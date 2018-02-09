@@ -58,10 +58,21 @@ public class RegistrationDashboardStepDefinition {
 	 */
 	@Given("^User click on the register button$")
 	public void clickRegisterButton() throws InterruptedException {
-		NewLoginPage newLoginPage = (NewLoginPage) getLoginScenario().getBean(PageConstants.NEW_LOGIN_PAGE);
-		Thread.sleep(4000);
-		newLoginPage.navigateToRegistration();
 		
+        WebDriver wd = loginScenario.getWebDriver();
+        loginScenario.saveBean(CommonConstants.WEBDRIVER, wd);
+        
+          
+        // create Sign In context
+        NewLoginPage newLoginPage = new NewLoginPage(wd);
+       
+        
+        newLoginPage.navigateToNewDashboardUrls();
+        getLoginScenario().saveBean(PageConstants.NEW_LOGIN_PAGE, newLoginPage);
+		
+		
+		newLoginPage.navigateToRegistration();
+		Thread.sleep(4000);
 		RegistrationInformationPage registrationInformationPage = new RegistrationInformationPage(newLoginPage.driver);
 		 getLoginScenario().saveBean(PageConstants.REGISTRATION_INFORMATION_PAGE,registrationInformationPage);
 	}
@@ -586,15 +597,22 @@ public class RegistrationDashboardStepDefinition {
 
     	// deregister the user for subsequent registration
     	DeregisterPage deregisterPage = new DeregisterPage(wd);
+    	System.out.println("here i m");
+    	deregisterPage.navigateToDeregisterUrls();
+    	Thread.sleep(10000);
     	deregisterPage.deregisterUser(userName);
     	Thread.sleep(5000);
     	
 		// create registration context
-		NewLoginPage newLoginPage = new NewLoginPage(wd);
-		getLoginScenario().saveBean(PageConstants.NEW_LOGIN_PAGE, newLoginPage);
-		NewLoginPage newloginPage = (NewLoginPage) getLoginScenario().getBean(PageConstants.NEW_LOGIN_PAGE);
-		Thread.sleep(4000);
-		newloginPage.navigateToRegistration();
+        NewLoginPage newLoginPage = new NewLoginPage(wd);
+       
+        
+        newLoginPage.navigateToNewDashboardUrls();
+        getLoginScenario().saveBean(PageConstants.NEW_LOGIN_PAGE, newLoginPage);
+		
+		
+		newLoginPage.navigateToRegistration();
+		
 		RegistrationInformationPage registrationInformationPage = new RegistrationInformationPage(newLoginPage.driver);
 		getLoginScenario().saveBean(PageConstants.REGISTRATION_INFORMATION_PAGE,registrationInformationPage);
 		}

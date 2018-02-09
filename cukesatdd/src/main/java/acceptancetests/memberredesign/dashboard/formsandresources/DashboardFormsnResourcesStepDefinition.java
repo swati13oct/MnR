@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pages.dashboard.acquisition.RegistrationInformationPage;
 import pages.dashboard.formsandresources.FormsAndResourcesPage;
 import pages.member.redesign.NewLoginPage;
+import pages.member.ulayer.AccountHomePage;
+import pages.member.ulayer.LoginPage;
 import pages.member.ulayer.RallyDashboard;
 
        import acceptancetests.atdd.data.CommonConstants;
@@ -59,17 +61,21 @@ import cucumber.api.java.en.Then;
                      // init Web Driver
                      WebDriver wd = loginScenario.getWebDriver();
                      loginScenario.saveBean(CommonConstants.WEBDRIVER, wd);
-
+                     
                        
                      // create Sign In context
                      NewLoginPage newLoginPage = new NewLoginPage(wd);
+                    
+                     
+                     newLoginPage.navigateToNewDashboardUrls();
                      getLoginScenario().saveBean(PageConstants.NEW_LOGIN_PAGE, newLoginPage);
+                     RallyDashboard rallydashboardpage = (RallyDashboard) newLoginPage.loginWith(userId, password);
+        			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+        			getLoginScenario().saveBean(PageConstants.RALLY_DASHBOARDPAGE,rallydashboardpage);
                      
 
-                     // authenticate
-                     RallyDashboard rallydashboardpage = (RallyDashboard) newLoginPage.loginWith(userId, password);
-                     loginScenario.saveBean(PageConstants.RALLY_DASHBOARDPAGE, rallydashboardpage);
-                  }
+                   
+              }
               
                               
               /**
@@ -147,11 +153,14 @@ import cucumber.api.java.en.Then;
                                               
                               }
                               /**
-                               * @toDo : verifies the plan material section
+                               * @throws InterruptedException 
+                             * @toDo : verifies the plan material section
                                */
                               @Then("^validate plan materials section$")
-                              public void validatePlanMaterialSection() {
+                              public void validatePlanMaterialSection() throws InterruptedException {
                                               FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+                                              Thread.sleep(30000);
+                                              System.out.println("fnr page");
                                               formsAndResourcesPage.getplanmaterialsection().isDisplayed();
                                               
                                               

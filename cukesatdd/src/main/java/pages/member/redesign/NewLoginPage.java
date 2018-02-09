@@ -17,6 +17,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import pages.acquisition.ulayer.LoginAssistancePage;
 import pages.dashboard.acquisition.RegistrationInformationPage;
+import pages.member.ulayer.AccountHomePage;
 import pages.member.ulayer.RallyDashboard;
 import pages.member.ulayer.TerminatedHomePage;
 import pages.member.ulayer.UNPWAssistancePage;
@@ -32,6 +33,12 @@ import atdd.framework.UhcDriver;
  *
  */
 public class NewLoginPage extends UhcDriver {
+
+	private static final String DASHBOARD_URL = MRConstants.DASHBOARD_URL;
+
+	private static final String REDESIGN_LOGIN_URL = MRConstants.REDESIGN_LOGIN_URL;
+
+	private static final String PAGE_URL_TEAM_MEDICARE_TESTHARNESS =MRConstants.TEAM_MEDICARE_TESTHARNESS ;
 
 	// Page URL
 	private static String PAGE_URL = MRConstants.REDESIGN_LOGIN_URL;
@@ -61,8 +68,26 @@ public class NewLoginPage extends UhcDriver {
 	public NewLoginPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		openAndValidate();
+		//openAndValidate();
 	}
+
+    public void navigateToNewDashboardUrls(){
+        if (MRScenario.environment.equalsIgnoreCase("stage"))
+        {
+               start(DASHBOARD_URL);
+               System.out.println("User is Navigating to Stage Dashboard");
+        }
+        else if (MRScenario.environment.equalsIgnoreCase("team-ci1")) {
+               
+               start(REDESIGN_LOGIN_URL);
+               System.out.println("user is on Team-Ci1 Environment");
+        }
+        else
+        {
+               start(PAGE_URL_TEAM_MEDICARE_TESTHARNESS);
+               System.out.println("User is on Medicare Test harness page");  
+        }
+}
 
 	public Object loginWith(String username, String password) throws InterruptedException {
 		//loginIn.click(); 
@@ -73,7 +98,7 @@ public class NewLoginPage extends UhcDriver {
 
 
 
-		try{
+	/*	try{
 		System.out.println();
 		Alert alert = driver.switchTo().alert();
 		alert.accept();
@@ -86,23 +111,45 @@ public class NewLoginPage extends UhcDriver {
 		Alert alert2 = driver.switchTo().alert();
 		alert2.accept();
 		}*/
-		          
-		Thread.sleep(30000);
-		System.out.println("30 secondss completed");
+	
+
+		if ( MRScenario.environment.equalsIgnoreCase("team-ci1") || (MRScenario.environment.equalsIgnoreCase("team-g"))) {
+
+			Alert alert = driver.switchTo().alert();
+			        alert.accept();
+			        //Alert alert1 = driver.switchTo().alert();
+			        //alert1.accept();
+			        
+			        
+					return new RallyDashboard(driver);
+					
+				} 
+		   
+		Thread.sleep(40000);
+		
+		System.out.println("30 seconds completed");
+		    
 		if(currentUrl().contains("/dashboard"))
 
 		{
 		return new RallyDashboard(driver);
 		}
+		
+		
+		
 		else if (currentUrl().contains("terminated-plan.html")) {
 		return new TerminatedHomePage(driver); 
+		
 		}
+		
 		return null;
-		}
-	@Override
+	}
+
+	
+	
 	public void openAndValidate() {
 		start(PAGE_URL);
-		}
+		}  
 
 	public static boolean isAlertPresent(WebDriver wd) {
 		try {

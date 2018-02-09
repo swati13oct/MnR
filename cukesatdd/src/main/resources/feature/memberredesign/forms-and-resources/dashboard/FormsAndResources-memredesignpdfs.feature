@@ -1,4 +1,4 @@
-@dashBoardFormsAndResourcespdfs @Gladiators
+@dashBoardFormsAndResourcespdfs @gladiators
 Feature: To validate plan materials section on forms and resources page in dashboard site
 
   @planMaterialsSectionValidation
@@ -25,7 +25,7 @@ Feature: To validate plan materials section on forms and resources page in dashb
     Examples: 
       | userId         | password   | Anoc_section  | AnnualDirectoriesSection  |  Provider_Searchlink| Pharmacy_Searchlink|Forms_Resources|
    # uhc
-      | q1_feb_uhc005 | Password@1 |  NO   | NO       | NO     | NO       | YES|          
+      | q1_feb_uhc085 | Password@1 |  NO   | NO       | NO     | NO       | YES|          
    # aarp
       | q4_dec_aarp159 | Password@1 |   YES  | YES       | YES     | YES        | YES|                
    
