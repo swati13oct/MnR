@@ -92,10 +92,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//div[contains(@ng-repeat,'plan in planModel.pdpPlans')]")
 	List<WebElement> pdpPlans;
 
-	@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='uhc-container tfnclassadj']/div[1]/div[3]/div[1]//span[@class='trigger-closed']")
+	@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='plan-overview-wrapper']/div[2]/div[1]//span[@class='trigger-closed']")
 	private WebElement viewPlans;
 	
-	@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='uhc-container tfnclassadj']/div[1]/div[3]/div[3]/div[1]//span[@class='trigger-closed']")
+	@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='plan-overview-wrapper']/div[2]/div[3]//span[@class='trigger-closed']")
 	private WebElement viewPDPPlans;
 
 	@FindBy(xpath = "//div[@id='snpplans_container']/h1/span[2]")
@@ -1270,7 +1270,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		if(plantype.equals("MA")||plantype.equals("MAPD")){
-			if(validate(viewPDPPlans)){
+			if(validate(viewPlans)){
 			viewPlans.click();
 			}
 			List<WebElement> view2017Plans = driver.findElements(By.linkText("Edit drug list"));
