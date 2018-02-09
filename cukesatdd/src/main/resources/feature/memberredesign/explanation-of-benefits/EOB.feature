@@ -10,7 +10,9 @@ Then the user navigates to EOB page
 Then the user validates site leaving pop up         
 Examples:
        | planType  | memberType        |  
-  	   | MAPD      |IndividualMed_EOB  | 
+  	   | MAPD      |IndividualMed_EOB  |
+  	   | MA        |IndividualMed_EOB  |
+  	   | MAPD      |Individual5Med_EOB | 
      
 
   @eobCountdaterange
@@ -40,7 +42,7 @@ Then the user validates content displayed on EOB page without combo tabs
        | Plan Type      |<planType>  |
 Examples: 
 | planType    | memberType   					 |
-| PDP      |IndividualMed_EOB  |  
+| MAPD      |IndividualMed_EOB  |  
 
 
 
