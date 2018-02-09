@@ -218,6 +218,14 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.validateAccountEdit(Password);
 
 	}
+	@Then("^the user validates the temporary address section for ship member")
+	public void UserValidatesTempAddressShip() {
+		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+		ProfilePreferencesPage.validateTempAddressShip();
+	
+
+	}
 
 	/** 
 	 * @toDo : The user checks the Password Update functionality  without entering the mandatory fields
@@ -357,13 +365,12 @@ public class ProfileandPreferencesUMSStepDefinition {
 	 * @toDo :  Validates the contact us link and the page that opens up on clicking the contact us link
 	 */
 
-	@Then("^the user clicks on contact us then contact us page should come")
+	@Then("^the user validates contact us statement")
 	public void uservalidatescontactuslinkpermanentadress() {
 		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
 
 		ProfilePreferencesPage.validatecontactuslink();
-
 	}
 	/** 
 	 * @toDo :  Validates the elements of Email section
@@ -373,7 +380,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
 
-		ProfilePreferencesPage.validateEmail();
+		ProfilePreferencesPage.validateEmailEdit();
 	}
 
 	/** 
@@ -694,6 +701,20 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.validateGoGreenHeader();
 
 	}
+	/** 
+	 * @toDo :  Validates the Need help section for ship member
+	 */
+
+	@Then("^ the user validates the need help section for ship member")
+	public void UserValidatesNeedHelpShip() {
+		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+
+		ProfilePreferencesPage.validateNeedHelpShip();
+
+	}
+
+
 
 
 }
