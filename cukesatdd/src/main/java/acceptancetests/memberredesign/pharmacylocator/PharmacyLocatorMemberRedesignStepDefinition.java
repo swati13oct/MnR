@@ -20,11 +20,12 @@ import pages.redesign.UlayerHomePage;
 import pages.redesign.PharmacySearchPage;
 import pages.redesign.RedesignLoginPage;
 import pages.redesign.PharmacySearchPage;
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.member.PageConstants;
-import acceptancetests.login.data.LoginCommonConstants;
-import acceptancetests.claims.data.ClaimsCommonConstants;
-import acceptancetests.pharmacylocator.data.PharmacySearchCommonConstants;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageConstants;
+import acceptancetests.data.PageConstantsMnR;
+import acceptancetests.data.LoginCommonConstants;
+import acceptancetests.memberredesign.claims.ClaimsCommonConstants;
+import acceptancetests.memberredesign.pharmacylocator.PharmacySearchCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.After;
@@ -114,7 +115,7 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 
 		if (accountHomePage != null) {
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
+			getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,
 					accountHomePage);
 			System.out.println("********* Account Landing Page Displayed for the Member **************");
 		}
@@ -131,7 +132,7 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 	@When("^the user navigates to pharmacy search page in Redesign site$")
 	public void user_views_pharmacy_locator_aarp() throws InterruptedException {
 		UlayerHomePage accountHomePage = (UlayerHomePage) getLoginScenario()
-				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 		PharmacySearchPage pharmacySearchPage = accountHomePage.navigateToPharmacyLocator();
 		if (pharmacySearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
@@ -187,7 +188,7 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 
 		PharmacySearchPage PharmacySearchPage = pharmacySearchPage.searchesPharmacy();
 		if (PharmacySearchPage != null) {
-			getLoginScenario().saveBean(PageConstants.PHARMACY_RESULT_PAGE,
+			getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE,
 					PharmacySearchPage);
 			Assert.assertTrue(true);
 
@@ -272,7 +273,7 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 		PharmacySearchPage PharmacySearchPage = pharmacySearchPage
 				.ValidateShowOnMapLinks();
 		if (PharmacySearchPage != null) {
-			getLoginScenario().saveBean(PageConstants.PHARMACY_RESULT_PAGE,
+			getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE,
 					PharmacySearchPage);
 			Assert.assertTrue(true);
 
@@ -293,7 +294,7 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 		PharmacySearchPage PharmacySearchPage = pharmacySearchPage
 				.ValidateSearchPdfResult();
 		if (PharmacySearchPage != null) {
-			getLoginScenario().saveBean(PageConstants.PHARMACY_RESULT_PAGE,
+			getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE,
 					PharmacySearchPage);
 			Assert.assertTrue(true);
 			System.out.println("PDF Result Page is Displayed");
@@ -313,7 +314,7 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		PharmacySearchPage PharmacySearchPage = pharmacySearchPage.validateMoreInfoContent();
 		if (PharmacySearchPage != null) {
-			getLoginScenario().saveBean(PageConstants.PHARMACY_RESULT_PAGE,
+			getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE,
 					PharmacySearchPage);
 			Assert.assertTrue(true);
 			System.out.println("More Info Disclaimer is Displayed");
@@ -341,7 +342,7 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		PharmacySearchPage PharmacySearchPage = pharmacySearchPage.validateLimitedAccessDisclaimer(DisclaimerText);
 		if (PharmacySearchPage != null) {
-			getLoginScenario().saveBean(PageConstants.PHARMACY_RESULT_PAGE,
+			getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE,
 					PharmacySearchPage);
 			Assert.assertTrue(true);
 			System.out.println("Limited Access Disclaimer is Displayed");
@@ -360,7 +361,7 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		PharmacySearchPage PharmacySearchPage = pharmacySearchPage.validateChatWidget();
 		if (PharmacySearchPage != null) {
-			getLoginScenario().saveBean(PageConstants.PHARMACY_RESULT_PAGE,
+			getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE,
 					PharmacySearchPage);
 			Assert.assertTrue(true);
 			System.out.println("Chat Widget is Displayed");
@@ -379,7 +380,7 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		PharmacySearchPage PharmacySearchPage = pharmacySearchPage.validateTfnWidget();
 		if (PharmacySearchPage != null) {
-			getLoginScenario().saveBean(PageConstants.PHARMACY_RESULT_PAGE,
+			getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE,
 					PharmacySearchPage);
 			Assert.assertTrue(true);
 			System.out.println("TFN Widget is Displayed");
@@ -430,7 +431,7 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		PharmacySearchPage PharmacySearchPage = pharmacySearchPage.multilangPharmacySearchResult();
 		if (PharmacySearchPage != null) {
-			getLoginScenario().saveBean(PageConstants.PHARMACY_RESULT_PAGE, PharmacySearchPage);
+			getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE, PharmacySearchPage);
 			Assert.assertTrue(true);
 			System.out.println("Pharmacy Results are Displayed");
 		}

@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.RequestHelpAndInformationPage;
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.acquisition.PageConstants;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.*;
 import atdd.framework.MRScenario;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
@@ -34,7 +34,7 @@ public class AttendCommunityMeetingStepDefinitionUHC {
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
 
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+		getLoginScenario().saveBean(PageConstantsMnR.ACQUISITION_HOME_PAGE,
 				aquisitionhomepage);
 	}
 	
@@ -44,7 +44,7 @@ public class AttendCommunityMeetingStepDefinitionUHC {
 	@When("^the user navigates to request more help and information page in UHC site and validates$")
 	public void request_more_help_information()
 	{
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario().getBean(PageConstantsMnR.ACQUISITION_HOME_PAGE);
 		RequestHelpAndInformationPage requestHelpAndInformationPage = aquisitionhomepage.navigateToMaMoreHelpAndInfo();
 		
 		if(requestHelpAndInformationPage!=null){

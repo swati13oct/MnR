@@ -1,7 +1,5 @@
 package pages.mobile.acquisition.ulayer;
 
-import java.util.Map;
-
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -12,9 +10,9 @@ import org.openqa.selenium.support.PageFactory;
 import pages.acquisition.ulayer.AgentAppointmentConfirmationPage;
 //import pages.acquisition.ulayer.ZipcodeLookupHomePage;
 //import pages.acquisition.ulayer.ZipcodeSelectionHomePage;
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.ElementData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.ElementData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 public class VPPRequestSendEmailPage extends UhcDriver {
