@@ -41,8 +41,7 @@ Feature: To test registration flow in redesign portal
       | CREATE_ACCOUNT_USER_NAME | <userName> |
     
       | CREATE_ACCOUNT_EMAIL | <email> |
-   # When member click on go to home page button
-   # Then member navigate to Rally dashboard home page
+
 
     Examples: 
       | planMemberId | dateOfBirth | planname                          | membername      | userName   | password   | email          |firstname  | lastname|
