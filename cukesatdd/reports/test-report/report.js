@@ -153,7 +153,7 @@ formatter.examples({
   "keyword": "Examples"
 });
 formatter.before({
-  "duration": 12293007,
+  "duration": 11273171,
   "status": "passed"
 });
 formatter.scenario({
@@ -291,68 +291,68 @@ formatter.match({
   "location": "DCEAcqStepDefinitionUHC.the_user_is_on_UMS_medicare_site_landing_page()"
 });
 formatter.result({
-  "duration": 35311511597,
+  "duration": 20794193250,
   "status": "passed"
 });
 formatter.match({
   "location": "DCEAcqStepDefinitionUHC.I_access_the_DCE_tool_home_page()"
 });
 formatter.result({
-  "duration": 8876143624,
+  "duration": 7556040541,
   "status": "passed"
 });
 formatter.match({
   "location": "DCEAcqStepDefinitionUHC.I_have_added_a_drug_to_my_drug_list(DataTable)"
 });
 formatter.result({
-  "duration": 51859370475,
+  "duration": 56537167005,
   "status": "passed"
 });
 formatter.match({
   "location": "DCEAcqStepDefinitionUHC.navigate_drugcostestimator_pharmacytab(DataTable)"
 });
 formatter.result({
-  "duration": 768159938,
+  "duration": 2678603045,
   "status": "passed"
 });
 formatter.match({
   "location": "DCEAcqStepDefinitionUHC.I_select_the_drug()"
 });
 formatter.result({
-  "duration": 20414263597,
+  "duration": 21517235891,
   "status": "passed"
 });
 formatter.match({
   "location": "DCEAcqStepDefinitionUHC.clickOnReturnLink()"
 });
 formatter.result({
-  "duration": 6434657863,
+  "duration": 5122551839,
   "status": "passed"
 });
 formatter.match({
   "location": "DCEAcqStepDefinitionUHC.I_access_the__vpp_page(DataTable)"
 });
 formatter.result({
-  "duration": 15745948756,
+  "duration": 17494431513,
   "status": "passed"
 });
 formatter.match({
   "location": "DCEAcqStepDefinitionUHC.accessDCEToolAfterDrugAdded(DataTable)"
 });
 formatter.result({
-  "duration": 18855478195,
+  "duration": 20548499659,
   "status": "passed"
 });
 formatter.match({
   "location": "DCEAcqStepDefinitionUHC.verifyDrugIsStillThere(DataTable)"
 });
 formatter.result({
-  "duration": 56113972,
+  "duration": 872904843,
   "status": "passed"
 });
 formatter.embedding("image/png", "embedded0.png");
 formatter.after({
-  "duration": 4420583218,
+  "duration": 1037280228,
   "status": "passed"
 });
 });
