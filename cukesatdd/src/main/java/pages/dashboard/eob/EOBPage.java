@@ -20,6 +20,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.itextpdf.text.log.SysoCounter;
 
 import acceptancetests.data.MRConstants;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 /**
 * EOB Page Validation
@@ -107,7 +108,9 @@ public class EOBPage extends UhcDriver{
 	@FindBy(xpath="//i[@class='rightarrow']")
 	private WebElement nextPageArrow;
 	
-	private static String EOB_DIRECT_URL = MRConstants.EOB_DIRECT_URL;
+	private static String EOB_DIRECT_URL = MRConstants.STAGE_DASHBOARD_NEW_DOMAIN_URL;
+	
+	private static String EOB_CI1_URL = MRConstants.TEAM_CI1_NEW_DASBOARD_URL;
 
 	public EOBPage(WebDriver driver) {
 		super(driver);
@@ -386,7 +389,15 @@ public class EOBPage extends UhcDriver{
 	}
 
 	public EOBPage loginToDashboardPage(String userName){
-		start(EOB_DIRECT_URL);
+		System.out.println(MRScenario.environment);
+		if ( MRScenario.environment.contains("stage") || MRScenario.environment.contains("test-a")){
+			System.out.println(EOB_DIRECT_URL);
+			start(EOB_DIRECT_URL);
+		}if(MRScenario.environment.contains("team-ci1")){
+			System.out.println(EOB_CI1_URL);
+			start(EOB_CI1_URL);
+		}
+		
 		driver.manage().timeouts().implicitlyWait(40,TimeUnit.SECONDS) ;
 		System.out.println(userName);
 		validate(driver.findElement(By.id("username")));
