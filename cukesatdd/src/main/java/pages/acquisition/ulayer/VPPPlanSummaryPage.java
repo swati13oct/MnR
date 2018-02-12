@@ -47,7 +47,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[1]/div/span/span[@class='ng-binding']")
 	private WebElement maPlansNumber;
 	
-	@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='uhc-container tfnclassadj']/div[1]/div[3]/div[1]//span[@class='trigger-closed']")
+	@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='plan-overview-wrapper']/div[2]/div[1]//span[@class='trigger-closed']")
 	private WebElement maPlansViewLink;
 	
 	@FindBy(id = "plan-list-1")
@@ -141,10 +141,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(id = "providerSearchFrame")
 	private WebElement providerSearchIframe;
 	
-	@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='uhc-container tfnclassadj']/div[1]/div[3]/div[1]//span[@class='trigger-closed']")
+	@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='plan-overview-wrapper']/div[2]/div[1]//span[@class='trigger-closed']")
 	private WebElement viewPlans;
 	
-	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[3]")
+	@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='plan-overview-wrapper']/div[2]/div[3]//span[@class='trigger-closed']")
 	private WebElement viewPDPPlans;
 	
 	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[3]/div/div[1]/div[3]/div/div/span[3]")
