@@ -182,7 +182,7 @@ public class RegistrationDashboardStepDefinition {
 				.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
 		Thread.sleep(6000);
 		//Assert.assertTrue(registrationInformationPage.currentUrl().contains("memberRegistration-Step2"));
-		registrationInformationPage.waitForPlanInformationPage();
+		//registrationInformationPage.waitForPlanInformationPage();
 		registrationInformationPage.getStepTwoText().isDisplayed();
 	}
 
@@ -204,7 +204,7 @@ public class RegistrationDashboardStepDefinition {
 		String expectedPlanName = memberAttributesMap.get("Plan name");
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
 				.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
-		Thread.sleep(6000);
+		Thread.sleep(10000);
 		String actualPlanName = registrationInformationPage.getPlanName().getText();
 		System.out.println(actualPlanName);
 		Assert.assertEquals(expectedPlanName, actualPlanName);
@@ -543,7 +543,7 @@ public class RegistrationDashboardStepDefinition {
 	/**
 	 * @toDo : user gives valid data on the create account page
 	 */
-	@And("The member land on create account enters the valid data to create account$")
+	@Then("The member land on create account enters the valid data to create account$")
 	public void enterCreateAccountData(DataTable givenAttributes) throws InterruptedException {
 		
 		
@@ -621,7 +621,7 @@ public class RegistrationDashboardStepDefinition {
 	/**
 	 * @toDo : account confirmation page displays
 	 */
-	@Then("^member lands on account confirmation page$")
+	@Then("^member navigate to plan confirmation page$")
 	public void validateAccountConfirmationPage() throws InterruptedException {
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
 				getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
@@ -636,8 +636,8 @@ public class RegistrationDashboardStepDefinition {
 	 * @toDo : verifies members information populated on the account information page
 	 */
 	@SuppressWarnings("deprecation")
-	@Then("^Verify that correct information is displayed on Account Confirmation page$")
-	public void VerifyAccountConfirmation_page(DataTable givenAttributes) throws InterruptedException {
+	@And("^Verify correct first name is displayed$")
+	public void VerifyAccountConfirmation_firstname(DataTable givenAttributes) throws InterruptedException {
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
 				.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
 		List<DataTableRow> memberAttributesRow = givenAttributes
@@ -648,7 +648,48 @@ public class RegistrationDashboardStepDefinition {
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
 		String expectedFirstName = memberAttributesMap.get("FIRST_NAME");
+		Thread.sleep(3000);
+		String actualFirstName = registrationInformationPage.getMemberFirstName().getText().toString();
+		Assert.assertEquals(expectedFirstName,actualFirstName);
+	
+	}
+		/**
+		 * @toDo : verifies members information populated on the account information page
+		 */
+		@SuppressWarnings("deprecation")
+		@And("^Verify correct last name is displayed$")
+		public void VerifyAccountConfirmation_lastname(DataTable givenAttributes) throws InterruptedException {
+			RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
+					.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
+			List<DataTableRow> memberAttributesRow = givenAttributes
+					.getGherkinRows();
+			Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+						.get(0), memberAttributesRow.get(i).getCells().get(1));
+			
+			}
 		String expectedLastName = memberAttributesMap.get("LAST_NAME");
+		Thread.sleep(3000);
+		String actualLastName = registrationInformationPage.getMemberLastName().getText().toString();
+		Assert.assertEquals(expectedLastName,actualLastName);
+			}
+		
+		/**
+		 * @toDo : verifies members information populated on the account information page
+		 */
+		@SuppressWarnings("deprecation")
+		@And("^verify correct member information is displayed$")
+		public void VerifyAccountConfirmation_information(DataTable givenAttributes) throws InterruptedException {
+			RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
+					.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
+			List<DataTableRow> memberAttributesRow = givenAttributes
+					.getGherkinRows();
+			Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+						.get(0), memberAttributesRow.get(i).getCells().get(1));
+			}
 		String expectedUserName = memberAttributesMap.get("CREATE_ACCOUNT_USER_NAME");
 		String ExpectedEmail = memberAttributesMap.get("CREATE_ACCOUNT_EMAIL");
 		
@@ -659,19 +700,19 @@ public class RegistrationDashboardStepDefinition {
 		String year = splitDate[2];
 		String expectedDateOfBirth = month + "/" + day + "/" + year;
 			
-		Thread.sleep(3000);
-		String actualFirstName = registrationInformationPage.getMemberFirstName().getText().toString();
-		String actualLastName = registrationInformationPage.getMemberLastName().getText().toString();
+
+
 		String actualUserName = registrationInformationPage.getUserName().getText().toString();
 		String actualEmail = registrationInformationPage.getEmailAddress().getText().toString();
 		String actualDateOfBirth = registrationInformationPage.getMemberDoB().getText();
-		Assert.assertEquals(expectedFirstName,actualFirstName);
-		Assert.assertEquals(expectedLastName,actualLastName);
+	
 		Assert.assertEquals(expectedUserName,actualUserName);
 		Assert.assertEquals(ExpectedEmail,actualEmail);
 		Assert.assertEquals(expectedDateOfBirth,actualDateOfBirth);
 		
 	}
+	
+	
 	
 	/**
 	 * @toDo : verifies the member id required fields error message
@@ -712,5 +753,6 @@ public class RegistrationDashboardStepDefinition {
 					.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
 			registrationInformationPage.getSnpMemberError();
 	}
+	
 
 }
