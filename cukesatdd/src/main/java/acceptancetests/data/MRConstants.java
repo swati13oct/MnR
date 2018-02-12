@@ -225,7 +225,7 @@ public class MRConstants {
   
   public static final String TEAM_MEDICARE_TESTHARNESS="https://"+MRScenario.environment+"-medicare.uhc.com/?testharness=true";
   
-  public static final String STAGE_DASHBOARD_NEW_DOMAIN_URL="https://"+MRScenario.environment+"-medicare.uhc.com/";
+  public static final String STAGE_DASHBOARD_NEW_DOMAIN_URL="https://"+MRScenario.environmentMedicare+"-medicare.uhc.com/";
   
   public static final String TEAM_CI1_NEW_DASBOARD_URL = "https://team-ci1-medicare.ose-elr-core.optum.com/";
 
@@ -233,37 +233,37 @@ public class MRConstants {
   
   public static final String UHCM_URL_REDESIGN = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/content/uhcm/home//testharness.html";
 	
-  public static final String MEDICARE_UHC_REDESIGN = "https://"+MRScenario.environment+"-medicare.uhc.com/medicare/login/overview.html?testharness=true";
+  public static final String MEDICARE_UHC_REDESIGN = "https://"+MRScenario.environmentMedicare+"-medicare.uhc.com/medicare/login/overview.html?testharness=true";
  
   public static final String AARPM_URL_RESEDIGN = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/#?target=test-harness";
   
   public static final String UHCM_URL_TEAMB_TESTHARNESS = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/content/medicare/login/overview.html?testharness=true" ;
   
-  public static final String STAGE_URL_TESTHARNES ="https://"+MRScenario.environment+"-medicare.uhc.com/?testharness=true";
+  public static final String STAGE_URL_TESTHARNES ="https://"+MRScenario.environmentMedicare+"-medicare.uhc.com/?testharness=true";
 
   public static String TeamC_VPP_PAGE_AARPM_URL = "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com";
   
   public static final String TeamC_ULayer_Member_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com";
   
-  public static final String TeamH_ULayer_Member_URL = "https://stage-medicare.uhc.com";
+  public static final String TeamH_ULayer_Member_URL = "https://"+MRScenario.environmentMedicare+"-medicare.uhc.com";
   
   public static final String TEAMB_TIME_ADMIN_PAGE_URL = "http://apsrt0245.uhc.com:9083/DCERestWAR/dcerest/timeAdmin";
   
-  public static final String Stage_UNPWAssistancePage_URL = "https://stage-medicare.uhc.com/content/medicare/login/reset.html#/start";
+  public static final String Stage_UNPWAssistancePage_URL = "https://"+MRScenario.environmentMedicare+"-medicare.uhc.com/content/medicare/login/reset.html#/start";
   
   public static String TeamC_MultipleEmail_address_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/content/dashboard/guest/multipleemailaddress.html";
 
   public static String DEREGISTER_STAGE_URL = "https://apsrs0261.uhc.com:9443/PartDPortalWeb/deregister.jsp";
   
-  public static final String MEMBER_AUTH_REDESIGN_LOGIN_URL = "https://"+MRScenario.environment+"-medicare.uhc.com/content/dashboard/guest/memberauth.html#/memberAuthLogin";
+  public static final String MEMBER_AUTH_REDESIGN_LOGIN_URL = "https://"+MRScenario.environmentMedicare+"-medicare.uhc.com/content/dashboard/guest/memberauth.html#/memberAuthLogin";
   
-  public static final String NEW_REDESIGN_URL = "https://"+MRScenario.environment+"-medicare.uhc.com/login/overview.html?testharness=true";
+  public static final String NEW_REDESIGN_URL = "https://"+MRScenario.environmentMedicare+"-medicare.uhc.com/login/overview.html?testharness=true";
 
-  public static final String NEW_REDESIGN_REGISTRATION_URL = "https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member-registration.html#/memberRegistration";
+  public static final String NEW_REDESIGN_REGISTRATION_URL = "https://"+MRScenario.environmentMedicare+"-medicare.uhc.com/content/medicare/member-registration.html#/memberRegistration";
   
-  public static final String NEW_REDESIGN_STAGE_REGISTRATION_URL = "https://stage-medicare.uhc.com/medicare/member-registration.html#/get-started";
+  public static final String NEW_REDESIGN_STAGE_REGISTRATION_URL = "https://"+MRScenario.environmentMedicare+"-medicare.uhc.com/medicare/member-registration.html#/get-started";
   
-  public static final String TeamH_BLayer_Member_URL = "https://stage-medicare.uhc.com/";
+  public static final String TeamH_BLayer_Member_URL = "https://"+MRScenario.environmentMedicare+"-medicare.uhc.com/";
   
   public static final String BNCBURL = "https://member." + MRScenario.environment + "-uhcmedicaresolutions.uhc.com/";
   
@@ -277,7 +277,7 @@ public class MRConstants {
   
   public static String CAMPAIGN_PAGE_URL2 = "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/available-plans.html?msg=zero&lang=en&zipcode=02211&WT.mc_id=832467";
   
-  public static String EOB_DIRECT_URL = "https://"+MRScenario.environment+"-medicare.uhc.com";
+  public static String EOB_DIRECT_URL = "https://"+MRScenario.environmentMedicare+"-medicare.uhc.com";
   
   public static final String DEEPLINK_URL = "https://"+MRScenario.environment+"-werally.uhc.com/login.html?TARGET=SMSR";
 
@@ -301,20 +301,21 @@ public class MRConstants {
   
   public static final String Connector_model_url1 = "https://www."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=897509&zipcode=32337&county=320&state=10&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Foptions&subdomain=options";
   
-  public static final String SIGNINPAGE_MEMREDESIGN = "https://"+MRScenario.environment+"-medicare.uhc.com/";
+  public static final String SIGNINPAGE_MEMREDESIGN = "https://"+MRScenario.environmentMedicare+"-medicare.uhc.com/";
 
   public static final String BLUE_LAYER_TEST_HARNESS_LINK = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/content/uhcm/home/testharness.html";
 
   public static final String TEAM_G_DEREGISTER_URL = "http://partd-teamg.ose.optum.com/PartDPortalWeb/deregister.jsp";
   
-  public static final String REDESIGN_REGISTRATION_URL = "https://"+MRScenario.environment+"-medicare.uhc.com/medicare/member-registration.html#/get-started";
+  public static final String REDESIGN_REGISTRATION_URL = "https://"+MRScenario.environmentMedicare+"-medicare.uhc.com/medicare/member-registration.html#/get-started";
 
-  public static final String DASHBOARD_URL ="https://"+MRScenario.environment+"-medicare.uhc.com/";
+  public static final String DASHBOARD_URL ="https://"+MRScenario.environmentMedicare+"-medicare.uhc.com/";
   
-  public static final String REDESIGN_LOGIN_URL = "https://"+MRScenario.environment+"-medicare." + getDomain() + "/?testharness=true";
+  public static final String REDESIGN_LOGIN_URL = "https://"+MRScenario.environmentMedicare+"-medicare." + getDomain() + "/?testharness=true";
    
 
   public static String getDomain() {
 		return (MRScenario.domain == null || MRScenario.domain.equals("")) ? "uhc.com" : MRScenario.domain;
 	}
-}
+  
+ }
