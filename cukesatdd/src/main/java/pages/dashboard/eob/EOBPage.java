@@ -17,8 +17,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.itextpdf.text.log.SysoCounter;
+
 import acceptancetests.data.MRConstants;
-import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 /**
 * EOB Page Validation
@@ -28,8 +29,11 @@ public class EOBPage extends UhcDriver{
 	@FindBy(id="eob-type")
 	private WebElement eobType;
 
-	@FindBy(id="date-range-1")
+	@FindBy(id="date-range")
 	private WebElement eobMonthDateRange;
+	
+	@FindBy(id="date-range-1")
+	private WebElement eobMonthDateRange1;
 
 	@FindBy(id="date-range")
 	private WebElement eobMonthDateRangeSHIP;
@@ -43,7 +47,7 @@ public class EOBPage extends UhcDriver{
 	@FindBy(className="btn custom-date-search-btn")
 	private WebElement searchButton;
 
-	@FindBy(xpath="//*[contains(text(),'Learn More About My Medical EOB')]")
+	@FindBy(xpath="//*[contains(text(),'Learn More About My')]")
 	private WebElement learnMoreLink;
 
 	@FindBy(xpath="//*[contains(text(),'How to read your Medical EOB ')]")
@@ -124,7 +128,12 @@ public class EOBPage extends UhcDriver{
 			select.selectByValue(eobTypeData);
 			System.out.println(eobTypeData);		 
 		}
-		Select select = new Select(eobMonthDateRange);
+		Select select;
+		if(planType.equalsIgnoreCase("SHIP")){
+		select = new Select(eobMonthDateRange);
+		}else{
+			select = new Select(eobMonthDateRange1);
+		}
 		System.out.println(dateRange);
 		select.selectByValue(dateRange);
 		validateDateRangeContentDisplayed(dateRange);
@@ -539,9 +548,17 @@ public class EOBPage extends UhcDriver{
 		*@toDo: the method is to validate eob display on eob page
 		*/
 		
-		public EOBPage validateEOBStatements(){
+		public EOBPage validateEOBStatements(String numberOfEOB){
 		System.out.println(eobCount.getText());
 		int eobCountInt = Integer.parseInt(eobCount.getText());
+		int numberOfEOBInt = Integer.parseInt(numberOfEOB);
+		System.out.println("EOB expected count = "+numberOfEOBInt);
+		if(numberOfEOBInt==eobCountInt){
+			System.out.println("count displayed correctly");
+		}else{
+			System.out.println("count not displayed correctly");
+			Assert.fail();
+		}
 		System.out.println(eobCountInt);
 		numberOfPageDisplayed(eobCountInt);
 		for(int i=0; i<eobCountInt; i++){
