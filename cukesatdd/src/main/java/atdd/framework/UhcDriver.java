@@ -18,9 +18,9 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import acceptancetests.atdd.data.ElementData;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.ElementData;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 
 /**
  * @author pjaising

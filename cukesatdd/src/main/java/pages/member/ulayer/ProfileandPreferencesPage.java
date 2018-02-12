@@ -22,9 +22,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.junit.Assert;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.member.bluelayer.GoGreenPage;
 import pages.member.bluelayer.ProfilePreferencesPage;

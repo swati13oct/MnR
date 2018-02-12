@@ -12,10 +12,11 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.member.PageConstants;
-import acceptancetests.dashboard.claims.data.RedesignClaimsCommonConstants;
-import acceptancetests.login.data.LoginCommonConstants;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageConstants;
+import acceptancetests.data.PageConstantsMnR;
+import acceptancetests.deprecated.dashboard.claims.data.RedesignClaimsCommonConstants;
+import acceptancetests.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
@@ -86,10 +87,10 @@ public class ClaimsMemberRedesignStepDefinition {
 		
 		{
 			loginPage.navigateToNewDashboardUrl();
-			getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
+			getLoginScenario().saveBean(PageConstantsMnR.LOGIN_PAGE, loginPage);
 			AccountHomePage accountHomePage = (AccountHomePage) loginPage.teamhloginWith(userName, pwd);
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,accountHomePage);
+			getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
 			Assert.assertTrue(true);
 		}
 		
@@ -100,12 +101,12 @@ public class ClaimsMemberRedesignStepDefinition {
 
 	@When("^I navigate to the claims Summary page in redesigned site$")
 	public void navigate_Claims_Summary_redesigned(){
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 		ClaimSummarypage newClaimsSummaryPage = accountHomePage.navigateToClaimsSummaryPage();
 		
 
 		if(newClaimsSummaryPage != null)
-			getLoginScenario().saveBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
+			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
 	}
 	/**
 	 * @toDo : The user search claims for the following time interval in redesigned site
@@ -122,11 +123,11 @@ public class ClaimsMemberRedesignStepDefinition {
 		}
 		String toDate = timeAttributesMap.get(RedesignClaimsCommonConstants.CLAIMS_TO_DATE);
 		String fromDate = timeAttributesMap.get(RedesignClaimsCommonConstants.CLAIMS_FROM_DATE);
-		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		newClaimsSummaryPage.searchClaimsByTimeInterval(toDate,fromDate);
 
 		if(newClaimsSummaryPage != null)
-			getLoginScenario().saveBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
+			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
 	}
 	/**
 	 * @toDo: Member is able to select claims from the "View Claims From" drop-down. 
@@ -148,12 +149,12 @@ public class ClaimsMemberRedesignStepDefinition {
 		String s=urlAttributesMap.get("Claim Period");
 		String planType = urlAttributesMap.get("Plan Type");
 		
-		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 
 		newClaimsSummaryPage.searchClaimsByTimePeriod(planType,s);
 
 		if(newClaimsSummaryPage != null)
-			getLoginScenario().saveBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
+			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
 
 	}
 	/**
@@ -161,11 +162,11 @@ public class ClaimsMemberRedesignStepDefinition {
 	 */
 	@Then("^I can see the claims displayed based on the selection in redesigned site$")
 	public void validate_claims_table_redesigned_site(){
-		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		newClaimsSummaryPage.validateClaimsTable();
 
 		if(newClaimsSummaryPage != null)
-			getLoginScenario().saveBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
+			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
 
 	}
 	/**
@@ -184,11 +185,11 @@ public class ClaimsMemberRedesignStepDefinition {
 		String planType = memberAttributesMap.get("Plan Type");
 		String domain  = memberAttributesMap.get("Domain");
 
-		ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+		ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		newclaimsSummarypage.validateEobfordifferentDomainType(domain, planType);
 
 		if(newclaimsSummarypage != null)
-			getLoginScenario().saveBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE, newclaimsSummarypage);
+			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newclaimsSummarypage);
 	}
 	/**
 	 * @toDo: On Claims Summary page the member Validates the Download my data section.
@@ -196,24 +197,24 @@ public class ClaimsMemberRedesignStepDefinition {
 
 	@And("^the user validates the DownloadMyData section in redesigned site$")
 	public void validates_DownloadMyData_redesigned_site(){
-		ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+		ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		newclaimsSummarypage.validateDownloadMyData();
 
 		if(newclaimsSummarypage != null)
-			getLoginScenario().saveBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE, newclaimsSummarypage);
+			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newclaimsSummarypage);
 	}	
 	/**
 	 * @toDo : navigate to the Claims Summary page in AARP
 	 */
 	@When("^I navigate to the Claims Summary page in AARP site$")	
 	public void i_navigate_to_member_redesign_claims_page(){
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 		ClaimSummarypage newClaimsSummaryPage = accountHomePage.navigateToClaimsSummaryPage();
-		getLoginScenario().saveBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
+		getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
 		String planType = memberAttributesMap.get("Plan Type");
 		newClaimsSummaryPage.selectRequiredPlanType(planType);
 
-		getLoginScenario().saveBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);			
+		getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);			
 
 	}
 	/**
@@ -222,7 +223,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	@Then("^I can view a Page Header in Claims Sumamry page in AARP site$")
 	public void validate_the_header()
 	{
-		/*ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+		/*ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 	newClaimsSummaryPage.validateHeader();*/
 
 	}
@@ -233,7 +234,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	@And("^A View Claims from dropdown menu that defaults to last 90 days in Claims Sumamry page in AARP site$")
 	public void validate_viewClaimsForm_dropdown(){
 		//String planType = memberAttributesMap.get("Plan Type");
-		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);	
+		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);	
 		Assert.assertEquals("Last 90 Days", claimSummarypage.validateViewClaimsFromDropDown());
 
 	}/**
@@ -244,7 +245,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	public void validate_claim_type_drop_down(){
 
 		String planType = memberAttributesMap.get("Plan Type");
-		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 
 		Assert.assertTrue(claimSummarypage.validateClaimType(planType));
 	}
@@ -254,7 +255,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	@And("^All Body Copy on the page in Claims Sumamry page in AARP site$")
 	public void validate_body_copay(){
 
-		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 
 		Assert.assertTrue(claimSummarypage.verifyCopyText());
 	}
@@ -264,7 +265,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	@Then ("^I can view all Body Copy on the page in AARP site$")
 	public void validate_claims_table_body_copy_text(){
 
-		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		Assert.assertTrue(claimSummarypage.verifyCopyText2());
 	}
 	/**
@@ -273,7 +274,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	@And("^Dynamic text with the number of claims and search criteria, or date range for custom search$")
 	public void validate_dynamic_nuber_of_claims_text(){
 
-		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		Assert.assertTrue(claimSummarypage.verifyDynamicText());
 	}
 	/**
@@ -283,7 +284,7 @@ public class ClaimsMemberRedesignStepDefinition {
 
 	public void validate_claims_table_and_pagination(){
 
-		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		Assert.assertTrue(claimSummarypage.verifyClaimsTableAndPagination());
 
 	}
@@ -303,7 +304,7 @@ public class ClaimsMemberRedesignStepDefinition {
 		String planType = memberAttributesMap.get("Plan Type");
 		String domain  = memberAttributesMap.get("Domain");
 
-		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 
 		Assert.assertTrue(claimSummarypage.validateEobfordifferentDomainType(domain, planType));
 	}
@@ -312,7 +313,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	 */
 	@Then("^I can view the Learn More About Your Cost Breakdown section$")
 	public void validate_learn_more_about_section(){
-		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 
 		Assert.assertTrue(claimSummarypage.validateLearnmoreaboutsection());
 	}
@@ -322,7 +323,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	@Then("^I can view and validate the download my data button in calims summary page$")
 	public void validate_bownload_my_data_button(){
 
-		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		Assert.assertTrue(claimSummarypage.validateDownloadMyDataButton());
 
 	}
@@ -331,9 +332,9 @@ public class ClaimsMemberRedesignStepDefinition {
 	 */
 	@When("^I navigate to the Claim Details page in AARP site$")	
 	public void i_navigate_to_member_redesign_claim_details_page(){
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 		ClaimDetailsPage newClaimDetailsPage = accountHomePage.navigateToClaimDetailsPage();
-		getLoginScenario().saveBean(PageConstants.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
+		getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
 
 	}
 	/**
@@ -341,7 +342,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	 */
 	@Then("^I validate the Learn more section in claims details page in AARP site$")
 	public void validate_Learn_More_details_AARP(){
-		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
 		claimDetailspage.validateLearnMoreInDetailsPage();		
 	}
 	/**
@@ -349,7 +350,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	 */
 	@And("^the user validates the header in claims details in AARP site$")
 	public void validate_header_claims_details_AARP(){
-		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
 		claimDetailspage.validateClaimSearch();
 		claimDetailspage.validateHeader();
 		claimDetailspage.clickOnEOB();	
@@ -359,7 +360,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	 */
 	@And("^the user validates the EOB section in claims details page in AARP site$")
 	public void validates_EOB_claimsDetails_AARP(){
-		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
 		claimDetailspage.validateEOB();
 	}
 	/**
@@ -367,7 +368,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	 */
 	@And("^I validate the Claims Table in claims details page in AARP site$")
 	public void validate_claimsTable_claimsDetails_AARP(){
-		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
 		claimDetailspage.validateClaimsTableInDetailsPage();
 	}
 	/**
@@ -375,14 +376,14 @@ public class ClaimsMemberRedesignStepDefinition {
 	 */
 	@And("^I validate the Claims Total in claims details page in AARP site$")
 	public void validate_claims_total_AARP(){
-		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
 		claimDetailspage.validateClaimsTotalInDetailsPage();
 	}
 
 	/*@Then("^I can view a claim search back button in Claims Details page in AARP site$")
 	public void validate_claim_search_button()
 	{
-		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
 
 		Assert.assertTrue(claimDetailspage.validateClaimSearch());
 	}*/
@@ -403,7 +404,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	public void validate_dynamic_dates()
 	{
 
-		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
 		Assert.assertTrue(claimDetailspage.verifyDateRange());
 	}
 	/**
@@ -412,7 +413,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	@And("^A Provider name in Claims Details page in AARP site$")
 	public void validate_dynamic_provider_name()
 	{
-		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
 		Assert.assertTrue(claimDetailspage.verifyProviderName());
 
 	}
@@ -422,7 +423,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	@And("^A Claim number label in Claims Details page in AARP site$")
 	public void validate_claim_nummber_label(){
 
-		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
 		Assert.assertTrue(claimDetailspage.verifyClaimNumber());
 	}
 	/**
@@ -431,7 +432,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	@And("^A Claim number with dynamic value in Claims Details page in AARP site$")
 	public void validate_dynamic_claim_num(){
 
-		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
 		Assert.assertTrue(claimDetailspage.verifyDynamicClaimNumber());
 	}
 	/**
@@ -440,7 +441,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	@And("^A Claim type label with dynamic value in Claims Details page in AARP site$")
 	public void validate_claim_type_label(){
 
-		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
 		Assert.assertTrue(claimDetailspage.validateClaimType());
 	}
 	/**
@@ -449,7 +450,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	@And("^A Claim type with dynamic value in Claims Details page in AARP site$")
 	public void validate_dynamic_claim_type(){
 
-		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
 		Assert.assertTrue(claimDetailspage.validateDynamicClaimType());
 	}
 	/**
@@ -458,7 +459,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	@And("^A Claim status label with dynamic value in Claims Details page in AARP site$")
 	public void validate_claim_status(){
 
-		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
 		Assert.assertTrue(claimDetailspage.validateClaimStatus());
 	}
 	/**
@@ -467,7 +468,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	@And("^A Claim status with dynamic value in Claims Details page in AARP site$")
 	public void validate_dynamic_claim_status(){
 
-		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
 		Assert.assertTrue(claimDetailspage.validateDynamicClaimStatus());
 	}
 	/**
@@ -485,7 +486,7 @@ public class ClaimsMemberRedesignStepDefinition {
 		String planType = memberAttributesMap.get("Plan Type");
 		String domain  = memberAttributesMap.get("Domain");
 
-		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
 
 		Assert.assertTrue(claimDetailspage.validateMedicalEOBfordifferentDomainType(domain, planType));
 
@@ -496,7 +497,7 @@ public class ClaimsMemberRedesignStepDefinition {
 
 	@Then("^I can view the Details Learn More About Your Cost Breakdown section$")
 	public void validate_learn_more_about_section_details(){
-		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
 
 		Assert.assertTrue(claimDetailspage.validateDetailsLearnmoreaboutsectionDetails());	
 
@@ -508,7 +509,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	@Then("^The User can able to see Drug Claims History: Reached Maximum Claim Results Error$")
 	public void validateMaxRxclaimsResultError(){
 
-		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 
 		Assert.assertTrue(claimSummarypage.validateRxReachexMaxClaimsErrorMsg());
 
@@ -519,7 +520,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	@Then("^the user should be able to see the SHIP Date Range Greater Than 24-Months Error$")
 	public void validateDateRangeErrorSHIP(){
 
-		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		//.Assert.assertTrue(claimSummarypage.validateShipGreaterThan24MonthsErrorMsg());
 		claimSummarypage.validateShipGreaterThan24MonthsErrorMsg();
 	}
@@ -528,7 +529,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	 */
 	@Then("^the user should be able to see the FED Date Range Greater Than 24-Months Error$")
 	public void validateDateRangeErrorMsgFED(){
-		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		//.Assert.assertTrue(claimSummarypage.validateShipGreaterThan24MonthsErrorMsg());
 		claimSummarypage.validateFedGreaterThan24MonthsErrorMsg();
 
@@ -538,7 +539,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	 */
 	@Then("^the user should be able to see the from date is greater than to date error message$")
 	public void validateToDateErrorMessage(){
-		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		//.Assert.assertTrue(claimSummarypage.validateShipGreaterThan24MonthsErrorMsg());
 		claimSummarypage.validatefromDateLaterThanToDateError();
 

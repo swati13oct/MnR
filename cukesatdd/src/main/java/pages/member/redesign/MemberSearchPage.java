@@ -11,7 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**

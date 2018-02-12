@@ -8,8 +8,9 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.member.PageConstants;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageConstants;
+import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
@@ -64,7 +65,7 @@ public class MyprofileandPreferencesRedesignStepDefinition {
 
 		if (compp != null) {
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-			getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE, compp);
+			getLoginScenario().saveBean(PageConstantsMnR.TEST_HARNESS_PAGE, compp);
 			Assert.assertTrue(true);
 		}
 	}
@@ -74,13 +75,13 @@ public class MyprofileandPreferencesRedesignStepDefinition {
 			throws InterruptedException {
 
 		CommunicationPreferences compp = (CommunicationPreferences) getLoginScenario()
-				.getBean(PageConstants.TEST_HARNESS_PAGE);
+				.getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
 
 		compp.navigateToPreferencesPage();
 
 		if (compp != null) {
 			getLoginScenario().saveBean(
-					PageConstants.PROFILEANDPREFERENCES_PAGE, compp);
+					PageConstantsMnR.PROFILEANDPREFERENCES_PAGE, compp);
 			Assert.assertTrue(true);
 		}
 	}
@@ -88,13 +89,13 @@ public class MyprofileandPreferencesRedesignStepDefinition {
 	@Then("^PreferencesSpartans the user changes delivery preferences$")
 	public void PreferencesSpartans_the_user_changes_delivery_preferences() throws InterruptedException {
 		CommunicationPreferences compp = (CommunicationPreferences) getLoginScenario()
-				.getBean(PageConstants.PROFILEANDPREFERENCES_PAGE);
+				.getBean(PageConstantsMnR.PROFILEANDPREFERENCES_PAGE);
 
 		compp.SelectPreferences();
 
 		if (compp != null)
 			getLoginScenario().saveBean(
-					PageConstants.PROFILEANDPREFERENCES_PAGE, compp);
+					PageConstantsMnR.PROFILEANDPREFERENCES_PAGE, compp);
 	}
 
 }

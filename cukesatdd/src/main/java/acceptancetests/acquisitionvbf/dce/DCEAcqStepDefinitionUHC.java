@@ -13,8 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.DrugCostEstimatorPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.acquisition.PageConstants;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
@@ -166,7 +166,6 @@ public class DCEAcqStepDefinitionUHC {
 		String drug = memberAttributesRow.get(0).getCells().get(1);
 
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) loginScenario.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
-		System.out.println("drug: "+drug+"and "+drug.split(" ")[0]);
 			dce.addDrug(drug.split(" ")[0]);
 
 	}
