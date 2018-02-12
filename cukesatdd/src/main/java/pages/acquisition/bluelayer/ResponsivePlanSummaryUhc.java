@@ -23,12 +23,12 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.ElementData;
-import acceptancetests.atdd.data.MRConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
-import acceptancetests.enrollinplan.bluelayer.EnrollInPlanUhcStepDefinition;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.ElementData;
+import acceptancetests.data.MRConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
+import acceptancetests.deprecated.enrollinplan.bluelayer.EnrollInPlanUhcStepDefinition;
 // import acceptancetests.planName.bluelayer.PlanNamesStepDefinition;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ulayer.ResponsivePlanDetails;

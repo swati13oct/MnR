@@ -18,10 +18,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pages.acquisition.ulayer.LoginAssistancePage;
-import pages.member.ulayer.AccountHomePage;import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.MRConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import pages.member.ulayer.AccountHomePage;import acceptancetests.data.CommonConstants;
+import acceptancetests.data.MRConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
@@ -280,7 +280,7 @@ public class LoginPage extends UhcDriver {
 		}
 		else if (MRScenario.environment.equalsIgnoreCase("team-ci1")) {
 			
-			start(TEAM_CI1_NEW_DASHBOARD_URL);
+			start(MRConstants.REDESIGN_LOGIN_URL);
 			System.out.println("user is on Team-Ci1 Environment");
 		}
 		else
@@ -375,6 +375,42 @@ public class LoginPage extends UhcDriver {
 			
 				return null;
 		
+	}
+	
+	public Object doLoginWith(String username, String password) {
+		sendkeys(thUserName, username);
+		sendkeys(thPassword, password);
+		thSignIn.click();
+		if ( MRScenario.environment.equals("team-e")){
+
+			Alert alert = driver.switchTo().alert();
+			alert.accept();
+		} 
+		try{
+			Thread.sleep(40000);
+			if (validate(iPerceptionPopUp)) {
+				System.out.println("iPerceptionPopUp is Displayed");
+				iPerceptionPopUp.click();
+			}
+		}catch(Exception e)        {
+			System.out.println("iPerception Pop Up not displayed");
+		}
+
+		if(currentUrl().contains("testharness.html") || currentUrl().contains("/dashboard"))
+
+		{
+			return new AccountHomePage(driver);
+		}
+		else if(currentUrl().contains("home/my-account-home.html")  || currentUrl().contains("/login.html") ) {
+			return new AccountHomePage(driver);
+		}
+		else if (currentUrl().contains("terminated-plan.html")) {
+			return new TerminatedHomePage(driver);
+		}
+
+		System.out.println("teamhloginWith is returing null. Please Update the above condition As per your Needs");
+
+		return null;
 	}
 
 }

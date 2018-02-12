@@ -19,9 +19,9 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.dashboard.member.ulayer.ClaimDetailsPage;
@@ -109,7 +109,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath="//dashboard//a[contains(text(),'Contact')]")
 	private WebElement linkContactUs;
 	
-	@FindBy(xpath="//a[contains(text(),'Help')]")
+	@FindBy(xpath="//a[contains(text(),'Contact')]")
 	private WebElement helpAndContactUslink;
 	
 	@FindBy(xpath="//header//h1")
@@ -331,11 +331,16 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public ContactUsPage navigateToContactUsPage() {
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		if (validate(iPerceptionPopUp)) {
             iPerceptionPopUp.click();
             System.out.println("iPerception Pop Up displayed");
 		}
-		if (MRScenario.environment.equals("team-h") || MRScenario.environment.equals("test-a")) {
+		if (MRScenario.environment.equals("team-ci1") || MRScenario.environment.equals("team-h") || MRScenario.environment.equals("test-a") || MRScenario.environment.equals("team-e")) {
 			helpAndContactUslink.click();
 		}else{
 			linkContactUs.click();

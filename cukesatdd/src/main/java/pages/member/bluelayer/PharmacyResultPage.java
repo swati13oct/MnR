@@ -18,10 +18,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
-import acceptancetests.login.data.LoginCommonConstants;import atdd.framework.UhcDriver;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
+import acceptancetests.data.LoginCommonConstants;import atdd.framework.UhcDriver;
 
 /**
  * @author pagarwa5
@@ -47,13 +47,13 @@ public class PharmacyResultPage extends UhcDriver {
 	@FindBy(xpath = "(//div[@class='startedsearchtop headingtop1'])[3]/h2")
 	private WebElement contactOptumRxWidgetDisplayed;
 
-	@FindBy(xpath = "//a[text()='丬文']")
+	@FindBy(xpath = "//a[text()='ä¸¬æ–‡']")
 	private WebElement chineseContent;
 
 	@FindBy(xpath = "//a[text()='search']")
 	private WebElement chineseSearch;
 
-	@FindBy(xpath = "//a[text()='español']")
+	@FindBy(xpath = "//a[text()='espaÃ±ol']")
 	private WebElement spanishContent;
 
 	@FindBy(xpath = "//a[text()='search']")
@@ -428,10 +428,10 @@ public class PharmacyResultPage extends UhcDriver {
 			}
 			else if(language.equals("Chinese")){
 				if(zipcode == null || planName == null){
-					if(!jsonObject.get("pharmacyTitleText").toString().contains("附近的 "))	
+					if(!jsonObject.get("pharmacyTitleText").toString().contains("é™„è¿‘çš„ "))	
 						flag = false;
 				}else{
-					if(!jsonObject.get("pharmacyTitleText").toString().contains(zipcode+" 附近的 "+planName+" 藥房"))
+					if(!jsonObject.get("pharmacyTitleText").toString().contains(zipcode+" é™„è¿‘çš„ "+planName+" è—¥æˆ¿"))
 						flag = false;
 				}
 
@@ -442,13 +442,13 @@ public class PharmacyResultPage extends UhcDriver {
 						+ "24 hours a day, 7 days a week. TTY users, call: 711."))
 					flag = false;
 
-				if(!jsonObject.get("pharmacyNameheader").toString().contains("藥房名稱"))
+				if(!jsonObject.get("pharmacyNameheader").toString().contains("è—¥æˆ¿å��ç¨±"))
 					flag = false;
 
-				if(!jsonObject.get("servicesHeader").toString().contains("服務"))
+				if(!jsonObject.get("servicesHeader").toString().contains("æœ�å‹™"))
 					flag = false;
 
-				if(!jsonObject.get("distnaceHeader").toString().contains("距離"))
+				if(!jsonObject.get("distnaceHeader").toString().contains("è·�é›¢"))
 					flag = false;
 
 				viewMaplink.click();
