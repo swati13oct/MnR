@@ -10,16 +10,13 @@ import java.util.Set;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.member.PageConstants;
-import acceptancetests.login.data.LoginCommonConstants;
+import acceptancetests.data.PageConstantsMnR;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageConstants;
+import acceptancetests.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
-import cucumber.api.java.After;
-import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.dashboard.member.drugcostestimator.blayer.DrugCostEstimatorPage;
@@ -27,15 +24,22 @@ import pages.memberredesign.bluelayer.AccountHomePage;
 import pages.memberredesign.bluelayer.HealthAndWellness;
 import pages.memberredesign.bluelayer.LoginPage;
 
+/**
+ * Functionality : Covers step definition methods related to member redesign Health and Wellness page .
+ */
 public class MemberRedesignHealthnWellnessStepDefinition {
-	
+
 	@Autowired
 	MRScenario loginScenario;
 
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-	
+
+	/**
+	 * @toDo : Finds authenticated user to login with Health n Wellness rewards
+	 * @param memberAttributes
+	 */
 	@Given("^I am a authenticated member on the member redesign site HW$")
 	public void I_am_a_authenticated_member_on_the_member_redesign_site(DataTable memberAttributes) {
 		WebDriver wd = getLoginScenario().getWebDriver();
@@ -86,7 +90,10 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 		getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
 
 	}
-	
+
+	/**
+	 * @toDo : User gets logged in to member site
+	 */
 	@When("^the above plantype user logs in UMS Site Desktop HW$")
 	public void plantype_user_logs_in() {
 		String userName = (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
@@ -95,15 +102,19 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		LoginPage loginPage = new LoginPage(wd);
 		//loginPage.loginToStageTestHarness();
-		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
+		getLoginScenario().saveBean(PageConstantsMnR.LOGIN_PAGE, loginPage);
 		AccountHomePage accountHomePage = (AccountHomePage) loginPage.thloginWith(userName, pwd,category);
-		getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
-	
+		getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
+
 	}
-	
+
+	/**
+	 * @toDo : View Health n Wellness Global Navigation
+	 * @throws InterruptedException
+	 */
 	@When("^I view the global navigation HW$")
 	public void I_view_the_global_navigation() throws InterruptedException {
-	    // Express the Regexp above with the code you wish you had
+		// Express the Regexp above with the code you wish you had
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
 		//DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
@@ -111,38 +122,49 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 		//AccountHomePage accountHomePage = new AccountHomePage(wd);
 		//getLoginScenario().saveBean(PageConstants.MEM_REDESIGN_ACCOUNT_HOME_PAGE, accountHomePage);
 		HealthAndWellness healthnWellnessPage = new HealthAndWellness(wd);
-		getLoginScenario().saveBean(PageConstants.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE, healthnWellnessPage);
+		getLoginScenario().saveBean(PageConstantsMnR.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE, healthnWellnessPage);
 	}
-	
+
+	/**
+	 * @toDo : Clicks on Health and Wellness Tab
+	 */
 	@When("^then click the health and wellness tab HW$")
 	public void then_click_the_health_and_wellness_tab() {
-	    // Express the Regexp above with the code you wish you had
-		HealthAndWellness healthnWellnessPage = (HealthAndWellness) getLoginScenario().getBean(PageConstants.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE);
+		// Express the Regexp above with the code you wish you had
+		HealthAndWellness healthnWellnessPage = (HealthAndWellness) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE);
 		healthnWellnessPage.clickHealthnWellnessTab();
 	}
 
+	/**
+	 * @toDo : See health n Wellness Generic dashboard and lifestyle , learning and rewards level 2 tabs
+	 */
 	@When("^I should see the H&W Generic dashboard and lifestyle,learning and rewards L2 tabs HW$")
 	public void I_should_see_the_H_W_Generic_dashboard_and_tabs() {
-	    // Express the Regexp above with the code you wish you had
-		HealthAndWellness healthnWellnessPage = (HealthAndWellness) getLoginScenario().getBean(PageConstants.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE);
+		// Express the Regexp above with the code you wish you had
+		HealthAndWellness healthnWellnessPage = (HealthAndWellness) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE);
 		healthnWellnessPage.validateHnWDashboardnL2Tabs();
 
 	}
 
-
+	/**
+	 * @toDo : Clicks on Lifestyle tab and navigate to lifestyle page
+	 */
 	@When("^then click the Lifestyle tab and I should be directed to Lifestyle Page HW$")
 	public void then_click_the_Lifestyle_tab_and_I_should_be_directed_to_Lifestyle_Page() {
-	    // Express the Regexp above with the code you wish you had
-		HealthAndWellness healthnWellnessPage = (HealthAndWellness) getLoginScenario().getBean(PageConstants.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE);
+		// Express the Regexp above with the code you wish you had
+		HealthAndWellness healthnWellnessPage = (HealthAndWellness) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE);
 		healthnWellnessPage.clickLifestyleTab();
 		healthnWellnessPage.validateLifestylePage();
 
 	}
 
+	/**
+	 * @toDo : Clicks on Learning tab and navigate to learning page.
+	 */
 	@When("^then click the Learning tab and I should be directed to Learning Page HW$")
 	public void then_click_the_Learning_tab_and_I_should_be_directed_to_Learning_Page() {
-	    // Express the Regexp above with the code you wish you had
-		HealthAndWellness healthnWellnessPage = (HealthAndWellness) getLoginScenario().getBean(PageConstants.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE);
+		// Express the Regexp above with the code you wish you had
+		HealthAndWellness healthnWellnessPage = (HealthAndWellness) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE);
 		healthnWellnessPage.clickLearningTab();
 		healthnWellnessPage.validateLearningPage();
 
@@ -150,10 +172,10 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 
 	@When("^then click the Rewards tab and I should be directed to Rewards Page HW$")
 	public void then_click_the_Rewards_tab_and_I_should_be_directed_to_Rewards_Page() {
-	    // Express the Regexp above with the code you wish you had
+		// Express the Regexp above with the code you wish you had
 
 	}
 
-	
+
 
 }

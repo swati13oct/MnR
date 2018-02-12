@@ -15,10 +15,11 @@ import org.openqa.selenium.WebDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.member.PageConstants;
-import acceptancetests.claims.data.ClaimsCommonConstants;
-import acceptancetests.login.data.LoginCommonConstants;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageConstants;
+import acceptancetests.data.PageConstantsMnR;
+import acceptancetests.memberredesign.claims.ClaimsCommonConstants;
+import acceptancetests.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.After;
@@ -95,7 +96,7 @@ public class EobStepDefinition {
 		        eobPage.loginToDashboardPage(userName);
 		        if (eobPage != null) {
 		        	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		        	getLoginScenario().saveBean(PageConstants.EOB_Page, eobPage);
+		        	getLoginScenario().saveBean(PageConstantsMnR.EOB_Page, eobPage);
 		        }
 
 	}
@@ -124,11 +125,11 @@ public class EobStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.PLAN_TYPE, planType);
 
  	     //Pass the direct URL to validate the page
-		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstantsMnR.EOB_Page);
 		eobPage.navigateDirectToEOBPag();		 
 		eobPage.selectDateRange(dateRange, planType, eobTypeData);
 		if(eobPage!=null){
-			getLoginScenario().saveBean(PageConstants.EOB_Page, eobPage);
+			getLoginScenario().saveBean(PageConstantsMnR.EOB_Page, eobPage);
 			System.out.println("user is on EOB page");
 		} 
 	}
@@ -139,10 +140,10 @@ public class EobStepDefinition {
  	
  	@Then("^the user navigates to EOB page$")
  		public void the_user_navigates_to_EOB_page() {
-		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstantsMnR.EOB_Page);
 		eobPage.navigateDirectToEOBPag();
 		if(eobPage!=null){
-			getLoginScenario().saveBean(PageConstants.MEDICAL_EOB_PAGE,
+			getLoginScenario().saveBean(PageConstantsMnR.MEDICAL_EOB_PAGE,
 					eobPage);
 		} 
 	}
@@ -153,7 +154,7 @@ public class EobStepDefinition {
  	
 	@And("^the user validates how to read medical eob PDF$")
 		public void the_user_validates_how_to_read_medical_eob_PDF() {
-		EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstants.MEDICAL_EOB_PAGE);
+		EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstantsMnR.MEDICAL_EOB_PAGE);
 		eobPage.validateReadPDF();		 
 	}
 	
@@ -163,7 +164,7 @@ public class EobStepDefinition {
 	
 	@Then("^the user validates EOB statments displayed$")
 		public void the_user_validates_EOB_statments_displayed() {
-		EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstants.MEDICAL_EOB_PAGE);
+		EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstantsMnR.MEDICAL_EOB_PAGE);
         eobPage.validateEachEOBonUI();		 
 	}
 	
@@ -182,7 +183,7 @@ public class EobStepDefinition {
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
 		String planType  = memberAttributesMap.get("Plan Type");
-		EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstants.MEDICAL_EOB_PAGE);
+		EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstantsMnR.MEDICAL_EOB_PAGE);
         System.out.println(planType);
 		eobPage.validateDropDowns(planType);		 
 	}
@@ -193,7 +194,7 @@ public class EobStepDefinition {
 	
 	@And("^the user validates How to read your Medical EOB video$")
 		public void the_user_validates_how_to_read_medical_eob_Video() {
-		EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstants.MEDICAL_EOB_PAGE);
+		EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstantsMnR.MEDICAL_EOB_PAGE);
 		eobPage.validateEobVideo();
 	}
 	
@@ -225,7 +226,7 @@ public class EobStepDefinition {
 	
 	@Then("^the user validates site leaving pop up$")
 		public void user_validates_site_leaving_poup(){
-		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstantsMnR.EOB_Page);
         eobPage.validateSiteLeaveingPopUP();
 	}
 	
@@ -247,7 +248,7 @@ public class EobStepDefinition {
 		String dateRange = memberAttributesMap.get("Date Range");
 		String planType  = memberAttributesMap.get("Plan Type");
 		String eobTypeData   = memberAttributesMap.get("EOB Type");
-		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstantsMnR.EOB_Page);
 		eobPage.selectDateRange(dateRange, planType, eobTypeData);
 	}
 	
@@ -266,7 +267,7 @@ public class EobStepDefinition {
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
 		String planType = memberAttributesMap.get("Plan Type");
- 		EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+ 		EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstantsMnR.EOB_Page);
  		
  		eobPage.navigatePlanTabs(planType);
  		eobPage.validateDropDowns(planType);
@@ -288,7 +289,7 @@ public class EobStepDefinition {
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
 		String planType = memberAttributesMap.get("Plan Type");
- 		EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+ 		EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstantsMnR.EOB_Page);
   		eobPage.validateDropDowns(planType);*/
 	}
 		
@@ -310,7 +311,7 @@ public class EobStepDefinition {
 		String eobTypeData = memberAttributesMap.get("EOB Type");
 		String dateRange = memberAttributesMap.get("Date Range");
 
-		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstantsMnR.EOB_Page);
 		eobPage.selectDateRange(dateRange, planType, eobTypeData);*/
 		
 	}	

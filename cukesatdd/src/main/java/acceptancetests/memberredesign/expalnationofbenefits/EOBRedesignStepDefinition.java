@@ -8,8 +8,9 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.member.PageConstants;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageConstants;
+import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.java.en.And;
 import cucumber.api.DataTable;
@@ -67,7 +68,7 @@ public class EOBRedesignStepDefinition {
 
 		if (eobp != null) {
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-			getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE, eobp);
+			getLoginScenario().saveBean(PageConstantsMnR.TEST_HARNESS_PAGE, eobp);
 			Assert.assertTrue(true);
 		}
 	}
@@ -79,7 +80,7 @@ public class EOBRedesignStepDefinition {
 			throws InterruptedException {
 
 		ExplanationOfBenefitsPage eobp = (ExplanationOfBenefitsPage) getLoginScenario()
-				.getBean(PageConstants.TEST_HARNESS_PAGE);
+				.getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
 
 		eobp.navigateToEOBPage();
 
@@ -96,7 +97,7 @@ public class EOBRedesignStepDefinition {
 	public void EOBspartans_validate_the_EOB_Elements()
 			throws InterruptedException {
 		ExplanationOfBenefitsPage eobp = (ExplanationOfBenefitsPage) getLoginScenario()
-				.getBean(PageConstants.EOB_Page);
+				.getBean(PageConstantsMnR.EOB_Page);
 
 		eobp.validateEOB();
 
