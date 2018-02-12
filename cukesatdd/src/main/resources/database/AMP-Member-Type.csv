@@ -34,16 +34,10 @@ q1_grp_feb131,MA,UHCGroup,,,
 q1_grp_feb206,MAPD,UHCGroup,,,
 q1_grp_feb292,PDP,UHCGroup,,,
 q1_grp_feb369,MAPD,Group,,,
-q1_aarp_feb291,PDP,RXCLAIMS,,<<<<<<< .mine
+q1_aarp_feb291,PDP,RXCLAIMS,,
 q1_aarp_feb005,MA,NICECLAIMS,
 q1_grp_feb069,MAPD,Group,
 q1_aarp_feb291,PDP,RXCLAIMS,,
-
-
-
-
-
-=======
 q1_ship_feb011,SHIP,AARPIndividual,,,
 q1_aarp_feb151,MA,AARPIndividual,,,
 q1_aarp_feb450,MAPD,AARPIndividual,,,
@@ -52,4 +46,4 @@ q1_grp_feb131,MA,UHCGroup,,,
 q1_grp_feb206,MAPD,UHCGroup,,,
 q1_grp_feb292,PDP,UHCGroup,,,
 q1_grp_feb369,MAPD,Group,,,
->>>>>>> .theirs
+
