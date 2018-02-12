@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.RequestHelpAndInformationPage;
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.acquisition.PageConstants;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;

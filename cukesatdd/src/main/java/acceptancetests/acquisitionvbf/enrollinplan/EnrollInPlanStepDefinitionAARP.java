@@ -26,10 +26,10 @@ import pages.acquisition.ulayer.ProposedEffectiveDatePage;
 import pages.acquisition.ulayer.ReviewAndSubmitPage;
 import pages.acquisition.ulayer.SpecialElectionPeriodPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.acquisition.PageConstants;
-import acceptancetests.enrollinplan.data.EnrollInPlanCommonConstants;
-import acceptancetests.vpp.data.VPPCommonConstants;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageConstants;
+import acceptancetests.acquisitionvbf.enrollinplan.EnrollInPlanCommonConstants;
+import acceptancetests.acquisitionvbf.vpp.VPPCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
@@ -115,15 +115,13 @@ public class EnrollInPlanStepDefinitionAARP {
 				CommonConstants.WEBDRIVER); //
 		String plantype = givenAttributesMap.get("Plan Type");
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
-		/*VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage(wd);
-		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, wd);*/
-		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		planSummaryPage.viewPlanSummary(plantype);
+		VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage(wd);
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, wd);
+		plansummaryPage = plansummaryPage.viewPlanSummary(plantype);
 
-		if (planSummaryPage != null) {
+		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
-					planSummaryPage);
+					plansummaryPage);
 
 		}
 	}
@@ -368,7 +366,7 @@ public class EnrollInPlanStepDefinitionAARP {
 			SpecialElectionPeriodPage specialElectionPeriodPage = (SpecialElectionPeriodPage) getLoginScenario()
 					.getBean(PageConstants.SPECIAL_ELECTION_PERIOD_PAGE);
 
-			specialElectionPeriodPage.noForSEPQuestion();
+			specialElectionPeriodPage.yesForSEPQuestion(SEPAttributesMap);
 
 			getLoginScenario().saveBean(
 					PageConstants.SPECIAL_ELECTION_PERIOD_PAGE,
@@ -874,7 +872,7 @@ public class EnrollInPlanStepDefinitionAARP {
 				if (pedPage.validateEffectiveDatePage()) {
 					Assert.assertTrue(true);
 				} else
-					Assert.fail("Error in validating the Effective Date Page");
+					Assert.fail("Error in validating the Riders Page");
 
 			} else {
 				Assert.fail("ERROR loading PED Page");
