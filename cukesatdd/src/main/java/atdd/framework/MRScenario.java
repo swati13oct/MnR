@@ -68,6 +68,9 @@ public class MRScenario {
 
                private static Map<String, Map<String, JSONObject>> expectedDataMapBluelayer = new LinkedHashMap<String, Map<String, JSONObject>>();
                public static String environment;
+               
+               public static String environmentMedicare;
+               
                public static String domain;
 
                private static final String DIRECTORY = "/src/main/resources/";
@@ -116,6 +119,15 @@ public class MRScenario {
 
                               /* Set acqusisition and member urls */
                               environment = props.get("Environment");
+                              
+                              if(environment.equals("awe-test-a")){
+                            	  environmentMedicare ="test-a";
+                              }else if(environment.equals("awe-stage")){
+                            	  environmentMedicare ="stage";
+                              }else{
+                            	  environmentMedicare =environment;
+                              }
+                       
                               
                                  if(props.containsKey("Domain")) {
                                         domain = props.get("Domain");
