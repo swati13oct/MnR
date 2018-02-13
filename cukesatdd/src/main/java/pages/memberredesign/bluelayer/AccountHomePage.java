@@ -336,8 +336,8 @@ public class AccountHomePage extends UhcDriver {
 //		System.out.println(footerlinksColumn.size());
 //		String quickLinksFooterLinkText = footerlinksColumn.get(1).getText();
 		//System.out.println(quickLinksFooterLinkText);
-		Assert.assertTrue("Language Assistance english link is not displayed", languageAssistanceEnglish.isDisplayed());
-		Assert.assertTrue("Language Assistance Spanish is not displayed", languageAssistanceSpanish.isDisplayed());
+		//Assert.assertTrue("Language Assistance english link is not displayed", languageAssistanceEnglish.isDisplayed());
+		//Assert.assertTrue("Language Assistance Spanish is not displayed", languageAssistanceSpanish.isDisplayed());
 		
 	}
 	
