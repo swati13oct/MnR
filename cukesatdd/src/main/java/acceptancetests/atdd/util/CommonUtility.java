@@ -103,21 +103,26 @@ public class CommonUtility {
 		WebDriverWait wait = new WebDriverWait(driver, timeout);
 		try {
 			WebElement elementExpected = wait.until(ExpectedConditions.visibilityOf(element));
-			if ((elementExpected.getText().isEmpty() || elementExpected.getText() == null)) {
+			if(elementExpected.isDisplayed()){
+				System.out.println("The element: "+elementExpected+" is visible");
+			}
+			/*if ((elementExpected.getText().isEmpty() || elementExpected.getText() == null)) {
 				timeout = timeout - 5;
 				if (timeout > 0) {
 					waitForPageLoad(driver, element, timeout);
 				}
-			}
+			}*/
 
 		} catch (Exception e) {
-			timeout = timeout - 5;
+			/*timeout = timeout - 5;
 			if (timeout > 0) {
 				waitForPageLoad(driver, element, timeout);
 			} else {
 				System.out.println("Not able to locate this " + element + " on page");
 				return;
-			}
+			}*/
+			System.out.println("Not able to locate this element -- " + element + " on page");
+			System.out.println(e.getMessage());
 		}
 
 	}

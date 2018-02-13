@@ -46,7 +46,6 @@ public class MemberSearchPage extends UhcDriver {
 	}
 	
 	public MemberInformationPage memberSearch(String strMemberUsername){
-		WebDriverWait wait = new WebDriverWait(driver,30);
 		sendkeys(memberUsername, strMemberUsername);
 		btnSearch.click();
 		CommonUtility.waitForPageLoad(driver, lnkMemberUsername, 60);

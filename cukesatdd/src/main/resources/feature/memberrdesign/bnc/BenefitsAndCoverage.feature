@@ -24,7 +24,7 @@ Feature: 1.01-To test plan benefits and Coverage functionality
     Examples: 
       |  memberType  | 
       |  BncnonlisUHCIndividual   | 
-      |  BncnonlisAARPIndividual       | 
+     # |  BncnonlisAARPIndividual       | 
 
   @smokeTest_BenefitsAndCoverageGrp
     Scenario Outline: Verify multiple sections on Benefits and Coverage page for non-LIS group member

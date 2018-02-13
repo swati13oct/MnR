@@ -52,7 +52,8 @@ public abstract class UhcDriver {
 	public void switchToNewTab(WebElement Element) {
 		
 		int initialCount = driver.getWindowHandles().size();
-		Element.click();
+		Element.click();;
+		//clickUsingAction(Element);
 		waitForCountIncrement(initialCount);
 		ArrayList<String> tabs = new ArrayList<String>(
 				driver.getWindowHandles());
@@ -60,6 +61,7 @@ public abstract class UhcDriver {
 	}
 	
 	public void waitForCountIncrement(int initialCount){
+		System.out.println("Waiting for new window to get open");
 		WebDriverWait wait = new WebDriverWait(driver, 60);
 		wait.until(ExpectedConditions.numberOfWindowsToBe(initialCount+1));
 	}
@@ -461,6 +463,7 @@ public abstract class UhcDriver {
 	public void jsClick(WebElement element){
 		JavascriptExecutor js = (JavascriptExecutor)driver;
 		js.executeScript("arguments[0].click();", element);
+		System.out.println("Element Clicked");
 	}
 	
 	public boolean scrollToView(WebElement element) {

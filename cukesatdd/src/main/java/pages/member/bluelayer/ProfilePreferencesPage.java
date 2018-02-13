@@ -265,7 +265,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(xpath = "html/body/div[3]/div[3]/div[1]/div[1]/div[2]/div/div/div/div[2]/div/div/div/div")
 	private WebElement backLink2;
 
-	@FindBy(className = "atdd-checkbox-label")
+	@FindBy(className = "atdd-notes")
 	private WebElement NoteSection;
 
 	@FindBy(className = "atdd-checkbox-label")

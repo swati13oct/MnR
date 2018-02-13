@@ -371,12 +371,16 @@ CommonUtility.waitForPageLoad(driver, OrderMaterialsErrorMsg, 30);
 		if(loadingImages.size()>0){
 			CommonUtility.waitForElementToDisappear(driver, loadingImages.get(0), 120);
 			}
-
-		if (validate(OrderConfirmationHeader) || validate(OrderConfirmation_addordermaterialLink)) {
-			System.out.println("@@@@ Opder Plan Material COnfirmation Page is Displayed @@@@");
-			return new PlanMaterialConfirmationPage(driver);
-		} 
-			return null;
+		try{
+			if (validate(OrderConfirmationHeader) || validate(OrderConfirmation_addordermaterialLink)) {
+				System.out.println("@@@@ Opder Plan Material COnfirmation Page is Displayed @@@@");
+				return new PlanMaterialConfirmationPage(driver);
+			}
+		return null;
+		}catch(Exception ex){
+			Assert.fail("@@@@ Opder Plan Material COnfirmation Page is not Displayed @@@@");
+					return null;
+		}
 	}
 	
 	public OrderplanmaterialsPage verifyneedHelpcomponent(){

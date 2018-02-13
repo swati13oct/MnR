@@ -16,8 +16,8 @@ Feature: 1.10-To test order materials functionality
     Examples: 
       | planType | memberType | option           |
       | MAPD     | UhcIndOrderPlan  | Replacement ID card      |
-      | MAPD     | AARPIndOrderPlan  | Replacement ID card      |
-      | MAPD     | GrpRetireeOrderPlan  | Replacement ID card      |
+   #   | MAPD     | AARPIndOrderPlan  | Replacement ID card      |
+   #   | MAPD     | GrpRetireeOrderPlan  | Replacement ID card      |
            # | MA       |  UhcInd | Member Materials |
      # | PDP      |  AARPInd | Welcome Guide    |
     #  | SHIP     | Individual  | Member ID Card |

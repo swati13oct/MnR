@@ -19,6 +19,7 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.dashboard.member.ulayer.RallyDashboardPage;
+import pages.member.bluelayer.BenefitsAndCoveragePage;
 import pages.member.ulayer.AccountHomePage;
 import pages.member.ulayer.ConfirmOneTimePaymentPage;
 import pages.member.ulayer.LoginPage;
@@ -337,6 +338,7 @@ public class PaymentStepDefintion {
 
 		TeamHLoginUlayer THloginPage = new TeamHLoginUlayer(wd);
 		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, THloginPage);
+		
 	}
 	
 	@Given("^the user is on the Team-C AARP medicare site login page$")
@@ -539,7 +541,7 @@ public class PaymentStepDefintion {
 	
 	
 	@And("^the user navigates to PaymentOverview Page$")
-	public void user_navigates_to_PaymentOverview_Page()
+	public void user_navigates_to_PaymentOverview_Page() throws InterruptedException
 	{
 		TestHarness testHarness = (TestHarness)getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
 		PaymentsOverview paymentsOverview = testHarness.navigateToPaymentOverview();
@@ -884,9 +886,16 @@ public class PaymentStepDefintion {
 	@And("^the user navigates Premium Payment from Rally Dashboard Page$")
 	public void user_navigates_to_premium_payment_from_RallyDashboardPage_Page() throws InterruptedException
 	{
+		PaymentsOverview paymentsOverview;
+		if("YES".equalsIgnoreCase(MRScenario.isTestHarness)){
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
+			
+			paymentsOverview= testHarness.navigateToPaymentOverview();
+		}else{
 		RallyDashboardPage rallyDashboardPage = (RallyDashboardPage)getLoginScenario().getBean(PageConstants.RALLY_DASHBOARD_PAGE);
 
-		PaymentsOverview paymentsOverview = rallyDashboardPage.navigateToPaymentOverview();
+		paymentsOverview = rallyDashboardPage.navigateToPaymentOverview();
+		}
 		if(paymentsOverview!= null){
 			getLoginScenario().saveBean(PageConstants.PAYMENT_OVERVIEW,
 					paymentsOverview);
@@ -939,33 +948,28 @@ public class PaymentStepDefintion {
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 		}
 		
-		TeamHLoginUlayer loginPage = (TeamHLoginUlayer)getLoginScenario().getBean(PageConstants.LOGIN_PAGE);
-		RallyDashboardPage rallyDashboard = (RallyDashboardPage) loginPage.loginWith(userName, pwd);
-		//AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
+		TeamHLoginUlayer THloginPage = (TeamHLoginUlayer)getLoginScenario().getBean(PageConstants.LOGIN_PAGE);
+		if(("YES").equalsIgnoreCase(MRScenario.isTestHarness)){
+			TestHarness testHarness = (TestHarness) THloginPage.loginWith(userName, pwd);
+			if (testHarness != null) {
+				getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE,
+						testHarness);		}
+			else{
+				Assert.fail("Login not successful...");
+			}
+		}
+		else{
+			
 		
-		
+		RallyDashboardPage rallyDashboard = (RallyDashboardPage) THloginPage.loginWith(userName, pwd);
 		if (rallyDashboard != null) {
 			getLoginScenario().saveBean(PageConstants.RALLY_DASHBOARD_PAGE,
-					rallyDashboard);
-			Assert.assertTrue(true);
-			/*JSONObject accountHomeActualJson = TestHarn.accountHomeJson;
-			getLoginScenario().saveBean(
-					LoginCommonConstants.ACCOUNT_HOME_ACTUAL,
-					accountHomeActualJson);*/
-			
-			/* Get expected data 
-			Map<String, JSONObject> expectedDataMap = loginScenario
-					.getExpectedJson(userName);
-			JSONObject accountHomeExpectedJson = accountHomePage
-					.getExpectedData(expectedDataMap);
-			getLoginScenario().saveBean(LoginCommonConstants.ACCOUNT_HOME_EXPECTED,
-					accountHomeExpectedJson);*/
-	
-	
-	}
+					rallyDashboard);		}
 		else{
 			Assert.fail("Login not successful...");
-		}	
+		}
+		}
+
 
 	}
 	

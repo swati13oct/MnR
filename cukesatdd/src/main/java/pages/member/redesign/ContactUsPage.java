@@ -194,10 +194,10 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(css="h2.plan.margin-large>span")
 	private WebElement pdpHeader;
 	
-	@FindBy(css="div>div.alert-message")
+	@FindBy(css=".alert-message")
 	private WebElement memberAuthMessage;	
 	
-	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))]//div[contains(@class,'message-block-body')][1]//h3")
+	@FindBy(xpath="//div[contains(@class,'card-body')]/div[not (contains(@class,'ng-hide'))]//div[contains(@class,'message-block-body')][1]//h3[text()]")
 	private WebElement memberAuthNotAuthorizedToSendUsQuestionMessage;
 	
 	@FindBy(xpath="//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='call-number']")
@@ -1176,26 +1176,23 @@ public class ContactUsPage extends UhcDriver{
 	}
 
 	public String getMemberAuthNotAuthorizedToSendUsQuestionMessage(){
-		try {
-			Thread.sleep(35000);
+			//Thread.sleep(35000);
+		validate(memberAuth_fillOutFormButton);
 			memberAuth_fillOutFormButton.click();
-			Thread.sleep(3000);
+			//Thread.sleep(3000);
+			validate(memberauth_questionSubmit);
 			memberauth_questionSubmit.click();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+			validate(memberAuthNotAuthorizedToSendUsQuestionMessage);
 		return memberAuthNotAuthorizedToSendUsQuestionMessage.getText().trim();
 	}
 	
 	public String getMemberAuthNotAuthorizedToRequestACallMessage(){
-		try {
-			Thread.sleep(15000);
-			memberAuth_fillOutFormButton.click();
-			Thread.sleep(3000);
-			memberauth_questionSubmit.click();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+
+			System.out.println("send a req  is displayed");
+			jsClick(requestACall);
+			validate(contactoption);
+			sendkeys(clickToCallInputNum, "9023456121");
+			validate(memberAuthNotAuthorizedToSendUsQuestionMessage);
 		return memberAuthNotAuthorizedToSendUsQuestionMessage.getText().trim();
 	}
 }

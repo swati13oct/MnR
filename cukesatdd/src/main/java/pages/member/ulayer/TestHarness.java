@@ -18,7 +18,9 @@ import pages.member.bluelayer.BenefitsAndCoveragePage;
 import pages.member.bluelayer.ConfirmOneTimePaymentPage;
 import pages.member.bluelayer.DrugCostEstimatorPage;
 import pages.member.bluelayer.HealthAndWellness;
+import pages.member.bluelayer.ProfilePreferencesPage;
 import pages.member.redesign.ContactUsPage;
+import pages.redesign.PharmacySearchPage;
 
 public class TestHarness extends UhcDriver{
 	
@@ -100,16 +102,21 @@ public class TestHarness extends UhcDriver{
 		validate(claimsPageLink);
 	}	
 	
-	public PaymentsOverview navigateToPaymentOverview()
+	public PaymentsOverview navigateToPaymentOverview() throws InterruptedException
 	{
 		System.out.println("Inside navigateToPaymentOverview functions");
-		if(PaymentPageLik.isEnabled()){
+/*		waitforElement(panelFindCareCost, 60);
+		if(panelClaims.isEnabled()){
+			panelClaims.click();*/
+			//driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+			//waitforElement(panelPremiumPayment, 60);
+			validate(PaymentPageLik);
 			PaymentPageLik.click();
-			System.out.println("Go tp Payment link clicked");
-			//Implementing direct navigation as PaymentLink in test harness is not getting clicked via selenium
-			//driver.get("https://team-h-medicare.uhc.com/content/medicare/member/payments/overview.html");
-			return new PaymentsOverview(driver);
-		}
+			CommonUtility.checkPageIsReady(driver);
+			if (driver.getTitle().equalsIgnoreCase("Overview")) {
+				return new PaymentsOverview(driver);	
+			}			
+		//}
 		return null;
 	}
 	
@@ -248,5 +255,49 @@ public OrderplanmaterialsPage navigateToOrderPlanMaterialsPage() {
 	}
 	return null;
 }
+
+public PharmacySearchPage navigateToPharmacyLocator() throws InterruptedException {
+				
+				CommonUtility.checkPageIsReady(driver);
+				validate(pharmacyPageLink);
+				pharmacyPageLink.click();
+				//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+				CommonUtility.checkPageIsReady(driver);
+
+				System.out.println(driver.getTitle());
+				
+				if (driver.getTitle().contains("Pharmacy")) {
+					return new PharmacySearchPage(driver);
+				}
+				return null;
+	}
+
+public pages.member.bluelayer.ProfilePreferencesPage navigateDirectToProfilePage() {
+		System.out.println(driver.getTitle());
+		validate(profilePageLink);
+		profilePageLink.click();
+		CommonUtility.checkPageIsReady(driver);
+		/*try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		System.out.println(driver.getTitle());
+
+		if (driver.getTitle().equalsIgnoreCase("Profile")) {
+			 System.out.println("Pass!");
+			return new ProfilePreferencesPage(driver);
+		}
+		/*JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,200)", "");*/
+		/*try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		return null;
+	}
 
 }

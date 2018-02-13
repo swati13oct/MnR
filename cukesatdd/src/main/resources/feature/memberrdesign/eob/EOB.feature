@@ -19,9 +19,9 @@ Examples:
 	| planType  | memberType           |dateRange		  | eobType 		  |
 	| MAPD      | UHCIndividualEOB     |18 Months		  | Medical 		  |          
 	| MAPD      | UHCIndividualEOB     |18 Months		  | Prescription Drug | 
-	| MAPD      | AARPIndividualEOB    |18 Months		  | Medical 		  | 
-	| MAPD      | AARPIndividualEOB    |18 Months		  | Prescription Drug | 
-	| MAPD      | GroupRetireeEOB      |18 Months		  | Medical           | 
+#	| MAPD      | AARPIndividualEOB    |18 Months		  | Medical 		  | 
+#	| MAPD      | AARPIndividualEOB    |18 Months		  | Prescription Drug | 
+#	| MAPD      | GroupRetireeEOB      |18 Months		  | Medical           | 
 	#| MAPD      | GroupRetireeEOB      |18 Months		  | Prescription Drug | 
  
 #@fixed 

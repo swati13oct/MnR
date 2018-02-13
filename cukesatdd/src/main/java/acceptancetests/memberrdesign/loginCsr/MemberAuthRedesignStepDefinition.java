@@ -25,6 +25,7 @@ import pages.member.redesign.ContactUsPage;
 import pages.member.redesign.MemberAuthLoginPage;
 import pages.member.redesign.MemberInformationPage;
 import pages.member.redesign.MemberSearchPage;
+import pages.member.ulayer.TestHarness;
 
 public class MemberAuthRedesignStepDefinition {
 	/**
@@ -86,15 +87,31 @@ public class MemberAuthRedesignStepDefinition {
 		}
 		
 		@Then("^click on the member displayed in the search list$")
-		public void click_on_the_member_displayed_in_the_search_list()
+		public void click_on_the_member_displayed_in_the_search_list() throws InterruptedException
 		{
 			MemberInformationPage memberInformationPage = (MemberInformationPage) getLoginScenario().getBean(PageConstants.MEMBER_AUTH_INFORMATION_PAGE);
 			
-			RallyDashboardPage rallyDashboardPage = memberInformationPage.loginAsMember();
 			
-			if(rallyDashboardPage != null)				
+			if(("YES").equalsIgnoreCase(MRScenario.isTestHarness)){
+				TestHarness testHarness =(TestHarness) memberInformationPage.loginAsMember();
+				if (testHarness != null) {
+					getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE,
+							testHarness);		}
+				else{
+					Assert.fail("Login not successful...");
+				}
+			}
+			else{
+				
+			
+			RallyDashboardPage rallyDashboard = (RallyDashboardPage) memberInformationPage.loginAsMember();
+			if (rallyDashboard != null) {
 				getLoginScenario().saveBean(PageConstants.RALLY_DASHBOARD_PAGE,
-						rallyDashboardPage);
+						rallyDashboard);		}
+			else{
+				Assert.fail("Login not successful...");
+			}
+			}
 		}
 		
 		@Then("^I will see the disclaimer text at top of the page$")
@@ -106,18 +123,29 @@ public class MemberAuthRedesignStepDefinition {
 			    memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
 			}
 			// get parameter Disclaimer
-			String disclaimer = memberAttributesMap.get("Disclaimer");
-			
+			String disclaimer = memberAttributesMap.get("Disclaimer").trim();
+			ContactUsPage contactUsPage;
+			if("YES".equalsIgnoreCase(MRScenario.environment)){
+				TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
+				
+				contactUsPage = testHarnessPage.navigateToContactUsPage();
+				
+			}
+			else{
 			RallyDashboardPage rallyDashboardPage = (RallyDashboardPage) getLoginScenario().getBean(PageConstants.RALLY_DASHBOARD_PAGE);
+			contactUsPage = rallyDashboardPage.navigateToContactUsPage();
+			}
 			
-			ContactUsPage contactUsPage = rallyDashboardPage.navigateToContactUsPage();
-			
-			Assert.assertEquals(disclaimer, contactUsPage.getDisclaimerTextForMemberAuth());
-			
-			if(contactUsPage != null)				
-				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
-						contactUsPage);
+			String message;
+			if(contactUsPage != null){	
+				message = contactUsPage.getDisclaimerTextForMemberAuth();
+				Assert.assertTrue("@@@Disclaimer test:"+message+" -- is not displayed@@@", message.contains(disclaimer));
+			}
+			else{
+				Assert.fail("Contact Us page is not loaded");
+			}
 		}
+		
 		
 		@Then("^all SUBMIT buttons display message when clicked on contact us page$")
 		public void all_SUBMIT_buttons_display_message_when_clicked_on_contact_us_page(DataTable givenAttributes)

@@ -25,10 +25,10 @@ Scenario Outline: To validate that claims are present on claims summary page and
  	 | membertype 	 | planType | claimPeriod    | domain | claimssystem |
      |  BlueLayerInd | MAPD     | Last 24 months | COSMOS | COSMOSCLAIMS |
      |  BlueLayerInd | MAPD     | Last 24 months | NICE   | NICECLAIMS   |
-     |  ULayerInd 	 | MAPD     | Last 24 months | COSMOS | COSMOSCLAIMS |
-     |  ULayerInd	 | MAPD     | Last 24 months | NICE   | NICECLAIMS   |
-     |  GroupRetiree | MAPD     | Last 24 months | COSMOS | COSMOSCLAIMS |
-     |  GroupRetiree | MAPD     | Last 24 months | NICE   | NICECLAIMS   |
+    # |  ULayerInd 	 | MAPD     | Last 24 months | COSMOS | COSMOSCLAIMS |
+   #  |  ULayerInd	 | MAPD     | Last 24 months | NICE   | NICECLAIMS   |
+   #  |  GroupRetiree | MAPD     | Last 24 months | COSMOS | COSMOSCLAIMS |
+   #  |  GroupRetiree | MAPD     | Last 24 months | NICE   | NICECLAIMS   |
      
 
 #  @claimsHeader

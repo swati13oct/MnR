@@ -14,5 +14,5 @@ When then click the Learning tab and I should be directed to Learning Page
 Examples:
  | planType  | memberType  |
  | MAPD      | UhcIndOrderPlan |
- | MAPD      | AARPIndOrderPlan |
- | MAPD      | GrpRetireeOrderPlan |
+ #| MAPD      | AARPIndOrderPlan |
+ #| MAPD      | GrpRetireeOrderPlan |

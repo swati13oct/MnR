@@ -9,9 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.dashboard.member.ulayer.RallyDashboardPage;
 import pages.member.bluelayer.AccountHomePage;
-
+import pages.member.bluelayer.BenefitsAndCoveragePage;
 import pages.member.bluelayer.ProfilePreferencesPage;
 import pages.member.ulayer.TeamHLoginUlayer;
+import pages.member.ulayer.TestHarness;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.login.data.LoginCommonConstants;
@@ -70,11 +71,31 @@ public class ProfileandPreferencesStepDefinition {
 		//Inserting new code fr Rally Dashboard
 		TeamHLoginUlayer THloginPage = new TeamHLoginUlayer(wd);
 		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, THloginPage);
+		if(("YES").equalsIgnoreCase(MRScenario.isTestHarness)){
+			TestHarness testHarness = (TestHarness) THloginPage.loginWith(userName, pwd);
+			if (testHarness != null) {
+				getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE,
+						testHarness);		}
+			else{
+				Assert.fail("Login not successful...");
+			}
+		}
+		else{
+			
+		
 		RallyDashboardPage rallyDashboard = (RallyDashboardPage) THloginPage.loginWith(userName, pwd);
 		if (rallyDashboard != null) {
 			getLoginScenario().saveBean(PageConstants.RALLY_DASHBOARD_PAGE,
+					rallyDashboard);		}
+		else{
+			Assert.fail("Login not successful...");
+		}
+		}
+		/*RallyDashboardPage rallyDashboard = (RallyDashboardPage) THloginPage.loginWith(userName, pwd);
+		if (rallyDashboard != null) {
+			getLoginScenario().saveBean(PageConstants.RALLY_DASHBOARD_PAGE,
 					rallyDashboard);
-			Assert.assertTrue(true);
+			Assert.assertTrue(true);*/
 			/*JSONObject accountHomeActualJson = TestHarn.accountHomeJson;
 			getLoginScenario().saveBean(
 					LoginCommonConstants.ACCOUNT_HOME_ACTUAL,
@@ -88,11 +109,11 @@ public class ProfileandPreferencesStepDefinition {
 			getLoginScenario().saveBean(LoginCommonConstants.ACCOUNT_HOME_EXPECTED,
 					accountHomeExpectedJson);*/
 	
-	
+	/*
 	}
 		else{
 			Assert.fail("Login not successful...");
-		}
+		}*/
 		// comment CM code for login page
 	
 		/*LoginPage2 loginPage = new LoginPage2(wd);
@@ -557,9 +578,15 @@ public class ProfileandPreferencesStepDefinition {
 	@And("^the user navigates to Rally Dashboard Page for profile and preference$")
 	public void user_navigates_to_RallyDashboardPage_Page() throws InterruptedException
 	{
+		ProfilePreferencesPage ProfilePreferencesPage;
+		if("YES".equalsIgnoreCase(MRScenario.isTestHarness)){
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
+			
+			ProfilePreferencesPage= testHarness.navigateDirectToProfilePage();
+		}else{
 		RallyDashboardPage rallyDashboardPage = (RallyDashboardPage)getLoginScenario().getBean(PageConstants.RALLY_DASHBOARD_PAGE);
-		ProfilePreferencesPage ProfilePreferencesPage = rallyDashboardPage.navigateDirectToProfilePage();
-
+		ProfilePreferencesPage = rallyDashboardPage.navigateDirectToProfilePage();
+		}
 		if (ProfilePreferencesPage!= null) {
 			getLoginScenario().saveBean(PageConstants.ProfilePreferencesPage, ProfilePreferencesPage);
 		}

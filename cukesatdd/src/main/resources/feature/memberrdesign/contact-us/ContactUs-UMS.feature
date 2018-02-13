@@ -14,7 +14,7 @@ Feature: 1.03-To test contact us page
      Examples: 
       | userName        |  | password   | memberType |
        | q1_feb_uhc002 |  | Password@1 | UHC      |
-        | q1_aarp_feb015 |  | Password@1 | AARP      |
+   #     | q1_aarp_feb015 |  | Password@1 | AARP      |
         
         @smokeTest_contactusGrp
   Scenario Outline: Verify Click to Call and email Widget section on contact us page for Group member
@@ -30,7 +30,7 @@ Feature: 1.03-To test contact us page
     
      Examples: 
       | userName        |  | password   | memberType |
-      | q1_grp_feb108 |  | Password@1 | Group      |
+      | q1_grp_feb018 |  | Password@1 | Group      |
 
 
 #  #US634975

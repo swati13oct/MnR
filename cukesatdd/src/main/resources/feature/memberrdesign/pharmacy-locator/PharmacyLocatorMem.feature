@@ -15,8 +15,8 @@ Then the user validate more information content based on plan type in Redesign S
 Examples:
 	| planType | memberType | distance |
 	| MAPD	   | UhcIndOrderPlan  |   25      |
-	| MAPD	   | AARPIndOrderPlan  |   25      |
-	| MAPD	   | GrpRetireeOrderPlan  |   25      |
+#	| MAPD	   | AARPIndOrderPlan  |   25      |
+#	| MAPD	   | GrpRetireeOrderPlan  |   25      |
 	
 #@PharmacyDistanceDefaultZip
 #Scenario Outline:To verify all available pharmacies for default zipcode in Redesign site

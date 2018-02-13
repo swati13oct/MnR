@@ -87,9 +87,9 @@ public class RegistrationInformationPage extends UhcDriver {
 	@FindBy(id = "continue-btn")
 	private WebElement nextButton;
 
-	/** The direct URL for registration redesign page. */
+	/** The direct URL for registration redesign page. *//*
 	private static String PAGE_URL = MRConstants.REDESIGN_REGISTRATION_URL;
-
+*/
 	/**
 	 * Additional personal Information section
 	 */
@@ -385,6 +385,7 @@ public class RegistrationInformationPage extends UhcDriver {
 	 * @return the Plan Info text
 	 */
 	public WebElement getStepTwoText() {
+		validate(planInfoText);
 		return planInfoText;
 	}
 
@@ -733,8 +734,7 @@ public class RegistrationInformationPage extends UhcDriver {
 	}
 
 	@Override
-	public void openAndValidate() {
-		start(PAGE_URL);		
+	public void openAndValidate() {	
 		CommonUtility.waitForPageLoad(driver, memberid, 60);
 		validate(memberid);
 		validate(monthToEnter);
@@ -939,6 +939,7 @@ public class RegistrationInformationPage extends UhcDriver {
 	 * @return the date of birthirth on account confirmation page
 	 */
 	public WebElement getMemberDoB() {
+		validate(dateOfBirthText);
 		return dateOfBirthText;
 	}
 	
@@ -946,6 +947,7 @@ public class RegistrationInformationPage extends UhcDriver {
 	 * @return the user Name on account confirmation page
 	 */
 	public WebElement getUserName() {
+		validate(userNameText);
 		return userNameText;
 	}
 	
@@ -953,6 +955,7 @@ public class RegistrationInformationPage extends UhcDriver {
 	 * @return the email address on account confirmation page
 	 */
 	public WebElement getEmailAddress() {
+		validate(emailIdText);
 		return emailIdText;
 	}
 	
@@ -991,6 +994,7 @@ public class RegistrationInformationPage extends UhcDriver {
     	WebDriverWait wait = new WebDriverWait(this.driver, 70);
     	wait.until(new ExpectedCondition<Boolean>() {
     	    public Boolean apply(WebDriver driver) {
+    	    	scrollToView(planName);
     		if (planName.isDisplayed())
     		    return true;
     		else

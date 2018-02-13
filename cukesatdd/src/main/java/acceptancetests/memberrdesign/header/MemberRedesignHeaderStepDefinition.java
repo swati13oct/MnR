@@ -26,6 +26,7 @@ import pages.dashboard.member.ulayer.RallyDashboardPage;
 import pages.member.bluelayer.BenefitsAndCoveragePage;
 import pages.member.bluelayer.DrugCostEstimatorPage;
 import pages.member.ulayer.TeamHLoginUlayer;
+import pages.member.ulayer.TestHarness;
 
 public class MemberRedesignHeaderStepDefinition {
 	
@@ -94,14 +95,25 @@ public class MemberRedesignHeaderStepDefinition {
 		
 		TeamHLoginUlayer THloginPage = new TeamHLoginUlayer(wd);
 		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, THloginPage);
+		if(("YES").equalsIgnoreCase(MRScenario.isTestHarness)){
+			TestHarness testHarness = (TestHarness) THloginPage.loginWith(userName, pwd);
+			if (testHarness != null) {
+				getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE,
+						testHarness);		}
+			else{
+				Assert.fail("Login not successful...");
+			}
+		}
+		else{
+			
+		
 		RallyDashboardPage rallyDashboard = (RallyDashboardPage) THloginPage.loginWith(userName, pwd);
 		if (rallyDashboard != null) {
 			getLoginScenario().saveBean(PageConstants.RALLY_DASHBOARD_PAGE,
-					rallyDashboard);
-			Assert.assertTrue(true);
-		}
+					rallyDashboard);		}
 		else{
-			Assert.fail("Member login not successful....");
+			Assert.fail("Login not successful...");
+		}
 		}
 	}
 	

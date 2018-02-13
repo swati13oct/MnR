@@ -832,7 +832,7 @@ public class MRScenario {
                 	capabilities = DesiredCapabilities.chrome();
                 	capabilities.setCapability("platform", "Windows 7");
                 	capabilities.setCapability("version", "52.0");
-                	capabilities.setCapability("screenResolution", "800x600");
+                	//capabilities.setCapability("screenResolution", "800x600");
                 }
                 capabilities.setCapability("autoAcceptsAlerts", true);
                 capabilities.setCapability("parent-tunnel", "sauce_admin");

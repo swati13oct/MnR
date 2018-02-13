@@ -33,8 +33,8 @@ Feature: 1.15-To test registration flow
       | planMemberId | dateOfBirth | 	       planname     					| userName       | password   | confirmPassword 	| email          		| confirmEmail   |
   	#  |    949291584 | 02-17-1952  | Preferred Choice Palm Beach (HMO)   		| Username@1 	 | Password@1 | Password@1 		| member@uhc.com 		| member@uhc.com |
 	 |    961861481 | 09-22-1949  | UnitedHealthcare The Villages MedicareComplete 1 (HMO)   		| q1_feb_uhc185 	 | Password@1 | Password@1 		| uhcmnrportals@gmail.com 		| uhcmnrportals@gmail.com |
-	 |    979920703 | 08-20-1931  | UnitedHealthcare Group Medicare Advantage (PPO)   		| GroupRetiree01 	 | Password@1 | Password@1 		| uhcmnrportals@gmail.com 		| uhcmnrportals@gmail.com |
-	 |    960769855 | 06-20-1942  | AARP MedicareComplete Plan 3 (HMO)   		| q4_dec_aarp567 	 | Password@1 | Password@1 		| uhcmnrportals@gmail.com		| uhcmnrportals@gmail.com |
+	# |    979920703 | 08-20-1931  | UnitedHealthcare Group Medicare Advantage (PPO)   		| GroupRetiree01 	 | Password@1 | Password@1 		| uhcmnrportals@gmail.com 		| uhcmnrportals@gmail.com |
+	# |    960769855 | 06-20-1942  | AARP MedicareComplete Plan 3 (HMO)   		| q1_aarp_feb566 	 | Password@1 | Password@1 		| uhcmnrportals@gmail.com		| uhcmnrportals@gmail.com |
 
 
 #  Scenario Outline: To verify member is navigated to the registeration plan Information page

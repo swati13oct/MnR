@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.atdd.data.MRConstants;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 /**
@@ -15,7 +16,7 @@ public class DeregisterPage extends UhcDriver {
 
 
     /** The Deregister page url for team - g. */
-    private static String PAGE_URL = MRConstants.STAGE_DEREGISTER_URL;
+    private static String PAGE_URL;
     
     /** The Deregister page url for team - h. */
     //private static String PAGE_URL = MRConstants.TEAM_H_DEREGISTER_URL;
@@ -40,7 +41,18 @@ public class DeregisterPage extends UhcDriver {
                 
                 @Override
                 public void openAndValidate() {
-                start(PAGE_URL);
+                   		String environment = MRScenario.environment;
+                		switch(environment.toUpperCase()){
+                		case "TEAMCI-1": PAGE_URL = MRConstants.TEANCI_1_DEREGISTER_URL;
+                		break;
+                		case "TEST-A": PAGE_URL = MRConstants.TEST_A_DEREGISTER_URL;
+                		break;
+                		case "STAGE": PAGE_URL = MRConstants.STAGE_DEREGISTER_URL;
+                		break;
+                		default : System.out.println("Please check environment");
+                		}
+            		System.out.println("URL:"+PAGE_URL);
+            		start(PAGE_URL);
                 }
                 
                 public void deregisterUser(String userId)

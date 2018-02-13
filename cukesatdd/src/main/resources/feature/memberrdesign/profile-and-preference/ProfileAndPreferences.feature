@@ -1,5 +1,5 @@
 @smokeTest
-Feature: 1.13=To test My Profile & Preferences and Go Green flows
+Feature: 1.13-To test My Profile & Preferences and Go Green flows
 @smokeTest_ProfileAndPreference
   Scenario Outline: Verify Plan Name, Member name, Member ID and account section
     Given registered member with following details for Profile and Preferences flow
@@ -9,9 +9,9 @@ Feature: 1.13=To test My Profile & Preferences and Go Green flows
 
     Examples: 
          | planType|
-         | GroupRetireeMapd|
+#         | GroupRetireeMapd|
        	 | UhcMapdInd     |
-         | AARPMapdInd       |
+#         | AARPMapdInd       |
 
  @smokeTest_GoGreen
     Scenario Outline: To verify Go Green page
@@ -23,15 +23,14 @@ Feature: 1.13=To test My Profile & Preferences and Go Green flows
     Then the user validates the presence of Communication preferences header
     Then the user validates the presence of Back to Profile and Preferences links
     Then the user validates the Note section
-    Then the user validates the I have read checkbox and check it
     Then the user validates the Save Preferences Button
     Then the user validates the Go Green Header
     
      Examples: 
       | planType |
-   	  | GroupRetireeMapd|
+#   	  | GroupRetireeMapd|
       | UhcMapdInd     |
-      | AARPMapdInd       |
+#      | AARPMapdInd       |
 
 #  Scenario Outline: To verify My Profiles in UMS site
 #    Given registered member for My Profile & Preferences in UMS site

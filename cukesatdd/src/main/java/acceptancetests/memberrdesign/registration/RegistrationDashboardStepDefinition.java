@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pages.dashboard.member.ulayer.RallyDashboardPage;
 import pages.member.bluelayer.DeregisterPage;
 import pages.member.bluelayer.RegistrationInformationPage;
+import pages.member.ulayer.TeamHLoginUlayer;
+import pages.member.ulayer.TestHarness;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -146,7 +148,7 @@ public class RegistrationDashboardStepDefinition {
 				.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
 		// Assert.assertTrue(registrationInformationPage.currentUrl().contains("memberRegistration-Step2"));
 		registrationInformationPage.waitForPlanInformationPage();
-		registrationInformationPage.getStepTwoText().isDisplayed();
+			Assert.assertTrue("Check member details", registrationInformationPage.getStepTwoText().isDisplayed());
 	}
 
 	@Then("^Verify correct plan name is displayed$")
@@ -501,14 +503,17 @@ public class RegistrationDashboardStepDefinition {
     	// deregister the user for subsequent registration
     	DeregisterPage deregisterPage = new DeregisterPage(wd);
     	deregisterPage.deregisterUser(userName);
-    	Thread.sleep(5000);
+    	//Thread.sleep(5000);
     	
 		// create registration context
-		RegistrationInformationPage registrationInformationPage = new RegistrationInformationPage(
-				wd);
+    	TeamHLoginUlayer THloginPage = new TeamHLoginUlayer(wd);
+    	RegistrationInformationPage registrationInformationPage = THloginPage.navigateToRegistrationPage();
+		if(null!=registrationInformationPage)
 		getLoginScenario().saveBean(
 				PageConstants.REGISTRATION_INFORMATION_PAGE,
 				registrationInformationPage);
+		else
+			Assert.fail("Registration page is not loaded");
 
 		}
 
@@ -573,15 +578,21 @@ public class RegistrationDashboardStepDefinition {
 	 
 	 @And("^User successfully navigates to RallyDasboard page$")
      public void user_navigates_to_rallydasboard_page() throws InterruptedException {
-                     // navigate to registration page
-                     RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
-                                                     getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
-                     
-                     RallyDashboardPage rallyDashboard = registrationInformationPage.navigateToRallyDashboardPage();
-         
-         			if (rallyDashboard == null) {
-         				Assert.fail("User -- "+getLoginScenario().getBean(CommonConstants.ACCOUNT_USER_NAME)+ " navigation to dashboard page failed.");
-         			}
-     }
-
+	
+			 if(("YES").equalsIgnoreCase(MRScenario.isTestHarness)){
+				 System.out.println("@@@Skipping navigation to home page as rallyDashboard is not integrated to this environment@@@");
+			 }
+			 else{
+                // navigate to registration page
+                RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
+                                                getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
+                
+                RallyDashboardPage rallyDashboard = registrationInformationPage.navigateToRallyDashboardPage();
+    
+    			if (rallyDashboard == null) {
+    				Assert.fail("User -- "+getLoginScenario().getBean(CommonConstants.ACCOUNT_USER_NAME)+ " navigation to dashboard page failed.");
+    			}
+			 }
+			 
+	 }
 }

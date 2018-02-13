@@ -13,7 +13,7 @@ And the user navigates to Team H One Time Payments page
 Examples:
 	| planType |
 	| GroupRetireePayment      |
-	| AARPMapdInd      |
+#	| AARPMapdInd      |
 	| UhcMapdInd      |
 	
 

@@ -270,9 +270,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		RallyDashboardPage.checkModelPopup(driver);
-		String fileName = CommonConstants.BENEFITS_AND_COVERAGE_PAGE_DATA;
-		benefitsCoverage = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_BLAYER_MEMBER);
-		openAndValidate();
+		//String fileName = CommonConstants.BENEFITS_AND_COVERAGE_PAGE_DATA;
+		//benefitsCoverage = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_BLAYER_MEMBER);
+		//openAndValidate();
 	}
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
@@ -307,17 +307,17 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	}
 
 	public void openAndValidate() {
-
-		JSONObject jsonObject = new JSONObject();
+		validateFieldsOnBenefitsAndCoveragePage();
+		/*JSONObject jsonObject = new JSONObject();
 		for (String key : benefitsCoverage.getExpectedData().keySet()) {
 			List<WebElement> elements = findElements(benefitsCoverage.getExpectedData().get(key));
-			/*
+			
 			 * if (elements.size() == 1) { validate(elements.get(0)); try {
 			 * jsonObject.put(key, elements.get(0).getText());
 			 * //System.out.println("Text"+elements.get(0).getText()); } catch
 			 * (JSONException e) { // TODO Auto-generated catch block
 			 * e.printStackTrace(); } } else if (elements.size() > 1) {
-			 */
+			 
 			JSONArray jsonArray = new JSONArray();
 			for (WebElement element : elements) {
 
@@ -343,7 +343,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 		benefitsandcoverageJson = jsonObject;
 
-		System.out.println("BenefitsCoverageJson----->" + benefitsandcoverageJson);
+		System.out.println("BenefitsCoverageJson----->" + benefitsandcoverageJson);*/
 
 	}
 

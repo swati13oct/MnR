@@ -37,8 +37,15 @@ public class RallyDashboardPage extends UhcDriver{
 
 	
 	
+	@FindBy(id="findcarecost2")
+	private WebElement panelFindCareCost1;
+	
 	@FindBy(xpath="(//nav[@id='main-nav']//a[contains(text(),'Find Care')])[1]")
 	private WebElement panelFindCareCost;
+	
+	@FindBy(xpath="(//nav[@id='main-nav']//a[contains(text(),'Coverage & Benefits')])[1]")
+	private WebElement panelBnC;
+	
 	
 	@FindBy(xpath="(//nav[@id='main-nav']//a[contains(text(),'Premium Payments')])[1]")
 	private WebElement panelPremiumPayment;
@@ -371,7 +378,7 @@ public class RallyDashboardPage extends UhcDriver{
 	public ProviderSearchPage validateFindCareCostTab() {
 		CommonUtility.checkPageIsReady(driver);
 		//driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-		panelFindCareCost.click();
+		panelFindCareCost1.click();
 		CommonUtility.checkPageIsReady(driver);
 		if (driver.getTitle().contains("Find Care")) {
 			return new ProviderSearchPage(driver);	
@@ -413,8 +420,8 @@ public class RallyDashboardPage extends UhcDriver{
 public BenefitsAndCoveragePage validateBnCNaviation() {
 		
 		//driver.navigate().to(PAGE_URL);
-		validate(coverageBenefits);
-		coverageBenefits.click();
+		validate(panelBnC);
+		panelBnC.click();
         validate(benefitsSummary);
         benefitsSummary.click();
 		CommonUtility.checkPageIsReady(driver);

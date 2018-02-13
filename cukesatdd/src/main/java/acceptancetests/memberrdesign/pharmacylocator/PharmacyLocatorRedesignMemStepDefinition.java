@@ -21,8 +21,10 @@ import pages.redesign.PharmacySearchPage;
 //import pages.redesign.RedesignLoginPage;
 import pages.redesign.PharmacyResultPage;
 import pages.dashboard.member.ulayer.RallyDashboardPage;
+import pages.member.bluelayer.BenefitsAndCoveragePage;
 //import pages.member.ulayer.PharmacyResultPage;
 import pages.member.ulayer.TeamHLoginUlayer;
+import pages.member.ulayer.TestHarness;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.login.data.LoginCommonConstants;
@@ -108,7 +110,27 @@ public class PharmacyLocatorRedesignMemStepDefinition {
 		//WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);		
 		TeamHLoginUlayer THloginPage = new TeamHLoginUlayer(wd);
 		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, THloginPage);
+		if(("YES").equalsIgnoreCase(MRScenario.isTestHarness)){
+			TestHarness testHarness = (TestHarness) THloginPage.loginWith(userName, pwd);
+			if (testHarness != null) {
+				getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE,
+						testHarness);		}
+			else{
+				Assert.fail("Login not successful...");
+			}
+		}
+		else{
+			
+		
 		RallyDashboardPage rallyDashboard = (RallyDashboardPage) THloginPage.loginWith(userName, pwd);
+		if (rallyDashboard != null) {
+			getLoginScenario().saveBean(PageConstants.RALLY_DASHBOARD_PAGE,
+					rallyDashboard);		}
+		else{
+			Assert.fail("Login not successful...");
+		}
+		}
+		/*RallyDashboardPage rallyDashboard = (RallyDashboardPage) THloginPage.loginWith(userName, pwd);
 		if (rallyDashboard != null) {
 			getLoginScenario().saveBean(PageConstants.RALLY_DASHBOARD_PAGE,
 					rallyDashboard);
@@ -116,7 +138,7 @@ public class PharmacyLocatorRedesignMemStepDefinition {
 		}
 		else{
 			Assert.fail("Login not successful...");
-		}
+		}*/
 		
 		/*WebDriver wd = getLoginScenario().getWebDriver();
 
@@ -139,11 +161,18 @@ public class PharmacyLocatorRedesignMemStepDefinition {
 
 	@When("^the user navigates to pharmacy search page in Redesign site$")
 	public void user_views_pharmacy_locator_aarp() throws InterruptedException {
+		PharmacySearchPage pharmacySearchPage;
+		if("YES".equalsIgnoreCase(MRScenario.isTestHarness)){
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
+			
+			pharmacySearchPage= testHarness.navigateToPharmacyLocator();
+		}else{
 		RallyDashboardPage rallyDashboard = (RallyDashboardPage)getLoginScenario()
 				.getBean(PageConstants.RALLY_DASHBOARD_PAGE);
 		/*UlayerHomePage accountHomePage = (UlayerHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);*/
-		PharmacySearchPage pharmacySearchPage = rallyDashboard.navigateToPharmacyLocator();
+		 pharmacySearchPage = rallyDashboard.navigateToPharmacyLocator();
+		}
 		if (pharmacySearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
 					pharmacySearchPage);

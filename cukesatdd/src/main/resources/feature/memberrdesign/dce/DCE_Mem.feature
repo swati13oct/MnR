@@ -21,7 +21,7 @@ Then I should see that total estimated annual drug costs in summary section matc
 Examples:
 | memberType| drug |USOTZipcode|
 | UhcMapdInd |lipitor|90002|
-| AARPMapdInd |lipitor|90002|
+#| AARPMapdInd |lipitor|90002|
 
  
  

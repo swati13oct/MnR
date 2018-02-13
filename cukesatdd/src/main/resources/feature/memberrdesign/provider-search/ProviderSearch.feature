@@ -10,6 +10,6 @@ Then the member should be able to access provider page
 Examples:
 | memberType        	|
 | UhcMapdInd    |
-| AARPMapdInd   |
-| GroupRetireeMapd     |
+#| AARPMapdInd   |
+#| GroupRetireeMapd     |
 	

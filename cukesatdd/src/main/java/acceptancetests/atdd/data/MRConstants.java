@@ -229,21 +229,16 @@ public static String CAMPAIGN_PAGE_URL1 = "https://www."+MRScenario.environment+
 	  public static final String TEAMCI1_TESTHARNESS ="https://team-ci1-medicare.ose-elr-core.optum.com/?testharness=true";
 	  public static final String DASHBOARD = "https://"+ MRScenario.environment +"-medicare.uhc.com/";
 	public static final String BNCBURL = "https://member." + MRScenario.environment + "-uhcmedicaresolutions.uhc.com/";
-	
-	  /** DeRegister URL for team-g */
-    public static final String TEAM_G_DEREGISTER_URL = "http://partd-teamg.ose.optum.com/PartDPortalWeb/deregister.jsp";
    
-    /** DeRegister URL for team-g */
+    /** DeRegister URLs*/
     public static final String STAGE_DEREGISTER_URL = "https://apsrs0261.uhc.com:9443/PartDPortalWeb/deregister.jsp ";
-    
-    
+    public static final String TEANCI_1_DEREGISTER_URL = " http://partdexternal-team-ci1.ose-elr-core.optum.com/PartDPortalWeb/deregister.jsp";
+    public static final String TEAM_G_DEREGISTER_URL = "http://partd-teamg.ose.optum.com/PartDPortalWeb/deregister.jsp";
+    public static final String TEAM_H_DEREGISTER_URL = "http://partd-teamh.ose.optum.com/PartDPortalWeb/deregister.jsp";  
+    public static final String TEST_A_DEREGISTER_URL = "https://apsrt0245.uhc.com:9443/PartDPortalWeb/deregister.jsp";  
+     
     /** Registration URL for Member Redesign */
-   // public static final String REDESIGN_REGISTRATION_URL = "https://"+MRScenario.environment+"-medicare.uhc.com/medicare/member-registration.html";
     public static final String REDESIGN_REGISTRATION_URL = "https://stage-medicare.uhc.com/medicare/member-registration.html";
-
-    /** DeRegister URL for team-h */
-    public static final String TEAM_H_DEREGISTER_URL = "http://partd-teamh.ose.optum.com/PartDPortalWeb/deregister.jsp";
-   // public static final String MEMBER_AUTH_REDESIGN_LOGIN_URL = "https://"+MRScenario.environment+"-medicare.uhc.com/content/dashboard/guest/memberauth.html#/memberAuthLogin";
     public static final String MEMBER_AUTH_REDESIGN_LOGIN_URL = "https://awe-stage-generic.uhc.com/content/medicare/memberauth.html ";
     public static final String REDESIGN_AARPM_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/content/medicare/member/contact-us/overview.html";
     

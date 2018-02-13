@@ -2,6 +2,7 @@ package pages.member.ulayer;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.TimeoutException;
@@ -21,6 +22,7 @@ import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.dashboard.member.ulayer.RallyDashboardPage;
+import pages.member.bluelayer.RegistrationInformationPage;
 
 
 
@@ -40,6 +42,9 @@ public class TeamHLoginUlayer extends UhcDriver{
 
 	@FindBy(id="sign-in-btn")
 	private WebElement signInButton;
+	
+	@FindBy(id="regbutton")
+	private WebElement registrationButton;
 	
 	private PageData browserCheckData;
 
@@ -102,7 +107,7 @@ public class TeamHLoginUlayer extends UhcDriver{
 		return browserCheckJson;
 
 	}
-
+	
 //Updated loginWith to include RallyDashboard navigation
 	public Object loginWith(String username, String password) throws InterruptedException {
 		sendkeys(userNameField,username);
@@ -118,7 +123,7 @@ public class TeamHLoginUlayer extends UhcDriver{
 				System.out.println("No Such alert displayed");
 			}
 		//CommonUtility.checkPageIsReady(driver);
-		WebDriverWait wait = new WebDriverWait(driver, 2);
+		WebDriverWait wait = new WebDriverWait(driver, 5);
 		Alert alert ;
 		int counter =0;
 		
@@ -164,4 +169,16 @@ public class TeamHLoginUlayer extends UhcDriver{
 		return null;
 	}
 
+	public RegistrationInformationPage navigateToRegistrationPage() {
+		validate(registrationButton);
+		registrationButton.click();
+		CommonUtility.checkPageIsReady(driver);
+		if(driver.getCurrentUrl().contains("member-registration.html")){
+			return new RegistrationInformationPage(
+					driver);
+		}
+		else{
+			return null;
+		}
+	}
 }

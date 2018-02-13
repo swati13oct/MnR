@@ -23,6 +23,7 @@ import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import junit.framework.Assert;
 
 /**
  * @author pjaising
@@ -64,9 +65,17 @@ public class MemberAuthLoginPage extends UhcDriver {
 	}
 	@Override
 	public void openAndValidate() {
-		start(MRConstants.MEMBER_AUTH_REDESIGN_LOGIN_URL);
+		if("YES".equalsIgnoreCase(MRScenario.isTestHarness)){
+
+			System.out.println("@@@Please provide test URL@@@");
+			Assert.fail();
+			
+		}
+		else{
+			PAGE_URL = MRConstants.MEMBER_AUTH_REDESIGN_LOGIN_URL;
+		}
+		start(PAGE_URL);
 		CommonUtility.checkPageIsReady(driver);
-		waitforElement(btnLogin);
 		validate(btnLogin);
 	}
 }
