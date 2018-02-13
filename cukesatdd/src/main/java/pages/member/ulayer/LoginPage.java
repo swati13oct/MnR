@@ -273,7 +273,7 @@ public class LoginPage extends UhcDriver {
 	}
 	
 	public void navigateToNewDashboardUrl(){
-		if (MRScenario.environment.equalsIgnoreCase("stage"))
+		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage"))
 		{
 			start(STAGE_DASHBOARD_URL);
 			System.out.println(STAGE_DASHBOARD_URL);
