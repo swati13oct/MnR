@@ -13,7 +13,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import junit.framework.Assert;
 
@@ -406,10 +406,11 @@ public class OrderplanmaterialsPage extends UhcDriver {
 			return null;
 	}
 	/**
-	* @todo : Verify help component in order materials page
+	* @throws InterruptedException 
+	 * @todo : Verify help component in order materials page
 	*/
 
-	public OrderplanmaterialsPage verifyneedHelpcomponent(){
+	public OrderplanmaterialsPage verifyneedHelpcomponent() throws InterruptedException{
 		boolean present;
 		try{
 			validate(needhelpcomponent);
@@ -418,10 +419,12 @@ public class OrderplanmaterialsPage extends UhcDriver {
 		{
 			present=false;
 		}
-		if(present)
-		System.out.println("Able to find needhelp component");
-		else
-			System.out.println("No needhelp component is displayed");
+		if(present){
+			System.out.println("Able to find needhelp component");
+			return new OrderplanmaterialsPage(driver);
+		}
+		
+		System.out.println("No needhelp component is displayed");
 		return null;
 	}
 

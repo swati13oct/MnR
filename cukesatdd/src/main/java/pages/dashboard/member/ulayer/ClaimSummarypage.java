@@ -17,12 +17,15 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import pages.member.ulayer.DrugClaimSummaryPage;
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import junit.framework.Assert;
 
+/**
+ * Functionality : this page validates the Claim Summary page.
+ */
 public class ClaimSummarypage extends UhcDriver{
 
 	private PageData newClaimsSummarypage;
@@ -92,13 +95,15 @@ public class ClaimSummarypage extends UhcDriver{
 	private WebElement claimsTablePagination;
 
 	//@FindBy (xpath="//div[not (contains(@class,'ng-hide')) and contains(@ng-show,'AEM')]//div[@id='ma_mapd']//a")
+	@FindBy (xpath="(.//p[contains(text(),'Medical EOB')])[2]/ancestor::div[1]")
 	//@FindBy (xpath="//div[@class='parsys summaryParsys']/div/div[not (contains(@class,'ng-hide'))][1]//a[contains(@class,'btn btn--secondary')]")
-	@FindBy (xpath = "//div[@class='parsys summaryParsys']/div/div[not (contains(@class,'ng-hide'))][1]//span[text()='Medical EOB']/parent::a[contains(@class,'btn btn--secondary')]")
+	//@FindBy (xpath = "//div[@class='parsys summaryParsys']/div/div[not (contains(@class,'ng-hide'))][1]//span[text()='Medical EOB']/parent::a[contains(@class,'btn btn--secondary')]")
 	private WebElement medicalEobText;
 
 	//@FindBy (xpath="//div[not (contains(@class,'ng-hide')) and contains(@ng-show,'AEM')]//div[@id='pdp_mapd']//a")
+	@FindBy (xpath="(.//p[contains(text(),'Prescription Drug EOB')])[1]/ancestor::div[1]")
 	//@FindBy (xpath = "//div[@class='parsys summaryParsys']/div/div[not (contains(@class,'ng-hide'))][1]//a[contains(@class,'btn btn--secondary')]")
-	@FindBy (xpath = "//div[@class='parsys summaryParsys']/div/div[not (contains(@class,'ng-hide'))][1]//p[text()='Prescription Drug EOB']/following::a[contains(@class,'btn btn--secondary')][1]")
+	//@FindBy (xpath = "//div[@class='parsys summaryParsys']/div/div[not (contains(@class,'ng-hide'))][1]//p[text()='Prescription Drug EOB']/following::a[contains(@class,'btn btn--secondary')][1]")
 	private WebElement PrescriptionEobText;
 	
 	@FindBy (xpath="//span[text()='Ship EOB']/parent::a")
@@ -181,8 +186,9 @@ public class ClaimSummarypage extends UhcDriver{
 			Assert.fail("Claims Page Header Not found");
 		}
 	}
-
-
+	/**
+	 * @toDo : this method validates claim type
+	 */
 	public  boolean validateClaimType(String abc){	
 
 		if(abc.equals("MA")){	
@@ -210,32 +216,43 @@ public class ClaimSummarypage extends UhcDriver{
 		}*/
 		}	
 	}	
+	/**
+	 * @toDo : this method validates view claim FROM drop down 
+	 */
 	public String validateViewClaimsFromDropDown(){		
 		Select select = new Select(viewClaimsFrom);
 		return select.getFirstSelectedOption().getText(); 		
 	}
-
+	/**
+	 * @toDo : this method validates the text 
+	 */
 	public boolean verifyCopyText(){
 		return claimsCopyText.isDisplayed();
 	}
-
-
+	/**
+	 * @toDo : this method validates the text 
+	 */
 	public boolean verifyCopyText2(){
 		return claimsCopyText2.isDisplayed();
 	}
-
-
+	/**
+	 * @toDo : this method validates dynamic text
+	 */
 	public boolean verifyDynamicText(){
 		return dynamicNumberOfClaimsText.isDisplayed() || dynamicNumberOfClaimsTextPdp.isDisplayed() ;
 
 	}
-
+	/**
+	 * @toDo : this method validates claims table and pagination
+	 */
 	public boolean verifyClaimsTableAndPagination(){
 
 		return claimsTableMedical.isDisplayed()&& claimsTablePagination.isDisplayed();
 
 	}
-
+	/**
+	 * @toDo : this method validates EOB 
+	 */
 	public boolean validateEobfordifferentDomainType(String domain, String plantype){
 
 		if (domain.equals("COSMOS")&& plantype.equals("MAPD"))
@@ -270,16 +287,19 @@ public class ClaimSummarypage extends UhcDriver{
 			return PrescriptionEobText.isDisplayed();
 
 		}
-
-
 	}
+	/**
+	 * @toDo : this method validates Learn More 
+	 */
 
 	public boolean validateLearnmoreaboutsection() {
 
 		return learnmorefalse.isDisplayed() || learnmorePdp.isDisplayed();
 
 	}
-
+	/**
+	 * @toDo : this method validates Down Load my Data Button
+	 */
 	public Boolean validateDownloadMyDataButton(){
 
 		System.out.println("download my data button is displayed ====>"+ (downloadmydatabutton.isDisplayed()));
@@ -300,7 +320,9 @@ public class ClaimSummarypage extends UhcDriver{
 			return false;
 		}
 	}
-
+	/**
+	 * @toDo : this method validates required plan type
+	 */
 	public  boolean selectRequiredPlanType(String planType) {
 
 		if (planType.equals("MA")){
@@ -324,6 +346,9 @@ public class ClaimSummarypage extends UhcDriver{
 		return false;
 
 	}
+	/**
+	 * @toDo : this method validates claims by time interval 
+	 */
 
 	public void searchClaimsByTimeInterval(String toDate, String fromDate) {
 		System.out.println("The title of the page is-------->"+driver.getTitle());
@@ -338,6 +363,9 @@ public class ClaimSummarypage extends UhcDriver{
 			searchButton.click();
 		}
 	}
+	/**
+	 * @toDo : this method validates Claims by time period 
+	 */
 	
 	public void searchClaimsByTimePeriod(String planType,String claimPeriod) {
 		System.out.println("The title of the page is-------->"+driver.getTitle());
@@ -377,7 +405,9 @@ public class ClaimSummarypage extends UhcDriver{
 			claimsFrom.selectByValue("24 months");*/
 		}
 	}
-
+	/**
+	 * @toDo : this method validates claims table
+	 */
 	public boolean validateClaimsTable() {
 		CommonUtility.waitForPageLoad(driver, ClaimsSummaryPage,60);
 		
@@ -399,7 +429,9 @@ public class ClaimSummarypage extends UhcDriver{
 		return false;
 		}
 	}
-
+	/**
+	 * @toDo : this method validates Download My Data
+	 */
 	public void validateDownloadMyData() {
 		CommonUtility.waitForPageLoad(driver, downloadmydatabutton, 60);
 		if (downloadmydatabutton.isDisplayed())
@@ -427,37 +459,43 @@ public class ClaimSummarypage extends UhcDriver{
 
 		}
 	}
+	/**
+	 * @toDo : this method validates Error Max claims reached 
+	 */
 	
 	public boolean validateRxReachexMaxClaimsErrorMsg() {
 
 		return rxErrorMsg.isDisplayed();
-
 	}
-	
-
+	/**
+	 * @toDo : this method validates Error greater than 24 months 
+	 */
 	public void validateShipGreaterThan24MonthsErrorMsg() {
 		if (!shipDateRangeErrMsg.isDisplayed())
 		Assert.fail(shipDateRangeErrMsg + "is not being displayed");
 
 		// shipDateRangeErrMsg.isDisplayed();
-
 	}
-	
+	/**
+	 * @toDo : this method validates Error message greater than 24 months.
+	 */	
 	public void validateFedGreaterThan24MonthsErrorMsg() {
 		
 		if(!fedDateRangeErrMsg.isDisplayed())
-			Assert.fail(fedDateRangeErrMsg +"Is not being displayed");
-		
+			Assert.fail(fedDateRangeErrMsg +"Is not being displayed");		
 	}
-	
+	/**
+	 * @toDo : this method validates ERROR message from date later than to date 
+	 */	
 	public void  validatefromDateLaterThanToDateError() {
 		
 		
 		if(!fromDateLaterThanToDateError.isDisplayed())
-			Assert.fail(fromDateLaterThanToDateError + "is not beind dsiplayed");
-		
+			Assert.fail(fromDateLaterThanToDateError + "is not beind dsiplayed");		
 	}
-	
+	/**
+	 * @toDo : this method validates combo tab section
+	 */
 	public ClaimSummarypage comboTabSelection(){
 		for (WebElement webElement : comboTabsOnclaimsPage) {
 			System.out.println(webElement.getText());

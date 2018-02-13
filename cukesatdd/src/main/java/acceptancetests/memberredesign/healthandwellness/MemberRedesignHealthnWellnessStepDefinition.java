@@ -10,10 +10,10 @@ import java.util.Set;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.member.PageConstants;
-import acceptancetests.login.data.LoginCommonConstants;
+import acceptancetests.data.PageConstantsMnR;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageConstants;
+import acceptancetests.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
@@ -102,9 +102,9 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		LoginPage loginPage = new LoginPage(wd);
 		//loginPage.loginToStageTestHarness();
-		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
+		getLoginScenario().saveBean(PageConstantsMnR.LOGIN_PAGE, loginPage);
 		AccountHomePage accountHomePage = (AccountHomePage) loginPage.thloginWith(userName, pwd,category);
-		getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
+		getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
 
 	}
 
@@ -122,7 +122,7 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 		//AccountHomePage accountHomePage = new AccountHomePage(wd);
 		//getLoginScenario().saveBean(PageConstants.MEM_REDESIGN_ACCOUNT_HOME_PAGE, accountHomePage);
 		HealthAndWellness healthnWellnessPage = new HealthAndWellness(wd);
-		getLoginScenario().saveBean(PageConstants.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE, healthnWellnessPage);
+		getLoginScenario().saveBean(PageConstantsMnR.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE, healthnWellnessPage);
 	}
 
 	/**
@@ -131,7 +131,7 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 	@When("^then click the health and wellness tab HW$")
 	public void then_click_the_health_and_wellness_tab() {
 		// Express the Regexp above with the code you wish you had
-		HealthAndWellness healthnWellnessPage = (HealthAndWellness) getLoginScenario().getBean(PageConstants.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE);
+		HealthAndWellness healthnWellnessPage = (HealthAndWellness) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE);
 		healthnWellnessPage.clickHealthnWellnessTab();
 	}
 
@@ -141,7 +141,7 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 	@When("^I should see the H&W Generic dashboard and lifestyle,learning and rewards L2 tabs HW$")
 	public void I_should_see_the_H_W_Generic_dashboard_and_tabs() {
 		// Express the Regexp above with the code you wish you had
-		HealthAndWellness healthnWellnessPage = (HealthAndWellness) getLoginScenario().getBean(PageConstants.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE);
+		HealthAndWellness healthnWellnessPage = (HealthAndWellness) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE);
 		healthnWellnessPage.validateHnWDashboardnL2Tabs();
 
 	}
@@ -152,7 +152,7 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 	@When("^then click the Lifestyle tab and I should be directed to Lifestyle Page HW$")
 	public void then_click_the_Lifestyle_tab_and_I_should_be_directed_to_Lifestyle_Page() {
 		// Express the Regexp above with the code you wish you had
-		HealthAndWellness healthnWellnessPage = (HealthAndWellness) getLoginScenario().getBean(PageConstants.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE);
+		HealthAndWellness healthnWellnessPage = (HealthAndWellness) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE);
 		healthnWellnessPage.clickLifestyleTab();
 		healthnWellnessPage.validateLifestylePage();
 
@@ -164,7 +164,7 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 	@When("^then click the Learning tab and I should be directed to Learning Page HW$")
 	public void then_click_the_Learning_tab_and_I_should_be_directed_to_Learning_Page() {
 		// Express the Regexp above with the code you wish you had
-		HealthAndWellness healthnWellnessPage = (HealthAndWellness) getLoginScenario().getBean(PageConstants.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE);
+		HealthAndWellness healthnWellnessPage = (HealthAndWellness) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE);
 		healthnWellnessPage.clickLearningTab();
 		healthnWellnessPage.validateLearningPage();
 

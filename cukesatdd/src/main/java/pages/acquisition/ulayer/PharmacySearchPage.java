@@ -22,10 +22,10 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.ElementData;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.ElementData;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ulayer.PharmacyResultPage;
 import junit.framework.Assert;
@@ -269,9 +269,10 @@ public class PharmacySearchPage extends UhcDriver {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		System.out.println("*****Zipcode, distance and County details are entered******");
 
-		zipcodeSearchButton.click();
+		//zipcodeSearchButton.click();
+		
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -281,14 +282,14 @@ public class PharmacySearchPage extends UhcDriver {
 			if (countyPopOut.isDisplayed()) {
 				for (WebElement webElement : countyList) {
 					try {
-						Thread.sleep(2000);
+						Thread.sleep(5000);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					if (webElement.getText().contains(county)) {
 						try {
-							Thread.sleep(2000);
+							Thread.sleep(5000);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();

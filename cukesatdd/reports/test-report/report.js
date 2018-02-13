@@ -1,158 +1,245 @@
-$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("ProviderSearchAcq/Providersearch.feature");
+$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("dce/DCE-ACQ-UHC.feature");
 formatter.feature({
-  "line": 3,
-  "name": "1.15-VBF-Acq-To test Provider Search Flow  in UMS site",
+  "line": 2,
+  "name": "1.24-VBF-Acq-Drug Cost Estimator (DCE) - To test DCE flows on UMS acq site",
   "description": "",
-  "id": "1.15-vbf-acq-to-test-provider-search-flow--in-ums-site",
+  "id": "1.24-vbf-acq-drug-cost-estimator-(dce)---to-test-dce-flows-on-ums-acq-site",
   "keyword": "Feature",
   "tags": [
     {
       "line": 1,
-      "name": "@fixedTestCaseTest"
-    },
-    {
-      "line": 2,
-      "name": "@BlayerProviderSearch"
+      "name": "@acq_dce_UHC"
     }
   ]
 });
 formatter.scenarioOutline({
-  "line": 4,
-  "name": "Verify Provider Search  in UMS site",
+  "line": 93,
+  "name": "To go through dce from homepage and validate drug is still there when going to dce from vpp",
   "description": "",
-  "id": "1.15-vbf-acq-to-test-provider-search-flow--in-ums-site;verify-provider-search--in-ums-site",
+  "id": "1.24-vbf-acq-drug-cost-estimator-(dce)---to-test-dce-flows-on-ums-acq-site;to-go-through-dce-from-homepage-and-validate-drug-is-still-there-when-going-to-dce-from-vpp",
   "type": "scenario_outline",
-  "keyword": "Scenario Outline"
+  "keyword": "Scenario Outline",
+  "tags": [
+    {
+      "line": 92,
+      "name": "@defect1662"
+    }
+  ]
 });
 formatter.step({
-  "line": 5,
-  "name": "the user is on UMS medicare acquisition site landing page",
+  "line": 94,
+  "name": "the user is on blayer medicare acq site landing page",
   "keyword": "Given "
 });
 formatter.step({
-  "line": 6,
-  "name": "the user performs plan search using following information in the UMS site",
+  "line": 95,
+  "name": "I access the acquisition DCE tool from home page on ums site",
+  "keyword": "When "
+});
+formatter.step({
+  "line": 96,
+  "name": "I have added a drug to my drug list on ums site",
+  "rows": [
+    {
+      "cells": [
+        "Drug",
+        "\u003cdrug\u003e"
+      ],
+      "line": 97
+    }
+  ],
+  "keyword": "And "
+});
+formatter.step({
+  "line": 98,
+  "name": "the user selects the pharmacy tab information",
+  "rows": [
+    {
+      "cells": [
+        "Zipcode",
+        "\u003czipcode\u003e"
+      ],
+      "line": 99
+    },
+    {
+      "cells": [
+        "Radius",
+        "\u003cradius\u003e"
+      ],
+      "line": 100
+    }
+  ],
+  "keyword": "And "
+});
+formatter.step({
+  "line": 101,
+  "name": "I select the first pharmacy on there",
+  "keyword": "And "
+});
+formatter.step({
+  "line": 102,
+  "name": "I click on the return link",
+  "keyword": "And "
+});
+formatter.step({
+  "line": 103,
+  "name": "I access the vpp page using below zipcode on ums site",
   "rows": [
     {
       "cells": [
         "Zip Code",
         "\u003czipcode\u003e"
       ],
-      "line": 7
-    },
-    {
-      "cells": [
-        "County Name",
-        "\u003ccounty\u003e"
-      ],
-      "line": 8
+      "line": 104
     }
   ],
   "keyword": "When "
 });
 formatter.step({
-  "line": 9,
-  "name": "the user Click on Show Plans link",
+  "line": 105,
+  "name": "I access the DCE tool after adding drug",
   "rows": [
     {
       "cells": [
-        "PlanType",
+        "Plan Type",
         "\u003cplantype\u003e"
       ],
-      "line": 10
+      "line": 106
     }
   ],
-  "keyword": "When "
+  "keyword": "And "
 });
 formatter.step({
-  "line": 11,
-  "name": "the user Click on Is my Provider covered link",
+  "line": 107,
+  "name": "I verify that the drug is still there",
   "rows": [
     {
       "cells": [
-        "PlanName",
-        "\u003cplanname\u003e"
+        "Drug",
+        "\u003cdrug\u003e"
       ],
-      "line": 12
-    }
-  ],
-  "keyword": "When "
-});
-formatter.step({
-  "line": 13,
-  "name": "Verify X out of Y provider covered information is displayed on Plan Summary page",
-  "rows": [
-    {
-      "cells": [
-        "PlanName",
-        "\u003cplanname\u003e"
-      ],
-      "line": 14
+      "line": 108
     }
   ],
   "keyword": "Then "
 });
 formatter.examples({
-  "line": 15,
+  "line": 110,
   "name": "",
   "description": "",
-  "id": "1.15-vbf-acq-to-test-provider-search-flow--in-ums-site;verify-provider-search--in-ums-site;",
+  "id": "1.24-vbf-acq-drug-cost-estimator-(dce)---to-test-dce-flows-on-ums-acq-site;to-go-through-dce-from-homepage-and-validate-drug-is-still-there-when-going-to-dce-from-vpp;",
   "rows": [
     {
       "cells": [
+        "drug",
         "zipcode",
-        "county",
-        "plantype",
-        "planname"
+        "radius",
+        "plantype"
       ],
-      "line": 16,
-      "id": "1.15-vbf-acq-to-test-provider-search-flow--in-ums-site;verify-provider-search--in-ums-site;;1"
+      "line": 111,
+      "id": "1.24-vbf-acq-drug-cost-estimator-(dce)---to-test-dce-flows-on-ums-acq-site;to-go-through-dce-from-homepage-and-validate-drug-is-still-there-when-going-to-dce-from-vpp;;1"
     },
     {
       "cells": [
+        "Lipitor TAB 10MG",
         "90210",
-        "Los Angeles County",
-        "MA",
-        "AARP MedicareComplete SecureHorizons Plan 2 (HMO)"
+        "15miles",
+        "MA"
       ],
-      "line": 17,
-      "id": "1.15-vbf-acq-to-test-provider-search-flow--in-ums-site;verify-provider-search--in-ums-site;;2"
+      "line": 112,
+      "id": "1.24-vbf-acq-drug-cost-estimator-(dce)---to-test-dce-flows-on-ums-acq-site;to-go-through-dce-from-homepage-and-validate-drug-is-still-there-when-going-to-dce-from-vpp;;2"
     }
   ],
   "keyword": "Examples"
 });
 formatter.before({
-  "duration": 9624308,
+  "duration": 12293007,
   "status": "passed"
 });
 formatter.scenario({
-  "line": 17,
-  "name": "Verify Provider Search  in UMS site",
+  "line": 112,
+  "name": "To go through dce from homepage and validate drug is still there when going to dce from vpp",
   "description": "",
-  "id": "1.15-vbf-acq-to-test-provider-search-flow--in-ums-site;verify-provider-search--in-ums-site;;2",
+  "id": "1.24-vbf-acq-drug-cost-estimator-(dce)---to-test-dce-flows-on-ums-acq-site;to-go-through-dce-from-homepage-and-validate-drug-is-still-there-when-going-to-dce-from-vpp;;2",
   "type": "scenario",
   "keyword": "Scenario Outline",
   "tags": [
     {
       "line": 1,
-      "name": "@fixedTestCaseTest"
+      "name": "@acq_dce_UHC"
     },
     {
-      "line": 2,
-      "name": "@BlayerProviderSearch"
+      "line": 92,
+      "name": "@defect1662"
     }
   ]
 });
 formatter.step({
-  "line": 5,
-  "name": "the user is on UMS medicare acquisition site landing page",
+  "line": 94,
+  "name": "the user is on blayer medicare acq site landing page",
   "keyword": "Given "
 });
 formatter.step({
-  "line": 6,
-  "name": "the user performs plan search using following information in the UMS site",
+  "line": 95,
+  "name": "I access the acquisition DCE tool from home page on ums site",
+  "keyword": "When "
+});
+formatter.step({
+  "line": 96,
+  "name": "I have added a drug to my drug list on ums site",
   "matchedColumns": [
-    0,
+    0
+  ],
+  "rows": [
+    {
+      "cells": [
+        "Drug",
+        "Lipitor TAB 10MG"
+      ],
+      "line": 97
+    }
+  ],
+  "keyword": "And "
+});
+formatter.step({
+  "line": 98,
+  "name": "the user selects the pharmacy tab information",
+  "matchedColumns": [
+    1,
+    2
+  ],
+  "rows": [
+    {
+      "cells": [
+        "Zipcode",
+        "90210"
+      ],
+      "line": 99
+    },
+    {
+      "cells": [
+        "Radius",
+        "15miles"
+      ],
+      "line": 100
+    }
+  ],
+  "keyword": "And "
+});
+formatter.step({
+  "line": 101,
+  "name": "I select the first pharmacy on there",
+  "keyword": "And "
+});
+formatter.step({
+  "line": 102,
+  "name": "I click on the return link",
+  "keyword": "And "
+});
+formatter.step({
+  "line": 103,
+  "name": "I access the vpp page using below zipcode on ums site",
+  "matchedColumns": [
     1
   ],
   "rows": [
@@ -161,90 +248,111 @@ formatter.step({
         "Zip Code",
         "90210"
       ],
-      "line": 7
-    },
-    {
-      "cells": [
-        "County Name",
-        "Los Angeles County"
-      ],
-      "line": 8
+      "line": 104
     }
   ],
   "keyword": "When "
 });
 formatter.step({
-  "line": 9,
-  "name": "the user Click on Show Plans link",
+  "line": 105,
+  "name": "I access the DCE tool after adding drug",
   "matchedColumns": [
-    2
+    3
   ],
   "rows": [
     {
       "cells": [
-        "PlanType",
+        "Plan Type",
         "MA"
       ],
-      "line": 10
+      "line": 106
     }
   ],
-  "keyword": "When "
+  "keyword": "And "
 });
 formatter.step({
-  "line": 11,
-  "name": "the user Click on Is my Provider covered link",
+  "line": 107,
+  "name": "I verify that the drug is still there",
   "matchedColumns": [
-    3
+    0
   ],
   "rows": [
     {
       "cells": [
-        "PlanName",
-        "AARP MedicareComplete SecureHorizons Plan 2 (HMO)"
+        "Drug",
+        "Lipitor TAB 10MG"
       ],
-      "line": 12
-    }
-  ],
-  "keyword": "When "
-});
-formatter.step({
-  "line": 13,
-  "name": "Verify X out of Y provider covered information is displayed on Plan Summary page",
-  "matchedColumns": [
-    3
-  ],
-  "rows": [
-    {
-      "cells": [
-        "PlanName",
-        "AARP MedicareComplete SecureHorizons Plan 2 (HMO)"
-      ],
-      "line": 14
+      "line": 108
     }
   ],
   "keyword": "Then "
 });
 formatter.match({
-  "location": "ProviderSearchUmsStepDefinition.user_UMS_Medicare()"
+  "location": "DCEAcqStepDefinitionUHC.the_user_is_on_UMS_medicare_site_landing_page()"
 });
 formatter.result({
-  "duration": 27847807292,
+  "duration": 35311511597,
   "status": "passed"
 });
 formatter.match({
-  "location": "ProviderSearchUmsStepDefinition.zipcode_details_in_UMS_site(DataTable)"
+  "location": "DCEAcqStepDefinitionUHC.I_access_the_DCE_tool_home_page()"
 });
 formatter.result({
-  "duration": 17342299587,
+  "duration": 8876143624,
   "status": "passed"
 });
 formatter.match({
-  "location": "ProviderSearchUmsStepDefinition.clickonshowplans(DataTable)"
+  "location": "DCEAcqStepDefinitionUHC.I_have_added_a_drug_to_my_drug_list(DataTable)"
 });
 formatter.result({
-  "duration": 33913578865,
+  "duration": 51859370475,
   "status": "passed"
 });
 formatter.match({
-  "location": "ProviderSearchUmsStepDefinition.clickonProvidercoveredlink(DataTable)"
+  "location": "DCEAcqStepDefinitionUHC.navigate_drugcostestimator_pharmacytab(DataTable)"
+});
+formatter.result({
+  "duration": 768159938,
+  "status": "passed"
+});
+formatter.match({
+  "location": "DCEAcqStepDefinitionUHC.I_select_the_drug()"
+});
+formatter.result({
+  "duration": 20414263597,
+  "status": "passed"
+});
+formatter.match({
+  "location": "DCEAcqStepDefinitionUHC.clickOnReturnLink()"
+});
+formatter.result({
+  "duration": 6434657863,
+  "status": "passed"
+});
+formatter.match({
+  "location": "DCEAcqStepDefinitionUHC.I_access_the__vpp_page(DataTable)"
+});
+formatter.result({
+  "duration": 15745948756,
+  "status": "passed"
+});
+formatter.match({
+  "location": "DCEAcqStepDefinitionUHC.accessDCEToolAfterDrugAdded(DataTable)"
+});
+formatter.result({
+  "duration": 18855478195,
+  "status": "passed"
+});
+formatter.match({
+  "location": "DCEAcqStepDefinitionUHC.verifyDrugIsStillThere(DataTable)"
+});
+formatter.result({
+  "duration": 56113972,
+  "status": "passed"
+});
+formatter.embedding("image/png", "embedded0.png");
+formatter.after({
+  "duration": 4420583218,
+  "status": "passed"
+});
 });

@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import pages.acquisition.bluelayer.AcquisitionHomePage;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.util.CommonUtility;
 
 /**
  * @author pperugu
