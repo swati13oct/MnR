@@ -273,16 +273,19 @@ public class LoginPage extends UhcDriver {
 	}
 	
 	public void navigateToNewDashboardUrl(){
-		if (MRScenario.environment.equalsIgnoreCase("stage"))
+		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage"))
 		{
+			System.out.println(STAGE_DASHBOARD_URL);
 			start(STAGE_DASHBOARD_URL);
 			System.out.println("User is Navigating to Stage Dashboard");
-		}
-		else if (MRScenario.environment.equalsIgnoreCase("team-ci1")) {
 			
-start(MRConstants.REDESIGN_LOGIN_URL);
-			System.out.println("user is on Team-Ci1 Environment");		}
-		else if (MRScenario.environment.equalsIgnoreCase("team-t")) {
+		}
+		else{
+			
+			start(MRConstants.REDESIGN_LOGIN_URL);
+			System.out.println("user is on testharness");	
+			}
+		/*else if (MRScenario.environment.equalsIgnoreCase("team-t")) {
 			start(TEAM_T_NEW_DASHBOARD_URL);
 			System.out.println("User is on team-t Environment ");
 			
@@ -292,7 +295,7 @@ start(MRConstants.REDESIGN_LOGIN_URL);
 		{
 			start(PAGE_URL_TEAM_MEDICARE_TESTHARNESS);
 			System.out.println("User is on Medicare Test harness page");	
-		}
+		}*/
 	}
 	
 	public Object thloginWith(String username, String password, String category) {
@@ -347,7 +350,7 @@ start(MRConstants.REDESIGN_LOGIN_URL);
 		sendkeys(thPassword, password);
 		thSignIn.click();
 		
-if ( MRScenario.environment.equalsIgnoreCase("team-ci1") || (MRScenario.environment.equalsIgnoreCase("team-t"))) {
+if ( MRScenario.environmentMedicare.equalsIgnoreCase("team-ci1") || (MRScenario.environmentMedicare.equalsIgnoreCase("team-t"))) {
 			
 			Alert alert = driver.switchTo().alert();
 	        alert.accept();
@@ -357,7 +360,7 @@ if ( MRScenario.environment.equalsIgnoreCase("team-ci1") || (MRScenario.environm
 		
 		try{
 			
-			if (MRScenario.environment.equalsIgnoreCase("stage") || (MRScenario.environment.equalsIgnoreCase("team-t")  || ( MRScenario.environment.equalsIgnoreCase("team-ci1")))) {
+			if (MRScenario.environmentMedicare.equalsIgnoreCase("stage") || (MRScenario.environmentMedicare.equalsIgnoreCase("team-t")  || ( MRScenario.environmentMedicare.equalsIgnoreCase("team-ci1")))) {
 				Thread.sleep(50000);	
 			}else {
 				
