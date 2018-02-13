@@ -12,7 +12,6 @@ Examples:
        | planType    | memberType                      |  
  			 | MAPD        | IndividualAARPWOEOB						 |
        | MA          | IndividualAARPWOEOB						 |
-       | SHIP        | IndividualAARPWOEOB						 |
      
 
   @eobCountdaterange
