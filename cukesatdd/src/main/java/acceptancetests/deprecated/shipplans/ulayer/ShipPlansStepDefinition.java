@@ -25,7 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.redesign.UlayerHomePage;
 import pages.redesign.ContactUsPage;
-import pages.redesign.UlayerLoginPage;
+import pages.redesign.RedesignLoginPage;
 import pages.redesign.MedicalClaimSummaryPage;
 import pages.redesign.MyProfilesPage;
 import pages.redesign.OrderplanmaterialsPage;
@@ -110,7 +110,7 @@ public class ShipPlansStepDefinition {
 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		JSONObject accountHomeActualJson = null;
-		UlayerLoginPage loginPage = new UlayerLoginPage(wd);
+		RedesignLoginPage loginPage = new RedesignLoginPage(wd);
 
 		UlayerHomePage accountHomePage = (UlayerHomePage)loginPage.loginWith(userName, pwd);
 		

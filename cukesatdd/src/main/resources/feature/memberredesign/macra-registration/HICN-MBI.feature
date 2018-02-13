@@ -1,23 +1,6 @@
-@thePredators
+#@thePredators
 @F108803_HICN_MBI
 Feature: ATDD implementation for HICN/MBI entry to Medicare ID field for Personal Identification Page in Registration Flow
-
-#@HICN_Entry_PreApr2018
-#Scenario Outline: Medicare ID filed should accept HICN number for Serverd date 31 March 2018 without error for Personal identification
-#Given Server Date is set to the following date
-#     | Server Date   | <ServerDateMilliSeconds>   |
-#And User adds the following details in Registration Page and click on Continue Button
-#     | Member Number   | <MemberNo>   |
-#     | Date Of Birth   | <DOB>   |
-#When User enters Following No in the Member ID field
-#     | Identification Type	  | <HICN_MBI>   |
-#     | Identification Value   | <HICN_MBI_Value> |
-#Then Validate that Continue button is enabled
-#And User should successfully navigate to create User Account Page
-#Examples:
-
-#| ServerDateMilliSeconds | MemberNo  | DOB 				| HICN_MBI | HICN_MBI_Value | 
-#| 1522476000000 				 | 001742786 | 11/01/1939 | HICN		 | 	163344396A	 |
 
 @HICN_MBI_Entry_Apr2018
 Scenario Outline: Medicare ID filed should accept either HICN or MBI number for Server date 01 Apr 2018 without error for Personal identification

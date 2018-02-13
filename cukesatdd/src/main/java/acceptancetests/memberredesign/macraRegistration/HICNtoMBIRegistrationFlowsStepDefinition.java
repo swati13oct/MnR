@@ -1,5 +1,5 @@
 
-package acceptancetests.deprecated.registration.Redesign;
+package acceptancetests.memberredesign.macraRegistration;
 
 import java.util.HashMap;
 import java.util.List;
