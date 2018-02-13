@@ -187,10 +187,10 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(css="div.field.ask-question-message.field-has-error div.field-input label#message-email-error.error")
 	private WebElement questionAboutEmailErrorMsg;
 	
-	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//span[contains(@class,'color-green-dark bold')]")
+	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//div[contains(@class,'success') and (not (contains(@class,'ng-hide')))]/div[@class='message-block-header']//p")
 	private WebElement requestReceivedMessageHeader;
 	
-	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//div[contains(@class,'message-block-body')]/p")
+	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//div[contains(@class,'success') and (not (contains(@class,'ng-hide')))]/div[@class='message-block-body']//p[2]")
 	private WebElement thankYouMessage;
 	
 	@FindBy(css="h2.plan.margin-large>span")
@@ -212,13 +212,18 @@ public class ContactUsPage extends UhcDriver{
 	
 	public ContactUsPage(WebDriver driver) {
 		super(driver);
-		if (validate(iPerceptionPopUp)) {
-            iPerceptionPopUp.click();
-            System.out.println("iPerception Pop Up displayed");
+		try {
+			Thread.sleep(8000);
+			if (validate(iPerceptionPopUp)) {
+	            iPerceptionPopUp.click();
+	            System.out.println("iPerception Pop Up displayed");
+			}
+			PageFactory.initElements(driver, this);
+			CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_30);
+			openAndValidate();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
-		PageFactory.initElements(driver, this);
-		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_30);
-		openAndValidate();
 	}
 
 	@Override
@@ -567,7 +572,7 @@ public class ContactUsPage extends UhcDriver{
 				e.printStackTrace();
 			}
 			String confirmPhoneErrmsg = confirmPhneErrorMsg.getText();
-			Assert.assertTrue("Please enter same Number", confirmPhoneErrmsg.equals("Your confirmation alternative phone number and alternative phone number do not match."));
+			Assert.assertTrue("Please enter same Number", confirmPhoneErrmsg.equals("Enter a value that matches the value above."));
 			
 	}else
 	{
