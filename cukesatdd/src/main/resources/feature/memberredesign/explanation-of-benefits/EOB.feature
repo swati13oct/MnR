@@ -1,4 +1,4 @@
-@fastandfurious
+@fastandfurious @theSpartans
 @eob
 Feature:To test EOB on Dashboard page
 @Eobsiteleavingpopup 
@@ -12,7 +12,6 @@ Examples:
        | planType    | memberType                      |  
  			 | MAPD        | IndividualAARPWOEOB						 |
        | MA          | IndividualAARPWOEOB						 |
-       | PDP         | IndividualAARPWOEOB						 |
        | SHIP        | IndividualAARPWOEOB						 |
      
 
@@ -30,8 +29,7 @@ Then the user validates EOB count
 	| EOB COUNT			 | <eobCount>|
 	Examples:
 	| planType    | memberType                |dateRange					   | eobType           |eobCount |
-	| SHIP        |Individual 			          |6-12 Months					 | Medical           |		1		 |
-	| PCP         | withEOB                   | 18 Months            | Medical           |		4		 |
+ 	| PCP         | withEOB                   | 18 Months            | Medical           |		4		 |
 	| MAPD        |aarpWithEOB 			          | 90 Days    			     | Medical 	         |		5		 |
 	| MAPD        |aarpWithEOB 			          | 6 Months    		     | Medical 	         |		5		 |
 	| MAPD        |aarpWithEOB 			          | 12 Months    		     | Medical 	         |		5		 |
@@ -54,7 +52,6 @@ Examples:
 | planType    | memberType   					         |
 | MAPD        | IndividualAARPWOEOB						 |
 | MA          | IndividualAARPWOEOB						 |
-| PDP         | IndividualAARPWOEOB						 |
 | SHIP        | IndividualAARPWOEOB						 |
  
 @dropDownFuntion 
@@ -72,14 +69,13 @@ Examples:
 	| planType    | memberType                | eobTypeData       | dateRange       |
 	| MAPD        | IndividualAARPWOEOB       | Medical           | 6 Months        |
 	| MAPD        | IndividualAARPWOEOB       | Prescription Drug | 6 Months        |
-	| MAPD        | IndividualAARPWOEOB       | Prescription Drug | 12 Months        |
+	| MAPD        | IndividualAARPWOEOB       | Prescription Drug | 12 Months       |
 	| MAPD        | IndividualAARPWOEOB       | Medical           | 12 Months       |
 	| MAPD        | IndividualAARPWOEOB       | Medical           | 18 Months       |
 	| MAPD        | IndividualAARPWOEOB       | Medical           | 90 Days         |
 	| SHIP        | Individual 			  			  | Medical 					|6-12 Months			|
 	| SHIP        | Individual 			  			  | Medical 					|90 Days			    |
- 	| SHIP        | Individual 			  			  | Medical 					|18 Months			  |
- 
+  
 @learnAboutMedicalEOB 
 Scenario Outline: To verify How to read a medical EOB PDF
 Given registered AMP with for EOB flow
