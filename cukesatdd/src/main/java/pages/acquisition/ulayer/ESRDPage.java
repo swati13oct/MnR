@@ -20,10 +20,10 @@ import atdd.framework.UhcDriver;
  */
 public class ESRDPage extends UhcDriver{	
 	
-	@FindBy(xpath = "//label[@for='esrd-no']")
+	@FindBy(xpath = ".//*[@id='esrd-no_label']")
 	private WebElement esrdno;
 	
-	@FindBy(xpath = "//label[@for='esrd-yes']")
+	@FindBy(xpath = ".//*[@id='esrd-yes_label']")
 	private WebElement esrdyes;
 	
 	@FindBy(id = "esrdprevious")
@@ -101,7 +101,7 @@ public class ESRDPage extends UhcDriver{
 	
 	public boolean validateESRDPage(){
 		boolean flag = false;
-		if(validate(esrdHeader)&&validate(esrdQuestion)&&validate(esrdno)&&validate(esrdyes)&&validate(esrdprevious)
+		if(validate(esrdHeader)&&validate(esrdno)&&validate(esrdyes)&&validate(esrdprevious)
 		&&validate(esrdsaveandcontinue)&&validate(esrdcancelregistration))
 			flag = true;
 		return flag;
