@@ -51,8 +51,7 @@ Examples:
 | planType    | memberType   					         |
 | MAPD        | IndividualAARPWOEOB						 |
 | MA          | IndividualAARPWOEOB						 |
-| SHIP        | IndividualAARPWOEOB						 |
- 
+  
 @dropDownFuntion 
 Scenario Outline: To validate page functionality with different dropdowns
 Given registered AMP with for EOB flow
