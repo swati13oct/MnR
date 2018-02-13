@@ -273,7 +273,7 @@ public class LoginPage extends UhcDriver {
 	}
 	
 	public void navigateToNewDashboardUrl(){
-		if (MRScenario.environment.equalsIgnoreCase("stage"))
+		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage"))
 		{
 			System.out.println(STAGE_DASHBOARD_URL);
 			start(STAGE_DASHBOARD_URL);
@@ -350,7 +350,7 @@ public class LoginPage extends UhcDriver {
 		sendkeys(thPassword, password);
 		thSignIn.click();
 		
-if ( MRScenario.environment.equalsIgnoreCase("team-ci1") || (MRScenario.environment.equalsIgnoreCase("team-t"))) {
+if ( MRScenario.environmentMedicare.equalsIgnoreCase("team-ci1") || (MRScenario.environmentMedicare.equalsIgnoreCase("team-t"))) {
 			
 			Alert alert = driver.switchTo().alert();
 	        alert.accept();
@@ -360,7 +360,7 @@ if ( MRScenario.environment.equalsIgnoreCase("team-ci1") || (MRScenario.environm
 		
 		try{
 			
-			if (MRScenario.environment.equalsIgnoreCase("stage") || (MRScenario.environment.equalsIgnoreCase("team-t")  || ( MRScenario.environment.equalsIgnoreCase("team-ci1")))) {
+			if (MRScenario.environmentMedicare.equalsIgnoreCase("stage") || (MRScenario.environmentMedicare.equalsIgnoreCase("team-t")  || ( MRScenario.environmentMedicare.equalsIgnoreCase("team-ci1")))) {
 				Thread.sleep(50000);	
 			}else {
 				

@@ -985,11 +985,11 @@ driver.switchTo().window(mainwindow);
 	
 public pages.dashboard.member.ulayer.ClaimSummarypage navigateToClaimsSummaryPage() {
 		
-		if (MRScenario.environment.equalsIgnoreCase("team-h") || MRScenario.environment.equalsIgnoreCase("test-a") || (MRScenario.environment.equalsIgnoreCase("team-t") || MRScenario.environment.equalsIgnoreCase("team-ci1"))) {
+		if (MRScenario.environmentMedicare.equalsIgnoreCase("team-h") || MRScenario.environmentMedicare.equalsIgnoreCase("test-a") || (MRScenario.environmentMedicare.equalsIgnoreCase("team-t") || MRScenario.environment.equalsIgnoreCase("team-ci1"))) {
 			System.out.println("Go to claims link is present "+driver.findElement(By.xpath("//a[text()='Go to Claims page']")).isDisplayed());
 			driver.findElement(By.xpath("//a[text()='Go to Claims page']")).click();			
 		}
-		else if (MRScenario.environment.equalsIgnoreCase("stage")) {
+		else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
 			System.out.println("user is on Stage login page");						
 			if(driver.getCurrentUrl().contains("/dashboard"));
 			{
