@@ -12,7 +12,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.PageFactory; 
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -108,10 +108,8 @@ public class EOBPage extends UhcDriver{
 	@FindBy(xpath="//i[@class='rightarrow']")
 	private WebElement nextPageArrow;
 	
-	private static String EOB_DIRECT_URL = MRConstants.STAGE_DASHBOARD_NEW_DOMAIN_URL;
+	private static String STAGE_DASHBOARD_URL = MRConstants.DASHBOARD_URL;
 	
-	private static String EOB_CI1_URL = MRConstants.TEAM_CI1_NEW_DASBOARD_URL;
-
 	public EOBPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -390,12 +388,18 @@ public class EOBPage extends UhcDriver{
 
 	public EOBPage loginToDashboardPage(String userName){
 		System.out.println(MRScenario.environment);
-		if ( MRScenario.environment.contains("stage") || MRScenario.environment.contains("test-a")){
+		/*if ( MRScenario.environment.contains("stage") || MRScenario.environment.contains("test-a")){
 			System.out.println(EOB_DIRECT_URL);
 			start(EOB_DIRECT_URL);
 		}if(MRScenario.environment.contains("team-ci1")){
 			System.out.println(EOB_CI1_URL);
 			start(EOB_CI1_URL);
+		}*/
+		if(MRScenario.environment.contains("stage")){
+			start(STAGE_DASHBOARD_URL);
+			System.out.println(STAGE_DASHBOARD_URL);
+		}else{
+			start(MRConstants.REDESIGN_LOGIN_URL);
 		}
 		
 		driver.manage().timeouts().implicitlyWait(40,TimeUnit.SECONDS) ;
@@ -560,6 +564,12 @@ public class EOBPage extends UhcDriver{
 		*/
 		
 		public EOBPage validateEOBStatements(String numberOfEOB){
+			try {
+				Thread.sleep(6000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		System.out.println(eobCount.getText());
 		int eobCountInt = Integer.parseInt(eobCount.getText());
 		int numberOfEOBInt = Integer.parseInt(numberOfEOB);
