@@ -108,7 +108,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
 
     Examples: 
       | plantype | memberType  |
-      | MAPD     | MAPDwithHIP |
+      | MAPD     | MAPDwithMedSupp |
 
   @secureMessagingModel
   Scenario Outline: Verify secureMessaging Model section upon clicking the send A Message button
@@ -120,7 +120,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
 
     Examples: 
       | plantype | memberType  |
-      | MAPD     | MAPDwithHIP |
+      | MAPD     | MAPDwithMedSupp |
 
   @secureMessagingModelCancel
   Scenario Outline: Verify secureMessaging Model section upon clicking the send A Message button and cancel link
@@ -132,7 +132,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
 
     Examples: 
       | plantype | memberType  |
-      | MAPD     | MAPDwithHIP |
+      | MAPD     | MAPDwithMedSupp |
 
   @secureMessagingModelPrescriptionLink
   Scenario Outline: Verify secureMessaging Model section upon clicking the send A Message button
@@ -144,7 +144,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
 
     Examples: 
       | plantype | memberType  |
-      | MAPD     | MAPDwithHIP |
+      | MAPD     | MAPDwithMedSupp |
 
   @goToInbox
   Scenario Outline: Verify go To Inbox button on contactUS redesign page for opted in member
@@ -156,7 +156,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
 
     Examples: 
       | plantype | memberType  |
-      | MAPD     | MAPDwithHIP |
+      | MAPD     | MAPDwithMedSupp |
 
   #	@NoSecureEmailForNonEligibleMember
   #Scenario Outline: Verify secureEmail widget non display on contactUS redesign page for non eligible member
@@ -168,7 +168,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
   #
   #Examples:
   #| plantype | memberType |
-  #| MAPD     | MAPDwithHIP|
+  #| MAPD     | MAPDwithMedSupp|
   @clickToCallCancel
   Scenario Outline: Verify clickToCall Widget Expansion (Drop-Down, Text Box and Button UI) and click on cancel on contactUS redesign page
     Given registered UMS member with following attributes

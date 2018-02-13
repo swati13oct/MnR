@@ -276,18 +276,19 @@ public class LoginPage extends UhcDriver {
 		if (MRScenario.environment.equalsIgnoreCase("stage"))
 		{
 			start(STAGE_DASHBOARD_URL);
+			System.out.println(STAGE_DASHBOARD_URL);
 			System.out.println("User is Navigating to Stage Dashboard");
 		}
-		else if (MRScenario.environment.equalsIgnoreCase("team-ci1")) {
+		else{
 			
 			start(MRConstants.REDESIGN_LOGIN_URL);
-			System.out.println("user is on Team-Ci1 Environment");
+			System.out.println("user is on Testharness Environment");
 		}
-		else
+		/*else
 		{
 			start(PAGE_URL_TEAM_MEDICARE_TESTHARNESS);
 			System.out.println("User is on Medicare Test harness page");	
-		}
+		}*/
 	}
 	
 	public Object thloginWith(String username, String password, String category) {
@@ -386,7 +387,7 @@ public class LoginPage extends UhcDriver {
 			alert.accept();
 		} 
 		try{
-			Thread.sleep(40000);
+			Thread.sleep(70000);
 			if (validate(iPerceptionPopUp)) {
 				System.out.println("iPerceptionPopUp is Displayed");
 				iPerceptionPopUp.click();
