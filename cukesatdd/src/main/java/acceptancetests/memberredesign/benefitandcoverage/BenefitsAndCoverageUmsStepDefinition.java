@@ -14,10 +14,10 @@ import org.openqa.selenium.WebDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.member.PageConstants;
-import acceptancetests.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonConstants;
-import acceptancetests.login.data.LoginCommonConstants;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageConstantsMnR;
+import acceptancetests.deprecated.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonConstants;
+import acceptancetests.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
@@ -90,45 +90,13 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		// MRScenario.keyEvent(wd);
 
 		LoginPage2 loginPage = new LoginPage2(wd);
-		loginPage.navigateToNewDashboardUrl();
-		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
+		{
 		AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,accountHomePage);
+		getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
 		Assert.assertTrue(true);
-		
-
-		if (accountHomePage!= null) {
-			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
-
-		} else {
-			System.out.println("Null Dashboard page");
 		}
-
-		// JSONObject accountHomeActualJson = null;
-
-		/* Get expected data */
-		/*
-		 * Map<String,JSONObject> expectedDataMap =
-		 * loginScenario.getExpectedJson(userName); JSONObject
-		 * accountHomeExpectedJson =
-		 * accountHomePage.getExpectedData(expectedDataMap);
-		 * 
-		 * if (accountHomePage != null) {
-		 * getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		 * getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
-		 * accountHomePage); Assert.assertTrue(true); accountHomeActualJson =
-		 * accountHomePage.accountHomeJson; }
-		 * 
-		 * try { JSONAssert.assertEquals(accountHomeExpectedJson,
-		 * accountHomeActualJson, true); } catch (JSONException e) { // TODO
-		 * Auto-generated catch block e.printStackTrace(); }
-		 * 
-		 * getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP,
-		 * expectedDataMap);
-		 * 
-		 */
+		
 
 	}
 
@@ -139,12 +107,12 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@Then("^the user navigates to Benefits and coverage page$")
 	public void user_views_BenefitsAndCoveragejenkins1() {
 
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 
 		BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag();
 
 		if (benefitsCoveragePage != null) {
-			getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
+			getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
 		}
 		else
 
@@ -204,7 +172,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 		if (accountHomePage != null) {
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
+			getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
 		}
 	}
 
@@ -216,12 +184,12 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@Then("^the user navigates to Benefits coverage page$")
 	public void user_views_BenefitsAndCoveragejenkins() {
 
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.dashboardPage);
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.dashboardPage);
 
 		BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag();
 
 		if (benefitsCoveragePage != null) {
-			getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
+			getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
 
 		}
 
@@ -242,7 +210,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@Then("^the user validates Plan Documents section")
 	public void validateContentOnBenefitsAndCoveragePage1() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.PlanDocumentssection();
 	}
 
@@ -256,7 +224,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@Then("^the user validates Needhelp header")
 	public void validateneedhelpheader() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validateNeedhelpheader();
 	}
 
@@ -267,7 +235,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@Then("^the user validates contactus section")
 	public void validatecontactussection() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validatecontactussection();
 		benefitsCoveragePage.contactUslink();
 	}
@@ -280,7 +248,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@Then("^the user clicks on More Information link$")
 	public void the_user_clicks_on_Disclaimers_link() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.clickOnDisclaimers();
 	}
 
@@ -313,7 +281,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("^the user validates view and document label$")
 	public void user_validates_view_and_document_label() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 
 		benefitsCoveragePage.getdocuments_label();
 		benefitsCoveragePage.getview_label();
@@ -327,7 +295,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("the user validates spanish and chinese should not display in dropdown")
 	public void user_validates_spanish_chinese_notvisible() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.languagevalidation();
 
 	}
@@ -340,7 +308,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("^the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully$")
 	public void validate_languagedropdown(DataTable givenAttributes) {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validate_langdropdown_first_selection();
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -360,7 +328,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("the user validates the language dropdown and the value displayed by default should be English")
 	public void user_validates_englishlanguage() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validate_langdropdown_first_selection();
 	}
 
@@ -371,7 +339,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@Then("^the user validates Hearing section$")
 	public void user_validates__Hearing_section() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.HearingSection();
 
 	}
@@ -383,7 +351,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	public void user_validates__Hearing_Aid_section() {
 
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.HearingAid();
 	}
 
@@ -395,7 +363,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("^the user validates the Vision section$")
 	public void user_validates__Vision_section() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.Vision();
 	}
 
@@ -407,7 +375,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("^the user validates the Dental section$")
 	public void user_validates__Dental_section() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.Dental();
 	}
 
@@ -418,7 +386,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("^the user validates Header section$")
 	public void user_validates__Header_section() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.Header();
 
 	}
@@ -430,7 +398,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("^the user validates chiropractic section$")
 	public void user_validates__chiropractic_section() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.chiropracticsection();
 	}
 
@@ -442,7 +410,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("^user validates and clicks on Disclaimers link under Exclusive hearing$")
 	public void user_validates__disclaimerlink() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.ExclusiveDisclaimers();
 	}
 
@@ -454,7 +422,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("^user validates and clicks on Learn More button under Exclusive hearing section$")
 	public void user_validates__learnmorebutton() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.Exclusivelearnmore();
 	}
 	/** 
@@ -464,7 +432,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("^user validates the Leaving  popup$")
 	public void user_validates__leavingpopup() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.Leavingpopup();
 
 	}
@@ -477,7 +445,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("^user validates and click on Cancel button$")
 	public void user_validates__cacenbutton() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.Cancelbutton();
 	}
 	/** 
@@ -488,7 +456,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("^user validates and clicks on Proceed button and navigate to heathnavigationpage$")
 	public void user_validates__proceedbutton() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.Proceedbutton();
 	}
 
@@ -499,7 +467,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("^the user validates Drug coverage header and text under the section")
 	public void user_validates__drugcoverage_section() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validatedrugcoverageheaderandtext();
 	}
 	/** 
@@ -509,7 +477,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("^the user validates text for the Look Up Drugs section")
 	public void user_validates__lookupdrugs_section() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validate_lookupdrugstext();
 	}
 	/** 
@@ -519,7 +487,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("^the user validates Look Up Drugs button should be visible")
 	public void user_validates_lookupdrugsbuuton() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validatelookupdrugsbutton();
 	}
 
@@ -530,7 +498,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("^the user view the Drug Copays & Discounts header")
 	public void user_view_drugcopayanddiscountheader() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validate_drugcopayheaderntext();
 
 	}
@@ -541,7 +509,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("the user view the LIS Drug Copays & Discounts header")
 	public void user_validate_lisdrugcopaydiscounttable() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validate_lisdrugcopayheaderntext();
 	}
 
@@ -551,7 +519,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("^the user view the Drug Cost header and text")
 	public void user_view_drugcostheaderandtext() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validate_drugcostheaderntext();
 	}
 
@@ -561,7 +529,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("^the user validates text for the Locate a Pharmacy section")
 	public void user_validate_textforlocatepharmacy() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validate_locateapharmacysection();
 	}
 
@@ -571,7 +539,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("^the user validates Locate a Pharmacy button should be visible")
 	public void user_validate_locatepharmacybutton() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validate_locateapharmacysection();
 	}
 
@@ -582,7 +550,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("^the user validates tier link should not display")
 	public void user_validate_tierinkshouldnotdisplay() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validate_tierlinknotdisplay();
 	}
 
@@ -593,7 +561,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("^the user validates dropdown selection functionality")
 	public void user_validate_dropdwonvalues() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		// JSONObject
 		// benefitsandcoverageExectedJson=(JSONObject)loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
 		benefitsCoveragePage.validate_drugcostdropdownoptions();
@@ -608,7 +576,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("the drugcost dropdown should not display")
 	public void user_validate_dropdownshouldnotdisplay() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validate_dropdownnotdisplay();
 	}
 
@@ -618,7 +586,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("^the user validates the Learn More section for stage and tier")
 	public void user_validate_links() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validate_learnmoreaboutlink();
 	}
 
@@ -628,7 +596,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("^the user validates the Learn More section link for stage")
 	public void user_validate_stagelink() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validate_learnmoreaboutstagelink();
 	}
 
@@ -638,7 +606,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("^the user validates the user click on the link it expands and when user clicks it again it should collapse")
 	public void user_validate_linksworking() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		// JSONObject benefitsandcoverageExectedJson = (JSONObject)
 		// loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
 		benefitsCoveragePage.clickOnLearnmoreaboutlinkstage();
@@ -651,7 +619,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("the user should see drug copay and discount table")
 	public void user_validate_drugcopaydiscounttable() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validatedrugcopaytable();
 	}
 	/** 
@@ -661,7 +629,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("the user should see drug cost table for Lis members")
 	public void user_validate_drugcosttable() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validatedrugcosttable();
 	}
 
@@ -671,7 +639,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("the user should see Ways to save Option")
 	public void user_validate_waysToSave() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validateWaystoSave();
 	}
 
@@ -681,7 +649,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("the user validates plan overview section")
 	public void user_validate_planOverview() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validatePlanOverview();
 	}
 
@@ -691,7 +659,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("the user validates plan overview section for a Lis member")
 	public void user_validate_planOverviewLis() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validatePlanOverviewLis();
 	}
 
@@ -701,7 +669,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("the user validates headers on Bnc page for indi members")
 	public void user_validate_Headers() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validateHeaders();
 	}
 
@@ -711,7 +679,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("the user validates headers on Bnc page for group members")
 	public void user_validate_Headers_Group() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validateHeadersGroup();
 	}
 	/** 
@@ -721,7 +689,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("the user validates the Primarycare Provider section")
 	public void user_validate_PrimaryCareProv() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validatePrimaryCareProvider();
 	}
 	/** 
@@ -732,7 +700,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("the user validates the Primarycare Provider section for Group")
 	public void user_validate_PrimaryCareProvForHmo() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validatePrimaryCareProviderForGroup();
 	}
 
@@ -744,7 +712,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("the user validates the Out of Pocket Max section")
 	public void user_validate_OutofPocket() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validateOutofPocketMax();
 	}
 
@@ -755,7 +723,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("the user validates headers on Bnc page for ship members")
 	public void user_validate_Headers_Ship() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validateHeadersShip();
 	}
 
@@ -766,7 +734,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	public void validate_VAS_section()
 	{
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.vasSection();
 	}
 
@@ -778,7 +746,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	public void validate_hand_image()
 	{
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.handimage();
 	}
 
@@ -789,7 +757,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("the user validates learnmorebutton on Bnc page for ship members")
 	public void user_validate_learnmorebutton() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.learnmorebutton();
 	}
 	/** 
@@ -799,7 +767,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@Then("^the user validates the Needhelp header")
 	public void validateneedhelpheaderFED() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validateNeedhelpheader();
 	}
 
@@ -811,10 +779,10 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	public void validate_Value_Add_page()
 	{
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		ValueAddedServicepage valueaddedservices= benefitsCoveragePage.navigateToValueAddService();
 		if (valueaddedservices!= null) {
-			getLoginScenario().saveBean(PageConstants.VALUE_ADDED_SERVICES, valueaddedservices);
+			getLoginScenario().saveBean(PageConstantsMnR.VALUE_ADDED_SERVICES, valueaddedservices);
 		}
 	}
 
@@ -824,7 +792,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@Then("^the user validates the need help section for ship")
 	public void uservalidatesneedhelpsectionShip() {
 		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 
 		benefitsnCoveragepage.validateneedhelpheaderShip();
 
@@ -836,7 +804,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@Then("^the user validates see more ways to contact us section for ship")
 	public void uservalidatesseeMoreWaysShip() {
 		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 
 		benefitsnCoveragepage.validateContactUsNeedHelp();
 
@@ -848,7 +816,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@Then("^the user validates on clicking contact us link it should route to contact us page for ship member")
 	public void uservalidatescontactus() {
 		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 
 		benefitsnCoveragepage.contactUslinkShip();
 	}

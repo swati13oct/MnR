@@ -11,7 +11,17 @@ package acceptancetests.data;
  */
 public class PageConstants {
 	
+	public static final String ACCOUNT_HOME_PAGE = "accountHomePage";
+	
 	public static final String SignIN_Page = "signinpage";
+	
+	public static final String LOGIN_PAGE = "loginPage";
+	
+    public static final String BENEFITS_AND_COVERAGE_PAGE = "planBenefitsCoveragePage";
+	
+	public static final String BENEFITS_COVERAGE_PAGE = "benefitsCoveragePage";
+
+	public static final String PROFILE_AND_PREFERENCES_PAGE = "ProfileandPreferencesPage";
 	
 	public static final String Error_Message = "errorMessage";
 

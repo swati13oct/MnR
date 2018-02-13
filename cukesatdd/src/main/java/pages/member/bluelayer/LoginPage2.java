@@ -15,6 +15,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pages.acquisition.ulayer.LoginAssistancePage;
 import acceptancetests.data.CommonConstants;
@@ -67,7 +68,7 @@ public class LoginPage2 extends UhcDriver {
 	public LoginPage2(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		//openAndValidate();
+		openAndValidate();
 	}
 
 	public Object loginWith(String username, String password) throws InterruptedException {
@@ -197,9 +198,29 @@ public class LoginPage2 extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		System.out.println("Entering page" + PAGE_URL2);
-		start(PAGE_URL2);
-
+		if (MRScenario.environment.equalsIgnoreCase("stage"))
+		{
+			start(STAGE_DASHBOARD_URL);
+			System.out.println("User is Navigating to Stage Dashboard");
+		}
+		else if (MRScenario.environment.equalsIgnoreCase("team-ci1")) {
+			
+			start(MRConstants.REDESIGN_LOGIN_URL);
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println(driver.getCurrentUrl());
+			System.out.println("user is on Team-Ci1 Environment");
+		}
+		else
+			
+		{
+			start(PAGE_URL_TEAM_MEDICARE_TESTHARNESS);
+			System.out.println("User is on Medicare Test harness page");	
+		}
 		// validate(loginIn);
 
 	}
@@ -223,6 +244,7 @@ public class LoginPage2 extends UhcDriver {
 			System.out.println("user is on Team-Ci1 Environment");
 		}
 		else
+			
 		{
 			start(PAGE_URL_TEAM_MEDICARE_TESTHARNESS);
 			System.out.println("User is on Medicare Test harness page");	
@@ -303,8 +325,7 @@ public class LoginPage2 extends UhcDriver {
 			alert.accept();
 		} 
 		try
-		   {
-			Thread.sleep(40000);
+		{
 			if (validate(iPerceptionPopUp)) 
 			{
 				System.out.println("iPerceptionPopUp is Displayed");
@@ -317,6 +338,7 @@ public class LoginPage2 extends UhcDriver {
 		if(currentUrl().contains("testharness.html") || currentUrl().contains("/dashboard"))
 
 		{
+			System.out.println("test");
 			return new AccountHomePage(driver);
 		}
 		else if(currentUrl().contains("home/my-account-home.html")  || currentUrl().contains("/login.html") ) {

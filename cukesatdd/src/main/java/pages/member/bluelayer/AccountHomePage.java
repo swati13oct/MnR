@@ -29,10 +29,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
-import acceptancetests.login.data.LoginCommonConstants;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
+import acceptancetests.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
@@ -311,6 +311,9 @@ private WebElement searchforproviderlinkinClaimsPage;
         @FindBy(xpath="//header//h1")
     	private WebElement heading;
         
+        @FindBy(xpath = "//sticky[@id='sticky-nav']//nav[@id='main-nav']//a[contains(text(),'Coverage & Benefits')]")
+    	private WebElement BnClink;
+        
         private PageData myAccountHome;
 
         public JSONObject accountHomeJson;
@@ -331,7 +334,7 @@ private WebElement searchforproviderlinkinClaimsPage;
                                         CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);
                 }
                 
-                openAndValidate();
+                //openAndValidate();
         }
 
         public AccountHomePage(WebDriver driver) {
@@ -341,7 +344,27 @@ private WebElement searchforproviderlinkinClaimsPage;
         }
         
         public BenefitsAndCoveragePage navigateDirectToBnCPag() {
-    		try {
+    		
+        	if (MRScenario.environment.equalsIgnoreCase("stage")) 
+        	{
+    			System.out.println("user is on Stage login page");			
+    			//CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);			
+    			if(driver.getCurrentUrl().contains("/dashboard"));
+    			{
+    				System.out.println("User is on dashboard page and URL is ====>"+driver.getCurrentUrl());
+    				BnClink.click();
+    				
+    			}
+        	}
+    			else if (MRScenario.environment.equals("team-ci1") || MRScenario.environment.equals("team-h") || MRScenario.environment.equals("test-a") || MRScenario.environment.equals("team-e")) {
+        			benefitcoveragelink.click();
+        		}
+    			else
+    			{
+        			linkbenefit.click();
+        		}
+        	
+        	try {
     			Thread.sleep(10000);
     		} catch (InterruptedException e) {
     			e.printStackTrace();
@@ -350,18 +373,16 @@ private WebElement searchforproviderlinkinClaimsPage;
                 iPerceptionPopUp.click();
                 System.out.println("iPerception Pop Up displayed");
     		}
-    		if (MRScenario.environment.equals("team-ci1") || MRScenario.environment.equals("team-h") || MRScenario.environment.equals("test-a") || MRScenario.environment.equals("team-e")) {
-    			benefitcoveragelink.click();
-    		}else{
-    			linkbenefit.click();
-    		}
+
     		CommonUtility.waitForPageLoad(driver, heading, 50);
     		if(driver.getTitle().equalsIgnoreCase("Benefits Overview"))
     		{
     			return new BenefitsAndCoveragePage(driver);
     		}
+    			
     		return null;
     	}
+
         
         public ProfilePreferencesPage navigateDirectToProfilePage() throws InterruptedException  {
     		
