@@ -69,8 +69,7 @@ Examples:
 	| planType    | memberType                | eobTypeData       | dateRange       |
 	| MAPD        | IndividualAARPWOEOB       | Medical           | 6 Months        |
 	| MAPD        | IndividualAARPWOEOB       | Prescription Drug | 6 Months        |
-	| MAPD        | IndividualAARPWOEOB       | Prescription Drug | 12 Months       |
-	| MAPD        | IndividualAARPWOEOB       | Medical           | 12 Months       |
+ 	| MAPD        | IndividualAARPWOEOB       | Medical           | 12 Months       |
 	| MAPD        | IndividualAARPWOEOB       | Medical           | 18 Months       |
 	| MAPD        | IndividualAARPWOEOB       | Medical           | 90 Days         |
 	| SHIP        | Individual 			  			  | Medical 					|6-12 Months			|
