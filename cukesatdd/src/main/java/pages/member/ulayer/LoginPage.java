@@ -381,7 +381,7 @@ public class LoginPage extends UhcDriver {
 		sendkeys(thUserName, username);
 		sendkeys(thPassword, password);
 		thSignIn.click();
-		if ( MRScenario.environment.equals("team-e") || MRScenario.environment.equals("team-ci1")){
+		if ( MRScenario.environmentMedicare.equals("team-e") || MRScenario.environmentMedicare.equals("team-ci1")){
 
 			Alert alert = driver.switchTo().alert();
 			alert.accept();

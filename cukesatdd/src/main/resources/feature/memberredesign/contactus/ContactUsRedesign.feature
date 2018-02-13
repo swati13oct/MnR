@@ -13,17 +13,17 @@ Feature: To test Send us a question Widget and Click to call functionality in co
       | plantype | memberType 	|
       | MAPD     | COSMOSCLAIMS |
 
-  @secureEmailWidgetGroup
-  Scenario Outline: Verify Send us a question Widget section in contact us redesign page which covers 1,3,4
-    Given registered UMS member with following attributes
-      | Plan Type   | <plantype>   |
-      | Member Type | <memberType> |
-    When the user navigates to contact us page in UHC site
-    Then user validates Group secure email widget  in redesign contact us page
-
-    Examples: 
-      | plantype | memberType 			|
-      | MAPD     | SDCERAGroup      |
+  #@secureEmailWidgetGroup
+  #Scenario Outline: Verify Send us a question Widget section in contact us redesign page which covers 1,3,4
+    #Given registered UMS member with following attributes
+      #| Plan Type   | <plantype>   |
+      #| Member Type | <memberType> |
+    #When the user navigates to contact us page in UHC site
+    #Then user validates Group secure email widget  in redesign contact us page
+#
+    #Examples: 
+      #| plantype | memberType 			|
+      #| MAPD     | SDCERAGroup      |
 
   @secureEmailWidgetCancelForGroup
   Scenario Outline: Verify cancel click on Group secure email widget  in redesign contact us page
