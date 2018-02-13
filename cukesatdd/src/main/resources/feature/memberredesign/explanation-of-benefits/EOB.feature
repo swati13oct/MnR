@@ -42,7 +42,7 @@ Then the user validates EOB count
 
  
 
-@noComboTab
+@planTypeValidation
 Scenario Outline: To verify different plan types under combo tabs
 Given registered AMP with for EOB flow
 	| Plan Type      |<planType>  |
@@ -57,7 +57,7 @@ Examples:
 | PDP         | IndividualAARPWOEOB						 |
 | SHIP        | IndividualAARPWOEOB						 |
  
-@fixed 
+@dropDownFuntion 
 Scenario Outline: To validate page functionality with different dropdowns
 Given registered AMP with for EOB flow
 	| Plan Type      |<planType>  |
@@ -93,29 +93,11 @@ And the user validates how to read medical eob PDF
  	Examples:
 	| planType    | memberType                |dateRange         | eobTypeData       |
 	| PCP         | withEOB                   |  18 Months       | Medica            |
-#	| SHIP        |Individual 			          | 6-12 Months			 | Medical 	         |
-#	| MAPD        |aarpWithEOB 			          | 90 Days    			 | Medical 	         |
-#	| MAPD        |aarpWithEOB 			          | 6 Months    		 | Medical 	         |
-#	| MAPD        |aarpWithEOB 			          | 12 Months    		 | Medical 	         |
+	| MAPD        |aarpWithEOB 			          | 90 Days    			 | Medical 	         |
+	| MAPD        |aarpWithEOB 			          | 6 Months    		 | Medical 	         |
+	| MAPD        |aarpWithEOB 			          | 12 Months    		 | Medical 	         |
 	| MAPD        |aarpWithEOB 			          | 18 Months    		 | Medical 	         |
-	| MAPD        |aarpWithEOB 			          | 6 Months   			 | Prescription Drug |
-	| MAPD        |aarpWithEOB 			          | 12 Months  			 | Prescription Drug |
-	| MAPD        |aarpWithEOB 			          | 18 Months   		 | Prescription Drug |  
-	
-	
-@noComboTabNew
-Scenario Outline: To verify different plan types under non combo tabs
-Given registered AMP with for EOB flow
-	| Plan Type      |<planType>  |
-	| Member Type    |<memberType>|
-And the user navigates to EOB page  
-And the user selects the desired date range
-		| Plan Type      |<planType>  |
-		|EOB Type				 |<eobTypeData>|
-		|Date Range			 |<dateRange>|
-Examples:
-| planType    | memberType   					 |eobTypeData				 |dateRange			|
-| MA        |IndividualMed_EOB  		   | Prescription Drug |12 Months  	  |
+
 
  
  
