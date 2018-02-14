@@ -647,6 +647,7 @@ public class RegistrationDashboardStepDefinition {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
+		registrationInformationPage.waitForAccountConfirmationPage();
 		String expectedFirstName = memberAttributesMap.get("FIRST_NAME");
 		Thread.sleep(3000);
 		String actualFirstName = registrationInformationPage.getMemberFirstName().getText().toString();
