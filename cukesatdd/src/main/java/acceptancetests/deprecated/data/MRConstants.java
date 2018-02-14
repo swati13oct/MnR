@@ -277,7 +277,8 @@ public class MRConstants {
   
   public static String CAMPAIGN_PAGE_URL2 = "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/available-plans.html?msg=zero&lang=en&zipcode=02211&WT.mc_id=832467";
   
-  public static String EOB_DIRECT_URL = "https://"+MRScenario.environment+"-medicare.uhc.com";
+  public static String EOB_DIRECT_URL = "https://"+MRScenario.environment+"-medicare.uhc.com/?testharness=true";
+  
   
   public static final String DEEPLINK_URL = "https://"+MRScenario.environment+"-werally.uhc.com/login.html?TARGET=SMSR";
 
