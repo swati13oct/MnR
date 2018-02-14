@@ -87,16 +87,18 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		}
 
 		WebDriver wd = getLoginScenario().getWebDriver();
-		// MRScenario.keyEvent(wd);
-
-		LoginPage2 loginPage = new LoginPage2(wd);
-		{
-		AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
-		Assert.assertTrue(true);
-		}
+		LoginPage2 loginPage = new LoginPage2(wd);
 		
+		AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
+		
+		if (accountHomePage != null) {
+			 getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
+			Assert.assertTrue(true);
+		}
+		else {
+			Assert.fail("***** Error in loading  Redesign Account Landing Page *****");
+		}
 
 	}
 

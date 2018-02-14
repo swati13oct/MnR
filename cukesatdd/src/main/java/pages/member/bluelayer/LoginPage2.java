@@ -201,7 +201,7 @@ public class LoginPage2 extends UhcDriver {
 		if (MRScenario.environment.equalsIgnoreCase("stage"))
 		{
 			start(STAGE_DASHBOARD_URL);
-			System.out.println("User is Navigating to Stage Dashboard");
+			
 		}
 		else if (MRScenario.environment.equalsIgnoreCase("team-ci1")) {
 			
@@ -319,25 +319,14 @@ public class LoginPage2 extends UhcDriver {
 		sendkeys(passwordField, password);
 		signInButton.click();
 		
-		if ( MRScenario.environment.equals("team-ci1")){
-
-			Alert alert = driver.switchTo().alert();
-			alert.accept();
-		} 
-		try
-		{
-			if (validate(iPerceptionPopUp)) 
-			{
-				System.out.println("iPerceptionPopUp is Displayed");
-				iPerceptionPopUp.click();
-			}
-		}catch(Exception e)        {
-			System.out.println("iPerception Pop Up not displayed");
+		try {
+			Thread.sleep(50000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-
 		if(currentUrl().contains("testharness.html") || currentUrl().contains("/dashboard"))
-
-		{
+        {
 			System.out.println("test");
 			return new AccountHomePage(driver);
 		}

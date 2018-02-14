@@ -33,6 +33,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import acceptancetests.data.LoginCommonConstants;
+import acceptancetests.data.MRConstants;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
@@ -317,6 +318,8 @@ private WebElement searchforproviderlinkinClaimsPage;
         private PageData myAccountHome;
 
         public JSONObject accountHomeJson;
+        
+        private static String PAGE_URL = MRConstants.STAGE_DASHBOARD_NEW_DOMAIN_URL;
 
         public AccountHomePage(WebDriver driver,String category) {
                 super(driver);
@@ -333,6 +336,7 @@ private WebElement searchforproviderlinkinClaimsPage;
                         myAccountHome = CommonUtility.readPageData(fileName,
                                         CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);
                 }
+              
                 
                 //openAndValidate();
         }
@@ -352,10 +356,20 @@ private WebElement searchforproviderlinkinClaimsPage;
     			if(driver.getCurrentUrl().contains("/dashboard"));
     			{
     				System.out.println("User is on dashboard page and URL is ====>"+driver.getCurrentUrl());
-    				BnClink.click();
-    				
-    			}
+    				driver.navigate().to(PAGE_URL+".com/medicare/member/benefits-coverage.html");
+    				System.out.println(driver.getCurrentUrl());
+    				try{
+    					Thread.sleep(40000);
+    					if (validate(iPerceptionPopUp)) {
+    						System.out.println("iPerceptionPopUp is Displayed");
+    						iPerceptionPopUp.click();
+    					}
+    				}catch(Exception e)        {
+    					System.out.println("iPerception Pop Up not displayed");
+    				}
+    		    }
         	}
+        
     			else if (MRScenario.environment.equals("team-ci1") || MRScenario.environment.equals("team-h") || MRScenario.environment.equals("test-a") || MRScenario.environment.equals("team-e")) {
         			benefitcoveragelink.click();
         		}
