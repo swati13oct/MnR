@@ -312,6 +312,9 @@ public class MRConstants {
   public static final String DASHBOARD_URL ="https://"+MRScenario.environmentMedicare+"-medicare.uhc.com/";
   
   public static final String REDESIGN_LOGIN_URL = "https://"+MRScenario.environmentMedicare+"-medicare." + getDomain() + "/?testharness=true";
+  
+  public static final String TEAM_T_NEW_TESTHANESS_URL = "https://team-t-medicare.ose-elr-core.optum.com/medicare/login/overview.html?testharness=true";
+
    
 
   public static String getDomain() {
