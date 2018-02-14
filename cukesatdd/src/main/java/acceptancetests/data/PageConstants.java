@@ -396,4 +396,8 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 	   
 	   public static final String DASHBOARD_FORMS_AND_RESOURCES_PAGE = "FormsAndResourcesPage";
 	   public static final String COMPARE_PLANS_PAGE = "comparePlansPage";
+	   
+	public static final String EOB_Page = "eobPage";
+	
+	public static final String MEDICAL_EOB_PAGE = "medicalEobPage";
 }

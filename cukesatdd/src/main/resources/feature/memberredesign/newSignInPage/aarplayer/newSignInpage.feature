@@ -3,14 +3,17 @@ Feature: To validate the new changes related to new SignIn page  on the member r
 @signInErrorMessages1 
   Scenario Outline: To Verify Error Messages In Both username and password fields
   Given I am a  member on the sign-in page
-  | URL | <url> |
-When I have not entred any thing in both username and password fields
+   When I have not entred any thing in both username and password fields
 Then I should get the error message on both fields 
+
  Examples:
  |url                                                                                  |
- |https://member.team-b-aarpmedicareplans.uhc.com/content/dashboard/guest/signin.html  |  
- |https://member.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/guest/signin.html|
- |https://www.team-b-mypcpmedicare.uhc.com/content/dashboard/guest/signin.html|
+ |https://stage-medicare.uhc.com/  | 
+ |https://stage-medicare.uhc.com/|
+ |https://stage-mymedicareaccount.uhc.com/medica|
+ 
+ 
+ 
 @signInErrorMessages2
  Scenario Outline: To Verify Error Messages In username field 
   Given I am a  member on the sign-in page
@@ -18,10 +21,12 @@ Then I should get the error message on both fields
 When I have not entred any thing in  username  field
 Then I should get the error message on username field 
  Examples:
- |url                                                                                  |
- |https://member.team-b-aarpmedicareplans.uhc.com/content/dashboard/guest/signin.html  | 
- |https://member.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/guest/signin.html|
- |https://www.team-b-mypcpmedicare.uhc.com/content/dashboard/guest/signin.html|
+  |url                                                                                  |
+ |https://stage-medicare.uhc.com/  | 
+ |https://stage-medicare.uhc.com/|
+ |https://stage-mymedicareaccount.uhc.com/medica|
+ 
+ 
 @signInErrorMessages3
  Scenario Outline: To Verify Error Messages In password field 
  Given I am a  member on the sign-in page
@@ -30,9 +35,9 @@ When I have not entred any thing in password field
 Then I should get the error message on password field 
  Examples:
  |url                                                                                  |
- |https://member.team-b-aarpmedicareplans.uhc.com/content/dashboard/guest/signin.html  | 
- |https://member.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/guest/signin.html|
- |https://www.team-b-mypcpmedicare.uhc.com/content/dashboard/guest/signin.html|
+ |https://stage-medicare.uhc.com/  | 
+ |https://stage-medicare.uhc.com/|
+ |https://stage-mymedicareaccount.uhc.com/medica|
 
  
 @forgotusernamepasswordlink
@@ -45,9 +50,9 @@ And siteID should be passed to the URL of Username and Password Assistance page
 | SiteID | <siteID> |
  Examples:
  |url                                                                                   | siteID |
- |https://member.team-b-aarpmedicareplans.uhc.com/content/dashboard/guest/signin.html   | AARP   |
- |https://member.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/guest/signin.html|UHCM   |
- |https://www.team-b-mypcpmedicare.uhc.com/content/dashboard/guest/signin.html          |MYPCP|
+ |https://stage-medicare.uhc.com/                                                       | AARP   |
+ |https://stage-medicare.uhc.com/                                                       | UHCM   |
+ |https://stage-mymedicareaccount.uhc.com/medica                                        |MYPCP   |
 
 
 @registerbutton
@@ -59,11 +64,10 @@ And siteID should be passed to the URL of Username and Password Assistance page
   And I should see the SiteID that i have passed on the New Registration page
   | RegSiteID | <regsiteID> | 
    Examples:
- |url                                                                                   | regsiteID |
- |https://member.team-b-aarpmedicareplans.uhc.com/content/dashboard/guest/signin.html   |     AARP  |
- |https://member.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/guest/signin.html|     UHCM  |
- |https://www.team-b-mypcpmedicare.uhc.com/content/dashboard/guest/signin.html          |     MYPCP |
- 
+  |url                                                                                   | siteID |
+ |https://stage-medicare.uhc.com/                                                       | AARP   |
+ |https://stage-medicare.uhc.com/                                                       | UHCM   |
+ |https://stage-mymedicareaccount.uhc.com/medica                                        |MYPCP   |
  
  
  
