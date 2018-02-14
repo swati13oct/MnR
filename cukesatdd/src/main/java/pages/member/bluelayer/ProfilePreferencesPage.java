@@ -271,6 +271,9 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	@FindBy(className = "atdd-claims-header")
 	private WebElement ClaimsSupportSection;
+	
+	@FindBy(className = "add-address-btn")
+	private WebElement MailingAddressEditButton;
 
 	public PageData ProfileandPreferences;
 
@@ -1066,5 +1069,58 @@ public class ProfilePreferencesPage extends UhcDriver {
 		}
 
 	}
+	
+	public void validateEmailEditNokia() {
+		if(	EmailEditbutton.isDisplayed())
+				{
+			Assert.assertFalse(	EmailEditbutton.isDisplayed());
+				}
+		else{
+			System.out.println("Email edit button is not displayed.");
+		}
+				
+		
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void validatePhoneEditNokia() {
+		
+		if(	PhoneEditButton.isDisplayed())
+		{
+		Assert.assertFalse(PhoneEditButton.isDisplayed());
+		
+		}
+		else{
+			System.out.println("Phone edit button is not displayed.");
+		}
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void validateTempAddEditNokia() {
+		if(	tempEditButton.isDisplayed())
+		{
+		Assert.assertFalse(tempEditButton.isDisplayed());
+		}
+		else{
+			System.out.println("Temp address edit button is not displayed.");
+		}
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void validateMailAddEditNokia() {
+		// TODO Auto-generated method stub
+		if(	MailingAddressEditButton.isDisplayed())
+		{
+		Assert.assertFalse(MailingAddressEditButton.isDisplayed());
+		}
+		else{
+			System.out.println("Mailing address edit button is not displayed.");
+		}
+		
+	}
+
 
 }

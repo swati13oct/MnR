@@ -714,6 +714,40 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.validateNeedHelpShip();
 
 	}
+	@Then("^the user validates the Presence of edit button in email section")
+	public void UserValidatesEmailEditNokia() {
+		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+
+		ProfilePreferencesPage.validateEmailEditNokia();
+
+	}
+	@Then("^the user validates the Presence of edit button in Phone section")
+	public void UserValidatesPhoneEditNokia() {
+		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+
+		ProfilePreferencesPage.validatePhoneEditNokia();
+
+	}
+	@Then("^the user validates the Presence of edit button in Temporary Address section")
+	public void UserValidatesTempAddEditNokia() {
+		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+
+		ProfilePreferencesPage.validateTempAddEditNokia();
+
+	}
+	@Then("^the user validates the Presence of edit button in Mailing Address section")
+	public void UserValidatesMailAddEditNokia() {
+		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+
+		ProfilePreferencesPage.validateMailAddEditNokia();
+
+	}
+	
+
 
 
 
