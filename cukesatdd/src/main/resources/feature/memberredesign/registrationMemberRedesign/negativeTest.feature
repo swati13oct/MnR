@@ -18,7 +18,7 @@ Scenario Outline: To verify already existing member error message page
 
     Examples: 
       | planMemberId | dateOfBirth |
-      | 914429086    | 08-28-1927  |
+      | 001935183-1    | 10-09-1921  |
 
 @navigationToPasswordHelpPage
   Scenario Outline: To verify member is navigated to the username and password help page from existing member error page
@@ -35,7 +35,7 @@ Scenario Outline: To verify already existing member error message page
 
     Examples: 
       | planMemberId | dateOfBirth |
-      | 914429086    | 08-28-1927  |
+      | 001935183-1    | 10-09-1921  |
 
 @navigationToSignInPage
   Scenario Outline: To verify member is navigated to the sign In page from existing member error page
@@ -52,7 +52,7 @@ Scenario Outline: To verify already existing member error message page
 
     Examples: 
       | planMemberId | dateOfBirth |
-      | 914429086    | 08-28-1927  |
+      | 001935183-1    | 10-09-1921  |
 
   @futureEffectivePlanError
   Scenario Outline: To verify future effective member error message page

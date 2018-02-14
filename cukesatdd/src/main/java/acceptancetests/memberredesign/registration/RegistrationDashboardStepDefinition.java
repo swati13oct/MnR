@@ -182,7 +182,7 @@ public class RegistrationDashboardStepDefinition {
 				.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
 		Thread.sleep(6000);
 		//Assert.assertTrue(registrationInformationPage.currentUrl().contains("memberRegistration-Step2"));
-		//registrationInformationPage.waitForPlanInformationPage();
+		registrationInformationPage.waitForPlanInformationPage();
 		registrationInformationPage.getStepTwoText().isDisplayed();
 	}
 
@@ -204,7 +204,7 @@ public class RegistrationDashboardStepDefinition {
 		String expectedPlanName = memberAttributesMap.get("Plan name");
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
 				.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
-		Thread.sleep(10000);
+		registrationInformationPage.scroll();
 		String actualPlanName = registrationInformationPage.getPlanName().getText();
 		System.out.println(actualPlanName);
 		Assert.assertEquals(expectedPlanName, actualPlanName);
@@ -470,7 +470,7 @@ public class RegistrationDashboardStepDefinition {
 	public void existingMemberErrorMessage() throws InterruptedException {
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
 				.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
-		Thread.sleep(2000);
+		Thread.sleep(10000);
 		registrationInformationPage.getExistingMemberError().isDisplayed();
 		Assert.assertTrue(registrationInformationPage.getExistingMemberError()
 				.toString().contains("existing"));
