@@ -355,19 +355,16 @@ private WebElement searchforproviderlinkinClaimsPage;
     			//CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);			
     			if(driver.getCurrentUrl().contains("/dashboard"));
     			{
-    				System.out.println("User is on dashboard page and URL is ====>"+driver.getCurrentUrl());
+    				System.out.println("User is on dashboard page and URL is ==>"+driver.getCurrentUrl());
     				driver.navigate().to(PAGE_URL+".com/medicare/member/benefits-coverage.html");
     				System.out.println(driver.getCurrentUrl());
-    				try{
-    					Thread.sleep(40000);
-    					if (validate(iPerceptionPopUp)) {
-    						System.out.println("iPerceptionPopUp is Displayed");
-    						iPerceptionPopUp.click();
-    					}
-    				}catch(Exception e)        {
-    					System.out.println("iPerception Pop Up not displayed");
-    				}
-    		    }
+    				CommonUtility.waitForPageLoad(driver, heading, 50);
+    				if(driver.getTitle().equalsIgnoreCase("Benefits Overview"))
+    	    		{
+    	    			return new BenefitsAndCoveragePage(driver);
+    	    		}
+    				
+        	}
         	}
         
     			else if (MRScenario.environment.equals("team-ci1") || MRScenario.environment.equals("team-h") || MRScenario.environment.equals("test-a") || MRScenario.environment.equals("team-e")) {
@@ -378,11 +375,7 @@ private WebElement searchforproviderlinkinClaimsPage;
         			linkbenefit.click();
         		}
         	
-        	try {
-    			Thread.sleep(10000);
-    		} catch (InterruptedException e) {
-    			e.printStackTrace();
-    		}
+ 
     		if (validate(iPerceptionPopUp)) {
                 iPerceptionPopUp.click();
                 System.out.println("iPerception Pop Up displayed");
