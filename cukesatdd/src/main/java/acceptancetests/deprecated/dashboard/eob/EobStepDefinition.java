@@ -234,7 +234,7 @@ public class EobStepDefinition {
 	public void user_validated_EOB_Count(){
 		 
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-		eobPage.validateEOBStatements();
+		//eobPage.validateEOBStatements();
 	}
 	
 	@After

@@ -273,26 +273,24 @@ public class LoginPage extends UhcDriver {
 	}
 	
 	public void navigateToNewDashboardUrl(){
-		if (MRScenario.environment.equalsIgnoreCase("stage"))
+		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage"))
 		{
+			System.out.println(STAGE_DASHBOARD_URL);
 			start(STAGE_DASHBOARD_URL);
+			System.out.println(STAGE_DASHBOARD_URL);
 			System.out.println("User is Navigating to Stage Dashboard");
-		}
-		else if (MRScenario.environment.equalsIgnoreCase("team-ci1")) {
-			
-start(MRConstants.REDESIGN_LOGIN_URL);
-			System.out.println("user is on Team-Ci1 Environment");		}
-		else if (MRScenario.environment.equalsIgnoreCase("team-t")) {
-			start(TEAM_T_NEW_DASHBOARD_URL);
-			System.out.println("User is on team-t Environment ");
-			
 			
 		}
-		else
+		else{
+			
+			start(MRConstants.REDESIGN_LOGIN_URL);
+			System.out.println("user is on Testharness Environment");
+		}
+		/*else
 		{
 			start(PAGE_URL_TEAM_MEDICARE_TESTHARNESS);
 			System.out.println("User is on Medicare Test harness page");	
-		}
+		}*/
 	}
 	
 	public Object thloginWith(String username, String password, String category) {
@@ -347,7 +345,7 @@ start(MRConstants.REDESIGN_LOGIN_URL);
 		sendkeys(thPassword, password);
 		thSignIn.click();
 		
-if ( MRScenario.environment.equalsIgnoreCase("team-ci1") || (MRScenario.environment.equalsIgnoreCase("team-t"))) {
+if ( MRScenario.environmentMedicare.equalsIgnoreCase("team-ci1") || (MRScenario.environmentMedicare.equalsIgnoreCase("team-t"))) {
 			
 			Alert alert = driver.switchTo().alert();
 	        alert.accept();
@@ -357,7 +355,7 @@ if ( MRScenario.environment.equalsIgnoreCase("team-ci1") || (MRScenario.environm
 		
 		try{
 			
-			if (MRScenario.environment.equalsIgnoreCase("stage") || (MRScenario.environment.equalsIgnoreCase("team-t")  || ( MRScenario.environment.equalsIgnoreCase("team-ci1")))) {
+			if (MRScenario.environmentMedicare.equalsIgnoreCase("stage") || (MRScenario.environmentMedicare.equalsIgnoreCase("team-t")  || ( MRScenario.environmentMedicare.equalsIgnoreCase("team-ci1")))) {
 				Thread.sleep(50000);	
 			}else {
 				
@@ -387,20 +385,19 @@ if ( MRScenario.environment.equalsIgnoreCase("team-ci1") || (MRScenario.environm
 			System.out.println("teamhloginWith is returing null. Please Update the above condition As per your Needs");
 			
 				return null;
-		
 	}
 	
 	public Object doLoginWith(String username, String password) {
 		sendkeys(thUserName, username);
 		sendkeys(thPassword, password);
 		thSignIn.click();
-		if ( MRScenario.environment.equals("team-e")){
+		if ( MRScenario.environmentMedicare.equals("team-e") || MRScenario.environmentMedicare.equals("team-ci1")){
 
 			Alert alert = driver.switchTo().alert();
 			alert.accept();
 		} 
 		try{
-			Thread.sleep(40000);
+			Thread.sleep(70000);
 			if (validate(iPerceptionPopUp)) {
 				System.out.println("iPerceptionPopUp is Displayed");
 				iPerceptionPopUp.click();
@@ -421,7 +418,7 @@ if ( MRScenario.environment.equalsIgnoreCase("team-ci1") || (MRScenario.environm
 			return new TerminatedHomePage(driver);
 		}
 
-		System.out.println("teamhloginWith is returing null. Please Update the above condition As per your Needs");
+		System.out.println("login is returing null. Please Update the above condition As per your Needs");
 
 		return null;
 	}

@@ -33,7 +33,7 @@ public class IntroductionInformationPage extends UhcDriver{
 	@FindBy(id = "lastnametextbox")
 	private WebElement lastNameField;
 	
-	@FindBy(id = "medicalclaimnumtext")
+	@FindBy(xpath = ".//*[@id='medicalclaimnum']/input[1]")
 	private WebElement claimNumberField;
 	
 	@FindBy(id = "part-a")
