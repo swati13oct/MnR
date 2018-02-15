@@ -45,8 +45,8 @@ Feature: To test Send us a question Widget and Click to call functionality in co
     Then user enters invalidate alternative email ID in sendUS A question widget
 
     Examples: 
-      | plantype | memberType |
-      | MAPD     | Group      |
+      | plantype | memberType   |
+      | MAPD     | CALPERSGroup |
 
   @invalidConfirmEmail
   Scenario Outline: Validate  invalid confirm aletrnative emailIds in contact us redesign page
@@ -57,8 +57,8 @@ Feature: To test Send us a question Widget and Click to call functionality in co
     Then user enters invalidate Confirm email ID in sendUS A question widget
 
     Examples: 
-      | plantype | memberType |
-      | MAPD     | Group      |
+      | plantype | memberType   |
+      | MAPD     | CALPERSGroup |
 
   @blankSendUsQuestion
   Scenario Outline: validate user enters blank text  in sendUS A question  message widget in contact us redesign page
@@ -69,8 +69,8 @@ Feature: To test Send us a question Widget and Click to call functionality in co
     Then user enters blank text  in sendUS A question  message widget
 
     Examples: 
-      | plantype | memberType |
-      | MAPD     | Group      |
+      | plantype | memberType   |
+      | MAPD     | CALPERSGroup |
 
   @invalidPhone
   Scenario Outline: validate user enters invalid phone number  in sendUS A question widget in contact us redesign page
@@ -81,8 +81,8 @@ Feature: To test Send us a question Widget and Click to call functionality in co
     Then user enters invalid phone number  in sendUS A question widget
 
     Examples: 
-      | plantype | memberType |
-      | MAPD     | Group      |
+      | plantype | memberType   |
+      | MAPD     | CALPERSGroup |
 
   @GroupEmailConfirmMessage
   Scenario Outline: Verify Group Email Widget Confirm Request in contact us redesign page
@@ -94,8 +94,8 @@ Feature: To test Send us a question Widget and Click to call functionality in co
     And UI should be replaced by a confirmation display
 
     Examples: 
-      | plantype | memberType |
-      | MAPD     | Group      |
+      | plantype | memberType   |
+      | MAPD     | CALPERSGroup |
 
   #@secureEmailForCombo
   #Scenario Outline: Verify secureEmail Widget using using Email Address on File radio button in contact us redesign page of  AARP site
@@ -174,8 +174,8 @@ Feature: To test Send us a question Widget and Click to call functionality in co
     And user clicks on send a Request button on Click to call widget
 
     Examples: 
-      | plantype | memberType |
-      | MAPD     | Group      |
+      | plantype | memberType   |
+      | MAPD     | CALPERSGroup |
 
   @clickToCall
   Scenario Outline: Verify Click to Call Widget Drop-Down Request Routing and Confirmation message functionality on contactUS redesign page
@@ -187,8 +187,8 @@ Feature: To test Send us a question Widget and Click to call functionality in co
     And user clicks on Request Confirmation Click
 
     Examples: 
-      | plantype | memberType |
-      | MAPD     | Group      |
+      | plantype | memberType   |
+      | MAPD     | CALPERSGroup |
 
   @sendUsQuestionPDP
   Scenario Outline: Verify sendUs A Question Widget page for PDP display section in contact us redesign page
