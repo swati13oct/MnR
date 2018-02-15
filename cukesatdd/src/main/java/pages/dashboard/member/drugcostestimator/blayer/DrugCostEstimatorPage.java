@@ -335,7 +335,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			NewDCEUrl = "https://team-h-medicare.uhc.com/member/drug-lookup/overview.html#/drug-cost-estimator";
 			//"https://team-h-werally.uhc.com/content/medicare/member/drug-lookup/overview.html#/drug-cost-estimator";
 			//           https://team-h-werally.uhc.com/content/medicare/member/drug-lookup/overview.html
-		}else if(evironment.equals("stage")){
+		}else if(evironment.equals("stage") || evironment.equals("awe-stage")){
 			NewDCEUrl = "https://stage-medicare.uhc.com/content/medicare/member/drug-lookup/overview.html#/drug-cost-estimator";
 		}else if(evironment.equals("test-a")){
 			NewDCEUrl = "https://test-a-medicare.uhc.com/content/medicare/member/drug-lookup/overview.html#/drug-cost-estimator";
