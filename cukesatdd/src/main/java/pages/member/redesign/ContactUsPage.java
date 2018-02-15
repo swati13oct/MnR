@@ -282,7 +282,7 @@ public class ContactUsPage extends UhcDriver{
 	 */
 	public void validateThankYouMessage(String expectedMessage){
 		
-		Assert.assertEquals("Your Request has Been Received", requestReceivedMessageHeader.getText().trim());
+		Assert.assertEquals("Request Confirmed", requestReceivedMessageHeader.getText().trim());
 		Assert.assertEquals(expectedMessage, thankYouMessage.getText().trim());
 		
 	}
