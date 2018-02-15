@@ -237,8 +237,8 @@ public class ContactusRedesignStepDefinition {
 			
 			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 			
-			String expectedMessage = "Thank you. We value your input, and will be happy to answer your questions."
-				+ " A Customer Service representative will review your question and respond to you shortly.";
+			String expectedMessage = "Thank you for your inquiry. We value your input, and would be happy to answer your questions."
+				+ " A Customer Service Advocate will review your question and respond to you shortly.";
 			
 			contactusPage.validateThankYouMessage(expectedMessage);
 			

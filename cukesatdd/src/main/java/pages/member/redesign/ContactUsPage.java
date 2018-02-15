@@ -779,7 +779,7 @@ public class ContactUsPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			continueButton.click();
+			/*continueButton.click();
 			waitforElement(ConfirmationWidgetButton);
 			
 			waitforElement(sendAmessageButton);
@@ -790,7 +790,7 @@ public class ContactUsPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+			*/
 			
 		}
 		else

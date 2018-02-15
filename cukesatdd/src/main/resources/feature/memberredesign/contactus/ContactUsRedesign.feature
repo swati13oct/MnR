@@ -10,21 +10,20 @@ Feature: To test Send us a question Widget and Click to call functionality in co
     Then user validates secure email widget UI in redesign contact us page
 
     Examples: 
-      | plantype | memberType 	|
+      | plantype | memberType   |
       | MAPD     | COSMOSCLAIMS |
 
   #@secureEmailWidgetGroup
   #Scenario Outline: Verify Send us a question Widget section in contact us redesign page which covers 1,3,4
-    #Given registered UMS member with following attributes
-      #| Plan Type   | <plantype>   |
-      #| Member Type | <memberType> |
-    #When the user navigates to contact us page in UHC site
-    #Then user validates Group secure email widget  in redesign contact us page
-#
-    #Examples: 
-      #| plantype | memberType 			|
-      #| MAPD     | SDCERAGroup      |
-
+  #Given registered UMS member with following attributes
+  #| Plan Type   | <plantype>   |
+  #| Member Type | <memberType> |
+  #When the user navigates to contact us page in UHC site
+  #Then user validates Group secure email widget  in redesign contact us page
+  #
+  #Examples:
+  #| plantype | memberType 			|
+  #| MAPD     | SDCERAGroup      |
   @secureEmailWidgetCancelForGroup
   Scenario Outline: Verify cancel click on Group secure email widget  in redesign contact us page
     Given registered UMS member with following attributes
@@ -34,8 +33,8 @@ Feature: To test Send us a question Widget and Click to call functionality in co
     Then user validates cancel click on Group secure email widget  in redesign contact us page
 
     Examples: 
-      | plantype | memberType 			|
-      | MAPD     | SDCERAGroup      |
+      | plantype | memberType  |
+      | MAPD     | SDCERAGroup |
 
   @invalidEmail
   Scenario Outline: Validate  invalid aletrnative emailIds in contact us redesign page
@@ -98,30 +97,28 @@ Feature: To test Send us a question Widget and Click to call functionality in co
       | plantype | memberType |
       | MAPD     | Group      |
 
-  @secureEmailForCombo
-  Scenario Outline: Verify secureEmail Widget using using Email Address on File radio button in contact us redesign page of  AARP site
-    Given registered UMS member with following attributes
-      | Plan Type   | <plantype>   |
-      | Member Type | <memberType> |
-    When the user navigates to contact us page in UHC site
-    Then user validates secure email widget functionality using Email Address on File radio button
-
-    Examples: 
-      | plantype | memberType  |
-      | MAPD     | MAPDwithMedSupp |
-
-  @secureMessagingModel
-  Scenario Outline: Verify secureMessaging Model section upon clicking the send A Message button
-    Given registered UMS member with following attributes
-      | Plan Type   | <plantype>   |
-      | Member Type | <memberType> |
-    When the user navigates to contact us page in UHC site
-    Then user validates secure Messaging Model
-
-    Examples: 
-      | plantype | memberType  |
-      | MAPD     | MAPDwithMedSupp |
-
+  #@secureEmailForCombo
+  #Scenario Outline: Verify secureEmail Widget using using Email Address on File radio button in contact us redesign page of  AARP site
+  #Given registered UMS member with following attributes
+  #| Plan Type   | <plantype>   |
+  #| Member Type | <memberType> |
+  #When the user navigates to contact us page in UHC site
+  #Then user validates secure email widget functionality using Email Address on File radio button
+  #
+  #Examples:
+  #| plantype | memberType  |
+  #| MAPD     | MAPDwithMedSupp |
+  #@secureMessagingModel
+  #Scenario Outline: Verify secureMessaging Model section upon clicking the send A Message button
+  #Given registered UMS member with following attributes
+  #| Plan Type   | <plantype>   |
+  #| Member Type | <memberType> |
+  #When the user navigates to contact us page in UHC site
+  #Then user validates secure Messaging Model
+  #
+  #Examples:
+  #| plantype | memberType  |
+  #| MAPD     | MAPDwithMedSupp |
   @secureMessagingModelCancel
   Scenario Outline: Verify secureMessaging Model section upon clicking the send A Message button and cancel link
     Given registered UMS member with following attributes
@@ -131,21 +128,20 @@ Feature: To test Send us a question Widget and Click to call functionality in co
     Then user validates secure Messaging Model Cancel link
 
     Examples: 
-      | plantype | memberType  |
-      | MAPD     | MAPDwithMedSupp |
+      | plantype | memberType |
+      | PDP      | HIP        |
 
-  @secureMessagingModelPrescriptionLink
-  Scenario Outline: Verify secureMessaging Model section upon clicking the send A Message button
-    Given registered UMS member with following attributes
-      | Plan Type   | <plantype>   |
-      | Member Type | <memberType> |
-    When the user navigates to contact us page in UHC site
-    Then user validates secure Messaging Model Prescription link click on SecureEmail Model
-
-    Examples: 
-      | plantype | memberType  |
-      | MAPD     | MAPDwithMedSupp |
-
+  #@secureMessagingModelPrescriptionLink
+  #Scenario Outline: Verify secureMessaging Model section upon clicking the send A Message button
+  #Given registered UMS member with following attributes
+  #| Plan Type   | <plantype>   |
+  #| Member Type | <memberType> |
+  #When the user navigates to contact us page in UHC site
+  #Then user validates secure Messaging Model Prescription link click on SecureEmail Model
+  #
+  #Examples:
+  #| plantype | memberType  |
+  #| MAPD     | MAPDwithMedSupp |
   @goToInbox
   Scenario Outline: Verify go To Inbox button on contactUS redesign page for opted in member
     Given registered UMS member with following attributes
@@ -155,7 +151,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
     Then user validates go To Inbox button  in redesign contact us page
 
     Examples: 
-      | plantype | memberType  |
+      | plantype | memberType      |
       | MAPD     | MAPDwithMedSupp |
 
   #	@NoSecureEmailForNonEligibleMember
