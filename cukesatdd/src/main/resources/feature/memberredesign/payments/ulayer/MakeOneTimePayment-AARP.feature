@@ -1,4 +1,4 @@
-@payments
+
 Feature: To test the payment flow on AARP site 
 Scenario Outline: Verify one time payment for total ammount due in AARP site 
 Given registered AARP with a planType member for AARP site
