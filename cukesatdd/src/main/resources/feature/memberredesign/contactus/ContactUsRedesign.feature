@@ -121,16 +121,15 @@ Feature: To test Send us a question Widget and Click to call functionality in co
   #| MAPD     | MAPDwithMedSupp |
   #@secureMessagingModelCancel
   #Scenario Outline: Verify secureMessaging Model section upon clicking the send A Message button and cancel link
-    #Given registered UMS member with following attributes
-      #| Plan Type   | <plantype>   |
-      #| Member Type | <memberType> |
-    #When the user navigates to contact us page in UHC site
-    #Then user validates secure Messaging Model Cancel link
-#
-    #Examples: 
-      #| plantype | memberType |
-      #| PDP      | PDPwithHIP        |
-
+  #Given registered UMS member with following attributes
+  #| Plan Type   | <plantype>   |
+  #| Member Type | <memberType> |
+  #When the user navigates to contact us page in UHC site
+  #Then user validates secure Messaging Model Cancel link
+  #
+  #Examples:
+  #| plantype | memberType |
+  #| PDP      | PDPwithHIP        |
   #@secureMessagingModelPrescriptionLink
   #Scenario Outline: Verify secureMessaging Model section upon clicking the send A Message button
   #Given registered UMS member with following attributes
@@ -201,4 +200,4 @@ Feature: To test Send us a question Widget and Click to call functionality in co
 
     Examples: 
       | plantype | memberType |
-      | MAPD     | PDP        |
+      | PDP      | rx_eob     |
