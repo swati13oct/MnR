@@ -40,7 +40,7 @@ public class LoginPage extends UhcDriver {
 	private static String PAGE_URL_TEAM_H_TEST_HARNESS = MRConstants.TEAMH_URL_TESTHARNES;
 	private static String PAGE_URL_TEAM_MEDICARE_TESTHARNESS = MRConstants.TEAM_MEDICARE_TESTHARNESS;
 	private static String STAGE_DASHBOARD_URL = MRConstants.STAGE_DASHBOARD_NEW_DOMAIN_URL;
-	private static String TEAM_CI1_NEW_DASHBOARD_URL = MRConstants.TEAM_CI1_NEW_DASBOARD_URL;
+	private static String TEAM_T_NEW_DASHBOARD_URL = MRConstants.TEAM_T_NEW_TESTHANESS_URL;
 	
 
 	@FindBy(id = "fd_memberSignInButton")
@@ -275,9 +275,11 @@ public class LoginPage extends UhcDriver {
 	public void navigateToNewDashboardUrl(){
 		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage"))
 		{
+			System.out.println(STAGE_DASHBOARD_URL);
 			start(STAGE_DASHBOARD_URL);
 			System.out.println(STAGE_DASHBOARD_URL);
 			System.out.println("User is Navigating to Stage Dashboard");
+			
 		}
 		else{
 			
@@ -343,9 +345,17 @@ public class LoginPage extends UhcDriver {
 		sendkeys(thPassword, password);
 		thSignIn.click();
 		
+if ( MRScenario.environmentMedicare.equalsIgnoreCase("team-ci1") || (MRScenario.environmentMedicare.equalsIgnoreCase("team-t"))) {
+			
+			Alert alert = driver.switchTo().alert();
+	        alert.accept();
+	        //Alert alert1 = driver.switchTo().alert();
+	        //alert1.accept();
+	        } 
+		
 		try{
 			
-			if (MRScenario.environment.equalsIgnoreCase("stage")) {
+			if (MRScenario.environmentMedicare.equalsIgnoreCase("stage") || (MRScenario.environmentMedicare.equalsIgnoreCase("team-t")  || ( MRScenario.environmentMedicare.equalsIgnoreCase("team-ci1")))) {
 				Thread.sleep(50000);	
 			}else {
 				
@@ -356,9 +366,9 @@ public class LoginPage extends UhcDriver {
             	System.out.println("iPerceptionPopUp is Displayed");
                   iPerceptionPopUp.click();
             }
-     }catch(Exception e)        {
+              }catch(Exception e)        {
             System.out.println("iPerception Pop Up not displayed");
-     }
+         }
 
 				if(currentUrl().contains("testharness.html") || currentUrl().contains("/dashboard"))
 

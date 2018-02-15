@@ -269,7 +269,7 @@ public class MRConstants {
   
   public static final String UHCM_TEAM_E_URL = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com";
   
-  public static final String MEMBER_AUTH = "https://"+MRScenario.environment+"-generic.uhc.com/content/dashboard/guest/memberauth.html#/memberAuthLogin";
+  public static final String MEMBER_AUTH = "https://"+MRScenario.environment+"-generic.uhc.com/content/medicare/memberauth.html#/memberAuthLogin";
 
   public static final String PORTFOLIO_PAGE_URL = "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com";
 
@@ -312,6 +312,9 @@ public class MRConstants {
   public static final String DASHBOARD_URL ="https://"+MRScenario.environmentMedicare+"-medicare.uhc.com/";
   
   public static final String REDESIGN_LOGIN_URL = "https://"+MRScenario.environmentMedicare+"-medicare." + getDomain() + "/?testharness=true";
+  
+  public static final String TEAM_T_NEW_TESTHANESS_URL = "https://team-t-medicare.ose-elr-core.optum.com/medicare/login/overview.html?testharness=true";
+
    
 
   public static String getDomain() {

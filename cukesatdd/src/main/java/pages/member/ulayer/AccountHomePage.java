@@ -988,21 +988,19 @@ driver.switchTo().window(mainwindow);
 	
 public pages.dashboard.member.ulayer.ClaimSummarypage navigateToClaimsSummaryPage() {
 		
-		if (MRScenario.environment.equalsIgnoreCase("team-h") || MRScenario.environment.equalsIgnoreCase("test-a")) {
+		if (MRScenario.environmentMedicare.equalsIgnoreCase("team-h") || MRScenario.environmentMedicare.equalsIgnoreCase("test-a") || (MRScenario.environmentMedicare.equalsIgnoreCase("team-t") || MRScenario.environment.equalsIgnoreCase("team-ci1"))) {
 			System.out.println("Go to claims link is present "+driver.findElement(By.xpath("//a[text()='Go to Claims page']")).isDisplayed());
-			driver.findElement(By.xpath("//a[text()='Go to Claims page']")).click();
-			
+			driver.findElement(By.xpath("//a[text()='Go to Claims page']")).click();			
 		}
-
-		else if (MRScenario.environment.equalsIgnoreCase("stage")) {
-			System.out.println("user is on Stage login page");			
-			//CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);			
+		else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
+			System.out.println("user is on Stage login page");						
 			if(driver.getCurrentUrl().contains("/dashboard"));
 			{
 				System.out.println("User is on dashboard page and URL is ====>"+driver.getCurrentUrl());
 				claimsDashboardLink.click();
 				try {
-					Thread.sleep(10000);
+					Thread.sleep(10000);	
+					
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
