@@ -203,23 +203,23 @@ public class PharmacyLocatorStepDefinitionUHC {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		
-		/*PharmacyResultPage pharmacyResultPage = pharmacySearchPage
+		PharmacyResultPage pharmacyResultPage = pharmacySearchPage
 				.showAllPharmacies();
 
 		if (pharmacyResultPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_RESULTS_PAGE,
-					pharmacyResultPage);*/
+					pharmacyResultPage);
 
 		
 			/* Get actual data */
-			/*JSONObject pharmacyResultActualJson = pharmacyResultPage.pharmacyResultJson;
+			JSONObject pharmacyResultActualJson = pharmacyResultPage.pharmacyResultJson;
 			getLoginScenario().saveBean(
 					PharmacySearchCommonConstants.PHARMACY_RESULT_ACTUAL,
 					pharmacyResultActualJson);
 
 		} else {
 			Assert.fail("Failed to load Pharmacy search page");
-		}*/
+		}
 
 	}
 
@@ -234,21 +234,21 @@ public class PharmacyLocatorStepDefinitionUHC {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 
-		/*PharmacyResultPage pharmacyResultPage = pharmacySearchPage.searchSelectingPharmacyTypes(pharmacyTypeArray);
+		PharmacyResultPage pharmacyResultPage = pharmacySearchPage.searchSelectingPharmacyTypes(pharmacyTypeArray);
 
 		if (pharmacyResultPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_RESULTS_PAGE,
-					pharmacyResultPage);*/
+					pharmacyResultPage);
 
 			/* Get actual data */
-			/*JSONObject pharmacyResultActualJson = pharmacyResultPage.pharmacyResultJson;
+			JSONObject pharmacyResultActualJson = pharmacyResultPage.pharmacyResultJson;
 			getLoginScenario().saveBean(
 					PharmacySearchCommonConstants.PHARMACY_RESULT_ACTUAL,
 					pharmacyResultActualJson);
 
 		} else {
 			Assert.fail("Failed to load Pharmacy search page");
-		}*/
+		}
 
 	}
 
