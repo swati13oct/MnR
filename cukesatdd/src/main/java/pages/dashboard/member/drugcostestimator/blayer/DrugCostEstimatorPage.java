@@ -198,6 +198,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(xpath = "//p[contains(text(),'STEP3:')]/following-sibling::span[p[contains(text(),'COST')]]")
 	public WebElement step3;
+	
+	@FindBy(xpath = ".//*[@id='costsTabId']/a")
+	public WebElement costTab;
 
 	@FindBy(id = "total_annauldeductible")
 	public WebElement left_rail_deductible;
@@ -291,7 +294,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	 */
 	public AddNewDrugModal clickOnAddDrug() throws InterruptedException {
 		Thread.sleep(5000);
-		waitforElement(addDrug);
+		//waitforElement(addDrug);
 		addDrug.click();
 		//addDrug.click();
 		System.out.println("Current Page title :: " + driver.getTitle());
@@ -332,9 +335,12 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			NewDCEUrl = "https://team-h-medicare.uhc.com/member/drug-lookup/overview.html#/drug-cost-estimator";
 			//"https://team-h-werally.uhc.com/content/medicare/member/drug-lookup/overview.html#/drug-cost-estimator";
 			//           https://team-h-werally.uhc.com/content/medicare/member/drug-lookup/overview.html
-		}else if(evironment.equals("stage")){
+		}else if(evironment.equals("stage") || evironment.equals("awe-stage")){
 			NewDCEUrl = "https://stage-medicare.uhc.com/content/medicare/member/drug-lookup/overview.html#/drug-cost-estimator";
-		}else if(evironment.equals("team-ci1")){
+		}else if(evironment.equals("test-a") || evironment.equals("awe-test-a")){
+			NewDCEUrl = "https://test-a-medicare.uhc.com/content/medicare/member/drug-lookup/overview.html#/drug-cost-estimator";
+		}
+		else if(evironment.equals("team-ci1")){
 			NewDCEUrl = "https://team-ci1-medicare.ose-elr-core.optum.com/content/medicare/member/drug-lookup/overview.html#/drug-cost-estimator";
 		}
 
@@ -980,8 +986,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	 * Navigates to step 3 
 	 */
 	public void navigateToStep3() throws InterruptedException {
-		waitforElement(step2);
-		step3.click();
+		//waitforElement(step2);
+		costTab.click();
 		Thread.sleep(10000);
 	}
 
@@ -1014,10 +1020,11 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		AddNewDrugModal addNewDrugModal = clickOnAddDrug();
 		addNewDrugModal.typeDrugName(drug);
 		addNewDrugModal.submit();
-		// addNewDrugModal.selectDrug(drug);
+		//addNewDrugModal.selectDrug(drug);
+		addNewDrugModal.continueAddNewDrugModal();
 		AddDrugDetails addDrugDetails = new AddDrugDetails(driver);
-
-		//		SavingsOppurtunity savingsOppurtunity = addDrugDetails.continueAddDrugDetailsModal();
+		
+		addDrugDetails.continueAddDrugDetails();
 
 		// if(addDrugDetails.continueAddDrugDetails()!=null){
 		SavingsOppurtunity savingsOppurtunity1 = new SavingsOppurtunity(driver);

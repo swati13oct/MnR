@@ -111,7 +111,7 @@ public class UlayerHomePage extends UhcDriver {
 
 	public PaymentHistoryPage navigateToPayments() throws InterruptedException {
 
-		driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/payments/overview.html");
+		driver.navigate().to(Page_URL+".com/content/medicare/member/payments/overview.html");
 /*		
 		GoToPaymentsLink.click();
 */		CommonUtility.checkPageIsReady(driver);
@@ -128,7 +128,7 @@ public class UlayerHomePage extends UhcDriver {
 	public MyProfilesPage navigateToProfAndPref() throws InterruptedException {
 
 		//MyProfileLink.click();
-		driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/account/profile.html");
+		driver.navigate().to(Page_URL+".com/content/medicare/member/account/profile.html");
 		
 		CommonUtility.checkPageIsReady(driver);
 		if (MyProfilePageHeader.isDisplayed()) {
@@ -158,7 +158,7 @@ public class UlayerHomePage extends UhcDriver {
 	public MedicalClaimSummaryPage navigateToMedicalClaimsSummary() throws InterruptedException {
 		//ClaimsLink.click();
 		
-		driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/claims.html#/overview");
+		driver.navigate().to(Page_URL+".com/content/medicare/member/claims.html#/overview");
 		CommonUtility.checkPageIsReady(driver);
 		if (validate(ClaimsPageHeader)) {
 			System.out.println("Claims Page loaded");
@@ -169,7 +169,7 @@ public class UlayerHomePage extends UhcDriver {
 	}
 
 	public EoBSearchPage navigateToBenefitsAndCoverage() throws InterruptedException {
-		driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/eob.html");
+		driver.navigate().to(Page_URL+".com/content/medicare/member/eob.html");
 		//EOBsearchLink.click();
 
 		CommonUtility.checkPageIsReady(driver);
@@ -207,7 +207,7 @@ public class UlayerHomePage extends UhcDriver {
 	public ContactUsPage navigatesToContactUsPage() throws InterruptedException {
 
 		//GoToContactUsLnk.click();
-		driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/contact-us/overview.html#/contact-us-two");
+		driver.navigate().to(Page_URL+".com/content/medicare/member/contact-us/overview.html#/contact-us-two");
 		CommonUtility.checkPageIsReady(driver);
 		if (driver.findElement(By.xpath("//div[@ng-controller='contactUsCtrl']")).isDisplayed()){
 			return new ContactUsPage(driver);

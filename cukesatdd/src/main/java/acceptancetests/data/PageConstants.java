@@ -396,8 +396,19 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 	   
 	   public static final String DASHBOARD_FORMS_AND_RESOURCES_PAGE = "FormsAndResourcesPage";
 	   public static final String COMPARE_PLANS_PAGE = "comparePlansPage";
+
+	   public static final String LOGIN_PAGE = "loginPage";
 	   
-	public static final String EOB_Page = "eobPage";
+	   public static final String ACCOUNT_HOME_PAGE = "accountHomePage";
+	   
+	   public static final String ADD_DRUG_DETAILS = "addDrugDetails";
+	   
+	   public static final String BENEFITS_SUMMARY_PAGE = "benefitsSummaryPage";
+	   
+	   public static final String SAVING_OPPORTUNITY = "savingopportunity";
+
+	   public static final String EOB_Page = "eobPage";
 	
-	public static final String MEDICAL_EOB_PAGE = "medicalEobPage";
+	   public static final String MEDICAL_EOB_PAGE = "medicalEobPage";
+
 }

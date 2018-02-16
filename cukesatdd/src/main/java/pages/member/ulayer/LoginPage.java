@@ -277,21 +277,16 @@ public class LoginPage extends UhcDriver {
 		{
 			System.out.println(STAGE_DASHBOARD_URL);
 			start(STAGE_DASHBOARD_URL);
+			System.out.println(STAGE_DASHBOARD_URL);
 			System.out.println("User is Navigating to Stage Dashboard");
 			
 		}
 		else{
 			
 			start(MRConstants.REDESIGN_LOGIN_URL);
-			System.out.println("user is on testharness");	
-			}
-		/*else if (MRScenario.environment.equalsIgnoreCase("team-t")) {
-			start(TEAM_T_NEW_DASHBOARD_URL);
-			System.out.println("User is on team-t Environment ");
-			
-			
+			System.out.println("user is on Testharness Environment");
 		}
-		else
+		/*else
 		{
 			start(PAGE_URL_TEAM_MEDICARE_TESTHARNESS);
 			System.out.println("User is on Medicare Test harness page");	
@@ -390,20 +385,19 @@ if ( MRScenario.environmentMedicare.equalsIgnoreCase("team-ci1") || (MRScenario.
 			System.out.println("teamhloginWith is returing null. Please Update the above condition As per your Needs");
 			
 				return null;
-		
 	}
 	
 	public Object doLoginWith(String username, String password) {
 		sendkeys(thUserName, username);
 		sendkeys(thPassword, password);
 		thSignIn.click();
-		if ( MRScenario.environment.equals("team-e")){
+		if ( MRScenario.environmentMedicare.equals("team-e") || MRScenario.environmentMedicare.equals("team-ci1")){
 
 			Alert alert = driver.switchTo().alert();
 			alert.accept();
 		} 
 		try{
-			Thread.sleep(40000);
+			Thread.sleep(70000);
 			if (validate(iPerceptionPopUp)) {
 				System.out.println("iPerceptionPopUp is Displayed");
 				iPerceptionPopUp.click();
@@ -424,7 +418,7 @@ if ( MRScenario.environmentMedicare.equalsIgnoreCase("team-ci1") || (MRScenario.
 			return new TerminatedHomePage(driver);
 		}
 
-		System.out.println("teamhloginWith is returing null. Please Update the above condition As per your Needs");
+		System.out.println("login is returing null. Please Update the above condition As per your Needs");
 
 		return null;
 	}

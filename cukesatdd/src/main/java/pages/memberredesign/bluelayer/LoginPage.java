@@ -49,6 +49,8 @@ public class LoginPage extends UhcDriver {
 		// TODO Auto-generated method stub
 		start(PAGE_URL_MEM_REDESIGN);
 		//start(PAGE_URL_TEST_HARNESS);
+		
+		System.out.println("**** current URL******"+driver.getCurrentUrl());
 		validate(thUserName);
 		validate(thPassword);
 		validate(thSignIn);
