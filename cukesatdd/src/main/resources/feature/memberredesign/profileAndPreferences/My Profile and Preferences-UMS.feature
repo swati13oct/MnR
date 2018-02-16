@@ -191,7 +191,7 @@ Feature: To test Profile and Preferences page .
          | planType|
          | MAPD     |
           | MA       |
-         # |PDP       |
+          |PDP       |
           #|SHIP      |
 
 

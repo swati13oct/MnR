@@ -583,14 +583,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 	 * @toDo :  Validates the Save Functionality of the Temporary address section
 	 */
 
-	@Then("^the user validates the functionality of save Button in Temporary adrress section")
-	public void UserValidatestempaddressSaveButton() {
-		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
-				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
-		ProfilePreferencesPage.validatetempaddressSave();
-
-	}
 
 	/** 
 	 * @toDo :  Validates the Cancel Functionality of the temp address section

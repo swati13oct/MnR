@@ -173,6 +173,9 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	@FindBy(className = "edit-btn")
 	private WebElement tempEditButton;
+	
+	@FindBy(className = "add-address-btn")
+	private WebElement addAddress;
 
 	@FindBy(id = "temporaryAddress")
 	private WebElement Edittemporaryaddressform;
@@ -234,7 +237,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(xpath = "html/body/div[2]/div[3]/div[2]/div[1]/div/div/div/div/div[1]/div/div/div/div/div/div/a")
 	private WebElement Profilenprefernceslink;
 
-	@FindBy(id = "mail-preferences-selector")
+	@FindBy(className = "atdd-plan-name")
 	private WebElement planNameGoGreen;
 
 	@FindBy(className = "atdd-section-heading")
@@ -720,6 +723,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 		if (gopaperlessbutton.isDisplayed()) {
 			gopaperlessbutton.click();
 		} else {
+			
 			EditPreferencesButton.click();
 		}
 
@@ -737,8 +741,8 @@ public class ProfilePreferencesPage extends UhcDriver {
 	public void validateheader() {
 		validate(gogreenleaf);
 		validate(goggreenheader);
-		validate(communicationheader);
-		validate(Profilenprefernceslink);
+	
+		
 
 	}
 
@@ -865,7 +869,16 @@ public class ProfilePreferencesPage extends UhcDriver {
 	 */
 	public void validatetempaddressEditElements() {
 		// TODO Auto-generated method stub'
+		if(tempEditButton.isDisplayed())
+		{
 		tempEditButton.click();
+		}
+		else
+		{
+			
+			addAddress.click();
+			
+		}
 		validate(Edittemporaryaddressform);
 		validate(StreetAddress2);
 		validate(City);
@@ -893,13 +906,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	}
 
-	/**
-	 * @toDo : Validates the Save Functionality of the Temporary address section
-	 */
 
-	public void validatetempaddressSave() {
-
-	}
 
 	/**
 	 * @toDo : Validates the Cancel Functionality of the temp address section
@@ -1005,8 +1012,11 @@ public class ProfilePreferencesPage extends UhcDriver {
 	 */
 	public void validateCheckbox() {
 		// TODO Auto-generated method stub
-		validate(iHavereadCheckbox);
+		
+		if(iHavereadCheckbox.isDisplayed())
+		{
 		iHavereadCheckbox.click();
+		}
 	}
 
 	/**
@@ -1017,7 +1027,16 @@ public class ProfilePreferencesPage extends UhcDriver {
 		validate(savePreferencesButton);
 		if (iHavereadCheckbox.isSelected()) {
 			savePreferencesButton.click();
-			validate(EditPreferenceButton);
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+				Assert.assertTrue(EditPreferenceButton.isDisplayed());
+			
+			
 		}
 
 	}
