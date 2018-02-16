@@ -30,9 +30,6 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(className = "atdd-profile-membernumber")
 	private WebElement memberId;
 
-	@FindBy(xpath = "//*[@id='tab-1']//div[1]//div//p[2]//text()")
-	private WebElement memberIdtext;
-
 	@FindBy(xpath = "//span[contains(text(),'Username')]")
 	private WebElement Username;
 
@@ -148,20 +145,21 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='phoneCardHeight']/div[1]/div/div/div/div/div/div/div/a")
 	private WebElement PhoneEditButton;
-
+	
+	
 	@FindBy(xpath = "//*[@id='tab-1']/div[3]/div[1]/div/div[2]/div/div/div/div[1]/div/div/div[2]/div[1]/div[1]/div/span[1]")
 	private WebElement Daytimephone;
 
 	@FindBy(id = "phone-form")
 	private WebElement PhoneForm;
 
-	@FindBy(xpath = ".//*[@id='phone-form']/div[3]/div/button")
+	@FindBy(className = "atdd-phone-save")
 	private WebElement PhoneSaveButton;
 
-	@FindBy(xpath = "//*[@id='phone-form']/div[3]/div/a")
+	@FindBy(className = "atdd-phone-bottomcancel")
 	private WebElement PhoneCancelButton;
 
-	@FindBy(xpath = ".//*[@id='phone']/div[1]/div/div/div/div/div/a[2]")
+	@FindBy(className = "atdd-phoneedit-cancel")
 	private WebElement PhoneTopCancelButton;
 
 	@FindBy(id = "daytimePhone")
@@ -1048,6 +1046,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 		validate(Technicalsupportsection);
 		validate(GeneralQuestionsSection);
 		validate(ClaimsSupportSection);
+		
 	}
 
 	public void validateTempAddressShip() {

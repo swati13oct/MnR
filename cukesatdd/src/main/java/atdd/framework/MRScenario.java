@@ -68,7 +68,6 @@ public class MRScenario {
 
                private static Map<String, Map<String, JSONObject>> expectedDataMapBluelayer = new LinkedHashMap<String, Map<String, JSONObject>>();
                public static String environment;
-               
                public static String environmentMedicare;
                
                public static String domain;
@@ -102,7 +101,7 @@ public class MRScenario {
                               }
                }
 
-               WebDriver webDriver;
+           static WebDriver webDriver;
 
                public Object getBean(String id) {
                               Object result = scenarioObjectMap.get(id);
@@ -839,4 +838,12 @@ public class MRScenario {
 
                }
 
+               
+               public void DriverQuit()
+          
+               {
+            	   webDriver.quit();
+               }
+               
+               
 }

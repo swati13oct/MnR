@@ -706,7 +706,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 	 * @toDo :  Validates the Need help section for ship member
 	 */
 
-	@Then("^ the user validates the need help section for ship member")
+	@Then("^the user validates the need help section for ship member")
 	public void UserValidatesNeedHelpShip() {
 		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
