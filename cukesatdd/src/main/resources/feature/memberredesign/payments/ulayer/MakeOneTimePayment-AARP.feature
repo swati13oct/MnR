@@ -241,7 +241,7 @@ Examples:
 	| planType |
 	| SHIP     |
 
-@TeamHActual @theSpartans
+@TeamHActual 
 Scenario Outline: Verify the Timestamp on OneTime Payment Submitted page
 Given TimeStampTheSpartans the user is on the Team-H AARP medicare site login page
 When TimeStampTheSpartans the user logs in TeamH with a registered AMP with following details in AARP site
@@ -257,7 +257,7 @@ Examples:
 	| FED      |
 
 
-@TeamHAuto @theSpartans
+@TeamHAuto 
 Scenario Outline: Verify the Timestamp on Automatic Payment Submitted page
 Given TimeStampTheSpartans the user is on the Team-H AARP medicare site login page
 When TimeStampTheSpartans the user logs in TeamH with a registered AMP with following details in AARP site
@@ -288,7 +288,7 @@ Examples:
 	| FED     |
 
 
-@US764275 @theSpartans
+@US764275 
 Scenario Outline: Verify the Timestamp on OneTime Payment Submitted page
 Given TimeStampTheSpartans the user is on the Team-H AARP medicare site login page
 When TimeStampTheSpartans the user logs in TeamH with a registered AMP with following details in AARP site
