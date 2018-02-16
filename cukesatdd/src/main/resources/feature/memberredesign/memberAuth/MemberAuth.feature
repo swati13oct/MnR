@@ -10,6 +10,6 @@ Feature: To test Member Auth Dashboard page.
       | Error Message | <errormessage> |
 
     Examples: 
-      | username  | password | errormessage                                    |
-      | qavgogine |          | Either your UserName or Password was incorrect. |
-    # |       username   |   qavgogine           | Either your UserName or Password was incorrect.|
+      | username  | password  | errormessage                                    |
+      | qavgogine |           | Either your UserName or Password was incorrect. |
+      | username  | qavgogine | Either your UserName or Password was incorrect. |

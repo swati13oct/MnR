@@ -24,6 +24,7 @@ import pages.member.redesign.NewRegistrationPage;
 import pages.member.redesign.PreferencesPage;
 import pages.member.redesign.RegistrationConfirmationPage;
 import pages.member.redesign.TestHarnessPage;
+import pages.member.ulayer.RallyDashboard;
 import pages.member.ulayer.UNPWAssistancePage;
 import pages.redesign.CommunicationPreferences;
 
@@ -37,7 +38,10 @@ public class MyprofileandPreferencesRedesignStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-	// Login to the application
+	
+	/** 
+	 * @todo :Login to the application
+	 */
 	@Given("^PreferencesSpartans Login to the application$")
 	public void PreferencesSpartans_Login_to_the_application(DataTable givenAttributes)
 			throws InterruptedException {
@@ -60,8 +64,10 @@ public class MyprofileandPreferencesRedesignStepDefinition {
 		NewLoginPage loginPage = new NewLoginPage(wd);
 		CommunicationPreferences compp = new CommunicationPreferences(wd);
 		CommunicationPreferences compp1 = new CommunicationPreferences(wd);
-		compp1 = (CommunicationPreferences) loginPage.loginWith(userName,
-				passWord);
+		/*compp1 = (CommunicationPreferences) loginPage.loginWith(userName,
+				passWord);*/
+		
+		RallyDashboard rallyDashboardPAge = (RallyDashboard) loginPage.loginWith(userName, passWord);
 
 		if (compp != null) {
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -69,7 +75,10 @@ public class MyprofileandPreferencesRedesignStepDefinition {
 			Assert.assertTrue(true);
 		}
 	}
-	// Navigate to preference page
+	
+	/** 
+	 * @todo :Navigate to preference page
+	 */
 	@When("^PreferencesSpartans the user navigates to Prefrences page$")
 	public void PreferencesSpartans_the_user_navigates_to_Prefrences_page()
 			throws InterruptedException {
@@ -85,7 +94,10 @@ public class MyprofileandPreferencesRedesignStepDefinition {
 			Assert.assertTrue(true);
 		}
 	}
-	// change delivery preferences from mail to online or viceversa
+	
+	/** 
+	 * @todo :change delivery preferences from mail to online or viceversa
+	 */
 	@Then("^PreferencesSpartans the user changes delivery preferences$")
 	public void PreferencesSpartans_the_user_changes_delivery_preferences() throws InterruptedException {
 		CommunicationPreferences compp = (CommunicationPreferences) getLoginScenario()

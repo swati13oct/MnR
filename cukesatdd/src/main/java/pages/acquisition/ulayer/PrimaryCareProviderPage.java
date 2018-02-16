@@ -74,7 +74,7 @@ public class PrimaryCareProviderPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='pcpInfo']/p")
 	private WebElement pcpHeader;
 	
-	@FindBy(xpath = ".//*[@id='enrollment-step-1-part-7']/div[1]/div/div[2]/fieldset/a")
+	@FindBy(xpath = ".//*[@id='enrollment-step-1-part-7']//a[@class='cta-button secondary pcp-lookup-button look-but']")
 	private WebElement lookupProviderBtn;
 	
 	public boolean validatePCPPage(){

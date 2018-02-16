@@ -52,8 +52,8 @@ public class AddNewDrugModal extends UhcDriver {
 	public AddNewDrugModal(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		CommonUtility.waitForPageLoad(driver, addNewDrugHeading, 10);
-		String fileName = CommonConstants.ADD_NEW_DRUG_PAGE_DATA;
+		//CommonUtility.waitForPageLoad(driver, addNewDrugHeading, 10);
+		//String fileName = CommonConstants.ADD_NEW_DRUG_PAGE_DATA;
 		//addnewdrug = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_BLAYER_MEMBER);
 		//openAndValidate();
 	}
@@ -113,8 +113,9 @@ public class AddNewDrugModal extends UhcDriver {
 		exceededError.isDisplayed();
 	}
 	public AddDrugDetails continueAddNewDrugModal() {
-		// TODO Auto-generated method stub
-		return null;
+		waitforElement(continueButton);
+		continueButton.click();
+		return new AddDrugDetails(driver);
 	}
 }
 

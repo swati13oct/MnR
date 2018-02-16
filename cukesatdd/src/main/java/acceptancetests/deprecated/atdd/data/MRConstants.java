@@ -307,11 +307,11 @@ public class MRConstants {
 
   public static final String TEAM_G_DEREGISTER_URL = "http://partd-teamg.ose.optum.com/PartDPortalWeb/deregister.jsp";
   
-  public static final String REDESIGN_REGISTRATION_URL = "https://"+MRScenario.environment+"-medicare.uhc.com/medicare/member-registration.html#/get-started";
+  public static final String REDESIGN_REGISTRATION_URL = "https://"+MRScenario.environmentMedicare+"-medicare.uhc.com/medicare/member-registration.html#/get-started";
 
-  public static final String DASHBOARD_URL ="https://"+MRScenario.environment+"-medicare.uhc.com/";
+  public static final String DASHBOARD_URL ="https://"+MRScenario.environmentMedicare+"-medicare.uhc.com/";
   
-  public static final String REDESIGN_LOGIN_URL = "https://"+MRScenario.environment+"-medicare." + getDomain() + "/?testharness=true";
+  public static final String REDESIGN_LOGIN_URL = "https://"+MRScenario.environmentMedicare+"-medicare." + getDomain() + "/?testharness=true";
    
 
   public static String getDomain() {
