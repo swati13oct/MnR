@@ -34,11 +34,12 @@ import pages.redesign.OrderplanmaterialsPage;
 import pages.redesign.PaymentHistoryPage;
 import pages.redesign.EoBSearchPage;
 import pages.redesign.PlanMaterialConfirmationPage;
-import acceptancetests.deprecated.atdd.data.CommonConstants;
-import acceptancetests.deprecated.atdd.data.member.PageConstants;
-import acceptancetests.deprecated.claims.data.ClaimsCommonConstants;
-import acceptancetests.deprecated.login.data.LoginCommonConstants;
-import acceptancetests.deprecated.ordermaterials.data.OrderPlanMaterialsCommonConstants;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageConstants;
+import acceptancetests.data.PageConstantsMnR;
+import acceptancetests.memberredesign.claims.ClaimsCommonConstants;
+import acceptancetests.data.LoginCommonConstants;
+import acceptancetests.memberredesign.ordermaterials.OrderPlanMaterialsCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.After;
@@ -148,7 +149,7 @@ public class ComboTabsRedesignPagesStepDefinition {
 			MedicalClaimSummaryPage medicalClaimssummaryPage = accountHomePage.navigateToMedicalClaimsSummary();
 			if (medicalClaimssummaryPage != null) {
 				System.out.println("Claims page Loaded");
-				getLoginScenario().saveBean(PageConstants.CLAIM_SUMMARY_PAGE,
+				getLoginScenario().saveBean(PageConstantsMnR.CLAIM_SUMMARY_PAGE,
 						medicalClaimssummaryPage);
 				Assert.assertTrue(true);
 			}
@@ -162,7 +163,7 @@ public class ComboTabsRedesignPagesStepDefinition {
 			EoBSearchPage planBenefitsCoverage = accountHomePage.navigateToBenefitsAndCoverage();
 			if (planBenefitsCoverage != null) {
 				System.out.println("EOB page Loaded");
-				getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE,
+				getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE,
 						planBenefitsCoverage);
 				Assert.assertTrue(true);
 			}
@@ -176,7 +177,7 @@ public class ComboTabsRedesignPagesStepDefinition {
 			MyProfilesPage myProfilepage = accountHomePage.navigateToProfAndPref();
 			if (myProfilepage != null) {
 				System.out.println("Profile page Loaded");
-				getLoginScenario().saveBean(PageConstants.PROF_AND_PREF_PAGE,
+				getLoginScenario().saveBean(PageConstantsMnR.PROF_AND_PREF_PAGE,
 						myProfilepage);
 				Assert.assertTrue(true);
 			}
@@ -187,7 +188,7 @@ public class ComboTabsRedesignPagesStepDefinition {
 				GoGreenPreferencesPage goGreenPage = myProfilepage.NavigateTo_GoGreen_MyPreferences_Page();
 				if (goGreenPage != null) {
 					System.out.println("@@@@ Go Green Preferences page is Loaded @@@@");
-					getLoginScenario().saveBean(PageConstants.MY_PREFERENCES_PAGE, goGreenPage);
+					getLoginScenario().saveBean(PageConstantsMnR.MY_PREFERENCES_PAGE, goGreenPage);
 					Assert.assertTrue(true);
 				} else {
 					Assert.fail("@@@@ Error in Loading Go Green Preferences page @@@@");
@@ -230,7 +231,7 @@ public class ComboTabsRedesignPagesStepDefinition {
 		//switch(PageName){
 		
 		if (PageName.equalsIgnoreCase("Profile")){
-			MyProfilesPage myProfilepage = (MyProfilesPage) getLoginScenario().getBean(PageConstants.PROF_AND_PREF_PAGE);			
+			MyProfilesPage myProfilepage = (MyProfilesPage) getLoginScenario().getBean(PageConstantsMnR.PROF_AND_PREF_PAGE);			
 			if(myProfilepage.Validate_NoDisplay_TerminatedTabs()){
 				System.out.println("Terminated Tabs are NOT Displayed");
 				Assert.assertTrue(true);
@@ -241,7 +242,7 @@ public class ComboTabsRedesignPagesStepDefinition {
 				}
 			}
 		else if (PageName.equalsIgnoreCase("GoGreenPreferences")){
-			GoGreenPreferencesPage goGreenPage = (GoGreenPreferencesPage) getLoginScenario().getBean(PageConstants.MY_PREFERENCES_PAGE);
+			GoGreenPreferencesPage goGreenPage = (GoGreenPreferencesPage) getLoginScenario().getBean(PageConstantsMnR.MY_PREFERENCES_PAGE);
 			if(goGreenPage.Validate_NoDisplay_TerminatedTabs() ){
 				System.out.println("Terminated Tabs are NOT Displayed");
 				Assert.assertTrue(true);
@@ -278,7 +279,7 @@ public class ComboTabsRedesignPagesStepDefinition {
 		if (PageName.equalsIgnoreCase("Claims")){
 			MedicalClaimSummaryPage medicalClaimssummaryPage = 
 					(MedicalClaimSummaryPage) getLoginScenario()
-					.getBean(PageConstants.CLAIM_SUMMARY_PAGE);
+					.getBean(PageConstantsMnR.CLAIM_SUMMARY_PAGE);
 			
 			if(medicalClaimssummaryPage.Validate_Terminated_Tab() ){
 				System.out.println("Terminated Tabs are Displayed");
@@ -292,7 +293,7 @@ public class ComboTabsRedesignPagesStepDefinition {
 		else if (PageName.equalsIgnoreCase("EOB")){
 			EoBSearchPage EOBsearchPage = 
 					(EoBSearchPage) getLoginScenario()
-					.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+					.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 			if(EOBsearchPage.Validate_Terminated_Tab() ){
 				System.out.println("Terminated Tabs are Displayed");
 				Assert.assertTrue(true);
@@ -339,7 +340,7 @@ public class ComboTabsRedesignPagesStepDefinition {
 		if (PageName.equalsIgnoreCase("Claims")){
 			MedicalClaimSummaryPage medicalClaimssummaryPage = 
 					(MedicalClaimSummaryPage) getLoginScenario()
-					.getBean(PageConstants.CLAIM_SUMMARY_PAGE);
+					.getBean(PageConstantsMnR.CLAIM_SUMMARY_PAGE);
 			
 			if(medicalClaimssummaryPage.Validate_Single_Tab_SHIP() ){
 				System.out.println("**********CLAIMS Page - Single Tab displayed for all SHIP Plans");
@@ -367,7 +368,7 @@ public class ComboTabsRedesignPagesStepDefinition {
 		else if (PageName.equalsIgnoreCase("Profile")){
 			MyProfilesPage myProfilepage = 
 					(MyProfilesPage) getLoginScenario()
-					.getBean(PageConstants.PROF_AND_PREF_PAGE);
+					.getBean(PageConstantsMnR.PROF_AND_PREF_PAGE);
 			
 			if(myProfilepage.Validate_Single_Tab_SHIP() ){
 				System.out.println("**********Profile Page - Single Tab displayed for all SHIP Plans");
@@ -381,7 +382,7 @@ public class ComboTabsRedesignPagesStepDefinition {
 		else if (PageName.equalsIgnoreCase("Payment")){
 			PaymentHistoryPage paymentHistorypage  = 
 					(PaymentHistoryPage) getLoginScenario()
-					.getBean(PageConstants.PAYMENT_HISTORY_PAGE);
+					.getBean(PageConstantsMnR.PAYMENT_HISTORY_PAGE);
 			
 			if(paymentHistorypage.Validate_Single_Tab_SHIP() ){
 				System.out.println("**********Payment Page - Single Tab displayed for all SHIP Plans");
@@ -420,7 +421,7 @@ public class ComboTabsRedesignPagesStepDefinition {
 		MyProfilesPage myProfilepage = accountHomePage.navigateToProfAndPref();
 		if (myProfilepage != null) {
 			System.out.println("Profile page Loaded");
-			getLoginScenario().saveBean(PageConstants.PROF_AND_PREF_PAGE, myProfilepage);
+			getLoginScenario().saveBean(PageConstantsMnR.PROF_AND_PREF_PAGE, myProfilepage);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("Error in Loading Profile and Preferences Summary Page");
@@ -434,7 +435,7 @@ public class ComboTabsRedesignPagesStepDefinition {
 		MyProfilesPage myProfilepage = accountHomePage.navigateToProfAndPref();
 		if (myProfilepage != null) {
 			System.out.println("Profile page Loaded");
-			getLoginScenario().saveBean(PageConstants.PROF_AND_PREF_PAGE, myProfilepage);
+			getLoginScenario().saveBean(PageConstantsMnR.PROF_AND_PREF_PAGE, myProfilepage);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("Error in Loading Profile and Preferences Summary Page");

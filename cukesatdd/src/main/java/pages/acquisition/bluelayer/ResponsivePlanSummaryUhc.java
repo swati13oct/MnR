@@ -28,7 +28,7 @@ import acceptancetests.data.ElementData;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
-import acceptancetests.deprecated.enrollinplan.bluelayer.EnrollInPlanUhcStepDefinition;
+
 // import acceptancetests.planName.bluelayer.PlanNamesStepDefinition;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ulayer.ResponsivePlanDetails;
