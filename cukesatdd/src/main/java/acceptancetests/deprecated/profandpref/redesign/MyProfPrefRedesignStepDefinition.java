@@ -26,11 +26,13 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
-import pages.redesign.RedesignLoginPage;
-import pages.redesign.UlayerHomePage;
+import pages.redesign.BlueLayerHomePage;
+import pages.redesign.BlueLayerLoginPage;
 import pages.redesign.GoGreenPreferencesPage;
 import pages.redesign.MyProfilesPage;
 import pages.redesign.OrderplanmaterialsPage;
+import pages.redesign.UlayerHomePage;
+import pages.redesign.UlayerLoginPage;
 
 public class MyProfPrefRedesignStepDefinition {
 
@@ -98,7 +100,7 @@ public class MyProfPrefRedesignStepDefinition {
 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
-		RedesignLoginPage loginPage = new RedesignLoginPage(wd);
+		UlayerLoginPage loginPage = new UlayerLoginPage(wd);
 
 		UlayerHomePage accountHomePage = (UlayerHomePage) loginPage.loginWith(userName, pwd);
 
@@ -107,7 +109,7 @@ public class MyProfPrefRedesignStepDefinition {
 	}
 	
 	@Given("^registered UHC member with following attributes$")
-	public void registered_UHC_member_with_following_attributes(DataTable memberAttributes) throws InterruptedException {
+	public void registered_UHC_member_with_following_attributes(DataTable memberAttributes) {
 
 		
 		/* Reading the given attribute from feature file */
@@ -165,9 +167,9 @@ public class MyProfPrefRedesignStepDefinition {
 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
-		RedesignLoginPage loginPage = new RedesignLoginPage(wd);
+		BlueLayerLoginPage loginPage = new BlueLayerLoginPage(wd);
 
-		UlayerHomePage accountHomePage = (UlayerHomePage) loginPage.loginWith(userName, pwd);
+		BlueLayerHomePage accountHomePage = (BlueLayerHomePage) loginPage.loginWith(userName, pwd, category);
 
 		getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
 
@@ -190,7 +192,7 @@ public class MyProfPrefRedesignStepDefinition {
 
 	@When("^the user Navigates to BlueLayer Member Redesign My Profile and Preferences page$")
 	public void the_user_Navigates_to_UMS_Member_Redesign_My_Profile_and_Preferences_page() throws InterruptedException {
-		UlayerHomePage accountHomePage = (UlayerHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		BlueLayerHomePage accountHomePage = (BlueLayerHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		MyProfilesPage myProfilepage = accountHomePage.navigateToProfAndPref();
 		if (myProfilepage != null) {
 			System.out.println("Profile page Loaded");

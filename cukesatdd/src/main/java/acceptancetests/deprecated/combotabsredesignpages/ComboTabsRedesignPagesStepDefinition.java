@@ -3,7 +3,7 @@
  * @author sdwaraka
  * 
  */
-package acceptancetests.deprecated.shipplans.ulayer;
+package acceptancetests.deprecated.combotabsredesignpages;
 import gherkin.formatter.model.DataTableRow;
 
 import java.util.ArrayList;
@@ -25,6 +25,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.redesign.UlayerHomePage;
 import pages.redesign.ContactUsPage;
+import pages.redesign.EoBSearchPage;
+import pages.redesign.GoGreenPreferencesPage;
 import pages.redesign.UlayerLoginPage;
 import pages.redesign.MedicalClaimSummaryPage;
 import pages.redesign.MyProfilesPage;
@@ -48,7 +50,10 @@ import cucumber.api.java.en.When;
 * @author sdwaraka
 *
 */
-public class ShipPlansStepDefinition {
+/**
+* Functionality: Combo tabs in redesign page
+*/
+public class ComboTabsRedesignPagesStepDefinition {
 
 	@Autowired
 	MRScenario loginScenario;
@@ -56,12 +61,15 @@ public class ShipPlansStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
+	/**
+	* @todo : Registration of combo members
+	*/
 
-	@Given("^registered AMP member with SHIP combo plans$")
-	public void registered_member_SHIPplans() throws InterruptedException {
-
+	@Given("^registered Combo Plans member with following attribute$")
+	public void registered_member_with_following_attributes(DataTable memberAttributes) throws InterruptedException {
+		
 		/* Reading the given attribute from feature file */
-		/*List<DataTableRow> memberAttributesRow = memberAttributes
+		List<DataTableRow> memberAttributesRow = memberAttributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -69,28 +77,22 @@ public class ShipPlansStepDefinition {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
-		String planType = memberAttributesMap.get("Plan Type");*/
-		String businessType = "SHIP";
-		
-		getLoginScenario().saveBean(ClaimsCommonConstants.BUSINESS_TYPE,
-				businessType);
 
-		//Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+	
+		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
 		List<String> desiredAttributes = new ArrayList<String>();
-		desiredAttributes.add("SHIP");
-		/*for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
 				.hasNext();) {
 			{
 				String key = iterator.next();
-				if (!memberAttributesMap.get(key).isEmpty()) {
-					desiredAttributes.add(memberAttributesMap.get(key));
-				}
+				desiredAttributes.add(memberAttributesMap.get(key));
 			}
-		}*/
-		System.out.println("desiredAttributes.." + desiredAttributes);
-		Map<String, String> loginCreds = loginScenario
-				.getAMPMemberWithDesiredAttributes(desiredAttributes);
 
+		}
+		System.out.println("desiredAttributes.." + desiredAttributes);
+
+		Map<String, String> loginCreds = loginScenario.getAMPMemberWithDesiredAttributes(desiredAttributes);
+//				.getUMSMemberWithDesiredAttributes(desiredAttributes);
 		String userName = null;
 		String pwd = null;
 		if (loginCreds == null) {
@@ -107,43 +109,27 @@ public class ShipPlansStepDefinition {
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 		}
 
+		getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
+		getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
+
 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		JSONObject accountHomeActualJson = null;
+
 		UlayerLoginPage loginPage = new UlayerLoginPage(wd);
 
-		UlayerHomePage accountHomePage = (UlayerHomePage)loginPage.loginWith(userName, pwd);
-		
-		 getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,accountHomePage);
-		
+		UlayerHomePage accountHomePage = (UlayerHomePage) loginPage.loginWith(userName, pwd);
 
-		/* Get expected data */
-		/*Map<String, JSONObject> expectedDataMap = loginScenario
-				.getExpectedJson(userName);
-		JSONObject accountHomeExpectedJson = accountHomePage
-				.getExpectedData(expectedDataMap);
+		getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
 
-		if (accountHomePage != null) {
-			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
-					accountHomePage);
-			Assert.assertTrue(true);
-			accountHomeActualJson = accountHomePage.accountHomeJson;
-		}
 
-		try {
-			JSONAssert.assertEquals(accountHomeExpectedJson,
-					accountHomeActualJson, true);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-
-		getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP,
-				expectedDataMap);*/
 
 	}
 	
-	@When("^the user navigates to mentioned page in AARP site$")
+	/**
+	* @todo : Navigation to different pages from dashboard
+	*/
+	
+	@When("^the user navigates to mentioned page in Redesign site$")
 	public void views_pages_in_Ums_site(DataTable givenAttributes) throws InterruptedException {
 		
 		List<DataTableRow> givenAttributesRow = givenAttributes
@@ -176,7 +162,7 @@ public class ShipPlansStepDefinition {
 			EoBSearchPage planBenefitsCoverage = accountHomePage.navigateToBenefitsAndCoverage();
 			if (planBenefitsCoverage != null) {
 				System.out.println("EOB page Loaded");
-				getLoginScenario().saveBean(PageConstants.MEDICAL_EOB_PAGE,
+				getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE,
 						planBenefitsCoverage);
 				Assert.assertTrue(true);
 			}
@@ -184,7 +170,7 @@ public class ShipPlansStepDefinition {
 				Assert.fail("Error in loading  EOB Page");
 			}
 		}
-		else if (PageName.equalsIgnoreCase("Profile")){
+		else if (PageName.equalsIgnoreCase("Profile") || PageName.equalsIgnoreCase("GoGreenPreferences")){
 			UlayerHomePage accountHomePage = (UlayerHomePage) getLoginScenario()
 					.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 			MyProfilesPage myProfilepage = accountHomePage.navigateToProfAndPref();
@@ -197,19 +183,15 @@ public class ShipPlansStepDefinition {
 			else {
 				Assert.fail("Error in Loading Profile and Preferences Summary Page");
 			}
-		}
-		else if (PageName.equalsIgnoreCase("Payment")){
-			UlayerHomePage accountHomePage = (UlayerHomePage) getLoginScenario()
-					.getBean(PageConstants.ACCOUNT_HOME_PAGE);
-			PaymentHistoryPage paymentHistorypage = accountHomePage.navigateToPayments();
-			if (paymentHistorypage != null) {
-				System.out.println("Payment page Loaded");
-				getLoginScenario().saveBean(PageConstants.PAYMENT_HISTORY_PAGE,
-						paymentHistorypage);
-				Assert.assertTrue(true);
-			}
-			else {
-				Assert.fail("Error in loading Payment History Page");
+			if (PageName.equalsIgnoreCase("GoGreenPreferences")){
+				GoGreenPreferencesPage goGreenPage = myProfilepage.NavigateTo_GoGreen_MyPreferences_Page();
+				if (goGreenPage != null) {
+					System.out.println("@@@@ Go Green Preferences page is Loaded @@@@");
+					getLoginScenario().saveBean(PageConstants.MY_PREFERENCES_PAGE, goGreenPage);
+					Assert.assertTrue(true);
+				} else {
+					Assert.fail("@@@@ Error in Loading Go Green Preferences page @@@@");
+				}
 			}
 		}
 		else if (PageName.equalsIgnoreCase("ContactUs")){
@@ -228,9 +210,12 @@ public class ShipPlansStepDefinition {
 		}
 		else{System.out.println("Invalid Page Name selection");}
 	}
-	
-	@Then("^the user validates single tab for all SHIP plans$")
-	public void user_validates_single_tab(DataTable givenAttributes) {
+	/**
+	* @todo : Verifying terminated tab not coming for combo scenario
+	*/
+
+	@Then("^the user validates Terminated Plans Tab are Not Displayed in the Redesign Page$")
+	public void user_validates_TerminatedTabs_NotDIsplayed(DataTable givenAttributes) {
 		
 		
 		List<DataTableRow> givenAttributesRow = givenAttributes
@@ -240,7 +225,53 @@ public class ShipPlansStepDefinition {
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
 		}
-		String PageName = givenAttributesMap.get("SHIP Page");
+		String PageName = givenAttributesMap.get("Page Name");
+		System.out.println(PageName);
+		//switch(PageName){
+		
+		if (PageName.equalsIgnoreCase("Profile")){
+			MyProfilesPage myProfilepage = (MyProfilesPage) getLoginScenario().getBean(PageConstants.PROF_AND_PREF_PAGE);			
+			if(myProfilepage.Validate_NoDisplay_TerminatedTabs()){
+				System.out.println("Terminated Tabs are NOT Displayed");
+				Assert.assertTrue(true);
+			}
+			else{
+				System.out.println("Terminated Tabs are Displayed");
+				Assert.fail();
+				}
+			}
+		else if (PageName.equalsIgnoreCase("GoGreenPreferences")){
+			GoGreenPreferencesPage goGreenPage = (GoGreenPreferencesPage) getLoginScenario().getBean(PageConstants.MY_PREFERENCES_PAGE);
+			if(goGreenPage.Validate_NoDisplay_TerminatedTabs() ){
+				System.out.println("Terminated Tabs are NOT Displayed");
+				Assert.assertTrue(true);
+			}
+			else{
+				System.out.println("Terminated Tabs are Displayed");
+				Assert.fail();
+				}
+			}
+		else{
+			System.out.println("Invalid Page Name Selection");
+			Assert.fail();
+		}
+	}
+	/**
+	* @todo : Verifying only terminated tabs information
+	*/
+			
+	@Then("^the user validates Terminated Plan Tabs in the Redesign Page$")
+	public void user_validates_TerminatedTabs(DataTable givenAttributes) {
+		
+		
+		List<DataTableRow> givenAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		String PageName = givenAttributesMap.get("Page Name");
 		System.out.println(PageName);
 		//switch(PageName){
 		
@@ -249,54 +280,25 @@ public class ShipPlansStepDefinition {
 					(MedicalClaimSummaryPage) getLoginScenario()
 					.getBean(PageConstants.CLAIM_SUMMARY_PAGE);
 			
-			if(medicalClaimssummaryPage.Validate_Single_Tab_SHIP() ){
-				System.out.println("**********CLAIMS Page - Single Tab displayed for all SHIP Plans");
+			if(medicalClaimssummaryPage.Validate_Terminated_Tab() ){
+				System.out.println("Terminated Tabs are Displayed");
 				Assert.assertTrue(true);
 			}
 			else{
-				System.out.println("**********CLAIMS Page - Single Tab NOT displayed for all SHIP Plans");
+				System.out.println("Terminated Tabs are NOT Displayed");
 				Assert.fail();
 				}
 			}
 		else if (PageName.equalsIgnoreCase("EOB")){
-			EoBSearchPage planBenefitsCoverage = 
+			EoBSearchPage EOBsearchPage = 
 					(EoBSearchPage) getLoginScenario()
-					.getBean(PageConstants.MEDICAL_EOB_PAGE);
-			
-			if(planBenefitsCoverage.Validate_Single_Tab_SHIP() ){
-				System.out.println("**********EOB Page - Single Tab displayed for all SHIP Plans");
+					.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+			if(EOBsearchPage.Validate_Terminated_Tab() ){
+				System.out.println("Terminated Tabs are Displayed");
 				Assert.assertTrue(true);
 			}
 			else{
-				System.out.println("**********EOB Page - Single Tab NOT displayed for all SHIP Plans");
-				Assert.fail();
-				}
-			}
-		else if (PageName.equalsIgnoreCase("Profile")){
-			MyProfilesPage myProfilepage = 
-					(MyProfilesPage) getLoginScenario()
-					.getBean(PageConstants.PROF_AND_PREF_PAGE);
-			
-			if(myProfilepage.Validate_Single_Tab_SHIP() ){
-				System.out.println("**********Profile Page - Single Tab displayed for all SHIP Plans");
-				Assert.assertTrue(true);
-			}
-			else{
-				System.out.println("**********Profile Page - Single Tab NOT displayed for all SHIP Plans");
-				Assert.fail();
-				}
-			}
-		else if (PageName.equalsIgnoreCase("Payment")){
-			PaymentHistoryPage paymentHistorypage  = 
-					(PaymentHistoryPage) getLoginScenario()
-					.getBean(PageConstants.PAYMENT_HISTORY_PAGE);
-			
-			if(paymentHistorypage.Validate_Single_Tab_SHIP() ){
-				System.out.println("**********Payment Page - Single Tab displayed for all SHIP Plans");
-				Assert.assertTrue(true);
-			}
-			else{
-				System.out.println("**********Payment Page - Single Tab NOT displayed for all SHIP Plans");
+				System.out.println("Terminated Tabs are NOT Displayed");
 				Assert.fail();
 				}
 			}
@@ -304,13 +306,12 @@ public class ShipPlansStepDefinition {
 			ContactUsPage contactUspage  = 
 					(ContactUsPage) getLoginScenario()
 					.getBean(PageConstants.CONTACT_US_PAGE);
-			
-			if(contactUspage.Validate_Single_Tab_SHIP() ){
-				System.out.println("**********Contact Us Page - Single Tab displayed for all SHIP Plans");
+			if(contactUspage.Validate_Terminated_Tab() ){
+				System.out.println("Terminated Tabs are Displayed");
 				Assert.assertTrue(true);
 			}
 			else{
-				System.out.println("**********Contact Us Page - Single Tab NOT displayed for all SHIP Plans");
+				System.out.println("Terminated Tabs are NOT Displayed");
 				Assert.fail();
 				}
 			}
@@ -320,23 +321,13 @@ public class ShipPlansStepDefinition {
 		}
 		
 	}
-		
 	
-	
-
-	/*@After
+/*
+	@After
 	public void tearDown() {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.quit();
 		getLoginScenario().flushBeans();
-	}*/
-
-	public static boolean isAlertPresent(FirefoxDriver wd) {
-		try {
-			wd.switchTo().alert();
-			return true;
-		} catch (NoAlertPresentException e) {
-			return false;
-		}
 	}
+*/
 }
