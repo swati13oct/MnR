@@ -24,6 +24,7 @@ import pages.member.redesign.NewRegistrationPage;
 import pages.member.redesign.PreferencesPage;
 import pages.member.redesign.RegistrationConfirmationPage;
 import pages.member.redesign.TestHarnessPage;
+import pages.member.ulayer.RallyDashboard;
 import pages.member.ulayer.UNPWAssistancePage;
 import pages.redesign.CommunicationPreferences;
 
@@ -63,8 +64,10 @@ public class MyprofileandPreferencesRedesignStepDefinition {
 		NewLoginPage loginPage = new NewLoginPage(wd);
 		CommunicationPreferences compp = new CommunicationPreferences(wd);
 		CommunicationPreferences compp1 = new CommunicationPreferences(wd);
-		compp1 = (CommunicationPreferences) loginPage.loginWith(userName,
-				passWord);
+		/*compp1 = (CommunicationPreferences) loginPage.loginWith(userName,
+				passWord);*/
+		
+		RallyDashboard rallyDashboardPAge = (RallyDashboard) loginPage.loginWith(userName, passWord);
 
 		if (compp != null) {
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
