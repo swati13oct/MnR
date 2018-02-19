@@ -343,8 +343,8 @@ public PharmacySearchPage selectPharmacyandServices(String pharmacytype) {
 	public PharmacyResultPage searchSelectingPharmacyTypes(
 			String[] pharmacyTypeArray) {
 
-		pharmacyTypeSelectionRadioButton.click();
-		for (String pharmacyType : pharmacyTypeArray) {
+		//pharmacyTypeSelectionRadioButton.click();
+		/*for (String pharmacyType : pharmacyTypeArray) {
 			for (WebElement checkBox : pharmacyTypesCheckboxes) {
 				if (checkBox.getText().equalsIgnoreCase(pharmacyType)) {
 					ElementData elementData = new ElementData("id",
@@ -353,21 +353,26 @@ public PharmacySearchPage selectPharmacyandServices(String pharmacytype) {
 				}
 				
 			}
-		}
-		searchPharmaciesButton.click();
-		for(int i=0;i<10;i++){
+		}*/
+		//searchPharmaciesButton.click();
+		/*for(int i=0;i<10;i++){
 			try {
 				Thread.sleep(10000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
 			if(pharmacyResultHeader.isDisplayed())
 				break;
 			
 		}
 		if (pharmacyResultHeader.getText().equalsIgnoreCase(
 				"Pharmacies Available in Your Area")) {
+			return new PharmacyResultPage(driver);
+		}*/
+		if(pharmacyResultHeader.isDisplayed())
+		{
 			return new PharmacyResultPage(driver);
 		}
 		return null;
