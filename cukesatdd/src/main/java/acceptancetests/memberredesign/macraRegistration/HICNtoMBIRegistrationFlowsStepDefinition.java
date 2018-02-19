@@ -9,9 +9,8 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageConstants;
-import acceptancetests.data.PageConstantsMnR;
+import acceptancetests.deprecated.atdd.data.CommonConstants;
+import acceptancetests.deprecated.atdd.data.member.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
@@ -49,7 +48,7 @@ public class HICNtoMBIRegistrationFlowsStepDefinition {
 		RegistrationPage = RegistrationPage.SetServerDate(ServerDate_MilliSeconds);
 		RegistrationPage = RegistrationPage.NavigateToRegistrationPage();
 		if(RegistrationPage!=null){
-			getLoginScenario().saveBean(PageConstantsMnR.NEW_REGISTRATION_PAGE,RegistrationPage);
+			getLoginScenario().saveBean(PageConstants.NEW_REGISTRATION_PAGE,RegistrationPage);
 			Assert.assertTrue(true);
 		}
 		else {
@@ -69,11 +68,11 @@ public class HICNtoMBIRegistrationFlowsStepDefinition {
 		String MemberNo = givenAttributesMap.get("Member Number");
 		String DOB = givenAttributesMap.get("Date Of Birth");
 		
-		ReDesignRegistrationPage RegistrationPage = (ReDesignRegistrationPage) getLoginScenario().getBean(PageConstantsMnR.NEW_REGISTRATION_PAGE);
+		ReDesignRegistrationPage RegistrationPage = (ReDesignRegistrationPage) getLoginScenario().getBean(PageConstants.NEW_REGISTRATION_PAGE);
 		
 		RegistrationPage = RegistrationPage.Enter_MemberNo_DOB(MemberNo, DOB);
 		if(RegistrationPage!=null){
-			getLoginScenario().saveBean(PageConstantsMnR.NEW_REGISTRATION_PAGE,RegistrationPage);
+			getLoginScenario().saveBean(PageConstants.NEW_REGISTRATION_PAGE,RegistrationPage);
 			Assert.assertTrue(true);
 		}
 		else {
@@ -93,13 +92,13 @@ public class HICNtoMBIRegistrationFlowsStepDefinition {
 		String Type_MedicareID = givenAttributesMap.get("Identification Type");
 		String Medicar_ID_Value = givenAttributesMap.get("Identification Value");
 		
-		ReDesignRegistrationPage RegistrationPage = (ReDesignRegistrationPage) getLoginScenario().getBean(PageConstantsMnR.NEW_REGISTRATION_PAGE);
+		ReDesignRegistrationPage RegistrationPage = (ReDesignRegistrationPage) getLoginScenario().getBean(PageConstants.NEW_REGISTRATION_PAGE);
 
 		System.out.println("The Identification Type for Medicare ID is  : "+Type_MedicareID);
 
 		RegistrationPage = RegistrationPage.Enter_MedicareID(Medicar_ID_Value);
 		if(RegistrationPage!=null){
-			getLoginScenario().saveBean(PageConstantsMnR.NEW_REGISTRATION_PAGE,RegistrationPage);
+			getLoginScenario().saveBean(PageConstants.NEW_REGISTRATION_PAGE,RegistrationPage);
 			Assert.assertTrue(true);
 		}
 		else {
@@ -109,11 +108,11 @@ public class HICNtoMBIRegistrationFlowsStepDefinition {
 
 	@Then("^Validate that Continue button is enabled$")
 	public void Continue_button_should_be_enabled() {
-		ReDesignRegistrationPage RegistrationPage = (ReDesignRegistrationPage) getLoginScenario().getBean(PageConstantsMnR.NEW_REGISTRATION_PAGE);
+		ReDesignRegistrationPage RegistrationPage = (ReDesignRegistrationPage) getLoginScenario().getBean(PageConstants.NEW_REGISTRATION_PAGE);
 		boolean Continue_Enabled = true;
 		boolean Flag = RegistrationPage.Validate_ContinueButton(Continue_Enabled);
 		if(Flag == true){
-			getLoginScenario().saveBean(PageConstantsMnR.NEW_REGISTRATION_PAGE,RegistrationPage);
+			getLoginScenario().saveBean(PageConstants.NEW_REGISTRATION_PAGE,RegistrationPage);
 			Assert.assertTrue(true);
 		}
 		else {
@@ -123,11 +122,11 @@ public class HICNtoMBIRegistrationFlowsStepDefinition {
 
 	@Then("^User should successfully navigate to create User Account Page$")
 	public void User_should_successfully_navigate_to_create_User_Account_Page() throws InterruptedException {
-		ReDesignRegistrationPage RegistrationPage = (ReDesignRegistrationPage) getLoginScenario().getBean(PageConstantsMnR.NEW_REGISTRATION_PAGE);
+		ReDesignRegistrationPage RegistrationPage = (ReDesignRegistrationPage) getLoginScenario().getBean(PageConstants.NEW_REGISTRATION_PAGE);
 		boolean CreateAccountPage_Displayed = true;
 		boolean Flag = RegistrationPage.Validate_CreateAccountPage(CreateAccountPage_Displayed);
 		if(Flag == true){
-			getLoginScenario().saveBean(PageConstantsMnR.NEW_REGISTRATION_PAGE,RegistrationPage);
+			getLoginScenario().saveBean(PageConstants.NEW_REGISTRATION_PAGE,RegistrationPage);
 			Assert.assertTrue(true);
 		}
 		else {
@@ -137,11 +136,11 @@ public class HICNtoMBIRegistrationFlowsStepDefinition {
 
 	@Then("^Validate that Continue button is Disabled$")
 	public void Continue_button_should_be_Disabled() {
-		ReDesignRegistrationPage RegistrationPage = (ReDesignRegistrationPage) getLoginScenario().getBean(PageConstantsMnR.NEW_REGISTRATION_PAGE);
+		ReDesignRegistrationPage RegistrationPage = (ReDesignRegistrationPage) getLoginScenario().getBean(PageConstants.NEW_REGISTRATION_PAGE);
 		boolean Continue_Enabled = false;
 		boolean Flag = RegistrationPage.Validate_ContinueButton(Continue_Enabled);
 		if(Flag == true){
-			getLoginScenario().saveBean(PageConstantsMnR.NEW_REGISTRATION_PAGE,RegistrationPage);
+			getLoginScenario().saveBean(PageConstants.NEW_REGISTRATION_PAGE,RegistrationPage);
 			Assert.assertTrue(true);
 		}
 		else {
@@ -151,11 +150,11 @@ public class HICNtoMBIRegistrationFlowsStepDefinition {
 
 	@Then("^User should NOT be able navigate to create User Account Page$")
 	public void User_should_NOT_be_able_navigate_to_create_User_Account_Page() throws InterruptedException {
-		ReDesignRegistrationPage RegistrationPage = (ReDesignRegistrationPage) getLoginScenario().getBean(PageConstantsMnR.NEW_REGISTRATION_PAGE);
+		ReDesignRegistrationPage RegistrationPage = (ReDesignRegistrationPage) getLoginScenario().getBean(PageConstants.NEW_REGISTRATION_PAGE);
 		boolean CreateAccountPage_Displayed = false;
 		boolean Flag = RegistrationPage.Validate_CreateAccountPage(CreateAccountPage_Displayed);
 		if(Flag == true){
-			getLoginScenario().saveBean(PageConstantsMnR.NEW_REGISTRATION_PAGE,RegistrationPage);
+			getLoginScenario().saveBean(PageConstants.NEW_REGISTRATION_PAGE,RegistrationPage);
 			Assert.assertTrue(true);
 		}
 		else {
@@ -173,10 +172,10 @@ public class HICNtoMBIRegistrationFlowsStepDefinition {
 					givenAttributesRow.get(i).getCells().get(1));
 		}
 		String ErrorMessage = givenAttributesMap.get("Error Message");
-		ReDesignRegistrationPage RegistrationPage = (ReDesignRegistrationPage) getLoginScenario().getBean(PageConstantsMnR.NEW_REGISTRATION_PAGE);
+		ReDesignRegistrationPage RegistrationPage = (ReDesignRegistrationPage) getLoginScenario().getBean(PageConstants.NEW_REGISTRATION_PAGE);
 		boolean Flag = RegistrationPage.Validate_ErrorMessage(ErrorMessage);
 		if(Flag == true){
-			getLoginScenario().saveBean(PageConstantsMnR.NEW_REGISTRATION_PAGE,RegistrationPage);
+			getLoginScenario().saveBean(PageConstants.NEW_REGISTRATION_PAGE,RegistrationPage);
 			Assert.assertTrue(true);
 		}
 		else {

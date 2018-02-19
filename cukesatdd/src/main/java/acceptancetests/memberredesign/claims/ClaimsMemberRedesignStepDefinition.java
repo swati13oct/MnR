@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
-import acceptancetests.memberredesign.claims.RedesignClaimsCommonConstants;
+import acceptancetests.deprecated.dashboard.claims.data.RedesignClaimsCommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
