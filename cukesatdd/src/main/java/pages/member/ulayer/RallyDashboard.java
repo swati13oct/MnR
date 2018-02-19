@@ -1,6 +1,7 @@
 package pages.member.ulayer;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,6 +19,7 @@ public class RallyDashboard extends UhcDriver{
 	
 	@FindBy(linkText="VIEW DOCUMENTS & RESOURCES")
 	private WebElement DOCUMENTSRESOURCES;
+
 	
 	@FindBy(xpath="//*[@class='fluid-nav ng-scope']/div/div/a[5]")
     private WebElement PremiumPaymentsLink;	
@@ -34,10 +36,11 @@ public class RallyDashboard extends UhcDriver{
 		System.out.println("Welcome Message Displayed");		
 	}
 	/**
-     * @throws InterruptedException 
+     * @return 
+	 * @throws InterruptedException 
 	 * @toDo : clicking forms and resources link on dashboard
      */
-	   public pages.dashboard.formsandresources.FormsAndResourcesPage navigatetoFormsnResources() throws InterruptedException
+	   public FormsAndResourcesPage navigatetoFormsnResources() throws InterruptedException
        {
                      //  DOCUMENTSRESOURCES.click();
                       if (MRScenario.environment.equalsIgnoreCase("team-ci1") || MRScenario.environment.equalsIgnoreCase("team-g") ||MRScenario.environment.equalsIgnoreCase("test-a") ) {
@@ -53,7 +56,8 @@ public class RallyDashboard extends UhcDriver{
                			if(driver.getCurrentUrl().contains("/dashboard"));
                			{
                				System.out.println("User is on dashboard page and URL is ====>"+driver.getCurrentUrl());
-               				Thread.sleep(20000);
+               				Thread.sleep(30000);
+               				DOCUMENTSRESOURCES.click();
                				DOCUMENTSRESOURCES.click();
                				
                			}
@@ -67,10 +71,11 @@ public class RallyDashboard extends UhcDriver{
                       System.out.println(driver.getTitle());
 
                		
-                       return new FormsAndResourcesPage(super.driver);
+                       return new FormsAndResourcesPage(driver);
                        
        }
- 
+	   
+
 	
 	public PaymentsOverview navigateToPaymentOverview() throws InterruptedException
 	{
@@ -80,6 +85,12 @@ public class RallyDashboard extends UhcDriver{
 			return new PaymentsOverview(driver);
 		}
 		return null;
+	}
+
+	public void scroll() {
+	  	JavascriptExecutor jse = (JavascriptExecutor)driver;
+    	jse.executeScript("window.scrollBy(0,450)", "");
+		
 	}
 
 

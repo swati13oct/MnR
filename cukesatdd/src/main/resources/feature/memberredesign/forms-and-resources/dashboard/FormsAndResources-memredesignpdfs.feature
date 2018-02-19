@@ -8,7 +8,18 @@ Feature: To validate plan materials section on forms and resources page in dashb
       | password | <password> |
     And click on the forms and resource link and navigate to forms and resource page
     Then validate plan materials section
-    And click on the order plan materials and view temporary id card link
+    And click on the order plan materials and view temporary id card link and he is navigated to rallydashboard page
+    Examples: 
+      | userId         | password   |
+   # uhc
+      | q1_feb_uhc085 | Password@1 |
+  
+  @anocsectionValidation  
+    Scenario Outline:
+    Given details of user to sign in on member redesign site to see forms and resources page
+          | userId   | <userId>  |
+      | password | <password> |
+    And click on the forms and resource link and navigate to forms and resource page
     Then validate that english is default language in dropdown 
     And change the language in the language dropdown
     Then validate the anoc section

@@ -85,6 +85,7 @@ import cucumber.api.java.en.Then;
                               public void clickOnFormAndResourcesLink() throws InterruptedException {
                                    RallyDashboard rallydashboardpage = (RallyDashboard) loginScenario.getBean(PageConstants.RALLY_DASHBOARDPAGE);
                                               Thread.sleep(5000);
+                                              rallydashboardpage.scroll();   
                                   FormsAndResourcesPage formsAndResourcesPage = rallydashboardpage.navigatetoFormsnResources();     
                                   getLoginScenario().saveBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE, formsAndResourcesPage);
                                               
@@ -160,24 +161,27 @@ import cucumber.api.java.en.Then;
                               public void validatePlanMaterialSection() throws InterruptedException {
                                               FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
                                               Thread.sleep(30000);
+                                            /*  formsAndResourcesPage.clickonperceptionpopup();*/
                                               System.out.println("fnr page");
                                               formsAndResourcesPage.getplanmaterialsection().isDisplayed();
+                                              System.out.println("plan materials");
                                               
                                               
                               }
                               /**
                                * @toDo : clicks order plan materials and view temporary id card links
                                */
-                              @And("^click on the order plan materials and view temporary id card link$")
+                              @And("^click on the order plan materials and view temporary id card link and he is navigated to rallydashboard page$")
                               public void clicklinksonplanmaterials() throws InterruptedException  {
                                               FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
-                                              formsAndResourcesPage.getOrderPlanMaterialLink().isDisplayed();
+                                             /* formsAndResourcesPage.getOrderPlanMaterialLink().isDisplayed();
                                               Thread.sleep(2000);
-                                              formsAndResourcesPage.validatenclickOrderPlanMaterial();
-                                         
+*/                                         
                                               formsAndResourcesPage.getTemporaryIdcardlink().isDisplayed();
-                                              Thread.sleep(1000);
+                                              Thread.sleep(2000);
+                                              formsAndResourcesPage.scroll();
                                               formsAndResourcesPage.validatenclickIDCard();
+                                              
                                               
                               }
                               /**
