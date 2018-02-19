@@ -7,7 +7,6 @@ Feature: To test plan benefits and Coverage on UMS site
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
     Then the user navigates to Benefits and coverage page
-    And the user validates the content on benefits and coverage page
     And the user validates Needhelp header
     And the user clicks on More Information link
     And the user validates contactus section
@@ -25,7 +24,6 @@ Feature: To test plan benefits and Coverage on UMS site
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
     Then the user navigates to Benefits and coverage page
-    And the user validates the content on benefits and coverage page
     And the user validates view and document label
     And the user validates the language dropdown and the value displayed by default should be English
    
@@ -44,7 +42,6 @@ Feature: To test plan benefits and Coverage on UMS site
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
     Then the user navigates to Benefits and coverage page
-    And the user validates the content on benefits and coverage page
     And the user validates view and document label
     And the user validates spanish and chinese should not display in dropdown
  
@@ -121,7 +118,6 @@ Feature: To test plan benefits and Coverage on UMS site
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
     When the user navigates to Benefits coverage page
-    And the user validates the content on benefits and coverage page
     And the user view the Drug Copays & Discounts header 
     And the user validates the Learn More section for stage and tier
     And the user validates dropdown selection functionality
@@ -147,7 +143,6 @@ Feature: To test plan benefits and Coverage on UMS site
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
     Then the user navigates to Benefits coverage page
-    And the user validates the content on benefits and coverage page
     And the user view the LIS Drug Copays & Discounts header
     And the drugcost dropdown should not display
     And the user validates the Learn More section link for stage
@@ -257,7 +252,6 @@ Feature: To test plan benefits and Coverage on UMS site
       | Plan Type      | <planType>  |
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
-    Then the user navigates to Benefits and coverage page
     Then the user navigates to Benefits and coverage page    
     And the user validates the Primarycare Provider section
     

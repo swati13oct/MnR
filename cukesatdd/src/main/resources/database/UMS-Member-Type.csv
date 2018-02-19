@@ -27,4 +27,10 @@ q1_aarp_feb008/Password@1,MAPD,Individual,NON LIS
 q1_aarp_feb299/Password@1,PDP,Individual,NON LIS 
 q1_grp_feb276/Password@1,PDP,Group,NON LIS 
 q1_grp_feb012/Password@1,MAPD,Group,NON LIS 
-q1_grp_feb002/Password@1,MA,Group,HMO
+q1_grp_feb014/Password@1,MA,Group,HMO
+q1_feb_uhc022/Password@1,MAPD,Individual,LIS 1 
+q1_aarp_feb405/Password@1,PDP,Individual,LIS 4  
+q1_aarp_feb580/Password@1,MA,Individual,LIS 1
+q1_grp_feb043/Password@1,MA,Group,LIS 1
+q1_ship_feb120/Password,HIP,SHIP,NON LIS
+q1_ship_feb232/Password@1,PHIP,SHIP,NON LIS
