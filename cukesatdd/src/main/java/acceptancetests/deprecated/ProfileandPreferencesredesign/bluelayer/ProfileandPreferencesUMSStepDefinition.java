@@ -450,7 +450,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
 
-		ProfilePreferencesPage.validatetempaddressSave();
+		//ProfilePreferencesPage.validatetempaddressSave();
 
 	}
 
