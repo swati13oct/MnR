@@ -3,110 +3,122 @@
  */
 package pages.redesign;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
-import org.joda.time.DateTime;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Cookie;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.redesign.OrderplanmaterialsPage;
+import pages.member.bluelayer.ContactUsPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
+import acceptancetests.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.redesign.EoBSearchPage;
-import pages.redesign.*;
+
 
 /**
  * @author sdwaraka
+ *
  */
 
-@SuppressWarnings("unused")
-public class UlayerHomePage extends UhcDriver {
-	
+public class BlueLayerHomePage extends UhcDriver {
+
 
 	@FindBy(xpath = "//a[contains(text(), 'Go to Claims')]")
 	private WebElement ClaimsLink;
-
+	
 	@FindBy(xpath = "//h1[contains(text(), 'My Claims')]")
 	private WebElement ClaimsPageHeader;
 
-	@FindBy(xpath = "//a[contains(text(), 'Go to EOB Search')]")
-	private WebElement EOBsearchLink;
-	
 	@FindBy(xpath = "//h1[contains(text(), 'Explanation of Benefits')]")
 	private WebElement EOBPageHeader;
 
-
-	@FindBy(xpath = "//a[contains(text(), 'Go to My Profile and Preferences_Redesign')]")
+	
+	@FindBy(xpath = "//a[contains(text(), 'Go to EOB Search')]")
+	private WebElement EOBsearchLink;
+	
+	@FindBy(xpath = "//a[contains(text(), 'Go to My Profile')]")
 	private WebElement MyProfileLink;
 
-	@FindBy(xpath = "//h1[contains(text(), 'My Profile and Preferences')]")
+	@FindBy(xpath = "//*[@id='profilePreferencesController']//h1")
 	private WebElement MyProfilePageHeader;
 
 	@FindBy(xpath = "//a[contains(text(), 'Go to Payments')]")
 	private WebElement GoToPaymentsLink;
-
+	
 	@FindBy(xpath = "//a[contains(text(), 'Go to Contact Us')]")
 	private WebElement GoToContactUsLnk;
 	
-	@FindBy(xpath = "//a[contains(text(), 'Go to Pharmacy Locator')]")
+	@FindBy(linkText = "Go to Pharmacy Search page")
 	private WebElement PharmacyLocatorLink;
 
-	@FindBy(xpath = "//h1[contains(text(), 'Locate a Pharmacy')]")
-	private WebElement PharmacyLocatorPageHeader;
-
+	
 	@FindBy(linkText = "Back to previous page")
 	private WebElement backTopreviouspageLink;
-
+	
+	
+	//@FindBy(linkText = "ORDER ADDITIONAL MATERIALS")
 	@FindBy(xpath = "//section[1]/div/div/div/a")
 	private WebElement addordermaterialLink;
-
-	@FindBy(xpath = "//a[contains(text(),'Go to Order ')]")
+	
+	//@FindBy(linkText="Go to Order Materials page")
+	@FindBy(xpath ="//a[contains(text(),'Go to Order ')]")
 	private WebElement OrderPlanMaterialslnk;
-
-	@FindBy(xpath = "//h3[contains(text(),'Technical Support') or contains(text(),'Plan Support')]/ancestor::div[@class='col-md-4']")
+	
+	@FindBy(xpath="//h3[contains(text(),'Technical Support') or contains(text(),'Plan Support')]/ancestor::div[@class='col-md-4']")
 	private WebElement needhelpcomponent;
-
-	@FindBy(xpath = "//h1[@class='h4 margin-none']")
+	
+	@FindBy(xpath="//h1[@class='h4 margin-none']")
 	private WebElement orderplanHeadertxt;
 	
-	public static String Page_URL;
-
-	private PageData myAccountHome;
-
-/*	public JSONObject accountHomeJson;
+	
 
 	private PageData browserCheckData;
 
-	private JSONObject browserCheckJson;*/
+	private JSONObject browserCheckJson;
+	
+	private PageData myAccountHome;
 
-	public UlayerHomePage(WebDriver driver) throws InterruptedException {
+	public JSONObject accountHomeJson;
+
+	public BlueLayerHomePage(WebDriver driver,String category) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		String fileName = CommonConstants.ACCOUNT_HOME_PAGE_DATA;
-		myAccountHome = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
-		Thread.sleep(3000);
-		CommonUtility.checkPageIsReady(driver);
+		if(category.equalsIgnoreCase("Individual"))
+		{
+			String fileName = CommonConstants.ACCOUNT_HOME_PAGE_INDIVIDUAL_DATA;
+			myAccountHome = CommonUtility.readPageData(fileName,
+					CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);
+		}
+		else
+		{
+			String fileName = CommonConstants.ACCOUNT_HOME_PAGE_DATA;
+			myAccountHome = CommonUtility.readPageData(fileName,
+					CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);
+		}
 		
-		Page_URL = driver.getCurrentUrl().split(".com")[0];
-		//openAndValidate();
+		openAndValidate();
+	}
+
+	public BlueLayerHomePage(WebDriver driver) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		
+//		openAndValidate();
 	}
 
 	public PaymentHistoryPage navigateToPayments() throws InterruptedException {
@@ -142,14 +154,14 @@ public class UlayerHomePage extends UhcDriver {
 	}
 
 	public PharmacySearchPage navigateToPharmacyLocator() throws InterruptedException {
-/*		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
-		CommonUtility.checkPageIsReady(driver);
+/*		CommonUtility.checkPageIsReady(driver);
 		PharmacyLocatorLink.click();
 */		
- 		driver.navigate().to(Page_URL+".com/content/medicare/member/pharmacy-locator/overview.html#/Pharmacy-Search-English");
-		Thread.sleep(10000);
+		driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/pharmacy-locator/overview.html#/Pharmacy-Search-English");
+		
 		CommonUtility.checkPageIsReady(driver);
-		if (validate(PharmacyLocatorPageHeader)) {
+		if (driver.getTitle().equalsIgnoreCase("AARP Medicare Plans | Pharmacy Directory")
+				|| driver.getTitle().equalsIgnoreCase("Locate a Pharmacy")) {
 			return new PharmacySearchPage(driver);
 		}
 		return null;
@@ -193,9 +205,27 @@ public class UlayerHomePage extends UhcDriver {
 
 	}
 
+	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
+
+		JSONObject accountHomeExpectedJson = expectedDataMap.get(CommonConstants.MY_ACCOUNT_HOME);
+
+		return accountHomeExpectedJson;
+	}
+
+	public JSONObject getAdditionalPlanExpectedData(Map<String, JSONObject> expectedDataMap) {
+
+		JSONObject globalExpectedJson = expectedDataMap.get(CommonConstants.GLOBAL);
+		JSONObject addPlanExpectedJson = expectedDataMap.get(CommonConstants.ADD_PLAN);
+		JSONObject accountHomeExpectedJson = expectedDataMap.get(CommonConstants.MY_ACCOUNT_HOME);
+		JSONObject accountHomeComboExpectedJson = expectedDataMap.get(CommonConstants.MY_ACCOUNT_HOME_COMBO);
+		accountHomeExpectedJson = CommonUtility.mergeJson(accountHomeExpectedJson, globalExpectedJson);
+		accountHomeExpectedJson = CommonUtility.mergeJson(accountHomeExpectedJson, addPlanExpectedJson);
+		accountHomeExpectedJson = CommonUtility.mergeJson(accountHomeExpectedJson, accountHomeComboExpectedJson);
+		return accountHomeExpectedJson;
+	}
 
 	public OrderplanmaterialsPage navigateToOrderPlanMaterialsPage() throws InterruptedException {
-		driver.navigate().to(Page_URL+".com/content/medicare/member/order-materials/overview.html");
+		driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/order-materials/overview.html");
 		//OrderPlanMaterialslnk.click();
 		CommonUtility.checkPageIsReady(driver);
 		if (orderplanHeadertxt.isDisplayed()) {
@@ -204,7 +234,7 @@ public class UlayerHomePage extends UhcDriver {
 		return null;
 	}
 
-	public ContactUsPage navigatesToContactUsPage() throws InterruptedException {
+	public ContactUsPage navigatesToContactUsPage() {
 
 		//GoToContactUsLnk.click();
 		driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/contact-us/overview.html#/contact-us-two");
@@ -216,41 +246,22 @@ public class UlayerHomePage extends UhcDriver {
 		}
 	}
 
-	public OrderplanmaterialsPage navigateToValidateOrderConfirmationInAarpPage() throws InterruptedException {
-		Thread.sleep(9000);
-		addordermaterialLink.click();
-		Thread.sleep(3000);
-		return null;
-	}
 
-	public OrderplanmaterialsPage verifyneedHelpcomponent() {
+	public OrderplanmaterialsPage verifyneedHelpcomponent(){
 		boolean present;
-		try {
+		try{
 			validate(needhelpcomponent);
-			present = true;
-		} catch (NoSuchElementException e) {
-			present = false;
+			present=true;
+		}catch(NoSuchElementException e)
+		{
+			present=false;
 		}
-		if (present)
-			System.out.println("Able to find needhelp component");
+		if(present)
+		System.out.println("Able to find needhelp component");
 		else
 			System.out.println("No needhelp component is displayed");
 		return null;
 	}
-
-	public OrderplanmaterialsPage verifyHeaderTextandSubtext() {
-		boolean present;
-		try {
-			validate(orderplanHeadertxt);
-			present = true;
-		} catch (NoSuchElementException e) {
-			present = false;
-		}
-		if (present)
-			System.out.println("@@@@@ Able to find order plan header text @@@@@");
-		else
-			System.out.println("order plan header text is not displayed");
-		return null;
-	}
-
+	
+	
 }
