@@ -320,7 +320,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		}
 		String language = memberAttributesMap.get("Language");
 		getLoginScenario().saveBean(PlanBenefitsAndCoverageCommonConstants.Language, language);
-		benefitsCoveragePage.validate_langdropdown_select(language);
+		//benefitsCoveragePage.validate_langdropdown_select(language);
 	}
 
 

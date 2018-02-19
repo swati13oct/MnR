@@ -29,9 +29,9 @@ Feature: To test plan benefits and Coverage on UMS site
    
      Examples: 
        | planType|  memberType  | copayCategory |
-       | PDP     |  Group       |  NON LIS      | 
-       | MAPD    |  Group       |  NON LIS      |
-       | MA      |  Group       |  HMO          |
+        | PDP     |  Group       |  NON LIS      | 
+        | MAPD    |  Group       |  NON LIS      |
+        | MA      |  Group       |  HMO          |
   
 
 
@@ -66,7 +66,7 @@ Feature: To test plan benefits and Coverage on UMS site
       
        | planType|  memberType  | copayCategory | language |
        | MAPD    |  Individual  |  NON LIS      | SPANISH  |
-   
+       | PDP     |  Individual  |  NON LIS      | SPANISH  |
    
      @CMAncillarysection1
     Scenario Outline: Verify Ancilliary section is in place on Benefits and Coverage page
