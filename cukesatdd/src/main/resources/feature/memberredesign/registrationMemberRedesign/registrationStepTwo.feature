@@ -1,5 +1,5 @@
 @registrationStepTwo @Gladiators
-Feature: To test registration step 2 flow in redesign portal
+Feature: G1.11To test registration step 2 flow in redesign portal
 
 @toCreateAccountNavigation
 Scenario Outline: To verify member with no additional plan is navigated to Create Account after clicking next button on Plan Information
