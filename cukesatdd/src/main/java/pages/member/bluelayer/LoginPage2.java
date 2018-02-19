@@ -198,7 +198,7 @@ public class LoginPage2 extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		if (MRScenario.environment.equalsIgnoreCase("awe-stage"))
+		if (MRScenario.environment.equalsIgnoreCase("stage"))
 		{
 			start(STAGE_DASHBOARD_URL);
 			
@@ -315,6 +315,7 @@ public class LoginPage2 extends UhcDriver {
 	
 	public Object doLoginWith(String username, String password) {
 
+                System.out.println(driver.getCurrentUrl());
 		sendkeys(userNameField, username);
 		sendkeys(passwordField, password);
 		signInButton.click();
