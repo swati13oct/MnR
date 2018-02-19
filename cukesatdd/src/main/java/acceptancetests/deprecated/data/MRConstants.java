@@ -227,7 +227,7 @@ public class MRConstants {
   
   public static final String STAGE_DASHBOARD_NEW_DOMAIN_URL="https://"+MRScenario.environment+"-medicare.uhc.com/";
   
-  public static final String TEAM_CI1_NEW_DASBOARD_URL = "https://team-ci1-medicare.ose-elr-core.optum.com/";
+  public static final String TEAM_T_NEW_TESTHANESS_URL = "https://team-t-medicare.ose-elr-core.optum.com/medicare/login/overview.html?testharness=true";
 
   public static final String AARP_MOBILE_TEAM_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/mobile/guest/login.html";
   
@@ -277,7 +277,8 @@ public class MRConstants {
   
   public static String CAMPAIGN_PAGE_URL2 = "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/available-plans.html?msg=zero&lang=en&zipcode=02211&WT.mc_id=832467";
   
-  public static String EOB_DIRECT_URL = "https://"+MRScenario.environment+"-medicare.uhc.com";
+  public static String EOB_DIRECT_URL = "https://"+MRScenario.environment+"-medicare.uhc.com/?testharness=true";
+  
   
   public static final String DEEPLINK_URL = "https://"+MRScenario.environment+"-werally.uhc.com/login.html?TARGET=SMSR";
 
@@ -311,7 +312,7 @@ public class MRConstants {
 
   public static final String DASHBOARD_URL ="https://"+MRScenario.environment+"-medicare.uhc.com/";
   
-  public static final String REDESIGN_LOGIN_URL = "https://"+MRScenario.environment+"-medicare." + getDomain() + "/?testharness=true";
+  public static final String REDESIGN_LOGIN_URL = "https://"+MRScenario.environment+"-medicare." + getDomain() +"/?testharness=true";
    
 
   public static String getDomain() {

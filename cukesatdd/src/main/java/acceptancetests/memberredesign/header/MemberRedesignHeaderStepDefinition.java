@@ -172,6 +172,7 @@ public class MemberRedesignHeaderStepDefinition {
 	public void then_click_the_Claims_Summary_tab() {
 		// Express the Regexp above with the code you wish you had
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
+		accountHomePage.checkModelPopup();
 		accountHomePage.clickClaimsSummary();
 	}
 
@@ -182,6 +183,7 @@ public class MemberRedesignHeaderStepDefinition {
 	public void then_click_the_Explanation_of_Benefits_tab() {
 		// Express the Regexp above with the code you wish you had
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
+		accountHomePage.checkModelPopup();
 		accountHomePage.clickeob();
 	}
 

@@ -26,11 +26,11 @@ public class CommunicationPreferences extends UhcDriver {
 	@FindBy(xpath = "(//div[contains(@class,'preferences-wrapper')]/div[@class='ng-scope'])[1]/div[4]/fieldset/div[1]/div/label")
 	private WebElement PaperlessPrefRadioButtons;
 
-	@FindBy(xpath = "(.//button[@id='save-prefs-btn'])[1]")
+	@FindBy(xpath = ".//*[@id='save-prefs-btn']")
 	private WebElement SavePreferences;
 
-	@FindBy(xpath = "(.//label[@class='atdd-checkbox-label'])[1]")
-	private WebElement AgreeTerms;
+	/*@FindBy(xpath = ".//*[@id='save-prefs-btn']")
+	private WebElement AgreeTerms;*/
 
 	@FindBy(xpath = "//a[text()='Go to preferences page']")
 	private WebElement linkPreferences;
@@ -40,11 +40,11 @@ public class CommunicationPreferences extends UhcDriver {
 
 	@FindBy(xpath = "(//a[@title='Back to My Profile'])[1]")
 	private WebElement BackToMyProfileButton;
-
-	@FindBy(xpath = ".//h3[contains(text(),'Quick Links')]/following::a[contains(text(),'Account Settings')]")
+	
+	@FindBy(linkText = "Account Settings")
 	private WebElement AccSettings;
 
-	@FindBy(xpath = ".//a[contains(text(),'SIGN UP TODAY')]")
+	@FindBy(linkText = "EDIT PREFERENCES")
 	private WebElement CommPreferencesBtn;
 
 	private static String PAGE_URL = MRConstants.STAGE_DASHBOARD_NEW_DOMAIN_URL;
@@ -61,14 +61,16 @@ public class CommunicationPreferences extends UhcDriver {
 	public void openAndValidate() {
 		start(PAGE_URL);
 	}
-
-	// Navigate to preferences page from testharness page
+	
+	/** 
+	 * @todo : Navigate to preferences page from testharness page
+	 */
 	public void navigateToPreferencesPage() throws InterruptedException {
-		if (driver.getTitle().equalsIgnoreCase("UnitedHealthcare")) {
+		if (driver.getTitle().contains("UnitedHealthcare")) {
 			System.out.println("navigated to Homepage!");
 			Thread.sleep(5000);
 			AccSettings.click();
-			Thread.sleep(5000);
+			Thread.sleep(10000);
 
 			CommPreferencesBtn.click();
 			Thread.sleep(5000);
@@ -101,7 +103,9 @@ public class CommunicationPreferences extends UhcDriver {
 		}
 	}
 
-	// Select preferences from mail to online and viceversa
+	/** 
+	 * @todo : Select preferences from mail to online and viceversa
+	 */
 	public void SelectPreferences() throws InterruptedException {
 
 		if (driver.getTitle().equalsIgnoreCase("Preferences")) {
@@ -125,7 +129,8 @@ public class CommunicationPreferences extends UhcDriver {
 			}
 
 		}
-		AgreeTerms.click();
+		Thread.sleep(5000);
+		//AgreeTerms.click();
 		SavePreferences.click();
 		if (driver.getTitle().equalsIgnoreCase("Preferences")) {
 			Thread.sleep(5000);
