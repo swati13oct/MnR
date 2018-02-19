@@ -198,7 +198,7 @@ public class LoginPage2 extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		if (MRScenario.environment.equalsIgnoreCase("stage"))
+		if (MRScenario.environment.equalsIgnoreCase("awe-stage"))
 		{
 			start(STAGE_DASHBOARD_URL);
 			
