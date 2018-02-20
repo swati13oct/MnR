@@ -208,16 +208,16 @@ public class PharmacyResultPage extends UhcDriver{
 	
 	public boolean navigateTopharmacySearch(){
 		boolean flag = true;
-		searchAgainButton.click();
+		//searchAgainButton.click();
 		try {
 			Thread.sleep(14000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (!searchPharmaciesButton.isDisplayed()) {
-			flag  = false;
-		}
+		//if (!searchPharmaciesButton.isDisplayed()) {
+			//flag  = false;
+		//}
 		return flag;
 		
 	}
