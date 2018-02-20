@@ -1,6 +1,6 @@
 @thePredators
 @pharmacylocator
-Feature:To test Locate a Pharmacy tool in Redesign site
+Feature:P1.6To test Locate a Pharmacy tool in Redesign site
 
 @PharmacyDistanceDefaultZip
 Scenario Outline:To verify for default zipcode, filters, Show on map, View PDF, More Info in Redesign site

@@ -1,6 +1,6 @@
 @theIncredibles
 @member_redesign
-Feature:Header/Navigation for Member Site Redesign
+Feature:I1.3Header/Navigation for Member Site Redesign
 
 @member_redesign_header @IncrediblesHeader
 Scenario Outline:As an authenticated member on the new Member site, I want to check the L1 and L2 tabs and its navigation.

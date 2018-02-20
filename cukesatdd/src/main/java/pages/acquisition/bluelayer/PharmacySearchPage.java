@@ -85,7 +85,8 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(xpath = "//form[@id='searchCriteria']/div[3]/p[2]/span")
 	private WebElement narrowYourSearchContent;
 
-	@FindBy(xpath = "//div[@id='medicareTitle']/h1")
+	//@FindBy(xpath = "//div[@id='medicareTitle']/h1")
+	@FindBy(xpath = "//*[@id='site-wrapper']/div[4]/div/div/div/div/div/main/div/div[3]/div/div[1]/div/div[1]/div/div/div[1]/h2")
 	private WebElement pharmacyResultHeader;
 	
 	@FindBy(id = "services")
@@ -278,8 +279,8 @@ public class PharmacySearchPage extends UhcDriver {
 
 
 	public PharmacyResultPage showAllPharmacies() {
-		allPharmacies.click();
-		searchPharmaciesButton.click();
+		//allPharmacies.click();
+		//searchPharmaciesButton.click();
 		for(int i=0;i<10;i++){
 			try {
 				Thread.sleep(5000);
@@ -288,12 +289,15 @@ public class PharmacySearchPage extends UhcDriver {
 				e.printStackTrace();
 			}
 			if(pharmacyResultHeader.isDisplayed())
-				break;			
+			{
+				return new PharmacyResultPage(driver);
+			}
+				//break;			
 		}
-		if (pharmacyResultHeader.getText().equalsIgnoreCase(
+		/*if (pharmacyResultHeader.getText().equalsIgnoreCase(
 				"Pharmacies Available in Your Area")) {
 			return new PharmacyResultPage(driver);
-		}
+		}*/
 		return null;
 	}
 
@@ -339,8 +343,8 @@ public PharmacySearchPage selectPharmacyandServices(String pharmacytype) {
 	public PharmacyResultPage searchSelectingPharmacyTypes(
 			String[] pharmacyTypeArray) {
 
-		pharmacyTypeSelectionRadioButton.click();
-		for (String pharmacyType : pharmacyTypeArray) {
+		//pharmacyTypeSelectionRadioButton.click();
+		/*for (String pharmacyType : pharmacyTypeArray) {
 			for (WebElement checkBox : pharmacyTypesCheckboxes) {
 				if (checkBox.getText().equalsIgnoreCase(pharmacyType)) {
 					ElementData elementData = new ElementData("id",
@@ -349,21 +353,26 @@ public PharmacySearchPage selectPharmacyandServices(String pharmacytype) {
 				}
 				
 			}
-		}
-		searchPharmaciesButton.click();
-		for(int i=0;i<10;i++){
+		}*/
+		//searchPharmaciesButton.click();
+		/*for(int i=0;i<10;i++){
 			try {
 				Thread.sleep(10000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
 			if(pharmacyResultHeader.isDisplayed())
 				break;
 			
 		}
 		if (pharmacyResultHeader.getText().equalsIgnoreCase(
 				"Pharmacies Available in Your Area")) {
+			return new PharmacyResultPage(driver);
+		}*/
+		if(pharmacyResultHeader.isDisplayed())
+		{
 			return new PharmacyResultPage(driver);
 		}
 		return null;
