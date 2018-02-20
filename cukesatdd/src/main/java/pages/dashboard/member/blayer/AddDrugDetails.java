@@ -42,7 +42,7 @@ public class AddDrugDetails extends UhcDriver {
 	public AddDrugDetails(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		CommonUtility.waitForPageLoad(driver, AddDrugDetailsPage, 10);
+		//CommonUtility.waitForPageLoad(driver, AddDrugDetailsPage, 10);
 		String fileName = CommonConstants.ADD_DRUG_DETAILS_PAGE_DATA;
 		//	adddrugdetails = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_BLAYER_MEMBER);
 		//openAndValidate();

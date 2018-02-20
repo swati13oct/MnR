@@ -1,5 +1,5 @@
 @registrationAddplanpopup
-Feature: To test add a plan flow and error for registration flow in redesign portal
+Feature:G1.7To test add a plan flow and error for registration flow in redesign portal
 
   Scenario Outline: To verify member with additional plan is navigated to step 3 (Create Account) after adding another plan on Step2(Plan Information Page)
     Given the member is on sign in page

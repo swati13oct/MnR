@@ -28,6 +28,9 @@ public class MemberNewSignInPage extends UhcDriver{
 
 	@FindBy (css = "#sign-in-btn")
 	private WebElement signInButton;
+	
+	@FindBy (id ="uname_pwd_empty_error")
+	private WebElement emptyUsernamePswd;
 
 	@FindBy (css = "#username-error>p")
 	private WebElement usernameErrormessage;
@@ -107,6 +110,12 @@ public class MemberNewSignInPage extends UhcDriver{
 	public boolean validatepassworderror() {
 
 		return passwordErrorMessage.isDisplayed();
+
+	}
+	
+	public boolean validateUsernamePswdError() {
+
+		return emptyUsernamePswd.isDisplayed();
 
 	}
 
