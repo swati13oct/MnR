@@ -8,10 +8,9 @@ ATDD_MAPD_IND_RX_EOB_01/Password@1,MAPD,Individual,rx_Eob
 q3_sep_blayer149/Password@1,MAPD-PHR,Individual,
 ATDD_q2_jun_blayer123/Password@1,MAPD,COSMOS_dce,
 q1_grp_feb261/Password@1,MA,Group,
-q1_aarp_feb364/Password@1,MAPD,Individual,NON LIS
+q1_feb_uhc009/Password@1,MAPD,Individual,NON LIS
 q1_feb_uhc152/Password@1,MA,Individual,
 q3_sep_grp351/Password@1,SSUP,Group,
-<<<<<<< HEAD
 q1_grp_feb271/Password@1,PDP,Group,
 q1_grp_feb020/Password@1,MAPD,Group,NON LIS
 q1_grp_feb270/Password@1,PDP,Group,NON LIS
@@ -34,7 +33,6 @@ q1_aarp_feb580/Password@1,MA,Individual,LIS 1
 q1_grp_feb043/Password@1,MA,Group,LIS 1
 q1_ship_feb120/Password,HIP,SHIP,NON LIS
 q1_ship_feb232/Password@1,PHIP,SHIP,NON LIS
-=======
 q4_dec_uhc012/Password@1,MAPD,Individual,
 q4_dec_grp306/Password@1,PDP,Group,
 q3_sep_grp279/Password@1,Peehip,Group,
@@ -51,5 +49,3 @@ q1_aarp_feb006/Password@1,PDP,IndividualAARPWOEOB
 q1_ship_feb005/Password@1,SHIP,IndividualAARPWOEOB
 q1_feb_sfl023/Password@1,PCP,withEOB
 q1_aarp_feb159/Password@1,MAPD,aarpWithEOB
->>>>>>> develop
-
