@@ -242,6 +242,15 @@ private WebElement myMenu;
 @FindBy(linkText = "Benefits and Coverage")
 private WebElement benefitsAndCoveragelink;
 
+@FindBy(xpath = "//button[@id='dropdown-toggle--1']/span[contains(text(),'Profile')]")
+private WebElement accountToggleDropdown;
+
+@FindBy(xpath = "//a[@class='dropdown-option' and contains(text(),'Account Settings')]")
+private WebElement accountSettingOption;
+
+@FindBy(xpath = "//header//h1")
+private WebElement heading;
+
 
 @FindBy(xpath="//a[contains(text(),'Search for a provider')]")
 private WebElement providerlinkinPCPSection;
@@ -309,9 +318,7 @@ private WebElement searchforproviderlinkinClaimsPage;
         private WebElement profilenpreferenceslink;
         
         
-        @FindBy(xpath="//header//h1")
-    	private WebElement heading;
-        
+
         @FindBy(xpath = "//sticky[@id='sticky-nav']//nav[@id='main-nav']//a[contains(text(),'Coverage & Benefits')]")
     	private WebElement BnClink;
         
@@ -393,6 +400,35 @@ private WebElement searchforproviderlinkinClaimsPage;
         
         public ProfilePreferencesPage navigateDirectToProfilePage() throws InterruptedException  {
     		
+        	if (MRScenario.environment.equalsIgnoreCase("stage")) 
+        	{
+    			System.out.println("user is on Stage login page");			
+    			//CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);			
+    			if(driver.getCurrentUrl().contains("/dashboard"));
+    			{
+    				
+    				accountToggleDropdown.click();
+    				validate(accountSettingOption);
+    				accountSettingOption.click();
+    				try {
+    					Thread.sleep(3000);
+    				} catch (InterruptedException e) {
+    					// TODO Auto generated catch block
+    					e.printStackTrace();
+    				}
+    				System.out.println("title is "+driver.getTitle());
+    				System.out.println("Current Url is "+driver.getCurrentUrl());
+    				CommonUtility.waitForPageLoad(driver, heading, 50);
+
+    				if (driver.getTitle().equalsIgnoreCase("Profile")) {
+
+    					return new ProfilePreferencesPage(driver);
+    				}
+    			
+        	}
+        	}
+        	
+        	
     		if (validate(iPerceptionPopUp)) {
                 iPerceptionPopUp.click();
                 System.out.println("iPerception Pop Up displayed");

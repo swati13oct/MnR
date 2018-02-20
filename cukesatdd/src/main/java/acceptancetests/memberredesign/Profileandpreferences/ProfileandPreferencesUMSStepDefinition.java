@@ -50,7 +50,6 @@ public class ProfileandPreferencesUMSStepDefinition {
 	 */
 	@Given("^registered member with following details for Profile and Preferences flow$")
 	public void login_with_member(DataTable memberAttributes) throws InterruptedException {
-		/* Reading the given attribute from feature file */
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -59,7 +58,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 					memberAttributesRow.get(i).getCells().get(1));
 		}
 
-		//String category = memberAttributesMap.get("Member Type");
+		String category = memberAttributesMap.get("Member Type");
 		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
 		List<String> desiredAttributes = new ArrayList<String>();
 		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator.hasNext();) {
@@ -86,47 +85,21 @@ public class ProfileandPreferencesUMSStepDefinition {
 			getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 		}
+
 		WebDriver wd = getLoginScenario().getWebDriver();
-		// MRScenario.keyEvent(wd);
-
-		LoginPage2 loginPage = new LoginPage2(wd);
-		loginPage.navigateToNewDashboardUrl();
-		getLoginScenario().saveBean(PageConstantsMnR.LOGIN_PAGE, loginPage);
-		AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
-		Assert.assertTrue(true);
+		LoginPage2 loginPage = new LoginPage2(wd);
 		
-		if (accountHomePage!= null) {
-			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-			getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
-
-		} else {
-			System.out.println("Null Dashboard page");
+		AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
+		
+		if (accountHomePage != null) {
+			 getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
+			Assert.assertTrue(true);
+		}
+		else {
+			Assert.fail("***** Error in loading  Redesign Account Landing Page *****");
 		}
 
-		// JSONObject accountHomeActualJson = null;
-
-		/* Get expected data */
-		/*
-		 * Map<String,JSONObject> expectedDataMap =
-		 * loginScenario.getExpectedJson(userName); JSONObject
-		 * accountHomeExpectedJson =
-		 * accountHomePage.getExpectedData(expectedDataMap);
-		 * 
-		 * if (accountHomePage != null) {
-		 * getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		 * getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,
-		 * accountHomePage); Assert.assertTrue(true); accountHomeActualJson =
-		 * accountHomePage.accountHomeJson; }
-		 * 
-		 * try { JSONAssert.assertEquals(accountHomeExpectedJson,
-		 * accountHomeActualJson, true); } catch (JSONException e) { // TODO
-		 * Auto-generated catch block e.printStackTrace(); }
-		 * 
-		 * getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP,
-		 * expectedDataMap);
-		 */
 
 	}
 
@@ -147,7 +120,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 		}
 		else
         {
-			System.out.println("Benefits and Coverage page object is Null ");
+			System.out.println("Pnp page object is Null ");
 		}
 
 	}
@@ -699,7 +672,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 	 * @toDo :  Validates the Need help section for ship member
 	 */
 
-	@Then("^the user validates the need help section for ship member")
+	@Then("^the user validate the need help section for ship member")
 	public void UserValidatesNeedHelpShip() {
 		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
