@@ -75,7 +75,7 @@ public class MemberNewSignInPageStepDefinition {
 		MemberNewSignInPage sign_Page =  ( MemberNewSignInPage) getLoginScenario().getBean(PageConstantsMnR.NEW_SIGN_PAGE);	
 
 		System.out.println("Both UN and PW fields are Empty");
-		System.out.println("Validating the Username and Password Error messages ===========>"+ (sign_Page.validateUsernameError() && sign_Page.validatepassworderror()));
+		System.out.println("Validating the Username and Password Error messages ===========>"+ (sign_Page.validateUsernamePswdError()));
 	}
 
 	@When("^I have not entred any thing in  username  field$")

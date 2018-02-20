@@ -1,5 +1,5 @@
 @codeMonkeys
-Feature: To test plan benefits and Coverage on UMS site
+Feature:C1.1 To test plan benefits and Coverage on UMS site
 @CMneedHelp
     Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
     Given registered member with following details logins in the member portal 

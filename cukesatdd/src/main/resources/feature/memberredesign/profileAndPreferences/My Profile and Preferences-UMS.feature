@@ -1,5 +1,5 @@
 @codeMonkeys
-Feature: To test Profile and Preferences page .
+Feature: C1.2To test Profile and Preferences page .
 
 
     @CMNeedhelp

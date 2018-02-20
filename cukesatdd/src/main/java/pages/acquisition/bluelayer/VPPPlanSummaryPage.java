@@ -1273,11 +1273,23 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			if(validate(viewPlans)){
 			viewPlans.click();
 			}
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			List<WebElement> view2017Plans = driver.findElements(By.linkText("Edit drug list"));
 			view2017Plans.get(0).click();
 		}else{
 			if(validate(viewPDPPlans)){
 			viewPDPPlans.click();
+			}
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 			List<WebElement> view2017PDPPlans = driver.findElements(By.linkText("Edit drug list"));
 			view2017PDPPlans.get(0).click();

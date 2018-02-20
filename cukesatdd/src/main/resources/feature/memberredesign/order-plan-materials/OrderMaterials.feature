@@ -1,7 +1,7 @@
 @thePredators
 @ordermaterials
 
-Feature: To test order materials in Redesign site
+Feature:P1.5 To test order materials in Redesign site
   @ConfirmationPage
   Scenario Outline: Verify order materials confirmation page in Redesign site
     Given registered Redesign member for Order Plan Materials with following attributes

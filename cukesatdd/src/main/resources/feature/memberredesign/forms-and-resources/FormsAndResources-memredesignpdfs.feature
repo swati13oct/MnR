@@ -1,5 +1,5 @@
 @dashBoardFormsAndResourcespdfs @Gladiators
-Feature: To validate plan materials section on forms and resources page in dashboard site
+Feature:G1.2 To validate plan materials section on forms and resources page in dashboard site
 
   @planMaterialsSectionValidation
   Scenario Outline: 
