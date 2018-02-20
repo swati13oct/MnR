@@ -215,9 +215,9 @@ public class PharmacyResultPage extends UhcDriver{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (!searchPharmaciesButton.isDisplayed()) {
-			flag  = false;
-		}
+		//if (!searchPharmaciesButton.isDisplayed()) {
+			//flag  = false;
+		//}
 		return flag;
 		
 	}
