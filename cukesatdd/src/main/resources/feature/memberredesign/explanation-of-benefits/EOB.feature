@@ -1,4 +1,4 @@
-@fastandfurious @theSpartans
+@fastandfurious @theSpartans @febRelease2018
 @eob
 Feature:To test EOB on Dashboard page
 @Eobsiteleavingpopup 
