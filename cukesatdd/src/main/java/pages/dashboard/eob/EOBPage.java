@@ -5,19 +5,13 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory; 
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import com.itextpdf.text.log.SysoCounter;
 
 import acceptancetests.data.MRConstants;
 import atdd.framework.MRScenario;
@@ -48,20 +42,18 @@ public class EOBPage extends UhcDriver{
 	@FindBy(className="btn custom-date-search-btn")
 	private WebElement searchButton;
 
-	@FindBy(xpath="//*[contains(text(),'Learn More About My')]")
+	@FindBy(className="learnmoreunderline ng-scope")
 	private WebElement learnMoreLink;
 
+	// The below web element doesn't have Id or class 
 	@FindBy(xpath="//*[contains(text(),'How to read your Medical EOB ')]")
 	private WebElement readMedicalEOB;
 
-	@FindBy(xpath="//*[@id='collapseEOB']/ul/li/a")
+	@FindBy(id="eobvideoicon")
 	private WebElement eobVideoBox;
 	
-	@FindBy(xpath=".//*[@id='error-results']/div[1]/div/h2/span[3]")
-	private WebElement eobDetailsHeader;
-
-	@FindBy(xpath="//*[contains(text(),'Watch Video')]")
-	private WebElement readEOBVideo;
+	//@FindBy(xpath="//*[contains(text(),'Watch Video')]")
+	//private WebElement readEOBVideo;
 
 	@FindBy(id="adobesitelink")
 	private WebElement adobeWebsiteLink;
@@ -72,7 +64,7 @@ public class EOBPage extends UhcDriver{
 	@FindBy(id="cancelbtn")
 	private WebElement siteLeavingCancelButton;
 
-	@FindBy(xpath=".//*[@id='IPEinvL']/map/area[2]")
+	@FindBy(className="modal-body")
 	private WebElement iPerceptionPopUp;
 
 	@FindBy(xpath = "//a[contains(text(), 'Medicare Advantage Plan')]")
@@ -99,13 +91,13 @@ public class EOBPage extends UhcDriver{
 	@FindBy(id="fromDatepicker")
 	private WebElement fromDate;	
 	
-	@FindBy(xpath="//*[@class='btn btn--primary' and text()='Search']")
+	@FindBy(className=" btn btn—primary")
 	private WebElement customSearchButton;
 	
-	@FindBy(xpath="//*[@class='bold number-title ng-binding']")
+	@FindBy(className="bold number-title ng-binding")
 	private WebElement eobCount;
 		
-	@FindBy(xpath="//i[@class='rightarrow']")
+	@FindBy(className="rightarrow")
 	private WebElement nextPageArrow;
 	
 	private static String STAGE_DASHBOARD_URL = MRConstants.DASHBOARD_URL;
@@ -368,9 +360,9 @@ public class EOBPage extends UhcDriver{
 	
 		public EOBPage validateEobVideo(){
 		learnMoreLink.click();
-		if(readEOBVideo.isDisplayed()){
+		if(eobVideoBox.isDisplayed()){
 			System.out.println("HOW TO READ YOUR MONTHLY MEDICAL EXPLANATION OF BENEFITS (VIDEO) link displayed correctly");
-			readEOBVideo.click();
+			eobVideoBox.click();
 			try {
 				Thread.sleep(5000);
 				return new EOBPage(driver);
@@ -616,6 +608,7 @@ public class EOBPage extends UhcDriver{
 			numberOfPageDisplayed+=1;
 			System.out.println(numberOfPageDisplayed + "Page displayed for EOBs");
 		}
+		
 		return numberOfPageDisplayed;
 	}
 	
