@@ -261,7 +261,9 @@ public class PharmacyLocatorStepDefinitionUHC {
 
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		pharmacySearchPage.validateNoPharmacyErrormsg(pharmacyTypeArray);
+		//jchen118 remove the non existing btn start
+		//pharmacySearchPage.validateNoPharmacyErrormsg(pharmacyTypeArray);
+		//jchen118 remove the non existing btn end
 	}
 
 	/**

@@ -371,11 +371,11 @@ public PharmacySearchPage selectPharmacyandServices(String pharmacytype) {
 				"Pharmacies Available in Your Area")) {
 			return new PharmacyResultPage(driver);
 		}*/
-		if(pharmacyResultHeader.isDisplayed())
-		{
+		//if(pharmacyResultHeader.isDisplayed())
+		//{
 			return new PharmacyResultPage(driver);
-		}
-		return null;
+		//}
+		//return null;
 	}
 	
 		public AddDrugPage selectPharmacy(String pharmacyName) {
