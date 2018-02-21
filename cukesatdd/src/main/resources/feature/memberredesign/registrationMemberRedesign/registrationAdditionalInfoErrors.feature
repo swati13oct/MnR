@@ -1,5 +1,5 @@
 @registrationAdditionalInfoErrors
-Feature: To test additional information section in dashboard registration flow
+Feature: G1.6To test additional information section in dashboard registration flow
 
   Scenario Outline: To verify member is navigated to plan info in registration Additional Information Section using valid Zip/First/Last name
     Given the member is on sign in page

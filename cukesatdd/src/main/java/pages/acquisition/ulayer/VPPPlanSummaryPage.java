@@ -19,7 +19,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
-
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -961,6 +960,44 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return null;
 	}
 	
+	public boolean validatePlanSummary(){
+		boolean flag = true;
+		int allPlans = 0;
+		int maPlans = 0;
+		int msPlans = 0;
+		int pdpPlans =0;
+				int msnPlans = 0;
+		if(validate(allPlansSize)){
+			 allPlans = Integer.valueOf(allPlansSize.getText().split(" ")[2]);
+		}else{
+			Assert.assertTrue("This scenario is for AEP period", true);
+			
+		}
+
+		if(validate(maPlansCount)){
+			 maPlans = Integer.valueOf(maPlansCount.getText());
+		}else{
+			Assert.assertTrue("This scenario is for AEP period", true);
+			
+		}
+		
+		if(validate(msPlansCount)){
+			 msPlans = Integer.valueOf(msPlansCount.getText());
+		}else{
+			Assert.assertTrue("This scenario is for AEP period", true);
+			
+		}
+		
+		if(validate(pdpPlansCount)){
+			 pdpPlans = Integer.valueOf(pdpPlansCount.getText());
+		}else{
+			Assert.assertTrue("This scenario is for AEP period", true);
+			
+		}
+	
+		
+		return flag;
+	}
 
 }
 
