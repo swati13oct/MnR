@@ -50,14 +50,19 @@ public abstract class UhcDriver {
 	
 
 	public void switchToNewTab(WebElement Element) {
-		
+		String ParentHandle = driver.getWindowHandle();
 		int initialCount = driver.getWindowHandles().size();
-		Element.click();;
-		//clickUsingAction(Element);
+		Element.click();
 		waitForCountIncrement(initialCount);
 		ArrayList<String> tabs = new ArrayList<String>(
 				driver.getWindowHandles());
-		driver.switchTo().window(tabs.get(1));
+		String currentHandle = null;
+		for (int i = 0; i < initialCount + 1; i++ ){
+			driver.switchTo().window(tabs.get(i));
+			currentHandle = driver.getWindowHandle();
+			if(!currentHandle.contentEquals(ParentHandle))
+				driver.switchTo().window(tabs.get(i));
+		}
 	}
 	
 	public void waitForCountIncrement(int initialCount){

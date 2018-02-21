@@ -1172,6 +1172,7 @@ public class ContactUsPage extends UhcDriver{
 	}
 	
 	public String getDisclaimerTextForMemberAuth(){
+		validate(memberAuthMessage);
 		return memberAuthMessage.getText().trim();
 	}
 
