@@ -44,11 +44,7 @@ public class FormsAndResourcesPage extends UhcDriver {
             	/**Link for perception popup**/
             	@FindBy(xpath="html/body/div[3]/div[2]/map/area[1]")
                 private WebElement perceptionpopup;	
-            	
-            	/**Link for cross link on modal id cards **/
-            	
-            	@FindBy(xpath="//*[@id='ui-view-modal']/div/id-cards/modal/div/div/header/div/button")
-                public WebElement crosslink;
+
 
                 /** Medical button in EOB section - Forms And Resources page */
                 @FindBy(id = "medicalEOB")
@@ -100,7 +96,7 @@ public class FormsAndResourcesPage extends UhcDriver {
                 
             
                 /**Forms and Resources section**/    
-                @FindBy(xpath = "(//*[contains(text(),'Forms and Resources')])[4]")
+                @FindBy(xpath = "//h2[@id='formsAndResHeader']")
                 private WebElement FormsnResources;
                 
                 
@@ -108,7 +104,7 @@ public class FormsAndResourcesPage extends UhcDriver {
                 public FormsAndResourcesPage(WebDriver driver) {
                                 super(driver);
                                 PageFactory.initElements(driver, this);
-                               // openAndValidate();
+                              //  openAndValidate();
                 }
                 
              /*   public void navigatetoFormsnResources() throws InterruptedException
@@ -295,13 +291,15 @@ public class FormsAndResourcesPage extends UhcDriver {
                      getTemporaryIdcardlink().click();
                      
                      Thread.sleep(5000);
-                     String expectedURL ="https://member.int.uhc.com/aarp/dashboard/modal/id-cards";
+                     
+                     String expectedURL ="https://member.int.uhc.com/medicare/dashboard/modal/id-cards";
                      String actualURL=driver.getCurrentUrl();
                      System.out.println(actualURL);
-                     Thread.sleep(2000);
-                   
-					// Assert.assertEquals(expectedURL, actualURL);
-                     crosslink.click();
+                     Thread.sleep(5000);
+                   Assert.assertEquals(expectedURL, actualURL);
+                     driver.findElement(By.cssSelector(".modal-close-btn")).click();
+					
+                     
                      Thread.sleep(5000);
                     String s=driver.getCurrentUrl();
                     System.out.println(s);
@@ -320,9 +318,11 @@ public class FormsAndResourcesPage extends UhcDriver {
                  */
                 public void validateEngDefault()
                 {
-                     if(oselect.getFirstSelectedOption().getText()=="ENGLISH")
+                	System.out.println(oselect.getFirstSelectedOption().getText());
+                     if(oselect.getFirstSelectedOption().getText().equals("ENGLISH"))
                      {
-                           System.out.println("true");
+                    	 System.out.println(oselect.getFirstSelectedOption().getText());
+                    	 System.out.println("true");
                      }
                      
                      else 

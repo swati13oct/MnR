@@ -43,22 +43,23 @@ public class RallyDashboard extends UhcDriver{
 	   public FormsAndResourcesPage navigatetoFormsnResources() throws InterruptedException
        {
                      //  DOCUMENTSRESOURCES.click();
-                      if (MRScenario.environment.equalsIgnoreCase("team-ci1") || MRScenario.environment.equalsIgnoreCase("team-g") ||MRScenario.environment.equalsIgnoreCase("test-a") ) {
-                    	  Thread.sleep(40000);
+                      if (MRScenario.environmentMedicare.equalsIgnoreCase("team-ci1") || MRScenario.environmentMedicare.equalsIgnoreCase("team-g") ||MRScenario.environment.equalsIgnoreCase("test-a") ) {
+                    	  Thread.sleep(50000);
                			System.out.println("Go to forms and resources link is present "+driver.findElement(By.xpath("//*[contains(text(),'Go to Forms and Resource page')]")).isDisplayed());
                			driver.findElement(By.xpath("//*[contains(text(),'Go to Forms and Resource page')]")).click();
                			
                		}
 
-               		else if (MRScenario.environment.equalsIgnoreCase("stage")) {
+               		else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
+               			Thread.sleep(40000);
                			System.out.println("user is on Stage login page");			
                						
                			if(driver.getCurrentUrl().contains("/dashboard"));
                			{
                				System.out.println("User is on dashboard page and URL is ====>"+driver.getCurrentUrl());
-               				Thread.sleep(30000);
+               				Thread.sleep(40000);
                				DOCUMENTSRESOURCES.click();
-               				DOCUMENTSRESOURCES.click();
+               				
                				
                			}
                				
@@ -90,7 +91,7 @@ public class RallyDashboard extends UhcDriver{
 	public void scroll() {
 	  	JavascriptExecutor jse = (JavascriptExecutor)driver;
     	jse.executeScript("window.scrollBy(0,450)", "");
-		
+    	
 	}
 
 

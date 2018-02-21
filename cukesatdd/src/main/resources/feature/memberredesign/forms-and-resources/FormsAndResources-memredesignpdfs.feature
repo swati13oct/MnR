@@ -29,16 +29,16 @@ Feature: To validate plan materials section on forms and resources page in dashb
      | PROVIDER_SEARCHLINK | <Provider_Searchlink> |
      | PHARMACY_SEARCHLINK | <Pharmacy_Searchlink> |
     And validate that the forms and resources section is displayed 
-    | FORMS_N_RESOURCES   |  <Forms_Resources>     |
+    
     
      
     #u Layer Members
     Examples: 
-      | userId         | password   | Anoc_section  | AnnualDirectoriesSection  |  Provider_Searchlink| Pharmacy_Searchlink|Forms_Resources|
+      | userId         | password   | Anoc_section  | AnnualDirectoriesSection  |  Provider_Searchlink| Pharmacy_Searchlink|
    # uhc
-      | q1_feb_uhc085 | Password@1 |  NO   | NO       | NO     | NO       | YES|          
+      | q1_feb_uhc085 | Password@1 |  NO   | NO       | NO     | NO       |         
    # aarp
-      | q4_dec_aarp159 | Password@1 |   YES  | YES       | YES     | YES        | YES|                
+    #  | q1_aarp_feb010 | Password@1 |   YES  | YES       | YES     | YES        |                
    
       
        

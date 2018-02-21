@@ -72,12 +72,12 @@ public class NewLoginPage extends UhcDriver {
 	}
 
     public void navigateToNewDashboardUrls(){
-        if (MRScenario.environment.equalsIgnoreCase("stage"))
+        if (MRScenario.environmentMedicare.equalsIgnoreCase("stage"))
         {
                start(DASHBOARD_URL);
                System.out.println("User is Navigating to Stage Dashboard");
         }
-        else if (MRScenario.environment.equalsIgnoreCase("team-ci1")) {
+        else if (MRScenario.environmentMedicare.equalsIgnoreCase("team-ci1")) {
                
                start(REDESIGN_LOGIN_URL);
                System.out.println("user is on Team-Ci1 Environment");
@@ -113,7 +113,7 @@ public class NewLoginPage extends UhcDriver {
 		}*/
 	
 
-		if ( MRScenario.environment.equalsIgnoreCase("team-ci1") || (MRScenario.environment.equalsIgnoreCase("team-g"))) {
+		if ( MRScenario.environmentMedicare.equalsIgnoreCase("team-ci1") || (MRScenario.environmentMedicare.equalsIgnoreCase("team-g"))) {
 
 			Alert alert = driver.switchTo().alert();
 			        alert.accept();
