@@ -13,23 +13,26 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.member.PageConstants;
-import acceptancetests.login.data.LoginCommonConstants;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageConstants;
+import acceptancetests.data.PageConstantsMnR;
+import acceptancetests.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
-import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.member.redesign.ContactUsPage;
-import pages.member.redesign.NewLoginPage;
-import pages.member.redesign.TestHarnessPage;
 import pages.member.ulayer.AccountHomePage;
 import pages.member.ulayer.LoginPage;
 
+/**
+ * 
+ * Functionality Contact Us UHC site
+ *
+ */
 public class ContactusRedesignStepDefinition {
 	/**
 	 * 
@@ -43,6 +46,9 @@ public class ContactusRedesignStepDefinition {
 			return loginScenario;
 		}
 		
+		/**
+		 * 		@toDO : user login with the registered member
+		 */
 		@Given("^registered UMS member with following attributes$")
 		public void registered_member_orderplanmaterials_ums(DataTable givenAttributes) throws InterruptedException {
 
@@ -88,18 +94,21 @@ public class ContactusRedesignStepDefinition {
 			
 			{
 				loginPage.navigateToNewDashboardUrl();
-				getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
-				AccountHomePage accountHomePage = (AccountHomePage) loginPage.teamhloginWith(userName, pwd);
+				getLoginScenario().saveBean(PageConstantsMnR.LOGIN_PAGE, loginPage);
+				AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
 				getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-				getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,accountHomePage);
+				getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
 				Assert.assertTrue(true);
 			}
 		}
 		
+		/**
+		 *  @toDO : the user navigate to the contact us page
+		 */
 		@When("^the user navigates to contact us page in UHC site$")
 		public void validates_contactUs_Redesign_Page() {
 			
-			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 			
 			ContactUsPage contactUsPage = accountHomePage.navigateToContactUsPage();
 			if(contactUsPage != null)				
@@ -107,6 +116,9 @@ public class ContactusRedesignStepDefinition {
 						contactUsPage);
 		}
 		
+		/**
+		 *  @toDO : the user validates secure email widget on contact us page
+		 */
 		@Then("^user validates secure email widget in contact us page$")
 		public void user_validateSendUaQuestionWidget_UIPage()
 		{
@@ -121,7 +133,9 @@ public class ContactusRedesignStepDefinition {
 		}
 		
 		
-		
+		/**
+		 *  @toDO : the user validates group secure email widget on contact us page
+		 */
 		@Then("^user validates Group secure email widget  in redesign contact us page$")
 		public void user_validates_email_widget_func()
 		{
@@ -134,6 +148,10 @@ public class ContactusRedesignStepDefinition {
 						contactusPage);
 			
 		}
+		
+		/**
+		 *  @toDO : the user validates cancel link on secure email widget on contact us page
+		 */
 		@Then("^user validates cancel click on Group secure email widget  in redesign contact us page$")
 		public void user_validates_email_widget_Cancel_Click()
 		{
@@ -147,7 +165,9 @@ public class ContactusRedesignStepDefinition {
 			
 		}
 		
-		
+		/**
+		 *  @toDO : the user fills the fill out contact form and submit on contact us page
+		 */
 		@Then("^user clicks on submit question by selecting Finding a Physician option in redesign contact us page$")
 		public void user_clicks_submit_question()
 		{
@@ -161,19 +181,9 @@ public class ContactusRedesignStepDefinition {
 			
 		}
 		
-		@Then("^user clicks on submit question by selecting Billing Information option in redesign contact us page$")
-		public void user_clicks_submit_question_using_Billing_info()
-		{
-			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
-			
-			contactusPage.submitQuestionClick_by_BillingInfo_option();
-			 
-			if(contactusPage != null)				
-				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
-						contactusPage);
-			
-		}
-		
+		/**
+		 * @toDO : the user validate the invalid alternative email Id
+		 */
 		@Then("^user enters invalidate alternative email ID in sendUS A question widget$")
 		public void email_Validations()
 		{
@@ -187,6 +197,9 @@ public class ContactusRedesignStepDefinition {
 			
 		}
 		
+		/**
+		 * @toDO : the user validate the invalid confirm alternative email Id
+		 */
 		@Then("^user enters invalidate Confirm email ID in sendUS A question widget$")
 		public void invalidate_confirmEmailValidations()
 		{
@@ -200,6 +213,9 @@ public class ContactusRedesignStepDefinition {
 			
 		}
 		
+		/**
+		 * @toDO : the user validate the blank text for alternative email Id
+		 */
 		@Then("^user enters blank text  in sendUS A question  message widget$")
 		public void invalidate_blankEmailMsgValidations()
 		{
@@ -213,13 +229,16 @@ public class ContactusRedesignStepDefinition {
 			
 		}
 
+		/**
+		 * @toDO : the user validate the confirmation message after successful submission 
+		 */
 		@And("^UI should be replaced by a confirmation display$")
 		public void UI_should_be_replaced_by_a_confirmation_display(){
 			
 			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 			
-			String expectedMessage = "Thank you. We value your input, and will be happy to answer your questions."
-				+ " A Customer Service representative will review your question and respond to you shortly.";
+			String expectedMessage = "Thank you for your inquiry. We value your input, and would be happy to answer your questions."
+				+ " A Customer Service Advocate will review your question and respond to you shortly.";
 			
 			contactusPage.validateThankYouMessage(expectedMessage);
 			
@@ -228,6 +247,9 @@ public class ContactusRedesignStepDefinition {
 						contactusPage);
 		}
 		
+		/**
+		 * @toDO : the user validate invalid phone number
+		 */
 		@Then("^user enters invalid phone number  in sendUS A question widget$")
 		public void alternative_email_idError_Validations()
 		{
@@ -241,17 +263,9 @@ public class ContactusRedesignStepDefinition {
 			
 		}
 
-		@When("^the user validates the contact us redesign  page in AARP site$")
-		public void the_user_validates_the_contact_us_redesign_page_in_AARP_site() {
-			
-			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-			
-			ContactUsPage contactUsPage = accountHomePage.navigateToContactUsPage();
-			if(contactUsPage != null)				
-				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
-						contactUsPage);
-		}
-		
+		/**
+		 * @toDO : the user validate secure email widget section
+		 */
 		@Then("^user validates secure email widget UI in redesign contact us page$")
 		public void user_validates_secure_email_widget_UI_in_redesign_contact_us_page()
 		{
@@ -261,6 +275,9 @@ public class ContactusRedesignStepDefinition {
 			
 		}
 		
+		/**
+		 * @toDO : the user validate secure email widget functionality
+		 */
 		@Then("^user validates secure email widget in redesign contact us page$")
 		public void user_validates_secure_email_widget_functionality_in_redesign_contact_us_page()
 		{
@@ -274,6 +291,9 @@ public class ContactusRedesignStepDefinition {
 			
 		}
 		
+		/**
+		 * @toDO : the user validate secure email widget functionality with new email address
+		 */
 		@Then("^user validates secure email widget functionality using Email Address on File radio button$")
 		public void user_validates_email_widget_func_byEmailAddress_Radio_button()
 		{
@@ -287,6 +307,9 @@ public class ContactusRedesignStepDefinition {
 			
 		}
 		
+		/**
+		 * @toDO : the user validate secure email messaging model
+		 */
 		@Then("^user validates secure Messaging Model$")
 		public void user_validates_SecureMessagingModel()
 		{
@@ -300,7 +323,9 @@ public class ContactusRedesignStepDefinition {
 			
 			
 		}
-		
+		/**
+		 * @toDO : the user validate cancel link on secure email widget section 
+		 */
 		@Then("^user validates secure Messaging Model Cancel link$")
 		public void user_validates_SecureMessagingModel_Cancel()
 		{
@@ -315,6 +340,9 @@ public class ContactusRedesignStepDefinition {
 			
 		}
 		
+		/**
+		 * @toDO : the user validates go to inbox
+		 */
 		@Then("^user validates go To Inbox button  in redesign contact us page$")
 		public void user_validates_goToInBoxDiaplay()
 		{
@@ -324,6 +352,9 @@ public class ContactusRedesignStepDefinition {
 			
 		}
 		
+		/**
+		 * @toDO : the user validates request to call button
+		 */
 		@Then("^user validates clickToCallButton display on contactUS redesign page$")
 		public void validates_clickToCall_widget()
 		{
@@ -337,6 +368,9 @@ public class ContactusRedesignStepDefinition {
 			
 		}
 		
+		/**
+		 * @toDO : the user validates cancel link after clicking request to call button
+		 */
 		@And("^user clicks on send a Request button on Click to call widget$")
 		public void Requestcall_click()
 		{
@@ -344,12 +378,11 @@ public class ContactusRedesignStepDefinition {
 			
 			contactusPage.sendAreqclick();
 			
-			/*if(contactusPage != null)				
-				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
-						contactusPage);*/
-			
 		}
 		
+		/**
+		 * @toDO : the user validates request to call confirmation
+		 */
 		@And("^user clicks on Request Confirmation Click$")
 		public void RequestcallConfimration_click()
 		{
@@ -357,12 +390,11 @@ public class ContactusRedesignStepDefinition {
 			
 			contactusPage.reqCallclickConformation();
 			
-			/*if(contactusPage != null)				
-				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
-						contactusPage);*/
-			
 		}
 		
+		/**
+		 * @toDO : the user validates send us a question widget
+		 */
 		@Then("^user validates sendUS A question Widget in redesign contact us page$")
 		public void user_validates_sendUsQuestion_Widget()
 		{
@@ -375,6 +407,10 @@ public class ContactusRedesignStepDefinition {
 						contactusPage);
 			
 		}
+		
+		/**
+		 * @toDO : the user validates header display for PDP member
+		 */
 		@Then("^user validates PDP page display in redesign contact us page$")
 		public void PdpPageDisplay()
 		{
@@ -387,9 +423,6 @@ public class ContactusRedesignStepDefinition {
 						contactusPage);
 			
 		}
-
-
-		
 
 	}
 

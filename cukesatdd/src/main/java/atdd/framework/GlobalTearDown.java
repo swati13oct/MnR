@@ -6,7 +6,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.atdd.data.CommonConstants;
+import acceptancetests.data.CommonConstants;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 /**
@@ -60,9 +60,9 @@ public class GlobalTearDown {
 			
 			//To get the report embedded in the report
 			scenario.embed(screenshot, "image/png");
-			
+			 MRScenario mrScen=new MRScenario();
 			//Clean up the existing webdriver.
-		    wd.quit();
+			 mrScen.DriverQuit();
 		}
 
 	}

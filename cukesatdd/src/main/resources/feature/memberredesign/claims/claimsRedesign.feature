@@ -1,5 +1,5 @@
 @claimspage @theTransformers
-Feature: To validate the new changes related to claims page on the member redesigned site
+Feature:T1.1To validate the new changes related to claims page on the member redesigned site
 
   @claimsSummaryFED @theTransformers
   Scenario Outline: To validate the claims present for the Federal member on claims sumamry page for AARP site
@@ -19,6 +19,8 @@ Feature: To validate the new changes related to claims page on the member redesi
       | planType | claimPeriod    | domain | claimssystem |
       | MAPD     | Last 24 Months | COSMOS | COSMOSCLAIMS |
       | MA       | Last 24 Months | NICE   | NICECLAIMS   |
+      #| PDP      | Last 24 Months | RX     | RXCLAIMS     |
+
   @claimsSummarySHIP @theTransformers
   Scenario Outline: To validate the claims present for the SHIP member on claims sumamry page for AARP site
     Given I am an Individual or Group member on the redesigned site
@@ -48,17 +50,17 @@ Feature: To validate the new changes related to claims page on the member redesi
     #And the user search claims for the following time interval in redesigned site
     #| Claims To Date   | <claimToDate>   |
     #| Claims From Date | <claimFromDate>  |
-    Then user validates the claims displayed based on the selection in redesigned site
+    Then I can see the claims displayed based on the selection in redesigned site
     And I navigate to the Claim Details page in AARP site
     Then I validate the Claims Table in claims details page in AARP site
     And I validate the Claims Total in claims details page in AARP site
 
     Examples: 
       | planType | claimPeriod    | claimssystem |
-      #| MA       | Last 24 Months | NICECLAIMS   |
+      | MA       | Last 24 Months | NICECLAIMS   |
       | MAPD     | Last 24 Months | COSMOSCLAIMS |
 
-  #| SHIP     |Last 24 Months |
+  
   @ClaimsDetailsSHIP @theTransformers
   Scenario Outline: To Verify Learn more section on Claims Details Page
     Given I am an Individual or Group member on the redesigned site
@@ -68,15 +70,14 @@ Feature: To validate the new changes related to claims page on the member redesi
     And I can search claims for the following claim period on redesigned site
       | Plan Type    | <planType>    |
       | Claim Period | <claimPeriod> |
-    Then user validates the claims displayed based on the selection in redesigned site
+    Then I can see the claims displayed based on the selection in redesigned site
     And I navigate to the Claim Details page in AARP site
     Then I validate the Claims Table in claims details page in AARP site
     And I validate the Claims Total in claims details page in AARP site
 
     Examples: 
-      | planType | claimPeriod    |claimssystem |
-      | SHIP     | Last 24 Months |SHIPCALIMS   |
-
+      | planType | claimPeriod    | claimssystem |
+      | SHIP     | Last 24 Months | SHIPCALIMS   |
   # This Scenario can only execute when max claims indicator as true
   #@MaxClaimsResultsError
   #Scenario Outline: To Verify the Drug Claims History: Reached Maximum Claim Results Error

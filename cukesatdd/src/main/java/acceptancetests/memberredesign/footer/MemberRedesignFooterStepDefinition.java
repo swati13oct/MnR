@@ -11,9 +11,10 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.member.PageConstants;
-import acceptancetests.login.data.LoginCommonConstants;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageConstants;
+import acceptancetests.data.PageConstantsMnR;
+import acceptancetests.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.After;
@@ -26,15 +27,22 @@ import pages.dashboard.member.drugcostestimator.blayer.DrugCostEstimatorPage;
 import pages.memberredesign.bluelayer.AccountHomePage;
 import pages.memberredesign.bluelayer.LoginPage;
 
+/**
+ * Functionality : Covers all step definition methods related to member redesign footer section.
+ */
 public class MemberRedesignFooterStepDefinition {
-	
+
 	@Autowired
 	MRScenario loginScenario;
 
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-	
+
+	/**
+	 * @toDo : Finds authenticated user to login
+	 * @param memberAttributes
+	 */
 	@Given("^I am a authenticated member on the member redesign site Footer$")
 	public void I_am_a_authenticated_member_on_the_member_redesign_site(DataTable memberAttributes) {
 		WebDriver wd = getLoginScenario().getWebDriver();
@@ -85,7 +93,10 @@ public class MemberRedesignFooterStepDefinition {
 		getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
 
 	}
-	
+
+	/**
+	 * @toDo : user gets logged in to new member site
+	 */
 	@When("^the above plantype user logs in UMS Site Desktop Footer$")
 	public void plantype_user_logs_in() {
 		String userName = (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
@@ -94,51 +105,67 @@ public class MemberRedesignFooterStepDefinition {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		LoginPage loginPage = new LoginPage(wd);
 		//loginPage.loginToStageTestHarness();;
-		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
+		getLoginScenario().saveBean(PageConstantsMnR.LOGIN_PAGE, loginPage);
 		AccountHomePage accountHomePage = (AccountHomePage) loginPage.thloginWith(userName, pwd,category);
-		getLoginScenario().saveBean(PageConstants.MEM_REDESIGN_ACCOUNT_HOME_PAGE, accountHomePage);
-	
+		getLoginScenario().saveBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE, accountHomePage);
+
 	}
-	
+
+	/**
+	 * @toDo : View global navigation Footer
+	 * @throws InterruptedException
+	 */
 	@When("^I view the global navigation Footer$")
 	public void I_view_the_global_navigation() throws InterruptedException {
-	    // Express the Regexp above with the code you wish you had
+		// Express the Regexp above with the code you wish you had
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
 		dce.changeUrlToNewDCEPage();
 		AccountHomePage accountHomePage = new AccountHomePage(wd);
-		getLoginScenario().saveBean(PageConstants.MEM_REDESIGN_ACCOUNT_HOME_PAGE, accountHomePage);
+		getLoginScenario().saveBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE, accountHomePage);
 	}
-	
+
+	/**
+	 *  @toDo : On member page and checks for footer sections - check model popup, validate claims level 2 tab, validate footer section
+	 */
 	@When("^I am on the member page then I should be able to see the footer sections Footer$")
 	public void I_am_on_the_member_page_then_I_should_be_able_to_see_the_footer_sections() {
-	    // Express the Regexp above with the code you wish you had
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
+		// Express the Regexp above with the code you wish you had
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
 		accountHomePage.checkModelPopup();
 		accountHomePage.validateClaimsL2Tabs();
 		accountHomePage.checkModelPopup();
 		accountHomePage.validateFooterSection();
 	}
 
+	/**
+	 *  @toDo : Checks for Member support and links under it
+	 */
 	@When("^Member Support and links under it should be displayed Footer$")
 	public void Member_Support_and_links_under_it_should_be_displayed() {
-	    // Express the Regexp above with the code you wish you had
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
+		// Express the Regexp above with the code you wish you had
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
 		accountHomePage.validateMemberSupport();
 	}
 
+	/**
+	 *  @toDo : Checks quick links and links under it
+	 */
 	@When("^Quick links and links under it should be displayed Footer$")
 	public void Quick_links_and_links_under_it_should_be_displayed() {
-	    // Express the Regexp above with the code you wish you had
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
+		// Express the Regexp above with the code you wish you had
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
 		accountHomePage.validateQuickLinks();
 	}
 
+	/**
+	 *  @toDo : Access to Rally Provider Search Tool and check for saved option under quick links
+	 */
 	@When("^I have access to the Rally Provider Search Tool and I see the Saved option under Quick Links Footer$")
 	public void I_have_access_to_the_Rally_Provider_Search_Tool_and_I_see_the_Saved_option_under_Quick_Links() {
-	    // Express the Regexp above with the code you wish you had
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
+		// Express the Regexp above with the code you wish you had
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
 		accountHomePage.validateSavedLink();
 	}
 

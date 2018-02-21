@@ -19,9 +19,9 @@ import org.openqa.selenium.support.PageFactory;
 
 import pages.member.ulayer.LowCostOptPage;
 import pages.member.ulayer.ManageDrugPage;
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 public class DrugDosagePage extends UhcDriver {

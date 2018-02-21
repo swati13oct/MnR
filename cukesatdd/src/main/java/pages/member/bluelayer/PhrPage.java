@@ -12,10 +12,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
-import acceptancetests.login.data.LoginCommonConstants;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
+import acceptancetests.data.LoginCommonConstants;
 import atdd.framework.UhcDriver;
 
 public class PhrPage extends UhcDriver {

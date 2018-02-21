@@ -12,10 +12,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.ElementData;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.ElementData;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -33,7 +33,7 @@ public class IntroductionInformationPage extends UhcDriver{
 	@FindBy(id = "lastnametextbox")
 	private WebElement lastNameField;
 	
-	@FindBy(id = "medicalclaimnumtext")
+	@FindBy(xpath = ".//*[@id='medicalclaimnum']/input[1]")
 	private WebElement claimNumberField;
 	
 	@FindBy(id = "part-a")

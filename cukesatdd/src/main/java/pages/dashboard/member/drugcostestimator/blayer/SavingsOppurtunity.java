@@ -4,18 +4,20 @@ import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+
+/**
+ * Functionality: Covers all elements and methods for Saving Opportunity Modal
+ */
 public class SavingsOppurtunity extends UhcDriver{
 	
 	private PageData switchgeneric;
@@ -69,6 +71,11 @@ public class SavingsOppurtunity extends UhcDriver{
 
 		return newPaymentHistoryExpectedJson;
 	}
+	
+	
+	/**
+	 *  Clicks on save drug button 
+	 */
 	public void savedrugbutton() throws InterruptedException {
 		Thread.sleep(10000);
 		waitforElement(savedrugbutton);
@@ -78,6 +85,9 @@ public class SavingsOppurtunity extends UhcDriver{
 		
 	}
 	
+	/**
+	 *  Clicks on switch To Generic button 
+	 */
 	public void switchToGeneric() throws InterruptedException {
 
 		List<WebElement> generic = driver.findElements(By.xpath(".//*[@id='generic-check']/div[1]"));

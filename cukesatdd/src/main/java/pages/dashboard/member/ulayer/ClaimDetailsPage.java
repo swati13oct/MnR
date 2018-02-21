@@ -14,11 +14,14 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import junit.framework.Assert;
+/**
+ * Functionality : this page validates Claims Details Page. 
+ */
 public class ClaimDetailsPage extends UhcDriver{
 	private PageData newClaimDetailspage;
 
@@ -126,6 +129,9 @@ public class ClaimDetailsPage extends UhcDriver{
 		}
 		
 	}
+	/**
+	 * @toDo :this method validates header
+	 */
 	public void validateHeader() {
 		if(myCaimsDetailsText.getText().equals("My Claims Details")){
 			Assert.assertTrue(true);
@@ -135,49 +141,68 @@ public class ClaimDetailsPage extends UhcDriver{
 			Assert.assertTrue("Claims Details Header is not present in Claims Details Page", false);
 		}
 	}
-
+	/**
+	 * @toDo :this method validates date range 
+	 */
 	public boolean verifyDateRange(){
 		System.out.println("verifyDateRange");
 		return dateRange.isDisplayed();
 	}
-
-
+	/**
+	 * @toDo :this method validates provider name
+	 */
 	public boolean verifyProviderName(){
 		System.out.println("verifyProviderName");
 		return providerName.isDisplayed();
 	}
-
-
+	/**
+	 * @toDo :this method validates claim number 
+	 */
 	public boolean verifyClaimNumber(){
 		System.out.println("verifyClaimNumber");
 		return claimNumber.isDisplayed();
-
 	}
-
+	/**
+	 * @toDo :this method validates dynamic claim number 
+	 */
 	public boolean verifyDynamicClaimNumber(){
 		System.out.println("verifyDynamicClaimNumber");
 		return claimNumDynamic.isDisplayed();
 
 	}
-
+	/**
+	 * @toDo : this method validates claim type 
+	 */
 	public boolean validateClaimType() {
 		System.out.println("validateClaimType");
 		return claimType.isDisplayed();
 
 	}
+	/**
+	 * @toDo : this method validates Dynamic claim type 
+	 */
 
 	public boolean validateDynamicClaimType(){
 		System.out.println("validateDynamicClaimType");
 			return claimsTypeDynamic.isDisplayed();
 		}
+	/**
+	 * @toDo :this method validates claim status 
+	 */
 	public boolean validateClaimStatus(){
 		System.out.println("validateClaimStatus");
 		return claimStatus.isDisplayed();
 	}
+	/**
+	 * @toDo :this method validates dynamic claim status 
+	 */
 	public boolean validateDynamicClaimStatus(){
 		System.out.println("validateDynamicClaimStatus");
 		return claimStatusDynamic.isDisplayed();
 	}
+	/**
+	 * @toDo :this method validates EOB for different domain 
+	 */
 	public boolean validateMedicalEOBfordifferentDomainType(String domain, String plantype){
 
 		if (domain.equals("COSMOS")&& plantype.equals("MAPD"))
@@ -189,6 +214,9 @@ public class ClaimDetailsPage extends UhcDriver{
 		return false;
 		
 	}
+	/**
+	 * @toDo :this method validates "Learn more about section"
+	 */
 	
 	public boolean validateDetailsLearnmoreaboutsectionDetails() {
 
@@ -229,7 +257,9 @@ public class ClaimDetailsPage extends UhcDriver{
 		}
 		
 	}
-
+	/**
+	 * @toDo :this method validates EOB
+	 */
 	public void validateEOB() {
 		if(EOB.isDisplayed()){
 			Assert.assertTrue(true);
@@ -240,6 +270,9 @@ public class ClaimDetailsPage extends UhcDriver{
 		}
 		
 	}
+	/**
+	 * @toDo :this method validates Claims total 
+	 */
 
 	public void validateClaimsTotalInDetailsPage() {
 		try {

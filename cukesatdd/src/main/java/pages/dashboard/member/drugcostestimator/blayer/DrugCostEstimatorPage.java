@@ -7,10 +7,8 @@ import java.util.Map;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,14 +16,16 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import pages.dashboard.member.blayer.AddDrugDetails;
-import pages.dashboard.member.blayer.AddNewDrugModal;
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageData;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.dashboard.member.blayer.AddDrugDetails;
+import pages.dashboard.member.blayer.AddNewDrugModal;
 
+/**
+ * Functionality: Covers all elements and methods for Drug cost estimator Page
+ */
 public class DrugCostEstimatorPage extends UhcDriver {
 
 	public DrugCostEstimatorPage(WebDriver driver) {
@@ -198,6 +198,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(xpath = "//p[contains(text(),'STEP3:')]/following-sibling::span[p[contains(text(),'COST')]]")
 	public WebElement step3;
+	
+	@FindBy(xpath = ".//*[@id='costsTabId']/a")
+	public WebElement costTab;
 
 	@FindBy(id = "total_annauldeductible")
 	public WebElement left_rail_deductible;
@@ -247,15 +250,15 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id = "collapseHomeDel")
 	public WebElement homeDeliveryContent;
 
-//	@FindBy(xpath = ".//*[@id='drugdetails']/div[1]/div[1]/div/div/section/div")
-//	public WebElement switchGenericOption;
-//
-//	@FindBy(xpath = ".//*[@id='drugdetails']/div[1]/div[1]/div/div/section/div/section/div[2]/a")
-//	public WebElement switchNowLink;
+	//	@FindBy(xpath = ".//*[@id='drugdetails']/div[1]/div[1]/div/div/section/div")
+	//	public WebElement switchGenericOption;
+	//
+	//	@FindBy(xpath = ".//*[@id='drugdetails']/div[1]/div[1]/div/div/section/div/section/div[2]/a")
+	//	public WebElement switchNowLink;
 
 	@FindBy(className = "pharmacy-container")
 	public WebElement selectedPharmacy;
-	
+
 	@FindBy(xpath = ".//*[@id='drugsTabId']/a")
 	public WebElement step1DrugTab;
 
@@ -286,9 +289,12 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		return dashoardExpectedJson;
 	}
 
+	/** Click on add drug link
+	 * 
+	 */
 	public AddNewDrugModal clickOnAddDrug() throws InterruptedException {
 		Thread.sleep(5000);
-		waitforElement(addDrug);
+		//waitforElement(addDrug);
 		addDrug.click();
 		//addDrug.click();
 		System.out.println("Current Page title :: " + driver.getTitle());
@@ -298,7 +304,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		}
 		return null;
 	}
-
+	/**TODO: Need clean up lot of hard coded items
+	 * 
+	 */
 	public void changeUrlToNewDCEPage() throws InterruptedException {
 
 		String Current_url = driver.getCurrentUrl();
@@ -308,8 +316,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		System.out.println("dce link");
 		dcelink.click();*/
 		//Go to DCE page
-		
-/*		WebElement dcelink = driver.findElement(By.xpath("html/body/div[2]/div[4]/div[3]/div[1]/div/table/tbody/tr[11]/td[2]/a"));
+
+		/*		WebElement dcelink = driver.findElement(By.xpath("html/body/div[2]/div[4]/div[3]/div[1]/div/table/tbody/tr[11]/td[2]/a"));
 		JavascriptExecutor js = (JavascriptExecutor)driver;
 		js.executeScript("arguments[0].click();", dcelink); */
 		System.out.println("dce link");
@@ -327,8 +335,13 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			NewDCEUrl = "https://team-h-medicare.uhc.com/member/drug-lookup/overview.html#/drug-cost-estimator";
 			//"https://team-h-werally.uhc.com/content/medicare/member/drug-lookup/overview.html#/drug-cost-estimator";
 			//           https://team-h-werally.uhc.com/content/medicare/member/drug-lookup/overview.html
-		}else if(evironment.equals("stage")){
+		}else if(evironment.equals("stage") || evironment.equals("awe-stage")){
 			NewDCEUrl = "https://stage-medicare.uhc.com/content/medicare/member/drug-lookup/overview.html#/drug-cost-estimator";
+		}else if(evironment.equals("test-a") || evironment.equals("awe-test-a")){
+			NewDCEUrl = "https://test-a-medicare.uhc.com/content/medicare/member/drug-lookup/overview.html#/drug-cost-estimator";
+		}
+		else if(evironment.equals("team-ci1")){
+			NewDCEUrl = "https://team-ci1-medicare.ose-elr-core.optum.com/content/medicare/member/drug-lookup/overview.html#/drug-cost-estimator";
 		}
 
 		driver.get(NewDCEUrl);
@@ -360,7 +373,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			System.out.println("No loading image");
 			Thread.sleep(15000);
 		}
-		
+
 		Thread.sleep(15000);
 	}
 
@@ -371,6 +384,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	}
 
+	/** 
+	 * validate introductory text
+	 */
 	public boolean validateintroductorytext() {
 		// TODO Auto-generated method stub
 		if (validateIntroductoryText.getText().equalsIgnoreCase("Drug Cost Estimator"))
@@ -379,6 +395,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			return false;
 	}
 
+	/** 
+	 * validate drug heading
+	 */
 	public boolean validatedrugheading() {
 		// TODO Auto-generated method stub
 		if (validateIntroductoryText.getText().equalsIgnoreCase("Drug Cost Estimator"))
@@ -387,6 +406,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			return false;
 	}
 
+	/** 
+	 * Click Edit Drug link for particular drug
+	 */
 	public void navgateToEditDrug(String drug) {
 		// editDrug.click();
 		WebElement editDrug = driver.findElement(By.xpath("//div[@class='drug-container']//p[contains(text(),'" + drug
@@ -394,6 +416,10 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		editDrug.click();
 	}
 
+	/** 
+	 * To add drugs 
+	 * TODO : Need clean up 
+	 */
 	public void addDrugs(int count, String drug) throws InterruptedException {
 		for (int i = 1; i <= count; i++) {
 			AddNewDrugModal addNewDrugModal = clickOnAddDrug();
@@ -414,12 +440,18 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		}
 	}
 
+	/** 
+	 * To get drugs count
+	 */
 	public int getDrugsCount() {
 		List<WebElement> drugs = driver
 				.findElements(By.xpath("//div[@id='drugs-tab']//div[contains(@ng-repeat,'eachDrug')]"));
 		return drugs.size();
 	}
 
+	/** 
+	 * Navigate to step 2 pharmacy tab
+	 */
 	public void navigateToStep2() throws InterruptedException {
 		//waitforElement(step2Pharmacy);
 		Thread.sleep(10000);
@@ -429,6 +461,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	}
 
+	/** 
+	 * Click on to step 1 drug tab
+	 */
 	public void backwardToStep1() {
 		step1DrugTab.click();
 	}
@@ -441,6 +476,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		//Assert.assertTrue(rbPreferredRetail.isDisplayed());
 	}
 
+	/** 
+	 * validate pharmacy information step 2 tab, zipcode, miles selection, search link
+	 */
 	public void pharmacyInformation(String zipcode, String radius) {
 		validate(step2PharmacyTab);
 		validate(zipcodeInput);
@@ -453,6 +491,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	}
 
+	/** 
+	 * validate message more drugs other text
+	 */
 	public boolean validatemesgmoredrugsothertext(String otherscount) {
 		// TODO Auto-generated method stub
 
@@ -464,15 +505,24 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			return false;
 	}
 
+	/** 
+	 * validate enter drug text
+	 */
 	public void validateenterdrugtext() {
 		Assert.assertTrue(Enter_drug_text.isDisplayed());
 	}
 
+	/** 
+	 * validate summary heading
+	 */
 	public void validatesummaryheading() {
 
 		Assert.assertTrue(SummaryHeader.isDisplayed());
 	}
 
+	/** 
+	 * validate tab drug heading
+	 */
 	public boolean validatetabdrugheading() {
 		// TODO Auto-generated method stub
 
@@ -483,6 +533,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			return false;
 	}
 
+	/** 
+	 * validate Drugs not Present
+	 */
 	public void validateDrugsnotPresent(String dosage) {
 
 		String deleteDrugXpath = "//div[@id='drugs-tab']//p[contains (text(), '" + dosage + "')]";
@@ -495,6 +548,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	}
 
+	/** 
+	 * Delete drugs by dosage
+	 */
 	public void deleteDrugsByDosage(String dosage) throws InterruptedException {
 		Thread.sleep(15000);
 		String deleteDrugXpath = "//div[@id='drugs-tab']//p[contains (text(), '" + dosage
@@ -505,6 +561,11 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	}
 
+	/** 
+	 * Navigate to Edit Drug modal on clicking edit drug link
+	 * 
+	 * return new AddDrugDetails
+	 */
 	public AddDrugDetails navigateToEditDrug(String drug) throws Exception {
 		// editDrug.click();
 		Thread.sleep(15000);
@@ -515,6 +576,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		return new AddDrugDetails(driver);
 	}
 
+	/** 
+	 * Validate the drug is added or not by sending drug name and dosage 
+	 */
 	public boolean validateAddedDrug(String args1, String arg2, String arg3) {
 		// TODO Auto-generated method stub
 		validate(driver.findElement(By.xpath("//div[@id='drugs-tab']//p[contains (text(), '" + args1
@@ -527,15 +591,18 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		// "+++++++++++++++++" );
 
 		driver.findElement(By.xpath("//div[@id='drugs-tab']//p[contains (text(), '" + args1 + "')]")).getText()
-				.contains(arg2);
+		.contains(arg2);
 		driver.findElement(By.xpath("//div[@id='drugs-tab']//p[contains (text(), '" + args1 + "')]")).getText()
-				.contains(arg3);
+		.contains(arg3);
 
 		// driver.findElements(By.xpath("//div[@id='drugs-tab']//p[contains
 		// (text(), '"+args1+"')]).gettext();
 		return true;
 	}
 
+	/** 
+	 * Validate drug and dosage text 
+	 */
 	public boolean validatedrugdosagetext(String arg1, String arg2, String arg3) {
 		// TODO Auto-generated method stub
 		if (drugndosage1.getText().equalsIgnoreCase(arg1) && drugndosage2.getText().equalsIgnoreCase(arg2)
@@ -545,6 +612,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			return false;
 	}
 
+	/** 
+	 * Verifies miles drop down list 
+	 */
 	public void verifyPhamaciesRadisInfo(List<String> miles) {
 		System.out.println("Expected List is : " + miles);
 		Select select = new Select(milesSelection);
@@ -557,10 +627,16 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		Assert.assertEquals(miles, actualList);
 	}
 
+	/** 
+	 * Validate entered zipcode
+	 */
 	public void validateZipcode(String zipcode) {
 		Assert.assertEquals(zipcode, zipcodeInput.getText());
 	}
 
+	/** 
+	 * Select radius in miles drop down
+	 */
 	public void selectRadius() {
 		int index = 5;
 		Select options = new Select(milesSelection);
@@ -568,6 +644,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		// options.getAllSelectedOptions();
 	}
 
+	/* 
+	 * Validate miles dropdown selections
+	 */
 	public void validateselectRadius() throws InterruptedException {
 		Select options = new Select(milesSelection);
 		for (int i = 0; i < 6; i++) {
@@ -578,10 +657,16 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		}
 	}
 
+	/** 
+	 * Enter zipcode 
+	 */
 	public void selectZipcode(String zipcode) {
 		sendkeys(zipcodeInput, zipcode);
 	}
 
+	/** 
+	 * Validate default step 2 elements : Zipcode, pharmacy type, miles
+	 */
 	public void validateDefaultStep2(String zipcode, String radius, String pharmacy_type) {
 		System.out.println("--------zipcodeInput.getText()-----------" + zipcodeInput.getText());
 		// Assert.assertEquals(zipcode,zipcodeInput.getText());
@@ -597,15 +682,18 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		// String str = options.getAllSelectedOptions().toString();
 		// str.toString();
 		System.out.println("--------options.getAllSelectedOptions()-----------" + options.getAllSelectedOptions()
-				+ "----------------");
+		+ "----------------");
 		// System.out.println("--------str-----------"+ str +
 		// "----------------");
 		// Assert.assertEquals(pharmacy_type,str);
 
 	}
 
+	/** 
+	 * select Pharmacy Type
+	 */
 	public void selectPharmacyType(String pharmacy) throws InterruptedException {
-		
+
 		WebElement rbtn = driver.findElement(By.xpath(".//*[@id='pharmacy-type']/div/label/p[contains(text(),'" + pharmacy + "')]"));
 
 		rbtn.isDisplayed();
@@ -619,6 +707,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		Thread.sleep(5000);
 	}
 
+	/** 
+	 * validate selection of Pharmacy Type
+	 */
 	public void validateselectPharmacyType() throws InterruptedException {
 		for (int i = 1; i < 5; i++) {
 			WebElement rbtn = driver.findElement(By.xpath(".//*[@id='pharmacy-type']/div[" + i + "]/label"));
@@ -633,24 +724,41 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	}
 
+	/** 
+	 * Click on step2 search button
+	 */
 	public void clickstep2Search() throws InterruptedException {
 		Thread.sleep(12000);
 		btnSearch.click();
 
 	}
 
+	/** 
+	 * Verify Pharmacy results
+	 */
 	public void verifyPharmacyResults() {
 		Assert.assertTrue(pharmacyResults.isDisplayed());
 	}
 
+	/** 
+	 * Get pharmacy result count
+	 * return pharmacies   count
+	 */
 	public int getResultPharmacyCount() {
 		return pharmacies.size();
 	}
 
+	/** 
+	 * TODO: Need Clean up
+	 */
 	public void validatePharmacylist() {
 		//Assert.assertEquals(3, pharmacies.size());
 	}
 
+	/** 
+	 * Select first pharmacy from pharmacy result
+	 * 
+	 */
 	public void select_first_pharmacy() throws InterruptedException {
 		Thread.sleep(10000);
 		//waitforElement(select_btn_first);
@@ -660,6 +768,10 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		Thread.sleep(5000);
 	}
 
+	/** 
+	 * validate cost saving present
+	 * TODO: Need clean up
+	 */
 	public void validate_cost_saving_present(String pharmacy_type) {
 		if (pharmacy_type == "Standard Network") {
 			validate_cost_saving_not_present();
@@ -672,12 +784,19 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		}
 	}
 
+	/** 
+	 * validate cost saving not present
+	 * TODO: Need clean up
+	 */
 	public void validate_cost_saving_not_present() { // Need refactoring
 		Assert.assertFalse(card_promo_blue_saver.isDisplayed());
 		Assert.assertFalse(card_promo_blue_mail.isDisplayed());
 		Assert.assertFalse(card_promo_blue_retail.isDisplayed());
 	}
 
+	/** 
+	 * Validate pharmacy type saver is not present
+	 */
 	public boolean validate_pharmacy_type_saver_not_present() {
 		// Assert.assertFalse(pharmacy_saver_type.isEnabled());
 
@@ -689,11 +808,18 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		}
 	}
 
+	/** 
+	 * TODO: Need clean up -- to be removed
+	 */
 	public void validate_pharmacy_saver_result() {
 		//Assert.assertTrue(text_total_annual_drug_cost.isDisplayed());
 		// text_total_annual_drug_cost.getSize()
 	}
 
+	/** 
+	 * Validate selected Pharmacy type conditionally as per pharmacy_type passed
+	 * 
+	 */
 	public boolean validate_selected_pharmacy_type(String pharmacy_type) {
 		if (pharmacy_type == "Preferred Retail") {
 			Assert.assertTrue(pharmacy_type + "is not selected", pharmacy_retail_type.isSelected());
@@ -708,6 +834,10 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			return false;
 	}
 
+	/** 
+	 * Validate Pharmacy type not present conditionally as per pharmacy_type passed
+	 * 
+	 */
 	public boolean validate_pharmacy_type_not_present(String pharmacy_type) {
 		if (pharmacy_type == "Preferred Retail") {
 			if (driver.findElements(By.id("pharmacy_retail_type")).size() < 1)
@@ -728,6 +858,10 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			return false;
 	}
 
+	/** 
+	 * verifies preferred retail pharmacy result
+	 * TODO -Need clean up checks for first pharmacy record with hardcoded values
+	 */
 	public boolean verify_preferred_retail_pharmacy_result() {
 		String first_phar_result_record = first_pharmacy_record.getText();
 		if (first_phar_result_record.contains("Walgreens") && first_phar_result_record.contains("3320 Chino Hills Pkwy")
@@ -739,12 +873,18 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			return false;
 	}
 
+	/** 
+	 * validate pharmacy Information - enter zipcode and search
+	 */
 	public void pharmacyInformation(String zipcode) {
 		validate(zipcodeInput);
 		sendkeys(zipcodeInput, zipcode);
 		btnZipCodeSearch.click();
 	}
 
+	/** 
+	 * validate Preferred Mail Service pharmacy type Not Present
+	 */
 	public void validatePreferredMailServiceNotPresent() {
 		List<WebElement> mailService = driver.findElements(By.id("mail-service-type"));
 		if (mailService.get(0).isDisplayed()) {
@@ -754,6 +894,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		}
 	}
 
+	/** 
+	 * validate Preferred Mail Service label
+	 */
 	public void validatePreferredMailServiceRD() {
 		try {
 			Assert.assertTrue(lbPreferredMailService.isDisplayed());
@@ -762,6 +905,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		}
 	}
 
+	/** 
+	 * select first pharmacy result
+	 */
 	public void select_first_pharmacy_result() throws InterruptedException {
 		// waitforElement(first_pharmacy_select_btn);
 		Thread.sleep(10000);
@@ -769,15 +915,21 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		Thread.sleep(15000);
 	}
 
+	/** 
+	 * verifies summary cost
+	 */
 	public void verify_summary_cost(String total_cost) { // waitforElement(summary_tot_cost);
-															// String temp =
-															// validateIntroductoryText.getText().equalsIgnoreCase("Drug
-															// Cost Estimator")
+		// String temp =
+		// validateIntroductoryText.getText().equalsIgnoreCase("Drug
+		// Cost Estimator")
 		Assert.assertTrue("Expected Summary cost is  not present" + summary_tot_cost.getText(),
 				summary_tot_cost.getText().equalsIgnoreCase(total_cost));
 
 	}
 
+	/** 
+	 * verifies summary saving
+	 */
 	public void verify_summary_saving(String total_saving) throws InterruptedException {
 		Thread.sleep(5000);
 		waitforElement(summary_saving);
@@ -785,11 +937,17 @@ public class DrugCostEstimatorPage extends UhcDriver {
 				summary_saving.getText().contains(total_saving));
 	}
 
+	/** 
+	 * verifies left rail deductible
+	 */
 	public void verify_deductible(String deductible) {
 		waitforElement(left_rail_deductible);
 		Assert.assertTrue("Expected Deductible is not present", left_rail_deductible.getText().contains(deductible));
 	}
 
+	/** 
+	 * verifies left rail total cost
+	 */
 	public void verify_leftrail_cost(String total_cost) throws InterruptedException {
 		Thread.sleep(10000);
 		waitforElement(left_rail_tot_cost);
@@ -797,29 +955,45 @@ public class DrugCostEstimatorPage extends UhcDriver {
 				left_rail_tot_cost.getText().contains(total_cost));
 	}
 
+
+	/** 
+	 * verifies left rail total saving
+	 */
 	public void verify_leftrail_saving(String total_saving) {
 		waitforElement(left_rail_tot_saving);
 		Assert.assertTrue("Expected Left rail Total Savings is not present",
 				left_rail_tot_saving.getText().contains(total_saving));
 	}
 
+	/** 
+	 * verifies left rail drug saving
+	 */
 	public void verify_leftrail_drug_saving(String drug_saving) {
 		waitforElement(left_rail_drug_saving);
 		Assert.assertTrue("Expected Drug Saving is not present", left_rail_drug_saving.getText().contains(drug_saving));
 	}
 
+	/** 
+	 * verifies left rail pharmacy saving
+	 */
 	public void verify_leftrail_pharmacy_saving(String pharmacy_saving) {
 		waitforElement(left_rail_pharmacy_saving);
 		Assert.assertTrue("Expected Pharmacy saving is not present",
 				left_rail_pharmacy_saving.getText().contains(pharmacy_saving));
 	}
 
+	/** 
+	 * Navigates to step 3 
+	 */
 	public void navigateToStep3() throws InterruptedException {
-		waitforElement(step2);
-		step3.click();
+		//waitforElement(step2);
+		costTab.click();
 		Thread.sleep(10000);
 	}
 
+	/** 
+	 * Delete all drug
+	 */
 	public void delete_all_drugs() throws InterruptedException {
 
 		while (driver.findElements(By.className("delete-drug")).size() > 0) {
@@ -828,6 +1002,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		}
 	}
 
+	/** 
+	 * Selects standard network pharmacy
+	 */
 	public void fillPharmacyInfo() {
 		// rbStandardNetwork.click();// select pharmacy type standard network
 		if (select_btn_first.isDisplayed()) {
@@ -835,18 +1012,22 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		}
 	}
 
+	/** 
+	 * Add branded drug
+	 */
 	public void addDrug(String drug) throws InterruptedException {
 
 		AddNewDrugModal addNewDrugModal = clickOnAddDrug();
 		addNewDrugModal.typeDrugName(drug);
 		addNewDrugModal.submit();
-		// addNewDrugModal.selectDrug(drug);
+		//addNewDrugModal.selectDrug(drug);
+		addNewDrugModal.continueAddNewDrugModal();
 		AddDrugDetails addDrugDetails = new AddDrugDetails(driver);
-
-//		SavingsOppurtunity savingsOppurtunity = addDrugDetails.continueAddDrugDetailsModal();
+		
+		addDrugDetails.continueAddDrugDetails();
 
 		// if(addDrugDetails.continueAddDrugDetails()!=null){
-		 SavingsOppurtunity savingsOppurtunity1 = new SavingsOppurtunity(driver);
+		SavingsOppurtunity savingsOppurtunity1 = new SavingsOppurtunity(driver);
 		savingsOppurtunity1.savedrugbutton();
 		// }
 		Thread.sleep(2000);
@@ -862,6 +1043,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='total_drugsavings']/div[2]/a")
 	public WebElement editDrugListLink;
 
+	/** 
+	 * Validates drug savings info
+	 */
 	public void validateDrugSavingInfo() {
 		if (totalDrugSavingsBox.isDisplayed()) {
 
@@ -873,23 +1057,30 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			System.out.println("The Drug Cost Savings Info on the left rail is not displayed");
 	}
 
+
+	/** 
+	 * Click on edit drug list link
+	 */
 	public void clickOnEditDrugListLink() {
 		editDrugListLink.click();
 	}
 
+	/** 
+	 * Deletes all drugs
+	 */
 	public void deleteAllDrugs() throws InterruptedException {
 
 		int drugCount = getDrugsCount();
 		while (getDrugsCount() != 0) {
-//			String deleteDrugXpath = ".//*[@id='drugdetails']/div[1]/div[1]/div/div/section/ul/li[2]/a";
-//			WebElement deleteDrug = driver.findElement(By.xpath(deleteDrugXpath));
-//			deleteDrug.click();
-//			deleteDrug();
+			//			String deleteDrugXpath = ".//*[@id='drugdetails']/div[1]/div[1]/div/div/section/ul/li[2]/a";
+			//			WebElement deleteDrug = driver.findElement(By.xpath(deleteDrugXpath));
+			//			deleteDrug.click();
+			//			deleteDrug();
 
 			String deleteDrugXpath = ".//*[@id='drugdetails']/div[2]/div["+drugCount+"]/div/div/section/ul/li[2]/a";
 			WebElement deleteDrug = driver.findElement(By.xpath(deleteDrugXpath));
 			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", deleteDrug);
-			
+
 			deleteDrug.click();
 			System.out.println("drug deleted");
 			WebElement deleteButtonXpath = driver.findElement(By.xpath(".//*[@id='drugModal']/div/div/div[2]/div/section/div/button[2]"));
@@ -900,13 +1091,16 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			Thread.sleep(5000);
 		}
 	}
-	
+
+	/** 
+	 * Deletes, added drugs
+	 */
 	public void deleteDrug() throws InterruptedException{
-		
-		
+
+
 		String deleteDrugXpath = ".//*[@id='drugdetails']/div[2]/div[3]/div/div/section/ul/li[2]/a";
 		WebElement deleteDrug = driver.findElement(By.xpath(deleteDrugXpath));
-		
+
 		deleteDrug.click();
 		WebElement deleteButtonXpath = driver.findElement(By.xpath(".//*[@id='drugModal']/div/div/div[2]/div/section/div/button[2]"));
 		waitforElement(deleteButtonXpath);
@@ -914,6 +1108,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		Thread.sleep(5000);
 	}
 
+	/** 
+	 * Adds generic drug of its branded drug
+	 */
 	public void addGenericDrug(String drug) throws InterruptedException {
 		AddNewDrugModal addNewDrugModal = clickOnAddDrug();
 		if ((getDrugsCount()) == 25) {
@@ -925,7 +1122,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		// addNewDrugModal.selectDrug(drug);
 		AddDrugDetails addDrugDetails = new AddDrugDetails(driver);
 		//addDrugDetails.selectQnty(60 + "");
-	//	SavingsOppurtunity savingsOppurtunity = addDrugDetails.continueAddDrugDetails();
+		//	SavingsOppurtunity savingsOppurtunity = addDrugDetails.continueAddDrugDetails();
 		SavingsOppurtunity savingsOppurtunity1 = new SavingsOppurtunity(driver);
 		savingsOppurtunity1.switchToGeneric();
 		savingsOppurtunity1.savedrugbutton();
@@ -933,6 +1130,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	}
 
+	/** 
+	 * Validates Total Estimated Annual Drug Costs
+	 */
 	public void validateTotalEstimatedAnnualDrugCosts(String totalAnnualDrugCost) throws InterruptedException {
 		Thread.sleep(10000);
 		Thread.sleep(5000);
@@ -954,6 +1154,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	}
 
+	/** 
+	 * Validates Total available savings
+	 */
 	public void validatetotalAvailableSavings(String totalAvailableSavings) {
 		List<WebElement> totAvailableSav_Summary = driver.findElements(By.xpath(".//*[@id='summary_savings']/span"));
 		List<WebElement> totAvailableSav_LeftRail = driver
@@ -976,6 +1179,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	}
 
+	/** 
+	 * Validates drug savings
+	 */
 	public void validateDrugSavings(String drugSavings) {
 		List<WebElement> totDrugSavings = driver.findElements(By.xpath(".//*[@id='total_drugsavings']/div[2]/span"));
 
@@ -990,6 +1196,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	}
 
+	/** 
+	 * Validate pharmacy savings
+	 */
 	public void validatePharmacySavings(String pharmacySavings) {
 		List<WebElement> totPharmacySavings = driver
 				.findElements(By.xpath(".//*[@id='total_pharmacysavings']/div[2]/span"));
@@ -1004,6 +1213,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		}
 	}
 
+	/** 
+	 * Validate drug coverage on the page
+	 */
 	public void validateDrugCoverage(String drugCoverage) {
 		List<WebElement> initialDrugCoverage = driver.findElements(
 				By.xpath(".//*[@id='drugcosts']/div[2]/div[2]/div/div[2]/div/div/section/div[2]/div[2]/p/span"));
@@ -1025,11 +1237,17 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		}
 	}
 
+	/** 
+	 * Validate edit drug and pharmacy links on the page
+	 */
 	public void validateEditDrugAndPharmacyLinks() {
 		Assert.assertTrue(elementFound(lkEditDrugsList));
 		Assert.assertTrue(elementFound(lkEditPharmacyList));
 	}
 
+	/** 
+	 * Validate edit drug link not present on the page
+	 */
 	public void validateEditDrugLinkNotPresent() {
 		List<WebElement> editDrugLink = driver.findElements(By.xpath(".//*[@id='total_drugsavings']/div[2]/a"));
 		// String valEditDrugLink = editDrugLink.get(0).getText();
@@ -1040,6 +1258,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		}
 	}
 
+	/** 
+	 * selects pharmacy if not selected from pharmacy results
+	 */
 	public void select_pharmacy_if_not_selected() throws InterruptedException {
 		if (pharmacyContainer.getText().contains("Selected")) {
 			System.out.println("One of the Pharmacy is already selected");
@@ -1050,16 +1271,26 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	}
 
+	/** 
+	 * Click on learn more tiers link
+	 */
 	public void clicklearnmoreTiersLink() throws InterruptedException {
 		learnmoreTiers.click();
 		Thread.sleep(3000);
 	}
 
+
+	/** 
+	 * Click on learn more stages link
+	 */
 	public void clicklearnmoreStagesLink() throws InterruptedException {
 		learnmoreStages.click();
 		Thread.sleep(3000);
 	}
 
+	/** 
+	 * Verifies stages text are present on the page
+	 */
 	public void verifystagesTexts() {
 
 		String all_text = stagesTexts.getText();
@@ -1070,6 +1301,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 				all_text.contains("Catastrophic Coverage Stage"));
 	}
 
+	/** 
+	 * Validates tiers text such as year layer and plan 
+	 */
 	public void verifyTiersTexts(String year, String layer, String plan) {
 
 		String all_text = tierTexts.getText();
@@ -1078,6 +1312,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		Assert.assertTrue(plan + " is not present", all_text.contains(plan));
 	}
 
+	/** 
+	 * select Preferred Mail Service Pharmacy 
+	 */
 	public void selectPharmacyMailServicePharmacy() throws InterruptedException {
 
 		// String all_text = pharmacyResults.getText();
@@ -1093,6 +1330,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	}
 
+	/** 
+	 * Validates Learn More Home Delivery Link 
+	 */
 	public void click_learnMoreHomeDeliveryLink() throws InterruptedException
 
 	{
@@ -1100,11 +1340,17 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		Thread.sleep(3000);
 	}
 
+	/** Validates Learn More Delivery Content 
+	 * 
+	 */
 	public void verifyLearnMoreDeliveryContent(String content) {
 		homeDeliveryContent.getText().contains(content);
 		Assert.assertTrue(content + "is not present", homeDeliveryContent.getText().contains(content));
 	}
 
+	/** Validates pharmacy is selected on the page
+	 * @TODO: Need Cleanup
+	 */
 	public void isPharmacySelected() {
 		// List<WebElement> selectedPharmacy =
 		// driver.findElements(By.className("pharmacy-container"));
@@ -1116,6 +1362,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		}
 	}
 
+	/** Validates pharmacy is selected on the page
+	 * 
+	 */
 	public void validatePharmacySelected() {
 		// List<WebElement> selectedPharmacy =
 		// driver.findElements(By.className("pharmacy-container"));
@@ -1128,6 +1377,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		}
 	}
 
+	/** Validates drug with switch to generic option present on the page
+	 * 
+	 */
 	public void validateSwitchGenericOption() {
 
 		int drugscount = getDrugsCount();
@@ -1142,10 +1394,13 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		}else{
 			Assert.assertTrue("There are no drugs added ",false);
 		}
-		
+
 
 	}
 
+	/** Validates switch now link on the page
+	 * 
+	 */
 	public void validateSwitchNowLink() {
 		int drugscount = getDrugsCount();
 		if(drugscount>0){
@@ -1155,13 +1410,16 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			} else {
 				Assert.assertTrue("Switch now link is not present",false);
 			}
-			
+
 		}else{
 			Assert.assertTrue("There are no drugs added ",false);
 		}
-		
+
 	}
 
+	/** Validates save money generic message
+	 * 
+	 */
 	public void validateSaveGenericMessage() {
 		int drugscount = getDrugsCount();
 		if (drugscount > 0) {
@@ -1177,9 +1435,13 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		} else {
 			Assert.assertTrue("There are no drugs added ", false);
 		}
-		
+
 	}
 
+
+	/** Validates Save Dollar Value Message
+	 * TODO: Need clean up validateSaveGenericMessage duplicate to this.
+	 */
 	public void validateSaveDollarValueMessage() throws InterruptedException {
 		int drugscount = getDrugsCount();
 		Thread.sleep(10000);
@@ -1196,9 +1458,12 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		} else {
 			Assert.assertTrue("There are no drugs added ", false);
 		}
-		
+
 	}
 
+	/** click on switch now button
+	 * 
+	 */
 	public void clickSwitchNow() throws InterruptedException {
 		int drugscount = getDrugsCount();
 		if (drugscount > 0) {
@@ -1220,16 +1485,22 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		} else {
 			Assert.assertTrue("There are no drugs added ", false);
 		}
-		
+
 
 	}
 
+	/** click on switch to generic button
+	 * 
+	 */
 	public void clickSwitchToGeneric() throws InterruptedException {
 		WebElement btnSwitchToGeneric = driver.findElement(By.id("switchToGenericBtnId"));
 		btnSwitchToGeneric.click();
 		Thread.sleep(3000);
 	}
 
+	/** Validates whether branded drug switched to generic drug ATORVASTATIN
+	 * 
+	 */
 	public void isGeneric() throws InterruptedException {
 		Thread.sleep(5000);
 		List<WebElement> lbGenericdrug = driver.findElements(By.id("drugDosageStrengthId"));
@@ -1246,7 +1517,10 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			Assert.assertTrue("There are no drugs added ", false);
 		}
 	}
-	
+
+	/** Navigates to  DCE page
+	 * Todo - Need clean up to remove this hard code stuff
+	 */
 	public void navigateToDCETool() throws InterruptedException {
 
 		String Current_url = driver.getCurrentUrl();
@@ -1262,7 +1536,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 		Thread.sleep(15000);
 	}
-	
-	
+
+
 
 }

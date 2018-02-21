@@ -2,6 +2,7 @@ package acceptancetests.acquisitionvbf.dce;
 
 import gherkin.formatter.model.DataTableRow;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,8 +15,8 @@ import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.DrugCostEstimatorPage;
 import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.acquisition.PageConstants;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
@@ -258,5 +259,34 @@ public class DCEAcqStepDefinitionAARP {
 		}
 		
 	}	
+	
+	@And("^I hover or click on Our Plans in the top navigation and enter zipcode Ulayer$")
+	public void hover_on_Our_Plans_in_the_top_navigation(DataTable givenAttributes){
+		DrugCostEstimatorPage dcePage = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String zipCode = memberAttributesMap.get("Zip Code");
+		VPPPlanSummaryPage vppPage = dcePage.mouseHoverOurPlans(zipCode);
+		if(vppPage!=null){
+			loginScenario.saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, vppPage);
+		}else{
+			System.out.println("===========Page not returned============");
+			Assert.fail();
+		}
+	}
+	
+	@Then("^I should be directed to the VPP Plan Summary Page Ulayer and I should see the Plan Count Overlay populated appropriately$")
+	public void should_be_directed_to_the_VPP_Plan_Summary_Page(){
+		VPPPlanSummaryPage vppPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		vppPage.validatePlanSummary();
+	}
+	
+	
 }

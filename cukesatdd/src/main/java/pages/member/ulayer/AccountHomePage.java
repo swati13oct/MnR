@@ -4,7 +4,6 @@
 package pages.member.ulayer;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -13,18 +12,18 @@ import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.dashboard.member.ulayer.ClaimDetailsPage;
 import pages.dashboard.member.ulayer.ClaimSummarypage;
 import pages.member.redesign.ContactUsPage;
 
@@ -109,7 +108,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath="//dashboard//a[contains(text(),'Contact')]")
 	private WebElement linkContactUs;
 	
-	@FindBy(xpath="//a[contains(text(),'Help')]")
+	@FindBy(xpath="//a[contains(text(),'Contact Us page')]")
 	private WebElement helpAndContactUslink;
 	
 	@FindBy(xpath="//header//h1")
@@ -331,12 +330,21 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public ContactUsPage navigateToContactUsPage() {
+		
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		if (validate(iPerceptionPopUp)) {
             iPerceptionPopUp.click();
             System.out.println("iPerception Pop Up displayed");
 		}
-		if (MRScenario.environment.equals("team-h") || MRScenario.environment.equals("test-a")) {
-			helpAndContactUslink.click();
+		if (MRScenario.environmentMedicare.equals("team-ci1") || MRScenario.environmentMedicare.equals("team-h") || MRScenario.environmentMedicare.equals("test-a") || MRScenario.environmentMedicare.equals("team-e")) {
+			js.executeScript("arguments[0].click();", helpAndContactUslink);
+			
 		}else{
 			linkContactUs.click();
 		}
@@ -980,21 +988,19 @@ driver.switchTo().window(mainwindow);
 	
 public pages.dashboard.member.ulayer.ClaimSummarypage navigateToClaimsSummaryPage() {
 		
-		if (MRScenario.environment.equalsIgnoreCase("team-h") || MRScenario.environment.equalsIgnoreCase("test-a")) {
+		if (MRScenario.environmentMedicare.equalsIgnoreCase("team-h") || MRScenario.environmentMedicare.equalsIgnoreCase("test-a") || (MRScenario.environmentMedicare.equalsIgnoreCase("team-t") || MRScenario.environment.equalsIgnoreCase("team-ci1"))) {
 			System.out.println("Go to claims link is present "+driver.findElement(By.xpath("//a[text()='Go to Claims page']")).isDisplayed());
-			driver.findElement(By.xpath("//a[text()='Go to Claims page']")).click();
-			
+			driver.findElement(By.xpath("//a[text()='Go to Claims page']")).click();			
 		}
-
-		else if (MRScenario.environment.equalsIgnoreCase("stage")) {
-			System.out.println("user is on Stage login page");			
-			//CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);			
+		else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
+			System.out.println("user is on Stage login page");						
 			if(driver.getCurrentUrl().contains("/dashboard"));
 			{
 				System.out.println("User is on dashboard page and URL is ====>"+driver.getCurrentUrl());
 				claimsDashboardLink.click();
 				try {
-					Thread.sleep(10000);
+					Thread.sleep(10000);	
+					
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

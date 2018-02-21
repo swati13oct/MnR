@@ -8,17 +8,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
-import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.member.PageConstants;
-import acceptancetests.claims.data.ClaimsCommonConstants;
-import acceptancetests.login.data.LoginCommonConstants;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.LoginCommonConstants;
+import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.After;
@@ -28,9 +24,6 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.dashboard.eob.EOBPage;
-import pages.member.ulayer.AccountHomePage;
-import pages.member.ulayer.LoginPage;
-
  
 public class EobStepDefinition {
 	@Autowired
@@ -118,8 +111,6 @@ public class EobStepDefinition {
 		String dateRange = memberAttributesMap.get("Date Range");
 		String planType  = memberAttributesMap.get("Plan Type");
 		String eobTypeData = memberAttributesMap.get("EOB Type");
-		String fromDate = memberAttributesMap.get("From Date");
-		String toDate = memberAttributesMap.get("To Date");
 		
 		getLoginScenario().saveBean(CommonConstants.PLAN_TYPE, planType);
 
@@ -153,7 +144,7 @@ public class EobStepDefinition {
  	
 	@And("^the user validates how to read medical eob PDF$")
 		public void the_user_validates_how_to_read_medical_eob_PDF() {
-		EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstants.MEDICAL_EOB_PAGE);
+		EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
 		eobPage.validateReadPDF();		 
 	}
 	
@@ -212,11 +203,6 @@ public class EobStepDefinition {
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
 
-		String dateRange = memberAttributesMap.get("Date Range");
-		String planType  = memberAttributesMap.get("Plan Type");
-		String eobTypeData = memberAttributesMap.get("EOB Type");
-		String fromDate = memberAttributesMap.get("From Date");
-		String toDate = memberAttributesMap.get("To Date");
 	}
 	
 	/**
@@ -298,7 +284,7 @@ public class EobStepDefinition {
 	
 	@And("^the user selects the desired date range$")
 		public void user_selects_the_desired_date_range(DataTable givenAttributes){
-		List<DataTableRow> memberAttributesRow = givenAttributes
+		/*List<DataTableRow> memberAttributesRow = givenAttributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -311,28 +297,37 @@ public class EobStepDefinition {
 		String dateRange = memberAttributesMap.get("Date Range");
 
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-		eobPage.selectDateRange(dateRange, planType, eobTypeData);
+		eobPage.selectDateRange(dateRange, planType, eobTypeData);*/
 		
 	}	
+	
 	
 	/**
 	*@toDo: the method validates the eob count
 	*/
 	
 	@Then("^the user validates EOB count$")
-		public void user_validated_EOB_Count(){
-		 
+		public void user_validated_EOB_Count(DataTable givenAttributes){
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String eobCount = memberAttributesMap.get("EOB COUNT");
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-		eobPage.validateEOBStatements();
+		eobPage.validateEOBStatements(eobCount);
 	}
 	
-	@After
+	/*@After
 	public void tearDown() {
 
 		WebDriver wd = (WebDriver) getLoginScenario().getBean("webDriver");
 		if(wd!=null){
 		wd.quit();
-		}
+		}*/
 		
 	}
-}
+

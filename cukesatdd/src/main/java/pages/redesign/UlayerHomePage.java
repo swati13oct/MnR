@@ -25,9 +25,9 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.redesign.EoBSearchPage;
@@ -87,7 +87,7 @@ public class UlayerHomePage extends UhcDriver {
 	@FindBy(xpath = "//h1[@class='h4 margin-none']")
 	private WebElement orderplanHeadertxt;
 	
-	
+	public static String Page_URL;
 
 	private PageData myAccountHome;
 
@@ -104,6 +104,8 @@ public class UlayerHomePage extends UhcDriver {
 		myAccountHome = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
 		Thread.sleep(3000);
 		CommonUtility.checkPageIsReady(driver);
+		
+		Page_URL = driver.getCurrentUrl().split(".com")[0];
 		//openAndValidate();
 	}
 
@@ -144,8 +146,8 @@ public class UlayerHomePage extends UhcDriver {
 		CommonUtility.checkPageIsReady(driver);
 		PharmacyLocatorLink.click();
 */		
- 		driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/pharmacy-locator/overview.html#/Pharmacy-Search-English");
-		Thread.sleep(8000);
+ 		driver.navigate().to(Page_URL+".com/content/medicare/member/pharmacy-locator/overview.html#/Pharmacy-Search-English");
+		Thread.sleep(10000);
 		CommonUtility.checkPageIsReady(driver);
 		if (validate(PharmacyLocatorPageHeader)) {
 			return new PharmacySearchPage(driver);
@@ -191,27 +193,9 @@ public class UlayerHomePage extends UhcDriver {
 
 	}
 
-/*	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 
-		JSONObject accountHomeExpectedJson = expectedDataMap.get(CommonConstants.MY_ACCOUNT_HOME);
-
-		return accountHomeExpectedJson;
-	}
-
-	public JSONObject getAdditionalPlanExpectedData(Map<String, JSONObject> expectedDataMap) {
-
-		JSONObject globalExpectedJson = expectedDataMap.get(CommonConstants.GLOBAL);
-		JSONObject addPlanExpectedJson = expectedDataMap.get(CommonConstants.ADD_PLAN);
-		JSONObject accountHomeExpectedJson = expectedDataMap.get(CommonConstants.MY_ACCOUNT_HOME);
-		JSONObject accountHomeComboExpectedJson = expectedDataMap.get(CommonConstants.MY_ACCOUNT_HOME_COMBO);
-		accountHomeExpectedJson = CommonUtility.mergeJson(accountHomeExpectedJson, globalExpectedJson);
-		accountHomeExpectedJson = CommonUtility.mergeJson(accountHomeExpectedJson, addPlanExpectedJson);
-		accountHomeExpectedJson = CommonUtility.mergeJson(accountHomeExpectedJson, accountHomeComboExpectedJson);
-		return accountHomeExpectedJson;
-	}
-*/
 	public OrderplanmaterialsPage navigateToOrderPlanMaterialsPage() throws InterruptedException {
-		driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/order-materials/overview.html");
+		driver.navigate().to(Page_URL+".com/content/medicare/member/order-materials/overview.html");
 		//OrderPlanMaterialslnk.click();
 		CommonUtility.checkPageIsReady(driver);
 		if (orderplanHeadertxt.isDisplayed()) {

@@ -154,7 +154,7 @@ And the user validates the plan summary for the below plan in UMS site
 Examples:
 	| zipcode | county              | drugInitials	|  drugName      |  drugDosage	       | quantity	| drugFrequency  | packages | genericAvailable	| brand/generic								| pharmacyType				| distance	| pharmacyName					| plantype	| planName						|
 #	| 90210   |  Los Angeles County	| lipi       	| Lipitor        |  Lipitor TAB 20MG   |   40		| Every 3 Months | null     |	yes				| Lipitor TAB 20MG (Qty 40 Every 3 Months)	| Available Pharmacies		| 15 miles	| Garfield Pharmacy  			| MAPD		| AARP MedicareComplete SecureHorizons Plan 2 (HMO)	|
-	| 80002   |   Adams County      | lipi		    | Lipitor        |  Lipitor TAB 20MG   |   40		| Every 3 Months | null     |	yes				| Lipitor TAB 20MG (Qty 40 Every 3 Months)	| Available Pharmacies		| 15 miles	| Costco Pharmacy				| PDP		| AARP MedicareRx Preferred (PDP) | 
+#	| 80002   |   Adams County      | lipi		    | Lipitor        |  Lipitor TAB 20MG   |   40		| Every 3 Months | null     |	yes				| Lipitor TAB 20MG (Qty 40 Every 3 Months)	| Available Pharmacies		| 15 miles	| Costco Pharmacy				| PDP		| AARP MedicareRx Preferred (PDP) | 
 
 @dceVPPDrugsPlanAEP
 Scenario Outline: To Verify the drugs and plan summary for AEP period 
@@ -242,10 +242,10 @@ Then the user validates the details of the selected plan in UMS site
 
 Examples:
 	| zipcode | county              | drugInitials	| drugName      |  drugDosage	      | quantity	| drugFrequency		| packages | genericAvailable	| brand/generic					| pharmacyType				| distance	| pharmacyName			| plantype	| planName						|
-	| 90210   |  Los Angeles County	| lipi       	| Lipitor        |  Lipitor TAB 20MG   |   40		| Every 3 Months | null     |	yes				| Lipitor TAB 20MG (Qty 40 Every 3 Months)	| Available Pharmacies		| 15 miles	| Garfield Pharmacy  			| MAPD		| AARP MedicareComplete SecureHorizons Plan 2 (HMO)	|
+#	| 90210   |  Los Angeles County	| lipi       	| Lipitor        |  Lipitor TAB 20MG   |   40		| Every 3 Months | null     |	yes				| Lipitor TAB 20MG (Qty 40 Every 3 Months)	| Available Pharmacies		| 15 miles	| Garfield Pharmacy  			| MAPD		| AARP MedicareComplete SecureHorizons Plan 2 (HMO)	|
 #	| 75244   |  Dallas County	| lipi       	| Lipitor        |  Lipitor TAB 20MG   |   40		| Every 3 Months | null     |	yes				| Lipitor TAB 20MG (Qty 40 Every 3 Months)	| Available Pharmacies		| 15 miles	| Downing Labs  			| MAPD		| AARP MedicareComplete SecureHorizons Plan 1 (HMO)	|
 #	| 76270   | Montague County    | lipi	      |  Lipitor      |  Lipitor TAB 20MG   | 40       | Every 3 Months | null | yes              | Lipitor TAB 20MG (Qty 40 Every 3 Months) | Available Pharmacies  | 15 miles   |  CVS Pharmacy     | PDP      |    AARP MedicareRx Preferred (PDP)        |
-	| 80002   |  Adams County       | lipi		|  Lipitor      |  Lipitor TAB 20MG   |   40		| Every 3 Months	| null     |	yes		| Lipitor TAB 20MG (Qty 40 Every 3 Months)	| Available Pharmacies 		| 15 miles	| Costco Pharmacy		| PDP		| AARP MedicareRx Preferred (PDP) 	| 
+#	| 80002   |  Adams County       | lipi		|  Lipitor      |  Lipitor TAB 20MG   |   40		| Every 3 Months	| null     |	yes		| Lipitor TAB 20MG (Qty 40 Every 3 Months)	| Available Pharmacies 		| 15 miles	| Costco Pharmacy		| PDP		| AARP MedicareRx Preferred (PDP) 	| 
 
 @dceGenericFlow
 Scenario Outline: To Verify the drugs and pharmacy model for new generic flow
@@ -281,7 +281,7 @@ When the user views plan results after selecting drug and pharmacy in UMS site
 Then user validates plan count for all plan types on plan summary page in UMS site
 Examples:
 	| zipcode | county              | drugInitials	| drugName      |  drugDosage	      | quantity	| drugFrequency  | packages | genericAvailable	| brand/generic					| pharmacyType				| distance	| pharmacyName			| 
-	| 80002   | Adams County       | lipi		|  Lipitor      |  Lipitor TAB 20MG   |   40		| Every 3 Months | null     |	yes		| Lipitor TAB 20MG (Qty 40 Every 3 Months)	| Available Pharmacies 		| 15 miles	|  Costco Pharmacy		| 
+#	| 80002   | Adams County       | lipi		|  Lipitor      |  Lipitor TAB 20MG   |   40		| Every 3 Months | null     |	yes		| Lipitor TAB 20MG (Qty 40 Every 3 Months)	| Available Pharmacies 		| 15 miles	|  Costco Pharmacy		| 
 	
 @dceVppDrugsListPlanCost
 Scenario Outline: To Verify the drug list and plan cost sections in View Plan Details page 
@@ -316,5 +316,18 @@ Then the user view plan details of the selected plan in UMS site
 Examples:
 	| zipcode | county             | drugInitials | drugName      |  drugDosage	        | packages | quantity | drugFrequency  | genericAvailable | brand/generic                            | pharmacyType	 	 	 | distance   |  pharmacyName       | plantype |planYear| planName 					            |errorMessage                                                                                                                                   |
 #	| 76270   | Montague County    | lipi	      |  Lipitor      |  Lipitor TAB 20MG   | null     | 40       | Every 3 Months | yes              | Lipitor TAB 20MG (Qty 40 Every 3 Months) | Available Pharmacies  | 15 miles   |  CVS Pharmacy     | PDP      | 2016   |AARP MedicareRx Preferred (PDP)        |The pharmacy selected is not part of this plan's pharmacy network. Please edit your current pharmacy to estimate your drug costs for this plan.|
-	| 80002   |   Adams County      | lipi		    | Lipitor        |  Lipitor TAB 20MG   |  null | 40		| Every 3 Months |    	yes				| Lipitor TAB 20MG (Qty 40 Every 3 Months)	| Available Pharmacies		| 15 miles	| Costco Pharmacy				| PDP |2017		| AARP MedicareRx Preferred (PDP) | The pharmacy selected is not part of this plan's pharmacy network. Please edit your current pharmacy to estimate your drug costs for this plan.|
+#	| 80002   |   Adams County      | lipi		    | Lipitor        |  Lipitor TAB 20MG   |  null | 40		| Every 3 Months |    	yes				| Lipitor TAB 20MG (Qty 40 Every 3 Months)	| Available Pharmacies		| 15 miles	| Costco Pharmacy				| PDP |2017		| AARP MedicareRx Preferred (PDP) | The pharmacy selected is not part of this plan's pharmacy network. Please edit your current pharmacy to estimate your drug costs for this plan.|
+
+@dceOurPlansHover @US953320
+Scenario Outline: To verify DCE flow from Blayer home page
+Given the user is on blayer medicare acq site landing page
+When I access the acquisition DCE tool from home page on ums site
+And I hover or click on Our Plans in the top navigation and enter zipcode Blayer
+| Zip Code    | <zipcode>  |
+Then I should be directed to the VPP Plan Summary Page Blayer and I should see the Plan Count Overlay populated appropriately
+Examples:
+	| zipcode |
+  | 90210   |
+  | 30210   |
+  | 10002   |
 	

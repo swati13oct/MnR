@@ -22,8 +22,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import acceptancetests.atdd.data.MRConstants;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.MRConstants;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
@@ -38,7 +38,7 @@ public class ReDesignRegistrationPage extends UhcDriver {
 	private static String PAGE_URL = MRConstants.AARPM_URL;
 	private static String REDESIGN_REGISTRATION_PAGE_URL = MRConstants.NEW_REDESIGN_REGISTRATION_URL;
 	private static String SetServerDate_URL = "http://mrrest-teama.ose.optum.com/MRRestWAR/rest/zadmin/time/joda?millis=";
-	private static String REDESIGN_REGISTRATION_URL = "https://"+MRScenario.environment+"-medicare.uhc.com/medicare/member-registration.html#/get-started";
+	private static String REDESIGN_REGISTRATION_URL = "https://team-a-medicare.uhc.com/medicare/member-registration.html#/get-started";
 	
 	
 	@FindBy(id = "member-id")

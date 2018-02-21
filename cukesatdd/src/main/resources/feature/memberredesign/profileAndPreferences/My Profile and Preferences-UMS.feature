@@ -1,11 +1,11 @@
 @codeMonkeys
-Feature: To test Profile and Preferences page .
+Feature: C1.2To test Profile and Preferences page .
 
 
-  @CMNeedhelp
-  Scenario Outline: To verify the edit functionality in Account Profile section in UMS site
+    @CMNeedhelp
+  Scenario Outline: To verify the NeedHelp Section On Account Profile page
     Given registered member with following details for Profile and Preferences flow
-      | <planType> |
+     | Plan Type      | <planType>  |
     When the user navigates to Profile and Preferences page
     And the user validates the need help section
     And the user validates see more ways to contact us section
@@ -14,30 +14,42 @@ Feature: To test Profile and Preferences page .
     Examples: 
          | planType|
          | MAPD     |
-          | MA       |
          |PDP       |
-         |SHIP      |
-       
-       
-        @CMValidatePlanNamemembernameIDAccountSectionUMS
+         
+
+
+@CMNeedhelpShip
+  Scenario Outline: To verify the NeedHelp Section On Account Profile page for ship members
+    Given registered member with following details for Profile and Preferences flow
+     | Plan Type      | <planType>  |
+    When the user navigates to Profile and Preferences page
+    And the user validate the need help section for ship member
+    And the user validates see more ways to contact us section
+    And the user validates on clicking contact us link it should route to contact us page
+
+    Examples: 
+         | planType|
+         | SHIP    |
+
+  @CMValidatePlanNamemembernameIDAccountSectionUMS
   Scenario Outline: To verify Plan Name, Member name, Member ID and account section in UMS site
     Given registered member with following details for Profile and Preferences flow
-      | <planType> |
+       | Plan Type      | <planType>  |
     Then the user navigates to Profile and Preferences page
     Then the user validates the Plan Name, Member name, Member ID and account section in UMS site
 
     Examples: 
          | planType|
-         | MAPD     |
-          | MA       |
-         |PDP       |
-         |SHIP      |
+         |MAPD     |
+         |MA       |
+         |PDP      |
+         |SHIP     |
 
 
   @CMPasswordEdit
   Scenario Outline: To verify the edit functionality in Account Profile section in UMS site
     Given registered member with following details for Profile and Preferences flow
-      | <planType> |
+        | Plan Type      | <planType>  |
     When the user navigates to Profile and Preferences page
     Then the user validates the elements on clicking the edit link
     #Then the user validates the functionality of save Button
@@ -50,11 +62,10 @@ Feature: To test Profile and Preferences page .
          |PDP       |
          |SHIP      |
           
-          
-            @CMPasswordEdit1
-  Scenario Outline: To verify the edit functionality in Account Profile section in UMS site
+           @CMPasswordEdit1
+  Scenario Outline: To verify the edit functionality in Account Profile section in UMS site without entering the mandatory fields
     Given registered member with following details for Profile and Preferences flow
-      | <planType> |
+        | Plan Type      | <planType>  |
     When the user navigates to Profile and Preferences page
     Then the user validates the elements on clicking the edit link
     Then the user clicks on save button without filling current and new password and the red mandatory message should come
@@ -66,11 +77,12 @@ Feature: To test Profile and Preferences page .
           |PDP       |
           |SHIP      |
           
-          
-     @CMPasswordEdit3
-  Scenario Outline: To verify the edit functionality in Account Profile section in UMS site
+
+
+   @CMPasswordEdit3
+  Scenario Outline: To verify the edit functionality in Account Profile section in UMS site when user enters different password in confirm new password field
     Given registered member with following details for Profile and Preferences flow
-      | <planType> |
+       | Plan Type      | <planType>  |
     When the user navigates to Profile and Preferences page
     Then the user validates the elements on clicking the edit link
     Then the user enters different password in confirm password field and clicks save button and the user should see expected error message - Please enter the same value again
@@ -78,14 +90,15 @@ Feature: To test Profile and Preferences page .
    Examples: 
          | planType|
          | MAPD     |
-          | MA       |
+         | MA       |
          |PDP       |
-          |SHIP      |
-          
-        @CMTemporaryaddress
-    Scenario Outline: To verify Temporary adrress and Edit Functionality
+         |SHIP      |
+
+
+@CMTemporaryaddress
+    Scenario Outline: To verify Temporary address section
     Given registered member with following details for Profile and Preferences flow
-      | <planType> |
+       | Plan Type      | <planType>  |
     Then the user navigates to Profile and Preferences page
     Then the user validates the temporary address section
     Then the user validates the fields and Buttons of temp address section
@@ -96,13 +109,26 @@ Feature: To test Profile and Preferences page .
     Examples: 
        | planType |
        | MAPD     |
-      | MA       |
-      
-      
-        @CMValidateEmail
-    Scenario Outline: To verify Email section in UMS site
+       | MA       |
+
+       
+        @CMTemporaryaddressShip
+    Scenario Outline: To verify Temporary address section
     Given registered member with following details for Profile and Preferences flow
-      | <planType> |
+        | Plan Type      | <planType>  |
+    Then the user navigates to Profile and Preferences page
+    Then the user validates the temporary address section for ship member
+
+
+    Examples: 
+       | planType |
+       | SHIP       |
+      
+
+@CMValidateEmail
+    Scenario Outline: To verify Email section in member Redesign site
+    Given registered member with following details for Profile and Preferences flow
+       | Plan Type      | <planType>  |
     Then the user navigates to Profile and Preferences page
     Then the user validates the Email section in UMS site
 
@@ -112,13 +138,13 @@ Feature: To test Profile and Preferences page .
           | MA       |
          |PDP       |
           |SHIP      |
-          
-          
-          
-            @CMEmailEdit1
-  Scenario Outline: To verify Email section in AARP site
+
+
+
+  @CMEmailEdit1
+  Scenario Outline: To verify Email edit functionality in Redesign site 
     Given registered member with following details for Profile and Preferences flow
-      | <planType> |
+   | Plan Type      | <planType>  |
     When the user navigates to Profile and Preferences page
     Then the user clicks on edit button
     Then the user clicks on save without filling both fields then the user should see red mandatory message
@@ -135,9 +161,9 @@ Feature: To test Profile and Preferences page .
           
 @CMEmailEdit2
 
- Scenario Outline: To verify Email section in in UMS site
+ Scenario Outline: To verify validations on email secton in member redesign site
     Given registered member with following details for Profile and Preferences flow
-      | <planType> |
+        | Plan Type      | <planType>  |
     When the user navigates to Profile and Preferences page
     Then the user clicks on edit button
     Then the user fill invalid email and clicks on save button then the user should see error message for invalid email
@@ -150,11 +176,28 @@ Feature: To test Profile and Preferences page .
          |PDP       |
          |SHIP      |
           
-          
-            @CMCommunicationPreferences
-  Scenario Outline: To verify Go green in UMS site
+
+         
+          @CMPermanentAddress
+  Scenario Outline: To verify the Permanent Address section
     Given registered member with following details for Profile and Preferences flow
-      | <planType> |
+       | Plan Type      | <planType>  |
+    When the user navigates to Profile and Preferences page
+    Then the user validates permanent address section
+    And the user validates contact us statement
+
+    Examples: 
+         | planType|
+         | MAPD     |
+          | MA       |
+          |PDP       |
+          #|SHIP      |
+
+
+  @CMCommunicationPreferences
+  Scenario Outline: To verify Communication Preferences section
+    Given registered member with following details for Profile and Preferences flow
+        | Plan Type      | <planType>  |
     When the user navigates to Profile and Preferences page
     Then the user validates Communication Preferences section
     And the user validates Go paperless button and on clicking button go green page should come
@@ -164,37 +207,18 @@ Feature: To test Profile and Preferences page .
           | planType |
           | MAPD     |
           | MA       |
-        |PDP       |
+          |PDP       |
          |SHIP      |
-         
-         
-          @CMPermanentAddress
-  Scenario Outline: To verify the edit functionality in Account Profile section in UMS site
-    Given registered member with following details for Profile and Preferences flow
-      | <planType> |
-    When the user navigates to Profile and Preferences page
-    Then the user validates permanent address section
-    And the user clicks on contact us then contact us page should come
-
-    Examples: 
-         | planType|
-         | MAPD     |
-          | MA       |
-         # |PDP       |
-          #|SHIP      |
-
-
- 
 @CMPhone
       Scenario Outline: To verify Phone in Aarp site
       Given registered member with following details for Profile and Preferences flow
-      | <planType> |
+      | Plan Type      | <planType>  |
       Then the user navigates to Profile and Preferences page
       Then the user validates the Phone section
-      #Then the user Clicks on the the Edit Link and validates the elements
-      #Then the user checks the Edit Button changes to Cancel Button
-      #Then the user validates the functionality of save Button in Phoneeditsection 
-      #Then the user validates the functionality of Cancel Button In phoneeditSection
+      Then the user Clicks on the the Edit Link and validates the elements
+      Then the user checks the Edit Button changes to Cancel Button
+      Then the user validates the functionality of save Button in Phoneeditsection 
+      Then the user validates the functionality of Cancel Button In phoneeditSection
       
 
     Examples: 
@@ -203,12 +227,11 @@ Feature: To test Profile and Preferences page .
       | MA       |
       |PDP       |
       |SHIP      |
-
-       
-       @CMGoGreen
+      
+        @CMGoGreen
     Scenario Outline: To verify Go Green page
     Given registered member with following details for Profile and Preferences flow
-      | <planType> |
+        | Plan Type      | <planType>  |
     Then the user navigates to Profile and Preferences page
     Then the user validates Go paperless button and on clicking button go green page should come
     Then the user validates the presence of Communication preferences header
@@ -228,10 +251,27 @@ Feature: To test Profile and Preferences page .
       | MA       |
       |PDP       |
      #|SHIP      |
+     
+      @CMNokiaMemberValidateEmailPhoneEdit
+    Scenario Outline: To verify Email section in member Redesign site
+    Given registered member with following details for Profile and Preferences flow
+        | Plan Type      | <planType>  |
+      | Member Type    | <memberType>|
+    Then the user navigates to Profile and Preferences page
+    Then the user validates the Presence of edit button in email section
+    Then the user validates the Presence of edit button in Phone section
+     Then the user validates the Presence of edit button in Temporary Address section
+ Then the user validates the Presence of edit button in Mailing Address section
+ 
+ 
+    Examples: 
+       | planType| memberType  |
+       | MA    | NOKIA       | 
+       | MAPD    | NOKIA       | 
+      
        
          
 
 
-
-          
-
+      
+  

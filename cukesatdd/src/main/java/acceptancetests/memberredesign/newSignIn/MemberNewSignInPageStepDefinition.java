@@ -8,8 +8,9 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.member.PageConstants;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageConstants;
+import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.After;
@@ -55,7 +56,7 @@ public class MemberNewSignInPageStepDefinition {
 		sign_Page.validateNewSignPage();
 		if (sign_Page != null) {
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
-			getLoginScenario().saveBean(PageConstants.NEW_SIGN_PAGE,sign_Page);
+			getLoginScenario().saveBean(PageConstantsMnR.NEW_SIGN_PAGE,sign_Page);
 			Assert.assertTrue(true);
 		}
 
@@ -63,7 +64,7 @@ public class MemberNewSignInPageStepDefinition {
 
 	@When("^I have not entred any thing in both username and password fields$")
 	public void i_press_the_signin_button() {		
-		MemberNewSignInPage sign_Page =  ( MemberNewSignInPage) getLoginScenario().getBean(PageConstants.NEW_SIGN_PAGE);	
+		MemberNewSignInPage sign_Page =  ( MemberNewSignInPage) getLoginScenario().getBean(PageConstantsMnR.NEW_SIGN_PAGE);	
 		sign_Page.clearUnAndPwfields();		
 		/*
 		 */
@@ -71,36 +72,36 @@ public class MemberNewSignInPageStepDefinition {
 	}
 	@Then("^I should get the error message on both fields$")
 	public void I_should_get_the_error_message_on_both_fields() {
-		MemberNewSignInPage sign_Page =  ( MemberNewSignInPage) getLoginScenario().getBean(PageConstants.NEW_SIGN_PAGE);	
+		MemberNewSignInPage sign_Page =  ( MemberNewSignInPage) getLoginScenario().getBean(PageConstantsMnR.NEW_SIGN_PAGE);	
 
 		System.out.println("Both UN and PW fields are Empty");
-		System.out.println("Validating the Username and Password Error messages ===========>"+ (sign_Page.validateUsernameError() && sign_Page.validatepassworderror()));
+		System.out.println("Validating the Username and Password Error messages ===========>"+ (sign_Page.validateUsernamePswdError()));
 	}
 
 	@When("^I have not entred any thing in  username  field$")
 	public void I_have_not_entred_any_thing_in_username_field() {
-		MemberNewSignInPage sign_Page =  ( MemberNewSignInPage) getLoginScenario().getBean(PageConstants.NEW_SIGN_PAGE);
+		MemberNewSignInPage sign_Page =  ( MemberNewSignInPage) getLoginScenario().getBean(PageConstantsMnR.NEW_SIGN_PAGE);
 		sign_Page.onlypasswerdEntred();
 
 	}
 
 	@Then("^I should get the error message on username field$")
 	public void I_should_get_the_error_message_on_username_field() {
-		MemberNewSignInPage sign_Page =  ( MemberNewSignInPage) getLoginScenario().getBean(PageConstants.NEW_SIGN_PAGE);
+		MemberNewSignInPage sign_Page =  ( MemberNewSignInPage) getLoginScenario().getBean(PageConstantsMnR.NEW_SIGN_PAGE);
 		System.out.println("only password entred");
 		System.out.println("validating the Username error =======>"+ sign_Page.validateUsernameError()); 
 	}
 
 	@When("^I have not entred any thing in password field$")
 	public void I_have_not_entred_any_thing_in_password_field() {
-		MemberNewSignInPage sign_Page =  ( MemberNewSignInPage) getLoginScenario().getBean(PageConstants.NEW_SIGN_PAGE);
+		MemberNewSignInPage sign_Page =  ( MemberNewSignInPage) getLoginScenario().getBean(PageConstantsMnR.NEW_SIGN_PAGE);
 		sign_Page.onlyUsernameEntred();
 
 	}
 
 	@Then("^I should get the error message on password field$")
 	public void I_should_get_the_error_message_on_password_field() {
-		MemberNewSignInPage sign_Page =  ( MemberNewSignInPage) getLoginScenario().getBean(PageConstants.NEW_SIGN_PAGE);
+		MemberNewSignInPage sign_Page =  ( MemberNewSignInPage) getLoginScenario().getBean(PageConstantsMnR.NEW_SIGN_PAGE);
 		System.out.println("Only Username Entred ");
 		System.out.println("validating the password error message ========>" + sign_Page.validatepassworderror()); 
 
@@ -108,15 +109,15 @@ public class MemberNewSignInPageStepDefinition {
 	
 	@When("^I click on the forgot your username and password link on signin page$")
 	public void clickUsernamePasswordLink() throws InterruptedException {
-		MemberNewSignInPage sign_Page =  ( MemberNewSignInPage) getLoginScenario().getBean(PageConstants.NEW_SIGN_PAGE);
+		MemberNewSignInPage sign_Page =  ( MemberNewSignInPage) getLoginScenario().getBean(PageConstantsMnR.NEW_SIGN_PAGE);
 		UsernamePasswordAssistancePage usernamePasswordAssistancePage = sign_Page.clickForgotUsernamePasswordLink();
-		getLoginScenario().saveBean(PageConstants.USERNAME_PASSWORD_ASSISTANCE_PAGE,usernamePasswordAssistancePage);
+		getLoginScenario().saveBean(PageConstantsMnR.USERNAME_PASSWORD_ASSISTANCE_PAGE,usernamePasswordAssistancePage);
 		
 		}
 		
 	@Then("^I should be taken to Username and Password Assistance page$")
 	public void verifyUsernamePasswordAssistancePage() {
-		UsernamePasswordAssistancePage usernamePasswordAssistancePage =  (UsernamePasswordAssistancePage) getLoginScenario().getBean(PageConstants.USERNAME_PASSWORD_ASSISTANCE_PAGE);
+		UsernamePasswordAssistancePage usernamePasswordAssistancePage =  (UsernamePasswordAssistancePage) getLoginScenario().getBean(PageConstantsMnR.USERNAME_PASSWORD_ASSISTANCE_PAGE);
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
@@ -140,7 +141,7 @@ public class MemberNewSignInPageStepDefinition {
 					.get(0), AttributesRow.get(i).getCells().get(1));
 		}
 		String siteID = urlAttributesMap.get("SiteID");
-		UsernamePasswordAssistancePage usernamePasswordAssistancePage =  (UsernamePasswordAssistancePage) getLoginScenario().getBean(PageConstants.USERNAME_PASSWORD_ASSISTANCE_PAGE);
+		UsernamePasswordAssistancePage usernamePasswordAssistancePage =  (UsernamePasswordAssistancePage) getLoginScenario().getBean(PageConstantsMnR.USERNAME_PASSWORD_ASSISTANCE_PAGE);
 		Assert.assertTrue(usernamePasswordAssistancePage.currentUrl().contains(siteID));
 		String PAGE_URL = usernamePasswordAssistancePage.currentUrl().toString();
 		System.out.println("Actual SiteID in the URL is "+PAGE_URL);
@@ -148,16 +149,16 @@ public class MemberNewSignInPageStepDefinition {
 		    }
    @When("^the user click on registration page$")
    public void the_user_click_on_registration_page() {
-	   MemberNewSignInPage sign_Page =  ( MemberNewSignInPage) getLoginScenario().getBean(PageConstants.NEW_SIGN_PAGE);
+	   MemberNewSignInPage sign_Page =  ( MemberNewSignInPage) getLoginScenario().getBean(PageConstantsMnR.NEW_SIGN_PAGE);
 	   
 	   NewMemebrRegistrationPage newMemebrRegistrationPage =  sign_Page.clickRegisterbutton();
-	   getLoginScenario().saveBean(PageConstants.NEW_REGISTRATION_PAGE,newMemebrRegistrationPage);
+	   getLoginScenario().saveBean(PageConstantsMnR.NEW_REGISTRATION_PAGE,newMemebrRegistrationPage);
       
    }
 
    @Then("^I should be taken to the new Registration page$")
    public void I_should_be_taken_to_the_new_Registration_page() {
-	   NewMemebrRegistrationPage NewMemebrRegistrationPage =  (NewMemebrRegistrationPage) getLoginScenario().getBean(PageConstants.NEW_REGISTRATION_PAGE);
+	   NewMemebrRegistrationPage NewMemebrRegistrationPage =  (NewMemebrRegistrationPage) getLoginScenario().getBean(PageConstantsMnR.NEW_REGISTRATION_PAGE);
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
@@ -183,7 +184,7 @@ public class MemberNewSignInPageStepDefinition {
 		}
 		String regsiteID1 = urlAttributesMap.get("RegSiteID");
 		
-		NewMemebrRegistrationPage NewMemebrRegistrationPage =  (NewMemebrRegistrationPage) getLoginScenario().getBean(PageConstants.NEW_REGISTRATION_PAGE);
+		NewMemebrRegistrationPage NewMemebrRegistrationPage =  (NewMemebrRegistrationPage) getLoginScenario().getBean(PageConstantsMnR.NEW_REGISTRATION_PAGE);
 
 		Assert.assertTrue(NewMemebrRegistrationPage.currentUrl().contains(regsiteID1));
 		System.err.println("Actual SiteID in the URL is "+driver.getCurrentUrl());

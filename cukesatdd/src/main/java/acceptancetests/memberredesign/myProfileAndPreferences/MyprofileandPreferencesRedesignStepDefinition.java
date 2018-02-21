@@ -8,8 +8,9 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.member.PageConstants;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageConstants;
+import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
@@ -23,6 +24,7 @@ import pages.member.redesign.NewRegistrationPage;
 import pages.member.redesign.PreferencesPage;
 import pages.member.redesign.RegistrationConfirmationPage;
 import pages.member.redesign.TestHarnessPage;
+import pages.member.ulayer.RallyDashboard;
 import pages.member.ulayer.UNPWAssistancePage;
 import pages.redesign.CommunicationPreferences;
 
@@ -36,7 +38,10 @@ public class MyprofileandPreferencesRedesignStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-	// Login to the application
+	
+	/** 
+	 * @todo :Login to the application
+	 */
 	@Given("^PreferencesSpartans Login to the application$")
 	public void PreferencesSpartans_Login_to_the_application(DataTable givenAttributes)
 			throws InterruptedException {
@@ -59,42 +64,50 @@ public class MyprofileandPreferencesRedesignStepDefinition {
 		NewLoginPage loginPage = new NewLoginPage(wd);
 		CommunicationPreferences compp = new CommunicationPreferences(wd);
 		CommunicationPreferences compp1 = new CommunicationPreferences(wd);
-		compp1 = (CommunicationPreferences) loginPage.loginWith(userName,
-				passWord);
+		/*compp1 = (CommunicationPreferences) loginPage.loginWith(userName,
+				passWord);*/
+		
+		RallyDashboard rallyDashboardPAge = (RallyDashboard) loginPage.loginWith(userName, passWord);
 
 		if (compp != null) {
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-			getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE, compp);
+			getLoginScenario().saveBean(PageConstantsMnR.TEST_HARNESS_PAGE, compp);
 			Assert.assertTrue(true);
 		}
 	}
-	// Navigate to preference page
+	
+	/** 
+	 * @todo :Navigate to preference page
+	 */
 	@When("^PreferencesSpartans the user navigates to Prefrences page$")
 	public void PreferencesSpartans_the_user_navigates_to_Prefrences_page()
 			throws InterruptedException {
 
 		CommunicationPreferences compp = (CommunicationPreferences) getLoginScenario()
-				.getBean(PageConstants.TEST_HARNESS_PAGE);
+				.getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
 
 		compp.navigateToPreferencesPage();
 
 		if (compp != null) {
 			getLoginScenario().saveBean(
-					PageConstants.PROFILEANDPREFERENCES_PAGE, compp);
+					PageConstantsMnR.PROFILEANDPREFERENCES_PAGE, compp);
 			Assert.assertTrue(true);
 		}
 	}
-	// change delivery preferences from mail to online or viceversa
+	
+	/** 
+	 * @todo :change delivery preferences from mail to online or viceversa
+	 */
 	@Then("^PreferencesSpartans the user changes delivery preferences$")
 	public void PreferencesSpartans_the_user_changes_delivery_preferences() throws InterruptedException {
 		CommunicationPreferences compp = (CommunicationPreferences) getLoginScenario()
-				.getBean(PageConstants.PROFILEANDPREFERENCES_PAGE);
+				.getBean(PageConstantsMnR.PROFILEANDPREFERENCES_PAGE);
 
 		compp.SelectPreferences();
 
 		if (compp != null)
 			getLoginScenario().saveBean(
-					PageConstants.PROFILEANDPREFERENCES_PAGE, compp);
+					PageConstantsMnR.PROFILEANDPREFERENCES_PAGE, compp);
 	}
 
 }

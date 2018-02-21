@@ -12,7 +12,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import pages.member.redesign.PreferencesPage;
-import acceptancetests.atdd.data.MRConstants;
+import acceptancetests.data.MRConstants;
 import atdd.framework.UhcDriver;
 
 public class ExplanationOfBenefitsPage extends UhcDriver {
@@ -67,8 +67,9 @@ public class ExplanationOfBenefitsPage extends UhcDriver {
 	public void openAndValidate() {
 		start(PAGE_URL);
 	}
-
-	// Navigate to EOB Page
+	/** 
+	 * @todo : Navigate to EOB Page
+	 */
 	public void navigateToEOBPage() throws InterruptedException {
 		if (driver.getTitle().equalsIgnoreCase("UnitedHealthcare")) {
 			System.out.println("navigated to Homepage!");
@@ -115,8 +116,9 @@ public class ExplanationOfBenefitsPage extends UhcDriver {
 			// return null;
 		}
 	}
-
-	// Validate the EOB elements present in the page or not
+	/** 
+	 * @todo : Validate the EOB elements present in the page or not
+	 */
 	public void validateEOB() throws InterruptedException {
 
 		if (driver.getTitle().equalsIgnoreCase("EOB Search")) {

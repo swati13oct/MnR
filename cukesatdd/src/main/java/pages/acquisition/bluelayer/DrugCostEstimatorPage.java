@@ -9,21 +9,24 @@ import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import com.itextpdf.text.log.SysoCounter;
+
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
 public class DrugCostEstimatorPage extends UhcDriver {
 
@@ -391,7 +394,13 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	
 	@FindBy(xpath = ".//*[@id='borderContainer']/div/div[2]/div[2]/button[2]")
 	public WebElement year2018;
-
+	
+	@FindBy(id = "ghn_lnk_2")
+	public WebElement ourPlansTab;
+	
+	@FindBy(id = "nav-zipcode")
+	public WebElement enterZipcode;
+	
 	@Override
 	public void openAndValidate() {
 
@@ -1788,5 +1797,16 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		return null;
 	}
 	
+	public VPPPlanSummaryPage mouseHoverOurPlans(String zipCode){
+		if(ourPlansTab.isDisplayed()){
+		Actions actions = new Actions(driver);
+		actions.moveToElement(ourPlansTab).build().perform();
+		enterZipcode.sendKeys(zipCode, Keys.ENTER);
+		return new VPPPlanSummaryPage(driver);
+		}else{
+			System.out.println("====================Our Plans tab not displayed================");
+			return null;
+		}
+	}
 
 }

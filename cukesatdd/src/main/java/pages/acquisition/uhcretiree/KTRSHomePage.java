@@ -12,7 +12,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import pages.acquisition.uhcretiree.KTRSFindaProviderPage;
 import pages.acquisition.uhcretiree.Rallytool_Page;
-import acceptancetests.atdd.data.MRConstants;
+import acceptancetests.data.MRConstants;
 import atdd.framework.UhcDriver;
 
 /**

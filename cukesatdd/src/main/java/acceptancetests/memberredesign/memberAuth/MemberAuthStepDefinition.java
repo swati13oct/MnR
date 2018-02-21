@@ -7,7 +7,7 @@ import java.util.Map;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.atdd.data.MRConstants;
+import acceptancetests.data.MRConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.After;
@@ -34,6 +34,9 @@ public class MemberAuthStepDefinition{
 		return loginScenario;
 	}
 	
+	/** 
+	 * @todo :user to login for member auth
+	 */
 	@Given("^the user is on member auth login page$")
 	public void the_user_is_on_member_auth_login_page(){
 		WebDriver wd = getLoginScenario().getWebDriver();	
@@ -54,7 +57,10 @@ getLoginScenario().saveBean(MRConstants.MEMBER_AUTH, memberauth);
         getLoginScenario().saveBean(MRConstants.MEMBER_AUTH, memberauth);*/
         
 //}
-		
+	
+	/** 
+	 * @todo :user to validate errors for member login with valid user and pwd 
+	 */
 	@Then ("^the member tries to login with invalid username and correct password and verify the error message$")
 	public void member_tries_to_login_with_credentials(DataTable profileAttributes) throws InterruptedException{
 		

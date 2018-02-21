@@ -11,6 +11,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -18,9 +19,10 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import acceptancetests.atdd.data.ElementData;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.ElementData;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
+import junit.framework.Assert;
 
 /**
  * @author pjaising
@@ -100,18 +102,40 @@ public abstract class UhcDriver {
         }
 
         public boolean validate(WebElement element) {
-                try {
-                        if (element.isDisplayed()) {
-                                System.out.println("Element found!!!!");
-                                return true;
-                        } else {
-                                System.out.println("Element not found/not visible");
-                        }
-                } catch (Exception e) {
-                        System.out.println("Exception: Element not found/not visible");
+        	/*try {
+    		if (element.isDisplayed()) {
+    		System.out.println("Element found!!!!");
+    		return true;
+    		} else {
+    		System.out.println("Element not found/not visible");
+    		}
+    		} catch (Exception e) {
+    		System.out.println("Exception: Element not found/not visible");
 
-                }
-                return false;
+    		}
+    		return false;*/
+
+    		//CM code
+    		
+    		JavascriptExecutor jse = (JavascriptExecutor)driver;
+    		jse.executeScript("window.scrollBy(0,-50)", "");
+    	        try {
+    	         waitforElement(element);
+    	            if (element.isDisplayed()) {
+
+    	                 /*  Actions actions = new Actions(driver);
+    	                   actions.moveToElement(element);
+    	                   actions.perform();*/
+    	                   Assert.assertTrue("@@@The element " + element.getText() + "is found@@@", element.isDisplayed());
+    	                   System.out.println("@@@The element " + element.getText() + "is found@@@");
+    	            }
+    	     } catch (Exception e) {
+
+    	            Assert.fail("The element " + element.getText() + "is not  found");
+    	         return false;
+    	     }
+    	     
+    	        return true;
         }
 
         public WebElement findElement(ElementData elementData) {

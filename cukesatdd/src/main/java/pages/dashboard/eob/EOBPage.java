@@ -12,13 +12,15 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.PageFactory; 
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import acceptancetests.atdd.data.MRConstants;
-import acceptancetests.atdd.util.CommonUtility;
+import com.itextpdf.text.log.SysoCounter;
+
+import acceptancetests.data.MRConstants;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 /**
 * EOB Page Validation
@@ -28,8 +30,11 @@ public class EOBPage extends UhcDriver{
 	@FindBy(id="eob-type")
 	private WebElement eobType;
 
-	@FindBy(id="date-range-1")
+	@FindBy(id="date-range")
 	private WebElement eobMonthDateRange;
+	
+	@FindBy(id="date-range-1")
+	private WebElement eobMonthDateRange1;
 
 	@FindBy(id="date-range")
 	private WebElement eobMonthDateRangeSHIP;
@@ -43,7 +48,7 @@ public class EOBPage extends UhcDriver{
 	@FindBy(className="btn custom-date-search-btn")
 	private WebElement searchButton;
 
-	@FindBy(xpath="//*[contains(text(),'Learn More About My Medical EOB')]")
+	@FindBy(xpath="//*[contains(text(),'Learn More About My')]")
 	private WebElement learnMoreLink;
 
 	@FindBy(xpath="//*[contains(text(),'How to read your Medical EOB ')]")
@@ -103,8 +108,8 @@ public class EOBPage extends UhcDriver{
 	@FindBy(xpath="//i[@class='rightarrow']")
 	private WebElement nextPageArrow;
 	
-	private static String EOB_DIRECT_URL = MRConstants.EOB_DIRECT_URL;
-
+	private static String STAGE_DASHBOARD_URL = MRConstants.DASHBOARD_URL;
+	
 	public EOBPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -124,7 +129,12 @@ public class EOBPage extends UhcDriver{
 			select.selectByValue(eobTypeData);
 			System.out.println(eobTypeData);		 
 		}
-		Select select = new Select(eobMonthDateRange);
+		Select select;
+		if(planType.equalsIgnoreCase("SHIP")){
+		select = new Select(eobMonthDateRange);
+		}else{
+			select = new Select(eobMonthDateRange1);
+		}
 		System.out.println(dateRange);
 		select.selectByValue(dateRange);
 		validateDateRangeContentDisplayed(dateRange);
@@ -377,7 +387,21 @@ public class EOBPage extends UhcDriver{
 	}
 
 	public EOBPage loginToDashboardPage(String userName){
-		start(EOB_DIRECT_URL);
+		System.out.println(MRScenario.environment);
+		/*if ( MRScenario.environment.contains("stage") || MRScenario.environment.contains("test-a")){
+			System.out.println(EOB_DIRECT_URL);
+			start(EOB_DIRECT_URL);
+		}if(MRScenario.environment.contains("team-ci1")){
+			System.out.println(EOB_CI1_URL);
+			start(EOB_CI1_URL);
+		}*/
+		if(MRScenario.environment.contains("stage")){
+			start(STAGE_DASHBOARD_URL);
+			System.out.println(STAGE_DASHBOARD_URL);
+		}else{
+			start(MRConstants.REDESIGN_LOGIN_URL);
+		}
+		
 		driver.manage().timeouts().implicitlyWait(40,TimeUnit.SECONDS) ;
 		System.out.println(userName);
 		validate(driver.findElement(By.id("username")));
@@ -539,9 +563,23 @@ public class EOBPage extends UhcDriver{
 		*@toDo: the method is to validate eob display on eob page
 		*/
 		
-		public EOBPage validateEOBStatements(){
+		public EOBPage validateEOBStatements(String numberOfEOB){
+			try {
+				Thread.sleep(6000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		System.out.println(eobCount.getText());
 		int eobCountInt = Integer.parseInt(eobCount.getText());
+		int numberOfEOBInt = Integer.parseInt(numberOfEOB);
+		System.out.println("EOB expected count = "+numberOfEOBInt);
+		if(numberOfEOBInt==eobCountInt){
+			System.out.println("count displayed correctly");
+		}else{
+			System.out.println("count not displayed correctly");
+			Assert.fail();
+		}
 		System.out.println(eobCountInt);
 		numberOfPageDisplayed(eobCountInt);
 		for(int i=0; i<eobCountInt; i++){

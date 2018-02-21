@@ -19,9 +19,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.member.ulayer.ValueAddedServicepage;
 
@@ -333,7 +333,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		PageFactory.initElements(driver, this);
 		String fileName = CommonConstants.BENEFITS_AND_COVERAGE_PAGE_DATA;
 		benefitsCoverage = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_BLAYER_MEMBER);
-		openAndValidate();
+		//openAndValidate();
 	}
 
 

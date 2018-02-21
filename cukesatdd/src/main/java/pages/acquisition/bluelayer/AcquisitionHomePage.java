@@ -18,10 +18,10 @@ import org.openqa.selenium.support.PageFactory;
 
 
 //import pages.member.bluelayer.AccountHomePage;
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.MRConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.MRConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 //import pages.acquisition.ulayer.MaViewPlansAndPricingPage;
 //import pages.acquisition.ulayer.MsViewPlansAndPricingPage;
 //import pages.acquisition.ulayer.PdpViewPlansAndPricingPage;
@@ -1041,7 +1041,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
         public VPPPlanSummaryPage navigateToVpp(String zipcode)
         {
-                
+                try {
+					Thread.sleep(10000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
                 sendkeys(zipCodeField, zipcode);
                 viewPlansButton.click();
                 

@@ -106,7 +106,29 @@
 					<executable>${basedir}/src/main/resources/pdfReportGenerator.sh</executable>
 				</configuration>
 			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>3.9.0</version>
+				<configuration>
+					<targetJdk>1.8</targetJdk>
+				<rulesets>
+					<ruleset>${project.basedir}/src/main/resources/ucp-custom-ruleset.xml</ruleset>
+				</rulesets>
+				<failsOnError>false</failsOnError>
+     			<failOnViolation>false</failOnViolation>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
+	
 		<pluginManagement>
 			<plugins>
 				<!--This plugin's configuration is used to store Eclipse m2e settings 
@@ -144,6 +166,29 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+		<reporting>
+    		<plugins>
+       		 <plugin>
+          	  <groupId>org.apache.maven.plugins</groupId>
+          	  <artifactId>maven-jxr-plugin</artifactId>
+           	 <version>2.5</version>
+       		 </plugin>
+       		 
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-pmd-plugin</artifactId>
+            <version>3.9.0</version>
+            <configuration>
+                <linkXRef>false</linkXRef>
+                <targetJdk>1.8</targetJdk>
+                <rulesets>
+                    <ruleset>/rulesets/basic.xml</ruleset>
+                </rulesets>
+            </configuration>
+        </plugin>
+    		</plugins>
+		</reporting>
+
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -284,11 +329,6 @@
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-java</artifactId>
-			<version>${selenium.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-firefox-driver</artifactId>
 			<version>${selenium.version}</version>
 		</dependency>
@@ -345,5 +385,5 @@
 		</dependency>
 
 	</dependencies>
-
+	
 </project>
