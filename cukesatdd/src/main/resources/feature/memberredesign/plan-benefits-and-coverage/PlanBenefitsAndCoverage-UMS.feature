@@ -181,13 +181,15 @@ Feature:C1.1 To test plan benefits and Coverage on UMS site
     @CMBncHeadersIndividual
      Scenario Outline: Verify that Page Headers are in place on Benefits and Coverage page
     Given registered member with following details logins in the member portal 
-       | Plan Type      | <planType>     |
+      | Plan Type      | <planType>  |
+      | Member Type    | <memberType>|
+      | Copay Category | <copayCategory>|
     Then the user navigates to Benefits and coverage page
     And the user validates headers on Bnc page for indi members
      Examples: 
       | planType|  memberType  | copayCategory |
-      | MAPD    |  Individual  |   LIS 1       | 
-      | MA      |  Individual  |   LIS 1       |
+      | MA      |  Individual  |   LIS 1       | 
+      | MA      |  Individual  |   NON LIS     |
       | MAPD    |  Individual  |  NON LIS      | 
       | PDP     |  Individual  |  NON LIS      | 
       | PDP     |  Individual  |   LIS 4       |
@@ -209,23 +211,22 @@ Feature:C1.1 To test plan benefits and Coverage on UMS site
      | MAPD    |  Group       |  NON LIS      | 
       
       
-  @CMPlanOverviewNonLis
+    @CMPlanOverviewNonLis
     Scenario Outline: Verify that Plan Overview  is in place on Benefits and Coverage page for Non LIS Members
     Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>  |
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
     Then the user navigates to Benefits and coverage page
-    And the user validates plan overview section 
+    And the user validates Ind plan overview   
 
     Examples: 
       
       | planType|  memberType  | copayCategory |
       | MAPD    |  Individual  |  NON LIS      | 
       | PDP     |  Individual  |  NON LIS      | 
-      | MA      |  Group       |  HMO          |
-      | PDP     |  Group       |  NON LIS      |
-      | MAPD    |  Group       |  NON LIS      |  
+      | MA      |  Individual  |  NON LIS      |
+      
       
     @CMPlanOverviewLis
     Scenario Outline: Verify that Plan Overview is in place on Benefits and Coverage page for LIS Members
@@ -234,11 +235,11 @@ Feature:C1.1 To test plan benefits and Coverage on UMS site
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
     Then the user navigates to Benefits and coverage page
-    And the user validates plan overview section for a Lis member
+    And the user validates Lis member plan overview section
 
     Examples: 
       | planType|  memberType  | copayCategory |
-      | MAPD    |  Individual  |   LIS 1       | 
+      | MAPD    |  Ind         |   LIS 1       | 
       | MA      |  Individual  |   LIS 1       | 
       | PDP     |  Individual  |   LIS 4       | 
       | MA      |  Group       |   LIS 1       |

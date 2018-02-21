@@ -70,19 +70,19 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(id = "lang-select-2")
 	private WebElement langdropdown;
 
-	@FindBy(xpath = ".//*[@id='ancillary']/div[2]/div[1]/div")
+	@FindBy(className = "atdd-benefitssummary-ancillaryHearingText")
 	private WebElement Hearingsection;
 
-	@FindBy(xpath = ".//*[@id='ancillary']/div[2]/div[2]/div/div/div")
+	@FindBy(className = "atdd-benefitssummary-exclusivehearing")
 	private WebElement Hearingaid;
 
-	@FindBy(xpath = ".//*[@id='ancillary']/div[2]/div[3]/div[1]/div")
+	@FindBy(xpath = "atdd-benefitssummary-vision")
 	private WebElement Visionsection;
 
-	@FindBy(xpath = ".//*[@id='ancillary']/div[2]/div[3]/div[2]/div")
+	@FindBy(xpath = "atdd-benefitssummary-dental")
 	private WebElement Dentalsection;
 
-	@FindBy(xpath = ".//*[@id='ancillary']/div[1]/div")
+	@FindBy(className = "atdd-benefitssummary-ancillaryHeader")
 	private WebElement Headersection;
 
 	@FindBy(xpath = ".//*[@id='ancillary']/div[2]/div[4]/div/div")
@@ -179,10 +179,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-benefitsoverview-extrahelplevel-ma-label")
 	private WebElement ExtraHelp;
 
-	@FindBy(className = "atdd-benefitssummary-headertitle")
+	@FindBy(xpath = ".//*[@id='benefitsMain']/div[2]/div/div[1]/div/div/div/div/div[1]/div/div/h1")
 	private WebElement BenefitsSummaryHeader;
 
-	@FindBy(className = "atdd-benefitssummary-subheadertitle")
+	@FindBy(xpath = ".//*[@id='benefitsMain']/div[2]/div/div[1]/div/div/div/div/div[2]/div/div/div[1]/div/h3/b/span")
 	private WebElement Copayscoinsuranceheader;
 
 	@FindBy(className = "atdd-hospitalvisits-title")
@@ -1133,9 +1133,19 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(nameLabel);
 		validate(memberID);
 		validate(effective_Date);
-		validate(Monthly_Premium);
+		//validate(Monthly_Premium);
+		
 		validate(GroupId);
 
+	}
+	
+	public void validatePlanOverviewInd()
+	{
+		validate(planName);
+		validate(nameLabel);
+		validate(memberID);
+		validate(effective_Date);
+		//validate(Monthly_Premium);
 	}
 	
 	/** 
@@ -1147,7 +1157,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(nameLabel);
 		validate(memberID);
 		validate(effective_Date);
-		validate(Monthly_Premium);
+		//validate(Monthly_Premium);
 		validate(ExtraHelp);
 
 	}

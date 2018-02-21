@@ -186,7 +186,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@Then("^the user navigates to Benefits coverage page$")
 	public void user_views_BenefitsAndCoveragejenkins() {
 
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.dashboardPage);
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 
 		BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag();
 
@@ -654,12 +654,22 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validatePlanOverview();
 	}
+	
+	/** 
+	 * @toDo : Validates the  Plan overview section for  a Non lis member Ind Member
+	 */
+	@And("the user validates Ind plan overview")
+	public void user_validate_IndplanOverviewsection() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validatePlanOverviewInd();
+	}
 
 	/** 
 	 * @toDo : Validates the  Plan overview section for  a lis member
 	 */
-	@And("the user validates plan overview section for a Lis member")
-	public void user_validate_planOverviewLis() {
+	@And("the user validates Lis member plan overview section")
+	public void user_validate_LisplanOverview() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validatePlanOverviewLis();

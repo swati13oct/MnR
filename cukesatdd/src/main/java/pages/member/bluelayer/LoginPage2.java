@@ -315,7 +315,7 @@ public class LoginPage2 extends UhcDriver {
 	
 	public Object doLoginWith(String username, String password) {
 
-                System.out.println(driver.getCurrentUrl());
+        System.out.println(driver.getCurrentUrl());
 		sendkeys(userNameField, username);
 		sendkeys(passwordField, password);
 		signInButton.click();
@@ -329,6 +329,14 @@ public class LoginPage2 extends UhcDriver {
 		if(currentUrl().contains("testharness.html") || currentUrl().contains("/dashboard"))
         {
 			System.out.println("test");
+			System.out.println(driver.getCurrentUrl());
+			try {
+				Thread.sleep(30000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println(driver.getCurrentUrl());
 			return new AccountHomePage(driver);
 		}
 		else if(currentUrl().contains("home/my-account-home.html")  || currentUrl().contains("/login.html") ) {
