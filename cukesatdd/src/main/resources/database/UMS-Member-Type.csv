@@ -2,6 +2,7 @@ q1_grp_feb001/Password@1,MAPD,Group,
 q1_grp_feb012/Password@1,MAPD,Individual,Nice_med
 q1_aarp_feb008/Password@1,MAPD,Individual,
 q1_feb_uhc138/Password@1,MAPD,,
+q1_aarp_feb012/Password@1,MA,, 
 q4_dec_uhc003/Password@1,MAPD,Individual,Drug
 q4_dec_uhc002/Password@1,MAPD,Individual,Med_EOB
 ATDD_MAPD_IND_RX_EOB_01/Password@1,MAPD,Individual,rx_Eob
@@ -28,8 +29,7 @@ Reward_bl_005/Password@5,MAPD,RewardsMember,
 q1_grp_feb086/Password@1,MA,Nokia,
 q1_grp_feb009/Password@1,MAPD,Nokia,
 q1_feb_uhc202/Password@1,PDP,,
-q1_ship_feb192/Password@1,SHIP,,
-q1_aarp_feb005/Password@1,MA,,  
+q1_ship_feb192/Password@1,SHIP,, 
 q1_grp_feb111/Password@1,MA,Group,HMO
 q1_grp_feb043/Password@1,MA,Group,LIS 1
 q1_ship_feb120/Password,HIP,SHIP,NON LIS

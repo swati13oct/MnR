@@ -192,7 +192,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.validateAccountEdit(Password);
 
 	}
-	@Then("^the user validates the temporary address section for ship member")
+	@Then("^the user validate the temporary address section for ship member")
 	public void UserValidatesTempAddressShip() {
 		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);

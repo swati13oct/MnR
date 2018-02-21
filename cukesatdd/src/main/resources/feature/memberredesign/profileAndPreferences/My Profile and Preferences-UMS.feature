@@ -41,7 +41,6 @@ Feature: C1.2To test Profile and Preferences page .
     Examples: 
          | planType|
          |MAPD     |
-         |MA       |
          |PDP      |
          |SHIP     |
 
@@ -58,7 +57,6 @@ Feature: C1.2To test Profile and Preferences page .
       Examples: 
          | planType|
          | MAPD     |
-          | MA       |
          |PDP       |
          |SHIP      |
           
@@ -73,7 +71,6 @@ Feature: C1.2To test Profile and Preferences page .
    Examples: 
          | planType|
          | MAPD     |
-          | MA       |
           |PDP       |
           |SHIP      |
           
@@ -90,7 +87,6 @@ Feature: C1.2To test Profile and Preferences page .
    Examples: 
          | planType|
          | MAPD     |
-         | MA       |
          |PDP       |
          |SHIP      |
 
@@ -109,7 +105,7 @@ Feature: C1.2To test Profile and Preferences page .
     Examples: 
        | planType |
        | MAPD     |
-       | MA       |
+       | PDP       |
 
        
         @CMTemporaryaddressShip
@@ -117,12 +113,12 @@ Feature: C1.2To test Profile and Preferences page .
     Given registered member with following details for Profile and Preferences flow
         | Plan Type      | <planType>  |
     Then the user navigates to Profile and Preferences page
-    Then the user validates the temporary address section for ship member
+    Then the user validate the temporary address section for ship member
 
 
     Examples: 
        | planType |
-       | SHIP       |
+       | SHIP     |
       
 
 @CMValidateEmail
@@ -135,7 +131,6 @@ Feature: C1.2To test Profile and Preferences page .
     Examples: 
         | planType|
          | MAPD     |
-          | MA       |
          |PDP       |
           |SHIP      |
 
@@ -153,7 +148,6 @@ Feature: C1.2To test Profile and Preferences page .
     Examples: 
         | planType|
          | MAPD     |
-          | MA       |
         |PDP       |
          |SHIP      |
           
@@ -172,7 +166,6 @@ Feature: C1.2To test Profile and Preferences page .
     Examples: 
          | planType|
          | MAPD     |
-          | MA       |
          |PDP       |
          |SHIP      |
           

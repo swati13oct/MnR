@@ -145,8 +145,8 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='phoneCardHeight']/div[1]/div/div/div/div/div/div/div/a")
 	private WebElement PhoneEditButton;
-	
-	
+
+
 	@FindBy(xpath = "//*[@id='tab-1']/div[3]/div[1]/div/div[2]/div/div/div/div[1]/div/div/div[2]/div[1]/div[1]/div/span[1]")
 	private WebElement Daytimephone;
 
@@ -168,12 +168,12 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(id = "eveningPhone")
 	private WebElement EveningTimePhoneTextField;
 
-	@FindBy(xpath = "//*[@id='temporaryAddress']/div[1]/p")
+	@FindBy(id = "temporaryAddress")
 	private WebElement tempAddressHeader;
 
 	@FindBy(className = "edit-btn")
 	private WebElement tempEditButton;
-	
+
 	@FindBy(className = "add-address-btn")
 	private WebElement addAddress;
 
@@ -272,7 +272,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	@FindBy(className = "atdd-claims-header")
 	private WebElement ClaimsSupportSection;
-	
+
 	@FindBy(className = "add-address-btn")
 	private WebElement MailingAddressEditButton;
 
@@ -315,11 +315,11 @@ public class ProfilePreferencesPage extends UhcDriver {
 	 *       member
 	 */
 
-	
+
 	public void jsClick(WebElement element){
 		JavascriptExecutor js = (JavascriptExecutor)driver;
 		js.executeScript("arguments[0].click();", element);
-		}
+	}
 	public void validatePlanNameMemberidNameAcountProfile() {
 
 		validate(planName);
@@ -390,7 +390,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 	 */
 	public boolean validateSavebuttonclick() {
 		try {
-			Thread.sleep(30000);
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -445,9 +445,9 @@ public class ProfilePreferencesPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		SaveButton.click();
-		System.out.println("Validation error is " + passworderrormessage3);
+		System.out.println("Validation error is " + passworderrormessage3.getText());
 
-		if (passworderrormessage3.getText().contentEquals("Your password and password confirmation do not match.")) {
+		if (passworderrormessage3.getText().contentEquals("Your password and password confirmation do not match. ")) {
 			System.out.println("The element" + passworderrormessage3.getText() + "is found");
 			return true;
 		} else {
@@ -469,7 +469,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Assert.assertTrue("Button is present", Password.isDisplayed());
+		Assert.assertTrue("On clicking on the Cancel Button,Password field should be displayed", Password.isDisplayed());
 	}
 
 	/**
@@ -479,8 +479,8 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 		validate(EmailEditbutton);
 
-		
-	EmailEditbutton.click();
+
+		EmailEditbutton.click();
 
 		//EmailEditbutton.click();
 		try {
@@ -496,7 +496,6 @@ public class ProfilePreferencesPage extends UhcDriver {
 		validate(Emailform);
 		// validate(email);
 		System.out.println(email.getText());
-
 	}
 
 	/**
@@ -723,7 +722,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 		if (gopaperlessbutton.isDisplayed()) {
 			gopaperlessbutton.click();
 		} else {
-			
+
 			EditPreferencesButton.click();
 		}
 
@@ -741,8 +740,8 @@ public class ProfilePreferencesPage extends UhcDriver {
 	public void validateheader() {
 		validate(gogreenleaf);
 		validate(goggreenheader);
-	
-		
+
+
 
 	}
 
@@ -791,13 +790,13 @@ public class ProfilePreferencesPage extends UhcDriver {
 	public void validatePhoneEditElements() {
 		PhoneEditButton.click();
 		validate(PhoneForm);
-		
-		 validate(EveningTimePhoneTextField);
-		 validate(DaytimePhoneTextField);
-		 validate(PhoneTopCancelButton); 
-		 validate(PhoneCancelButton);
-		 validate(PhoneSaveButton);
-		 
+
+		validate(EveningTimePhoneTextField);
+		validate(DaytimePhoneTextField);
+		validate(PhoneTopCancelButton); 
+		validate(PhoneCancelButton);
+		validate(PhoneSaveButton);
+
 	}
 
 	/**
@@ -871,13 +870,12 @@ public class ProfilePreferencesPage extends UhcDriver {
 		// TODO Auto-generated method stub'
 		if(tempEditButton.isDisplayed())
 		{
-		tempEditButton.click();
+			tempEditButton.click();
 		}
 		else
 		{
-			
 			addAddress.click();
-			
+
 		}
 		validate(Edittemporaryaddressform);
 		validate(StreetAddress2);
@@ -1012,10 +1010,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 	 */
 	public void validateCheckbox() {
 		// TODO Auto-generated method stub
-		
+
 		if(iHavereadCheckbox.isDisplayed())
 		{
-		iHavereadCheckbox.click();
+			iHavereadCheckbox.click();
 		}
 	}
 
@@ -1033,10 +1031,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-				Assert.assertTrue(EditPreferenceButton.isDisplayed());
-			
-			
+
+			Assert.assertTrue(EditPreferenceButton.isDisplayed());
+
+
 		}
 
 	}
@@ -1065,11 +1063,11 @@ public class ProfilePreferencesPage extends UhcDriver {
 		validate(Technicalsupportsection);
 		validate(GeneralQuestionsSection);
 		validate(ClaimsSupportSection);
-		
+
 	}
 
-	public void validateTempAddressShip() {
-
+	public void validateTempAddressShip()
+	{
 		validate(tempAddressHeader);
 		Assert.assertFalse(tempEditButton.isDisplayed());
 
@@ -1087,57 +1085,57 @@ public class ProfilePreferencesPage extends UhcDriver {
 		}
 
 	}
-	
+
 	public void validateEmailEditNokia() {
 		if(	EmailEditbutton.isDisplayed())
-				{
+		{
 			Assert.assertFalse(	EmailEditbutton.isDisplayed());
-				}
+		}
 		else{
 			System.out.println("Email edit button is not displayed.");
 		}
-				
-		
+
+
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void validatePhoneEditNokia() {
-		
+
 		if(	PhoneEditButton.isDisplayed())
 		{
-		Assert.assertFalse(PhoneEditButton.isDisplayed());
-		
+			Assert.assertFalse(PhoneEditButton.isDisplayed());
+
 		}
 		else{
 			System.out.println("Phone edit button is not displayed.");
 		}
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void validateTempAddEditNokia() {
 		if(	tempEditButton.isDisplayed())
 		{
-		Assert.assertFalse(tempEditButton.isDisplayed());
+			Assert.assertFalse(tempEditButton.isDisplayed());
 		}
 		else{
 			System.out.println("Temp address edit button is not displayed.");
 		}
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void validateMailAddEditNokia() {
 		// TODO Auto-generated method stub
 		if(	MailingAddressEditButton.isDisplayed())
 		{
-		Assert.assertFalse(MailingAddressEditButton.isDisplayed());
+			Assert.assertFalse(MailingAddressEditButton.isDisplayed());
 		}
 		else{
 			System.out.println("Mailing address edit button is not displayed.");
 		}
-		
+
 	}
 
 
