@@ -981,6 +981,8 @@ public class EnrollInPlanStepDefinitionAARP {
 			reviewandSubmitPage.stmtofunderstanding(personalAttributesMap);
 			ConfirmationPage confirmationPage = reviewandSubmitPage
 					.navigatesToNextStep();
+			Boolean errorMessage = reviewandSubmitPage.validateErrorMessage();
+			getLoginScenario().saveBean(EnrollInPlanCommonConstants.HAS_ERROR_MESSAGE, errorMessage);
 			getLoginScenario().saveBean(PageConstants.CONFIRMATION_PAGE,
 					confirmationPage);
 			getLoginScenario().saveBean(PageConstants.REVIEW_APPLICATION_PAGE,
@@ -996,20 +998,22 @@ public class EnrollInPlanStepDefinitionAARP {
 	public void user_navigates_to_Confirmation_Page() {
 		boolean hasEnrolled = (Boolean) getLoginScenario().getBean(
 				EnrollInPlanCommonConstants.HAS_ENROLLED);
-
+		boolean hasErrorMessage = (Boolean) getLoginScenario().getBean(
+				EnrollInPlanCommonConstants.HAS_ERROR_MESSAGE);
 		if (!hasEnrolled) {
-
+			if(!hasErrorMessage) {
 			ConfirmationPage confirmationPage = (ConfirmationPage) getLoginScenario()
 					.getBean(PageConstants.CONFIRMATION_PAGE);
 
-			if (confirmationPage != null) {
+				if (confirmationPage != null) {
 
-				if (confirmationPage.validateConfirmationPage())
-					Assert.assertTrue(true);
-				else
-					Assert.fail("Error in validating the Confirmation Page");
-			} else {
-				Assert.fail("ERROR loading Confirmation Page");
+					if (confirmationPage.validateConfirmationPage())
+						Assert.assertTrue(true);
+					else
+						Assert.fail("Error in validating the Confirmation Page");
+				} else {
+					Assert.fail("ERROR loading Confirmation Page");
+				}
 			}
 		}
 	}
