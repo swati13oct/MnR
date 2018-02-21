@@ -1,7 +1,5 @@
 package acceptancetests.deprecated.druglookup.bluelayer;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -17,6 +15,17 @@ import org.openqa.selenium.WebDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.deprecated.atdd.data.CommonConstants;
+import acceptancetests.deprecated.atdd.data.member.PageConstants;
+import acceptancetests.deprecated.druglookup.data.DceCommonConstants;
+import acceptancetests.deprecated.login.data.LoginCommonConstants;
+import atdd.framework.MRScenario;
+import cucumber.api.DataTable;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
 import pages.member.bluelayer.AccountHomePage;
 import pages.member.bluelayer.AddDrugPage;
 import pages.member.bluelayer.DrugDosagePage;
@@ -25,17 +34,6 @@ import pages.member.bluelayer.LowCostOptPage;
 import pages.member.bluelayer.ManageDrugPage;
 import pages.member.bluelayer.SelectPharmacyPage;
 import pages.member.bluelayer.ViewDrugCostPage;
-import acceptancetests.deprecated.atdd.data.CommonConstants;
-import acceptancetests.deprecated.atdd.data.member.PageConstants;
-import acceptancetests.deprecated.druglookup.data.DceCommonConstants;
-import acceptancetests.deprecated.login.data.LoginCommonConstants;
-import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.After;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 
 /**
  * @author pperugu

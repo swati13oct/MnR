@@ -19,7 +19,6 @@ import acceptancetests.deprecated.atdd.data.member.PageConstants;
 import acceptancetests.deprecated.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
-import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;

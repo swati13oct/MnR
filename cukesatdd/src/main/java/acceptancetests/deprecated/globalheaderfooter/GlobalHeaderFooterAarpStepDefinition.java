@@ -16,8 +16,6 @@ import acceptancetests.deprecated.atdd.data.CommonConstants;
 import acceptancetests.deprecated.atdd.data.acquisition.PageConstants;
 import acceptancetests.deprecated.globalfooter.data.AcquistionCommonConstants;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -41,11 +39,9 @@ import pages.acquisition.ulayer.PlanSelectorPage;
 import pages.acquisition.ulayer.PrepareforInitialEnrollmentPage;
 import pages.acquisition.ulayer.PrescriptionDrugRequestMoreHelpPage;
 import pages.acquisition.ulayer.PrivacyPolicyAARPPage;
-import pages.acquisition.ulayer.RegistrationHomePage;
 import pages.acquisition.ulayer.ResumeYourSavedApplicationPage;
 import pages.acquisition.ulayer.SiteMapAARPPage;
 import pages.acquisition.ulayer.TermsnConditionsAARPPage;
-import pages.member.ulayer.AccountHomePage;
 
 /**
  * @author saduri

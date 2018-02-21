@@ -18,7 +18,6 @@ import acceptancetests.deprecated.enrollinplan.data.EnrollInPlanCommonConstants;
 import acceptancetests.deprecated.vpp.data.VPPCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
-import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;

@@ -1,19 +1,5 @@
 package acceptancetests.deprecated.responsive.bluelayer;
 
-import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.bluelayer.BLayerPlanComparePage;
-import pages.acquisition.bluelayer.PlanComparePage;
-import pages.acquisition.bluelayer.VASPage;
-import pages.acquisition.bluelayer.PortfolioPageUhc;
-import pages.acquisition.bluelayer.PortfolioTeamCUhc;
-import pages.acquisition.bluelayer.ResponsivePlanDetailsUhc;
-import pages.acquisition.bluelayer.ResponsivePlanSummaryUhc;
-import pages.acquisition.bluelayer.VPPAarpNeedAStepBackWidget;
-import pages.acquisition.bluelayer.VPPAarpNeedHelpWidgetPage;
-import pages.acquisition.bluelayer.VPPNeedMoreInformationWidget;
-import pages.acquisition.bluelayer.VPPRequestSendEmailPage;
-import pages.dashboard.member.blayer.DrugCostEstimatorPage;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,12 +14,23 @@ import acceptancetests.deprecated.atdd.data.acquisition.PageConstants;
 import acceptancetests.deprecated.vpp.data.VPPCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
-import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.bluelayer.BLayerPlanComparePage;
+import pages.acquisition.bluelayer.PlanComparePage;
+import pages.acquisition.bluelayer.PortfolioPageUhc;
+import pages.acquisition.bluelayer.PortfolioTeamCUhc;
+import pages.acquisition.bluelayer.ResponsivePlanDetailsUhc;
+import pages.acquisition.bluelayer.ResponsivePlanSummaryUhc;
+import pages.acquisition.bluelayer.VASPage;
+import pages.acquisition.bluelayer.VPPAarpNeedAStepBackWidget;
+import pages.acquisition.bluelayer.VPPAarpNeedHelpWidgetPage;
+import pages.acquisition.bluelayer.VPPNeedMoreInformationWidget;
+import pages.acquisition.bluelayer.VPPRequestSendEmailPage;
+import pages.dashboard.member.blayer.DrugCostEstimatorPage;
 
 
 

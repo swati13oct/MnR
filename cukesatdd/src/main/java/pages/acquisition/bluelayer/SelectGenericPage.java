@@ -5,7 +5,6 @@ package pages.acquisition.bluelayer;
 import java.io.File;
 import java.util.List;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.NoSuchElementException;
@@ -15,10 +14,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.acquisitionvbf.dce.DceCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
-import acceptancetests.acquisitionvbf.dce.DceCommonConstants;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 

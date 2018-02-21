@@ -7,7 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.acquisition.ulayer.AcquisitionHomePage;
 import atdd.framework.UhcDriver;
 
 public class SdceraSiteMapPage extends UhcDriver {

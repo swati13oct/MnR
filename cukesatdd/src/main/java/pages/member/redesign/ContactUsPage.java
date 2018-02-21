@@ -17,9 +17,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.data.CommonConstants;
+import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
-import acceptancetests.data.LoginCommonConstants;
 import atdd.framework.UhcDriver;
 
 /**

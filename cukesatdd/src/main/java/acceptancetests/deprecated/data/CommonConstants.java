@@ -3,8 +3,6 @@
  */
 package acceptancetests.deprecated.data;
 
-import acceptancetests.deprecated.data.Page;
-
 /**
  * @author pjaising
  *

@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -22,13 +20,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
-import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.EnrollPlanInfoPage;
-import pages.acquisition.ulayer.DrugCostEstimatorPage;
 import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPage;
 
 /**

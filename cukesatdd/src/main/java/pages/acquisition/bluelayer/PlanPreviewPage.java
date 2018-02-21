@@ -1,6 +1,5 @@
 package pages.acquisition.bluelayer;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +13,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;

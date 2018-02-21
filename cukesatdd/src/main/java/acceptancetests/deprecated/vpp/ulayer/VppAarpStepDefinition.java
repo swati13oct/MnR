@@ -1,7 +1,5 @@
 package acceptancetests.deprecated.vpp.ulayer;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.io.File;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -11,33 +9,29 @@ import java.util.Map;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
-import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.ulayer.AddDrugPage;
-import pages.acquisition.ulayer.GetStartedPage;
-import pages.acquisition.ulayer.ManageDrugPage;
-import pages.acquisition.ulayer.PlanDetailsPage;
-import pages.acquisition.ulayer.SelectDosagePage;
-import pages.acquisition.ulayer.SelectGenericPage;
-import pages.acquisition.ulayer.SelectPharmacyPage;
-import pages.acquisition.ulayer.AcquisitionHomePage;
-import pages.acquisition.ulayer.ProviderSearchPage;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import acceptancetests.deprecated.atdd.data.CommonConstants;
 import acceptancetests.deprecated.atdd.data.acquisition.PageConstants;
 import acceptancetests.deprecated.dce.data.DceCommonConstants;
 import acceptancetests.deprecated.vpp.data.VPPCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
-import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.ulayer.AcquisitionHomePage;
+import pages.acquisition.ulayer.AddDrugPage;
+import pages.acquisition.ulayer.ManageDrugPage;
+import pages.acquisition.ulayer.PlanDetailsPage;
+import pages.acquisition.ulayer.SelectDosagePage;
+import pages.acquisition.ulayer.SelectGenericPage;
+import pages.acquisition.ulayer.SelectPharmacyPage;
+import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
 
 

@@ -1,38 +1,26 @@
 package acceptancetests.deprecated.ProfileandPreferencesredesign.bluelayer;
 
-import gherkin.formatter.model.DataTableRow;
-
-import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
-import pages.member.bluelayer.AccountHomePage;
 
-import pages.member.bluelayer.LoginPage2;
-import pages.member.bluelayer.ProfilePreferencesPage;
 import acceptancetests.deprecated.atdd.data.CommonConstants;
 import acceptancetests.deprecated.atdd.data.member.PageConstants;
-import acceptancetests.deprecated.atdd.util.CommonUtility;
 import acceptancetests.deprecated.login.data.LoginCommonConstants;
 import acceptancetests.deprecated.profandpref.data.ProfnPrefCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
-import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.WebElement;
+import pages.member.bluelayer.AccountHomePage;
+import pages.member.bluelayer.LoginPage2;
+import pages.member.bluelayer.ProfilePreferencesPage;
 
 /**
  * @author akapoo18

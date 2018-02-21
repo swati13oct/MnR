@@ -1,7 +1,5 @@
 package pages.member.ulayer;
 
-import java.util.Map;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -11,7 +9,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import atdd.framework.UhcDriver;
-import pages.member.bluelayer.ConfirmOneTimePaymentPage;
 
 public class PaymentsOverview extends UhcDriver{
 

@@ -13,7 +13,6 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import junit.framework.Assert;
 
 /**
  * @author pperugu

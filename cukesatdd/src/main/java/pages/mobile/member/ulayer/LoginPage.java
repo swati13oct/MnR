@@ -14,10 +14,10 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
+import acceptancetests.deprecated.atdd.mobile.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import acceptancetests.deprecated.atdd.mobile.data.CommonConstants;
 /**
  * @author pjaising
  *

@@ -1,9 +1,6 @@
 package acceptancetests.deprecated.payments.bluelayer;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -17,25 +14,17 @@ import org.openqa.selenium.WebDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.member.bluelayer.AccountHomePage;
-import pages.member.bluelayer.ConfirmOneTimePaymentPage;
-import pages.member.bluelayer.GoGreenPage;
-import pages.member.bluelayer.LoginPage;
-import pages.member.ulayer.OneTimePaymentPage;
-import pages.member.bluelayer.OneTimePaymentSuccessPage;
-import pages.member.ulayer.PaymentHistoryPage;
-import pages.member.bluelayer.TestHarness;
 import acceptancetests.deprecated.atdd.data.CommonConstants;
 import acceptancetests.deprecated.atdd.data.member.PageConstants;
 import acceptancetests.deprecated.login.data.LoginCommonConstants;
-import acceptancetests.deprecated.payments.data.PaymentCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
-import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
+import pages.member.bluelayer.AccountHomePage;
+import pages.member.bluelayer.GoGreenPage;
+import pages.member.bluelayer.LoginPage;
 /**
  * @author pdas101
  *

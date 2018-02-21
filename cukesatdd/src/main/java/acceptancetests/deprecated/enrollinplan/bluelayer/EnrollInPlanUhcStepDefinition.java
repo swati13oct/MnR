@@ -1,14 +1,10 @@
 package acceptancetests.deprecated.enrollinplan.bluelayer;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.io.File;
-import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -16,9 +12,20 @@ import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.deprecated.atdd.data.CommonConstants;
+import acceptancetests.deprecated.atdd.data.acquisition.PageConstants;
+import acceptancetests.deprecated.atdd.util.CommonUtility;
+import acceptancetests.deprecated.enrollinplan.data.EnrollInPlanCommonConstants;
+import acceptancetests.deprecated.vpp.data.VPPCommonConstants;
+import atdd.framework.MRScenario;
+import cucumber.api.DataTable;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.AdditionalInformationPage;
 import pages.acquisition.bluelayer.BeneficiaryInformationPage;
@@ -28,18 +35,6 @@ import pages.acquisition.bluelayer.PlanInformationPage;
 import pages.acquisition.bluelayer.ReviewApplicationPage;
 import pages.acquisition.bluelayer.SubmitApplicationPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
-import acceptancetests.deprecated.atdd.data.CommonConstants;
-import acceptancetests.deprecated.atdd.data.acquisition.PageConstants;
-import acceptancetests.deprecated.atdd.util.CommonUtility;
-import acceptancetests.deprecated.enrollinplan.data.EnrollInPlanCommonConstants;
-import acceptancetests.deprecated.vpp.data.VPPCommonConstants;
-import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.After;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 
 /**
  * @author pperugu

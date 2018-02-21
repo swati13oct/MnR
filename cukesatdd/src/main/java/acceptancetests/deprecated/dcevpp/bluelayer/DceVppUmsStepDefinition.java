@@ -1,7 +1,5 @@
 package acceptancetests.deprecated.dcevpp.bluelayer;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.io.File;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -14,16 +12,6 @@ import org.openqa.selenium.WebDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.bluelayer.AcquisitionHomePage;
-import pages.acquisition.bluelayer.AddDrugPage;
-import pages.acquisition.bluelayer.GetStartedPage;
-import pages.acquisition.bluelayer.LocationSearchPage;
-import pages.acquisition.bluelayer.ManageDrugPage;
-import pages.acquisition.bluelayer.PlanDetailsPage;
-import pages.acquisition.bluelayer.SelectDosagePage;
-import pages.acquisition.bluelayer.SelectGenericPage;
-import pages.acquisition.bluelayer.SelectPharmacyPage;
-import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import acceptancetests.deprecated.atdd.data.CommonConstants;
 import acceptancetests.deprecated.atdd.data.acquisition.PageConstants;
 import acceptancetests.deprecated.dce.data.DceCommonConstants;
@@ -35,6 +23,17 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.acquisition.bluelayer.AddDrugPage;
+import pages.acquisition.bluelayer.GetStartedPage;
+import pages.acquisition.bluelayer.LocationSearchPage;
+import pages.acquisition.bluelayer.ManageDrugPage;
+import pages.acquisition.bluelayer.PlanDetailsPage;
+import pages.acquisition.bluelayer.SelectDosagePage;
+import pages.acquisition.bluelayer.SelectGenericPage;
+import pages.acquisition.bluelayer.SelectPharmacyPage;
+import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 
 /**
  * @author pagarwa5

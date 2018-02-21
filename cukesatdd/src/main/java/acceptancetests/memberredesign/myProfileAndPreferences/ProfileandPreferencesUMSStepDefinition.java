@@ -11,10 +11,8 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageConstants;
-import acceptancetests.data.PageConstantsMnR;
 import acceptancetests.data.LoginCommonConstants;
-import acceptancetests.memberredesign.myProfileAndPreferences.ProfnPrefCommonConstants;
+import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;

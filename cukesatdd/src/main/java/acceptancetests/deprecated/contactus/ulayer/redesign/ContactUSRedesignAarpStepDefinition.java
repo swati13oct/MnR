@@ -2,37 +2,26 @@ package acceptancetests.deprecated.contactus.ulayer.redesign;
 
 
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
-import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.deprecated.atdd.data.CommonConstants;
 import acceptancetests.deprecated.atdd.data.member.PageConstants;
-import acceptancetests.deprecated.contactus.data.ContactUsCommonConstants;
-import acceptancetests.deprecated.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
-import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
-import pages.dashboard.member.ulayer.ClaimSummarypage;
 import pages.member.redesign.NewLoginPage;
 import pages.member.redesign.TestHarnessPage;
-import pages.member.ulayer.AccountHomePage;
 import pages.member.ulayer.ContactUsPage;
-import pages.member.ulayer.LoginPage;
 public class ContactUSRedesignAarpStepDefinition {
 	/**
 	 * 

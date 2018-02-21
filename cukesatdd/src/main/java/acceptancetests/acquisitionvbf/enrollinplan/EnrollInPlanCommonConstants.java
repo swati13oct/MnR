@@ -3,9 +3,6 @@
  */
 package acceptancetests.acquisitionvbf.enrollinplan;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * @author pperugu
  *

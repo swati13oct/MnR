@@ -1,7 +1,5 @@
 package acceptancetests.deprecated.dtmtests;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
@@ -16,25 +14,23 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.ulayer.AcquisitionHomePage;
-import pages.acquisition.ulayer.AdditionalInformationPage;
-import pages.acquisition.ulayer.BeneficiaryInformationPage;
-import pages.acquisition.ulayer.IntroductionInformationPage;
-import pages.acquisition.ulayer.PlanInformationPage;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import acceptancetests.deprecated.atdd.data.CommonConstants;
 import acceptancetests.deprecated.atdd.data.acquisition.PageConstants;
-import acceptancetests.deprecated.atdd.util.CommonUtility;
 import acceptancetests.deprecated.enrollinplan.data.EnrollInPlanCommonConstants;
 import acceptancetests.deprecated.globalfooter.data.AcquistionCommonConstants;
 import acceptancetests.deprecated.vpp.data.VPPCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
-import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.ulayer.AcquisitionHomePage;
+import pages.acquisition.ulayer.AdditionalInformationPage;
+import pages.acquisition.ulayer.BeneficiaryInformationPage;
+import pages.acquisition.ulayer.IntroductionInformationPage;
+import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
 /**
  * @author pgrover1
