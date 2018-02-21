@@ -108,7 +108,7 @@ public class ContactusRedesignStepDefinition {
 		{
 			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 			
-			contactusPage.validateEmailWidgetfunctionality();
+			//contactusPage.validateEmailWidgetfunctionality();
 			
 			if(contactusPage != null)				
 				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
@@ -123,7 +123,7 @@ public class ContactusRedesignStepDefinition {
 		{
 			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 			
-			contactusPage.validateEmailWidgetfunctionality();
+			//contactusPage.validateEmailWidgetfunctionality();
 			
 			if(contactusPage != null)				
 				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
@@ -135,7 +135,7 @@ public class ContactusRedesignStepDefinition {
 		{
 			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 			
-			contactusPage.validateEmailWidgetSection();
+			//contactusPage.validateEmailWidgetSection();
 			
 			if(contactusPage != null)				
 				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
@@ -149,7 +149,7 @@ public class ContactusRedesignStepDefinition {
 		{
 			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 			
-			contactusPage.submitQuestionClick();
+			//contactusPage.submitQuestionClick();
 			
 			if(contactusPage != null)				
 				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
@@ -175,7 +175,7 @@ public class ContactusRedesignStepDefinition {
 		{
 			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 			
-			contactusPage.sendUsQuestion_Field_Validations();
+			//contactusPage.sendUsQuestion_Field_Validations();
 			
 			if(contactusPage != null)				
 				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
@@ -188,7 +188,7 @@ public class ContactusRedesignStepDefinition {
 		{
 			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 			
-			contactusPage.sendUsQuestion_confirmEmailID_Validations();
+			//contactusPage.sendUsQuestion_confirmEmailID_Validations();
 			
 			if(contactusPage != null)				
 				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
@@ -201,7 +201,7 @@ public class ContactusRedesignStepDefinition {
 		{
 			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 			
-			contactusPage.sendUsQuestion_blankText_Message_Validations();
+			//contactusPage.sendUsQuestion_blankText_Message_Validations();
 			
 			if(contactusPage != null)				
 				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
@@ -229,7 +229,7 @@ public class ContactusRedesignStepDefinition {
 		{
 			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 			
-			contactusPage.sendUsQuestion_invalid_PhoneNumber_Validations();
+			//contactusPage.sendUsQuestion_invalid_PhoneNumber_Validations();
 			
 			if(contactusPage != null)				
 				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
@@ -253,7 +253,7 @@ public class ContactusRedesignStepDefinition {
 		{
 			ContactUsPage contactus=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 			
-			contactus.validateEmailWidgetSection();
+			//contactus.validateEmailWidgetSection();
 			
 		}
 		
@@ -262,7 +262,7 @@ public class ContactusRedesignStepDefinition {
 		{
 			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 			
-			contactusPage.validateEmailWidgetfunctionality();
+			//contactusPage.validateEmailWidgetfunctionality();
 			
 			if(contactusPage != null)				
 				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
@@ -275,7 +275,7 @@ public class ContactusRedesignStepDefinition {
 		{
 			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 			
-			contactusPage.validateEmailby_Email_Address_RadioButton();
+			//contactusPage.validateEmailby_Email_Address_RadioButton();
 			
 			if(contactusPage != null)				
 				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
@@ -288,7 +288,7 @@ public class ContactusRedesignStepDefinition {
 		{
 			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 			
-			contactusPage.validateSecureEmailModelfunctionality();
+			//contactusPage.validateSecureEmailModelfunctionality();
 			
 			if(contactusPage != null)				
 				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
@@ -302,7 +302,7 @@ public class ContactusRedesignStepDefinition {
 		{
 			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 			
-			contactusPage.validateSecureEmailModel_Cancellink_Click();
+			//contactusPage.validateSecureEmailModel_Cancellink_Click();
 			
 			if(contactusPage != null)				
 				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
@@ -316,7 +316,7 @@ public class ContactusRedesignStepDefinition {
 		{
 			ContactUsPage contactus=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 			
-			contactus.goToInBoxButtonDisplay();
+			//contactus.goToInBoxButtonDisplay();
 			
 		}
 		
@@ -338,7 +338,7 @@ public class ContactusRedesignStepDefinition {
 		{
 			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 			
-			contactusPage.sendAreqclick();
+			//contactusPage.sendAreqclick();
 			
 			/*if(contactusPage != null)				
 				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
@@ -351,7 +351,7 @@ public class ContactusRedesignStepDefinition {
 		{
 			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 			
-			contactusPage.reqCallclickConformation();
+			//contactusPage.reqCallclickConformation();
 			
 			/*if(contactusPage != null)				
 				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
@@ -364,7 +364,7 @@ public class ContactusRedesignStepDefinition {
 		{
 			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 			
-			contactusPage.validateSendUsAQuestionWidget();
+			//contactusPage.validateSendUsAQuestionWidget();
 			
 			if(contactusPage != null)				
 				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
