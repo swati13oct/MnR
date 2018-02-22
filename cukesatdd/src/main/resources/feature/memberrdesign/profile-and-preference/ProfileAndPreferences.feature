@@ -1,6 +1,6 @@
 @smokeTest
-Feature: 1.13-To test My Profile & Preferences and Go Green flows
-@smokeTest_ProfileAndPreference
+Feature: 1.13-VBF-MemRedesign-To test My Profile & Preferences and Go Green flows
+@smokeTest_ProfileAndPreference @rallyDashboard @testharness
   Scenario Outline: Verify Plan Name, Member name, Member ID and account section
     Given registered member with following details for Profile and Preferences flow
       | <planType> |
@@ -13,7 +13,7 @@ Feature: 1.13-To test My Profile & Preferences and Go Green flows
        	 | UhcMapdInd     |
 #         | AARPMapdInd       |
 
- @smokeTest_GoGreen
+ @smokeTest_GoGreen @rallyDashboard @testharness
     Scenario Outline: To verify Go Green page
     Given registered member with following details for Profile and Preferences flow
       | <planType> |

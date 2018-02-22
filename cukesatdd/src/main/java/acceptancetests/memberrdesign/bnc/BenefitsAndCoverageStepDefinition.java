@@ -99,6 +99,7 @@ public class BenefitsAndCoverageStepDefinition {
 		}
 
 		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		System.out.println("WebDriver inside step definition file:"+wd);
 		//MRScenario.keyEvent(wd);
 

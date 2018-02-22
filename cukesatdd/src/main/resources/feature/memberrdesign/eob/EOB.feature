@@ -1,6 +1,6 @@
 @smokeTest
-Feature: 1.05-To test EOB functionality
-@smokeTest_EOB
+Feature: 1.05-VBF-MemRedesign-To test EOB functionality
+@smokeTest_EOB @rallyDashboard @testharness
 Scenario Outline: Validate that member can search for eob statement
 Given I am a authenticated member on the member redesign site for EOB
 	| Plan Type      |<planType>  |

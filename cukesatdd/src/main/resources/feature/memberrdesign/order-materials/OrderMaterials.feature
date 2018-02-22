@@ -1,6 +1,6 @@
 @smokeTest
-Feature: 1.10-To test order materials functionality
-@smokeTest_OrderPlanMaterial
+Feature: 1.10-VBF-MemRedesign-To test order materials functionality
+@smokeTest_OrderPlanMaterial @rallyDashboard @testharness
   Scenario Outline: Verify order materials confirmation page in Redesign site
     Given registered AMP member with following attributes
       | Plan Type | <planType> |

@@ -1,6 +1,6 @@
 @smokeTest
-Feature: 1.09-To test sign functionality
-@smokeTest_DirectLogin
+Feature: 1.09-VBF-MemRedesign-To test sign functionality
+@smokeTest_DirectLogin @rallyDashboard @testharness
 Scenario Outline: Validate that member is successfully getting logged in to Rally Dashboard
 Given I am a authenticated member on the member redesign site for Direct Login
 	| Member Type    |<memberType>|

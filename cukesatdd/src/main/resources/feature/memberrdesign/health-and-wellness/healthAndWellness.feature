@@ -1,6 +1,6 @@
 @smokeTest
-Feature: 1.07-To test Health and Wellness functionality
-@smokeTest__H&W
+Feature: 1.07-VBF-MemRedesign-To test Health and Wellness functionality
+@smokeTest__H&W @rallyDashboard @testharness
 Scenario Outline:Validate that member can check health and wellness and its Lifestyle, Learning tabs
 Given I am a authenticated member on the member redesign site
 | Plan Type   | <planType>   |

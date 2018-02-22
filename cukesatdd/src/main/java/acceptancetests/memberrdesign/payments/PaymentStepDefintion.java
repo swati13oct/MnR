@@ -102,7 +102,7 @@ public class PaymentStepDefintion {
 
 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean("webDriver", wd);
-
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		LoginPage loginPage = new LoginPage(wd);
 		AccountHomePage accountHomePage = (AccountHomePage)loginPage.loginWith(userName, pwd);
 		JSONObject accountHomeActualJson = null;
@@ -114,7 +114,7 @@ public class PaymentStepDefintion {
 				.getExpectedData(expectedDataMap);
 
 		if (accountHomePage != null) {
-			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+			
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
 					accountHomePage);
 			Assert.assertTrue(true);

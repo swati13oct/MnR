@@ -138,6 +138,8 @@ public class MemberAuthRedesignStepDefinition {
 			
 			String message;
 			if(contactUsPage != null){	
+				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+						contactUsPage);
 				message = contactUsPage.getDisclaimerTextForMemberAuth();
 				Assert.assertTrue("@@@Disclaimer test:"+message+" -- is not displayed@@@", message.contains(disclaimer));
 			}
@@ -160,7 +162,7 @@ public class MemberAuthRedesignStepDefinition {
 			
 			ContactUsPage contactUsPage = (ContactUsPage) getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 			
-			Assert.assertEquals(message, contactUsPage.getMemberAuthNotAuthorizedToSendUsQuestionMessage());
+			Assert.assertEquals(message, contactUsPage.getMemberAuthNotAuthorizedToRequestACallMessage());
 			
 		}
 		

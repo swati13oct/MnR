@@ -66,6 +66,7 @@ public class ProfileandPreferencesStepDefinition {
 		}
 
 		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		// MRScenario.keyEvent(wd);
 
 		//Inserting new code fr Rally Dashboard

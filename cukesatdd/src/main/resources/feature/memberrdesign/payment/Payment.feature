@@ -1,6 +1,6 @@
 @smokeTest
-Feature: 1.11-To test the payment history
-@smokeTest_Payment
+Feature: 1.11-VBF-MemRedesign-To test the payment history
+@smokeTest_Payment @rallyDashboard @testharness
 Scenario Outline: Validate that member view Payment history table
 Given the user is on the Team-H AARP medicare site login page
 When the user logs in TeamH with a registered AMP with following details in AARP site

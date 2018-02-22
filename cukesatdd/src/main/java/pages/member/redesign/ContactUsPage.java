@@ -91,7 +91,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//a[@id='call-btn']")
 	private WebElement requestACall;;
 	
-	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//button[@id='call-submit']")
+	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//button[@id='call-submit']/span")
 	private WebElement requestCall;
 	
 	@FindBy(id = "call-question-about")
@@ -1172,6 +1172,7 @@ public class ContactUsPage extends UhcDriver{
 	}
 	
 	public String getDisclaimerTextForMemberAuth(){
+		scrollToView(memberAuthMessage);
 		validate(memberAuthMessage);
 		return memberAuthMessage.getText().trim();
 	}
@@ -1188,11 +1189,12 @@ public class ContactUsPage extends UhcDriver{
 	}
 	
 	public String getMemberAuthNotAuthorizedToRequestACallMessage(){
-
-			System.out.println("send a req  is displayed");
+			validate(requestACall);
 			jsClick(requestACall);
 			validate(contactoption);
 			sendkeys(clickToCallInputNum, "9023456121");
+			validate(requestCall);
+			requestCall.click();			
 			validate(memberAuthNotAuthorizedToSendUsQuestionMessage);
 		return memberAuthNotAuthorizedToSendUsQuestionMessage.getText().trim();
 	}

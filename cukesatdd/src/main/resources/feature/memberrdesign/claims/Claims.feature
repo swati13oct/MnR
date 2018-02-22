@@ -1,6 +1,6 @@
 @smokeTest
-Feature: 1.02-To test claim functionality
-@smokeTest_Claims
+Feature: 1.02-VBF-MemRedesign-To test claim functionality
+@smokeTest_Claims @rallyDashboard @testharness
 Scenario Outline: To validate that claims are present on claims summary page and claims details page
     Given I am an AARP member on the redesigned site
       | Plan Type      | <planType>     |

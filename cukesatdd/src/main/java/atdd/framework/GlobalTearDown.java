@@ -6,6 +6,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.testng.Assert;
 
 import acceptancetests.atdd.data.CommonConstants;
 import cucumber.api.Scenario;
@@ -69,6 +70,9 @@ public class GlobalTearDown {
 			System.out.println("Driver Quitted!!!");
 			wd = null;
 			System.out.println("Webdriver reference made null!!!");*/
+		}
+		else{
+			Assert.fail("Screenshot not captured and webdriver not quitted...");
 		}
 
 	}

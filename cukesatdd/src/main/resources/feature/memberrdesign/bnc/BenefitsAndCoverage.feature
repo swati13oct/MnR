@@ -1,7 +1,7 @@
 @smokeTest
-Feature: 1.01-To test plan benefits and Coverage functionality
+Feature: 1.01-VBF-MemRedesign-To test plan benefits and Coverage functionality
 
-@smokeTest_BenefitsAndCoverageInd
+@smokeTest_BenefitsAndCoverageInd @rallyDashboard @testharness
     Scenario Outline: Verify multiple sections on Benefits and Coverage page for non-LIS federal members
     Given registered member with following details logins in the member portal
       #| Plan Type      | <planType>  |
@@ -26,7 +26,7 @@ Feature: 1.01-To test plan benefits and Coverage functionality
       |  BncnonlisUHCIndividual   | 
      # |  BncnonlisAARPIndividual       | 
 
-  @smokeTest_BenefitsAndCoverageGrp
+  @smokeTest_BenefitsAndCoverageGrp @rallyDashboard @testharness
     Scenario Outline: Verify multiple sections on Benefits and Coverage page for non-LIS group member
     Given registered member with following details logins in the member portal
       | Member Type    | <memberType>| 

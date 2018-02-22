@@ -101,7 +101,7 @@ public class ClaimsRedesignStepDefinition {
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);			
 		}
 		WebDriver wd = getLoginScenario().getWebDriver();
-
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		//LoginPage loginPage = new LoginPage(wd);
 		
 		

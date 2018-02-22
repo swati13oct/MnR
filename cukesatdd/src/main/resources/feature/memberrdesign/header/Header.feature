@@ -1,6 +1,6 @@
 @smokeTest
-Feature: 1.06-To test Header Navigation functionality
-@smokeTest_Header
+Feature: 1.06-VBF-MemRedesign-To test Header Navigation functionality
+@smokeTest_Header @rallyDashboard @testharness
 Scenario Outline:Validate that member can check the L1 and L2 tabs and its navigation.
 Given I am a authenticated member on the member redesign site for Header
 | Member Type	  | <memberType> |

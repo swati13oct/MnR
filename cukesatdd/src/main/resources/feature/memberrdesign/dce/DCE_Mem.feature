@@ -1,6 +1,6 @@
 @smokeTest
-Feature: 1.04-To test Drug Cost Estimator functionality
-@smokeTest_DceMem
+Feature: 1.04-VBF-MemRedesign-To test Drug Cost Estimator functionality
+@smokeTest_DceMem @rallyDashboard @testharness
 Scenario Outline: To Verify member is able to add drug, change pharmacy and view costs
 Given I am a registered member using the new M&R member portal on a desktop computer
 | Member Type	  | <memberType> |

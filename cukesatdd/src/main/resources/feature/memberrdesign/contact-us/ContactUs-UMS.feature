@@ -1,6 +1,6 @@
 @smokeTest 
-Feature: 1.03-To test contact us page
-@smokeTest_contactusInd
+Feature: 1.03-VBF-MemRedesign-To test contact us page
+@smokeTest_contactusInd @rallyDashboard @testharness
   Scenario Outline: Verify Click to Call and email Widget section on contact us page for Federal member
     Given registered UMS member with following attributes
       | UserName    | <userName>   |
@@ -16,7 +16,7 @@ Feature: 1.03-To test contact us page
        | q1_feb_uhc002 |  | Password@1 | UHC      |
    #     | q1_aarp_feb015 |  | Password@1 | AARP      |
         
-        @smokeTest_contactusGrp
+        @smokeTest_contactusGrp @rallyDashboard @testharness
   Scenario Outline: Verify Click to Call and email Widget section on contact us page for Group member
     Given registered UMS member with following attributes
       | UserName    | <userName>   |
