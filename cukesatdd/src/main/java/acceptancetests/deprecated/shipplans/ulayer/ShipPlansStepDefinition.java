@@ -4,46 +4,35 @@
  * 
  */
 package acceptancetests.deprecated.shipplans.ulayer;
-import gherkin.formatter.model.DataTableRow;
-
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.redesign.UlayerHomePage;
-import pages.redesign.ContactUsPage;
-import pages.redesign.UlayerLoginPage;
-import pages.redesign.MedicalClaimSummaryPage;
-import pages.redesign.MyProfilesPage;
-import pages.redesign.OrderplanmaterialsPage;
-import pages.redesign.PaymentHistoryPage;
-import pages.redesign.EoBSearchPage;
-import pages.redesign.PlanMaterialConfirmationPage;
 import acceptancetests.deprecated.atdd.data.CommonConstants;
 import acceptancetests.deprecated.atdd.data.member.PageConstants;
 import acceptancetests.deprecated.claims.data.ClaimsCommonConstants;
 import acceptancetests.deprecated.login.data.LoginCommonConstants;
-import acceptancetests.deprecated.ordermaterials.data.OrderPlanMaterialsCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
-import cucumber.api.java.After;
-import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
+import pages.redesign.ContactUsPage;
+import pages.redesign.EoBSearchPage;
+import pages.redesign.MedicalClaimSummaryPage;
+import pages.redesign.MyProfilesPage;
+import pages.redesign.PaymentHistoryPage;
+import pages.redesign.UlayerHomePage;
+import pages.redesign.UlayerLoginPage;
 /**
 * @author sdwaraka
 *

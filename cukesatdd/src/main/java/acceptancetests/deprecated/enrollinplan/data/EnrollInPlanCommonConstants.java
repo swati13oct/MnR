@@ -3,9 +3,6 @@
  */
 package acceptancetests.deprecated.enrollinplan.data;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * @author pperugu
  *

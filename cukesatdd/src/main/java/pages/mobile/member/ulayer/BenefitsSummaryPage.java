@@ -14,15 +14,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import acceptancetests.deprecated.atdd.mobile.data.CommonConstants;
-import acceptancetests.data.PageData;
 
+import acceptancetests.data.PageData;
+import acceptancetests.deprecated.atdd.mobile.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.dashboard.member.ulayer.PaymentHistoryPage;
-import pages.mobile.member.ulayer.CustomerServicePage;
-import pages.mobile.member.ulayer.MyDrugBenefitDetailsPage;
-import pages.mobile.member.ulayer.MyPlanBenefitDetailsPage;
 
 /**
  * @author pjaising

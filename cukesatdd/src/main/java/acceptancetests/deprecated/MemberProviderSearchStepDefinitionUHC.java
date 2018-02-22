@@ -1,7 +1,5 @@
 package acceptancetests.deprecated;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -9,20 +7,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-
-
-
-
-
-
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-
-
-import pages.member.bluelayer.AccountHomePage;
-import pages.member.bluelayer.LoginPage;
 import acceptancetests.deprecated.atdd.data.CommonConstants;
 import acceptancetests.deprecated.atdd.data.member.PageConstants;
 import acceptancetests.deprecated.login.data.LoginCommonConstants;
@@ -31,6 +19,9 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
+import pages.member.bluelayer.AccountHomePage;
+import pages.member.bluelayer.LoginPage;
 
 /**
  *Functionality:

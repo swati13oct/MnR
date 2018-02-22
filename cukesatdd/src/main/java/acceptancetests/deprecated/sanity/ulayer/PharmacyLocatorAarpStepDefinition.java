@@ -3,8 +3,6 @@
  */
 package acceptancetests.deprecated.sanity.ulayer;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -17,19 +15,19 @@ import org.openqa.selenium.WebDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.ulayer.AcquisitionHomePage;
-import pages.acquisition.ulayer.PharmacyResultPage;
-import pages.acquisition.ulayer.PharmacySearchPage;
 import acceptancetests.deprecated.atdd.data.CommonConstants;
 import acceptancetests.deprecated.atdd.data.acquisition.PageConstants;
 import acceptancetests.deprecated.pharmacylocator.data.PharmacySearchCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
-import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.ulayer.AcquisitionHomePage;
+import pages.acquisition.ulayer.PharmacyResultPage;
+import pages.acquisition.ulayer.PharmacySearchPage;
 
 /**
  * @author pagarwa5

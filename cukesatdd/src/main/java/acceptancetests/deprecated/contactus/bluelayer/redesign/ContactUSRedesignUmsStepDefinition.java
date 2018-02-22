@@ -14,15 +14,12 @@ import acceptancetests.deprecated.atdd.data.CommonConstants;
 import acceptancetests.deprecated.atdd.data.member.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
-import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
-import pages.member.bluelayer.AccountHomePage;
 import pages.member.bluelayer.ContactUsPage;
-import pages.member.bluelayer.LoginPage;
 import pages.member.redesign.NewLoginPage;
 import pages.member.redesign.TestHarnessPage;
 

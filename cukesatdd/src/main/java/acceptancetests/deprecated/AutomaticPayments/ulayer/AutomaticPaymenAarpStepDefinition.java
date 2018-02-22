@@ -1,10 +1,7 @@
 package acceptancetests.deprecated.AutomaticPayments.ulayer;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -18,34 +15,27 @@ import org.openqa.selenium.WebDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-
-import pages.member.ulayer.AccountHomePage;
-import pages.member.ulayer.AutomaticPaymentPage;
-import pages.member.ulayer.AutomaticPaymentSubmittedPage;
-import pages.member.ulayer.AutomaticPaymentSuccessPage;
-import pages.member.ulayer.AutomaticPaymentsPage;
-import pages.member.ulayer.ConfirmAutomaticPaymentPage;
-import pages.member.ulayer.LoginPage;
-import pages.member.ulayer.OneTimePaymentPage;
-import pages.member.ulayer.OneTimePaymentSuccessPage;
-import pages.member.ulayer.OneTimePaymentsPage;
-import pages.member.ulayer.PaymentHistoryPage;
-import pages.member.ulayer.PaymentsOverview;
-import pages.member.ulayer.ReviewAutomaticPaymentsPage;
-import pages.member.ulayer.ReviewOneTimePaymentsPage;
-import pages.member.ulayer.TeamHLoginUlayer;
-import pages.member.ulayer.TestHarness;
 import acceptancetests.deprecated.atdd.data.CommonConstants;
 import acceptancetests.deprecated.atdd.data.member.PageConstants;
 import acceptancetests.deprecated.login.data.LoginCommonConstants;
 import acceptancetests.deprecated.payments.data.PaymentCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
-import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
+import pages.member.ulayer.AccountHomePage;
+import pages.member.ulayer.AutomaticPaymentPage;
+import pages.member.ulayer.AutomaticPaymentSubmittedPage;
+import pages.member.ulayer.AutomaticPaymentsPage;
+import pages.member.ulayer.LoginPage;
+import pages.member.ulayer.OneTimePaymentsPage;
+import pages.member.ulayer.PaymentsOverview;
+import pages.member.ulayer.ReviewAutomaticPaymentsPage;
+import pages.member.ulayer.TeamHLoginUlayer;
+import pages.member.ulayer.TestHarness;
 
 /**
  * @author tpravee2

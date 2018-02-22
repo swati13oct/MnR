@@ -5,28 +5,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import gherkin.formatter.model.DataTableRow;
-
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.ulayer.AcquisitionHomePage;
-import pages.acquisition.uhcretiree.Rallytool_Page;
-import pages.acquisition.ulayer.PrivacyPolicyAARPPage;
-import pages.acquisition.ulayer.SiteMapAARPPage;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import acceptancetests.deprecated.atdd.data.CommonConstants;
 import acceptancetests.deprecated.atdd.data.acquisition.PageConstants;
 import acceptancetests.deprecated.vpp.data.VPPCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
-import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.uhcretiree.Rallytool_Page;
+import pages.acquisition.ulayer.AcquisitionHomePage;
+import pages.acquisition.ulayer.SiteMapAARPPage;
+import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
 public class RallytoolAarpStepDefinition {
 

@@ -1,7 +1,5 @@
 package acceptancetests.deprecated.vpp.bluelayer;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.io.File;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -17,6 +15,17 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.deprecated.atdd.data.CommonConstants;
+import acceptancetests.deprecated.atdd.data.acquisition.PageConstants;
+import acceptancetests.deprecated.dce.data.DceCommonConstants;
+import acceptancetests.deprecated.vpp.data.VPPCommonConstants;
+import atdd.framework.MRScenario;
+import cucumber.api.DataTable;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.AddDrugPage;
 import pages.acquisition.bluelayer.GetStartedPage;
@@ -26,17 +35,6 @@ import pages.acquisition.bluelayer.SelectDosagePage;
 import pages.acquisition.bluelayer.SelectGenericPage;
 import pages.acquisition.bluelayer.SelectPharmacyPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
-import acceptancetests.deprecated.atdd.data.CommonConstants;
-import acceptancetests.deprecated.atdd.data.acquisition.PageConstants;
-import acceptancetests.deprecated.dce.data.DceCommonConstants;
-import acceptancetests.deprecated.vpp.data.VPPCommonConstants;
-import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.After;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 
 /**
  * @author gumeshna

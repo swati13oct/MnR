@@ -6,7 +6,6 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -19,8 +18,6 @@ import acceptancetests.deprecated.atdd.mobile.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.dashboard.member.blayer.PaymentHistoryPage;
-import pages.mobile.member.blayer.MyDrugBenefitDetailsPage;
-import pages.mobile.member.blayer.MyPlanBenefitDetailsPage;
 
 /**
  * @author pnampall

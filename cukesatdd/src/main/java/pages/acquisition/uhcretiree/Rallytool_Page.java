@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.acquisition.ulayer.AcquisitionHomePage;
 import atdd.framework.UhcDriver;
 
 public class Rallytool_Page extends UhcDriver {

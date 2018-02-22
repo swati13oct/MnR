@@ -15,15 +15,13 @@ import acceptancetests.deprecated.atdd.data.CommonConstants;
 import acceptancetests.deprecated.atdd.data.acquisition.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
-import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.uhcretiree.AcquisitionHomePage;
-import pages.acquisition.uhcretiree.UhcRetireePharmacyLocatorPage;
 import pages.acquisition.uhcretiree.PharmacyResultsPage;
+import pages.acquisition.uhcretiree.UhcRetireePharmacyLocatorPage;
 
 
 /**

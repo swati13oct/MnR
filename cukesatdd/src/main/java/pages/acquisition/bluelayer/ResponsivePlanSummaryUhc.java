@@ -1,7 +1,5 @@
 package pages.acquisition.bluelayer;
 
-import static org.junit.Assert.fail;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -28,10 +26,8 @@ import acceptancetests.data.ElementData;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
-import acceptancetests.deprecated.enrollinplan.bluelayer.EnrollInPlanUhcStepDefinition;
 // import acceptancetests.planName.bluelayer.PlanNamesStepDefinition;
 import atdd.framework.UhcDriver;
-import pages.acquisition.ulayer.ResponsivePlanDetails;
 import pages.dashboard.member.blayer.DrugCostEstimatorPage;
 import pages.member.ulayer.Rallytool_Page;
 

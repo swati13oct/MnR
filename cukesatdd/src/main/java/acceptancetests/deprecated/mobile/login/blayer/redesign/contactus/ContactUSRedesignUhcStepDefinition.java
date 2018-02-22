@@ -3,8 +3,6 @@ package acceptancetests.deprecated.mobile.login.blayer.redesign.contactus;
 
 
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -16,20 +14,18 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.member.bluelayer.AccountHomePage;
-import pages.mobile.member.blayer.BenefitsSummaryPage;
-import pages.mobile.member.blayer.ContactUsPage;
-import pages.mobile.member.blayer.LoginPage;
 import acceptancetests.deprecated.atdd.data.CommonConstants;
 import acceptancetests.deprecated.atdd.data.mobile.member.PageConstants;
 import acceptancetests.deprecated.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
-import cucumber.api.java.After;
-import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
+import pages.mobile.member.blayer.BenefitsSummaryPage;
+import pages.mobile.member.blayer.ContactUsPage;
+import pages.mobile.member.blayer.LoginPage;
 
 public class ContactUSRedesignUhcStepDefinition {
 	/**

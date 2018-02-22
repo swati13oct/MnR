@@ -13,7 +13,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import acceptancetests.deprecated.atdd.data.MRConstants;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.memberredesign.bluelayer.AccountHomePage;
 import pages.member.bluelayer.TerminatedHomePage;
 
 public class LoginPage extends UhcDriver {

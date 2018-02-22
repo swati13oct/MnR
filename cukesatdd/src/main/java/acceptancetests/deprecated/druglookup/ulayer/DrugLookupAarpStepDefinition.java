@@ -1,7 +1,5 @@
 package acceptancetests.deprecated.druglookup.ulayer;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,18 +13,8 @@ import org.openqa.selenium.WebDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.member.ulayer.AccountHomePage;
-import pages.member.ulayer.AddDrugPage;
-import pages.member.ulayer.DrugDosagePage;
-import pages.member.ulayer.EstimateYourDrugCostPage;
-import pages.member.ulayer.LoginPage;
-import pages.member.ulayer.LowCostOptPage;
-import pages.member.ulayer.ManageDrugPage;
-import pages.member.ulayer.SelectPharmacyPage;
-import pages.member.ulayer.ViewDrugCostPage;
 import acceptancetests.deprecated.atdd.data.CommonConstants;
 import acceptancetests.deprecated.atdd.data.member.PageConstants;
-import acceptancetests.deprecated.dceretiree.data.DCERetireeCommonConstants;
 import acceptancetests.deprecated.druglookup.data.DceCommonConstants;
 import acceptancetests.deprecated.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
@@ -36,6 +24,16 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
+import pages.member.ulayer.AccountHomePage;
+import pages.member.ulayer.AddDrugPage;
+import pages.member.ulayer.DrugDosagePage;
+import pages.member.ulayer.EstimateYourDrugCostPage;
+import pages.member.ulayer.LoginPage;
+import pages.member.ulayer.LowCostOptPage;
+import pages.member.ulayer.ManageDrugPage;
+import pages.member.ulayer.SelectPharmacyPage;
+import pages.member.ulayer.ViewDrugCostPage;
 
 
 /**

@@ -1,6 +1,5 @@
 package pages.member.ulayer;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

@@ -16,7 +16,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.PageData;
-import acceptancetests.deprecated.atdd.mobile.data.*;
+import acceptancetests.deprecated.atdd.mobile.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 

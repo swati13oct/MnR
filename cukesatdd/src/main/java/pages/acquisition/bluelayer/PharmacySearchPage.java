@@ -5,10 +5,6 @@ package pages.acquisition.bluelayer;
 
 import java.util.List;
 
-import junit.framework.Assert;
-
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
@@ -26,6 +22,7 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import junit.framework.Assert;
 
 /**
  * @author pagarwa5

@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.deprecated.atdd.data.CommonConstants;
 import atdd.framework.MRScenario;
+import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import cucumber.api.DataTable;
 
 /**
  *Functionality: Checking for sauce labs

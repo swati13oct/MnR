@@ -1,7 +1,5 @@
 package acceptancetests.deprecated;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -13,11 +11,6 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.member.ulayer.AccountHomePage;
-import pages.member.ulayer.FormsandresourcesPage;
-import pages.member.ulayer.LoginPage;
-import pages.member.ulayer.MedicalEobPage;
-import pages.member.ulayer.PrescriptionDrugEobPage;
 import acceptancetests.deprecated.atdd.data.CommonConstants;
 import acceptancetests.deprecated.atdd.data.member.PageConstants;
 import acceptancetests.deprecated.claims.data.ClaimsCommonConstants;
@@ -27,6 +20,12 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
+import pages.member.ulayer.AccountHomePage;
+import pages.member.ulayer.FormsandresourcesPage;
+import pages.member.ulayer.LoginPage;
+import pages.member.ulayer.MedicalEobPage;
+import pages.member.ulayer.PrescriptionDrugEobPage;
 
 /**
  *Functionality:EOB
