@@ -801,8 +801,8 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	/** 
 	 * @toDo : Validates the Need help section headers for a ship member
 	 */
-	@Then("^the user validates the need help section for ship")
-	public void uservalidatesneedhelpsectionShip() {
+	@Then("^the user validates ship the need help section")
+	public void uservalidatesShipneedhelpsection() {
 		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 

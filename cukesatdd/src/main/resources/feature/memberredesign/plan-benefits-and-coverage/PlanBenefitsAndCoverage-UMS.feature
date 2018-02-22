@@ -74,7 +74,7 @@ Feature:C1.1 To test plan benefits and Coverage on UMS site
       | Plan Type      | <planType>  |
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
-    Then the user navigates to Benefits coverage page
+    Then the user navigates to Benefits and coverage page
     Then the user validates Header section
     Then the user validates Hearing section
     Then the user validates the Hearing Aid section
@@ -95,8 +95,7 @@ Feature:C1.1 To test plan benefits and Coverage on UMS site
       | Plan Type      | <planType>  |
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
-    When the user navigates to Benefits coverage page
-    And the user validates the content on benefits and coverage page
+    When the user navigates to Benefits and coverage page
     Then user validates and clicks on Disclaimers link under Exclusive hearing
     Then user validates and clicks on Learn More button under Exclusive hearing section
     And user validates the Leaving  popup
@@ -258,7 +257,7 @@ Feature:C1.1 To test plan benefits and Coverage on UMS site
     
     Examples: 
       | planType|  memberType  | copayCategory |
-      | MAPD    |  Individual  |   LIS 1       | 
+      | MAPD    |  Ind         |   LIS 1       | 
       | MA      |  Individual  |   LIS 1       | 
       | PDP     |  Individual  |   LIS 4       | 
       | MA      |  Group       |   LIS 1       | 
@@ -323,7 +322,7 @@ Feature:C1.1 To test plan benefits and Coverage on UMS site
     When the user navigates to Benefits and coverage page
     And the user validates hand image under discount and services section
     And the user validates the Vas section on benefits and coverage page
-    And the user validates and clicks on Learn More button 
+    And the user validates learnmorebutton on Bnc page for ship members 
 
     Examples: 
       | planType|  memberType  | copayCategory |
@@ -344,7 +343,7 @@ Feature:C1.1 To test plan benefits and Coverage on UMS site
     
     Examples: 
       | planType|  memberType  | copayCategory |
-      | MAPD    |  Individual  |   LIS 1       | 
+      | MAPD    |  Ind         |   LIS 1       | 
       | MA      |  Individual  |   LIS 1       | 
       | PDP     |  Individual  |   LIS 4       | 
       
@@ -356,7 +355,7 @@ Feature:C1.1 To test plan benefits and Coverage on UMS site
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
     When the user navigates to Benefits and coverage page
-    And the user validates the need help section for ship
+    And the user validates ship the need help section
     And the user validates see more ways to contact us section for ship
     And the user validates on clicking contact us link it should route to contact us page for ship member
     
