@@ -1,5 +1,5 @@
 @theSpartans
-Feature: To test Member Auth Dashboard page.
+Feature:S1.1 To test Member Auth Dashboard page.
 
   @memb
   Scenario Outline: To validate the error message for invalid user name and correct password or viseversa.

@@ -2,7 +2,7 @@
 @drug_cost_estimator
 Feature:Drug Cost Estimator
 @IncrediblesDCE1
-Scenario Outline: To Verify MR portal members using DCE on a desktop device , Pharmacy search tab validation
+Scenario Outline:I1.1 To Verify MR portal members using DCE on a desktop device , Pharmacy search tab validation
 Given I am a registered member using the new M&R member portal on a desktop computer blayer dce
 | Plan Type   | <planType>   |
 | Member Type	  | <memberType> |

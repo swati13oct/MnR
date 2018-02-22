@@ -1,6 +1,6 @@
 @fastandfurious @theSpartans @febRelease2018
 @eob
-Feature:To test EOB on Dashboard page
+Feature:F1.1To test EOB on Dashboard page
 @Eobsiteleavingpopup 
 Scenario Outline: Allowed Domains – Authors need ability to define messages and domains for leaving member sites (ATDD)
 Given registered AMP with for EOB flow
