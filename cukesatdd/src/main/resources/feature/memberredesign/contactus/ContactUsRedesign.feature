@@ -107,10 +107,11 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
     When the user navigates to contact us page in UHC site
     Then user validates clickToCallButton display on contactUS redesign page
     And user clicks on cancel button on Request a call widget
+      | Phone Number | <phoneNumber> |
 
     Examples: 
-      | plantype | memberType   |
-      | MAPD     | CALPERSGroup |
+      | plantype | memberType   | phoneNumber |
+      | MAPD     | CALPERSGroup |  9999999999 |
 
   @clickToCallConfirmation
   Scenario Outline: Verify Click to Call Widget Drop-Down Request Routing and Confirmation message functionality on contactUS redesign page
