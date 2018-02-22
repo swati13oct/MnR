@@ -266,6 +266,17 @@ public class ContactusRedesignStepDefinition {
 		/**
 		 * @toDO : the user validates request to call confirmation
 		 */
+		@And("^user clicks on cancel button on Request a call widget$")
+		public void user_clicks_on_cancel_button_on_Request_a_call_widget(DataTable givenAttributes)
+		{
+			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+			
+			contactusPage.reqACall_Cancel(givenAttributes);
+		}
+		
+		/**
+		 * @toDO : the user validates request to call confirmation
+		 */
 		@And("^user clicks on Request Confirmation Click$")
 		public void RequestcallConfimration_click(DataTable givenAttributes)
 		{

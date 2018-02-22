@@ -32,10 +32,10 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
       | Expected Message | <expectedMessage> |
 
     Examples: 
-      | plantype | memberType    | enquiryType         | alternativeEmailId | confirmAlternativeEmailId | alternativePhoneNumber | confirmAlternativePhoneNumber | expectedMessage                                                                                                                                                                 |
-      | MAPD     | CALPERSGroup  | Payment Information | test@optum.com     | test@optum.com            |             9999999999 |                    9999999999 | Thank you for your inquiry. We value your input, and would be happy to answer your questions. A Customer Service Advocate will review your question and respond to you shortly. |
-      | MAPD     | GEORGIAGroup  | Finding a Pharmacy  | test@optum.com     | test@optum.com            |             9999999999 |                    9999999999 | Thank you for your inquiry. We value your input, and would be happy to answer your questions. A Customer Service Advocate will review your question and respond to you shortly. |
-      | MAPD     | TEXASERSGroup | Billing Information | test@optum.com     | test@optum.com            |             9999999999 |                    9999999999 | Thank you for your inquiry. We value your input, and would be happy to answer your questions. A Customer Service Advocate will review your question and respond to you shortly. |
+      | plantype | memberType    | enquiryType                 | alternativeEmailId | confirmAlternativeEmailId | alternativePhoneNumber | confirmAlternativePhoneNumber | expectedMessage                                                                                                                                                                 |
+      | MAPD     | CALPERSGroup  | Payment Information         | test@optum.com     | test@optum.com            |             9999999999 |                    9999999999 | Thank you for your inquiry. We value your input, and would be happy to answer your questions. A Customer Service Advocate will review your question and respond to you shortly. |
+      | MAPD     | GEORGIAGroup  | Finding a Pharmacy          | test@optum.com     | test@optum.com            |             9999999999 |                    9999999999 | Thank you for your inquiry. We value your input, and would be happy to answer your questions. A Customer Service Advocate will review your question and respond to you shortly. |
+      | MAPD     | TEXASERSGroup | Updating Member information | test@optum.com     | test@optum.com            |             9999999999 |                    9999999999 | Thank you for your inquiry. We value your input, and would be happy to answer your questions. A Customer Service Advocate will review your question and respond to you shortly. |
 
   @GroupEmailAQuestionFiledValidations
   Scenario Outline: Verify Group Email Widget Confirm Request in contact us redesign page
@@ -106,11 +106,12 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
       | Member Type | <memberType> |
     When the user navigates to contact us page in UHC site
     Then user validates clickToCallButton display on contactUS redesign page
-    And user clicks on send a Request button on Click to call widget
+    And user clicks on cancel button on Request a call widget
+      | Phone Number | <phoneNumber> |
 
     Examples: 
-      | plantype | memberType   |
-      | MAPD     | CALPERSGroup |
+      | plantype | memberType   | phoneNumber |
+      | MAPD     | CALPERSGroup |  9999999999 |
 
   @clickToCallConfirmation
   Scenario Outline: Verify Click to Call Widget Drop-Down Request Routing and Confirmation message functionality on contactUS redesign page
