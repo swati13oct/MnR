@@ -1,4 +1,5 @@
-#@thePredators
+@thePredators
+@febRelease2018
 @F108803_HICN_MBI
 Feature: ATDD implementation for HICN/MBI entry to Medicare ID field for Personal Identification Page in Registration Flow
 

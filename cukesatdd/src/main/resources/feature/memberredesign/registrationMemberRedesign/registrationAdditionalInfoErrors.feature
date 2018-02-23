@@ -1,3 +1,5 @@
+@thePredators
+@febRelease2018
 @registrationAdditionalInfoErrors
 Feature: To test additional information section in dashboard registration flow
 
