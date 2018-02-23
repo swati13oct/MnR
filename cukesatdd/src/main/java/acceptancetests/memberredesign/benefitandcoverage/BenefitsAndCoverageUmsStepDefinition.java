@@ -813,7 +813,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	/** 
 	 * @toDo : Validates the see more ways to contact us section for ship members in Need help section
 	 */
-	@Then("^the user validates see more ways to contact us section for ship")
+	@Then("^the user validates for ship see more ways to contact us section")
 	public void uservalidatesseeMoreWaysShip() {
 		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
@@ -825,7 +825,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	 * @toDo : Validates the contact us page on clicking on the link of contact us in Need help section
 	 */
 
-	@Then("^the user validates on clicking contact us link it should route to contact us page for ship member")
+	@Then("^the user validates for ship member on clicking contact us link it should route to contact us page")
 	public void uservalidatescontactus() {
 		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);

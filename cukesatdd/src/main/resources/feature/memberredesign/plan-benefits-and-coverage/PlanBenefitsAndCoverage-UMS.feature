@@ -129,18 +129,18 @@ Feature:C1.1 To test plan benefits and Coverage on UMS site
     And the user should see drug copay and discount table
     Examples: 
        | planType|  memberType  | copayCategory |
-       #| PDP     |  Group       |  NON LIS      |
-       #| MAPD    |  Group       |  NON LIS      |
-        | MAPD    |  Individual  |  NON LIS      | 
-       #| PDP     |  Individual  |  NON LIS      |
+       | PDP     |  Group       |  NON LIS      |
+       | MAPD    |  Group       |  NON LIS      |
+       | MAPD    |  Individual  |  NON LIS      | 
+       | PDP     |  Individual  |  NON LIS      |
 
       
     @CMdrugcopaysectionlis
     Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
     Given registered member with following details logins in the member portal 
        | Plan Type      | <planType>     |
-      | Member Type    | <memberType>|
-      | Copay Category | <copayCategory>|
+       | Member Type    | <memberType>|
+       | Copay Category | <copayCategory>|
     Then the user navigates to Benefits coverage page
     And the user view the LIS Drug Copays & Discounts header
     And the drugcost dropdown should not display
@@ -150,8 +150,8 @@ Feature:C1.1 To test plan benefits and Coverage on UMS site
 
     Examples: 
       | planType|  memberType  | copayCategory |
-      | MAPD    |  Individual  |   LIS 1       | 
-      | MA      |  Individual  |   LIS 1       |
+      | MAPD    |  Ind         |   LIS 1       | 
+     #| MA      |  Individual  |   LIS 1       |
       | PDP     |  Individual  |   LIS 4       |
            
       
@@ -356,8 +356,8 @@ Feature:C1.1 To test plan benefits and Coverage on UMS site
       | Copay Category | <copayCategory>|
     When the user navigates to Benefits and coverage page
     And the user validates ship the need help section
-    And the user validates see more ways to contact us section for ship
-    And the user validates on clicking contact us link it should route to contact us page for ship member
+    And the user validates for ship see more ways to contact us section
+    And the user validates for ship member on clicking contact us link it should route to contact us page 
     
     Examples: 
       | planType|  memberType  | copayCategory |
