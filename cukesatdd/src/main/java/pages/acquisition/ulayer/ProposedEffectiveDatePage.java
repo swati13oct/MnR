@@ -90,11 +90,16 @@ public class ProposedEffectiveDatePage extends UhcDriver{
 	private WebElement pedCancelBtn;
 	
 	public boolean validateEffectiveDatePage(){
-		boolean flag = false;
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if(validate(segmentHeading)&&validate(saveAndContinue)&&validate(dateRadioBtn)&&
 		validate(pedPrevBtn)&&validate(pedCancelBtn))
-			flag = true;
-		return flag;
+			return true;
+		return false;
 	}
 	
 }
