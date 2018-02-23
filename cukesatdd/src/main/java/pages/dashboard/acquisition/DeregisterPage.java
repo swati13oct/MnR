@@ -34,12 +34,12 @@ public class DeregisterPage extends UhcDriver {
            
 public void navigateToDeregisterUrls()
 {
-	       if (MRScenario.environment.equalsIgnoreCase("stage"))
+	       if (MRScenario.environmentMedicare.equalsIgnoreCase("stage"))
     {
         start(StageDeregisterURL);
         System.out.println("User is Navigating to Stage Deregister");
  }
- else if (MRScenario.environment.equalsIgnoreCase("team-ci1")) {
+ else if (MRScenario.environmentMedicare.equalsIgnoreCase("team-ci1")) {
         
         start(StageDeregisterURL);
         System.out.println("user is on Team-Ci1 Environment for deregistering");
