@@ -184,7 +184,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath=".//*[@class='img' and @src='/images/guidedSearch/gs_icn_pro_healthcarepro.svg']")
 	private WebElement People;
 	
-	@FindBy(xpath="//div[@class='plan-overview-wrapper']/div[3]/div[1]/div/span[@class='trigger-closed']")
+	@FindBy(xpath="//div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[@class='tab plancountheight']/div/span[@class='trigger-closed']")
 	private WebElement closedTrigger;	
 	
 
@@ -215,7 +215,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//*[@class='action-btn lt']")
 	private WebElement Viewsavebtn;
 
-	@FindBy(xpath=".//*[@class='action-btn negative' and @type='submit']")
+	@FindBy(xpath=".//*[@id='connectHeader']//div[@class='exportSavedProvidersContainer']//div[@class='exportSavedProviders']/form/button")
 	private WebElement Checkcoverage;
 
 	@FindBy(xpath="//*[@id='physicians_info']")
@@ -919,7 +919,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		Viewsavebtn.click();
 
 		waitforElement(Checkcoverage);
-
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Checkcoverage.click();
 		driver.switchTo().window(mainwindow);
 
