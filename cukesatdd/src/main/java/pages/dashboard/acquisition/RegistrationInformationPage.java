@@ -74,7 +74,7 @@ public class RegistrationInformationPage extends UhcDriver {
 	private WebElement yearresults;*/
 
 	/** The cancel button. */
-	@FindBy(xpath= ".//*[@id='register-form']/div[3]/div/div/a[1]")
+	@FindBy(id= "cancelButton")
 	private WebElement cancelButton;
 
 	/** The next button. */
@@ -176,7 +176,7 @@ public class RegistrationInformationPage extends UhcDriver {
 	 */
 
 	/** The username and password help link on existing member page. */
-	@FindBy(linkText = "username and password help")
+	@FindBy(className = "lowercase")
 	private WebElement usernameAndPasswordHelpLink;
 
 	/** The sign in with your existing credentials link on existing member page. */
@@ -212,7 +212,7 @@ public class RegistrationInformationPage extends UhcDriver {
 	private WebElement additionalInfoHeader;
 
 	/** The PFFS member Id error message */
-	@FindBy(xpath = ".//*[@id='errorPffsMember']/p")
+	@FindBy(id = "errorPffsMember")
 	private WebElement pffsErrorMessage;
 
 	/** Multiple Plans **/
@@ -337,7 +337,7 @@ public class RegistrationInformationPage extends UhcDriver {
 	 */
 	
 	/** The account Confirmation Heading Text. */
-	@FindBy(xpath = ".//*[@id='accountConfirmation']/div[1]/div/div[1]/h3")
+	@FindBy(id = "accountConfirmation")
 	private WebElement accountConfirmationHeading;
 	
 	/** The account Confirmation  Text. */
@@ -366,7 +366,7 @@ public class RegistrationInformationPage extends UhcDriver {
 	
 	
 	/** edit your profile link. */
-	@FindBy(linkText = "EDIT YOUR PROFILE")
+	@FindBy(id = "editYourProfileLink")
 	private WebElement editYourProfileLink;
 	
 	/** print link. */
