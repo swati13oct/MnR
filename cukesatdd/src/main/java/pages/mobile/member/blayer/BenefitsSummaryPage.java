@@ -14,7 +14,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.PageData;
-import acceptancetests.deprecated.atdd.mobile.data.CommonConstants;
+import acceptancetests.data.CommonConstantsMobile;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.dashboard.member.blayer.PaymentHistoryPage;
@@ -111,9 +111,9 @@ public class BenefitsSummaryPage extends UhcDriver{
 	public BenefitsSummaryPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		String fileName = CommonConstants.BENEFITS_SUMMARY_PAGE_DATA;
+		String fileName = CommonConstantsMobile.BENEFITS_SUMMARY_PAGE_DATA;
 		benefitsSummary = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_MOBILE_BLUELAYER_MEMBER);
+				CommonConstantsMobile.PAGE_OBJECT_DIRECTORY_MOBILE_BLUELAYER_MEMBER);
 		openAndValidate();
 	}
 
@@ -318,9 +318,9 @@ public class BenefitsSummaryPage extends UhcDriver{
 		 
 	 public JSONObject getBrowserCheck() {
 	
-		String fileName = CommonConstants.MOBILE_BROWSER_CHECK_DATA_BLUELAYER;
+		String fileName = CommonConstantsMobile.MOBILE_BROWSER_CHECK_DATA_BLUELAYER;
 		browserCheckData = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_MOBILE_BLUELAYER_MEMBER);
+				CommonConstantsMobile.PAGE_OBJECT_DIRECTORY_MOBILE_BLUELAYER_MEMBER);
 
 		JSONObject jsonObject = new JSONObject();
 		for (String key : browserCheckData.getExpectedData().keySet()) {
