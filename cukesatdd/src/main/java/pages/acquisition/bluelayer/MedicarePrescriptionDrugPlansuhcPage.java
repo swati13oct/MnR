@@ -6,8 +6,6 @@ package pages.acquisition.bluelayer;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.acquisition.bluelayer.GlobalWebElements;
-
 /**
  * @author rkodumur
  *

@@ -14,9 +14,9 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
+import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
-import acceptancetests.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
@@ -261,6 +261,17 @@ public class ContactusRedesignStepDefinition {
 				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
 						contactusPage);
 			
+		}
+		
+		/**
+		 * @toDO : the user validates request to call confirmation
+		 */
+		@And("^user clicks on cancel button on Request a call widget$")
+		public void user_clicks_on_cancel_button_on_Request_a_call_widget(DataTable givenAttributes)
+		{
+			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+			
+			contactusPage.reqACall_Cancel(givenAttributes);
 		}
 		
 		/**

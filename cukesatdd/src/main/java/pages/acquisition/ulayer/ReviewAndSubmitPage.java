@@ -48,6 +48,9 @@ public class ReviewAndSubmitPage extends UhcDriver{
 	@FindBy(id = "step3save")
 	private WebElement reviewandsubmitapplication;
 	
+	@FindBy(xpath =".//*[@id='enrollment-step-2-part-0']/span")
+	private WebElement submitPageErrMsg;
+	
 	private PageData reviewApplication;
 
 	public JSONObject reviewApplicationJson;
@@ -286,5 +289,11 @@ public class ReviewAndSubmitPage extends UhcDriver{
 			System.out.println("Invalid plan type");
 		}
 	return flag;
+	}
+	
+	public boolean validateErrorMessage() {
+		if(validate(submitPageErrMsg))
+			return true;
+		return false;
 	}
 }

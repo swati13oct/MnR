@@ -16,13 +16,12 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import pages.acquisition.uhcretiree.Rallytool_Page;
-import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.uhcretiree.Rallytool_Page;
 
 public class PlanDetailsPage extends UhcDriver{
 

@@ -13,7 +13,6 @@ import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
-import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 public class AddDrugDetails extends UhcDriver {

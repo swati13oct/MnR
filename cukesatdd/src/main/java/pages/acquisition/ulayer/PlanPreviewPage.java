@@ -1,6 +1,5 @@
 package pages.acquisition.ulayer;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,27 +7,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
-
-
-import org.openqa.selenium.By;
-
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
-import org.skyscreamer.jsonassert.JSONAssert;
 
 //import cucumber.api.en.And;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
-import acceptancetests.data.PageConstants;
 import acceptancetests.util.CommonUtility;
-import acceptancetests.acquisitionvbf.vpp.VPPCommonConstants;
-import atdd.framework.MRScenario;
 import pages.acquisition.bluelayer.ZipcodeLookupHomePage;
 import pages.acquisition.uhcretiree.Rallytool_Page;
 

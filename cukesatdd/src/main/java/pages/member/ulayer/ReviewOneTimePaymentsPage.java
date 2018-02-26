@@ -3,8 +3,6 @@
  */
 package pages.member.ulayer;
 
-import java.util.concurrent.TimeUnit;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.JavascriptExecutor;

@@ -9,7 +9,6 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -17,15 +16,8 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
-import pages.member.redesign.DeregisterPage;
-import pages.member.redesign.GoGreenSplashPage;
 import pages.member.redesign.NewLoginPage;
-import pages.member.redesign.NewRegistrationPage;
-import pages.member.redesign.PreferencesPage;
-import pages.member.redesign.RegistrationConfirmationPage;
-import pages.member.redesign.TestHarnessPage;
 import pages.member.ulayer.RallyDashboard;
-import pages.member.ulayer.UNPWAssistancePage;
 import pages.redesign.CommunicationPreferences;
 
 public class MyprofileandPreferencesRedesignStepDefinition {

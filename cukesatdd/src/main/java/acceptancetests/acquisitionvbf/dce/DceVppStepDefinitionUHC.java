@@ -1,6 +1,4 @@
 package acceptancetests.acquisitionvbf.dce;
-import gherkin.formatter.model.DataTableRow;
-
 import java.io.File;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -12,6 +10,16 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.acquisitionvbf.vpp.VPPCommonConstants;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageConstants;
+import atdd.framework.MRScenario;
+import cucumber.api.DataTable;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.AddDrugPage;
 import pages.acquisition.bluelayer.GetStartedPage;
@@ -22,16 +30,6 @@ import pages.acquisition.bluelayer.SelectDosagePage;
 import pages.acquisition.bluelayer.SelectGenericPage;
 import pages.acquisition.bluelayer.SelectPharmacyPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageConstants;
-import acceptancetests.acquisitionvbf.dce.DceCommonConstants;
-import acceptancetests.acquisitionvbf.vpp.VPPCommonConstants;
-import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 
 /**
  *Functionality: DCE VPP Flow

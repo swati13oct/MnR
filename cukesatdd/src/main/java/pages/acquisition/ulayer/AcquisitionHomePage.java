@@ -21,7 +21,6 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
 /**
  * @author pperugu

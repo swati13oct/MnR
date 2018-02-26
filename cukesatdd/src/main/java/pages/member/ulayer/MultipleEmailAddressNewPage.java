@@ -1,17 +1,12 @@
 package pages.member.ulayer;
 
-import org.json.JSONObject;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.MRConstants;
-import acceptancetests.data.PageData;
-import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.dashboard.eob.EOBPage;
 
 public class MultipleEmailAddressNewPage extends UhcDriver{	
 

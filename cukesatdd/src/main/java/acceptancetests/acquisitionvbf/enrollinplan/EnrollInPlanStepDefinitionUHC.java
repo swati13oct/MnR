@@ -1,7 +1,5 @@
 package acceptancetests.acquisitionvbf.enrollinplan;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +11,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.acquisitionvbf.vpp.VPPCommonConstants;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageConstants;
+import atdd.framework.MRScenario;
+import cucumber.api.DataTable;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.AdditionalInformationPage;
 import pages.acquisition.bluelayer.BeneficiaryInformationPage;
@@ -22,16 +30,6 @@ import pages.acquisition.bluelayer.PlanInformationPage;
 import pages.acquisition.bluelayer.ReviewApplicationPage;
 import pages.acquisition.bluelayer.SubmitApplicationPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageConstants;
-import acceptancetests.acquisitionvbf.enrollinplan.EnrollInPlanCommonConstants;
-import acceptancetests.acquisitionvbf.vpp.VPPCommonConstants;
-import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 
 /**
  *Functionality: Enroll In Plan

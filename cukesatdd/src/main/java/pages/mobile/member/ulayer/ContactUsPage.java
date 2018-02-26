@@ -3,7 +3,6 @@
  */
 package pages.mobile.member.ulayer;
 
-import java.util.List;
 import java.util.Map;
 
 import org.json.JSONException;

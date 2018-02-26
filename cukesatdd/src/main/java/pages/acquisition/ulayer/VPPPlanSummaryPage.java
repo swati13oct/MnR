@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -22,13 +20,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
-import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.EnrollPlanInfoPage;
-import pages.acquisition.ulayer.DrugCostEstimatorPage;
 import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPage;
 
 /**
@@ -46,7 +40,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[1]/div/span/span[@class='ng-binding']")
 	private WebElement maPlansNumber;
 	
-	@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='plan-overview-wrapper']/div[2]/div[1]//span[@class='trigger-closed']")
+	@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='plan-overview-wrapper']//div[@class='overview-tabs module-tabs-tabs']/div[1]//span[@class='trigger-closed']")
 	private WebElement maPlansViewLink;
 	
 	@FindBy(id = "plan-list-1")

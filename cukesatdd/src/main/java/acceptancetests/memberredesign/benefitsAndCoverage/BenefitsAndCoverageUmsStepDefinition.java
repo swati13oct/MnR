@@ -15,10 +15,9 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageConstants;
+import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstantsMnR;
 import acceptancetests.memberredesign.expalnationofbenefits.PlanBenefitsAndCoverageCommonConstants;
-import acceptancetests.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
