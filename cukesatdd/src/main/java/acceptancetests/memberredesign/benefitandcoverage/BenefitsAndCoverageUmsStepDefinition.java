@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstantsMnR;
-import acceptancetests.deprecated.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonConstants;
+//import acceptancetests.deprecated.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -257,7 +257,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 
 
-	public void views_mydoument_validation_ums_site() {
+	/*public void views_mydoument_validation_ums_site() {
 		try {
 
 			JSONObject actual = (JSONObject) loginScenario
@@ -274,7 +274,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 			e.printStackTrace();
 		}
 
-	}
+	}*/
 
 	/** 
 	 * @toDo : The user checks the view and Document labels in Documents section
@@ -319,7 +319,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 					memberAttributesRow.get(i).getCells().get(1));
 		}
 		String language = memberAttributesMap.get("Language");
-		getLoginScenario().saveBean(PlanBenefitsAndCoverageCommonConstants.Language, language);
+		getLoginScenario().saveBean(LoginCommonConstants.Language, language);
 		//benefitsCoveragePage.validate_langdropdown_select(language);
 	}
 

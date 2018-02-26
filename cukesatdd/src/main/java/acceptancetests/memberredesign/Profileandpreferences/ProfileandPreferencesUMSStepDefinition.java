@@ -15,9 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstantsMnR;
-import acceptancetests.deprecated.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonConstants;
+//import acceptancetests.deprecated.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonConstants;
 import acceptancetests.data.LoginCommonConstants;
-import acceptancetests.deprecated.profandpref.data.ProfnPrefCommonConstants;
+//import acceptancetests.deprecated.profandpref.data.ProfnPrefCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
@@ -285,16 +285,16 @@ public class ProfileandPreferencesUMSStepDefinition {
 		String userName = (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
 		try {
 			JSONObject profilenpreferencesActualJson = ProfilePreferencesPage.ProfileandPreferencesPageJson;
-			loginScenario.saveBean(ProfnPrefCommonConstants.MY_PROFILE_PREFERENCES_ACTUAL,
-					profilenpreferencesActualJson);
+			//loginScenario.saveBean(ProfnPrefCommonConstants.MY_PROFILE_PREFERENCES_ACTUAL,
+					//profilenpreferencesActualJson);
 			System.out.println("profilenpreferencesActualJson---->" + profilenpreferencesActualJson);
 			System.out.println(userName);
 			// Get expected data
 			String fileName = userName;
 			String directory = CommonConstants.PROFILE_AND_PREFERNCES_PAGE_DIRECTORY;
 			JSONObject myProfilenpreferencesexpectedjson = MRScenario.readExpectedJson(fileName, directory);
-			loginScenario.saveBean(ProfnPrefCommonConstants.MY_PROFILE_PREFERENCES_EXPECTED,
-					myProfilenpreferencesexpectedjson);
+			//loginScenario.saveBean(ProfnPrefCommonConstants.MY_PROFILE_PREFERENCES_EXPECTED,
+					//myProfilenpreferencesexpectedjson);
 			ProfilePreferencesPage.clickOndisclaimerlink(myProfilenpreferencesexpectedjson);
 			System.out.println("profilenpreferencesExpectedJson---->" + myProfilenpreferencesexpectedjson);
 
