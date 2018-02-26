@@ -718,7 +718,7 @@ public class MRScenario {
                }
 */           
                public WebDriver getWebDriver() {
-               DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+               DesiredCapabilities capabilities = DesiredCapabilities.chrome();
                                              
                capabilities.setCapability("platform", "Windows 7");
                capabilities.setCapability("version", "45.0");
