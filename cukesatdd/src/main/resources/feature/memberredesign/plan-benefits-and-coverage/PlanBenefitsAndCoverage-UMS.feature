@@ -206,7 +206,7 @@ Feature:C1.1 To test plan benefits and Coverage on UMS site
      Examples: 
      | planType|  memberType  | copayCategory |
      | MA      |  Group       |  HMO          |
-    #| PDP     |  Group       |  NON LIS      |
+     | PDP     |  Group       |  NON LIS      |
      | MAPD    |  Group       |  NON LIS      | 
       
       
@@ -260,7 +260,10 @@ Feature:C1.1 To test plan benefits and Coverage on UMS site
       | MAPD    |  Ind         |   LIS 1       | 
       | MA      |  Individual  |   LIS 1       | 
       | PDP     |  Individual  |   LIS 4       | 
-      | MA      |  Group       |   LIS 1       | 
+      | MAPD    |  Individual  |  NON LIS      | 
+      | PDP     |  Individual  |  NON LIS      | 
+      | MA      |  Individual  |  NON LIS      |
+     
      
      
     
@@ -276,7 +279,7 @@ Feature:C1.1 To test plan benefits and Coverage on UMS site
     Examples: 
        | planType|  memberType  | copayCategory |
        | MA      |  Group       |  HMO          |
-      #| PDP     |  Group       |  NON LIS      |
+       | PDP     |  Group       |  NON LIS      |
        | MAPD    |  Group       |  NON LIS      |
     
    
@@ -291,7 +294,7 @@ Feature:C1.1 To test plan benefits and Coverage on UMS site
     
       Examples: 
       | planType|  memberType  | copayCategory |
-      | MAPD    |  Individual  |   LIS 1       | 
+      | MAPD    |  Ind         |   LIS 1       | 
       | MA      |  Individual  |   LIS 1       | 
       | MAPD    |  Individual  |  NON LIS      | 
       | MA      |  Group       |  HMO          |

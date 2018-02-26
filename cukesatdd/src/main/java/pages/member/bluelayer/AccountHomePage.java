@@ -365,7 +365,7 @@ private WebElement searchforproviderlinkinClaimsPage;
     				System.out.println("User is on dashboard page and URL is ==>"+driver.getCurrentUrl());
     				driver.navigate().to(PAGE_URL+"medicare/member/benefits-coverage.html");
     				System.out.println(driver.getCurrentUrl());
-    				//CommonUtility.waitForPageLoad(driver, heading, 30);
+    				CommonUtility.waitForPageLoad(driver, heading, 30);
     				if(driver.getTitle().equalsIgnoreCase("Benefits Overview"))
     	    		{
     					System.out.println(driver.getTitle());

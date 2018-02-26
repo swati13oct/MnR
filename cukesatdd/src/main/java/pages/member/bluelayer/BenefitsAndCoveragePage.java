@@ -5,6 +5,7 @@ package pages.member.bluelayer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -179,6 +180,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='benefitsMain']/div[2]/div/div[1]/div/div/div/div/div[1]/div/div/h1")
 	private WebElement BenefitsSummaryHeader;
+	
+	@FindBy(xpath = ".//*[@id='benefitsMain']/div[2]/div/div[1]/div/div/div/div/div[1]/div/h1")
+	private WebElement BenefitsSummaryHeadership;
+	
 
 	@FindBy(xpath = ".//*[@id='benefitsMain']/div[2]/div/div[1]/div/div/div/div/div[2]/div/div/div[1]/div/h3/b/span")
 	private WebElement Copayscoinsuranceheader;
@@ -1162,6 +1167,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	 */
 
 	public void validateHeaders() {
+		
 		validate(BenefitsSummaryHeader);
 		validate(Copayscoinsuranceheader);
 		validate(HospitalVisits);
@@ -1264,7 +1270,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	public void validateHeadersShip() {
 		// TODO Auto-generated method stub
 
-		validate(BenefitsSummaryHeader);
+		validate(BenefitsSummaryHeadership);
 		validate(ParticipatingHospitalStays1);
 
 	}

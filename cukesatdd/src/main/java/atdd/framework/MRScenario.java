@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
@@ -32,7 +33,12 @@ import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxBinary;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.stereotype.Component;
@@ -712,8 +718,8 @@ public class MRScenario {
                }
 */           
                public WebDriver getWebDriver() {
-               DesiredCapabilities capabilities = DesiredCapabilities
-                                             .firefox();
+               DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+                                             
                capabilities.setCapability("platform", "Windows 7");
                capabilities.setCapability("version", "45.0");
                capabilities.setCapability("parent-tunnel", "sauce_admin");
@@ -729,6 +735,7 @@ public class MRScenario {
                               // TODO Auto-generated catch block
                               e.printStackTrace();
                }
+               
                return webDriver;
                }
                
