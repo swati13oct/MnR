@@ -1,7 +1,5 @@
 package acceptancetests.acquisitionvbf.vpp;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,19 +8,19 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.ulayer.AcquisitionHomePage;
-import pages.acquisition.ulayer.ComparePlansPage;
-import pages.acquisition.ulayer.PlanDetailsPage;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
-import acceptancetests.acquisitionvbf.vpp.VPPCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.ulayer.AcquisitionHomePage;
+import pages.acquisition.ulayer.ComparePlansPage;
+import pages.acquisition.ulayer.PlanDetailsPage;
+import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
 /**
  * Functionality: VPP flow for AARP site 

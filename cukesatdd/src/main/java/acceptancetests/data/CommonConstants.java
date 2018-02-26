@@ -3,8 +3,6 @@
  */
 package acceptancetests.data;
 
-import acceptancetests.data.Page;
-
 /**
  * @author pjaising
  *

@@ -3,12 +3,14 @@
  */
 package pages.member.ulayer;
 
-import java.util.List;import java.util.Map;
+import java.util.List;
+import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
-import org.openqa.selenium.By; import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;

@@ -3,9 +3,6 @@
  */
 package acceptancetests.acquisitionvbf.enrollinplan;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * @author pperugu
  *
@@ -52,4 +49,5 @@ public class EnrollInPlanCommonConstants {
 	public static final String ENROLLER_ADDRESSPREFERENCE="enrollerAddressPreference";
 	public static final String ENROLLER_LANGUAGEPREFERENCE="enrollerLanguagePreference";
 	public static final String HAS_ENROLLED = "hasEnrolled";
+	public static final String HAS_ERROR_MESSAGE = "hasErrorMessage";
 }

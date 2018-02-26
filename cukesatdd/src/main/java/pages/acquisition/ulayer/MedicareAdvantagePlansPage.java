@@ -3,8 +3,6 @@ package pages.acquisition.ulayer;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.acquisition.ulayer.MedicareAdvantageRequestMoreHelpPage;
-
 public class MedicareAdvantagePlansPage extends GlobalWebElements {
 	
 

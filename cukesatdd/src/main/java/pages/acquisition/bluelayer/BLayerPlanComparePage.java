@@ -9,9 +9,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.PlanSelectorPage;
-import pages.acquisition.bluelayer.ResponsivePlanSummaryUhc;
 
 public class BLayerPlanComparePage extends UhcDriver {
 	

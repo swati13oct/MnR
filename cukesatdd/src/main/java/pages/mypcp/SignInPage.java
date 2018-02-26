@@ -5,8 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.acquisition.bluelayer.GlobalWebElements;
 import acceptancetests.data.MRConstants;
+import pages.acquisition.bluelayer.GlobalWebElements;
 
 public class SignInPage extends GlobalWebElements {
 	

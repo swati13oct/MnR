@@ -14,7 +14,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
-import acceptancetests.deprecated.atdd.mobile.data.CommonConstants;
+import acceptancetests.data.CommonConstantsMobile;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
@@ -141,9 +141,9 @@ public class LoginPage extends UhcDriver{
 
 
 	public JSONObject getBrowserCheck() {
-			String fileName = CommonConstants.MOBILE_BROWSER_CHECK_DATA;
+			String fileName = CommonConstantsMobile.MOBILE_BROWSER_CHECK_DATA;
 			browserCheckData = CommonUtility.readPageData(fileName,
-					CommonConstants.PAGE_OBJECT_DIRECTORY_MOBILE_ULAYER_MEMBER);
+					CommonConstantsMobile.PAGE_OBJECT_DIRECTORY_MOBILE_ULAYER_MEMBER);
 
 			JSONObject jsonObject = new JSONObject();
 			for (String key : browserCheckData.getExpectedData().keySet()) {

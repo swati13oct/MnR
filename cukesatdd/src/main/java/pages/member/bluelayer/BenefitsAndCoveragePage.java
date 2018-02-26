@@ -5,7 +5,6 @@ package pages.member.bluelayer;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONException;

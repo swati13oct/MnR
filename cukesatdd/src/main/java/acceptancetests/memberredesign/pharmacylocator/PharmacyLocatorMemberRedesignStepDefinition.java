@@ -3,8 +3,6 @@
  */
 package acceptancetests.memberredesign.pharmacylocator;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -16,23 +14,21 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.redesign.UlayerHomePage;
-import pages.redesign.PharmacySearchPage;
-import pages.redesign.RedesignLoginPage;
-import pages.redesign.PharmacySearchPage;
 import acceptancetests.data.CommonConstants;
+import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
-import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.memberredesign.claims.ClaimsCommonConstants;
-import acceptancetests.memberredesign.pharmacylocator.PharmacySearchCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
-import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
+import pages.redesign.PharmacySearchPage;
+import pages.redesign.RedesignLoginPage;
+import pages.redesign.UlayerHomePage;
 
 /**
  * @author sdwaraka

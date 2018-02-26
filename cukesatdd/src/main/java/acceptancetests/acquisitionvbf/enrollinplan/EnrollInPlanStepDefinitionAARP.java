@@ -1,7 +1,5 @@
 package acceptancetests.acquisitionvbf.enrollinplan;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +8,16 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.acquisitionvbf.vpp.VPPCommonConstants;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageConstants;
+import atdd.framework.MRScenario;
+import cucumber.api.DataTable;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.BeneficiaryInformationPage;
 import pages.acquisition.ulayer.ConfirmationPage;
@@ -26,16 +34,6 @@ import pages.acquisition.ulayer.ProposedEffectiveDatePage;
 import pages.acquisition.ulayer.ReviewAndSubmitPage;
 import pages.acquisition.ulayer.SpecialElectionPeriodPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageConstants;
-import acceptancetests.acquisitionvbf.enrollinplan.EnrollInPlanCommonConstants;
-import acceptancetests.acquisitionvbf.vpp.VPPCommonConstants;
-import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 
 /**
  *Functionality:EnrollInPlan
@@ -983,6 +981,8 @@ public class EnrollInPlanStepDefinitionAARP {
 			reviewandSubmitPage.stmtofunderstanding(personalAttributesMap);
 			ConfirmationPage confirmationPage = reviewandSubmitPage
 					.navigatesToNextStep();
+			Boolean errorMessage = reviewandSubmitPage.validateErrorMessage();
+			getLoginScenario().saveBean(EnrollInPlanCommonConstants.HAS_ERROR_MESSAGE, errorMessage);
 			getLoginScenario().saveBean(PageConstants.CONFIRMATION_PAGE,
 					confirmationPage);
 			getLoginScenario().saveBean(PageConstants.REVIEW_APPLICATION_PAGE,
@@ -998,20 +998,22 @@ public class EnrollInPlanStepDefinitionAARP {
 	public void user_navigates_to_Confirmation_Page() {
 		boolean hasEnrolled = (Boolean) getLoginScenario().getBean(
 				EnrollInPlanCommonConstants.HAS_ENROLLED);
-
+		boolean hasErrorMessage = (Boolean) getLoginScenario().getBean(
+				EnrollInPlanCommonConstants.HAS_ERROR_MESSAGE);
 		if (!hasEnrolled) {
-
+			if(!hasErrorMessage) {
 			ConfirmationPage confirmationPage = (ConfirmationPage) getLoginScenario()
 					.getBean(PageConstants.CONFIRMATION_PAGE);
 
-			if (confirmationPage != null) {
+				if (confirmationPage != null) {
 
-				if (confirmationPage.validateConfirmationPage())
-					Assert.assertTrue(true);
-				else
-					Assert.fail("Error in validating the Confirmation Page");
-			} else {
-				Assert.fail("ERROR loading Confirmation Page");
+					if (confirmationPage.validateConfirmationPage())
+						Assert.assertTrue(true);
+					else
+						Assert.fail("Error in validating the Confirmation Page");
+				} else {
+					Assert.fail("ERROR loading Confirmation Page");
+				}
 			}
 		}
 	}

@@ -7,7 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.acquisition.ulayer.AgentAppointmentConfirmationPage;
 //import pages.acquisition.ulayer.ZipcodeLookupHomePage;
 //import pages.acquisition.ulayer.ZipcodeSelectionHomePage;
 import acceptancetests.data.CommonConstants;

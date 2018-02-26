@@ -1,7 +1,4 @@
 package pages.acquisition.bluelayer;
-import java.util.List;
-import java.util.Map;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
@@ -12,9 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
-import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 public class AddDrugDetails extends UhcDriver {

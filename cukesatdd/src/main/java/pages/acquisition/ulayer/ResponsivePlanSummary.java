@@ -25,7 +25,6 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.bluelayer.PlanComparePage;
-import pages.acquisition.bluelayer.VASPage;
 import pages.member.ulayer.Rallytool_Page;
 import pages.mobile.acquisition.ulayer.VPPAarpNeedAStepBackWidget;
 import pages.mobile.acquisition.ulayer.VPPAarpNeedHelpWidgetPage;
