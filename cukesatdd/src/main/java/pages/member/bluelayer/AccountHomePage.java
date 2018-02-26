@@ -356,7 +356,7 @@ private WebElement searchforproviderlinkinClaimsPage;
         
         public BenefitsAndCoveragePage navigateDirectToBnCPag() {
     		
-        	if (MRScenario.environment.equalsIgnoreCase("stage")) 
+        	if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) 
         	{
     			System.out.println("user is on Stage login page");			
     			//CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);			
