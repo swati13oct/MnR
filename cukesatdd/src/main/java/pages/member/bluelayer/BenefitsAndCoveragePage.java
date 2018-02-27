@@ -50,7 +50,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-contact-us")
 	private WebElement contactUslink;
 
-	@FindBy(xpath = "html/body/div[2]/div[4]/div[1]/div[2]/section[2]/div/div[3]/div/p")
+	@FindBy(xpath = ".//*[@id='needhelpsectioncontactus']/section[2]/div/div[3]/div/p")
 	private WebElement Seemorewaystext;
 
 	@FindBy(className = "atdd-need-help")
@@ -963,6 +963,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	public void validate_learnmoreaboutlink() {
 		validate(Learnmoretierslink);
 		validate(Learnmorestagelink);
+		System.out.println(Learnmoretierslink.getLocation());
+		System.out.println(Learnmorestagelink.getLocation());
 
 	}
 
@@ -982,14 +984,15 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	public void clickOnLearnmoreaboutlinktier() {
 		// TODO Auto-generated method stub
 		try {
-			Thread.sleep(30000);
+			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		Learnmoretierslink.click();
 		try {
-			Thread.sleep(30000);
+			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1038,14 +1041,14 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	public void clickOnLearnmoreaboutlinkstage() {
 		// TODO Auto-generated method stub
         try {
-			Thread.sleep(30000);
+			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		Learnmorestagelink.click();
 		 try {
-				Thread.sleep(30000);
+				Thread.sleep(10000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

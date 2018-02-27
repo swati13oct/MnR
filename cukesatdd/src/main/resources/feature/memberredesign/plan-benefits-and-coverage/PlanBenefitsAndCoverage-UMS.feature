@@ -120,13 +120,13 @@ Feature:C1.1 To test plan benefits and Coverage on UMS site
     And the user view the Drug Copays & Discounts header 
     And the user validates the Learn More section for stage and tier
     And the user validates dropdown selection functionality
-    And the user validates the user click on the link it expands and when user clicks it again it should collapse
     And the user validates Drug coverage header and text under the section
     And the user validates text for the Look Up Drugs section
     And the user validates Look Up Drugs button should be visible
     And the user validates text for the Locate a Pharmacy section
     And the user validates Locate a Pharmacy button should be visible
     And the user should see drug copay and discount table
+    And the user validates the user click on the link it expands and when user clicks it again it should collapse
     Examples: 
        | planType|  memberType  | copayCategory |
        | PDP     |  Group       |  NON LIS      |
