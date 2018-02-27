@@ -225,8 +225,6 @@ public class CommonConstants {
 
 	private static final String PLAN_CONFIRMATION_BLUELAYER_DIRECTORY = "/jsonresponse/Member/bluelayer/registration/planconfirmation/";
 
-	private static final String REGISTRATION_BLUELAYER_DIRECTORY = "/jsonresponse/Member/bluelayer/registration/registrationsuccess/";
-
 	private static final String ADD_PLAN_BLUELAYER_DIRECTORY = "/jsonresponse/member/bluelayer/addplan/";
 
 	private static final String MY_ACCOUNT_HOME_COMBO_BLUELAYER_DIRECTORY = "/jsonresponse/member/bluelayer/myaccounthomecombo/";
@@ -721,8 +719,6 @@ public class CommonConstants {
 	public static final String HEALTH_AND_WELLNESS_DROPDOWN_DATA = "healthandwellnessdropdownactual.json";
 
 	public static final String OUR_PLANS_DROPDOWN_DATA = "ourplansdropdownactual.json";
-
-	private static final String HEALTH_AND_WELLNESS_DIRECTORY = "/jsonresponse/member/ulayer/healthandwellness/";
 
 	public static final String PLAN_COMPARE_PAGE_DATA = "plancompare.json";
 

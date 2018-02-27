@@ -7,7 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.CommonConstants;
-import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -31,7 +30,6 @@ public class GroupHomePage extends UhcDriver {
 	public JSONObject browserCheckJson;
 	private PageData browserCheckData;
 
-	private static String UHCRETIREE_ACQISITION_PAGE_URL = MRConstants.UHCRETIREE_URL;
 
 	public GroupHomePage(WebDriver driver) {
 		super(driver);

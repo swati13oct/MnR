@@ -1,6 +1,6 @@
 package pages.dashboard.eob;
 
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -45,15 +45,8 @@ public class EOBPage extends UhcDriver{
 	@FindBy(className="learnmoreunderline ng-scope")
 	private WebElement learnMoreLink;
 
-	// The below web element doesn't have Id or class 
-	@FindBy(xpath="//*[contains(text(),'How to read your Medical EOB ')]")
-	private WebElement readMedicalEOB;
-
 	@FindBy(id="eobvideoicon")
 	private WebElement eobVideoBox;
-	
-	//@FindBy(xpath="//*[contains(text(),'Watch Video')]")
-	//private WebElement readEOBVideo;
 
 	@FindBy(id="adobesitelink")
 	private WebElement adobeWebsiteLink;
@@ -181,7 +174,7 @@ public class EOBPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+			
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
@@ -288,13 +281,13 @@ public class EOBPage extends UhcDriver{
 		}
 		 
 		Select selectDate;
-		WebElement firstInDateDropDown;
+		
 		if(planType.equals("SHIP") || planType.equals("SSUP") || planType.equals("HIP")){
 			selectDate = new Select(eobMonthDateRangeSHIP);
-			firstInDateDropDown = selectDate.getFirstSelectedOption();
+			selectDate.getFirstSelectedOption();
 		}else{
 			selectDate = new Select(eobMonthDateRange);
-			firstInDateDropDown = selectDate.getFirstSelectedOption();
+			selectDate.getFirstSelectedOption();
 		}
 		/*if(firstInDateDropDown.getText().equals("Last 90 Days")){
 			System.out.println("First element Date Range dropdown displayed correctly "+ firstInDateDropDown.getText());

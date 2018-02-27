@@ -64,8 +64,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
         @FindBy(id = "dce")
         private WebElement prescriptionsLink;
         
-        @FindBys(value = { @FindBy(xpath = "//table[@id='colhowdoesthiswork']/tbody/tr/td/span/span/a") })
-        private List<WebElement> howdoesthiswork;
 
         @FindBy(id = "learn-zipcode")
         private WebElement learnzipCodeField;
@@ -76,8 +74,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
         @FindBy(id = "learnfindplanBtn")
         private WebElement learnfindPlansButton;
 
-        @FindBy(id = "homefooter")
-        private WebElement homefooter;
 
         @FindBy(id = "atdd_ma_plans")
         private WebElement ma_moreHelpInfoLink;
@@ -105,17 +101,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
         @FindBy(className = "fd_myPlans")
         private WebElement myPlansTab;
 
-        @FindBy(linkText = "pharmacy")
-        private WebElement pharmacyLink;
-
         @FindBy(id = "ghn_lnk_2")
         private WebElement ourPlans;
 
         @FindBy(id = "ghn_lnk_1")
         private WebElement Home;
-
-        @FindBy(linkText = "Request More Help and Information")
-        private WebElement requestInfoLink;
 
         @FindBy(xpath = "//*[@id='subnav_2']/div/div/div[1]/div[1]/div[2]/h3/a/span")
         private WebElement maVppLink;

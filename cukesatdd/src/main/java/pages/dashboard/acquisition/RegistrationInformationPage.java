@@ -365,11 +365,6 @@ public class RegistrationInformationPage extends UhcDriver {
 	@FindBy(id = "emailText")
 	private WebElement emailIdText;	
 	
-	
-	/** edit your profile link. */
-	@FindBy(linkText = "EDIT YOUR PROFILE")
-	private WebElement editYourProfileLink;
-	
 	/** print link. */
 	@FindBy(id = "printLink")
 	private WebElement printLink;

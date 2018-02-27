@@ -43,9 +43,6 @@ public class PersonalIdentificationPage extends UhcDriver{
 	@FindBy(id = "continueToConfirmPersonalId")
 	private WebElement continueField;
 	
-	@FindBy(xpath = "//div[@id='passwordChangeInfoDiv']/div/p/strong")
-	private WebElement pageHeading;	
-	
 	
 	public PersonalIdentificationPage(WebDriver driver) {
 		super(driver);

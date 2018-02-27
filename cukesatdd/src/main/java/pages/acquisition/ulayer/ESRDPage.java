@@ -96,9 +96,6 @@ public class ESRDPage extends UhcDriver{
 	@FindBy(xpath = ".//*[@id='esrdInfo']/p")
 	private WebElement esrdHeader;
 	
-	@FindBy(xpath = ".//*[@id='esrdquestion']/p/strog/span/span/b")
-	private WebElement esrdQuestion;
-	
 	public boolean validateESRDPage(){
 		boolean flag = false;
 		if(validate(esrdHeader)&&validate(esrdno)&&validate(esrdyes)&&validate(esrdprevious)

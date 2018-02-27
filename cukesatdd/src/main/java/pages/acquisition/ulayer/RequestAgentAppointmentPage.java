@@ -42,26 +42,8 @@ public class RequestAgentAppointmentPage extends UhcDriver{
 	@FindBy(id="ym-zip")
 	private WebElement zip;
 	
-	@FindBy(id="areacode")
-	private WebElement areacode;
-	
 	@FindBy(id="ym-phone")
 	private WebElement phoneField;
-	
-	@FindBy(id="ym-email")
-	private WebElement email;
-	
-	@FindBy(id="phone2")
-	private WebElement phone2;
-	
-	@FindBy(id="confirm_areacode")
-	private WebElement confirmAreacode;
-	
-	@FindBy(id="confirm_phone1")
-	private WebElement confirmPhone1;
-	
-	@FindBy(id="confirm_phone2")
-	private WebElement confirmPhone2;
 	
 	@FindBy(xpath=".//*[@id='appointmentform']/fieldset/button")
 	private WebElement requestAppointmentButton;

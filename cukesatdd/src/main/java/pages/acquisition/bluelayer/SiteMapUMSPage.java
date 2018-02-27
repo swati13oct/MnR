@@ -29,11 +29,7 @@ public class SiteMapUMSPage extends UhcDriver{
 	
 	@FindBy(id = "medicareTitle")
 	private WebElement medicareTitle;
-	
-	@FindBy(id = "gf_lnk_4")
-	private WebElement privacyPolicyLink;
-	
-	//@FindBy(xpath = "/html/body/div[4]/div/table/tbody/tr[2]/td/table/tbody/tr[3]/td/div[1]/div/div/div/div[2]/div/ul/li[2]/ul/li[4]/a") 
+
 	@FindBy(id="PO7link")
 	private WebElement SearchforaProviderFacility ;
 	
