@@ -375,19 +375,21 @@ private WebElement searchforproviderlinkinClaimsPage;
         	}
         	}
         
-    			else if (MRScenario.environment.equals("team-ci1") || MRScenario.environment.equals("team-h") || MRScenario.environment.equals("test-a") || MRScenario.environment.equals("team-e")) {
-        			benefitcoveragelink.click();
+    			else if (MRScenario.environmentMedicare.equals("team-ci1") || MRScenario.environmentMedicare.equals("team-h") || MRScenario.environmentMedicare.equals("test-a") || MRScenario.environmentMedicare.equals("team-e")) {
+    				driver.navigate().to(PAGE_URL+"medicare/member/benefits-coverage.html");
+    				System.out.println(driver.getCurrentUrl());
         		}
     			else
     			{
-        			linkbenefit.click();
+    				driver.navigate().to(PAGE_URL+"medicare/member/benefits-coverage.html");
+    				System.out.println(driver.getCurrentUrl());
         		}
         	
- 
-    		if (validate(iPerceptionPopUp)) {
+            
+    		/*if (validate(iPerceptionPopUp)) {
                 iPerceptionPopUp.click();
                 System.out.println("iPerception Pop Up displayed");
-    		}
+    		}*/
 
     		CommonUtility.waitForPageLoad(driver, heading, 50);
     		if(driver.getTitle().equalsIgnoreCase("Benefits Overview"))
