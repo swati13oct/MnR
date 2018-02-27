@@ -16,8 +16,6 @@ import atdd.framework.UhcDriver;
 
 public class UhcRetireePharmacyLocatorPage extends UhcDriver {
 
-	@FindBy(css="h1.titleLeft")
-	private WebElement pharmacyLocatorHeading;
 	
 	@FindBy(id="zipCode")
 	private WebElement txtZipcode;
@@ -25,8 +23,6 @@ public class UhcRetireePharmacyLocatorPage extends UhcDriver {
 	@FindBy(id="continue")
 	private WebElement btnContinue;
 	
-	@FindBy(id="planyear")
-	private WebElement planYear;
 	
 	public UhcRetireePharmacyLocatorPage(WebDriver driver) {
 		super(driver);

@@ -85,7 +85,8 @@ public class OptionalRidersPage extends UhcDriver{
 		String optradiooption = personalAttributesMap.get("optradiooption");
 		if(optradiooption.equalsIgnoreCase("No")){
 			optno.click();
-		}
+		}else
+			optyes.click();
 			
 		}
 	

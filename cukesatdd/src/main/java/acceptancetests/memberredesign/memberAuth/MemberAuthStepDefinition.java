@@ -22,8 +22,6 @@ import pages.dashboard.memberAuth.MemberAuthLoginPage;
 
 
 public class MemberAuthStepDefinition{
-
-	//private static final MemberAuthLoginPage MemberAuthLoginPage = null;
 	@Autowired
 	MRScenario loginScenario;
 

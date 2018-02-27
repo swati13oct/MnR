@@ -8,8 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
-import acceptancetests.data.PageData;
 import atdd.framework.UhcDriver;
 
 /**
@@ -18,8 +16,6 @@ import atdd.framework.UhcDriver;
  */
 public class PrimaryCareProviderPage extends UhcDriver {
 
-	@FindBy(id = "pcpprevious")
-	private WebElement pageHeadingPlanPaymentopt;
 
 	@FindBy(id = "pcpprevious")
 	private WebElement pcpprevious;
@@ -33,8 +29,6 @@ public class PrimaryCareProviderPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id='pcpsaveandcont']")
 	private WebElement saveandcontinuepcp;
-
-	private PageData primarycareproviderInformation;
 
 	public JSONObject primarycareproviderInformationJson;
 

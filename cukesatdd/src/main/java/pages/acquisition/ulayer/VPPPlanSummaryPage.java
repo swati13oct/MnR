@@ -15,7 +15,6 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -67,9 +66,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='maplans_planbutton']/div[2]/div[2]/div[2]")
 	private WebElement hideMaPlans;
 
-	@FindBy(xpath = "//div[@class='plan-overview-wrapper']")
-	private WebElement vppplansummarypage;
-
 	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div[1]/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[2]/div/span[3]")
 	private WebElement showMsPlans;
 	
@@ -85,27 +81,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@class='disabledprint ng-scope']")
 	List<WebElement> pdpPlanElement;
-	
-	@FindBy(id = "medicalinsursectionheading")
-	private WebElement pageHeading;
-	
-	@FindBy(xpath =".//*[@id='step1Desc']/p")
-	private WebElement step1Desc; 
-	
-	@FindBy(id = "editDrugMA")
-	private WebElement editDrugListLink;
-	
-	@FindBy(linkText = "All Primary Care Physicians")
-	private WebElement allPrimaryCarePhysicians;
-	
-	@FindBy(linkText = "Complete my list")
-	private WebElement completeMyList;
-	
-	@FindBys(value = { @FindBy(className = "firstTierFilterItem") })
-	private List<WebElement> physcianSearchTypes;
-	
-	@FindBys(value = { @FindBy(xpath = "//div[@id='providerResultsContainer']/div") })
-	private List<WebElement> providerNameList;
 	
 	@FindBy(xpath="//div[contains(@ng-repeat,'plan in planModel.maPlans')]")
 	List<WebElement> maPlans;
@@ -128,29 +103,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div[1]/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[3]/div/span[1]/span")
 	private WebElement pdpPlansCount;
 	
-	@FindBy(id = "pageHeader")
-	private WebElement pageHeader;
-	
-	@FindBy(id = "providerSearchFrame")
-	private WebElement providerSearchIframe;
-	
 	@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='plan-overview-wrapper']/div[2]/div[1]//span[@class='trigger-closed']")
 	private WebElement viewPlans;
 	
 	@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='plan-overview-wrapper']/div[2]/div[3]//span[@class='trigger-closed']")
 	private WebElement viewPDPPlans;
-	
-	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[3]/div/div[1]/div[3]/div/div/span[3]")
-	private WebElement maChkboxMessage1;
-	
-	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[3]/div/div[2]/div[3]/div/div/span[3]")
-	private WebElement maChkboxMessage2;
-	
-	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[3]/div/div[3]/div[3]/div/div/span[3]")
-	private WebElement maChkboxMessage3;
-	
-	@FindBy(xpath=".//*[@id='plan-list-1']//a[@class='compare-link']")
-	private WebElement compareLink;
 	
 	@FindBy(className = "switchPlanYear")
 	private WebElement toggleplanYear;
@@ -165,9 +122,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(css="#pdpplans_container .planCompareBtn")
 	private WebElement comparePDPPlanChkBox;
-	
-	@FindBy(id="pdpplans")
-	private WebElement pdpShowPlansLnk;
 	
 	@FindBy(css="#maplans_container .compareHeading>p")
 	private WebElement compareUpto3PlansPopup;
@@ -218,14 +172,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//button[@class='action-btn negative']")
 	private WebElement Checkcoverage;
 	
-	@FindBy(xpath="//p/span[@class='ng-binding']")
-	private WebElement provider;
-	
 	@FindBy(xpath = ".//*[@class='swiper-container']")
 	List<WebElement> maPlanElement1;
-	
-	@FindBy(name = "emailWidgetForm")
-	private WebElement emailWidgetForm;
 	
 	public JSONObject vppPlanSummaryJson;
 
@@ -680,9 +628,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return false;
 	}
 	
-	@FindBy(linkText = "Change location")
-	private WebElement changeLocationBtn;
-	
 	public boolean validateVPPPlanSummaryPage() {
 		WebDriverWait wait = new WebDriverWait(driver, 60000);
 		vppTop = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='overview-main']/h2")));
@@ -956,34 +901,30 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	public boolean validatePlanSummary(){
 		boolean flag = true;
-		int allPlans = 0;
-		int maPlans = 0;
-		int msPlans = 0;
-		int pdpPlans =0;
-				int msnPlans = 0;
+		
 		if(validate(allPlansSize)){
-			 allPlans = Integer.valueOf(allPlansSize.getText().split(" ")[2]);
+		//	 allPlans = Integer.valueOf(allPlansSize.getText().split(" ")[2]);
 		}else{
 			Assert.assertTrue("This scenario is for AEP period", true);
 			
 		}
 
 		if(validate(maPlansCount)){
-			 maPlans = Integer.valueOf(maPlansCount.getText());
+		//	 maPlans = Integer.valueOf(maPlansCount.getText());
 		}else{
 			Assert.assertTrue("This scenario is for AEP period", true);
 			
 		}
 		
 		if(validate(msPlansCount)){
-			 msPlans = Integer.valueOf(msPlansCount.getText());
+		//	 msPlans = Integer.valueOf(msPlansCount.getText());
 		}else{
 			Assert.assertTrue("This scenario is for AEP period", true);
 			
 		}
 		
 		if(validate(pdpPlansCount)){
-			 pdpPlans = Integer.valueOf(pdpPlansCount.getText());
+		//	 pdpPlans = Integer.valueOf(pdpPlansCount.getText());
 		}else{
 			Assert.assertTrue("This scenario is for AEP period", true);
 			

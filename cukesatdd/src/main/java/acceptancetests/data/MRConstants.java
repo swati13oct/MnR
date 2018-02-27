@@ -205,7 +205,7 @@ public class MRConstants {
 	//public static final String MA_RESOURCES_AND_PLAN_TAB_URL = "https://www.awe-"+MRScenario.environment+"-uhcmedicaresolutions." + getDomain() + "/health-plans/medicare-advantage-plans/resources-plan-material.html";
 
 
-	private static final String UMS_PLANPREVIEW_URL = null;	
+	
 	
 	public static final String SERVER_DATE_PARTD_PORTAL_WEB = "https://"+MRScenario.environment+"-generic.uhc.com/PartDPortalWeb/jsp/zadmin/timeAdmin.jsp?server=1";
 

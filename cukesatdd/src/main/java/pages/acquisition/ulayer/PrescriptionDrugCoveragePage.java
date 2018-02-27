@@ -37,9 +37,6 @@ public class PrescriptionDrugCoveragePage extends UhcDriver{
 	@FindBy(id = "member-id")
 	private WebElement pdcmemberid;
 	
-	@FindBy(id = "pdcprevious")
-	private WebElement pdcprevious;
-	
 	@FindBy(id = "pdcsaveandcont")
 	private WebElement pdcsaveandcont;
 	

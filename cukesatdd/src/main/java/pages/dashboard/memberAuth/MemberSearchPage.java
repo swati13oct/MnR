@@ -8,8 +8,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import acceptancetests.data.MRConstants;
 import atdd.framework.UhcDriver;
 import pages.member.ulayer.TestHarness;
 
@@ -32,7 +30,7 @@ public class MemberSearchPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(text(),'Login as member')]")
 	private WebElement loginasmember;
 	
-	private static String MEMBER_AUTH = MRConstants.MEMBER_AUTH;
+	
 	
 	public MemberSearchPage(WebDriver driver) {
 		super(driver);
