@@ -32,11 +32,12 @@ public static final String DASHBOARD_PAGE = "dashboardPage";public static final 
 	public static final String TIMESTAMP = "TimeStamp";
 	
 	public static final String PLAN_CONFIRMATION_PAGE = "planConfirmationPage";
+	
+	public static final String PROFILE_AND_PREFERENCES_PAGE = "ProfileandPreferencesPage";
 
 	public static final String CREATE_ACCOUNT_PAGE = "createAccountPage";
 	
 	public static final String BENEFITS_SUMMARY_PAGE = "benefitsSummaryPage";
-	
 	
 	public static final String Rally_Dashboard = "RallyDashboard";
 
@@ -90,7 +91,7 @@ public static final String DASHBOARD_PAGE = "dashboardPage";public static final 
 	
 	public static final String BENEFITS_COVERAGE_PAGE = "benefitsCoveragePage";
 
-	public static final String PROFILE_AND_PREFERENCES_PAGE = "ProfileandPreferencesPage";
+
 
 	//public static final String PROFILEANDPREFERENCES_PAGE = "ProfilePreferencesPage";
 	

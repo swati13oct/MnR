@@ -32,13 +32,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(className = "atdd-profile-membernumber")
 	private WebElement memberId;
 
-	@FindBy(xpath = "//*[@id='tab-1']//div[1]//div//p[2]//text()")
-	private WebElement memberIdtext;
-
-	@FindBy(xpath = ".//*[@id='profilePreferencesController']/div[1]/div/div/section/div/div[3]/div/div/div/div/div/div[1]/div/span[1]")
+	@FindBy(xpath = "//span[contains(text(),'Username')]")
 	private WebElement Username;
 
-	@FindBy(xpath = ".//*[@id='profilePreferencesController']/div[1]/div/div/section/div/div[3]/div/div/div/div/div/div[1]/div/span[2]")
+	@FindBy(xpath = ".//span[contains(text(),'Username')]/following-sibling::span")
 	private WebElement Usernametext;
 
 	@FindBy(xpath = ".//*[@id='password']/div/div/span[1]")
@@ -47,21 +44,21 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='password']/div/div/span[2]")
 	private WebElement Passwordtext;
 
-    @FindBy(id="Artwork")
+	@FindBy(id = "Artwork")
 	private WebElement EditButton;
-    
-    @FindBy(id="password-form")
+
+	@FindBy(id = "password-form")
 	private WebElement Editform;
-    
-    @FindBy(id = "passwordOld-error")
+
+	@FindBy(id = "requiredField-errorMessage")
 	private WebElement passworderrormessage;
-    
-    @FindBy(id = "passwordNew-error")
+
+	@FindBy(id = "passwordNew-error")
 	private WebElement passworderrormessage2;
-    
-    @FindBy(id = "passwordNewConfirm-error")
+
+	@FindBy(id = "passwordNotMatch-error")
 	private WebElement passworderrormessage3;
-    
+
 	@FindBy(xpath = ".//*[@id='email']/div[1]/p")
 	private WebElement EmailLabel;
 
@@ -113,10 +110,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(id = "profileemailaddress")
 	private WebElement EmailValue;
 
-	@FindBy(className = "margin-none")
+	@FindBy(xpath = ".//*[@id='needhelpsectioncontactus']//p[Contains(text(),'See more ways to')]")
 	private WebElement Seemorewaystext;
 
-	@FindBy(linkText = "atdd-contact-us")
+	@FindBy(className = "atdd-contact-us")
 	private WebElement contactUs;
 
 	@FindBy(className = "atdd-need-help")
@@ -136,34 +133,35 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(id = "permanenet")
 	private WebElement permanentaddress;
 
-	@FindBy(className = "text-link")
+	@FindBy(xpath = ".//*[@id='permanenet']/div[2]")
 	private WebElement contactuslink;
 
 	@FindBy(className = "atdd-profile-communicationpreference")
 	private WebElement communicationpreferencesheader;
 
-    @FindBy(id="communicationAddress")
+	@FindBy(id = "communicationAddress")
 	private WebElement communicationpreferncessection;
 
-    @FindBy(id="phone")
+	@FindBy(id = "phone")
 	private WebElement Phonesection;
-	
-	@FindBy(xpath = ".//*[@id='phone']/div[1]/div/div/div/div/div/a[1]")
+
+	@FindBy(xpath = ".//*[@id='phoneCardHeight']/div[1]/div/div/div/div/div/div/div/a")
 	private WebElement PhoneEditButton;
 
-    @FindBy(xpath = "//*[@id='tab-1']/div[3]/div[1]/div/div[2]/div/div/div/div[1]/div/div/div[2]/div[1]/div[1]/div/span[1]")
+
+	@FindBy(xpath = "//*[@id='tab-1']/div[3]/div[1]/div/div[2]/div/div/div/div[1]/div/div/div[2]/div[1]/div[1]/div/span[1]")
 	private WebElement Daytimephone;
-	
-	@FindBy(id="phone-form")
+
+	@FindBy(id = "phone-form")
 	private WebElement PhoneForm;
 
-	@FindBy(xpath = ".//*[@id='phone-form']/div[3]/div/button")
+	@FindBy(className = "atdd-phone-save")
 	private WebElement PhoneSaveButton;
 
-	@FindBy(xpath = "//*[@id='phone-form']/div[3]/div/a")
+	@FindBy(className = "atdd-phone-bottomcancel")
 	private WebElement PhoneCancelButton;
 
-	@FindBy(xpath = ".//*[@id='phone']/div[1]/div/div/div/div/div/a[2]")
+	@FindBy(className = "atdd-phoneedit-cancel")
 	private WebElement PhoneTopCancelButton;
 
 	@FindBy(id = "daytimePhone")
@@ -172,13 +170,16 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(id = "eveningPhone")
 	private WebElement EveningTimePhoneTextField;
 
-	@FindBy(xpath = "//*[@id='temporaryAddress']/div[1]/p")
+	@FindBy(id = "temporaryAddress")
 	private WebElement tempAddressHeader;
-	
-	@FindBy(xpath = ".//*[@id='temporaryAddress']/div[2]/div[1]/div/div/a")
+
+	@FindBy(className = "edit-btn")
 	private WebElement tempEditButton;
 
-	@FindBy(id="temporaryAddress")
+	@FindBy(className = "add-address-btn")
+	private WebElement addAddress;
+
+	@FindBy(id = "temporaryAddress")
 	private WebElement Edittemporaryaddressform;
 
 	@FindBy(id = "altStreet2")
@@ -223,6 +224,9 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(className = "atdd-gopaperless")
 	private WebElement gopaperlessbutton;
 
+	@FindBy(className = "atdd-editpreferences")
+	private WebElement EditPreferencesButton;
+
 	@FindBy(className = "atdd-go-green-img")
 	private WebElement gogreenleaf;
 
@@ -234,8 +238,8 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	@FindBy(xpath = "html/body/div[2]/div[3]/div[2]/div[1]/div/div/div/div/div[1]/div/div/div/div/div/div/a")
 	private WebElement Profilenprefernceslink;
-	
-	@FindBy(id  = "mail-preferences-selector")
+
+	@FindBy(className = "atdd-plan-name")
 	private WebElement planNameGoGreen;
 
 	@FindBy(className = "atdd-section-heading")
@@ -264,8 +268,17 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	@FindBy(className = "atdd-goGreensubHeader")
 	private WebElement GoGreenText;
-    
-    public PageData ProfileandPreferences;
+
+	@FindBy(className = "atdd-general-header")
+	private WebElement GeneralQuestionsSection;
+
+	@FindBy(className = "atdd-claims-header")
+	private WebElement ClaimsSupportSection;
+
+	@FindBy(className = "add-address-btn")
+	private WebElement MailingAddressEditButton;
+
+	public PageData ProfileandPreferences;
 
 	public JSONObject ProfileandPreferencesPageJson;
 
@@ -279,11 +292,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 		openAndValidate();
 	}
 
-
 	@Override
 	public void openAndValidate() throws InterruptedException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
@@ -299,11 +311,17 @@ public class ProfilePreferencesPage extends UhcDriver {
 		return profilenpreferencesExpectedJson;
 
 	}
-	
-	/** 
-	 * @toDo : The user validates the Account information of the logged in member 
+
+	/**
+	 * @toDo : The user validates the Account information of the logged in
+	 *       member
 	 */
 
+
+	public void jsClick(WebElement element){
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("arguments[0].click();", element);
+	}
 	public void validatePlanNameMemberidNameAcountProfile() {
 
 		validate(planName);
@@ -319,9 +337,9 @@ public class ProfilePreferencesPage extends UhcDriver {
 		validate(EditButton);
 
 	}
-	
-	/** 
-	 * @toDo : The user checks the email section 
+
+	/**
+	 * @toDo : The user checks the email section
 	 */
 
 	public void validateEmail() {
@@ -331,8 +349,8 @@ public class ProfilePreferencesPage extends UhcDriver {
 		validate(email);
 
 	}
-	
-	/** 
+
+	/**
 	 * @toDo : The user checks the Password Update functionality
 	 */
 
@@ -346,9 +364,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 		SaveButton.click();
 
 	}
-	
-	/** 
-	 * @toDo : The user checks the elements that appear when the user clicks on edit link of Account section
+
+	/**
+	 * @toDo : The user checks the elements that appear when the user clicks on
+	 *       edit link of Account section
 	 */
 
 	public void validateAccountEditElements() {
@@ -365,15 +384,15 @@ public class ProfilePreferencesPage extends UhcDriver {
 		validate(ConfirmPassword);
 		validate(SaveButton);
 		validate(CancelButton);
-        }
+	}
 
-	
-	/** 
-	 * @toDo : The user checks the Password Update functionality  without entering the mandatory fields
+	/**
+	 * @toDo : The user checks the Password Update functionality without
+	 *       entering the mandatory fields
 	 */
 	public boolean validateSavebuttonclick() {
 		try {
-			Thread.sleep(30000);
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -388,13 +407,13 @@ public class ProfilePreferencesPage extends UhcDriver {
 		}
 		return false;
 	}
-	
-	/** 
-	 * @toDo :  The user checks the Password Update functionality by entering an invalid password
+
+	/**
+	 * @toDo : The user checks the Password Update functionality by entering an
+	 *       invalid password
 	 */
-	public boolean invalidpasswordvalidation()
-	{
-		//EditButton.click();
+	public boolean invalidpasswordvalidation() {
+		// EditButton.click();
 		NewPassword.sendKeys("Passw");
 		try {
 			Thread.sleep(30000);
@@ -411,23 +430,26 @@ public class ProfilePreferencesPage extends UhcDriver {
 		}
 		return false;
 	}
-	
-	/** 
-	 * @toDo :  The user checks the Password Update functionality by entering different  password in confirm password field
+
+	/**
+	 * @toDo : The user checks the Password Update functionality by entering
+	 *       different password in confirm password field
 	 */
-	public boolean invalidpasswordvalidation2()
-	{
-		//EditButton.click();
+	public boolean invalidpasswordvalidation2() {
+		// EditButton.click();
+		CurrentPassword.sendKeys("Random@1");
 		NewPassword.sendKeys("Password@1");
 		ConfirmPassword.sendKeys("Password@2");
 		try {
-			Thread.sleep(30000);
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		SaveButton.click();
-		if (passworderrormessage3.getText().contentEquals("Please Enter the same value again.")) {
+		System.out.println("Validation error is " + passworderrormessage3.getText());
+
+		if (passworderrormessage3.getText().contentEquals("Your password and password confirmation do not match. ")) {
 			System.out.println("The element" + passworderrormessage3.getText() + "is found");
 			return true;
 		} else {
@@ -435,18 +457,12 @@ public class ProfilePreferencesPage extends UhcDriver {
 		}
 		return false;
 	}
-	
-	/** 
-	 * @toDo : The user checks the functionality of cancel Button of the password update window
+
+	/**
+	 * @toDo : The user checks the functionality of cancel Button of the
+	 *       password update window
 	 */
 	public void validateCancelButton() {
-		
-		try {
-			Thread.sleep(30000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
 		CancelButton.click();
 		try {
@@ -455,41 +471,46 @@ public class ProfilePreferencesPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Assert.assertTrue("Button is present", Password.isDisplayed());
+		Assert.assertTrue("On clicking on the Cancel Button,Password field should be displayed", Password.isDisplayed());
 	}
-	
-	
-	/** 
+
+	/**
 	 * @toDo : The user checks the options after clicking on email edit link
 	 */
 	public void validateEmailEditElements() {
 
 		validate(EmailEditbutton);
-		EmailEditbutton.click();
-		validate(NewEmail);
-		validate(emailConfirm);
-		validate(SaveEmailButton);
-		validate(CanceEmaillButton);
-		validate(Emailform);
-		//validate(email);
-		System.out.println(email.getText());
 
-	}
 
-	
-	/** 
-	 * @toDo :  Validates the email edit functionality without filling any of the email text fields
-	 */
-	public boolean emailblankfieldsvalidation() {
 		EmailEditbutton.click();
+
+		//EmailEditbutton.click();
 		try {
 			Thread.sleep(20000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		validate(NewEmail);
+		validate(emailConfirm);
+		validate(SaveEmailButton);
+		validate(CanceEmaillButton);
+		validate(Emailform);
+		// validate(email);
+		System.out.println(email.getText());
+	}
+
+	/**
+	 * @toDo : Validates the email edit functionality without filling any of the
+	 *       email text fields
+	 */
+	public boolean emailblankfieldsvalidation() {
+
 		SaveEmailButton.click();
-		if (mandatorymessage.getText().contentEquals("This field is required.")) {
+
+		System.out.println("Mandatory message txt" + mandatorymessage.getText());
+		if (mandatorymessage.getText()
+				.contentEquals("Enter your email address like this: yourname@emailprovider.com")) {
 			System.out.println("The element" + mandatorymessage.getText() + "is found");
 			return true;
 		} else {
@@ -498,13 +519,12 @@ public class ProfilePreferencesPage extends UhcDriver {
 		return false;
 	}
 
-	
-	/** 
-	 * @toDo :  Validates the email edit functionality with valid email
+	/**
+	 * @toDo : Validates the email edit functionality with valid email
 	 */
 	public boolean validateemailsavefunctionality() {
-		NewEmail.sendKeys("nikitajain4@gmail.com");
-		emailConfirm.sendKeys("nikitajain4@gmail.com");
+		NewEmail.sendKeys("alisha_kapoor@optum.com");
+		emailConfirm.sendKeys("alisha_kapoor@optum.com");
 		SaveEmailButton.click();
 		try {
 			Thread.sleep(20000);
@@ -512,7 +532,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (email.getText().equals("nikitajain4@gmail.com")) {
+		if (email.getText().equals("alisha_kapoor@optum.com")) {
 			System.out.println("The element" + email.getText() + "is found");
 			return true;
 		} else {
@@ -521,8 +541,8 @@ public class ProfilePreferencesPage extends UhcDriver {
 		return false;
 	}
 
-	/** 
-	 * @toDo :  Validates the email edit functionality with invalid email
+	/**
+	 * @toDo : Validates the email edit functionality with invalid email
 	 */
 	public void validateinvalidemailerrormessage() {
 		EmailEditbutton.click();
@@ -537,9 +557,9 @@ public class ProfilePreferencesPage extends UhcDriver {
 		CanceEmaillButton.click();
 	}
 
-	
-	/** 
-	 * @toDo :  Validates the email edit functionality by entering different email id's in confirm email box from new email address
+	/**
+	 * @toDo : Validates the email edit functionality by entering different
+	 *       email id's in confirm email box from new email address
 	 */
 	public boolean validateduplicateerrormessage() {
 		EmailEditbutton.click();
@@ -568,46 +588,46 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	}
 
-	
-	/** 
-	 * @toDo : checks the see more ways to contact us link in the Need help section
+	/**
+	 * @toDo : checks the see more ways to contact us link in the Need help
+	 *       section
 	 */
 	public void validateseemorewaystext() {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,4000)", "");
-                try {
-			Thread.sleep(20000);
+		try {
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		validate(Seemorewaystext);
+		validate(contactUs);
 	}
 
-	
-	/** 
-	 * @toDo :  the user validates the page that opens up on  clicking the  see more ways to contact us link in the Need help section
+	/**
+	 * @toDo : the user validates the page that opens up on clicking the see
+	 *       more ways to contact us link in the Need help section
 	 */
 	public boolean clickcontactUslink() {
-		validate(contactUs);
+
 		contactUs.click();
 		try {
-			Thread.sleep(20000);
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (driver.getCurrentUrl().contains("/content/uhcm/home/contact.html")) {
+		if (driver.getCurrentUrl().contains("/contact-us/overview.html")) {
 			return true;
 		} else {
 			Assert.fail("The element " + contactuslink.getText() + "is not found");
 		}
 		return false;
-		
+
 	}
 
-	/** 
-	 * @toDo :  Validates the need help section headers
+	/**
+	 * @toDo : Validates the need help section headers
 	 */
 	public void validateneedhelpheader() {
 		validate(NeedHelpHeader);
@@ -651,11 +671,11 @@ public class ProfilePreferencesPage extends UhcDriver {
 		}
 	}
 
-	/** 
-	 * @toDo :  Validates the permanent address section header
+	/**
+	 * @toDo : Validates the permanent address section header
 	 */
 	public void validatepermanentaddress() {
-		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,400)", "");
 		try {
 			Thread.sleep(30000);
@@ -666,68 +686,71 @@ public class ProfilePreferencesPage extends UhcDriver {
 		validate(permanentaddress);
 
 	}
-	
-	/** 
-	 * @toDo :  Validates the contact us link and the page that opens up on clicking the contact us link
+
+	/**
+	 * @toDo : Validates the contact us link and the page that opens up on
+	 *       clicking the contact us link
 	 */
 
-
-	public boolean validatecontactuslink() {
+	public void validatecontactuslink() {
 		validate(contactuslink);
-		contactuslink.click();
-		try {
-			Thread.sleep(20000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if (driver.getCurrentUrl().contains("content/uhcm/home/contact.html")) {
-			return true;
-		} else {
-			Assert.fail("The element " + contactuslink.getText() + "is not found");
-		}
-		return false;
+
 	}
-	
-	/** 
-	 * @toDo :  Validates the Communication Preferences section headers
+
+	/**
+	 * @toDo : Validates the Communication Preferences section headers
 	 */
 
 	public void validatecommunicationpreferences() {
 		validate(communicationpreferencesheader);
-		validate(gopaperlessbutton);
 		validate(communicationpreferncessection);
 	}
-	
-	/** 
-	 * @toDo :  Validates the Go green button in Communication Preferences section 
+
+	/**
+	 * @toDo : Validates the Go green button in Communication Preferences
+	 *       section
 	 */
 
 	public GoGreenPage validategogreenbutton() {
-		gopaperlessbutton.click();
-		System.out.println(driver.getTitle());
-		if (getTitle().equalsIgnoreCase("gogreen")) {
+
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,350)", "");
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (gopaperlessbutton.isDisplayed()) {
+			gopaperlessbutton.click();
+		} else {
+
+			EditPreferencesButton.click();
+		}
+
+		System.out.println("Title is "+driver.getTitle());
+		if (getTitle().equalsIgnoreCase("Preferences")) {
 			return new GoGreenPage(driver);
 		}
 		return null;
 	}
-	
-	/** 
-	 * @toDo :  Validates the headers on Go green page
+
+	/**
+	 * @toDo : Validates the headers on Go green page
 	 */
 
 	public void validateheader() {
 		validate(gogreenleaf);
 		validate(goggreenheader);
-		validate(communicationheader);
-		validate(Profilenprefernceslink);
+
+
 
 	}
 
-	
-	/** 
-	 * @throws InterruptedException 
-	 * @toDo :  Validates the back Link functionality from Go green page to Profile page 
+	/**
+	 * @throws InterruptedException
+	 * @toDo : Validates the back Link functionality from Go green page to
+	 *       Profile page
 	 */
 	public ProfilePreferencesPage validatepnparrowlink() throws InterruptedException {
 		try {
@@ -749,10 +772,9 @@ public class ProfilePreferencesPage extends UhcDriver {
 		}
 		return null;
 	}
-	
 
-	/** 
-	 * @toDo :  Validates the elements of Phone section
+	/**
+	 * @toDo : Validates the elements of Phone section
 	 */
 
 	public void validatePhoneElements() {
@@ -760,25 +782,28 @@ public class ProfilePreferencesPage extends UhcDriver {
 		validate(Phonesection);
 		validate(PhoneEditButton);
 		// validate(PhoneEditLink);
-		
-}
-	
-	/** 
-	 * @toDo :  Validates the elements on clicking the Phone edit Button
+
+	}
+
+	/**
+	 * @toDo : Validates the elements on clicking the Phone edit Button
 	 */
 
 	public void validatePhoneEditElements() {
 		PhoneEditButton.click();
 		validate(PhoneForm);
-		/*validate(EveningTimePhoneTextField);
+
+		validate(EveningTimePhoneTextField);
 		validate(DaytimePhoneTextField);
-		validate(PhoneTopCancelButton);
+		validate(PhoneTopCancelButton); 
 		validate(PhoneCancelButton);
-		validate(PhoneSaveButton);*/
+		validate(PhoneSaveButton);
+
 	}
-	
-	/** 
-	 * @toDo :  Validates the functionality of cancel Button which appears post clicking the edit button in phone section
+
+	/**
+	 * @toDo : Validates the functionality of cancel Button which appears post
+	 *       clicking the edit button in phone section
 	 */
 
 	public void validatePhoneCancel() {
@@ -795,8 +820,9 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	}
 
-	/** 
-	 * @toDo :  Validates the functionality of saving or updating Phone numbers in phone section
+	/**
+	 * @toDo : Validates the functionality of saving or updating Phone numbers
+	 *       in phone section
 	 */
 	public void validatePhoneSave() {
 		if (PhoneSaveButton.isDisplayed()) {
@@ -817,8 +843,9 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	}
 
-	/** 
-	 * @toDo :  Validates the presence of Cancel Button post clicking the edit buttton of the Phone section
+	/**
+	 * @toDo : Validates the presence of Cancel Button post clicking the edit
+	 *       buttton of the Phone section
 	 */
 
 	public void validateCancelElement() {
@@ -827,9 +854,8 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	}
 
-	
-	/** 
-	 * @toDo :  Validates the elements of the temporary address section
+	/**
+	 * @toDo : Validates the elements of the temporary address section
 	 */
 	public void validatetempaddressElements() {
 
@@ -838,13 +864,21 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	}
 
-	
-	/** 
-	 * @toDo : Validates the elements that appear on clicking the edit button of the temp address section
+	/**
+	 * @toDo : Validates the elements that appear on clicking the edit button of
+	 *       the temp address section
 	 */
 	public void validatetempaddressEditElements() {
 		// TODO Auto-generated method stub'
-		tempEditButton.click();
+		if(tempEditButton.isDisplayed())
+		{
+			tempEditButton.click();
+		}
+		else
+		{
+			addAddress.click();
+
+		}
 		validate(Edittemporaryaddressform);
 		validate(StreetAddress2);
 		validate(City);
@@ -862,27 +896,20 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	}
 
-	
-	/** 
-	 * @toDo :  Validates the Cancel button that appear on clicking the edit button of the temp address section
+	/**
+	 * @toDo : Validates the Cancel button that appear on clicking the edit
+	 *       button of the temp address section
 	 */
 
 	public void validateTempAddressTopCancelElement() {
 		Assert.assertTrue(CancelButtontoptempAddress.getText().equalsIgnoreCase("CANCEL"));
 
 	}
-	
-	/** 
-	 * @toDo :  Validates the Save Functionality of the Temporary address section
-	 */
 
-	public void validatetempaddressSave() {
 
-	}
 
-	
-	/** 
-	 * @toDo :  Validates the Cancel Functionality of the temp address section
+	/**
+	 * @toDo : Validates the Cancel Functionality of the temp address section
 	 */
 	public void validatetempaddressCancel() {
 
@@ -893,9 +920,9 @@ public class ProfilePreferencesPage extends UhcDriver {
 		}
 
 	}
-	
-	/** 
-	 * @toDo :  Validates the presence of Go Paperless button
+
+	/**
+	 * @toDo : Validates the presence of Go Paperless button
 	 */
 
 	public void validateGoPaperlessbutton() {
@@ -905,16 +932,17 @@ public class ProfilePreferencesPage extends UhcDriver {
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}validate(gopaperlessbutton);
+		}
+		validate(gopaperlessbutton);
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
-	/** 
-	 * @toDo :  Validates the plan name on the Go Green page
+	/**
+	 * @toDo : Validates the plan name on the Go Green page
 	 */
 
 	public void validatePlanName() {
-		
+
 		try {
 			Thread.sleep(40000);
 		} catch (InterruptedException e) {
@@ -922,11 +950,11 @@ public class ProfilePreferencesPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		validate(planNameGoGreen);
-		
+
 	}
 
-	/** 
-	 * @toDo :  Validates the headers of the communication preferences section
+	/**
+	 * @toDo : Validates the headers of the communication preferences section
 	 */
 
 	public void validatecommunicationpreferencesheader() {
@@ -938,46 +966,40 @@ public class ProfilePreferencesPage extends UhcDriver {
 			System.out.println(cp);
 			Assert.assertTrue(cp.equalsIgnoreCase("Communication Preferences"));
 		}
-		
 
 	}
-	
-	/** 
-	 * @toDo :  Validates the  presence of Back to Profile and Preferences links on Go green page
+
+	/**
+	 * @toDo : Validates the presence of Back to Profile and Preferences links
+	 *       on Go green page
 	 */
 
 	public void validateBacktoPNPlink() {
 
 		validate(backLink1);
-		/*backLink1.click();
-		try {
-			Thread.sleep(20000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		gopaperlessbutton.click();
-		try {
-			Thread.sleep(20000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
+		/*
+		 * backLink1.click(); try { Thread.sleep(20000); } catch
+		 * (InterruptedException e) { // TODO Auto-generated catch block
+		 * e.printStackTrace(); } gopaperlessbutton.click(); try {
+		 * Thread.sleep(20000); } catch (InterruptedException e) { // TODO
+		 * Auto-generated catch block e.printStackTrace(); }
+		 */
 		validate(backLink1);
-		/*backLink2.click();
-		
-		if (driver.getTitle().equalsIgnoreCase("profile")) {
-			System.out.println("Pass");
-			return new ProfilePreferencesPage(driver);
-		}
-		return null;*/
+		/*
+		 * backLink2.click();
+		 * 
+		 * if (driver.getTitle().equalsIgnoreCase("profile")) {
+		 * System.out.println("Pass"); return new
+		 * ProfilePreferencesPage(driver); } return null;
+		 */
 
 	}
-	/** 
-	 * @toDo :  Validates the Note section on Go green page
+
+	/**
+	 * @toDo : Validates the Note section on Go green page
 	 */
 	public void validateNoteSection() {
-		
+
 		validate(NoteSection);
 		String noteContentActual = NoteSection.getText();
 		String noteContentExpected = "Note: it may take up to two mail cycles for your updated delivery preferences to take effect. Your mailing cycle-the length of time between documents-varies by document. When the paper mailings stop, you will receive an email notification alerting you that a new document has been posted to your online account. ";
@@ -985,32 +1007,42 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	}
 
-	
-	/** 
-	 * @toDo :  Validates the I have read checkbox  on Go green page
+	/**
+	 * @toDo : Validates the I have read checkbox on Go green page
 	 */
 	public void validateCheckbox() {
 		// TODO Auto-generated method stub
-		validate(iHavereadCheckbox);
-		iHavereadCheckbox.click();
+
+		if(iHavereadCheckbox.isDisplayed())
+		{
+			iHavereadCheckbox.click();
+		}
 	}
 
-	
-	/** 
-	 * @toDo :  Validates the save preferences functionality on Go green page
+	/**
+	 * @toDo : Validates the save preferences functionality on Go green page
 	 */
 	public void validateSavePreferences() {
 		// TODO Auto-generated method stub
 		validate(savePreferencesButton);
 		if (iHavereadCheckbox.isSelected()) {
 			savePreferencesButton.click();
-			validate(EditPreferenceButton);
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			Assert.assertTrue(EditPreferenceButton.isDisplayed());
+
+
 		}
 
 	}
-	
-	/** 
-	 * @toDo :  Validates the Go green header on Go green page
+
+	/**
+	 * @toDo : Validates the Go green header on Go green page
 	 */
 
 	public void validateGoGreenHeader() {
@@ -1027,6 +1059,86 @@ public class ProfilePreferencesPage extends UhcDriver {
 		}
 	}
 
+	public void validateNeedHelpShip() {
+
+		validate(NeedHelpHeader);
+		validate(Technicalsupportsection);
+		validate(GeneralQuestionsSection);
+		validate(ClaimsSupportSection);
+
+	}
+
+	public void validateTempAddressShip()
+	{
+		validate(tempAddressHeader);
+		Assert.assertFalse(tempEditButton.isDisplayed());
+
+	}
+
+	public void validateEmailEdit() {
+		// TODO Auto-generated method stub
+		validate(EmailEditbutton);
+		EmailEditbutton.click();
+		try {
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	public void validateEmailEditNokia() {
+		if(	EmailEditbutton.isDisplayed())
+		{
+			Assert.assertFalse(	EmailEditbutton.isDisplayed());
+		}
+		else{
+			System.out.println("Email edit button is not displayed.");
+		}
+
+
+		// TODO Auto-generated method stub
+
+	}
+
+	public void validatePhoneEditNokia() {
+
+		if(	PhoneEditButton.isDisplayed())
+		{
+			Assert.assertFalse(PhoneEditButton.isDisplayed());
+
+		}
+		else{
+			System.out.println("Phone edit button is not displayed.");
+		}
+		// TODO Auto-generated method stub
+
+	}
+
+	public void validateTempAddEditNokia() {
+		if(	tempEditButton.isDisplayed())
+		{
+			Assert.assertFalse(tempEditButton.isDisplayed());
+		}
+		else{
+			System.out.println("Temp address edit button is not displayed.");
+		}
+		// TODO Auto-generated method stub
+
+	}
+
+	public void validateMailAddEditNokia() {
+		// TODO Auto-generated method stub
+		if(	MailingAddressEditButton.isDisplayed())
+		{
+			Assert.assertFalse(MailingAddressEditButton.isDisplayed());
+		}
+		else{
+			System.out.println("Mailing address edit button is not displayed.");
+		}
+
+	}
 
 
 }

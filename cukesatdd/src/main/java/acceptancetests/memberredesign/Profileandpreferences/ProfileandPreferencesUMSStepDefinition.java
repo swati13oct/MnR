@@ -1,9 +1,12 @@
 
-package acceptancetests.memberredesign.myProfileAndPreferences;
+package acceptancetests.memberredesign.Profileandpreferences;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.json.JSONObject;
 import org.junit.Assert;
@@ -11,13 +14,18 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
-import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstantsMnR;
+//import acceptancetests.deprecated.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonConstants;
+import acceptancetests.data.LoginCommonConstants;
+//import acceptancetests.deprecated.profandpref.data.ProfnPrefCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import gherkin.formatter.model.DataTableRow;
+import pages.member.bluelayer.AccountHomePage;
+import pages.member.bluelayer.BenefitsAndCoveragePage;
 import pages.member.bluelayer.DashboardPage;
 import pages.member.bluelayer.LoginPage2;
 import pages.member.bluelayer.ProfilePreferencesPage;
@@ -42,12 +50,23 @@ public class ProfileandPreferencesUMSStepDefinition {
 	 */
 	@Given("^registered member with following details for Profile and Preferences flow$")
 	public void login_with_member(DataTable memberAttributes) throws InterruptedException {
-		/* Reading the given attribute from feature file */
-		List<List<String>> dataTable = memberAttributes.raw();
-		List<String> desiredAttributes = new ArrayList<String>();
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-		for (List<String> data : dataTable) {
-			desiredAttributes.add(data.get(0));
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String category = memberAttributesMap.get("Member Type");
+		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+		List<String> desiredAttributes = new ArrayList<String>();
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator.hasNext();) {
+			{
+				String key = iterator.next();
+				desiredAttributes.add(memberAttributesMap.get(key));
+			}
+
 		}
 		System.out.println("desiredAttributes.." + desiredAttributes);
 
@@ -68,44 +87,19 @@ public class ProfileandPreferencesUMSStepDefinition {
 		}
 
 		WebDriver wd = getLoginScenario().getWebDriver();
-		// MRScenario.keyEvent(wd);
-
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		LoginPage2 loginPage = new LoginPage2(wd);
-		DashboardPage dashboardPage = (DashboardPage) loginPage.loginWith(userName, pwd);
-
-		if (dashboardPage != null) {
-			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-			getLoginScenario().saveBean(PageConstantsMnR.dashboardPage, dashboardPage);
-
+		
+		AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
+		
+		if (accountHomePage != null) {
+			 getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
+			Assert.assertTrue(true);
 		}
-		else
-		{
-			System.out.println("NULL Dashboard page");
+		else {
+			Assert.fail("***** Error in loading  Redesign Account Landing Page *****");
 		}
 
-
-		// JSONObject accountHomeActualJson = null;
-
-		/* Get expected data */
-		/*
-		 * Map<String,JSONObject> expectedDataMap =
-		 * loginScenario.getExpectedJson(userName); JSONObject
-		 * accountHomeExpectedJson =
-		 * accountHomePage.getExpectedData(expectedDataMap);
-		 * 
-		 * if (accountHomePage != null) {
-		 * getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		 * getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,
-		 * accountHomePage); Assert.assertTrue(true); accountHomeActualJson =
-		 * accountHomePage.accountHomeJson; }
-		 * 
-		 * try { JSONAssert.assertEquals(accountHomeExpectedJson,
-		 * accountHomeActualJson, true); } catch (JSONException e) { // TODO
-		 * Auto-generated catch block e.printStackTrace(); }
-		 * 
-		 * getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP,
-		 * expectedDataMap);
-		 */
 
 	}
 
@@ -116,23 +110,20 @@ public class ProfileandPreferencesUMSStepDefinition {
 	 */
 	@Then("^the user navigates to Profile and Preferences page")
 	public void user_navigate_toProfileandPreferencespage() throws InterruptedException {
+        
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 
-		DashboardPage dashboardPage = (DashboardPage) getLoginScenario().getBean(PageConstantsMnR.dashboardPage);
-		ProfilePreferencesPage ProfilePreferencesPage = dashboardPage.navigateDirectToProfilePage();
+		ProfilePreferencesPage ProfilePreferencesPage = accountHomePage.navigateDirectToProfilePage();
 
-		if (ProfilePreferencesPage != null) {
+		if (ProfilePreferencesPage!= null) {
 			getLoginScenario().saveBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE, ProfilePreferencesPage);
-
 		}
-
 		else
-
-		{
-			System.out.println("Null returned while opening profile and Preferences page from Dashboard");
+        {
+			System.out.println("Pnp page object is Null ");
 		}
 
 	}
-
 	/*@Then("^the user navigates to Profile page")
 	public void user_navigate_toProfilepage() {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
@@ -199,6 +190,14 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 		String Password = (String) getLoginScenario().getBean(LoginCommonConstants.PASSWORD);
 		ProfilePreferencesPage.validateAccountEdit(Password);
+
+	}
+	@Then("^the user validate the temporary address section for ship member")
+	public void UserValidatesTempAddressShip() {
+		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+		ProfilePreferencesPage.validateTempAddressShip();
+	
 
 	}
 
@@ -286,16 +285,16 @@ public class ProfileandPreferencesUMSStepDefinition {
 		String userName = (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
 		try {
 			JSONObject profilenpreferencesActualJson = ProfilePreferencesPage.ProfileandPreferencesPageJson;
-			loginScenario.saveBean(ProfnPrefCommonConstants.MY_PROFILE_PREFERENCES_ACTUAL,
-					profilenpreferencesActualJson);
+			//loginScenario.saveBean(ProfnPrefCommonConstants.MY_PROFILE_PREFERENCES_ACTUAL,
+					//profilenpreferencesActualJson);
 			System.out.println("profilenpreferencesActualJson---->" + profilenpreferencesActualJson);
 			System.out.println(userName);
 			// Get expected data
 			String fileName = userName;
 			String directory = CommonConstants.PROFILE_AND_PREFERNCES_PAGE_DIRECTORY;
 			JSONObject myProfilenpreferencesexpectedjson = MRScenario.readExpectedJson(fileName, directory);
-			loginScenario.saveBean(ProfnPrefCommonConstants.MY_PROFILE_PREFERENCES_EXPECTED,
-					myProfilenpreferencesexpectedjson);
+			//loginScenario.saveBean(ProfnPrefCommonConstants.MY_PROFILE_PREFERENCES_EXPECTED,
+					//myProfilenpreferencesexpectedjson);
 			ProfilePreferencesPage.clickOndisclaimerlink(myProfilenpreferencesexpectedjson);
 			System.out.println("profilenpreferencesExpectedJson---->" + myProfilenpreferencesexpectedjson);
 
@@ -340,13 +339,12 @@ public class ProfileandPreferencesUMSStepDefinition {
 	 * @toDo :  Validates the contact us link and the page that opens up on clicking the contact us link
 	 */
 
-	@Then("^the user clicks on contact us then contact us page should come")
+	@Then("^the user validates contact us statement")
 	public void uservalidatescontactuslinkpermanentadress() {
 		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
 		ProfilePreferencesPage.validatecontactuslink();
-
 	}
 	/** 
 	 * @toDo :  Validates the elements of Email section
@@ -356,7 +354,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
-		ProfilePreferencesPage.validateEmail();
+		ProfilePreferencesPage.validateEmailEdit();
 	}
 
 	/** 
@@ -558,14 +556,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 	 * @toDo :  Validates the Save Functionality of the Temporary address section
 	 */
 
-	@Then("^the user validates the functionality of save Button in Temporary adrress section")
-	public void UserValidatestempaddressSaveButton() {
-		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
-				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
-		ProfilePreferencesPage.validatetempaddressSave();
-
-	}
 
 	/** 
 	 * @toDo :  Validates the Cancel Functionality of the temp address section
@@ -677,6 +668,54 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.validateGoGreenHeader();
 
 	}
+	/** 
+	 * @toDo :  Validates the Need help section for ship member
+	 */
+
+	@Then("^the user validate the need help section for ship member")
+	public void UserValidatesNeedHelpShip() {
+		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+
+		ProfilePreferencesPage.validateNeedHelpShip();
+
+	}
+	@Then("^the user validates the Presence of edit button in email section")
+	public void UserValidatesEmailEditNokia() {
+		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+
+		ProfilePreferencesPage.validateEmailEditNokia();
+
+	}
+	@Then("^the user validates the Presence of edit button in Phone section")
+	public void UserValidatesPhoneEditNokia() {
+		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+
+		ProfilePreferencesPage.validatePhoneEditNokia();
+
+	}
+	@Then("^the user validates the Presence of edit button in Temporary Address section")
+	public void UserValidatesTempAddEditNokia() {
+		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+
+		ProfilePreferencesPage.validateTempAddEditNokia();
+
+	}
+	@Then("^the user validates the Presence of edit button in Mailing Address section")
+	public void UserValidatesMailAddEditNokia() {
+		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+
+		ProfilePreferencesPage.validateMailAddEditNokia();
+
+	}
+	
+
+
+
 
 
 }

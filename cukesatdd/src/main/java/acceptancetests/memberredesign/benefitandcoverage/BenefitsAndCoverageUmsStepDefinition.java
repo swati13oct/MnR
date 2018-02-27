@@ -1,4 +1,4 @@
-package acceptancetests.memberredesign.benefitsAndCoverage;
+package acceptancetests.memberredesign.benefitandcoverage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,9 +15,9 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
-import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstantsMnR;
-import acceptancetests.memberredesign.expalnationofbenefits.PlanBenefitsAndCoverageCommonConstants;
+//import acceptancetests.deprecated.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonConstants;
+import acceptancetests.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
@@ -87,42 +87,18 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		}
 
 		WebDriver wd = getLoginScenario().getWebDriver();
-		// MRScenario.keyEvent(wd);
-
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		LoginPage2 loginPage = new LoginPage2(wd);
-		DashboardPage dashboardPage = (DashboardPage) loginPage.loginWith(userName, pwd, category);
-
-		if (dashboardPage != null) {
-			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-			getLoginScenario().saveBean(PageConstantsMnR.dashboardPage, dashboardPage);
-
-		} else {
-			System.out.println("Null Dashboard page");
+		
+		AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
+		
+		if (accountHomePage != null) {
+			 getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
+			Assert.assertTrue(true);
 		}
-
-		// JSONObject accountHomeActualJson = null;
-
-		/* Get expected data */
-		/*
-		 * Map<String,JSONObject> expectedDataMap =
-		 * loginScenario.getExpectedJson(userName); JSONObject
-		 * accountHomeExpectedJson =
-		 * accountHomePage.getExpectedData(expectedDataMap);
-		 * 
-		 * if (accountHomePage != null) {
-		 * getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		 * getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,
-		 * accountHomePage); Assert.assertTrue(true); accountHomeActualJson =
-		 * accountHomePage.accountHomeJson; }
-		 * 
-		 * try { JSONAssert.assertEquals(accountHomeExpectedJson,
-		 * accountHomeActualJson, true); } catch (JSONException e) { // TODO
-		 * Auto-generated catch block e.printStackTrace(); }
-		 * 
-		 * getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP,
-		 * expectedDataMap);
-		 * 
-		 */
+		else {
+			Assert.fail("***** Error in loading  Redesign Account Landing Page *****");
+		}
 
 	}
 
@@ -133,15 +109,13 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@Then("^the user navigates to Benefits and coverage page$")
 	public void user_views_BenefitsAndCoveragejenkins1() {
 
-		DashboardPage dashboardPage = (DashboardPage) getLoginScenario().getBean(PageConstantsMnR.dashboardPage);
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 
-		BenefitsAndCoveragePage benefitsCoveragePage = dashboardPage.navigateDirectToBnCPag();
+		BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag();
 
 		if (benefitsCoveragePage != null) {
 			getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
-
 		}
-
 		else
 
 		{
@@ -212,9 +186,9 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@Then("^the user navigates to Benefits coverage page$")
 	public void user_views_BenefitsAndCoveragejenkins() {
 
-		DashboardPage dashboardPage = (DashboardPage) getLoginScenario().getBean(PageConstantsMnR.dashboardPage);
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 
-		BenefitsAndCoveragePage benefitsCoveragePage = dashboardPage.navigateDirectToBnCPag();
+		BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag();
 
 		if (benefitsCoveragePage != null) {
 			getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
@@ -283,7 +257,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 
 
-	public void views_mydoument_validation_ums_site() {
+	/*public void views_mydoument_validation_ums_site() {
 		try {
 
 			JSONObject actual = (JSONObject) loginScenario
@@ -300,7 +274,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 			e.printStackTrace();
 		}
 
-	}
+	}*/
 
 	/** 
 	 * @toDo : The user checks the view and Document labels in Documents section
@@ -345,8 +319,8 @@ public class BenefitsAndCoverageUmsStepDefinition {
 					memberAttributesRow.get(i).getCells().get(1));
 		}
 		String language = memberAttributesMap.get("Language");
-		getLoginScenario().saveBean(PlanBenefitsAndCoverageCommonConstants.Language, language);
-		benefitsCoveragePage.validate_langdropdown_select(language);
+		getLoginScenario().saveBean(LoginCommonConstants.Language, language);
+		//benefitsCoveragePage.validate_langdropdown_select(language);
 	}
 
 
@@ -680,12 +654,22 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validatePlanOverview();
 	}
+	
+	/** 
+	 * @toDo : Validates the  Plan overview section for  a Non lis member Ind Member
+	 */
+	@And("the user validates Ind plan overview")
+	public void user_validate_IndplanOverviewsection() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validatePlanOverviewInd();
+	}
 
 	/** 
 	 * @toDo : Validates the  Plan overview section for  a lis member
 	 */
-	@And("the user validates plan overview section for a Lis member")
-	public void user_validate_planOverviewLis() {
+	@And("the user validates Lis member plan overview section")
+	public void user_validate_LisplanOverview() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validatePlanOverviewLis();
@@ -817,8 +801,8 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	/** 
 	 * @toDo : Validates the Need help section headers for a ship member
 	 */
-	@Then("^the user validates the need help section for ship")
-	public void uservalidatesneedhelpsectionShip() {
+	@Then("^the user validates ship the need help section")
+	public void uservalidatesShipneedhelpsection() {
 		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 
@@ -829,7 +813,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	/** 
 	 * @toDo : Validates the see more ways to contact us section for ship members in Need help section
 	 */
-	@Then("^the user validates see more ways to contact us section for ship")
+	@Then("^the user validates for ship see more ways to contact us section")
 	public void uservalidatesseeMoreWaysShip() {
 		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
@@ -841,7 +825,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	 * @toDo : Validates the contact us page on clicking on the link of contact us in Need help section
 	 */
 
-	@Then("^the user validates on clicking contact us link it should route to contact us page for ship member")
+	@Then("^the user validates for ship member on clicking contact us link it should route to contact us page")
 	public void uservalidatescontactus() {
 		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);

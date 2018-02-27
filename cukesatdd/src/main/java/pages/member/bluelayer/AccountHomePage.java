@@ -6,21 +6,35 @@ package pages.member.bluelayer;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
+
+import pages.member.bluelayer.*;
+
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.data.CommonConstants;
-import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
+import acceptancetests.data.LoginCommonConstants;
+import acceptancetests.data.MRConstants;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 
@@ -228,6 +242,15 @@ private WebElement myMenu;
 @FindBy(linkText = "Benefits and Coverage")
 private WebElement benefitsAndCoveragelink;
 
+@FindBy(xpath = "//button[@id='dropdown-toggle--1']/span[contains(text(),'Profile')]")
+private WebElement accountToggleDropdown;
+
+@FindBy(xpath = "//a[@class='dropdown-option' and contains(text(),'Account Settings')]")
+private WebElement accountSettingOption;
+
+@FindBy(xpath = "//header//h1")
+private WebElement heading;
+
 
 @FindBy(xpath="//a[contains(text(),'Search for a provider')]")
 private WebElement providerlinkinPCPSection;
@@ -282,11 +305,28 @@ private WebElement searchforproviderlinkinClaimsPage;
         private WebElement searchProviderLinkinFormsandResourcePage;
         
 
+        @FindBy(xpath="html/body/div[2]/div/div[4]/div[2]/div/table/tbody/tr[4]/td[2]/a")
+    	private WebElement linkbenefit;  
         
+        @FindBy(xpath=".//*[@id='IPEinvL']/map/area[2]")
+        private WebElement iPerceptionPopUp;
+        
+        @FindBy(xpath="html/body/div[2]/div/div[4]/div[2]/div/table/tbody/tr[4]/td[2]/a")
+    	private WebElement benefitcoveragelink;
+        
+        @FindBy(xpath="html/body/div[2]/div/div[4]/div[2]/div/table/tbody/tr[6]/td[2]/a")
+        private WebElement profilenpreferenceslink;
+        
+        
+
+        @FindBy(xpath = "//sticky[@id='sticky-nav']//nav[@id='main-nav']//a[contains(text(),'Coverage & Benefits')]")
+    	private WebElement BnClink;
         
         private PageData myAccountHome;
 
         public JSONObject accountHomeJson;
+        
+        private static String PAGE_URL = MRConstants.STAGE_DASHBOARD_NEW_DOMAIN_URL;
 
         public AccountHomePage(WebDriver driver,String category) {
                 super(driver);
@@ -303,8 +343,9 @@ private WebElement searchforproviderlinkinClaimsPage;
                         myAccountHome = CommonUtility.readPageData(fileName,
                                         CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);
                 }
+              
                 
-                openAndValidate();
+                //openAndValidate();
         }
 
         public AccountHomePage(WebDriver driver) {
@@ -312,6 +353,102 @@ private WebElement searchforproviderlinkinClaimsPage;
                 PageFactory.initElements(driver, this);
 //                openAndValidate();
         }
+        
+        public BenefitsAndCoveragePage navigateDirectToBnCPag() {
+    		
+        	if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) 
+        	{
+    			System.out.println("user is on Stage login page");			
+    			//CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);			
+    			if(driver.getCurrentUrl().contains("/dashboard"));
+    			{
+    				System.out.println("User is on dashboard page and URL is ==>"+driver.getCurrentUrl());
+    				driver.navigate().to(PAGE_URL+"medicare/member/benefits-coverage.html");
+    				System.out.println(driver.getCurrentUrl());
+    				CommonUtility.waitForPageLoad(driver, heading, 30);
+    				if(driver.getTitle().equalsIgnoreCase("Benefits Overview"))
+    	    		{
+    					System.out.println(driver.getTitle());
+    	    			return new BenefitsAndCoveragePage(driver);
+    	    		}
+    				
+        	}
+        	}
+        
+    			else if (MRScenario.environmentMedicare.equals("team-ci1") || MRScenario.environmentMedicare.equals("team-h") || MRScenario.environmentMedicare.equals("test-a") || MRScenario.environmentMedicare.equals("team-e")) {
+    				driver.navigate().to(PAGE_URL+"medicare/member/benefits-coverage.html");
+    				System.out.println(driver.getCurrentUrl());
+        		}
+    			else
+    			{
+    				driver.navigate().to(PAGE_URL+"medicare/member/benefits-coverage.html");
+    				System.out.println(driver.getCurrentUrl());
+        		}
+        	
+            
+    		/*if (validate(iPerceptionPopUp)) {
+                iPerceptionPopUp.click();
+                System.out.println("iPerception Pop Up displayed");
+    		}*/
+
+    		CommonUtility.waitForPageLoad(driver, heading, 50);
+    		if(driver.getTitle().equalsIgnoreCase("Benefits Overview"))
+    		{
+    			return new BenefitsAndCoveragePage(driver);
+    		}
+    			
+    		return null;
+    	}
+
+        
+        public ProfilePreferencesPage navigateDirectToProfilePage() throws InterruptedException  {
+    		
+        	if (MRScenario.environment.equalsIgnoreCase("stage")) 
+        	{
+    			System.out.println("user is on Stage login page");			
+    			//CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);			
+    			if(driver.getCurrentUrl().contains("/dashboard"));
+    			{
+    				
+    				accountToggleDropdown.click();
+    				validate(accountSettingOption);
+    				accountSettingOption.click();
+    				try {
+    					Thread.sleep(3000);
+    				} catch (InterruptedException e) {
+    					// TODO Auto generated catch block
+    					e.printStackTrace();
+    				}
+    				System.out.println("title is "+driver.getTitle());
+    				System.out.println("Current Url is "+driver.getCurrentUrl());
+    				CommonUtility.waitForPageLoad(driver, heading, 50);
+
+    				if (driver.getTitle().equalsIgnoreCase("Profile")) {
+
+    					return new ProfilePreferencesPage(driver);
+    				}
+    			
+        	}
+        	}
+        	
+        	
+    		if (validate(iPerceptionPopUp)) {
+                iPerceptionPopUp.click();
+                System.out.println("iPerception Pop Up displayed");
+    		}
+    		if (MRScenario.environment.equals("team-ci1") || MRScenario.environment.equals("team-h") || MRScenario.environment.equals("test-a") || MRScenario.environment.equals("team-e")) {
+    			profilenpreferenceslink.click();
+    		}else{
+    			profilenpreferenceslink.click();
+    		}
+    		CommonUtility.waitForPageLoad(driver, heading, 50);
+    		if(driver.getTitle().equalsIgnoreCase("Profile"))
+    		{
+    			return new ProfilePreferencesPage(driver);
+    		}
+    		
+    		return null;
+    	}
 
         public String getMyPlans() {
                 return planBox.getText();
