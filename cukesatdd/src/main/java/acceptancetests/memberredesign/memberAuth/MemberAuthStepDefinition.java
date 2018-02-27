@@ -22,27 +22,27 @@ import pages.dashboard.memberAuth.MemberAuthLoginPage;
 
 
 public class MemberAuthStepDefinition{
-	
-	private static final MemberAuthLoginPage MemberAuthLoginPage = null;
+
+	//private static final MemberAuthLoginPage MemberAuthLoginPage = null;
 	@Autowired
 	MRScenario loginScenario;
 
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-	
+
 	/** 
 	 * @todo :user to login for member auth
 	 */
 	@Given("^the user is on member auth login page$")
 	public void the_user_is_on_member_auth_login_page(){
 		WebDriver wd = getLoginScenario().getWebDriver();	
-		
+
 		MemberAuthLoginPage memberauth = new MemberAuthLoginPage(wd);
 		memberauth.navigateToLoginURL();
-		
+
 		if(memberauth!=null){
-getLoginScenario().saveBean(MRConstants.MEMBER_AUTH, memberauth);
+			getLoginScenario().saveBean(MRConstants.MEMBER_AUTH, memberauth);
 		}
 	}
 	/*public void uhc_login_page(){
@@ -52,33 +52,31 @@ getLoginScenario().saveBean(MRConstants.MEMBER_AUTH, memberauth);
        // LoginPage loginPage = new LoginPage(wd);
         MemberAuthLoginPage memberauth = new MemberAuthLoginPage(wd);
         getLoginScenario().saveBean(MRConstants.MEMBER_AUTH, memberauth);*/
-        
-//}
-	
+
+	//}
+
 	/** 
 	 * @todo :user to validate errors for member login with valid user and pwd 
 	 */
 	@Then ("^the member tries to login with invalid username and correct password and verify the error message$")
 	public void member_tries_to_login_with_credentials(DataTable profileAttributes) throws InterruptedException{
-		
+
 
 		MemberAuthLoginPage memberauth = (MemberAuthLoginPage) getLoginScenario().getBean(MRConstants.MEMBER_AUTH);
-		
+
 		List<DataTableRow> profileAttributesRow = profileAttributes
 				.getGherkinRows();
-				Map<String, String> profileAttributesMap = new LinkedHashMap<String, String>();
-				for (int i = 0; i < profileAttributesRow.size(); i++) {
+		Map<String, String> profileAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < profileAttributesRow.size(); i++) {
 
-				profileAttributesMap.put(profileAttributesRow.get(i).getCells()
-				.get(0), profileAttributesRow.get(i).getCells().get(1));
-				}
-			//MemberAuthLoginPage memberauth =  (MemberAuthLoginPage);
-				
-				memberauth.validateErrorMessage(profileAttributesMap.get("Username") ,profileAttributesMap.get("Password"), profileAttributesMap.get("Error Message"));
-				//memberauth.validateErrorMessage(loginname, loginpassword);
-				
+			profileAttributesMap.put(profileAttributesRow.get(i).getCells()
+					.get(0), profileAttributesRow.get(i).getCells().get(1));
+		}
+		//MemberAuthLoginPage memberauth =  (MemberAuthLoginPage);
+
+		memberauth.validateErrorMessage(profileAttributesMap.get("Username") ,profileAttributesMap.get("Password"), profileAttributesMap.get("Error Message"));
+		//memberauth.validateErrorMessage(loginname, loginpassword);
+
 	}
-
-	
 
 }
