@@ -1293,8 +1293,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	 */
 	public void vasSection() {
 
-		validate(textdiscountservices);
-		//validate(headerdiscountservices);
+		 validate(textdiscountservices);
+		
 	}
 
 	/**
