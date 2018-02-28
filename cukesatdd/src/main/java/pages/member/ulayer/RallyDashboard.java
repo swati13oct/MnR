@@ -58,9 +58,42 @@ public class RallyDashboard extends UhcDriver{
                			{
                				System.out.println("User is on dashboard page and URL is ====>"+driver.getCurrentUrl());
                				Thread.sleep(40000);
+               				
                				DOCUMENTSRESOURCES.click();
                				
                				
+               			}
+               				
+               		}
+               		else 
+               		{
+               			System.out.println("This script is only intended to be run using test harness on team-b or team-h. Update condition for your own environment");	
+               		}
+               		
+                      System.out.println(driver.getTitle());
+
+               		
+                       return new FormsAndResourcesPage(driver);
+                       
+       }
+	   
+	   
+	   public FormsAndResourcesPage navigatetoFormsnResourcesforactivemembers() throws InterruptedException
+       {
+                     //  DOCUMENTSRESOURCES.click();
+                      if (MRScenario.environmentMedicare.equalsIgnoreCase("team-ci1") || MRScenario.environmentMedicare.equalsIgnoreCase("team-g") ||MRScenario.environment.equalsIgnoreCase("test-a") ) {
+                    	  Thread.sleep(50000);
+               			driver.get("");
+               		}
+
+               		else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
+               			Thread.sleep(40000);
+               			System.out.println("user is on Stage login page");			
+               						
+               			if(driver.getCurrentUrl().contains("/dashboard"));
+               			{
+               				
+               			driver.get("https://stage-medicare.uhc.com/medicare/member/documents/overview.html");
                			}
                				
                		}
@@ -91,6 +124,12 @@ public class RallyDashboard extends UhcDriver{
 	public void scroll() {
 	  	JavascriptExecutor jse = (JavascriptExecutor)driver;
     	jse.executeScript("window.scrollBy(0,450)", "");
+    	
+	}
+	
+	public void scrollforactive() {
+	  	JavascriptExecutor jse = (JavascriptExecutor)driver;
+    	jse.executeScript("window.scrollBy(0,600)", "");
     	
 	}
 

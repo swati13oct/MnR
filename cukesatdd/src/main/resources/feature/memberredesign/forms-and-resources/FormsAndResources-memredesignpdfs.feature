@@ -2,13 +2,32 @@
 Feature: To validate plan materials section on forms and resources page in dashboard site
 
   @planMaterialsSectionValidation
+  
+  @activememberscenario
   Scenario Outline: 
     Given details of user to sign in on member redesign site to see forms and resources page
           | userId   | <userId>  |
       | password | <password> |
-    And click on the forms and resource link and navigate to forms and resource page
+    And click on the forms and resource link and navigate to forms and resource page for active member
     Then validate plan materials section
-    And click on the order plan materials and view temporary id card link and he is navigated to rallydashboard page
+    And for active member both the links are displayed
+    And clicking on the order plan materials link the user is navigated back to the forms and resources page
+    And clicking on the view temporary id card link user is navigated to rallydashboard page
+    Examples: 
+      | userId         | password   |	
+   # uhc
+      | q1_aarp_feb012 | Password@1 |
+  
+  
+  @terminatedmembervalidation
+  Scenario Outline: 
+    Given details of user to sign in on member redesign site to see forms and resources page
+          | userId   | <userId>  |
+      | password | <password> |
+    And click on the forms and resource link and navigate to forms and resource page for terminated member
+    Then validate plan materials section
+    And for terminated member order plan materials link is not displayed
+    And clicking on the view temporary id card link user is navigated to rallydashboard page
     Examples: 
       | userId         | password   |
    # uhc
@@ -19,7 +38,7 @@ Feature: To validate plan materials section on forms and resources page in dashb
     Given details of user to sign in on member redesign site to see forms and resources page
           | userId   | <userId>  |
       | password | <password> |
-    And click on the forms and resource link and navigate to forms and resource page
+    And click on the forms and resource link and navigate to forms and resource page for active member 
     Then validate that english is default language in dropdown 
     And change the language in the language dropdown
     Then validate the anoc section

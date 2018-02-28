@@ -19,7 +19,7 @@ import pages.member.redesign.NewLoginPage;
 import pages.member.ulayer.AccountHomePage;
 import pages.member.ulayer.LoginPage;
 import pages.member.ulayer.RallyDashboard;
-
+import atdd.framework.*;
        import acceptancetests.data.CommonConstants;
        import acceptancetests.data.PageConstants;
        import atdd.framework.MRScenario;
@@ -79,9 +79,9 @@ import cucumber.api.java.en.Then;
               
                               
               /**
-               * @toDo : navigation to the forms and resources page from dashboard
+               * @toDo : navigation to the forms and resources page from dashboard for terminated member
                */
-                              @And("^click on the forms and resource link and navigate to forms and resource page$")
+                              @And("^click on the forms and resource link and navigate to forms and resource page for terminated member$")
                               public void clickOnFormAndResourcesLink() throws InterruptedException {
                                    RallyDashboard rallydashboardpage = (RallyDashboard) loginScenario.getBean(PageConstants.RALLY_DASHBOARDPAGE);
                                               Thread.sleep(5000);
@@ -90,6 +90,57 @@ import cucumber.api.java.en.Then;
                                   getLoginScenario().saveBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE, formsAndResourcesPage);
                                               
                               }
+                              
+                              /**
+                               * @toDo : navigation to the forms and resources page from dashboard for active member
+                               */
+                                              @And("^click on the forms and resource link and navigate to forms and resource page for active member$")
+                                              public void clickOnFormAndResourcesLinkActive() throws InterruptedException {
+                                                   RallyDashboard rallydashboardpage = (RallyDashboard) loginScenario.getBean(PageConstants.RALLY_DASHBOARDPAGE);
+                                                              Thread.sleep(5000);
+                                                                     
+                                                  FormsAndResourcesPage formsAndResourcesPage = rallydashboardpage.navigatetoFormsnResourcesforactivemembers();     
+                                                  getLoginScenario().saveBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE, formsAndResourcesPage);
+                                                              
+                                              }
+                                              
+                         /**
+                          * @toDo : show that order plan material is not visible for terminated member
+                          */     
+                                   
+                                              
+                         @And("^for terminated member order plan materials link is not displayed$")
+                         public void linknotdisplayedforterminated()
+                         {
+                       	  
+                       	  FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);        	  
+                       	  formsAndResourcesPage.checkOrderPlanMaterialLinkforterminated();
+                         }                    
+                                              
+                                                             
+                                              
+                         @And("^for active member both the links are displayed$")
+                         public void linksdisplayedforactivemembers() throws InterruptedException
+                         {
+			                   FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);        	  
+			                                             
+			                   formsAndResourcesPage.getOrderPlanMaterialLink().isDisplayed();
+			                   Thread.sleep(2000);
+			                                        
+			                   formsAndResourcesPage.getTemporaryIdcardlink().isDisplayed();
+			                   Thread.sleep(2000);                     
+                       
+                         }                              
+                                              
+		               @And("^clicking on the order plan materials link the user is navigated back to the forms and resources page$")
+		                   public void planmateriallink() throws InterruptedException
+		                     {
+		                 FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+		                   Thread.sleep(2000);
+		                 formsAndResourcesPage.validatenclickOrderPlanMaterial();
+		                 
+				                                             
+		                        }
                               /**
                                * @toDo : verifies the EOB section
                                */
@@ -171,12 +222,9 @@ import cucumber.api.java.en.Then;
                               /**
                                * @toDo : clicks order plan materials and view temporary id card links
                                */
-                              @And("^click on the order plan materials and view temporary id card link and he is navigated to rallydashboard page$")
+                              @And("^clicking on the view temporary id card link user is navigated to rallydashboard page$")
                               public void clicklinksonplanmaterials() throws InterruptedException  {
                                               FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
-                                             /* formsAndResourcesPage.getOrderPlanMaterialLink().isDisplayed();
-                                              Thread.sleep(2000);
-*/                                         
                                               formsAndResourcesPage.getTemporaryIdcardlink().isDisplayed();
                                               Thread.sleep(2000);
                                               formsAndResourcesPage.scroll();

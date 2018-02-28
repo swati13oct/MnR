@@ -9,12 +9,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
-
 import acceptancetests.data.MRConstants;
-import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import junit.framework.Assert;
 
+@SuppressWarnings("deprecation")
 public class FormsAndResourcesPage extends UhcDriver {
 	
 	        @FindBy(linkText="VIEW DOCUMENTS & RESOURCES")
@@ -273,8 +272,20 @@ public class FormsAndResourcesPage extends UhcDriver {
                      Thread.sleep(5000);
                      String expectedURL ="https://stage-medicare.uhc.com/content/medicare/member/order-materials/overview.html";
                      String actualURL=driver.getCurrentUrl();
+                     System.out.println(actualURL);
                     Assert.assertEquals(expectedURL, actualURL);
                      driver.navigate().back();
+                     Thread.sleep(5000);
+                     String s=driver.getCurrentUrl();
+                     System.out.println(s);
+                     if(s.contains("overview"))
+                     {
+                    	 System.out.println("passed");
+                     }
+                     else 
+                     {
+                    	 System.out.println("failed");
+                     }
                 }
                 /**
                  * @toDo : temporary id card link
@@ -347,7 +358,11 @@ public class FormsAndResourcesPage extends UhcDriver {
 				    	jse.executeScript("window.scrollBy(0,150)", "");
 				    	
 				    }
-					
+			public void checkOrderPlanMaterialLinkforterminated(){
+				Assert.assertTrue(!(validate(OrderPlanMaterialLink)));
+				
+				
+			}
 				
                 
                 
