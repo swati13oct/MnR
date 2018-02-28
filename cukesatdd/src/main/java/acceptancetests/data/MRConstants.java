@@ -223,7 +223,7 @@ public class MRConstants {
   
   public static final String TEAMH_URL_TESTHARNES ="https://"+MRScenario.environment+"-werally.uhc.com/medicare/login/overview.html?testharness=true";
   
-  public static final String TEAM_MEDICARE_TESTHARNESS="https://"+MRScenario.environment+"-medicare.uhc.com/?testharness=true";
+  public static final String TEAM_MEDICARE_TESTHARNESS="https://"+MRScenario.environmentMedicare+"-medicare.uhc.com/?testharness=true";
   
   public static final String STAGE_DASHBOARD_NEW_DOMAIN_URL="https://"+MRScenario.environmentMedicare+"-medicare.uhc.com/";
   
