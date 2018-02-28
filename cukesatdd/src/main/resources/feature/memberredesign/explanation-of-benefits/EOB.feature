@@ -29,10 +29,10 @@ Then the user validates EOB count
 	Examples:
 	| planType    | memberType                |dateRange					   | eobType           |eobCount |
  	| PCP         | withEOB                   | 18 Months            | Medical           |		4		 |
-	| MAPD        |aarpWithEOB 			          | 90 Days    			     | Medical 	         |		5		 |
-	| MAPD        |aarpWithEOB 			          | 6 Months    		     | Medical 	         |		5		 |
-	| MAPD        |aarpWithEOB 			          | 12 Months    		     | Medical 	         |		5		 |
-	| MAPD        |aarpWithEOB 			          | 18 Months    		     | Medical 	         |		5		 |
+	| MAPD        |aarpWithEOB 			          | 90 Days    			     | Medical 	         |		8		 |
+	| MAPD        |aarpWithEOB 			          | 6 Months    		     | Medical 	         |		8		 |
+	| MAPD        |aarpWithEOB 			          | 12 Months    		     | Medical 	         |		8		 |
+	| MAPD        |aarpWithEOB 			          | 18 Months    		     | Medical 	         |		8		 |
 	| MAPD        |aarpWithEOB 			          | 6 Months   			     | Prescription Drug |		1		 |
 	| MAPD        |aarpWithEOB 			          | 12 Months  			     | Prescription Drug |		1		 |
 	| MAPD        |aarpWithEOB 			          | 18 Months   		     | Prescription Drug |		1		 |
