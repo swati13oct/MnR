@@ -15,7 +15,6 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
-import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
@@ -42,7 +41,6 @@ public class SelectDosagePage extends UhcDriver{
 	@FindBy(className = "drugListScroll")
 	WebElement dosageElement;
 
-	private PageData drugDosageInfo;
 
 	public JSONObject drugDosageJson;
 

@@ -9,7 +9,8 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import junit.framework.Assert;
+//import junit.framework.Assert;
+import org.junit.Assert;
 
 public class MemberAuthLoginPage extends UhcDriver {
 	
@@ -70,7 +71,7 @@ public class MemberAuthLoginPage extends UhcDriver {
 		search.click();
 		Thread.sleep(5000);
 		if (!(unpswdIncorrecterrormsg.isDisplayed())){
-						Assert.fail("Error message mismatch");	
+						Assert.fail("Error message mismatch");
 			
 		}
 		//if(!(this.unpswdIncorrecterrormsg.getText().trim().contains(Errormessage)))

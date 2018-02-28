@@ -28,9 +28,6 @@ public class OurPlansPage extends UhcDriver {
 	@FindBy(id = "nav-zipcode")
 	private WebElement zipfield;
 
-	@FindBy(xpath = "//*[@id='zipLookup']/p/a")
-	private WebElement LookUpZipCode;
-
 	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div[2]/form/span/span")
 	private WebElement errormessage;
 

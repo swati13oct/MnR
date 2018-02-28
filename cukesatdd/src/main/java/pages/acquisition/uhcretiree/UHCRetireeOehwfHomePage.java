@@ -35,7 +35,6 @@ public class UHCRetireeOehwfHomePage extends UhcDriver {
 
 	private static String UHCRETIREE_ACQISITION_OEHWF_PAGE_URL = MRConstants.UHCRETIREE_OEHWF_URL;
 	
-	private static String OEHWF_SITE_MAP_URL =  MRConstants.OEHWF_SITE_MAP_URL;
 
 	public UHCRetireeOehwfHomePage(WebDriver driver) {
 		super(driver);

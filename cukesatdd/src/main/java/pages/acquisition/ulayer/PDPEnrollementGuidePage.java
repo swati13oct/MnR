@@ -58,9 +58,6 @@ public class PDPEnrollementGuidePage extends UhcDriver{
 	@FindBy(id = "medicareNumber")
 	private WebElement medicareNumberField;
 	
-	@FindBy(id="planGuide1")
-	private WebElement chkBoxPlanName;
-	
 	@FindBy(id = "oneTimeAddress.addressLine1")
 	private WebElement addressLine1Field;
 	
@@ -78,9 +75,7 @@ public class PDPEnrollementGuidePage extends UhcDriver{
 	
 	@FindBys(value = { @FindBy(xpath = "//select[@id='oneTimeAddress.stateCode']/option") })
 	private List<WebElement> stateCodeDropDown;
-	
-	@FindBy(id="oneTimeAddress.stateCode")
-	private WebElement stateDrpDown;
+
 	
 	@FindBy(id = "oneTimeAddress.zipCode")
 	private WebElement zipCodeField;

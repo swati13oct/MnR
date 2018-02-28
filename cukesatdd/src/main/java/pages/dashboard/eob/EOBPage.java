@@ -1,6 +1,6 @@
 package pages.dashboard.eob;
 
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -42,20 +42,11 @@ public class EOBPage extends UhcDriver{
 	@FindBy(className="btn custom-date-search-btn")
 	private WebElement searchButton;
 
-	@FindBy(xpath="//*[contains(text(),'Learn More About My')]")
+	@FindBy(className="learnmoreunderline ng-scope")
 	private WebElement learnMoreLink;
 
-	@FindBy(xpath="//*[contains(text(),'How to read your Medical EOB ')]")
-	private WebElement readMedicalEOB;
-
-	@FindBy(xpath="//*[@id='collapseEOB']/ul/li/a")
+	@FindBy(id="eobvideoicon")
 	private WebElement eobVideoBox;
-	
-	@FindBy(xpath=".//*[@id='error-results']/div[1]/div/h2/span[3]")
-	private WebElement eobDetailsHeader;
-
-	@FindBy(xpath="//*[contains(text(),'Watch Video')]")
-	private WebElement readEOBVideo;
 
 	@FindBy(id="adobesitelink")
 	private WebElement adobeWebsiteLink;
@@ -66,7 +57,7 @@ public class EOBPage extends UhcDriver{
 	@FindBy(id="cancelbtn")
 	private WebElement siteLeavingCancelButton;
 
-	@FindBy(xpath=".//*[@id='IPEinvL']/map/area[2]")
+	@FindBy(className="modal-body")
 	private WebElement iPerceptionPopUp;
 
 	@FindBy(xpath = "//a[contains(text(), 'Medicare Advantage Plan')]")
@@ -93,13 +84,13 @@ public class EOBPage extends UhcDriver{
 	@FindBy(id="fromDatepicker")
 	private WebElement fromDate;	
 	
-	@FindBy(xpath="//*[@class='btn btn--primary' and text()='Search']")
+	@FindBy(className=" btn btn—primary")
 	private WebElement customSearchButton;
 	
-	@FindBy(xpath="//*[@class='bold number-title ng-binding']")
+	@FindBy(className="bold number-title ng-binding")
 	private WebElement eobCount;
 		
-	@FindBy(xpath="//i[@class='rightarrow']")
+	@FindBy(className="rightarrow")
 	private WebElement nextPageArrow;
 	
 	private static String STAGE_DASHBOARD_URL = MRConstants.DASHBOARD_URL;
@@ -183,7 +174,7 @@ public class EOBPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+			
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
@@ -290,13 +281,13 @@ public class EOBPage extends UhcDriver{
 		}
 		 
 		Select selectDate;
-		WebElement firstInDateDropDown;
+		
 		if(planType.equals("SHIP") || planType.equals("SSUP") || planType.equals("HIP")){
 			selectDate = new Select(eobMonthDateRangeSHIP);
-			firstInDateDropDown = selectDate.getFirstSelectedOption();
+			selectDate.getFirstSelectedOption();
 		}else{
 			selectDate = new Select(eobMonthDateRange);
-			firstInDateDropDown = selectDate.getFirstSelectedOption();
+			selectDate.getFirstSelectedOption();
 		}
 		/*if(firstInDateDropDown.getText().equals("Last 90 Days")){
 			System.out.println("First element Date Range dropdown displayed correctly "+ firstInDateDropDown.getText());
@@ -362,9 +353,9 @@ public class EOBPage extends UhcDriver{
 	
 		public EOBPage validateEobVideo(){
 		learnMoreLink.click();
-		if(readEOBVideo.isDisplayed()){
+		if(eobVideoBox.isDisplayed()){
 			System.out.println("HOW TO READ YOUR MONTHLY MEDICAL EXPLANATION OF BENEFITS (VIDEO) link displayed correctly");
-			readEOBVideo.click();
+			eobVideoBox.click();
 			try {
 				Thread.sleep(5000);
 				return new EOBPage(driver);
@@ -610,6 +601,7 @@ public class EOBPage extends UhcDriver{
 			numberOfPageDisplayed+=1;
 			System.out.println(numberOfPageDisplayed + "Page displayed for EOBs");
 		}
+		
 		return numberOfPageDisplayed;
 	}
 	

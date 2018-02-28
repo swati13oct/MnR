@@ -10,7 +10,6 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.CommonConstants;
@@ -45,38 +44,13 @@ public class VPPAarpPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@class='disabledprint ng-scope']")
 	List<WebElement> pdpPlanElement;
-	
-	@FindBy(id = "medicalinsursectionheading")
-	private WebElement pageHeading;
 
-	@FindBy(id = "editDrugMA")
-	private WebElement editDrugListLink;
-	
-	@FindBy(linkText = "All Primary Care Physicians")
-	private WebElement allPrimaryCarePhysicians;
-	
-	@FindBy(linkText = "Complete my list")
-	private WebElement completeMyList;
-	
-	@FindBys(value = { @FindBy(className = "firstTierFilterItem") })
-	private List<WebElement> physcianSearchTypes;
-	
-	
-	@FindBys(value = { @FindBy(xpath = "//div[@id='providerResultsContainer']/div") })
-	private List<WebElement> providerNameList;
-	
-	
 	@FindBy(id = "pageHeader")
 	private WebElement pageHeader;
 	
-	@FindBy(id = "providerSearchFrame")
-	private WebElement providerSearchIframe;
-	
-
 	@FindBy(className = "switchPlanYear")
 	private WebElement toggleplanYear;
 	
-	//@FindBy(xpath = "//div[@id='maplans_container']/div[3]/div/div[2]/div[1]/div/div[1]/div[1]/div/div[1]/div[2]/table/tbody/tr/td[3]/div/div[2]/div[3]/div[1]/p/a")
 	@FindBy(xpath=".//*[@id='doctorCoverMA']")
 	private WebElement MaProviderLink;
 	
@@ -86,9 +60,6 @@ public class VPPAarpPlanSummaryPage extends UhcDriver {
 
 	@FindBy(css="#pdpplans_container .planCompareBtn")
 	private WebElement comparePDPPlanChkBox;
-	
-	@FindBy(id="pdpplans")
-	private WebElement pdpShowPlansLnk;
 	
 	@FindBy(css="#maplans_container .compareHeading>p")
 	private WebElement compareUpto3PlansPopup;
