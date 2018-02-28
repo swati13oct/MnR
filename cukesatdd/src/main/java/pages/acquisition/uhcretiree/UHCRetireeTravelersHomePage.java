@@ -7,7 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-
 import acceptancetests.data.MRConstants;
 import atdd.framework.UhcDriver;
 
@@ -42,8 +41,6 @@ public class UHCRetireeTravelersHomePage extends UhcDriver {
 
 	private static String UHCRETIREE_ACQISITION_TRAVELERS_PAGE_URL = MRConstants.UHCRETIREE_TRAVELERS_URL;
 	
-	private static String UHCRETIREE_SITE_MAP_URL =  MRConstants.UHCRETIREE_SITE_MAP_TRAVELERS_URL;
-
 	
 	public SelectFormularyPage prescriptionsDrugLink() {
 		validate(FindaProviderlink);

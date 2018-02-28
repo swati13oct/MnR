@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import atdd.framework.UhcDriver;
 
 /**
@@ -363,11 +364,6 @@ public class RegistrationInformationPage extends UhcDriver {
 	/** email address field. */
 	@FindBy(id = "emailText")
 	private WebElement emailIdText;	
-	
-	
-	/** edit your profile link. */
-	@FindBy(linkText = "EDIT YOUR PROFILE")
-	private WebElement editYourProfileLink;
 	
 	/** print link. */
 	@FindBy(id = "printLink")

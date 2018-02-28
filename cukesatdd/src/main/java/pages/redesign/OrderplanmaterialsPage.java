@@ -4,7 +4,6 @@
 package pages.redesign;
 
 import java.util.NoSuchElementException;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;

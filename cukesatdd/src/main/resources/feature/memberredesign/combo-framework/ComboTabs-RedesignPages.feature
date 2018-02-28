@@ -1,6 +1,6 @@
 #@thePredators
 @ComboTabsRedesignPages
-Feature: Test Combo Member Plan Tabs for Redesign Pages
+Feature:P1.1 Test Combo Member Plan Tabs for Redesign Pages
 
 @TerminatedPlanTabsDisplay
 Scenario Outline: Verify Terminated Plan Tabs are displayed in Claims, EOB, Contact Us and Forms & Resources Redesign pages

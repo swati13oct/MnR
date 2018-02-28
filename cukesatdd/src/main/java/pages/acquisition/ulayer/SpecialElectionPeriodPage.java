@@ -7,31 +7,15 @@ import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import gherkin.formatter.model.DataTableRow;
 
 public class SpecialElectionPeriodPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='enrollment-step-1-part-1']/div[1]/div/div[2]/fieldset/span[1]/label")
@@ -42,9 +26,6 @@ public class SpecialElectionPeriodPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id='partSave']")
 	private WebElement saveAndContinue;
-
-	@FindBy(id = "esrdinfo")
-	private WebElement pageHeadingESRD;
 	
 	@FindBy(xpath = "//*[@id='enrollment-step-1-part-1']/div[2]/a[2]")
 	private WebElement previous;
@@ -238,9 +219,8 @@ public class SpecialElectionPeriodPage extends UhcDriver {
 	public void selectSixthQuestion(String date) {
 		//checkBoxSixA.click();
 		//checkBoxSixB.click();
-		String[] Date = date.split(",");
-		String startDate = Date[0];
-		String endDate = Date[1];
+	
+
 		//enterDateSixA.sendKeys(startDate);
 		//enterDateSixB.sendKeys(endDate);
 	}

@@ -1,6 +1,6 @@
 @gladiators
 @registrationAccConfirmation
-Feature: To test registration flow in redesign portal
+Feature: G1.8To test registration flow in redesign portal
 
  @memberRegistrationFlow
  Scenario Outline: To verify the member registration flow in redesign portal

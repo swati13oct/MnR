@@ -24,11 +24,6 @@ import atdd.framework.UhcDriver;
  */
 public class PharmacyResultPage extends UhcDriver{
 
-	@FindBy(id = "currentRowObject")
-	private WebElement pharmacyResults;
-
-	@FindBy(id ="disclosure_link")
-	private WebElement logOut;
 
 	public JSONObject pharmacyResultJson;
 
@@ -52,11 +47,6 @@ public class PharmacyResultPage extends UhcDriver{
 	@FindBy(xpath = "//div[@class='mapContainer']/div/div/div/div/div[4]/div[4]/div/div[2]/div/div/p")
 	private List<WebElement> viewMapresult;
 	
-	@FindBy(xpath = "//a[@id='find_searchagainbtn']")
-	private WebElement searchAgainButton;
-	
-	@FindBy(id = "find_searchbtn")
-	private WebElement searchPharmaciesButton;
 	
 	public PharmacyResultPage(WebDriver driver){
 		super(driver);
@@ -208,16 +198,16 @@ public class PharmacyResultPage extends UhcDriver{
 	
 	public boolean navigateTopharmacySearch(){
 		boolean flag = true;
-		searchAgainButton.click();
+		//searchAgainButton.click();
 		try {
 			Thread.sleep(14000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (!searchPharmaciesButton.isDisplayed()) {
-			flag  = false;
-		}
+		//if (!searchPharmaciesButton.isDisplayed()) {
+			//flag  = false;
+		//}
 		return flag;
 		
 	}

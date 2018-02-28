@@ -10,8 +10,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -21,7 +19,6 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.ulayer.DrugCostEstimatorPage;
 
 /**
  * @author gumeshna
@@ -32,14 +29,8 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(id = "planDetailsPage")
 	private WebElement plandetails;
 
-	@FindBy(id = "learnmorebtnDetails")
-	private WebElement waysToSaveLink;
-
 	@FindBy(xpath=".//*[@id='highlights']/div/a")
 	private WebElement enrollInPlanBtn;
-
-	@FindBy(xpath = "//*[@id='detailplanNameBox']/div/div/div/span/h3")
-	private WebElement planName;
 
 	@FindBy(xpath = "//*[@id='yourDruglist']/div[1]/p[4]")
 	private WebElement errorMessage;
@@ -62,10 +53,6 @@ public class PlanDetailsPage extends UhcDriver {
 	
 	@FindBy(xpath = ".//*[@id='highlights']/div/div/span[2]/span")
 	private WebElement compareMessageBox;
-
-
-       @FindBy(id = "yourDceInitial")
-	private WebElement enterDrugInfoLink;
 	
 	    @FindBy(xpath = "//*[@id='yourDruglist']/div[2]/table/tbody/tr[3]/td/span[2]")
     private WebElement drugListCost;
@@ -81,9 +68,6 @@ public class PlanDetailsPage extends UhcDriver {
 	
 	@FindBy(xpath="//*[@id='detail-0']/div/div/div[1]")
 	private WebElement medBenefitsSection;
-	
-	@FindBy(xpath="//*[@id='detail-0']/div/div/div[2]")
-	private WebElement addBenefitsSection;
 
 	@FindBy(id = "prescriptiondrug")
     private WebElement presDrugTab;
@@ -91,25 +75,11 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(xpath=".//*[@id='drugBenefits']")
 	private WebElement drugBenefitsSection;
 	
-	@FindBy(xpath=".//*[@id='DrugListDetails']")
-	private WebElement drugListEditBtn;
-	
 	@FindBy(id = "estimateYourDrugsLink")
 	private WebElement estimateDrugBtn;
 	
-	@FindBy(xpath="//*[@id='detailTabs']/div[1]/a[1]")
-	private WebElement optRidersTab;
-	
-	@FindBy(xpath=".//*[@id='optionalRiders']")
-	private WebElement optRiderSection;
-	
 	@FindBy(id="plancosts")
 	private WebElement planCostsTab;
-	
-	@FindBy(id="planCosts")
-	private WebElement planCostsSection;
-	
-	private PageData vppPlanDetails;
 
 	public JSONObject vppPlanDetailsJson;
 	

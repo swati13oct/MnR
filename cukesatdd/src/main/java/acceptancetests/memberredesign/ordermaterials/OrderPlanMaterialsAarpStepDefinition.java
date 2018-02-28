@@ -3,8 +3,6 @@
  */
 package acceptancetests.memberredesign.ordermaterials;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -13,32 +11,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.redesign.UlayerHomePage;
-import pages.redesign.OrderplanmaterialsPage;
-import pages.redesign.PlanMaterialConfirmationPage;
-import pages.redesign.RedesignLoginPage;
 import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageConstants;
+import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstantsMnR;
 import acceptancetests.memberredesign.claims.ClaimsCommonConstants;
-import acceptancetests.data.LoginCommonConstants;
-import acceptancetests.memberredesign.ordermaterials.OrderPlanMaterialsCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
-import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
+import pages.redesign.OrderplanmaterialsPage;
+import pages.redesign.PlanMaterialConfirmationPage;
+import pages.redesign.RedesignLoginPage;
+import pages.redesign.UlayerHomePage;
 /**
  * @author sdwaraka
  *

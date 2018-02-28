@@ -12,7 +12,7 @@ And the user enters following details for pharmacy search in UMS Site
 	| County Name	| <county>	|
 And the user chooses a plan from dropdown in UMS Site
 	| <planName> |
-And the user searches available pharmacies by selecting "Show pharmacies for ALL types"
+#And the user searches available pharmacies by selecting "Show pharmacies for ALL types"
 Then the user validates the available pharmacies page in UMS site
 		
 Examples:

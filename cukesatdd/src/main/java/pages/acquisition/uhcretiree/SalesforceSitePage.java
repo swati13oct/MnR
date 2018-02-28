@@ -1,11 +1,8 @@
 package pages.acquisition.uhcretiree;
 
-import java.util.ArrayList;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.acquisition.uhcretiree.AcquisitionHomePage;
 import atdd.framework.UhcDriver;
 
 

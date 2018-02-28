@@ -21,7 +21,6 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
 /**
  * @author pperugu
@@ -31,9 +30,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(id = "cta-zipcode")
 	private WebElement zipCodeField;
-
-	@FindBy(id = "topic-selectSelectBoxIt")
-	private WebElement selectSelectBoxIt;
 
 	@FindBy(className = "fd_myPlans")
 	private WebElement myPlansTab;
@@ -53,71 +49,18 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
 	private WebElement OurPlansLink1;
 
-	@FindBy(xpath = "//a[text()='Look up ZIP code']")
-	private WebElement LookUpZipCode1;
-
-	@FindBy(xpath = "//*[@id='zipLookup']/p/a")
-	private WebElement lookupZipcode21;
-
-	@FindBy(xpath = "//*[@id='subnav_2']/div/div/div[2]/form/span/span")
-	private WebElement errormessage1;
-
-	@FindBy(className = "zip-button")
-	private WebElement FindPlansButton;
-
 	@FindBy(id = "zipcodebtn")
 	private WebElement findPlansButton;
-	
-	@FindBy(id="takequizbtn")
-	private WebElement takequizbtn;
-
-	@FindBy(id = "compareplans")
-	private WebElement compareplans;
-
-	@FindBy(id = "picktopicbtn")
-	private WebElement picktopicbtn;
 
 	@FindBy(id = "learn-zipcode")
 	private WebElement learnzipCodeField;
 
-	@FindBy(id = "chooseUhcBtn")
-	private WebElement chooseUhcButton;
-
-	@FindBy(id = "state_select")
-	private WebElement stateDropDown;
-
-	@FindBy(id = "topic-selectSelectBoxIt")
-	private WebElement topicselect;
-
-	@FindBy(id = "pageHeader")
-	private WebElement pageHeader;
-
-	@FindBys(value = { @FindBy(xpath = "//ul[@id='topic-selectSelectBoxItOptions']/li") })
-	private List<WebElement> topicDropDownValues;
-
 	@FindBy(id = "lookzip")
 	private WebElement lookzip;
 
-	@FindBy(id = "findazip_box")
-	private WebElement zipCodeSearchPopup;
-
-	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
-	private WebElement OurPlansLink;
-
-	@FindBy(xpath = "//a[text()='Look up ZIP code']")
-	private WebElement LookUpZipCode;
-
-	@FindBy(xpath = "//*[@id='zipLookup']/p/a")
-	private WebElement LookUpZipCode2;
-
-	@FindBy(xpath = "//*[@id='subnav_2']/div/div/div[2]/form/span/span")
-	private WebElement errormessage;
 
 	@FindBy(id = "zipcodebtn")
 	private WebElement viewPlansButton;
-
-	/*@FindBy(id = "vpp_selectcounty_box")
-	private WebElement countyModal;*/
 	
 	@FindBy(xpath = "//div[@class='modal-title']")
 	private WebElement countyModal;
@@ -126,60 +69,17 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "homefooter")
 	private WebElement homefooter;
 
-	@FindBy(id = "lookzip")
-	private WebElement lookupZipcode;
-
-	@FindBy(id = "medicareTitle")
-	private WebElement medicareTitleText;
-
-	@FindBy(linkText = "pharmacy")
-	private WebElement pharmacyLink;
-
-	/*@FindBys(value = { @FindBy(xpath = "//table[@id='selectcountytable']/tbody/tr/td") })
-	List<WebElement> countyRows;
-	*/
 	@FindBys(value = { @FindBy(id="selectCounty")})
 	List<WebElement> countyRows;
 
-
-	@FindBy(xpath = "//div[@id='findazip_box']/div/div/div/h4")
-	private WebElement zipCodeSearchPopupHeading;
-
 	@FindBy(xpath = "/html/body/div[3]/div/table/tbody/tr[3]/td/table/tbody/tr[2]/td/div/div[2]/div/div/div[2]/div/ul/li[2]/a")
 	WebElement zipCodebtn;
-
-	@FindBy(className = "disclaimer hideLink")
-	private WebElement disclaimerHideLink;
-
-	@FindBy(linkText = "View all disclaimer information")
-	private WebElement disclaimerViewLink;
-
-	@FindBy(className = "disclaimerCon")
-	private WebElement disclaimerCon;
-
-	@FindBy(className = "disclaimer-extended")
-	private WebElement disclaimerExtented;
-
-	@FindBy(id = "insuranceplan")
-	private WebElement ourPlans;
-
-	@FindBy(xpath = "//div[@id='insuranceplan_nav']/div/div[1]/ul/li/a/span")
-	private WebElement maVppLink;
-
-	@FindBy(xpath = "//div[@id='insuranceplan_nav']/div/div[3]/ul/li/a/span")
-	private WebElement pdpVppLink;
 	                 
 	@FindBy(id = "atdd_mpd_plans")
 	private WebElement pdp_moreHelpInfoLink;
 
 	@FindBy(id = "atdd_ma_plans")
 	private WebElement ma_moreHelpInfoLink;
-
-	@FindBy(id = "ipeL")
-	private WebElement feedBackPopUp;
-
-	@FindBy(xpath = "//div[@id='ipeL']/div[2]/map/area[3]")
-	private WebElement popUpcloseLink;
 
 	@FindBy(id = "ghn_lnk_1")
 	public static WebElement navigationSectionHomeLink;
@@ -205,38 +105,26 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='subnav_4']/div/div/div[2]/div/a")
 	public static WebElement forgotusernamepasswordlink;
 
-	@FindBy(xpath = "//*[@id='medicareTitle']/h1")
-	private WebElement usernameassistancetext;
-
 	@FindBy(xpath = "//*[@id='subnav_4']/div/div/div[2]/div/span[2]/a")
 	public static WebElement registerherelink;
-
-	@FindBy(xpath = "//*[@id='subnav_4']/div/div/div[1]/div[1]/div[1]/h3/a/span")
-	private WebElement healthcenterslink;
 
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
 	
 	private static String AARP_ACQISITION_OFFLINE_PAGE_URL = MRConstants.AARP_URL_OFFLINE;
 
 	private PageData globalFooter;
-	private PageData browserCheckData;
+
 
 	public JSONObject globalFooterJson;
 	public JSONObject browserCheckJson;
 
-	private PageData homePageDisclaimer;
 	public JSONObject homePageDisclaimerJson;
 
-	private PageData homePageDisclaimerHide;
 	public JSONObject homePageDisclaimerHideJson;
 
-	private PageData alreadyPlanMember;
 	public JSONObject alreadyPlanMemberJson;
-
-	private PageData medicareEducationDropDown;
 	public JSONObject medicareEducationDropDownJson;
 
-	private PageData header;
 	public JSONObject headerJson;
 
 	private PageData globalHeader;
@@ -244,8 +132,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public JSONObject globalHeaderJson;
 
 	public JSONObject ourplansdropdownJson;
-
-	private PageData ourplansdropdown;
 
 	public JSONObject homeJson;
 

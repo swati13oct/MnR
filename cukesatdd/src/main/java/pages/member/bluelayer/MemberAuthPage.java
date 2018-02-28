@@ -1,20 +1,10 @@
 package pages.member.bluelayer;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import pages.acquisition.bluelayer.LoginAssistancePage;
-
-import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
-import acceptancetests.data.PageData;
-import acceptancetests.util.CommonUtility;
-import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 

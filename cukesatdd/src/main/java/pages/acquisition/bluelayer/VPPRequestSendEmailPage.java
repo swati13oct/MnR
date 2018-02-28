@@ -1,7 +1,5 @@
 package pages.acquisition.bluelayer;
 
-import java.util.Map;
-
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -9,7 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.acquisition.ulayer.AgentAppointmentConfirmationPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.util.CommonUtility;
@@ -47,9 +44,6 @@ public class VPPRequestSendEmailPage extends UhcDriver {
 	
 	@FindBy(xpath="//a[@class='cta-button close-modal']")
 	private WebElement okButton;
-
-	@FindBy(xpath="//*[contains(text(),'Email Updates')]/parent::div/following-sibling::div/div/p")
-    private WebElement emailBodyContent;
 	
 	public VPPRequestSendEmailPage(WebDriver driver) {
 		super(driver);

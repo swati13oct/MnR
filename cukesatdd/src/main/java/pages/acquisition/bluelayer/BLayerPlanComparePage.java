@@ -9,29 +9,25 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.PlanSelectorPage;
-import pages.acquisition.bluelayer.ResponsivePlanSummaryUhc;
 
 public class BLayerPlanComparePage extends UhcDriver {
 	
-//	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[3]/div/div[1]/div[3]/div/div/span[1]/label")
+
 	@FindBy(xpath = "(.//label[contains(text(),'Add to compare')])[1]")
 	private WebElement Plan2HMO;
 	
-//	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[3]/div/div[2]/div[3]/div/div/span[1]/label")
+
 	@FindBy(xpath = "(.//label[contains(text(),'Add to compare')])[1]")
 	private WebElement Plan1HMO;
 	
-/*	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[2]/div/div[2]/div[3]/div/div/span[3]/a")
-	private WebElement ComparePlansLink;*/
+
 	
 	//@FindBy(linkText = "Compare plans")
 	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[2]/div/div[2]/div[3]/div/div/span[3]/a")
 	private WebElement ComparePlansLink;
-	/*
-	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[2]/div/div[1]/div[3]/div/div/span[3]/a")
-	private WebElement ComparePlanLink;	*/
+
 	
 	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[2]/div/div[1]/div[3]/div/div/span[3]/a")
 	private WebElement ComparePlanLink;
@@ -44,9 +40,6 @@ public class BLayerPlanComparePage extends UhcDriver {
 	
 	@FindBy(id="nav")
 	private WebElement MenuLayer;
-	
-	@FindBy(xpath = ".//*[@id='fixTable']/tbody/tr[34]/td/p")
-	private WebElement FootNotes;
 	
 	@FindBy(linkText = "Summary of Plan Benefits (PDF)")
 	private WebElement FootNotesPDF;
@@ -80,9 +73,6 @@ public class BLayerPlanComparePage extends UhcDriver {
 	
 	@FindBy(xpath="//*[@id='fixTable']/tbody/tr[8]/td[2]/div[1]/div/span[2]/sup")
 	private WebElement Superscript;
-
-	@FindBy(id="8075b5b6-838a-4c09-822f-ef18ce42baab_toolTip")
-	private WebElement toolTip;
 	
 	@FindBy(xpath="//*[@id='fixTable']/tbody/tr[8]/td[2]/div[1]/div/span[1]")
 	private WebElement TierValue;

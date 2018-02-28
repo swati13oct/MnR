@@ -1,5 +1,5 @@
 @registrationStepThree @Gladiators
-Feature: To test registration flow in redesign portal
+Feature: G1.9To test registration flow in redesign portal
 
   Scenario Outline: To verify member with no additional plan is navigated to Create Account after clicking next button on Plan Information
     Given the member is on registration page of redesign portal
