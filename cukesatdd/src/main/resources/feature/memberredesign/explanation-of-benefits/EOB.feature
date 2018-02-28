@@ -29,10 +29,10 @@ Then the user validates EOB count
 	Examples:
 	| planType    | memberType                |dateRange					   | eobType           |eobCount |
  	| PCP         | withEOB                   | 18 Months            | Medical           |		4		 |
-	| MAPD        |aarpWithEOB 			          | 90 Days    			     | Medical 	         |		5		 |
-	| MAPD        |aarpWithEOB 			          | 6 Months    		     | Medical 	         |		5		 |
-	| MAPD        |aarpWithEOB 			          | 12 Months    		     | Medical 	         |		5		 |
-	| MAPD        |aarpWithEOB 			          | 18 Months    		     | Medical 	         |		5		 |
+	| MAPD        |aarpWithEOB 			          | 90 Days    			     | Medical 	         |		8		 |
+	| MAPD        |aarpWithEOB 			          | 6 Months    		     | Medical 	         |		8		 |
+	| MAPD        |aarpWithEOB 			          | 12 Months    		     | Medical 	         |		8		 |
+	| MAPD        |aarpWithEOB 			          | 18 Months    		     | Medical 	         |		8		 |
 	| MAPD        |aarpWithEOB 			          | 6 Months   			     | Prescription Drug |		1		 |
 	| MAPD        |aarpWithEOB 			          | 12 Months  			     | Prescription Drug |		1		 |
 	| MAPD        |aarpWithEOB 			          | 18 Months   		     | Prescription Drug |		1		 |
@@ -91,7 +91,21 @@ And the user validates how to read medical eob PDF
 	| MAPD        |aarpWithEOB 			          | 12 Months    		 | Medical 	         |
 	| MAPD        |aarpWithEOB 			          | 18 Months    		 | Medical 	         |
 
-
+@febRelease2018 
+Scenario Outline: To verify NICE EOB and click on the pdf
+Given registered AMP with for EOB flow
+	| Plan Type      |<planType>  |
+	| Member Type    |<memberType>|
+Then the user navigates to EOB page and validates the page
+ |Date Range|<dateRange>  |
+ |Plan Type |<planType>   |
+ |EOB Type  |<eobTypeData>|
+And the user clicks on first eob from the list
+ 	Examples:
+	| planType    | memberType    |dateRange     | eobTypeData       |
+	| MAPD        | NICE_EOB      | 18 Months    | Medical           |
+	| MA          | NICE_EOB 			| 18 Months    | Medical 	         |
+	| MAPD_GRP    | NICE_EOB 			| 18 Months    | Medical 	         |
  
  
  
