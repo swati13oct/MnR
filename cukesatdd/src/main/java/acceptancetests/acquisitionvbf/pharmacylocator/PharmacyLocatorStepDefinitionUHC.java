@@ -255,10 +255,9 @@ public class PharmacyLocatorStepDefinitionUHC {
 	 */
 	@Then("^the user validates the error message for no pharmacies found for below pharmacy$")
 	public void validates_error_msg_for_no_pharmacies_found(DataTable pharmacyTypeAttributes){
-		String[] pharmacyTypeArray = pharmacyTypeAttributes.getGherkinRows().get(0).getCells().get(0).split(",");
+		
 
-		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
-				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		 getLoginScenario().getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		//jchen118 remove the non existing btn start
 		//pharmacySearchPage.validateNoPharmacyErrormsg(pharmacyTypeArray);
 		//jchen118 remove the non existing btn end

@@ -21,14 +21,6 @@ import atdd.framework.UhcDriver;
  */
 public class EnrollPlanInfoPage extends UhcDriver{
 
-	@FindBy(xpath = "//div[@id='chooseplan']/div/div[3]/div/table/tbody/tr[1]/td[2]")
-	private WebElement planName;
-
-	@FindBy(xpath = "//div[@id='chooseplan']/div/div[3]/div/table/tbody/tr[2]/td[2]")
-	private WebElement zipcode;
-
-	@FindBy(xpath = "//div[@id='chooseplan']/div/div[3]/div/table/tbody/tr[3]/td[2]")
-	private WebElement premium;
 
 	@FindBy(id = "continueEnrollment")
 	private WebElement continueEnrollmentButton;

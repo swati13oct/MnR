@@ -75,25 +75,10 @@ public class BeneficiaryInformationPage extends UhcDriver{
 	
 	//@FindBy(id = "same-address-no")
 	@FindBy(xpath = "//*[@id='enrollment-step-1-part-0']/div[1]/div/div[2]/fieldset/span[18]/label")
-	private WebElement mailingAddressNoButton;
-	
-	@FindBy(id = "field-mail-address-1")
-	private WebElement mailaddress1Field;
-	
-	@FindBy(id = "field-mail-address-2")
-	private WebElement mailaddress2Field;
-	
-	@FindBy(id = "field-mail-state")
-	private WebElement mailcityField;
-	
-	@FindBy(id = "field-mail-zip")
-	private WebElement mailstateField;	
+	private WebElement mailingAddressNoButton;	
 
 	@FindBy(id = "part1save")
 	private WebElement enrollmentNext;
-	
-	@FindBy(id="partSave")
-	private WebElement continueButton;
 	
 	@FindBy(xpath = "//div[@class='enrollment_content']/div[2]/form/h2")
 	private WebElement pageHeading;

@@ -411,8 +411,7 @@ public class DceVppStepDefinitionUHC {
 
 		SelectPharmacyPage pharmacySearchPage = (SelectPharmacyPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		SelectPharmacyPage updatedPharmacyPage = pharmacySearchPage
-				.searchPharmacies(pharmacyType, distance);
+		 pharmacySearchPage.searchPharmacies(pharmacyType, distance);
 	}
 
 	/**

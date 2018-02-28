@@ -17,7 +17,6 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
-import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
@@ -34,9 +33,6 @@ public class ManageDrugPage extends UhcDriver {
 	@FindBy(css = "div > img[alt=\"Plus Image\"]")
 	WebElement plusSign;
 
-	@FindBy(xpath = "//div[@class='reduceCosts generic']")
-	private WebElement reduceCostPath;
-
 	@FindBy(linkText = "Reduce costs")
 	WebElement reduceCostLink;
 
@@ -51,9 +47,6 @@ public class ManageDrugPage extends UhcDriver {
 
 	@FindBy(className = "drugList")
 	private List<WebElement> selectedDrug;
-
-	@FindBy(xpath = "//div[@id='dcemodal']/div/div/div[8]/div[4]/a[2]")
-	private WebElement pharmacySearchButton;
 
 	@FindBy(xpath = "//span[@class='dceOrangeBtn']")
 	private WebElement pharmacySearchButton2;
@@ -82,23 +75,14 @@ public class ManageDrugPage extends UhcDriver {
 	@FindBy(xpath = "//span[@class='tooltipalign']/p/span")
 	private WebElement addtooltip;
 
-	@FindBy(xpath = "//div[contains(@class, 'drugDetailsMessage')]")
-	private WebElement drugdetailMsg;
-
 	@FindBy(className = "drugDetailsMessage")
 	private WebElement drugdetailMsg1;
 	
 	@FindBy(linkText = "Edit Pharmacy")
 	WebElement editPharmacyLink;
-
-	@FindBy(xpath = "//span[@class='current-pharmacy']")
-	private WebElement pharmacyNameElement;
 	
 	public JSONObject manageDrugJson;
 
-	private PageData drugInfo;
-
-	private PageData manageDrug;
 
 	public ManageDrugPage(WebDriver driver) {
 		super(driver);

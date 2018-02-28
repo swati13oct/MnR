@@ -26,9 +26,6 @@ public class SpecialElectionPeriodPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id='partSave']")
 	private WebElement saveAndContinue;
-
-	@FindBy(id = "esrdinfo")
-	private WebElement pageHeadingESRD;
 	
 	@FindBy(xpath = "//*[@id='enrollment-step-1-part-1']/div[2]/a[2]")
 	private WebElement previous;
@@ -222,9 +219,8 @@ public class SpecialElectionPeriodPage extends UhcDriver {
 	public void selectSixthQuestion(String date) {
 		//checkBoxSixA.click();
 		//checkBoxSixB.click();
-		String[] Date = date.split(",");
-		String startDate = Date[0];
-		String endDate = Date[1];
+	
+
 		//enterDateSixA.sendKeys(startDate);
 		//enterDateSixB.sendKeys(endDate);
 	}

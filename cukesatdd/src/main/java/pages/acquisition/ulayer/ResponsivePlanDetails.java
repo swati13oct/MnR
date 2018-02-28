@@ -10,8 +10,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import acceptancetests.data.PageData;
 import atdd.framework.UhcDriver;
 
 public class ResponsivePlanDetails extends UhcDriver{
@@ -64,7 +62,6 @@ public class ResponsivePlanDetails extends UhcDriver{
 	@FindBy(css="#planCosts>h3")
 	private WebElement planCostsHeader;
 	
-	private PageData vppPlanDetails;
 
 		
 	public ResponsivePlanDetails(WebDriver driver) {

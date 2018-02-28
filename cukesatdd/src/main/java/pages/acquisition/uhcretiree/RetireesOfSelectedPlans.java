@@ -10,8 +10,6 @@ import atdd.framework.UhcDriver;
 
 public class RetireesOfSelectedPlans extends UhcDriver {
 
-	@FindBy(xpath = "/html/body/div[1]/div/div[1]/div/div[3]/div[1]/div[3]/div/div/div[1]/div[2]/div/div[1]/div[1]/p[3]/a")
-	private WebElement understandPrescriptionDrugCoverageLink;
 	
 	@FindBy(linkText = "Understand prescription drug coverage options")
 	private WebElement coverageOptionsLink;

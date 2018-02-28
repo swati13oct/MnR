@@ -24,9 +24,6 @@ public class SiteMapSHBPPage extends UhcDriver {
 
 	}
 	
-	@FindBy(xpath="//*[@id='main']/div/div[1]/div/div[4]/div[1]/div/div[1]/div[1]/ul/li[4]/a")
-	private WebElement findproviderlink;
-	
 
 	@FindBy(xpath=".//*[@id='main']/div/div[1]/div/div[4]/div[1]/div/div[1]/div[1]/ul/li[4]/a")
 	private WebElement findaproviderlink;
