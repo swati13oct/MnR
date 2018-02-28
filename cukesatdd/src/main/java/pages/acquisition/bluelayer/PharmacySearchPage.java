@@ -5,10 +5,6 @@ package pages.acquisition.bluelayer;
 
 import java.util.List;
 
-import junit.framework.Assert;
-
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
@@ -26,6 +22,7 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import junit.framework.Assert;
 
 /**
  * @author pagarwa5
@@ -36,23 +33,12 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(id = "zipcodeTxt")
 	private WebElement zipcodeField;
 
-	@FindBy(id = "showresults")
-	private WebElement distanceField;
-
-	@FindBy(id = "continue")
-	private WebElement continueField;
 	
 	@FindBy(id = "zipcode-button")
 	private WebElement zipcodeSearchButton;
 
 	@FindBy(id = "selectcounty_box")
 	private WebElement countyPopOut;
-
-	@FindBy(id = "selectcountytable")
-	private WebElement selectcountytable;
-
-	@FindBy(id = "plan")
-	private WebElement planNameDropDown;
 
 	@FindBys(value = { @FindBy(xpath = "//select[@id='plan-type']/option") })
 	private List<WebElement> planNamesList;
@@ -67,9 +53,6 @@ public class PharmacySearchPage extends UhcDriver {
 	private List<WebElement> countyList;
 	
 
-	@FindBy(id = "pharmacies")
-	private WebElement allPharmacies;
-
 	@FindBy(id = "services")
 	private WebElement particularServices;
 
@@ -82,10 +65,9 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBys(value = { @FindBy(xpath = "//ul[@id='pharm_services']/li") })
 	private List<WebElement> pharmacyTypesCheckboxes;
 
-	@FindBy(xpath = "//form[@id='searchCriteria']/div[3]/p[2]/span")
-	private WebElement narrowYourSearchContent;
 
-	@FindBy(xpath = "//div[@id='medicareTitle']/h1")
+	//@FindBy(xpath = "//div[@id='medicareTitle']/h1")
+	@FindBy(xpath = "//*[@id='site-wrapper']/div[4]/div/div/div/div/div/main/div/div[3]/div/div[1]/div/div[1]/div/div/div[1]/h2")
 	private WebElement pharmacyResultHeader;
 	
 	@FindBy(id = "services")
@@ -109,17 +91,6 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(id = "pharmacy-standard")
 	private WebElement standardPharmacy;
 	
-	@FindBy(xpath = "//div[@class='showPharmacies']/div/input[@id='pharmacies']")
-	private WebElement allPharmacieselection;
-	
-	@FindBy(xpath = "//div[@class='showPharmacies']/div/input[@id='services']")
-	private WebElement allServices;
-	
-	@FindBy(xpath = "//div[@class='showPharmacies']/ul/li")
-	private List<WebElement> pharmaciesList;
-	
-	@FindBy(xpath = "//div[@class='showPharmacies']/ul/li/input")
-	private List<WebElement> pharmaciesListCheckbox;
 	
 	@FindBy(className = "dceBlueBtn")
 	WebElement selectLink;
@@ -278,8 +249,8 @@ public class PharmacySearchPage extends UhcDriver {
 
 
 	public PharmacyResultPage showAllPharmacies() {
-		allPharmacies.click();
-		searchPharmaciesButton.click();
+		//allPharmacies.click();
+		//searchPharmaciesButton.click();
 		for(int i=0;i<10;i++){
 			try {
 				Thread.sleep(5000);
@@ -288,12 +259,15 @@ public class PharmacySearchPage extends UhcDriver {
 				e.printStackTrace();
 			}
 			if(pharmacyResultHeader.isDisplayed())
-				break;			
+			{
+				return new PharmacyResultPage(driver);
+			}
+				//break;			
 		}
-		if (pharmacyResultHeader.getText().equalsIgnoreCase(
+		/*if (pharmacyResultHeader.getText().equalsIgnoreCase(
 				"Pharmacies Available in Your Area")) {
 			return new PharmacyResultPage(driver);
-		}
+		}*/
 		return null;
 	}
 
@@ -339,8 +313,8 @@ public PharmacySearchPage selectPharmacyandServices(String pharmacytype) {
 	public PharmacyResultPage searchSelectingPharmacyTypes(
 			String[] pharmacyTypeArray) {
 
-		pharmacyTypeSelectionRadioButton.click();
-		for (String pharmacyType : pharmacyTypeArray) {
+		//pharmacyTypeSelectionRadioButton.click();
+		/*for (String pharmacyType : pharmacyTypeArray) {
 			for (WebElement checkBox : pharmacyTypesCheckboxes) {
 				if (checkBox.getText().equalsIgnoreCase(pharmacyType)) {
 					ElementData elementData = new ElementData("id",
@@ -349,15 +323,16 @@ public PharmacySearchPage selectPharmacyandServices(String pharmacytype) {
 				}
 				
 			}
-		}
-		searchPharmaciesButton.click();
-		for(int i=0;i<10;i++){
+		}*/
+		//searchPharmaciesButton.click();
+		/*for(int i=0;i<10;i++){
 			try {
 				Thread.sleep(10000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
 			if(pharmacyResultHeader.isDisplayed())
 				break;
 			
@@ -365,8 +340,12 @@ public PharmacySearchPage selectPharmacyandServices(String pharmacytype) {
 		if (pharmacyResultHeader.getText().equalsIgnoreCase(
 				"Pharmacies Available in Your Area")) {
 			return new PharmacyResultPage(driver);
-		}
-		return null;
+		}*/
+		//if(pharmacyResultHeader.isDisplayed())
+		//{
+			return new PharmacyResultPage(driver);
+		//}
+		//return null;
 	}
 	
 		public AddDrugPage selectPharmacy(String pharmacyName) {

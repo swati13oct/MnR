@@ -4,29 +4,21 @@
 package pages.member.redesign;
 
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.UnsupportedCommandException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.acquisition.ulayer.LoginAssistancePage;
+import acceptancetests.data.MRConstants;
+import atdd.framework.UhcDriver;
 import pages.dashboard.acquisition.RegistrationInformationPage;
 import pages.member.ulayer.AccountHomePage;
 import pages.member.ulayer.RallyDashboard;
 import pages.member.ulayer.TerminatedHomePage;
 import pages.member.ulayer.UNPWAssistancePage;
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.MRConstants;
-import acceptancetests.data.PageData;
-import acceptancetests.util.CommonUtility;
-import atdd.framework.MRScenario;
-import atdd.framework.UhcDriver;
 
 /**
  * @author pjaising

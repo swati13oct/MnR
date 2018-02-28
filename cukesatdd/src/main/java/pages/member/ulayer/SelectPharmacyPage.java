@@ -18,7 +18,6 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.member.ulayer.ViewDrugCostPage;
 
 /**
  * @author pagarwa5

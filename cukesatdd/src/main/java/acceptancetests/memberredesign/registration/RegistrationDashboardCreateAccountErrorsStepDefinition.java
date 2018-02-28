@@ -1,30 +1,13 @@
 package acceptancetests.memberredesign.registration;
 
-import gherkin.formatter.model.DataTableRow;
-
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
-import junit.framework.Assert;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.dashboard.acquisition.RegistrationInformationPage;
-import cucumber.api.DataTable;
-import cucumber.api.java.After;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
-import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Then;
+import junit.framework.Assert;
+import pages.dashboard.acquisition.RegistrationInformationPage;
 
 /**
  * @Functionality : Errors validation on Create Account page

@@ -3,6 +3,7 @@
  */
 package pages.member.redesign;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,10 +18,12 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.data.CommonConstants;
+import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
-import acceptancetests.data.LoginCommonConstants;
 import atdd.framework.UhcDriver;
+import cucumber.api.DataTable;
+import gherkin.formatter.model.DataTableRow;
 
 /**
  * @author pperugu
@@ -28,58 +31,30 @@ import atdd.framework.UhcDriver;
  */
 public class ContactUsPage extends UhcDriver{
 
-	@FindBy(id = "disclosure_link")
-	private WebElement logOut;
-	
-	@FindBy(xpath="//*[@id='secureWidget']/div[1]")
-	private WebElement securewidget;
-	
-	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//a[@id='message-btn'][2]")
+	@FindBy(css="a#message-btn:first-child")
 	private WebElement getStartedButton;
 
-	@FindBy(xpath="//*[@id='message-cancel']")
+	@FindBy(id="message-cancel")
 	private WebElement cancelLink;
-	
-	@FindBy(xpath="//*[@id='message-submit']/span")
-	private WebElement continueButton;
-	
 	
 	@FindBy(xpath="//*[@id='message-form']/fieldset/div[2]/div")
 	private WebElement useDifferentEmailRadioButton;
 	
-	@FindBy(xpath = "//*[@id='message-email']")
+	@FindBy(id = "message-emails")
 	private WebElement newemailId;
 	
-	@FindBy(xpath = "//*[@id='message-email-confirm']") 
+	@FindBy(id = "message-email-confirms") 
 	private WebElement confirmemailId;
 	
-	@FindBy(xpath = "//*[@id='message-form']/fieldset/div[1]/div/div/label")
-	private WebElement emailAddressonFile;
-		
-	@FindBy(xpath = "//*[@id='message-btn']")
+	@FindBy(css = "a#message-btn:last-child")
 	private WebElement goToInboxButton;
 	
 	@FindBy(xpath = "//*[@id='confirmationWidget']/div")
 	private WebElement ConfirmationWidgetButton;
 	
-	@FindBy(xpath = "//*[@id='message-send']")
+	@FindBy(id = "message-send")
 	private WebElement sendAmessageButton;
 	
-	@FindBy(xpath = "//*[@id='messageModal']/div/div/div[1]")
-	private WebElement secureModel;
-	
-	@FindBy(xpath = "//*[@id='messageModal']/div/div/div[3]/button/span")
-	private WebElement secureModelContinueButton;
-	 
-	@FindBy(xpath = "//*[@id='messageModal']/div/div/div[3]/a")
-	private WebElement secureModelCancel;
-
-	@FindBy(xpath = " //*[@id='messageModal']/div/div/div[2]/div/div/div/ul/li[2]/p/a")
-	private WebElement prescriptionLink;
-	
-	
-	@FindBy(xpath = "//div[contains(@class,'parsys click-to-call')]/div/div[not (contains(@class,'ng-hide'))]//div[@class='card-header']/p[1]")
-	private WebElement haveUsCallYou;
 	
 	@FindBy(xpath="//div[contains(@class,'click-to-call')][1]/div[1]//div[@class='card-slide']/a")
 	private WebElement memberAuthRequestACall;
@@ -88,10 +63,25 @@ public class ContactUsPage extends UhcDriver{
 	private WebElement sendArequest;
 	
 	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//a[@id='call-btn']")
-	private WebElement requestACall;;
+	private WebElement requestACall;
 	
-	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//button[@id='call-submit']")
+	@FindBy(id = "call-submit")
 	private WebElement requestCall;
+	
+	@FindBy(id = "call-cancel")
+	private WebElement requestCall_Cancel;
+	
+	@FindBy(id="call-question-about")
+	private WebElement callQuestionAbout;
+	
+	@FindBy(xpath="//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='call-number']")
+	private WebElement requestACallPhoneNumber;
+	
+	@FindBy(xpath="//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//div[@class='message-block-body']//p[2]")
+	private WebElement reqConfirmationMessage;
+	
+	@FindBy(xpath="//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//div[@class='message-block-body']//p[4]")
+	private WebElement reqACallPhoneNumber;
 	
 	@FindBy(xpath = "/*[@id='call-question-about'] ")
 	private WebElement contactoption;
@@ -157,6 +147,8 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath="/html/body/div[2]/div/div/div/div[5]/div/div/div[2]/div/div[1]/div/div/div/div/div/div[2]/div[3]/div[1]")	
 	private WebElement conformationMessage;
 	
+	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//select[@id='question-about']")
+	private WebElement questionAboutDropDown;
 
 	@FindBy(xpath="//*[@id='question-about']")	
 	private WebElement alternativeEmailHeader;
@@ -171,24 +163,27 @@ public class ContactUsPage extends UhcDriver{
 	private WebElement questionEmailmessageError;
 	
 
-	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-email']/following-sibling::span[1]")
+	@FindBy(xpath="//input[@id='question-alt-email']/following-sibling::span[not (contains(@class,'hide'))]")
 	private WebElement alternativemessageEmailError;
 	
 	
-	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-email-confirm']/following-sibling::span[2]")
+	@FindBy(xpath="//input[@id='question-alt-email-confirm']/following-sibling::span[not (contains(@class,'hide'))]")
 	private WebElement confirmMsgEmailError;
 	
-	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-phone']/following-sibling::span[1]")
+	@FindBy(xpath="//input[@id='question-alt-phone']/following-sibling::span[not (contains(@class,'hide'))]")
 	private WebElement invalidPhneErrorMsg;
 	
-	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-phone-confirm']/following-sibling::span[2]")
+	@FindBy(xpath="//input[@id='question-alt-phone-confirm']/following-sibling::span[not (contains(@class,'hide'))]")
 	private WebElement confirmPhneErrorMsg;
 	
-	@FindBy(css="div.field.ask-question-message.field-has-error div.field-input label#message-email-error.error")
+	@FindBy(css="//input[@id='question-alt-email']/following-sibling::span[not (contains(@class,'hide'))]")
 	private WebElement questionAboutEmailErrorMsg;
 	
 	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//div[contains(@class,'success') and (not (contains(@class,'ng-hide')))]/div[@class='message-block-header']//p")
 	private WebElement requestReceivedMessageHeader;
+	
+	@FindBy(xpath="//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//div[@class='message-block--full-width success margin-none']/div[1]//b")
+	private WebElement requestACallSuccessMessageHeader;
 	
 	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//div[contains(@class,'success') and (not (contains(@class,'ng-hide')))]/div[@class='message-block-body']//p[2]")
 	private WebElement thankYouMessage;
@@ -202,13 +197,55 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))]//div[contains(@class,'message-block-body')][1]//h3")
 	private WebElement memberAuthNotAuthorizedToSendUsQuestionMessage;
 	
-	private PageData contactUs;
-
+	@FindBy(css="div#confrmmatchheightonce #question-btn")
+	private WebElement btn_EmailForm;
+	
+	@FindBy(id="question-about")
+	private WebElement questionAboutDropdown_EmailForm;
+	
+	@FindBy(id="question-message")
+	private WebElement questionMessage_EmailForm;
+	
+	@FindBy(id="question-member-number")
+	private WebElement aarpMemberShipNumber;
+	
+	@FindBy(id="question-first-name")
+	private WebElement firstName_EmailForm;
+	
+	@FindBy(id="question-last-name")
+	private WebElement lastName_EmailForm;
+	
+	@FindBy(id="question-email")
+	private WebElement email_EmailForm;
+	
+	@FindBy(id="question-email-confirm")
+	private WebElement confirmEmail_EmailForm;
+	
+	@FindBy(id="date-mm")
+	private WebElement dateMM_EmailForm;
+	
+	@FindBy(id="date-dd")
+	private WebElement dateDD_EmailForm;
+	
+	@FindBy(id="date-yyyy")
+	private WebElement dateyyyy_EmailForm;
+	
+	@FindBy(id="question-submit")
+	private WebElement btnSubmit_EmailForm;
+	
+	@FindBy(css="div#confrmmatchheightonce div.message-block-body p:nth-child(2)")
+	private WebElement successMessage_EmailForm;
+	
+	@FindBy(css="div#confrmmatchheightonce div.message-block-header p>b")
+	private WebElement successHeader_EmailForm;
+	
 	public JSONObject contactUsJson;
 	
 	private JSONObject secureemailwidgetDataJson;
 	
 	private PageData secureemailwidgetData;
+	
+	Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 	
 	public ContactUsPage(WebDriver driver) {
 		super(driver);
@@ -243,21 +280,6 @@ public class ContactUsPage extends UhcDriver{
 	}
 
 	/**
-	 * validate the secure email widget display
-	 */
-	public void validatesecureemail()
-	{
-		if (securewidget.isDisplayed())
-		{
-			System.out.println("Secure widget is displayed");
-		}
-		else
-		{
-			System.out.println("Secure widget is not  displayed");
-		}
-	}
-	
-	/**
 	 * Validate Texas ERS plan name
 	 */
 	public void validatePlanName(){
@@ -288,692 +310,48 @@ public class ContactUsPage extends UhcDriver{
 	}
 	
 	/**
-	 * Validate send us question widget
+	 * Validate the success message of Email Form
 	 */
-	public void validateSendUaQuestionWidget()
-	{
-		if (fillOutFormButton.isDisplayed())
-		{
-			System.out.println("send us Question is  displayed");
-			fillOutFormButton.click();
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		else
-		{
-			System.out.println("send us Question is not  displayed");
-		}
-	}
-	
-	/**
-	 * Validate send us question widget functionality
-	 */
-	public void validateSendUsaQuestionWidgetfunctionality()
-	{
-		if (fillOutFormButton.isDisplayed())
-		{
-			System.out.println("send us Question is  displayed");
-			fillOutFormButton.click();
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			questionCancelLink.click();
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			System.out.println("end of the secure emial");
-		}
-		else
-		{
-			System.out.println("send us Question is not  displayed");
-		}
-	}
-	/**
-	 * Validate the cancel link on send us question widget 
-	 */
-	public void validateSendUaQuestionWidgetCancelClick()
-	{
-		if (fillOutFormButton.isDisplayed())
-		{
-			System.out.println("send us Question is  displayed");
-			fillOutFormButton.click();
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			questionCancelLink.click();
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		else
-		{
-			System.out.println("send us Question is not  displayed");
-		}
-	}
-	
-	/**
-	 * This method used to fill the send us question details and click on submit button
-	 */
-	public void submitQuestionClick()
-	{
-		if (fillOutFormButton.isDisplayed())
-		{
-			System.out.println("send us Question is  displayed");
-			fillOutFormButton.click();
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			Select dropdown = new Select(driver.findElement(By.xpath("//div[contains(@class,'request-email')]"
-					+ "/div[not (contains(@class,'ng-hide'))][1]//select[@id='question-about']")));
-			System.out.println("dropdown" +dropdown);
-			dropdown.getFirstSelectedOption().click();
-			dropdown.selectByVisibleText("Payment Information");
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			questionMessage.sendKeys("Payment information");
-			/*entering email */
-			addAlternativeEmail.click();
-			alternativeEmailAddress.sendKeys("utestums@gmail.com");
-			confirmEmailAddress.sendKeys("utestums@gmail.com");
-			addAlternativePhneNumberLink.click();
-			alternativePhneNumber.sendKeys("9023456121");
-			confirmAlternativePhneNumber.sendKeys("9023456121");
-			questionSubmit.click();
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			System.out.println("questionSubmit Clicked");
-		}
-		else
-		{
-			System.out.println("send us Question is not  displayed");
-		}
-	}
-	
-	/**
-	 * This method used to validate the send us question fields
-	 */
-	public void sendUsQuestion_Field_Validations(){
-		if (fillOutFormButton.isDisplayed())
-		{
-			System.out.println("send us Question is  displayed");
-			fillOutFormButton.click();
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			Select dropdown = new Select(driver.findElement(By.xpath("//div[contains(@class,'request-email')]"
-					+ "/div[not (contains(@class,'ng-hide'))][1]//select[@id='question-about']")));
-			System.out.println("dropdown" +dropdown);
-			dropdown.getFirstSelectedOption().click();
-			dropdown.selectByVisibleText("Payment Information");
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			questionMessage.sendKeys("Billing Information");
-			/*entering email */
-			addAlternativeEmail.click();
-			alternativeEmailAddress.sendKeys("abc");
-			//confirmEmailAddress.sendKeys("");
-			alternativeEmailAddress.click();
-			jsClick(driver.findElement(By.xpath("//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-email']/preceding::p[1]")));
-			driver.findElement(By.xpath
-					("//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-email']/preceding::p[1]")).click();
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			String alternativeerrorMessage=alternativemessageEmailError.getText();
-			System.out.println("alternativeerrorMessage::" +alternativeerrorMessage);
-			Assert.assertTrue("Email address not valid", alternativeerrorMessage.equalsIgnoreCase("Enter your email address like this: yourname@emailprovider.com."));
+	public void validateEmailUsSuccessMessage(String expectedMessage){
 		
-	}else
-	{
-		System.out.println("send us Question is not  displayed");
-	}
-	}
-	/**
-	 * This method is used to validate the confirm email ID in send us question
-	 */
-	public void sendUsQuestion_confirmEmailID_Validations(){
-		if (fillOutFormButton.isDisplayed())
-		{
-			System.out.println("send us Question is  displayed");
-			fillOutFormButton.click();
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			Select dropdown = new Select(driver.findElement(By.xpath("//div[contains(@class,'request-email')]"
-					+ "/div[not (contains(@class,'ng-hide'))][1]//select[@id='question-about']")));
-			System.out.println("dropdown" +dropdown);
-			dropdown.getFirstSelectedOption().click();
-			dropdown.selectByVisibleText("Payment Information");
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			questionMessage.sendKeys("Billing Information");
-			/*entering email */
-			addAlternativeEmail.click();
-			alternativeEmailAddress.sendKeys("abc");
-			confirmEmailAddress.sendKeys("xyz");
-			confirmEmailAddress.click();
-			jsClick(driver.findElement(By.xpath("//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-email']/preceding::p[1]")));
-			driver.findElement(By.xpath
-					("//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-email']/preceding::p[1]")).click();
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			String confirmErrMessage=confirmMsgEmailError.getText();		
-			 System.out.println("confirmErrMessage;;" + confirmErrMessage);
-			 Assert.assertTrue("Please enter same email id", confirmErrMessage.equalsIgnoreCase("Your email confirmation and email address do not match."));
-			
-			
-	}else
-	{
-		System.out.println("send us Question is not  displayed");
-	}
-	}
-	private void jsClick(WebElement findElement) {
-		// TODO Auto-generated method stub
+		Assert.assertEquals("Thank you. We received your request.", successHeader_EmailForm.getText().trim());
+		Assert.assertEquals(expectedMessage, successMessage_EmailForm.getText().trim());
 		
 	}
+	
+	/**
+	 * Validate the success message of Request a call widget
+	 */
+	public void validateRequestACallSuccessMessage(String expectedMessage,String phoneNumber){
+		
+		Assert.assertEquals("Your request has been received", requestACallSuccessMessageHeader.getText().trim());
+		//Assert.assertEquals(expectedMessage, reqConfirmationMessage.getText().trim());
+		Assert.assertEquals(phoneNumber,reqACallPhoneNumber.getText().trim());
+		
+	}
+	
+	/**
+	 * Validate the Filed validation error messages in Email a question
+	 */
+	public void validateFiledValidationErrorMessages(DataTable givenAttributes){
+		
+		/* Reading the given attribute from feature file */
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-	/**
-	 * This method is used to validate the ivalid phone numbers in send us question
-	 */
-	public void sendUsQuestion_invalid_PhoneNumber_Validations(){
-		if (fillOutFormButton.isDisplayed())
-		{
-			System.out.println("send us Question is  displayed");
-			fillOutFormButton.click();
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			Select dropdown = new Select(driver.findElement(By.xpath("//div[contains(@class,'request-email')]"
-					+ "/div[not (contains(@class,'ng-hide'))][1]//select[@id='question-about']")));
-			//System.out.println("dropdown" +dropdown);
-			dropdown.getFirstSelectedOption().click();
-			dropdown.selectByVisibleText("Payment Information");
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			questionMessage.sendKeys("Billing Information");
-			addAlternativePhneNumberLink.click();
-			alternativePhneNumber.sendKeys("123");
-			alternativePhneNumber.click();
-			jsClick(driver.findElement(By.xpath("//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-email']/preceding::p[1]")));
-			driver.findElement(By.xpath
-					("//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-email']/preceding::p[1]")).click();
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			String invalidPhnenumerErrmsg = invalidPhneErrorMsg.getText();
-			System.out.println("invalidPhnenumerErrmsg::" +invalidPhnenumerErrmsg);
-			Assert.assertTrue("Phone number is not valid", invalidPhnenumerErrmsg.equals("Enter phone number like this: 111-111-1111."));
-			confirmAlternativePhneNumber.sendKeys("789");
-			jsClick(driver.findElement(By.xpath("//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-email']/preceding::p[1]")));
-			driver.findElement(By.xpath
-					("//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-email']/preceding::p[1]")).click();
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			String confirmPhoneErrmsg = confirmPhneErrorMsg.getText();
-			Assert.assertTrue("Please enter same Number", confirmPhoneErrmsg.equals("Your confirmation alternative phone number and alternative phone number do not match."));
-			
-	}else
-	{
-		System.out.println("send us Question is not  displayed");
-	}
-	}
-	
-	/**
-	 * This method is used to validate the blank text in email ID in send us question
-	 */
-	public void sendUsQuestion_blankText_Message_Validations(){
-		if (fillOutFormButton.isDisplayed())
-		{
-			System.out.println("send us Question is  displayed");
-			fillOutFormButton.click();
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			Select dropdown = new Select(driver.findElement(By.xpath("//div[contains(@class,'request-email')]"
-					+ "/div[not (contains(@class,'ng-hide'))][1]//select[@id='question-about']")));
-			System.out.println("dropdown" +dropdown);
-			dropdown.getFirstSelectedOption().click();
-			dropdown.selectByVisibleText("Payment Information");
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			questionMessage.sendKeys("hhh");
-			questionMessage.clear();
-			questionSubmit.click();
-			String questionErrorMessage=questionEmailmessageError.getText();
-			 Assert.assertTrue("Please dont leave it blank", questionErrorMessage.equalsIgnoreCase("Enter a question or comment."));
-			 //Assert.assertTrue("Please enter same email id", confirmErrMessage.equalsIgnoreCase("Please enter same email id"));
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
 		
+		String inavlidPhoneErrorMessage = memberAttributesMap.get("InavlidPhone ErrorMessage");
+		String inavlidAConfirmPhoneErrorMessage = memberAttributesMap.get("InavlidConfirmPhone ErrorMessage");
+		String inavlidEmailErrorMessage = memberAttributesMap.get("InavlidEmail ErrorMessage");
+		String inavlidAConfirmEmailErrorMessage = memberAttributesMap.get("InavlidConfirmEmail ErrorMessage");
 		
-	}else
-	{
-		System.out.println("send us Question is not  displayed");
-	}
-	}
-	public void logOut() {
-		logOut.click();
-
-	}
-	
-	/**
-	 * This method is used to validate email us widget section
-	 */
-	public void validateEmailWidgetSection()
-	{
-		if (getStartedButton.isDisplayed())
-		{
-			System.out.println("email widget is displayed");
-			getStartedButton.click();
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			waitforElement(useDifferentEmailRadioButton);
-			useDifferentEmailRadioButton.click();
-			emailAddressonFile.click();
-			useDifferentEmailRadioButton.click();
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			//newemailId.sendKeys("tiasdgaarp@gmail.com");
-			//confirmemailId.sendKeys("tiasdgaarp@gmail.com");
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			waitforElement(cancelLink);
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			cancelLink.click();
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		}
-		else
-		{
-			System.out.println("Secure widget is not  displayed");
-		}
-	}
-	
-	/**
-	 * This method used to validate email us widget functional flow
-	 */
-	public void validateEmailWidgetfunctionality()
-	{
-		if (getStartedButton.isDisplayed())
-		{
-			System.out.println("email widget is displayed");
-			getStartedButton.click();
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			waitforElement(useDifferentEmailRadioButton);
-			useDifferentEmailRadioButton.click();
-			//emailAddressonFile.click();
-			//useDifferentEmailRadioButton.click();
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			driver.findElement(By.id("message-email")).click();
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			driver.findElement(By.id("message-email")).sendKeys("miasdgaarp@gmail.com");
-			driver.findElement(By.id("message-email-confirm")).click();
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			driver.findElement(By.id("message-email-confirm")).sendKeys("miasdgaarp@gmail.com");
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			waitforElement(continueButton);
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			continueButton.click();
-			waitforElement(ConfirmationWidgetButton);
-			
-			waitforElement(sendAmessageButton);
-			
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			sendAmessageButton.click();
-		}
-		else
-		{
-			System.out.println("Secure widget is not  displayed");
-		}
-	}
-	
-	/**
-	 * This method is used to validate email address radio button in Email Us widget
-	 */
-	public void validateEmailby_Email_Address_RadioButton()
-	{
-		if (getStartedButton.isDisplayed())
-		{
-			System.out.println("email widget is displayed");
-			getStartedButton.click();
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			waitforElement(useDifferentEmailRadioButton);
-			useDifferentEmailRadioButton.click();
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			/*continueButton.click();
-			waitforElement(ConfirmationWidgetButton);
-			
-			waitforElement(sendAmessageButton);
-			
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			*/
-			
-		}
-		else
-		{
-			System.out.println("Secure widget is not  displayed");
-		}
-	}
-	
-	/**
-	 * This method is used to validate secure email modal functionality
-	 */
-	public void validateSecureEmailModelfunctionality()
-	{
-		if (getStartedButton.isDisplayed())
-		{
-			System.out.println("email widget is displayed");
-			getStartedButton.click();
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			waitforElement(useDifferentEmailRadioButton);
-			useDifferentEmailRadioButton.click();
-			//emailAddressonFile.click();
-			//useDifferentEmailRadioButton.click();
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			driver.findElement(By.id("message-email")).click();
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			driver.findElement(By.id("message-email")).sendKeys("miasdgaarp@gmail.com");
-			driver.findElement(By.id("message-email-confirm")).click();
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			driver.findElement(By.id("message-email-confirm")).sendKeys("miasdgaarp@gmail.com");
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			waitforElement(continueButton);
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			continueButton.click();
-			waitforElement(ConfirmationWidgetButton);
-			
-			waitforElement(sendAmessageButton);
-			
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			sendAmessageButton.click();
-			/*waitforElement(secureModelCancel);
-			secureModelCancel.click();*/
-			waitforElement(secureModelContinueButton);
-			secureModelContinueButton.click();
-			waitforElement(sendAmessageButton);
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		}
-		/*else
-		{
-			System.out.println("Secure widget is not  displayed");
-		}*/
-	//}
-	
-	/**
-	 * This method is used to validate cancel link in secure email modal functionality
-	 */
-	public void validateSecureEmailModel_Cancellink_Click()
-	{
-		if (getStartedButton.isDisplayed())
-		{
-			System.out.println("email widget is displayed");
-			getStartedButton.click();
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			waitforElement(useDifferentEmailRadioButton);
-			useDifferentEmailRadioButton.click();
-			//emailAddressonFile.click();
-			//useDifferentEmailRadioButton.click();
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			driver.findElement(By.id("message-email")).sendKeys("miasdgaarp@gmail.com");
-			driver.findElement(By.id("message-email-confirm")).sendKeys("miasdgaarp@gmail.com");
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			waitforElement(continueButton);
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			continueButton.click();
-			waitforElement(ConfirmationWidgetButton);
-			
-			waitforElement(sendAmessageButton);
-			
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			sendAmessageButton.click();
-			waitforElement(secureModelCancel);
-			secureModelCancel.click();
-			/*waitforElement(secureModelContinueButton);
-			secureModelContinueButton.click();*/
-			waitforElement(sendAmessageButton);
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		}
-	
-	/**
-	 * this method is used to validate the go to inbox button
-	 */
-	public void goToInBoxButtonDisplay()
-	{
-		if (goToInboxButton.isDisplayed())
-		{
-			System.out.println("GoTO Inbox button is displayed");
-			
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		else
-		{
-			System.out.println("GoTO Inbox button is not displayed");
-		}
+		Assert.assertEquals(inavlidPhoneErrorMessage, invalidPhneErrorMsg.getText().trim());
+		Assert.assertEquals(inavlidAConfirmPhoneErrorMessage, confirmPhneErrorMsg.getText().trim());
+		Assert.assertEquals(inavlidEmailErrorMessage, alternativemessageEmailError.getText().trim());
+		Assert.assertEquals(inavlidAConfirmEmailErrorMessage, confirmMsgEmailError.getText().trim());
 	}
 	
 	/**
@@ -984,113 +362,59 @@ public class ContactUsPage extends UhcDriver{
 		Assert.assertTrue("Request a call widget is displayed", requestACall.isDisplayed());
 	}
 	
-	/**
-	 * this method is used to send a request in request to call widget
-	 */
-	public void sendAreqclick()
-	{
-		if (requestACall.isDisplayed())
-		{
-			System.out.println("Request a Call is displayed");
-			requestACall.click();
-			try {
-				Thread.sleep(8000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			Select dropdown = new Select(driver.findElement(By.id("call-question-about")));
-			System.out.println("dropdown" +dropdown);
-			/*dropdown.getFirstSelectedOption().click();*/
-			dropdown.selectByVisibleText("Benefits");
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			//request confirmation:
-			
-			callCancel.click();
-	
-			/*other.clear();*/
-			
-			System.out.println("select drop down element clicked" );
-		}
-		else
-		{
-			System.out.println("send a req  is not  displayed");
-		}
-	}
 	
 	/**
-	 * this method is used to click on Request to call widget and validate for the confiramtion message
+	 * this method is used to click on Request to call widget and validate for the confirmation message
 	 */
-	public void reqCallclickConformation()
-	{
-		if (requestACall.isDisplayed())
-		{
-			System.out.println("send a req  is displayed");
+	public void reqACall(DataTable givenAttributes)
+	{	
+		/* Reading the given attribute from feature file */
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String phoneNumber = memberAttributesMap.get("Phone Number");
+		try {
 			requestACall.click();
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			Select dropdown = new Select(driver.findElement(By.id("call-question-about")));
-			System.out.println("dropdown" +dropdown);
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			driver.findElement(By.xpath("//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='call-number']")).sendKeys("9023456121");
+			Thread.sleep(5000);
+			Select dropdown = new Select(callQuestionAbout);
+			Thread.sleep(5000);
+			requestACallPhoneNumber.sendKeys(phoneNumber);
 			requestCall.click();
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			//request confirmation:
-			
-			waitforElement(reqConfirmation);
-	
-			/*other.clear();*/
-			
-			System.out.println("req confirmmation end" );
+			Thread.sleep(5000);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		
+		waitforElement(reqConfirmation);
 	}
 	
 	/**
-	 * this method is used to validate the send us question button
+	 * this method is used to click on Request to call widget and validate the cancel link
 	 */
-	public void validateSendUsAQuestionWidget()
-	{
-		if (fillOutFormButton.isDisplayed())
-		{
-			System.out.println("send us Question is  displayed");
-			fillOutFormButton.click();
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+	public void reqACall_Cancel(DataTable givenAttributes)
+	{	
+		/* Reading the given attribute from feature file */
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
-		else
-		{
-			System.out.println("send us Question is not  displayed");
+		String phoneNumber = memberAttributesMap.get("Phone Number");
+		try {
+			requestACall.click();
+			Thread.sleep(5000);
+			Select dropdown = new Select(callQuestionAbout);
+			Thread.sleep(5000);
+			requestACallPhoneNumber.sendKeys(phoneNumber);
+			requestCall_Cancel.click();
+			Thread.sleep(5000);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		waitforElement(requestACall);
 	}
 
 	public JSONObject getsecurewidget() {
@@ -1161,5 +485,183 @@ public class ContactUsPage extends UhcDriver{
 			e.printStackTrace();
 		}
 		return memberAuthNotAuthorizedToSendUsQuestionMessage.getText().trim();
+	}
+	
+	
+	/**
+	 * This method validates the Email a Question widget for Group (CALPERS\GEORGIA-SHBP\TEXAS ERS) members 
+	 * 
+	 * @param givenAttributes
+	 */
+	public void validateEmailAQuestionWidget(DataTable givenAttributes){
+		/* Reading the given attribute from feature file */
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String enquiryType = memberAttributesMap.get("Enquiry Type");
+		String alternativeEmailId = memberAttributesMap.get("Alternative Email");
+		String confirmAlternativeEmailId = memberAttributesMap.get("ConfirmAlternative Email");
+		String alternativePhoneNumber = memberAttributesMap.get("AlternativePhone Number");
+		String confirmAlternativePhoneNumber = memberAttributesMap.get("ConfirmAlternativePhone Number");
+		try {
+			fillOutFormButton.click();
+			Thread.sleep(5000);
+			Select dropdown = new Select(questionAboutDropDown);
+			dropdown.getFirstSelectedOption().click();
+			dropdown.selectByVisibleText(enquiryType);
+			questionMessage.sendKeys(enquiryType);
+			addAlternativeEmail.click();
+			alternativeEmailAddress.sendKeys(alternativeEmailId);
+			confirmEmailAddress.sendKeys(confirmAlternativeEmailId);
+			addAlternativePhneNumberLink.click();
+			alternativePhneNumber.sendKeys(alternativePhoneNumber);
+			confirmAlternativePhneNumber.sendKeys(confirmAlternativePhoneNumber);
+			questionSubmit.click();
+			Thread.sleep(5000);
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+	}
+	
+	/**
+	 * This method fills invalid details in the Email a Question widget for Group (CALPERS\GEORGIA-SHBP\TEXAS ERS) members and validates error messages 
+	 * 
+	 * @param givenAttributes
+	 */
+	public void fillInvalidDetailsInEmailAQuestionWidget(DataTable givenAttributes){
+		/* Reading the given attribute from feature file */
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String enquiryType = memberAttributesMap.get("Enquiry Type");
+		String alternativeEmailId = memberAttributesMap.get("Alternative Email");
+		String confirmAlternativeEmailId = memberAttributesMap.get("ConfirmAlternative Email");
+		String alternativePhoneNumber = memberAttributesMap.get("AlternativePhone Number");
+		String confirmAlternativePhoneNumber = memberAttributesMap.get("ConfirmAlternativePhone Number");
+		try {
+			fillOutFormButton.click();
+			Thread.sleep(5000);
+			Select dropdown = new Select(questionAboutDropDown);
+			dropdown.getFirstSelectedOption().click();
+			dropdown.selectByVisibleText(enquiryType);
+			questionMessage.sendKeys(enquiryType);
+			addAlternativeEmail.click();
+			alternativeEmailAddress.sendKeys(alternativeEmailId);
+			confirmEmailAddress.sendKeys(confirmAlternativeEmailId);
+			Thread.sleep(5000);
+			confirmEmailAddress.click();
+			//jsClick(driver.findElement(By.xpath("//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-email']/preceding::p[1]")));
+			driver.findElement(By.xpath("//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-email']/preceding::p[1]")).click();
+			addAlternativePhneNumberLink.click();
+			//jsClick(addAlternativePhneNumberLink);
+			Thread.sleep(5000);
+			alternativePhneNumber.sendKeys(alternativePhoneNumber);
+			confirmAlternativePhneNumber.sendKeys(confirmAlternativePhoneNumber);
+			Thread.sleep(3000);
+			questionSubmit.click();
+			Thread.sleep(10000);
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+	}
+	
+	/**
+	 * This method is used to validate secure email us widget section
+	 */
+	public void validateSecureEmailUsWidgetSection(DataTable givenAttributes) {
+		
+		/* Reading the given attribute from feature file */
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String newEmailId = memberAttributesMap.get("New Email");
+		String newConfirmEmailId = memberAttributesMap.get("NewConfirm Email");
+		
+		try {
+			Thread.sleep(5000);
+			getStartedButton.click();
+			Thread.sleep(5000);
+			waitforElement(useDifferentEmailRadioButton);
+			useDifferentEmailRadioButton.click();
+			Thread.sleep(5000);
+			newemailId.sendKeys(newEmailId);
+			confirmemailId.sendKeys(newConfirmEmailId);
+			waitforElement(cancelLink);
+			Thread.sleep(5000);
+			cancelLink.click();
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	/**
+	 * This method validates the Email Form widget for SHIP members 
+	 * 
+	 * @param givenAttributes
+	 */
+	public void validateEmailFormWidget(DataTable givenAttributes){
+		/* Reading the given attribute from feature file */
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String enquiryType = memberAttributesMap.get("Enquiry Type");
+		
+		String message = memberAttributesMap.get("Message");
+		String aarpMembershipNumber = memberAttributesMap.get("AARPMembership Number");
+		String firstName = memberAttributesMap.get("First Name");
+		String lastName = memberAttributesMap.get("Last Name");
+		String emailAddress = memberAttributesMap.get("Email Address");
+		String confirmEmailAddress = memberAttributesMap.get("ConfirmEmail Address");
+		String date = memberAttributesMap.get("Date");
+		String month = memberAttributesMap.get("Month");
+		String year = memberAttributesMap.get("Year");
+		
+		try {
+			btn_EmailForm.click();
+			Thread.sleep(5000);
+			Select dropdown = new Select(questionAboutDropdown_EmailForm);
+			dropdown.getFirstSelectedOption().click();
+			dropdown.selectByVisibleText(enquiryType);
+			questionMessage_EmailForm.sendKeys(message);
+			aarpMemberShipNumber.sendKeys(aarpMembershipNumber);
+			firstName_EmailForm.sendKeys(firstName);
+			lastName_EmailForm.sendKeys(lastName);
+			email_EmailForm.sendKeys(emailAddress);
+			confirmEmail_EmailForm.sendKeys(confirmEmailAddress);
+			dateDD_EmailForm.sendKeys(date);
+			dateMM_EmailForm.sendKeys(month);
+			dateyyyy_EmailForm.sendKeys(year);
+			Thread.sleep(2000);
+			btnSubmit_EmailForm.click();
+			Thread.sleep(5000);
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Validate the go to inbox button for a member who has already opted out for secure email
+	 */
+	public void validateGoToInbox(){
+		try {
+			waitforElement(goToInboxButton);
+			Assert.assertTrue(validate(goToInboxButton));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

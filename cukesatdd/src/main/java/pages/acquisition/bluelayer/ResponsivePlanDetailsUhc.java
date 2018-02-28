@@ -27,10 +27,6 @@ public class ResponsivePlanDetailsUhc extends UhcDriver {
 	@FindBy(xpath="//div[1][@class='riders-box']")
 	private WebElement optionalDentalBox;
 	
-	@FindBy(xpath="//div[1][@class='riders-box']/h3")
-	private WebElement optionalDentalBoxHeader;
-	
-	
 	@FindBy(xpath="//div[1][@class='riders-box']/p[3]/b")
 	private WebElement optionalDentalDollarValue;
 	
@@ -156,7 +152,7 @@ public class ResponsivePlanDetailsUhc extends UhcDriver {
 	}
 	
 	public ResponsivePlanDetailsUhc valiadateOptionalServices(String optionalDental, String highOptionalDental){
-		String highOptionalDollarValue = null;
+		
 		String optionalDentalDolarValue = null;
 		//waitforElement(optionalServiceTab);
 		optionalServiceTab.click();
@@ -167,7 +163,7 @@ public class ResponsivePlanDetailsUhc extends UhcDriver {
 				optionalDentalDolarValue = optionalDentalDollarValue.getText();
 			}if(highOptionalDental.equals(true)){
 				validate(highOptionalDentalBox);
-				highOptionalDollarValue = highOptionalDentalDollarValue.getText();
+				
 			}if(optionalDental.equals(true) && highOptionalDental.equals(true)){
 				optionalDentalCheckBox.click();
 				if(!highOptionalDentalCheckBox.isEnabled()){

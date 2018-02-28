@@ -1,6 +1,6 @@
 #@thePredators
 @F108803_HICN_MBI
-Feature: ATDD implementation for HICN/MBI entry to Medicare ID field for Personal Identification Page in Registration Flow
+Feature:P1.2 ATDD implementation for HICN/MBI entry to Medicare ID field for Personal Identification Page in Registration Flow
 
 @HICN_MBI_Entry_Apr2018
 Scenario Outline: Medicare ID filed should accept either HICN or MBI number for Server date 01 Apr 2018 without error for Personal identification

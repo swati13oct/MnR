@@ -16,13 +16,12 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import pages.acquisition.uhcretiree.Rallytool_Page;
-import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.uhcretiree.Rallytool_Page;
 
 public class PlanDetailsPage extends UhcDriver{
 
@@ -75,24 +74,9 @@ public class PlanDetailsPage extends UhcDriver{
 	@FindBy(xpath=".//*[@id='po7link']")
 	private WebElement isMyDoctorCoveredLink;
 	
-	@FindBy(xpath=".//*[@id='additionalBenefits']")
-	private WebElement addBenefitsSection;
-
-	@FindBy(xpath=".//*[@id='drugBenefits']")
-	private WebElement drugCoPaysSection;
-	
 	//@FindBy(xpath=".//*[@id='backToplans']")
 	@FindBy(linkText="Back to all plans")
 	private WebElement backToPlansBtn;
-	
-	@FindBy(xpath=".//*[@id='highlights']/div/a[1]") //*[@id='enrollDetails']")
-	private WebElement enrollInPlanBtn;
-	
-	@FindBy(xpath=".//*[@id='optionalRiders']")
-	private WebElement optRiderSection;
-	
-	@FindBy(xpath=".//*[@id='planCost']")
-	private WebElement planCostsSection;
 	
 	 @FindBy(xpath = ".//*[@id='highlights']/div/div/span[1]/label")
 	 private WebElement compareBox;
@@ -102,9 +86,6 @@ public class PlanDetailsPage extends UhcDriver{
 	 
 	 @FindBy(xpath = ".//*[@id='highlights']/div/div/span[2]/span")
 	 private WebElement compareBoxMessagePDP;
-	    
-	@FindBy(xpath=".//*[@id='_content_uhcmedicaresolutions_en_health-plans_medicare-advantage-plans_plan-detail_jcr_content_contentPar_plandetails_parsys_plandetailstwocoloum_parsys_teaser']")
-	private WebElement planDocsSection;
 
 	private PageData vppPlanDetails;
 

@@ -1,5 +1,5 @@
 @dashBoardFormsAndResources @gladiators
-Feature: To validate forms and resources page in dashboard site
+Feature:G1.1 To validate forms and resources page in dashboard site
 
   @formsAndResourcesPageValidation
   Scenario Outline: 

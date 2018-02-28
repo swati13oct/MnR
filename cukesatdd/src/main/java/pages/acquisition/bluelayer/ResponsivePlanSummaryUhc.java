@@ -1,7 +1,5 @@
 package pages.acquisition.bluelayer;
 
-import static org.junit.Assert.fail;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -28,21 +26,15 @@ import acceptancetests.data.ElementData;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
-import acceptancetests.deprecated.enrollinplan.bluelayer.EnrollInPlanUhcStepDefinition;
 // import acceptancetests.planName.bluelayer.PlanNamesStepDefinition;
 import atdd.framework.UhcDriver;
-import pages.acquisition.ulayer.ResponsivePlanDetails;
 import pages.dashboard.member.blayer.DrugCostEstimatorPage;
 import pages.member.ulayer.Rallytool_Page;
 
 public class ResponsivePlanSummaryUhc extends UhcDriver{
 	
 	//US504467
-		@FindBy(xpath = "//div[@class='tab plancountheight'][1]")
-		private WebElement viewMaPlans;
-		
-//		@FindBy(xpath = "//*[@id='site-wrapper']/div[4]/div/div[1]/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div/span[3]")                
-		//@FindBy(xpath = "(.//a[@id='change-location']//following::span[contains(text(),'View Plans')][@class='trigger-closed'])[1]")
+	
 		@FindBy(xpath = "//span[@class='title' and contains(text(),'Medicare Advantage Plans')]")
 		private WebElement viewMAPlans;
 		
@@ -72,28 +64,15 @@ public class ResponsivePlanSummaryUhc extends UhcDriver{
 		@FindBy(xpath = "//div[@class='disabledprint ng-scope']")
 		List<WebElement> pdpPlanElement;
 		
-		@FindBy(xpath = "//div[@class='overview-main']")
-		private WebElement responsivevpppage;
-		
 		@FindBy(className="change-location-link")
 		private WebElement changeLoationLink;
-		
-		@FindBy(id="zipcode")
-		private WebElement zipcodeBox;
 		
 		@FindBy(xpath="//*[@class='content-cols']/div[1]/h3")
 		private WebElement planHighlightsHeader;
 		
 		@FindBy(xpath="//h2[contains(text(),'We have')]")
 		private WebElement countyNameDetail;
-		
-		//@FindBy(xpath="//div[@class='content-cols']/descendant::div[1]/h3")
-		@FindBy(xpath="//*[@class='content-cols']/div[2]/h3")
-		private WebElement benefitsHeader;
-		
-		/*@FindBy(xpath="//a[contains(text(),'Find a provider')]")
-		private WebElement providerSearchLink;
-		*/
+
 		@FindBy(xpath="//*[@class='content-cols']/div[1]/ul")
 		private List<WebElement> marketingBullet;
 		
@@ -103,17 +82,8 @@ public class ResponsivePlanSummaryUhc extends UhcDriver{
 		@FindBy(className="plan-index")
 		private List<WebElement> planIndexList;
 		
-		@FindBy(xpath = "//*[@class='tab']/div[1]/span[3]")
-		private WebElement showMaPlansClickable;
-		
-		@FindBy(xpath="//*[@class='tab active' and contains(text(),'Medicare Advantage Plans')]/div[1]/span[3]")
-		private WebElement showMaPlansNotClickable;
-		
 		@FindBy(xpath = "//div[@class='tab med-supp plancountheight']/div")
 		private WebElement showMsPlans;
-		
-		@FindBy(xpath = "//h3[text()='AARP® Medicare Supplement Insurance Plans']")
-		private WebElement msHeaderTitle;
 		
 		@FindBy(xpath="//*[contains(text(),'Start Plan Selector')]")
 		private WebElement planSelector;
@@ -160,9 +130,6 @@ public class ResponsivePlanSummaryUhc extends UhcDriver{
 		    @FindBy(xpath=".//*[@class='parbase planscompare section']/div[2]")
 		    private WebElement disclaimerTxt;
 		    
-		    @FindBy(xpath=".//*[text()='2017 AARP MedicareComplete SecureHorizons Plan 1 (HMO)']")
-		    private WebElement mapdPlan1;
-		    
 		    @FindBy(xpath="//*[contains(text(),'You Have Chosen to Enroll in the Following Plan')]")
 		    private WebElement enrollInPlan;
 		  
@@ -186,22 +153,8 @@ public class ResponsivePlanSummaryUhc extends UhcDriver{
 		    
 		    @FindBy (xpath=".//*[@id='fixTable']/tbody/tr[3]/td[4]")
 		    private WebElement outofpocket2;
-		    
-		    @FindBy(xpath="//*[@class='title' and contains(text(),'Medicare Advantage Plans')]")
-			private WebElement showMaPlans;
-			
-			@FindBy(xpath="//*[contains(text(),'Medicare Prescription')]/following-sibling::span[2]")
-			private WebElement showPdpPlans;
 			
 			//prescription drug benefits
-			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[16]/td[1]/p")
-		    private WebElement deductible;
-			
-			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[16]/td[2]/span")
-		    private WebElement deductible1;
-			
-			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[16]/td[10]/span")
-		    private WebElement deductible2;
 			
 			//@FindBy (xpath="//*[@id='fixTable']/tbody/tr[17]/td[1]/p")
 			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[25]/td[1]/p")
@@ -254,17 +207,11 @@ public class ResponsivePlanSummaryUhc extends UhcDriver{
 			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[24]/td[4]/strong[1]")
 		    private WebElement medicalBenefits2;
 			
-			@FindBy(xpath="//a[contains(text(),'Is my provider covered in my ZIP code/county?')]")
-            private WebElement providerSearchLink;
-			
 			@FindBy(xpath="//*[contains(text(),'Want to enroll')]")
             private WebElement blueBannerText;
 
 			@FindBy(xpath="//a[@class='ng-binding']")
             private WebElement planYearToggle;
-			
-			@FindBy(xpath="html/body/div[6]/div[4]/div/div/div/div/div/div/div[3]/div[1]/div/div/div/div[1]/div/div[1]/div/div[1]/div/h2")
-            private WebElement viewPlanHeader;
 
 			@FindBy(xpath="//div[@class='tab plancountheight active']/div/span/span")
             private WebElement planCount;
@@ -281,26 +228,12 @@ public class ResponsivePlanSummaryUhc extends UhcDriver{
 		@FindBy	(xpath="//span[@class='remove-plan-text show']/p")
 		private WebElement errorMessage;
 		
-		@FindBy	(xpath="//div[@class='mabenefittable']/parent::div/parent::div")
-		private List<WebElement> maPlanCardNumber;
-		
 		@FindBy(id="nav")
 		private WebElement headerElement;
 		
 		@FindBy(className="footer")
 		private WebElement footerElement;
 		
-		@FindBy(className="cta-button secondary compare-plans-button show")
-		private WebElement comparePlanLink;
-		
-			private static String CAMPAIGN_URL_1 = MRConstants.CAMPAIGN_PAGE_URL1;
-			
-			private static String CAMPAIGN_URL_2 = MRConstants.CAMPAIGN_PAGE_URL2;
-			
-			private static String ENDORSED_URL=MRConstants.Connector_model_url1;
-			//change to non-endorsed url
-			
-			private static String NON_ENDORSEDURL=MRConstants.Connector_model_url1;
 			
 			String drugCost=null;
 			
@@ -350,48 +283,7 @@ public class ResponsivePlanSummaryUhc extends UhcDriver{
 		// TODO Auto-generated method stub
 		// ADD elements that needed to validate
 	}
-	private JSONObject formJsonObject(PageData vppPlanSummary) {
-		JSONObject jsonObject = new JSONObject();
-		for (String key : vppPlanSummary.getExpectedData().keySet()) {
-			List<WebElement> elements = findElements(vppPlanSummary.getExpectedData().get(key));
-			if (elements.size() == 1) {
-				if (validate(elements.get(0))) {
-					try {
-						jsonObject.put(key, elements.get(0).getText().trim());
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			} else if (elements.size() > 1) {
-				JSONArray jsonArray = new JSONArray();
-				for (WebElement element : elements) {
 
-					if (validate(element)) {
-						try {
-							JSONObject jsonObjectForArray = new JSONObject();
-							jsonObjectForArray.put(vppPlanSummary.getExpectedData().get(key).getElementName(),
-									element.getText().trim());
-							jsonArray.put(jsonObjectForArray);
-						} catch (JSONException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-				}
-				try {
-					jsonObject.put(key, jsonArray);
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-			}
-
-		}
-		return jsonObject;
-
-}
 	public JSONObject getPlanSummaryActualData(String planName) {
 	String fileName = null;
 	if (planName.contains("HMO")) {

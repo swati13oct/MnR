@@ -1,5 +1,5 @@
 @registrationStepThreeErrormessages @gladiators
-Feature: To test the error messages on create account page in redesign portal
+Feature: G1.10To test the error messages on create account page in redesign portal
 
 @blankUsernameFieldError
   Scenario Outline: To verify correct error message appears if username field is left blank or incorrectly on create account page

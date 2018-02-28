@@ -1,27 +1,21 @@
 
 	package acceptancetests.memberredesign.registration;
 
-                import gherkin.formatter.model.DataTableRow;
-
                 import java.util.LinkedHashMap;
-                import java.util.List;
-                import java.util.Map;
+import java.util.List;
+import java.util.Map;
 
-                import junit.framework.Assert;
+import org.springframework.beans.factory.annotation.Autowired;
 
-                import org.openqa.selenium.WebDriver;
-                import org.springframework.beans.factory.annotation.Autowired;
-
-                import pages.dashboard.acquisition.RegistrationInformationPage;
-                import cucumber.api.DataTable;
-            	import cucumber.api.java.After;
-            	import cucumber.api.java.en.And;
-            	import cucumber.api.java.en.Given;
-            	import cucumber.api.java.en.Then;
-            	import cucumber.api.java.en.When;
-                import acceptancetests.data.CommonConstants;
-                import acceptancetests.data.PageConstants;
-                import atdd.framework.MRScenario;
+import acceptancetests.data.PageConstants;
+import atdd.framework.MRScenario;
+import cucumber.api.DataTable;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
+import junit.framework.Assert;
+import pages.dashboard.acquisition.RegistrationInformationPage;
 
                 /**
                 * @author 

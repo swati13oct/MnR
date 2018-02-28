@@ -6,9 +6,9 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.acquisition.bluelayer.ZipcodeLookupPage;
 import acceptancetests.data.MRConstants;
 import atdd.framework.UhcDriver;
+import pages.acquisition.bluelayer.ZipcodeLookupPage;
 
 /**
  * @author pperugu
@@ -27,9 +27,6 @@ public class OurPlansPage extends UhcDriver {
 
 	@FindBy(id = "nav-zipcode")
 	private WebElement zipfield;
-
-	@FindBy(xpath = "//*[@id='zipLookup']/p/a")
-	private WebElement LookUpZipCode;
 
 	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div[2]/form/span/span")
 	private WebElement errormessage;

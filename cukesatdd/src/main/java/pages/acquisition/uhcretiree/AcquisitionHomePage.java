@@ -57,7 +57,6 @@ public class AcquisitionHomePage extends UhcDriver {
 
 	private static String UHCRETIREE_ACQISITION_PAGE_URL = MRConstants.UHCRETIREE_URL;
 
-	private static String UHCRETIREE_SITE_MAP_URL = MRConstants.UHCRETIREE_SITE_MAP_URL;
 
 	public AcquisitionHomePage(WebDriver driver) {
 		super(driver);

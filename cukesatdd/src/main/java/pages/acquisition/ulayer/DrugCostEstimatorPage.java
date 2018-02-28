@@ -2,25 +2,23 @@ package pages.acquisition.ulayer;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -365,6 +363,12 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	
 	@FindBy(xpath = ".//*[@id='acqsummary']/div[3]/div[4]/div/p")
 	private WebElement costText;
+	
+	@FindBy(id = "ghn_lnk_2")
+	public WebElement ourPlansTab;
+	
+	@FindBy(id = "nav-zipcode")
+	public WebElement enterZipcode;
 
 	@Override
 	public void openAndValidate() {
@@ -401,7 +405,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	public void changeUrlToNewDCEPage() throws InterruptedException {
 
-		String Current_url = driver.getCurrentUrl();
+		
 		String NewDCEUrl;
 
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
@@ -559,7 +563,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 		String deleteDrugXpath = "//div[@id='drugs-tab']//p[contains (text(), '" + dosage + "')]";
 		try {
-			WebElement dosagedrug = driver.findElement(By.xpath(deleteDrugXpath));
+			driver.findElement(By.xpath(deleteDrugXpath));
 			Assert.assertFalse(true);
 		} catch (NoSuchElementException e) {
 			Assert.assertFalse(false);
@@ -983,7 +987,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		// addNewDrugModal.selectDrug(drug);
 		AddDrugDetails addDrugDetails = new AddDrugDetails(driver);
 		// addDrugDetails.selectQnty(60 + "");
-		SavingsOppurtunity savingsOppurtunity = addDrugDetails.continueAddDrugDetails();
+		addDrugDetails.continueAddDrugDetails();
 		SavingsOppurtunity savingsOppurtunity1 = new SavingsOppurtunity(driver);
 		savingsOppurtunity1.switchToGeneric();
 		savingsOppurtunity1.savedrugbutton();
@@ -1706,5 +1710,18 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			return true;
 		return false;
 	}
+	
+	public VPPPlanSummaryPage mouseHoverOurPlans(String zipCode){
+		if(ourPlansTab.isDisplayed()){
+		Actions actions = new Actions(driver);
+		actions.moveToElement(ourPlansTab).build().perform();
+		enterZipcode.sendKeys(zipCode, Keys.ENTER);
+		return new VPPPlanSummaryPage(driver);
+		}else{
+			System.out.println("====================Our Plans tab not displayed================");
+			return null;
+		}
+	}
+	
 
 }

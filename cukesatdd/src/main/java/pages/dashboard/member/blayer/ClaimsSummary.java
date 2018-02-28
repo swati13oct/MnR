@@ -1,7 +1,5 @@
 package pages.dashboard.member.blayer;
 
-import junit.framework.Assert;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
@@ -10,10 +8,10 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import junit.framework.Assert;
 
 public class ClaimsSummary extends UhcDriver{
 
@@ -37,9 +35,6 @@ public class ClaimsSummary extends UhcDriver{
 
 	@FindBy(xpath="//*[@id='medical']")
 	private WebElement ClaimsSummaryPage;
-
-	@FindBy(xpath=".//h2[contains(.,'Plan Name Lorem Ipsum')]")
-	private WebElement  planName;
 
 	@FindBy(xpath="//div[contains(.,'Medical')]")
 	private WebElement claimTypeMA;
@@ -87,9 +82,6 @@ public class ClaimsSummary extends UhcDriver{
 
 	@FindBy (xpath="//img[@alt='Blue Button']")
 	private WebElement downloadmydatabutton;
-
-	@FindBy (xpath="//button[contains(.,'Proceed')]")
-	private WebElement proceedbutton;
 
 	@FindBy (xpath=".//*[@id='differentProviderClaims']/div/div")
 	private WebElement proceedToDownloadPopUp;

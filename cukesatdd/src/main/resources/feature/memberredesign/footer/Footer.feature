@@ -1,6 +1,6 @@
 @theIncredibles
 @member_redesign_footer
-Feature:Footer for Member Site Redesign
+Feature:I1.2Footer for Member Site Redesign
 
 @member_redesign_footer @IncrediblesFooter
 Scenario Outline:As an authenticated member on the new Member site, I want to check Footer section.

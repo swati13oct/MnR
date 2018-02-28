@@ -60,9 +60,9 @@ public class GlobalTearDown {
 			
 			//To get the report embedded in the report
 			scenario.embed(screenshot, "image/png");
-			
+			 MRScenario mrScen=new MRScenario();
 			//Clean up the existing webdriver.
-		    wd.quit();
+			 mrScen.DriverQuit();
 		}
 
 	}

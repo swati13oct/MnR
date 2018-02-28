@@ -1,10 +1,5 @@
 package pages.member.bluelayer;
 
-/*@sunya*/
-
-import java.util.List;
-import java.util.Map;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;

@@ -68,7 +68,6 @@ public class MRScenario {
 
                private static Map<String, Map<String, JSONObject>> expectedDataMapBluelayer = new LinkedHashMap<String, Map<String, JSONObject>>();
                public static String environment;
-               
                public static String environmentMedicare;
                
                public static String domain;
@@ -102,7 +101,7 @@ public class MRScenario {
                               }
                }
 
-               WebDriver webDriver;
+           static WebDriver webDriver;
 
                public Object getBean(String id) {
                               Object result = scenarioObjectMap.get(id);
@@ -719,8 +718,8 @@ public class MRScenario {
                }
 */           
                public WebDriver getWebDriver() {
-               DesiredCapabilities capabilities = DesiredCapabilities
-                                             .firefox();
+               DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+                                             
                capabilities.setCapability("platform", "Windows 7");
                capabilities.setCapability("version", "45.0");
                capabilities.setCapability("parent-tunnel", "sauce_admin");
@@ -736,6 +735,7 @@ public class MRScenario {
                               // TODO Auto-generated catch block
                               e.printStackTrace();
                }
+               
                return webDriver;
                }
                
@@ -839,4 +839,12 @@ public class MRScenario {
 
                }
 
+               
+               public void DriverQuit()
+          
+               {
+            	   webDriver.quit();
+               }
+               
+               
 }

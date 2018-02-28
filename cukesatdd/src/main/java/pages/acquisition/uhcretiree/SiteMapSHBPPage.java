@@ -7,7 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.data.MRConstants;
 import atdd.framework.UhcDriver;
 
 
@@ -24,9 +23,6 @@ public class SiteMapSHBPPage extends UhcDriver {
 	public void openAndValidate() {
 
 	}
-	
-	@FindBy(xpath="//*[@id='main']/div/div[1]/div/div[4]/div[1]/div/div[1]/div[1]/ul/li[4]/a")
-	private WebElement findproviderlink;
 	
 
 	@FindBy(xpath=".//*[@id='main']/div/div[1]/div/div[4]/div[1]/div/div[1]/div[1]/ul/li[4]/a")
