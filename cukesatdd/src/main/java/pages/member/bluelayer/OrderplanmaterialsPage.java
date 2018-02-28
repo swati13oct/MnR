@@ -35,8 +35,7 @@ public class OrderplanmaterialsPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='orderplanconttext']/h3")
 	private WebElement planMaterialHeading;
 
-	@FindBy(id = "shipDocumentStateCodeId")
-	private WebElement shipDocumentStateCodeId;
+
 
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;

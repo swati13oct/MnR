@@ -30,14 +30,6 @@ public class PharmacyResultPage extends UhcDriver {
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;
 
-	@FindBy(xpath = "//div[@class='pharmacymid']/p")
-	private WebElement pharmacyTypesicondescription;
-
-	@FindBy(xpath = "//div[@class='Pharmacyresults']/table[@class='searchResults']/thead/tr/th[@class='colPhar2']/div/span")
-	private WebElement servicesTooltip;
-
-	@FindBy(xpath = "//div[@class='tooltipinner']/ul/li")
-	private List<WebElement> tooltipDetails;
 
 	@FindBy(xpath = "//div[@class='Pharmacyresults']/table[@class='searchResults']/tbody/tr/td[3]/div/ul/li[2]/a")
 	private WebElement viewMaplink;
@@ -48,8 +40,7 @@ public class PharmacyResultPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='mapContainer']/div/div/div/div/div[4]/div[4]/div/div[2]/div/div/p")
 	private List<WebElement> viewMapresult;
 
-	@FindBy(xpath = "//a[@id='find_searchagainbtn']")
-	private WebElement searchAgainButton;
+
 
 	@FindBy(linkText = "Create PDF")
 	private WebElement createPDFlink;

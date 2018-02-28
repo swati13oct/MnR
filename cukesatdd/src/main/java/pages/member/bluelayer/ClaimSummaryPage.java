@@ -11,7 +11,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
@@ -50,12 +49,6 @@ public class ClaimSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//table[@id='claim']/tbody/tr[2]/td[6]/form/input[12]")
 	private WebElement claimDetail;
-
-	@FindBy(xpath = "//div[@id='providercontainer']/select")
-	private WebElement providerSearch;
-
-	@FindBy(xpath = "//table[@id='claim']/tbody/tr[2]/td[7]/form/input[4]")
-	private WebElement drugclaimDetail;
 
 	@FindBy(className = "claimssection")
 	private WebElement claimssection;
@@ -112,7 +105,7 @@ public class ClaimSummaryPage extends UhcDriver {
 	private WebElement searchResultMsg;
 
 
-	private PageData claimsSummary;
+	
 
 	public JSONObject claimSummaryJson;
 
@@ -122,9 +115,7 @@ public class ClaimSummaryPage extends UhcDriver {
 
 		//CommonUtility.waitForPageLoad(driver, showClaimHistoryButton,30);
 
-		String fileName = CommonConstants.CLAIM_SUMMARY_PAGE_DATA;
-		claimsSummary = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);
+		
 		openAndValidate();
 	}
 
@@ -132,9 +123,7 @@ public class ClaimSummaryPage extends UhcDriver {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		CommonUtility.waitForPageLoad(driver, showClaimHistoryButton, CommonConstants.TIMEOUT_30);
-		String fileName = CommonConstants.CLAIM_SUMMARY_INDIVIDUAL_PAGE_DATA;
-		claimsSummary = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);
+		
 		openAndValidate();
 	}
 

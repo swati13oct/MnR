@@ -273,7 +273,7 @@ public class PharmacySearchPage extends UhcDriver{
         }
 
         public PharmacySearchPage hoverOverToolTip(String pharmacyType) {
-                String pharmacyTypeText = pharmacyTypeActual.getText().trim();
+                
                 //if(pharmacyTypeActual.equals(pharmacyType)){
                         toolTip.click();
                         try {

@@ -49,17 +49,6 @@ public class PharmacyResultPage extends UhcDriver {
 	@FindBy(xpath = "(//div[@class='startedsearchtop headingtop1'])[3]/h2")
 	private WebElement contactOptumRxWidgetDisplayed;
 
-	@FindBy(xpath = "//a[text()='ä¸¬æ–‡']")
-	private WebElement chineseContent;
-
-	@FindBy(xpath = "//a[text()='search']")
-	private WebElement chineseSearch;
-
-	@FindBy(xpath = "//a[text()='espaÃ±ol']")
-	private WebElement spanishContent;
-
-	@FindBy(xpath = "//a[text()='search']")
-	private WebElement spanishSearch;
 	
 	@FindBy(xpath = "//div[contains(@class,'Pharmacyresults')]/table[@class='searchResults']/tbody/tr/td[3]/div/ul/li[2]/a")
 	private WebElement viewMaplink;
@@ -70,8 +59,6 @@ public class PharmacyResultPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='mapContainer']/div/div/div/div/div[4]/div[4]/div/div[2]/div/div/p")
 	private List<WebElement> viewMapresult;
 
-	@FindBy(xpath = "//a[@id='find_searchagainbtn']")
-	private WebElement searchAgainButton;
 
 	@FindBy(linkText = "Create PDF")
 	private WebElement createPDFlink;
