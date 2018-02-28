@@ -91,7 +91,21 @@ And the user validates how to read medical eob PDF
 	| MAPD        |aarpWithEOB 			          | 12 Months    		 | Medical 	         |
 	| MAPD        |aarpWithEOB 			          | 18 Months    		 | Medical 	         |
 
-
+@spartansNiceEOB 
+Scenario Outline: To verify NICE EOB and click on the pdf
+Given registered AMP with for EOB flow
+	| Plan Type      |<planType>  |
+	| Member Type    |<memberType>|
+Then the user navigates to EOB page and validates the page
+ |Date Range|<dateRange>  |
+ |Plan Type |<planType>   |
+ |EOB Type  |<eobTypeData>|
+And the user clicks on first eob from the list
+ 	Examples:
+	| planType    | memberType    |dateRange     | eobTypeData       |
+	| MAPD        | NICE_EOB      | 18 Months    | Medical           |
+	| MA          | NICE_EOB 			| 18 Months    | Medical 	         |
+	| MAPD_GRP    | NICE_EOB 			| 18 Months    | Medical 	         |
  
  
  

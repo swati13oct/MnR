@@ -26,3 +26,6 @@ q1_aarp_feb006/Password@1,PDP,IndividualAARPWOEOB
 q1_ship_feb005/Password@1,SHIP,IndividualAARPWOEOB
 q1_feb_sfl023/Password@1,PCP,withEOB
 q1_aarp_feb159/Password@1,MAPD,aarpWithEOB
+q1_feb_aarpeob001/Password@1,MAPD,NICE_EOB
+q1_feb_aarpeob004/Password@1,MA,NICE_EOB
+q1_feb_grpeob002/Password@1,MAPD_GRP,NICE_EOB
