@@ -270,7 +270,7 @@ public class FormsAndResourcesPage extends UhcDriver {
                 {
                      getOrderPlanMaterialLink().click();
                      Thread.sleep(5000);
-                     String expectedURL ="https://stage-medicare.uhc.com/content/medicare/member/order-materials/overview.html";
+                     String expectedURL ="https://stage-medicare.uhc.com/medicare/member/order-materials/overview.html";
                      String actualURL=driver.getCurrentUrl();
                      System.out.println(actualURL);
                     Assert.assertEquals(expectedURL, actualURL);

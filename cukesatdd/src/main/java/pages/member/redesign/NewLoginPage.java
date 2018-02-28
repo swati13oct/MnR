@@ -13,6 +13,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.MRConstants;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.dashboard.acquisition.RegistrationInformationPage;
 import pages.member.ulayer.AccountHomePage;
