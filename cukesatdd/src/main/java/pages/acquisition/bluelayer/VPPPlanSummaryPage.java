@@ -4,7 +4,6 @@
 package pages.acquisition.bluelayer;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -113,17 +112,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath =".//*[@id='viewDetailsMA']")
 	private WebElement viewDetailsBtnMA;
 
-	//@FindBy(xpath ="//div[@id='snpplans_container']/div[2]/div/div/div/div[@class='ng-scope']")
-
 	@FindBy(xpath="//div[@id='snpplans_container']")
 	List<WebElement> snpPlanElement;
-
-	@FindBy(className = "planinf")
-	private WebElement vppplansummarypage;
-
-	@FindBy(id = "editDrugMA")
-	private WebElement editDrugListLink;
-
 
 	@FindBy(linkText ="Make an appointment with an agent")
 	private WebElement make_an_appointment_agent;
@@ -136,9 +126,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath=".//*[@id='plan-list-1']/div/div[2]/div/div[3]/div[3]/div/div/span[1]/label")
 	private WebElement compareChkBox3;
-
-	@FindBy(xpath=".//*[@id='plan-list-1']/div/div[3]/div/div[4]/div[3]/div/div/span[1]/label")
-	private WebElement compareChkBox4;
 
 	@FindBy(xpath="//div[@data-ng-repeat='plan in maplans'][1]//div[contains(@id,'showcompare')][1]/div[@class='compareHeading']/p[1]/b")
 	private WebElement comparePopUpTxt1;
@@ -172,9 +159,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(className = "planYear")
 	WebElement planYear;
-
-	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[2]/div/div[3]/div[2]/div/div[3]")
-	private WebElement viewMAPlanDetailsLink3;
 
 	@FindBy(xpath=".//*[@class='action-btn getStarted']")
 	private WebElement GetStarted;
@@ -332,8 +316,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public boolean validateAvailablePlans(String planType){
 		boolean flag = true;
 		int planCount = 0;
-		Calendar calender = Calendar.getInstance();
-		int year = calender.get(Calendar.YEAR);
 		if(planType.equals("MAPD") || planType.equals("MA") ){
 			String planHeading = null;
 			if(maPlanHeadingText.isDisplayed()){

@@ -6,8 +6,6 @@ import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.MRConstants;
@@ -15,8 +13,7 @@ import atdd.framework.UhcDriver;
 
 public class DeepLink extends UhcDriver{
 
-	@FindBy(id="home")
-	private WebElement homeButton;
+
 	
  	private static String DEEPLINK_URL = MRConstants.DEEPLINK_URL;
 	public DeepLink(WebDriver driver) {

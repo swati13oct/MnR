@@ -10,12 +10,10 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageData;
 import atdd.framework.UhcDriver;
 import pages.dashboard.member.drugcostestimator.blayer.AddDrugDetails;
 public class AddNewDrugModal extends UhcDriver {
 
-	private PageData addnewdrug;
 
 	public JSONObject addnewdrugJson;
 

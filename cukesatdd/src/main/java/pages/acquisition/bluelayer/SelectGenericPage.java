@@ -16,7 +16,6 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.acquisitionvbf.dce.DceCommonConstants;
 import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
@@ -36,7 +35,6 @@ public class SelectGenericPage extends UhcDriver {
 	@FindBy(name = "drug")
 	List<WebElement> drugs;
 	
-	private PageData genericDrug;
 
 	public JSONObject genericDrugJson;
 

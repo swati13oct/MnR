@@ -57,9 +57,6 @@ public class IntroductionInformationPage extends UhcDriver{
 	@FindBy(xpath = "//div[@id='beginOnlineEnrollment']/span")
 	private WebElement alreadyEnrolledErrorMsg;
 	
-	@FindBy(xpath = "//div[@id='disclaimer']/div/p")
-	private WebElement disclaimerHeading;
-	
 	private PageData introductionInformation;
 
 	public JSONObject  introductionInformationJson;

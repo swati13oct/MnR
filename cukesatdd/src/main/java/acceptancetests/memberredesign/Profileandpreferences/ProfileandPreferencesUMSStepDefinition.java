@@ -38,7 +38,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 	@Autowired
 	MRScenario loginScenario;
 
-	private String userName;
+	
 
 	public MRScenario getLoginScenario() {
 		return loginScenario;
@@ -78,7 +78,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 			System.out.println("Member Type data could not be setup !!!");
 			Assert.fail("unable to find a " + desiredAttributes + " member");
 		} else {
-			this.userName = userName = loginCreds.get("user");
+			userName = loginCreds.get("user");
 			pwd = loginCreds.get("pwd");
 			System.out.println("User is..." + userName);
 			System.out.println("Password is..." + pwd);

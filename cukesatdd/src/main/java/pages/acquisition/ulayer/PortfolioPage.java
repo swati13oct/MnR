@@ -36,14 +36,8 @@ public class PortfolioPage extends UhcDriver {
 	@FindBy(id = "cta-zipcode")
 	private WebElement zipCodeField;
 
-	@FindBy(id = "goBtn")
-	private WebElement goButton;
-
 	@FindBy(id = "nav-zipcode")
 	private WebElement zipfield;
-
-	@FindBy(xpath = "//*[@id='zipLookup']/p/a")
-	private WebElement LookUpZipCode;
 
 	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div[2]/form/span/span")
 	private WebElement errormessage;
@@ -69,13 +63,6 @@ public class PortfolioPage extends UhcDriver {
     @FindBy(id="city")
     private WebElement city;
     
-    @FindBy(xpath="//select")
-    private WebElement selectDropDown;
-
-   // @FindBy(xpath="html/body/div[4]/div[2]/div[1]/div/div/div/div/div[1]/div/div/div/div[2]/div/div/form/button")
-    @FindBy(className="zip-button")
-	private WebElement Findplansbuttonportfolio;
-    
     @FindBy(id="compare-plan-1")
     private WebElement chkBoxAddtoCompare1;
     
@@ -93,9 +80,6 @@ public class PortfolioPage extends UhcDriver {
     
     @FindBy(className="single-added-text show")
     private WebElement onePlanAdded;
-    
-    @FindBy(className="multiple-added-text show")
-    private WebElement twoPlanAdded;
 
 	//private static String PAGE_URL = MRConstants.AARP_OUR_PLANS_URL;
 	private static String PAGE_URL = MRConstants.PORTFOLIO_PAGE_URL;

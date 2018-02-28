@@ -23,6 +23,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ulayer.LoginAssistancePage;
+import pages.dashboard.member.ulayer.MemberNewSignInPage;
 
 /**
  * @author pjaising
@@ -421,5 +422,10 @@ if ( MRScenario.environmentMedicare.equalsIgnoreCase("team-ci1") || (MRScenario.
 
 		return null;
 	}
+
+	public Object loginPageObject(){
+		return new MemberNewSignInPage(driver);
+
+		}
 
 }
