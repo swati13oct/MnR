@@ -91,7 +91,7 @@ And the user validates how to read medical eob PDF
 	| MAPD        |aarpWithEOB 			          | 12 Months    		 | Medical 	         |
 	| MAPD        |aarpWithEOB 			          | 18 Months    		 | Medical 	         |
 
-@spartansNiceEOB 
+@febRelease2018 
 Scenario Outline: To verify NICE EOB and click on the pdf
 Given registered AMP with for EOB flow
 	| Plan Type      |<planType>  |
