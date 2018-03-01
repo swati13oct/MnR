@@ -19,8 +19,7 @@ import atdd.framework.UhcDriver;
  */
 public class PreferencesPage extends UhcDriver{
 
-	@FindBy(id = "disclosure_link")
-	private WebElement logOut;
+
 	
 	@FindBy(xpath="//div[contains(@class,'parsys overview')]/div[not (contains(@class,'ng-hide'))][1]//button[@id='save-prefs-btn']")
 	private WebElement btnSavePreferences;
@@ -28,8 +27,7 @@ public class PreferencesPage extends UhcDriver{
 	@FindBy(xpath="//div[contains(@class,'parsys overview')]/div[not (contains(@class,'ng-hide'))][1]//div[contains(@class,'benefits-coverage')]//a[contains(@class,'prefernce')]")
 	private WebElement lnkProfilePreferences;
 	
-	@FindBy(xpath="//div[contains(@class,'preferences-wrapper')]/div[@class='ng-scope']")
-	private WebElement paperlessPreferences;
+
 	
 	@FindBy(xpath="//div[contains(@class,'parsys overview')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='goPaperless0']")
 	private WebElement chkBox;
@@ -54,9 +52,7 @@ public class PreferencesPage extends UhcDriver{
 	
 	@FindBy(xpath="//div[contains(@class,'parsys overview')]/div[not (contains(@class,'ng-hide'))][1]//a[@title='Back to My Profile']")
 	private WebElement btnGoToMyAccount;
-	
-	@FindBy(xpath="//h2[@class='h3 medium margin-small']/p")
-	private WebElement goGreenHeading;
+
 	
 	public PreferencesPage(WebDriver driver) {
 		super(driver);

@@ -18,8 +18,7 @@ import atdd.framework.UhcDriver;
  */
 public class GoGreenSplashPage extends UhcDriver{
 
-	@FindBy(id = "disclosure_link")
-	private WebElement logOut;
+	
 	
 	@FindBy(id="save-prefs-btn")
 	private WebElement btnSavePreferences;
@@ -32,9 +31,7 @@ public class GoGreenSplashPage extends UhcDriver{
 	
 	@FindBy(xpath="//div[@class='message-block--full-width success margin-large']/div[1]/span")
 	private WebElement successMessageHeading;
-	
-	@FindBy(xpath="//div[@class='message-block--full-width success margin-large']/div[2]/p[2]")
-	private WebElement confirmationMessageText;
+
 	
 	@FindBy(id="goPaperless")
 	private WebElement mustAgreeTerms;
@@ -51,8 +48,6 @@ public class GoGreenSplashPage extends UhcDriver{
 	@FindBy(xpath="//a[@title='Back to My Profile']/p")
 	private WebElement btnGoToMyAccount;
 	
-	@FindBy(xpath="//h2[@class='h3 medium margin-small']/p")
-	private WebElement goGreenHeading;
 	
 	public GoGreenSplashPage(WebDriver driver) {
 		super(driver);

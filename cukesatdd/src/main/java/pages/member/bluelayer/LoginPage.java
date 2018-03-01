@@ -53,8 +53,7 @@ public class LoginPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='accessURAccountBTN']")
 	private WebElement signInButton;
 	
-	@FindBy(xpath = "//*[@id='fd_signInPanel']/div[2]/div[4]/button")
-	private WebElement signInNewButton;
+
 	
 
 	@FindBy(linkText = "Forgot your username or password?")
@@ -304,11 +303,6 @@ System.out.println(signInButton.isEnabled());
 			return new TerminatedHomePage(driver);
 		}
 		return null;
-	}
-
-	private void While(boolean b) {
-		// TODO Auto-generated method stub
-		
 	}
 
 

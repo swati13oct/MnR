@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
@@ -23,7 +22,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
-import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 // import acceptancetests.planName.bluelayer.PlanNamesStepDefinition;

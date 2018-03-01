@@ -75,29 +75,17 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(linkText = "medical providers")
 	private WebElement medicalProviders ;
 
-	@FindBy(xpath = "//li[@id='fd_myMenu']/a")
-	private WebElement myMenuNavigator;
 
 	@FindBy(xpath = "//span[contains(.,'Print temporary ID card')]")
 	private WebElement viewIDCard;
 	
 	@FindBy(id = "pcpLogoPrint1left")
 	private WebElement validateLogo;
-	
-	@FindBy(linkText = "Prescription drug cost and benefits summary")
-	private WebElement prescriptionDrugCostBenefitSummaryLink;
 
-	@FindBy(linkText = "Medical Explanation of Benefits (EOB)")
-	private WebElement medicalEobLink;
-
-	@FindBy(linkText = "Prescription Drug Explanation of Benefits (EOB)")
-	private WebElement prescriptionDrugEobLink;
 
 	@FindBy(linkText = "look up drugs")
 	private WebElement drugLookupLink;
 
-	@FindBy(linkText = "Search claim history")
-	private WebElement searchClaimsHistory;
 
 	@FindBy(linkText = "Search medical claims")
 	private WebElement searchMedicalClaims;
@@ -117,8 +105,6 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath=".//*[@id='IPEinvL']/map/area[2]")
     private WebElement iPerceptionPopUp;
 
-	@FindBy(linkText = "Supplemental Insurance Explanation of Benefits (EOB)")
-	private WebElement suppInsurancelEobLink;
 
 	@FindBy(className = "fd_myMenu")
 	private WebElement myMenuLinkAarp;
@@ -162,8 +148,6 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='gogreenlogin_box']/div[4]/div")
 	private WebElement gogreenPopup;
 	
-	@FindBy(xpath = "//*[@id='gogreenlogin_box']/div[4]/div/a")
-	private WebElement gogreenPopupClose;
 	
 	
 	@FindBy(xpath = "//*[@id='paymentOverviewApp']/div[1]/div/div/div/h1")
@@ -187,26 +171,10 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(xpath = ".//*[@id='contentRow']/td/table/tbody/tr/td/div/div[2]/div[3]/div[3]/div[2]/div/div/div[2]/div")
 	private WebElement myResourcesContent;
-	
-	@FindBy(xpath = "//*[@class='zip']/span[1]")
-	private WebElement RallyZipcode;
-
-	@FindBy(xpath="//*[@id='IPEinvL']/map/area[3]")
-	private WebElement closebtn;
-	
 
 	
 	@FindBy(xpath="//a[contains(text(),'Provider search')]")
 	private WebElement providerSearchinPanelNavigation;
-
-	@FindBy(xpath="//a[contains(text(),'Medical Explanation of Benefits (EOB)')]")
-	private WebElement medicalEOBLinkInPanelNavigation;
-	@FindBy(id="zipCode")
-	private WebElement zipCode;
-
-
-
-
 
 
 	@FindBy(xpath="//a[@class='searchforproviders margin_top_5px']")
@@ -253,8 +221,6 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath="//a[contains(text(),'search for providers')]")
 	private WebElement searchforproviderlinkinClaimsPage;
 
-	  @FindBy(xpath="//*[@id='btn_searchforaprovider']")
-	  private WebElement providerLink;
 	  
 	  @FindBy(xpath="//a[@class='searchforproviders margin_top_5px']")
 		private WebElement searchProviderinFormsandResourcePage;
@@ -267,14 +233,9 @@ public class AccountHomePage extends UhcDriver {
 	  
 	  @FindBy(xpath = "//*[@id='dashboard']//span[text()='View Your Claims']")
 	  private WebElement claimsDashboardLink;
-	  
-	  
+
 	
 	
-	@FindBy(xpath="//span[text()='search providers']")
-	private WebElement searchProviderLinkinFormsandResourcePage;
-	
-	private PageData myAccountHome;
 
 	public JSONObject accountHomeJson;
 
@@ -288,9 +249,7 @@ public class AccountHomePage extends UhcDriver {
 	public AccountHomePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		String fileName = CommonConstants.ACCOUNT_HOME_PAGE_DATA;
-		myAccountHome = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
+		
 		openAndValidate();
 		
 	}

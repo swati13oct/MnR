@@ -1,6 +1,8 @@
 package pages.dashboard.memberAuth;
 
 import org.json.JSONObject;
+//import junit.framework.Assert;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,8 +11,6 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-//import junit.framework.Assert;
-import org.junit.Assert;
 
 public class MemberAuthLoginPage extends UhcDriver {
 	

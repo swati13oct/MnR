@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;

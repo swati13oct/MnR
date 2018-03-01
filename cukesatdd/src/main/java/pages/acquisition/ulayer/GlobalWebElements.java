@@ -144,7 +144,7 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(className = "not-registered-text")
 	 public static WebElement notRegisteredText;
 	
-	@FindBy(xpath = "//div[@class='nav-search']/form/input")
+	@FindBy(id = "nav")
 	 public static WebElement navigationSectionEnterSearch;
 	
 	@FindBy(id = "ghn_lnk_2")

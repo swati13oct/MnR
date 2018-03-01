@@ -35,14 +35,12 @@ import gherkin.formatter.model.DataTableRow;
  */
 public class PlanBenefitsCoveragePage extends UhcDriver {
 
-	@FindBy(id = "planBenefitsApp")
-	private WebElement planBenefitsContent;
+	
 
 	@FindBy(id ="disclosure_link")
 	private WebElement logOut;
 
-	@FindBy(id = "standardNetwork")
-	private WebElement standardNetwork;
+	
 
 	private PageData planBenefitsCoverage;
 

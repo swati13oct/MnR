@@ -61,9 +61,7 @@ public class MemberNewSignInPage extends UhcDriver{
 	
 	@FindBy (id ="member-id")
 	private WebElement MemberId;
-	
-	@FindBy (css = "#regbutton")
-	private WebElement regbutton;
+
 	
 
 	private WebDriver driver;

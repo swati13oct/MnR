@@ -65,8 +65,7 @@ public class DrugClaimSummaryPage extends UhcDriver {
 	@FindBy(id = "shiptoYear")
 	private WebElement shiptoYear;
 
-	@FindBy(id = "shipRange")
-	private WebElement shipRange;
+
 
 	@FindBy(id = "searchbutton")
 	private WebElement searchbutton;
@@ -74,11 +73,6 @@ public class DrugClaimSummaryPage extends UhcDriver {
 	@FindBy(xpath = "/html/body/div[6]/div/div/table/tbody/tr[5]/td/div[2]/div/div/div[2]/div[8]/div/div[2]/div[2]/div[2]/div/div[2]/div[3]/div/div[3]/div")
 	private WebElement shipsearchbutton;
 
-	@FindBy(xpath = "//table[@id='claim']/tbody/tr[2]/td[8]/form/input[4]")
-	private WebElement shipclaimDetail;
-
-	@FindBy(xpath = "//table[@id='claim']/tbody/tr[3]/td[6]/form/input[12]")
-	private WebElement claimDetail;
 
 	@FindBy(xpath = "//table[@id='claim']/tbody/tr[2]/td[7]/form/input[4]")
 	private WebElement drugclaimDetail;
@@ -92,17 +86,7 @@ public class DrugClaimSummaryPage extends UhcDriver {
 	@FindBy(className = "claimssection")
 	private WebElement claimsSection;
 
-	@FindBy(id = "searchResultMsg")
-	private WebElement searchResultMessage;
 
-	@FindBy(id = "noClaimsFoundMsg")
-	private WebElement noClaimsFoundMessage;
-
-	@FindBy(id = "customResultMsg")
-	private WebElement customResultMessage;
-
-	@FindBy(id = "pageheading")
-	private WebElement drugClaimsPageheading;
 
 	@FindBy(id = "radioDrug")
 	private WebElement radioDrug;

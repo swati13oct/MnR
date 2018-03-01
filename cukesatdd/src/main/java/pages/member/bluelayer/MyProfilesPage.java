@@ -58,14 +58,11 @@ public class MyProfilesPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='editLink']")
 	private List<WebElement> editLink;
 
-	@FindBy(xpath = "//div[@class='accProMidBg']")
-	private WebElement accountInfo;
+
 
 	@FindBy(linkText = "save")
 	private WebElement saveButton;
 
-	@FindBy(xpath = "//div[@class='myProSubCntMidBg']")
-	private WebElement planProfileInfo;
 
 	@FindBy(id = "temporaryAddress.addressLine1")
 	private WebElement tempAddress1Field;
@@ -81,12 +78,6 @@ public class MyProfilesPage extends UhcDriver {
 
 	@FindBy(id = "temporaryAddress.startDate.month")
 	private WebElement tempAddStartDateMonthField;
-
-	@FindBy(id = "temporaryAddress.startDate.day")
-	private WebElement tempAddStartDateDayField;
-
-	@FindBy(id = "temporaryAddress.startDate.year")
-	private WebElement tempAddStartDateYearField;
 
 	@FindBy(id = "temporaryAddress.stopDate.month")
 	private WebElement tempAddStopDateMonthField;
