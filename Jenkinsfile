@@ -5,9 +5,9 @@
 // Global Variables
 def pom, fullGitCommit, pipelineVersion
 def credentialsId = 'c35e98d4-5b20-4607-854e-ddc6f0fd8ba4'
-def codeHubRepoUrl = 'https://codehub.optum.com/consumer-portals/mratdd.git'
+def gitHubRepoUrl = 'https://github.optum.com/consumer-portals/mratdd.git'
 def gitBranch = "${env.BRANCH_NAME}"
-def mvnParams = "-Dgit.branch=${gitBranch} -Dbuild.number=${env.BUILD_NUMBER} -Dbuild.time=${env.BUILD_TIMESTAMP} -Dgit.url=${codeHubRepoUrl}"
+def mvnParams = "-Dgit.branch=${gitBranch} -Dbuild.number=${env.BUILD_NUMBER} -Dbuild.time=${env.BUILD_TIMESTAMP} -Dgit.url=${gitHubRepoUrl}"
 def pomLocation = "cukesatdd/pom.xml"
 /**
  * Run with java and maven version environment setup
@@ -83,12 +83,12 @@ def updatePipelineVersion(String gitBranch, String pipelineVersion){
 *Write build properties files to be used in subsequent jobs
 *
 * @param gitBranch
-* @codeHubRepoUrl
+* @gitHubRepoUrl
 * @gitBranch
 *
 */
-def writeBuildPropertiesFile(String gitBranch, String codeHubRepoUrl, String pipelineVersion){
-	writeFile file: 'build.properties', text: "GIT_BRANCH=${gitBranch}\nSOURCE_BUILD_NUMBER=${env.BUILD_NUMBER}\nSOURCE_GIT_URL=${codeHubRepoUrl}\nSOURCE_JOB_NAME=${env.JOB_NAME}\nSOURCE_JOB_URL=${env.JOB_URL}\nPIPELINE_VERSION=${pipelineVersion}"
+def writeBuildPropertiesFile(String gitBranch, String gitHubRepoUrl, String pipelineVersion){
+	writeFile file: 'build.properties', text: "GIT_BRANCH=${gitBranch}\nSOURCE_BUILD_NUMBER=${env.BUILD_NUMBER}\nSOURCE_GIT_URL=${gitHubRepoUrl}\nSOURCE_JOB_NAME=${env.JOB_NAME}\nSOURCE_JOB_URL=${env.JOB_URL}\nPIPELINE_VERSION=${pipelineVersion}"
 		
 	archiveArtifacts artifacts: 'build.properties', fingerprint: true
 }
@@ -99,7 +99,7 @@ node('docker-maven-slave') {
     stage('GiT Clone') {
 		
         // Checkout source code from CodeHub branch
-        performGitCheckout(gitBranch, credentialsId, codeHubRepoUrl)
+        performGitCheckout(gitBranch, credentialsId, gitHubRepoUrl)
         stash name: 'source'
 
         // Get POM version and set it as pipeline version
@@ -107,7 +107,7 @@ node('docker-maven-slave') {
         fullGitCommit = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
         pipelineVersion = "${pom.version}-${env.BUILD_NUMBER}"
 		pipelineVersion = updatePipelineVersion(gitBranch, pipelineVersion)
-		writeBuildPropertiesFile(gitBranch, codeHubRepoUrl, pipelineVersion)		
+		writeBuildPropertiesFile(gitBranch, gitHubRepoUrl, pipelineVersion)		
 
         // Set build display name and description
 		currentBuild.displayName = "#${env.BUILD_NUMBER} - ${pipelineVersion}"
