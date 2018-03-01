@@ -410,7 +410,7 @@ private WebElement searchforproviderlinkinClaimsPage;
     			if(driver.getCurrentUrl().contains("/dashboard"));
     			{
     				
-    				accountToggleDropdown.click();
+    				/*accountToggleDropdown.click();
     				validate(accountSettingOption);
     				accountSettingOption.click();
     				try {
@@ -418,7 +418,9 @@ private WebElement searchforproviderlinkinClaimsPage;
     				} catch (InterruptedException e) {
     					// TODO Auto generated catch block
     					e.printStackTrace();
-    				}
+    				}*/
+    				driver.navigate().to(PAGE_URL+"medicare/member/account/profile.html");
+    		
     				System.out.println("title is "+driver.getTitle());
     				System.out.println("Current Url is "+driver.getCurrentUrl());
     				CommonUtility.waitForPageLoad(driver, heading, 50);
@@ -437,9 +439,17 @@ private WebElement searchforproviderlinkinClaimsPage;
                 System.out.println("iPerception Pop Up displayed");
     		}
     		if (MRScenario.environment.equals("team-ci1") || MRScenario.environment.equals("team-h") || MRScenario.environment.equals("test-a") || MRScenario.environment.equals("team-e")) {
-    			profilenpreferenceslink.click();
+    			driver.navigate().to(PAGE_URL+"medicare/member/account/profile.html");
+        		
+				System.out.println("title is "+driver.getTitle());
+				System.out.println("Current Url is "+driver.getCurrentUrl());
+				
     		}else{
-    			profilenpreferenceslink.click();
+    			driver.navigate().to(PAGE_URL+"medicare/member/account/profile.html");
+        		
+				System.out.println("title is "+driver.getTitle());
+				System.out.println("Current Url is "+driver.getCurrentUrl());
+			
     		}
     		CommonUtility.waitForPageLoad(driver, heading, 50);
     		if(driver.getTitle().equalsIgnoreCase("Profile"))
