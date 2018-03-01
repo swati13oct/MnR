@@ -5,7 +5,6 @@ package pages.member.bluelayer;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -118,14 +117,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-bnc-drugcostsheading")
 	private WebElement DrugCostHeader;
 
-	@FindBy(className = "atdd-bnc-phrmcytext")
-	private WebElement DrugCostheadertext;
 
 	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[2]/div/div")
 	private WebElement DrugCostheaderandtext;
-
-	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[3]/div/div/div[2]/p")
-	private WebElement Pharmacycontent;
 
 	@FindBy(xpath = ".//*[@id='waystosave']/div/div/div[1]/div/h1")
 	private WebElement TextWaystoSave;
@@ -209,8 +203,6 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "changepcp-atdd")
 	private WebElement ChangeYourPcpButton;
 
-	@FindBy(xpath = "//*[@id='planBenefitsApp']/div/div[1]/div[6]/div/div[2]/div[2]/div")
-	private WebElement SearchforaPhysician;
 
 	@FindBy(className = "start-search-atdd")
 	private WebElement StartSearch;
@@ -242,8 +234,6 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='planBenefitsApp']/div[2]/div[11]/div/div/div/header/span")
 	private WebElement EmergencyCare;
 
-	@FindBy(className = "atdd-bncsummary-primarycareprvdrheader")
-	private WebElement PrimaryCareProviderHeader;
 
 	@FindBy(xpath = ".//*[@id='benefitsMain']/div[2]/div/div[1]/div/div/div/div/div[6]/div/div[1]/div/h2")
 	private WebElement PrimaryCareProviderHeaderInd;
@@ -565,7 +555,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	 */
 	public void languagevalidation() {
 		if (langdropdown.isDisplayed()) {
-			List<String> listActual = new ArrayList<String>();
+			
 			Select dropdown = new Select(langdropdown);
 			List<WebElement> webElements = dropdown.getOptions();
 			for (WebElement element : webElements) {

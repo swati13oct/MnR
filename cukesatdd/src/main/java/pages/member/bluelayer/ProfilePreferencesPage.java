@@ -149,9 +149,6 @@ public class ProfilePreferencesPage extends UhcDriver {
 	private WebElement PhoneEditButton;
 
 
-	@FindBy(xpath = "//*[@id='tab-1']/div[3]/div[1]/div/div[2]/div/div/div/div[1]/div/div/div[2]/div[1]/div[1]/div/span[1]")
-	private WebElement Daytimephone;
-
 	@FindBy(id = "phone-form")
 	private WebElement PhoneForm;
 
@@ -248,8 +245,6 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(className = "html/body/div[2]/div[3]/div[2]/div[1]/div/div/div/div/div[1]/div/div/div/div/div/div/a")
 	private WebElement backLink1;
 
-	@FindBy(xpath = "html/body/div[3]/div[3]/div[1]/div[1]/div[2]/div/div/div/div[2]/div/div/div/div")
-	private WebElement backLink2;
 
 	@FindBy(className = "atdd-checkbox-label")
 	private WebElement NoteSection;

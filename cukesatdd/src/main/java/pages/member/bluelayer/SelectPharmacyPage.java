@@ -12,7 +12,6 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.CommonConstants;
@@ -42,11 +41,7 @@ public class SelectPharmacyPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='dce.member']/div/div[5]/div/div/form/div/div/div[1]/div[2]/p")
 	private WebElement pharmacyHeading;
 
-	@FindBys(value = { @FindBy(xpath = "//div[@class='dcePharmacyTable']/table/tbody/tr") })
-	private List<WebElement> pharmacyRows;
-
-	@FindBy(className = "viewDrugCost")
-	private WebElement drugCostTable;
+	
 
 	@FindBy(className = "dcePharmacyTable")
 	private WebElement pharmacyTable;
@@ -54,14 +49,6 @@ public class SelectPharmacyPage extends UhcDriver {
 	@FindBy(className = "milesSelection")
 	private WebElement distances;
 
-	@FindBy(linkText = "add a drug")
-	private WebElement addDrugLink;
-
-	@FindBy(linkText = "select")
-	private WebElement selectPharmacyButton;
-	
-	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[5]/a[3]/span")
-	private WebElement viewDrugCostBtn;
 	
 	@FindBy(xpath = "//*[@id='dceMemberUlayer']/div/div[1]/div[3]/div[2]/table/tbody/tr[2]/td[3]/div")
 	private WebElement drugCostsValue;

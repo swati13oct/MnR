@@ -20,8 +20,7 @@ import atdd.framework.UhcDriver;
 
 public class MyProfilesPage extends UhcDriver{
 	
-   @FindBy(className = "shipmyplans_tab")
-   private WebElement myProfilesTab;
+ 
    
    @FindBy(className = "shipmyprefers_tab")
    private WebElement myPrefTab;
@@ -80,11 +79,6 @@ public class MyProfilesPage extends UhcDriver{
 	@FindBy(id = "temporaryAddress.startDate.month")
 	private WebElement tempAddStartDateMonthField;
 	
-	@FindBy(id = "temporaryAddress.startDate.day")
-	private WebElement tempAddStartDateDayField;
-	
-	@FindBy(id = "temporaryAddress.startDate.year")
-	private WebElement tempAddStartDateYearField;
 	
 	@FindBy(id = "temporaryAddress.stopDate.month")
 	private WebElement tempAddStopDateMonthField;

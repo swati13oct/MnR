@@ -12,35 +12,7 @@ public class NewEmailAddressPage extends UhcDriver{
 	
   //private static String PAGE_URL = MRConstants.TeamC_NewEmail_address_URL;
 	
-		@FindBy(xpath = ".//*[@id='email-modal-form']/div/button")
-		private WebElement ContinueButton;
-		
-		@FindBy(xpath = ".//*[@id='email-modal-form']/fieldset/span")
-		private WebElement Error1;
-		
-		@FindBy(xpath = ".//*[@id='email-modal-form']/fieldset/div[1]/div[3]/div/div/label")
-		private WebElement UseDifferentEmailAddressButton;
-		
-		@FindBy(xpath = ".//*[@id='new-email']")
-		private WebElement New_Mail;
-		
-		@FindBy(xpath = ".//*[@id='new-email-confirm']")
-		private WebElement Confirm_New_Mail;
-		
-		@FindBy(xpath = ".//*[@id='email-modal-form']/fieldset/div[2]/div[1]/span[1]")
-		private WebElement Valid_email_error;
-		
-		@FindBy(xpath = ".//*[@id='email-modal-form']/fieldset/div[2]/div[2]/span[3]")
-		private WebElement Email_confirm_error;
-		
-		@FindBy(xpath = ".//*[@id='email-modal-form']/fieldset/div[1]/div[3]/div/div/label")
-		private WebElement UseDifferentMailAddressLink;		
-       
-		@FindBy(id = "email-2")
-		private WebElement SecondOption;	
-		
-		@FindBy(xpath = ".//*[@id='email-modal-form']/fieldset/div[1]/div[1]/div/div/label")
-		private WebElement FirstOption;
+	
 		
 		@FindBy(id = "new-email")
 		private WebElement newEmail;

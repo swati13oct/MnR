@@ -32,11 +32,12 @@ public class EobStepDefinition {
 	}
 	
 	/**
-	*@toDo: get the required parameters from the feature files
+	*@throws InterruptedException 
+	 * @toDo: get the required parameters from the feature files
 	*/
 	
 	@Given("^registered AMP with for EOB flow$")
-	public void registered_AMP_with_attribute_eob_aarp(DataTable memberAttributes){
+	public void registered_AMP_with_attribute_eob_aarp(DataTable memberAttributes) throws InterruptedException{
 		//get the required parameters from the feature files
 				WebDriver wd = getLoginScenario().getWebDriver();
 				getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -318,6 +319,15 @@ public class EobStepDefinition {
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
 		eobPage.validateEOBStatements(eobCount);
 	}
+
+	@And("^the user clicks on first eob from the list$")
+	public void the_user_clicks_on_first_eob_from_the_list() throws InterruptedException {
+		
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+	
+		eobPage.clickOnEob();
+	}
+
 	
 	/*@After
 	public void tearDown() {

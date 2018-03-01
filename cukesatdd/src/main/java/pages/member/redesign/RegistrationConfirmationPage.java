@@ -20,9 +20,7 @@ public class RegistrationConfirmationPage extends UhcDriver {
 
 	@FindBy(css="div#goToHomeId>a:first-child")
 	private WebElement btnGotoHomePage;
-	
-	@FindBy(css="div#account-confirmation-text>div:first-child>p")
-	private WebElement successMessage;
+
 
 
 	public RegistrationConfirmationPage(WebDriver driver) {

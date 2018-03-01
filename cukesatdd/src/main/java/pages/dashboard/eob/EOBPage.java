@@ -1,6 +1,7 @@
 package pages.dashboard.eob;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -92,6 +93,10 @@ public class EOBPage extends UhcDriver{
 		
 	@FindBy(className="rightarrow")
 	private WebElement nextPageArrow;
+	
+	@FindBy(id="eoblist0")
+	private WebElement eobFirst;
+	
 	
 	private static String STAGE_DASHBOARD_URL = MRConstants.DASHBOARD_URL;
 	
@@ -371,7 +376,7 @@ public class EOBPage extends UhcDriver{
 		return null;
 	}
 
-	public EOBPage loginToDashboardPage(String userName){
+	public EOBPage loginToDashboardPage(String userName) throws InterruptedException{
 		System.out.println(MRScenario.environment);
 		/*if ( MRScenario.environment.contains("stage") || MRScenario.environment.contains("test-a")){
 			System.out.println(EOB_DIRECT_URL);
@@ -389,9 +394,12 @@ public class EOBPage extends UhcDriver{
 		
 		driver.manage().timeouts().implicitlyWait(40,TimeUnit.SECONDS) ;
 		System.out.println(userName);
+		Thread.sleep(3000);
 		validate(driver.findElement(By.id("username")));
 		driver.findElement(By.id("username")).sendKeys(userName);
+		Thread.sleep(1000);
 		driver.findElement(By.id("password")).sendKeys("Password@1");
+		Thread.sleep(2000);
 		driver.findElement(By.id("sign-in-btn")).click();
 		return new EOBPage(driver);
 	}
@@ -604,7 +612,27 @@ public class EOBPage extends UhcDriver{
 		
 		return numberOfPageDisplayed;
 	}
+	public void clickOnEob () throws InterruptedException {
+		waitforElement(eobFirst);
+		eobFirst.click();
+		Thread.sleep(5000);
+		//Get the current window handle
+		//String windowHandle = driver.getWindowHandle();
+
+		//Get the list of window handles
+		  ArrayList<String> newTab = new ArrayList<String>(driver.getWindowHandles());
+		System.out.println(newTab.size());
+		//Use the list of window handles to switch between windows
+		driver.switchTo().window(newTab.get(1));
+
+		//Switch back to original window
+		//driver.switchTo().window(mainWindowHandle);
+		String getURL = driver.getCurrentUrl();
+		System.out.println(" pdf url: " + getURL);
+		Assert.assertTrue(getURL.contains(".pdf"));
+	}
 	
+		
 	public void validatePaginationText(){
 		
 	}

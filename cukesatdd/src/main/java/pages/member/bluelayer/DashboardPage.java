@@ -21,29 +21,17 @@ public class DashboardPage extends UhcDriver {
 		openAndValidate();
 	}
 
-	@FindBy(xpath = "(//nav[@id='main nav']//a[contains(text(),'Find Care')])[1]")
-	private WebElement panelFindCareCost;
 
-	@FindBy(id = "premiumpayment")
-	private WebElement panelPremiumPayment;
+
 
 	@FindBy(xpath = "(//nav[@id='main-nav']//a[contains(text(),'Home')])[1])")
 	private WebElement panelHome;
-
-	@FindBy(xpath = "(//nav[@id='main nav']//a[contains(text(),'Claims')])[1]")
-	private WebElement panelClaims;
 
 	@FindBy(xpath = "//button[@id='dropdown-toggle--1']/span[contains(text(),'Profile')]")
 	private WebElement accountToggleDropdown;
 
 	@FindBy(xpath = "//a[@class='dropdown-option' and contains(text(),'Account Settings')]")
 	private WebElement accountSettingOption;
-
-	@FindBy(xpath = "//header//h1")
-	private WebElement heading;
-
-	@FindBy(xpath = "//div[@id='ui view page']//span[contains(text(),'Look up Drugs')]")
-	private WebElement DCE_Dashboard;
 
 	@FindBy(xpath = "//sticky[@id='sticky-nav']//nav[@id='main-nav']//a[contains(text(),'Coverage & Benefits')]")
 	private WebElement BnClink;
