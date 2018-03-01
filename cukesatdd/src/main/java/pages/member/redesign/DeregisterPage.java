@@ -19,15 +19,12 @@ import atdd.framework.UhcDriver;
 public class DeregisterPage extends UhcDriver {
 
     /** The signin page url. */
-    private static String PAGE_URL = MRConstants.DEREGISTER_STAGE_URL;
-
+    
     /** The agent party unix id. */
     @FindBy(id = "tobederegisteruser")
     private WebElement userNameField;
 
-    /** The password field. */
-    @FindBy(id = "password")
-    private WebElement passwordField;
+
 
     /** The password field. */
     @FindBy(xpath = "//input[@value='DeRegister']")

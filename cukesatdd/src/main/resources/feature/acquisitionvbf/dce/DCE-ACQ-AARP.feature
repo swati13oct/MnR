@@ -105,5 +105,5 @@ Then I should be directed to the VPP Plan Summary Page Ulayer and I should see t
 Examples:
 	| zipcode |
   | 90210   |
-  | 30210   |
-  | 10002   |
+ #| 30210   |
+#| 10002   |

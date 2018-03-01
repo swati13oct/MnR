@@ -19,8 +19,7 @@ import atdd.framework.UhcDriver;
 public class MemberAuthLoginPage extends UhcDriver {
 
 	// Page URL
-	private static String PAGE_URL = MRConstants.AARPM_URL;
-	private static String REDESIGN_PAGE_URL = MRConstants.REDESIGN_AARPM_URL;
+	
 
 	@FindBy(id = "find_searchbtn")
 	private WebElement btnLogin;

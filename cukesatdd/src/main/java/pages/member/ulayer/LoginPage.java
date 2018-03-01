@@ -33,14 +33,14 @@ public class LoginPage extends UhcDriver {
 
 	// Page URL
 	private static String PAGE_URL = MRConstants.AARPM_URL;
-	private static String REDESIGN_PAGE_URL = MRConstants.REDESIGN_AARPM_URL;
+	
 	private static String PAGE_URL_TEST_HARNESS = MRConstants.AARPM_URL_TEAMB_TESTHARNESS;
 	private static String PAGE_URL_OFFLINE = MRConstants.AARPM_URL_OFFLINE;
 		
 	private static String PAGE_URL_TEAM_H_TEST_HARNESS = MRConstants.TEAMH_URL_TESTHARNES;
-	private static String PAGE_URL_TEAM_MEDICARE_TESTHARNESS = MRConstants.TEAM_MEDICARE_TESTHARNESS;
+	
 	private static String STAGE_DASHBOARD_URL = MRConstants.STAGE_DASHBOARD_NEW_DOMAIN_URL;
-	private static String TEAM_T_NEW_DASHBOARD_URL = MRConstants.TEAM_T_NEW_TESTHANESS_URL;
+	
 	
 
 	@FindBy(id = "fd_memberSignInButton")
@@ -61,11 +61,7 @@ public class LoginPage extends UhcDriver {
 	@FindBy(linkText = "Forgot your username or password?")
 	private WebElement forgotUsernamePasswordLink;
 	
-	@FindBy(xpath = "//*[@id='gogreenlogin_box']/div[4]/div")
-	private WebElement gogreenPopup;
-	
-	@FindBy(xpath = "//*[@id='gogreenlogin_box']/div[4]/div/a")
-	private WebElement gogreenPopupClose;
+
 
 	@FindBy(id = "usercheckbox")
 	private WebElement userNameCheckBox;

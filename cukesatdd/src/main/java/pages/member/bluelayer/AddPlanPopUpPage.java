@@ -18,11 +18,7 @@ public class AddPlanPopUpPage extends UhcDriver {
 	@FindBy(linkText = "continue")
 	private WebElement continueButton;
 	
-	@FindBy(xpath = "//div[@id='add_anotherplan']/div[2]/div/div[2]/div[2]/h3[2]")
-	private WebElement addNewPlansHeading;
-	
-	@FindBy(xpath = "//div[@id='add_anotherplan']/div[2]/div/div[2]/div[2]/p[2]")
-	private WebElement addNewPlansHeadingMessage;
+
 
 	public AddPlanPopUpPage(WebDriver driver) {
 		super(driver);

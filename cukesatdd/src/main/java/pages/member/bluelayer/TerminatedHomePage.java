@@ -19,16 +19,11 @@ import acceptancetests.util.CommonUtility;
 public class TerminatedHomePage{
 	
 
-	
 
-	@FindBy(id = "memberId")
-	private WebElement memberId;
 	
 	@FindBy(linkText = "addaplan")
 	private WebElement addaplanlink;
-	
-	@FindBy(id = "terminatedDate")
-	private WebElement terminatedDate;
+
 	
 	@FindBy(linkText = "Search claim history")
 	private WebElement searchClaimsHistory;

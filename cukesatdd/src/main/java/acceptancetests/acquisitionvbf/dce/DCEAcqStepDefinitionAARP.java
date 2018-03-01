@@ -59,7 +59,7 @@ public class DCEAcqStepDefinitionAARP {
 	public void I_access_the_DCE_tool_home_page() throws InterruptedException {
 
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) loginScenario.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
-		dce.navigateToDCEToolFromHome();;
+		dce.navigateToDCEToolFromHome();
 	}
 	
 	/**
