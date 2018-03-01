@@ -1,17 +1,21 @@
 package pages.member.bluelayer;
 
+import java.util.List;
 import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.LoginCommonConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 public class PhrPage extends UhcDriver {
@@ -81,8 +85,36 @@ public class PhrPage extends UhcDriver {
 		}
 		phrJson = jsonObject;
 
+		System.out.println("phrJson----->"+phrJson);
 	}
-
+	 public void validateMyPharmacies(){
+		  List<WebElement> lst = driver.findElements(By.xpath("//*[@class='phr_greybox_mid']"));
+		  for(int i=0;i<lst.size();i++){
+			  if(lst.get(i).getText().contains("Preferred Mail Service Pharmacy")){
+				  Assert.fail("------------Failed due to presence of Preferred Mail Service Pharmacy-------------------");
+			  }
+			  else{
+				   System.out.println("-----Passed--------------");
+			   }
+		  }
+	   }
+	 public void validatePlanName(){
+	    	String planName = LoginCommonConstants.PLAN_NAME;
+	    	System.out.println(planName);
+	    	List<WebElement> planWebElement = driver.findElements(By.xpath("//*[text()='"+LoginCommonConstants.PLAN_NAME+"']"));
+	    	for(int i=0; i<planWebElement.size();i++){
+	    		if(planWebElement.get(i).getText().contains("HealthSelect Medicare Rx ")){
+	    			System.out.println("----------Failed due to presence of HealthSelect Medicare Rx ------------");
+	    			Assert.fail();
+	    		}
+	    		else if(planWebElement.get(i).getText().equalsIgnoreCase(LoginCommonConstants.PLAN_NAME)){
+	    			System.out.println("----------Plan name displayed as expected="+planName);
+	    		} else{
+	    			System.out.println("----------Failed because Plan NAme not present");
+	    			Assert.fail();
+	    		} 	  		 
+	    	}
+	 }
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 		/* get PHR expected data */
 		JSONObject phrExpectedJson = expectedDataMap.get(CommonConstants.PHR);

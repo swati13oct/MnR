@@ -1,11 +1,17 @@
 package pages.acquisition.ulayer;
 
+import java.util.ArrayList;
+
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.MRConstants;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.MRConstants;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -58,6 +64,19 @@ public class RegistrationHomePage extends UhcDriver{
 
 		continueButton.click();
 
+		try {
+			if (memberid1.isDisplayed()) {
+				CommonUtility.waitForElementToDisappear(driver, memberid1,
+						CommonConstants.TIMEOUT_30);
+			}
+		} catch (NoSuchElementException e) {
+			System.out.println("memberid1 not found");
+		} catch (TimeoutException ex) {
+			System.out.println("memberid1 not found");
+		} catch (Exception e) {
+			System.out.println("memberid1 not found");
+		}
+
 		if (driver.getTitle().equalsIgnoreCase(
 				"AARP Medicare Plans | Registration"))
 			return new PlanConfirmationPage(driver);
@@ -75,4 +94,18 @@ public class RegistrationHomePage extends UhcDriver{
 		validate(yearToEnter);
 		
 	}
+
+	public void switchBack() {		
+		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+	    driver.switchTo().window(tabs.get(0));
+	}
+	
+	public RegistrationAARPErrorPage navigateToErrorPage() {		
+		if (driver.getTitle().equalsIgnoreCase(
+				"AARP Medicare Plans | Registration")) {
+			return new RegistrationAARPErrorPage(driver);
+		}
+		return null;
+	}
+	
 }

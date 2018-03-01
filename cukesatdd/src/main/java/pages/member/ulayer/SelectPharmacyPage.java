@@ -7,15 +7,16 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -54,7 +55,38 @@ public class SelectPharmacyPage extends UhcDriver {
 
 	@FindBy(linkText = "select")
 	private WebElement selectPharmacyButton;
+	
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[2]/div[5]/a[1]")
+	private WebElement zipcodeLink;
+	
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[2]/div[5]/a[2]/span")
+	private WebElement enterZipBtn;
+	
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[2]/div[5]/span[3]/input")
+	private WebElement zipcodeField;
+	
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[2]/div[7]/table/tbody/tr[2]/td[5]/a/span")
+	private WebElement select_first_btn;
+	
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[5]/a[3]/span")
+	private WebElement viewDrugCostBtn;
+	
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[3]/div[3]/table/tbody/tr[2]/td[1]")
+	private WebElement descBox;
+	
+	@FindBy(xpath = "/html/body/div[7]/div/div/table/tbody/tr[5]/td/div[4]/div/div[6]/div[1]/div[3]/div/div/div/div[7]/div/div/div/div/div[1]/div[3]/div[2]/span[6]/span[2]/strong/span[2]")
+	private WebElement planYear2017;
+	
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[2]/div[3]/div[1]/p")
+	private WebElement pharmacySaverPharmacieslb;
+	
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[2]/div[10]/div[5]/div/div[1]/div/p")
+	private WebElement pharmacySaverDisclaimer;
 
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[2]/div[3]/div[1]/span[3]/div")
+	private WebElement pharmacySaver_SaverMessage;
+	
+	
 	private PageData selectPharmacy;
 
 	public JSONObject selectPharmacyJson;
@@ -109,11 +141,17 @@ public class SelectPharmacyPage extends UhcDriver {
 					pharmacyColumns.get(4).findElement(By.linkText("select"))
 							.click();
 					viewDrugCostTab1.click();
-					return new ViewDrugCostPage(driver,planType);
+					if(validate(planYear2017)){
+						planYear2017.click();
+					}
+					return new ViewDrugCostPage(driver);
 
 				} else {
 					viewDrugCostTab2.click();
-					return new ViewDrugCostPage(driver,planType);
+					if(validate(planYear2017)){
+						planYear2017.click();
+					}
+					return new ViewDrugCostPage(driver);
 				}
 
 			}
@@ -204,6 +242,77 @@ public class SelectPharmacyPage extends UhcDriver {
 			}
 		}
 		selectPharmacyJson = jsonObject;
+		
+		System.out.println("selectPharmacyJson----->"+selectPharmacyJson);
+
+	}
+	
+	public boolean isPharmacySaveRadioButtonPresent(){
+		
+		if(pharmacySaverPharmacieslb.isDisplayed()){
+			return true;
+		}else{
+			return false;
+		}
+		
+	}
+	
+	public void refreshDrugLookupPage() throws InterruptedException {
+		driver.navigate().refresh();
+		Thread.sleep(5000);
+	}
+	
+	public void selectPharmacy(){
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(select_first_btn.isDisplayed())
+			select_first_btn.click();
+	}
+	
+	public ViewDrugCostPage navigateToStep3(){
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("arguments[0].click();", viewDrugCostBtn);
+		//viewDrugCostBtn.click();
+		if(descBox.getText().contains("Total estimated annual drug costs"))
+			return new ViewDrugCostPage(driver);
+		return null;
+	}
+	
+	public void changeZipcode(String zipcode) {
+		zipcodeLink.click();
+		zipcodeField.click();
+		zipcodeField.sendKeys(zipcode);
+		enterZipBtn.click();
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	public boolean isPharmacySaverDisclaimerDisplayed() {
+
+		if (pharmacySaverDisclaimer.isDisplayed()) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+	
+	public boolean isPharmacySaver_SaverMessagePresent() {
+
+		if (pharmacySaver_SaverMessage.isDisplayed()) {
+			return true;
+		} else {
+			return false;
+		}
 
 	}
 

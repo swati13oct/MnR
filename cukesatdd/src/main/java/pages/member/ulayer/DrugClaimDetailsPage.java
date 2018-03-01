@@ -9,9 +9,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -20,17 +20,9 @@ import atdd.framework.UhcDriver;
  */
 public class DrugClaimDetailsPage extends UhcDriver{
 
-	@FindBy(id = "searchRange")
-	private WebElement searchRange;
 
-	@FindBy(id = "searchbutton")
-	private WebElement searchbutton;
 
-	@FindBy(id = "drugdetailfooter")
-	private WebElement drugCostDetailsSection;
 
-	@FindBy(id = "drugclaimdetail")
-	private WebElement servicesChargesSection;
 	
 	@FindBy(id = "drugdetailtableheader")
 	private WebElement drugdetailtableheader;
@@ -74,6 +66,8 @@ public class DrugClaimDetailsPage extends UhcDriver{
 			}
 		}
 		drugClaimDetailJson = jsonObject;
+		
+		System.out.println("drugClaimDetailJson----->"+drugClaimDetailJson);
 	}
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap,String firstRxNumber) {

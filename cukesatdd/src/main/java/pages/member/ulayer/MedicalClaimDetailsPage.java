@@ -14,9 +14,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -31,8 +31,7 @@ public class MedicalClaimDetailsPage extends UhcDriver {
 	@FindBy(id = "searchbutton")
 	private WebElement searchbutton;
 
-	@FindBy(xpath = "//table[@id='claim']/tbody/tr[3]/td[6]/form/input[12]")
-	private WebElement claimDetail;
+
 
 	@FindBy(id = "medicaldetailsinner")
 	private WebElement medicalClaimDetailsSection;
@@ -45,6 +44,22 @@ public class MedicalClaimDetailsPage extends UhcDriver {
 
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;
+	
+	//@FindBy(xpath = ".//*[@id='drugclaimdetail']")
+	//private WebElement drugclaimdetailbox;
+	
+	@FindBy(id="drugclaimdetail")
+	private WebElement drugclaimdetailbox;
+	
+	//@FindBy(xpath = ".//*[@id='medicaldetailsinner']")
+	//private WebElement medDetailsInnerBox;
+	
+	
+	@FindBy(id = "medicaldetailsinner")
+	private WebElement medDetailsInnerBox;
+	
+	@FindBy(xpath = ".//*[@id='medicaldetailsouter']/div[2]/a")
+	private WebElement backtoClaimSearchbtn;
 
 	private PageData medicalClaimDetails;
 
@@ -159,7 +174,17 @@ public class MedicalClaimDetailsPage extends UhcDriver {
 
 		}
 		medicalClaimDetailsJson = jsonObject;
+		
+		System.out.println("medicalClaimDetailsJson----->"+medicalClaimDetailsJson);
 
+	}
+
+	public boolean validateMoreInfo(){
+		boolean flag = false;
+		if(validate(drugclaimdetailbox)&&validate(medDetailsInnerBox)&&validate(backtoClaimSearchbtn))
+			flag = true;
+		
+		return flag;
 	}
 
 }

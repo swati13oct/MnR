@@ -10,7 +10,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class EnterZipCodePage {
+import atdd.framework.UhcDriver;
+
+public class EnterZipCodePage  extends UhcDriver{
 	
 	@FindBy(name = "zipcode")
 	WebElement zipCodeField;
@@ -23,18 +25,12 @@ public class EnterZipCodePage {
 	
 	@FindBy(xpath = "//div[@id='counties']//span[.='Continue']")
 	WebElement countyContinueButton;
-	
-	/*@FindBy(className = "//div[@class='marginTop5 ng-binding ng-scope']")
-	List<WebElement> counties;*/
-	
-	
-	
-	private WebDriver driver;
 
+	
 	public EnterZipCodePage(WebDriver driver) {
-		 this.driver=driver;
-	       //Initialise Elements
-	       PageFactory.initElements(driver, this);
+		super(driver);
+	    PageFactory.initElements(driver, this);
+	    openAndValidate();
 	}
 
 	public AddDrugPage getZipCodeCounty(String zipCode, String county, String planYear) {
@@ -64,7 +60,7 @@ public class EnterZipCodePage {
 			}	
 			
 			countyContinueButton.click();
-			/*driver.findElement(By.xpath("//div[@id='counties']//span[.='Continue']")).click();*/
+			
 		}
 		
 		if(driver.getTitle().equalsIgnoreCase("Our Medicare Plan Types | UnitedHealthcare®"))
@@ -76,6 +72,11 @@ public class EnterZipCodePage {
 			return null;
 		}
 		
+	}
+	
+	@Override
+	public void openAndValidate() {
+
 	}
 
 }

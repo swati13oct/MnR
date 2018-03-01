@@ -57,21 +57,13 @@
 "identifier":"xpath",
 "elementName":"//div[@id='_content_campaigns_aarpm_home-myresources-main_home-myresources-main_jcr_content_par_teaser_3']/div/div[2]/a/span"
 },
-"providerSearchLink":{
-"identifier":"linkText",
-"elementName":"search for providers"
-},
 "primaryCareProvider":{
 "identifier":"xpath",
 "elementName":"//div[@id='plan_box']/div/div[2]/div/table/tbody/tr[3]/td[2]"
 },
-"claimHistoryLink":{
-"identifier":"linkText",
-"elementName":"view your claims"
-},
-"payPremiumOnlineLink":{
-"identifier":"linkText",
-"elementName":"make a payment"
+"myPersonalHealth":{
+"identifier":"xpath",
+"elementName":"//*[@id='_content_aarpm_home_jcr_content_chunkyfooterpar_chunkyfootercontaine_cftitlenlink1_teaser_0']/div/div/div[2]/h2"
 }
 }
 }

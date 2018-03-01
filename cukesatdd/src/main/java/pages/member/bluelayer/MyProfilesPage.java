@@ -7,18 +7,23 @@ import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 public class MyProfilesPage extends UhcDriver {
+
+
+	@FindBy(xpath = "//a[contains(text(),'UnitedHealthcare MedicareComplete Choice (PPO)')]")
+	private WebElement uhcMedicareCompleteChoicePPO;
 
 	@FindBy(className = "shipmyprefers_tab")
 	private WebElement myPrefTab;
@@ -53,14 +58,11 @@ public class MyProfilesPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='editLink']")
 	private List<WebElement> editLink;
 
-	@FindBy(xpath = "//div[@class='accProMidBg']")
-	private WebElement accountInfo;
+
 
 	@FindBy(linkText = "save")
 	private WebElement saveButton;
 
-	@FindBy(xpath = "//div[@class='myProSubCntMidBg']")
-	private WebElement planProfileInfo;
 
 	@FindBy(id = "temporaryAddress.addressLine1")
 	private WebElement tempAddress1Field;
@@ -76,12 +78,6 @@ public class MyProfilesPage extends UhcDriver {
 
 	@FindBy(id = "temporaryAddress.startDate.month")
 	private WebElement tempAddStartDateMonthField;
-
-	@FindBy(id = "temporaryAddress.startDate.day")
-	private WebElement tempAddStartDateDayField;
-
-	@FindBy(id = "temporaryAddress.startDate.year")
-	private WebElement tempAddStartDateYearField;
 
 	@FindBy(id = "temporaryAddress.stopDate.month")
 	private WebElement tempAddStopDateMonthField;
@@ -152,6 +148,9 @@ public class MyProfilesPage extends UhcDriver {
 	@FindBy(linkText = "Sign Out")
 	private WebElement logOut;
 
+	@FindBy(id = "addAnotherPlanLink")
+	private WebElement addAnotherPlanLink;
+	
 	private PageData myProfiles;
 
 	public JSONObject myProfilesJson;
@@ -165,16 +164,7 @@ public class MyProfilesPage extends UhcDriver {
 		openAndValidate();
 	}
 
-	public MyPrefPage selectMyPref() {
-		myPrefTab.click();
-		if (this.driver.getTitle().equalsIgnoreCase(
-				"UnitedHealthcare Medicare Solutions | Go Green")) {
-			return new MyPrefPage(driver);
-		} else {
-			return null;
-		}
-	}
-
+	
 	public void editProfile(Map<String, String> profileAttributesMap) {
 		WebElement accountInfoElement = editLink.get(0);
 		accountInfoElement.findElement(By.linkText("Edit")).click();
@@ -280,20 +270,52 @@ public class MyProfilesPage extends UhcDriver {
 		for (String key : myProfiles.getExpectedData().keySet()) {
 			WebElement element = findElement(myProfiles.getExpectedData().get(
 					key));
+			if(element!=null){
 			validate(element);
 			try {
 				jsonObject.put(key, element.getText());
+
+
 			} catch (JSONException e) {
 				e.printStackTrace();
+			}
 			}
 
 		}
 		myProfilesJson = jsonObject;
+
+		System.out.println("myProfilesJson----->"+myProfilesJson);
 
 	}
 
 	public void logOut() {
 		logOut.click();
 	}
+	/**
+	 * Below method will validate plan name: 'uhcMedicareCompleteChoicePPO'
+	 * Added as part of commandos team
+	 * @return
+	 */
+	public boolean isUHCMedicareCompleteChoicePPOPresent(){
+		try{
+			if(uhcMedicareCompleteChoicePPO.getText() == "UnitedHealthcare MedicareComplete Choice (PPO)"){
+				System.out.println("uhcMedicareCompleteChoicePPO is displayed ");
+			}else{
+				System.out.println("uhcMedicareCompleteChoicePPO.getText() >>>>>>   "+uhcMedicareCompleteChoicePPO.getText());
+			}
+		}catch(Exception e){
+			return false;
+		}
+		return true;
+	}
+	
+	public void validateAddPlanLink() {
 
+		if (validate(addAnotherPlanLink)) {
+			Assert.fail("Add Plan is displayed");
+		} else {
+			System.out
+					.println("Add Plan link is hidden for Alabama PEEHIP member");
+		}
+	}
 }

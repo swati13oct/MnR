@@ -9,9 +9,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -25,6 +25,8 @@ public class OneTimePaymentSuccessPage extends UhcDriver{
 	                 
 	@FindBy(xpath = "/html/body/div[6]/div/div/table/tbody/tr[5]/td/div[2]/div/div/div[2]/div[7]/div/div/div/div/div/div")
 	private WebElement OneTimePaymentSuccess;
+
+
 
 	private PageData oneTimePaymentSuccess;
 	
@@ -66,6 +68,8 @@ public class OneTimePaymentSuccessPage extends UhcDriver{
 		}
 		oneTimePaymentSuccessJson = jsonObject;
 		
+		System.out.println("oneTimePaymentSuccessJson----->"+oneTimePaymentSuccessJson);
+		
 	}
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
@@ -76,4 +80,6 @@ public class OneTimePaymentSuccessPage extends UhcDriver{
 		return oneTimePaymentExpectedJson;
 	}
 
+	
+	
 }

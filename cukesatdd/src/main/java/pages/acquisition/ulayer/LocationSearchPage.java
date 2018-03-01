@@ -2,26 +2,21 @@ package pages.acquisition.ulayer;
 
 /*@author pagarwa5*/
 
-import java.util.List;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.data.ElementData;
 import atdd.framework.UhcDriver;
 
 public class LocationSearchPage extends UhcDriver{
 	
-	@FindBy(name = "zipcode")
+	@FindBy(className = "ZIPCodeBox")
 	WebElement zipCodeField;
 
 	@FindBy(linkText = "Continue")
 	WebElement continueButton;
-	
-	/*@FindBy(xpath = "//div[@id='counties']//span[.='Continue']")
-	WebElement countyContinueButton;*/
 
 	public LocationSearchPage(WebDriver driver) {
 		 super(driver);
@@ -29,25 +24,29 @@ public class LocationSearchPage extends UhcDriver{
 	       openAndValidate();
 	}
 
-	public ManageDrugPage enterLocation(String zipCode, String county, String planYear) {
+	public AddDrugPage enterLocation(String zipCode, String county, String planYear) {
 		sendkeys(zipCodeField, zipCode);
 		if(null!=planYear)
 		{
-			String planYearXpath = "//div[@class='marginBottom25']//span[.='"+planYear+"']";
-			driver.findElement(By.xpath(planYearXpath)).click();
-			System.out.println("year");
+			ElementData elementData = new ElementData("xpath","//div[@class='marginBottom25']//span[.='"+planYear+"']");
+			findElement(elementData).click();
 		}
 		continueButton.click();
-		
-		if(currentUrl().contains("manageDrugList"))
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(currentUrl().contains("drugSearch"))
 		{
-			return new ManageDrugPage(driver);
+			return new AddDrugPage(driver);
 		}
 		else if(currentUrl().contains("enterZipCode"))
 		{
-			CountySelectionPage countySelectionPage = new CountySelectionPage(driver);
-			ManageDrugPage manageDrugPage = countySelectionPage.selectCounty(county);
-			return manageDrugPage;
+			//CountySelectionPage countySelectionPage = new CountySelectionPage(driver);
+			//AddDrugPage addDrugPage = countySelectionPage.selectCounty(county);
+			//return addDrugPage;
 		}
 		
 		return null;
@@ -60,5 +59,6 @@ public class LocationSearchPage extends UhcDriver{
 		validate(continueButton);
 		
 	}
+	
 
 }

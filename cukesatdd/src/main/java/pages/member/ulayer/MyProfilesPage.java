@@ -13,15 +13,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 public class MyProfilesPage extends UhcDriver{
 	
-   @FindBy(className = "shipmyplans_tab")
-   private WebElement myProfilesTab;
+ 
    
    @FindBy(className = "shipmyprefers_tab")
    private WebElement myPrefTab;
@@ -80,11 +79,6 @@ public class MyProfilesPage extends UhcDriver{
 	@FindBy(id = "temporaryAddress.startDate.month")
 	private WebElement tempAddStartDateMonthField;
 	
-	@FindBy(id = "temporaryAddress.startDate.day")
-	private WebElement tempAddStartDateDayField;
-	
-	@FindBy(id = "temporaryAddress.startDate.year")
-	private WebElement tempAddStartDateYearField;
 	
 	@FindBy(id = "temporaryAddress.stopDate.month")
 	private WebElement tempAddStopDateMonthField;
@@ -152,6 +146,9 @@ public class MyProfilesPage extends UhcDriver{
 	@FindBy(id = "mailingAddress.stopDate.year")
 	private WebElement mailingAddStopDateYear;
 	
+	@FindBy(xpath = "//div[@class='myProfileMid']/div/form/div/div/div/div[2]/div/div[2]/h3")
+	private WebElement preferencesPageHeading;
+	
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;
 	
@@ -165,11 +162,12 @@ public class MyProfilesPage extends UhcDriver{
 		String fileName = CommonConstants.MY_PROFILES_PAGE_DATA;
 		myProfiles = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
-		openAndValidate();
+		//openAndValidate();
 	}
 
 	public MyPreferencesPage navigateToMyPrefTab() {
 		myPrefTab.click();
+		CommonUtility.waitForPageLoad(driver, preferencesPageHeading, 10);
 		if(currentUrl().contains("my-preferences"))
 		{
 			return new MyPreferencesPage(driver);
@@ -342,9 +340,20 @@ public class MyProfilesPage extends UhcDriver{
 	}
 
 
+	public boolean Validate_Single_Tab_SHIP(){
+		List<WebElement> PlanTabs = driver.findElements(By.xpath("//a[contains(text(),'Supplemental  Insurance Plans')]"));
+		System.out.println("No of tabs: "+PlanTabs.size());
+		if(PlanTabs.size()>1){
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+
 	@Override
 	public void openAndValidate() {
-		validate(logOut);
+		//validate(logOut);
 
 		JSONObject jsonObject = new JSONObject();
 		for (String key : myProfiles.getExpectedData().keySet()) {
@@ -361,6 +370,8 @@ public class MyProfilesPage extends UhcDriver{
 			}
 		}
 		myProfilesJson = jsonObject;
+		
+		System.out.println("myProfilesJson----->"+myProfilesJson);
 		
 	}
 

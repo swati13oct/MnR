@@ -3,20 +3,17 @@
  */
 package pages.member.ulayer;
 
-import java.util.List;
 import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.ElementData;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.ElementData;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -25,14 +22,7 @@ import atdd.framework.UhcDriver;
  */
 public class AddDrugPage extends UhcDriver {
 
-	@FindBys(value = { @FindBy(xpath = "//div[@class='autoCompleteDrugs']") })
-	private List<WebElement> drugListElements;
 
-	@FindBys(value = { @FindBy(xpath = "//div[@class='drugDropDownList']/div") })
-	private List<WebElement> drugListElements1;
-
-	@FindBy(className = "drugDropDownList")
-	private WebElement drugDropDownList;
 
 	private PageData addDrug;
 
@@ -82,25 +72,28 @@ public class AddDrugPage extends UhcDriver {
 			}
 		}
 		addDrugJson = jsonObject;
+		
+		System.out.println("addDrugJson----->"+addDrugJson);
 
 	}
 
-	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap,
-			String drugInitials) {
 
-		JSONObject globalExpectedJson = expectedDataMap
-				.get(CommonConstants.GLOBAL);
-		JSONObject addDrugExpectedJson = null;
-		try {
-			addDrugExpectedJson = (JSONObject) expectedDataMap.get(
-					CommonConstants.ADD_DRUG).get(drugInitials);
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		addDrugExpectedJson = CommonUtility.mergeJson(addDrugExpectedJson,
-				globalExpectedJson);
-		return addDrugExpectedJson;
-	}
+    public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap,
+                    String drugInitials) {
+
+            JSONObject globalExpectedJson = expectedDataMap
+                            .get(CommonConstants.GLOBAL);
+            JSONObject addDrugExpectedJson = null;
+            try {
+                    addDrugExpectedJson = (JSONObject) expectedDataMap.get(
+                                    CommonConstants.ADD_DRUG).get(drugInitials);
+            } catch (JSONException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+            }
+            addDrugExpectedJson = CommonUtility.mergeJson(addDrugExpectedJson,
+                            globalExpectedJson);
+            return addDrugExpectedJson;
+    }
 
 }

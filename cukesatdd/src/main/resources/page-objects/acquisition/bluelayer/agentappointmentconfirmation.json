@@ -1,0 +1,17 @@
+{
+"url":null,
+"expectedData":{
+"title":{
+"identifier":"id",
+"elementName":"medicareTitle"
+},
+"confirmationMessage":{
+"identifier":"xpath",
+"elementName":"//div[@id='thankyou']/p[1]"
+},
+"tfn":{
+"identifier":"xpath",
+"elementName":"//div[@id='thankyou']/p[2]"
+}
+}
+}

@@ -14,6 +14,12 @@ public class GetStartedPage extends UhcDriver {
 	
 	@FindBy(linkText = "Get started")
 	private WebElement getStartedLink;
+	
+	@FindBy(xpath = "/html/body/div[3]/div/table/tbody/tr[3]/td/div/table/tbody/tr[2]/td/div/div/div/div[3]/div/div[3]/div[4]/div/div[2]/div/div/div/div/div/div/div[2]/table/tbody/tr/td[3]/div/div[2]/div/div/p/a")
+	WebElement enterDrugLink;
+	
+	@FindBy(xpath="//iframe[@src='/health-plans/dce.html#/estimate-drug-costs']")
+	WebElement dceToolFrame;
 
 	public GetStartedPage(WebDriver driver) {
 		 super(driver);
@@ -37,5 +43,28 @@ public class GetStartedPage extends UhcDriver {
 		validate(getStartedLink);
 		
 	}
+	
+	public AddDrugPage navigateToDCE(){
+		enterDrugLink.click();
+		getStartedLink.click();
+		return new AddDrugPage(driver);
+		
+	}
+		  
+	public AddDrugPage clicksOnGetStarted() {
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		driver.switchTo().frame(dceToolFrame);
+		try{
+			getStartedLink.click();
+		}catch(Exception e){
+			System.out.println("phantomjs doesn't support the element on switched iframe");
+		}
+		return new AddDrugPage(driver);
+	}	 
 
 }

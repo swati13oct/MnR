@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.MRConstants;
+import acceptancetests.data.MRConstants;
 import atdd.framework.UhcDriver;
 
 /**
@@ -14,7 +14,7 @@ import atdd.framework.UhcDriver;
  */
 public class OurPlansPage extends UhcDriver {
 
-	@FindBy(linkText = "Look up a ZIP code")
+	@FindBy(id = "zipLookup")
 	private WebElement lookupZipcodeLink;
 
 	@FindBy(className = "zipcode_text")

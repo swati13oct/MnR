@@ -2,11 +2,15 @@ package pages.acquisition.ulayer;
 
 import java.util.Map;
 
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.data.CommonConstants;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -56,7 +60,20 @@ public class CreateAccountPage extends UhcDriver{
 		sendkeys(confirmEmailAdrField, confirmEmailId);
 		continueButton.click();
 
-		if (driver.getTitle().equalsIgnoreCase("Online Account Confirmation")) {
+		try {
+			if (userNameField.isDisplayed()) {
+				CommonUtility.waitForElementToDisappear(driver, userNameField,
+						CommonConstants.TIMEOUT_30);
+			}
+		} catch (NoSuchElementException e) {
+			System.out.println("userNameField not found");
+		} catch (TimeoutException ex) {
+			System.out.println("userNameField not found");
+		} catch (Exception e) {
+			System.out.println("userNameField not found");
+		}
+
+		if (currentUrl().contains("/home/register-success.html")) {
 			return new RegistrationSuccessPage(driver);
 		}
 		return null;

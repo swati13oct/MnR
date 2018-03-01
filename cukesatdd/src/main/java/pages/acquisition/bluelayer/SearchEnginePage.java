@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.util.CommonUtility;
 
 /**
  * @author pperugu
@@ -81,8 +81,13 @@ public class SearchEnginePage {
 			bingSearchFeild.sendKeys(searchParamter);
 			bingSubmitFeild.click();
 			CommonUtility.checkPageIsReady(driver);
-			if (driver.getTitle().equalsIgnoreCase(
-					"UHC medicare solutions - Bing")) {
+//			if (driver.getTitle().equalsIgnoreCase(
+//					"UHC medicare solutions - Bing")) {
+//				return new SearchResultsPage(driver);
+//			}
+			
+			if (driver.getCurrentUrl().contains("q=UHC"))
+			{
 				return new SearchResultsPage(driver);
 			}
 			return null;

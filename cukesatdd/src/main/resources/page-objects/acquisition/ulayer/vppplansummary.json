@@ -7,7 +7,7 @@
 },
 "msPlanCount":{
 "identifier":"xpath",
-"elementName":"//div[@class='medsupplans_planbutton']/div[1]/p"
+"elementName":"//*[@class='title' and contains(text(),'Medicare Supplement Insurance')]/span"
 },
 "pdpPlanCount":{
 "identifier":"xpath",
@@ -15,12 +15,17 @@
 },
 "vppSummary":{
 "identifier":"xpath",
-"elementName":"//div[@class='planinf']/h3"
+"elementName":"//h2[contains(text(),'We have')]"
+"zipCodeDisplayed":{
+"identifier":"id",
+"elementName":"zipcode"
 },
 "changeLocationLink":{
-"identifier":"xpath",
-"elementName":"//div[@class='planinf']/p[2]/a"
+"identifier":"linkText",
+"elementName":"Change Location"
+"countyDisplayed":{
+"identifier":"id",
+"elementName":"county"
 }
-
 }
 }

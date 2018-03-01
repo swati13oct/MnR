@@ -12,9 +12,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -44,14 +44,14 @@ public class PrescriptionDrugEobPage extends UhcDriver{
 	@FindBy(className = "shipbtnEobHistory")
 	private WebElement shipbtnEobHistory;
 	
-	@FindBy(id = "eobtable")
-	private WebElement eobtable;
-	
 	@FindBy(xpath = "//div[@class='eobCntMidBg']/h3")
 	private WebElement drugEobHeading;
 	
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;
+	
+	@FindBy(xpath = ".//*[@id='eobSearchForm']/div[2]/div[2]/div[2]/table")
+	private WebElement eobTable;
 	
 	private PageData prescriptionDrugEob;
 
@@ -61,10 +61,6 @@ public class PrescriptionDrugEobPage extends UhcDriver{
 		super(driver);
 		PageFactory.initElements(driver, this);
 		CommonUtility.waitForPageLoad(driver, drugEobHeading, CommonConstants.TIMEOUT_30);
-		String fileName = CommonConstants.PRESCRIPTION_DRUG_EOB_PAGE_DATA;
-		prescriptionDrugEob = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
-		openAndValidate();
 	}
 
 	
@@ -109,6 +105,14 @@ public class PrescriptionDrugEobPage extends UhcDriver{
 		toYear.sendKeys(toYearInput);
 		
 		shipbtnEobHistory.click();
+		
+		try {
+			Thread.sleep(15000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		if (currentUrl().contains("part-d-eob-search.html")) {
 			return new PrescriptionDrugEobPage(driver);
 		}
@@ -117,7 +121,7 @@ public class PrescriptionDrugEobPage extends UhcDriver{
 	}
 
 	public String getPrescriptionDrugEobContent() {
-		return eobtable.getText();
+		return eobTable.getText();
 	}
 
 
@@ -148,9 +152,18 @@ public class PrescriptionDrugEobPage extends UhcDriver{
 			}
 		}
 		prescriptionDrugEobJson = jsonObject;
+		
+		System.out.println("prescriptionDrugEobJson----->"+prescriptionDrugEobJson);
 	}
 
-
+	public boolean validateRxEob(){
+		CommonUtility.waitForPageLoad(driver, eobTable, 20);
+		if(eobTable.getText().contains("EOB Date")&&eobTable.getText().contains("My EOB Statements")&&
+				eobTable.getText().contains("Download EOB (PDF)"))
+			return true;
+		return false;
+	}
+	
 	public void logOut() {
 		logOut.click();
 

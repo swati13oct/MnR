@@ -16,9 +16,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 public class LowCostOptPage extends UhcDriver {
@@ -28,6 +28,8 @@ public class LowCostOptPage extends UhcDriver {
 
 	@FindBys(value = { @FindBy(name = "typeofdrug") })
 	private List<WebElement> genericDrugs;
+	
+
 
 	private PageData lowCostOptions;
 
@@ -76,6 +78,8 @@ public class LowCostOptPage extends UhcDriver {
 			}
 		}
 		lowCostOptionsJson = jsonObject;
+		
+		System.out.println("lowCostOptionsJson----->"+lowCostOptionsJson);
 
 	}
 
@@ -109,5 +113,11 @@ public class LowCostOptPage extends UhcDriver {
 				lowCostOptionsExpectedJson, globalExpectedJson);
 		return lowCostOptionsExpectedJson;
 	}
-
+	
+	public boolean validateLowCostSection(String drugdosage){
+		boolean flag = false;
+		if(validate(continueButton))
+			flag = true;
+		return flag;
+	}
 }

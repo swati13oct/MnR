@@ -54,7 +54,7 @@ public class CreateAccountPage extends UhcDriver {
 		sendkeys(emailAdrField, emailId);
 		sendkeys(confirmEmailAdrField, confirmEmailId);
 		continueButton.click();
-		if (this.driver.getTitle().equalsIgnoreCase("Register Success")) {
+		if (currentUrl().contains("/home/register-success.html")) {
 			return new RegistrationSuccessPage(driver);
 		}
 		return null;

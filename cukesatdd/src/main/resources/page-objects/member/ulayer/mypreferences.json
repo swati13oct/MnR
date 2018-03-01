@@ -7,7 +7,7 @@
 },
 "planName1":{
 "identifier":"xpath",
-"elementName":"//div[@class='fd_blueFooterMid']/h3"
+"elementName":"//div[@class='preferenceplan']/div[2]/h3"
 },
 "memberId1":{
 "identifier":"id",
@@ -17,13 +17,9 @@
 "identifier":"id",
 "elementName":"status"
 },
-"planName2":{
+"preferences":{
 "identifier":"xpath",
-"elementName":"//div[@class='preferenceplan']/div[2]/h3"
-},
-"preferenceTable":{
-"identifier":"id",
-"elementName":"govt_delivery_preference_table"
+"elementName":"//table[@id='govt_delivery_preference_table']/tbody/tr"
 }
 }
 }

@@ -14,9 +14,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 public class ViewDrugCostPage extends UhcDriver {
@@ -110,12 +110,37 @@ public class ViewDrugCostPage extends UhcDriver {
 
 		}
 		viewDrugCostJson = jsonObject;
+		
+		System.out.println("viewDrugCostJson----->"+viewDrugCostJson);
 
 	}
 
 	public void logOut() {
 		logOut.click();
 
+	}
+	
+	@FindBy(xpath = ".//*[@id='dce.member']/div/div[6]/div/div/div/div/div[1]/div[3]/div[2]/table/tbody/tr[7]/td[1]")
+	private WebElement drugInfoBox;
+	
+	@FindBy(linkText ="Edit pharmacy")
+	private WebElement editPharmacyLink;
+	
+	@FindBy(xpath =".//*[@id='dce.member']/div/div[6]/div/div/div/div/div[1]/div[3]/div[2]")
+	private WebElement descriptionTable;
+	
+	public boolean validateViewDrugPage(String dosage) {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("text: " +drugInfoBox.getText()); System.out.println("dosage: "+dosage);
+		if(validate(descriptionTable)&&(drugInfoBox.getText().contains(dosage)) && validate(editLink)&&validate(editPharmacyLink))
+			return true;
+		else 
+			return false;
 	}
 
 }

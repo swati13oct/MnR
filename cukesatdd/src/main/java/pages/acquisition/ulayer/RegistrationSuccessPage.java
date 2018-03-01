@@ -1,5 +1,7 @@
 package pages.acquisition.ulayer;
 
+import java.util.Map;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
@@ -7,11 +9,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.member.ulayer.AccountHomePage;
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.member.ulayer.AccountHomePage;
 
 /**
  * @author pperugu
@@ -42,13 +44,12 @@ public class RegistrationSuccessPage extends UhcDriver {
 	}
 
 	public String getContent() {
-		CommonUtility.checkPageIsReady(driver);
 		return registrationSuccessContent.getText(); // get page id
 	}
 
 	public AccountHomePage navigateToHomePage() {
 		homePageLink.click();
-		if (driver.getTitle().equalsIgnoreCase(
+		if (getTitle().equalsIgnoreCase(
 				"AARP Medicare Plans | My Account Home"))
 			return new AccountHomePage(driver);
 		else
@@ -84,5 +85,64 @@ public class RegistrationSuccessPage extends UhcDriver {
 
 		}
 		registrationSuccessJson = jsonObject;
+		
+		System.out.println("registrationSuccessJson---->"+registrationSuccessJson);
+	}
+
+	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap, JSONObject registrationCommonExpected) {
+		
+		JSONObject registrationSuccessExpectedJson = expectedDataMap
+				.get(CommonConstants.REGISTRATION_SUCCESS);
+		String dateOfBirth = null;
+		String name = null;
+		
+		try {
+			JSONObject jsonObject = registrationCommonExpected.getJSONArray("dateOfBirth").getJSONObject(0);
+			dateOfBirth = jsonObject.getString("dob");
+			
+			JSONObject jsonObject2 = registrationCommonExpected.getJSONArray("memberName").getJSONObject(0);
+			name = jsonObject2.getString("name");
+			
+			if(null!=dateOfBirth)
+			{
+				registrationSuccessExpectedJson.put("dateOfBirth", dateOfBirth);
+			}
+			
+			if(null!=name)
+			{
+				String[] fullName = name.split(" ");
+				String firstName = fullName[0];
+				String lastName = fullName[1];
+				registrationSuccessExpectedJson.put("firstName", firstName);
+				registrationSuccessExpectedJson.put("lastName", lastName);
+				
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println("registrationSuccessExpectedJson---->"+registrationSuccessExpectedJson);
+		
+		return registrationSuccessExpectedJson;
+	}
+
+	public boolean validateRegistrationSuccessPage() {
+		
+		boolean flag = false;
+		for (String key : registrationSuccess.getExpectedData().keySet()) {
+			System.err.println("key::"+key);
+			WebElement element = findElement(registrationSuccess.getExpectedData()
+					.get(key));
+
+			if (validate(element) && null != element.getText()
+					&& element.getText() != "") {
+				flag = true;
+			} else {
+				return false;
+			}
+		}
+
+		return flag;
 	}
 }

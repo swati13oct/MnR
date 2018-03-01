@@ -2,11 +2,13 @@ package pages.acquisition.ulayer;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.MRConstants;
+import acceptancetests.data.MRConstants;
 import atdd.framework.UhcDriver;
+import pages.acquisition.bluelayer.ZipcodeLookupPage;
 
 /**
  * @author pperugu
@@ -22,6 +24,21 @@ public class OurPlansPage extends UhcDriver {
 
 	@FindBy(id = "goBtn")
 	private WebElement goButton;
+
+	@FindBy(id = "nav-zipcode")
+	private WebElement zipfield;
+
+	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div[2]/form/span/span")
+	private WebElement errormessage;
+
+	@FindBy(id = "ghn_lnk_2")
+	private WebElement OurPlansLink;
+
+	@FindBy(id = "subnav_2")
+	public static WebElement ourPlansDropdown;
+
+	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div[2]/form/span/button")
+	public WebElement FindPlansButton;
 
 	private static String PAGE_URL = MRConstants.AARP_OUR_PLANS_URL;
 
@@ -51,6 +68,65 @@ public class OurPlansPage extends UhcDriver {
 		validate(goButton);
 		validate(lookupZipcodeLink);
 
+	}
+
+	public void hoverourplanslink() {
+
+		validate(OurPlansLink);
+		Actions action = new Actions(driver);
+		action.moveToElement(OurPlansLink).build().perform();
+		validate(OurPlansLink);
+	}
+
+	public Boolean findplansbuttonclick2() {
+
+		hoverourplanslink();
+		validate(FindPlansButton);
+		FindPlansButton.click();
+		validate(FindPlansButton);
+
+		return validate(errormessage);
+
+	}
+
+	public AcquisitionHomePage ErrorMessage() {
+		validate(errormessage);
+		Actions action = new Actions(driver);
+		action.moveToElement(errormessage);
+
+		validate(errormessage);
+		return null;
+	}
+
+	public Boolean clicktextfield() {
+
+		hoverourplanslink();
+
+		validate(zipfield);
+		zipfield.click();
+		zipfield.sendKeys("9001");
+		validate(FindPlansButton);
+		FindPlansButton.click();
+		return validate(errormessage);
+	}
+
+	public AcquisitionHomePage errormessage() {
+		validate(errormessage);
+		Actions action = new Actions(driver);
+		action.moveToElement(errormessage);
+
+		validate(errormessage);
+		return null;
+	}
+
+	public Boolean correctzipcode() {
+
+		hoverourplanslink();
+
+		validate(zipfield);
+		zipfield.click();
+		zipfield.sendKeys("90010");
+		return null;
 	}
 
 }
