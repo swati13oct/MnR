@@ -18,8 +18,7 @@ public class ExplanationOfBenefitsPage extends UhcDriver {
 	@FindBy(xpath = "//a[text()='Go to EOB Search page']")
 	private WebElement linkEOB;
 
-	@FindBy(id = "eob-type")
-	private WebElement EOBTypeRadioButton;
+	
 
 	@FindBy(xpath = ".//span[contains(text(),'Last 18 Months')]")
 	private WebElement EOBTypeResult;

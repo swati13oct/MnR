@@ -36,8 +36,7 @@ public class ManageDrugPage extends UhcDriver {
        /*@FindBy(css = "div > img[alt=\"Plus Image\"]")
        WebElement plusSign;*/
 
-       @FindBy(xpath = "//div[@class='reduceCosts generic']")
-       private WebElement reduceCostPath;
+      
 
        @FindBy(linkText = "Reduce costs")
        WebElement reduceCostLink;

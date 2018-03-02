@@ -53,9 +53,7 @@ public class PharmacySearchPage extends UhcDriver{
 	
 	@FindBy(xpath = ".//*[@id='selectZiptable']/tbody[1]/tr//a")
 	private List<WebElement> countyList;
-
-	@FindBy(id = "plan-year")
-	private WebElement planYearDropDown;	
+	
 
 	
 	@FindBy(xpath = "(//*[@id='lang-select']//option)[1]")
@@ -79,8 +77,6 @@ public class PharmacySearchPage extends UhcDriver{
 	private WebElement pharmacyTypes;
 	
 	
-	@FindBy(xpath = "(//*[@id='lang-select']//option)[1]")
-	private WebElement espanolLink;
 	
 	@FindBy(xpath = "(//*[contains(text(),'SHOW ON MAP')])")
 	private List<WebElement> showonmap;
@@ -88,8 +84,6 @@ public class PharmacySearchPage extends UhcDriver{
 	@FindBy(xpath = "//a[contains(text(),'VIEW RESULT AS PDF')]")
 	private WebElement viewsearchpdf;
 	
-	@FindBy(id = "outerContainer")
-	private WebElement PDFcontainer;
 	
 	@FindBy(xpath = ".//a[@class='display-block collapse-expand collapsed']")
 	private WebElement moreInfoLink;

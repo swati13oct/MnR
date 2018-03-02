@@ -38,23 +38,7 @@ public class PaymentHistoryPage extends UhcDriver{
 	@FindBy(xpath = "/html/body/div[6]/div/div/table/tbody/tr[5]/td/div[2]/div/div/div[2]/div[7]/div/div/div[1]/div[2]/div/div[2]/div[2]/a/div[2]/p")
 	private WebElement showPaymentHistory;
 
-	@FindBy(xpath = "//div[@id='paymentHistoryApp']/div/div/div/div/div[2]/table[2]/tbody/tr[1]/td/a/div[2]/p")
-	private WebElement oneTimePaymentButtonGovt;
 	
-	@FindBy(xpath = "//div[@id='paymentHistoryApp']/div/div/div/div/div[2]/table[2]/tbody/tr[2]/td/a[1]/div[2]")
-	private WebElement editPaymentButtonGovt;
-	
-	@FindBy(xpath = "//div[@id='paymentHistoryApp']/div/div/div/div/div[2]/table[2]/tbody/tr[2]/td/a[2]/div[2]")
-	private WebElement setupPaymentsButtonGovt;
-	
-	@FindBy(xpath = "//div[@id='paymentHistoryApp']/div/div/div/div/div[2]/table[1]/tbody/tr[4]/td[2]")
-	private WebElement paymentMethodGovt;
-	
-	@FindBy(xpath = "//div[@class='automaticpaymentspopupcontainer']/div/div[2]/div[1]/table/tbody/tr/td[2]/div/a/div[2]/p")
-	private WebElement setUpAutoPaymentsButtonGovt;
-	
-	@FindBy(xpath = "/html/body/div[6]/div/div/table/tbody/tr[5]/td/div[2]/div/div/div[2]/div[7]/div/div/div[2]/div[2]/div/div/div[2]/table[2]/tbody/tr[1]/td/a/div[2]/p")
-	private WebElement oneTimePaymentButtonShip;
 	
 	@FindBy(id = "fromMonth")
 	private WebElement fromMonth;
@@ -77,8 +61,6 @@ public class PaymentHistoryPage extends UhcDriver{
 	@FindBy(id ="disclosure_link")
 	private WebElement logOut;
 	
-	@FindBy(className="paymentsoverview")
-	private WebElement paymenthistorypage;
 
 	private PageData paymentHistory;
 	

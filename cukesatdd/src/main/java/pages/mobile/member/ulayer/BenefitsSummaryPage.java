@@ -371,7 +371,7 @@ public class BenefitsSummaryPage extends UhcDriver{
 	public PaymentHistoryPage changeUrlToNewPaymentHistoryPage() {
 
 		String NewPayHistoryUrl = "https://member.team-b-aarpmedicareplans.uhc.com/content/dashboard/home/payments.html";
-		String url = driver.getCurrentUrl();
+		
 		driver.get(NewPayHistoryUrl);
 		try {
 			Thread.sleep(15000);
@@ -383,7 +383,7 @@ public class BenefitsSummaryPage extends UhcDriver{
 	}
 	public boolean validateSetupAutomaticPayments() {
 		String NewPayHistoryUrl = "https://member.team-b-aarpmedicareplans.uhc.com/content/dashboard/home/payments.html";
-		String url = driver.getCurrentUrl();
+		
 		driver.get(NewPayHistoryUrl);
 		try {
 			Thread.sleep(10000);
@@ -403,7 +403,7 @@ public class BenefitsSummaryPage extends UhcDriver{
 	public boolean validateOneTimePaymentDtmValues() {
 		// TODO Auto-generated method stub
 		String NewPayHistoryUrl = "https://member.team-b-aarpmedicareplans.uhc.com/content/dashboard/home/payments.html";
-		String url = driver.getCurrentUrl();
+		
 		driver.get(NewPayHistoryUrl);
 
 		try {
@@ -423,7 +423,7 @@ public class BenefitsSummaryPage extends UhcDriver{
 	public boolean validateSetupPaymentDtmValues() {
 		// TODO Auto-generated method stub
 		String NewPayHistoryUrl = "https://member.team-b-aarpmedicareplans.uhc.com/content/dashboard/home/payments.html";
-		String url = driver.getCurrentUrl();
+		
 		driver.get(NewPayHistoryUrl);
 
 		try {
