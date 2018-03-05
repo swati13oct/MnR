@@ -80,11 +80,7 @@ public class OrderplanmaterialsPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id = 'coi-id']/..")
 	private WebElement certificateInsurance;
 	
-	@FindBy(xpath = "//label[@for='member-materials']")
-	private WebElement radiokitLink;
 	
-	@FindBy(xpath = "//p[contains(text(),'Replacement ID card')]")
-	private WebElement radioidLink;
 
 	@FindBy(xpath="//h3[contains(text(),'Technical Support') or contains(text(),'Plan Support')]/ancestor::div[@class='col-md-4']")
 	private WebElement needhelpcomponent;
@@ -106,9 +102,6 @@ public class OrderplanmaterialsPage extends UhcDriver {
 	@FindBy(className = "orderplanmaterials")
 	private WebElement OrderPlanMaterialsSection;
 	
-	//@FindBy(id = "shipDocumentStateCodeId")
-	@FindBy(id = "state")
-	private WebElement shipDocumentStateCodeId;
 
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;

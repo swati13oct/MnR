@@ -133,7 +133,7 @@ public class LoginAssistanceAarpStepDefintion {
 
 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		LoginPage loginPage = new LoginPage(wd);
+		
 		LoginAssistanceConfirmationJava LoginAssistance = new LoginAssistanceConfirmationJava(
 				wd);
 		Thread.sleep(2000);
@@ -310,8 +310,7 @@ public class LoginAssistanceAarpStepDefintion {
 
 	@Then("^the user validates the successfully mail sent message in AARP site$")
 	public void user_validates_successfully_mail_sent_message_aarp() {
-		LoginAssitanceMessagePage loginAssitanceMessagePage = (LoginAssitanceMessagePage) getLoginScenario()
-				.getBean(PageConstants.LOGIN_ASSISTANCE_MESSAGE_PAGE);
+		
 		/*JSONObject loginAssistanceMessageActual = loginAssitanceMessagePage.loginAssistanceMessageJson;
 
 		 Get expected data 
@@ -360,7 +359,7 @@ public class LoginAssistanceAarpStepDefintion {
 			throws InterruptedException {
 		LoginAssitanceMessagePage loginAssitanceMessagePage = (LoginAssitanceMessagePage) getLoginScenario()
 				.getBean(PageConstants.LOGIN_ASSISTANCE_MESSAGE_PAGE);
-		LoginAssitanceMessagePage loginErrorMessages = loginAssitanceMessagePage
+		loginAssitanceMessagePage
 				.ErrorMessageValidation();
 		if (loginAssitanceMessagePage != null) {
 			getLoginScenario().saveBean(PageConstants.Error_Message,

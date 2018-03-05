@@ -17,7 +17,6 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.member.redesign.NewLoginPage;
-import pages.member.ulayer.RallyDashboard;
 import pages.redesign.CommunicationPreferences;
 
 public class MyprofileandPreferencesRedesignStepDefinition {
@@ -55,11 +54,11 @@ public class MyprofileandPreferencesRedesignStepDefinition {
 
 		NewLoginPage loginPage = new NewLoginPage(wd);
 		CommunicationPreferences compp = new CommunicationPreferences(wd);
-		CommunicationPreferences compp1 = new CommunicationPreferences(wd);
+		//CommunicationPreferences compp1 = new CommunicationPreferences(wd);
 		/*compp1 = (CommunicationPreferences) loginPage.loginWith(userName,
 				passWord);*/
 		
-		RallyDashboard rallyDashboardPAge = (RallyDashboard) loginPage.loginWith(userName, passWord);
+		 loginPage.loginWith(userName, passWord);
 
 		if (compp != null) {
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);

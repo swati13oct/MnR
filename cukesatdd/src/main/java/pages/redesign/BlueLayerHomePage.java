@@ -14,7 +14,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
@@ -39,32 +38,18 @@ public class BlueLayerHomePage extends UhcDriver {
 	private WebElement EOBPageHeader;
 
 	
-	@FindBy(xpath = "//a[contains(text(), 'Go to EOB Search')]")
-	private WebElement EOBsearchLink;
 	
-	@FindBy(xpath = "//a[contains(text(), 'Go to My Profile')]")
-	private WebElement MyProfileLink;
 
 	@FindBy(xpath = "//*[@id='profilePreferencesController']//h1")
 	private WebElement MyProfilePageHeader;
 
-	@FindBy(xpath = "//a[contains(text(), 'Go to Payments')]")
-	private WebElement GoToPaymentsLink;
+	
 	
 	@FindBy(xpath = "//a[contains(text(), 'Go to Contact Us')]")
 	private WebElement GoToContactUsLnk;
 	
-	@FindBy(linkText = "Go to Pharmacy Search page")
-	private WebElement PharmacyLocatorLink;
+	
 
-	
-	@FindBy(linkText = "Back to previous page")
-	private WebElement backTopreviouspageLink;
-	
-	
-	//@FindBy(linkText = "ORDER ADDITIONAL MATERIALS")
-	@FindBy(xpath = "//section[1]/div/div/div/a")
-	private WebElement addordermaterialLink;
 	
 	//@FindBy(linkText="Go to Order Materials page")
 	@FindBy(xpath ="//a[contains(text(),'Go to Order ')]")
@@ -78,29 +63,13 @@ public class BlueLayerHomePage extends UhcDriver {
 	
 	
 
-	private PageData browserCheckData;
-
-	private JSONObject browserCheckJson;
-	
-	private PageData myAccountHome;
 
 	public JSONObject accountHomeJson;
 
 	public BlueLayerHomePage(WebDriver driver,String category) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		if(category.equalsIgnoreCase("Individual"))
-		{
-			String fileName = CommonConstants.ACCOUNT_HOME_PAGE_INDIVIDUAL_DATA;
-			myAccountHome = CommonUtility.readPageData(fileName,
-					CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);
-		}
-		else
-		{
-			String fileName = CommonConstants.ACCOUNT_HOME_PAGE_DATA;
-			myAccountHome = CommonUtility.readPageData(fileName,
-					CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);
-		}
+		
 		
 		openAndValidate();
 	}

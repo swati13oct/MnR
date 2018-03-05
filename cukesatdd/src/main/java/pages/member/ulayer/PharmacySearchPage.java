@@ -56,8 +56,6 @@ public class PharmacySearchPage extends UhcDriver{
         @FindBy(id = "planyear")
         private WebElement planYearDropDown;
 
-        @FindBy(xpath = "//*[@id='pharm_services']/li[1]")
-        private WebElement pharmacyTypeActual;
 
         @FindBy(xpath = "//ul[@id='pharm_services']/li/span")
         private WebElement toolTip;

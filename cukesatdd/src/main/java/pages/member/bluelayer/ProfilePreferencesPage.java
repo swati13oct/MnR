@@ -110,8 +110,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(id = "profileemailaddress")
 	private WebElement EmailValue;
 
-	@FindBy(xpath = ".//*[@id='needhelpsectioncontactus']//p[Contains(text(),'See more ways to')]")
-	private WebElement Seemorewaystext;
+
 
 	@FindBy(className = "atdd-contact-us")
 	private WebElement contactUs;
@@ -230,8 +229,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(className = "atdd-goGreenHeader")
 	private WebElement goggreenheader;
 
-	@FindBy(className = "atdd-section-heading")
-	private WebElement communicationheader;
+
 
 	@FindBy(xpath = "html/body/div[2]/div[3]/div[2]/div[1]/div/div/div/div/div[1]/div/div/div/div/div/div/a")
 	private WebElement Profilenprefernceslink;

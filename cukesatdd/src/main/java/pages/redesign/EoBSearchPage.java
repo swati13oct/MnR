@@ -10,8 +10,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
@@ -30,15 +28,12 @@ public class EoBSearchPage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(), '(Terminated)')]")
 	private List<WebElement> TerminatedTabs;
 
-	private PageData planBenefitsCoverage;
 
 	
 	public EoBSearchPage(WebDriver driver) throws InterruptedException {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		String fileName = CommonConstants.MEDICAL_EOB_PAGE_DATA;
-		planBenefitsCoverage = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
+		
 		Thread.sleep(5000);
 		CommonUtility.checkPageIsReady(driver);
 		try{
