@@ -87,11 +87,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(linkText = "Terms of Use")
 	private WebElement termsOfUse;
 
-	@FindBy(linkText = "Language Assistance | Non-Discrimination Notice")
-	private WebElement languageAssistanceEnglish;
-	
-	@FindBy(linkText = "Asistencia de Idiomas | Aviso de no Discriminación (PDF)")
-	private WebElement languageAssistanceSpanish;
+
 	
 	public AccountHomePage(WebDriver driver) {
 		super(driver);

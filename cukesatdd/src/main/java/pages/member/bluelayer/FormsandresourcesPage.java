@@ -32,11 +32,6 @@ public class FormsandresourcesPage extends UhcDriver {
         @FindBy(xpath = "/html/body/div[6]/div/div/table/tbody/tr[5]/td/div[2]/div/div/div[2]/div[5]/div/div/div/div/div/div/div/div/div/div[2]/div/div/div/div")
         private WebElement PlanMaterialsSection;
 
-        @FindBy(linkText = "Plan Benefits")
-        private WebElement benefitsLink;
-        
-        @FindBy(xpath = ".//*[@id='document-date']/option[4]")
-        private WebElement selectLast24Months;
         
         @FindBy(xpath = ".//*[@id='_content_campaigns_uhcm_formsresources-main_formsresources-main_jcr_content_par_teaser_2']")
         private WebElement eobSectionBox;
@@ -50,23 +45,10 @@ public class FormsandresourcesPage extends UhcDriver {
         @FindBy(id = "disclosure_link")
         private WebElement logOut;
 
-        @FindBy(xpath = "//*[@id='SummaryofBenefits_-1609990126']/p/a")
-        private WebElement PDF1;
-
-        @FindBy(xpath=".//*[contains(text(),'search providers')]")
-        private WebElement searchProvider;
         
         @FindBy(xpath="//*[@id='benefits']/a")
-        private WebElement benefitsAndCoverage;  
-        
-        @FindBy(xpath="//*[@id='planBenefitsApp']/div/div/div[1]/div/div/div/div/span[2]")
-        private WebElement planName;
-        
-        @FindBy(xpath="//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div[1]/div[1]/div[2]")  
-        private WebElement memberNameText;
-        
-        @FindBy(xpath="//*[@id='planBenefitsApp']/div/div/div[2]/div[3]/span[2]")
-        private WebElement monthlyPremiumText;
+        private WebElement benefitsAndCoverage; 
+      
         
         @FindBy(linkText = "Prescription Mail Order Form - Preferred Mail Service Pharmacy through OptumRx")
         private WebElement preferredMailOrderLink;

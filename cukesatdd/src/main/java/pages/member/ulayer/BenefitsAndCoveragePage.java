@@ -3,7 +3,7 @@
  */
 package pages.member.ulayer;
 
-import java.util.ArrayList;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -115,8 +115,6 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(id = "mapdPageNonLis")
 	private WebElement drugcopaytable;
 	
-	@FindBy(xpath = ".//*[@id='coPaySection']/div/section/div/div[4]/div/div[1]/div")
-	private WebElement learnoreContent;
 
 	@FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[2]/div[1]/div")
 	private WebElement drugheader;
@@ -142,11 +140,6 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-hospitalvisits-title")
 	private WebElement HospitalVisits;
 
-	@FindBy(className = "atdd-emergencycare-title")
-	private WebElement EmergencyHeader;
-
-	@FindBy(className = "atdd-ambulance-title")
-	private WebElement AmbulanceHeader;
 
 	@FindBy(className = "atdd-officevisits-title")
 	private WebElement OfficeVisits;
@@ -207,8 +200,6 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[1]/div/div[3]/div[1]/span")
 	private WebElement effective_Date;
 
-	@FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[4]/span[2]")
-	private WebElement Monthly_Premium;
 
 	@FindBy(className = "atdd-need-help")
 	private WebElement NeedhelpShip;
@@ -231,8 +222,6 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[2]/div[1]/div/div[1]/div/span")
 	private WebElement ExtraHelp;
 
-        @FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[4]/button")
-	private WebElement MakePaymentButton;
 
 	@FindBy(xpath = ".//*[@id='planBenefitsApp']/div/div/div/div/div/div[2]/a")
 	private WebElement learnmorebutton;
@@ -276,12 +265,6 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-bnc-discounttitle")
 	private WebElement headerdiscountservices;
 
-	@FindBy(xpath = ".//*[@id='planBenefitsApp']/div/div/div/div/div/div[2]")
-	private WebElement vassection;
-
-
-	@FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[1]/div/div/h2")
-	private WebElement Header;
 
 	public static final String learnmorelinktiertext_xpath = ".//*[@id='collapseTiers']";
 	public static final String learnmorestagetext_xpath = ".//*[@id='collapseStages']";
@@ -694,7 +677,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	{
 		if (DrugCostDropdown.isDisplayed()) {
-			List<String> listActual = new ArrayList<String>();
+			
 			Select dropdown = new Select(DrugCostDropdown);
 			List<WebElement> webElements = dropdown.getOptions();
 			for (WebElement element : webElements) {

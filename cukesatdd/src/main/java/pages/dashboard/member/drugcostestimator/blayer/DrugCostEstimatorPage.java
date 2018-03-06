@@ -32,7 +32,6 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		// CommonUtility.waitForPageLoad(driver, SaveDrugPage, 10);
-		String fileName = CommonConstants.SAVE_DRUG_PAGE_DATA;
 		// savedrugpage = CommonUtility.readPageData(fileName,
 		// CommonConstants.PAGE_OBJECT_DIRECTORY_BLAYER_MEMBER);
 		// openAndValidate();
@@ -309,7 +308,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	 */
 	public void changeUrlToNewDCEPage() throws InterruptedException {
 
-		String Current_url = driver.getCurrentUrl();
+		
 		String NewDCEUrl = "https://member.team-b-uhcmedicaresolutions.uhc.com/content/medicare/member/drug-lookup/overview.html";
 		String evironment = MRScenario.environment;
 		/*WebElement dcelink = driver.findElement(By.linkText("Estimate Drug Costs"));
@@ -540,7 +539,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 		String deleteDrugXpath = "//div[@id='drugs-tab']//p[contains (text(), '" + dosage + "')]";
 		try {
-			WebElement dosagedrug = driver.findElement(By.xpath(deleteDrugXpath));
+			driver.findElement(By.xpath(deleteDrugXpath));
 			Assert.assertFalse(true);
 		} catch (NoSuchElementException e) {
 			Assert.assertFalse(false);
@@ -638,8 +637,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	 * Select radius in miles drop down
 	 */
 	public void selectRadius() {
-		int index = 5;
-		Select options = new Select(milesSelection);
+		
+		//Select options = new Select(milesSelection);
 		//options.selectByIndex(index);
 		// options.getAllSelectedOptions();
 	}
@@ -1120,7 +1119,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		addNewDrugModal.typeDrugName(drug);
 		addNewDrugModal.submit();
 		// addNewDrugModal.selectDrug(drug);
-		AddDrugDetails addDrugDetails = new AddDrugDetails(driver);
+		//AddDrugDetails addDrugDetails = new AddDrugDetails(driver);
 		//addDrugDetails.selectQnty(60 + "");
 		//	SavingsOppurtunity savingsOppurtunity = addDrugDetails.continueAddDrugDetails();
 		SavingsOppurtunity savingsOppurtunity1 = new SavingsOppurtunity(driver);
@@ -1523,7 +1522,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	 */
 	public void navigateToDCETool() throws InterruptedException {
 
-		String Current_url = driver.getCurrentUrl();
+		
 		String NewDCEUrl;
 
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {

@@ -31,8 +31,7 @@ public class MedicalClaimDetailsPage extends UhcDriver {
 	@FindBy(id = "searchbutton")
 	private WebElement searchbutton;
 
-	@FindBy(xpath = "//table[@id='claim']/tbody/tr[3]/td[6]/form/input[12]")
-	private WebElement claimDetail;
+
 
 	@FindBy(id = "medicaldetailsinner")
 	private WebElement medicalClaimDetailsSection;

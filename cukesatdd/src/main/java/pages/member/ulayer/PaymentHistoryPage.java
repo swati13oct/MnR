@@ -74,8 +74,7 @@ public class PaymentHistoryPage extends UhcDriver{
 	@FindBy(id ="disclosure_link")
 	private WebElement logOut;
 	
-	@FindBy(className="paymentsoverview")
-	private WebElement paymenthistorypage;
+	
 
 	private PageData paymentHistory;
 	

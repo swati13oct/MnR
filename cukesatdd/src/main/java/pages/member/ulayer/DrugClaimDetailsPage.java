@@ -20,17 +20,9 @@ import atdd.framework.UhcDriver;
  */
 public class DrugClaimDetailsPage extends UhcDriver{
 
-	@FindBy(id = "searchRange")
-	private WebElement searchRange;
 
-	@FindBy(id = "searchbutton")
-	private WebElement searchbutton;
 
-	@FindBy(id = "drugdetailfooter")
-	private WebElement drugCostDetailsSection;
 
-	@FindBy(id = "drugclaimdetail")
-	private WebElement servicesChargesSection;
 	
 	@FindBy(id = "drugdetailtableheader")
 	private WebElement drugdetailtableheader;

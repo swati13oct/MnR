@@ -59,7 +59,7 @@ public class ContactusRedesignStepDefinition {
 
 				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
 			}
-			String planType = memberAttributesMap.get("Plan Type");
+			
 			Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
 			List<String> desiredAttributes = new ArrayList<String>();
 			for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator.hasNext();) {
