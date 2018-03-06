@@ -152,7 +152,7 @@ public class OrderPlanMaterialsAarpStepDefinition {
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
 		}
-		String plantype = givenAttributesMap.get("Plan Type");
+		
 		String option = givenAttributesMap.get("Option");
 		
 /*		if (!plantype.contentEquals("SHIP")){
@@ -184,10 +184,10 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		PlanMaterialConfirmationPage planMaterialConfirmationPage = (PlanMaterialConfirmationPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PLAN_MATERIALS_CONFIRMATION_PAGE);
 		OrderplanmaterialsPage orderPlanMaterialsPage = (OrderplanmaterialsPage) getLoginScenario().getBean(PageConstantsMnR.ORDER_PLAN_MATERIALS_PAGE);
-		boolean flag = true;
+		
 		if (planMaterialConfirmationPage == null){
 			System.out.println("@@@@@@@@@@  Order Material Failed  @@@@@@@@@@");
-			flag = orderPlanMaterialsPage.ValidateErrorMessage();
+			 orderPlanMaterialsPage.ValidateErrorMessage();
 			Assert.fail("Order Plan Materials Submission Failed. Confirmation page not displayed");
 		}
 

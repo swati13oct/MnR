@@ -1695,6 +1695,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	private WebElement selectedPharmSection;
 
 	public void switchYear(){
+		if(btn2017!=null)
 		btn2017.click();
 		
 	}
@@ -1716,6 +1717,13 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		Actions actions = new Actions(driver);
 		actions.moveToElement(ourPlansTab).build().perform();
 		enterZipcode.sendKeys(zipCode, Keys.ENTER);
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		driver.navigate().refresh();
 		return new VPPPlanSummaryPage(driver);
 		}else{
 			System.out.println("====================Our Plans tab not displayed================");

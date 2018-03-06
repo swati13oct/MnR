@@ -55,8 +55,8 @@ public class RegistrationStartOverErrorPageStepDefinition {
 
                 @Then("^the member navigate to the username and password help page$")
                 public void navigateToUsernameAndPasswordHelpPage() {
-                                RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
-                                                                getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
+                             /*   RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
+                                                                getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);*/
                 }
 
                 @When("^member click on Sign in link on existing member page$")
@@ -68,8 +68,8 @@ public class RegistrationStartOverErrorPageStepDefinition {
 
                 @Then("^the member navigate to the Sign in page$")
                 public void navigateToSignInPage() {
-                                RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
-                                                                getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
+                                /*RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
+                                                                getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);*/
                 }
                 
                 @When("^member click on start over link on future effective page$")

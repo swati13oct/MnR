@@ -117,7 +117,7 @@
 					<ruleset>${project.basedir}/src/main/resources/ucp-custom-ruleset.xml</ruleset>
 				</rulesets>
 				<failsOnError>false</failsOnError>
-     			<failOnViolation>false</failOnViolation>
+     			<failOnViolation>true</failOnViolation>
 				</configuration>
 				<executions>
 					<execution>

@@ -14,7 +14,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
@@ -34,11 +33,7 @@ public class GoGreenPreferencesPage extends UhcDriver{
 	private WebElement myProfileHeader;
 
 
-	@FindBy(id = "save-prefs-btn")
-	private WebElement SavePreferencesButton;
 	
-	@FindBy(id = "goPaperless-error")
-	private WebElement TermsAgreeError;
 
 	
 	@FindBy(xpath = "//a[contains(text(), 'Medicare Advantage Plan')]")
@@ -59,16 +54,16 @@ public class GoGreenPreferencesPage extends UhcDriver{
 	@FindBy(xpath="//a[contains(text(),'Personal Health Insurance')]")
 	private WebElement PHIPtab;
 
-	private PageData myProfiles;
+	
 
 	public JSONObject myProfilesJson;
 
 	public GoGreenPreferencesPage(WebDriver driver) throws InterruptedException {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		String fileName = CommonConstants.MY_PREFERENCES_PAGE_DATA;
+		/*String fileName = CommonConstants.MY_PREFERENCES_PAGE_DATA;
 		myProfiles = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
+				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);*/
 		Thread.sleep(5000);
 		CommonUtility.checkPageIsReady(driver);
 		try{

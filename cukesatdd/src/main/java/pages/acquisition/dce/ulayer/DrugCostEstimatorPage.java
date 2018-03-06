@@ -412,7 +412,7 @@ if (driver.getTitle().equalsIgnoreCase("estimate-drug-costs") || driver.getTitle
 
 	public void changeUrlToNewDCEPage() throws InterruptedException {
 
-		String Current_url = driver.getCurrentUrl();
+		
 		String NewDCEUrl;
 
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
@@ -576,7 +576,7 @@ sendkeys(zipcodeInput, zipcode); // not sure what webelement to use
 
 		String deleteDrugXpath = "//div[@id='drugs-tab']//p[contains (text(), '" + dosage + "')]";
 		try {
-			WebElement dosagedrug = driver.findElement(By.xpath(deleteDrugXpath));
+			 driver.findElement(By.xpath(deleteDrugXpath));
 			Assert.assertFalse(true);
 		} catch (NoSuchElementException e) {
 			Assert.assertFalse(false);
@@ -648,8 +648,8 @@ sendkeys(zipcodeInput, zipcode); // not sure what webelement to use
 	}
 
 	public void selectRadius() {
-		int index = 5;
-		Select options = new Select(milesSelection);
+		
+		 new Select(milesSelection);
 		//options.selectByIndex(index);
 		// options.getAllSelectedOptions();
 	}
@@ -1003,7 +1003,7 @@ sendkeys(zipcodeInput, zipcode); // not sure what webelement to use
 		// addNewDrugModal.selectDrug(drug);
 		AddDrugDetails addDrugDetails = new AddDrugDetails(driver);
 		// addDrugDetails.selectQnty(60 + "");
-		SavingsOppurtunity savingsOppurtunity = addDrugDetails.continueAddDrugDetails();
+		addDrugDetails.continueAddDrugDetails();
 		SavingsOppurtunity savingsOppurtunity1 = new SavingsOppurtunity(driver);
 		savingsOppurtunity1.switchToGeneric();
 		savingsOppurtunity1.savedrugbutton();
