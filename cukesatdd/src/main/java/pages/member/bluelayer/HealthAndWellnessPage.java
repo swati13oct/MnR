@@ -16,8 +16,7 @@ import atdd.framework.UhcDriver;
 
 public class HealthAndWellnessPage extends UhcDriver {
 
-	@FindBy(xpath = "//a[contains(text(),'UnitedHealthcare MedicareComplete Choice (PPO)')]")
-	private WebElement uhcMedicareCompleteChoicePPO;
+	
 
 	@FindBy(xpath = ".//*[@id='hl-hw-banner']/a")
 	private WebElement healthAndWellnessBanner;

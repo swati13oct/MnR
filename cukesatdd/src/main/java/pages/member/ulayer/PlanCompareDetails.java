@@ -6,14 +6,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageData;
-import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 public class PlanCompareDetails extends UhcDriver {
 	
-	private PageData planCompareDetails;
+	
 	
 	public JSONObject planCompareDetailsJson;
 	
@@ -26,8 +23,7 @@ public class PlanCompareDetails extends UhcDriver {
 	@FindBy(xpath="/html/body/div[7]/div/div/table/tbody/tr[5]/td/div[2]/div/div[2]/div[2]/div[2]/div/div/div/div[4]/div[5]/div[2]/div[3]/div[2]/div/p")
 	private WebElement preferredTableText;
 	
-	@FindBy(xpath="")
-	private WebElement preferredDisclaimerText;
+	
 	
 	@FindBy(xpath="/html/body/div[7]/div/div/table/tbody/tr[5]/td/div[2]/div/div[2]/div[2]/div[2]/div/div/div/div[4]/div[4]/div/div[8]/div[2]/p[2]")
 	private WebElement preferredNetworkDisclaimerMAPD;
@@ -41,9 +37,7 @@ public class PlanCompareDetails extends UhcDriver {
 	public PlanCompareDetails(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		String fileName = CommonConstants.PLAN_COMPARE_DETAILS;
-		planCompareDetails = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
+		
 		openAndValidate();
 	}
 

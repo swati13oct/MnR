@@ -13,8 +13,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.data.PageData;
 import acceptancetests.data.CommonConstantsMobile;
+import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.dashboard.member.blayer.PaymentHistoryPage;
@@ -87,8 +87,6 @@ public class BenefitsSummaryPage extends UhcDriver{
 	private WebElement mapView;
 
 
-	@FindBy(linkText = "PHARMACY LOCATOR")
-	private WebElement pharmacylocator;
 	
 	@FindBy(linkText = "Map View")
 	private WebElement mapview;
@@ -370,7 +368,7 @@ public class BenefitsSummaryPage extends UhcDriver{
 	public PaymentHistoryPage changeUrlToNewPaymentHistoryPage() {
 
 		String NewPayHistoryUrl = "https://member.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/home/payments.html";
-		String url = driver.getCurrentUrl();
+		
 		driver.get(NewPayHistoryUrl);
 		try {
 			Thread.sleep(15000);

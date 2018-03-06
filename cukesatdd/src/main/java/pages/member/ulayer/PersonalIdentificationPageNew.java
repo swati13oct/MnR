@@ -13,8 +13,7 @@ public class PersonalIdentificationPageNew extends UhcDriver {
 	@FindBy(id = "missing-additional-btn")
 	private WebElement ContinuePI;
 	
-	@FindBy(id = "missingerror")
-	private WebElement ErrorMessage;
+	
 	
 	@FindBy(id = "member-idErr")
 	private WebElement MemberIdErrorMessage;

@@ -42,8 +42,7 @@ public class TeamCLoginUlayer extends UhcDriver {
 		@FindBy(id = "usercheckbox")
 		private WebElement userNameCheckBox;
 		
-		@FindBy(xpath = "html/body/div[2]/div/div/div/div/div/main/div/div/div/div/div/div/div/a")
-		private WebElement BackToSignInPage;
+
 
 		private PageData browserCheckData;
 

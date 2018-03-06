@@ -23,8 +23,7 @@ public class ReDesignRegistrationPage extends UhcDriver {
 
 
 	// Page URL
-	private static String PAGE_URL = MRConstants.AARPM_URL;
-	private static String REDESIGN_REGISTRATION_PAGE_URL = MRConstants.NEW_REDESIGN_REGISTRATION_URL;
+	
 	private static String SetServerDate_URL = "http://mrrest-teama.ose.optum.com/MRRestWAR/rest/zadmin/time/joda?millis=";
 	private static String REDESIGN_REGISTRATION_URL = "https://team-a-medicare.uhc.com/medicare/member-registration.html#/get-started";
 	
@@ -32,8 +31,7 @@ public class ReDesignRegistrationPage extends UhcDriver {
 	@FindBy(id = "member-id")
 	private WebElement memberIdField;
 
-	@FindBy(id = "password")
-	private WebElement passwordField;
+	
 	
 	@FindBy(id="date-mm")
 	private WebElement month;
@@ -60,30 +58,6 @@ public class ReDesignRegistrationPage extends UhcDriver {
 	private WebElement Step2_Page_PlanDetails;
 	
 	
-	@FindBy(id="username")
-	private WebElement txtUsername;
-	
-	@FindBy(id="password")
-	private WebElement txtPassword;
-	
-	@FindBy(id="password-confirm")
-	private WebElement txtConfirmPassword;
-	
-	@FindBy(id="email")
-	private WebElement emailAddress;
-	
-	@FindBy(id="email-confirm")
-	private WebElement confrmEmailAddress;
-	
-	@FindBy(id="continue-btn")
-	private WebElement btn_ConfirmRegistration;
-	
-
-	@FindBy(linkText = "Forgot your username or password?")
-	private WebElement forgotUsernamePasswordLink;
-
-	@FindBy(id = "usercheckbox")
-	private WebElement userNameCheckBox;
 
 	
 	public ReDesignRegistrationPage(WebDriver driver) {

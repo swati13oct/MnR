@@ -22,8 +22,7 @@ public class HealthAndWellness  extends UhcDriver {
 	@FindBy(id = "learning_desk1")
 	private WebElement learningTab;
 	
-	@FindBy(id = "rewards_desk")
-	private WebElement rewardsTab;
+	
 	
 	@FindBy(xpath = ".//*[@id='hl-hw-buckets']/div/div[1]/a/img")
 	private WebElement lifestyleIcon;

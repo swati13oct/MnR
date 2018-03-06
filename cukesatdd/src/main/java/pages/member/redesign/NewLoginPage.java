@@ -43,11 +43,7 @@ public class NewLoginPage extends UhcDriver {
 	@FindBy(linkText = "Forgot your username or password?")
 	private WebElement forgotUsernamePasswordLink;
 
-	@FindBy(id = "usercheckbox")
-	private WebElement userNameCheckBox;
-	
-	@FindBy(xpath=".//*[@id='IPEinvL']/map/area[2]")
-    private WebElement iPerceptionPopUp;
+
 
 
 	public NewLoginPage(WebDriver driver) {

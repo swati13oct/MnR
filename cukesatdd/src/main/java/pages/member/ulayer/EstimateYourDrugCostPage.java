@@ -25,14 +25,11 @@ public class EstimateYourDrugCostPage extends UhcDriver {
 	@FindBy(className = "y2015")
 	private WebElement nextYear;
 	
-	@FindBy(xpath = "/html/body/div[7]/div/div/table/tbody/tr[5]/td/div[4]/div/div[6]/div[1]/div[3]/div/div/div/div[1]/div/div/div[1]/div[2]/div[2]/span/strong/span[1]")
-	private WebElement planYear2016;
 	
 	@FindBy(xpath = "/html/body/div[7]/div/div/table/tbody/tr[5]/td/div[4]/div/div[6]/div[1]/div[3]/div/div/div/div[1]/div/div/div[1]/div[2]/div[4]/a")
 	private WebElement continueToManageDrugList;
 	
-	@FindBy(className = "getstartedselectplan")
-	private WebElement selectPlanDropDown;
+	
 	
 	public EstimateYourDrugCostPage(WebDriver driver) {
 		super(driver);

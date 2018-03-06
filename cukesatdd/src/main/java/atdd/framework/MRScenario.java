@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
@@ -33,12 +32,7 @@ import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxBinary;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.phantomjs.PhantomJSDriver;
-import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.stereotype.Component;
@@ -74,7 +68,7 @@ public class MRScenario {
 
                private static final String DIRECTORY = "/src/main/resources/";
 
-               private static final String SQL_COMMIT = "COMMIT";
+             //  private static final String SQL_COMMIT = "COMMIT";
 
                public static int count = 0;
 
@@ -245,7 +239,7 @@ public class MRScenario {
 
                }
 
-               private static boolean checkMemberFound(String userName, Connection con,
+               /*private static boolean checkMemberFound(String userName, Connection con,
                                              String defaultSchema) {
 
                               Statement stmt;
@@ -270,9 +264,9 @@ public class MRScenario {
                                              e.printStackTrace();
                               }
                               return false;
-               }
+               }*/
 
-               private static void removeMemberFound(String userName, Connection con,
+               /*private static void removeMemberFound(String userName, Connection con,
                                              String defaultSchema) {
 
                               Statement stmt;
@@ -289,7 +283,7 @@ public class MRScenario {
                               }
 
                               try {
-                                             /* Checking in DataBase */
+                                              Checking in DataBase 
                                              if (rs.next()) {
                                                             stmt = con.createStatement();
 
@@ -315,9 +309,9 @@ public class MRScenario {
                                              e.printStackTrace();
                               }
 
-               }
+               }*/
 
-               private static void addMember(String userName, Connection con,
+              /* private static void addMember(String userName, Connection con,
                                              String defaultSchema, String[] massRegisStreamAttributes) {
 
                               Statement stmt;
@@ -327,9 +321,9 @@ public class MRScenario {
                               String accountID = massRegisStreamAttributes[6];
                               String businessType = massRegisStreamAttributes[7];
 
-                              /* Creating Database entry */
+                               Creating Database entry 
 
-                              /*
+                              
                               * Sample Queries ::::: INSERT INTO portal_user ( PORTAL_USER_ID,
                               * USER_NAME,EMAIL_OPT_IN_IND,GUID,UPDATE_NU,CREATED_BY
                               * ,CREATION_DATE,LAST_MODIFIED_BY,LAST_MODIFIED_DATE ) VALUES ( (SELECT
@@ -346,7 +340,7 @@ public class MRScenario {
                               * 'GOVT','c7429fee012cdd44:-347aba25:1597345cc63:-6a7e',0,'portaladmin','16-JAN-17
                               * 05.28.36.998000000 AM','portaladmin','16-JAN-17 05.28.36.998000000
                               * AM'); commit;
-                              */
+                              
                               try {
                                              stmt = con.createStatement();
                                              String portalUserEntryQuery = "INSERT INTO "
@@ -375,7 +369,7 @@ public class MRScenario {
                                              e.printStackTrace();
                               }
 
-               }
+               }*/
 
                private static Connection getDBConnection(Map<String, String> props) {
                               try {

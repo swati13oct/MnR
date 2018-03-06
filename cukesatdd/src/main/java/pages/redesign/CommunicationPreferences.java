@@ -21,8 +21,7 @@ public class CommunicationPreferences extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='IPEinvL']/map/area[2]")
 	private WebElement iPerceptionPopUp;
 
-	@FindBy(xpath = "(//div[contains(@class,'preferences-wrapper')]/div[@class='ng-scope'])[1]/div[4]/fieldset/div[1]/div/label")
-	private WebElement PaperlessPrefRadioButtons;
+	
 
 	@FindBy(xpath = ".//*[@id='save-prefs-btn']")
 	private WebElement SavePreferences;

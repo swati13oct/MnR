@@ -57,7 +57,7 @@ public class PrescriptionDrugEobPage extends UhcDriver {
 	public PrescriptionDrugEobPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		String fileName = CommonConstants.PRESCRIPTION_DRUG_EOB_PAGE_DATA;
+		
 		/*prescriptionDrugEob = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);*/
 	

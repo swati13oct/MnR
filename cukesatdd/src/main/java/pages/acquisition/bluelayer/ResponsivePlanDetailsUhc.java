@@ -39,8 +39,7 @@ public class ResponsivePlanDetailsUhc extends UhcDriver {
 	@FindBy(xpath="//div[2][@class='riders-box']/label")
 	private WebElement highOptionalDentalCheckBox;
 	
-	@FindBy(xpath="	//div[2][@class='riders-box']/p[3]/b")
-	private WebElement highOptionalDentalDollarValue;
+
 		
 	@FindBy(xpath="//span[@class='title' and text()='Plan Costs']")
 	private WebElement planCostsTab;
