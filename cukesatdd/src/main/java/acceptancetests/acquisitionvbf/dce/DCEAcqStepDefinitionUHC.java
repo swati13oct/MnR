@@ -100,9 +100,11 @@ public class DCEAcqStepDefinitionUHC {
 
 		String plantype = memberAttributesMap.get("Plan Type");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) loginScenario.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		
+		plansummaryPage.clickOnViewPlans(plantype);
 		boolean yearBtnVppPageExists = plansummaryPage.yearBtnExists();
 		loginScenario.saveBean(CommonConstants.YEAR_BUTTON_VPPPAGE, yearBtnVppPageExists);
-		plansummaryPage.clickOnViewPlans(plantype);
 		if(yearBtnVppPageExists){
 			plansummaryPage.choose2017Plans();
 		}
