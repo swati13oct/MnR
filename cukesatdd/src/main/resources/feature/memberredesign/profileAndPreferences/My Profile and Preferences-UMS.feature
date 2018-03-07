@@ -245,7 +245,10 @@ Feature: C1.2To test Profile and Preferences page .
       |PDP       |
      #|SHIP      |
      
-      @CMNokiaMemberValidateEmailPhoneEdit
+    
+
+    @aprilRelease2018
+    @CMNokiaMemberValidateEmailPhoneEdit
     Scenario Outline: To verify Email section in member Redesign site
     Given registered member with following details for Profile and Preferences flow
         | Plan Type      | <planType>  |
@@ -253,13 +256,13 @@ Feature: C1.2To test Profile and Preferences page .
     Then the user navigates to Profile and Preferences page
     Then the user validates the Presence of edit button in email section
     Then the user validates the Presence of edit button in Phone section
-     Then the user validates the Presence of edit button in Temporary Address section
- Then the user validates the Presence of edit button in Mailing Address section
+    Then the user validates the Presence of edit button in Temporary Address section
+    Then the user validates the Presence of edit button in Mailing Address section
  
  
     Examples: 
        | planType| memberType  |
-       | MA    | NOKIA       | 
+       | MA      | NOKIA       | 
        | MAPD    | NOKIA       | 
       
        

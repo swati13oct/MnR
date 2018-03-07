@@ -123,9 +123,9 @@ public abstract class UhcDriver {
     	         waitforElement(element);
     	            if (element.isDisplayed()) {
 
-    	                 /*  Actions actions = new Actions(driver);
+    	                   Actions actions = new Actions(driver);
     	                   actions.moveToElement(element);
-    	                   actions.perform();*/
+    	                   actions.perform();
     	                   Assert.assertTrue("@@@The element " + element.getText() + "is found@@@", element.isDisplayed());
     	                   System.out.println("@@@The element " + element.getText() + "is found@@@");
     	            }
