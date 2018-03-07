@@ -8,7 +8,7 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=2, screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target")
-@CucumberOptions(glue = { "atdd.framework","acceptancetests.memberrdesign.pharmacylocator" }, features = { "src/main/resources/feature/memberrdesign/pharmacy-locator" }, plugin = {
+@CucumberOptions(glue = { "atdd.framework","acceptancetests.memberrdesignVBF.pharmacylocator" }, features = { "src/main/resources/feature/member-redesign-vbf/pharmacy-locator" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-SanityRunRedesignMemPharmacylocator.json" }, tags = { "@smokeTest_PharmacyLocatorMem" },monochrome = true)
 public class SanityRunRedesignMemPharmacylocator {
 

@@ -8,7 +8,7 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=2, screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberrdesign.eob" }, features = { "src/main/resources/feature/memberrdesign/eob" }, plugin = {
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberrdesignVBF.eob" }, features = { "src/main/resources/feature/member-redesign-vbf/eob" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-SanityRunRedesignEob.json" }, tags = { "@smokeTest_EOB" },monochrome = true)
 
 

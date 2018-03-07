@@ -25,32 +25,31 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
+
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Assert;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
+
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.phantomjs.PhantomJSDriver;
-import org.openqa.selenium.phantomjs.PhantomJSDriverService;
-import org.openqa.selenium.remote.CapabilityType;
+
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.stereotype.Component;
 
-import acceptancetests.atdd.data.CommonConstants;
+import acceptancetests.data.CommonConstants;
 import cucumber.api.Scenario;
-
+import org.junit.Assert;
+import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 /**
  * 
  * @author schak38
@@ -65,6 +64,7 @@ public class MRScenario {
 	private static Map<String, List<String>> ampMemberAttributesMap = new LinkedHashMap<String, List<String>>();
 
 	private static Map<String, List<String>> umsMemberAttributesMap = new LinkedHashMap<String, List<String>>();
+	private static Map<String, List<String>> memberRedesignVbfAttributesMap = new LinkedHashMap<String, List<String>>();
 
 	private static List<String> userNamesAddedList = new ArrayList<String>();
 
@@ -73,22 +73,26 @@ public class MRScenario {
 	private static Map<String, Map<String, JSONObject>> expectedDataMapUlayer = new LinkedHashMap<String, Map<String, JSONObject>>();
 
 	private static Map<String, Map<String, JSONObject>> expectedDataMapBluelayer = new LinkedHashMap<String, Map<String, JSONObject>>();
-	public static String environment, browser, TeamCEnvironment, isTestHarness;
+	public static String environment, isTestHarness;
+    public static String environmentMedicare;
+    
+    public static String domain;
+    
 	private static final String DIRECTORY = "/src/main/resources/";
 
 	private static final String SQL_COMMIT = "COMMIT";
 
 	public static int count = 0;
 
-	/*
+	
 	public static final String USERNAME = "ucpadmin";
 
 	public static final String ACCESS_KEY ="2817affd-616e-4c96-819e-4583348d7b37";
-	*/
+	
 
-	public static final String USERNAME = System.getenv("SAUCE_USERNAME");
+	//public static final String USERNAME = System.getenv("SAUCE_USERNAME");
 
-	public static final String ACCESS_KEY = System.getenv("SAUCE_ACCESS_KEY");
+	//public static final String ACCESS_KEY = System.getenv("SAUCE_ACCESS_KEY");
 
 	public static final String URL = "https://" + USERNAME + ":" + ACCESS_KEY
 			+ "@ondemand.saucelabs.com:443/wd/hub";
@@ -103,7 +107,7 @@ public class MRScenario {
 		}
 	}
 
-	public WebDriver webDriver;
+	static WebDriver webDriver;
 
 	public Object getBean(String id) {
 		Object result = scenarioObjectMap.get(id);
@@ -120,9 +124,22 @@ public class MRScenario {
 
 		/* Set acqusisition and member urls */
 		environment = props.get("Environment");
-		isTestHarness =  props.get("isTestHarness");
-		
-		
+
+		if(environment.equals("awe-test-a")){
+      	  environmentMedicare ="test-a";
+        }else if(environment.equals("awe-stage")){
+      	  environmentMedicare ="stage";
+        }else{
+      	  environmentMedicare =environment;
+        }
+ 
+        
+           if(props.containsKey("Domain")) {
+                  domain = props.get("Domain");
+           } else {
+                  domain = null;
+           }
+   		isTestHarness =  props.get("isTestHarness");
 		// Setting permission to the scripts , so that jenkins server can access
 		File shellScript  =  new File("src/main/resources/pdfReportGenerator.sh");
 		File groovyScript  =  new File("src/main/resources/pdfReporter.groovy");
@@ -178,6 +195,7 @@ public class MRScenario {
 */
 		BufferedReader memberAmpTypeReader = null;
 		BufferedReader memberUmsTypeReader = null;
+		BufferedReader memberRedesignVbfTypeReader = null;
 
 		try {
 			InputStream memberTypeStream = ClassLoader.class
@@ -204,29 +222,42 @@ public class MRScenario {
 			//	}
 			}
 
-			InputStream memberTypeStream1 = ClassLoader.class
-					.getResourceAsStream("/database/UMS-Member-Type.csv");
-			memberUmsTypeReader = new BufferedReader(new InputStreamReader(
-					memberTypeStream1));
+			 InputStream memberTypeStream1 = ClassLoader.class
+                     .getResourceAsStream("/database/UMS-Member-Type.csv");
+memberUmsTypeReader = new BufferedReader(new InputStreamReader(
+                     memberTypeStream1));
 
-			while ((line = memberUmsTypeReader.readLine()) != null) {
-				// use comma as separator
-				String[] memberAttributes = line.split(cvsSplitBy);
-				List<String> attrList = Arrays.asList(memberAttributes)
-						.subList(1, memberAttributes.length);
-				String uhcUserName = null;
-				uhcUserName = memberAttributes[0];
-				/*if (memberAttributes[0].contains("/")) {
-					String[] memberAttributArr = memberAttributes[0].split("/");
-					uhcUserName = memberAttributArr[0];
+while ((line = memberUmsTypeReader.readLine()) != null) {
+      // use comma as separator
+      String[] memberAttributes = line.split(cvsSplitBy);
+      List<String> attrList = Arrays.asList(memberAttributes)
+                                    .subList(1, memberAttributes.length);
+      String uhcUserName = null;
+      if (memberAttributes[0].contains("/")) {
+                     String[] memberAttributArr = memberAttributes[0].split("/");
+                     uhcUserName = memberAttributArr[0];
 
-				} else {
-					uhcUserName = memberAttributes[0];
-				}*/
-				//if (userNamesAddedList.contains(uhcUserName)) {
-					umsMemberAttributesMap.put(uhcUserName, attrList);
-				//}
+      } else {
+                     uhcUserName = memberAttributes[0];
+      }
+      //if (userNamesAddedList.contains(uhcUserName)) {
+                     umsMemberAttributesMap.put(uhcUserName, attrList);
+      //}
+}
+					
+					InputStream memberTypeStream2 = ClassLoader.class
+							.getResourceAsStream("/database/MemberRedesign-VBF.csv");
+					memberRedesignVbfTypeReader = new BufferedReader(new InputStreamReader(
+							memberTypeStream2));
 
+					while ((line = memberRedesignVbfTypeReader.readLine()) != null) {
+						// use comma as separator
+						String[] memberAttributes = line.split(cvsSplitBy);
+						List<String> attrList = Arrays.asList(memberAttributes)
+								.subList(1, memberAttributes.length);
+						String uhcUserName = null;
+						uhcUserName = memberAttributes[0];
+						memberRedesignVbfAttributesMap.put(uhcUserName, attrList);
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -503,31 +534,30 @@ public class MRScenario {
 		return null;
 	}
 
-	public Map<String, String> getUMSMemberWithDesiredAttributes(
-			List<String> desiredAttributes) {
-		Map<String, String> loginCreds = new HashMap<String, String>();
-		for (Entry<String, List<String>> currEntry : umsMemberAttributesMap
-				.entrySet()) {
-			System.out.println("Current value entry  - "+currEntry.getValue());
-			if (currEntry.getValue().equals(desiredAttributes)) {
-				System.out.println("Current key entry - "+currEntry.getKey());
-				if (currEntry.getKey().contains("/")) {
-					String[] keyArr = currEntry.getKey().split("/");
-					loginCreds.put("user", keyArr[0]);
-					loginCreds.put("pwd", keyArr[1]);
-					return loginCreds;
-				} else {
-					loginCreds.put("user", currEntry.getKey());
-					loginCreds.put("pwd", "Password@1");
-					return loginCreds;
-				}
+	 public Map<String, String> getUMSMemberWithDesiredAttributes(
+             List<String> desiredAttributes) {
+Map<String, String> loginCreds = new HashMap<String, String>();
+for (Entry<String, List<String>> currEntry : umsMemberAttributesMap
+                            .entrySet()) {
+             if (currEntry.getValue().equals(desiredAttributes)) {
+                            if (currEntry.getKey().contains("/")) {
+                                           String[] keyArr = currEntry.getKey().split("/");
+                                           loginCreds.put("user", keyArr[0]);
+                                           loginCreds.put("pwd", keyArr[1]);
+                                           return loginCreds;
+                            } else {
+                                           loginCreds.put("user", currEntry.getKey());
+                                           loginCreds.put("pwd", "Password@1");
+                                           return loginCreds;
+                            }
 
-			}
-		}
-		// No match found
-		return null;
-	}
+             }
+}
+// No match found
+return null;
+}
 
+	
 	public static JSONObject readExpectedJson(String fileName, String directory) {
 
 		if (fileName.contains("/")) {
@@ -606,266 +636,113 @@ public class MRScenario {
 		}
 	}
 
-	/*public WebDriver getWebDriver() {
+	/*           public WebDriver getWebDriver() {
 
-		
-		 * 
-		 * Below code excecutes if webdriver value is passed in build command ::
-		 * either saucelabs or headless
-		 
-		if (null != System.getProperty("webdriverhost")
-				&& !(System.getProperty("webdriverhost").equalsIgnoreCase(""))) {
+    /*
+    * 
+     * Below code excecutes if webdriver value is passed in build command ::
+    * either saucelabs or headless
+    */
+/*                          if (null != System.getProperty("webdriverhost")
+                                  && !(System.getProperty("webdriverhost").equalsIgnoreCase(""))) {
 
-			if (System.getProperty("webdriverhost").equalsIgnoreCase(
-					"saucelabs")) {
-				DesiredCapabilities capabilities = DesiredCapabilities
-						.firefox();
-				capabilities.setCapability("platform", "Windows 7");
-				capabilities.setCapability("version", "45.0");
-				capabilities.setCapability("parent-tunnel", "sauce_admin");
-				capabilities.setCapability("tunnelIdentifier",
-						"OptumSharedTunnel-Prd");
-				//capabilities.setCapability("name", "MRATDD-TestSuite");
-				capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
-				String jobName = "VBF Execution - Using " + capabilities.getBrowserName() + " in  " + System.getProperty("environment") +" environment";
-                capabilities.setCapability("name", jobName);
-				try {
-					webDriver = new RemoteWebDriver(new URL(URL), capabilities);
-				} catch (MalformedURLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			} else {
-				
-				 * Below code snippet is for triggering HeadLess Browser
-				 * (PhantomJS)
-				 
-				String phantomjs = System.getProperty("phantomjs");
-				DesiredCapabilities caps = new DesiredCapabilities();
-				if (StringUtils.isBlank(phantomjs)) {
-					caps.setCapability(
-							PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
-							props.get("HeadlessBrowserPath"));
-				} else {
-					caps.setCapability(
-							PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
-							System.getProperty("phantomjs"));
-				}
-				caps.setJavascriptEnabled(true);
-				caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS,
-						new String[] { "--web-security=false",
-								"--ignore-ssl-errors=true",
-								"--ssl-protocol=any" });
-				String userAgent = "Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1";
-				System.setProperty("phantomjs.page.settings.userAgent",
-						userAgent);
-				webDriver = new PhantomJSDriver(caps);
-			}
+                   if (System.getProperty("webdriverhost").equalsIgnoreCase(
+                                                 "saucelabs")) {
+                                  DesiredCapabilities capabilities = DesiredCapabilities
+                                                                .firefox();
+                                  capabilities.setCapability("platform", "Windows 7");
+                                  capabilities.setCapability("version", "45.0");
+                                  capabilities.setCapability("parent-tunnel", "sauce_admin");
+                                  capabilities.setCapability("tunnelIdentifier",
+                                                                "OptumSharedTunnel-Prd");
+                                  //capabilities.setCapability("name", "MRATDD-TestSuite");
+                                  capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
+                                  String jobName = "VBF Execution - Using " + capabilities.getBrowserName() + " in  " + System.getProperty("environment") +" environment";
+capabilities.setCapability("name", jobName);
+                                  try {
+                                                 webDriver = new RemoteWebDriver(new URL(URL), capabilities);
+                                  } catch (MalformedURLException e) {
+                                                 // TODO Auto-generated catch block
+                                                 e.printStackTrace();
+                                  }
+                   } else {
+                                  /*
+                                  * Below code snippet is for triggering HeadLess Browser
+                                  * (PhantomJS)
+                                  */
+/*                                                        String phantomjs = System.getProperty("phantomjs");
+                                  DesiredCapabilities caps = new DesiredCapabilities();
+                                  if (StringUtils.isBlank(phantomjs)) {
+                                                 caps.setCapability(
+                                                                               PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
+                                                                               props.get("HeadlessBrowserPath"));
+                                  } else {
+                                                 caps.setCapability(
+                                                                               PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
+                                                                               System.getProperty("phantomjs"));
+                                  }
+                                  caps.setJavascriptEnabled(true);
+                                  caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS,
+                                                                new String[] { "--web-security=false",
+                                                                                              "--ignore-ssl-errors=true",
+                                                                                              "--ssl-protocol=any" });
+                                  String userAgent = "Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1";
+                                  System.setProperty("phantomjs.page.settings.userAgent",
+                                                                userAgent);
+                                  webDriver = new PhantomJSDriver(caps);
+                   }
 
-		} else {
-				 
-			 * TODO: pperugu :: Need to update the headless browser code below
-			 * for local
-			 
+    } else {/*
+                                  * Below code excecutes if webdriver value is not passed in
+                                  * build command :: mostly running locally and triggering runner
+                                  * class directly
+                                  */
+                   /*
+                   * TODO: pperugu :: Need to update the headless browser code below
+                   * for local
+                   */
 
-			String phantomjs = System.getProperty("phantomjs");
-			String agent = "Mozilla/5.0 (Linux; U; Android 2.3.3; en-us; LG-LU3000 Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
-			DesiredCapabilities caps = new DesiredCapabilities();
-			if (StringUtils.isBlank(phantomjs)) {
-				caps.setCapability(
-						PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
-						props.get("HeadlessBrowserPath"));
-			} else {
-				caps.setCapability(
-						PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
-						System.getProperty("phantomjs"));
-			}
-			caps.setCapability(
-					PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX
-							+ "userAgent", agent);
-			caps.setJavascriptEnabled(true);
-			caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS,
-					new String[] { "--web-security=false",
-							"--ignore-ssl-errors=true", "--ssl-protocol=any" });
-			String userAgent = "Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1";
-			System.setProperty("phantomjs.page.settings.userAgent", userAgent);
-			webDriver = new PhantomJSDriver(caps);
+/*                                         String phantomjs = System.getProperty("phantomjs");
+                   String agent = "Mozilla/5.0 (Linux; U; Android 2.3.3; en-us; LG-LU3000 Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
+                   DesiredCapabilities caps = new DesiredCapabilities();
+                   if (StringUtils.isBlank(phantomjs)) {
+                                  caps.setCapability(
+                                                                PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
+                                                                props.get("HeadlessBrowserPath"));
+                   } else {
+                                  caps.setCapability(
+                                                                PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
+                                                                System.getProperty("phantomjs"));
+                   }
+                   caps.setCapability(
+                                                 PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX
+                                                                               + "userAgent", agent);
+                   caps.setJavascriptEnabled(true);
+                   caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS,
+                                                 new String[] { "--web-security=false",
+                                                                               "--ignore-ssl-errors=true", "--ssl-protocol=any" });
+                   String userAgent = "Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1";
+                   System.setProperty("phantomjs.page.settings.userAgent", userAgent);
+                   webDriver = new PhantomJSDriver(caps);
 
-		}
+    }
+    return webDriver;
+}
 
-		return webDriver;
-	}*/
+public WebDriver getWebDriver() {
+    File pathToBinary = new File("C:\\firefox 29\\firefox.exe");
+    FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
+    FirefoxProfile firefoxProfile = new FirefoxProfile();       
+    webDriver = new FirefoxDriver(ffBinary,firefoxProfile);
+    webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+    //webDriver.manage().window().maximize();
+    return webDriver;
+}
+*/              
 	
 	public WebDriver getWebDriver() {
-
-        // !!!!! ATTENTION !!!!!
-        /// If you're changing this code to get a browser to work the you're
-        // doing it wrong
-        // You should be able to configure a browser in whatever
-        // config.preoperties file
-        // you're using. You shouldn't have to change code.
-
-        // Is system propery exists defining JENKINS_BROWSER, we're running in
-        // JENKINS and
-        // will prefer those browser properties.
-        String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
-                      ? props.get(CommonConstants.DESKTOP_WEBDRIVER)
-                      : System.getProperty(CommonConstants.JENKINS_BROWSER));
-
-        String browserName = (null == System.getProperty(CommonConstants.BROWSER_NAME) ? props.get("BrowserName")
-                      : System.getProperty(CommonConstants.BROWSER_NAME));
-
-       /* String agent = (null == System.getProperty(CommonConstants.JENKINS_BROWSER_AGENT_STRING)
-                      ? props.get(CommonConstants.DESKTOP_BROWSER_AGENT_STRING)
-                      : System.getProperty(CommonConstants.JENKINS_BROWSER_AGENT_STRING));*/
-
-       /* if (browser.equalsIgnoreCase(CommonConstants.JENKINS_BROWSER_PHANTOMJS)) {
-               System.out.println("PHANTOMJS Agent: " + agent);
-        }*/
-
-        // Again, Jenkins takes precedent.
-        String pathToBinary = (null == System.getProperty("phantomjs") ? props.get("BrowserPathToBinary")
-                      : System.getProperty("phantomjs"));
-
-        System.out.println("getWebDriver: returning driver for " + browser);
-        // if webDriver is null, create one, otherwise send the existing one
-        // back.
-        // This has to happen to preserve the state of webDriver so that we can
-        // take screenshots at the end.
-        if (null == webDriver) {
-               System.out.println("New WebDriver CREATED");
-
-               // Choose your browser based on name. The name value is what is in
-               // CommonConstants.
-               // If the browser isn't configured (null) or it's set to HTMLUNIT,
-               // use HTMLUNIT.
-               // This is the default browser when I checked out the code, so it's
-               // the default
-               /*if (null == browser || browser.equalsIgnoreCase(CommonConstants.HTMLUNIT_BROWSER)) {
-                      // use the HtmlUnit Driver
-                      HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(BrowserVersion.getDefault()) {
-                            @Override
-                            protected WebClient modifyWebClient(WebClient client) {
-                                   client.getOptions().setThrowExceptionOnScriptError(false);
-                                   return client;
-                            }
-                      };
-                      htmlUnitDriver.setJavascriptEnabled(true);
-
-                      webDriver = htmlUnitDriver;
-                      webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-                      webDriver.manage().window().maximize();
-               } */
-                if (browser.equalsIgnoreCase(CommonConstants.JENKINS_BROWSER_PHANTOMJS)) {
-                      // otherwise if we have a Jenkins browser defined, we use it.
-                      DesiredCapabilities caps = new DesiredCapabilities();
-                      caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, pathToBinary);
-                      // from Jarvis
-                      // caps.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX
-                      // + "userAgent", agent);
-                      caps.setJavascriptEnabled(true);
-                      caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS,
-                                   new String[] { "--web-security=no", "--ignore-ssl-errors=yes", "--ssl-protocol=any" });
-
-                      // end from jarvis
-                      webDriver = new PhantomJSDriver(caps);
-                      webDriver.manage().window().setSize(new Dimension(1400, 1000));
-                      webDriver.manage().timeouts().pageLoadTimeout(200, TimeUnit.SECONDS);
-               } else if (browser.equalsIgnoreCase(CommonConstants.FIREFOX_BROWSER)) {
-               
-                      System.setProperty("webdriver.gecko.driver", "pathToBinary");
-                      DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-                      capabilities.setCapability("marionette", true);
-                      webDriver = new FirefoxDriver(capabilities);
-               
-                      webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-                      
-                      webDriver.get("google.com");
-                      return webDriver;
-                      
-               } else if (browser.equalsIgnoreCase(CommonConstants.CHROME_BROWSER)) {
-                      Map<String, Object> chromeOptions = new HashMap<String, Object>();
-                      chromeOptions.put("binary", pathToBinary);
-                      DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-                      capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-                      System.setProperty("webdriver.chrome.driver", pathToBinary);
-                     // System.setProperty("webdriver.chrome.driver", props.get(CommonConstants.CHROME_DRIVER));
-                      webDriver = new ChromeDriver();
-                      saveBean(CommonConstants.WEBDRIVER, webDriver);
-                      return webDriver;
-
-               } else if (browser.equalsIgnoreCase(CommonConstants.IE_BROWSER)) {
-                      System.setProperty("webdriver.ie.driver", pathToBinary);
-                      DesiredCapabilities ieCaps = DesiredCapabilities.internetExplorer();
-                      ieCaps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-                      webDriver = new InternetExplorerDriver(ieCaps);
-                      webDriver.manage().window().maximize();
-
-                      return webDriver;
-               } else if (browser.equalsIgnoreCase(CommonConstants.MOBILE_BROWSER)) {
-                      Map<String, String> mobileEmulation = new HashMap<String, String>();
-                      mobileEmulation.put("deviceName", props.get(CommonConstants.DEVICE_NAME));
-                      Map<String, Object> chromeOptions = new HashMap<String, Object>();
-                      chromeOptions.put("mobileEmulation", mobileEmulation);
-                      DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-                      capabilities.setCapability("chrome.switches", Arrays.asList("--start-maximized"));
-                      capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-                      System.setProperty("webdriver.chrome.driver", props.get(CommonConstants.CHROME_DRIVER));
-                      webDriver = new ChromeDriver(capabilities);
-                      return webDriver;
-               } else if (browser.equalsIgnoreCase(CommonConstants.SAUCE_BROWSER_WEB)) {
-				System.out.println("Execution is Going to Start on SauceLabs Web.....!!!!!");
-                DesiredCapabilities capabilities = null;
-                if(browserName.equalsIgnoreCase("firefox")){
-                	System.out.println("Inside firefox");
-                capabilities = DesiredCapabilities.firefox();
-                capabilities.setCapability("platform", "Windows 7");
-                capabilities.setCapability("version", "52");
-               // capabilities.setCapability("idleTimeout", 180);
-                }else if(browserName.equalsIgnoreCase("IE")){
-                	capabilities = DesiredCapabilities.internetExplorer();
-                	capabilities.setCapability("platform", "Windows 7");
-                	capabilities.setCapability("version", "11.0");
-                	capabilities.setCapability("screenResolution", "1024x768");
-                }else if(browserName.equalsIgnoreCase("chrome")){
-                	System.out.println("Inside chrome");
-                	capabilities = DesiredCapabilities.chrome();
-                	capabilities.setCapability("platform", "Windows 7");
-                	capabilities.setCapability("version", "52.0");
-                	//capabilities.setCapability("screenResolution", "800x600");
-                }
-                capabilities.setCapability("autoAcceptsAlerts", true);
-                capabilities.setCapability("parent-tunnel", "sauce_admin");
-                capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
-               // capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-               // capabilities.setCapability("--no-ssl-bump-domains", "all");
-               // capabilities.setCapability("--no-ssl-bump-domains", "*.optum.com");
-                String SAUCE_USERNAME = props.get("SAUCE_USERNAME");
-	            String SAUCE_ACCESS_KEY = props.get("SAUCE_ACCESS_KEY");
-                //String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
-                String URL = "http://" + SAUCE_USERNAME + ":" + SAUCE_ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
-                if (SAUCE_USERNAME == null || SAUCE_ACCESS_KEY == null) {
-                       Assert.fail(
-                                     "Missing value for environment variable(s) SAUCE_USERNAME or SAUCE_ACCESS_KEY.  Check environment configuration and try again");
-                }
-                try {
-                	
-                	webDriver = new RemoteWebDriver(new URL(URL), capabilities);
-                	webDriver.manage().deleteAllCookies();
-                } catch (MalformedURLException e) {
-                       Assert.fail("Invalid Sauce URL: [" + URL + "]");
-                }
-                
- 			}
-        }
-                      return webDriver;
-               
-
-  }
-
-/*	public WebDriver getWebDriver() {
-        DesiredCapabilities capabilities = DesiredCapabilities
-                                      .firefox();
+        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+                                      
         capabilities.setCapability("platform", "Windows 7");
         capabilities.setCapability("version", "45.0");
         capabilities.setCapability("parent-tunnel", "sauce_admin");
@@ -881,9 +758,10 @@ capabilities.setCapability("name", jobName);
                        // TODO Auto-generated catch block
                        e.printStackTrace();
         }
+        
         return webDriver;
-        }*/
-
+        }
+	
 	public WebDriver getIEDriver() {
 		System.setProperty("webdriver.ie.driver",
 				"C:/Users/pgupta15/Downloads/IEDriverServer_x64_2.27.0/IEDriverServer.exe");
@@ -914,21 +792,12 @@ capabilities.setCapability("name", jobName);
 	}
 
 	public void nullifyWebDriver() {
-		if (null != webDriver) {
-			webDriver.quit();
-			webDriver = null;
-		}
+        if (null != webDriver) {
+                       webDriver.close();
+                       webDriver = null;
+        }
 
-	}
-	
-	public void CaptureScreenshot(Scenario scenario) {
-		final byte[] screenshot = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BYTES);
-		System.out.println("Screenshot captured!!!");
-		//To get the report embedded in the report
-		scenario.embed(screenshot, "image/png");
-
-	}
-
+}
 	public void removeMember(String userName) {
 
 		System.out.println("Removing members in registration flow");
@@ -991,23 +860,185 @@ capabilities.setCapability("name", jobName);
 		System.out.println("Removing members in registration flow:: Complete");
 
 	}
-	public static void keyEvent(WebDriver driver) {
-		// TODO Auto-generated method stub
+	
+	 public void DriverQuit()
+     
+     {
+  	   webDriver.quit();
+     }
+	 
+	public Map<String, String> getmemberRedesignVbfWithDesiredAttributes(
+			List<String> desiredAttributes) {
+		Map<String, String> loginCreds = new HashMap<String, String>();
+		for (Entry<String, List<String>> currEntry : memberRedesignVbfAttributesMap
+				.entrySet()) {
+			System.out.println("Current value entry  - "+currEntry.getValue());
+			if (currEntry.getValue().equals(desiredAttributes)) {
+				System.out.println("Current key entry - "+currEntry.getKey());
+				if (currEntry.getKey().contains("/")) {
+					String[] keyArr = currEntry.getKey().split("/");
+					loginCreds.put("user", keyArr[0]);
+					loginCreds.put("pwd", keyArr[1]);
+					return loginCreds;
+				} else {
+					loginCreds.put("user", currEntry.getKey());
+					loginCreds.put("pwd", "Password@1");
+					return loginCreds;
+				}
 
-		try {
-			Actions Builder = new Actions(driver);
+			}
+		}
+		// No match found
+		return null;
+	}
 
-			Actions pressingEnter = Builder.keyDown(Keys.ENTER);
-			pressingEnter.perform();
+	
+	
+	public void CaptureScreenshot(Scenario scenario) {
+		final byte[] screenshot = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BYTES);
+		System.out.println("Screenshot captured!!!");
+		//To get the report embedded in the report
+		scenario.embed(screenshot, "image/png");
 
-			// rb.keyPress(KeyEvent.VK_ENTER);
-			// rb.keyRelease(KeyEvent.VK_ENTER);
-
-			System.out.println("Pressing enter");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	}
+	public void nullifyWebDriverNew() {
+		if (null != webDriver) {
+			webDriver.quit();
+			webDriver = null;
 		}
 
 	}
+	
+	public WebDriver getWebDriverNew() {
+
+        // !!!!! ATTENTION !!!!!
+        /// If you're changing this code to get a browser to work the you're
+        // doing it wrong
+        // You should be able to configure a browser in whatever
+        // config.preoperties file
+        // you're using. You shouldn't have to change code.
+
+        // Is system propery exists defining JENKINS_BROWSER, we're running in
+        // JENKINS and
+        // will prefer those browser properties.
+        String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
+                      ? props.get(CommonConstants.DESKTOP_WEBDRIVER)
+                      : System.getProperty(CommonConstants.JENKINS_BROWSER));
+
+        String browserName = (null == System.getProperty(CommonConstants.BROWSER_NAME) ? props.get("BrowserName")
+                      : System.getProperty(CommonConstants.BROWSER_NAME));
+        // Again, Jenkins takes precedent.
+        String pathToBinary = (null == System.getProperty("phantomjs") ? props.get("BrowserPathToBinary")
+                      : System.getProperty("phantomjs"));
+
+        System.out.println("getWebDriver: returning driver for " + browser);
+        // if webDriver is null, create one, otherwise send the existing one
+        // back.
+        // This has to happen to preserve the state of webDriver so that we can
+        // take screenshots at the end.
+        if (null == webDriver) {
+               System.out.println("New WebDriver CREATED");
+
+               // Choose your browser based on name. The name value is what is in
+               // CommonConstants.
+               // If the browser isn't configured (null) or it's set to HTMLUNIT,
+               // use HTMLUNIT.
+               // This is the default browser when I checked out the code, so it's
+               // the default
+                if (browser.equalsIgnoreCase(CommonConstants.JENKINS_BROWSER_PHANTOMJS)) {
+                      // otherwise if we have a Jenkins browser defined, we use it.
+                      DesiredCapabilities caps = new DesiredCapabilities();
+                      caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, pathToBinary);
+                      caps.setJavascriptEnabled(true);
+                      caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS,
+                                   new String[] { "--web-security=no", "--ignore-ssl-errors=yes", "--ssl-protocol=any" });
+
+                      // end from jarvis
+                      webDriver = new PhantomJSDriver(caps);
+                      webDriver.manage().window().setSize(new Dimension(1400, 1000));
+                      webDriver.manage().timeouts().pageLoadTimeout(200, TimeUnit.SECONDS);
+               } else if (browser.equalsIgnoreCase(CommonConstants.FIREFOX_BROWSER)) {
+               
+                      System.setProperty("webdriver.gecko.driver", "pathToBinary");
+                      DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+                      capabilities.setCapability("marionette", true);
+                      webDriver = new FirefoxDriver(capabilities);
+               
+                      webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+                      
+                      webDriver.get("google.com");
+                      return webDriver;
+                      
+               } else if (browser.equalsIgnoreCase(CommonConstants.CHROME_BROWSER)) {
+                      Map<String, Object> chromeOptions = new HashMap<String, Object>();
+                      chromeOptions.put("binary", pathToBinary);
+                      DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+                      capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+                      System.setProperty("webdriver.chrome.driver", pathToBinary);
+                      webDriver = new ChromeDriver();
+                      saveBean(CommonConstants.WEBDRIVER, webDriver);
+                      return webDriver;
+
+               } else if (browser.equalsIgnoreCase(CommonConstants.IE_BROWSER)) {
+                      System.setProperty("webdriver.ie.driver", pathToBinary);
+                      DesiredCapabilities ieCaps = DesiredCapabilities.internetExplorer();
+                      ieCaps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+                      webDriver = new InternetExplorerDriver(ieCaps);
+                      webDriver.manage().window().maximize();
+
+                      return webDriver;
+               } else if (browser.equalsIgnoreCase(CommonConstants.MOBILE_BROWSER)) {
+                      Map<String, String> mobileEmulation = new HashMap<String, String>();
+                      mobileEmulation.put("deviceName", props.get(CommonConstants.DEVICE_NAME));
+                      Map<String, Object> chromeOptions = new HashMap<String, Object>();
+                      chromeOptions.put("mobileEmulation", mobileEmulation);
+                      DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+                      capabilities.setCapability("chrome.switches", Arrays.asList("--start-maximized"));
+                      capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+                      System.setProperty("webdriver.chrome.driver", props.get(CommonConstants.CHROME_DRIVER));
+                      webDriver = new ChromeDriver(capabilities);
+                      return webDriver;
+               } else if (browser.equalsIgnoreCase(CommonConstants.SAUCE_BROWSER_WEB)) {
+				System.out.println("Execution is Going to Start on SauceLabs Web.....!!!!!");
+                DesiredCapabilities capabilities = null;
+                if(browserName.equalsIgnoreCase("firefox")){
+                	System.out.println("Inside firefox");
+                capabilities = DesiredCapabilities.firefox();
+                capabilities.setCapability("platform", "Windows 7");
+                capabilities.setCapability("version", "52");
+                }else if(browserName.equalsIgnoreCase("IE")){
+                	capabilities = DesiredCapabilities.internetExplorer();
+                	capabilities.setCapability("platform", "Windows 7");
+                	capabilities.setCapability("version", "11.0");
+                	capabilities.setCapability("screenResolution", "1024x768");
+                }else if(browserName.equalsIgnoreCase("chrome")){
+                	System.out.println("Inside chrome");
+                	capabilities = DesiredCapabilities.chrome();
+                	capabilities.setCapability("platform", "Windows 7");
+                	capabilities.setCapability("version", "52.0");
+                }
+                capabilities.setCapability("autoAcceptsAlerts", true);
+                capabilities.setCapability("parent-tunnel", "sauce_admin");
+                capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
+                String SAUCE_USERNAME = props.get("SAUCE_USERNAME");
+	            String SAUCE_ACCESS_KEY = props.get("SAUCE_ACCESS_KEY");
+                String URL = "http://" + SAUCE_USERNAME + ":" + SAUCE_ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
+                if (SAUCE_USERNAME == null || SAUCE_ACCESS_KEY == null) {
+                       Assert.fail(
+                                     "Missing value for environment variable(s) SAUCE_USERNAME or SAUCE_ACCESS_KEY.  Check environment configuration and try again");
+                }
+                try {
+                	
+                	webDriver = new RemoteWebDriver(new URL(URL), capabilities);
+                	webDriver.manage().deleteAllCookies();
+                } catch (MalformedURLException e) {
+                       Assert.fail("Invalid Sauce URL: [" + URL + "]");
+                }
+                
+ 			}
+        }
+                      return webDriver;
+               
+
+  }
 }
