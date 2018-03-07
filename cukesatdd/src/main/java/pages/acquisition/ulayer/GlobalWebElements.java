@@ -105,7 +105,8 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(id = "gfn_lnk_row2_5")
 	 public static WebElement medicareSpecialNeedPlansLink;
 	
-	@FindBy(xpath = "//h1[@class='logo']/a")
+	//@FindBy(xpath = "//h1[@class='logo']/a")
+	@FindBy(id = "logo")
 	 public static WebElement logoLink;
 	
 	@FindBy(xpath = "//ul[@class='menu-links']/li[2]/a")
