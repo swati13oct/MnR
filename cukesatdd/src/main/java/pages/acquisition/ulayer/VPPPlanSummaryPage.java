@@ -146,8 +146,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private WebElement stayOnthisPopup;
 	
 	
-	@FindBy(xpath="//div[@class='tab-contents']/span[contains(text(),'Medicare Advantage Plans')]/following-sibling::span[text()='View Plans'][2]")
-	private WebElement viewMAPlansC;
+	@FindBy(xpath=".//*[@id='site-wrapper']//div[@class='plan-overview-wrapper']/div[2]/div[1]//span[@class='trigger-closed']")
+	private WebElement viewMAPlans;
 	
 	@FindBy(xpath="//button[contains(text(),'Get Started')]")
 	private WebElement GetStarted;
@@ -284,12 +284,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			}
 		} else if (planType.equalsIgnoreCase("MA")
 				|| planType.equalsIgnoreCase("MAPD")) {
-			if(validate(viewMAPlansC)){
-				viewMAPlansC.click();
+			if(validate(viewMAPlans)){
+				viewMAPlans.click();
 			}
-			if(validate(hideMaPlans)){
-				validate(hideMaPlans);
-			}
+			
 		} else if (planType.equalsIgnoreCase("MS")) {
 			if(validate(showMsPlans)){
 				showMsPlans.click();

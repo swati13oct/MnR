@@ -73,6 +73,7 @@ Examples:
 | zipcode  | plantype |  drug   | 
 | 90210    | PDP	  |Lipitor TAB 10MG|
 
+#AEP period scenario that requires changing the year to 2017
 @defect3255
 Scenario Outline: To test Pharmacy Saver pharmacy type is displayed
 Given the user is on blayer medicare acq site landing page
@@ -87,7 +88,7 @@ Then I validate pharmacy saver pharmacy type is displayed
 
 Examples:
 | zipcode  | plantype |  drug   | 
-| 90210    | MA	  |Lipitor TAB 10MG|
+#| 90210    | MA	  |Lipitor TAB 10MG|
 
 @defect1662
 Scenario Outline: To go through dce from homepage and validate drug is still there when going to dce from vpp
@@ -328,6 +329,6 @@ Then I should be directed to the VPP Plan Summary Page Blayer and I should see t
 Examples:
 	| zipcode |
   | 90210   |
-  | 30210   |
-  | 10002   |
+#| 30210   |
+#| 10002   |
 	
