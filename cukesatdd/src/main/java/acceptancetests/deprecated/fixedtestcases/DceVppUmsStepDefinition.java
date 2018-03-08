@@ -1,4 +1,4 @@
-package acceptancetests.deprecated.fixedtestcases;
+/*package acceptancetests.deprecated.fixedtestcases;
 import gherkin.formatter.model.DataTableRow;
 import pages.deprecated.acquisition.bluelayer.AcquisitionHomePage;
 import pages.deprecated.acquisition.bluelayer.AddDrugPage;
@@ -33,10 +33,10 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-/**
+*//**
  * @author pagarwa5
  *
- */
+ *//*
 
 public class DceVppUmsStepDefinition {
 
@@ -108,15 +108,15 @@ public class DceVppUmsStepDefinition {
 		getLoginScenario().saveBean(DceCommonConstants.DRUG_INITIALS, drugInitials);
 		addDrugPage.enterDrugInitials(drugInitials);
 
-		/*		/*Get actual Json
+				/*Get actual Json
 
 		JSONObject drugListActualJson = addDrugPage.drugListJson;
 		getLoginScenario().saveBean(DceCommonConstants.DRUG_LIST_ACTUAL,
 				drugListActualJson);
 
 		/* Get Expected Json 
-		 */	
-		/*		String fileName = drugInitials;
+		 	
+				String fileName = drugInitials;
 		String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
 				+ File.separator + CommonConstants.SITE_BLUELAYER
 				+ File.separator + DceCommonConstants.ADD_DRUG_FLOW
@@ -125,7 +125,7 @@ public class DceVppUmsStepDefinition {
 				directory);
 		getLoginScenario().saveBean(DceCommonConstants.DRUG_LIST_EXPECTED,
 				drugListExpectedJson);
-		 */         
+		          
 		getLoginScenario().saveBean(PageConstants.ADD_DRUG_PAGE, addDrugPage);
 
 	}
@@ -153,7 +153,7 @@ public class DceVppUmsStepDefinition {
 			Assert.fail("Error in validating drug initials search ");
 		}
 
-		/*		JSONObject drugListExpectedJson = (JSONObject) getLoginScenario()
+				JSONObject drugListExpectedJson = (JSONObject) getLoginScenario()
 				.getBean(DceCommonConstants.DRUG_LIST_EXPECTED);
 		JSONObject drugListActualJson = (JSONObject) getLoginScenario()
 				.getBean(DceCommonConstants.DRUG_LIST_ACTUAL);
@@ -165,7 +165,7 @@ public class DceVppUmsStepDefinition {
 			.println("Exception ocurred comparing actual and expected drug list : "
 					+ e);
 		}
-		 */
+		 
 	}
 
 	@And("^the user selects following drug in UMS site$")
@@ -185,14 +185,14 @@ public class DceVppUmsStepDefinition {
 					selectDosagePage);
 
 
-			/* Get Actual Data */
-			/*			
+			 Get Actual Data 
+						
 			JSONObject drugDosageActualJson = selectDosagePage.drugDosageJson;
 			getLoginScenario().saveBean(DceCommonConstants.DRUG_DOSAGE_ACTUAL,
 					drugDosageActualJson);
-			 */
-			/* Get Expected Data */
-			/*			String fileName = drugName;
+			 
+			 Get Expected Data 
+						String fileName = drugName;
 			String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
 					+ File.separator + CommonConstants.SITE_BLUELAYER
 					+ File.separator + DceCommonConstants.DRUG_DOSAGE_FLOW
@@ -202,7 +202,7 @@ public class DceVppUmsStepDefinition {
 			getLoginScenario().saveBean(
 					DceCommonConstants.DRUG_DOSAGE_EXPECTED,
 					drugDosageExpectedJson);
-			 */
+			 
 		}
 	}
 
@@ -235,7 +235,7 @@ public class DceVppUmsStepDefinition {
 			Assert.fail("Error in validating dosage information check ");
 		}
 
-		/*		
+				
 		JSONObject drugDosageExpectedJson = (JSONObject) getLoginScenario()
 				.getBean(DceCommonConstants.DRUG_DOSAGE_EXPECTED);
 		JSONObject drugDosageActualJson = (JSONObject) getLoginScenario()
@@ -248,7 +248,7 @@ public class DceVppUmsStepDefinition {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		 */
+		 
 
 	}
 
@@ -300,7 +300,7 @@ public class DceVppUmsStepDefinition {
 
 			SelectGenericPage selectGenericPage = (SelectGenericPage) getLoginScenario()
 					.getBean(PageConstants.AFTER_DOSAGE_SELECTION);
-			/*			JSONObject selectGenericActualJson = selectGenericPage.genericDrugJson;
+						JSONObject selectGenericActualJson = selectGenericPage.genericDrugJson;
 			JSONObject selectGenericExpectedJson = selectGenericPage
 					.getExpectedData(drugName, drugDosage);
 
@@ -311,20 +311,20 @@ public class DceVppUmsStepDefinition {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			 */
+			 
 			ManageDrugPage manageDrugPage = selectGenericPage
 					.selectGeneric(drugDosage);
 			if (manageDrugPage != null) {
 				getLoginScenario().saveBean(PageConstants.MANAGE_DRUG_PAGE,
 						manageDrugPage);
-				/*
+				
 				JSONObject manageDrugActualJson = manageDrugPage.manageDrugJson;
 				getLoginScenario().saveBean(
 						DceCommonConstants.MANAGE_DRUG_ACTUAL,
 						manageDrugActualJson);
-				 */
-				/* Get Expected data */
-				/*
+				 
+				 Get Expected data 
+				
 				String fileName = drugDosage;
 				String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
 						+ File.separator
@@ -341,7 +341,7 @@ public class DceVppUmsStepDefinition {
 				getLoginScenario().saveBean(
 						DceCommonConstants.MANAGE_DRUG_EXPECTED,
 						manageDrugExpectedJson);
-				 */
+				 
 			}
 		}
 
@@ -351,14 +351,14 @@ public class DceVppUmsStepDefinition {
 			if (manageDrugPage != null) {
 				getLoginScenario().saveBean(PageConstants.MANAGE_DRUG_PAGE,
 						manageDrugPage);
-				/*
+				
 				JSONObject manageDrugActualJson = manageDrugPage.manageDrugJson;
 				getLoginScenario().saveBean(
 						DceCommonConstants.MANAGE_DRUG_ACTUAL,
 						manageDrugActualJson);
-				 */
-				/* Get Expected data */
-				/*
+				 
+				 Get Expected data 
+				
 			@SuppressWarnings("unchecked")
 				Map<String, String> dosageAttributesMap = (Map<String, String>) getLoginScenario()
 				.getBean(DceCommonConstants.DOSAGE_MAP);
@@ -386,7 +386,7 @@ public class DceVppUmsStepDefinition {
 				getLoginScenario().saveBean(
 						DceCommonConstants.MANAGE_DRUG_EXPECTED,
 						manageDrugExpectedJson);
-				 */
+				 
 			}
 		}
 
@@ -452,7 +452,7 @@ public class DceVppUmsStepDefinition {
 		}
 
 
-		/*
+		
 
 		JSONObject manageDrugActualJson = (JSONObject) getLoginScenario()
 				.getBean(DceCommonConstants.MANAGE_DRUG_ACTUAL);
@@ -470,7 +470,7 @@ public class DceVppUmsStepDefinition {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		 */
+		 
 
 	}
 
@@ -483,15 +483,15 @@ public class DceVppUmsStepDefinition {
 		if (selectPharmacyPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
 					selectPharmacyPage);
-			/* Get Actual Data */
-			/*			
+			 Get Actual Data 
+						
 			JSONObject availablePharmaciesActualJson = selectPharmacyPage.availablePharmaciesJson;
 			getLoginScenario().saveBean(
 					DceCommonConstants.AVAILABLE_PHARMACIES_ACTUAL,
 					availablePharmaciesActualJson);
-			 */
-			/* Get Expected Data */
-			/*
+			 
+			 Get Expected Data 
+			
 			String zipcode = (String) getLoginScenario().getBean(
 					DceCommonConstants.ZIPCODE);
 			String county = (String) getLoginScenario().getBean(
@@ -510,7 +510,7 @@ public class DceVppUmsStepDefinition {
 			getLoginScenario().saveBean(
 					DceCommonConstants.AVAILABLE_PHARMACIES_EXPECTED,
 					availablePharmaciesExpectedJson);
-			 */
+			 
 		}
 	}
 
@@ -537,7 +537,7 @@ public class DceVppUmsStepDefinition {
 		} else {
 			Assert.fail("Error in validating available pharmacies check ");
 		}
-		/*
+		
 		JSONObject availablePharmaciesActualJson = (JSONObject) getLoginScenario()
 				.getBean(DceCommonConstants.AVAILABLE_PHARMACIES_ACTUAL);
 		System.out.println("availablePharmaciesActualJson ---->"
@@ -554,7 +554,7 @@ public class DceVppUmsStepDefinition {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		 */
+		 
 	}
 
 	@And("^the user selects the pharmacy type and distance in UMS site$")
@@ -578,15 +578,15 @@ public class DceVppUmsStepDefinition {
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		SelectPharmacyPage updatedPharmacyPage = pharmacySearchPage
 				.searchPharmacies(pharmacyType, distance);
-		/*
+		
 		/* Get Actual Data 
 		JSONObject availablePharmaciesActualJson = updatedPharmacyPage.availablePharmaciesJson;
 		getLoginScenario().saveBean(
 				DceCommonConstants.AVAILABLE_PHARMACIES_ACTUAL,
 				availablePharmaciesActualJson);
 
-		/* Get Expected Data */
-		/*		String zipcode = (String) getLoginScenario().getBean(
+		/* Get Expected Data 
+				String zipcode = (String) getLoginScenario().getBean(
 				DceCommonConstants.ZIPCODE);
 		String county = (String) getLoginScenario().getBean(
 				DceCommonConstants.COUNTY_NAME);
@@ -601,7 +601,7 @@ public class DceVppUmsStepDefinition {
 		getLoginScenario().saveBean(
 				DceCommonConstants.AVAILABLE_PHARMACIES_EXPECTED,
 				availablePharmaciesExpectedJson);
-		 */
+		 
 	}
 
 	@And("^the user selects the type of pharmacy and distance in UMS site$")
@@ -643,7 +643,7 @@ public class DceVppUmsStepDefinition {
 		} else {
 			Assert.fail("Error in validating dosage information check ");
 		}
-		/*
+		
 		JSONObject availablePharmaciesActualJson = (JSONObject) getLoginScenario()
 				.getBean(DceCommonConstants.AVAILABLE_PHARMACIES_ACTUAL);
 		JSONObject availablePharmaciesExpectedJson = (JSONObject) getLoginScenario()
@@ -659,7 +659,7 @@ public class DceVppUmsStepDefinition {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		 */
+		 
 	}
 
 	@When("^the user selects a pharmacy from the list of pharmacies in UMS site$")
@@ -677,12 +677,12 @@ public class DceVppUmsStepDefinition {
 		if (manageDrugPage != null) {
 			getLoginScenario().saveBean(PageConstants.MANAGE_DRUG_PAGE,
 					manageDrugPage);
-			/* Get Actual Data */
+			 Get Actual Data 
 			JSONObject manageDrugActualJson = manageDrugPage.manageDrugJson;
 			getLoginScenario().saveBean(DceCommonConstants.MANAGE_DRUG_ACTUAL,
 					manageDrugActualJson);
 
-			/* Get Expected Data */
+			 Get Expected Data 
 			String fileName = null;
 			if (!pharmacyType
 					.equalsIgnoreCase("Preferred Mail Service Pharmacy")) {
@@ -738,7 +738,7 @@ public class DceVppUmsStepDefinition {
 		} else {
 			Assert.fail("Error in validating available pharmacies check ");
 		}
-		/*
+		
 		JSONObject manageDrugActualJson = (JSONObject) getLoginScenario()
 				.getBean(DceCommonConstants.MANAGE_DRUG_ACTUAL);
 		System.out
@@ -757,7 +757,7 @@ public class DceVppUmsStepDefinition {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		 */
+		 
 	}
 	
 	@And("^the user clicks Edit Pharmacy and validates Edit zipcode functionality and selects the pharmacy$")
@@ -828,8 +828,8 @@ public class DceVppUmsStepDefinition {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
 					planSummaryPage);
 
-			/* Get Expected Data */
-			/*
+			 Get Expected Data 
+			
 			String fileName = "vppPlanSummary";
 			String zipcode = (String) getLoginScenario().getBean(
 					DceCommonConstants.ZIPCODE);
@@ -846,14 +846,14 @@ public class DceVppUmsStepDefinition {
 			getLoginScenario().saveBean(
 					VPPCommonConstants.VPP_PLAN_SUMMARY_EXPECTED,
 					planSummaryExpectedJson);
-			 */
-			/* Get actual data */
-			/*
+			 
+			 Get actual data 
+			
 			JSONObject planSummaryActualJson = planSummaryPage.vppPlanSummaryJson;
 			getLoginScenario().saveBean(
 					VPPCommonConstants.VPP_PLAN_SUMMARY_ACTUAL,
 					planSummaryActualJson);
-			 */
+			 
 		}
 	}
 
@@ -882,7 +882,7 @@ public class DceVppUmsStepDefinition {
 		}
 
 
-		/*
+		
 		JSONObject planSummaryActualJson = (JSONObject) getLoginScenario()
 				.getBean(VPPCommonConstants.VPP_PLAN_SUMMARY_ACTUAL);
  v
@@ -900,7 +900,7 @@ public class DceVppUmsStepDefinition {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		 */
+		 
 	}
 
 	@When("^the user views plans of the below plan type in UMS site$")
@@ -923,8 +923,8 @@ public class DceVppUmsStepDefinition {
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
 					plansummaryPage);
-			/* Get actual data */
-			/*
+			 Get actual data 
+			
 			JSONObject planSummaryActualJson = plansummaryPage.vppPlanSummaryJson;
 			System.out
 			.println("planSummaryActualJson for selected plan type---->"
@@ -932,9 +932,9 @@ public class DceVppUmsStepDefinition {
 			getLoginScenario().saveBean(
 					VPPCommonConstants.VPP_PLAN_SUMMARY_ACTUAL,
 					planSummaryActualJson);
-			 */
-			/* Get expected data */
-			/*
+			 
+			 Get expected data 
+			
 			String fileName = null;
 			if (plantype.equalsIgnoreCase("MA")
 					|| plantype.equalsIgnoreCase("MAPD")) {
@@ -959,7 +959,7 @@ public class DceVppUmsStepDefinition {
 			getLoginScenario().saveBean(
 					VPPCommonConstants.VPP_PLAN_SUMMARY_EXPECTED,
 					planSummaryExpectedJson);
-			 */
+			 
 		}
 
 	}
@@ -988,7 +988,7 @@ public class DceVppUmsStepDefinition {
 
 	}
 
-	/*	@And("^the user selects the plan year in UMS site$")
+		@And("^the user selects the plan year in UMS site$")
 	public void user_selects_plan_year_ums(DataTable givenAttributes) {
 		List<DataTableRow> givenAttributesRow = givenAttributes
 				.getGherkinRows();
@@ -1013,7 +1013,7 @@ public class DceVppUmsStepDefinition {
 
 		}
 
-	}*/
+	}
 
 	@Then("^the user validates the available plans for selected plan types in UMS site$")
 	public void user_validates_available_plans_ums() {
@@ -1025,7 +1025,7 @@ public class DceVppUmsStepDefinition {
 		} else {
 			Assert.fail("Error in validating available plans check ");
 		}
-		/*
+		
 		JSONObject planSummaryActualJson = (JSONObject) getLoginScenario()
 				.getBean(VPPCommonConstants.VPP_PLAN_SUMMARY_ACTUAL);
 		JSONObject planSummaryExpectedJson = (JSONObject) getLoginScenario()
@@ -1037,7 +1037,7 @@ public class DceVppUmsStepDefinition {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		 */
+		 
 	}
 
 	@And("^the user validates the plan summary for the below plan in UMS site$")
@@ -1054,8 +1054,8 @@ public class DceVppUmsStepDefinition {
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		/* Get expected data */
-		/*String fileName = planName;
+		 Get expected data 
+		String fileName = planName;
 		String zipcode = (String) getLoginScenario().getBean(
 				DceCommonConstants.ZIPCODE);
 		String county = (String) getLoginScenario().getBean(
@@ -1089,24 +1089,24 @@ public class DceVppUmsStepDefinition {
 
 		try {
 			if (planSummaryExpectedJson != null){
-				/* get actual data for a particular plan */
-		/*JSONObject planSummaryActualJson = planSummaryPage
+				/* get actual data for a particular plan 
+		JSONObject planSummaryActualJson = planSummaryPage
 						.getPlanSummaryActualData(planName);
 				System.out
 				.println("planSummaryActualJson---->" + planSummaryActualJson);
 				JSONAssert.assertEquals(planSummaryExpectedJson,
 						planSummaryActualJson, true);
-			}else{*/
+			}else{
 		if (planSummaryPage.validatePlanSummarydetails(planName)) {
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("Error in validating plan summary check ");
 		}
-		/*}
+		}
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
 
 	}
 
@@ -1128,17 +1128,17 @@ public class DceVppUmsStepDefinition {
 		if (vppPlanDetailsPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE,
 					vppPlanDetailsPage);
-			/* Get actual data */
-			/*
+			 Get actual data 
+			
 			JSONObject planDetailsActualJson = vppPlanDetailsPage.vppPlanDetailsJson;
 			System.out.println("planDetailsActualJson---->"
 					+ planDetailsActualJson);
 			getLoginScenario().saveBean(
 					VPPCommonConstants.VPP_PLAN_DETAIL_ACTUAL,
 					planDetailsActualJson);
-			 */
-			/* Get expected data */
-			/*
+			 
+			 Get expected data 
+			
 			String fileName = planName;
 			String drugWithDosage = (String) getLoginScenario().getBean(
 					DceCommonConstants.DRUG_WITH_DOSAGE);
@@ -1167,7 +1167,7 @@ public class DceVppUmsStepDefinition {
 			getLoginScenario().saveBean(
 					VPPCommonConstants.VPP_PLAN_DETAIL_EXPECTED,
 					planDetailsExpectedJson);
-			 */
+			 
 		}
 	}
 
@@ -1215,7 +1215,7 @@ public class DceVppUmsStepDefinition {
 			Assert.fail("Error in validating plan details check ");
 		}
 
-		/*
+		
 		JSONObject planDetailsActualJson = (JSONObject) getLoginScenario()
 				.getBean(VPPCommonConstants.VPP_PLAN_DETAIL_ACTUAL);
 		JSONObject planDetailsExpectedJson = (JSONObject) getLoginScenario()
@@ -1232,9 +1232,10 @@ public class DceVppUmsStepDefinition {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		 */
+		 
 	}
 
 
 
 }
+*/
