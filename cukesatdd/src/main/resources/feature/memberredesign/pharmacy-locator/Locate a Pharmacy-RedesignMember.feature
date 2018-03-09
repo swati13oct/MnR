@@ -1,5 +1,6 @@
 @thePredators
 @pharmacylocator
+@PharmacylocatorRedesign
 Feature:P1.6To test Locate a Pharmacy tool in Redesign site
 
 @PharmacyDistanceDefaultZip
