@@ -5,14 +5,24 @@
 "identifier":"xpath",
 "elementName":"//div[@class='maplans_planbutton']/div[1]/p"
 },
+"msPlanCount":{
+"identifier":"xpath",
+"elementName":"//*[@class='title' and contains(text(),'Medicare Supplement Insurance')]/span"
+},
 "pdpPlanCount":{
 "identifier":"xpath",
 "elementName":"//div[@class='pdpplans_planbutton']/div[1]/p"
 },
+"vppSummary":{
+"identifier":"xpath",
+"elementName":"//h2[contains(text(),'We have')]"
 "zipCodeDisplayed":{
 "identifier":"id",
 "elementName":"zipcode"
 },
+"changeLocationLink":{
+"identifier":"linkText",
+"elementName":"Change Location"
 "countyDisplayed":{
 "identifier":"id",
 "elementName":"county"

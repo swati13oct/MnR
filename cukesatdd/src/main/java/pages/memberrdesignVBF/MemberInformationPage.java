@@ -16,7 +16,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 /*import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.MRScenario;*/
 import atdd.framework.UhcDriver;
-import pages.deprecated.member.ulayer.TerminatedHomePage;
+import pages.memberrdesignVBF.TerminatedHomePage;
 
 public class MemberInformationPage extends UhcDriver {
 

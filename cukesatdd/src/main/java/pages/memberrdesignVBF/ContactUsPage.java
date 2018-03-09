@@ -303,7 +303,7 @@ public class ContactUsPage extends UhcDriver {
 		validateNew(requestACall);
 		if (requestACall.isDisplayed()) {
 			System.out.println("send a req  is displayed");
-			jsClick(requestACall);
+			jsClickNew(requestACall);
 			validateNew(contactoption);
 			sendkeysNew(clickToCallInputNum, "9023456121");
 			requestCall.click();
@@ -330,7 +330,7 @@ public class ContactUsPage extends UhcDriver {
 
 	public String getMemberAuthNotAuthorizedToRequestACallMessage() {
 		validateNew(requestACall);
-		jsClick(requestACall);
+		jsClickNew(requestACall);
 		validateNew(contactoption);
 		sendkeysNew(clickToCallInputNum, "9023456121");
 		validateNew(requestCall);

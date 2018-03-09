@@ -112,7 +112,7 @@ public class CommonConstants {
 	public static final String  PAYMENT_HISTORY_BLUELAYER_DIRECTORY_MOBILE ="/jsonresponse/mobile/member/bluelayer/payment-history/";
 	
 	public static final String  DASHBOARD_PAYMENT_HISTORY_ULAYER_DIRECTORY_MOBILE ="/jsonresponse/mobile/member/ulayer/payment-history/";
-	
+
 	private static final String DASHBOARD_DRUGCOSTESTIMATOR_DIRECTORY = "/jsonresponse/member/dashboard/drugcostestimator/";
 
 	public static final String ADD_DRUG_DETAILS = "adddrugdetails";
@@ -167,7 +167,7 @@ public class CommonConstants {
 					CommonConstants.DASHBOARD_DRUGCOSTESTIMATOR_DIRECTORY),
 					new Page(CommonConstants.ADD_NEW_DRUG_MODAL,
                             CommonConstants.DASHBOARD_DRUGCOSTESTIMATOR_DIRECTORY),
-					
+
 	};
 
 	public static final String BENEFITS_SUMMARY_DIRECTORY = "/jsonresponse/mobile/member/ulayer/benefits-summary/";
@@ -842,5 +842,5 @@ public class CommonConstants {
     public static final String DESKTOP_BROWSER_AGENT_STRING = "BrowserAgentString";
     public static final String JENKINS_BROWSER_AGENT_STRING = "JENKINS_BROWSER_AGENT_STRING";
 	public static final String ACCOUNT_USER_NAME = null;
-
+	
 }

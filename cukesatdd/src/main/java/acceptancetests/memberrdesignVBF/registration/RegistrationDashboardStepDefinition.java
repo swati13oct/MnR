@@ -20,7 +20,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import cucumber.api.DataTable;
 import acceptancetests.data.CommonConstants;
-import acceptancetests.deprecated.atdd.data.acquisition.PageConstants;
+import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 
 /**

@@ -17,7 +17,7 @@ import org.json.JSONObject;
  */
 public class ExpectedDataUtility {
 	
-	private static final String DIRECTORY = "/src/main/resources/";
+	private static final String DIRECTORY = "/src/main/resources";
 	static ObjectMapper objectMapper = new ObjectMapper();
 	
 	public static File getExpectedResponse(String fileName, String directory) throws IOException{
@@ -26,7 +26,7 @@ public class ExpectedDataUtility {
 		
 		if (directory!=null){
 		
-			lookUpDirectory = parentDirectory+DIRECTORY+File.separator+directory;
+			lookUpDirectory = parentDirectory+DIRECTORY+directory;
 		
 		}
 		

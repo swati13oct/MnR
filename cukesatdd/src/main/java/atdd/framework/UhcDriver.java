@@ -30,183 +30,183 @@ import junit.framework.Assert;
  */
 public abstract class UhcDriver {
 
-    public WebDriver driver;
+        public WebDriver driver;
 
-    public void start(String url) {
-            driver.get(url);
-    }
+        public void start(String url) {
+                driver.get(url);
+        }
 
-    public UhcDriver(WebDriver driver) {
-            this.driver = driver;
-    }
+        public UhcDriver(WebDriver driver) {
+                this.driver = driver;
+        }
 
-    public void waitforElement(WebElement element) {
-            WebDriverWait wait = new WebDriverWait(driver, 5000L);
-            wait.until(ExpectedConditions.visibilityOf(element));
+        public void waitforElement(WebElement element) {
+                WebDriverWait wait = new WebDriverWait(driver, 5000L);
+                wait.until(ExpectedConditions.visibilityOf(element));
 
-    }
+        }
 
-    public void switchToNewTab() {
-            ArrayList<String> tabs = new ArrayList<String>(
-                            driver.getWindowHandles());
-            driver.switchTo().window(tabs.get(1));
-    }
+        public void switchToNewTab() {
+                ArrayList<String> tabs = new ArrayList<String>(
+                                driver.getWindowHandles());
+                driver.switchTo().window(tabs.get(1));
+        }
 
-    public WebDriver switchToNewIframe(String iframeName) {
-            return driver.switchTo().frame(iframeName);
+        public WebDriver switchToNewIframe(String iframeName) {
+                return driver.switchTo().frame(iframeName);
 
-    }
+        }
 
-    public WebDriver switchToNewIframe(WebElement iframeElement) {
-            return driver.switchTo().frame(iframeElement);
+        public WebDriver switchToNewIframe(WebElement iframeElement) {
+                return driver.switchTo().frame(iframeElement);
 
-    }
+        }
 
-    public boolean elementFound(WebElement element) {
-            try {
-                    if (element.isDisplayed()) {
-                            System.out.println("Element found!!!!");
-                            return true;
-                    } else {
-                            System.out.println("Element not found/not visible");
-                            return false;
-                    }
+        public boolean elementFound(WebElement element) {
+                try {
+                        if (element.isDisplayed()) {
+                                System.out.println("Element found!!!!");
+                                return true;
+                        } else {
+                                System.out.println("Element not found/not visible");
+                                return false;
+                        }
 
-            } catch (Exception e) {
-                    driver.quit();
-                    System.out.println("Element not found/not visible");
-            }
-            return false;
-    }
+                } catch (Exception e) {
+                        driver.quit();
+                        System.out.println("Element not found/not visible");
+                }
+                return false;
+        }
 
-    public void sendkeys(WebElement element, String message) {
-            element.click();
-            element.clear();
-            element.sendKeys(message);
+        public void sendkeys(WebElement element, String message) {
+                element.click();
+                element.clear();
+                element.sendKeys(message);
 
-    }
+        }
 
-    public void select(WebElement element, String message) {
-            element.click();
-            element.sendKeys(message);
-    }
+        public void select(WebElement element, String message) {
+                element.click();
+                element.sendKeys(message);
+        }
 
-    public void selectFromDropDown(List<WebElement> elementList, String value) {
-            for (WebElement element : elementList) {
-                    if (element.getText().contains(value)) {
-                            element.click();
-                            break;
-                    }
-            }
+        public void selectFromDropDown(List<WebElement> elementList, String value) {
+                for (WebElement element : elementList) {
+                        if (element.getText().contains(value)) {
+                                element.click();
+                                break;
+                        }
+                }
 
-    }
+        }
 
-    public boolean validate(WebElement element) {
-    	/*try {
-		if (element.isDisplayed()) {
-		System.out.println("Element found!!!!");
-		return true;
-		} else {
-		System.out.println("Element not found/not visible");
-		}
-		} catch (Exception e) {
-		System.out.println("Exception: Element not found/not visible");
+        public boolean validate(WebElement element) {
+        	/*try {
+    		if (element.isDisplayed()) {
+    		System.out.println("Element found!!!!");
+    		return true;
+    		} else {
+    		System.out.println("Element not found/not visible");
+    		}
+    		} catch (Exception e) {
+    		System.out.println("Exception: Element not found/not visible");
 
-		}
-		return false;*/
+    		}
+    		return false;*/
 
-		//CM code
-		
-		JavascriptExecutor jse = (JavascriptExecutor)driver;
-		jse.executeScript("window.scrollBy(0,-50)", "");
-	        try {
-	         waitforElement(element);
-	            if (element.isDisplayed()) {
+    		//CM code
+    		
+    		JavascriptExecutor jse = (JavascriptExecutor)driver;
+    		jse.executeScript("window.scrollBy(0,-50)", "");
+    	        try {
+    	         waitforElement(element);
+    	            if (element.isDisplayed()) {
 
-	                 /*  Actions actions = new Actions(driver);
-	                   actions.moveToElement(element);
-	                   actions.perform();*/
-	                   Assert.assertTrue("@@@The element " + element.getText() + "is found@@@", element.isDisplayed());
-	                   System.out.println("@@@The element " + element.getText() + "is found@@@");
-	            }
-	     } catch (Exception e) {
+    	                 /*  Actions actions = new Actions(driver);
+    	                   actions.moveToElement(element);
+    	                   actions.perform();*/
+    	                   Assert.assertTrue("@@@The element " + element.getText() + "is found@@@", element.isDisplayed());
+    	                   System.out.println("@@@The element " + element.getText() + "is found@@@");
+    	            }
+    	     } catch (Exception e) {
 
-	            Assert.fail("The element " + element.getText() + "is not  found");
-	         return false;
-	     }
-	     
-	        return true;
-    }
+    	            Assert.fail("The element " + element.getText() + "is not  found");
+    	         return false;
+    	     }
+    	     
+    	        return true;
+        }
 
-    public WebElement findElement(ElementData elementData) {
-            WebElement element = null;
-            try {
-                    if (elementData.getIdentifier().equalsIgnoreCase("id")) {
-                            driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-                            element = driver
-                                            .findElement(By.id(elementData.getElementName()));
-                    } else if (elementData.getIdentifier()
-                                    .equalsIgnoreCase("className")) {
-                            driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-                            element = driver.findElement(By.className(elementData
-                                            .getElementName()));
-                    } else if (elementData.getIdentifier().equalsIgnoreCase("xpath")) {
-                            driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-                            element = driver.findElement(By.xpath(elementData
-                                            .getElementName()));
-                    } else if (elementData.getIdentifier().equalsIgnoreCase("linkText")) {
-                            driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-                            element = driver.findElement(By.linkText(elementData
-                                            .getElementName()));
-                    } else if (elementData.getIdentifier().equalsIgnoreCase("name")) {
-                            driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-                            element = driver.findElement(By.name(elementData
-                                            .getElementName()));
-                    } else if (elementData.getIdentifier().equalsIgnoreCase("tagName")) {
-                            driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-                            element = driver.findElement(By.tagName(elementData
-                                            .getElementName()));
-                    }
+        public WebElement findElement(ElementData elementData) {
+                WebElement element = null;
+                try {
+                        if (elementData.getIdentifier().equalsIgnoreCase("id")) {
+                                driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+                                element = driver
+                                                .findElement(By.id(elementData.getElementName()));
+                        } else if (elementData.getIdentifier()
+                                        .equalsIgnoreCase("className")) {
+                                driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+                                element = driver.findElement(By.className(elementData
+                                                .getElementName()));
+                        } else if (elementData.getIdentifier().equalsIgnoreCase("xpath")) {
+                                driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+                                element = driver.findElement(By.xpath(elementData
+                                                .getElementName()));
+                        } else if (elementData.getIdentifier().equalsIgnoreCase("linkText")) {
+                                driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+                                element = driver.findElement(By.linkText(elementData
+                                                .getElementName()));
+                        } else if (elementData.getIdentifier().equalsIgnoreCase("name")) {
+                                driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+                                element = driver.findElement(By.name(elementData
+                                                .getElementName()));
+                        } else if (elementData.getIdentifier().equalsIgnoreCase("tagName")) {
+                                driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+                                element = driver.findElement(By.tagName(elementData
+                                                .getElementName()));
+                        }
 
-                    return element;
-            } catch (Exception e) {
-                    return null;
-            }
+                        return element;
+                } catch (Exception e) {
+                        return null;
+                }
 
-    }
+        }
 
-    public WebElement findChildElement(ElementData elementData,
-                    WebElement parentElement) {
-            WebElement element = null;
-            try {
-                    if (elementData.getIdentifier().equalsIgnoreCase("id")) {
+        public WebElement findChildElement(ElementData elementData,
+                        WebElement parentElement) {
+                WebElement element = null;
+                try {
+                        if (elementData.getIdentifier().equalsIgnoreCase("id")) {
 
-                            driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-                            element = parentElement.findElement(By.id(elementData
-                                            .getElementName()));
-                    } else if (elementData.getIdentifier()
-                                    .equalsIgnoreCase("className")) {
-                            driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-                            element = parentElement.findElement(By.className(elementData
-                                            .getElementName()));
-                    } else if (elementData.getIdentifier().equalsIgnoreCase("xpath")) {
-                            driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-                            element = parentElement.findElement(By.xpath(elementData
-                                            .getElementName()));
-                    } else if (elementData.getIdentifier().equalsIgnoreCase("linkText")) {
-                            driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-                            element = parentElement.findElement(By.linkText(elementData
-                                            .getElementName()));
+                                driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+                                element = parentElement.findElement(By.id(elementData
+                                                .getElementName()));
+                        } else if (elementData.getIdentifier()
+                                        .equalsIgnoreCase("className")) {
+                                driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+                                element = parentElement.findElement(By.className(elementData
+                                                .getElementName()));
+                        } else if (elementData.getIdentifier().equalsIgnoreCase("xpath")) {
+                                driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+                                element = parentElement.findElement(By.xpath(elementData
+                                                .getElementName()));
+                        } else if (elementData.getIdentifier().equalsIgnoreCase("linkText")) {
+                                driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+                                element = parentElement.findElement(By.linkText(elementData
+                                                .getElementName()));
 
-                    } else if (elementData.getIdentifier().equalsIgnoreCase("name")) {
-                            driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-                            element = parentElement.findElement(By.name(elementData
-                                            .getElementName()));
+                        } else if (elementData.getIdentifier().equalsIgnoreCase("name")) {
+                                driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+                                element = parentElement.findElement(By.name(elementData
+                                                .getElementName()));
 
-                    } else if (elementData.getIdentifier().equalsIgnoreCase("tagName")) {
-                            driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-                            element = parentElement.findElement(By.tagName(elementData
-                                            .getElementName()));
+                        } else if (elementData.getIdentifier().equalsIgnoreCase("tagName")) {
+                                driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+                                element = parentElement.findElement(By.tagName(elementData
+                                                .getElementName()));
 
                     }
                     return element;
@@ -394,7 +394,7 @@ public abstract class UhcDriver {
 	 * 
 	 * @param element
 	 */
-	public void jsClick(WebElement element) {
+	public void jsClickNew(WebElement element) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].click();", element);
 		System.out.println("Element Clicked");

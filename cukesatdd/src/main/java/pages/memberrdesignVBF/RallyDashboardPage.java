@@ -11,7 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.deprecated.member.bluelayer.HealthAndWellness;
+import pages.memberrdesignVBF.HealthAndWellness;
 
 public class RallyDashboardPage extends UhcDriver {
 

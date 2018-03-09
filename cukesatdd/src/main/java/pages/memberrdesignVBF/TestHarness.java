@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.deprecated.member.bluelayer.HealthAndWellness;
+import pages.memberrdesignVBF.HealthAndWellness;
 
 public class TestHarness extends UhcDriver {
 
@@ -162,7 +162,7 @@ public class TestHarness extends UhcDriver {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,50)", "");
 		scrollToView(benefitsPageLink);
-		jsClick(benefitsPageLink);
+		jsClickNew(benefitsPageLink);
 
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println(driver.getTitle());

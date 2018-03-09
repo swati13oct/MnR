@@ -60,9 +60,6 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(id = "payment-date")
 	private WebElement viewPaymentHistoryDropdown;
 	
-	@FindBy(xpath="//*[@id='customFields']/div[3]/button")
-	private WebElement searchbutton;
-	
 	@FindBy(id="customSearch")
 	private WebElement customSearchtext;
 	

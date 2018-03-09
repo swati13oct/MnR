@@ -4,10 +4,6 @@
 "nameInfo":{
 "identifier":"id",
 "elementName":"nameInfo"
-},
-"confirmationMessage":{
-"identifier":"className",
-"elementName":"med_cont"
 }
 }
 }

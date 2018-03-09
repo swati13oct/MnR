@@ -21,7 +21,7 @@ import cucumber.api.DataTable;
 import gherkin.formatter.model.DataTableRow;
 import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.memberrdesignVBF.TestHarness;
-import pages.deprecated.member.bluelayer.HealthAndWellness;
+import pages.memberrdesignVBF.HealthAndWellness;
 import pages.memberrdesignVBF.LoginPage;
 
 public class MemberRedesignHealthnWellnessStepDefinition {
