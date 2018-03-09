@@ -42,7 +42,7 @@ Then the user should see choose a plan in UMS site
 Examples:
 	| zipcode     | distance  | county       |  planName 			               	  | plantype|languageName|
 	| 80002       | 25        | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | MA|Spanish|
-  | 80002       | 15        | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | MA|Spanish|
+#  | 80002       | 15        | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | MA|Spanish|
 
 @pharmacyServicesUMS
 Scenario Outline:To verify available pharmacies and Services in UMS site
