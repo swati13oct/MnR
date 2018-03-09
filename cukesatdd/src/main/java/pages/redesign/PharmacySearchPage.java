@@ -98,11 +98,11 @@ public class PharmacySearchPage extends UhcDriver{
 	private WebElement TFNwidget;
 
 
-	public PharmacySearchPage(WebDriver driver) throws InterruptedException{
+	public PharmacySearchPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		CommonUtility.checkPageIsReady(driver);
-		Thread.sleep(5000);
+		//Thread.sleep(5000);
 		CommonUtility.checkPageIsReady(driver);
 		try{
 			FeedbackModal.click();
