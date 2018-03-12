@@ -187,22 +187,17 @@ private WebElement FormsandResourcesLinkn;
         private WebElement searchProviderLinkinFormsandResourcePage;
         
 
-        @FindBy(xpath="html/body/div[2]/div/div[4]/div[2]/div/table/tbody/tr[4]/td[2]/a")
-    	private WebElement linkbenefit;  
+        
         
         @FindBy(xpath=".//*[@id='IPEinvL']/map/area[2]")
         private WebElement iPerceptionPopUp;
         
-        @FindBy(xpath="html/body/div[2]/div/div[4]/div[2]/div/table/tbody/tr[4]/td[2]/a")
-    	private WebElement benefitcoveragelink;
+      
         
         @FindBy(xpath="html/body/div[2]/div/div[4]/div[2]/div/table/tbody/tr[6]/td[2]/a")
         private WebElement profilenpreferenceslink;
         
-        
-
-        @FindBy(xpath = "//sticky[@id='sticky-nav']//nav[@id='main-nav']//a[contains(text(),'Coverage & Benefits')]")
-    	private WebElement BnClink;
+   
         
         private PageData myAccountHome;
 

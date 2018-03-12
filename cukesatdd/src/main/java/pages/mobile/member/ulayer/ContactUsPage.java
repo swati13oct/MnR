@@ -62,8 +62,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath = "//*[@id='message-send']")
 	private WebElement sendAmessageButton;
 	
-	@FindBy(xpath = "//*[@id='messageModal']/div/div/div[1]")
-	private WebElement secureModel;
+	
 	
 	@FindBy(xpath = "//*[@id='messageModal']/div/div/div[3]/button/span")
 	private WebElement secureModelContinueButton;
@@ -85,11 +84,6 @@ public class ContactUsPage extends UhcDriver{
 	private WebElement requestCall;;
 	
 	
-	@FindBy(xpath = "/*[@id='call-question-about'] ")
-	private WebElement contactoption;
-		
-	@FindBy(xpath = "//*[@id='call-question-about'] ")
-	private WebElement other;
 	
 	@FindBy(xpath = "//*[@id='call-cancel'] ")
 	private WebElement callCancel;

@@ -102,7 +102,7 @@ public abstract class UhcDriver {
         }
 
         public boolean validate(WebElement element) {
-        	/*try {
+        	try {
     		if (element.isDisplayed()) {
     		System.out.println("Element found!!!!");
     		return true;
@@ -113,9 +113,9 @@ public abstract class UhcDriver {
     		System.out.println("Exception: Element not found/not visible");
 
     		}
-    		return false;*/
+    		return false;
 
-    		//CM code
+    		/*//CM code
     		
     		JavascriptExecutor jse = (JavascriptExecutor)driver;
     		jse.executeScript("window.scrollBy(0,-50)", "");
@@ -135,7 +135,7 @@ public abstract class UhcDriver {
     	         return false;
     	     }
     	     
-    	        return true;
+    	        return true;*/
         }
 
         public WebElement findElement(ElementData elementData) {

@@ -26,8 +26,7 @@ import atdd.framework.UhcDriver;
  */
 public class BenefitDetailsPage extends UhcDriver{
 	
-	@FindBy(xpath="//div[@class='site-header']/a")
-	private WebElement menuButton;
+	
 	
 	@FindBy(xpath = "//div[@id='standard']//div[@class='carousel-next clickable']")
 	private WebElement nextarrow;

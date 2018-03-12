@@ -25,8 +25,7 @@ public class ViewDrugCostPage extends UhcDriver {
 	@FindBy(xpath = "//table[@class='viewDrugCost']//td[@class='borderLeft_color druglistedit']/p/a")
 	private WebElement editLink;
 
-	@FindBy(className = "viewDrugCost")
-	private WebElement drugCostContent;
+	
 
 	@FindBy(linkText = "Sign Out")
 	private WebElement logOut;
@@ -37,11 +36,7 @@ public class ViewDrugCostPage extends UhcDriver {
 	@FindBy(className= "borderLeft drugdosage ng-binding")
 	private WebElement descBox;
 	
-	@FindBy(linkText ="Edit pharmacy")
-	private WebElement editPharmacyLink;
-	
-	@FindBy(xpath =".//*[@id='dce.member']/div/div[7]/div/div/div/div/div[1]/div[3]/div[3]")
-	private WebElement descriptionTable;
+
 
 	private PageData viewDrugCost;
 

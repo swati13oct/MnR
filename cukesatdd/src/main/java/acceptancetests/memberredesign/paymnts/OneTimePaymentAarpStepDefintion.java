@@ -1205,7 +1205,7 @@ public class OneTimePaymentAarpStepDefintion {
 				.getBean(PageConstantsMnR.ONE_TIME_PAYMENTS_DASHBOARD);
 		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = oneTimePaymentsPage
 				.enterInfoWithoutCheckBoxAndContinue();
-		ReviewOneTimePaymentsPage reviewOneTimePaymentsPagechkbox = oneTimePaymentsPage
+		oneTimePaymentsPage
 				.errorMessagechkBox();
 		if (reviewOneTimePaymentsPage != null) {
 			getLoginScenario().saveBean(
@@ -1290,7 +1290,7 @@ public class OneTimePaymentAarpStepDefintion {
 	public void user_clicks_cancelbtn_onOnetimePaymentPage() {
 		OneTimePaymentsPage oneTimePaymentsPage = (OneTimePaymentsPage) getLoginScenario()
 				.getBean(PageConstantsMnR.ONE_TIME_PAYMENTS_DASHBOARD);
-		OneTimePaymentPage reviewOneTimePaymentsPage = oneTimePaymentsPage
+		 oneTimePaymentsPage
 				.onetimepagecancelbtn();
 	}
 }

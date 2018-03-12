@@ -17,8 +17,8 @@ Then the user validates the available pharmacies page in UMS site
 		
 Examples:
 	| zipcode     | distance  | county       |  planName 			               	  | plantype|
-	| 80002       | 25        | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | MA|
-	| 90210       | 2        |       | AARP MedicareRx Preferred (PDP)                    | PDP|
+#	| 80002       | 25        | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | MA|
+#	| 90210       | 2        |       | AARP MedicareRx Preferred (PDP)                    | PDP|
 	
 @pharmacySearchPage
 Scenario Outline:To verify available pharmacies for particular pharmacy types in UMS site
@@ -40,7 +40,7 @@ And the user clicks on SearchAgain and navigates to pharmacies search page
 Examples:
 	| zipcode     | distance  | county       |  planName 			                 	  | pharmacytype				|plantype|
 	| 80002       | 25        | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  |  Standard Network Pharmacy,Long-term care|MA|
-	| 90210       | 2        |       | AARP MedicareRx Preferred (PDP)                    |   Standard Network Pharmacy				|PDP|
+#	| 90210       | 2        |       | AARP MedicareRx Preferred (PDP)                    |   Standard Network Pharmacy				|PDP|
 	
 @validateError
 Scenario Outline:To verify error message for no results found for pharmacy type in UMS site

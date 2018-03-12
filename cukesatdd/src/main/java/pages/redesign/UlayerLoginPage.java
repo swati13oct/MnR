@@ -38,11 +38,7 @@ public class UlayerLoginPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='fd_userPassSection']/button")
 	private WebElement signInButton;
 
-	@FindBy(linkText = "Forgot your username or password?")
-	private WebElement forgotUsernamePasswordLink;
-
-	@FindBy(id = "usercheckbox")
-	private WebElement userNameCheckBox;
+	
 
 	private PageData browserCheckData;
 

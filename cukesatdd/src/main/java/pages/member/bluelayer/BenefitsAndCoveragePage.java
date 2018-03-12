@@ -163,8 +163,6 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-benefitsoverview-effectivedatelabel")
 	private WebElement effective_Date;
 
-	@FindBy(className = "atdd-benefitsoverview-monthlypremium-label")
-	private WebElement Monthly_Premium;
 
 	@FindBy(className = "atdd-benefitsoverview-groupidlabel")
 	private WebElement GroupId;
@@ -210,29 +208,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(id = "benefitShipCard")
 	private WebElement ParticipatingHospitalStays1;
 
-	@FindBy(xpath = "//*[@id='planBenefitsApp']/div[2]/div[4]/div/div/div/header/span")
-	private WebElement ParticipatingHospitalStays2;
 
-	@FindBy(xpath = "//*[@id='planBenefitsApp']/div[2]/div[5]/div/div/div/header")
-	private WebElement TravelBenefitHeader;
 
-	@FindBy(xpath = "//*[@id='planBenefitsApp']/div[2]/div[6]/div/div/div/header/span")
-	private WebElement BloodPackedRedBloodCellsPartA;
 
-	@FindBy(xpath = "//*[@id='planBenefitsApp']/div[2]/div[7]/div/div/div/header/span")
-	private WebElement SkilledNursingFacilityStays;
-
-	@FindBy(xpath = "//*[@id='planBenefitsApp']/div[2]/div[8]/div/div/div/header/span")
-	private WebElement HospiceCare;
-
-	@FindBy(xpath = "//*[@id='planBenefitsApp']/div[2]/div[9]/div/div/div/header/span")
-	private WebElement MedicalCare;
-
-	@FindBy(xpath = "//*[@id='planBenefitsApp']/div[2]/div[10]/div/div/div/header/span")
-	private WebElement BloodPackedRedBloodCellsPartB;
-
-	@FindBy(xpath = "//*[@id='planBenefitsApp']/div[2]/div[11]/div/div/div/header/span")
-	private WebElement EmergencyCare;
 
 
 	@FindBy(xpath = ".//*[@id='benefitsMain']/div[2]/div/div[1]/div/div/div/div/div[6]/div/div[1]/div/h2")
@@ -292,8 +270,6 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(id = "specialDisctServices")
 	private WebElement textdiscountservices;
 
-	@FindBy(className = "atdd-bnc-specialdscnt-desc")
-	private WebElement textdiscountservices1;
 
 	@FindBy(className = "atdd-bnc-discounttitle")
 	private WebElement headerdiscountservices;

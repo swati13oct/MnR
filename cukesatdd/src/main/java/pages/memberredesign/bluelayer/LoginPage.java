@@ -19,7 +19,7 @@ public class LoginPage extends UhcDriver {
 
 	private static String PAGE_URL_MEM_REDESIGN = MRConstants.REDESIGN_LOGIN_URL;
 
-	private static String PAGE_URL_TEST_HARNESS = MRConstants.UHCM_URL_TEAMB_TESTHARNESS;
+	
 	
 	private static String PAGE_URL_TEAM_H_TEST_HARNESS = MRConstants.TEAMH_URL_TESTHARNES;
 	
