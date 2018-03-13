@@ -51,11 +51,11 @@ public class LoginPage extends UhcDriver {
 			if ("teamci-1".equalsIgnoreCase(MRScenario.environment)|| "teamci-2".equalsIgnoreCase(MRScenario.environment)) {
 				PAGE_URL = MRConstants.TEAMCI_TESTHARNESS;
 			} else {
-				PAGE_URL = MRConstants.TESTHARNESS;
+				PAGE_URL = MRConstants.TESTHARNESS.replace("awe-", "");
 			}
 
 		} else {
-			PAGE_URL = MRConstants.DASHBOARD;
+			PAGE_URL = MRConstants.DASHBOARD.replace("awe-", "");
 		}
 		System.out.println("URL:" + PAGE_URL);
 		startNew(PAGE_URL);
