@@ -102,13 +102,6 @@ public class MemberProviderSearchStepDefinition {
 				Assert.fail("Login not successful...");
 			}
 		}
-		/*RallyDashboardPage rallyDashboard = (RallyDashboardPage) THloginPage.loginWith(userName, pwd);
-		if (rallyDashboard != null) {
-			getLoginScenario().saveBean(PageConstants.RALLY_DASHBOARD_PAGE, rallyDashboard);
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail("Login not successful...");
-		}*/
 	}
 
 	@When("^the member navigates to Provider Search page$")

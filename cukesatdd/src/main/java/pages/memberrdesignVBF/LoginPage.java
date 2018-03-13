@@ -48,8 +48,8 @@ public class LoginPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
-			if ("teamci-1".equalsIgnoreCase(MRScenario.environment)) {
-				PAGE_URL = MRConstants.TEAMCI1_TESTHARNESS;
+			if ("teamci-1".equalsIgnoreCase(MRScenario.environment)|| "teamci-2".equalsIgnoreCase(MRScenario.environment)) {
+				PAGE_URL = MRConstants.TEAMCI_TESTHARNESS;
 			} else {
 				PAGE_URL = MRConstants.TESTHARNESS;
 			}

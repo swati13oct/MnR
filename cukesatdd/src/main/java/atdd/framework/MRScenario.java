@@ -139,7 +139,10 @@ public class MRScenario {
                                  } else {
                                         domain = null;
                                  }
-                                 isTestHarness =  props.get("isTestHarness");
+                                 isTestHarness = (null == System.getProperty(CommonConstants.IS_TESTHARNESS)
+                                         ? props.get("isTestHarness")
+                                         : System.getProperty(CommonConstants.IS_TESTHARNESS));
+                                // isTestHarness =  props.get("isTestHarness");
                               // Setting permission to the scripts , so that jenkins server can access
                               File shellScript  =  new File("src/main/resources/pdfReportGenerator.sh");
                               File groovyScript  =  new File("src/main/resources/pdfReporter.groovy");

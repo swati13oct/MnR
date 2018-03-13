@@ -36,7 +36,10 @@ public class DeregisterPage extends UhcDriver {
 		String environment = MRScenario.environment;
 		switch (environment.toUpperCase()) {
 		case "TEAMCI-1":
-			PAGE_URL = MRConstants.TEANCI_1_DEREGISTER_URL;
+			PAGE_URL = MRConstants.TEANCI_DEREGISTER_URL;
+			break;
+		case "TEAMCI-2":
+			PAGE_URL = MRConstants.TEANCI_DEREGISTER_URL;
 			break;
 		case "TEST-A":
 			PAGE_URL = MRConstants.TEST_A_DEREGISTER_URL;

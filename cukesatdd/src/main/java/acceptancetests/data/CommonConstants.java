@@ -842,5 +842,7 @@ public class CommonConstants {
     public static final String DESKTOP_BROWSER_AGENT_STRING = "BrowserAgentString";
     public static final String JENKINS_BROWSER_AGENT_STRING = "JENKINS_BROWSER_AGENT_STRING";
 	public static final String ACCOUNT_USER_NAME = null;
+
+	public static final String IS_TESTHARNESS = "istestharness";
 	
 }

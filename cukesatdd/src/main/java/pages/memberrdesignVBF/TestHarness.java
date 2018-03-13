@@ -10,6 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.memberrdesignVBF.HealthAndWellness;
@@ -232,11 +233,30 @@ public class TestHarness extends UhcDriver {
 /***
  * 
  * @return
+ * @throws InterruptedException 
  */
-	public HealthAndWellness clickHealthnWellnessTab() {
-		validateNew(healthWellness);
-		healthWellness.click();
-		CommonUtility.checkPageIsReadyNew(driver);
+	public HealthAndWellness clickHealthnWellnessTab() throws InterruptedException {
+		/*validateNew(healthWellness);
+		healthWellness.click();*/
+		startNew(MRConstants.HEALTH_AND_WELLNESS_TESTHARNESS);
+		int counter = 0;
+
+		do {
+			if (counter <= 10) {
+				Thread.sleep(5000);
+				System.out.println("Time elapsed post sign In clicked --" + counter + "*5 sec.");
+			} else {
+				System.out.println("TimeOut!!!");
+				return null;
+			}
+			counter++;
+
+			if (driver.getTitle().contains("Health")) {
+				return new HealthAndWellness(driver);
+			}
+			
+		} while (!(driver.getTitle().contains("Find Care")));
+		//CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getTitle().contains("Health")) {
 			return new HealthAndWellness(driver);
 		}
@@ -292,8 +312,9 @@ public class TestHarness extends UhcDriver {
 	}
 
 public ProviderSearchPage navigateToProviderSearch() throws InterruptedException {
-	validateNew(panelFindCareCost);
-	panelFindCareCost.click();
+	/*validateNew(panelFindCareCost);
+	panelFindCareCost.click();*/
+	startNew(MRConstants.PROVIDER_TESTHARNESS);
 	int counter = 0;
 
 	do {

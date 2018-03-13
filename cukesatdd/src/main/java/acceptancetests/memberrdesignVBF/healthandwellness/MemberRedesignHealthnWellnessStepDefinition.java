@@ -117,11 +117,12 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 		}
 	}
 
-	/***
+	/**
+	 * @throws InterruptedException *
 	 * 
 	 */
 	@When("^then click the health and wellness tab$")
-	public void then_click_the_health_and_wellness_tab() {
+	public void then_click_the_health_and_wellness_tab() throws InterruptedException {
 		HealthAndWellness healthAndWellness;
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
 			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
