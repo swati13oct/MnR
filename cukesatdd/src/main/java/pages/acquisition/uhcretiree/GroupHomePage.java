@@ -2,8 +2,10 @@ package pages.acquisition.uhcretiree;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.CommonConstants;
@@ -18,6 +20,9 @@ import atdd.framework.UhcDriver;
  */
 
 public class GroupHomePage extends UhcDriver { 
+	
+	@FindBy(id = "cq-imagebutton-jsp-/content/gr/en/asrs/right_column/jcr:content/parsys/titledtext_0/parsys/events/parsys/imagebutton")
+	private WebElement signInOrRegisterbtn;
 
 	@Override
 	public void openAndValidate() {
@@ -62,6 +67,21 @@ public class GroupHomePage extends UhcDriver {
 
 		return browserCheckJson;
 	}
+	
+	public void validateSignInOrRegisterbtn(){
+		Assert.assertTrue("signInOrRegisterbtn is not displayed in group page",signInOrRegisterbtn.isDisplayed());
+	}
+	
+	public void clickSignInOrRegisterbtn(){
+		signInOrRegisterbtn.click();
+		if(driver.getCurrentUrl().contains("medicare.uhc.com")){
+			Assert.assertTrue(true);
+		}else{
+			Assert.assertFalse("Signin Or Registration button is not redirected to HSID",true);
+		}
+	}
+	
+
 
 
 }
