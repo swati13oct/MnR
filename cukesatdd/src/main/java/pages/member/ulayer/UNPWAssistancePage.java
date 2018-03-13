@@ -18,14 +18,11 @@ public class UNPWAssistancePage extends UhcDriver {
 	@FindBy(xpath = ".//label[@for='select-password']")
 	private WebElement pwdBtn;
 
-	@FindBy(xpath = ".//label[@id='invalidmember-id'][@class='error']")
-	private WebElement MemberIDError;
+
 
 	@FindBy(id = "member-id")
 	private WebElement MemberID;
 
-	@FindBy(xpath = ".//label[@id='dobGroup'][@class='error']")
-	private WebElement DOBerror;
 
 	@FindBy(id = "date-mm")
 	private WebElement DOBmm;
@@ -36,8 +33,7 @@ public class UNPWAssistancePage extends UhcDriver {
 	@FindBy(id = "date-yyyy")
 	private WebElement DOByyyy;
 
-	@FindBy(xpath = ".//label[@id='lastnameErr'][@class='error']")
-	private WebElement LastNameError;
+	
 
 	@FindBy(xpath = ".//*[@class='error']")
 	private WebElement ErrorinPage;
@@ -45,17 +41,10 @@ public class UNPWAssistancePage extends UhcDriver {
 	@FindBy(id = "lastname")
 	private WebElement LastName;
 
-	@FindBy(xpath = ".//label[@id='invalidzipErr'][@class='error']")
-	private WebElement ZIPerror;
 
 	@FindBy(id = "zipcode")
 	private WebElement ZIP;
 
-	@FindBy(xpath = ".//span[@class='errmsg']")
-	private WebElement Valid_email_error;
-
-	@FindBy(xpath = ".//a[@class='btn btn--secondary'][contains(text(),'Cancel')]")
-	private WebElement cancel;
 
 	@FindBy(xpath = ".//button[@class='btn']")
 	private WebElement ContinueButton;

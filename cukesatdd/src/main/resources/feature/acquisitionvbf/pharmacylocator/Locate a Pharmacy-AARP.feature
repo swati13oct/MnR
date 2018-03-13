@@ -40,7 +40,7 @@ Then the user should see choose a plan in AARP site
 Examples:
 	| zipcode     | distance  | county       |  planName 			               	  |  plantype|languageName|
 	| 80002       | 25 miles     | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | MA |Spanish |
-	| 80002       | 15 miles     | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | MA |Spanish |
+#	| 80002       | 15 miles     | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | MA |Spanish |
 #	| 90210       | 2        |      | AARP MedicareRx Preferred (PDP)                    | PDP |
 
 @pharmaciesServicesAARP

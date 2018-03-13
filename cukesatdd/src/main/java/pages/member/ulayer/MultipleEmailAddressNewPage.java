@@ -39,18 +39,7 @@ public class MultipleEmailAddressNewPage extends UhcDriver{
        
 		@FindBy(id = "email-2")
 		private WebElement SecondOption;	
-		
-		@FindBy(xpath = ".//*[@id='email-modal-form']/fieldset/div[1]/div[1]/div/div/label")
-		private WebElement FirstOption;
-		
-		@FindBy(id = "new-email")
-		private WebElement newEmail;
-		
-		@FindBy(id = "new-email-confirm")
-		private WebElement ConfirmNewEmail;
-		
-		@FindBy(xpath = ".//*[@id='email-modal-form']/div/button/span")
-		private WebElement ContinueButton1;
+
 
 
 		public MultipleEmailAddressNewPage(WebDriver driver) {

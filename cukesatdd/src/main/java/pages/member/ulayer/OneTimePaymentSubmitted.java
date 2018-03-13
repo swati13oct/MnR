@@ -31,9 +31,7 @@ public class OneTimePaymentSubmitted extends UhcDriver {
 	
 	@FindBy(xpath="//*[@id='atdd_reviewonetime_label']/div[6]/div[2]/span")
 	private WebElement AccountHolderNamePaymentSubmittedpage;
-	
-	@FindBy(xpath="/html/body/div[2]/div/div/div[2]/div[3]/div/div/div/button")
-	private WebElement SubmitButton;
+
 	
 	@FindBy(xpath="html/body/div[2]/div/div[2]/div/div/div[1]/div/div/div[1]/div[2]/span")
 	private WebElement PaymentType;

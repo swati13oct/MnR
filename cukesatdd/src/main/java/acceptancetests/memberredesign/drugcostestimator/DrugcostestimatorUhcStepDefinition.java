@@ -627,8 +627,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		}
 
 		String zipcode = memberAttributesMap.get("Zipcode");
-		String radius = memberAttributesMap.get("Radius");
-		String Pharmacy_type = memberAttributesMap.get("Pharmacy Type");
+		
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		//dce.validateZipcode(zipcode);
 		dce.selectRadius();
@@ -896,7 +895,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		}
 		//System.out.println("Map values"+memberAttributesMap);
 		String totalAnnualDrugCost = memberAttributesMap.get("totalAnnualDrugCost");
-		WebDriver wd = (WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		

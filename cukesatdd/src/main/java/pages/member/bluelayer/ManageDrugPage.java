@@ -14,7 +14,6 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.CommonConstants;
@@ -37,9 +36,6 @@ public class ManageDrugPage extends UhcDriver {
 	@FindBy(linkText = "Delete")
 	private WebElement deleteLink;
 
-	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/p")
-	private WebElement pharmacyHeading;
-
 	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[1]/h3[2]")
 	private WebElement searchPharmacyTab;
 
@@ -49,20 +45,13 @@ public class ManageDrugPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='drugDropDownList']")
 	private WebElement drugDropDownList;
 
-	@FindBys(value = { @FindBy(xpath = "//div[@class='drugDropDownList']/div") })
-	private List<WebElement> drugListElements;
-
 	@FindBy(linkText = "view drug costs")
 	private WebElement viewDrugCostButton;
 
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;
 	
-	@FindBy(xpath = ".//*[@id='dce.member']/div/div[4]/div/div/div[1]/div[1]/div[3]")
-	private WebElement viewDrugCostTab;
-	
-	@FindBy(xpath = ".//*[@id='dce.member']/div/div[4]/div/div/div[1]/div[1]/div[1]")
-	private WebElement drugListTab;
+
 	
 	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[4]/div")
 	private WebElement drugListBox; //box where all the added drugs will show 

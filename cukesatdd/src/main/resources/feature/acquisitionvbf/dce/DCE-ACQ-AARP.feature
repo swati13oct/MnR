@@ -93,9 +93,9 @@ Then I switch the year to 2017 and change zipcode and verify that the pharmacy p
 	
 Examples:
 	| drug|zipcode| radius| zipcode2 |
-	| Lipitor TAB 10MG| 90210 | 15miles | 27009|
+#	| Lipitor TAB 10MG| 90210 | 15miles | 27009|
 	
-	@dceMousehoverOurPlans @aprilRelease2018
+@dceMousehoverOurPlans @aprilRelease2018
 Scenario Outline: To Mousehover on Our Plans tab from the DCE Page 
 Given the user is on ulayer medicare acq site landing page
 When I access the acquisition DCE tool from home page
@@ -105,5 +105,5 @@ Then I should be directed to the VPP Plan Summary Page Ulayer and I should see t
 Examples:
 	| zipcode |
   | 90210   |
-  | 30210   |
-  | 10002   |
+ #| 30210   |
+#| 10002   |

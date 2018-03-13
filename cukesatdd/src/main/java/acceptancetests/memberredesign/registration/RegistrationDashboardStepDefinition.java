@@ -382,7 +382,7 @@ public class RegistrationDashboardStepDefinition {
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
 		// get expected member id
-		String expectedmemberid = memberAttributesMap.get("Plan Member ID");
+		//String expectedmemberid = memberAttributesMap.get("Plan Member ID");
 		// get expected member dob
 		String expectedmemberdob = memberAttributesMap.get("Date of birth");
 		// System.out.println("expected member name is" +expectedmemberid);
@@ -399,8 +399,8 @@ public class RegistrationDashboardStepDefinition {
 		}
 
 		// get actual member id
-		String actualmemberid = registrationInformationPage.getMemberID()
-				.getAttribute("value");
+		//String actualmemberid = registrationInformationPage.getMemberID()
+			//	.getAttribute("value");
 		// System.out.println("actual member id is" +actualmemberid);
 		// get actual member dob month
 		String actualmemberdobmm = registrationInformationPage.getEnterMonth()

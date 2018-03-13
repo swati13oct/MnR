@@ -8,7 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.data.CommonConstants;
 import atdd.framework.UhcDriver;
 
 /**
@@ -27,7 +26,7 @@ public class PlanMaterialConfirmationPage extends UhcDriver {
 	public PlanMaterialConfirmationPage(WebDriver driver){
 		super(driver);
 		PageFactory.initElements(driver, this);
-		String fileName = CommonConstants.ORDER_PLAN_MATERIALS_PAGE_DATA;
+		//String fileName = CommonConstants.ORDER_PLAN_MATERIALS_PAGE_DATA;
 //		planMaterials = CommonUtility.readPageData(fileName,
 //				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
 		openAndValidate();

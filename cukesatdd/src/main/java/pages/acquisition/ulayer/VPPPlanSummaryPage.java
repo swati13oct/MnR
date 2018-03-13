@@ -94,13 +94,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(id = "allplanssise")
 	private WebElement allPlansSize;
 
-	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div[1]/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div/span[1]/span")
+	@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='plan-overview-wrapper']//div[@class='overview-tabs module-tabs-tabs']/div[1]//span[@class='title']")
 	private WebElement maPlansCount;
 	
-	@FindBy(xpath = "//div[@class='medsupplans_planbutton']/div[1]/p")
+	@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='plan-overview-wrapper']//div[@class='overview-tabs module-tabs-tabs']/div[2]//span[@class='trigger-closed']")
 	private WebElement msPlansCount;
 	
-	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div[1]/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[3]/div/span[1]/span")
+	@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='plan-overview-wrapper']//div[@class='overview-tabs module-tabs-tabs']/div[3]//span[@class='trigger-closed']")
 	private WebElement pdpPlansCount;
 	
 	@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='plan-overview-wrapper']/div[2]/div[1]//span[@class='trigger-closed']")
@@ -146,8 +146,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private WebElement stayOnthisPopup;
 	
 	
-	@FindBy(xpath="//div[@class='tab-contents']/span[contains(text(),'Medicare Advantage Plans')]/following-sibling::span[text()='View Plans'][2]")
-	private WebElement viewMAPlansC;
+	@FindBy(xpath=".//*[@id='site-wrapper']//div[@class='plan-overview-wrapper']/div[2]/div[1]//span[@class='trigger-closed']")
+	private WebElement viewMAPlans;
 	
 	@FindBy(xpath="//button[contains(text(),'Get Started')]")
 	private WebElement GetStarted;
@@ -284,12 +284,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			}
 		} else if (planType.equalsIgnoreCase("MA")
 				|| planType.equalsIgnoreCase("MAPD")) {
-			if(validate(viewMAPlansC)){
-				viewMAPlansC.click();
+			if(validate(viewMAPlans)){
+				viewMAPlans.click();
 			}
-			if(validate(hideMaPlans)){
-				validate(hideMaPlans);
-			}
+			
 		} else if (planType.equalsIgnoreCase("MS")) {
 			if(validate(showMsPlans)){
 				showMsPlans.click();
@@ -901,14 +899,20 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	public boolean validatePlanSummary(){
 		boolean flag = true;
-		
-		if(validate(allPlansSize)){
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		maPlansViewLink.click();
+		/*if(validate(allPlansSize)){
 		//	 allPlans = Integer.valueOf(allPlansSize.getText().split(" ")[2]);
 		}else{
 			Assert.assertTrue("This scenario is for AEP period", true);
 			
-		}
-
+		}*/
+		
 		if(validate(maPlansCount)){
 		//	 maPlans = Integer.valueOf(maPlansCount.getText());
 		}else{

@@ -9,8 +9,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.data.PageData;
 import acceptancetests.data.CommonConstantsMobile;
+import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
@@ -56,17 +56,7 @@ public class PharmacyLocatorPage extends UhcDriver {
 	@FindBy(css="div.pharmacy_details_page>div:nth-child(2)>div:first-child")
 	private WebElement txtPharmacyResult;
 	
-	@FindBy(css="div.button.button-primary.pharmacy_filter_button")
-	private WebElement btnFilter;
-	
-	@FindBy(css="div.pharmacy_types.constrain>div.context-help.clickable")
-	private WebElement toolTip;
-	
-	@FindBy(xpath="//span[@ng-show='pharmacySaverPlan']/p/b")
-	private WebElement txtToolTip_PharmacySaver;
-	
-	@FindBy(xpath="//span[@ng-show='pharmacyPreferredPlan']/p/b")
-	private WebElement txtToolTip_PreferredPharmacy;
+
 	
 	public static final String STANDARD_PHARMACY_COLOUR ="Blue";
 	

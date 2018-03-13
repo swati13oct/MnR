@@ -75,9 +75,7 @@ public class OrderplanmaterialsPage extends UhcDriver {
 	@FindBy(className = "orderplanmaterials")
 	private WebElement OrderPlanMaterialsSection;
 	
-	//@FindBy(id = "shipDocumentStateCodeId")
-	@FindBy(id = "state")
-	private WebElement shipDocumentStateCodeId;
+
 
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;

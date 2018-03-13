@@ -30,8 +30,7 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;
 
-	@FindBy(id = "showresults")
-	private WebElement distanceField;
+	
 
 	//@FindBy(id = "dis_continue_btn")
 	//private WebElement continueField;
@@ -51,9 +50,6 @@ public class PharmacySearchPage extends UhcDriver {
     @FindBy(xpath = "//a[text()='search']")
     private WebElement spanishSearch;*/
 
-
-	@FindBy(xpath = "//div[@id='medicareTitle']/h1")
-	private WebElement pharmacySearchHeading;
 	
 	@FindBy(xpath = "//div[@id='subPageLeft']/div[2]/div[2]/h3")
 	private WebElement pharmacySearchResultMsg;
@@ -70,8 +66,7 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBys(value = { @FindBy(xpath = "//ul[@id='pharm_services']/li") })
 	private List<WebElement> pharmacyTypesCheckboxes;
 
-	@FindBy(id = "plan")
-	private WebElement planNameDropDown;
+
 	
 	@FindBys(value = { @FindBy(xpath = "//select[@id='plan']/option") })
 	private List<WebElement> planNames;

@@ -15,8 +15,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.data.PageData;
 import acceptancetests.data.CommonConstantsMobile;
+import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
@@ -26,8 +26,7 @@ import atdd.framework.UhcDriver;
  */
 public class BenefitDetailsPage extends UhcDriver{
 	
-	@FindBy(xpath="//div[@class='site-header']/a")
-	private WebElement menuButton;
+
 	
 	@FindBy(xpath = "//div[@id='standard']//div[@class='carousel-next clickable']")
 	private WebElement nextarrow;

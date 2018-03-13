@@ -68,8 +68,8 @@ public class RegistrationStartOverErrorPageStepDefinition {
                  */
                 @Then("^the member navigate to the username and password help page$")
                 public void navigateToUsernameAndPasswordHelpPage() {
-                                RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
-                                                                getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
+                             /*   RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
+                                                                getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);*/
                 }
                 /**
                  * @throws InterruptedException 
@@ -87,8 +87,8 @@ public class RegistrationStartOverErrorPageStepDefinition {
                  */
                 @Then("^the member navigate to the Sign in page$")
                 public void navigateToSignInPage() {
-                                RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
-                                                                getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
+                                /*RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
+                                                                getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);*/
                 }
                 /**
                  * @toDo : verifying the start over link on future effective error page

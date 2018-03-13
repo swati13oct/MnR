@@ -28,12 +28,6 @@ public class PaymentHistoryPage extends UhcDriver {
 	
 	@FindBy(id="custom-to")
 	public WebElement customSearchTo;
-	
-	@FindBy(xpath = "//span[contains(text(),'Total Amount Due')]")
-	private WebElement labelTotalAmoutDue;
-
-	@FindBy(xpath = "//div[@id='paymentOverviewApp']//h1")
-	private WebElement header;
 
 	@FindBy(xpath = "//span[text()='Payment Method:']/../following-sibling::div[1]")
 	private WebElement validatePaymentMethod;
@@ -56,9 +50,6 @@ public class PaymentHistoryPage extends UhcDriver {
 
 	@FindBy(id="paymentTable")
 	public WebElement paymentTableData;
-
-	@FindBy(xpath = "/html/body/div[2]/div[2]/div/div/div/div/div/p[2]/span[2]")
-	private WebElement totalAmountDueLabel;
 	
 	@FindBy(id="learnMoreAboutWaysLink")
 	private WebElement learnMoreAboutWaysLink;

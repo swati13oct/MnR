@@ -41,8 +41,7 @@ public class SelectPharmacyPage extends UhcDriver {
 	@FindBys(value = { @FindBy(xpath = "//div[@class='dcePharmacyTable']/table/tbody/tr") })
 	private List<WebElement> pharmacyRows;
 
-	@FindBy(className = "viewDrugCost")
-	private WebElement drugCostTable;
+	
 
 	@FindBy(className = "tablePharmacy")
 	WebElement pharmacyTable;
@@ -50,11 +49,7 @@ public class SelectPharmacyPage extends UhcDriver {
 	@FindBy(className = "milesSelection")
 	private WebElement distances;
 
-	@FindBy(linkText = "add a drug")
-	private WebElement addDrugLink;
 
-	@FindBy(linkText = "select")
-	private WebElement selectPharmacyButton;
 	
 	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[2]/div[5]/a[1]")
 	private WebElement zipcodeLink;
