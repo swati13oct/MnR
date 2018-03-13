@@ -115,7 +115,7 @@ public abstract class UhcDriver {
     		}
     		return false;
 
-    		/*//CM code
+    		/*//CM
     		
     		JavascriptExecutor jse = (JavascriptExecutor)driver;
     		jse.executeScript("window.scrollBy(0,-50)", "");
