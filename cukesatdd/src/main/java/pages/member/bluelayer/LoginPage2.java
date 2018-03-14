@@ -31,8 +31,6 @@ public class LoginPage2 extends UhcDriver {
 	
 	private static String STAGE_DASHBOARD_URL = MRConstants.STAGE_DASHBOARD_NEW_DOMAIN_URL;
 
-	@FindBy(id = "fd_memberSignInButton")
-	private WebElement loginIn;
 
 	@FindBy(id = "username")
 	private WebElement userNameField;
@@ -53,9 +51,6 @@ public class LoginPage2 extends UhcDriver {
 	@FindBy(id = "accessURAccountBTN")
 	private WebElement Signin;
 	
-	@FindBy(xpath=".//*[@id='IPEinvL']/map/area[1]")
-    private WebElement iPerceptionPopUp;
-
 	public LoginPage2(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);

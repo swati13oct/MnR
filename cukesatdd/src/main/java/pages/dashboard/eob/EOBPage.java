@@ -88,7 +88,7 @@ public class EOBPage extends UhcDriver{
 	@FindBy(className=" btn btn—primary")
 	private WebElement customSearchButton;
 	
-	@FindBy(className="bold number-title ng-binding")
+	@FindBy(xpath="//*[@class='bold number-title ng-binding']")
 	private WebElement eobCount;
 		
 	@FindBy(className="rightarrow")

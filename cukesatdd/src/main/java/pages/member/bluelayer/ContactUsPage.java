@@ -472,7 +472,7 @@ public void validateThankYouMessage(String expectedMessage){
 			alternativeEmailAddress.sendKeys("abc");
 			//confirmEmailAddress.sendKeys("");
 			alternativeEmailAddress.click();
-			jsClickNew(driver.findElement(By.xpath("//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-email']/preceding::p[1]")));
+			jsClick(driver.findElement(By.xpath("//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-email']/preceding::p[1]")));
 			driver.findElement(By.xpath
 					("//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-email']/preceding::p[1]")).click();
 			try {
@@ -524,7 +524,7 @@ public void validateThankYouMessage(String expectedMessage){
 			confirmEmailAddress.sendKeys("xyz");
 			confirmEmailAddress.clear();
 			confirmEmailAddress.click();
-			jsClickNew(driver.findElement(By.xpath("//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-email']/preceding::p[1]")));
+			jsClick(driver.findElement(By.xpath("//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-email']/preceding::p[1]")));
 			driver.findElement(By.xpath
 					("//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-email']/preceding::p[1]")).click();
 			try {
@@ -569,7 +569,7 @@ public void validateThankYouMessage(String expectedMessage){
 			addAlternativePhneNumberLink.click();
 			alternativePhneNumber.sendKeys("123");
 			alternativePhneNumber.click();
-			jsClickNew(driver.findElement(By.xpath("//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-email']/preceding::p[1]")));
+			jsClick(driver.findElement(By.xpath("//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-email']/preceding::p[1]")));
 			driver.findElement(By.xpath
 					("//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-email']/preceding::p[1]")).click();
 			try {
@@ -582,7 +582,7 @@ public void validateThankYouMessage(String expectedMessage){
 			System.out.println("invalidPhnenumerErrmsg::" +invalidPhnenumerErrmsg);
 			Assert.assertTrue("Phone number is not valid", invalidPhnenumerErrmsg.equals("Enter phone number like this: 111-111-1111."));
 			confirmAlternativePhneNumber.sendKeys("789");
-			jsClickNew(driver.findElement(By.xpath("//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-email']/preceding::p[1]")));
+			jsClick(driver.findElement(By.xpath("//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-email']/preceding::p[1]")));
 			driver.findElement(By.xpath
 					("//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-email']/preceding::p[1]")).click();
 			try {

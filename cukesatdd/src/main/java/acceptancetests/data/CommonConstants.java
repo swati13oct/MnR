@@ -9,7 +9,6 @@ package acceptancetests.data;
  */
 public class CommonConstants {
 
-
 	public static final String FLOW_NAME = "registration/planconfirmation";
 
 	public static final String REG_FAILURE_FLOW_NAME = "registration/registrationfailure";
