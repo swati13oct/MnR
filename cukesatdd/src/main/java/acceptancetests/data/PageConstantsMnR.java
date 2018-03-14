@@ -11,6 +11,11 @@ public class PageConstantsMnR {
 
 	public static final String ACCOUNT_HOME_PAGE = "accountHomePage";
 	
+	public static final String ASSISTIVE_REGISTRATION_PAGE = "AssistiveRegistrationPage";
+	
+	
+	public static final String HSID_LOGIN_PAGE = "hsidloginpage";
+	
 	public static final String  dashboardPage="dashboardPage";	
 public static final String CUSTOM_RANGE = "customRange";
 	
