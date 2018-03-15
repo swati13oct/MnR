@@ -47,6 +47,7 @@ public class GroupRetireeCustomAndNonCustom {
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String groupName = memberAttributesRow.get(0).getCells().get(1);
 		GroupHomePage groupHomePage = acquisitionHomePage.selectGroupFromList(groupName);
+		groupHomePage.setGroupName(groupName);
 		getLoginScenario().saveBean(PageConstants.UHCRETIREE_ACQ_RETIREES_OF_SELECTED_PLANS_HOME_PAGE, groupHomePage);
 		
 	}

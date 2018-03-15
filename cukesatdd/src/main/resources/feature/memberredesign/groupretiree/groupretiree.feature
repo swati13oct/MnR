@@ -1,3 +1,4 @@
+@codeMonkeys
 @aprilRelease2018
 @groupretireecustomgroup
 Feature:CTTest all group retiree member pages for sign in and registration.Make sure links are working to go to external hsid page to preform the action member needs.
@@ -15,3 +16,8 @@ Then user is redirected to external hsid page
 Examples:
  | groupName |
  | ASRS      |
+ | BASF      |
+ | CalPERS   |
+ | Diageo    |
+ | Eaton     |
+ | ERS       |

@@ -3,6 +3,7 @@ package pages.acquisition.uhcretiree;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -21,8 +22,11 @@ import atdd.framework.UhcDriver;
 
 public class GroupHomePage extends UhcDriver { 
 	
-	@FindBy(id = "cq-imagebutton-jsp-/content/gr/en/asrs/right_column/jcr:content/parsys/titledtext_0/parsys/events/parsys/imagebutton")
-	private WebElement signInOrRegisterbtn;
+	//@FindBy(id = "cq-imagebutton-jsp-/content/gr/en/asrs/right_column/jcr:content/parsys/titledtext_0/parsys/events/parsys/imagebutton")
+	//private WebElement signInOrRegisterbtn;
+	
+	private String groupName;
+
 
 	@Override
 	public void openAndValidate() {
@@ -69,16 +73,28 @@ public class GroupHomePage extends UhcDriver {
 	}
 	
 	public void validateSignInOrRegisterbtn(){
-		Assert.assertTrue("signInOrRegisterbtn is not displayed in group page",signInOrRegisterbtn.isDisplayed());
+		//Assert.assertTrue("signInOrRegisterbtn is not displayed in group page",signInOrRegisterbtn.isDisplayed());
 	}
 	
 	public void clickSignInOrRegisterbtn(){
+		String groupname = getGroupName().toLowerCase();
+		WebElement signInOrRegisterbtn = driver.findElement(By.id("cq-imagebutton-jsp-/content/gr/en/"+groupname+"/right_column/jcr:content/parsys/titledtext_0/parsys/events/parsys/imagebutton"));
 		signInOrRegisterbtn.click();
 		if(driver.getCurrentUrl().contains("medicare.uhc.com")){
 			Assert.assertTrue(true);
 		}else{
 			Assert.assertFalse("Signin Or Registration button is not redirected to HSID",true);
 		}
+	}
+
+
+	public String getGroupName() {
+		return groupName;
+	}
+
+
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
 	}
 	
 
