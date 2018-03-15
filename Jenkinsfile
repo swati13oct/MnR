@@ -90,7 +90,7 @@ def updatePipelineVersion(String gitBranch, String pipelineVersion){
 def writeBuildPropertiesFile(String gitBranch, String gitHubRepoUrl, String pipelineVersion){
 	writeFile file: 'build.properties', text: "GIT_BRANCH=${gitBranch}\nSOURCE_BUILD_NUMBER=${env.BUILD_NUMBER}\nSOURCE_GIT_URL=${gitHubRepoUrl}\nSOURCE_JOB_NAME=${env.JOB_NAME}\nSOURCE_JOB_URL=${env.JOB_URL}\nPIPELINE_VERSION=${pipelineVersion}"
 		
-	archiveArtifacts artifacts: 'build.properties', fingerprint: true
+	archiveArtifacts artifacts: 'build.properties, **/*pmd.xml', fingerprint: true
 }
 	
 // Pipeline
@@ -125,7 +125,7 @@ node('docker-maven-slave') {
         }
 
         echo "Build complete"
-		archiveArtifacts artifacts: '**/target/*.war , **/target/*.ear, **/build/*.zip, **/build_info.txt, **/build.properties', fingerprint: true
+		archiveArtifacts artifacts: '**/target/*.war , **/target/*.ear, **/build/*.zip, **/build_info.txt, **/build.properties, **/*pmd.xml', fingerprint: true
     }
     echo "Build complete"
 	
