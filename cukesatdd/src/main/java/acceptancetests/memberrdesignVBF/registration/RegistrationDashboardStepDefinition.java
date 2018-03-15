@@ -179,8 +179,8 @@ public class RegistrationDashboardStepDefinition {
 	@Given("^the member is on registration page of redesign portal$")
 	public void RegistrationPage(DataTable givenAttributes) throws InterruptedException {
 		// init Web Driver
-		WebDriver wd = loginScenario.getWebDriverNew();
-		loginScenario.saveBean(CommonConstants.WEBDRIVER, wd);
+		WebDriver wd = getLoginScenario().getWebDriverNew();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		// get test variables
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
