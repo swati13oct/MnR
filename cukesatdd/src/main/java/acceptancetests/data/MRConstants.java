@@ -23,7 +23,7 @@ public class MRConstants {
 	
 	public static final String UHC_PLANPREVIEW_URL= "https://www."+MRScenario.environment+"-uhcmedicaresolutions." + getDomain() + "/plan-preview.html";
 
-	public static final String UHCRETIREE_URL = "https://www."+MRScenario.environment+"-uhcretiree.uhc.com//gr/en/home.html";
+	public static final String UHCRETIREE_URL = "https://www."+MRScenario.environment+"-uhcretiree.uhc.com/";
 	
 	public static final String VERIZON_PROVIDER_PAGE_URL = "https://www."+MRScenario.environment+"-uhcretiree.uhc.com/verizon/find_a_provider.html";
 	
@@ -266,6 +266,8 @@ public class MRConstants {
   public static final String TeamH_BLayer_Member_URL = "https://"+MRScenario.environmentMedicare+"-medicare.uhc.com/";
   
   public static final String BNCBURL = "https://member." + MRScenario.environment + "-uhcmedicaresolutions.uhc.com/";
+  
+  public static final String HSIDURL = "https://" + MRScenario.environment + "-medicare.uhc.com/";
   
   public static final String UHCM_TEAM_E_URL = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com";
   

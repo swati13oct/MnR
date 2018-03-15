@@ -110,7 +110,8 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(id = "profileemailaddress")
 	private WebElement EmailValue;
 
-
+	@FindBy(xpath = ".//*[@id='needhelpsectioncontactus']//p[Contains(text(),'See more ways to')]")
+	private WebElement Seemorewaystext;
 
 	@FindBy(className = "atdd-contact-us")
 	private WebElement contactUs;
@@ -144,9 +145,12 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(id = "phone")
 	private WebElement Phonesection;
 
-	@FindBy(xpath = ".//*[@id='phoneCardHeight']/div[1]/div/div/div/div/div/div/div/a")
+	@FindBy(xpath = ".//*[@id='phone']/div[1]/div/div/div/div/div/div/div/a")
 	private WebElement PhoneEditButton;
 
+
+	@FindBy(xpath = "//*[@id='tab-1']/div[3]/div[1]/div/div[2]/div/div/div/div[1]/div/div/div[2]/div[1]/div[1]/div/span[1]")
+	private WebElement Daytimephone;
 
 	@FindBy(id = "phone-form")
 	private WebElement PhoneForm;
@@ -169,7 +173,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(id = "temporaryAddress")
 	private WebElement tempAddressHeader;
 
-	@FindBy(className = "edit-btn")
+	@FindBy(xpath = ".//*[@id='temporaryAddress']/div[1]/a[1]")
 	private WebElement tempEditButton;
 
 	@FindBy(className = "add-address-btn")
@@ -229,7 +233,8 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(className = "atdd-goGreenHeader")
 	private WebElement goggreenheader;
 
-
+	@FindBy(className = "atdd-section-heading")
+	private WebElement communicationheader;
 
 	@FindBy(xpath = "html/body/div[2]/div[3]/div[2]/div[1]/div/div/div/div/div[1]/div/div/div/div/div/div/a")
 	private WebElement Profilenprefernceslink;
@@ -243,6 +248,8 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(className = "html/body/div[2]/div[3]/div[2]/div[1]/div/div/div/div/div[1]/div/div/div/div/div/div/a")
 	private WebElement backLink1;
 
+	@FindBy(xpath = "html/body/div[3]/div[3]/div[1]/div[1]/div[2]/div/div/div/div[2]/div/div/div/div")
+	private WebElement backLink2;
 
 	@FindBy(className = "atdd-checkbox-label")
 	private WebElement NoteSection;
@@ -268,7 +275,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(className = "atdd-claims-header")
 	private WebElement ClaimsSupportSection;
 
-	@FindBy(className = "add-address-btn")
+	@FindBy(xpath = ".//*[@id='mailingAddress']/div[1]/a[1]")
 	private WebElement MailingAddressEditButton;
 
 	public PageData ProfileandPreferences;
@@ -1097,9 +1104,9 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	public void validatePhoneEditNokia() {
 
-		if(	PhoneEditButton.isDisplayed())
+		if(PhoneEditButton.isDisplayed())
 		{
-			Assert.assertFalse(PhoneEditButton.isDisplayed());
+			Assert.fail();
 
 		}
 		else{
