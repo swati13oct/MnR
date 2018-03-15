@@ -78,7 +78,7 @@ public class PharmacySearchPage extends UhcDriver{
 	
 	
 	
-	@FindBy(xpath = "(//*[contains(text(),'SHOW ON MAP')])")
+	@FindBy(xpath = "(//*[contains(text(),'Show on Map')])")
 	private List<WebElement> showonmap;
 	
 	@FindBy(xpath = "//a[contains(text(),'VIEW RESULT AS PDF')]")
