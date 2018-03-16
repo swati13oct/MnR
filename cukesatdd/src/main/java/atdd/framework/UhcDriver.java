@@ -11,7 +11,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
-import org.openqa.selenium.JavascriptExecutor;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -22,7 +22,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
-import junit.framework.Assert;
+
 
 /**
  * @author pjaising
@@ -102,7 +102,7 @@ public abstract class UhcDriver {
         }
 
         public boolean validate(WebElement element) {
-        	/*try {
+        	try {
     		if (element.isDisplayed()) {
     		System.out.println("Element found!!!!");
     		return true;
@@ -113,9 +113,9 @@ public abstract class UhcDriver {
     		System.out.println("Exception: Element not found/not visible");
 
     		}
-    		return false;*/
+    		return false;
 
-    		//CM code
+    		/*//CM code
     		
     		JavascriptExecutor jse = (JavascriptExecutor)driver;
     		jse.executeScript("window.scrollBy(0,-50)", "");
@@ -123,9 +123,9 @@ public abstract class UhcDriver {
     	         waitforElement(element);
     	            if (element.isDisplayed()) {
 
-    	                 /*  Actions actions = new Actions(driver);
+    	                   Actions actions = new Actions(driver);
     	                   actions.moveToElement(element);
-    	                   actions.perform();*/
+    	                   actions.perform();
     	                   Assert.assertTrue("@@@The element " + element.getText() + "is found@@@", element.isDisplayed());
     	                   System.out.println("@@@The element " + element.getText() + "is found@@@");
     	            }
@@ -135,7 +135,7 @@ public abstract class UhcDriver {
     	         return false;
     	     }
     	     
-    	        return true;
+    	        return true;*/
         }
 
         public WebElement findElement(ElementData elementData) {

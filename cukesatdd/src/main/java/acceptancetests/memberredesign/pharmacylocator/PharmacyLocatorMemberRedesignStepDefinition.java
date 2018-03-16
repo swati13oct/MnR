@@ -26,9 +26,11 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
+import pages.member.ulayer.AccountHomePage;
+import pages.member.ulayer.LoginPage;
 import pages.redesign.PharmacySearchPage;
-import pages.redesign.RedesignLoginPage;
-import pages.redesign.UlayerHomePage;
+//import pages.redesign.RedesignLoginPage;
+//import pages.redesign.UlayerHomePage;
 
 /**
  * @author sdwaraka
@@ -104,10 +106,14 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 
 		WebDriver wd = getLoginScenario().getWebDriver();
 
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		RedesignLoginPage loginPage = new RedesignLoginPage(wd);
+		//getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		LoginPage loginPage = new LoginPage(wd);
+		loginPage.navigateToNewDashboardUrl();
+		getLoginScenario().saveBean(PageConstantsMnR.LOGIN_PAGE, loginPage);
+		
+		//RedesignLoginPage loginPage = new RedesignLoginPage(wd);
 
-		UlayerHomePage accountHomePage = (UlayerHomePage)loginPage.loginWith(userName, pwd);
+		AccountHomePage accountHomePage = (AccountHomePage)loginPage.teamhloginWith(userName, pwd);
 
 		if (accountHomePage != null) {
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -127,9 +133,9 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 	
 	@When("^the user navigates to pharmacy search page in Redesign site$")
 	public void user_views_pharmacy_locator_aarp() throws InterruptedException {
-		UlayerHomePage accountHomePage = (UlayerHomePage) getLoginScenario()
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		PharmacySearchPage pharmacySearchPage = accountHomePage.navigateToPharmacyLocator();
+		PharmacySearchPage pharmacySearchPage = accountHomePage.navigateToRedesignPharmacyLocaterPage();
 		if (pharmacySearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
 					pharmacySearchPage);
