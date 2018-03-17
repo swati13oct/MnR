@@ -81,9 +81,9 @@ public class RallyDashboard extends UhcDriver{
 	   public FormsAndResourcesPage navigatetoFormsnResourcesforactivemembers() throws InterruptedException
        {
                      //  DOCUMENTSRESOURCES.click();
-                      if (MRScenario.environmentMedicare.equalsIgnoreCase("team-ci1") || MRScenario.environmentMedicare.equalsIgnoreCase("team-g") ||MRScenario.environment.equalsIgnoreCase("test-a") ) {
+                      if (MRScenario.environmentMedicare.equalsIgnoreCase("team-ci1")) {
                     	  Thread.sleep(50000);
-               			driver.get("");
+               			driver.get("https://team-ci1-medicare.ose-elr-core.optum.com/content/medicare/member/documents/overview.html");
                		}
 
                		else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
@@ -95,11 +95,23 @@ public class RallyDashboard extends UhcDriver{
                				
                			driver.get("https://stage-medicare.uhc.com/medicare/member/documents/overview.html");
                			}
+               		}
+               			
+               			else if (MRScenario.environmentMedicare.equalsIgnoreCase("test-a")) {
+                   			Thread.sleep(30000);
+                   			System.out.println("user is on test-a after login page");			
+                   						
+                   			driver.findElement(By.xpath("//*[contains(text(),'Go to Forms and Resource page')]")).click();
+                   				
+                   			
+                   			
                				
                		}
-               		else 
-               		{
-               			System.out.println("This script is only intended to be run using test harness on team-b or team-h. Update condition for your own environment");	
+               		else if (MRScenario.environmentMedicare.equalsIgnoreCase("team-g"))
+               		{   
+               			Thread.sleep(40000);
+               			driver.get("https://team-g-medicare.uhc.com/medicare/member/documents/overview.html");
+               			
                		}
                		
                       System.out.println(driver.getTitle());

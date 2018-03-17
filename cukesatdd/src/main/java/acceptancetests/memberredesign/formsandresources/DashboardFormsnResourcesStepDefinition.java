@@ -85,7 +85,7 @@ import cucumber.api.java.en.Then;
                               public void clickOnFormAndResourcesLink() throws InterruptedException {
                                    RallyDashboard rallydashboardpage = (RallyDashboard) loginScenario.getBean(PageConstants.RALLY_DASHBOARDPAGE);
                                               Thread.sleep(5000);
-                                              rallydashboardpage.scroll();   
+                                                
                                   FormsAndResourcesPage formsAndResourcesPage = rallydashboardpage.navigatetoFormsnResources();     
                                   getLoginScenario().saveBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE, formsAndResourcesPage);
                                               
@@ -123,12 +123,13 @@ import cucumber.api.java.en.Then;
                          public void linksdisplayedforactivemembers() throws InterruptedException
                          {
 			                   FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);        	  
-			                                             
+			                   Thread.sleep(2000); 
+			                   formsAndResourcesPage.scroll();
 			                   formsAndResourcesPage.getOrderPlanMaterialLink().isDisplayed();
-			                   Thread.sleep(2000);
-			                                        
+			               
+			                   Thread.sleep(2000);                    
 			                   formsAndResourcesPage.getTemporaryIdcardlink().isDisplayed();
-			                   Thread.sleep(2000);                     
+			                                      
                        
                          }                              
                                               
@@ -154,6 +155,7 @@ import cucumber.api.java.en.Then;
                                                               memberAttributesMap.put(memberAttributesRow.get(i).getCells()
                                                                                               .get(0), memberAttributesRow.get(i).getCells().get(1));
                                               }
+                                              formsAndResourcesPage.scroll();
                                               String eobMedicalLink = memberAttributesMap.get("EOB_MEDICAL_LINK");
                                               String eobDrugLink = memberAttributesMap.get("EOB_DRUG_LINK");
                                               try {
@@ -199,6 +201,7 @@ import cucumber.api.java.en.Then;
                                                               memberAttributesMap.put(memberAttributesRow.get(i).getCells()
                                                                                               .get(0), memberAttributesRow.get(i).getCells().get(1));
                                               }
+                                              formsAndResourcesPage.scroll();
                                               String renewMagazine = memberAttributesMap.get("RENEW_MAGAZINE_SECTION");
                                               String isRenewMagazineVisible = isButtonVisible(formsAndResourcesPage.getRenewMagazineSection()) ?"YES": "NO";
                                               Assert.assertEquals(renewMagazine, isRenewMagazineVisible);
@@ -225,9 +228,11 @@ import cucumber.api.java.en.Then;
                               @And("^clicking on the view temporary id card link user is navigated to rallydashboard page$")
                               public void clicklinksonplanmaterials() throws InterruptedException  {
                                               FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+                                              Thread.sleep(10000);
+                                             formsAndResourcesPage.scroll();
                                               formsAndResourcesPage.getTemporaryIdcardlink().isDisplayed();
-                                              Thread.sleep(2000);
-                                              formsAndResourcesPage.scroll();
+                                              
+                                              
                                               formsAndResourcesPage.validatenclickIDCard();
                                               
                                               
@@ -253,6 +258,7 @@ import cucumber.api.java.en.Then;
                                                               memberAttributesMap.put(memberAttributesRow.get(i).getCells()
                                                                                               .get(0), memberAttributesRow.get(i).getCells().get(1));
                                               }
+                                              formsAndResourcesPage.scroll();
                                               String  anocsection = memberAttributesMap.get("ANOC_SECTION");
                                               String isANOCSECTIONVisible = isButtonVisible(formsAndResourcesPage.getANOCSection()) ?"YES": "NO";
                                               Assert.assertEquals(anocsection, isANOCSECTIONVisible);
@@ -279,6 +285,7 @@ import cucumber.api.java.en.Then;
                                                               memberAttributesMap.put(memberAttributesRow.get(i).getCells()
                                                                                               .get(0), memberAttributesRow.get(i).getCells().get(1));
                                               }
+                                              formsAndResourcesPage.scroll();
                                               String AnnualDirectoriesSection = memberAttributesMap.get("ANNUAL_DIRECTORIES_SECTION");
                                               String providersearchLink = memberAttributesMap.get("PROVIDER_SEARCHLINK");
                                               String pharmacylocatorLink = memberAttributesMap.get("PHARMACY_SEARCHLINK");
@@ -306,6 +313,8 @@ import cucumber.api.java.en.Then;
                                               
                                               FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
                                               Thread.sleep(5000);
+                                              formsAndResourcesPage.scroll();
+                                              
                                             /*  formsAndResourcesPage.clickonperceptionpopup();*/
                                               System.out.println("fnr section");
                                               if(formsAndResourcesPage.getFormsandResourcesSection().isDisplayed())

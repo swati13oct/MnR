@@ -315,7 +315,7 @@ public class MRConstants {
   
   public static final String TEAM_T_NEW_TESTHANESS_URL = "https://team-t-medicare.ose-elr-core.optum.com/medicare/login/overview.html?testharness=true";
 
-   
+  public static String DEREGISTER_TEST_URL = "https://apsrt0245.uhc.com:9443/PartDPortalWeb/deregister.jsp";
 
   public static String getDomain() {
 		return (MRScenario.domain == null || MRScenario.domain.equals("")) ? "uhc.com" : MRScenario.domain;

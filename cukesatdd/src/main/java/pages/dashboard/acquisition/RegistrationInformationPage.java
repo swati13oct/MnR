@@ -141,7 +141,7 @@ public class RegistrationInformationPage extends UhcDriver {
                 */
 
                 /** The already existing member account error message. */
-                @FindBy(id = "existing_member_error")
+                @FindBy(xpath = "//p[contains(text(),'The member information entered already has an online account.')]")
                 private WebElement existingMember;
 
                 /** The inactive or terminated error message. */

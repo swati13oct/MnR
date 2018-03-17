@@ -71,7 +71,7 @@ public class NewLoginPage extends UhcDriver {
                start(REDESIGN_LOGIN_URL);
                System.out.println("user is on Team-Ci1 Environment");
         }
-        else
+        else if (MRScenario.environmentMedicare.equalsIgnoreCase("test-a"))
         {
                start(PAGE_URL_TEAM_MEDICARE_TESTHARNESS);
                System.out.println("User is on Medicare Test harness page");  
@@ -114,11 +114,16 @@ public class NewLoginPage extends UhcDriver {
 					
 				} 
 		   
-		Thread.sleep(40000);
+		Thread.sleep(20000);
 		
-		System.out.println("30 seconds completed");
+		System.out.println("20 seconds completed");
+		
+		if(currentUrl().contains("testharness"))
+		{
+			return new RallyDashboard(driver);
+		}
 		    
-		if(currentUrl().contains("/dashboard"))
+		else if(currentUrl().contains("/dashboard"))
 
 		{
 		return new RallyDashboard(driver);
@@ -131,7 +136,7 @@ public class NewLoginPage extends UhcDriver {
 		
 		}
 		
-		return null;
+	  return null;
 	}
 
 	

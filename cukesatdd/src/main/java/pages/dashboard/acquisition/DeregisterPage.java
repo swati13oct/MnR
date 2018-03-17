@@ -20,6 +20,9 @@ public class DeregisterPage extends UhcDriver {
     
     /** The Deregister page url for stage */
     private static String StageDeregisterURL = MRConstants.DEREGISTER_STAGE_URL;
+    
+    /** The Deregister page url for test */
+    private static String TestDeregisterURL = MRConstants.DEREGISTER_TEST_URL;  
 
 
                 /** The user Id to be deregistered. */
@@ -44,6 +47,13 @@ public void navigateToDeregisterUrls()
         start(StageDeregisterURL);
         System.out.println("user is on Team-Ci1 Environment for deregistering");
  }
+ else if (MRScenario.environmentMedicare.equalsIgnoreCase("test-a")) {
+     
+     start(TestDeregisterURL);
+     System.out.println("user is on Test Environment for deregistering");
+}       
+	       
+	       
  else
  {
         start(PAGE_URL);
