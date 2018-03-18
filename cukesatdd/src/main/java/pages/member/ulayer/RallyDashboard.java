@@ -144,6 +144,10 @@ public class RallyDashboard extends UhcDriver{
     	jse.executeScript("window.scrollBy(0,600)", "");
     	
 	}
+	
+	/*public void handleperception() {
+		
+	}*/
 
 
 }

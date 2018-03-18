@@ -50,7 +50,7 @@ public class FormsAndResourcesPage extends UhcDriver {
                 private WebElement eobMedicalButton;
 
                 /** Drug button in EOB section */
-                @FindBy(xpath = "(//*[contains(text(),'Drug EOB')])[3]")
+                @FindBy(xpath = "(//*[contains(text(),'Drug EOB')])[4]")
                 private WebElement eobDrugButton;
                 
                 /** Renew Magazine Section - Forms And Resources page */
@@ -88,7 +88,7 @@ public class FormsAndResourcesPage extends UhcDriver {
                 private WebElement AnocSection; 
                 
             /** Annual Directories Section**/
-                @FindBy(xpath ="(//*[contains(text(),'Annual Directories')])[2]")
+                @FindBy(xpath ="(//*[contains(text(),'Annual Directories')])[3]")
                 private WebElement AnnualDirectorySection;
                 
                 /*Provider Search Link*/
@@ -359,18 +359,22 @@ public class FormsAndResourcesPage extends UhcDriver {
                 }
 
 				
-				    public void scroll() {
+		 public void scroll() {
 				    	JavascriptExecutor jse = (JavascriptExecutor)driver;
 				    	jse.executeScript("window.scrollBy(0,150)", "");
 				    	
-				    }
+		    }
 			public void checkOrderPlanMaterialLinkforterminated(){
 				Assert.assertTrue(!(validate(OrderPlanMaterialLink)));
 				
 				
 			}
-				
-                
+			
+			public void validateshipeob()
+			{
+				WebElement shipeob= driver.findElement(By.xpath("(//*[contains(text(),'Medical EOB')])[7]"));
+                validate(shipeob);
+			}
                 
                 
 }

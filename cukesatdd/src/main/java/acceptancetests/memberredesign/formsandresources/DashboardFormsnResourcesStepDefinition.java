@@ -225,15 +225,13 @@ import cucumber.api.java.en.Then;
                               /**
                                * @toDo : clicks order plan materials and view temporary id card links
                                */
-                              @And("^clicking on the view temporary id card link user is navigated to rallydashboard page$")
+                              @And("^clicks on the view temporary id card link$")
                               public void clicklinksonplanmaterials() throws InterruptedException  {
                                               FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
                                               Thread.sleep(10000);
-                                             formsAndResourcesPage.scroll();
-                                              formsAndResourcesPage.getTemporaryIdcardlink().isDisplayed();
-                                              
-                                              
-                                              formsAndResourcesPage.validatenclickIDCard();
+                                            
+                                           formsAndResourcesPage.getTemporaryIdcardlink().isDisplayed(); 
+                                           formsAndResourcesPage.validatenclickIDCard();
                                               
                                               
                               }
@@ -304,6 +302,21 @@ import cucumber.api.java.en.Then;
                                               Assert.assertEquals(AnnualDirectoriesSection, isannualdirectoryVisible);
                                               
                               }
+                              /**
+                               * @throws InterruptedException 
+                             * @toDo : verifies the eob statemnets for ship member
+                               */
+                              
+                              @And("^validate that the EOB statemnets section is displayed$")
+                             public void validateEOBship() throws  InterruptedException {
+                            	  FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+                                  Thread.sleep(5000);
+                                  System.out.println("eob section");
+                                  formsAndResourcesPage.validateshipeob();
+                              }
+                              
+                              
+                              
                               /**
                                * @throws InterruptedException 
                              * @toDo : verifies the forms and resources section
