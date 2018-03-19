@@ -26,6 +26,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import atdd.framework.MRScenario;
+import junit.framework.Assert;
 
 /**
  * @author pjaising
@@ -36,7 +37,7 @@ public class CommonUtility {
 	private static String MRREST_TIME_ADMIN_URL = MRConstants.MRREST_TIME_ADMIN_URL;
 
 	private static String PARTD_TIME_ADMIN_URL = MRConstants.PARTD_TIME_ADMIN_URL;
-	
+
 	public static boolean checkPageIsReady(WebDriver driver) {
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -76,8 +77,8 @@ public class CommonUtility {
 	}
 
 	public static JSONObject mergeJson(JSONObject toJson, JSONObject fromJson) {
-		System.out.println("toJson"+toJson);
-		System.out.println("fromJson"+fromJson);
+		System.out.println("toJson" + toJson);
+		System.out.println("fromJson" + fromJson);
 
 		Iterator<?> itr = fromJson.keys();
 		while (itr.hasNext()) {
@@ -94,7 +95,7 @@ public class CommonUtility {
 	}
 
 	public static void waitForPageLoad(WebDriver driver, WebElement element, long timeout) {
-		
+
 		WebDriverWait wait = new WebDriverWait(driver, timeout);
 		try {
 			WebElement elementExpected = wait.until(ExpectedConditions.visibilityOf(element));
@@ -177,7 +178,7 @@ public class CommonUtility {
 
 		String completeDateUrl = MRREST_TIME_ADMIN_URL + dateURL;
 
-		WebDriver wd = mrScenario.getWebDriver();
+		WebDriver wd = mrScenario.getWebDriverNew();
 		wd.get(completeDateUrl);
 		wd.quit();
 	}
@@ -209,7 +210,7 @@ public class CommonUtility {
 
 		String completeDateUrl = PARTD_TIME_ADMIN_URL + dateURL;
 
-		WebDriver wd = mrScenario.getWebDriver();
+		WebDriver wd = mrScenario.getWebDriverNew();
 		wd.get(completeDateUrl);
 		wd.quit();
 	}
@@ -217,7 +218,7 @@ public class CommonUtility {
 	public static void resetMRRestTime(MRScenario mrScenario) {
 		String dateURL = "jvm?server=1";
 		String completeDateUrl = MRREST_TIME_ADMIN_URL + dateURL;
-		WebDriver wd = mrScenario.getWebDriver();
+		WebDriver wd = mrScenario.getWebDriverNew();
 		wd.get(completeDateUrl);
 		wd.quit();
 	}
@@ -225,7 +226,7 @@ public class CommonUtility {
 	public static void resetPartDTime(MRScenario mrScenario) {
 		String dateURL = "jvm?server=1";
 		String completeDateUrl = PARTD_TIME_ADMIN_URL + dateURL;
-		WebDriver wd = mrScenario.getWebDriver();
+		WebDriver wd = mrScenario.getWebDriverNew();
 		wd.get(completeDateUrl);
 		wd.quit();
 
@@ -251,7 +252,7 @@ public class CommonUtility {
 	}
 
 	public static JSONObject checkForVariable(WebDriver driver, String filePath, String dtmDir) {
-		 //Read the file containing dtm script variables
+		// Read the file containing dtm script variables
 		JSONObject getTags = MRScenario.readExpectedJson(filePath, dtmDir);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		JSONObject dtmObject = new JSONObject();
@@ -266,7 +267,7 @@ public class CommonUtility {
 				String val = js.executeScript("return " + value).toString();
 				dtmObject.put(key, val);
 			} catch (JSONException e) {
-               System.out.println("Something wrong with the JSON key "+ key);
+				System.out.println("Something wrong with the JSON key " + key);
 				e.printStackTrace();
 			}
 		}
@@ -277,7 +278,7 @@ public class CommonUtility {
 	public static void deRegister(MRScenario mrScenario, String username) {
 
 		if (System.getProperty("environment").equalsIgnoreCase("ci")) {
-			WebDriver driver = mrScenario.getWebDriver();
+			WebDriver driver = mrScenario.getWebDriverNew();
 			driver.get("http://partdtemp-ci.ose.optum.com/PartDPortalWeb/deregister.jsp");
 			driver.findElement(By.id("tobederegisteruser")).click();
 			driver.findElement(By.id("tobederegisteruser")).sendKeys(username);
@@ -285,7 +286,7 @@ public class CommonUtility {
 			driver.quit();
 		}
 		if (System.getProperty("environment").equalsIgnoreCase("stage")) {
-			WebDriver driver = mrScenario.getWebDriver();
+			WebDriver driver = mrScenario.getWebDriverNew();
 			driver.get("http://apsrs0261.uhc.com:9080/PartDPortalWeb/deregister.jsp");
 			driver.findElement(By.id("tobederegisteruser")).click();
 			driver.findElement(By.id("tobederegisteruser")).sendKeys(username);
@@ -293,7 +294,7 @@ public class CommonUtility {
 			driver.quit();
 		}
 		if (System.getProperty("environment").equalsIgnoreCase("test-a")) {
-			WebDriver driver = mrScenario.getWebDriver();
+			WebDriver driver = mrScenario.getWebDriverNew();
 			driver.get("http://apsrt0245.uhc.com:9080/PartDPortalWeb/deregister.jsp");
 			driver.findElement(By.id("tobederegisteruser")).click();
 			driver.findElement(By.id("tobederegisteruser")).sendKeys(username);
@@ -301,7 +302,7 @@ public class CommonUtility {
 			driver.quit();
 		}
 		if (System.getProperty("environment").equalsIgnoreCase("test-b")) {
-			WebDriver driver = mrScenario.getWebDriver();
+			WebDriver driver = mrScenario.getWebDriverNew();
 			driver.get("http://apsrt0247.uhc.com:9080/PartDPortalWeb/deregister.jsp");
 			driver.findElement(By.id("tobederegisteruser")).click();
 			driver.findElement(By.id("tobederegisteruser")).sendKeys(username);
@@ -311,49 +312,34 @@ public class CommonUtility {
 
 	}
 
-	public static void createVersionFile(MRScenario mrScenario) {		
+	public static void createVersionFile(MRScenario mrScenario) {
 		if (System.getProperty("environment").equalsIgnoreCase("ci")) {
-			WebDriver wd = mrScenario.getWebDriver();
+			WebDriver wd = mrScenario.getWebDriverNew();
 			try {
 				int widthMaxLimit = 45;
-				PrintWriter writer = new PrintWriter("target/version.txt",
-						"UTF-8");
+				PrintWriter writer = new PrintWriter("target/version.txt", "UTF-8");
 				String headerCol1 = "Artifact Name";
-				String headerLine = headerCol1
-						+ String.format(
-								"%" + (widthMaxLimit - headerCol1.length())
-										+ "s", "") + "Build Number";
+				String headerLine = headerCol1 + String.format("%" + (widthMaxLimit - headerCol1.length()) + "s", "")
+						+ "Build Number";
 				writer.println(headerLine);
 
 				try {
 					wd.get("https://ci-generic.uhc.com/content/cqartifactsversion.html");
-					List<WebElement> rows = wd
-							.findElements(By
-									.xpath("//table[@id='package_info_table']/tbody/tr"));
+					List<WebElement> rows = wd.findElements(By.xpath("//table[@id='package_info_table']/tbody/tr"));
 
 					for (WebElement row : rows) {
-						String artifactName = row
-								.findElements(By.tagName("td")).get(0)
-								.getText();
-						String buildNumber = row.findElements(By.tagName("td"))
-								.get(1).getText();
+						String artifactName = row.findElements(By.tagName("td")).get(0).getText();
+						String buildNumber = row.findElements(By.tagName("td")).get(1).getText();
 						row.findElements(By.tagName("td")).get(2).getText();
 						String line = artifactName
-								+ String.format(
-										"%"
-												+ (widthMaxLimit - artifactName
-														.length()) + "s", "")
-								+ buildNumber;
+								+ String.format("%" + (widthMaxLimit - artifactName.length()) + "s", "") + buildNumber;
 						writer.println(line);
 					}
 				} catch (Exception e1) {
 					// e1.printStackTrace();
 					String cqAritifacts = "CQ Artifacts";
 					String mrrLine = cqAritifacts
-							+ String.format(
-									"%"
-											+ (widthMaxLimit - cqAritifacts
-													.length()) + "s", "")
+							+ String.format("%" + (widthMaxLimit - cqAritifacts.length()) + "s", "")
 							+ "Failed to load CQ Artifacts Info(Deployment Failed)";
 					writer.println(mrrLine);
 					System.out.println("ERROR getting CQ Artifacts version");
@@ -363,47 +349,31 @@ public class CommonUtility {
 					wd.get("http://mrrest-ci.ose.optum.com/MRRestWAR/version.jsp");
 
 					String mrrLine = mrrestAppName
-							+ String.format("%"
-									+ (widthMaxLimit - mrrestAppName.length())
-									+ "s", "")
-							+ wd.findElement(
-									By.xpath("//table[@class='outer']/tbody/tr[3]/td[2]"))
-									.getText();
+							+ String.format("%" + (widthMaxLimit - mrrestAppName.length()) + "s", "")
+							+ wd.findElement(By.xpath("//table[@class='outer']/tbody/tr[3]/td[2]")).getText();
 					writer.println(mrrLine);
 				} catch (Exception e2) {
 					// e.printStackTrace();
 					String mrrLine = mrrestAppName
-							+ String.format("%"
-									+ (widthMaxLimit - mrrestAppName.length())
-									+ "s", "")
+							+ String.format("%" + (widthMaxLimit - mrrestAppName.length()) + "s", "")
 							+ "Failed to load Build Number(Deployment Failed)";
 					writer.println(mrrLine);
-					System.out
-							.println("ERROR getting MRREST application version");
+					System.out.println("ERROR getting MRREST application version");
 				}
 				String partdAppName = "PartDPortalWeb";
 				try {
 					wd.get("http://partdtemp-ci.ose.optum.com/PartDPortalWeb/version.jsp");
 					String partDLine = partdAppName
-							+ String.format(
-									"%"
-											+ (widthMaxLimit - partdAppName
-													.length()) + "s", "")
-							+ wd.findElement(
-									By.xpath("//table[@class='outer']/tbody/tr[7]/td[2]"))
-									.getText();
+							+ String.format("%" + (widthMaxLimit - partdAppName.length()) + "s", "")
+							+ wd.findElement(By.xpath("//table[@class='outer']/tbody/tr[7]/td[2]")).getText();
 					writer.println(partDLine);
 				} catch (Exception e3) {
 					// e.printStackTrace();
 					String partDLine = partdAppName
-							+ String.format(
-									"%"
-											+ (widthMaxLimit - partdAppName
-													.length()) + "s", "")
+							+ String.format("%" + (widthMaxLimit - partdAppName.length()) + "s", "")
 							+ "Failed to load Build Number(Deployment Failed)";
 					writer.println(partDLine);
-					System.out
-							.println("ERROR getting PartD application version");
+					System.out.println("ERROR getting PartD application version");
 				}
 				writer.close();
 			} catch (Exception e) {
@@ -411,5 +381,53 @@ public class CommonUtility {
 			}
 			wd.quit();
 		}
+	}
+
+	/***
+	 * the method waits for a given time till element gets visible
+	 * 
+	 * @param driver
+	 * @param element
+	 * @param timeout
+	 */
+	public static void waitForPageLoadNew(WebDriver driver, WebElement element, long timeout) {
+
+		WebDriverWait wait = new WebDriverWait(driver, timeout);
+		try {
+			WebElement elementExpected = wait.until(ExpectedConditions.visibilityOf(element));
+			if (elementExpected.isDisplayed()) {
+				System.out.println("The element: " + elementExpected + " is visible");
+			}
+
+		} catch (Exception e) {
+			System.out.println("Not able to locate this element -- " + element + " on page");
+			System.out.println(e.getMessage());
+		}
+
+	}
+
+	/***
+	 * the waits till page state becomes complete
+	 * 
+	 * @param driver
+	 * @return
+	 */
+	public static boolean checkPageIsReadyNew(WebDriver driver) {
+
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+
+		for (int counter = 0; counter <= 23; counter++) {
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			if (js.executeScript("return document.readyState").toString().equals("complete")) {
+				System.out.println("Browser Page -- " + driver.getTitle() + " -- Is loaded.");
+				return true;
+			}
+		}
+		Assert.fail("TimeOut!!! Page not loaded");
+		return false;
 	}
 }
