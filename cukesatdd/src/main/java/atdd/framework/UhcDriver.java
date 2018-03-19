@@ -9,10 +9,9 @@ import java.util.concurrent.TimeUnit;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
-import org.openqa.selenium.JavascriptExecutor;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -23,7 +22,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
-
+import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
 
 /**
  * @author pjaising
@@ -123,7 +123,6 @@ public abstract class UhcDriver {
     	        try {
     	         waitforElement(element);
     	            if (element.isDisplayed()) {
-
     	                   Actions actions = new Actions(driver);
     	                   actions.moveToElement(element);
     	                   actions.perform();
@@ -131,7 +130,6 @@ public abstract class UhcDriver {
     	                   System.out.println("@@@The element " + element.getText() + "is found@@@");
     	            }
     	     } catch (Exception e) {
-
     	            Assert.fail("The element " + element.getText() + "is not  found");
     	         return false;
     	     }
