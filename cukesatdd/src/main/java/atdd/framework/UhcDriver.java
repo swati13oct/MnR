@@ -22,7 +22,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
-
+import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
 
 /**
  * @author pjaising
