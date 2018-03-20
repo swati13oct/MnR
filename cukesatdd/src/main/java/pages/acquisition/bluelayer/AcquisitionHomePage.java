@@ -389,6 +389,22 @@ public class AcquisitionHomePage extends GlobalWebElements {
                 }
                 return null;
         }
+        
+        public VPPPlanSummaryPage searchPlans(String zipcode) {
+            sendkeys(zipCodeField, zipcode);
+            viewPlansButton.click();
+            try {
+                    Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+            }
+            if (driver.getTitle().equalsIgnoreCase(
+                            "Our Medicare Plan Types | UnitedHealthcare®")) {
+                    return new VPPPlanSummaryPage(driver);
+            }
+            return null;
+    }
 
         public VPPPlanSummaryPage searchPlansForLearnFindPlans(String zipcode,
                         String countyName) {

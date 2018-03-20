@@ -14,10 +14,12 @@ import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.EnquiryKitConfirmationPage;
+import pages.acquisition.ulayer.IntroductionInformationPage;
 import pages.acquisition.ulayer.PDPEnrollementGuidePage;
 import pages.acquisition.ulayer.PDPRequestHelpAndInformationPage;
 
@@ -110,5 +112,44 @@ public class PDPEnquiryKitStepDefintionAARP {
 			else
 				Assert.fail("Error in validating confirmation page");
 		}
-	}	
+	
+	}
+	@Then("^the user validates the correct formatting for Medicare ID field$")
+	public void the_user_validates_the_correct_formatting_for_Medicare_ID_field(DataTable arg1) throws Throwable {
+		List<DataTableRow> personalAttributesRow = arg1
+				.getGherkinRows();
+		Map<String, String> personalAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < personalAttributesRow.size(); i++) {
+
+			personalAttributesMap.put(personalAttributesRow.get(i).getCells()
+					.get(0), personalAttributesRow.get(i).getCells().get(1));
+		}
+		
+		String ValidFormatFlag = personalAttributesMap.get("Valid Format");
+		
+		PDPEnrollementGuidePage pdpEnrollementGuidePage = (PDPEnrollementGuidePage) getLoginScenario()
+				.getBean(PageConstants.PDP_ENROLLMENT_GUIDE_PAGE);
+		boolean MedicareValidFlag= ValidFormatFlag.contains("true")?true:false;
+		boolean Flag = pdpEnrollementGuidePage
+				.ValidateMedicareIDformat(MedicareValidFlag);
+		System.out.println("Medicare ID validated - "+Flag);
+		
+		getLoginScenario().saveBean(
+				PageConstants.PDP_ENROLLMENT_GUIDE_PAGE,
+				pdpEnrollementGuidePage);
+		if (Flag) {
+			System.out.println("Medicare ID validation Passed");
+				Assert.assertTrue(true);
+		} 
+		else{
+			Assert.fail("ERROR Validating Medicare ID field");
+		}
+	}
+
+
+		
 }
+	
+
+	
+	

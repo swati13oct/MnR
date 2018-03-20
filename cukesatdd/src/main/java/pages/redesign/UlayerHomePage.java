@@ -37,7 +37,9 @@ public class UlayerHomePage extends UhcDriver {
 	@FindBy(xpath = "//h1[contains(text(), 'Explanation of Benefits')]")
 	private WebElement EOBPageHeader;
 
-
+	@FindBy(xpath = "//*[contains(text(), 'Plan Benefits Summary')]")
+	private WebElement BnCPageHeader;
+	
 	@FindBy(xpath = "//a[contains(text(), 'Go to My Profile and Preferences_Redesign')]")
 	private WebElement MyProfileLink;
 
@@ -152,9 +154,16 @@ public class UlayerHomePage extends UhcDriver {
 		}
 	}
 
-	public EoBSearchPage navigateToBenefitsAndCoverage() throws InterruptedException {
-		driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/eob.html");
+	public EoBSearchPage navigateToEOBsearchPage() throws InterruptedException {
+		driver.navigate().to(Page_URL+".com/content/medicare/member/eob.html");
 		//EOBsearchLink.click();
+		
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		CommonUtility.checkPageIsReady(driver);
 
@@ -166,6 +175,30 @@ public class UlayerHomePage extends UhcDriver {
 		}
 	}
 
+	/**
+	 * 
+	 * 
+	 */
+	public BenefitsAndCoveragePage navigateToBenefitsAndCoverage() throws InterruptedException {
+		driver.navigate().to(Page_URL+".com/content/medicare/member/benefits/overview.html");
+		//EOBsearchLink.click();
+		
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		CommonUtility.checkPageIsReady(driver);
+
+		if (validate(BnCPageHeader)) {
+			System.out.println("Benefits and Coverage Page loaded");
+			return new BenefitsAndCoveragePage(driver);
+		} else {
+			return null;
+		}
+	}
 	@Override
 	public void openAndValidate() {
 		CommonUtility.checkPageIsReady(driver);
