@@ -678,6 +678,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 	
 	public PharmacySearchPage navigateToPharmacyLocator() {
+		driver.manage().window().maximize();
 		pharmacyNearLink.click();
 		for(int i=0;i<10;i++){
 			try {

@@ -125,7 +125,7 @@ node('docker-maven-slave') {
         }
 
         echo "Build complete"
-		archiveArtifacts artifacts: '**/target/*.war , **/target/*.ear, **/build/*.zip, **/build_info.txt, **/build.properties', fingerprint: true
+		archiveArtifacts artifacts: '**/target/*.war , **/target/*.ear, **/build/*.zip, **/build_info.txt, **/build.properties, **/target/*pmd.xml', fingerprint: true
     }
     echo "Build complete"
 	
