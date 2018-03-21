@@ -8,14 +8,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
-import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.openqa.selenium.By;
-
 import pages.memberrdesignVBF.BenefitsAndCoveragePage;
 import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.memberrdesignVBF.TestHarness;
@@ -27,9 +22,7 @@ import atdd.framework.MRScenario;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 import cucumber.api.DataTable;
-import org.openqa.selenium.WebElement;
 
 /**
  * @author pagarwa5
@@ -45,11 +38,12 @@ public class BenefitsAndCoverageStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-/***
- * 
- * @param memberAttributes
- * @throws InterruptedException
- */
+
+	/***
+	 * 
+	 * @param memberAttributes
+	 * @throws InterruptedException
+	 */
 	@Given("^registered member with following details logins in the member portal$")
 	public void login_with_member(DataTable memberAttributes) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
@@ -110,9 +104,9 @@ public class BenefitsAndCoverageStepDefinition {
 
 	}
 
-/***
- * 
- */
+	/***
+	 * 
+	 */
 	@Then("^the user validates Needhelp header and disclaimer link")
 	public void validateneedhelpheader() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -120,18 +114,19 @@ public class BenefitsAndCoverageStepDefinition {
 		benefitsCoveragePage.validateNeedhelpheader();
 	}
 
-/***
- * 
- */
+	/***
+	 * 
+	 */
 	@Then("^the user clicks on Disclaimers link$")
 	public void the_user_clicks_on_Disclaimers_link() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE_VBF);
 		benefitsCoveragePage.clickOnDisclaimers();
 	}
-/***
- * 
- */
+
+	/***
+	 * 
+	 */
 	@And("^the user validates view and document label$")
 	public void user_validates_view_and_document_label() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -142,9 +137,9 @@ public class BenefitsAndCoverageStepDefinition {
 
 	}
 
-/***
- * 
- */
+	/***
+	 * 
+	 */
 	@And("^the user validates Drug coverage header and text under the section")
 	public void user_validates__drugcoverage_section() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -152,18 +147,19 @@ public class BenefitsAndCoverageStepDefinition {
 		benefitsCoveragePage.validatedrugcoverageheaderandtext();
 	}
 
-/***
- * 
- */
+	/***
+	 * 
+	 */
 	@And("^the user validates Look Up Drugs button should be visible")
 	public void user_validates_lookupdrugsbuuton() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE_VBF);
 		benefitsCoveragePage.validatelookupdrugsbutton();
 	}
-/***
- * 
- */
+
+	/***
+	 * 
+	 */
 	@And("^the user view the Drug Copays & Discounts header")
 	public void user_view_drugcopayanddiscountheader() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -172,9 +168,9 @@ public class BenefitsAndCoverageStepDefinition {
 
 	}
 
-/***
- * 
- */
+	/***
+	 * 
+	 */
 	@And("^the user validates Locate a Pharmacy button should be visible")
 	public void user_validate_locatepharmacybutton() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -182,9 +178,9 @@ public class BenefitsAndCoverageStepDefinition {
 		benefitsCoveragePage.validate_locateapharmacysection();
 	}
 
-/***
- * 
- */
+	/***
+	 * 
+	 */
 	@And("^the user validates dropdown selection functionality")
 	public void user_validate_dropdwonvalues() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -192,9 +188,9 @@ public class BenefitsAndCoverageStepDefinition {
 		benefitsCoveragePage.validate_drugcostdropdownoptions();
 	}
 
-/***
- * 
- */
+	/***
+	 * 
+	 */
 	@And("^user validates the Learn More section link for stage and tier")
 	public void user_validate_links() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -202,9 +198,9 @@ public class BenefitsAndCoverageStepDefinition {
 		benefitsCoveragePage.validate_learnmoreaboutlink();
 	}
 
-/***
- * 
- */
+	/***
+	 * 
+	 */
 	@And("the user should see drug copay and discount table")
 	public void user_validate_drugcopaydiscounttable() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -212,9 +208,9 @@ public class BenefitsAndCoverageStepDefinition {
 		benefitsCoveragePage.validatedrugcopaytable();
 	}
 
-/***
- * 
- */
+	/***
+	 * 
+	 */
 	@And("the user validates plan overview section")
 	public void user_validate_planOverview() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -222,9 +218,9 @@ public class BenefitsAndCoverageStepDefinition {
 		benefitsCoveragePage.validatePlanOverview();
 	}
 
-/***
- * 
- */
+	/***
+	 * 
+	 */
 	@And("the user validates headers on Bnc page for indi members")
 	public void user_validate_Headers() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -232,37 +228,40 @@ public class BenefitsAndCoverageStepDefinition {
 		benefitsCoveragePage.validateHeaders();
 	}
 
-/***
- * 
- */
+	/***
+	 * 
+	 */
 	@And("the user validates the Primarycare Provider section")
 	public void user_validate_PrimaryCareProv() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE_VBF);
 		benefitsCoveragePage.validatePrimaryCareProvider();
 	}
-/***
- * 
- */
+
+	/***
+	 * 
+	 */
 	@And("user validates the Primarycare Provider section for Group")
 	public void user_validate_PrimaryCareProvForHmo() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE_VBF);
 		benefitsCoveragePage.validatePrimaryCareProviderForGroup();
 	}
-/***
- * 
- */
+
+	/***
+	 * 
+	 */
 	@And("the user validates the Out of Pocket Max section")
 	public void user_validate_OutofPocket() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE_VBF);
 		benefitsCoveragePage.validateOutofPocketMax();
 	}
-/***
- * 
- * @throws InterruptedException
- */
+
+	/***
+	 * 
+	 * @throws InterruptedException
+	 */
 	@And("^the user navigates to Rally Dashboard Page for bnc$")
 	public void user_navigates_to_RallyDashboardPage_Page() throws InterruptedException {
 		BenefitsAndCoveragePage benefitsCoveragePage;

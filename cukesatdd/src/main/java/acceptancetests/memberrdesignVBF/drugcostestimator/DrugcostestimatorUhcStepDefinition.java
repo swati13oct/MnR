@@ -22,10 +22,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.memberrdesignVBF.RallyDashboardPage;
-import pages.memberrdesignVBF.SavingsOppurtunity;
 import pages.memberrdesignVBF.TestHarness;
-import pages.memberrdesignVBF.AddDrugDetails;
-import pages.memberrdesignVBF.AddNewDrugModal;
 import pages.memberrdesignVBF.DrugCostEstimatorPage;
 import pages.memberrdesignVBF.LoginPage;
 
@@ -33,15 +30,15 @@ public class DrugcostestimatorUhcStepDefinition {
 
 	@Autowired
 	MRScenario loginScenario;
-	private String userName = null;
 
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-/***
- * 
- * @param memberAttributes
- */
+
+	/***
+	 * 
+	 * @param memberAttributes
+	 */
 	@Given("^I am a registered member using the new M&R member portal on a desktop computer$")
 	public void i_am_an_uhc_individual_member_on_the_dashboard_site(DataTable memberAttributes) {
 		WebDriver wd = getLoginScenario().getWebDriverNew();
@@ -88,10 +85,10 @@ public class DrugcostestimatorUhcStepDefinition {
 
 	}
 
-/***
- * 
- * @throws InterruptedException
- */
+	/***
+	 * 
+	 * @throws InterruptedException
+	 */
 	@When("^the above plantype user logs in member redesign for DCE$")
 	public void plantype_user_logs_in() throws InterruptedException {
 		String userName = (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
@@ -117,10 +114,11 @@ public class DrugcostestimatorUhcStepDefinition {
 		}
 
 	}
-/***
- * 
- * @throws InterruptedException
- */
+
+	/***
+	 * 
+	 * @throws InterruptedException
+	 */
 	@When("^I access the page containing the DCE tool$")
 	public void I_access_the_page_containing_the_DCE_tool() throws InterruptedException {
 		DrugCostEstimatorPage dcePage;
@@ -139,10 +137,10 @@ public class DrugcostestimatorUhcStepDefinition {
 
 	}
 
-/***
- * 
- * @throws InterruptedException
- */
+	/***
+	 * 
+	 * @throws InterruptedException
+	 */
 	@And("^I navigate to step2 page$")
 	public void I_navigate_to_step2_page() throws InterruptedException {
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
@@ -151,11 +149,11 @@ public class DrugcostestimatorUhcStepDefinition {
 
 	}
 
-/***
- * 
- * @param memberAttributes
- * @throws InterruptedException
- */
+	/***
+	 * 
+	 * @param memberAttributes
+	 * @throws InterruptedException
+	 */
 	@And("^I enter a US other territory zip code and click select$")
 	public void I_enter_a_US_other_territory_zip_code_and_click_select(DataTable memberAttributes)
 			throws InterruptedException {
@@ -173,9 +171,9 @@ public class DrugcostestimatorUhcStepDefinition {
 		dce.pharmacyInformation(zipcode);
 	}
 
-/***
- * 
- */
+	/***
+	 * 
+	 */
 	@Then("^I should see preferred mail service radio button under pharmacy type$")
 	public void I_should_see_preferred_mail_service_radio_button_under_pharmacy_type() {
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
@@ -184,10 +182,10 @@ public class DrugcostestimatorUhcStepDefinition {
 
 	}
 
-/***
- * 
- * @throws InterruptedException
- */
+	/***
+	 * 
+	 * @throws InterruptedException
+	 */
 	@And("^I select first pharmacy from standard network pharmacy type$")
 	public void I_select_this_pharmacy_from_standard_network_pharmacy_type() throws InterruptedException {
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
@@ -196,10 +194,11 @@ public class DrugcostestimatorUhcStepDefinition {
 		dce.select_first_pharmacy();
 
 	}
-/***
- * 
- * @throws InterruptedException
- */
+
+	/***
+	 * 
+	 * @throws InterruptedException
+	 */
 	@Then("^I should see that total estimated annual drug costs in summary section matches with left rail value$")
 	public void I_should_see_that_total_estimated_annual_drug_costs_in_summary_section_matches_with_left_rail_value()
 			throws InterruptedException {
@@ -210,10 +209,10 @@ public class DrugcostestimatorUhcStepDefinition {
 
 	}
 
-/***
- * 
- * @throws InterruptedException
- */
+	/***
+	 * 
+	 * @throws InterruptedException
+	 */
 	@And("^I navigate to step3 page$")
 	public void I_navigate_to_step3_page() throws InterruptedException {
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
@@ -222,9 +221,9 @@ public class DrugcostestimatorUhcStepDefinition {
 
 	}
 
-/***
- * 
- */
+	/***
+	 * 
+	 */
 	@Then("I should be presented the option to switch to the generic option")
 	public void I_should_be_presented_the_option_to_switch_to_the_generic_option() {
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
@@ -232,11 +231,11 @@ public class DrugcostestimatorUhcStepDefinition {
 		dce.validateSwitchGenericOption();
 	}
 
-/***
- * 
- * @param data
- * @throws InterruptedException
- */
+	/***
+	 * 
+	 * @param data
+	 * @throws InterruptedException
+	 */
 	@And("^I have added a drug to my drug list and a generic equivalent is available for the drug I have selected$")
 	public void I_have_added_a_drug_to_my_drug_list_and_a_generic_equivalent_is_available_for_the_drug_I_have_selected(
 			DataTable data) throws InterruptedException {

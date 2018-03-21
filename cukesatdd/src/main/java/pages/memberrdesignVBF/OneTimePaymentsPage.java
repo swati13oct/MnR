@@ -43,47 +43,8 @@ public class OneTimePaymentsPage extends UhcDriver {
 	@FindBy(id = "review-continue")
 	private WebElement reviewContinue;
 
-	@FindBy(xpath = "//div[@class='longform__row']//div[@class='margin-medium']/a[2]")
-	private WebElement AutoreviewContinue;
-
-	@FindBy(className = "error-count")
-	private WebElement ErrorMessageChkbox;
-
-	@FindBy(xpath = "//*[text()='cancel ']")
-	private WebElement onetimecancelbtn;
-
 	@FindBy(xpath = "//div[@id='atdd_electronicsignature_label']/div/fieldset/label")
 	private WebElement electronicSignatureCheck;
-
-	@FindBy(xpath = "//fieldset[@class='checkbox-block margin-small']/label")
-	private WebElement AutoEsignaturecheck;
-
-	@FindBy(xpath = "//*[text()='Edit Payment Information']")
-	private WebElement editPaymentInfo;
-
-	@FindBy(linkText = "CANCEL")
-	private WebElement CancelButton;
-
-	@FindBy(xpath = ".//*[@id='paymentHistoryApp']/div/div/div/div/h1")
-	private WebElement PaymentHistoryText;
-
-	@FindBy(name = "amount")
-	private WebElement amountRadioButton;
-
-	@FindBy(id = "middle-name")
-	private WebElement middleNameField;
-
-	@FindBy(id = "review-continue")
-	private WebElement continueButton;
-
-	@FindBy(xpath = "/html/body/div[6]/div/div/table/tbody/tr[5]/td/div[2]/div/div/div[2]/div[7]/div/div/div/div/form/div/div/div[2]/div/table[1]/tbody/tr[1]/td[2]")
-	private WebElement amountDisplayed;
-
-	@FindBy(xpath = "//*[@id='atdd_otheramount_label']/label")
-	private WebElement otherAmtRadioButton;
-
-	@FindBy(id = "other-amount-number")
-	private WebElement amountToBePaidField;
 
 	public OneTimePaymentsPage(WebDriver driver) {
 		super(driver);

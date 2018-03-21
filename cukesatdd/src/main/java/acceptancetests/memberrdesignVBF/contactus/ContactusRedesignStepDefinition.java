@@ -32,11 +32,12 @@ public class ContactusRedesignStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-/***
- * 
- * @param givenAttributes
- * @throws InterruptedException
- */
+
+	/***
+	 * 
+	 * @param givenAttributes
+	 * @throws InterruptedException
+	 */
 	@Given("^registered UMS member with following attributes$")
 	public void registered_member_orderplanmaterials_ums(DataTable givenAttributes) throws InterruptedException {
 
@@ -49,7 +50,6 @@ public class ContactusRedesignStepDefinition {
 		// get parameter username and password
 		String userName = memberAttributesMap.get("UserName");
 		String passWord = memberAttributesMap.get("Password");
-		String category = memberAttributesMap.get("Member Type");
 		System.out.println("User is..." + userName);
 		System.out.println("Password is..." + passWord);
 		WebDriver wd = getLoginScenario().getWebDriverNew();
@@ -73,9 +73,10 @@ public class ContactusRedesignStepDefinition {
 			}
 		}
 	}
-/***
- * 
- */
+
+	/***
+	 * 
+	 */
 	@When("^the user navigates to contact us page in UHC site$")
 	public void validates_contactUs_Redesign_Page() {
 		ContactUsPage contactUsPage;
@@ -94,9 +95,9 @@ public class ContactusRedesignStepDefinition {
 			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE, contactUsPage);
 	}
 
-/***
- * 
- */
+	/***
+	 * 
+	 */
 	@Then("^user validates Group secure email widget  in redesign contact us page$")
 	public void user_validates_email_widget_func() {
 		ContactUsPage contactusPage = (ContactUsPage) getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
@@ -104,9 +105,10 @@ public class ContactusRedesignStepDefinition {
 		contactusPage.validateEmailWidgetfunctionality();
 
 	}
-/***
- * 
- */
+
+	/***
+	 * 
+	 */
 	@Then("^user validates secure email widget UI in redesign contact us page$")
 	public void user_validates_secure_email_widget_UI_in_redesign_contact_us_page() {
 		ContactUsPage contactus = (ContactUsPage) getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
@@ -115,9 +117,9 @@ public class ContactusRedesignStepDefinition {
 
 	}
 
-/***
- * 
- */
+	/***
+	 * 
+	 */
 	@Then("^user validates clickToCallButton display on contactUS redesign page$")
 	public void validates_clickToCall_widget() {
 		ContactUsPage contactusPage = (ContactUsPage) getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
@@ -125,9 +127,9 @@ public class ContactusRedesignStepDefinition {
 		contactusPage.validates_clickToCall_widget();
 	}
 
-/***
- * 
- */
+	/***
+	 * 
+	 */
 	@And("^user clicks on Request Confirmation Click$")
 	public void RequestcallConfimration_click() {
 		ContactUsPage contactusPage = (ContactUsPage) getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);

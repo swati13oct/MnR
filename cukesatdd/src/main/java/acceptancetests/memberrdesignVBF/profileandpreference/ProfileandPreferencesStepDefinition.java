@@ -52,14 +52,13 @@ public class ProfileandPreferencesStepDefinition {
 		System.out.println("desiredAttributes.." + desiredAttributes);
 
 		Map<String, String> loginCreds = loginScenario.getmemberRedesignVbfWithDesiredAttributes(desiredAttributes);
-		String userName = null;
 		String pwd = null;
 		if (loginCreds == null) {
 			// no match found
 			System.out.println("Member Type data could not be setup !!!");
 			Assert.fail("unable to find a " + desiredAttributes + " member");
 		} else {
-			this.userName = userName = loginCreds.get("user");
+			this.userName = loginCreds.get("user");
 			pwd = loginCreds.get("pwd");
 			System.out.println("User is..." + userName);
 			System.out.println("Password is..." + pwd);
