@@ -108,21 +108,3 @@ And the user clicks on first eob from the list
 	| MAPD_GRP    | NICE_EOB 			| 18 Months    | Medical 	         |
  
  
-@fastandfurious
-@aprilRelease2018 @CatastrophicStageLanguage
-  Scenario Outline: Verify Updated Language in Catastrophic Coverage Stage for Drug Copays and Discounts in Redesign site
-Given registered Redesign member for EOB with following attributes
-      | Plan Type | <planType> |
-      | Member Type  | <memberType> |
- And the user navigates to Benefits and Coverage page
- Then the user validates Catastrophic Stage language for the member
- 
-  | Updated Language | <UpdatedLanguage> |
-  | Display Flag | <DisplayFlag> |
-  
- 	Examples:
-	| planType    | memberType    |UpdatedLanguage     | DisplayFlag       |
-	| PDP          | Group_LIS 			|  -either- coinsurance of 5% of the cost of the drug   |  	  false       |
-
- 
-

@@ -17,7 +17,7 @@ import atdd.framework.UhcDriver;
  * @author sdwaraka
  *
  */
-public class BenefitsAndCoveragePage extends UhcDriver {
+public class BenefitsCoveragePage extends UhcDriver {
 
 	@FindBy(xpath = "//area[@href='javascript:clWin()'][@alt = 'close']")
 	private WebElement FeedbackModal;
@@ -32,7 +32,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	private List<WebElement> showonmap;
 
 	
-	public BenefitsAndCoveragePage(WebDriver driver) throws InterruptedException {
+	public BenefitsCoveragePage(WebDriver driver) throws InterruptedException {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		

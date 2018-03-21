@@ -179,7 +179,7 @@ public class UlayerHomePage extends UhcDriver {
 	 * 
 	 * 
 	 */
-	public BenefitsAndCoveragePage navigateToBenefitsAndCoverage() throws InterruptedException {
+	public BenefitsCoveragePage navigateToBenefitsAndCoverage() throws InterruptedException {
 		driver.navigate().to(Page_URL+".com/content/medicare/member/benefits/overview.html");
 		//EOBsearchLink.click();
 		
@@ -194,7 +194,7 @@ public class UlayerHomePage extends UhcDriver {
 
 		if (validate(BnCPageHeader)) {
 			System.out.println("Benefits and Coverage Page loaded");
-			return new BenefitsAndCoveragePage(driver);
+			return new BenefitsCoveragePage(driver);
 		} else {
 			return null;
 		}

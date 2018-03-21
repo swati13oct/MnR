@@ -37,7 +37,7 @@ public class IntroductionInformationPage extends UhcDriver{
 	/*@FindBy(xpath = ".//*[@id='medicalclaimnum']/input[2]")
 	private WebElement claimNumberField;*/
 	
-	@FindBy(id = "medicalclaimnumtext")
+	@FindBy(xpath = "//*[@id='medicalclaimnumtext'][2]")
 	private WebElement claimNumberField;
 	
 	@FindBy(id = "part-a")
@@ -61,7 +61,7 @@ public class IntroductionInformationPage extends UhcDriver{
 	@FindBy(xpath = "//div[@id='beginOnlineEnrollment']/span")
 	private WebElement alreadyEnrolledErrorMsg;
 	
-	@FindBy(id = "enrollment.medicareBeneficiary.medicareClaimNumber.errors")
+	@FindBy(id = "medicalclaimnumerr")
 	private WebElement MedicareIDErrorMsg;
 	
 	private PageData introductionInformation;
@@ -120,7 +120,13 @@ public class IntroductionInformationPage extends UhcDriver{
 		String medicareClaimNumber = personalAttributesMap.get("Medicare Claim Number").replaceAll("-", "");
 		String partAStartDate = personalAttributesMap.get("Hospital (Part A) Effective Date").replaceAll("[/-]", "");
 		String partBStartDate = personalAttributesMap.get("Medical (Part B) Effective Date").replaceAll("[/-]", "");
-		
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		sendkeys(firstNameField, firstName);
 		sendkeys(middleInitialField, middleName);
 		sendkeys(lastNameField, lastName);
@@ -198,6 +204,7 @@ public class IntroductionInformationPage extends UhcDriver{
 
 		
 		public boolean ValidateMedicareIDformat(boolean MedicareValidFlag) {
+			
 			viewEnrollDisclaimer.click();
 			try {
 				Thread.sleep(1000);

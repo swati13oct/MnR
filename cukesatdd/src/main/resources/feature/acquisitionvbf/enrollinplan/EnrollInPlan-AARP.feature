@@ -190,7 +190,7 @@ Examples:
 
 
 @fastandfurious
-
+@EnrollInPlanOLE
 @aprilRelease2018
 Scenario Outline: Validate HICN and MBI formats are accepted for Medicare ID in AARP OLE
 Given the user is on the AARP acquisition Site home page
@@ -213,5 +213,7 @@ Then the user Validates the following formats for Medicare ID in AARP OLE
 | Valid Format	| <validFormat>	|
 
 Examples:
-|zipcode |countyName          | planType | planName                                           |     medicareID1    | firstName|middleInitial|lastName| medicareClaimNumber|hospitalEffectiveDate |  medicalEffectiveDate  | validFormat |
-|90210   |Los Angeles County  | MA       |AARP MedicareComplete SecureHorizons Plan 2 (HMO)   |     2A22C22YK2   | First   |  m          |  last  | 2A22C22YK22      |07/01/1988            |      07/01/1988        |  false			 | 
+|zipcode |countyName          | planType | planName                                           |   firstName|middleInitial|lastName| medicareClaimNumber|hospitalEffectiveDate |  medicalEffectiveDate  | validFormat |
+|90210   |Los Angeles County  | MA       |AARP MedicareComplete SecureHorizons Plan 2 (HMO)   |   First   |  m          |  last  | 111111111      |07/01/1988            |      07/01/1988        |  false			 | 
+|90210   |Los Angeles County  | MA       |AARP MedicareComplete SecureHorizons Plan 2 (HMO)   |   First   |  m          |  last  | 123456789a1B      |07/01/1988            |      07/01/1988        |  true			 |
+|90210   |Los Angeles County  | MA       |AARP MedicareComplete SecureHorizons Plan 2 (HMO)   |   First   |  m          |  last  | 2A22C22YK22      |07/01/1988            |      07/01/1988        |  true			 |
