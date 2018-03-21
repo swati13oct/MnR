@@ -829,6 +829,13 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 		benefitsnCoveragepage.contactUslinkShip();
 	}
+	
+	@And("^the user can see the values for catastrophic values$")
+	public void user_validates_catastrophic_values(){
+		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsnCoveragepage.valiadateCatastrophicCoverageValue("wotCMSValue");
+	}
 
 
 }
