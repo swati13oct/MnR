@@ -68,6 +68,12 @@ public class HSIDLoginPage extends UhcDriver {
 	
 	public void validateelements()
 	{
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		validate(userNameField);
 		validate(passwordField);
 		validate(signInButton);
@@ -82,7 +88,7 @@ public class HSIDLoginPage extends UhcDriver {
 		sendkeys(passwordField, password);
 		signInButton.click();
 		try {
-			Thread.sleep(30000);
+			Thread.sleep(40000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
