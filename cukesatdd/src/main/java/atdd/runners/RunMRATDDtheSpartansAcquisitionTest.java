@@ -14,11 +14,11 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=2,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDtheSpartansTest.json",detailedReport = true, detailedAggregatedReport = true, 
-	overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDtheSpartansTest")
+jsonReport = "target/cucumber-RunMRATDDtheSpartansAcquisitionTest.json",detailedReport = true, detailedAggregatedReport = true, 
+	overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDtheSpartansAcquisitionTest")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, 
 features = { "src/main/resources/feature/acquisition" }, plugin = {"pretty", "html:reports/test-report", 
-		"json:target/cucumber-RunMRATDDtheSpartansTest.json" }, tags = { "@theSpartans" })
+		"json:target/cucumber-RunMRATDDtheSpartansAcquisitionTest.json" }, tags = { "@theSpartans" })
 public class RunMRATDDtheSpartansAcquisitionTest {
 
 }
