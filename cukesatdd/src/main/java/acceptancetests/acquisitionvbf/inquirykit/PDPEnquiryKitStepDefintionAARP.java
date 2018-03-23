@@ -36,19 +36,9 @@ public class PDPEnquiryKitStepDefintionAARP {
 	/**
 	 * @toDo:the user is on the AARP acquisition Site home 
 	 */	
-	@Given("^the user is on the AARP acquisition Site home page$")
-	public void the_user_on_aarp_medicare_site_landing_page()
-	{
 
-		WebDriver wd = getLoginScenario().getWebDriver();
-
-		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
-
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
-				aquisitionhomepage);
-	
-	}
+	//moved @given statement to common stepdefinition
+		//the user is on AARP medicare acquisition site landing page
 	
 	/**
 	 * @toDo:user navigates to Request More Help and Information page under pdp section 

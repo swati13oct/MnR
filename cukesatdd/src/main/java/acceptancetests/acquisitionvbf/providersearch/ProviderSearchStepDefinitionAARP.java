@@ -37,18 +37,9 @@ public class ProviderSearchStepDefinitionAARP {
 	
 	/**
 	 * @toDo: user is on AARP Ulayer medicare acquisition site
+	 *this given statement moved to common stepdefinition folder
 	 */
-	@Given("^the user is on AARP Ulayer medicare acquisition site landing page$")
-	public void user_AARP_Medicare()
-	{
-		WebDriver wd = getLoginScenario().getWebDriver();
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
-				aquisitionhomepage);
-		
-	}
+	
 	
 	/**
 	 * @toDo:user performs plan search using following information 

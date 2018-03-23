@@ -32,19 +32,9 @@ public class GlobalHeaderFooterStepDefinitionAARP {
 		return loginScenario;
 	}
 
-	/**
-	 * @toDo:user is on acquisition home
-	 */
-	@Given("^user is on acquisition home page of AARP Site$")
-	public void user_is_on_acquisition_home_page_of_AARP_Site() {
-		WebDriver wd = getLoginScenario().getWebDriver();
 
-		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
-
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
-				aquisitionhomepage);
-	}
+	//moved @given statement to common stepdefinition
+		//the user is on AARP medicare acquisition site landing page
 
 	/**
 	 * @toDo:user accesses global footer

@@ -3,7 +3,7 @@
 Feature:1.17-VBF-Acq-To test Locate a Pharmacy in acqusition flow AARP site
 @pharmacylocatorulayerSmoke
 Scenario Outline:To verify available pharmacies in AARP site
-Given the user is on the AARP Medicare Site landing page
+Given the user is on AARP medicare acquisition site landing page
 When the user hovers to Our Plans and select Request More Help and Information for following plan type in AARP Site
 	| <plantype> |
 When the user navigates to pharmacy search page in AARP Site
@@ -22,7 +22,7 @@ Examples:
 	
 @availablePharmAARP
 Scenario Outline:To verify available pharmacies in AARP site
-Given the user is on the AARP Medicare Site landing page
+Given the user is on AARP medicare acquisition site landing page
 When the user hovers to Our Plans and select Request More Help and Information for following plan type in AARP Site
 	| <plantype> |
 When the user navigates to pharmacy search page in AARP Site
@@ -45,7 +45,7 @@ Examples:
 
 @pharmaciesServicesAARP
 Scenario Outline:To verify available pharmacies and Services in AARP site
-Given the user is on the AARP Medicare Site landing page
+Given the user is on AARP medicare acquisition site landing page
 When the user hovers to Our Plans and select Request More Help and Information for following plan type in AARP Site
 	| <plantype> |
 When the user navigates to pharmacy search page in AARP Site
@@ -68,7 +68,7 @@ Examples:
 
 @pharmaciesSelPharmacyTypesAARP
 Scenario Outline:To verify available pharmacies for particular pharmacy types in AARP site
-Given the user is on the AARP Medicare Site landing page
+Given the user is on AARP medicare acquisition site landing page
 When the user hovers to Our Plans and select Request More Help and Information for following plan type in AARP Site
 	| <plantype> |
 When the user navigates to pharmacy search page in AARP Site
@@ -90,7 +90,7 @@ Examples:
 
 @errorMessageNoPharamcyAARP
 Scenario Outline:To verify error message for no results found for pharmacy type in UMS site
-Given the user is on the AARP Medicare Site landing page
+Given the user is on AARP medicare acquisition site landing page
 When the user hovers to Our Plans and select Request More Help and Information for following plan type in AARP Site
 	| <plantype> |
 When the user navigates to pharmacy search page in AARP Site
