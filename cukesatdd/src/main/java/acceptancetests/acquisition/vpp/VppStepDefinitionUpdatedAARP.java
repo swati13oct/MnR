@@ -234,4 +234,39 @@ public class VppStepDefinitionUpdatedAARP {
 		}
 
 	}
+	
+	@Then("^the user view plan details of the above selected plan in AARP site vpp$")
+	public void the_user_view_plan_details_of_the_above_selected_plan_in_UMS_site_vpp(DataTable givenAttributes) {
+		
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		String planName = memberAttributesRow.get(0).getCells().get(1);
+		String planType = memberAttributesRow.get(1).getCells().get(1); 
+				getLoginScenario().saveBean(
+				VPPCommonConstants.PLAN_NAME,planName);
+		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(planName, planType);
+		if (vppPlanDetailsPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE,
+					vppPlanDetailsPage);
+//			if(vppPlanDetailsPage.validatePlanDetailsPage()){
+//				Assert.assertTrue(true);
+//			}else
+//				Assert.fail("Error in validating the Plan Details Page");
+
+		}
+}
+	
+	@Then("^the user clicks on both top and bottom back to plans link and validates its redirection AARP$")
+	public void the_user_clicks_on_both_topand_bottom_back_to_plans_link_and_validates_its_redirection() throws InterruptedException {
+//		getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE,
+//				vppPlanDetailsPage);
+		PlanDetailsPage vppPlanDetailsPage =  ( PlanDetailsPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		vppPlanDetailsPage.validatetopbacktoplanslink();
+		vppPlanDetailsPage.browserBack();
+		vppPlanDetailsPage.validatedownbacktoplanslink();
+		
+		}
 }
