@@ -43,3 +43,23 @@ Then I click back to all plans button and verify that all 3 plans are still sele
 Examples:
 |zipcode|
 |80007 | 
+
+
+@theSpartans @aprilRelease2018 @vppbacktoallplans @US987466 @US987470
+Scenario Outline: To click Back to all plans from Top and bottom of the page and verify redirection back to the VPP-Summary page AARP site
+Given the user is on AARP medicare acquisition site landing page
+When the user performs plan search using following information in the AARP site
+	| Zip Code    | <zipcode> |
+	| County Name | <county>  |
+#Then user validates plan count for all plan types on plan summary page in the AARP site
+And the user views the plans of the below plan type in AARP site
+	| Plan Type | <plantype> |
+#And the user validates the available plans for selected plan types in the AARP site
+Then the user view plan details of the above selected plan in AARP site vpp
+	| Plan Name | <planName> |
+	| Plan Type | <plantype> |
+Then the user clicks on both top and bottom back to plans link and validates its redirection AARP
+Examples:
+| zipcode | county             | plantype | planName                                         |
+| 90210   | Los Angeles County | MA	  | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    |
+

@@ -147,11 +147,11 @@ public class ComboTabsRedesignPagesStepDefinition {
 		else if (PageName.equalsIgnoreCase("EOB")){
 			UlayerHomePage accountHomePage = (UlayerHomePage) getLoginScenario()
 					.getBean(PageConstants.ACCOUNT_HOME_PAGE);
-			EoBSearchPage planBenefitsCoverage = accountHomePage.navigateToBenefitsAndCoverage();
-			if (planBenefitsCoverage != null) {
+			EoBSearchPage eobSearchPage = accountHomePage.navigateToEOBsearchPage();
+			if (eobSearchPage != null) {
 				System.out.println("EOB page Loaded");
-				getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE,
-						planBenefitsCoverage);
+				getLoginScenario().saveBean(PageConstantsMnR.MEDICAL_EOB_PAGE,
+						eobSearchPage);
 				Assert.assertTrue(true);
 			}
 			else {
@@ -280,7 +280,7 @@ public class ComboTabsRedesignPagesStepDefinition {
 		else if (PageName.equalsIgnoreCase("EOB")){
 			EoBSearchPage EOBsearchPage = 
 					(EoBSearchPage) getLoginScenario()
-					.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+					.getBean(PageConstantsMnR.MEDICAL_EOB_PAGE);
 			if(EOBsearchPage.Validate_Terminated_Tab() ){
 				System.out.println("Terminated Tabs are Displayed");
 				Assert.assertTrue(true);

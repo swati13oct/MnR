@@ -17,20 +17,22 @@ import atdd.framework.UhcDriver;
  * @author sdwaraka
  *
  */
-public class EoBSearchPage extends UhcDriver {
+public class BenefitsCoveragePage extends UhcDriver {
 
 	@FindBy(xpath = "//area[@href='javascript:clWin()'][@alt = 'close']")
 	private WebElement FeedbackModal;
 
-	@FindBy(xpath = "//h1[contains(text(), 'Explanation of Benefits')]")
-	private WebElement EOBPageHeader;
+	@FindBy(xpath = "//*[contains(text(), 'Plan Benefits Summary')]")
+	private WebElement BnCPageHeader;
 
-	@FindBy(xpath = "//a[contains(text(), '(Terminated)')]")
-	private List<WebElement> TerminatedTabs;
-
+	@FindBy(xpath = "//*[contains(text(), 'Plan Benefits Summary')]")
+	private List<WebElement> UpdatedLanguageElements;
+	
+	@FindBy(xpath = "(//*[contains(text(),'SHOW ON MAP')])")
+	private List<WebElement> showonmap;
 
 	
-	public EoBSearchPage(WebDriver driver) throws InterruptedException {
+	public BenefitsCoveragePage(WebDriver driver) throws InterruptedException {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		
@@ -56,34 +58,36 @@ public class EoBSearchPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		if(validate(EOBPageHeader)){
+		if(validate(BnCPageHeader)){
 			System.out.println("Explanation of Benefits PAGE is LOADED");
 		}
 		else{
 			System.out.println("Explanation of Benefits is NOT LOADED");
 		}
 	}
-	public boolean Validate_Single_Tab_SHIP(){
-		List<WebElement> PlanTabs = driver.findElements(By.xpath("//a[contains(text(),'Supplemental  Insurance Plans')]"));
-		System.out.println("No of tabs: "+PlanTabs.size());
-		if(PlanTabs.size()>1){
+
+	/**
+	 * @author sdwaraka
+	 * To validate if Updated language is displayed or not. 
+	 * @param updatedLanguage
+	 * @param displayFlag
+	 * @return
+	 */
+	public boolean Validate_Catastrophic_Stage_Language(String updatedLanguage, String displayFlag) {
+		
+		List <WebElement> UpdatedLanguageCount = driver.findElements(By.xpath("//*[contains(text(),'"+updatedLanguage+"')]"));
+		boolean Expectedflag = (displayFlag.equalsIgnoreCase("true"))?true:false ;
+		boolean ActualFlag = (UpdatedLanguageCount.size()>0)?true:false;
+		if(Expectedflag ==ActualFlag  )
+		{
+			System.out.println("Updated Language is Displayed/Not DIsplayed as expected");
+			return true;
+		}
+		else {
+			System.out.println("Updated Language validation : Failed");
 			return false;
 		}
-		else{
-			return true;
-		}
 	}
-	public boolean Validate_Terminated_Tab(){
-		
-		if(!TerminatedTabs.isEmpty()){
-			System.out.println("Terminated Tabs for the following Plans are Displayed");
 
-			for(WebElement TerminatedPlan: TerminatedTabs){
-				System.out.println(TerminatedPlan.getText());
-			}
-			return true;
-		}
-		return false;
-	}
 
 }
