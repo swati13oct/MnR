@@ -187,33 +187,3 @@ Then the user navigates to Confirmation Page
 Examples:
 |zipcode |countyName          | planType  | planName                       |firstName|middleInitial|lastName| medicareClaimNumber|hospitalEffectiveDate |  medicalEffectiveDate  | emailAddress |mainPhoneNumber | otherPhoneNumber |birthDate    |selectedGender |languagePreference |address |  city    | apartment |sep1|sep2|sep4|sep5|sep6|sep7|sep8|sep9|sepOther| sepDate1 | sepDate2    | sepDate5  | sepDate6    |sepOtherReason |esrdradiooption |pdcradiooption |pdchealthinsurname|pdcgroupidnumber|pdcmemberidnumber|ltcradiooption |ltcname|ltcstreetaddr|ltcapt|ltccity|ltcphonenum |ltcdatemoved|planpaymentoption|agreeStmtUnderstanding|authRepresent|
 #|90210   |Los Angeles County  | PDP       |AARP MedicareRx Preferred (PDP) | First   |  m          |  last  | 112-11-1117-A      |07/01/1988            |      07/01/1988        | test@uhc.com | 999-991-1111   | 999-991-1111     | 12-20-1950  |Male           |Spanish            |1234    | Colorado | UHG       |No  |Yes |No  |No  |No  |No  |No  |No  |No      | 02/15/2016| 02/15/2016 |02/15/2016 | 02/15/2016  |Test           |No              |Yes            | abc              |abc             |123              |Yes            |first  |123          |1     |abc    |666-666-6666|12-20-1982   |  No           |Agree|Agree|
-
-
-@fastandfurious
-@EnrollInPlanOLE
-@aprilRelease2018
-Scenario Outline: Validate HICN and MBI formats are accepted for Medicare ID in AARP OLE
-Given the user is on the AARP acquisition Site home page
-When user performs plan search using following information in AARP site OLE
-	| Zip Code    | <zipcode> |
-	| County Name | <countyName>  |
-And the user views plans of the below plan type in AARP site OLE
-	| Plan Type | <planType> |
-And the user enrolls for the below plan in AARP site OLE
-	| <planName> |
-And the user navigates to introduction information step in AARP site OLE
-And the user fill following information in introduction information step in AARP site OLE
-    | First Name                        | <firstName>		    |
-    | Middle Initial                    | <middleInitial>	    |
-    | Last Name                         | <lastName>		    |
-    | Medicare Claim Number             | <medicareClaimNumber>    |  
-    | Hospital (Part A) Effective Date  | <hospitalEffectiveDate>  |
-    | Medical (Part B) Effective Date   | <medicalEffectiveDate>   |
-Then the user Validates the following formats for Medicare ID in AARP OLE
-| Valid Format	| <validFormat>	|
-
-Examples:
-|zipcode |countyName          | planType | planName                                           |   firstName|middleInitial|lastName| medicareClaimNumber|hospitalEffectiveDate |  medicalEffectiveDate  | validFormat |
-|90210   |Los Angeles County  | MA       |AARP MedicareComplete SecureHorizons Plan 2 (HMO)   |   First   |  m          |  last  | 111111111      |07/01/1988            |      07/01/1988        |  false			 | 
-|90210   |Los Angeles County  | MA       |AARP MedicareComplete SecureHorizons Plan 2 (HMO)   |   First   |  m          |  last  | 123456789a1B      |07/01/1988            |      07/01/1988        |  true			 |
-|90210   |Los Angeles County  | MA       |AARP MedicareComplete SecureHorizons Plan 2 (HMO)   |   First   |  m          |  last  | 2A22C22YK22      |07/01/1988            |      07/01/1988        |  true			 |

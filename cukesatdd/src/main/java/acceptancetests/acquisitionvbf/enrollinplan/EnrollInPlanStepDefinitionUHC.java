@@ -574,46 +574,6 @@ public class EnrollInPlanStepDefinitionUHC {
 		}
 
 	}
-	
-	/**
-	 * 
-	 * To validate HICN/MBI formats for medicare ID field in UHC OLE
-	 * Added by @author sdwaraka
-	 * @param arg1
-	 * @throws Throwable
-	 */
-	@When("^the user Validates the following formats for Medicare ID in UHC OLE$")
-	public void the_user_enters_and_Validates_the_following_formats_for_Medicare_ID(DataTable arg1) throws Throwable {
-		List<DataTableRow> personalAttributesRow = arg1
-				.getGherkinRows();
-		Map<String, String> personalAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < personalAttributesRow.size(); i++) {
-
-			personalAttributesMap.put(personalAttributesRow.get(i).getCells()
-					.get(0), personalAttributesRow.get(i).getCells().get(1));
-		}
-		
-		String ValidFormatFlag = personalAttributesMap.get("Valid Format");
-		BeneficiaryInformationPage beneficiaryInformationPage = (BeneficiaryInformationPage) getLoginScenario()
-				.getBean(PageConstants.BENEFICIARY_INFORMATION_PAGE);
-		beneficiaryInformationPage
-		.entersPersonalInformation(personalAttributesMap);
-		boolean MedicareValidFlag = ValidFormatFlag.contains("true")?true:false;
-		boolean Flag = beneficiaryInformationPage
-				.ValidateMedicareIDformat(MedicareValidFlag);
-		System.out.println("Medicare ID validated - "+Flag);
-		getLoginScenario().saveBean(PageConstants.BENEFICIARY_INFORMATION_PAGE,
-				beneficiaryInformationPage);
-
-		if (Flag) {
-			System.out.println("Medicare ID validation Passed");
-				Assert.assertTrue(true);
-		} 
-		else{
-			Assert.fail("ERROR Validating Medicare ID field");
-		}
-
-	}
 
 	/**
 	 * @toDo:isAlertPresent

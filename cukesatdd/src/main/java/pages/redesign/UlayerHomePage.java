@@ -16,6 +16,7 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.redesign.BenefitsCoveragePage;
 
 /**
  * @author sdwaraka
