@@ -187,4 +187,47 @@ And the user fill following information in beneficiary information
         ##     |80002   |Adams County | MAPD       |AARP MedicareComplete SecureHorizons Plan 2 (HMO)   |Yes/No|                |         |             |        |           |
        ##    |80002   |             | MA         |
        ##    |80002   |             | PDP        |
-       
+
+@fastandfurious
+@aprilRelease2018 @HicnMBI_Validations
+Scenario Outline: Validate HICN and MBI formats are accepted for Medicare ID in UHC OLE
+Given the user is on the UHC medicare solutions landing page
+When user performs plan search using following Zip Code in UHC site
+        | Zip Code    | <zipcode> |
+And the user views plans of the below plan type in UHC site
+        | Plan Type | <planType> |
+And the user enrolls for the below plan in UHC site
+        | <planName> |
+And the user select the answer of this question Do you have End-Stage Renal Disease in UHC site
+        |<answer>|
+And the user navigates to Benefit information step in UHC site
+And the user fill following information in beneficiary information step in UHC site
+     | First Name                        | <firstName>                    |
+     | Middle Initial                    | <middleInitial>            |
+     | Last Name                         | <lastName>                    |
+     | Birth Date                        | <birthDate>                    |
+     | Gender                            | <selectedGender>            |
+     | Medicare Claim Number             | <medicareClaimNumber>    |  
+     | Hospital (Part A) Effective Date  | <hospitalEffectiveDate>  |
+     | Medical (Part B) Effective Date   | <medicalEffectiveDate>   |
+     | Address                           | <address>                    |  
+     | Apartment                         | <apartment>                    |
+     | City                              | <city>                    |
+     | Same Mailing Address                 | Yes                            |
+     | Main Phone Number                 | <mainPhoneNumber>            |  
+     | Other Phone Number                 | <otherPhoneNumber>            |
+     | Email Address                         | <emailAddress>            |
+     | Confirm Email Address                 | <confirmEmailAddress>    |
+     | Language Preference                 | <languagePreference>     |
+Then the user Validates the following formats for Medicare ID in UHC OLE
+| Valid Format	| <validFormat>	|       
+  Examples:
+  |zipcode | planType   | planName                                        |answer|firstName|middleInitial|lastName|birthDate  |selectedGender        | medicareClaimNumber|hospitalEffectiveDate        |medicalEffectiveDate        |address    |  city          | apartment |mainPhoneNumber |otherPhoneNumber| emailAddress   | confirmEmailAddress | languagePreference |  validFormat |
+  |90210   | MA         |AARP MedicareComplete SecureHorizons Plan 1 (HMO)|No    | First   |  m          |  last  |01/01/1940 |  Male                | 2ab2Cz2Yi22     |07/01/1988                   |07/01/1988                  |1234            | Colorado    | UHG       |9999911111      |1111199999      | test@uhc.com   | test@uhc.com        |  English           | false |
+  |90210   | MA         |AARP MedicareComplete SecureHorizons Plan 1 (HMO)|No    | First   |  m          |  last  |01/01/1940 |  Male                | 123456789a1B     |07/01/1988                   |07/01/1988                  |1234            | Colorado    | UHG       |9999911111      |1111199999      | test@uhc.com   | test@uhc.com        |  English           | true |
+  |90210   | MA         |AARP MedicareComplete SecureHorizons Plan 1 (HMO)|No    | First   |  m          |  last  |01/01/1940 |  Male                | A1234567890     |07/01/1988                   |07/01/1988                  |1234            | Colorado    | UHG       |9999911111      |1111199999      | test@uhc.com   | test@uhc.com        |  English           | true |
+  |90210   | MA         |AARP MedicareComplete SecureHorizons Plan 1 (HMO)|No    | First   |  m          |  last  |01/01/1940 |  Male                | A123456     |07/01/1988                   |07/01/1988                  |1234            | Colorado    | UHG       |9999911111      |1111199999      | test@uhc.com   | test@uhc.com        |  English           | true |
+  |90210   | MA         |AARP MedicareComplete SecureHorizons Plan 1 (HMO)|No    | First   |  m          |  last  |01/01/1940 |  Male                | Uex123456     |07/01/1988                   |07/01/1988                  |1234            | Colorado    | UHG       |9999911111      |1111199999      | test@uhc.com   | test@uhc.com        |  English           | true |
+  |90210   | MA         |AARP MedicareComplete SecureHorizons Plan 1 (HMO)|No    | First   |  m          |  last  |01/01/1940 |  Male                | Utx123456789     |07/01/1988                   |07/01/1988                  |1234            | Colorado    | UHG       |9999911111      |1111199999      | test@uhc.com   | test@uhc.com        |  English           | true |
+  |90210   | MA         |AARP MedicareComplete SecureHorizons Plan 1 (HMO)|No    | First   |  m          |  last  |01/01/1940 |  Male                | 2A22C22YK22     |07/01/1988                   |07/01/1988                  |1234            | Colorado    | UHG       |9999911111      |1111199999      | test@uhc.com   | test@uhc.com        |  English           | true |
+  |90210   | MA         |AARP MedicareComplete SecureHorizons Plan 1 (HMO)|No    | First   |  m          |  last  |01/01/1940 |  Male                | 2at2Cu2YK22     |07/01/1988                   |07/01/1988                  |1234            | Colorado    | UHG       |9999911111      |1111199999      | test@uhc.com   | test@uhc.com        |  English           | true |
