@@ -123,7 +123,6 @@ public abstract class UhcDriver {
     	        try {
     	         waitforElement(element);
     	            if (element.isDisplayed()) {
-
     	                   Actions actions = new Actions(driver);
     	                   actions.moveToElement(element);
     	                   actions.perform();
@@ -131,7 +130,6 @@ public abstract class UhcDriver {
     	                   System.out.println("@@@The element " + element.getText() + "is found@@@");
     	            }
     	     } catch (Exception e) {
-
     	            Assert.fail("The element " + element.getText() + "is not  found");
     	         return false;
     	     }
