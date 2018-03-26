@@ -27,7 +27,7 @@ public class OptionalRidersPage extends UhcDriver{
 	@FindBy(xpath = "//label[@for='dental-no']")
 	private WebElement optno;
 	
-	@FindBy(id = "optionalridersquestionyestext")
+	@FindBy(id = "dental-rider-yes-label1")
 	private WebElement optyes;
 	
 	@FindBy(id = "optRiderprevious")
