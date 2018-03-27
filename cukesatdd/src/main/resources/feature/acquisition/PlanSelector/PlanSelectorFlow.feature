@@ -1,3 +1,4 @@
+Feature: Plan Selector Tool flow
 @DSTFlow16
 Scenario Outline: To validate DST flow in UHC site
 GIVEN the user is on UHC medicare acquisition site landing page
