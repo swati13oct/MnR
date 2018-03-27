@@ -1,0 +1,7 @@
+@DSTFlow16
+Scenario Outline: To validate DST flow in UHC site
+GIVEN the user is on UHC medicare acquisition site landing page
+WHEN User Starts the PST quiz
+AND I deep link to VPP Plan Details
+AND I click "Back to plan options" link
+THEN I should be brought back to the PST results page
