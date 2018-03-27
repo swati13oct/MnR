@@ -1,4 +1,4 @@
-package acceptancetests.acquisition.DST;
+package acceptancetests.acquisition.PlanSelector;
 
 import java.util.HashMap;
 import java.util.List;
