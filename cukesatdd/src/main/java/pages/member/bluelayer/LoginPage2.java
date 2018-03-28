@@ -63,6 +63,17 @@ public class LoginPage2 extends UhcDriver {
 	
 	@FindBy(xpath=".//*[@id='IPEinvL']/map/area[1]")
     private WebElement iPerceptionPopUp;
+	
+	
+	@FindBy(id = "hsid-username")
+	private WebElement hsiduserNameField;
+
+	@FindBy(id = "hsid-password")
+	private WebElement hsidpasswordField;
+	
+	@FindBy(id = "hsid-submit")
+	private WebElement signInHsidButton;
+	
 
 	public LoginPage2(WebDriver driver) {
 		super(driver);
@@ -354,6 +365,44 @@ public class LoginPage2 extends UhcDriver {
 		}
 
 		System.out.println("teamhloginWith is returing null. Please Update the above condition As per your Needs");
+
+		return null;
+	}
+
+	public Object doLoginWithHsid(String username, String password) {
+
+	    System.out.println("Driver url"+driver.getCurrentUrl());
+		sendkeys(hsiduserNameField, username);
+		sendkeys(hsidpasswordField, password);
+		signInHsidButton.click();
+		
+		try {
+			Thread.sleep(50000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(currentUrl().contains("testharness.html") || currentUrl().contains("/dashboard"))
+	    {
+			
+			System.out.println(driver.getCurrentUrl());
+			try {
+				Thread.sleep(30000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println(driver.getCurrentUrl());
+			return new AccountHomePage(driver);
+		}
+		else if(currentUrl().contains("healthsafe-id.com")  || currentUrl().contains("securityQuestion") ) {
+			return new AccountHomePage(driver);
+		}
+		else if (currentUrl().contains("terminated-plan.html")) {
+			return new TerminatedHomePage(driver);
+		}
+
+		System.out.println("Please Update the above condition As per your Needs");
 
 		return null;
 	}
