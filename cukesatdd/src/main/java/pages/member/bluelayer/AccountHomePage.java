@@ -190,12 +190,23 @@ private WebElement FormsandResourcesLinkn;
         
         
         @FindBy(xpath=".//*[@id='IPEinvL']/map/area[2]")
-        private WebElement iPerceptionPopUp;
+        private List<WebElement> iPerceptionPopUp;
         
       
         
         @FindBy(xpath="html/body/div[2]/div/div[4]/div[2]/div/table/tbody/tr[6]/td[2]/a")
         private WebElement profilenpreferenceslink;
+        @FindBy(linkText="Go to profile page")
+        private WebElement profilenpreferenceslink1;
+        
+        
+        @FindBy(id ="authQuestiontextLabelId")
+        private WebElement questionid;
+        @FindBy(id ="challengeQuestionList[0].userAnswer")
+        private WebElement securityAnswer;
+        
+        @FindBy(id ="continueSubmitButton")
+        private WebElement continueButton;
         
    
         
@@ -308,9 +319,9 @@ private WebElement FormsandResourcesLinkn;
         	}
         	}
         	
-        	
-    		if (validate(iPerceptionPopUp)) {
-                iPerceptionPopUp.click();
+        	Thread.sleep(5000);
+    		if (iPerceptionPopUp.size()>0) {
+                iPerceptionPopUp.get(0).click();
                 System.out.println("iPerception Pop Up displayed");
     		}
     		if (MRScenario.environment.equals("team-ci1") || MRScenario.environment.equals("team-h") || MRScenario.environment.equals("test-a") || MRScenario.environment.equals("team-e")) {
@@ -937,6 +948,98 @@ public void FormsandResourcesLinkinPlanSummaryPageBlayer()
             return null;
 
     }
+        
+    	public void  validateTheSecurityQues(String friendname, String favouritecolor, String phoneNumber) {
+    		String Question=questionid.getText();
+    		System.out.println("question is"+ Question);
+    		if (Question.equalsIgnoreCase("What is your best friend's name?" ))
+    		         {
+    			System.out.println("Question is related to friendname");
+    			    securityAnswer.sendKeys(friendname);
+    			    continueButton.click();
+    		         }
+    				
+    				else if(Question.equalsIgnoreCase("What is your favorite color?" ))
+    				{
+    					System.out.println("Question is related to color");
+    					 securityAnswer.sendKeys(favouritecolor);
+    					 continueButton.click();
+    				}
+    				else
+    				{
+    					System.out.println("Question is related to phone");
+    					 securityAnswer.sendKeys(phoneNumber);
+    					 continueButton.click();
+    				}
+
+
+    		}
+
+    				public ProfilePageHsid navigateDirectToProfilePageHsid() throws InterruptedException {
+    					// TODO Auto-generated method stub
+    					if (MRScenario.environment.equalsIgnoreCase("stage")) 
+    		        	{
+    		    			System.out.println("user is on Stage login page");			
+    		    			//CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);			
+    		    			if(driver.getCurrentUrl().contains("/dashboard"));
+    		    			{
+    		    				
+    		    				accountToggleDropdown.click();
+    		    				validate(accountSettingOption);
+    		    				accountSettingOption.click();
+    		    				try {
+    		    					Thread.sleep(3000);
+    		    				} catch (InterruptedException e) {
+    		    					// TODO Auto generated catch block
+    		    					e.printStackTrace();
+    		    				}
+    		    				System.out.println("title is "+driver.getTitle());
+    		    				System.out.println("Current Url is "+driver.getCurrentUrl());
+    		    				CommonUtility.waitForPageLoad(driver, heading, 50);
+    		    			
+
+    		    				if (driver.getTitle().equalsIgnoreCase("Profile")) {
+
+    		    					return new ProfilePageHsid(driver);
+    		    				}
+    		    			
+    		        	}
+    		        	}
+    		        	
+    		        	
+    					Thread.sleep(5000);
+    		    		if (iPerceptionPopUp.size()>0) {
+    		                iPerceptionPopUp.get(0).click();
+    		                System.out.println("iPerception Pop Up displayed");
+    		    		}
+
+    					
+    					if (MRScenario.environment.equals("team-ci1") || MRScenario.environment.equals("team-h") || MRScenario.environment.equals("test-a") || MRScenario.environment.equals("team-e")) {
+    						WebElement element = driver.findElement(By.xpath("//a[contains(.,'profile page')]"));
+    						validateNew(element);
+    						element.click();
+    						/*accountToggleDropdown1.click();
+    						validate(accountSettingOption1);
+    						accountSettingOption1.click();*/
+    						try {
+    							Thread.sleep(3000);
+    						} catch (InterruptedException e) {
+    							// TODO Auto generated catch block
+    							e.printStackTrace();
+    						}
+    		    		}else{
+    		    			profilenpreferenceslink.click();
+    		    		}
+    		    		CommonUtility.waitForPageLoad(driver, heading, 50);
+    		    		if(driver.getTitle().equalsIgnoreCase("Profile"))
+    		    		{
+    		    			System.out.println("here");
+    		    			return new ProfilePageHsid(driver);
+    		    		}
+    		    
+    					return null;
+    				
+    		}
 
 }
 
