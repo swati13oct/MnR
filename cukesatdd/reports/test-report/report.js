@@ -1,358 +1,625 @@
-$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("dce/DCE-ACQ-UHC.feature");
+$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("HSID/HSID-registration.feature");
 formatter.feature({
   "line": 2,
-  "name": "1.24-VBF-Acq-Drug Cost Estimator (DCE) - To test DCE flows on UMS acq site",
+  "name": "To test HSID registration flow",
   "description": "",
-  "id": "1.24-vbf-acq-drug-cost-estimator-(dce)---to-test-dce-flows-on-ums-acq-site",
+  "id": "to-test-hsid-registration-flow",
   "keyword": "Feature",
   "tags": [
     {
       "line": 1,
-      "name": "@acq_dce_UHC"
+      "name": "@aprilRelease2018"
     }
   ]
 });
 formatter.scenarioOutline({
-  "line": 93,
-  "name": "To go through dce from homepage and validate drug is still there when going to dce from vpp",
+  "line": 5,
+  "name": "Verify HSID registration.",
   "description": "",
-  "id": "1.24-vbf-acq-drug-cost-estimator-(dce)---to-test-dce-flows-on-ums-acq-site;to-go-through-dce-from-homepage-and-validate-drug-is-still-there-when-going-to-dce-from-vpp",
+  "id": "to-test-hsid-registration-flow;verify-hsid-registration.",
   "type": "scenario_outline",
   "keyword": "Scenario Outline",
   "tags": [
     {
-      "line": 92,
-      "name": "@defect1662"
+      "line": 4,
+      "name": "@hsidregistration"
     }
   ]
 });
 formatter.step({
-  "line": 94,
-  "name": "the user is on blayer medicare acq site landing page",
+  "line": 6,
+  "name": "the user is on medicare sign in page",
   "keyword": "Given "
 });
 formatter.step({
-  "line": 95,
-  "name": "I access the acquisition DCE tool from home page on ums site",
+  "line": 7,
+  "name": "the user clicks on Register now link",
   "keyword": "When "
 });
 formatter.step({
-  "line": 96,
-  "name": "I have added a drug to my drug list on ums site",
-  "rows": [
-    {
-      "cells": [
-        "Drug",
-        "\u003cdrug\u003e"
-      ],
-      "line": 97
-    }
-  ],
+  "line": 8,
+  "name": "HSID registration page is displayed with all the fields",
   "keyword": "And "
 });
 formatter.step({
-  "line": 98,
-  "name": "the user selects the pharmacy tab information",
+  "line": 9,
+  "name": "enter first name, last name, date of birth, zip code, member id and click continue",
   "rows": [
     {
       "cells": [
-        "Zipcode",
-        "\u003czipcode\u003e"
+        "firstName",
+        "\u003cfirstName\u003e"
       ],
-      "line": 99
+      "line": 10
     },
     {
       "cells": [
-        "Radius",
-        "\u003cradius\u003e"
+        "lastName",
+        "\u003clastName\u003e"
       ],
-      "line": 100
-    }
-  ],
-  "keyword": "And "
-});
-formatter.step({
-  "line": 101,
-  "name": "I select the first pharmacy on there",
-  "keyword": "And "
-});
-formatter.step({
-  "line": 102,
-  "name": "I click on the return link",
-  "keyword": "And "
-});
-formatter.step({
-  "line": 103,
-  "name": "I access the vpp page using below zipcode on ums site",
-  "rows": [
+      "line": 11
+    },
     {
       "cells": [
-        "Zip Code",
+        "dob",
+        "\u003cdob\u003e"
+      ],
+      "line": 12
+    },
+    {
+      "cells": [
+        "memberid",
+        "\u003cmemberid\u003e"
+      ],
+      "line": 13
+    },
+    {
+      "cells": [
+        "zipcode",
         "\u003czipcode\u003e"
       ],
-      "line": 104
-    }
-  ],
-  "keyword": "When "
-});
-formatter.step({
-  "line": 105,
-  "name": "I access the DCE tool after adding drug",
-  "rows": [
-    {
-      "cells": [
-        "Plan Type",
-        "\u003cplantype\u003e"
-      ],
-      "line": 106
+      "line": 14
     }
   ],
   "keyword": "And "
 });
 formatter.step({
-  "line": 107,
-  "name": "I verify that the drug is still there",
+  "line": 15,
+  "name": "user is navigated to step two:create account page",
+  "keyword": "And "
+});
+formatter.step({
+  "line": 16,
+  "name": "enter username, password, re-enter password, email, re-enter email",
   "rows": [
     {
       "cells": [
-        "Drug",
-        "\u003cdrug\u003e"
+        "userName",
+        "\u003cuserName\u003e"
       ],
-      "line": 108
+      "line": 17
+    },
+    {
+      "cells": [
+        "password",
+        "\u003cpassword\u003e"
+      ],
+      "line": 18
+    },
+    {
+      "cells": [
+        "email",
+        "\u003cemail\u003e"
+      ],
+      "line": 19
     }
   ],
+  "keyword": "And "
+});
+formatter.step({
+  "line": 20,
+  "name": "select the security type as \"Security questions\"",
+  "keyword": "And "
+});
+formatter.step({
+  "line": 21,
+  "name": "select security question1 as \"What was your first phone number?\"",
+  "keyword": "And "
+});
+formatter.step({
+  "line": 22,
+  "name": "select security answer1 as \"number1\"",
+  "keyword": "And "
+});
+formatter.step({
+  "line": 23,
+  "name": "select security question2 as \"What is your best friend\u0027s name?\"",
+  "keyword": "And "
+});
+formatter.step({
+  "line": 24,
+  "name": "select security answer2 as \"name1\"",
+  "keyword": "And "
+});
+formatter.step({
+  "line": 25,
+  "name": "select security question3 as \"What is your favorite color?\"",
+  "keyword": "And "
+});
+formatter.step({
+  "line": 26,
+  "name": "select security answer3 as \"color1\"",
+  "keyword": "And "
+});
+formatter.step({
+  "line": 27,
+  "name": "check the terms and click on create my ID button",
+  "keyword": "And "
+});
+formatter.step({
+  "line": 28,
+  "name": "user is navigated to Confirm email page",
+  "keyword": "And "
+});
+formatter.step({
+  "line": 29,
+  "name": "user should see a latest unread mail recieved in provided email address",
+  "keyword": "And "
+});
+formatter.step({
+  "line": 30,
+  "name": "user should copy the confirm email url to browser",
   "keyword": "Then "
 });
+formatter.step({
+  "line": 31,
+  "name": "user should be at Sign In page",
+  "keyword": "And "
+});
+formatter.step({
+  "line": 32,
+  "name": "user should see the email confirmation message \"Email confirmed: Please sign in with your new username and password.\" in Sign In form",
+  "keyword": "And "
+});
+formatter.step({
+  "line": 33,
+  "name": "user should see a latest unread mail recieved from \"myUHCMedicare.com - your HealthSafe ID registration is complete\" in mail server",
+  "keyword": "Then "
+});
+formatter.step({
+  "line": 34,
+  "name": "I should see a Username or email address label with textbox in Sign In page",
+  "keyword": "And "
+});
 formatter.examples({
-  "line": 110,
+  "line": 37,
   "name": "",
   "description": "",
-  "id": "1.24-vbf-acq-drug-cost-estimator-(dce)---to-test-dce-flows-on-ums-acq-site;to-go-through-dce-from-homepage-and-validate-drug-is-still-there-when-going-to-dce-from-vpp;",
+  "id": "to-test-hsid-registration-flow;verify-hsid-registration.;",
   "rows": [
     {
       "cells": [
-        "drug",
+        "firstName",
+        "lastName",
+        "dob",
+        "memberid",
         "zipcode",
-        "radius",
-        "plantype"
+        "userName",
+        "password",
+        "email",
+        "question1",
+        "question2",
+        "question3"
       ],
-      "line": 111,
-      "id": "1.24-vbf-acq-drug-cost-estimator-(dce)---to-test-dce-flows-on-ums-acq-site;to-go-through-dce-from-homepage-and-validate-drug-is-still-there-when-going-to-dce-from-vpp;;1"
+      "line": 38,
+      "id": "to-test-hsid-registration-flow;verify-hsid-registration.;;1"
     },
     {
       "cells": [
-        "Lipitor TAB 10MG",
-        "90210",
-        "15miles",
-        "MA"
+        "ACDBSDF",
+        "ADFACBBD",
+        "12/23/1934",
+        "000971217-1",
+        "99833",
+        "q1_aarp_feb357",
+        "Test2day",
+        "bhavana.pilli@optum.com",
+        "number1",
+        "name1",
+        "color1"
       ],
-      "line": 112,
-      "id": "1.24-vbf-acq-drug-cost-estimator-(dce)---to-test-dce-flows-on-ums-acq-site;to-go-through-dce-from-homepage-and-validate-drug-is-still-there-when-going-to-dce-from-vpp;;2"
+      "line": 39,
+      "id": "to-test-hsid-registration-flow;verify-hsid-registration.;;2"
     }
   ],
   "keyword": "Examples"
 });
 formatter.before({
-  "duration": 12293007,
+  "duration": 7253849,
   "status": "passed"
 });
 formatter.scenario({
-  "line": 112,
-  "name": "To go through dce from homepage and validate drug is still there when going to dce from vpp",
+  "line": 39,
+  "name": "Verify HSID registration.",
   "description": "",
-  "id": "1.24-vbf-acq-drug-cost-estimator-(dce)---to-test-dce-flows-on-ums-acq-site;to-go-through-dce-from-homepage-and-validate-drug-is-still-there-when-going-to-dce-from-vpp;;2",
+  "id": "to-test-hsid-registration-flow;verify-hsid-registration.;;2",
   "type": "scenario",
   "keyword": "Scenario Outline",
   "tags": [
     {
       "line": 1,
-      "name": "@acq_dce_UHC"
+      "name": "@aprilRelease2018"
     },
     {
-      "line": 92,
-      "name": "@defect1662"
+      "line": 4,
+      "name": "@hsidregistration"
     }
   ]
 });
 formatter.step({
-  "line": 94,
-  "name": "the user is on blayer medicare acq site landing page",
+  "line": 6,
+  "name": "the user is on medicare sign in page",
   "keyword": "Given "
 });
 formatter.step({
-  "line": 95,
-  "name": "I access the acquisition DCE tool from home page on ums site",
+  "line": 7,
+  "name": "the user clicks on Register now link",
   "keyword": "When "
 });
 formatter.step({
-  "line": 96,
-  "name": "I have added a drug to my drug list on ums site",
-  "matchedColumns": [
-    0
-  ],
-  "rows": [
-    {
-      "cells": [
-        "Drug",
-        "Lipitor TAB 10MG"
-      ],
-      "line": 97
-    }
-  ],
+  "line": 8,
+  "name": "HSID registration page is displayed with all the fields",
   "keyword": "And "
 });
 formatter.step({
-  "line": 98,
-  "name": "the user selects the pharmacy tab information",
+  "line": 9,
+  "name": "enter first name, last name, date of birth, zip code, member id and click continue",
   "matchedColumns": [
+    0,
     1,
-    2
+    2,
+    3,
+    4
   ],
   "rows": [
     {
       "cells": [
-        "Zipcode",
-        "90210"
+        "firstName",
+        "ACDBSDF"
       ],
-      "line": 99
+      "line": 10
     },
     {
       "cells": [
-        "Radius",
-        "15miles"
+        "lastName",
+        "ADFACBBD"
       ],
-      "line": 100
+      "line": 11
+    },
+    {
+      "cells": [
+        "dob",
+        "12/23/1934"
+      ],
+      "line": 12
+    },
+    {
+      "cells": [
+        "memberid",
+        "000971217-1"
+      ],
+      "line": 13
+    },
+    {
+      "cells": [
+        "zipcode",
+        "99833"
+      ],
+      "line": 14
     }
   ],
   "keyword": "And "
 });
 formatter.step({
-  "line": 101,
-  "name": "I select the first pharmacy on there",
+  "line": 15,
+  "name": "user is navigated to step two:create account page",
   "keyword": "And "
 });
 formatter.step({
-  "line": 102,
-  "name": "I click on the return link",
-  "keyword": "And "
-});
-formatter.step({
-  "line": 103,
-  "name": "I access the vpp page using below zipcode on ums site",
+  "line": 16,
+  "name": "enter username, password, re-enter password, email, re-enter email",
   "matchedColumns": [
-    1
+    5,
+    6,
+    7
   ],
   "rows": [
     {
       "cells": [
-        "Zip Code",
-        "90210"
+        "userName",
+        "q1_aarp_feb357"
       ],
-      "line": 104
-    }
-  ],
-  "keyword": "When "
-});
-formatter.step({
-  "line": 105,
-  "name": "I access the DCE tool after adding drug",
-  "matchedColumns": [
-    3
-  ],
-  "rows": [
+      "line": 17
+    },
     {
       "cells": [
-        "Plan Type",
-        "MA"
+        "password",
+        "Test2day"
       ],
-      "line": 106
+      "line": 18
+    },
+    {
+      "cells": [
+        "email",
+        "bhavana.pilli@optum.com"
+      ],
+      "line": 19
     }
   ],
   "keyword": "And "
 });
 formatter.step({
-  "line": 107,
-  "name": "I verify that the drug is still there",
-  "matchedColumns": [
-    0
-  ],
-  "rows": [
-    {
-      "cells": [
-        "Drug",
-        "Lipitor TAB 10MG"
-      ],
-      "line": 108
-    }
-  ],
+  "line": 20,
+  "name": "select the security type as \"Security questions\"",
+  "keyword": "And "
+});
+formatter.step({
+  "line": 21,
+  "name": "select security question1 as \"What was your first phone number?\"",
+  "keyword": "And "
+});
+formatter.step({
+  "line": 22,
+  "name": "select security answer1 as \"number1\"",
+  "keyword": "And "
+});
+formatter.step({
+  "line": 23,
+  "name": "select security question2 as \"What is your best friend\u0027s name?\"",
+  "keyword": "And "
+});
+formatter.step({
+  "line": 24,
+  "name": "select security answer2 as \"name1\"",
+  "keyword": "And "
+});
+formatter.step({
+  "line": 25,
+  "name": "select security question3 as \"What is your favorite color?\"",
+  "keyword": "And "
+});
+formatter.step({
+  "line": 26,
+  "name": "select security answer3 as \"color1\"",
+  "keyword": "And "
+});
+formatter.step({
+  "line": 27,
+  "name": "check the terms and click on create my ID button",
+  "keyword": "And "
+});
+formatter.step({
+  "line": 28,
+  "name": "user is navigated to Confirm email page",
+  "keyword": "And "
+});
+formatter.step({
+  "line": 29,
+  "name": "user should see a latest unread mail recieved in provided email address",
+  "keyword": "And "
+});
+formatter.step({
+  "line": 30,
+  "name": "user should copy the confirm email url to browser",
   "keyword": "Then "
 });
+formatter.step({
+  "line": 31,
+  "name": "user should be at Sign In page",
+  "keyword": "And "
+});
+formatter.step({
+  "line": 32,
+  "name": "user should see the email confirmation message \"Email confirmed: Please sign in with your new username and password.\" in Sign In form",
+  "keyword": "And "
+});
+formatter.step({
+  "line": 33,
+  "name": "user should see a latest unread mail recieved from \"myUHCMedicare.com - your HealthSafe ID registration is complete\" in mail server",
+  "keyword": "Then "
+});
+formatter.step({
+  "line": 34,
+  "name": "I should see a Username or email address label with textbox in Sign In page",
+  "keyword": "And "
+});
 formatter.match({
-  "location": "DCEAcqStepDefinitionUHC.the_user_is_on_UMS_medicare_site_landing_page()"
+  "location": "HsidRegistrationStepDefinition.the_user_is_on_medicare_sign_in_page()"
 });
 formatter.result({
-  "duration": 35311511597,
+  "duration": 19286530427,
   "status": "passed"
 });
 formatter.match({
-  "location": "DCEAcqStepDefinitionUHC.I_access_the_DCE_tool_home_page()"
+  "location": "HsidRegistrationStepDefinition.the_user_clicks_on_Register_now_link()"
 });
 formatter.result({
-  "duration": 8876143624,
+  "duration": 12023235952,
   "status": "passed"
 });
 formatter.match({
-  "location": "DCEAcqStepDefinitionUHC.I_have_added_a_drug_to_my_drug_list(DataTable)"
+  "location": "HsidRegistrationStepDefinition.hsid_registration_page_is_displayed_with_all_the_fields()"
 });
 formatter.result({
-  "duration": 51859370475,
+  "duration": 171198309,
   "status": "passed"
 });
 formatter.match({
-  "location": "DCEAcqStepDefinitionUHC.navigate_drugcostestimator_pharmacytab(DataTable)"
+  "location": "HsidRegistrationStepDefinition.enter_first_name_last_name_date_of_birth_zip_code_member_id_and_click_continue(DataTable)"
 });
 formatter.result({
-  "duration": 768159938,
-  "status": "passed"
+  "duration": 6469294796,
+  "error_message": "java.lang.AssertionError: Errors in Registration Personal Info page and not navigated to Create Account page\r\n\tat org.junit.Assert.fail(Assert.java:88)\r\n\tat org.junit.Assert.assertTrue(Assert.java:41)\r\n\tat pages.redesign.HsidRegistrationPersonalInformationPage.clickContinue(HsidRegistrationPersonalInformationPage.java:104)\r\n\tat acceptancetests.memberredesign.HSID.HsidRegistrationStepDefinition.enter_first_name_last_name_date_of_birth_zip_code_member_id_and_click_continue(HsidRegistrationStepDefinition.java:83)\r\n\tat ✽.And enter first name, last name, date of birth, zip code, member id and click continue(HSID/HSID-registration.feature:9)\r\n",
+  "status": "failed"
 });
 formatter.match({
-  "location": "DCEAcqStepDefinitionUHC.I_select_the_drug()"
+  "location": "HsidRegistrationStepDefinition.user_is_navigated_to_step_two_create_account_page()"
 });
 formatter.result({
-  "duration": 20414263597,
-  "status": "passed"
+  "status": "skipped"
 });
 formatter.match({
-  "location": "DCEAcqStepDefinitionUHC.clickOnReturnLink()"
+  "location": "HsidRegistrationStepDefinition.enter_username_password_re_enter_password_email_re_enter_email(DataTable)"
 });
 formatter.result({
-  "duration": 6434657863,
-  "status": "passed"
+  "status": "skipped"
 });
 formatter.match({
-  "location": "DCEAcqStepDefinitionUHC.I_access_the__vpp_page(DataTable)"
+  "arguments": [
+    {
+      "val": "Security questions",
+      "offset": 29
+    }
+  ],
+  "location": "HsidRegistrationStepDefinition.select_the_security_type_as(String)"
 });
 formatter.result({
-  "duration": 15745948756,
-  "status": "passed"
+  "status": "skipped"
 });
 formatter.match({
-  "location": "DCEAcqStepDefinitionUHC.accessDCEToolAfterDrugAdded(DataTable)"
+  "arguments": [
+    {
+      "val": "What was your first phone number?",
+      "offset": 30
+    }
+  ],
+  "location": "HsidRegistrationStepDefinition.select_security_question1_as(String)"
 });
 formatter.result({
-  "duration": 18855478195,
-  "status": "passed"
+  "status": "skipped"
 });
 formatter.match({
-  "location": "DCEAcqStepDefinitionUHC.verifyDrugIsStillThere(DataTable)"
+  "arguments": [
+    {
+      "val": "number1",
+      "offset": 28
+    }
+  ],
+  "location": "HsidRegistrationStepDefinition.select_security_answer1_as(String)"
 });
 formatter.result({
-  "duration": 56113972,
-  "status": "passed"
+  "status": "skipped"
 });
-formatter.embedding("image/png", "embedded0.png");
+formatter.match({
+  "arguments": [
+    {
+      "val": "What is your best friend\u0027s name?",
+      "offset": 30
+    }
+  ],
+  "location": "HsidRegistrationStepDefinition.select_security_question2_as(String)"
+});
+formatter.result({
+  "status": "skipped"
+});
+formatter.match({
+  "arguments": [
+    {
+      "val": "name1",
+      "offset": 28
+    }
+  ],
+  "location": "HsidRegistrationStepDefinition.select_security_answer2_as(String)"
+});
+formatter.result({
+  "status": "skipped"
+});
+formatter.match({
+  "arguments": [
+    {
+      "val": "What is your favorite color?",
+      "offset": 30
+    }
+  ],
+  "location": "HsidRegistrationStepDefinition.select_security_question3_as(String)"
+});
+formatter.result({
+  "status": "skipped"
+});
+formatter.match({
+  "arguments": [
+    {
+      "val": "color1",
+      "offset": 28
+    }
+  ],
+  "location": "HsidRegistrationStepDefinition.select_security_answer3_as(String)"
+});
+formatter.result({
+  "status": "skipped"
+});
+formatter.match({
+  "location": "HsidRegistrationStepDefinition.check_the_terms_and_click_on_create_my_ID_button()"
+});
+formatter.result({
+  "status": "skipped"
+});
+formatter.match({
+  "location": "HsidRegistrationStepDefinition.user_is_navigated_to_Confirm_email_page()"
+});
+formatter.result({
+  "status": "skipped"
+});
+formatter.match({
+  "location": "HsidRegistrationStepDefinition.user_should_see_a_latest_unread_mail_recieved_in_provided_email_address()"
+});
+formatter.result({
+  "status": "skipped"
+});
+formatter.match({
+  "location": "HsidRegistrationStepDefinition.user_should_copy_the_confirm_email_url_to_browser()"
+});
+formatter.result({
+  "status": "skipped"
+});
+formatter.match({
+  "location": "HsidRegistrationStepDefinition.user_should_be_at_Sign_In_page()"
+});
+formatter.result({
+  "status": "skipped"
+});
+formatter.match({
+  "arguments": [
+    {
+      "val": "Email confirmed: Please sign in with your new username and password.",
+      "offset": 48
+    }
+  ],
+  "location": "HsidRegistrationStepDefinition.user_should_see_the_email_confirmation_message_in_Sign_In_form(String)"
+});
+formatter.result({
+  "status": "skipped"
+});
+formatter.match({
+  "arguments": [
+    {
+      "val": "myUHCMedicare.com - your HealthSafe ID registration is complete",
+      "offset": 52
+    }
+  ],
+  "location": "HsidRegistrationStepDefinition.user_should_see_a_latest_unread_mail_recieved_from_in_mail_server(String)"
+});
+formatter.result({
+  "status": "skipped"
+});
+formatter.match({
+  "location": "HsidRegistrationStepDefinition.i_should_see_a_Username_or_email_address_label_with_textbox_in_Sign_In_page()"
+});
+formatter.result({
+  "status": "skipped"
+});
 formatter.after({
-  "duration": 4420583218,
+  "duration": 3479295,
   "status": "passed"
 });
 });
