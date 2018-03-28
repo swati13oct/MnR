@@ -128,8 +128,7 @@ public class AcqSEOStepDefinitionUHC {
 			    sc.init(null, trustAllCerts, new java.security.SecureRandom());
 			    HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
 			    HostnameVerifier hv = new HostnameVerifier() {
-			    	@Override
-		            public boolean verify(String urlHostName, SSLSession session) {
+			    	public boolean verify(String urlHostName, SSLSession session) {
 		                if (!urlHostName.equalsIgnoreCase(session.getPeerHost())) {
 		                    System.out.println("Warning: URL host '" + urlHostName + "' is different to SSLSession host '" + session.getPeerHost() + "'.");
 		                }

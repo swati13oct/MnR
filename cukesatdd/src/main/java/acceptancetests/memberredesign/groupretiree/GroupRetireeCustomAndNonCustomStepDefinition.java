@@ -18,7 +18,7 @@ import pages.acquisition.uhcretiree.AcquisitionHomePage;
 import pages.acquisition.uhcretiree.GroupHomePage;
 import pages.acquisition.ulayer.DrugCostEstimatorPage;
 
-public class GroupRetireeCustomAndNonCustom {
+public class GroupRetireeCustomAndNonCustomStepDefinition {
 	
 	@Autowired
 	MRScenario loginScenario;

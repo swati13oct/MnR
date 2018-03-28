@@ -3,6 +3,8 @@
  */
 package acceptancetests.data;
 
+import pages.redesign.HsidRegistrationPersonalInformationPage;
+
 //import pages.acquisition.bluelayer.MARightsAndResponsibilitiesPage;
 
 /**
@@ -418,5 +420,13 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 	   public static final String EOB_Page = "eobPage";
 	
 	   public static final String MEDICAL_EOB_PAGE = "medicalEobPage";
+	   
+	   public static final String HSID_LOGIN_PAGE = "hsidLoginPage";
+	   
+	   public static final String HSID_REGISTRATION_PERSONALINFOPAGE = "HsidRegistrationPersonalInformationPage";
+	   
+	   public static final String HSID_REGISTRATION_PERSONALCREATEACCOUNT = "hsidRegistrationPersonalCreateAccount";
+	   
+	   public static final String HSID_REGISTRATION_CONFIRM_INFORMATION = "hsidRegistrationConfirmInformation";
 
 }
