@@ -46,6 +46,14 @@ public class LoginCommonConstants {
 	public static final String RALLY_SSO = "rallySSO";
 
 	public static final String PLANTYPE = "planType";
+
+	public static final String Option = null;
+
+	public static final String Option1 = null;
+
+	public static final String Option2 = null;
+
+	public static final String Option3 = null;
 	
 	public static String PLAN_NAME;
 	

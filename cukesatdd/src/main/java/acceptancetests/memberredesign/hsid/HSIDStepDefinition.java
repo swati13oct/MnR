@@ -1,6 +1,7 @@
 package acceptancetests.memberredesign.HSID;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -106,9 +107,83 @@ public class HSIDStepDefinition {
 		assistiveregistration.usernameautofill(username);
 	}
 	
+
+	@And("^the user validate all fields on this page$")
+	public void validateotherfields()
+	{
+		AssistiveRegistrationPage assistiveregistration = (AssistiveRegistrationPage) getLoginScenario().getBean(PageConstantsMnR.ASSISTIVE_REGISTRATION_PAGE);
+		String username = (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
+		assistiveregistration.validate_allfields();
+	
+	}
+	
+	@And("^the user validate security questions option and user answer all security questions$")
+	public void validatesecurityquestions(DataTable givenAttributes)
+	{
+		AssistiveRegistrationPage assistiveregistration = (AssistiveRegistrationPage) getLoginScenario()
+			.getBean(PageConstantsMnR.ASSISTIVE_REGISTRATION_PAGE);
+	
+     List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+				memberAttributesRow.get(i).getCells().get(1));
+	}
+	String option = memberAttributesMap.get("Option");
+	String option1 = memberAttributesMap.get("Option1");
+	String option2 = memberAttributesMap.get("Option2");
+	String option3 = memberAttributesMap.get("Option3");
+	getLoginScenario().saveBean(LoginCommonConstants.Option, option);
+	getLoginScenario().saveBean(LoginCommonConstants.Option1, option1);
+	getLoginScenario().saveBean(LoginCommonConstants.Option2, option2);
+	getLoginScenario().saveBean(LoginCommonConstants.Option3, option3);
+	assistiveregistration.validate_security1_select(option);
+	System.out.println(option1);
+	assistiveregistration.validate_security2_select(option1);
+	assistiveregistration.validate_security2_ans();
+	System.out.println(option2);
+	assistiveregistration.validate_security3_select(option2);
+	assistiveregistration.validate_security3_ans();
+	System.out.println(option3);
+	assistiveregistration.validate_security4_select(option3);
+	assistiveregistration.validate_security4_ans();
+	
+	
+	}
+	
+	@And("^the user check checkboxes$")
+	public void validatecheckboxes()
+	{
+	AssistiveRegistrationPage assistiveregistration = (AssistiveRegistrationPage) getLoginScenario()
+	.getBean(PageConstantsMnR.ASSISTIVE_REGISTRATION_PAGE);
+	assistiveregistration.validate_checkboxes();
+	
+}
+	
+	@And("^the user clicks submit button$")
+	public void validatesubmitbutton()
+	{
+	AssistiveRegistrationPage assistiveregistration = (AssistiveRegistrationPage) getLoginScenario()
+	.getBean(PageConstantsMnR.ASSISTIVE_REGISTRATION_PAGE);
+	assistiveregistration.validate_submitbutton();
+	
+}
+	@And("^the user enters password and confirm password field$")
+	public void validatepasswordfield()
+	{
+	AssistiveRegistrationPage assistiveregistration = (AssistiveRegistrationPage) getLoginScenario()
+	.getBean(PageConstantsMnR.ASSISTIVE_REGISTRATION_PAGE);
+	assistiveregistration.validate_passwordfields();
+	}
+	
+	@And("^the user enters email and confirm email field$")
+	public void validateemailfield()
+	{
+	AssistiveRegistrationPage assistiveregistration = (AssistiveRegistrationPage) getLoginScenario()
+	.getBean(PageConstantsMnR.ASSISTIVE_REGISTRATION_PAGE);
+	assistiveregistration.validate_emailfields();
+	}
 	
 
 	
-	
-
 }
