@@ -48,20 +48,6 @@ public class EnrollInPlanStepDefinitionAARP {
 	}
 
 	/**
-	 * @toDo:user is on the AARP medicare site landing page
-	 */
-	@Given("^the user is on AARP medicare site landing page OLE$")
-	public void the_user_on_UHC_Medicaresolutions_Site() {
-		WebDriver wd = getLoginScenario().getWebDriver();
-
-		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
-
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
-				aquisitionhomepage);
-	}
-
-	/**
 	 * @toDo:user performs plan search using following information
 	 */
 	@When("^user performs plan search using following information in AARP site OLE$")

@@ -43,20 +43,7 @@ public class EnrollInPlanStepDefinitionUHC {
 		return loginScenario;
 	}
 
-	/**
-	 * @toDo:user is on the UHC medicare solutions landing page
-	 */
-	@Given("^the user is on the UHC medicare solutions landing page$")
-	public void the_user_on_UHC_Medicaresolutions_Site() {
-		WebDriver wd = getLoginScenario().getWebDriver();
-
-		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
-
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
-				aquisitionhomepage);
-	}
-
+	
 	/**
 	 * @toDo:user performs plan search using following information
 	 */

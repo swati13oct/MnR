@@ -25,25 +25,6 @@ public class AttendCommunityMeetingStepDefinitionAARP {
 	}
 
 	/**
-	 * @toDo: user lands on the acquisition page
-	 */
-	@Given("^the user is on the AARP acquisition site home page$")
-	public void the_user_on_aarp_medicaresolutions_Site() {
-		WebDriver wd = getLoginScenario().getWebDriver();
-
-		AcquisitionHomePage acquisitionhomepage = new AcquisitionHomePage(wd);
-
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		if(acquisitionhomepage!=null){
-			if(acquisitionhomepage.validateAllElementsOnPage())
-				getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
-						acquisitionhomepage);
-			else
-				Assert.fail("Page Loading error: not able to validate the elements on the page");
-		}
-	}
-	
-	/**
 	 * @toDo: user navigates to request more help and information page
 	 */
 	@When("^the user navigates to request more help and information page in AARP site and validates$")

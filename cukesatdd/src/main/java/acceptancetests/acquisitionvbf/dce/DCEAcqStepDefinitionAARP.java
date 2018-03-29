@@ -9,6 +9,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.acquisitionvbf.common.CommonStepDefinition;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
@@ -34,10 +35,10 @@ public class DCEAcqStepDefinitionAARP {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-	
-	/**
+/*	
+	*//**
 	 * @toDo:
-	 */
+	 *//*
 	@Given("^the user is on ulayer medicare acq site landing page$")
 	public void the_user_is_on_AARP_medicare_site_landing_page() {
 		
@@ -48,18 +49,22 @@ public class DCEAcqStepDefinitionAARP {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
 				aquisitionhomepage);
-		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
-		getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
+		
 	}
-	
+	*/
 	/**
 	 * @toDo:
 	 */
 	@When("^I access the acquisition DCE tool from home page$")
 	public void I_access_the_DCE_tool_home_page() throws InterruptedException {
-
-		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) loginScenario.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
-		dce.navigateToDCEToolFromHome();
+		
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(CommonStepDefinition.webDriverObj);
+		getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
+		
+		DrugCostEstimatorPage dce1 = (DrugCostEstimatorPage) loginScenario.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce1.navigateToDCEToolFromHome();
 	}
 	
 	/**

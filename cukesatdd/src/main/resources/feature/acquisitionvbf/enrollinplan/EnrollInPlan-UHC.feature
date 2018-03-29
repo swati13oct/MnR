@@ -2,7 +2,7 @@
 Feature: To test enroll in plan on UHC site 
 @OLE_MA
 Scenario Outline: Verify enroll in plan in UHC site for federal plan type member  
-Given the user is on the UHC medicare solutions landing page
+Given the user is on the UHC medicare solutions site landing page
 When user performs plan search using following information in UHC site
         | Zip Code    | <zipcode> |
         | County Name | <countyName>  |
@@ -46,7 +46,7 @@ Then the user validates the enrollment application confimation in UHC site
     
 @OLE_PDP
 Scenario Outline: Verify enroll in plan in UHC site for federal plan type member  
-Given the user is on UHC medicare site landing page
+Given the user is on the UHC medicare solutions site landing page
 When user performs plan search using following information in UHC site
         | Zip Code    | <zipcode> |
         | County Name | <countyName>  |

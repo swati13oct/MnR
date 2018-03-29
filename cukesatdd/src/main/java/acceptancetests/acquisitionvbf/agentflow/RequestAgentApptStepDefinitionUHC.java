@@ -27,19 +27,6 @@ public class RequestAgentApptStepDefinitionUHC {
 		return loginScenario;
 	}
 
-	/**
-	 * @toDo: user reaching home page
-	 */
-	@Given("^the user is on the UHCM site landing page$")
-	public void the_user_on_uhc_medicaresolutions_Site() {
-		WebDriver wd = getLoginScenario().getWebDriver();
-
-		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
-
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
-				aquisitionhomepage);
-	}
 	
 	/**
 	 * @toDo: user navigates to request more help and information in 

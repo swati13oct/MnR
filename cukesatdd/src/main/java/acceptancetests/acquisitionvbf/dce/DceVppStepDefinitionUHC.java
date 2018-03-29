@@ -44,20 +44,6 @@ public class DceVppStepDefinitionUHC {
 	}
 
 	/**
-	 * @toDo: user is on UHC homepage
-	 */
-	@Given("^the user is on the UHC medicare solutions site landing page$")
-	public void landing_page_umssite() {
-		WebDriver wd = getLoginScenario().getWebDriver();
-
-		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
-
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
-				aquisitionhomepage);
-	}
-
-	/**
 	 * @toDo:user performs drug search using the following information 
 	 */
 	@When("^the user performs drug search using the following information in UMS site$")

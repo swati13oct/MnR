@@ -3,7 +3,7 @@ Feature:1.23-VBF-Acq-Drug Cost Estimator (DCE) - To test DCE flows on aarp acq s
 
 @acq_drug_cost_estimator_ulayer_flow
 Scenario Outline: To verify DCE flow from Ulayer home page
-Given the user is on ulayer medicare acq site landing page
+Given the user is on AARP medicare acquisition site landing page
 When I access the acquisition DCE tool from home page
 And I have added a drug to my drug list
 	|Drug|<drug>|
@@ -22,7 +22,7 @@ And I navigate to step3 page and validate
 
 @dceVppUlayer
 Scenario Outline: To verify DCE flow from Ulayer Plan Summary page 
-Given the user is on ulayer medicare acq site landing page
+Giventhe user is on AARP medicare acquisition site landing page
 When I access the vpp page using below zipcode on aarp site
 	| Zip Code    | <zipcode>  |
 And I access the DCE tool on aarp site
@@ -41,7 +41,7 @@ Examples:
 
 @switchNowStep3
 Scenario Outline: To test the switch now option in step 3
-Given the user is on ulayer medicare acq site landing page
+Given the user is on AARP medicare acquisition site landing page
 When I access the vpp page using below zipcode on aarp site
 	| Zip Code    | <zipcode>  |
 And I access the DCE tool on aarp site
@@ -60,7 +60,7 @@ Examples:
 
 @defect3235
 Scenario Outline: To go through dce flow from prescription drugs tab and verify right message when clicked on add to compare
-Given the user is on ulayer medicare acq site landing page
+Given the user is on AARP medicare acquisition site landing page
 When I access the vpp page using below zipcode on aarp site
 	|Zip Code| <zipcode> |
 And I go to the view plan details page and access DCE flow from prescription drugs tab
@@ -78,7 +78,7 @@ Examples:
 
 @defect2291
 Scenario Outline: To select a pharmacy in DCE under 2018 and then change year to 2017 and check the pharmacy selected isn't there
-Given the user is on ulayer medicare acq site landing page
+Given the user is on AARP medicare acquisition site landing page
 When I access the acquisition DCE tool from home page
 And I have added a drug to my drug list
 	|Drug|<drug>|
@@ -97,7 +97,7 @@ Examples:
 	
 @dceMousehoverOurPlans @aprilRelease2018
 Scenario Outline: To Mousehover on Our Plans tab from the DCE Page 
-Given the user is on ulayer medicare acq site landing page
+Given the user is on AARP medicare acquisition site landing page
 When I access the acquisition DCE tool from home page
 And I hover or click on Our Plans in the top navigation and enter zipcode Ulayer
 | Zip Code    | <zipcode>  |
