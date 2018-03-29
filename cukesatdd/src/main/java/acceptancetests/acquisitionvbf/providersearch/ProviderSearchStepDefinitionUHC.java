@@ -33,22 +33,7 @@ public class ProviderSearchStepDefinitionUHC {
 		return loginScenario;
 				
 	}
-	
-	/**
-	 * @toDo:user is on UMS medicare acquisition site landing page
-	 */
-	@Given("^the user is on UMS medicare acquisition site landing page$")
-	public void user_UMS_Medicare()
-	{
-		WebDriver wd = getLoginScenario().getWebDriver();
 
-		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
-				aquisitionhomepage);
-		
-	}
-	
 	/**
 	 * @toDo:the user performs plan search using following information in the UMS site
 	 */

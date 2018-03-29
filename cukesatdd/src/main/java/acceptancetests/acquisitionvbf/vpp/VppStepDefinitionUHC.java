@@ -38,21 +38,6 @@ public class VppStepDefinitionUHC {
 	}
 
 	/**
-	 * @toDo:user is on the uhcmedicaresolutions site landing page
-	 */
-	@Given("^the user is on the uhcmedicaresolutions site landing page$")
-	public void the_user_on_UHC_Medicaresolutions_Site() {
-		WebDriver wd = getLoginScenario().getWebDriver();
-
-		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
-
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
-				aquisitionhomepage);
-	}
-
-
-	/**
 	 * @toDo : the user enters the zip code to search plans
 	 */
 	@When("^the user performs plan search using following information in UMS site$")

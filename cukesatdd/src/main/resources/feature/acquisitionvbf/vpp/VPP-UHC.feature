@@ -4,7 +4,7 @@ Feature:1.09-VBF-Acq-To test plan summary in vpp flow UMS site
 @planDetailsUMS
 @vppBlayerSmoke
 Scenario Outline: Verify plan details in UMS site 
-Given the user is on the uhcmedicaresolutions site landing page
+Given the user is on the UHC medicare solutions site landing page
 When the user performs plan search using following information in UMS site
 	| Zip Code    | <zipcode>|
 	| County Name |<county> |

@@ -33,22 +33,6 @@ public class PDPEnquiryKitStepDefintionUHC {
 		return loginScenario;
 	}
 
-	/**
-	 * @toDo:the user is on the UHC acquisition Site
-	 */
-	@Given("^the user is on the UHC acquisition Site home page$")
-	public void the_user_is_on_uhc_acquisition_site_home_page()
-	{
-
-		WebDriver wd = getLoginScenario().getWebDriver();
-
-		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
-
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
-				aquisitionhomepage);
-	
-	}
 	
 	/**
 	 * @toDo:the user navigates to Request More Help and Information page 

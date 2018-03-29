@@ -37,23 +37,6 @@ public class PharmacyLocatorStepDefinitionUHC {
 	}
 
 	/**
-	 * @toDo:user is on the UMS Medicare Site landing page
-	 */
-	@Given("^the user is on the UMS Medicare Site landing page$")
-	public void registered_member_located_pharmacy_UMS() {
-		WebDriver wd = getLoginScenario().getWebDriver();
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-
-		AcquisitionHomePage acqusitionHomePage = new AcquisitionHomePage(wd);
-
-		if (acqusitionHomePage != null) {
-			getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
-					acqusitionHomePage);
-			Assert.assertTrue(true);
-		}
-	}
-
-	/**
 	 * @toDo:user hovers to Our Plans and select Request More Help and Information for following plan type
 	 */
 	@When("^the user hovers to Our Plans and select Request More Help and Information for following plan type$")

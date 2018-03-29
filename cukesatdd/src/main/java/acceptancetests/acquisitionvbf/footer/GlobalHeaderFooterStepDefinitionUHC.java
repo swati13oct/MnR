@@ -33,20 +33,6 @@ public class GlobalHeaderFooterStepDefinitionUHC {
 	}
 
 	/**
-	 * @toDo:the user is on the UHC Medicaresolutions Site
-	 */
-	@Given("^the user is on the UHC Medicaresolutions Site$")
-	public void the_user_on_UHC_Medicaresolutions_Site() {
-		WebDriver wd = getLoginScenario().getWebDriver();
-
-		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
-
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
-				aquisitionhomepage);
-	}
-
-	/**
 	 * @toDo:user accesses global footer
 	 */
 	@When("^user accesses global footer UHC Medicaresolutions Site$")
