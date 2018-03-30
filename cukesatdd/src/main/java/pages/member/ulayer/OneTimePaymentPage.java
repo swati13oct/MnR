@@ -1,3 +1,5 @@
+
+
 package pages.member.ulayer;
 
 import java.util.Map;
@@ -8,6 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
+import pages.dashboard.eob.EOBPage;
 
 /**
  * @author pperugu
@@ -15,37 +18,50 @@ import atdd.framework.UhcDriver;
  */
 public class OneTimePaymentPage extends UhcDriver{
 
+	@FindBy(xpath = ".//*[@id='atdd_otheramount_label']/label")
+	private WebElement amountRadioButton;
 	
+	@FindBy(id = "other-amount-number")
+	private WebElement otheramountfield;
 	
-	@FindBy(name = "routingNumber")
+	@FindBy(id = "routing-number")
 	private WebElement routingNumberField;
 
-	@FindBy(name = "confirmRoutingNumber")
+	@FindBy(id = "confirm-routing-number")
 	private WebElement confirmRoutingNumberField;
 	
-	@FindBy(name = "accountNumber")
+	@FindBy(id = "account-number")
 	private WebElement accountNumberField;
 	
-	@FindBy(name = "confirmAccountNumber")
+	@FindBy(id = "confirm-account-number")
 	private WebElement confirmAccountNumberField;
 	
-	@FindBy(name = "firstName")
+	@FindBy(id = "first-name")
 	private WebElement firstNameField;
 	
-	@FindBy(name = "middleName")
+	@FindBy(id = "middle-name")
 	private WebElement middleNameField;
 	
-	@FindBy(name = "lastName")
+	@FindBy(id = "last-name")
 	private WebElement lastNameField;
 	
-	@FindBy(xpath = "/html/body/div[6]/div/div/table/tbody/tr[5]/td/div[2]/div/div/div[2]/div[7]/div/div/div/div/form/div/div/div[2]/div/div[3]/a")			
+
+	
+	@FindBy(xpath = "/html/body/div[6]/div/div/table/tbody/tr[5]/td/div[2]/div/div/div[2]/div[7]/div/div/div/div/form/div/div/div[2]/div/table[1]/tbody/tr[1]/td[2]")			
+	private WebElement amountDisplayed;
+	
+	@FindBy(xpath ="//*[@id='atdd_electronicsignature_label']/div/fieldset/label")
+	private WebElement electrosign;
+	
+	@FindBy(id="review-continue")
 	private WebElement continueButton;
 	
+	@FindBy(className="modal-body")
+	private WebElement iPerceptionPopUp;
 	
-	@FindBy(xpath = "/html/body/div[6]/div/div/table/tbody/tr[5]/td/div[2]/div/div/div[2]/div[7]/div/div/div/div/form/div/div/div[2]/div/table[1]/tbody/tr[2]/td[1]/input")			
-	private WebElement otherAmtRadioButton;
+
 	
-	@FindBy(id = "amountToBePaid")
+	@FindBy(id ="amountToBePaid")
 	private WebElement amountToBePaidField;
 	
 	public OneTimePaymentPage(WebDriver driver) {
@@ -71,11 +87,28 @@ public class OneTimePaymentPage extends UhcDriver{
 			//TODO:: if first radio button is selected??
 		}*/
 		
-		otherAmtRadioButton.click();
+		try{
+			if (iPerceptionPopUp.isDisplayed()) {
+				iPerceptionPopUp.click();
+			}
+		}catch(Exception e)        {
+			System.out.println("iPerception Pop Up not displayed");
+		}
+
+		waitforElement(amountRadioButton);
+		validate(amountRadioButton);
+		amountRadioButton.click();
 		
-		amountToBePaidField.clear();
-		amountToBePaidField.click();
-		amountToBePaidField.sendKeys(amount);
+	
+		
+		
+		
+		
+		otheramountfield.click();
+		
+		otheramountfield.clear();
+		otheramountfield.click();
+		otheramountfield.sendKeys(amount);
 		
 		routingNumberField.click();
 		routingNumberField.clear();
@@ -104,7 +137,8 @@ public class OneTimePaymentPage extends UhcDriver{
 		lastNameField.click();
 		lastNameField.clear();
 		lastNameField.sendKeys(lastName);
-				
+		
+		electrosign.click();				
 		continueButton.click();
 		
 		if(driver.getTitle().equalsIgnoreCase("Make Online Payment")){
@@ -117,7 +151,7 @@ public class OneTimePaymentPage extends UhcDriver{
 	@Override
 	public void openAndValidate() {
 		
-		validate(otherAmtRadioButton);
+		validate(otheramountfield);
 		validate(amountToBePaidField);
 		validate(routingNumberField);
 		validate(confirmRoutingNumberField);
