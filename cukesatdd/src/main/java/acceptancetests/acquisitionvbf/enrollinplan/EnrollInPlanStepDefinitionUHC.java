@@ -42,7 +42,7 @@ public class EnrollInPlanStepDefinitionUHC {
 		return loginScenario;
 	}
 	
-	private Map<String, String> memberAttributesMap =new CommonStepDefinition().getAttributesMap();
+	private Map<String, String> memberAttributesMap =null;
 	
 	private List<DataTableRow> memberAttributesRow = new CommonStepDefinition().getAttributesRow();
 	
@@ -51,7 +51,11 @@ public class EnrollInPlanStepDefinitionUHC {
 	 */
 	@When("^user performs plan search using following information in UHC site$")
 	public void zipcode_details_in_uhc_site(DataTable givenAttributes) {
-
+		if(memberAttributesRow.size()>0){
+		        for (int i = 0; i < memberAttributesRow.size(); i++) {
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		        }
+	        }
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String county = memberAttributesMap.get("County Name");
 		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
@@ -78,6 +82,11 @@ public class EnrollInPlanStepDefinitionUHC {
 	 */
 	@And("^the user views plans of the below plan type in UHC site$")
 	public void user_performs_planSearch_in_aarp_site() {
+		if(memberAttributesRow.size()>0){
+	        for (int i = 0; i < memberAttributesRow.size(); i++) {
+	               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+	        }
+        }
 		String plantype = memberAttributesMap.get("Plan Type");
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
@@ -193,7 +202,11 @@ public class EnrollInPlanStepDefinitionUHC {
 	@And("^the user fill following information in beneficiary information step in UHC site$")
 	public void user_fill_information_beneficiary_information_aarp(
 			) {
-
+		if(memberAttributesRow.size()>0){
+	        for (int i = 0; i < memberAttributesRow.size(); i++) {
+	               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+	        }
+        }
 		String name = memberAttributesMap.get("First Name") + " "+ memberAttributesMap.get("Middle Initial") +". "+memberAttributesMap.get("Last Name");
 		getLoginScenario().saveBean(EnrollInPlanCommonConstants.ENROLLER_NAME,
 				name);

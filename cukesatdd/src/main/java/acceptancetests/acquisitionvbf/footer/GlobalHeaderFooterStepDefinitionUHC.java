@@ -38,10 +38,7 @@ public class GlobalHeaderFooterStepDefinitionUHC {
 		return loginScenario;
 	}
 	
-	private Map<String, String> memberAttributesMap =new CommonStepDefinition().getAttributesMap();
-	
-	private List<DataTableRow> memberAttributesRow = new CommonStepDefinition().getAttributesRow();
-	
+
 
 	/**
 	 * @toDo:user accesses global footer

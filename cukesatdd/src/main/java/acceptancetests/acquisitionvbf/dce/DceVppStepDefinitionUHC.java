@@ -44,7 +44,7 @@ public class DceVppStepDefinitionUHC {
 		return loginScenario;
 	}
 
-	private Map<String, String> memberAttributesMap =new CommonStepDefinition().getAttributesMap();
+	private Map<String, String> memberAttributesMap =null;
 	
 	private List<DataTableRow> memberAttributesRow = new CommonStepDefinition().getAttributesRow();
 	
@@ -54,6 +54,11 @@ public class DceVppStepDefinitionUHC {
 	@When("^the user performs drug search using the following information in UMS site$")
 	public void zipcode_and_planyear_details_ums() {
 		String planYear = null;
+		 if(memberAttributesRow.size()>0){
+		        for (int i = 0; i < memberAttributesRow.size(); i++) {
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		        }
+	        }
 		if (memberAttributesMap.containsKey("Plan Year")) {
 			planYear = memberAttributesMap.get("Plan Year");
 		} else {
@@ -221,7 +226,11 @@ public class DceVppStepDefinitionUHC {
 	@And("^the user selects low cost options for above selected drug in UMS site$")
 	public void user_selects_lowCostOptions_ums() {
 
-		List<DataTableRow> drugAttributesRow = memberAttributesRow;
+		 if(memberAttributesRow.size()>0){
+		        for (int i = 0; i < memberAttributesRow.size(); i++) {
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		        }
+	        }
 		Map<String, String> drugAttributesMap = memberAttributesMap;
 		String isGenericAvailable = drugAttributesMap.get("Generic Available");
 		if (isGenericAvailable.equalsIgnoreCase("yes")) {
@@ -259,7 +268,11 @@ public class DceVppStepDefinitionUHC {
 	@And("^the user selects low cost options for the selected drug in UMS site$")
 	public void low_cost_ums(){
 
-		List<DataTableRow> drugAttributesRow = memberAttributesRow;
+		 if(memberAttributesRow.size()>0){
+		        for (int i = 0; i < memberAttributesRow.size(); i++) {
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		        }
+	        }
 		Map<String, String> drugAttributesMap = memberAttributesMap;
 		String isGenericAvailable = drugAttributesMap.get("Generic Available");
 		if (isGenericAvailable.equalsIgnoreCase("yes")) {
@@ -364,7 +377,11 @@ public class DceVppStepDefinitionUHC {
 	@And("^the user selects the pharmacy type and distance in UMS site$")
 	public void user_selects_pharmacyType_and_distance_ums(
 			) {
-		List<DataTableRow> pharmacyAttributesRow = memberAttributesRow;
+		 if(memberAttributesRow.size()>0){
+		        for (int i = 0; i < memberAttributesRow.size(); i++) {
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		        }
+	        }
 		Map<String, String> pharmacyAttributesMap = memberAttributesMap;
 		String pharmacyType = pharmacyAttributesMap.get("Pharmacy Type");
 		getLoginScenario().saveBean(DceCommonConstants.PHARMACY_TYPE,
@@ -383,7 +400,11 @@ public class DceVppStepDefinitionUHC {
 	@And("^the user selects the type of pharmacy and distance in UMS site$")
 	public void select_pharmacy_distance_ums(){
 
-		List<DataTableRow> pharmacyAttributesRow = memberAttributesRow;
+		 if(memberAttributesRow.size()>0){
+		        for (int i = 0; i < memberAttributesRow.size(); i++) {
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		        }
+	        }
 		Map<String, String> pharmacyAttributesMap = memberAttributesMap;
 		String pharmacyType = pharmacyAttributesMap.get("Pharmacy Type");
 		getLoginScenario().saveBean(DceCommonConstants.PHARMACY_TYPE,
@@ -622,7 +643,11 @@ public class DceVppStepDefinitionUHC {
 	 */
 	@When("^the user views plans of the below plan type in UMS site$")
 	public void user_performs_planSearch_in_ums() {
-		List<DataTableRow> givenAttributesRow = memberAttributesRow;
+		 if(memberAttributesRow.size()>0){
+		        for (int i = 0; i < memberAttributesRow.size(); i++) {
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		        }
+	        }
 		Map<String, String> givenAttributesMap = memberAttributesMap;
 
 		String plantype = givenAttributesMap.get("Plan Type");
@@ -644,7 +669,11 @@ public class DceVppStepDefinitionUHC {
 	 */
 	@And("^the user selects the plan in UMS site$")
 	public void user_selects_plan_ums(){
-		List<DataTableRow> givenAttributesRow = memberAttributesRow;
+		 if(memberAttributesRow.size()>0){
+		        for (int i = 0; i < memberAttributesRow.size(); i++) {
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		        }
+	        }
 		Map<String, String> givenAttributesMap = memberAttributesMap;
 
 
@@ -681,7 +710,11 @@ public class DceVppStepDefinitionUHC {
 	 */
 	@And("^the user validates the plan summary for the below plan in UMS site$")
 	public void user_validates_plan_summary_ums() {
-		List<DataTableRow> givenAttributesRow = memberAttributesRow;
+		 if(memberAttributesRow.size()>0){
+		        for (int i = 0; i < memberAttributesRow.size(); i++) {
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		        }
+	        }
 		Map<String, String> givenAttributesMap = memberAttributesMap;
 
 
@@ -713,7 +746,11 @@ public class DceVppStepDefinitionUHC {
 	 */
 	@Then("^the user view plan details of the selected plan in UMS site$")
 	public void view_plan_details_ums(){
-		List<DataTableRow> givenAttributesRow = memberAttributesRow;
+		 if(memberAttributesRow.size()>0){
+		        for (int i = 0; i < memberAttributesRow.size(); i++) {
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		        }
+	        }
 		Map<String, String> givenAttributesMap = memberAttributesMap;
 
 		String planName = givenAttributesMap.get("Plan Name");

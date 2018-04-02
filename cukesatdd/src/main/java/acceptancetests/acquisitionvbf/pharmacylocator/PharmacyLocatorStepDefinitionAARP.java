@@ -35,7 +35,7 @@ public class PharmacyLocatorStepDefinitionAARP {
 		return loginScenario;
 	}
 	
-	private Map<String, String> memberAttributesMap =new CommonStepDefinition().getAttributesMap();
+	private Map<String, String> memberAttributesMap =null;
 	
 	private List<DataTableRow> memberAttributesRow = new CommonStepDefinition().getAttributesRow();
 
@@ -82,8 +82,12 @@ public class PharmacyLocatorStepDefinitionAARP {
 	 */
 	@And("^the user enters following details for pharmacy search in AARP Site$")
 	public void user_enters_zipcode_distance_details_aarp() {
-		List<DataTableRow> zipAttributesRow = memberAttributesRow;
-		Map<String, String> zipAttributesMap = memberAttributesMap;
+		 if(memberAttributesRow.size()>0){
+		        for (int i = 0; i < memberAttributesRow.size(); i++) {
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		        }
+	        }
+		 Map<String, String> zipAttributesMap = memberAttributesMap;
 		String zipcode = zipAttributesMap.get("Zip Code");
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.ZIPCODE,
 				zipcode);

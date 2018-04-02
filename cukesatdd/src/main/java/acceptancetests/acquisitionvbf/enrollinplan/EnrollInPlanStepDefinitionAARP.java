@@ -48,7 +48,7 @@ public class EnrollInPlanStepDefinitionAARP {
 		return loginScenario;
 	}
 	
-	private Map<String, String> memberAttributesMap =new CommonStepDefinition().getAttributesMap();
+	private Map<String, String> memberAttributesMap =null;
 	
 	private List<DataTableRow> memberAttributesRow = new CommonStepDefinition().getAttributesRow();
 
@@ -57,7 +57,11 @@ public class EnrollInPlanStepDefinitionAARP {
 	 */
 	@When("^user performs plan search using following information in AARP site OLE$")
 	public void zipcode_details_in_aarp_site() {
-
+		if(memberAttributesRow.size()>0){
+	        for (int i = 0; i < memberAttributesRow.size(); i++) {
+	               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+	        }
+        }
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String county = memberAttributesMap.get("County Name");
 		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
@@ -83,7 +87,11 @@ public class EnrollInPlanStepDefinitionAARP {
 	 */
 	@And("^the user views plans of the below plan type in AARP site OLE$")
 	public void user_performs_planSearch_in_aarp_site() {
-		
+		if(memberAttributesRow.size()>0){
+	        for (int i = 0; i < memberAttributesRow.size(); i++) {
+	               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+	        }
+        }
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(
 				CommonConstants.WEBDRIVER); //
 		String plantype = memberAttributesMap.get("Plan Type");
@@ -153,7 +161,11 @@ public class EnrollInPlanStepDefinitionAARP {
 	@And("^the user fill following information in introduction information step in AARP site OLE$")
 	public void user_fill_information_introduction_information_aarp() {
 
-
+		if(memberAttributesRow.size()>0){
+	        for (int i = 0; i < memberAttributesRow.size(); i++) {
+	               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+	        }
+        }
 		IntroductionInformationPage introInformationPage = (IntroductionInformationPage) getLoginScenario()
 				.getBean(PageConstants.INTRODUCTION_INFORMATION_PAGE);
 		introInformationPage
@@ -208,7 +220,11 @@ public class EnrollInPlanStepDefinitionAARP {
 	@And("^the user fill following information in beneficiary information step in AARP site OLE$")
 	public void user_fill_information_beneficiary_information_aarp(
 			) {
-
+		if(memberAttributesRow.size()>0){
+	        for (int i = 0; i < memberAttributesRow.size(); i++) {
+	               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+	        }
+        }
 		boolean hasEnrolled = (Boolean) getLoginScenario().getBean(
 				EnrollInPlanCommonConstants.HAS_ENROLLED);
 
@@ -264,6 +280,11 @@ public class EnrollInPlanStepDefinitionAARP {
 	 */
 	@And("^the user select no for Special Election Period OLE$")
 	public void user_selects_no_for_SEPQuestion() {
+		if(memberAttributesRow.size()>0){
+	        for (int i = 0; i < memberAttributesRow.size(); i++) {
+	               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+	        }
+        }
 		boolean hasEnrolled = (Boolean) getLoginScenario().getBean(
 				EnrollInPlanCommonConstants.HAS_ENROLLED);
 
@@ -300,6 +321,11 @@ public class EnrollInPlanStepDefinitionAARP {
 	 */
 	@And("^the user select yes for Special Election Period OLE$")
 	public void user_selects_yes_for_SEPQuestion() {
+		if(memberAttributesRow.size()>0){
+	        for (int i = 0; i < memberAttributesRow.size(); i++) {
+	               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+	        }
+        }
 		boolean hasEnrolled = (Boolean) getLoginScenario().getBean(
 				EnrollInPlanCommonConstants.HAS_ENROLLED);
 
@@ -363,7 +389,11 @@ public class EnrollInPlanStepDefinitionAARP {
 	@And("^the user fill following information in esrd information step in AARP site OLE$")
 	public void user_fill_information_esrd_information_aarp(
 			) {
-
+		if(memberAttributesRow.size()>0){
+	        for (int i = 0; i < memberAttributesRow.size(); i++) {
+	               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+	        }
+        }
 		boolean hasEnrolled = (Boolean) getLoginScenario().getBean(
 				EnrollInPlanCommonConstants.HAS_ENROLLED);
 
@@ -413,6 +443,11 @@ public class EnrollInPlanStepDefinitionAARP {
 	@And("^the user fill following information in prescription drug coverage step in AARP site OLE$")
 	public void user_fill_information_prescription_drug_coverage_aarp(
 			) {
+		if(memberAttributesRow.size()>0){
+	        for (int i = 0; i < memberAttributesRow.size(); i++) {
+	               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+	        }
+        }
 		boolean hasEnrolled = (Boolean) getLoginScenario().getBean(
 				EnrollInPlanCommonConstants.HAS_ENROLLED);
 
@@ -460,7 +495,11 @@ public class EnrollInPlanStepDefinitionAARP {
 	@And("^the user fill following information in long term care step in AARP site OLE$")
 	public void user_fill_information_long_term_care_aarp(
 			) {
-
+		if(memberAttributesRow.size()>0){
+	        for (int i = 0; i < memberAttributesRow.size(); i++) {
+	               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+	        }
+        }
 		boolean hasEnrolled = (Boolean) getLoginScenario().getBean(
 				EnrollInPlanCommonConstants.HAS_ENROLLED);
 
@@ -520,7 +559,11 @@ public class EnrollInPlanStepDefinitionAARP {
 	@And("^the user fill following information in medicaid step in AARP site OLE$")
 	public void user_fill_information_medicaid_aarp_step_aarp(
 			) {
-
+		if(memberAttributesRow.size()>0){
+	        for (int i = 0; i < memberAttributesRow.size(); i++) {
+	               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+	        }
+        }
 		boolean hasEnrolled = (Boolean) getLoginScenario().getBean(
 				EnrollInPlanCommonConstants.HAS_ENROLLED);
 
@@ -581,7 +624,11 @@ public class EnrollInPlanStepDefinitionAARP {
 	@And("^the user fill following information in other health insurance step in AARP site OLE$")
 	public void user_fill_information_other_health_insurance_aarp_step_aarp(
 			) {
-
+		if(memberAttributesRow.size()>0){
+	        for (int i = 0; i < memberAttributesRow.size(); i++) {
+	               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+	        }
+        }
 		boolean hasEnrolled = (Boolean) getLoginScenario().getBean(
 				EnrollInPlanCommonConstants.HAS_ENROLLED);
 
@@ -672,7 +719,11 @@ public class EnrollInPlanStepDefinitionAARP {
 	@And("^the user fill following information in plan payment options step in AARP site OLE$")
 	public void user_fill_information_plan_payment_options_aarp_step_aarp(
 		) {
-
+		if(memberAttributesRow.size()>0){
+	        for (int i = 0; i < memberAttributesRow.size(); i++) {
+	               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+	        }
+        }
 		boolean hasEnrolled = (Boolean) getLoginScenario().getBean(
 				EnrollInPlanCommonConstants.HAS_ENROLLED);
 
@@ -731,7 +782,11 @@ public class EnrollInPlanStepDefinitionAARP {
 	@And("^the user fill following information in optional Riders step in AARP site OLE$")
 	public void user_fill_information_optional_riders_aarp_step_aarp(
 			) {
-
+		if(memberAttributesRow.size()>0){
+	        for (int i = 0; i < memberAttributesRow.size(); i++) {
+	               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+	        }
+        }
 		boolean hasEnrolled = (Boolean) getLoginScenario().getBean(
 				EnrollInPlanCommonConstants.HAS_ENROLLED);
 
@@ -779,7 +834,11 @@ public class EnrollInPlanStepDefinitionAARP {
 	 */
 	@And("^the user selects proposed effective date OLE$")
 	public void user_selects_proposed_effective_date() {
-
+		if(memberAttributesRow.size()>0){
+	        for (int i = 0; i < memberAttributesRow.size(); i++) {
+	               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+	        }
+        }
 		boolean hasEnrolled = (Boolean) getLoginScenario().getBean(
 				EnrollInPlanCommonConstants.HAS_ENROLLED);
 
@@ -814,6 +873,11 @@ public class EnrollInPlanStepDefinitionAARP {
 	@And("^the user navigates to review and submit application step in AARP site OLE$")
 	public void user_navigates_review_and_submit_application_aarp(
 			) {
+		if(memberAttributesRow.size()>0){
+	        for (int i = 0; i < memberAttributesRow.size(); i++) {
+	               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+	        }
+        }
 		boolean hasEnrolled = (Boolean) getLoginScenario().getBean(
 				EnrollInPlanCommonConstants.HAS_ENROLLED);
 
@@ -841,6 +905,11 @@ public class EnrollInPlanStepDefinitionAARP {
 	@And("^the user reviews the information on review and submit application step in AARP site OLE$")
 	public void user_reviews_the_information_review_and_submit_applcation_aarp(
 			) {
+		if(memberAttributesRow.size()>0){
+	        for (int i = 0; i < memberAttributesRow.size(); i++) {
+	               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+	        }
+        }
 		boolean hasEnrolled = (Boolean) getLoginScenario().getBean(
 				EnrollInPlanCommonConstants.HAS_ENROLLED);
 

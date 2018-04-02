@@ -1,5 +1,8 @@
 package acceptancetests.acquisitionvbf.providersearch;
 
+import gherkin.formatter.model.DataTableRow;
+
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
@@ -28,15 +31,20 @@ public class ProviderSearchStepDefinitionUHC {
 				
 	}
 	
-	private Map<String, String> memberAttributesMap =new CommonStepDefinition().getAttributesMap();
+	private Map<String, String> memberAttributesMap =null;
 	
+	private List<DataTableRow> memberAttributesRow = new CommonStepDefinition().getAttributesRow();
 
 	/**
 	 * @toDo:the user performs plan search using following information in the UMS site
 	 */
 	@When("^the user performs plan search using following information in the UMS site$")
 	public void zipcode_details_in_UMS_site() {
-
+		 if(memberAttributesRow.size()>0){
+		        for (int i = 0; i < memberAttributesRow.size(); i++) {
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		        }
+	        }
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String county = memberAttributesMap.get("County Name");
 		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
@@ -61,7 +69,11 @@ public class ProviderSearchStepDefinitionUHC {
 	@When("^the user Click on Show Plans link$")
 	public void clickonshowplans()
 	{
-	
+		 if(memberAttributesRow.size()>0){
+		        for (int i = 0; i < memberAttributesRow.size(); i++) {
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		        }
+	        }
 		String planType = memberAttributesMap.get("PlanType");
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planType);
 		
@@ -84,7 +96,11 @@ public class ProviderSearchStepDefinitionUHC {
 	@When("^the user Click on Is my Provider covered link$")
 	public void clickonProvidercoveredlink()
 	{
-		
+		 if(memberAttributesRow.size()>0){
+		        for (int i = 0; i < memberAttributesRow.size(); i++) {
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		        }
+	        }
 		String planName = memberAttributesMap.get("PlanName");
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
@@ -102,7 +118,11 @@ public class ProviderSearchStepDefinitionUHC {
 		public void verifyproviderscovered()
 	{
 		
-	
+		 if(memberAttributesRow.size()>0){
+		        for (int i = 0; i < memberAttributesRow.size(); i++) {
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		        }
+	        }
 		String planName = memberAttributesMap.get("PlanName");
 		
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);

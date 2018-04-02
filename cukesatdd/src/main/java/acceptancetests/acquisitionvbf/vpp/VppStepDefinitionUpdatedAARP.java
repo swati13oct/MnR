@@ -36,7 +36,7 @@ public class VppStepDefinitionUpdatedAARP {
 		return loginScenario;
 	}
 
-	private Map<String, String> memberAttributesMap =new CommonStepDefinition().getAttributesMap();
+	private Map<String, String> memberAttributesMap =null;
 	
 	private List<DataTableRow> memberAttributesRow = new CommonStepDefinition().getAttributesRow();
 	
@@ -45,6 +45,11 @@ public class VppStepDefinitionUpdatedAARP {
 	 */
 	@When("^the user performs plan search using following information in the AARP site$")
 	public void zipcode_details_in_aarp_site() {
+		 if(memberAttributesRow.size()>0){
+		        for (int i = 0; i < memberAttributesRow.size(); i++) {
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		        }
+	        }
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String county = memberAttributesMap.get("County Name");
 		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
@@ -87,6 +92,11 @@ public class VppStepDefinitionUpdatedAARP {
 	 */
 	@And("^the user views the plans of the below plan type in AARP site$")
 	public void user_performs_planSearch_in_aarp_site() {
+		 if(memberAttributesRow.size()>0){
+		        for (int i = 0; i < memberAttributesRow.size(); i++) {
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		        }
+	        }
 		String plantype = memberAttributesMap.get("Plan Type");
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
@@ -108,6 +118,7 @@ public class VppStepDefinitionUpdatedAARP {
 	 */
 	@And("^I select all 3 plans to compare in MA and click on compare plan link$")
 	public void I_select_all_3_plans_to_compare(){
+		
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.clickonViewPlans();
@@ -140,7 +151,11 @@ public class VppStepDefinitionUpdatedAARP {
 	 */
 	@When("^the user view plan details of the above selected plan in AARP site and validates$")
 	public void user_views_plandetails_selected_plan_aarp() {
-		
+		 if(memberAttributesRow.size()>0){
+		        for (int i = 0; i < memberAttributesRow.size(); i++) {
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		        }
+	        }
 		String planName = memberAttributesRow.get(0).getCells().get(1);
 		getLoginScenario().saveBean(
 				VPPCommonConstants.PLAN_NAME,planName);
@@ -185,7 +200,11 @@ public class VppStepDefinitionUpdatedAARP {
 	 */
 	@And("^the user validates plan summary for the below plan in the AARP site$")
 	public void user_validates_plan_summary() {
-		
+		 if(memberAttributesRow.size()>0){
+		        for (int i = 0; i < memberAttributesRow.size(); i++) {
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		        }
+	        }
 		String planName = memberAttributesMap.get("Plan Name");
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()

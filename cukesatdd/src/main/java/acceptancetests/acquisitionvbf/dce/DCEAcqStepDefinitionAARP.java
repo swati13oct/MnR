@@ -34,7 +34,7 @@ public class DCEAcqStepDefinitionAARP {
 		return loginScenario;
 	}
 	
-	private Map<String, String> memberAttributesMap =new CommonStepDefinition().getAttributesMap();
+	private Map<String, String> memberAttributesMap =null;
 	
 	private List<DataTableRow> memberAttributesRow = new CommonStepDefinition().getAttributesRow();
 /*	
@@ -74,6 +74,11 @@ public class DCEAcqStepDefinitionAARP {
 	 */	
 	@When("^I access the vpp page using below zipcode on aarp site$")
 	public void I_access_the__vpp_page() throws InterruptedException {
+		 if(memberAttributesRow.size()>0){
+	        for (int i = 0; i < memberAttributesRow.size(); i++) {
+	               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+	        }
+        }
 		String zipcode = memberAttributesMap.get("Zip Code");
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)loginScenario.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.navigateToVpp(zipcode);
@@ -87,6 +92,11 @@ public class DCEAcqStepDefinitionAARP {
 	 */
 	@And("^I go to the view plan details page and access DCE flow from prescription drugs tab$")
 	public void clickOnViewPlanDetailsAndGoTODCE(){
+		 if(memberAttributesRow.size()>0){
+		        for (int i = 0; i < memberAttributesRow.size(); i++) {
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		        }
+	        }
 				String planName = memberAttributesMap.get("Plan Name");
 		String planType = memberAttributesMap.get("Plan Type");
 
@@ -105,7 +115,12 @@ public class DCEAcqStepDefinitionAARP {
 	 */
 	@And("^I access the DCE tool on aarp site$")
 	public void accessDCETool(){
-	
+		 if(memberAttributesRow.size()>0){
+		        for (int i = 0; i < memberAttributesRow.size(); i++) {
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		        }
+	        }
+		 
 		String plantype = memberAttributesMap.get("Plan Type");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) loginScenario.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		DrugCostEstimatorPage dce = plansummaryPage.navigateToDCE(plantype);
@@ -119,6 +134,11 @@ public class DCEAcqStepDefinitionAARP {
 	 */
 	@When("^I have added a drug to my drug list$")
 	public void I_have_added_a_drug_to_my_drug_list() throws InterruptedException {
+		 if(memberAttributesRow.size()>0){
+		        for (int i = 0; i < memberAttributesRow.size(); i++) {
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		        }
+	        }
 			String drug = memberAttributesRow.get(0).getCells().get(1);
 
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) loginScenario.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
@@ -140,6 +160,11 @@ public class DCEAcqStepDefinitionAARP {
 	}
 	@And("^the user selects the pharmacy tab information like miles, zipcode and pharmacy type$")
 	public void navigate_drugcostestimator_pharmacytab(DataTable memberAttributes) throws InterruptedException {
+		 if(memberAttributesRow.size()>0){
+		        for (int i = 0; i < memberAttributesRow.size(); i++) {
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		        }
+	        }
 		String zipcode = memberAttributesMap.get("Zipcode");
 		String radius = memberAttributesMap.get("Radius");
 		
@@ -181,6 +206,11 @@ public class DCEAcqStepDefinitionAARP {
 	 */
 	@Then("^I navigate to step3 page and validate$")
 	public void I_navigate_to_step_page() throws InterruptedException {
+		 if(memberAttributesRow.size()>0){
+		        for (int i = 0; i < memberAttributesRow.size(); i++) {
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		        }
+	        }
 		String drug = memberAttributesRow.get(0).getCells().get(1);
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.navigateToStep3();
@@ -204,13 +234,11 @@ public class DCEAcqStepDefinitionAARP {
 	 */
 	@Then("^I switch the year to 2017 and change zipcode and verify that the pharmacy previously selected isn't there$")
 	public void switchYearandCheckPharmacy(){
-	
-		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
+		 if(memberAttributesRow.size()>0){
+		        for (int i = 0; i < memberAttributesRow.size(); i++) {
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		        }
+	        }
 
 		String zipcode = memberAttributesMap.get("Zipcode");
 		String radius = memberAttributesMap.get("Radius");
@@ -231,7 +259,11 @@ public class DCEAcqStepDefinitionAARP {
 	@And("^I hover or click on Our Plans in the top navigation and enter zipcode Ulayer$")
 	public void hover_on_Our_Plans_in_the_top_navigation(){
 		DrugCostEstimatorPage dcePage = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
-		
+		 if(memberAttributesRow.size()>0){
+		        for (int i = 0; i < memberAttributesRow.size(); i++) {
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		        }
+	        }
 		String zipCode = memberAttributesMap.get("Zip Code");
 		VPPPlanSummaryPage vppPage = dcePage.mouseHoverOurPlans(zipCode);
 		if(vppPage!=null){

@@ -1,5 +1,8 @@
 package acceptancetests.acquisitionvbf.providersearch;
 
+import gherkin.formatter.model.DataTableRow;
+
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
@@ -29,8 +32,10 @@ public class ProviderSearchStepDefinitionAARP {
 				
 	}
 	
-	private Map<String, String> memberAttributesMap =new CommonStepDefinition().getAttributesMap();
+	private Map<String, String> memberAttributesMap =null;
 	
+	private List<DataTableRow> memberAttributesRow = new CommonStepDefinition().getAttributesRow();
+
 	/**
 	 * @toDo: user is on AARP Ulayer medicare acquisition site
 	 *this given statement moved to common stepdefinition folder
@@ -43,6 +48,11 @@ public class ProviderSearchStepDefinitionAARP {
 	@When("^the user performs plan search using following information in the Ulayer AARP site$")
 	public void zipcode_details_in_AARP_site() 
 	{
+		 if(memberAttributesRow.size()>0){
+		        for (int i = 0; i < memberAttributesRow.size(); i++) {
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		        }
+	        }
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String county = memberAttributesMap.get("County Name");
 		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
@@ -68,7 +78,11 @@ public class ProviderSearchStepDefinitionAARP {
 	@When("^the user Click on Show Plans link Ulayer$")
 	public void clickonshowplans()
 	{
-	   
+		 if(memberAttributesRow.size()>0){
+		        for (int i = 0; i < memberAttributesRow.size(); i++) {
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		        }
+	        }
 		String planType = memberAttributesMap.get("PlanType");
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planType);
 		
@@ -89,7 +103,11 @@ public class ProviderSearchStepDefinitionAARP {
 		@When("^the user Click on Is my Provider covered link Ulayer$")
 		public void clickonProvidercoveredlink(){
 		{
-			
+			 if(memberAttributesRow.size()>0){
+			        for (int i = 0; i < memberAttributesRow.size(); i++) {
+			               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+			        }
+		        }
 			String planName = memberAttributesMap.get("PlanName");
 			getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
@@ -105,7 +123,13 @@ public class ProviderSearchStepDefinitionAARP {
 		 * @toDo:Verify X out of Y provider covered information is displayed on Plan Summary page
 		 */
 		@Then("^Verify X out of Y provider covered information is displayed on Plan Summary page Ulayer$")
-		public void verifyproviderscoveredulayer(){			
+		public void verifyproviderscoveredulayer(){
+			
+			 if(memberAttributesRow.size()>0){
+			        for (int i = 0; i < memberAttributesRow.size(); i++) {
+			               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+			        }
+		        }
 		String planName = memberAttributesMap.get("PlanName");
 	
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);

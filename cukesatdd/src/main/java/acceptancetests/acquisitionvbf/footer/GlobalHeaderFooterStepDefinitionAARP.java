@@ -38,9 +38,6 @@ public class GlobalHeaderFooterStepDefinitionAARP {
 		return loginScenario;
 	}
 	
-	private Map<String, String> memberAttributesMap =new CommonStepDefinition().getAttributesMap();
-	
-	private List<DataTableRow> memberAttributesRow = new CommonStepDefinition().getAttributesRow();
 	
 
 	//moved @given statement to common stepdefinition

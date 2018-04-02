@@ -27,9 +27,8 @@ public class CommonStepDefinition {
 
 	public static WebDriver webDriverObj;
 	
-	private static Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-	private static List<DataTableRow> memberAttributesRow = null;
-	
+//	private static Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+	private static List<DataTableRow> memberAttributesRow = null;	
 	
 	public MRScenario getLoginScenario() {
 		return loginScenario;
@@ -43,7 +42,7 @@ public class CommonStepDefinition {
 	/**
 	 * @toDo:user is on AARP medicare acquisition site landing page
 	 */
-	@Given("^the user is on AARP medicare acquisition site landing page$")
+	@Given("^the user is on AARP medicare acquisition site landing page appli tools$")
 	public void the_user_on_aarp_medicaresolutions_Site() {
 		setWebDriverObj();
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(webDriverObj);
@@ -51,6 +50,7 @@ public class CommonStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, webDriverObj);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
 				aquisitionhomepage);
+		
 	}
 	
 	/**
@@ -58,33 +58,28 @@ public class CommonStepDefinition {
 	 */
 	@Given("^the user is on the UHC medicare solutions site landing page$")
 	public void the_user_is_on_UMS_medicare_site_landing_page() {
-		
-		WebDriver wd = getLoginScenario().getWebDriver();
 
+		WebDriver wd = getLoginScenario().getWebDriver();
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
 
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
-				aquisitionhomepage);
-		
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,aquisitionhomepage);		
 	}
 	
-
-	/**
+/*
 	 * @toDo:atrributes in member map format
-	 */
+	 *//*
 	@When("^fetch the data attributes in map form$")
 	public  Map<String, String> fetch_the_data_attributes_in_map_form(DataTable memberAttributes) {
 		// memberAttributesMap.clear();
 	        List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 	        if(memberAttributesRow.size()>0){
 		        for (int i = 0; i < memberAttributesRow.size(); i++) {
-		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-		                            memberAttributesRow.get(i).getCells().get(1));
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
 		        }
 	        }
 	        return memberAttributesMap;		
-	}
+	}*/
 	
 	
 	/**
@@ -99,10 +94,10 @@ public class CommonStepDefinition {
 		
 	}	
 	
-	public Map<String, String> getAttributesMap(){
+	/*public Map<String, String> getAttributesMap(){
 		return memberAttributesMap;
 	}
-
+*/
 	public List<DataTableRow> getAttributesRow(){
 		return memberAttributesRow;
 	}

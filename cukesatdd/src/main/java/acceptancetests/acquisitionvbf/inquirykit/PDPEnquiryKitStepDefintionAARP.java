@@ -34,7 +34,7 @@ public class PDPEnquiryKitStepDefintionAARP {
 		return loginScenario;
 	}
 	
-	private Map<String, String> memberAttributesMap =new CommonStepDefinition().getAttributesMap();
+	private Map<String, String> memberAttributesMap =null;
 	
 	private List<DataTableRow> memberAttributesRow = new CommonStepDefinition().getAttributesRow();
 
@@ -86,7 +86,11 @@ public class PDPEnquiryKitStepDefintionAARP {
 	 */
 	@And("^the user submits by entering following details in Order Enrollment Information page in AARP Site$")
 	public void the_user_submits_entering_details_order_enrollment_information_aarp(){
-				
+		 if(memberAttributesRow.size()>0){
+		        for (int i = 0; i < memberAttributesRow.size(); i++) {
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		        }
+	        }
 		PDPEnrollementGuidePage pdpEnrollementGuidePage = (PDPEnrollementGuidePage) getLoginScenario().getBean(PageConstants.PDP_ENROLLMENT_GUIDE_PAGE);
 		pdpEnrollementGuidePage.entersDetails(memberAttributesMap);
 		EnquiryKitConfirmationPage enquiryKitConfirmationPage = pdpEnrollementGuidePage.submitsRequest();
