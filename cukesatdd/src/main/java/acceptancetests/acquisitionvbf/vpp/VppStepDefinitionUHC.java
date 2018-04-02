@@ -36,7 +36,7 @@ public class VppStepDefinitionUHC {
 		return loginScenario;
 	}
 	
-	private Map<String, String> memberAttributesMap =new CommonStepDefinition().getAttributesMap();
+	private Map<String, String> memberAttributesMap =null;
 	
 	private List<DataTableRow> memberAttributesRow = new CommonStepDefinition().getAttributesRow();
 
@@ -46,6 +46,11 @@ public class VppStepDefinitionUHC {
 	 */
 	@When("^the user performs plan search using following information in UMS site$")
 	public void zipcode_details_in_UMS_site() {
+		 if(memberAttributesRow.size()>0){
+		        for (int i = 0; i < memberAttributesRow.size(); i++) {
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		        }
+	        }
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String county = memberAttributesMap.get("County Name");
 		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
@@ -73,6 +78,11 @@ public class VppStepDefinitionUHC {
 	 */
 	@When("user views plans of the below plan type in UMS site$")
 	public void user_performs_planSearch_in_UMS_site() {
+		 if(memberAttributesRow.size()>0){
+		        for (int i = 0; i < memberAttributesRow.size(); i++) {
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		        }
+	        }
 		String plantype = memberAttributesMap.get("Plan Type");
 
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
@@ -93,7 +103,11 @@ public class VppStepDefinitionUHC {
 	@Then("^the user view plan details of the above selected plan in UMS site and validates$")
 	public void user_views_plandetails_selected_plan_ums() {
 		
-	
+		 if(memberAttributesRow.size()>0){
+		        for (int i = 0; i < memberAttributesRow.size(); i++) {
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		        }
+	        }
 		String planName = memberAttributesRow.get(0).getCells().get(1); 
 				getLoginScenario().saveBean(
 				VPPCommonConstants.PLAN_NAME,planName);
@@ -117,6 +131,11 @@ public class VppStepDefinitionUHC {
 	 */
 	@When("^I access the vpp page$")
 	public void I_access_the_vpp_page() throws InterruptedException {
+		 if(memberAttributesRow.size()>0){
+		        for (int i = 0; i < memberAttributesRow.size(); i++) {
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		        }
+	        }
 		String zipcode = memberAttributesMap.get("Zip Code");
 		AcquisitionHomePage acqhomepage = (AcquisitionHomePage) loginScenario.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		VPPPlanSummaryPage vppplansummarypage = acqhomepage.navigateToVpp(zipcode);
