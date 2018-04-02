@@ -69,7 +69,7 @@ public class RedesignLoginPage extends UhcDriver {
 		signInButton.click();
 		Thread.sleep(25000);
 		
-		if ( MRScenario.environment.equals("team-h") || MRScenario.environment.equals("team-a") || MRScenario.environment.equals("team-ci1")) {
+		if ( MRScenario.environment.equals("team-f") || MRScenario.environment.equals("team-h") || MRScenario.environment.equals("team-a") || MRScenario.environment.equals("team-ci1")) {
 			while (isAlertPresent());
 
 /*			try{
