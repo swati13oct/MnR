@@ -75,13 +75,14 @@ public class CommonStepDefinition {
 	 */
 	@When("^fetch the data attributes in map form$")
 	public  Map<String, String> fetch_the_data_attributes_in_map_form(DataTable memberAttributes) {
-		 memberAttributesMap.clear();
+		// memberAttributesMap.clear();
 	        List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
-	        for (int i = 0; i < memberAttributesRow.size(); i++) {
-	               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-	                            memberAttributesRow.get(i).getCells().get(1));
+	        if(memberAttributesRow.size()>0){
+		        for (int i = 0; i < memberAttributesRow.size(); i++) {
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		                            memberAttributesRow.get(i).getCells().get(1));
+		        }
 	        }
-	
 	        return memberAttributesMap;		
 	}
 	
