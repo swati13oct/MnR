@@ -1,14 +1,21 @@
 package acceptancetests.acquisitionvbf.common;
 
+import gherkin.formatter.model.DataTableRow;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.acquisition.ulayer.AcquisitionHomePage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
+import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
-import pages.acquisition.bluelayer.DrugCostEstimatorPage;
-import pages.acquisition.ulayer.AcquisitionHomePage;
+import cucumber.api.java.en.When;
 
 /**
  *Functionality:Attend Community Meeting
@@ -19,6 +26,10 @@ public class CommonStepDefinition {
 	MRScenario loginScenario;
 
 	public static WebDriver webDriverObj;
+	
+	private static Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+	private static List<DataTableRow> memberAttributesRow = null;
+	
 	
 	public MRScenario getLoginScenario() {
 		return loginScenario;
@@ -55,9 +66,43 @@ public class CommonStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
 				aquisitionhomepage);
-	
 		
 	}
 	
 
+	/**
+	 * @toDo:atrributes in member map format
+	 */
+	@When("^fetch the data attributes in map form$")
+	public  Map<String, String> fetch_the_data_attributes_in_map_form(DataTable memberAttributes) {
+		 memberAttributesMap.clear();
+	        List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+	        for (int i = 0; i < memberAttributesRow.size(); i++) {
+	               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+	                            memberAttributesRow.get(i).getCells().get(1));
+	        }
+	
+	        return memberAttributesMap;		
+	}
+	
+	
+	/**
+	 * @toDo:atrributes in member row format
+	 */
+	@When("^fetch the data attributes in row form$")
+	public List<DataTableRow>  fetch_the_data_attributes_in_row_form(DataTable memberAttributesrow) {
+		memberAttributesRow.clear();
+        List<DataTableRow> memberAttributesRow = memberAttributesrow.getGherkinRows();
+       
+        return memberAttributesRow;
+		
+	}	
+	
+	public Map<String, String> getAttributesMap(){
+		return memberAttributesMap;
+	}
+
+	public List<DataTableRow> getAttributesRow(){
+		return memberAttributesRow;
+	}
 }

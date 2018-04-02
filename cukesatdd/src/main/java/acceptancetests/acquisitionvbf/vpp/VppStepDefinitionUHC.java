@@ -1,5 +1,7 @@
 package acceptancetests.acquisitionvbf.vpp;
 
+import gherkin.formatter.model.DataTableRow;
+
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -7,22 +9,19 @@ import java.util.Map;
 
 import org.junit.Assert;
 import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.data.CommonConstants;
+import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.acquisition.bluelayer.PlanDetailsPage;
+import pages.acquisition.bluelayer.VPPPlanSummaryPage;
+import acceptancetests.acquisitionvbf.common.CommonStepDefinition;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.bluelayer.AcquisitionHomePage;
-import pages.acquisition.bluelayer.PlanDetailsPage;
-import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 
 /**
  * Functionality: VPP UHC site
@@ -36,22 +35,17 @@ public class VppStepDefinitionUHC {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
+	
+	private Map<String, String> memberAttributesMap =new CommonStepDefinition().getAttributesMap();
+	
+	private List<DataTableRow> memberAttributesRow = new CommonStepDefinition().getAttributesRow();
+
 
 	/**
 	 * @toDo : the user enters the zip code to search plans
 	 */
 	@When("^the user performs plan search using following information in UMS site$")
-	public void zipcode_details_in_UMS_site(DataTable givenAttributes) {
-
-		List<DataTableRow> memberAttributesRow = givenAttributes
-				.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
-
+	public void zipcode_details_in_UMS_site() {
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String county = memberAttributesMap.get("County Name");
 		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
@@ -78,17 +72,8 @@ public class VppStepDefinitionUHC {
 	 * @toDo:user views plans of the below plan type
 	 */
 	@When("user views plans of the below plan type in UMS site$")
-	public void user_performs_planSearch_in_UMS_site(DataTable givenAttributes) {
-		List<DataTableRow> givenAttributesRow = givenAttributes
-				.getGherkinRows();
-		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}
-
-		String plantype = givenAttributesMap.get("Plan Type");
+	public void user_performs_planSearch_in_UMS_site() {
+		String plantype = memberAttributesMap.get("Plan Type");
 
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
@@ -106,10 +91,9 @@ public class VppStepDefinitionUHC {
 	 * @toDo:user view plan details of the above selected plan
 	 */
 	@Then("^the user view plan details of the above selected plan in UMS site and validates$")
-	public void user_views_plandetails_selected_plan_ums(DataTable givenAttributes) {
+	public void user_views_plandetails_selected_plan_ums() {
 		
-		List<DataTableRow> memberAttributesRow = givenAttributes
-				.getGherkinRows();
+	
 		String planName = memberAttributesRow.get(0).getCells().get(1); 
 				getLoginScenario().saveBean(
 				VPPCommonConstants.PLAN_NAME,planName);
@@ -132,16 +116,7 @@ public class VppStepDefinitionUHC {
 	 * @toDo:access the vpp page
 	 */
 	@When("^I access the vpp page$")
-	public void I_access_the_vpp_page(DataTable memberAttributes) throws InterruptedException {
-		List<DataTableRow> memberAttributesRow = memberAttributes
-				.getGherkinRows();
-		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
-
+	public void I_access_the_vpp_page() throws InterruptedException {
 		String zipcode = memberAttributesMap.get("Zip Code");
 		AcquisitionHomePage acqhomepage = (AcquisitionHomePage) loginScenario.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		VPPPlanSummaryPage vppplansummarypage = acqhomepage.navigateToVpp(zipcode);

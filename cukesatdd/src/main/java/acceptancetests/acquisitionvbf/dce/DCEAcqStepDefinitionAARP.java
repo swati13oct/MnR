@@ -1,28 +1,26 @@
 package acceptancetests.acquisitionvbf.dce;
 
+import gherkin.formatter.model.DataTableRow;
+
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.acquisitionvbf.common.CommonStepDefinition;
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageConstants;
-import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.DrugCostEstimatorPage;
 import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import acceptancetests.acquisitionvbf.common.CommonStepDefinition;
+import acceptancetests.data.PageConstants;
+import atdd.framework.MRScenario;
+import cucumber.api.DataTable;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 
 /**
  *Functionality:DCE Acquisition
@@ -35,6 +33,10 @@ public class DCEAcqStepDefinitionAARP {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
+	
+	private Map<String, String> memberAttributesMap =new CommonStepDefinition().getAttributesMap();
+	
+	private List<DataTableRow> memberAttributesRow = new CommonStepDefinition().getAttributesRow();
 /*	
 	*//**
 	 * @toDo:
@@ -71,16 +73,7 @@ public class DCEAcqStepDefinitionAARP {
 	 * @toDo:
 	 */	
 	@When("^I access the vpp page using below zipcode on aarp site$")
-	public void I_access_the__vpp_page(DataTable memberAttributes) throws InterruptedException {
-		List<DataTableRow> memberAttributesRow = memberAttributes
-				.getGherkinRows();
-		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
-
+	public void I_access_the__vpp_page() throws InterruptedException {
 		String zipcode = memberAttributesMap.get("Zip Code");
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)loginScenario.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.navigateToVpp(zipcode);
@@ -93,17 +86,8 @@ public class DCEAcqStepDefinitionAARP {
 	 * @toDo:
 	 */
 	@And("^I go to the view plan details page and access DCE flow from prescription drugs tab$")
-	public void clickOnViewPlanDetailsAndGoTODCE(DataTable attributes){
-		List<DataTableRow> memberAttributesRow = attributes
-				.getGherkinRows();
-		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
-
-		String planName = memberAttributesMap.get("Plan Name");
+	public void clickOnViewPlanDetailsAndGoTODCE(){
+				String planName = memberAttributesMap.get("Plan Name");
 		String planType = memberAttributesMap.get("Plan Type");
 
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) loginScenario.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
@@ -120,16 +104,8 @@ public class DCEAcqStepDefinitionAARP {
 	 * @toDo:
 	 */
 	@And("^I access the DCE tool on aarp site$")
-	public void accessDCETool(DataTable attributes){
-		List<DataTableRow> memberAttributesRow = attributes
-				.getGherkinRows();
-		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
-
+	public void accessDCETool(){
+	
 		String plantype = memberAttributesMap.get("Plan Type");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) loginScenario.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		DrugCostEstimatorPage dce = plansummaryPage.navigateToDCE(plantype);
@@ -142,9 +118,8 @@ public class DCEAcqStepDefinitionAARP {
 	 * @toDo:
 	 */
 	@When("^I have added a drug to my drug list$")
-	public void I_have_added_a_drug_to_my_drug_list(DataTable data) throws InterruptedException {
-		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
-		String drug = memberAttributesRow.get(0).getCells().get(1);
+	public void I_have_added_a_drug_to_my_drug_list() throws InterruptedException {
+			String drug = memberAttributesRow.get(0).getCells().get(1);
 
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) loginScenario.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		boolean isDrugPresent = dce.isDrugPresent(drug);
@@ -165,15 +140,6 @@ public class DCEAcqStepDefinitionAARP {
 	}
 	@And("^the user selects the pharmacy tab information like miles, zipcode and pharmacy type$")
 	public void navigate_drugcostestimator_pharmacytab(DataTable memberAttributes) throws InterruptedException {
-		List<DataTableRow> memberAttributesRow = memberAttributes
-				.getGherkinRows();
-		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
-
 		String zipcode = memberAttributesMap.get("Zipcode");
 		String radius = memberAttributesMap.get("Radius");
 		
@@ -214,8 +180,7 @@ public class DCEAcqStepDefinitionAARP {
 	 * @toDo:
 	 */
 	@Then("^I navigate to step3 page and validate$")
-	public void I_navigate_to_step_page(DataTable data) throws InterruptedException {
-		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+	public void I_navigate_to_step_page() throws InterruptedException {
 		String drug = memberAttributesRow.get(0).getCells().get(1);
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.navigateToStep3();
@@ -238,9 +203,8 @@ public class DCEAcqStepDefinitionAARP {
 	 * @toDo:
 	 */
 	@Then("^I switch the year to 2017 and change zipcode and verify that the pharmacy previously selected isn't there$")
-	public void switchYearandCheckPharmacy(DataTable memberAttributes){
-		List<DataTableRow> memberAttributesRow = memberAttributes
-				.getGherkinRows();
+	public void switchYearandCheckPharmacy(){
+	
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -265,17 +229,9 @@ public class DCEAcqStepDefinitionAARP {
 	}	
 	
 	@And("^I hover or click on Our Plans in the top navigation and enter zipcode Ulayer$")
-	public void hover_on_Our_Plans_in_the_top_navigation(DataTable givenAttributes){
+	public void hover_on_Our_Plans_in_the_top_navigation(){
 		DrugCostEstimatorPage dcePage = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
-		List<DataTableRow> memberAttributesRow = givenAttributes
-				.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
-
+		
 		String zipCode = memberAttributesMap.get("Zip Code");
 		VPPPlanSummaryPage vppPage = dcePage.mouseHoverOurPlans(zipCode);
 		if(vppPage!=null){

@@ -9,6 +9,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.acquisitionvbf.common.CommonStepDefinition;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
@@ -35,14 +36,18 @@ public class PharmacyLocatorStepDefinitionUHC {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
+	
+	private Map<String, String> memberAttributesMap =new CommonStepDefinition().getAttributesMap();
+	
+	private List<DataTableRow> memberAttributesRow = new CommonStepDefinition().getAttributesRow();
 
 	/**
 	 * @toDo:user hovers to Our Plans and select Request More Help and Information for following plan type
 	 */
 	@When("^the user hovers to Our Plans and select Request More Help and Information for following plan type$")
-	public void user_hovers_to_our_plans_and_select_request_more_help_and_information(DataTable planAttributes){
+	public void user_hovers_to_our_plans_and_select_request_more_help_and_information(){
 
-		String planType = planAttributes.getGherkinRows().get(0).getCells()
+		String planType = memberAttributesRow.get(0).getCells()
 				.get(0);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PLAN_TYPE, planType);
 		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
@@ -76,14 +81,9 @@ public class PharmacyLocatorStepDefinitionUHC {
 	 * @toDo: user enters following details for pharmacy search
 	 */
 	@And("^the user enters following details for pharmacy search in UMS Site$")
-	public void user_enters_zipcode_distance_details_UMS(DataTable zipAttributes) {
-		List<DataTableRow> zipAttributesRow = zipAttributes.getGherkinRows();
-		Map<String, String> zipAttributesMap = new LinkedHashMap<String, String>();
-		for (int i = 0; i < zipAttributesRow.size(); i++) {
-
-			zipAttributesMap.put(zipAttributesRow.get(i).getCells().get(0),
-					zipAttributesRow.get(i).getCells().get(1));
-		}
+	public void user_enters_zipcode_distance_details_UMS() {
+		List<DataTableRow> zipAttributesRow = memberAttributesRow;
+		Map<String, String> zipAttributesMap = memberAttributesMap;
 		String zipcode = zipAttributesMap.get("Zip Code");
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.ZIPCODE,
 				zipcode);
@@ -113,9 +113,9 @@ public class PharmacyLocatorStepDefinitionUHC {
 	 * @toDo:user chooses a plan from dropdown 
 	 */
 	@And("^the user chooses a plan from dropdown in UMS Site$")
-	public void user_chooses_plan_dropdown_UMS(DataTable planAttributes) {
+	public void user_chooses_plan_dropdown_UMS() {
 
-		String planName = planAttributes.getGherkinRows().get(0).getCells()
+		String planName =memberAttributesRow.get(0).getCells()
 				.get(0);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PLAN_NAME, planName);
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
@@ -137,9 +137,9 @@ public class PharmacyLocatorStepDefinitionUHC {
 	 * @toDo: user chooses the Pharmacy Type
 	 */
 	@Then("^the user chooses the Pharmacy Type blayer$")
-	public void the_user_chooses_the_pharmacy_type_blayer(DataTable pharmacyTypeAttribute){
+	public void the_user_chooses_the_pharmacy_type_blayer(){
 		
-		String PharmacyType = pharmacyTypeAttribute.getGherkinRows().get(0).getCells()
+		String PharmacyType = memberAttributesRow.get(0).getCells()
 				.get(0);
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
@@ -158,9 +158,9 @@ public class PharmacyLocatorStepDefinitionUHC {
 	 * @toDo: user chooses the Service Type blayer
 	 */
 	@Then("^the user chooses the Service Type blayer$")
-	public void the_user_chooses_the_service_type_blayer(DataTable serviceTypeAttribute){
+	public void the_user_chooses_the_service_type_blayer(){
 		
-		String serviceType = serviceTypeAttribute.getGherkinRows().get(0).getCells()
+		String serviceType = memberAttributesRow.get(0).getCells()
 				.get(0);
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
@@ -208,9 +208,9 @@ public class PharmacyLocatorStepDefinitionUHC {
 	 * @toDo:user searches available pharmacies by selecting 
 	 */
 	@And("the user searches available pharmacies by selecting \"Show pharmacies for these services.\"$")
-	public void  user_searches_pharmacies_by_choosing_pharmacy_types_ums(DataTable pharmacyTypeAttributes)
+	public void  user_searches_pharmacies_by_choosing_pharmacy_types_ums()
 	{
-		String[] pharmacyTypeArray = pharmacyTypeAttributes.getGherkinRows().get(0).getCells().get(0).split(",");
+		String[] pharmacyTypeArray = memberAttributesRow.get(0).getCells().get(0).split(",");
 
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
@@ -237,7 +237,7 @@ public class PharmacyLocatorStepDefinitionUHC {
 	 * @toDo: user validates the error message for no pharmacies found for below pharmacy
 	 */
 	@Then("^the user validates the error message for no pharmacies found for below pharmacy$")
-	public void validates_error_msg_for_no_pharmacies_found(DataTable pharmacyTypeAttributes){
+	public void validates_error_msg_for_no_pharmacies_found(){
 		
 
 		 getLoginScenario().getBean(PageConstants.PHARMACY_SEARCH_PAGE);
@@ -306,9 +306,9 @@ public class PharmacyLocatorStepDefinitionUHC {
 	 * @toDo:the user selects a language from dropdown in UMS Site
 	 */
 	@And("^the user selects a language from dropdown in UMS Site$")
-	public void user_selects_language_ums(DataTable languageAttributes) {
+	public void user_selects_language_ums() {
 
-		String langName = languageAttributes.getGherkinRows().get(0).getCells()
+		String langName = memberAttributesRow.get(0).getCells()
 				.get(0);
 		if(langName.equals("Spanish")){
 			langName = "espa";	
@@ -348,8 +348,8 @@ public class PharmacyLocatorStepDefinitionUHC {
 	 * @toDo:the user selects the county
 	 */
 	@When("^the user selects the county in UMS site$")
-	public void user_selects_county_ums(DataTable countyAttributes){
-		String countyName = countyAttributes.getGherkinRows().get(0).getCells()
+	public void user_selects_county_ums(){
+		String countyName = memberAttributesRow.get(0).getCells()
 				.get(0);
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);

@@ -1,19 +1,22 @@
 package acceptancetests.acquisitionvbf.agentflow;
 
+import gherkin.formatter.model.DataTableRow;
+
+import java.util.List;
+import java.util.Map;
+
 import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.data.CommonConstants;
+import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.acquisition.bluelayer.RequestAgentAppointmentPage;
+import pages.acquisition.bluelayer.RequestHelpAndInformationPage;
+import acceptancetests.acquisitionvbf.common.CommonStepDefinition;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
-import pages.acquisition.bluelayer.AcquisitionHomePage;
-import pages.acquisition.bluelayer.RequestAgentAppointmentPage;
-import pages.acquisition.bluelayer.RequestHelpAndInformationPage;
 
 /**
  *Functionality: Agent Flow
@@ -26,7 +29,6 @@ public class RequestAgentApptStepDefinitionUHC {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-
 	
 	/**
 	 * @toDo: user navigates to request more help and information in 
@@ -48,7 +50,7 @@ public class RequestAgentApptStepDefinitionUHC {
 	 * @toDo: request appointment with an agent in UHC site 
 	 */
 	@And("^the user navigates to request appointment with an agent in UHC site and validates page loaded$")
-	public void request_appointment(DataTable userAttributes)
+	public void request_appointment()
 	{
 		RequestHelpAndInformationPage requestHelpAndInformationPage = (RequestHelpAndInformationPage) getLoginScenario().getBean(PageConstants.REQUEST_MORE_HELP_INFORMATION_PAGE);
 		RequestAgentAppointmentPage requestAgentAppointmentPage = requestHelpAndInformationPage.nagiateToAgentAppointmentRequest();

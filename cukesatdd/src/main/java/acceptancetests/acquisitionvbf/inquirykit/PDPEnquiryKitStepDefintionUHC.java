@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.acquisitionvbf.common.CommonStepDefinition;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
@@ -32,6 +33,10 @@ public class PDPEnquiryKitStepDefintionUHC {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
+
+	private Map<String, String> memberAttributesMap =new CommonStepDefinition().getAttributesMap();
+	
+	private List<DataTableRow> memberAttributesRow = new CommonStepDefinition().getAttributesRow();
 
 	
 	/**
@@ -74,19 +79,10 @@ public class PDPEnquiryKitStepDefintionUHC {
 	 * @toDo:the user submits by entering following details in Order Enrollment Information 
 	 */
 	@And("^the user submits by entering following details in Order Enrollment Information page in UHC Site$")
-	public void the_user_submits_entering_details_order_enrollment_information_uhc(DataTable attributes){
-		List<DataTableRow> personalAttributesRow = attributes
-				.getGherkinRows();
-		Map<String, String> personalAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < personalAttributesRow.size(); i++) {
-
-			personalAttributesMap.put(personalAttributesRow.get(i).getCells()
-					.get(0), personalAttributesRow.get(i).getCells().get(1));
-		}
-		
-		
+	public void the_user_submits_entering_details_order_enrollment_information_uhc(){
+				
 		PDPEnrollementGuidePage pdpEnrollementGuidePage = (PDPEnrollementGuidePage) getLoginScenario().getBean(PageConstants.PDP_ENROLLMENT_GUIDE_PAGE);
-		pdpEnrollementGuidePage.entersDetails(personalAttributesMap);
+		pdpEnrollementGuidePage.entersDetails(memberAttributesMap);
 		EnquiryKitConfirmationPage enquiryKitConfirmationPage = pdpEnrollementGuidePage.submitsRequest();
 		if(enquiryKitConfirmationPage!=null){
 			if(enquiryKitConfirmationPage.validateConfPage())

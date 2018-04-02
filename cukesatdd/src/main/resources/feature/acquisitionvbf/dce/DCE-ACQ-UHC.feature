@@ -4,6 +4,8 @@ Feature:1.24-VBF-Acq-Drug Cost Estimator (DCE) - To test DCE flows on UMS acq si
 @acq_drug_cost_estimator_blayer_flow
 Scenario Outline: To verify DCE flow from Blayer home page
 Given the user is on the UHC medicare solutions site landing page
+When fetch the data attributes in map form
+When fetch the data attributes in row form
 When I access the acquisition DCE tool from home page on ums site
 And I have added a drug to my drug list on ums site
 	|Drug|<drug>|
@@ -23,6 +25,8 @@ And I navigate to step3 page and validate the drug info
 @dceVppBlayer
 Scenario Outline: To test the dce vpp flow
 Given the user is on the UHC medicare solutions site landing page
+When fetch the data attributes in map form
+When fetch the data attributes in row form
 When I access the vpp page using below zipcode on ums site
 	| Zip Code    | <zipcode>  |
 And I access the DCE tool
@@ -41,6 +45,8 @@ Examples:
 @switchNowStep3Blayer
 Scenario Outline: To test the dce vpp flow with switch now option
 Given the user is on the UHC medicare solutions site landing page
+When fetch the data attributes in map form
+When fetch the data attributes in row form
 When I access the vpp page using below zipcode on ums site
 	| Zip Code    | <zipcode>  |
 And I access the DCE tool
@@ -60,6 +66,8 @@ Examples:
 @defect3312
 Scenario Outline: To test Preferred Retail pharmacy type is there for Walgreens plan
 Given the user is on the UHC medicare solutions site landing page
+When fetch the data attributes in map form
+When fetch the data attributes in row form
 When I access the vpp page using below zipcode on ums site
 	| Zip Code    | <zipcode>  |
 And I access the DCE tool
@@ -77,6 +85,8 @@ Examples:
 @defect3255
 Scenario Outline: To test Pharmacy Saver pharmacy type is displayed
 Given the user is on the UHC medicare solutions site landing page
+When fetch the data attributes in map form
+When fetch the data attributes in row form
 When I access the vpp page using below zipcode on ums site
 	| Zip Code    | <zipcode>  |
 And I choose the 2017 plan and go to DCE page
@@ -93,6 +103,8 @@ Examples:
 @defect1662
 Scenario Outline: To go through dce from homepage and validate drug is still there when going to dce from vpp
 Given the user is on the UHC medicare solutions site landing page
+When fetch the data attributes in map form
+When fetch the data attributes in row form
 When I access the acquisition DCE tool from home page on ums site
 And I have added a drug to my drug list on ums site
 	|Drug|<drug>|
@@ -115,6 +127,8 @@ Then I verify that the drug is still there
 @dcevppblayer
 Scenario Outline: To Verify the drugs and plan summary for non AEP period
 Given the user is on the UHC medicare solutions site landing page
+When fetch the data attributes in map form
+When fetch the data attributes in row form
 When the user performs drug search using the following information in UMS site
 	| Zip Code    | <zipcode>  |
 	| County      | <county>   |
@@ -160,6 +174,8 @@ Examples:
 @dceVPPDrugsPlanAEP
 Scenario Outline: To Verify the drugs and plan summary for AEP period 
 Given the user is on the UHC medicare solutions site landing page
+When fetch the data attributes in map form
+When fetch the data attributes in row form
 When the user performs drug search using the following information in UMS site
 	| Zip Code    | <zipcode>  |
 	| County      | <county>   |
@@ -204,6 +220,8 @@ Examples:
 @dceVPPDrugsPlanNonAEP
 Scenario Outline: To Verify the drugs and plan details for non AEP period 
 Given the user is on the UHC medicare solutions site landing page
+When fetch the data attributes in map form
+When fetch the data attributes in row form
 When the user performs drug search using the following information in UMS site
 	| Zip Code    | <zipcode>  |
 	| County      | <county>   |
@@ -251,6 +269,8 @@ Examples:
 @dceGenericFlow
 Scenario Outline: To Verify the drugs and pharmacy model for new generic flow
 Given the user is on the UHC medicare solutions site landing page
+When fetch the data attributes in map form
+When fetch the data attributes in row form
 When the user performs drug search using the following information in UMS site
 	| Zip Code    | <zipcode>  |
 	| County      | <county>   |
@@ -287,6 +307,8 @@ Examples:
 @dceVppDrugsListPlanCost
 Scenario Outline: To Verify the drug list and plan cost sections in View Plan Details page 
 Given the user is on the UHC medicare solutions site landing page
+When fetch the data attributes in map form
+When fetch the data attributes in row form
 When the user performs drug search using the following information in UMS site
 	| Zip Code    | <zipcode>  |
 	| County      | <county>   |
@@ -322,6 +344,8 @@ Examples:
 @dceOurPlansHover @US953320 @aprilRelease2018
 Scenario Outline: To verify DCE flow from Blayer home page
 Given the user is on the UHC medicare solutions site landing page
+When fetch the data attributes in map form
+When fetch the data attributes in row form
 When I access the acquisition DCE tool from home page on ums site
 And I hover or click on Our Plans in the top navigation and enter zipcode Blayer
 | Zip Code    | <zipcode>  |

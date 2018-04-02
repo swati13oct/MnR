@@ -1,5 +1,7 @@
 package acceptancetests.acquisitionvbf.enrollinplan;
 
+import gherkin.formatter.model.DataTableRow;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,16 +10,6 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.acquisitionvbf.vpp.VPPCommonConstants;
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageConstants;
-import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.BeneficiaryInformationPage;
 import pages.acquisition.ulayer.ConfirmationPage;
@@ -34,6 +26,15 @@ import pages.acquisition.ulayer.ProposedEffectiveDatePage;
 import pages.acquisition.ulayer.ReviewAndSubmitPage;
 import pages.acquisition.ulayer.SpecialElectionPeriodPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import acceptancetests.acquisitionvbf.common.CommonStepDefinition;
+import acceptancetests.acquisitionvbf.vpp.VPPCommonConstants;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageConstants;
+import atdd.framework.MRScenario;
+import cucumber.api.DataTable;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 
 /**
  *Functionality:EnrollInPlan
@@ -46,21 +47,16 @@ public class EnrollInPlanStepDefinitionAARP {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
+	
+	private Map<String, String> memberAttributesMap =new CommonStepDefinition().getAttributesMap();
+	
+	private List<DataTableRow> memberAttributesRow = new CommonStepDefinition().getAttributesRow();
 
 	/**
 	 * @toDo:user performs plan search using following information
 	 */
 	@When("^user performs plan search using following information in AARP site OLE$")
-	public void zipcode_details_in_aarp_site(DataTable givenAttributes) {
-
-		List<DataTableRow> memberAttributesRow = givenAttributes
-				.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
+	public void zipcode_details_in_aarp_site() {
 
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String county = memberAttributesMap.get("County Name");
@@ -86,18 +82,11 @@ public class EnrollInPlanStepDefinitionAARP {
 	 * @toDo:user views plans of the below plan type 
 	 */
 	@And("^the user views plans of the below plan type in AARP site OLE$")
-	public void user_performs_planSearch_in_aarp_site(DataTable givenAttributes) {
-		List<DataTableRow> givenAttributesRow = givenAttributes
-				.getGherkinRows();
-		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}
+	public void user_performs_planSearch_in_aarp_site() {
+		
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(
 				CommonConstants.WEBDRIVER); //
-		String plantype = givenAttributesMap.get("Plan Type");
+		String plantype = memberAttributesMap.get("Plan Type");
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
 		VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage(wd);
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, wd);
@@ -114,10 +103,10 @@ public class EnrollInPlanStepDefinitionAARP {
 	 * @toDo:user enrolls for the below plan
 	 */
 	@And("^the user enrolls for the below plan in AARP site OLE$")
-	public void user_enrolls_for_plan(DataTable planAttributes) {
+	public void user_enrolls_for_plan() {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(
 				CommonConstants.WEBDRIVER);
-		String planName = planAttributes.getGherkinRows().get(0).getCells()
+		String planName = memberAttributesRow.get(0).getCells()
 				.get(0);
 		getLoginScenario().saveBean(EnrollInPlanCommonConstants.PLAN_NAME,
 				planName);
@@ -162,21 +151,13 @@ public class EnrollInPlanStepDefinitionAARP {
 	 * @toDo:user fill following information in introduction information 
 	 */
 	@And("^the user fill following information in introduction information step in AARP site OLE$")
-	public void user_fill_information_introduction_information_aarp(
-			DataTable personalAttributes) {
+	public void user_fill_information_introduction_information_aarp() {
 
-		List<DataTableRow> personalAttributesRow = personalAttributes
-				.getGherkinRows();
-		Map<String, String> personalAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < personalAttributesRow.size(); i++) {
 
-			personalAttributesMap.put(personalAttributesRow.get(i).getCells()
-					.get(0), personalAttributesRow.get(i).getCells().get(1));
-		}
 		IntroductionInformationPage introInformationPage = (IntroductionInformationPage) getLoginScenario()
 				.getBean(PageConstants.INTRODUCTION_INFORMATION_PAGE);
 		introInformationPage
-				.entersmedicareinsuranceInformation(personalAttributesMap);
+				.entersmedicareinsuranceInformation(memberAttributesMap);
 		getLoginScenario().saveBean(
 				PageConstants.INTRODUCTION_INFORMATION_PAGE,
 				introInformationPage);
@@ -226,25 +207,17 @@ public class EnrollInPlanStepDefinitionAARP {
 	 */
 	@And("^the user fill following information in beneficiary information step in AARP site OLE$")
 	public void user_fill_information_beneficiary_information_aarp(
-			DataTable personalAttributes) {
+			) {
 
 		boolean hasEnrolled = (Boolean) getLoginScenario().getBean(
 				EnrollInPlanCommonConstants.HAS_ENROLLED);
 
 		if (!hasEnrolled) {
-			List<DataTableRow> personalAttributesRow = personalAttributes
-					.getGherkinRows();
-			Map<String, String> personalAttributesMap = new HashMap<String, String>();
-			for (int i = 0; i < personalAttributesRow.size(); i++) {
-
-				personalAttributesMap.put(personalAttributesRow.get(i)
-						.getCells().get(0), personalAttributesRow.get(i)
-						.getCells().get(1));
-			}
+			
 			BeneficiaryInformationPage beneficiaryInformationPage = (BeneficiaryInformationPage) getLoginScenario()
 					.getBean(PageConstants.BENEFICIARY_INFORMATION_PAGE);
 			beneficiaryInformationPage
-					.entersPersonalInformation(personalAttributesMap);
+					.entersPersonalInformation(memberAttributesMap);
 
 			getLoginScenario().saveBean(
 					PageConstants.BENEFICIARY_INFORMATION_PAGE,
@@ -290,20 +263,12 @@ public class EnrollInPlanStepDefinitionAARP {
 	 * @toDo:user select no for Special Election Period 
 	 */
 	@And("^the user select no for Special Election Period OLE$")
-	public void user_selects_no_for_SEPQuestion(DataTable SEPAttributes) {
+	public void user_selects_no_for_SEPQuestion() {
 		boolean hasEnrolled = (Boolean) getLoginScenario().getBean(
 				EnrollInPlanCommonConstants.HAS_ENROLLED);
 
 		if (!hasEnrolled) {
-			List<DataTableRow> personalAttributesRow = SEPAttributes
-					.getGherkinRows();
-			Map<String, String> personalAttributesMap = new HashMap<String, String>();
-			for (int i = 0; i < personalAttributesRow.size(); i++) {
-
-				personalAttributesMap.put(personalAttributesRow.get(i)
-						.getCells().get(0), personalAttributesRow.get(i)
-						.getCells().get(1));
-			}
+			
 
 			SpecialElectionPeriodPage specialElectionPeriodPage = (SpecialElectionPeriodPage) getLoginScenario()
 					.getBean(PageConstants.SPECIAL_ELECTION_PERIOD_PAGE);
@@ -314,7 +279,7 @@ public class EnrollInPlanStepDefinitionAARP {
 					PageConstants.SPECIAL_ELECTION_PERIOD_PAGE,
 					specialElectionPeriodPage);
 
-			String plantype = personalAttributesMap.get("Plan Type");
+			String plantype = memberAttributesMap.get("Plan Type");
 			if (plantype.equalsIgnoreCase("MA")
 					|| plantype.equalsIgnoreCase("MAPD")) {
 				ESRDPage esrdpage = specialElectionPeriodPage
@@ -334,29 +299,22 @@ public class EnrollInPlanStepDefinitionAARP {
 	 * @toDo:user select yes for Special Election Period 
 	 */
 	@And("^the user select yes for Special Election Period OLE$")
-	public void user_selects_yes_for_SEPQuestion(DataTable SEPAttributes) {
+	public void user_selects_yes_for_SEPQuestion() {
 		boolean hasEnrolled = (Boolean) getLoginScenario().getBean(
 				EnrollInPlanCommonConstants.HAS_ENROLLED);
 
 		if (!hasEnrolled) {
-			List<DataTableRow> SEPAttributesRow = SEPAttributes
-					.getGherkinRows();
-			Map<String, String> SEPAttributesMap = new HashMap<String, String>();
-			for (int i = 0; i < SEPAttributesRow.size(); i++) {
-
-				SEPAttributesMap.put(SEPAttributesRow.get(i).getCells().get(0),
-						SEPAttributesRow.get(i).getCells().get(1));
-			}
+			
 			SpecialElectionPeriodPage specialElectionPeriodPage = (SpecialElectionPeriodPage) getLoginScenario()
 					.getBean(PageConstants.SPECIAL_ELECTION_PERIOD_PAGE);
 
-			specialElectionPeriodPage.yesForSEPQuestion(SEPAttributesMap);
+			specialElectionPeriodPage.yesForSEPQuestion(memberAttributesMap);
 
 			getLoginScenario().saveBean(
 					PageConstants.SPECIAL_ELECTION_PERIOD_PAGE,
 					specialElectionPeriodPage);
 
-			String plantype = SEPAttributesMap.get("Plan Type");
+			String plantype = memberAttributesMap.get("Plan Type");
 			if (plantype.equalsIgnoreCase("MA")
 					|| plantype.equalsIgnoreCase("MAPD")) {
 				ESRDPage esrdpage = specialElectionPeriodPage
@@ -404,23 +362,16 @@ public class EnrollInPlanStepDefinitionAARP {
 	 */
 	@And("^the user fill following information in esrd information step in AARP site OLE$")
 	public void user_fill_information_esrd_information_aarp(
-			DataTable personalAttributes) {
+			) {
 
 		boolean hasEnrolled = (Boolean) getLoginScenario().getBean(
 				EnrollInPlanCommonConstants.HAS_ENROLLED);
 
 		if (!hasEnrolled) {
-			List<DataTableRow> personalAttributesRow = personalAttributes
-					.getGherkinRows();
-			Map<String, String> personalAttributesMap = new HashMap<String, String>();
-			for (int i = 0; i < personalAttributesRow.size(); i++) {
-				personalAttributesMap.put(personalAttributesRow.get(i)
-						.getCells().get(0), personalAttributesRow.get(i)
-						.getCells().get(1));
-			}
+			
 			ESRDPage esrdPage = (ESRDPage) getLoginScenario().getBean(
 					PageConstants.ESRD_PAGE);
-			esrdPage.entersESRDInformation(personalAttributesMap);
+			esrdPage.entersESRDInformation(memberAttributesMap);
 
 			getLoginScenario().saveBean(PageConstants.ESRD_PAGE, esrdPage);
 
@@ -461,22 +412,15 @@ public class EnrollInPlanStepDefinitionAARP {
 	 */
 	@And("^the user fill following information in prescription drug coverage step in AARP site OLE$")
 	public void user_fill_information_prescription_drug_coverage_aarp(
-			DataTable personalAttributes) {
+			) {
 		boolean hasEnrolled = (Boolean) getLoginScenario().getBean(
 				EnrollInPlanCommonConstants.HAS_ENROLLED);
 
 		if (!hasEnrolled) {
-			List<DataTableRow> personalAttributesRow = personalAttributes
-					.getGherkinRows();
-			Map<String, String> personalAttributesMap = new HashMap<String, String>();
-			for (int i = 0; i < personalAttributesRow.size(); i++) {
-				personalAttributesMap.put(personalAttributesRow.get(i)
-						.getCells().get(0), personalAttributesRow.get(i)
-						.getCells().get(1));
-			}
+			
 			PrescriptionDrugCoveragePage pdcPage = (PrescriptionDrugCoveragePage) getLoginScenario()
 					.getBean(PageConstants.PRESCRIPTION_DRUG_COVERAGE_PAGE);
-			pdcPage.enterspdcInformation(personalAttributesMap);
+			pdcPage.enterspdcInformation(memberAttributesMap);
 
 			getLoginScenario().saveBean(
 					PageConstants.PRESCRIPTION_DRUG_COVERAGE_PAGE, pdcPage);
@@ -515,28 +459,21 @@ public class EnrollInPlanStepDefinitionAARP {
 	 */
 	@And("^the user fill following information in long term care step in AARP site OLE$")
 	public void user_fill_information_long_term_care_aarp(
-			DataTable personalAttributes) {
+			) {
 
 		boolean hasEnrolled = (Boolean) getLoginScenario().getBean(
 				EnrollInPlanCommonConstants.HAS_ENROLLED);
 
 		if (!hasEnrolled) {
-			List<DataTableRow> personalAttributesRow = personalAttributes
-					.getGherkinRows();
-			Map<String, String> personalAttributesMap = new HashMap<String, String>();
-			for (int i = 0; i < personalAttributesRow.size(); i++) {
-				personalAttributesMap.put(personalAttributesRow.get(i)
-						.getCells().get(0), personalAttributesRow.get(i)
-						.getCells().get(1));
-			}
+			
 			LongTermCarePage ltcPage = (LongTermCarePage) getLoginScenario()
 					.getBean(PageConstants.LONG_TERM_CARE_PAGE);
-			ltcPage.enterslongtermInformation(personalAttributesMap);
+			ltcPage.enterslongtermInformation(memberAttributesMap);
 
 			getLoginScenario().saveBean(PageConstants.LONG_TERM_CARE_PAGE,
 					ltcPage);
 
-			String plantype = personalAttributesMap.get("Plan Type");
+			String plantype = memberAttributesMap.get("Plan Type");
 			if (plantype.equalsIgnoreCase("MA")
 					|| plantype.equalsIgnoreCase("MAPD")) {
 				MedicaidPage medicaidPage = ltcPage
@@ -582,28 +519,21 @@ public class EnrollInPlanStepDefinitionAARP {
 	 */
 	@And("^the user fill following information in medicaid step in AARP site OLE$")
 	public void user_fill_information_medicaid_aarp_step_aarp(
-			DataTable personalAttributes) {
+			) {
 
 		boolean hasEnrolled = (Boolean) getLoginScenario().getBean(
 				EnrollInPlanCommonConstants.HAS_ENROLLED);
 
 		if (!hasEnrolled) {
-			List<DataTableRow> personalAttributesRow = personalAttributes
-					.getGherkinRows();
-			Map<String, String> personalAttributesMap = new HashMap<String, String>();
-			for (int i = 0; i < personalAttributesRow.size(); i++) {
-				personalAttributesMap.put(personalAttributesRow.get(i)
-						.getCells().get(0), personalAttributesRow.get(i)
-						.getCells().get(1));
-			}
+			
 			MedicaidPage medicaidPage = (MedicaidPage) getLoginScenario()
 					.getBean(PageConstants.MEDICAID_PAGE);
-			medicaidPage.entersmedicaidInformation(personalAttributesMap);
+			medicaidPage.entersmedicaidInformation(memberAttributesMap);
 
 			getLoginScenario().saveBean(PageConstants.MEDICAID_PAGE,
 					medicaidPage);
 
-			String plantype = personalAttributesMap.get("Plan Type");
+			String plantype = memberAttributesMap.get("Plan Type");
 			if (plantype.equalsIgnoreCase("MA")
 					|| plantype.equalsIgnoreCase("MAPD")) {
 				OtherHealthInsurancePage othPage = medicaidPage
@@ -650,23 +580,16 @@ public class EnrollInPlanStepDefinitionAARP {
 	 */
 	@And("^the user fill following information in other health insurance step in AARP site OLE$")
 	public void user_fill_information_other_health_insurance_aarp_step_aarp(
-			DataTable personalAttributes) {
+			) {
 
 		boolean hasEnrolled = (Boolean) getLoginScenario().getBean(
 				EnrollInPlanCommonConstants.HAS_ENROLLED);
 
 		if (!hasEnrolled) {
-			List<DataTableRow> personalAttributesRow = personalAttributes
-					.getGherkinRows();
-			Map<String, String> personalAttributesMap = new HashMap<String, String>();
-			for (int i = 0; i < personalAttributesRow.size(); i++) {
-				personalAttributesMap.put(personalAttributesRow.get(i)
-						.getCells().get(0), personalAttributesRow.get(i)
-						.getCells().get(1));
-			}
+		
 			OtherHealthInsurancePage othPage = (OtherHealthInsurancePage) getLoginScenario()
 					.getBean(PageConstants.OTHER_HEALTH_INSURANCE_PAGE);
-			othPage.entersotherhealthinsurInformation(personalAttributesMap);
+			othPage.entersotherhealthinsurInformation(memberAttributesMap);
 
 			getLoginScenario().saveBean(
 					PageConstants.OTHER_HEALTH_INSURANCE_PAGE, othPage);
@@ -748,26 +671,19 @@ public class EnrollInPlanStepDefinitionAARP {
 	 */
 	@And("^the user fill following information in plan payment options step in AARP site OLE$")
 	public void user_fill_information_plan_payment_options_aarp_step_aarp(
-			DataTable personalAttributes) {
+		) {
 
 		boolean hasEnrolled = (Boolean) getLoginScenario().getBean(
 				EnrollInPlanCommonConstants.HAS_ENROLLED);
 
 		if (!hasEnrolled) {
-			List<DataTableRow> personalAttributesRow = personalAttributes
-					.getGherkinRows();
-			Map<String, String> personalAttributesMap = new HashMap<String, String>();
-			for (int i = 0; i < personalAttributesRow.size(); i++) {
-				personalAttributesMap.put(personalAttributesRow.get(i)
-						.getCells().get(0), personalAttributesRow.get(i)
-						.getCells().get(1));
-			}
+		
 			
 			PlanPaymentOptions ppoPage = (PlanPaymentOptions) getLoginScenario()
 					.getBean(PageConstants.PLAN_PAYMENT_OPTION_PAGE);
 
-			String plantype = personalAttributesMap.get("Plan Type");
-			ppoPage.clickplanproviderInformation(personalAttributesMap);
+			String plantype = memberAttributesMap.get("Plan Type");
+			ppoPage.clickplanproviderInformation(memberAttributesMap);
 
 			if (plantype.equalsIgnoreCase("MA")
 					|| plantype.equalsIgnoreCase("MAPD")) {
@@ -814,23 +730,16 @@ public class EnrollInPlanStepDefinitionAARP {
 	 */
 	@And("^the user fill following information in optional Riders step in AARP site OLE$")
 	public void user_fill_information_optional_riders_aarp_step_aarp(
-			DataTable personalAttributes) {
+			) {
 
 		boolean hasEnrolled = (Boolean) getLoginScenario().getBean(
 				EnrollInPlanCommonConstants.HAS_ENROLLED);
 
 		if (!hasEnrolled) {
-			List<DataTableRow> personalAttributesRow = personalAttributes
-					.getGherkinRows();
-			Map<String, String> personalAttributesMap = new HashMap<String, String>();
-			for (int i = 0; i < personalAttributesRow.size(); i++) {
-				personalAttributesMap.put(personalAttributesRow.get(i)
-						.getCells().get(0), personalAttributesRow.get(i)
-						.getCells().get(1));
-			}
+		
 			OptionalRidersPage optPage = (OptionalRidersPage) getLoginScenario()
 					.getBean(PageConstants.OPTIONAL_RIDERS_PAGE);
-			optPage.entersOptionalRiderInformation(personalAttributesMap);
+			optPage.entersOptionalRiderInformation(memberAttributesMap);
 
 			ProposedEffectiveDatePage pedPage = optPage.navigatesToNextStep();
 			getLoginScenario().saveBean(
@@ -869,26 +778,19 @@ public class EnrollInPlanStepDefinitionAARP {
 	 * @toDo:user selects proposed effective date OLE
 	 */
 	@And("^the user selects proposed effective date OLE$")
-	public void user_selects_proposed_effective_date(DataTable pedAttributes) {
+	public void user_selects_proposed_effective_date() {
 
 		boolean hasEnrolled = (Boolean) getLoginScenario().getBean(
 				EnrollInPlanCommonConstants.HAS_ENROLLED);
 
 		if (!hasEnrolled) {
-			List<DataTableRow> pedAttributesRow = pedAttributes
-					.getGherkinRows();
-			Map<String, String> pedAttributesMap = new HashMap<String, String>();
-			for (int i = 0; i < pedAttributesRow.size(); i++) {
-
-				pedAttributesMap.put(pedAttributesRow.get(i).getCells().get(0),
-						pedAttributesRow.get(i).getCells().get(1));
-			}
+		
 
 			ProposedEffectiveDatePage proposedEffectiveDatePage = (ProposedEffectiveDatePage) getLoginScenario()
 					.getBean(PageConstants.PROPOSED_EFFECTIVE_DATE_PAGE);
 
 			proposedEffectiveDatePage.selectTheDate();
-			String plantype = pedAttributesMap.get("Plan Type");
+			String plantype = memberAttributesMap.get("Plan Type");
 			ReviewAndSubmitPage revSubmitPage = proposedEffectiveDatePage
 					.clickOnSaveAndContinue(plantype);
 			getLoginScenario().saveBean(
@@ -911,22 +813,16 @@ public class EnrollInPlanStepDefinitionAARP {
 	 */
 	@And("^the user navigates to review and submit application step in AARP site OLE$")
 	public void user_navigates_review_and_submit_application_aarp(
-			DataTable reviewAttributes) {
+			) {
 		boolean hasEnrolled = (Boolean) getLoginScenario().getBean(
 				EnrollInPlanCommonConstants.HAS_ENROLLED);
 
 		if (!hasEnrolled) {
 			ReviewAndSubmitPage revSubmitPage = (ReviewAndSubmitPage) getLoginScenario()
 					.getBean(PageConstants.REVIEW_APPLICATION_PAGE);
-			List<DataTableRow> reviewAttributesRow = reviewAttributes
-					.getGherkinRows();
-			Map<String, String> reviewAttributesMap = new HashMap<String, String>();
-			for (int i = 0; i < reviewAttributesRow.size(); i++) {
-				reviewAttributesMap.put(reviewAttributesRow.get(i).getCells()
-						.get(0), reviewAttributesRow.get(i).getCells().get(1));
-			}
+			
 
-			String plantype = reviewAttributesMap.get("Plan Type");
+			String plantype = memberAttributesMap.get("Plan Type");
 			if (revSubmitPage != null) {
 
 				if (revSubmitPage.validateReviewPage(plantype)) {
@@ -944,7 +840,7 @@ public class EnrollInPlanStepDefinitionAARP {
 	 */
 	@And("^the user reviews the information on review and submit application step in AARP site OLE$")
 	public void user_reviews_the_information_review_and_submit_applcation_aarp(
-			DataTable personalAttributes) {
+			) {
 		boolean hasEnrolled = (Boolean) getLoginScenario().getBean(
 				EnrollInPlanCommonConstants.HAS_ENROLLED);
 
@@ -953,18 +849,8 @@ public class EnrollInPlanStepDefinitionAARP {
 			ReviewAndSubmitPage reviewandSubmitPage = (ReviewAndSubmitPage) getLoginScenario()
 					.getBean(PageConstants.REVIEW_APPLICATION_PAGE);
 
-			List<DataTableRow> personalAttributesRow = personalAttributes
-					.getGherkinRows();
-			Map<String, String> personalAttributesMap = new HashMap<String, String>();
-			for (int i = 0; i < personalAttributesRow.size(); i++) {
-				personalAttributesMap.put(personalAttributesRow.get(i)
-						.getCells().get(0), personalAttributesRow.get(i)
-						.getCells().get(1));
-			}
-
-			
-			reviewandSubmitPage.selectauthRepresentative(personalAttributesMap);
-			reviewandSubmitPage.stmtofunderstanding(personalAttributesMap);
+			reviewandSubmitPage.selectauthRepresentative(memberAttributesMap);
+			reviewandSubmitPage.stmtofunderstanding(memberAttributesMap);
 			ConfirmationPage confirmationPage = reviewandSubmitPage
 					.navigatesToNextStep();
 			Boolean errorMessage = reviewandSubmitPage.validateErrorMessage();

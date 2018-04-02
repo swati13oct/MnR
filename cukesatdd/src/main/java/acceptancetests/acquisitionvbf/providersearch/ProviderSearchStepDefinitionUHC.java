@@ -1,24 +1,18 @@
 package acceptancetests.acquisitionvbf.providersearch;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.acquisitionvbf.vpp.VPPCommonConstants;
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageConstants;
-import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
+import acceptancetests.acquisitionvbf.common.CommonStepDefinition;
+import acceptancetests.acquisitionvbf.vpp.VPPCommonConstants;
+import acceptancetests.data.PageConstants;
+import atdd.framework.MRScenario;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 
 /**
  * Functionality:ProviderSearch 
@@ -33,21 +27,15 @@ public class ProviderSearchStepDefinitionUHC {
 		return loginScenario;
 				
 	}
+	
+	private Map<String, String> memberAttributesMap =new CommonStepDefinition().getAttributesMap();
+	
 
 	/**
 	 * @toDo:the user performs plan search using following information in the UMS site
 	 */
 	@When("^the user performs plan search using following information in the UMS site$")
-	public void zipcode_details_in_UMS_site(DataTable givenAttributes) {
-
-		List<DataTableRow> memberAttributesRow = givenAttributes
-				.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
+	public void zipcode_details_in_UMS_site() {
 
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String county = memberAttributesMap.get("County Name");
@@ -71,19 +59,10 @@ public class ProviderSearchStepDefinitionUHC {
 	 * @toDo:the user Click on Show Plans link
 	 */
 	@When("^the user Click on Show Plans link$")
-	public void clickonshowplans(DataTable planTypeAttribute)
+	public void clickonshowplans()
 	{
-		
-		List<DataTableRow> planTypeAttributesRow = planTypeAttribute
-				.getGherkinRows();
-		Map<String, String> planTypeAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < planTypeAttributesRow.size(); i++) {
-
-			planTypeAttributesMap.put(planTypeAttributesRow.get(i).getCells()
-					.get(0), planTypeAttributesRow.get(i).getCells().get(1));
-		}
-
-		String planType = planTypeAttributesMap.get("PlanType");
+	
+		String planType = memberAttributesMap.get("PlanType");
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planType);
 		
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
@@ -103,17 +82,10 @@ public class ProviderSearchStepDefinitionUHC {
 	 * @toDo:the user Click on Is my Provider covered link
 	 */
 	@When("^the user Click on Is my Provider covered link$")
-	public void clickonProvidercoveredlink(DataTable Planname )
+	public void clickonProvidercoveredlink()
 	{
-		List<DataTableRow> plannameAttributesRow = Planname
-				.getGherkinRows();
-		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < plannameAttributesRow.size(); i++) {
-
-			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells()
-					.get(0), plannameAttributesRow.get(i).getCells().get(1));
-		}
-		String planName = plannameAttributesMap.get("PlanName");
+		
+		String planName = memberAttributesMap.get("PlanName");
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		
@@ -127,18 +99,11 @@ public class ProviderSearchStepDefinitionUHC {
 	 * @toDo:Verify X out of Y provider covered information is displayed on Plan Summary page
 	 */
 	@Then("^Verify X out of Y provider covered information is displayed on Plan Summary page$")
-		public void verifyproviderscovered(DataTable Planname)
+		public void verifyproviderscovered()
 	{
 		
-		List<DataTableRow> plannameAttributesRow = Planname
-				.getGherkinRows();
-		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < plannameAttributesRow.size(); i++) {
-
-			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells()
-					.get(0), plannameAttributesRow.get(i).getCells().get(1));
-		}
-		String planName = plannameAttributesMap.get("PlanName");
+	
+		String planName = memberAttributesMap.get("PlanName");
 		
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		if(plansummaryPage.providerinfo(planName))

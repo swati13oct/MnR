@@ -9,6 +9,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.acquisitionvbf.common.CommonStepDefinition;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
@@ -33,7 +34,10 @@ public class PharmacyLocatorStepDefinitionAARP {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-
+	
+	private Map<String, String> memberAttributesMap =new CommonStepDefinition().getAttributesMap();
+	
+	private List<DataTableRow> memberAttributesRow = new CommonStepDefinition().getAttributesRow();
 
 	//moved @given statement to common stepdefinition
 		//the user is on AARP medicare acquisition site landing page
@@ -42,9 +46,9 @@ public class PharmacyLocatorStepDefinitionAARP {
 	 * @toDo:user hovers to Our Plans and select Request More Help and Information for following plan type
 	 */
 	@When("^the user hovers to Our Plans and select Request More Help and Information for following plan type in AARP Site$")
-	public void user_hovers_to_our_plans_and_select_request_more_help_and_information_aarp(DataTable planAttributes){
+	public void user_hovers_to_our_plans_and_select_request_more_help_and_information_aarp(){
 		
-		String planType = planAttributes.getGherkinRows().get(0).getCells()
+		String planType = memberAttributesRow.get(0).getCells()
 				.get(0);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PLAN_TYPE, planType);
 		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
@@ -77,14 +81,9 @@ public class PharmacyLocatorStepDefinitionAARP {
 	 * @toDo:user enters following details for pharmacy search
 	 */
 	@And("^the user enters following details for pharmacy search in AARP Site$")
-	public void user_enters_zipcode_distance_details_aarp(DataTable zipAttributes) {
-		List<DataTableRow> zipAttributesRow = zipAttributes.getGherkinRows();
-		Map<String, String> zipAttributesMap = new LinkedHashMap<String, String>();
-		for (int i = 0; i < zipAttributesRow.size(); i++) {
-
-			zipAttributesMap.put(zipAttributesRow.get(i).getCells().get(0),
-					zipAttributesRow.get(i).getCells().get(1));
-		}
+	public void user_enters_zipcode_distance_details_aarp() {
+		List<DataTableRow> zipAttributesRow = memberAttributesRow;
+		Map<String, String> zipAttributesMap = memberAttributesMap;
 		String zipcode = zipAttributesMap.get("Zip Code");
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.ZIPCODE,
 				zipcode);
@@ -114,9 +113,9 @@ public class PharmacyLocatorStepDefinitionAARP {
 	 * @toDo:user selects a language from dropdown 
 	 */
 	@And("^the user selects a language from dropdown in AARP Site$")
-	public void user_selects_language_aarp(DataTable languageAttributes) {
+	public void user_selects_language_aarp() {
 
-		String langName = languageAttributes.getGherkinRows().get(0).getCells()
+		String langName = memberAttributesRow.get(0).getCells()
 				.get(0);
 		if(langName.equals("Spanish")){
 			langName = "espa";	
@@ -143,9 +142,9 @@ public class PharmacyLocatorStepDefinitionAARP {
 	 * @toDo:user chooses a plan from dropdown
 	 */
 	@And("^the user chooses a plan from dropdown in AARP Site$")
-	public void user_chooses_plan_dropdown_aarp(DataTable planAttributes) {
+	public void user_chooses_plan_dropdown_aarp() {
 
-		String planName = planAttributes.getGherkinRows().get(0).getCells()
+		String planName = memberAttributesRow.get(0).getCells()
 				.get(0);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PLAN_NAME, planName);
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
@@ -167,9 +166,9 @@ public class PharmacyLocatorStepDefinitionAARP {
 	 * @toDo:user chooses the Pharmacy Type
 	 */
 	@Then("^the user chooses the Pharmacy Type$")
-	public void the_user_chooses_the_pharmacy_type(DataTable pharmacyTypeAttribute){
+	public void the_user_chooses_the_pharmacy_type(){
 		
-		String PharmacyType = pharmacyTypeAttribute.getGherkinRows().get(0).getCells()
+		String PharmacyType = memberAttributesRow.get(0).getCells()
 				.get(0);
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
@@ -188,9 +187,9 @@ public class PharmacyLocatorStepDefinitionAARP {
 	 * @toDo:user chooses the Service Type
 	 */
 	@Then("^the user chooses the Service Type$")
-	public void the_user_chooses_the_service_type(DataTable serviceTypeAttribute){
+	public void the_user_chooses_the_service_type(){
 		
-		String serviceType = serviceTypeAttribute.getGherkinRows().get(0).getCells()
+		String serviceType = memberAttributesRow.get(0).getCells()
 				.get(0);
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
@@ -235,9 +234,9 @@ public class PharmacyLocatorStepDefinitionAARP {
 	 * @toDo:user searches available pharmacies by selecting
 	 */
 	@And("the user searches available pharmacies by selecting \"Show pharmacies for these services.\" in AARP site$")
-	public void  user_searches_pharmacies_by_choosing_pharmacy_types_aarp(DataTable pharmacyTypeAttributes)
+	public void  user_searches_pharmacies_by_choosing_pharmacy_types_aarp()
 	{
-		String[] pharmacyTypeArray = pharmacyTypeAttributes.getGherkinRows().get(0).getCells().get(0).split(",");
+		String[] pharmacyTypeArray = memberAttributesRow.get(0).getCells().get(0).split(",");
 		
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
@@ -266,8 +265,8 @@ public class PharmacyLocatorStepDefinitionAARP {
 	 * @toDo:user validates the error message for no pharmacies found for below pharmacy
 	 */
 	@Then("^the user validates the error message for no pharmacies found for below pharmacy in the AARP Site$")
-	public void validates_error_msg_for_no_pharmacies_found_aarp(DataTable pharmacyTypeAttributes){
-		String[] pharmacyTypeArray = pharmacyTypeAttributes.getGherkinRows().get(0).getCells().get(0).split(",");
+	public void validates_error_msg_for_no_pharmacies_found_aarp(){
+		String[] pharmacyTypeArray = memberAttributesRow.get(0).getCells().get(0).split(",");
 		
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
@@ -309,8 +308,8 @@ public class PharmacyLocatorStepDefinitionAARP {
 	 * @toDo:user selects the county
 	 */
 	@When("^the user selects the county in AARP site$")
-	public void user_selects_county_aarp(DataTable countyAttributes){
-		String countyName = countyAttributes.getGherkinRows().get(0).getCells()
+	public void user_selects_county_aarp(){
+		String countyName = memberAttributesRow.get(0).getCells()
 				.get(0);
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
