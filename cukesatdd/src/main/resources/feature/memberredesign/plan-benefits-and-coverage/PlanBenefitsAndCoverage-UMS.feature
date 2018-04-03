@@ -366,7 +366,39 @@ Feature:C1.1 To test plan benefits and Coverage on UMS site
       | planType|  memberType  | copayCategory |
       | HIP     |  SHIP        |   NON LIS     | 
       | PHIP    |  SHIP        |   NON LIS     |
+      
+    @aprilRelease2018Fnf
+ Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
+    Given registered member with following details logins in the member portal 
+      | Plan Type      | <planType>  |
+      | Member Type    | <memberType>|
+      | Copay Category | <copayCategory>|
+    When the user navigates to Benefits and coverage page
+    And the user can see the values for catastrophic values
+    Examples: 
+      | planType |  memberType  |  copayCategory    |
+      | MAPD     |  Group   		|  wotCMSValue      | 
    
+
+@fastandfurious
+@aprilRelease2018 @CatastrophicStageLanguage
+  Scenario Outline: Verify Updated Language in Catastrophic Coverage Stage for Drug Copays and Discounts in Redesign site
+Given registered Redesign member for EOB with following attributes
+      | Plan Type | <planType> |
+      | Member Type  | <memberType> |
+ And the user navigates to Benefits and Coverage page
+ Then the user validates Catastrophic Stage language for the member
+ 
+  | Updated Language | <UpdatedLanguage> |
+  | Display Flag | <DisplayFlag> |
+  
+ 	Examples:
+	| planType    | memberType    |UpdatedLanguage     | DisplayFlag       |
+	| PDP          | Group_LIS 			|  -either- coinsurance of 5% of the cost of the drug   |  	  false       |
+	| MAPD          | Group_Non_LIS 			|  -either- coinsurance of 5% of the cost of the drug   |  	  true       |
+	| PDP          | Group_Non_LIS 			|  -either- coinsurance of 5% of the cost of the drug   |  	  false       |
+
+
     
     
 
