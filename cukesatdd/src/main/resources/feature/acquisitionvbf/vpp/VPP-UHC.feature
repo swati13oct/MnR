@@ -5,7 +5,6 @@ Feature:1.09-VBF-Acq-To test plan summary in vpp flow UMS site
 @vppBlayerSmoke
 Scenario Outline: Verify plan details in UMS site 
 Given the user is on the UHC medicare solutions site landing page
-When fetch the data attributes in map form
 When fetch the data attributes in row form
 When the user performs plan search using following information in UMS site
 	| Zip Code    | <zipcode>|

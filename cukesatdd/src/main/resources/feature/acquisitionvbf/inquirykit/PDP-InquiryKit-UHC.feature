@@ -4,7 +4,6 @@ Feature:2.05-VBF-Acq-To test PDP inquiry flow in UHC site
 @pdpInquiryKitUHC
 Scenario Outline:To verify PDP inquiry flow in UHC site
 Given the user is on the UHC medicare solutions site landing page
-When fetch the data attributes in map form
 When fetch the data attributes in row form
 When the user navigates to Request More Help and Information page under pdp section in UHC Site
 And the user accesses the Request Plan Information and Enrollment Materials in UHC site

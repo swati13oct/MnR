@@ -4,7 +4,6 @@ Feature:1.18-VBF-Acq-To test Locate a Pharmacy in acqusition flow UMS site
 @PharmacyLocatorBlayerSmoke
 Scenario Outline:To verify available pharmacies in UMS site
 Given the user is on the UHC medicare solutions site landing page
-When fetch the data attributes in map form
 When fetch the data attributes in row form
 When the user hovers to Our Plans and select Request More Help and Information for following plan type
 	| <plantype> |

@@ -4,7 +4,6 @@ Feature:1.10-VBF-Acq-To test plan summary in vpp flow AARP site
 @vppUlayerSmoke
 Scenario Outline: Verify plan summary in AARP site
 Given the user is on AARP medicare acquisition site landing page
-When fetch the data attributes in map form
 When fetch the data attributes in row form
 When the user performs plan search using following information in the AARP site
 	| Zip Code    | <zipcode> |

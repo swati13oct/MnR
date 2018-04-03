@@ -3,7 +3,6 @@
 Feature:1.16-VBF-Acq-To test Provider Search Flow  in AARP site
 Scenario Outline: Verify Provider Search  in AARP site
 Given the user is on AARP medicare acquisition site landing page
-When fetch the data attributes in map form
 When fetch the data attributes in row form
 When the user performs plan search using following information in the Ulayer AARP site
         | Zip Code    | <zipcode> |

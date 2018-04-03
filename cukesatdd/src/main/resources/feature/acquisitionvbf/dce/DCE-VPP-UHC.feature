@@ -3,7 +3,6 @@ Feature: To test DCE to VPP plan Summary flow  in UMS site
 @dcevppnonaep
 Scenario Outline: To Verify the drugs and plan summary for non AEP period
 Given the user is on the UHC medicare solutions site landing page
-When fetch the data attributes in map form
 When fetch the data attributes in row form
 When the user performs drug search using the following information in UMS site
 	| Zip Code    | <zipcode>  |

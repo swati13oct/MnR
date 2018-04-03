@@ -3,7 +3,6 @@ Feature: To test enroll in plan on UHC site
 @OLE_MA
 Scenario Outline: Verify enroll in plan in UHC site for federal plan type member  
 Given the user is on the UHC medicare solutions site landing page
-When fetch the data attributes in map form
 When fetch the data attributes in row form
 When user performs plan search using following information in UHC site
         | Zip Code    | <zipcode> |
