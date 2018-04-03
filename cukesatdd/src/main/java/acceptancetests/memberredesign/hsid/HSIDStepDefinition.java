@@ -95,16 +95,23 @@ public class HSIDStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		HSIDLoginPage loginPage = new HSIDLoginPage(wd);
 		loginPage.validateelements();
-		AssistiveRegistrationPage assistiveregistration = (AssistiveRegistrationPage) loginPage.doLoginWith(userName, pwd);
+        AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
 		
-		
+		if (accountHomePage!= null) {
+			 getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
+			Assert.assertTrue(true);
+		}
+		else {
+			Assert.fail("***** Error in loading  Redesign Account Landing Page *****");
+		}
+		/*AssistiveRegistrationPage assistiveregistration = (AssistiveRegistrationPage) loginPage.doLoginWith(userName, pwd);
 		if (assistiveregistration != null) {
 			 getLoginScenario().saveBean(PageConstantsMnR.ASSISTIVE_REGISTRATION_PAGE,assistiveregistration);
 			Assert.assertTrue(true);
 		}
 		else {
 			Assert.fail("***** Error in loading  Assistive Registration Page *****");
-		}
+		}*/
 
 	}
 	
