@@ -1,5 +1,6 @@
-package acceptancetests.memberredesign.HSID;
+package acceptancetests.memberredesign.hsid;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -8,23 +9,31 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
+import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageConstantsMnR;
+
 //import acceptancetests.deprecated.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonConstants;
 import acceptancetests.data.LoginCommonConstants;
-import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
-import cucumber.api.java.en.When;
+import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
+import pages.member.bluelayer.AccountHomePage;
 import pages.member.bluelayer.AssistiveRegistrationPage;
+import pages.member.bluelayer.BenefitsAndCoveragePage;
+import pages.member.bluelayer.DashboardPage;
 import pages.member.bluelayer.HSIDLoginPage;
+import pages.member.bluelayer.LoginPage2;
+import pages.member.ulayer.ValueAddedServicepage;
+import pages.member.redesign.DeregisterPage;
 
 /**
  * Functionality: Benefits and Coverage page
@@ -44,7 +53,7 @@ public class HSIDStepDefinition {
 
 
 	
-	@Given("^register with following details logins in the member portal and validate elements$")
+	@And("^register with following details logins in the member portal and validate elements$")
 	public void login_with_member(DataTable memberAttributes) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
@@ -86,16 +95,23 @@ public class HSIDStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		HSIDLoginPage loginPage = new HSIDLoginPage(wd);
 		loginPage.validateelements();
-		AssistiveRegistrationPage assistiveregistration = (AssistiveRegistrationPage) loginPage.doLoginWith(userName, pwd);
+        AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
 		
-		
+		if (accountHomePage!= null) {
+			 getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
+			Assert.assertTrue(true);
+		}
+		else {
+			Assert.fail("***** Error in loading  Redesign Account Landing Page *****");
+		}
+		/*AssistiveRegistrationPage assistiveregistration = (AssistiveRegistrationPage) loginPage.doLoginWith(userName, pwd);
 		if (assistiveregistration != null) {
 			 getLoginScenario().saveBean(PageConstantsMnR.ASSISTIVE_REGISTRATION_PAGE,assistiveregistration);
 			Assert.assertTrue(true);
 		}
 		else {
 			Assert.fail("***** Error in loading  Assistive Registration Page *****");
-		}
+		}*/
 
 	}
 	
@@ -107,7 +123,6 @@ public class HSIDStepDefinition {
 		assistiveregistration.usernameautofill(username);
 	}
 	
-
 	@And("^the user validate all fields on this page$")
 	public void validateotherfields()
 	{
@@ -182,6 +197,116 @@ public class HSIDStepDefinition {
 	AssistiveRegistrationPage assistiveregistration = (AssistiveRegistrationPage) getLoginScenario()
 	.getBean(PageConstantsMnR.ASSISTIVE_REGISTRATION_PAGE);
 	assistiveregistration.validate_emailfields();
+	}
+	
+	
+
+	@Given("^the user connect to DB$")
+	public void i_connected_to_Provisional_data_base() {
+		Map<String, String> props = new HashMap<String, String>();
+		props = loginScenario.getProperties();
+		loginScenario.getPDBDBConnection(props);
+	}
+	
+	@And("^the user select record from database$")
+	public void i_select_record_data_base(DataTable givenAttributes) throws SQLException {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String firstname = memberAttributesMap.get("Firstname");
+		String lastname = memberAttributesMap.get("Lastname");
+		getLoginScenario().saveBean(LoginCommonConstants.Firstname, firstname);
+		getLoginScenario().saveBean(LoginCommonConstants.Lastname, lastname);
+		System.out.println(firstname);
+		System.out.println(lastname);
+		MRScenario.getRecordsFrom_mbr_table(firstname,lastname);
+	}
+	
+	@And("^the user delete record from mbr_portal$")
+	public void i_delete_record_data_base(DataTable givenAttributes) throws SQLException {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String firstname = memberAttributesMap.get("Firstname");
+		String lastname = memberAttributesMap.get("Lastname");
+		getLoginScenario().saveBean(LoginCommonConstants.Firstname, firstname);
+		getLoginScenario().saveBean(LoginCommonConstants.Lastname, lastname);
+		System.out.println(firstname);
+		System.out.println(lastname);
+		MRScenario.deleteRecordsFrom_mbr_prtl_table(firstname,lastname);
+	}
+	
+	@And("^the user delete record from mbr$")
+	public void i_delete_record_mbrtable(DataTable givenAttributes) throws SQLException {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String firstname = memberAttributesMap.get("Firstname");
+		String lastname = memberAttributesMap.get("Lastname");
+		getLoginScenario().saveBean(LoginCommonConstants.Firstname, firstname);
+		getLoginScenario().saveBean(LoginCommonConstants.Lastname, lastname);
+		System.out.println(firstname);
+		System.out.println(lastname);
+		MRScenario.deleteRecordsFrom_mbr_table(firstname,lastname);
+	}
+	
+	@And("^the user delete record from extreme scale$")
+	public void i_delete_record_extremescaletable(DataTable givenAttributes) throws SQLException {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String firstname = memberAttributesMap.get("Firstname");
+		String lastname = memberAttributesMap.get("Lastname");
+		getLoginScenario().saveBean(LoginCommonConstants.Firstname, firstname);
+		getLoginScenario().saveBean(LoginCommonConstants.Lastname, lastname);
+		System.out.println(firstname);
+		System.out.println(lastname);
+		MRScenario.deleteRecordsFrom_mbr_extrm_scl_dtl_table(firstname,lastname);
+	}
+	
+	@Given("^the user deregister from M&R LDAP$")
+	public void I_delete_user_from_mnrldap(DataTable givenAttributes)
+	{
+		WebDriver wd = loginScenario.getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		DeregisterPage deregisterPage = new DeregisterPage(wd);
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String username = memberAttributesMap.get("Username");
+		getLoginScenario().saveBean(LoginCommonConstants.Username, username);
+		
+		System.out.println(username);
+
+		deregisterPage.deregisterUser(username);
+		
+	}
+	
+	@Then("^I enter valid username \"([^\"]*)\" into Username field for bulk registration$")
+	public void i_enter_valid_username_into_Username_field(String arg1) throws Throwable {
+		WebDriver wd = loginScenario.getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		DeregisterPage deregisterPage = new DeregisterPage(wd);
+		String username=deregisterPage.getUserName();		
+		username=username+arg1;// adding special symbol 		
+		deregisterPage.setUserName(username);// setting up new user name				
+		//deregisterPage.enterUserName(username);
+		
 	}
 	
 

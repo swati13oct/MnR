@@ -40,6 +40,15 @@ public class CommonConstants {
 	public static final String DB_USERNAME = "DBUsername";
 
 	public static final String DB_PASSWORD = "DBPassword";
+	
+	public static final String HSIDDB_URL = "HSIDDBURL";
+
+	public static final String HSIDDB_USERNAME = "HSIDDBUsername";
+
+	public static final String HSIDDB_PASSWORD = "HSIDDBPassword";
+	
+	public static final String HSID_ENV = "HSID_ENV";
+	
 
 	public static final String DB_SCHEMA = "DBSchema";
 
@@ -794,9 +803,9 @@ public class CommonConstants {
 	public static final String NEW_PAYMENT_HISTORY_EXPECTED_JSON = "newPaymentHistoryexpectedJSON";
 
 	public static final String PROFILE_AND_PREFERENCES_REDESIGN_PAGE_DATA = "profilenpreferencesredesign.json";
-
-	public static final String REVIEW_AUTOMATIC_PAGE_DATA = "reviewautomaticactual.json";
 	
+	 public static final String REVIEW_AUTOMATIC_PAGE_DATA = "reviewautomaticactual.json";
+	 
 	 public static final String REVIEW_ONE_TIME_PAGE_DATA = "reviewonetimeactual.json";
 	 
 	 public static final String SAVE_DRUG_PAGE_DATA="savedrugpagedata.json";
@@ -823,25 +832,6 @@ public class CommonConstants {
 
 	public static final String BENEFITS_AND_COVERAGE = "benefitsandcoverage" ;
 	
-	public static final String DRUGCOSTESTIMATORDATAPAGE = "DrugCostEstimatorPage.json";
-	
-    //Browsers supported in MRScenario
-	public static final String BROWSER_NAME = "BROWSER_NAME";
-    public static final String JENKINS_BROWSER_PHANTOMJS = "headless";
-    public static final String DESKTOP_WEBDRIVER = "WebDriver";
-	public static final String JENKINS_BROWSER = "webdriverhost";
-    public static final String HTMLUNIT_BROWSER = "HTMLUNIT";
-    public static final String FIREFOX_BROWSER = "FIREFOX";
-    public static final String CHROME_BROWSER = "CHROME";
-    public static final String IE_BROWSER = "IE";
-    public static final String MOBILE_BROWSER = "MOBILE";   
-    public static final String SAUCE_BROWSER_WEB = "saucelabs";
-    public static final String SAUCE_BROWSER_MOBILE = "SAUCE_BROWSER_MOBILE";
 
-    public static final String DESKTOP_BROWSER_AGENT_STRING = "BrowserAgentString";
-    public static final String JENKINS_BROWSER_AGENT_STRING = "JENKINS_BROWSER_AGENT_STRING";
-	public static final String ACCOUNT_USER_NAME = null;
-
-	public static final String IS_TESTHARNESS = "istestharness";
 	
 }

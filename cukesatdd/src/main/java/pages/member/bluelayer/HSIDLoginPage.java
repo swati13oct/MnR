@@ -15,8 +15,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.ulayer.LoginAssistancePage;
+import pages.member.redesign.ConfirmSecurityQuestion;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
@@ -55,6 +57,13 @@ public class HSIDLoginPage extends UhcDriver {
 	
     @FindBy(xpath=".//*[@id='IPEinvL']/map/area[1]")
     private WebElement iPerceptionPopUp;
+    
+MRScenario loginScenario;
+	
+	public MRScenario getLoginScenario() {
+		MRScenario loginScenario = null;
+		return loginScenario;
+	}
 
 	public HSIDLoginPage(WebDriver driver) {
 		super(driver);
@@ -81,7 +90,7 @@ public class HSIDLoginPage extends UhcDriver {
 		validate(passwordlink);
 	}
 	
-	public Object doLoginWith(String username, String password) {
+	public Object doLoginWith2(String username, String password) {
 
         System.out.println(driver.getCurrentUrl());
 		sendkeys(userNameField, username);
@@ -101,5 +110,73 @@ public class HSIDLoginPage extends UhcDriver {
 		return null;
 	}
 	
+	
+	
+	public Object doLoginWith(String username, String password) {
+
+        System.out.println(driver.getCurrentUrl());
+		sendkeys(userNameField, username);
+		sendkeys(passwordField, password);
+		signInButton.click();
+		
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if (driver.getCurrentUrl().contains("aa-web/evaluate?execution=e1s2&action=securityQuestion"))
+		{
+			
+			
+			ConfirmSecurityQuestion cs = new ConfirmSecurityQuestion(driver);
+		    try {
+				cs.enterValidSecurityAnswer();
+				System.out.println(driver.getCurrentUrl());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else if(currentUrl().contains("testharness.html") || currentUrl().contains("/dashboard"))
+		{
+			
+				System.out.println("test");
+				System.out.println(driver.getCurrentUrl());
+			    return new AccountHomePage(driver);
+			
+		}
+		
+		if ( MRScenario.environmentMedicare.equals("team-e") || MRScenario.environmentMedicare.equals("team-ci1")){
+
+			Alert alert = driver.switchTo().alert();
+			alert.accept();
+		} 
+		
+		try {
+			Thread.sleep(20000);
+		} catch (InterruptedException e) 
+		{
+		// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(currentUrl().contains("testharness.html") || currentUrl().contains("/dashboard"))
+        {
+			System.out.println("test");
+			System.out.println(driver.getCurrentUrl());
+			return new AccountHomePage(driver);
+		}
+		else if(currentUrl().contains("home/my-account-home.html")  || currentUrl().contains("/login.html") ) {
+			return new AccountHomePage(driver);
+		}
+		else if (currentUrl().contains("terminated-plan.html")) {
+			return new TerminatedHomePage(driver);
+		}
+
+		System.out.println("teamhloginWith is returing null. Please Update the above condition As per your Needs");
+
+		return null;
+	}
 
 }
