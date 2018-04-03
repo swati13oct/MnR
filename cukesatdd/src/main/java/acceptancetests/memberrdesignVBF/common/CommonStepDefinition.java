@@ -127,6 +127,7 @@ public class CommonStepDefinition {
 	}
 
 	public static Map<String, String> storeAttributesInMap(DataTable memberAttributes) {
+		
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			System.out.println("Key to store in Map:" + memberAttributesRow.get(i).getCells().get(0));
@@ -162,5 +163,6 @@ public class CommonStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		CommonStepDefinition commonStepDefinition = new CommonStepDefinition(loginScenario);
 		getLoginScenario().saveBean(CommonConstants.COMMONSTEPDEFINITIONMEMVBF, commonStepDefinition);
+		memberAttributesMap.clear();
 	}
 }
