@@ -108,6 +108,3 @@ And the user clicks on first eob from the list
 	| MAPD_GRP    | NICE_EOB 			| 18 Months    | Medical 	         |
  
  
- 
- 
-
