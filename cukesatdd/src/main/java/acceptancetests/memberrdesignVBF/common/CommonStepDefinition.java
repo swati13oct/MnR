@@ -127,7 +127,6 @@ public class CommonStepDefinition {
 	}
 
 	public static Map<String, String> storeAttributesInMap(DataTable memberAttributes) {
-		memberAttributesMap.clear();
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			System.out.println("Key to store in Map:" + memberAttributesRow.get(i).getCells().get(0));

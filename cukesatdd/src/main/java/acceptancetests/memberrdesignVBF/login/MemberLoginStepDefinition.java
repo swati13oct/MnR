@@ -4,6 +4,8 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.memberrdesignVBF.common.CommonStepDefinition;
 import cucumber.api.java.en.And;
@@ -29,7 +31,7 @@ public class MemberLoginStepDefinition {
 	 */
 	@Then("^User should be able to validate Dashboard elements$")
 	public void user_validate_dashboard_elements() throws InterruptedException {
-
+		category = CommonStepDefinition.getMemberAttributeMap().get("Member Type");
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
 			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
 
@@ -70,23 +72,24 @@ public class MemberLoginStepDefinition {
 	public void validateURLNavigation() {
 		category = CommonStepDefinition.getMemberAttributeMap().get("Member Type");
 		System.out.println("Current category: " + category);
-
+		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		System.out.println("Current URL: " + wd.getCurrentUrl());
-		if (category.equals("UhcMapdInd"))
+		if (category.equalsIgnoreCase("UhcMapdInd"))
 			Assert.assertTrue(wd.getCurrentUrl().contains("/medicare/dashboard"));
-		else if (category.equals("AARPMapdInd"))
+		else if (category.equalsIgnoreCase("AARPMapdInd"))
 			Assert.assertTrue(wd.getCurrentUrl().contains("/aarp/dashboard"));
-		else if (category.equals("GroupRetireeMapd"))
+		else if (category.equalsIgnoreCase("GroupRetireeMapd"))
 			Assert.assertTrue(wd.getCurrentUrl().contains("/retiree/dashboard"));
-		else if (category.equals("Ship"))
+		else if (category.equalsIgnoreCase("Ship"))
 			Assert.assertTrue(wd.getCurrentUrl().contains("/aarp/dashboard"));
-		else if (category.equals("PCP"))
+		else if (category.equalsIgnoreCase("PCP"))
 			Assert.assertTrue(wd.getCurrentUrl().contains("/pcp/dashboard"));
-		else if (category.equals("Medica"))
+		else if (category.equalsIgnoreCase("Medica"))
 			Assert.assertTrue(wd.getCurrentUrl().contains("/medica/dashboard"));
-		else
+		else {
 			System.out.println("Please specifiy a specific member type ");
-		Assert.fail("Please specifiy a specific member type ");
+			Assert.fail("Please specifiy a specific member type ");
+		}
 	}
 
 }
