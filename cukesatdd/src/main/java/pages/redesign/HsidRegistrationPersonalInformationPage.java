@@ -98,6 +98,17 @@ public class HsidRegistrationPersonalInformationPage extends UhcDriver {
 	
 	public HsidRegistrationPersonalCreateAccount clickContinue(){
 		continuebtn.click();
+
+		while(!currentUrl().contains("register/createAccount")){
+			System.out.println("create account page is loading");
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		System.out.println("create account page is loaded");
 		if(currentUrl().contains("register/createAccount")){
 			return new HsidRegistrationPersonalCreateAccount(driver);
 		}else{

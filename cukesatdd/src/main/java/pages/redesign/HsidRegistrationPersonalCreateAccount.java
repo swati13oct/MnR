@@ -127,7 +127,7 @@ public class HsidRegistrationPersonalCreateAccount extends UhcDriver {
 	}
 	
 	public void enterUsername(String userName){
-		if(userNameLabelWithTextBox.isDisplayed()){
+		if(userNameTextBox.isDisplayed()){
 			userNameTextBox.clear();
 			userNameTextBox.sendKeys(userName);
 		}

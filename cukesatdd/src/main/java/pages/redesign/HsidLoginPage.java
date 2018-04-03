@@ -14,7 +14,13 @@ public class HsidLoginPage extends UhcDriver {
 	@FindBy(xpath=".//*[@id='hsid-login']/div[2]/p[3]/a")
 	private WebElement registerNow;
 	
+	@FindBy(id="register-Register")
+	private WebElement lawwregisterNow;
+	
+	
 	private static String PAGE_URL = MRConstants.STAGE_DASHBOARD_NEW_DOMAIN_URL;
+	
+	private static String REGIRATION_URL = "https://st1.healthsafe-id.com/protected/register?HTTP_TARGETPORTAL=MNR&HTTP_ERRORURL=https://stage-medicare.uhc.com/&HTTP_TARGETURL=https%3A%2F%2Fstage-medicare.uhc.com%2Fmember%2Fpost-sign-in.html%3Ftarget%3Drallydashboard%26portalIndicator%3DUHC&HTTP_ELIGIBILITY=P&HTTP_GRADIENTCOLOR1=%23003DA1&HTTP_GRADIENTCOLOR2=%2300A8F7&HSID_DOMAIN_URL=https://st1.healthsafe-id.com&USE_TEST_RECAPTCHA=true";
 
 	public HsidLoginPage(WebDriver driver) {
 		super(driver);
@@ -28,7 +34,11 @@ public class HsidLoginPage extends UhcDriver {
 		
 	}
 	
+	
+	
 	public HsidRegistrationPersonalInformationPage clickRegister(){
+		driver.get(REGIRATION_URL);
+		/*
 		if(registerNow.isDisplayed()){
 			registerNow.click();
 			try {
@@ -40,8 +50,8 @@ public class HsidLoginPage extends UhcDriver {
 			return new HsidRegistrationPersonalInformationPage(driver);
 		}else{
 			Assert.assertTrue("Register now button is not displayed", false);
-		}
-		return null;
+		}*/
+		return new HsidRegistrationPersonalInformationPage(driver);
 	}
 	
 	

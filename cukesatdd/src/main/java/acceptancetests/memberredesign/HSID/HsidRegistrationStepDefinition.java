@@ -1,5 +1,6 @@
 package acceptancetests.memberredesign.HSID;
 
+import java.sql.Driver;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -147,10 +148,10 @@ public class HsidRegistrationStepDefinition {
 	}
 	
 	@When("^select security question2 as \"([^\"]*)\"$")
-	public void select_security_question2_as(String question1) throws Throwable {
+	public void select_security_question2_as(String question2) throws Throwable {
 		HsidRegistrationPersonalCreateAccount hsidRegistrationPersonalCreateAccount = 
 				(HsidRegistrationPersonalCreateAccount) loginScenario.getBean(PageConstants.HSID_REGISTRATION_PERSONALCREATEACCOUNT);
-		hsidRegistrationPersonalCreateAccount.selectSecurityQuestion1(question1);
+		hsidRegistrationPersonalCreateAccount.selectSecurityQuestion2(question2);
 	}
 
 	@When("^select security answer2 as \"([^\"]*)\"$")
@@ -248,12 +249,19 @@ public class HsidRegistrationStepDefinition {
 
 	@When("^user should see a latest unread mail recieved in provided email address$")
 	public void user_should_see_a_latest_unread_mail_recieved_in_provided_email_address() throws Throwable {
-		
+		HsidRegistrationConfirmInformation hsidRegistrationConfirmInformationPage = 
+				(HsidRegistrationConfirmInformation) loginScenario.getBean(PageConstants.HSID_REGISTRATION_CONFIRM_INFORMATION);
+		String[] mailParts = hsidRegistrationConfirmInformationPage.getConfirmRegistrationURLWithSubjectandEmailContent();
+		hsidRegistrationConfirmInformationPage.setConfirmationUrl(mailParts[0]);
 	}
 
 	@Then("^user should copy the confirm email url to browser$")
 	public void user_should_copy_the_confirm_email_url_to_browser() throws Throwable {
-
+		HsidRegistrationConfirmInformation hsidRegistrationConfirmInformationPage = 
+				(HsidRegistrationConfirmInformation) loginScenario.getBean(PageConstants.HSID_REGISTRATION_CONFIRM_INFORMATION);
+		
+		hsidRegistrationConfirmInformationPage.getConfirmationUrl();
+		
 	}
 
 	@Then("^user should be at Sign In page$")

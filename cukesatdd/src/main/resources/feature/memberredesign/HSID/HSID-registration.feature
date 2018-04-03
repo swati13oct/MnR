@@ -36,7 +36,7 @@ And I should see a Username or email address label with textbox in Sign In page
 
 Examples:
  | firstName | lastName |   dob 	  | memberid 	| zipcode | userName 	| password |   email	  			  | question1 | question2 | question3 |
- | ACDBSDF   | ADFACBBD | 12/23/1934  | 000971217-1 | 99833	  |q1_aarp_feb357 | Test2day | bhavana.pilli@optum.com| number1   | name1     | color1    |
+ | ACACBAA   | CBEFABBB  | 09/15/1944  | 008540905-1 | 97106	|q1_aarp_apr258| Password@1 | codetransformers@gmail.com| number1   | name1     | color1    |
  
  
 @validateStep1 
