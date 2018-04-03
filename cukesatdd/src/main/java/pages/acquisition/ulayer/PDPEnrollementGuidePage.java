@@ -76,7 +76,9 @@ public class PDPEnrollementGuidePage extends UhcDriver{
 	@FindBys(value = { @FindBy(xpath = "//select[@id='oneTimeAddress.stateCode']/option") })
 	private List<WebElement> stateCodeDropDown;
 
-	
+	@FindBy(xpath = "//*[@class='error'][@for='medicareNumber']")
+	private WebElement MedicareIDErrorMsg;
+
 	@FindBy(id = "oneTimeAddress.zipCode")
 	private WebElement zipCodeField;
 	
@@ -178,8 +180,45 @@ public class PDPEnrollementGuidePage extends UhcDriver{
 			return  new EnquiryKitConfirmationPage(driver);
 		}
 		return null;
-	
 		
+	}
+
+
+	public boolean ValidateMedicareIDformat(boolean MedicareValidFlag) {
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println("Medicare ID provided is Valid Format"+MedicareValidFlag);
+		if(validate(MedicareIDErrorMsg)){
+			if(MedicareValidFlag ==false){
+				System.out.println("Error Message Displayed for InCorrect Medicare ID Format");
+				return true;
+			}
+			else if(MedicareValidFlag ==true){
+				System.out.println("Error Message Displayed for Correct Medicare ID Format");
+				return false;
+			}
+			else{
+				System.out.println("Please provide true/false for Medicare ID format provided is Valid"+MedicareValidFlag);
+				return false;
+			}
+		}
+		else if(!validate(MedicareIDErrorMsg)){
+			if(MedicareValidFlag ==true){
+				System.out.println("Error Message is NOT Displayed for Correct Medicare ID Format");
+				return true;
+			}
+			else{
+				System.out.println("Please provide true/false for Medicare ID format provided is Valid"+MedicareValidFlag);
+				return false;
+			}
+		}
+		return false;
+	
 	}
 
 }
