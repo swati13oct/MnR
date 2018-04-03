@@ -35,7 +35,7 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(xpath = "//span[@ng-show = 'showPharmacyCount']")
 	private WebElement PharmacyFoundCount;
 
-	@FindBy(xpath = "(//*[contains(text(),'Show on Map')])")
+	@FindBy(xpath = "//*[@id='viewmapdetails_id']")
 	private List<WebElement> showonmap;
 
 	@FindBy(xpath = ".//a[@class='display-block collapse-expand collapsed']")
@@ -113,13 +113,13 @@ public class PharmacySearchPage extends UhcDriver {
 	 * @return
 	 */
 	public PharmacyResultPage ValidateShowOnMapLinks() {
-		driver.manage().timeouts().implicitlyWait(160, TimeUnit.SECONDS);
 		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, showonmap.get(0), 100);
 		int showonmapCount = showonmap.size();
 		int PharmacyCount = PharmacyResultList.size();
 
 		System.out.println(" No of SHOW ON MAP Links displayed : " + showonmapCount);
-		System.out.println(" No of Pharmacy Results displayed : " + showonmapCount);
+		System.out.println(" No of Pharmacy Results displayed : " + PharmacyCount);
 
 		if (showonmapCount == PharmacyCount) {
 			System.out.println("Show on Map Links are Displayed for all Displayed Pharmacy Results");

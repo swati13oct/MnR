@@ -1,24 +1,15 @@
 package acceptancetests.memberrdesignVBF.profileandpreference;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.memberrdesignVBF.TestHarness;
-import pages.memberrdesignVBF.LoginPage;
 import pages.memberrdesignVBF.ProfilePreferencesPage;
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import cucumber.api.DataTable;
+import cucumber.api.java.en.When;
 
 /**
  * @author akapoo18
@@ -29,65 +20,8 @@ public class ProfileandPreferencesStepDefinition {
 	@Autowired
 	MRScenario loginScenario;
 
-	private String userName = null;
-
 	public MRScenario getLoginScenario() {
 		return loginScenario;
-	}
-
-	/***
-	 * 
-	 * @param memberAttributes
-	 * @throws InterruptedException
-	 */
-	@Given("^registered member with following details for Profile and Preferences flow$")
-	public void login_with_member(DataTable memberAttributes) throws InterruptedException {
-		/* Reading the given attribute from feature file */
-		List<List<String>> dataTable = memberAttributes.raw();
-		List<String> desiredAttributes = new ArrayList<String>();
-
-		for (List<String> data : dataTable) {
-			desiredAttributes.add(data.get(0));
-		}
-		System.out.println("desiredAttributes.." + desiredAttributes);
-
-		Map<String, String> loginCreds = loginScenario.getmemberRedesignVbfWithDesiredAttributes(desiredAttributes);
-		String pwd = null;
-		if (loginCreds == null) {
-			// no match found
-			System.out.println("Member Type data could not be setup !!!");
-			Assert.fail("unable to find a " + desiredAttributes + " member");
-		} else {
-			this.userName = loginCreds.get("user");
-			pwd = loginCreds.get("pwd");
-			System.out.println("User is..." + userName);
-			System.out.println("Password is..." + pwd);
-			getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
-			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
-		}
-
-		WebDriver wd = getLoginScenario().getWebDriverNew();
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-
-		// Inserting new code fr Rally Dashboard
-		LoginPage THloginPage = new LoginPage(wd);
-		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, THloginPage);
-		if (("YES").equalsIgnoreCase(MRScenario.isTestHarness)) {
-			TestHarness testHarness = (TestHarness) THloginPage.loginWith(userName, pwd);
-			if (testHarness != null) {
-				getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE, testHarness);
-			} else {
-				Assert.fail("Login not successful...");
-			}
-		} else {
-
-			RallyDashboardPage rallyDashboard = (RallyDashboardPage) THloginPage.loginWith(userName, pwd);
-			if (rallyDashboard != null) {
-				getLoginScenario().saveBean(PageConstants.RALLY_DASHBOARD_PAGE, rallyDashboard);
-			} else {
-				Assert.fail("Login not successful...");
-			}
-		}
 	}
 
 	/***
@@ -213,6 +147,45 @@ public class ProfileandPreferencesStepDefinition {
 				.getBean(PageConstants.ProfilePreferencesPage);
 
 		ProfilePreferencesPage.clickEditPreferencesButton();
+
+	}
+
+	/**
+	 * @toDo : The user clicks on health safe Id password
+	 */
+
+	@When("^I click the HEALTHSAFE ID PASSWORD link$")
+	public void i_click_the_HEALTHSAFE_ID_PASSWORD_link() throws InterruptedException {
+
+		ProfilePreferencesPage ProfilePreferencesPage = (pages.memberrdesignVBF.ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstants.ProfilePreferencesPage);
+
+		ProfilePreferencesPage.validateHealthSafeIdLink();
+	}
+
+	/**
+	 * @toDo : The user should see the breadcrumb in the upper left side
+	 */
+
+	@Then("^I should see the breadcrumb  in the upper left side of the page$")
+	public void i_should_see_the_breadcrumb_in_the_upper_left_side_of_the_page() throws InterruptedException {
+
+		ProfilePreferencesPage ProfilePreferencesPage = (pages.memberrdesignVBF.ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstants.ProfilePreferencesPage);
+
+		ProfilePreferencesPage.validateBreadCrumb();
+
+	}
+
+	/**
+	 * @toDo : The functionality of Bread crumb
+	 */
+	@And("^clicking the link should lead me back to the Account Settings page of the member site$")
+	public void clicking_the_link_should_lead_me_back_to_the_Account_Settings_page_of_the_Medica_member_site() {
+		ProfilePreferencesPage ProfilePreferencesPage = (pages.memberrdesignVBF.ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstants.ProfilePreferencesPage);
+
+		ProfilePreferencesPage.validateBreadCrumbClick();
 
 	}
 

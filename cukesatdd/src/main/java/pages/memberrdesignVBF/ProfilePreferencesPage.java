@@ -25,21 +25,27 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	@FindBy(className = "atdd-profile-membernumber")
 	private WebElement memberId;
-
-	@FindBy(xpath = "//span[contains(text(),'Username')]")
+	
+	@FindBy(xpath = "//*[contains(@class,'atdd-profile-membernumber')]/parent::p")
+	private WebElement memberIdText;
+	
+	@FindBy(xpath = "//*[contains(@class,'atdd-profile-membername')]/parent::p")
+	private WebElement memberNameText;
+	
+	@FindBy(xpath = "//*[contains(text(),'Username')]")
 	private WebElement Username;
 
-	@FindBy(xpath = "//span[contains(text(),'Username')]/following-sibling::span")
-
+	@FindBy(xpath = "//*[contains(text(),'Username')]/parent::*/following-sibling::*/p")
 	private WebElement Usernametext;
+	
 	@FindBy(xpath = ".//*[@id='password']/div/div/span[1]")
 	private WebElement Password;
 
 	@FindBy(xpath = ".//*[@id='password']/div/div/span[2]")
 	private WebElement Passwordtext;
 
-	@FindBy(id = "Artwork")
-	private WebElement EditButton;
+	@FindBy(className = "edit-btn-email")
+	private WebElement EditButtonEmail;
 
 	@FindBy(id = "mail-preferences-selector")
 	private WebElement planNameGoGreen;
@@ -64,6 +70,20 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	@FindBy(className = "atdd-goGreensubHeader")
 	private WebElement GoGreenText;
+	
+    @FindBy(id = "hsidPwdLink")
+    private WebElement hsidPasswordLink;
+    
+    @FindBy(xpath = "//*[@id='header']/h1/a")
+    private WebElement breadCrumbToNavigateBack;
+    
+    @FindBy(id = "hsidRecLink")
+    private WebElement hsidAccountLink;
+    
+    @FindBy(id = "profileemailaddress")
+    private WebElement emailAddress;
+    
+
 
 	public ProfilePreferencesPage(WebDriver driver) {
 		super(driver);
@@ -86,13 +106,11 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 		System.out.println("Plan name is " + planName.getText());
 		validateNew(memberId);
+		validateNew(memberIdText);
 		validateNew(memberName);
+		validateNew(memberNameText);
 		// ValidateAccount Profile
-		validateNew(Username);
-		validateNew(Usernametext);
-		validateNew(Password);
-		validateNew(Passwordtext);
-		validateNew(EditButton);
+		validateNew(EditButtonEmail);
 
 	}
 
@@ -158,5 +176,35 @@ public class ProfilePreferencesPage extends UhcDriver {
 		validateNew(EditPreferenceButton);
 		EditPreferenceButton.click();
 	}
+	
+    public void validateHealthSafeIdLink() throws InterruptedException {
+        validateNew(hsidPasswordLink);
+        hsidPasswordLink.click();
+
+        CommonUtility.checkPageIsReadyNew(driver);
+        CommonUtility.waitForPageLoadNew(driver, breadCrumbToNavigateBack, 60);
+        System.out.println("PageTitle "+driver.getTitle());
+        Assert.assertTrue(driver.getTitle().equalsIgnoreCase("HealthSafe ID"));
+        
+
+}
+
+public void validateBreadCrumb() throws InterruptedException {
+        // TODO Auto-generated method stub
+	Assert.assertTrue(breadCrumbToNavigateBack.isDisplayed());
+	Assert.assertTrue(Username.isDisplayed());
+	Assert.assertTrue(Usernametext.isDisplayed());        
+}
+
+@SuppressWarnings("deprecation")
+public void validateBreadCrumbClick() {
+        // TODO Auto-generated method stub
+        breadCrumbToNavigateBack.click();
+        RallyDashboardPage.checkModelPopup(driver);
+        CommonUtility.waitForPageLoadNew(driver,hsidPasswordLink, 50);
+        Assert.assertTrue(driver.getTitle().equalsIgnoreCase("Profile"));
+}
+
+
 
 }
