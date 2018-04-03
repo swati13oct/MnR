@@ -46,9 +46,12 @@ public class PharmacyLocatorStepDefinitionUHC {
 	 */
 	@When("^the user hovers to Our Plans and select Request More Help and Information for following plan type$")
 	public void user_hovers_to_our_plans_and_select_request_more_help_and_information(){
-
-		String planType = memberAttributesRow.get(0).getCells()
-				.get(0);
+		 if(memberAttributesRow.size()>0){
+		        for (int i = 0; i < memberAttributesRow.size(); i++) {
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		        }
+	        }
+		String planType = memberAttributesMap.get("plantype");
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PLAN_TYPE, planType);
 		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
