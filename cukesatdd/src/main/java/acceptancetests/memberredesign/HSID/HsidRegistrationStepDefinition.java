@@ -1,4 +1,4 @@
-package acceptancetests.memberredesign.HSID;
+package acceptancetests.memberredesign.hsid;
 
 import java.sql.Driver;
 import java.util.LinkedHashMap;
@@ -8,6 +8,7 @@ import java.util.Map;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -16,6 +17,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.uhcretiree.AcquisitionHomePage;
+import pages.member.redesign.DeregisterPage;
 import pages.redesign.HsidLoginPage;
 import pages.redesign.HsidRegistrationConfirmInformation;
 import pages.redesign.HsidRegistrationPersonalCreateAccount;
@@ -116,6 +118,10 @@ public class HsidRegistrationStepDefinition {
 		String password = memberAttributesMap.get("password");
 		String email = memberAttributesMap.get("email");
 		System.out.println("userName: "+userName +"password: "+password +"email: "+email);
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		DeregisterPage deregister = new DeregisterPage(wd);
+		String username = deregister.getUserName();
 		hsidRegistrationPersonalCreateAccount.enterUsername(userName);
 		hsidRegistrationPersonalCreateAccount.enterPassword(password);
 		hsidRegistrationPersonalCreateAccount.enterConfirmPassword(password);

@@ -18,7 +18,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.ulayer.LoginAssistancePage;
-import pages.member.redesign.ConfirmSecurityQuestion;
+import pages.member.bluelayer.ConfirmSecurityQuestion;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
@@ -126,27 +126,8 @@ MRScenario loginScenario;
 			e.printStackTrace();
 		}
 		
-		if (driver.getCurrentUrl().contains("aa-web/evaluate?execution=e1s2&action=securityQuestion"))
-		{
-			
-			
-			ConfirmSecurityQuestion cs = new ConfirmSecurityQuestion(driver);
-		    try {
-				cs.enterValidSecurityAnswer();
-				System.out.println(driver.getCurrentUrl());
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		else if(currentUrl().contains("testharness.html") || currentUrl().contains("/dashboard"))
-		{
-			
-				System.out.println("test");
-				System.out.println(driver.getCurrentUrl());
-			    return new AccountHomePage(driver);
-			
-		}
+
+		
 		
 		if ( MRScenario.environmentMedicare.equals("team-e") || MRScenario.environmentMedicare.equals("team-ci1")){
 
