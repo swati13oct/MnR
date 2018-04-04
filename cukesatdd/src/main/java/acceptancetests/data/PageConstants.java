@@ -566,10 +566,10 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 
 	public static final String CREATE_ACCOUNT_PAGE = "createAccountPage";
 
-	public static final String Payments_History_Page = null;
+	public static final String Payments_History_Page =  "paymentHistoryPage";
 
-	public static final String One_Time_Payments_Page = null;
+	public static final String One_Time_Payments_Page = "oneTimePaymentPage";
 
-	public static final String Review_OneTime_Page = null;
+	public static final String Review_OneTime_Page = "reviewOneTimePaymentPage";
 	
 }

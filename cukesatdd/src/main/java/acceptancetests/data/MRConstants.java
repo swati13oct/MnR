@@ -333,6 +333,7 @@ public class MRConstants {
 	    public static final String TEST_A_DEREGISTER_URL = "https://apsrt0245.uhc.com:9443/PartDPortalWeb/deregister.jsp";
 	    public static final String HEALTH_AND_WELLNESS_TESTHARNESS = "https://"+MRScenario.environment +"-medicare."+MRScenario.domain+"/content/medicare/member/health-and-wellness.html";
 	    public static final String PROVIDER_TESTHARNESS = "https://member.int.uhc.com/aarp/find-care";
+	    public static final String MEMBER_AUTH_REDESIGN_URL = "https://awe-stage-generic.uhc.com/content/medicare/memberauth.html#/memberAuthLogin";
 	    
 	    //public static final String TEANCI_1_DEREGISTER_URL = " http://partdexternal-team-ci1.ose-elr-core.optum.com/PartDPortalWeb/deregister.jsp";
 	    /*public static final String MEDICA_REGISTRATION_URL = "https://www.awe-"+MRScenario.environment+"-mymedicamedicare.uhc.com/guest/registration.html";
