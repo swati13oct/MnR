@@ -571,5 +571,7 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 	public static final String One_Time_Payments_Page = "oneTimePaymentPage";
 
 	public static final String Review_OneTime_Page = "reviewOneTimePaymentPage";
+
+	public static final String SECURITY_QUESTIONS_PAGE = "securityQuestionsPage";
 	
 }
