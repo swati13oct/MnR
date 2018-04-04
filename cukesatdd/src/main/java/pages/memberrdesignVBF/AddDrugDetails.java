@@ -1,19 +1,12 @@
 package pages.memberrdesignVBF;
 
 import java.util.List;
-import java.util.Map;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
-
-import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -22,7 +15,7 @@ public class AddDrugDetails extends UhcDriver {
 
 	private PageData adddrugdetails;
 
-	public JSONObject adddrugdetailsJson;
+	private JSONObject adddrugdetailsJson;
 
 	@FindBy(xpath = "//span[contains(text(),'Add Drug Details')]")
 	public WebElement addDrugDetailsPage;
@@ -71,11 +64,11 @@ public class AddDrugDetails extends UhcDriver {
 		System.out.println("addnewdrugJson----->" + adddrugdetailsJson);
 	}
 
-/***
- * 
- * @return
- * @throws InterruptedException
- */
+	/***
+	 * 
+	 * @return
+	 * @throws InterruptedException
+	 */
 	public SavingsOppurtunity continueAddDrugDetailsModal() throws InterruptedException {
 		validateNew(continueButton);
 		continueButton.click();
@@ -84,6 +77,5 @@ public class AddDrugDetails extends UhcDriver {
 		}
 		return new SavingsOppurtunity(driver);
 	}
-
 
 }

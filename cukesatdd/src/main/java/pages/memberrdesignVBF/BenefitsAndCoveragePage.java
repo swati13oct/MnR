@@ -3,20 +3,12 @@
  */
 package pages.memberrdesignVBF;
 
-import java.util.List;
-import java.util.Map;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
-
-import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -28,9 +20,7 @@ import pages.memberrdesignVBF.RallyDashboardPage;
  */
 public class BenefitsAndCoveragePage extends UhcDriver {
 
-	public PageData benefitsCoverage;
-
-	public JSONObject benefitsandcoverageJson;
+	private PageData benefitsCoverage;
 
 	@FindBy(xpath = "//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[2]/div[1]/span")
 	private WebElement memberId;
@@ -41,59 +31,17 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[4]/div[1]/span")
 	private WebElement effectiveDate;
 
-	@FindBy(className = "atdd-contact-us")
-	private WebElement contactUslink;
-
-	@FindBy(xpath = "html/body/div[2]/div[4]/div[1]/div[2]/section[2]/div/div[3]/div/p")
-	private WebElement Seemorewaystext;
-
 	@FindBy(className = "atdd-need-help")
 	private WebElement NeedHelpHeader;
 
-	@FindBy(xpath = "html/body/div[2]/div[4]/div[1]/div[2]/section[2]/div/div[3]/div/p")
-	private WebElement Contactussection;
-
 	@FindBy(className = "atdd-needhelp-disclaimer-text")
 	private WebElement disclaimersLink;
-
-	@FindBy(xpath = ".//*[@id='plan_benefit_documents']/section/div/div[1]/div")
-	private WebElement planBenefitsDocuments;
-
-	@FindBy(xpath = ".//*[@id='lang-select-2']")
-	private WebElement langdropdown;
-
-	@FindBy(xpath = ".//*[@id='ancillary']/div[2]/div[1]/div")
-	private WebElement Hearingsection;
-
-	@FindBy(xpath = ".//*[@id='ancillary']/div[2]/div[2]/div/div/div")
-	private WebElement Hearingaid;
-
-	@FindBy(xpath = ".//*[@id='ancillary']/div[2]/div[3]/div[1]/div")
-	private WebElement Visionsection;
-
-	@FindBy(xpath = ".//*[@id='ancillary']/div[2]/div[3]/div[2]/div")
-	private WebElement Dentalsection;
-
-	@FindBy(xpath = ".//*[@id='ancillary']/div[1]/div")
-	private WebElement Headersection;
-
-	@FindBy(xpath = ".//*[@id='ancillary']/div[2]/div[4]/div/div")
-	private WebElement chiropracticsection;
 
 	@FindBy(className = "atdd-bnc-drgcvrgeinfo")
 	private WebElement DrugCoveragetext;
 
 	@FindBy(className = "atdd-bnc-drugcoverage-title")
 	private WebElement DrugCoverageHeader;
-
-	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[1]/div/div/div/div[2]/div/div/h2")
-	private WebElement lisDrugCopayHeader;
-
-	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[1]/div/div/div/div[2]/div/div/p")
-	private WebElement lisDrugCopayText;
-
-	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[7]/div[1]/div/div/div/div/p")
-	private WebElement LookupDrugstext;
 
 	@FindBy(className = "atdd-bnc-lookupdrugbtn")
 	private WebElement LookUpDrugsButton;
@@ -107,15 +55,6 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(id = "drug-costs")
 	private WebElement DrugCostDropdown;
 
-	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[2]/div/div")
-	private WebElement DrugCostheaderandtext;
-
-	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[3]/div/div/div[2]/p")
-	private WebElement Pharmacycontent;
-
-	@FindBy(xpath = ".//*[@id='waystosave']/div/div/div[1]/div/h1")
-	private WebElement TextWaystoSave;
-
 	@FindBy(className = "atdd-bnc-drgpricingtiers")
 	private WebElement Learnmoretierslink;
 
@@ -127,15 +66,6 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(className = "atdd-bnc-locatepharmacybtn")
 	private WebElement locateapharmacybutton;
-
-	@FindBy(id = "mapdPageNonLis")
-	private WebElement drugcopaytable;
-
-	@FindBy(id = "mapdPageLis")
-	private WebElement RetailDrugCost_Table;
-
-	@FindBy(id = "waystosave")
-	private WebElement waysToSave;
 
 	@FindBy(xpath = ".//*[@id='plan_benefit_documents']/section/div/div[2]/div/form/span[1]")
 	private WebElement view_label;
@@ -155,12 +85,6 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-benefitsoverview-effectivedatelabel")
 	private WebElement effective_Date;
 
-	@FindBy(className = "atdd-benefitsoverview-monthlypremium-label")
-	private WebElement Monthly_Premium;
-
-	@FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[2]/div[1]/div/div[1]/div/span")
-	private WebElement ExtraHelp;
-
 	@FindBy(xpath = "//div[@class='page-header--left']/h1[contains(.,'Benefits Summary')]")
 	private WebElement BenefitsSummaryHeader;
 
@@ -169,13 +93,6 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(className = "atdd-hospitalvisits-title")
 	private WebElement HospitalVisits;
-
-	@FindBy(className = "atdd-emergencycare-title")
-	private WebElement EmergencyHeader;
-
-	@FindBy(className = "atdd-ambulance-title")
-	private WebElement AmbulanceHeader;
-
 	@FindBy(className = "atdd-officevisits-title")
 	private WebElement OfficeVisits;
 
@@ -187,12 +104,6 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(className = "changepcp-atdd")
 	private WebElement ChangeYourPcpButton;
-
-	@FindBy(xpath = "//*[@id='planBenefitsApp']/div/div[1]/div[6]/div/div[2]/div[2]/div")
-	private WebElement SearchforaPhysician;
-
-	@FindBy(className = "start-search-atdd")
-	private WebElement StartSearch;
 
 	@FindBy(className = "primary-heading")
 	private WebElement PrimaryCareProviderHeader;
@@ -241,9 +152,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validateFieldsOnBenefitsAndCoveragePage();
 	}
 
-/***
- * 
- */
+	/***
+	 * 
+	 */
 	public void validateNeedhelpheader() {
 
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
@@ -251,42 +162,44 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validateNew(NeedHelpHeader);
 	}
 
-/***
- * 
- */
+	/***
+	 * 
+	 */
 	public void clickOnDisclaimers() {
-		// TODO Auto-generated method stub
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,3000)", "");
 		validateNew(disclaimersLink);
 		disclaimersLink.click();
 	}
-/***
- * 
- * @return
- */
+
+	/***
+	 * 
+	 * @return
+	 */
 	public boolean getview_label() {
 		return validateNew(view_label);
 	}
-/***
- * 
- * @return
- */
+
+	/***
+	 * 
+	 * @return
+	 */
 	public boolean getdocuments_label() {
 		CommonUtility.waitForPageLoadNew(driver, documents_label, 15);
 		return validateNew(documents_label);
 	}
 
-/***
- * 
- */
+	/***
+	 * 
+	 */
 	public void validatedrugcoverageheaderandtext() {
 		validateNew(DrugCoverageHeader);
 		validateNew(DrugCoveragetext);
 	}
-/***
- * 
- */
+
+	/***
+	 * 
+	 */
 	public void validatelookupdrugsbutton() {
 		if (LookUpDrugsButton.isDisplayed()) {
 			Assert.assertTrue(true);
@@ -294,53 +207,53 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			Assert.fail("Button not displayed");
 	}
 
-/***
- * 
- */
+	/***
+	 * 
+	 */
 	public void validate_drugcopayheaderntext() {
 		validateNew(DrugCopayHeader);
 		validateNew(DrugCopayText);
 
 	}
 
-/***
- * 
- */
+	/***
+	 * 
+	 */
 	public void validate_locateapharmacysection() {
 		validateNew(locateapharmacysection);
 		validateNew(locateapharmacybutton);
 
 	}
 
-/***
- * 
- */
+	/***
+	 * 
+	 */
 	public void validate_drugcostdropdownoptions()
 
 	{
 		validateNew(DrugCostDropdown);
 	}
-/***
- * 
- */
+
+	/***
+	 * 
+	 */
 	public void validate_learnmoreaboutlink() {
 		validateNew(Learnmoretierslink);
 		validateNew(Learnmorestagelink);
 
 	}
 
-/***
- * 
- */
+	/***
+	 * 
+	 */
 	public void validatedrugcopaytable() {
+		//CT team created an empty method. Need to follow up on this with them 
 	}
 
-/***
- * 
- */
+	/***
+	 * 
+	 */
 	public void validatePlanOverview() {
-		// TODO Auto-generated method stub
-
 		validateNew(planName);
 		validateNew(nameLabel);
 		validateNew(memberID);
@@ -348,9 +261,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	}
 
-/***
- * 
- */
+	/***
+	 * 
+	 */
 	public void validateHeaders() {
 		validateNew(BenefitsSummaryHeader);
 		validateNew(Copayscoinsuranceheader);
@@ -360,9 +273,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	}
 
-/***
- * 
- */
+	/***
+	 * 
+	 */
 	public void validatePrimaryCareProvider() {
 
 		validateNew(PrimaryCareProviderHeader);
@@ -370,17 +283,19 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validateNew(ChangeYourPcpButton);
 
 	}
-/***
- * 
- */
+
+	/***
+	 * 
+	 */
 	public void validatePrimaryCareProviderForGroup() {
 
 		validateNew(PrimaryCareProviderHeaderHMO);
 
 	}
-/***
- * 
- */
+
+	/***
+	 * 
+	 */
 	public void validateOutofPocketMax() {
 		validateNew(OutofPocketMaximum);
 		validateNew(INNETWORK);

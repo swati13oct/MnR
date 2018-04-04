@@ -843,5 +843,8 @@ public class CommonConstants {
 	public static final String ACCOUNT_USER_NAME = null;
 
 	public static final String IS_TESTHARNESS = "istestharness";
+
+	public static final String COMMONSTEPDEFINITIONMEMVBF = "commonStepDefinition";
+	
 	
 }

@@ -13,12 +13,10 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.data.MRConstants;
-import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 public class EOBPage extends UhcDriver {
-	private PageData eobPage;
 
 	@FindBy(id = "eob-type")
 	private WebElement eobType;
@@ -26,32 +24,8 @@ public class EOBPage extends UhcDriver {
 	@FindBy(id = "date-range-1")
 	private WebElement eobMonthDateRange;
 
-	@FindBy(id = "date-range")
-	private WebElement eobMonthDateRangeSHIP;
-
-	@FindBy(id = "custom-from2")
-	private WebElement fromDateInputBox;
-
-	@FindBy(id = "custom-to1")
-	private WebElement toDateInputBox;
-
-	@FindBy(className = "btn custom-date-search-btn")
-	private WebElement searchButton;
-
-	@FindBy(xpath = "//*[contains(text(),'Learn More About My Medical EOB')]")
-	private WebElement learnMoreLink;
-
-	@FindBy(xpath = "//*[contains(text(),'How to read your Medical EOB ')]")
-	private WebElement readMedicalEOB;
-
-	@FindBy(xpath = "//*[@id='collapseEOB']/ul/li/a")
-	private WebElement eobVideoBox;
-
 	@FindBy(xpath = "//h2[@class='h4 margin-none']")
 	private WebElement eobDetailsHeader;
-
-	@FindBy(xpath = "//*[contains(text(),'Watch Video')]")
-	private WebElement readEOBVideo;
 
 	@FindBy(id = "adobesitelink")
 	private WebElement adobeWebsiteLink;
@@ -65,32 +39,8 @@ public class EOBPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='IPEinvL']/map/area[2]")
 	private WebElement iPerceptionPopUp;
 
-	@FindBy(xpath = "//a[contains(text(), 'Medicare Advantage Plan')]")
-	private WebElement MAPlanTab;
-
-	@FindBy(xpath = "//a[contains(text(), 'Hospital Indemnity')]")
-	private WebElement HIPplanTab;
-
-	@FindBy(xpath = "//a[contains(text(), 'Medicare Prescription Drug Plan')]")
-	private WebElement PDPPlanTab;
-
-	@FindBy(xpath = "//a[contains(text(), 'Medicare Supplement Insurance Plan')]")
-	private WebElement MedSuppPlanTab;
-
-	@FindBy(xpath = "//a[contains(text(), 'Supplemental  Insurance Plans')]")
-	private WebElement SuppTab;
-
 	@FindBy(xpath = "//a[contains(text(),'EOB Search')]")
 	private WebElement eobLink;
-
-	@FindBy(id = "toDatepicker")
-	private WebElement toDate;
-
-	@FindBy(id = "fromDatepicker")
-	private WebElement fromDate;
-
-	@FindBy(xpath = "//*[@class='btn btn--primary' and text()='Search']")
-	private WebElement customSearchButton;
 
 	@FindBy(xpath = "//*[@class='bold number-title ng-binding']")
 	private WebElement eobCount;
@@ -202,16 +152,12 @@ public class EOBPage extends UhcDriver {
 		if (!(loadingImages.isEmpty())) {
 			CommonUtility.waitForElementToDisappear(driver, loadingImages.get(0), 120);
 		}
-		if (dateRangeValue.contains("custom")) {
-
+		String modifiedDateRange = dateRangeValue.replace('m', 'M');
+		if (eobDetailsHeader.getText().contains(modifiedDateRange)) {
+			System.out.println(dateRangeValue + " displayed correctly");
 		} else {
-			String modifiedDateRange = dateRangeValue.replace('m', 'M');
-			if (eobDetailsHeader.getText().contains(modifiedDateRange)) {
-				System.out.println(dateRangeValue + " displayed correctly");
-			} else {
-				System.out.println("Desired value not displayed correctly for EOB statement header");
-				Assert.fail();
-			}
+			System.out.println("Desired value not displayed correctly for EOB statement header");
+			Assert.fail();
 		}
 	}
 
