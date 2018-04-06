@@ -1,4 +1,4 @@
-package acceptancetests.memberredesign.hsid;
+package acceptancetests.memberredesign.HSID;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
