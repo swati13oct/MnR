@@ -207,6 +207,12 @@ public class HsidRegistrationPersonalCreateAccount extends UhcDriver {
 	public HsidRegistrationConfirmInformation clickCreateMyIDButton() {
 		createMyIDButton.click();
 		
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if(currentUrl().contains("register/createAccount")){
 			return new HsidRegistrationConfirmInformation(driver);
 		}

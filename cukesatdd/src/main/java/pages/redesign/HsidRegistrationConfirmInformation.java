@@ -26,8 +26,9 @@ import atdd.framework.UhcDriver;
 
 public class HsidRegistrationConfirmInformation extends UhcDriver {
 	
-	@FindBy(xpath = "//*[contains(@class,'form__step3')]|//flex[contains(@class,'form__content')]//p[contains(.,'To confirm your identity, we sent an email to:')]")
+	@FindBy(className = "form__content")
 	public WebElement confirmEmailSection;
+	
 	
 	public String confirmationUrl;
 
@@ -51,6 +52,12 @@ public class HsidRegistrationConfirmInformation extends UhcDriver {
 	}
 	
 	public void verifyConfirmInformationPage() {
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Assert.assertTrue("Registration Confirmation page is not loaded", confirmEmailSection.isDisplayed());
 	}
 	

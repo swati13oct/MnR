@@ -91,10 +91,7 @@ public class DeregisterPage extends UhcDriver {
     
     public static String getUserName() {
 
-		if (UserName.get() != null) {
-			return UserName.get();
-		}
-
+		
 		DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 		Date date = new Date();
 
