@@ -260,7 +260,7 @@ public class HsidRegistrationStepDefinition {
 		HsidRegistrationConfirmInformation hsidRegistrationConfirmInformationPage = 
 				(HsidRegistrationConfirmInformation) loginScenario.getBean(PageConstants.HSID_REGISTRATION_CONFIRM_INFORMATION);
 		
-		hsidRegistrationConfirmInformationPage.getConfirmationUrl();
+		hsidRegistrationConfirmInformationPage.confirmEmail();
 		
 	}
 
