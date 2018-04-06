@@ -114,14 +114,15 @@ public class HsidRegistrationStepDefinition {
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
 		
-		String userName = memberAttributesMap.get("userName");
+		//String userName = memberAttributesMap.get("userName");
 		String password = memberAttributesMap.get("password");
 		String email = memberAttributesMap.get("email");
-		System.out.println("userName: "+userName +"password: "+password +"email: "+email);
+	
 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		DeregisterPage deregister = new DeregisterPage(wd);
-		String username = deregister.getUserName();
+		String userName = deregister.getUserName();
+		System.out.println("userName: "+userName +"password: "+password +"email: "+email);
 		hsidRegistrationPersonalCreateAccount.enterUsername(userName);
 		hsidRegistrationPersonalCreateAccount.enterPassword(password);
 		hsidRegistrationPersonalCreateAccount.enterConfirmPassword(password);
