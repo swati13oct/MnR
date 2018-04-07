@@ -1,7 +1,7 @@
 @aprilRelease2018
 Feature:To test HSID registration flow
 
-@hsidregistration
+@hsidregistration @US968241
 Scenario Outline:Verify HSID registration.
 Given the user is on medicare sign in page
 When the user clicks on Register now link
@@ -39,7 +39,7 @@ Examples:
  | ACACBAA   | CBEFABBB  | 09/15/1944  | 008540905-1 | 97106	|q1_aarp_apr258| Password@1 | codetransformers@gmail.com| number1   | name1     | color1    |
  
  
-@validateStep1 
+@validateStep1 @US968241
 Scenario Outline:Verify feilds in HSID registration Step 1 page.
 Given the user is on medicare sign in page
 When the user clicks on Register now link
