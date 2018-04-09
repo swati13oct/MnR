@@ -2,9 +2,11 @@
 
 Feature:To test HSID functionality on Medicare site
 
-    @US968324
-    Scenario Outline: Verify HSID login page
+ 
    
+   
+   @US968323
+    Scenario Outline:Verify HSID registration.
     Given the user connect to DB
     And the user select record from database
       | Firstname  | <firstname>  |
@@ -20,37 +22,9 @@ Feature:To test HSID functionality on Medicare site
       | Lastname   | <lastname>   |
     And the user deregister from M&R LDAP
       | Username  | <username>  |
-    And register with following details logins in the member portal and validate elements 
-      | Plan Type      | <planType>  |
-      | Member Type    | <memberType>|
-      | Copay Category | <copayCategory>|
-    And user deregisters from M&R
-    When the user validate username autofill
-    And the user enters password and confirm password field
-    And the user enters email and confirm email field
-    And the user clicks submit button
-    When the user validate all fields on this page
-    And  the user validate security questions option and user answer all security questions
-      | Option  | <option>  |
-      | Option1 | <option1> |
-      | Option2 | <option2> |
-      | Option3 | <option3> |
-    And the user check checkboxes
-    And the user clicks submit button
-    
-    
-      Examples:
-      
-       | planType|  memberType  | copayCategory | option              | option1                          | option2                      | option3                          |firstname  | lastname  | username      |
-       | MAPD    |  Individual  |  NON LIS      | Security questions  | What was your first phone number?| What is your favorite color? | What is your best friend's name? |EDEEB      | EAAFEF    | q1_feb_sfl035 |
-       
-       
-   
-   @US968323
-    Scenario Outline:Verify HSID registration.
-    Given the user is on medicare sign in page
+    And the user is on medicare sign in page
     When the user clicks on Register now link
-And HSID registration page is displayed with all the fields
+    And HSID registration page is displayed with all the fields
 And enter first name, last name, date of birth, zip code, member id and click continue
 | firstName   | <firstName>   |
 | lastName    | <lastName>   |
@@ -85,7 +59,20 @@ Then user should see a latest unread mail recieved from "myUHCMedicare.com - you
    
    @Assistive
    Scenario Outline:Verify HSID assistive registration.
-   Given login with following details logins in the member portal and validate elements and route to assistive flow 
+   Given the user connect to DB
+    And the user select record from database
+      | Firstname  | <firstname>  |
+      | Lastname   | <lastname>   |
+    And the user delete record from extreme scale
+      | Firstname  | <firstname>  |
+      | Lastname   | <lastname>   |
+    And the user delete record from mbr_portal
+      | Firstname  | <firstname>  |
+      | Lastname   | <lastname>   |
+    And the user delete record from mbr
+      | Firstname  | <firstname>  |
+      | Lastname   | <lastname>   |
+   And login with following details logins in the member portal and validate elements and route to assistive flow 
       | Plan Type      | <planType>  |
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
