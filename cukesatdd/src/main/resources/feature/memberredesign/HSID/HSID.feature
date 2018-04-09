@@ -108,20 +108,7 @@ Feature:To test HSID registration flow
    
    @Login @US968315
    Scenario Outline:Verify HSID login functionality.
-   Given the user connect to DB
-    And the user select record from database
-      | Firstname  | <firstname>  |
-      | Lastname   | <lastname>   |
-    And the user delete record from extreme scale
-      | Firstname  | <firstname>  |
-      | Lastname   | <lastname>   |
-    And the user delete record from mbr_portal
-      | Firstname  | <firstname>  |
-      | Lastname   | <lastname>   |
-    And the user delete record from mbr
-      | Firstname  | <firstname>  |
-      | Lastname   | <lastname>   |
-   And login with following details logins in the member portal and validate elements and route to assistive flow 
+   Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>  |
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
