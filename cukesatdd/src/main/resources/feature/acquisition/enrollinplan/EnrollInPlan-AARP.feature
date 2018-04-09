@@ -189,7 +189,7 @@ Examples:
 #|90210   |Los Angeles County  | PDP       |AARP MedicareRx Preferred (PDP) | First   |  m          |  last  | 112-11-1117-A      |07/01/1988            |      07/01/1988        | test@uhc.com | 999-991-1111   | 999-991-1111     | 12-20-1950  |Male           |Spanish            |1234    | Colorado | UHG       |No  |Yes |No  |No  |No  |No  |No  |No  |No      | 02/15/2016| 02/15/2016 |02/15/2016 | 02/15/2016  |Test           |No              |Yes            | abc              |abc             |123              |Yes            |first  |123          |1     |abc    |666-666-6666|12-20-1982   |  No           |Agree|Agree|
 
 @fastandfurious
-@aprilRelease2018 @HicnMBI_Validations
+@aprilRelease2018 @OLE_AARP_HicnMBI_Validations
 Scenario Outline: Validate HICN and MBI formats are accepted for Medicare ID in AARP OLE
 Given the user is on the AARP acquisition Site home page
 When user performs plan search using following information in AARP site OLE

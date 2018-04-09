@@ -49,6 +49,8 @@ public class BeneficiaryInformationPage extends UhcDriver{
     	@FindBy(id = "enrollment.medicareBeneficiary.medicareClaimNumber.errors")
     	private WebElement MedicareIDErrorMsg;
 
+    	@FindBy(id = "longTermCareFacility")
+    	private WebElement NextStepPage;
         
         @FindBy(id = "enrollment.medicareBeneficiary.partAEffectiveDate.strDate")
         private WebElement partAStartDateField;
@@ -193,7 +195,7 @@ public class BeneficiaryInformationPage extends UhcDriver{
 	        	String firstName = personalAttributesMap.get("First Name");
 	            String middleName = personalAttributesMap.get("Middle Initial");
 	            String lastName = personalAttributesMap.get("Last Name");
-	            String dob = personalAttributesMap.get("Birth Date").replaceAll("[/-]", "");
+	            String dob = personalAttributesMap.get("Birth Date").replaceAll("[/-]","");
 	            String gender = personalAttributesMap.get("Gender");
 	            String medicareClaimNumber = personalAttributesMap.get("Medicare Claim Number").replaceAll("-", "");
                 String partAStartDate = personalAttributesMap.get("Hospital (Part A) Effective Date").replaceAll("[/-]", "");
@@ -270,8 +272,10 @@ public class BeneficiaryInformationPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}			
-			System.out.println("Medicare ID provided is Valid Format"+MedicareValidFlag);
-			if(validate(MedicareIDErrorMsg)){
+			System.out.println("Medicare ID provided : "+claimNumberField.getText()+" ; is Valid Format"+MedicareValidFlag);
+			boolean MedicareErrorDisplayed = validate(MedicareIDErrorMsg)?true:false;
+			boolean NextStepPageDisplayed = validate(NextStepPage)?true:false;
+			if(MedicareErrorDisplayed){
 				if(MedicareValidFlag ==false){
 					System.out.println("Error Message Displayed for InCorrect Medicare ID Format");
 					return true;
@@ -285,9 +289,9 @@ public class BeneficiaryInformationPage extends UhcDriver{
 					return false;
 				}
 			}
-			else if(!validate(MedicareIDErrorMsg)){
+			else if(!MedicareErrorDisplayed &&  NextStepPageDisplayed){
 				if(MedicareValidFlag ==true){
-					System.out.println("Error Message is NOT Displayed for Correct Medicare ID Format");
+					System.out.println("Error Message is NOT Displayed for Correct Medicare ID Format; Step 2 Page Displayed");
 					return true;
 				}
 				else{

@@ -189,7 +189,7 @@ And the user fill following information in beneficiary information
        ##    |80002   |             | PDP        |
 
 @fastandfurious
-@aprilRelease2018 @HicnMBI_Validations
+@aprilRelease2018 @UHC_OLE_HicnMBI_Validations
 Scenario Outline: Validate HICN and MBI formats are accepted for Medicare ID in UHC OLE
 Given the user is on the UHC medicare solutions landing page
 When user performs plan search using following Zip Code in UHC site
