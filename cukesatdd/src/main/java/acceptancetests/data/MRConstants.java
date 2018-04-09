@@ -327,6 +327,7 @@ public class MRConstants {
   public static final String TEAMCI_TESTHARNESS ="https://"+MRScenario.environment +"-medicare."+MRScenario.domain+"/?testharness=true";
   public static final String DASHBOARD = "https://"+ MRScenario.environment +"-medicare.uhc.com/";
 	   
+
   /** DeRegister URLs*/
   public static final String STAGE_DEREGISTER_URL = "https://apsrs0261."+MRScenario.domain+":9443/PartDPortalWeb/deregister.jsp ";
   public static final String TEANCI_DEREGISTER_URL = " http://partdexternal-"+MRScenario.environment +"."+MRScenario.domain+"/PartDPortalWeb/deregister.jsp";
@@ -334,6 +335,8 @@ public class MRConstants {
   public static final String TEST_A_DEREGISTER_URL = "https://apsrt0245.uhc.com:9443/PartDPortalWeb/deregister.jsp";
   public static final String HEALTH_AND_WELLNESS_TESTHARNESS = "https://"+MRScenario.environment +"-medicare."+MRScenario.domain+"/content/medicare/member/health-and-wellness.html";
   public static final String PROVIDER_TESTHARNESS = "https://member.int.uhc.com/aarp/find-care";
+  public static final String MEMBER_AUTH_REDESIGN_URL = "https://awe-stage-generic.uhc.com/content/medicare/memberauth.html ";
+
   
   //public static final String TEANCI_1_DEREGISTER_URL = " http://partdexternal-team-ci1.ose-elr-core.optum.com/PartDPortalWeb/deregister.jsp";
   /*public static final String MEDICA_REGISTRATION_URL = "https://www.awe-"+MRScenario.environment+"-mymedicamedicare.uhc.com/guest/registration.html";
@@ -346,3 +349,5 @@ public class MRConstants {
   public static final String REDESIGN_REGISTRATION_URL = "https://stage-medicare.uhc.com/medicare/member-registration.html";*/
   
  }
+
+	    

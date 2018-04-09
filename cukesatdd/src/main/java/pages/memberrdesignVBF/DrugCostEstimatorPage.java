@@ -1,6 +1,5 @@
 package pages.memberrdesignVBF;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -9,13 +8,10 @@ import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
-
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
@@ -35,7 +31,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	private PageData savedrugpage;
 
-	public JSONObject savedrugpageJson;
+	private JSONObject savedrugpageJson;
 
 	@FindBy(id = "add-drug")
 	public WebElement addDrug;
@@ -289,15 +285,14 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 
-		JSONObject dashoardExpectedJson = expectedDataMap.get(CommonConstants.DCEstimator);
-
-		return dashoardExpectedJson;
+		return(expectedDataMap.get(CommonConstants.DCEstimator));
 	}
-/***
- * 
- * @return
- * @throws InterruptedException
- */
+
+	/***
+	 * 
+	 * @return
+	 * @throws InterruptedException
+	 */
 	public AddNewDrugModal clickOnAddDrug() throws InterruptedException {
 		validateNew(addDrug);
 		addDrug.click();
@@ -329,18 +324,19 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		CommonUtility.waitForElementToDisappear(driver, loadingImage, 60);
 		Thread.sleep(15000);
 	}
-	
-/***
- * 
- * @return
- */
+
+	/***
+	 * 
+	 * @return
+	 */
 	public int getDrugsCount() {
 		return drugs.size();
 	}
-/***
- * 
- * @throws InterruptedException
- */
+
+	/***
+	 * 
+	 * @throws InterruptedException
+	 */
 	public void navigateToStep2() throws InterruptedException {
 		validateNew(step2Pharmacy);
 		step2Pharmacy.click();
@@ -349,11 +345,11 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	}
 
-/***
- * 
- * @param pharmacy
- * @throws InterruptedException
- */
+	/***
+	 * 
+	 * @param pharmacy
+	 * @throws InterruptedException
+	 */
 	public void selectPharmacyType(String pharmacy) throws InterruptedException {
 		CommonUtility.waitForElementToDisappear(driver, loadingImage, 120);
 		WebElement rbtn = driver
@@ -370,10 +366,10 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		Thread.sleep(5000);
 	}
 
-/***
- * 
- * @throws InterruptedException
- */
+	/***
+	 * 
+	 * @throws InterruptedException
+	 */
 	public void select_first_pharmacy() throws InterruptedException {
 		CommonUtility.waitForElementToDisappear(driver, loadingImage, 180);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
@@ -384,20 +380,20 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		CommonUtility.waitForElementToDisappear(driver, loadingImage, 180);
 	}
 
-/***
- * 
- * @param zipcode
- * @throws InterruptedException
- */
+	/***
+	 * 
+	 * @param zipcode
+	 * @throws InterruptedException
+	 */
 	public void pharmacyInformation(String zipcode) throws InterruptedException {
 		validateNew(zipcodeInput);
 		sendkeysNew(zipcodeInput, zipcode);
 		btnZipCodeSearch.click();
 	}
 
-/***
- * 
- */
+	/***
+	 * 
+	 */
 	public void validatePreferredMailServiceRD() {
 		try {
 			validateNew(lbPreferredMailService);
@@ -407,10 +403,10 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		}
 	}
 
-/***
- * 
- * @throws InterruptedException
- */
+	/***
+	 * 
+	 * @throws InterruptedException
+	 */
 	public void navigateToStep3() throws InterruptedException {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,-500)", "");
@@ -418,11 +414,11 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		step3.click();
 	}
 
-/***
- * 
- * @param drug
- * @throws InterruptedException
- */
+	/***
+	 * 
+	 * @param drug
+	 * @throws InterruptedException
+	 */
 	public void addDrug(String drug) throws InterruptedException {
 		AddNewDrugModal addNewDrugModal = clickOnAddDrug();
 		addNewDrugModal.typeDrugName(drug);
@@ -446,10 +442,10 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='total_drugsavings']/div[2]/a")
 	public WebElement editDrugListLink;
 
-/***
- * 
- * @throws InterruptedException
- */
+	/***
+	 * 
+	 * @throws InterruptedException
+	 */
 	public void deleteAllDrugs() throws InterruptedException {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,200)", "");
@@ -469,10 +465,10 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		}
 	}
 
-/***
- * 
- * @throws InterruptedException
- */
+	/***
+	 * 
+	 * @throws InterruptedException
+	 */
 	public void validateTotalEstimatedAnnualDrugCosts() throws InterruptedException {
 		CommonUtility.waitForPageLoadNew(driver, totDrugCost_Summary, 20);
 		validateNew(totDrugCost_LeftRail);
@@ -483,9 +479,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		Assert.assertEquals(valTotDrugCost_Summary, valtotDrugCost_LeftRail);
 	}
 
-/***
- * 
- */
+	/***
+	 * 
+	 */
 	public void validateSwitchGenericOption() {
 
 		int drugscount = getDrugsCount();

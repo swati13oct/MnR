@@ -576,5 +576,5 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 	public static final String PLAN_CONFIRMATION_PAGE = "planConfirmationPage";
 
 	public static final String CREATE_ACCOUNT_PAGE = "createAccountPage";
-	
+	public static final String SECURITY_QUESTIONS_PAGE = "accountHomePage";
 }

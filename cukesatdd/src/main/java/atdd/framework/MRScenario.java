@@ -74,15 +74,16 @@ public class MRScenario {
 
                private static Map<String, Map<String, JSONObject>> expectedDataMapUlayer = new LinkedHashMap<String, Map<String, JSONObject>>();
 
+
                private static Map<String, Map<String, JSONObject>> expectedDataMapBluelayer = new LinkedHashMap<String, Map<String, JSONObject>>();
                public static String environment;
                public static String environmentMedicare;
                public static String isTestHarness;
                public static String domain;
+               private static final String SQL_COMMIT = "COMMIT";
+
 
                private static final String DIRECTORY = "/src/main/resources/";
-
-               private static final String SQL_COMMIT = "COMMIT";
 
                public static int count = 0;
 
