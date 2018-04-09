@@ -5,11 +5,13 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
+import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
@@ -17,6 +19,8 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.uhcretiree.AcquisitionHomePage;
+import pages.member.bluelayer.AccountHomePage;
+import pages.member.bluelayer.HSIDLoginPage;
 import pages.member.redesign.DeregisterPage;
 import pages.redesign.HsidLoginPage;
 import pages.redesign.HsidRegistrationConfirmInformation;
@@ -272,23 +276,35 @@ public class HsidRegistrationStepDefinition {
 	}
 
 	@Then("^user should be at Sign In page$")
-	public void user_should_be_at_Sign_In_page() throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
+	public void user_should_be_at_Sign_In_page(DataTable memberAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		
+		String userName = memberAttributesMap.get("userName");
+		String password = memberAttributesMap.get("password");
+		
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		HSIDLoginPage loginPage = new HSIDLoginPage(wd);
+		loginPage.validateelements();
+        AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, password);
+        if (accountHomePage!= null) {
+			 getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
+			Assert.assertTrue(true);
+		}
+		else {
+			Assert.fail("***** Error in loading  Redesign Account Landing Page *****");
+		}
+
 
 	}
 
-	@Then("^user should see the email confirmation message \"([^\"]*)\" in Sign In form$")
-	public void user_should_see_the_email_confirmation_message_in_Sign_In_form(String arg1) throws Throwable {
-
-
-	}
-
-	@Then("^user should see a latest unread mail recieved from \"([^\"]*)\" in mail server$")
-	public void user_should_see_a_latest_unread_mail_recieved_from_in_mail_server(String arg1) throws Throwable {
-
-
-	}
-
+	
 	@Then("^I should see a Username or email address label with textbox in Sign In page$")
 	public void i_should_see_a_Username_or_email_address_label_with_textbox_in_Sign_In_page() throws Throwable {
 
