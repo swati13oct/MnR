@@ -96,6 +96,7 @@ Examples:
 #	| Lipitor TAB 10MG| 90210 | 15miles | 27009|
 	
 @dceMousehoverOurPlans @aprilRelease2018
+@regressiontestcase-ATDDtags
 Scenario Outline: To Mousehover on Our Plans tab from the DCE Page 
 Given the user is on ulayer medicare acq site landing page
 When I access the acquisition DCE tool from home page
