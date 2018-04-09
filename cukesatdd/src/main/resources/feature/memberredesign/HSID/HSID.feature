@@ -1,12 +1,9 @@
-
-
-Feature:To test HSID functionality on Medicare site
+@aprilRelease2018
+Feature:To test HSID registration flow
 
  
-   
-   
    @US968241 @hsidregistration
-    Scenario Outline:Verify HSID registration.
+   Scenario Outline:Verify HSID registration.
     Given the user connect to DB
     And the user select record from database
       | Firstname  | <firstname>  |
@@ -25,31 +22,31 @@ Feature:To test HSID functionality on Medicare site
     And the user is on medicare sign in page
     When the user clicks on Register now link
     And HSID registration page is displayed with all the fields
-And enter first name, last name, date of birth, zip code, member id and click continue
-| firstName   | <firstName>   |
-| lastName    | <lastName>   |
-| dob    | <dob>   |
-| memberid   | <memberid>   |
-|zipcode 	| <zipcode>  |
-And user is navigated to step two:create account page
-And enter username, password, re-enter password, email, re-enter email
-| userName   | <userName>   |
-| password   | <password>   |
-| email      | <email>   	|
-And select the security type as "Security questions"
-And select security question1 as "What was your first phone number?"
-And select security answer1 as "number1"
-And select security question2 as "What is your best friend's name?"
-And select security answer2 as "name1"
-And select security question3 as "What is your favorite color?"
-And select security answer3 as "color1"
-And check the terms and click on create my ID button
-And user is navigated to Confirm email page
-And user should see a latest unread mail recieved in provided email address
-Then user should copy the confirm email url to browser
-And user should be at Sign In page
-And user should see the email confirmation message "Email confirmed: Please sign in with your new username and password." in Sign In form
-Then user should see a latest unread mail recieved from "myUHCMedicare.com - your HealthSafe ID registration is complete" in mail server
+    And enter first name, last name, date of birth, zip code, member id and click continue
+      | firstName   | <firstName>   |
+      | lastName    | <lastName>   |
+      | dob    | <dob>   |
+      | memberid   | <memberid>   |
+      |zipcode 	| <zipcode>  |
+   And user is navigated to step two:create account page
+   And enter username, password, re-enter password, email, re-enter email
+      | userName   | <userName>   |
+      | password   | <password>   |
+      | email      | <email>   	|
+   And select the security type as "Security questions"
+   And select security question1 as "What was your first phone number?"
+   And select security answer1 as "number1"
+   And select security question2 as "What is your best friend's name?"
+   And select security answer2 as "name1"
+   And select security question3 as "What is your favorite color?"
+  And select security answer3 as "color1"
+  And check the terms and click on create my ID button
+  And user is navigated to Confirm email page
+  And user should see a latest unread mail recieved in provided email address
+  Then user should copy the confirm email url to browser
+  And user should be at Sign In page
+  And user should see the email confirmation message "Email confirmed: Please sign in with your new username and password." in Sign In form
+  Then user should see a latest unread mail recieved from "myUHCMedicare.com - your HealthSafe ID registration is complete" in mail server
    
    Examples:
  
@@ -110,7 +107,7 @@ Then user should see a latest unread mail recieved from "myUHCMedicare.com - you
    
    
    @Login @US968315
-   Scenario Outline:Verify HSID assistive registration.
+   Scenario Outline:Verify HSID login functionality.
    Given the user connect to DB
     And the user select record from database
       | Firstname  | <firstname>  |
@@ -129,7 +126,7 @@ Then user should see a latest unread mail recieved from "myUHCMedicare.com - you
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
       
-      Examples:
- 
+    Examples:
+      
    | planType|  memberType  | copayCategory | 
    | MAPD    |  Individual  |  NON LIS      | 
