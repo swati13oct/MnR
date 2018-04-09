@@ -67,7 +67,7 @@ public class MemberAuthLoginPage extends UhcDriver {
 			Assert.fail();
 
 		} else {
-			PAGE_URL = MRConstants.MEMBER_AUTH_REDESIGN_LOGIN_URL;
+			PAGE_URL = MRConstants.MEMBER_AUTH_REDESIGN_URL;
 		}
 		startNew(PAGE_URL);
 		CommonUtility.checkPageIsReadyNew(driver);

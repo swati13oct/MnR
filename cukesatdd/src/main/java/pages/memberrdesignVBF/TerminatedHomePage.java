@@ -17,67 +17,54 @@ import acceptancetests.util.CommonUtility;
  *
  */
 public class TerminatedHomePage {
-	
 
-	
-
-	@FindBy(id = "memberId")
-	private WebElement memberId;
-	
 	@FindBy(linkText = "addaplan")
 	private WebElement addaplanlink;
-	
-	@FindBy(id = "terminatedDate")
-	private WebElement terminatedDate;
-	
+
 	@FindBy(linkText = "Search claim history")
 	private WebElement searchClaimsHistory;
-	
-	@FindBy(id ="disclosure_link")
+
+	@FindBy(id = "disclosure_link")
 	private WebElement logOut;
 
 	private WebDriver driver;
-	
-	public TerminatedHomePage(WebDriver driver){
-	       this.driver=driver;
-	       //Initialise Elements
-	       PageFactory.initElements(driver, this);
-	   }
-	
+
+	public TerminatedHomePage(WebDriver driver) {
+		this.driver = driver;
+		// Initialise Elements
+		PageFactory.initElements(driver, this);
+	}
+
 	public void logOut() {
 		logOut.click();
-		
+
 	}
 
 	public ClaimSummarypage navigateToClaimsSummary() {
 
 		searchClaimsHistory.click();
-    	CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Claims")) {
 			return new ClaimSummarypage(driver);
 		}
 		return null;
 	}
-	
+
 	public boolean validateaddaplanlink() {
-		
-	boolean presentLink =false;
-		
+
+		boolean presentLink = false;
+
 		try {
-			if(addaplanlink.isDisplayed()){
-				
+			if (addaplanlink.isDisplayed()) {
+
 				presentLink = true;
 				return presentLink;
-			}			  
-			 
+			}
+
 		} catch (NoSuchElementException e) {
 			presentLink = false;
 		}
 		return presentLink;
-		// TODO Auto-generated method stub
-		
 	}
-
-
 
 }

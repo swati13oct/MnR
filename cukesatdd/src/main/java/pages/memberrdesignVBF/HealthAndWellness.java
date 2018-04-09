@@ -12,12 +12,6 @@ import pages.memberrdesignVBF.RallyDashboardPage;
 
 public class HealthAndWellness extends UhcDriver {
 
-	@FindBy(partialLinkText = "Health & Wellness")
-	private WebElement rallyHealthAndWellness;
-
-	@FindBy(id = "healthwellness")
-	private WebElement healthAndWellness;
-
 	@FindBy(id = "lifestyle_desk1")
 	private WebElement lifestyleTab;
 
@@ -45,7 +39,6 @@ public class HealthAndWellness extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		// TODO Auto-generated method stub
 		CommonUtility.waitForPageLoadNew(driver, lifestyleIcon, 50);
 		validateNew(lifestyleIcon);
 		validateNew(learningIcon);

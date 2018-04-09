@@ -15,30 +15,6 @@ public class PaymentsOverview extends UhcDriver {
 	@FindBy(xpath = "//div[@class='margin-small']//a[@id='onetimepayment' and not(contains(@class,'ng-hide'))]")
 	private WebElement OneTimePaymentButton;
 
-	@FindBy(xpath = "//div[@class='margin-small']//a[@id='setupautopayment' and not(contains(@class,'ng-hide'))]")
-	private WebElement AutomaticPaymentButton;
-
-	@FindBy(xpath = ".//*[@id='customFields']/div[3]/button")
-	private WebElement SearchButton;
-
-	@FindBy(xpath = ".//*[@id='paymentHistoryApp']/div/div/div/div/div[1]/p")
-	private WebElement ErrorMessage;
-
-	@FindBy(xpath = "//*[@id='50129808']/a")
-	private WebElement Tab1;
-
-	@FindBy(xpath = "//*[@id='22976826']/a")
-	private WebElement Tab2;
-
-	@FindBy(xpath = "//*[@id='paymentCustomSearch']/div/span/div/div[2]/div[1]/label")
-	private WebElement PaidCheckbox;
-
-	@FindBy(xpath = "//*[@id='paymentCustomSearch']/div/span/div/div[2]/div[2]/label")
-	private WebElement UnPaidCheckbox;
-
-	@FindBy(xpath = "//*[@id='paymentHistoryApp']/div[1]/div/div/div/div[3]")
-	private WebElement Payments_status_Error;
-
 	@FindBy(id = "paymentTable")
 	private WebElement PaymentsTable;
 

@@ -5,8 +5,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.data.MRConstants;
-import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 /**
@@ -15,7 +13,7 @@ import atdd.framework.UhcDriver;
 public class DeregisterPage extends UhcDriver {
 
 	/** The Deregister page url for team - g. */
-	private static String PAGE_URL;
+	//private static String PAGE_URL;
 
 	/** The user Id to be deregistered. */
 	@FindBy(id = "tobederegisteruser")
@@ -32,7 +30,7 @@ public class DeregisterPage extends UhcDriver {
 	}
 
 	@Override
-	public void openAndValidate() {
+	public void openAndValidate() {/*
 		String environment = MRScenario.environment;
 		switch (environment.toUpperCase()) {
 		case "TEAMCI-1":
@@ -52,7 +50,7 @@ public class DeregisterPage extends UhcDriver {
 		}
 		System.out.println("URL:" + PAGE_URL);
 		startNew(PAGE_URL);
-	}
+	*/}
 
 	public void deregisterUser(String userId) {
 		enterUserName.sendKeys(userId);
