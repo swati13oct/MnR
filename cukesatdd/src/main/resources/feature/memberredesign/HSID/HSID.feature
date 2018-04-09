@@ -5,7 +5,7 @@ Feature:To test HSID functionality on Medicare site
  
    
    
-   @US968323
+   @US968241 @hsidregistration
     Scenario Outline:Verify HSID registration.
     Given the user connect to DB
     And the user select record from database
@@ -50,14 +50,13 @@ Then user should copy the confirm email url to browser
 And user should be at Sign In page
 And user should see the email confirmation message "Email confirmed: Please sign in with your new username and password." in Sign In form
 Then user should see a latest unread mail recieved from "myUHCMedicare.com - your HealthSafe ID registration is complete" in mail server
-    #And I should see a Username or email address label with textbox in Sign In page
-    
+   
    Examples:
  
    | planType|  memberType  | copayCategory | firstName | lastName        |   dob 	            | memberid 	  | zipcode| userName 	         | password   |   email	  			          | question1 | question2 | question3 |
    | MAPD    |  Individual  |  NON LIS      | BBABFAD   | BEDD            | 09/17/1946          | 002238311-1 | 92024	 |AUTO_q2_apr_uhc100   | Password@1 | codetransformers@gmail.com | number1   | name1     | color1    |
    
-   @Assistive
+   @AssistiveRegistration @US968323
    Scenario Outline:Verify HSID assistive registration.
    Given the user connect to DB
     And the user select record from database
@@ -102,9 +101,35 @@ Then user should see a latest unread mail recieved from "myUHCMedicare.com - you
   And user should be at Sign In page
   And user should see the email confirmation message "Email confirmed: Please sign in with your new username and password." in Sign In form
   Then user should see a latest unread mail recieved from "myUHCMedicare.com - your HealthSafe ID registration is complete" in mail server
-   #And I should see a Username or email address label with textbox in Sign In page
+   
     
    Examples:
  
    | planType|  memberType  | copayCategory | firstName | lastName        |   dob 	            | memberid 	  | zipcode| userName 	         | password   |   email	  			           | question1 | question2 | question3 |
    | MAPD    |  Individual  |  NON LIS      | BBABFAD   | BEDD            | 09/17/1946          | 002238311-1 | 92024	 |AUTO_q2_apr_uhc100   | Password@1 | codetransformers@gmail.com | number1   | name1     | color1    |
+   
+   
+   @Login @US968315
+   Scenario Outline:Verify HSID assistive registration.
+   Given the user connect to DB
+    And the user select record from database
+      | Firstname  | <firstname>  |
+      | Lastname   | <lastname>   |
+    And the user delete record from extreme scale
+      | Firstname  | <firstname>  |
+      | Lastname   | <lastname>   |
+    And the user delete record from mbr_portal
+      | Firstname  | <firstname>  |
+      | Lastname   | <lastname>   |
+    And the user delete record from mbr
+      | Firstname  | <firstname>  |
+      | Lastname   | <lastname>   |
+   And login with following details logins in the member portal and validate elements and route to assistive flow 
+      | Plan Type      | <planType>  |
+      | Member Type    | <memberType>|
+      | Copay Category | <copayCategory>|
+      
+      Examples:
+ 
+   | planType|  memberType  | copayCategory | 
+   | MAPD    |  Individual  |  NON LIS      | 

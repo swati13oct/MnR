@@ -33,7 +33,7 @@ And user should be at Sign In page
 | password   | <password>   |
 And user should see the email confirmation message "Email confirmed: Please sign in with your new username and password." in Sign In form
 Then user should see a latest unread mail recieved from "myUHCMedicare.com - your HealthSafe ID registration is complete" in mail server
-And I should see a Username or email address label with textbox in Sign In page
+
 
 
 Examples:

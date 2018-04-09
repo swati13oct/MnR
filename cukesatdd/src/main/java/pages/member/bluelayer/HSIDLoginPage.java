@@ -120,14 +120,38 @@ MRScenario loginScenario;
 		signInButton.click();
 		
 		try {
-			Thread.sleep(10000);
+			Thread.sleep(20000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-
+		if (driver.getCurrentUrl().contains("aa-web/evaluate?execution=e1s2&action=securityQuestion"))
+		{
+			
+			
+			ConfirmSecurityQuestion cs = new ConfirmSecurityQuestion(driver);
+		    try {
+				cs.enterValidSecurityAnswer();
+				System.out.println(driver.getCurrentUrl());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
+		else if(currentUrl().contains("testharness.html") || currentUrl().contains("/dashboard"))
+		{
+			
+				System.out.println("test");
+				System.out.println(driver.getCurrentUrl());
+			    return new AccountHomePage(driver);
+		}
+		
+		else
+		{
+			System.out.println("teamhloginWith is returing null. Please Update the above condition As per your Needs");
+		}
 		
 		if ( MRScenario.environmentMedicare.equals("team-e") || MRScenario.environmentMedicare.equals("team-ci1")){
 
@@ -155,9 +179,10 @@ MRScenario loginScenario;
 			return new TerminatedHomePage(driver);
 		}
 
-		System.out.println("teamhloginWith is returing null. Please Update the above condition As per your Needs");
+		
 
 		return null;
 	}
+	}
 
-}
+
