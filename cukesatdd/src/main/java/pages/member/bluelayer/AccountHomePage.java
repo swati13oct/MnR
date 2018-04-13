@@ -1175,5 +1175,12 @@ public void FormsandResourcesLinkinPlanSummaryPageBlayer()
     				
     		}
 
+     public void verifyPageTitle() throws InterruptedException {
+     String title = driver.getTitle();
+     //Assert.assertEquals(title, "Home | UnitedHealthcare");
+     Assert.assertTrue(title.contains("UnitedHealthcare"));
+    			     
+   	}	
+    			    
 }
 

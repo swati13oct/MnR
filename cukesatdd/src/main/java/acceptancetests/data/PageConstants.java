@@ -577,4 +577,7 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 
 	public static final String CREATE_ACCOUNT_PAGE = "createAccountPage";
 	public static final String SECURITY_QUESTIONS_PAGE = "accountHomePage";
+	
+	public static final String SSO_TEST_HARNESS_PAGE = "ssoTestHarnessPage";
+	
 }

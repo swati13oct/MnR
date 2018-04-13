@@ -2,6 +2,7 @@ package pages.member.bluelayer;
 
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -74,7 +75,14 @@ public class ProfilePageHsid  extends UhcDriver {
 		hsidAccountLink.click();
 		Thread.sleep(10000);
 	Assert.assertTrue(driver.getTitle().equalsIgnoreCase("HealthSafe ID"));
-
+}
+	
+	public void validateHealthSafeAccountLinkNOTPresent() throws InterruptedException {
+		Assert.assertFalse(hsidAccountLink.isDisplayed());
+	}
+		
+	public void validateHealthSafePasswordLinkNOTPresent() throws InterruptedException {
+		Assert.assertFalse(hsidPasswordLink.isDisplayed());
 		
 	}
 
