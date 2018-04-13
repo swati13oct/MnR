@@ -118,6 +118,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
         @FindBy(id = "cobrowse-disclaimer")
         private WebElement cobrowsemodelwindow;
+        
+        @FindBy(xpath = "//a[@class='cta-button']")
+        private WebElement takeTheQuizBtn;
 
         private PageData homePageDisclaimer;
         public JSONObject homePageDisclaimerJson;
@@ -1165,4 +1168,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
                 
                 return flag;
         }
+        
+        public PlanSelectorNewPage quizButton() {
+        	waitforElement(ourPlans);
+    		Actions action = new Actions(driver);		
+    		action.moveToElement(ourPlans).build().perform();
+    		waitforElement(takeTheQuizBtn);
+    		takeTheQuizBtn.click();
+			return new PlanSelectorNewPage(driver);
+    	}
 }
