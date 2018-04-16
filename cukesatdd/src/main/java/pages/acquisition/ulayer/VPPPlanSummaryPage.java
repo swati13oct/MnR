@@ -172,8 +172,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//button[@class='action-btn negative']")
 	private WebElement Checkcoverage;
 	
-	@FindBy(xpath = ".//*[@class='swiper-container']")
-	List<WebElement> maPlanElement1;
+	@FindBy(xpath = ".//*[@id='plan-list-1']//div[@class='module-plan-overview module swiper-slide ng-scope']")
+	List<WebElement> maPlansList;
 	
 	public JSONObject vppPlanSummaryJson;
 
@@ -300,8 +300,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if (planName.contains("HMO")) {
 			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 			
-			if(maPlanElement1!=null){
-			for (WebElement plan : maPlanElement1) {
+			if(maPlansList!=null){
+			for (WebElement plan : maPlansList) {
 				if (plan.getText().contains(planName)) {
 					//ElementData elementData = new ElementData("id",
 						//	"doctorCoverMA");
