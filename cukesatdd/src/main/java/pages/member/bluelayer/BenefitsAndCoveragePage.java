@@ -294,6 +294,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	
 	@FindBy(xpath = ".//*[@id='drug-benefits']/div[5]/div[10]/div/div[1]/div/div")
 	private WebElement hartfortdrugtable;
+	
 	@FindBy(className = "atdd-bnc-CTgrouptable")
 	private WebElement GreenwichTable;
 	
