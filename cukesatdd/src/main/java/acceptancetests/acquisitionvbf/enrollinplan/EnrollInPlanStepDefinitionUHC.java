@@ -21,7 +21,7 @@ import pages.acquisition.bluelayer.PlanInformationPage;
 import pages.acquisition.bluelayer.ReviewApplicationPage;
 import pages.acquisition.bluelayer.SubmitApplicationPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
-import acceptancetests.acquisitionvbf.common.CommonStepDefinition;
+import pages.acquisition.ulayer.IntroductionInformationPage;import acceptancetests.acquisitionvbf.common.CommonStepDefinition;
 import acceptancetests.acquisitionvbf.vpp.VPPCommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
@@ -77,6 +77,37 @@ public class EnrollInPlanStepDefinitionUHC {
 		}
 	}
 
+	
+	@When("^user performs plan search using following Zip Code in UHC site$")
+	public void zipcode_search_in_uhc_site(DataTable givenAttributes) {
+
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String zipcode = memberAttributesMap.get("Zip Code");
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.searchPlans(
+				zipcode);
+
+		if (plansummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
+					plansummaryPage);
+			if (plansummaryPage.validatePlanSummary()) {
+				Assert.assertTrue(true);
+			} else {
+				Assert.fail("Error in validating available plans check ");
+			}
+		}
+	}
 	/**
 	 * @toDo:user views plans of the below plan type
 	 */
@@ -122,12 +153,6 @@ public class EnrollInPlanStepDefinitionUHC {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		EnrollPlanInfoPage enrollPlanInfoPage = planSummaryPage.clicksOnEnrollInplanLink(planName);
 		if (enrollPlanInfoPage != null) {
-			if (enrollPlanInfoPage.validatePlanChoosenforEnroll(planName,zipCountyInfo)) {
-				Assert.assertTrue(true);
-			} else {
-				Assert.fail("Error in validating choosen plan for enroll in check ");
-			}
-
 			PlanInformationPage planInformationPage = enrollPlanInfoPage.continuesEnrollment(planName);
 			getLoginScenario().saveBean(PageConstants.PLAN_INFORMATION,
 					planInformationPage);
@@ -137,7 +162,6 @@ public class EnrollInPlanStepDefinitionUHC {
 			Assert.fail("ERROR loading PlanInformationPage");
 		}
 		}
-
 	}
 
 	/**
@@ -166,30 +190,10 @@ public class EnrollInPlanStepDefinitionUHC {
 				.getBean(PageConstants.PLAN_INFORMATION);
 		BeneficiaryInformationPage beneficiaryInformationPage = planInformationPage
 				.navigateToNextStep();
-		getLoginScenario().saveBean(PageConstants.BENEFICIARY_INFORMATION_PAGE,
-				beneficiaryInformationPage);
 		if (beneficiaryInformationPage != null) {
-			/* Get actual data */
-			JSONObject beneficiaryInformationActual = beneficiaryInformationPage.getBeneficiaryActualData();
-			System.out
-			.println("beneficiaryInformationActual---->" + beneficiaryInformationActual);
-
-			/* Get expected data */
-			String planName = (String) getLoginScenario().getBean(
-					EnrollInPlanCommonConstants.PLAN_NAME);
-
-
-			String zipcode = (String) getLoginScenario().getBean(
-					VPPCommonConstants.ZIPCODE);
-			String county = (String) getLoginScenario().getBean(
-					VPPCommonConstants.COUNTY);
-			String zipCountyInfo = zipcode +" ("+county+")";
-
-			if(beneficiaryInformationPage.validateBeneficiaryPage(beneficiaryInformationActual,planName,zipCountyInfo)){
-				Assert.assertTrue(true);
-			} else {
-				Assert.fail("Error in validating beneficiary information page check ");
-			}	
+			getLoginScenario().saveBean(PageConstants.BENEFICIARY_INFORMATION_PAGE,
+					beneficiaryInformationPage);
+			Assert.assertTrue(true);
 		} else {
 			Assert.fail("ERROR loading BeneficiaryInformationPage");
 		}

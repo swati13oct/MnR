@@ -38,6 +38,16 @@ public class LoginPage extends UhcDriver {
 	private PageData browserCheckData;
 
 	private JSONObject browserCheckJson;
+	
+    @FindBy(id = "hsid-username")
+    private WebElement hsiduserNameField;
+
+    @FindBy(id = "hsid-password")
+    private WebElement hsidpasswordField;
+    
+    @FindBy(id = "hsid-submit")
+    private WebElement signInHsidButton;
+
 
 	public LoginPage(WebDriver driver) {
 		super(driver);
@@ -59,7 +69,9 @@ public class LoginPage extends UhcDriver {
 		}
 		System.out.println("URL:" + PAGE_URL);
 		startNew(PAGE_URL);
-		validateNew(signInButton);
+		//validateNew(signInButton);
+		validateNew(signInHsidButton);
+		
 	}
 
 	public JSONObject getBrowserCheck() {
@@ -85,7 +97,7 @@ public class LoginPage extends UhcDriver {
 
 	}
 
-	// Updated loginWith to include RallyDashboard navigation
+	/*// Updated loginWith to include RallyDashboard navigation
 	public Object loginWith(String username, String password) throws InterruptedException {
 		sendkeysNew(userNameField, username);
 		sendkeysNew(passwordField, password);
@@ -137,8 +149,89 @@ public class LoginPage extends UhcDriver {
 			return new RallyDashboardPage(driver);
 		}
 		return null;
-	}
+	}*/
 
+	// Updated loginWith to include RallyDashboard navigation
+		public SecurityQuestionsPage loginWith(String username, String password) throws InterruptedException {
+			sendkeysNew(hsiduserNameField, username);
+			sendkeysNew(hsidpasswordField, password);
+			signInHsidButton.click();
+			System.out.println("Sign In clicked");
+			try {
+				Alert alert = driver.switchTo().alert();
+				alert.accept();
+				Alert alert1 = driver.switchTo().alert();
+				alert1.accept();
+			} catch (Exception e) {
+				System.out.println("No Such alert displayed");
+			}
+			int counter = 0;
+			do {
+				if (counter <= 20) {
+					Thread.sleep(5000);
+					System.out.println("Time elapsed post sign In clicked --" + counter + "*5 sec.");
+				} else {
+					System.out.println("TimeOut!!!");
+					return null;
+				}
+				counter++;
+			} while (!(driver.getTitle().contains("security questions")));
+			
+			if (currentUrl().contains("=securityQuestion")) {
+				return new SecurityQuestionsPage(driver);
+			}
+			return null;
+			
+		}
+/***
+ * 
+ * @param username
+ * @param password
+ * @return
+ * @throws InterruptedException
+ */
+		public Object navigateToHomePage() throws InterruptedException {
+		
+			// CommonUtility.checkPageIsReady(driver);
+			WebDriverWait wait = new WebDriverWait(driver, 5);
+			Alert alert;
+			int counter = 0;
+
+			do {
+				if (counter <= 20) {
+					Thread.sleep(5000);
+					System.out.println("Time elapsed post sign In clicked --" + counter + "*5 sec.");
+				} else {
+					System.out.println("TimeOut!!!");
+					return null;
+				}
+				counter++;
+				try {
+					alert = wait.until(ExpectedConditions.alertIsPresent());
+					alert.accept();
+				} catch (NoAlertPresentException ex) {
+					System.out.println("NoAlertPresentException - No Aert Presernt...");
+				} catch (TimeoutException ex) {
+					System.out.println("TimeoutException - No Aert Presernt...");
+				}
+
+				if (driver.getTitle().contains("Internal Error") || driver.getTitle().contains("Sign In")) {
+					System.out.println("Error !!!");
+					return null;
+				}
+			} while (!((driver.getTitle().contains("Home")) || (driver.getTitle().contains("Test Harness"))));
+
+			System.out.println("Current URL: " + currentUrl());
+			if (currentUrl().contains("member/testharness.html")) {
+				return new TestHarness(driver);
+			} else if (currentUrl().contains("terminated-plan.html")) {
+				return new TerminatedHomePage(driver);
+			} else if (currentUrl().contains("/dashboard")) {
+				return new RallyDashboardPage(driver);
+			}
+			return null;
+		}
+		
 	public RegistrationInformationPage navigateToRegistrationPage() {
 		validateNew(registrationButton);
 		registrationButton.click();

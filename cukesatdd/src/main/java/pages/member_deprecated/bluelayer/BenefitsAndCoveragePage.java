@@ -267,7 +267,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='specialDisctServices']/div[1]/img")
 	private WebElement handimage;
 
-	@FindBy(className = "atdd-bnc-discountsubtitle")
+	@FindBy(id = "specialDisctServices")
 	private WebElement textdiscountservices;
 
 
@@ -289,6 +289,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-claims-header")
 	private WebElement ClaimsSupportShip;
 
+	@FindBy(id = "ccs-header")
+	private WebElement catastrophicCoverageStage;
+	
 	public static final String learnmorestagetext_xpath = ".//*[@id='collapseStages']";
 
 	public static final String learnmorelinktiertext_xpath = ".//*[@id='collapseTiers']";
@@ -1259,8 +1262,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	 */
 	public void vasSection() {
 
-		validate(textdiscountservices);
-		validate(headerdiscountservices);
+		 validate(textdiscountservices);
+		
 	}
 
 	/**
@@ -1350,5 +1353,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		// Assert.assertTrue(getTitle().equalsIgnoreCase("Contact Us"));
 
 	}
-
+ 
+	public void valiadateCatastrophicCoverageValue(String copayType){
+		validate(catastrophicCoverageStage);
+		if(copayType.equals("wotCMSValue")){
+		}
+	}
 }

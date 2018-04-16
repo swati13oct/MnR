@@ -84,9 +84,6 @@ public class RallyDashboardPage extends UhcDriver {
 	@FindBy(xpath = "(//nav[@id='utility-nav']//a/span[contains(text(),'Help')])[1]")
 	private WebElement ContactUsLink;
 
-	@FindBy(id = "ordermaterials")
-	private WebElement OrderPlanMaterialslnk;
-
 	@FindBy(id = "hello-person")
 	private WebElement HelloMessage;
 
@@ -191,11 +188,12 @@ public class RallyDashboardPage extends UhcDriver {
 		validateNew(panelHome);
 		validateNew(HelloMessage);
 	}
-/***
- * 
- * @return
- * @throws InterruptedException
- */
+
+	/***
+	 * 
+	 * @return
+	 * @throws InterruptedException
+	 */
 	public PaymentsOverview navigateToPaymentOverview() throws InterruptedException {
 		System.out.println("Inside navigateToPaymentOverview functions");
 		validateNew(panelPremiumPayment);
@@ -206,10 +204,11 @@ public class RallyDashboardPage extends UhcDriver {
 		}
 		return null;
 	}
-/***
- * 
- * @return
- */
+
+	/***
+	 * 
+	 * @return
+	 */
 	public pages.memberrdesignVBF.ProfilePreferencesPage navigateDirectToProfilePage() {
 		System.out.println(driver.getTitle());
 		validateNew(accountToggleDropdown);
@@ -272,10 +271,11 @@ public class RallyDashboardPage extends UhcDriver {
 		}
 		return null;
 	}
-/***
- * 
- * @return
- */
+
+	/***
+	 * 
+	 * @return
+	 */
 	public HealthAndWellness clickHealthnWellnessTab() {
 		validateNew(panelHealth);
 		panelHealth.click();
@@ -286,10 +286,11 @@ public class RallyDashboardPage extends UhcDriver {
 		return null;
 
 	}
-/***
- * 
- * @return
- */
+
+	/***
+	 * 
+	 * @return
+	 */
 	public OrderplanmaterialsPage navigateToOrderPlanMaterialsPage() {
 		validateNew(OrderMaterial_Dashboard);
 		OrderMaterial_Dashboard.click();
@@ -299,11 +300,12 @@ public class RallyDashboardPage extends UhcDriver {
 		}
 		return null;
 	}
-/***
- * 
- * @return
- * @throws InterruptedException
- */
+
+	/***
+	 * 
+	 * @return
+	 * @throws InterruptedException
+	 */
 	public PharmacySearchPage navigateToPharmacyLocator() throws InterruptedException {
 
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -590,10 +592,11 @@ public class RallyDashboardPage extends UhcDriver {
 		}
 		return null;
 	}
-/***
- * 
- * @param Category
- */
+
+	/***
+	 * 
+	 * @param Category
+	 */
 	public void validateDashboardElements(String Category) {
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (!(("Ship").equalsIgnoreCase(Category))) {

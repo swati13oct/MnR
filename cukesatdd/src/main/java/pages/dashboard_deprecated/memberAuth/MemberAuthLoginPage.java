@@ -26,7 +26,7 @@ public class MemberAuthLoginPage extends UhcDriver {
 	@FindBy(id="find_searchbtn")
 	private WebElement search;
 	
-	@FindBy(id ="memAuthLoginBox")
+	@FindBy(xpath =".//*[@id='memAuthLoginBox']//span[@class='redError']")
 	private WebElement unpswdIncorrecterrormsg;
 	
 	private static String MEMBER_AUTH = MRConstants.MEMBER_AUTH;
@@ -65,7 +65,7 @@ public class MemberAuthLoginPage extends UhcDriver {
 	/** 
 	 * @todo : Validate Error message
 	 */
-	public void validateErrorMessage(String loginname, String  loginpassword, String Errormessage) throws InterruptedException{
+	public MemberAuthLoginPage validateErrorMessage(String loginname, String  loginpassword, String Errormessage) throws InterruptedException{
 		username.sendKeys(loginname);
 		password.sendKeys(loginpassword);
 		search.click();
@@ -75,6 +75,8 @@ public class MemberAuthLoginPage extends UhcDriver {
 			
 		}
 		//if(!(this.unpswdIncorrecterrormsg.getText().trim().contains(Errormessage)))
+		
+		return null;
 			
 	}
 }

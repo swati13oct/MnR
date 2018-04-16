@@ -15,14 +15,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
+import acceptancetests.data.PageConstantsMnR;
+import acceptancetests.memberredesign.claims.ClaimsCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
-import pages.dashboard_deprecated.eob.EOBPage;
- 
+import pages.dashboard.eob.EOBPage;
+
 public class EobStepDefinition {
 	@Autowired
 	MRScenario loginScenario;
@@ -91,6 +93,7 @@ public class EobStepDefinition {
 		        }
 
 	}
+	
 	
 	/**
 	*@toDo: get the required parameters from the feature files 
@@ -328,7 +331,8 @@ public class EobStepDefinition {
 		eobPage.clickOnEob();
 	}
 
-	
+
+
 	/*@After
 	public void tearDown() {
 

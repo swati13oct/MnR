@@ -14,6 +14,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
@@ -85,6 +86,12 @@ public class PlanDetailsPage extends UhcDriver {
 	
 	@FindBy(xpath="//*[@id='bf3dfe9a-aba6-449b-865c-b5628cb03a60']/a[6]")
 	private WebElement pdfLink;
+	
+	@FindBy(xpath="//div[@class='content-section plan-details-content mb-content ng-scope']/div[1]//a[@class='back-to-plans backtoplans-plandetail ng-scope']")
+	private WebElement topbackToPlanslink;
+	
+	@FindBy(xpath="//div[@class='content-section plan-details-content mb-content ng-scope']/div[2]//a[@class='back-to-plans backtoplans-plandetail ng-scope']")
+	private WebElement downbackToPlanslink;
 	
 	private PageData planDocsPDF;
 	
@@ -291,8 +298,36 @@ public class PlanDetailsPage extends UhcDriver {
 		return false;
 	}
 
-   	
+	public void validatetopbacktoplanslink() throws InterruptedException{
+    	
+    	waitforElement(topbackToPlanslink);
+    	topbackToPlanslink.click();
+    	Thread.sleep(3000);
+    	if (driver.getCurrentUrl().contains("health-plans.html#/plan-summary"))
+    	{
+    		Assert.assertTrue(true);
+    	}
+    	
+    	else Assert.assertTrue(false);
+  
+	}
+	
+public void validatedownbacktoplanslink() throws InterruptedException{
+    	
+    	waitforElement(downbackToPlanslink);
+    	downbackToPlanslink.click();
+    	Thread.sleep(3000);
+    	if (driver.getCurrentUrl().contains("health-plans.html#/plan-summary"))
+    	{
+    		Assert.assertTrue(true);
+    	}
+    	
+    	else Assert.assertTrue(false);
+  
+	}
 
+public void browserBack() {
 
-
+driver.navigate().back();
+}
 }

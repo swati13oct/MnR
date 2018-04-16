@@ -86,5 +86,4 @@ public class EoBSearchPage extends UhcDriver {
 		return false;
 	}
 
-
 }

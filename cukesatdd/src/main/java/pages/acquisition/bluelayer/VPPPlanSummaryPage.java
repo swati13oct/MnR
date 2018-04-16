@@ -168,7 +168,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath=".//*[@class='img' and @src='/images/guidedSearch/gs_icn_pro_healthcarepro.svg']")
 	private WebElement People;
 	
-	@FindBy(xpath="//div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[@class='tab plancountheight']/div/span[@class='trigger-closed']")
+	@FindBy(xpath="//div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[1]/div/span[@class='trigger-closed']")
 	private WebElement closedTrigger;	
 	
 
@@ -264,7 +264,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		int maPlans = 0;
 		int msPlans = 0;
 		int pdpPlans =0;
-				int msnPlans = 0;
+		int msnPlans = 0;
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		if(validate(allPlansSize)){
 			 allPlans = Integer.valueOf(allPlansSize.getText().split(" ")[2]);
 		}else{

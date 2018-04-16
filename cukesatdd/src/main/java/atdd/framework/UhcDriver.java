@@ -18,7 +18,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
+import org.openqa.selenium.interactions.Actions;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
@@ -116,7 +116,7 @@ public abstract class UhcDriver {
     		}
     		return false;
 
-    		/*//CM code
+    		/*//CM
     		
     		JavascriptExecutor jse = (JavascriptExecutor)driver;
     		jse.executeScript("window.scrollBy(0,-50)", "");

@@ -15,17 +15,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acceptancetests.data.CommonConstants;
 //import acceptancetests.deprecated.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonConstants;
 import acceptancetests.data.LoginCommonConstants;
+import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
+import acceptancetests.memberredesign.claims.ClaimsCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
-import pages.member_deprecated.bluelayer.AccountHomePage;
-import pages.member_deprecated.bluelayer.BenefitsAndCoveragePage;
-import pages.member_deprecated.bluelayer.LoginPage2;
-import pages.member_deprecated.ulayer.ValueAddedServicepage;
+import pages.member.bluelayer.AccountHomePage;
+import pages.member.bluelayer.BenefitsAndCoveragePage;
+import pages.member.bluelayer.LoginPage2;
+import pages.member.ulayer.ValueAddedServicepage;
+import pages.redesign.BenefitsCoveragePage;
+import pages.redesign.RedesignLoginPage;
+import pages.redesign.UlayerHomePage;
 
 /**
  * Functionality: Benefits and Coverage page
@@ -829,6 +834,146 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 		benefitsnCoveragepage.contactUslinkShip();
 	}
+	
+	@And("^the user can see the values for catastrophic values$")
+	public void user_validates_catastrophic_values(){
+		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsnCoveragepage.valiadateCatastrophicCoverageValue("wotCMSValue");
+	}
 
+	
+	/**
+	 * @author sdwaraka
+	 * To Login to redesign 
+	 */
+	
+	@Given("^registered Redesign member for EOB with following attributes$")
+	public void registered_member_EOB_redesign(
+			DataTable memberAttributes) throws InterruptedException {
 
+		/* Reading the given attribute from feature file */
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String planType = memberAttributesMap.get("Plan Type");
+		String businessType = null;
+		if (planType.equalsIgnoreCase("MA")
+				|| planType.equalsIgnoreCase("MAPD")
+				|| planType.equalsIgnoreCase("PDP")) {
+			businessType = "GOVT";
+		} else {
+			businessType = "SHIP";
+		}
+		getLoginScenario().saveBean(ClaimsCommonConstants.BUSINESS_TYPE,
+				businessType);
+
+		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+		List<String> desiredAttributes = new ArrayList<String>();
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
+				.hasNext();) {
+			{
+				String key = iterator.next();
+				if (!memberAttributesMap.get(key).isEmpty()) {
+					desiredAttributes.add(memberAttributesMap.get(key));
+				}
+			}
+		}
+		System.out.println("desiredAttributes.." + desiredAttributes);
+		Map<String, String> loginCreds = loginScenario
+				.getAMPMemberWithDesiredAttributes(desiredAttributes);
+
+		String userName = null;
+		String pwd = null;
+		if (loginCreds == null) {
+			// no match found
+			System.out.println("Member Type data could not be setup !!!");
+			Assert.fail("unable to find a " + desiredAttributes + " member");
+		} else {
+			userName = loginCreds.get("user");
+			pwd = loginCreds.get("pwd");
+			System.out.println("User is..." + userName);
+			System.out.println("Password is..." + pwd);
+			getLoginScenario()
+					.saveBean(LoginCommonConstants.USERNAME, userName);
+			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
+		}
+
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		RedesignLoginPage loginPage = new RedesignLoginPage(wd);
+
+		UlayerHomePage accountHomePage = (UlayerHomePage)loginPage.loginWith(userName, pwd);
+		if (accountHomePage != null) {
+			 getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
+			Assert.assertTrue(true);
+		}
+		else {
+			Assert.fail("***** Error in loading  Redesign Account Landing Page *****");
+		}
+	}
+
+	/**
+	 * @throws InterruptedException 
+	 * @author sdwaraka
+	 * 
+	 */
+	
+	@Then("^the user navigates to Benefits and Coverage page$")
+	public void the_user_navigates_to_Redesign_BnC_page() throws InterruptedException{
+		UlayerHomePage accountHomePage = (UlayerHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		BenefitsCoveragePage planBenefitsCoverage = accountHomePage.navigateToBenefitsAndCoverage();
+		if (planBenefitsCoverage != null) {
+			System.out.println("EOB page Loaded");
+			getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE,
+					planBenefitsCoverage);
+			Assert.assertTrue(true);
+		}
+		else {
+			Assert.fail("Error in loading  EOB Page");
+		}
+
+	}
+	
+	
+	/**
+	 * To validate updated language in Drug Copays and Discounts, Catastrophic Stage for member as per the display flag
+	 * @author sdwaraka
+	 */
+ 	@Then("^the user validates Catastrophic Stage language for the member$")
+	public void the_user_validates_updated_language_catastrophic_stage(DataTable givenAttributes) {
+			List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String updatedLanguage = memberAttributesMap.get("Updated Language");
+		String DisplayFlag  = memberAttributesMap.get("Display Flag");
+		BenefitsCoveragePage planBenefitsCoverage = (BenefitsCoveragePage) getLoginScenario().getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		boolean flag = planBenefitsCoverage.Validate_Catastrophic_Stage_Language(updatedLanguage,DisplayFlag);
+		System.out.println("Updated Language validated - "+flag);
+		getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE,
+				planBenefitsCoverage);
+
+		if (flag) {
+			System.out.println("Catastrophic Coverage Stage Updated Language validation Passed");
+				Assert.assertTrue(true);
+		} 
+		else{
+			Assert.fail("ERROR Validating Catastrophic Coverage Stage Updated Language");
+		}
+
+ 	}
+	
+	
 }
