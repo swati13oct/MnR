@@ -1,7 +1,7 @@
 /**
  * 
  */
-package pages.member.bluelayer;
+package pages.member_deprecated.bluelayer;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,7 +18,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.ulayer.LoginAssistancePage;
-import pages.member.bluelayer.ConfirmSecurityQuestion;
+import pages.member_deprecated.bluelayer.ConfirmSecurityQuestion;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;

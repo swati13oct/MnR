@@ -1,7 +1,7 @@
 /**
  * 
  */
-package pages.member.bluelayer;
+package pages.member_deprecated.bluelayer;
 
 
 import org.junit.Assert;

@@ -16,10 +16,10 @@ import java.util.Map;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.member.bluelayer.AccountHomePage;
-import pages.member.bluelayer.ProfilePageHsid;
-import pages.member.redesign.cqLoginPage;
-import pages.member.redesign.ssoTestHarnessPage;
+import pages.member_deprecated.bluelayer.AccountHomePage;
+import pages.member_deprecated.bluelayer.ProfilePageHsid;
+import pages.member_deprecated.redesign.cqLoginPage;
+import pages.member_deprecated.redesign.ssoTestHarnessPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;

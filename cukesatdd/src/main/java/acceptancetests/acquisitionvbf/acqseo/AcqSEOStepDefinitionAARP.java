@@ -17,9 +17,9 @@ import javax.net.ssl.X509TrustManager;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
-
+/*
 import com.applitools.eyes.BatchInfo;
-import com.applitools.eyes.selenium.Eyes;
+import com.applitools.eyes.selenium.Eyes;*/
 
 import acceptancetests.data.CommonConstants;
 import atdd.framework.MRScenario;

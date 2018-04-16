@@ -23,7 +23,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import pages.member.bluelayer.*;
+import pages.member_deprecated.bluelayer.*;
+import pages.member_deprecated.bluelayer.ProfilePageHsid;
 
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;

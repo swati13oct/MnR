@@ -1,4 +1,4 @@
-package acceptancetests.memberredesign.hsid;
+package acceptancetests.memberredesign.HSID;
 
 import java.sql.Driver;
 import java.util.LinkedHashMap;
@@ -19,9 +19,9 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.uhcretiree.AcquisitionHomePage;
-import pages.member.bluelayer.AccountHomePage;
-import pages.member.bluelayer.HSIDLoginPage;
-import pages.member.redesign.DeregisterPage;
+import pages.member_deprecated.bluelayer.HSIDLoginPage;
+import pages.member_deprecated.redesign.DeregisterPage;
+import pages.memberredesign_deprecated.bluelayer.AccountHomePage;
 import pages.redesign.HsidLoginPage;
 import pages.redesign.HsidRegistrationConfirmInformation;
 import pages.redesign.HsidRegistrationPersonalCreateAccount;
