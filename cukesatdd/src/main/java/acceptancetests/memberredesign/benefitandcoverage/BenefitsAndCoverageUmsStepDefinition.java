@@ -22,10 +22,10 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
-import pages.member.bluelayer.AccountHomePage;
-import pages.member.bluelayer.BenefitsAndCoveragePage;
-import pages.member.bluelayer.LoginPage2;
-import pages.member.ulayer.ValueAddedServicepage;
+import pages.member_deprecated.bluelayer.AccountHomePage;
+import pages.member_deprecated.bluelayer.BenefitsAndCoveragePage;
+import pages.member_deprecated.bluelayer.LoginPage2;
+import pages.member_deprecated.ulayer.ValueAddedServicepage;
 
 /**
  * Functionality: Benefits and Coverage page

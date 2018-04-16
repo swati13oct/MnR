@@ -22,10 +22,10 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
-import pages.dashboard.member.ulayer.ClaimDetailsPage;
-import pages.dashboard.member.ulayer.ClaimSummarypage;
-import pages.member.ulayer.AccountHomePage;
-import pages.member.ulayer.LoginPage;
+import pages.dashboard_deprecated.member.ulayer.ClaimDetailsPage;
+import pages.dashboard_deprecated.member.ulayer.ClaimSummarypage;
+import pages.member_deprecated.ulayer.AccountHomePage;
+import pages.member_deprecated.ulayer.LoginPage;
 
 /**
  Functionality : Validating the Claims Summary & Claims Details Page on the redesigned site.

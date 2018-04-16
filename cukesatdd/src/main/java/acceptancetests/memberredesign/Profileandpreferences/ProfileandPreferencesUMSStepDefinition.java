@@ -24,9 +24,9 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
-import pages.member.bluelayer.AccountHomePage;
-import pages.member.bluelayer.LoginPage2;
-import pages.member.bluelayer.ProfilePreferencesPage;
+import pages.member_deprecated.bluelayer.AccountHomePage;
+import pages.member_deprecated.bluelayer.LoginPage2;
+import pages.member_deprecated.bluelayer.ProfilePreferencesPage;
 
 /**
  * Functionality: Profile And Preferences page
@@ -458,7 +458,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	@Then("^the user validates the Phone section")
 	public void UserValidatesPhoneSection() {
-		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
+		ProfilePreferencesPage ProfilePreferencesPage = (pages.member_deprecated.bluelayer.ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
 		ProfilePreferencesPage.validatePhoneElements();
@@ -470,7 +470,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 	 */
 	@Then("^the user Clicks on the the Edit Link and validates the elements")
 	public void UserClicksEditPhoneSection() {
-		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
+		ProfilePreferencesPage ProfilePreferencesPage = (pages.member_deprecated.bluelayer.ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
 		ProfilePreferencesPage.validatePhoneEditElements();
@@ -482,7 +482,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	@Then("^the user checks the Edit Button changes to Cancel Button")
 	public void UserChecksSaveCancelButton() {
-		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
+		ProfilePreferencesPage ProfilePreferencesPage = (pages.member_deprecated.bluelayer.ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
 		ProfilePreferencesPage.validateCancelElement();
@@ -495,7 +495,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	@Then("^the user validates the functionality of save Button in Phoneeditsection")
 	public void UserValidatesPhoneSaveButton() {
-		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
+		ProfilePreferencesPage ProfilePreferencesPage = (pages.member_deprecated.bluelayer.ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
 		ProfilePreferencesPage.validatePhoneSave();
@@ -508,7 +508,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	@Then("^the user validates the functionality of Cancel Button In phoneeditSection")
 	public void UserValidatesPhoneCancelButton() {
-		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
+		ProfilePreferencesPage ProfilePreferencesPage = (pages.member_deprecated.bluelayer.ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
 		ProfilePreferencesPage.validatePhoneCancel();
@@ -520,7 +520,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 	 */
 	@Then("^the user validates the temporary address section")
 	public void tempaddress() {
-		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
+		ProfilePreferencesPage ProfilePreferencesPage = (pages.member_deprecated.bluelayer.ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
 		ProfilePreferencesPage.validatetempaddressElements();
@@ -532,7 +532,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	@Then("^the user validates the fields and Buttons of temp address section")
 	public void UserClicksEdittempaddressSection() {
-		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
+		ProfilePreferencesPage ProfilePreferencesPage = (pages.member_deprecated.bluelayer.ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
 		ProfilePreferencesPage.validatetempaddressEditElements();
@@ -544,7 +544,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	@Then("^the user checks the Edit Button on the top changes to Cancel Button")
 	public void UserChecksTopCancelButton() {
-		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
+		ProfilePreferencesPage ProfilePreferencesPage = (pages.member_deprecated.bluelayer.ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
 		ProfilePreferencesPage.validateTempAddressTopCancelElement();
@@ -562,7 +562,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	@Then("^the user validates the functionality of Cancel Button In Temporary adrress section")
 	public void UserValidatestempaddressCancelButton() {
-		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
+		ProfilePreferencesPage ProfilePreferencesPage = (pages.member_deprecated.bluelayer.ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
 		ProfilePreferencesPage.validatetempaddressCancel();
@@ -574,7 +574,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 	 */
 	@Then("^the user validates the presence of Go Paperless button")
 	public void UserValidateGoPaperlessbutton() {
-		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
+		ProfilePreferencesPage ProfilePreferencesPage = (pages.member_deprecated.bluelayer.ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
 		ProfilePreferencesPage.validateGoPaperlessbutton();
@@ -587,7 +587,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 	 */
 	@Then("^the user validates the presence of Plan Name")
 	public void UserValidatePlanName() {
-		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
+		ProfilePreferencesPage ProfilePreferencesPage = (pages.member_deprecated.bluelayer.ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
 		ProfilePreferencesPage.validatePlanName();
@@ -599,7 +599,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	@Then("^the user validates the presence of Communication preferences header")
 	public void UserValidatescommunicationpreferencesheader() {
-		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
+		ProfilePreferencesPage ProfilePreferencesPage = (pages.member_deprecated.bluelayer.ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
 		ProfilePreferencesPage.validatecommunicationpreferencesheader();
@@ -611,7 +611,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 	 */
 	@Then("^the user validates the presence of Back to Profile and Preferences links")
 	public void UserValidatesBacktoPNPlink() {
-		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
+		ProfilePreferencesPage ProfilePreferencesPage = (pages.member_deprecated.bluelayer.ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
 		ProfilePreferencesPage.validateBacktoPNPlink();
@@ -623,7 +623,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 	 */
 	@Then("^the user validates the Note section")
 	public void UserValidatesNoteSection() {
-		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
+		ProfilePreferencesPage ProfilePreferencesPage = (pages.member_deprecated.bluelayer.ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
 		ProfilePreferencesPage.validateNoteSection();
@@ -635,7 +635,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 	 */
 	@Then("^the user validates the I have read checkbox and check it")
 	public void UserValidatesCheckbox() {
-		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
+		ProfilePreferencesPage ProfilePreferencesPage = (pages.member_deprecated.bluelayer.ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
 		ProfilePreferencesPage.validateCheckbox();
@@ -647,7 +647,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 	 */
 	@Then("^the user validates the Save Preferences Button")
 	public void UserValidatesSavePreferences() {
-		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
+		ProfilePreferencesPage ProfilePreferencesPage = (pages.member_deprecated.bluelayer.ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
 		ProfilePreferencesPage.validateSavePreferences();
@@ -660,7 +660,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	@Then("^the user validates the Go Green Header")
 	public void UserValidatesGoGreenHeader() {
-		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
+		ProfilePreferencesPage ProfilePreferencesPage = (pages.member_deprecated.bluelayer.ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
 		ProfilePreferencesPage.validateGoGreenHeader();
@@ -672,7 +672,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	@Then("^the user validate the need help section for ship member")
 	public void UserValidatesNeedHelpShip() {
-		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
+		ProfilePreferencesPage ProfilePreferencesPage = (pages.member_deprecated.bluelayer.ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
 		ProfilePreferencesPage.validateNeedHelpShip();
@@ -680,7 +680,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 	}
 	@Then("^the user validates the Presence of edit button in email section")
 	public void UserValidatesEmailEditNokia() {
-		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
+		ProfilePreferencesPage ProfilePreferencesPage = (pages.member_deprecated.bluelayer.ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
 		ProfilePreferencesPage.validateEmailEditNokia();
@@ -688,7 +688,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 	}
 	@Then("^the user validates the Presence of edit button in Phone section")
 	public void UserValidatesPhoneEditNokia() {
-		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
+		ProfilePreferencesPage ProfilePreferencesPage = (pages.member_deprecated.bluelayer.ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
 		ProfilePreferencesPage.validatePhoneEditNokia();
@@ -696,7 +696,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 	}
 	@Then("^the user validates the Presence of edit button in Temporary Address section")
 	public void UserValidatesTempAddEditNokia() {
-		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
+		ProfilePreferencesPage ProfilePreferencesPage = (pages.member_deprecated.bluelayer.ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
 		ProfilePreferencesPage.validateTempAddEditNokia();
@@ -704,7 +704,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 	}
 	@Then("^the user validates the Presence of edit button in Mailing Address section")
 	public void UserValidatesMailAddEditNokia() {
-		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
+		ProfilePreferencesPage ProfilePreferencesPage = (pages.member_deprecated.bluelayer.ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
 		ProfilePreferencesPage.validateMailAddEditNokia();

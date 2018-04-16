@@ -17,10 +17,10 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
-import pages.dashboard.member.ulayer.MemberNewSignInPage;
-import pages.dashboard.member.ulayer.NewMemebrRegistrationPage;
-import pages.dashboard.member.ulayer.UsernamePasswordAssistancePage;
-import pages.member.ulayer.LoginPage;
+import pages.dashboard_deprecated.member.ulayer.MemberNewSignInPage;
+import pages.dashboard_deprecated.member.ulayer.NewMemebrRegistrationPage;
+import pages.dashboard_deprecated.member.ulayer.UsernamePasswordAssistancePage;
+import pages.member_deprecated.ulayer.LoginPage;
 
 
 public class MemberNewSignInPageStepDefinition {

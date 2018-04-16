@@ -25,11 +25,11 @@ import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.ulayer.LoginAssitanceMessagePage;
 import pages.acquisition.ulayer.PersonalIdentificationPage;
-import pages.member.ulayer.LoginAssistanceConfirmationJava;
-import pages.member.ulayer.LoginPage;
-import pages.member.ulayer.PersonalIdentificationPageNew;
-import pages.member.ulayer.PersonalIdentityUlayerPage;
-import pages.member.ulayer.UNPWAssistancePage;
+import pages.member_deprecated.ulayer.LoginAssistanceConfirmationJava;
+import pages.member_deprecated.ulayer.LoginPage;
+import pages.member_deprecated.ulayer.PersonalIdentificationPageNew;
+import pages.member_deprecated.ulayer.PersonalIdentityUlayerPage;
+import pages.member_deprecated.ulayer.UNPWAssistancePage;
 
 /**
  * @author pperugu

@@ -26,20 +26,20 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
-import pages.member.ulayer.AccountHomePage;
-import pages.member.ulayer.ConfirmOneTimePaymentPage;
-import pages.member.ulayer.LoginPage;
-import pages.member.ulayer.OneTimePaymentPage;
-import pages.member.ulayer.OneTimePaymentPageSubmitted;
-import pages.member.ulayer.OneTimePaymentSuccessPage;
-import pages.member.ulayer.OneTimePaymentsPage;
-import pages.member.ulayer.PaymentHistoryPage;
-import pages.member.ulayer.PaymentsOverview;
-import pages.member.ulayer.RallyDashboard;
-import pages.member.ulayer.ReviewOneTimePaymentsPage;
-import pages.member.ulayer.TeamCLoginUlayerPayments;
-import pages.member.ulayer.TeamHLoginUlayer;
-import pages.member.ulayer.TestHarness;
+import pages.member_deprecated.ulayer.AccountHomePage;
+import pages.member_deprecated.ulayer.ConfirmOneTimePaymentPage;
+import pages.member_deprecated.ulayer.LoginPage;
+import pages.member_deprecated.ulayer.OneTimePaymentPage;
+import pages.member_deprecated.ulayer.OneTimePaymentPageSubmitted;
+import pages.member_deprecated.ulayer.OneTimePaymentSuccessPage;
+import pages.member_deprecated.ulayer.OneTimePaymentsPage;
+import pages.member_deprecated.ulayer.PaymentHistoryPage;
+import pages.member_deprecated.ulayer.PaymentsOverview;
+import pages.member_deprecated.ulayer.RallyDashboard;
+import pages.member_deprecated.ulayer.ReviewOneTimePaymentsPage;
+import pages.member_deprecated.ulayer.TeamCLoginUlayerPayments;
+import pages.member_deprecated.ulayer.TeamHLoginUlayer;
+import pages.member_deprecated.ulayer.TestHarness;
 
 /**
  * @author pperugu
