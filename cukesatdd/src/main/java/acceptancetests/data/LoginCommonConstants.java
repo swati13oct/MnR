@@ -41,6 +41,25 @@ public class LoginCommonConstants {
 	public static final String MEMBER_BROWSER_CHECK_EXPECTED = "browserCheckExpected";
 
 	public static final String MEMBER_BENEFITS_AND_COVERAGE = "benefitsandcoverage";
+<<<<<<< HEAD
+=======
+	
+	public static final String Language = "language";
+	
+	public static final String Option = "option";
+	
+	public static final String Firstname = "firstname";
+	
+	public static final String Username = "username";
+	
+	public static final String Lastname = "lastname";
+	
+	public static final String Option1 = "option1";
+	
+	public static final String Option2 = "option2";
+	
+	public static final String Option3 = "option3";
+>>>>>>> develop
 
 	public static final String RALLY_SSO = "rallySSO";
 

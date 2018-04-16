@@ -267,7 +267,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='specialDisctServices']/div[1]/img")
 	private WebElement handimage;
 
-	@FindBy(className = "atdd-bnc-discountsubtitle")
+	@FindBy(id = "specialDisctServices")
 	private WebElement textdiscountservices;
 
 
@@ -1262,8 +1262,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	 */
 	public void vasSection() {
 
-		validate(textdiscountservices);
-		validate(headerdiscountservices);
+		 validate(textdiscountservices);
+		
 	}
 
 	/**
