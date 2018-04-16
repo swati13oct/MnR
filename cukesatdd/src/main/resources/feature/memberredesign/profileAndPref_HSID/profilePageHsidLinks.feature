@@ -1,4 +1,4 @@
-@thePredators @AprilRelease2018
+@thePredators @AprilRelease2018 @US980034
 Feature: To test Profile Page Post Hsid Login
 
   @ProfilePageHSIDLinks

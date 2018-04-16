@@ -23,6 +23,7 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.member.bluelayer.AccountHomePage;
 import pages.member.bluelayer.BenefitsAndCoveragePage;
@@ -1090,7 +1091,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	}
 	
 	/** 
-	 * @toDo : Validates the Drug costs table  for  a group member
+	 * @toDo : Validates the Drug costs table  for  a City Of Hartford group member
 	 * @author mrani101
 	 */
 	@And("the user validates City of Hartford prescription Drug Benefits table")
@@ -1101,7 +1102,19 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		planBenefitsCoverage.validatehartfortprescriptiondrugtable();
 						
 	}
-
+	
+	/** 
+	 * @toDo : Validates the Drug costs table  for  a  Town Of Greenwich group member
+	 * @author mrani101
+	 */
+	@And("the user validates Town Of Greenwich table")
+	public void user_validate_TownOfGreenwich_drugtable() {
+				
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.validateTownOfGreenwichdrugtable();
+						
+	}
 	
 	
 }

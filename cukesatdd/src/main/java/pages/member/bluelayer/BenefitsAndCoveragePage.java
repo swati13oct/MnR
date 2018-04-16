@@ -294,6 +294,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	
 	@FindBy(xpath = ".//*[@id='drug-benefits']/div[5]/div[10]/div/div[1]/div/div")
 	private WebElement hartfortdrugtable;
+	@FindBy(className = "atdd-bnc-CTgrouptable")
+	private WebElement GreenwichTable;
 	
 	public static final String learnmorestagetext_xpath = ".//*[@id='collapseStages']";
 
@@ -1376,6 +1378,18 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			// TODO Auto generated catch block
 			e.printStackTrace();
 		}
-		validate(hartfortdrugtable);
+		validateNew(hartfortdrugtable);
 	}
+	
+	public void validateTownOfGreenwichdrugtable() {
+		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto generated catch block
+			e.printStackTrace();
+		}
+		validateNew(GreenwichTable);
+	}
+
 }
