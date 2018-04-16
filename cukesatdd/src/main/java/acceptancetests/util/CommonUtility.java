@@ -32,6 +32,7 @@ import junit.framework.Assert;
  * @author pjaising
  *
  */
+@SuppressWarnings("deprecation")
 public class CommonUtility {
 
 	private static String MRREST_TIME_ADMIN_URL = MRConstants.MRREST_TIME_ADMIN_URL;

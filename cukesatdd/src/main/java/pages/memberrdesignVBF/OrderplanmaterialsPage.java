@@ -20,21 +20,6 @@ import atdd.framework.UhcDriver;
  */
 public class OrderplanmaterialsPage extends UhcDriver {
 
-	@FindBy(xpath = "//a[contains(text(), 'Medicare Advantage Plan')]")
-	private WebElement MAPlanTab;
-
-	@FindBy(xpath = "//a[contains(text(), 'Hospital Indemnity')]")
-	private WebElement HIPplanTab;
-
-	@FindBy(xpath = "//a[contains(text(), 'Medicare Prescription Drug Plan')]")
-	private WebElement PDPPlanTab;
-
-	@FindBy(xpath = "//a[contains(text(), 'Medicare Supplement Insurance Plan')]")
-	private WebElement MedSuppPlanTab;
-
-	@FindBy(xpath = "//a[contains(text(), 'Senior Supplement Plan')]")
-	private WebElement SrSuppTab;
-
 	@FindBy(xpath = "//*[@id = 'member-materials']/..")
 	private WebElement memberMaterialsfield;
 
@@ -48,9 +33,6 @@ public class OrderplanmaterialsPage extends UhcDriver {
 	private WebElement EFTbrochureField;
 
 	@FindBy(id = "order-materials-error")
-	private WebElement SHIPerrorMsg;
-
-	@FindBy(id = "order-materials-error")
 	private WebElement OrderMaterialsErrorMsg;
 
 	@FindBy(xpath = "//*[@id = 'ppe-id']/..")
@@ -59,23 +41,11 @@ public class OrderplanmaterialsPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id = 'couponBook-id']/..")
 	private WebElement couponBook;
 
-	@FindBy(xpath = "//*[@id = 'medicareHospital-id']/..")
-	private WebElement medicareHospital;
-
 	@FindBy(xpath = "//*[@id = 'claimsEnvelope-id']/..")
 	private WebElement claimsEnvelope;
 
 	@FindBy(xpath = "//*[@id = 'coi-id']/..")
 	private WebElement certificateInsurance;
-
-	@FindBy(xpath = "//label[@for='member-materials']")
-	private WebElement radiokitLink;
-
-	@FindBy(xpath = "//p[contains(text(),'Replacement ID card')]")
-	private WebElement radioidLink;
-
-	@FindBy(xpath = "//h3[contains(text(),'Technical Support') or contains(text(),'Plan Support')]/ancestor::div[@class='col-md-4']")
-	private WebElement needhelpcomponent;
 
 	@FindBy(id = "submit-order-materials")
 	private WebElement submitButton;
@@ -85,21 +55,6 @@ public class OrderplanmaterialsPage extends UhcDriver {
 
 	@FindBy(id = "additionalMaterialsText")
 	private WebElement OrderConfirmation_addordermaterialLink;
-
-	@FindBy(className = "orderplanmaterials")
-	private WebElement OrderPlanMaterialsSection;
-
-	@FindBy(id = "state")
-	private WebElement shipDocumentStateCodeId;
-
-	@FindBy(id = "disclosure_link")
-	private WebElement logOut;
-
-	@FindBy(id = "addAnotherPlanLink")
-	private WebElement addPlansTab;
-
-	@FindBy(className = "selected")
-	private WebElement orderMaterial;
 
 	@FindBy(xpath = "//h1[@class='h4 margin-none']")
 	private WebElement orderMaterialHeading1;
