@@ -158,7 +158,7 @@ public class MemberLoginStepDefinition {
 		System.out.println("Current category: " + category);
 
 		System.out.println("Current URL: " + wd.getCurrentUrl());
-		switch (category) {
+		/*switch (category) {
 		case "UhcMapdInd":
 			Assert.assertTrue(wd.getCurrentUrl().contains("/medicare/dashboard"));
 			break;
@@ -180,8 +180,9 @@ public class MemberLoginStepDefinition {
 			break;
 		default:
 			System.out.println("Please specifiy a specific member type ");
-
-		}
+			}
+*/
+		
 
 	}
 

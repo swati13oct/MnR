@@ -2,7 +2,7 @@
 Feature:1.19-To test Locate a Pharmacy in acqusition flow UMS site TEST1
 @pharmacySearch
 Scenario Outline:To verify available pharmacies in UMS site
-Given the user is on the UMS Medicare Site landing page
+Given the user is on the UHC medicare solutions site landing page
 When the user hovers to Our Plans and select Request More Help and Information for following plan type
 	| <plantype> |
 When the user navigates to pharmacy search page in UMS Site
@@ -22,7 +22,7 @@ Examples:
 	
 @pharmacySearchPage
 Scenario Outline:To verify available pharmacies for particular pharmacy types in UMS site
-Given the user is on the UMS Medicare Site landing page
+Given the user is on the UHC medicare solutions site landing page
 When the user hovers to Our Plans and select Request More Help and Information for following plan type
 	| <plantype> |
 When the user navigates to pharmacy search page in UMS Site
@@ -44,7 +44,7 @@ Examples:
 	
 @validateError
 Scenario Outline:To verify error message for no results found for pharmacy type in UMS site
-Given the user is on the UMS Medicare Site landing page
+Given the user is on the UHC medicare solutions site landing page
 When the user hovers to Our Plans and select Request More Help and Information for following plan type
 	| <plantype> |
 When the user navigates to pharmacy search page in UMS Site

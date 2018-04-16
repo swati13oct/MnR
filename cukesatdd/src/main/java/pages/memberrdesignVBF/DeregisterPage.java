@@ -34,7 +34,7 @@ public class DeregisterPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		String environment = MRScenario.environment;
-		switch (environment.toUpperCase()) {
+		/*switch (environment.toUpperCase()) {
 		case "TEAMCI-1":
 			PAGE_URL = MRConstants.TEANCI_DEREGISTER_URL;
 			break;
@@ -49,7 +49,7 @@ public class DeregisterPage extends UhcDriver {
 			break;
 		default:
 			System.out.println("Please check environment");
-		}
+		}*/
 		System.out.println("URL:" + PAGE_URL);
 		startNew(PAGE_URL);
 	}

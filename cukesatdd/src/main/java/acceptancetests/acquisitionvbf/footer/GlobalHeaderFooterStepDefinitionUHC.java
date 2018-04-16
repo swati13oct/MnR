@@ -1,10 +1,16 @@
 package acceptancetests.acquisitionvbf.footer;
 
+import gherkin.formatter.model.DataTableRow;
+
+import java.util.List;
+import java.util.Map;
+
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.acquisitionvbf.common.CommonStepDefinition;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
@@ -31,20 +37,8 @@ public class GlobalHeaderFooterStepDefinitionUHC {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
+	
 
-	/**
-	 * @toDo:the user is on the UHC Medicaresolutions Site
-	 */
-	@Given("^the user is on the UHC Medicaresolutions Site$")
-	public void the_user_on_UHC_Medicaresolutions_Site() {
-		WebDriver wd = getLoginScenario().getWebDriver();
-
-		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
-
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
-				aquisitionhomepage);
-	}
 
 	/**
 	 * @toDo:user accesses global footer

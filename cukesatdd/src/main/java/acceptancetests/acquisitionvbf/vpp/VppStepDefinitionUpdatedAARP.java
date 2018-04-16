@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.acquisitionvbf.common.CommonStepDefinition;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
@@ -35,34 +36,20 @@ public class VppStepDefinitionUpdatedAARP {
 		return loginScenario;
 	}
 
-	/**
-	 * @toDo:user is on AARP medicare acquisition site landing page
-	 */
-	@Given("^the user is on AARP medicare acquisition site landing page$")
-	public void the_user_on_aarp_medicaresolutions_Site() {
-		WebDriver wd = getLoginScenario().getWebDriver();
-		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
-
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
-				aquisitionhomepage);
-	}
-
+	private Map<String, String> memberAttributesMap =null;
+	
+	private List<DataTableRow> memberAttributesRow = new CommonStepDefinition().getAttributesRow();
+	
 	/**
 	 * @toDo: user performs plan search using following information
 	 */
 	@When("^the user performs plan search using following information in the AARP site$")
-	public void zipcode_details_in_aarp_site(DataTable givenAttributes) {
-
-		List<DataTableRow> memberAttributesRow = givenAttributes
-				.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
-
+	public void zipcode_details_in_aarp_site() {
+		 if(memberAttributesRow.size()>0){
+		        for (int i = 0; i < memberAttributesRow.size(); i++) {
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		        }
+	        }
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String county = memberAttributesMap.get("County Name");
 		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
@@ -104,17 +91,13 @@ public class VppStepDefinitionUpdatedAARP {
 	 * @toDo:user views the plans of the below plan type 
 	 */
 	@And("^the user views the plans of the below plan type in AARP site$")
-	public void user_performs_planSearch_in_aarp_site(DataTable givenAttributes) {
-		List<DataTableRow> givenAttributesRow = givenAttributes
-				.getGherkinRows();
-		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}
-
-		String plantype = givenAttributesMap.get("Plan Type");
+	public void user_performs_planSearch_in_aarp_site() {
+		 if(memberAttributesRow.size()>0){
+		        for (int i = 0; i < memberAttributesRow.size(); i++) {
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		        }
+	        }
+		String plantype = memberAttributesMap.get("Plan Type");
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
@@ -135,6 +118,7 @@ public class VppStepDefinitionUpdatedAARP {
 	 */
 	@And("^I select all 3 plans to compare in MA and click on compare plan link$")
 	public void I_select_all_3_plans_to_compare(){
+		
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.clickonViewPlans();
@@ -166,9 +150,12 @@ public class VppStepDefinitionUpdatedAARP {
 	 * @toDo:user view plan details of the above selected plan in AARP site and validates
 	 */
 	@When("^the user view plan details of the above selected plan in AARP site and validates$")
-	public void user_views_plandetails_selected_plan_aarp(DataTable givenAttributes) {
-		List<DataTableRow> memberAttributesRow = givenAttributes
-				.getGherkinRows();
+	public void user_views_plandetails_selected_plan_aarp() {
+		 if(memberAttributesRow.size()>0){
+		        for (int i = 0; i < memberAttributesRow.size(); i++) {
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		        }
+	        }
 		String planName = memberAttributesRow.get(0).getCells().get(1);
 		getLoginScenario().saveBean(
 				VPPCommonConstants.PLAN_NAME,planName);
@@ -212,16 +199,13 @@ public class VppStepDefinitionUpdatedAARP {
 	 * @toDo:user validates plan summary for the below plan
 	 */
 	@And("^the user validates plan summary for the below plan in the AARP site$")
-	public void user_validates_plan_summary(DataTable planAttributes) {
-		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
-		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}
-
-		String planName = givenAttributesMap.get("Plan Name");
+	public void user_validates_plan_summary() {
+		 if(memberAttributesRow.size()>0){
+		        for (int i = 0; i < memberAttributesRow.size(); i++) {
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		        }
+	        }
+		String planName = memberAttributesMap.get("Plan Name");
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);

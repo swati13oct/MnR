@@ -3,7 +3,7 @@
 @globalfooterAARP
 Feature:2.04-VBF-Acq-To test global footer links in AARP site
 Scenario:To verify links displayed in the global footer of AARP site
-Given user is on acquisition home page of AARP Site
+Given the user is on AARP medicare acquisition site landing page
 When user accesses global footer of the AARP Medicare Plans home page 
 And user clicks on Aboutus link from footer of the AARP Medicare Plans home page
 And user clicks on contactus link of aboutus page
