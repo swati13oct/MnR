@@ -1,4 +1,4 @@
-package pages.memberrdesignVBF;
+/*package pages.memberrdesignVBF;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,19 +7,18 @@ import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
 
-/**
+*//**
  * @author akuma103
- */
+ *//*
 public class DeregisterPage extends UhcDriver {
 
-	/** The Deregister page url for team - g. */
+	*//** The Deregister page url for team - g. *//*
 	//private static String PAGE_URL;
-
-	/** The user Id to be deregistered. */
+	*//** The user Id to be deregistered. *//*
 	@FindBy(id = "tobederegisteruser")
 	private WebElement enterUserName;
 
-	/** The deregister button. */
+	*//** The deregister button. *//*
 	@FindBy(xpath = "//*[@id='deregisterform']/input[2]")
 	private WebElement deregisterButton;
 
@@ -28,9 +27,8 @@ public class DeregisterPage extends UhcDriver {
 		PageFactory.initElements(driver, this);
 		openAndValidate();
 	}
-
-	@Override
-	public void openAndValidate() {/*
+	
+	public void openAndValidate() {
 		String environment = MRScenario.environment;
 		/*switch (environment.toUpperCase()) {
 		case "TEAMCI-1":
@@ -47,10 +45,10 @@ public class DeregisterPage extends UhcDriver {
 			break;
 		default:
 			System.out.println("Please check environment");
-		}*/
+		}
 		System.out.println("URL:" + PAGE_URL);
 		startNew(PAGE_URL);
-	*/}
+	}
 
 	public void deregisterUser(String userId) {
 		enterUserName.sendKeys(userId);
@@ -59,3 +57,4 @@ public class DeregisterPage extends UhcDriver {
 	}
 
 }
+*/
