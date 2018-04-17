@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import atdd.framework.UhcDriver;
 
@@ -27,8 +29,8 @@ public class HsidRegistrationPersonalInformationPage extends UhcDriver {
 	public WebElement memberId;
 
 	////button[contains(.,'Register now')]
-	@FindBy(xpath = "html/body/div[1]/div/div[2]/flex[2]/flex-content[1]/div/form/div/div[2]/p/button")
-	public WebElement continuebtn;
+    @FindBy(xpath = "html/body/div[1]/div/div[2]/flex[2]/flex-content[1]/div/form/div/div[2]/p/button")
+    public WebElement continuebutton;
 	
 	@FindBy(xpath = "//label[@for='piFirstName']/span[@class='error']")
 	private WebElement firstNameErrorMsg;
@@ -78,7 +80,7 @@ public class HsidRegistrationPersonalInformationPage extends UhcDriver {
 		validate(dob);
 		validate(zipCode);
 		validate(memberId);
-		validate(continuebtn);
+		validate(continuebutton);
 	}
 	
 	public void populatefields(String firstName, String lastName, String dob,String zipcode, String memberId){
@@ -97,7 +99,7 @@ public class HsidRegistrationPersonalInformationPage extends UhcDriver {
 	}
 	
 	public HsidRegistrationPersonalCreateAccount clickContinue(){
-		continuebtn.click();
+		continuebutton.click();
 
 		while(!currentUrl().contains("register/createAccount")){
 			System.out.println("create account page is loading");
@@ -118,6 +120,9 @@ public class HsidRegistrationPersonalInformationPage extends UhcDriver {
 	}
 	
 	public void clickContinueAndValidate(){
+		WebDriverWait wait = new WebDriverWait(driver,20);
+		
+		WebElement continuebtn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("html/body/div[1]/div/div[2]/flex[2]/flex-content[1]/div/form/div/div[2]/p/button")));
 		continuebtn.click();
 	}
 	

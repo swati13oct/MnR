@@ -120,7 +120,7 @@ MRScenario loginScenario;
 		signInButton.click();
 		
 		try {
-			Thread.sleep(20000);
+			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -139,6 +139,8 @@ MRScenario loginScenario;
 				e.printStackTrace();
 			}
 		}
+		
+		
 		
 		else if(currentUrl().contains("testharness.html") || currentUrl().contains("/dashboard"))
 		{
@@ -160,12 +162,12 @@ MRScenario loginScenario;
 		} 
 		
 		try {
-			Thread.sleep(20000);
-		} catch (InterruptedException e) 
-		{
-		// TODO Auto-generated catch block
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	   
 		if(currentUrl().contains("testharness.html") || currentUrl().contains("/dashboard"))
         {
 			System.out.println("test");
@@ -181,6 +183,11 @@ MRScenario loginScenario;
 
 		
 
+		return null;
+	}
+
+	private char[] getcurrenturl() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 	}
