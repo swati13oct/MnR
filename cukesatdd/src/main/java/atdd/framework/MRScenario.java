@@ -836,7 +836,7 @@ public class MRScenario {
                                              * for local
                                              */
 
-/*                                         String phantomjs = System.getProperty("phantomjs");
+                /*                         String phantomjs = System.getProperty("phantomjs");
                                              String agent = "Mozilla/5.0 (Linux; U; Android 2.3.3; en-us; LG-LU3000 Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
                                              DesiredCapabilities caps = new DesiredCapabilities();
                                              if (StringUtils.isBlank(phantomjs)) {
@@ -871,8 +871,8 @@ public class MRScenario {
                               webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
                               //webDriver.manage().window().maximize();
                               return webDriver;
-               }
-                public WebDriver getWebDriver() {
+               }*/
+              
             	DesiredCapabilities capabilities = DesiredCapabilities.firefox();
                    
                    capabilities.setCapability("platform", "Windows 7");
