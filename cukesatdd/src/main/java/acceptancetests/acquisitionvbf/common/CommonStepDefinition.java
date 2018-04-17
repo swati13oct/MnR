@@ -56,8 +56,8 @@ public class CommonStepDefinition {
 	/**
 	 * @toDo:user is on blayer medicare
 	 */
-	@Given("^the user is on the UHC medicare solutions site landing page$")
-	public void the_user_is_on_UMS_medicare_site_landing_page() {
+	@Given("^the user is on the UHC medicare solutions site home page$")
+	public void the_user_is_on_UMS_medicare_solutions_site_home_page() {
 
 		WebDriver wd = getLoginScenario().getWebDriver();
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
