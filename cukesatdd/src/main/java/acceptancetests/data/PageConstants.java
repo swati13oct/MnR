@@ -579,6 +579,8 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 
 
 	public static final String Payments_History_Page =  "paymentHistoryPage";
+	
+	public static final String DashPage =  "DashboradPage";
 
 	public static final String One_Time_Payments_Page = "oneTimePaymentPage";
 

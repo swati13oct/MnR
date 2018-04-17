@@ -48,10 +48,7 @@ public class PaymentHistoryPage extends UhcDriver{
 	private WebElement onetimepaymentbtn;
 	
 	@FindBy(linkText= "Make a Payment")
-	private WebElement paymentslink;
-	
-
-	
+	private WebElement paymentslink;	
 	
 	@FindBy(xpath = "/html/body/div[6]/div/div/table/tbody/tr[5]/td/div[2]/div/div/div[2]/div[7]/div/div/div[1]/div[2]/div/div[2]/div[2]/a/div[2]/p")
 	private WebElement showPaymentHistory;
@@ -104,7 +101,19 @@ public class PaymentHistoryPage extends UhcDriver{
 	@FindBy(xpath = "//a[contains(text(),'Claims & Accounts')]")
 	private WebElement claimslink;
 	
+	@FindBy(xpath="//*[@id='IPEinvL']/map/area[3]")
+	private WebElement iPerceptionAutoPopUp;
+	
+	@FindBy(xpath="//*[@id='editAutomaticPaymentsModal']//div[@class='modal-footer']/a[1]")
+	private WebElement SetUpNewPayment;	
+	
+	@FindBy(id = "editAutomaticPaymentButton")
+	private WebElement AutoPayButton;
+	
+	@FindBy(xpath = "//*[@class='payment-method-btn'][2]/a")
+	private WebElement SetUpAutoPayButton;
 
+	
 	private PageData paymentHistory;
 	
 	public JSONObject paymentHistoryJson;
@@ -321,9 +330,51 @@ public class PaymentHistoryPage extends UhcDriver{
 		else {
 			return null;
 		}
-	 
-	   
+	    
 		    }
+	 
+public OneTimePaymentPage AutoPay(){
+		 
+		 if(validate(iPerceptionAutoPopUp)) {
+			 iPerceptionAutoPopUp.click();
+	    	}
+	    	else  {
+	    		System.out.println("iPerception Pop Up not displayed");
+	    	}
+		 
+		 try{
+			 if(SetUpAutoPayButton.isDisplayed())
+			 {
+				 SetUpAutoPayButton.click();
+				 System.out.println("clicked on Setup New Payment button");
+				 return new  OneTimePaymentPage(driver);
+			 }
+			 else
+			 {
+				 System.out.println("No Setup Automatic Payment Button, looking for Edit auto payment button");
+			 }
+			 
+		 }catch(Exception e)
+		 {
+			 System.out.println("No Edit payment button exists");
+		 }		
+		 
+		 waitforElement(AutoPayButton);  		
+			AutoPayButton.click();
+		
+		 waitforElement(SetUpNewPayment);
+		 
+		 if (validate(SetUpNewPayment)){
+			 SetUpNewPayment.click();
+			 System.out.println("clicked on Setup New Payment button");		 
+		 return new  OneTimePaymentPage(driver);		 
+		 }
+		 else
+		 return null;
+}
 		
 }
+
+		
+
 

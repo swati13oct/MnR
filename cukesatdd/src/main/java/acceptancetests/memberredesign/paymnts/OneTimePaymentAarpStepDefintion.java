@@ -1,6 +1,3 @@
-
-
-
 package acceptancetests.memberredesign.paymnts;
 
 import gherkin.formatter.model.DataTableRow;
@@ -134,10 +131,32 @@ public class OneTimePaymentAarpStepDefintion {
       if (paymentHistoryPage!=null){
     	     	  getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
 			System.out.println("user is on one time payment page"); 
-      }
-		
+      }	
 
 	}
+	
+	@When("^the user navigates to Recurring payment history$")
+	public void user_views_Recurring_payment_history() throws InterruptedException {
+		pages.member.bluelayer.AccountHomePage AHPage = (pages.member.bluelayer.AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+		AHPage = AHPage.navigateToAutoPaymentHistoryPage();
+		
+      if (AHPage!=null){
+    	     	  getLoginScenario().saveBean(PageConstants.DashPage, AHPage);
+			System.out.println("User is on Recurring Payment History");
+      }
+      
+	}
+	
+	@Then("^User Scrolls down to validate Payment History and Scrolls up$")
+	public void Validate_History_Payment() throws InterruptedException{
+		pages.member.bluelayer.AccountHomePage AHPage = (pages.member.bluelayer.AccountHomePage) getLoginScenario().getBean(PageConstants.DashPage);
+		PaymentHistoryPage paymentHistoryPage = AHPage.scrollDownAndUp();
+		if (paymentHistoryPage!=null){
+	     	  getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
+		System.out.println("user has scrolled up"); 
+}
+	}
+	
 	
 	@And("^the user clicks on Make One Time Payment button$")
 		public void click_on_OTP_btn(){
@@ -152,8 +171,17 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 	
 
-
+	@And("^the user clicks on Edit Automatic Payment button$")
+	public void click_on_Recurring_btn(){
+		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
+		OneTimePaymentPage oneTimePayment = paymenthistory.AutoPay();
 		
+		if(oneTimePayment!=null){
+			getLoginScenario().saveBean(PageConstants.One_Time_Payments_Page, oneTimePayment);
+			System.out.println("user is on one time payment page");	
+		}
+		
+	}	
 	
 	
 	@And("^the user makes one time payment in AARP site$")
@@ -176,6 +204,25 @@ public class OneTimePaymentAarpStepDefintion {
 		getLoginScenario().saveBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD,confirmOneTimePaymentPage);
 
 	}
+	
+	@And("^the user makes auto payment in AARP site$")
+	public void makes_auto_payment_aarp(DataTable givenAttributes) {			
+		
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+		    memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}		
+		
+		OneTimePaymentPage oneTimePayment = (OneTimePaymentPage) getLoginScenario().getBean(PageConstants.One_Time_Payments_Page);
+		
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = oneTimePayment.enterAutoPaymentDetails(memberAttributesMap);
+		
+
+		getLoginScenario().saveBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD,confirmOneTimePaymentPage);
+
+	}
+
 	
 	@And("^the user confirms the payment in AARP site$")
 	public void confirms_payment_aarp() {
@@ -207,6 +254,21 @@ public class OneTimePaymentAarpStepDefintion {
 				PaymentCommonConstants.ONE_TIME_PAYMENT_SUCCESS_ACTUAL,
 				oneTimePaymentSuccessActualJson);
 
+	}
+	
+	@And("^the user confirms the Autopayment in UHC site$")
+	public void confirms_payment_uhc() throws InterruptedException {
+		ConfirmOneTimePaymentPage confirmOneTimePaymentsuccesspage = (ConfirmOneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD);	
+		
+		OneTimePaymentSuccessPage oneTimePaymentSuccessPage = confirmOneTimePaymentsuccesspage.confirmsAutoPayment();
+        
+		if (oneTimePaymentSuccessPage != null) {
+			getLoginScenario().saveBean(
+					PageConstantsMnR.ONE_TIME_PAYMENT_SUCCESS_PAGE,
+					oneTimePaymentSuccessPage);
+			Assert.assertTrue(true);
+	}
 	}
 	
 	
