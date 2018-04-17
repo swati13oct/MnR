@@ -123,10 +123,10 @@ public class PharmacySearchPage extends UhcDriver {
 	//@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[2]/div/div[@class='collapse-wrapper']/div")
 	WebElement mapView;
 
-	@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[2]/div/ul[@class='pharmacy-list']")
+	@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[2]/div/ol[@class='pharmacy-list']")
 	WebElement pharmacyList;
 
-	@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[2]/div/ul[@class='pharmacy-list']/li")
+	@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[2]/div/ol[@class='pharmacy-list']/li")
 	List<WebElement> pharmacyListItems;
 	
 	@FindBys(value = { @FindBy(xpath = "//ul[1][@class='filter-list']/li/label") })
