@@ -1,7 +1,5 @@
 package acceptancetests.acquisitionvbf.enrollinplan;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,9 +7,20 @@ import java.util.Map;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.acquisitionvbf.vpp.VPPCommonConstants;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageConstants;
+import atdd.framework.MRScenario;
+import cucumber.api.DataTable;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.AdditionalInformationPage;
 import pages.acquisition.bluelayer.BeneficiaryInformationPage;
@@ -21,14 +30,7 @@ import pages.acquisition.bluelayer.PlanInformationPage;
 import pages.acquisition.bluelayer.ReviewApplicationPage;
 import pages.acquisition.bluelayer.SubmitApplicationPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
-import pages.acquisition.ulayer.IntroductionInformationPage;import acceptancetests.acquisitionvbf.common.CommonStepDefinition;
-import acceptancetests.acquisitionvbf.vpp.VPPCommonConstants;
-import acceptancetests.data.PageConstants;
-import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import pages.acquisition.ulayer.IntroductionInformationPage;
 
 /**
  *Functionality: Enroll In Plan
@@ -41,21 +43,36 @@ public class EnrollInPlanStepDefinitionUHC {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-	
-	private Map<String, String> memberAttributesMap =null;
-	
-	private List<DataTableRow> memberAttributesRow = new CommonStepDefinition().getAttributesRow();
-	
+
+	/**
+	 * @toDo:user is on the UHC medicare solutions landing page
+	 */
+	@Given("^the user is on the UHC medicare solutions landing page$")
+	public void the_user_on_UHC_Medicaresolutions_Site() {
+		WebDriver wd = getLoginScenario().getWebDriver();
+
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
+
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+				aquisitionhomepage);
+	}
+
 	/**
 	 * @toDo:user performs plan search using following information
 	 */
 	@When("^user performs plan search using following information in UHC site$")
 	public void zipcode_details_in_uhc_site(DataTable givenAttributes) {
-		if(memberAttributesRow.size()>0){
-		        for (int i = 0; i < memberAttributesRow.size(); i++) {
-		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
-		        }
-	        }
+
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String county = memberAttributesMap.get("County Name");
 		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
@@ -112,13 +129,17 @@ public class EnrollInPlanStepDefinitionUHC {
 	 * @toDo:user views plans of the below plan type
 	 */
 	@And("^the user views plans of the below plan type in UHC site$")
-	public void user_performs_planSearch_in_aarp_site() {
-		if(memberAttributesRow.size()>0){
-	        for (int i = 0; i < memberAttributesRow.size(); i++) {
-	               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
-	        }
-        }
-		String plantype = memberAttributesMap.get("Plan Type");
+	public void user_performs_planSearch_in_aarp_site(DataTable givenAttributes) {
+		List<DataTableRow> givenAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String plantype = givenAttributesMap.get("Plan Type");
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
@@ -139,8 +160,8 @@ public class EnrollInPlanStepDefinitionUHC {
 	 * @toDo: user enrolls for the below plan 
 	 */
 	@And("^the user enrolls for the below plan in UHC site$")
-	public void user_enrolls_for_plan() {
-		String planName = memberAttributesRow.get(0).getCells()
+	public void user_enrolls_for_plan(DataTable planAttributes) {
+		String planName = planAttributes.getGherkinRows().get(0).getCells()
 				.get(0);
 		getLoginScenario().saveBean(EnrollInPlanCommonConstants.PLAN_NAME,
 				planName);
@@ -168,8 +189,8 @@ public class EnrollInPlanStepDefinitionUHC {
 	 * @toDo:user select the answer of this question Do you have End-Stage Renal Disease
 	 */
 	@And("^the user select the answer of this question Do you have End-Stage Renal Disease in UHC site$")
-	public void user_selects_answer_esrd_question() {
-		String answer = memberAttributesRow.get(0).getCells().get(0);
+	public void user_selects_answer_esrd_question(DataTable attributes) {
+		String answer = attributes.getGherkinRows().get(0).getCells().get(0);
 		String planName = (String) getLoginScenario().getBean(EnrollInPlanCommonConstants.PLAN_NAME);
 		if(planName.contains("HMO")){
 			PlanInformationPage planInformationPage = (PlanInformationPage) getLoginScenario()
@@ -205,52 +226,58 @@ public class EnrollInPlanStepDefinitionUHC {
 	 */
 	@And("^the user fill following information in beneficiary information step in UHC site$")
 	public void user_fill_information_beneficiary_information_aarp(
-			) {
-		if(memberAttributesRow.size()>0){
-	        for (int i = 0; i < memberAttributesRow.size(); i++) {
-	               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
-	        }
-        }
-		String name = memberAttributesMap.get("First Name") + " "+ memberAttributesMap.get("Middle Initial") +". "+memberAttributesMap.get("Last Name");
+			DataTable personalAttributes) {
+
+		List<DataTableRow> personalAttributesRow = personalAttributes
+				.getGherkinRows();
+		Map<String, String> personalAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < personalAttributesRow.size(); i++) {
+
+			personalAttributesMap.put(personalAttributesRow.get(i).getCells()
+					.get(0), personalAttributesRow.get(i).getCells().get(1));
+		}
+
+
+		String name = personalAttributesMap.get("First Name") + " "+ personalAttributesMap.get("Middle Initial") +". "+personalAttributesMap.get("Last Name");
 		getLoginScenario().saveBean(EnrollInPlanCommonConstants.ENROLLER_NAME,
 				name);
 		getLoginScenario().saveBean(EnrollInPlanCommonConstants.ENROLLER_DOB,
-				memberAttributesMap.get("Birth Date"));
+				personalAttributesMap.get("Birth Date"));
 
 		getLoginScenario().saveBean(EnrollInPlanCommonConstants.ENROLLER_GENDER,
-				memberAttributesMap.get("Gender"));
+				personalAttributesMap.get("Gender"));
 
 		getLoginScenario().saveBean(EnrollInPlanCommonConstants.ENROLLER_MCARENUMBER,
-				memberAttributesMap.get("Medicare Claim Number").replaceAll("-", ""));
+				personalAttributesMap.get("Medicare Claim Number").replaceAll("-", ""));
 
 		getLoginScenario().saveBean(EnrollInPlanCommonConstants.ENROLLER_ADDRESS,
-				memberAttributesMap.get("Address"));
+				personalAttributesMap.get("Address"));
 
 		getLoginScenario().saveBean(EnrollInPlanCommonConstants.ENROLLER_APARTMENT,
-				memberAttributesMap.get("Apartment"));
+				personalAttributesMap.get("Apartment"));
 
 		getLoginScenario().saveBean(EnrollInPlanCommonConstants.ENROLLER_CITY,
-				memberAttributesMap.get("City"));
+				personalAttributesMap.get("City"));
 
 		getLoginScenario().saveBean(EnrollInPlanCommonConstants.ENROLLER_ADDRESSPREFERENCE,
-				memberAttributesMap.get("Same Mailing Address"));
+				personalAttributesMap.get("Same Mailing Address"));
 
 		getLoginScenario().saveBean(EnrollInPlanCommonConstants.ENROLLER_PHNUMBER,
-				memberAttributesMap.get("Main Phone Number").replaceAll("-", ""));
+				personalAttributesMap.get("Main Phone Number").replaceAll("-", ""));
 
 		getLoginScenario().saveBean(EnrollInPlanCommonConstants.ENROLLER_OTHERPHNUMBER,
-				memberAttributesMap.get("Other Phone Number").replaceAll("-", ""));
+				personalAttributesMap.get("Other Phone Number").replaceAll("-", ""));
 
 		getLoginScenario().saveBean(EnrollInPlanCommonConstants.ENROLLER_EMAILADDRESS,
-				memberAttributesMap.get("Email Address"));
+				personalAttributesMap.get("Email Address"));
 
 		getLoginScenario().saveBean(EnrollInPlanCommonConstants.ENROLLER_LANGUAGEPREFERENCE,
-				memberAttributesMap.get("Language Preference"));
+				personalAttributesMap.get("Language Preference"));
 
 		BeneficiaryInformationPage beneficiaryInformationPage = (BeneficiaryInformationPage) getLoginScenario()
 				.getBean(PageConstants.BENEFICIARY_INFORMATION_PAGE);
 		beneficiaryInformationPage
-		.entersPersonalInformation(memberAttributesMap);
+		.entersPersonalInformation(personalAttributesMap);
 		getLoginScenario().saveBean(PageConstants.BENEFICIARY_INFORMATION_PAGE,
 				beneficiaryInformationPage);
 
@@ -297,8 +324,8 @@ public class EnrollInPlanStepDefinitionUHC {
 	 * @toDo:user select the answer for special election period in Additional Information
 	 */
 	@And("^the user select the answer for special election period in Additional Information$")
-	public void user_selects_special_election_period_in_additional_information_page() {
-		String answer = memberAttributesRow.get(0).getCells().get(0);
+	public void user_selects_special_election_period_in_additional_information_page(DataTable attributes) {
+		String answer = attributes.getGherkinRows().get(0).getCells().get(0);
 		AdditionalInformationPage additionalInformationPage = (AdditionalInformationPage) getLoginScenario()
 				.getBean(PageConstants.ADDITIONAL_INFORMATION_PAGE);
 		additionalInformationPage.answerSpecialElectionQuestion(answer);
@@ -308,8 +335,8 @@ public class EnrollInPlanStepDefinitionUHC {
 	 * @toDo:user select the answer for prescription drug coverage in Additional Information
 	 */
 	@And("^the user select the answer for prescription drug coverage in Additional Information$")
-	public void the_user_select_the_answer_for_prescription_drug_coverage_in_Additional_Information() {
-		String answer = memberAttributesRow.get(0).getCells().get(0);
+	public void the_user_select_the_answer_for_prescription_drug_coverage_in_Additional_Information(DataTable attributes) {
+		String answer = attributes.getGherkinRows().get(0).getCells().get(0);
 		AdditionalInformationPage additionalInformationPage = (AdditionalInformationPage) getLoginScenario()
 				.getBean(PageConstants.ADDITIONAL_INFORMATION_PAGE);
 		additionalInformationPage.answerPrescriptionDrugCoverageQuestion(answer);
@@ -319,8 +346,8 @@ public class EnrollInPlanStepDefinitionUHC {
 	 * @toDo:user select the answer for long-term care facility question in Additional Information
 	 */
 	@And("^the user select the answer for long-term care facility question in Additional Information$")
-	public void the_user_select_the_answer_for_long_term_care_facility_question_in_Additional_Information() {
-		String answer =memberAttributesRow.get(0).getCells().get(0);
+	public void the_user_select_the_answer_for_long_term_care_facility_question_in_Additional_Information(DataTable attributes) {
+		String answer = attributes.getGherkinRows().get(0).getCells().get(0);
 		AdditionalInformationPage additionalInformationPage = (AdditionalInformationPage) getLoginScenario()
 				.getBean(PageConstants.ADDITIONAL_INFORMATION_PAGE);
 		additionalInformationPage.answerLongTermCareQuestion(answer);
@@ -330,8 +357,8 @@ public class EnrollInPlanStepDefinitionUHC {
 	 * @toDo:user select the answer for medicaid program question in Additional Information
 	 */
 	@And("^the user select the answer for medicaid program question in Additional Information$")
-	public void the_user_select_the_answer_for_medicaid_program_question_in_Additional_Information() {
-		String answer = memberAttributesRow.get(0).getCells().get(0);
+	public void the_user_select_the_answer_for_medicaid_program_question_in_Additional_Information(DataTable attributes) {
+		String answer = attributes.getGherkinRows().get(0).getCells().get(0);
 		AdditionalInformationPage additionalInformationPage = (AdditionalInformationPage) getLoginScenario()
 				.getBean(PageConstants.ADDITIONAL_INFORMATION_PAGE);
 		additionalInformationPage.answerMedicaidProgramQuestion(answer);
@@ -341,8 +368,8 @@ public class EnrollInPlanStepDefinitionUHC {
 	 * @toDo:user select the answer for other health insurance question in Additional Information
 	 */
 	@And("^the user select the answer for other health insurance question in Additional Information$")
-	public void the_user_select_the_answer_for_other_health_insurance_question_in_Additional_Information() {
-		String answer = memberAttributesRow.get(0).getCells().get(0);
+	public void the_user_select_the_answer_for_other_health_insurance_question_in_Additional_Information(DataTable attributes) {
+		String answer = attributes.getGherkinRows().get(0).getCells().get(0);
 		AdditionalInformationPage additionalInformationPage = (AdditionalInformationPage) getLoginScenario()
 				.getBean(PageConstants.ADDITIONAL_INFORMATION_PAGE);
 		additionalInformationPage.answerOtherHealthInsuranceQuestion(answer);
@@ -352,8 +379,8 @@ public class EnrollInPlanStepDefinitionUHC {
 	 * @toDo:user select the answer for this question in supplemental benefits
 	 */
 	@And("^the user select the answer for this question \"([^\"]*)\" in supplemental benefits$")
-	public void the_user_select_the_answer_for_this_question_in_supplemental_benefits(String question) {
-		String answer = memberAttributesRow.get(0).getCells().get(0);
+	public void the_user_select_the_answer_for_this_question_in_supplemental_benefits(String question,DataTable attributes) {
+		String answer = attributes.getGherkinRows().get(0).getCells().get(0);
 		AdditionalInformationPage additionalInformationPage = (AdditionalInformationPage) getLoginScenario()
 				.getBean(PageConstants.ADDITIONAL_INFORMATION_PAGE);
 		additionalInformationPage.answerDentalSupplementQuestion(answer);
@@ -381,8 +408,8 @@ public class EnrollInPlanStepDefinitionUHC {
 	 * @toDo:user select option for plan payment options
 	 */
 	@And("the user select option for plan payment options$")
-	public void user_select_payment_options() {
-		String answer = memberAttributesRow.get(0).getCells().get(0);
+	public void user_select_payment_options(DataTable attributes) {
+		String answer = attributes.getGherkinRows().get(0).getCells().get(0);
 		AdditionalInformationPage additionalInformationPage = (AdditionalInformationPage) getLoginScenario()
 				.getBean(PageConstants.ADDITIONAL_INFORMATION_PAGE);
 		additionalInformationPage.answerPaymentOptionsQuestion(answer);
@@ -392,8 +419,8 @@ public class EnrollInPlanStepDefinitionUHC {
 	 * @toDo:user fill broker id
 	 */
 	@And("^the user fill broker id$")
-	public void user_fill_agent_or_broker_id() {
-		String brokerId = memberAttributesRow.get(0).getCells().get(0);
+	public void user_fill_agent_or_broker_id(DataTable attributes) {
+		String brokerId = attributes.getGherkinRows().get(0).getCells().get(0);
 		AdditionalInformationPage additionalInformationPage = (AdditionalInformationPage) getLoginScenario()
 				.getBean(PageConstants.ADDITIONAL_INFORMATION_PAGE);
 		additionalInformationPage.provideBrokerid(brokerId);

@@ -1,16 +1,10 @@
 package acceptancetests.acquisitionvbf.footer;
 
-import gherkin.formatter.model.DataTableRow;
-
-import java.util.List;
-import java.util.Map;
-
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.acquisitionvbf.common.CommonStepDefinition;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
@@ -37,11 +31,20 @@ public class GlobalHeaderFooterStepDefinitionAARP {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-	
-	
 
-	//moved @given statement to common stepdefinition
-		//the user is on AARP medicare acquisition site landing page
+	/**
+	 * @toDo:user is on acquisition home
+	 */
+	@Given("^user is on acquisition home page of AARP Site$")
+	public void user_is_on_acquisition_home_page_of_AARP_Site() {
+		WebDriver wd = getLoginScenario().getWebDriver();
+
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
+
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+				aquisitionhomepage);
+	}
 
 	/**
 	 * @toDo:user accesses global footer

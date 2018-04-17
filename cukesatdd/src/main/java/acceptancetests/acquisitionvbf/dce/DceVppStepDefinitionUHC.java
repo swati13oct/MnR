@@ -10,7 +10,6 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.acquisitionvbf.common.CommonStepDefinition;
 import acceptancetests.acquisitionvbf.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
@@ -44,31 +43,44 @@ public class DceVppStepDefinitionUHC {
 		return loginScenario;
 	}
 
-	private Map<String, String> memberAttributesMap =null;
-	
-	private List<DataTableRow> memberAttributesRow = new CommonStepDefinition().getAttributesRow();
-	
+	/**
+	 * @toDo: user is on UHC homepage
+	 */
+	@Given("^the user is on the UHC medicare solutions site landing page$")
+	public void landing_page_umssite() {
+		WebDriver wd = getLoginScenario().getWebDriver();
+
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
+
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+				aquisitionhomepage);
+	}
+
 	/**
 	 * @toDo:user performs drug search using the following information 
 	 */
 	@When("^the user performs drug search using the following information in UMS site$")
-	public void zipcode_and_planyear_details_ums() {
+	public void zipcode_and_planyear_details_ums(DataTable givenAttributes) {
+		List<DataTableRow> givenAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
 		String planYear = null;
-		 if(memberAttributesRow.size()>0){
-		        for (int i = 0; i < memberAttributesRow.size(); i++) {
-		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
-		        }
-	        }
-		if (memberAttributesMap.containsKey("Plan Year")) {
-			planYear = memberAttributesMap.get("Plan Year");
+		if (givenAttributesMap.containsKey("Plan Year")) {
+			planYear = givenAttributesMap.get("Plan Year");
 		} else {
 			int year = Calendar.getInstance().get(Calendar.YEAR);
 			System.out.println("year---->" + year);
 			getLoginScenario().saveBean(DceCommonConstants.PLAN_YEAR,
 					String.valueOf(year));
 		}
-		String zipCode = memberAttributesMap.get("Zip Code");
-		String county = memberAttributesMap.get("County");
+		String zipCode = givenAttributesMap.get("Zip Code");
+		String county = givenAttributesMap.get("County");
 
 		getLoginScenario().saveBean(DceCommonConstants.ZIPCODE, zipCode);
 		getLoginScenario().saveBean(DceCommonConstants.COUNTY_NAME, county);
@@ -92,8 +104,9 @@ public class DceVppStepDefinitionUHC {
 	 * @toDo:user search the drug using drug initials 
 	 */
 	@When("^the user search the drug using drug initials in UMS site$")
-	public void user_validated_drugInformation_ums() {
-		String drugInitials = memberAttributesRow.get(0).getCells().get(0);
+	public void user_validated_drugInformation_ums(DataTable givenAttributes) {
+		String drugInitials = givenAttributes.getGherkinRows().get(0)
+				.getCells().get(0);
 		AddDrugPage addDrugPage = (AddDrugPage) getLoginScenario().getBean(
 				PageConstants.ADD_DRUG_PAGE);
 		getLoginScenario().saveBean(DceCommonConstants.DRUG_NAME, drugInitials);
@@ -107,9 +120,9 @@ public class DceVppStepDefinitionUHC {
 	 * @toDo:user search for the drug 
 	 */
 	@And("^the user search for the drug in UMS site$")
-	public void search_drug_ums(){
+	public void search_drug_ums(DataTable givenAttributes){
 
-		String drugInitials = memberAttributesRow.get(0)
+		String drugInitials = givenAttributes.getGherkinRows().get(0)
 				.getCells().get(0);
 		AddDrugPage addDrugPage = (AddDrugPage) getLoginScenario().getBean(
 				PageConstants.ADD_DRUG_PAGE);
@@ -138,9 +151,10 @@ public class DceVppStepDefinitionUHC {
 	 * @toDo:user selects following drug
 	 */
 	@And("^the user selects following drug in UMS site$")
-	public void user_selects_drugname_druglist_ums() {
+	public void user_selects_drugname_druglist_ums(DataTable drugNameAttributes) {
 
-		String drugName = memberAttributesRow.get(0).getCells().get(0);
+		String drugName = drugNameAttributes.getGherkinRows().get(0).getCells()
+				.get(0);
 
 		getLoginScenario().saveBean(DceCommonConstants.DRUG_NAME, drugName);
 		AddDrugPage addDrugPage = (AddDrugPage) getLoginScenario().getBean(
@@ -159,9 +173,10 @@ public class DceVppStepDefinitionUHC {
 	 * @toDo:user selects the drug from the dropdown
 	 */
 	@And("^the user selects the drug from the dropdown in UMS site$")
-	public void select_drug_ums(){
+	public void select_drug_ums(DataTable drugNameAttributes){
 
-		String drugName = memberAttributesRow.get(0).getCells().get(0);
+		String drugName = drugNameAttributes.getGherkinRows().get(0).getCells()
+				.get(0);
 
 		getLoginScenario().saveBean(DceCommonConstants.DRUG_NAME, drugName);
 		AddDrugPage addDrugPage = (AddDrugPage) getLoginScenario().getBean(
@@ -195,10 +210,11 @@ public class DceVppStepDefinitionUHC {
 	 * @toDo:user selects the following dosage information 
 	 */
 	@And("^the user selects the following dosage information in UMS site$")
-	public void user_selects_dosage_information_ums() {
+	public void user_selects_dosage_information_ums(DataTable dosagesAttributes) {
 		SelectDosagePage selectDosagePage = (SelectDosagePage) getLoginScenario()
 				.getBean(PageConstants.SELECT_DOSAGE_PAGE);
-		List<DataTableRow> dosageAttributesRow = memberAttributesRow;
+		List<DataTableRow> dosageAttributesRow = dosagesAttributes
+				.getGherkinRows();
 		Map<String, String> dosageAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < dosageAttributesRow.size(); i++) {
 
@@ -224,14 +240,15 @@ public class DceVppStepDefinitionUHC {
 	 * @toDo:user selects low cost options for above selected drug
 	 */
 	@And("^the user selects low cost options for above selected drug in UMS site$")
-	public void user_selects_lowCostOptions_ums() {
+	public void user_selects_lowCostOptions_ums(DataTable drugAttributes) {
 
-		 if(memberAttributesRow.size()>0){
-		        for (int i = 0; i < memberAttributesRow.size(); i++) {
-		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
-		        }
-	        }
-		Map<String, String> drugAttributesMap = memberAttributesMap;
+		List<DataTableRow> drugAttributesRow = drugAttributes.getGherkinRows();
+		Map<String, String> drugAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < drugAttributesRow.size(); i++) {
+
+			drugAttributesMap.put(drugAttributesRow.get(i).getCells().get(0),
+					drugAttributesRow.get(i).getCells().get(1));
+		}
 		String isGenericAvailable = drugAttributesMap.get("Generic Available");
 		if (isGenericAvailable.equalsIgnoreCase("yes")) {
 			String drugDosage = drugAttributesMap.get("Brand or Generic");
@@ -266,14 +283,15 @@ public class DceVppStepDefinitionUHC {
 	 * @toDo: user selects low cost options for the selected drug
 	 */
 	@And("^the user selects low cost options for the selected drug in UMS site$")
-	public void low_cost_ums(){
+	public void low_cost_ums(DataTable drugAttributes){
 
-		 if(memberAttributesRow.size()>0){
-		        for (int i = 0; i < memberAttributesRow.size(); i++) {
-		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
-		        }
-	        }
-		Map<String, String> drugAttributesMap = memberAttributesMap;
+		List<DataTableRow> drugAttributesRow = drugAttributes.getGherkinRows();
+		Map<String, String> drugAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < drugAttributesRow.size(); i++) {
+
+			drugAttributesMap.put(drugAttributesRow.get(i).getCells().get(0),
+					drugAttributesRow.get(i).getCells().get(1));
+		}
 		String isGenericAvailable = drugAttributesMap.get("Generic Available");
 		if (isGenericAvailable.equalsIgnoreCase("yes")) {
 			String drugDosage = drugAttributesMap.get("Brand or Generic");
@@ -376,13 +394,15 @@ public class DceVppStepDefinitionUHC {
 	 */
 	@And("^the user selects the pharmacy type and distance in UMS site$")
 	public void user_selects_pharmacyType_and_distance_ums(
-			) {
-		 if(memberAttributesRow.size()>0){
-		        for (int i = 0; i < memberAttributesRow.size(); i++) {
-		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
-		        }
-	        }
-		Map<String, String> pharmacyAttributesMap = memberAttributesMap;
+			DataTable pharmacyAttributes) {
+		List<DataTableRow> pharmacyAttributesRow = pharmacyAttributes
+				.getGherkinRows();
+		Map<String, String> pharmacyAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < pharmacyAttributesRow.size(); i++) {
+
+			pharmacyAttributesMap.put(pharmacyAttributesRow.get(i).getCells()
+					.get(0), pharmacyAttributesRow.get(i).getCells().get(1));
+		}
 		String pharmacyType = pharmacyAttributesMap.get("Pharmacy Type");
 		getLoginScenario().saveBean(DceCommonConstants.PHARMACY_TYPE,
 				pharmacyType);
@@ -398,14 +418,16 @@ public class DceVppStepDefinitionUHC {
 	 * @toDo:user selects the type of pharmacy and distance 
 	 */
 	@And("^the user selects the type of pharmacy and distance in UMS site$")
-	public void select_pharmacy_distance_ums(){
+	public void select_pharmacy_distance_ums(DataTable pharmacyAttributes){
 
-		 if(memberAttributesRow.size()>0){
-		        for (int i = 0; i < memberAttributesRow.size(); i++) {
-		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
-		        }
-	        }
-		Map<String, String> pharmacyAttributesMap = memberAttributesMap;
+		List<DataTableRow> pharmacyAttributesRow = pharmacyAttributes
+				.getGherkinRows();
+		Map<String, String> pharmacyAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < pharmacyAttributesRow.size(); i++) {
+
+			pharmacyAttributesMap.put(pharmacyAttributesRow.get(i).getCells()
+					.get(0), pharmacyAttributesRow.get(i).getCells().get(1));
+		}
 		String pharmacyType = pharmacyAttributesMap.get("Pharmacy Type");
 		getLoginScenario().saveBean(DceCommonConstants.PHARMACY_TYPE,
 				pharmacyType);
@@ -443,10 +465,10 @@ public class DceVppStepDefinitionUHC {
 	 * @toDo :user selects a pharmacy from the list of pharmacies
 	 */
 	@When("^the user selects a pharmacy from the list of pharmacies in UMS site$")
-	public void user_selects_pharmacy_ums() {
+	public void user_selects_pharmacy_ums(DataTable pharmacyAttributes) {
 		SelectPharmacyPage pharmacySearchPage = (SelectPharmacyPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		String pharmacyName = memberAttributesRow.get(0)
+		String pharmacyName = pharmacyAttributes.getGherkinRows().get(0)
 				.getCells().get(0);
 		getLoginScenario().saveBean(DceCommonConstants.PHARMACY_NAME,
 				pharmacyName);
@@ -492,10 +514,10 @@ public class DceVppStepDefinitionUHC {
 	 * @toDo:user selects a pharmacy 
 	 */
 	@And("^the user selects a pharmacy in UMS site$")
-	public void select_pharmacy_ums(){
+	public void select_pharmacy_ums(DataTable pharmacyAttributes){
 		SelectPharmacyPage pharmacySearchPage = (SelectPharmacyPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		String pharmacyName = memberAttributesRow.get(0)
+		String pharmacyName = pharmacyAttributes.getGherkinRows().get(0)
 				.getCells().get(0);
 		getLoginScenario().saveBean(DceCommonConstants.PHARMACY_NAME,
 				pharmacyName);
@@ -642,13 +664,15 @@ public class DceVppStepDefinitionUHC {
 	 * @toDo: user views plans of the below plan
 	 */
 	@When("^the user views plans of the below plan type in UMS site$")
-	public void user_performs_planSearch_in_ums() {
-		 if(memberAttributesRow.size()>0){
-		        for (int i = 0; i < memberAttributesRow.size(); i++) {
-		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
-		        }
-	        }
-		Map<String, String> givenAttributesMap = memberAttributesMap;
+	public void user_performs_planSearch_in_ums(DataTable givenAttributes) {
+		List<DataTableRow> givenAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
 
 		String plantype = givenAttributesMap.get("Plan Type");
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
@@ -668,14 +692,15 @@ public class DceVppStepDefinitionUHC {
 	 * @toDo:user selects the plan in
 	 */
 	@And("^the user selects the plan in UMS site$")
-	public void user_selects_plan_ums(){
-		 if(memberAttributesRow.size()>0){
-		        for (int i = 0; i < memberAttributesRow.size(); i++) {
-		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
-		        }
-	        }
-		Map<String, String> givenAttributesMap = memberAttributesMap;
+	public void user_selects_plan_ums(DataTable givenAttributes){
+		List<DataTableRow> givenAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
 
 		String plantype = givenAttributesMap.get("Plan Type");
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
@@ -709,14 +734,14 @@ public class DceVppStepDefinitionUHC {
 	 * @toDo
 	 */
 	@And("^the user validates the plan summary for the below plan in UMS site$")
-	public void user_validates_plan_summary_ums() {
-		 if(memberAttributesRow.size()>0){
-		        for (int i = 0; i < memberAttributesRow.size(); i++) {
-		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
-		        }
-	        }
-		Map<String, String> givenAttributesMap = memberAttributesMap;
+	public void user_validates_plan_summary_ums(DataTable planAttributes) {
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
 
 		String planName = givenAttributesMap.get("Plan Name");
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
@@ -745,14 +770,14 @@ public class DceVppStepDefinitionUHC {
 	 * @toDo
 	 */
 	@Then("^the user view plan details of the selected plan in UMS site$")
-	public void view_plan_details_ums(){
-		 if(memberAttributesRow.size()>0){
-		        for (int i = 0; i < memberAttributesRow.size(); i++) {
-		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
-		        }
-	        }
-		Map<String, String> givenAttributesMap = memberAttributesMap;
+	public void view_plan_details_ums(DataTable planAttributes){
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
 		String planName = givenAttributesMap.get("Plan Name");
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);		
 		
