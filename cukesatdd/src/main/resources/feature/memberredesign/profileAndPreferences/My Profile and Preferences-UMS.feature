@@ -1,8 +1,8 @@
-@codeMonkeys
+@codeMonkeys1
 Feature: C1.2To test Profile and Preferences page .
 
 
-    @CMNeedhelp
+  @CMNeedhelp
   Scenario Outline: To verify the NeedHelp Section On Account Profile page
     Given registered member with following details for Profile and Preferences flow
      | Plan Type      | <planType>  |
@@ -60,7 +60,7 @@ Feature: C1.2To test Profile and Preferences page .
          |PDP       |
          |SHIP      |
           
-           @CMPasswordEdit1
+   @CMPasswordEdit1
   Scenario Outline: To verify the edit functionality in Account Profile section in UMS site without entering the mandatory fields
     Given registered member with following details for Profile and Preferences flow
         | Plan Type      | <planType>  |
@@ -69,8 +69,8 @@ Feature: C1.2To test Profile and Preferences page .
     Then the user clicks on save button without filling current and new password and the red mandatory message should come
 
    Examples: 
-         | planType|
-         | MAPD     |
+          | planType|
+          | MAPD     |
           |PDP       |
           |SHIP      |
           
@@ -245,21 +245,21 @@ Feature: C1.2To test Profile and Preferences page .
       |PDP       |
      #|SHIP      |
      
-      @CMNokiaMemberValidateEmailPhoneEdit
+    @US957739
     Scenario Outline: To verify Email section in member Redesign site
     Given registered member with following details for Profile and Preferences flow
-        | Plan Type      | <planType>  |
+      | Plan Type      | <planType>  |
       | Member Type    | <memberType>|
     Then the user navigates to Profile and Preferences page
     Then the user validates the Presence of edit button in email section
     Then the user validates the Presence of edit button in Phone section
-     Then the user validates the Presence of edit button in Temporary Address section
- Then the user validates the Presence of edit button in Mailing Address section
+    Then the user validates the Presence of edit button in Temporary Address section
+    Then the user validates the Presence of edit button in Mailing Address section
  
  
     Examples: 
        | planType| memberType  |
-       | MA    | NOKIA       | 
+       | MA      | NOKIA       | 
        | MAPD    | NOKIA       | 
       
        

@@ -1,4 +1,4 @@
-@thePredators @aprilRelease2018 @US980034
+@thePredators @AprilRelease2018
 Feature: To test Profile Page Post Hsid Login
 
   @ProfilePageHSIDLinks
@@ -19,7 +19,3 @@ Feature: To test Profile Page Post Hsid Login
     Examples: 
       | planType | friendname | favcolor | phonenumber |
       | MAPD     | name1      | color1   | number1     |
-      | PDP     | name1      | color1   | number1     |
-      | SHIP    | name1      | color1   | number1     |
-      | PCP   | name1      | color1   | number1     |
-      | MEDICA    | name1      | color1   | number1     |

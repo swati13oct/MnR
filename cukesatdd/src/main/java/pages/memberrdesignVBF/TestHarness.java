@@ -2,14 +2,10 @@ package pages.memberrdesignVBF;
 
 import org.junit.Assert;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -32,14 +28,8 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath = "//table[@class='componentTable']/tbody/tr/td/a[contains(.,'profile')]")
 	private WebElement profilePageLink;
 
-	@FindBy(xpath = "//table[@class='componentTable']/tbody/tr/td/a[contains(.,'preferences')]")
-	private WebElement preferencesPageLink;
-
 	@FindBy(xpath = "//table[@class='componentTable']/tbody/tr/td/a[contains(.,'EOB Search')]")
 	private WebElement eobPageLink;
-
-	@FindBy(xpath = "//table[@class='componentTable']/tbody/tr/td/a[contains(.,'Payments')]")
-	private WebElement paymentPageLink;
 
 	@FindBy(xpath = "//table[@class='componentTable']/tbody/tr/td/a[contains(.,'Order Plan material')]")
 	private WebElement orderPlanPageLink;
@@ -59,21 +49,6 @@ public class TestHarness extends UhcDriver {
 	@FindBy(linkText = "Go to payment link page")
 	private WebElement TeamCPaymentPage;
 
-	@FindBy(id = "home_2")
-	private WebElement panelHome;
-
-	@FindBy(id = "claims_1")
-	private WebElement panelClaims;
-
-	@FindBy(id = "findcarecost2")
-	private WebElement panelFindCareCost;
-
-	@FindBy(id = "premiumpayment_3")
-	private WebElement panelPremiumPayment;
-
-	@FindBy(id = "healthwellness_3")
-	private WebElement healthWellness;
-
 	@FindBy(xpath = "//header//h1")
 	private WebElement heading;
 
@@ -92,11 +67,12 @@ public class TestHarness extends UhcDriver {
 		validateNew(orderPlanPageLink);
 		validateNew(claimsPageLink);
 	}
-/***
- * 
- * @return
- * @throws InterruptedException
- */
+
+	/***
+	 * 
+	 * @return
+	 * @throws InterruptedException
+	 */
 	public PaymentsOverview navigateToPaymentOverview() throws InterruptedException {
 		System.out.println("Inside navigateToPaymentOverview functions");
 		/*
@@ -139,10 +115,11 @@ public class TestHarness extends UhcDriver {
 		}
 		return null;
 	}
-/***
- * 
- * @param Category
- */
+
+	/***
+	 * 
+	 * @param Category
+	 */
 	public void validateTestHarnessElements(String Category) {
 		RallyDashboardPage.checkModelPopup(driver);
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -155,10 +132,11 @@ public class TestHarness extends UhcDriver {
 		validateNew(profilePageLink);
 
 	}
-/***
- * 
- * @return
- */
+
+	/***
+	 * 
+	 * @return
+	 */
 	public BenefitsAndCoveragePage navigateDirectToBnCPag() {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,50)", "");
@@ -173,10 +151,11 @@ public class TestHarness extends UhcDriver {
 		}
 		return null;
 	}
-/***
- * 
- * @return
- */
+
+	/***
+	 * 
+	 * @return
+	 */
 	public ClaimSummarypage navigateToClaimsSummaryPage() {
 		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(claimsPageLink);
@@ -187,10 +166,11 @@ public class TestHarness extends UhcDriver {
 		}
 		return null;
 	}
-/***
- * 
- * @return
- */
+
+	/***
+	 * 
+	 * @return
+	 */
 	public ContactUsPage navigateToContactUsPage() {
 		validateNew(contactUsPageLink);
 		contactUsPageLink.click();
@@ -200,11 +180,12 @@ public class TestHarness extends UhcDriver {
 		}
 		return null;
 	}
-/***
- * 
- * @return
- * @throws InterruptedException
- */
+
+	/***
+	 * 
+	 * @return
+	 * @throws InterruptedException
+	 */
 	public DrugCostEstimatorPage navigateToDCEPage() throws InterruptedException {
 		validateNew(dcePageLink);
 		dcePageLink.click();
@@ -214,10 +195,11 @@ public class TestHarness extends UhcDriver {
 		}
 		return null;
 	}
-/***
- * 
- * @return
- */
+
+	/***
+	 * 
+	 * @return
+	 */
 	public EOBPage navigateToEOBPage() {
 		validateNew(eobPageLink);
 		eobPageLink.click();
@@ -230,14 +212,16 @@ public class TestHarness extends UhcDriver {
 			return new EOBPage(driver);
 		}
 	}
-/***
- * 
- * @return
- * @throws InterruptedException 
- */
+
+	/***
+	 * 
+	 * @return
+	 * @throws InterruptedException
+	 */
 	public HealthAndWellness clickHealthnWellnessTab() throws InterruptedException {
-		/*validateNew(healthWellness);
-		healthWellness.click();*/
+		/*
+		 * validateNew(healthWellness); healthWellness.click();
+		 */
 		startNew(MRConstants.HEALTH_AND_WELLNESS_TESTHARNESS);
 		int counter = 0;
 
@@ -254,19 +238,20 @@ public class TestHarness extends UhcDriver {
 			if (driver.getTitle().contains("Health")) {
 				return new HealthAndWellness(driver);
 			}
-			
+
 		} while (!(driver.getTitle().contains("Find Care")));
-		//CommonUtility.checkPageIsReadyNew(driver);
+		// CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getTitle().contains("Health")) {
 			return new HealthAndWellness(driver);
 		}
 		return null;
 
 	}
-/***
- * 
- * @return
- */
+
+	/***
+	 * 
+	 * @return
+	 */
 	public OrderplanmaterialsPage navigateToOrderPlanMaterialsPage() {
 		validateNew(orderPlanPageLink);
 		orderPlanPageLink.click();
@@ -276,11 +261,12 @@ public class TestHarness extends UhcDriver {
 		}
 		return null;
 	}
-/***
- * 
- * @return
- * @throws InterruptedException
- */
+
+	/***
+	 * 
+	 * @return
+	 * @throws InterruptedException
+	 */
 	public PharmacySearchPage navigateToPharmacyLocator() throws InterruptedException {
 
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -293,10 +279,11 @@ public class TestHarness extends UhcDriver {
 		}
 		return null;
 	}
-/***
- * 
- * @return
- */
+
+	/***
+	 * 
+	 * @return
+	 */
 	public pages.memberrdesignVBF.ProfilePreferencesPage navigateDirectToProfilePage() {
 		System.out.println(driver.getTitle());
 		validateNew(profilePageLink);
@@ -311,28 +298,29 @@ public class TestHarness extends UhcDriver {
 		return null;
 	}
 
-public ProviderSearchPage navigateToProviderSearch() throws InterruptedException {
-	/*validateNew(panelFindCareCost);
-	panelFindCareCost.click();*/
-	startNew(MRConstants.PROVIDER_TESTHARNESS);
-	int counter = 0;
+	public ProviderSearchPage navigateToProviderSearch() throws InterruptedException {
+		/*
+		 * validateNew(panelFindCareCost); panelFindCareCost.click();
+		 */
+		startNew(MRConstants.PROVIDER_TESTHARNESS);
+		int counter = 0;
 
-	do {
-		if (counter <= 10) {
-			Thread.sleep(5000);
-			System.out.println("Time elapsed post sign In clicked --" + counter + "*5 sec.");
-		} else {
-			System.out.println("TimeOut!!!");
-			return null;
-		}
-		counter++;
+		do {
+			if (counter <= 10) {
+				Thread.sleep(5000);
+				System.out.println("Time elapsed post sign In clicked --" + counter + "*5 sec.");
+			} else {
+				System.out.println("TimeOut!!!");
+				return null;
+			}
+			counter++;
 
-		if (driver.getTitle().contains("Find Care")) {
-			return new ProviderSearchPage(driver);
-		}
-		
-	} while (!(driver.getTitle().contains("Find Care")));
-	return null;
-}
+			if (driver.getTitle().contains("Find Care")) {
+				return new ProviderSearchPage(driver);
+			}
+
+		} while (!(driver.getTitle().contains("Find Care")));
+		return null;
+	}
 
 }
