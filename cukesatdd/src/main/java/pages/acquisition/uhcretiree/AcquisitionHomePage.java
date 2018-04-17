@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,6 +19,7 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+
 
 /**
  * @author eb
@@ -179,5 +181,9 @@ public class AcquisitionHomePage extends UhcDriver {
 		} else {
 			return null;
 		}
+	}
+	
+	public void validateGroupDropdownList(){
+		Assert.assertTrue("Group dropdown is not displayed", dropDownMenu.isDisplayed());
 	}
 }
