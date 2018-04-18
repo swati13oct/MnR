@@ -53,13 +53,13 @@ public class HsidRegistrationPersonalInformationPage extends UhcDriver {
 	@FindBy(xpath = "//label[@for='email']//span[contains(@class,'error') and not(contains(@class,'ng-hide'))]")
 	private WebElement emailErrorMsg;
 
-	@FindBy(xpath = "//label[@for='piZipCode']/span[starts-with(@class,'error')]")
+	@FindBy(xpath = "//label[@for='piZipCode']//span[starts-with(@class,'error')]")
 	private WebElement zipcodeErrorMsg;
 	
 	@FindBy(xpath = "//label[starts-with(@for,'piMemberId')]//*[@ng-bind-html='piMemberIdError']|//label[@for='piMemberId']/span[@class='error']")
 	private WebElement memberIdErrorMsg;
 	
-	@FindBy(xpath = "//div[contains(@class,'form__step1')]/p[contains(@class,'ng-scope')]|//div[@ng-show='pageError']/p")
+	@FindBy(xpath = "//div[contains(@class,'form__step1')]//p[contains(@class,'ng-scope')]|//div[@ng-show='pageError']/p")
 	private WebElement mainErrorMsg;
 	
 	

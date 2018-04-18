@@ -3,26 +3,15 @@
  */
 package pages.member.bluelayer;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.junit.Assert;
+
 import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.UnhandledAlertException;
-import org.openqa.selenium.UnsupportedCommandException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.ulayer.LoginAssistancePage;
-import pages.member.bluelayer.ConfirmSecurityQuestion;
-import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
-import acceptancetests.data.PageData;
-import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
@@ -57,6 +46,9 @@ public class HSIDLoginPage extends UhcDriver {
 	
     @FindBy(xpath=".//*[@id='IPEinvL']/map/area[1]")
     private WebElement iPerceptionPopUp;
+    
+    @FindBy(xpath ="//div[@id='hsid-commonError']/p/span[2]")
+    private WebElement EmailConfirmedtext;
     
 MRScenario loginScenario;
 	
@@ -190,6 +182,15 @@ MRScenario loginScenario;
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	private void emailconfirmed() {
+		// TODO Auto-generated method stub
+		
+		Assert.assertTrue("Text not present", EmailConfirmedtext.isDisplayed());
+	}
+	
+	
+	
 	}
 
 

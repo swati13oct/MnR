@@ -305,10 +305,14 @@ public class HsidRegistrationStepDefinition {
 	}
 
 	
-	@Then("^I should see a Username or email address label with textbox in Sign In page$")
+	@Then("^user should see the email confirmation message \"[^\"]*\" in Sign In form$" ) 
 	public void i_should_see_a_Username_or_email_address_label_with_textbox_in_Sign_In_page() throws Throwable {
-
+		
+		HsidLoginPage hsidLoginPage = (HsidLoginPage) loginScenario.getBean(PageConstants.HSID_LOGIN_PAGE);
+		hsidLoginPage.emailconfirmed();
 	}
+	
+	
 	
 
 
