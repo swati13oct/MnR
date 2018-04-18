@@ -12,7 +12,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.dashboard.eob.EOBPage;
-import pages.member.ulayer.PaymentHistoryPage;
+import pages.regression.payments.PaymentHistoryPage;
+
 
 /**
  * Functionality: Rally Dashboard page

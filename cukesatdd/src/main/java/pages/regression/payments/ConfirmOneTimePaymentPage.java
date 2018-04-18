@@ -1,4 +1,4 @@
-package pages.member.ulayer;
+package pages.regression.payments;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
