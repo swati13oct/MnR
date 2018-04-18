@@ -19,8 +19,8 @@ Feature: To test SSO functionality for SSO groups
     Then security and password reset link should not be visible
 
     Examples: 
-      | GroupName | ssoPartner   | firstName | lastName  | dateOfBirth | uhcID     |eaID     | empNumber | userName | passWord |
-      | NC        | benefitfocus | EFBBF     | EEEDFAB	 |    01251950 | BAB27F10F |BAB27F10F|           |          |          |
+      | GroupName | ssoPartner   | firstName | lastName  | dateOfBirth | uhcID     |eaID     | empNumber | userName      | passWord  |
+      | NC        | benefitfocus | EFBBF     | EEEDFAB	 |    01251950 | BAB27F10F |BAB27F10F|           | sso_dummy_user| Password@1|
 
  @US1048825      
 Scenario Outline: Verify AT&T SSO functionality and check that security and password reset links are not displayed on profile page.
@@ -41,8 +41,8 @@ Scenario Outline: Verify AT&T SSO functionality and check that security and pass
     Then security and password reset link should not be visible
 
  Examples: 
-      | GroupName | ssoPartner   | firstName | lastName  | dateOfBirth | uhcID     |eaID     | empNumber | userName | passWord |
-      | AT&T      | aonhewitt 	 | FBDDE     | EABEAFBCB |    05171937 | 2906710B4 |2906710B4|           |   |  |
+      | GroupName | ssoPartner   | firstName | lastName  | dateOfBirth | uhcID     |eaID     | empNumber | userName      | passWord  |
+      | AT&T      | aonhewitt 	 | FBDDE     | EABEAFBCB |    05171937 | 2906710B4 |2906710B4|           | sso_dummy_user| Password@1|
 
   @US1048825     
 Scenario Outline: Verify Verizon MA SSO functionality and check that security and password reset links are not displayed on profile page.
@@ -63,8 +63,8 @@ Scenario Outline: Verify Verizon MA SSO functionality and check that security an
     Then security and password reset link should not be visible
 
  Examples: 
-      | GroupName  | ssoPartner   | firstName | lastName  | dateOfBirth | uhcID     |eaID      | empNumber | userName | passWord |
-      | Verizon MA | conduent     | DABDCAE   | FCADBDD   |    11101946 |           |63E8B0353B|   023978  |   |  |
+      | GroupName  | ssoPartner   | firstName | lastName  | dateOfBirth | uhcID     |eaID      | empNumber | userName      | passWord  |
+      | Verizon MA | conduent     | DABDCAE   | FCADBDD   |    11101946 |           |63E8B0353B|   023978  | sso_dummy_user| Password@1|
   
    @US1048825    
  Scenario Outline: Verify Verizon MAPD SSO functionality and check that security and password reset links are not displayed on profile page.
@@ -85,5 +85,5 @@ Scenario Outline: Verify Verizon MA SSO functionality and check that security an
     Then security and password reset link should not be visible
 
  Examples: 
-      | GroupName   | ssoPartner   | firstName | lastName  | dateOfBirth | uhcID     |eaID      | empNumber | userName | passWord |
-      | Verizon MAPD| conduent     | ROBERT    | MARINO    |  02111944   |           |F0203F253 |   002203  |   |  |
+      | GroupName   | ssoPartner   | firstName | lastName  | dateOfBirth | uhcID     |eaID      | empNumber | userName      | passWord  |
+      | Verizon MAPD| conduent     | ROBERT    | MARINO    |  02111944   |           |F0203F253 |   002203  | sso_dummy_user| Password@1|
