@@ -1,3 +1,4 @@
+
 /**
  * 
  */
@@ -40,8 +41,7 @@ public class LoginCommonConstants {
 	public static final String MEMBER_BROWSER_CHECK_EXPECTED = "browserCheckExpected";
 
 	public static final String MEMBER_BENEFITS_AND_COVERAGE = "benefitsandcoverage";
-	
-	public static final String Language = "language";
+
 	
 	public static final String Option = "option";
 	
@@ -57,9 +57,12 @@ public class LoginCommonConstants {
 	
 	public static final String Option3 = "option3";
 
+
 	public static final String RALLY_SSO = "rallySSO";
 
 	public static final String PLANTYPE = "planType";
+
+	public static final String Language = "language";
 	
 	public static String PLAN_NAME;
 	

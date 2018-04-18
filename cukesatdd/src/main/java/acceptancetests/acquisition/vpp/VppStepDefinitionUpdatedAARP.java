@@ -115,6 +115,7 @@ public class VppStepDefinitionUpdatedAARP {
 		}
 
 		String plantype = givenAttributesMap.get("Plan Type");
+		System.out.println("Select PlanTYpe to view Plans for entered Zip"+plantype);
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
@@ -124,6 +125,7 @@ public class VppStepDefinitionUpdatedAARP {
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
 					plansummaryPage);
+			
 		} else {
 			Assert.fail("Error loading plans of desired plantype in  VPP plan summary page");
 		}
@@ -209,10 +211,11 @@ public class VppStepDefinitionUpdatedAARP {
 	}
 
 	/**
+	 * @throws InterruptedException 
 	 * @toDo:user validates plan summary for the below plan
 	 */
 	@And("^the user validates plan summary for the below plan in the AARP site$")
-	public void user_validates_plan_summary(DataTable planAttributes) {
+	public void user_validates_plan_summary(DataTable planAttributes) throws InterruptedException {
 		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {

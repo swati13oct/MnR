@@ -367,7 +367,7 @@ Feature:C1.1 To test plan benefits and Coverage on UMS site
       | HIP     |  SHIP        |   NON LIS     | 
       | PHIP    |  SHIP        |   NON LIS     |
       
-    @aprilRelease2018Fnf
+    @aprilRelease2018Fnf @regressiontestcase-ATDDtags
  Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
     Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>  |
@@ -380,7 +380,7 @@ Feature:C1.1 To test plan benefits and Coverage on UMS site
       | MAPD     |  Group   		|  wotCMSValue      | 
    
 
-@fastandfurious
+@fastandfurious @regressiontestcase-ATDDtags
 @aprilRelease2018 @CatastrophicStageLanguage
   Scenario Outline: Verify Updated Language in Catastrophic Coverage Stage for Drug Copays and Discounts in Redesign site
 Given registered Redesign member for EOB with following attributes

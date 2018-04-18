@@ -109,7 +109,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public static WebElement registerherelink;
 
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
-	
+	private static String UHC_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
 	private static String AARP_ACQISITION_OFFLINE_PAGE_URL = MRConstants.AARP_URL_OFFLINE;
 
 	private PageData globalFooter;

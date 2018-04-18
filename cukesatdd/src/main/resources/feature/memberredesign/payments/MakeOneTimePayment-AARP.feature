@@ -312,3 +312,59 @@ Then TimeStampTheSpartans user unchecks paid and unpaid checkbox and validates t
 Examples:
 	| planType |
 	| SHIP    |
+	
+	
+	
+	@paymentsFInal
+  Scenario Outline: Verify one time payment for total ammount due in AARP site
+    Given registered AMP with for payments flow
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    Then the user navigates to payment history
+    And the user clicks on Make One Time Payment button
+    And the user makes one time payment in AARP site
+      | Amount to be paid          | <Amount>           |
+      | Routing number             | <routingNo>        |
+      | Confirm routing number     | <confirmRoutingNo> |
+      | Account number             | <accountNo>        |
+      | Confirm account number     | <confirmAccountNo> |
+      | Account holder first name  | <firstName>        |
+      | Account holder middle name | <middleName>       |
+      | Account holder last name   | <lastName>         |
+    And the user confirms the payment in AARP site
+
+    #Then the user validates the payment successful page
+    Examples: 
+      | planType | memberType              | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
+      | PDP      | IndividualAARPWPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
+
+  # |  MAPD   | 123000000 |  123000000       | 1234567890  | 1234567890       | first     | second     | third    | 2.00   |
+  #         |  PDP    | 123000000 |  123000000       | 1234567890  | 1234567890       | first     | second     | third    | 2.00   |
+  #        |  MS     | 123000000 |  123000000       | 1234567890  | 1234567890       | first     | second     | third    | 2.00   |
+  #        |  HIP    | 123000000 |  123000000       | 1234567890  | 1234567890       | first     | second     | third    | 2.00   |
+  #	       |  RIDER  | 123000000 |  123000000       | 1234567890  | 1234567890       | first     | second     | third    | 2.00   |
+  
+ 
+ @paymentsAutoPay
+  Scenario Outline: Verify Recurring Payment for Different Types of Member
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When the user navigates to Recurring payment history
+    Then User Scrolls down to validate Payment History and Scrolls up
+    And the user clicks on Edit Automatic Payment button
+    And the user makes auto payment in AARP site
+      | Routing number             | <routingNo>        |
+      | Confirm routing number     | <confirmRoutingNo> |
+      | Account number             | <accountNo>        |
+      | Confirm account number     | <confirmAccountNo> |
+      | Account holder first name  | <firstName>        |
+      | Account holder middle name | <middleName>       |
+      | Account holder last name   | <lastName>         |
+    And the user confirms the Autopayment in UHC site
+
+    #Then the user validates the payment successful page
+    Examples: 
+      | planType | memberType              | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
+      | MAPD      | IndividualUHCPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
+ 
