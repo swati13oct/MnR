@@ -18,6 +18,7 @@ public class MRConstants {
 	public static final String AARP_URL_OFFLINE = "https://offline.aarpmedicareplans.com";
 	public static final String UHCM_URL = "https://member."+MRScenario.environment+"-uhcmedicaresolutions." + getDomain() + "/guest/login.html";
 	public static final String UHCM_URL_OFFLINE = "https://member.offline.uhcmedicaresolutions.com";
+	//public static final String UHC_URL = "https://www."+MRScenario.environment+"-uhcmedicarsolutions." + getDomain() + "/";
 	
 	public static final String AARP_PLANPREVIEW_URL= "https://www."+MRScenario.environment+"-aarpmedicareplans." + getDomain() + "/plan-preview.html";
 	
@@ -116,8 +117,11 @@ public class MRConstants {
 	
 	public static final String UHCM_MOBILE_URL = "https://member.awe-"+MRScenario.environment+"-uhcmedicaresolutions." + getDomain() + "/mobile/guest/login.html";
 	
-	public static final String MRREST_TIME_ADMIN_URL = "https://"+MRScenario.environment+"-generic.uhc.com/MRRestWAR/rest/zadmin/time/";
-	
+		public static final String MRREST_TIME_ADMIN_URL = "https://"+MRScenario.environment+"-generic.uhc.com/MRRestWAR/rest/zadmin/time/";		public static final String AARP_SITE_MAP_PAGE_URL_OFFLINE = "https://"+MRScenario.environment+".aarpmedicareplans.com" + "/sitemap.html";	
+		
+		public static final String MA_PLAN_PRES_DRUGS_TRANSITION_PLANS_PAGE_URL = "https://www."+MRScenario.environment+"-uhcmedicaresolutions." + getDomain() + "/health-plans/medicare-advantage-plans/resources-plan-material/ma-medicare-forms/ma-drug-transition.html";
+		
+		public static final String MA_HOW_TO_APPOINT_REPRESENTIVE_PAGE_URL = "https://www."+MRScenario.environment+"-uhcmedicaresolutions." + getDomain() + "/health-plans/medicare-advantage-plans/resources-plan-material/ma-medicare-forms/how_to_appoint_a_representative.html";	
 	public static final String PARTD_TIME_ADMIN_URL = "https://"+MRScenario.environment+"-generic.uhc.com/PartDPortalWeb/rest/zadmin/time/";
 	
 	public static final String GENERIC_PORTLET_URL = "https://portal.uhc.com/bConnectedDCE/home.html";

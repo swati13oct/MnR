@@ -1,4 +1,4 @@
-package acceptancetests.memberredesign.hsid;
+package acceptancetests.memberredesign.HSID;
 
 import java.sql.Driver;
 import java.util.LinkedHashMap;
