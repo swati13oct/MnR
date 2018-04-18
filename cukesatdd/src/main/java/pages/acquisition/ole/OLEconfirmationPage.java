@@ -1,7 +1,7 @@
 /**
  * 
  */
-package pages.acquisition.OLE_CommonTool;
+package pages.acquisition.ole;
 
 import java.util.Map;
 
@@ -23,7 +23,7 @@ import atdd.framework.UhcDriver;
  *@author sdwaraka
  *
  */
-public class PrimaryCarePhysicianPage extends UhcDriver{
+public class OLEconfirmationPage extends UhcDriver{
 	
 	@FindBy(id="firstnametextbox")
 	private WebElement firstNameField;
@@ -68,13 +68,13 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 	private WebElement NextStepPage;
 	
 	
-	private PageData PrimaryCarePhysicianPage;
+	private PageData OLEconfirmationPage;
 
-	public PrimaryCarePhysicianPage(WebDriver driver) {
+	public OLEconfirmationPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		String fileName = CommonConstants.INTRODUCTION_INFORMATION_PAGE_DATA;
-		PrimaryCarePhysicianPage = CommonUtility.readPageData(fileName,
+		OLEconfirmationPage = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
 		openAndValidate();
 	}

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package pages.acquisition.OLE_CommonTool;
+package pages.acquisition.ole;
 
 import java.util.Map;
 

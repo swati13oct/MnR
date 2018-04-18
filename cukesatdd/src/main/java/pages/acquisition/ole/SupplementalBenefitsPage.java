@@ -1,7 +1,7 @@
 /**
  * 
  */
-package pages.acquisition.OLE_CommonTool;
+package pages.acquisition.ole;
 
 import java.util.Map;
 
@@ -20,10 +20,10 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
- * @author sdwaraka
+ *@author sdwaraka
  *
  */
-public class WelcomePage extends UhcDriver{
+public class SupplementalBenefitsPage extends UhcDriver{
 	
 	@FindBy(id="firstnametextbox")
 	private WebElement firstNameField;
@@ -68,17 +68,13 @@ public class WelcomePage extends UhcDriver{
 	private WebElement NextStepPage;
 	
 	
-	private PageData WelcomePage;
+	private PageData SupplementalBenefitsPage;
 
-	public JSONObject  introductionInformationJson;
-
-	public JSONObject enrollPlanInfoJson;
-
-	public WelcomePage(WebDriver driver) {
+	public SupplementalBenefitsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		String fileName = CommonConstants.INTRODUCTION_INFORMATION_PAGE_DATA;
-		WelcomePage = CommonUtility.readPageData(fileName,
+		SupplementalBenefitsPage = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
 		openAndValidate();
 	}

@@ -10,6 +10,9 @@ package acceptancetests.data;
  *
  */
 public class OLE_PageConstants {
+	
+	
+	public static final String OLE_WELCOME_PAGE = "olewelcomepage";
 
 	
 	public static final String PLAN_INFORMATION = "planInformationPage";

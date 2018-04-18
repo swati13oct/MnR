@@ -1,7 +1,7 @@
 /**
  * 
  */
-package pages.acquisition.OLE_CommonTool;
+package pages.acquisition.ole;
 
 import java.util.Map;
 
@@ -23,7 +23,7 @@ import atdd.framework.UhcDriver;
  *@author sdwaraka
  *
  */
-public class SpecialElectionPeriodPage extends UhcDriver{
+public class ReviewSubmitPage extends UhcDriver{
 	
 	@FindBy(id="firstnametextbox")
 	private WebElement firstNameField;
@@ -68,13 +68,13 @@ public class SpecialElectionPeriodPage extends UhcDriver{
 	private WebElement NextStepPage;
 	
 	
-	private PageData SpecialElectionPeriodPage;
+	private PageData ReviewSubmitPage;
 
-	public SpecialElectionPeriodPage(WebDriver driver) {
+	public ReviewSubmitPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		String fileName = CommonConstants.INTRODUCTION_INFORMATION_PAGE_DATA;
-		SpecialElectionPeriodPage = CommonUtility.readPageData(fileName,
+		ReviewSubmitPage = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
 		openAndValidate();
 	}
