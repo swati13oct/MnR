@@ -3,6 +3,8 @@
  */
 package acceptancetests.data;
 
+import pages.redesign.HsidRegistrationPersonalInformationPage;
+
 //import pages.acquisition.bluelayer.MARightsAndResponsibilitiesPage;
 
 /**
@@ -418,6 +420,14 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 	
 	   public static final String MEDICAL_EOB_PAGE = "medicalEobPage";
 	   
+	   public static final String HSID_LOGIN_PAGE = "hsidLoginPage";
+	   
+	   public static final String HSID_REGISTRATION_PERSONALINFOPAGE = "HsidRegistrationPersonalInformationPage";
+	   
+	   public static final String HSID_REGISTRATION_PERSONALCREATEACCOUNT = "hsidRegistrationPersonalCreateAccount";
+	   
+	   public static final String HSID_REGISTRATION_CONFIRM_INFORMATION = "hsidRegistrationConfirmInformation";
+
 		// ************************** New Constant  ***************************************
 
 	   
@@ -481,6 +491,7 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 	public static final String SETUP_PAYMENTS_SUCCESS_PAGE = "setupAutoPaymentSuccessPage";
 
 	public static final String DRUG_COST_BENEFITS_SUMMARY_PAGE = "drugCostandBenefitSummaryPage";
+
 
 	public static final String DRUG_CLAIM_SUMMARY_PAGE = "drugClaimSummaryPage";
 
@@ -566,12 +577,21 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 
 	public static final String CREATE_ACCOUNT_PAGE = "createAccountPage";
 
+
 	public static final String Payments_History_Page =  "paymentHistoryPage";
+	
+	public static final String DashPage =  "DashboradPage";
 
 	public static final String One_Time_Payments_Page = "oneTimePaymentPage";
 
 	public static final String Review_OneTime_Page = "reviewOneTimePaymentPage";
 
 	public static final String SECURITY_QUESTIONS_PAGE = "securityQuestionsPage";
+	
+	public static final String PLAN_SELECTOR_NEW_PAGE = "planSelectorNewPage";
+
+		
+	public static final String SSO_TEST_HARNESS_PAGE = "ssoTestHarnessPage";
+
 	
 }

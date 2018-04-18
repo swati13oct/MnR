@@ -40,6 +40,15 @@ public class CommonConstants {
 	public static final String DB_USERNAME = "DBUsername";
 
 	public static final String DB_PASSWORD = "DBPassword";
+	
+	public static final String HSIDDB_URL = "HSIDDBURL";
+
+	public static final String HSIDDB_USERNAME = "HSIDDBUsername";
+
+	public static final String HSIDDB_PASSWORD = "HSIDDBPassword";
+	
+	public static final String HSID_ENV = "HSID_ENV";
+	
 
 	public static final String DB_SCHEMA = "DBSchema";
 
@@ -794,9 +803,9 @@ public class CommonConstants {
 	public static final String NEW_PAYMENT_HISTORY_EXPECTED_JSON = "newPaymentHistoryexpectedJSON";
 
 	public static final String PROFILE_AND_PREFERENCES_REDESIGN_PAGE_DATA = "profilenpreferencesredesign.json";
-
-	public static final String REVIEW_AUTOMATIC_PAGE_DATA = "reviewautomaticactual.json";
 	
+	 public static final String REVIEW_AUTOMATIC_PAGE_DATA = "reviewautomaticactual.json";
+	 
 	 public static final String REVIEW_ONE_TIME_PAGE_DATA = "reviewonetimeactual.json";
 	 
 	 public static final String SAVE_DRUG_PAGE_DATA="savedrugpagedata.json";
@@ -846,5 +855,5 @@ public class CommonConstants {
 
 	public static final String COMMONSTEPDEFINITIONMEMVBF = "commonStepDefinition";
 	
-	
+
 }

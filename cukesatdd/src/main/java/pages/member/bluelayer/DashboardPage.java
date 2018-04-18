@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.util.CommonUtility;
@@ -61,9 +62,17 @@ public class DashboardPage extends UhcDriver {
 	@FindBy(xpath ="//a[contains(text(),'EOB Search')]")
 	private WebElement CoverageAndBenefits;
 	
+	@FindBy(xpath="//*[@id='IPEinvL']/map/area[3]")
+	private WebElement iPerceptionAutoPopUp;
 	
+	@FindBy(id="premiumpayment_3")
+	private WebElement PremiumPayment;
 	
+	@FindBy(id="payment-date")
+	private WebElement HistoryDropdown;	
 	
+	@FindBy(className="newTable  width100")
+	private WebElement HistoryTable;	
 
 
 	/** 
@@ -169,6 +178,59 @@ public class DashboardPage extends UhcDriver {
 		 	    	return new PaymentHistoryPage(driver);
 	 	    	}*/
 	 	}
+	 
+	 
+	 public DashboardPage navigateToAutoPaymentHistoryPage() throws InterruptedException
+	 {
+
+	 	    	/*WebDriverWait wait = new WebDriverWait(driver, 30);
+	 				wait.until(ExpectedConditions.elementToBeClickable(paymentslink));
+	 */
+	 	    	if(	validate(iPerceptionAutoPopUp)) {
+	 	    		iPerceptionAutoPopUp.click();
+	 	    	}
+	 	    	else  {
+	 	    		System.out.println("iPerception Pop Up not displayed");
+	 	    	}
+	 	    	
+	 	        Thread.sleep(6000);
+
+	 	    	if (validate(PremiumPayment)) {
+
+	 	    		System.out.println("payment link is displayed on the header");
+	 	    		PremiumPayment.click();
+	 	    		return new DashboardPage(driver);
+	 	    	}else{
+	 	    		System.out.println("payment link is not displayed on the header");
+	 	    		return null;
+	 	    	}	 	    	
+	 	}
+  
+	 public PaymentHistoryPage scrollDownAndUp() throws InterruptedException
+	 {
+		 JavascriptExecutor jse = (JavascriptExecutor) driver;
+			jse.executeScript("window.scrollBy(0,500)", "");
+			
+			waitforElement(HistoryDropdown);
+			
+			Select dateRange = new Select(HistoryDropdown);
+			dateRange.selectByVisibleText("Last 6 months");
+			
+			Thread.sleep(6000);
+			
+			if(HistoryTable.isDisplayed())
+			{
+				System.out.println("Payment History Exists");
+				jse.executeScript("window.scrollBy(0,-500)", "");
+				Thread.sleep(2000);
+				return new PaymentHistoryPage(driver);				
+			}
+			else
+			{
+			return null;
+			}
+	 }
+
 
 	public void loginWith(String userName, String password) {
 		// TODO Auto-generated method stub
