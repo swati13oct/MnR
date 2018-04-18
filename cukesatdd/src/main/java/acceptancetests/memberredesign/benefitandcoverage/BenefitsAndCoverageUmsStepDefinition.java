@@ -980,9 +980,10 @@ public class BenefitsAndCoverageUmsStepDefinition {
  	/**
 	 * @toDo : The user logs in to the member Redesign Portal
 	 * @author mrani101
+ 	 * @throws InterruptedException 
 	 */
 	@Given("^Registered member with following details$")
-	public void registered_member_with_following_details(DataTable memberAttributes){
+	public void registered_member_with_following_details(DataTable memberAttributes) throws InterruptedException{
 		
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();

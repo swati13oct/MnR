@@ -220,6 +220,9 @@ public class AccountHomePage extends UhcDriver {
         @FindBy(xpath="//*[@id='IPEinvL']/map/area[3]")
         private WebElement closebtn;
         
+        @FindBy(xpath="html/body/div[2]/div/div[4]/div[2]/div/table/tbody/tr[4]/td[2]/a")
+        private WebElement benfitscoveragelink;
+        
 @FindBy(xpath="//a[contains(text(),'Provider search')]")
 private WebElement providerSearchinPanelNavigation;
 
@@ -1149,6 +1152,7 @@ public void FormsandResourcesLinkinPlanSummaryPageBlayer()
 
     					
     					if (MRScenario.environment.equals("team-ci1") || MRScenario.environment.equals("team-h") || MRScenario.environment.equals("test-a") || MRScenario.environment.equals("team-e")) {
+    						Thread.sleep(10000);
     						WebElement element = driver.findElement(By.xpath("//a[contains(.,'profile page')]"));
     						validateNew(element);
     						element.click();
@@ -1181,6 +1185,82 @@ public void FormsandResourcesLinkinPlanSummaryPageBlayer()
      Assert.assertTrue(title.contains("UnitedHealthcare"));
     			     
    	}	
+     
+     public BenefitsAndCoveragePage navigateDirectToBnC() throws InterruptedException {
+			// TODO Auto-generated method stub
+			if (MRScenario.environment.equalsIgnoreCase("stage")) 
+     	{
+ 			System.out.println("user is on Stage login page");			
+ 			//CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);			
+ 			if(driver.getCurrentUrl().contains("/dashboard"));
+ 			{
+ 				
+ 				accountToggleDropdown.click();
+ 				validate(accountSettingOption);
+ 				accountSettingOption.click();
+ 				try {
+ 					Thread.sleep(3000);
+ 				} catch (InterruptedException e) {
+ 					// TODO Auto generated catch block
+ 					e.printStackTrace();
+ 				}
+ 				System.out.println("title is "+driver.getTitle());
+ 				System.out.println("Current Url is "+driver.getCurrentUrl());
+ 				CommonUtility.waitForPageLoad(driver, heading, 50);
+ 			
+
+ 				if (driver.getTitle().equalsIgnoreCase("Profile")) {
+
+ 					return new BenefitsAndCoveragePage(driver);
+ 				}
+ 				
+ 				
+ 			
+     	}
+     	}
+     	
+     	
+			Thread.sleep(5000);
+ 		if (iPerceptionPopUp.size()>0) {
+             iPerceptionPopUp.get(0).click();
+             System.out.println("iPerception Pop Up displayed");
+ 		}
+
+			
+			if (MRScenario.environment.equals("team-ci1") || MRScenario.environment.equals("team-h") || MRScenario.environment.equals("test-a") || MRScenario.environment.equals("team-e")) {
+				try {
+					Thread.sleep(10000);
+				} catch (InterruptedException e) {
+					// TODO Auto generated catch block
+					e.printStackTrace();
+				}
+				WebElement element = driver.findElement(By.xpath("//a[contains(.,'benefits and coverage page')]"));
+				validateNew(element);
+				element.click();
+				
+				//benfitscoveragelink.click();
+				/*accountToggleDropdown1.click();
+				validate(accountSettingOption1);
+				accountSettingOption1.click();*/
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					// TODO Auto generated catch block
+					e.printStackTrace();
+				}
+ 		}else{
+ 			benfitscoveragelink.click();
+ 		}
+ 		CommonUtility.waitForPageLoad(driver, heading, 50);
+ 		if(driver.getTitle().equalsIgnoreCase("Profile"))
+ 		{
+ 			System.out.println("here");
+ 			return new BenefitsAndCoveragePage(driver);
+ 		}
+ 
+			return new BenefitsAndCoveragePage(driver);
+		
+}
     			    
 }
 
