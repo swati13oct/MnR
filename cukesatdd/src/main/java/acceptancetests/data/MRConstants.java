@@ -153,12 +153,12 @@ public class MRConstants {
 	public static final String MA_PLANS_AND_GRIEVANCES_URL = "https://www."+MRScenario.environment+"-uhcmedicaresolutions." + getDomain() + "/health-plans/medicare-advantage-plans/resources-plan-material/ma-medicare-forms/medicare-appeal.html" ;
 	
 	public static final String MA_RIGHTS_AND_RESPONSIBILITIES_PAGE_URL = "https://www."+MRScenario.environment+"-uhcmedicaresolutions." + getDomain() + "/health-plans/medicare-advantage-plans/resources-plan-material/ma-medicare-forms/medicare-rights-center.html" ;
-	
+		
 	public static final String AARP_SITE_MAP_PAGE_URL = "https://www."+MRScenario.environment+"-aarpmedicareplans." + getDomain() + "/sitemap.html";	
 
-	public static final String MA_PLAN_PRES_DRUGS_TRANSITION_PLANS_PAGE_URL = "https://www."+MRScenario.environment+"-uhcmedicaresolutions." + getDomain() + "/health-plans/medicare-advantage-plans/resources-plan-material/ma-medicare-forms/ma-drug-transition.html";
+//	public static final String MA_PLAN_PRES_DRUGS_TRANSITION_PLANS_PAGE_URL = "https://www."+MRScenario.environment+"-uhcmedicaresolutions." + getDomain() + "/health-plans/medicare-advantage-plans/resources-plan-material/ma-medicare-forms/ma-drug-transition.html";
 	
-	public static final String MA_HOW_TO_APPOINT_REPRESENTIVE_PAGE_URL = "https://www."+MRScenario.environment+"-uhcmedicaresolutions." + getDomain() + "/health-plans/medicare-advantage-plans/resources-plan-material/ma-medicare-forms/how_to_appoint_a_representative.html";
+//	public static final String MA_HOW_TO_APPOINT_REPRESENTIVE_PAGE_URL = "https://www."+MRScenario.environment+"-uhcmedicaresolutions." + getDomain() + "/health-plans/medicare-advantage-plans/resources-plan-material/ma-medicare-forms/how_to_appoint_a_representative.html";
 
 	public static final String OUR_PLANS_MA_HOW_TO_PAY_YOUR_PREMIUM_URL = "https://www."+MRScenario.environment+"-uhcmedicaresolutions." + getDomain() + "/health-plans/medicare-advantage-plans/resources-plan-material/ma-medicare-forms/how_to_pay_your_premium.html";
 
