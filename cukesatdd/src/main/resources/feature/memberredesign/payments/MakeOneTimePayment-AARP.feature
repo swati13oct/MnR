@@ -345,7 +345,7 @@ Examples:
   #	       |  RIDER  | 123000000 |  123000000       | 1234567890  | 1234567890       | first     | second     | third    | 2.00   |
   
  
- @paymentsAutoPay
+ @paymentsAutoPay @15301
   Scenario Outline: Verify Recurring Payment for Different Types of Member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
