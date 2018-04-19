@@ -80,8 +80,9 @@ public class HsidRegistrationConfirmInformation extends UhcDriver {
 		// Filter inbox messages by "UNSEEN" and "TO={username}"
 		FlagTerm ft_unseen = new FlagTerm(new Flags(Flags.Flag.SEEN), false);
 		RecipientStringTerm ft_toEmail = new RecipientStringTerm(RecipientType.TO, username);
-		Thread.sleep(20000);
+		
 		SearchTerm st = new AndTerm(ft_unseen, ft_toEmail);
+		Thread.sleep(20000);
 		Message msg[] = inbox.search(st);
 		String mail = "";
 		String sub= "";
