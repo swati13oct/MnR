@@ -98,6 +98,8 @@ public class HsidRegistrationConfirmInformation extends UhcDriver {
 		
 		Object emailcontent = msg[msg.length - 1].getContent();
 		
+		System.out.println(emailcontent);
+		
 		
 		String toberemoved = "This e-mail, including attachments, may include confidential and/or proprietary information, and may be used only by the person or entity to which it is addressed. If the reader of this e-mail is not the intended recipient or his or her authorized agent, the reader is hereby notified that any dissemination, distribution or copying of this e-mail is prohibited. If you have received this e-mail in error, please notify the sender by replying to this message and delete this e-mail immediately.";
 
@@ -109,13 +111,13 @@ public class HsidRegistrationConfirmInformation extends UhcDriver {
 			String[] tmparray = ((String) emailcontent).split("href=\"");
 			
 			String portalName = "mnr";
-			if (portalName.contains("my")) {
+			if (portalName.contains("mnr")) {
 
 				tmparr_2 = tmparray[1].split("\""); 
 			} else {
 				if (tmparray[0].contains("Confirm your email address")) {
 
-					tmparr_2 = tmparray[0].split("<");
+					tmparr_2 = tmparray[0].split("Simply click the link below");
 					tmparr_2 = tmparr_2[1].split(">");
 				}
 
@@ -132,6 +134,7 @@ public class HsidRegistrationConfirmInformation extends UhcDriver {
 
 		String[] rtrnrarr = new String[] { linkurl, msg[msg.length - 1].getSubject().toString(),
 				Jsoup.parse(emailcontent.toString()).text().replace(toberemoved, "") };
+		System.out.println(rtrnrarr);
 		store.close();
 		session = null;
 		return rtrnrarr;
