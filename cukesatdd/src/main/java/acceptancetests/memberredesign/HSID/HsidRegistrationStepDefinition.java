@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
+import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
@@ -126,6 +127,7 @@ public class HsidRegistrationStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		DeregisterPage deregister = new DeregisterPage(wd);
 		String userName = deregister.getUserName();
+		getLoginScenario().saveBean(LoginCommonConstants.Username, userName);
 		System.out.println("userName: "+userName +"password: "+password +"email: "+email);
 		hsidRegistrationPersonalCreateAccount.enterUsername(userName);
 		hsidRegistrationPersonalCreateAccount.enterPassword(password);
@@ -285,13 +287,15 @@ public class HsidRegistrationStepDefinition {
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
 		
-		String userName = memberAttributesMap.get("userName");
+		//String userName = memberAttributesMap.get("userName");
 		String password = memberAttributesMap.get("password");
 		
 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		
 		HSIDLoginPage loginPage = new HSIDLoginPage(wd);
 		loginPage.validateelements();
+		String userName =  (String)getLoginScenario().getBean(LoginCommonConstants.Username);
         AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, password);
         if (accountHomePage!= null) {
 			 getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);

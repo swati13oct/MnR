@@ -66,6 +66,8 @@ public class HsidRegistrationConfirmInformation extends UhcDriver {
 
 		String username = "codetransformers@gmail.com";
         String pwd = "CodeTransformers@1";
+        
+        Thread.sleep(44000);
 	
 		Properties props = System.getProperties();
 		props.setProperty("mail.store.protocol", "imaps");
@@ -80,8 +82,9 @@ public class HsidRegistrationConfirmInformation extends UhcDriver {
 		// Filter inbox messages by "UNSEEN" and "TO={username}"
 		FlagTerm ft_unseen = new FlagTerm(new Flags(Flags.Flag.SEEN), false);
 		RecipientStringTerm ft_toEmail = new RecipientStringTerm(RecipientType.TO, username);
-		Thread.sleep(20000);
+		
 		SearchTerm st = new AndTerm(ft_unseen, ft_toEmail);
+		
 		Message msg[] = inbox.search(st);
 		String mail = "";
 		String sub= "";
