@@ -53,8 +53,21 @@ public class oleStepDefinition {
 	}
 
 	@Then("^the user clicks on Enroll Now for AARP site to start the OLE flow$")
-	public void the_user_clicks_on_Enroll_Now_to_start_the_OLE_flow() throws Throwable {
-		String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
+	public void the_user_clicks_on_Enroll_Now_to_start_the_OLE_flow(DataTable planAttributes) throws Throwable {
+		
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String PlanName = givenAttributesMap.get("Plan Name");
+
+		
+		
+		//String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 
 		String PlanYear = "2018"; 
 		String PlanPremium;

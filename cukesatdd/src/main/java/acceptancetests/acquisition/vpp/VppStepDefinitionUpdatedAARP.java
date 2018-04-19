@@ -208,6 +208,8 @@ public class VppStepDefinitionUpdatedAARP {
 		String planType = (String) getLoginScenario().getBean(
 				VPPCommonConstants.PLAN_TYPE);
 		if (plansummaryPage.validatePlanNames(planType)) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
+					plansummaryPage);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("Error validating availables plans for selected plantype in  VPP plan summary page");

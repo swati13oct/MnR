@@ -79,14 +79,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@class='module-plan-overview module swiper-slide ng-scope']")
 	List<WebElement> maPlanElement;
-/*
+
 	@FindBy(xpath = "//div[@class='disabledprint ng-scope']")
 	List<WebElement> pdpPlanElement;
-	*/
+	
 	//Change PDP Plan Element identifier. Same as for MA/MAPD plans
-	@FindBy(xpath = "//div[@class='module-plan-overview module swiper-slide ng-scope']")
+/*	@FindBy(xpath = "//div[@class='module-plan-overview module swiper-slide ng-scope']")
 	List<WebElement> pdpPlanElement;
-
+*/
 	@FindBy(xpath="//div[contains(@ng-repeat,'plan in planModel.maPlans')]")
 	List<WebElement> maPlans;
 	
@@ -269,10 +269,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		if (planType.equalsIgnoreCase("PDP")) {
 //	WebElement hidePdpPlans invalid
-//			if(validate(hidePdpPlans)){
+			//if(validate(hidePdpPlans)){
 				pdpPlansViewLink.click();
 				System.out.println("PDP Plan Type Clicked");
-//			}
+			//}
 		} else if (planType.equalsIgnoreCase("MA")
 				|| planType.equalsIgnoreCase("MAPD")) {
 				maPlansViewLink.click();
@@ -773,13 +773,17 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			}
 
 		} else if (planType.equalsIgnoreCase("PDP")) {
-			ElementData elementData = new ElementData("id", "viewmoredetlinkpdp");
-			WebElement element = getViewPlanDetailsElement(pdpPlanElement, elementData, planName);
-			if (element != null) {
+//			ElementData elementData = new ElementData("id", "viewmoredetlinkpdp");
+//			WebElement element = getViewPlanDetailsElement(pdpPlanElement, elementData, planName);
+			WebElement PDPmoreDetailsLink = driver.findElement(By.xpath("//h2[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@id = 'viewmoredetlinkpdp']"));
+			validate(PDPmoreDetailsLink);
+			PDPmoreDetailsLink.click();
+			System.out.println("View Plan Details Link is clicked for PDP plan"+planName);
+			
+/*			if (element != null) {
 				element.click();
-
 			}
-
+*/
 		}
 		CommonUtility.checkPageIsReady(driver);
 		if (driver.getTitle().equalsIgnoreCase("Our Medicare Plans | AARP® Medicare Plans from UnitedHealthcare®")

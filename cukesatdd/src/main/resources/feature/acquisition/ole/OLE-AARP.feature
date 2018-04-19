@@ -10,9 +10,10 @@ When the user performs plan search using following information in the AARP site
 And the user views the plans of the below plan type in AARP site
 	| Plan Type | <plantype> |
 And the user validates the available plans for selected plan types in the AARP site
-Then the user validates plan summary for the below plan in the AARP site
-	| Plan Name | <planName> |
+#Then the user validates plan summary for the below plan in the AARP site
+#	| Plan Name | <planName> |
 Then the user clicks on Enroll Now for AARP site to start the OLE flow
+	| Plan Name | <planName> |
 Then the user validates the Plan details on OLE 
 
 	
