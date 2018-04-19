@@ -283,6 +283,12 @@ public class PlanDetailsPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		presDrugTab.click();
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		estimateDrugBtn.click();
 		try {
 			Thread.sleep(4000);
