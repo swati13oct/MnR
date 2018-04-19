@@ -369,7 +369,10 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	
 	@FindBy(id = "nav-zipcode")
 	public WebElement enterZipcode;
-
+	
+	@FindBy(xpath = ".//*[@id='subnav_2']//button[@class='zip-button']")
+	public WebElement findPlans;
+	
 	@Override
 	public void openAndValidate() {
 
@@ -1716,7 +1719,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		if(ourPlansTab.isDisplayed()){
 		Actions actions = new Actions(driver);
 		actions.moveToElement(ourPlansTab).build().perform();
-		enterZipcode.sendKeys(zipCode, Keys.ENTER);
+		enterZipcode.sendKeys(zipCode);
+		findPlans.click();
 		try {
 			Thread.sleep(4000);
 		} catch (InterruptedException e) {
