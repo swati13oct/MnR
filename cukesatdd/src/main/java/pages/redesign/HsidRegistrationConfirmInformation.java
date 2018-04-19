@@ -87,14 +87,14 @@ public class HsidRegistrationConfirmInformation extends UhcDriver {
 		MimeMultipart body;
 		String bodyText = "";
 		System.out.println("getConfirmRegistrationURLWithSubjectandEmailContent::MAILS for [" + username + "]: " + msg.length);
-		for(Message message:msg) {
-	        mail = message.getFrom()[0].toString();
-	        sub = message.getSubject();
-	         body = (MimeMultipart) message.getContent();
-	        bodyText = getTextFromMimeMultipart(body);
+		//for(Message message:msg) {
+	        //mail = message.getFrom()[0].toString();
+	        //sub = message.getSubject();
+	         //body = (MimeMultipart) message.getContent();
+	        //bodyText = getTextFromMimeMultipart(body);
 	         
-	         System.out.println("mail:" +mail +"sub: " +sub + "body: "+ bodyText);
-	    }
+	         //System.out.println("mail:" +mail +"sub: " +sub + "body: "+ bodyText);
+	    //}
 		
 		Object emailcontent = msg[msg.length - 1].getContent();
 		
@@ -104,7 +104,9 @@ public class HsidRegistrationConfirmInformation extends UhcDriver {
 		String linkurl;
 		try {
 			String[] tmparr_2;
-			String[] tmparray = (bodyText).split("href=\"");
+			
+			
+			String[] tmparray = ((String) emailcontent).split("href=\"");
 			
 			String portalName = "mnr";
 			if (portalName.contains("my")) {
@@ -156,6 +158,7 @@ public class HsidRegistrationConfirmInformation extends UhcDriver {
 	
 	public void confirmEmail(){
 		driver.get(getConfirmationUrl());
+		
 	}
 
 
