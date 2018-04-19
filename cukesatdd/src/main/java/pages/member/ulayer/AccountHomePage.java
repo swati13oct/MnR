@@ -27,6 +27,7 @@ import atdd.framework.UhcDriver;
 import pages.dashboard.member.ulayer.ClaimSummarypage;
 import pages.member.redesign.ContactUsPage;
 import pages.redesign.PharmacySearchPage;
+import pages.regression.payments.PaymentHistoryPage;
 
 /**
  * @author pjaising

@@ -24,7 +24,6 @@ import pages.acquisition.ulayer.LoginAssistancePage;
 import pages.dashboard.acquisition.RegistrationInformationPage;
 import pages.dashboard.eob.EOBPage;
 import pages.member.bluelayer.DashboardPage;
-import pages.member.ulayer.PaymentHistoryPage;
 import pages.member.ulayer.RallyDashboard;
 import pages.member.ulayer.TerminatedHomePage;
 import pages.member.ulayer.UNPWAssistancePage;
