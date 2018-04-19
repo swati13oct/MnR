@@ -79,10 +79,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@class='module-plan-overview module swiper-slide ng-scope']")
 	List<WebElement> maPlanElement;
-
+/*
 	@FindBy(xpath = "//div[@class='disabledprint ng-scope']")
 	List<WebElement> pdpPlanElement;
-	
+	*/
+	//Change PDP Plan Element identifier. Same as for MA/MAPD plans
+	@FindBy(xpath = "//div[@class='module-plan-overview module swiper-slide ng-scope']")
+	List<WebElement> pdpPlanElement;
+
 	@FindBy(xpath="//div[contains(@ng-repeat,'plan in planModel.maPlans')]")
 	List<WebElement> maPlans;
 	
@@ -262,6 +266,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 
 	public VPPPlanSummaryPage viewPlanSummary(String planType) {
+		
 		if (planType.equalsIgnoreCase("PDP")) {
 //	WebElement hidePdpPlans invalid
 //			if(validate(hidePdpPlans)){
