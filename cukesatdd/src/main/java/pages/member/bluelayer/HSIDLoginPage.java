@@ -4,7 +4,6 @@
 package pages.member.bluelayer;
 
 import org.junit.Assert;
-
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -64,6 +63,12 @@ MRScenario loginScenario;
 	}
 	
 	public void openAndValidate() {
+		try {
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		start(PAGE_URL);
 	}
 	
