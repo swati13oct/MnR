@@ -80,7 +80,7 @@ public class AddDrugDetails extends UhcDriver {
 		return addDrugDetailsPageExpectedJson;
 	}
 
-	/** select dosage of the drug
+	/** select Dosage of the drug
 	 * 
 	 */
 	public void selectDosage(String dosage){
@@ -91,7 +91,7 @@ public class AddDrugDetails extends UhcDriver {
 		}
 	}
 
-	/** select qnty quantity of the drug
+	/** select quantity qnty of the drug
 	 * 
 	 */
 	public void selectQnty(String qnty){

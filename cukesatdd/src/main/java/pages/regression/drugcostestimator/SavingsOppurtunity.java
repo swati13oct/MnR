@@ -16,7 +16,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
- * Functionality: Covers all elements and methods for Saving Opportunity Modal
+ * Functionality: Covers all elements and methods for Saving Opportunity Modal in DCE
  */
 public class SavingsOppurtunity extends UhcDriver{
 	

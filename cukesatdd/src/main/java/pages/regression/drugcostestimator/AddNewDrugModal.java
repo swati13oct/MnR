@@ -16,7 +16,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
- * Functionality: Covers all elements and methods for Add New Drug Modal
+ * Functionality: Covers all elements and methods for Add New Drug Modal in DCE
  */
 public class AddNewDrugModal extends UhcDriver {
 

@@ -27,6 +27,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+
 //import pages.dashboard.member.blayer.AddDrugDetails;
 //import pages.dashboard.member.blayer.AddNewDrugModal;
 import pages.regression.drugcostestimator.AddDrugDetails;
@@ -418,7 +419,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	 * Click Edit Drug link for particular drug
 	 */
 	public void navgateToEditDrug(String drug) {
-		// editDrug.click();
+		
 		WebElement editDrug = driver.findElement(By.xpath("//div[@class='drug-container']//p[contains(text(),'" + drug
 				+ "')]/parent::section//a[@class='edit-drug']"));
 		editDrug.click();
