@@ -24,6 +24,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import pages.member.bluelayer.*;
+import pages.regression.pharmacylocator.PharmacySearchPage;
 
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -1181,6 +1182,49 @@ public void FormsandResourcesLinkinPlanSummaryPageBlayer()
      Assert.assertTrue(title.contains("UnitedHealthcare"));
     			     
    	}	
+     
+	public pages.regression.pharmacylocator.PharmacySearchPage navigateToRedesignPharmacyLocaterPage() {
+		
+		if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a") || MRScenario.environmentMedicare.equalsIgnoreCase("test-a") || MRScenario.environment.equalsIgnoreCase("team-ci1")) {
+			System.out.println("Go to claims link is present "+driver.findElement(By.xpath("//a[text()='Go to Pharmacy Locator page']")).isDisplayed());
+			driver.findElement(By.xpath("//a[text()='Go to Pharmacy Locator page']")).click();			
+		}
+		/*else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
+			System.out.println("user is on Stage login page");						
+			if(driver.getCurrentUrl().contains("/dashboard"));
+			{
+				System.out.println("User is on dashboard page and URL is ====>"+driver.getCurrentUrl());
+				claimsDashboardLink.click();
+				try {
+					Thread.sleep(10000);	
+					
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+				
+		}
+		else 
+		{
+			System.out.println("This script is only intended to be run using test harness on team-b or team-h. Update condition for your own environment");	
+		}
+		System.out.println(driver.getTitle());
+	*/
+		/*if (driver.getTitle().equalsIgnoreCase("Claims")) {
+			try {
+				Thread.sleep(10000);
+				ClaimSummarypage comboTab = new ClaimSummarypage(driver).comboTabSelection();
+	            comboTab.comboTabSelection();
+	            
+			} catch (InterruptedException e) {
+				
+				e.printStackTrace();
+			}	
+
+	}*/
+		return new PharmacySearchPage(driver);
+	}
     			    
 }
 
