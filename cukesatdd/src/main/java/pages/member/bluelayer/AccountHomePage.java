@@ -16,6 +16,7 @@ import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -24,8 +25,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import pages.member.bluelayer.*;
-import pages.regression.pharmacylocator.PharmacySearchPage;
-import pages.regression.formsandresources.*;
+import pages.member.ulayer.PaymentHistoryPage;
+
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -287,7 +288,7 @@ private WebElement claimsLink;
 
 
 @FindBy(xpath ="(//a[contains(@href,'my-plans/forms-and-resources')])[4]")
-private WebElement FormsandResourcesLink;
+private WebElement FormsandResourcesLinkn;
 
 
 
@@ -335,6 +336,21 @@ private WebElement searchforproviderlinkinClaimsPage;
         @FindBy(xpath = "//sticky[@id='sticky-nav']//nav[@id='main-nav']//a[contains(text(),'Coverage & Benefits')]")
     	private WebElement BnClink;
         
+    	@FindBy(xpath="//*[@id='IPEinvL']/map/area[3]")
+    	private WebElement iPerceptionAutoPopUp;
+    	
+    	@FindBy(xpath="//*[@id='sticky-nav']//div[@ng-switch-when='M&R']/a[5]")
+    	private WebElement PremiumPayment;
+    	
+    	@FindBy(id="payment-date")
+    	private WebElement HistoryDropdown;	
+    	
+    	@FindBy(xpath="(//*[@id='paymentTable'])[1]")
+    	private WebElement HistoryTable;	
+        
+    	@FindBy(xpath="//*[@id='paymentOverviewApp']//div[@class='container']//div[@class='col-md-12']/h1")
+    	private WebElement PaymentHeading;
+    	
         private PageData myAccountHome;
 
         public JSONObject accountHomeJson;
@@ -688,9 +704,9 @@ public void FormsandResourcesLinkinPlanSummaryPageBlayer()
         {
         
           myPlansTab.click();
-          waitforElement(FormsandResourcesLink);
+          waitforElement(FormsandResourcesLinkn);
         
-                FormsandResourcesLink.click();
+                FormsandResourcesLinkn.click();
                 
                 waitforElement(searchProviderLinkinFormsandResourcePage);
                 
@@ -1183,79 +1199,61 @@ public void FormsandResourcesLinkinPlanSummaryPageBlayer()
     			     
    	}	
      
-	public pages.regression.pharmacylocator.PharmacySearchPage navigateToRedesignPharmacyLocaterPage() {
-		
-		if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a") || MRScenario.environmentMedicare.equalsIgnoreCase("test-a") || MRScenario.environment.equalsIgnoreCase("team-ci1")) {
-			System.out.println("Go to claims link is present "+driver.findElement(By.xpath("//a[text()='Go to Pharmacy Locator page']")).isDisplayed());
-			driver.findElement(By.xpath("//a[text()='Go to Pharmacy Locator page']")).click();			
-		}
-		/*else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
-			System.out.println("user is on Stage login page");						
-			if(driver.getCurrentUrl().contains("/dashboard"));
-			{
-				System.out.println("User is on dashboard page and URL is ====>"+driver.getCurrentUrl());
-				claimsDashboardLink.click();
-				try {
-					Thread.sleep(10000);	
-					
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-				
-		}
-		else 
-		{
-			System.out.println("This script is only intended to be run using test harness on team-b or team-h. Update condition for your own environment");	
-		}
-		System.out.println(driver.getTitle());
-	*/
-		/*if (driver.getTitle().equalsIgnoreCase("Claims")) {
-			try {
-				Thread.sleep(10000);
-				ClaimSummarypage comboTab = new ClaimSummarypage(driver).comboTabSelection();
-	            comboTab.comboTabSelection();
-	            
-			} catch (InterruptedException e) {
-				
-				e.printStackTrace();
-			}	
+     
+     public AccountHomePage navigateToAutoPaymentHistoryPage() throws InterruptedException
+	 {
 
-	}*/
-		return new PharmacySearchPage(driver);
-	}
+	 	    	/*WebDriverWait wait = new WebDriverWait(driver, 30);
+	 				wait.until(ExpectedConditions.elementToBeClickable(paymentslink));
+	 */
+	 	    	if(	validate(iPerceptionAutoPopUp)) {
+	 	    		iPerceptionAutoPopUp.click();
+	 	    	}
+	 	    	else  {
+	 	    		System.out.println("iPerception Pop Up not displayed");
+	 	    	}
+	 	    	
+	 	        //Thread.sleep(16000);
 
-	
-public pages.regression.formsandresources.FormsAndResourcesPage navigatetoFormsnResources() {
-		
-		if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a") || MRScenario.environmentMedicare.equalsIgnoreCase("test-a") || MRScenario.environment.equalsIgnoreCase("team-ci1")) {
-			System.out.println("Go to claims link is present "+driver.findElement(By.xpath("//a[text()='Go to Pharmacy Locator page']")).isDisplayed());
-			driver.findElement(By.xpath("//a[text()='Go to Pharmacy Locator page']")).click();			
-		}
-		else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
-			System.out.println("user is on Stage login page");						
-			if(driver.getCurrentUrl().contains("/dashboard"));
+	 	       waitforElement(PremiumPayment);
+	 	    		System.out.println("payment link is displayed on the header");
+	 	    		PremiumPayment.click();
+	 	    		Thread.sleep(10000);
+	 	    		if(PaymentHeading.getText().contains("Premium Payments Overview"))
+	 	    		{
+	 	    			System.out.println("Payment Overview page displayed");
+	 	    		return new AccountHomePage(driver);
+	 	    		}
+	 	    	else{
+	 	    		System.out.println("payment overview page not displayed");
+	 	    		return null;
+	 	    	}	 	    	
+	 	}
+  
+	 public PaymentHistoryPage scrollDownAndUp() throws InterruptedException
+	 {
+		 JavascriptExecutor jse = (JavascriptExecutor) driver;
+			jse.executeScript("window.scrollBy(0,500)", "");
+			
+			waitforElement(HistoryDropdown);
+			
+			Select dateRange = new Select(HistoryDropdown);
+			dateRange.selectByVisibleText("Last 6 months");
+			
+			Thread.sleep(6000);
+			
+			if(HistoryTable.isDisplayed())
 			{
-				System.out.println("User is on dashboard page and URL is ====>"+driver.getCurrentUrl());
-				FormsandResourcesLink.click();
-				try {
-					Thread.sleep(10000);	
-					
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				System.out.println("Payment History Exists");
+				jse.executeScript("window.scrollBy(0,-600)", "");
+				Thread.sleep(3000);
+				return new PaymentHistoryPage(driver);				
 			}
-				
-		}
-		else 
-		{
-			System.out.println("This script is only intended to be run using test harness on team-b or team-h. Update condition for your own environment");	
-		}
+			else
+			{
+			return null;
+			}
+	 }
     			    
-
-
-return new FormsAndResourcesPage(driver);
 }
-}
+

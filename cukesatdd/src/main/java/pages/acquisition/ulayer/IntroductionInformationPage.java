@@ -64,6 +64,10 @@ public class IntroductionInformationPage extends UhcDriver{
 	@FindBy(id = "medicalclaimnumerr")
 	private WebElement MedicareIDErrorMsg;
 	
+	@FindBy(id = "step2Heading")
+	private WebElement NextStepPage;
+	
+	
 	private PageData introductionInformation;
 
 	public JSONObject  introductionInformationJson;
@@ -227,8 +231,11 @@ public class IntroductionInformationPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}			
-			System.out.println("Medicare ID provided is Valid Format"+MedicareValidFlag);
-			if(validate(MedicareIDErrorMsg)){
+			System.out.println("Medicare ID provided : "+claimNumberField.getText()+" ; is Valid Format"+MedicareValidFlag);
+			
+			boolean MedicareErrorDisplayed = validate(MedicareIDErrorMsg)?true:false;
+			boolean NextStepPageDisplayed = validate(NextStepPage)?true:false;
+			if(MedicareErrorDisplayed){
 				if(MedicareValidFlag ==false){
 					System.out.println("Error Message Displayed for InCorrect Medicare ID Format");
 					return true;
@@ -242,9 +249,9 @@ public class IntroductionInformationPage extends UhcDriver{
 					return false;
 				}
 			}
-			else if(!validate(MedicareIDErrorMsg)){
+			else if(!MedicareErrorDisplayed &&  NextStepPageDisplayed){
 				if(MedicareValidFlag ==true){
-					System.out.println("Error Message is NOT Displayed for Correct Medicare ID Format");
+					System.out.println("Error Message is NOT Displayed for Correct Medicare ID Format; Step 2 Page Displayed");
 					return true;
 				}
 				else{
