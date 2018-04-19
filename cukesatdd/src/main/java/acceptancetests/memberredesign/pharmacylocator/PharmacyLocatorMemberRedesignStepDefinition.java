@@ -28,7 +28,8 @@ import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.member.ulayer.AccountHomePage;
 import pages.member.ulayer.LoginPage;
-import pages.redesign.PharmacySearchPage;
+import pages.regression.pharmacylocator.PharmacySearchPage;
+
 //import pages.redesign.RedesignLoginPage;
 //import pages.redesign.UlayerHomePage;
 
