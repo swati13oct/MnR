@@ -1,7 +1,7 @@
 /**
  * 
  */
-package pages.member.redesign;
+package pages.regression.sso;
 
 
 import java.util.Set;
