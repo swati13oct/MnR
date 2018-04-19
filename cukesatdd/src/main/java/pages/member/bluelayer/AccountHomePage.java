@@ -25,7 +25,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import pages.member.bluelayer.*;
 import pages.regression.pharmacylocator.PharmacySearchPage;
-
+import pages.regression.formsandresources.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -287,7 +287,7 @@ private WebElement claimsLink;
 
 
 @FindBy(xpath ="(//a[contains(@href,'my-plans/forms-and-resources')])[4]")
-private WebElement FormsandResourcesLinkn;
+private WebElement FormsandResourcesLink;
 
 
 
@@ -688,9 +688,9 @@ public void FormsandResourcesLinkinPlanSummaryPageBlayer()
         {
         
           myPlansTab.click();
-          waitforElement(FormsandResourcesLinkn);
+          waitforElement(FormsandResourcesLink);
         
-                FormsandResourcesLinkn.click();
+                FormsandResourcesLink.click();
                 
                 waitforElement(searchProviderLinkinFormsandResourcePage);
                 
@@ -1225,6 +1225,37 @@ public void FormsandResourcesLinkinPlanSummaryPageBlayer()
 	}*/
 		return new PharmacySearchPage(driver);
 	}
-    			    
-}
 
+	
+public pages.regression.formsandresources.FormsAndResourcesPage navigatetoFormsnResources() {
+		
+		if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a") || MRScenario.environmentMedicare.equalsIgnoreCase("test-a") || MRScenario.environment.equalsIgnoreCase("team-ci1")) {
+			System.out.println("Go to claims link is present "+driver.findElement(By.xpath("//a[text()='Go to Pharmacy Locator page']")).isDisplayed());
+			driver.findElement(By.xpath("//a[text()='Go to Pharmacy Locator page']")).click();			
+		}
+		else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
+			System.out.println("user is on Stage login page");						
+			if(driver.getCurrentUrl().contains("/dashboard"));
+			{
+				System.out.println("User is on dashboard page and URL is ====>"+driver.getCurrentUrl());
+				FormsandResourcesLink.click();
+				try {
+					Thread.sleep(10000);	
+					
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+				
+		}
+		else 
+		{
+			System.out.println("This script is only intended to be run using test harness on team-b or team-h. Update condition for your own environment");	
+		}
+    			    
+
+
+return new FormsAndResourcesPage(driver);
+}
+}

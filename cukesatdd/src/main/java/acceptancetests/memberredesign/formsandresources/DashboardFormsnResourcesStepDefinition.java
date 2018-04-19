@@ -1,36 +1,41 @@
-
-       package acceptancetests.memberredesign.formsandresources;
+package acceptancetests.memberredesign.formsandresources;
 
        import gherkin.formatter.model.DataTableRow;
 
-       import java.util.LinkedHashMap;
-       import java.util.List;
-       import java.util.Map;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Set;
 
 import junit.framework.Assert;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
-import pages.dashboard.acquisition.RegistrationInformationPage;
-import pages.dashboard.formsandresources.FormsAndResourcesPage;
+
+import pages.regression.formsandresources.FormsAndResourcesPage;
+import pages.member.bluelayer.HSIDLoginPage;
 import pages.member.redesign.NewLoginPage;
-import pages.member.ulayer.AccountHomePage;
+import pages.member.bluelayer.AccountHomePage;
 import pages.member.ulayer.LoginPage;
 import pages.member.ulayer.RallyDashboard;
 import atdd.framework.*;
-       import acceptancetests.data.CommonConstants;
-       import acceptancetests.data.PageConstants;
-       import atdd.framework.MRScenario;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.LoginCommonConstants;
+import acceptancetests.data.PageConstants;
+import acceptancetests.data.PageConstantsMnR;
+import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 
 /**
- * @Functionality : Forms and resources page navigation from dashboard and sections validation
- */
+* @Functionality : Forms and resources page navigation from dashboard and sections validation
+*/
 
 
        public class DashboardFormsnResourcesStepDefinition {
@@ -45,64 +50,94 @@ import cucumber.api.java.en.Then;
               /**
                * @toDo : user logs in
                */
-              @Given("^details of user to sign in on member redesign site to see forms and resources page$")
-                  public void details_of_user_for_member_redesign_site(DataTable givenAttributes) throws InterruptedException {
-                     // get test variables
-                     List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-                     Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-                     for (int i = 0; i < memberAttributesRow.size(); i++) {
-                         memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
-                     }
+             
+              @Given("^logging in with following details member logins in the member portal and validate elements$")
+  				public void login_with_member(DataTable memberAttributes) throws InterruptedException {
+                List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+                Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+                for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-                     // extract relevant field data from test variable parameters
-                     String userId = memberAttributesMap.get("userId");
-                     String password = memberAttributesMap.get("password");
+                 memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+                }
 
-                     // init Web Driver
-                     WebDriver wd = loginScenario.getWebDriver();
-                     loginScenario.saveBean(CommonConstants.WEBDRIVER, wd);
-                     
-                       
-                     // create Sign In context
-                     NewLoginPage newLoginPage = new NewLoginPage(wd);
-                    
-                     
-                     newLoginPage.navigateToNewDashboardUrls();
-                     getLoginScenario().saveBean(PageConstants.NEW_LOGIN_PAGE, newLoginPage);
-                     RallyDashboard rallydashboardpage = (RallyDashboard) newLoginPage.loginWith(userId, password);
-        			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-        			getLoginScenario().saveBean(PageConstants.RALLY_DASHBOARDPAGE,rallydashboardpage);
-                     
+                String category = memberAttributesMap.get("Member Type");
+				Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+				List<String> desiredAttributes = new ArrayList<String>();
+				for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator.hasNext();) {
+                {
+                                String key = iterator.next();
+                                desiredAttributes.add(memberAttributesMap.get(key));
+                }
 
-                   
-              }
+		}
+		System.out.println("desiredAttributes.." + desiredAttributes);
+		
+		Map<String, String> loginCreds = loginScenario.getUMSMemberWithDesiredAttributes(desiredAttributes);
+		String userName = null;
+		String pwd = null;
+		if (loginCreds == null) {
+		                // no match found
+		System.out.println("Member Type data could not be setup !!!");
+		Assert.fail("unable to find a " + desiredAttributes + " member");
+		} else {
+		                userName = loginCreds.get("user");
+		pwd = loginCreds.get("pwd");
+		System.out.println("User is..." + userName);
+		System.out.println("Password is..." + pwd);
+		                                getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
+		                                getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
+		                }
+   
+                WebDriver wd = getLoginScenario().getWebDriver();
+                getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+                HSIDLoginPage loginPage = new HSIDLoginPage(wd);
+                loginPage.validateelements();
+  AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
+                
+                if (accountHomePage!= null) {
+                                 getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
+                                Assert.assertTrue(true);
+                }
+                else {
+                                Assert.fail("***** Error in loading  Redesign Account Landing Page *****");
+}
+/*AssistiveRegistrationPage assistiveregistration = (AssistiveRegistrationPage) loginPage.doLoginWith(userName, pwd);
+if (assistiveregistration != null) {
+                 getLoginScenario().saveBean(PageConstantsMnR.ASSISTIVE_REGISTRATION_PAGE,assistiveregistration);
+                Assert.assertTrue(true);
+}
+else {
+                Assert.fail("***** Error in loading  Assistive Registration Page *****");
+}*/
+
+}
               
                               
-              /**
-               * @toDo : navigation to the forms and resources page from dashboard for terminated member
-               */
-                              @And("^click on the forms and resource link and navigate to forms and resource page for terminated member$")
-                              public void clickOnFormAndResourcesLink() throws InterruptedException {
-                                   RallyDashboard rallydashboardpage = (RallyDashboard) loginScenario.getBean(PageConstants.RALLY_DASHBOARDPAGE);
-                                              Thread.sleep(5000);
-                                                
-                                  FormsAndResourcesPage formsAndResourcesPage = rallydashboardpage.navigatetoFormsnResources();     
-                                  getLoginScenario().saveBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE, formsAndResourcesPage);
-                                              
-                              }
-                              
-                              /**
-                               * @toDo : navigation to the forms and resources page from dashboard for active member
-                               */
-                                              @And("^click on the forms and resource link and navigate to forms and resource page for active member$")
-                                              public void clickOnFormAndResourcesLinkActive() throws InterruptedException {
-                                                   RallyDashboard rallydashboardpage = (RallyDashboard) loginScenario.getBean(PageConstants.RALLY_DASHBOARDPAGE);
-                                                              Thread.sleep(5000);
-                                                                     
-                                                  FormsAndResourcesPage formsAndResourcesPage = rallydashboardpage.navigatetoFormsnResourcesforactivemembers();     
-                                                  getLoginScenario().saveBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE, formsAndResourcesPage);
-                                                              
-                                              }
+  /**
+   * @toDo : navigation to the forms and resources page from dashboard for terminated member
+   */
+  @And("^click on the forms and resource link and navigate to forms and resource page for terminated member$")
+  public void clickOnFormAndResourcesLink() throws InterruptedException {
+       AccountHomePage accounthomepage = (AccountHomePage) loginScenario.getBean(PageConstants.RALLY_DASHBOARDPAGE);
+                  Thread.sleep(5000);
+                    
+      FormsAndResourcesPage formsAndResourcesPage = accounthomepage.navigatetoFormsnResources();     
+      getLoginScenario().saveBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE, formsAndResourcesPage);
+                  
+  }
+  
+  /**
+   * @toDo : navigation to the forms and resources page from dashboard for active member
+   */
+  @And("^click on the forms and resource link and navigate to forms and resource page$")
+  public void clickOnFormAndResourcesLinkActive() throws InterruptedException {
+	  AccountHomePage accounthomepage = (AccountHomePage) loginScenario.getBean(PageConstants.RALLY_DASHBOARDPAGE);
+                  Thread.sleep(5000);
+                         
+      FormsAndResourcesPage formsAndResourcesPage = accounthomepage.navigatetoFormsnResources();     
+      getLoginScenario().saveBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE, formsAndResourcesPage);
+                  
+  }
                                               
                          /**
                           * @toDo : show that order plan material is not visible for terminated member
@@ -112,9 +147,9 @@ import cucumber.api.java.en.Then;
                          @And("^for terminated member order plan materials link is not displayed$")
                          public void linknotdisplayedforterminated()
                          {
-                       	  
-                       	  FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);        	  
-                       	  formsAndResourcesPage.checkOrderPlanMaterialLinkforterminated();
+                                  
+                                  FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);                     
+                                  formsAndResourcesPage.checkOrderPlanMaterialLinkforterminated();
                          }                    
                                               
                                                              
@@ -122,26 +157,26 @@ import cucumber.api.java.en.Then;
                          @And("^for active member both the links are displayed$")
                          public void linksdisplayedforactivemembers() throws InterruptedException
                          {
-			                   FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);        	  
-			                   Thread.sleep(2000); 
-			                   formsAndResourcesPage.scroll();
-			                   formsAndResourcesPage.getOrderPlanMaterialLink().isDisplayed();
-			               
-			                   Thread.sleep(2000);                    
-			                   formsAndResourcesPage.getTemporaryIdcardlink().isDisplayed();
-			                                      
+                                                                   FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);                     
+                                                                   Thread.sleep(2000); 
+                                                                   formsAndResourcesPage.scroll();
+                                                                   formsAndResourcesPage.getOrderPlanMaterialLink().isDisplayed();
+                                                               
+                                                                   Thread.sleep(2000);                    
+                                                                   formsAndResourcesPage.getTemporaryIdcardlink().isDisplayed();
+                                                                                      
                        
                          }                              
                                               
-		               @And("^clicking on the order plan materials link the user is navigated back to the forms and resources page$")
-		                   public void planmateriallink() throws InterruptedException
-		                     {
-		                 FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
-		                   Thread.sleep(2000);
-		                 formsAndResourcesPage.validatenclickOrderPlanMaterial();
-		                 
-				                                             
-		                        }
+                                               @And("^clicking on the order plan materials link the user is navigated back to the forms and resources page$")
+                                                   public void planmateriallink() throws InterruptedException
+                                                     {
+                                                 FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+                                                   Thread.sleep(2000);
+                                                 formsAndResourcesPage.validatenclickOrderPlanMaterial();
+                                                 
+                                                                                                             
+                                                        }
                               /**
                                * @toDo : verifies the EOB section
                                */
@@ -309,7 +344,7 @@ import cucumber.api.java.en.Then;
                               
                               @And("^validate that the EOB statemnets section is displayed$")
                              public void validateEOBship() throws  InterruptedException {
-                            	  FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+                                  FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
                                   Thread.sleep(5000);
                                   System.out.println("eob section");
                                   formsAndResourcesPage.validateshipeob();
@@ -331,11 +366,11 @@ import cucumber.api.java.en.Then;
                                             /*  formsAndResourcesPage.clickonperceptionpopup();*/
                                               System.out.println("fnr section");
                                               if(formsAndResourcesPage.getFormsandResourcesSection().isDisplayed())
-                                            	  {
-                                            	    System.out.println("true");
-                                            	  }
+                                                  {
+                                                    System.out.println("true");
+                                                  }
                                               else 
-                                            	  System.out.println("false");
+                                                  System.out.println("false");
                                               
                                               
                                               

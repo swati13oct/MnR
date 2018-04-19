@@ -4,9 +4,9 @@ Feature:G1.1 To validate forms and resources page in dashboard site
 
     @fnrvalidation
   Scenario Outline: 
-    Given details of user to sign in on member redesign site to see forms and resources page
-          | userId   | <userId>  |
-      | password | <password> |
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>  |
+      | Member Type    | <memberType>|
     And click on the forms and resource link and navigate to forms and resource page for active member
     Then validate plan materials section
     And for active member both the links are displayed
@@ -26,9 +26,9 @@ Feature:G1.1 To validate forms and resources page in dashboard site
       | RENEW_MAGAZINE_SECTION | <RenewMagazineVisible> |
       
     Examples: 
-      | userId         | password   | Anoc_section  |AnnualDirectoriesSection  |Provider_Searchlink|  Pharmacy_Searchlink| EOBMedicalLinkVisible | EOBDrugLinkVisible | MyDocumentVisible | RenewMagazineVisible |
+      | planType         | memberType   | Anoc_section  |AnnualDirectoriesSection  |Provider_Searchlink|  Pharmacy_Searchlink| EOBMedicalLinkVisible | EOBDrugLinkVisible | MyDocumentVisible | RenewMagazineVisible |
       # mauhc
-      | q1_feb_uhc153  | Password@1 | NO            |NO                         |NO                 |NO                  |YES                    | NO                | YES                | YES                  |
+      | MAPD  | Individual | NO            |NO                         |NO                 |NO                  |YES                    | NO                | YES                | YES                  |
       # mapdaarp
      | q1_aarp_feb197  | Password@1 | YES           |YES                        |YES                |YES                 |YES                   | YES               | YES                |YES                   |
       #pdpuhc
