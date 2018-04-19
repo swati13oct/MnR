@@ -24,9 +24,9 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.dashboard.member.ulayer.ClaimSummarypage;
 import pages.member.redesign.ContactUsPage;
 import pages.redesign.PharmacySearchPage;
+import pages.regression.claims.ClaimSummarypage;
 
 /**
  * @author pjaising
@@ -950,7 +950,7 @@ driver.switchTo().window(mainwindow);
 		return flag;
 	}
 	
-public pages.dashboard.member.ulayer.ClaimSummarypage navigateToClaimsSummaryPage() {
+public pages.regression.claims.ClaimSummarypage navigateToClaimsSummaryPage() {
 		
 		if (MRScenario.environmentMedicare.equalsIgnoreCase("team-h") || MRScenario.environmentMedicare.equalsIgnoreCase("test-a") || (MRScenario.environmentMedicare.equalsIgnoreCase("team-t") || MRScenario.environment.equalsIgnoreCase("team-ci1"))) {
 			System.out.println("Go to claims link is present "+driver.findElement(By.xpath("//a[text()='Go to Claims page']")).isDisplayed());
@@ -993,7 +993,7 @@ public pages.dashboard.member.ulayer.ClaimSummarypage navigateToClaimsSummaryPag
 		return new ClaimSummarypage(driver);
 }
 
-public pages.dashboard.member.ulayer.ClaimDetailsPage navigateToClaimDetailsPage() {
+public pages.regression.claims.ClaimDetailsPage navigateToClaimDetailsPage() {
 	CommonUtility.waitForPageLoad(driver, claimstablemoreinfolink, 60);
 	claimstablemoreinfolink.click();
 	CommonUtility.waitForPageLoad(driver, claimDetTableMainSection, 30);
@@ -1005,10 +1005,10 @@ public pages.dashboard.member.ulayer.ClaimDetailsPage navigateToClaimDetailsPage
 	 */
 	System.out.println(driver.getTitle());
 	if (driver.getTitle().equalsIgnoreCase("claims   ")) {
-		return new pages.dashboard.member.ulayer.ClaimDetailsPage(driver);
+		return new pages.regression.claims.ClaimDetailsPage(driver);
 
 	}
-	return new pages.dashboard.member.ulayer.ClaimDetailsPage(driver);
+	return new pages.regression.claims.ClaimDetailsPage(driver);
 }
 
 public pages.redesign.PharmacySearchPage navigateToRedesignPharmacyLocaterPage() {

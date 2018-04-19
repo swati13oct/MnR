@@ -1,4 +1,4 @@
-package pages.dashboard.member.ulayer;
+package pages.regression.claims;
 import java.util.List;
 
 import org.openqa.selenium.By;
