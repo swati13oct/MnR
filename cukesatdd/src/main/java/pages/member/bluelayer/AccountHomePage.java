@@ -24,6 +24,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import pages.member.bluelayer.*;
+import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -418,7 +419,7 @@ private WebElement searchforproviderlinkinClaimsPage;
     	}
 
         
-        public ProfilePreferencesPage navigateDirectToProfilePage() throws InterruptedException  {
+        public ProfileandPreferencesPage navigateDirectToProfilePage() throws InterruptedException  {
     		
         	if (MRScenario.environment.equalsIgnoreCase("stage")) 
         	{
@@ -444,7 +445,7 @@ private WebElement searchforproviderlinkinClaimsPage;
 
     				if (driver.getTitle().equalsIgnoreCase("Profile")) {
 
-    					return new ProfilePreferencesPage(driver);
+    					return new ProfileandPreferencesPage(driver);
     				}
     			
         	}
@@ -470,7 +471,7 @@ private WebElement searchforproviderlinkinClaimsPage;
     		CommonUtility.waitForPageLoad(driver, heading, 50);
     		if(driver.getTitle().equalsIgnoreCase("Profile"))
     		{
-    			return new ProfilePreferencesPage(driver);
+    			return new ProfileandPreferencesPage(driver);
     		}
     		
     		return null;
@@ -1112,7 +1113,7 @@ public void FormsandResourcesLinkinPlanSummaryPageBlayer()
 
     		}
 
-    				public ProfilePageHsid navigateDirectToProfilePageHsid() throws InterruptedException {
+    				public ProfileandPreferencesPage navigateDirectToProfilePageHsid() throws InterruptedException {
     					// TODO Auto-generated method stub
     					if (MRScenario.environment.equalsIgnoreCase("stage")) 
     		        	{
@@ -1137,7 +1138,7 @@ public void FormsandResourcesLinkinPlanSummaryPageBlayer()
 
     		    				if (driver.getTitle().equalsIgnoreCase("Profile")) {
 
-    		    					return new ProfilePageHsid(driver);
+    		    					return new ProfileandPreferencesPage(driver);
     		    				}
     		    			
     		        	}
@@ -1172,7 +1173,7 @@ public void FormsandResourcesLinkinPlanSummaryPageBlayer()
     		    		if(driver.getTitle().equalsIgnoreCase("Profile"))
     		    		{
     		    			System.out.println("here");
-    		    			return new ProfilePageHsid(driver);
+    		    			return new ProfileandPreferencesPage(driver);
     		    		}
     		    
     					return null;
