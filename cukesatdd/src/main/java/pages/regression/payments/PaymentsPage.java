@@ -1,7 +1,7 @@
 /**
  * 
  */
-package pages.regression.paymnts;
+package pages.regression.payments;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;

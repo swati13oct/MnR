@@ -1,4 +1,4 @@
-package pages.member.ulayer;
+package pages.regression.payments;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -70,22 +70,22 @@ public class ConfirmOneTimePaymentPage extends UhcDriver{
 		if(driver.getTitle().equalsIgnoreCase("overview")){
 			System.out.println("Title matched");
 			Thread.sleep(8000);
-		}		
-		
+		}			
 		try{
-		if(OneTimePaymentError.getText().contains("only one payment request can be submitted per business day"))
-		{
-			System.out.println("Payment error message dispayed");
-		return new OneTimePaymentSuccessPage(driver);
-		}
+			if(SuccessPay.getText().contains("Thank you for your payment"))
+			{
+				return new OneTimePaymentSuccessPage(driver);			
+			}		
 		}
 		catch(Exception e)
 		{
 			System.out.println("Payment success page not displayed");
 		}
-		if(SuccessPay.getText().contains("Thank you for your payment"))
+		
+		if(OneTimePaymentError.getText().contains("only one payment request can be submitted per business day"))
 		{
-			return new OneTimePaymentSuccessPage(driver);			
+			System.out.println("Payment error message dispayed");
+		return new OneTimePaymentSuccessPage(driver);
 		}
 		else
 			return null;

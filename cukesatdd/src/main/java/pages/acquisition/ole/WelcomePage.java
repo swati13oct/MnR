@@ -70,8 +70,8 @@ public class WelcomePage extends UhcDriver{
 			e.printStackTrace();
 		}
 
-		//validate(WelcomePageHeader);
-		//validate(PlanYear_PlanName);
+		validate(WelcomePageHeader);
+		validate(PlanYear_PlanName);
 		
 	}
 
@@ -87,18 +87,29 @@ public class WelcomePage extends UhcDriver{
 		String Expected_ZipCode = planDetailsMap.get("Zip Code");
 		String Expected_County = planDetailsMap.get("County");
 		String Expected_PlanPremium = planDetailsMap.get("Plan Premium");
-		if(PlanYear_PlanName_Text.contains(Expected_PlanName) && 
-				PlanYear_PlanName_Text.contains(Expected_PlanYear) && 
-				Zip_County_Text.contains(Expected_County)&& 
-				Zip_County_Text.contains(Expected_ZipCode) && 
-				Premium.contains(Expected_PlanPremium)){
-			System.out.println("All Plan Details are Validated");
-			return true;
-			
+		boolean flag = false;
+		
+		if(PlanYear_PlanName_Text.contains(Expected_PlanName)){
+			flag = true;
+			System.out.println("Plan Name is Validated : "+flag);
 		}
-		return false;
+		if(PlanYear_PlanName_Text.contains(Expected_PlanYear)){
+			flag = (flag==false)?false:true;
+			System.out.println("Plan Year is Validated : "+flag);
+		}
+		if(Zip_County_Text.contains(Expected_County)){
+			flag = (flag==false)?false:true;
+			System.out.println("Plan County is Validated : "+flag);
+		}
+		if(Zip_County_Text.contains(Expected_ZipCode)){
+			flag = (flag==false)?false:true;
+			System.out.println("Plan ZIP CODE is Validated : "+flag);
+		}
+		if(Premium.contains(Expected_PlanPremium)){
+			flag = (flag==false)?false:true;
+			System.out.println("Plan Premium is Validated : "+flag);
+		}
+		System.out.println("Plan Details are Validated : "+flag);
+		return flag;
 	}
-
-
-
 }
