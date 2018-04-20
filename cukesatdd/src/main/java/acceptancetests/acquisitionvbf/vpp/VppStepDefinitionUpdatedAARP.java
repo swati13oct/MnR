@@ -209,10 +209,11 @@ public class VppStepDefinitionUpdatedAARP {
 	}
 
 	/**
+	 * @throws InterruptedException 
 	 * @toDo:user validates plan summary for the below plan
 	 */
 	@And("^the user validates plan summary for the below plan in the AARP site$")
-	public void user_validates_plan_summary(DataTable planAttributes) {
+	public void user_validates_plan_summary(DataTable planAttributes) throws InterruptedException {
 		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {

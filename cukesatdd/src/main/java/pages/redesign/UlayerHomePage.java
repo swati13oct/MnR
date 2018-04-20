@@ -17,6 +17,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.redesign.BenefitsCoveragePage;
+import pages.regression.ordermaterials.OrderMaterialsPage;
 
 /**
  * @author sdwaraka
@@ -212,12 +213,12 @@ public class UlayerHomePage extends UhcDriver {
 	}
 
 
-	public OrderplanmaterialsPage navigateToOrderPlanMaterialsPage() throws InterruptedException {
+	public OrderMaterialsPage navigateToOrderPlanMaterialsPage() throws InterruptedException {
 		driver.navigate().to(Page_URL+".com/content/medicare/member/order-materials/overview.html");
 		//OrderPlanMaterialslnk.click();
 		CommonUtility.checkPageIsReady(driver);
 		if (orderplanHeadertxt.isDisplayed()) {
-			return new OrderplanmaterialsPage(driver);
+			return new OrderMaterialsPage(driver);
 		}
 		return null;
 	}

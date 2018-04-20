@@ -11,9 +11,11 @@ import cucumber.api.CucumberOptions;
  * this file is to run test cases for Fast and Furious User Stories in Acquisition sites
  */
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount=2,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAprilRelease.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAprilRelease")
+@ExtendedCucumberOptions(screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDfastandfuriousAcquisitionTest.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDfastandfuriousAcquisitionTest")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAprilRelease.json" }, tags = { "@fastandfurious,@aprilRelease2018"})
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDfastandfuriousAcquisitionTest.json" }, tags = {"@OLE_PlanDetails_Aarp"})
 public class RunMRATDDfastandfuriousAcquisitionTest { 
-
+//,@aprilRelease2018
+	//retryCount=2,
+	//@OLE_AARP_HicnMBI_Validations,@UHC_OLE_HicnMBI_Validations,@OLE_AARP_HicnMBI_Validations
 }
