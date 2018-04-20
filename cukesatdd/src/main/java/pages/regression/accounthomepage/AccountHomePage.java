@@ -27,7 +27,7 @@ import pages.member.bluelayer.ProfilePageHsid;
 import pages.member.bluelayer.ProfilePreferencesPage;
 import pages.member.redesign.ContactUsPage;
 import pages.member.ulayer.OneTimePaymentsPage;
-import pages.member.ulayer.PaymentHistoryPage;
+import pages.redesign.PaymentHistoryPage;
 import pages.member.ulayer.PlanComparePage;
 import pages.member.ulayer.Rallytool_Page;
 import pages.member.ulayer.TestHarness;
