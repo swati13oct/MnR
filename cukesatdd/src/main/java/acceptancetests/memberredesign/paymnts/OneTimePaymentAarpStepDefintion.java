@@ -136,7 +136,7 @@ public class OneTimePaymentAarpStepDefintion {
 	
 	@When("^the user navigates to Recurring payment history$")
 	public void user_views_Recurring_payment_history() throws InterruptedException {
-		pages.member.bluelayer.AccountHomePage AHPage = (pages.member.bluelayer.AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+		pages.regression.accounthomepage.AccountHomePage AHPage = (pages.regression.accounthomepage.AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 		AHPage = AHPage.navigateToAutoPaymentHistoryPage();
 		
       if (AHPage!=null){
@@ -148,7 +148,7 @@ public class OneTimePaymentAarpStepDefintion {
 	
 	@Then("^User Scrolls down to validate Payment History and Scrolls up$")
 	public void Validate_History_Payment() throws InterruptedException{
-		pages.member.bluelayer.AccountHomePage AHPage = (pages.member.bluelayer.AccountHomePage) getLoginScenario().getBean(PageConstants.DashPage);
+		pages.regression.accounthomepage.AccountHomePage AHPage = (pages.regression.accounthomepage.AccountHomePage) getLoginScenario().getBean(PageConstants.DashPage);
 		PaymentHistoryPage paymentHistoryPage = AHPage.scrollDownAndUp();
 		if (paymentHistoryPage!=null){
 	     	  getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);

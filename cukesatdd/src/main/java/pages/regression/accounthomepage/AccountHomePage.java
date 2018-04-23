@@ -685,7 +685,7 @@ public class AccountHomePage extends UhcDriver {
 		}
 	}
 
-	public PaymentHistoryPage scrollDownAndUp() throws InterruptedException {
+	public pages.regression.payments.PaymentHistoryPage scrollDownAndUp() throws InterruptedException {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,500)", "");
 
@@ -700,7 +700,7 @@ public class AccountHomePage extends UhcDriver {
 			System.out.println("Payment History Exists");
 			jse.executeScript("window.scrollBy(0,-600)", "");
 			Thread.sleep(3000);
-			return new PaymentHistoryPage(driver);
+			return new pages.regression.payments.PaymentHistoryPage(driver);
 		} else {
 			return null;
 		}
