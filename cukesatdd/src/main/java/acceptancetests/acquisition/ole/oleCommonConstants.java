@@ -10,13 +10,13 @@ package acceptancetests.acquisition.ole;
 public class oleCommonConstants {
 
 	public static final String COMMON_DATA = "common";
-	public static final String PLAN_NAME = "planName";
-	public static final String PLAN_TYPE = "planName";
-	public static final String ZIPCODE = "zipcode";
-	public static final String COUNTY = "county";
-	public static final String PLAN_YEAR = "planyear";
-	public static final String PLAN_PREMIUM = "premium";
-	public static final String TFN = "tfn";
+	public static final String OLE_PLAN_NAME = "planName";
+	public static final String OLE_PLAN_TYPE = "planType";
+	public static final String OLE_ZIPCODE = "zipcode";
+	public static final String OLE_COUNTY = "county";
+	public static final String OLE_PLAN_YEAR = "planyear";
+	public static final String OLE_PLAN_PREMIUM = "premium";
+	public static final String OLE_TFN = "tfn";
 	public static final String ACQ_SITE_NAME = "acq_site";
 
 }

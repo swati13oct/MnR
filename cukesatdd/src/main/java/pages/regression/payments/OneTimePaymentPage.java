@@ -1,6 +1,4 @@
-
-
-package pages.member.ulayer;
+package pages.regression.payments;
 
 import java.util.Map;
 

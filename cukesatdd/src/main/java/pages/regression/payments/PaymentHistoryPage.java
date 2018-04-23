@@ -1,7 +1,7 @@
 /**
  * 
  */
-package pages.member.ulayer;
+package pages.regression.payments;
 
 import java.util.List;
 import java.util.Map;
@@ -25,6 +25,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.dashboard.eob.EOBPage;
+import pages.member.ulayer.SetupAutoPaymentPage;
 
 /**
  * @author pperugu
