@@ -11,43 +11,22 @@ package acceptancetests.data;
  */
 public class OLE_PageConstants {
 	
-	
 	public static final String OLE_WELCOME_PAGE = "olewelcomepage";
-
+	public static final String OLE_MEDICARE_INFO_PAGE = "olemedicareinfopage";
+	public static final String OLE_AUTHORIZATION_PAGE = "oleauthorizationpage";
+	public static final String OLE_COVERAGE_INFO_PAGE = "olecoverageinfopage";
+	public static final String OLE_CONFIRMATION_PAGE = "oleconfirmationpage";
+	public static final String OLE_PERSONAL_INFO_PAGE = "olepersonalinfopage";
+	public static final String OLE_PLAN_PREMIUM_PAGE = "oleplanpremiumpage";
+	public static final String OLE_PRELIM_QUESTIONS_PAGE = "oleprelimquestionspage";
+	public static final String OLE_PRIMARY_CARE_PHYSICIAN_PAGE = "oleprimarycarephysicianpage";
+	public static final String OLE_PROPOSED_EFF_DATE_PAGE = "oleproposedeffdatepage";
+	public static final String OLE_REVIEW_SUBMIT_PAGE = "olereviewsubmitpage";
+	public static final String OLE_SPECIAL_ELECTION_PERIOD_PAGE = "olespecialelectionperiodpage";
+	public static final String OLE_SUPPLEMENTAL_BENEFITS_PAGE = "olesupplementalbenefitspage";
 	
-	public static final String PLAN_INFORMATION = "planInformationPage";
-
-	public static final String BENEFICIARY_INFORMATION_PAGE = "beneficiaryInformationPage";
-
-	public static final String INTRODUCTION_INFORMATION_PAGE = "introductionInformationPage";
-	
-	public static final String ESRD_PAGE = "esrdPage";
-
-	public static final String PRESCRIPTION_DRUG_COVERAGE_PAGE = "prescriptiondrugcoveragePage";
-
-	public static final String LONG_TERM_CARE_PAGE = "longtermcarePage";
-
-	public static final String MEDICAID_PAGE = "medicaidPage";
-
-	public static final String OTHER_HEALTH_INSURANCE_PAGE = "otherhealthinsPage";
-	
-	public static final String PRIMARY_CARE_PROVIDER_PAGE = "primarycareproviderPage";
-
-	public static final String PLAN_PAYMENT_OPTION_PAGE = "planpaymentoptionPage";
-
-	public static final String OPTIONAL_RIDERS_PAGE = "optionalridersPage";
-	
-	public static final String PROPOSED_EFFECTIVE_DATE_PAGE = "pedPage";
-
-	public static final String ADDITIONAL_INFORMATION_PAGE = "additionalInformation";
-
-	public static final String REVIEW_APPLICATION_PAGE = "reviewApplication";
-
-	public static final String SUBMIT_APPLICATION_PAGE = "submitApplicationPage";
-
-	public static final String ENROLLMENT_CONFIRMATION_PAGE = "enrollmentConfirmationPage";
-
-	public static final String PERSONAL_IDENTIFICATION_PAGE = "personalIdentificationPage";
-
-	
+	//Pop-up Modal Pages
+	public static final String OLE_LEAVING_MODAL_PAGE = "oleleavingmodalpage";
+	public static final String OLE_CANCELLATION_MODAL_PAGE = "olecancellationmodalpage";
+	public static final String OLE_LEARNMORE_MODAL_PAGE = "olelearnmoremodalpage";
 }

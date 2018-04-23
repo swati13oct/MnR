@@ -24,58 +24,20 @@ import atdd.framework.UhcDriver;
  *
  */
 public class PersonalInformationPage extends UhcDriver{
+		
+	//OLE Common Elements
+	@FindBy(xpath = "//*[@class = 'logo']")
+	private WebElement SiteLogo;
 	
-	@FindBy(id="firstnametextbox")
-	private WebElement firstNameField;
+	@FindBy(xpath = "//*[@class = 'cta-button next-button']")
+	private WebElement NextBtn;
 	
-	@FindBy(id = "middlenametextbox")
-	private WebElement middleInitialField;
-	
-	@FindBy(id = "lastnametextbox")
-	private WebElement lastNameField;
-	
-	/*@FindBy(xpath = ".//*[@id='medicalclaimnum']/input[2]")
-	private WebElement claimNumberField;*/
-	
-	@FindBy(xpath = "//*[@id='medicalclaimnumtext'][2]")
-	private WebElement claimNumberField;
-	
-	@FindBy(id = "part-a")
-	private WebElement partAStartDateField;
-	
-	@FindBy(id = "part-b")
-	private WebElement partBStartDateField;
-	
-	@FindBy(id = "enrollmentdisclaimerstep1btn")
-	private WebElement viewEnrollDisclaimer;
-	
-	@FindBy(id="disclaimerAgreeBtndisclaimer")
-	private WebElement disclaimeragreebtn;
-	
-	@FindBy(id="beginOnlineEnrollmentbtn")
-	private WebElement enrollmentNext;
-	
-	@FindBy(id = "beginOnlineEnrollmentBtn")
-	private WebElement beginOnlineEnrBtn;
-	
-	@FindBy(xpath = "//div[@id='beginOnlineEnrollment']/span")
-	private WebElement alreadyEnrolledErrorMsg;
-	
-	@FindBy(id = "medicalclaimnumerr")
-	private WebElement MedicareIDErrorMsg;
-	
-	@FindBy(id = "step2Heading")
-	private WebElement NextStepPage;
-	
-	
-	private PageData PersonalInformationPage;
+	@FindBy(xpath = "//*[@class = 'cancel-button modal-link']")
+	private WebElement CancelEnrollmentLink;
 
 	public PersonalInformationPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		String fileName = CommonConstants.INTRODUCTION_INFORMATION_PAGE_DATA;
-		PersonalInformationPage = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
 		openAndValidate();
 	}
 

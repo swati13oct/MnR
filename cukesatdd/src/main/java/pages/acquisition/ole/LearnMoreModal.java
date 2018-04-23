@@ -23,20 +23,16 @@ import atdd.framework.UhcDriver;
  *@author sdwaraka
  *
  */
-public class CoverageInformationPage extends UhcDriver{
+public class LearnMoreModal extends UhcDriver{
 	
+	@FindBy(id = "view-learn-enrollment")
+	private WebElement LearnMore_Modal;
 	
-	//OLE Common Elements
-	@FindBy(xpath = "//*[@class = 'logo']")
-	private WebElement SiteLogo;
+	@FindBy(xpath = "//*[@id='view-learn-enrollment']//a")
+	private WebElement BackBtn;
 	
-	@FindBy(xpath = "//*[@class = 'cta-button next-button']")
-	private WebElement NextBtn;
-	
-	@FindBy(xpath = "//*[@class = 'cancel-button modal-link']")
-	private WebElement CancelEnrollmentLink;
-	
-	public CoverageInformationPage(WebDriver driver) {
+
+	public LearnMoreModal(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
@@ -44,10 +40,24 @@ public class CoverageInformationPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		
+		validate(LearnMore_Modal);
 		
 	}
 
-
+	public WelcomePage returntoOLE() {
+		validate(BackBtn);
+		BackBtn.click();
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(driver.getCurrentUrl().contains("enrollment")){
+			System.out.println("OLE Welcome Page is Displayed");
+			return new WelcomePage(driver);
+		}
+		return null;	
+	}
 
 }

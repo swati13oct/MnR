@@ -26,29 +26,33 @@ import atdd.framework.UhcDriver;
 public class MedicareInformationPage extends UhcDriver{
 	
 	//OLE Common Elements
-
-	@FindBy(className = "logo")
+	@FindBy(xpath = "//*[@class = 'logo']")
 	private WebElement SiteLogo;
-	
-	@FindBy(className = "cta-button next-button")
+		
+	@FindBy(xpath = "//*[@class = 'cta-button next-button']")
 	private WebElement NextBtn;
-	
-	@FindBy(className = "cancel-button modal-link")
+		
+	@FindBy(xpath = "//*[@class = 'cancel-button modal-link']")
 	private WebElement CancelEnrollmentLink;
 
-	
-	@FindBy(className = "only-insurance-info")
+	//Page Header
+	@FindBy(xpath = "//*[@class = 'ole-form-header']")
 	private WebElement MedicalInfoPageHeader;
 	
 	//Select Medicare Card Type - A 0r B
 	
-	@FindBy(xpath = "//*[@id='card-type-before']/following-sibling::label")
+	@FindBy(id="card-typeA")
 	private WebElement SelectCardA;
 	
-	@FindBy(xpath = "//*[@id='card-type-after']/following-sibling::label")
+	@FindBy(id="card-typeB")
 	private WebElement SelectCardB;
 	
+	@FindBy(id="card-type-before")
+	private WebElement RadioCardA;
 	
+	@FindBy(id="card-type-after")
+	private WebElement RadioCardB;
+
 	//Medicare Information fields
 	@FindBy(id="First")
 	private WebElement firstNameField;
@@ -70,13 +74,49 @@ public class MedicareInformationPage extends UhcDriver{
 	
 	public MedicareInformationPage(WebDriver driver) {
 		super(driver);
+		PageFactory.initElements(driver, this);
 		openAndValidate();
 	}
 
 	@Override
 	public void openAndValidate() {
 		
+		System.out.println("Validating Medicare Information for OLE");
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validate(MedicalInfoPageHeader);
+		validate(SelectCardA);
+		validate(SelectCardB);
+	}
+
+	public boolean validate_required_fields() {
+		boolean flag = false;
 		
+		if(!RadioCardA.isSelected() && !RadioCardA.isSelected()){
+			if(!NextBtn.isEnabled() && !validate(firstNameField)&& !validate(lastNameField) && !validate(claimNumberField)
+					&& !validate(partAStartDateField)&& !validate(partBStartDateField)){
+				System.out.println("Medicare Information Fields are not Displayed when Card Type is not selected");
+				flag= true;
+			}
+			else{
+				System.out.println("Validation for Required Medicare Card Type Selection failed ");
+				flag= false;
+			}
+		}
+		SelectCardA.click();
+		if(validate(firstNameField)&& validate(lastNameField) && validate(claimNumberField)
+				&& validate(partAStartDateField)&& validate(partBStartDateField)){
+			
+			System.out.println("Medicare Information Fields are Displayed when Card Type is not selected");
+			flag = (flag==false)?false:true;
+		}
+		
+		
+		return flag;
 	}
 
 
