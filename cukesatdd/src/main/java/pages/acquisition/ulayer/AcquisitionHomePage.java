@@ -109,7 +109,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public static WebElement registerherelink;
 
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
-	
+	private static String UHC_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
 	private static String AARP_ACQISITION_OFFLINE_PAGE_URL = MRConstants.AARP_URL_OFFLINE;
 
 	private PageData globalFooter;
@@ -204,6 +204,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public VPPPlanSummaryPage searchPlans(String zipcode, String countyName) {
 		
+		
+		try {
+			Thread.sleep(10000);
+			} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		sendkeys(zipCodeField, zipcode);
 		
 		viewPlansButton.click();
