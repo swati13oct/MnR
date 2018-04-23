@@ -25,7 +25,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import pages.member.bluelayer.*;
-import pages.member.ulayer.PaymentHistoryPage;
+
+import pages.regression.payments.PaymentHistoryPage;
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 
 import org.openqa.selenium.support.ui.ExpectedConditions;

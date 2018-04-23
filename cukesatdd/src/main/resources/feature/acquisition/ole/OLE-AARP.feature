@@ -10,9 +10,10 @@ When the user performs plan search using following information in the AARP site
 And the user views the plans of the below plan type in AARP site
 	| Plan Type | <plantype> |
 And the user validates the available plans for selected plan types in the AARP site
-Then the user validates plan summary for the below plan in the AARP site
-	| Plan Name | <planName> |
+#Then the user validates plan summary for the below plan in the AARP site
+#	| Plan Name | <planName> |
 Then the user clicks on Enroll Now for AARP site to start the OLE flow
+	| Plan Name | <planName> |
 Then the user validates the Plan details on OLE 
 
 	
@@ -37,7 +38,8 @@ Then the user validates the Plan details on OLE
 
 Examples:
 	| zipcode | county             | plantype |  planName                                             |
-	| 80002   | Adams County | MAPD     	  |  AARP MedicareComplete SecureHorizons Plan 2 (HMO)    |
+	| 90210   | Los Angeles County | MA	  | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    |
+	| 90210		| Los Angeles County | PDP  | AARP MedicareRx Walgreens (PDP) 	|
 	
 	@OLE_PlanCompare_Aarp
 Scenario Outline: OLE Landing from VPP Plan Compare

@@ -88,7 +88,7 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(xpath="//*[@class='tel ng-binding']")
 	private WebElement RightRail_TFN;
 
-	@FindBy(xpath="//a[contains(text(), 'Enroll in Plan')][1]")
+	@FindBy(xpath="//a[contains(text(), 'Enroll in plan')]")
 	private WebElement EnrollinPlan;
 
 	@FindBy(xpath="//*[@id='medicalBenefits']/div[1]/table/tbody/tr[1]/td[4]/strong")
@@ -283,12 +283,8 @@ public class PlanDetailsPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		presDrugTab.click();
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		CommonUtility.waitForPageLoad(driver, estimateDrugBtn, 20);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", estimateDrugBtn);
 		estimateDrugBtn.click();
 		try {
 			Thread.sleep(4000);
@@ -381,14 +377,24 @@ public String getPlanPremium(String PlanName) {
  */
 public WelcomePage Enroll_OLE_Plan(String planName) throws InterruptedException {
 	
+	try {
+		Thread.sleep(10000);
+		} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
 	System.out.println("Enroll in Plan for Plan : "+planName);
 	try {
-	validate(EnrollinPlan);
-	
-	System.out.println("Found Enroll IN Plan Button for the Plan : "+planName);
+		if(validate(EnrollinPlan))
+			System.out.println("Found Enroll IN Plan Button for the Plan : "+planName);
+		else
+			System.out.println("Enroll in Plan Button is Not Displayed ");
+
 	}catch(Exception e){
 		System.out.println("Enroll in Plan Button is Not Displayed ");
 	}
+	
 	EnrollinPlan.click();
 	
 	try {

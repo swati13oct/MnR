@@ -734,7 +734,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 		//waitforElement(select_btn_first);
 		System.out.println("first pharmacy");
+		
 		if (select_btn_first.isDisplayed()) {
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", select_btn_first);
 			select_btn_first.click();
 		}
 		System.out.println("first pharmacy 2");
