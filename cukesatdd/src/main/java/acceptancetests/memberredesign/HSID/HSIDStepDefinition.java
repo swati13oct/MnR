@@ -53,7 +53,7 @@ public class HSIDStepDefinition {
 
 
 	
-	@And("^login with following details logins in the member portal and validate elements$")
+	@Given("^login with following details logins in the member portal and validate elements$")
 	public void login_with_member(DataTable memberAttributes) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();

@@ -88,9 +88,9 @@ public class MRScenario {
                public static int count = 0;
 
                
-               public static final String USERNAME = "ucpadmin";
+               public static final String USERNAME = "pdas101";
 
-               public static final String ACCESS_KEY ="2817affd-616e-4c96-819e-4583348d7b37";
+               public static final String ACCESS_KEY ="7b410de4-e6b2-4af6-98fc-2758bceba3f0";
                
 
                //public static final String USERNAME = System.getenv("SAUCE_USERNAME");
