@@ -1,7 +1,7 @@
 @fastandfurious
-@OLE_Ulayer @BuildAcceptanceTest
+@OLE_Ulayer
 Feature: To test OLE common tool flow in AARP site
-@US0000 @OLE_Sanity
+@BuildAcceptanceTest
 Scenario Outline: Build Validation Test for OLE Flow 
 Given the user lands on OLE Welcome Page wity following Plan Details
 	| Zip Code    | <zipcode> |
