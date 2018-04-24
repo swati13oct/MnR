@@ -42,14 +42,14 @@ public class HsidRegistrationStepDefinition {
 	@Given("^the user is on medicare sign in page$")
 	public void the_user_is_on_medicare_sign_in_page() throws Throwable {
 		WebDriver wd = getLoginScenario().getWebDriver();
-		HsidLoginPage hsidLoginPage = new HsidLoginPage(wd);
+		HSIDLoginPage hsidLoginPage = new HSIDLoginPage(wd);
 		getLoginScenario().saveBean(PageConstants.HSID_LOGIN_PAGE, hsidLoginPage);
 	}
 
 	@When("^the user clicks on Register now link$")
 	public void the_user_clicks_on_Register_now_link() throws Throwable {
 		
-		HsidLoginPage hsidLoginPage = (HsidLoginPage) loginScenario.getBean(PageConstants.HSID_LOGIN_PAGE);
+		HSIDLoginPage hsidLoginPage = (HSIDLoginPage) loginScenario.getBean(PageConstants.HSID_LOGIN_PAGE);
 		HsidRegistrationPersonalInformationPage hsidRegistrationPersonalInfoPage = hsidLoginPage.clickRegister();
 		getLoginScenario().saveBean(PageConstants.HSID_REGISTRATION_PERSONALINFOPAGE, hsidRegistrationPersonalInfoPage);
 		
@@ -298,7 +298,7 @@ public class HsidRegistrationStepDefinition {
 		String userName =  (String)getLoginScenario().getBean(LoginCommonConstants.Username);
         AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, password);
         if (accountHomePage!= null) {
-			 getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
+        	loginScenario.saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
 			Assert.assertTrue(true);
 		}
 		else {
@@ -312,7 +312,7 @@ public class HsidRegistrationStepDefinition {
 	@Then("^user should see the email confirmation message \"[^\"]*\" in Sign In form$" ) 
 	public void i_should_see_a_Username_or_email_address_label_with_textbox_in_Sign_In_page() throws Throwable {
 		
-		HsidLoginPage hsidLoginPage = (HsidLoginPage) loginScenario.getBean(PageConstants.HSID_LOGIN_PAGE);
+		HSIDLoginPage hsidLoginPage = (HSIDLoginPage) loginScenario.getBean(PageConstants.HSID_LOGIN_PAGE);
 		hsidLoginPage.emailconfirmed();
 	}
 	
