@@ -14,6 +14,7 @@ import pages.redesign.HsidRegistrationPersonalInformationPage;
 import acceptancetests.data.MRConstants;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.regression.accounthomepage.AccountHomePage;
 
 /**
  * @author pjaising
