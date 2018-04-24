@@ -26,7 +26,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import pages.member.bluelayer.*;
 import pages.regression.payments.PaymentHistoryPage;
-
+import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;

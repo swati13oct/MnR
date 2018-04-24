@@ -40,6 +40,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.firefox.internal.ProfilesIni;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
@@ -88,9 +89,9 @@ public class MRScenario {
                public static int count = 0;
 
                
-               public static final String USERNAME = "ucpadmin";
+               public static final String USERNAME = "njain112";
 
-               public static final String ACCESS_KEY ="2817affd-616e-4c96-819e-4583348d7b37";
+               public static final String ACCESS_KEY ="13284fe0-5132-4a64-8558-1ddfa10b32e8";
                
 
                //public static final String USERNAME = System.getenv("SAUCE_USERNAME");
@@ -886,34 +887,39 @@ public class MRScenario {
             	   }
                return webDriver;
             	*/   
-               DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-                                             
-               capabilities.setCapability("platform", "Windows 7");
-               capabilities.setCapability("version", "45.0");
-               capabilities.setCapability("parent-tunnel", "sauce_admin");
-               capabilities.setCapability("tunnelIdentifier",
-                                             "OptumSharedTunnel-Prd");
-               //capabilities.setCapability("name", "MRATDD-TestSuite");
-               capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
-               String jobName = "VBF Execution - Using " + capabilities.getBrowserName() + " in  " + System.getProperty("environment") +" environment";
-    capabilities.setCapability("name", jobName);
-               try {
-                              webDriver = new RemoteWebDriver(new URL(URL), capabilities);
-               } catch (MalformedURLException e) {
-                              // TODO Auto-generated catch block
+                 DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+                                            
+                 capabilities.setCapability("platform", "Windows 7");
+                 capabilities.setCapability("version", "45.0");
+                 capabilities.setCapability("parent-tunnel", "sauce_admin");
+                   capabilities.setCapability("tunnelIdentifier",
+                                               "OptumSharedTunnel-Stg");
+              //capabilities.setCapability("name", "MRATDD-TestSuite");
+              capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
+              String jobName = "VBF Execution - Using " + capabilities.getBrowserName() + " in  " + System.getProperty("environment") +" environment";
+              capabilities.setCapability("name", jobName);
+                try {
+                                webDriver = new RemoteWebDriver(new URL(URL), capabilities);
+                 } catch (MalformedURLException e) {
+                                // TODO Auto-generated catch block
                               e.printStackTrace();
                }
+            	
+            	
                
                return webDriver;
                }
                
                public WebDriver getIEDriver() {
                               System.setProperty("webdriver.ie.driver",
-                                                            "C:/Users/pgupta15/Downloads/IEDriverServer_x64_2.27.0/IEDriverServer.exe");
+                                                            "./IEDriverServer.exe");
                               DesiredCapabilities ieCaps = DesiredCapabilities.internetExplorer();
                               ieCaps.setCapability(
                                                             InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,
                                                             true);
+                              ieCaps.setCapability(
+                                      InternetExplorerDriver.IGNORE_ZOOM_SETTING,
+                                      true);
                               webDriver = new InternetExplorerDriver(ieCaps);
                               webDriver.manage().window().maximize();
                               return webDriver;
