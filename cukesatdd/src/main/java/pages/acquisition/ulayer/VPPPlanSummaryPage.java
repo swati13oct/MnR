@@ -19,6 +19,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -99,7 +100,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(id = "allplanssise")
 	private WebElement allPlansSize;
 
-	@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='plan-overview-wrapper']//div[@class='overview-tabs module-tabs-tabs']/div[1]//span[@class='title']")
+	@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='plan-overview-wrapper']//div[@class='overview-tabs module-tabs-tabs']/div[1]//span[@class='ng-binding']")
 	private WebElement maPlansCount;
 	
 	@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='plan-overview-wrapper']//div[@class='overview-tabs module-tabs-tabs']/div[2]//span[@class='trigger-closed']")
@@ -1034,6 +1035,43 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		System.out.println("TFN is not Displayed for PlanType in VPP page");
 		
+		return null;
+	}
+
+	public ComparePlansPage selectplantocompare() {
+		//To add upto 4 plans to compare and navigate to Plan Compare Page
+		int count = 1;
+		if(oleCommonConstants.OLE_PLAN_TYPE.contains("PDP")){
+			count = Integer.parseInt(maPlansCount.getText())+1;
+			
+		}
+		do{
+			String temp = Integer.toString(count);
+			WebElement SelectCompare = driver.findElement(By.xpath("//*[@id = 'compare-plan-"+temp+"']//following-sibling::label"));
+			validate(SelectCompare);
+			SelectCompare.click();
+			count++;
+		}while(count<5);
+		/*while(validate(driver.findElement(By.xpath("//*[@id = 'compare-plan-'"+ Integer.toString(count)+"']")))){
+			driver.findElement(By.xpath("//*[@id = 'compare-plan-'"+count+"']")).click();
+			count++;
+			if(count>4){
+				break;
+			}
+		}*/
+		
+	List <WebElement> ComparePlansLinks = driver.findElements(By.xpath("//a[@class='compare-link']"));
+		//validate();
+	for(WebElement CompareLink : ComparePlansLinks){
+		if(CompareLink.isDisplayed()){
+			CompareLink.click();
+			CommonUtility.checkPageIsReady(driver);
+			if (driver.getCurrentUrl().contains("plan-compare")) {
+				return new ComparePlansPage(driver);
+			}
+		}
+	}
+	System.out.println("Compare Plans Link not displayed");
 		return null;
 	}
 

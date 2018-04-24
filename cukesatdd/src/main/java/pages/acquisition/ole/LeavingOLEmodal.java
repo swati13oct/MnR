@@ -25,6 +25,15 @@ import atdd.framework.UhcDriver;
  */
 public class LeavingOLEmodal extends UhcDriver{
 	
+	@FindBy(id = "sample-linkrouter")
+	private WebElement LeavingOLEmodal;
+	
+	
+	@FindBy(id = "proceed")
+	private WebElement YesLeaveOLE;
+
+	@FindBy(id = "leaveOleAlertBack")
+	private WebElement NoBacktoOLE;
 	
 
 	public LeavingOLEmodal(WebDriver driver) {
@@ -35,8 +44,23 @@ public class LeavingOLEmodal extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
+		validate(LeavingOLEmodal);
 		
-		
+	}
+
+	public WelcomePage returntoOLE() {
+		validate(NoBacktoOLE);
+		NoBacktoOLE.click();
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if(driver.getCurrentUrl().contains("enrollment")){
+			System.out.println("OLE Welcome Page is Displayed");
+			return new WelcomePage(driver);
+		}
+		return null;	
 	}
 
 
