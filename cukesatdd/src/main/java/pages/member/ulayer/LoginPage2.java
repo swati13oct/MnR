@@ -14,6 +14,7 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.data.MRConstants;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.regression.accounthomepage.AccountHomePage;
 
 /**
  * @author pjaising
@@ -108,7 +109,7 @@ public class LoginPage2 extends UhcDriver {
 		}
 		System.out.println(currentUrl());
 
-		if (currentUrl().contains("home/my-account-home.html"))
+		if (currentUrl().contains("my-account-home.html"))
 
 		{
 			return new AccountHomePage(driver);

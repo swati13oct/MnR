@@ -24,6 +24,7 @@ import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ulayer.LoginAssistancePage;
 import pages.dashboard.member.ulayer.MemberNewSignInPage;
+import pages.regression.accounthomepage.AccountHomePage;
 
 /**
  * @author pjaising
@@ -149,7 +150,7 @@ public class LoginPage extends UhcDriver {
 		if(currentUrl().contains("home/my-account-home.html"))
 
 		{
-			return new pages.member.ulayer.AccountHomePage(driver);
+			return new pages.regression.accounthomepage.AccountHomePage(driver);
 		}
 		else if (currentUrl().contains("home/testharness.html")){
 			return new Object();
