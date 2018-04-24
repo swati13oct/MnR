@@ -5,6 +5,7 @@ package pages.acquisition.ole;
 
 import java.util.Map;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -42,7 +43,10 @@ public class WelcomePage extends UhcDriver{
 
 	@FindBy(id = "ole-cancel-confirm")
 	private WebElement CancellationModal;
-
+	
+	@FindBy(id = "sample-linkrouter")
+	private WebElement LeavingOLEmodal;
+	
 	@FindBy(xpath = "//*[contains(text(), 'chosen to enroll in:')]/following-sibling::h3")
 	private WebElement PlanYear_PlanName;
 	
@@ -229,13 +233,12 @@ public class WelcomePage extends UhcDriver{
 
 	public CancelOLEModal OpenCancelOLE() {
 		validate(CancelEnrollmentLink);
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-
-		CancelEnrollmentLink.click();
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", CancelEnrollmentLink);
+		
+		//((JavascriptExecutor) driver).executeScript("arguments[0].click;", CancelEnrollmentLink);
+		
+		//CancelEnrollmentLink.click();
 		try {
 			Thread.sleep(6000);
 		} catch (InterruptedException e) {
@@ -244,6 +247,23 @@ public class WelcomePage extends UhcDriver{
 		if(validate(CancellationModal)){
 			System.out.println("OLE Cancel Enrollment Modal is Displayed");
 			return new CancelOLEModal(driver);
+		}
+		return null;
+	}
+
+	public LeavingOLEmodal OpenLeaveOLEmodal() {
+		validate(SiteLogo);
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", SiteLogo);
+		//SiteLogo.click();
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if(validate(LeavingOLEmodal)){
+			System.out.println("Leaving OLE modal is Displayed");
+			return new LeavingOLEmodal(driver);
 		}
 		return null;
 	}

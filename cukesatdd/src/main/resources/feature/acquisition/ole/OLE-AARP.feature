@@ -10,6 +10,8 @@ Given the user lands on OLE Welcome Page wity following Plan Details
 		| Plan Name | <planName> |
 	| Premium	 		| <premium>	|
 Then the user validates Learn more modal for OLE
+Then the user validates cancellation modal for OLE
+Then the user validates Leave OLE modal for OLE
 Then the user validates and selects the Disclaimer Checkbox
 Then the user navigates to Medicare Information Page
 Then the user validates Medicare Information Page required fields
@@ -18,7 +20,6 @@ Then the user validates Medicare Information Page required fields
 Examples:
 | zipcode | county             | plantype | planName                                         | premium	|
 | 90210   | Los Angeles County | MA	  | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    |	$0.00	|
-
 
 
 @OLE_VPP_AARP
@@ -35,7 +36,8 @@ Then the user clicks on Enroll Now for AARP site to start the OLE flow
 Then the user validates the Plan details on OLE 
 Then the user validates TFN in Right Rail
 Then the user validates Learn more modal for OLE
-#Then the user validates cancellation modal for OLE
+Then the user validates Leave OLE modal for OLE
+Then the user validates cancellation modal for OLE
 Then the user validates and selects the Disclaimer Checkbox
 Then the user navigates to Medicare Information Page
 Then the user validates Medicare Information Page required fields
@@ -44,7 +46,7 @@ Then the user validates Medicare Information Page required fields
 Examples:
 | zipcode | county             | plantype | planName                                         |
 | 90210   | Los Angeles County | MA	  | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    |
-| 90210		| Los Angeles County | PDP  | AARP MedicareRx Walgreens (PDP) 	|
+#| 90210		| Los Angeles County | PDP  | AARP MedicareRx Walgreens (PDP) 	|
 
 @OLE_PlanDetails_Aarp
 Scenario Outline: OLE Landing from VPP Plan Details
@@ -73,10 +75,12 @@ When the user performs plan search using following information in the AARP site
 And the user views the plans of the below plan type in AARP site
 	| Plan Type | <plantype> |
 Then the user selects plans to add to plan compare and navigates to Plan compare page
-Then the user clicks on Enroll Now to start the OLE flow
-	
+	| Plan Name | <planName> |
+Then the user clicks on Enroll Now in Plan Compare Page for the following Plan to start the OLE flow
+	| Plan Name | <planName> |
+Then the user validates the Plan details on OLE 
 
 Examples:
-	| zipcode | county             | plantype |  planName                                             |
-	| 90002   | Adams County | MAPD     	  |  AARP MedicareComplete SecureHorizons Plan 2 (HMO)    |
+	| zipcode | county             | plantype |  planName                                      |
+	| 90210   | Los Angeles County | MA	  | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    |
 	
