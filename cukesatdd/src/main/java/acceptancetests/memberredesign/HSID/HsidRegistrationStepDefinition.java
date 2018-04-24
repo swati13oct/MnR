@@ -316,6 +316,16 @@ public class HsidRegistrationStepDefinition {
 		hsidLoginPage.emailconfirmed();
 	}
 	
+	@Then("^user should see a latest unread mail recieved  in mail server$" ) 
+	public void i_should_see_congratulations_email() throws Throwable {
+		
+		HsidRegistrationConfirmInformation hsidRegistrationConfirmInformationPage = 
+				(HsidRegistrationConfirmInformation) loginScenario.getBean(PageConstants.HSID_REGISTRATION_CONFIRM_INFORMATION);
+		
+		hsidRegistrationConfirmInformationPage.getregistrationflowcompleteemail();
+	}
+	
+	
 	
 	
 

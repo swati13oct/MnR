@@ -167,6 +167,57 @@ public class HsidRegistrationConfirmInformation extends UhcDriver {
 		driver.get(getConfirmationUrl());
 		
 	}
+	
+	public  void getregistrationflowcompleteemail()
+			throws MessagingException, IOException, InterruptedException {
+
+		String username = "codetransformers@gmail.com";
+        String pwd = "CodeTransformers@1";
+        
+        Thread.sleep(44000);
+	
+		Properties props = System.getProperties();
+		props.setProperty("mail.store.protocol", "imaps");
+		Session session = Session.getDefaultInstance(props, null);
+		Store store = session.getStore("imaps");
+		store.connect("imap.gmail.com", username, pwd);
+		Folder inbox = store.getFolder("Inbox");
+
+		inbox.open(Folder.READ_WRITE);
+		//inbox.open(Folder.READ_ONLY);
+
+		// Filter inbox messages by "UNSEEN" and "TO={username}"
+		FlagTerm ft_unseen = new FlagTerm(new Flags(Flags.Flag.SEEN), false);
+		RecipientStringTerm ft_toEmail = new RecipientStringTerm(RecipientType.TO, username);
+		
+		SearchTerm st = new AndTerm(ft_unseen, ft_toEmail);
+		
+		Message msg[] = inbox.search(st);
+		String mail = "";
+		String sub= "";
+		MimeMultipart body;
+		String bodyText = "";
+		System.out.println("getCompleteRegistrationURLWithSubjectandEmailContent::MAILS for [" + username + "]: " + msg.length);
+		for(Message message:msg) {
+	        //mail = message.getFrom()[0].toString();
+	        sub = message.getSubject();
+	         //body = (MimeMultipart) message.getContent();
+	        //bodyText = getTextFromMimeMultipart(body);
+	         
+	         System.out.println("sub: " +sub );
+	    //}
+	         
+	        if(sub.contains("myUHCMedicare.com - your HealthSafe ID registration is complete"))
+	        {
+	        	Assert.assertTrue(true);
+	        }
+	        else
+	        {
+	        	Assert.fail("Email didn't come");
+	        }
+	         
+		}
+	}
 
 
 

@@ -48,7 +48,7 @@ Feature:To test HSID registration flow
        | userName   | <userName>   |  
        | password   | <password>   |  
   And user should see the email confirmation message "Email confirmed: Please sign in with your new username and password." in Sign In form
-  #Then user should see a latest unread mail recieved from "myUHCMedicare.com - your HealthSafe ID registration is complete" in mail server
+  Then user should see a latest unread mail recieved  in mail server
    
    Examples:
  
@@ -101,7 +101,7 @@ Feature:To test HSID registration flow
   Then user should copy the confirm email url to browser
   And user should be at Sign In page
   And user should see the email confirmation message "Email confirmed: Please sign in with your new username and password." in Sign In form
-  Then user should see a latest unread mail recieved from "myUHCMedicare.com - your HealthSafe ID registration is complete" in mail server
+  Then user should see a latest unread mail recieved  in mail server
    
     
    Examples:

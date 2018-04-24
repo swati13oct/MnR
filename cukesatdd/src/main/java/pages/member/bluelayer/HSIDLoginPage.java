@@ -87,6 +87,9 @@ MRScenario loginScenario;
 		validate(passwordlink);
 	}
 	
+	/**
+	 * @toDo : To check whether user is landed on Assistive Registration Step1
+	 */
 	public Object doLoginWith2(String username, String password) {
 
         System.out.println(driver.getCurrentUrl());
@@ -101,14 +104,16 @@ MRScenario loginScenario;
 		}
 		System.out.println(driver.getCurrentUrl());
 		if (currentUrl().contains("/register/createAccount")) {
-			System.out.println("yes yes");
+			
 			return new AssistiveRegistrationPage(driver);
 		}
 		return null;
 	}
 	
 	
-	
+	/**
+	 * @toDo : To login through hsid via entering security questions
+	 */
 	public Object doLoginWith(String username, String password) {
 
         System.out.println(driver.getCurrentUrl());
@@ -142,7 +147,7 @@ MRScenario loginScenario;
 		else if(currentUrl().contains("testharness.html") || currentUrl().contains("/dashboard"))
 		{
 			
-				System.out.println("test");
+				
 				System.out.println(driver.getCurrentUrl());
 			    return new AccountHomePage(driver);
 		}
@@ -167,7 +172,7 @@ MRScenario loginScenario;
 	   
 		if(currentUrl().contains("testharness.html") || currentUrl().contains("/dashboard"))
         {
-			System.out.println("test");
+			
 			System.out.println(driver.getCurrentUrl());
 			return new AccountHomePage(driver);
 		}
