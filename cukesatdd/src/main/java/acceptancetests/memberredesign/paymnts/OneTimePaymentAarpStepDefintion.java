@@ -33,7 +33,8 @@ import pages.member.ulayer.ReviewOneTimePaymentsPage;
 import pages.member.ulayer.TeamCLoginUlayerPayments;
 import pages.member.ulayer.TeamHLoginUlayer;
 import pages.member.ulayer.TestHarness;
-import pages.regression.payments.AccountHomePage;
+import pages.regression.accounthomepage.AccountHomePage;
+//import pages.regression.payments.AccountHomePage;
 import pages.regression.payments.ConfirmOneTimePaymentPage;
 import pages.regression.payments.OneTimePaymentPage;
 import pages.regression.payments.OneTimePaymentSuccessPage;
@@ -127,7 +128,7 @@ public class OneTimePaymentAarpStepDefintion {
 	public void user_views_payment_history() throws InterruptedException {		
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
-		PaymentHistoryPage paymentHistoryPage = accountHomePage.navigateToPaymentHistoryPage();
+		pages.redesign.PaymentHistoryPage paymentHistoryPage = accountHomePage.navigateToPaymentHistoryPage();
 					
 		 //PaymentHistoryPage paymenthistory = PaymentHis
       if (paymentHistoryPage!=null){
@@ -452,7 +453,7 @@ public class OneTimePaymentAarpStepDefintion {
 
 		LoginPage loginPage = (LoginPage) getLoginScenario().getBean(
 				PageConstantsMnR.LOGIN_PAGE);
-		AccountHomePage accountHomePage = (AccountHomePage) loginPage
+		pages.regression.accounthomepage.AccountHomePage accountHomePage = (AccountHomePage) loginPage
 				.loginWith(userName, pwd);
 
 		if (accountHomePage != null) {

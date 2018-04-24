@@ -19,7 +19,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.uhcretiree.AcquisitionHomePage;
-import pages.member.bluelayer.AccountHomePage;
+//import pages.member.bluelayer.AccountHomePage;
 import pages.member.bluelayer.HSIDLoginPage;
 import pages.member.redesign.DeregisterPage;
 import pages.redesign.HsidLoginPage;
@@ -292,7 +292,7 @@ public class HsidRegistrationStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		HSIDLoginPage loginPage = new HSIDLoginPage(wd);
 		loginPage.validateelements();
-        AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, password);
+        pages.regression.accounthomepage.AccountHomePage accountHomePage = (pages.regression.accounthomepage.AccountHomePage) loginPage.doLoginWith(userName, password);
         if (accountHomePage!= null) {
 			 getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
 			Assert.assertTrue(true);

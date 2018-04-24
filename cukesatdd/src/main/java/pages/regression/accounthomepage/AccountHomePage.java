@@ -937,6 +937,8 @@ public pages.redesign.PharmacySearchPage navigateToRedesignPharmacyLocaterPage()
 		}	
 
 }*/
+	return null;
+}
 	
 	public PaymentHistoryPage navigateToPaymentHistoryPage() throws InterruptedException
 	 {
@@ -953,10 +955,10 @@ public pages.redesign.PharmacySearchPage navigateToRedesignPharmacyLocaterPage()
 	 	    	
 	 	        Thread.sleep(6000);
 
-	 	    	if (validate(paymentslink)) {
+	 	    	if (validate(paymentsLink)) {
 
 	 	    		System.out.println("payment link is displayed on the header");
-	 	    		paymentslink.click();
+	 	    		paymentsLink.click();
 	 	    		return new PaymentHistoryPage(driver);
 	 	    	}else{
 	 	    		System.out.println("payment link is not displayed on the header");
@@ -972,8 +974,8 @@ public pages.redesign.PharmacySearchPage navigateToRedesignPharmacyLocaterPage()
 		 	    	paymentslink.click();
 		 	    	return new PaymentHistoryPage(driver);
 	 	    	}*/
-	 	}
+	 	
 
-	return new PharmacySearchPage(driver);
+	//return new PaymentHistoryPage(driver);
 }
 }

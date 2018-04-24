@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.ulayer.LoginAssistancePage;
 import pages.member.bluelayer.ConfirmSecurityQuestion;
+import pages.regression.accounthomepage.AccountHomePage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;

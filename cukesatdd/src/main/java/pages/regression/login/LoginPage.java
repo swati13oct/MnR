@@ -12,10 +12,11 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.data.MRConstants;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.member.bluelayer.AccountHomePage;
+//import pages.member.bluelayer.AccountHomePage;
 import pages.member.bluelayer.AssistiveRegistrationPage;
 import pages.member.bluelayer.ConfirmSecurityQuestion;
 import pages.member.bluelayer.TerminatedHomePage;
+import pages.regression.accounthomepage.AccountHomePage;
 
 public class LoginPage extends UhcDriver {
 	

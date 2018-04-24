@@ -24,13 +24,14 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
-import pages.member.bluelayer.AccountHomePage;
+//import pages.member.bluelayer.AccountHomePage;
 import pages.member.bluelayer.BenefitsAndCoveragePage;
 import pages.member.bluelayer.LoginPage2;
 import pages.member.ulayer.ValueAddedServicepage;
 import pages.redesign.BenefitsCoveragePage;
 import pages.redesign.RedesignLoginPage;
 import pages.redesign.UlayerHomePage;
+import pages.regression.accounthomepage.AccountHomePage;
 
 /**
  * Functionality: Benefits and Coverage page
@@ -172,7 +173,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 		LoginPage2 loginPage = new LoginPage2(wd);
 
-		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginMobile(userName, pwd, category);
+		pages.regression.accounthomepage.AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginMobile(userName, pwd, category);
 
 		if (accountHomePage != null) {
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
