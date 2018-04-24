@@ -26,13 +26,14 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
-import pages.member.bluelayer.AccountHomePage;
+
 import pages.member.bluelayer.AssistiveRegistrationPage;
 import pages.member.bluelayer.BenefitsAndCoveragePage;
 import pages.member.bluelayer.DashboardPage;
 import pages.member.bluelayer.HSIDLoginPage;
 import pages.member.bluelayer.LoginPage2;
 import pages.member.ulayer.ValueAddedServicepage;
+import pages.regression.accounthomepage.AccountHomePage;
 import pages.member.redesign.DeregisterPage;
 
 /**
@@ -53,7 +54,7 @@ public class HSIDStepDefinition {
 
 
 	
-	@And("^login with following details logins in the member portal and validate elements$")
+	@Given("^login with following details logins in the member portal and validate elements$")
 	public void login_with_member(DataTable memberAttributes) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();

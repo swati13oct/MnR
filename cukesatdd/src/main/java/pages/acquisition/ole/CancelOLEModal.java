@@ -62,7 +62,4 @@ public class CancelOLEModal extends UhcDriver{
 		}
 		return null;	
 	}
-
-
-
 }

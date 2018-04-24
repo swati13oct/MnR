@@ -24,6 +24,32 @@ import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.ole.CancelOLEModal;
+import pages.acquisition.ole.LearnMoreModal;
+import pages.acquisition.ole.LeavingOLEmodal;
+import pages.acquisition.ole.MedicareInformationPage;
+import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.ulayer.AcquisitionHomePage;
+import pages.acquisition.ulayer.BeneficiaryInformationPage;
+import pages.acquisition.ulayer.ComparePlansPage;
+import pages.acquisition.ulayer.ConfirmationPage;
+import pages.acquisition.ulayer.ESRDPage;
+import pages.acquisition.ulayer.IntroductionInformationPage;
+import pages.acquisition.ulayer.LongTermCarePage;
+import pages.acquisition.ulayer.MedicaidPage;
+import pages.acquisition.ulayer.OptionalRidersPage;
+import pages.acquisition.ulayer.OtherHealthInsurancePage;
+import pages.acquisition.ulayer.PDPEnrollementGuidePage;
+import pages.acquisition.ulayer.PlanDetailsPage;
+import pages.acquisition.ulayer.PlanPaymentOptions;
+import pages.acquisition.ulayer.PrescriptionDrugCoveragePage;
+import pages.acquisition.ulayer.PrimaryCareProviderPage;
+import pages.acquisition.ulayer.ProposedEffectiveDatePage;
+import pages.acquisition.ulayer.ReviewAndSubmitPage;
+import pages.acquisition.ulayer.SpecialElectionPeriodPage;
+import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
 /**
  * @author sdwaraka
@@ -200,6 +226,32 @@ public class oleStepDefinition {
 			Assert.fail("Error in validating the OLE Welcome Page");
 	}
 	
+
+@Then("^the user clicks on Enroll Now in Plan Compare Page for the following Plan to start the OLE flow$")
+public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttributes) throws Throwable {
+	List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+	Map<String, String> givenAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+		givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+				givenAttributesRow.get(i).getCells().get(1));
+	}
+	String PlanName = givenAttributesMap.get("Plan Name");
+	ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+	
+	WelcomePage welcomePage = comparePlansPage.Enroll_OLE_Plan(PlanName);
+	if (welcomePage != null) {
+		
+		getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE,
+				welcomePage);
+		System.out.println("OLE Welcome Page is Displayed");
+		Assert.assertTrue(true);
+	}
+	else
+		Assert.fail("Error in validating the OLE Welcome Page");
+	
+}
+	
 	/**
 	 * @author sdwaraka
 	 * To Validate the Plan Details carried forward from VPP on Welcome Page of VPP
@@ -294,6 +346,30 @@ public class oleStepDefinition {
 			Assert.fail("Back to OLE Application page - Welcome Page is NOT Displayed");
 	}
 
+	@Then("^the user validates Leave OLE modal for OLE$")
+	public void the_user_validates_Leave_OLE_modal_for_OLE() throws Throwable {
+		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
+		LeavingOLEmodal leaveOLEmodal = welcomePage.OpenLeaveOLEmodal();
+		if (leaveOLEmodal != null) {
+
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_LEARNMORE_MODAL_PAGE,
+					leaveOLEmodal);
+			System.out.println("Leave OLE modal - Back to OLE ");
+		}
+		else
+			Assert.fail("Leave OLE Modal is NOT Displayed");
+
+		welcomePage = leaveOLEmodal.returntoOLE();
+		if (welcomePage != null) {
+			
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE,
+					welcomePage);
+			System.out.println("Back to OLE Application page - Welcome Page is Displayed");
+		}
+		else
+			Assert.fail("Back to OLE Application page - Welcome Page is NOT Displayed");
+
+	}
 
 
 	@Then("^the user validates and selects the Disclaimer Checkbox$")
@@ -341,8 +417,4 @@ public class oleStepDefinition {
 		}
 	}
 
-	@Then("^the user selects plans to add to plan compare and navigates to Plan compare page$")
-	public void the_user_selects_plans_to_add_to_plan_compare_and_navigates_to_Plan_compare_page() throws Throwable {
 	}
-
-}

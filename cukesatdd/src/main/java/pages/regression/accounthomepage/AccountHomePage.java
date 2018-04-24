@@ -937,6 +937,43 @@ public pages.redesign.PharmacySearchPage navigateToRedesignPharmacyLocaterPage()
 		}	
 
 }*/
+	
+	public PaymentHistoryPage navigateToPaymentHistoryPage() throws InterruptedException
+	 {
+
+	 	    	/*WebDriverWait wait = new WebDriverWait(driver, 30);
+	 				wait.until(ExpectedConditions.elementToBeClickable(paymentslink));
+	 */
+	 	    	if(	validate(iPerceptionPopUp)) {
+	 	    		iPerceptionPopUp.click();
+	 	    	}
+	 	    	else  {
+	 	    		System.out.println("iPerception Pop Up not displayed");
+	 	    	}
+	 	    	
+	 	        Thread.sleep(6000);
+
+	 	    	if (validate(paymentslink)) {
+
+	 	    		System.out.println("payment link is displayed on the header");
+	 	    		paymentslink.click();
+	 	    		return new PaymentHistoryPage(driver);
+	 	    	}else{
+	 	    		System.out.println("payment link is not displayed on the header");
+	 	    		return null;
+	 	    	}
+	 	    	/*else{
+	 	    		CoverageAndBenefits.click();
+		 	    	
+		 	    	WebDriverWait wait = new WebDriverWait(driver, 30);
+		 			wait.until(ExpectedConditions.elementToBeClickable(paymentslink));
+		 	    	
+		 	    	validate(paymentslink);
+		 	    	paymentslink.click();
+		 	    	return new PaymentHistoryPage(driver);
+	 	    	}*/
+	 	}
+
 	return new PharmacySearchPage(driver);
 }
 }
