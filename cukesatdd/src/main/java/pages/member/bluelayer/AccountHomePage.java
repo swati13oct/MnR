@@ -45,6 +45,10 @@ import atdd.framework.UhcDriver;
  
  */
 public class AccountHomePage extends UhcDriver {
+	
+	@FindBy(css= "sticky#sticky-nav nav#main-nav a:nth-child(5)")
+	private WebElement paymentslink;
+	
 
         @FindBy(css = "a.fd_myPersonalHealthRecord")
         private WebElement phrTab;
@@ -1254,6 +1258,44 @@ public void FormsandResourcesLinkinPlanSummaryPageBlayer()
 			return null;
 			}
 	 }
+	 public PaymentHistoryPage navigateToPaymentHistoryPage() throws InterruptedException
+	 {
+
+	 	    	/*WebDriverWait wait = new WebDriverWait(driver, 30);
+	 				wait.until(ExpectedConditions.elementToBeClickable(paymentslink));
+	 */
+	 	    		if (iPerceptionPopUp.size()>0) {
+	                iPerceptionPopUp.get(0).click();
+	                System.out.println("iPerception Pop Up displayed");
+	 	    	}
+	 	    	else  {
+	 	    		System.out.println("iPerception Pop Up not displayed");
+	 	    	}
+	 	    	
+	 	        Thread.sleep(6000);
+
+	 	    	if (validate(paymentslink)) {
+
+	 	    		System.out.println("payment link is displayed on the header");
+	 	    		paymentslink.click();
+	 	    		return new PaymentHistoryPage(driver);
+	 	    	}else{
+	 	    		System.out.println("payment link is not displayed on the header");
+	 	    		return null;
+	 	    	}
+	 	    	/*else{
+	 	    		CoverageAndBenefits.click();
+		 	    	
+		 	    	WebDriverWait wait = new WebDriverWait(driver, 30);
+		 			wait.until(ExpectedConditions.elementToBeClickable(paymentslink));
+		 	    	
+		 	    	validate(paymentslink);
+		 	    	paymentslink.click();
+		 	    	return new PaymentHistoryPage(driver);
+	 	    	}*/
+	 	}
+	 
+
     			    
 }
 
