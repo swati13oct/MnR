@@ -205,8 +205,11 @@ public class HsidRegistrationConfirmInformation extends UhcDriver {
 	        //bodyText = getTextFromMimeMultipart(body);
 	         
 	         System.out.println("sub: " +sub );
-	    //}
+	    }
 	         
+        Object emailcontent = msg[msg.length - 1].getContent();
+		
+		System.out.println(emailcontent);
 	        if(sub.contains("myUHCMedicare.com - your HealthSafe ID registration is complete"))
 	        {
 	        	Assert.assertTrue(true);
@@ -217,7 +220,7 @@ public class HsidRegistrationConfirmInformation extends UhcDriver {
 	        }
 	         
 		}
-	}
+	
 
 
 
