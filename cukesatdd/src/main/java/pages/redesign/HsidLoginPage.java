@@ -17,6 +17,9 @@ public class HsidLoginPage extends UhcDriver {
 	@FindBy(id="register-Register")
 	private WebElement lawwregisterNow;
 	
+	 @FindBy(xpath ="//div[@id='hsid-commonError']/p/span[2]")
+	    private WebElement EmailConfirmedtext;
+	
 	
 	private static String PAGE_URL = MRConstants.STAGE_DASHBOARD_NEW_DOMAIN_URL;
 	
@@ -54,6 +57,10 @@ public class HsidLoginPage extends UhcDriver {
 		return new HsidRegistrationPersonalInformationPage(driver);
 	}
 	
-	
+	public void emailconfirmed() {
+		// TODO Auto-generated method stub
+		
+		Assert.assertTrue("Text not present", EmailConfirmedtext.isDisplayed());
+	}
 
 }

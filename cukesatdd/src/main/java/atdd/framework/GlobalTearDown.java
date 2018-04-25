@@ -1,5 +1,8 @@
 package atdd.framework;
 
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.Assert;
 
@@ -47,7 +50,7 @@ public class GlobalTearDown {
 	/**
 	 * 
 	 * @param scenario
-	 *//*
+	 */
 	@After
 	public void tearDown(Scenario scenario) {
 
@@ -63,14 +66,15 @@ public class GlobalTearDown {
 			 mrScen.DriverQuit();
 		}
 
-	}*/
+	}
 	// to be added
 	/**
 	 * 
 	 * @param scenario
 	 */
-	@After
-	public void tearDown(Scenario scenario) {
+	/*@After
+	public void tearDown(Scenario scenario) 
+	//{
 
 		if (null != getLoginScenario() && null != getLoginScenario().getBean(CommonConstants.WEBDRIVER)) {
 			//To get the report embedded in the report
@@ -80,8 +84,8 @@ public class GlobalTearDown {
 			getLoginScenario().nullifyWebDriverNew();
 		} else {
 			Assert.fail("Screenshot not captured and webdriver not quitted...");
-		}
+    }
 
-	}
+	}*/
 
 }
