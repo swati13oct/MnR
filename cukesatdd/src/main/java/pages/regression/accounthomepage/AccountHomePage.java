@@ -696,15 +696,22 @@ public class AccountHomePage extends UhcDriver {
 
 		Thread.sleep(6000);
 
-		if (HistoryTable.isDisplayed()) {
-			System.out.println("Payment History Exists");
-			jse.executeScript("window.scrollBy(0,-600)", "");
-			Thread.sleep(3000);
+		try{			
+			if (HistoryTable.isDisplayed()) {
+				System.out.println("Payment History Exists");
+				jse.executeScript("window.scrollBy(0,-600)", "");
+				Thread.sleep(3000);			
+			} }
+			catch(Exception e)
+			{
+				System.out.println("History table not present for this member");
+				jse.executeScript("window.scrollBy(0,-600)", "");
+				Thread.sleep(3000);				
+			}
 			return new pages.regression.payments.PaymentHistoryPage(driver);
-		} else {
-			return null;
 		}
-	}
+
+	
 	
 public ContactUsPage navigateToContactUsPage() {
 		

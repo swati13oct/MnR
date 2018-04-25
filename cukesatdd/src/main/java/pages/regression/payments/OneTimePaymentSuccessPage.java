@@ -92,6 +92,11 @@ globalExpectedJson);
 		return oneTimePaymentExpectedJson;
 	}
 
-	
+
+	// In progress
+	public PaymentHistoryPage test()
+	{
+		return new PaymentHistoryPage(driver);
+	}
 	
 }
