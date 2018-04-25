@@ -1038,27 +1038,23 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return null;
 	}
 
-	public ComparePlansPage selectplantocompare() {
+	public ComparePlansPage selectplantocompare(String PlanType) {
 		//To add upto 4 plans to compare and navigate to Plan Compare Page
 		int count = 1;
-		if(oleCommonConstants.OLE_PLAN_TYPE.contains("PDP")){
-			count = Integer.parseInt(maPlansCount.getText())+1;
-			
+		if(PlanType.contains("PDP")){
+			System.out.println("Plan Type is :"+PlanType);
+			count = (Integer.parseInt(maPlansCount.getText())) + 1;
+			System.out.println("Plan count starts is :"+count);
 		}
+		int CountUntil = count+4;
 		do{
 			String temp = Integer.toString(count);
 			WebElement SelectCompare = driver.findElement(By.xpath("//*[@id = 'compare-plan-"+temp+"']//following-sibling::label"));
-			validate(SelectCompare);
-			SelectCompare.click();
+			if(validate(SelectCompare))
+				SelectCompare.click();
 			count++;
-		}while(count<5);
-		/*while(validate(driver.findElement(By.xpath("//*[@id = 'compare-plan-'"+ Integer.toString(count)+"']")))){
-			driver.findElement(By.xpath("//*[@id = 'compare-plan-'"+count+"']")).click();
-			count++;
-			if(count>4){
-				break;
-			}
-		}*/
+		}while(count<CountUntil);
+		
 		
 	List <WebElement> ComparePlansLinks = driver.findElements(By.xpath("//a[@class='compare-link']"));
 		//validate();

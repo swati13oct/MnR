@@ -122,23 +122,23 @@ public class WelcomePage extends UhcDriver{
 		if(PlanYear_PlanName_Text.contains(Expected_PlanName)){
 			flag = true;
 			System.out.println("Plan Name is Validated : "+flag);
-		}
+		}else flag =false;
 		if(PlanYear_PlanName_Text.contains(Expected_PlanYear)){
 			flag = (flag==false)?false:true;
 			System.out.println("Plan Year is Validated : "+flag);
-		}
+		}else flag =false;
 		if(Zip_County_Text.contains(Expected_County)){
 			flag = (flag==false)?false:true;
 			System.out.println("Plan County is Validated : "+flag);
-		}
+		}else flag =false;
 		if(Zip_County_Text.contains(Expected_ZipCode)){
 			flag = (flag==false)?false:true;
 			System.out.println("Plan ZIP CODE is Validated : "+flag);
-		}
+		}else flag =false;
 		if(Premium.contains(Expected_PlanPremium)){
 			flag = (flag==false)?false:true;
 			System.out.println("Plan Premium is Validated : "+flag);
-		}
+		}else flag =false;
 		System.out.println("Plan Details are Validated : "+flag);
 		return flag;
 	}

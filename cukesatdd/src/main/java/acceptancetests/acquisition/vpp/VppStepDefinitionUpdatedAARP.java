@@ -211,6 +211,9 @@ public class VppStepDefinitionUpdatedAARP {
 		if (plansummaryPage.validatePlanNames(planType)) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
 					plansummaryPage);
+			String SiteName = "AARP_ACQ";
+			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
+				
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("Error validating availables plans for selected plantype in  VPP plan summary page");
@@ -306,8 +309,6 @@ public class VppStepDefinitionUpdatedAARP {
 		TFN = planSummaryPage.GetTFNforPlanType();
 		
 		PlanPremium = planSummaryPage.getPlanPremium(PlanName);
-		
-		ComparePlansPage comparePlansPage = planSummaryPage.selectplantocompare();
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
@@ -324,7 +325,8 @@ public class VppStepDefinitionUpdatedAARP {
 		System.out.println("TFN for Plan Type is : "+TFN);
 		System.out.println("Plan Year is : "+PlanYear);
 		System.out.println("OLE is being started from Acquisition Site : "+SiteName);
-		
+
+		ComparePlansPage comparePlansPage = planSummaryPage.selectplantocompare(PlanType);
 		if (comparePlansPage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE,comparePlansPage);
 			Assert.assertTrue(true);

@@ -1,7 +1,5 @@
 package acceptancetests.acquisition.ole;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,12 +8,6 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.ole.CancelOLEModal;
-import pages.acquisition.ole.LearnMoreModal;
-import pages.acquisition.ole.MedicareInformationPage;
-import pages.acquisition.ole.WelcomePage;
-import pages.acquisition.ulayer.PlanDetailsPage;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import acceptancetests.acquisitionvbf.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.OLE_PageConstants;
@@ -24,31 +16,15 @@ import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.bluelayer.PlanComparePage;
 import pages.acquisition.ole.CancelOLEModal;
 import pages.acquisition.ole.LearnMoreModal;
 import pages.acquisition.ole.LeavingOLEmodal;
 import pages.acquisition.ole.MedicareInformationPage;
 import pages.acquisition.ole.WelcomePage;
-import pages.acquisition.ulayer.AcquisitionHomePage;
-import pages.acquisition.ulayer.BeneficiaryInformationPage;
 import pages.acquisition.ulayer.ComparePlansPage;
-import pages.acquisition.ulayer.ConfirmationPage;
-import pages.acquisition.ulayer.ESRDPage;
-import pages.acquisition.ulayer.IntroductionInformationPage;
-import pages.acquisition.ulayer.LongTermCarePage;
-import pages.acquisition.ulayer.MedicaidPage;
-import pages.acquisition.ulayer.OptionalRidersPage;
-import pages.acquisition.ulayer.OtherHealthInsurancePage;
-import pages.acquisition.ulayer.PDPEnrollementGuidePage;
 import pages.acquisition.ulayer.PlanDetailsPage;
-import pages.acquisition.ulayer.PlanPaymentOptions;
-import pages.acquisition.ulayer.PrescriptionDrugCoveragePage;
-import pages.acquisition.ulayer.PrimaryCareProviderPage;
-import pages.acquisition.ulayer.ProposedEffectiveDatePage;
-import pages.acquisition.ulayer.ReviewAndSubmitPage;
-import pages.acquisition.ulayer.SpecialElectionPeriodPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
 /**
@@ -140,13 +116,27 @@ public class oleStepDefinition {
 		String County = (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
 		String PlanType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		String TFN;
-		String SiteName = "AARP_ACQ";
+		String SiteName;
+		SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);	
+		WelcomePage welcomePage;
+		if(SiteName.contains("UHC_ACQ")){
+			pages.acquisition.bluelayer.VPPPlanSummaryPage planSummaryPage = (pages.acquisition.bluelayer.VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			TFN = planSummaryPage.GetTFNforPlanType();
 			
-		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		TFN = planSummaryPage.GetTFNforPlanType();
-		
-		PlanPremium = planSummaryPage.getPlanPremium(PlanName);
+			PlanPremium = planSummaryPage.getPlanPremium(PlanName);
+			welcomePage = planSummaryPage.Enroll_OLE_Plan(PlanName);
+
+		}
+		else{
+			VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			TFN = planSummaryPage.GetTFNforPlanType();
+			
+			PlanPremium = planSummaryPage.getPlanPremium(PlanName);
+			welcomePage = planSummaryPage.Enroll_OLE_Plan(PlanName);
+
+		}
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
@@ -164,7 +154,6 @@ public class oleStepDefinition {
 		System.out.println("Plan Year is : "+PlanYear);
 		System.out.println("OLE is being started from Acquisition Site : "+SiteName);
 		
-		WelcomePage welcomePage = planSummaryPage.Enroll_OLE_Plan(PlanName);
 		if (welcomePage != null) {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE,
 					welcomePage);
@@ -189,21 +178,30 @@ public class oleStepDefinition {
 		String County = (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
 		String PlanType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		String TFN;
-		String SiteName = "AARP_ACQ";
+		String SiteName;
+		SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);	
+		
+		WelcomePage welcomePage;
+		if(SiteName.contains("UHC_ACQ")){
+			
+			pages.acquisition.bluelayer.PlanDetailsPage vppPlanDetailsPage = (pages.acquisition.bluelayer.PlanDetailsPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+			TFN = vppPlanDetailsPage.GetTFNforPlanType();
+			welcomePage = vppPlanDetailsPage.Enroll_OLE_Plan(PlanName);
+		}
+		else{
+			PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+			TFN = vppPlanDetailsPage.GetTFNforPlanType();
+			welcomePage = vppPlanDetailsPage.Enroll_OLE_Plan(PlanName);
+			}
+		String PlanPremium = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, County);
 		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
-		
-			
-		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-		TFN = vppPlanDetailsPage.GetTFNforPlanType();
-		String PlanPremium = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM);
-		//PlanPremium = vppPlanDetailsPage.getPlanPremium(PlanName);
-		//getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_TFN, TFN);
 		System.out.println("Plan Name is : "+PlanName);
 		System.out.println("Plan Type is : "+PlanType);
@@ -213,8 +211,6 @@ public class oleStepDefinition {
 		System.out.println("TFN for Plan Type is : "+TFN);
 		System.out.println("Plan Year is : "+PlanYear);
 		System.out.println("OLE is being started from Acquisition Site : "+SiteName);
-		
-		WelcomePage welcomePage = vppPlanDetailsPage.Enroll_OLE_Plan(PlanName);
 		if (welcomePage != null) {
 			
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE,
@@ -237,9 +233,20 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 				givenAttributesRow.get(i).getCells().get(1));
 	}
 	String PlanName = givenAttributesMap.get("Plan Name");
-	ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+	String SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
+	WelcomePage welcomePage;
+	if(SiteName.contains("UHC_ACQ")){
+		
+		pages.acquisition.bluelayer.PlanComparePage comparePlansPage = (PlanComparePage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		welcomePage = comparePlansPage.Enroll_OLE_Plan(PlanName);
+	}
+	else{
+		ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+		
+		welcomePage = comparePlansPage.Enroll_OLE_Plan(PlanName);
+		}
 	
-	WelcomePage welcomePage = comparePlansPage.Enroll_OLE_Plan(PlanName);
 	if (welcomePage != null) {
 		
 		getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE,

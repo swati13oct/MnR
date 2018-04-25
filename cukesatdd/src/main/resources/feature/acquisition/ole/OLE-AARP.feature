@@ -1,4 +1,4 @@
-@fastandfurious
+@fastandfurious @OLE
 @OLE_Ulayer
 Feature: To test OLE common tool flow in AARP site
 @BuildAcceptanceTest
@@ -46,7 +46,7 @@ Then the user validates Medicare Information Page required fields
 Examples:
 | zipcode | county             | plantype | planName                                         |
 | 90210   | Los Angeles County | MA	  | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    |
-#| 90210		| Los Angeles County | PDP  | AARP MedicareRx Walgreens (PDP) 	|
+| 90210		| Los Angeles County | PDP  | AARP MedicareRx Walgreens (PDP) 	|
 
 @OLE_PlanDetails_Aarp
 Scenario Outline: OLE Landing from VPP Plan Details
@@ -83,4 +83,5 @@ Then the user validates the Plan details on OLE
 Examples:
 	| zipcode | county             | plantype |  planName                                      |
 	| 90210   | Los Angeles County | MA	  | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    |
+	| 90210		| Los Angeles County | PDP  | AARP MedicareRx Walgreens (PDP) 	|
 	
