@@ -83,12 +83,10 @@ public class ConfirmOneTimePaymentPage extends UhcDriver{
 		}
 		
 		if(OneTimePaymentError.getText().contains("only one payment request can be submitted per business day"))
-		{
+		
 			System.out.println("Payment error message dispayed");
-		return new OneTimePaymentSuccessPage(driver);
-		}
-		else
-			return null;
+		return null;
+		
 		
 	}
 

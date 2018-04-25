@@ -79,7 +79,7 @@ public class OneTimePaymentPage extends UhcDriver{
 
 	public ConfirmOneTimePaymentPage enterPaymentDetails(Map<String, String> accountAttributessMap) {
 		
-		String amount = accountAttributessMap.get("Amount to be paid");
+		String amount =  ""+accountAttributessMap.get("Amount to be paid");
 		String routingNumber = accountAttributessMap.get("Routing number");
 		String confirmRoutingNumber = accountAttributessMap.get("Confirm routing number");
 		String accountNumber = accountAttributessMap.get("Account number");
@@ -107,8 +107,7 @@ public class OneTimePaymentPage extends UhcDriver{
 		
 		otheramountfield.click();
 		
-		otheramountfield.clear();
-		otheramountfield.click();
+		otheramountfield.clear();		
 		otheramountfield.sendKeys(amount);
 		
 		routingNumberField.click();
@@ -139,7 +138,7 @@ public class OneTimePaymentPage extends UhcDriver{
 		lastNameField.clear();
 		lastNameField.sendKeys(lastName);
 		
-		electrosign.click();				
+		electronicsignature.click();				
 		continueButton.click();
 		
 		if(driver.getTitle().equalsIgnoreCase("Make Online Payment")){

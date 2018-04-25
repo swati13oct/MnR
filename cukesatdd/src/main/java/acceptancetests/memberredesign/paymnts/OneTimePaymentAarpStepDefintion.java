@@ -272,7 +272,21 @@ public class OneTimePaymentAarpStepDefintion {
 					oneTimePaymentSuccessPage);
 			Assert.assertTrue(true);
 	}
+		else
+			System.out.println("Encountered More than one Payment per Business day error");
 	}
+	
+
+	@And("^the user checks and Go to Payment History Page$")
+	public void Go_toPayment_History_page() throws InterruptedException{
+		OneTimePaymentSuccessPage oneTimePaymentSuccessPageScroll = (OneTimePaymentSuccessPage) getLoginScenario().getBean(PageConstantsMnR.ONE_TIME_PAYMENT_SUCCESS_PAGE);
+		PaymentHistoryPage paymentHistoryPage = oneTimePaymentSuccessPageScroll.test();
+		if (paymentHistoryPage!=null){
+	     	  getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
+		System.out.println("user has scrolled up"); 
+}
+	}
+
 	
 	
 	@And("^the user confirms the values in AARP site$")

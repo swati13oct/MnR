@@ -45,7 +45,7 @@ public class PaymentHistoryPage extends UhcDriver{
 	@FindBy(id = "paymentSearchRangeGovt")
 	private WebElement paymentSearchRangeGovt;
 	
-	@FindBy(id = "onetimepayment")
+	@FindBy(xpath = "//*[@class='payment-method-btn'][1]/a")
 	private WebElement onetimepaymentbtn;
 	
 	@FindBy(linkText= "Make a Payment")
@@ -313,8 +313,8 @@ public class PaymentHistoryPage extends UhcDriver{
 	 
 	 public OneTimePaymentPage OTPbtn(){
 		 
-		 if(	validate(iPerceptionPopUp)) {
-	    		iPerceptionPopUp.click();
+		 if(	validate(iPerceptionAutoPopUp)) {
+	    		iPerceptionAutoPopUp.click();
 	    	}
 	    	else  {
 	    		System.out.println("iPerception Pop Up not displayed");
