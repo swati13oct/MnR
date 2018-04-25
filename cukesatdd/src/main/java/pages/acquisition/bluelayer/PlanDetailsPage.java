@@ -17,6 +17,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
@@ -94,8 +95,11 @@ public class PlanDetailsPage extends UhcDriver{
 		@FindBy(xpath="//*[@class='tel ng-binding']")
 		private WebElement RightRail_TFN;
 
-		@FindBy(xpath="//a[@class = 'cta-button ng-scope']//*[contains(text(), 'Enroll in')]")
-		private List <WebElement> EnrollinPlanLinks;
+		@FindBy(xpath="//a[@class = 'cta-button ng-scope']/span")
+		private List <WebElement> SNP_EnrollinPlanLinks;
+		
+		@FindBy(xpath="//a[contains(text(), 'Enroll in plan')]")
+		private List <WebElement> EnrollinPlan;
 
 		@FindBy(xpath="//*[@id='medicalBenefits']/div[1]/table/tbody/tr[1]/td[4]/strong")
 		private WebElement PremiumForPlan;
@@ -362,7 +366,6 @@ public class PlanDetailsPage extends UhcDriver{
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			clickCompareBox();
@@ -476,9 +479,14 @@ public WelcomePage Enroll_OLE_Plan(String planName) throws InterruptedException 
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-	
+	WebElement Enroll;
 	System.out.println("Enroll in Plan for Plan : "+planName);
-	WebElement Enroll = EnrollinPlanLinks.get(0);
+	if (planName.contains("SNP")){
+		Enroll = SNP_EnrollinPlanLinks.get(0);
+	}
+	else{
+		Enroll = EnrollinPlan.get(0);
+	}
 	try {
 		if(validate(Enroll))
 			System.out.println("Found Enroll IN Plan Button for the Plan : "+planName);

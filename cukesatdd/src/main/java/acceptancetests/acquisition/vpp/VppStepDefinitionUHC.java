@@ -113,10 +113,8 @@ public class VppStepDefinitionUHC {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		Thread.sleep(7000);
 		plansummaryPage = plansummaryPage.viewPlanSummary(plantype);
-		
 		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "UHC_ACQ");
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, plantype);
-
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
 					plansummaryPage);
@@ -124,7 +122,6 @@ public class VppStepDefinitionUHC {
 		} else {
 			Assert.fail("Error validating availables plans for selected plantype in  VPP plan summary page");
 		}
-
 	}
 	
 	/**

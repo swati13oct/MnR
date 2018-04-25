@@ -11,8 +11,13 @@ import cucumber.api.CucumberOptions;
  * this file is to run test cases for Fast and Furious User Stories in Acquisition sites
  */
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDfastandfuriousAcquisitionTest.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDfastandfuriousAcquisitionTest")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDfastandfuriousAcquisitionTest.json" }, tags = {"@OLE"})
+@ExtendedCucumberOptions(retryCount=2,screenShotSize="", screenShotLocation="/screenshots/",
+		jsonReport = "target/cucumber-RunMRATDDfastandfuriousAcquisitionTest.json",detailedReport = true, 
+		detailedAggregatedReport = true, overviewReport = true, toPDF = true, 
+		outputFolder = "target/RunMRATDDfastandfuriousAcquisitionTest")
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, 
+		features = { "src/main/resources/feature/acquisition" }, 
+		plugin = {"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDfastandfuriousAcquisitionTest.json" }, 
+		tags = {"@OLE"})
 public class RunMRATDDfastandfuriousAcquisitionTest { 
 }
