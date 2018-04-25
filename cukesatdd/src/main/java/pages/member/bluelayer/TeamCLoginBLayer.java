@@ -15,7 +15,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ulayer.LoginAssistancePage;
-import pages.member.ulayer.AccountHomePage;
+import pages.regression.accounthomepage.AccountHomePage;
 import pages.member.ulayer.TerminatedHomePage;
 
 public class TeamCLoginBLayer extends UhcDriver {
