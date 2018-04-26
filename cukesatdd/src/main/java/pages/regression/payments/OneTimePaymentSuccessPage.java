@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -32,6 +33,9 @@ public class OneTimePaymentSuccessPage extends UhcDriver{
 	
 	@FindBy(xpath = "/html/body/div[2]/div/div[2]/div/div/div[1]/div/div/div[6]/div[2]/span")
 	private WebElement AccountHolderName;
+	
+	@FindBy(xpath = "//*[@class='container--base']/div[@class='container']//button[@ng-click='backToPaymentHistoryPage()']")
+	private WebElement BackToPaymentHistoryPage;
 
 
 	private PageData oneTimePaymentSuccess;
@@ -94,9 +98,20 @@ globalExpectedJson);
 
 
 	// In progress
-	public PaymentHistoryPage test()
+	public PaymentHistoryPage ScrollDownToBackButton()
 	{
-		return new PaymentHistoryPage(driver);
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,700)", "");
+		
+		if(BackToPaymentHistoryPage.isDisplayed())
+		{
+			BackToPaymentHistoryPage.click();
+			return new PaymentHistoryPage(driver);
+		}
+		else
+			return null;
+		
+		
 	}
 	
 }

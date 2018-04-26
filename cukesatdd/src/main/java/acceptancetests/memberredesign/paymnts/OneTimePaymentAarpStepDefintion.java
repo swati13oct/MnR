@@ -277,10 +277,10 @@ public class OneTimePaymentAarpStepDefintion {
 	}
 	
 
-	@And("^the user checks and Go to Payment History Page$")
+	@And("^the user moves to Go to Payment History Page button$")
 	public void Go_toPayment_History_page() throws InterruptedException{
 		OneTimePaymentSuccessPage oneTimePaymentSuccessPageScroll = (OneTimePaymentSuccessPage) getLoginScenario().getBean(PageConstantsMnR.ONE_TIME_PAYMENT_SUCCESS_PAGE);
-		PaymentHistoryPage paymentHistoryPage = oneTimePaymentSuccessPageScroll.test();
+		PaymentHistoryPage paymentHistoryPage = oneTimePaymentSuccessPageScroll.ScrollDownToBackButton();
 		if (paymentHistoryPage!=null){
 	     	  getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
 		System.out.println("user has scrolled up"); 
