@@ -19,7 +19,7 @@ import pages.memberrdesignVBF.ClaimSummarypage;
 import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.memberrdesignVBF.TestHarness;
 
-public class ClaimsRedesignStepDefinition {
+public class ClaimsStepDefinition {
 	@Autowired
 	MRScenario loginScenario;
 	// Map<String, String> memberAttributesMap = new LinkedHashMap<String,

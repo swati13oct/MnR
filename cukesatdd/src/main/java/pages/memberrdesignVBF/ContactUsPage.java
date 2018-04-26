@@ -20,7 +20,7 @@ import atdd.framework.UhcDriver;
  */
 public class ContactUsPage extends UhcDriver {
 
-	@FindBy(xpath = "//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))]//a[@id='message-btn'][1]")
+	@FindBy(xpath = "//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))]//a[contains(@class,'message-btn')][1]")
 	private WebElement getStartedButton;
 
 	@FindBy(xpath = "//*[@id='message-cancel']")
@@ -46,7 +46,8 @@ public class ContactUsPage extends UhcDriver {
 
 	@FindBy(id = "message-send")
 	private WebElement sendAmessageButton;
-	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//a[@id='call-btn']")
+	
+	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//a[contains(@class,'call-btn')]")
 	private WebElement requestACall;;
 
 	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//button[@id='call-submit']/span")
@@ -85,7 +86,7 @@ public class ContactUsPage extends UhcDriver {
 	public ContactUsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		CommonUtility.waitForPageLoadNew(driver, heading, CommonConstants.TIMEOUT_30);
+		//CommonUtility.waitForPageLoadNew(driver, heading, CommonConstants.TIMEOUT_30);
 		openAndValidate();
 
 	}

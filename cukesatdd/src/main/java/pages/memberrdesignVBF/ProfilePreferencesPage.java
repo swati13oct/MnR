@@ -8,7 +8,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.junit.Assert;
+
+import acceptancetests.memberrdesignVBF.common.CommonStepDefinition;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 /**
@@ -47,7 +50,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(className = "edit-btn-email")
 	private WebElement EditButtonEmail;
 
-	@FindBy(id = "mail-preferences-selector")
+	@FindBy(className = "atdd-plan-name")
 	private WebElement planNameGoGreen;
 
 	@FindBy(className = "atdd-section-heading")
@@ -59,9 +62,12 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(className = "atdd-notes")
 	private WebElement NoteSection;
 
-	@FindBy(id = "save-prefs-btn")
-	private WebElement savePreferencesButton;
-
+	@FindBy(xpath = "//button[@id='save-prefs-btn-FEDERAL-INDIVIDUAL']/span")
+	private WebElement savePreferencesButtonInd;
+	
+	@FindBy(xpath = "//button[@id='save-prefs-btn-FEDERAL-GROUP']/span[text()='Save Preferences']")
+	private WebElement savePreferencesButtonGrp;
+	
 	@FindBy(partialLinkText = "PREFERENCES")
 	private WebElement EditPreferenceButton;
 
@@ -158,9 +164,11 @@ public class ProfilePreferencesPage extends UhcDriver {
 	 * 
 	 */
 	public void validateSavePreferences() {
-		validateNew(savePreferencesButton);
+		if(CommonStepDefinition.getMemberAttributeMap().get("Member Type").contains("GroupRetireeMapd"))
+		validateNew(savePreferencesButtonGrp);
+		else
+			validateNew(savePreferencesButtonInd);
 	}
-
 	/***
 	 * 
 	 */
@@ -179,12 +187,17 @@ public class ProfilePreferencesPage extends UhcDriver {
 	
     public void validateHealthSafeIdLink() throws InterruptedException {
         validateNew(hsidPasswordLink);
+        if("YES".equalsIgnoreCase(MRScenario.isHSIDCompatible)){
         hsidPasswordLink.click();
 
         CommonUtility.checkPageIsReadyNew(driver);
         CommonUtility.waitForPageLoadNew(driver, breadCrumbToNavigateBack, 60);
         System.out.println("PageTitle "+driver.getTitle());
         Assert.assertTrue(driver.getTitle().equalsIgnoreCase("HealthSafe ID"));
+        }
+        else{
+        	System.out.println("Skkiing the functionality as HSID is not supported");
+        }
         
 
 }

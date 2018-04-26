@@ -22,7 +22,7 @@ import pages.memberrdesignVBF.MemberSearchPage;
 import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.memberrdesignVBF.TestHarness;
 
-public class MemberAuthRedesignStepDefinition {
+public class MemberAuthStepDefinition {
 	/**
 	 * 
 	 */

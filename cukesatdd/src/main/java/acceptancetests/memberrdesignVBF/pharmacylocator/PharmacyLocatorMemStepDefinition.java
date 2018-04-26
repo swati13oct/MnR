@@ -26,7 +26,7 @@ import cucumber.api.DataTable;
  * @author sdwaraka
  *
  */
-public class PharmacyLocatorRedesignMemStepDefinition {
+public class PharmacyLocatorMemStepDefinition {
 
 	@Autowired
 	MRScenario loginScenario;

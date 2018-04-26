@@ -169,11 +169,14 @@ public class ProfileandPreferencesStepDefinition {
 
 	@Then("^I should see the breadcrumb  in the upper left side of the page$")
 	public void i_should_see_the_breadcrumb_in_the_upper_left_side_of_the_page() throws InterruptedException {
+		if ("YES".equalsIgnoreCase(MRScenario.isHSIDCompatible)) {
+			ProfilePreferencesPage ProfilePreferencesPage = (pages.memberrdesignVBF.ProfilePreferencesPage) getLoginScenario()
+					.getBean(PageConstants.ProfilePreferencesPage);
 
-		ProfilePreferencesPage ProfilePreferencesPage = (pages.memberrdesignVBF.ProfilePreferencesPage) getLoginScenario()
-				.getBean(PageConstants.ProfilePreferencesPage);
-
-		ProfilePreferencesPage.validateBreadCrumb();
+			ProfilePreferencesPage.validateBreadCrumb();
+		} else {
+			System.out.println("Skkiing the functionality as HSID is not supported");
+		}
 
 	}
 
@@ -182,11 +185,15 @@ public class ProfileandPreferencesStepDefinition {
 	 */
 	@And("^clicking the link should lead me back to the Account Settings page of the member site$")
 	public void clicking_the_link_should_lead_me_back_to_the_Account_Settings_page_of_the_Medica_member_site() {
-		ProfilePreferencesPage ProfilePreferencesPage = (pages.memberrdesignVBF.ProfilePreferencesPage) getLoginScenario()
-				.getBean(PageConstants.ProfilePreferencesPage);
+		if ("YES".equalsIgnoreCase(MRScenario.isHSIDCompatible)) {
+			ProfilePreferencesPage ProfilePreferencesPage = (pages.memberrdesignVBF.ProfilePreferencesPage) getLoginScenario()
+					.getBean(PageConstants.ProfilePreferencesPage);
 
-		ProfilePreferencesPage.validateBreadCrumbClick();
+			ProfilePreferencesPage.validateBreadCrumbClick();
 
+		} else {
+			System.out.println("Skkiing the functionality as HSID is not supported");
+		}
 	}
 
 }

@@ -35,7 +35,7 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(xpath = "//span[@ng-show = 'showPharmacyCount']")
 	private WebElement PharmacyFoundCount;
 
-	@FindBy(xpath = "//*[@id='viewmapdetails_id']")
+	@FindBy(xpath = "//*[contains(text(),'SHOW ON MAP')]")
 	private List<WebElement> showonmap;
 
 	@FindBy(xpath = ".//a[@class='display-block collapse-expand collapsed']")

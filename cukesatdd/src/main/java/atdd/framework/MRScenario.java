@@ -76,6 +76,7 @@ public class MRScenario {
 	public static String environment; 
 	public static String isTestHarness;
     public static String environmentMedicare;
+    public static String isHSIDCompatible;
     
     public static String domain;
     
@@ -141,6 +142,10 @@ public class MRScenario {
                                  isTestHarness = (null == System.getProperty(CommonConstants.IS_TESTHARNESS)
                                          ? props.get("isTestHarness")
                                          : System.getProperty(CommonConstants.IS_TESTHARNESS));
+                                 isHSIDCompatible = (null == System.getProperty(CommonConstants.IS_HSID_COMPATIBLE)
+                                         ? props.get("isHSIDCompatible")
+                                         : System.getProperty(CommonConstants.IS_HSID_COMPATIBLE));
+                                 
                                 // isTestHarness =  props.get("isTestHarness");
                               // Setting permission to the scripts , so that jenkins server can access
                               File shellScript  =  new File("src/main/resources/pdfReportGenerator.sh");
@@ -246,9 +251,15 @@ public class MRScenario {
                                                                            umsMemberAttributesMap.put(uhcUserName, attrList);
                                                             //}
  }
-                         					
-                         					InputStream memberTypeStream2 = ClassLoader.class
-                         							.getResourceAsStream("/database/MemberRedesign-VBF.csv");
+                                             InputStream memberTypeStream2;
+                                             if("team-ci1".equalsIgnoreCase(environment)){
+                         					 memberTypeStream2 = ClassLoader.class
+                         							.getResourceAsStream("/database/MemberRedesign-VBF-Teamci-1.csv");
+                                             }
+                                             else{
+                                            	  memberTypeStream2 = ClassLoader.class
+                              							.getResourceAsStream("/database/MemberRedesign-VBF.csv");
+                                             }
                          					memberRedesignVbfTypeReader = new BufferedReader(new InputStreamReader(
                          							memberTypeStream2));
 					while ((line = memberRedesignVbfTypeReader.readLine()) != null) {

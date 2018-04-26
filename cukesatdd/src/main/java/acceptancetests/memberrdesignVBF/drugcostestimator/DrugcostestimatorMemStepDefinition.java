@@ -16,7 +16,7 @@ import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.memberrdesignVBF.TestHarness;
 import pages.memberrdesignVBF.DrugCostEstimatorPage;
 
-public class DrugcostestimatorUhcStepDefinition {
+public class DrugcostestimatorMemStepDefinition {
 
 	@Autowired
 	MRScenario loginScenario;

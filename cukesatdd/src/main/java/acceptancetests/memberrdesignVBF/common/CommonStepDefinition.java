@@ -46,7 +46,8 @@ public class CommonStepDefinition {
 	 */
 	@Given("^I am a authenticated member on the member redesign site for Direct Login$")
 	public void I_am_a_authenticated_member_on_the_member_redesign_site(DataTable memberAttributes) {
-		launchBrowser();
+		memberAttributesMap.clear();
+
 		CommonStepDefinition.storeAttributesInMap(memberAttributes);
 		List<String> desiredAttributes = CommonStepDefinition.storeMapAttributesInList();
 		Map<String, String> loginCreds = loginScenario.getmemberRedesignVbfWithDesiredAttributes(desiredAttributes);
@@ -63,6 +64,7 @@ public class CommonStepDefinition {
 			System.out.println("Password is..." + pwd);
 			getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
+			launchBrowser();
 		}
 	}
 
@@ -78,13 +80,32 @@ public class CommonStepDefinition {
 
 		LoginPage loginPage = new LoginPage(wd);
 		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
-		SecurityQuestionsPage securityQuestionsPage = (SecurityQuestionsPage) loginPage.loginWith(userName, pwd);
-		if (securityQuestionsPage != null) {
-			getLoginScenario().saveBean(PageConstants.SECURITY_QUESTIONS_PAGE, securityQuestionsPage);
+		if ("YES".equalsIgnoreCase(MRScenario.isHSIDCompatible)) {
+			SecurityQuestionsPage securityQuestionsPage = (SecurityQuestionsPage) loginPage.loginWith(userName, pwd);
+			if (securityQuestionsPage != null) {
+				getLoginScenario().saveBean(PageConstants.SECURITY_QUESTIONS_PAGE, securityQuestionsPage);
+			} else {
+				Assert.fail("securityQuestionsPage is not displayed...");
+			}
+			i_enter_the_security_questions(memberattributes);
 		} else {
-			Assert.fail("securityQuestionsPage is not displayed...");
+			if (("YES").equalsIgnoreCase(MRScenario.isTestHarness)) {
+				TestHarness testHarness = (TestHarness) loginPage.loginWithLegacy(userName, pwd);
+				if (testHarness != null) {
+					getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE, testHarness);
+				} else {
+					Assert.fail("Login not successful...");
+				}
+			} else {
+
+				RallyDashboardPage rallyDashboard = (RallyDashboardPage) loginPage.loginWithLegacy(userName, pwd);
+				if (rallyDashboard != null) {
+					getLoginScenario().saveBean(PageConstants.RALLY_DASHBOARD_PAGE, rallyDashboard);
+				} else {
+					Assert.fail("Login not successful...");
+				}
+			}
 		}
-		i_enter_the_security_questions(memberattributes);
 	}
 
 	public void i_enter_the_security_questions(DataTable givenAttributes) {
@@ -106,28 +127,32 @@ public class CommonStepDefinition {
 
 	@Then("^member should navigate to Home page$")
 	public void member_should_navigate_to_home_page() throws InterruptedException {
-		LoginPage loginPage = (LoginPage) getLoginScenario().getBean(PageConstants.LOGIN_PAGE);
-		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
-		if (("YES").equalsIgnoreCase(MRScenario.isTestHarness)) {
-			TestHarness testHarness = (TestHarness) loginPage.navigateToHomePage();
-			if (testHarness != null) {
-				getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE, testHarness);
+		if ("YES".equalsIgnoreCase(MRScenario.isHSIDCompatible)) {
+			LoginPage loginPage = (LoginPage) getLoginScenario().getBean(PageConstants.LOGIN_PAGE);
+			getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
+			if (("YES").equalsIgnoreCase(MRScenario.isTestHarness)) {
+				TestHarness testHarness = (TestHarness) loginPage.navigateToHomePage();
+				if (testHarness != null) {
+					getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE, testHarness);
+				} else {
+					Assert.fail("Login not successful...");
+				}
 			} else {
-				Assert.fail("Login not successful...");
+
+				RallyDashboardPage rallyDashboard = (RallyDashboardPage) loginPage.navigateToHomePage();
+				if (rallyDashboard != null) {
+					getLoginScenario().saveBean(PageConstants.RALLY_DASHBOARD_PAGE, rallyDashboard);
+				} else {
+					Assert.fail("Login not successful...");
+				}
 			}
 		} else {
-
-			RallyDashboardPage rallyDashboard = (RallyDashboardPage) loginPage.navigateToHomePage();
-			if (rallyDashboard != null) {
-				getLoginScenario().saveBean(PageConstants.RALLY_DASHBOARD_PAGE, rallyDashboard);
-			} else {
-				Assert.fail("Login not successful...");
-			}
+			Assert.assertTrue("Skipping this functionality as already done in previous step!!!", true);
 		}
 	}
 
 	public static Map<String, String> storeAttributesInMap(DataTable memberAttributes) {
-		
+
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			System.out.println("Key to store in Map:" + memberAttributesRow.get(i).getCells().get(0));
@@ -163,6 +188,6 @@ public class CommonStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		CommonStepDefinition commonStepDefinition = new CommonStepDefinition(loginScenario);
 		getLoginScenario().saveBean(CommonConstants.COMMONSTEPDEFINITIONMEMVBF, commonStepDefinition);
-		memberAttributesMap.clear();
+
 	}
 }

@@ -845,6 +845,7 @@ public class CommonConstants {
 	public static final String IS_TESTHARNESS = "istestharness";
 
 	public static final String COMMONSTEPDEFINITIONMEMVBF = "commonStepDefinition";
+	public static final String IS_HSID_COMPATIBLE	 = "isHSIDCompatible";
 	
 	
 }

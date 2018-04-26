@@ -10,7 +10,7 @@ import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.memberrdesignVBF.TestHarness;
 import pages.memberrdesignVBF.HealthAndWellness;
 
-public class MemberRedesignHealthnWellnessStepDefinition {
+public class MemberHealthnWellnessStepDefinition {
 
 	@Autowired
 	MRScenario loginScenario;

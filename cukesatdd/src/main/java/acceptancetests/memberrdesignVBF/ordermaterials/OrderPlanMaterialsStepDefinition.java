@@ -16,7 +16,7 @@ import cucumber.api.java.en.When;
 import cucumber.api.DataTable;
 import gherkin.formatter.model.DataTableRow;
 
-public class OrderPlanMaterialsRedesignStepDefinition {
+public class OrderPlanMaterialsStepDefinition {
 	@Autowired
 	MRScenario loginScenario;
 

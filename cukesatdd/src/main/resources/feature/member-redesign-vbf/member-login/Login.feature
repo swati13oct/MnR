@@ -18,6 +18,6 @@ Feature: 1.09-VBF-MemRedesign-To test sign functionality
       | UhcMapdInd     |name1      | color1   | number1     |
       | AARPMapdInd | name1      | color1   | number1     |
       | GroupRetireeMapd     |name1      | color1   | number1     |
-      | Ship     |name1      | color1   | number1     |
+     # | Ship     |name1      | color1   | number1     |
       | PCP     |name1      | color1   | number1     |
-      | Medica      | name1      | color1   | number1     |
+     # | Medica      | name1      | color1   | number1     |

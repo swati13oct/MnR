@@ -1,6 +1,7 @@
 package acceptancetests.memberrdesignVBF.contactus;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.testng.Assert;
 
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
@@ -11,7 +12,7 @@ import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.memberrdesignVBF.TestHarness;
 import pages.memberrdesignVBF.ContactUsPage;
 
-public class ContactusRedesignStepDefinition {
+public class ContactusStepDefinition {
 	/**
 	 * 
 	 */
@@ -41,6 +42,8 @@ public class ContactusRedesignStepDefinition {
 		}
 		if (contactUsPage != null)
 			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE, contactUsPage);
+		else
+			Assert.fail("Contact Us page not loaded!!!");
 	}
 
 	/***

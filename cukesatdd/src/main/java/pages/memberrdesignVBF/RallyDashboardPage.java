@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.memberrdesignVBF.HealthAndWellness;
@@ -250,8 +251,8 @@ public class RallyDashboardPage extends UhcDriver {
 	public ContactUsPage navigateToContactUsPage() {
 		validateNew(ContactUsLink);
 		ContactUsLink.click();
-		CommonUtility.waitForPageLoadNew(driver, heading, 10);
-		if (driver.getTitle().equalsIgnoreCase("Overview")) {
+		CommonUtility.waitForPageLoadNew(driver, heading, CommonConstants.TIMEOUT_30);
+		if (driver.getTitle().trim().contains("Overview")) {
 			return new ContactUsPage(driver);
 		}
 		return null;

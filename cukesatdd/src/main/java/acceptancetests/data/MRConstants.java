@@ -10,6 +10,7 @@ import atdd.framework.MRScenario;
  *
  */
 public class MRConstants {
+	public static final String LEGACY_REDESIGN ="/content/medicare/login/memberRedesign.html";
 	public static final String AARPM_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans." + getDomain();
 	public static final String AARPM_URL_OFFLINE = "https://member.offline.aarpmedicareplans.com";
 	//public static final String UHCM_URL = "https://member."+MRScenario.environment+"-uhcmedicaresolutions." + getDomain() + "/guest/home.html";
@@ -324,10 +325,11 @@ public class MRConstants {
 	    public static final String TESTHARNESS = "https://"+ MRScenario.environment +"-medicare."+MRScenario.domain+"/content/medicare/login/overview.html/?testharness=true";
 	    public static final String TEAMCI_TESTHARNESS ="https://"+MRScenario.environment +"-medicare."+MRScenario.domain+"/?testharness=true";
 	    public static final String DASHBOARD = "https://"+ MRScenario.environment +"-medicare.uhc.com/";
-		   
+	    public static final String LEGACY_TESTHARNESS = "https://" + MRScenario.environment + "-medicare."+ MRScenario.domain + LEGACY_REDESIGN + "/?testharness=true";
+	    public static final String LEGACY_DASHBOARD = "https://" + MRScenario.environment + "-medicare."+ MRScenario.domain + LEGACY_REDESIGN;
 	    /** DeRegister URLs*/
 	    public static final String STAGE_DEREGISTER_URL = "https://apsrs0261."+MRScenario.domain+":9443/PartDPortalWeb/deregister.jsp ";
-	    public static final String TEANCI_DEREGISTER_URL = " http://partdexternal-"+MRScenario.environment +"."+MRScenario.domain+"/PartDPortalWeb/deregister.jsp";
+	    public static final String TEANCI_DEREGISTER_URL = "http://partdexternal-"+MRScenario.environment +"."+MRScenario.domain+"/PartDPortalWeb/deregister.jsp";
 	    public static final String TEAM_H_DEREGISTER_URL = "http://partd-teamh.ose.optum.com/PartDPortalWeb/deregister.jsp";  
 	    public static final String TEST_A_DEREGISTER_URL = "https://apsrt0245.uhc.com:9443/PartDPortalWeb/deregister.jsp";
 	    public static final String HEALTH_AND_WELLNESS_TESTHARNESS = "https://"+MRScenario.environment +"-medicare."+MRScenario.domain+"/content/medicare/member/health-and-wellness.html";

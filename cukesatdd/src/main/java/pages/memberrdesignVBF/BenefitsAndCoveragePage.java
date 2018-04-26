@@ -73,7 +73,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='plan_benefit_documents']/section/div/div[2]/div/form/span[2]")
 	private WebElement documents_label;
 
-	@FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[1]/div/div/div/div/h1")
+	@FindBy(xpath = "//div[@id='planBenefitsAppSum']/section//div/span[contains(@class,'atdd-benefitsoverview-plantitle')]")
 	private WebElement planName;
 
 	@FindBy(className = "atdd-benefitsoverview-membernamelabel")

@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -63,6 +65,7 @@ public class TestHarness extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
+		RallyDashboardPage.checkModelPopup(driver);
 		validateNew(heading);
 		validateNew(orderPlanPageLink);
 		validateNew(claimsPageLink);
@@ -172,10 +175,19 @@ public class TestHarness extends UhcDriver {
 	 * @return
 	 */
 	public ContactUsPage navigateToContactUsPage() {
+
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,-500)", "");
 		validateNew(contactUsPageLink);
 		contactUsPageLink.click();
-		CommonUtility.waitForPageLoadNew(driver, heading, 10);
-		if (driver.getTitle().equalsIgnoreCase("Overview")) {
+		CommonUtility.waitForPageLoadNew(driver, heading, CommonConstants.TIMEOUT_30);
+		try {
+			Thread.sleep(3000L);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (driver.getTitle().trim().contains("Overview")) {
 			return new ContactUsPage(driver);
 		}
 		return null;

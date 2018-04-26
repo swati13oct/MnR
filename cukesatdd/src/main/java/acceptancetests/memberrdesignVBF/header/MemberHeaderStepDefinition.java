@@ -12,7 +12,7 @@ import pages.memberrdesignVBF.ClaimSummarypage;
 import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.memberrdesignVBF.TestHarness;
 
-public class MemberRedesignHeaderStepDefinition {
+public class MemberHeaderStepDefinition {
 
 	@Autowired
 	MRScenario loginScenario;
