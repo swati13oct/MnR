@@ -34,8 +34,7 @@ public class OneTimePaymentSuccessPage extends UhcDriver{
 	@FindBy(xpath = "/html/body/div[2]/div/div[2]/div/div/div[1]/div/div/div[6]/div[2]/span")
 	private WebElement AccountHolderName;
 	
-	@FindBy(xpath = "//*[@class='container--base']/div[@class='container']//button[@ng-click='backToPaymentHistoryPage()']")
-	private WebElement BackToPaymentHistoryPage;
+
 
 
 	private PageData oneTimePaymentSuccess;
@@ -98,20 +97,9 @@ globalExpectedJson);
 
 
 	// In progress
-	public PaymentHistoryPage ScrollDownToBackButton()
-	{
-		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		jse.executeScript("window.scrollBy(0,700)", "");
-		
-		if(BackToPaymentHistoryPage.isDisplayed())
-		{
-			BackToPaymentHistoryPage.click();
-			return new PaymentHistoryPage(driver);
-		}
-		else
-			return null;
+	
 		
 		
-	}
+	
 	
 }

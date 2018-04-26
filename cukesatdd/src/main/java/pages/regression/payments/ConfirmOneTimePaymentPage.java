@@ -1,5 +1,6 @@
 package pages.regression.payments;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -26,6 +27,8 @@ public class ConfirmOneTimePaymentPage extends UhcDriver{
 	@FindBy(xpath ="//*[@class='parsys overview']//div[@class='row'][1]//div[@ng-if='models.submitAutomaticFailure']/p[2]")
 	private WebElement OneTimePaymentError;
 
+	@FindBy(xpath = "//*[@class='container--base']/div[@class='container']//button[@ng-click='backToPaymentHistoryPage()']")
+	private WebElement BackToPaymentHistoryPage;
 
 	public ConfirmOneTimePaymentPage(WebDriver driver) {
 		super(driver);
@@ -67,6 +70,7 @@ public class ConfirmOneTimePaymentPage extends UhcDriver{
 			SubmitPaymentButton.click();
 		     System.out.println("Submit Payment Button clicked");
 		CommonUtility.checkPageIsReady(driver);
+		Thread.sleep(5000);
 		if(driver.getTitle().equalsIgnoreCase("overview")){
 			System.out.println("Title matched");
 			Thread.sleep(8000);
@@ -74,6 +78,7 @@ public class ConfirmOneTimePaymentPage extends UhcDriver{
 		try{
 			if(SuccessPay.getText().contains("Thank you for your payment"))
 			{
+				System.out.println("Payment Success Page Reached");
 				return new OneTimePaymentSuccessPage(driver);			
 			}
 			else if(OneTimePaymentError.getText().contains("only one payment request can be submitted per business day"))
@@ -89,6 +94,20 @@ public class ConfirmOneTimePaymentPage extends UhcDriver{
 		
 		return new OneTimePaymentSuccessPage(driver);
 		
+	}
+    
+    public PaymentHistoryPage ScrollDownToBackButton()
+	{
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,700)", "");
+		
+		if(BackToPaymentHistoryPage.isDisplayed())
+		{
+			BackToPaymentHistoryPage.click();
+			return new PaymentHistoryPage(driver);
+		}
+		else
+			return null;
 	}
 
 

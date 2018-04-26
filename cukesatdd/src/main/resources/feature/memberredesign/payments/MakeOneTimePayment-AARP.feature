@@ -362,7 +362,10 @@ Feature: To test the payment flow on AARP site
       | Account holder middle name | <middleName>       |
       | Account holder last name   | <lastName>         |
     And the user confirms the Autopayment in UHC site
-    And the user checks and Go to Payment History Page
+    And the user moves to Go to Payment History Page button
+    And the user clicks on Make One Time Payment button
+    And the user makes one time payment in AARP site
+    And the user confirms the Autopayment in UHC site
        
 
     Examples: 

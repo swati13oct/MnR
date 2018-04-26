@@ -48,6 +48,9 @@ public class PaymentHistoryPage extends UhcDriver{
 	@FindBy(xpath = "//*[@class='payment-method-btn'][1]/a")
 	private WebElement onetimepaymentbtn;
 	
+	@FindBy(xpath = "//*[@class='payment-method-btn'][1]/a[2]")
+	private WebElement onetimepaymentbtnPDP;
+	
 	@FindBy(linkText= "Make a Payment")
 	private WebElement paymentslink;	
 	
@@ -319,18 +322,26 @@ public class PaymentHistoryPage extends UhcDriver{
 	    	else  {
 	    		System.out.println("iPerception Pop Up not displayed");
 	    	}
-		 waitforElement(onetimepaymentbtn);
-	    	
-		if (validate(onetimepaymentbtn)){
+		
+	   try
+	   {
+		if(onetimepaymentbtn.isDisplayed()){
 			onetimepaymentbtn.click();
-		 System.out.println("clicked on make OTP button");
-		 
+		 System.out.println("clicked on make OTP button");		 
 		 return new  OneTimePaymentPage(driver);
 		}
-		
-		else {
-			return null;
-		}
+		else if(onetimepaymentbtnPDP.isDisplayed())
+		{
+			onetimepaymentbtnPDP.click();
+			System.out.println("clicked on make OTP button");
+			return new  OneTimePaymentPage(driver);
+		}		
+	   }catch(Exception e)
+	   {
+		   System.out.println("One time Payment Button not displayed");
+		   return null;
+	   }
+	   return new  OneTimePaymentPage(driver);
 	    
 		    }
 	 
