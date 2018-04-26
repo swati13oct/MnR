@@ -399,6 +399,41 @@ Given registered Redesign member for EOB with following attributes
 	| PDP          | Group_Non_LIS 			|  -either- coinsurance of 5% of the cost of the drug   |  	  false       |
 
 
+@thePredators
+@juneRelease2018 @hartfordprescriptionDrugBenefit
+ Scenario Outline: Verify city of Hartford Prescription Drug Benefits 
+Given Registered member with following details
+| Plan Type   | <planType>    |
+| Member Type  | <memberType> |
+When I Enter the security questions
+      | friendname | <friendname> | 
+     | favouritecolor | <favcolor> |
+     | PhoneNumber | <phonenumber> |
+ Then The user navigates to Benefits and Coverage page
+ And the user validates City of Hartford prescription Drug Benefits table    
+ 	Examples:
+	| planType |memberType | friendname | favcolor | phonenumber |
+    | MAPD   |Hartford   | name1      | color1   | number1     |
+    | PDP    |Hartford   | name1      | color1   | number1     |      
     
+    
+   @thePredators
+@juneRelease2018 @TownOfGreenwichprescriptionDrugBenefit
+ Scenario Outline: Verify city of Hartford Prescription Drug Benefits 
+Given Registered member with following details
+| Plan Type   | <planType>    |
+| Member Type  | <memberType> |
+When I Enter the security questions
+      | friendname | <friendname> | 
+     | favouritecolor | <favcolor> |
+     | PhoneNumber | <phonenumber> |
+Then The user navigates to Benefits and Coverage page
+And the user validates Town Of Greenwich table
+ 
+    
+ 	Examples:
+	| planType |memberType | friendname | favcolor | phonenumber |
+    | PDP   |Greenwich   | name1      | color1   | number1     |
+
     
 

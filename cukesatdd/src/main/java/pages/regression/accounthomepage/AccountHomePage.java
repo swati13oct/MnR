@@ -23,7 +23,7 @@ import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.dashboard.member.ulayer.ClaimSummarypage;
 import pages.member.bluelayer.BenefitsAndCoveragePage;
-import pages.member.bluelayer.ProfilePageHsid;
+import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 import pages.member.bluelayer.ProfilePreferencesPage;
 import pages.member.redesign.ContactUsPage;
 import pages.member.ulayer.OneTimePaymentsPage;
@@ -587,7 +587,7 @@ public class AccountHomePage extends UhcDriver {
 
 	}
 
-	public ProfilePageHsid navigateDirectToProfilePageHsid() throws InterruptedException {
+	public ProfileandPreferencesPage navigateDirectToProfilePageHsid() throws InterruptedException {
 		// TODO Auto-generated method stub
 		if (MRScenario.environment.equalsIgnoreCase("stage")) {
 			System.out.println("user is on Stage login page");
@@ -611,7 +611,7 @@ public class AccountHomePage extends UhcDriver {
 
 				if (driver.getTitle().equalsIgnoreCase("Profile")) {
 
-					return new ProfilePageHsid(driver);
+					return new ProfileandPreferencesPage(driver);
 				}
 
 			}
@@ -644,7 +644,7 @@ public class AccountHomePage extends UhcDriver {
 		CommonUtility.waitForPageLoad(driver, heading, 50);
 		if (driver.getTitle().equalsIgnoreCase("Profile")) {
 			System.out.println("here");
-			return new ProfilePageHsid(driver);
+			return new ProfileandPreferencesPage(driver);
 		}
 
 		return null;
