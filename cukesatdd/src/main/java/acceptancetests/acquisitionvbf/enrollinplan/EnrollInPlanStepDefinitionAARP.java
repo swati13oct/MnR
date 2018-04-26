@@ -1005,9 +1005,10 @@ public class EnrollInPlanStepDefinitionAARP {
 	public void user_navigates_to_Confirmation_Page() {
 		boolean hasEnrolled = (Boolean) getLoginScenario().getBean(
 				EnrollInPlanCommonConstants.HAS_ENROLLED);
-		boolean hasErrorMessage = (Boolean) getLoginScenario().getBean(
-				EnrollInPlanCommonConstants.HAS_ERROR_MESSAGE);
+		
 		if (!hasEnrolled) {
+			boolean hasErrorMessage = (Boolean) getLoginScenario().getBean(
+					EnrollInPlanCommonConstants.HAS_ERROR_MESSAGE);
 			if(!hasErrorMessage) {
 			ConfirmationPage confirmationPage = (ConfirmationPage) getLoginScenario()
 					.getBean(PageConstants.CONFIRMATION_PAGE);
