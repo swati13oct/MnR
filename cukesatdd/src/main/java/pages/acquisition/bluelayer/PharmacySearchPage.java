@@ -67,7 +67,8 @@ public class PharmacySearchPage extends UhcDriver {
 
 
 	//@FindBy(xpath = "//div[@id='medicareTitle']/h1")
-	@FindBy(xpath = "//*[@id='site-wrapper']/div[4]/div/div/div/div/div/main/div/div[3]/div/div[1]/div/div[1]/div/div/div[1]/h2")
+	//@FindBy(xpath = "//*[@id='site-wrapper']/div[4]/div/div/div/div/div/main/div/div[3]/div/div[1]/div/div[1]/div/div/div[1]/h2")
+	@FindBy(xpath = "//*[@id='site-wrapper']//h2")
 	private WebElement pharmacyResultHeader;
 	
 	@FindBy(id = "services")
@@ -110,13 +111,16 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(xpath = "//div/h2[contains(@class, 'pharmacy-count')]")
 	private WebElement pharmacyCount;
 
-	@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[2]")
+	//@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[2]")
+	@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']//div[2]")
 	WebElement pharmacyResults;
 
-	@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[1]")
+	//@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[1]")
+	@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']//div[1]")
 	WebElement zeropharmacyResults;
 
-	@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[2]/div/ul[@class='map-toggle']")
+	//@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[2]/div/ul[@class='map-toggle']")
+	@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']//ul[@class='map-toggle']")
 	WebElement mapToggleElement;
 
 	@FindBy(id="collapseMap")
