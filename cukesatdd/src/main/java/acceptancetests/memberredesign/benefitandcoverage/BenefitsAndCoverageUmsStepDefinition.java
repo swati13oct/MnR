@@ -1076,10 +1076,9 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	public void the_user_navigates_to_Redesign_BandC_page() throws InterruptedException{
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		BenefitsAndCoveragePage planBenefitsCoverage = accountHomePage.navigateDirectToBnC();
-		getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE,
-				planBenefitsCoverage);
-		/*if (planBenefitsCoverage != null) {
+		BenefitsAndCoveragePage planBenefitsCoverage = accountHomePage.navigateDirectToBnCPag();
+		//getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE,planBenefitsCoverage);
+		if (planBenefitsCoverage != null) {
 			System.out.println("BNC page Loaded");
 			getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE,
 					planBenefitsCoverage);
@@ -1087,7 +1086,8 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		}
 		else {
 			Assert.fail("Error in loading  BNC Page");
-		}*/
+		}
+
 
 	}
 	
@@ -1114,6 +1114,42 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		planBenefitsCoverage.validateTownOfGreenwichdrugtable();
+						
+	}
+	
+	
+	
+	@And("the user validates the Drug costs Section")
+	public void user_validate_drugCostSectionTexas() {
+				
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.validatedrugCostSectionTexas();
+						
+	}
+	@And("the user verifies the Retail Cost sharing table")
+	public void user_validate_RetailCostSharing_Drugtable() {
+				
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.validateRetailCostSharingdrugtable();
+						
+	}
+	@And("the user verifies the Mail Order Cost sharing table")
+	public void user_validate_MailOrderCostSharing_Drugtable() {
+				
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.validateMailOrderCostSharing_Drugtable();
+						
+	}
+	
+	@And("the user validates the Office Visits section")
+	public void user_validate_OfficeVisitssection() {
+				
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.validateOfficeVisitssection();
 						
 	}
 	
