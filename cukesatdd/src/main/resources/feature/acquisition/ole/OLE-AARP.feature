@@ -15,7 +15,7 @@ Then the user validates Leave OLE modal for OLE
 Then the user validates and selects the Disclaimer Checkbox
 Then the user navigates to Medicare Information Page
 Then the user validates Medicare Information Page required fields
-
+Then the user navigates to Preliminary Questions Page
 	
 Examples:
 | zipcode | county             | plantype | planName                                         | premium	|
@@ -41,6 +41,7 @@ Then the user validates cancellation modal for OLE
 Then the user validates and selects the Disclaimer Checkbox
 Then the user navigates to Medicare Information Page
 Then the user validates Medicare Information Page required fields
+Then the user navigates to Preliminary Questions Page
 
 	
 Examples:

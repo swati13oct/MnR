@@ -20,6 +20,7 @@ Then the user validates cancellation modal for OLE
 Then the user validates and selects the Disclaimer Checkbox
 Then the user navigates to Medicare Information Page
 Then the user validates Medicare Information Page required fields
+Then the user navigates to Preliminary Questions Page
 Examples:
 	| zipcode | county             | plantype |  planName                                             |
 	| 90210   | Los Angeles County | MA     	|  AARP MedicareComplete SecureHorizons Plan 2 (HMO)    |
@@ -37,7 +38,7 @@ When user views plans of the below plan type in UMS site
 Then the user view plan details of the above selected plan in UMS site vpp
 	| Plan Name | <planName> |
 Then the user clicks on Enroll Now in Plan Details Page to start the OLE flow
-Then the user validates the Plan details on OLE 
+Then the user validates the Plan details on OLE
 
 Examples:
 	| zipcode | county             | plantype |  planName                                             |

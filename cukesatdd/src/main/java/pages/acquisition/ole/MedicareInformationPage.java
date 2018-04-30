@@ -119,6 +119,22 @@ public class MedicareInformationPage extends UhcDriver{
 		return flag;
 	}
 
+	public PrelimineryQuestionsPage navigate_to_Preliminary_Questions_page() {
+		
+		validate(NextBtn);
+		NextBtn.click();
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(driver.getCurrentUrl().contains("preliminary-questions")){
+			System.out.println("OLE Preliminary Questions Page is Displayed");
+			return new PrelimineryQuestionsPage(driver);
+		}
+		return null;
+	}
 
 
 }

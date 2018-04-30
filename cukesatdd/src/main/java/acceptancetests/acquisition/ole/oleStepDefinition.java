@@ -22,6 +22,7 @@ import pages.acquisition.ole.CancelOLEModal;
 import pages.acquisition.ole.LearnMoreModal;
 import pages.acquisition.ole.LeavingOLEmodal;
 import pages.acquisition.ole.MedicareInformationPage;
+import pages.acquisition.ole.PrelimineryQuestionsPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.ComparePlansPage;
 import pages.acquisition.ulayer.PlanDetailsPage;
@@ -424,4 +425,20 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 		}
 	}
 
+	@Then("^the user navigates to Preliminary Questions Page$")
+	public void the_user_navigates_to_Preliminary_Questions_Page() throws Throwable {
+		MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE);
+		PrelimineryQuestionsPage prelimineryQuestionsPage = medicareInfoPage.navigate_to_Preliminary_Questions_page();
+		if (prelimineryQuestionsPage != null) {
+			
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE,
+					medicareInfoPage);
+			System.out.println("OLE Preliminary Questions Page is Displayed");
+			Assert.assertTrue(true);
+		}
+		else
+			Assert.fail("OLE Preliminary Questions Page is NOT Displayed");
 	}
+
+
+}
