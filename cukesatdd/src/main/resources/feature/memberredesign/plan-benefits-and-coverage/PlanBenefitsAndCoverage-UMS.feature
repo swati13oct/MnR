@@ -435,5 +435,32 @@ And the user validates Town Of Greenwich table
 	| planType |memberType | friendname | favcolor | phonenumber |
     | PDP   |Greenwich   | name1      | color1   | number1     |
 
+
+
+ @BenefitsforTexasERSMember @regression
+  Scenario Outline: Verify the Benefits for TexasERSMember
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type | <planType> |
+    Then The user navigates to Benefits and Coverage page
+    And the user validates the Drug costs Section
+    Then the user verifies the Retail Cost sharing table
+   
+
+    Examples: 
+      | planType |
+      | Texas    |
+      
+   @OfficeVisitswithoutprovidertiering   @regression 
+    Scenario Outline: Verify the Office visits widget for a member withoutprovidertiering
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type | <planType> |
+    Then The user navigates to Benefits and Coverage page
+    And the user validates the Office Visits section
+
+
+    Examples: 
+      | planType |
+      | MAPD    |
+
     
 

@@ -191,7 +191,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-ambulance-title")
 	private WebElement AmbulanceHeader;
 
-	@FindBy(className = "atdd-officevisits-title")
+	@FindBy(id = "officeVisitTileAtdd")
 	private WebElement OfficeVisits;
 
 	@FindBy(className = "atdd-outpatientsurgery-title")
@@ -300,6 +300,38 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-bnc-CTgrouptable")
 	private WebElement GreenwichTable;
 	
+	@FindBy(className = "atdd-bnc-pharmacydropdwn")
+	private WebElement pharmacyDropdown;
+
+	@FindBy(className = "atdd-bnc-drugcostsheading")
+	private WebElement drugCostsHeader;
+
+	@FindBy(className = "atdd-bnc-txers-retailcostsharing-table")
+	private WebElement retailTable;
+
+	@FindBy(xpath = ".//*[@class='table-subheader']/td[1]")
+	private List<WebElement> ICStage30dayNonMain;
+
+	@FindBy(xpath = ".//*[@class='table-subheader']/td[2]")
+	private List<WebElement> ICStage30dayMain;
+
+	@FindBy(xpath = ".//*[@class='table-subheader']/td[3]")
+	private List<WebElement> ICStage31to60;
+
+	@FindBy(xpath = ".//*[@class='table-subheader']/td[4]")
+	private List<WebElement> ICStage61to90;
+	
+	@FindBy(xpath = ".//*[@class='table-white atdd-bnc-txers-retailcostsharing-table']/tbody/tr[3]/td[2]")
+	private WebElement ICTier1Value;
+
+	@FindBy(xpath = "//*[@id='officeVisitTileAtdd']/div/section/div[1]/span")
+	private WebElement pcpValue;
+	
+	@FindBy(xpath = "//*[@id='officeVisitTileAtdd']/div/section/span")
+	private WebElement specialistValue;
+	
+
+
 	
 	public static final String learnmorestagetext_xpath = ".//*[@id='collapseStages']";
 
@@ -1388,5 +1420,88 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			e.printStackTrace();
 		}
 		validateNew(GreenwichTable);
+	}
+
+	public void validatedrugCostSectionTexas() {
+		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
+				try {
+					Thread.sleep(10000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				JavascriptExecutor jse = (JavascriptExecutor) driver;
+				jse.executeScript("window.scrollBy(0,-500)", "");
+				validateNew(pharmacyDropdown);
+				validateNew(drugCostsHeader);
+	}
+
+	public void validateRetailCostSharingdrugtable() {
+		// TODO Auto-generated method stub
+
+		Select drpPharmacy = new Select(pharmacyDropdown);
+		drpPharmacy.selectByVisibleText("Retail Cost Sharing");
+		System.out.println("Retail Cost Sharing dropdown value selected");
+
+		validateNew(retailTable);
+		if(ICStage30dayNonMain.size()<1 ||ICStage30dayMain.size()<1 ||ICStage31to60.size()<1||ICStage61to90.size()<1)
+		{
+			Assert.assertFalse("The columns are incorrect in texas Ers table",true);
+			
+		}
+		
+		
+		if(ICTier1Value.getText().trim().length()<1)
+		{
+			Assert.assertFalse("No value in the IC stage tier 1 cell",true);
+		}
+		
+	}
+
+	public void validateMailOrderCostSharing_Drugtable() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void validateOfficeVisitssection() {
+		
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,-50)", "");
+		
+		validateNew(OfficeVisits);
+		// TODO Auto-generated method stub
+		
+		validateNew(pcpValue);
+		validateNew(specialistValue);
+		if(pcpValue.getText().contains("$"))
+		{
+		Assert.assertTrue(true);
+		}
+		
+		else
+		{
+			Assert.assertTrue(false);
+			
+			
+		}
+		
+		if(specialistValue.getText().contains("$"))
+		{
+		Assert.assertTrue(true);
+		}
+		
+		else
+		{
+			Assert.assertTrue(false);
+		}
+		
+		
+		
+		
+		
+			
+		
+		
 	}
 }
