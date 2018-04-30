@@ -22,6 +22,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import acceptancetests.data.ElementData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ole.WelcomePage;
 import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPage;
 
 /**
@@ -75,13 +76,17 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//div[@class='pdpplans_planbutton']/div[2]/div[2]/div[2]")
 	private WebElement hidePdpPlans;
-
+                                   
 	@FindBy(xpath = "//div[@class='module-plan-overview module swiper-slide ng-scope']")
 	List<WebElement> maPlanElement;
 
 	@FindBy(xpath = "//div[@class='disabledprint ng-scope']")
 	List<WebElement> pdpPlanElement;
 	
+	//Change PDP Plan Element identifier. Same as for MA/MAPD plans
+/*	@FindBy(xpath = "//div[@class='module-plan-overview module swiper-slide ng-scope']")
+	List<WebElement> pdpPlanElement;
+*/
 	@FindBy(xpath="//div[contains(@ng-repeat,'plan in planModel.maPlans')]")
 	List<WebElement> maPlans;
 	
@@ -172,8 +177,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//button[@class='action-btn negative']")
 	private WebElement Checkcoverage;
 	
-	@FindBy(xpath = ".//*[@class='swiper-container']")
-	List<WebElement> maPlanElement1;
+	@FindBy(xpath = ".//*[@id='plan-list-1']//div[@class='module-plan-overview module swiper-slide ng-scope']")
+	List<WebElement> maPlansList;
+	
+	//Right Rail Element - TFN
+	@FindBy(xpath="//*[@class='tel ng-binding']")
+	private WebElement RightRail_TFN;
+	
 	
 	public JSONObject vppPlanSummaryJson;
 
@@ -256,10 +266,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 
 	public VPPPlanSummaryPage viewPlanSummary(String planType) {
+		
 		if (planType.equalsIgnoreCase("PDP")) {
-			if(validate(hidePdpPlans)){
+//	WebElement hidePdpPlans invalid
+			//if(validate(hidePdpPlans)){
 				pdpPlansViewLink.click();
-			}
+				System.out.println("PDP Plan Type Clicked");
+			//}
 		} else if (planType.equalsIgnoreCase("MA")
 				|| planType.equalsIgnoreCase("MAPD")) {
 				maPlansViewLink.click();
@@ -300,8 +313,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if (planName.contains("HMO")) {
 			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 			
-			if(maPlanElement1!=null){
-			for (WebElement plan : maPlanElement1) {
+			if(maPlansList!=null){
+			for (WebElement plan : maPlansList) {
 				if (plan.getText().contains(planName)) {
 					//ElementData elementData = new ElementData("id",
 						//	"doctorCoverMA");
@@ -570,7 +583,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	}
 
-	public boolean getSpecificPlanInfo(String planName) {
+	public boolean getSpecificPlanInfo(String planName) throws InterruptedException {
+		
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
 		WebElement element = null;
 		ElementData elementData = new ElementData("className",
 				"module-plan-overview");
@@ -655,7 +675,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if (planName.contains("HMO")) {
 			for(WebElement plan : maPlans){
 				if (plan.getText().contains(planName)) {
-					ElementData elementData = new ElementData("id", "enrollMAButton");
+					ElementData elementData = new ElementData("xpath", "//div[@class='enrollment']//a[@class='cta-button']");
 					if(findChildElement(elementData, plan).isDisplayed()){
 						findChildElement(elementData, plan).click();
 						break;
@@ -745,7 +765,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public PlanDetailsPage navigateToPlanDetails(String planName, String planType) {
 		driver.manage().window().maximize();
 		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
-			ElementData elementData = new ElementData("id", "viewmoredetlinkmapd");
+			ElementData elementData = new ElementData("id", "viewmoredetlinkmapdplan");
 			WebElement element = getViewPlanDetailsElement(maPlanElement, elementData, planName);
 			if (element != null) {
 				element.click();
@@ -753,16 +773,20 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			}
 
 		} else if (planType.equalsIgnoreCase("PDP")) {
-			ElementData elementData = new ElementData("id", "viewmoredetlinkpdp");
-			WebElement element = getViewPlanDetailsElement(pdpPlanElement, elementData, planName);
-			if (element != null) {
+//			ElementData elementData = new ElementData("id", "viewmoredetlinkpdp");
+//			WebElement element = getViewPlanDetailsElement(pdpPlanElement, elementData, planName);
+			WebElement PDPmoreDetailsLink = driver.findElement(By.xpath("//h2[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@id = 'viewmoredetlinkpdp']"));
+			validate(PDPmoreDetailsLink);
+			PDPmoreDetailsLink.click();
+			System.out.println("View Plan Details Link is clicked for PDP plan"+planName);
+			
+/*			if (element != null) {
 				element.click();
-
 			}
-
+*/
 		}
 		CommonUtility.checkPageIsReady(driver);
-		if (driver.getTitle().equalsIgnoreCase("Our Medicare Plans | AARP® Medicare Plans from UnitedHealthcare®")
+		if (driver.getTitle().equalsIgnoreCase("AARPMP: Medicare Plan Benefits and Information | AARP® Medicare Plans from UnitedHealthcare®")
 				|| driver.getTitle().equalsIgnoreCase("Plan Detail")) {
 			return new PlanDetailsPage(driver);
 		}
@@ -861,8 +885,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			
 			if(validate(viewPlans)){
 				viewPlans.click();
-				List<WebElement> view2017Plans = driver.findElements(By.id("maDCELink"));
-				view2017Plans.get(0).click();
+				List<WebElement> maDCELink = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[@class='mabenefittable']//a"));
+				maDCELink.get(0).click();
 				}else{
 					Assert.assertTrue("This scenario is for AEP period", true);
 					
@@ -936,6 +960,81 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 		
 		return flag;
+	}
+
+	
+	/**
+	 * Methods added for OLE Flow validations
+	 * @author sdwaraka
+	 * @param PlanName
+	 * @return
+	 */
+	public String getPlanPremium(String PlanName) {
+		
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
+		System.out.println("Plan Name is : "+PlanName);
+		
+		WebElement PremiumForPlan = driver.findElement(By.xpath("//h2[contains(text(), '"+PlanName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//li[contains(text(),'Monthly Premium')]//span[contains(text(),'$')]"));
+		String PlanPremium = PremiumForPlan.getText();
+		
+		System.out.println("Premium for Plan : "+PlanPremium);
+		return PlanPremium;
+	}
+
+	/**
+	 * @author sdwaraka
+	 * Method Added for OLE Flow - Navigate to OLE from Plan Summary Page
+	 * @param planName
+	 * @return
+	 * @throws InterruptedException
+	 */
+	public WelcomePage Enroll_OLE_Plan(String planName) throws InterruptedException {
+		
+		System.out.println("Enroll in Plan for Plan : "+planName);
+		WebElement EnrollForPlan = driver.findElement(By.xpath("//h2[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(), 'Enroll in plan')]"));
+		try {
+		validate(EnrollForPlan);
+		
+		System.out.println("Found Enroll IN Plan Button for the Plan : "+planName);
+		}catch(Exception e){
+			System.out.println("Enroll in Plan Button is Not Displayed ");
+		}
+		EnrollForPlan.click();
+		
+		try {
+			Thread.sleep(5000);
+			} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(driver.getCurrentUrl().contains("enrollment")){
+			System.out.println("OLE Welcome Page is Displayed");
+			return new WelcomePage(driver);
+		}
+		return null;
+	}
+
+	/**
+	 * @author sdwaraka
+	 * Method added for OLE Flow Validations
+	 * @return
+	 */
+	public String GetTFNforPlanType() {
+		if(validate(RightRail_TFN)){
+			System.out.println("TFN is displayed in Right Rail");
+			String TFN_Number = RightRail_TFN.getText();
+			return TFN_Number;
+		}
+		System.out.println("TFN is not Displayed for PlanType in VPP page");
+		
+		return null;
 	}
 
 }

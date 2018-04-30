@@ -1,7 +1,7 @@
 /**
  * 
  */
-package pages.member_deprecated.redesign;
+package pages.regression.sso;
 
 
 import java.util.Set;
@@ -14,7 +14,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import pages.memberredesign_deprecated.bluelayer.AccountHomePage;
+import pages.memberredesign.bluelayer.AccountHomePage;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 

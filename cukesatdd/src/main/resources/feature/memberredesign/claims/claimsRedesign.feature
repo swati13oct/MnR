@@ -3,7 +3,8 @@ Feature:T1.1To validate the new changes related to claims page on the member red
 
   @claimsSummaryFED @theTransformers
   Scenario Outline: To validate the claims present for the Federal member on claims sumamry page for AARP site
-    Given I am an Individual or Group member on the redesigned site
+    #Given I am an Individual or Group member on the redesigned site
+    Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>     |
       | Test Data Type | <claimssystem> |
     When I navigate to the claims Summary page in redesigned site
@@ -17,7 +18,7 @@ Feature:T1.1To validate the new changes related to claims page on the member red
 
     Examples: 
       | planType | claimPeriod    | domain | claimssystem |
-      | MAPD     | Last 24 Months | COSMOS | COSMOSCLAIMS |
+      #| MAPD     | Last 24 Months | COSMOS | COSMOSCLAIMS |
       | MA       | Last 24 Months | NICE   | NICECLAIMS   |
       #| PDP      | Last 24 Months | RX     | RXCLAIMS     |
 

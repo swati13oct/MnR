@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -1419,7 +1420,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	public boolean isDrugPresent(String drugName) {
 		boolean isPresent = false;
-		List<WebElement> drugNamesList = driver.findElements(By.id("drugDosageStrengthId"));
+		List<WebElement> drugNamesList = driver.findElements(By.id("drugDosageStrengthId_0"));
 
 		System.out.println("drug list size"+drugNamesList.size());
 		for (WebElement drugNames : drugNamesList) {
@@ -1785,7 +1786,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		returnLink.click();	
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", returnLink);	
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", returnLink);
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {

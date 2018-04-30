@@ -196,16 +196,20 @@ public class VppStepDefinitionUpdatedAARP {
 	}
 
 	/**
+	 * @throws InterruptedException 
 	 * @toDo:user validates plan summary for the below plan
 	 */
 	@And("^the user validates plan summary for the below plan in the AARP site$")
-	public void user_validates_plan_summary() {
-		 if(memberAttributesRow.size()>0){
-		        for (int i = 0; i < memberAttributesRow.size(); i++) {
-		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
-		        }
-	        }
-		String planName = memberAttributesMap.get("Plan Name");
+	public void user_validates_plan_summary(DataTable planAttributes) throws InterruptedException {
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planName = givenAttributesMap.get("Plan Name");
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);

@@ -4,26 +4,43 @@
 package pages.member_deprecated.redesign;
 
 
+import java.util.concurrent.TimeUnit;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.UnsupportedCommandException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import pages.acquisition.ulayer.LoginAssistancePage;
+import pages.dashboard.acquisition.RegistrationInformationPage;
+import pages.dashboard.eob.EOBPage;
+import pages.member.bluelayer.DashboardPage;
+import pages.member.ulayer.RallyDashboard;
+import pages.member.ulayer.TerminatedHomePage;
+import pages.member.ulayer.UNPWAssistancePage;
+import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.dashboard_deprecated.acquisition.RegistrationInformationPage;
-import pages.member_deprecated.ulayer.RallyDashboard;
-import pages.member_deprecated.ulayer.TerminatedHomePage;
-import pages.member_deprecated.ulayer.UNPWAssistancePage;
 
 /**
  * @author pjaising
  *
  */
 public class NewLoginPage extends UhcDriver {
+
+	private static final String STAGE_DASHBOARD_URL = null;
 
 	// Page URL
 	private static String PAGE_URL = MRConstants.DASHBOARD_URL;
@@ -43,7 +60,17 @@ public class NewLoginPage extends UhcDriver {
 	@FindBy(linkText = "Forgot your username or password?")
 	private WebElement forgotUsernamePasswordLink;
 
+	@FindBy(id = "usercheckbox")
+	private WebElement userNameCheckBox;
+	
+	@FindBy(className="modal-body")
+	private WebElement iPerceptionPopUp;
+	
 
+
+	
+
+	
 
 
 	public NewLoginPage(WebDriver driver) {
@@ -53,7 +80,8 @@ public class NewLoginPage extends UhcDriver {
 	}
 
 	public Object loginWith(String username, String password) throws InterruptedException {
-		//loginIn.click(); 
+		System.out.println("---------------------inside loginWith---------------------------" + username);
+		waitforElement(userNameField);
 		sendkeys(userNameField,username);
 		sendkeys(passwordField,password);
 		btnSignIn.click();
@@ -75,12 +103,13 @@ public class NewLoginPage extends UhcDriver {
 		alert2.accept();
 		}*/
 		          
-		Thread.sleep(30000);
+		Thread.sleep(70000);
 		System.out.println("30 secondss completed");
 		if(currentUrl().contains("/dashboard"))
 
 		{
-		return new RallyDashboard(driver);
+		
+		return new DashboardPage(driver);
 		}
 		else if (currentUrl().contains("terminated-plan.html")) {
 		return new TerminatedHomePage(driver); 
@@ -126,4 +155,26 @@ public class NewLoginPage extends UhcDriver {
     	return new UNPWAssistancePage(super.driver);
     }
     
+    public EOBPage loginToDashboardPage(String userName){
+		System.out.println(MRScenario.environment);
+	
+		if(MRScenario.environment.contains("stage")){
+			start(STAGE_DASHBOARD_URL);
+			System.out.println(STAGE_DASHBOARD_URL);
+		}else{
+			start(MRConstants.REDESIGN_LOGIN_URL);
+		}
+		
+		driver.manage().timeouts().implicitlyWait(40,TimeUnit.SECONDS) ;
+		System.out.println(userName);
+		validate(driver.findElement(By.id("username")));
+		driver.findElement(By.id("username")).sendKeys(userName);
+		driver.findElement(By.id("password")).sendKeys("Password@1");
+		driver.findElement(By.id("sign-in-btn")).click();
+		return new EOBPage(driver);
+	}
+    
 }
+
+    
+    

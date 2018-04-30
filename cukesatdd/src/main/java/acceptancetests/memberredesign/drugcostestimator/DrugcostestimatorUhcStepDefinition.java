@@ -21,13 +21,18 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
-import pages.dashboard_deprecated.member.drugcostestimator.blayer.AddDrugDetails;
-import pages.dashboard_deprecated.member.drugcostestimator.blayer.AddNewDrugModal;
-import pages.dashboard_deprecated.member.drugcostestimator.blayer.DrugCostEstimatorPage;
-import pages.dashboard_deprecated.member.drugcostestimator.blayer.SavingsOppurtunity;
-//import pages.member_deprecated.bluelayer.AccountHomePage;
-import pages.memberredesign_deprecated.bluelayer.AccountHomePage;
-import pages.memberredesign_deprecated.bluelayer.LoginPage;
+
+//import pages.dashboard.member.drugcostestimator.blayer.AddDrugDetails;
+//import pages.dashboard.member.drugcostestimator.blayer.AddNewDrugModal;
+//import pages.dashboard.member.drugcostestimator.blayer.DrugCostEstimatorPage;
+//import pages.dashboard.member.drugcostestimator.blayer.SavingsOppurtunity;
+import pages.regression.drugcostestimator.AddDrugDetails;
+import pages.regression.drugcostestimator.AddNewDrugModal;
+import pages.regression.drugcostestimator.DrugCostEstimatorPage;
+import pages.regression.drugcostestimator.SavingsOppurtunity;
+//import pages.member.bluelayer.AccountHomePage;
+import pages.memberredesign.bluelayer.AccountHomePage;
+import pages.memberredesign.bluelayer.LoginPage;
 import pages.mobile.member.blayer.BenefitsSummaryPage;
 
 public class DrugcostestimatorUhcStepDefinition {
@@ -172,7 +177,7 @@ public class DrugcostestimatorUhcStepDefinition {
 
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
 		dce.changeUrlToNewDCEPage();
-		pages.dashboard_deprecated.member.blayer.AddNewDrugModal addNewDrugModal = dce.clickOnAddDrug();
+		AddNewDrugModal addNewDrugModal = dce.clickOnAddDrug();
 		addNewDrugModal.clickonSearchButton(drug);
 	}
 
@@ -267,7 +272,7 @@ public class DrugcostestimatorUhcStepDefinition {
 	@And("^I should be able to click on Add a Drug blayer dce$")
 	public void i_should_be_able_to_click_AddDrug() throws InterruptedException{
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
-		pages.dashboard_deprecated.member.blayer.AddNewDrugModal addNewDrugModal = dce.clickOnAddDrug();
+		AddNewDrugModal addNewDrugModal = dce.clickOnAddDrug();
 		getLoginScenario().saveBean(PageConstants.ADD_DRUG_PAGE, addNewDrugModal);
 	}
 	@And("^the Add a Drug search modal should launch blayer dce$")
@@ -465,7 +470,7 @@ public class DrugcostestimatorUhcStepDefinition {
 
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
-		pages.dashboard_deprecated.member.blayer.AddDrugDetails adddrugdetails = dce.navigateToEditDrug(drug);
+		AddDrugDetails adddrugdetails = dce.navigateToEditDrug(drug);
 		adddrugdetails.selectDosage(dosage);
 		adddrugdetails.selectQnty(quantity);
 		adddrugdetails.selectFrequency(frequency);
@@ -544,7 +549,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
 		//dce.changeUrlToNewDCEPage();
 		dce.deleteAllDrugs();
-		pages.dashboard_deprecated.member.blayer.AddNewDrugModal addNewDrugModal = dce.clickOnAddDrug();
+		AddNewDrugModal addNewDrugModal = dce.clickOnAddDrug();
 		addNewDrugModal.clickonSearchButton(drug);
 
 		//AddDrugDetails addDrugDetails = new AddDrugDetails(wd);
@@ -580,7 +585,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
 		//dce.changeUrlToNewDCEPage();
 		dce.deleteAllDrugs();
-		pages.dashboard_deprecated.member.blayer.AddNewDrugModal addNewDrugModal = dce.clickOnAddDrug();
+		AddNewDrugModal addNewDrugModal = dce.clickOnAddDrug();
 		addNewDrugModal.clickonSearchButton(drug);
 
 		//AddDrugDetails addDrugDetails = new AddDrugDetails(wd);

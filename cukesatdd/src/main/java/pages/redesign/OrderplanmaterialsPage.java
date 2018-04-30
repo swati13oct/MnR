@@ -260,7 +260,7 @@ public class OrderplanmaterialsPage extends UhcDriver {
 		Thread.sleep(3000);
 		if (validate(OrderMaterialsErrorMsg)){
 			System.out.println("*************Error Message Displayed displayed for Order materials Page***************");
-			System.out.println("*************Error Message : "+OrderMaterialsErrorMsg.getText()+" ***************");
+			System.err.println("*************Error Message : "+OrderMaterialsErrorMsg.getText()+" ***************");
 			return true;
 		}
 		else{ 

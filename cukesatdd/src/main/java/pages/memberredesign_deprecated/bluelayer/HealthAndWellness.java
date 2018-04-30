@@ -13,7 +13,7 @@ public class HealthAndWellness  extends UhcDriver {
 	@FindBy(linkText = "Health & Wellness")
 	private WebElement rallyHealthAndWellness;
 	
-	@FindBy(id = "healthwellness_3")
+	@FindBy(xpath  = "//header[@class='hide-mobile']//a[contains(text(),'Health & Wellness')]")
 	private WebElement healthAndWellness;
 	
 	@FindBy(id = "lifestyle_desk1")

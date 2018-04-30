@@ -16,10 +16,12 @@ import java.util.Map;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.member_deprecated.bluelayer.AccountHomePage;
-import pages.member_deprecated.bluelayer.ProfilePageHsid;
-import pages.member_deprecated.redesign.cqLoginPage;
-import pages.member_deprecated.redesign.ssoTestHarnessPage;
+import pages.member.bluelayer.AccountHomePage;
+
+import pages.regression.profileandpreferences.ProfileandPreferencesPage;
+import pages.regression.sso.cqLoginPage;
+import pages.regression.sso.ssoTestHarnessPage;
+//import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
@@ -131,7 +133,7 @@ public void user_should_be_navigated_to_home_page_of_rally_dashboard() throws Th
 @And("^user clicks on account setting link$")
 public void user_clicks_on_account_setting_link() throws Throwable {
 	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-	ProfilePageHsid profilePageHsid = accountHomePage.navigateDirectToProfilePageHsid();
+	ProfileandPreferencesPage profilePageHsid = accountHomePage.navigateDirectToProfilePageHsid();
 
 	if (profilePageHsid!= null) {
 		getLoginScenario().saveBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE_HSID, profilePageHsid);
@@ -147,7 +149,7 @@ public void user_clicks_on_account_setting_link() throws Throwable {
 
 @Then("^security and password reset link should not be visible$")
 public void security_and_password_reset_link_should_not_be_visible() throws Throwable {
-	ProfilePageHsid profilePageHsid = (ProfilePageHsid) getLoginScenario()
+	ProfileandPreferencesPage profilePageHsid = (ProfileandPreferencesPage) getLoginScenario()
 			.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE_HSID);
 	profilePageHsid.validateHealthSafePasswordLinkNOTPresent();
 	profilePageHsid.validateHealthSafeAccountLinkNOTPresent();

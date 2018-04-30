@@ -24,10 +24,10 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.dashboard_deprecated.member.ulayer.ClaimSummarypage;
-import pages.member_deprecated.redesign.ContactUsPage;
+import pages.regression.claims.ClaimSummarypage;
+import pages.member.redesign.ContactUsPage;
 import pages.redesign.PharmacySearchPage;
-
+import pages.regression.payments.PaymentHistoryPage;
 /**
  * @author pjaising
  */
@@ -234,6 +234,10 @@ public class AccountHomePage extends UhcDriver {
 	  
 	  @FindBy(xpath = "//*[@id='dashboard']//span[text()='View Your Claims']")
 	  private WebElement claimsDashboardLink;
+	  
+	  @FindBy (xpath = "//*[@id='dashboard']//span[text()='Locate a Pharmacy']")
+	  private WebElement dashboardLocateaPharmacyLink;
+	  
 
 	
 	
@@ -946,7 +950,7 @@ driver.switchTo().window(mainwindow);
 		return flag;
 	}
 	
-public pages.dashboard_deprecated.member.ulayer.ClaimSummarypage navigateToClaimsSummaryPage() {
+public pages.regression.claims.ClaimSummarypage navigateToClaimsSummaryPage() {
 		
 		if (MRScenario.environmentMedicare.equalsIgnoreCase("team-h") || MRScenario.environmentMedicare.equalsIgnoreCase("test-a") || (MRScenario.environmentMedicare.equalsIgnoreCase("team-t") || MRScenario.environment.equalsIgnoreCase("team-ci1"))) {
 			System.out.println("Go to claims link is present "+driver.findElement(By.xpath("//a[text()='Go to Claims page']")).isDisplayed());
@@ -989,7 +993,7 @@ public pages.dashboard_deprecated.member.ulayer.ClaimSummarypage navigateToClaim
 		return new ClaimSummarypage(driver);
 }
 
-public pages.dashboard_deprecated.member.ulayer.ClaimDetailsPage navigateToClaimDetailsPage() {
+public pages.regression.claims.ClaimDetailsPage navigateToClaimDetailsPage() {
 	CommonUtility.waitForPageLoad(driver, claimstablemoreinfolink, 60);
 	claimstablemoreinfolink.click();
 	CommonUtility.waitForPageLoad(driver, claimDetTableMainSection, 30);
@@ -1001,24 +1005,24 @@ public pages.dashboard_deprecated.member.ulayer.ClaimDetailsPage navigateToClaim
 	 */
 	System.out.println(driver.getTitle());
 	if (driver.getTitle().equalsIgnoreCase("claims   ")) {
-		return new pages.dashboard_deprecated.member.ulayer.ClaimDetailsPage(driver);
+		return new pages.regression.claims.ClaimDetailsPage(driver);
 
 	}
-	return new pages.dashboard_deprecated.member.ulayer.ClaimDetailsPage(driver);
+	return new pages.regression.claims.ClaimDetailsPage(driver);
 }
 
 public pages.redesign.PharmacySearchPage navigateToRedesignPharmacyLocaterPage() {
 	
 	if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a") || MRScenario.environmentMedicare.equalsIgnoreCase("test-a") || MRScenario.environment.equalsIgnoreCase("team-ci1")) {
-		System.out.println("Go to claims link is present "+driver.findElement(By.xpath("//a[text()='Go to Pharmacy Locator page']")).isDisplayed());
+		System.out.println("@@@@@@    Go to Pharmacy Locator page ====>"+driver.findElement(By.xpath("//a[text()='Go to Pharmacy Locator page']")).isDisplayed());
 		driver.findElement(By.xpath("//a[text()='Go to Pharmacy Locator page']")).click();			
 	}
-	/*else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
+	else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
 		System.out.println("user is on Stage login page");						
 		if(driver.getCurrentUrl().contains("/dashboard"));
 		{
 			System.out.println("User is on dashboard page and URL is ====>"+driver.getCurrentUrl());
-			claimsDashboardLink.click();
+			dashboardLocateaPharmacyLink.click();
 			try {
 				Thread.sleep(10000);	
 				
@@ -1034,7 +1038,7 @@ public pages.redesign.PharmacySearchPage navigateToRedesignPharmacyLocaterPage()
 		System.out.println("This script is only intended to be run using test harness on team-b or team-h. Update condition for your own environment");	
 	}
 	System.out.println(driver.getTitle());
-*/
+
 	/*if (driver.getTitle().equalsIgnoreCase("Claims")) {
 		try {
 			Thread.sleep(10000);

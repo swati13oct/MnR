@@ -367,7 +367,7 @@ Feature:C1.1 To test plan benefits and Coverage on UMS site
       | HIP     |  SHIP        |   NON LIS     | 
       | PHIP    |  SHIP        |   NON LIS     |
       
-    @aprilRelease2018Fnf
+    @aprilRelease2018Fnf @regressiontestcase-ATDDtags
  Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
     Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>  |
@@ -380,7 +380,7 @@ Feature:C1.1 To test plan benefits and Coverage on UMS site
       | MAPD     |  Group   		|  wotCMSValue      | 
    
 
-@fastandfurious
+@fastandfurious @regressiontestcase-ATDDtags
 @aprilRelease2018 @CatastrophicStageLanguage
   Scenario Outline: Verify Updated Language in Catastrophic Coverage Stage for Drug Copays and Discounts in Redesign site
 Given registered Redesign member for EOB with following attributes
@@ -399,6 +399,68 @@ Given registered Redesign member for EOB with following attributes
 	| PDP          | Group_Non_LIS 			|  -either- coinsurance of 5% of the cost of the drug   |  	  false       |
 
 
+@thePredators
+@juneRelease2018 @hartfordprescriptionDrugBenefit
+ Scenario Outline: Verify city of Hartford Prescription Drug Benefits 
+Given Registered member with following details
+| Plan Type   | <planType>    |
+| Member Type  | <memberType> |
+When I Enter the security questions
+      | friendname | <friendname> | 
+     | favouritecolor | <favcolor> |
+     | PhoneNumber | <phonenumber> |
+ Then The user navigates to Benefits and Coverage page
+ And the user validates City of Hartford prescription Drug Benefits table    
+ 	Examples:
+	| planType |memberType | friendname | favcolor | phonenumber |
+    | MAPD   |Hartford   | name1      | color1   | number1     |
+    | PDP    |Hartford   | name1      | color1   | number1     |      
     
+    
+   @thePredators
+@juneRelease2018 @TownOfGreenwichprescriptionDrugBenefit
+ Scenario Outline: Verify city of Hartford Prescription Drug Benefits 
+Given Registered member with following details
+| Plan Type   | <planType>    |
+| Member Type  | <memberType> |
+When I Enter the security questions
+      | friendname | <friendname> | 
+     | favouritecolor | <favcolor> |
+     | PhoneNumber | <phonenumber> |
+Then The user navigates to Benefits and Coverage page
+And the user validates Town Of Greenwich table
+ 
+    
+ 	Examples:
+	| planType |memberType | friendname | favcolor | phonenumber |
+    | PDP   |Greenwich   | name1      | color1   | number1     |
+
+
+
+ @BenefitsforTexasERSMember @regression
+  Scenario Outline: Verify the Benefits for TexasERSMember
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type | <planType> |
+    Then The user navigates to Benefits and Coverage page
+    And the user validates the Drug costs Section
+    Then the user verifies the Retail Cost sharing table
+   
+
+    Examples: 
+      | planType |
+      | Texas    |
+      
+   @OfficeVisitswithoutprovidertiering   @regression 
+    Scenario Outline: Verify the Office visits widget for a member withoutprovidertiering
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type | <planType> |
+    Then The user navigates to Benefits and Coverage page
+    And the user validates the Office Visits section
+
+
+    Examples: 
+      | planType |
+      | MAPD    |
+
     
 

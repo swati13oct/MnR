@@ -27,14 +27,12 @@ public class SiteMapAARPPage extends GlobalWebElements {
 
 	@Override
 	public void openAndValidate() {
-		//if ("offline".equalsIgnoreCase(System.getProperty("environment")))
-		//{
-			//start(AARP_SITE_MAP_PAGE_URL_OFFLINE);
-		//}
-		//else {
+		String en=System.getProperty("environment");
+		if ("offline".equalsIgnoreCase(en)){
+			start(AARP_SITE_MAP_PAGE_URL_OFFLINE);
+		}else{
 			start(AARP_SITE_MAP_PAGE_URL);
-		//}
-	
+		}
 		validate(footerPrivacyPolicyLink);
 		
 	}
@@ -44,7 +42,7 @@ public class SiteMapAARPPage extends GlobalWebElements {
 	public WebElement providerlinkonaarpsitemaplink;
 
 	private static String AARP_SITE_MAP_PAGE_URL = MRConstants.AARP_SITE_MAP_PAGE_URL;
-	//private static String AARP_SITE_MAP_PAGE_URL_OFFLINE = MRConstants.AARP_SITE_MAP_PAGE_URL_OFFLINE;
+	private static String AARP_SITE_MAP_PAGE_URL_OFFLINE = MRConstants.AARP_SITE_MAP_PAGE_URL_OFFLINE;
 	public PrivacyPolicyAARPPage privacypolicyFooterClick() {
 		validate(footerPrivacyPolicyLink);
 		footerPrivacyPolicyLink.click();

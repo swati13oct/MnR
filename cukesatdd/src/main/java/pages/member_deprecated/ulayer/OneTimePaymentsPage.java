@@ -12,6 +12,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
+import pages.regression.payments.OneTimePaymentPage;
 
 /**
  * @author saduri
@@ -71,7 +72,8 @@ public class OneTimePaymentsPage extends UhcDriver{
         @FindBy(xpath=".//*[@id='paymentHistoryApp']/div/div/div/div/h1")
          private WebElement PaymentHistoryText;
         
-             
+        @FindBy(name = "amount")
+        private WebElement amountRadioButton;        
         
         @FindBy(id = "middle-name")
         private WebElement middleNameField;        
@@ -79,7 +81,8 @@ public class OneTimePaymentsPage extends UhcDriver{
         @FindBy(id="review-continue")                        
         private WebElement continueButton;
         
-    
+        @FindBy(xpath = "/html/body/div[6]/div/div/table/tbody/tr[5]/td/div[2]/div/div/div[2]/div[7]/div/div/div/div/form/div/div/div[2]/div/table[1]/tbody/tr[1]/td[2]")                        
+        private WebElement amountDisplayed;
         
         @FindBy(xpath = "//*[@id='atdd_otheramount_label']/label")                        
         private WebElement otherAmtRadioButton;
