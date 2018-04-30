@@ -61,7 +61,7 @@ public class ConfirmOneTimePaymentPage extends UhcDriver{
 	}
 
 	
-    public OneTimePaymentSuccessPage confirmsAutoPayment() throws InterruptedException  {
+    public ConfirmOneTimePaymentPage confirmsAutoPayment() throws InterruptedException  {
 		
 		waitforElement(TermsCheckRadioButton);
 		TermsCheckRadioButton.click();
@@ -79,7 +79,7 @@ public class ConfirmOneTimePaymentPage extends UhcDriver{
 			if(SuccessPay.getText().contains("Thank you for your payment"))
 			{
 				System.out.println("Payment Success Page Reached");
-				return new OneTimePaymentSuccessPage(driver);			
+				return new ConfirmOneTimePaymentPage(driver);			
 			}
 			else if(OneTimePaymentError.getText().contains("only one payment request can be submitted per business day"))
 			{
@@ -92,7 +92,7 @@ public class ConfirmOneTimePaymentPage extends UhcDriver{
 			System.out.println("Payment success page not displayed");
 		}	
 		
-		return new OneTimePaymentSuccessPage(driver);
+		return new ConfirmOneTimePaymentPage(driver);
 		
 	}
     

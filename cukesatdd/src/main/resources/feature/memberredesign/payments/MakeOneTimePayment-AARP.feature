@@ -345,7 +345,7 @@ Feature: To test the payment flow on AARP site
       | MAPD     | IndividualUHCPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
 
  
- @paymentsMoreThanOnePay 
+ @paymentsMoreThanOnePay @15142
   Scenario Outline: Verify More Than one Payment Per day error message
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -365,6 +365,13 @@ Feature: To test the payment flow on AARP site
     And the user moves to Go to Payment History Page button
     And the user clicks on Make One Time Payment button
     And the user makes one time payment in AARP site
+      | Routing number             | <routingNo>        |
+      | Confirm routing number     | <confirmRoutingNo> |
+      | Account number             | <accountNo>        |
+      | Confirm account number     | <confirmAccountNo> |
+      | Account holder first name  | <firstName>        |
+      | Account holder middle name | <middleName>       |
+      | Account holder last name   | <lastName>         |
     And the user confirms the Autopayment in UHC site
        
 

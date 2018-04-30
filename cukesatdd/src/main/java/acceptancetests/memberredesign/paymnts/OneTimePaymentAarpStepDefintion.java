@@ -264,7 +264,7 @@ public class OneTimePaymentAarpStepDefintion {
 		ConfirmOneTimePaymentPage confirmOneTimePaymentsuccesspage = (ConfirmOneTimePaymentPage) getLoginScenario()
 				.getBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD);	
 		
-		OneTimePaymentSuccessPage oneTimePaymentSuccessPage = confirmOneTimePaymentsuccesspage.confirmsAutoPayment();
+		ConfirmOneTimePaymentPage oneTimePaymentSuccessPage = confirmOneTimePaymentsuccesspage.confirmsAutoPayment();
         
 		if (oneTimePaymentSuccessPage != null) {
 			getLoginScenario().saveBean(
