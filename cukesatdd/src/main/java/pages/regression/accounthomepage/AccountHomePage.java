@@ -17,12 +17,13 @@ import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
+import acceptancetests.data.PageConstantsMnR;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.dashboard.member.ulayer.ClaimSummarypage;
-import pages.member.bluelayer.BenefitsAndCoveragePage;
+
 import pages.member.bluelayer.ProfilePageHsid;
 import pages.member.bluelayer.ProfilePreferencesPage;
 import pages.member.redesign.ContactUsPage;
@@ -32,6 +33,7 @@ import pages.member.ulayer.PlanComparePage;
 import pages.member.ulayer.Rallytool_Page;
 import pages.member.ulayer.TestHarness;
 import pages.redesign.PharmacySearchPage;
+import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 
 
 public class AccountHomePage extends UhcDriver {
@@ -347,6 +349,12 @@ public class AccountHomePage extends UhcDriver {
   
 	@FindBy(xpath = "//*[@id='dashboard']//span[text()='View Your Claims']")
 	private WebElement claimsDashboardLink;
+	
+	//@FindBy(css = "img.primary-logo")
+    //private WebElement logoImage;
+	
+	@FindBy(xpath = "//div[@id='white-label']/a/img")
+	private WebElement logoImage;
 	
 	private PageData myAccountHome;
 
@@ -834,7 +842,15 @@ public ContactUsPage navigateToContactUsPage() {
 			System.out.println("Drug Preferred Mail Service Link is not displaying in footer");
 		}
 	}
-	
+	public void validateImagePresent(String logoToBeDisplayedOnDashboard) throws InterruptedException {
+		Thread.sleep(2000);	
+		String logo_src = logoImage.getAttribute("src");
+		String logo_alt = logoImage.getAttribute("alt");
+		System.out.println("Actual logo's source on Dashboard page is   "+logo_src+" and Expected logo source    "+logoToBeDisplayedOnDashboard+" .");	
+		System.out.println("logo's alt text on Dashboard page is   "+logo_alt);		
+		Assert.assertTrue(logo_src.contains(logoToBeDisplayedOnDashboard));
+		
+	}
 	
 public pages.dashboard.member.ulayer.ClaimSummarypage navigateToClaimsSummaryPage() {
 		

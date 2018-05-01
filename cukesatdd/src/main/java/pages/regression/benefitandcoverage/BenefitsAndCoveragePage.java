@@ -294,6 +294,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(id = "ccs-header")
 	private WebElement catastrophicCoverageStage;
 	
+	@FindBy(css = "img.img-responsive")
+	private WebElement logoImage;
+
+	
 	public static final String learnmorestagetext_xpath = ".//*[@id='collapseStages']";
 
 	public static final String learnmorelinktiertext_xpath = ".//*[@id='collapseTiers']";
@@ -1360,5 +1364,14 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(catastrophicCoverageStage);
 		if(copayType.equals("wotCMSValue")){
 		}
+	}
+	
+    public void validateImagePresent(String logoToBeDisplayedOnSecondaryPage) {
+		
+		String logo_src = logoImage.getAttribute("src");
+		String logo_alt = logoImage.getAttribute("alt");
+		System.out.println("Actual logo's source on Dashboard page is   "+logo_src+" and Expected logo source is  "+logoToBeDisplayedOnSecondaryPage+" . ");		
+		System.out.println("logo's alt text on secondary page is   "+logo_alt);	
+		Assert.assertTrue(logo_src.contains(logoToBeDisplayedOnSecondaryPage));
 	}
 }
