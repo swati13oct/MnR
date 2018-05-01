@@ -130,7 +130,7 @@ public class MedicareInformationPage extends UhcDriver{
 			e.printStackTrace();
 		}
 		if(driver.getCurrentUrl().contains("preliminary-questions")){
-			System.out.println("OLE Preliminary Questions Page is Displayed");
+			System.out.println("OLE Preliminary Questions page is Displayed");
 			return new PrelimineryQuestionsPage(driver);
 		}
 		return null;

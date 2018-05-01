@@ -16,6 +16,7 @@ Then the user validates and selects the Disclaimer Checkbox
 Then the user navigates to Medicare Information Page
 Then the user validates Medicare Information Page required fields
 Then the user navigates to Preliminary Questions Page
+Then the user navigates to Personal Information Page
 	
 Examples:
 | zipcode | county             | plantype | planName                                         | premium	|

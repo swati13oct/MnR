@@ -33,7 +33,7 @@ public class PrelimineryQuestionsPage extends UhcDriver{
 	@FindBy(xpath = "//*[@class = 'cta-button next-button']")
 	private WebElement NextBtn;
 	
-	@FindBy(xpath = "//*[@class = 'cancel-button modal-link']")
+	@FindBy(xpath = "//*[@class = 'cancel-butt on modal-link']")
 	private WebElement CancelEnrollmentLink;
 
 	public PrelimineryQuestionsPage(WebDriver driver) {
@@ -48,6 +48,22 @@ public class PrelimineryQuestionsPage extends UhcDriver{
 		
 	}
 
-
+public PersonalInformationPage navigate_to_Personal_Information_page() {
+		
+		validate(NextBtn);
+		NextBtn.click();
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(driver.getCurrentUrl().contains("personal-information")){
+			System.out.println("OLE Personal Information Page is Displayed");
+			return new PersonalInformationPage(driver);
+		}
+		return null;
+	}
+	
 
 }

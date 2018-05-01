@@ -22,6 +22,7 @@ import pages.acquisition.ole.CancelOLEModal;
 import pages.acquisition.ole.LearnMoreModal;
 import pages.acquisition.ole.LeavingOLEmodal;
 import pages.acquisition.ole.MedicareInformationPage;
+import pages.acquisition.ole.PersonalInformationPage;
 import pages.acquisition.ole.PrelimineryQuestionsPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.ComparePlansPage;
@@ -432,7 +433,7 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 		if (prelimineryQuestionsPage != null) {
 			
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE,
-					medicareInfoPage);
+					prelimineryQuestionsPage);
 			System.out.println("OLE Preliminary Questions Page is Displayed");
 			Assert.assertTrue(true);
 		}
@@ -440,5 +441,20 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 			Assert.fail("OLE Preliminary Questions Page is NOT Displayed");
 	}
 
+	@Then("^the user navigates to Personal Information Page$")
+	public void the_user_navigates_to_Personal_Information_Page() throws Throwable {
+		PrelimineryQuestionsPage prelimineryQuestionsPage = (PrelimineryQuestionsPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
+		PersonalInformationPage personalInformationPage = prelimineryQuestionsPage.navigate_to_Personal_Information_page();
+				
+		if (personalInformationPage != null) {
+			
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE,
+					personalInformationPage);
+			System.out.println("OLE Personal Information Page is Displayed");
+			Assert.assertTrue(true);
+		}
+		else
+			Assert.fail("OLE Personal Information Page is NOT Displayed");
+	}
 
 }
