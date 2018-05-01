@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
+import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
@@ -41,14 +42,14 @@ public class HsidRegistrationStepDefinition {
 	@Given("^the user is on medicare sign in page$")
 	public void the_user_is_on_medicare_sign_in_page() throws Throwable {
 		WebDriver wd = getLoginScenario().getWebDriver();
-		HsidLoginPage hsidLoginPage = new HsidLoginPage(wd);
+		HSIDLoginPage hsidLoginPage = new HSIDLoginPage(wd);
 		getLoginScenario().saveBean(PageConstants.HSID_LOGIN_PAGE, hsidLoginPage);
 	}
 
 	@When("^the user clicks on Register now link$")
 	public void the_user_clicks_on_Register_now_link() throws Throwable {
 		
-		HsidLoginPage hsidLoginPage = (HsidLoginPage) loginScenario.getBean(PageConstants.HSID_LOGIN_PAGE);
+		HSIDLoginPage hsidLoginPage = (HSIDLoginPage) loginScenario.getBean(PageConstants.HSID_LOGIN_PAGE);
 		HsidRegistrationPersonalInformationPage hsidRegistrationPersonalInfoPage = hsidLoginPage.clickRegister();
 		getLoginScenario().saveBean(PageConstants.HSID_REGISTRATION_PERSONALINFOPAGE, hsidRegistrationPersonalInfoPage);
 		
@@ -126,6 +127,7 @@ public class HsidRegistrationStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		DeregisterPage deregister = new DeregisterPage(wd);
 		String userName = deregister.getUserName();
+		getLoginScenario().saveBean(LoginCommonConstants.Username, userName);
 		System.out.println("userName: "+userName +"password: "+password +"email: "+email);
 		hsidRegistrationPersonalCreateAccount.enterUsername(userName);
 		hsidRegistrationPersonalCreateAccount.enterPassword(password);
@@ -285,16 +287,22 @@ public class HsidRegistrationStepDefinition {
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
 		
-		String userName = memberAttributesMap.get("userName");
+		//String userName = memberAttributesMap.get("userName");
 		String password = memberAttributesMap.get("password");
 		
 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		
 		HSIDLoginPage loginPage = new HSIDLoginPage(wd);
 		loginPage.validateelements();
+<<<<<<< HEAD
         pages.regression.accounthomepage.AccountHomePage accountHomePage = (pages.regression.accounthomepage.AccountHomePage) loginPage.doLoginWith(userName, password);
+=======
+		String userName =  (String)getLoginScenario().getBean(LoginCommonConstants.Username);
+        AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, password);
+>>>>>>> develop
         if (accountHomePage!= null) {
-			 getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
+        	loginScenario.saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
 			Assert.assertTrue(true);
 		}
 		else {
@@ -305,10 +313,24 @@ public class HsidRegistrationStepDefinition {
 	}
 
 	
-	@Then("^I should see a Username or email address label with textbox in Sign In page$")
+	@Then("^user should see the email confirmation message \"[^\"]*\" in Sign In form$" ) 
 	public void i_should_see_a_Username_or_email_address_label_with_textbox_in_Sign_In_page() throws Throwable {
-
+		
+		HSIDLoginPage hsidLoginPage = (HSIDLoginPage) loginScenario.getBean(PageConstants.HSID_LOGIN_PAGE);
+		hsidLoginPage.emailconfirmed();
 	}
+	
+	@Then("^user should see a latest unread mail recieved  in mail server$" ) 
+	public void i_should_see_congratulations_email() throws Throwable {
+		
+		HsidRegistrationConfirmInformation hsidRegistrationConfirmInformationPage = 
+				(HsidRegistrationConfirmInformation) loginScenario.getBean(PageConstants.HSID_REGISTRATION_CONFIRM_INFORMATION);
+		
+		hsidRegistrationConfirmInformationPage.getregistrationflowcompleteemail();
+	}
+	
+	
+	
 	
 
 

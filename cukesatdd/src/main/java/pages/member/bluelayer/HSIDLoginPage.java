@@ -3,29 +3,25 @@
  */
 package pages.member.bluelayer;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.junit.Assert;
 import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.UnhandledAlertException;
-import org.openqa.selenium.UnsupportedCommandException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.springframework.beans.factory.annotation.Autowired;
 
+<<<<<<< HEAD
 import pages.acquisition.ulayer.LoginAssistancePage;
 import pages.member.bluelayer.ConfirmSecurityQuestion;
 import pages.regression.accounthomepage.AccountHomePage;
 import acceptancetests.data.CommonConstants;
+=======
+import pages.redesign.HsidRegistrationPersonalInformationPage;
+>>>>>>> develop
 import acceptancetests.data.MRConstants;
-import acceptancetests.data.PageData;
-import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.regression.accounthomepage.AccountHomePage;
 
 /**
  * @author pjaising
@@ -59,6 +55,15 @@ public class HSIDLoginPage extends UhcDriver {
     @FindBy(xpath=".//*[@id='IPEinvL']/map/area[1]")
     private WebElement iPerceptionPopUp;
     
+    @FindBy(xpath ="//div[@id='hsid-commonError']/p/span[2]")
+    private WebElement EmailConfirmedtext;
+    
+    @FindBy(xpath=".//*[@id='hsid-login']/div[2]/p[3]/a")
+	private WebElement registerNow;
+    
+    private static String REGIRATION_URL = "https://st1.healthsafe-id.com/protected/register?HTTP_TARGETPORTAL=MNR&HTTP_ERRORURL=https://stage-medicare.uhc.com/&HTTP_TARGETURL=https%3A%2F%2Fstage-medicare.uhc.com%2Fmember%2Fpost-sign-in.html%3Ftarget%3Drallydashboard%26portalIndicator%3DUHC&HTTP_ELIGIBILITY=P&HTTP_GRADIENTCOLOR1=%23003DA1&HTTP_GRADIENTCOLOR2=%2300A8F7&HSID_DOMAIN_URL=https://st1.healthsafe-id.com&USE_TEST_RECAPTCHA=true";
+	
+    
 MRScenario loginScenario;
 	
 	public MRScenario getLoginScenario() {
@@ -73,6 +78,12 @@ MRScenario loginScenario;
 	}
 	
 	public void openAndValidate() {
+		try {
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		start(PAGE_URL);
 	}
 	
@@ -91,6 +102,27 @@ MRScenario loginScenario;
 		validate(passwordlink);
 	}
 	
+	public HsidRegistrationPersonalInformationPage clickRegister(){
+		driver.get(REGIRATION_URL);
+		/*
+		if(registerNow.isDisplayed()){
+			registerNow.click();
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return new HsidRegistrationPersonalInformationPage(driver);
+		}else{
+			Assert.assertTrue("Register now button is not displayed", false);
+		}*/
+		return new HsidRegistrationPersonalInformationPage(driver);
+	}
+	
+	/**
+	 * @toDo : To check whether user is landed on Assistive Registration Step1
+	 */
 	public Object doLoginWith2(String username, String password) {
 
         System.out.println(driver.getCurrentUrl());
@@ -105,14 +137,16 @@ MRScenario loginScenario;
 		}
 		System.out.println(driver.getCurrentUrl());
 		if (currentUrl().contains("/register/createAccount")) {
-			System.out.println("yes yes");
+			
 			return new AssistiveRegistrationPage(driver);
 		}
 		return null;
 	}
 	
 	
-	
+	/**
+	 * @toDo : To login through hsid via entering security questions
+	 */
 	public Object doLoginWith(String username, String password) {
 
         System.out.println(driver.getCurrentUrl());
@@ -121,7 +155,7 @@ MRScenario loginScenario;
 		signInButton.click();
 		
 		try {
-			Thread.sleep(20000);
+			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -141,10 +175,12 @@ MRScenario loginScenario;
 			}
 		}
 		
+		
+		
 		else if(currentUrl().contains("testharness.html") || currentUrl().contains("/dashboard"))
 		{
 			
-				System.out.println("test");
+				
 				System.out.println(driver.getCurrentUrl());
 			    return new AccountHomePage(driver);
 		}
@@ -161,15 +197,15 @@ MRScenario loginScenario;
 		} 
 		
 		try {
-			Thread.sleep(20000);
-		} catch (InterruptedException e) 
-		{
-		// TODO Auto-generated catch block
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	   
 		if(currentUrl().contains("testharness.html") || currentUrl().contains("/dashboard"))
         {
-			System.out.println("test");
+			
 			System.out.println(driver.getCurrentUrl());
 			return new AccountHomePage(driver);
 		}
@@ -184,6 +220,20 @@ MRScenario loginScenario;
 
 		return null;
 	}
+
+	private char[] getcurrenturl() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public void emailconfirmed() {
+		// TODO Auto-generated method stub
+		
+		Assert.assertTrue("Text not present", EmailConfirmedtext.isDisplayed());
+	}
+	
+	
+	
 	}
 
 

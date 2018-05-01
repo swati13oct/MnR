@@ -23,9 +23,16 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
+<<<<<<< HEAD
 import pages.member.bluelayer.BenefitsAndCoveragePage;
+=======
+import pages.member.bluelayer.AccountHomePage;
+import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
+>>>>>>> develop
 import pages.member.bluelayer.LoginPage2;
+
 import pages.member.ulayer.ValueAddedServicepage;
 import pages.redesign.BenefitsCoveragePage;
 import pages.redesign.RedesignLoginPage;
@@ -974,6 +981,182 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		}
 
  	}
+ 	
+ 	/**
+	 * @toDo : The user logs in to the member Redesign Portal
+	 * @author mrani101
+ 	 * @throws InterruptedException 
+	 */
+	@Given("^Registered member with following details$")
+	public void registered_member_with_following_details(DataTable memberAttributes) throws InterruptedException{
+		
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		
+		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+		List<String> desiredAttributes = new ArrayList<String>();
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator.hasNext();) {
+			{
+				String key = iterator.next();
+				desiredAttributes.add(memberAttributesMap.get(key));
+			}
+
+		}
+		System.out.println("desiredAttributes.." + desiredAttributes);
+
+		Map<String, String> loginCreds = loginScenario.getUMSMemberWithDesiredAttributes(desiredAttributes);
+		String userName = null;
+		String pwd = null;
+		if (loginCreds == null) {
+			// no match found
+			System.out.println("Member Type data could not be setup !!!");
+			Assert.fail("unable to find a " + desiredAttributes + " member");
+		} else {
+			userName = loginCreds.get("user");
+			pwd = loginCreds.get("pwd");
+			System.out.println("User is..." + userName);
+			System.out.println("Password is..." + pwd);
+
+			getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
+			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
+		}
+
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		LoginPage2 loginPage = new LoginPage2(wd);
+		
+		AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWithHsid(userName, pwd);
+		
+		if (accountHomePage != null) {
+			 getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
+			Assert.assertTrue(true);
+			
+		}
+		else {
+			Assert.fail("***** Error in loading  Redesign Account Landing Page *****");
+		}
+
+	   
+	   
+	}
+	/**
+	 * @toDo : The user enters the security questions
+	 * @author mrani101
+	 */
+	
+	@When("^I Enter the security questions$")
+	public void i_enter_the_security_questions(DataTable givenAttributes)
+	{
+        List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+        Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+        for (int i = 0; i < memberAttributesRow.size(); i++) {
+               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+                            memberAttributesRow.get(i).getCells().get(1));
+        }
+        String friendname = memberAttributesMap.get("friendname");
+        String favouritecolor = memberAttributesMap.get("favouritecolor");
+        String PhoneNumber = memberAttributesMap.get("PhoneNumber");
+        
+        AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+
+		accountHomePage.validateTheSecurityQues(friendname,favouritecolor,PhoneNumber);
+
+
+		
+	}
+
+ 	
+ 	/** 
+	 * @toDo : User navigates to benefit and coverage page
+	 * @author mrani101
+	 */
+	
+	@Then("^The user navigates to Benefits and Coverage page$")
+	public void the_user_navigates_to_Redesign_BandC_page() throws InterruptedException{
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		BenefitsAndCoveragePage planBenefitsCoverage = accountHomePage.navigateDirectToBnCPag();
+		//getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE,planBenefitsCoverage);
+		if (planBenefitsCoverage != null) {
+			System.out.println("BNC page Loaded");
+			getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE,
+					planBenefitsCoverage);
+			Assert.assertTrue(true);
+		}
+		else {
+			Assert.fail("Error in loading  BNC Page");
+		}
+
+
+	}
+	
+	/** 
+	 * @toDo : Validates the Drug costs table  for  a City Of Hartford group member
+	 * @author mrani101
+	 */
+	@And("the user validates City of Hartford prescription Drug Benefits table")
+	public void user_validate_hartfort_prescription_drugtable() {
+				
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.validatehartfortprescriptiondrugtable();
+						
+	}
+	
+	/** 
+	 * @toDo : Validates the Drug costs table  for  a  Town Of Greenwich group member
+	 * @author mrani101
+	 */
+	@And("the user validates Town Of Greenwich table")
+	public void user_validate_TownOfGreenwich_drugtable() {
+				
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.validateTownOfGreenwichdrugtable();
+						
+	}
+	
+	
+	
+	@And("the user validates the Drug costs Section")
+	public void user_validate_drugCostSectionTexas() {
+				
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.validatedrugCostSectionTexas();
+						
+	}
+	@And("the user verifies the Retail Cost sharing table")
+	public void user_validate_RetailCostSharing_Drugtable() {
+				
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.validateRetailCostSharingdrugtable();
+						
+	}
+	@And("the user verifies the Mail Order Cost sharing table")
+	public void user_validate_MailOrderCostSharing_Drugtable() {
+				
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.validateMailOrderCostSharing_Drugtable();
+						
+	}
+	
+	@And("the user validates the Office Visits section")
+	public void user_validate_OfficeVisitssection() {
+				
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.validateOfficeVisitssection();
+						
+	}
 	
 	
 }
