@@ -27,10 +27,8 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
 
-<<<<<<< HEAD
-=======
 import pages.regression.accounthomepage.AccountHomePage;
->>>>>>> develop
+
 import pages.member.bluelayer.AssistiveRegistrationPage;
 import pages.member.bluelayer.BenefitsAndCoveragePage;
 import pages.member.bluelayer.DashboardPage;

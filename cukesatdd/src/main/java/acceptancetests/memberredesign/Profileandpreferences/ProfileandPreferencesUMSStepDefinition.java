@@ -26,12 +26,12 @@ import gherkin.formatter.model.DataTableRow;
 //import pages.member.bluelayer.AccountHomePage;
 import pages.member.bluelayer.LoginPage2;
 import pages.member.bluelayer.ProfilePreferencesPage;
-<<<<<<< HEAD
+
 import pages.regression.accounthomepage.AccountHomePage;
-=======
+
 //import pages.member.bluelayer.ProfilePreferencesPage;
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
->>>>>>> develop
+
 
 /**
  * Functionality: Profile And Preferences page
