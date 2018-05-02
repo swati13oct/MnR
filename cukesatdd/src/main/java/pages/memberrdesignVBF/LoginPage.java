@@ -57,16 +57,16 @@ public class LoginPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness) & "YES".equalsIgnoreCase(MRScenario.isHSIDCompatible)) {
-			if ("teamci-1".equalsIgnoreCase(MRScenario.environment)
-					|| "teamci-2".equalsIgnoreCase(MRScenario.environment)) {
+			if ("team-ci1".equalsIgnoreCase(MRScenario.environment)
+					|| "team-ci2".equalsIgnoreCase(MRScenario.environment)) {
 				PAGE_URL = MRConstants.TEAMCI_TESTHARNESS;
 			} else {
 				PAGE_URL = MRConstants.TESTHARNESS.replace("awe-", "");
 			}
 		} else if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)
 				& "NO".equalsIgnoreCase(MRScenario.isHSIDCompatible)) {
-			if ("teamci-1".equalsIgnoreCase(MRScenario.environment)
-					|| "teamci-2".equalsIgnoreCase(MRScenario.environment)) {
+			if ("team-ci1".equalsIgnoreCase(MRScenario.environment)
+					|| "team-ci2".equalsIgnoreCase(MRScenario.environment)) {
 				PAGE_URL = MRConstants.LEGACY_TESTHARNESS;
 			} else {
 				PAGE_URL = MRConstants.LEGACY_TESTHARNESS.replace("awe-", "");
