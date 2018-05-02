@@ -26,7 +26,7 @@ import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.regression.claims.ClaimSummarypage;
 import pages.member.redesign.ContactUsPage;
-import pages.redesign.PharmacySearchPage;
+import pages.regression.pharmacylocator.PharmacySearchPage;
 import pages.regression.payments.PaymentHistoryPage;
 /**
  * @author pjaising
@@ -1011,7 +1011,7 @@ public pages.regression.claims.ClaimDetailsPage navigateToClaimDetailsPage() {
 	return new pages.regression.claims.ClaimDetailsPage(driver);
 }
 
-public pages.redesign.PharmacySearchPage navigateToRedesignPharmacyLocaterPage() {
+public PharmacySearchPage navigateToRedesignPharmacyLocaterPage() {
 	
 	if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a") || MRScenario.environmentMedicare.equalsIgnoreCase("test-a") || MRScenario.environment.equalsIgnoreCase("team-ci1")) {
 		System.out.println("@@@@@@    Go to Pharmacy Locator page ====>"+driver.findElement(By.xpath("//a[text()='Go to Pharmacy Locator page']")).isDisplayed());
