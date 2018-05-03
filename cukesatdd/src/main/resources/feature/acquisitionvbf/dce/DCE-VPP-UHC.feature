@@ -3,9 +3,11 @@ Feature: To test DCE to VPP plan Summary flow  in UMS site
 @dcevppnonaep
 Scenario Outline: To Verify the drugs and plan summary for non AEP period
 Given the user is on the UHC medicare solutions site landing page
+When fetch the data attributes in row form
 When the user performs drug search using the following information in UMS site
 	| Zip Code    | <zipcode>  |
 	| County      | <county>   |
+When click the find plans button
 When the user search the drug using drug initials in UMS site
 	| <drugInitials> |
 Then the user validates the drug list that has above mentioned drug initials in UMS site
@@ -46,6 +48,8 @@ Examples:
 @dcevppaep
 Scenario Outline: To Verify the drugs and plan summary for AEP period 
 Given the user is on the UHC medicare solutions site landing page
+When fetch the data attributes in map form
+When fetch the data attributes in row form
 When the user performs drug search using the following information in UMS site
 	| Zip Code    | <zipcode>  |
 	| County      | <county>   |
@@ -90,6 +94,8 @@ Examples:
 @dceVppnonAepDrugPlanDetails
 Scenario Outline: To Verify the drugs and plan details for non AEP period 
 Given the user is on the UHC medicare solutions site landing page
+When fetch the data attributes in map form
+When fetch the data attributes in row form
 When the user performs drug search using the following information in UMS site
 	| Zip Code    | <zipcode>  |
 	| County      | <county>   |
@@ -133,6 +139,8 @@ Examples:
 @dceGenericFlowDrugsPharmacy
 Scenario Outline: To Verify the drugs and pharmacy model for new generic flow
 Given the user is on the UHC medicare solutions site landing page
+When fetch the data attributes in map form
+When fetch the data attributes in row form
 When the user performs drug search using the following information in UMS site
 	| Zip Code    | <zipcode>  |
 	| County      | <county>   |
@@ -169,6 +177,8 @@ Examples:
 @dcevppDrugListPlanCost
 Scenario Outline: To Verify the drug list and plan cost sections in View Plan Details page 
 Given the user is on the UHC medicare solutions site landing page
+When fetch the data attributes in map form
+When fetch the data attributes in row form
 When the user performs drug search using the following information in UMS site
 	| Zip Code    | <zipcode>  |
 	| County      | <county>   |

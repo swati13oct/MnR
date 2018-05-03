@@ -17,10 +17,14 @@ import javax.net.ssl.X509TrustManager;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
+/*
+import com.applitools.eyes.BatchInfo;
+import com.applitools.eyes.selenium.Eyes;*/
 
 import acceptancetests.data.CommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
+import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import gherkin.formatter.model.DataTableRow;
 
@@ -39,6 +43,9 @@ public class AcqSEOStepDefinitionAARP {
 				
 	}	
 	
+	
+
+	
 	/**
 	 *@toDo: login with user details
 	 */
@@ -56,10 +63,16 @@ public class AcqSEOStepDefinitionAARP {
 			urlAttributesMap .put(AttributesRow.get(i).getCells()
 					.get(0), AttributesRow.get(i).getCells().get(1));
 		}
+		
+		
+		
 		String url = urlAttributesMap.get("URL");
 		
        try{
     	   fetchRedirectURL(url) ;
+    	   
+    	   
+    	   
        }catch(Exception ex){
               ex.printStackTrace();
        }

@@ -16,7 +16,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
-import pages.member.redesign.NewLoginPage;
+import pages.member_deprecated.redesign.NewLoginPage;
 import pages.redesign.CommunicationPreferences;
 
 public class MyprofileandPreferencesRedesignStepDefinition {

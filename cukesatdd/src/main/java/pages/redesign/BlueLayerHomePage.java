@@ -17,7 +17,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.member.bluelayer.ContactUsPage;
+import pages.member_deprecated.bluelayer.ContactUsPage;
 
 
 /**

@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.acquisitionvbf.common.CommonStepDefinition;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
@@ -34,23 +35,17 @@ public class PDPEnquiryKitStepDefintionAARP {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
+	
+	private Map<String, String> memberAttributesMap =null;
+	
+	private List<DataTableRow> memberAttributesRow = new CommonStepDefinition().getAttributesRow();
 
 	/**
 	 * @toDo:the user is on the AARP acquisition Site home 
 	 */	
-	@Given("^the user is on the AARP acquisition Site home page$")
-	public void the_user_on_aarp_medicare_site_landing_page()
-	{
 
-		WebDriver wd = getLoginScenario().getWebDriver();
-
-		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
-
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
-				aquisitionhomepage);
-	
-	}
+	//moved @given statement to common stepdefinition
+		//the user is on AARP medicare acquisition site landing page
 	
 	/**
 	 * @toDo:user navigates to Request More Help and Information page under pdp section 
@@ -92,19 +87,14 @@ public class PDPEnquiryKitStepDefintionAARP {
 	 * @toDo:user submits by entering following details in Order Enrollment Information page 
 	 */
 	@And("^the user submits by entering following details in Order Enrollment Information page in AARP Site$")
-	public void the_user_submits_entering_details_order_enrollment_information_aarp(DataTable attributes){
-		List<DataTableRow> personalAttributesRow = attributes
-				.getGherkinRows();
-		Map<String, String> personalAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < personalAttributesRow.size(); i++) {
-
-			personalAttributesMap.put(personalAttributesRow.get(i).getCells()
-					.get(0), personalAttributesRow.get(i).getCells().get(1));
-		}
-		
-		
+	public void the_user_submits_entering_details_order_enrollment_information_aarp(){
+		 if(memberAttributesRow.size()>0){
+		        for (int i = 0; i < memberAttributesRow.size(); i++) {
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		        }
+	        }
 		PDPEnrollementGuidePage pdpEnrollementGuidePage = (PDPEnrollementGuidePage) getLoginScenario().getBean(PageConstants.PDP_ENROLLMENT_GUIDE_PAGE);
-		pdpEnrollementGuidePage.entersDetails(personalAttributesMap);
+		pdpEnrollementGuidePage.entersDetails(memberAttributesMap);
 		EnquiryKitConfirmationPage enquiryKitConfirmationPage = pdpEnrollementGuidePage.submitsRequest();
 		if(enquiryKitConfirmationPage!=null){
 			if(enquiryKitConfirmationPage.validateConfPage())

@@ -73,7 +73,7 @@ def updatePipelineVersion(String gitBranch, String pipelineVersion){
 		pipelineVersion = "${version}-${env.BUILD_NUMBER}"
    } else if (gitBranch=="develop"){
 	   echo "Branch name is develop. Use global Jenkins variable UCP_DEVELOP_RELEASE_VERSION to set version to ${UCP_DEVELOP_RELEASE_VERSION}"
-	   pipelineVersion = "${UCP_DEVELOP_RELEASE_VERSION}-d${env.BUILD_NUMBER}"
+	   pipelineVersion = "${UCP_DEVELOP_RELEASE_VERSION}-d{env.BUILD_NUMBER}"
    }
 	echo "New version: ${pipelineVersion}"
 	return pipelineVersion
@@ -110,7 +110,7 @@ node('docker-maven-slave') {
 		writeBuildPropertiesFile(gitBranch, gitHubRepoUrl, pipelineVersion)		
 
         // Set build display name and description
-		currentBuild.displayName = "${pipelineVersion}"
+		currentBuild.displayName = "#${env.BUILD_NUMBER} - ${pipelineVersion}"
         currentBuild.description = "Git commit: ${fullGitCommit.take(6)}"
 
         echo "Building version: ${env.BUILD_NUMBER} from commit: ${fullGitCommit}"

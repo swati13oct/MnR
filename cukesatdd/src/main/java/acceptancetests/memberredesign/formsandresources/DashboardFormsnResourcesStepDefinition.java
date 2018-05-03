@@ -19,9 +19,9 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
 import junit.framework.Assert;
-import pages.dashboard.formsandresources.FormsAndResourcesPage;
-import pages.member.redesign.NewLoginPage;
-import pages.member.ulayer.RallyDashboard;
+import pages.dashboard_deprecated.formsandresources.FormsAndResourcesPage;
+import pages.member_deprecated.redesign.NewLoginPage;
+import pages.member_deprecated.ulayer.RallyDashboard;
 
        /**
        * @author 

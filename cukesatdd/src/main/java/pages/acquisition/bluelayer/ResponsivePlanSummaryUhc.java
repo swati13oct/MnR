@@ -26,8 +26,8 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 // import acceptancetests.planName.bluelayer.PlanNamesStepDefinition;
 import atdd.framework.UhcDriver;
-import pages.dashboard.member.blayer.DrugCostEstimatorPage;
-import pages.member.ulayer.Rallytool_Page;
+import pages.dashboard_deprecated.member.blayer.DrugCostEstimatorPage;
+import pages.member_deprecated.ulayer.Rallytool_Page;
 
 public class ResponsivePlanSummaryUhc extends UhcDriver{
 	

@@ -7,7 +7,7 @@ import atdd.framework.MRScenario;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import junit.framework.Assert;
-import pages.dashboard.acquisition.RegistrationInformationPage;
+import pages.dashboard_deprecated.acquisition.RegistrationInformationPage;
 
 /**
 * @author sarora29
