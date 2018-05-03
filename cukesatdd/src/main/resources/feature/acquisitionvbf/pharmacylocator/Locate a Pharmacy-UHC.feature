@@ -24,7 +24,7 @@ Examples:
 #	| 90210       | 2        |       | AARP MedicareRx Preferred (PDP)                    | PDP|
 	
 @LangDropdownSelectorUMS
-Scenario Outline:To verify available pharmacies in UMS site
+Scenario Outline:To verify available pharmacies in UMS site with language
 Given the user is on the UHC medicare solutions site landing page
 When fetch the data attributes in map form
 When fetch the data attributes in row form

@@ -22,7 +22,7 @@ Examples:
 #	| 80002       | 15 miles     | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | MA |
 	
 @availablePharmAARP
-Scenario Outline:To verify available pharmacies in AARP site
+Scenario Outline:To verify available pharmacies in AARP site with language
 Given the user is on AARP medicare acquisition site landing page
 When fetch the data attributes in map form
 When fetch the data attributes in row form
@@ -35,7 +35,7 @@ And the user enters following details for pharmacy search in AARP Site
 	| County Name	| <county>	|
 And the user chooses a plan from dropdown in AARP Site
 	| <planName> |
-Then the user validates the available pharmacies page in AARP site
+Then the user validates the available pharmacies page in AARP site with language
 When the user selects a language from dropdown in AARP Site
 	| <languageName> |
 Then the user should see choose a plan in AARP site
