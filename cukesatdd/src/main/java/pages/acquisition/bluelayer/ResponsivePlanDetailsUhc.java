@@ -11,7 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
 import pages.acquisition.ulayer.ResponsivePlanDetails;
-import pages.member_deprecated.ulayer.Rallytool_Page;
+import pages.member.ulayer.Rallytool_Page;
 
 public class ResponsivePlanDetailsUhc extends UhcDriver {
 

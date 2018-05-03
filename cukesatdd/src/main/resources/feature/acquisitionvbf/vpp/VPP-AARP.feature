@@ -4,7 +4,6 @@ Feature:1.10-VBF-Acq-To test plan summary in vpp flow AARP site
 @vppUlayerSmoke
 Scenario Outline: Verify plan summary in AARP site
 Given the user is on AARP medicare acquisition site landing page
-When fetch the data attributes in row form
 When the user performs plan search using following information in the AARP site
 	| Zip Code    | <zipcode> |
 	| County Name | <county>  |
@@ -21,8 +20,6 @@ Examples:
 @vppPlanDetailsAarp
 Scenario Outline: Verify plan details in AARP site
 Given the user is on AARP medicare acquisition site landing page
-When fetch the data attributes in map form
-When fetch the data attributes in row form
 When the user performs plan search using following information in the AARP site
 	| Zip Code    | <zipcode> |
 	| County Name | <county>  |
@@ -38,8 +35,6 @@ Examples:
 @defect3281
 Scenario Outline: To check all 3 MA plans and go to estimate drug costs page and return to vpp to verify they're still selected
 Given the user is on AARP medicare acquisition site landing page
-When fetch the data attributes in map form
-When fetch the data attributes in row form
 When the user performs plan search using following information in the AARP site
 	|Zip Code| <zipcode> |
 And I select all 3 plans to compare in MA and click on compare plan link

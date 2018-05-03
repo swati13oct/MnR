@@ -8,7 +8,7 @@ import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import pages.dashboard_deprecated.acquisition.RegistrationInformationPage;
+import pages.dashboard.acquisition.RegistrationInformationPage;
 
 public class RegistrationStartOverErrorPageStepDefinition {
                 @Autowired

@@ -12,8 +12,8 @@ import cucumber.api.CucumberOptions;
  */
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=2, screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcquisitionAgentFlowVBF.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionAgentFlowVBF")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisitionvbf.applitools" }, features = { "src/main/resources/feature/acquisitionvbf/applitools" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionAgentFlowVBF.json" }, tags = { "@aplliTools" })
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisitionvbf" }, features = { "src/main/resources/feature/acquisitionvbf" }, plugin = {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionAgentFlowVBF.json" }, tags = { "@agentAppointment,@attendCommunity,@pdpInquiryKit" })
 public class RunMRATDDAcquisitionAgentFlowVBF {
 
 }

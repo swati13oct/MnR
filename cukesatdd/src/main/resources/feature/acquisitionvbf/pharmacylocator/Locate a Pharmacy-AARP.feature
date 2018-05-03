@@ -3,8 +3,7 @@
 Feature:1.17-VBF-Acq-To test Locate a Pharmacy in acqusition flow AARP site
 @pharmacylocatorulayerSmoke
 Scenario Outline:To verify available pharmacies in AARP site
-Given the user is on AARP medicare acquisition site landing page
-When fetch the data attributes in row form
+Given the user is on the AARP Medicare Site landing page
 When the user hovers to Our Plans and select Request More Help and Information for following plan type in AARP Site
 	| <plantype> |
 When the user navigates to pharmacy search page in AARP Site
@@ -22,10 +21,8 @@ Examples:
 #	| 80002       | 15 miles     | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | MA |
 	
 @availablePharmAARP
-Scenario Outline:To verify available pharmacies in AARP site with language
-Given the user is on AARP medicare acquisition site landing page
-When fetch the data attributes in map form
-When fetch the data attributes in row form
+Scenario Outline:To verify available pharmacies in AARP site
+Given the user is on the AARP Medicare Site landing page
 When the user hovers to Our Plans and select Request More Help and Information for following plan type in AARP Site
 	| <plantype> |
 When the user navigates to pharmacy search page in AARP Site
@@ -35,7 +32,7 @@ And the user enters following details for pharmacy search in AARP Site
 	| County Name	| <county>	|
 And the user chooses a plan from dropdown in AARP Site
 	| <planName> |
-Then the user validates the available pharmacies page in AARP site with language
+Then the user validates the available pharmacies page in AARP site
 When the user selects a language from dropdown in AARP Site
 	| <languageName> |
 Then the user should see choose a plan in AARP site
@@ -48,9 +45,7 @@ Examples:
 
 @pharmaciesServicesAARP
 Scenario Outline:To verify available pharmacies and Services in AARP site
-Given the user is on AARP medicare acquisition site landing page
-When fetch the data attributes in map form
-When fetch the data attributes in row form
+Given the user is on the AARP Medicare Site landing page
 When the user hovers to Our Plans and select Request More Help and Information for following plan type in AARP Site
 	| <plantype> |
 When the user navigates to pharmacy search page in AARP Site
@@ -73,9 +68,7 @@ Examples:
 
 @pharmaciesSelPharmacyTypesAARP
 Scenario Outline:To verify available pharmacies for particular pharmacy types in AARP site
-Given the user is on AARP medicare acquisition site landing page
-When fetch the data attributes in map form
-When fetch the data attributes in row form
+Given the user is on the AARP Medicare Site landing page
 When the user hovers to Our Plans and select Request More Help and Information for following plan type in AARP Site
 	| <plantype> |
 When the user navigates to pharmacy search page in AARP Site
@@ -97,9 +90,7 @@ Examples:
 
 @errorMessageNoPharamcyAARP
 Scenario Outline:To verify error message for no results found for pharmacy type in UMS site
-Given the user is on AARP medicare acquisition site landing page
-When fetch the data attributes in map form
-When fetch the data attributes in row form
+Given the user is on the AARP Medicare Site landing page
 When the user hovers to Our Plans and select Request More Help and Information for following plan type in AARP Site
 	| <plantype> |
 When the user navigates to pharmacy search page in AARP Site

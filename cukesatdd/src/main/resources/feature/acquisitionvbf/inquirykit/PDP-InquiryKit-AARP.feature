@@ -3,9 +3,7 @@
 Feature:2.06-VBF-Acq-To test PDP inquiry flow in AARP site
 @pdpInquiryKitAARP
 Scenario Outline:To verify PDP inquiry flow in AARP site
-Given the user is on AARP medicare acquisition site landing page
-When fetch the data attributes in map form
-When fetch the data attributes in row form
+Given the user is on the AARP acquisition Site home page
 When the user navigates to Request More Help and Information page under pdp section in AARP Site
 And the user accesses the Request Plan Information and Enrollment Materials in AARP site
 Then the user submits by entering following details in Order Enrollment Information page in AARP Site
