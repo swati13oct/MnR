@@ -1,5 +1,6 @@
 @thePredators
 @ordermaterials
+@redesignOrderMaterials
 
 Feature:P1.5 To test order materials in Redesign site
   @ConfirmationPage
@@ -19,7 +20,7 @@ Feature:P1.5 To test order materials in Redesign site
 
     Examples: 
       | planType | memberType | option           |
-      | MA       |  AARPIndividual | Replacement ID card |
+      #| MA       |  AARPIndividual | Replacement ID card |
       | MAPD     | AARPIndividual  | Replacement ID card      |
       | PDP      |  AARPIndividual | Welcome Guide    |
       | SHIP     | AARPIndividual  | Member ID Card |

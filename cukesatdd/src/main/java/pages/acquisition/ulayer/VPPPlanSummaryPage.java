@@ -77,7 +77,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//div[@class='pdpplans_planbutton']/div[2]/div[2]/div[2]")
 	private WebElement hidePdpPlans;
-
+                                   
 	@FindBy(xpath = "//div[@class='module-plan-overview module swiper-slide ng-scope']")
 	List<WebElement> maPlanElement;
 
@@ -676,7 +676,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if (planName.contains("HMO")) {
 			for(WebElement plan : maPlans){
 				if (plan.getText().contains(planName)) {
-					ElementData elementData = new ElementData("id", "enrollMAButton");
+					ElementData elementData = new ElementData("xpath", "//div[@class='enrollment']//a[@class='cta-button']");
 					if(findChildElement(elementData, plan).isDisplayed()){
 						findChildElement(elementData, plan).click();
 						break;
@@ -766,7 +766,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public PlanDetailsPage navigateToPlanDetails(String planName, String planType) {
 		driver.manage().window().maximize();
 		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
-			ElementData elementData = new ElementData("id", "viewmoredetlinkmapd");
+			ElementData elementData = new ElementData("id", "viewmoredetlinkmapdplan");
 			WebElement element = getViewPlanDetailsElement(maPlanElement, elementData, planName);
 			if (element != null) {
 				element.click();
@@ -787,7 +787,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 */
 		}
 		CommonUtility.checkPageIsReady(driver);
-		if (driver.getTitle().equalsIgnoreCase("Our Medicare Plans | AARP® Medicare Plans from UnitedHealthcare®")
+		if (driver.getTitle().equalsIgnoreCase("AARPMP: Medicare Plan Benefits and Information | AARP® Medicare Plans from UnitedHealthcare®")
 				|| driver.getTitle().equalsIgnoreCase("Plan Detail")) {
 			return new PlanDetailsPage(driver);
 		}
@@ -886,8 +886,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			
 			if(validate(viewPlans)){
 				viewPlans.click();
-				List<WebElement> view2017Plans = driver.findElements(By.id("maDCELink"));
-				view2017Plans.get(0).click();
+				List<WebElement> maDCELink = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[@class='mabenefittable']//a"));
+				maDCELink.get(0).click();
 				}else{
 					Assert.assertTrue("This scenario is for AEP period", true);
 					

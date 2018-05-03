@@ -1,5 +1,6 @@
 @thePredators
 @pharmacylocator
+@PharmacylocatorRedesign
 Feature:P1.6To test Locate a Pharmacy tool in Redesign site
 
 @PharmacyDistanceDefaultZip
@@ -21,7 +22,7 @@ Examples:
 	| planType | memberType 			| distance |pharmacyType			|
 	| MAPD      | AARPIndividual  |  25       |Open 24 hours |
 	| PDP	   | AARPIndividual  |   25      | E-Prescribing |
-#	| MAPD	   | AARPIndividual  | 25        | Long-term care |
+	#| MAPD	   | AARPIndividual  | 25        | Long-term care |
 
 @ValidateLanguageandZIPcode
 Scenario Outline: To verify pharmacy Locator ZIP code entry and for Chinese and Spanish Language in Redesign site
@@ -43,21 +44,21 @@ Then the user searches multi lang for pharmacy search results available in Redes
     | MAPD	   | AARPIndividual  |  10980 |       10 | 
     
     
-@ZipCodeErrorMessages
-Scenario Outline: To verify error messages for invalid Zipcode in pharmacy locator page in Redesign site
-Given registered member to verify locate a pharmacy in Redesign Site
-| Plan Type	| <planType> |
-  | Member Type  | <memberType> |
-When the user navigates to pharmacy search page in Redesign site
-When the user enters following details for pharmacy search in Redesign Site
-      | Zip Code    | <zipcode>  |
-      | Distance    | <distance> |
-Then the user verify error messages in pharmacy locator page in Redesign site
- 
-     Examples: 
-   | planType | memberType    | zipcode | distance | 
-      | MAPD	   | AARPIndividual  |         |       5 | 
-      | MAPD	   | AARPIndividual  |    9999 |       10 | 
+#@ZipCodeErrorMessages
+#Scenario Outline: To verify error messages for invalid Zipcode in pharmacy locator page in Redesign site
+#Given registered member to verify locate a pharmacy in Redesign Site
+#| Plan Type	| <planType> |
+  #| Member Type  | <memberType> |
+#When the user navigates to pharmacy search page in Redesign site
+#When the user enters following details for pharmacy search in Redesign Site
+      #| Zip Code    | <zipcode>  |
+      #| Distance    | <distance> |
+#Then the user verify error messages in pharmacy locator page in Redesign site
+ #
+     #Examples: 
+   #| planType | memberType    | zipcode | distance | 
+      #| MAPD	   | AARPIndividual  |         |       5 | 
+      #| MAPD	   | AARPIndividual  |    9999 |       10 | 
 
 #@zipcodeEntry
 #  Scenario Outline: To verify pharmacy locator zipcode entry in Redesign site
