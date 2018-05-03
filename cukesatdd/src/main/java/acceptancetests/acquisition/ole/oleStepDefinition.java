@@ -425,6 +425,31 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 			Assert.fail();
 		}
 	}
+	@Then("^the user enters following required Medicare Information$")
+	public void the_user_enters_Medicare_Details_in_medicare_info_page(DataTable planAttributes) throws Throwable {
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> MedicareDetailsMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			MedicareDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		String SSNflag = MedicareDetailsMap.get("SSN Flag");
+		if(SSNflag.contains("true")){
+			MedicareDetailsMap.put("SSN Number", "123456789");
+		}
+		MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+		medicareInfoPage = medicareInfoPage.enter_required_Medicare_details(MedicareDetailsMap);
+		if (medicareInfoPage != null) {
+			
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE,
+					medicareInfoPage);
+			System.out.println("OLE Medicare Information Page, Medicare Info is entered and Next Button is enabled");
+			Assert.assertTrue(true);
+		}
+		else
+			Assert.fail("OLE Medicare Information Page Next Button is not enabled, medicare Info data entry failed");
+	}
 
 	@Then("^the user navigates to Preliminary Questions Page$")
 	public void the_user_navigates_to_Preliminary_Questions_Page() throws Throwable {

@@ -30,12 +30,50 @@ public class PrelimineryQuestionsPage extends UhcDriver{
 	@FindBy(xpath = "//*[@class = 'logo']")
 	private WebElement SiteLogo;
 	
-	@FindBy(xpath = "//*[@class = 'cta-button next-button']")
+	//Progress Bar Elements 
+	@FindBy(xpath = "//*[@class = 'progress-legend']")
+	private WebElement ProgressBarText;
+
+	@FindBy(xpath = "//*[@class = 'form-current-progress']")
+	private WebElement ProgressBarPercentageIndicator;
+
+	//Page Navigation Elements
+	@FindBy(id = "ole-form-back-button")
+	private WebElement BackBtn;
+	
+	@FindBy(id = "ole-form-next-button")
 	private WebElement NextBtn;
 	
-	@FindBy(xpath = "//*[@class = 'cancel-butt on modal-link']")
+	@FindBy(id = "cancel-enrollment")
 	private WebElement CancelEnrollmentLink;
+	
+	@FindBy(xpath = "//*[@class='cta-button primary force-cancel-button modal-link show']")
+	private WebElement CancelEnrollmentBtn;
 
+
+	//Preliminery Page header
+	@FindBy(xpath = "//*[@class='only-prelim']")
+	private WebElement PrelimPageHeader;
+
+	// Medicaid Questions
+	@FindBy(id = "medicaid")
+	private WebElement MedicaidquestionRadio;
+
+	@FindBy(id = "medicaidNumber")
+	private WebElement MedicaidNumberField;
+	
+	@FindBy(xpath = "//*[@id='esrd-msg-block']//p[1]")
+	private WebElement Medicaid_ErrorMessage;
+	
+	//ESRD question
+
+	@FindBy(id = "renalstage")
+	private WebElement ESRDquestionRadio;
+	
+	@FindBy(xpath = "//*[@id='esrd-msg-block']//p']")
+	private WebElement ESRD_ErrorMessage;
+
+	
 	public PrelimineryQuestionsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -44,11 +82,11 @@ public class PrelimineryQuestionsPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		
-		
+		validate(PrelimPageHeader);
+		validate(PrelimPageHeader);
 	}
 
-public PersonalInformationPage navigate_to_Personal_Information_page() {
+	public PersonalInformationPage navigate_to_Personal_Information_page() {
 		
 		validate(NextBtn);
 		NextBtn.click();

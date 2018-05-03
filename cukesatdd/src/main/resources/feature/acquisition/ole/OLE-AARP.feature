@@ -42,13 +42,23 @@ Then the user validates cancellation modal for OLE
 Then the user validates and selects the Disclaimer Checkbox
 Then the user navigates to Medicare Information Page
 Then the user validates Medicare Information Page required fields
+Then the user enters following required Medicare Information
+| First Name | <firstname> |
+| last Name | <lastname> |
+| Medicare Number | <medicarenumber> |
+| SSN Flag | <ssnflag> |
+| PartA Date | <partadate> |
+| PartB Date | <partbdate> |
+| Card Type | <cardtype> |
+
 Then the user navigates to Preliminary Questions Page
 
 	
 Examples:
-| zipcode | county             | plantype | planName                                         |
-| 90210   | Los Angeles County | MA	  | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    |
-| 90210		| Los Angeles County | PDP  | AARP MedicareRx Walgreens (PDP) 	|
+| zipcode | county             | plantype | planName                                       | cardtype  | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate |
+| 90210   | Los Angeles County | MA	  | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | HICN			 |  John		 |	Doe			|	123456789a		 | false		 | 01012010	 | 01012010	 |
+| 90210		| Los Angeles County | PDP  | AARP MedicareRx Walgreens (PDP) 									 |	MBI 		 |  John		 |	Doe			|	2A22C22YK22		 | false		 | 01012010	 | 01012010	 |
+#| 28036 	| Mecklenburg County | SNP  | AARP MedicareRx Walgreens (PDP) 									 | HICN	 		 |  John		 |	Doe			|	123456789a		 | true		 | 01012010	 | 01012010	 |
 
 @OLE_PlanDetails_Aarp
 Scenario Outline: OLE Landing from VPP Plan Details

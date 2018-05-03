@@ -62,9 +62,9 @@ public class WelcomePage extends UhcDriver{
 	@FindBy(xpath = "//*[@id='learn-more-ole']/a")
 	private WebElement RightRail_LearnMoreLink;
 	
-	@FindBy(xpath = "//*[@id='enrollment-disclaimer-accept-yes']")
+/*	@FindBy(xpath = "//*[@id='enrollment-disclaimer-accept-yes']")
 	private WebElement DisclaimerAgreeCheckBx;
-	
+	*/
 	//@FindBy(xpath = "//*[@id='enrollment-disclaimer-accept-yes']/following-sibling::label")
 	@FindBy(xpath = "//*[@id='enrollment-disclaimer-accept-yes']")
 	private WebElement DisclaimerAgreeSelect;
@@ -166,7 +166,7 @@ public class WelcomePage extends UhcDriver{
 		
 		boolean flag = false;
 		
-		boolean Disclaimer_Flag = (DisclaimerAgreeCheckBx.isSelected())?true:false;
+		boolean Disclaimer_Flag = (DisclaimerAgreeSelect.isSelected())?true:false;
 		boolean NextBtn_Flag = (NextBtn.isEnabled())?true:false;
 		if(!Disclaimer_Flag){
 			if(!NextBtn_Flag){
@@ -181,7 +181,7 @@ public class WelcomePage extends UhcDriver{
 		}
 		DisclaimerAgreeSelect.click();
 		
-		Disclaimer_Flag = (DisclaimerAgreeCheckBx.isSelected())?true:false;
+		Disclaimer_Flag = (DisclaimerAgreeSelect.isSelected())?true:false;
 		NextBtn_Flag = (NextBtn.isEnabled())?true:false;
 		if(Disclaimer_Flag){
 			if(NextBtn_Flag){

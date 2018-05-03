@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,15 +29,26 @@ public class MedicareInformationPage extends UhcDriver{
 	//OLE Common Elements
 	@FindBy(xpath = "//*[@class = 'logo']")
 	private WebElement SiteLogo;
-		
-	@FindBy(xpath = "//*[@class = 'cta-button next-button']")
+	
+	//Progress Bar Elements 
+	@FindBy(xpath = "//*[@class = 'progress-legend']")
+	private WebElement ProgressBarText;
+
+	@FindBy(xpath = "//*[@class = 'form-current-progress']")
+	private WebElement ProgressBarPercentageIndicator;
+
+	//Page Navigation Elements
+	@FindBy(id = "ole-form-back-button")
+	private WebElement BackBtn;
+	
+	@FindBy(id = "ole-form-next-button")
 	private WebElement NextBtn;
-		
-	@FindBy(xpath = "//*[@class = 'cancel-button modal-link']")
+	
+	@FindBy(id = "cancel-enrollment")
 	private WebElement CancelEnrollmentLink;
 
 	//Page Header
-	@FindBy(xpath = "//*[@class = 'ole-form-header']")
+	@FindBy(xpath = "//*[@class='only-prelim']")
 	private WebElement MedicalInfoPageHeader;
 	
 	//Select Medicare Card Type - A 0r B
@@ -65,6 +77,9 @@ public class MedicareInformationPage extends UhcDriver{
 	
 	@FindBy(id = "claimNumber")
 	private WebElement claimNumberField;
+	
+	@FindBy(id = "SSN")
+	private WebElement SSNField;
 	
 	@FindBy(id = "partAdate")
 	private WebElement partAStartDateField;
@@ -119,6 +134,59 @@ public class MedicareInformationPage extends UhcDriver{
 		return flag;
 	}
 
+	public MedicareInformationPage enter_required_Medicare_details(Map<String, String> MedicareDetailsMap){
+		String FirstName = MedicareDetailsMap.get("First Name");
+		String LastName = MedicareDetailsMap.get("Last Name");
+		String MedicareNumber = MedicareDetailsMap.get("Medicare Number");
+		String PartAeffectiveDate = MedicareDetailsMap.get("PardA Date");
+		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date");
+		String CardType = MedicareDetailsMap.get("Card Type");
+		String SSNflag = MedicareDetailsMap.get("SSN flag");
+		WebElement MedicareNumberLabel = driver.findElement(By.xpath(".//*[@id='claimNumber']/preceding-sibling::label"));
+		if(CardType.contains("HICN")){
+			SelectCardA.click();
+			if(MedicareNumberLabel.getText().contains("Medicare Claim Number")){
+				System.out.println("Correct Label 'Medicare Claim Number' displayed for CARD A");
+			}
+			else{
+				System.out.println("Correct Label not displayed for CARD A");
+				return null;
+			}
+		}
+		if(CardType.contains("MBI")){
+			SelectCardB.click();
+			if(MedicareNumberLabel.getText().contains("Medicare Number")){
+				System.out.println("Correct Label 'Medicare Number' displayed for CARD B");
+			}
+			else{
+				System.out.println("Correct Label not displayed for CARD B");
+				return null;
+			}
+		}
+
+		firstNameField.sendKeys(FirstName);
+		lastNameField.sendKeys(LastName);
+		claimNumberField.sendKeys(MedicareNumber);
+		if(SSNflag.contains("true")){
+			String SSNnumber = MedicareDetailsMap.get("SSN Number");
+			if(validate(SSNField)){
+				System.out.println("SSN field is Displayed for NC M&R DSNP");
+				SSNField.sendKeys(SSNnumber);
+			}
+		}
+		
+		partAStartDateField.sendKeys(PartAeffectiveDate);
+		partBStartDateField.sendKeys(PartBeffectiveDate);
+		System.out.println("All Medicare Details are entered");
+		if(NextBtn.isEnabled()){
+			System.out.println("Next Button is enabled to navigate to Next Page");
+			return new MedicareInformationPage(driver);
+		}
+		else
+			System.out.println("Next Button is disabled, Required Medicare Details are not provided");
+		return null;
+	}
+	
 	public PrelimineryQuestionsPage navigate_to_Preliminary_Questions_page() {
 		
 		validate(NextBtn);
