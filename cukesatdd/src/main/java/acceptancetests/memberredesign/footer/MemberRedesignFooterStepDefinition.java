@@ -20,9 +20,9 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
-import pages.dashboard.member.drugcostestimator.blayer.DrugCostEstimatorPage;
-import pages.memberredesign.bluelayer.AccountHomePage;
-import pages.memberredesign.bluelayer.LoginPage;
+import pages.dashboard_deprecated.member.drugcostestimator.blayer.DrugCostEstimatorPage;
+import pages.memberredesign_deprecated.bluelayer.AccountHomePage;
+import pages.memberredesign_deprecated.bluelayer.LoginPage;
 
 /**
  * Functionality : Covers all step definition methods related to member redesign footer section.

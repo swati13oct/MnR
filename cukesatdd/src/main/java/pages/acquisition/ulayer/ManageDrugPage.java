@@ -22,7 +22,7 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.member.bluelayer.SelectPharmacyPage;
+import pages.member_deprecated.bluelayer.SelectPharmacyPage;
 
 /**
 * @author pjaising

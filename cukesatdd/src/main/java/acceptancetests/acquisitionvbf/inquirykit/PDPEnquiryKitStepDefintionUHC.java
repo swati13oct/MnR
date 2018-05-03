@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.acquisitionvbf.common.CommonStepDefinition;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
@@ -34,22 +35,10 @@ public class PDPEnquiryKitStepDefintionUHC {
 		return loginScenario;
 	}
 
-	/**
-	 * @toDo:the user is on the UHC acquisition Site
-	 */
-	@Given("^the user is on the UHC acquisition Site home page$")
-	public void the_user_is_on_uhc_acquisition_site_home_page()
-	{
-
-		WebDriver wd = getLoginScenario().getWebDriver();
-
-		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
-
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
-				aquisitionhomepage);
+	private Map<String, String> memberAttributesMap =null;
 	
-	}
+	private List<DataTableRow> memberAttributesRow = new CommonStepDefinition().getAttributesRow();
+
 	
 	/**
 	 * @toDo:the user navigates to Request More Help and Information page 
@@ -91,19 +80,14 @@ public class PDPEnquiryKitStepDefintionUHC {
 	 * @toDo:the user submits by entering following details in Order Enrollment Information 
 	 */
 	@And("^the user submits by entering following details in Order Enrollment Information page in UHC Site$")
-	public void the_user_submits_entering_details_order_enrollment_information_uhc(DataTable attributes){
-		List<DataTableRow> personalAttributesRow = attributes
-				.getGherkinRows();
-		Map<String, String> personalAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < personalAttributesRow.size(); i++) {
-
-			personalAttributesMap.put(personalAttributesRow.get(i).getCells()
-					.get(0), personalAttributesRow.get(i).getCells().get(1));
-		}
-		
-		
+	public void the_user_submits_entering_details_order_enrollment_information_uhc(){
+		 if(memberAttributesRow.size()>0){
+		        for (int i = 0; i < memberAttributesRow.size(); i++) {
+		               memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		        }
+	        }
 		PDPEnrollementGuidePage pdpEnrollementGuidePage = (PDPEnrollementGuidePage) getLoginScenario().getBean(PageConstants.PDP_ENROLLMENT_GUIDE_PAGE);
-		pdpEnrollementGuidePage.entersDetails(personalAttributesMap);
+		pdpEnrollementGuidePage.entersDetails(memberAttributesMap);
 		EnquiryKitConfirmationPage enquiryKitConfirmationPage = pdpEnrollementGuidePage.submitsRequest();
 		if(enquiryKitConfirmationPage!=null){
 			if(enquiryKitConfirmationPage.validateConfPage())

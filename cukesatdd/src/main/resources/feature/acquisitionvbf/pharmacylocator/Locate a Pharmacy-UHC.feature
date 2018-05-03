@@ -3,7 +3,8 @@
 Feature:1.18-VBF-Acq-To test Locate a Pharmacy in acqusition flow UMS site
 @PharmacyLocatorBlayerSmoke
 Scenario Outline:To verify available pharmacies in UMS site
-Given the user is on the UMS Medicare Site landing page
+Given the user is on the UHC medicare solutions site landing page
+When fetch the data attributes in row form
 When the user hovers to Our Plans and select Request More Help and Information for following plan type
 	| <plantype> |
 When the user navigates to pharmacy search page in UMS Site
@@ -23,8 +24,10 @@ Examples:
 #	| 90210       | 2        |       | AARP MedicareRx Preferred (PDP)                    | PDP|
 	
 @LangDropdownSelectorUMS
-Scenario Outline:To verify available pharmacies in UMS site
-Given the user is on the UMS Medicare Site landing page
+Scenario Outline:To verify available pharmacies in UMS site with language
+Given the user is on the UHC medicare solutions site landing page
+When fetch the data attributes in map form
+When fetch the data attributes in row form
 When the user hovers to Our Plans and select Request More Help and Information for following plan type
 	| <plantype> |
 When the user navigates to pharmacy search page in UMS Site
@@ -46,7 +49,9 @@ Examples:
 
 @pharmacyServicesUMS
 Scenario Outline:To verify available pharmacies and Services in UMS site
-Given the user is on the UMS Medicare Site landing page
+Given the user is on the UHC medicare solutions site landing page
+When fetch the data attributes in map form
+When fetch the data attributes in row form
 When the user hovers to Our Plans and select Request More Help and Information for following plan type
 	| <plantype> |
 When the user navigates to pharmacy search page in UMS Site
@@ -69,7 +74,9 @@ Examples:
 	
 @pharmaciesSelPharmTypeUMS
 Scenario Outline:To verify available pharmacies for particular pharmacy types in UMS site
-Given the user is on the UMS Medicare Site landing page
+Given the user is on the UHC medicare solutions site landing page
+When fetch the data attributes in map form
+When fetch the data attributes in row form
 When the user hovers to Our Plans and select Request More Help and Information for following plan type
 	| <plantype> |
 When the user navigates to pharmacy search page in UMS Site
@@ -91,7 +98,9 @@ Examples:
 
 @errorMessageNoResultUMS
 Scenario Outline:To verify error message for no results found for pharmacy type in UMS site
-Given the user is on the UMS Medicare Site landing page
+Given the user is on the UHC medicare solutions site landing page
+When fetch the data attributes in map form
+When fetch the data attributes in row form
 When the user hovers to Our Plans and select Request More Help and Information for following plan type
 	| <plantype> |
 When the user navigates to pharmacy search page in UMS Site

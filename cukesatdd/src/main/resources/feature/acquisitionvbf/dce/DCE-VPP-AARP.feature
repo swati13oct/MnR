@@ -3,6 +3,8 @@ Feature: To test DCE to VPP plan Summary flow  in AARP site
 @dceVppNonAepAARP
 Scenario Outline: To Verify the drugs and plan summary for non AEP period 
 Given the user is on the AARP medicare site landing page
+When fetch the data attributes in map form
+When fetch the data attributes in row form
 When the user performs drug search using the following information in AARP site
 	| Zip Code    | <zipcode>  |
 	| County      | <county>   |
@@ -47,6 +49,8 @@ Given the zipcode and county information DCE to Vpp Plan summary flow in AARP si
 	| Zip Code    | <Zipcode>  |
 	| County      | <county>   |
 	| Plan Year   | <planYear> |
+When fetch the data attributes in map form
+When fetch the data attributes in row form
 When user search the drug using drug initials in AARP site
 	| <drugInitials> |
 And user access the drug list having 5 drugs in AARP site
@@ -78,6 +82,8 @@ Examples:
 @dceVppNonAepDrugsPlanDetailsAARP
 Scenario Outline: To Verify the drugs and plan details for non AEP period 
 Given the user is on the AARP medicare site landing page
+When fetch the data attributes in map form
+When fetch the data attributes in row form
 When the user performs drug search using the following information in AARP site
 	| Zip Code    | <zipcode>  |
 	| County      | <county>   |
@@ -121,6 +127,8 @@ Examples:
 @dceVppNonAepDrugsWaysToSaveAARP
 Scenario Outline: To Verify the drugs and ways to save options for non AEP period 
 Given the user is on the AARP medicare site landing page
+When fetch the data attributes in map form
+When fetch the data attributes in row form
 When the user performs drug search using the following information in AARP site
 	| Zip Code    | <zipcode>  |
 	| County      | <county>   |
@@ -174,6 +182,8 @@ Then the user validates the plan details of the above selected plan after switch
 @dceVPPToolTipsAARP
 Scenario Outline: To Verify the manage drug page and verify tooltips for AARP Site 
 Given the user is on the AARP medicare site landing page
+When fetch the data attributes in map form
+When fetch the data attributes in row form
 When the user performs drug search using the following information in AARP site
 	| Zip Code    | <zipcode>  |
 	| County      | <county>   |
@@ -219,6 +229,8 @@ Examples:
 @dceGenericDrugsAndPharmacyAARP
 Scenario Outline: To Verify the drugs and pharmacy model for new generic flow 
 Given the user is on the AARP medicare site landing page
+When fetch the data attributes in map form
+When fetch the data attributes in row form
 When the user performs drug search using the following information in AARP site
 	| Zip Code    | <zipcode>  |
 	| County      | <county>   |
@@ -254,6 +266,8 @@ Examples:
 @dceGenericDrugsListPlanCostAARP
 Scenario Outline: To Verify the drug list and plan cost sections in View Plan Details page 
 Given the user is on the AARP medicare site landing page
+When fetch the data attributes in map form
+When fetch the data attributes in row form
 When the user performs drug search using the following information in AARP site
 	| Zip Code    | <zipcode>  |
 	| County      | <county>   |
