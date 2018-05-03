@@ -1,3 +1,4 @@
+@BAT_CommunityMeetings
 @attendCommunity
 @fixedTestCaseTest
 Feature:1.13-VBF-Acq-To test attend community meeting flow in AARP site
