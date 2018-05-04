@@ -13,7 +13,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.member_deprecated.bluelayer.AccountHomePage;
+import pages.member.bluelayer.AccountHomePage;
 
 /**
  * @author pagarwa5

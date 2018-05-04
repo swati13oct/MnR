@@ -1,3 +1,4 @@
+@BAT_AgentAppointment
 @fixedTestCaseTest
 @agentAppointment
 Feature:1.05-VBF-Acq-To test request an appointment with an agent flow in UHC site

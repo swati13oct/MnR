@@ -2,8 +2,7 @@
 Feature: To test enroll in plan on UHC site 
 @OLE_MA
 Scenario Outline: Verify enroll in plan in UHC site for federal plan type member  
-Given the user is on the UHC medicare solutions site landing page
-When fetch the data attributes in row form
+Given the user is on the UHC medicare solutions landing page
 When user performs plan search using following information in UHC site
         | Zip Code    | <zipcode> |
         | County Name | <countyName>  |
@@ -47,9 +46,7 @@ Then the user validates the enrollment application confimation in UHC site
     
 @OLE_PDP
 Scenario Outline: Verify enroll in plan in UHC site for federal plan type member  
-Given the user is on the UHC medicare solutions site landing page
-When fetch the data attributes in map form
-When fetch the data attributes in row form
+Given the user is on UHC medicare site landing page
 When user performs plan search using following information in UHC site
         | Zip Code    | <zipcode> |
         | County Name | <countyName>  |
@@ -93,8 +90,6 @@ Scenario Outline: Verify enroll in plan  in UHC site for federal plan type membe
 Given the following zipcode for UHC site 
                  | Zip Code    | <zipcode>    |
                  | County Name | <countyName> |
-When fetch the data attributes in map form
-When fetch the data attributes in row form
 When the user performs a plan search in VPP flow for UHC site
          | Plan Type | <plantype> |
 And the user views enroll in plan in UHC site

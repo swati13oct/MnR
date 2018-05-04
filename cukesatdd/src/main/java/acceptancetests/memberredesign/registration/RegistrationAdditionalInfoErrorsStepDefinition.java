@@ -14,7 +14,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
 import junit.framework.Assert;
-import pages.dashboard_deprecated.acquisition.RegistrationInformationPage;
+import pages.dashboard.acquisition.RegistrationInformationPage;
 
 	/**
 	 * @author 

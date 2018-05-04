@@ -17,9 +17,9 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import junit.framework.Assert;
-import pages.dashboard_deprecated.acquisition.DeregisterPage;
-import pages.dashboard_deprecated.acquisition.RegistrationInformationPage;
-import pages.member_deprecated.redesign.NewLoginPage;
+import pages.dashboard.acquisition.DeregisterPage;
+import pages.dashboard.acquisition.RegistrationInformationPage;
+import pages.member.redesign.NewLoginPage;
 
 /**
  * Functionality: Registration flow validation

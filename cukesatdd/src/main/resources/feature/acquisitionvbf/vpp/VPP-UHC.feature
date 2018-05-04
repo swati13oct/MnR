@@ -4,8 +4,7 @@ Feature:1.09-VBF-Acq-To test plan summary in vpp flow UMS site
 @planDetailsUMS
 @vppBlayerSmoke
 Scenario Outline: Verify plan details in UMS site 
-Given the user is on the UHC medicare solutions site landing page
-When fetch the data attributes in row form
+Given the user is on the uhcmedicaresolutions site landing page
 When the user performs plan search using following information in UMS site
 	| Zip Code    | <zipcode>|
 	| County Name |<county> |
@@ -21,8 +20,6 @@ Examples:
 @defect1964
 Scenario Outline: To verify correct message shows on view details page after checking compare plans box
 Given the user is on the uhcmedicaresolutions site landing page
-When fetch the data attributes in map form
-When fetch the data attributes in row form
 When I access the vpp page
 	|Zip Code| <zipcode> |
 And I click on add to compare checkbox and click on view details link
@@ -35,8 +32,6 @@ Examples:
 @defect1803
 Scenario Outline: To test checkbox is unchecked on vpp after unchecking it on view details page
 Given the user is on the uhcmedicaresolutions site landing page
-When fetch the data attributes in map form
-When fetch the data attributes in row form
 When I access the vpp page
 	|Zip Code| <zipcode> |
 And I click on add to compare checkbox and click on view details link
@@ -49,8 +44,6 @@ Examples:
 @defect1970
 Scenario Outline: To test correct message is displayed for PDP plans after checking compare plans box
 Given the user is on the uhcmedicaresolutions site landing page
-When fetch the data attributes in map form
-When fetch the data attributes in row form
 When I access the vpp page
 	|Zip Code| <zipcode> |
 And I select pdp plans and go to view details page
@@ -63,8 +56,6 @@ Examples:
 @defect1363
 Scenario Outline: To test two plans are added when clicked on compare plans on Plan details page
 Given the user is on the uhcmedicaresolutions site landing page
-When fetch the data attributes in map form
-When fetch the data attributes in row form
 When I access the vpp page
 	|Zip Code| <zipcode> |
 When user views plans of the below plan type in UMS site

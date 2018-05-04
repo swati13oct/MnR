@@ -25,7 +25,19 @@ public class AttendCommunityMeetingStepDefinitionUHC {
 		return loginScenario;
 	}
 
-	
+	/**
+	 * @toDo: user lands on the acquisition page
+	 */
+	@Given("^the user is on the UHC acquisition site home page$")
+	public void the_user_on_uhc_medicaresolutions_Site() {
+		WebDriver wd = getLoginScenario().getWebDriver();
+
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
+
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstantsMnR.ACQUISITION_HOME_PAGE,
+				aquisitionhomepage);
+	}
 	
 	/**
 	 * @toDo: user navigates to request more help and information page

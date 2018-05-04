@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.memberrdesignVBF.RegistrationInformationPage;
+import pages.memberrdesignVBF.DeregisterPage;
 import pages.memberrdesignVBF.LoginPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -192,9 +193,9 @@ public class RegistrationDashboardStepDefinition {
 		String userName = memberAttributesMap.get("CREATE_ACCOUNT_USER_NAME");
 
 		// deregister the user for subsequent registration
-		/*DeregisterPage deregisterPage = new DeregisterPage(wd);
+		DeregisterPage deregisterPage = new DeregisterPage(wd);
 		deregisterPage.deregisterUser(userName);
-*/
+
 		// create registration context
 		LoginPage THloginPage = new LoginPage(wd);
 		RegistrationInformationPage registrationInformationPage = THloginPage.navigateToRegistrationPage();

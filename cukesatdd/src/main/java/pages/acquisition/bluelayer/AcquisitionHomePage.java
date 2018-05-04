@@ -16,7 +16,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
-//import pages.member_deprecated.bluelayer.AccountHomePage;
+//import pages.member.bluelayer.AccountHomePage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;

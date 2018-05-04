@@ -3,9 +3,7 @@
 Feature:1.12-VBF-Acq-To test enroll in plan on AARP site
 @OLE_MA
 Scenario Outline: Verify enroll in plan in AARP site for federal plan type member  for MA or MAPD plan
-Given the user is on AARP medicare acquisition site landing page
-When fetch the data attributes in map form
-When fetch the data attributes in row form
+Given the user is on AARP medicare site landing page OLE
 When user performs plan search using following information in AARP site OLE
 	| Zip Code    | <zipcode> |
 	| County Name | <countyName>  |
@@ -108,9 +106,7 @@ Examples:
 
 @OLE_PDP
 Scenario Outline: Verify enroll in plan in AARP site for federal plan type member  PDP member
-Given the user is on AARP medicare acquisition site landing page
-When fetch the data attributes in map form
-When fetch the data attributes in row form
+Given the user is on AARP medicare site landing page
 When user performs plan search using following information in AARP site
                | Zip Code    | <zipcode> |
                | County Name | <countyName>  |

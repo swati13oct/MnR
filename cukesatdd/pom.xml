@@ -89,7 +89,7 @@
 				</configuration>
 				
 			</plugin>
-			<plugin>
+		<!--	<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
 				<version>1.1.1</version>
@@ -105,7 +105,7 @@
 				<configuration>
 					<executable>${basedir}/src/main/resources/pdfReportGenerator.sh</executable>
 				</configuration>
-			</plugin>
+			</plugin> -->
 			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -404,20 +404,7 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.6</version>
-		</dependency><dependency>
-		    <groupId>com.applitools</groupId>
-		    <artifactId>eyes-selenium-java3</artifactId>
-		    <version>RELEASE</version>
-		    <exclusions>
-		        <exclusion>
-		            <groupId>org.seleniumhq.selenium</groupId>
-		            <artifactId>selenium-java</artifactId>
-		        </exclusion>
-		        <exclusion>
-		            <groupId>org.seleniumhq.selenium</groupId>
-		            <artifactId>selenium-api</artifactId>
-		        </exclusion>
-		    </exclusions>
-		</dependency>	</dependencies>
+		</dependency>
+	</dependencies>
 	
 </project>

@@ -13,8 +13,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.regression.accounthomepage.AccountHomePage;
-
+import pages.member.ulayer.AccountHomePage;
 
 /**
  * @author pperugu

@@ -21,7 +21,7 @@ Examples:
 #	| 80002       | 15 miles     | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | MA |
 	
 @availablePharmAARP
-Scenario Outline:To verify available pharmacies in AARP site with language
+Scenario Outline:To verify available pharmacies with language in AARP site
 Given the user is on the AARP Medicare Site landing page
 When the user hovers to Our Plans and select Request More Help and Information for following plan type in AARP Site
 	| <plantype> |

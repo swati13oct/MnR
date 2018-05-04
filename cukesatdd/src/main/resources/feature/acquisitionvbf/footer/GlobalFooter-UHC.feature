@@ -3,7 +3,7 @@
 @globalfooterUMS
 Feature:2.03-VBF-Acq-To test Global Footer links in UMS site
 Scenario:To verify links displayed in Global footer section in UMS site
-Given the user is on the UHC medicare solutions site landing page
+Given the user is on the UHC Medicaresolutions Site
 When user accesses global footer UHC Medicaresolutions Site
 And the user clicks on Sitemap link from home page footer UHC Medicaresolutions Site
 And the user clicks on Aboutus link from home page footer UHC Medicaresolutions Site
