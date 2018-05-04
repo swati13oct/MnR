@@ -1,8 +1,7 @@
-/**
- * 
- */
+
+
 package pages.regression.formsandresources;
-import java.util.ArrayList;
+import java.util.*;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -10,16 +9,23 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import acceptancetests.data.MRConstants;
+import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import junit.framework.Assert;
 
 @SuppressWarnings("deprecation")
 public class FormsAndResourcesPage extends UhcDriver {
-	
-	        @FindBy(linkText="VIEW DOCUMENTS & RESOURCES")
-	           private WebElement DOCUMENTSRESOURCES;
+                     @FindBy(linkText="")
+                 private WebElement DocumentResourceslink;
+                  
+                 @FindBy(linkText="VIEW DOCUMENTS & RESOURCES")
+                  private WebElement DOCUMENTSRESOURCES;
 
                 /** The member signin link. */
                 @FindBy(id = "fd_memberSignInButton")
@@ -41,10 +47,10 @@ public class FormsAndResourcesPage extends UhcDriver {
                 @FindBy(linkText = "Go to Forms And Resources page")
                 private WebElement linkToFormsAndResources;
                 
-            	
-            	/**Link for perception popup**/
-            	@FindBy(xpath="html/body/div[3]/div[2]/map/area[1]")
-                private WebElement perceptionpopup;	
+              
+              /**Link for perception popup**/
+              @FindBy(xpath="html/body/div[3]/div[2]/map/area[1]")
+                private WebElement perceptionpopup;    
 
 
                 /** Medical button in EOB section - Forms And Resources page */
@@ -81,9 +87,9 @@ public class FormsAndResourcesPage extends UhcDriver {
                 
                 @FindBy(xpath = " //*[contains(text(),'ORDER PLAN MATERIALS')]")
                 private WebElement OrderPlanMaterialLink;
-                       
-                WebElement languagedropdown = driver.findElement(By.id("lang-select-2"));
-                Select oselect = new Select(languagedropdown);
+                
+                @FindBy(id="lang-select-2")
+                private WebElement languagedropdown;
 
             /**Anoc Section**/
                 @FindBy(xpath ="//*[contains(text(),'Annual Notice of Changes Documents')]")
@@ -107,47 +113,32 @@ public class FormsAndResourcesPage extends UhcDriver {
                 private WebElement FormsnResources;
                 
                 
+              //*[@class='formsAndResourcesDocListContainer base_tools_component section']
+                private WebElement FormsandResourcesSection;
+                
+                @FindBy(xpath = "//area[@href='javascript:clWin()'][@alt = 'close']")
+              private WebElement FeedbackModal;
                 
                 public FormsAndResourcesPage(WebDriver driver) {
                                 super(driver);
                                 PageFactory.initElements(driver, this);
-                              //  openAndValidate();
+                                CommonUtility.checkPageIsReady(driver);
+                                  //Thread.sleep(5000);
+                                  CommonUtility.checkPageIsReady(driver);
+                                  try{
+                                  FeedbackModal.click();
+                                  System.out.println("FeedBack Modal Present");
+                                  if (validate(FeedbackModal)){
+                                  System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
+                                  }
+                                  System.out.println("FeedBack Modal Closed");
+                                  }
+                                  catch (Exception e) {
+                                  System.out.println("FeedBack Modal NOT Present");
+                                  }
+                               openAndValidate();
                 }
                 
-             /*   public void navigatetoFormsnResources() throws InterruptedException
-                {
-                              //  DOCUMENTSRESOURCES.click();
-                               if (MRScenario.environment.equalsIgnoreCase("team-ci1") || MRScenario.environment.equalsIgnoreCase("team-g") ||MRScenario.environment.equalsIgnoreCase("test-a") ) {
-                             	  Thread.sleep(40000);
-                        			System.out.println("Go to forms and resources link is present "+driver.findElement(By.xpath("//*[contains(text(),'Go to Forms and Resource page')]")).isDisplayed());
-                        			driver.findElement(By.xpath("//*[contains(text(),'Go to Forms and Resource page')]")).click();
-                        			
-                        		}
-
-                        		else if (MRScenario.environment.equalsIgnoreCase("stage")) {
-                        			System.out.println("user is on Stage login page");			
-                        						
-                        			if(driver.getCurrentUrl().contains("/dashboard"));
-                        			{
-                        				System.out.println("User is on dashboard page and URL is ====>"+driver.getCurrentUrl());
-                        				Thread.sleep(20000);
-                        				DOCUMENTSRESOURCES.click();
-                        				
-                        				
-                        			}
-                        				
-                        		}
-                        		else 
-                        		{
-                        			System.out.println("This script is only intended to be run using test harness on team-b or team-h. Update condition for your own environment");	
-                        		}
-                        		
-                               System.out.println(driver.getTitle());
-
-                        		
-                             //   return new FormsAndResourcesPage(super.driver);
-                                
-                }*/
 
                 @Override
                 public void openAndValidate() {
@@ -249,12 +240,12 @@ public class FormsAndResourcesPage extends UhcDriver {
                 /**
                  * @toDo : clicking on perception
                  */
-         	   public void clickonperceptionpopup()
-        	   {
-        		   perceptionpopup.click();
-        		   perceptionpopup.click();
-        		   
-        	   }
+                 public void clickonperceptionpopup()
+                 {
+                        perceptionpopup.click();
+                        perceptionpopup.click();
+                        
+                 }
          
                 
                 /**
@@ -274,27 +265,32 @@ public class FormsAndResourcesPage extends UhcDriver {
                 /**
                  * @toDo : to click order plan material link
                  */
-                public void validatenclickOrderPlanMaterial() throws InterruptedException
+                public void validateOrderPlanMaterial() throws InterruptedException
                 {
-                     getOrderPlanMaterialLink().click();
+                     
+                     OrderPlanMaterialLink.click();
                      Thread.sleep(5000);
-                   /*  String expectedURL ="https://stage-medicare.uhc.com/medicare/member/order-materials/overview.html";
-                     String actualURL=driver.getCurrentUrl();
-                     System.out.println(actualURL);
-                    Assert.assertEquals(expectedURL, actualURL);*/
+                     if(driver.getCurrentUrl().contains("order plan materials"))
+                                  {
+                                Assert.assertTrue(true);
+                                  }
+                     else{
+                             Assert.fail("failed to loaf order materials page");
+                          }
+                     
                      driver.navigate().back();
-                     Thread.sleep(5000);
-                     String s=driver.getCurrentUrl();
-                     System.out.println(s);
-                     if(s.contains("overview"))
-                     {
-                    	 System.out.println("passed");
-                     }
-                     else 
-                     {
-                    	 System.out.println("failed");
-                     }
-                }
+                     
+                     if(driver.getCurrentUrl().contains("documents overview"))
+                                  {
+                                Assert.assertTrue(true);
+                                  }
+                     else{
+                             Assert.fail("failed to loaf fnr page");
+                          }
+                            
+                     
+                      }
+               
                 /**
                  * @toDo : temporary id card link
                  */
@@ -305,43 +301,53 @@ public class FormsAndResourcesPage extends UhcDriver {
                 /**
                  * @toDo : to click temporary id card link
                  */
-                public void validatenclickIDCard() throws InterruptedException
+                public void validateIDCard() throws InterruptedException
                 {
-                     getTemporaryIdcardlink().click();
-                     
-                     Thread.sleep(5000);
-                     
-                   /*  String expectedURL ="https://member.int.uhc.com/medicare/dashboard/modal/id-cards";
-                     String actualURL=driver.getCurrentUrl();
-                     System.out.println(actualURL);
-                     Thread.sleep(5000);
-                   Assert.assertEquals(expectedURL, actualURL);
-                     driver.findElement(By.cssSelector(".modal-close-btn")).click();
-					
-                     
-                     Thread.sleep(5000);
-                    String s=driver.getCurrentUrl();
-                    System.out.println(s);
-                     if(s.contains("/dashboard"))
-                     {
-                     System.out.println("passed");
-                     }
-                     else 
-                     {
-                    	 System.out.println("failed"); 
-                     }*/
-                     }
 
+                     if (MRScenario.environmentMedicare.equalsIgnoreCase("team-g") || MRScenario.environmentMedicare.equalsIgnoreCase("test-a") || MRScenario.environment.equalsIgnoreCase("team-ci1")) {
+                                         
+                           
+                                  String s=getTemporaryIdcardlink().getAttribute("href");
+                                  if(s.contains("test-harness"))
+                                  {
+                                         Assert.assertTrue(true);
+                                  }
+                                  else 
+                                  {
+                                         Assert.fail("Some wrong link is coming for member id cards");
+                                  }
+                                  
+                                  
+                           }
+                     else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) 
+                                                              
+                           {
+                                  String s=getTemporaryIdcardlink().getAttribute("href");
+                                  if(s.contains("member-int.uhc.com"))
+                                  {
+                                         Assert.assertTrue(true);
+                                  }
+                                  else 
+                                  {
+                                         Assert.fail("The member id cards link is wrong");
+                                  }
+                                  
+                     
+                          } 
+                     }
+                
+                
                 /**
                  * @toDo : to verify english as a default language 
                  */
                 public void validateEngDefault()
-                {
-                	System.out.println(oselect.getFirstSelectedOption().getText());
+                {	
+                	 Select oselect = new Select(languagedropdown);
+                     System.out.println(oselect.getFirstSelectedOption().getText());
                      if(oselect.getFirstSelectedOption().getText().equals("ENGLISH"))
                      {
-                    	 System.out.println(oselect.getFirstSelectedOption().getText());
-                    	 System.out.println("true");
+                     System.out.println(oselect.getFirstSelectedOption().getText());
+                     System.out.println("true");
                      }
                      
                      else 
@@ -353,31 +359,81 @@ public class FormsAndResourcesPage extends UhcDriver {
                  * @toDo : switch language
                  */
                 public void changelanguage() throws InterruptedException
-                {
+                {    
+                      Thread.sleep(3000);
+                      Select oselect = new Select(languagedropdown);
                      oselect.selectByVisibleText("SPANISH");
                      Thread.sleep(3000);
                   System.out.println(oselect.getFirstSelectedOption().getText());
                      
                 }
 
-				
-		 public void scroll() {
-				    	JavascriptExecutor jse = (JavascriptExecutor)driver;
-				    	jse.executeScript("window.scrollBy(0,150)", "");
-				    	
-		    }
-			public void checkOrderPlanMaterialLinkforterminated(){
-				Assert.assertTrue(!(validate(OrderPlanMaterialLink)));
-				
-				
-			}
-			
-			public void validateshipeob()
-			{
-				WebElement shipeob= driver.findElement(By.xpath("(//*[contains(text(),'Medical EOB')])[7]"));
+                           
+              public void scroll() {
+                                  JavascriptExecutor jse = (JavascriptExecutor)driver;
+                                  jse.executeScript("window.scrollBy(0,150)", "");
+                                  
+                  }
+                     public void checkOrderPlanMaterialLinkforterminated(){
+                            Assert.assertTrue(!(validate(driver.findElement(By.xpath("(//div[contains(@class,'planBenefitsHeaderParsys')]/div/div[not(contains(@class,'ng-hide')]//*[contains(text(),'ORDER')])[1])")))));
+                           
+                           
+                     }
+                     
+                     public void checkRenewsectionforterminated(){
+                            Assert.assertTrue(!(validate(driver.findElement(By.xpath("//*[contains(text(),'Renew Magazine')]")))));
+                     }
+                     
+                     public void validateshipeob()
+                     {
+                           WebElement shipeob= driver.findElement(By.xpath("(//*[contains(text(),'Medical EOB')])[7]"));
                 validate(shipeob);
-			}
-                
-                
-}
+                     }
+            
+                     
+                     public String[] verifypdfname()
+                     {   
+                           java.util.List<WebElement> pdfs = driver.findElements(By.xpath("//div[contains(@class,'plan-material')]//span//li/a"));
+                           String[] pdfname=null;
+                           for (int i=0;i<pdfs.size();i++)
+                           {  
+                                   pdfname[i]=pdfs.get(i).getText(); 
+                                                
+                           }
+                           return pdfname;
+                     }
+                     
+                     public void waitforFNRpage()
+                     {
+                WebDriverWait wait = new WebDriverWait(this.driver, 60);
+                wait.until(new ExpectedCondition<Boolean>() {
+                    public Boolean apply(WebDriver driver) {
+                                if (driver.getTitle().contains("Documents Overview"))
+                                    return true;
+                                else
+                                    return false;
+                    } }   );
 
+}
+                     
+             		/**
+             		 * @return the Order Plan Material Link
+             		 */
+             		public boolean checkPOrderPlanMaterialLinkNotAvailable() {
+             			try {
+             				if(driver.findElement(By.xpath("(*//[contains(text(),'ORDER')])[1])")).isDisplayed()) {
+             				System.out.println("Order Plan Material Link link is present");
+             				return false;
+             				}
+             				else {
+             				
+             			}
+             			}
+             			catch(Exception e) {
+             				System.out.println("Order Plan Material Link link is not present");
+             				return true;
+             			}
+             			return false;
+             		}
+                     
+}
