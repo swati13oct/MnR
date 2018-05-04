@@ -17,36 +17,26 @@ import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
-import acceptancetests.data.PageConstantsMnR;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-<<<<<<< HEAD
-import pages.dashboard.member.ulayer.ClaimSummarypage;
-
-import pages.member.bluelayer.ProfilePageHsid;
-=======
 import pages.regression.claims.ClaimSummarypage;
-import pages.regression.claims.ClaimDetailsPage;
-import pages.member.bluelayer.BenefitsAndCoveragePage;
-import pages.regression.profileandpreferences.ProfileandPreferencesPage;
->>>>>>> origin/develop
+import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.member.bluelayer.ProfilePreferencesPage;
 import pages.member.redesign.ContactUsPage;
 import pages.member.ulayer.OneTimePaymentsPage;
-import pages.redesign.PaymentHistoryPage;
-import pages.regression.formsandresources.FormsAndResourcesPage;
-import pages.regression.pharmacylocator.PharmacySearchPage;
 import pages.member.ulayer.PlanComparePage;
 import pages.member.ulayer.Rallytool_Page;
 import pages.member.ulayer.TestHarness;
-<<<<<<< HEAD
-import pages.redesign.PharmacySearchPage;
-import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
-=======
+import pages.redesign.PaymentHistoryPage;
+import pages.regression.claims.ClaimDetailsPage;
+import pages.regression.formsandresources.FormsAndResourcesPage;
+import pages.regression.pharmacylocator.PharmacySearchPage;
+import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 
->>>>>>> origin/develop
+
+
 
 
 public class AccountHomePage extends UhcDriver {
@@ -360,16 +350,16 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='dashboard']//span[text()='View Your Claims']")
 	private WebElement claimsDashboardLink;
 	
-<<<<<<< HEAD
+
 	//@FindBy(css = "img.primary-logo")
     //private WebElement logoImage;
 	
 	@FindBy(xpath = "//div[@id='white-label']/a/img")
 	private WebElement logoImage;
-=======
+
 	@FindBy(xpath = "//*[@ng-src='/images/icons/icon-pharmacy-locator.svg']")
 	private WebElement pharmacySearchLink;
->>>>>>> origin/develop
+
 	
 	private PageData myAccountHome;
 

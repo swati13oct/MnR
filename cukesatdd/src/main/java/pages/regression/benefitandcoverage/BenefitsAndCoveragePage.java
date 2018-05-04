@@ -294,10 +294,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(id = "ccs-header")
 	private WebElement catastrophicCoverageStage;
 	
-<<<<<<< HEAD
+
 	@FindBy(css = "img.img-responsive")
 	private WebElement logoImage;
-=======
+
 	@FindBy(xpath = ".//*[@id='drug-benefits']/div[5]/div[10]/div/div[1]/div/div")
 	private WebElement hartfortdrugtable;
 	
@@ -335,7 +335,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	private WebElement specialistValue;
 	
 
->>>>>>> origin/develop
+
 
 	
 	public static final String learnmorestagetext_xpath = ".//*[@id='collapseStages']";
@@ -1405,7 +1405,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		if(copayType.equals("wotCMSValue")){
 		}
 	}
-<<<<<<< HEAD
+
 	
     public void validateImagePresent(String logoToBeDisplayedOnSecondaryPage) {
 		
@@ -1425,8 +1425,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		} else {
 			Assert.assertTrue(true);
 		}
+    }
 
-=======
+
 	public void validatehartfortprescriptiondrugtable() {
 		// TODO Auto-generated method stub
 		try {
@@ -1530,6 +1531,6 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			
 		
 		
->>>>>>> origin/develop
+
 	}
 }
