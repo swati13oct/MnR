@@ -1374,4 +1374,16 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		System.out.println("logo's alt text on secondary page is   "+logo_alt);	
 		Assert.assertTrue(logo_src.contains(logoToBeDisplayedOnSecondaryPage));
 	}
+    
+    public void ancillarynotdisplayed() {
+		if (Headersection.isDisplayed()) {
+			Assert.assertFalse("The element" + Headersection.getText()
+			+ "is not display", false);
+			System.out.println("The element " + Headersection.getText()
+					+ "is not display");
+		} else {
+			Assert.assertTrue(true);
+		}
+
+	}
 }

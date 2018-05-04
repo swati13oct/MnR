@@ -70,7 +70,7 @@ Feature:C1.1 To test plan benefits and Coverage on UMS site
    
      @CMAncillarysection1
     Scenario Outline: Verify Ancilliary section is in place on Benefits and Coverage page
-    Given registered member with following details logins in the member portal 
+    Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>  |
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
@@ -398,7 +398,19 @@ Given registered Redesign member for EOB with following attributes
 	| MAPD          | Group_Non_LIS 			|  -either- coinsurance of 5% of the cost of the drug   |  	  true       |
 	| PDP          | Group_Non_LIS 			|  -either- coinsurance of 5% of the cost of the drug   |  	  false       |
 
-
+@ancillarybenefitnegativescenarioscodemonkeys
+Scenario Outline: Verify ancillary benefits are not displayed other than Group memnbers
+Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>  |
+      | Member Type    | <memberType>|
+      | Copay Category | <copayCategory>|
+    Then the user navigates to Benefits and coverage page
+    Then verify ancillary benefit section is not displayed
+        Examples: 
+       | planType|  memberType  | copayCategory |
+      #| PDP     |  Group       |  NON LIS      |
+       | MAPD    |  Individual  |  NON LIS      |
+      #| MA      |  Group       |  HMO          | 
     
     
 
