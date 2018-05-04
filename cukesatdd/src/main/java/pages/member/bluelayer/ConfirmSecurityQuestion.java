@@ -76,6 +76,7 @@ public class ConfirmSecurityQuestion extends UhcDriver {
 		//formContent.click();
 		WebElement submitbutton = driver.findElement(By.id("continueSubmitButton"));
 		submitbutton.click();
+		Thread.sleep(5000);
 	}
 
 }
