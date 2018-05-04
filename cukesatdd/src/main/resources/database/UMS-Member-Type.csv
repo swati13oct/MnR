@@ -11,8 +11,11 @@ q1_grp_feb261/Password@1,MA,Group,
 q1_grp_feb086/Password@1,MA,NOKIA,
 q1_grp_feb009/Password@1,MAPD,NOKIA,
 q1_aarp_apr125/Password@1,MAPD,Individual,NON LIS
+<<<<<<< HEAD
 q1_apr_uhc003/Password@1,MAPD,UHCIndividual,NON LIS
 q1_aarp_apr125/Password@1,MAPD,AARPIndividual,NON LIS
+=======
+>>>>>>> origin/develop
 q1_aarp_feb170/Password@1,MA,Individual,LIS 1
 q1_feb_uhc022/Password@1,MAPD,Individual,LIS 1 
 q1_feb_uhc022/Password@1,MAPD,Ind,LIS 1
@@ -20,7 +23,11 @@ q1_aarp_feb405/Password@1,PDP,Individual,LIS 4
 q1_aarp_feb267/Password@1,MA,Individual,NON LIS
 q3_sep_grp351/Password@1,SSUP,Group,
 q1_grp_feb271/Password@1,PDP,Group,
+<<<<<<< HEAD
 verahsid0328/Password@1,MAPD,Group,NON LIS
+=======
+q1_grp_feb031/Password@1,MAPD,Group,NON LIS
+>>>>>>> origin/develop
 q1_grp_feb276/Password@1,PDP,Group,NON LIS
 q1_grp_feb259/Password@1,Peehip,Group,
 q1_aarp_feb299/Password@1,PDP,Individual,NON LIS
@@ -101,7 +108,11 @@ ATDD_MAPD_IND_RX_EOB_01/Password@1,MAPD,Individual,rx_Eob
 q3_sep_blayer149/Password@1,MAPD-PHR,Individual,
 ATDD_q2_jun_blayer123/Password@1,MAPD,COSMOS_dce,
 q1_grp_feb261/Password@1,MA,Group,
+<<<<<<< HEAD
 q1_aarp_apr194/Password@1,MAPD,Individual,NON LIS
+=======
+q1_feb_uhc009/Password@1,MAPD,Individual,NON LIS
+>>>>>>> origin/develop
 q1_aarp_feb170/Password@1,MA,Individual,LIS 1
 q1_feb_uhc022/Password@1,MAPD,Individual,LIS 1 
 q1_feb_uhc022/Password@1,MAPD,Ind,LIS 1
@@ -148,6 +159,19 @@ q1_feb_aarpeob004/Password@1,MA,NICE_EOB,
 q1_feb_grpeob002/Password@1,MAPD_GRP,NICE_EOB,
 q1_grp_feb031/Password@1,MAPD,Group,wotCMSValue
 q1_apr_uhc032/Password@1,MAPD,IndividualUHCPayments,
+<<<<<<< HEAD
 shiponly001/Password@1,SHIP,SHIPOnlyBranding,NON LIS
 q1_apr_sfl017942/Password@1,MAPD,Medica,NON LIS
 q1_feb_sfl023_hsid/Password@1,MAPD,PCP,NON LIS
+=======
+q1_aarp_apr194/Password@1,MAPD,IndAARPPharmacyFnR,
+q1_aarp_apr290/Password@1,PDP,IndAARPPharmacyFnR,
+q1_grp_apr026/Password@1,MAPD,GroupPharmacyFnR,
+q1_apr_sfl0190190/Password@1,MAPD,MedicaPharmacyFnR,
+q1_feb_sfl023_hsid/Password@1,MAPD,PCPPharmacyFnR,
+q1_grp_apr226/Password@1,PDP,TexasRxPharmacyFnR,
+q1_apr_uhc032/Password@1,MAPD,IndUHCPharmacyFnR,
+q1_ship_apr006/Password@1,SHIP,IndPharmacyFnR,
+q1_aarp_ma001/Password@1,MA,IndAARPPharmacyFnR,
+q1_uhc_ma001/Password@1,MA,IndUHCPharmacyFnR,
+>>>>>>> origin/develop

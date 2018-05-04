@@ -22,18 +22,31 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+<<<<<<< HEAD
 import pages.dashboard.member.ulayer.ClaimSummarypage;
 
 import pages.member.bluelayer.ProfilePageHsid;
+=======
+import pages.regression.claims.ClaimSummarypage;
+import pages.regression.claims.ClaimDetailsPage;
+import pages.member.bluelayer.BenefitsAndCoveragePage;
+import pages.regression.profileandpreferences.ProfileandPreferencesPage;
+>>>>>>> origin/develop
 import pages.member.bluelayer.ProfilePreferencesPage;
 import pages.member.redesign.ContactUsPage;
 import pages.member.ulayer.OneTimePaymentsPage;
 import pages.redesign.PaymentHistoryPage;
+import pages.regression.formsandresources.FormsAndResourcesPage;
+import pages.regression.pharmacylocator.PharmacySearchPage;
 import pages.member.ulayer.PlanComparePage;
 import pages.member.ulayer.Rallytool_Page;
 import pages.member.ulayer.TestHarness;
+<<<<<<< HEAD
 import pages.redesign.PharmacySearchPage;
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
+=======
+
+>>>>>>> origin/develop
 
 
 public class AccountHomePage extends UhcDriver {
@@ -93,11 +106,8 @@ public class AccountHomePage extends UhcDriver {
 	private WebElement searchClaimsHistory;
 
 	@FindBy(linkText = "Search medical claims")
-	// @FindBy(xpath =
-	// ".//*[@id='_content_campaigns_uhcm_chunkyfooter-activitylinks-main_activitylinks-main_jcr_content_par_teaser']/div/li/a")//(linkText
-	// = "Search medical claims")
 	private WebElement searchMedicalClaims;
-
+	
 	@FindBy(linkText = "Medical Explanation of Benefits (EOB)")
 	private WebElement medicalEobLink;
 
@@ -350,11 +360,16 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='dashboard']//span[text()='View Your Claims']")
 	private WebElement claimsDashboardLink;
 	
+<<<<<<< HEAD
 	//@FindBy(css = "img.primary-logo")
     //private WebElement logoImage;
 	
 	@FindBy(xpath = "//div[@id='white-label']/a/img")
 	private WebElement logoImage;
+=======
+	@FindBy(xpath = "//*[@ng-src='/images/icons/icon-pharmacy-locator.svg']")
+	private WebElement pharmacySearchLink;
+>>>>>>> origin/develop
 	
 	private PageData myAccountHome;
 
@@ -595,7 +610,7 @@ public class AccountHomePage extends UhcDriver {
 
 	}
 
-	public ProfilePageHsid navigateDirectToProfilePageHsid() throws InterruptedException {
+	public ProfileandPreferencesPage navigateDirectToProfilePageHsid() throws InterruptedException {
 		// TODO Auto-generated method stub
 		if (MRScenario.environment.equalsIgnoreCase("stage")) {
 			System.out.println("user is on Stage login page");
@@ -619,7 +634,7 @@ public class AccountHomePage extends UhcDriver {
 
 				if (driver.getTitle().equalsIgnoreCase("Profile")) {
 
-					return new ProfilePageHsid(driver);
+					return new ProfileandPreferencesPage(driver);
 				}
 
 			}
@@ -652,7 +667,7 @@ public class AccountHomePage extends UhcDriver {
 		CommonUtility.waitForPageLoad(driver, heading, 50);
 		if (driver.getTitle().equalsIgnoreCase("Profile")) {
 			System.out.println("here");
-			return new ProfilePageHsid(driver);
+			return new ProfileandPreferencesPage(driver);
 		}
 
 		return null;
@@ -852,7 +867,7 @@ public ContactUsPage navigateToContactUsPage() {
 		
 	}
 	
-public pages.dashboard.member.ulayer.ClaimSummarypage navigateToClaimsSummaryPage() {
+public ClaimSummarypage navigateToClaimsSummaryPage() {
 		
 		if (MRScenario.environmentMedicare.equalsIgnoreCase("team-h") || MRScenario.environmentMedicare.equalsIgnoreCase("test-a") || (MRScenario.environmentMedicare.equalsIgnoreCase("team-t") || MRScenario.environment.equalsIgnoreCase("team-ci1"))) {
 			System.out.println("Go to claims link is present "+driver.findElement(By.xpath("//a[text()='Go to Claims page']")).isDisplayed());
@@ -895,7 +910,7 @@ public pages.dashboard.member.ulayer.ClaimSummarypage navigateToClaimsSummaryPag
 		return new ClaimSummarypage(driver);
 }
 
-public pages.dashboard.member.ulayer.ClaimDetailsPage navigateToClaimDetailsPage() {
+public ClaimDetailsPage navigateToClaimDetailsPage() {
 	CommonUtility.waitForPageLoad(driver, claimstablemoreinfolink, 60);
 	claimstablemoreinfolink.click();
 	CommonUtility.waitForPageLoad(driver, claimDetTableMainSection, 30);
@@ -907,13 +922,62 @@ public pages.dashboard.member.ulayer.ClaimDetailsPage navigateToClaimDetailsPage
 	 */
 	System.out.println(driver.getTitle());
 	if (driver.getTitle().equalsIgnoreCase("claims   ")) {
-		return new pages.dashboard.member.ulayer.ClaimDetailsPage(driver);
+		return new ClaimDetailsPage(driver);
 
 	}
-	return new pages.dashboard.member.ulayer.ClaimDetailsPage(driver);
+	return new ClaimDetailsPage(driver);
 }
 
-public pages.redesign.PharmacySearchPage navigateToRedesignPharmacyLocaterPage() {
+public PharmacySearchPage navigateToRedesignPharmacyLocaterPage() {
+	if (validate(iPerceptionAutoPopUp)) {
+		iPerceptionAutoPopUp.click();
+	} else {
+		System.out.println("iPerception Pop Up not displayed");
+	}
+	if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a") || MRScenario.environmentMedicare.equalsIgnoreCase("test-a") || MRScenario.environment.equalsIgnoreCase("team-ci1")) {
+		System.out.println("Go to Pharmacy locator is present "+ pharmacySearchLink.isDisplayed());
+		pharmacySearchLink.click();			
+	}
+	else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {	
+		if(driver.getCurrentUrl().contains("/dashboard"));
+		{
+			System.out.println("User is on dashboard page and URL is ====>"+driver.getCurrentUrl());
+			pharmacySearchLink.click();
+			try {
+				Thread.sleep(10000);	
+				
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+			
+	}
+	return new PharmacySearchPage(driver);
+}
+
+		/**
+		 * @return the pharmacySearchLink
+		 */
+		public boolean checkPharmacyLinkNotAvailable() {
+			try {
+				if(pharmacySearchLink.isDisplayed()) {
+				System.out.println("Pharmacy link is present");
+				return false;
+				}
+				else {
+				
+			}
+			}
+			catch(Exception e) {
+				System.out.println("Pharmacy link is not present");
+				return true;
+			}
+			return false;
+		}
+
+// to navigate to forms and resources page
+public pages.regression.formsandresources.FormsAndResourcesPage navigatetoFormsnResources() {
 	
 	if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a") || MRScenario.environmentMedicare.equalsIgnoreCase("test-a") || MRScenario.environment.equalsIgnoreCase("team-ci1")) {
 		System.out.println("Go to claims link is present "+driver.findElement(By.xpath("//a[text()='Go to Pharmacy Locator page']")).isDisplayed());
@@ -953,6 +1017,6 @@ public pages.redesign.PharmacySearchPage navigateToRedesignPharmacyLocaterPage()
 		}	
 
 }*/
-	return new PharmacySearchPage(driver);
+	return new FormsAndResourcesPage(driver);
 }
 }

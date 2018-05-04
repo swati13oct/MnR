@@ -25,9 +25,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import pages.member.bluelayer.*;
+
 import pages.regression.payments.PaymentHistoryPage;
-import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import pages.regression.profileandpreferences.ProfileandPreferencesPage;import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -221,6 +221,9 @@ public class AccountHomePage extends UhcDriver {
 
         @FindBy(xpath="//*[@id='IPEinvL']/map/area[3]")
         private WebElement closebtn;
+        
+        @FindBy(xpath="html/body/div[2]/div/div[4]/div[2]/div/table/tbody/tr[4]/td[2]/a")
+        private WebElement benfitscoveragelink;
         
 @FindBy(xpath="//a[contains(text(),'Provider search')]")
 private WebElement providerSearchinPanelNavigation;
@@ -432,7 +435,7 @@ private WebElement searchforproviderlinkinClaimsPage;
     	}
 
         
-        public ProfilePreferencesPage navigateDirectToProfilePage() throws InterruptedException  {
+        public ProfileandPreferencesPage navigateDirectToProfilePage() throws InterruptedException  {
     		
         	if (MRScenario.environment.equalsIgnoreCase("stage")) 
         	{
@@ -458,7 +461,7 @@ private WebElement searchforproviderlinkinClaimsPage;
 
     				if (driver.getTitle().equalsIgnoreCase("Profile")) {
 
-    					return new ProfilePreferencesPage(driver);
+    					return new ProfileandPreferencesPage(driver);
     				}
     			
         	}
@@ -484,7 +487,7 @@ private WebElement searchforproviderlinkinClaimsPage;
     		CommonUtility.waitForPageLoad(driver, heading, 50);
     		if(driver.getTitle().equalsIgnoreCase("Profile"))
     		{
-    			return new ProfilePreferencesPage(driver);
+    			return new ProfileandPreferencesPage(driver);
     		}
     		
     		return null;
@@ -1126,7 +1129,7 @@ public void FormsandResourcesLinkinPlanSummaryPageBlayer()
 
     		}
 
-    				public ProfilePageHsid navigateDirectToProfilePageHsid() throws InterruptedException {
+    				public ProfileandPreferencesPage navigateDirectToProfilePageHsid() throws InterruptedException {
     					// TODO Auto-generated method stub
     					if (MRScenario.environment.equalsIgnoreCase("stage")) 
     		        	{
@@ -1151,7 +1154,7 @@ public void FormsandResourcesLinkinPlanSummaryPageBlayer()
 
     		    				if (driver.getTitle().equalsIgnoreCase("Profile")) {
 
-    		    					return new ProfilePageHsid(driver);
+    		    					return new ProfileandPreferencesPage(driver);
     		    				}
     		    			
     		        	}
@@ -1166,6 +1169,7 @@ public void FormsandResourcesLinkinPlanSummaryPageBlayer()
 
     					
     					if (MRScenario.environment.equals("team-ci1") || MRScenario.environment.equals("team-h") || MRScenario.environment.equals("test-a") || MRScenario.environment.equals("team-e")) {
+    						Thread.sleep(10000);
     						WebElement element = driver.findElement(By.xpath("//a[contains(.,'profile page')]"));
     						validateNew(element);
     						element.click();
@@ -1185,7 +1189,7 @@ public void FormsandResourcesLinkinPlanSummaryPageBlayer()
     		    		if(driver.getTitle().equalsIgnoreCase("Profile"))
     		    		{
     		    			System.out.println("here");
-    		    			return new ProfilePageHsid(driver);
+    		    			return new ProfileandPreferencesPage(driver);
     		    		}
     		    
     					return null;
@@ -1198,9 +1202,7 @@ public void FormsandResourcesLinkinPlanSummaryPageBlayer()
      Assert.assertTrue(title.contains("UnitedHealthcare"));
     			     
    	}	
-     
-     
-     public AccountHomePage navigateToAutoPaymentHistoryPage() throws InterruptedException
+public AccountHomePage navigateToAutoPaymentHistoryPage() throws InterruptedException
 	 {
 
 	 	    	/*WebDriverWait wait = new WebDriverWait(driver, 30);
@@ -1254,6 +1256,81 @@ public void FormsandResourcesLinkinPlanSummaryPageBlayer()
 			return null;
 			}
 	 }
+     public BenefitsAndCoveragePage navigateDirectToBnC() throws InterruptedException {
+			// TODO Auto-generated method stub
+			if (MRScenario.environment.equalsIgnoreCase("stage")) 
+     	{
+ 			System.out.println("user is on Stage login page");			
+ 			//CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);			
+ 			if(driver.getCurrentUrl().contains("/dashboard"));
+ 			{
+ 				
+ 				accountToggleDropdown.click();
+ 				validate(accountSettingOption);
+ 				accountSettingOption.click();
+ 				try {
+ 					Thread.sleep(3000);
+ 				} catch (InterruptedException e) {
+ 					// TODO Auto generated catch block
+ 					e.printStackTrace();
+ 				}
+ 				System.out.println("title is "+driver.getTitle());
+ 				System.out.println("Current Url is "+driver.getCurrentUrl());
+ 				CommonUtility.waitForPageLoad(driver, heading, 50);
+ 			
+
+ 				if (driver.getTitle().equalsIgnoreCase("Profile")) {
+
+ 					return new BenefitsAndCoveragePage(driver);
+ 				}
+ 				
+ 				
+ 			
+     	}
+     	}
+     	
+     	
+			Thread.sleep(5000);
+ 		if (iPerceptionPopUp.size()>0) {
+             iPerceptionPopUp.get(0).click();
+             System.out.println("iPerception Pop Up displayed");
+ 		}
+
+			
+			if (MRScenario.environment.equals("team-ci1") || MRScenario.environment.equals("team-h") || MRScenario.environment.equals("test-a") || MRScenario.environment.equals("team-e")) {
+				try {
+					Thread.sleep(10000);
+				} catch (InterruptedException e) {
+					// TODO Auto generated catch block
+					e.printStackTrace();
+				}
+				WebElement element = driver.findElement(By.xpath("//a[contains(.,'benefits and coverage page')]"));
+				validateNew(element);
+				element.click();
+				
+				//benfitscoveragelink.click();
+				/*accountToggleDropdown1.click();
+				validate(accountSettingOption1);
+				accountSettingOption1.click();*/
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					// TODO Auto generated catch block
+					e.printStackTrace();
+				}
+ 		}else{
+ 			benfitscoveragelink.click();
+ 		}
+ 		CommonUtility.waitForPageLoad(driver, heading, 50);
+ 		if(driver.getTitle().equalsIgnoreCase("Profile"))
+ 		{
+ 			System.out.println("here");
+ 			return new BenefitsAndCoveragePage(driver);
+ 		}
+ 
+			return new BenefitsAndCoveragePage(driver);
+		
+}
     			    
 }
 
