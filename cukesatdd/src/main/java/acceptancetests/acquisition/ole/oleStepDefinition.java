@@ -290,7 +290,7 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 		}
 	}
 
-	@Then("^the user validates TFN in Right Rail$")
+	@Then("^the user validates TFN in Welcome OLE Right Rail$")
 	public void the_user_validates_TFN_in_Right_Rail() throws Throwable {
 		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
 		String TFN = (String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN);
@@ -480,6 +480,22 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 		}
 		else
 			Assert.fail("OLE Personal Information Page is NOT Displayed");
+	}
+
+	@Then("^the user validates TFN in Right Rail on Medicare Insurance Page$")
+	public void the_user_validates_TFN_in_Right_Rail_Medicare_Info_page() throws Throwable {
+		MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+		String TFN = (String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN);
+		boolean Validation_Status = medicareInfoPage.ValidateTFNMedicareInfo(TFN);
+		if(Validation_Status){
+			System.out.println("TFN, Wunderman Validation in OLE PAGE : "+Validation_Status+" - Validation Passed");
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE, medicareInfoPage);
+			Assert.assertTrue(true);
+		}
+		else{
+			System.out.println("TFN, Wunderman Validation in OLE PAGE : "+Validation_Status);
+			Assert.fail();
+		}
 	}
 
 }

@@ -35,7 +35,7 @@ And the user validates the available plans for selected plan types in the AARP s
 Then the user clicks on Enroll Now for AARP site to start the OLE flow
 	| Plan Name | <planName> |
 Then the user validates the Plan details on OLE 
-Then the user validates TFN in Right Rail
+Then the user validates TFN in Welcome OLE Right Rail
 Then the user validates Learn more modal for OLE
 Then the user validates Leave OLE modal for OLE
 Then the user validates cancellation modal for OLE
@@ -50,14 +50,14 @@ Then the user enters following required Medicare Information
 | PartA Date | <partadate> |
 | PartB Date | <partbdate> |
 | Card Type | <cardtype> |
-
+Then the user validates TFN in Right Rail on Medicare Insurance Page
 Then the user navigates to Preliminary Questions Page
 
 	
 Examples:
 | zipcode | county             | plantype | planName                                       | cardtype  | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate |
 | 90210   | Los Angeles County | MA	  | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | HICN			 |  John		 |	Doe			|	123456789a		 | false		 | 01012010	 | 01012010	 |
-| 90210		| Los Angeles County | PDP  | AARP MedicareRx Walgreens (PDP) 									 |	MBI 		 |  John		 |	Doe			|	2A22C22YK22		 | false		 | 01012010	 | 01012010	 |
+#| 90210		| Los Angeles County | PDP  | AARP MedicareRx Walgreens (PDP) 									 |	MBI 		 |  John		 |	Doe			|	2A22C22YK22		 | false		 | 01012010	 | 01012010	 |
 #| 28036 	| Mecklenburg County | SNP  | AARP MedicareRx Walgreens (PDP) 									 | HICN	 		 |  John		 |	Doe			|	123456789a		 | true		 | 01012010	 | 01012010	 |
 
 @OLE_PlanDetails_Aarp

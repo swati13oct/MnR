@@ -87,6 +87,11 @@ public class MedicareInformationPage extends UhcDriver{
 	@FindBy(id = "partBdate")
 	private WebElement partBStartDateField;
 	
+	//Right Rail Elements
+	
+		@FindBy(id = "tty-number")
+		private WebElement RightRailTFN;
+	
 	public MedicareInformationPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -203,6 +208,27 @@ public class MedicareInformationPage extends UhcDriver{
 		}
 		return null;
 	}
+
+
+
+public boolean ValidateTFNMedicareInfo(String MedicaretFN) {
+	if(validate(RightRailTFN)){
+		String TFN_OLE = RightRailTFN.getText();
+		if(TFN_OLE.contains(MedicaretFN)){
+			System.out.println("TFN is validated in Medicare Insurance info Page"+MedicaretFN);
+			return true;
+		}
+		else{
+			System.out.println("TFN does not match");
+			System.out.println("TFN in VPP page : "+MedicaretFN);
+			System.out.println("TFN in Medicare Info Right Rail : "+TFN_OLE);
+			return false;
+		}
+	}
+	System.out.println("TFN not displayed in OLE right rail");
+	return false;
+}
+
 
 
 }
