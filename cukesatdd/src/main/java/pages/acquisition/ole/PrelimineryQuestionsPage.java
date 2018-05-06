@@ -72,6 +72,11 @@ public class PrelimineryQuestionsPage extends UhcDriver{
 	
 	@FindBy(xpath = "//*[@id='esrd-msg-block']//p']")
 	private WebElement ESRD_ErrorMessage;
+	
+	//Right Rail Elements
+	
+			@FindBy(id = "tty-number")
+			private WebElement RightRailTFN;
 
 	
 	public PrelimineryQuestionsPage(WebDriver driver) {
@@ -103,5 +108,22 @@ public class PrelimineryQuestionsPage extends UhcDriver{
 		return null;
 	}
 	
+	public boolean ValidateTFNPrelimQues(String PrelimQuesTFN) {
+		if(validate(RightRailTFN)){
+			String TFN_OLE = RightRailTFN.getText();
+			if(TFN_OLE.contains(PrelimQuesTFN)){
+				System.out.println("TFN is validated in Medicare Insurance info Page"+PrelimQuesTFN);
+				return true;
+			}
+			else{
+				System.out.println("TFN does not match");
+				System.out.println("TFN in VPP page : "+PrelimQuesTFN);
+				System.out.println("TFN in Medicare Info Right Rail : "+TFN_OLE);
+				return false;
+			}
+		}
+		System.out.println("TFN not displayed in OLE right rail");
+		return false;
+	}
 
 }

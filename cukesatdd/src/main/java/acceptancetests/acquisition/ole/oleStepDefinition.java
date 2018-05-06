@@ -497,5 +497,21 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 			Assert.fail();
 		}
 	}
+	
+	@Then("^the user validates TFN in Right Rail on Preliminary Questions Page$")
+	public void the_user_validates_TFN_in_Right_Rail_Prelim_Questions_page() throws Throwable {
+		PrelimineryQuestionsPage prelimineryQuestionsPage = (PrelimineryQuestionsPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE);
+		String TFN = (String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN);
+		boolean Validation_Status = prelimineryQuestionsPage.ValidateTFNPrelimQues(TFN);
+		if(Validation_Status){
+			System.out.println("TFN, Wunderman Validation in OLE PAGE : "+Validation_Status+" - Validation Passed");
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE, prelimineryQuestionsPage);
+			Assert.assertTrue(true);
+		}
+		else{
+			System.out.println("TFN, Wunderman Validation in OLE PAGE : "+Validation_Status);
+			Assert.fail();
+		}
+	}
 
 }

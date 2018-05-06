@@ -52,7 +52,7 @@ Then the user enters following required Medicare Information
 | Card Type | <cardtype> |
 Then the user validates TFN in Right Rail on Medicare Insurance Page
 Then the user navigates to Preliminary Questions Page
-
+Then the user validates TFN in Right Rail on Preliminary Questions Page
 	
 Examples:
 | zipcode | county             | plantype | planName                                       | cardtype  | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate |
