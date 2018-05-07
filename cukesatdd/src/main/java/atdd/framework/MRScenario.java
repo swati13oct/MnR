@@ -89,9 +89,9 @@ public class MRScenario {
                public static int count = 0;
 
                
-               public static final String USERNAME = "njain112";
+               public static final String USERNAME = "ucpadmin";
 
-               public static final String ACCESS_KEY ="13284fe0-5132-4a64-8558-1ddfa10b32e8";
+               public static final String ACCESS_KEY ="2817affd-616e-4c96-819e-4583348d7b37";
                
 
                //public static final String USERNAME = System.getenv("SAUCE_USERNAME");
@@ -904,7 +904,7 @@ public class MRScenario {
                                 // TODO Auto-generated catch block
                               e.printStackTrace();
                }
-            	
+              
             	
                
                return webDriver;
