@@ -1,7 +1,7 @@
 /**
  * 
  */
-package pages.redesign;
+package pages.regression.pharmacylocator;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;

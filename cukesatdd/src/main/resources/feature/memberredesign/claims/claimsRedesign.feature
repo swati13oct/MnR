@@ -19,9 +19,8 @@ Feature:T1.1To validate the new changes related to claims page on the member red
     Examples: 
       | planType | claimPeriod    | domain | claimssystem |
       #| MAPD     | Last 24 months | COSMOS | COSMOSCLAIMS |
-      | MA        | Last 24 months | NICE   | NiceClaims   |
+      | MA        | Last 24 months | NICE   | NICECLAIMS   |
       #| PDP      | Last 24 months | RX     | RXCLAIMS     |
-
   @claimsSummarySHIP @theTransformers
   Scenario Outline: To validate the claims present for the SHIP member on claims sumamry page for AARP site
     Given I am an Individual or Group member on the redesigned site

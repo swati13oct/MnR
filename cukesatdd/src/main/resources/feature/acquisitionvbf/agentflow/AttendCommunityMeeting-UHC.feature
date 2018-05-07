@@ -1,3 +1,4 @@
+@BAT_CommunityMeetings
 @attendCommunity
 @fixedTestCaseTest
 Feature:1.14-VBF-Acq-To test attend community meeting flow in UHC site

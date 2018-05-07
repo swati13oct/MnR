@@ -134,6 +134,16 @@ public class NewLoginPage extends UhcDriver {
 		}
 	}
 	
+    public void navigateToNewDashboardUrls(){
+        if (MRScenario.environmentMedicare.equalsIgnoreCase("stage"))
+        {
+               start(PAGE_URL);
+               System.out.println("User is Navigating to Stage Dashboard");
+        }
+       
+}
+
+
 	
     /**
      * Navigate to registration page

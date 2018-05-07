@@ -4,7 +4,8 @@ Feature:I1.3Header/Navigation for Member Site Redesign
 
 @member_redesign_header @IncrediblesHeader
 Scenario Outline:As an authenticated member on the new Member site, I want to check the L1 and L2 tabs and its navigation.
-Given I am a authenticated member on the member redesign site Header
+Scenario Outline:Verify HSID login functionality.
+  Given login with following details logins in the member portal and validate elements
 | Plan Type   | <planType>   |
 | Member Type	  | <memberType> |
 When the above plantype user logs in UMS Site Desktop Header

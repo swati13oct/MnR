@@ -25,7 +25,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
-import pages.member.bluelayer.AccountHomePage;
+
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.member.bluelayer.LoginPage2;
 
@@ -33,7 +33,7 @@ import pages.member.ulayer.ValueAddedServicepage;
 import pages.redesign.BenefitsCoveragePage;
 import pages.redesign.RedesignLoginPage;
 import pages.redesign.UlayerHomePage;
-
+import pages.regression.accounthomepage.AccountHomePage;
 /**
  * Functionality: Benefits and Coverage page
  */
@@ -976,6 +976,15 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		}
 
  	}
+
+@Then("^verify ancillary benefit section is not displayed$")
+ 	
+ 	public void ancillary_not_displayed() {
+ 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.ancillarynotdisplayed();
+ 	}
+
  	
  	/**
 	 * @toDo : The user logs in to the member Redesign Portal
@@ -1076,10 +1085,9 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	public void the_user_navigates_to_Redesign_BandC_page() throws InterruptedException{
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		BenefitsAndCoveragePage planBenefitsCoverage = accountHomePage.navigateDirectToBnC();
-		getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE,
-				planBenefitsCoverage);
-		/*if (planBenefitsCoverage != null) {
+		BenefitsAndCoveragePage planBenefitsCoverage = accountHomePage.navigateDirectToBnCPag();
+		//getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE,planBenefitsCoverage);
+		if (planBenefitsCoverage != null) {
 			System.out.println("BNC page Loaded");
 			getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE,
 					planBenefitsCoverage);
@@ -1087,7 +1095,8 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		}
 		else {
 			Assert.fail("Error in loading  BNC Page");
-		}*/
+		}
+
 
 	}
 	
@@ -1116,6 +1125,43 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		planBenefitsCoverage.validateTownOfGreenwichdrugtable();
 						
 	}
+	
+	
+	
+	@And("the user validates the Drug costs Section")
+	public void user_validate_drugCostSectionTexas() {
+				
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.validatedrugCostSectionTexas();
+						
+	}
+	@And("the user verifies the Retail Cost sharing table")
+	public void user_validate_RetailCostSharing_Drugtable() {
+				
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.validateRetailCostSharingdrugtable();
+						
+	}
+	@And("the user verifies the Mail Order Cost sharing table")
+	public void user_validate_MailOrderCostSharing_Drugtable() {
+				
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.validateMailOrderCostSharing_Drugtable();
+						
+	}
+	
+	@And("the user validates the Office Visits section")
+	public void user_validate_OfficeVisitssection() {
+				
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.validateOfficeVisitssection();
+						
+	}
+
 	
 	
 }
