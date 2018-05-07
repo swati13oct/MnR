@@ -1,0 +1,133 @@
+@fixedTestCaseTest
+@eob
+Feature:1.22-VBF-Member-To test EOB flows under forms and resources in UMS site
+@medEOBblayer
+Scenario Outline:To verify Medical EOB for forms and resources flow in UMS site
+Given registered UMS with following details for EOB flow
+	| Plan Type    | <plantype>   |
+	| Member Type  | <memberType> |
+	| Eob Type     | <eobType>    |
+When the user views forms and resources in UMS site
+And the user clicks My Medical Explanation of Benefits link in forms and resources page in UMS site
+Then the user searches EOB history for the date range in UMS site and validates
+	| Date Range  | <dateRange> |
+Examples:
+	| plantype | memberType   | eobType | dateRange      |
+	| MAPD       |Individual  | Med_EOB | Last 18 Months |
+
+
+@rxEOB_blayer
+Scenario Outline:To verify Prescription Drug EOB for forms and resources flow in UMS site
+Given registered UMS with following details for EOB flow
+	| Plan Type    | <plantype>   |
+	| Member Type  | <memberType> |
+	| Eob Type     | <eobType>    |
+When the user views forms and resources in UMS site
+And the user clicks My Prescription Drug Explanation of Benefits link in forms and resources page in UMS site
+And the user searches prescription drug EOB history for the following interval in UMS site and validates
+	| From Date | <fromDate> |
+	| To Date   | <toDate> |
+Examples:
+	| plantype | memberType | eobType | fromDate   | toDate     |
+	| MAPD     |Individual | rx_Eob | 12-03-2016 | 06-06-2017 |   
+
+@enrollmentUHC
+Scenario Outline: Verify enroll in plan in UHC site for federal plan type member  
+Given the user is on the UHC medicare solutions landing page
+When user performs plan search using following information in UHC site
+        | Zip Code    | <zipcode> |
+        | County Name | <countyName>  |
+And the user views plans of the below plan type in UHC site
+        | Plan Type | <planType> |
+And the user enrolls for the below plan in UHC site
+        | <planName> |
+And the user select the answer of this question Do you have End-Stage Renal Disease in UHC site
+        |<answer>|
+And the user navigates to Benefit information step in UHC site
+And the user fill following information in beneficiary information step in UHC site
+     | First Name                        | <firstName>                    |
+     | Middle Initial                    | <middleInitial>            |
+     | Last Name                         | <lastName>                    |
+     | Birth Date                        | <birthDate>                    |
+     | Gender                            | <selectedGender>            |
+     | Medicare Claim Number             | <medicareClaimNumber>    |  
+     | Hospital (Part A) Effective Date  | <hospitalEffectiveDate>  |
+     | Medical (Part B) Effective Date   | <medicalEffectiveDate>   |
+     | Address                           | <address>                    |  
+     | Apartment                         | <apartment>                    |
+     | City                              | <city>                    |
+     | Same Mailing Address                 | Yes                            |
+     | Main Phone Number                 | <mainPhoneNumber>            |  
+     | Other Phone Number                 | <otherPhoneNumber>            |
+     | Email Address                         | <emailAddress>            |
+     | Confirm Email Address                 | <confirmEmailAddress>    |
+     | Language Preference                 | <languagePreference>     |
+And the user navigates to Additional Information step in UHC site
+And the user reviews the personal and plan data by navigating to Review application step in UHC site
+And the user navigates to submit application step in UHC site
+And the user selects "I am the applicant listed on this enrollment application" for the question "What is your relationship to the applicant listed on this enrollment application" in UHC site
+And the user submits application by selecting agree to the Statement of Understanding in UHC site
+Then the user validates the enrollment application confirmation in UHC site
+    
+  Examples:
+  |zipcode |countyName   | planType   | planName                                           |answer|firstName|middleInitial|lastName|birthDate  |selectedGender        | medicareClaimNumber|hospitalEffectiveDate        |medicalEffectiveDate        |address    |  city          | apartment |mainPhoneNumber |otherPhoneNumber| emailAddress   | confirmEmailAddress | languagePreference |
+  |90210   |Los Angeles County | MA         |AARP MedicareComplete SecureHorizons Essential (HMO)|No    | First   |  m          |  last  |01/01/1940 |  Male                | 111-11-1111-A      |07/01/1988                   |07/01/1988                  |1234            | Colorado    | UHG       |9999911111      |1111199999      | test@uhc.com   | test@uhc.com        |  English           |
+
+@enrollUHCElectionPeriod
+Scenario Outline: Verify enroll in plan  in UHC site for federal plan type member by opting yes for special election period
+Given the user is on the UHC medicare solutions landing page
+When user performs plan search using following information in UHC site
+        | Zip Code    | <zipcode> |
+        | County Name | <countyName>  |
+And the user views plans of the below plan type in UHC site
+        | Plan Type | <planType> |
+And the user enrolls for the below plan in UHC site
+        | <planName> |
+And the user select the answer of this question Do you have End-Stage Renal Disease in UHC site
+        |<answer>|
+And the user navigates to Benefit information step in UHC site
+And the user fill following information in beneficiary information step in UHC site
+     | First Name                        | <firstName>                    |
+     | Middle Initial                    | <middleInitial>            |
+     | Last Name                         | <lastName>                    |
+     | Birth Date                        | <birthDate>                    |
+     | Gender                            | <selectedGender>            |
+     | Medicare Claim Number             | <medicareClaimNumber>    |  
+     | Hospital (Part A) Effective Date  | <hospitalEffectiveDate>  |
+     | Medical (Part B) Effective Date   | <medicalEffectiveDate>   |
+     | Address                           | <address>                    |  
+     | Apartment                         | <apartment>                    |
+     | City                              | <city>                    |
+     | Same Mailing Address                 | Yes                            |
+     | Main Phone Number                 | <mainPhoneNumber>            |  
+     | Other Phone Number                 | <otherPhoneNumber>            |
+     | Email Address                         | <emailAddress>            |
+     | Confirm Email Address                 | <confirmEmailAddress>    |
+     | Language Preference                 | <languagePreference>     |
+  And the user navigates to Additional Information step in UHC site
+  And the user select the answer for special election period in Additional Information
+     |<answerForElectionPeriod>|
+  And the user select the answer for prescription drug coverage in Additional Information
+     |answerPrescriptionSelected|   
+  And the user select the answer for long-term care facility question in Additional Information
+     |<answerLongTermCareFacilitySelected>| 
+  And the user select the answer for medicaid program question in Additional Information
+     |<answerStateMedicaidSelected>|
+  And the user select the answer for other health insurance question in Additional Information
+     |<answerOtherHealthInsurance>|   
+    And the user select option for plan payment options
+     |<planPaymentOptionSelected>|     
+  And the user fill broker id 
+     |<brokerId>|  
+  And the user reviews the personal and plan data by navigating to Review application step in UHC site
+ And the user navigates to submit application step in UHC site
+ And the user selects "I am the applicant listed on this enrollment application" for the question "What is your relationship to the applicant listed on this enrollment application" in UHC site
+ And the user submits application by selecting agree to the Statement of Understanding in UHC site
+ Then the user validates the enrollment application confirmation in UHC site
+ 
+  Examples:
+            |zipcode |countyName   | planType   | planName                                           |answer|firstName|middleInitial|lastName|birthDate  |selectedGender        | medicareClaimNumber|hospitalEffectiveDate        |medicalEffectiveDate        |address    |  city          | apartment |mainPhoneNumber |otherPhoneNumber| emailAddress   | confirmEmailAddress | languagePreference |answerForElectionPeriod|answerPrescriptionSelected|answerLongTermCareFacilitySelected|answerStateMedicaidSelected|answerOtherHealthInsurance|answerRiderSelected|planPaymentOptionSelected|brokerId|           
+            |90210   |Los Angeles County | MAPD       |AARP MedicareComplete SecureHorizons Plan 2 (HMO)   |No    |  First  |  m          |  last  |01/01/1940 |  Male                | 111-11-1111-A      |07/01/1988                   |07/01/1988          	    |1234     	| Colorado       | UHG       |9999911111      |1111199999      | test@uhc.com   | test@uhc.com        |  English           |Yes					   |	Yes				   	  |			No						 |		Yes					 |    No                    |    No             |    Yes                  |brok1234|
+    
+    
+	

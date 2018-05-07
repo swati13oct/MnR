@@ -1,0 +1,108 @@
+<html>
+<head><style type="text/css">h1 {background-color:#9999CC}
+h2 {background-color:#BBBBCC}
+h3 {background-color:#DDDDFF}
+th {border:1px solid black;background-color:#CCCCDD;}
+td{border:1px solid black;}
+table {border:1px solid black;border-collapse: collapse;}
+.chart {border:0px none black;border-collapse: collapse;background-color: none;}
+.passed {background-color:lightgreen;font-weight:bold;color:darkgreen}
+.failed {background-color:tomato;font-weight:bold;color:darkred}
+.undefined {background-color:gold;font-weight:bold;color:goldenrod}
+.skipped {background-color:silver;font-weight:bold;color:darkgray}
+.known {background-color:goldenrod;font-weight:bold;color:darkred}
+.passed_description {background-color:#D0FFD0;font-weight:bold;font-style:italic;color:black}
+.failed_description {background-color:#FFA898;font-weight:bold;font-style:italic;color:black}
+.comment {font-family:courier;font-weight:normal;font-size:small;color:black;border:1px dashed black;background-color:silver}
+.tip {font-family:courier;font-weight:normal;font-size:small;color:white;background-color:black}
+OL { counter-reset: item }
+OL>LI { display: block }
+OL>LI:before { content: counters(item, ".") " "; counter-increment: item }
+
+div.header {
+    display: block; text-align: center;
+    position: running(header);
+}
+div.footer {
+    display: block; text-align: center;
+    position: running(footer);
+}
+div.content {page-break-after: always;}
+@page {
+	 size: auto;
+     @top-center {
+     	content: "Detailed Results Report";
+	    color: silver;
+	    font-size: 14px;
+     }
+     @top-right {
+     	content: date("dd MMM, yyyy hh:mm");
+	    color: silver;
+	    font-size: 8px;
+     }
+    @bottom-right {
+    	content: "Page " counter(page) " of " counter(pages) ;
+	    color: silver;
+	    font-size: 8px;
+    }
+}
+ol a::after {
+  content: leader('.') target-counter(attr(href), page);
+}
+</style>
+<title>Detailed Results Report</title>
+  </head>
+  <body>
+    <div class='header'></div>
+    <div class='footer'></div>
+  <h1>Overview</h1>
+<table><tr><th></th><th>Passed</th><th>Failed</th><th>Known</th><th>Undefined</th><th>%Passed</th></tr><tr><th>Features</th><td class="passed" id="features_passed">0</td><td class="failed" id="features_failed">1</td><td class="known" id="features_known">0</td><td class="undefined" id="features_undefined">0</td><td id="features_rate">0.00</td></tr><tr><th>Scenarios</th><td class="passed" id="scenarios_passed">0</td><td class="failed" id="scenarios_failed">1</td><td class="known" id="scenarios_known">0</td><td class="undefined" id="scenarios_undefined">0</td><td id="scenarios_rate">0.00</td></tr><tr><th>Steps</th><td class="passed" id="steps_passed">5</td><td class="failed" id="steps_failed">1</td><td class="known" id="steps_known">0</td><td class="undefined" id="steps_undefined">9</td><td id="steps_rate">33.33</td></tr></table><div><b>Overall Duration: 0h 02m 01s</b></div>
+<a id="top"></a><h1>Table of Contents</h1><ol><li> <span class="failed"><a href="#feature-2c1.2to-test-profile-and-preferences-page-.">C1.2To test Profile and Preferences page .</a></span><ol><li> <span class="failed"><a href="#sc-296-c1.2to-test-profile-and-preferences-page-.;to-test-end-to-end-regression-scenario-for-account-profile-page;;2">To test end to end regression scenario for account profile page</a></span></li></ol></li></ol><h1>Detailed Results Report</h1><table width="700px"><tr class="failed"><td colspan="4"><b>Feature:</b> <a id="feature-2c1.2to-test-profile-and-preferences-page-.">C1.2To test Profile and Preferences page .</a></td></tr><tr class="failed"><td><small><b>Passed:</b> 0</small></td><td><small><b>Failed:</b> 1</small></td><td><small><b>Undefined:</b> 0</small></td><td><small>Duration: 121.03s</small></td></tr><tr class="failed"><td colspan="4" style="padding-left:20px"> <table width="100%"><tr class="failed"><td colspan="4"><b>Scenario Outline:</b> <a id="sc-296-c1.2to-test-profile-and-preferences-page-.;to-test-end-to-end-regression-scenario-for-account-profile-page;;2">To test end to end regression scenario for account profile page</a></td></tr><tr class="failed"><td><small><b>Passed:</b> 5</small></td><td><small><b>Failed:</b> 1</small></td><td><small><b>Undefined:</b> 9</small></td><td><small>Duration: 121.03s</small></td></tr><tr class="passed"><td>Before</td><td colspan="2"></td><td width="100">0.01s</td></tr><tr class="passed"><td colspan="4"></td></tr><tr class="failed"><td colspan="4" style="padding-left:20px"> <table width="100%"><tr class="passed"><td><b>Given </b> login with following details logins in the member portal and validate elements</td><td width="100">90.08s</td></tr><tr class="passed"><td style="padding-left:20px" colspan="2"><table><tr><td>User Type</td><td>UHC</td></tr></table></td></tr><tr class="passed"><td><b>When </b> the user navigates to Profile and Preferences page</td><td width="100">6.14s</td></tr><tr class="passed"><td><b>And </b> I click the HEALTHSAFE ID PASSWORD link and validate username and password</td><td width="100">14.40s</td></tr><tr class="passed"><td><b>Then </b> I should see the breadcrumb  in the upper left side of the page</td><td width="100">0.29s</td></tr><tr class="passed"><td><b>And </b> clicking the link should lead me back to the Account Settings page of the member site</td><td width="100">9.44s</td></tr><tr class="failed"><td><b>And </b> the user validates the Phone section</td><td width="100">0.67s</td></tr><tr class="failed"><td colspan="2"><div><br>org.openqa.selenium.NoSuchElementException: Unable to locate element: {&quot;method&quot;:&quot;id&quot;,&quot;selector&quot;:&quot;phoneCardHeight&quot;}
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.53.1', revision: 'a36b8b1', time: '2016-06-30 17:37:03'
+System info: host: 'WIN-R1JBAO1CNPS', ip: '172.20.116.84', os.name: 'Windows Server 2008 R2', os.arch: 'x86', os.version: '6.1', java.version: '1.8.0_91'
+Driver info: driver.version: unknown
+Command duration or timeout: 308 milliseconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.53.0', revision: '35ae25b1534ae328c771e0856c93e187490ca824', time: '2016-03-15 10:43:46'
+System info: host: 'LH7U0CND7075S37', ip: '10.137.94.11', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_131'
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Capabilities [{applicationCacheEnabled=true, rotatable=false, hasMetadata=true, databaseEnabled=true, handlesAlerts=true, version=45.0, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webdriver.remote.sessionid=42080882d8794787b3ecac8e44d26416, locationContextEnabled=true, webStorageEnabled=true, takesScreenshot=true, browserName=firefox, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: 42080882d8794787b3ecac8e44d26416
+*** Element info: {Using=id, value=phoneCardHeight}</br><br>
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)</br><br>
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)</br><br>
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)</br><br>
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)</br><br>
+	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:206)</br><br>
+	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:158)</br><br>
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:678)</br><br>
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:363)</br><br>
+	at org.openqa.selenium.remote.RemoteWebDriver.findElementById(RemoteWebDriver.java:413)</br><br>
+	at org.openqa.selenium.By&#36;ById.findElement(By.java:218)</br><br>
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:355)</br><br>
+	at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:69)</br><br>
+	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)</br><br>
+	at com.sun.proxy.&#36;Proxy23.getText(Unknown Source)</br><br>
+	at atdd.framework.UhcDriver.scrollToView(UhcDriver.java:415)</br><br>
+	at atdd.framework.UhcDriver.validateNew(UhcDriver.java:499)</br><br>
+	at pages.regression.profileandpreferences.ProfileandPreferencesPage.validatePhoneElements(ProfileandPreferencesPage.java:865)</br><br>
+	at acceptancetests.memberredesign.Profileandpreferences.ProfileandPreferencesUMSStepDefinition.UserValidatesPhoneSection(ProfileandPreferencesUMSStepDefinition.java:489)</br><br>
+	at &#10045;.And the user validates the Phone section(profileAndPreferences/My Profile and Preferences-UMS.feature:283)</br><br>
+Caused by: org.openqa.selenium.NoSuchElementException: Unable to locate element: {&quot;method&quot;:&quot;id&quot;,&quot;selector&quot;:&quot;phoneCardHeight&quot;}
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.53.1', revision: 'a36b8b1', time: '2016-06-30 17:37:03'
+System info: host: 'WIN-R1JBAO1CNPS', ip: '172.20.116.84', os.name: 'Windows Server 2008 R2', os.arch: 'x86', os.version: '6.1', java.version: '1.8.0_91'
+Driver info: driver.version: unknown
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.53.0', revision: '35ae25b1534ae328c771e0856c93e187490ca824', time: '2016-03-15 10:43:46'
+System info: host: 'LH7U0CND7075S37', ip: '10.137.94.11', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_131'
+Driver info: driver.version: unknown</br><br>
+	at &lt;anonymous class&gt;.FirefoxDriver.prototype.findElementInternal_(file:///C:/Users/ADMINI~1/AppData/Local/Temp/anonymous8124471532679337012webdriver-profile/extensions/fxdriver@googlecode.com/components/driver-component.js:10770)</br><br>
+	at &lt;anonymous class&gt;.FirefoxDriver.prototype.findElement(file:///C:/Users/ADMINI~1/AppData/Local/Temp/anonymous8124471532679337012webdriver-profile/extensions/fxdriver@googlecode.com/components/driver-component.js:10779)</br><br>
+	at &lt;anonymous class&gt;.DelayedCommand.prototype.executeInternal_/h(file:///C:/Users/ADMINI~1/AppData/Local/Temp/anonymous8124471532679337012webdriver-profile/extensions/fxdriver@googlecode.com/components/command-processor.js:12661)</br><br>
+	at &lt;anonymous class&gt;.DelayedCommand.prototype.executeInternal_(file:///C:/Users/ADMINI~1/AppData/Local/Temp/anonymous8124471532679337012webdriver-profile/extensions/fxdriver@googlecode.com/components/command-processor.js:12666)</br><br>
+	at &lt;anonymous class&gt;.DelayedCommand.prototype.execute/&lt;(file:///C:/Users/ADMINI~1/AppData/Local/Temp/anonymous8124471532679337012webdriver-profile/extensions/fxdriver@googlecode.com/components/command-processor.js:12608)</br><br>
+</br></div></td></tr><tr class="skipped"><td><b>And </b> the user Clicks on the the Edit phone Link and validates the elements</td><td width="100">0.00s</td></tr><tr class="skipped"><td><b>Then </b> the user validates Communication Preferences section</td><td width="100">0.00s</td></tr><tr class="skipped"><td><b>And </b> the user clicks on edit preferences link</td><td width="100">0.00s</td></tr><tr class="skipped"><td><b>And </b> the user clicks on profile &amp; preferences link to go back to Account settings page</td><td width="100">0.00s</td></tr><tr class="skipped"><td><b>And </b> the user validates permanent address section</td><td width="100">0.00s</td></tr><tr class="skipped"><td><b>And </b> the user validates the temporary address section</td><td width="100">0.00s</td></tr><tr class="skipped"><td><b>And </b> the user validates the fields and Buttons of temp address section</td><td width="100">0.00s</td></tr><tr class="skipped"><td><b>And </b> the user validates the Presence of edit button in Mailing Address section</td><td width="100">0.00s</td></tr><tr class="skipped"><td><b>Then </b> the user validates the fields under add mailing address button</td><td width="100">0.00s</td></tr><tr class="skipped"><td colspan="2"><img src="/screenshots/296-c1.2to-test-profile-and-preferences-page-._to-test-end-to-end-regression-scenario-for-account-profile-page__21525377439660.png"  /></td></tr></table></td></tr><tr class="passed"><td>After</td><td colspan="2"></td><td width="100">0.00s</td></tr><tr class="passed"><td colspan="4"></td></tr><tr><td colspan="5"><sup><a href="#top">Back to Table of Contents</a></sup></td></tr></table></td></tr><tr><td colspan="5"></td></tr></table>
+	</body>
+</html>

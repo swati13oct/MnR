@@ -1,0 +1,34 @@
+{  
+   "url":null,
+   "expectedData":{  
+     "memberId1":{
+	     "identifier":"xpath",
+	      "elementName":"//*[@id='status']",
+	       "elementName":"//*[@id='maPlanBenefits']/div[3]/div/table/tbody/tr[1]/td[2]"
+     },      
+      "planStatus1":{  
+         "identifier":"xpath",
+         "elementName":"//*[@id='status']"
+      },
+      "planName1":{  
+         "identifier":"xpath",
+         "elementName":"//*[@id='planinformation']/div[2]/h3/a"
+      },
+      "memberName":{  
+         "identifier":"xpath",
+         "elementName":"//*[@id='welcomeText']"
+      },
+      "effectiveDate":{  
+         "identifier":"xpath",
+         "elementName":"//*[@id='maPlanBenefits']/div[3]/div/table/tbody/tr[2]/td[2]"
+      },
+      "drugBenefits":{  
+         "identifier":"xpath",
+         "elementName":"//*[@id='accountdetails']/div/div[2]/div/div[2]/div/h3"
+      },
+      "riderContent":{  
+         "identifier":"xpath",
+         "elementName":".//*[@id='optionalservice_box']/div[1]/div[2]/div/p[1]"
+      }
+   }
+}

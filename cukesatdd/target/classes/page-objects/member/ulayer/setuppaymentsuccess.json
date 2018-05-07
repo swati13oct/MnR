@@ -1,0 +1,49 @@
+{
+"url":null,
+"expectedData":{
+"paymentType":{
+"identifier": "xpath",
+"elementName": "//table[@class='shipeftpayment shipeftpaymentnew']/tbody/tr[1]/td[2]"
+},
+"dateSubmitted" :{
+"identifier": "xpath",
+"elementName": "//table[@class='shipeftpayment shipeftpaymentnew']/tbody/tr[2]/td[2]"
+},
+"paymentAmount" :{
+"identifier": "xpath",
+"elementName": "//table[@class='shipeftpayment shipeftpaymentnew']/tbody/tr[3]/td[2]"
+},
+"routingNumber":{
+"identifier": "xpath",
+"elementName": "//table[@class='shipeftpayment shipeftpaymentnew']/tbody/tr[4]/td[2]"
+},
+"accountNumber":{
+"identifier": "xpath",
+"elementName": "//table[@class='shipeftpayment shipeftpaymentnew']/tbody/tr[5]/td[2]"
+},
+"accountHolderName":{
+"identifier": "xpath",
+"elementName": "//table[@class='shipeftpayment shipeftpaymentnew']/tbody/tr[6]/td[2]"
+},
+"memberId1":{
+"identifier": "xpath",
+"elementName": "//table[@class='shipeftpayment shipeftpaymentnew']/tbody/tr[7]/td[2]"
+},
+"memberName1":{
+"identifier": "xpath",
+"elementName": "//table[@class='shipeftpayment shipeftpaymentnew']/tbody/tr[8]/td[2]"
+},
+"memberName":{
+"identifier":"id",
+"elementName":"welcomeText"
+},
+"planStatus1":{
+"identifier":"id",
+"elementName":"status"
+},
+"planName1":{
+"identifier":"xpath",
+"elementName":"//div[@class='fd_blueFooterMid']/h3"
+}
+}
+}

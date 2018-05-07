@@ -1,0 +1,9 @@
+{
+"url":null,
+"expectedData":{
+"longtercareInfo":{
+"identifier":"id",
+"elementName":"ltcInfo"
+}
+}
+}

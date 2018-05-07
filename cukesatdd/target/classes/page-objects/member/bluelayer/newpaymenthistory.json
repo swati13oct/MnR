@@ -1,0 +1,50 @@
+{
+"url":null,
+"expectedData":{
+"totalAmountDue":{
+"identifier": "id",
+"elementName": "totalamtdueVal"
+},
+"paymentMethod" : {
+"identifier": "id",
+"elementName": "paymentMethodVal"
+},
+ "creditBalance":{
+	"identifier": "id",
+	"elementName": "paymentCreditBalVal"
+},
+"makeaPaymentButton" : {
+"identifier": "id",
+"elementName": "onetimepayment"
+},
+"automicPayments" : {
+"identifier": "id",
+"elementName": "autopayment"
+},
+"paymentHistoryHeader":{
+"identifier": "xpath",
+"elementName": "/html/body/div[2]/div[3]/div/div/div/div/div/h1"
+},
+"paymentHistoryDropdownLabel":{
+"identifier": "xpath",
+"elementName": "/html/body/div[2]/div[3]/div/div/div/div/div/form/div/div/div[1]/label"
+},
+"paymentHistoryDropdown":{
+"identifier": "id",
+"elementName": "payment-date"
+},
+"paymentHistoryHeaderText":{
+"identifier": "xpath",
+"elementName": "/html/body/div[2]/div[3]/div/div/div/div/div/p"
+},
+"makeYourPaymentsHeader":{
+"identifier": "id",
+"elementName": "makeYourPaymentsHeader"
+},
+"makeYourPaymentsText":{
+"identifier": "id",
+"elementName": "makeYourPaymetsContent"
+}
+}
+}
+
