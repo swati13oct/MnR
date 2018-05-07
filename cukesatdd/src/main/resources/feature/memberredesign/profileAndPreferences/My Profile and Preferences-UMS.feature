@@ -271,7 +271,7 @@ Feature: C1.2To test Profile and Preferences page .
       | planType | 
       | MAPD     |
          
-@regressionProfAndPref         
+@profAndPref  @regression       
 Scenario Outline: To test end to end regression scenario for account profile page
 Given login with following details logins in the member portal and validate elements
       | User Type   | <userType>    |  
@@ -292,6 +292,6 @@ And the user validates the Presence of edit button in Mailing Address section
 Then the user validates the fields under add mailing address button
 Examples: 
       | userType | 
-#      | AARP    | 
-      | UHC     |
+      | AARP    | 
+#      | UHC     |
   
