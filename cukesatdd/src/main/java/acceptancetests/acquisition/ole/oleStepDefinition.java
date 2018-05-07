@@ -8,12 +8,14 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.acquisition.enrollinplan.EnrollInPlanCommonConstants;
 import acceptancetests.acquisitionvbf.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.OLE_PageConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
@@ -26,7 +28,10 @@ import pages.acquisition.ole.PersonalInformationPage;
 import pages.acquisition.ole.PrelimineryQuestionsPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.ComparePlansPage;
+import pages.acquisition.ulayer.MedicaidPage;
+import pages.acquisition.ulayer.OtherHealthInsurancePage;
 import pages.acquisition.ulayer.PlanDetailsPage;
+import pages.acquisition.ulayer.PlanPaymentOptions;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
 /**
@@ -35,6 +40,7 @@ import pages.acquisition.ulayer.VPPPlanSummaryPage;
  */
 public class oleStepDefinition {
 
+	private static final String PrelimineryQuestionsPage = null;
 	@Autowired
 	MRScenario loginScenario;
 
@@ -290,7 +296,7 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 		}
 	}
 
-	@Then("^the user validates TFN in Right Rail$")
+	@Then("^the user validates TFN in Welcome OLE Right Rail$")
 	public void the_user_validates_TFN_in_Right_Rail() throws Throwable {
 		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
 		String TFN = (String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN);
@@ -468,7 +474,7 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 
 	@Then("^the user navigates to Personal Information Page$")
 	public void the_user_navigates_to_Personal_Information_Page() throws Throwable {
-		PrelimineryQuestionsPage prelimineryQuestionsPage = (PrelimineryQuestionsPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
+		PrelimineryQuestionsPage prelimineryQuestionsPage = (PrelimineryQuestionsPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE);
 		PersonalInformationPage personalInformationPage = prelimineryQuestionsPage.navigate_to_Personal_Information_page();
 				
 		if (personalInformationPage != null) {
@@ -482,4 +488,64 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 			Assert.fail("OLE Personal Information Page is NOT Displayed");
 	}
 
-}
+	@Then("^the user validates TFN in Right Rail on Medicare Insurance Page$")
+	public void the_user_validates_TFN_in_Right_Rail_Medicare_Info_page() throws Throwable {
+		MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+		String TFN = (String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN);
+		boolean Validation_Status = medicareInfoPage.ValidateTFNMedicareInfo(TFN);
+		if(Validation_Status){
+			System.out.println("TFN, Wunderman Validation in OLE PAGE : "+Validation_Status+" - Validation Passed");
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE, medicareInfoPage);
+			Assert.assertTrue(true);
+		}
+		else{
+			System.out.println("TFN, Wunderman Validation in OLE PAGE : "+Validation_Status);
+			Assert.fail();
+		}
+	}
+	
+	@Then("^the user validates TFN in Right Rail on Preliminary Questions Page$")
+	public void the_user_validates_TFN_in_Right_Rail_Prelim_Questions_page() throws Throwable {
+		PrelimineryQuestionsPage prelimineryQuestionsPage = (PrelimineryQuestionsPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE);
+		String TFN = (String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN);
+		boolean Validation_Status = prelimineryQuestionsPage.ValidateTFNPrelimQues(TFN);
+		if(Validation_Status){
+			System.out.println("TFN, Wunderman Validation in OLE PAGE : "+Validation_Status+" - Validation Passed");
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE, prelimineryQuestionsPage);
+			Assert.assertTrue(true);
+		}
+		else{
+			System.out.println("TFN, Wunderman Validation in OLE PAGE : "+Validation_Status);
+			Assert.fail();
+		}
+	}
+	
+	/**
+	 * @toDo:user fill following information in Preliminary Questions Page 
+	 */
+	@And("^the user fills following information in Preliminary Questions page$")
+	public void user_fill_information_Preliminary_Questions_page(
+			DataTable personalAttributes) {
+
+	
+	
+			List<DataTableRow> personalAttributesRow = personalAttributes.getGherkinRows();
+			Map<String, String> personalAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < personalAttributesRow.size(); i++) {
+				personalAttributesMap.put(personalAttributesRow.get(i)
+						.getCells().get(0), personalAttributesRow.get(i)
+						.getCells().get(1));
+			
+			String medicaidnumber = personalAttributesMap.get("MedicaidNumber");
+			PrelimineryQuestionsPage prelimineryQuestionsPage = (PrelimineryQuestionsPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE);
+			prelimineryQuestionsPage.entersPrelimQuesInformation(medicaidnumber);
+
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE,
+					prelimineryQuestionsPage);
+
+					}
+		}
+
+	}
+
+

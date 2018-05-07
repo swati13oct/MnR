@@ -42,7 +42,7 @@ public class VppStepDefinitionUpdatedAARP {
 	 */
 	@Given("^the user is on AARP medicare acquisition site landing page$")
 	public void the_user_on_aarp_medicaresolutions_Site() {
-		WebDriver wd = getLoginScenario().getWebDriver();
+		WebDriver wd = getLoginScenario().getWebDriverNew();
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
 
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);

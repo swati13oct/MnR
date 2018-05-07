@@ -3,6 +3,8 @@
  */
 package pages.acquisition.ole;
 
+import static org.junit.Assert.fail;
+
 import java.util.Map;
 
 import org.json.JSONException;
@@ -56,11 +58,20 @@ public class PrelimineryQuestionsPage extends UhcDriver{
 	private WebElement PrelimPageHeader;
 
 	// Medicaid Questions
-	@FindBy(id = "medicaid")
+	@FindBy(id = "medicaidnum")
 	private WebElement MedicaidquestionRadio;
 
 	@FindBy(id = "medicaidNumber")
 	private WebElement MedicaidNumberField;
+	
+	@FindBy(xpath = "//label[@for='medicaid-no']")
+	private WebElement medicaiddno;
+	
+	@FindBy(xpath = "//label[@for='medicaid-yes']")
+	private WebElement medicaiddyes;
+	
+	@FindBy(id = "medicaid-number")
+	private WebElement medicaidnum;
 	
 	@FindBy(xpath = "//*[@id='esrd-msg-block']//p[1]")
 	private WebElement Medicaid_ErrorMessage;
@@ -72,6 +83,11 @@ public class PrelimineryQuestionsPage extends UhcDriver{
 	
 	@FindBy(xpath = "//*[@id='esrd-msg-block']//p']")
 	private WebElement ESRD_ErrorMessage;
+	
+	//Right Rail Elements
+	
+			@FindBy(id = "tty-number")
+			private WebElement RightRailTFN;
 
 	
 	public PrelimineryQuestionsPage(WebDriver driver) {
@@ -103,5 +119,39 @@ public class PrelimineryQuestionsPage extends UhcDriver{
 		return null;
 	}
 	
+	public boolean ValidateTFNPrelimQues(String PrelimQuesTFN) {
+		if(validate(RightRailTFN)){
+			String TFN_OLE = RightRailTFN.getText();
+			if(TFN_OLE.contains(PrelimQuesTFN)){
+				System.out.println("TFN is validated in Medicare Insurance info Page"+PrelimQuesTFN);
+				return true;
+			}
+			else{
+				System.out.println("TFN does not match");
+				System.out.println("TFN in VPP page : "+PrelimQuesTFN);
+				System.out.println("TFN in Medicare Info Right Rail : "+TFN_OLE);
+				return false;
+			}
+		}
+		System.out.println("TFN not displayed in OLE right rail");
+		return false;
+	}
 
+	public void entersPrelimQuesInformation(String medicaidnumber) {
+			
+		if(medicaiddno.getText().equalsIgnoreCase("No")){
+				medicaiddno.click();
+		}else if(medicaiddyes.getText().equalsIgnoreCase("Yes")){
+			medicaiddyes.click();
+			if (medicaidnum.isDisplayed())
+			{
+			sendkeys(medicaidnum,medicaidnumber);
+			}
+			else
+			{
+				fail();
+			}
+		}				
+	}
+	
 }
