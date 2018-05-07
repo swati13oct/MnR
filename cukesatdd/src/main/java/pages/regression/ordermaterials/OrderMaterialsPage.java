@@ -292,6 +292,13 @@ public class OrderMaterialsPage extends UhcDriver  {
 
 	public OrderPlanMaterialConfirmationPage selectsOption(String option) throws InterruptedException {
 		
+		try {
+			Thread.sleep(3000);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		CommonUtility.checkPageIsReady(driver);
 
 		if (option.contains("Member Materials") || option.contains("Welcome Guide") || option.contains("Welcome kit")) {
@@ -307,6 +314,7 @@ public class OrderMaterialsPage extends UhcDriver  {
 		if (option.contains("Replacement ID card")) {
 			System.out.println("*************Selecting Replacement ID card Radio***************");
 			replacementIdField.click();
+		
 			if(!replacementIdField.isEnabled()){
 				System.out.println("*************NOT ABLE to SELECT Replacement ID card Radio***************");
 			}
@@ -384,7 +392,12 @@ public class OrderMaterialsPage extends UhcDriver  {
 			System.out.println("****** Submit Button Clicked ********");
 		}
 
-		Thread.sleep(5000);
+		try {
+			Thread.sleep(5000);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		CommonUtility.checkPageIsReady(driver);
 		if (validate(OrderConfirmationHeader) || validate(OrderConfirmation_addordermaterialLink)) {
 			System.out.println("@@@@ Opder Plan Material COnfirmation Page is Displayed @@@@");

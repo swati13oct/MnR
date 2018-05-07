@@ -12,10 +12,9 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.data.MRConstants;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-//import pages.member.bluelayer.AccountHomePage;
-import pages.member.bluelayer.AssistiveRegistrationPage;
-import pages.member.bluelayer.ConfirmSecurityQuestion;
-import pages.member.bluelayer.TerminatedHomePage;
+import pages.regression.login.AssistiveRegistrationPage;
+import pages.regression.login.ConfirmSecurityQuestion;
+import pages.regression.login.TerminatedHomePage;
 import pages.regression.accounthomepage.AccountHomePage;
 
 public class LoginPage extends UhcDriver {
@@ -116,7 +115,7 @@ public class LoginPage extends UhcDriver {
 			if (driver.getCurrentUrl().contains("aa-web/evaluate?execution=e1s2&action=securityQuestion"))
 			{
 				
-				
+				System.out.println("Security Question Page is displayed");
 				ConfirmSecurityQuestion cs = new ConfirmSecurityQuestion(driver);
 			    try {
 					cs.enterValidSecurityAnswer();
@@ -126,8 +125,8 @@ public class LoginPage extends UhcDriver {
 					e.printStackTrace();
 				}
 			}
-			
-			else if(currentUrl().contains("testharness.html") || currentUrl().contains("/dashboard"))
+			//If security Question Page not displayed
+			else if(driver.getCurrentUrl().contains("testharness.html") || driver.getCurrentUrl().contains("/dashboard"))
 			{
 				
 					System.out.println("test");
@@ -139,13 +138,7 @@ public class LoginPage extends UhcDriver {
 			{
 				System.out.println("teamhloginWith is returing null. Please Update the above condition As per your Needs");
 			}
-			
-			if ( MRScenario.environmentMedicare.equals("team-e") || MRScenario.environmentMedicare.equals("team-ci1")){
-
-				Alert alert = driver.switchTo().alert();
-				alert.accept();
-			} 
-			
+			//end of if else
 			try {
 				Thread.sleep(20000);
 			} catch (InterruptedException e) 
@@ -153,19 +146,42 @@ public class LoginPage extends UhcDriver {
 			// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			if(currentUrl().contains("testharness.html") || currentUrl().contains("/dashboard"))
+
+			if ( MRScenario.environmentMedicare.equals("team-e") || MRScenario.environmentMedicare.equals("team-ci1")){
+
+				Alert alert = driver.switchTo().alert();
+				alert.accept();
+			} 
+			// Validate Account Home page
+			if(driver.getCurrentUrl().contains("testharness.html") || driver.getCurrentUrl().contains("/dashboard"))
 	        {
-				System.out.println("test");
+				System.out.println("Displaying Dashboard or Test Harness page");
 				System.out.println(driver.getCurrentUrl());
 				return new AccountHomePage(driver);
 			}
-			else if(currentUrl().contains("home/my-account-home.html")  || currentUrl().contains("/login.html") ) {
+			else if(driver.getCurrentUrl().contains("home/my-account-home.html")  || driver.getCurrentUrl().contains("/login.html") ) {
 				return new AccountHomePage(driver);
 			}
-			else if (currentUrl().contains("terminated-plan.html")) {
+			else if (driver.getCurrentUrl().contains("terminated-plan.html")) {
 				return new TerminatedHomePage(driver);
 			}
+			else{
+				driver.navigate().refresh();
+				try {
+					Thread.sleep(20000);
+				} catch (InterruptedException e) 
+				{
+				// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
+				if(driver.getCurrentUrl().contains("testharness.html") || driver.getCurrentUrl().contains("/dashboard"))
+		        {
+					System.out.println("Displaying Dashboard or Test Harness page");
+					System.out.println(driver.getCurrentUrl());
+					return new AccountHomePage(driver);
+				}
+			}
 			return null;
 		}
 }

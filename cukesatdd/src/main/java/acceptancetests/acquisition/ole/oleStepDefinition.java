@@ -453,7 +453,7 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 
 	@Then("^the user navigates to Preliminary Questions Page$")
 	public void the_user_navigates_to_Preliminary_Questions_Page() throws Throwable {
-		MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE);
+		MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
 		PrelimineryQuestionsPage prelimineryQuestionsPage = medicareInfoPage.navigate_to_Preliminary_Questions_page();
 		if (prelimineryQuestionsPage != null) {
 			

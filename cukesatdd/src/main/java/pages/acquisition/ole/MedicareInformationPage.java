@@ -53,10 +53,10 @@ public class MedicareInformationPage extends UhcDriver{
 	
 	//Select Medicare Card Type - A 0r B
 	
-	@FindBy(id="card-typeA")
+	@FindBy(xpath="//*[@id='card-typeA']/label")
 	private WebElement SelectCardA;
 	
-	@FindBy(id="card-typeB")
+	@FindBy(xpath="//*[@id='card-typeB']/label")
 	private WebElement SelectCardB;
 	
 	@FindBy(id="card-type-before")
@@ -66,7 +66,7 @@ public class MedicareInformationPage extends UhcDriver{
 	private WebElement RadioCardB;
 
 	//Medicare Information fields
-	@FindBy(id="First")
+	@FindBy(id="FirstName")
 	private WebElement firstNameField;
 	
 	@FindBy(id = "Middle")
@@ -126,7 +126,7 @@ public class MedicareInformationPage extends UhcDriver{
 		if(validate(firstNameField)&& validate(lastNameField) && validate(claimNumberField)
 				&& validate(partAStartDateField)&& validate(partBStartDateField)){
 			
-			System.out.println("Medicare Information Fields are Displayed when Card Type is not selected");
+			System.out.println("Medicare Information Fields are Displayed when Card Type is selected");
 			flag = (flag==false)?false:true;
 		}
 		
@@ -138,10 +138,10 @@ public class MedicareInformationPage extends UhcDriver{
 		String FirstName = MedicareDetailsMap.get("First Name");
 		String LastName = MedicareDetailsMap.get("Last Name");
 		String MedicareNumber = MedicareDetailsMap.get("Medicare Number");
-		String PartAeffectiveDate = MedicareDetailsMap.get("PardA Date");
+		String PartAeffectiveDate = MedicareDetailsMap.get("PartA Date");
 		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date");
 		String CardType = MedicareDetailsMap.get("Card Type");
-		String SSNflag = MedicareDetailsMap.get("SSN flag");
+		String SSNflag = MedicareDetailsMap.get("SSN Flag");
 		WebElement MedicareNumberLabel = driver.findElement(By.xpath(".//*[@id='claimNumber']/preceding-sibling::label"));
 		if(CardType.contains("HICN")){
 			SelectCardA.click();
@@ -164,8 +164,31 @@ public class MedicareInformationPage extends UhcDriver{
 			}
 		}
 
-		firstNameField.sendKeys(FirstName);
-		lastNameField.sendKeys(LastName);
+		if(validate(firstNameField)){
+			firstNameField.sendKeys(FirstName);
+			System.out.println("First Name entered : "+FirstName);
+		}
+		else{
+			System.out.println("First Name field is not dispaleyd");
+			return null;
+		}
+		if(validate(lastNameField)){
+			lastNameField.sendKeys(LastName);
+			System.out.println("Last Name entered : "+LastName);
+		}
+		else{
+			System.out.println("Last Name field is not dispaleyd");
+			return null;
+		}
+		if(validate(claimNumberField)){
+			claimNumberField.sendKeys(MedicareNumber);
+			System.out.println("Medicare Number entered : "+MedicareNumber);
+		}
+		else{
+			System.out.println("Medicare Number field is not dispaleyd");
+			return null;
+		}
+
 		claimNumberField.sendKeys(MedicareNumber);
 		if(SSNflag.contains("true")){
 			String SSNnumber = MedicareDetailsMap.get("SSN Number");

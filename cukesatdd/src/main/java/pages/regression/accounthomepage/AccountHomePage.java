@@ -13,7 +13,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
@@ -22,6 +24,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.regression.claims.ClaimSummarypage;
+import pages.regression.ordermaterials.OrderMaterialsPage;
 import pages.member.bluelayer.BenefitsAndCoveragePage;
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 import pages.member.bluelayer.ProfilePreferencesPage;
@@ -31,6 +34,7 @@ import pages.redesign.PaymentHistoryPage;
 import pages.member.ulayer.PlanComparePage;
 import pages.member.ulayer.Rallytool_Page;
 import pages.member.ulayer.TestHarness;
+import pages.memberrdesignVBF.OrderplanmaterialsPage;
 import pages.redesign.PharmacySearchPage;
 
 
@@ -348,6 +352,15 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='dashboard']//span[text()='View Your Claims']")
 	private WebElement claimsDashboardLink;
 	
+	//Added by Sneha - Navigate to Order Plan Materials 
+	@FindBy(xpath = "//div[@id='ui-view-page']//a[@track='ORDER_MATERIALS']")
+	private WebElement OrderMaterial_Dashboard;
+
+	@FindBy(xpath = "//h1[@class='h4 margin-none']")
+	private WebElement orderplanHeadertxt;
+
+
+	
 	private PageData myAccountHome;
 
 	public JSONObject accountHomeJson;
@@ -373,6 +386,7 @@ public class AccountHomePage extends UhcDriver {
 	public AccountHomePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
+		
 		// openAndValidate();
 	}
 
@@ -985,4 +999,37 @@ public pages.redesign.PharmacySearchPage navigateToRedesignPharmacyLocaterPage()
 
 	//return new PaymentHistoryPage(driver);
 }
+
+	/*
+	 * Added by Sneha - To Navigate to Order plan Materials page by clicking on link in Rally Dashboard
+	 * 
+	 */
+	public OrderMaterialsPage navigateToOrderPlanMaterialsPage() throws InterruptedException {
+		
+		CommonUtility.checkPageIsReady(driver);
+		if(validate(OrderMaterial_Dashboard)){
+			System.out.println("Order Materials link found on dashboard");
+			JavascriptExecutor executor = (JavascriptExecutor)driver;
+			executor.executeScript("arguments[0].click();", OrderMaterial_Dashboard);
+			//OrderMaterial_Dashboard.click();
+		}
+		else{
+			String Page_URL = "https://" + MRScenario.environment + "-medicare.uhc.com//member/order-plan-materials.html";
+			//String Page_URL = driver.getCurrentUrl().split(".com")[0];
+			driver.navigate().to(Page_URL);
+			System.out.println("Navigated to Order materials Page URL : "+Page_URL);
+		}
+		try {
+			Thread.sleep(3000);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		CommonUtility.checkPageIsReady(driver);
+//		CommonUtility.waitForPageLoadNew(driver, orderplanHeadertxt, 30);
+		if (orderplanHeadertxt.isDisplayed()) {
+			return new OrderMaterialsPage(driver);
+		}
+		return null;
+	}
 }
