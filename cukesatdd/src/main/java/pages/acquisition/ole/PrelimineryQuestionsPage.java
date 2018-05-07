@@ -3,6 +3,8 @@
  */
 package pages.acquisition.ole;
 
+import static org.junit.Assert.fail;
+
 import java.util.Map;
 
 import org.json.JSONException;
@@ -56,11 +58,20 @@ public class PrelimineryQuestionsPage extends UhcDriver{
 	private WebElement PrelimPageHeader;
 
 	// Medicaid Questions
-	@FindBy(id = "medicaid")
+	@FindBy(id = "medicaidnum")
 	private WebElement MedicaidquestionRadio;
 
 	@FindBy(id = "medicaidNumber")
 	private WebElement MedicaidNumberField;
+	
+	@FindBy(xpath = "//label[@for='medicaid-no']")
+	private WebElement medicaiddno;
+	
+	@FindBy(xpath = "//label[@for='medicaid-yes']")
+	private WebElement medicaiddyes;
+	
+	@FindBy(id = "medicaid-number")
+	private WebElement medicaidnum;
 	
 	@FindBy(xpath = "//*[@id='esrd-msg-block']//p[1]")
 	private WebElement Medicaid_ErrorMessage;
@@ -126,4 +137,21 @@ public class PrelimineryQuestionsPage extends UhcDriver{
 		return false;
 	}
 
+	public void entersPrelimQuesInformation(String medicaidnumber) {
+			
+		if(medicaiddno.getText().equalsIgnoreCase("No")){
+				medicaiddno.click();
+		}else if(medicaiddyes.getText().equalsIgnoreCase("Yes")){
+			medicaiddyes.click();
+			if (medicaidnum.isDisplayed())
+			{
+			sendkeys(medicaidnum,medicaidnumber);
+			}
+			else
+			{
+				fail();
+			}
+		}				
+	}
+	
 }

@@ -8,12 +8,14 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.acquisition.enrollinplan.EnrollInPlanCommonConstants;
 import acceptancetests.acquisitionvbf.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.OLE_PageConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
@@ -26,7 +28,10 @@ import pages.acquisition.ole.PersonalInformationPage;
 import pages.acquisition.ole.PrelimineryQuestionsPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.ComparePlansPage;
+import pages.acquisition.ulayer.MedicaidPage;
+import pages.acquisition.ulayer.OtherHealthInsurancePage;
 import pages.acquisition.ulayer.PlanDetailsPage;
+import pages.acquisition.ulayer.PlanPaymentOptions;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
 /**
@@ -35,6 +40,7 @@ import pages.acquisition.ulayer.VPPPlanSummaryPage;
  */
 public class oleStepDefinition {
 
+	private static final String PrelimineryQuestionsPage = null;
 	@Autowired
 	MRScenario loginScenario;
 
@@ -453,7 +459,7 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 
 	@Then("^the user navigates to Preliminary Questions Page$")
 	public void the_user_navigates_to_Preliminary_Questions_Page() throws Throwable {
-		MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE);
+		MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
 		PrelimineryQuestionsPage prelimineryQuestionsPage = medicareInfoPage.navigate_to_Preliminary_Questions_page();
 		if (prelimineryQuestionsPage != null) {
 			
@@ -468,7 +474,7 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 
 	@Then("^the user navigates to Personal Information Page$")
 	public void the_user_navigates_to_Personal_Information_Page() throws Throwable {
-		PrelimineryQuestionsPage prelimineryQuestionsPage = (PrelimineryQuestionsPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
+		PrelimineryQuestionsPage prelimineryQuestionsPage = (PrelimineryQuestionsPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE);
 		PersonalInformationPage personalInformationPage = prelimineryQuestionsPage.navigate_to_Personal_Information_page();
 				
 		if (personalInformationPage != null) {
@@ -513,5 +519,33 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 			Assert.fail();
 		}
 	}
+	
+	/**
+	 * @toDo:user fill following information in Preliminary Questions Page 
+	 */
+	@And("^the user fills following information in Preliminary Questions page$")
+	public void user_fill_information_Preliminary_Questions_page(
+			DataTable personalAttributes) {
 
-}
+	
+	
+			List<DataTableRow> personalAttributesRow = personalAttributes.getGherkinRows();
+			Map<String, String> personalAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < personalAttributesRow.size(); i++) {
+				personalAttributesMap.put(personalAttributesRow.get(i)
+						.getCells().get(0), personalAttributesRow.get(i)
+						.getCells().get(1));
+			
+			String medicaidnumber = personalAttributesMap.get("MedicaidNumber");
+			PrelimineryQuestionsPage prelimineryQuestionsPage = (PrelimineryQuestionsPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE);
+			prelimineryQuestionsPage.entersPrelimQuesInformation(medicaidnumber);
+
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE,
+					prelimineryQuestionsPage);
+
+					}
+		}
+
+	}
+
+

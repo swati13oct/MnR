@@ -45,7 +45,7 @@ Then the user validates Medicare Information Page required fields
 Then the user enters following required Medicare Information
 | First Name | <firstname> |
 | last Name | <lastname> |
-| Medicare Number | <medicarenumber> |
+| MedicareNumber | <medicarenumber> |
 | SSN Flag | <ssnflag> |
 | PartA Date | <partadate> |
 | PartB Date | <partbdate> |
@@ -53,12 +53,14 @@ Then the user enters following required Medicare Information
 Then the user validates TFN in Right Rail on Medicare Insurance Page
 Then the user navigates to Preliminary Questions Page
 Then the user validates TFN in Right Rail on Preliminary Questions Page
-	
+Then the user fills following information in Preliminary Questions page
+
+| MedicaidNumber | <medicaidnumber> |	
 Examples:
-| zipcode | county             | plantype | planName                                       | cardtype  | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate |
-| 90210   | Los Angeles County | MA	  | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | HICN			 |  John		 |	Doe			|	123456789a		 | false		 | 01012010	 | 01012010	 |
-#| 90210		| Los Angeles County | PDP  | AARP MedicareRx Walgreens (PDP) 									 |	MBI 		 |  John		 |	Doe			|	2A22C22YK22		 | false		 | 01012010	 | 01012010	 |
-#| 28036 	| Mecklenburg County | SNP  | AARP MedicareRx Walgreens (PDP) 									 | HICN	 		 |  John		 |	Doe			|	123456789a		 | true		 | 01012010	 | 01012010	 |
+| zipcode | county             | plantype | planName                                       | cardtype  | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber |
+| 90210   | Los Angeles County | MA	  | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | HICN			 |  John		 |	Doe			|	123456789a		 | false		 | 01012010	 | 01012010	 | 123456789123121 |
+#| 90210		| Los Angeles County | PDP  | AARP MedicareRx Walgreens (PDP) 									 |	MBI 		 |  John		 |	Doe			|	2A22C22YK22		 | false		 | 01012010	 | 01012010	 | 123456789123121 |
+#| 28036 	| Mecklenburg County | SNP  | AARP MedicareRx Walgreens (PDP) 									 | HICN	 		 |  John		 |	Doe			|	123456789a		 | true		 | 01012010	 | 01012010	 | 123456789123121 |
 
 @OLE_PlanDetails_Aarp
 Scenario Outline: OLE Landing from VPP Plan Details
