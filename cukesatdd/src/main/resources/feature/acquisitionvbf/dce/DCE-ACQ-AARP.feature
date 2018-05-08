@@ -74,7 +74,7 @@ Then I navigate back to plan details page and verify correct message shows when 
 	
 Examples:
 | zipcode  |   drug          | planname 										| plantype | 
-| 33021    | Lipitor TAB 10MG|AARP MedicareComplete Choice Plan 2 (Regional PPO) | MA	|
+| 90210    | Lipitor TAB 10MG|AARP MedicareComplete SecureHorizons Plan 1 (HMO) | MA	|
 
 @defect2291
 Scenario Outline: To select a pharmacy in DCE under 2018 and then change year to 2017 and check the pharmacy selected isn't there

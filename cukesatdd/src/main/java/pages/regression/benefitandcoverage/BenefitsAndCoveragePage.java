@@ -294,6 +294,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(id = "ccs-header")
 	private WebElement catastrophicCoverageStage;
 	
+
+	@FindBy(css = "img.img-responsive")
+	private WebElement logoImage;
+
 	@FindBy(xpath = ".//*[@id='drug-benefits']/div[5]/div[10]/div/div[1]/div/div")
 	private WebElement hartfortdrugtable;
 	
@@ -330,6 +334,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='officeVisitTileAtdd']/div/section/span")
 	private WebElement specialistValue;
 	
+
 
 
 	
@@ -1400,6 +1405,29 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		if(copayType.equals("wotCMSValue")){
 		}
 	}
+
+	
+    public void validateImagePresent(String logoToBeDisplayedOnSecondaryPage) {
+		
+		String logo_src = logoImage.getAttribute("src");
+		String logo_alt = logoImage.getAttribute("alt");
+		System.out.println("Actual logo's source on Dashboard page is   "+logo_src+" and Expected logo source is  "+logoToBeDisplayedOnSecondaryPage+" . ");		
+		System.out.println("logo's alt text on secondary page is   "+logo_alt);	
+		Assert.assertTrue(logo_src.contains(logoToBeDisplayedOnSecondaryPage));
+	}
+    
+    public void ancillarynotdisplayed() {
+		if (Headersection.isDisplayed()) {
+			Assert.assertFalse("The element" + Headersection.getText()
+			+ "is not display", false);
+			System.out.println("The element " + Headersection.getText()
+					+ "is not display");
+		} else {
+			Assert.assertTrue(true);
+		}
+    }
+
+
 	public void validatehartfortprescriptiondrugtable() {
 		// TODO Auto-generated method stub
 		try {
@@ -1503,5 +1531,6 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			
 		
 		
+
 	}
 }

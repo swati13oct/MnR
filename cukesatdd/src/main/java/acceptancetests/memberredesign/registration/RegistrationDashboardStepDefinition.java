@@ -22,7 +22,7 @@ import pages.dashboard.acquisition.RegistrationInformationPage;
 import pages.member.redesign.NewLoginPage;
 
 /**
- * @author akuma103 
+ * Functionality: Registration flow validation
  */
 
 @SuppressWarnings("deprecation")
@@ -35,7 +35,9 @@ public class RegistrationDashboardStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-	
+	/**
+	 * @toDo : user is on the sign in page
+	 */
 	@Given("^the member is on sign in page$")
 	public void signInPage() {
 			// init Web Driver
@@ -49,16 +51,33 @@ public class RegistrationDashboardStepDefinition {
 			
 	}
 	
+	/**
+	 * @toDo : registration page navigation when clicking the register button
+	 */
 	@Given("^User click on the register button$")
 	public void clickRegisterButton() throws InterruptedException {
-		NewLoginPage newLoginPage = (NewLoginPage) getLoginScenario().getBean(PageConstants.NEW_LOGIN_PAGE);
-		Thread.sleep(4000);
-		newLoginPage.navigateToRegistration();
 		
+        WebDriver wd = loginScenario.getWebDriver();
+        loginScenario.saveBean(CommonConstants.WEBDRIVER, wd);
+        
+          
+        // create Sign In context
+        NewLoginPage newLoginPage = new NewLoginPage(wd);
+       
+        
+        newLoginPage.navigateToNewDashboardUrls();
+        getLoginScenario().saveBean(PageConstants.NEW_LOGIN_PAGE, newLoginPage);
+		
+		
+		newLoginPage.navigateToRegistration();
+		Thread.sleep(4000);
 		RegistrationInformationPage registrationInformationPage = new RegistrationInformationPage(newLoginPage.driver);
 		 getLoginScenario().saveBean(PageConstants.REGISTRATION_INFORMATION_PAGE,registrationInformationPage);
 	}
-
+	
+	/**
+	 * @toDo : user gives member value in the member id field
+	 */
 	@When("^the member enter the member ID into Member ID field$")
 	public void enterMemberID(DataTable givenAttributes) throws InterruptedException {
 		// get test variables
@@ -82,6 +101,9 @@ public class RegistrationDashboardStepDefinition {
 		registrationInformationPage.enterMemberID(memberId);
 	}
 
+	/**
+	 * @toDo : user selects dob from the drop down
+	 */
 	@When("^member enter date of birth in the date of birth dropdown$")
 	public void enterDate(DataTable givenAttributes) throws InterruptedException {
 		// get test variables
@@ -110,7 +132,7 @@ public class RegistrationDashboardStepDefinition {
 		}
 		
 		registrationInformationPage.scroll();
-		Thread.sleep(2000);
+		Thread.sleep(4000);
 		registrationInformationPage.getEnterMonth().click();
 		registrationInformationPage.enterMonth(month);
 		Thread.sleep(2000);
@@ -129,6 +151,9 @@ public class RegistrationDashboardStepDefinition {
 		
 	}
 
+	/**
+	 * @toDo : user clicks next button on the registrations first step
+	 */
 	@When("^member click Next$")
 	public void clickNext() throws InterruptedException {
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
@@ -145,6 +170,9 @@ public class RegistrationDashboardStepDefinition {
 		}
 	}
 
+	/**
+	 * @toDo : navigation to the plan information page
+	 */
 	@Then("^member will be navigated to registration plan information page$")
 	public void RegistrationPlanInformation() throws InterruptedException {
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
@@ -155,6 +183,9 @@ public class RegistrationDashboardStepDefinition {
 		registrationInformationPage.getStepTwoText().isDisplayed();
 	}
 
+	/**
+	 * @toDo : plan name validation
+	 */
 	@Then("^Verify correct plan name is displayed$")
 	public void verifyRegistrationPlanInformation(DataTable givenAttributes) throws InterruptedException {
 		// get test variables
@@ -170,12 +201,15 @@ public class RegistrationDashboardStepDefinition {
 		String expectedPlanName = memberAttributesMap.get("Plan name");
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
 				.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
-		Thread.sleep(6000);
+		registrationInformationPage.scroll();
 		String actualPlanName = registrationInformationPage.getPlanName().getText();
 		System.out.println(actualPlanName);
 		Assert.assertEquals(expectedPlanName, actualPlanName);
 	}
 
+	/**
+	 * @toDo : member id validation
+	 */
 	@And("^correct member ID value is displayed$")
 	public void correctMemberIDValueisdisplayed(DataTable givenAttributes) {
 		// get test variables
@@ -201,6 +235,9 @@ public class RegistrationDashboardStepDefinition {
 		Assert.assertTrue(actualmemberId.contains(expectedmemberId));
 	}
 
+	/**
+	 * @toDo : member name validation
+	 */
 	@And("^correct Member name value is displayed$")
 	public void correctMemberNameValueisdisplayed(DataTable givenAttributes) {
 		// get test variables
@@ -224,6 +261,9 @@ public class RegistrationDashboardStepDefinition {
 		Assert.assertEquals(expectedmembername, actualmembername);
 	}
 
+	/**
+	 * @toDo : date of birth value validation
+	 */
 	@And("^correct Member date of birth value is displayed$")
 	public void correctMemberDatePfBirthValueisdisplayed(
 			DataTable givenAttributes) {
@@ -256,6 +296,9 @@ public class RegistrationDashboardStepDefinition {
 
 	}
 
+	/**
+	 * @toDo : previous button displays
+	 */
 	@And("^Previous button is displayed$")
 	public void previousButtonIsDisplayed() throws InterruptedException {
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
@@ -264,6 +307,9 @@ public class RegistrationDashboardStepDefinition {
 		registrationInformationPage.getPreviousButton().isDisplayed();
 	}
 
+	/**
+	 * @toDo : next button displays
+	 */
 	@And("^Next button is displayed$")
 	public void nextButtonIsDisplayed() {
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
@@ -272,6 +318,9 @@ public class RegistrationDashboardStepDefinition {
 
 	}
 
+	/**
+	 * @toDo : user verifies by clicking the previous button
+	 */
 	@When("^member clicks on previous button$")
 	public void member_clicks_on_previous_button() {
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
@@ -280,6 +329,9 @@ public class RegistrationDashboardStepDefinition {
 
 	}
 
+	/**
+	 * @toDo : user verifies by clicking the next button
+	 */
 	@When("^member clicks on next button$")
 	public void member_clicks_on_next_button() throws InterruptedException {
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
@@ -296,6 +348,9 @@ public class RegistrationDashboardStepDefinition {
 		}*/
 	}
 
+	/**
+	 * @toDo : navigation to the create account page
+	 */
 	@Then("^the member navigate to the create account page$")
 	public void navigateToCreateAccountPage() {
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
@@ -311,6 +366,9 @@ public class RegistrationDashboardStepDefinition {
 
 	}
 
+	/**
+	 * @toDo : verifies the previously entered member id and dob values
+	 */
 	@SuppressWarnings("deprecation")
 	@Then("^Member ID and Date of birth is prepopulated with previously entered values.$")
 	public void Member_ID_and_Date_of_birth_is_prepopulated_with_previously_entered_values(
@@ -366,6 +424,9 @@ public class RegistrationDashboardStepDefinition {
 
 	}
 
+	/**
+	 * @toDo : navigation to additional information
+	 */
 	@Then("^the member navigate to additional information section$")
 	public void VerifyAdditionInformtionSeaction() {
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
@@ -373,6 +434,9 @@ public class RegistrationDashboardStepDefinition {
 		registrationInformationPage.getAdditionalInfoHeader().isEnabled();
 	}
 
+	/**
+	 * @toDo : user enter additional info
+	 */
 	@Then("^member enter additional information$")
 	public void enterAdditionalInformation(DataTable givenAttributes) {
 		// get test variables
@@ -395,17 +459,23 @@ public class RegistrationDashboardStepDefinition {
 
 	}
 
+	/**
+	 * @toDo : verifies the existing member error message
+	 */
 	@SuppressWarnings("deprecation")
 	@Then("^the member validate existing member error message$")
 	public void existingMemberErrorMessage() throws InterruptedException {
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
 				.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
-		Thread.sleep(2000);
+		Thread.sleep(10000);
 		registrationInformationPage.getExistingMemberError().isDisplayed();
 		Assert.assertTrue(registrationInformationPage.getExistingMemberError()
 				.toString().contains("existing"));
 	}
 
+	/**
+	 * @toDo : verifies the inactive or terminated member error message
+	 */
 	@SuppressWarnings("deprecation")
 	@Then("^the member validate inactive or terminated error message$")
 	public void inactiveTerminatedErrorMessage() {
@@ -416,6 +486,9 @@ public class RegistrationDashboardStepDefinition {
 				.getInactiveTerminatedError().toString().contains("inactive"));
 	}
 
+	/**
+	 * @toDo : verifies the future effective error message
+	 */
 	@SuppressWarnings("deprecation")
 	@Then("^the member validate future effective error message$")
 	public void futureEffectiveErrorMessage() {
@@ -427,6 +500,9 @@ public class RegistrationDashboardStepDefinition {
 
 	}
 
+	/**
+	 * @toDo : verifies the member not found error message
+	 */
 	@SuppressWarnings("deprecation")
 	@Then("^the member validate member not found error message$")
 	public void memberNotFoundErrorMessage() {
@@ -437,6 +513,9 @@ public class RegistrationDashboardStepDefinition {
 				.toString().contains("Not_Found"));
 	}
 
+	/**
+	 * @toDo : Additional plan info displays - this will be an invalid scenario
+	 */
 	@Then("^the member navigate to the Additional Plans section is displayed on Plan Information page$")
 	public void VerifyAdditionPlanInformtionSeaction() {
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
@@ -445,6 +524,9 @@ public class RegistrationDashboardStepDefinition {
 
 	}
 
+	/**
+	 * @toDo : verifies the pffs member error message
+	 */
 	@SuppressWarnings("deprecation")
 	@Then("the member validates pffs member error message$")
 	public void pffsMemberErrorMessage() {
@@ -455,8 +537,10 @@ public class RegistrationDashboardStepDefinition {
 
 	}
 	
-	
-	@And("The member land on create account enters the valid data to create account$")
+	/**
+	 * @toDo : user gives valid data on the create account page
+	 */
+	@Then("The member land on create account enters the valid data to create account$")
 	public void enterCreateAccountData(DataTable givenAttributes) throws InterruptedException {
 		
 		
@@ -487,6 +571,9 @@ public class RegistrationDashboardStepDefinition {
 		registrationInformationPage.enterConfirmEmailToCreateAccount(confirmEmail);
 	}
 	
+	/**
+	 * @toDo : user is on the registration page
+	 */
 	@Given("^the member is on registration page of redesign portal$")
 	public void RegistrationPage(DataTable givenAttributes) throws InterruptedException {
     	// init Web Driver
@@ -508,20 +595,30 @@ public class RegistrationDashboardStepDefinition {
 
     	// deregister the user for subsequent registration
     	DeregisterPage deregisterPage = new DeregisterPage(wd);
+    	System.out.println("here i m");
+    	deregisterPage.navigateToDeregisterUrls();
+    	Thread.sleep(10000);
     	deregisterPage.deregisterUser(userName);
     	Thread.sleep(5000);
     	
 		// create registration context
-		NewLoginPage newLoginPage = new NewLoginPage(wd);
-		getLoginScenario().saveBean(PageConstants.NEW_LOGIN_PAGE, newLoginPage);
-		NewLoginPage newloginPage = (NewLoginPage) getLoginScenario().getBean(PageConstants.NEW_LOGIN_PAGE);
-		Thread.sleep(4000);
-		newloginPage.navigateToRegistration();
+        NewLoginPage newLoginPage = new NewLoginPage(wd);
+       
+        
+        newLoginPage.navigateToNewDashboardUrls();
+        getLoginScenario().saveBean(PageConstants.NEW_LOGIN_PAGE, newLoginPage);
+		
+		
+		newLoginPage.navigateToRegistration();
+		
 		RegistrationInformationPage registrationInformationPage = new RegistrationInformationPage(newLoginPage.driver);
 		getLoginScenario().saveBean(PageConstants.REGISTRATION_INFORMATION_PAGE,registrationInformationPage);
 		}
 
-	@Then("^member lands on account confirmation page$")
+	/**
+	 * @toDo : account confirmation page displays
+	 */
+	@Then("^member navigate to plan confirmation page$")
 	public void validateAccountConfirmationPage() throws InterruptedException {
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
 				getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
@@ -532,10 +629,12 @@ public class RegistrationDashboardStepDefinition {
 		registrationInformationPage.getGoToMyAccountButton().isDisplayed();
 	}
 		
-	
+	/**
+	 * @toDo : verifies members information populated on the account information page
+	 */
 	@SuppressWarnings("deprecation")
-	@Then("^Verify that correct information is displayed on Account Confirmation page$")
-	public void VerifyAccountConfirmation_page(DataTable givenAttributes) throws InterruptedException {
+	@And("^Verify correct first name is displayed$")
+	public void VerifyAccountConfirmation_firstname(DataTable givenAttributes) throws InterruptedException {
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
 				.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
 		List<DataTableRow> memberAttributesRow = givenAttributes
@@ -545,8 +644,50 @@ public class RegistrationDashboardStepDefinition {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
+		registrationInformationPage.waitForAccountConfirmationPage();
 		String expectedFirstName = memberAttributesMap.get("FIRST_NAME");
+		Thread.sleep(3000);
+		String actualFirstName = registrationInformationPage.getMemberFirstName().getText().toString();
+		Assert.assertEquals(expectedFirstName,actualFirstName);
+	
+	}
+		/**
+		 * @toDo : verifies members information populated on the account information page
+		 */
+		@SuppressWarnings("deprecation")
+		@And("^Verify correct last name is displayed$")
+		public void VerifyAccountConfirmation_lastname(DataTable givenAttributes) throws InterruptedException {
+			RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
+					.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
+			List<DataTableRow> memberAttributesRow = givenAttributes
+					.getGherkinRows();
+			Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+						.get(0), memberAttributesRow.get(i).getCells().get(1));
+			
+			}
 		String expectedLastName = memberAttributesMap.get("LAST_NAME");
+		Thread.sleep(3000);
+		String actualLastName = registrationInformationPage.getMemberLastName().getText().toString();
+		Assert.assertEquals(expectedLastName,actualLastName);
+			}
+		
+		/**
+		 * @toDo : verifies members information populated on the account information page
+		 */
+		@SuppressWarnings("deprecation")
+		@And("^verify correct member information is displayed$")
+		public void VerifyAccountConfirmation_information(DataTable givenAttributes) throws InterruptedException {
+			RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
+					.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
+			List<DataTableRow> memberAttributesRow = givenAttributes
+					.getGherkinRows();
+			Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+						.get(0), memberAttributesRow.get(i).getCells().get(1));
+			}
 		String expectedUserName = memberAttributesMap.get("CREATE_ACCOUNT_USER_NAME");
 		String ExpectedEmail = memberAttributesMap.get("CREATE_ACCOUNT_EMAIL");
 		
@@ -557,20 +698,23 @@ public class RegistrationDashboardStepDefinition {
 		String year = splitDate[2];
 		String expectedDateOfBirth = month + "/" + day + "/" + year;
 			
-		Thread.sleep(3000);
-		String actualFirstName = registrationInformationPage.getMemberFirstName().getText().toString();
-		String actualLastName = registrationInformationPage.getMemberLastName().getText().toString();
+
+
 		String actualUserName = registrationInformationPage.getUserName().getText().toString();
 		String actualEmail = registrationInformationPage.getEmailAddress().getText().toString();
 		String actualDateOfBirth = registrationInformationPage.getMemberDoB().getText();
-		Assert.assertEquals(expectedFirstName,actualFirstName);
-		Assert.assertEquals(expectedLastName,actualLastName);
+	
 		Assert.assertEquals(expectedUserName,actualUserName);
 		Assert.assertEquals(ExpectedEmail,actualEmail);
 		Assert.assertEquals(expectedDateOfBirth,actualDateOfBirth);
 		
 	}
 	
+	
+	
+	/**
+	 * @toDo : verifies the member id required fields error message
+	 */
 	@Then("^the member validate member id required error message$")
 	public void memberIdRequiredErrorMessage() {
 			RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
@@ -578,6 +722,9 @@ public class RegistrationDashboardStepDefinition {
 			registrationInformationPage.getMemberIdBlankError();			
 	}
 
+	/**
+	 * @toDo : verifies the dob required fields error message
+	 */
 	@Then("^the member validate dob required error message$")
 	public void dobRequiredErrorMessage() {
 			RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
@@ -585,6 +732,9 @@ public class RegistrationDashboardStepDefinition {
 			registrationInformationPage.getDobBlankError();
 	}
 
+	/**
+	 * @toDo : verifies the 13 or younger age error message
+	 */
 	@Then("^the member validate dob fields thirteen years or younger error message$")
 	public void ageLessThanThirteen() {
 			RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
@@ -592,11 +742,15 @@ public class RegistrationDashboardStepDefinition {
 			registrationInformationPage.getAgeLessError();
 	}
 
+	/**
+	 * @toDo : verifies the snp error message
+	 */
 	@Then("^the member validate snp error message$")
 	public void snpRequiredErrorMessage() {
 			RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
 					.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
 			registrationInformationPage.getSnpMemberError();
 	}
+	
 
 }

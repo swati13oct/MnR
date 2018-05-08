@@ -26,7 +26,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
-
+import pages.regression.login.LoginPage;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.member.bluelayer.AssistiveRegistrationPage;
 import pages.member.bluelayer.BenefitsAndCoveragePage;
@@ -94,10 +94,10 @@ public class HSIDStepDefinition {
          
 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		HSIDLoginPage loginPage = new HSIDLoginPage(wd);
+		LoginPage loginPage = new LoginPage(wd);
 		loginPage.validateelements();
         AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
-		
+        Thread.sleep(10000);
 		if (accountHomePage!= null) {
 			 getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
 			Assert.assertTrue(true);

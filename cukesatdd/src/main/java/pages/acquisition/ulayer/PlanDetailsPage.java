@@ -285,7 +285,7 @@ public class PlanDetailsPage extends UhcDriver {
 		presDrugTab.click();
 		CommonUtility.waitForPageLoad(driver, estimateDrugBtn, 20);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", estimateDrugBtn);
-		estimateDrugBtn.click();
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", estimateDrugBtn);
 		try {
 			Thread.sleep(4000);
 		} catch (InterruptedException e) {
@@ -308,7 +308,7 @@ public class PlanDetailsPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(compareMessageBox.getText().contains("2 plans added") && compareMessageBox.getText().contains("Compare plans") )
+		if(compareMessageBox.getText().contains("1 plan added"))
 			return true;
 		return false;
 	}
