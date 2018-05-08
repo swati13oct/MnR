@@ -16,5 +16,7 @@ And then click the Learning tab and I should be directed to Learning Page HW
 And then click the Rewards tab and I should be directed to Rewards Page HW
 
 Examples:
- | planType  | memberType  |
+ | planType  | memberType   |
  | MAPD      |RewardsMember |
+ | MA        |RewardsMember |
+ | PDP       |RewardsMember |
