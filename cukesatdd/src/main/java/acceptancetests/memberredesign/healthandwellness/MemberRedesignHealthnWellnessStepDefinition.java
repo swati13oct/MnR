@@ -82,7 +82,8 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 	@When("^then click the Rewards tab and I should be directed to Rewards Page HW$")
 	public void then_click_the_Rewards_tab_and_I_should_be_directed_to_Rewards_Page() {
 		// Express the Regexp above with the code you wish you had
-
+		HealthAndWellnessPage healthnWellnessPage = (HealthAndWellnessPage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE);
+		healthnWellnessPage.clicAndValidateRewardsPage();
 	}
 
 

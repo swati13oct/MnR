@@ -30,8 +30,6 @@ public class HealthAndWellnessPage extends UhcDriver{
 	@FindBy(id = "learning_desk1")
 	private WebElement learningTab;
 
-
-
 	@FindBy(xpath = ".//*[@id='hl-hw-buckets']/div/div[1]/a/img")
 	private WebElement lifestyleIcon;
 
@@ -46,6 +44,13 @@ public class HealthAndWellnessPage extends UhcDriver{
 
 	@FindBy (xpath = "//header[@class='hide-mobile']//*[@id='main-nav']/div")
 	private WebElement dashboardHeader;
+	
+	@FindBy (id = "rewards_desk")
+	private WebElement rewadsTab;
+	
+	@FindBy (id = "renew-rewards-widget-target")
+	private WebElement rewardsPage;
+	
 
 	public HealthAndWellnessPage(WebDriver driver){
 		super(driver);
@@ -134,6 +139,21 @@ public class HealthAndWellnessPage extends UhcDriver{
 	public void validateHeaderOnDashborad(){
 		Assert.assertTrue("Learning dashboard is not displayed", dashboardHeader.isDisplayed());
 		System.out.println("=========================>Header is Diaplyed on Dashboard page");
+	}
+
+	public void clicAndValidateRewardsPage() {
+		Assert.assertTrue(">>>>>>>>>Rewards tab Displayed",rewadsTab.isDisplayed());
+		System.out.println("rewards tab is displayed");
+		try {
+			rewadsTab.click();
+			Thread.sleep(50000);
+			validate(rewardsPage);
+			
+		} catch (Exception e) {
+			System.err.println("rewards page is not loaded properly");
+			// TODO: handle exception
+		}
+		
 	}
 
 }
