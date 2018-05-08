@@ -158,7 +158,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       
     @CMPlanOverviewGroup
     Scenario Outline: Verify that drug cost table  is in place on Benefits and Coverage page for LIS Members
-    Scenario Outline: Verify PDF section is in place on Benefits and     Coverage page
+    #Scenario Outline: Verify PDF section is in place on Benefits and     Coverage page
     Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>  |
       | Member Type    | <memberType>|
@@ -501,3 +501,21 @@ And the user validates Town Of Greenwich table
     Examples: 
       | planType |
       | MAPD    |
+    
+    
+
+@outpatientcenterwithoutprovidertier   @regressionoutpatientwithoutprovider 
+    Scenario Outline: Verify the outpatient widget for a member withprovidertiering
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType> |
+      #| Member Type   | <memberType> |
+    Then The user navigates to Benefits and Coverage page
+    And the user validates the Outpatient Surgery Center Visits section
+
+
+
+    Examples: 
+      | planType | 
+      | MAPD     |  
+   
+   
