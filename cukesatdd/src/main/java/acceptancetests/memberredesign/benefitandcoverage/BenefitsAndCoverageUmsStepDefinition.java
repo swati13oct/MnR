@@ -1161,6 +1161,15 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		planBenefitsCoverage.validateOfficeVisitssection();
 						
 	}
+	
+	@And("the user validates the Outpatient Surgery Center Visits section")
+	public void user_validate_outpatientSurgeryVisitssection() {
+				
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.validateoutpatientsurgerycenterVisitssection();
+						
+	}
 
 	
 	

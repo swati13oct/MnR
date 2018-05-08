@@ -1,5 +1,5 @@
 @codeMonkeys
-Feature:C1.1 To test plan benefits and Coverage on UMS site
+Feature: C1.1 To test plan benefits and Coverage on UMS site
 @CMneedHelp
     Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
     Given registered member with following details logins in the member portal 
@@ -477,5 +477,27 @@ And the user validates Town Of Greenwich table
       | planType |
       | MAPD    |
 
-    
+	@outpatientcenterwithprovidertier   @regressionoutpatient 
+    Scenario Outline: Verify the outpatient widget for a member withprovidertiering
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType> |
+      #| Member Type   | <memberType> |
+    Then The user navigates to Benefits and Coverage page
+    And the user validates the Outpatient Surgery Center Visits section
 
+
+    Examples: 
+      | planType | 
+      | MAPD     |     
+
+	@primarycareproviderspecialist   @regressionprimarycareprovider 
+    Scenario Outline: Verify the Office visits widget for a member withprovidertiering
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type | <planType> |
+    Then The user navigates to Benefits and Coverage page
+    And the user validates the Office Visits section
+
+
+    Examples: 
+      | planType |
+      | MAPD    |
