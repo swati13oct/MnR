@@ -398,7 +398,7 @@ Given registered Redesign member for EOB with following attributes
 	| MAPD          | Group_Non_LIS 			|  -either- coinsurance of 5% of the cost of the drug   |  	  true       |
 	| PDP          | Group_Non_LIS 			|  -either- coinsurance of 5% of the cost of the drug   |  	  false       |
 
-<<<<<<< HEAD
+
 @ancillarybenefitnegativescenarioscodemonkeys
 Scenario Outline: Verify ancillary benefits are not displayed other than Group memnbers
 Given login with following details logins in the member portal and validate elements
@@ -412,7 +412,7 @@ Given login with following details logins in the member portal and validate elem
       #| PDP     |  Group       |  NON LIS      |
        | MAPD    |  Individual  |  NON LIS      |
       #| MA      |  Group       |  HMO          | 
-=======
+
 
 @thePredators
 @juneRelease2018 @hartfordprescriptionDrugBenefit
@@ -431,7 +431,7 @@ When I Enter the security questions
     | MAPD   |Hartford   | name1      | color1   | number1     |
     | PDP    |Hartford   | name1      | color1   | number1     |      
     
->>>>>>> origin/develop
+
     
    @thePredators
 @juneRelease2018 @TownOfGreenwichprescriptionDrugBenefit

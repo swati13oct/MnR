@@ -7,6 +7,7 @@ import java.util.Random;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -74,9 +75,12 @@ public class ConfirmSecurityQuestion extends UhcDriver {
 			throw new Exception("unknown challenge " + SecurityQtn);
 		}
 		//formContent.click();
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+        jse.executeScript("window.scrollBy(0,50)", "");
+		
 		WebElement submitbutton = driver.findElement(By.id("continueSubmitButton"));
 		submitbutton.click();
-		Thread.sleep(5000);
+		
 	}
 
 }

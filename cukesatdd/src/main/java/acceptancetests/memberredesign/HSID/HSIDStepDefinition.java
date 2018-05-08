@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstantsMnR;
-
+import acceptancetests.util.CommonUtility;
 //import acceptancetests.deprecated.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
@@ -92,12 +92,11 @@ public class HSIDStepDefinition {
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 		}
          
-		WebDriver wd = getLoginScenario().getWebDriver();
+		WebDriver wd = getLoginScenario().getWebDriverNew();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		LoginPage loginPage = new LoginPage(wd);
 		loginPage.validateelements();
         AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
-        Thread.sleep(10000);
 		if (accountHomePage!= null) {
 			 getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
 			Assert.assertTrue(true);

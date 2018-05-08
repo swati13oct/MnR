@@ -54,15 +54,15 @@ public class FormsAndResourcesPage extends UhcDriver {
 
 
                 /** Medical button in EOB section - Forms And Resources page */
-                @FindBy(xpath = "html/body/div[2]/div/div[4]/div[2]/div[8]/div/div/div/section/div/div[2]/div/div/section/a")
+                @FindBy(xpath = "//*[@class='customsegments parbase section']//div[@class='otherPages']//*[@class='explanationbenefits parbase section']//*[@class='block-body']")
                 private WebElement eobMedicalButton;
 
                 /** Drug button in EOB section */
-                @FindBy(xpath = "(//*[contains(text(),'Drug EOB')])[4]")
+                @FindBy(xpath ="//*[@class='customsegments parbase section']//div[@class='otherPages']//*[@class='explanationbenefits parbase section']//*[@class='col-md-4 block border-left']")
                 private WebElement eobDrugButton;
                 
                 /** Renew Magazine Section - Forms And Resources page */
-                @FindBy(xpath = "(//*[contains(text(),'Renew Magazine')])[3]")
+                @FindBy(xpath = "//*[@class='customsegments parbase section']//div[@class='otherPages']//*[@href='/wellness/health/health-wellness-programs-pastissues-renew?type=lifestyle']")
                 private WebElement renewMagazineSection;
                 
                 /** My DocumentSection - Forms And Resources page */
@@ -72,11 +72,11 @@ public class FormsAndResourcesPage extends UhcDriver {
                 
                 /** Plan Material Section**/
                 
-                @FindBy(xpath = "(//h2[contains(text(),'Plan Materials')])[1]")
+                @FindBy(id = "plan_material_fnr2018")
                 private WebElement PlanMaterialSection;
       
                 /*for active uhc member */
-                @FindBy(xpath = "(//a[contains(text(),'VIEW MEMBER ID CARD')])[1]")
+                @FindBy(xpath = "(//div[contains(@class,'planBenefitsHeaderParsys')]//*[@class='otherPages']//*[contains(text(),'VIEW MEMBER')])[1]")
                 private WebElement MemberIdCardlink;
               //*[contains(text(),'VIEW MEMBER ID CARD')]
                 
@@ -85,26 +85,26 @@ public class FormsAndResourcesPage extends UhcDriver {
                 private WebElement MemberIdCardlinkterminated;
 
                 
-                @FindBy(xpath = " //*[contains(text(),'ORDER PLAN MATERIALS')]")
+                @FindBy(xpath = "(//div[contains(@class,'planBenefitsHeaderParsys')]//*[@class='otherPages']//*[contains(text(),'ORDER PLAN MATERIALS')])[1]")
                 private WebElement OrderPlanMaterialLink;
                 
-                @FindBy(id="lang-select-2")
+                @FindBy(xpath="//*[@id='lang-select-2source-content-configurations_plan-material_jcr-content_overview_formsandresourcescon_formsAndResourcesParsys_customsegments2018_segmentContainer_planbenefitdocuments']")
                 private WebElement languagedropdown;
 
             /**Anoc Section**/
-                @FindBy(xpath ="//*[contains(text(),'Annual Notice of Changes Documents')]")
+                @FindBy(id ="anoc_headerfnr")
                 private WebElement AnocSection; 
                 
             /** Annual Directories Section**/
-                @FindBy(xpath ="(//*[contains(text(),'Annual Directories')])[3]")
+                @FindBy(id ="FnR_annualDirectory")
                 private WebElement AnnualDirectorySection;
                 
                 /*Provider Search Link*/
-                @FindBy(xpath ="(//*[contains(text(),'Provider Search')])[1]")
+                @FindBy(xpath ="//*[@class='customsegments parbase section']//div[@class='otherPages']//*[contains(@ng-show ,'mapdIndividual')]//*[contains(text(),'Provider Search')]")
                 private WebElement ProviderSearchLink;
                 
                 /*Pharmacy Locator Link*/
-                @FindBy(xpath ="(//*[contains(text(),'Pharmacy Locator')])[2]")
+                @FindBy(xpath ="//*[@class='customsegments parbase section']//div[@class='otherPages']//*[contains(@ng-show ,'mapdIndividual')]//*[contains(text(),'Pharmacy Locator')]")
                 private WebElement PharmacyLocatorLink;
                 
             
@@ -279,7 +279,7 @@ public class FormsAndResourcesPage extends UhcDriver {
                           }
                      
                      driver.navigate().back();
-                     
+                     Thread.sleep(20000);
                      if(driver.getCurrentUrl().contains("documents overview"))
                                   {
                                 Assert.assertTrue(true);
@@ -323,7 +323,7 @@ public class FormsAndResourcesPage extends UhcDriver {
                                                               
                            {
                                   String s=getTemporaryIdcardlink().getAttribute("href");
-                                  if(s.contains("member-int.uhc.com"))
+                                  if(s.contains("int.uhc.com"))
                                   {
                                          Assert.assertTrue(true);
                                   }
@@ -362,9 +362,17 @@ public class FormsAndResourcesPage extends UhcDriver {
                 {    
                       Thread.sleep(3000);
                       Select oselect = new Select(languagedropdown);
-                     oselect.selectByVisibleText("SPANISH");
-                     Thread.sleep(3000);
-                  System.out.println(oselect.getFirstSelectedOption().getText());
+                      if(oselect.getOptions().contains("SPANISH"))
+                      {
+                    	  oselect.selectByVisibleText("SPANISH"); 
+                          Thread.sleep(3000);
+                          System.out.println(oselect.getFirstSelectedOption().getText());
+                      }
+                      else 
+                      {
+                    	  System.out.println("only english doc are there");
+                      }
+               
                      
                 }
 
@@ -436,4 +444,10 @@ public class FormsAndResourcesPage extends UhcDriver {
              			return false;
              		}
                      
+             		 public WebElement geteobmapdsection()
+             		{	
+             		
+             			 return	driver.findElement(By.xpath("//*[@class='customsegments parbase section']//div[@class='otherPages']//*[@class='explanationbenefits parbase section']//*[contains(text(),'Explanation')]"));
+             			
+             		}
 }

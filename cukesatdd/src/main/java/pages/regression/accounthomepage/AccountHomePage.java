@@ -40,6 +40,8 @@ import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 
 
 public class AccountHomePage extends UhcDriver {
+	@FindBy(id = "plan_material_fnr2018")
+    private WebElement PlanMaterialSection;
 
 	@FindBy(css = "a.fd_myPersonalHealthRecord")
 	private WebElement phrTab;
@@ -982,15 +984,26 @@ public FormsAndResourcesPage navigatetoFormsnResources() throws InterruptedExcep
 		        if(driver.getCurrentUrl().contains("/dashboard"));
 		        {
 		               System.out.println("User is on dashboard page and URL is ====>"+driver.getCurrentUrl());
-                       JavascriptExecutor jse = (JavascriptExecutor)driver;
-                       jse.executeScript("window.scrollBy(0,100)", "");
-                       Thread.sleep(1000);
-		               driver.findElement(By.linkText("VIEW DOCUMENTS & RESOURCES")).click();
-		               Thread.sleep(15000);
+		               Thread.sleep(2000);
+		               driver.navigate().to(PAGE_URL + "medicare/member/documents/overview.html");
+						System.out.println(driver.getCurrentUrl());
+						CommonUtility.waitForPageLoad(driver, PlanMaterialSection, 20);
+						if (driver.getTitle().equalsIgnoreCase("Documents Overview")) {
+							System.out.println(driver.getTitle());}
+		              /* CommonUtility.waitForPageLoad(driver, bencovtab, 20);
+		      
+		               bencovtab.click();
+		               Thread.sleep(10000);
 					   System.out.println(driver.getTitle());
+                      /* JavascriptExecutor jse = (JavascriptExecutor)driver;
+                       jse.executeScript("window.scrollBy(0,100)", "");
+                       
+                       driver.findElement(By.id("formsandresourcesC1")).click();
+		               Thread.sleep(15000);
+					   System.out.println(driver.getTitle());*/
 		               
 		        } }
-		 System.out.println("wait for fnr page");
+		 
 
 	return new FormsAndResourcesPage(driver);
 }

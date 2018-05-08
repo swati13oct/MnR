@@ -14,15 +14,14 @@ Feature: G1.1 To validate forms and resources page in dashboard site
     # |
     And the user changes the laguage in the language dropdown
     And for active member Temporary Id Card and Plan Order Material links are displayed
-    And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
+   # And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
     And validates the view temporary id card link
-    Then validate that the EOB section is displayed
-    And both the Drug and Medical EOB links are displayed
-    Then validate that My document section is displayed
-    When the user clicks on the Search Documents button the user is navigated to the MyDocuments page
     Then validate that the anoc section is displayed
     Then validate that the annual directories section is displayed
     And both the Pharmacy locator and provider search links are displayed
+    Then validate that My document section is displayed
+    Then validate that the EOB section is displayed
+    And both the Drug and Medical EOB links are displayed
     Then validate that the forms and resources section is displayed
     Then validate that the renew magazine section is displayed
 
