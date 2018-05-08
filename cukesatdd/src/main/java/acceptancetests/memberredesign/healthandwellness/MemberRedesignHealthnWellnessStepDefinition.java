@@ -104,12 +104,9 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 	public void I_view_the_global_navigation() throws InterruptedException {
 		// Express the Regexp above with the code you wish you had
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-
-		//DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
-		//dce.changeUrlToNewDCEPage();
-		//AccountHomePage accountHomePage = new AccountHomePage(wd);
-		//getLoginScenario().saveBean(PageConstants.MEM_REDESIGN_ACCOUNT_HOME_PAGE, accountHomePage);
 		HealthAndWellnessPage healthnWellnessPage = new HealthAndWellnessPage(wd);
+		healthnWellnessPage.validateHeaderOnDashborad();
+		
 		getLoginScenario().saveBean(PageConstantsMnR.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE, healthnWellnessPage);
 	}
 
