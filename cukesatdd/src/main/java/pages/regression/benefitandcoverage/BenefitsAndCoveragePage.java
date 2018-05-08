@@ -334,7 +334,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='officeVisitTileAtdd']/div/section/span")
 	private WebElement specialistValue;
 	
-
+	@FindBy(id = "outPatientTileAtdd")
+	private WebElement outpatientsurgeryVisits;
 
 
 	
@@ -1524,13 +1525,15 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			Assert.assertTrue(false);
 		}
 		
+	}
+	
+	
+	public void validateoutpatientsurgerycenterVisitssection() {
+		// TODO Auto-generated method stub
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,-50)", "");
 		
+		validateNew(outpatientsurgeryVisits);
 		
-		
-		
-			
-		
-		
-
 	}
 }
