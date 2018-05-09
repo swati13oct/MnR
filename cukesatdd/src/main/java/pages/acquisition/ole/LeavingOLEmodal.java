@@ -48,7 +48,7 @@ public class LeavingOLEmodal extends UhcDriver{
 		
 	}
 
-	public WelcomePage returntoOLE() {
+	public Object returntoOLE() {
 		validate(NoBacktoOLE);
 		NoBacktoOLE.click();
 		try {
@@ -56,10 +56,15 @@ public class LeavingOLEmodal extends UhcDriver{
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		if(driver.getCurrentUrl().contains("enrollment")){
+		if(driver.getCurrentUrl().contains("welcome")){
 			System.out.println("OLE Welcome Page is Displayed");
 			return new WelcomePage(driver);
 		}
+		else if(driver.getCurrentUrl().contains("medicare-information")){
+			System.out.println("OLE Medicare Information Page is Displayed");
+			return new MedicareInformationPage(driver);
+		}
+		
 		return null;	
 	}
 

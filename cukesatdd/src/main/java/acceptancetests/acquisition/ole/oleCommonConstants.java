@@ -28,5 +28,6 @@ public class oleCommonConstants {
 	public static final String SSN_FLAG = "ssnflag";
 	public static final String PARTA_EFFECTIVE = "partaeffective";
 	public static final String PARTB_EFFECTIVE = "partbeffective";
+	public static final String SSN_NUMBER = "ssnnumber";
 
 }

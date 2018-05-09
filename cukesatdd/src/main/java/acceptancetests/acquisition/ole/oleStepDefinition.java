@@ -313,7 +313,7 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 	}
 
 
-	@Then("^the user validates Learn more modal for OLE$")
+	@Then("^the user validates Learn more modal for Welcome OLE$")
 	public void the_user_validates_Learn_more_modal_for_OLE() throws Throwable {
 		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
 		LearnMoreModal learnMoremodal = welcomePage.OpenLearnMore();
@@ -326,7 +326,7 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 		else
 			Assert.fail("OLE Learn More Modal is NOT Displayed");
 		
-		welcomePage = learnMoremodal.returntoOLE();
+		welcomePage = (WelcomePage) learnMoremodal.returntoOLE();
 		if (welcomePage != null) {
 			
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE,
@@ -337,7 +337,7 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 			Assert.fail("Back to OLE Application page - Welcome Page is NOT Displayed");
 	}
 
-	@Then("^the user validates cancellation modal for OLE$")
+	@Then("^the user validates cancellation modal for Welcome OLE$")
 	public void the_user_validates_cancellation_modal_for_OLE() throws Throwable {
 		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
 		CancelOLEModal cancelOLEmodal = welcomePage.OpenCancelOLE();
@@ -350,7 +350,7 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 		else
 			Assert.fail("OLE Cancellation Modal is NOT Displayed");
 		
-		welcomePage = cancelOLEmodal.returntoOLE();
+		welcomePage = (WelcomePage) cancelOLEmodal.returntoOLE();
 		if (welcomePage != null) {
 			
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE,
@@ -361,7 +361,7 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 			Assert.fail("Back to OLE Application page - Welcome Page is NOT Displayed");
 	}
 
-	@Then("^the user validates Leave OLE modal for OLE$")
+	@Then("^the user validates Leave OLE modal for Welcome OLE$")
 	public void the_user_validates_Leave_OLE_modal_for_OLE() throws Throwable {
 		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
 		LeavingOLEmodal leaveOLEmodal = welcomePage.OpenLeaveOLEmodal();
@@ -374,7 +374,7 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 		else
 			Assert.fail("Leave OLE Modal is NOT Displayed");
 
-		welcomePage = leaveOLEmodal.returntoOLE();
+		welcomePage = (WelcomePage) leaveOLEmodal.returntoOLE();
 		if (welcomePage != null) {
 			
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE,
@@ -445,17 +445,157 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 			MedicareDetailsMap.put("SSN Number", "123456789");
 		}
 		MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+		
 		medicareInfoPage = medicareInfoPage.enter_required_Medicare_details(MedicareDetailsMap);
 		if (medicareInfoPage != null) {
 			
+			getLoginScenario().saveBean(oleCommonConstants.FIRST_NAME, MedicareDetailsMap.get("First Name"));
+			getLoginScenario().saveBean(oleCommonConstants.LAST_NAME, MedicareDetailsMap.get("Last Name"));
+			getLoginScenario().saveBean(oleCommonConstants.MEDICARE_NUMBER, MedicareDetailsMap.get("Medicare Number"));
+			getLoginScenario().saveBean(oleCommonConstants.CARD_TYPE, MedicareDetailsMap.get("Card Type"));
+			getLoginScenario().saveBean(oleCommonConstants.PARTA_EFFECTIVE, MedicareDetailsMap.get("PartA Date"));
+			getLoginScenario().saveBean(oleCommonConstants.PARTB_EFFECTIVE, MedicareDetailsMap.get("PartB Date"));
+			getLoginScenario().saveBean(oleCommonConstants.SSN_FLAG, MedicareDetailsMap.get("SSN Flag"));
+			getLoginScenario().saveBean(oleCommonConstants.SSN_NUMBER, MedicareDetailsMap.get("SSN Number"));
+
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE,
 					medicareInfoPage);
 			System.out.println("OLE Medicare Information Page, Medicare Info is entered and Next Button is enabled");
 			Assert.assertTrue(true);
 		}
 		else
-			Assert.fail("OLE Medicare Information Page Next Button is not enabled, medicare Info data entry failed");
+			Assert.fail("Medicare Info data entry failed");
 	}
+	@Then("^the user validates TFN in Medicare Info OLE Right Rail$")
+	public void the_user_validates_TFN_in_Medicare_Info_OLE_Right_Rail() throws Throwable {
+		MedicareInformationPage MedicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+		String TFN = (String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN);
+		boolean Validation_Status = MedicareInfoPage.ValidateTFNMedicareInfo(TFN);
+		if(Validation_Status){
+			System.out.println("TFN, Wunderman Validation in OLE PAGE : "+Validation_Status+" - Validation Passed");
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE, MedicareInfoPage);
+			Assert.assertTrue(true);
+		}
+		else{
+			System.out.println("TFN, Wunderman Validation in OLE PAGE : "+Validation_Status);
+			Assert.fail();
+		}
+	}
+
+	@Then("^the user validates the Plan details in Medicare Info OLE Right Rail")
+	public void the_user_validates_the_Plan_details_in_Medicare_Info_OLE_Right_Rail() throws Throwable {
+		MedicareInformationPage MedicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+
+		Map<String, String> PlanDetailsMap = new HashMap<String, String>();
+		PlanDetailsMap.put("Plan Name", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME));
+		PlanDetailsMap.put("Plan Year", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR));
+		PlanDetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
+		PlanDetailsMap.put("County", (String) getLoginScenario().getBean(oleCommonConstants.OLE_COUNTY));
+		PlanDetailsMap.put("Plan Premium", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM));
+		
+		boolean Validation_Status = MedicareInfoPage.validate_plan_details(PlanDetailsMap);
+		if(Validation_Status){
+			System.out.println("Plan Details Validation in OLE Medicare Information  PAGE : "+Validation_Status+" - Validation Passed");
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE, MedicareInfoPage);
+			Assert.assertTrue(true);
+		}
+		else{
+			System.out.println("Plan Details Validation in OLE Medicare Information PAGE : "+Validation_Status);
+			Assert.fail();
+		}
+	}
+	
+	@Then("the user validates error messages for Negative values and required fields on Medicare Info Page")
+	public void user_validates_negative_scenarios_medicare_info_page(){
+		MedicareInformationPage MedicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+		boolean Validation_Status = MedicareInfoPage.validate_negative_values();
+		if(Validation_Status){
+			System.out.println("Invalid Entry Validation for required fields in OLE Medicare Information  PAGE : "+Validation_Status+" - Validation Passed");
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE, MedicareInfoPage);
+			Assert.assertTrue(true);
+		}
+		else{
+			System.out.println("Invalid Entry Validation for required fields in OLE Medicare Information PAGE : "+Validation_Status);
+			Assert.fail();
+		}
+	}
+	
+	
+
+	@Then("^the user validates Learn more modal for Medicare Information Page$")
+	public void the_user_validates_Learn_more_Medicare_Info_for_Welcome_OLE() throws Throwable {
+		MedicareInformationPage MedicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+		LearnMoreModal learnMoremodal = MedicareInfoPage.OpenLearnMore();
+		if (learnMoremodal != null) {
+			
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_LEARNMORE_MODAL_PAGE,
+					learnMoremodal);
+			System.out.println("OLE Learn More Modal is Displayed");
+		}
+		else
+			Assert.fail("OLE Learn More Modal is NOT Displayed");
+		
+		MedicareInfoPage =  (MedicareInformationPage) learnMoremodal.returntoOLE();
+		if (MedicareInfoPage != null) {
+			
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE,
+					MedicareInfoPage);
+			System.out.println("Back to OLE Application page - OLE Medicare Information Page is Displayed");
+		}
+		else
+			Assert.fail("Back to OLE Application page -OLE Medicare Information Page is NOT Displayed");
+
+	}
+
+	@Then("^the user validates Leave OLE modal for Medicare Information Page$")
+	public void the_user_validates_Leave_OLE_modal_for_Medicare_Info_OLE() throws Throwable {
+		MedicareInformationPage MedicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+		LeavingOLEmodal leaveOLEmodal = MedicareInfoPage.OpenLeaveOLEmodal();
+		if (leaveOLEmodal != null) {
+
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_LEAVING_MODAL_PAGE,
+					leaveOLEmodal);
+			System.out.println("Leave OLE modal - Back to OLE ");
+		}
+		else
+			Assert.fail("Leave OLE Modal is NOT Displayed");
+
+		MedicareInfoPage = (MedicareInformationPage) leaveOLEmodal.returntoOLE();
+		if (MedicareInfoPage != null) {
+			
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE,
+					MedicareInfoPage);
+			System.out.println("Back to OLE Application page - OLE Medicare Information Page is Displayed");
+		}
+		else
+			Assert.fail("Back to OLE Application page - OLE Medicare Information Page is NOT Displayed");
+
+	}
+
+	@Then("^the user validates cancellation modal for Medicare Information Page$")
+	public void the_user_validates_cancellation_modal_for_Medicare_Info_OLE() throws Throwable {
+		MedicareInformationPage MedicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+		CancelOLEModal cancelOLEmodal = MedicareInfoPage.OpenCancelOLE();
+		if (cancelOLEmodal != null) {
+			
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_LEARNMORE_MODAL_PAGE,
+					cancelOLEmodal);
+			System.out.println("OLE Cancellation Modal is Displayed");
+		}
+		else
+			Assert.fail("OLE Cancellation Modal is NOT Displayed");
+		
+		MedicareInfoPage = (MedicareInformationPage) cancelOLEmodal.returntoOLE();
+		if (MedicareInfoPage != null) {
+			
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE,
+					MedicareInfoPage);
+			System.out.println("Back to OLE Application page - OLE Medicare Information Page is Displayed");
+		}
+		else
+			Assert.fail("Back to OLE Application page - OLE Medicare Information Page is NOT Displayed");
+
+}
 
 	@Then("^the user navigates to Preliminary Questions Page$")
 	public void the_user_navigates_to_Preliminary_Questions_Page() throws Throwable {
@@ -488,21 +628,6 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 			Assert.fail("OLE Personal Information Page is NOT Displayed");
 	}
 
-	@Then("^the user validates TFN in Right Rail on Medicare Insurance Page$")
-	public void the_user_validates_TFN_in_Right_Rail_Medicare_Info_page() throws Throwable {
-		MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
-		String TFN = (String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN);
-		boolean Validation_Status = medicareInfoPage.ValidateTFNMedicareInfo(TFN);
-		if(Validation_Status){
-			System.out.println("TFN, Wunderman Validation in OLE PAGE : "+Validation_Status+" - Validation Passed");
-			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE, medicareInfoPage);
-			Assert.assertTrue(true);
-		}
-		else{
-			System.out.println("TFN, Wunderman Validation in OLE PAGE : "+Validation_Status);
-			Assert.fail();
-		}
-	}
 	
 	@Then("^the user validates TFN in Right Rail on Preliminary Questions Page$")
 	public void the_user_validates_TFN_in_Right_Rail_Prelim_Questions_page() throws Throwable {

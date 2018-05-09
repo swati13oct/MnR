@@ -310,10 +310,11 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		
 	}
 	/**
-	* @todo : Verify error messages in order materials page for ship member
+	* @throws InterruptedException 
+	 * @todo : Verify error messages in order materials page for ship member
 	*/
 	@Then("^the user validates error message for SHIP invalid selection in Order Materials page$")
-	public void user_validates_SHIP_error_message(){
+	public void user_validates_SHIP_error_message() throws InterruptedException{
 		OrderMaterialsPage orderPlanMaterialsPage = (OrderMaterialsPage) getLoginScenario().getBean(PageConstantsMnR.ORDER_PLAN_MATERIALS_PAGE);
 		
 		if(!orderPlanMaterialsPage.ValidateSHIPErrorMessage()){

@@ -140,7 +140,7 @@ public class LoginPage extends UhcDriver {
 			}
 			//end of if else
 			try {
-				Thread.sleep(20000);
+				Thread.sleep(25000);
 			} catch (InterruptedException e) 
 			{
 			// TODO Auto-generated catch block

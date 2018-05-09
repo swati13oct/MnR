@@ -9,14 +9,13 @@ Given the user lands on OLE Welcome Page wity following Plan Details
 		| Plan Type | <plantype> |
 		| Plan Name | <planName> |
 	| Premium	 		| <premium>	|
-Then the user validates Learn more modal for OLE
-Then the user validates cancellation modal for OLE
-Then the user validates Leave OLE modal for OLE
+Then the user validates Learn more modal for Welcome OLE
+Then the user validates Leave OLE modal for Welcome OLE
+Then the user validates cancellation modal for Welcome OLE
 Then the user validates and selects the Disclaimer Checkbox
 Then the user navigates to Medicare Information Page
 Then the user validates Medicare Information Page required fields
-Then the user navigates to Preliminary Questions Page
-Then the user navigates to Personal Information Page
+
 	
 Examples:
 | zipcode | county             | plantype | planName                                         | premium	|
@@ -36,9 +35,9 @@ Then the user clicks on Enroll Now for AARP site to start the OLE flow
 	| Plan Name | <planName> |
 Then the user validates the Plan details on OLE 
 Then the user validates TFN in Welcome OLE Right Rail
-Then the user validates Learn more modal for OLE
-Then the user validates Leave OLE modal for OLE
-Then the user validates cancellation modal for OLE
+Then the user validates Learn more modal for Welcome OLE
+Then the user validates Leave OLE modal for Welcome OLE
+Then the user validates cancellation modal for Welcome OLE
 Then the user validates and selects the Disclaimer Checkbox
 Then the user navigates to Medicare Information Page
 Then the user validates Medicare Information Page required fields
@@ -50,17 +49,20 @@ Then the user enters following required Medicare Information
 | PartA Date | <partadate> |
 | PartB Date | <partbdate> |
 | Card Type | <cardtype> |
-Then the user validates TFN in Right Rail on Medicare Insurance Page
-Then the user navigates to Preliminary Questions Page
-Then the user validates TFN in Right Rail on Preliminary Questions Page
-Then the user fills following information in Preliminary Questions page
+Then the user validates TFN in Medicare Info OLE Right Rail
+Then the user validates the Plan details in Medicare Info OLE Right Rail 
+Then the user validates Learn more modal for Medicare Information Page
+Then the user validates Leave OLE modal for Medicare Information Page
+Then the user validates cancellation modal for Medicare Information Page
+#Then the user navigates to Preliminary Questions Page
+#Then the user validates TFN in Right Rail on Preliminary Questions Page
+#Then the user fills following information in Preliminary Questions page
 
 | MedicaidNumber | <medicaidnumber> |	
 Examples:
-| zipcode | county             | plantype | planName                                       | cardtype  | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber |
-| 90210   | Los Angeles County | MA	  | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | HICN			 |  John		 |	Doe			|	123456789a		 | false		 | 01012010	 | 01012010	 | 123456789123121 |
-#| 90210		| Los Angeles County | PDP  | AARP MedicareRx Walgreens (PDP) 									 |	MBI 		 |  John		 |	Doe			|	2A22C22YK22		 | false		 | 01012010	 | 01012010	 | 123456789123121 |
-#| 28036 	| Mecklenburg County | SNP  | AARP MedicareRx Walgreens (PDP) 									 | HICN	 		 |  John		 |	Doe			|	123456789a		 | true		 | 01012010	 | 01012010	 | 123456789123121 |
+| zipcode | county             | plantype | planName                                       | cardtype   | firstname  | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber |
+| 90210   | Los Angeles County | MA	  | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | HICN		|  John		 |	Doe			|	123456789a		 | false		 | 01012010	 | 01012010	 | 123456789123121 |
+| 90210		| Los Angeles County | PDP  | AARP MedicareRx Walgreens (PDP) 			 	|	MBI 	|  John		 |	Doe			|	2A22C22YK22		 | false		 | 01012010	 | 01012010	 | 123456789123121 |
 
 @OLE_PlanDetails_Aarp
 Scenario Outline: OLE Landing from VPP Plan Details
@@ -77,8 +79,8 @@ Then the user validates the Plan details on OLE
 
 Examples:
 	| zipcode | county             | plantype |  planName                                             |
-	| 90210   | Los Angeles County | MA	  | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    |
-	| 90210		| Los Angeles County | PDP  | AARP MedicareRx Walgreens (PDP) 	|
+#	| 90210   | Los Angeles County | MA	  | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    |
+#	| 90210		| Los Angeles County | PDP  | AARP MedicareRx Walgreens (PDP) 	|
 	
 	@OLE_PlanCompare_Aarp
 Scenario Outline: OLE Landing from VPP Plan Compare

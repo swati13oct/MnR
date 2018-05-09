@@ -20,8 +20,8 @@ Feature:P1.5 To test order materials in Redesign site
       | planType | memberType | option           |
       | MA      |  MA_AARPIndividual | Replacement ID card |
       | MAPD     | MAPD_AARPIndividual  | Replacement ID card      |
-      | MAPD     | PCP_OrderMaterials  | Replacement ID card      |
-      | MAPD     | Medica_OrderMaterials  | Replacement ID card      |
+#      | MAPD     | PCP_OrderMaterials  | Replacement ID card      |
+#      | MAPD     | Medica_OrderMaterials  | Replacement ID card      |
       | PDP      |  PDP_AARPIndividual | Welcome Guide    |
       | SHIP     | SHIP_AARPIndividual  | Member ID Card |
 
@@ -54,7 +54,7 @@ Feature:P1.5 To test order materials in Redesign site
 
     Examples: 
       | planType | memberType | option   |
-#      | MA       | UHCGroup      | Replacement ID card |
+      | MA       | MA_UHCGroup      | Replacement ID card |
       | PDP      | PDP_UHCGroup      | Welcome Guide |
       | MAPD     | MAPD_UHCGroup      | Replacement ID card |
 
