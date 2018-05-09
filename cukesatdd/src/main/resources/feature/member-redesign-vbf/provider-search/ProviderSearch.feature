@@ -1,7 +1,7 @@
 @smokeTest
 Feature: 1.14-VBF-MemRedesign-To test provider search (Rally) functionality
 
-  @smokeTest_ProviderSearch @rallyDashboard @testharness
+  @smokeTest_ProviderSearch @rallyDashboard
   Scenario Outline: To validate that provider search is opening up correctly
     Given I am a authenticated member on the member redesign site for Direct Login
       | Member Type | <memberType> |
