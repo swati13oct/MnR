@@ -1420,12 +1420,12 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	public boolean isDrugPresent(String drugName) {
 		boolean isPresent = false;
-		List<WebElement> drugNamesList = driver.findElements(By.id("drugDosageStrengthId_0"));
+		List<WebElement> drugNamesList = driver.findElements(By.xpath(".//*[@id='drugcontainer_0']/div"));
 
 		System.out.println("drug list size"+drugNamesList.size());
 		for (WebElement drugNames : drugNamesList) {
 			System.out.println("drug name: " + drugNames.getText());
-			if (drugName.equalsIgnoreCase(drugNames.getText())) {
+			if (drugNames.getText().contains(drugName)) {
 				isPresent = true;
 			}
 		}
