@@ -25,16 +25,18 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
-import pages.member.bluelayer.BenefitsAndCoveragePage;
-import pages.member.bluelayer.AccountHomePage;
+
+//import pages.member.bluelayer.BenefitsAndCoveragePage;
+//import pages.member.bluelayer.AccountHomePage;
 
 import pages.member.bluelayer.LoginPage2;
 
 import pages.member.ulayer.ValueAddedServicepage;
+import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.redesign.BenefitsCoveragePage;
 import pages.redesign.RedesignLoginPage;
 import pages.redesign.UlayerHomePage;
-
+import pages.regression.accounthomepage.AccountHomePage;
 
 /**
  * Functionality: Benefits and Coverage page
@@ -979,6 +981,15 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
  	}
  	
+@Then("^verify ancillary benefit section is not displayed$")
+ 	
+ 	public void ancillary_not_displayed() {
+	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.ancillarynotdisplayed();
+ 	}
+
+ 	
  	/**
 	 * @toDo : The user logs in to the member Redesign Portal
 	 * @author mrani101
@@ -1154,6 +1165,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		//planBenefitsCoverage.validateOfficeVisitssection();
 						
 	}
+	
 	
 	
 }

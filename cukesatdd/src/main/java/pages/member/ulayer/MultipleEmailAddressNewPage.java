@@ -7,6 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.MRConstants;
 import atdd.framework.UhcDriver;
+import pages.regression.accounthomepage.AccountHomePage;
 
 public class MultipleEmailAddressNewPage extends UhcDriver{	
 

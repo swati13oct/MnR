@@ -16,6 +16,7 @@ import pages.regression.login.AssistiveRegistrationPage;
 import pages.regression.login.ConfirmSecurityQuestion;
 import pages.regression.login.TerminatedHomePage;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.accounthomepage.AccountHomePage;
 
 public class LoginPage extends UhcDriver {
 	
@@ -114,10 +115,17 @@ public class LoginPage extends UhcDriver {
 			
 			if (driver.getCurrentUrl().contains("aa-web/evaluate?execution=e1s2&action=securityQuestion"))
 			{
+				try {
+					Thread.sleep(10000);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
 				System.out.println("Security Question Page is displayed");
 				ConfirmSecurityQuestion cs = new ConfirmSecurityQuestion(driver);
 			    try {
+			    	Thread.sleep(10000);
 					cs.enterValidSecurityAnswer();
 					System.out.println(driver.getCurrentUrl());
 				} catch (Exception e) {
@@ -129,7 +137,7 @@ public class LoginPage extends UhcDriver {
 			else if(driver.getCurrentUrl().contains("testharness.html") || driver.getCurrentUrl().contains("/dashboard"))
 			{
 				
-					System.out.println("test");
+					System.out.println("testharess.html or /dashboard was there in the URL");
 					System.out.println(driver.getCurrentUrl());
 				    return new AccountHomePage(driver);
 			}

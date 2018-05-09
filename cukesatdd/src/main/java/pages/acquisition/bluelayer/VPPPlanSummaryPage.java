@@ -1256,7 +1256,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public DrugCostEstimatorPage navigateToDCE(String plantype) {
 		if(plantype.equals("MA")||plantype.equals("MAPD")){
 			//viewPlans.click();
-			List<WebElement> maDCELink = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[@class='mabenefittable']//a"));
+			List<WebElement> maDCELink = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[@class='mabenefittable']//a[contains(@dtmname, 'Plans Landing:Plan:MA:Drug Cost Estimator')]"));
 			maDCELink.get(0).click();
 		}else{
 			//viewPDPPlans.click();

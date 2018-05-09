@@ -186,6 +186,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//*[@class='tel ng-binding']")
 	private WebElement RightRail_TFN;
 	
+	@FindBy(id="backToPlanSummaryTop")
+	private WebElement backToPlansLink;
+	
 	
 	public JSONObject vppPlanSummaryJson;
 
@@ -768,16 +771,22 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		
 	}
-	
+	@FindBy(xpath=".//*[@id='plan-list-1']//div[@class='swiper-wrapper']/div[1]//div[@class='swiper-content']//a[contains(text(),'View plan and drug coverage details')]") private WebElement test; 
 	public PlanDetailsPage navigateToPlanDetails(String planName, String planType) {
 		driver.manage().window().maximize();
-		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
-/*			ElementData elementData = new ElementData("id", "viewmoredetlinkmapdplan");
+/*		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) { 
+  			validate(test);
+			ElementData elementData = new ElementData("xpath", ".//a[contains(text(),'View plan and drug coverage details')]");
+		
+			ElementData elementData = new ElementData("id", "viewmoredetlinkmapdplan");
 			WebElement element = getViewPlanDetailsElement(maPlanElement, elementData, planName);
 			if (element != null) {
 				element.click();
 			}
-*/			WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//h2[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@id = 'viewmoredetlinkmapd']"));
+			
+	*/	
+		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {	
+		WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//h2[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@id = 'viewmoredetlinkmapd']"));
 			validate(MAmoreDetailsLink);
 			MAmoreDetailsLink.click();
 			System.out.println("View Plan Details Link is clicked for MA plan"+planName);
@@ -796,9 +805,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			}
 */
 		}
+		
 		CommonUtility.checkPageIsReady(driver);
 		if (driver.getTitle().equalsIgnoreCase("AARPMP: Medicare Plan Benefits and Information | AARP® Medicare Plans from UnitedHealthcare®")
-				|| driver.getTitle().equalsIgnoreCase("Plan Detail") || driver.getCurrentUrl().contains("/details")) {
+				|| driver.getTitle().equalsIgnoreCase("Plan Detail") || validate(backToPlansLink)) {
+				//|| driver.getTitle().equalsIgnoreCase("Plan Detail") || driver.getCurrentUrl().contains("/details")) {
 			return new PlanDetailsPage(driver);
 		}
 
@@ -896,7 +907,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			
 			if(validate(viewPlans)){
 				viewPlans.click();
-				List<WebElement> maDCELink = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[@class='mabenefittable']//a"));
+				List<WebElement> maDCELink = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[@class='mabenefittable']//a[contains(@dtmname, 'Plans Landing:Plan:MA:Drug Cost Estimator')]"));
 				maDCELink.get(0).click();
 				}else{
 					Assert.assertTrue("This scenario is for AEP period", true);

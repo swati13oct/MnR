@@ -24,9 +24,9 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
-import pages.member.redesign.ContactUsPage;
-import pages.member.ulayer.AccountHomePage;
 import pages.member.ulayer.LoginPage;
+import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.contactus.ContactUsPage;
 
 /**
  * 
@@ -48,11 +48,11 @@ public class ContactusRedesignStepDefinition {
 		
 		/**
 		 * 		@toDO : user login with the registered member
-		 */
+		 *//*
 		@Given("^registered UMS member with following attributes$")
 		public void registered_member_orderplanmaterials_ums(DataTable givenAttributes) throws InterruptedException {
 
-			/* Reading the given attribute from feature file */
+			 Reading the given attribute from feature file 
 			List<DataTableRow> memberAttributesRow = givenAttributes
 					.getGherkinRows();
 			for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -99,7 +99,7 @@ public class ContactusRedesignStepDefinition {
 				getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
 				Assert.assertTrue(true);
 			}
-		}
+		}*/
 		
 		/**
 		 *  @toDO : the user navigate to the contact us page
