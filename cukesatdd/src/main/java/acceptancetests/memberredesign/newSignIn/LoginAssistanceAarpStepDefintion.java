@@ -3,6 +3,8 @@
  */
 package acceptancetests.memberredesign.newSignIn;
 
+import gherkin.formatter.model.DataTableRow;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -14,6 +16,13 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.acquisition.ulayer.LoginAssitanceMessagePage;
+import pages.acquisition.ulayer.PersonalIdentificationPage;
+import pages.member.ulayer.LoginAssistanceConfirmationJava;
+import pages.member.ulayer.LoginPage;
+import pages.member.ulayer.PersonalIdentificationPageNew;
+import pages.member.ulayer.PersonalIdentityUlayerPage;
+import pages.member.ulayer.UNPWAssistancePage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
@@ -22,14 +31,6 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.ulayer.LoginAssitanceMessagePage;
-import pages.acquisition.ulayer.PersonalIdentificationPage;
-import pages.member.ulayer.LoginAssistanceConfirmationJava;
-import pages.member.ulayer.LoginPage;
-import pages.member.ulayer.PersonalIdentificationPageNew;
-import pages.member.ulayer.PersonalIdentityUlayerPage;
-import pages.member.ulayer.UNPWAssistancePage;
 
 /**
  * @author pperugu

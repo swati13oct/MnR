@@ -3,8 +3,6 @@
  */
 package acceptancetests.data;
 
-import pages.redesign.HsidRegistrationPersonalInformationPage;
-
 //import pages.acquisition.bluelayer.MARightsAndResponsibilitiesPage;
 
 /**

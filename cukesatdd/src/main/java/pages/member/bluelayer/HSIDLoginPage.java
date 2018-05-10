@@ -11,10 +11,10 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import pages.redesign.HsidRegistrationPersonalInformationPage;
+import pages.regression.accounthomepage.AccountHomePage;
 import acceptancetests.data.MRConstants;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.regression.accounthomepage.AccountHomePage;
 
 /**
  * @author pjaising
@@ -214,11 +214,6 @@ MRScenario loginScenario;
 		return null;
 	}
 
-	private char[] getcurrenturl() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 	public void emailconfirmed() {
 		// TODO Auto-generated method stub
 		

@@ -4,16 +4,15 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.LoginCommonConstants;
-import acceptancetests.data.PageConstants;
-import acceptancetests.memberrdesignVBF.common.CommonStepDefinition;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Then;
 import pages.memberrdesignVBF.BenefitsAndCoveragePage;
 import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.memberrdesignVBF.TestHarness;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageConstants;
+import acceptancetests.memberrdesignVBF.common.CommonStepDefinition;
 import atdd.framework.MRScenario;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Then;
 
 public class MemberLoginStepDefinition {
 	@Autowired

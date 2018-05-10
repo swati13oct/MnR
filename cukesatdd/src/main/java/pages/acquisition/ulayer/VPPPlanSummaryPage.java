@@ -19,11 +19,11 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import pages.acquisition.ole.WelcomePage;
+import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPage;
 import acceptancetests.data.ElementData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.ole.WelcomePage;
-import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPage;
 
 /**
  * @author 

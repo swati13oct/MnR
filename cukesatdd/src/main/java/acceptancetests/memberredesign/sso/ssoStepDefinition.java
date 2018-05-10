@@ -17,7 +17,6 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.member.bluelayer.AccountHomePage;
-
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 import pages.regression.sso.cqLoginPage;
 import pages.regression.sso.ssoTestHarnessPage;

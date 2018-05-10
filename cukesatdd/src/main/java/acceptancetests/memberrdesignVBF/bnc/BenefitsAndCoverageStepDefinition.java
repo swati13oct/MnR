@@ -2,6 +2,7 @@ package acceptancetests.memberrdesignVBF.bnc;
 
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import pages.memberrdesignVBF.BenefitsAndCoveragePage;
 import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.memberrdesignVBF.TestHarness;

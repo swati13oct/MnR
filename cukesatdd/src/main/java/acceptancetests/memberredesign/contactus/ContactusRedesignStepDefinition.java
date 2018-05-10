@@ -2,6 +2,8 @@ package acceptancetests.memberredesign.contactus;
 
 
 
+import gherkin.formatter.model.DataTableRow;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -13,6 +15,9 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.member.redesign.ContactUsPage;
+import pages.member.ulayer.AccountHomePage;
+import pages.member.ulayer.LoginPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
@@ -23,10 +28,6 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
-import pages.member.redesign.ContactUsPage;
-import pages.member.ulayer.AccountHomePage;
-import pages.member.ulayer.LoginPage;
 
 /**
  * 

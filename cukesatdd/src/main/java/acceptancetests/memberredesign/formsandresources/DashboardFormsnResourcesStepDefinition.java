@@ -1,15 +1,22 @@
 
        package acceptancetests.memberredesign.formsandresources;
 
-       import java.util.LinkedHashMap;
+       import gherkin.formatter.model.DataTableRow;
+
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+
+import junit.framework.Assert;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.dashboard.formsandresources.FormsAndResourcesPage;
+import pages.member.redesign.NewLoginPage;
+import pages.member.ulayer.RallyDashboard;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
@@ -17,11 +24,6 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import gherkin.formatter.model.DataTableRow;
-import junit.framework.Assert;
-import pages.dashboard.formsandresources.FormsAndResourcesPage;
-import pages.member.redesign.NewLoginPage;
-import pages.member.ulayer.RallyDashboard;
 
        /**
        * @author 

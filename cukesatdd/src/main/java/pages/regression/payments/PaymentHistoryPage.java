@@ -5,7 +5,6 @@ package pages.regression.payments;
 
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,18 +13,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
+import pages.member.ulayer.SetupAutoPaymentPage;
 import acceptancetests.data.CommonConstants;
-import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
-import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.dashboard.eob.EOBPage;
-import pages.member.ulayer.SetupAutoPaymentPage;
 
 /**
  * @author pperugu
@@ -33,12 +26,6 @@ import pages.member.ulayer.SetupAutoPaymentPage;
  */
 public class PaymentHistoryPage extends UhcDriver{
 	
-	private static final String STAGE_DASHBOARD_URL = null;
-
-	private static final FluentWait<WebDriver> wait = null;
-
-	private static final ExpectedConditions ImplectedConditions = null;
-
 	@FindBy(id = "paymentHistoryApp")
 	private WebElement paymentHistoryApp;
 	

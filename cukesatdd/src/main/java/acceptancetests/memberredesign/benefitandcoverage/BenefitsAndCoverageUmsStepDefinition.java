@@ -1,5 +1,7 @@
 package acceptancetests.memberredesign.benefitandcoverage;
 
+import gherkin.formatter.model.DataTableRow;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -12,6 +14,13 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.member.bluelayer.LoginPage2;
+import pages.member.ulayer.ValueAddedServicepage;
+import pages.redesign.BenefitsCoveragePage;
+import pages.redesign.RedesignLoginPage;
+import pages.redesign.UlayerHomePage;
+import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import acceptancetests.data.CommonConstants;
 //import acceptancetests.deprecated.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonConstants;
 import acceptancetests.data.LoginCommonConstants;
@@ -24,16 +33,6 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
-
-import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
-import pages.member.bluelayer.LoginPage2;
-
-import pages.member.ulayer.ValueAddedServicepage;
-import pages.redesign.BenefitsCoveragePage;
-import pages.redesign.RedesignLoginPage;
-import pages.redesign.UlayerHomePage;
-import pages.regression.accounthomepage.AccountHomePage;
 /**
  * Functionality: Benefits and Coverage page
  */

@@ -1,20 +1,23 @@
 package acceptancetests.memberrdesignVBF.ordermaterials;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import gherkin.formatter.model.DataTableRow;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.junit.Assert;
-import pages.memberrdesignVBF.RallyDashboardPage;
-import pages.memberrdesignVBF.TestHarness;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import pages.memberrdesignVBF.OrderplanmaterialsPage;
 import pages.memberrdesignVBF.PlanMaterialConfirmationPage;
+import pages.memberrdesignVBF.RallyDashboardPage;
+import pages.memberrdesignVBF.TestHarness;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
+import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.When;
-import cucumber.api.DataTable;
-import gherkin.formatter.model.DataTableRow;
 
 public class OrderPlanMaterialsRedesignStepDefinition {
 	@Autowired

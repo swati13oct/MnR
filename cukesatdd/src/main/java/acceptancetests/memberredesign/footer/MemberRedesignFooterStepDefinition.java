@@ -1,5 +1,7 @@
 package acceptancetests.memberredesign.footer;
 
+import gherkin.formatter.model.DataTableRow;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -11,6 +13,9 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.dashboard.member.drugcostestimator.blayer.DrugCostEstimatorPage;
+import pages.memberredesign.bluelayer.AccountHomePage;
+import pages.memberredesign.bluelayer.LoginPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
@@ -19,10 +24,6 @@ import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
-import pages.dashboard.member.drugcostestimator.blayer.DrugCostEstimatorPage;
-import pages.memberredesign.bluelayer.AccountHomePage;
-import pages.memberredesign.bluelayer.LoginPage;
 
 /**
  * Functionality : Covers all step definition methods related to member redesign footer section.

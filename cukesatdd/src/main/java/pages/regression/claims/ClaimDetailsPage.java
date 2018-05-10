@@ -2,13 +2,14 @@ package pages.regression.claims;
 /**
  * 
  */
+import junit.framework.Assert;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
-import junit.framework.Assert;
 /**
  * Functionality : this page validates Claims Details Page. 
  */
