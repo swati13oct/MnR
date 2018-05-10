@@ -24,8 +24,16 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.regression.accounthomepage.AccountHomePage;
+//import pages.member.bluelayer.AccountHomePage;
 import pages.member.bluelayer.LoginPage2;
 import pages.regression.profileandpreferences.*;
+import pages.member.bluelayer.ProfilePreferencesPage;
+
+import pages.regression.accounthomepage.AccountHomePage;
+
+//import pages.member.bluelayer.ProfilePreferencesPage;
+import pages.regression.profileandpreferences.ProfileandPreferencesPage;
+
 
 /**
  * Functionality: Profile And Preferences page
@@ -884,7 +892,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 	}
 	
 	
-	
+
 
 
 

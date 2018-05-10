@@ -16,12 +16,18 @@ import java.util.Map;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.member.bluelayer.AccountHomePage;
+//import pages.member.bluelayer.AccountHomePage;
+//import pages.member.bluelayer.ProfilePageHsid;
+
+import pages.regression.accounthomepage.AccountHomePage;
+
+
 
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 import pages.regression.sso.cqLoginPage;
 import pages.regression.sso.ssoTestHarnessPage;
 //import pages.regression.profileandpreferences.ProfileandPreferencesPage;
+
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;

@@ -13,7 +13,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
@@ -21,6 +23,12 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.regression.claims.ClaimSummarypage;
+import pages.regression.ordermaterials.OrderMaterialsPage;
+//import pages.member.bluelayer.BenefitsAndCoveragePage;
+import pages.regression.profileandpreferences.ProfileandPreferencesPage;
+import pages.member.bluelayer.ProfilePreferencesPage;
+//import pages.member.redesign.ContactUsPage;
 import pages.member.ulayer.OneTimePaymentsPage;
 import pages.member.ulayer.PlanComparePage;
 import pages.member.ulayer.Rallytool_Page;
@@ -28,11 +36,11 @@ import pages.member.ulayer.TestHarness;
 import pages.redesign.PaymentHistoryPage;
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.regression.claims.ClaimDetailsPage;
-import pages.regression.claims.ClaimSummarypage;
+//import pages.regression.claims.ClaimSummarypage;
 import pages.regression.contactus.ContactUsPage;
 import pages.regression.formsandresources.FormsAndResourcesPage;
 import pages.regression.pharmacylocator.PharmacySearchPage;
-import pages.regression.profileandpreferences.ProfileandPreferencesPage;
+import pages.regression.pharmacylocator.PharmacySearchPage;
 
 
 
@@ -96,7 +104,7 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(linkText = "Search medical claims")
 	private WebElement searchMedicalClaims;
-	
+
 	@FindBy(linkText = "Medical Explanation of Benefits (EOB)")
 	private WebElement medicalEobLink;
 
@@ -360,6 +368,15 @@ public class AccountHomePage extends UhcDriver {
 	private WebElement pharmacySearchLink;
 
 	
+	//Added by Sneha - Navigate to Order Plan Materials 
+	@FindBy(xpath = "//div[@id='ui-view-page']//a[@track='ORDER_MATERIALS']")
+	private WebElement OrderMaterial_Dashboard;
+
+	@FindBy(xpath = "//h1[@class='h4 margin-none']")
+	private WebElement orderplanHeadertxt;
+
+
+	
 	private PageData myAccountHome;
 
 	public JSONObject accountHomeJson;
@@ -385,6 +402,7 @@ public class AccountHomePage extends UhcDriver {
 	public AccountHomePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
+		
 		// openAndValidate();
 	}
 
@@ -697,7 +715,7 @@ public class AccountHomePage extends UhcDriver {
 		}
 	}
 
-	public PaymentHistoryPage scrollDownAndUp() throws InterruptedException {
+	public pages.regression.payments.PaymentHistoryPage scrollDownAndUp() throws InterruptedException {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,500)", "");
 
@@ -708,15 +726,22 @@ public class AccountHomePage extends UhcDriver {
 
 		Thread.sleep(6000);
 
-		if (HistoryTable.isDisplayed()) {
-			System.out.println("Payment History Exists");
-			jse.executeScript("window.scrollBy(0,-600)", "");
-			Thread.sleep(3000);
-			return new PaymentHistoryPage(driver);
-		} else {
-			return null;
+		try{			
+			if (HistoryTable.isDisplayed()) {
+				System.out.println("Payment History Exists");
+				jse.executeScript("window.scrollBy(0,-600)", "");
+				Thread.sleep(3000);			
+			} }
+			catch(Exception e)
+			{
+				System.out.println("History table not present for this member");
+				jse.executeScript("window.scrollBy(0,-600)", "");
+				Thread.sleep(3000);				
+			}
+			return new pages.regression.payments.PaymentHistoryPage(driver);
 		}
-	}
+
+	
 	
 public ContactUsPage navigateToContactUsPage() {
 		
@@ -853,7 +878,7 @@ public ContactUsPage navigateToContactUsPage() {
 		System.out.println("Actual logo's source on Dashboard page is   "+logo_src+" and Expected logo source    "+logoToBeDisplayedOnDashboard+" .");	
 		System.out.println("logo's alt text on Dashboard page is   "+logo_alt);		
 		Assert.assertTrue(logo_src.contains(logoToBeDisplayedOnDashboard));
-		
+	
 	}
 	
 public ClaimSummarypage navigateToClaimsSummaryPage() {
@@ -934,7 +959,7 @@ public PharmacySearchPage navigateToRedesignPharmacyLocaterPage() {
 			pharmacySearchLink.click();
 			try {
 				Thread.sleep(10000);	
-				
+	
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -1007,5 +1032,78 @@ public pages.regression.formsandresources.FormsAndResourcesPage navigatetoFormsn
 
 }*/
 	return new FormsAndResourcesPage(driver);
+	//return null;
 }
+	
+	public PaymentHistoryPage navigateToPaymentHistoryPage() throws InterruptedException
+	 {
+
+	 	    	/*WebDriverWait wait = new WebDriverWait(driver, 30);
+	 				wait.until(ExpectedConditions.elementToBeClickable(paymentslink));
+	 */
+	 	    	if(	validate(iPerceptionPopUp)) {
+	 	    		iPerceptionPopUp.click();
+	 	    	}
+	 	    	else  {
+	 	    		System.out.println("iPerception Pop Up not displayed");
+	 	    	}
+	 	    	
+	 	        Thread.sleep(6000);
+
+	 	    	if (validate(paymentsLink)) {
+
+	 	    		System.out.println("payment link is displayed on the header");
+	 	    		paymentsLink.click();
+	 	    		return new PaymentHistoryPage(driver);
+	 	    	}else{
+	 	    		System.out.println("payment link is not displayed on the header");
+	 	    		return null;
+	 	    	}
+	 	    	/*else{
+	 	    		CoverageAndBenefits.click();
+		 	    	
+		 	    	WebDriverWait wait = new WebDriverWait(driver, 30);
+		 			wait.until(ExpectedConditions.elementToBeClickable(paymentslink));
+		 	    	
+		 	    	validate(paymentslink);
+		 	    	paymentslink.click();
+		 	    	return new PaymentHistoryPage(driver);
+	 	    	}*/
+	 	
+
+	//return new PaymentHistoryPage(driver);
+}
+
+	/*
+	 * Added by Sneha - To Navigate to Order plan Materials page by clicking on link in Rally Dashboard
+	 * 
+	 */
+	public OrderMaterialsPage navigateToOrderPlanMaterialsPage() throws InterruptedException {
+		
+		CommonUtility.checkPageIsReady(driver);
+		if(validate(OrderMaterial_Dashboard)){
+			System.out.println("Order Materials link found on dashboard");
+			JavascriptExecutor executor = (JavascriptExecutor)driver;
+			executor.executeScript("arguments[0].click();", OrderMaterial_Dashboard);
+			//OrderMaterial_Dashboard.click();
+		}
+		else{
+			String Page_URL = "https://" + MRScenario.environment + "-medicare.uhc.com//member/order-plan-materials.html";
+			//String Page_URL = driver.getCurrentUrl().split(".com")[0];
+			driver.navigate().to(Page_URL);
+			System.out.println("Navigated to Order materials Page URL : "+Page_URL);
+		}
+		try {
+			Thread.sleep(3000);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		CommonUtility.checkPageIsReady(driver);
+//		CommonUtility.waitForPageLoadNew(driver, orderplanHeadertxt, 30);
+		if (orderplanHeadertxt.isDisplayed()) {
+			return new OrderMaterialsPage(driver);
+		}
+		return null;
+	}
 }
