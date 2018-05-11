@@ -64,7 +64,7 @@ public class OneTimePaymentPage extends UhcDriver{
 	@FindBy(xpath ="//*[@id='consent']/following-sibling::label[contains(text(),'I have read and agree to the following')]")
 	private WebElement electronicsignature;
 	
-	@FindBy(xpath="//*[@class='parsys overview']//div[@class='row'][3]//div[@class='longform__row'][10]//div[@class='margin-medium']/a[2]")
+	@FindBy(xpath="//*[@class='overview parsys']//div[@class='row'][3]//div[@class='longform__row'][10]//div[@class='margin-medium']/a[2]")
 	private WebElement continueAutoPayButton;
 
 

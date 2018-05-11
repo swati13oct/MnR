@@ -359,6 +359,21 @@ public OneTimePaymentPage AutoPay(){
 			 {
 				 SetUpAutoPayButton.click();
 				 System.out.println("clicked on Setup New Payment button");
+				 try{
+					 waitforElement(SetUpNewPayment);
+					 
+					 if (validate(SetUpNewPayment)){
+						 SetUpNewPayment.click();
+						 System.out.println("clicked on Setup New Payment button");		 
+					 return new  OneTimePaymentPage(driver);
+					 }
+					 else
+						 return null;
+				 }catch(Exception e)
+				 {
+					 
+				 }
+					 
 				 return new  OneTimePaymentPage(driver);
 			 }
 			 else
