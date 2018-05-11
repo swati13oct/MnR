@@ -1,5 +1,6 @@
 package pages.redesign;
 
+import org.junit.Assert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -103,7 +104,10 @@ public class HsidRegistrationPersonalCreateAccount extends UhcDriver {
 	private WebElement createMyIDButton;
 
 	@FindBy(id = "secOption")
-	private WebElement securityTypeDropdown;	
+	private WebElement securityTypeDropdown;
+	
+	@FindBy(id="username")
+	private WebElement usernameField;
 
 
 	public HsidRegistrationPersonalCreateAccount(WebDriver driver) {
@@ -223,6 +227,19 @@ public class HsidRegistrationPersonalCreateAccount extends UhcDriver {
 
 		Select dropdown = new Select(securityTypeDropdown);
 		dropdown.selectByVisibleText(securityType);
+	}
+	
+	public void usernameautofill(String username)
+	{
+		System.out.println(usernameField.getAttribute("value"));
+		if (usernameField.getAttribute("value").equalsIgnoreCase(username))
+				{
+			Assert.assertTrue(true);
+				}
+		else
+		{
+			Assert.fail("usernameField.getText() >>"+ usernameField.getText());	
+					}
 	}
 
 }
