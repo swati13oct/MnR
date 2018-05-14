@@ -27,10 +27,6 @@ import pages.regression.accounthomepage.AccountHomePage;
 //import pages.member.bluelayer.AccountHomePage;
 import pages.member.bluelayer.LoginPage2;
 import pages.regression.profileandpreferences.*;
-import pages.member.bluelayer.ProfilePreferencesPage;
-
-import pages.regression.accounthomepage.AccountHomePage;
-
 //import pages.member.bluelayer.ProfilePreferencesPage;
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 

@@ -8,7 +8,6 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.acquisition.enrollinplan.EnrollInPlanCommonConstants;
 import acceptancetests.acquisitionvbf.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.OLE_PageConstants;
@@ -28,10 +27,7 @@ import pages.acquisition.ole.PersonalInformationPage;
 import pages.acquisition.ole.PrelimineryQuestionsPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.ComparePlansPage;
-import pages.acquisition.ulayer.MedicaidPage;
-import pages.acquisition.ulayer.OtherHealthInsurancePage;
 import pages.acquisition.ulayer.PlanDetailsPage;
-import pages.acquisition.ulayer.PlanPaymentOptions;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
 /**
@@ -40,7 +36,6 @@ import pages.acquisition.ulayer.VPPPlanSummaryPage;
  */
 public class oleStepDefinition {
 
-	private static final String PrelimineryQuestionsPage = null;
 	@Autowired
 	MRScenario loginScenario;
 

@@ -22,11 +22,6 @@ import atdd.framework.UhcDriver;
  */
 public class LoginPage2 extends UhcDriver {
 
-	// Page URL
-	private static String PAGE_URL = MRConstants.BNCBURL;
-
-	private static String PAGE_URL2 = MRConstants.DASHBOARD_URL;
-	
 	private static String PAGE_URL_TEAM_MEDICARE_TESTHARNESS = MRConstants.TEAM_MEDICARE_TESTHARNESS;
 	
 	private static String STAGE_DASHBOARD_URL = MRConstants.STAGE_DASHBOARD_NEW_DOMAIN_URL;

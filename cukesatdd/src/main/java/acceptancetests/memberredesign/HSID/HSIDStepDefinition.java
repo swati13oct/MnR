@@ -9,10 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
-import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
@@ -30,12 +28,7 @@ import pages.regression.login.LoginPage;
 import pages.regression.accounthomepage.AccountHomePage;
 
 import pages.member.bluelayer.AssistiveRegistrationPage;
-import pages.member.bluelayer.BenefitsAndCoveragePage;
-import pages.member.bluelayer.DashboardPage;
 import pages.member.bluelayer.HSIDLoginPage;
-import pages.member.bluelayer.LoginPage2;
-import pages.member.ulayer.ValueAddedServicepage;
-import pages.regression.accounthomepage.AccountHomePage;
 import pages.member.redesign.DeregisterPage;
 
 /**
@@ -66,7 +59,7 @@ public class HSIDStepDefinition {
 					memberAttributesRow.get(i).getCells().get(1));
 		}
 
-		String category = memberAttributesMap.get("Member Type");
+		memberAttributesMap.get("Member Type");
 		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
 		List<String> desiredAttributes = new ArrayList<String>();
 		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator.hasNext();) {
@@ -130,7 +123,7 @@ public class HSIDStepDefinition {
 					memberAttributesRow.get(i).getCells().get(1));
 		}
 
-		String category = memberAttributesMap.get("Member Type");
+		memberAttributesMap.get("Member Type");
 		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
 		List<String> desiredAttributes = new ArrayList<String>();
 		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator.hasNext();) {
@@ -186,7 +179,7 @@ public class HSIDStepDefinition {
 	public void validateotherfields()
 	{
 		AssistiveRegistrationPage assistiveregistration = (AssistiveRegistrationPage) getLoginScenario().getBean(PageConstantsMnR.ASSISTIVE_REGISTRATION_PAGE);
-		String username = (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
+		getLoginScenario().getBean(LoginCommonConstants.USERNAME);
 		assistiveregistration.validate_allfields();
 	
 	}

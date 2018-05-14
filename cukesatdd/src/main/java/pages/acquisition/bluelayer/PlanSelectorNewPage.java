@@ -5,7 +5,6 @@ package pages.acquisition.bluelayer;
 
 
 import org.json.JSONObject;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -60,9 +59,6 @@ public class PlanSelectorNewPage extends UhcDriver {
 
 
 
-
-
-	private PageData planselectoruhc;
 
 
 	public PlanSelectorNewPage(WebDriver driver) {
