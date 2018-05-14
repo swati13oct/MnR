@@ -15,17 +15,7 @@ import atdd.framework.UhcDriver;
  *
  */
 public class CoverageInformationPage extends UhcDriver{
-	
-	
-	//OLE Common Elements
-	@FindBy(xpath = "//*[@class = 'logo']")
-	private WebElement SiteLogo;
-	
-	@FindBy(xpath = "//*[@class = 'cta-button next-button']")
-	private WebElement NextBtn;
-	
-	@FindBy(xpath = "//*[@class = 'cancel-button modal-link']")
-	private WebElement CancelEnrollmentLink;
+
 	
 	public CoverageInformationPage(WebDriver driver) {
 		super(driver);

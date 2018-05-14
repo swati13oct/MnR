@@ -3,13 +3,13 @@ package pages.redesign;
 import java.io.IOException;
 import java.util.Properties;
 
-import javax.mail.*;
+import javax.mail.Flags;
 import javax.mail.Folder;
+import javax.mail.Message;
 import javax.mail.Message.RecipientType;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Store;
-import javax.mail.internet.MimeMultipart;
 import javax.mail.search.AndTerm;
 import javax.mail.search.FlagTerm;
 import javax.mail.search.RecipientStringTerm;

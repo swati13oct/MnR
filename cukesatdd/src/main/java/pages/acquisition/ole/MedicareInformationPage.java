@@ -24,17 +24,7 @@ public class MedicareInformationPage extends UhcDriver{
 	//OLE Common Elements
 	@FindBy(xpath = "//*[@class = 'logo']//img")
 	private WebElement SiteLogo;
-	
-	//Progress Bar Elements 
-	@FindBy(xpath = "//*[@class = 'progress-legend']")
-	private WebElement ProgressBarText;
 
-	@FindBy(xpath = "//*[@class = 'form-current-progress']")
-	private WebElement ProgressBarPercentageIndicator;
-
-	//Page Navigation Elements
-	@FindBy(id = "ole-form-back-button")
-	private WebElement BackBtn;
 	
 	@FindBy(id = "ole-form-next-button")
 	private WebElement NextBtn;
@@ -56,16 +46,10 @@ public class MedicareInformationPage extends UhcDriver{
 	
 	@FindBy(id="card-type-before")
 	private WebElement RadioCardA;
-	
-	@FindBy(id="card-type-after")
-	private WebElement RadioCardB;
 
 	//Medicare Information fields
 	@FindBy(xpath="//*[@id='firstName' or @id = 'FirstName']")
 	private WebElement firstNameField;
-	
-	@FindBy(xpath = "//*[@id='middleName' or @id = 'Middle']")
-	private WebElement middleInitialField;
 	
 	@FindBy(xpath = "//*[@id='lastName' or @id = 'Last']")
 	private WebElement lastNameField;

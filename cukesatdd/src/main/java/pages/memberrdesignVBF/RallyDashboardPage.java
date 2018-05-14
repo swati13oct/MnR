@@ -1,6 +1,7 @@
 package pages.memberrdesignVBF;
 
 import java.util.List;
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -11,7 +12,6 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.memberrdesignVBF.HealthAndWellness;
 
 public class RallyDashboardPage extends UhcDriver {
 

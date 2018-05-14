@@ -2,7 +2,6 @@ package pages.memberrdesignVBF;
 
 import java.util.List;
 
-
 import org.openqa.selenium.By;
 /**
  * 

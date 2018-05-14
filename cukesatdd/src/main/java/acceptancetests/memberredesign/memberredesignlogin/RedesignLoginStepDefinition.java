@@ -12,17 +12,15 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageConstantsMnR;
-
 //import acceptancetests.deprecated.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonConstants;
 import acceptancetests.data.LoginCommonConstants;
+import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import gherkin.formatter.model.DataTableRow;
-
-import pages.regression.login.LoginPage;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.login.LoginPage;
 
 /**
  * Functionality: Benefits and Coverage page

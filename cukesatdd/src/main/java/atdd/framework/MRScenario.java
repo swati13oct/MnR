@@ -78,8 +78,6 @@ public class MRScenario {
                public static String environmentMedicare;
                public static String isTestHarness;
                public static String domain;
-               private static final String SQL_COMMIT = "COMMIT";
-
 
                private static final String DIRECTORY = "/src/main/resources/";
 

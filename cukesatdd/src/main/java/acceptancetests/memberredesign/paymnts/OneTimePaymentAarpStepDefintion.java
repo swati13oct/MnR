@@ -1,7 +1,5 @@
 package acceptancetests.memberredesign.paymnts;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,9 +15,20 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.LoginCommonConstants;
+import acceptancetests.data.PageConstants;
+import acceptancetests.data.PageConstantsMnR;
+import atdd.framework.MRScenario;
+import cucumber.api.DataTable;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
 import pages.member.bluelayer.DashboardPage;
 import pages.member.redesign.NewLoginPage;
-
 import pages.member.ulayer.LoginPage;
 import pages.member.ulayer.OneTimePaymentPageSubmitted;
 import pages.member.ulayer.OneTimePaymentsPage;
@@ -35,17 +44,6 @@ import pages.regression.payments.ConfirmOneTimePaymentPage;
 import pages.regression.payments.OneTimePaymentPage;
 import pages.regression.payments.OneTimePaymentSuccessPage;
 import pages.regression.payments.PaymentHistoryPage;
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageConstants;
-import acceptancetests.data.PageConstantsMnR;
-import acceptancetests.data.LoginCommonConstants;
-import acceptancetests.memberredesign.paymnts.PaymentCommonConstants;
-import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 
 /**
  * @author pperugu

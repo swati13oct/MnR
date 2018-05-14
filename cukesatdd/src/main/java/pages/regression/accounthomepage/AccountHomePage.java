@@ -14,16 +14,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.regression.claims.ClaimSummarypage;
-import pages.regression.ordermaterials.OrderMaterialsPage;
-//import pages.member.bluelayer.BenefitsAndCoveragePage;
-import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 //import pages.member.redesign.ContactUsPage;
 import pages.member.ulayer.OneTimePaymentsPage;
 import pages.member.ulayer.PlanComparePage;
@@ -32,10 +29,14 @@ import pages.member.ulayer.TestHarness;
 import pages.redesign.PaymentHistoryPage;
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.regression.claims.ClaimDetailsPage;
+import pages.regression.claims.ClaimSummarypage;
 //import pages.regression.claims.ClaimSummarypage;
 import pages.regression.contactus.ContactUsPage;
 import pages.regression.formsandresources.FormsAndResourcesPage;
+import pages.regression.ordermaterials.OrderMaterialsPage;
 import pages.regression.pharmacylocator.PharmacySearchPage;
+//import pages.member.bluelayer.BenefitsAndCoveragePage;
+import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 
 
 

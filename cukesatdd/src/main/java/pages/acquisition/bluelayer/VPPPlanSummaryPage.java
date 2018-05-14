@@ -30,7 +30,6 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.uhcretiree.Rallytool_Page;
-import pages.acquisition.bluelayer.PlanComparePage;
 
 /**
  * @author pagarwa5

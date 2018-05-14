@@ -23,37 +23,12 @@ public class PrelimineryQuestionsPage extends UhcDriver{
 	@FindBy(xpath = "//*[@class = 'logo']")
 	private WebElement SiteLogo;
 	
-	//Progress Bar Elements 
-	@FindBy(xpath = "//*[@class = 'progress-legend']")
-	private WebElement ProgressBarText;
-
-	@FindBy(xpath = "//*[@class = 'form-current-progress']")
-	private WebElement ProgressBarPercentageIndicator;
-
-	//Page Navigation Elements
-	@FindBy(id = "ole-form-back-button")
-	private WebElement BackBtn;
-	
 	@FindBy(id = "ole-form-next-button")
 	private WebElement NextBtn;
-	
-	@FindBy(id = "cancel-enrollment")
-	private WebElement CancelEnrollmentLink;
-	
-	@FindBy(xpath = "//*[@class='cta-button primary force-cancel-button modal-link show']")
-	private WebElement CancelEnrollmentBtn;
-
 
 	//Preliminery Page header
 	@FindBy(xpath = "//*[@class='only-prelim']")
 	private WebElement PrelimPageHeader;
-
-	// Medicaid Questions
-	@FindBy(id = "medicaidnum")
-	private WebElement MedicaidquestionRadio;
-
-	@FindBy(id = "medicaidNumber")
-	private WebElement MedicaidNumberField;
 	
 	@FindBy(xpath = "//label[@for='medicaid-no']")
 	private WebElement medicaiddno;
@@ -63,20 +38,7 @@ public class PrelimineryQuestionsPage extends UhcDriver{
 	
 	@FindBy(id = "medicaid-number")
 	private WebElement medicaidnum;
-	
-	@FindBy(xpath = "//*[@id='esrd-msg-block']//p[1]")
-	private WebElement Medicaid_ErrorMessage;
-	
-	//ESRD question
 
-	@FindBy(id = "renalstage")
-	private WebElement ESRDquestionRadio;
-	
-	@FindBy(xpath = "//*[@id='esrd-msg-block']//p']")
-	private WebElement ESRD_ErrorMessage;
-	
-	//Right Rail Elements
-	
 			@FindBy(id = "tty-number")
 			private WebElement RightRailTFN;
 

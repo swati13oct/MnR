@@ -30,13 +30,12 @@ import gherkin.formatter.model.DataTableRow;
 //import pages.member.bluelayer.AccountHomePage;
 
 import pages.member.bluelayer.LoginPage2;
-
 import pages.member.ulayer.ValueAddedServicepage;
-import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.redesign.BenefitsCoveragePage;
 import pages.redesign.RedesignLoginPage;
 import pages.redesign.UlayerHomePage;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 
 /**
  * Functionality: Benefits and Coverage page

@@ -16,7 +16,6 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import junit.framework.Assert;
-import pages.memberrdesignVBF.OneTimePaymentPageSubmitted;
 
 /**
  * @author saduri
