@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acceptancetests.data.CommonConstants;
 //import acceptancetests.deprecated.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonConstants;
 import acceptancetests.data.LoginCommonConstants;
+import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -23,11 +24,11 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
-import pages.member.bluelayer.AssistiveRegistrationPage;
-import pages.member.bluelayer.HSIDLoginPage;
-import pages.member.redesign.DeregisterPage;
 import pages.regression.accounthomepage.AccountHomePage;
-import pages.regression.login.LoginPage;
+import pages.regression.login.AssistiveRegistrationPage;
+import pages.regression.login.DeregisterPage;
+import pages.regression.login.HSIDLoginPage;
+import pages.regression.login.HsidRegistrationPersonalCreateAccount;
 
 /**
  * Functionality: Benefits and Coverage page
@@ -87,10 +88,10 @@ public class HSIDStepDefinition {
          
 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		LoginPage loginPage = new LoginPage(wd);
+		HSIDLoginPage loginPage = new HSIDLoginPage(wd);
 		loginPage.validateelements();
         AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
-        Thread.sleep(10000);
+		
 		if (accountHomePage!= null) {
 			 getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
 			Assert.assertTrue(true);
@@ -154,9 +155,9 @@ public class HSIDStepDefinition {
 		HSIDLoginPage loginPage = new HSIDLoginPage(wd);
 		loginPage.validateelements();
        
-		AssistiveRegistrationPage assistiveregistration = (AssistiveRegistrationPage) loginPage.doLoginWith2(userName, pwd);
-		if (assistiveregistration != null) {
-			 getLoginScenario().saveBean(PageConstantsMnR.ASSISTIVE_REGISTRATION_PAGE,assistiveregistration);
+		HsidRegistrationPersonalCreateAccount hsidRegistrationPersonalCreateAccount  = (HsidRegistrationPersonalCreateAccount) loginPage.doLoginWith2(userName, pwd);
+		if (hsidRegistrationPersonalCreateAccount != null) {
+			 getLoginScenario().saveBean(PageConstants.HSID_REGISTRATION_PERSONALCREATEACCOUNT, hsidRegistrationPersonalCreateAccount);
 			Assert.assertTrue(true);
 		}
 		else {
@@ -168,9 +169,9 @@ public class HSIDStepDefinition {
 	@And("^the user validate username autofill$")
 	public void validateelementassistive()
 	{
-		AssistiveRegistrationPage assistiveregistration = (AssistiveRegistrationPage) getLoginScenario().getBean(PageConstantsMnR.ASSISTIVE_REGISTRATION_PAGE);
+		HsidRegistrationPersonalCreateAccount hsidRegistrationPersonalCreateAccount = (HsidRegistrationPersonalCreateAccount) getLoginScenario().getBean(PageConstants.HSID_REGISTRATION_PERSONALCREATEACCOUNT);
 		String username = (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
-		assistiveregistration.usernameautofill(username);
+		hsidRegistrationPersonalCreateAccount.usernameautofill(username);
 	}
 	
 	@And("^the user validate all fields on this page$")
