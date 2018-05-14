@@ -1,20 +1,21 @@
 
 package pages.regression.profileandpreferences;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
@@ -62,17 +63,14 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(className = "bold atdd-profile-membernumber")
 	private WebElement memberId;
 
-	@FindBy(xpath = "//span[contains(text(),'Username')]")
-	private WebElement username;
-
 	@FindBy(xpath = ".//*[@class='account_settings form__content']/div/flex/flex/flex-content[2]/p")
 	private WebElement usernameText;
 
 	@FindBy(xpath = ".//*[@id='password']/div/div/span[1]")
 	private WebElement password;
 
-	@FindBy(xpath = ".//*[@id='password']/div/div/span[2]")
-	private WebElement passwordText;
+	//@FindBy(xpath = ".//*[@id='password']/div/div/span[2]")
+	//private WebElement passwordText;
 
 	@FindBy(id = "Artwork")
 	private WebElement editButton;
@@ -140,9 +138,6 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(id = "profileemailaddress")
 	private WebElement EmailValue;
 
-	@FindBy(xpath = ".//*[@id='needhelpsectioncontactus']//p[Contains(text(),'See more ways to')]")
-	private WebElement Seemorewaystext;
-
 	@FindBy(className = "atdd-contact-us")
 	private WebElement contactUs;
 
@@ -183,9 +178,6 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@id='phoneCardHeight']//span[contains(text(),'Evening Phone')]")
 	private WebElement eveningPhone;
-
-	@FindBy(id = "phone-form")
-	private WebElement PhoneForm;
 
 	@FindBy(xpath= ".//*[@id='phone-form']//button")
 	private WebElement phoneSaveButton;
@@ -298,9 +290,6 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(className = "atdd-goGreenHeader")
 	private WebElement goggreenheader;
 
-	@FindBy(className = "atdd-section-heading")
-	private WebElement communicationheader;
-
 	@FindBy(xpath = "html/body/div[2]/div[3]/div[2]/div[1]/div/div/div/div/div[1]/div/div/div/div/div/div/a")
 	private WebElement Profilenprefernceslink;
 
@@ -312,9 +301,6 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	@FindBy(className = "atdd-banklink-prefernce")
 	private WebElement backLink1;
-
-	@FindBy(xpath = "atdd-banklink-prefernce")
-	private WebElement backLink2;
 
 	@FindBy(className = "atdd-notes")
 	private WebElement NoteSection;

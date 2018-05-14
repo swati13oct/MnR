@@ -4,12 +4,12 @@ import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.PageConstants;
+import atdd.framework.MRScenario;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import pages.memberrdesignVBF.ProviderSearchPage;
 import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.memberrdesignVBF.TestHarness;
-import atdd.framework.MRScenario;
 
 public class MemberProviderSearchStepDefinition {
 	@Autowired

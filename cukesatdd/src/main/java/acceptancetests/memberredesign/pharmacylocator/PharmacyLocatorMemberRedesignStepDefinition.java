@@ -6,8 +6,10 @@ package acceptancetests.memberredesign.pharmacylocator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;

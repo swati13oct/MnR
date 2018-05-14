@@ -7,26 +7,12 @@
  */
 package acceptancetests.memberredesign.sso;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
-
-//import pages.member.bluelayer.AccountHomePage;
-//import pages.member.bluelayer.ProfilePageHsid;
-
-import pages.regression.accounthomepage.AccountHomePage;
-
-
-
-import pages.regression.profileandpreferences.ProfileandPreferencesPage;
-import pages.regression.sso.cqLoginPage;
-import pages.regression.sso.ssoTestHarnessPage;
-//import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
@@ -37,6 +23,16 @@ import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import gherkin.formatter.model.DataTableRow;
+
+//import pages.member.bluelayer.AccountHomePage;
+//import pages.member.bluelayer.ProfilePageHsid;
+
+import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.profileandpreferences.ProfileandPreferencesPage;
+import pages.regression.sso.cqLoginPage;
+import pages.regression.sso.ssoTestHarnessPage;
+//import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 /**
  * 
  * @author jkuma14

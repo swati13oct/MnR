@@ -16,16 +16,6 @@ import atdd.framework.UhcDriver;
  */
 public class SpecialElectionPeriodPage extends UhcDriver{
 	
-	
-	//OLE Common Elements
-	@FindBy(xpath = "//*[@class = 'logo']")
-	private WebElement SiteLogo;
-	
-	@FindBy(xpath = "//*[@class = 'cta-button next-button']")
-	private WebElement NextBtn;
-	
-	@FindBy(xpath = "//*[@class = 'cancel-button modal-link']")
-	private WebElement CancelEnrollmentLink;
 
 	public SpecialElectionPeriodPage(WebDriver driver) {
 		super(driver);

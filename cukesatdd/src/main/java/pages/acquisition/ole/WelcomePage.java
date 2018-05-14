@@ -34,9 +34,6 @@ public class WelcomePage extends UhcDriver{
 	// WebElements for Welcome Page
 	@FindBy(xpath = "//*[@class = 'only-intro']")
 	private WebElement WelcomePageHeader;
-	
-	@FindBy(xpath="//a[contains(text(), 'Our Plans')]")
-	private WebElement OurPlansLink;
 
 	@FindBy(id = "view-learn-enrollment")
 	private WebElement LearnMore_Modal;
@@ -58,9 +55,6 @@ public class WelcomePage extends UhcDriver{
 	
 	@FindBy(id = "learn-more")
 	private WebElement LearnMoreButton;
-	
-	@FindBy(xpath = "//*[@id='learn-more-ole']/a")
-	private WebElement RightRail_LearnMoreLink;
 	
 /*	@FindBy(xpath = "//*[@id='enrollment-disclaimer-accept-yes']")
 	private WebElement DisclaimerAgreeCheckBx;
