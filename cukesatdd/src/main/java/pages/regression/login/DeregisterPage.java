@@ -1,4 +1,4 @@
-package pages.member.redesign;
+package pages.regression.login;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -22,6 +22,9 @@ import atdd.framework.UhcDriver;
  */
 
 public class DeregisterPage extends UhcDriver {
+
+    /** The signin page url. */
+    private static String PAGE_URL = MRConstants.DEREGISTER_STAGE_URL;
 
     /** The agent party unix id. */
     @FindBy(id = "tobederegisteruser")

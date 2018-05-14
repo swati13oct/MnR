@@ -1,5 +1,6 @@
 package pages.regression.login;
 
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -76,6 +77,10 @@ public class ConfirmSecurityQuestion extends UhcDriver {
 		//formContent.click();
 		WebElement submitbutton = driver.findElement(By.id("continueSubmitButton"));
 		submitbutton.click();
+		Thread.sleep(5000);
+
+
+
 	}
 
 }

@@ -12,11 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.data.MRConstants;
-import acceptancetests.util.CommonUtility;
-import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.LoginAssistancePage;
-import pages.memberrdesignVBF.SecurityQuestionsPage;
 
 /**
  * @author pagarwa5

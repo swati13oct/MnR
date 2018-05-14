@@ -8,7 +8,6 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.memberrdesignVBF.RallyDashboardPage;
 
 public class HealthAndWellness extends UhcDriver {
 

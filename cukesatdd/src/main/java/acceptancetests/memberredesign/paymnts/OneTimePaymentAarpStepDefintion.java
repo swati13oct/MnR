@@ -1,7 +1,5 @@
 package acceptancetests.memberredesign.paymnts;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,13 +15,20 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
-import pages.dashboard.eob.EOBPage;
 
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.LoginCommonConstants;
+import acceptancetests.data.PageConstants;
+import acceptancetests.data.PageConstantsMnR;
+import atdd.framework.MRScenario;
+import cucumber.api.DataTable;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
 import pages.member.bluelayer.DashboardPage;
-import pages.member.redesign.MemberAuthLoginPage;
-import pages.member.redesign.MemberSearchPage;
 import pages.member.redesign.NewLoginPage;
-
 import pages.member.ulayer.LoginPage;
 import pages.member.ulayer.OneTimePaymentPageSubmitted;
 import pages.member.ulayer.OneTimePaymentsPage;
@@ -34,24 +39,11 @@ import pages.member.ulayer.TeamCLoginUlayerPayments;
 import pages.member.ulayer.TeamHLoginUlayer;
 import pages.member.ulayer.TestHarness;
 import pages.regression.accounthomepage.AccountHomePage;
-import pages.regression.accounthomepage.AccountHomePage;
 //import pages.regression.payments.AccountHomePage;
 import pages.regression.payments.ConfirmOneTimePaymentPage;
 import pages.regression.payments.OneTimePaymentPage;
 import pages.regression.payments.OneTimePaymentSuccessPage;
 import pages.regression.payments.PaymentHistoryPage;
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageConstants;
-import acceptancetests.data.PageConstantsMnR;
-import acceptancetests.data.LoginCommonConstants;
-import acceptancetests.memberredesign.paymnts.PaymentCommonConstants;
-import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.After;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 
 /**
  * @author pperugu
@@ -1195,7 +1187,7 @@ public class OneTimePaymentAarpStepDefintion {
 				.getBean(PageConstantsMnR.ONE_TIME_PAYMENTS_DASHBOARD);
 		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = oneTimePaymentsPage
 				.enterInfoWithoutCheckBoxAndContinue();
-		ReviewOneTimePaymentsPage reviewOneTimePaymentsPagechkbox = oneTimePaymentsPage
+		oneTimePaymentsPage
 				.errorMessagechkBox();
 		if (reviewOneTimePaymentsPage != null) {
 			getLoginScenario().saveBean(
@@ -1280,7 +1272,7 @@ public class OneTimePaymentAarpStepDefintion {
 	public void user_clicks_cancelbtn_onOnetimePaymentPage() {
 		OneTimePaymentsPage oneTimePaymentsPage = (OneTimePaymentsPage) getLoginScenario()
 				.getBean(PageConstantsMnR.ONE_TIME_PAYMENTS_DASHBOARD);
-		OneTimePaymentPage reviewOneTimePaymentsPage = oneTimePaymentsPage
+		oneTimePaymentsPage
 				.onetimepagecancelbtn();
 	}
 }

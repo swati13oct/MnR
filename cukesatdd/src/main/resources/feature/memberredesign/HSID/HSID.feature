@@ -77,14 +77,7 @@ Feature:To test HSID registration flow
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
    When the user validate username autofill
-   And enter first name, last name, date of birth, zip code, member id and click continue
-     | firstName   | <firstName>   |
-     | lastName    | <lastName>    |
-     | dob         | <dob>         |
-     | memberid    | <memberid>   |
-     |zipcode 	   | <zipcode>  |
-  And user is navigated to step two:create account page
-  And enter username, password, re-enter password, email, re-enter email
+   And enter username, password, re-enter password, email, re-enter email
      | userName   | <userName>   |
      | password   | <password>   |
      | email      | <email>   	|

@@ -10,11 +10,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import pages.regression.accounthomepage.AccountHomePage;
+
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.regression.accounthomepage.AccountHomePage;
 
 /**
  * @author pjaising
@@ -22,11 +23,6 @@ import atdd.framework.UhcDriver;
  */
 public class LoginPage2 extends UhcDriver {
 
-	// Page URL
-	private static String PAGE_URL = MRConstants.BNCBURL;
-
-	private static String PAGE_URL2 = MRConstants.DASHBOARD_URL;
-	
 	private static String PAGE_URL_TEAM_MEDICARE_TESTHARNESS = MRConstants.TEAM_MEDICARE_TESTHARNESS;
 	
 	private static String STAGE_DASHBOARD_URL = MRConstants.STAGE_DASHBOARD_NEW_DOMAIN_URL;

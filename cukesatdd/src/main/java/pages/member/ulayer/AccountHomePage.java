@@ -24,10 +24,10 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.regression.claims.ClaimSummarypage;
 import pages.member.redesign.ContactUsPage;
-import pages.regression.pharmacylocator.PharmacySearchPage;
+import pages.regression.claims.ClaimSummarypage;
 import pages.regression.payments.PaymentHistoryPage;
+import pages.regression.pharmacylocator.PharmacySearchPage;
 /**
  * @author pjaising
  */

@@ -30,13 +30,12 @@ import gherkin.formatter.model.DataTableRow;
 //import pages.member.bluelayer.AccountHomePage;
 
 import pages.member.bluelayer.LoginPage2;
-
 import pages.member.ulayer.ValueAddedServicepage;
-import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.redesign.BenefitsCoveragePage;
 import pages.redesign.RedesignLoginPage;
 import pages.redesign.UlayerHomePage;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 
 /**
  * Functionality: Benefits and Coverage page
@@ -1135,34 +1134,30 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("the user validates the Drug costs Section")
 	public void user_validate_drugCostSectionTexas() {
 				
-		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+		getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		//planBenefitsCoverage.validatedrugCostSectionTexas();
 						
 	}
 	@And("the user verifies the Retail Cost sharing table")
 	public void user_validate_RetailCostSharing_Drugtable() {
 				
-		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+		getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		//planBenefitsCoverage.validateRetailCostSharingdrugtable();
 						
 	}
 	@And("the user verifies the Mail Order Cost sharing table")
 	public void user_validate_MailOrderCostSharing_Drugtable() {
 				
-		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+		getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		//planBenefitsCoverage.validateMailOrderCostSharing_Drugtable();
 						
 	}
 	
 	@And("the user validates the Office Visits section")
 	public void user_validate_OfficeVisitssection() {
 				
-		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+		getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		//planBenefitsCoverage.validateOfficeVisitssection();
 						
 	}
 	
