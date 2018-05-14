@@ -37,10 +37,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.firefox.internal.ProfilesIni;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
@@ -48,7 +45,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.stereotype.Component;
 
-import com.sun.java_cup.internal.runtime.Scanner;
+//import com.sun.java_cup.internal.runtime.Scanner;
 
 import acceptancetests.data.CommonConstants;
 import cucumber.api.Scenario;
@@ -81,16 +78,12 @@ public class MRScenario {
                public static String environmentMedicare;
                public static String isTestHarness;
                public static String domain;
-               private static final String SQL_COMMIT = "COMMIT";
-
 
                private static final String DIRECTORY = "/src/main/resources/";
 
                public static int count = 0;
 
-               
                public static final String USERNAME = "ucpadmin";
-
                public static final String ACCESS_KEY ="2817affd-616e-4c96-819e-4583348d7b37";
                
 
@@ -250,138 +243,6 @@ public class MRScenario {
                                              }
                               } catch (IOException e) {
                                              // TODO Auto-generated catch block
-                                             e.printStackTrace();
-                              }
-
-               }
-
-               private static boolean checkMemberFound(String userName, Connection con,
-                                             String defaultSchema) {
-
-                              Statement stmt;
-                              ResultSet rs = null;
-                              try {
-                                             stmt = con.createStatement();
-                                             String query = "select * from " + defaultSchema
-                                                                           + ".PORTAL_USER where USER_NAME='" + userName + "'";
-                                             rs = stmt.executeQuery(query);
-                              } catch (SQLException e) {
-                                             // TODO Auto-generated catch block
-                                             e.printStackTrace();
-                              }
-                              try {
-
-                                             if (rs.next()) {
-                                                            return true;
-                                             } else {
-                                                            System.out.println(userName + ": Not found in database");
-                                             }
-                              } catch (SQLException e) {
-                                             e.printStackTrace();
-                              }
-                              return false;
-               }
-
-               private static void removeMemberFound(String userName, Connection con,
-                                             String defaultSchema) {
-
-                              Statement stmt;
-                              ResultSet rs = null;
-
-                              try {
-                                             stmt = con.createStatement();
-                                             String query = "select * from " + defaultSchema
-                                                                           + ".PORTAL_USER where USER_NAME='" + userName + "'";
-                                             rs = stmt.executeQuery(query);
-                              } catch (SQLException e) {
-                                             // TODO Auto-generated catch block
-                                             e.printStackTrace();
-                              }
-
-                              try {
-                                             /* Checking in DataBase */
-                                             if (rs.next()) {
-                                                            stmt = con.createStatement();
-
-                                                            String query = "DELETE FROM "
-                                                                                          + defaultSchema
-                                                                                          + ".PORTAL_USER_ACCOUNT where PORTAL_USER_ID in (select PORTAL_USER_ID from "
-                                                                                          + defaultSchema + ".PORTAL_USER where USER_NAME='"
-                                                                                          + userName + "')";
-                                                            String query1 = "DELETE FROM " + defaultSchema
-                                                                                          + ".PORTAL_USER where USER_NAME='" + userName + "'";
-                                                            rs = stmt.executeQuery(query);
-                                                            rs = stmt.executeQuery(query1);
-
-                                                            System.out.println("USERNAME " + userName
-                                                                                          + " :: deleted from PORTAL_USER table");
-
-                                             } else {
-                                                            System.out.println("USERNAME " + userName
-                                                                                          + " :: member not found in database");
-                                             }
-
-                              } catch (SQLException e) {
-                                             e.printStackTrace();
-                              }
-
-               }
-
-               private static void addMember(String userName, Connection con,
-                                             String defaultSchema, String[] massRegisStreamAttributes) {
-
-                              Statement stmt;
-                              ResultSet rs = null;
-
-                              String individualID = massRegisStreamAttributes[5];
-                              String accountID = massRegisStreamAttributes[6];
-                              String businessType = massRegisStreamAttributes[7];
-
-                              /* Creating Database entry */
-
-                              /*
-                              * Sample Queries ::::: INSERT INTO portal_user ( PORTAL_USER_ID,
-                              * USER_NAME,EMAIL_OPT_IN_IND,GUID,UPDATE_NU,CREATED_BY
-                              * ,CREATION_DATE,LAST_MODIFIED_BY,LAST_MODIFIED_DATE ) VALUES ( (SELECT
-                              * MAX(PORTAL_USER_ID) FROM portal_user)+1,
-                              * 'ATDD_ULAYER_MAPD_01','N','367c9a44d9076499:-2cd46151:1599308a8fb:-7fdb',8,'portaladmin','13-JAN-17
-                              * 08.01.56.509000000 PM','portaladmin','15-JAN-17 11.47.14.428000000
-                              * PM'); INSERT INTO portal_user_Account(PORTAL_USER_ACCOUNT_ID
-                              * ,PORTAL_USER_ID,INDIVIDUAL_ID
-                              * ,ACCOUNT_ID,BUSINESS_TYPE,GUID,UPDATE_NU
-                              * ,CREATED_BY,CREATION_DATE,LAST_MODIFIED_BY,LAST_MODIFIED_DATE )
-                              * VALUES(((SELECT MAX(PORTAL_USER_ACCOUNT_ID) FROM
-                              * portal_user_Account)+1),(SELECT MAX(PORTAL_USER_ID) FROM
-                              * portal_user),600030162506,10030183001,
-                              * 'GOVT','c7429fee012cdd44:-347aba25:1597345cc63:-6a7e',0,'portaladmin','16-JAN-17
-                              * 05.28.36.998000000 AM','portaladmin','16-JAN-17 05.28.36.998000000
-                              * AM'); commit;
-                              */
-                              try {
-                                             stmt = con.createStatement();
-                                             String portalUserEntryQuery = "INSERT INTO "
-                                                                           + defaultSchema
-                                                                           + ".PORTAL_USER ( PORTAL_USER_ID,USER_NAME,EMAIL_OPT_IN_IND,GUID,UPDATE_NU,CREATED_BY,CREATION_DATE,LAST_MODIFIED_BY,LAST_MODIFIED_DATE ) VALUES ( (SELECT MAX(PORTAL_USER_ID) FROM portal_user)+1,'"
-                                                                           + userName
-                                                                           + "','N','367c9a44d9076499:-2cd46151:1599308a8fb:-7fdb',8,'portaladmin','13-JAN-17 08.01.56.509000000 PM','portaladmin','15-JAN-17 11.47.14.428000000 PM')";
-                                             String portalUserAccountEntryQuery = "INSERT INTO "
-                                                                           + defaultSchema
-                                                                           + ".PORTAL_USER_ACCOUNT(PORTAL_USER_ACCOUNT_ID,PORTAL_USER_ID,INDIVIDUAL_ID,ACCOUNT_ID,BUSINESS_TYPE,GUID,UPDATE_NU,CREATED_BY,CREATION_DATE,LAST_MODIFIED_BY,LAST_MODIFIED_DATE )  VALUES(((SELECT MAX(PORTAL_USER_ACCOUNT_ID) FROM portal_user_Account)+1),(SELECT MAX(PORTAL_USER_ID) FROM portal_user),"
-                                                                           + individualID
-                                                                           + ","
-                                                                           + accountID
-                                                                           + ",'"
-                                                                           + businessType
-                                                                           + "','c7429fee012cdd44:-347aba25:1597345cc63:-6a7e',0,'portaladmin','16-JAN-17 05.28.36.998000000 AM','portaladmin','16-JAN-17 05.28.36.998000000 AM')";
-                                             rs = stmt.executeQuery(portalUserEntryQuery);
-                                             rs = stmt.executeQuery(portalUserAccountEntryQuery);
-                                             rs = stmt.executeQuery(SQL_COMMIT);
-
-                                             System.out.println(userName
-                                                                           + " Entry Created in DATABASE successfully");
-
-                              } catch (SQLException e) {
-                                             System.out.println("ERROR:: Creating " + userName + " in DATABASE");
                                              e.printStackTrace();
                               }
 
@@ -771,7 +632,7 @@ public class MRScenario {
                               }
                }
 
-            public WebDriver getWebDriver() {
+         /*   public WebDriver getWebDriver() {
 
                               /*
                               * 
@@ -862,54 +723,31 @@ public class MRScenario {
 
                               }
                               return webDriver;
-               }
+               } */
 
-               public WebDriver getWebDriver() {
-                              File pathToBinary = new File("C:\\firefox 29\\firefox.exe");
-                              FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
-                              FirefoxProfile firefoxProfile = new FirefoxProfile();       
-                              webDriver = new FirefoxDriver(ffBinary,firefoxProfile);
-                              webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-                              //webDriver.manage().window().maximize();
-                              return webDriver;
-               }
-         
+       
                public WebDriver getWebDriver() {
             	   
-            	   if (null == webDriver) {              
-         	           File pathToBinary = new File("C:\\Users\\njain112\\Documents\\Chrome\\Application\\Chrome.exe");
-         	           Map<String, Object> chromeOptions = new HashMap<String, Object>();
-         	           chromeOptions.put("binary", pathToBinary);
-         	           DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-         	           capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-         	           System.setProperty("webdriver.chrome.driver","C:\\Users\\njain112\\Documents\\chromedriver.exe");
-         	           webDriver = new ChromeDriver();
+            	   DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+
+            	   capabilities.setCapability("platform", "Windows 7");
+            	   capabilities.setCapability("version", "45.0");
+            	   capabilities.setCapability("parent-tunnel", "sauce_admin");
+            	   capabilities.setCapability("tunnelIdentifier",
+            			   "OptumSharedTunnel-Stg");
+            	   //capabilities.setCapability("name", "MRATDD-TestSuite");
+            	   capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
+            	   String jobName = "VBF Execution - Using " + capabilities.getBrowserName() + " in  " + System.getProperty("environment") +" environment";
+            	   capabilities.setCapability("name", jobName);
+            	   try {
+            		   webDriver = new RemoteWebDriver(new URL(URL), capabilities);
+            	   } catch (MalformedURLException e) {
+            		   // TODO Auto-generated catch block
+            		   e.printStackTrace();
             	   }
-               return webDriver;
-            	*/   
-                 DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-                                            
-                 capabilities.setCapability("platform", "Windows 7");
-                 capabilities.setCapability("version", "45.0");
-                 capabilities.setCapability("parent-tunnel", "sauce_admin");
-                   capabilities.setCapability("tunnelIdentifier",
-                                               "OptumSharedTunnel-Stg");
-              //capabilities.setCapability("name", "MRATDD-TestSuite");
-              capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
-              String jobName = "VBF Execution - Using " + capabilities.getBrowserName() + " in  " + System.getProperty("environment") +" environment";
-              capabilities.setCapability("name", jobName);
-                try {
-                                webDriver = new RemoteWebDriver(new URL(URL), capabilities);
-                 } catch (MalformedURLException e) {
-                                // TODO Auto-generated catch block
-                              e.printStackTrace();
+            	   return webDriver;
                }
-              
-            	
-               
-               return webDriver;
-               }
-               
+
                public WebDriver getIEDriver() {
                               System.setProperty("webdriver.ie.driver",
                                                             "./IEDriverServer.exe");

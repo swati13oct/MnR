@@ -21,7 +21,10 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
-
+//import pages.member.bluelayer.AccountHomePage;
+import pages.memberredesign.bluelayer.AccountHomePage;
+import pages.memberredesign.bluelayer.LoginPage;
+import pages.mobile.member.blayer.BenefitsSummaryPage;
 //import pages.dashboard.member.drugcostestimator.blayer.AddDrugDetails;
 //import pages.dashboard.member.drugcostestimator.blayer.AddNewDrugModal;
 //import pages.dashboard.member.drugcostestimator.blayer.DrugCostEstimatorPage;
@@ -30,10 +33,6 @@ import pages.regression.drugcostestimator.AddDrugDetails;
 import pages.regression.drugcostestimator.AddNewDrugModal;
 import pages.regression.drugcostestimator.DrugCostEstimatorPage;
 import pages.regression.drugcostestimator.SavingsOppurtunity;
-//import pages.member.bluelayer.AccountHomePage;
-import pages.memberredesign.bluelayer.AccountHomePage;
-import pages.memberredesign.bluelayer.LoginPage;
-import pages.mobile.member.blayer.BenefitsSummaryPage;
 
 public class DrugcostestimatorUhcStepDefinition {
 

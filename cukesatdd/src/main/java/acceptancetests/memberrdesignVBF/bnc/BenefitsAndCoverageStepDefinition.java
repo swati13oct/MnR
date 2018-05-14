@@ -2,13 +2,14 @@ package acceptancetests.memberrdesignVBF.bnc;
 
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
-import pages.memberrdesignVBF.BenefitsAndCoveragePage;
-import pages.memberrdesignVBF.RallyDashboardPage;
-import pages.memberrdesignVBF.TestHarness;
+
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
+import pages.memberrdesignVBF.BenefitsAndCoveragePage;
+import pages.memberrdesignVBF.RallyDashboardPage;
+import pages.memberrdesignVBF.TestHarness;
 
 /**
  * @author pagarwa5

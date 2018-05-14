@@ -16,7 +16,6 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.redesign.BenefitsCoveragePage;
 import pages.regression.ordermaterials.OrderMaterialsPage;
 import pages.regression.pharmacylocator.PharmacySearchPage;
 

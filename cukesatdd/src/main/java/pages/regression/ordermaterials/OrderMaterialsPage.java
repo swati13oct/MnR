@@ -51,7 +51,7 @@ public class OrderMaterialsPage extends UhcDriver  {
 	@FindBy(xpath = "//*[@id='eft-id']/..")
 	private WebElement EFTbrochureField;
 
-	@FindBy(id = "order-materials-error")
+	@FindBy(xpath = "//*[@id='order-materials-serviceFail-error']/p")
 	private WebElement SHIPerrorMsg;
 	
 	@FindBy(id = "order-materials-error")
@@ -264,13 +264,20 @@ public class OrderMaterialsPage extends UhcDriver  {
 	}
 
 	/**
-	* @todo : error message for ship members
+	* @throws InterruptedException 
+	 * @todo : error message for ship members
 	*/
 
-	public boolean ValidateSHIPErrorMessage(){
+	public boolean ValidateSHIPErrorMessage() throws InterruptedException{
 		
-		if (SHIPerrorMsg.isDisplayed()){
-			if(SHIPerrorMsg.getText().contains("request cannot be processed at this time. For help, please contact Customer Service")){
+		try {
+			Thread.sleep(8000);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (validate(SHIPerrorMsg)){
+			if(SHIPerrorMsg.getText().contains("request cannot be processed at this time")){
 			System.out.println("*************Error Message Displayed displayed for SHIP invalid Selection in Order materials Page***************");
 			System.out.println("*************Error Message : "+SHIPerrorMsg.getText()+"***************");
 			return true;
@@ -292,6 +299,26 @@ public class OrderMaterialsPage extends UhcDriver  {
 
 	public OrderPlanMaterialConfirmationPage selectsOption(String option) throws InterruptedException {
 		
+		driver.navigate().refresh();
+		
+		try {
+			Thread.sleep(3000);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try{
+			FeedbackModal.click();
+			System.out.println("FeedBack Modal Present");
+			if (validate(FeedbackModal)){
+				System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
+			}
+			System.out.println("FeedBack Modal Closed");
+		}
+		catch (Exception e) {
+			System.out.println("FeedBack Modal NOT Present");
+		}
+
 		CommonUtility.checkPageIsReady(driver);
 
 		if (option.contains("Member Materials") || option.contains("Welcome Guide") || option.contains("Welcome kit")) {
@@ -299,11 +326,8 @@ public class OrderMaterialsPage extends UhcDriver  {
 			memberMaterialsfield.click();
 			if(!memberMaterialsfield.isEnabled()){
 				System.out.println("*************NOT ABLE to SELECT Member materials Radio***************");
-				
 			}
-
 		}
-		
 		if (option.contains("Replacement ID card")) {
 			System.out.println("*************Selecting Replacement ID card Radio***************");
 			replacementIdField.click();
@@ -318,7 +342,6 @@ public class OrderMaterialsPage extends UhcDriver  {
 			if(!MemberIDcardField.isEnabled()){
 				System.out.println("*************NOT ABLE to SELECT Member ID Card Radio***************");
 			}
-
 		}
 
 		if (option.contains("Electronic Funds Transfer (EFT) Brochure")) {
@@ -384,7 +407,12 @@ public class OrderMaterialsPage extends UhcDriver  {
 			System.out.println("****** Submit Button Clicked ********");
 		}
 
-		Thread.sleep(5000);
+		try {
+			Thread.sleep(5000);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		CommonUtility.checkPageIsReady(driver);
 		if (validate(OrderConfirmationHeader) || validate(OrderConfirmation_addordermaterialLink)) {
 			System.out.println("@@@@ Opder Plan Material COnfirmation Page is Displayed @@@@");

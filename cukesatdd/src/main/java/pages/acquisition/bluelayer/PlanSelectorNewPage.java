@@ -5,31 +5,22 @@ package pages.acquisition.bluelayer;
 
 
 import org.json.JSONObject;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
-import acceptancetests.data.PageData;
 import atdd.framework.UhcDriver;
 
 
 public class PlanSelectorNewPage extends UhcDriver {
 
-
-	@FindBy(xpath = "//article[@id='criteria']/header/div[1]/h2")
-	private WebElement planselectoruhcpage;
-
-
 	@FindBy(id = "planSelectorTool")
 	private WebElement iframePst; 
 
-	@FindBy(xpath = "//a[@class='cta-button']")
-	private WebElement quizButton; 
 
 	@FindBy(xpath = "//div[@id='widget_0tdroCAgSEGuqWNwLbf7xA']/div/a")
 	private WebElement getStartedBtn; 
@@ -60,9 +51,6 @@ public class PlanSelectorNewPage extends UhcDriver {
 
 
 
-
-
-	private PageData planselectoruhc;
 
 
 	public PlanSelectorNewPage(WebDriver driver) {

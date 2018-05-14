@@ -274,4 +274,6 @@ public static final String DASHBOARD_PAGE = "dashboardPage";public static final 
 	public static final String PROFILE_AND_PREFERENCES_PAGE_HSID = "ProfilePageHsid";
 	
 	public static final String COMMUNICATION_PREFERENCE_PAGE = "communicationPrefPage";
+	
+	public static final String Payments_History_Page = "PaymentsHistoryPage";
 }
