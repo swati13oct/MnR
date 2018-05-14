@@ -23,6 +23,8 @@ import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.uhcretiree.Rallytool_Page;
 
 public class PlanDetailsPage extends UhcDriver{
 
@@ -87,6 +89,21 @@ public class PlanDetailsPage extends UhcDriver{
 	 
 	 @FindBy(xpath = ".//*[@id='highlights']/div/div/span[2]/span")
 	 private WebElement compareBoxMessagePDP;
+	 
+	 
+		//Right Rail Element - TFN
+		@FindBy(xpath="//*[@class='tel ng-binding']")
+		private WebElement RightRail_TFN;
+
+		@FindBy(xpath="//a[@class = 'cta-button ng-scope']/span")
+		private List <WebElement> SNP_EnrollinPlanLinks;
+		
+		@FindBy(xpath="//a[contains(text(), 'Enroll in plan')]")
+		private List <WebElement> EnrollinPlan;
+
+		@FindBy(xpath="//*[@id='medicalBenefits']/div[1]/table/tbody/tr[1]/td[4]/strong")
+		private WebElement PremiumForPlan;
+		
 
 	private PageData vppPlanDetails;
 
@@ -349,7 +366,6 @@ public class PlanDetailsPage extends UhcDriver{
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			clickCompareBox();
@@ -418,10 +434,100 @@ public void validatedownbacktoplanslink() throws InterruptedException{
 	  
 		}
 
+
+
+
 public void browserBack() {
 	
 	driver.navigate().back();
 }
+
+/**
+ * Methods added for OLE Flow validations
+ * @author sdwaraka
+ * @param PlanName
+ * @return
+ */
+public String getPlanPremium(String PlanName) {
+	
+	try {
+		Thread.sleep(5000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	System.out.println("Plan Name is : "+PlanName);
+	
+	String PlanPremium = PremiumForPlan.getText();
+	
+	System.out.println("Premium for Plan : "+PlanPremium);
+	return PlanPremium;
+}
+
+/**
+ * @author sdwaraka
+ * Method Added for OLE Flow - Navigate to OLE from Plan Details Page
+ * @param planName
+ * @return
+ * @throws InterruptedException
+ */
+public WelcomePage Enroll_OLE_Plan(String planName) throws InterruptedException {
+	
+	try {
+		Thread.sleep(10000);
+		} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	WebElement Enroll;
+	System.out.println("Enroll in Plan for Plan : "+planName);
+	if (planName.contains("SNP")){
+		Enroll = SNP_EnrollinPlanLinks.get(0);
+	}
+	else{
+		Enroll = EnrollinPlan.get(0);
+	}
+	try {
+		if(validate(Enroll))
+			System.out.println("Found Enroll IN Plan Button for the Plan : "+planName);
+		else
+			System.out.println("Enroll in Plan Button is Not Displayed ");
+
+	}catch(Exception e){
+		System.out.println("Enroll in Plan Button is Not Displayed ");
+	}
+	
+	Enroll.click();
+	
+	try {
+		Thread.sleep(5000);
+		} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	if(driver.getCurrentUrl().contains("enrollment")){
+		System.out.println("OLE Welcome Page is Displayed");
+		return new WelcomePage(driver);
+	}
+	return null;
+}
+
+/**
+ * @author sdwaraka
+ * Method added for OLE Flow Validations
+ * @return
+ */
+public String GetTFNforPlanType() {
+	if(validate(RightRail_TFN)){
+		System.out.println("TFN is displayed in Right Rail");
+		String TFN_Number = RightRail_TFN.getText();
+		return TFN_Number;
+	}
+	System.out.println("TFN is not Displayed for PlanType in VPP page");
+	
+	return null;
+}
+
 }
 
 

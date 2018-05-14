@@ -10,6 +10,9 @@ import atdd.framework.MRScenario;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import pages.memberrdesignVBF.ContactUsPage;
+import pages.memberrdesignVBF.RallyDashboardPage;
+import pages.memberrdesignVBF.TestHarness;
 
 public class ContactusRedesignStepDefinition {
 	/**

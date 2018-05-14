@@ -12,8 +12,6 @@ import java.util.Map;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.regression.accounthomepage.AccountHomePage;
-import pages.regression.pharmacylocator.PharmacySearchPage;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;

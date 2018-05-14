@@ -9,6 +9,9 @@ import pages.memberrdesignVBF.TestHarness;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.java.en.When;
+import pages.memberrdesignVBF.HealthAndWellness;
+import pages.memberrdesignVBF.RallyDashboardPage;
+import pages.memberrdesignVBF.TestHarness;
 
 public class MemberRedesignHealthnWellnessStepDefinition {
 

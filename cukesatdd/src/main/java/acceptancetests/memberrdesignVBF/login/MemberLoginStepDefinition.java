@@ -13,6 +13,9 @@ import acceptancetests.memberrdesignVBF.common.CommonStepDefinition;
 import atdd.framework.MRScenario;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
+import pages.memberrdesignVBF.BenefitsAndCoveragePage;
+import pages.memberrdesignVBF.RallyDashboardPage;
+import pages.memberrdesignVBF.TestHarness;
 
 public class MemberLoginStepDefinition {
 	@Autowired

@@ -40,7 +40,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[1]/div/span/span[@class='ng-binding']")
 	private WebElement maPlansNumber;
 	
-	@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='plan-overview-wrapper']//div[@class='overview-tabs module-tabs-tabs']/div[1]//span[@class='trigger-closed']")
+	//@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='plan-overview-wrapper']//div[@class='overview-tabs module-tabs-tabs']/div[1]//span[@class='trigger-closed']")
+	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[1]//span[@class='trigger-closed']")
 	private WebElement maPlansViewLink;
 	
 	@FindBy(id = "plan-list-1")
@@ -99,7 +100,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(id = "allplanssise")
 	private WebElement allPlansSize;
 
-	@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='plan-overview-wrapper']//div[@class='overview-tabs module-tabs-tabs']/div[1]//span[@class='title']")
+	@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='plan-overview-wrapper']//div[@class='overview-tabs module-tabs-tabs']/div[1]//span[@class='ng-binding']")
 	private WebElement maPlansCount;
 	
 	@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='plan-overview-wrapper']//div[@class='overview-tabs module-tabs-tabs']/div[2]//span[@class='trigger-closed']")
@@ -206,28 +207,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	
 
-	private WebElement getViewPlanDetailsElement(
-			List<WebElement> planElement, ElementData elementData,
-			String planName) {
-		for (WebElement plan : planElement) {
-			
-			if (plan.getText().contains(planName)) {
-				try {
-					Thread.sleep(2000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				WebElement element = findChildElement(elementData,
-						plan);
-
-				return element;
-
-			}
-		}
-		return null;
-	}
-	
 	private WebElement getSpecificPlanSummary(
 			List<WebElement> planElement,
 			String planName) {
@@ -269,6 +248,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 
 	public VPPPlanSummaryPage viewPlanSummary(String planType) {
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		
 		if (planType.equalsIgnoreCase("PDP")) {
 //	WebElement hidePdpPlans invalid
@@ -767,13 +751,23 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath=".//*[@id='plan-list-1']//div[@class='swiper-wrapper']/div[1]//div[@class='swiper-content']//a[contains(text(),'View plan and drug coverage details')]") private WebElement test; 
 	public PlanDetailsPage navigateToPlanDetails(String planName, String planType) {
 		driver.manage().window().maximize();
-		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) { validate(test);
+/*		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) { 
+  			validate(test);
 			ElementData elementData = new ElementData("xpath", ".//a[contains(text(),'View plan and drug coverage details')]");
+		
+			ElementData elementData = new ElementData("id", "viewmoredetlinkmapdplan");
 			WebElement element = getViewPlanDetailsElement(maPlanElement, elementData, planName);
 			if (element != null) {
 				element.click();
-
 			}
+			
+	*/	
+		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {	
+		WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//h2[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@id = 'viewmoredetlinkmapd']"));
+			validate(MAmoreDetailsLink);
+			MAmoreDetailsLink.click();
+			System.out.println("View Plan Details Link is clicked for MA plan"+planName);
+
 
 		} else if (planType.equalsIgnoreCase("PDP")) {
 //			ElementData elementData = new ElementData("id", "viewmoredetlinkpdp");
@@ -788,9 +782,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			}
 */
 		}
+		
 		CommonUtility.checkPageIsReady(driver);
 		if (driver.getTitle().equalsIgnoreCase("AARPMP: Medicare Plan Benefits and Information | AARP® Medicare Plans from UnitedHealthcare®")
 				|| driver.getTitle().equalsIgnoreCase("Plan Detail") || validate(backToPlansLink)) {
+				//|| driver.getTitle().equalsIgnoreCase("Plan Detail") || driver.getCurrentUrl().contains("/details")) {
 			return new PlanDetailsPage(driver);
 		}
 
@@ -1037,6 +1033,39 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		System.out.println("TFN is not Displayed for PlanType in VPP page");
 		
+		return null;
+	}
+
+	public ComparePlansPage selectplantocompare(String PlanType) {
+		//To add upto 4 plans to compare and navigate to Plan Compare Page
+		int count = 1;
+		if(PlanType.contains("PDP")){
+			System.out.println("Plan Type is :"+PlanType);
+			count = (Integer.parseInt(maPlansCount.getText())) + 1;
+			System.out.println("Plan count starts is :"+count);
+		}
+		int CountUntil = count+4;
+		do{
+			String temp = Integer.toString(count);
+			WebElement SelectCompare = driver.findElement(By.xpath("//*[@id = 'compare-plan-"+temp+"']//following-sibling::label"));
+			if(validate(SelectCompare))
+				SelectCompare.click();
+			count++;
+		}while(count<CountUntil);
+		
+		
+	List <WebElement> ComparePlansLinks = driver.findElements(By.xpath("//a[@class='compare-link']"));
+		//validate();
+	for(WebElement CompareLink : ComparePlansLinks){
+		if(CompareLink.isDisplayed()){
+			CompareLink.click();
+			CommonUtility.checkPageIsReady(driver);
+			if (driver.getCurrentUrl().contains("plan-compare")) {
+				return new ComparePlansPage(driver);
+			}
+		}
+	}
+	System.out.println("Compare Plans Link not displayed");
 		return null;
 	}
 

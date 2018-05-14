@@ -13,9 +13,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.bluelayer.AcquisitionHomePage;
-import pages.acquisition.bluelayer.PlanDetailsPage;
-import pages.acquisition.bluelayer.VPPPlanSummaryPage;
+import acceptancetests.acquisition.ole.oleCommonConstants;
+import acceptancetests.acquisitionvbf.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
@@ -24,7 +23,11 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-
+import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.acquisition.bluelayer.PlanComparePage;
+import pages.acquisition.bluelayer.PlanDetailsPage;
+import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 /**
  * Functionality: VPP UHC site
  */
@@ -111,13 +114,15 @@ public class VppStepDefinitionUHC {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		Thread.sleep(7000);
 		plansummaryPage = plansummaryPage.viewPlanSummary(plantype);
-
+		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "UHC_ACQ");
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, plantype);
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
 					plansummaryPage);
-			
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Error validating availables plans for selected plantype in  VPP plan summary page");
 		}
-
 	}
 	
 	/**
@@ -150,24 +155,24 @@ public class VppStepDefinitionUHC {
 			
 			List<DataTableRow> memberAttributesRow = givenAttributes
 					.getGherkinRows();
-			String planName = memberAttributesRow.get(0).getCells().get(1); 
+			String PlanName = memberAttributesRow.get(0).getCells().get(1); 
 					getLoginScenario().saveBean(
-					VPPCommonConstants.PLAN_NAME,planName);
+					VPPCommonConstants.PLAN_NAME,PlanName);
 			VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			String PlanPremium = vppPlanSummaryPage.getPlanPremium(PlanName);
+			getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
 
-			PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(planName);
+			PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(PlanName);
 			if (vppPlanDetailsPage != null) {
 				getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE,
 						vppPlanDetailsPage);
-//				if(vppPlanDetailsPage.validatePlanDetailsPage()){
-//					Assert.assertTrue(true);
-//				}else
-//					Assert.fail("Error in validating the Plan Details Page");
-
+				Assert.assertTrue(true);
 			}
-	}
-		
+			else
+				Assert.fail("Error in Loading the Plan Details Page");	
+		}
+
 		@Then("^the user clicks on both top and bottom back to plans link and validates its redirection$")
 		public void the_user_clicks_on_both_topand_bottom_back_to_plans_link_and_validates_its_redirection() throws InterruptedException {
 //			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE,
@@ -293,5 +298,58 @@ public class VppStepDefinitionUHC {
 			return false;
 		}
 	}
+	@Then("^the user selects plans to add to plan compare and navigates to Plan compare page in UHC site$")
+	public void the_user_selects_plans_to_add_to_plan_compare_and_navigates_to_Plan_compare_page(DataTable planAttributes) throws Throwable {
+		
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		String PlanName = givenAttributesMap.get("Plan Name");
+		//String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
+
+		String PlanYear = "2018"; 
+		String PlanPremium;
+		String ZipCode = (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
+		String County = (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
+		String PlanType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		String TFN;
+		String SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
+		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		TFN = planSummaryPage.GetTFNforPlanType();
+		PlanPremium = planSummaryPage.getPlanPremium(PlanName);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, County);
+		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_TFN, TFN);
+		System.out.println("Plan Name is : "+PlanName);
+		System.out.println("Plan Type is : "+PlanType);
+		System.out.println("Plan Zip Code is : "+ZipCode);
+		System.out.println("Plan County Name is : "+County);
+		System.out.println("Plan Plan Premium is : "+PlanPremium);
+		System.out.println("TFN for Plan Type is : "+TFN);
+		System.out.println("Plan Year is : "+PlanYear);
+		System.out.println("OLE is being started from Acquisition Site : "+SiteName);
+		PlanComparePage comparePlansPage = planSummaryPage.selectplantocompare(PlanType);
+		
+		
+		if (comparePlansPage != null) {
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE,comparePlansPage);
+			Assert.assertTrue(true);
+		}
+		else
+			Assert.fail("Error in Loading the Plan Compare Page");
+		
+	}
+
 	
 }

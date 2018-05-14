@@ -23,12 +23,13 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import pages.acquisition.uhcretiree.Rallytool_Page;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.uhcretiree.Rallytool_Page;
 
 /**
  * @author pagarwa5
@@ -171,9 +172,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[1]/div/span[@class='trigger-closed']")
 	private WebElement closedTrigger;	
 	
-
+/*This SNP View Plans identifier is invalid
 	@FindBy(xpath="//div[@class='snpplans_planbutton']/div[2]/div[2]/div")
 	private WebElement snpplans;			
+*/
+	@FindBy(xpath="//*[contains(text(), 'Special Needs Plans')]/following-sibling::*[@class = 'trigger-closed']")
+	private WebElement snpplans;			
+
 	
 
 	@FindBy(xpath="//div[@class='medsupplans_planbutton']/div[2]/div[1]/a")
@@ -216,6 +221,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@class='swiper-container']")
 	List<WebElement> maPlanElement1;
+	
+	//Right Rail Element - TFN
+	@FindBy(xpath="//*[@class='tel ng-binding']")
+	private WebElement RightRail_TFN;
+	
+
 
 	private PageData vppPlanSummary;
 
@@ -417,38 +428,45 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public PlanDetailsPage navigateToPlanDetails(String planName) {
 		System.out.println("******");
 		System.out.println(planName);
-		if (planName.contains("HMO") || (planName.contains("Regional PPO"))) {
+/*		if (planName.contains("HMO") || (planName.contains("Regional PPO"))) {
 			ElementData elementData = new ElementData("id", "viewmoredetlinkmapd");
 			WebElement element = getViewPlanDetailsElement(maPlanElement, elementData, planName);
 			if (element != null) {
 				element.click();
 			}
 			System.out.println(driver.getCurrentUrl());
-		} else if (planName.contains("PDP")) {
-			ElementData elementData = new ElementData("id", "viewmoredetlinkpdp");
-			WebElement element = getViewPlanDetailsElement(pdpPlanElement,
-					elementData, planName);
-			System.out.println(element.getText());
-			if (element != null) {
+		} else */
+		
+		if (planName.contains("PDP")) {
+//			ElementData elementData = new ElementData("id", "viewmoredetlinkpdp");
+//			WebElement element = getViewPlanDetailsElement(pdpPlanElement, elementData, planName);
+			WebElement PDPmoreDetailsLink = driver.findElement(By.xpath("//h2[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@id = 'viewmoredetlinkpdp']"));
+			validate(PDPmoreDetailsLink);
+			PDPmoreDetailsLink.click();
+			System.out.println("View Plan Details Link is clicked for PDP plan"+planName);
+			
+/*			if (element != null) {
 				element.click();
 			}
-			System.out.println(driver.getCurrentUrl());
-		}
+*/		}
 		else if (planName.contains("SNP")) {
-			ElementData elementData = new ElementData("id", "viewDetailsSNP");
+/*			ElementData elementData = new ElementData("id", "viewDetailsSNP");
 			WebElement element = getViewPlanDetailsElement(snpPlanElement,
 					elementData, planName);
 			if (element != null) {
 				element.click();
-			}
-		}else if (planName.contains("Regional PPO")) {
-			ElementData elementData = new ElementData("id", "viewDetailsMA");
-			WebElement element = getViewPlanDetailsElement(maPlanElement,
-					elementData, planName);
+			}*/
+			WebElement SNPmoreDetailsLink = driver.findElement(By.xpath("//h2[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//a[contains(text(), 'View plan and drug coverage details')]"));
+			validate(SNPmoreDetailsLink);
+			SNPmoreDetailsLink.click();
+			System.out.println("View Plan Details Link is clicked for SNP plan"+planName);
+
+		}else if (planName.contains("HMO") || planName.contains("Regional PPO")) {
+			ElementData elementData = new ElementData("id", "viewmoredetlinkmapd");
+			WebElement element = getViewPlanDetailsElement(maPlanElement, elementData, planName);
 			if (element != null) {
 				element.click();
 			}
-
 		}
 		try {
 			Thread.sleep(5000);
@@ -1331,5 +1349,112 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			return true;
 		return false;
 	}
+	
+	/**
+	 * Methods added for OLE Flow validations
+	 * @author sdwaraka
+	 * @param PlanName
+	 * @return
+	 */
+	public String getPlanPremium(String PlanName) {
+		
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
+		System.out.println("Plan Name is : "+PlanName);
+		
+		WebElement PremiumForPlan = driver.findElement(By.xpath("//h2[contains(text(), '"+PlanName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//li[contains(text(),'Monthly Premium')]//span[contains(text(),'$')]"));
+		String PlanPremium = PremiumForPlan.getText();
+		
+		System.out.println("Premium for Plan : "+PlanPremium);
+		return PlanPremium;
+	}
+
+	/**
+	 * @author sdwaraka
+	 * Method Added for OLE Flow - Navigate to OLE from Plan Summary Page
+	 * @param planName
+	 * @return
+	 * @throws InterruptedException
+	 */
+	public WelcomePage Enroll_OLE_Plan(String planName) throws InterruptedException {
+		
+		System.out.println("Enroll in Plan for Plan : "+planName);
+		WebElement EnrollForPlan = driver.findElement(By.xpath("//h2[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(), 'Enroll in')]"));
+		try {
+		validate(EnrollForPlan);
+		
+		System.out.println("Found Enroll IN Plan Button for the Plan : "+planName);
+		}catch(Exception e){
+			System.out.println("Enroll in Plan Button is Not Displayed ");
+		}
+		EnrollForPlan.click();
+		
+		try {
+			Thread.sleep(5000);
+			} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(driver.getCurrentUrl().contains("enrollment")){
+			System.out.println("OLE Welcome Page is Displayed");
+			return new WelcomePage(driver);
+		}
+		return null;
+	}
+
+	/**
+	 * @author sdwaraka
+	 * Method added for OLE Flow Validations
+	 * @return
+	 */
+	public String GetTFNforPlanType() {
+		if(validate(RightRail_TFN)){
+			System.out.println("TFN is displayed in Right Rail");
+			String TFN_Number = RightRail_TFN.getText();
+			return TFN_Number;
+		}
+		System.out.println("TFN is not Displayed for PlanType in VPP page");
+		
+		return null;
+	}
+
+	public PlanComparePage selectplantocompare(String PlanType) {
+		//To add upto 4 plans to compare and navigate to Plan Compare Page
+		int count = 1;
+		if(PlanType.contains("PDP")){
+			System.out.println("Plan Type is :"+PlanType);
+			count = (Integer.parseInt(maPlansCount.getText())) + 1;
+			System.out.println("Plan count starts is :"+count);
+		}
+		int CountUntil = count+4;
+		do{
+			String temp = Integer.toString(count);
+			WebElement SelectCompare = driver.findElement(By.xpath("//*[@id = 'compare-plan-"+temp+"']//following-sibling::label"));
+			if(validate(SelectCompare))
+				SelectCompare.click();
+			count++;
+		}while(count<CountUntil);
+		
+	List <WebElement> ComparePlansLinks = driver.findElements(By.xpath("//a[@class='compare-link']"));
+		//validate();
+	for(WebElement CompareLink : ComparePlansLinks){
+		if(CompareLink.isDisplayed()){
+			CompareLink.click();
+			CommonUtility.checkPageIsReady(driver);
+			if (driver.getCurrentUrl().contains("plan-compare")) {
+				return new PlanComparePage(driver);
+			}
+		}
+	}
+	System.out.println("Compare Plans Link not displayed");
+		return null;
+	}
 
 }
+

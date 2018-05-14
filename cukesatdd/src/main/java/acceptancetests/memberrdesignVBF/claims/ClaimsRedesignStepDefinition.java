@@ -20,6 +20,11 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
+import pages.memberrdesignVBF.ClaimDetailsPage;
+import pages.memberrdesignVBF.ClaimSummarypage;
+import pages.memberrdesignVBF.RallyDashboardPage;
+import pages.memberrdesignVBF.TestHarness;
 
 public class ClaimsRedesignStepDefinition {
 	@Autowired

@@ -3,8 +3,6 @@
  */
 package pages.memberrdesignVBF;
 
-import junit.framework.Assert;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.JavascriptExecutor;
@@ -17,6 +15,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import junit.framework.Assert;
 
 /**
  * @author saduri

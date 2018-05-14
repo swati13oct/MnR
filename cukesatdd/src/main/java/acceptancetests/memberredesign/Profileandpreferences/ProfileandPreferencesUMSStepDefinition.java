@@ -15,10 +15,6 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.member.bluelayer.LoginPage2;
-import pages.regression.accounthomepage.AccountHomePage;
-import pages.regression.profileandpreferences.CommunicationPreferencePage;
-import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstantsMnR;
@@ -28,6 +24,14 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
+//import pages.member.bluelayer.AccountHomePage;
+import pages.member.bluelayer.LoginPage2;
+import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.profileandpreferences.CommunicationPreferencePage;
+//import pages.member.bluelayer.ProfilePreferencesPage;
+import pages.regression.profileandpreferences.ProfileandPreferencesPage;
+
 
 /**
  * Functionality: Profile And Preferences page
@@ -886,7 +890,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 	}
 	
 	
-	
+
 
 
 

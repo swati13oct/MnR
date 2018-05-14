@@ -18,16 +18,9 @@ import atdd.framework.UhcDriver;
 
 public class PlanSelectorNewPage extends UhcDriver {
 
-
-	@FindBy(xpath = "//article[@id='criteria']/header/div[1]/h2")
-	private WebElement planselectoruhcpage;
-
-
 	@FindBy(id = "planSelectorTool")
 	private WebElement iframePst; 
 
-	@FindBy(xpath = "//a[@class='cta-button']")
-	private WebElement quizButton; 
 
 	@FindBy(xpath = "//div[@id='widget_0tdroCAgSEGuqWNwLbf7xA']/div/a")
 	private WebElement getStartedBtn; 

@@ -19,15 +19,15 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.member.redesign.ContactUsPage;
-import pages.regression.claims.ClaimSummarypage;
-import pages.regression.payments.PaymentHistoryPage;
-import pages.regression.pharmacylocator.PharmacySearchPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.member.redesign.ContactUsPage;
+import pages.regression.claims.ClaimSummarypage;
+import pages.regression.payments.PaymentHistoryPage;
+import pages.regression.pharmacylocator.PharmacySearchPage;
 /**
  * @author pjaising
  */
