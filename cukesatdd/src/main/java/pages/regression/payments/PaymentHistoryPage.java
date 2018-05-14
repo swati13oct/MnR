@@ -303,12 +303,14 @@ public class PaymentHistoryPage extends UhcDriver{
 	 
 	 public OneTimePaymentPage OTPbtn(){
 		 
-		 if(	validate(iPerceptionAutoPopUp)) {
+		 try{
+		 if(validate(iPerceptionAutoPopUp)) {
 	    		iPerceptionAutoPopUp.click();
 	    	}
-	    	else  {
-	    		System.out.println("iPerception Pop Up not displayed");
-	    	}
+		 }catch(Exception e)
+		 {
+			 System.out.println("No iperception Pop Up displayed");
+		 }	    	
 		
 	   try
 	   {
