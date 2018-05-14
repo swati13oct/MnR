@@ -1,5 +1,6 @@
 package pages.regression.payments;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -26,6 +27,8 @@ public class ConfirmOneTimePaymentPage extends UhcDriver{
 	@FindBy(xpath ="//*[@class='parsys overview']//div[@class='row'][1]//div[@ng-if='models.submitAutomaticFailure']/p[2]")
 	private WebElement OneTimePaymentError;
 
+	@FindBy(xpath = "//*[@class='container--base']/div[@class='container']//button[@ng-click='backToPaymentHistoryPage()']")
+	private WebElement BackToPaymentHistoryPage;
 
 	public ConfirmOneTimePaymentPage(WebDriver driver) {
 		super(driver);
@@ -58,7 +61,7 @@ public class ConfirmOneTimePaymentPage extends UhcDriver{
 	}
 
 	
-    public OneTimePaymentSuccessPage confirmsAutoPayment() throws InterruptedException  {
+    public ConfirmOneTimePaymentPage confirmsAutoPayment() throws InterruptedException  {
 		
 		waitforElement(TermsCheckRadioButton);
 		TermsCheckRadioButton.click();
@@ -67,6 +70,7 @@ public class ConfirmOneTimePaymentPage extends UhcDriver{
 			SubmitPaymentButton.click();
 		     System.out.println("Submit Payment Button clicked");
 		CommonUtility.checkPageIsReady(driver);
+		Thread.sleep(5000);
 		if(driver.getTitle().equalsIgnoreCase("overview")){
 			System.out.println("Title matched");
 			Thread.sleep(8000);
@@ -74,22 +78,36 @@ public class ConfirmOneTimePaymentPage extends UhcDriver{
 		try{
 			if(SuccessPay.getText().contains("Thank you for your payment"))
 			{
-				return new OneTimePaymentSuccessPage(driver);			
-			}		
+				System.out.println("Payment Success Page Reached");
+				return new ConfirmOneTimePaymentPage(driver);			
+			}
+			else if(OneTimePaymentError.getText().contains("only one payment request can be submitted per business day"))
+			{
+				System.out.println("Payment error message dispayed");
+				return null;
+			}
 		}
 		catch(Exception e)
 		{
 			System.out.println("Payment success page not displayed");
-		}
+		}	
 		
-		if(OneTimePaymentError.getText().contains("only one payment request can be submitted per business day"))
+		return new ConfirmOneTimePaymentPage(driver);
+		
+	}
+    
+    public PaymentHistoryPage ScrollDownToBackButton()
+	{
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,700)", "");
+		
+		if(BackToPaymentHistoryPage.isDisplayed())
 		{
-			System.out.println("Payment error message dispayed");
-		return new OneTimePaymentSuccessPage(driver);
+			BackToPaymentHistoryPage.click();
+			return new PaymentHistoryPage(driver);
 		}
 		else
 			return null;
-		
 	}
 
 

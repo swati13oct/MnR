@@ -5,7 +5,6 @@ package pages.regression.payments;
 
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,17 +13,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.data.CommonConstants;
-import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
-import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.dashboard.eob.EOBPage;
 import pages.member.ulayer.SetupAutoPaymentPage;
 
 /**
@@ -33,20 +26,17 @@ import pages.member.ulayer.SetupAutoPaymentPage;
  */
 public class PaymentHistoryPage extends UhcDriver{
 	
-	private static final String STAGE_DASHBOARD_URL = null;
-
-	private static final FluentWait<WebDriver> wait = null;
-
-	private static final ExpectedConditions ImplectedConditions = null;
-
 	@FindBy(id = "paymentHistoryApp")
 	private WebElement paymentHistoryApp;
 	
 	@FindBy(id = "paymentSearchRangeGovt")
 	private WebElement paymentSearchRangeGovt;
 	
-	@FindBy(id = "onetimepayment")
+	@FindBy(xpath = "//*[@class='payment-method-btn'][1]/a")
 	private WebElement onetimepaymentbtn;
+	
+	@FindBy(xpath = "//*[@class='payment-method-btn'][1]/a[2]")
+	private WebElement onetimepaymentbtnPDP;
 	
 	@FindBy(linkText= "Make a Payment")
 	private WebElement paymentslink;	
@@ -313,24 +303,32 @@ public class PaymentHistoryPage extends UhcDriver{
 	 
 	 public OneTimePaymentPage OTPbtn(){
 		 
-		 if(	validate(iPerceptionPopUp)) {
-	    		iPerceptionPopUp.click();
+		 if(	validate(iPerceptionAutoPopUp)) {
+	    		iPerceptionAutoPopUp.click();
 	    	}
 	    	else  {
 	    		System.out.println("iPerception Pop Up not displayed");
 	    	}
-		 waitforElement(onetimepaymentbtn);
-	    	
-		if (validate(onetimepaymentbtn)){
+		
+	   try
+	   {
+		if(onetimepaymentbtn.isDisplayed()){
 			onetimepaymentbtn.click();
-		 System.out.println("clicked on make OTP button");
-		 
+		 System.out.println("clicked on make OTP button");		 
 		 return new  OneTimePaymentPage(driver);
 		}
-		
-		else {
-			return null;
-		}
+		else if(onetimepaymentbtnPDP.isDisplayed())
+		{
+			onetimepaymentbtnPDP.click();
+			System.out.println("clicked on make OTP button");
+			return new  OneTimePaymentPage(driver);
+		}		
+	   }catch(Exception e)
+	   {
+		   System.out.println("One time Payment Button not displayed");
+		   return null;
+	   }
+	   return new  OneTimePaymentPage(driver);
 	    
 		    }
 	 

@@ -1,6 +1,5 @@
 package acceptancetests.memberredesign.HSID;
 
-import java.sql.Driver;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,14 +18,12 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.uhcretiree.AcquisitionHomePage;
-import pages.regression.accounthomepage.AccountHomePage;
-
 import pages.regression.login.DeregisterPage;
 import pages.regression.login.HSIDLoginPage;
 import pages.regression.login.HsidRegistrationConfirmInformation;
 import pages.regression.login.HsidRegistrationPersonalCreateAccount;
 import pages.regression.login.HsidRegistrationPersonalInformationPage;
+
 
 public class HsidRegistrationStepDefinition {
 	
@@ -287,7 +284,7 @@ public class HsidRegistrationStepDefinition {
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
 		
-		//String userName = memberAttributesMap.get("userName");
+		String userName = memberAttributesMap.get("userName");
 		String password = memberAttributesMap.get("password");
 		
 		WebDriver wd = getLoginScenario().getWebDriver();
@@ -295,8 +292,13 @@ public class HsidRegistrationStepDefinition {
 		
 		HSIDLoginPage loginPage = new HSIDLoginPage(wd);
 		loginPage.validateelements();
-		String userName =  (String)getLoginScenario().getBean(LoginCommonConstants.Username);
-        AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, password);
+
+        
+		pages.regression.accounthomepage.AccountHomePage accountHomePage = (pages.regression.accounthomepage.AccountHomePage) loginPage.doLoginWith(userName, password);
+
+		/*String userName =  (String)getLoginScenario().getBean(LoginCommonConstants.Username);
+        AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, password);*/
+
         if (accountHomePage!= null) {
         	loginScenario.saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
 			Assert.assertTrue(true);

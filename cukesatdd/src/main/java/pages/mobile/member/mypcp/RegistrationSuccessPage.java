@@ -13,7 +13,8 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.member.bluelayer.AccountHomePage;
+import pages.regression.accounthomepage.AccountHomePage;
+//import pages.member.bluelayer.AccountHomePage;
 
 /**
  * @author pagarwa5

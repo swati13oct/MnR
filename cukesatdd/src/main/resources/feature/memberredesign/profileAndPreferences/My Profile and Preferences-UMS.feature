@@ -261,7 +261,7 @@ Feature: C1.2To test Profile and Preferences page .
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>    |  
     When the user navigates to Profile and Preferences page
-    And I click the HEALTHSAFE ID PASSWORD link
+    And I click the HEALTHSAFE ID PASSWORD link and validate username and password
     Then I should see the breadcrumb  in the upper left side of the page
     And clicking the link should lead me back to the Account Settings page of the member site
     And I click the HEALTHSAFE ID ACCOUNT RECOVERY AND SECURITY link
@@ -271,9 +271,27 @@ Feature: C1.2To test Profile and Preferences page .
       | planType | 
       | MAPD     |
          
-
-
-      
-
-      
+@profAndPref  @regression       
+Scenario Outline: To test end to end regression scenario for account profile page
+Given login with following details logins in the member portal and validate elements
+      | User Type   | <userType>    |  
+When the user navigates to Profile and Preferences page
+And I click the HEALTHSAFE ID PASSWORD link and validate username and password
+Then I should see the breadcrumb  in the upper left side of the page
+And clicking the link should lead me back to the Account Settings page of the member site 
+#And the user validates the Email section in UMS site  
+And the user validates the Phone section
+And the user Clicks on the the Edit phone Link and validates the elements
+Then the user validates Communication Preferences section
+And the user clicks on edit preferences link
+And the user clicks on profile & preferences link to go back to Account settings page
+And the user validates permanent address section
+And the user validates the temporary address section
+And the user validates the fields and Buttons of temp address section
+And the user validates the Presence of edit button in Mailing Address section
+Then the user validates the fields under add mailing address button
+Examples: 
+      | userType | 
+      | AARP    | 
+#      | UHC     |
   

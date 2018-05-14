@@ -50,7 +50,11 @@ public class TerminatedHomePage{
 		searchClaimsHistory.click();
     	CommonUtility.checkPageIsReady(driver);
 		if (driver.getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Claims")) {
+
 			return new ClaimsPage();
+
+//			return new ClaimsPage(driver);
+
 		}
 		return null;
 	}

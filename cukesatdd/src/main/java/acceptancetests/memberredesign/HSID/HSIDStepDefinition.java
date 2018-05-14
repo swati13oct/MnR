@@ -9,30 +9,26 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
-import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageConstants;
-import acceptancetests.data.PageConstantsMnR;
-
 //import acceptancetests.deprecated.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonConstants;
 import acceptancetests.data.LoginCommonConstants;
+import acceptancetests.data.PageConstants;
+import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
-import pages.regression.login.HsidRegistrationPersonalCreateAccount;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.login.AssistiveRegistrationPage;
-import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
-import pages.regression.login.HSIDLoginPage;
 import pages.regression.login.DeregisterPage;
+import pages.regression.login.HSIDLoginPage;
+import pages.regression.login.HsidRegistrationPersonalCreateAccount;
 
 /**
  * Functionality: Benefits and Coverage page
@@ -52,7 +48,7 @@ public class HSIDStepDefinition {
 
 
 	
-	@And("^login with following details logins in the member portal and validate elements$")
+	@Given("^login with following details logins in the member portal and validate elements$")
 	public void login_with_member(DataTable memberAttributes) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
@@ -62,7 +58,7 @@ public class HSIDStepDefinition {
 					memberAttributesRow.get(i).getCells().get(1));
 		}
 
-		String category = memberAttributesMap.get("Member Type");
+		memberAttributesMap.get("Member Type");
 		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
 		List<String> desiredAttributes = new ArrayList<String>();
 		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator.hasNext();) {
@@ -126,7 +122,7 @@ public class HSIDStepDefinition {
 					memberAttributesRow.get(i).getCells().get(1));
 		}
 
-		String category = memberAttributesMap.get("Member Type");
+		memberAttributesMap.get("Member Type");
 		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
 		List<String> desiredAttributes = new ArrayList<String>();
 		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator.hasNext();) {
@@ -182,7 +178,7 @@ public class HSIDStepDefinition {
 	public void validateotherfields()
 	{
 		AssistiveRegistrationPage assistiveregistration = (AssistiveRegistrationPage) getLoginScenario().getBean(PageConstantsMnR.ASSISTIVE_REGISTRATION_PAGE);
-		String username = (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
+		getLoginScenario().getBean(LoginCommonConstants.USERNAME);
 		assistiveregistration.validate_allfields();
 	
 	}

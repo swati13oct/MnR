@@ -9,7 +9,6 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -285,7 +284,7 @@ public class PlanDetailsPage extends UhcDriver {
 		presDrugTab.click();
 		CommonUtility.waitForPageLoad(driver, estimateDrugBtn, 20);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", estimateDrugBtn);
-		estimateDrugBtn.click();
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", estimateDrugBtn);
 		try {
 			Thread.sleep(4000);
 		} catch (InterruptedException e) {
@@ -308,7 +307,7 @@ public class PlanDetailsPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(compareMessageBox.getText().contains("2 plans added") && compareMessageBox.getText().contains("Compare plans") )
+		if(compareMessageBox.getText().contains("1 plan added"))
 			return true;
 		return false;
 	}

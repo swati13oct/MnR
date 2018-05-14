@@ -3,10 +3,6 @@
  */
 package pages.regression.drugcostestimator;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
-
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -27,11 +23,6 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-
-//import pages.dashboard.member.blayer.AddDrugDetails;
-//import pages.dashboard.member.blayer.AddNewDrugModal;
-import pages.regression.drugcostestimator.AddDrugDetails;
-import pages.regression.drugcostestimator.AddNewDrugModal;
 
 /**
  * Functionality: Covers all elements and methods for Drug cost estimator Page
