@@ -19,7 +19,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -208,28 +207,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	
 
-	private WebElement getViewPlanDetailsElement(
-			List<WebElement> planElement, ElementData elementData,
-			String planName) {
-		for (WebElement plan : planElement) {
-			
-			if (plan.getText().contains(planName)) {
-				try {
-					Thread.sleep(2000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				WebElement element = findChildElement(elementData,
-						plan);
-
-				return element;
-
-			}
-		}
-		return null;
-	}
-	
 	private WebElement getSpecificPlanSummary(
 			List<WebElement> planElement,
 			String planName) {

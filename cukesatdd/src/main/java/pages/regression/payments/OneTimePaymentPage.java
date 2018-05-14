@@ -8,7 +8,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
-import pages.dashboard.eob.EOBPage;
 
 /**
  * @author pperugu
@@ -79,7 +78,7 @@ public class OneTimePaymentPage extends UhcDriver{
 
 	public ConfirmOneTimePaymentPage enterPaymentDetails(Map<String, String> accountAttributessMap) {
 		
-		String amount =  accountAttributessMap.get("Amount to be paid");		
+		accountAttributessMap.get("Amount to be paid");		
 		String routingNumber = accountAttributessMap.get("Routing number");
 		String confirmRoutingNumber = accountAttributessMap.get("Confirm routing number");
 		String accountNumber = accountAttributessMap.get("Account number");

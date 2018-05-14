@@ -20,8 +20,6 @@ import pages.memberrdesignVBF.RallyDashboardPage;
  */
 public class BenefitsAndCoveragePage extends UhcDriver {
 
-	private PageData benefitsCoverage;
-
 	@FindBy(xpath = "//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[2]/div[1]/span")
 	private WebElement memberId;
 

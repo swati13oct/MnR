@@ -16,7 +16,6 @@ import pages.regression.login.AssistiveRegistrationPage;
 import pages.regression.login.ConfirmSecurityQuestion;
 import pages.regression.login.TerminatedHomePage;
 import pages.regression.accounthomepage.AccountHomePage;
-import pages.regression.accounthomepage.AccountHomePage;
 
 public class LoginPage extends UhcDriver {
 	
