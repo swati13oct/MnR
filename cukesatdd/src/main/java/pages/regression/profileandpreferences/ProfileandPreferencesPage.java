@@ -1196,7 +1196,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 		Thread.sleep(10000);
 		System.out.println("PageTitle " + driver.getTitle());
-		Assert.assertTrue(driver.getTitle().equalsIgnoreCase("HealthSafe ID"));
+		Assert.assertTrue(driver.getTitle().contains("HealthSafe ID"));
 		if(validate(usernameText)&&validate(passwordEditLink))
 			return true;
 		return false;
