@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -120,11 +121,12 @@ public class ClaimsMemberRedesignStepDefinition {
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
 	}
 	/**
+	 * @throws InterruptedException 
 	 * @toDo: Member is able to select claims from the "View Claims From" drop-down. 
 	 */
 
 	@And("^I can search claims for the following claim period on redesigned site$")
-	public void search_claims_period_redesigned_site(DataTable timeAttributes){
+	public void search_claims_period_redesigned_site(DataTable timeAttributes) throws InterruptedException{
 		List<DataTableRow> timeAttributesRow = timeAttributes.getGherkinRows();
 		Map<String, String> urlAttributesMap = new HashMap<String, String>();
 
@@ -270,14 +272,16 @@ public class ClaimsMemberRedesignStepDefinition {
 	/**
 	 * @toDo : Claims Table & pagination (if there are more than 10 claims.)
 	 */
-	@And ("^A Claims Table with pagination in AARP site$")
-
+	/*@And ("^A Claims Table with pagination in AARP site$")
 	public void validate_claims_table_and_pagination(){
-
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		Assert.assertTrue(claimSummarypage.verifyClaimsTableAndPagination());
-
-	}
+	}*/
+	@And("^I validate the pagination on the claims summary page$")
+	public void i_validate_the_pagination_on_the_claims_summary_page() throws Throwable {
+		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
+		Assert.assertTrue(claimSummarypage.verifyClaimsTableAndPagination());
+	   	}
 	/**
 	 * @toDo :view an Explanation of Benefits component with the Medical and/or Prescription Drug EOB search buttons based on my plan type
 	 */
@@ -323,16 +327,21 @@ public class ClaimsMemberRedesignStepDefinition {
 	@When("^I navigate to the Claim Details page in AARP site$")	
 	public void i_navigate_to_member_redesign_claim_details_page(){
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		accountHomePage.navigateToClaimDetailsPage();
-
+		ClaimDetailsPage newClaimDetailsPage = accountHomePage.navigateToClaimDetailsPage();
+		//getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
+		if(newClaimDetailsPage != null)
+			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
 	}
 	/**
 	 * @toDo : validate the Learn more section in claims details page
 	 */
 	@Then("^I validate the Learn more section in claims details page in AARP site$")
 	public void validate_Learn_More_details_AARP(){
-		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
-		claimDetailspage.validateLearnMoreInDetailsPage();		
+		/*ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
+		claimDetailspage.validateLearnMoreInDetailsPage();		*/
+		
+		ClaimDetailsPage newclaimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
+		newclaimDetailspage.validateLearnMoreInDetailsPage();	
 	}
 	/**
 	 * @toDo : validate the header in claims details page.
@@ -357,16 +366,18 @@ public class ClaimsMemberRedesignStepDefinition {
 	 */
 	@And("^I validate the Claims Table in claims details page in AARP site$")
 	public void validate_claimsTable_claimsDetails_AARP(){
-		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
-		claimDetailspage.validateClaimsTableInDetailsPage();
+		ClaimDetailsPage newclaimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
+		newclaimDetailspage.validateClaimsTableInDetailsPage();
+		if(newclaimDetailspage != null)
+			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newclaimDetailspage);
 	}
 	/**
 	 * @toDo : validate the Claims Total in claims details page
 	 */
 	@And("^I validate the Claims Total in claims details page in AARP site$")
 	public void validate_claims_total_AARP(){
-		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
-		claimDetailspage.validateClaimsTotalInDetailsPage();
+		ClaimDetailsPage newclaimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
+		newclaimDetailspage.validateClaimsTotalInDetailsPage();
 	}
 
 	/*@Then("^I can view a claim search back button in Claims Details page in AARP site$")
@@ -532,5 +543,13 @@ public class ClaimsMemberRedesignStepDefinition {
 		//.Assert.assertTrue(claimSummarypage.validateShipGreaterThan24MonthsErrorMsg());
 		claimSummarypage.validatefromDateLaterThanToDateError();
 
+	}
+	
+	@When("^I validate the error message for a PHIP Member on the screen$")
+	public void i_validate_the_error_message_for_a_PHIP_Member_on_the_screen() throws Throwable {
+		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
+		 claimSummarypage.ValidatePHIPErrorMessage();
+	   // throw new PendingException();
+	 
 	}
 }
