@@ -7,8 +7,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.data.PageConstants;
+import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.UhcDriver;
+import cucumber.api.java.en.And;
 import junit.framework.Assert;
+
 /**
  * Functionality : this page validates Claims Details Page. 
  */
@@ -73,6 +77,9 @@ public class ClaimDetailsPage extends UhcDriver{
 	
 	@FindBy(id = "eobClass")
 	private WebElement headerEOB;
+	
+	@FindBy(xpath =".//*[@id='claimDetailsHeaders']/p")
+	private WebElement medicalClaimDetailsText;
 	
 	@FindBy(xpath = ".//*[@id='ship_eob']/div/section/a/p")
 	private WebElement EOB;
@@ -205,6 +212,15 @@ public class ClaimDetailsPage extends UhcDriver{
 
 	@SuppressWarnings("deprecation")
 	public void validateClaimsTableInDetailsPage() {
+		System.out.println("!!! Validating the elements on the Claims Details page !!!");
+		validate(medicalClaimDetailsText);
+		System.out.println("!!! Medical Claims Details text is seen on the Claims Details page !!!");
+		validate(claimNumber);
+		System.out.println("!!!Claim Number is displayed===>"+claimNumber.isDisplayed());
+		validate(learnMoreLink);
+		System.out.println("!!!Learn More link is seen on the Claims Details Page !!!");
+				validate(claimDetTableMainSection);
+		System.out.println("!!! Claims table is seen in the Cliams details page ===>"+claimDetTableMainSection.isDisplayed());
 		if(claimDetTableMainSection.isDisplayed()){
 			Assert.assertTrue(true);
 		}
@@ -216,6 +232,8 @@ public class ClaimDetailsPage extends UhcDriver{
 
 	@SuppressWarnings("deprecation")
 	public void validateLearnMoreInDetailsPage() {
+		validate(learnMoreLink);
+		System.out.println("!!! Learn more link is seen on the claims Details page ===>"+learnMoreLink.getText());
 		if(learnMoreLink.isDisplayed()){
 			Assert.assertTrue(true);
 		}
@@ -260,6 +278,8 @@ public class ClaimDetailsPage extends UhcDriver{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		validate(claimstotalTable);
+		System.out.println("!!! Claims Total $$ table is displayed on the Claims Details page===>"+claimstotalTable.isDisplayed());
 		if(claimstotalTable.isDisplayed()){
 			Assert.assertTrue(true);			
 		}
