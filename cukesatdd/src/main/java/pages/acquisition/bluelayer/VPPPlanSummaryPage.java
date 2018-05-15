@@ -166,7 +166,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	//@FindBy(xpath="//*[contains(text(),'People')]")
 
-	@FindBy(xpath=".//*[@class='img' and @src='/images/guidedSearch/gs_icn_pro_healthcarepro.svg']")
+	@FindBy(xpath=".//*[@class='gs-option']//h3[contains(text(),'People')]")
 	private WebElement People;
 	
 	@FindBy(xpath="//div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[1]/div/span[@class='trigger-closed']")
@@ -186,7 +186,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	//"
 
 	//@FindBy(xpath="//*[contains(text(),'Primary Care')]")
-	@FindBy(xpath=".//*[@class='img' and @src='/images/guidedSearch/gs_icn_pro_primarycarephysicians.svg']")
+	@FindBy(xpath=".//*[@class='gs-option']//h3[contains(text(),'Primary Care')]")
 	private WebElement Primary;
 
 	@FindBy(xpath="//*[contains(text(),'Primary Care Physician')] ")
@@ -196,7 +196,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	//private WebElement Savebtn;
 
 
-	@FindBy(xpath="//div[contains(@class,'first')]//div[@class='hidden-phone']/button[not(contains(@class,'hidden'))]")
+	@FindBy(xpath="//div[contains(@class,'first')]//div[@class='hidden-phone']/button[@class='section action-btn saved-provider-button']")
 	private WebElement Savebtn;
 
 	//@FindBy(xpath=".//*[@id='label_unsaved_selectedLocation0']")
@@ -977,7 +977,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		waitforElement(GetStarted);
 		GetStarted.click();
 
-		waitforElement( People);
+		waitforElement(People);
 
 		People.click();
 

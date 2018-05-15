@@ -748,22 +748,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		
 	}
-	@FindBy(xpath=".//*[@id='plan-list-1']//div[@class='swiper-wrapper']/div[1]//div[@class='swiper-content']//a[contains(text(),'View plan and drug coverage details')]") private WebElement test; 
 	public PlanDetailsPage navigateToPlanDetails(String planName, String planType) {
 		driver.manage().window().maximize();
-/*		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) { 
-  			validate(test);
-			ElementData elementData = new ElementData("xpath", ".//a[contains(text(),'View plan and drug coverage details')]");
-		
-			ElementData elementData = new ElementData("id", "viewmoredetlinkmapdplan");
-			WebElement element = getViewPlanDetailsElement(maPlanElement, elementData, planName);
-			if (element != null) {
-				element.click();
-			}
-			
-	*/	
+	
 		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {	
-		WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//h2[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@id = 'viewmoredetlinkmapd']"));
+		WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//h2[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@id = 'viewmoredetlinkmapd' or @id='viewmoredetlinkmapdplan']"));
 			validate(MAmoreDetailsLink);
 			MAmoreDetailsLink.click();
 			System.out.println("View Plan Details Link is clicked for MA plan"+planName);
