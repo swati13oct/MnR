@@ -1,5 +1,12 @@
 package pages.regression.login;
 
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Random;
+
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,6 +16,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import acceptancetests.data.MRConstants;
 import atdd.framework.UhcDriver;
 
 
@@ -69,6 +77,10 @@ public class ConfirmSecurityQuestion extends UhcDriver {
 		//formContent.click();
 		WebElement submitbutton = driver.findElement(By.id("continueSubmitButton"));
 		submitbutton.click();
+		Thread.sleep(5000);
+
+
+
 	}
 
 }
