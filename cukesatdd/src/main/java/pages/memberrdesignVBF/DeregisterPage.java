@@ -1,5 +1,10 @@
 package pages.memberrdesignVBF;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Random;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -26,6 +31,8 @@ public class DeregisterPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='deregisterform']/input[2]")
 	private WebElement deregisterButton;
 
+	private static ThreadLocal<String> UserName = new ThreadLocal<String>();
+	
 	public DeregisterPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -55,5 +62,19 @@ public class DeregisterPage extends UhcDriver {
 		deregisterButton.click();
 		driver.switchTo().alert().accept();
 	}
+	   public static String getUserName() {
 
+			
+			DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+			Date date = new Date();
+
+			// For multithreaded execution, timestamp with seconds is not granular
+			// enough. Include random suffix
+			String rndSuffix = Integer.toString(new Random().nextInt(10)); //1000 is too long and is leading to issues in LAWW.
+			String appndTxt = dateFormat.format(date) + "_" + rndSuffix;
+
+			UserName.set("Auto" + appndTxt);
+			return UserName.get();
+
+		}
 }

@@ -530,8 +530,38 @@ public class RallyDashboardPage extends UhcDriver {
 		do {
 
 			System.out.println("current value of conter: " + counter);
+			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
+			
+if(IPerceptionsFrame.isEmpty()){
+	if (driver.findElements(By.xpath("//area[@href='javascript:clWin()'][@alt = 'no']")).isEmpty()) {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			System.out.println(e.getMessage());
+		}
 
-			if (driver.findElements(By.xpath("//area[@href='javascript:clWin()'][@alt = 'no']")).isEmpty()) {
+	}
+	else {
+		System.out.println("FeedBack Modal Present and counter value is:" + counter);
+		try {
+			Thread.sleep(2000);
+			WebElement NoThanks = driver.findElement(By.xpath("//*[@id='IPEinvL']/map/area[3]"));
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].scrollIntoView();", NoThanks);
+			js.executeScript("arguments[0].click();", NoThanks);
+			break;
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+	}
+}
+else{
+	driver.switchTo().frame(IPerceptionsFrame.get(0));
+	driver.findElement(By.className("btn-no")).click();
+	driver.switchTo().defaultContent();
+}
+			/*if (driver.findElements(By.xpath("//area[@href='javascript:clWin()'][@alt = 'no']")).isEmpty()) {
 				try {
 					Thread.sleep(5000);
 				} catch (InterruptedException e) {
@@ -553,7 +583,7 @@ public class RallyDashboardPage extends UhcDriver {
 					e.printStackTrace();
 				}
 
-			}
+			}*/
 			counter++;
 		} while (counter < 1);
 	}
@@ -622,5 +652,21 @@ public class RallyDashboardPage extends UhcDriver {
 		validateNew(accountnSettings);
 
 	}
+	/***
+	 * 
+	 * @return
+	 */
+	public FormsAndResourcesPage navigateDirectToFnRPage() {
 
+		validateNew(formsResources_Dashboard);
+		formsResources_Dashboard.click();
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println(driver.getTitle());
+
+		if (driver.getTitle().equalsIgnoreCase("Documents Overview")) {
+			return new FormsAndResourcesPage(driver);
+		}
+		return null;
+	}
 }

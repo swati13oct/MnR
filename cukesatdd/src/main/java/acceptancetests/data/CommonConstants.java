@@ -40,6 +40,15 @@ public class CommonConstants {
 	public static final String DB_USERNAME = "DBUsername";
 
 	public static final String DB_PASSWORD = "DBPassword";
+	
+	public static final String HSIDDB_URL = "HSIDDBURL";
+
+	public static final String HSIDDB_USERNAME = "HSIDDBUsername";
+
+	public static final String HSIDDB_PASSWORD = "HSIDDBPassword";
+	
+	public static final String HSID_ENV = "HSID_ENV";
+	
 
 	public static final String DB_SCHEMA = "DBSchema";
 

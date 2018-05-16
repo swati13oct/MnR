@@ -566,4 +566,9 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 
 	public static final String CREATE_ACCOUNT_PAGE = "createAccountPage";
 	public static final String SECURITY_QUESTIONS_PAGE = "accountHomePage";
+	   public static final String HSID_REGISTRATION_PERSONALINFOPAGE = "HsidRegistrationPersonalInformationPage";
+	   
+	   public static final String HSID_REGISTRATION_PERSONALCREATEACCOUNT = "hsidRegistrationPersonalCreateAccount";
+	   
+	   public static final String HSID_REGISTRATION_CONFIRM_INFORMATION = "hsidRegistrationConfirmInformation";
 }

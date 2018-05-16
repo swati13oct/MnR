@@ -25,31 +25,28 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
-
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Assert;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.stereotype.Component;
 
 import acceptancetests.data.CommonConstants;
 import cucumber.api.Scenario;
-import org.junit.Assert;
-import java.util.concurrent.TimeUnit;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.phantomjs.PhantomJSDriver;
-import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 /**
 * 
  * @author schak38
@@ -493,7 +490,7 @@ public class MRScenario {
 
                }
 
-               private static Map<String, String> getProperties() {
+               public static Map<String, String> getProperties() {
                               Map<String, String> props = new HashMap<String, String>();
                               Properties prop = new Properties();
                               String propertiesFileToPick = System.getProperty("environment");
@@ -750,7 +747,7 @@ public class MRScenario {
                               return webDriver;
                }
 */           
-               public WebDriver getWebDriver() {
+              /* public WebDriver getWebDriver() {
             	  
             	   DesiredCapabilities capabilities = DesiredCapabilities.firefox();
                    
@@ -771,6 +768,20 @@ public class MRScenario {
                    }
            
                return webDriver;
+               }*/
+               
+               public WebDriver getWebDriver() {
+                   
+                   if (null == webDriver) {              
+                       File pathToBinary = new File("C:\\Users\\njain112\\Documents\\Chrome\\Application\\Chrome.exe");
+                       Map<String, Object> chromeOptions = new HashMap<String, Object>();
+                       chromeOptions.put("binary", pathToBinary);
+                       DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+                       capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+                       System.setProperty("webdriver.chrome.driver","C:\\Users\\njain112\\Documents\\chromedriver.exe");
+                       webDriver = new ChromeDriver();
+                   }
+                  return webDriver;
                }
                
                public WebDriver getIEDriver() {
@@ -1031,10 +1042,11 @@ public class MRScenario {
                 }
                 capabilities.setCapability("autoAcceptsAlerts", true);
                 capabilities.setCapability("parent-tunnel", "sauce_admin");
-                capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
+                capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Stg");             
                 String SAUCE_USERNAME = props.get("SAUCE_USERNAME");
 	            String SAUCE_ACCESS_KEY = props.get("SAUCE_ACCESS_KEY");
-                String URL = "http://" + SAUCE_USERNAME + ":" + SAUCE_ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
+	            String URL = "http://" + SAUCE_USERNAME + ":" + SAUCE_ACCESS_KEY + "@162.222.75.33:80/wd/hub";
+              //  String URL = "http://" + SAUCE_USERNAME + ":" + SAUCE_ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
                 if (SAUCE_USERNAME == null || SAUCE_ACCESS_KEY == null) {
                        Assert.fail(
                                      "Missing value for environment variable(s) SAUCE_USERNAME or SAUCE_ACCESS_KEY.  Check environment configuration and try again");
@@ -1053,4 +1065,172 @@ public class MRScenario {
                
 
   }
+	 public static Connection getPDBDBConnection(Map<String, String> props) {
+   	  
+  	   try 
+  	   {
+  		   Class.forName("com.mysql.jdbc.Driver");
+         } 
+  	   catch (ClassNotFoundException e) {
+             // TODO Auto-generated catch block
+         e.printStackTrace();
+         }
+         
+      Connection con = null;
+     	String env = props.get(CommonConstants.HSID_ENV);
+		String user = props.get(CommonConstants.HSIDDB_USERNAME);
+		String pwd = props.get(CommonConstants.HSIDDB_PASSWORD);
+		String url = props.get(CommonConstants.HSIDDB_URL);
+         try {
+                        con = DriverManager.getConnection(url,user,pwd);
+                                                      
+         } catch (SQLException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+         }
+ 		
+ 		
+ 		System.out.println("Connected to: " + env.toUpperCase() + " database");
+ 		
+      return con;
+
+}
+     
+    public static  boolean getRecordsFrom_mbr_table(String firstName, String lastName) throws SQLException {
+    	System.out.println("Getting records from MBR table");
+    	boolean isRecordExists = false;
+  	   Connection con = getPDBDBConnection(props);
+   	   Statement stmt = null;
+        
+          stmt = con.createStatement();
+          String sql;
+          sql = "SELECT HLTHSF_ID FROM mbr where MDM_FST_NM = '" + firstName
+ 				+ "' and MDM_LST_NM = '" + lastName + "'";
+          ResultSet rs1 = stmt.executeQuery(sql);
+         // rs1.first();
+          if(rs1.first()){
+        	  isRecordExists = true;
+        	  System.out.println("Record exists...");
+          String HLTHSF_ID  = rs1.getString("HLTHSF_ID");
+          System.out.println("HSID: "+HLTHSF_ID);
+         
+          }else{
+        	  System.out.println("No record found!!!");
+             // Assert.fail("No record found!!!");
+          }
+          rs1.close();
+          stmt.close();
+          con.close();
+         return isRecordExists;
+     }
+     
+     
+     
+     public static void deleteRecordsFrom_mbr_table(String firstName, String lastName) throws SQLException {
+  	   Connection con = getPDBDBConnection(props);
+  	   Statement stmt = null;
+         ResultSet rs = null;
+         stmt = con.createStatement();   
+ 		rs = stmt.executeQuery(
+ 				"SELECT COUNT(*) FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName + "'");
+ 		int initialrowcount = 0;
+ 		if(rs.first()){
+ 		while (rs.next()) {
+ 			initialrowcount = rs.getInt(1);
+ 		}
+ 		System.out.println("Total selected records to delete from mbr table are: " + initialrowcount);
+ 		stmt.executeUpdate(
+ 				"delete from mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName + "'");
+
+ 		rs = stmt.executeQuery(
+ 				"SELECT COUNT(*) FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName + "'");
+ 		int finalrowcount = 0;
+ 		while (rs.next()) {
+ 			finalrowcount = rs.getInt(1);
+ 		}
+ 		System.out.println("Total selected records to delete from mbr table are: " + finalrowcount);
+ 		if (finalrowcount == 0) {
+ 			System.out.println("Records deleted successfully from table: mbr");
+ 		} else {
+ 			System.out.println("Still Records exist in the table: mbr");
+ 		}
+ 		}else{
+ 			System.out.println("No Records found in the table: mbr !!!");	
+ 		}
+ 	} 
+     
+     public static void deleteRecordsFrom_mbr_prtl_table(String firstName, String lastName) throws SQLException {
+
+ 		// The following steps will return no. of selected records based on
+ 		// first name and last name
+  	   Connection con = getPDBDBConnection(props);
+  	   Statement stmt = null;
+         ResultSet rs = null;
+         stmt = con.createStatement();
+ 		rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr_prtl where MBR_PRTL_FST_NM = '" + firstName
+ 				+ "' and MBR_PRTL_LST_NM = '" + lastName + "'");
+ 		int initialrowcount = 0;
+ 		if(rs.first()){
+ 		while (rs.next()) {
+ 			initialrowcount = rs.getInt(1);
+ 		}
+ 		System.out.println("Total selected records to delete from mbr_prtl table are: " + initialrowcount);
+
+ 		
+ 		stmt.executeUpdate("delete from mbr_prtl where MBR_PRTL_FST_NM = '" + firstName + "' and MBR_PRTL_LST_NM = '"
+ 				+ lastName + "'");
+ 		rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr_prtl where MBR_PRTL_FST_NM = '" + firstName
+ 				+ "' and MBR_PRTL_LST_NM = '" + lastName + "'");
+ 		int finalrowcount = 0;
+ 		while (rs.next()) {
+ 			finalrowcount = rs.getInt(1);
+ 		}
+ 		System.out.println("Total selected records to delete from mbr_prtl table are: " + finalrowcount);
+ 		if (finalrowcount == 0) {
+ 			System.out.println("Records deleted successfully from table: mbr_prtl");
+ 		} else {
+ 			System.out.println("Still Records exist in the table: mbr_prtl");
+ 		}
+ 		}else{
+ 			System.out.println("No Records found in the table: mbr_prtl !!!");	
+ 		}
+ 		
+ 	}
+
+ 	public static void deleteRecordsFrom_mbr_extrm_scl_dtl_table(String firstName, String lastName) throws SQLException {
+ 		// The following steps will return no. of selected records based on
+ 		// first name and last name
+ 		Connection con = getPDBDBConnection(props);
+	   Statement stmt = null;
+      ResultSet rs = null;
+      stmt = con.createStatement();
+      String sql;
+      sql = "SELECT HLTHSF_ID FROM mbr where MDM_FST_NM = '" + firstName
+ 				+ "' and MDM_LST_NM = '" + lastName + "'";
+      ResultSet rs1 = stmt.executeQuery(sql);
+      if(rs1.first()){
+      String HLTHSF_ID  = rs1.getString("HLTHSF_ID");
+      System.out.println(HLTHSF_ID);
+ 		rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr_extrm_scl_dtl where HLTHSF_ID = '" + HLTHSF_ID + "'");
+ 		int initialrowcount = 0;
+ 		while (rs.next()) {
+ 			initialrowcount = rs.getInt(1);
+ 		}
+ 		System.out.println("Total selected records to delete from mbr_extrm_scl_dtl table are: " + initialrowcount);
+ 		stmt.executeUpdate("delete from mbr_extrm_scl_dtl where HLTHSF_ID = '" + HLTHSF_ID + "'");
+ 		rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr_extrm_scl_dtl where HLTHSF_ID = '" + HLTHSF_ID + "'");
+ 		int finalrowcount = 0;
+ 		while (rs.next()) {
+ 			finalrowcount = rs.getInt(1);
+ 		}
+ 		System.out.println("Total selected records to delete from mbr_extrm_scl_dtl table are: " + finalrowcount);
+ 		if (finalrowcount == 0) {
+ 			System.out.println("Records deleted successfully from table: mbr_extrm_scl_dtl");
+ 		} else {
+ 			System.out.println("Still Records exist in the table: mbr_extrm_scl_dtl");
+ 		}
+ 	}else{
+ 		System.out.println("No Records found in the table: mbr_extrm_scl_dtl");
+ 	}
+ 	}
 }

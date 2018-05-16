@@ -2,6 +2,7 @@ package pages.memberrdesignVBF;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.TimeoutException;
@@ -18,6 +19,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.memberrdesignVBF.TerminatedHomePage;
+import pages.memberrdesignVBF.hsidRegistration.HsidRegistrationPersonalInformationPage;
 
 public class LoginPage extends UhcDriver {
 
@@ -48,6 +50,14 @@ public class LoginPage extends UhcDriver {
 	@FindBy(id = "hsid-submit")
 	private WebElement signInHsidButton;
 
+	@FindBy(xpath = "//a[@class='button button--tertiary' and contains(text(),'Register now')]")
+	private WebElement registerHsidButton;
+	
+    @FindBy(xpath ="//div[@id='hsid-commonError']/p/span[2]")
+    private WebElement EmailConfirmedtext;
+
+	private static String REGIRATION_URL = "https://st1.healthsafe-id.com/protected/register?HTTP_TARGETPORTAL=MNR&HTTP_ERRORURL=https://stage-medicare.uhc.com/&HTTP_TARGETURL=https%3A%2F%2Fstage-medicare.uhc.com%2Fmember%2Fpost-sign-in.html%3Ftarget%3Drallydashboard%26portalIndicator%3DUHC&HTTP_ELIGIBILITY=P&HTTP_GRADIENTCOLOR1=%23003DA1&HTTP_GRADIENTCOLOR2=%2300A8F7&HSID_DOMAIN_URL=https://st1.healthsafe-id.com&USE_TEST_RECAPTCHA=true";
+	
 	public LoginPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -256,5 +266,15 @@ public class LoginPage extends UhcDriver {
 		} else {
 			return null;
 		}
+	}
+	
+	public HsidRegistrationPersonalInformationPage clickRegister(){
+		driver.get(REGIRATION_URL);
+		return new HsidRegistrationPersonalInformationPage(driver);
+	}
+	public void emailconfirmed() {
+		// TODO Auto-generated method stub
+		
+		Assert.assertTrue("Text not present", EmailConfirmedtext.isDisplayed());
 	}
 }

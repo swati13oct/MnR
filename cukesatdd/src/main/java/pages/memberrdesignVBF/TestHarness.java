@@ -334,5 +334,23 @@ public class TestHarness extends UhcDriver {
 		} while (!(driver.getTitle().contains("Find Care")));
 		return null;
 	}
+	/***
+	 * 
+	 * @return
+	 */
+	public FormsAndResourcesPage navigateDirectToFnRPage() {
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,50)", "");
+		scrollToView(formsPageLink);
+		jsClickNew(formsPageLink);
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println(driver.getTitle());
+
+		if (driver.getTitle().equalsIgnoreCase("Documents Overview")) {
+			return new FormsAndResourcesPage(driver);
+		}
+		return null;
+	}
 
 }
