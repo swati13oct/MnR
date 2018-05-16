@@ -91,22 +91,22 @@ And the user validates how to read medical eob PDF
 	| MAPD        |aarpWithEOB 			          | 12 Months    		 | Medical 	         |
 	| MAPD        |aarpWithEOB 			          | 18 Months    		 | Medical 	         |
 
-@febRelease2018
+@febRelease2018 @hsideob
 Scenario Outline: To verify NICE EOB and click on the pdf
 Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-Then the user navigates to EOB page and validates the page
- |Date Range|<dateRange>  |
- |Plan Type |<planType>   |
- |EOB Type  |<eobTypeData>|
-And the user clicks on first eob from the list
- 	Examples:
-	| planType    | memberType    |dateRange     | eobTypeData       | friendname | favcolor | phonenumber |
-	| MAPD        | NICE_EOB      | 18 Months    | Medical           | name1      | color1   | number1     |
-	| MA          | NICE_EOB 			| 18 Months    | Medical 	         | name1      | color1   | number1     |
-	| MAPD_GRP    | NICE_EOB 			| 18 Months    | Medical 	         | name1      | color1   | number1     |
-	
+Then the user navigates to EOB page_hsid 
+And the user slects the desired date range
+  | Plan Type      |<planType>  |
+  | Date Range     |<dateRange> |
+  | EOB Type         |<eobType>   |
+Then the user validates EOB count
+       | EOB COUNT                | <eobCount>|
+    Examples:
+       | planType    | memberType    |dateRange  | eobType |  eobCount |
+       | MAPD        | NICE_EOB      | 18 Months |Medical  |     8     |
+
 	
 	
  

@@ -32,6 +32,7 @@ import pages.regression.claims.ClaimDetailsPage;
 import pages.regression.claims.ClaimSummarypage;
 //import pages.regression.claims.ClaimSummarypage;
 import pages.regression.contactus.ContactUsPage;
+import pages.regression.explanationofbenefits.EOBPage;
 import pages.regression.formsandresources.FormsAndResourcesPage;
 import pages.regression.ordermaterials.OrderMaterialsPage;
 import pages.regression.pharmacylocator.PharmacySearchPage;
@@ -101,7 +102,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(linkText = "Search medical claims")
 	private WebElement searchMedicalClaims;
 
-	@FindBy(linkText = "Medical Explanation of Benefits (EOB)")
+	@FindBy(xpath = "(.//*[@class='link-row ng-scope']//a[@class='link-text ng-scope ng-binding'])[1]")
 	private WebElement medicalEobLink;
 
 	@FindBy(linkText = "Prescription Drug Explanation of Benefits (EOB)")
@@ -1102,4 +1103,21 @@ public pages.regression.formsandresources.FormsAndResourcesPage navigatetoFormsn
 		}
 		return null;
 	}
+    public EOBPage navigateDirectToEOBPag(){
+        /*WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.elementToBeClickable(eobLink));*/
+        try{
+                        if (iPerceptionPopUp.isDisplayed()) {
+                                        iPerceptionPopUp.click();
+                        }
+        }catch(Exception e)        {
+                        System.out.println("iPerception Pop Up not displayed");
+        }
+
+        validate(medicalEobLink);
+        medicalEobLink.click();
+        return new EOBPage(driver);
+}
+
+	
 }
