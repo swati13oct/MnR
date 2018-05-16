@@ -32,9 +32,6 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
 import pages.regression.accounthomepage.AccountHomePage;
-import pages.regression.login.AssistiveRegistrationPage;
-import pages.regression.login.DeregisterPage;
-import pages.regression.login.HSIDLoginPage;
 import pages.regression.login.HsidRegistrationPersonalCreateAccount;
 
 /**

@@ -24,11 +24,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
-import pages.regression.login.DeregisterPage;
-import pages.regression.login.HSIDLoginPage;
-import pages.regression.login.HsidRegistrationConfirmInformation;
-import pages.regression.login.HsidRegistrationPersonalCreateAccount;
-import pages.regression.login.HsidRegistrationPersonalInformationPage;
+
 
 
 public class HsidRegistrationStepDefinition {
