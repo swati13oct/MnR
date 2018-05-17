@@ -52,16 +52,6 @@ public class NewLoginPage extends UhcDriver {
 
 	@FindBy(id = "usercheckbox")
 	private WebElement userNameCheckBox;
-	
-	@FindBy(className="modal-body")
-	private WebElement iPerceptionPopUp;
-	
-
-
-	
-
-	
-
 
 	public NewLoginPage(WebDriver driver) {
 		super(driver);

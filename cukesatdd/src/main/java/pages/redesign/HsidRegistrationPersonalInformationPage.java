@@ -40,18 +40,9 @@ public class HsidRegistrationPersonalInformationPage extends UhcDriver {
 
 	@FindBy(xpath = "//label[@for='piDoB']//span[contains(@class,'error') and not(contains(@class,'ng-hide'))]")
 	private WebElement dateOfBirthErrorMsg;
-	
-	@FindBy(xpath = "//label[@for='username']//span[contains(@class,'error') and not(contains(@class,'ng-hide'))]")
-	private WebElement usernameErrorMsg;
 
 	@FindBy(xpath = "//label[@for='password']//span[contains(@class,'error') and not(contains(@class,'ng-hide'))]")
 	private WebElement passwordErrorMsg;
-
-	@FindBy(xpath = "//*[@for='confirmPassword']//*[contains(@class,'error')]")
-	private WebElement confirmPasswordErrorMsg;
-
-	@FindBy(xpath = "//label[@for='email']//span[contains(@class,'error') and not(contains(@class,'ng-hide'))]")
-	private WebElement emailErrorMsg;
 
 	@FindBy(xpath = "//label[@for='piZipCode']//span[starts-with(@class,'error')]")
 	private WebElement zipcodeErrorMsg;

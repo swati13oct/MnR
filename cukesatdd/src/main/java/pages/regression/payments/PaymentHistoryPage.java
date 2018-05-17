@@ -82,15 +82,9 @@ public class PaymentHistoryPage extends UhcDriver{
 		
 	@FindBy(id ="disclosure_link")
 	private WebElement logOut;
-	
-	@FindBy(className="paymentsoverview")
-	private WebElement paymenthistorypage;
-	
+
 	@FindBy(className="modal-body")
 	private WebElement iPerceptionPopUp;
-	
-	@FindBy(xpath = "//a[contains(text(),'Claims & Accounts')]")
-	private WebElement claimslink;
 	
 	@FindBy(xpath="//*[@id='IPEinvL']/map/area[3]")
 	private WebElement iPerceptionAutoPopUp;

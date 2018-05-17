@@ -3,7 +3,6 @@ package pages.regression.login;
 import java.io.IOException;
 import java.util.Properties;
 
-import javax.mail.BodyPart;
 import javax.mail.Flags;
 import javax.mail.Folder;
 import javax.mail.Message;
@@ -11,7 +10,6 @@ import javax.mail.Message.RecipientType;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Store;
-import javax.mail.internet.MimeMultipart;
 import javax.mail.search.AndTerm;
 import javax.mail.search.FlagTerm;
 import javax.mail.search.RecipientStringTerm;
@@ -88,10 +86,6 @@ public class HsidRegistrationConfirmInformation extends UhcDriver {
 		SearchTerm st = new AndTerm(ft_unseen, ft_toEmail);
 		
 		Message msg[] = inbox.search(st);
-		String mail = "";
-		String sub= "";
-		MimeMultipart body;
-		String bodyText = "";
 		System.out.println("getConfirmRegistrationURLWithSubjectandEmailContent::MAILS for [" + username + "]: " + msg.length);
 		//for(Message message:msg) {
 	        //mail = message.getFrom()[0].toString();
@@ -146,25 +140,6 @@ public class HsidRegistrationConfirmInformation extends UhcDriver {
 		return rtrnrarr;
 	}
 	
-	private  String getTextFromMimeMultipart(
-	        MimeMultipart mimeMultipart)  throws MessagingException, IOException{
-	    String result = "";
-	    int count = mimeMultipart.getCount();
-	    for (int i = 0; i < count; i++) {
-	        BodyPart bodyPart = mimeMultipart.getBodyPart(i);
-	        if (bodyPart.isMimeType("text/plain")) {
-	            result = result + "\n" + bodyPart.getContent();
-	            break; // without break same text appears twice in my tests
-	        } else if (bodyPart.isMimeType("text/html")) {
-	            String html = (String) bodyPart.getContent();
-	            result = result + "\n" + org.jsoup.Jsoup.parse(html).text();
-	        } else if (bodyPart.getContent() instanceof MimeMultipart){
-	            result = result + getTextFromMimeMultipart((MimeMultipart)bodyPart.getContent());
-	        }
-	    }
-	    return result;
-	} 
-	
 	public void confirmEmail(){
 		driver.get(getConfirmationUrl());
 		
@@ -195,10 +170,7 @@ public class HsidRegistrationConfirmInformation extends UhcDriver {
 		SearchTerm st = new AndTerm(ft_unseen, ft_toEmail);
 		
 		Message msg[] = inbox.search(st);
-		String mail = "";
 		String sub= "";
-		MimeMultipart body;
-		String bodyText = "";
 		System.out.println("getCompleteRegistrationURLWithSubjectandEmailContent::MAILS for [" + username + "]: " + msg.length);
 		for(Message message:msg) {
 	        //mail = message.getFrom()[0].toString();

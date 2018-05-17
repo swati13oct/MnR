@@ -272,10 +272,6 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(id = "specialDisctServices")
 	private WebElement textdiscountservices;
 
-
-	@FindBy(className = "atdd-bnc-discounttitle")
-	private WebElement headerdiscountservices;
-
 	@FindBy(className = "atdd-bnc-discntlearnmorimg")
 	private WebElement learnmorebutton;
 
