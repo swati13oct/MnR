@@ -55,10 +55,18 @@ public class LeavingOLEmodal extends UhcDriver{
 			System.out.println("OLE Medicare Information Page is Displayed");
 			return new MedicareInformationPage(driver);
 		}
-		
+		else if(driver.getCurrentUrl().contains("preliminary-questions")){
+			System.out.println("OLE Preliminary Questions Page is Displayed");
+			return new PrelimineryQuestionsPage(driver);
+		}
+		else if(driver.getCurrentUrl().contains("personal-information")){
+			System.out.println("OLE Personal Information Page is Displayed");
+			return new PersonalInformationPage(driver);
+		}
+		else if(driver.getCurrentUrl().contains("special-election-period")){
+			System.out.println("OLE Special Election Period Page is Displayed");
+			return new SpecialElectionPeriodPage(driver);
+		}
 		return null;	
 	}
-
-
-
 }
