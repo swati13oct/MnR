@@ -293,6 +293,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(css = "img.img-responsive")
 	private WebElement logoImage;
+	
+	@FindBy(xpath = "(//img[@alt='CoLogo'])[1]")
+	private WebElement cologoImage;
 
 	@FindBy(xpath = ".//*[@id='drug-benefits']/div[5]/div[10]/div/div[1]/div/div")
 	private WebElement hartfortdrugtable;
@@ -1410,8 +1413,20 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		System.out.println("Actual logo's source on Dashboard page is   "+logo_src+" and Expected logo source is  "+logoToBeDisplayedOnSecondaryPage+" . ");		
 		System.out.println("logo's alt text on secondary page is   "+logo_alt);	
 		Assert.assertTrue(logo_src.contains(logoToBeDisplayedOnSecondaryPage));
+		System.out.println("Secondary page main logo assert condition is passed");	
 	}
     
+    public void validateCoLogoImagePresent(String cologoToBeDisplayedOnSecondaryPage) {
+		
+ 		String cologo_src = cologoImage.getAttribute("src");
+ 		String cologo_alt = cologoImage.getAttribute("alt");
+ 		System.out.println("Actual logo's source on Dashboard page is   "+cologo_src+" and Expected logo source is  "+cologoToBeDisplayedOnSecondaryPage+" . ");		
+ 		System.out.println("logo's alt text on secondary page is   "+cologo_alt);	
+ 		Assert.assertTrue(cologo_src.contains(cologoToBeDisplayedOnSecondaryPage));
+ 		System.out.println("Secondary page co logo assert condition is passed");
+ 	}
+     
+
     public void ancillarynotdisplayed() {
 		if (Headersection.isDisplayed()) {
 			Assert.assertFalse("The element" + Headersection.getText()

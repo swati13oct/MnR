@@ -140,6 +140,9 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(xpath = "//div[@id='white-label']/a/img")
 	private WebElement logoImage;
+	
+	@FindBy(xpath = "//div[@id='white-label']/a/img[2]")
+	private WebElement cologoImage;
 
 	@FindBy(xpath = "//*[@ng-src='/images/icons/icon-pharmacy-locator.svg']")
 	private WebElement pharmacySearchLink;
@@ -655,7 +658,17 @@ public ContactUsPage navigateToContactUsPage() {
 		System.out.println("Actual logo's source on Dashboard page is   "+logo_src+" and Expected logo source    "+logoToBeDisplayedOnDashboard+" .");	
 		System.out.println("logo's alt text on Dashboard page is   "+logo_alt);		
 		Assert.assertTrue(logo_src.contains(logoToBeDisplayedOnDashboard));
+		System.out.println("Dashboard page main logo assert condition is passed");
+	}
 	
+	public void validateCoLogoImagePresent(String cologoToBeDisplayedOnDashboard) throws InterruptedException {
+		Thread.sleep(2000);	
+		String cologo_src = cologoImage.getAttribute("src");
+		String cologo_alt = cologoImage.getAttribute("alt");
+		System.out.println("Actual cologo's source on Dashboard page is   "+cologo_src+" and Expected cologo source    "+cologoToBeDisplayedOnDashboard+" .");	
+		System.out.println("cologo's alt text on Dashboard page is   "+cologo_alt);		
+		Assert.assertTrue(cologo_src.contains(cologoToBeDisplayedOnDashboard));
+		System.out.println("Dashboard page cologo assert condition is passed");
 	}
 	
 public ClaimSummarypage navigateToClaimsSummaryPage() {
