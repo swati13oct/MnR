@@ -19,6 +19,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
+import pages.regression.payments.PaymentHistoryPage;
+import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.MRConstants;
@@ -26,9 +29,6 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
-import pages.regression.payments.PaymentHistoryPage;
-import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 
 
 /**
@@ -43,11 +43,6 @@ public class AccountHomePage extends UhcDriver {
         @FindBy(id = "plan_box")
         private WebElement planBox;
 
-        @FindBy(linkText = "Order plan materials")
-        private WebElement orderPlanMaterials;
-
-        @FindBy(xpath = "//div[@class='myProfileMid']/div[1]/div/div[2]/h2")
-        private WebElement myProfilesHeading;
 
         @FindBy(linkText = "estimate costs")
         private WebElement estimateCostLink;
@@ -61,15 +56,8 @@ public class AccountHomePage extends UhcDriver {
         @FindBy(id = "disclosure_link")
         private WebElement logOut;
 
-        @FindBy(linkText = "Premium payment information")
-        private WebElement paymentsLink;
-
         @FindBy(xpath = ".//*[@id='_content_campaigns_uhcm_panelnav-planresources-main_links_jcr_content_par_teaser']/div/li/a")
         private WebElement formsAndResourcesLink;
-
-        @FindBy(linkText = "My Profile & Preferences")
-        private WebElement profAndPrefLink;
-
 
         @FindBy(xpath = "//*[@id='myshipplans']/a")
         private WebElement myPlansTab;
@@ -83,38 +71,15 @@ public class AccountHomePage extends UhcDriver {
         @FindBy(xpath = "//li[@id='fd_myMenu']/a")
         private WebElement myMenuNavigator;
 
-        @FindBy(linkText = "Prescription drug cost and benefits summary")
-        private WebElement prescriptionDrugCostBenefitSummaryLink;
-
         @FindBy(linkText = "Search drug claims")
         private WebElement searchDrugClaims;
-
-        @FindBy(linkText = "Search claim history")
-        private WebElement searchClaimsHistory;
-
 
         @FindBy(linkText = "Search medical claims")
         //@FindBy(xpath = ".//*[@id='_content_campaigns_uhcm_chunkyfooter-activitylinks-main_activitylinks-main_jcr_content_par_teaser']/div/li/a")//(linkText = "Search medical claims")
         private WebElement searchMedicalClaims;
-
-        @FindBy(linkText = "Medical Explanation of Benefits (EOB)")
-        private WebElement medicalEobLink;
-
-        @FindBy(linkText = "Prescription Drug Explanation of Benefits (EOB)")
-        private WebElement prescriptionDrugEobLink;
         
         @FindBy(xpath = "//div[@id='medicareTitle']/h1")
         private WebElement pharmacyLocatorHeading;
-        
-        @FindBy(xpath = "//*[@id='medicareTitle']/p/a[1]")
-        private WebElement espanolLink;
-        
-        @FindBy(xpath = "//*[@id='medicareTitle']/p/a[2]")   //Story 261070
-        private WebElement chineseLink;
-        
-        @FindBy(xpath = "////*[@id='subPageLeft']/div[2]/div[2]/h3[2]/a")
-        private WebElement createPdfLink;
-        
 
         @FindBy(xpath = "//span[contains(.,'Print temporary ID card')]")
         private WebElement viewIDCard;
@@ -134,9 +99,6 @@ public class AccountHomePage extends UhcDriver {
         @FindBy(xpath ="//*[@id='gogreenmeter']/a")
         private WebElement goGreenLink;
         
-        @FindBy(xpath = "/html/body/div[2]/div[2]/div/div[1]/div/div/div/h1")
-        private WebElement paymentsHeading;
-        
         @FindBy(xpath = "//*[@id='gogreenlogin_box']/div[4]/div/a")
         private WebElement gogreenPopupClose;
         
@@ -144,54 +106,12 @@ public class AccountHomePage extends UhcDriver {
         @FindBy(xpath = "//*[@id='gogreenlogin_box']/div[4]/div")
         private WebElement gogreenPopup;
         
-        @FindBy(linkText = "My Documents")
-        private WebElement MyDocumentLink;
-        
-        @FindBy(linkText = "Back to previous page")
-        private WebElement backTopreviouspageLink;
-        
-
-        @FindBy(xpath = "//html/body/title")
-        private WebElement newClaimsPageHeading;
-        
-
-        @FindBy(linkText = "View/Download")
-        private WebElement viewanddownloadLink;
-
-        
-        @FindBy(xpath = "//*[@id='myDocuments']/div/div[2]/div/p[2]/ul/li[4]/a")
-        private WebElement paginationLink;
-        
-        @FindBy(xpath = "//*[@id='myDocuments']/div/div[1]/div/form/div/div[2]/div[2]/div[2]/div[1]/div/input")
-        private WebElement fromdate;
-        
-        @FindBy(xpath = "//*[@id='myDocuments']/div/div[1]/div/form/div/div[2]/div[2]/div[2]/div[2]/div/input")
-        private WebElement todate;
-        
-        @FindBy(xpath = "//*[@id='myDocuments']/div/div[1]/div/form/div/div[2]/div[2]/div[2]/div[3]/button")
-        private WebElement searchLink;
-        
-        @FindBy(linkText = "Date")
-        private WebElement dateLink;
-        
-        @FindBy(xpath = ".//*[@id='plan_box']/div/div[2]/div/table/tbody/tr[3]/td[2]")
-        private WebElement status;
-        
         @FindBy(xpath = ".//*[@id='plan_box']/div/div[2]/div/table/tbody/tr[2]/td[2]")
         private WebElement memberId;
         
         @FindBy(xpath = ".//*[@id='plan_box']/div/div[2]/div/table/tbody/tr[1]/td[2]")
         private WebElement groupId;
-        
-        @FindBy(id = "_content_uhcm_home_my-account-home_jcr_content_contentPar_myresource_contentParResource_teaser")
-        private WebElement myResource;
-        
-        @FindBy(linkText = "mental health or substance use")
-        private WebElement MentalHealthOrSubstanceUse;
-        
-        @FindBy(xpath = ".//*[@id='_content_campaigns_uhcm_home-myresources-main_home-myresources-main_jcr_content_par_teaser_2']/div/div[2]")
-        private WebElement drugLookup;
-        
+ 
         @FindBy(xpath = ".//*[@id='plan_box']/div/div[2]/div/p/a")
         private WebElement planNameLink;
         
@@ -207,30 +127,17 @@ public class AccountHomePage extends UhcDriver {
         @FindBy(xpath = ".//*[@id='contentRow']/td/table/tbody/tr/td/div/div[2]/div[3]/div[3]/div[2]")
         private WebElement myResourcesContent;
         
-        @FindBy(xpath = "//*[@class='zip']/span[1]")
-        private WebElement RallyZipcode;
-
-        @FindBy(xpath="//*[@id='IPEinvL']/map/area[3]")
-        private WebElement closebtn;
-        
         @FindBy(xpath="html/body/div[2]/div/div[4]/div[2]/div/table/tbody/tr[4]/td[2]/a")
         private WebElement benfitscoveragelink;
         
 @FindBy(xpath="//a[contains(text(),'Provider search')]")
 private WebElement providerSearchinPanelNavigation;
 
-@FindBy(xpath="//a[contains(text(),'Medical Explanation of Benefits (EOB)')]")
-private WebElement medicalEOBLinkInPanelNavigation;
-
 @FindBy(id="btn_searchforaprovider")
 private WebElement medicalEOBproviderlink;
 
 @FindBy(linkText="Medical Explanation of Benefits (EOB)")
 private WebElement medicalEOBlink;
-
-@FindBy(id="zipCode")
-private WebElement zipCode;
-
 
 @FindBy(id="fd_myMenu")
 private WebElement myMenu;
@@ -284,39 +191,18 @@ private WebElement claimsLink;
 @FindBy(xpath ="(//a[contains(@href,'my-plans/forms-and-resources')])[4]")
 private WebElement FormsandResourcesLinkn;
 
-
-
-@FindBy(xpath="//a[contains(text(),'search for providers')]")
-private WebElement searchforproviderlinkinClaimsPage;
-
   @FindBy(xpath="//*[@id='btn_searchforaprovider']")
   private WebElement providerLink;
-  
-  @FindBy(xpath="//a[@class='searchforproviders margin_top_5px']")
-        private WebElement searchProviderinFormsandResourcePage;
-        
-        
         
         @FindBy(xpath="//span[text()='search providers']")
         private WebElement searchProviderLinkinFormsandResourcePage;
-        
-
-        @FindBy(xpath="html/body/div[2]/div/div[4]/div[2]/div/table/tbody/tr[4]/td[2]/a")
-    	private WebElement linkbenefit;  
+ 
         
         @FindBy(xpath=".//*[@id='IPEinvL']/map/area[2]")
         private List<WebElement> iPerceptionPopUp;
         
-        @FindBy(xpath="//a[contains(text(),'Go to benefits and coverage page')]")
-    	private WebElement benefitcoveragelink;
-        
         @FindBy(xpath="html/body/div[2]/div/div[4]/div[2]/div/table/tbody/tr[6]/td[2]/a")
         private WebElement profilenpreferenceslink;
-  
-        
-        @FindBy(linkText="Go to profile page")
-        private WebElement profilenpreferenceslink1;
-        
         
         @FindBy(id ="authQuestiontextLabelId")
         private WebElement questionid;
@@ -325,10 +211,6 @@ private WebElement searchforproviderlinkinClaimsPage;
         
         @FindBy(id ="continueSubmitButton")
         private WebElement continueButton;
-        
-
-        @FindBy(xpath = "//sticky[@id='sticky-nav']//nav[@id='main-nav']//a[contains(text(),'Coverage & Benefits')]")
-    	private WebElement BnClink;
         
     	@FindBy(xpath="//*[@id='IPEinvL']/map/area[3]")
     	private WebElement iPerceptionAutoPopUp;

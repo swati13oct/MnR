@@ -54,9 +54,6 @@ public class IntroductionInformationPage extends UhcDriver{
 	@FindBy(id="beginOnlineEnrollmentbtn")
 	private WebElement enrollmentNext;
 	
-	@FindBy(id = "beginOnlineEnrollmentBtn")
-	private WebElement beginOnlineEnrBtn;
-	
 	@FindBy(xpath = "//div[@id='beginOnlineEnrollment']/span")
 	private WebElement alreadyEnrolledErrorMsg;
 	

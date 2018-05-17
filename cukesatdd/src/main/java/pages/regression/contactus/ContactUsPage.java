@@ -3,6 +3,8 @@
  */
 package pages.regression.contactus;
 
+import gherkin.formatter.model.DataTableRow;
+
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +25,6 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import cucumber.api.DataTable;
-import gherkin.formatter.model.DataTableRow;
 
 /**
  * @author bnaveen4

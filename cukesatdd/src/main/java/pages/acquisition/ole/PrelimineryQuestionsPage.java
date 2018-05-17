@@ -17,11 +17,7 @@ import atdd.framework.UhcDriver;
  *
  */
 public class PrelimineryQuestionsPage extends UhcDriver{
-	
-	
-	//OLE Common Elements
-	@FindBy(xpath = "//*[@class = 'logo']")
-	private WebElement SiteLogo;
+
 	
 	@FindBy(id = "ole-form-next-button")
 	private WebElement NextBtn;
