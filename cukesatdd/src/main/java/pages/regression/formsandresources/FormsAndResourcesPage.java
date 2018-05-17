@@ -19,9 +19,6 @@ import atdd.framework.UhcDriver;
 
 @SuppressWarnings("deprecation")
 public class FormsAndResourcesPage extends UhcDriver {
-	
-	        @FindBy(linkText="VIEW DOCUMENTS & RESOURCES")
-	           private WebElement DOCUMENTSRESOURCES;
 
                 /** The member signin link. */
                 @FindBy(id = "fd_memberSignInButton")
@@ -75,10 +72,6 @@ public class FormsAndResourcesPage extends UhcDriver {
                 @FindBy(xpath = "(//a[contains(text(),'VIEW MEMBER ID CARD')])[1]")
                 private WebElement MemberIdCardlink;
               //*[contains(text(),'VIEW MEMBER ID CARD')]
-                
-                /*for terminated*/
-                @FindBy(xpath = "(//a[contains(text(),'VIEW MEMBER ID CARD')])[1]")
-                private WebElement MemberIdCardlinkterminated;
 
                 
                 @FindBy(xpath = " //*[contains(text(),'ORDER PLAN MATERIALS')]")

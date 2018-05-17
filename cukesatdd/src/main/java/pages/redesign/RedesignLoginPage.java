@@ -67,15 +67,6 @@ public class RedesignLoginPage extends UhcDriver {
 
 	@FindBy(id = "continueSubmitButton")
 	private static WebElement continueButton;
-	
-	@FindBy(id = "new-email")
-	private WebElement NewEmailTxtBox;
-
-	@FindBy(id = "new-email-confirm")
-	private WebElement ConfirmNewEmailTxtBox;
-	
-	@FindBy(xpath = "//*[@id='email-modal-form']//button")
-	private WebElement NewEmailContinueBtn;
 
 
 	/**

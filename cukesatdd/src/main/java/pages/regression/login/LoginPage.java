@@ -19,10 +19,6 @@ public class LoginPage extends UhcDriver {
 		// Page URL
 		private static String PAGE_URL = MRConstants.HSIDURL;
 
-
-		@FindBy(id = "fd_memberSignInButton")
-		private WebElement loginIn;
-
 		@FindBy(id = "hsid-username")
 		private WebElement userNameField;
 

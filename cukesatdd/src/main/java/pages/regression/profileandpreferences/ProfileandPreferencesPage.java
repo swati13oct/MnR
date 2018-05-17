@@ -93,9 +93,6 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='emailCardHeight']//span[@class='bold atdd-email ng-scope']")
 	private WebElement EmailAddressLabel;
 
-	@FindBy(id = "email")
-	private WebElement Emailform;
-
 	@FindBy(id = "profileemailaddress")
 	private WebElement emailAddress;
 
