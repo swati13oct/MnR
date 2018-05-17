@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-import atdd.framework.UhcDriver;
 import pages.regression.accounthomepage.AccountHomePage;
+import atdd.framework.UhcDriver;
 
 public class Rallytool_Page extends UhcDriver{
 

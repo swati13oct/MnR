@@ -45,8 +45,6 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.stereotype.Component;
 
-//import com.sun.java_cup.internal.runtime.Scanner;
-
 import acceptancetests.data.CommonConstants;
 import cucumber.api.Scenario;
 
@@ -78,12 +76,13 @@ public class MRScenario {
                public static String environmentMedicare;
                public static String isTestHarness;
                public static String domain;
-
                private static final String DIRECTORY = "/src/main/resources/";
 
                public static int count = 0;
 
+               
                public static final String USERNAME = "ucpadmin";
+
                public static final String ACCESS_KEY ="2817affd-616e-4c96-819e-4583348d7b37";
                
 
@@ -632,7 +631,7 @@ public class MRScenario {
                               }
                }
 
-         /*   public WebDriver getWebDriver() {
+            public WebDriver getWebDriver() {
 
                               /*
                               * 
@@ -723,31 +722,54 @@ public class MRScenario {
 
                               }
                               return webDriver;
-               } */
-
-       
-               public WebDriver getWebDriver() {
-            	   
-            	   DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-
-            	   capabilities.setCapability("platform", "Windows 7");
-            	   capabilities.setCapability("version", "45.0");
-            	   capabilities.setCapability("parent-tunnel", "sauce_admin");
-            	   capabilities.setCapability("tunnelIdentifier",
-            			   "OptumSharedTunnel-Stg");
-            	   //capabilities.setCapability("name", "MRATDD-TestSuite");
-            	   capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
-            	   String jobName = "VBF Execution - Using " + capabilities.getBrowserName() + " in  " + System.getProperty("environment") +" environment";
-            	   capabilities.setCapability("name", jobName);
-            	   try {
-            		   webDriver = new RemoteWebDriver(new URL(URL), capabilities);
-            	   } catch (MalformedURLException e) {
-            		   // TODO Auto-generated catch block
-            		   e.printStackTrace();
-            	   }
-            	   return webDriver;
                }
 
+               public WebDriver getWebDriver() {
+                              File pathToBinary = new File("C:\\firefox 29\\firefox.exe");
+                              FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
+                              FirefoxProfile firefoxProfile = new FirefoxProfile();       
+                              webDriver = new FirefoxDriver(ffBinary,firefoxProfile);
+                              webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+                              //webDriver.manage().window().maximize();
+                              return webDriver;
+               }
+         
+               public WebDriver getWebDriver() {
+            	   
+            	   if (null == webDriver) {              
+         	           File pathToBinary = new File("C:\\Users\\njain112\\Documents\\Chrome\\Application\\Chrome.exe");
+         	           Map<String, Object> chromeOptions = new HashMap<String, Object>();
+         	           chromeOptions.put("binary", pathToBinary);
+         	           DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+         	           capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+         	           System.setProperty("webdriver.chrome.driver","C:\\Users\\njain112\\Documents\\chromedriver.exe");
+         	           webDriver = new ChromeDriver();
+            	   }
+               return webDriver;
+            	*/   
+                 DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+                                            
+                 capabilities.setCapability("platform", "Windows 7");
+                 capabilities.setCapability("version", "45.0");
+                 capabilities.setCapability("parent-tunnel", "sauce_admin");
+                   capabilities.setCapability("tunnelIdentifier",
+                                               "OptumSharedTunnel-Stg");
+              //capabilities.setCapability("name", "MRATDD-TestSuite");
+              capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
+              String jobName = "VBF Execution - Using " + capabilities.getBrowserName() + " in  " + System.getProperty("environment") +" environment";
+              capabilities.setCapability("name", jobName);
+                try {
+                                webDriver = new RemoteWebDriver(new URL(URL), capabilities);
+                 } catch (MalformedURLException e) {
+                                // TODO Auto-generated catch block
+                              e.printStackTrace();
+               }
+              
+            	
+               
+               return webDriver;
+               }
+               
                public WebDriver getIEDriver() {
                               System.setProperty("webdriver.ie.driver",
                                                             "./IEDriverServer.exe");

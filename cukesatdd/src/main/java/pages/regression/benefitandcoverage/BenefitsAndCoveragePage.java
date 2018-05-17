@@ -18,12 +18,12 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import pages.member.bluelayer.ProfilePreferencesPage;
+import pages.member.ulayer.ValueAddedServicepage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.member.bluelayer.ProfilePreferencesPage;
-import pages.member.ulayer.ValueAddedServicepage;
 
 /**
  * @Functionality : To check Benefits and Coverage page

@@ -1,6 +1,8 @@
 
 package acceptancetests.memberredesign.Profileandpreferences;
 
+import gherkin.formatter.model.DataTableRow;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;

@@ -1,5 +1,7 @@
 package acceptancetests.memberrdesignVBF.claims;
 
+import gherkin.formatter.model.DataTableRow;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +9,10 @@ import java.util.Map;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.memberrdesignVBF.ClaimDetailsPage;
+import pages.memberrdesignVBF.ClaimSummarypage;
+import pages.memberrdesignVBF.RallyDashboardPage;
+import pages.memberrdesignVBF.TestHarness;
 import acceptancetests.data.PageConstants;
 import acceptancetests.memberrdesignVBF.common.CommonStepDefinition;
 import atdd.framework.MRScenario;

@@ -10,6 +10,8 @@ import cucumber.api.java.en.When;
 import pages.memberrdesignVBF.ProviderSearchPage;
 import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.memberrdesignVBF.TestHarness;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 
 public class MemberProviderSearchStepDefinition {
 	@Autowired

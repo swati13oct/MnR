@@ -1,5 +1,7 @@
 package acceptancetests.memberredesign.groupretiree;
 
+import gherkin.formatter.model.DataTableRow;
+
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;

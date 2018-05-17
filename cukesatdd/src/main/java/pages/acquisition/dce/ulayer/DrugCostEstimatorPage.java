@@ -17,10 +17,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import pages.acquisition.ulayer.PlanDetailsPage;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.ulayer.PlanDetailsPage;
 
 public class DrugCostEstimatorPage extends UhcDriver {
 

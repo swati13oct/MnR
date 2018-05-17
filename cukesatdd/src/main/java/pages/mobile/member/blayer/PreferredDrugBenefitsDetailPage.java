@@ -6,6 +6,8 @@ package pages.mobile.member.blayer;
 import java.util.List;
 import java.util.Map;
 
+import junit.framework.Assert;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,7 +20,6 @@ import acceptancetests.data.CommonConstantsMobile;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import junit.framework.Assert;
 
 /**
  * @author pjaising

@@ -3,6 +3,8 @@
  */
 package acceptancetests.memberredesign.pharmacylocator;
 
+import gherkin.formatter.model.DataTableRow;
+
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,10 +19,8 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.pharmacylocator.PharmacySearchPage;
-
 /**
  * @author sdwaraka
  * Functionality: Pharmacy locator in New Member redesign
