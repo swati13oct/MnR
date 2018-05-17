@@ -901,13 +901,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		waitforElement(People);
 
 		System.out.println("Rally tool started");
-		People.click();
-
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", People);
 
 
 		waitforElement(Primary);
-
-
 
 		Primary.click();
 
