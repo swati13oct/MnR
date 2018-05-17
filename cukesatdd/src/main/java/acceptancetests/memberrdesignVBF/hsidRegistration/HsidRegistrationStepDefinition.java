@@ -50,6 +50,7 @@ public class HsidRegistrationStepDefinition {
 	@Given("^the user is on medicare sign in page$")
 	public void the_user_is_on_medicare_sign_in_page() throws Throwable {
 		WebDriver wd = getLoginScenario().getWebDriverNew();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		LoginPage loginPage = new LoginPage(wd);
 		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
 	}
@@ -87,9 +88,10 @@ public class HsidRegistrationStepDefinition {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
-		
-		String firstName = memberAttributesMap.get("firstName");
-		String lastName = memberAttributesMap.get("lastName");
+		String firstName = (String) getLoginScenario().getBean(LoginCommonConstants.Firstname);
+		String lastName =  (String) getLoginScenario().getBean(LoginCommonConstants.Lastname);
+		/*String firstName = memberAttributesMap.get("firstName");
+		String lastName = memberAttributesMap.get("lastName");*/
 		String dob = memberAttributesMap.get("dob");
 		String zipcode = memberAttributesMap.get("zipcode");
 		String memberId = memberAttributesMap.get("memberid");
@@ -275,7 +277,12 @@ public class HsidRegistrationStepDefinition {
 		HsidRegistrationConfirmInformation hsidRegistrationConfirmInformationPage = 
 				(HsidRegistrationConfirmInformation) loginScenario.getBean(PageConstants.HSID_REGISTRATION_CONFIRM_INFORMATION);
 		String[] mailParts = hsidRegistrationConfirmInformationPage.getConfirmRegistrationURLWithSubjectandEmailContent();
+		if(!mailParts[0].equals(null)){
 		hsidRegistrationConfirmInformationPage.setConfirmationUrl(mailParts[0]);
+		}
+		else{
+			Assert.fail();
+		}
 	}
 
 	@Then("^user should copy the confirm email url to browser$")
@@ -575,7 +582,7 @@ public class HsidRegistrationStepDefinition {
 		MRScenario.getRecordsFrom_mbr_table(firstname,lastname);
 	}
 	
-	@And("^the user delete record from mbr_portal$")
+	/*@And("^the user delete record from mbr_portal$")
 	public void i_delete_record_data_base(DataTable givenAttributes) throws SQLException {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -590,9 +597,17 @@ public class HsidRegistrationStepDefinition {
 		System.out.println(firstname);
 		System.out.println(lastname);
 		MRScenario.deleteRecordsFrom_mbr_prtl_table(firstname,lastname);
+	}*/
+	
+	@And("^the user delete record from mbr_portal$")
+	public void i_delete_record_data_base() throws SQLException {
+		
+		String firstname = (String) getLoginScenario().getBean(LoginCommonConstants.Firstname);
+		String lastname =  (String) getLoginScenario().getBean(LoginCommonConstants.Lastname);
+		MRScenario.deleteRecordsFrom_mbr_prtl_table(firstname,lastname);
 	}
 	
-	@And("^the user delete record from mbr$")
+	/*@And("^the user delete record from mbr$")
 	public void i_delete_record_mbrtable(DataTable givenAttributes) throws SQLException {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -607,9 +622,16 @@ public class HsidRegistrationStepDefinition {
 		System.out.println(firstname);
 		System.out.println(lastname);
 		MRScenario.deleteRecordsFrom_mbr_table(firstname,lastname);
+	}*/
+	
+	@And("^the user delete record from mbr$")
+	public void i_delete_record_mbrtable() throws SQLException {
+		String firstname = (String) getLoginScenario().getBean(LoginCommonConstants.Firstname);
+		String lastname =  (String) getLoginScenario().getBean(LoginCommonConstants.Lastname);
+		MRScenario.deleteRecordsFrom_mbr_table(firstname,lastname);
 	}
 	
-	@And("^the user delete record from extreme scale$")
+	/*@And("^the user delete record from extreme scale$")
 	public void i_delete_record_extremescaletable(DataTable givenAttributes) throws SQLException {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -624,8 +646,14 @@ public class HsidRegistrationStepDefinition {
 		System.out.println(firstname);
 		System.out.println(lastname);
 		MRScenario.deleteRecordsFrom_mbr_extrm_scl_dtl_table(firstname,lastname);
+	}*/
+	@And("^the user delete record from extreme scale$")
+	public void i_delete_record_extremescaletable() throws SQLException {
+		
+		String firstname = (String) getLoginScenario().getBean(LoginCommonConstants.Firstname);
+		String lastname =  (String) getLoginScenario().getBean(LoginCommonConstants.Lastname);
+		MRScenario.deleteRecordsFrom_mbr_extrm_scl_dtl_table(firstname,lastname);
 	}
-	
 	@Given("^the user deregister from M&R LDAP$")
 	public void I_delete_user_from_mnrldap(DataTable givenAttributes)
 	{
@@ -664,8 +692,8 @@ public class HsidRegistrationStepDefinition {
 	 * 
 	 * @throws InterruptedException
 	 */
-	@When("^the above plantype user logs in member redesign for Direct Login$")
-	public void plantype_user_logs_in(DataTable memberattributes) throws InterruptedException {
+	@When("^registered user logs in post registration$")
+	public void registered_user_logs_in(DataTable memberattributes) throws InterruptedException {
 		String userName = (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
 		String pwd = (String) getLoginScenario().getBean(LoginCommonConstants.PASSWORD);
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
@@ -716,8 +744,8 @@ public class HsidRegistrationStepDefinition {
 
 		securityQuestionsPage.validateTheSecurityQues(friendname, favouritecolor, PhoneNumber);
 	}
-	@Then("^member should navigate to Home page$")
-	public void member_should_navigate_to_home_page() throws InterruptedException {
+	/*@Then("^member should be able to sign in$")
+	public void member_should_be_able_to_signin() throws InterruptedException {
 		if ("YES".equalsIgnoreCase(MRScenario.isHSIDCompatible)) {
 			LoginPage loginPage = (LoginPage) getLoginScenario().getBean(PageConstants.LOGIN_PAGE);
 			getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
@@ -740,5 +768,5 @@ public class HsidRegistrationStepDefinition {
 		} else {
 			Assert.assertTrue("Skipping this functionality as already done in previous step!!!", true);
 		}
-	}
+	}*/
 }

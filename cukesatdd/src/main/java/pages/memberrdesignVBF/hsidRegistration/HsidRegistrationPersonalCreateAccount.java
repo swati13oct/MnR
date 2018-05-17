@@ -14,6 +14,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 public class HsidRegistrationPersonalCreateAccount extends UhcDriver {
@@ -119,6 +120,7 @@ public class HsidRegistrationPersonalCreateAccount extends UhcDriver {
 	public HsidRegistrationPersonalCreateAccount(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
+		CommonUtility.checkPageIsReadyNew(driver);
 	}
 
 	@Override
@@ -127,48 +129,29 @@ public class HsidRegistrationPersonalCreateAccount extends UhcDriver {
 		
 	}
 	
-	public boolean verifyCreateAccountSection() {
-		try {
-			Thread.sleep(2000);
-			return createAccountSection.isDisplayed();
-		} catch (Exception e) {
-			return false;
-		}
+	public void verifyCreateAccountSection() {
+			validateNew(createAccountSection);
+
 	}
 	
 	public void enterUsername(String userName){
-		if(userNameTextBox.isDisplayed()){
-			userNameTextBox.clear();
-			userNameTextBox.sendKeys(userName);
-		}
+		sendkeysNew(userNameTextBox, userName);
 	}
 	
 	public void enterPassword(String password){
-		if(passwordTextBox.isDisplayed()){
-			passwordTextBox.clear();
-			passwordTextBox.sendKeys(password);
-		}
+		sendkeysNew(passwordTextBox, password);
 	}
 	
 	public void enterConfirmPassword(String password){
-		if(confirmPasswordTextBox.isDisplayed()){
-			confirmPasswordTextBox.clear();
-			confirmPasswordTextBox.sendKeys(password);
-		}
+		sendkeysNew(confirmPasswordTextBox, password);
 	}
 	
 	public void enterEmail(String email){
-		if(emailTextBox.isDisplayed()){
-			emailTextBox.clear();
-			emailTextBox.sendKeys(email);
-		}
+		sendkeysNew(emailTextBox, email);
 	}
 	
 	public void enterConfirmEmail(String email){
-		if(confirmEmailTextBox.isDisplayed()){
-			confirmEmailTextBox.clear();
-			confirmEmailTextBox.sendKeys(email);
-		}
+		sendkeysNew(confirmEmailTextBox, email);
 	}
 	
 	public void selectSecurityQuestion1(String questionName) {		 
@@ -187,42 +170,54 @@ public class HsidRegistrationPersonalCreateAccount extends UhcDriver {
 	}
 	
 	public void enterSecurityAnswer1(String securityAnswer) {
-
-		answer1TextBox.clear();
-		answer1TextBox.sendKeys(securityAnswer);
+sendkeysNew(answer1TextBox, securityAnswer);
 	}
 
 	public void enterSecurityAnswer2(String securityAnswer) {
-
-		answer2TextBox.clear();
-		answer2TextBox.sendKeys(securityAnswer);
+		sendkeysNew(answer2TextBox, securityAnswer);
 	}
 
 	public void enterSecurityAnswer3(String securityAnswer) {
-		answer3TextBox.clear();
-		answer3TextBox.sendKeys(securityAnswer);
+		sendkeysNew(answer3TextBox, securityAnswer);
 	}
 	
 	public void clickRememberThisDeviceCheckBox() {
-		
+		validateNew(rememberDeviceCheckBox);
 		rememberDeviceCheckBox.click();
 	}
 
 	public void clicktermsOfUseCheckBox() {		
-		JavascriptExecutor executor = (JavascriptExecutor)driver;
-        executor.executeScript("arguments[0].click();", termsOfUseCheckBox);
-		//termsOfUseCheckBox.click();
+		jsClickNew(termsOfUseCheckBox);
 	}
 	
 	public HsidRegistrationConfirmInformation clickCreateMyIDButton() {
 		createMyIDButton.click();
-		
-		try {
+	int counter = 0;
+	do {
+		if (counter <= 10) {
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println("Time elapsed post Continue clicked --" + counter + "*5 sec.");
+		} else {
+			System.out.println("TimeOut!!!");
+			return null;
+		}
+		counter++;
+		/*if (createIDErrorMsg.isDisplayed()) {
+			System.out.println("Error !!!");
+			break;
+		}*/
+	} while (!(currentUrl().contains("register/createAccount")));
+		/*try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		if(currentUrl().contains("register/createAccount")){
 			return new HsidRegistrationConfirmInformation(driver);
 		}

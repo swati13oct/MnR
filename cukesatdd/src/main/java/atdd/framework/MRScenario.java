@@ -1096,9 +1096,8 @@ public class MRScenario {
 
 }
      
-    public static  boolean getRecordsFrom_mbr_table(String firstName, String lastName) throws SQLException {
+    public static void getRecordsFrom_mbr_table(String firstName, String lastName) throws SQLException {
     	System.out.println("Getting records from MBR table");
-    	boolean isRecordExists = false;
   	   Connection con = getPDBDBConnection(props);
    	   Statement stmt = null;
         
@@ -1106,10 +1105,10 @@ public class MRScenario {
           String sql;
           sql = "SELECT HLTHSF_ID FROM mbr where MDM_FST_NM = '" + firstName
  				+ "' and MDM_LST_NM = '" + lastName + "'";
+          System.out.println("SQL Query:"+sql);
           ResultSet rs1 = stmt.executeQuery(sql);
          // rs1.first();
           if(rs1.first()){
-        	  isRecordExists = true;
         	  System.out.println("Record exists...");
           String HLTHSF_ID  = rs1.getString("HLTHSF_ID");
           System.out.println("HSID: "+HLTHSF_ID);
@@ -1121,7 +1120,6 @@ public class MRScenario {
           rs1.close();
           stmt.close();
           con.close();
-         return isRecordExists;
      }
      
      
@@ -1157,6 +1155,9 @@ public class MRScenario {
  		}else{
  			System.out.println("No Records found in the table: mbr !!!");	
  		}
+ 		rs.close();
+        stmt.close();
+        con.close();
  	} 
      
      public static void deleteRecordsFrom_mbr_prtl_table(String firstName, String lastName) throws SQLException {
@@ -1194,7 +1195,9 @@ public class MRScenario {
  		}else{
  			System.out.println("No Records found in the table: mbr_prtl !!!");	
  		}
- 		
+ 		rs.close();
+        stmt.close();
+        con.close();
  	}
 
  	public static void deleteRecordsFrom_mbr_extrm_scl_dtl_table(String firstName, String lastName) throws SQLException {
@@ -1207,6 +1210,8 @@ public class MRScenario {
       String sql;
       sql = "SELECT HLTHSF_ID FROM mbr where MDM_FST_NM = '" + firstName
  				+ "' and MDM_LST_NM = '" + lastName + "'";
+      
+      System.out.println("SQL Query:"+sql);
       ResultSet rs1 = stmt.executeQuery(sql);
       if(rs1.first()){
       String HLTHSF_ID  = rs1.getString("HLTHSF_ID");
@@ -1232,5 +1237,8 @@ public class MRScenario {
  	}else{
  		System.out.println("No Records found in the table: mbr_extrm_scl_dtl");
  	}
+      rs1.close();
+      stmt.close();
+      con.close();
  	}
 }

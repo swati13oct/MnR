@@ -99,9 +99,10 @@ public class HsidRegistrationConfirmInformation extends UhcDriver {
 	public  String[] getConfirmRegistrationURLWithSubjectandEmailContent()
 			throws MessagingException, IOException, InterruptedException {
 
-		String username = "uhcmnrportals@gmail.com";
-        String pwd = "Medicare123";
-        
+		/*String username = "uhcmnrportals@gmail.com";
+        String pwd = "Medicare123";*/
+		String username = "codetransformers@gmail.com";
+        String pwd = "CodeTransformers@1";
         Thread.sleep(44000);
        
 		Properties props = System.getProperties();
@@ -134,7 +135,7 @@ public class HsidRegistrationConfirmInformation extends UhcDriver {
 	         
 	         //System.out.println("mail:" +mail +"sub: " +sub + "body: "+ bodyText);
 	    //}
-		
+		if(msg.length!=0){
 		Object emailcontent = msg[msg.length - 1].getContent();
 		
 		System.out.println(emailcontent);
@@ -177,6 +178,11 @@ public class HsidRegistrationConfirmInformation extends UhcDriver {
 		store.close();
 		session = null;
 		return rtrnrarr;
+		}
+		else{
+			System.out.println("No unread email found!!!");
+			return null;
+		}
 	}
 	
 	private  String getTextFromMimeMultipart(
@@ -206,11 +212,11 @@ public class HsidRegistrationConfirmInformation extends UhcDriver {
 	public  void getregistrationflowcompleteemail()
 			throws MessagingException, IOException, InterruptedException {
 
-		String username = "uhcmnrportals@gmail.com";
-        String pwd = "Medicare123";
+		/*String username = "uhcmnrportals@gmail.com";
+        String pwd = "Medicare123";*/
         
-        Thread.sleep(44000);
-	
+		String username = "codetransformers@gmail.com";
+        String pwd = "CodeTransformers@1";
 		Properties props = System.getProperties();
 		props.setProperty("mail.store.protocol", "imaps");
 		Session session = Session.getDefaultInstance(props, null);
@@ -219,8 +225,6 @@ public class HsidRegistrationConfirmInformation extends UhcDriver {
 		Folder inbox = store.getFolder("Inbox");
 
 		inbox.open(Folder.READ_WRITE);
-		//inbox.open(Folder.READ_ONLY);
-
 		// Filter inbox messages by "UNSEEN" and "TO={username}"
 		FlagTerm ft_unseen = new FlagTerm(new Flags(Flags.Flag.SEEN), false);
 		RecipientStringTerm ft_toEmail = new RecipientStringTerm(RecipientType.TO, username);
@@ -241,7 +245,7 @@ public class HsidRegistrationConfirmInformation extends UhcDriver {
 	         
 	         System.out.println("sub: " +sub );
 	    }
-	         
+	         if(msg.length!=0){
         Object emailcontent = msg[msg.length - 1].getContent();
 		
 		System.out.println(emailcontent);
@@ -251,9 +255,12 @@ public class HsidRegistrationConfirmInformation extends UhcDriver {
 	        }
 	        else
 	        {
-	        	Assert.fail("Email didn't come");
+	        	Assert.fail("Registration email has not received!!!");
 	        }
-	         
+	         }
+	         else{
+	        	 Assert.fail("No unread email!!!");
+	         }
 		}
 	
 

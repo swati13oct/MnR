@@ -1,7 +1,11 @@
 package pages.memberrdesignVBF.hsidRegistration;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,6 +13,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 public class HsidRegistrationPersonalInformationPage extends UhcDriver {
@@ -62,10 +67,14 @@ public class HsidRegistrationPersonalInformationPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'form__step1')]//p[contains(@class,'ng-scope')]|//div[@ng-show='pageError']/p")
 	private WebElement mainErrorMsg;
 	
+	@FindBy(xpath = "//span[contains(@class,'Error')]")
+	private List<WebElement> createIDErrorMsg;
 	
 	public HsidRegistrationPersonalInformationPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, firstName, 40);
 	}
 
 	@Override
@@ -98,10 +107,24 @@ public class HsidRegistrationPersonalInformationPage extends UhcDriver {
 		this.memberId.sendKeys(memberId);
 	}
 	
-	public HsidRegistrationPersonalCreateAccount clickContinue(){
+	public HsidRegistrationPersonalCreateAccount clickContinue() throws InterruptedException{
 		continuebutton.click();
-
-		while(!currentUrl().contains("register/createAccount")){
+		int counter = 0;
+		do {
+			if (counter <= 5) {
+				Thread.sleep(5000);
+				System.out.println("Time elapsed post Continue clicked --" + counter + "*5 sec.");
+			} else {
+				System.out.println("TimeOut!!!");
+				return null;
+			}
+			counter++;
+			if (!createIDErrorMsg.isEmpty()) {
+				System.out.println("Error !!!");
+				break;
+			}
+		} while (!(currentUrl().contains("register/createAccount")));
+/*		while(!currentUrl().contains("register/createAccount")){
 			System.out.println("create account page is loading");
 			try {
 				Thread.sleep(3000);
@@ -109,7 +132,7 @@ public class HsidRegistrationPersonalInformationPage extends UhcDriver {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
+		}*/
 		System.out.println("create account page is loaded");
 		if(currentUrl().contains("register/createAccount")){
 			return new HsidRegistrationPersonalCreateAccount(driver);

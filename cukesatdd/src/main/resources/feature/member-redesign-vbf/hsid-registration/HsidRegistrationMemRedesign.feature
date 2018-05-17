@@ -3,19 +3,19 @@ Feature: 1.15-VBF-MemRedesign-To test HSID registration flow
 
 @smokeTest_HSIDregistration @rallyDashboard @testharness
    Scenario Outline:Verify HSID registration.
-     Given the user connect to DB
+     #Given the user connect to DB
      And the user select record from database
        | Firstname  | <firstname>  |
        | Lastname   | <lastname>   |
      And the user delete record from extreme scale
-       | Firstname  | <firstname>  |
-       | Lastname   | <lastname>   |
+     #  | Firstname  | <firstname>  |
+      # | Lastname   | <lastname>   |
      And the user delete record from mbr_portal
-       | Firstname  | <firstname>  |
-       | Lastname   | <lastname>   |
+      # | Firstname  | <firstname>  |
+     #  | Lastname   | <lastname>   |
      And the user delete record from mbr
-       | Firstname  | <firstname>  |
-       | Lastname   | <lastname>   |
+      # | Firstname  | <firstname>  |
+      # | Lastname   | <lastname>   |
     And the user is on medicare sign in page
     When the user clicks on Register now link
     And HSID registration page is displayed with all the fields
@@ -40,20 +40,17 @@ Feature: 1.15-VBF-MemRedesign-To test HSID registration flow
   And check the terms and click on create my ID button
   And user is navigated to Confirm email page
   And user should see a latest unread mail recieved in provided email address
-  Then user should copy the confirm email url to browser
-  #And user should be at Sign In page
-    #   | userName   | <userName>   |  
-     #  | password   | <password>   |  
+  Then user should copy the confirm email url to browser 
   And user should see the email confirmation message "Email confirmed: Please sign in with your new username and password." in Sign In form
-   When the above plantype user logs in member redesign for Direct Login
+   When registered user logs in post registration
     | friendname     | <friendname>  |
       | favouritecolor | <favcolor>    |
       | PhoneNumber    | <phonenumber> |
+  Then member should navigate to Home page
   Then user should see a latest unread mail recieved  in mail server
    
    Examples:
  
    | planType|  memberType  | copayCategory | firstname | lastname        |   dob 	            | memberid 	  | zipcode  | userName 	       | password   |   email	  			          | question1 | question2 | question3 |friendname | favcolor | phonenumber |
-   | MAPD    |  Individual  |  NON LIS      | AFAFBBF   | AECFEC          | 05/15/1950          | 954668573-1 | 78501	 |q1_feb_uhc042        | Password@1 | codetransformers@gmail.com      | number1   | name1     | color1    |name1      | color1   | number1     |
-   
-   
+    | MAPD    |  Individual  |  NON LIS      | FABCAEAD   | EFCEAA          | 09/22/1949          | 961861481-1 | 34748	 |q1_feb_uhc042        | Password@1 | codetransformers@gmail.com      | number1   | name1     | color1    |name1      | color1   | number1     |
+  #  | MAPD    |  Individual  |  NON LIS      | AFAFBBF   | AECFEC          | 05/15/1950          | 954668573-1 | 78501	 |q1_feb_uhc042        | Password@1 | codetransformers@gmail.com      | number1   | name1     | color1    |name1      | color1   | number1     |

@@ -91,10 +91,13 @@ public class LoginPage extends UhcDriver {
 
 		System.out.println("URL:" + PAGE_URL);
 		startNew(PAGE_URL);
+		CommonUtility.checkPageIsReadyNew(driver);
 		if ("NO".equalsIgnoreCase(MRScenario.isHSIDCompatible))
-			validateNew(signInButton);
+			CommonUtility.waitForPageLoadNew(driver, signInButton, 60);
+			//validateNew(signInButton);
 		else
-			validateNew(signInHsidButton);
+			CommonUtility.waitForPageLoadNew(driver, signInHsidButton, 60);
+			//validateNew(signInHsidButton);
 
 	}
 
