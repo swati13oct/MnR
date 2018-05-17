@@ -24,17 +24,9 @@ public class DashboardPage extends UhcDriver {
 		openAndValidate();
 	}
 
-	@FindBy(xpath = "(//nav[@id='main nav']//a[contains(text(),'Find Care')])[1]")
-	private WebElement panelFindCareCost;
-
-	@FindBy(id = "premiumpayment")
-	private WebElement panelPremiumPayment;
 
 	@FindBy(id = "main-nav")
 	private WebElement panelHome;
-
-	@FindBy(xpath = "(//nav[@id='main nav']//a[contains(text(),'Claims')])[1]")
-	private WebElement panelClaims;
 
 	@FindBy(xpath = "//button[@id='dropdown-toggle--1']/span[contains(text(),'Profile')]")
 	private WebElement accountToggleDropdown;
@@ -42,11 +34,6 @@ public class DashboardPage extends UhcDriver {
 	@FindBy(xpath = "//a[@class='dropdown-option' and contains(text(),'Account Settings')]")
 	private WebElement accountSettingOption;
 
-	@FindBy(xpath = "//header//h1")
-	private WebElement heading;
-
-	@FindBy(xpath = "//div[@id='ui view page']//span[contains(text(),'Look up Drugs')]")
-	private WebElement DCE_Dashboard;
 
 	@FindBy(xpath = "//sticky[@id='sticky-nav']//nav[@id='main-nav']//a[contains(text(),'Coverage & Benefits')]")
 	private WebElement BnClink;
@@ -56,9 +43,6 @@ public class DashboardPage extends UhcDriver {
 	
 	@FindBy(css= "sticky#sticky-nav nav#main-nav a:nth-child(5)")
 	private WebElement paymentslink;
-	
-	@FindBy(xpath ="//a[contains(text(),'EOB Search')]")
-	private WebElement CoverageAndBenefits;
 	
 	@FindBy(xpath="//*[@id='IPEinvL']/map/area[3]")
 	private WebElement iPerceptionAutoPopUp;

@@ -25,11 +25,6 @@ public class HSIDLoginPage extends UhcDriver {
 	// Page URL
 	private static String PAGE_URL = MRConstants.HSIDURL;
 
-	
-
-	@FindBy(id = "fd_memberSignInButton")
-	private WebElement loginIn;
-
 	@FindBy(id = "hsid-username")
 	private WebElement userNameField;
 
@@ -44,15 +39,9 @@ public class HSIDLoginPage extends UhcDriver {
 	
 	@FindBy(id = "hsid-FPwd")
 	private WebElement passwordlink;
-	
-    @FindBy(xpath=".//*[@id='IPEinvL']/map/area[1]")
-    private WebElement iPerceptionPopUp;
     
     @FindBy(xpath ="//div[@id='hsid-commonError']/p/span[2]")
     private WebElement EmailConfirmedtext;
-    
-    @FindBy(xpath=".//*[@id='hsid-login']/div[2]/p[3]/a")
-	private WebElement registerNow;
     
     private static String REGIRATION_URL = "https://st1.healthsafe-id.com/protected/register?HTTP_TARGETPORTAL=MNR&HTTP_ERRORURL=https://stage-medicare.uhc.com/&HTTP_TARGETURL=https%3A%2F%2Fstage-medicare.uhc.com%2Fmember%2Fpost-sign-in.html%3Ftarget%3Drallydashboard%26portalIndicator%3DUHC&HTTP_ELIGIBILITY=P&HTTP_GRADIENTCOLOR1=%23003DA1&HTTP_GRADIENTCOLOR2=%2300A8F7&HSID_DOMAIN_URL=https://st1.healthsafe-id.com&USE_TEST_RECAPTCHA=true";
 	

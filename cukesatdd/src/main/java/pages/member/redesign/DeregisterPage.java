@@ -27,9 +27,6 @@ public class DeregisterPage extends UhcDriver {
     @FindBy(id = "tobederegisteruser")
     private WebElement userNameField;
 
-    /** The password field. */
-    @FindBy(id = "password")
-    private WebElement passwordField;
 
     /** The password field. */
     @FindBy(xpath = "//input[@value='DeRegister']")
