@@ -2,7 +2,6 @@ package pages.regression.login;
 
 import org.junit.Assert;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,9 +18,6 @@ public class HsidRegistrationPersonalCreateAccount extends UhcDriver {
 	@FindBy(id = "username")
 	private WebElement userNameTextBox;
 	
-	@FindBy(xpath= "//span[contains(@class,'strong') and contains(.,'Username')]/following-sibling::input[@id='username']")
-	private WebElement userNameLabelWithTextBox;
-	
 	@FindBy(id = "password")
 	private WebElement passwordTextBox;
 	
@@ -30,9 +26,6 @@ public class HsidRegistrationPersonalCreateAccount extends UhcDriver {
 
 	@FindBy(id = "confirmPassword")
 	private WebElement confirmPasswordTextBox;
-	
-	@FindBy(xpath= "//input[@id='confirmPassword']/following-sibling::a[@class='password-show-icon']")
-	private WebElement confirmPasswordTextBoxEyeIcon;
 
 	@FindBy(id = "email")
 	private WebElement emailTextBox;
@@ -48,45 +41,9 @@ public class HsidRegistrationPersonalCreateAccount extends UhcDriver {
 	
 	@FindBy(xpath= "//span[text()='Security question three']/../select")
 	private WebElement securityQuestion3Select;
-	
-	@FindBy(id = "q0")
-	private WebElement securityQuestion1TextBox;
-	
-	@FindBy(id = "q1")
-	private WebElement securityQuestion2TextBox;
-	
-	@FindBy(id = "q2")
-	private WebElement securityQuestion3TextBox;
-	
-	@FindBy(xpath = "//label[@for='q0']/span[1]")
-	private WebElement securityQuestion1Label;
-	
-	@FindBy(xpath = "//label[@for='q1']/span[1]")
-	private WebElement securityQuestion2Label;
-	
-	@FindBy(xpath = "//label[@for='q2']/span[1]")
-	private WebElement securityQuestion3Label;
-	
-	@FindBy(xpath = "//label[@for='a0']/span[1]")
-	private WebElement securityAnswer1Label;
-	
-	@FindBy(xpath = "//label[@for='a1']/span[1]")
-	private WebElement securityAnswer2Label;
-	
-	@FindBy(xpath= "//label[@for='a2']/span[1]")
-	private WebElement securityAnswer3Label;
-	
-	@FindBy(xpath = "//label[@for='remember']/span[1]")
-	private WebElement rememberMeLabel;
-	
-	@FindBy(xpath= "//label[@for='terms']")
-	private WebElement termsOfUseLabel;
-	
+
 	@FindBy(xpath = "//span[text()='Security question one']/../../following-sibling::div[1]/label/input")
 	private WebElement answer1TextBox;
-	
-	@FindBy(xpath= "//span[text()='Security question one']/../../following-sibling::div[1]/label/input[contains(@class,'ng-not-empty')]")
-	private WebElement answer1TextBoxmasked;
 
 	@FindBy(xpath = "//span[text()='Security question two']/../../following-sibling::div[1]/label/input")
 	private WebElement answer2TextBox;

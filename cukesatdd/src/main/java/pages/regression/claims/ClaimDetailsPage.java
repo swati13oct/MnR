@@ -2,6 +2,8 @@ package pages.regression.claims;
 /**
  * 
  */
+import junit.framework.Assert;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,8 +12,6 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.UhcDriver;
-import cucumber.api.java.en.And;
-import junit.framework.Assert;
 
 /**
  * Functionality : this page validates Claims Details Page. 

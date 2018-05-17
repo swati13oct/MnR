@@ -16,11 +16,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import pages.member.bluelayer.GoGreenPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.member.bluelayer.GoGreenPage;
 
 
 /**
@@ -92,9 +92,6 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='emailCardHeight']//span[@class='bold atdd-email ng-scope']")
 	private WebElement EmailAddressLabel;
-
-	@FindBy(id = "email")
-	private WebElement Emailform;
 
 	@FindBy(id = "profileemailaddress")
 	private WebElement emailAddress;

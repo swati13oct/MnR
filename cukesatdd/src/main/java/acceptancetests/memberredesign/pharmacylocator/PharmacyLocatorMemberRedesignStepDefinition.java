@@ -3,6 +3,8 @@
  */
 package acceptancetests.memberredesign.pharmacylocator;
 
+import gherkin.formatter.model.DataTableRow;
+
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +12,8 @@ import java.util.Map;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.pharmacylocator.PharmacySearchPage;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
@@ -17,10 +21,6 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
-import pages.regression.accounthomepage.AccountHomePage;
-import pages.regression.pharmacylocator.PharmacySearchPage;
-
 /**
  * @author sdwaraka
  * Functionality: Pharmacy locator in New Member redesign

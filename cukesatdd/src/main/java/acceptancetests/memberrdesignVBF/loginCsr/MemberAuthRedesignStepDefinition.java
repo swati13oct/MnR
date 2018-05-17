@@ -1,5 +1,7 @@
 package acceptancetests.memberrdesignVBF.loginCsr;
 
+import gherkin.formatter.model.DataTableRow;
+
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +10,12 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.memberrdesignVBF.ContactUsPage;
+import pages.memberrdesignVBF.MemberAuthLoginPage;
+import pages.memberrdesignVBF.MemberInformationPage;
+import pages.memberrdesignVBF.MemberSearchPage;
+import pages.memberrdesignVBF.RallyDashboardPage;
+import pages.memberrdesignVBF.TestHarness;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
@@ -15,13 +23,6 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
-import pages.memberrdesignVBF.ContactUsPage;
-import pages.memberrdesignVBF.MemberAuthLoginPage;
-import pages.memberrdesignVBF.MemberInformationPage;
-import pages.memberrdesignVBF.MemberSearchPage;
-import pages.memberrdesignVBF.RallyDashboardPage;
-import pages.memberrdesignVBF.TestHarness;
 
 public class MemberAuthRedesignStepDefinition {
 	/**
