@@ -7,9 +7,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import pages.regression.payments.PaymentHistoryPage;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.regression.payments.PaymentHistoryPage;
 
 
 /**

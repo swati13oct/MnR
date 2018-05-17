@@ -19,7 +19,7 @@ import pages.member.bluelayer.AssistiveRegistrationPage;
 import pages.member.bluelayer.HSIDLoginPage;
 import pages.member.redesign.DeregisterPage;
 import pages.regression.accounthomepage.AccountHomePage;
-import pages.regression.login.LoginPage;
+import pages.regression.login.HsidRegistrationPersonalCreateAccount;
 import acceptancetests.data.CommonConstants;
 //import acceptancetests.deprecated.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonConstants;
 import acceptancetests.data.LoginCommonConstants;
@@ -30,9 +30,6 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import gherkin.formatter.model.DataTableRow;
-import pages.regression.accounthomepage.AccountHomePage;
-import pages.regression.login.HsidRegistrationPersonalCreateAccount;
 
 /**
  * Functionality: Benefits and Coverage page

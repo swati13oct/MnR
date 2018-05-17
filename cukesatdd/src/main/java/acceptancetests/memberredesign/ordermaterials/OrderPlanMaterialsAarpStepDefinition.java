@@ -3,6 +3,8 @@
  */
 package acceptancetests.memberredesign.ordermaterials;
 
+import gherkin.formatter.model.DataTableRow;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,16 +14,15 @@ import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.ordermaterials.OrderMaterialsPage;
+import pages.regression.ordermaterials.OrderPlanMaterialConfirmationPage;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
-import pages.regression.accounthomepage.AccountHomePage;
-import pages.regression.ordermaterials.OrderMaterialsPage;
-import pages.regression.ordermaterials.OrderPlanMaterialConfirmationPage;
 
 /**
  * @author sdwaraka

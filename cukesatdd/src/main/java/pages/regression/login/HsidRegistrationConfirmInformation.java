@@ -3,8 +3,10 @@ package pages.regression.login;
 import java.io.IOException;
 import java.util.Properties;
 
-import javax.mail.*;
+import javax.mail.BodyPart;
+import javax.mail.Flags;
 import javax.mail.Folder;
+import javax.mail.Message;
 import javax.mail.Message.RecipientType;
 import javax.mail.MessagingException;
 import javax.mail.Session;
