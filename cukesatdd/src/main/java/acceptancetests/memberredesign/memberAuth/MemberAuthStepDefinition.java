@@ -17,6 +17,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.dashboard.memberAuth.MemberAuthLoginPage;
+import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.memberauth.MemberAuthPage;
 /**
  * 
@@ -147,8 +148,25 @@ public class MemberAuthStepDefinition{
 
 
 		MemberAuthPage popupMauth = (MemberAuthPage) getLoginScenario().getBean(PageConstants.Member_Auth_PopUp);
-		MemberAuthPage NewWindow =  popupMauth.PopupClick();
+		AccountHomePage NewWindow =  popupMauth.PopupClick();
+		
+		if(NewWindow!=null){
+			getLoginScenario().saveBean(PageConstants.DashPage, NewWindow);
+		}
 	
 	}
+	
+	/*@And("^User switches to new Tab opened$")
+	public void Switch_To_New_Tab() throws InterruptedException{
+
+
+		MemberAuthPage NewTab = (MemberAuthPage) getLoginScenario().getBean(PageConstants.New_Window);
+		MemberAuthPage PayLink =  NewTab.NewTabValidation();
+		
+		if(NewWindow!=null){
+			getLoginScenario().saveBean(PageConstants.New_Window, NewWindow);
+		}
+	
+	}*/
 
 }

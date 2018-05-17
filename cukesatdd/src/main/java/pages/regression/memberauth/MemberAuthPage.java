@@ -1,5 +1,7 @@
 package pages.regression.memberauth;
 
+import java.util.ArrayList;
+
 import org.json.JSONObject;
 //import junit.framework.Assert;
 import org.junit.Assert;
@@ -11,6 +13,7 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.regression.accounthomepage.AccountHomePage;
 
 /**
  * @author agoyal24
@@ -45,6 +48,9 @@ public class MemberAuthPage extends UhcDriver {
 	
 	@FindBy(xpath ="//*[@class='modal-content']//div[@role='document']//div[@class='btn-group--full-width loginbutton']/a[1]")
 	private WebElement MemberPopUpLogin;
+	
+	@FindBy(xpath = "//*[@id='sticky-nav']//div[@ng-switch-when='M&R']/a[5]")
+	private WebElement PremiumPayment;
 	
 	private static String MEMBER_AUTH = MRConstants.MEMBER_AUTH;
 	
@@ -126,16 +132,46 @@ public class MemberAuthPage extends UhcDriver {
 		return null;			
 	}
 	
-	public MemberAuthPage PopupClick() throws InterruptedException{
+	public AccountHomePage PopupClick() throws InterruptedException{
 		
 		waitforElement(MemberPopUpLogin);
+		Thread.sleep(2000);
 		if (MemberPopUpLogin.isDisplayed()){
 			System.out.println("Pop up Login Button is displayed");	
-			MemberPopUpLogin.click();
+			MemberPopUpLogin.click();	
+			System.out.println("popup login button clicked");
+			Thread.sleep(20000);
+			switchToNewTab();
+			System.out.println("Switched to new tab");
+		    Thread.sleep(10000);
+		    waitforElement(PremiumPayment);
+		    if(PremiumPayment.isEnabled())
+		    {
+		    PremiumPayment.click();		    
+			return new AccountHomePage(driver);		
+			}else
+			{
+				System.out.println("Payment Link not displayed");
+			}
+		}
+		else
+			System.out.println("Member Pop up Login not found");
+		return null;			
+	}
+	
+public MemberAuthPage NewTabValidation() throws InterruptedException{		
+	
+	    
+	   
+	    
+		waitforElement(PremiumPayment);
+		if (PremiumPayment.isDisplayed()){
+			System.out.println("Premium Payment link is displayed");	
+			PremiumPayment.click();
 			return new MemberAuthPage(driver);		
 			}
 		else
-			System.out.println("Member Pop up Login not found");
+			System.out.println("Premium Payment Link not found");
 		return null;			
 	}
 	

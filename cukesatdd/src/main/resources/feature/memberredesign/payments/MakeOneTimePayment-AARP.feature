@@ -389,10 +389,12 @@ Feature: To test the payment flow on AARP site
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |   
     And User Clicks on the Pop up displayed
+    Then User Scrolls down to validate Payment History and Scrolls up
+    And the user clicks on MemAuth Edit Automatic Payment button
+ 
       
 
     Examples: 
-      | username  | password  |MemUserName |
+      | username  | password  |MemUserName    | 
       | qavgogine | qavgogine | q1_apr_uhc032 |
-      
  
