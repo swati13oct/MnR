@@ -6,7 +6,7 @@ Scenario Outline: Allowed Domains – Authors need ability to define messages and 
 Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-Then the user navigates to EOB page 
+Then the user navigates to EOB page_hsid 
 Then the user validates site leaving pop up         
 Examples:
        | planType    | memberType                      |  
@@ -19,7 +19,7 @@ Scenario Outline: To verify EOB result list
 Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-Then the user navigates to EOB page	
+Then the user navigates to EOB page_hsid	
 And the user slects the desired date range
   | Plan Type      |<planType>  |
   | Date Range     |<dateRange> |
@@ -39,18 +39,18 @@ Then the user validates EOB count
 
  
 
-@planTypeValidation
+@planTypeValidation @hsideob2
 Scenario Outline: To verify different plan types under combo tabs
 Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-And the user navigates to EOB page  
+And the user navigates to EOB page_hsid  
 Then the user validates content displayed on EOB page without combo tabs
   | Plan Type      |<planType>  |
 Examples: 
 | planType    | memberType   					         |
-| MAPD        | IndividualAARPWOEOB						 |
-| MA          | IndividualAARPWOEOB						 |
+| MAPD        | NICE_EOB 						 |
+#| MA          | IndividualAARPWOEOB						 |
   
 @dropDownFuntion 
 Scenario Outline: To validate page functionality with different dropdowns
@@ -103,10 +103,13 @@ And the user slects the desired date range
   | EOB Type         |<eobType>   |
 Then the user validates EOB count
        | EOB COUNT                | <eobCount>|
-    Examples:
+ And the user clicks on first eob from the list
+ #And the user validates how to read medical eob PDF
+ 
+           Examples:
        | planType    | memberType    |dateRange  | eobType |  eobCount |
        | MAPD        | NICE_EOB      | 18 Months |Medical  |     8     |
-
+       | MA          | COSMOS_EOB      | 18 Months |Medical  |     1     |
 	
 	
  
