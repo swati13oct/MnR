@@ -18,10 +18,6 @@ public class LeavingOLEmodal extends UhcDriver{
 	
 	@FindBy(id = "sample-linkrouter")
 	private WebElement LeavingOLEmodal;
-	
-	
-	@FindBy(id = "proceed")
-	private WebElement YesLeaveOLE;
 
 	@FindBy(id = "leaveOleAlertBack")
 	private WebElement NoBacktoOLE;

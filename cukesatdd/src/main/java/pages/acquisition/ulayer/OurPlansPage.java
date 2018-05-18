@@ -6,9 +6,9 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import pages.acquisition.bluelayer.ZipcodeLookupPage;
 import acceptancetests.data.MRConstants;
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.ZipcodeLookupPage;
 
 /**
  * @author pperugu

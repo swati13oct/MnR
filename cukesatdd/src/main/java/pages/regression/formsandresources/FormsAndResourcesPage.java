@@ -4,6 +4,8 @@
 package pages.regression.formsandresources;
 import java.util.ArrayList;
 
+import junit.framework.Assert;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -14,13 +16,9 @@ import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.data.MRConstants;
 import atdd.framework.UhcDriver;
-import junit.framework.Assert;
 
 @SuppressWarnings("deprecation")
 public class FormsAndResourcesPage extends UhcDriver {
-	
-	        @FindBy(linkText="VIEW DOCUMENTS & RESOURCES")
-	           private WebElement DOCUMENTSRESOURCES;
 
                 /** The member signin link. */
                 @FindBy(id = "fd_memberSignInButton")
@@ -74,10 +72,6 @@ public class FormsAndResourcesPage extends UhcDriver {
                 @FindBy(xpath = "(//a[contains(text(),'VIEW MEMBER ID CARD')])[1]")
                 private WebElement MemberIdCardlink;
               //*[contains(text(),'VIEW MEMBER ID CARD')]
-                
-                /*for terminated*/
-                @FindBy(xpath = "(//a[contains(text(),'VIEW MEMBER ID CARD')])[1]")
-                private WebElement MemberIdCardlinkterminated;
 
                 
                 @FindBy(xpath = " //*[contains(text(),'ORDER PLAN MATERIALS')]")

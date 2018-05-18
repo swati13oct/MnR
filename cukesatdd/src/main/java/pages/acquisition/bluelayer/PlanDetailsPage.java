@@ -17,13 +17,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.uhcretiree.Rallytool_Page;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.ole.WelcomePage;
-import pages.acquisition.uhcretiree.Rallytool_Page;
 
 public class PlanDetailsPage extends UhcDriver{
 

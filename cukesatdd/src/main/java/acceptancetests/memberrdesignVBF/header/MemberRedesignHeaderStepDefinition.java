@@ -3,14 +3,14 @@ package acceptancetests.memberrdesignVBF.header;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.data.PageConstants;
-import atdd.framework.MRScenario;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Then;
 import pages.memberrdesignVBF.BenefitsAndCoveragePage;
 import pages.memberrdesignVBF.ClaimSummarypage;
 import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.memberrdesignVBF.TestHarness;
+import acceptancetests.data.PageConstants;
+import atdd.framework.MRScenario;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Then;
 
 public class MemberRedesignHeaderStepDefinition {
 

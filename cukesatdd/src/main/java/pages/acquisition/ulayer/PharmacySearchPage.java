@@ -6,6 +6,8 @@ package pages.acquisition.ulayer;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import junit.framework.Assert;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
@@ -21,7 +23,6 @@ import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import junit.framework.Assert;
 
 /**
  * @author pagarwa5
@@ -133,17 +134,20 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[1]")
 	WebElement zeropharmacyResults;
 
-	@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[2]/div/ul[@class='map-toggle']")
+	//@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[2]/div/ul[@class='map-toggle']")
+	@FindBy(xpath = "//*[@class='map-toggle']")
 	WebElement mapToggleElement;
 	
 	@FindBy(id="collapseMap")
 	//@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[2]/div/div[@class='collapse-wrapper']/div")
 	WebElement mapView;
 
-	@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']//ol[@class='pharmacy-list']")
+	//@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']//ol[@class='pharmacy-list']")
+	@FindBy(xpath = "//*[@class='pharmacy-list']")
 	WebElement pharmacyList;
 
-	@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']//ol[@class='pharmacy-list']/li")
+	//@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']//ol[@class='pharmacy-list']/li")
+	@FindBy(xpath = "//*[@class='pharmacy-list']/li")
 	List<WebElement> pharmacyListItems;
 
 	@FindBy(linkText = "VIEW RESULT AS PDF")

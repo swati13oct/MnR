@@ -23,14 +23,6 @@ public class LoginPage extends UhcDriver {
 
 	private static String PAGE_URL = null;
 
-	@FindBy(id = "username")
-	private WebElement userNameField;
-
-	@FindBy(id = "password")
-	private WebElement passwordField;
-
-	@FindBy(id = "sign-in-btn")
-	private WebElement signInButton;
 
 	@FindBy(id = "regbutton")
 	private WebElement registrationButton;

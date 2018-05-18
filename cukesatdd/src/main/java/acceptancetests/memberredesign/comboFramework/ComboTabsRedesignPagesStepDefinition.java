@@ -4,6 +4,8 @@
  * 
  */
 package acceptancetests.memberredesign.comboFramework;
+import gherkin.formatter.model.DataTableRow;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -16,6 +18,14 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.redesign.ContactUsPage;
+import pages.redesign.EoBSearchPage;
+import pages.redesign.GoGreenPreferencesPage;
+import pages.redesign.MedicalClaimSummaryPage;
+import pages.redesign.MyProfilesPage;
+import pages.redesign.PaymentHistoryPage;
+import pages.redesign.RedesignLoginPage;
+import pages.redesign.UlayerHomePage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
@@ -25,15 +35,6 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
-import pages.redesign.ContactUsPage;
-import pages.redesign.EoBSearchPage;
-import pages.redesign.GoGreenPreferencesPage;
-import pages.redesign.MedicalClaimSummaryPage;
-import pages.redesign.MyProfilesPage;
-import pages.redesign.PaymentHistoryPage;
-import pages.redesign.RedesignLoginPage;
-import pages.redesign.UlayerHomePage;
 /**
 * @author sdwaraka
 *

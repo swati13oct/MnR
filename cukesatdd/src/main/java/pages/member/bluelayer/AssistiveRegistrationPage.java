@@ -59,13 +59,7 @@ public class AssistiveRegistrationPage extends UhcDriver {
   	private WebElement securityans1;
     
     @FindBy(id="a2")
-  	private WebElement securityans2;
-    
-    @FindBy(id="a3")
-  	private WebElement securityans3;
-    
-    
-    
+  	private WebElement securityans2;  
 
 	public AssistiveRegistrationPage(WebDriver driver) {
 		super(driver);
