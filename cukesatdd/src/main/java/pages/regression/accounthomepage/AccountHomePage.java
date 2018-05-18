@@ -684,7 +684,7 @@ public class AccountHomePage extends UhcDriver {
 
 	}
 
-	public PaymentHistoryPage navigateToAutoPaymentHistoryPage(){
+	public AccountHomePage navigateToAutoPaymentHistoryPage(){
 
 		/*
 		 * WebDriverWait wait = new WebDriverWait(driver, 30);
@@ -708,7 +708,7 @@ public class AccountHomePage extends UhcDriver {
 		}
 		if (PaymentHeading.getText().contains("Premium Payments Overview")) {
 			System.out.println("Payment Overview page displayed");
-			return new PaymentHistoryPage(driver);
+			return new AccountHomePage(driver);
 		} else {
 			System.out.println("payment overview page not displayed");
 			return null;

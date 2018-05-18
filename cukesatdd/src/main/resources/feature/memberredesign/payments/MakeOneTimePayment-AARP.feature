@@ -375,7 +375,7 @@ Feature: To test the payment flow on AARP site
       | MAPD      | IndividualAARPRPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.12 |
 
 
-@TestmemberAuth
+@TestmemberAuth @15170
  Scenario Outline: To validate the oneTime Payment flow for Member Auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password

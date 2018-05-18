@@ -134,7 +134,7 @@ public class OneTimePaymentAarpStepDefintion {
 	@When("^the user navigates to Recurring payment history$")
 	public void user_views_Recurring_payment_history() throws InterruptedException {
 		pages.regression.accounthomepage.AccountHomePage AHPage = (pages.regression.accounthomepage.AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		//AHPage = AHPage.navigateToAutoPaymentHistoryPage();
+		AHPage = AHPage.navigateToAutoPaymentHistoryPage();
 		
       if (AHPage!=null){
     	     	  getLoginScenario().saveBean(PageConstants.DashPage, AHPage);
@@ -156,9 +156,10 @@ public class OneTimePaymentAarpStepDefintion {
 	
 	@And("^the user clicks on Make One Time Payment button$")
 		public void click_on_OTP_btn(){
-		AccountHomePage accountHomePage = (AccountHomePage)getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-			PaymentHistoryPage paymenthistory = (PaymentHistoryPage) accountHomePage.navigateToAutoPaymentHistoryPage();
-			OneTimePaymentPage oneTimePayment = paymenthistory.OTPbtn();
+		//AccountHomePage accountHomePage = (AccountHomePage)getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			//PaymentHistoryPage paymenthistory = (PaymentHistoryPage) accountHomePage.navigateToAutoPaymentHistoryPage();
+		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);	
+		OneTimePaymentPage oneTimePayment = paymenthistory.OTPbtn();
 			
 			if(oneTimePayment!=null){
 				getLoginScenario().saveBean(PageConstants.One_Time_Payments_Page, oneTimePayment);

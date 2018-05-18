@@ -138,6 +138,7 @@ public class MemberAuthPage extends UhcDriver {
 		Thread.sleep(2000);
 		if (MemberPopUpLogin.isDisplayed()){
 			System.out.println("Pop up Login Button is displayed");	
+			Thread.sleep(2000);
 			MemberPopUpLogin.click();	
 			System.out.println("popup login button clicked");
 			Thread.sleep(20000);
