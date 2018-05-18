@@ -1,5 +1,7 @@
 package acceptancetests.memberredesign.HSID;
 
+import gherkin.formatter.model.DataTableRow;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,32 +11,25 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
-import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.member.bluelayer.AssistiveRegistrationPage;
+import pages.member.bluelayer.HSIDLoginPage;
+import pages.member.redesign.DeregisterPage;
+import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.login.HsidRegistrationPersonalCreateAccount;
 import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageConstantsMnR;
-import acceptancetests.util.CommonUtility;
 //import acceptancetests.deprecated.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonConstants;
 import acceptancetests.data.LoginCommonConstants;
+import acceptancetests.data.PageConstants;
+import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import gherkin.formatter.model.DataTableRow;
-import pages.regression.login.LoginPage;
-import pages.regression.accounthomepage.AccountHomePage;
-import pages.member.bluelayer.AssistiveRegistrationPage;
-import pages.member.bluelayer.BenefitsAndCoveragePage;
-import pages.member.bluelayer.DashboardPage;
-import pages.member.bluelayer.HSIDLoginPage;
-import pages.member.bluelayer.LoginPage2;
-import pages.member.ulayer.ValueAddedServicepage;
-import pages.member.redesign.DeregisterPage;
 
 /**
  * Functionality: Benefits and Coverage page
@@ -54,7 +49,7 @@ public class HSIDStepDefinition {
 
 
 	
-	@And("^login with following details logins in the member portal and validate elements$")
+	@Given("^login with following details logins in the member portal and validate elements$")
 	public void login_with_member(DataTable memberAttributes) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
@@ -64,7 +59,7 @@ public class HSIDStepDefinition {
 					memberAttributesRow.get(i).getCells().get(1));
 		}
 
-		String category = memberAttributesMap.get("Member Type");
+		memberAttributesMap.get("Member Type");
 		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
 		List<String> desiredAttributes = new ArrayList<String>();
 		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator.hasNext();) {
@@ -92,11 +87,12 @@ public class HSIDStepDefinition {
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 		}
          
-		WebDriver wd = getLoginScenario().getWebDriverNew();
+		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		LoginPage loginPage = new LoginPage(wd);
+		HSIDLoginPage loginPage = new HSIDLoginPage(wd);
 		loginPage.validateelements();
         AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
+		
 		if (accountHomePage!= null) {
 			 getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
 			Assert.assertTrue(true);
@@ -127,7 +123,7 @@ public class HSIDStepDefinition {
 					memberAttributesRow.get(i).getCells().get(1));
 		}
 
-		String category = memberAttributesMap.get("Member Type");
+		memberAttributesMap.get("Member Type");
 		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
 		List<String> desiredAttributes = new ArrayList<String>();
 		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator.hasNext();) {
@@ -160,9 +156,9 @@ public class HSIDStepDefinition {
 		HSIDLoginPage loginPage = new HSIDLoginPage(wd);
 		loginPage.validateelements();
        
-		AssistiveRegistrationPage assistiveregistration = (AssistiveRegistrationPage) loginPage.doLoginWith2(userName, pwd);
-		if (assistiveregistration != null) {
-			 getLoginScenario().saveBean(PageConstantsMnR.ASSISTIVE_REGISTRATION_PAGE,assistiveregistration);
+		HsidRegistrationPersonalCreateAccount hsidRegistrationPersonalCreateAccount  = (HsidRegistrationPersonalCreateAccount) loginPage.doLoginWith2(userName, pwd);
+		if (hsidRegistrationPersonalCreateAccount != null) {
+			 getLoginScenario().saveBean(PageConstants.HSID_REGISTRATION_PERSONALCREATEACCOUNT, hsidRegistrationPersonalCreateAccount);
 			Assert.assertTrue(true);
 		}
 		else {
@@ -174,16 +170,16 @@ public class HSIDStepDefinition {
 	@And("^the user validate username autofill$")
 	public void validateelementassistive()
 	{
-		AssistiveRegistrationPage assistiveregistration = (AssistiveRegistrationPage) getLoginScenario().getBean(PageConstantsMnR.ASSISTIVE_REGISTRATION_PAGE);
+		HsidRegistrationPersonalCreateAccount hsidRegistrationPersonalCreateAccount = (HsidRegistrationPersonalCreateAccount) getLoginScenario().getBean(PageConstants.HSID_REGISTRATION_PERSONALCREATEACCOUNT);
 		String username = (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
-		assistiveregistration.usernameautofill(username);
+		hsidRegistrationPersonalCreateAccount.usernameautofill(username);
 	}
 	
 	@And("^the user validate all fields on this page$")
 	public void validateotherfields()
 	{
 		AssistiveRegistrationPage assistiveregistration = (AssistiveRegistrationPage) getLoginScenario().getBean(PageConstantsMnR.ASSISTIVE_REGISTRATION_PAGE);
-		String username = (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
+		getLoginScenario().getBean(LoginCommonConstants.USERNAME);
 		assistiveregistration.validate_allfields();
 	
 	}

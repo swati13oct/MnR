@@ -11,9 +11,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import acceptancetests.data.MRConstants;
-import acceptancetests.util.CommonUtility;
-import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 /**
@@ -62,13 +59,7 @@ public class AssistiveRegistrationPage extends UhcDriver {
   	private WebElement securityans1;
     
     @FindBy(id="a2")
-  	private WebElement securityans2;
-    
-    @FindBy(id="a3")
-  	private WebElement securityans3;
-    
-    
-    
+  	private WebElement securityans2;  
 
 	public AssistiveRegistrationPage(WebDriver driver) {
 		super(driver);

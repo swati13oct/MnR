@@ -2,31 +2,23 @@ package acceptancetests.memberredesign.contactus;
 
 
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import gherkin.formatter.model.DataTableRow;
+
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
-import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.LoginCommonConstants;
+import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.contactus.ContactUsPage;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
-import pages.member.redesign.ContactUsPage;
-import pages.member.ulayer.AccountHomePage;
-import pages.member.ulayer.LoginPage;
 
 /**
  * 
@@ -48,11 +40,11 @@ public class ContactusRedesignStepDefinition {
 		
 		/**
 		 * 		@toDO : user login with the registered member
-		 */
+		 *//*
 		@Given("^registered UMS member with following attributes$")
 		public void registered_member_orderplanmaterials_ums(DataTable givenAttributes) throws InterruptedException {
 
-			/* Reading the given attribute from feature file */
+			 Reading the given attribute from feature file 
 			List<DataTableRow> memberAttributesRow = givenAttributes
 					.getGherkinRows();
 			for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -99,7 +91,7 @@ public class ContactusRedesignStepDefinition {
 				getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
 				Assert.assertTrue(true);
 			}
-		}
+		}*/
 		
 		/**
 		 *  @toDO : the user navigate to the contact us page

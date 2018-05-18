@@ -3,11 +3,12 @@
  */
 package pages.memberrdesignVBF;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.junit.Assert;
+
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
@@ -37,12 +38,6 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(text(),'Username')]/parent::*/following-sibling::*/p")
 	private WebElement Usernametext;
-	
-	@FindBy(xpath = ".//*[@id='password']/div/div/span[1]")
-	private WebElement Password;
-
-	@FindBy(xpath = ".//*[@id='password']/div/div/span[2]")
-	private WebElement Passwordtext;
 
 	@FindBy(className = "edit-btn-email")
 	private WebElement EditButtonEmail;
@@ -76,14 +71,6 @@ public class ProfilePreferencesPage extends UhcDriver {
     
     @FindBy(xpath = "//*[@id='header']/h1/a")
     private WebElement breadCrumbToNavigateBack;
-    
-    @FindBy(id = "hsidRecLink")
-    private WebElement hsidAccountLink;
-    
-    @FindBy(id = "profileemailaddress")
-    private WebElement emailAddress;
-    
-
 
 	public ProfilePreferencesPage(WebDriver driver) {
 		super(driver);

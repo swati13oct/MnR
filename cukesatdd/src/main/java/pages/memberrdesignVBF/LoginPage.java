@@ -11,26 +11,18 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.memberrdesignVBF.TerminatedHomePage;
 
 public class LoginPage extends UhcDriver {
 
 	private static String PAGE_URL = null;
 
-	@FindBy(id = "username")
-	private WebElement userNameField;
-
-	@FindBy(id = "password")
-	private WebElement passwordField;
-
-	@FindBy(id = "sign-in-btn")
-	private WebElement signInButton;
 
 	@FindBy(id = "regbutton")
 	private WebElement registrationButton;

@@ -110,7 +110,7 @@ Then I verify that the drug is still there
 
  Examples:
 | drug|zipcode| radius|	plantype |
-| Lipitor TAB 10MG| 90210 | 15miles | MA |
+| LIPITOR TAB 10MG| 90210 | 15miles | MA |
 
 @dcevppblayer
 Scenario Outline: To Verify the drugs and plan summary for non AEP period

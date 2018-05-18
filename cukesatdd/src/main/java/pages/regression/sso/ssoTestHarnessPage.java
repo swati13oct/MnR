@@ -4,10 +4,6 @@
 package pages.regression.sso;
 
 
-import java.util.Set;
-
-import junit.framework.Assert;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,7 +11,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import pages.memberredesign.bluelayer.AccountHomePage;
-import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -23,9 +18,6 @@ import atdd.framework.UhcDriver;
  *
  */
 public class ssoTestHarnessPage extends UhcDriver {
-	
-	@FindBy(xpath="//h2[text()='Generate Open Token for Inbound SSO']")
-	private WebElement pageHeading;
 
 	@FindBy(id="ssosource")
 	private WebElement ssoPartnerdropdown;

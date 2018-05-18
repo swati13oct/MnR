@@ -432,7 +432,6 @@ When I Enter the security questions
     | PDP    |Hartford   | name1      | color1   | number1     |      
     
 
-    
    @thePredators
 @juneRelease2018 @TownOfGreenwichprescriptionDrugBenefit
  Scenario Outline: Verify city of Hartford Prescription Drug Benefits 

@@ -19,7 +19,11 @@ public class VPPCommonConstants {
 	public static final String PLAN_NAME = "planName";
 
 	public static final String PLAN_TYPE = "planType";
-
+	
+	public static final String TFN = "tfn";
+	public static final String PLAN_PREMIUM = "premium";
+	
+	
 	public static final String VPP_PLAN_DETAIL_ACTUAL = "planDetailsActualJson";
 
 	public static final String VPP_PLAN_DETAILS_FLOW_NAME = "vppplandetails";

@@ -1,11 +1,5 @@
 package pages.member.bluelayer;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Random;
-
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -16,17 +10,11 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import acceptancetests.data.MRConstants;
 import atdd.framework.UhcDriver;
 
 
 
 public class ConfirmSecurityQuestion extends UhcDriver {
-
-
-    
-	@FindBy(how = How.CLASS_NAME, using = "form__content")
-	private WebElement formContent;
 	
 	@FindBy(how = How.CLASS_NAME, using = "rememberThisDevice")
 	private WebElement rememberThisDeviceSection;

@@ -2,9 +2,9 @@ package acceptancetests.memberrdesignVBF.profileandpreference;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.memberrdesignVBF.ProfilePreferencesPage;
 import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.memberrdesignVBF.TestHarness;
-import pages.memberrdesignVBF.ProfilePreferencesPage;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.java.en.And;

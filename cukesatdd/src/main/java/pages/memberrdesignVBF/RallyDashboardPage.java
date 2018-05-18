@@ -1,6 +1,5 @@
 package pages.memberrdesignVBF;
 
-import java.util.List;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -11,7 +10,6 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.memberrdesignVBF.HealthAndWellness;
 
 public class RallyDashboardPage extends UhcDriver {
 
@@ -117,17 +115,8 @@ public class RallyDashboardPage extends UhcDriver {
 	@FindBy(id = "accountprofile")
 	private WebElement accountProfile;
 
-	@FindBy(className = "menuL1")
-	private WebElement header;
-
 	@FindBy(id = "arcade-footer")
 	private WebElement footerSection;
-
-	@FindBy(xpath = "//*[@id='IPEinvL']/map/area[3]")
-	private static WebElement FeedbackModal;
-
-	@FindBy(xpath = "//area[@href='javascript:clWin()'][@alt = 'no']")
-	private static List<WebElement> FeedbackModalList;
 
 	@FindBy(linkText = "Help & Contact Us")
 	private WebElement helpnContactUs;

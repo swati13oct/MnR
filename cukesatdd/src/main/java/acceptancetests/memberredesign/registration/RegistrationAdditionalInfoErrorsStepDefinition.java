@@ -1,20 +1,22 @@
 
 	package acceptancetests.memberredesign.registration;
 
-	import java.util.LinkedHashMap;
+	import gherkin.formatter.model.DataTableRow;
+
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import junit.framework.Assert;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.dashboard.acquisition.RegistrationInformationPage;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
-import gherkin.formatter.model.DataTableRow;
-import junit.framework.Assert;
-import pages.dashboard.acquisition.RegistrationInformationPage;
 
 	/**
 	 * @author 

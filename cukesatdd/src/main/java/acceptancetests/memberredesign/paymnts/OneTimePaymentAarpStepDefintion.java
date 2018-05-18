@@ -17,12 +17,9 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
-import pages.dashboard.eob.EOBPage;
-import pages.member.bluelayer.DashboardPage;
-import pages.member.redesign.MemberAuthLoginPage;
-import pages.member.redesign.MemberSearchPage;
-import pages.member.redesign.NewLoginPage;
 
+import pages.member.bluelayer.DashboardPage;
+import pages.member.redesign.NewLoginPage;
 import pages.member.ulayer.LoginPage;
 import pages.member.ulayer.OneTimePaymentPageSubmitted;
 import pages.member.ulayer.OneTimePaymentsPage;
@@ -33,18 +30,17 @@ import pages.member.ulayer.TeamCLoginUlayerPayments;
 import pages.member.ulayer.TeamHLoginUlayer;
 import pages.member.ulayer.TestHarness;
 import pages.regression.accounthomepage.AccountHomePage;
+//import pages.regression.payments.AccountHomePage;
 import pages.regression.payments.ConfirmOneTimePaymentPage;
 import pages.regression.payments.OneTimePaymentPage;
 import pages.regression.payments.OneTimePaymentSuccessPage;
 import pages.regression.payments.PaymentHistoryPage;
 import acceptancetests.data.CommonConstants;
+import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
-import acceptancetests.data.LoginCommonConstants;
-import acceptancetests.memberredesign.paymnts.PaymentCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
-import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -123,9 +119,10 @@ public class OneTimePaymentAarpStepDefintion {
 
 	}
 	@Then("^the user navigates to payment history$")
-	public void user_views_payment_history() throws InterruptedException {
-		DashboardPage dashboardpage = (DashboardPage) getLoginScenario().getBean(PageConstants.RALLY_DASHBOARDPAGE);
-		PaymentHistoryPage paymentHistoryPage = dashboardpage.navigateToPaymentHistoryPage();
+	public void user_views_payment_history() throws InterruptedException {		
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
+		pages.redesign.PaymentHistoryPage paymentHistoryPage = accountHomePage.navigateToPaymentHistoryPage();
 					
 		 //PaymentHistoryPage paymenthistory = PaymentHis
       if (paymentHistoryPage!=null){
@@ -137,7 +134,7 @@ public class OneTimePaymentAarpStepDefintion {
 	
 	@When("^the user navigates to Recurring payment history$")
 	public void user_views_Recurring_payment_history() throws InterruptedException {
-		pages.member.bluelayer.AccountHomePage AHPage = (pages.member.bluelayer.AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+		pages.regression.accounthomepage.AccountHomePage AHPage = (pages.regression.accounthomepage.AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 		AHPage = AHPage.navigateToAutoPaymentHistoryPage();
 		
       if (AHPage!=null){
@@ -149,7 +146,7 @@ public class OneTimePaymentAarpStepDefintion {
 	
 	@Then("^User Scrolls down to validate Payment History and Scrolls up$")
 	public void Validate_History_Payment() throws InterruptedException{
-		pages.member.bluelayer.AccountHomePage AHPage = (pages.member.bluelayer.AccountHomePage) getLoginScenario().getBean(PageConstants.DashPage);
+		pages.regression.accounthomepage.AccountHomePage AHPage = (pages.regression.accounthomepage.AccountHomePage) getLoginScenario().getBean(PageConstants.DashPage);
 		PaymentHistoryPage paymentHistoryPage = AHPage.scrollDownAndUp();
 		if (paymentHistoryPage!=null){
 	     	  getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
@@ -261,7 +258,7 @@ public class OneTimePaymentAarpStepDefintion {
 		ConfirmOneTimePaymentPage confirmOneTimePaymentsuccesspage = (ConfirmOneTimePaymentPage) getLoginScenario()
 				.getBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD);	
 		
-		OneTimePaymentSuccessPage oneTimePaymentSuccessPage = confirmOneTimePaymentsuccesspage.confirmsAutoPayment();
+		ConfirmOneTimePaymentPage oneTimePaymentSuccessPage = confirmOneTimePaymentsuccesspage.confirmsAutoPayment();
         
 		if (oneTimePaymentSuccessPage != null) {
 			getLoginScenario().saveBean(
@@ -269,7 +266,21 @@ public class OneTimePaymentAarpStepDefintion {
 					oneTimePaymentSuccessPage);
 			Assert.assertTrue(true);
 	}
+		else
+			System.out.println("Encountered More than one Payment per Business day error");
 	}
+	
+
+	@And("^the user moves to Go to Payment History Page button$")
+	public void Go_toPayment_History_page() throws InterruptedException{
+		ConfirmOneTimePaymentPage oneTimePaymentSuccessPageScroll = (ConfirmOneTimePaymentPage) getLoginScenario().getBean(PageConstantsMnR.ONE_TIME_PAYMENT_SUCCESS_PAGE);
+		PaymentHistoryPage paymentHistoryPage = oneTimePaymentSuccessPageScroll.ScrollDownToBackButton();
+		if (paymentHistoryPage!=null){
+	     	  getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
+		System.out.println("user has reached back"); 
+}
+	}
+
 	
 	
 	@And("^the user confirms the values in AARP site$")
@@ -450,7 +461,7 @@ public class OneTimePaymentAarpStepDefintion {
 
 		LoginPage loginPage = (LoginPage) getLoginScenario().getBean(
 				PageConstantsMnR.LOGIN_PAGE);
-		AccountHomePage accountHomePage = (AccountHomePage) loginPage
+		pages.regression.accounthomepage.AccountHomePage accountHomePage = (AccountHomePage) loginPage
 				.loginWith(userName, pwd);
 
 		if (accountHomePage != null) {
@@ -694,50 +705,11 @@ public class OneTimePaymentAarpStepDefintion {
 
 	}
 
-	@And("^the user navigates to TestHarness Page$")
-	public void user_navigates_to_TestHarness_page() {
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
-				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		TestHarness testHarness = accountHomePage.navigateToTestHarnesspage();
-		if (testHarness != null) {
-			getLoginScenario().saveBean(PageConstantsMnR.TEST_HARNESS_PAGE,
-					testHarness);
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail("Test Harness page not found");
-		}
+	
 
-	}
 
-	@And("^the user navigates to Team-h TestHarness Page$")
-	public void user_navigates_to_TeamHTestHarness_page() {
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
-				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		TestHarness testHarness = accountHomePage.navigateToTestHarnesspage();
-		if (testHarness != null) {
-			getLoginScenario().saveBean(PageConstantsMnR.TEST_HARNESS_PAGE,
-					testHarness);
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail("Test Harness page not found");
-		}
 
-	}
 
-	@And("^the user navigates to Team-c TestHarness Page$")
-	public void user_navigates_to_TeamC_TestHarness_page() {
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
-				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		TestHarness testHarness = accountHomePage.navigateToTestHarnesspage();
-		if (testHarness != null) {
-			getLoginScenario().saveBean(PageConstantsMnR.TEST_HARNESS_PAGE,
-					testHarness);
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail("Test Harness page not found");
-		}
-
-	}
 
 	@And("^the user navigates to PaymentOverview Page$")
 	public void user_navigates_to_PaymentOverview_Page() {
@@ -814,23 +786,7 @@ public class OneTimePaymentAarpStepDefintion {
 
 	}
 
-	@And("^the user navigates to One Time Payments page$")
-	public void user_navigates_to_one_time_payments()
-			throws InterruptedException {
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
-				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		OneTimePaymentsPage oneTimePaymentsPage = accountHomePage
-				.navigateToOneTimePaymentsPage();
-		if (oneTimePaymentsPage != null) {
-			getLoginScenario().saveBean(
-					PageConstantsMnR.ONE_TIME_PAYMENTS_DASHBOARD,
-					oneTimePaymentsPage);
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail("one time payments dashboard page not found");
-		}
-
-	}
+	
 
 	/*
 	 * @And("^the user navigates to Team H One Time Payments page$") public void
@@ -1232,7 +1188,7 @@ public class OneTimePaymentAarpStepDefintion {
 				.getBean(PageConstantsMnR.ONE_TIME_PAYMENTS_DASHBOARD);
 		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = oneTimePaymentsPage
 				.enterInfoWithoutCheckBoxAndContinue();
-		ReviewOneTimePaymentsPage reviewOneTimePaymentsPagechkbox = oneTimePaymentsPage
+		oneTimePaymentsPage
 				.errorMessagechkBox();
 		if (reviewOneTimePaymentsPage != null) {
 			getLoginScenario().saveBean(
@@ -1317,7 +1273,7 @@ public class OneTimePaymentAarpStepDefintion {
 	public void user_clicks_cancelbtn_onOnetimePaymentPage() {
 		OneTimePaymentsPage oneTimePaymentsPage = (OneTimePaymentsPage) getLoginScenario()
 				.getBean(PageConstantsMnR.ONE_TIME_PAYMENTS_DASHBOARD);
-		OneTimePaymentPage reviewOneTimePaymentsPage = oneTimePaymentsPage
+		oneTimePaymentsPage
 				.onetimepagecancelbtn();
 	}
 }

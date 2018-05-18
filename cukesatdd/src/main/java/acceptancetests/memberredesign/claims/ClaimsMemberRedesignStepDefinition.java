@@ -1,5 +1,7 @@
 package acceptancetests.memberredesign.claims;
 
+import gherkin.formatter.model.DataTableRow;
+
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -8,16 +10,15 @@ import java.util.Map;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.claims.ClaimDetailsPage;
+import pages.regression.claims.ClaimSummarypage;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
-import pages.regression.accounthomepage.AccountHomePage;
-import pages.regression.claims.ClaimDetailsPage;
-import pages.regression.claims.ClaimSummarypage;
 
 /**
  Functionality : Validating the Claims Summary & Claims Details Page on the redesigned site.
@@ -323,8 +324,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	@When("^I navigate to the Claim Details page in AARP site$")	
 	public void i_navigate_to_member_redesign_claim_details_page(){
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		ClaimDetailsPage newClaimDetailsPage = accountHomePage.navigateToClaimDetailsPage();
-		//getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
+		accountHomePage.navigateToClaimDetailsPage();
 
 	}
 	/**

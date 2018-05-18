@@ -4,11 +4,9 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.testng.Assert;
 
 import acceptancetests.data.CommonConstants;
 import cucumber.api.Scenario;
-
 // To be added
 import cucumber.api.java.After;
 
