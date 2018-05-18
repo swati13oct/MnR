@@ -363,7 +363,7 @@ public class ClaimSummarypage extends UhcDriver{
 			
 			}else{
 				
-				last24months = driver.findElement(By.xpath("//div[@class='medical-claims']//h2[@ng-bind-html='planName']/parent::div//*[@id='document-date']//option[contains(@value,'24 months')]"));
+				last24months = driver.findElement(By.xpath(".//*[@id='fed-document-date']//option[contains(@value,'24 months')]"));
 							}
 			
 			//Select dropdown = new Select(driver.findElement(By.xpath("//div[@class='medical-claims']//h2[@ng-bind-html='planName']/parent::div//*[@id='document-date']//option[contains(@value,'24 months')]")));

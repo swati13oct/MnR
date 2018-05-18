@@ -323,7 +323,9 @@ public class ClaimsMemberRedesignStepDefinition {
 	@When("^I navigate to the Claim Details page in AARP site$")	
 	public void i_navigate_to_member_redesign_claim_details_page(){
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		accountHomePage.navigateToClaimDetailsPage();
+		ClaimDetailsPage claimDetailsPage =accountHomePage.navigateToClaimDetailsPage();
+		//aimDetailsPage claimsdetailspage =  (ClaimDetailsPage) getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, claimsdetailspage);
+	 getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, claimDetailsPage);
 
 	}
 	/**
@@ -331,6 +333,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	 */
 	@Then("^I validate the Learn more section in claims details page in AARP site$")
 	public void validate_Learn_More_details_AARP(){
+		
 		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
 		claimDetailspage.validateLearnMoreInDetailsPage();		
 	}

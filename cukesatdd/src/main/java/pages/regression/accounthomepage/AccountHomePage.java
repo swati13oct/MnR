@@ -923,7 +923,7 @@ public ClaimSummarypage navigateToClaimsSummaryPage() {
 public ClaimDetailsPage navigateToClaimDetailsPage() {
 	CommonUtility.waitForPageLoad(driver, claimstablemoreinfolink, 60);
 	claimstablemoreinfolink.click();
-	CommonUtility.waitForPageLoad(driver, claimDetTableMainSection, 30);
+	CommonUtility.waitForPageLoad(driver, claimDetTableMainSection, 60);
 
 	//driver.findElement(By.xpath("//a[contains(text(),'MORE INFO')]")).click();
 	/*
@@ -931,7 +931,7 @@ public ClaimDetailsPage navigateToClaimDetailsPage() {
 	 * Auto-generated catch block e.printStackTrace(); }
 	 */
 	System.out.println(driver.getTitle());
-	if (driver.getTitle().equalsIgnoreCase("claims   ")) {
+	if (driver.getTitle().equalsIgnoreCase("Claims")) {
 		return new ClaimDetailsPage(driver);
 
 	}
