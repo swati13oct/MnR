@@ -292,8 +292,8 @@ Feature: To test the payment flow on AARP site
       | planType |
       | SHIP     |
 
-  @paymentsFInal
-  Scenario Outline: Verify one time payment for total ammount due in AARP site
+  @paymentsFInal @paymentsOneTimePayments
+  Scenario Outline: Verify if the user is able to make one time payment.
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -310,17 +310,12 @@ Feature: To test the payment flow on AARP site
       | Account holder last name   | <lastName>         |
     And the user confirms the payment in AARP site
 
-    #Then the user validates the payment successful page
+    
     Examples: 
       | planType | memberType            | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
       | MAPD     | IndividualUHCPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
-
-  # |  MAPD   | 123000000 |  123000000       | 1234567890  | 1234567890       | first     | second     | third    | 2.00   |
-  #         |  PDP    | 123000000 |  123000000       | 1234567890  | 1234567890       | first     | second     | third    | 2.00   |
-  #        |  MS     | 123000000 |  123000000       | 1234567890  | 1234567890       | first     | second     | third    | 2.00   |
-  #        |  HIP    | 123000000 |  123000000       | 1234567890  | 1234567890       | first     | second     | third    | 2.00   |
-  #	       |  RIDER  | 123000000 |  123000000       | 1234567890  | 1234567890       | first     | second     | third    | 2.00   |
-  
+      | SHIP     | IndividualUHCPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
+ 
   @paymentsAutoPay @15301
   Scenario Outline: Verify Recurring Payment for Different Types of Member
     Given login with following details logins in the member portal and validate elements
