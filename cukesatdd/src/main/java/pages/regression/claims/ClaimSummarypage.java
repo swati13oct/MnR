@@ -1,6 +1,7 @@
 package pages.regression.claims;
 import java.util.List;
 
+import org.jsoup.select.Evaluator.ContainsText;
 import org.openqa.selenium.By;
 /**
  * 
@@ -18,9 +19,9 @@ import junit.framework.Assert;
 /**
  * Functionality : this page validates the Claim Summary page.
  */
+
 public class ClaimSummarypage extends UhcDriver{
 
-	
 
 	@FindBy (xpath=".//*[@id='MA']")
 	private WebElement MA;
@@ -133,8 +134,16 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy (xpath= "//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li")
 	private List<WebElement> comboTabsOnclaimsPage;
 	
+	@FindBy(id="fed-document-date")
+	private WebElement claimFromDropDown1;
+	
+	@FindBy(id="claim-type")
+	private WebElement clamtypeFromDropDown;
+	
+	@FindBy(xpath="//*[@id='skipToBodyContent']//div[@class='reviewclaimstextFed parsys']//p")
+	private WebElement clamsSummaryCopyText;
 
-
+	
 	public ClaimSummarypage(WebDriver driver) {
 		super(driver);
 
@@ -359,7 +368,7 @@ public class ClaimSummarypage extends UhcDriver{
 			if(planType.contains("SHIP")){
 				System.out.println(planType+"SHIP plan type last 24 moths is going to select");
 						
-				last24months = driver.findElement(By.xpath("//div[@class='medical-claims shipCompSection']//div//*[@id='document-date']//option[contains(@value,'24 months')]"));
+				last24months = driver.findElement(By.xpath(".//*[@id='fed-document-date']//option[contains(@value,'24 months')]"));
 			
 			}else{
 				
@@ -497,6 +506,38 @@ public class ClaimSummarypage extends UhcDriver{
 		return new ClaimSummarypage(driver);
 	}
 	
+	public void validateClaimsPlantype() {
+		// TODO Auto-generated method stub
+		Select select = new Select(clamtypeFromDropDown);
+		System.out.println("Slected value is  =>" +select.getFirstSelectedOption());
+		for(int i=0;i<select.getOptions().size();i++){
+			System.out.println(select.getOptions().get(i).getAttribute("value"));
+		}
+	}
+
+	public void validateClaimsFromDropDowns1() {
+		// TODO Auto-generated method stub
+		Select select = new Select(claimFromDropDown1);
+		System.out.println("Slected value is  =>" +select.getFirstSelectedOption());
+		for(int i=0;i<select.getOptions().size();i++){
+			System.out.println(select.getOptions().get(i).getAttribute("value"));
+		}
+		
+		
+	}
+
+	public void validateClaimsHeaderCopyText() {
+		// TODO Auto-generated method stub
+		if (clamsSummaryCopyText.getText().contains("Review your claims search"))
+		{
+			System.out.println(clamsSummaryCopyText.getText());
+			System.out.println("claims Summary page copy test is dipalyed ");
+			Assert.assertTrue(clamsSummaryCopyText.getText().contains("Review your claims search")+"copy text is displayed", true);
+		
+		}	
+		
+	}
+
 }
 
 

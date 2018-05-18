@@ -8,6 +8,7 @@ import java.util.Map;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -536,4 +537,15 @@ public class ClaimsMemberRedesignStepDefinition {
 		claimSummarypage.validatefromDateLaterThanToDateError();
 
 	}
+	@Then("^I can validate the claims summary header$")
+	public void i_can_validate_the_claims_summary_header()  {
+		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario()
+				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+		newClaimsSummaryPage.validateClaimsFromDropDowns1();
+		newClaimsSummaryPage.validateClaimsPlantype();
+		
+		newClaimsSummaryPage.validateClaimsHeaderCopyText();
+	    
+	}
+
 }
