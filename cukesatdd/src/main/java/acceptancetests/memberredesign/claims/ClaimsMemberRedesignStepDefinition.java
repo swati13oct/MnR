@@ -548,4 +548,10 @@ public class ClaimsMemberRedesignStepDefinition {
 	    
 	}
 
+	@Then("^I can see the pagination if more than 10 clams records is displayed$")
+	public void i_can_see_the_pagination()  {
+		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario()
+				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+		newClaimsSummaryPage.validatePagination();	    
+	}
 }

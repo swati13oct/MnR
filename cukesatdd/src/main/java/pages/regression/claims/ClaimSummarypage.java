@@ -96,7 +96,7 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy (xpath="//span[text()='Ship EOB']/parent::a")
 	private WebElement ShipClaimsEobText;
 
-	@FindBy (xpath=".//*[@id='table-medical']/div[2]/div[1]/div/a")
+	@FindBy (id="learnmoresummarytoggle")
 	private WebElement learnmorefalse;
 
 	@FindBy (xpath=".//*[@id='table-medical']/div[2]/div[2]/div/a")
@@ -143,6 +143,8 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy(xpath="//*[@id='skipToBodyContent']//div[@class='reviewclaimstextFed parsys']//p")
 	private WebElement clamsSummaryCopyText;
 
+	@FindBy(xpath="//*[@id='graySection']//div[@class='tablenavigationarea tablepagination']")
+	private WebElement pagination;
 	
 	public ClaimSummarypage(WebDriver driver) {
 		super(driver);
@@ -536,6 +538,11 @@ public class ClaimSummarypage extends UhcDriver{
 		
 		}	
 		
+	}
+
+	public void validatePagination() {
+		// TODO Auto-generated method stub
+		validateNew(pagination);
 	}
 
 }
