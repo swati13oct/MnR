@@ -6,6 +6,7 @@ import gherkin.formatter.model.DataTableRow;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -89,22 +90,36 @@ import cucumber.api.java.en.When;
    * @toDo : correct pdfs are coming
    */
   @SuppressWarnings("deprecation")
-@And("^the user verifies that the correct pdfs are coming$")
+@And("^the user verifies that the correct pdfs are coming in the plan material section$")
    public void verifypdfscoming(DataTable givenAttributes) throws InterruptedException   {
          
  FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
       List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+      System.out.println(memberAttributesRow);
       Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
       for (int i = 0; i < memberAttributesRow.size(); i++) {
                       memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-                                                      .get(0), memberAttributesRow.get(i).getCells().get(1));
+                                                      .get(0), memberAttributesRow.get(i).getCells().get(1));}
+                      Collection<String> values = memberAttributesMap.values();
+                      String[] targetArray = values.toArray(new String[values.size()]);
+                      System.out.println(values.size());
+                      
+                      boolean arraycheck = formsAndResourcesPage.verifypdfname(targetArray);
+                      if (arraycheck == true)
+                      {
+                    	  Assert.assertTrue(true);
+                    	  System.out.println("all pdfs are coming correctly");
+                      }
+                      else 
+                      {
+                    	  Assert.fail("pdfs not coming correctly");
+                      }
       }
       
-      String pdfname = memberAttributesMap.get("BENEFIT-HIGHLIGHTS");
-      Assert.assertEquals(pdfname, formsAndResourcesPage.verifypdfname());
+     
                                   
          
-  }
+  
                   
    
   
@@ -137,30 +152,119 @@ import cucumber.api.java.en.When;
      }                    
                           
    
-    @And("^Renew Magazine section is not displayed for termibated members$")
+    @Then("^validate that the renew magazine section is not displayed$")
     public void renewsectionfortermed()
     {
          FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);                     
          formsAndResourcesPage.scroll();
          formsAndResourcesPage.scroll();
-         formsAndResourcesPage.checkRenewsectionforterminated();
+         formsAndResourcesPage.checkRenewsection();
     }
-                                              
-                         @And("^for active member Temporary Id Card and Plan Order Material links are displayed$")
-                         public void linksdisplayedforactivemembers() throws InterruptedException
-         {
-                           FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);                     
-                           Thread.sleep(2000); 
-                           
-                           formsAndResourcesPage.getOrderPlanMaterialLink().isDisplayed();
-                           
-                       
-                           Thread.sleep(2000);                    
-                           formsAndResourcesPage.getTemporaryIdcardlink().isDisplayed();
-                                                              
-                       
-                         }                              
-                                              
+    
+    @Then("^validate that the annual directories section is not displayed$")
+    public void annualdirectoriesnotdispalyed()
+    {
+         FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);                     
+         
+         
+         formsAndResourcesPage.scroll();
+         Assert.assertTrue(formsAndResourcesPage.checkAnnualDirectoriesforgroup());
+    }
+    
+    @And("^both the Pharmacy locator and provider search links are not displayed$")
+    public void providerpharacygroupnotdisplayed() throws InterruptedException
+    {
+    	
+ FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);                     
+         
+ formsAndResourcesPage.scroll();
+ Thread.sleep(6000);
+        Assert.assertTrue(formsAndResourcesPage.checkProviderforgroup());
+        Assert.assertTrue(formsAndResourcesPage.checkPharmacyforgroup());
+    }
+    
+    @And ("^the Pharmacy locator link is displayed for PDP$")
+    public void phamacypdp()
+    {
+    	FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);                     
+    	formsAndResourcesPage.scroll();
+    	formsAndResourcesPage.scroll();
+        if(formsAndResourcesPage.getPharmacyforPDP().isDisplayed())
+        {
+        	Assert.assertTrue(true);
+        	System.out.println("pharmacy locator link for PDP is present");
+        }
+        else 
+        {
+        	Assert.fail("pharmacy locator link for PDP is not present");
+        }
+    }
+    
+    
+      @And("^the provider search link is not displayed for PDP")
+      public void providerpdp()
+      {
+    	  FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);                     
+      	
+    	  Assert.assertTrue(formsAndResourcesPage.checkProviderforPDP());
+          
+      }
+      
+      @And("^the Drug EOB link is displayed for PDP$")
+      public void eoblinkforpdp()
+      {
+    	  FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);                     
+      	  formsAndResourcesPage.scroll();
+          if(formsAndResourcesPage.getDrugEOBforPDP().isDisplayed())
+          {
+          	Assert.assertTrue(true);
+          	System.out.println("drug eob link for PDP is present");
+          }
+          else 
+          {
+          	Assert.fail("drug eob link for PDP is not present");
+          }
+      }
+    
+      @And("^Medical EOB link is not displayed for PDP")
+      public void medeoblinkpdp()
+      {
+    	  FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);                     
+        	
+    	  Assert.assertTrue(formsAndResourcesPage.checkMedicalEobforPDP());
+      }
+    @Then("^validate that the anoc section is displayed for group$")
+    public void anocforgroup() throws InterruptedException
+    {
+    	FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);                     
+        Thread.sleep(2000); 
+        if(formsAndResourcesPage.getAnocforgroup().isDisplayed())
+        {
+        	Assert.assertTrue(true);
+        	System.out.println("anoc for grp is present");
+        }
+        else
+        {
+        	Assert.fail("anoc for grp is not present");
+        }
+        
+    }
+                              
+ @And("^for active member Temporary Id Card and Plan Order Material links are displayed$")
+     public void linksdisplayedforactivemembers() throws InterruptedException
+    {
+       FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);                     
+       Thread.sleep(2000); 
+       
+       formsAndResourcesPage.getOrderPlanMaterialLink().isDisplayed();
+       
+   
+       Thread.sleep(2000);                    
+       formsAndResourcesPage.getTemporaryIdcardlink().isDisplayed();
+                                          
+   
+     }                              
+                          
    @And("^clicking on the order plan materials link the user is navigated to the Order Plan Material Page$")
    public void planmateriallink() throws InterruptedException
             {
@@ -171,26 +275,6 @@ import cucumber.api.java.en.When;
                                                                     
             }
    
-   @And("^clicking on the view temporary id card link the modal id popups open up$")
-   public void temporaryidcardlink() throws InterruptedException
-       {
-          
-          
-          
-          
-          
-          
-       }
-   
-   
-   /** @toDo :clicking on cross symbol on id cards to 
-    navigate back to the rally dashboard page */
-   
-   @And("^clicking on cross symbol the user is navigated back to the rally dashboard page$")
-   public void clickoncross() throws InterruptedException
-   {
-          
-   }
    
    @Then("^validate that the EOB section is displayed$")
    public void eobsec() throws InterruptedException
@@ -198,7 +282,7 @@ import cucumber.api.java.en.When;
 	   FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);  
        formsAndResourcesPage.scroll();
        Thread.sleep(2000); 
-       if(formsAndResourcesPage.geteobmapdsection().isDisplayed())
+       if(formsAndResourcesPage.geteobsectionall().isDisplayed())
        {
     	  Assert.assertTrue(true); 
     	  System.out.println("eob present");
@@ -329,71 +413,33 @@ import cucumber.api.java.en.When;
    }
     
    
-   /**
-   * @toDo : verifies the EOB section
-   */
-  @SuppressWarnings("deprecation")
-  @Then("^validate EOB section$")
-  public void validateEOBSection(DataTable givenAttributes) {
-      FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
-      List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-      Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-      for (int i = 0; i < memberAttributesRow.size(); i++) {
-                      memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-                                                      .get(0), memberAttributesRow.get(i).getCells().get(1));
-      }
-      formsAndResourcesPage.scroll();
-      String eobMedicalLink = memberAttributesMap.get("EOB_MEDICAL_LINK");
-  String eobDrugLink = memberAttributesMap.get("EOB_DRUG_LINK");
-  try {
-                  Thread.sleep(50000);
-  } catch (InterruptedException e) {
-                  e.printStackTrace();
-  }
+   @And("^the user verifies that the correct pdfs are coming in the anoc and annual directories section$")
+    public void verifyanocpdfscoming(DataTable givenAttributes) throws InterruptedException   {
+       
+    FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+    List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+    System.out.println(memberAttributesRow);
+    Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+    for (int i = 0; i < memberAttributesRow.size(); i++) {
+                    memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+                                                    .get(0), memberAttributesRow.get(i).getCells().get(1));}
+    Collection<String> values = memberAttributesMap.values();
+    String[] targetArray = values.toArray(new String[values.size()]);
+    System.out.println(values.size());
+    
+    boolean arraycheck = formsAndResourcesPage.verifypdfnamesforanocdocuments(targetArray);
+    if (arraycheck == true)
+    {
+  	  Assert.assertTrue(true);
+  	  System.out.println("all anoc and annual directory pdfs are coming correctly");
+    }
+    else 
+    {
+  	  Assert.fail("anoc and annual directory pdfs not coming correctly");
+    }
+    }
+    
   
-  String isEOBMedicalButtonVisible = isButtonVisible(formsAndResourcesPage.getEOBMedicaButton()) ?"YES": "NO";
-  String isEOBDrugButtonVisible =  isButtonVisible(formsAndResourcesPage.getEOBDrugButton()) ?"YES": "NO";
-      Assert.assertEquals(eobMedicalLink, isEOBMedicalButtonVisible);
-      Assert.assertEquals(eobDrugLink, isEOBDrugButtonVisible);
-      
-  }
-          /**
-   * @toDo : verifies my document section
-   */
-  @SuppressWarnings("deprecation")
-  @And("^validate my document section$")
-  public void validateMyDocumentSection(DataTable givenAttributes) {
-                  FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
-                  List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-                  Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-                  for (int i = 0; i < memberAttributesRow.size(); i++) {
-                                  memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-                                                                  .get(0), memberAttributesRow.get(i).getCells().get(1));
-                  }
-                  
-                  String myDocumentSection = memberAttributesMap.get("MY_DOCUMENT_SECTION");
-  String isMyDocumentVisible = isButtonVisible(formsAndResourcesPage.getMyDocumentSection()) ?"YES": "NO";
-                  Assert.assertEquals(myDocumentSection, isMyDocumentVisible);
-  }
-  /**
-   * @toDo : verifies renew magazine section
-   */
-  @SuppressWarnings("deprecation")
-  @And("^validate renew magazine section$")
-  public void validateRenewMagazineSection(DataTable givenAttributes) {
-                  FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
-                  List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-                  Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-                  for (int i = 0; i < memberAttributesRow.size(); i++) {
-                                  memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-                                                                  .get(0), memberAttributesRow.get(i).getCells().get(1));
-                  }
-                  formsAndResourcesPage.scroll();
-                  String renewMagazine = memberAttributesMap.get("RENEW_MAGAZINE_SECTION");
-  String isRenewMagazineVisible = isButtonVisible(formsAndResourcesPage.getRenewMagazineSection()) ?"YES": "NO";
-                  Assert.assertEquals(renewMagazine, isRenewMagazineVisible);
-                  
-  }
   /**
    * @throws InterruptedException 
  * @toDo : verifies the plan material section
@@ -435,24 +481,7 @@ import cucumber.api.java.en.When;
                   
                   formsAndResourcesPage.validateEngDefault();
   }
-  /**
-   * @toDo : verifies the anoc section
-   */
-  @Then("^validate the anoc section$")
-  public void validateAnocSection(DataTable givenAttributes) {
-                  FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
-                  List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-                  Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-                  for (int i = 0; i < memberAttributesRow.size(); i++) {
-                                  memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-                                                                  .get(0), memberAttributesRow.get(i).getCells().get(1));
-                  }
-                  formsAndResourcesPage.scroll();
-                  String  anocsection = memberAttributesMap.get("ANOC_SECTION");
-  String isANOCSECTIONVisible = isButtonVisible(formsAndResourcesPage.getANOCSection()) ?"YES": "NO";
-                  Assert.assertEquals(anocsection, isANOCSECTIONVisible);
-                  
-  }
+  
   /**
    * @toDo : user switches to a different language than the default one
    */
@@ -462,37 +491,7 @@ import cucumber.api.java.en.When;
                   formsAndResourcesPage.changelanguage();
                  
   }
- /**
-  * @toDo : verifies the annual directories section
-  */
-  @Then("^validate the annual directories section$")
-  public void validatePlanMaterialSection(DataTable givenAttributes) {
-          FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
-          List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-          Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-          for (int i = 0; i < memberAttributesRow.size(); i++) {
-                          memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-                                                          .get(0), memberAttributesRow.get(i).getCells().get(1));
-          }
-          formsAndResourcesPage.scroll();
-          String AnnualDirectoriesSection = memberAttributesMap.get("ANNUAL_DIRECTORIES_SECTION");
-  String providersearchLink = memberAttributesMap.get("PROVIDER_SEARCHLINK");
-  String pharmacylocatorLink = memberAttributesMap.get("PHARMACY_SEARCHLINK");
-  try {
-                  Thread.sleep(50000);
-  } catch (InterruptedException e) {
-                  e.printStackTrace();
-  }
-  
-  String isPharmacyLocatorLinkVisible = isButtonVisible(formsAndResourcesPage.getpharmacysearchlink()) ?"YES": "NO";
-  String isproviderSearchVisible =  isButtonVisible(formsAndResourcesPage.getprovisesearchlink()) ?"YES": "NO";
-  Assert.assertEquals(providersearchLink, isproviderSearchVisible);
-  Assert.assertEquals(pharmacylocatorLink, isPharmacyLocatorLinkVisible);
  
-  String isannualdirectoryVisible = isButtonVisible(formsAndResourcesPage.getAnnualDirectorySection()) ?"YES": "NO";
-                  Assert.assertEquals(AnnualDirectoriesSection, isannualdirectoryVisible);
-                  
-  }
           /**
    * @throws InterruptedException 
  * @toDo : verifies the eob statemnets for ship member
@@ -504,9 +503,30 @@ import cucumber.api.java.en.When;
       Thread.sleep(5000);
       System.out.println("eob section");
                   formsAndResourcesPage.validateshipeob();
-              }
-              
-              
+          }
+  
+  /**
+   * @toDO  : to show ALPeehip Doc
+   */
+  @And("^validates that the Alpeehip doc is present$")
+  public void validateALPeehipDoc() throws InterruptedException {
+      FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+      formsAndResourcesPage.scroll();
+      formsAndResourcesPage.scroll();
+      
+	if(formsAndResourcesPage.getMAPDALpeehipDoc().isDisplayed())
+	{   System.out.println(formsAndResourcesPage.getMAPDALpeehipDoc().getText());  
+		
+	 
+	Assert.assertTrue(true);
+	}
+	else 
+	{
+	Assert.fail("plan material section is not present");
+	      }
+	            
+
+       }
               
   /**
    * @throws InterruptedException 
@@ -549,14 +569,4 @@ import cucumber.api.java.en.When;
   }
   
                   
-  private boolean isButtonVisible(WebElement button){
-                  try{
-                                  if(button.isDisplayed()){
-                                                  return true;
-                                  }
-                  }catch(NoSuchElementException noSuchElementException){
-                                  return false;
-                  }
-                  return false;
-  }
-  }
+       }

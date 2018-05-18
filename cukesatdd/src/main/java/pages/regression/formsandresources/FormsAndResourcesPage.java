@@ -2,6 +2,7 @@
 
 package pages.regression.formsandresources;
 import java.util.*;
+import java.util.regex.Pattern;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -21,8 +22,8 @@ import junit.framework.Assert;
 
 @SuppressWarnings("deprecation")
 public class FormsAndResourcesPage extends UhcDriver {
-                     @FindBy(linkText="")
-                 private WebElement DocumentResourceslink;
+                     @FindBy(xpath="//*[@class='clearfix MAPD_govt_false_57425290']//*[contains(text(),'Benefit Highlights')]")
+                 private WebElement pdf;
                   
                  @FindBy(linkText="VIEW DOCUMENTS & RESOURCES")
                   private WebElement DOCUMENTSRESOURCES;
@@ -49,17 +50,25 @@ public class FormsAndResourcesPage extends UhcDriver {
                 
               
               /**Link for perception popup**/
-              @FindBy(xpath="html/body/div[3]/div[2]/map/area[1]")
-                private WebElement perceptionpopup;    
+              @FindBy(id="iPerceptionsFrame")
+                private WebElement perceptionpopup; 
+              
+              @FindBy(className="btn btn-no")
+              private WebElement nothanksbutton; 
 
-
-                /** Medical button in EOB section - Forms And Resources page */
+                /** Medical button in EOB section for MAPD - Forms And Resources page */
                 @FindBy(xpath = "//*[@class='customsegments parbase section']//div[@class='otherPages']//*[@class='explanationbenefits parbase section']//*[@class='block-body']")
                 private WebElement eobMedicalButton;
 
-                /** Drug button in EOB section */
+                /** Drug button in EOB section for MAPD*/
                 @FindBy(xpath ="//*[@class='customsegments parbase section']//div[@class='otherPages']//*[@class='explanationbenefits parbase section']//*[@class='col-md-4 block border-left']")
                 private WebElement eobDrugButton;
+                
+                
+                /** Drug button in EOB section for PDP*/
+                @FindBy(xpath ="//*[@class='customsegments parbase section']//div[@class='otherPages']//*[@class='explanationbenefits parbase section']//*[contains(@class,'col-md-4 block')]")
+                private WebElement eobDrugButtonPDP;
+                
                 
                 /** Renew Magazine Section - Forms And Resources page */
                 @FindBy(xpath = "//*[@class='customsegments parbase section']//div[@class='otherPages']//*[@href='/wellness/health/health-wellness-programs-pastissues-renew?type=lifestyle']")
@@ -95,36 +104,68 @@ public class FormsAndResourcesPage extends UhcDriver {
                 @FindBy(id ="anoc_headerfnr")
                 private WebElement AnocSection; 
                 
+                /**Anoc section for group**/
+                @FindBy(id ="anoc_headerfnrgroup")
+                private WebElement AnocSectionGroup; 
+                
+                /**Anoc and Annual Directories Documents*/
+                @FindBy(xpath="//*[@class='otherPages']//div[@class='sectionWise_div_2018']//*[@class='document-list-new margin-small']")
+                private WebElement anocannualdirectorydocuments;
+                
             /** Annual Directories Section**/
                 @FindBy(id ="FnR_annualDirectory")
                 private WebElement AnnualDirectorySection;
+
                 
                 /*Provider Search Link*/
                 @FindBy(xpath ="//*[@class='customsegments parbase section']//div[@class='otherPages']//*[contains(@ng-show ,'mapdIndividual')]//*[contains(text(),'Provider Search')]")
                 private WebElement ProviderSearchLink;
                 
-                /*Pharmacy Locator Link*/
+                /*Pharmacy Locator Link for MAPD*/
                 @FindBy(xpath ="//*[@class='customsegments parbase section']//div[@class='otherPages']//*[contains(@ng-show ,'mapdIndividual')]//*[contains(text(),'Pharmacy Locator')]")
                 private WebElement PharmacyLocatorLink;
                 
-            
+                   /*Provider Search link for PDP*/
+                 @FindBy(xpath ="//*[@class='customsegments parbase section']//div[@class='otherPages']//*[contains(@ng-show ,'pdpIndividual')]//*[contains(text(),'Provider Search')]")  
+                 private WebElement ProviderSearchLinkPDP;
+                
+                 /*Pharmacy Locator Link for PDP*/
+                 @FindBy(xpath ="(//*[@class='customsegments parbase section']//div[@class='otherPages']//*[contains(text(),'Pharmacy Locator')])[1]")
+                 private WebElement PharmacyLocatorLinkPDP;
+                 
                 /**Forms and Resources section**/    
                 @FindBy(xpath = "//h2[@id='formsAndResHeader']")
                 private WebElement FormsnResources;
                 
                 
-              //*[@class='formsAndResourcesDocListContainer base_tools_component section']
-                private WebElement FormsandResourcesSection;
+                @FindBy(xpath ="//*[contains(text(),'MA/MAPD opt-out form (PDF')]")
+                private WebElement ALPEEhipDoc;
                 
                 @FindBy(xpath = "//area[@href='javascript:clWin()'][@alt = 'close']")
               private WebElement FeedbackModal;
                 
-                public FormsAndResourcesPage(WebDriver driver) {
+                public FormsAndResourcesPage(WebDriver driver) throws InterruptedException {
                                 super(driver);
                                 PageFactory.initElements(driver, this);
                                 CommonUtility.checkPageIsReady(driver);
                                   //Thread.sleep(5000);
                                   CommonUtility.checkPageIsReady(driver);
+                                  try{
+                                  if (perceptionpopup.isDisplayed()) {
+                                	  driver.switchTo().frame("iPerceptionsFrame");
+                                	  Thread.sleep(3000);
+                                	  nothanksbutton.click();
+                              	  } 
+                                  else{
+                                	  
+                                      }
+                                  }
+                                  catch (Exception e) {
+                                  
+                                  {
+                              		System.out.println("iPerception Pop Up not displayed");
+                              	  }
+                                  }
                                   try{
                                   FeedbackModal.click();
                                   System.out.println("FeedBack Modal Present");
@@ -244,6 +285,7 @@ public class FormsAndResourcesPage extends UhcDriver {
                  {
                         perceptionpopup.click();
                         perceptionpopup.click();
+                        driver.findElement(By.xpath("html/body/div[5]/div[2]/button[2]"));
                         
                  }
          
@@ -269,11 +311,11 @@ public class FormsAndResourcesPage extends UhcDriver {
                 {
                      
                      OrderPlanMaterialLink.click();
-                     Thread.sleep(5000);
-                     if(driver.getCurrentUrl().contains("order plan materials"))
-                                  {
-                                Assert.assertTrue(true);
-                                  }
+                     Thread.sleep(20000);
+                     if(driver.getCurrentUrl().contains("order"))
+                      {
+                    Assert.assertTrue(true);
+                      }
                      else{
                              Assert.fail("failed to loaf order materials page");
                           }
@@ -360,10 +402,13 @@ public class FormsAndResourcesPage extends UhcDriver {
                  */
                 public void changelanguage() throws InterruptedException
                 {    
-                      Thread.sleep(3000);
+                	/*CommonUtility.waitForPageLoad(driver, pdf, 20);*/
                       Select oselect = new Select(languagedropdown);
+                      System.out.println(oselect.getOptions());
                       if(oselect.getOptions().contains("SPANISH"))
-                      {
+                      {    
+                    	  Thread.sleep(3000);
+                    	  languagedropdown.click();
                     	  oselect.selectByVisibleText("SPANISH"); 
                           Thread.sleep(3000);
                           System.out.println(oselect.getFirstSelectedOption().getText());
@@ -399,16 +444,70 @@ public class FormsAndResourcesPage extends UhcDriver {
                      }
             
                      
-                     public String[] verifypdfname()
+                     public boolean verifypdfname(String a[])
                      {   
                            java.util.List<WebElement> pdfs = driver.findElements(By.xpath("//div[contains(@class,'plan-material')]//span//li/a"));
-                           String[] pdfname=null;
+                           System.out.println(pdfs.size());
                            for (int i=0;i<pdfs.size();i++)
                            {  
-                                   pdfname[i]=pdfs.get(i).getText(); 
+                              String pdfnames = null;
+                              pdfnames= (pdfs.get(i).getText()) ;
+                        	   System.out.println(pdfnames);
+                           }
+                               
+                           boolean checkflag =true;
+                           
+                         
+                           for (int i=0;i<pdfs.size();i++)
+                           {  
+                             String pdf[] = pdfs.get(i).getText().split(Pattern.quote("("));
+                        	   if(pdf[0].contains(a[i])){
+                        		   System.out.println(pdf[0]);
+                                	  checkflag = true; 
+                                  }
+                        	   else {
+                        		   checkflag=false;
+                        		   break;
+                        	        }
                                                 
                            }
-                           return pdfname;
+                           return checkflag;
+                     }
+                     /**
+                      * This mthod verifies the PDF links present for the ANOC section on forms and resoourcse page
+                      * @param a --> This will collect the PDF link names
+                      * @return --> tru/false
+                      */
+                     public boolean verifypdfnamesforanocdocuments(String a[])
+                     {   
+                           java.util.List<WebElement> anocpdfs =driver.findElements(By.xpath("//*[@class='otherPages']//div[@class='sectionWise_div_2018']//*[@class='document-list-new margin-small']"));
+                
+                           System.out.println(anocpdfs.size());
+                           for (int i=0;i<anocpdfs.size();i++)
+                           {  
+                              String pdfnames = null;
+                              pdfnames= (anocpdfs.get(i).getText()) ;
+                        	   System.out.println(pdfnames);
+                           }
+                               
+                         
+                           boolean checkflag =true;
+                           
+                         
+                           for (int i=0;i<anocpdfs.size();i++)
+                           {  
+                             String pdf[] = anocpdfs.get(i).getText().split(Pattern.quote("("));
+                        	   if(pdf[0].contains(a[i])){
+                        		   System.out.println(pdf[0]);
+                                	  checkflag = true; 
+                                  }
+                        	   else {
+                        		   checkflag=false;
+                        		   break;
+                        	        }
+                                                
+                           }
+                           return checkflag;
                      }
                      
                      public void waitforFNRpage()
@@ -444,10 +543,154 @@ public class FormsAndResourcesPage extends UhcDriver {
              			return false;
              		}
                      
-             		 public WebElement geteobmapdsection()
+             		
+             		/**
+             		 * @return the Annual Directories section for group
+             		 */
+             		public boolean checkAnnualDirectoriesforgroup() {
+             			
+             			
+             				if(AnnualDirectorySection.isDisplayed()) {
+             				System.out.println("Annual Directories section is present");
+             				return false;
+             				}
+             				else{
+             					System.out.println("Annual Directories section is not present");
+                 				return true;
+             				}
+             			
+             			
+             				
+             	
+             		}
+             		
+             		
+             		/**
+             		 * check the provider and pharmacy section for group
+             		 */
+             		public boolean checkProviderforgroup() {
+             			
+             			try{
+             				if(ProviderSearchLink.isDisplayed()) {
+             				System.out.println("Provider section is present for group");
+             				return false;
+             				}
+             				
+             			}
+             			catch(Exception e)
+             			{
+             				System.out.println("Provider section is not present for group");
+             				return true;
+             				
+             			}
+             				
+             			return false;
+             		}
+             		
+                  public boolean checkPharmacyforgroup() {
+             			
+             			try{
+             				if(PharmacyLocatorLink.isDisplayed()) {
+             				System.out.println("Pharmacy section is present for group");
+             				return false;
+             				}
+             				
+             			}
+             			catch(Exception e)
+             			{
+             				System.out.println("Pharmacy section is not present for group");
+             				return true;
+             				
+             			}
+             				
+             			return false;
+             		}
+             		
+             		
+             		 public WebElement geteobsectionall()
              		{	
              		
              			 return	driver.findElement(By.xpath("//*[@class='customsegments parbase section']//div[@class='otherPages']//*[@class='explanationbenefits parbase section']//*[contains(text(),'Explanation')]"));
              			
+             		}
+             		 
+             		 public WebElement getAnocforgroup()
+              		{	
+              		
+              			 return	AnocSectionGroup;
+              		}
+             		 
+             		 
+             		 public WebElement getPharmacyforPDP()
+               		{	
+               		
+               			 return	PharmacyLocatorLinkPDP;
+               		}
+             		 
+             		 public WebElement getDrugEOBforPDP()
+                		{	
+                		
+                			 return	eobDrugButtonPDP;
+                		}
+             		 
+             		  public WebElement getMAPDALpeehipDoc()
+             		{	
+             		
+             			 return	ALPEEhipDoc;
+             		}
+             		
+             		 public boolean checkProviderforPDP() {
+             			
+             			try{
+             				if(ProviderSearchLinkPDP.isDisplayed()) {
+             				System.out.println("Provider section is present for PDP");
+             				return false;
+             				}
+             				
+             			}
+             			catch(Exception e)
+             			{
+             				System.out.println("Provider section is not present for PDP");
+             				return true;
+             				
+             			}
+             				
+             			return false;
+             		}
+             		 
+               		 public boolean checkMedicalEobforPDP() {
+              			
+              			try{
+              				if(eobMedicalButton.isDisplayed()) {
+              				System.out.println("Medical Eob is present for PDP");
+              				return false;
+              				}
+              				
+              			}
+              			catch(Exception e)
+              			{
+              				System.out.println("Medical Eob  is not present for PDP");
+              				return true;
+              				
+              			}
+              				
+              			return false;
+              		}
+               		 
+               		public boolean checkRenewsection() {
+             			try {
+             				if(renewMagazineSection.isDisplayed()) {
+             				System.out.println("Renew magazine sec is present");
+             				return false;
+             				}
+             				else {
+             				
+             			}
+             			}
+             			catch(Exception e) {
+             				System.out.println("Renew magazine section is not present");
+             				return true;
+             			}
+             			return false;
              		}
 }
