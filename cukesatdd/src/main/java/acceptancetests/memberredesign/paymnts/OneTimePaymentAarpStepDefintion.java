@@ -181,6 +181,18 @@ public class OneTimePaymentAarpStepDefintion {
 		
 	}	
 	
+	@And("^the user clicks on MemAuth Edit Automatic Payment button$")
+	public void click_on_MemAuth_Recurring_btn(){
+		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
+		OneTimePaymentPage oneTimePayment = paymenthistory.MemAuthAutoPay();
+		
+		if(oneTimePayment!=null){
+			getLoginScenario().saveBean(PageConstants.One_Time_Payments_Page, oneTimePayment);
+			System.out.println("user is on one time payment page");	
+		}
+		
+	}
+	
 	
 	@And("^the user makes one time payment in AARP site$")
 	public void makes_one_time_payment_aarp(DataTable givenAttributes) {
@@ -269,6 +281,23 @@ public class OneTimePaymentAarpStepDefintion {
 	}
 		else
 			System.out.println("Encountered More than one Payment per Business day error");
+	}
+	
+	@And("^the user confirms the AutoPay Disabled for Memauth$")
+	public void confirms_payment_DisableButton() throws InterruptedException {
+		ConfirmOneTimePaymentPage confirmOneTimePaymentsuccesspage = (ConfirmOneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD);	
+		
+		ConfirmOneTimePaymentPage oneTimePaymentSuccessPage = confirmOneTimePaymentsuccesspage.ValidateAutoPaymentButton();
+        
+		if (oneTimePaymentSuccessPage != null) {
+			getLoginScenario().saveBean(
+					PageConstantsMnR.ONE_TIME_PAYMENT_SUCCESS_PAGE,
+					oneTimePaymentSuccessPage);
+			Assert.assertTrue(true);
+	}
+		else
+			System.out.println("Issue with Button enablement");
 	}
 	
 

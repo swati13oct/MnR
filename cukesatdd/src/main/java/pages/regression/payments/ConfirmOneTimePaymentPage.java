@@ -109,6 +109,26 @@ public class ConfirmOneTimePaymentPage extends UhcDriver{
 		else
 			return null;
 	}
+    
+     public ConfirmOneTimePaymentPage ValidateAutoPaymentButton() throws InterruptedException  {
+		
+		waitforElement(TermsCheckRadioButton);
+		TermsCheckRadioButton.click();
+		System.out.println("Terms and conditions radio button clicked");
+		try{
+		if(!(SubmitPaymentButton.isEnabled()))	{	
+		     System.out.println("Submit Payment Button is dsabled as expected");
+		     return new ConfirmOneTimePaymentPage(driver);
+		}
+		else
+		  return null;
+		}catch(Exception e)
+		{
+			System.out.println("Submit Payment button not loaded");
+			return null;
+		}
+		     
+     }
 
 
 	@Override

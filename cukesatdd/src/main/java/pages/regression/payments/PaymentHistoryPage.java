@@ -104,6 +104,8 @@ public class PaymentHistoryPage extends UhcDriver{
 	@FindBy(xpath = "//*[@class='payment-method-btn'][2]/a")
 	private WebElement SetUpAutoPayButton;
 
+	@FindBy(xpath = "(//*[@id='paymentOverviewApp']//div[@class='col-md-12'])[2]//div[@class='margin-small']/span[@class='payment-method-btn'][3]/a")
+	private WebElement MemAuthEditPay;
 	
 	private PageData paymentHistory;
 	
@@ -389,6 +391,33 @@ public OneTimePaymentPage AutoPay(){
 		 return null;
 }
 		
+public OneTimePaymentPage MemAuthAutoPay(){
+	 
+	 if(validate(iPerceptionAutoPopUp)) {
+		 iPerceptionAutoPopUp.click();
+   	}
+   	else  {
+   		System.out.println("iPerception Pop Up not displayed");   	}
+	 
+	 
+	 
+	 waitforElement(MemAuthEditPay);  		
+	 if(!(MemAuthEditPay.isEnabled()))
+	 {
+		 System.out.println("Edit/Setup Pay buton disabled");
+	
+	/* waitforElement(SetUpNewPayment);
+	 
+	 if (validate(SetUpNewPayment)){
+		 SetUpNewPayment.click();
+		 System.out.println("clicked on Setup New Payment button");	*/	 
+	 return new  OneTimePaymentPage(driver);		 
+	 }
+	 else
+	 return null;
+}
+
+
 }
 
 		
