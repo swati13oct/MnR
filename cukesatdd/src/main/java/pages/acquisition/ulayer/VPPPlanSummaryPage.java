@@ -152,7 +152,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private WebElement stayOnthisPopup;
 	
 	
-	@FindBy(xpath=".//*[@id='site-wrapper']//div[@class='plan-overview-wrapper']/div[2]/div[1]//span[@class='trigger-closed']")
+	@FindBy(xpath=".//*[@id='site-wrapper']//div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[1]/div/a[@class='trigger-closed']")
 	private WebElement viewMAPlans;
 	
 	@FindBy(xpath="//button[contains(text(),'Get Started')]")
