@@ -20,7 +20,6 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
-import acceptancetests.memberredesign.HSID.HSIDStepDefinition;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
@@ -235,36 +234,23 @@ public class OneTimePaymentAarpStepDefintion {
 
 	
 	@And("^the user confirms the payment in AARP site$")
-	public void confirms_payment_aarp() {
+	public void confirmspayment_uhc() throws InterruptedException {
 		ConfirmOneTimePaymentPage confirmOneTimePaymentsuccesspage = (ConfirmOneTimePaymentPage) getLoginScenario()
-				.getBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD);
-		OneTimePaymentSuccessPage oneTimePaymentSuccessPage = confirmOneTimePaymentsuccesspage
-				.confirmsPayment();
-
-		/* Get expected data */
-		@SuppressWarnings("unchecked")
-		Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario()
-				.getBean(CommonConstants.EXPECTED_DATA_MAP);
-		JSONObject oneTimePaymentSuccessExpectedJson = oneTimePaymentSuccessPage
-				.getExpectedData(expectedDataMap);
-		getLoginScenario().saveBean(
-				PaymentCommonConstants.ONE_TIME_PAYMENT_SUCCESS_EXPECTED,
-				oneTimePaymentSuccessExpectedJson);
-
-		JSONObject oneTimePaymentSuccessActualJson = null;
+				.getBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD);	
+		
+		ConfirmOneTimePaymentPage oneTimePaymentSuccessPage = confirmOneTimePaymentsuccesspage.confirmsAutoPayment();
+        
 		if (oneTimePaymentSuccessPage != null) {
 			getLoginScenario().saveBean(
 					PageConstantsMnR.ONE_TIME_PAYMENT_SUCCESS_PAGE,
 					oneTimePaymentSuccessPage);
 			Assert.assertTrue(true);
-			oneTimePaymentSuccessActualJson = oneTimePaymentSuccessPage.oneTimePaymentSuccessJson;
-		}
-
-		getLoginScenario().saveBean(
-				PaymentCommonConstants.ONE_TIME_PAYMENT_SUCCESS_ACTUAL,
-				oneTimePaymentSuccessActualJson);
-
 	}
+		else
+			System.out.println("Encountered More than one Payment per Business day error");
+	}
+
+	
 	
 	@And("^the user confirms the Autopayment in UHC site$")
 	public void confirms_payment_uhc() throws InterruptedException {
@@ -368,9 +354,6 @@ public class OneTimePaymentAarpStepDefintion {
 			Assert.fail("one time payments dashboard page not found");
 		}
 	}
-
-
-	
 	
 
 	
