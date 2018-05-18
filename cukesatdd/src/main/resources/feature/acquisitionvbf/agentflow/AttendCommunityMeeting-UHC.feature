@@ -1,7 +1,7 @@
 @BAT_CommunityMeetings
 @attendCommunity
 @fixedTestCaseTest
-Feature:1.14-VBF-Acq-To test attend community meeting flow in UHC site
+Feature:1.15-VBF-Acq-To test attend community meeting flow in UHC site
 @communityMeeting_UHC
 Scenario Outline: Verify attend community meeting flow in AARP site
 Given the user is on the UHC acquisition site home page
