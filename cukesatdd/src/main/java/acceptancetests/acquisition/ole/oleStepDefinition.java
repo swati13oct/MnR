@@ -19,14 +19,19 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.bluelayer.PlanComparePage;
+import pages.acquisition.ole.AuthorizationPage;
 import pages.acquisition.ole.CancelOLEModal;
 import pages.acquisition.ole.CoverageInformationPage;
 import pages.acquisition.ole.LearnMoreModal;
 import pages.acquisition.ole.LeavingOLEmodal;
 import pages.acquisition.ole.MedicareInformationPage;
 import pages.acquisition.ole.PersonalInformationPage;
+import pages.acquisition.ole.PlanPremiumPage;
 import pages.acquisition.ole.PrelimineryQuestionsPage;
+import pages.acquisition.ole.PrimaryCarePhysicianPage;
+import pages.acquisition.ole.ProposedEffectiveDatePage;
 import pages.acquisition.ole.SpecialElectionPeriodPage;
+import pages.acquisition.ole.SupplementalBenefitsPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.ComparePlansPage;
 import pages.acquisition.ulayer.PlanDetailsPage;
@@ -45,7 +50,7 @@ public class oleStepDefinition {
 		return loginScenario;
 	}
 
-	
+
 	/**
 	 * @author sdwaraka
 	 * 
@@ -54,7 +59,7 @@ public class oleStepDefinition {
 	 */
 	@Given("^the user lands on OLE Welcome Page wity following Plan Details$")
 	public void the_user_lands_on_OLE_Welcome_Page_wity_following_Plan_Details(DataTable planAttributes) throws Throwable {
-		
+
 		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
@@ -76,10 +81,10 @@ public class oleStepDefinition {
 		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
-		
+
 		//Hard Coding OLE Welcome Page URL for Build Validation Test
 		String OLE_URL = "https://www.team-f-aarpmedicareplans.ose-elr-core.optum.com/content/aarpmedicareplans/en/enrollment.html";
-		
+
 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
@@ -94,8 +99,8 @@ public class oleStepDefinition {
 			Assert.fail("Error in validating the OLE Welcome Page");
 	}
 
-	
-	
+
+
 	/**
 	 * @author sdwaraka
 	 * To start Enroll Now and land on Welcome Page from Plan Summary Page of VPP
@@ -104,7 +109,7 @@ public class oleStepDefinition {
 	 */
 	@Then("^the user clicks on Enroll Now for AARP site to start the OLE flow$")
 	public void the_user_clicks_on_Enroll_Now_to_start_the_OLE_flow(DataTable planAttributes) throws Throwable {
-		
+
 		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
@@ -128,7 +133,7 @@ public class oleStepDefinition {
 			pages.acquisition.bluelayer.VPPPlanSummaryPage planSummaryPage = (pages.acquisition.bluelayer.VPPPlanSummaryPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			TFN = planSummaryPage.GetTFNforPlanType();
-			
+
 			PlanPremium = planSummaryPage.getPlanPremium(PlanName);
 			welcomePage = planSummaryPage.Enroll_OLE_Plan(PlanName);
 
@@ -137,7 +142,7 @@ public class oleStepDefinition {
 			VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			TFN = planSummaryPage.GetTFNforPlanType();
-			
+
 			PlanPremium = planSummaryPage.getPlanPremium(PlanName);
 			welcomePage = planSummaryPage.Enroll_OLE_Plan(PlanName);
 
@@ -158,7 +163,7 @@ public class oleStepDefinition {
 		System.out.println("TFN for Plan Type is : "+TFN);
 		System.out.println("Plan Year is : "+PlanYear);
 		System.out.println("OLE is being started from Acquisition Site : "+SiteName);
-		
+
 		if (welcomePage != null) {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE,
 					welcomePage);
@@ -168,7 +173,7 @@ public class oleStepDefinition {
 		else
 			Assert.fail("Error in validating the OLE Welcome Page");
 	}
-	
+
 	/**
 	 * @author sdwaraka
 	 * To start Enroll Now and land on Welcome Page from Plan Details Page of VPP
@@ -185,10 +190,10 @@ public class oleStepDefinition {
 		String TFN;
 		String SiteName;
 		SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);	
-		
+
 		WelcomePage welcomePage;
 		if(SiteName.contains("UHC_ACQ")){
-			
+
 			pages.acquisition.bluelayer.PlanDetailsPage vppPlanDetailsPage = (pages.acquisition.bluelayer.PlanDetailsPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 			TFN = vppPlanDetailsPage.GetTFNforPlanType();
@@ -199,7 +204,7 @@ public class oleStepDefinition {
 					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 			TFN = vppPlanDetailsPage.GetTFNforPlanType();
 			welcomePage = vppPlanDetailsPage.Enroll_OLE_Plan(PlanName);
-			}
+		}
 		String PlanPremium = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
@@ -217,7 +222,7 @@ public class oleStepDefinition {
 		System.out.println("Plan Year is : "+PlanYear);
 		System.out.println("OLE is being started from Acquisition Site : "+SiteName);
 		if (welcomePage != null) {
-			
+
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE,
 					welcomePage);
 			System.out.println("OLE Welcome Page is Displayed");
@@ -226,44 +231,44 @@ public class oleStepDefinition {
 		else
 			Assert.fail("Error in validating the OLE Welcome Page");
 	}
-	
 
-@Then("^the user clicks on Enroll Now in Plan Compare Page for the following Plan to start the OLE flow$")
-public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttributes) throws Throwable {
-	List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
-	Map<String, String> givenAttributesMap = new HashMap<String, String>();
-	for (int i = 0; i < givenAttributesRow.size(); i++) {
 
-		givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-				givenAttributesRow.get(i).getCells().get(1));
-	}
-	String PlanName = givenAttributesMap.get("Plan Name");
-	String SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
-	WelcomePage welcomePage;
-	if(SiteName.contains("UHC_ACQ")){
-		
-		pages.acquisition.bluelayer.PlanComparePage comparePlansPage = (PlanComparePage) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		welcomePage = comparePlansPage.Enroll_OLE_Plan(PlanName);
-	}
-	else{
-		ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
-		
-		welcomePage = comparePlansPage.Enroll_OLE_Plan(PlanName);
+	@Then("^the user clicks on Enroll Now in Plan Compare Page for the following Plan to start the OLE flow$")
+	public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttributes) throws Throwable {
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
 		}
-	
-	if (welcomePage != null) {
-		
-		getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE,
-				welcomePage);
-		System.out.println("OLE Welcome Page is Displayed");
-		Assert.assertTrue(true);
+		String PlanName = givenAttributesMap.get("Plan Name");
+		String SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
+		WelcomePage welcomePage;
+		if(SiteName.contains("UHC_ACQ")){
+
+			pages.acquisition.bluelayer.PlanComparePage comparePlansPage = (PlanComparePage) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);
+			welcomePage = comparePlansPage.Enroll_OLE_Plan(PlanName);
+		}
+		else{
+			ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+
+			welcomePage = comparePlansPage.Enroll_OLE_Plan(PlanName);
+		}
+
+		if (welcomePage != null) {
+
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE,
+					welcomePage);
+			System.out.println("OLE Welcome Page is Displayed");
+			Assert.assertTrue(true);
+		}
+		else
+			Assert.fail("Error in validating the OLE Welcome Page");
+
 	}
-	else
-		Assert.fail("Error in validating the OLE Welcome Page");
-	
-}
-	
+
 	/**
 	 * @author sdwaraka
 	 * To Validate the Plan Details carried forward from VPP on Welcome Page of VPP
@@ -272,7 +277,7 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 	 */
 	@Then("^the user validates the Plan details on OLE$")
 	public void the_user_validates_the_Plan_details_on_OLE() throws Throwable {
-		
+
 		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
 		Map<String, String> PlanDetailsMap = new HashMap<String, String>();
 		PlanDetailsMap.put("Plan Name", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME));
@@ -280,7 +285,7 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 		PlanDetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
 		PlanDetailsMap.put("County", (String) getLoginScenario().getBean(oleCommonConstants.OLE_COUNTY));
 		PlanDetailsMap.put("Plan Premium", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM));
-		
+
 		boolean Validation_Status = welcomePage.validate_plan_details(PlanDetailsMap);
 		if(Validation_Status){
 			System.out.println("Plan Details Validation in OLE PAGE : "+Validation_Status+" - Validation Passed");
@@ -315,17 +320,17 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
 		LearnMoreModal learnMoremodal = welcomePage.OpenLearnMore();
 		if (learnMoremodal != null) {
-			
+
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_LEARNMORE_MODAL_PAGE,
 					learnMoremodal);
 			System.out.println("OLE Learn More Modal is Displayed");
 		}
 		else
 			Assert.fail("OLE Learn More Modal is NOT Displayed");
-		
+
 		welcomePage = (WelcomePage) learnMoremodal.returntoOLE();
 		if (welcomePage != null) {
-			
+
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE,
 					welcomePage);
 			System.out.println("Back to OLE Application page - Welcome Page is Displayed");
@@ -339,17 +344,17 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
 		CancelOLEModal cancelOLEmodal = welcomePage.OpenCancelOLE();
 		if (cancelOLEmodal != null) {
-			
+
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_LEARNMORE_MODAL_PAGE,
 					cancelOLEmodal);
 			System.out.println("OLE Cancellation Modal is Displayed");
 		}
 		else
 			Assert.fail("OLE Cancellation Modal is NOT Displayed");
-		
+
 		welcomePage = (WelcomePage) cancelOLEmodal.returntoOLE();
 		if (welcomePage != null) {
-			
+
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE,
 					welcomePage);
 			System.out.println("Back to OLE Application page - Welcome Page is Displayed");
@@ -373,7 +378,7 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 
 		welcomePage = (WelcomePage) leaveOLEmodal.returntoOLE();
 		if (welcomePage != null) {
-			
+
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE,
 					welcomePage);
 			System.out.println("Back to OLE Application page - Welcome Page is Displayed");
@@ -404,7 +409,7 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
 		MedicareInformationPage medicareInfoPage = welcomePage.navigate_to_medicare_info_page();
 		if (medicareInfoPage != null) {
-			
+
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE,
 					medicareInfoPage);
 			System.out.println("OLE Medicare Information Page is Displayed");
@@ -442,10 +447,10 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 			MedicareDetailsMap.put("SSN Number", "123456789");
 		}
 		MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
-		
+
 		medicareInfoPage = medicareInfoPage.enter_required_Medicare_details(MedicareDetailsMap);
 		if (medicareInfoPage != null) {
-			
+
 			getLoginScenario().saveBean(oleCommonConstants.FIRST_NAME, MedicareDetailsMap.get("First Name"));
 			getLoginScenario().saveBean(oleCommonConstants.LAST_NAME, MedicareDetailsMap.get("Last Name"));
 			getLoginScenario().saveBean(oleCommonConstants.MEDICARE_NUMBER, MedicareDetailsMap.get("Medicare Number"));
@@ -489,7 +494,7 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 		PlanDetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
 		PlanDetailsMap.put("County", (String) getLoginScenario().getBean(oleCommonConstants.OLE_COUNTY));
 		PlanDetailsMap.put("Plan Premium", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM));
-		
+
 		boolean Validation_Status = MedicareInfoPage.validate_plan_details(PlanDetailsMap);
 		if(Validation_Status){
 			System.out.println("Plan Details Validation in OLE Medicare Information  PAGE : "+Validation_Status+" - Validation Passed");
@@ -501,7 +506,7 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 			Assert.fail();
 		}
 	}
-	
+
 	@Then("the user validates error messages for Negative values and required fields on Medicare Info Page")
 	public void user_validates_negative_scenarios_medicare_info_page(){
 		MedicareInformationPage MedicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
@@ -516,25 +521,25 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 			Assert.fail();
 		}
 	}
-	
-	
+
+
 
 	@Then("^the user validates Learn more modal for Medicare Information Page$")
 	public void the_user_validates_Learn_more_Medicare_Info_for_Welcome_OLE() throws Throwable {
 		MedicareInformationPage MedicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
 		LearnMoreModal learnMoremodal = MedicareInfoPage.OpenLearnMore();
 		if (learnMoremodal != null) {
-			
+
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_LEARNMORE_MODAL_PAGE,
 					learnMoremodal);
 			System.out.println("OLE Learn More Modal is Displayed");
 		}
 		else
 			Assert.fail("OLE Learn More Modal is NOT Displayed");
-		
+
 		MedicareInfoPage =  (MedicareInformationPage) learnMoremodal.returntoOLE();
 		if (MedicareInfoPage != null) {
-			
+
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE,
 					MedicareInfoPage);
 			System.out.println("Back to OLE Application page - OLE Medicare Information Page is Displayed");
@@ -559,7 +564,7 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 
 		MedicareInfoPage = (MedicareInformationPage) leaveOLEmodal.returntoOLE();
 		if (MedicareInfoPage != null) {
-			
+
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE,
 					MedicareInfoPage);
 			System.out.println("Back to OLE Application page - OLE Medicare Information Page is Displayed");
@@ -574,17 +579,17 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 		MedicareInformationPage MedicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
 		CancelOLEModal cancelOLEmodal = MedicareInfoPage.OpenCancelOLE();
 		if (cancelOLEmodal != null) {
-			
+
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_LEARNMORE_MODAL_PAGE,
 					cancelOLEmodal);
 			System.out.println("OLE Cancellation Modal is Displayed");
 		}
 		else
 			Assert.fail("OLE Cancellation Modal is NOT Displayed");
-		
+
 		MedicareInfoPage = (MedicareInformationPage) cancelOLEmodal.returntoOLE();
 		if (MedicareInfoPage != null) {
-			
+
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE,
 					MedicareInfoPage);
 			System.out.println("Back to OLE Application page - OLE Medicare Information Page is Displayed");
@@ -592,14 +597,14 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 		else
 			Assert.fail("Back to OLE Application page - OLE Medicare Information Page is NOT Displayed");
 
-}
+	}
 
 	@Then("^the user navigates to Preliminary Questions Page$")
 	public void the_user_navigates_to_Preliminary_Questions_Page() throws Throwable {
 		MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
 		PrelimineryQuestionsPage prelimineryQuestionsPage = medicareInfoPage.navigate_to_Preliminary_Questions_page();
 		if (prelimineryQuestionsPage != null) {
-			
+
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE,
 					prelimineryQuestionsPage);
 			System.out.println("OLE Preliminary Questions Page is Displayed");
@@ -608,7 +613,7 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 		else
 			Assert.fail("OLE Preliminary Questions Page is NOT Displayed");
 	}
-	
+
 	@Then("^the user validates requierd fields for Preliminary Questions Page$")
 	public void the_user_validates_requierd_fields_for_Preliminary_Questions_Page(DataTable Flags) throws Throwable {
 		List<DataTableRow> personalAttributesRow = Flags.getGherkinRows();
@@ -620,7 +625,7 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 		}
 		String MedicaidNumber = PreliminaryFlagsMap.get("MedicaidNumber");
 		String PlanType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
-		
+
 		PrelimineryQuestionsPage prelimineryQuestionsPage = (PrelimineryQuestionsPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE);
 		boolean Validation_Status = prelimineryQuestionsPage.validate_Required_Fields(PlanType, MedicaidNumber);
 		if(Validation_Status){
@@ -640,28 +645,28 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 	@And("^the user fills following information in Preliminary Questions page$")
 	public void user_fill_information_Preliminary_Questions_page(
 			DataTable personalAttributes) {
-			List<DataTableRow> personalAttributesRow = personalAttributes.getGherkinRows();
-			Map<String, String> personalAttributesMap = new HashMap<String, String>();
-			for (int i = 0; i < personalAttributesRow.size(); i++) {
-				personalAttributesMap.put(personalAttributesRow.get(i)
-						.getCells().get(0), personalAttributesRow.get(i)
-						.getCells().get(1));
-			}
-			String medicaidnumber = personalAttributesMap.get("MedicaidNumber");
-			PrelimineryQuestionsPage prelimineryQuestionsPage = (PrelimineryQuestionsPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE);
-			prelimineryQuestionsPage.entersPrelimQuesInformation(medicaidnumber);
+		List<DataTableRow> personalAttributesRow = personalAttributes.getGherkinRows();
+		Map<String, String> personalAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < personalAttributesRow.size(); i++) {
+			personalAttributesMap.put(personalAttributesRow.get(i)
+					.getCells().get(0), personalAttributesRow.get(i)
+					.getCells().get(1));
+		}
+		String medicaidnumber = personalAttributesMap.get("MedicaidNumber");
+		PrelimineryQuestionsPage prelimineryQuestionsPage = (PrelimineryQuestionsPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE);
+		prelimineryQuestionsPage.entersPrelimQuesInformation(medicaidnumber);
 
-			if (prelimineryQuestionsPage != null) {
-				
-				getLoginScenario().saveBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE,
-						prelimineryQuestionsPage);
-				System.out.println("OLE Preliminary Questions Page is Displayed : Medicaid Number is entered");
-				Assert.assertTrue(true);
-			}
-			else
-				Assert.fail("OLE Preliminary Questions Page is NOT Displayed");
+		if (prelimineryQuestionsPage != null) {
+
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE,
+					prelimineryQuestionsPage);
+			System.out.println("OLE Preliminary Questions Page is Displayed : Medicaid Number is entered");
+			Assert.assertTrue(true);
+		}
+		else
+			Assert.fail("OLE Preliminary Questions Page is NOT Displayed");
 	}
-	
+
 	@Then("^the user validates the Plan details in Preliminary Questions Pag OLE Right Rail$")
 	public void the_user_validates_the_Plan_details_in_Preliminary_Questions_Pag_OLE_Right_Rail() throws Throwable {
 		PrelimineryQuestionsPage prelimineryQuestionsPage = (PrelimineryQuestionsPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE);
@@ -671,7 +676,7 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 		PlanDetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
 		PlanDetailsMap.put("County", (String) getLoginScenario().getBean(oleCommonConstants.OLE_COUNTY));
 		PlanDetailsMap.put("Plan Premium", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM));
-		
+
 		boolean Validation_Status = prelimineryQuestionsPage.validate_plan_details(PlanDetailsMap);
 		if(Validation_Status){
 			System.out.println("Plan Details Validation in OLE Premliminary Questions PAGE : "+Validation_Status+" - Validation Passed");
@@ -698,7 +703,7 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 			Assert.fail();
 		}
 	}
-	
+
 	@Then("^the user validates Leave OLE modal for Preliminary Questions Page$")
 	public void the_user_validates_Leave_OLE_modal_for_Preliminary_Questions_Page() throws Throwable {
 		PrelimineryQuestionsPage prelimineryQuestionsPage = (PrelimineryQuestionsPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE);
@@ -714,7 +719,7 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 
 		prelimineryQuestionsPage = (PrelimineryQuestionsPage) leaveOLEmodal.returntoOLE();
 		if (prelimineryQuestionsPage != null) {
-			
+
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE,
 					prelimineryQuestionsPage);
 			System.out.println("Back to OLE Application page - OLE Preliminary Questions Page is Displayed");
@@ -722,14 +727,14 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 		else
 			Assert.fail("Back to OLE Application page - OLE Preliminary Questions Page is NOT Displayed");
 
-}
+	}
 
 	@Then("^the user validates Learn more modal for Preliminary Questions Page$")
 	public void the_user_validates_Learn_more_modal_for_Preliminary_Questions_Page() throws Throwable {
 		PrelimineryQuestionsPage prelimineryQuestionsPage = (PrelimineryQuestionsPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE);
 		LearnMoreModal learnMoremodal = prelimineryQuestionsPage.OpenLearnMore();
 		if (learnMoremodal != null) {
-			
+
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_LEARNMORE_MODAL_PAGE,
 					learnMoremodal);
 			System.out.println("OLE Learn More Modal is Displayed");
@@ -738,46 +743,46 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 			Assert.fail("OLE Learn More Modal is NOT Displayed");
 		prelimineryQuestionsPage =  (PrelimineryQuestionsPage) learnMoremodal.returntoOLE();
 		if (prelimineryQuestionsPage != null) {
-			
+
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE,
 					prelimineryQuestionsPage);
 			System.out.println("Back to OLE Application page - OLE Preliminary Questions Page is Displayed");
 		}
 		else
 			Assert.fail("Back to OLE Application page -OLE Preliminary Questions Page is NOT Displayed");
-}
+	}
 
 	@Then("^the user validates cancellation modal for Preliminary Questions Page$")
 	public void the_user_validates_cancellation_modal_for_Preliminary_Questions_Page() throws Throwable {
 		PrelimineryQuestionsPage prelimineryQuestionsPage = (PrelimineryQuestionsPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE);
 		CancelOLEModal cancelOLEmodal = prelimineryQuestionsPage.OpenCancelOLE();
 		if (cancelOLEmodal != null) {
-			
+
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_LEARNMORE_MODAL_PAGE,
 					cancelOLEmodal);
 			System.out.println("OLE Cancellation Modal is Displayed");
 		}
 		else
 			Assert.fail("OLE Cancellation Modal is NOT Displayed");
-		
+
 		prelimineryQuestionsPage = (PrelimineryQuestionsPage) cancelOLEmodal.returntoOLE();
 		if (prelimineryQuestionsPage != null) {
-			
+
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE,
 					prelimineryQuestionsPage);
 			System.out.println("Back to OLE Application page - OLE Preliminary Questions Page is Displayed");
 		}
 		else
 			Assert.fail("Back to OLE Application page - OLE Preliminary Questions Page is NOT Displayed");
-}
-	
+	}
+
 	@Then("^the user navigates to Personal Information Page$")
 	public void the_user_navigates_to_Personal_Information_Page() throws Throwable {
 		PrelimineryQuestionsPage prelimineryQuestionsPage = (PrelimineryQuestionsPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE);
 		PersonalInformationPage personalInformationPage = prelimineryQuestionsPage.navigate_to_Personal_Information_page();
-				
+
 		if (personalInformationPage != null) {
-			
+
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE,
 					personalInformationPage);
 			System.out.println("OLE Personal Information Page is Displayed");
@@ -806,7 +811,7 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 		else
 			Assert.fail("OLE Personal Information Page - Adding Member Details Failed");
 	}
-	
+
 	@Then("^the user validates the Plan details in Personal Information Page OLE Right Rail$")
 	public void the_user_validates_the_Plan_details_in_Personal_Information_Page_OLE_Right_Rail() throws Throwable {
 		PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
@@ -816,7 +821,7 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 		PlanDetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
 		PlanDetailsMap.put("County", (String) getLoginScenario().getBean(oleCommonConstants.OLE_COUNTY));
 		PlanDetailsMap.put("Plan Premium", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM));
-		
+
 		boolean Validation_Status = personalInformationPage.validate_plan_details(PlanDetailsMap);
 		if(Validation_Status){
 			System.out.println("Plan Details Validation in OLE Personal Information PAGE : "+Validation_Status+" - Validation Passed");
@@ -828,6 +833,27 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 			Assert.fail();
 		}
 	}
+
+	@Then("^the user validates the Member details dynamic display in Personal Information Page$")
+	public void the_user_validates_the_Member_details_in_Personal_Information_Page_OLE_Right_Rail() throws Throwable {
+		PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
+		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
+		MemberDetailsMap.put("First Name", (String) getLoginScenario().getBean(oleCommonConstants.FIRST_NAME));
+		MemberDetailsMap.put("Last Name", (String) getLoginScenario().getBean(oleCommonConstants.LAST_NAME));
+		MemberDetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
+
+		boolean Validation_Status = personalInformationPage.validate_member_details(MemberDetailsMap);
+		if(Validation_Status){
+			System.out.println("Member Details Validation in OLE Personal Information PAGE : - Validation Passed");
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE, personalInformationPage);
+			Assert.assertTrue(true);
+		}
+		else{
+			System.out.println("Member Details Validation in OLE Personal Information PAGE : - Validation Failed");
+			Assert.fail();
+		}
+	}
+
 
 	@Then("^the user validates TFN in Right Rail on Personal Information Page$")
 	public void the_user_validates_TFN_in_Right_Rail_on_Personal_Information_Page() throws Throwable {
@@ -860,21 +886,21 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 
 		personalInformationPage = (PersonalInformationPage) leaveOLEmodal.returntoOLE();
 		if (personalInformationPage != null) {
-			
+
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE,
 					personalInformationPage);
 			System.out.println("Back to OLE Application page - OLE Personal Information Page is Displayed");
 		}
 		else
 			Assert.fail("Back to OLE Application page - OLE Personal Information Page is NOT Displayed");
-}
+	}
 
 	@Then("^the user validates Learn more modal for Personal Information Page$")
 	public void the_user_validates_Learn_more_modal_for_Personal_Information_Page() throws Throwable {
 		PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
 		LearnMoreModal learnMoremodal = personalInformationPage.OpenLearnMore();
 		if (learnMoremodal != null) {
-			
+
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_LEARNMORE_MODAL_PAGE,
 					learnMoremodal);
 			System.out.println("OLE Learn More Modal is Displayed");
@@ -883,47 +909,47 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 			Assert.fail("OLE Learn More Modal is NOT Displayed");
 		personalInformationPage =  (PersonalInformationPage) learnMoremodal.returntoOLE();
 		if (personalInformationPage != null) {
-			
+
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE,
 					personalInformationPage);
 			System.out.println("Back to OLE Application page - OLE Personal Information Page is Displayed");
 		}
 		else
 			Assert.fail("Back to OLE Application page -OLE Personal Information Page is NOT Displayed");
-}
+	}
 
 	@Then("^the user validates cancellation modal for Personal Information Page$")
 	public void the_user_validates_cancellation_modal_for_Personal_Information_Page() throws Throwable {
 		PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
 		CancelOLEModal cancelOLEmodal = personalInformationPage.OpenCancelOLE();
 		if (cancelOLEmodal != null) {
-			
+
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_LEARNMORE_MODAL_PAGE,
 					cancelOLEmodal);
 			System.out.println("OLE Cancellation Modal is Displayed");
 		}
 		else
 			Assert.fail("OLE Cancellation Modal is NOT Displayed");
-		
+
 		personalInformationPage = (PersonalInformationPage) cancelOLEmodal.returntoOLE();
 		if (personalInformationPage != null) {
-			
+
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE,
 					personalInformationPage);
 			System.out.println("Back to OLE Application page - OLE Personal Information Page is Displayed");
 		}
 		else
 			Assert.fail("Back to OLE Application page - OLE Personal Information Page is NOT Displayed");
-}
-	
-	
+	}
+
+
 	@Then("^the user navigates to SEP Page$")
 	public void the_user_navigates_to_SEP_Page() throws Throwable {
 		PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
 		SpecialElectionPeriodPage specialElectionPeriodPage = personalInformationPage.navigate_to_SEP_page();
-				
+
 		if (specialElectionPeriodPage != null) {
-			
+
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE,
 					specialElectionPeriodPage);
 			System.out.println("OLE SEP Page is Displayed");
@@ -942,7 +968,7 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 		PlanDetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
 		PlanDetailsMap.put("County", (String) getLoginScenario().getBean(oleCommonConstants.OLE_COUNTY));
 		PlanDetailsMap.put("Plan Premium", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM));
-		
+
 		boolean Validation_Status = specialElectionPeriodPage.validate_plan_details(PlanDetailsMap);
 		if(Validation_Status){
 			System.out.println("Plan Details Validation in OLE SEP PAGE : "+Validation_Status+" - Validation Passed");
@@ -969,7 +995,7 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 			System.out.println("TFN, Wunderman Validation in OLE SEP PAGE : "+Validation_Status);
 			Assert.fail();
 		}
-}
+	}
 
 	@Then("^the user validates Leave OLE modal for SEP Page$")
 	public void the_user_validates_Leave_OLE_modal_for_SEP_Page() throws Throwable {
@@ -986,38 +1012,38 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 
 		specialElectionPeriodPage = (SpecialElectionPeriodPage) leaveOLEmodal.returntoOLE();
 		if (specialElectionPeriodPage != null) {
-			
+
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE,
 					specialElectionPeriodPage);
 			System.out.println("Back to OLE Application page - OLE SEP Page is Displayed");
 		}
 		else
 			Assert.fail("Back to OLE Application page - OLE SEP Page is NOT Displayed");
-}
+	}
 
 	@Then("^the user validates Learn more modal for SEP Page$")
 	public void the_user_validates_Learn_more_modal_for_SEP_Page() throws Throwable {
 		SpecialElectionPeriodPage specialElectionPeriodPage = (SpecialElectionPeriodPage) getLoginScenario().getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
 		LearnMoreModal learnMoremodal = specialElectionPeriodPage.OpenLearnMore();
 		if (learnMoremodal != null) {
-			
+
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_LEARNMORE_MODAL_PAGE,
 					learnMoremodal);
 			System.out.println("OLE Learn More Modal is Displayed");
 		}
 		else
 			Assert.fail("OLE Learn More Modal is NOT Displayed");
-		
+
 		specialElectionPeriodPage =  (SpecialElectionPeriodPage) learnMoremodal.returntoOLE();
 		if (specialElectionPeriodPage != null) {
-			
+
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE,
 					specialElectionPeriodPage);
 			System.out.println("Back to OLE Application page - OLE SEP Page is Displayed");
 		}
 		else
 			Assert.fail("Back to OLE Application page -OLE SEP Page is NOT Displayed");
-}
+	}
 
 	@Then("^the user validates cancellation modal for SEP Page$")
 	public void the_user_validates_cancellation_modal_for_SEP_Page() throws Throwable {
@@ -1032,7 +1058,7 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 			Assert.fail("OLE Cancellation Modal is NOT Displayed");
 		specialElectionPeriodPage = (SpecialElectionPeriodPage) cancelOLEmodal.returntoOLE();
 		if (specialElectionPeriodPage != null) {
-			
+
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE,
 					specialElectionPeriodPage);
 			System.out.println("Back to OLE Application page - OLE SEP Page is Displayed");
@@ -1041,53 +1067,201 @@ public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttri
 			Assert.fail("Back to OLE Application page - OLE SEP Page is NOT Displayed");
 	}
 
-@Then("^the user validates SEP options and Required Fields for PlanType in SEP Page$")
-public void the_user_validates_SEP_options_and_Required_Fields_for_PlanType_in_SEP_Page() throws Throwable {
-	SpecialElectionPeriodPage specialElectionPeriodPage = (SpecialElectionPeriodPage) getLoginScenario().getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
-	String PlanType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
-	boolean Validation_Status = specialElectionPeriodPage.validate_SEPoptions_for_planType(PlanType);
-	if(Validation_Status){
-		System.out.println("Plan Type Options Validation in OLE SEP PAGE : "+Validation_Status+" - Validation Passed");
-		getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE, specialElectionPeriodPage);
-		Assert.assertTrue(true);
-	}
-	else{
-		System.out.println("Plan Type Options in OLE SEP PAGE : "+Validation_Status);
-		Assert.fail();
-	}
-}
-
-@Then("^the user navigates to Coverage and Health Information Page$")
-public void the_user_navigates_to_Coverage_and_Health_Information_Page() throws Throwable {
-	SpecialElectionPeriodPage specialElectionPeriodPage = (SpecialElectionPeriodPage) getLoginScenario().getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
-	CoverageInformationPage coverageInformationPage = specialElectionPeriodPage.navigate_to_Coverage_Information_page();
-	if (coverageInformationPage != null) {
-		
-		getLoginScenario().saveBean(OLE_PageConstants.OLE_COVERAGE_INFO_PAGE,
-				coverageInformationPage);
-		System.out.println("OLE Coverage and Health Information Page is Displayed");
-	}
-	else
-		Assert.fail("OLE Coverage and Health Information Page is NOT Displayed");
-
-}
-
-@Then("^the user validates the dispalyed sections for the Plan Type in Coverage and Health Information Page$")
-public void the_user_validates_the_dispalyed_sections_for_the_Plan_Type_in_Coverage_and_Health_Information_Page() throws Throwable {
-	CoverageInformationPage coverageInformationPage = (CoverageInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_COVERAGE_INFO_PAGE);
-	String PlanType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
-	boolean Validation_Status = coverageInformationPage.validate_CoverageInfo_Questions_for_planType(PlanType);
-	if(Validation_Status){
-		System.out.println("Plan Type Questions Validation in OLE Coverage and Health PAGE : Validation Passed");
-		getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE, coverageInformationPage);
-		Assert.assertTrue(true);
-	}
-	else{
-		System.out.println("Plan Type Questions Validation in OLE Coverage and Health PAGE : Validation Failed");
-		Assert.fail();
-	}
+	@Then("^the user validates SEP options and Required Fields for PlanType in SEP Page$")
+	public void the_user_validates_SEP_options_and_Required_Fields_for_PlanType_in_SEP_Page() throws Throwable {
+		SpecialElectionPeriodPage specialElectionPeriodPage = (SpecialElectionPeriodPage) getLoginScenario().getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
+		String PlanType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
+		boolean Validation_Status = specialElectionPeriodPage.validate_SEPoptions_for_planType(PlanType);
+		if(Validation_Status){
+			System.out.println("Plan Type Options Validation in OLE SEP PAGE : "+Validation_Status+" - Validation Passed");
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE, specialElectionPeriodPage);
+			Assert.assertTrue(true);
+		}
+		else{
+			System.out.println("Plan Type Options in OLE SEP PAGE : "+Validation_Status);
+			Assert.fail();
+		}
 	}
 
+	@Then("^the user navigates to Coverage and Health Information Page$")
+	public void the_user_navigates_to_Coverage_and_Health_Information_Page() throws Throwable {
+		SpecialElectionPeriodPage specialElectionPeriodPage = (SpecialElectionPeriodPage) getLoginScenario().getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
+		CoverageInformationPage coverageInformationPage = specialElectionPeriodPage.navigate_to_Coverage_Information_page();
+		if (coverageInformationPage != null) {
+
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_COVERAGE_INFO_PAGE,
+					coverageInformationPage);
+			System.out.println("OLE Coverage and Health Information Page is Displayed");
+		}
+		else
+			Assert.fail("OLE Coverage and Health Information Page is NOT Displayed");
+
+	}
+
+	@Then("^the user validates the dispalyed sections for the Plan Type in Coverage and Health Information Page$")
+	public void the_user_validates_the_dispalyed_sections_for_the_Plan_Type_in_Coverage_and_Health_Information_Page() throws Throwable {
+		CoverageInformationPage coverageInformationPage = (CoverageInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_COVERAGE_INFO_PAGE);
+		String PlanType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
+		boolean Validation_Status = coverageInformationPage.validate_CoverageInfo_Questions_for_planType(PlanType);
+		if(Validation_Status){
+			System.out.println("Plan Type Questions Validation in OLE Coverage and Health PAGE : Validation Passed");
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_COVERAGE_INFO_PAGE, coverageInformationPage);
+			Assert.assertTrue(true);
+		}
+		else{
+			System.out.println("Plan Type Questions Validation in OLE Coverage and Health PAGE : Validation Failed");
+			Assert.fail();
+		}
+	}
+
+	@Then("^the user navigates to Proposed Effective Date Page$")
+	public void the_user_navigates_to_Proposed_Effective_Date_Page() throws Throwable {
+		CoverageInformationPage coverageInformationPage = (CoverageInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_COVERAGE_INFO_PAGE);
+		ProposedEffectiveDatePage proposedEffectiveDatePage = coverageInformationPage.navigate_to_Proposed_Effective_Date_Page();
+		if (proposedEffectiveDatePage != null) {
+
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_PROPOSED_EFF_DATE_PAGE,
+					proposedEffectiveDatePage);
+			System.out.println("OLE Proposed Effective Date Page is Displayed");
+		}
+		else
+			Assert.fail("OLE Proposed Effective Date Page is NOT Displayed");
+
+	}
+	
+	@Then("^the user navigates to PCP Page and validates PCP page is not displayed for PDP$")
+	public void the_user_navigates_to_PCP_Page() throws Throwable {
+		ProposedEffectiveDatePage proposedEffectiveDatePage = (ProposedEffectiveDatePage) getLoginScenario().getBean(OLE_PageConstants.OLE_PROPOSED_EFF_DATE_PAGE);
+		String planType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
+		if(planType.contentEquals("PDP")){
+			PlanPremiumPage  planPremiumPage = (PlanPremiumPage) proposedEffectiveDatePage.navigate_to_PCP_Page(planType);
+			if (planPremiumPage != null) {
+
+				getLoginScenario().saveBean(OLE_PageConstants.OLE_PLAN_PREMIUM_PAGE,
+						planPremiumPage);
+				System.out.println("PCP Page is not Displayed : OLE Monthly Plan Premium Page is Displayed for Plantype : "+planType);
+			}
+			else
+				Assert.fail("OLE Monthly Plan Premium Page is NOT Displayed for Plantype : "+planType);
+		}
+		else{
+			PrimaryCarePhysicianPage pcpPage = (PrimaryCarePhysicianPage) proposedEffectiveDatePage.navigate_to_PCP_Page(planType);
+			if (pcpPage != null) {
+
+				getLoginScenario().saveBean(OLE_PageConstants.OLE_PRIMARY_CARE_PHYSICIAN_PAGE,
+						pcpPage);
+				System.out.println("OLE PCP Page is Displayed for Plantype : "+planType);
+			}
+			else
+				Assert.fail("OLE PCP Page is NOT Displayed for Plantype : "+planType);
+		}
+	}
+
+	@Then("^the user validates PCP page for MA and MAPD PFFS plans$")
+	public void the_user_validates_PCP_page_for_MD_and_MAPD_PFFS_plans() throws Throwable {
+		PrimaryCarePhysicianPage pcpPage = (PrimaryCarePhysicianPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRIMARY_CARE_PHYSICIAN_PAGE);
+		String planType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
+		String planName = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME);
+		if(!planType.contentEquals("PDP") && planName.contains("PFFS")){
+			System.out.println("Validating Provider Contact Information for PFFS plans");
+			boolean Validation_Status = pcpPage.validate_provider_contact_info_in_PCP();
+			if(Validation_Status){
+				System.out.println("PFFS plan Provider Contact Information Section : Validation Passed");
+				getLoginScenario().saveBean(OLE_PageConstants.OLE_PRIMARY_CARE_PHYSICIAN_PAGE,
+						pcpPage);
+				Assert.assertTrue(true);
+			}
+			else{
+				System.out.println("PFFS plan Provider Contact Information Section : Validation Failed");
+				Assert.fail();
+			}
+		}
+	    // Write code here that turns the phrase above into concrete actions
+	}
+
+	@Then("^the user validates Look up Provider for MA MAPD and DSNP plans\\.$")
+	public void the_user_validates_Look_up_Provider_for_MA_MAPD_and_DSNP_plans() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	}
+
+	@Then("^the user navigates to Monthly Plan Premium Page$")
+	public void the_user_navigates_to_Monthly_Plan_Premium_Page() throws Throwable {
+		String planType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
+		PrimaryCarePhysicianPage pcpPage = (PrimaryCarePhysicianPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRIMARY_CARE_PHYSICIAN_PAGE);
+	
+		if(!planType.contentEquals("PDP")){
+			PlanPremiumPage  planPremiumPage = (PlanPremiumPage) pcpPage.navigate_to_Plan_Premium_Page();
+			if (planPremiumPage != null) {
+
+				getLoginScenario().saveBean(OLE_PageConstants.OLE_PLAN_PREMIUM_PAGE,
+						planPremiumPage);
+				System.out.println("PCP Page is not Displayed : OLE Monthly Plan Premium Page is Displayed for Plantype : "+planType);
+			}
+			else
+				Assert.fail("OLE Monthly Plan Premium Page is NOT Displayed for Plantype : "+planType);
+		}
+	}
+	
+	@Then("^the user navigates to Optional Benefits Page for following plans with available Riders$")
+	public void the_user_navigates_to_optional_rider_Page(DataTable Flags) {
+		List<DataTableRow> personalAttributesRow = Flags.getGherkinRows();
+		Map<String, String> RiderFlagMap = new HashMap<String, String>();
+		for (int i = 0; i < personalAttributesRow.size(); i++) {
+			RiderFlagMap.put(personalAttributesRow.get(i)
+					.getCells().get(0), personalAttributesRow.get(i)
+					.getCells().get(1));
+		}
+		String RiderFlag = RiderFlagMap.get("Rider Flag");
+		if(RiderFlag.contains("true")){
+			PlanPremiumPage  planPremiumPage = (PlanPremiumPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PLAN_PREMIUM_PAGE);
+			SupplementalBenefitsPage ridersPage = planPremiumPage.navigate_to_Supplemental_Riders_Page();
+			if (ridersPage != null) {
+
+				getLoginScenario().saveBean(OLE_PageConstants.OLE_SUPPLEMENTAL_BENEFITS_PAGE,
+						ridersPage);
+				System.out.println("OLE Supplemental Benefits page is Displayed");
+			}
+			else
+				Assert.fail("OLE Supplemental Benefits page is NOT Displayed");
+
+		}
+	}
+	@Then("^the user navigates to Authorization Page for plan as per following rider options$")
+	public void the_user_navigates_to_authorization(DataTable Flags) {
+		List<DataTableRow> personalAttributesRow = Flags.getGherkinRows();
+		Map<String, String> RiderFlagMap = new HashMap<String, String>();
+		for (int i = 0; i < personalAttributesRow.size(); i++) {
+			RiderFlagMap.put(personalAttributesRow.get(i)
+					.getCells().get(0), personalAttributesRow.get(i)
+					.getCells().get(1));
+		}
+		String RiderFlag = RiderFlagMap.get("Rider Flag");
+		if(RiderFlag.contains("true")){
+			SupplementalBenefitsPage ridersPage = (SupplementalBenefitsPage) getLoginScenario().getBean(OLE_PageConstants.OLE_SUPPLEMENTAL_BENEFITS_PAGE);
+			AuthorizationPage authorizationPage = ridersPage.navigate_to_Authorization_Page();
+			if (authorizationPage != null) {
+
+				getLoginScenario().saveBean(OLE_PageConstants.OLE_AUTHORIZATION_PAGE,
+						authorizationPage);
+				System.out.println("OLE Authorization page is Displayed for Plan with Rider");
+			}
+			else
+				Assert.fail("OLE Authorization page is NOT Displayed for Plan with Rider");
+
+		}
+		else{
+			PlanPremiumPage  planPremiumPage = (PlanPremiumPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PLAN_PREMIUM_PAGE);
+			AuthorizationPage authorizationPage = planPremiumPage.navigate_to_Authorization_Page();
+			if (authorizationPage != null) {
+
+				getLoginScenario().saveBean(OLE_PageConstants.OLE_AUTHORIZATION_PAGE,
+						authorizationPage);
+				System.out.println("OLE Authorization page is Displayed for Plan without Rider");
+			}
+			else
+				Assert.fail("OLE Authorization page is NOT Displayed for Plan without Rider");
+		}
+	}
 }
 
 

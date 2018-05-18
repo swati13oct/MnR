@@ -15,7 +15,7 @@ import atdd.framework.UhcDriver;
  *@author sdwaraka
  *
  */
-public class PlanPremiumPage extends UhcDriver{
+public class ProposedEffectiveDatePage extends UhcDriver{
 	
 	//OLE Common Elements
 	@FindBy(xpath = "//*[@class = 'logo']")
@@ -32,7 +32,7 @@ public class PlanPremiumPage extends UhcDriver{
 
 	//Page Header
 	@FindBy(xpath = "//*[@class='only-prelim']")
-	private WebElement PageHeader;
+	private WebElement ProposedEffectiveDatePageHeader;
 
 	//Right Rail Elements
 
@@ -50,8 +50,8 @@ public class PlanPremiumPage extends UhcDriver{
 	
 	@FindBy(xpath = "//*[@id='ole-premium']")
 	private WebElement PremiumDisplay;
-	
-	public PlanPremiumPage(WebDriver driver) {
+
+	public ProposedEffectiveDatePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
@@ -59,11 +59,12 @@ public class PlanPremiumPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		validate(PageHeader);
-		System.out.println("Page header is Displayed"+PageHeader.getText());	
+		validate(ProposedEffectiveDatePageHeader);
+		System.out.println("Page header is Displayed"+ProposedEffectiveDatePageHeader.getText());
 	}
+	
+	public Object navigate_to_PCP_Page(String planType) {
 
-	public SupplementalBenefitsPage navigate_to_Supplemental_Riders_Page() {
 		validate(NextBtn);
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);
@@ -73,36 +74,25 @@ public class PlanPremiumPage extends UhcDriver{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(driver.getCurrentUrl().contains("optional-benefits")){
-			System.out.println("OLE Supplemental Benefits page is Displayed");
-			return new SupplementalBenefitsPage(driver);
+		if(planType.contentEquals("PDP")){
+			if(driver.getCurrentUrl().contains("monthly-premium")){
+				System.out.println("OLE Monthly Plan Premium Page is Displayed");
+				return new PlanPremiumPage(driver);
+			}
+			else{
+				System.out.println("OLE Monthly Plan Premium Page is Not Displayed");
+				return null;
+			}
 		}
 		else{
-			System.out.println("OLE Supplemental Benefits page is Displayed");
-			return null;
+			if (driver.getCurrentUrl().contains("provider-search")){
+				System.out.println("OLE Primary Care Physician Page is Displayed");
+				return new PrimaryCarePhysicianPage(driver);
+			}
+			else{
+				System.out.println("OLE Primary Care Physician Page is Not Displayed");
+				return null;
+			}
 		}
-	}	
-
-	public AuthorizationPage navigate_to_Authorization_Page() {
-		validate(NextBtn);
-		JavascriptExecutor executor = (JavascriptExecutor)driver;
-		executor.executeScript("arguments[0].click();", NextBtn);
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if(driver.getCurrentUrl().contains("authorization")){
-			System.out.println("OLE Authorization page is Displayed : Navigation from Plan Premium Page Passed");
-			return new AuthorizationPage(driver);
-		}
-		else{
-			System.out.println("OLE Authorization page is Displayed : Navigation from Plan Premium Page Failed");
-			return null;
-		}
-	}	
-
-
-
+	}
 }

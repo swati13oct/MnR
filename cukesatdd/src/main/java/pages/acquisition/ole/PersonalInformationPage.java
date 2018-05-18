@@ -19,15 +19,15 @@ import atdd.framework.UhcDriver;
  *
  */
 public class PersonalInformationPage extends UhcDriver{
-		
-	
+
+
 	//OLE Common Elements
 	@FindBy(xpath ="//*[@class = 'logo']//img")
 	private WebElement SiteLogo;
-	
+
 	@FindBy(id = "ole-form-next-button")
 	private WebElement NextBtn;
-	
+
 	@FindBy(id = "ole-form-back-button")
 	private WebElement BackBtn;
 
@@ -39,7 +39,7 @@ public class PersonalInformationPage extends UhcDriver{
 
 	@FindBy(id = "ole-cancel-confirm")
 	private WebElement CancellationModal;
-	
+
 	@FindBy(id = "sample-linkrouter")
 	private WebElement LeavingOLEmodal;
 
@@ -47,30 +47,30 @@ public class PersonalInformationPage extends UhcDriver{
 
 	@FindBy(xpath = "//*[@id='learn-more-ole']/a")
 	private WebElement RightRail_LearnMoreLink;
-	
+
 	@FindBy(id = "tty-number")
 	private WebElement RightRailTFN;
-	
+
 	@FindBy(xpath = "//*[@id='ole-plan-name']")
 	private WebElement PlanYear_PlanName;
-	
+
 	@FindBy(xpath = "//*[@id='ole-zip']")
 	private WebElement ZipCode_County;
-	
+
 	@FindBy(xpath = "//*[@id='ole-premium']")
 	private WebElement PremiumDisplay;
-	
+
 
 	//Personal Information fields
-	@FindBy(xpath = "//*[contains(text(), 'First Name')]")
+	@FindBy(xpath = "//*[contains(text(), 'First Name')]//..")
 	private WebElement FirstNameDisplay;
-	
-	@FindBy(xpath = "//*[contains(text(), 'Last Name')]")
+
+	@FindBy(xpath = "//*[contains(text(), 'Last Name')]//..")
 	private WebElement LastNameDisplay;
 
 	@FindBy(id = "dob")
 	private WebElement DOBtxtFld;
-	
+
 	@FindBy(id = "genderMale")
 	private WebElement GenderSelectMale;
 
@@ -79,31 +79,31 @@ public class PersonalInformationPage extends UhcDriver{
 
 	@FindBy(id = "address1")
 	private WebElement PermanentAdd_Street;
-	
+
 	@FindBy(id = "city")
 	private WebElement PermanentAdd_City;
-	
-	@FindBy(xpath = "//*[contains(text(), 'State:')]")
+
+	@FindBy(xpath = "//*[contains(text(), 'State:')]//..")
 	private WebElement StateDisplay;
-	
-	@FindBy(xpath = "//*[contains(text(), 'Last Name')]")
+
+	@FindBy(xpath = "//*[contains(text(), 'ZIP:')]//..")
 	private WebElement ZipDisplay;
 
 	@FindBy(id = "sameMailingAddressYes")
 	private WebElement SameMailingAddressYes;
-	
+
 	@FindBy(id = "sameMailingAddressNo")
 	private WebElement SameMailingAddressNo;
-	
+
 	@FindBy(id = "address10")
 	private WebElement MailingAdd_Street;
-	
+
 	@FindBy(id = "city0")
 	private WebElement MailingAdd_City;
-	
+
 	@FindBy(xpath = "//*[@id='constantStates' or @id = 'state0']")
 	private WebElement MailingAdd_State_DropDown;
-	
+
 	@FindBy(xpath = "//*[@id='zipCode0' or @id = 'Zip0']")
 	private WebElement MailingAdd_Zip;
 
@@ -118,8 +118,8 @@ public class PersonalInformationPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		
-		
+
+
 	}
 
 	public PersonalInformationPage enter_member_details(Map<String, String> memberDetailsMap) throws InterruptedException {
@@ -134,7 +134,7 @@ public class PersonalInformationPage extends UhcDriver{
 		String Mailing_State = memberDetailsMap.get("Mailing_State");
 		String Mailing_Zip = memberDetailsMap.get("Mailing_Zip");
 		String EmailAddress = memberDetailsMap.get("Email");
-	
+
 		sendkeys(DOBtxtFld,DOB);
 		if(Gender.contains("Male")){
 			GenderSelectMale.click();
@@ -180,7 +180,7 @@ public class PersonalInformationPage extends UhcDriver{
 		String Expected_County = planDetailsMap.get("County");
 		String Expected_PlanPremium = planDetailsMap.get("Plan Premium");
 		boolean flag = false;
-		
+
 		if(PlanYear_PlanName_Text.contains(Expected_PlanName)){
 			flag = true;
 			System.out.println("Plan Name is Validated : "+flag);
@@ -206,93 +206,118 @@ public class PersonalInformationPage extends UhcDriver{
 	}
 
 
-public boolean ValidateTFNMedicareInfo(String MedicaretFN) {
-	if(validate(RightRailTFN)){
-		String TFN_OLE = RightRailTFN.getText();
-		if(TFN_OLE.contains(MedicaretFN)){
-			System.out.println("TFN is validated in Medicare Insurance info Page"+MedicaretFN);
-			return true;
+	public boolean ValidateTFNMedicareInfo(String MedicaretFN) {
+		if(validate(RightRailTFN)){
+			String TFN_OLE = RightRailTFN.getText();
+			if(TFN_OLE.contains(MedicaretFN)){
+				System.out.println("TFN is validated in Medicare Insurance info Page"+MedicaretFN);
+				return true;
+			}
+			else{
+				System.out.println("TFN does not match");
+				System.out.println("TFN in VPP page : "+MedicaretFN);
+				System.out.println("TFN in Medicare Info Right Rail : "+TFN_OLE);
+				return false;
+			}
 		}
-		else{
-			System.out.println("TFN does not match");
-			System.out.println("TFN in VPP page : "+MedicaretFN);
-			System.out.println("TFN in Medicare Info Right Rail : "+TFN_OLE);
-			return false;
+		System.out.println("TFN not displayed in OLE right rail");
+		return false;
+	}
+
+	public LearnMoreModal OpenLearnMore() {
+		validate(RightRail_LearnMoreLink);
+		RightRail_LearnMoreLink.click();
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		if(validate(LearnMore_Modal)){
+			System.out.println("OLE Learn More Modal is Displayed");
+			return new LearnMoreModal(driver);
+		}
+		return null;
 	}
-	System.out.println("TFN not displayed in OLE right rail");
-	return false;
-}
 
-public LearnMoreModal OpenLearnMore() {
-	validate(RightRail_LearnMoreLink);
-	RightRail_LearnMoreLink.click();
-	try {
-		Thread.sleep(6000);
-	} catch (InterruptedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	if(validate(LearnMore_Modal)){
-		System.out.println("OLE Learn More Modal is Displayed");
-		return new LearnMoreModal(driver);
-	}
-	return null;
-}
+	public CancelOLEModal OpenCancelOLE() {
+		validate(CancelEnrollmentLink);
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", CancelEnrollmentLink);
 
-public CancelOLEModal OpenCancelOLE() {
-	validate(CancelEnrollmentLink);
-	JavascriptExecutor executor = (JavascriptExecutor)driver;
-	executor.executeScript("arguments[0].click();", CancelEnrollmentLink);
-	
-	//((JavascriptExecutor) driver).executeScript("arguments[0].click;", CancelEnrollmentLink);
-	
-	//CancelEnrollmentLink.click();
-	try {
-		Thread.sleep(6000);
-	} catch (InterruptedException e) {
-		e.printStackTrace();
-	}
-	if(validate(CancellationModal)){
-		System.out.println("OLE Cancel Enrollment Modal is Displayed");
-		return new CancelOLEModal(driver);
-	}
-	return null;
-}
+		//((JavascriptExecutor) driver).executeScript("arguments[0].click;", CancelEnrollmentLink);
 
-public LeavingOLEmodal OpenLeaveOLEmodal() {
-	validate(SiteLogo);
-	JavascriptExecutor executor = (JavascriptExecutor)driver;
-	executor.executeScript("arguments[0].click();", SiteLogo);
-	//SiteLogo.click();
-	try {
-		Thread.sleep(6000);
-	} catch (InterruptedException e) {
-		e.printStackTrace();
+		//CancelEnrollmentLink.click();
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if(validate(CancellationModal)){
+			System.out.println("OLE Cancel Enrollment Modal is Displayed");
+			return new CancelOLEModal(driver);
+		}
+		return null;
 	}
-	if(validate(LeavingOLEmodal)){
-		System.out.println("Leaving OLE modal is Displayed");
-		return new LeavingOLEmodal(driver);
-	}
-	return null;
-}
 
-public SpecialElectionPeriodPage navigate_to_SEP_page() {
-	
-	validate(NextBtn);
-	JavascriptExecutor executor = (JavascriptExecutor)driver;
-	executor.executeScript("arguments[0].click();", NextBtn);
-	try {
-		Thread.sleep(2000);
-	} catch (InterruptedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+	public LeavingOLEmodal OpenLeaveOLEmodal() {
+		validate(SiteLogo);
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", SiteLogo);
+		//SiteLogo.click();
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if(validate(LeavingOLEmodal)){
+			System.out.println("Leaving OLE modal is Displayed");
+			return new LeavingOLEmodal(driver);
+		}
+		return null;
 	}
-	if(driver.getCurrentUrl().contains("special-election-period")){
-		System.out.println("OLE SEP Page is Displayed");
-		return new SpecialElectionPeriodPage(driver);
+
+	public SpecialElectionPeriodPage navigate_to_SEP_page() {
+
+		validate(NextBtn);
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", NextBtn);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(driver.getCurrentUrl().contains("special-election-period")){
+			System.out.println("OLE SEP Page is Displayed");
+			return new SpecialElectionPeriodPage(driver);
+		}
+		return null;
 	}
-	return null;
-}
+
+	public boolean validate_member_details(Map<String, String> memberDetailsMap){
+		String FirstName = memberDetailsMap.get("First Name");
+		String LastName = memberDetailsMap.get("Last Name");
+		String ZipCode = memberDetailsMap.get("Zip Code");
+		boolean Validation_Flag = true;
+		
+		String FirstNameDisplayText = FirstNameDisplay.getText();
+		String LastNameDisplayText = LastNameDisplay.getText();
+		String StateDisplayText = StateDisplay.getText();
+		String ZipDisplayText = ZipDisplay.getText();
+		
+		System.out.println("First Name Expected : "+FirstName+"       Displayed on page  - "+FirstNameDisplayText);
+		System.out.println("Last Name Expected : "+LastName+"       Displayed on page  - "+LastNameDisplayText);
+		System.out.println("State Name Displayed on page  - "+StateDisplayText);
+		System.out.println("Zip Code Name Expected : "+ZipCode+"       Displayed on page  - "+ZipDisplayText);
+		
+		if(FirstNameDisplayText.contains(FirstName) && LastNameDisplayText.contains(LastName) && ZipDisplayText.contains(ZipCode)){
+			System.out.println("Member Details Validated on Personal Information Page");
+			Validation_Flag = true;
+		}
+		else
+			Validation_Flag = false;
+		return Validation_Flag;
+	}
 
 }

@@ -3,6 +3,7 @@
  */
 package pages.acquisition.ole;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -93,8 +94,6 @@ public class CoverageInformationPage extends UhcDriver{
 		System.out.println("Page header is Displayed"+CoverageInfoPageHeader.getText());
 	
 	}
-
-
 	public boolean validate_CoverageInfo_Questions_for_planType(String planType) {
 		boolean Validation_Flag = true;
 		System.out.println("PlanType : "+planType);
@@ -120,4 +119,23 @@ public class CoverageInformationPage extends UhcDriver{
 		}
 		return Validation_Flag;
 	}
+	
+	public ProposedEffectiveDatePage navigate_to_Proposed_Effective_Date_Page() {
+
+		validate(NextBtn);
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", NextBtn);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(driver.getCurrentUrl().contains("effective-date")){
+			System.out.println("OLE Proposed Effective Date Page is Displayed");
+			return new ProposedEffectiveDatePage(driver);
+		}
+		return null;
+	}
+
 }

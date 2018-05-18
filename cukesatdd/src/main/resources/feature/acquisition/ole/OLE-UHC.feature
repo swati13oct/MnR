@@ -27,19 +27,19 @@ Feature: To test OLE common tool flow flow UMS site
       | PartA Date      | <partadate>      |
       | PartB Date      | <partbdate>      |
       | Card Type       | <cardtype>       |
-    Then the user validates TFN in Medicare Info OLE Right Rail
-    Then the user validates the Plan details in Medicare Info OLE Right Rail
-    Then the user validates Leave OLE modal for Medicare Information Page
-    Then the user validates Learn more modal for Medicare Information Page
+    #   Then the user validates TFN in Medicare Info OLE Right Rail
+    #   Then the user validates the Plan details in Medicare Info OLE Right Rail
+    #   Then the user validates Leave OLE modal for Medicare Information Page
+    #   Then the user validates Learn more modal for Medicare Information Page
     Then the user validates cancellation modal for Medicare Information Page
     Then the user navigates to Preliminary Questions Page
     Then the user validates requierd fields for Preliminary Questions Page
       | MedicaidNumber | <medicaidnumber> |
     Then the user validates the Plan details in Preliminary Questions Pag OLE Right Rail
-    Then the user validates TFN in Right Rail on Preliminary Questions Page
-    Then the user validates Leave OLE modal for Preliminary Questions Page
-    Then the user validates Learn more modal for Preliminary Questions Page
-    Then the user validates cancellation modal for Preliminary Questions Page
+    #   Then the user validates TFN in Right Rail on Preliminary Questions Page
+    #   Then the user validates Leave OLE modal for Preliminary Questions Page
+    #   Then the user validates Learn more modal for Preliminary Questions Page
+    #   Then the user validates cancellation modal for Preliminary Questions Page
     Then the user navigates to Personal Information Page
     Then the user enters following required information in Personal Information Page
       | DOB                      | <dob>                    |
@@ -54,28 +54,40 @@ Feature: To test OLE common tool flow flow UMS site
       | Email                    | <email>                  |
       | MedicaidNumber           | <medicaidnumber>         |
     Then the user validates the Plan details in Personal Information Page OLE Right Rail
-    Then the user validates TFN in Right Rail on Personal Information Page
-    Then the user validates Leave OLE modal for Personal Information Page
-    Then the user validates Learn more modal for Personal Information Page
-    Then the user validates cancellation modal for Personal Information Page
+    Then the user validates the Member details dynamic display in Personal Information Page
+    #    Then the user validates TFN in Right Rail on Personal Information Page
+    #    Then the user validates Leave OLE modal for Personal Information Page
+    #    Then the user validates Learn more modal for Personal Information Page
+    #    Then the user validates cancellation modal for Personal Information Page
     Then the user navigates to SEP Page
     Then the user validates the Plan details in SEP Page OLE Right Rail
-    Then the user validates TFN in Right Rail on SEP Page
-    Then the user validates Leave OLE modal for SEP Page
-    Then the user validates Learn more modal for SEP Page
-    Then the user validates cancellation modal for SEP Page
-    Then the user validates SEP options and Required Fields for PlanType in SEP Page
+    #    Then the user validates TFN in Right Rail on SEP Page
+    #    Then the user validates Leave OLE modal for SEP Page
+    #    Then the user validates Learn more modal for SEP Page
+    #    Then the user validates cancellation modal for SEP Page
+    #    Then the user validates SEP options and Required Fields for PlanType in SEP Page
     Then the user navigates to Coverage and Health Information Page
     Then the user validates the dispalyed sections for the Plan Type in Coverage and Health Information Page
+    Then the user navigates to Proposed Effective Date Page
+    Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
+    Then the user validates PCP page for MA and MAPD PFFS plans
+    Then the user validates Look up Provider for MA MAPD and DSNP plans.
+    Then the user navigates to Monthly Plan Premium Page
+    Then the user navigates to Optional Benefits Page for following plans with available Riders
+      | Rider Flag | <riderflag> |
+    Then the user navigates to Authorization Page for plan as per following rider options
+      | Rider Flag | <riderflag> |
 
     Examples: 
-      | zipcode | county             | plantype | planName                                             | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         |
-      |   90210 | Los Angeles County | MAPD     | AARP MedicareComplete SecureHorizons Plan 2 (HMO)    | HICN     | John      | Doe      | 123456789a     | false   |  01012010 |  01012010 |      231665465 | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | CALIFORNIA   |      90210 | test@test.com |
-      |   90210 | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Essential (HMO) | HICN     | John      | Doe      | 123456789a     | false   |  01012010 |  01012010 |      231665465 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    |               |             | CALIFORNIA   |      90210 | test@test.com |
-      |   28035 | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete (HMO SNP)             | MBI      | John      | Doe      | 2A22C22YK22    | true    |  01012010 |  01012010 |     0123456789 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | CALIFORNIA   |      90210 | test@test.com |
-      |   90210 | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                      | MBI      | John      | Doe      | 2A22C22YK22    | false   |  01012010 |  01012010 |                | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | CALIFORNIA   |      90210 | test@test.com |
+      | zipcode | county             | plantype | planName                                             | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | riderflag |
+      |   90210 | Los Angeles County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    | HICN     | John      | Doe      | 123456789a     | false   |  01012010 |  01012010 |      231665465 | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | CALIFORNIA   |      90210 | test@test.com | true      |
+      |   90210 | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                      | MBI      | John      | Doe      | 2A22C22YK22    | false   |  01012010 |  01012010 |                | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | CALIFORNIA   |      90210 | test@test.com | false     |
+      |   90210 | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Essential (HMO) | HICN     | John      | Doe      | 123456789a     | false   |  01012010 |  01012010 |      231665465 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    |               |             | CALIFORNIA   |      90210 | test@test.com | false     |
+      |   85923 | Navajo County      | MAPD     | UnitedHealthcare MedicareDirect Rx (PFFS)            | HICN     | John      | Doe      | 123456789a     | false   |  01012010 |  01012010 |      231665465 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    |               |             | CALIFORNIA   |      90210 | test@test.com | false     |
+      |   85923 | Navajo County      | MA       | UnitedHealthcare MedicareDirect Essential (PFFS)     | HICN     | John      | Doe      | 123456789a     | false   |  01012010 |  01012010 |      231665465 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    |               |             | CALIFORNIA   |      90210 | test@test.com | false     |
+      |   28035 | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete (HMO SNP)             | MBI      | John      | Doe      | 2A22C22YK22    | true    |  01012010 |  01012010 |     0123456789 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | CALIFORNIA   |      90210 | test@test.com | false     |
+      |   35045 | Chilton County     | SNP      | UnitedHealthcare Dual Complete (HMO SNP)             | MBI      | John      | Doe      | 2A22C22YK22    | false   |  01012010 |  01012010 |      012345569 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | CALIFORNIA   |      90210 | test@test.com | false     |
 
-  #|   35045 | Chilton County     | SNP      | UnitedHealthcare Dual Complete (HMO SNP)          		| MBI      | John      | Doe      | 2A22C22YK22    | false   |  01012010 |  01012010 |	012345569			| true			|
   @NegativeValidations_MedicareInfoPage
   Scenario Outline: OLE Negative Validations for Required Fields
     Given the user is on the uhcmedicaresolutions site landing page
