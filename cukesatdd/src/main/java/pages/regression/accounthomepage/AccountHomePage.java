@@ -154,6 +154,16 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//h1[@class='h4 margin-none']")
 	private WebElement orderplanHeadertxt;
 
+	
+	//For Header
+	@FindBy(id = "premiumpayment_3")
+	private WebElement premiumPayment;
+	
+	@FindBy(id = "paymentOverviewApp")
+	public static WebElement paymentsOverview;
+
+	
+	
 
 	
 	private PageData myAccountHome;
@@ -880,5 +890,30 @@ public FormsAndResourcesPage navigatetoFormsnResources() throws InterruptedExcep
 			return new OrderMaterialsPage(driver);
 		}
 		return null;
+	}
+
+	/**
+	 * validate the Premium payment Page
+	 */
+	public void validatePremiumPage (){
+		Assert.assertTrue("Premium payment overivew is not displayed", paymentsOverview.isDisplayed());
+	}
+
+	
+
+public void clickPremiumPayment(){
+	if(premiumPayment.isDisplayed()){
+	premiumPayment.click();
+	}
+}
+
+public boolean navigateToPaymentsOverview(){
+	boolean flag = true;
+	
+	if(paymentsOverview.isDisplayed())
+		flag = false;
+	
+	return flag;
+
 	}
 }
