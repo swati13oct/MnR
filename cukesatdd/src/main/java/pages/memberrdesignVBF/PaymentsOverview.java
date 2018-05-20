@@ -12,7 +12,7 @@ import atdd.framework.UhcDriver;
 
 public class PaymentsOverview extends UhcDriver {
 	// updated element locator
-	@FindBy(xpath = "//div[@class='margin-small']//a[@id='onetimepayment' and not(contains(@class,'ng-hide'))]")
+	@FindBy(xpath = "//div[@class='margin-small']//a[contains(@ng-click,'gotoOneTimePayment()') and not(contains(@class,'ng-hide'))]")
 	private WebElement OneTimePaymentButton;
 
 	@FindBy(id = "paymentTable")

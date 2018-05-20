@@ -4,18 +4,14 @@ q2_grp_jun0018/Password@1,GroupRetireeMapd,,
 q1_ship_apr003/Password@1,Ship,,
 q1_apr_sfl010/Password@1,PCP,,
 q1_feb_sfl013_hsid/Password@1,Medica,,
-q2_jun_ulayer013/Password@1,BncnonlisAARPIndividual,,
-q2_jun_uhc0015/Password@1,BncnonlisUHCIndividual,,
-q2_grp_jun0095/Password@1,BncnonlisGroupRetiree,,
-q2_jun_ulayer002/Password@1,MAPD,NICECLAIMS,ULayerInd
-q2_jun_ulayer159/Password@1,MAPD,COSMOSCLAIMS,ULayerInd
-q2_jun_uhc0086/Password@1,MAPD,NICECLAIMS,BlueLayerInd
-q2_jun_uhc0033/Password@1,MAPD,COSMOSCLAIMS,BlueLayerInd
-q2_jun_grp004/Password@1,MAPD,NICECLAIMS,GroupRetiree
-q2_jun_grp036/Password@1,MAPD,COSMOSCLAIMS,GroupRetiree
-q4_dec_uhc003/Password@1,MAPD,UhcIndOrderPlan,
-q2_jun_aarp0016/Password@1,MAPD,AARPIndOrderPlan,
-q1_grp_apr275/Password@1,MAPD,GrpRetireeOrderPlan,
+q2_jun_ulayer002/Password@1,NICECLAIMS,ULayerInd
+q2_jun_ulayer159/Password@1,COSMOSCLAIMS,ULayerInd
+q2_jun_uhc0086/Password@1,NICECLAIMS,BlueLayerInd
+q2_jun_uhc0033/Password@1,COSMOSCLAIMS,BlueLayerInd
+q2_jun_grp004/Password@1,NICECLAIMS,GroupRetiree
+q2_jun_grp036/Password@1,COSMOSCLAIMS,GroupRetiree
+q4_dec_uhc003/Password@1,UhcIndMAPDPayments,
+q2_jun_aarp0016/Password@1,AARPIndMAPDPayments,
 q1_feb_uhc_eft014/Password@1,GroupRetireePayment,,
 q2_jun_blayer009/Password@1,MAPD,UHCIndividualEOB,Medical
 q1_apr_uhc083/Password@1,MAPD,UHCIndividualEOB,Prescription Drug
@@ -23,3 +19,7 @@ q2_jun_aarp0057/Password@1,MAPD,AARPIndividualEOB,Medical
 q2_jun_ulayer156/Password@1,MAPD,AARPIndividualEOB,Prescription Drug
 q1_grp_apr031/Password@1,MAPD,GroupRetireeEOB,Medical
 q4_dec_aarp195/Password@1,MAPD,IndAARPPharmacyFnR
+q2_jun_ulayer013/Password@1,BncnonlisAARPIndividual,,
+q2_jun_uhc0015/Password@1,BncnonlisUHCIndividual,,
+q2_grp_jun0095/Password@1,BncnonlisGroupRetiree,,
+q1_grp_apr275/Password@1,GrpRetireeOrderPlan,

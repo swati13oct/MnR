@@ -15,6 +15,6 @@ Feature: 1.14-VBF-MemRedesign-To test provider search (Rally) functionality
 
     Examples: 
       | memberType  | friendname | favcolor | phonenumber |
-      #   	  | GroupRetireeMapd|name1      | color1   | number1     |
-      #      | UhcMapdInd     |name1      | color1   | number1     |
-      | AARPMapdInd | name1      | color1   | number1     |
+      #  | GroupRetireeMapd|name1      | color1   | number1     |
+        | UhcMapdInd     |name1      | color1   | number1     |
+      # | AARPMapdInd | name1      | color1   | number1     |

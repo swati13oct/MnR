@@ -444,11 +444,11 @@ public class RallyDashboardPage extends UhcDriver {
 	 */
 	public void validateAccountProfile() {
 		Assert.assertTrue("Account/Profile tab is not displayed", accountProfile.isDisplayed());
-		accountProfile.click();
+		jsClickNew(accountProfile);
 		validateNew(NavAccountProfSignOut);
 		validateNew(NavAccountProfSetting);
 		scrollToView(accountProfile);
-		accountProfile.click();
+		jsClickNew(accountProfile);
 	}
 
 	/***
@@ -470,7 +470,7 @@ public class RallyDashboardPage extends UhcDriver {
 	 */
 	public HealthAndWellness validateHealthnWellnessPage() {
 		validateNew(healthWellness);
-		healthWellness.click();
+		jsClickNew(healthWellness);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getTitle().contains("Health")) {
 			return new HealthAndWellness(driver);
@@ -668,5 +668,25 @@ else{
 			return new FormsAndResourcesPage(driver);
 		}
 		return null;
+	}
+	
+	
+	/***
+	 * 
+	 * @return
+	 */
+	public FormsAndResourcesPage clickFormsAndResourcesTab() {
+		
+		validateNew(formsAndResources);
+		formsAndResources.click();
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println(driver.getTitle());
+
+		if (driver.getTitle().equalsIgnoreCase("Documents Overview")) {
+			return new FormsAndResourcesPage(driver);
+		}
+		return null;
+
 	}
 }

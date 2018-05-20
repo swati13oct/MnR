@@ -12,7 +12,7 @@ import cucumber.api.CucumberOptions;
  */
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=2, screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDMemberSanityHSIDRegistrationVBF.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDMemberSanityHSIDRegistrationVBF")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberrdesignVBF.hsidRegistration" }, features = { "src/main/resources/feature/member-redesign-vbf/hsid-registration" }, plugin = {
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberrdesignVBF" }, features = { "src/main/resources/feature/member-redesign-vbf/hsid-registration" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDMemberSanityHSIDRegistrationVBF.json" }, tags = { "@smokeTest_HSIDregistration" },monochrome = true)
 
 public class RunMRATDDMemberSanityHSIDRegistrationVBF {

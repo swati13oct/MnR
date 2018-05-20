@@ -26,7 +26,7 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy (xpath = "//div[@class='medical-claims']//h2[@ng-bind-html='planName']/parent::div//*[@id='document-date']//option[contains(@value,'24 months')]")
 	private WebElement last24months;
 
-	@FindBy(id="document-date")
+	@FindBy(xpath="//select[@name='document-date' and not(contains(@ng-hide,'todate'))]")
 	private WebElement viewClaimsFrom;
 
 	@FindBy (id = "medical")
@@ -38,10 +38,10 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy (id = "ship")
 	private WebElement claimsTableSHIP;
 	
-	@FindBy (xpath = "//div[@class='parsys summaryParsys']/div/div[not (contains(@class,'ng-hide'))][1]//span[text()='Medical EOB']/parent::a[contains(@class,'btn btn--secondary')]")
+	@FindBy (xpath = "//div[@class='summaryParsys parsys']/div/div[not (contains(@class,'ng-hide'))][1]//span[text()='Medical EOB']/parent::a[contains(@class,'btn btn--secondary')]")
 	private WebElement medicalEobText;
 
-	@FindBy (xpath = "//div[@class='parsys summaryParsys']/div/div[not (contains(@class,'ng-hide'))][1]//p[text()='Prescription Drug EOB']/following::a[contains(@class,'btn btn--secondary')][1]")
+	@FindBy (xpath = "//div[@class='summaryParsys parsys']/div/div[not (contains(@class,'ng-hide'))][1]//p[text()='Prescription Drug EOB']/following::a[contains(@class,'btn btn--secondary')][1]")
 	private WebElement PrescriptionEobText;
 	
 	@FindBy (xpath="//span[text()='Ship EOB']/parent::a")
@@ -187,7 +187,7 @@ public class ClaimSummarypage extends UhcDriver{
 	public pages.memberrdesignVBF.ClaimDetailsPage navigateToClaimDetailsPage() throws InterruptedException {
 		CommonUtility.waitForPageLoadNew(driver, claimstablemoreinfolink, 60);
 		scrollToView(claimstablemoreinfolink);
-		claimstablemoreinfolink.click();
+		jsClickNew(claimstablemoreinfolink);
 		int counter =0;
 		do{
 			if(counter<=12)

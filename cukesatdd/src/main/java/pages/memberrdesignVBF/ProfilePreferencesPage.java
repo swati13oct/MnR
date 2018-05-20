@@ -193,7 +193,7 @@ public class ProfilePreferencesPage extends UhcDriver {
         CommonUtility.checkPageIsReadyNew(driver);
         CommonUtility.waitForPageLoadNew(driver, breadCrumbToNavigateBack, 60);
         System.out.println("PageTitle "+driver.getTitle());
-        Assert.assertTrue(driver.getTitle().equalsIgnoreCase("HealthSafe ID"));
+        Assert.assertTrue(driver.getTitle().contains("HealthSafe ID"));
         }
         else{
         	System.out.println("Skkiing the functionality as HSID is not supported");

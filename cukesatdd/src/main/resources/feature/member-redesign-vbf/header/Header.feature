@@ -17,7 +17,7 @@ Feature: 1.06-VBF-MemRedesign-To test Header Navigation functionality
     Then I should be able to see and use the Home tab
     Then I should be able to see and use the Coverage & Benefits tab
     And clicking on the Coverage & Benefits tab should allow me to see links for the Benefits Summary tab, the Forms & Resources tab and Order materials tab on the second level navigation
-    And then click the Forms & Resources tab and I should be directed to the Forms & Resources Page
+    Then then click the Forms & Resources tab and I should be directed to the Forms & Resources Page
     And then click the Order Materials tab and I should be directed to the Order Materials Page
     Then upon clicking the Premium Payments tab I should navigate to the Premium Payments Overview Page
     Then I should be able to see and use the help button

@@ -24,8 +24,8 @@ Feature: 1.05-VBF-MemRedesign-To test EOB functionality
     Examples: 
       | planType | memberType        | dateRange | eobType           | friendname | favcolor | phonenumber |
     #  | MAPD     | UHCIndividualEOB  | 18 Months | Medical           | name1      | color1   | number1     |
-      | MAPD     | UHCIndividualEOB  | 18 Months | Prescription Drug | name1      | color1   | number1     |
+    #  | MAPD     | UHCIndividualEOB  | 18 Months | Prescription Drug | name1      | color1   | number1     |
       | MAPD     | AARPIndividualEOB | 18 Months | Medical           | name1      | color1   | number1     |
-		#	| MAPD      | AARPIndividualEOB    |18 Months		  | Prescription Drug | name1      | color1   | number1     | 
+			| MAPD      | AARPIndividualEOB    |18 Months		  | Prescription Drug | name1      | color1   | number1     | 
 		#	| MAPD      | GroupRetireeEOB      |18 Months		  | Medical           | name1      | color1   | number1     | 
 		#	| MAPD      | GroupRetireeEOB      |18 Months		  | Prescription Drug | name1      | color1   | number1     | 

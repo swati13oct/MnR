@@ -4,7 +4,6 @@ Feature: 1.05-VBF-MemRedesign-To test FnR functionality
  @smokeTest_FNR @rallyDashboard @testharness
   Scenario Outline: 
     Given I am a authenticated member on the member redesign site for Direct Login
-      | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When the above plantype user logs in member redesign for Direct Login
       | friendname     | <friendname>  |
@@ -25,9 +24,7 @@ Feature: 1.05-VBF-MemRedesign-To test FnR functionality
      |  FORMULARY ADDITIONS| <formularyadd> |
      |   FORMULARY DELETIONS| <formularydel> |
    
-    #And the user changes the laguage in the language dropdown
     And for active member Temporary Id Card and Plan Order Material links are displayed
-   # And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
     And validates the view temporary id card link
     Then validate that the anoc section is displayed
     Then validate that the annual directories section is displayed
@@ -39,7 +36,7 @@ Feature: 1.05-VBF-MemRedesign-To test FnR functionality
     Then validate that the renew magazine section is displayed
 
     Examples: 
-      | planType | memberType | friendname | favcolor | phonenumber |benefithighlight | summaryofbenefits | evidenceofcoverage | unitedhealthpassportprogram | comprehensiveformulary| priorauth |  steptherapy  |  formularyadd |  formularydel |
-      | MAPD     | IndAARPPharmacyFnR |name1      | color1   | number1     | Benefit Highlights  |Summary of Benefits |Evidence of Coverage (EOC) |  UnitedHealth Passport Program  |  Comprehensive Formulary | Prior Authorization | Step Therapy  | Formulary Additions | Formulary Deletions |
+	| memberType | friendname | favcolor | phonenumber |benefithighlight | summaryofbenefits | evidenceofcoverage | unitedhealthpassportprogram | comprehensiveformulary| priorauth |  steptherapy  |  formularyadd |  formularydel |
+	| AARPMapdInd |name1      | color1   | number1     | Benefit Highlights  |Summary of Benefits |Evidence of Coverage (EOC) |  UnitedHealth Passport Program  |  Comprehensive Formulary | Prior Authorization | Step Therapy  | Formulary Additions | Formulary Deletions |
       
 #q1_aarp_apr194/Password@1

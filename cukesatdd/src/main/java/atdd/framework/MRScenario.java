@@ -1045,8 +1045,9 @@ public class MRScenario {
                 capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Stg");             
                 String SAUCE_USERNAME = props.get("SAUCE_USERNAME");
 	            String SAUCE_ACCESS_KEY = props.get("SAUCE_ACCESS_KEY");
-	            String URL = "http://" + SAUCE_USERNAME + ":" + SAUCE_ACCESS_KEY + "@162.222.75.33:80/wd/hub";
-              //  String URL = "http://" + SAUCE_USERNAME + ":" + SAUCE_ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
+	           // String URL = "http://" + SAUCE_USERNAME + ":" + SAUCE_ACCESS_KEY + "@162.222.75.33:80/wd/hub";
+                String URL = "http://" + SAUCE_USERNAME + ":" + SAUCE_ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
+               System.out.println("URL:"+ URL);
                 if (SAUCE_USERNAME == null || SAUCE_ACCESS_KEY == null) {
                        Assert.fail(
                                      "Missing value for environment variable(s) SAUCE_USERNAME or SAUCE_ACCESS_KEY.  Check environment configuration and try again");
