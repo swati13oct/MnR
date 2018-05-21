@@ -2,10 +2,9 @@ package pages.regression.claims;
 import java.util.List;
 
 import org.jsoup.select.Evaluator.ContainsText;
-import junit.framework.Assertimport org.openqa.selenium.By;
-/**
- * 
- */
+import junit.framework.Assert;
+import org.openqa.selenium.By;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
