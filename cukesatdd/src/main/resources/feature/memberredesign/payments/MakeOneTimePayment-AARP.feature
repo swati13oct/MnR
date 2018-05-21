@@ -298,7 +298,7 @@ Feature: To test the payment flow on AARP site
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     Then the user navigates to payment history
-    And the user clicks on Make One Time Payment button
+    And the user clicks on One Time Payment button
     And the user makes one time payment in AARP site
       | Amount to be paid          | <Amount>           |
       | Routing number             | <routingNo>        |

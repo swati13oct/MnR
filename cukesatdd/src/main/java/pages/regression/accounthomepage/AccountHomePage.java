@@ -531,6 +531,34 @@ public class AccountHomePage extends UhcDriver {
 			return null;
 		}
 	}
+	
+	public PaymentHistoryPage navigateToOneTimePaymentHistoryPage(){
+
+		
+		if (validate(iPerceptionAutoPopUp)) {
+			iPerceptionAutoPopUp.click();
+		} else {
+			System.out.println("iPerception Pop Up not displayed");
+		}
+
+		// Thread.sleep(16000);
+
+		waitforElement(PremiumPayment);
+		System.out.println("payment link is displayed on the header");
+		PremiumPayment.click();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if (PaymentHeading.getText().contains("Premium Payments Overview")) {
+			System.out.println("Payment Overview page displayed");
+			return new PaymentHistoryPage(driver);
+		} else {
+			System.out.println("payment overview page not displayed");
+			return null;
+		}
+	}
 
 	public pages.regression.payments.PaymentHistoryPage scrollDownAndUp() throws InterruptedException {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;

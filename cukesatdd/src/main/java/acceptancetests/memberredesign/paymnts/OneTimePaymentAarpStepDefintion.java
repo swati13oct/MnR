@@ -168,6 +168,17 @@ public class OneTimePaymentAarpStepDefintion {
 			}
 			
 		}
+	@And("^the user clicks on One Time Payment button$")
+	public void click_on_OneTimePayment_btn(){
+		AccountHomePage accountHomePage = (AccountHomePage)getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+					PaymentHistoryPage paymenthistory = (PaymentHistoryPage) accountHomePage.navigateToOneTimePaymentHistoryPage();
+					OneTimePaymentPage oneTimePayment = paymenthistory.OTPbtn();
+		if(oneTimePayment!=null){
+			getLoginScenario().saveBean(PageConstants.One_Time_Payments_Page, oneTimePayment);
+			System.out.println("user is on one time payment page");	
+		}
+		
+	}
 	
 
 	@And("^the user clicks on Edit Automatic Payment button$")
