@@ -29,8 +29,29 @@ public class MedicareInformationPage extends UhcDriver{
 	@FindBy(id = "ole-form-next-button")
 	private WebElement NextBtn;
 	
+	@FindBy(id = "ole-form-back-button")
+	private WebElement BackBtn;
+
 	@FindBy(xpath = "//*[@id='ole-form-cancel-button' or @id = 'cancel-enrollment']")
 	private WebElement CancelEnrollmentLink;
+	
+	//Right Rail Elements
+
+	@FindBy(xpath = "//*[@id='learn-more-ole']/a")
+	private WebElement RightRail_LearnMoreLink;
+	
+	@FindBy(id = "tty-number")
+	private WebElement RightRailTFN;
+	
+	@FindBy(xpath = "//*[@id='ole-plan-name']")
+	private WebElement PlanYear_PlanName;
+	
+	@FindBy(xpath = "//*[@id='ole-zip']")
+	private WebElement ZipCode_County;
+	
+	@FindBy(xpath = "//*[@id='ole-premium']")
+	private WebElement PremiumDisplay;
+	
 
 	//Page Header
 	@FindBy(xpath = "//*[@class='only-prelim']")
@@ -77,25 +98,6 @@ public class MedicareInformationPage extends UhcDriver{
 
 	@FindBy(xpath = "//*[@class = 'field-error-msg']")
 	private List <WebElement> FieldValidation_ErrorMessage;
-	
-	
-	//Right Rail Elements
-
-	@FindBy(xpath = "//*[@id='learn-more-ole']/a")
-	private WebElement RightRail_LearnMoreLink;
-	
-	@FindBy(id = "tty-number")
-	private WebElement RightRailTFN;
-	
-	@FindBy(xpath = "//*[@id='ole-plan-name']")
-	private WebElement PlanYear_PlanName;
-	
-	@FindBy(xpath = "//*[@id='ole-zip']")
-	private WebElement ZipCode_County;
-	
-	@FindBy(xpath = "//*[@id='ole-premium']")
-	private WebElement PremiumDisplay;
-	
 	
 	public MedicareInformationPage(WebDriver driver) {
 		super(driver);
@@ -199,7 +201,7 @@ public class MedicareInformationPage extends UhcDriver{
 			return null;
 		}
 
-		claimNumberField.sendKeys(MedicareNumber);
+		//claimNumberField.sendKeys(MedicareNumber);
 		if(SSNflag.contains("true")){
 			String SSNnumber = MedicareDetailsMap.get("SSN Number");
 			if(validate(SSNField)){
@@ -243,7 +245,10 @@ public class MedicareInformationPage extends UhcDriver{
 	public PrelimineryQuestionsPage navigate_to_Preliminary_Questions_page() {
 		
 		validate(NextBtn);
-		NextBtn.click();
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", NextBtn);
+
+		//NextBtn.click();
 		try {
 			Thread.sleep(6000);
 		} catch (InterruptedException e) {

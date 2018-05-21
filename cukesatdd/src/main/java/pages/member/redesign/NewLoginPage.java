@@ -15,14 +15,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.data.MRConstants;
-import atdd.framework.MRScenario;
-import atdd.framework.UhcDriver;
 import pages.dashboard.acquisition.RegistrationInformationPage;
 import pages.dashboard.eob.EOBPage;
 import pages.member.bluelayer.DashboardPage;
 import pages.member.ulayer.TerminatedHomePage;
 import pages.member.ulayer.UNPWAssistancePage;
+import acceptancetests.data.MRConstants;
+import atdd.framework.MRScenario;
+import atdd.framework.UhcDriver;
 
 /**
  * @author pjaising
@@ -52,16 +52,6 @@ public class NewLoginPage extends UhcDriver {
 
 	@FindBy(id = "usercheckbox")
 	private WebElement userNameCheckBox;
-	
-	@FindBy(className="modal-body")
-	private WebElement iPerceptionPopUp;
-	
-
-
-	
-
-	
-
 
 	public NewLoginPage(WebDriver driver) {
 		super(driver);

@@ -23,13 +23,13 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.uhcretiree.Rallytool_Page;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.ole.WelcomePage;
-import pages.acquisition.uhcretiree.Rallytool_Page;
 
 /**
  * @author pagarwa5
@@ -166,10 +166,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	//@FindBy(xpath="//*[contains(text(),'People')]")
 
-	@FindBy(xpath=".//*[@class='img' and @src='/images/guidedSearch/gs_icn_pro_healthcarepro.svg']")
+	@FindBy(xpath=".//*[@class='gs-option']//h3[contains(text(),'People')]")
 	private WebElement People;
 	
-	@FindBy(xpath="//div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[1]/div/span[@class='trigger-closed']")
+	@FindBy(xpath="//div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[1]/div/a[@class='trigger-closed']")
 	private WebElement closedTrigger;	
 	
 /*This SNP View Plans identifier is invalid
@@ -186,7 +186,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	//"
 
 	//@FindBy(xpath="//*[contains(text(),'Primary Care')]")
-	@FindBy(xpath=".//*[@class='img' and @src='/images/guidedSearch/gs_icn_pro_primarycarephysicians.svg']")
+	@FindBy(xpath=".//*[@class='gs-option']//h3[contains(text(),'Primary Care')]")
 	private WebElement Primary;
 
 	@FindBy(xpath="//*[contains(text(),'Primary Care Physician')] ")
@@ -196,7 +196,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	//private WebElement Savebtn;
 
 
-	@FindBy(xpath="//div[contains(@class,'first')]//div[@class='hidden-phone']/button[not(contains(@class,'hidden'))]")
+	@FindBy(xpath="//div[contains(@class,'first')]//div[@class='hidden-phone']/button[@class='section action-btn saved-provider-button']")
 	private WebElement Savebtn;
 
 	//@FindBy(xpath=".//*[@id='label_unsaved_selectedLocation0']")
@@ -901,13 +901,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		waitforElement(People);
 
 		System.out.println("Rally tool started");
-		People.click();
-
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", People);
 
 
 		waitforElement(Primary);
-
-
 
 		Primary.click();
 
@@ -977,7 +974,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		waitforElement(GetStarted);
 		GetStarted.click();
 
-		waitforElement( People);
+		waitforElement(People);
 
 		People.click();
 

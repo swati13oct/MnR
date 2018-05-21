@@ -9,8 +9,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import atdd.framework.UhcDriver;
 import pages.member.ulayer.TestHarness;
+import atdd.framework.UhcDriver;
 
 public class MemberSearchPage extends UhcDriver {
 	

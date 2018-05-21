@@ -1,5 +1,6 @@
 package pages.regression.login;
 
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,11 +15,6 @@ import atdd.framework.UhcDriver;
 
 
 public class ConfirmSecurityQuestion extends UhcDriver {
-
-
-    
-	@FindBy(how = How.CLASS_NAME, using = "form__content")
-	private WebElement formContent;
 	
 	@FindBy(how = How.CLASS_NAME, using = "rememberThisDevice")
 	private WebElement rememberThisDeviceSection;
@@ -69,6 +65,10 @@ public class ConfirmSecurityQuestion extends UhcDriver {
 		//formContent.click();
 		WebElement submitbutton = driver.findElement(By.id("continueSubmitButton"));
 		submitbutton.click();
+		Thread.sleep(5000);
+
+
+
 	}
 
 }

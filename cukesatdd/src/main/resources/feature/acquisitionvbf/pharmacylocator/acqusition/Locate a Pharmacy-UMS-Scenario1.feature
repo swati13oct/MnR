@@ -1,5 +1,5 @@
 @pharmacylocatorUHC
-Feature:1.19-To test Locate a Pharmacy in acqusition flow UMS site TEST1
+Feature:1.20-To test Locate a Pharmacy in acqusition flow UMS site TEST1
 @pharmacySearch
 Scenario Outline:To verify available pharmacies in UMS site
 Given the user is on the UMS Medicare Site landing page

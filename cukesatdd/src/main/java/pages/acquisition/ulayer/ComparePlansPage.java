@@ -5,18 +5,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import atdd.framework.UhcDriver;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.ole.WelcomePage;
+import atdd.framework.UhcDriver;
 public class ComparePlansPage extends UhcDriver {
 
 	
 	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div/div/div/div[1]/div/div[1]/a")
 	private WebElement backToAllPlansLink;
 	
-	//Right Rail Element - TFN
-		@FindBy(xpath="//*[@class='tel ng-binding']")
-		private WebElement RightRail_TFN;
 	public ComparePlansPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);

@@ -10,8 +10,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.util.CommonUtility;
 import pages.regression.claims.ClaimsPage;
+import acceptancetests.util.CommonUtility;
 
 /**
  * @author pjaising
@@ -50,7 +50,11 @@ public class TerminatedHomePage{
 		searchClaimsHistory.click();
     	CommonUtility.checkPageIsReady(driver);
 		if (driver.getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Claims")) {
+
+			return new ClaimsPage();
+
 //			return new ClaimsPage(driver);
+
 		}
 		return null;
 	}

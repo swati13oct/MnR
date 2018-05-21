@@ -2,7 +2,7 @@ package pages.regression.claims;
 import java.util.List;
 
 import org.jsoup.select.Evaluator.ContainsText;
-import org.openqa.selenium.By;
+import junit.framework.Assertimport org.openqa.selenium.By;
 /**
  * 
  */
@@ -14,7 +14,6 @@ import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import junit.framework.Assert;
 
 /**
  * Functionality : this page validates the Claim Summary page.

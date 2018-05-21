@@ -10,12 +10,6 @@ import acceptancetests.data.MRConstants;
 import atdd.framework.UhcDriver;
 
 public class HsidLoginPage extends UhcDriver {
-	////button[contains(.,'Register now')]
-	@FindBy(xpath=".//*[@id='hsid-login']/div[2]/p[3]/a")
-	private WebElement registerNow;
-	
-	@FindBy(id="register-Register")
-	private WebElement lawwregisterNow;
 	
 	 @FindBy(xpath ="//div[@id='hsid-commonError']/p/span[2]")
 	    private WebElement EmailConfirmedtext;

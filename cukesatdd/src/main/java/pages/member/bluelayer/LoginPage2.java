@@ -11,11 +11,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import pages.regression.accounthomepage.AccountHomePage;
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.regression.accounthomepage.AccountHomePage;
 
 /**
  * @author pjaising
@@ -26,9 +26,6 @@ public class LoginPage2 extends UhcDriver {
 	private static String PAGE_URL_TEAM_MEDICARE_TESTHARNESS = MRConstants.TEAM_MEDICARE_TESTHARNESS;
 	
 	private static String STAGE_DASHBOARD_URL = MRConstants.STAGE_DASHBOARD_NEW_DOMAIN_URL;
-
-	@FindBy(id = "fd_memberSignInButton")
-	private WebElement loginIn;
 
 	@FindBy(id = "username")
 	private WebElement userNameField;
@@ -48,10 +45,6 @@ public class LoginPage2 extends UhcDriver {
 
 	@FindBy(id = "accessURAccountBTN")
 	private WebElement Signin;
-	
-	@FindBy(xpath=".//*[@id='IPEinvL']/map/area[1]")
-    private WebElement iPerceptionPopUp;
-	
 	
 	@FindBy(id = "hsid-username")
 	private WebElement hsiduserNameField;
