@@ -10,6 +10,10 @@ import java.util.Map;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.claims.ClaimDetailsPage;
+import pages.regression.claims.ClaimSummarypage;
+import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
