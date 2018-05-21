@@ -53,7 +53,7 @@ public class WelcomePage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(), 'Premium:')]/..")
 	private WebElement PremiumDisplay;
 	
-	@FindBy(id = "learn-more")
+	@FindBy(xpath = "//*[@id = 'learn-more' or @id = 'learnmorebtn']")
 	private WebElement LearnMoreButton;
 	
 /*	@FindBy(xpath = "//*[@id='enrollment-disclaimer-accept-yes']")

@@ -63,6 +63,8 @@ public class LoginCommonConstants {
 	public static final String PLANTYPE = "planType";
 
 	public static final String Language = "language";
+
+	public static final String MEMBERTYPE = "memberType";
 	
 	public static String PLAN_NAME;
 	

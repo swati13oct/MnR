@@ -18,11 +18,15 @@ import pages.regression.explanationofbenefits.EOBPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
+import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+//import gherkin.formatter.model.DataTableRow;
+import pages.regression.accounthomepage.AccountHomePage;
+//import pages.regression.explanationofbenefits.EOBPage;
 
 public class EobStepDefinition {
 	@Autowired
@@ -329,6 +333,23 @@ public class EobStepDefinition {
 	
 		eobPage.clickOnEob();
 	}
+
+    @Then("^the user navigates to EOB page_hsid$")
+    public void user_views_EOBpagehsid() throws InterruptedException {                  
+                    AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+                    //AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
+                    pages.regression.explanationofbenefits.EOBPage eobPage = accountHomePage.navigateDirectToEOBPag();
+                                                                    
+                    //PaymentHistoryPage paymenthistory = PaymentHis
+                    
+                    
+                    
+if (eobPage!=null){
+                      getLoginScenario().saveBean(PageConstants.EOB_Page, eobPage);
+                                    System.out.println("user is on the EOB page"); 
+}        
+
+    }
 
 
 

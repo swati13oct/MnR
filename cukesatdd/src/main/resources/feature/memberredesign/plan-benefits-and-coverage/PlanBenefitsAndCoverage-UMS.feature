@@ -1,5 +1,5 @@
 @codeMonkeys
-Feature:C1.1 To test plan benefits and Coverage on UMS site
+Feature: C1.1 To test plan benefits and Coverage on UMS site
 @CMneedHelp
     Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
     Given registered member with following details logins in the member portal 
@@ -158,7 +158,7 @@ Feature:C1.1 To test plan benefits and Coverage on UMS site
       
     @CMPlanOverviewGroup
     Scenario Outline: Verify that drug cost table  is in place on Benefits and Coverage page for LIS Members
-    Scenario Outline: Verify PDF section is in place on Benefits and     Coverage page
+    #Scenario Outline: Verify PDF section is in place on Benefits and     Coverage page
     Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>  |
       | Member Type    | <memberType>|
@@ -414,59 +414,88 @@ Given login with following details logins in the member portal and validate elem
       #| MA      |  Group       |  HMO          | 
 
 
-@thePredators
-@juneRelease2018 @hartfordprescriptionDrugBenefit
- Scenario Outline: Verify city of Hartford Prescription Drug Benefits 
-Given Registered member with following details
-| Plan Type   | <planType>    |
-| Member Type  | <memberType> |
-When I Enter the security questions
-      | friendname | <friendname> | 
-     | favouritecolor | <favcolor> |
-     | PhoneNumber | <phonenumber> |
- Then The user navigates to Benefits and Coverage page
- And the user validates City of Hartford prescription Drug Benefits table    
- 	Examples:
-	| planType |memberType | friendname | favcolor | phonenumber |
-    | MAPD   |Hartford   | name1      | color1   | number1     |
-    | PDP    |Hartford   | name1      | color1   | number1     |      
-    
+ @thePredators @juneRelease2018 @hartfordprescriptionDrugBenefit
+  Scenario Outline: Verify city of Hartford Prescription Drug Benefits
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type | <planType> |
+     | Member Type | <memberType>    |
+    Then The user navigates to Benefits and Coverage page
+    And the user validates City of Hartford prescription Drug Benefits table
+    Examples: 
+      | planType | memberType |
+      | MAPD     | Hartford   |
+      | PDP      | Hartford   |
 
-   @thePredators
-@juneRelease2018 @TownOfGreenwichprescriptionDrugBenefit
- Scenario Outline: Verify city of Hartford Prescription Drug Benefits 
-Given Registered member with following details
-| Plan Type   | <planType>    |
-| Member Type  | <memberType> |
-When I Enter the security questions
-      | friendname | <friendname> | 
-     | favouritecolor | <favcolor> |
-     | PhoneNumber | <phonenumber> |
-Then The user navigates to Benefits and Coverage page
-And the user validates Town Of Greenwich table
- 
-    
- 	Examples:
-	| planType |memberType | friendname | favcolor | phonenumber |
-    | PDP   |Greenwich   | name1      | color1   | number1     |
+  @thePredators @juneRelease2018 @TownOfGreenwichprescriptionDrugBenefit
+  Scenario Outline: Verify town of greenwich Prescription Drug Benefits
+  Given login with following details logins in the member portal and validate elements
+      | Plan Type | <planType> |
+     | Member Type | <memberType>    |
+    Then The user navigates to Benefits and Coverage page
+    And the user validates Town Of Greenwich table
+
+    Examples: 
+      | planType | memberType |
+      | PDP      | Greenwich  | 
 
 
 
- @BenefitsforTexasERSMember @regression
+
+  @BenefitsforTexasERSMember @regression
   Scenario Outline: Verify the Benefits for TexasERSMember
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
     Then The user navigates to Benefits and Coverage page
     And the user validates the Drug costs Section
     Then the user verifies the Retail Cost sharing table
-   
+    Then the user verifies the Mail Order Cost sharing table
 
     Examples: 
       | planType |
       | Texas    |
       
-   @OfficeVisitswithoutprovidertiering   @regression 
-    Scenario Outline: Verify the Office visits widget for a member withoutprovidertiering
+     @OfficeVisitswithoutprovidertiering @regression
+  Scenario Outline: Verify the Office visits widget for a member withoutprovidertiering
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type | <planType> |
+    Then The user navigates to Benefits and Coverage page
+    And the user validates the Office Visits section
+
+    Examples: 
+      | planType |
+      | MAPD     |
+
+@WaystoSaveforPdp @regression
+  Scenario Outline: Verify the ways to save  widget for a PDP member
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type | <planType> |
+      | Member Type | <memberType> |
+    Then The user navigates to Benefits and Coverage page
+    And the user validates the ways to save section
+
+    Examples: 
+      | planType |memberType |
+     # | PDP      |Wallgreens |
+      | PDP      |MailOrderPharamacy|
+      | MAPD     |Group |
+   
+   
+  
+	@outpatientcenterwithprovidertier   @regressionoutpatient 
+    Scenario Outline: Verify the outpatient widget for a member withprovidertiering
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType> |
+      #| Member Type   | <memberType> |
+    Then The user navigates to Benefits and Coverage page
+    And the user validates the Outpatient Surgery Center Visits section
+
+
+    Examples: 
+      | planType | 
+      | MAPD     |     
+
+	@primarycareproviderspecialist   @regressionprimarycareprovider 
+    Scenario Outline: Verify the Office visits widget for a member withprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
     Then The user navigates to Benefits and Coverage page
@@ -476,6 +505,47 @@ And the user validates Town Of Greenwich table
     Examples: 
       | planType |
       | MAPD    |
-
+    
     
 
+@outpatientcenterwithoutprovidertier   @regressionoutpatientwithoutprovider 
+    Scenario Outline: Verify the outpatient widget for a member withprovidertiering
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType> |
+      #| Member Type   | <memberType> |
+    Then The user navigates to Benefits and Coverage page
+    And the user validates the Outpatient Surgery Center Visits section
+
+
+
+    Examples: 
+      | planType | 
+      | MAPD     |  
+   
+     @BenefitsForAlPeehipMember @regression
+  Scenario Outline: Verify the benefits for an AL peehip member
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type | <planType> |
+     | Member Type | <memberType>    |
+    Then The user navigates to Benefits and Coverage page
+    And the user validates the Benefits for Peehip member
+
+    Examples: 
+      | planType |memberType |
+      | Peehip   |Group      |
+      
+      
+      
+  @BenefitsForMAMedsupSSUPMember @regression
+  Scenario Outline: Verify the Benefits for a  MA Member
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type | <planType> |
+     | Member Type | <memberType>    |
+    Then The user navigates to Benefits and Coverage page
+    And the user validates the Benefits for MA member
+
+    Examples: 
+      | planType |memberType |
+      | MA       |Individual  |
+      | SSUP     |Individual  |
+      | MedSupp  |Ship        |
