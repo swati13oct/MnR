@@ -17,14 +17,13 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-<<<<<<< HEAD
+
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.dashboard.memberAuth.MemberAuthLoginPage;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.memberauth.MemberAuthPage;
-=======
->>>>>>> develop
+
 /**
  * 
  * @author pdas101

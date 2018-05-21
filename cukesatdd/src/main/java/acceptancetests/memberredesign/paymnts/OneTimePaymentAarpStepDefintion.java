@@ -189,7 +189,7 @@ public class OneTimePaymentAarpStepDefintion {
 		
 		if(oneTimePayment!=null){
 			getLoginScenario().saveBean(PageConstants.One_Time_Payments_Page, oneTimePayment);
-			System.out.println("user is on one time payment page");	
+			System.out.println("user is not able to click autopay");	
 		}
 		
 	}
