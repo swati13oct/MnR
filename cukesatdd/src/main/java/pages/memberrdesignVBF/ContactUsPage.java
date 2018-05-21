@@ -71,9 +71,6 @@ public class ContactUsPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))]//button[@id='question-submit']")
 	private WebElement memberauth_questionSubmit;
 
-	@FindBy(xpath = "//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-email-confirm']")
-	private WebElement confirmEmailAddress;
-
 	@FindBy(css = ".alert-message")
 	private WebElement memberAuthMessage;
 

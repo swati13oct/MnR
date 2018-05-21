@@ -42,12 +42,6 @@ public class OneTimePaymentPage extends UhcDriver{
 	@FindBy(id = "last-name")
 	private WebElement lastNameField;
 	
-	@FindBy(xpath = "/html/body/div[6]/div/div/table/tbody/tr[5]/td/div[2]/div/div/div[2]/div[7]/div/div/div/div/form/div/div/div[2]/div/table[1]/tbody/tr[1]/td[2]")			
-	private WebElement amountDisplayed;
-	
-	@FindBy(xpath ="//*[@id='atdd_electronicsignature_label']/div/fieldset/label")
-	private WebElement electrosign;
-	
 	@FindBy(id="review-continue")
 	private WebElement continueButton;
 	

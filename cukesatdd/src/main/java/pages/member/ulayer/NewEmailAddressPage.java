@@ -5,8 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import atdd.framework.UhcDriver;
 import pages.regression.accounthomepage.AccountHomePage;
+import atdd.framework.UhcDriver;
 
 public class NewEmailAddressPage extends UhcDriver{	
 

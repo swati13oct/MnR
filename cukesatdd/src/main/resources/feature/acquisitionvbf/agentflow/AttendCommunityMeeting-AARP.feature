@@ -1,7 +1,7 @@
 @BAT_CommunityMeetings
 @attendCommunity
 @fixedTestCaseTest
-Feature:1.13-VBF-Acq-To test attend community meeting flow in AARP site
+Feature:1.14-VBF-Acq-To test attend community meeting flow in AARP site
 @communityMeeting_AARP
 Scenario Outline: Verify attend community meeting flow in AARP site
 Given the user is on the AARP acquisition site home page

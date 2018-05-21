@@ -25,13 +25,6 @@ public class BenefitsCoveragePage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(text(), 'Plan Benefits Summary')]")
 	private WebElement BnCPageHeader;
 
-	@FindBy(xpath = "//*[contains(text(), 'Plan Benefits Summary')]")
-	private List<WebElement> UpdatedLanguageElements;
-	
-	@FindBy(xpath = "(//*[contains(text(),'SHOW ON MAP')])")
-	private List<WebElement> showonmap;
-
-	
 	public BenefitsCoveragePage(WebDriver driver) throws InterruptedException {
 		super(driver);
 		PageFactory.initElements(driver, this);

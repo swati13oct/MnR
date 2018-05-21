@@ -10,11 +10,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.data.MRConstants;
-import atdd.framework.MRScenario;
-import atdd.framework.UhcDriver;
 import pages.redesign.HsidRegistrationPersonalInformationPage;
 import pages.regression.accounthomepage.AccountHomePage;
+import acceptancetests.data.MRConstants;
+import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
+import atdd.framework.UhcDriver;
 
 /**
  * @author pjaising
@@ -24,11 +25,6 @@ public class HSIDLoginPage extends UhcDriver {
 
 	// Page URL
 	private static String PAGE_URL = MRConstants.HSIDURL;
-
-	
-
-	@FindBy(id = "fd_memberSignInButton")
-	private WebElement loginIn;
 
 	@FindBy(id = "hsid-username")
 	private WebElement userNameField;
@@ -44,15 +40,18 @@ public class HSIDLoginPage extends UhcDriver {
 	
 	@FindBy(id = "hsid-FPwd")
 	private WebElement passwordlink;
-	
-    @FindBy(xpath=".//*[@id='IPEinvL']/map/area[1]")
-    private WebElement iPerceptionPopUp;
     
     @FindBy(xpath ="//div[@id='hsid-commonError']/p/span[2]")
     private WebElement EmailConfirmedtext;
     
-    @FindBy(xpath=".//*[@id='hsid-login']/div[2]/p[3]/a")
-	private WebElement registerNow;
+    @FindBy(id = "new-email")
+	private WebElement NewEmailTxtBox;
+
+	@FindBy(id = "new-email-confirm")
+	private WebElement ConfirmNewEmailTxtBox;
+	
+	@FindBy(xpath = "//*[@id='email-modal-form']//button")
+	private WebElement NewEmailContinueBtn;
     
     private static String REGIRATION_URL = "https://st1.healthsafe-id.com/protected/register?HTTP_TARGETPORTAL=MNR&HTTP_ERRORURL=https://stage-medicare.uhc.com/&HTTP_TARGETURL=https%3A%2F%2Fstage-medicare.uhc.com%2Fmember%2Fpost-sign-in.html%3Ftarget%3Drallydashboard%26portalIndicator%3DUHC&HTTP_ELIGIBILITY=P&HTTP_GRADIENTCOLOR1=%23003DA1&HTTP_GRADIENTCOLOR2=%2300A8F7&HSID_DOMAIN_URL=https://st1.healthsafe-id.com&USE_TEST_RECAPTCHA=true";
 	
@@ -195,7 +194,19 @@ MRScenario loginScenario;
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	   
+		try{
+			if(validate(NewEmailTxtBox)){
+			NewEmailTxtBox.sendKeys("uhcmnrportals@gmail.com");
+			ConfirmNewEmailTxtBox.sendKeys("uhcmnrportals@gmail.com");
+			System.out.println("@@@@@@@@@@@@ Enter New Email Page Displayed for ULayer Member@@@@@@@@@@@@");
+			NewEmailContinueBtn.click();
+			Thread.sleep(3000);
+			CommonUtility.checkPageIsReady(driver);
+			}
+		}
+		catch (Exception e) {
+			System.out.println("New Email Page NOT Present");
+		}
 		if(currentUrl().contains("testharness.html") || currentUrl().contains("/dashboard"))
         {
 			

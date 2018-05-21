@@ -1,6 +1,6 @@
 @fixedTestCaseTest
 @pharmacylocatorulayer
-Feature:1.17-VBF-Acq-To test Locate a Pharmacy in acqusition flow AARP site
+Feature:1.18-VBF-Acq-To test Locate a Pharmacy in acqusition flow AARP site
 @pharmacylocatorulayerSmoke
 Scenario Outline:To verify available pharmacies in AARP site
 Given the user is on the AARP Medicare Site landing page

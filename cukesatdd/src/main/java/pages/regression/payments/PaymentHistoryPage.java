@@ -14,11 +14,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import pages.member.ulayer.SetupAutoPaymentPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.member.ulayer.SetupAutoPaymentPage;
 
 /**
  * @author pperugu
@@ -82,15 +82,9 @@ public class PaymentHistoryPage extends UhcDriver{
 		
 	@FindBy(id ="disclosure_link")
 	private WebElement logOut;
-	
-	@FindBy(className="paymentsoverview")
-	private WebElement paymenthistorypage;
-	
+
 	@FindBy(className="modal-body")
 	private WebElement iPerceptionPopUp;
-	
-	@FindBy(xpath = "//a[contains(text(),'Claims & Accounts')]")
-	private WebElement claimslink;
 	
 	@FindBy(xpath="//*[@id='IPEinvL']/map/area[3]")
 	private WebElement iPerceptionAutoPopUp;

@@ -10,10 +10,10 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import pages.member.bluelayer.TerminatedHomePage;
 import acceptancetests.data.MRConstants;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.member.bluelayer.TerminatedHomePage;
 
 public class LoginPage extends UhcDriver {
 
