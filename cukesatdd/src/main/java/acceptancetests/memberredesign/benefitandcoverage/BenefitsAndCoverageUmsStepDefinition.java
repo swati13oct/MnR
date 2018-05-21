@@ -1130,37 +1130,41 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	}
 	
 	
-	
 	@And("the user validates the Drug costs Section")
 	public void user_validate_drugCostSectionTexas() {
 				
-		getLoginScenario()
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.validatedrugCostSectionTexas();
 						
 	}
 	@And("the user verifies the Retail Cost sharing table")
 	public void user_validate_RetailCostSharing_Drugtable() {
 				
-		getLoginScenario()
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.validateRetailCostSharingdrugtable();
 						
 	}
 	@And("the user verifies the Mail Order Cost sharing table")
 	public void user_validate_MailOrderCostSharing_Drugtable() {
 				
-		getLoginScenario()
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.validateMailOrderCostSharing_Drugtable();
 						
 	}
 	
 	@And("the user validates the Office Visits section")
 	public void user_validate_OfficeVisitssection() {
 				
-		getLoginScenario()
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.validateOfficeVisitssection();
+		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+		
 						
 	}
-	
 	@And("the user validates the Outpatient Surgery Center Visits section")
 	public void user_validate_outpatientSurgeryVisitssection() {
 				
@@ -1169,6 +1173,36 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		planBenefitsCoverage.validateoutpatientsurgerycenterVisitssection();
 						
 	}
+	@And("the user validates the ways to save section")
+	public void userValidateWaysToSaveSection() {
+				
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		String memberType = (String) getLoginScenario().getBean(LoginCommonConstants.MEMBERTYPE);
+		planBenefitsCoverage.validateWaysToSaveSection(memberType);
+						
+	}
+	
+	@And("the user validates the Benefits for Peehip member")
+	public void userValidatesPeehipsection() {
+				
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.ValidatePeehipsection();
+						
+	}
+
+	@And("the user validates the Benefits for MA member")
+	public void userValidatesMAsection() {
+				
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.ValidateMAsection();
+						
+	}
+	
+	
+	
 
 	
 	
