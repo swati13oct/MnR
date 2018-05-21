@@ -152,7 +152,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private WebElement stayOnthisPopup;
 	
 	
-	@FindBy(xpath=".//*[@id='site-wrapper']//div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[1]/div/a[@class='trigger-closed']")
+	@FindBy(xpath="//div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[1]/div/*[@class='trigger-closed']")
 	private WebElement viewMAPlans;
 	
 	@FindBy(xpath="//button[contains(text(),'Get Started')]")
@@ -285,7 +285,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		} else if (planType.equalsIgnoreCase("MA")
 				|| planType.equalsIgnoreCase("MAPD")) {
 			if(validate(viewMAPlans)){
-				viewMAPlans.click();
+				((JavascriptExecutor)driver).executeScript("arguments[0].click();", viewMAPlans);
 			}
 			
 		} else if (planType.equalsIgnoreCase("MS")) {
