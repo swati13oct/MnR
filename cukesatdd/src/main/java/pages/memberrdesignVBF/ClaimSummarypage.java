@@ -1,7 +1,7 @@
 package pages.memberrdesignVBF;
 
 import java.util.List;
-
+import java.util.regex.Pattern;
 
 import org.openqa.selenium.By;
 /**
@@ -13,6 +13,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import acceptancetests.data.PageConstants;
+import acceptancetests.memberrdesignVBF.common.CommonStepDefinition;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import junit.framework.Assert;
@@ -61,6 +63,17 @@ public class ClaimSummarypage extends UhcDriver{
 	
 	@FindBy(className = "loading-block")
 	public List<WebElement> loadingImages;
+	
+
+	@FindBy(xpath = "//table[@id='medical']/tbody/tr[2]/td[not (contains(@class,'hidden-lg'))]")
+	private List<WebElement> medicalTableRow;
+	
+	@FindBy(xpath = "//table[@id='medical']/tbody/tr[2]/td[not (contains(@class,'hidden-lg'))][count(//table[@id='medical']/tbody/tr/th/p[contains(text(),'Provider Name')]/parent::th/preceding-sibling::th)+1]")
+	private WebElement providerNameValue;
+	
+	@FindBy(xpath = "//table[@id='prescriptionDrug']/tbody/tr[2]/td[not (contains(@class,'ng-hide'))][not (contains(@class,'hidden-lg'))]")
+	private List<WebElement> drugTableRow;
+	
 	
 	public ClaimSummarypage(WebDriver driver) {
 		super(driver);
@@ -150,7 +163,27 @@ public class ClaimSummarypage extends UhcDriver{
 		scrollToView(ClaimsSummaryPage);
 		if(claimsTableMedical.isDisplayed() || claimsTablePrescriptionDrug.isDisplayed() || claimsTableSHIP.isDisplayed()){
 			System.out.println("!!!!!!!!! Able to find the claims table !!!!!!!!!");
-			
+			int counter = 0;
+			if(claimsTableMedical.isDisplayed()){
+				
+				int columnSize = medicalTableRow.size();
+				for(int columnNum = 1; columnNum< columnSize; columnNum++  ){
+					String columnActualText = medicalTableRow.get(columnNum).getText();
+				    if(!columnActualText.isEmpty())
+				    	counter++;
+				}
+					Assert.assertTrue("Claims table gets displayed", counter>0);
+					validateNew(providerNameValue);
+			}
+			else if(claimsTablePrescriptionDrug.isDisplayed()){
+				int columnSize = drugTableRow.size();
+				for(int columnNum = 1; columnNum< columnSize; columnNum++  ){
+					String columnActualText = drugTableRow.get(columnNum).getText();
+				    if(!columnActualText.isEmpty())
+				    	counter++;
+				}
+					Assert.assertTrue("Claims table gets displayed", counter>0);
+			}
 		}	
 		else
 		{
@@ -185,7 +218,6 @@ public class ClaimSummarypage extends UhcDriver{
 	 * @throws InterruptedException
 	 */
 	public pages.memberrdesignVBF.ClaimDetailsPage navigateToClaimDetailsPage() throws InterruptedException {
-		CommonUtility.waitForPageLoadNew(driver, claimstablemoreinfolink, 60);
 		scrollToView(claimstablemoreinfolink);
 		jsClickNew(claimstablemoreinfolink);
 		int counter =0;

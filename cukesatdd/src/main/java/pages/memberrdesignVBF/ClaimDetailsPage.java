@@ -1,5 +1,8 @@
 package pages.memberrdesignVBF;
 
+import java.util.List;
+import java.util.regex.Pattern;
+
 /**
  * 
  */
@@ -23,18 +26,47 @@ public class ClaimDetailsPage extends UhcDriver {
 	@FindBy(css = ".claimsTotalTable")
 	public WebElement claimstotalTable;
 
+	@FindBy(id = "providerName")
+	public WebElement providerName;
+
+	@FindBy(id = "claimDynamicNum")
+	public WebElement claimNumber;
+	
+	
+	@FindBy(xpath = "//div[@class='claimDetTableMainSection']//div[@class='card-body']//div/p[contains(text(),'$')]")
+	public List<WebElement> claimTableValues;
+	
 	public ClaimDetailsPage(WebDriver driver) {
 		super(driver);
 
 		PageFactory.initElements(driver, this);
+		CommonUtility.checkPageIsReadyNew(driver);
 		RallyDashboardPage.checkModelPopup(driver);
+		openAndValidate();
 	}
 
 	@Override
 	public void openAndValidate() {
-		validateNew(claimDetailPageHeader);
+		//validateNew(claimDetailPageHeader);
+		validateNew(providerName);
 	}
 
+	/***
+	 * 
+	 */
+	@SuppressWarnings("deprecation")
+	public void validateClaimsDetailsSection() {
+		validateNew(claimNumber);
+		String input = claimNumber.getText();
+	     Pattern pattern = Pattern.compile("^\\d+$");
+	    if (pattern.matcher(input).matches()) {
+	     Assert.assertTrue("claim number exists",true);
+	    }
+	    else{
+	     throw new IllegalArgumentException("Invalid String");
+	    }
+
+	}
 	/***
 	 * 
 	 */
@@ -42,7 +74,17 @@ public class ClaimDetailsPage extends UhcDriver {
 	public void validateClaimsTableInDetailsPage() {
 		CommonUtility.waitForPageLoadNew(driver, claimDetTableMainSection, 40);
 		Assert.assertTrue(claimDetTableMainSection.isDisplayed());
-
+		int columSize = claimTableValues.size();
+		for(int columnNum = 1; columnNum < columSize; columnNum++ ){
+		String input = claimTableValues.get(columnNum).getText();
+	     Pattern pattern = Pattern.compile("^\\$\\d+\\.\\d{2}$");
+	    if (pattern.matcher(input).matches()) {
+	     Assert.assertTrue("value exists in column - "+columnNum ,true);
+	    }
+	    else{
+	     throw new IllegalArgumentException("Invalid String");
+	    }
+		}
 	}
 
 	/***
