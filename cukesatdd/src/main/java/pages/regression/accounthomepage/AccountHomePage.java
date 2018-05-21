@@ -26,6 +26,7 @@ import pages.regression.claims.ClaimDetailsPage;
 import pages.regression.claims.ClaimSummarypage;
 //import pages.regression.claims.ClaimSummarypage;
 import pages.regression.contactus.ContactUsPage;
+import pages.regression.explanationofbenefits.EOBPage;
 import pages.regression.formsandresources.FormsAndResourcesPage;
 import pages.regression.ordermaterials.OrderMaterialsPage;
 import pages.regression.pharmacylocator.PharmacySearchPage;
@@ -49,6 +50,41 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(linkText = "medical providers")
 	private WebElement medicalProviders;
+
+	/*@FindBy(xpath = "//li[@id='fd_myMenu']/a")
+*/
+	@FindBy(xpath = "//li[@id='fd_myMenu']/a")
+	private WebElement myMenuNavigator;
+
+	@FindBy(linkText = "Prescription drug cost and benefits summary")
+	private WebElement prescriptionDrugCostBenefitSummaryLink;
+
+	@FindBy(linkText = "Search drug claims")
+	private WebElement searchDrugClaims;
+
+	@FindBy(linkText = "Search claim history")
+	private WebElement searchClaimsHistory;
+
+	@FindBy(linkText = "Search medical claims")
+	private WebElement searchMedicalClaims;
+
+	@FindBy(xpath = "(.//*[@class='link-row ng-scope']//a[@class='link-text ng-scope ng-binding'])[1]")
+	private WebElement medicalEobLink;
+
+	@FindBy(linkText = "Prescription Drug Explanation of Benefits (EOB)")
+	private WebElement prescriptionDrugEobLink;
+
+	@FindBy(xpath = "//div[@id='medicareTitle']/h1")
+	private WebElement pharmacyLocatorHeading;
+
+	@FindBy(xpath = "//*[@id='medicareTitle']/p/a[1]")
+	private WebElement espanolLink;
+
+	@FindBy(xpath = "//*[@id='medicareTitle']/p/a[2]") // Story 261070
+	private WebElement chineseLink;
+
+	@FindBy(xpath = "////*[@id='subPageLeft']/div[2]/div[2]/h3[2]/a")
+	private WebElement createPdfLink;
 
 	@FindBy(xpath = "//span[contains(.,'Print temporary ID card')]")
 	private WebElement viewIDCard;
@@ -883,4 +919,21 @@ public pages.regression.formsandresources.FormsAndResourcesPage navigatetoFormsn
 		}
 		return null;
 	}
+    public EOBPage navigateDirectToEOBPag(){
+        /*WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.elementToBeClickable(eobLink));*/
+        try{
+                        if (iPerceptionPopUp.isDisplayed()) {
+                                        iPerceptionPopUp.click();
+                        }
+        }catch(Exception e)        {
+                        System.out.println("iPerception Pop Up not displayed");
+        }
+
+        validate(medicalEobLink);
+        medicalEobLink.click();
+        return new EOBPage(driver);
+}
+
+	
 }
