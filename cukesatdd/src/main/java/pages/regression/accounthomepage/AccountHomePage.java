@@ -20,7 +20,6 @@ import pages.member.ulayer.OneTimePaymentsPage;
 import pages.member.ulayer.PlanComparePage;
 import pages.member.ulayer.Rallytool_Page;
 import pages.member.ulayer.TestHarness;
-import pages.redesign.PaymentHistoryPage;
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.regression.claims.ClaimDetailsPage;
 import pages.regression.claims.ClaimSummarypage;
@@ -29,6 +28,7 @@ import pages.regression.contactus.ContactUsPage;
 import pages.regression.explanationofbenefits.EOBPage;
 import pages.regression.formsandresources.FormsAndResourcesPage;
 import pages.regression.ordermaterials.OrderMaterialsPage;
+import pages.regression.payments.PaymentHistoryPage;
 import pages.regression.pharmacylocator.PharmacySearchPage;
 //import pages.member.bluelayer.BenefitsAndCoveragePage;
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
@@ -501,7 +501,7 @@ public class AccountHomePage extends UhcDriver {
 
 	}
 
-	public AccountHomePage navigateToAutoPaymentHistoryPage() throws InterruptedException {
+	public AccountHomePage navigateToAutoPaymentHistoryPage(){
 
 		/*
 		 * WebDriverWait wait = new WebDriverWait(driver, 30);
@@ -518,10 +518,42 @@ public class AccountHomePage extends UhcDriver {
 		waitforElement(PremiumPayment);
 		System.out.println("payment link is displayed on the header");
 		PremiumPayment.click();
-		Thread.sleep(10000);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		if (PaymentHeading.getText().contains("Premium Payments Overview")) {
 			System.out.println("Payment Overview page displayed");
 			return new AccountHomePage(driver);
+		} else {
+			System.out.println("payment overview page not displayed");
+			return null;
+		}
+	}
+	
+	public PaymentHistoryPage navigateToOneTimePaymentHistoryPage(){
+
+		
+		if (validate(iPerceptionAutoPopUp)) {
+			iPerceptionAutoPopUp.click();
+		} else {
+			System.out.println("iPerception Pop Up not displayed");
+		}
+
+		// Thread.sleep(16000);
+
+		waitforElement(PremiumPayment);
+		System.out.println("payment link is displayed on the header");
+		PremiumPayment.click();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if (PaymentHeading.getText().contains("Premium Payments Overview")) {
+			System.out.println("Payment Overview page displayed");
+			return new PaymentHistoryPage(driver);
 		} else {
 			System.out.println("payment overview page not displayed");
 			return null;
