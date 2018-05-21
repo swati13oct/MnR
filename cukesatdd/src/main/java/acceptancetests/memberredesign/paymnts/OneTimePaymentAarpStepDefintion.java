@@ -282,6 +282,24 @@ public class OneTimePaymentAarpStepDefintion {
 			System.out.println("Encountered More than one Payment per Business day error");
 	}
 	
+	@And("^the user confirms the Submit disabled in Member site$")
+	public void submit_disabled_payment_uhc() throws InterruptedException {
+		ConfirmOneTimePaymentPage confirmOneTimePaymentsuccesspage = (ConfirmOneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD);	
+		
+		ConfirmOneTimePaymentPage oneTimePaymentSuccessPage = confirmOneTimePaymentsuccesspage.MemAuthConfirmOTP();
+        
+		if (oneTimePaymentSuccessPage != null) {
+			getLoginScenario().saveBean(
+					PageConstantsMnR.ONE_TIME_PAYMENT_SUCCESS_PAGE,
+					oneTimePaymentSuccessPage);
+			Assert.assertTrue(true);
+	}
+		else
+			System.out.println("Submit button maybe enabled");
+	}
+	
+	
 	@And("^the user confirms the AutoPay Disabled for Memauth$")
 	public void confirms_payment_DisableButton() throws InterruptedException {
 		ConfirmOneTimePaymentPage confirmOneTimePaymentsuccesspage = (ConfirmOneTimePaymentPage) getLoginScenario()

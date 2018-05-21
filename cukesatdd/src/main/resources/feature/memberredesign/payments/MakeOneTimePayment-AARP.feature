@@ -386,10 +386,37 @@ Feature: To test the payment flow on AARP site
     And User Clicks on the Pop up displayed
     Then User Scrolls down to validate Payment History and Scrolls up
     And the user clicks on MemAuth Edit Automatic Payment button
- 
       
 
     Examples: 
       | username  | password  |MemUserName    | 
       | qavgogine | qavgogine | q1_apr_uhc032 |
+ 
+ 
+ @TestmemberAuthOTP
+ Scenario Outline: To validate the oneTime Payment flow for Member Auth
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username      | <username>     |
+      | Password      | <password>     |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |   
+    And User Clicks on the Pop up displayed
+    Then User Scrolls down to validate Payment History and Scrolls up
+    And the user clicks on Make One Time Payment button
+    And the user makes one time payment in AARP site
+      | Routing number             | <routingNo>        |
+      | Confirm routing number     | <confirmRoutingNo> |
+      | Account number             | <accountNo>        |
+      | Confirm account number     | <confirmAccountNo> |
+      | Account holder first name  | <firstName>        |
+      | Account holder middle name | <middleName>       |
+      | Account holder last name   | <lastName>         |
+    And the user confirms the Submit disabled in Member site
+      
+
+    Examples: 
+      | username  | password  |MemUserName    |routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
+      | qavgogine | qavgogine | q1_apr_uhc094 |123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.12 |
+ 
  

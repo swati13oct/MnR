@@ -96,6 +96,22 @@ public class ConfirmOneTimePaymentPage extends UhcDriver{
 		
 	}
     
+    public ConfirmOneTimePaymentPage MemAuthConfirmOTP() throws InterruptedException  {
+		
+ 		waitforElement(TermsCheckRadioButton);
+ 		TermsCheckRadioButton.click();
+ 		System.out.println("Terms and conditions radio button clicked");
+ 		if(!(SubmitPaymentButton.isEnabled())) 	
+ 		{
+ 		     System.out.println("Submit Payment Button disabled");
+ 		return new ConfirmOneTimePaymentPage(driver);
+ 		}else
+ 			return null;
+ 		     
+    }
+    
+    
+    
     public PaymentHistoryPage ScrollDownToBackButton()
 	{
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
