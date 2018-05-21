@@ -18,5 +18,5 @@ Feature: 1.07-VBF-MemRedesign-To test Health and Wellness functionality
     Examples: 
 		 | memberType        | friendname | favcolor | phonenumber |
 		 | UhcMapdInd				 |name1       | color1   | number1     |
-		 | AARPMapdInd			 | name1      | color1   | number1     |
-		 | GroupRetireeMapd	 |name1       | color1   | number1     |
+		# | AARPMapdInd			 | name1      | color1   | number1     |
+		# | GroupRetireeMapd	 |name1       | color1   | number1     |
