@@ -169,7 +169,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath=".//*[@class='gs-option']//h3[contains(text(),'People')]")
 	private WebElement People;
 	
-	@FindBy(xpath="//div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[1]/div/a[@class='trigger-closed']")
+	@FindBy(xpath="//div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[1]/div/*[@class='trigger-closed']")
 	private WebElement closedTrigger;	
 	
 /*This SNP View Plans identifier is invalid
