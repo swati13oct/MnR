@@ -97,11 +97,14 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='plan_box']/div/div[2]/div/p/a")
 	private WebElement planNameLink;
+	
+	@FindBy(id = "dropdown-toggle--1")
+	private WebElement accountProfileBtn;
 
 	@FindBy(xpath = "//button[@id='dropdown-toggle--1']/span[contains(text(),'Profile')]")
 	private WebElement accountToggleDropdown;
 
-	@FindBy(xpath = "//a[@class='dropdown-option' and contains(text(),'Account Settings')]")
+	@FindBy(xpath = ".//*[@id='dropdown-options--1']/a[contains(text(),'Account Settings')]")
 	private WebElement accountSettingOption;
 
 	@FindBy(xpath = "//header//h1")
@@ -279,8 +282,10 @@ public class AccountHomePage extends UhcDriver {
 				 * try { Thread.sleep(3000); } catch (InterruptedException e) {
 				 * // TODO Auto generated catch block e.printStackTrace(); }
 				 */
-				driver.navigate().to(PAGE_URL + "medicare/member/account/profile.html");
-
+				//driver.navigate().to(PAGE_URL + "medicare/member/account/profile.html");
+				waitforElement(accountProfileBtn);
+				accountProfileBtn.click();
+				accountSettingOption.click();
 				System.out.println("title is " + driver.getTitle());
 				System.out.println("Current Url is " + driver.getCurrentUrl());
 				CommonUtility.waitForPageLoad(driver, heading, 50);

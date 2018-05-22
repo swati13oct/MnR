@@ -58,7 +58,7 @@ Then the user validates the Plan details on OLE
 
 Examples:
 	| zipcode | county             | plantype |  planName                                             |
-#	| 90210   | Los Angeles County | MA	  | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    |
+	| 90210   | Los Angeles County | MA	  | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    |
 	
 @OLE_PlanCompare_Aarp
 Scenario Outline: OLE Landing from VPP Plan Compare
@@ -76,5 +76,5 @@ Then the user validates the Plan details on OLE
 
 Examples:
 	| zipcode | county             | plantype |  planName                                      |
-#	| 90210   | Los Angeles County | MA	  | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    |
+	| 90210   | Los Angeles County | MA	  | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    |
 	
