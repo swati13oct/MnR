@@ -4,8 +4,11 @@
 package pages.regression.benefitandcoverage;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.regex.Pattern;
 
+import org.apache.commons.lang.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,15 +18,17 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import pages.member.bluelayer.ProfilePreferencesPage;
-import pages.member.ulayer.ValueAddedServicepage;
 import acceptancetests.data.CommonConstants;
+import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.member.bluelayer.ProfilePreferencesPage;
+import pages.member.ulayer.ValueAddedServicepage;
 
 /**
  * @Functionality : To check Benefits and Coverage page
@@ -63,7 +68,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	// private WebElement Contactussection;
 
 	@FindBy(className = "atdd-needhelp-disclaimer-text")
-	private WebElement disclaimersLink;
+	private WebElement moreinformation;
 
 	@FindBy(xpath = ".//*[@id='plan_benefit_documents']/section/div/div[1]/div")
 	private WebElement planBenefitsDocuments;
@@ -119,8 +124,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-bnc-drugcostsheading")
 	private WebElement DrugCostHeader;
 
-
-	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[2]/div/div")
+    @FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[2]/div/div")
 	private WebElement DrugCostheaderandtext;
 
 	@FindBy(xpath = ".//*[@id='waystosave']/div/div/div[1]/div/h1")
@@ -132,7 +136,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-bnc-drgstgtiers")
 	private WebElement Learnmorestagelink;
 
-	@FindBy(xpath = "atdd-bnc-locatephrmcy-info")
+	@FindBy(xpath = ".//*[@id='drug-benefits']/div[8]/div[2]")
 	private WebElement locateapharmacysection;
 
 	@FindBy(className = "atdd-bnc-locatepharmacybtn")
@@ -182,8 +186,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='benefitsMain']/div[2]/div/div[1]/div/div/div/div/div[2]/div/div/div[1]/div/h3/b/span")
 	private WebElement Copayscoinsuranceheader;
 
-	@FindBy(className = "atdd-hospitalvisits-title")
-	private WebElement HospitalVisits;
+	@FindBy(className = "atdd-officevisits-title")
+	private WebElement OfficeVisits;
 
 	@FindBy(className = "atdd-emergencycare-title")
 	private WebElement EmergencyHeader;
@@ -191,31 +195,35 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-ambulance-title")
 	private WebElement AmbulanceHeader;
 
-	@FindBy(id = "officeVisitTileAtdd")
-	private WebElement OfficeVisits;
+	@FindBy(className = "atdd-hospitalvisits-title")
+	private WebElement HospitalVisits;
 
 	@FindBy(className = "atdd-outpatientsurgery-title")
 	private WebElement OutpatientSurgeryCenter;
-
-	@FindBy(id = "pcpCard")
+	
+	@FindBy(xpath = ".//*[@id='outPatientTileAtdd']/div/div")
+	private WebElement OutpatientSurgeryCenterValue;
+	
+	@FindBy(xpath = ".//*[@id='officeVisitTileAtdd']/div/section/div[1]/span")
+	private WebElement OfficVisitsValue;
+	
+	
+    @FindBy(id = "pcpCard")
 	private WebElement YourPrimaryCareProvider;
 
 	@FindBy(className = "changepcp-atdd")
 	private WebElement ChangeYourPcpButton;
 
-
+	@FindBy(id = "pcpCard2")
+	private WebElement SearchProvider;
+	
 	@FindBy(className = "start-search-atdd")
 	private WebElement StartSearch;
 
 	@FindBy(id = "benefitShipCard")
 	private WebElement ParticipatingHospitalStays1;
 
-
-
-
-
-
-	@FindBy(xpath = ".//*[@id='benefitsMain']/div[2]/div/div[1]/div/div/div/div/div[6]/div/div[1]/div/h2")
+    @FindBy(id = "individualPcpHeaderText")
 	private WebElement PrimaryCareProviderHeaderInd;
 
 	@FindBy(className = "atdd-bncsummary-primarycareprvdrheader")
@@ -235,8 +243,14 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(id = "oopOutNetowrk")
 	private WebElement OUTOFNETWORK;
-
-	@FindBy(xpath = "//button[@id='dropdown-toggle--1']/span[contains(text(),'Profile')]")
+	
+	@FindBy(xpath = ".//*[@id='oopInNetowrk']/section/div/h1")
+	private WebElement INNETWORKTEXT;
+	
+	@FindBy(xpath = ".//*[@id='oopOutNetowrk']/section/div/h1")
+	private WebElement OUTOFNETWORKTEXT;
+	
+    @FindBy(xpath = "//button[@id='dropdown-toggle--1']/span[contains(text(),'Profile')]")
 	private WebElement accountToggleDropdown;
 
 	@FindBy(xpath = "//a[@class='dropdown-option' and contains(text(),'Account Settings')]")
@@ -272,6 +286,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(id = "specialDisctServices")
 	private WebElement textdiscountservices;
 
+
+	@FindBy(className = "atdd-bnc-discounttitle")
+	private WebElement headerdiscountservices;
+
 	@FindBy(className = "atdd-bnc-discntlearnmorimg")
 	private WebElement learnmorebutton;
 
@@ -280,6 +298,12 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(className = "atdd-techsupport-block")
 	private WebElement TechnicalSupportShip;
+	
+	@FindBy(className = "atdd-tech-header")
+	private WebElement TechnicalSupport;
+	
+	@FindBy(className = "atdd-plan-header")
+	private WebElement PlanSupport;
 
 	@FindBy(className = "atdd-general-header")
 	private WebElement GeneralQuestionShip;
@@ -290,52 +314,25 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(id = "ccs-header")
 	private WebElement catastrophicCoverageStage;
 	
-
-	@FindBy(css = "img.img-responsive")
-	private WebElement logoImage;
+	@FindBy(xpath = "//div/span[@class='bold atdd-benefitsoverview-monthlypremium-label']")
+	private WebElement monthlypremiumlabel;
 	
-	@FindBy(xpath = "(//img[@alt='CoLogo'])[1]")
-	private WebElement cologoImage;
-
-	@FindBy(xpath = ".//*[@id='drug-benefits']/div[5]/div[10]/div/div[1]/div/div")
-	private WebElement hartfortdrugtable;
+	@FindBy(how = How.XPATH , using = ".//*[@id='plan_benefit_documents']/section[2]/div/div[2]/div/div[1]/div[1]/div/div/div[7]/div/div/div[1]/div[1]/ul/li/a")
+	                                   
+	private WebElement Medicationlinkinpdfsec;
 	
-	@FindBy(className = "atdd-bnc-CTgrouptable")
-	private WebElement GreenwichTable;
+	@FindBy(how = How.XPATH , using = ".//*[@id='plan_benefit_documents']/section[2]/div/div[2]/div/div[1]/div[1]/div/div/div[7]/div/div/div[2]/div[1]/ul/li/a")
+	private WebElement Viewotherdocsinpdf;
 	
-	@FindBy(className = "atdd-bnc-pharmacydropdwn")
-	private WebElement pharmacyDropdown;
-
-	@FindBy(className = "atdd-bnc-drugcostsheading")
-	private WebElement drugCostsHeader;
-
-	@FindBy(className = "atdd-bnc-txers-retailcostsharing-table")
-	private WebElement retailTable;
-
-	@FindBy(xpath = ".//*[@class='table-subheader']/td[1]")
-	private List<WebElement> ICStage30dayNonMain;
-
-	@FindBy(xpath = ".//*[@class='table-subheader']/td[2]")
-	private List<WebElement> ICStage30dayMain;
-
-	@FindBy(xpath = ".//*[@class='table-subheader']/td[3]")
-	private List<WebElement> ICStage31to60;
-
-	@FindBy(xpath = ".//*[@class='table-subheader']/td[4]")
-	private List<WebElement> ICStage61to90;
+	@FindBy(how = How.XPATH , using = ".//*[@id='plan_benefit_documents']/section[2]/div/div[2]/div/div[1]/div[1]/div/div/div[6]/div/div/div[1]/div[1]/ul/li/a")
+    
+	private WebElement Medicationlinkinpdfsecpdp;
 	
-	@FindBy(xpath = ".//*[@class='table-white atdd-bnc-txers-retailcostsharing-table']/tbody/tr[3]/td[2]")
-	private WebElement ICTier1Value;
-
-	@FindBy(xpath = "//*[@id='officeVisitTileAtdd']/div/section/div[1]/span")
-	private WebElement pcpValue;
+	@FindBy(how = How.XPATH , using = ".//*[@id='plan_benefit_documents']/section[2]/div/div[2]/div/div[1]/div[1]/div/div/div[6]/div/div/div[2]/div[1]/ul/li/a")
+	private WebElement Viewotherdocsinpdfpdp;
 	
-	@FindBy(xpath = "//*[@id='officeVisitTileAtdd']/div/section/span")
-	private WebElement specialistValue;
+	private static String PAGE_URL = MRConstants.STAGE_DASHBOARD_NEW_DOMAIN_URL;
 	
-
-
-
 	
 	public static final String learnmorestagetext_xpath = ".//*[@id='collapseStages']";
 
@@ -440,6 +437,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,3000)", "");
 		validate(NeedHelpHeader);
+		validate(TechnicalSupport);
+		validate(PlanSupport);
 
 	}
 
@@ -489,13 +488,19 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			contactUslink.click();
 		}
 		try {
-			Thread.sleep(30000);
+			Thread.sleep(20000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println("Title is " + getTitle());
-		// Assert.assertTrue(getTitle().equalsIgnoreCase("Contact Us"));
+		Assert.assertTrue(getTitle().equalsIgnoreCase("Contact Us"));
+		try {
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
@@ -506,7 +511,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	public void clickOnDisclaimers(JSONObject benefitsandcoverageExectedJson) {
 		// TODO Auto-generated method stub
 
-		disclaimersLink.click();
+		moreinformation.click();
 		// Thread.sleep(15000);
 		String finalPath;
 		String table_data;
@@ -546,18 +551,25 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	 *       section
 	 */
 
-	public void clickOnDisclaimers() {
+	public void clickOnmoreinformation() {
 		// TODO Auto-generated method stub
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,3000)", "");
-		validate(disclaimersLink);
-		// disclaimersLink.click();
+		validate(moreinformation);
+		moreinformation.click();
 		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void clickOnmoreinformationship() 
+	{
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,3000)", "");
+		validate(moreinformation);	
 	}
 
 	/**
@@ -625,6 +637,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	public void validate_langdropdown_select(String language) {
 		Select langdropdwn = new Select(langdropdown);
 		langdropdwn.selectByVisibleText(language);
+		System.out.println(langdropdwn.getFirstSelectedOption().getText());
 	}
 
 	/**
@@ -851,12 +864,38 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	/**
 	 * @toDo : Validates Look Up Drugs button in the DrugCosts section
 	 */
-	public void validatelookupdrugsbutton() {
-		if (LookUpDrugsButton.isDisplayed()) {
+	public void validatelookupdrugsbutton() 
+	{
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		validate(LookUpDrugsButton);
+		LookUpDrugsButton.click();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(driver.getCurrentUrl().contains("drug-lookup/overview.html"))
 			Assert.assertTrue(true);
-		} else
-			Assert.fail("Button not displayed");
-	}
+		else
+		{
+			Assert.fail();
+		}
+		driver.navigate().to(PAGE_URL+"medicare/member/benefits-coverage.html");
+		try {
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+    }
+	
 
 	/**
 	 * @toDo : Validates the text for the Look Up Drugs section
@@ -891,6 +930,27 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	public void validate_locateapharmacysection() {
 		validate(locateapharmacysection);
 		validate(locateapharmacybutton);
+		
+		locateapharmacybutton.click();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(driver.getCurrentUrl().contains("member/pharmacy-locator/overview.html"))
+			Assert.assertTrue(true);
+		else
+		{
+			Assert.fail();
+		}
+		driver.navigate().to(PAGE_URL+"medicare/member/benefits-coverage.html");
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
@@ -940,34 +1000,41 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(DrugCostDropdown);
 		validate(DrugCostHeader);
 
-		/*
-		 * if (DrugCostDropdown.isDisplayed()) { try { Thread.sleep(30000); }
-		 * catch (InterruptedException e1) { // TODO Auto-generated catch block
-		 * e1.printStackTrace(); } List<String> listActual = new
-		 * ArrayList<String>(); Select dropdown = new Select(DrugCostDropdown);
-		 * List<WebElement> webElements = dropdown.getOptions(); for (WebElement
-		 * element : webElements) { if
-		 * (element.getText().equals("Standard Retail Pharmacy") ) {
-		 * Assert.assertTrue("The element" + element.getText() +"should display"
-		 * , true);;
-		 * 
-		 * System.out.println("The element " + element.getText() +
-		 * "should not display"); } else if
-		 * (element.getText().equals("Preferred Mail Service Pharmacy") ) {
-		 * Assert.assertTrue("The element" + element.getText() +"should display"
-		 * , true);;
-		 * 
-		 * System.out.println("The element " + element.getText() +
-		 * "should not display"); } else if
-		 * (element.getText().equals("Preferred Retail Pharmacy")) {
-		 * Assert.assertTrue("The element" + element.getText() +"should display"
-		 * , true);;
-		 * 
-		 * System.out.println("The element " + element.getText() +
-		 * "should not display"); } else {
-		 * 
-		 * Assert.fail(); } } }
-		 */
+		
+		  if (DrugCostDropdown.isDisplayed()) 
+		  {
+			  try 
+			  { Thread.sleep(10000); 
+			  }
+		  catch (InterruptedException e1) { // TODO Auto-generated catch block
+		  e1.printStackTrace(); 
+		  }
+		  Select dropdown = new Select(DrugCostDropdown);
+		  List<WebElement> webElements = dropdown.getOptions(); 
+		  //System.out.println(webElements);
+		  for (WebElement element : webElements) 
+		  { 
+		  if(element.getText().contains("Standard Retail Pharmacy")) 
+		  {
+			  System.out.println(element.getText());
+		  Assert.assertTrue("The element" + element.getText() +"should display", true);
+		  
+		  } 
+		  else if(element.getText().contains("Preferred Mail Service Pharmacy") ) 
+		  {
+		  Assert.assertTrue("The element" + element.getText() +"should display", true);
+		  System.out.println(element.getText());
+		  }
+		 else if(element.getText().contains("Preferred Retail Pharmacy")) 
+		  {
+		  Assert.assertTrue("The element" + element.getText() +"should display", true);
+		  System.out.println(element.getText());
+		  } 
+		 else {
+		 Assert.fail(); 
+		  } 
+		  } }
+		 
 	}
 
 	/**
@@ -988,6 +1055,15 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	public void validate_learnmoreaboutstagelink() {
 
 		validate(Learnmorestagelink);
+		Learnmorestagelink.click();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Learnmorestagelink.click();
+		
 
 	}
 
@@ -1011,41 +1087,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		/*
-		 * try { Thread.sleep(30000); } catch (InterruptedException e1) { //
-		 * TODO Auto-generated catch block e1.printStackTrace(); }
-		 * 
-		 * String finalPath; String table_data;
-		 * 
-		 * finalPath = learnmorelinktiertext_xpath+"/div/div[4]/div/div/p[1]";
-		 * table_data = driver.findElement(By.xpath(finalPath)).getText();
-		 * System.out.println(table_data); Assert.assertEquals("Tier 1 Drugs",
-		 * table_data); // to validate amount Billed finalPath =
-		 * learnmorelinktiertext_xpath+"/div/div[4]/div/div/p[2]"; table_data =
-		 * driver.findElement(By.xpath(finalPath)).getText();
-		 * System.out.println(table_data); Assert.assertEquals(
-		 * "Nulla ea veniam nostrud reprehenderit eiusmod excepteur adipisicing nulla cupidatat cupidatat. Excepteur amet exercitation minim sint nulla occaecat dolor anim duis proident ad ea voluptate do enim consequat ea."
-		 * , table_data); // to validate amount Paid finalPath =
-		 * learnmorelinktiertext_xpath+"/div/div[4]/div/div/p[3]"; table_data =
-		 * driver.findElement(By.xpath(finalPath)).getText();
-		 * System.out.println(table_data); Assert.assertEquals("Tier 2 Drugs",
-		 * table_data); // to validate paid Date finalPath =
-		 * learnmorelinktiertext_xpath+"/div/div[4]/div/div/p[5]"; table_data =
-		 * driver.findElement(By.xpath(finalPath)).getText();
-		 * System.out.println(table_data); Assert.assertEquals("Tier 3 Drugs",
-		 * table_data); finalPath =
-		 * learnmorelinktiertext_xpath+"/div/div[4]/div/div/p[7]"; table_data =
-		 * driver.findElement(By.xpath(finalPath)).getText();
-		 * System.out.println(table_data); Assert.assertEquals("Tier 4 Drugs",
-		 * table_data); finalPath =
-		 * learnmorelinktiertext_xpath+"/div/div[4]/div/div/p[9]"; table_data =
-		 * driver.findElement(By.xpath(finalPath)).getText();
-		 * System.out.println(table_data); Assert.assertEquals("Tier 5 Drugs",
-		 * table_data);
-		 * 
-		 * Learnmoretierslink.click();
-		 */
-
+		Learnmoretierslink.click();
+		
 	}
 
 	/**
@@ -1054,47 +1097,15 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	public void clickOnLearnmoreaboutlinkstage() {
 		// TODO Auto-generated method stub
-        try {
+		validate(Learnmorestagelink);
+		Learnmorestagelink.click();
+		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		Learnmorestagelink.click();
-		 try {
-				Thread.sleep(10000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		/*
-		 * try { Thread.sleep(30000); } catch (InterruptedException e1) { //
-		 * TODO Auto-generated catch block e1.printStackTrace(); } //
-		 * Thread.sleep(15000); String finalPath; String table_data;
-		 * 
-		 * 
-		 * finalPath = learnmorestagetext_xpath+"/div/div[1]/div/div/p[3]/b";
-		 * table_data = driver.findElement(By.xpath(finalPath)).getText();
-		 * System.out.println(table_data);
-		 * Assert.assertEquals("Annual Deductible Stage", table_data); // to
-		 * validate amount Billed finalPath =
-		 * learnmorestagetext_xpath+"/div/div[1]/div/div/p[5]/b"; table_data =
-		 * driver.findElement(By.xpath(finalPath)).getText();
-		 * System.out.println(table_data);
-		 * Assert.assertEquals("Initial Coverage Stage", table_data); // to
-		 * validate amount Paid finalPath =
-		 * learnmorestagetext_xpath+"/div/div[1]/div/div/p[7]/b"; table_data =
-		 * driver.findElement(By.xpath(finalPath)).getText();
-		 * System.out.println(table_data);
-		 * Assert.assertEquals("Coverage Gap Stage", table_data); // to validate
-		 * paid Date finalPath =
-		 * learnmorestagetext_xpath+"/div/div[1]/div/div/p[9]/b"; table_data =
-		 * driver.findElement(By.xpath(finalPath)).getText();
-		 * System.out.println(table_data);
-		 * Assert.assertEquals("Catastrophic Coverage Stage", table_data);
-		 * 
-		 * Learnmorestagelink.click();
-		 */
 
 	}
 
@@ -1144,25 +1155,29 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	/**
 	 * @toDo : Validates the Plan overview section for a Non lis member
 	 */
-	public void validatePlanOverview() {
-		// TODO Auto-generated method stub
+	public void validatePlanOverview() 
+	{
+	    validate(planName);
+		validate(nameLabel);
+		validate(memberID);
+		validate(effective_Date);
+	  //validate(Monthly_Premium);
+        validate(GroupId);
+    }
 
+	public void validatePlanOverviewInd(String name , String memberid , String effectivedate , String monthlypremium) {
 		validate(planName);
 		validate(nameLabel);
 		validate(memberID);
 		validate(effective_Date);
-		// validate(Monthly_Premium);
-
-		validate(GroupId);
-
-	}
-
-	public void validatePlanOverviewInd() {
-		validate(planName);
-		validate(nameLabel);
-		validate(memberID);
-		validate(effective_Date);
-		// validate(Monthly_Premium);
+		validate(monthlypremiumlabel);
+		String[] firstname = name.trim().split("//s+");
+		
+		Assert.assertEquals(driver.findElement(By.xpath("//div[@id='planBenefitsApp']//div[contains(text(),firstname[0])]")).getText(),name);
+		Assert.assertEquals(driver.findElement(By.xpath("//div[@id='planBenefitsApp']//div[contains(text(),memberid)]")).getText(),memberid);
+		Assert.assertEquals(driver.findElement(By.xpath("//div[@id='planBenefitsApp']//div[contains(text(),effectivedate)]")).getText(),effectivedate);
+		
+			
 	}
 
 	/**
@@ -1190,7 +1205,25 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(HospitalVisits);
 		validate(OfficeVisits);
 		validate(OutpatientSurgeryCenter);
-
+		validate(OutpatientSurgeryCenterValue);
+		validate(OfficVisitsValue);
+		
+		Assert.assertEquals(OfficeVisits.getText(), "OFFICE VISITS");
+		Assert.assertEquals(OutpatientSurgeryCenter.getText(),"OUTPATIENT SURGERY CENTER VISITS");
+		Assert.assertEquals(HospitalVisits.getText(),"HOSPITAL VISITS");
+		
+		
+		if(StringUtils.isEmpty(OutpatientSurgeryCenterValue.getText()))
+		{
+			
+			Assert.fail();
+		}
+		if(StringUtils.isEmpty(OfficVisitsValue.getText()))
+		{
+			
+			Assert.fail();
+		}
+		
 	}
 
 	/**
@@ -1216,8 +1249,55 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(PrimaryCareProviderHeaderInd);
 		validate(YourPrimaryCareProvider);
 		validate(ChangeYourPcpButton);
-		// validateNew(SearchforaPhysician);
+		ChangeYourPcpButton.click();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(driver.getCurrentUrl());
+		if(driver.getCurrentUrl().contains("/member/contact-us"))
+		{
+			Assert.assertTrue(true);
+		}
+		else
+		{
+			Assert.fail();
+			
+		}
+		driver.navigate().to(PAGE_URL+"medicare/member/benefits-coverage.html");
+	
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		validate(SearchProvider);
 		validate(StartSearch);
+		StartSearch.click();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if(driver.getCurrentUrl().contains("werally"))
+		{
+			Assert.assertTrue(true);
+		}
+		else
+		{
+			Assert.fail();
+			
+		}
+		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(0));
+		driver.navigate().to(PAGE_URL+"medicare/member/benefits-coverage.html");
+		
 
 	}
 
@@ -1236,17 +1316,19 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	 * @toDo : Validates the Out Of Pocket Maximum section
 	 */
 
-	public void validateOutofPocketMax() {
+	public void validateOutofPocketMax() 
+	{
 		validate(OutofPocketMaximum);
 		validate(INNETWORK);
 		validate(OUTOFNETWORK);
 		validate(OutofPocketMaximumText);
+		validate(INNETWORKTEXT);
+		validate(OUTOFNETWORKTEXT);
+    }
 
-	}
-
-	/**
+	/*
 	 * @toDo : Validates the Benefits page
-	 */
+	*/
 
 	public void validateBnCPag() {
 		try {
@@ -1289,6 +1371,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 		validate(BenefitsSummaryHeadership);
 		validate(ParticipatingHospitalStays1);
+		validate(nameLabel);
+		validate(memberID);
+	    validate(effective_Date);
 
 	}
 
@@ -1404,144 +1489,238 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		if(copayType.equals("wotCMSValue")){
 		}
 	}
-
 	
-    public void validateImagePresent(String logoToBeDisplayedOnSecondaryPage) {
-		
-		String logo_src = logoImage.getAttribute("src");
-		String logo_alt = logoImage.getAttribute("alt");
-		System.out.println("Actual logo's source on Dashboard page is   "+logo_src+" and Expected logo source is  "+logoToBeDisplayedOnSecondaryPage+" . ");		
-		System.out.println("logo's alt text on secondary page is   "+logo_alt);	
-		Assert.assertTrue(logo_src.contains(logoToBeDisplayedOnSecondaryPage));
-		System.out.println("Secondary page main logo assert condition is passed");	
-	}
-    
-    public void validateCoLogoImagePresent(String cologoToBeDisplayedOnSecondaryPage) {
-		
- 		String cologo_src = cologoImage.getAttribute("src");
- 		String cologo_alt = cologoImage.getAttribute("alt");
- 		System.out.println("Actual logo's source on Dashboard page is   "+cologo_src+" and Expected logo source is  "+cologoToBeDisplayedOnSecondaryPage+" . ");		
- 		System.out.println("logo's alt text on secondary page is   "+cologo_alt);	
- 		Assert.assertTrue(cologo_src.contains(cologoToBeDisplayedOnSecondaryPage));
- 		System.out.println("Secondary page co logo assert condition is passed");
- 	}
-     
-
-    public void ancillarynotdisplayed() {
-		if (Headersection.isDisplayed()) {
-			Assert.assertFalse("The element" + Headersection.getText()
-			+ "is not display", false);
-			System.out.println("The element " + Headersection.getText()
-					+ "is not display");
-		} else {
-			Assert.assertTrue(true);
+	/*
+	 * ** To validate pdfs on Benefit&Coverage Page
+	 */
+	
+	public boolean verifypdfname(String a[])
+    {   
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		boolean checkflag =true;
+		Select langdropdwn = new Select(langdropdown);
+        if(langdropdwn.getFirstSelectedOption().getText().contains("ENGLISH"))
+        		{
+		List<WebElement> pdfs = driver.findElements(By.xpath("//div[@class='PlanPdf section']//ul//li[not(contains(@class,'ng-hide'))]/a/span/preceding::a[1]"));
+		
+		System.out.println("Size"+pdfs.size());
+        for (int i=0;i<pdfs.size();i++)
+        {  
+           String pdfnames = null;
+           pdfnames= (pdfs.get(i).getText());
+           System.out.println(pdfnames);
+        }
+        
+        if(a.length==pdfs.size())
+        {
+        for (int i=0;i<pdfs.size();i++)
+        {  
+          String pdf1[] = pdfs.get(i).getText().split(Pattern.quote("("));
+          if(StringUtils.isNotEmpty(pdf1[0]))
+          {
+          System.out.println(pdf1[0]);
+           if(pdf1[0].contains(a[i])){
+                 checkflag = true;
+                }
+           else {
+                  checkflag=false;
+                  break;
+           }
+          }
+        else
+        {
+        	Assert.fail();
+        }
+       }
+        }
+        else
+        {
+        	Assert.fail();
+        }
+        		}
+        else if(langdropdwn.getFirstSelectedOption().getText().contains("SPANISH"))
+        {
+        	
+		java.util.List<WebElement> pdfs = driver.findElements(By.xpath("//div[@class='PlanPdf section']//ul//li[not(contains(@class,'ng-hide'))]/a/span/preceding::a[1]"));
+		
+		                                                                 
+		System.out.println("Size"+pdfs.size());
+        for (int i=0;i<pdfs.size();i++)
+        {  
+           String pdfnames = null;
+           pdfnames= (pdfs.get(i).getText()) ;
+           System.out.println(pdfnames);
+        }
+        if(a.length==pdfs.size())
+        {
+        for (int i=0;i<pdfs.size();i++)
+        { 
+        	
+          String pdf[] = pdfs.get(i).getText().split(Pattern.quote("("));
+          if(StringUtils.isNotEmpty(pdf[i]))
+          {
+          System.out.println(pdf[0]);
+           if(pdf[0].contains(a[i])){
+                 checkflag = true;
+                }
+           else {
+                  checkflag=false;
+                  break;
+           }
+                             
+        }
+        
+        
+        else
+        {
+        	Assert.fail();
+        }
+        }
+        }
+        else
+        {
+        	Assert.fail();
+        }
+    
+        }
+        else if(langdropdwn.getFirstSelectedOption().getText().contains("CHINESE"))
+        {
+        	System.out.println("NO PDFs in chinese yet.if PDFs come then above same code can be used");
+        	checkflag = true;
+        }
+		
+		
+           return checkflag;
+          
     }
 
+        
+        
+        
 
-	public void validatehartfortprescriptiondrugtable() {
-		// TODO Auto-generated method stub
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto generated catch block
-			e.printStackTrace();
-		}
-		validateNew(hartfortdrugtable);
+
+	public void validatestaticlinksinpdf()
+	{
+	validate(Medicationlinkinpdfsec);
+	try {
+		Thread.sleep(10000);
+	} catch (InterruptedException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
+	Medicationlinkinpdfsec.click();
+	if(driver.getCurrentUrl().contains("/documents/medication-program"))
+	{
+		System.out.println(driver.getCurrentUrl());
+		Assert.assertTrue(true);
+	}
+	else
+	{
+		Assert.fail();
+	}
+	driver.navigate().to(PAGE_URL+"medicare/member/benefits-coverage.html");
+	validate(Viewotherdocsinpdf);
+	Viewotherdocsinpdf.click();
+	if(driver.getCurrentUrl().contains("/member/documents/overview.html"))
+	{
+		System.out.println(driver.getCurrentUrl());
+		Assert.assertTrue(true);
+	}
+	else
+	{
+		Assert.fail();
+	}
+	try {
+		Thread.sleep(20000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	driver.navigate().to(PAGE_URL+"medicare/member/benefits-coverage.html");
+	
 	}
 	
-	public void validateTownOfGreenwichdrugtable() {
-		// TODO Auto-generated method stub
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto generated catch block
-			e.printStackTrace();
-		}
-		validateNew(GreenwichTable);
+	public void validatestaticlinksinpdfpdp()
+	{
+	validate(Medicationlinkinpdfsecpdp);
+	try {
+		Thread.sleep(10000);
+	} catch (InterruptedException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
 	}
-
-	public void validatedrugCostSectionTexas() {
-		// TODO Auto-generated method stub
-		// TODO Auto-generated method stub
-				try {
-					Thread.sleep(10000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				JavascriptExecutor jse = (JavascriptExecutor) driver;
-				jse.executeScript("window.scrollBy(0,-500)", "");
-				validateNew(pharmacyDropdown);
-				validateNew(drugCostsHeader);
-	}
-
-	public void validateRetailCostSharingdrugtable() {
-		// TODO Auto-generated method stub
-
-		Select drpPharmacy = new Select(pharmacyDropdown);
-		drpPharmacy.selectByVisibleText("Retail Cost Sharing");
-		System.out.println("Retail Cost Sharing dropdown value selected");
-
-		validateNew(retailTable);
-		if(ICStage30dayNonMain.size()<1 ||ICStage30dayMain.size()<1 ||ICStage31to60.size()<1||ICStage61to90.size()<1)
-		{
-			Assert.assertFalse("The columns are incorrect in texas Ers table",true);
-			
-		}
-		
-		
-		if(ICTier1Value.getText().trim().length()<1)
-		{
-			Assert.assertFalse("No value in the IC stage tier 1 cell",true);
-		}
-		
-	}
-
-	public void validateMailOrderCostSharing_Drugtable() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void validateOfficeVisitssection() {
-		
-		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		jse.executeScript("window.scrollBy(0,-50)", "");
-		
-		validateNew(OfficeVisits);
-		// TODO Auto-generated method stub
-		
-		validateNew(pcpValue);
-		validateNew(specialistValue);
-		if(pcpValue.getText().contains("$"))
-		{
+	Medicationlinkinpdfsecpdp.click();
+	if(driver.getCurrentUrl().contains("/documents/medication-program"))
+	{
+		System.out.println(driver.getCurrentUrl());
 		Assert.assertTrue(true);
+	}
+	else
+	{
+		Assert.fail();
+	}
+	driver.navigate().to(PAGE_URL+"medicare/member/benefits-coverage.html");
+	validate(Viewotherdocsinpdfpdp);
+	Viewotherdocsinpdfpdp.click();
+	if(driver.getCurrentUrl().contains("/member/documents/overview.html"))
+	{
+		System.out.println(driver.getCurrentUrl());
+		Assert.assertTrue(true);
+	}
+	else
+	{
+		Assert.fail();
+	}
+	try {
+		Thread.sleep(20000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	driver.navigate().to(PAGE_URL+"medicare/member/benefits-coverage.html");
+	
+	}
+	
+	public void validatevillagetabletext(String text1)
+	{
+		WebElement villagetabletext = driver.findElement(By.xpath(".//*[@id='preferredRetailBenefit']/div/div[1]/div/div/div/table/tbody/tr[2]/td[4]/div[3]/div[2]"));
+		if(villagetabletext.getText().equalsIgnoreCase(text1))
+		{
+			 System.out.println(villagetabletext.getText());
+			Assert.assertTrue(true);
 		}
-		
 		else
 		{
-			Assert.assertTrue(false);
-			
-			
+			Assert.fail();
 		}
 		
-		if(specialistValue.getText().contains("$"))
-		{
-		Assert.assertTrue(true);
-		}
-		
-		else
-		{
-			Assert.assertTrue(false);
-		}
-		
-		
-		
-		
-		
-			
-		
-		
-
 	}
+	
+	
+	
+public boolean Validate_Catastrophic_Stage_Language(String updatedLanguage, String displayFlag) {
+		
+		List <WebElement> UpdatedLanguageCount = driver.findElements(By.xpath("//*[contains(text(),'"+updatedLanguage+"')]"));
+		System.out.println(updatedLanguage);
+		System.out.println(UpdatedLanguageCount.get(0));
+		boolean Expectedflag = (displayFlag.equalsIgnoreCase("true"))?true:false ;
+		System.out.println(Expectedflag);
+		boolean ActualFlag = (UpdatedLanguageCount.size()>0)?true:false;
+		System.out.println(ActualFlag);
+		if(Expectedflag ==ActualFlag  )
+		{
+			System.out.println("Updated Language is Displayed/Not DIsplayed as expected");
+			return true;
+		}
+		else {
+			System.out.println("Updated Language validation : Failed");
+			return false;
+		}
+	}
+	
 }

@@ -15,40 +15,104 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-//import pages.member.redesign.ContactUsPage;
-import pages.member.ulayer.OneTimePaymentsPage;
-import pages.member.ulayer.PlanComparePage;
-import pages.member.ulayer.Rallytool_Page;
-import pages.member.ulayer.TestHarness;
-import pages.redesign.PaymentHistoryPage;
-import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
-import pages.regression.claims.ClaimDetailsPage;
-import pages.regression.claims.ClaimSummarypage;
-//import pages.regression.claims.ClaimSummarypage;
-import pages.regression.contactus.ContactUsPage;
-import pages.regression.formsandresources.FormsAndResourcesPage;
-import pages.regression.ordermaterials.OrderMaterialsPage;
-import pages.regression.pharmacylocator.PharmacySearchPage;
-//import pages.member.bluelayer.BenefitsAndCoveragePage;
-import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-
-
-
+import pages.dashboard.member.ulayer.ClaimSummarypage;
+import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
+import pages.member.bluelayer.ProfilePageHsid;
+import pages.member.bluelayer.ProfilePreferencesPage;
+import pages.member.redesign.ContactUsPage;
+import pages.member.ulayer.OneTimePaymentsPage;
+import pages.redesign.PaymentHistoryPage;
+import pages.member.ulayer.PlanComparePage;
+import pages.member.ulayer.Rallytool_Page;
+import pages.member.ulayer.TestHarness;
+import pages.redesign.PharmacySearchPage;
 
 
 public class AccountHomePage extends UhcDriver {
 
+	@FindBy(css = "a.fd_myPersonalHealthRecord")
+	private WebElement phrTab;
+
+	@FindBy(id = "plan_box")
+	private WebElement planBox;
+
+	@FindBy(linkText = "Order plan materials")
+	private WebElement orderPlanMaterials;
+
+	@FindBy(xpath = "//div[@class='myProfileMid']/div[1]/div/div[2]/h2")
+	private WebElement myProfilesHeading;
+
+	@FindBy(linkText = "estimate costs")
+	private WebElement estimateCostLink;
+
+	@FindBy(linkText = "Contact Us")
+	private WebElement contactUsLink;
+
+	@FindBy(linkText = "Plan Benefits")
+	private WebElement benefitsLink;
+
+	@FindBy(id = "disclosure_link")
+	private WebElement logOut;
+
 	@FindBy(linkText = "Premium payment information")
 	private WebElement paymentsLink;
 
+	@FindBy(xpath = ".//*[@id='_content_campaigns_uhcm_panelnav-planresources-main_links_jcr_content_par_teaser']/div/li/a")
+	private WebElement formsAndResourcesLink;
+
+	@FindBy(linkText = "My Profile & Preferences")
+	private WebElement profAndPrefLink;
+
+	@FindBy(xpath = "//*[@id='myshipplans']/a")
+	private WebElement myPlansTab;
+
+	@FindBy(linkText = "locate a pharmacy")
+	private WebElement pharmacyLocator;
+
 	@FindBy(linkText = "medical providers")
 	private WebElement medicalProviders;
+
+	@FindBy(xpath = "//li[@id='fd_myMenu']/a")
+	private WebElement myMenuNavigator;
+
+	@FindBy(linkText = "Prescription drug cost and benefits summary")
+	private WebElement prescriptionDrugCostBenefitSummaryLink;
+
+	@FindBy(linkText = "Search drug claims")
+	private WebElement searchDrugClaims;
+
+	@FindBy(linkText = "Search claim history")
+	private WebElement searchClaimsHistory;
+
+	@FindBy(linkText = "Search medical claims")
+	// @FindBy(xpath =
+	// ".//*[@id='_content_campaigns_uhcm_chunkyfooter-activitylinks-main_activitylinks-main_jcr_content_par_teaser']/div/li/a")//(linkText
+	// = "Search medical claims")
+	private WebElement searchMedicalClaims;
+
+	@FindBy(linkText = "Medical Explanation of Benefits (EOB)")
+	private WebElement medicalEobLink;
+
+	@FindBy(linkText = "Prescription Drug Explanation of Benefits (EOB)")
+	private WebElement prescriptionDrugEobLink;
+
+	@FindBy(xpath = "//div[@id='medicareTitle']/h1")
+	private WebElement pharmacyLocatorHeading;
+
+	@FindBy(xpath = "//*[@id='medicareTitle']/p/a[1]")
+	private WebElement espanolLink;
+
+	@FindBy(xpath = "//*[@id='medicareTitle']/p/a[2]") // Story 261070
+	private WebElement chineseLink;
+
+	@FindBy(xpath = "////*[@id='subPageLeft']/div[2]/div[2]/h3[2]/a")
+	private WebElement createPdfLink;
 
 	@FindBy(xpath = "//span[contains(.,'Print temporary ID card')]")
 	private WebElement viewIDCard;
@@ -56,11 +120,113 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(id = "pcpLogoPrint1left")
 	private WebElement validateLogo;
 
+	@FindBy(xpath = "//a[contains(text(),'UnitedHealthcare MedicareComplete Choice (PPO)')]")
+	private WebElement uhcMedicareCompleteChoicePPO;
+
+	@FindBy(xpath = "//*[@id='healthwellness']/a")
+	private WebElement healthAndWellnessTab;
+
+	@FindBy(xpath = "html/body/div[3]/div/div[1]/header/div/div/div/div/div/div/p/a[2]")
+	private WebElement backToPreviousPage;
+
+	@FindBy(xpath = "//*[@id='gogreenmeter']/a")
+	private WebElement goGreenLink;
+
 	@FindBy(xpath = "/html/body/div[2]/div[2]/div/div[1]/div/div/div/h1")
 	private WebElement paymentsHeading;
 
+	@FindBy(xpath = "//*[@id='gogreenlogin_box']/div[4]/div/a")
+	private WebElement gogreenPopupClose;
+
+	@FindBy(xpath = "//*[@id='gogreenlogin_box']/div[4]/div")
+	private WebElement gogreenPopup;
+
+	@FindBy(linkText = "My Documents")
+	private WebElement MyDocumentLink;
+
+	@FindBy(linkText = "Back to previous page")
+	private WebElement backTopreviouspageLink;
+
+	@FindBy(xpath = "//html/body/title")
+	private WebElement newClaimsPageHeading;
+
+	@FindBy(linkText = "View/Download")
+	private WebElement viewanddownloadLink;
+
+	@FindBy(xpath = "//*[@id='myDocuments']/div/div[2]/div/p[2]/ul/li[4]/a")
+	private WebElement paginationLink;
+
+	@FindBy(xpath = "//*[@id='myDocuments']/div/div[1]/div/form/div/div[2]/div[2]/div[2]/div[1]/div/input")
+	private WebElement fromdate;
+
+	@FindBy(xpath = "//*[@id='myDocuments']/div/div[1]/div/form/div/div[2]/div[2]/div[2]/div[2]/div/input")
+	private WebElement todate;
+
+	@FindBy(xpath = "//*[@id='myDocuments']/div/div[1]/div/form/div/div[2]/div[2]/div[2]/div[3]/button")
+	private WebElement searchLink;
+
+	@FindBy(linkText = "Date")
+	private WebElement dateLink;
+
+	@FindBy(xpath = ".//*[@id='plan_box']/div/div[2]/div/table/tbody/tr[3]/td[2]")
+	private WebElement status;
+
+	@FindBy(xpath = ".//*[@id='plan_box']/div/div[2]/div/table/tbody/tr[2]/td[2]")
+	private WebElement memberId;
+
+	@FindBy(xpath = ".//*[@id='plan_box']/div/div[2]/div/table/tbody/tr[1]/td[2]")
+	private WebElement groupId;
+
+	@FindBy(id = "_content_uhcm_home_my-account-home_jcr_content_contentPar_myresource_contentParResource_teaser")
+	private WebElement myResource;
+
+	@FindBy(linkText = "mental health or substance use")
+	private WebElement MentalHealthOrSubstanceUse;
+
+	@FindBy(xpath = ".//*[@id='_content_campaigns_uhcm_home-myresources-main_home-myresources-main_jcr_content_par_teaser_2']/div/div[2]")
+	private WebElement drugLookup;
+
 	@FindBy(xpath = ".//*[@id='plan_box']/div/div[2]/div/p/a")
 	private WebElement planNameLink;
+
+	@FindBy(xpath = ".//*[@id='contentRow']")
+	private WebElement homePageContent;
+
+	@FindBy(xpath = ".//*[@id='_content_campaigns_uhcm_home-myresources-main_home-myresources-main_jcr_content_par_teaser_2']/div/div[2]")
+	private WebElement drugLookupBox;
+
+	@FindBy(xpath = ".//*[@id='_content_campaigns_uhcm_home-myresources-main_home-myresources-main_jcr_content_par_teaser_2']/div/div[2]/a/span")
+	private WebElement estimateCostsBtn;
+
+	@FindBy(xpath = ".//*[@id='contentRow']/td/table/tbody/tr/td/div/div[2]/div[3]/div[3]/div[2]")
+	private WebElement myResourcesContent;
+
+	@FindBy(xpath = "//*[@class='zip']/span[1]")
+	private WebElement RallyZipcode;
+
+	@FindBy(xpath = "//*[@id='IPEinvL']/map/area[3]")
+	private WebElement closebtn;
+
+	@FindBy(xpath = "//a[contains(text(),'Provider search')]")
+	private WebElement providerSearchinPanelNavigation;
+
+	@FindBy(xpath = "//a[contains(text(),'Medical Explanation of Benefits (EOB)')]")
+	private WebElement medicalEOBLinkInPanelNavigation;
+
+	@FindBy(id = "btn_searchforaprovider")
+	private WebElement medicalEOBproviderlink;
+
+	@FindBy(linkText = "Medical Explanation of Benefits (EOB)")
+	private WebElement medicalEOBlink;
+
+	@FindBy(id = "zipCode")
+	private WebElement zipCode;
+
+	@FindBy(id = "fd_myMenu")
+	private WebElement myMenu;
+
+	@FindBy(linkText = "Benefits and Coverage")
+	private WebElement benefitsAndCoveragelink;
 
 	@FindBy(xpath = "//button[@id='dropdown-toggle--1']/span[contains(text(),'Profile')]")
 	private WebElement accountToggleDropdown;
@@ -71,12 +237,51 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//header//h1")
 	private WebElement heading;
 
+	@FindBy(xpath = "//a[contains(text(),'Search for a provider')]")
+	private WebElement providerlinkinPCPSection;
+
+	@FindBy(css = "li#accountdetails>a")
+	private WebElement accountHome;
+
+	@FindBy(id = "widgetbuttoncontainer")
+	private WebElement searchLinkinClaimsPage;
+
+	@FindBy(id = "phr_widget_3")
+	private WebElement showLink;
+
+	@FindBy(xpath = "//div[@class='phr_greybox_mid']/p[contains(text(),'Looking for a doctor')]/following-sibling::p/a")
+	private WebElement providerSearchinPHPage;
+
 	// @FindBy(xpath="//*[@id='phr_widget_3_box']/div[233]/p[2]/a")
 	// private WebElement providerSearchinPHPage1;
 
 	// @FindBy(xpath="div[@class='phr_greybox_mid']/p[contains(text(),'Need to
 	// find a facility?')]/following-sibling::p/a")
 	// private WebElement providerSearchinPHPage1;
+
+	@FindBy(xpath = "(//a[@id='btn_searchforaprovider'])[1]")
+	private WebElement providerSearchinPHPage1;
+
+	@FindBy(linkText = "Claims")
+	private WebElement claimsLink;
+
+	@FindBy(xpath = "(//a[contains(@href,'my-plans/forms-and-resources')])[4]")
+	private WebElement FormsandResourcesLinkn;
+
+	@FindBy(xpath = "//a[contains(text(),'search for providers')]")
+	private WebElement searchforproviderlinkinClaimsPage;
+
+	@FindBy(xpath = "//*[@id='btn_searchforaprovider']")
+	private WebElement providerLink;
+
+	@FindBy(xpath = "//a[@class='searchforproviders margin_top_5px']")
+	private WebElement searchProviderinFormsandResourcePage;
+
+	@FindBy(xpath = "//span[text()='search providers']")
+	private WebElement searchProviderLinkinFormsandResourcePage;
+
+	@FindBy(xpath = "html/body/div[2]/div/div[4]/div[2]/div/table/tbody/tr[4]/td[2]/a")
+	private WebElement linkbenefit;
 
 	@FindBy(xpath=".//*[@id='IPEinvL']/map/area[2]")
     private WebElement iPerceptionPopUp;
@@ -87,8 +292,14 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath="//a[contains(text(),'Contact Us page')]")
 	private WebElement helpAndContactUslink;
 
+	@FindBy(xpath = "//a[contains(text(),'Go to benefits and coverage page')]")
+	private WebElement benefitcoveragelink;
+
 	@FindBy(xpath = "html/body/div[2]/div/div[4]/div[2]/div/table/tbody/tr[6]/td[2]/a")
 	private WebElement profilenpreferenceslink;
+
+	@FindBy(linkText = "Go to profile page")
+	private WebElement profilenpreferenceslink1;
 
 	@FindBy(id = "authQuestiontextLabelId")
 	private WebElement questionid;
@@ -97,6 +308,9 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(id = "continueSubmitButton")
 	private WebElement continueButton;
+
+	@FindBy(xpath = "//sticky[@id='sticky-nav']//nav[@id='main-nav']//a[contains(text(),'Coverage & Benefits')]")
+	private WebElement BnClink;
 
 	@FindBy(xpath = "//*[@id='IPEinvL']/map/area[3]")
 	private WebElement iPerceptionAutoPopUp;
@@ -134,29 +348,6 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='dashboard']//span[text()='View Your Claims']")
 	private WebElement claimsDashboardLink;
 	
-
-	//@FindBy(css = "img.primary-logo")
-    //private WebElement logoImage;
-	
-	@FindBy(xpath = "//div[@id='white-label']/a/img")
-	private WebElement logoImage;
-	
-	@FindBy(xpath = "//div[@id='white-label']/a/img[2]")
-	private WebElement cologoImage;
-
-	@FindBy(xpath = "//*[@ng-src='/images/icons/icon-pharmacy-locator.svg']")
-	private WebElement pharmacySearchLink;
-
-	
-	//Added by Sneha - Navigate to Order Plan Materials 
-	@FindBy(xpath = "//div[@id='ui-view-page']//a[@track='ORDER_MATERIALS']")
-	private WebElement OrderMaterial_Dashboard;
-
-	@FindBy(xpath = "//h1[@class='h4 margin-none']")
-	private WebElement orderplanHeadertxt;
-
-
-	
 	private PageData myAccountHome;
 
 	public JSONObject accountHomeJson;
@@ -182,7 +373,6 @@ public class AccountHomePage extends UhcDriver {
 	public AccountHomePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		
 		// openAndValidate();
 	}
 
@@ -231,7 +421,7 @@ public class AccountHomePage extends UhcDriver {
 		return null;
 	}
 
-	public ProfileandPreferencesPage navigateDirectToProfilePage() throws InterruptedException {
+	public ProfilePreferencesPage navigateDirectToProfilePage() throws InterruptedException {
 
 		if (MRScenario.environment.equalsIgnoreCase("stage")) {
 			System.out.println("user is on Stage login page");
@@ -254,7 +444,7 @@ public class AccountHomePage extends UhcDriver {
 
 				if (driver.getTitle().equalsIgnoreCase("Profile")) {
 
-					return new ProfileandPreferencesPage(driver);
+					return new ProfilePreferencesPage(driver);
 				}
 
 			}
@@ -277,7 +467,7 @@ public class AccountHomePage extends UhcDriver {
 		}
 		CommonUtility.waitForPageLoad(driver, heading, 50);
 		if (driver.getTitle().equalsIgnoreCase("Profile")) {
-			return new ProfileandPreferencesPage(driver);
+			return new ProfilePreferencesPage(driver);
 		}
 
 		return null;
@@ -397,7 +587,7 @@ public class AccountHomePage extends UhcDriver {
 
 	}
 
-	public ProfileandPreferencesPage navigateDirectToProfilePageHsid() throws InterruptedException {
+	public ProfilePageHsid navigateDirectToProfilePageHsid() throws InterruptedException {
 		// TODO Auto-generated method stub
 		if (MRScenario.environment.equalsIgnoreCase("stage")) {
 			System.out.println("user is on Stage login page");
@@ -421,7 +611,7 @@ public class AccountHomePage extends UhcDriver {
 
 				if (driver.getTitle().equalsIgnoreCase("Profile")) {
 
-					return new ProfileandPreferencesPage(driver);
+					return new ProfilePageHsid(driver);
 				}
 
 			}
@@ -454,7 +644,7 @@ public class AccountHomePage extends UhcDriver {
 		CommonUtility.waitForPageLoad(driver, heading, 50);
 		if (driver.getTitle().equalsIgnoreCase("Profile")) {
 			System.out.println("here");
-			return new ProfileandPreferencesPage(driver);
+			return new ProfilePageHsid(driver);
 		}
 
 		return null;
@@ -495,7 +685,7 @@ public class AccountHomePage extends UhcDriver {
 		}
 	}
 
-	public pages.regression.payments.PaymentHistoryPage scrollDownAndUp() throws InterruptedException {
+	public PaymentHistoryPage scrollDownAndUp() throws InterruptedException {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,500)", "");
 
@@ -506,22 +696,15 @@ public class AccountHomePage extends UhcDriver {
 
 		Thread.sleep(6000);
 
-		try{			
-			if (HistoryTable.isDisplayed()) {
-				System.out.println("Payment History Exists");
-				jse.executeScript("window.scrollBy(0,-600)", "");
-				Thread.sleep(3000);			
-			} }
-			catch(Exception e)
-			{
-				System.out.println("History table not present for this member");
-				jse.executeScript("window.scrollBy(0,-600)", "");
-				Thread.sleep(3000);				
-			}
-			return new pages.regression.payments.PaymentHistoryPage(driver);
+		if (HistoryTable.isDisplayed()) {
+			System.out.println("Payment History Exists");
+			jse.executeScript("window.scrollBy(0,-600)", "");
+			Thread.sleep(3000);
+			return new PaymentHistoryPage(driver);
+		} else {
+			return null;
 		}
-
-	
+	}
 	
 public ContactUsPage navigateToContactUsPage() {
 		
@@ -651,27 +834,9 @@ public ContactUsPage navigateToContactUsPage() {
 			System.out.println("Drug Preferred Mail Service Link is not displaying in footer");
 		}
 	}
-	public void validateImagePresent(String logoToBeDisplayedOnDashboard) throws InterruptedException {
-		Thread.sleep(2000);	
-		String logo_src = logoImage.getAttribute("src");
-		String logo_alt = logoImage.getAttribute("alt");
-		System.out.println("Actual logo's source on Dashboard page is   "+logo_src+" and Expected logo source    "+logoToBeDisplayedOnDashboard+" .");	
-		System.out.println("logo's alt text on Dashboard page is   "+logo_alt);		
-		Assert.assertTrue(logo_src.contains(logoToBeDisplayedOnDashboard));
-		System.out.println("Dashboard page main logo assert condition is passed");
-	}
 	
-	public void validateCoLogoImagePresent(String cologoToBeDisplayedOnDashboard) throws InterruptedException {
-		Thread.sleep(2000);	
-		String cologo_src = cologoImage.getAttribute("src");
-		String cologo_alt = cologoImage.getAttribute("alt");
-		System.out.println("Actual cologo's source on Dashboard page is   "+cologo_src+" and Expected cologo source    "+cologoToBeDisplayedOnDashboard+" .");	
-		System.out.println("cologo's alt text on Dashboard page is   "+cologo_alt);		
-		Assert.assertTrue(cologo_src.contains(cologoToBeDisplayedOnDashboard));
-		System.out.println("Dashboard page cologo assert condition is passed");
-	}
 	
-public ClaimSummarypage navigateToClaimsSummaryPage() {
+public pages.dashboard.member.ulayer.ClaimSummarypage navigateToClaimsSummaryPage() {
 		
 		if (MRScenario.environmentMedicare.equalsIgnoreCase("team-h") || MRScenario.environmentMedicare.equalsIgnoreCase("test-a") || (MRScenario.environmentMedicare.equalsIgnoreCase("team-t") || MRScenario.environment.equalsIgnoreCase("team-ci1"))) {
 			System.out.println("Go to claims link is present "+driver.findElement(By.xpath("//a[text()='Go to Claims page']")).isDisplayed());
@@ -714,7 +879,7 @@ public ClaimSummarypage navigateToClaimsSummaryPage() {
 		return new ClaimSummarypage(driver);
 }
 
-public ClaimDetailsPage navigateToClaimDetailsPage() {
+public pages.dashboard.member.ulayer.ClaimDetailsPage navigateToClaimDetailsPage() {
 	CommonUtility.waitForPageLoad(driver, claimstablemoreinfolink, 60);
 	claimstablemoreinfolink.click();
 	CommonUtility.waitForPageLoad(driver, claimDetTableMainSection, 30);
@@ -726,62 +891,13 @@ public ClaimDetailsPage navigateToClaimDetailsPage() {
 	 */
 	System.out.println(driver.getTitle());
 	if (driver.getTitle().equalsIgnoreCase("claims   ")) {
-		return new ClaimDetailsPage(driver);
+		return new pages.dashboard.member.ulayer.ClaimDetailsPage(driver);
 
 	}
-	return new ClaimDetailsPage(driver);
+	return new pages.dashboard.member.ulayer.ClaimDetailsPage(driver);
 }
 
-public PharmacySearchPage navigateToRedesignPharmacyLocaterPage() {
-	if (validate(iPerceptionAutoPopUp)) {
-		iPerceptionAutoPopUp.click();
-	} else {
-		System.out.println("iPerception Pop Up not displayed");
-	}
-	if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a") || MRScenario.environmentMedicare.equalsIgnoreCase("test-a") || MRScenario.environment.equalsIgnoreCase("team-ci1")) {
-		System.out.println("Go to Pharmacy locator is present "+ pharmacySearchLink.isDisplayed());
-		pharmacySearchLink.click();			
-	}
-	else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {	
-		if(driver.getCurrentUrl().contains("/dashboard"));
-		{
-			System.out.println("User is on dashboard page and URL is ====>"+driver.getCurrentUrl());
-			pharmacySearchLink.click();
-			try {
-				Thread.sleep(10000);	
-	
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-			
-	}
-	return new PharmacySearchPage(driver);
-}
-
-		/**
-		 * @return the pharmacySearchLink
-		 */
-		public boolean checkPharmacyLinkNotAvailable() {
-			try {
-				if(pharmacySearchLink.isDisplayed()) {
-				System.out.println("Pharmacy link is present");
-				return false;
-				}
-				else {
-				
-			}
-			}
-			catch(Exception e) {
-				System.out.println("Pharmacy link is not present");
-				return true;
-			}
-			return false;
-		}
-
-// to navigate to forms and resources page
-public pages.regression.formsandresources.FormsAndResourcesPage navigatetoFormsnResources() {
+public pages.redesign.PharmacySearchPage navigateToRedesignPharmacyLocaterPage() {
 	
 	if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a") || MRScenario.environmentMedicare.equalsIgnoreCase("test-a") || MRScenario.environment.equalsIgnoreCase("team-ci1")) {
 		System.out.println("Go to claims link is present "+driver.findElement(By.xpath("//a[text()='Go to Pharmacy Locator page']")).isDisplayed());
@@ -821,79 +937,6 @@ public pages.regression.formsandresources.FormsAndResourcesPage navigatetoFormsn
 		}	
 
 }*/
-	return new FormsAndResourcesPage(driver);
-	//return null;
+	return new PharmacySearchPage(driver);
 }
-	
-	public PaymentHistoryPage navigateToPaymentHistoryPage() throws InterruptedException
-	 {
-
-	 	    	/*WebDriverWait wait = new WebDriverWait(driver, 30);
-	 				wait.until(ExpectedConditions.elementToBeClickable(paymentslink));
-	 */
-	 	    	if(	validate(iPerceptionPopUp)) {
-	 	    		iPerceptionPopUp.click();
-	 	    	}
-	 	    	else  {
-	 	    		System.out.println("iPerception Pop Up not displayed");
-	 	    	}
-	 	    	
-	 	        Thread.sleep(6000);
-
-	 	    	if (validate(paymentsLink)) {
-
-	 	    		System.out.println("payment link is displayed on the header");
-	 	    		paymentsLink.click();
-	 	    		return new PaymentHistoryPage(driver);
-	 	    	}else{
-	 	    		System.out.println("payment link is not displayed on the header");
-	 	    		return null;
-	 	    	}
-	 	    	/*else{
-	 	    		CoverageAndBenefits.click();
-		 	    	
-		 	    	WebDriverWait wait = new WebDriverWait(driver, 30);
-		 			wait.until(ExpectedConditions.elementToBeClickable(paymentslink));
-		 	    	
-		 	    	validate(paymentslink);
-		 	    	paymentslink.click();
-		 	    	return new PaymentHistoryPage(driver);
-	 	    	}*/
-	 	
-
-	//return new PaymentHistoryPage(driver);
-}
-
-	/*
-	 * Added by Sneha - To Navigate to Order plan Materials page by clicking on link in Rally Dashboard
-	 * 
-	 */
-	public OrderMaterialsPage navigateToOrderPlanMaterialsPage() throws InterruptedException {
-		
-		CommonUtility.checkPageIsReady(driver);
-		if(validate(OrderMaterial_Dashboard)){
-			System.out.println("Order Materials link found on dashboard");
-			JavascriptExecutor executor = (JavascriptExecutor)driver;
-			executor.executeScript("arguments[0].click();", OrderMaterial_Dashboard);
-			//OrderMaterial_Dashboard.click();
-		}
-		else{
-			String Page_URL = "https://" + MRScenario.environment + "-medicare.uhc.com//member/order-plan-materials.html";
-			//String Page_URL = driver.getCurrentUrl().split(".com")[0];
-			driver.navigate().to(Page_URL);
-			System.out.println("Navigated to Order materials Page URL : "+Page_URL);
-		}
-		try {
-			Thread.sleep(3000);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		CommonUtility.checkPageIsReady(driver);
-//		CommonUtility.waitForPageLoadNew(driver, orderplanHeadertxt, 30);
-		if (orderplanHeadertxt.isDisplayed()) {
-			return new OrderMaterialsPage(driver);
-		}
-		return null;
-	}
 }
