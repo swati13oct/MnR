@@ -38,7 +38,6 @@ Feature:1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
     Examples: 
       | zipcode | county             | plantype | planName                                          | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate |
       |   90210 | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 2 (HMO) | HICN     | John      | Doe      | 123456789a     | false   |  01012010 |  01012010 |
-         | MBI      | John      | Doe      | 2A22C22YK22    | false   |  01012010 |  01012010 |
 
   
   @OLE_PlanDetails_UHC
