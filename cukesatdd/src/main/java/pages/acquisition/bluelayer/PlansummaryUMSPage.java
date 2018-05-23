@@ -12,6 +12,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
+import pages.acquisition.ulayer.PageTitleConstants;
 
 /**
  * @author gumeshna
@@ -67,7 +68,7 @@ public class PlansummaryUMSPage {
 		}
 
 		if (driver.getTitle().equalsIgnoreCase(
-				"Our Medicare Plan Types | UnitedHealthcare®")) {
+				PageTitleConstants.BLAYER_MEDICARE_PLAN_TYPES_TITLE)) {
 			return new PlansummaryUMSPage(driver);
 		}
 		return null;

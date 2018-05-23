@@ -14,6 +14,7 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
+import pages.acquisition.ulayer.PageTitleConstants;
 
 /**
  * @author rkodumur
@@ -62,7 +63,7 @@ public class LearnAboutMedicareuhcPage extends GlobalWebElements{
 		validate(prepareForInitialEnrollmentLink);
 		prepareForInitialEnrollmentLink.click();
 		validate(prepareForInitialEnrollmentLink);
-		if(driver.getTitle().equalsIgnoreCase("Prepare for Your Medicare Initial Enrollment Period | UnitedHealthcare®")){
+		if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_PREPARE_FOR_YOUR_MEDICARE_INITIAL_ENROLLMENT_PERIOD)){
 			return new PrepareForInitialEnrollmentuhcPage(driver);
 		}
 		return null;

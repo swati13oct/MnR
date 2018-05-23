@@ -9,6 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.MRConstants;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.PageTitleConstants;
 
 /**
  * @author pagarwa5
@@ -107,7 +108,7 @@ public class RegistrationHomePage extends UhcDriver {
 			
 			/*-----------end--------------*/
 			validate(registerHereLink);
-			if(getTitle().equalsIgnoreCase("Medicare Plans for Different Needs | UnitedHealthcare®"))
+			if(getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_PLANS_FOR_DIFFERENT_NEEDS))
 			{
 				return new AcquisitionHomePage(driver);
 			}
