@@ -13,6 +13,7 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
+import pages.acquisition.ulayer.PageTitleConstants;
 
 /**
  * @author saduri
@@ -76,7 +77,7 @@ public class AgentsAndBrokersPage extends GlobalWebElements{
 		validate(footerHomeLink);
 		footerHomeLink.click();
 		validate(footerHomeLink);
-		if (driver.getTitle().equalsIgnoreCase("Medicare Plans for Different Needs | UnitedHealthcare®")) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_PLANS_FOR_DIFFERENT_NEEDS)) {
 			return new AcquisitionHomePage(driver);
 		}
 		return null;

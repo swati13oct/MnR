@@ -25,6 +25,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.uhcretiree.Rallytool_Page;
+import pages.acquisition.ulayer.PageTitleConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
@@ -480,7 +481,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if (driver.getTitle().equalsIgnoreCase("Medicare Advantage Plan Details | | UnitedHealthcare®")
 				|| driver.getTitle().equalsIgnoreCase("Medicare Special Needs Plan Details | UnitedHealthcare®")
 				|| driver.getTitle().equalsIgnoreCase("Medicare Prescription Drug Plan Details | UnitedHealthcare®")
-				|| driver.getTitle().equalsIgnoreCase("Our Medicare Plan Types | UnitedHealthcare®")) {
+				|| driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_PLAN_TYPES_TITLE)) {
 			return new PlanDetailsPage(driver);
 		}
 		return null;
@@ -819,7 +820,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			}
 		}
 		if (driver.getTitle().equalsIgnoreCase(
-				"Our Medicare Plan Types | UnitedHealthcare®")) {
+				PageTitleConstants.BLAYER_MEDICARE_PLAN_TYPES_TITLE)) {
 			return new GetStartedPage(driver);
 		}
 		return null;
@@ -1194,7 +1195,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		viewPlansLinks.get(3).click();
 		
 		}
-		if(getTitle().equalsIgnoreCase("Our Medicare Plan Types | UnitedHealthcare®"))
+		if(getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_PLAN_TYPES_TITLE))
 			return new PlanDetailsPage(driver);
 		return null;
 	}
@@ -1204,7 +1205,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			viewDetailsPDP.click();
 			}
 	
-		if(getTitle().equalsIgnoreCase("Our Medicare Plan Types | UnitedHealthcare®"))
+		if(getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_PLAN_TYPES_TITLE))
 			return new PlanDetailsPage(driver);
 		return null;
 	}
