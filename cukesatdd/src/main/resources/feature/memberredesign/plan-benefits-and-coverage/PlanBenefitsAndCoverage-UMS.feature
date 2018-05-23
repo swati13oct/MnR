@@ -2,7 +2,7 @@
 Feature:C1.1 To test plan benefits and Coverage on UMS site
 
 
-    @CMFedMAPDNonLis
+    @CMFedDrugNonLis
     Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>  |

@@ -501,7 +501,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("Title is " + getTitle());
+		
 		Assert.assertTrue(getTitle().equalsIgnoreCase("Contact Us"));
 		try {
 			Thread.sleep(20000);
@@ -512,47 +512,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	}
 
-	/**
-	 * @toDo : The user checks the disclaimers
-	 */
-
-	public void clickOnDisclaimers(JSONObject benefitsandcoverageExectedJson) {
-		// TODO Auto-generated method stub
-
-		moreinformation.click();
-		// Thread.sleep(15000);
-		String finalPath;
-		String table_data;
-
-		// validate(disclaimertextarea_xpath);
-		try {
-			finalPath = disclaimertextarea_xpath + "/p[1]";
-			table_data = driver.findElement(By.xpath(finalPath)).getText();
-			System.out.println(table_data);
-			Assert.assertEquals(benefitsandcoverageExectedJson.get("1stline"),
-					table_data);
-			// to validate amount Billed
-			finalPath = disclaimertextarea_xpath + "/p[2]";
-			table_data = driver.findElement(By.xpath(finalPath)).getText();
-			System.out.println(table_data);
-			Assert.assertEquals(benefitsandcoverageExectedJson.get("2ndline"),
-					table_data);
-			// to validate amount Paid
-			finalPath = disclaimertextarea_xpath + "/p[3]";
-			table_data = driver.findElement(By.xpath(finalPath)).getText();
-			System.out.println(table_data);
-			Assert.assertEquals(benefitsandcoverageExectedJson.get("3rdline"),
-					table_data);
-			// to validate paid Date
-			finalPath = disclaimertextarea_xpath + "/p[4]";
-			table_data = driver.findElement(By.xpath(finalPath)).getText();
-			System.out.println(table_data);
-			Assert.assertEquals(benefitsandcoverageExectedJson.get("4thline"),
-					table_data);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-	}
+	
 
 	/**
 	 * @toDo : The user checks the More Information link in the Need help
@@ -1514,7 +1474,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		Select langdropdwn = new Select(langdropdown);
         if(langdropdwn.getFirstSelectedOption().getText().contains("ENGLISH"))
         		{
-		List<WebElement> pdfs = driver.findElements(By.xpath("//div[@class='PlanPdf section']//ul//li[not(contains(@class,'ng-hide'))]/a/span/preceding::a[1]"));
+		List<WebElement> pdfs = driver.findElements(By.xpath(".//*[@class='PlanPdf section']/div/div[1]/div[1]/span/div/ul/li[2]/a"));
 		
 		System.out.println("Size"+pdfs.size());
         for (int i=0;i<pdfs.size();i++)
@@ -1554,7 +1514,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
         else if(langdropdwn.getFirstSelectedOption().getText().contains("SPANISH"))
         {
         	
-		java.util.List<WebElement> pdfs = driver.findElements(By.xpath("//div[@class='PlanPdf section']//ul//li[not(contains(@class,'ng-hide'))]/a/span/preceding::a[1]"));
+		java.util.List<WebElement> pdfs = driver.findElements(By.xpath(".//*[@class='PlanPdf section']/div/div[1]/div[1]/span/div/ul/li[2]/a"));
 		
 		                                                                 
 		System.out.println("Size"+pdfs.size());
