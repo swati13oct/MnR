@@ -333,6 +333,14 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	
 	private static String PAGE_URL = MRConstants.STAGE_DASHBOARD_NEW_DOMAIN_URL;
 	
+	@FindBy(xpath = "//div[@id='white-label']/a/img")
+	private WebElement logoImage;
+	
+	@FindBy(xpath = "//div[@id='white-label']/a/img[2]")
+	private WebElement cologoImage;
+	
+	
+	
 	
 	public static final String learnmorestagetext_xpath = ".//*[@id='collapseStages']";
 
@@ -1721,6 +1729,26 @@ public boolean Validate_Catastrophic_Stage_Language(String updatedLanguage, Stri
 			System.out.println("Updated Language validation : Failed");
 			return false;
 		}
+	}
+
+public void validateImagePresent(String logoToBeDisplayedOnSecondaryPage) {
+	
+	String logo_src = logoImage.getAttribute("src");
+	String logo_alt = logoImage.getAttribute("alt");
+	System.out.println("Actual logo's source on Dashboard page is   "+logo_src+" and Expected logo source is  "+logoToBeDisplayedOnSecondaryPage+" . ");		
+	System.out.println("logo's alt text on secondary page is   "+logo_alt);	
+	Assert.assertTrue(logo_src.contains(logoToBeDisplayedOnSecondaryPage));
+	System.out.println("Secondary page main logo assert condition is passed");	
+}
+
+public void validateCoLogoImagePresent(String cologoToBeDisplayedOnSecondaryPage) {
+	
+		String cologo_src = cologoImage.getAttribute("src");
+		String cologo_alt = cologoImage.getAttribute("alt");
+		System.out.println("Actual logo's source on Dashboard page is   "+cologo_src+" and Expected logo source is  "+cologoToBeDisplayedOnSecondaryPage+" . ");		
+		System.out.println("logo's alt text on secondary page is   "+cologo_alt);	
+		Assert.assertTrue(cologo_src.contains(cologoToBeDisplayedOnSecondaryPage));
+		System.out.println("Secondary page co logo assert condition is passed");
 	}
 	
 }
