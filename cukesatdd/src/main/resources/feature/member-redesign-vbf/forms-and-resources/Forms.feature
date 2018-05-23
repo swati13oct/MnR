@@ -1,5 +1,5 @@
 @smokeTest
-Feature: 1.05-VBF-MemRedesign-To test FnR functionality
+Feature: 1.16-VBF-MemRedesign-To test FnR functionality
 
  @smokeTest_FNR @rallyDashboard @testharness
   Scenario Outline: 
