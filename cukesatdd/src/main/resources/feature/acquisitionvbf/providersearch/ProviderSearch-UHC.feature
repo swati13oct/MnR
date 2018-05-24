@@ -1,3 +1,4 @@
+@BAT_acq_providersearch
 @fixedTestCaseTest
 @BlayerProviderSearch
 Feature:1.16-VBF-Acq-To test Provider Search Flow  in UMS site
