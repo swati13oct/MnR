@@ -221,7 +221,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("county box not found");
 		}
 		
-		if (driver.getTitle().equalsIgnoreCase("Our Medicare Plans | AARP® Medicare Plans From UnitedHealthcare®")) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_OUR_MEDICARE_PLANS)) {
 			System.out.println("title matches");
 			return new VPPPlanSummaryPage(driver);
 		}
@@ -257,7 +257,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		viewPlansButton.click();
 		
 		if (getTitle().equalsIgnoreCase(
-				"Our Medicare Plans | AARP® Medicare Plans From UnitedHealthcare®")) {
+				PageTitleConstants.ULAYER_OUR_MEDICARE_PLANS)) {
 			return new VPPPlanSummaryPage(driver);
 		}
 		return null;
@@ -696,7 +696,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			if(driver.getCurrentUrl().contains("-pharmacy."))
 				break;
 		}
-		if (driver.getTitle().equalsIgnoreCase("Locate a Pharmacy | UnitedHealthcare®")) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE)) {
 			return new PharmacySearchPage(driver);
 		}
 		return null;

@@ -45,11 +45,11 @@ Examples:
 
 @OLE_PlanDetails_Aarp
 Scenario Outline: OLE Landing from VPP Plan Details
-Given the user is on AARP medicare acquisition site landing page
-When the user performs plan search using following information in the AARP site
+Given the user is on AARP medicare site landing page OLE
+When user performs plan search using following information in AARP site OLE
 	| Zip Code    | <zipcode> |
 	| County Name | <county>  |
-And the user views the plans of the below plan type in AARP site
+And the user views plans of the below plan type in AARP site OLE
 	| Plan Type | <plantype> |
 Then the user view plan details of the above selected plan in AARP site and validates
 	| Plan Name | <planName> |
@@ -62,11 +62,11 @@ Examples:
 	
 @OLE_PlanCompare_Aarp
 Scenario Outline: OLE Landing from VPP Plan Compare
-Given the user is on AARP medicare acquisition site landing page
-When the user performs plan search using following information in the AARP site
+Given the user is on AARP medicare site landing page OLE
+When user performs plan search using following information in AARP site OLE
 	| Zip Code    | <zipcode> |
 	| County Name | <county>  |
-And the user views the plans of the below plan type in AARP site
+And the user views plans of the below plan type in AARP site OLE
 	| Plan Type | <plantype> |
 Then the user selects plans to add to plan compare and navigates to Plan compare page
 	| Plan Name | <planName> |

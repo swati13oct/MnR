@@ -19,6 +19,7 @@ import org.testng.Assert;
 
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.uhcretiree.Rallytool_Page;
+import pages.acquisition.ulayer.PageTitleConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
@@ -131,7 +132,7 @@ public class PlanDetailsPage extends UhcDriver{
 
 	public AddDrugPage navigateToWTSPage() {
 		learnMoreButton.click();
-		if(driver.getTitle().equalsIgnoreCase("Plan Details"))
+		if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_PLAN_DETAILS))
 		{
 			return new AddDrugPage(driver);
 		}

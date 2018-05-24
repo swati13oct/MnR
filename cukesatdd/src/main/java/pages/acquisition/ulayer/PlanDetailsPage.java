@@ -137,7 +137,7 @@ public class PlanDetailsPage extends UhcDriver {
 	{
 		enrollInPlanBtn.click();
 		System.out.println(driver.getTitle());
-		if (driver.getTitle().equalsIgnoreCase("AARP Medicare Complete Online Application") || driver.getTitle().equalsIgnoreCase("AARP Medicarerx Online Application")|| driver.getTitle().equalsIgnoreCase("Enrollment Information"))
+		if (driver.getTitle().equalsIgnoreCase("AARP Medicare Complete Online Application") || driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_AARP_MEDICARERX_ONLINE_APPLICATION)|| driver.getTitle().equalsIgnoreCase("Enrollment Information"))
 		{
 			System.out.println("in if");
 			return new PlanInformationPage(driver, planName);
