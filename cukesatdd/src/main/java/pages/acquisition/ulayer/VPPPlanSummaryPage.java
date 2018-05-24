@@ -41,7 +41,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private WebElement maPlansNumber;
 	
 	//@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='plan-overview-wrapper']//div[@class='overview-tabs module-tabs-tabs']/div[1]//span[@class='trigger-closed']")
-	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[1]//span[@class='trigger-closed']")
+	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[1]//*[@class='trigger-closed']")
 	private WebElement maPlansViewLink;
 	
 	@FindBy(id = "plan-list-1")
@@ -109,7 +109,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='plan-overview-wrapper']//div[@class='overview-tabs module-tabs-tabs']/div[3]//span[@class='trigger-closed']")
 	private WebElement pdpPlansCount;
 	
-	@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='plan-overview-wrapper']/div[2]/div[1]//span[@class='trigger-closed']")
+	@FindBy(xpath = "//div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[1]//*[@class='trigger-closed']")
 	private WebElement viewPlans;
 	
 	@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='plan-overview-wrapper']/div[2]/div[3]//span[@class='trigger-closed']")
@@ -874,7 +874,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			if(validate(viewPlans)){
 				viewPlans.click();
 				List<WebElement> maDCELink = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[@class='mabenefittable']//a[contains(@dtmname, 'Plans Landing:Plan:MA:Drug Cost Estimator')]"));
-				maDCELink.get(0).click();
+				((JavascriptExecutor)driver).executeScript("arguments[0].click();", maDCELink.get(0));
+				//maDCELink.get(0).click();
 				}else{
 					Assert.assertTrue("This scenario is for AEP period", true);
 					

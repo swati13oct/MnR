@@ -133,7 +133,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='pharmacy-results']//span[contains(@class,'pharmacy-name')]")
 	public List<WebElement> pharmacies;
 	               
-	@FindBy(xpath = ".//*[@id='pharmacy-results']/div[2]/ul[1]/li[1]/div/div[2]/button")
+	@FindBy(id = "select-pharmacy-button-0")
 	public WebElement select_btn_first;
 
 	@FindBy(id = "saverSavingSpan")
@@ -735,7 +735,6 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		System.out.println("first pharmacy");
 		
 		if (select_btn_first.isDisplayed()) {
-			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", select_btn_first);
 			select_btn_first.click();
 		}
 		System.out.println("first pharmacy 2");
@@ -1681,7 +1680,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		returnLink.click();	
+		((JavascriptExecutor)driver).executeScript("arguments[0].click();", returnLink);
 		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {

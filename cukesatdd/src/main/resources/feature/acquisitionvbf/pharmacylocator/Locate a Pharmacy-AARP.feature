@@ -1,3 +1,4 @@
+@BAT_acq_pharmacylocator
 @fixedTestCaseTest
 @pharmacylocatorulayer
 Feature:1.18-VBF-Acq-To test Locate a Pharmacy in acqusition flow AARP site
