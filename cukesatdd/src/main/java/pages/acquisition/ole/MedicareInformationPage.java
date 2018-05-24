@@ -93,7 +93,7 @@ public class MedicareInformationPage extends UhcDriver{
 	@FindBy(id = "ole-cancel-confirm")
 	private WebElement CancellationModal;
 	
-	@FindBy(id = "sample-linkrouter")
+	@FindBy(id = "leavingSite-linkrouter")
 	private WebElement LeavingOLEmodal;
 
 	@FindBy(xpath = "//*[@class = 'field-error-msg']")
