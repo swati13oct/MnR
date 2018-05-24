@@ -1,3 +1,4 @@
+@BAT_acq_pharmacylocator
 @fixedTestCaseTest
 @pharmacylocatorblayer
 Feature:1.19-VBF-Acq-To test Locate a Pharmacy in acqusition flow UMS site
