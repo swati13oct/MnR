@@ -18,6 +18,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.data.MRConstants;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.PageTitleConstants;
 
 
 /**
@@ -269,7 +270,7 @@ public ResponsivePlanSummaryUhc searchPlans(String zipcode, String CountyName) {
 	    		break;
 	    	}
 	    }
-		if (driver.getTitle().contains("Our Medicare Plan Types | UnitedHealthcare")) {
+		if (driver.getTitle().contains(PageTitleConstants.BLAYER_OUR_MEDICARE_PLAN_TYPES_UNTEDHEALTHCARE)) {
 			return new ResponsivePlanSummaryUhc(driver);
 		} 
 		return null;

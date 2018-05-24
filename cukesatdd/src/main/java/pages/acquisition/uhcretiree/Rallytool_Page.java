@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.PageTitleConstants;
 
 public class Rallytool_Page extends UhcDriver {
 	
@@ -26,7 +27,7 @@ public class Rallytool_Page extends UhcDriver {
 			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 			driver.switchTo().window(tabs.get(0));
 			
-			if(driver.getTitle().equalsIgnoreCase("CalPERS Retirees – Home"))
+			if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_CALPERS_RETIREES_HOME))
 			{
 				return new CalpersHomePage(driver);
 			}
@@ -39,7 +40,7 @@ public class Rallytool_Page extends UhcDriver {
 			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 			driver.switchTo().window(tabs.get(0));
 			
-			if(driver.getTitle().equalsIgnoreCase("SDCERA Group Retiree – Home"))
+			if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_SDCERA_GROUP_RETIREE))
 			{
 				return new SdceraHomePage(driver);
 			}
@@ -51,7 +52,7 @@ public class Rallytool_Page extends UhcDriver {
 			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 			driver.switchTo().window(tabs.get(0));
 			
-			if(driver.getTitle().equalsIgnoreCase("CalPERS Retirees – Find a provider"))
+			if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_CALPERS_RETIREES_PROVIDER))
 			{
 				return new CalperFindaProviderPage(driver);
 			}
