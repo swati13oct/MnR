@@ -1,5 +1,7 @@
 package acceptancetests.memberredesign.HSID;
 
+import gherkin.formatter.model.DataTableRow;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,6 +15,11 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.member.bluelayer.AssistiveRegistrationPage;
+import pages.member.bluelayer.HSIDLoginPage;
+import pages.member.redesign.DeregisterPage;
+import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.login.HsidRegistrationPersonalCreateAccount;
 import acceptancetests.data.CommonConstants;
 //import acceptancetests.deprecated.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonConstants;
 import acceptancetests.data.LoginCommonConstants;
@@ -23,12 +30,6 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import gherkin.formatter.model.DataTableRow;
-import pages.regression.accounthomepage.AccountHomePage;
-import pages.regression.login.AssistiveRegistrationPage;
-import pages.regression.login.DeregisterPage;
-import pages.regression.login.HSIDLoginPage;
-import pages.regression.login.HsidRegistrationPersonalCreateAccount;
 
 /**
  * Functionality: Benefits and Coverage page

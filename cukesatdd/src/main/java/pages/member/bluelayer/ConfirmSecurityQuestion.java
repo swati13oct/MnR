@@ -14,11 +14,6 @@ import atdd.framework.UhcDriver;
 
 
 public class ConfirmSecurityQuestion extends UhcDriver {
-
-
-    
-	@FindBy(how = How.CLASS_NAME, using = "form__content")
-	private WebElement formContent;
 	
 	@FindBy(how = How.CLASS_NAME, using = "rememberThisDevice")
 	private WebElement rememberThisDeviceSection;

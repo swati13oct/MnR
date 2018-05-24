@@ -1,13 +1,14 @@
 package acceptancetests.memberredesign.registration;
 
+import junit.framework.Assert;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.dashboard.acquisition.RegistrationInformationPage;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
-import junit.framework.Assert;
-import pages.dashboard.acquisition.RegistrationInformationPage;
 
 /**
  * @Functionality : Errors validation on Create Account page

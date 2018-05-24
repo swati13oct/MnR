@@ -1,3 +1,186 @@
+q1_grp_feb001/Password@1,MAPD,Group,
+q1_grp_feb012/Password@1,MAPD,Individual,Nice_med
+q1_aarp_feb008/Password@1,MAPD,Individual,
+q1_feb_uhc138/Password@1,MAPD,,
+q4_dec_uhc003/Password@1,MAPD,Individual,Drug
+q4_dec_uhc002/Password@1,MAPD,Individual,Med_EOB
+ATDD_MAPD_IND_RX_EOB_01/Password@1,MAPD,Individual,rx_Eob
+q3_sep_blayer149/Password@1,MAPD-PHR,Individual,
+ATDD_q2_jun_blayer123/Password@1,MAPD,COSMOS_dce,
+q1_grp_feb261/Password@1,MA,Group,
+q1_grp_feb086/Password@1,MA,NOKIA,
+q1_grp_feb009/Password@1,MAPD,NOKIA,
+q1_aarp_apr125/Password@1,MAPD,Individual,NON LIS
+q1_apr_uhc003/Password@1,MAPD,UHCIndividual,NON LIS
+q1_aarp_apr125/Password@1,MAPD,AARPIndividual,NON LIS
+q1_aarp_feb170/Password@1,MA,Individual,LIS 1
+q1_feb_uhc022/Password@1,MAPD,Individual,LIS 1 
+q1_feb_uhc022/Password@1,MAPD,Ind,LIS 1
+q1_aarp_feb405/Password@1,PDP,Individual,LIS 4
+q1_aarp_feb267/Password@1,MA,Individual,NON LIS
+q3_sep_grp351/Password@1,SSUP,Group,
+q1_grp_feb271/Password@1,PDP,Group,
+verahsid0328/Password@1,MAPD,Group,NON LIS
+q1_grp_feb031/Password@1,MAPD,Group,NON LIS
+q1_grp_feb276/Password@1,PDP,Group,NON LIS
+q1_grp_feb259/Password@1,Peehip,Group,
+q1_aarp_feb299/Password@1,PDP,Individual,NON LIS
+q4_dec_grp086/Password@1,MAPD,Group,
+q1_grp_feb523,PDPwithSSUP,Group,
+q1_aarp_feb151/Password@1,MAPD,IndividualDCEmember,
+q4_dec_uhc160/Password@1,MAPD,Individualwithoutpharmacy,
+Reward_bl_005/Password@5,MAPD,RewardsMember,
+q1_feb_uhc202/Password@1,PDP,,
+q1_ship_feb192/Password@1,SHIP,,
+q1_aarp_feb005/Password@1,MA,,  
+q1_grp_feb495/Password@1,MA,Group,HMO
+q1_grp_feb043/Password@1,MA,Group,LIS 1
+q1_ship_feb120/Password,HIP,SHIP,NON LIS
+q1_ship_feb232/Password@1,PHIP,SHIP,NON LIS
+q1_grp_feb001/Password@1,MAPD,Group,
+q1_grp_feb012/Password@1,MAPD,Individual,Nice_med
+q1_aarp_feb008/Password@1,MAPD,Individual,
+q1_feb_uhc138/Password@1,MAPD,,
+q4_dec_uhc003/Password@1,MAPD,Individual,Drug
+q4_dec_uhc002/Password@1,MAPD,Individual,Med_EOB
+ATDD_MAPD_IND_RX_EOB_01/Password@1,MAPD,Individual,rx_Eob
+q3_sep_blayer149/Password@1,MAPD-PHR,Individual,
+ATDD_q2_jun_blayer123/Password@1,MAPD,COSMOS_dce,
+q1_grp_feb261/Password@1,MA,Group,
+q1_feb_uhc009/Password@1,MAPD,Individual,NON LIS
+q1_aarp_feb170/Password@1,MA,Individual,LIS 1
+q1_feb_uhc022/Password@1,MAPD,Individual,LIS 1 
+q1_feb_uhc022/Password@1,MAPD,Ind,LIS 1
+q1_aarp_feb405/Password@1,PDP,Individual,LIS 4
+q1_aarp_feb267/Password@1,MA,Individual,NON LIS
+q3_sep_grp351/Password@1,SSUP,Group,
+q1_grp_feb271/Password@1,PDP,Group,
+q1_grp_feb031/Password@1,MAPD,Group,NON LIS
+q1_grp_feb276/Password@1,PDP,Group,NON LIS
+q1_grp_feb259/Password@1,Peehip,Group,
+q1_aarp_feb299/Password@1,PDP,Individual,NON LIS
+q4_dec_grp086/Password@1,MAPD,Group,
+q1_grp_feb523,PDPwithSSUP,Group,
+q1_aarp_feb151/Password@1,MAPD,IndividualDCEmember,
+q4_dec_uhc160/Password@1,MAPD,Individualwithoutpharmacy,
+Reward_bl_005/Password@5,MAPD,RewardsMember,
+q1_grp_feb086/Password@1,MA,Nokia,
+q1_grp_feb009/Password@1,MAPD,Nokia,
+q1_feb_uhc202/Password@1,PDP,,
+q1_ship_feb192/Password@1,SHIP,,
+q1_aarp_feb005/Password@1,MA,,  
+q1_grp_feb495/Password@1,MA,Group,HMO
+q1_grp_feb043/Password@1,MA,Group,LIS 1
+q1_ship_feb120/Password,HIP,SHIP,NON LIS
+q1_ship_feb232/Password@1,PHIP,SHIP,NON LIS
+q4_dec_uhc012/Password@1,MAPD,Individual,
+q4_dec_grp306/Password@1,PDP,Group,
+q3_sep_grp279/Password@1,Peehip,Group,
+q4_dec_grp086/Password@1,MAPD,Group,
+q4_dec_grp337,PDPwithSSUP,Group,
+q1_aarp_feb025/Password@1,MAPD,IndividualDCEmember,
+q1_aarp_feb252/Password@1,MAPD,Individualwithoutpharmacy,
+Reward_bl_001/Password@10,MAPD,RewardsMember,
+q1_grp_feb337/Password@1,PDPwithSSUP,Group,
+q1_ship_feb001/Password@1,SHIP,Individual,
+q1_aarp_feb018/Password@1,MAPD,IndividualAARPWOEOB,
+q1_aarp_feb140/Password@1,MA,IndividualAARPWOEOB,
+q1_aarp_feb006/Password@1,PDP,IndividualAARPWOEOB,
+q1_ship_feb005/Password@1,SHIP,IndividualAARPWOEOB,
+q1_feb_sfl023/Password@1,PCP,withEOB,
+q1_feb_uhceob001/Password@1,MAPD,aarpWithEOB,
+q1_feb_aarpeob001/Password@1,MAPD,NICE_EOB,
+q1_feb_aarpeob004/Password@1,MA,NICE_EOB,
+q1_feb_grpeob002/Password@1,MAPD_GRP,NICE_EOB,
+q1_grp_feb001/Password@1,MAPD,Group,
+q1_grp_feb012/Password@1,MAPD,Individual,Nice_med
+q1_aarp_feb008/Password@1,MAPD,Individual,
+q1_feb_uhc138/Password@1,MAPD,,
+q4_dec_uhc003/Password@1,MAPD,Individual,Drug
+q4_dec_uhc002/Password@1,MAPD,Individual,Med_EOB
+ATDD_MAPD_IND_RX_EOB_01/Password@1,MAPD,Individual,rx_Eob
+q3_sep_blayer149/Password@1,MAPD-PHR,Individual,
+ATDD_q2_jun_blayer123/Password@1,MAPD,COSMOS_dce,
+q1_grp_feb261/Password@1,MA,Group,
+q1_aarp_apr194/Password@1,MAPD,Individual,NON LIS
+q1_feb_uhc009/Password@1,MAPD,Individual,NON LIS
+q1_aarp_feb170/Password@1,MA,Individual,LIS 1
+q1_feb_uhc022/Password@1,MAPD,Individual,LIS 1 
+q1_feb_uhc022/Password@1,MAPD,Ind,LIS 1
+q1_aarp_feb405/Password@1,PDP,Individual,LIS 4
+q1_aarp_feb267/Password@1,MA,Individual,NON LIS
+q3_sep_grp351/Password@1,SSUP,Group,
+q1_grp_feb271/Password@1,PDP,Group,
+q1_grp_feb031/Password@1,MAPD,Group,NON LIS
+q1_grp_feb276/Password@1,PDP,Group,NON LIS
+q1_grp_feb259/Password@1,Peehip,Group,
+q1_aarp_feb299/Password@1,PDP,Individual,NON LIS
+q4_dec_grp086/Password@1,MAPD,Group,
+q1_grp_feb523,PDPwithSSUP,Group,
+q1_aarp_feb151/Password@1,MAPD,IndividualDCEmember,
+q4_dec_uhc160/Password@1,MAPD,Individualwithoutpharmacy,
+Reward_bl_005/Password@5,MAPD,RewardsMember,
+q1_grp_feb086/Password@1,MA,Nokia,
+q1_grp_feb009/Password@1,MAPD,Nokia,
+q1_feb_uhc202/Password@1,PDP,,
+q1_ship_feb192/Password@1,SHIP,,
+q1_aarp_feb005/Password@1,MA,,  
+q1_grp_feb495/Password@1,MA,Group,HMO
+q1_grp_feb043/Password@1,MA,Group,LIS 1
+q1_ship_feb120/Password,HIP,SHIP,NON LIS
+q1_ship_feb232/Password@1,PHIP,SHIP,NON LIS
+q4_dec_uhc012/Password@1,MAPD,Individual,
+q4_dec_grp306/Password@1,PDP,Group,
+q3_sep_grp279/Password@1,Peehip,Group,
+q4_dec_grp086/Password@1,MAPD,Group,
+q4_dec_grp337,PDPwithSSUP,Group,
+q1_aarp_feb025/Password@1,MAPD,IndividualDCEmember,
+q1_aarp_feb252/Password@1,MAPD,Individualwithoutpharmacy,
+Reward_bl_001/Password@10,MAPD,RewardsMember,
+q1_grp_feb337/Password@1,PDPwithSSUP,Group,
+q1_ship_feb001/Password@1,SHIP,Individual,
+q1_aarp_feb018/Password@1,MAPD,IndividualAARPWOEOB,
+q1_aarp_feb140/Password@1,MA,IndividualAARPWOEOB,
+q1_aarp_feb006/Password@1,PDP,IndividualAARPWOEOB,
+q1_ship_feb005/Password@1,SHIP,IndividualAARPWOEOB,
+q1_feb_sfl023/Password@1,PCP,withEOB,
+q1_feb_uhceob001/Password@1,MAPD,aarpWithEOB,
+q1_feb_aarpeob001/Password@1,MAPD,NICE_EOB,
+q1_feb_aarpeob004/Password@1,MA,NICE_EOB,
+q1_feb_grpeob002/Password@1,MAPD_GRP,NICE_EOB,
+q1_grp_feb031/Password@1,MAPD,Group,wotCMSValue
+shiponly001/Password@1,SHIP,SHIPOnlyBranding,NON LIS
+q1_apr_sfl017942/Password@1,MAPD,Medica,NON LIS
+q1_feb_sfl023_hsid/Password@1,MAPD,PCP,NON LIS
+q1_aarp_apr194/Password@1,MAPD,IndAARPPharmacyFnR,
+q1_aarp_apr290/Password@1,PDP,IndAARPPharmacyFnR,
+q1_grp_apr026/Password@1,MAPD,GroupPharmacyFnR,
+q1_apr_sfl0190190/Password@1,MAPD,MedicaPharmacyFnR,
+q1_feb_sfl023_hsid/Password@1,MAPD,PCPPharmacyFnR,
+q1_grp_apr226/Password@1,PDP,TexasRxPharmacyFnR,
+q1_apr_uhc032/Password@1,MAPD,IndUHCPharmacyFnR,
+q1_ship_apr006/Password@1,SHIP,IndPharmacyFnR,
+q1_aarp_ma001/Password@1,MA,IndAARPPharmacyFnR,
+q1_uhc_ma001/Password@1,MA,IndUHCPharmacyFnR,
+q1_aarp_apr194/Password@1,AARP
+q1_apr_uhc184/Password@1,UHC
+q1_grp_feb026,MAPD,GEORGIAGroup,,,
+q1_grp_feb315,MAPD,TEXASERSGroup,,,
+q1_grp_feb094,MAPD,CALPERSGroup,,,
+q1_grp_feb032,MAPD,SDCERAGroup,,,
+q1_aarp_feb291,PDP,RXCLAIMS,,,
+q1_ship_feb031,SHIP,MedSupRider,,,
+q1_combo_feb008,MAPD,MAPDwithMedSupp,,,
+ATDD_ULAYER_PDP_RX_EOB_01/Password@1,PDP,rx_eob,,,q1_ship_apr220/Password@1,SHIP_AARPIndividual,,,
+q1_aarp_apr185/Password@1,MA_AARPIndividual,,,
+q1_aarp_apr194/Password@1,MAPD_AARPIndividual,,,
+q1_aarp_apr290/Password@1,PDP_AARPIndividual,,,
+q1_apr_uhc144/Password@1,MA_UHCGroup,,,
+q1_grp_apr026/Password@1,MAPD_UHCGroup,,,
+q1_grp_apr226/Password@1,PDP_UHCGroup,,,
+q1_feb_sfl023_hsid/Password@1,PCP_OrderMaterials,,,
+q1_apr_sfl0190190/Password@1,Medica_OrderMaterials,,,
+q1_apr_uhc032/Password@1,MAPD,IndividualUHCPayments,,,
 q1_aarp_apr004/Password@1,MA ,NiceClaims,
 q1_grp_feb001/Password@1,MAPD,Group,
 q1_grp_feb012/Password@1,MAPD,Individual,Nice_med
@@ -348,4 +531,5 @@ q1_grp_apr026/Password@1,MAPD_UHCGroup,,,
 q1_grp_apr226/Password@1,PDP_UHCGroup,,,
 q1_feb_sfl023_hsid/Password@1,PCP_OrderMaterials,,,
 q1_apr_sfl0190190/Password@1,Medica_OrderMaterials,,,
-
+q1_apr_uhc032/Password@1,MAPD,IndividualUHCPayments,,,
+q1_apr_uhc094/Password@1,MAPD,IndividualAARPRPayments,,,

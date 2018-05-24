@@ -1,5 +1,7 @@
 package acceptancetests.memberredesign.expalnationofbenefits;
 
+import gherkin.formatter.model.DataTableRow;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -12,6 +14,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.regression.explanationofbenefits.EOBPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
@@ -21,9 +24,9 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import gherkin.formatter.model.DataTableRow;
+//import gherkin.formatter.model.DataTableRow;
 import pages.regression.accounthomepage.AccountHomePage;
-import pages.regression.explanationofbenefits.EOBPage;
+//import pages.regression.explanationofbenefits.EOBPage;
 
 public class EobStepDefinition {
 	@Autowired
