@@ -135,7 +135,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='pharmacy-results']//span[contains(@class,'pharmacy-name')]")
 	public List<WebElement> pharmacies;
 
-	@FindBy(xpath = "//div[@id='pharmacy-results']//ul[@class='pharmacy-list']/li[not(contains(@class,'ng-hide'))]//a[starts-with(@id,'select-pharmacy-buttons_')]")
+	@FindBy(xpath = "//div[@id='pharmacy-results']//table[@class='pharmacy-list']/tbody/tr[not(contains(@class,'ng-hide'))]//a[starts-with(@id,'select-pharmacy-buttons_')]")
 	public WebElement select_btn_first;
 
 	@FindBy(id = "saverSavingSpan")
