@@ -91,7 +91,7 @@ public class RegistrationHomePage extends UhcDriver {
 
 	public RegistrationUMSErrorPage navigateToErrorPage() {		
 		if (driver.getTitle().equalsIgnoreCase(
-				"UnitedHealthcare Medicare Solutions | Registration")) {
+				PageTitleConstants.BLAYER_MEDICARE_SOLUTIONS_REGISTRATION)) {
 			return new RegistrationUMSErrorPage(driver);
 		}
 		return null;

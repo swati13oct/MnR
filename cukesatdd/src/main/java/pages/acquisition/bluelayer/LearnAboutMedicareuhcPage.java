@@ -76,7 +76,7 @@ public class LearnAboutMedicareuhcPage extends GlobalWebElements{
 	    actions.moveToElement(exploreChangingPlansMedicareEducationLink);
 	    actions.click().build().perform();
 	    validate(navigationSectionMedicareEducationLink);
-		if (driver.getTitle().equalsIgnoreCase("Change Medicare Plans | UnitedHealthcare®")) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_CHANGE_MEDICARE_PLANS_UNITEDHEALTHCARE)) {
 			return new ExploreChangingPlansuhcPage(driver);
 		}else{
 		

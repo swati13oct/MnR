@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.data.PageData;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.PageTitleConstants;
 
 public class AddDrugDetails extends UhcDriver {
 
@@ -112,7 +113,7 @@ public class AddDrugDetails extends UhcDriver {
 		
 		waitforElement(continueButton);
 		continueButton.click();
-		if (driver.getTitle().equalsIgnoreCase("SAVINGS OPPORTUNITY")) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_SAVINGS_OPPORTUNITY)) {
 			return new SavingsOppurtunity(driver);
 		}
 		return null;

@@ -774,7 +774,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		CommonUtility.checkPageIsReady(driver);
 		if (driver.getTitle().equalsIgnoreCase("AARPMP: Medicare Plan Benefits and Information | AARP® Medicare Plans from UnitedHealthcare®")
-				|| driver.getTitle().equalsIgnoreCase("Plan Detail") || validate(backToPlansLink)) {
+				|| driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_PLAN_DETAIL) || validate(backToPlansLink)) {
 				//|| driver.getTitle().equalsIgnoreCase("Plan Detail") || driver.getCurrentUrl().contains("/details")) {
 			return new PlanDetailsPage(driver);
 		}

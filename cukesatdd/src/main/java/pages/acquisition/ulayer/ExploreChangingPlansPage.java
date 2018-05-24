@@ -22,7 +22,7 @@ public class ExploreChangingPlansPage extends GlobalWebElements {
 		validate(discoverMoreResourcesLink);
 		discoverMoreResourcesLink.click();
 		validate(discoverMoreResourcesLink);
-		if (driver.getTitle().equalsIgnoreCase("More Medicare Resources | AARP® Medicare Plans from UnitedHealthcare®")) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_MORE_MEDICARE_RESOURCES)) {
 			return new DiscoverMoreResourcesPage(driver);
 		}else{
 		

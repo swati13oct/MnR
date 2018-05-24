@@ -88,7 +88,7 @@ public class PlansummaryUMSPage {
 
 			}
 		}
-		if (driver.getTitle().equalsIgnoreCase("Plan Details") || driver.getTitle().equalsIgnoreCase("Plan Detail")) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_PLAN_DETAILS) || driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_PLAN_DETAIL)) {
 			return new PlandetailsUMSPage(driver);
 		}
 
