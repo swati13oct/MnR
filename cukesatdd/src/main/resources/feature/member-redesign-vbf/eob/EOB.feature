@@ -23,9 +23,10 @@ Feature: 1.05-VBF-MemRedesign-To test EOB functionality
     #Then the user validates site leaving pop up
     Examples: 
       | planType | memberType        | dateRange | eobType           | friendname | favcolor | phonenumber |
-      | MAPD     | UHCIndividualEOB  | 18 Months | Medical           | name1      | color1   | number1     |
+      | MAPD     | UHCIndividualCosmosEOB  | 18 Months | Medical           | name1      | color1   | number1     |
     #  | MAPD     | UHCIndividualEOB  | 18 Months | Prescription Drug | name1      | color1   | number1     |
-    #  | MAPD     | AARPIndividualEOB | 18 Months | Medical           | name1      | color1   | number1     |
-			| MAPD      | AARPIndividualEOB    |18 Months		  | Prescription Drug | name1      | color1   | number1     | 
-		#	| MAPD      | GroupRetireeEOB      |18 Months		  | Medical           | name1      | color1   | number1     | 
+   #   | MAPD     | AARPIndividualCosmosEOB | 18 Months | Medical           | name1      | color1   | number1     |
+    | MAPD     | AARPIndividualNiceEOB | 18 Months | Medical           | name1      | color1   | number1     |
+		| MAPD      | AARPIndividualEOB    |18 Months		  | Prescription Drug | name1      | color1   | number1     | 
+		#	| MAPD      | GroupRetireeCosmosEOB      |18 Months		  | Medical           | name1      | color1   | number1     | 
 		#	| MAPD      | GroupRetireeEOB      |18 Months		  | Prescription Drug | name1      | color1   | number1     | 
