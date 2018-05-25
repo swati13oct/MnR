@@ -6,6 +6,7 @@ package pages.acquisition.bluelayer;
 import java.util.List;
 
 import junit.framework.Assert;
+import pages.acquisition.ulayer.PageTitleConstants;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -210,11 +211,11 @@ public class PharmacySearchPage extends UhcDriver {
 		}
 		System.out.println(driver.getTitle());
 		if (driver.getTitle().equalsIgnoreCase(
-				"Locate a Pharmacy | UnitedHealthcare®")) {
+				PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE)) {
 			return new PharmacySearchPage(driver);
 		}
 		if (driver.getTitle().equalsIgnoreCase(
-				"Find a Pharmacy | AARP® Medicare Plans from UnitedHealthcare®")) {
+				PageTitleConstants.BLAYER_FIND_A_PHARMACY_AARP_MEDICARE_PLANS_FROM_UNITEDHEALTHCARE)) {
 			return new PharmacySearchPage(driver);
 		}
 		return null;
@@ -232,7 +233,7 @@ public class PharmacySearchPage extends UhcDriver {
 			
 		}
 		if (driver.getTitle().equalsIgnoreCase(
-				"Locate a Pharmacy | UnitedHealthcare®")) {
+				PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE)) {
 			return new PharmacySearchPage(driver);
 		}
 		return null;
@@ -565,7 +566,7 @@ public PharmacySearchPage selectPharmacyandServices(String pharmacytype) {
 		}
 
 		if (driver.getTitle().equalsIgnoreCase(
-				"Locate a Pharmacy | UnitedHealthcare®")) {
+				PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE)) {
 			return new PharmacySearchPage(driver);
 		}
 		return null;

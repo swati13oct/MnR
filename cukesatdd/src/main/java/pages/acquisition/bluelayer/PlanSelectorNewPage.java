@@ -14,6 +14,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.PageTitleConstants;
 
 
 public class PlanSelectorNewPage extends UhcDriver {
@@ -141,7 +142,7 @@ public class PlanSelectorNewPage extends UhcDriver {
 		switchToNewIframe(iframePst);
 
 		waitforElement(firstPlanDetailsBtn);
-		if (driver.getTitle().contentEquals("Plan Selector"))
+		if (driver.getTitle().contentEquals(PageTitleConstants.BLAYER_PLAN_SELECTOR))
 		{
 			Assert.assertTrue(true);
 		}
@@ -159,7 +160,7 @@ public class PlanSelectorNewPage extends UhcDriver {
 		waitforElement(iframePst);
 		switchToNewIframe(iframePst);
 		waitforElement(firstPlanDetailsBtn);
-		if (driver.getTitle().contentEquals("Plan Selector"))
+		if (driver.getTitle().contentEquals(PageTitleConstants.BLAYER_PLAN_SELECTOR))
 		{
 			Assert.assertTrue(true);
 		}

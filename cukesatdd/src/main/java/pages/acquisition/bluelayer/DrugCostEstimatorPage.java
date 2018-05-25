@@ -1333,7 +1333,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			// switchToGenericHeadingsId
 			if (driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")) {
 				String savingsOpputunityHeading = driver.findElement(By.id("switchToGenericHeadingsId")).getText();
-				if (savingsOpputunityHeading.equals("SAVINGS OPPORTUNITY")) {
+				if (savingsOpputunityHeading.equals(PageTitleConstants.BLAYER_SAVINGS_OPPORTUNITY)) {
 					Assert.assertTrue(true);
 				} else {
 					Assert.assertTrue("Savings Oppurtunity modal popup does not show up", false);

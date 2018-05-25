@@ -9,6 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.MRConstants;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.PageTitleConstants;
 
 public class PortfolioTeamCUhc extends UhcDriver {
 
@@ -56,7 +57,7 @@ public class PortfolioTeamCUhc extends UhcDriver {
 		 * System.out.println(countyActuals.get(i).getText());
 		 * countyActuals.get(i).click(); break; } }
 		 */
-		if (driver.getTitle().contains("Our Medicare Plan Types")) {
+		if (driver.getTitle().contains(PageTitleConstants.BLAYER_OUR_MEDICARE_PLAN_TYPES)) {
 			return new ResponsivePlanSummaryUhc(driver);
 		}
 		return null;

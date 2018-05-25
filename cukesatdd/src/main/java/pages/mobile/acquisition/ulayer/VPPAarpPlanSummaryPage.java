@@ -16,6 +16,7 @@ import org.openqa.selenium.support.PageFactory;
 import pages.acquisition.ulayer.GetStartedPage;
 import pages.acquisition.ulayer.IntroductionInformationPage;
 import pages.acquisition.ulayer.ManageDrugPage;
+import pages.acquisition.ulayer.PageTitleConstants;
 import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.ulayer.PlanInformationPage;
 import pages.acquisition.ulayer.ProviderSearchPage;
@@ -156,7 +157,7 @@ public class VPPAarpPlanSummaryPage extends UhcDriver {
 		}
 		CommonUtility.checkPageIsReady(driver);
 		/*if (driver.getTitle().equalsIgnoreCase("Plan Details | AARP® Medicare Plans from UnitedHealthcare®")
-				|| driver.getTitle().equalsIgnoreCase("Plan Detail")) {
+				|| driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_PLAN_DETAIL)) {
 			return new PlanDetailsPage(driver,planType);
 		}*/
 
@@ -361,7 +362,7 @@ public class VPPAarpPlanSummaryPage extends UhcDriver {
 			}
 		}
 		if (driver.getTitle().equalsIgnoreCase(
-				"AARP Medicare Complete Online Application") || driver.getTitle().equalsIgnoreCase("AARP Medicarerx Online Application")) {
+				"AARP Medicare Complete Online Application") || driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_AARP_MEDICARERX_ONLINE_APPLICATION)) {
 			return new PlanInformationPage(driver,planName);
 		}
 		
@@ -387,7 +388,7 @@ public class VPPAarpPlanSummaryPage extends UhcDriver {
 			}
 		}
 		if (driver.getTitle().equalsIgnoreCase(
-				"AARP Medicare Complete Online Application") || driver.getTitle().equalsIgnoreCase("AARP Medicarerx Online Application")) {
+				"AARP Medicare Complete Online Application") || driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_AARP_MEDICARERX_ONLINE_APPLICATION)) {
 			return new IntroductionInformationPage(driver);
 		}
 		

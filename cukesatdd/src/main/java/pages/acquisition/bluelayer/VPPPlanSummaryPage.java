@@ -478,9 +478,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		CommonUtility.checkPageIsReady(driver);
 		System.out.println("Title is :"+driver.getTitle());
 		System.out.println(driver.getCurrentUrl());
-		if (driver.getTitle().equalsIgnoreCase("Medicare Advantage Plan Details | | UnitedHealthcare®")
-				|| driver.getTitle().equalsIgnoreCase("Medicare Special Needs Plan Details | UnitedHealthcare®")
-				|| driver.getTitle().equalsIgnoreCase("Medicare Prescription Drug Plan Details | UnitedHealthcare®")
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_ADVANTAGE_PLAN_DETAILS)
+				|| driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_SPECIAL_NEEDS_PLAN_DETAILS)
+				|| driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_PRESCRIPTION_DRUG_PLAN_DETAILS)
 				|| driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_PLAN_TYPES_TITLE)) {
 			return new PlanDetailsPage(driver);
 		}

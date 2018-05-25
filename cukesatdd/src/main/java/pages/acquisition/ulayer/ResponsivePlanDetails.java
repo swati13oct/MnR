@@ -124,7 +124,7 @@ public class ResponsivePlanDetails extends UhcDriver{
 			if (validate(PDPEnrolllink)) {
 				PDPEnrolllink.click();
 				
-				if(driver.getTitle().equalsIgnoreCase("Medicare Advantage Enrollment | AARP® Medicare Plans from UnitedHealthcare®")){
+				if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_ADVANTAGE_ENROLLMENT)){
 					 return new IntroductionInformationPage(driver);
 				
 				
@@ -134,7 +134,7 @@ public class ResponsivePlanDetails extends UhcDriver{
 		else if (plantype.equals("MA")) {
 			if (validate(MAEnrolllink)) {
 				MAEnrolllink.click();
-				if(driver.getTitle().equalsIgnoreCase("Medicare Advantage Enrollment | AARP® Medicare Plans from UnitedHealthcare®")){
+				if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_ADVANTAGE_ENROLLMENT)){
 					 return new IntroductionInformationPage(driver);
 				
 		}
