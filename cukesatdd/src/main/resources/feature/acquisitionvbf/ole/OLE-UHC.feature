@@ -55,7 +55,7 @@ Feature:1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
 
     Examples: 
       | zipcode | county             | plantype | planName                                          |
-      |   90210 | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |
+#      |   90210 | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |
        
 
   @OLE_PlanCompare_UHC
@@ -74,4 +74,4 @@ Feature:1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
 
     Examples: 
       | zipcode | county             | plantype | planName                                          |
-      |   90210 | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |
+#      |   90210 | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |
