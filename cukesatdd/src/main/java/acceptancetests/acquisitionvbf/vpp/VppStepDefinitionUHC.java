@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.PlanDetailsPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
+import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
@@ -108,14 +109,22 @@ public class VppStepDefinitionUHC {
 
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		try {
+			Thread.sleep(7000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		plansummaryPage = plansummaryPage.viewPlanSummary(plantype);
-
+		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "UHC_ACQ");
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, plantype);
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
 					plansummaryPage);
-			
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Error validating availables plans for selected plantype in  VPP plan summary page");
 		}
-
 	}
 	
 	/**

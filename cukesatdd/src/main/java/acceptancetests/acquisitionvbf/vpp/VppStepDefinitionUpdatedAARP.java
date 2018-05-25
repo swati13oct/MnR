@@ -14,6 +14,7 @@ import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.ComparePlansPage;
 import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
@@ -77,10 +78,6 @@ public class VppStepDefinitionUpdatedAARP {
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
 					plansummaryPage);
-			if(plansummaryPage.validateVPPPlanSummaryPage())
-				Assert.assertTrue(true);
-			else
-				Assert.fail("Error in validating the Plan Summary Page");
 		} else {
 			Assert.fail("Error Loading VPP plan summary page");
 		}
@@ -116,6 +113,7 @@ public class VppStepDefinitionUpdatedAARP {
 		}
 
 		String plantype = givenAttributesMap.get("Plan Type");
+		System.out.println("Select PlanType to view Plans for entered Zip"+plantype);
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
@@ -125,6 +123,7 @@ public class VppStepDefinitionUpdatedAARP {
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
 					plansummaryPage);
+			
 		} else {
 			Assert.fail("Error loading plans of desired plantype in  VPP plan summary page");
 		}
@@ -203,6 +202,11 @@ public class VppStepDefinitionUpdatedAARP {
 		String planType = (String) getLoginScenario().getBean(
 				VPPCommonConstants.PLAN_TYPE);
 		if (plansummaryPage.validatePlanNames(planType)) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
+					plansummaryPage);
+			String SiteName = "AARP_ACQ";
+			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
+				
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("Error validating availables plans for selected plantype in  VPP plan summary page");

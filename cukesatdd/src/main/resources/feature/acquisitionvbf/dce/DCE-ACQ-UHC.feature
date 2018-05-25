@@ -17,7 +17,7 @@ And I navigate to step3 page and validate the drug info
 
  Examples:
 | drug|zipcode| radius|
-| Lipitor TAB 10MG| 90210 | 15miles |
+| LIPITOR TAB 10MG| 90210 | 15miles |
 
 
 @dceVppBlayer
@@ -36,7 +36,7 @@ And I navigate to step3 page and validate the drug info
 	
 Examples:
 | zipcode  |plantype |   drug   | 
-| 90210    | MA 	 |Lipitor TAB 10MG|
+| 90210    | MA 	 |LIPITOR TAB 10MG|
 
 @switchNowStep3Blayer
 Scenario Outline: To test the dce vpp flow with switch now option
@@ -55,7 +55,7 @@ Then I switch to generic drug and validate on ums site
 	
 Examples:
 | zipcode  | plantype |   drug   | 
-| 90210    |  MA 	  | Lipitor TAB 10MG|
+| 90210    |  MA 	  | LIPITOR TAB 10MG|
 
 @defect3312
 Scenario Outline: To test Preferred Retail pharmacy type is there for Walgreens plan
@@ -71,7 +71,7 @@ Then I validate preferred retail pharmacy type is displayed
 
 Examples:
 | zipcode  | plantype |  drug   | 
-| 90210    | PDP	  |Lipitor TAB 10MG|
+| 90210    | PDP	  |LIPITOR TAB 10MG|
 
 #AEP period scenario that requires changing the year to 2017
 @defect3255
@@ -88,7 +88,7 @@ Then I validate pharmacy saver pharmacy type is displayed
 
 Examples:
 | zipcode  | plantype |  drug   | 
-#| 90210    | MA	  |Lipitor TAB 10MG|
+#| 90210    | MA	  |LIPITOR TAB 10MG|
 
 @defect1662
 Scenario Outline: To go through dce from homepage and validate drug is still there when going to dce from vpp
