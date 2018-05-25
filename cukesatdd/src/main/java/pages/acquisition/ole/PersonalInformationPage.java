@@ -40,7 +40,7 @@ public class PersonalInformationPage extends UhcDriver{
 	@FindBy(id = "ole-cancel-confirm")
 	private WebElement CancellationModal;
 
-	@FindBy(id = "sample-linkrouter")
+	@FindBy(id = "leavingSite-linkrouter")
 	private WebElement LeavingOLEmodal;
 
 	//Right Rail Elements
@@ -145,7 +145,7 @@ public class PersonalInformationPage extends UhcDriver{
 		sendkeys(PermanentAdd_Street,Perm_Street);
 		sendkeys(PermanentAdd_City,Perm_city);
 		System.out.println("Mailing Question : "+MailingQuestion);
-		if(MailingQuestion.contains("No")){
+		if(MailingQuestion.equalsIgnoreCase("no")){
 			SameMailingAddressNo.click();
 			try {
 				Thread.sleep(2000);
@@ -153,10 +153,10 @@ public class PersonalInformationPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			//sendkeys(MailingAdd_Street,Mailing_Street);
+			sendkeys(MailingAdd_Street,Mailing_Street);
 			sendkeys(MailingAdd_City,Mailing_City);
 			Select SelectState = new Select(MailingAdd_State_DropDown);
-			SelectState.selectByVisibleText(Mailing_State);
+			SelectState.selectByValue(Mailing_State);
 			sendkeys(MailingAdd_Zip,Mailing_Zip);
 		}
 		sendkeys(Email,EmailAddress);

@@ -22,6 +22,7 @@ import pages.acquisition.ole.PlanPremiumPage;
 import pages.acquisition.ole.PrelimineryQuestionsPage;
 import pages.acquisition.ole.PrimaryCarePhysicianPage;
 import pages.acquisition.ole.ProposedEffectiveDatePage;
+import pages.acquisition.ole.ReviewSubmitPage;
 import pages.acquisition.ole.SpecialElectionPeriodPage;
 import pages.acquisition.ole.SupplementalBenefitsPage;
 import pages.acquisition.ole.WelcomePage;
@@ -806,6 +807,16 @@ public class oleStepDefinition {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE,
 					personalInformationPage);
 			System.out.println("OLE Personal Information Page - All required Member Details are entered");
+			getLoginScenario().saveBean(oleCommonConstants.DOB, MemberDetailsMap.get("DOB"));
+			getLoginScenario().saveBean(oleCommonConstants.GENDER, MemberDetailsMap.get("Gender"));
+			getLoginScenario().saveBean(oleCommonConstants.PERM_STREET, MemberDetailsMap.get("Perm_Street"));
+			getLoginScenario().saveBean(oleCommonConstants.PERM_CITY, MemberDetailsMap.get("Perm_city"));
+			getLoginScenario().saveBean(oleCommonConstants.MAILING_QUESTION, MemberDetailsMap.get("Mailing Address Question"));
+			getLoginScenario().saveBean(oleCommonConstants.MAILING_STREET, MemberDetailsMap.get("Mailing_Street"));
+			getLoginScenario().saveBean(oleCommonConstants.MAILING_CITY, MemberDetailsMap.get("Mailing_City"));
+			getLoginScenario().saveBean(oleCommonConstants.MAILING_STATE, MemberDetailsMap.get("Mailing_State"));
+			getLoginScenario().saveBean(oleCommonConstants.MAILING_ZIP, MemberDetailsMap.get("Mailing_Zip"));
+			getLoginScenario().saveBean(oleCommonConstants.EMAIL, MemberDetailsMap.get("Email"));
 			Assert.assertTrue(true);
 		}
 		else
@@ -1083,6 +1094,32 @@ public class oleStepDefinition {
 		}
 	}
 
+	@Then("^the user selects the following options for SEP Page$")
+	public void the_user_selects_the_following_options_for_SEP_Page(DataTable SEPoptions) throws Throwable {
+		List<DataTableRow> personalAttributesRow = SEPoptions.getGherkinRows();
+		Map<String, String> SEPoptionsFlagMap = new HashMap<String, String>();
+		for (int i = 0; i < personalAttributesRow.size(); i++) {
+			SEPoptionsFlagMap.put(personalAttributesRow.get(i)
+					.getCells().get(0), personalAttributesRow.get(i)
+					.getCells().get(1));
+		}
+		String Selectoptions = SEPoptionsFlagMap.get("Select Options");
+		String optionsData = SEPoptionsFlagMap.get("Option Data");
+
+		SpecialElectionPeriodPage specialElectionPeriodPage = (SpecialElectionPeriodPage) getLoginScenario().getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
+		specialElectionPeriodPage = specialElectionPeriodPage.select_option_and_enter_data(Selectoptions, optionsData);
+		if (specialElectionPeriodPage != null) {
+
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE,
+					specialElectionPeriodPage);
+			System.out.println("OLE SEP page Options Selected : Next Button enabled");
+		}
+		else
+			Assert.fail("OLE SEP page Options NOT Selected : Next Button NOT enabled");
+
+	}
+
+
 	@Then("^the user navigates to Coverage and Health Information Page$")
 	public void the_user_navigates_to_Coverage_and_Health_Information_Page() throws Throwable {
 		SpecialElectionPeriodPage specialElectionPeriodPage = (SpecialElectionPeriodPage) getLoginScenario().getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
@@ -1113,6 +1150,32 @@ public class oleStepDefinition {
 			Assert.fail();
 		}
 	}
+	
+	@Then("^the user answers following questions in Coverage and Health Information Page$")
+	public void the_user_answers_following_questions_in_Coverage_and_Health_Information_Page(DataTable arg1) throws Throwable {
+		List<DataTableRow> personalAttributesRow = arg1.getGherkinRows();
+		Map<String, String> QuestionMap = new HashMap<String, String>();
+		for (int i = 0; i < personalAttributesRow.size(); i++) {
+			QuestionMap.put(personalAttributesRow.get(i)
+					.getCells().get(0), personalAttributesRow.get(i)
+					.getCells().get(1));
+		}
+/*		String PDPquestionFlag = QuestionMap.get("PDP Question");
+		String LongTermQuestionFlag = QuestionMap.get("LongTerm Question");
+*/
+		CoverageInformationPage coverageInformationPage = (CoverageInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_COVERAGE_INFO_PAGE);
+		coverageInformationPage = coverageInformationPage.answer_following_questions(QuestionMap);
+		if (coverageInformationPage != null) {
+
+				getLoginScenario().saveBean(OLE_PageConstants.OLE_COVERAGE_INFO_PAGE,
+						coverageInformationPage);
+				System.out.println("Coverage and Health Information Page : Data entered");
+			}
+			else
+				Assert.fail("Coverage and Health Information Page : Data entry FAILED");
+
+	}
+
 
 	@Then("^the user navigates to Proposed Effective Date Page$")
 	public void the_user_navigates_to_Proposed_Effective_Date_Page() throws Throwable {
@@ -1126,9 +1189,23 @@ public class oleStepDefinition {
 		}
 		else
 			Assert.fail("OLE Proposed Effective Date Page is NOT Displayed");
-
 	}
 	
+	@Then("^the user validates Proposed Effective Date is Displayed$")
+	public void the_user_validates_proposed_effective_date_display() throws Throwable {
+		ProposedEffectiveDatePage proposedEffectiveDatePage  = (ProposedEffectiveDatePage) getLoginScenario().getBean(OLE_PageConstants.OLE_PROPOSED_EFF_DATE_PAGE);
+		boolean Validation_Status = proposedEffectiveDatePage.validate_proposed_effective_date_options();
+		if(Validation_Status){
+			System.out.println("Proposed Effective Date display : Validation Passed");
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_PROPOSED_EFF_DATE_PAGE, proposedEffectiveDatePage);
+			Assert.assertTrue(true);
+		}
+		else{
+			System.out.println("Proposed Effective Date display : Validation Failed");
+			Assert.fail();
+		}
+	}
+
 	@Then("^the user navigates to PCP Page and validates PCP page is not displayed for PDP$")
 	public void the_user_navigates_to_PCP_Page() throws Throwable {
 		ProposedEffectiveDatePage proposedEffectiveDatePage = (ProposedEffectiveDatePage) getLoginScenario().getBean(OLE_PageConstants.OLE_PROPOSED_EFF_DATE_PAGE);
@@ -1176,11 +1253,27 @@ public class oleStepDefinition {
 				Assert.fail();
 			}
 		}
-	    // Write code here that turns the phrase above into concrete actions
 	}
 
 	@Then("^the user validates Look up Provider for MA MAPD and DSNP plans\\.$")
 	public void the_user_validates_Look_up_Provider_for_MA_MAPD_and_DSNP_plans() throws Throwable {
+		String planType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
+		PrimaryCarePhysicianPage pcpPage = (PrimaryCarePhysicianPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRIMARY_CARE_PHYSICIAN_PAGE);
+		String planName = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME);
+		if(!planType.contentEquals("PDP") && !planName.contains("PFFS")){
+			System.out.println("Validating Provider Look Up Provider for MA, MAPD, DSNP non-PFFS plans");
+			boolean Validation_Status = pcpPage.validate_provider_Lookup(planType);
+			if(Validation_Status){
+				System.out.println("Provider Look Up : Validation Passed for PlanType - "+planType);
+				getLoginScenario().saveBean(OLE_PageConstants.OLE_PRIMARY_CARE_PHYSICIAN_PAGE,
+						pcpPage);
+				Assert.assertTrue(true);
+			}
+			else{
+				System.out.println("Provider Look Up : Validation FAILED for PlanType - "+planType);
+				Assert.fail();
+			}
+		}
 	    // Write code here that turns the phrase above into concrete actions
 	}
 
@@ -1262,6 +1355,81 @@ public class oleStepDefinition {
 				Assert.fail("OLE Authorization page is NOT Displayed for Plan without Rider");
 		}
 	}
+	
+	@Then("^the user validates required fields for Authorization Page$")
+	public void the_user_validates_required_fields_for_Authorization_Page() throws Throwable {
+		AuthorizationPage authorizationPage = (AuthorizationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_AUTHORIZATION_PAGE);
+		boolean Validation_Status = authorizationPage.validate_required_field();
+		if(Validation_Status){
+			System.out.println("Authorization Page : Required fields Validated, Required data entered");
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_AUTHORIZATION_PAGE,
+					authorizationPage);
+			Assert.assertTrue(true);
+		}
+		else{
+			System.out.println("Authorization Page : Required fields NOT validated");
+			Assert.fail();
+		}
+
+	}
+
+	@Then("^the user navigates to Review and Submit Page$")
+	public void the_user_navigates_to_Review_and_Submit_Page() throws Throwable {
+		AuthorizationPage authorizationPage = (AuthorizationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_AUTHORIZATION_PAGE);
+		ReviewSubmitPage reviewSubmitPage = authorizationPage.navigate_to_Review_Submit_Page();
+		if (reviewSubmitPage != null) {
+
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_REVIEW_SUBMIT_PAGE,
+					reviewSubmitPage);
+			System.out.println("OLE Review and Submit page is Displayed");
+		}
+		else
+			Assert.fail("OLE Review and Submit page is NOT Displayed");
+	}
+
+
+	@Then("^the user validates the Plan and Member details on Review and Submit Page$")
+	public void the_user_validates_the_Plan_and_Member_details_on_Review_and_Submit_Page() throws Throwable {
+		ReviewSubmitPage reviewSubmitPage = (ReviewSubmitPage) getLoginScenario().getBean(OLE_PageConstants.OLE_REVIEW_SUBMIT_PAGE);
+		Map<String, String> DetailsMap = new HashMap<String, String>();
+		DetailsMap.put("Plan Name", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME));
+		DetailsMap.put("Plan Year", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR));
+		DetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
+		DetailsMap.put("County", (String) getLoginScenario().getBean(oleCommonConstants.OLE_COUNTY));
+		DetailsMap.put("Plan Premium", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM));
+		DetailsMap.put("First Name", (String) getLoginScenario().getBean(oleCommonConstants.FIRST_NAME));
+		DetailsMap.put("Last Name", (String) getLoginScenario().getBean(oleCommonConstants.LAST_NAME));
+		DetailsMap.put("Card Type", (String) getLoginScenario().getBean(oleCommonConstants.CARD_TYPE));
+		DetailsMap.put("Medicare Number", (String) getLoginScenario().getBean(oleCommonConstants.MEDICARE_NUMBER));
+		DetailsMap.put("PartA Date", (String) getLoginScenario().getBean(oleCommonConstants.PARTA_EFFECTIVE));
+		DetailsMap.put("PartB Date", (String) getLoginScenario().getBean(oleCommonConstants.PARTB_EFFECTIVE));
+		
+		DetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
+		DetailsMap.put("DOB", (String) getLoginScenario().getBean(oleCommonConstants.DOB));
+		DetailsMap.put("Gender", (String) getLoginScenario().getBean(oleCommonConstants.GENDER));
+		DetailsMap.put("Perm_Street", (String) getLoginScenario().getBean(oleCommonConstants.PERM_STREET));
+		DetailsMap.put("Perm_city", (String) getLoginScenario().getBean(oleCommonConstants.PERM_CITY));
+		DetailsMap.put("MAILING_QUESTION", (String) getLoginScenario().getBean(oleCommonConstants.MAILING_QUESTION));
+		DetailsMap.put("Mailing_Street", (String) getLoginScenario().getBean(oleCommonConstants.MAILING_STREET));
+		DetailsMap.put("Mailing_City", (String) getLoginScenario().getBean(oleCommonConstants.MAILING_CITY));
+		DetailsMap.put("Mailing_State", (String) getLoginScenario().getBean(oleCommonConstants.MAILING_STATE));
+		DetailsMap.put("Mailing_Zip", (String) getLoginScenario().getBean(oleCommonConstants.MAILING_ZIP));
+		DetailsMap.put("Email", (String) getLoginScenario().getBean(oleCommonConstants.EMAIL));
+
+		boolean Validation_Status = reviewSubmitPage.all_plan_and_member_details(DetailsMap);
+		if(Validation_Status){
+			System.out.println("Review and Submit Page : All Plan and Member Details Validated");
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_REVIEW_SUBMIT_PAGE,
+					reviewSubmitPage);
+			Assert.assertTrue(true);
+		}
+		else{
+			System.out.println("Review and Submit Page : All Plan and Member Details  NOT validated");
+			Assert.fail();
+		}
+	}
+
+
 }
 
 
