@@ -11,7 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import acceptancetests.acquisitionvbf.agentflow.RequestAgentAppointmentConstants;
+import acceptancetests.vbfacquisition.agentflow.RequestAgentAppointmentConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
