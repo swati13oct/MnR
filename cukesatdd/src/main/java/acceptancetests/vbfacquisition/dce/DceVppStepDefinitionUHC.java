@@ -1,4 +1,4 @@
-package acceptancetests.acquisitionvbf.dce;
+package acceptancetests.vbfacquisition.dce;
 import gherkin.formatter.model.DataTableRow;
 
 import java.io.File;
@@ -22,7 +22,7 @@ import pages.acquisition.bluelayer.SelectDosagePage;
 import pages.acquisition.bluelayer.SelectGenericPage;
 import pages.acquisition.bluelayer.SelectPharmacyPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
-import acceptancetests.acquisitionvbf.vpp.VPPCommonConstants;
+import acceptancetests.vbfacquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;

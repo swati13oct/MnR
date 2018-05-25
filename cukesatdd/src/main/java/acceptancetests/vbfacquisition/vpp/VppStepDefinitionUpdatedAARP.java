@@ -1,4 +1,4 @@
-package acceptancetests.acquisitionvbf.vpp;
+package acceptancetests.vbfacquisition.vpp;
 
 import gherkin.formatter.model.DataTableRow;
 

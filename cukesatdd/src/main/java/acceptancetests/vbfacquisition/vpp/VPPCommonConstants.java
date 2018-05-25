@@ -1,4 +1,4 @@
-package acceptancetests.acquisitionvbf.vpp;
+package acceptancetests.vbfacquisition.vpp;
 
 /**
  * @author pjaising

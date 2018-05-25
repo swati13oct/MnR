@@ -1,7 +1,7 @@
 /**
  * 
  */
-package acceptancetests.acquisitionvbf.enrollinplan;
+package acceptancetests.vbfacquisition.enrollinplan;
 
 /**
  * @author pperugu

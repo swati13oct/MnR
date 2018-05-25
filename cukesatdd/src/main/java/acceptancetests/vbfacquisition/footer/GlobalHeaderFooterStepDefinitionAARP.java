@@ -1,4 +1,4 @@
-package acceptancetests.acquisitionvbf.footer;
+package acceptancetests.vbfacquisition.footer;
 
 import org.json.JSONObject;
 import org.junit.Assert;

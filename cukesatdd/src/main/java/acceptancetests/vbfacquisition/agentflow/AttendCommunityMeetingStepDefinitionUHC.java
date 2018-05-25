@@ -1,4 +1,4 @@
-package acceptancetests.acquisitionvbf.agentflow;
+package acceptancetests.vbfacquisition.agentflow;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;

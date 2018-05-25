@@ -1,7 +1,7 @@
 /**
  * 
  */
-package acceptancetests.acquisitionvbf.pharmacylocator;
+package acceptancetests.vbfacquisition.pharmacylocator;
 
 /**
  * @author pperugu

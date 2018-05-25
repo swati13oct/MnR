@@ -1,4 +1,4 @@
-package acceptancetests.acquisitionvbf.pharmacylocator;
+package acceptancetests.vbfacquisition.pharmacylocator;
 
 import gherkin.formatter.model.DataTableRow;
 

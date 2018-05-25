@@ -1,4 +1,4 @@
-package acceptancetests.acquisitionvbf.acqseo;
+package acceptancetests.vbfacquisition.acqseo;
 
 import gherkin.formatter.model.DataTableRow;
 

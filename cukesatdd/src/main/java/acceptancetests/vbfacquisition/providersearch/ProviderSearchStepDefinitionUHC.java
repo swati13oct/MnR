@@ -1,4 +1,4 @@
-package acceptancetests.acquisitionvbf.providersearch;
+package acceptancetests.vbfacquisition.providersearch;
 
 import gherkin.formatter.model.DataTableRow;
 
@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
-import acceptancetests.acquisitionvbf.vpp.VPPCommonConstants;
+import acceptancetests.vbfacquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;

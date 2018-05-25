@@ -1,4 +1,4 @@
-package acceptancetests.acquisitionvbf.enrollinplan;
+package acceptancetests.vbfacquisition.enrollinplan;
 
 import gherkin.formatter.model.DataTableRow;
 
@@ -22,7 +22,7 @@ import pages.acquisition.bluelayer.PlanInformationPage;
 import pages.acquisition.bluelayer.ReviewApplicationPage;
 import pages.acquisition.bluelayer.SubmitApplicationPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
-import acceptancetests.acquisitionvbf.vpp.VPPCommonConstants;
+import acceptancetests.vbfacquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;

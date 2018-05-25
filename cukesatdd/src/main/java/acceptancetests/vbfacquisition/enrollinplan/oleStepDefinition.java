@@ -1,4 +1,4 @@
-package acceptancetests.acquisitionvbf.enrollinplan;
+package acceptancetests.vbfacquisition.enrollinplan;
 
 import gherkin.formatter.model.DataTableRow;
 
@@ -28,7 +28,7 @@ import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.ComparePlansPage;
 import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
-import acceptancetests.acquisitionvbf.vpp.VPPCommonConstants;
+import acceptancetests.vbfacquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.OLE_PageConstants;
 import acceptancetests.data.PageConstants;
