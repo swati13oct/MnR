@@ -41,7 +41,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//a[text()='Passport Flyer (PDF)']")
 	private WebElement PassportFlyerPDF;
 	
-	@FindBy(linkText = "Change location")
+	@FindBy(id = "change-location")
 	private WebElement changeLocationBtn;
 
 	@FindBy(xpath = ".//*[@id='maplans2']")
@@ -96,7 +96,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[1]//*[@class='trigger-closed']")
 	private WebElement viewPlans;
 	
-	@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='plan-overview-wrapper']/div[2]/div[3]//span[@class='trigger-closed']")
+	@FindBy(xpath ="//div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[3]//*[@class='trigger-closed']")
 	private WebElement viewPDPPlans;
 
 	@FindBy(xpath = "//div[@id='snpplans_container']/h1/span[2]")
@@ -1171,7 +1171,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public boolean validateVPPPlanSummaryPage(){
 		WebDriverWait wait = new WebDriverWait(driver, 45000);
 		boolean flag = false;
-		if(validate(viewPlans)){
+		/*if(validate(viewPlans)){
 		viewPlans = wait.until(ExpectedConditions.elementToBeClickable(viewPlans));
 		}
 		if(validate(viewPDPPlans)){
@@ -1179,7 +1179,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		if(validate(changeLocationBtn)){
 		changeLocationBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Change location")));
-		}
+		}*/
 
 
 		if(validate(viewPlans)&&validate(viewPDPPlans)&&validate(changeLocationBtn))

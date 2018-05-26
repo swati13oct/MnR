@@ -60,7 +60,7 @@ public class PlanPremiumPage extends UhcDriver{
 	@Override
 	public void openAndValidate() {
 		validate(PageHeader);
-		System.out.println("Page header is Displayed"+PageHeader.getText());	
+		System.out.println("Page header is Displayed : "+PageHeader.getText());	
 	}
 
 	public SupplementalBenefitsPage navigate_to_Supplemental_Riders_Page() {

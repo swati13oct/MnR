@@ -5,6 +5,7 @@ package pages.acquisition.ole;
 
 import java.util.Map;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -59,7 +60,7 @@ public class SpecialElectionPeriodPage extends UhcDriver{
 	@FindBy(id = "ole-cancel-confirm")
 	private WebElement CancellationModal;
 	
-	@FindBy(id = "sample-linkrouter")
+	@FindBy(id = "leavingSite-linkrouter")
 	private WebElement LeavingOLEmodal;
 
 	//SEP common options for all plan Types
@@ -109,7 +110,7 @@ public class SpecialElectionPeriodPage extends UhcDriver{
 	@Override
 	public void openAndValidate() {
 		validate(SEPPageHeader);
-		System.out.println("Page header is Displayed"+SEPPageHeader.getText());
+		System.out.println("Page header is Displayed : "+SEPPageHeader.getText());
 
 	}
 	public boolean validate_plan_details(Map<String, String> planDetailsMap) {
@@ -291,6 +292,59 @@ public CoverageInformationPage navigate_to_Coverage_Information_page() {
 		System.out.println("OLE Coverage and Health Information page is Displayed");
 		return new CoverageInformationPage(driver);
 	}
+	return null;
+}
+
+public SpecialElectionPeriodPage select_option_and_enter_data(String selectoptions, String optionsData) {
+	String[] options = selectoptions.split("/");
+	String[] optiondata = optionsData.split("/");
+	int i=0;
+	for(String currentOption : options){
+		System.out.println("Option to select : "+currentOption);
+/*		if(currentOption.contains("None apply")){
+			try {
+				WebElement currentOptionChkBx = driver.findElement(By.xpath("//*[contains(text(), 'None apply')]//..//preceding-sibling::input"));
+				currentOptionChkBx.click();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				System.out.println("Not able to select option");
+				return null;
+			}
+		}*/
+		try {
+			WebElement currentOptionChkBx = driver.findElement(By.xpath("//*[contains(text(), '"+currentOption+"')]//..//preceding-sibling::input"));
+			currentOptionChkBx.click();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("Not able to select option");
+			return null;
+		}
+		String currentOptionData = optiondata[i];
+		System.out.println("Entering data for option : "+currentOptionData);
+
+			try {
+				WebElement dataTextBx = driver.findElement(By.xpath("//*[contains(text(), '"+currentOption+"')]//..//fieldset//input"));
+				if(validate(dataTextBx))
+					dataTextBx.sendKeys(currentOptionData);
+			} 
+			catch (Exception e) {
+			}
+			try {
+				WebElement dataTextBx = driver.findElement(By.xpath("//*[contains(text(), '"+currentOption+"')]//..//fieldset//textarea"));
+				if(validate(dataTextBx))
+						dataTextBx.sendKeys(currentOptionData);
+			} catch (Exception e) {
+				System.out.println("No additional data required for Option selected");
+			}
+
+		i++;
+	}
+	
+	if(NextBtn.isEnabled()){
+		System.out.println("SEP options selected :  Next button is enabled");
+		return new SpecialElectionPeriodPage(driver);
+	}
+
 	return null;
 }
 

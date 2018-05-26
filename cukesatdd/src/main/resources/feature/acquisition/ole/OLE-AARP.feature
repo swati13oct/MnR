@@ -49,17 +49,17 @@ Feature: To test OLE common tool flow in AARP site
       | Card Type       | <cardtype>       |
     Then the user validates TFN in Medicare Info OLE Right Rail
     Then the user validates the Plan details in Medicare Info OLE Right Rail
-    Then the user validates Leave OLE modal for Medicare Information Page
-    Then the user validates Learn more modal for Medicare Information Page
-    Then the user validates cancellation modal for Medicare Information Page
+    #    Then the user validates Leave OLE modal for Medicare Information Page
+    #    Then the user validates Learn more modal for Medicare Information Page
+    #    Then the user validates cancellation modal for Medicare Information Page
     Then the user navigates to Preliminary Questions Page
     Then the user validates requierd fields for Preliminary Questions Page
       | MedicaidNumber | <medicaidnumber> |
     Then the user validates the Plan details in Preliminary Questions Pag OLE Right Rail
-    Then the user validates TFN in Right Rail on Preliminary Questions Page
-    Then the user validates Leave OLE modal for Preliminary Questions Page
-    Then the user validates Learn more modal for Preliminary Questions Page
-    Then the user validates cancellation modal for Preliminary Questions Page
+    #    Then the user validates TFN in Right Rail on Preliminary Questions Page
+    #    Then the user validates Leave OLE modal for Preliminary Questions Page
+    #    Then the user validates Learn more modal for Preliminary Questions Page
+    #    Then the user validates cancellation modal for Preliminary Questions Page
     Then the user navigates to Personal Information Page
     Then the user enters following required information in Personal Information Page
       | DOB                      | <dob>                    |
@@ -75,20 +75,27 @@ Feature: To test OLE common tool flow in AARP site
       | MedicaidNumber           | <medicaidnumber>         |
     Then the user validates the Plan details in Personal Information Page OLE Right Rail
     Then the user validates the Member details dynamic display in Personal Information Page
-    Then the user validates TFN in Right Rail on Personal Information Page
-    Then the user validates Leave OLE modal for Personal Information Page
-    Then the user validates Learn more modal for Personal Information Page
-    Then the user validates cancellation modal for Personal Information Page
+    #    Then the user validates TFN in Right Rail on Personal Information Page
+    #    Then the user validates Leave OLE modal for Personal Information Page
+    #    Then the user validates Learn more modal for Personal Information Page
+    #    Then the user validates cancellation modal for Personal Information Page
     Then the user navigates to SEP Page
-    Then the user validates the Plan details in SEP Page OLE Right Rail
-    Then the user validates TFN in Right Rail on SEP Page
-    Then the user validates Leave OLE modal for SEP Page
-    Then the user validates Learn more modal for SEP Page
-    Then the user validates cancellation modal for SEP Page
+    #    Then the user validates the Plan details in SEP Page OLE Right Rail
+    #    Then the user validates TFN in Right Rail on SEP Page
+    #    Then the user validates Leave OLE modal for SEP Page
+    #    Then the user validates Learn more modal for SEP Page
+    #    Then the user validates cancellation modal for SEP Page
     Then the user validates SEP options and Required Fields for PlanType in SEP Page
+    Then the user selects the following options for SEP Page
+      | Select Options | <selectoptions> |
+      | Option Data    | <optiondata>    |
     Then the user navigates to Coverage and Health Information Page
     Then the user validates the dispalyed sections for the Plan Type in Coverage and Health Information Page
+    Then the user answers following questions in Coverage and Health Information Page
+      | PDP Question      | <pdpFlag>      |
+      | LongTerm Question | <longTermFlag> |
     Then the user navigates to Proposed Effective Date Page
+    Then the user validates Proposed Effective Date is Displayed
     Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
     Then the user validates PCP page for MA and MAPD PFFS plans
     Then the user validates Look up Provider for MA MAPD and DSNP plans.
@@ -97,15 +104,17 @@ Feature: To test OLE common tool flow in AARP site
       | Rider Flag | <riderflag> |
     Then the user navigates to Authorization Page for plan as per following rider options
       | Rider Flag | <riderflag> |
+    Then the user validates required fields for Authorization Page
+    Then the user navigates to Review and Submit Page
+    Then the user validates the Plan and Member details on Review and Submit Page
 
     Examples: 
-      | zipcode | county             | plantype | planName                                             | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | riderflag |
-      |   90210 | Los Angeles County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    | HICN     | John      | Doe      | 123456789a     | false   |  01012010 |  01012010 |      231665465 | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | CALIFORNIA   |      90210 | test@test.com | true      |
-      |   90210 | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                      | MBI      | John      | Doe      | 2A22C22YK22    | false   |  01012010 |  01012010 |                | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                    | 876 MailingSt | Mailing LA  | CALIFORNIA   |      90210 | test@test.com | false     |
-      |   90210 | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Essential (HMO) | HICN     | John      | Doe      | 123456789a     | false   |  01012010 |  01012010 |      231665465 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    |               |             | CALIFORNIA   |      90210 | test@test.com | false     |
-      |   85923 | Navajo County      | MAPD     | UnitedHealthcare MedicareDirect Rx (PFFS)            | HICN     | John      | Doe      | 123456789a     | false   |  01012010 |  01012010 |      231665465 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    |               |             | CALIFORNIA   |      90210 | test@test.com | false     |
-      |   85923 | Navajo County      | MA       | UnitedHealthcare MedicareDirect Essential (PFFS)     | HICN     | John      | Doe      | 123456789a     | false   |  01012010 |  01012010 |      231665465 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    |               |             | CALIFORNIA   |      90210 | test@test.com | false     |
-
+      | zipcode | county             | plantype | planName                                             | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                      | optiondata        | pdpFlag | longTermFlag | riderflag |
+  #    |   90210 | Los Angeles County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    | HICN     | John      | Doe      | 012011222a     | false   |  01012010 |  01012010 |      231665465 | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | CA   |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | yes          | true      |
+  #    |   90210 | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                      | MBI      | John      | Doe      | 2A22C22YK22    | false   |  01012010 |  01012010 |                | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | CA   |      90210 | test@test.com | moved outside of the service area                  |          01012018 | yes     | no           | false     |
+  #    |   90210 | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Essential (HMO) | HICN     | John      | Doe      | 121212123a     | false   |  01012010 |  01012010 |      231665465 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    |               |             | CA   |      90210 | test@test.com | losing coverage                                    |          01012018 | No      | Yes          | false     |
+      |   85923 | Navajo County      | MAPD     | UnitedHealthcare MedicareDirect Rx (PFFS)            | HICN     | John      | Doe      | 123456789a     | false   |  01012010 |  01012010 |      231665465 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    |               |             | CA   |      90210 | test@test.com | None apply                                         |                   | No      | no           | false     |
+      |   85923 | Navajo County      | MA       | UnitedHealthcare MedicareDirect Essential (PFFS)     | HICN     | John      | Doe      | 123456789a     | false   |  01012010 |  01012010 |      231665465 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    |               |             | CA   |      90210 | test@test.com | Other reason                                       | other reason text | yes     | no           | false     |
 
   @OLE_PlanDetails_Aarp
   Scenario Outline: OLE Landing from VPP Plan Details

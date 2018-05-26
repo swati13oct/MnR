@@ -3,6 +3,8 @@
  */
 package pages.acquisition.ole;
 
+import java.util.Map;
+
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -91,7 +93,7 @@ public class CoverageInformationPage extends UhcDriver{
 	@Override
 	public void openAndValidate() {
 		validate(CoverageInfoPageHeader);
-		System.out.println("Page header is Displayed"+CoverageInfoPageHeader.getText());
+		System.out.println("Page header is Displayed : "+CoverageInfoPageHeader.getText());
 	
 	}
 	public boolean validate_CoverageInfo_Questions_for_planType(String planType) {
@@ -134,6 +136,23 @@ public class CoverageInformationPage extends UhcDriver{
 		if(driver.getCurrentUrl().contains("effective-date")){
 			System.out.println("OLE Proposed Effective Date Page is Displayed");
 			return new ProposedEffectiveDatePage(driver);
+		}
+		return null;
+	}
+
+	public CoverageInformationPage answer_following_questions(Map<String, String> questionMap) {
+		String PDPquestionFlag = questionMap.get("PDP Question");
+		String LongTermQuestionFlag = questionMap.get("LongTerm Question");
+
+		if(PDPquestionFlag.equalsIgnoreCase("yes")){
+			PDPQuestion_Yes.click();
+		}
+		if(LongTermQuestionFlag.equalsIgnoreCase("yes")){
+			LongTerm_Question_Yes.click();
+		}
+		if(NextBtn.isEnabled()){
+			System.out.println("SEP options selected :  Next button is enabled");
+			return new CoverageInformationPage(driver);
 		}
 		return null;
 	}

@@ -214,11 +214,11 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='pharmacyTabId']/div/p[2]")
 	public WebElement step2Pharmacy;
 
-	@FindBy(xpath = ".//*[@id='total_drugsavings']/div[2]/a")
-	public WebElement lkEditDrugsList;
+	@FindBy(xpath = ".//*[@id='total_drugsavings']/div[2]/*[contains(text(),'EDIT DRUGS LIST')]")
+	public WebElement step3EditDrugsList;
 
 	@FindBy(xpath = ".//*[@id='total_pharmacysavings']/div[2]/a")
-	public WebElement lkEditPharmacyList;
+	public WebElement step3EditPharmacyList;
 
 	@FindBy(xpath = "//div[@class='pharmacy-container']")
 	public WebElement pharmacyContainer;
@@ -291,14 +291,14 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(),'Drugs')]")
 	public WebElement drugsLink;
 	
-	@FindBy(xpath = ".//*[@id='acqsummary']/div[3]/div[1]/div/div/div/div[2]/a")
+	@FindBy(id= "generic-drug-switch-btn-0")
 	private WebElement switchNowBtn;
 	
 	@FindBy(id="switchToGenericBtnId")
 	private WebElement updateBtn;
 	
-	@FindBy(xpath = ".//*[@id='acqsummary']/div[3]/div[4]/div/p")
-	private WebElement costText;
+	@FindBy(id = "total_annualcost")
+	private WebElement step3CostValue;
 
 	//@FindBy(xpath = ".//*[@id='acqsummary']/div[2]/div[2]/a/p")
 	//@FindBy(xpath = "//p[contains(text(),'Pharmacy')]")
@@ -322,8 +322,11 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='pharmacymilestext']")
 	public WebElement step2Text;
 	
-	@FindBy(xpath = ".//*[@id='acqsummary']/div[3]/div[1]")
-	private WebElement step3drugInfo;
+	@FindBy(id= "drugcosts")
+	private WebElement step3Info;
+	
+	@FindBy(id= "drug-cost-card")
+	private WebElement drugCostCard;
 	
 	//@FindBy(xpath = ".//*[@id='costs-tab']/div/div[1]/div[2]/div/a")
 	@FindBy(xpath = "//a[contains(text(),'Return to plans')]")
@@ -907,7 +910,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 
 	public void navigateToStep3() throws InterruptedException {
-		Thread.sleep(6000);
+		Thread.sleep(10000);
 		waitforElement(step3);
 		step3.click();
 		Thread.sleep(10000);
@@ -1128,8 +1131,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 
 	public void validateEditDrugAndPharmacyLinks() {
-		Assert.assertTrue(elementFound(lkEditDrugsList));
-		Assert.assertTrue(elementFound(lkEditPharmacyList));
+		Assert.assertTrue(elementFound(step3EditDrugsList));
+		Assert.assertTrue(elementFound(step3EditPharmacyList));
 	}
 
 	public void validateEditDrugLinkNotPresent() {
@@ -1341,14 +1344,16 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			Assert.assertTrue("There are no drugs added ", false);
 		}*/
 		Thread.sleep(5000);
-		String brandedCost = costText.getText();
+		step3EditDrugsList.click();
+		String brandedCost = step3CostValue.getText();
 		System.out.println(brandedCost);
 		if(switchNowBtn.isDisplayed())
 			switchNowBtn.click();
 		Thread.sleep(3000);
 		updateBtn.click();
 		Thread.sleep(6000);
-		String genericCost = costText.getText();
+		navigateToStep3();
+		String genericCost = step3CostValue.getText();
 		if(brandedCost.equals(genericCost))
 			Assert.fail("Error in calculating costs after switching to generic");
 
@@ -1420,6 +1425,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	public boolean isDrugPresent(String drugName) {
 		boolean isPresent = false;
+		waitforElement(addDrug);
 		List<WebElement> drugNamesList = driver.findElements(By.xpath(".//*[@id='drugcontainer_0']/div"));
 
 		System.out.println("drug list size"+drugNamesList.size());
@@ -1759,7 +1765,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	
 
 	public boolean validateDrugOnStep3(String drug) {
-		if(step3drugInfo.getText().contains(drug))
+		if(step3Info.getText().contains(drug)&&validateNew(drugCostCard))
 			return true;
 		return false;
 		

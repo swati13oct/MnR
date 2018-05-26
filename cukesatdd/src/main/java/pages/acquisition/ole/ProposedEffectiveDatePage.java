@@ -3,6 +3,8 @@
  */
 package pages.acquisition.ole;
 
+import java.util.List;
+
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -34,6 +36,10 @@ public class ProposedEffectiveDatePage extends UhcDriver{
 	@FindBy(xpath = "//*[@class='only-prelim']")
 	private WebElement ProposedEffectiveDatePageHeader;
 
+	@FindBy(xpath = "//*[@type='radio']//following-sibling::label")
+	private List <WebElement> ProposedEffectiveDateOptions;
+
+	
 	//Right Rail Elements
 
 	@FindBy(xpath = "//*[@id='learn-more-ole']/a")
@@ -60,7 +66,26 @@ public class ProposedEffectiveDatePage extends UhcDriver{
 	@Override
 	public void openAndValidate() {
 		validate(ProposedEffectiveDatePageHeader);
+		
 		System.out.println("Page header is Displayed"+ProposedEffectiveDatePageHeader.getText());
+		
+	}
+	
+	public boolean validate_proposed_effective_date_options(){
+		boolean validation_Flag = true;
+		int count = ProposedEffectiveDateOptions.size();
+		if(count>0){
+			validation_Flag = true;
+			System.out.println("Proposed Effective Date displayed");
+			for(WebElement Dateoption : ProposedEffectiveDateOptions){
+				System.out.println(Dateoption.getText());
+			}
+		}
+		else{
+			System.out.println("Proposed Effective Date is NOT displayed");
+			validation_Flag = false;
+		}
+		return validation_Flag;
 	}
 	
 	public Object navigate_to_PCP_Page(String planType) {
