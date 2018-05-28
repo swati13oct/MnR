@@ -86,7 +86,7 @@ public class PaymentHistoryPage extends UhcDriver{
 	@FindBy(className="modal-body")
 	private WebElement iPerceptionPopUp;
 	
-	@FindBy(xpath="//*[@id='IPEinvL']/map/area[3]")
+	@FindBy(xpath="//*[@id='nav']/button[2]")
 	private WebElement iPerceptionAutoPopUp;
 	
 	@FindBy(xpath="//*[@id='editAutomaticPaymentsModal']//div[@class='modal-footer']/a[1]")
@@ -318,7 +318,7 @@ public class PaymentHistoryPage extends UhcDriver{
 		else if(onetimepaymentbtnPDP.isDisplayed())
 		{
 			onetimepaymentbtnPDP.click();
-			System.out.println("clicked on make OTP button");
+			System.out.println("clicked on make OTP PDP button");
 			return new  OneTimePaymentPage(driver);
 		}		
 	   }catch(Exception e)

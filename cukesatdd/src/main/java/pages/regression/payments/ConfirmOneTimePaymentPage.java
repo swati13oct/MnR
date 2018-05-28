@@ -29,6 +29,9 @@ public class ConfirmOneTimePaymentPage extends UhcDriver{
 
 	@FindBy(xpath = "//*[@class='container--base']/div[@class='container']//button[@ng-click='backToPaymentHistoryPage()']")
 	private WebElement BackToPaymentHistoryPage;
+	
+	@FindBy(xpath="//*[@id='nav']/button[2]")
+	private WebElement iPerceptionAutoPopUp;
 
 	public ConfirmOneTimePaymentPage(WebDriver driver) {
 		super(driver);
@@ -62,6 +65,15 @@ public class ConfirmOneTimePaymentPage extends UhcDriver{
 
 	
     public ConfirmOneTimePaymentPage confirmsAutoPayment() throws InterruptedException  {
+    	
+    	 try{
+    		 if(validate(iPerceptionAutoPopUp)) {
+    	    		iPerceptionAutoPopUp.click();
+    	    	}
+    		 }catch(Exception e)
+    		 {
+    			 System.out.println("No iperception Pop Up displayed");
+    		 }
 		
 		waitforElement(TermsCheckRadioButton);
 		TermsCheckRadioButton.click();

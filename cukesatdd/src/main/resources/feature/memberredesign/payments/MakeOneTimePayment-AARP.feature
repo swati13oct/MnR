@@ -333,8 +333,7 @@ Feature: To test the payment flow on AARP site
       | Account holder middle name | <middleName>       |
       | Account holder last name   | <lastName>         |
     And the user confirms the Autopayment in UHC site
-
-    #Then the user validates the payment successful page
+   
     Examples: 
       | planType | memberType            | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
       | MAPD     | IndividualUHCPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
@@ -418,5 +417,28 @@ Feature: To test the payment flow on AARP site
     Examples: 
       | username  | password  |MemUserName    |routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
       | qavgogine | qavgogine | q1_apr_uhc094 |123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.12 |
+ 
+ 
+  @paymentsShip @15320 @15144
+  Scenario Outline: Verify Recurring Payment for SHIP member
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When the user navigates to Ship Recurring payment history
+    Then User Scrolls down to validate Payment History and Scrolls up
+    And the user clicks on Edit Automatic Payment button
+    And the user makes auto payment in AARP site
+      | Routing number             | <routingNo>        |
+      | Confirm routing number     | <confirmRoutingNo> |
+      | Account number             | <accountNo>        |
+      | Confirm account number     | <confirmAccountNo> |
+      | Account holder first name  | <firstName>        |
+      | Account holder middle name | <middleName>       |
+      | Account holder last name   | <lastName>         |
+    And the user confirms the Autopayment in UHC site
+   
+    Examples: 
+      | planType | memberType            | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
+      | SHIP     | IndividualAARPSPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
  
  
