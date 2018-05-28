@@ -723,7 +723,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		Actions actions = new Actions(driver);
 		actions.moveToElement(ourPlansHoverLink);
-		actions.moveToElement(ma_moreHelpInfoLink);
+		actions.moveToElement(moreHelpInfoLink);
 		actions.click().build().perform();
 
 		try {
