@@ -80,6 +80,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(id = "atdd_ma_plans")
 	private WebElement ma_moreHelpInfoLink;
+	
+	@FindBy(xpath="//a[contains(text(),'Request More')]")
+	private WebElement moreHelpInfoLink;
 
 	@FindBy(id = "ghn_lnk_1")
 	public static WebElement navigationSectionHomeLink;
@@ -665,11 +668,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public void navigateToRequestMoreHelpAndInformation(String planType){
 		Actions action = new Actions(driver);
 		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
-		if(planType.contains("MA"))
+		/*if(planType.contains("MA"))
 				ma_moreHelpInfoLink.click();
 		else if(planType.contains("PDP")){
 				pdp_moreHelpInfoLink.click();		
-		}
+		}*/
+		moreHelpInfoLink.click();
 		for(int i=0;i<10;i++){
 			try {
 				Thread.sleep(2000);
