@@ -20,7 +20,6 @@ import pages.member.ulayer.OneTimePaymentsPage;
 import pages.member.ulayer.PlanComparePage;
 import pages.member.ulayer.Rallytool_Page;
 import pages.member.ulayer.TestHarness;
-import pages.redesign.PaymentHistoryPage;
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.regression.claims.ClaimDetailsPage;
 import pages.regression.claims.ClaimSummarypage;
@@ -29,6 +28,7 @@ import pages.regression.contactus.ContactUsPage;
 import pages.regression.explanationofbenefits.EOBPage;
 import pages.regression.formsandresources.FormsAndResourcesPage;
 import pages.regression.ordermaterials.OrderMaterialsPage;
+import pages.regression.payments.PaymentHistoryPage;
 import pages.regression.pharmacylocator.PharmacySearchPage;
 //import pages.member.bluelayer.BenefitsAndCoveragePage;
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
@@ -97,11 +97,14 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='plan_box']/div/div[2]/div/p/a")
 	private WebElement planNameLink;
+	
+	@FindBy(id = "dropdown-toggle--1")
+	private WebElement accountProfileBtn;
 
 	@FindBy(xpath = "//button[@id='dropdown-toggle--1']/span[contains(text(),'Profile')]")
 	private WebElement accountToggleDropdown;
 
-	@FindBy(xpath = "//a[@class='dropdown-option' and contains(text(),'Account Settings')]")
+	@FindBy(xpath = ".//*[@id='dropdown-options--1']/a[contains(text(),'Account Settings')]")
 	private WebElement accountSettingOption;
 
 	@FindBy(xpath = "//header//h1")
@@ -279,8 +282,10 @@ public class AccountHomePage extends UhcDriver {
 				 * try { Thread.sleep(3000); } catch (InterruptedException e) {
 				 * // TODO Auto generated catch block e.printStackTrace(); }
 				 */
-				driver.navigate().to(PAGE_URL + "medicare/member/account/profile.html");
-
+				//driver.navigate().to(PAGE_URL + "medicare/member/account/profile.html");
+				waitforElement(accountProfileBtn);
+				accountProfileBtn.click();
+				accountSettingOption.click();
 				System.out.println("title is " + driver.getTitle());
 				System.out.println("Current Url is " + driver.getCurrentUrl());
 				CommonUtility.waitForPageLoad(driver, heading, 50);
@@ -501,7 +506,7 @@ public class AccountHomePage extends UhcDriver {
 
 	}
 
-	public AccountHomePage navigateToAutoPaymentHistoryPage() throws InterruptedException {
+	public AccountHomePage navigateToAutoPaymentHistoryPage(){
 
 		/*
 		 * WebDriverWait wait = new WebDriverWait(driver, 30);
@@ -518,10 +523,42 @@ public class AccountHomePage extends UhcDriver {
 		waitforElement(PremiumPayment);
 		System.out.println("payment link is displayed on the header");
 		PremiumPayment.click();
-		Thread.sleep(10000);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		if (PaymentHeading.getText().contains("Premium Payments Overview")) {
 			System.out.println("Payment Overview page displayed");
 			return new AccountHomePage(driver);
+		} else {
+			System.out.println("payment overview page not displayed");
+			return null;
+		}
+	}
+	
+	public PaymentHistoryPage navigateToOneTimePaymentHistoryPage(){
+
+		
+		if (validate(iPerceptionAutoPopUp)) {
+			iPerceptionAutoPopUp.click();
+		} else {
+			System.out.println("iPerception Pop Up not displayed");
+		}
+
+		// Thread.sleep(16000);
+
+		waitforElement(PremiumPayment);
+		System.out.println("payment link is displayed on the header");
+		PremiumPayment.click();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if (PaymentHeading.getText().contains("Premium Payments Overview")) {
+			System.out.println("Payment Overview page displayed");
+			return new PaymentHistoryPage(driver);
 		} else {
 			System.out.println("payment overview page not displayed");
 			return null;

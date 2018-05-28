@@ -25,6 +25,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.uhcretiree.Rallytool_Page;
+import pages.acquisition.ulayer.PageTitleConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
@@ -40,7 +41,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//a[text()='Passport Flyer (PDF)']")
 	private WebElement PassportFlyerPDF;
 	
-	@FindBy(linkText = "Change location")
+	@FindBy(id = "change-location")
 	private WebElement changeLocationBtn;
 
 	@FindBy(xpath = ".//*[@id='maplans2']")
@@ -92,10 +93,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//div[contains(@ng-repeat,'plan in planModel.pdpPlans')]")
 	List<WebElement> pdpPlans;
 
-	@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='plan-overview-wrapper']/div[2]/div[1]//span[@class='trigger-closed']")
+	@FindBy(xpath = "//div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[1]//*[@class='trigger-closed']")
 	private WebElement viewPlans;
 	
-	@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='plan-overview-wrapper']/div[2]/div[3]//span[@class='trigger-closed']")
+	@FindBy(xpath ="//div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[3]//*[@class='trigger-closed']")
 	private WebElement viewPDPPlans;
 
 	@FindBy(xpath = "//div[@id='snpplans_container']/h1/span[2]")
@@ -169,7 +170,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath=".//*[@class='gs-option']//h3[contains(text(),'People')]")
 	private WebElement People;
 	
-	@FindBy(xpath="//div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[1]/div/a[@class='trigger-closed']")
+	@FindBy(xpath="//div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[1]/div/*[@class='trigger-closed']")
 	private WebElement closedTrigger;	
 	
 /*This SNP View Plans identifier is invalid
@@ -477,10 +478,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		CommonUtility.checkPageIsReady(driver);
 		System.out.println("Title is :"+driver.getTitle());
 		System.out.println(driver.getCurrentUrl());
-		if (driver.getTitle().equalsIgnoreCase("Medicare Advantage Plan Details | | UnitedHealthcare®")
-				|| driver.getTitle().equalsIgnoreCase("Medicare Special Needs Plan Details | UnitedHealthcare®")
-				|| driver.getTitle().equalsIgnoreCase("Medicare Prescription Drug Plan Details | UnitedHealthcare®")
-				|| driver.getTitle().equalsIgnoreCase("Our Medicare Plan Types | UnitedHealthcare®")) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_ADVANTAGE_PLAN_DETAILS)
+				|| driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_SPECIAL_NEEDS_PLAN_DETAILS)
+				|| driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_PRESCRIPTION_DRUG_PLAN_DETAILS)
+				|| driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_PLAN_TYPES_TITLE)) {
 			return new PlanDetailsPage(driver);
 		}
 		return null;
@@ -819,7 +820,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			}
 		}
 		if (driver.getTitle().equalsIgnoreCase(
-				"Our Medicare Plan Types | UnitedHealthcare®")) {
+				PageTitleConstants.BLAYER_MEDICARE_PLAN_TYPES_TITLE)) {
 			return new GetStartedPage(driver);
 		}
 		return null;
@@ -1170,7 +1171,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public boolean validateVPPPlanSummaryPage(){
 		WebDriverWait wait = new WebDriverWait(driver, 45000);
 		boolean flag = false;
-		if(validate(viewPlans)){
+		/*if(validate(viewPlans)){
 		viewPlans = wait.until(ExpectedConditions.elementToBeClickable(viewPlans));
 		}
 		if(validate(viewPDPPlans)){
@@ -1178,7 +1179,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		if(validate(changeLocationBtn)){
 		changeLocationBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Change location")));
-		}
+		}*/
 
 
 		if(validate(viewPlans)&&validate(viewPDPPlans)&&validate(changeLocationBtn))
@@ -1194,7 +1195,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		viewPlansLinks.get(3).click();
 		
 		}
-		if(getTitle().equalsIgnoreCase("Our Medicare Plan Types | UnitedHealthcare®"))
+		if(getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_PLAN_TYPES_TITLE))
 			return new PlanDetailsPage(driver);
 		return null;
 	}
@@ -1204,7 +1205,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			viewDetailsPDP.click();
 			}
 	
-		if(getTitle().equalsIgnoreCase("Our Medicare Plan Types | UnitedHealthcare®"))
+		if(getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_PLAN_TYPES_TITLE))
 			return new PlanDetailsPage(driver);
 		return null;
 	}

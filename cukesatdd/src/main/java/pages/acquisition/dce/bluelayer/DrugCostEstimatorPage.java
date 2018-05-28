@@ -21,6 +21,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.PageTitleConstants;
 
 public class DrugCostEstimatorPage extends UhcDriver {
 
@@ -414,7 +415,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		addDrug.click();
 		System.out.println("Current Page title :: " + driver.getTitle());
 
-		if (driver.getTitle().equalsIgnoreCase("estimate-drug-costs") || driver.getTitle().equalsIgnoreCase("Medicare Plan Drug Costs | AARP® Medicare Plans from UnitedHealthcare®")) {
+		if (driver.getTitle().equalsIgnoreCase("estimate-drug-costs") || driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_PLAN_DRUG_COSTS)) {
 
 			return new AddNewDrugModal(driver);
 		}
@@ -1336,9 +1337,9 @@ public void navigateFromStep2ToStep3() throws InterruptedException {
 			Thread.sleep(5000);
 
 			// switchToGenericHeadingsId
-			if (driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")) {
+			if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MY_BENEFITS_COVERAGES)) {
 				String savingsOpputunityHeading = driver.findElement(By.id("switchToGenericHeadingsId")).getText();
-				if (savingsOpputunityHeading.equals("SAVINGS OPPORTUNITY")) {
+				if (savingsOpputunityHeading.equals(PageTitleConstants.BLAYER_SAVINGS_OPPORTUNITY)) {
 					Assert.assertTrue(true);
 				} else {
 					Assert.assertTrue("Savings Oppurtunity modal popup does not show up", false);

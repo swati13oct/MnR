@@ -685,7 +685,7 @@ public void comparePlanslnk() throws InterruptedException{
 									e.printStackTrace();
 								}
 				                System.out.println(driver.getTitle());
-				                if(driver.getTitle().equalsIgnoreCase("Medicare Advantage Enrollment | AARP® Medicare Plans from UnitedHealthcare®")){
+				                if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_ADVANTAGE_ENROLLMENT)){
 				                	System.out.println("Page displayed successfully");
 				                	Assert.assertTrue(true);
 				                }else{
@@ -1087,7 +1087,7 @@ public void comparePlanslnk() throws InterruptedException{
 				 public VPPPlanSummaryPage enrollNowbtn(){
                      driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
                          enrollNowbtn.click();
-                         if(driver.getTitle().equalsIgnoreCase("Medicare Advantage Enrollment | AARP® Medicare Plans from UnitedHealthcare®"))                
+                         if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_ADVANTAGE_ENROLLMENT))                
                          System.out.println("Online enrollment tool launched");
                          driver.navigate().back();
                          System.out.println("Back to plan summary page");

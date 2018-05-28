@@ -41,7 +41,7 @@ public class WelcomePage extends UhcDriver{
 	@FindBy(id = "ole-cancel-confirm")
 	private WebElement CancellationModal;
 	
-	@FindBy(id = "sample-linkrouter")
+	@FindBy(id = "leavingSite-linkrouter")
 	private WebElement LeavingOLEmodal;
 	
 	@FindBy(xpath = "//*[contains(text(), 'chosen to enroll in:')]/following-sibling::h2")
