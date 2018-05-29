@@ -57,7 +57,7 @@ public class PrepareforInitialEnrollmentPage extends GlobalWebElements {
 		validate(medicareSupplementInsurancePlansLink);
 		exploreChangingPlansLink.click();
 		validate(medicareSupplementInsurancePlansLink);
-		if (driver.getTitle().equalsIgnoreCase("Change Medicare Plans | AARP® Medicare Plans from UnitedHealthcare®")) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_CHANGE_MEDICARE_PLANS)) {
 			return new ExploreChangingPlansPage(driver);
 		}else{
 		

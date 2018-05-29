@@ -353,7 +353,7 @@ public class VPPAarpPlanSummaryPage extends UhcDriver {
 			}
 		}
 		if (driver.getTitle().equalsIgnoreCase(
-				"AARP Medicare Complete Online Application") || driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_AARP_MEDICARERX_ONLINE_APPLICATION)) {
+				PageTitleConstants.ULAYER_AARP_MEDICARE_COMLETE_ONLINE_APP) || driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_AARP_MEDICARERX_ONLINE_APPLICATION)) {
 			return new PlanInformationPage(driver,planName);
 		}
 		
@@ -379,7 +379,7 @@ public class VPPAarpPlanSummaryPage extends UhcDriver {
 			}
 		}
 		if (driver.getTitle().equalsIgnoreCase(
-				"AARP Medicare Complete Online Application") || driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_AARP_MEDICARERX_ONLINE_APPLICATION)) {
+				PageTitleConstants.ULAYER_AARP_MEDICARE_COMLETE_ONLINE_APP) || driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_AARP_MEDICARERX_ONLINE_APPLICATION)) {
 			return new IntroductionInformationPage(driver);
 		}
 		
