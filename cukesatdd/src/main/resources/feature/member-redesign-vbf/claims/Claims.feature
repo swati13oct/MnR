@@ -35,4 +35,4 @@ Feature: 1.02-VBF-MemRedesign-To test claim functionality
      |  ULayerInd		 |MAPD |  Last 24 months | NICE   | NICECLAIMS   |name1      | color1   | number1     |
    # |  GroupRetiree |MAPD |  Last 24 months | COSMOS | COSMOSCLAIMS |name1      | color1   | number1     |
    #  |  GroupRetiree |MAPD |  Last 24 months | NICE   | NICECLAIMS   |name1      | color1   | number1     |
-   | GroupRetiree |MAPD |  Last 24 months | COSMOS   | RxCLAIMS   | name1      | color1   | number1     |
+   | GroupRetiree |MAPD |  Last 24 months | Rx   | RxCLAIMS   | name1      | color1   | number1     |

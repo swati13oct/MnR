@@ -376,7 +376,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		jse.executeScript("window.scrollBy(0,900)", "");
 		scrollToView(select_btn_first);
 		validateNew(select_btn_first);
-		select_btn_first.click();
+		jsClickNew(select_btn_first);
 		CommonUtility.waitForElementToDisappear(driver, loadingImage, 180);
 	}
 
