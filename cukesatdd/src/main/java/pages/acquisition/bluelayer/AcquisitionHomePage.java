@@ -76,13 +76,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
         private WebElement learnfindPlansButton;
 
 
-        @FindBy(id = "atdd_ma_plans")
+        @FindBy(xpath = "//*[@id='planTypesColumn']/h3[1]/a")
         private WebElement ma_moreHelpInfoLink;
         
         @FindBy(xpath="//a[contains(text(),'Request More')]")
     	private WebElement moreHelpInfoLink;
 
-        @FindBy(id = "atdd_mpd_plans")
+        @FindBy(xpath = "//*[@id='planTypesColumn']/h3[2]/a")
         private WebElement pdp_moreHelpInfoLink;
 
         @FindBys(value = { @FindBy(xpath = "//table[@id='selectcountytable']/tbody/tr/td") })

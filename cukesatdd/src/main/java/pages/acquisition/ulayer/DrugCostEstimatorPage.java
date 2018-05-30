@@ -133,7 +133,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='pharmacy-results']//span[contains(@class,'pharmacy-name')]")
 	public List<WebElement> pharmacies;
 	               
-	@FindBy(id = "select-pharmacy-button-0")
+	@FindBy(xpath = ".//*[@id='select-pharmacy-button' or @id='select-pharmacy-button-0']")
 	public WebElement select_btn_first;
 
 	@FindBy(id = "saverSavingSpan")
@@ -186,6 +186,12 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(id = "costsTabId")
 	public WebElement step3;
+	
+	@FindBy(id= "drugcosts")
+	private WebElement step3Info;
+	
+	@FindBy(id= "drug-cost-card-acq")
+	private WebElement drugCostCard;
 
 	@FindBy(id = "total_annauldeductible")
 	public WebElement left_rail_deductible;
@@ -729,13 +735,13 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	public void select_first_pharmacy() throws InterruptedException {
 		driver.manage().window().maximize();
-		Thread.sleep(10000);
+		Thread.sleep(15000);
 
 		//waitforElement(select_btn_first);
 		System.out.println("first pharmacy");
 		
-		if (select_btn_first.isDisplayed()) {
-			select_btn_first.click();
+		if (validateNew(select_btn_first)) {
+			((JavascriptExecutor)driver).executeScript("arguments[0].click();", select_btn_first);
 		}
 		System.out.println("first pharmacy 2");
 		Thread.sleep(10000);
@@ -1667,7 +1673,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='acqsummary']/div[3]/div[1]")
 	private WebElement step3drugInfo;
 	public boolean validateDrugOnStep3(String drug) {
-		if(step3drugInfo.getText().contains(drug))
+		if(step3Info.getText().contains(drug)&&validateNew(drugCostCard))
 			return true;
 		return false;
 		
