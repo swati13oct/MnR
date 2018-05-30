@@ -61,7 +61,7 @@ public class MRScenario {
                private static Map<String, List<String>> ampMemberAttributesMap = new LinkedHashMap<String, List<String>>();
 
                private static Map<String, List<String>> umsMemberAttributesMap = new LinkedHashMap<String, List<String>>();
-	private static Map<String, List<String>> memberRedesignVbfAttributesMap = new LinkedHashMap<String, List<String>>();
+               private static Map<String, String> memberRedesignVbfAttributesMap = new LinkedHashMap<String, String>();
 
                private static List<String> userNamesAddedList = new ArrayList<String>();
 
@@ -250,23 +250,37 @@ public class MRScenario {
  }
                                              InputStream memberTypeStream2;
                                              if("team-ci1".equalsIgnoreCase(environment)){
-                         					 memberTypeStream2 = ClassLoader.class
-                         							.getResourceAsStream("/database/MemberRedesign-VBF-Teamci-1.csv");
-                                             }
-                                             else{
-                                            	  memberTypeStream2 = ClassLoader.class
-                              							.getResourceAsStream("/database/MemberRedesign-VBF.csv");
-                                             }
-                         					memberRedesignVbfTypeReader = new BufferedReader(new InputStreamReader(
-                         							memberTypeStream2));
-					while ((line = memberRedesignVbfTypeReader.readLine()) != null) {
-						// use comma as separator
-						String[] memberAttributes = line.split(cvsSplitBy);
-						List<String> attrList = Arrays.asList(memberAttributes)
-								.subList(1, memberAttributes.length);
-						String uhcUserName = null;
-						uhcUserName = memberAttributes[0];
-						memberRedesignVbfAttributesMap.put(uhcUserName, attrList);
+                             					 memberTypeStream2 = ClassLoader.class
+                             							.getResourceAsStream("/database/MemberRedesign-VBF-Teamci-1.csv");
+                                                 }
+                                                 else{
+                                                	  memberTypeStream2 = ClassLoader.class
+                                  							.getResourceAsStream("/database/MemberRedesign-VBF.csv");
+                                                 }
+                             					memberRedesignVbfTypeReader = new BufferedReader(new InputStreamReader(
+                             							memberTypeStream2));
+                             					String finalAttributeString = "";
+    					while ((line = memberRedesignVbfTypeReader.readLine()) != null) {
+    						// use comma as separator
+    						 finalAttributeString = "";
+    						String[] memberAttributes = line.split(cvsSplitBy);
+
+    						for(int i = 0; i <= memberAttributes.length-2; i ++ ){
+    							if(2==memberAttributes.length){
+    								finalAttributeString = finalAttributeString.concat(memberAttributes[i]);
+    							}
+    							else{
+    								if(i!=memberAttributes.length-2)
+    									finalAttributeString = finalAttributeString.concat(memberAttributes[i]).concat(cvsSplitBy);
+    								else
+    									finalAttributeString = finalAttributeString.concat(memberAttributes[i]);
+    							}
+    						}
+    						System.out.println("finalAttributeString---"+finalAttributeString);
+    						String uhcUserName = null;
+    						uhcUserName = memberAttributes[memberAttributes.length-1];
+    						memberRedesignVbfAttributesMap.put(finalAttributeString,uhcUserName);
+    			
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -890,30 +904,38 @@ public class MRScenario {
   	   webDriver.quit();
      }
 	 
-	public Map<String, String> getmemberRedesignVbfWithDesiredAttributes(
-			List<String> desiredAttributes) {
-		Map<String, String> loginCreds = new HashMap<String, String>();
-		for (Entry<String, List<String>> currEntry : memberRedesignVbfAttributesMap
-				.entrySet()) {
-			System.out.println("Current value entry  - "+currEntry.getValue());
-			if (currEntry.getValue().equals(desiredAttributes)) {
-				System.out.println("Current key entry - "+currEntry.getKey());
-				if (currEntry.getKey().contains("/")) {
-					String[] keyArr = currEntry.getKey().split("/");
-					loginCreds.put("user", keyArr[0]);
-					loginCreds.put("pwd", keyArr[1]);
-					return loginCreds;
-				} else {
-					loginCreds.put("user", currEntry.getKey());
-					loginCreds.put("pwd", "Password@1");
-					return loginCreds;
-				}
+	 public Map<String, String> getmemberRedesignVbfWithDesiredAttributes(
+    			List<String> desiredAttributes) {
+     	   String compositeDesiredAttributes = "";
+     	   for(int i = 0; i < desiredAttributes.size(); i++){
+     		   if(i==desiredAttributes.size()-1){
+     			    compositeDesiredAttributes = compositeDesiredAttributes.concat(desiredAttributes.get(i));
+     		   }else{
+     			    compositeDesiredAttributes = compositeDesiredAttributes.concat(desiredAttributes.get(i)).concat(",");
+     		   }
+     	   }
+    		Map<String, String> loginCreds = new HashMap<String, String>();
+    		for (Entry<String, String> currEntry : memberRedesignVbfAttributesMap
+    				.entrySet()) {
+    			System.out.println("Current value entry  - "+currEntry.getValue());
+    			if (currEntry.getKey().equals(compositeDesiredAttributes)) {
+    				System.out.println("Current key entry - "+currEntry.getKey());
+    				if (currEntry.getValue().contains("/")) {
+    					String[] valArr = currEntry.getValue().split("/");
+    					loginCreds.put("user", valArr[0]);
+    					loginCreds.put("pwd", valArr[1]);
+    					return loginCreds;
+    				} else {
+    					loginCreds.put("user", currEntry.getValue());
+    					loginCreds.put("pwd", "Password@1");
+    					return loginCreds;
+    				}
 
-			}
-		}
-		// No match found
-		return null;
-	}
+    			}
+    		}
+    		// No match found
+    		return null;
+    	}
 
 	
 	

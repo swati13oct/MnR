@@ -3,19 +3,12 @@ Feature: 1.15-VBF-MemRedesign-To test HSID registration flow
 
 @smokeTest_HSIDregistration @rallyDashboard @testharness
    Scenario Outline:Verify HSID registration.
-     #Given the user connect to DB
      And the user select record from database
        | Firstname  | <firstname>  |
        | Lastname   | <lastname>   |
      And the user delete record from extreme scale
-     #  | Firstname  | <firstname>  |
-      # | Lastname   | <lastname>   |
      And the user delete record from mbr_portal
-      # | Firstname  | <firstname>  |
-     #  | Lastname   | <lastname>   |
      And the user delete record from mbr
-      # | Firstname  | <firstname>  |
-      # | Lastname   | <lastname>   |
     And the user is on medicare sign in page
     When the user clicks on Register now link
     And HSID registration page is displayed with all the fields
@@ -27,7 +20,6 @@ Feature: 1.15-VBF-MemRedesign-To test HSID registration flow
       |zipcode 	    | <zipcode>  |
    And user is navigated to step two:create account page
    And enter username, password, re-enter password, email, re-enter email
-      | userName   | <userName>   |
       | password   | <password>   |
       | email      | <email>   	|
    And select the security type as "Security questions"
@@ -51,6 +43,7 @@ Feature: 1.15-VBF-MemRedesign-To test HSID registration flow
    
    Examples:
  
-   | planType|  memberType  | copayCategory | firstname | lastname        |   dob 	            | memberid 	  | zipcode  | userName 	       | password   |   email	  			          | question1 | question2 | question3 |friendname | favcolor | phonenumber |
-    | MAPD    |  Individual  |  NON LIS      | FABCAEAD   | EFCEAA          | 09/22/1949          | 961861481-1 | 34748	 |q1_feb_uhc042        | Password@1 | codetransformers@gmail.com      | number1   | name1     | color1    |name1      | color1   | number1     |
-  #  | MAPD    |  Individual  |  NON LIS      | AFAFBBF   | AECFEC          | 05/15/1950          | 954668573-1 | 78501	 |q1_feb_uhc042        | Password@1 | codetransformers@gmail.com      | number1   | name1     | color1    |name1      | color1   | number1     |
+ | firstname  | lastname |    dob 	    | memberid 	    | zipcode | password   |   				email	  			    | friendname | favcolor | phonenumber |
+ | FABCAEAD   | EFCEAA   | 09/22/1949   | 961861481-1   | 34748	  | Password@1 | codetransformers@gmail.com | name1      | color1   | number1     |
+# | SGFXTEFI   | NHKBOHYG | 12/01/1941   | 375989563-11  | 46221   | Password@1 | codetransformers@gmail.com | name1      | color1   | number1     |
+# | FABCAEAD   | EFCEAA   | 09/22/1949   | 961861481-1   | 34748  	| Password@1 | codetransformers@gmail.com | name1      | color1   | number1     |    

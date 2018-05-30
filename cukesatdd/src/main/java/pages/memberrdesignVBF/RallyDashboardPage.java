@@ -200,7 +200,7 @@ public class RallyDashboardPage extends UhcDriver {
 		validateNew(panelPremiumPayment);
 		panelPremiumPayment.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getTitle().equalsIgnoreCase("Overview")) {
+		if (driver.getTitle().contains("Overview")) {
 			return new PaymentsOverview(driver);
 		}
 		return null;
@@ -219,7 +219,7 @@ public class RallyDashboardPage extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println(driver.getTitle());
 
-		if (driver.getTitle().equalsIgnoreCase("Profile")) {
+		if (driver.getTitle().contains("Profile")) {
 			System.out.println("Pass!");
 			return new ProfilePreferencesPage(driver);
 		}
@@ -238,7 +238,7 @@ public class RallyDashboardPage extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println(driver.getTitle());
 
-		if (driver.getTitle().equalsIgnoreCase("Benefits Overview")) {
+		if (driver.getTitle().contains("Benefits Overview")) {
 			return new BenefitsAndCoveragePage(driver);
 		}
 		return null;
@@ -328,7 +328,7 @@ public class RallyDashboardPage extends UhcDriver {
 		validateNew(Claims_Dashboard);
 		Claims_Dashboard.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getTitle().equalsIgnoreCase("Claims")) {
+		if (driver.getTitle().contains("Claims")) {
 			return new ClaimSummarypage(driver);
 		}
 		return null;
@@ -363,7 +363,7 @@ public class RallyDashboardPage extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		panelClaims.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getTitle().equalsIgnoreCase("Claims")) {
+		if (driver.getTitle().contains("Claims")) {
 			return new pages.memberrdesignVBF.ClaimSummarypage(driver);
 		}
 		return null;
@@ -385,7 +385,7 @@ public class RallyDashboardPage extends UhcDriver {
 		validateNew(explainationOfBenefits);
 		explainationOfBenefits.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (!(driver.getTitle().equalsIgnoreCase("EOB Search"))) {
+		if (!(driver.getTitle().contains("EOB Search"))) {
 			Assert.fail("EOB page not getting displayed");
 		}
 	}
@@ -410,7 +410,7 @@ public class RallyDashboardPage extends UhcDriver {
 		validateNew(benefitsSummary);
 		benefitsSummary.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getTitle().equalsIgnoreCase("Benefits Overview")) {
+		if (driver.getTitle().contains("Benefits Overview")) {
 			return new BenefitsAndCoveragePage(driver);
 		}
 		return null;
@@ -426,7 +426,7 @@ public class RallyDashboardPage extends UhcDriver {
 		validateNew(premiumPayment);
 		premiumPayment.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getTitle().equalsIgnoreCase("Overview")) {
+		if (driver.getTitle().contains("Overview")) {
 			return new PaymentsOverview(driver);
 		}
 		return null;
@@ -526,7 +526,6 @@ public class RallyDashboardPage extends UhcDriver {
 
 	public static void checkModelPopup(WebDriver driver) {
 		int counter = 0;
-		System.out.println("Initial value of conter: " + counter);
 		do {
 
 			System.out.println("current value of conter: " + counter);
@@ -561,29 +560,6 @@ else{
 	driver.findElement(By.className("btn-no")).click();
 	driver.switchTo().defaultContent();
 }
-			/*if (driver.findElements(By.xpath("//area[@href='javascript:clWin()'][@alt = 'no']")).isEmpty()) {
-				try {
-					Thread.sleep(5000);
-				} catch (InterruptedException e) {
-					System.out.println(e.getMessage());
-				}
-
-			}
-
-			else {
-				System.out.println("FeedBack Modal Present and counter value is:" + counter);
-				try {
-					Thread.sleep(2000);
-					WebElement NoThanks = driver.findElement(By.xpath("//*[@id='IPEinvL']/map/area[3]"));
-					JavascriptExecutor js = (JavascriptExecutor) driver;
-					js.executeScript("arguments[0].scrollIntoView();", NoThanks);
-					js.executeScript("arguments[0].click();", NoThanks);
-					break;
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-
-			}*/
 			counter++;
 		} while (counter < 1);
 	}
@@ -603,7 +579,7 @@ else{
 		validateNew(EOB_Dashboard);
 		EOB_Dashboard.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (!(driver.getTitle().equalsIgnoreCase("EOB Search"))) {
+		if (!(driver.getTitle().contains("EOB Search"))) {
 			Assert.fail("EOB page not getting displayed");
 			return null;
 		} else {
@@ -664,7 +640,7 @@ else{
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println(driver.getTitle());
 
-		if (driver.getTitle().equalsIgnoreCase("Documents Overview")) {
+		if (driver.getTitle().contains("Documents Overview")) {
 			return new FormsAndResourcesPage(driver);
 		}
 		return null;
@@ -683,7 +659,7 @@ else{
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println(driver.getTitle());
 
-		if (driver.getTitle().equalsIgnoreCase("Documents Overview")) {
+		if (driver.getTitle().contains("Documents Overview")) {
 			return new FormsAndResourcesPage(driver);
 		}
 		return null;

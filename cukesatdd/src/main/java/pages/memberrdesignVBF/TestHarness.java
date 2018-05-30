@@ -87,7 +87,7 @@ public class TestHarness extends UhcDriver {
 		validateNew(PaymentPageLik);
 		PaymentPageLik.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getTitle().equalsIgnoreCase("Overview")) {
+		if (driver.getTitle().contains("Overview")) {
 			return new PaymentsOverview(driver);
 		}
 		// }
@@ -149,7 +149,7 @@ public class TestHarness extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println(driver.getTitle());
 
-		if (driver.getTitle().equalsIgnoreCase("Benefits Overview")) {
+		if (driver.getTitle().contains("Benefits Overview")) {
 			return new BenefitsAndCoveragePage(driver);
 		}
 		return null;
@@ -164,7 +164,7 @@ public class TestHarness extends UhcDriver {
 		validateNew(claimsPageLink);
 		claimsPageLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getTitle().equalsIgnoreCase("Claims")) {
+		if (driver.getTitle().contains("Claims")) {
 			return new ClaimSummarypage(driver);
 		}
 		return null;
@@ -216,7 +216,7 @@ public class TestHarness extends UhcDriver {
 		validateNew(eobPageLink);
 		eobPageLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (!(driver.getTitle().equalsIgnoreCase("EOB Search"))) {
+		if (!(driver.getTitle().contains("EOB Search"))) {
 			Assert.fail("EOB page not getting displayed");
 			return null;
 		} else {
@@ -303,7 +303,7 @@ public class TestHarness extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println(driver.getTitle());
 
-		if ("Profile".equalsIgnoreCase(driver.getTitle())) {
+		if ("Profile".contains(driver.getTitle())) {
 			System.out.println("Pass!");
 			return new ProfilePreferencesPage(driver);
 		}
@@ -347,7 +347,7 @@ public class TestHarness extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println(driver.getTitle());
 
-		if (driver.getTitle().equalsIgnoreCase("Documents Overview")) {
+		if (driver.getTitle().contains("Documents Overview")) {
 			return new FormsAndResourcesPage(driver);
 		}
 		return null;

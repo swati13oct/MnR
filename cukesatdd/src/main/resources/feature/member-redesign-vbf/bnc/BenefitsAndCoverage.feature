@@ -28,8 +28,8 @@ Feature: 1.01-VBF-MemRedesign-To test plan benefits and Coverage functionality
 
     Examples: 
       | memberType              | friendname | favcolor | phonenumber |
-       |  UhcMapdInd   | name1      | color1   | number1     |
-      #| AARPMapdInd | name1      | color1   | number1     |
+      # |  BncnonlisUHCIndividual   | name1      | color1   | number1     |
+      | BncnonlisAARPIndividual | name1      | color1   | number1     |
 
   @smokeTest_BenefitsAndCoverageGrp @rallyDashboard @testharness
   Scenario Outline: Verify multiple sections on Benefits and Coverage page for non-LIS group member
@@ -57,4 +57,4 @@ Feature: 1.01-VBF-MemRedesign-To test plan benefits and Coverage functionality
 
     Examples: 
       | memberType            | friendname | favcolor | phonenumber |
-      | GroupRetireeMapd | name1      | color1   | number1     |
+      | BncnonlisGroupRetiree | name1      | color1   | number1     |
