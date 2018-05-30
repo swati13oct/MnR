@@ -1069,7 +1069,7 @@ public void comparePlanslnk() throws InterruptedException{
                             }
                             
                             if (driver.getTitle().equalsIgnoreCase(
-                            "Our Medicare Plan Types | AARP® Medicare Plans from UnitedHealthcare®") || driver.getTitle().equalsIgnoreCase("estimate-drug-costs")) {
+                            PageTitleConstants.ULAYER_OUR_MEDICARE_PLAN_TYPES) || driver.getTitle().equalsIgnoreCase("estimate-drug-costs")) {
                             return new VPPPlanSummaryPage(driver);
                             }
                     

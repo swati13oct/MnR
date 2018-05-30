@@ -38,7 +38,7 @@ public class MedicareAdvantagePlansPage extends GlobalWebElements {
 		validate(medicareAdvantagePlansRequestMoreHelpLink);
 		medicareAdvantagePlansRequestMoreHelpLink.click();
 		validate(medicareAdvantagePlansRequestMoreHelpLink);
-		if(driver.getTitle().equalsIgnoreCase("Request AARP® MA Plan Information | AARP® Medicare Plans from UnitedHealthcare®")){
+		if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_REQUEST_AARP_MA_PLAN_INFORMATION)){
 			return new MedicareAdvantageRequestMoreHelpPage(driver);
 		}
 	

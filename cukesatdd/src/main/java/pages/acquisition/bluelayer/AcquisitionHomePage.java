@@ -78,6 +78,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
         @FindBy(id = "atdd_ma_plans")
         private WebElement ma_moreHelpInfoLink;
+        
+        @FindBy(xpath="//a[contains(text(),'Request More')]")
+    	private WebElement moreHelpInfoLink;
 
         @FindBy(id = "atdd_mpd_plans")
         private WebElement pdp_moreHelpInfoLink;
@@ -1025,7 +1028,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
                 Actions actions = new Actions(driver);
                 actions.moveToElement(ourPlansHoverLink);
-                actions.moveToElement(ma_moreHelpInfoLink);
+                actions.moveToElement(moreHelpInfoLink);
                 actions.click().build().perform();
 
                 try {

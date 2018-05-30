@@ -47,7 +47,7 @@ public class SiteMapAARPPage extends GlobalWebElements {
 		validate(footerPrivacyPolicyLink);
 		footerPrivacyPolicyLink.click();
 		validate(footerPrivacyPolicyLink);
-		if (driver.getTitle().equalsIgnoreCase("Privacy Policy | AARP® Medicare Plans from UnitedHealthcare®")) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_PRIVACY_POLICY)) {
 			return new PrivacyPolicyAARPPage(driver);
 		}
 		return null;

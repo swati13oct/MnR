@@ -39,7 +39,7 @@ public class ExploreChangingPlansPage extends GlobalWebElements {
 	    actions.moveToElement(prepareForInitialEnrollmentMedicareEducationLink);
 	    actions.click().build().perform();
 	    validate(navigationSectionMedicareEducationLink);
-		if (driver.getTitle().equalsIgnoreCase("Medicare Initial Enrollment Period | AARP® Medicare Plans from UnitedHealthcare®")) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_MEDICARE_INITIAL_ENROLLMENT_PERIOD)) {
 			return new PrepareforInitialEnrollmentPage(driver);
 		}else{
 		

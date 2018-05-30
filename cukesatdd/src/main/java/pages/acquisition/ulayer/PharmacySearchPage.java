@@ -495,7 +495,7 @@ public PharmacyResultPage ValidateShowOnMapResult() {
 		driver.manage().timeouts().implicitlyWait(300, TimeUnit.SECONDS);
 		showonmap.click();
 		if (driver.getTitle().equalsIgnoreCase(
-				"Member Claims")) {
+				PageTitleConstants.ULAYER_MEMBER_CLAIMS)) {
 			return new PharmacyResultPage(driver);
 		}
 		return null;
