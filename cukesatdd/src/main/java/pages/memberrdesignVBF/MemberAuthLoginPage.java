@@ -29,7 +29,7 @@ import junit.framework.Assert;
 public class MemberAuthLoginPage extends UhcDriver {
 
 	// Page URL
-	private static String PAGE_URL = MRConstants.MEM_AUTH_URL;
+	private static String PAGE_URL = null;
 	// private static String REDESIGN_PAGE_URL = MRConstants.REDESIGN_AARPM_URL;
 
 	@FindBy(id = "find_searchbtn")
@@ -67,7 +67,7 @@ public class MemberAuthLoginPage extends UhcDriver {
 			Assert.fail();
 
 		} else {
-			PAGE_URL = MRConstants.MEMBER_AUTH_REDESIGN_URL;
+			PAGE_URL = MRConstants.MEMBER_AUTH_PLM_REDESIGN_URL;
 		}
 		startNew(PAGE_URL);
 		CommonUtility.checkPageIsReadyNew(driver);
