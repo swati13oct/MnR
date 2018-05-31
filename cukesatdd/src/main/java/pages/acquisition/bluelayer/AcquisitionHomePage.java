@@ -725,11 +725,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
         public PharmacySearchPage navigateToPharmacyLocator(String planType) {
 
     		driver.manage().window().maximize();
-                if(planType.contains("MA"))
+               /* if(planType.contains("MA"))
                         pharmacyNearLink_MA.click();
                 else if(planType.contains("PDP")){
                         pharmacyNearLink.click();                
-                }
+                }*/
 
 
                 for(int i=0;i<10;i++){
