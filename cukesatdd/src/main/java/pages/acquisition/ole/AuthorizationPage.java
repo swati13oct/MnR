@@ -124,8 +124,13 @@ public class AuthorizationPage extends UhcDriver{
 				System.out.println("Error message and Cancel Enrollment Button are NOT displaeyd for Disagree to SoU selection : Validation Failed");
 				validation_Flag = false;
 			}
+/*			if(validate(SoU_AgreeRadio)){
+				SoU_AgreeRadio.click();
+			}
+			if(validate(AuthorizedRepresentativeRadio)){
+				AuthorizedRepresentativeRadio.click();
+			}*/
 			SoU_AgreeRadio.click();
-			
 			AuthorizedRepresentativeRadio.click();
 			if(!NextBtn.isEnabled() && validate(Authorized_FirstName) && validate(Authorized_LastName) 
 					&& validate(Authorized_Relation) && validate(Authorized_Address) && validate(Authorized_City) && validate(Authorized_State)

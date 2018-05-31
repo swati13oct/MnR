@@ -69,7 +69,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(), 'Assign as PCP')]")
 	private List <WebElement> AssinPCPLinks;
 
-	@FindBy(xpath = "//*[@id='label_selectedLocation0_accepting']")
+	@FindBy(xpath = ".//*[@id='label_selectedLocation0_acceptingExistingPatientsOnly' or @id = 'label_selectedLocation0_accepting']")
 	private WebElement SelectPCPAddress;
 	
 	@FindBy(xpath = "//span[contains(text(), 'Continue')]//..")
@@ -225,7 +225,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 			}
 			else if(CurrentURL.contains("find-pcp")){
 				
-				if(!planType.contains("SNP")){
+				//if(!planType.contains("SNP")){
 					if(validate(SelectPCPLink)){
 						System.out.println("PCP selection is Displayed in Rally Page : Selecting PCP");
 						SelectPCPLink.click();
@@ -250,17 +250,19 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 						//SelectPCPContinueBtn.click();
 						try {
 							Thread.sleep(2000);
+							if(validate(SelectMedicalGrp)){
+								SelectMedicalGrp.click();
+								executor = (JavascriptExecutor)driver;
+								executor.executeScript("arguments[0].click();", MedicalGrpContinueBtn);
+
+							}
+
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-						SelectMedicalGrp.click();
-						executor = (JavascriptExecutor)driver;
-						executor.executeScript("arguments[0].click();", MedicalGrpContinueBtn);
-
-						//MedicalGrpContinueBtn.click();
 						try {
-							Thread.sleep(2000);
+							Thread.sleep(1000);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -293,7 +295,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 						System.out.println("Rally Provider Lookup page is not displayed");
 						validation_Flag = false; 
 					}
-				}
+				//}
 			}
 			else{
 				System.out.println("Rally Provider Lookup page is not displayed");
