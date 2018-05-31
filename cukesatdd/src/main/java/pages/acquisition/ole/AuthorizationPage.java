@@ -56,7 +56,7 @@ public class AuthorizationPage extends UhcDriver{
 	@FindBy(id = "auhtorizedCheckI am the applicant listed on this enrollment application.")
 	private WebElement ApplicantRadio;
 
-	@FindBy(id = "auhtorizedCheckI am the authorized representative of the applicant listed on this enrollment application under the laws of the state in which this individual resides. I can show written proof of this right if Medicare asks for it.")
+	@FindBy(xpath = "//*[contains(text(), 'I am the authorized representative of the applicant')]/preceding-sibling::input")
 	private WebElement AuthorizedRepresentativeRadio;
 
 	//Authorized Representative Details
@@ -125,6 +125,7 @@ public class AuthorizationPage extends UhcDriver{
 				validation_Flag = false;
 			}
 			SoU_AgreeRadio.click();
+			
 			AuthorizedRepresentativeRadio.click();
 			if(!NextBtn.isEnabled() && validate(Authorized_FirstName) && validate(Authorized_LastName) 
 					&& validate(Authorized_Relation) && validate(Authorized_Address) && validate(Authorized_City) && validate(Authorized_State)

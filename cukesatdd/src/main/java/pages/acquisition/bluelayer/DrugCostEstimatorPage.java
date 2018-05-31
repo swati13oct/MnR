@@ -139,7 +139,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='pharmacy-results']//span[contains(@class,'pharmacy-name')]")
 	public List<WebElement> pharmacies;
 	
-	@FindBy(id = "select-pharmacy-button-0")
+	@FindBy(xpath = ".//*[@id='select-pharmacy-button' or @id='select-pharmacy-button-0']")
 	public WebElement select_btn_first;
 
 	@FindBy(id = "saverSavingSpan")
@@ -325,7 +325,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id= "drugcosts")
 	private WebElement step3Info;
 	
-	@FindBy(id= "drug-cost-card")
+	@FindBy(id= "drug-cost-card-acq")
 	private WebElement drugCostCard;
 	
 	//@FindBy(xpath = ".//*[@id='costs-tab']/div/div[1]/div[2]/div/a")
@@ -944,7 +944,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		AddNewDrugModal addNewDrugModal = clickOnAddDrug();
 		//addNewDrugModal.typeDrugName(drug);
 		//addNewDrugModal.submit();
-		addNewDrugModal.clickonSearchButton(drug);
+		addNewDrugModal.clickonSearchButton(drug.toLowerCase());
 		// addNewDrugModal.selectDrug(drug);
 		AddDrugDetails addDrugDetails = new AddDrugDetails(driver);
 
