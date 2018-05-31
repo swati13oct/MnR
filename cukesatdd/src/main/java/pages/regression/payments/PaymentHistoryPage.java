@@ -309,24 +309,22 @@ public class PaymentHistoryPage extends UhcDriver{
 		 }	    	
 		
 	   try
-	   {
-		if(onetimepaymentbtn.isDisplayed()){
-			onetimepaymentbtn.click();
+	   {	
+		 Thread.sleep(2000);
+		 onetimepaymentbtn.click();
 		 System.out.println("clicked on make OTP button");		 
-		 return new  OneTimePaymentPage(driver);
-		}
-		else if(onetimepaymentbtnPDP.isDisplayed())
-		{
-			onetimepaymentbtnPDP.click();
-			System.out.println("clicked on make OTP PDP button");
-			return new  OneTimePaymentPage(driver);
-		}		
+		 return new  OneTimePaymentPage(driver);		
+				
 	   }catch(Exception e)
 	   {
-		   System.out.println("One time Payment Button not displayed");
-		   return null;
+		   System.out.println("Normal One time Payment Button not displayed");
+		  
 	   }
-	   return new  OneTimePaymentPage(driver);
+	   
+			onetimepaymentbtnPDP.click();
+			System.out.println("clicked on make OTP PDP button");
+			return new  OneTimePaymentPage(driver);  
+
 	    
 		    }
 	 
@@ -356,10 +354,9 @@ public OneTimePaymentPage AutoPay(){
 						 return null;
 				 }catch(Exception e)
 				 {
-					 
-				 }
-					 
-				 return new  OneTimePaymentPage(driver);
+					System.out.println("Set up Pop up not displayed"); 
+				 }					 
+				 
 			 }
 			 else
 			 {
@@ -368,7 +365,7 @@ public OneTimePaymentPage AutoPay(){
 			 
 		 }catch(Exception e)
 		 {
-			 System.out.println("No Edit payment button exists");
+			 System.out.println("No Auto payment button exists");
 		 }		
 		 
 		 waitforElement(AutoPayButton);  		

@@ -416,7 +416,7 @@ Feature: To test the payment flow on AARP site
 
     Examples: 
       | username  | password  |MemUserName    |routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
-      | qavgogine | qavgogine | q1_apr_uhc094 |123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.12 |
+      | qavgogine | qavgogine | q2_jun_uhc0042 |123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.12 |
  
  
   @paymentsShip @15320 @15144
@@ -439,6 +439,6 @@ Feature: To test the payment flow on AARP site
    
     Examples: 
       | planType | memberType            | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
-      | SHIP     | IndividualAARPSPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
+      | SHIP     | IndividualAARPSPayments | 123123123 |        123123123 |     12345 |          12345 | first     | second     | third    |   1.00 |
  
  

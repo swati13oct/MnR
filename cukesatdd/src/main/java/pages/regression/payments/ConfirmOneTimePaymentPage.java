@@ -21,6 +21,9 @@ public class ConfirmOneTimePaymentPage extends UhcDriver{
 	@FindBy(xpath = "(.//*[@class='btn btn--primary'])[2]")
 	private WebElement SubmitPaymentButton;
 	
+	@FindBy(xpath = "(.//*[@class='btn btn--primary disabled']")
+	private WebElement MemAuthSubmitPaymentButton;
+	
 	@FindBy(xpath = "//*[@class='message-block-header']/span")
 	private WebElement SuccessPay;
 	
@@ -113,7 +116,7 @@ public class ConfirmOneTimePaymentPage extends UhcDriver{
  		waitforElement(TermsCheckRadioButton);
  		TermsCheckRadioButton.click();
  		System.out.println("Terms and conditions radio button clicked");
- 		if(!(SubmitPaymentButton.isEnabled())) 	
+ 		if(!(MemAuthSubmitPaymentButton.isEnabled())) 	
  		{
  		     System.out.println("Submit Payment Button disabled");
  		return new ConfirmOneTimePaymentPage(driver);

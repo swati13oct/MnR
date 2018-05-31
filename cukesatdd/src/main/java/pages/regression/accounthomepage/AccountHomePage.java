@@ -610,15 +610,18 @@ public class AccountHomePage extends UhcDriver {
 		try{			
 			if (HistoryTable.isDisplayed()) {
 				System.out.println("Payment History Exists");
-				jse.executeScript("window.scrollBy(0,-850)", "");
+				jse.executeScript("window.scrollBy(0,-1100)", "");
 				Thread.sleep(5000);			
 			} }
 			catch(Exception e)
 			{
-				System.out.println("History table not present for this member");
-				jse.executeScript("window.scrollBy(0,-850)", "");
-				Thread.sleep(5000);				
+				System.out.println("History table not present for this member");	
+								
 			}
+		
+		jse.executeScript("window.scrollBy(0,-1000)", "");
+		Thread.sleep(5000);
+		
 			return new pages.regression.payments.PaymentHistoryPage(driver);
 		}
 
