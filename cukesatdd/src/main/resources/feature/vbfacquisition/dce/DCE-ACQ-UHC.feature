@@ -12,12 +12,12 @@ And the user selects the pharmacy tab information
 	| Zipcode	  | <zipcode> |
 	| Radius  | <radius>   |
 And I select the first pharmacy on there
-And I navigate to step3 page and validate the drug info
+And I navigate to step3 page and validate drug info for DCE homepage flow uhc
 	|Drug|<drug>|
 
  Examples:
 | drug|zipcode| radius|
-| LIPITOR TAB 10MG| 90210 | 15miles |
+| Lipitor TAB 10MG| 90210 | 15miles |
 
 
 @dceVppBlayer

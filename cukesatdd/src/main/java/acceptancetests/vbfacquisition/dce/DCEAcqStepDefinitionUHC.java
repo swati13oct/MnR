@@ -290,6 +290,18 @@ public class DCEAcqStepDefinitionUHC {
 		   Assert.fail("Error:the drug did not display on step 3 page"); 
 	}
 	
+	@Then("^I navigate to step3 page and validate drug info for DCE homepage flow uhc$")
+	public void I_navigate_to_step3_page(DataTable data) throws InterruptedException {
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		String drug = memberAttributesRow.get(0).getCells().get(1);
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.navigateToStep3();
+	   if(dce.validateDrugOnStep3FromHomePageFlow(drug))
+		   Assert.assertTrue(true);
+	   else
+		   Assert.fail("Error:the drug did not display on step 3 page"); 
+	}
+	
 	/**
 	 * @toDo:switch to generic drug and validate on ums site
 	 */

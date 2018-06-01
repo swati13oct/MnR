@@ -79,14 +79,14 @@ public class PharmacyLocatorStepDefinitionUHC {
 		PharmacySearchPage pharmacySearchPage = acqusitionHomePage
 				.navigateToPharmacyLocator(planType);
 
-		if (pharmacySearchPage != null) {
+		/*if (pharmacySearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
 					pharmacySearchPage);
 			Assert.assertTrue(true);
 			pharmacySearchPage.validateDefaultChooseaPlanSection();
 		} else {
 			Assert.fail("Failed to load Pharmacy search page");
-		}
+		}*/
 
 	}
 
