@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.PageTitleConstants;
 
 /**
  * @author pagarwa5
@@ -47,7 +48,7 @@ public class AdditionalPlanPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		if (driver.getTitle().equalsIgnoreCase(
-				"UnitedHealthcare Medicare Solutions | Registration"))
+				PageTitleConstants.BLAYER_MEDICARE_SOLUTIONS_REGISTRATION))
 			return new PlanConfirmationPage(driver);
 		return null;
 

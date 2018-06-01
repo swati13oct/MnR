@@ -78,8 +78,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "atdd_mpd_plans")
 	private WebElement pdp_moreHelpInfoLink;
 
-	@FindBy(id = "atdd_ma_plans")
+	@FindBy(xpath = ".//*[@id='atdd_ma_plans']/span")
 	private WebElement ma_moreHelpInfoLink;
+	
+	@FindBy(xpath="//a[contains(text(),'Request More')]")
+	private WebElement moreHelpInfoLink;
 
 	@FindBy(id = "ghn_lnk_1")
 	public static WebElement navigationSectionHomeLink;
@@ -221,7 +224,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("county box not found");
 		}
 		
-		if (driver.getTitle().equalsIgnoreCase("Our Medicare Plans | AARP® Medicare Plans From UnitedHealthcare®")) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_OUR_MEDICARE_PLANS)) {
 			System.out.println("title matches");
 			return new VPPPlanSummaryPage(driver);
 		}
@@ -257,7 +260,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		viewPlansButton.click();
 		
 		if (getTitle().equalsIgnoreCase(
-				"Our Medicare Plans | AARP® Medicare Plans From UnitedHealthcare®")) {
+				PageTitleConstants.ULAYER_OUR_MEDICARE_PLANS)) {
 			return new VPPPlanSummaryPage(driver);
 		}
 		return null;
@@ -665,11 +668,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public void navigateToRequestMoreHelpAndInformation(String planType){
 		Actions action = new Actions(driver);
 		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
-		if(planType.contains("MA"))
+		/*if(planType.contains("MA"))
 				ma_moreHelpInfoLink.click();
 		else if(planType.contains("PDP")){
 				pdp_moreHelpInfoLink.click();		
-		}
+		}*/
+		moreHelpInfoLink.click();
 		for(int i=0;i<10;i++){
 			try {
 				Thread.sleep(2000);
@@ -696,7 +700,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			if(driver.getCurrentUrl().contains("-pharmacy."))
 				break;
 		}
-		if (driver.getTitle().equalsIgnoreCase("Locate a Pharmacy | UnitedHealthcare®")) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE)) {
 			return new PharmacySearchPage(driver);
 		}
 		return null;
@@ -719,7 +723,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		Actions actions = new Actions(driver);
 		actions.moveToElement(ourPlansHoverLink);
-		actions.moveToElement(ma_moreHelpInfoLink);
+		actions.moveToElement(moreHelpInfoLink);
 		actions.click().build().perform();
 
 		try {

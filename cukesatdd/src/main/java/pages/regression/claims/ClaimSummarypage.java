@@ -1,12 +1,10 @@
 package pages.regression.claims;
 import java.util.List;
 
+import org.jsoup.select.Evaluator.ContainsText;
 import junit.framework.Assert;
-
 import org.openqa.selenium.By;
-/**
- * 
- */
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,9 +17,9 @@ import atdd.framework.UhcDriver;
 /**
  * Functionality : this page validates the Claim Summary page.
  */
+
 public class ClaimSummarypage extends UhcDriver{
 
-	
 
 	@FindBy (xpath=".//*[@id='MA']")
 	private WebElement MA;
@@ -96,7 +94,7 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy (xpath="//span[text()='Ship EOB']/parent::a")
 	private WebElement ShipClaimsEobText;
 
-	@FindBy (xpath=".//*[@id='table-medical']/div[2]/div[1]/div/a")
+	@FindBy (id="learnmoresummarytoggle")
 	private WebElement learnmorefalse;
 
 	@FindBy (xpath=".//*[@id='table-medical']/div[2]/div[2]/div/a")
@@ -134,8 +132,18 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy (xpath= "//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li")
 	private List<WebElement> comboTabsOnclaimsPage;
 	
+	@FindBy(id="fed-document-date")
+	private WebElement claimFromDropDown1;
+	
+	@FindBy(id="claim-type")
+	private WebElement clamtypeFromDropDown;
+	
+	@FindBy(xpath="//*[@id='skipToBodyContent']//div[@class='reviewclaimstextFed parsys']//p")
+	private WebElement clamsSummaryCopyText;
 
-
+	@FindBy(xpath="//*[@id='graySection']//div[@class='tablenavigationarea tablepagination']")
+	private WebElement pagination;
+	
 	public ClaimSummarypage(WebDriver driver) {
 		super(driver);
 
@@ -360,11 +368,11 @@ public class ClaimSummarypage extends UhcDriver{
 			if(planType.contains("SHIP")){
 				System.out.println(planType+"SHIP plan type last 24 moths is going to select");
 						
-				last24months = driver.findElement(By.xpath("//div[@class='medical-claims shipCompSection']//div//*[@id='document-date']//option[contains(@value,'24 months')]"));
+				last24months = driver.findElement(By.xpath(".//*[@id='fed-document-date']//option[contains(@value,'24 months')]"));
 			
 			}else{
 				
-				last24months = driver.findElement(By.xpath("//div[@class='medical-claims']//h2[@ng-bind-html='planName']/parent::div//*[@id='document-date']//option[contains(@value,'24 months')]"));
+				last24months = driver.findElement(By.xpath(".//*[@id='fed-document-date']//option[contains(@value,'24 months')]"));
 							}
 			
 			//Select dropdown = new Select(driver.findElement(By.xpath("//div[@class='medical-claims']//h2[@ng-bind-html='planName']/parent::div//*[@id='document-date']//option[contains(@value,'24 months')]")));
@@ -498,6 +506,43 @@ public class ClaimSummarypage extends UhcDriver{
 		return new ClaimSummarypage(driver);
 	}
 	
+	public void validateClaimsPlantype() {
+		// TODO Auto-generated method stub
+		Select select = new Select(clamtypeFromDropDown);
+		System.out.println("Slected value is  =>" +select.getFirstSelectedOption());
+		for(int i=0;i<select.getOptions().size();i++){
+			System.out.println(select.getOptions().get(i).getAttribute("value"));
+		}
+	}
+
+	public void validateClaimsFromDropDowns1() {
+		// TODO Auto-generated method stub
+		Select select = new Select(claimFromDropDown1);
+		System.out.println("Slected value is  =>" +select.getFirstSelectedOption());
+		for(int i=0;i<select.getOptions().size();i++){
+			System.out.println(select.getOptions().get(i).getAttribute("value"));
+		}
+		
+		
+	}
+
+	public void validateClaimsHeaderCopyText() {
+		// TODO Auto-generated method stub
+		if (clamsSummaryCopyText.getText().contains("Review your claims search"))
+		{
+			System.out.println(clamsSummaryCopyText.getText());
+			System.out.println("claims Summary page copy test is dipalyed ");
+			Assert.assertTrue(clamsSummaryCopyText.getText().contains("Review your claims search")+"copy text is displayed", true);
+		
+		}	
+		
+	}
+
+	public void validatePagination() {
+		// TODO Auto-generated method stub
+		validateNew(pagination);
+	}
+
 }
 
 

@@ -14,6 +14,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.PageTitleConstants;
 
 /**
  * @author saduri
@@ -73,7 +74,7 @@ public ContactUsUmsPage contactUsClick() {
 	validate(contactUsLink);
 	contactUsLink.click();
 	validate(contactUsLink);
-	if(driver.getTitle().equalsIgnoreCase("Contact UnitedHealthcare® | UnitedHealthcare")){
+	if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_CONTACT_UNITEDHEALTHCARE)){
 		return new ContactUsUmsPage(driver);
 	}
 	return null;

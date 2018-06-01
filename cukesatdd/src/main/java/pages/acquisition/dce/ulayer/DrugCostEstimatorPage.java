@@ -17,6 +17,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import pages.acquisition.ulayer.PageTitleConstants;
 import pages.acquisition.ulayer.PlanDetailsPage;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
@@ -404,7 +405,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		waitforElement(addDrug);
 		addDrug.click();
 
-if (driver.getTitle().equalsIgnoreCase("estimate-drug-costs") || driver.getTitle().equalsIgnoreCase("Medicare Plan Drug Costs | AARP® Medicare Plans from UnitedHealthcare®")) {
+if (driver.getTitle().equalsIgnoreCase("estimate-drug-costs") || driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_PLAN_DRUG_COSTS)) {
 			return new AddNewDrugModal(driver);
 		}
 		return null;
