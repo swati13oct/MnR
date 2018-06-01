@@ -192,6 +192,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	
 	@FindBy(id= "drug-cost-card-acq")
 	private WebElement drugCostCard;
+	
+	@FindBy(xpath= ".//*[@id='acqsummary']/div[3]/div[1]")
+	private WebElement step3DrugSummaryInfo;
 
 	@FindBy(id = "total_annauldeductible")
 	public WebElement left_rail_deductible;
@@ -366,7 +369,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id="switchToGenericBtnId")
 	private WebElement updateBtn;
 	
-	@FindBy(xpath = ".//*[@id='acqsummary']/div[3]/div[4]/div/p")
+	@FindBy(id = "total_annualcost_acq")
 	private WebElement costText;
 	
 	@FindBy(id = "ghn_lnk_2")
@@ -377,6 +380,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	
 	@FindBy(xpath = ".//*[@id='subnav_2']//button[@class='zip-button']")
 	public WebElement findPlans;
+	
+	@FindBy(xpath = ".//*[@id='drug-cost-card-acq']/div[2]//*[contains(text(),'EDIT DRUGS LIST')]")
+	public WebElement step3EditDrugsList;
 	
 	@Override
 	public void openAndValidate() {
@@ -1284,11 +1290,13 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public void clickSwitchNow() throws InterruptedException {
 		Thread.sleep(5000);
 		String brandedCost = costText.getText();
+		step3EditDrugsList.click();
 		System.out.println(brandedCost);
 		JavascriptExecutor js = (JavascriptExecutor)driver;
 		js.executeScript("arguments[0].click();", switchNowBtn);
 		updateBtn.click();
 		Thread.sleep(6000);
+		navigateToStep3();
 		String genericCost = costText.getText();System.out.println(genericCost);
 		if(brandedCost.equals(genericCost))
 			Assert.fail("Error in calculating costs after switching to generic");
@@ -1674,6 +1682,13 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	private WebElement step3drugInfo;
 	public boolean validateDrugOnStep3(String drug) {
 		if(step3Info.getText().contains(drug)&&validateNew(drugCostCard))
+			return true;
+		return false;
+		
+	}
+	
+	public boolean validateStep3FromHomePage(String drug) {
+		if(step3DrugSummaryInfo.getText().contains(drug))
 			return true;
 		return false;
 		

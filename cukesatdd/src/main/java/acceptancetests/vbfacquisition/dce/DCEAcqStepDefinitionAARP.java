@@ -221,6 +221,17 @@ public class DCEAcqStepDefinitionAARP {
 		   Assert.fail("Error:the drug did not display on step 3 page"); 
 	}
 	
+	@Then("^I navigate to step3 page and validate for DCE homepage flow$")
+	public void I_navigate_to_step3_page(DataTable data) throws InterruptedException {
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		String drug = memberAttributesRow.get(0).getCells().get(1);
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.navigateToStep3();
+	   if(dce.validateStep3FromHomePage(drug))
+		   Assert.assertTrue(true);
+	   else
+		   Assert.fail("Error:the drug did not display on step 3 page"); 
+	}
 	/**
 	 * @toDo:
 	 */
