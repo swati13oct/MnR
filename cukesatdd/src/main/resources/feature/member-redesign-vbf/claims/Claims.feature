@@ -16,6 +16,7 @@ Feature: 1.02-VBF-MemRedesign-To test claim functionality
     And the user search claims for the following claim period in AARP site
       | Plan Type    | <planType>    |
       | Claim Period | <claimPeriod> |
+       |ClaimSystem| <claimssystem>|
     Then user validates the claims displayed based on the selection in redesigned site
     And the user validates the EOB section based on domain in redesigned site
       | Domain | <domain> |

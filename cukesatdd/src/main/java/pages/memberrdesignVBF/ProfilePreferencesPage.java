@@ -215,7 +215,7 @@ public void validateBreadCrumbClick() {
         breadCrumbToNavigateBack.click();
         RallyDashboardPage.checkModelPopup(driver);
         CommonUtility.waitForPageLoadNew(driver,hsidPasswordLink, 50);
-        Assert.assertTrue(driver.getTitle().equalsIgnoreCase("Profile"));
+        Assert.assertTrue(driver.getTitle().contains("Profile"));
 }
 
 

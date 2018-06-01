@@ -66,12 +66,14 @@ public class ClaimsStepDefinition {
 		}
 
 		System.out.println(urlAttributesMap.get("Claim Period"));
-		String s = urlAttributesMap.get("Claim Period");
+		String period = urlAttributesMap.get("Claim Period");
 		String planType = urlAttributesMap.get("Plan Type");
+		String ClaimSystem = urlAttributesMap.get("ClaimSystem");
+		
 		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario()
 				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
 
-		newClaimsSummaryPage.searchClaimsByTimePeriod(planType, s);
+		newClaimsSummaryPage.searchClaimsByTimePeriod(planType, period, ClaimSystem);
 	}
 
 	/***
