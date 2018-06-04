@@ -923,17 +923,19 @@ public class FormsAndResourcesPage extends UhcDriver {
                            }
                            
                            
+                           
                            public void selectlanguagedropdown(String language)
                            {
                                   Select langdropdwn = new Select(languagedropdown);
                                   langdropdwn.selectByVisibleText(language);
                            }
                            
-                        public void scrollUp() {
-                     JavascriptExecutor jse = (JavascriptExecutor)driver;
-                     jse.executeScript("window.scrollBy(0,400)", "");
+                      
+                           public void scrollUp() {
+	                     JavascriptExecutor jse = (JavascriptExecutor)driver;
+	                     jse.executeScript("window.scrollBy(0,400)", "");
                      
-                 }
+                            }
                         
      
      

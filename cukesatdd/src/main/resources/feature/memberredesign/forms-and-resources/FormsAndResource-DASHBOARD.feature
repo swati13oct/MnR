@@ -8,6 +8,9 @@ Feature: G1.1 To validate forms and resources page in dashboard site
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     And user clicks on the view document and resources link and navigate to forms and resource page
+    And for active member Temporary Id Card and Plan Order Material links are displayed
+    And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
+    And validates the view temporary id card link
     Then validate that the plan materials section is displayed
     And validate that english is default language in dropdown
     And the user validates the language dropdown and selects new value in dropdown successfully
@@ -50,10 +53,10 @@ Feature: G1.1 To validate forms and resources page in dashboard site
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     And user clicks on the view document and resources link and navigate to forms and resource page
-    Then validate that the plan materials section is displayed
     And for active member Temporary Id Card and Plan Order Material links are displayed
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
     And validates the view temporary id card link
+    Then validate that the plan materials section is displayed
     And validate that english is default language in dropdown
     And the user changes the laguage in the language dropdown
     Then validate that the anoc section is displayed for group
@@ -400,10 +403,12 @@ Feature: G1.1 To validate forms and resources page in dashboard site
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     And user clicks on the view document and resources link and navigate to forms and resource page
-    Then validate plan materials section
-    And for active member both the links are displayed
-    And validate that the EOB statemnets section is displayed
-    And validate that the forms and resources section is displayed
+    And for active member Temporary Id Card and Plan Order Material links are displayed
+    And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
+    And validates the view temporary id card link
+    Then validate that the plan materials section is displayed
+    And validate that english is default language in dropdown
+    
 
     Examples: 
       | userId         | password   |
@@ -454,7 +459,7 @@ Feature: G1.1 To validate forms and resources page in dashboard site
     Then validate that the renew magazine section is displayed
     
     Examples:
-    | username  | password  | member                               | disclaimer                                                                                                      |                           
+    | username  | password  | member       | disclaimer                                                                                                      |                           
     | qavgogine | qavgogine | q1_aarp_apr194 | You are viewing this site with member authorized read only access. Remember to LOGOUT at the end of the session |
    
 

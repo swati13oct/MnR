@@ -674,7 +674,8 @@ FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginSc
   @Then("^validate that the EOB section and both the type of Eobs are not displayed")
        void eobpresentornot()
        {
-         FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+         
+	     FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
          Assert.assertTrue(formsAndResourcesPage.checkeobsection());
          Assert.assertTrue(formsAndResourcesPage.checkdrugeobforMA());
          Assert.assertTrue(formsAndResourcesPage.checkmedicaleob());

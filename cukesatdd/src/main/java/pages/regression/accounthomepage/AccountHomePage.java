@@ -1165,6 +1165,7 @@ public PharmacySearchPage navigateToRedesignPharmacyLocaterPage() {
 			e.printStackTrace();
 		}
 		CommonUtility.checkPageIsReady(driver);
+		
 //		CommonUtility.waitForPageLoadNew(driver, orderplanHeadertxt, 30);
 		if (orderplanHeadertxt.isDisplayed()) {
 			return new OrderMaterialsPage(driver);
