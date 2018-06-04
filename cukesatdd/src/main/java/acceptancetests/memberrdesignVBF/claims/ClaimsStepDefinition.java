@@ -24,7 +24,7 @@ public class ClaimsStepDefinition {
 	MRScenario loginScenario;
 	// Map<String, String> memberAttributesMap = new LinkedHashMap<String,
 	// String>();
-	public static String claimSystem;
+	public static String claimType;
 
 	public MRScenario getLoginScenario() {
 		return loginScenario;
@@ -69,7 +69,7 @@ public class ClaimsStepDefinition {
 		String period = urlAttributesMap.get("Claim Period");
 		String planType = urlAttributesMap.get("Plan Type");
 		String ClaimSystem = urlAttributesMap.get("ClaimSystem");
-		
+
 		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario()
 				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
 
@@ -109,9 +109,12 @@ public class ClaimsStepDefinition {
 	 */
 	@And("^the user validates the DownloadMyData section in redesigned site$")
 	public void validates_DownloadMyData_redesigned_site() {
+		String ClaimSystem = CommonStepDefinition.getMemberAttributeMap().get("ClaimSystem");
+		if(!ClaimSystem.equalsIgnoreCase("SHIPCLAIMS")){
 		ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario()
 				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
 		newclaimsSummarypage.validateDownloadMyData();
+		}
 	}
 
 	/***
@@ -120,21 +123,15 @@ public class ClaimsStepDefinition {
 	 */
 	@When("^I navigate to the Claim Details page in AARP site$")
 	public void i_navigate_to_member_redesign_claim_details_page(DataTable timeAttributes) throws InterruptedException {
-		/*List<DataTableRow> timeAttributesRow = timeAttributes.getGherkinRows();
-		Map<String, String> urlAttributesMap = new HashMap<String, String>();
+		String ClaimSystem = CommonStepDefinition.getMemberAttributeMap().get("ClaimSystem");
 
-		for (int i = 0; i < timeAttributesRow.size(); i++) {
-
-			urlAttributesMap.put(timeAttributesRow.get(i).getCells().get(0),
-					timeAttributesRow.get(i).getCells().get(1));
-		}
-
-		System.out.println(urlAttributesMap.get("ClaimSystem"));
-		String claimSystem = urlAttributesMap.get("ClaimSystem");*/
-		String claimType =CommonStepDefinition.getMemberAttributeMap().get("Test Data Type");
-		
-		if (claimType.equalsIgnoreCase("COSMOSCLAIMS") || claimType.equalsIgnoreCase("NICECLAIMS")) {
-			claimSystem = "Medical";
+		if (ClaimSystem.equalsIgnoreCase("COSMOSCLAIMS") || ClaimSystem.equalsIgnoreCase("NICECLAIMS")
+				|| ClaimSystem.equalsIgnoreCase("SHIPCLAIMS")) {
+			if (ClaimSystem.equalsIgnoreCase("SHIPCLAIMS")) {
+				claimType = "SHIP";
+			} else {
+				claimType = "Medical";
+			}
 			ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario()
 					.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
 			ClaimDetailsPage newClaimDetailsPage = claimSummarypage.navigateToClaimDetailsPage();
@@ -143,8 +140,8 @@ public class ClaimsStepDefinition {
 			else {
 				Assert.fail("Claims details page is not loaded!!!");
 			}
-		} else if (claimType.equalsIgnoreCase("RxCLAIMS")) {
-			claimSystem = "Drug";
+		} else if (ClaimSystem.equalsIgnoreCase("RxCLAIMS")) {
+			claimType = "Drug";
 			System.out.println("Skipping Claim Details navigation!!!");
 		} else {
 			Assert.fail("Please check Claim syatems!!!");
@@ -156,12 +153,16 @@ public class ClaimsStepDefinition {
 	 */
 	@And("^I validate the Claims Table in claims details page in AARP site$")
 	public void validate_claimsTable_claimsDetails_AARP() {
-		if (claimSystem.equalsIgnoreCase("Medical")) {
+		if (claimType.equalsIgnoreCase("Medical")) {
 			ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario()
 					.getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
 			claimDetailspage.validateClaimsTableInDetailsPage();
-		} else if (claimSystem.equalsIgnoreCase("Drug")) {
+		} else if (claimType.equalsIgnoreCase("Drug")) {
 			System.out.println("Skipping Claim Details validation!!!");
+		} else if (claimType.equalsIgnoreCase("SHIP")) {
+			ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario()
+					.getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+			claimDetailspage.validateShipClaimsTableInDetailsPage();
 		}
 	}
 
@@ -170,11 +171,15 @@ public class ClaimsStepDefinition {
 	 */
 	@And("^I validate the Claims Total in claims details page in AARP site$")
 	public void validate_claims_total_AARP() {
-		if (claimSystem.equalsIgnoreCase("Medical")) {
+		if (claimType.equalsIgnoreCase("Medical")) {
 			ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario()
 					.getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
 			claimDetailspage.validateClaimsTotalInDetailsPage();
-		} else if (claimSystem.equalsIgnoreCase("Drug")) {
+		} else if (claimType.equalsIgnoreCase("SHIP")) {
+			ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario()
+					.getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+			claimDetailspage.validateShipClaimsTotalInDetailsPage();
+		} else if (claimType.equalsIgnoreCase("Drug")) {
 			System.out.println("Skipping Claim Details validation!!!");
 		}
 	}

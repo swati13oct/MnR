@@ -30,6 +30,9 @@ public class ClaimSummarypage extends UhcDriver {
 
 	@FindBy(xpath = "//select[@name='document-date' and not(contains(@ng-hide,'todate'))]")
 	private WebElement viewClaimsFrom;
+	
+	@FindBy(xpath = "//select[@name='document-date' and contains(@ng-hide,'todate')]")
+	private WebElement viewClaimsFromShip;
 
 	@FindBy(id = "medical")
 	private WebElement claimsTableMedical;
@@ -69,10 +72,16 @@ public class ClaimSummarypage extends UhcDriver {
 
 	@FindBy(xpath = "//table[@id='medical']/tbody/tr[2]/td[not (contains(@class,'hidden-lg'))]")
 	private List<WebElement> medicalTableRow;
+	
+	@FindBy(xpath = "//table[@id='ship']/tbody/tr[2]/td[not (contains(@class,'hidden-lg'))]")
+	private List<WebElement> shipTableRow;
 
 	@FindBy(xpath = "//table[@id='medical']/tbody/tr[2]/td[not (contains(@class,'hidden-lg'))][count(//table[@id='medical']/tbody/tr/th/p[contains(text(),'Provider Name')]/parent::th/preceding-sibling::th)+1]")
 	private WebElement providerNameValue;
-
+	
+	@FindBy(xpath = "//table[@id='ship']/tbody/tr[2]/td[not (contains(@class,'hidden-lg'))][count(//table[@id='ship']/tbody/tr/th/p[text() ='Provider']/parent::th/preceding-sibling::th)+1]")
+	private WebElement shipProviderNameValue;
+	
 	@FindBy(xpath = "//table[@id='prescriptionDrug']/tbody/tr[2]/td[not (contains(@class,'ng-hide'))][not (contains(@class,'hidden-lg'))]")
 	private List<WebElement> drugTableRow;
 
@@ -87,7 +96,14 @@ public class ClaimSummarypage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoadNew(driver, viewClaimsFrom, 60);
+		if(CommonStepDefinition.getMemberAttributeMap().get("ClaimSystem").equalsIgnoreCase("SHIPCLAIMS")){
+			CommonUtility.waitForPageLoadNew(driver, viewClaimsFromShip, 60);
+			
+		}
+		else{
+			CommonUtility.waitForPageLoadNew(driver, viewClaimsFrom, 60);
+		}
+		
 	}
 
 	/***
@@ -140,13 +156,14 @@ public class ClaimSummarypage extends UhcDriver {
 
 			last24months = driver.findElement(By.xpath(
 					"//div[@class='medical-claims shipCompSection']//div//*[@id='document-date']//option[contains(@value,'24 months')]"));
-
+			Select dateDropdown = new Select(viewClaimsFromShip);
+			dateDropdown.selectByVisibleText(claimPeriod);
 		} else {
 			Select claimTypeDropdown = new Select(claimsType);
 			if (claimSystem.equalsIgnoreCase("RxCLAIMS")) {
 				claimTypeDropdown.selectByValue("drug");
 			} else {
-				claimTypeDropdown.selectByVisibleText("medical");
+				claimTypeDropdown.selectByValue("medical");
 			}
 			Select dateDropdown = new Select(viewClaimsFrom);
 			dateDropdown.selectByVisibleText(claimPeriod);
@@ -186,8 +203,18 @@ public class ClaimSummarypage extends UhcDriver {
 						counter++;
 				}
 				Assert.assertTrue("Claims table gets displayed", counter > 0);
+			}else if (claimsTableSHIP.isDisplayed()) {
+
+			int columnSize = shipTableRow.size();
+			for (int columnNum = 1; columnNum < columnSize; columnNum++) {
+				String columnActualText = shipTableRow.get(columnNum).getText();
+				if (!columnActualText.isEmpty())
+					counter++;
 			}
-		} else {
+			Assert.assertTrue("Claims table gets displayed", counter > 0);
+			validateNew(shipProviderNameValue);
+		}
+		}else {
 			System.out.println("!!!!!!!!! NOT Able to find the claim table !!!!!!!!!");
 			Assert.fail("!!!!!!!!! NOT Able to find the claim table !!!!!!!!!");
 		}

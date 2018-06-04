@@ -5,6 +5,7 @@ package pages.memberrdesignVBF;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -82,11 +83,13 @@ public class ContactUsPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='call-number']")
 	private WebElement clickToCallInputNum;
+	
+	@FindBy(xpath = "//a[contains(@class,'goToInbox') and @ng-show='isSecureMailBoxEnabled']")
+	private WebElement goToInboxButton;
 
 	public ContactUsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		//CommonUtility.waitForPageLoadNew(driver, heading, CommonConstants.TIMEOUT_30);
 		openAndValidate();
 
 	}
@@ -102,6 +105,10 @@ public class ContactUsPage extends UhcDriver {
 	 */
 	public void validateEmailWidgetSection() {
 		try {
+			validateNew(requestACall);
+			if(goToInboxButton.isDisplayed()){
+				Assert.assertTrue(validateNew(goToInboxButton));
+			}else{
 			validateNew(getStartedButton);
 			getStartedButton.click();
 			waitforElementNew(useDifferentEmailRadioButton);
@@ -112,6 +119,7 @@ public class ContactUsPage extends UhcDriver {
 			useDifferentEmailRadioButton.click();
 			validateNew(cancelLink);
 			cancelLink.click();
+			}
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
 			Assert.fail("Secure widget is not  displayed");
@@ -226,6 +234,18 @@ public class ContactUsPage extends UhcDriver {
 		requestCall.click();
 		validateNew(memberAuthNotAuthorizedToSendUsQuestionMessage);
 		return memberAuthNotAuthorizedToSendUsQuestionMessage.getText().trim();
+	}
+
+	/**
+	 * Validate the go to inbox button for a member who has already opted out for secure email
+	 */
+	public void validateGoToInbox(){
+		try {
+			waitforElement(goToInboxButton);
+			Assert.assertTrue(validate(goToInboxButton));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

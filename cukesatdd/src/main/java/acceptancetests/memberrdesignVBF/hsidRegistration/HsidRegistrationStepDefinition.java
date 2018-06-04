@@ -1,6 +1,9 @@
 package acceptancetests.memberrdesignVBF.hsidRegistration;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -325,7 +328,8 @@ public class HsidRegistrationStepDefinition {
 		getLoginScenario().saveBean(LoginCommonConstants.Lastname, lastname);
 		System.out.println(firstname);
 		System.out.println(lastname);
-		MRScenario.getRecordsFrom_mbr_table(firstname,lastname);
+		//MRScenario.getRecordsFrom_mbr_table(firstname,lastname);
+		getRecordsFrom_mbr_table(firstname,lastname);
 	}
 
 	
@@ -334,7 +338,8 @@ public class HsidRegistrationStepDefinition {
 		
 		String firstname = (String) getLoginScenario().getBean(LoginCommonConstants.Firstname);
 		String lastname =  (String) getLoginScenario().getBean(LoginCommonConstants.Lastname);
-		MRScenario.deleteRecordsFrom_mbr_prtl_table(firstname,lastname);
+		//MRScenario.deleteRecordsFrom_mbr_prtl_table(firstname,lastname);
+		deleteRecordsFrom_mbr_prtl_table(firstname,lastname);
 	}
 
 	
@@ -342,7 +347,8 @@ public class HsidRegistrationStepDefinition {
 	public void i_delete_record_mbrtable() throws SQLException {
 		String firstname = (String) getLoginScenario().getBean(LoginCommonConstants.Firstname);
 		String lastname =  (String) getLoginScenario().getBean(LoginCommonConstants.Lastname);
-		MRScenario.deleteRecordsFrom_mbr_table(firstname,lastname);
+		//MRScenario.deleteRecordsFrom_mbr_table(firstname,lastname);
+		deleteRecordsFrom_mbr_table(firstname,lastname);
 	}
 
 	@And("^the user delete record from extreme scale$")
@@ -350,7 +356,8 @@ public class HsidRegistrationStepDefinition {
 		
 		String firstname = (String) getLoginScenario().getBean(LoginCommonConstants.Firstname);
 		String lastname =  (String) getLoginScenario().getBean(LoginCommonConstants.Lastname);
-		MRScenario.deleteRecordsFrom_mbr_extrm_scl_dtl_table(firstname,lastname);
+		//MRScenario.deleteRecordsFrom_mbr_extrm_scl_dtl_table(firstname,lastname);
+		deleteRecordsFrom_mbr_extrm_scl_dtl_table(firstname,lastname);
 	}
 	@Given("^the user deregister from M&R LDAP$")
 	public void I_delete_user_from_mnrldap(DataTable givenAttributes)
@@ -431,4 +438,148 @@ public class HsidRegistrationStepDefinition {
 		securityQuestionsPage.validateTheSecurityQues(friendname, favouritecolor, PhoneNumber);
 	}
 
+	
+	
+	 public static void getRecordsFrom_mbr_table(String firstName, String lastName) throws SQLException {
+	    	System.out.println("Getting records from MBR table");
+	  	   Connection con = MRScenario.getPDBDBConnection(MRScenario.getProperties());
+	   	   Statement stmt = null;
+	        
+	          stmt = con.createStatement();
+	          String sql;
+	          sql = "SELECT HLTHSF_ID FROM mbr where MDM_FST_NM = '" + firstName
+	 				+ "' and MDM_LST_NM = '" + lastName + "'";
+	          System.out.println("SQL Query:"+sql);
+	          ResultSet rs1 = stmt.executeQuery(sql);
+	         // rs1.first();
+	          if(rs1.first()){
+	        	  System.out.println("Record exists...");
+	          String HLTHSF_ID  = rs1.getString("HLTHSF_ID");
+	          System.out.println("HSID: "+HLTHSF_ID);
+	         
+	          }else{
+	        	  System.out.println("No record found!!!");
+	             // Assert.fail("No record found!!!");
+	          }
+	          rs1.close();
+	          stmt.close();
+	          con.close();
+	     }
+	 public static void deleteRecordsFrom_mbr_extrm_scl_dtl_table(String firstName, String lastName) throws SQLException {
+	 		// The following steps will return no. of selected records based on
+	 		// first name and last name
+	 		Connection con = MRScenario.getPDBDBConnection(MRScenario.getProperties());
+		   Statement stmt = null;
+	      ResultSet rs = null;
+	      stmt = con.createStatement();
+	      String sql;
+	      sql = "SELECT HLTHSF_ID FROM mbr where MDM_FST_NM = '" + firstName
+	 				+ "' and MDM_LST_NM = '" + lastName + "'";
+	      
+	      System.out.println("SQL Query:"+sql);
+	      ResultSet rs1 = stmt.executeQuery(sql);
+	      if(rs1.first()){
+	      String HLTHSF_ID  = rs1.getString("HLTHSF_ID");
+	      System.out.println(HLTHSF_ID);
+	 		rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr_extrm_scl_dtl where HLTHSF_ID = '" + HLTHSF_ID + "'");
+	 		int initialrowcount = 0;
+	 		while (rs.next()) {
+	 			initialrowcount = rs.getInt(1);
+	 		}
+	 		System.out.println("Total selected records to delete from mbr_extrm_scl_dtl table are: " + initialrowcount);
+	 		stmt.executeUpdate("delete from mbr_extrm_scl_dtl where HLTHSF_ID = '" + HLTHSF_ID + "'");
+	 		rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr_extrm_scl_dtl where HLTHSF_ID = '" + HLTHSF_ID + "'");
+	 		int finalrowcount = 0;
+	 		while (rs.next()) {
+	 			finalrowcount = rs.getInt(1);
+	 		}
+	 		System.out.println("Total selected records to delete from mbr_extrm_scl_dtl table are: " + finalrowcount);
+	 		if (finalrowcount == 0) {
+	 			System.out.println("Records deleted successfully from table: mbr_extrm_scl_dtl");
+	 		} else {
+	 			System.out.println("Still Records exist in the table: mbr_extrm_scl_dtl");
+	 		}
+	 	}else{
+	 		System.out.println("No Records found in the table: mbr_extrm_scl_dtl");
+	 	}
+	      rs1.close();
+	      stmt.close();
+	      con.close();
+	 	}
+	 
+	 public static void deleteRecordsFrom_mbr_prtl_table(String firstName, String lastName) throws SQLException {
+
+	 		// The following steps will return no. of selected records based on
+	 		// first name and last name
+	  	   Connection con = MRScenario.getPDBDBConnection(MRScenario.getProperties());
+	  	   Statement stmt = null;
+	         ResultSet rs = null;
+	         stmt = con.createStatement();
+	 		rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr_prtl where MBR_PRTL_FST_NM = '" + firstName
+	 				+ "' and MBR_PRTL_LST_NM = '" + lastName + "'");
+	 		int initialrowcount = 0;
+	 		if(rs.first()){
+	 		while (rs.next()) {
+	 			initialrowcount = rs.getInt(1);
+	 		}
+	 		System.out.println("Total selected records to delete from mbr_prtl table are: " + initialrowcount);
+
+	 		
+	 		stmt.executeUpdate("delete from mbr_prtl where MBR_PRTL_FST_NM = '" + firstName + "' and MBR_PRTL_LST_NM = '"
+	 				+ lastName + "'");
+	 		rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr_prtl where MBR_PRTL_FST_NM = '" + firstName
+	 				+ "' and MBR_PRTL_LST_NM = '" + lastName + "'");
+	 		int finalrowcount = 0;
+	 		while (rs.next()) {
+	 			finalrowcount = rs.getInt(1);
+	 		}
+	 		System.out.println("Total selected records to delete from mbr_prtl table are: " + finalrowcount);
+	 		if (finalrowcount == 0) {
+	 			System.out.println("Records deleted successfully from table: mbr_prtl");
+	 		} else {
+	 			System.out.println("Still Records exist in the table: mbr_prtl");
+	 		}
+	 		}else{
+	 			System.out.println("No Records found in the table: mbr_prtl !!!");	
+	 		}
+	 		rs.close();
+	        stmt.close();
+	        con.close();
+	 	}
+	 
+	 public static void deleteRecordsFrom_mbr_table(String firstName, String lastName) throws SQLException {
+	  	   Connection con = MRScenario.getPDBDBConnection(MRScenario.getProperties());
+	  	   Statement stmt = null;
+	         ResultSet rs = null;
+	         stmt = con.createStatement();   
+	 		rs = stmt.executeQuery(
+	 				"SELECT COUNT(*) FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName + "'");
+	 		int initialrowcount = 0;
+	 		if(rs.first()){
+	 		while (rs.next()) {
+	 			initialrowcount = rs.getInt(1);
+	 		}
+	 		System.out.println("Total selected records to delete from mbr table are: " + initialrowcount);
+	 		stmt.executeUpdate(
+	 				"delete from mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName + "'");
+
+	 		rs = stmt.executeQuery(
+	 				"SELECT COUNT(*) FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName + "'");
+	 		int finalrowcount = 0;
+	 		while (rs.next()) {
+	 			finalrowcount = rs.getInt(1);
+	 		}
+	 		System.out.println("Total selected records to delete from mbr table are: " + finalrowcount);
+	 		if (finalrowcount == 0) {
+	 			System.out.println("Records deleted successfully from table: mbr");
+	 		} else {
+	 			System.out.println("Still Records exist in the table: mbr");
+	 		}
+	 		}else{
+	 			System.out.println("No Records found in the table: mbr !!!");	
+	 		}
+	 		rs.close();
+	        stmt.close();
+	        con.close();
+	 	} 
 }

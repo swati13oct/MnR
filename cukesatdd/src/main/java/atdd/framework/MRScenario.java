@@ -58,9 +58,9 @@ public class MRScenario {
 
                private Map<String, Object> scenarioObjectMap = new HashMap<String, Object>();
 
-               private static Map<String, List<String>> ampMemberAttributesMap = new LinkedHashMap<String, List<String>>();
+               private static Map<String, String> ampMemberAttributesMap = new LinkedHashMap<String, String>();
 
-               private static Map<String, List<String>> umsMemberAttributesMap = new LinkedHashMap<String, List<String>>();
+               private static Map<String, String> umsMemberAttributesMap = new LinkedHashMap<String, String>();
                private static Map<String, String> memberRedesignVbfAttributesMap = new LinkedHashMap<String, String>();
 
                private static List<String> userNamesAddedList = new ArrayList<String>();
@@ -70,13 +70,18 @@ public class MRScenario {
                private static Map<String, Map<String, JSONObject>> expectedDataMapUlayer = new LinkedHashMap<String, Map<String, JSONObject>>();
 
 	private static Map<String, Map<String, JSONObject>> expectedDataMapBluelayer = new LinkedHashMap<String, Map<String, JSONObject>>();
+	private static Map<String, String> loginCreds = new HashMap<String, String>();
 	public static String environment; 
 	public static String isTestHarness;
     public static String environmentMedicare;
     public static String isHSIDCompatible;
-    
+    public static String UserName = null;
+    public static String formattedMemberString = null;
     public static String domain;
-    
+    public static String line = "";
+    public static final String cvsSplitBy = ",";
+    public static String compositeDesiredAttributes;
+    public static String attributeMapToUse = "";
                private static final String DIRECTORY = "/src/main/resources/";
 
                public static int count = 0;
@@ -161,8 +166,7 @@ public class MRScenario {
 
                               /* Default Schema */
 ///                         String defaultSchema = props.get(CommonConstants.DB_SCHEMA);
-                              String line = "";
-                              String cvsSplitBy = ",";
+
                //            String userName = null;
 /*
                               InputStream massRegisStream = ClassLoader.class
@@ -208,8 +212,9 @@ public class MRScenario {
                                                                            memberTypeStream));
 
                                              while ((line = memberAmpTypeReader.readLine()) != null) {
+                                            	 formattedMemberString = formatMemberData(line,formattedMemberString);
                                                             // use comma as separator
-                                                            String[] memberAttributes = line.split(cvsSplitBy);
+                      /*                                      String[] memberAttributes = line.split(cvsSplitBy);
                                                             List<String> attrList = Arrays.asList(memberAttributes)
                                                                                           .subList(1, memberAttributes.length);
                                                             String ampUserName = null;
@@ -224,15 +229,17 @@ public class MRScenario {
                               //                           if (userNamesAddedList.contains(ampUserName)) {
                                                                            ampMemberAttributesMap.put(ampUserName, attrList);
                                              //            }
+*/                                                                           ampMemberAttributesMap.put(formattedMemberString,UserName);
                                              }
 
                                              InputStream memberTypeStream1 = ClassLoader.class
                                                                            .getResourceAsStream("/database/UMS-Member-Type.csv");
                                              memberUmsTypeReader = new BufferedReader(new InputStreamReader(
                                                                            memberTypeStream1));
-
-                                             while ((line = memberUmsTypeReader.readLine()) != null) {
-                                                            // use comma as separator
+                                             
+                                            while ((line = memberUmsTypeReader.readLine()) != null) {
+                                            	 formattedMemberString = formatMemberData(line,formattedMemberString);
+                                            	/*               // use comma as separator
                                                             String[] memberAttributes = line.split(cvsSplitBy);
                                                             List<String> attrList = Arrays.asList(memberAttributes)
                                                                                           .subList(1, memberAttributes.length);
@@ -244,14 +251,17 @@ public class MRScenario {
                                                             } else {
                                                                            uhcUserName = memberAttributes[0];
                                                             }
-                                                            //if (userNamesAddedList.contains(uhcUserName)) {
                                                                            umsMemberAttributesMap.put(uhcUserName, attrList);
-                                                            //}
- }
+                                                            
+*/
+                                            
+
+                                                                        umsMemberAttributesMap.put(formattedMemberString,UserName);               
+                              }
                                              InputStream memberTypeStream2;
-                                             if("team-ci1".equalsIgnoreCase(environment)){
+                                             if(environment.contains("team-ci")){
                              					 memberTypeStream2 = ClassLoader.class
-                             							.getResourceAsStream("/database/MemberRedesign-VBF-Teamci-1.csv");
+                             							.getResourceAsStream("/database/MemberRedesign-VBF-Teamci.csv");
                                                  }
                                                  else{
                                                 	  memberTypeStream2 = ClassLoader.class
@@ -259,11 +269,12 @@ public class MRScenario {
                                                  }
                              					memberRedesignVbfTypeReader = new BufferedReader(new InputStreamReader(
                              							memberTypeStream2));
-                             					String finalAttributeString = "";
+                             					
     					while ((line = memberRedesignVbfTypeReader.readLine()) != null) {
+    						formattedMemberString = formatMemberData(line,formattedMemberString);
     						// use comma as separator
-    						 finalAttributeString = "";
-    						String[] memberAttributes = line.split(cvsSplitBy);
+    						/*finalAttributeString = "";
+    						 String[] memberAttributes = line.split(cvsSplitBy);
 
     						for(int i = 0; i <= memberAttributes.length-2; i ++ ){
     							if(2==memberAttributes.length){
@@ -278,8 +289,8 @@ public class MRScenario {
     						}
     						System.out.println("finalAttributeString---"+finalAttributeString);
     						String uhcUserName = null;
-    						uhcUserName = memberAttributes[memberAttributes.length-1];
-    						memberRedesignVbfAttributesMap.put(finalAttributeString,uhcUserName);
+    						uhcUserName = memberAttributes[memberAttributes.length-1];*/
+    						memberRedesignVbfAttributesMap.put(formattedMemberString,UserName);
     			
 			}
 		} catch (IOException e) {
@@ -421,6 +432,26 @@ public class MRScenario {
 
                }*/
 
+               public static String formatMemberData(String line, String formattedMemberString) {
+            	   formattedMemberString = "";
+					String[] memberAttributes = line.split(cvsSplitBy);
+
+					for(int i = 0; i <= memberAttributes.length-2; i ++ ){
+						if(2==memberAttributes.length || i==memberAttributes.length-2){
+							formattedMemberString = formattedMemberString.concat(memberAttributes[i]);
+						}
+						else{
+							if(i!=memberAttributes.length-2)
+								formattedMemberString = formattedMemberString.concat(memberAttributes[i]).concat(cvsSplitBy);
+							/*else
+								formattedMemberString = formattedMemberString.concat(memberAttributes[i]);*/
+						}
+					}
+					System.out.println("formattedMemberString---"+formattedMemberString);
+					UserName = null;
+					UserName = memberAttributes[memberAttributes.length-1];
+            	   return formattedMemberString;
+               }
                private static Connection getDBConnection(Map<String, String> props) {
                               try {
                                              Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -536,7 +567,7 @@ public class MRScenario {
 
                public Map<String, String> getAMPMemberWithDesiredAttributes(
                                              List<String> desiredAttributes) {
-                              Map<String, String> loginCreds = new HashMap<String, String>();
+/*                              Map<String, String> loginCreds = new HashMap<String, String>();
                               for (Entry<String, List<String>> currEntry : ampMemberAttributesMap
                                                             .entrySet()) {
                                              if (currEntry.getValue().equals(desiredAttributes)) {
@@ -554,12 +585,16 @@ public class MRScenario {
                                              }
                               }
                               // No match found
-                              return null;
+                              return null;*/
+            		 attributeMapToUse = "ampMemberAttributesMap";
+            		 returnLoginCredentials();
+
+            		 return loginCreds;
                }
 
                public Map<String, String> getUMSMemberWithDesiredAttributes(
                                              List<String> desiredAttributes) {
-                              Map<String, String> loginCreds = new HashMap<String, String>();
+                             /* Map<String, String> loginCreds = new HashMap<String, String>();
                               for (Entry<String, List<String>> currEntry : umsMemberAttributesMap
                                                             .entrySet()) {
                                              if (currEntry.getValue().equals(desiredAttributes)) {
@@ -577,7 +612,11 @@ public class MRScenario {
                                              }
                               }
                               // No match found
-                              return null;
+                              return null;*/
+            	   attributeMapToUse = "ampMemberAttributesMap";
+          		 returnLoginCredentials();
+
+          		 return loginCreds;
                }
 
                public static JSONObject readExpectedJson(String fileName, String directory) {
@@ -906,15 +945,18 @@ public class MRScenario {
 	 
 	 public Map<String, String> getmemberRedesignVbfWithDesiredAttributes(
     			List<String> desiredAttributes) {
-     	   String compositeDesiredAttributes = "";
+		 formCompositeDesiredAttributes(desiredAttributes);
+     	    /*String compositeDesiredAttributes = "";
      	   for(int i = 0; i < desiredAttributes.size(); i++){
      		   if(i==desiredAttributes.size()-1){
      			    compositeDesiredAttributes = compositeDesiredAttributes.concat(desiredAttributes.get(i));
      		   }else{
      			    compositeDesiredAttributes = compositeDesiredAttributes.concat(desiredAttributes.get(i)).concat(",");
      		   }
-     	   }
-    		Map<String, String> loginCreds = new HashMap<String, String>();
+     	   }*/
+		 attributeMapToUse = "memberRedesignVbfAttributesMap";
+		 returnLoginCredentials();
+    		/*Map<String, String> loginCreds = new HashMap<String, String>();
     		for (Entry<String, String> currEntry : memberRedesignVbfAttributesMap
     				.entrySet()) {
     			System.out.println("Current value entry  - "+currEntry.getValue());
@@ -934,11 +976,50 @@ public class MRScenario {
     			}
     		}
     		// No match found
-    		return null;
+    		return null;*/
+		 return loginCreds;
     	}
 
 	
-	
+	public void formCompositeDesiredAttributes(List<String> desiredAttributes){
+		   compositeDesiredAttributes = "";
+     	   for(int i = 0; i < desiredAttributes.size(); i++){
+     		   if(i==desiredAttributes.size()-1){
+     			    compositeDesiredAttributes = compositeDesiredAttributes.concat(desiredAttributes.get(i));
+     		   }else{
+     			    compositeDesiredAttributes = compositeDesiredAttributes.concat(desiredAttributes.get(i)).concat(",");
+     		   }
+     	   }
+	}
+	public static Map<String, String> returnMemberAttributeMap(){
+		if(attributeMapToUse.equalsIgnoreCase("memberRedesignVbfAttributesMap"))
+			return memberRedesignVbfAttributesMap;
+		else if(attributeMapToUse.equalsIgnoreCase("ampMemberAttributesMap"))
+			return ampMemberAttributesMap;
+		else if(attributeMapToUse.equalsIgnoreCase("umsMemberAttributesMap"))
+			return ampMemberAttributesMap;
+		else
+			return null;
+	}
+	public static void returnLoginCredentials(){
+		//Map<String, String> loginCreds = new HashMap<String, String>();
+		for (Entry<String, String> currEntry : returnMemberAttributeMap()
+				.entrySet()) {
+			System.out.println("Current value entry  - "+currEntry.getValue());
+			if (currEntry.getKey().equals(compositeDesiredAttributes)) {
+				System.out.println("Current key entry - "+currEntry.getKey());
+				if (currEntry.getValue().contains("/")) {
+					String[] valArr = currEntry.getValue().split("/");
+					loginCreds.put("user", valArr[0]);
+					loginCreds.put("pwd", valArr[1]);
+				} else {
+					loginCreds.put("user", currEntry.getValue());
+					loginCreds.put("pwd", "Password@1");
+				}
+
+			}
+		}
+	}
 	public void CaptureScreenshot(Scenario scenario) {
 		final byte[] screenshot = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BYTES);
 		System.out.println("Screenshot captured!!!");

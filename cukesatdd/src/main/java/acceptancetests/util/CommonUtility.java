@@ -401,7 +401,7 @@ public class CommonUtility {
 			}
 
 		} catch (Exception e) {
-			System.out.println("Not able to locate this element -- " + element + " on page");
+			Assert.fail("Not able to locate this element -- " + element + " on page");
 			System.out.println(e.getMessage());
 		}
 
