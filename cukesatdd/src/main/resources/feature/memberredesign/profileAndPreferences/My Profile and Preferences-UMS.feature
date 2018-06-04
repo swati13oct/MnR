@@ -292,6 +292,6 @@ And the user validates the Presence of edit button in Mailing Address section
 Then the user validates the fields under add mailing address button
 Examples: 
       | userType | 
-      | AARP    | 
+      | MAPD_AARPIndividual    | 
 #      | UHC     |
   

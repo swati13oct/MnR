@@ -6,6 +6,8 @@ package pages.acquisition.bluelayer;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
+import pages.acquisition.ulayer.PageTitleConstants;
+
 /**
  * @author rkodumur
  *
@@ -30,7 +32,7 @@ public class MedicareAdvantagePlansuhcPage extends GlobalWebElements{
 		validate(medicareSupplementInsurancePlansLink);
 		medicareSupplementInsurancePlansLink.click();
 		validate(medicareSupplementInsurancePlansLink);
-		if(driver.getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | AARP Medicare Supplement Plans")){
+		if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_UNITEDHEALTHCARE_MEDICARE_SOLUTIONS)){
 			return new MedicareSupplementPlansuhcPage(driver);
 		}
 	
@@ -42,7 +44,7 @@ public class MedicareAdvantagePlansuhcPage extends GlobalWebElements{
 		validate(medicareAdvantagePlansRequestMoreHelpLink);
 		medicareAdvantagePlansRequestMoreHelpLink.click();
 		validate(medicareAdvantagePlansRequestMoreHelpLink);
-		if(driver.getTitle().equalsIgnoreCase("Request Information about Medicare Advantage Plans | UnitedHealthcare®")){
+		if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_REQUEST_INFORMATION_MEDICARE_ADVANTAGE_PLANS)){
 			return new MedicareAdvantageRequestMoreHelpPage(driver);
 		}
 	

@@ -27,7 +27,7 @@ public class AboutUsAARPPage extends GlobalWebElements{
 		validate(footerContactUsLink);
 		footerContactUsLink.click();
 		validate(footerContactUsLink);
-		if (driver.getTitle().equalsIgnoreCase("Contact UnitedHealthcare® | AARP® Medicare Plans from UnitedHealthcare")) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_CONTACT_UNITEDHEALTHCARE_AARP_MEDICARE)) {
 			return new ContactUsAARPPage(driver);
 		}
 		return null;

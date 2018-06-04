@@ -141,7 +141,7 @@ public class PlanPaymentOptions extends UhcDriver{
 		validate(saveandcontinuebutton);
 		saveandcontinuebutton.click();
 		
-		if (driver.getTitle().equalsIgnoreCase("Medicare Advantage Enrollment | AARP® Medicare Plans from UnitedHealthcare®")) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_ADVANTAGE_ENROLLMENT)) {
 			return new OptionalRidersPage(driver);
 		}
 		return null;

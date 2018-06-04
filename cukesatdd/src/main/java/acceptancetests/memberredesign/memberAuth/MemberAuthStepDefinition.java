@@ -1,15 +1,13 @@
 package acceptancetests.memberredesign.memberAuth;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.dashboard.memberAuth.MemberAuthLoginPage;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
@@ -17,12 +15,14 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.dashboard.memberAuth.MemberAuthLoginPage;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.contactus.ContactUsPage;
 import pages.regression.memberauth.MemberAuthPage;
+import pages.regression.memberauth.MemberInformationPage;
+import pages.regression.memberauth.MemberSearchPage;
 
 /**
  * 
@@ -100,8 +100,6 @@ public class MemberAuthStepDefinition{
 		}
 	}
 	
-	
-	
 	@When ("^the member is able to login with correct username and password$")
 	public void member_logins_with_credentials(DataTable profileAttributes) throws InterruptedException{
 
@@ -173,5 +171,93 @@ public class MemberAuthStepDefinition{
 		}
 	
 	}*/
+	
+	@When("^I search for a member$")
+	public void i_search_for_a_member(DataTable givenAttributes) {
+		
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+		    memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		// get parameter Member
+		String member = memberAttributesMap.get("Member");
+		
+		MemberSearchPage memberSearchPage = (MemberSearchPage) getLoginScenario().getBean(PageConstants.MEMBER_AUTHS_SEARCH_PAGE);
+		
+		MemberInformationPage memberInformationPage = memberSearchPage.memberSearch(member);
+		
+		if(memberInformationPage != null)				
+			getLoginScenario().saveBean(PageConstants.MEMBER_AUTH_INFORMATION_PAGE,
+					memberInformationPage);
+	}
+	
+	@Then("^click on the member displayed in the search list$")
+	public void click_on_the_member_displayed_in_the_search_list()
+	{
+		MemberInformationPage memberInformationPage = (MemberInformationPage) getLoginScenario().getBean(PageConstants.MEMBER_AUTH_INFORMATION_PAGE);
+		
+		AccountHomePage accountHomePage = memberInformationPage.loginAsMember();
+		
+		if(accountHomePage != null)				
+			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
+					accountHomePage);
+	}
+	
+	@Then("^I will see the disclaimer text at top of the page$")
+	public void i_will_see_the_disclaimer_text_at_top_of_the_page(DataTable givenAttributes)
+	{
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+		    memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		// get parameter Disclaimer
+		String disclaimer = memberAttributesMap.get("Disclaimer");
+		
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		
+		ContactUsPage contactUsPage = accountHomePage.navigateToContactUsPage();
+		
+		Assert.assertEquals(disclaimer, contactUsPage.getDisclaimerTextForMemberAuth());
+		
+		if(contactUsPage != null)				
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+					contactUsPage);
+	}
+	
+	@Then("^all SUBMIT buttons display message when clicked on contact us page$")
+	public void all_SUBMIT_buttons_display_message_when_clicked_on_contact_us_page(DataTable givenAttributes)
+	{
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+		    memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		// get parameter message
+		String message = memberAttributesMap.get("Message");
+		
+		ContactUsPage contactUsPage = (ContactUsPage) getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+		
+		Assert.assertEquals(message, contactUsPage.getMemberAuthNotAuthorizedToSendUsQuestionMessage());
+		
+	}
+	
+	@Then("^request a call access should not be done and display message when clicked$")
+	public void request_a_call_access_should_not_be_done_and_display_message_when_clicked(DataTable givenAttributes)
+	{
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+		    memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		// get parameter message
+		String message = memberAttributesMap.get("Message");
+		
+		ContactUsPage contactUsPage = (ContactUsPage) getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+		
+		Assert.assertEquals(message, contactUsPage.getMemberAuthNotAuthorizedToSendUsQuestionMessage());
+		
+	}
 
 }

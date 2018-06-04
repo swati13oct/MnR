@@ -80,15 +80,15 @@ public class LoginAssitanceMessagePage extends UhcDriver{
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
 		jse.executeScript("window.scrollBy(0,-350)", "");
 		Thread.sleep(1000);
-		GenericErrorMessage.getText().equalsIgnoreCase("Some information was entered incorrectly. Please review and re-enter information as needed for all required fields. Required fields are marked with an asterisk (*).");
+		GenericErrorMessage.getText().equalsIgnoreCase(PageTitleConstants.ULAYER_SOME_INFORMATION);
 		
 		jse.executeScript("window.scrollBy(0,350)", "");
 		Thread.sleep(2000);
-		PlanMemberIDErrorMessage.getText().equalsIgnoreCase("Your member ID was not recognized. Please re-enter your member ID exactly as it appears on your member ID card (health insurance card).");
-		DatefieldErrorMessage.getText().equalsIgnoreCase("Please enter your date of birth like this: MM/DD/YYYY");
-		LastNameErrorMessage.getText().equalsIgnoreCase("Your last name must contain at least 1 character and cannot be more than 35 characters. Please enter up to 35 characters of your last name.");
-		ZipcodeErrorMessage.getText().equalsIgnoreCase("Please enter your ZIP code as 5 numbers in the following format: 12345.");
-		if(driver.getTitle().equalsIgnoreCase("AARP Medicare Plans |Username and Password Assistance")){
+		PlanMemberIDErrorMessage.getText().equalsIgnoreCase(PageTitleConstants.ULAYER_YOUR_MEMBER_ID_WAS_NOT_RECOGINIZED);
+		DatefieldErrorMessage.getText().equalsIgnoreCase(PageTitleConstants.ULAYER_ENTER_DATE_OF_BIRTH);
+		LastNameErrorMessage.getText().equalsIgnoreCase(PageTitleConstants.ULAYER_LAST_NAME);
+		ZipcodeErrorMessage.getText().equalsIgnoreCase(PageTitleConstants.ULAYER_AARP_MEDICARE_PLANS_UID_PWD);
+		if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_AARP_MEDICARE_PLANS_UID_PWD)){
 			return new LoginAssitanceMessagePage(driver);
 		}
 		return null;
