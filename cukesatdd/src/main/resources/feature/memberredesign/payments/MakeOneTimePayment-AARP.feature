@@ -440,5 +440,29 @@ Feature: To test the payment flow on AARP site
     Examples: 
       | planType | memberType            | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
       | SHIP     | IndividualAARPSPayments | 123123123 |        123123123 |     12345 |          12345 | first     | second     | third    |   1.00 |
+
+    @paymentsCombo @15144
+    Scenario Outline: Verify Recurring Payment for SHIP member
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |    
+    When the user navigates to Combo payment history page
+    When the user navigates to Ship tab and validates the amount
+    Then User Scrolls down to validate Payment History and Scrolls up
+    And the user clicks on Edit Automatic Payment button
+    And the user makes auto payment in AARP site
+      | Routing number             | <routingNo>        |
+      | Confirm routing number     | <confirmRoutingNo> |
+      | Account number             | <accountNo>        |
+      | Confirm account number     | <confirmAccountNo> |
+      | Account holder first name  | <firstName>        |
+      | Account holder middle name | <middleName>       |
+      | Account holder last name   | <lastName>         |
+    And the user confirms the Autopayment in UHC site
+   
+    Examples: 
+      | planType | memberType            | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
+      | COMBO     | COMBOAARPPayments | 123123123 |        123123123 |     12345 |          12345 | first     | second     | third    |   1.00 |
  
+  
  

@@ -194,7 +194,11 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//h1[@class='h4 margin-none']")
 	private WebElement orderplanHeadertxt;
 
-
+	@FindBy(xpath = "//*[@id='23758795']")
+	private WebElement ShipTab;
+	
+	@FindBy(xpath = "//*[@class='table-body margin-large']/div[2]//p")
+	private WebElement PayDate;
 	
 	private PageData myAccountHome;
 
@@ -568,6 +572,25 @@ public class AccountHomePage extends UhcDriver {
 			return new AccountHomePage(driver);
 		} else {
 			System.out.println("payment overview page not displayed");
+			return null;
+		}
+	}
+	
+	public AccountHomePage navigateToSHIPTab(){	
+
+		waitforElement(ShipTab);
+		System.out.println("Ship tab loaded");
+		ShipTab.click();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if (PayDate.getText().contains("Paid through Date")) {
+			System.out.println("ShipTab with amount displayed");
+			return new AccountHomePage(driver);
+		} else {
+			System.out.println("Ship tab issue");
 			return null;
 		}
 	}
