@@ -13,6 +13,7 @@ MAPD,RxCLAIMS,BlueLayerInd,q1_apr_uhc083/Password@1
 MAPD,NICECLAIMS,GroupRetiree,q1_grp_feb009/Test2day
 MAPD,COSMOSCLAIMS,GroupRetiree,q1_grp_apr029/Password@1
 MAPD,RxCLAIMS,GroupRetiree,q1_grp_apr029/Password@1
+SHIP,SHIPCLAIMS,ShipInd,q2_jun_ship0001/Password@1
 UhcIndMAPDPayments,q1_apr_uhc002/Password@1
 AARPIndMAPDPayments,q1_aarp_apr158141/Password@1
 GroupRetireePayment,q1_feb_uhc_eft014/Password@1
