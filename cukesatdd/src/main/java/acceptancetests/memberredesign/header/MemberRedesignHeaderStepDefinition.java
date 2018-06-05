@@ -143,8 +143,25 @@ public class MemberRedesignHeaderStepDefinition {
 	public void I_should_be_able_to_see_and_use_the_Find_Care_Costs_tab() {
 		// Express the Regexp above with the code you wish you had
 		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
-		//accountHomePage.validateFindCareCostTab();
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean
+				(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+						accountHomePage.validateFindCareCostTab();
+						accountHomePage.validateFindCarePage();
+					}
+	
+	
+	/**
+	 * @toDo : verify that the Find Care & Costs tab is not displayed for ex: ship plan
+	 */
+	@Then("^I should not be able to see the Find Care & Costs tab Header$")
+	public void I_should_not_be_able_to_see_the_Find_Care_Costs_tab() {
+		// Express the Regexp above with the code you wish you had
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean
+				(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+		accountHomePage.findCareNotAvailable();
+		
 	}
+	
 
 	/**
 	 *  @toDo : see and validate Claims tab Header
@@ -251,15 +268,18 @@ public class MemberRedesignHeaderStepDefinition {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 		accountHomePage.clickPremiumPayment();
 		accountHomePage.validatePremiumPage();
-
 	}
 
 	/**
-	 *  @toDo : clicks on Premium Payments tab and navigate to the Premium Payments Overview Page
+	 *  @toDo : verify that the Premium payment tab is not displayed when premium subsidy is 100%
 	 */
-	@Then("^upon clicking the Premium Payments tab I should navigate to the Premium Payments Overview Page Header$")
+	
+	@Then("^I should not be able to see the Premium Payments tab Header$")
 	public void upon_clicking_the_Premium_Payments_tab_I_should_navigate_to_the_Premium_Payments_Overview_Page() {
 		// Express the Regexp above with the code you wish you had
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean
+				(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+						accountHomePage.premiumPaymentsNotAvailable();
 
 	}
 	/**

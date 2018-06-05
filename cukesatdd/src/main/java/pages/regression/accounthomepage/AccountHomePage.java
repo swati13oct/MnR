@@ -382,6 +382,20 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(xpath = "//h1[@class='h4 margin-none']")
 	private WebElement orderplanHeadertxt;
+	
+
+	//For Header
+		@FindBy(id = "premiumpayment_3")
+		private WebElement premiumPayment;
+		
+		@FindBy(id = "paymentOverviewApp")
+		public static WebElement paymentsOverview;
+		
+		@FindBy(linkText = "FIND CARE & COSTS")
+		private WebElement findCareCost;
+		
+		@FindBy(xpath = ".//header[@class='hide-mobile']//a[contains(text(),'Find Care & Costs')]")
+		private WebElement findCare;
 
 
 	
@@ -1188,5 +1202,72 @@ public PharmacySearchPage navigateToRedesignPharmacyLocaterPage() {
         return new EOBPage(driver);
 }
 
+	public void clickPremiumPayment() {
+	if(premiumPayment.isDisplayed()){
+			premiumPayment.click();
+	}
+	
+	}
+		/**
+		 * validate the Premium payment Page
+		 */
+		public void validatePremiumPage (){
+			Assert.assertTrue("Premium payment overivew is not displayed", paymentsOverview.isDisplayed());
+		}
+
+		/*validate that the Premium payment tab is not displayed on the header
+		 */
+
+		public boolean premiumPaymentsNotAvailable() {
+			
+			if(validate(premiumPayment)==false)
+			{
+				Assert.assertFalse("premium payment is not displayed", validate(premiumPayment));
+				return true;
+				
+			}
+			else {
+				Assert.fail("premium payment is displayed");
+				return false;
+			}
+			}
+
+/*validate that the Find care tab is not displayed on the header
+ */
+
+public boolean findCareNotAvailable() {
+	
+	if(validate(findCare)==false)
+	{
+		Assert.assertFalse("find care is not displayed", validate(findCare));
+		return true;
+		
+	}
+	else {
+		Assert.fail("find care is displayed");
+		return false;
+	}
+	}
+
+
+/**
+ * validate Find Care Cost Tab
+ */
+
+public void validateFindCareCostTab(){
+	Assert.assertTrue("Find Care and Cost tab is not displayed", findCareCost.isDisplayed());
+
 	
 }
+
+public void validateFindCarePage(){
+		
+if(driver.getCurrentUrl().contains("/find-care"));
+	{
+	System.out.println("User is on find care page and URL is ====>"+driver.getCurrentUrl()); 
+	}
+
+} }
+
+		
+	

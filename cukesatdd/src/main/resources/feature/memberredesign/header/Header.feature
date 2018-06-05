@@ -41,6 +41,51 @@ Then I should be able to see and use the Premium Payments tab Header
 Examples:
  | planType  | memberType  |
  | MAPD      |IndividualDCEmember |
+ #| MAPD    |GroupLessSubsidy |
+ 
+ 
+ @premiumpaymentsheader_100%subisdy
+ Scenario Outline:To check that the Premium Payments Tab is not displayed in the header
+Given login with following details logins in the member portal and validate elements
+| Plan Type   | <planType>   |
+| Member Type   | <memberType> |
+And I view the global navigation Header
+Then I should not be able to see the Premium Payments tab Header
+
+Examples:
+ | planType|  memberType  | 
+ | MAPD    |  UHCGroup  	  |
+ 
+ 
+ @findcarecostsheader
+ Scenario Outline:To check that the Find Care and Costs Tab is displayed in the header
+Given login with following details logins in the member portal and validate elements
+| Plan Type   | <planType>   |
+| Member Type   | <memberType> |
+And I view the global navigation Header
+Then I should be able to see and use the Find Care & Costs tab Header
+
+Examples:
+ | planType|  memberType  	| 
+| MAPD    |  UHCGroup  	  |
+ #| MAPD    | IndividualDCEmember |
+ #| PCP     | OrderMaterials |
+ #| Medica  | OrderMaterials |
+ 
+ 
+ @findcarecostsheader_negativescenario
+ 
+Scenario Outline:To check that the Find Care and Costs Tab is displayed in the header
+Given login with following details logins in the member portal and validate elements
+| Plan Type   | <planType>   |
+| Member Type   | <memberType> |
+#And I view the global navigation Header
+Then I should not be able to see the Find Care & Costs tab Header
+
+Examples:
+ | planType|  memberType  	| 
+| SHIP    |    	Individual  |
+#| SSUP    |   UHCGroup 	  |
  
 
  
