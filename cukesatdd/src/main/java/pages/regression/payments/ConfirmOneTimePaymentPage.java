@@ -21,6 +21,9 @@ public class ConfirmOneTimePaymentPage extends UhcDriver{
 	@FindBy(xpath = "(.//*[@class='btn btn--primary'])[2]")
 	private WebElement SubmitPaymentButton;
 	
+	@FindBy(xpath = "(.//*[@class='btn btn--primary disabled']")
+	private WebElement MemAuthSubmitPaymentButton;
+	
 	@FindBy(xpath = "//*[@class='message-block-header']/span")
 	private WebElement SuccessPay;
 	
@@ -29,6 +32,9 @@ public class ConfirmOneTimePaymentPage extends UhcDriver{
 
 	@FindBy(xpath = "//*[@class='container--base']/div[@class='container']//button[@ng-click='backToPaymentHistoryPage()']")
 	private WebElement BackToPaymentHistoryPage;
+	
+	@FindBy(xpath="//*[@id='nav']/button[2]")
+	private WebElement iPerceptionAutoPopUp;
 
 	public ConfirmOneTimePaymentPage(WebDriver driver) {
 		super(driver);
@@ -62,6 +68,15 @@ public class ConfirmOneTimePaymentPage extends UhcDriver{
 
 	
     public ConfirmOneTimePaymentPage confirmsAutoPayment() throws InterruptedException  {
+    	
+    	 try{
+    		 if(validate(iPerceptionAutoPopUp)) {
+    	    		iPerceptionAutoPopUp.click();
+    	    	}
+    		 }catch(Exception e)
+    		 {
+    			 System.out.println("No iperception Pop Up displayed");
+    		 }
 		
 		waitforElement(TermsCheckRadioButton);
 		TermsCheckRadioButton.click();
@@ -101,7 +116,7 @@ public class ConfirmOneTimePaymentPage extends UhcDriver{
  		waitforElement(TermsCheckRadioButton);
  		TermsCheckRadioButton.click();
  		System.out.println("Terms and conditions radio button clicked");
- 		if(!(SubmitPaymentButton.isEnabled())) 	
+ 		if(!(MemAuthSubmitPaymentButton.isEnabled())) 	
  		{
  		     System.out.println("Submit Payment Button disabled");
  		return new ConfirmOneTimePaymentPage(driver);

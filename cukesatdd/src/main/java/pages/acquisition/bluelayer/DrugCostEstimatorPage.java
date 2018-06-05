@@ -139,7 +139,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='pharmacy-results']//span[contains(@class,'pharmacy-name')]")
 	public List<WebElement> pharmacies;
 	
-	@FindBy(id = "select-pharmacy-button-0")
+	@FindBy(xpath = ".//*[@id='select-pharmacy-button' or @id='select-pharmacy-button-0']")
 	public WebElement select_btn_first;
 
 	@FindBy(id = "saverSavingSpan")
@@ -214,7 +214,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='pharmacyTabId']/div/p[2]")
 	public WebElement step2Pharmacy;
 
-	@FindBy(xpath = ".//*[@id='total_drugsavings']/div[2]/*[contains(text(),'EDIT DRUGS LIST')]")
+	@FindBy(xpath = ".//*[@id='drug-cost-card-acq']/div[2]//*[contains(text(),'EDIT DRUGS LIST')]")
 	public WebElement step3EditDrugsList;
 
 	@FindBy(xpath = ".//*[@id='total_pharmacysavings']/div[2]/a")
@@ -297,7 +297,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id="switchToGenericBtnId")
 	private WebElement updateBtn;
 	
-	@FindBy(id = "total_annualcost")
+	@FindBy(id = "total_annualcost_acq")
 	private WebElement step3CostValue;
 
 	//@FindBy(xpath = ".//*[@id='acqsummary']/div[2]/div[2]/a/p")
@@ -325,7 +325,10 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id= "drugcosts")
 	private WebElement step3Info;
 	
-	@FindBy(id= "drug-cost-card")
+	@FindBy(xpath= ".//*[@id='acqsummary']/div[3]/div[1]")
+	private WebElement step3DrugSummaryInfo;
+	
+	@FindBy(id= "drug-cost-card-acq")
 	private WebElement drugCostCard;
 	
 	//@FindBy(xpath = ".//*[@id='costs-tab']/div/div[1]/div[2]/div/a")
@@ -944,7 +947,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		AddNewDrugModal addNewDrugModal = clickOnAddDrug();
 		//addNewDrugModal.typeDrugName(drug);
 		//addNewDrugModal.submit();
-		addNewDrugModal.clickonSearchButton(drug);
+		addNewDrugModal.clickonSearchButton(drug.toLowerCase());
 		// addNewDrugModal.selectDrug(drug);
 		AddDrugDetails addDrugDetails = new AddDrugDetails(driver);
 
@@ -1344,8 +1347,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			Assert.assertTrue("There are no drugs added ", false);
 		}*/
 		Thread.sleep(5000);
-		step3EditDrugsList.click();
 		String brandedCost = step3CostValue.getText();
+		step3EditDrugsList.click();
 		System.out.println(brandedCost);
 		if(switchNowBtn.isDisplayed())
 			switchNowBtn.click();
@@ -1766,6 +1769,13 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	public boolean validateDrugOnStep3(String drug) {
 		if(step3Info.getText().contains(drug)&&validateNew(drugCostCard))
+			return true;
+		return false;
+		
+	}
+	
+	public boolean validateDrugOnStep3FromHomePageFlow(String drug) {
+		if(step3DrugSummaryInfo.getText().contains(drug))
 			return true;
 		return false;
 		

@@ -41,7 +41,7 @@ Then the user validates cancellation modal for Medicare Information Page
 #| MedicaidNumber | <medicaidnumber> |	
 Examples:
 | zipcode | county             | plantype | planName                                       | cardtype   | firstname  | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber |
-| 90210   | Los Angeles County | MA	  | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | HICN		|  John		 |	Doe			|	123456789a		 | false		 | 01012010	 | 01012010	 | 123456789123121 |
+| 90210   | Los Angeles County | MA	  | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | HICN		|  John		 |	Doe			|	123456787a		 | false		 | 01012010	 | 01012010	 | 123456789123121 |
 
 @OLE_PlanDetails_Aarp
 Scenario Outline: OLE Landing from VPP Plan Details

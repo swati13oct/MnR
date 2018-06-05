@@ -12,7 +12,7 @@ And the user selects the pharmacy tab information like miles, zipcode and pharma
 	| Zipcode	  | <zipcode> |
 	| Radius  | <radius>   |
 And I select the first pharmacy
-And I navigate to step3 page and validate
+And I navigate to step3 page and validate for DCE homepage flow
 	|Drug|<drug>|
 
  Examples:
@@ -36,7 +36,7 @@ And I navigate to step3 page and validate
 	
 Examples:
 | zipcode  |   drug   | plantype |
-| 90210    | Lipitor TAB 10MG| MA |
+| 90210    | LIPITOR TAB 10MG| MA |
 
 
 @switchNowStep3
@@ -56,7 +56,7 @@ Then I switch to generic drug and validate
 	
 Examples:
 | zipcode  |   drug          | plantype |
-| 90210    | Lipitor TAB 10MG| MA|
+| 90210    | LIPITOR TAB 10MG| MA|
 
 @defect3235
 Scenario Outline: To go through dce flow from prescription drugs tab and verify right message when clicked on add to compare
@@ -74,7 +74,7 @@ Then I navigate back to plan details page and verify correct message shows when 
 	
 Examples:
 | zipcode  |   drug          | planname 										| plantype | 
-| 90210    | Lipitor TAB 10MG|AARP MedicareComplete SecureHorizons Plan 1 (HMO) | MA	|
+| 90210    | LIPITOR TAB 10MG|AARP MedicareComplete SecureHorizons Plan 1 (HMO) | MA	|
 
 @defect2291
 Scenario Outline: To select a pharmacy in DCE under 2018 and then change year to 2017 and check the pharmacy selected isn't there

@@ -1,7 +1,5 @@
 package pages.regression.memberauth;
 
-import java.util.ArrayList;
-
 import org.json.JSONObject;
 //import junit.framework.Assert;
 import org.junit.Assert;
