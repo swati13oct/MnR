@@ -451,6 +451,100 @@ Given registered Redesign member for EOB with following attributes
 	| MAPD          | Group_Non_LIS 			|  -either- coinsurance of 5% of the cost of the drug   |  	  true       |
 	| PDP          | Group_Non_LIS 			|  -either- coinsurance of 5% of the cost of the drug   |  	  false       |
 
+@CMmapdindlis
+Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
+Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>  |
+      | Member Type    | <memberType>|
+      | Copay Category | <copayCategory>|
+ Then the user navigates to Benefits coverage page
+And the user validates Lis member plan overview section
+ 	  | Name           | <name>          |
+      | Member ID      | <memberid>      |
+      | Effective Date | <effectivedate> |
+      | Monthly premium| <monthlypremium>|
+ And the user validates headers on Bnc page for indi members
+ And the user validates the Primarycare Provider section
+ And the user validates the Out of Pocket Max section 
+ And the user view the LIS Drug Copays & Discounts header
+ And the user should see drug cost table for Lis members
+ And the user validates Drug coverage header and text under the section
+ And the user validates text for the Look Up Drugs section
+ And the user validates Look Up Drugs button should be visible
+ And the user validates text for the Locate a Pharmacy section
+ And the user validates Locate a Pharmacy button should be visible
+ And the drugcost dropdown should not display
+ And the user validates the Learn More section link for stage
+ And the user validates tier link should not display 
+ And the lis user validates the user click on the link it expands and when user clicks it again it should collapse
+ And the user validates view and document label
+ And the user validates static links
+And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully
+ | Language | <language> |
+And the user verifies that the correct pdfs are coming in the plan material section
+ |Summary of Benefits | <SummaryofBenefits> |
+ |Evidence of Coverage| <EvidenceofCoverage> |
+ |Comprehensive Formulary - Drug List| <ComprehensiveFormularyDrug List>|
+ And the user validates Needhelp section
+ And the user clicks on More Information link
+ And the user validates contactus section
+ Examples:
+ | planType|  memberType  | copayCategory | language    | SummaryofBenefits        | EvidenceofCoverage           | ComprehensiveFormularyDrug List         | name               | memberid      | effectivedate | monthlypremium |
+ | MAPD    |  Individual  |  LIS          | ENGLISH     | Summary of Benefits      | Evidence of Coverage         | Comprehensive Formulary - Drug List     | DABDCAE CFCFFCF    | 910114420-00  | 01/01/2018     | Not Available  | 
+ 
+ @CMpdpindlis
+Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
+Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>  |
+      | Member Type    | <memberType>|
+      | Copay Category | <copayCategory>|
+ Then the user navigates to Benefits coverage page
+And the user validates Lis member plan overview section
+ 	  | Name           | <name>          |
+      | Member ID      | <memberid>      |
+      | Effective Date | <effectivedate> |
+      | Monthly premium| <monthlypremium>|
+And the user validates headers on Bnc page for indi members
+And the user view the LIS Drug Copays & Discounts header
+And the user should see drug cost table for Lis members
+And the user validates Drug coverage header and text under the section
+And the user validates text for the Look Up Drugs section
+And the user validates Look Up Drugs button should be visible
+And the user validates text for the Locate a Pharmacy section
+And the user validates Locate a Pharmacy button should be visible
+And the drugcost dropdown should not display
+And the user validates the Learn More section link for stage
+And the user validates tier link should not display 
+And the lis user validates the user click on the link it expands and when user clicks it again it should collapse
+And the user validates view and document label
+ And the user validates static links
+And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully
+ | Language | <language> |
+And the user verifies that the correct pdfs are coming in the plan material section
+ |Summary of Benefits | <SummaryofBenefits> |
+ |Evidence of Coverage| <EvidenceofCoverage> |
+ |Comprehensive Formulary - Drug List| <ComprehensiveFormularyDrug List>|
+ And the user validates Needhelp section
+ And the user clicks on More Information link
+ And the user validates contactus section
+ Examples:
+ | planType|  memberType  | copayCategory | language    | SummaryofBenefits        | EvidenceofCoverage           | ComprehensiveFormularyDrug List         | name               | memberid      | effectivedate | monthlypremium |
+ | PDP    |  Individual  |  LIS          | ENGLISH     | Summary of Benefits      | Evidence of Coverage         | Comprehensive Formulary - Drug List     | DABDCAE CFCFFCF    | 910114420-00  | 01/01/2018     | Not Available  | 
+ 
+ 
+ @CMvasnegativescenario
+    Scenario Outline: Verify that DisocuntServices section is visible on Benefits and coverage page
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>  |
+      | Member Type    | <memberType>|
+      | Copay Category | <copayCategory>|
+    When the user navigates to Benefits and coverage page
+    And the user validates the Vas section on benefits and coverage page is not displayed
+        Examples: 
+      | planType|  memberType  | copayCategory |
+     | MAPD    |  Group       |  NON LIS      |
+ 
+   
 
     
     

@@ -40,6 +40,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	public PageData benefitsCoverage;
 
 	public JSONObject benefitsandcoverageJson;
+	
+	@FindBy(xpath=".//*[@id='pcpCard']/section/button")
+	 private WebElement Addaprovider;
 
 	@FindBy(xpath = "//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[2]/div[1]/span")
 	private WebElement memberId;
@@ -157,23 +160,29 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-document-text")
 	private WebElement documents_label;
 
-	@FindBy(className = "atdd-benefitsoverview-plantitle")
+	//@FindBy(className = "atdd-benefitsoverview-plantitle")
+	@FindBy(xpath=".//*[@class='h2 margin-none overview-heading atdd-benefitsoverview-plantitle ng-binding']")
 	private WebElement planName;
 
-	@FindBy(className = "atdd-benefitsoverview-membernamelabel")
+	//@FindBy(className = "atdd-benefitsoverview-membernamelabel")
+	@FindBy(xpath=".//*[@class='bold atdd-benefitsoverview-membernamelabel']")
 	private WebElement nameLabel;
 
-	@FindBy(className = "atdd-benefitsoverview-memberidlabel")
+	//@FindBy(className = "atdd-benefitsoverview-memberidlabel")
+	@FindBy(className = ".//*[@class='bold atdd-benefitsoverview-memberidlabel']")
 	private WebElement memberID;
 
-	@FindBy(className = "atdd-benefitsoverview-effectivedatelabel")
+	//@FindBy(className = "atdd-benefitsoverview-effectivedatelabel")
+	@FindBy(xpath=".//*[@class='bold atdd-benefitsoverview-effectivedatelabel']")
 	private WebElement effective_Date;
 
 
 	@FindBy(className = "atdd-benefitsoverview-groupidlabel")
 	private WebElement GroupId;
 
-	@FindBy(className = "atdd-benefitsoverview-extrahelplevel-ma-label")
+	//@FindBy(className = "atdd-benefitsoverview-extrahelplevel-ma-label")
+	
+	@FindBy(xpath=".//*[@class='bold atdd-benefitsoverview-extrahelplevel-ma-label ng-binding']")
 	private WebElement ExtraHelp;
 
 	@FindBy(xpath = ".//*[@id='benefitsMain']/div[2]/div/div[1]/div/div/div/div/div[1]/div/div/h1")
@@ -1216,8 +1225,18 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 		validate(PrimaryCareProviderHeaderInd);
 		validate(YourPrimaryCareProvider);
+		if( Addaprovider.isDisplayed())
+		{
+			
+		
+			validate (Addaprovider);
+			
+			Addaprovider.click();
+		}
+		else {
 		validate(ChangeYourPcpButton);
 		ChangeYourPcpButton.click();
+		}
 		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
@@ -1252,8 +1271,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		switchToNewTab();
+		System.out.println(driver.getCurrentUrl());
 		
-		if(driver.getCurrentUrl().contains("werally"))
+		if(driver.getCurrentUrl().contains("werally.in"))
 		{
 			Assert.assertTrue(true);
 		}
@@ -1710,5 +1731,38 @@ public void validateCoLogoImagePresent(String cologoToBeDisplayedOnSecondaryPage
 		Assert.assertTrue(cologo_src.contains(cologoToBeDisplayedOnSecondaryPage));
 		System.out.println("Secondary page co logo assert condition is passed");
 	}
+
+
+public void validatePlanOverviewIndlis(String name , String memberid , String effectivedate , String monthlypremium) {
+	validate(planName);
+	validate(nameLabel);
+	validate(memberID);
+	validate(effective_Date);
+	validate(monthlypremiumlabel);
+	validate(ExtraHelp);
 	
+	String[] firstname = name.trim().split("//s+");
+	
+	
+	Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='planBenefitsAppSum']/section/div/div[4]/div[1]/div/div[1]/div[2]")).getText(),name);
+	
+	Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='planBenefitsAppSum']/section/div/div[4]/div[1]/div/div[2]/div[2]")).getText(),memberid);
+	Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='planBenefitsAppSum']/section/div/div[4]/div[1]/div/div[4]/div[2]")).getText(),effectivedate);
+	
+	
+}
+public boolean vasnotdisplayed() {
+	if (textdiscountservices.isDisplayed()) {
+		System.out.println("Vas is present");
+		return false;
+	}
+		
+		 else {
+			 System.out.println("Vas is not present");
+			 return true;
+		
+		
+	}
+	
+}
 }

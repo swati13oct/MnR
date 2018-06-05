@@ -625,6 +625,13 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		benefitsCoveragePage.clickOnLearnmoreaboutlinktier();
 	}
 
+	@And("^the lis user validates the user click on the link it expands and when user clicks it again it should collapse")
+	public void user_validate_linksworkinglis() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+  benefitsCoveragePage.clickOnLearnmoreaboutlinkstage();
+	}
+
 	/** 
 	 * @toDo : Validates the Drug costs table  for  a Non Lis member
 	 */
@@ -718,10 +725,30 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	 * @toDo : Validates the  Plan overview section for  a lis member
 	 */
 	@And("the user validates Lis member plan overview section")
-	public void user_validate_LisplanOverview() {
+	/*public void user_validate_LisplanOverview() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validatePlanOverviewLis();
+	}*/
+	public void user_validate_IndplanOverviewsectionlis(DataTable givenAttributes) {
+	List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String membername = memberAttributesMap.get("Name");
+		String memberid  = memberAttributesMap.get("Member ID");
+		System.out.println(memberid);
+		String effectivedate = memberAttributesMap.get("Effective Date");
+	    String monthlypremium = memberAttributesMap.get("Monthly premium");
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		
+		benefitsCoveragePage.validatePlanOverviewIndlis(membername,memberid,effectivedate,monthlypremium);
 	}
 
 	/** 
@@ -1106,6 +1133,16 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
  	}
  	
+@And("^the user validates the Vas section on benefits and coverage page is not displayed$")
+ 	
+ 	public void vas_not_displayed() {
+	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+	System.out.println("Passed");
+	
+	Assert.assertTrue(benefitsCoveragePage.vasnotdisplayed());
+ 	}
+	
  	
 	
 	
