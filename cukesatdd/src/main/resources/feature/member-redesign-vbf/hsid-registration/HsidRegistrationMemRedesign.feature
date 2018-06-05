@@ -45,5 +45,5 @@ Feature: 1.15-VBF-MemRedesign-To test HSID registration flow
  
  | firstname  | lastname |    dob 	    | memberid 	    | zipcode | password   |   				email	  			    | friendname | favcolor | phonenumber |
  | FABCAEAD   | EFCEAA   | 09/22/1949   | 961861481-1   | 34748	  | Password@1 | codetransformers@gmail.com | name1      | color1   | number1     |
-# | SGFXTEFI   | NHKBOHYG | 12/01/1941   | 375989563-11  | 46221   | Password@1 | codetransformers@gmail.com | name1      | color1   | number1     |
+ | SGFXTEFI   | NHKBOHYG | 12/01/1941   | 375989563-11  | 46221   | Password@1 | codetransformers@gmail.com | name1      | color1   | number1     |
 # | FABCAEAD   | EFCEAA   | 09/22/1949   | 961861481-1   | 34748  	| Password@1 | codetransformers@gmail.com | name1      | color1   | number1     |    

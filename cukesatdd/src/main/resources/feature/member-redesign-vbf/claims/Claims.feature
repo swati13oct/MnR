@@ -28,14 +28,14 @@ Feature: 1.02-VBF-MemRedesign-To test claim functionality
 
     Examples: 
       | memberType   | planType | claimPeriod    | domain | claimssystem | friendname | favcolor | phonenumber |
-    #  | GroupRetiree |MAPD |  Last 24 months | Rx   | RxCLAIMS   | name1      | color1   | number1     |
-      |  ShipInd 	   |SHIP      | Last 24 months | NA     | SHIPCLAIMS   |  name1     | color1   | number1     |
-    #  | BlueLayerInd |MAPD |  Last 24 months | COSMOS | COSMOSCLAIMS | name1      | color1   | number1     |
-   	#	 | BlueLayerInd |MAPD |  Last 24 months | COSMOS   | RxCLAIMS   | name1      | color1   | number1     |
-    #  | BlueLayerInd |MAPD |  Last 24 months | NICE   | NICECLAIMS   | name1      | color1   | number1     |
+  
      |  ULayerInd 	 |MAPD |  Last 24 months | COSMOS | COSMOSCLAIMS |name1      | color1   | number1     |
-  #  	| ULayerInd |MAPD |  Last 24 months | COSMOS   | RxCLAIMS   | name1      | color1   | number1     |
      |  ULayerInd		 |MAPD |  Last 24 months | NICE   | NICECLAIMS   |name1      | color1   | number1     |
+     	| ULayerInd |MAPD |  Last 24 months | COSMOS   | RxCLAIMS   | name1      | color1   | number1     |
+   #  | BlueLayerInd |MAPD |  Last 24 months | COSMOS | COSMOSCLAIMS | name1      | color1   | number1     |
+   #	 | BlueLayerInd |MAPD |  Last 24 months | COSMOS   | RxCLAIMS   | name1      | color1   | number1     |
+   #  | BlueLayerInd |MAPD |  Last 24 months | NICE   | NICECLAIMS   | name1      | color1   | number1     |
    # |  GroupRetiree |MAPD |  Last 24 months | COSMOS | COSMOSCLAIMS |name1      | color1   | number1     |
    #  |  GroupRetiree |MAPD |  Last 24 months | NICE   | NICECLAIMS   |name1      | color1   | number1     |
-   
+   #   | GroupRetiree |MAPD |  Last 24 months | Rx   | RxCLAIMS   | name1      | color1   | number1     |
+      |  ShipInd 	   |SHIP      | Last 24 months | NA     | SHIPCLAIMS   |  name1     | color1   | number1     |

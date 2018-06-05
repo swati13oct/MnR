@@ -30,7 +30,7 @@ public class ClaimSummarypage extends UhcDriver {
 
 	@FindBy(xpath = "//select[@name='document-date' and not(contains(@ng-hide,'todate'))]")
 	private WebElement viewClaimsFrom;
-	
+
 	@FindBy(xpath = "//select[@name='document-date' and contains(@ng-hide,'todate')]")
 	private WebElement viewClaimsFromShip;
 
@@ -72,16 +72,16 @@ public class ClaimSummarypage extends UhcDriver {
 
 	@FindBy(xpath = "//table[@id='medical']/tbody/tr[2]/td[not (contains(@class,'hidden-lg'))]")
 	private List<WebElement> medicalTableRow;
-	
+
 	@FindBy(xpath = "//table[@id='ship']/tbody/tr[2]/td[not (contains(@class,'hidden-lg'))]")
 	private List<WebElement> shipTableRow;
 
 	@FindBy(xpath = "//table[@id='medical']/tbody/tr[2]/td[not (contains(@class,'hidden-lg'))][count(//table[@id='medical']/tbody/tr/th/p[contains(text(),'Provider Name')]/parent::th/preceding-sibling::th)+1]")
 	private WebElement providerNameValue;
-	
+
 	@FindBy(xpath = "//table[@id='ship']/tbody/tr[2]/td[not (contains(@class,'hidden-lg'))][count(//table[@id='ship']/tbody/tr/th/p[text() ='Provider']/parent::th/preceding-sibling::th)+1]")
 	private WebElement shipProviderNameValue;
-	
+
 	@FindBy(xpath = "//table[@id='prescriptionDrug']/tbody/tr[2]/td[not (contains(@class,'ng-hide'))][not (contains(@class,'hidden-lg'))]")
 	private List<WebElement> drugTableRow;
 
@@ -96,14 +96,22 @@ public class ClaimSummarypage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		if(CommonStepDefinition.getMemberAttributeMap().get("ClaimSystem").equalsIgnoreCase("SHIPCLAIMS")){
-			CommonUtility.waitForPageLoadNew(driver, viewClaimsFromShip, 60);
-			
-		}
-		else{
+		try {
+			if (CommonStepDefinition.getMemberAttributeMap().get("ClaimSystem").equalsIgnoreCase("SHIPCLAIMS")) {
+				CommonUtility.waitForPageLoadNew(driver, viewClaimsFromShip, 60);
+
+			} else {
+				CommonUtility.waitForPageLoadNew(driver, viewClaimsFrom, 60);
+			}
+		} catch (NullPointerException excption) {
+			System.out.println("!!!ClaimsSystem not specified!!!");
 			CommonUtility.waitForPageLoadNew(driver, viewClaimsFrom, 60);
+		} catch (ClassCastException exception) {
+			Assert.fail("ClaimSystem is of an inappropriate type");
+		} catch (Exception ex) {
+			Assert.fail(ex.getMessage());
 		}
-		
+
 	}
 
 	/***
@@ -203,18 +211,18 @@ public class ClaimSummarypage extends UhcDriver {
 						counter++;
 				}
 				Assert.assertTrue("Claims table gets displayed", counter > 0);
-			}else if (claimsTableSHIP.isDisplayed()) {
+			} else if (claimsTableSHIP.isDisplayed()) {
 
-			int columnSize = shipTableRow.size();
-			for (int columnNum = 1; columnNum < columnSize; columnNum++) {
-				String columnActualText = shipTableRow.get(columnNum).getText();
-				if (!columnActualText.isEmpty())
-					counter++;
+				int columnSize = shipTableRow.size();
+				for (int columnNum = 1; columnNum < columnSize; columnNum++) {
+					String columnActualText = shipTableRow.get(columnNum).getText();
+					if (!columnActualText.isEmpty())
+						counter++;
+				}
+				Assert.assertTrue("Claims table gets displayed", counter > 0);
+				validateNew(shipProviderNameValue);
 			}
-			Assert.assertTrue("Claims table gets displayed", counter > 0);
-			validateNew(shipProviderNameValue);
-		}
-		}else {
+		} else {
 			System.out.println("!!!!!!!!! NOT Able to find the claim table !!!!!!!!!");
 			Assert.fail("!!!!!!!!! NOT Able to find the claim table !!!!!!!!!");
 		}

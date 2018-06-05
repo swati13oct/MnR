@@ -107,7 +107,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='formsAndResourceHeaderDocListingParsys parsys']/div[@class='customsegments parbase section']/div[not(contains(@class,'ng-hide'))]/div[@class='customsegments parbase']//div[@class='formsAndResources base_tools_component section']/div/div[starts-with(@id,'collapse-source-content-configurations') and contains(@aria-expanded,'true')]")
 	private WebElement FormsnResourcesLinkPdf;
 
-	@FindBy(xpath = "//div[contains(@class,'plan-material')]//span//li/a")
+	@FindBy(xpath = "//div[contains(@class,'plan-material')]//ul//li/a")
 	private List<WebElement> actualPlanMaterialsPdfs;
 
 	@FindBy(xpath = "//a[contains(text(),'Search Documents')]")
