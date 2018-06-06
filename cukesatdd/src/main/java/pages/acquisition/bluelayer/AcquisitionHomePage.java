@@ -390,8 +390,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
                 }
-                if (driver.getTitle().equalsIgnoreCase(
-                                PageTitleConstants.BLAYER_MEDICARE_PLAN_TYPES_TITLE)) {
+                if (driver.getCurrentUrl().contains("plan-summary")) {
                         return new VPPPlanSummaryPage(driver);
                 }
                 return null;
