@@ -459,6 +459,17 @@ Feature: To test the payment flow on AARP site
       | Account holder middle name | <middleName>       |
       | Account holder last name   | <lastName>         |
     And the user confirms the Autopayment in UHC site
+    And the user moves to Go to Payment History Page button
+    And the user clicks on Make One Time Payment button
+    And the user makes one time payment in AARP site
+      | Routing number             | <routingNo>        |
+      | Confirm routing number     | <confirmRoutingNo> |
+      | Account number             | <accountNo>        |
+      | Confirm account number     | <confirmAccountNo> |
+      | Account holder first name  | <firstName>        |
+      | Account holder middle name | <middleName>       |
+      | Account holder last name   | <lastName>         |
+    And the user confirms the Autopayment in UHC site
    
     Examples: 
       | planType | memberType            | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |

@@ -159,7 +159,7 @@ public class OneTimePaymentAarpStepDefintion {
 	@When("^the user navigates to Combo payment history page$")
 	public void Combo_Recurring_payment_history() throws InterruptedException {
 		pages.regression.accounthomepage.AccountHomePage AHPage = (pages.regression.accounthomepage.AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		AHPage = AHPage.navigateToSHIPAutoPaymentHistoryPage();
+		AHPage = AHPage.navigateToAutoPaymentHistoryPage();
 		
       if (AHPage!=null){
     	     	  getLoginScenario().saveBean(PageConstantsMnR.ComboTab, AHPage);
@@ -276,8 +276,14 @@ public class OneTimePaymentAarpStepDefintion {
 		
 		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = oneTimePayment.enterAutoPaymentDetails(memberAttributesMap);
 		
-
+		if(confirmOneTimePaymentPage != null) {
 		getLoginScenario().saveBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD,confirmOneTimePaymentPage);
+		System.out.println("Payment details entered and moved successfully to next page");
+		}
+		else
+		{
+			System.out.println("Object issue");
+		}
 
 	}
 

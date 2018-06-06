@@ -209,7 +209,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//h1[@class='h4 margin-none']")
 	private WebElement orderplanHeadertxt;
 
-	@FindBy(xpath = "//*[@id='23758795']")
+	@FindBy(xpath = "//*[@class='tabs-desktop']//li[@role='listitem'][2]/a")
 	private WebElement ShipTab;
 	
 	@FindBy(xpath = "//*[@class='table-body margin-large']/div[2]//p")

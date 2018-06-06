@@ -69,15 +69,24 @@ public class ConfirmOneTimePaymentPage extends UhcDriver{
 	
     public ConfirmOneTimePaymentPage confirmsAutoPayment() throws InterruptedException  {
     	
-    	 try{
-    		 if(validate(iPerceptionAutoPopUp)) {
+    	System.out.println("In Confirm auto pay method");
+    	Thread.sleep(2000);
+    	
+    	 try{    		
+    		 if(iPerceptionAutoPopUp.isDisplayed()) {
     	    		iPerceptionAutoPopUp.click();
     	    	}
     		 }catch(Exception e)
     		 {
     			 System.out.println("No iperception Pop Up displayed");
     		 }
-		
+    	 
+    	/* JavascriptExecutor jse = (JavascriptExecutor) driver;
+    	 jse.executeScript("window.scrollBy(0,650)", "");    	 
+    	 Thread.sleep(2000);
+    	 System.out.println("Scrolled down");
+    	 Thread.sleep(1000);*/
+    	 
 		waitforElement(TermsCheckRadioButton);
 		TermsCheckRadioButton.click();
 		System.out.println("Terms and conditions radio button clicked");
@@ -86,7 +95,7 @@ public class ConfirmOneTimePaymentPage extends UhcDriver{
 		     System.out.println("Submit Payment Button clicked");
 		CommonUtility.checkPageIsReady(driver);
 		Thread.sleep(5000);
-		if(driver.getTitle().equalsIgnoreCase("overview")){
+		if(driver.getTitle().equalsIgnoreCase("overview") || driver.getTitle().equalsIgnoreCase("AARP Medicare Plans from UnitedHealthCare - overview")){
 			System.out.println("Title matched");
 			Thread.sleep(8000);
 		}			

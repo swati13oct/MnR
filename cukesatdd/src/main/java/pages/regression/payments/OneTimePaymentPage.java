@@ -151,6 +151,7 @@ public class OneTimePaymentPage extends UhcDriver{
 	    String lastName = accountAttributessMap.get("Account holder last name");   
 	    
 		try{
+			Thread.sleep(5000);
 			if (iPerceptionPopUp.isDisplayed()) {
 				iPerceptionPopUp.click();
 			}
@@ -158,8 +159,7 @@ public class OneTimePaymentPage extends UhcDriver{
 			System.out.println("iPerception Pop Up not displayed");
 		}
 
-		waitforElement(routingNumberField);
-	    
+		waitforElement(routingNumberField);	    
 	    
 	    routingNumberField.click();
 	    routingNumberField.clear();
@@ -189,14 +189,27 @@ public class OneTimePaymentPage extends UhcDriver{
 	    lastNameField.clear();
 	    lastNameField.sendKeys(lastName);
 	    
-	    electronicsignature.click();
-	                    
+	    electronicsignature.click();	                    
 	    continueAutoPayButton.click();
+	    System.out.println("Continue button clicked ");
 	    
-	    if(driver.getTitle().equalsIgnoreCase("overview")){
+	    try{
+			Thread.sleep(5000);
+			System.out.println("Thread Woke up");
+	    }catch(Exception e)
+	    {
+	    	System.out.println("thread issue");
+	    }
+	    
+	     System.out.println(driver.getTitle());
+	     
+	    if(driver.getTitle().equalsIgnoreCase("overview") || driver.getTitle().equalsIgnoreCase("AARP Medicare Plans from UnitedHealthCare - overview")){
+	    	System.out.println("Validated review page title");
 	            return new ConfirmOneTimePaymentPage(driver);
 	    }
+	    else{
 	    return null;
+	    }
 	}  
 
 	
