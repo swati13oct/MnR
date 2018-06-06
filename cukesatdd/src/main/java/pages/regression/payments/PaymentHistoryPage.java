@@ -14,6 +14,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import pages.Global.Member.footer;
 import pages.member.ulayer.SetupAutoPaymentPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
@@ -407,7 +408,11 @@ public OneTimePaymentPage MemAuthAutoPay(){
 	 else
 	 return null;
 }
-
+  public footer validatePageFooter(){
+	  	  
+	  	 
+	  	 return new footer(driver);
+  }
 
 }
 

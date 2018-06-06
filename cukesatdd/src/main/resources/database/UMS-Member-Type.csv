@@ -535,3 +535,5 @@ q1_apr_uhc032/Password@1,MAPD,IndividualUHCPayments,,,
 q1_apr_uhc094/Password@1,MAPD,IndividualAARPRPayments,,,
 q2_jun_ship0001/Password@1,SHIP,IndividualAARPSPayments,,,
 q2_june_combo0012/Password@1,COMBO,COMBOAARPPayments,,,
+
+q2_jun_aarp0004/Password@1,MAPD,IndividualFooter,

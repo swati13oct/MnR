@@ -45,11 +45,26 @@ import atdd.framework.UhcDriver;
 
 public class AccountHomePage extends UhcDriver {
 
-	@FindBy(linkText = "Premium payment information")
+	@FindBy(xpath = "(//*[@class='ng-scope']//a[text()='Premium Payments'])[1]")
 	private WebElement paymentsLink;
+	
+	@FindBy(xpath = "//area[@href='javascript:clWin()'][@alt = 'close']")
+	private WebElement FeedbackModal;	
+	
+	@FindBy(className = "footerContainer")
+	private WebElement footerSection;
+	
+	@FindBy(id = "claimsummaryC1")
+	private WebElement claimSummary;
+	
+	@FindBy(id = "eobC1")
+	private WebElement explainationOfBenefits;
 
 	@FindBy(linkText = "medical providers")
 	private WebElement medicalProviders;
+	
+	@FindBy(id = "claims_1")
+	private WebElement claims;
 
 	/*@FindBy(xpath = "//li[@id='fd_myMenu']/a")
 */
@@ -225,8 +240,15 @@ public class AccountHomePage extends UhcDriver {
 	public AccountHomePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		
-		// openAndValidate();
+		try {
+			
+            if (iPerceptionPopUp.isDisplayed()) {
+                            iPerceptionPopUp.click();
+            }
+}catch(Exception e)        {
+            System.out.println("iPerception Pop Up not displayed");
+}
+	 //openAndValidate();
 	}
 
 	public BenefitsAndCoveragePage navigateDirectToBnCPag() {
@@ -1034,5 +1056,23 @@ public pages.regression.formsandresources.FormsAndResourcesPage navigatetoFormsn
         return new EOBPage(driver);
 }
 
+    public void validateClaimsL2Tabs(){
+		if(claims.isDisplayed()){
+			claims.click();
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			Assert.assertTrue("claimSummary is not displayed", claimSummary.isDisplayed());
+			Assert.assertTrue("explainationOfBenefits is not displayed", explainationOfBenefits.isDisplayed());
+		}
+	}
 	
+    public void validateFooterSection() {		
+
+		JavascriptExecutor jse = (JavascriptExecutor) driver; 
+		Assert.assertTrue("Footer section is not displayed", footerSection.isDisplayed());
+	}
 }
