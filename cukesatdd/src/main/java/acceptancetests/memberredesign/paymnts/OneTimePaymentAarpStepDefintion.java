@@ -144,6 +144,18 @@ public class OneTimePaymentAarpStepDefintion {
       
 	}
 	
+	@When("^the user navigates to Ship Recurring payment history$")
+	public void user_Ship_Recurring_payment_history() throws InterruptedException {
+		pages.regression.accounthomepage.AccountHomePage AHPage = (pages.regression.accounthomepage.AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+		AHPage = AHPage.navigateToSHIPAutoPaymentHistoryPage();
+		
+      if (AHPage!=null){
+    	     	  getLoginScenario().saveBean(PageConstants.DashPage, AHPage);
+			System.out.println("User is on Recurring Payment History");
+      }
+      
+	}
+	
 	@Then("^User Scrolls down to validate Payment History and Scrolls up$")
 	public void Validate_History_Payment() throws InterruptedException{
 		pages.regression.accounthomepage.AccountHomePage AHPage = (pages.regression.accounthomepage.AccountHomePage) getLoginScenario().getBean(PageConstants.DashPage);

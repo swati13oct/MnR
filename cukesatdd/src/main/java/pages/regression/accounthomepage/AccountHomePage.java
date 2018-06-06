@@ -137,11 +137,14 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(id = "continueSubmitButton")
 	private WebElement continueButton;
 
-	@FindBy(xpath = "//*[@id='IPEinvL']/map/area[3]")
+	@FindBy(xpath = "//*[@id='nav']/button[2]")
 	private WebElement iPerceptionAutoPopUp;
 
 	@FindBy(xpath = "//*[@id='sticky-nav']//div[@ng-switch-when='M&R']/a[5]")
 	private WebElement PremiumPayment;
+	
+	@FindBy(xpath = "//*[@id='sticky-nav']//div[@ng-switch-when='M&R']/a[4]")
+	private WebElement ShipPremiumPayment;
 
 	@FindBy(id = "payment-date")
 	private WebElement HistoryDropdown;
@@ -537,6 +540,39 @@ public class AccountHomePage extends UhcDriver {
 		}
 	}
 	
+	
+	public AccountHomePage navigateToSHIPAutoPaymentHistoryPage(){
+
+		/*
+		 * WebDriverWait wait = new WebDriverWait(driver, 30);
+		 * wait.until(ExpectedConditions.elementToBeClickable(paymentslink));
+		 */
+		if (validate(iPerceptionAutoPopUp)) {
+			iPerceptionAutoPopUp.click();
+		} else {
+			System.out.println("iPerception Pop Up not displayed");
+		}
+
+		// Thread.sleep(16000);
+
+		waitforElement(ShipPremiumPayment);
+		System.out.println("payment link is displayed on the header");
+		ShipPremiumPayment.click();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if (PaymentHeading.getText().contains("Premium Payments Overview")) {
+			System.out.println("Payment Overview page displayed");
+			return new AccountHomePage(driver);
+		} else {
+			System.out.println("payment overview page not displayed");
+			return null;
+		}
+	}
+	
+	
 	public PaymentHistoryPage navigateToOneTimePaymentHistoryPage(){
 
 		
@@ -567,7 +603,7 @@ public class AccountHomePage extends UhcDriver {
 
 	public pages.regression.payments.PaymentHistoryPage scrollDownAndUp() throws InterruptedException {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		jse.executeScript("window.scrollBy(0,500)", "");
+		jse.executeScript("window.scrollBy(0,550)", "");
 
 		waitforElement(HistoryDropdown);
 
@@ -579,15 +615,18 @@ public class AccountHomePage extends UhcDriver {
 		try{			
 			if (HistoryTable.isDisplayed()) {
 				System.out.println("Payment History Exists");
-				jse.executeScript("window.scrollBy(0,-600)", "");
-				Thread.sleep(3000);			
+				jse.executeScript("window.scrollBy(0,-1100)", "");
+				Thread.sleep(5000);			
 			} }
 			catch(Exception e)
 			{
-				System.out.println("History table not present for this member");
-				jse.executeScript("window.scrollBy(0,-600)", "");
-				Thread.sleep(3000);				
+				System.out.println("History table not present for this member");	
+								
 			}
+		
+		jse.executeScript("window.scrollBy(0,-1000)", "");
+		Thread.sleep(5000);
+		
 			return new pages.regression.payments.PaymentHistoryPage(driver);
 		}
 
