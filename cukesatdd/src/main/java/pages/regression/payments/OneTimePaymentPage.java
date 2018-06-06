@@ -134,7 +134,7 @@ public class OneTimePaymentPage extends UhcDriver{
 		electronicsignature.click();				
 		continueButton.click();
 		
-		if(driver.getTitle().equalsIgnoreCase("overview")){
+		if(driver.getTitle().equalsIgnoreCase("overview") || driver.getTitle().equalsIgnoreCase("AARP Medicare Plans from UnitedHealthCare - overview")){
 			return new ConfirmOneTimePaymentPage(driver);
 		}
 		return null;		
