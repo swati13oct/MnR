@@ -65,6 +65,9 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(xpath = "//button[@id='dropdown-toggle--1']/span[contains(text(),'Profile')]")
 	private WebElement accountToggleDropdown;
+	
+	//@FindBy(id = "dropdown-toggle--1")
+	//private WebElement accountToggleDropdown;	
 
 	@FindBy(xpath = "//a[@class='dropdown-option' and contains(text(),'Account Settings')]")
 	private WebElement accountSettingOption;
@@ -408,6 +411,12 @@ public class AccountHomePage extends UhcDriver {
 			{
 
 				accountToggleDropdown.click();
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					// TODO Auto generated catch block
+					e.printStackTrace();
+				}
 				validate(accountSettingOption);
 				accountSettingOption.click();
 				try {
