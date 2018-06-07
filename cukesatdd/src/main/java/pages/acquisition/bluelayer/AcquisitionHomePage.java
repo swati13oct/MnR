@@ -95,6 +95,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
         private WebElement pharmacyNearLink_MA;
 
         @FindBy(id = "Find a pharmacy near you")
+        private WebElement findPharmacyNearYou;
+        
+        @FindBy(id = "Find a pharmacy near you")
         private WebElement pharmacyNearLink;
 
         @FindBy(className = "disclaimer hideLink")
@@ -702,13 +705,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
         }
 
         public void navigateToRequestMoreHelpAndInformation(String planType){
-                Actions action = new Actions(driver);
-                action.moveToElement(Home).moveToElement(ourPlans).build().perform();
-                if(planType.contains("MA"))
-                        ma_moreHelpInfoLink.click();
-                else if(planType.contains("PDP")){
-                        pdp_moreHelpInfoLink.click();                
-                }
+        	 Actions actions = new Actions(driver);
+             actions.moveToElement(ourPlansHoverLink);
+             actions.moveToElement(moreHelpInfoLink);
+            actions.click().build().perform();
+            
                 for(int i=0;i<10;i++){
                         try {
                                 Thread.sleep(2000);
@@ -731,7 +732,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
                         pharmacyNearLink.click();                
                 }*/
 
-
+    		findPharmacyNearYou.click();
+    		
                 for(int i=0;i<10;i++){
                         try {
                                 Thread.sleep(6000);
