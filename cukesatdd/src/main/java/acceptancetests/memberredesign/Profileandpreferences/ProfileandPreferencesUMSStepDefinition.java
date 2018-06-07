@@ -116,14 +116,12 @@ public class ProfileandPreferencesUMSStepDefinition {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 
 		ProfileandPreferencesPage profilePreferencesPage = accountHomePage.navigateDirectToProfilePage();
-
+		
 		if (profilePreferencesPage!= null) {
 			getLoginScenario().saveBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE, profilePreferencesPage);
 		}
 		else
-        {
-			System.out.println("Pnp page object is Null ");
-		}
+			Assert.fail("Profile preference page not loaded");
 
 	}
 	/*@Then("^the user navigates to Profile page")
@@ -162,12 +160,14 @@ public class ProfileandPreferencesUMSStepDefinition {
 	 * @toDo : The user checks the email section 
 	 */
 	@Then("^the user validates the Email section in UMS site")
-	public void user_Validates_email() {
+	public void user_Validates_email(DataTable memberAttributes) {
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		String memberType = memberAttributesRow.get(0).getCells().get(1);
 		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
-		profilePreferencesPage.validateEmail();
-		profilePreferencesPage.validateEmailEditElements();
+		profilePreferencesPage.validateEmail(memberType);
+		profilePreferencesPage.validateEmailEditElements(memberType);
 
 	}
 
@@ -337,8 +337,21 @@ public class ProfileandPreferencesUMSStepDefinition {
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
 		profilePreferencesPage.validatepermanentaddress();
+		
 
 	}
+	
+	@Then("^the user validates the address section")
+	public void uservalidatestheaddresssection(DataTable memberAttributes) {
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		String memberType = memberAttributesRow.get(0).getCells().get(1);
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+
+		profilePreferencesPage.validatesAddressSection(memberType);
+		
+	}
+	
 	/** 
 	 * @toDo :  Validates the contact us link and the page that opens up on clicking the contact us link
 	 */
@@ -434,7 +447,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 	/** 
 	 * @toDo : Clicks on Edit Preferences link under Communication Preferences section 
 	 */
-	@Then("^the user clicks on edit preferences link")
+	@Then("^the user clicks on edit preferences link and validates the page")
 	public void userClicksOnEditPrefLink() {
 		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
@@ -442,6 +455,9 @@ public class ProfileandPreferencesUMSStepDefinition {
 		 CommunicationPreferencePage communicationPrefPage = profilePreferencesPage.navigateToCommunicationPreferencePage();
 		 if(communicationPrefPage!=null)
 		 {
+			if(!communicationPrefPage.validatePage())
+				Assert.fail("Error in validating communication preferences page");
+			else
 			 getLoginScenario().saveBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE,communicationPrefPage);
 		 }
 	}
@@ -487,11 +503,13 @@ public class ProfileandPreferencesUMSStepDefinition {
 	 */
 
 	@Then("^the user validates the Phone section")
-	public void UserValidatesPhoneSection() {
+	public void UserValidatesPhoneSection(DataTable memberAttributes) {
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		String memberType = memberAttributesRow.get(0).getCells().get(1);
 		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
-		profilePreferencesPage.validatePhoneElements();
+		profilePreferencesPage.validatePhoneElements(memberType);
 
 	}
 
@@ -499,11 +517,13 @@ public class ProfileandPreferencesUMSStepDefinition {
 	 * @toDo :  Validates the elements on clicking the Phone edit Button
 	 */
 	@Then("^the user Clicks on the the Edit phone Link and validates the elements")
-	public void UserClicksEditPhoneSection() {
+	public void UserClicksEditPhoneSection(DataTable memberAttributes) {
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		String memberType = memberAttributesRow.get(0).getCells().get(1);
 		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
-		profilePreferencesPage.validatePhoneEditElements();
+		profilePreferencesPage.validatePhoneEditElements(memberType);
 
 	}
 	/** 
@@ -841,19 +861,20 @@ public class ProfileandPreferencesUMSStepDefinition {
 	 * @toDo : The user clicks on health safe Id password
 	 */
 
-	@When("^I click the HEALTHSAFE ID PASSWORD link and validate username and password$")
+	@When("^I click the HEALTHSAFE ID PASSWORD link and validate username and password and verify edit password link$")
 	public void i_click_the_HEALTHSAFE_ID_PASSWORD_link() throws InterruptedException{
 		
 		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
 		profilePreferencesPage.validateHealthSafeIdLink();
+		profilePreferencesPage.validateEditPasswordLinkBox();
 	}
 	
 	/**
 	 * @toDo : The user should see the breadcrumb in the upper left side
 	 */
-
+	
 	@Then("^I should see the breadcrumb  in the upper left side of the page$")
 	public void i_should_see_the_breadcrumb_in_the_upper_left_side_of_the_page() throws InterruptedException{
 		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
@@ -871,7 +892,10 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
-		profilePreferencesPage.validateBreadCrumbClick();
+		ProfileandPreferencesPage profAndPrefPage = profilePreferencesPage.validateBreadCrumbClick();
+		if(profAndPrefPage!=null){
+		getLoginScenario().saveBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE,profAndPrefPage);
+		}
 
 	}
 	/**
