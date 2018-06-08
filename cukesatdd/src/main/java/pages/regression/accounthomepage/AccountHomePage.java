@@ -322,7 +322,7 @@ public class AccountHomePage extends UhcDriver {
 				System.out.println("Current Url is " + driver.getCurrentUrl());
 				CommonUtility.waitForPageLoad(driver, heading, 50);
 
-				if (driver.getTitle().equalsIgnoreCase("Profile")) {
+				if (driver.getCurrentUrl().contains("profile")) {
 
 					return new ProfileandPreferencesPage(driver);
 				}
@@ -331,7 +331,7 @@ public class AccountHomePage extends UhcDriver {
 		}
 
 		if (MRScenario.environment.equals("team-ci1") || MRScenario.environment.equals("team-h")
-				|| MRScenario.environment.equals("test-a") || MRScenario.environment.equals("team-e")) {
+				|| MRScenario.environment.equals("test-a") || MRScenario.environment.equals("team-e") || MRScenario.environment.equals("stage")) {
 
 			driver.navigate().to(PAGE_URL + "medicare/member/account/profile.html");
 
