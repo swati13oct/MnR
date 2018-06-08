@@ -156,6 +156,30 @@ public class OneTimePaymentAarpStepDefintion {
       
 	}
 	
+	@When("^the user navigates to Combo payment history page$")
+	public void Combo_Recurring_payment_history() throws InterruptedException {
+		pages.regression.accounthomepage.AccountHomePage AHPage = (pages.regression.accounthomepage.AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+		AHPage = AHPage.navigateToAutoPaymentHistoryPage();
+		
+      if (AHPage!=null){
+    	     	  getLoginScenario().saveBean(PageConstantsMnR.ComboTab, AHPage);
+			System.out.println("User is on Recurring Payment History");
+      }
+      
+	}
+	
+	@When("^the user navigates to Ship tab and validates the amount$")
+	public void ship_tab_amount_validation() throws InterruptedException {
+		pages.regression.accounthomepage.AccountHomePage AHPage = (pages.regression.accounthomepage.AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ComboTab);
+		AHPage = AHPage.navigateToSHIPTab();
+		
+      if (AHPage!=null){
+    	     	  getLoginScenario().saveBean(PageConstants.DashPage, AHPage);
+			System.out.println("User is on Recurring Payment History");
+      }
+      
+	}
+	
 	@Then("^User Scrolls down to validate Payment History and Scrolls up$")
 	public void Validate_History_Payment() throws InterruptedException{
 		pages.regression.accounthomepage.AccountHomePage AHPage = (pages.regression.accounthomepage.AccountHomePage) getLoginScenario().getBean(PageConstants.DashPage);
@@ -252,8 +276,14 @@ public class OneTimePaymentAarpStepDefintion {
 		
 		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = oneTimePayment.enterAutoPaymentDetails(memberAttributesMap);
 		
-
+		if(confirmOneTimePaymentPage != null) {
 		getLoginScenario().saveBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD,confirmOneTimePaymentPage);
+		System.out.println("Payment details entered and moved successfully to next page");
+		}
+		else
+		{
+			System.out.println("Object issue");
+		}
 
 	}
 

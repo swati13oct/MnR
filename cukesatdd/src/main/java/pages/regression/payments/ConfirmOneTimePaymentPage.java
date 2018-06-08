@@ -1,5 +1,6 @@
 package pages.regression.payments;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -35,6 +36,9 @@ public class ConfirmOneTimePaymentPage extends UhcDriver{
 	
 	@FindBy(xpath="//*[@id='nav']/button[2]")
 	private WebElement iPerceptionAutoPopUp;
+	
+	@FindBy(id = "closeButton")
+	private WebElement iPerceptionCloseButton;
 
 	public ConfirmOneTimePaymentPage(WebDriver driver) {
 		super(driver);
@@ -44,6 +48,18 @@ public class ConfirmOneTimePaymentPage extends UhcDriver{
 
 
 	public OneTimePaymentSuccessPage confirmsPayment() {
+		
+		try {   
+	    	  Thread.sleep(2000); 		
+	    		driver.switchTo().frame("IPerceptionsEmbed");
+	    		System.out.println("iPerception Pop Up is Present");
+	    		iPerceptionCloseButton.click();
+	    		driver.switchTo().defaultContent();
+	    		Thread.sleep(5000);
+	    		}
+	    		catch (Exception e) {
+	    		System.out.println("iPerception Pop Up is not Present");
+	    		}
 		
 		TermsCheckRadioButton.click();
 		System.out.println("Terms and conditions radio button clicked");
@@ -69,15 +85,21 @@ public class ConfirmOneTimePaymentPage extends UhcDriver{
 	
     public ConfirmOneTimePaymentPage confirmsAutoPayment() throws InterruptedException  {
     	
-    	 try{
-    		 if(validate(iPerceptionAutoPopUp)) {
-    	    		iPerceptionAutoPopUp.click();
-    	    	}
-    		 }catch(Exception e)
-    		 {
-    			 System.out.println("No iperception Pop Up displayed");
-    		 }
-		
+    	System.out.println("In Confirm auto pay method");
+    	Thread.sleep(2000);    	
+    	
+    	try {   
+      	  Thread.sleep(2000); 		
+      		driver.switchTo().frame("IPerceptionsEmbed");
+      		System.out.println("iPerception Pop Up is Present");
+      		iPerceptionCloseButton.click();
+      		driver.switchTo().defaultContent();
+      		Thread.sleep(5000);
+      		}
+      		catch (Exception e) {
+      		System.out.println("iPerception Pop Up is not Present");
+      		}
+    	 
 		waitforElement(TermsCheckRadioButton);
 		TermsCheckRadioButton.click();
 		System.out.println("Terms and conditions radio button clicked");
@@ -86,7 +108,7 @@ public class ConfirmOneTimePaymentPage extends UhcDriver{
 		     System.out.println("Submit Payment Button clicked");
 		CommonUtility.checkPageIsReady(driver);
 		Thread.sleep(5000);
-		if(driver.getTitle().equalsIgnoreCase("overview")){
+		if(driver.getTitle().equalsIgnoreCase("overview") || driver.getTitle().equalsIgnoreCase("AARP Medicare Plans from UnitedHealthCare - overview")){
 			System.out.println("Title matched");
 			Thread.sleep(8000);
 		}			
@@ -113,6 +135,18 @@ public class ConfirmOneTimePaymentPage extends UhcDriver{
     
     public ConfirmOneTimePaymentPage MemAuthConfirmOTP() throws InterruptedException  {
 		
+    	try {   
+      	  Thread.sleep(2000); 		
+      		driver.switchTo().frame("IPerceptionsEmbed");
+      		System.out.println("iPerception Pop Up is Present");
+      		iPerceptionCloseButton.click();
+      		driver.switchTo().defaultContent();
+      		Thread.sleep(5000);
+      		}
+      		catch (Exception e) {
+      		System.out.println("iPerception Pop Up is not Present");
+      		}
+    	
  		waitforElement(TermsCheckRadioButton);
  		TermsCheckRadioButton.click();
  		System.out.println("Terms and conditions radio button clicked");
@@ -142,6 +176,18 @@ public class ConfirmOneTimePaymentPage extends UhcDriver{
 	}
     
      public ConfirmOneTimePaymentPage ValidateAutoPaymentButton() throws InterruptedException  {
+    	 
+    	 try {   
+       	  Thread.sleep(2000); 		
+       		driver.switchTo().frame("IPerceptionsEmbed");
+       		System.out.println("iPerception Pop Up is Present");
+       		iPerceptionCloseButton.click();
+       		driver.switchTo().defaultContent();
+       		Thread.sleep(5000);
+       		}
+       		catch (Exception e) {
+       		System.out.println("iPerception Pop Up is not Present");
+       		}
 		
 		waitforElement(TermsCheckRadioButton);
 		TermsCheckRadioButton.click();

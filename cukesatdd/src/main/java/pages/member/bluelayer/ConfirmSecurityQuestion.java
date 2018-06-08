@@ -35,16 +35,16 @@ public class ConfirmSecurityQuestion extends UhcDriver {
     @Override
     public void openAndValidate() {
 	
-	WebDriverWait wait = new WebDriverWait(driver,40);
+	WebDriverWait wait = new WebDriverWait(driver,50);
 	wait.until(ExpectedConditions.visibilityOf(rememberThisDeviceSection));
     }
 
     
 
 	public void enterValidSecurityAnswer() throws Exception {
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		System.out.println(driver.getCurrentUrl());
-		WebDriverWait wait = new WebDriverWait(driver,40);
+		WebDriverWait wait = new WebDriverWait(driver,50);
 		String SecurityQtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("authQuestiontextLabelId"))).getText();
 		WebElement answerField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("challengeQuestionList[0].userAnswer")));
 		answerField.clear();
@@ -64,7 +64,7 @@ public class ConfirmSecurityQuestion extends UhcDriver {
 		//formContent.click();
 		WebElement submitbutton = driver.findElement(By.id("continueSubmitButton"));
 		submitbutton.click();
-		Thread.sleep(5000);
+		Thread.sleep(15000);
 	}
 
 }

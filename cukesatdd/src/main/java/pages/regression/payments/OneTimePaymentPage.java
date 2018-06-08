@@ -2,6 +2,8 @@ package pages.regression.payments;
 
 import java.util.Map;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -59,9 +61,9 @@ public class OneTimePaymentPage extends UhcDriver{
 	
 	@FindBy(xpath="//*[@class='overview parsys']//div[@class='row'][3]//div[@class='longform__row'][10]//div[@class='margin-medium']/a[2]")
 	private WebElement continueAutoPayButton;
-
-
-
+	
+	@FindBy(id = "closeButton")
+	private WebElement iPerceptionCloseButton;
 	
 	public OneTimePaymentPage(WebDriver driver) {
 		super(driver);
@@ -86,13 +88,17 @@ public class OneTimePaymentPage extends UhcDriver{
 			//TODO:: if first radio button is selected??
 		}*/
 		
-		try{
-			if (iPerceptionPopUp.isDisplayed()) {
-				iPerceptionPopUp.click();
-			}
-		}catch(Exception e)        {
-			System.out.println("iPerception Pop Up not displayed");
-		}
+		try {   
+	    	  Thread.sleep(2000); 		
+	    		driver.switchTo().frame("IPerceptionsEmbed");
+	    		System.out.println("iPerception Pop Up is Present");
+	    		iPerceptionCloseButton.click();
+	    		driver.switchTo().defaultContent();
+	    		Thread.sleep(5000);
+	    		}
+	    		catch (Exception e) {
+	    		System.out.println("iPerception Pop Up is not Present");
+	    		}
 
 		waitforElement(amountRadioButton);
 		validate(amountRadioButton);
@@ -134,7 +140,7 @@ public class OneTimePaymentPage extends UhcDriver{
 		electronicsignature.click();				
 		continueButton.click();
 		
-		if(driver.getTitle().equalsIgnoreCase("overview")){
+		if(driver.getTitle().equalsIgnoreCase("overview") || driver.getTitle().equalsIgnoreCase("AARP Medicare Plans from UnitedHealthCare - overview")){
 			return new ConfirmOneTimePaymentPage(driver);
 		}
 		return null;		
@@ -150,16 +156,20 @@ public class OneTimePaymentPage extends UhcDriver{
 	    String middleName = accountAttributessMap.get("Account holder middle name");
 	    String lastName = accountAttributessMap.get("Account holder last name");   
 	    
-		try{
-			if (iPerceptionPopUp.isDisplayed()) {
-				iPerceptionPopUp.click();
-			}
-		}catch(Exception e)        {
-			System.out.println("iPerception Pop Up not displayed");
-		}
+	    try {   
+	    	  Thread.sleep(2000); 		
+	    		driver.switchTo().frame("IPerceptionsEmbed");
+	    		System.out.println("iPerception Pop Up is Present");
+	    		iPerceptionCloseButton.click();
+	    		driver.switchTo().defaultContent();
+	    		Thread.sleep(5000);
+	    		}
+	    		catch (Exception e) {
+	    		System.out.println("iPerception Pop Up is not Present");
+	    		}
 
-		waitforElement(routingNumberField);
 	    
+		waitforElement(routingNumberField);	    
 	    
 	    routingNumberField.click();
 	    routingNumberField.clear();
@@ -189,14 +199,27 @@ public class OneTimePaymentPage extends UhcDriver{
 	    lastNameField.clear();
 	    lastNameField.sendKeys(lastName);
 	    
-	    electronicsignature.click();
-	                    
+	    electronicsignature.click();	                    
 	    continueAutoPayButton.click();
+	    System.out.println("Continue button clicked ");
 	    
-	    if(driver.getTitle().equalsIgnoreCase("overview")){
+	    try{
+			Thread.sleep(5000);
+			System.out.println("Thread Woke up");
+	    }catch(Exception e)
+	    {
+	    	System.out.println("thread issue");
+	    }
+	    
+	     System.out.println(driver.getTitle());
+	     
+	    if(driver.getTitle().equalsIgnoreCase("overview") || driver.getTitle().equalsIgnoreCase("AARP Medicare Plans from UnitedHealthCare - overview")){
+	    	System.out.println("Validated review page title");
 	            return new ConfirmOneTimePaymentPage(driver);
 	    }
+	    else{
 	    return null;
+	    }
 	}  
 
 	
