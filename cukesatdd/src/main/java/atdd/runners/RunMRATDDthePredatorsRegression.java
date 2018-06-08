@@ -18,7 +18,7 @@ jsonReport = "target/cucumber-RunMRATDDthePredatorsRegression.json",detailedRepo
 	overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDthePredatorsRegression")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign" }, plugin = {"pretty", "html:reports/test-report", 
-		"json:target/cucumber-RunMRATDDthePredatorsRegression .json" }, tags = { "@regressionAccountProf&Pref,@regressionBenefitsCoverage,@regressionH&W,@regressiongenericpagesH&W" })
+		"json:target/cucumber-RunMRATDDthePredatorsRegression.json" }, tags = { "@regressionAccountProf&Pref,@regressionBenefitsCoverage,@regressionH&W,@regressiongenericpagesH&W" })
 public class RunMRATDDthePredatorsRegression {
 //@redesignOrderMaterials
 }

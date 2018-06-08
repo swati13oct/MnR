@@ -19,7 +19,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionTest.json",detailedReport = tru
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionTest")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.vbfacquisition" }, 
 features = { "src/main/resources/feature/vbfacquisition" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionTest.json" }, tags = { "@regressionTest" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionTest.json" }, tags = { "@redesignOrderMaterials,@hsideob,@regressionAccountProf&Pref" })
 public class RunMRATDDRegressionTest {
 
 }
