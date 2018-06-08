@@ -137,7 +137,7 @@ MRScenario loginScenario;
 		signInButton.click();
 		
 		try {
-			Thread.sleep(15000);
+			Thread.sleep(30000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

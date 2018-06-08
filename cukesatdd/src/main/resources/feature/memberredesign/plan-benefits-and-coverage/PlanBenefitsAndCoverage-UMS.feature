@@ -388,18 +388,19 @@ Feature:C1.1 To test plan benefits and Coverage on UMS site
     And the user validates view and document label
     And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully
        | Language | <language> |
-    #And the user validates pdfs and link for ship
+    And the user verifies that the correct pdfs are coming in the plan material section for ship
+       |Plan Benefits Table | <PlanBenefitsTable> |
+       |Plan Overview       | <PlanOverview>      |
     And the user validates ship the need help section
     And the user validates for ship see more ways to contact us section
     And the user validates for ship member on clicking contact us link it should route to contact us page 
     And the user clicks on More Information link for ship
     
    Examples: 
-      | planType|  memberType  | language | 
-      | HIP     |  SHIP        | ENGLISH  |
-      | PHIP    |  SHIP        | SPANISH  |
-      | PHIP    |  SHIP        | CHINESE  |
-      
+       | planType|  memberType  | language | PlanBenefitsTable   | PlanOverview  |
+       | HIP     |  SHIP        | ENGLISH  | Plan Benefits Table | Plan Overview |
+       | HIP     |  SHIP        | SPANISH  | Plan Benefits Table | Plan Overview |
+       | HIP     |  SHIP        | CHINESE  | Plan Benefits Table | Plan Overview |
       
     @CMneedHelpFederal
     Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page

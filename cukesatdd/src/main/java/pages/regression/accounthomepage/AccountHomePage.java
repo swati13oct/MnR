@@ -16,6 +16,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+
 //import pages.member.redesign.ContactUsPage;
 import pages.member.ulayer.OneTimePaymentsPage;
 import pages.member.ulayer.PlanComparePage;
@@ -200,9 +201,15 @@ public class AccountHomePage extends UhcDriver {
 			{
 				System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
 				driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
+				try {
+					Thread.sleep(20000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				System.out.println(driver.getCurrentUrl());
 				CommonUtility.waitForPageLoad(driver, heading, 30);
-				if (driver.getTitle().equalsIgnoreCase("Benefits Overview")) {
+				if (driver.getTitle().contains("Benefits Overview")) {
 					System.out.println(driver.getTitle());
 					return new BenefitsAndCoveragePage(driver);
 				}

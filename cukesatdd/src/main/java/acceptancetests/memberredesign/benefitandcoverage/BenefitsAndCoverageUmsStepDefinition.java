@@ -986,6 +986,37 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	                      System.out.println("pdfs not coming correctly");
 	                      }
 	      }
+	
+	@And("^the user verifies that the correct pdfs are coming in the plan material section for ship$")
+	   public void verifypdfscomingship(DataTable givenAttributes) throws InterruptedException   {
+	         
+		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+	      List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+	      
+	      Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+	      for (int i = 0; i < memberAttributesRow.size(); i++) {
+	                      memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+	                                                      .get(0), memberAttributesRow.get(i).getCells().get(1));
+	                      
+	      }
+	                      Collection<String> values = memberAttributesMap.values();
+	                      String[] targetArray = values.toArray(new String[values.size()]);
+	                      System.out.println(values.size());
+	                      
+	                      boolean arraycheck = benefitsnCoveragepage.verifypdfname(targetArray);
+	                      System.out.println(arraycheck);
+	                      if (arraycheck == true)
+	                      {
+	                      Assert.assertTrue(true);
+	                      System.out.println("all pdfs are coming correctly");
+	                      }
+	                      else 
+	                      {
+	                      Assert.fail();
+	                      System.out.println("pdfs not coming correctly");
+	                      }
+	      }
      
 	/**
 	 * To validate text in table for village members
