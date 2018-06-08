@@ -1,6 +1,6 @@
 Feature: To test branding functionality
 
-  @regression @regression_branding
+  @regression @regression_branding @regression_06_06_18
   Scenario Outline: Verify HSID login functionality.
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
