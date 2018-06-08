@@ -1,7 +1,5 @@
 package acceptancetests.memberredesign.footer;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -9,17 +7,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.poi.ss.usermodel.Footer;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.Global.Member.footer;
-import pages.dashboard.member.drugcostestimator.blayer.DrugCostEstimatorPage;
-
-import pages.memberredesign.bluelayer.LoginPage;
-import pages.regression.accounthomepage.AccountHomePage;
-import pages.regression.payments.PaymentHistoryPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
@@ -30,6 +21,12 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
+import pages.Global.Member.Footer;
+import pages.dashboard.member.drugcostestimator.blayer.DrugCostEstimatorPage;
+import pages.memberredesign.bluelayer.LoginPage;
+import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.payments.PaymentHistoryPage;
 
 /**
  * Functionality : Covers all step definition methods related to member redesign footer section.
@@ -140,17 +137,32 @@ public class MemberRedesignFooterStepDefinition {
       if (paymentHistoryPage!=null){
     	     	  getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
 			System.out.println("user is on one time payment page"); 
-      }	}
+      }else{
+    	  System.out.println("Null value returned");
+      }	
+		
+	}
 
       
-      @And("^the user validates the footer section$")
+      @Then("^the user navigates to the footer section$")
       public void user_validates_footer(){
     	  PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
-    	  footer footerPage = paymentHistoryPage.validatePageFooter();
+    	  Footer footer = paymentHistoryPage.validatePageFooter();
+    	  if (footer!=null){
+	     	  getLoginScenario().saveBean(PageConstants.footer_page,footer);
+    	  
+      }else{
+    	  Assert.fail();
+      }
+      
+      }
+      @And("^the user validates the footer section$")
+      public void validate() throws InterruptedException{
+    	  Footer footerPage = (Footer) getLoginScenario().getBean(PageConstants.footer_page);
     	  footerPage.validateFooterLinks();
       }
       
-	
+}
 
 
 		
@@ -188,4 +200,4 @@ public class MemberRedesignFooterStepDefinition {
 		accountHomePage.validateSavedLink();
 	}*/
 
-}
+

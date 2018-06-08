@@ -594,6 +594,9 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 	public static final String Member_Auth_PopUp = "MemberAuthPopUp";
 	
 	public static final String New_Window = "NewWindow";
+
+	public static final String footer_page = null;
+
 	
 	
 
