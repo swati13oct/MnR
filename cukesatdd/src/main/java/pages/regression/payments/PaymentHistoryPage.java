@@ -360,15 +360,14 @@ public OneTimePaymentPage AutoPay(){
 				 SetUpAutoPayButton.click();
 				 System.out.println("clicked on Setup New Payment button");
 				 try{
-					 waitforElement(SetUpNewPayment);
-					 
+					 Thread.sleep(2000);					 
 					 if (validate(SetUpNewPayment)){
 						 SetUpNewPayment.click();
 						 System.out.println("clicked on Setup New Payment button");		 
 					 return new  OneTimePaymentPage(driver);
 					 }
 					 else
-						 return null;
+						 return new OneTimePaymentPage(driver);
 				 }catch(Exception e)
 				 {
 					System.out.println("Set up Pop up not displayed"); 

@@ -316,7 +316,7 @@ Feature: To test the payment flow on AARP site
       | MAPD     | IndividualUHCPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
       | SHIP     | IndividualUHCPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
  
-  @paymentsAutoPay @15301
+  @paymentsAutoPay @15301 @regression_06_06_18
   Scenario Outline: Verify Recurring Payment for Different Types of Member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -339,7 +339,7 @@ Feature: To test the payment flow on AARP site
       | MAPD     | IndividualUHCPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
 
  
- @paymentsMoreThanOnePay @15142
+ @paymentsMoreThanOnePay @15142 @regression_06_06_18
   Scenario Outline: Verify More Than one Payment Per day error message
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -374,7 +374,7 @@ Feature: To test the payment flow on AARP site
       | MAPD      | IndividualAARPRPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.12 |
 
 
-@TestmemberAuth @15170
+@TestmemberAuth @15170 @regression_06_06_18
  Scenario Outline: To validate the oneTime Payment flow for Member Auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -392,7 +392,7 @@ Feature: To test the payment flow on AARP site
       | qavgogine | qavgogine | q2_jun_uhc0042 |
  
  
- @TestmemberAuthOTP
+ @TestmemberAuthOTP @regression_06_06_18
  Scenario Outline: To validate the oneTime Payment flow for Member Auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -419,7 +419,7 @@ Feature: To test the payment flow on AARP site
       | qavgogine | qavgogine | q2_jun_uhc0042 |123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.12 |
  
  
-  @paymentsShip @15320 @15144
+  @paymentsShip @15320 @regression_06_06_18
   Scenario Outline: Verify Recurring Payment for SHIP member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -441,7 +441,7 @@ Feature: To test the payment flow on AARP site
       | planType | memberType            | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
       | SHIP     | IndividualAARPSPayments | 123123123 |        123123123 |     12345 |          12345 | first     | second     | third    |   1.00 |
 
-    @paymentsCombo @15144
+    @paymentsCombo @15144 @regression_06_06_18
     Scenario Outline: Verify Recurring Payment for SHIP member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
