@@ -78,7 +78,7 @@ Examples:
  | planType| memberType| drug |
  | MAPD|IndividualDCEmember|lipitor|
  
-@IncrediblesDCE1_1
+@Member_DCE
 Scenario Outline:I1.1 To Verify MR portal DCE flow covering step1 step 2 and step3 .
 Given I login with registered user
 | Plan Type   | <planType>   |
@@ -116,7 +116,7 @@ Examples:
  | MAPD      |IndividualDCEmember |Lipitor|Lipitor TAB 10MG|31|Every 1 month|Lipitor TAB 20MG|Lipitor TAB 20MG|atorvastatin calcium TAB 20MG|90210|25 miles|100|Every 3 months|
  
  
-@IncrediblesDCE1_2
+@Member_dce_not
 Scenario Outline:I1.2 To Verify MR portal members DCE should not come for AARP federal members
 Given I login with registered user
 | Plan Type   | <planType>   |
@@ -129,7 +129,7 @@ Then I should not see drug look up on home page
  | Group     | SSUP      |
  
  
-@IncrediblesDCE1_3
+@Member_DCE_sso
 Scenario Outline:I1.3 To Verify MR portal group members DCE should redirect to optum rx sso landing page. 
 Given I login with registered user
 | Plan Type   | <planType>   |
