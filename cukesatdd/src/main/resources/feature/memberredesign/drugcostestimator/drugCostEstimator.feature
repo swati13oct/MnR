@@ -78,4 +78,65 @@ Examples:
  | planType| memberType| drug |
  | MAPD|IndividualDCEmember|lipitor|
  
+@IncrediblesDCE1_1
+Scenario Outline:I1.1 To Verify MR portal DCE flow covering step1 step 2 and step3 .
+Given I login with registered user
+| Plan Type   | <planType>   |
+| Member Type	  | <memberType> |
+When I navigate to drug look up page
+When I delete all added drugs
+When I add branded drug
+| Drug      | <drug1>     |
+| Dosage    | <dosage1>   |
+| Quantity  | <quantity1> |
+| Frequency	| <frequency1>|
+When I add branded drug
+| Drug      | <drug1>     |
+| Dosage    | <dosage2>   |
+| Quantity  | <quantity2> |
+| Frequency	| <frequency2>|
+When I switch to its generic durg
+| BrandedDrug      | <dosage2>   |
+| GenericDosage    | <genericdosage>  |
+| Quantity  | <quantity2> |
+| Frequency	| <frequency2>|
+When I delete the drug
+| Dosage	| <genericdosage>|
+When I navigate to Pharmacy tab
+| Zipcode	| <zipcode>|
+| Radius	| <radius>|
+When I select the pharmacy from the list
+When I navigate to costs tab
+Then I should see cost of the drug
+Then I should see learn more about the drug tiers and learn more about the drug payment stages link
+
+
+Examples:
+ | planType  | memberType  |drug1|dosage1|quantity1|frequency1|dosage2|brandeddrug|genericdosage|zipcode|radius|quantity2|frequency2|
+ | MAPD      |IndividualDCEmember |Lipitor|Lipitor TAB 10MG|31|Every 1 month|Lipitor TAB 20MG|Lipitor TAB 20MG|atorvastatin calcium TAB 20MG|90210|25 miles|100|Every 3 months|
+ 
+ 
+@IncrediblesDCE1_2
+Scenario Outline:I1.2 To Verify MR portal members DCE should not come for AARP federal members
+Given I login with registered user
+| Plan Type   | <planType>   |
+| Member Type	  | <memberType> |
+Then I should not see drug look up on home page
+ 
+ Examples:
+ | planType  | memberType|
+ | Medsup    | Ship_AARP |
+ | Group     | SSUP      |
+ 
+ 
+@IncrediblesDCE1_3
+Scenario Outline:I1.3 To Verify MR portal group members DCE should redirect to optum rx sso landing page. 
+Given I login with registered user
+| Plan Type   | <planType>   |
+| Member Type	  | <memberType> |
+When I navigate to drug look up page
+Then I should be optum rx sso landing page  
+  Examples:
+ | planType | memberType |
+ | MAPD    | GROUP  |
  
