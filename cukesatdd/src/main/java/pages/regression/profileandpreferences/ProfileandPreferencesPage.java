@@ -66,10 +66,10 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		}
 		
 	
-		if (iPerceptionPopUp.size() > 0) {
+		/*if (iPerceptionPopUp.size() > 0) {
 			iPerceptionPopUp.get(0).click();
 			System.out.println("iPerception Pop Up displayed");
-		}
+		}*/
 	}
 
 	@FindBy(id = "closeButton")
@@ -457,6 +457,9 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	
 	@FindBy(id="TM_cancelUpdateAddressBtn")
 	private WebElement tempAddressCancelBtnUhc;
+	
+	@FindBy(id="contact")
+	private WebElement contactInfoBox;
 
 	public PageData ProfileandPreferences;
 
@@ -520,18 +523,20 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	 */
 
 	public void validateEmail(String memType) {
-		try {
+		/*try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		if(memType.equals("AARP")){
+		}*/
+		/*if(memType.equals("AARP")){
 			validateNew(EmailLabel);
 			validateNew(emailAddress);
-		}else
-			validate(emailBoxUhc);
-			
+		}else*/
+		System.out.println("*****test***");
+		validate(contactInfoBox);
+		validate(emailBoxUhc);
+				
 	}
 
 	/**
@@ -665,7 +670,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	 */
 	public void validateEmailEditElements(String memType) {
 
-		if(memType.equals("AARP")){
+		/*if(memType.equals("AARP")){
 			validateNew(emailEditButton);
 			emailEditButton.click();
 			try {
@@ -681,7 +686,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			newEmail.sendKeys("UHCMNRPORTALS@GMAIL.COM");
 			emailConfirm.click();
 			validateNew(emailErrorMessage);
-		}else{
+		}else{*/
 			emailBoxUhc.click();
 			emailEditButtonUhc.click();
 			validateNew(emailAddressFieldUhc);
@@ -689,7 +694,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			validateNew(emailCancelBtnUhc);
 			emailCancelBtnUhc.click();
 			emailGoBackBtnUhc.click();
-		}
+		//}
 		
 	}
 
