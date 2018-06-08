@@ -168,7 +168,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "(//*[@id='paymentTable'])[1]")
 	private WebElement HistoryTable;
 
-	@FindBy(xpath = "//*[@id='paymentOverviewApp']//div[@class='container']//div[@class='col-md-12']/h1")
+	@FindBy(xpath = "//*[@id='paymentOverviewApp']//div[@class='container']//div[@class='col-md-12']/h2[1]")
 	private WebElement PaymentHeading;
 
 	@FindBy(linkText = "Compare 2017 Plans")

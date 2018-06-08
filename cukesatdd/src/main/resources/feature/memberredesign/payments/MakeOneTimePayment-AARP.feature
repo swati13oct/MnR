@@ -389,7 +389,7 @@ Feature: To test the payment flow on AARP site
 
     Examples: 
       | username  | password  |MemUserName    | 
-      | qavgogine | qavgogine | q1_apr_uhc032 |
+      | qavgogine | qavgogine | q2_jun_uhc0042 |
  
  
  @TestmemberAuthOTP
