@@ -1063,8 +1063,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
                 sendkeys(zipCodeField, zipcode);
                 viewPlansButton.click();
                 
-                if (getTitle().equalsIgnoreCase(
-                                PageTitleConstants.BLAYER_MEDICARE_PLAN_TYPES_TITLE)) {
+                if (driver.getCurrentUrl().contains("plan-summary")) {
                         return new VPPPlanSummaryPage(driver);
                 }
                 return null;
