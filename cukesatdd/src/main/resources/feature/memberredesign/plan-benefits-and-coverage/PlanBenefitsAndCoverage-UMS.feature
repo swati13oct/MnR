@@ -441,7 +441,7 @@ Given login with following details logins in the member portal and validate elem
 
 
 
-  @BenefitsforTexasERSMember @regression @regressionBenefitsCoverage
+  @BenefitsforTexasERSMember @regression @regression_06_06_18
   Scenario Outline: Verify the Benefits for TexasERSMember
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
@@ -454,7 +454,7 @@ Given login with following details logins in the member portal and validate elem
       | planType |
       | Texas    |
       
-     @OfficeVisitswithoutprovidertiering @regression @regressionBenefitsCoverage
+     @OfficeVisitswithoutprovidertiering @regression @regression_06_06_18
   Scenario Outline: Verify the Office visits widget for a member withoutprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
@@ -465,7 +465,7 @@ Given login with following details logins in the member portal and validate elem
       | planType |
       | MAPD     |
 
-@WaystoSaveforPdp @regression @regressionBenefitsCoverage
+@WaystoSaveforPdp @regression @regression_06_06_18
   Scenario Outline: Verify the ways to save  widget for a PDP member
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
@@ -481,7 +481,7 @@ Given login with following details logins in the member portal and validate elem
    
    
   
-	@outpatientcenterwithprovidertier   @regressionoutpatient @regressionBenefitsCoverage
+	@outpatientcenterwithprovidertier   @regressionoutpatient @regression_06_06_18
     Scenario Outline: Verify the outpatient widget for a member withprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType> |
@@ -494,7 +494,7 @@ Given login with following details logins in the member portal and validate elem
       | planType | 
       | MAPD     |     
 
-	@primarycareproviderspecialist   @regressionprimarycareprovider  @regressionBenefitsCoverage
+	@primarycareproviderspecialist   @regressionprimarycareprovider  @regression_06_06_18
     Scenario Outline: Verify the Office visits widget for a member withprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
@@ -508,7 +508,7 @@ Given login with following details logins in the member portal and validate elem
     
     
 
-@outpatientcenterwithoutprovidertier   @regressionoutpatientwithoutprovider @regressionBenefitsCoverage
+@outpatientcenterwithoutprovidertier   @regressionoutpatientwithoutprovider @regression_06_06_18
     Scenario Outline: Verify the outpatient widget for a member withprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType> |
@@ -522,7 +522,7 @@ Given login with following details logins in the member portal and validate elem
       | planType | 
       | MAPD     |  
    
-     @BenefitsForAlPeehipMember @regression @regressionBenefitsCoverage
+     @BenefitsForAlPeehipMember @regression @regression_06_06_18
   Scenario Outline: Verify the benefits for an AL peehip member
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
@@ -536,7 +536,7 @@ Given login with following details logins in the member portal and validate elem
       
       
       
-  @BenefitsForMAMedsupSSUPMember @regression @regressionBenefitsCoverage
+  @BenefitsForMAMedsupSSUPMember @regression @regression_06_06_18
   Scenario Outline: Verify the Benefits for a  MA Member
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
