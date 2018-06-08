@@ -1,5 +1,6 @@
 package pages.regression.payments;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -35,6 +36,9 @@ public class ConfirmOneTimePaymentPage extends UhcDriver{
 	
 	@FindBy(xpath="//*[@id='nav']/button[2]")
 	private WebElement iPerceptionAutoPopUp;
+	
+	@FindBy(id = "closeButton")
+	private WebElement iPerceptionCloseButton;
 
 	public ConfirmOneTimePaymentPage(WebDriver driver) {
 		super(driver);
@@ -44,6 +48,18 @@ public class ConfirmOneTimePaymentPage extends UhcDriver{
 
 
 	public OneTimePaymentSuccessPage confirmsPayment() {
+		
+		try {   
+	    	  Thread.sleep(2000); 		
+	    		driver.switchTo().frame("IPerceptionsEmbed");
+	    		System.out.println("iPerception Pop Up is Present");
+	    		iPerceptionCloseButton.click();
+	    		driver.switchTo().defaultContent();
+	    		Thread.sleep(5000);
+	    		}
+	    		catch (Exception e) {
+	    		System.out.println("iPerception Pop Up is not Present");
+	    		}
 		
 		TermsCheckRadioButton.click();
 		System.out.println("Terms and conditions radio button clicked");
@@ -70,22 +86,19 @@ public class ConfirmOneTimePaymentPage extends UhcDriver{
     public ConfirmOneTimePaymentPage confirmsAutoPayment() throws InterruptedException  {
     	
     	System.out.println("In Confirm auto pay method");
-    	Thread.sleep(2000);
+    	Thread.sleep(2000);    	
     	
-    	 try{    		
-    		 if(iPerceptionAutoPopUp.isDisplayed()) {
-    	    		iPerceptionAutoPopUp.click();
-    	    	}
-    		 }catch(Exception e)
-    		 {
-    			 System.out.println("No iperception Pop Up displayed");
-    		 }
-    	 
-    	/* JavascriptExecutor jse = (JavascriptExecutor) driver;
-    	 jse.executeScript("window.scrollBy(0,650)", "");    	 
-    	 Thread.sleep(2000);
-    	 System.out.println("Scrolled down");
-    	 Thread.sleep(1000);*/
+    	try {   
+      	  Thread.sleep(2000); 		
+      		driver.switchTo().frame("IPerceptionsEmbed");
+      		System.out.println("iPerception Pop Up is Present");
+      		iPerceptionCloseButton.click();
+      		driver.switchTo().defaultContent();
+      		Thread.sleep(5000);
+      		}
+      		catch (Exception e) {
+      		System.out.println("iPerception Pop Up is not Present");
+      		}
     	 
 		waitforElement(TermsCheckRadioButton);
 		TermsCheckRadioButton.click();
@@ -122,6 +135,18 @@ public class ConfirmOneTimePaymentPage extends UhcDriver{
     
     public ConfirmOneTimePaymentPage MemAuthConfirmOTP() throws InterruptedException  {
 		
+    	try {   
+      	  Thread.sleep(2000); 		
+      		driver.switchTo().frame("IPerceptionsEmbed");
+      		System.out.println("iPerception Pop Up is Present");
+      		iPerceptionCloseButton.click();
+      		driver.switchTo().defaultContent();
+      		Thread.sleep(5000);
+      		}
+      		catch (Exception e) {
+      		System.out.println("iPerception Pop Up is not Present");
+      		}
+    	
  		waitforElement(TermsCheckRadioButton);
  		TermsCheckRadioButton.click();
  		System.out.println("Terms and conditions radio button clicked");
@@ -151,6 +176,18 @@ public class ConfirmOneTimePaymentPage extends UhcDriver{
 	}
     
      public ConfirmOneTimePaymentPage ValidateAutoPaymentButton() throws InterruptedException  {
+    	 
+    	 try {   
+       	  Thread.sleep(2000); 		
+       		driver.switchTo().frame("IPerceptionsEmbed");
+       		System.out.println("iPerception Pop Up is Present");
+       		iPerceptionCloseButton.click();
+       		driver.switchTo().defaultContent();
+       		Thread.sleep(5000);
+       		}
+       		catch (Exception e) {
+       		System.out.println("iPerception Pop Up is not Present");
+       		}
 		
 		waitforElement(TermsCheckRadioButton);
 		TermsCheckRadioButton.click();

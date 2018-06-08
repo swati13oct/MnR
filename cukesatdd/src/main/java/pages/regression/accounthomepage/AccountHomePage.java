@@ -215,6 +215,9 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='table-body margin-large']/div[2]//p")
 	private WebElement PayDate;
 	
+	@FindBy(id = "closeButton")
+	private WebElement iPerceptionCloseButton;
+	
 	private PageData myAccountHome;
 
 	public JSONObject accountHomeJson;
@@ -537,15 +540,17 @@ public class AccountHomePage extends UhcDriver {
 
 	public AccountHomePage navigateToAutoPaymentHistoryPage(){
 
-		/*
-		 * WebDriverWait wait = new WebDriverWait(driver, 30);
-		 * wait.until(ExpectedConditions.elementToBeClickable(paymentslink));
-		 */
-		if (validate(iPerceptionAutoPopUp)) {
-			iPerceptionAutoPopUp.click();
-		} else {
-			System.out.println("iPerception Pop Up not displayed");
-		}
+		try {   
+	    	  Thread.sleep(2000); 		
+	    		driver.switchTo().frame("IPerceptionsEmbed");
+	    		System.out.println("iPerception Pop Up is Present");
+	    		iPerceptionCloseButton.click();
+	    		driver.switchTo().defaultContent();
+	    		Thread.sleep(5000);
+	    		}
+	    		catch (Exception e) {
+	    		System.out.println("iPerception Pop Up is not Present");
+	    		}	
 
 		// Thread.sleep(16000);
 
@@ -573,11 +578,17 @@ public class AccountHomePage extends UhcDriver {
 		 * WebDriverWait wait = new WebDriverWait(driver, 30);
 		 * wait.until(ExpectedConditions.elementToBeClickable(paymentslink));
 		 */
-		if (validate(iPerceptionAutoPopUp)) {
-			iPerceptionAutoPopUp.click();
-		} else {
-			System.out.println("iPerception Pop Up not displayed");
-		}
+		try {   
+	    	  Thread.sleep(2000); 		
+	    		driver.switchTo().frame("IPerceptionsEmbed");
+	    		System.out.println("iPerception Pop Up is Present");
+	    		iPerceptionCloseButton.click();
+	    		driver.switchTo().defaultContent();
+	    		Thread.sleep(5000);
+	    		}
+	    		catch (Exception e) {
+	    		System.out.println("iPerception Pop Up is not Present");
+	    		}
 
 		// Thread.sleep(16000);
 
@@ -598,7 +609,19 @@ public class AccountHomePage extends UhcDriver {
 		}
 	}
 	
-	public AccountHomePage navigateToSHIPTab(){	
+	public AccountHomePage navigateToSHIPTab(){	        
+    	
+    	try {   
+    	  Thread.sleep(2000); 		
+    		driver.switchTo().frame("IPerceptionsEmbed");
+    		System.out.println("iPerception Pop Up is Present");
+    		iPerceptionCloseButton.click();
+    		driver.switchTo().defaultContent();
+    		Thread.sleep(5000);
+    		}
+    		catch (Exception e) {
+    		System.out.println("iPerception Pop Up is not Present");
+    		}
 
 		waitforElement(ShipTab);
 		System.out.println("Ship tab loaded");
@@ -620,14 +643,17 @@ public class AccountHomePage extends UhcDriver {
 	
 	public PaymentHistoryPage navigateToOneTimePaymentHistoryPage(){
 
-		
-		if (validate(iPerceptionAutoPopUp)) {
-			iPerceptionAutoPopUp.click();
-		} else {
-			System.out.println("iPerception Pop Up not displayed");
-		}
-
-		// Thread.sleep(16000);
+		try {   
+	    	  Thread.sleep(2000); 		
+	    		driver.switchTo().frame("IPerceptionsEmbed");
+	    		System.out.println("iPerception Pop Up is Present");
+	    		iPerceptionCloseButton.click();
+	    		driver.switchTo().defaultContent();
+	    		Thread.sleep(5000);
+	    		}
+	    		catch (Exception e) {
+	    		System.out.println("iPerception Pop Up is not Present");
+	    		}
 
 		waitforElement(PremiumPayment);
 		System.out.println("payment link is displayed on the header");
@@ -975,12 +1001,16 @@ public pages.regression.formsandresources.FormsAndResourcesPage navigatetoFormsn
 	 	    	/*WebDriverWait wait = new WebDriverWait(driver, 30);
 	 				wait.until(ExpectedConditions.elementToBeClickable(paymentslink));
 	 */
-	 	    	if(	validate(iPerceptionPopUp)) {
-	 	    		iPerceptionPopUp.click();
-	 	    	}
-	 	    	else  {
-	 	    		System.out.println("iPerception Pop Up not displayed");
-	 	    	}
+		try {
+			System.out.println("iPerception Pop Up is Present");
+			driver.switchTo().frame("IPerceptionsEmbed");
+			iPerceptionCloseButton.click();
+			//driver.switchTo().defaultContent();
+			Thread.sleep(5000);
+		     }
+		catch (Exception e) {
+			System.out.println("iPerception Pop Up is not Present");
+		   }
 	 	    	
 	 	        Thread.sleep(6000);
 

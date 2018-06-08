@@ -2,6 +2,8 @@ package pages.regression.payments;
 
 import java.util.Map;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -59,9 +61,9 @@ public class OneTimePaymentPage extends UhcDriver{
 	
 	@FindBy(xpath="//*[@class='overview parsys']//div[@class='row'][3]//div[@class='longform__row'][10]//div[@class='margin-medium']/a[2]")
 	private WebElement continueAutoPayButton;
-
-
-
+	
+	@FindBy(id = "closeButton")
+	private WebElement iPerceptionCloseButton;
 	
 	public OneTimePaymentPage(WebDriver driver) {
 		super(driver);
@@ -86,13 +88,17 @@ public class OneTimePaymentPage extends UhcDriver{
 			//TODO:: if first radio button is selected??
 		}*/
 		
-		try{
-			if (iPerceptionPopUp.isDisplayed()) {
-				iPerceptionPopUp.click();
-			}
-		}catch(Exception e)        {
-			System.out.println("iPerception Pop Up not displayed");
-		}
+		try {   
+	    	  Thread.sleep(2000); 		
+	    		driver.switchTo().frame("IPerceptionsEmbed");
+	    		System.out.println("iPerception Pop Up is Present");
+	    		iPerceptionCloseButton.click();
+	    		driver.switchTo().defaultContent();
+	    		Thread.sleep(5000);
+	    		}
+	    		catch (Exception e) {
+	    		System.out.println("iPerception Pop Up is not Present");
+	    		}
 
 		waitforElement(amountRadioButton);
 		validate(amountRadioButton);
@@ -150,15 +156,19 @@ public class OneTimePaymentPage extends UhcDriver{
 	    String middleName = accountAttributessMap.get("Account holder middle name");
 	    String lastName = accountAttributessMap.get("Account holder last name");   
 	    
-		try{
-			Thread.sleep(5000);
-			if (iPerceptionPopUp.isDisplayed()) {
-				iPerceptionPopUp.click();
-			}
-		}catch(Exception e)        {
-			System.out.println("iPerception Pop Up not displayed");
-		}
+	    try {   
+	    	  Thread.sleep(2000); 		
+	    		driver.switchTo().frame("IPerceptionsEmbed");
+	    		System.out.println("iPerception Pop Up is Present");
+	    		iPerceptionCloseButton.click();
+	    		driver.switchTo().defaultContent();
+	    		Thread.sleep(5000);
+	    		}
+	    		catch (Exception e) {
+	    		System.out.println("iPerception Pop Up is not Present");
+	    		}
 
+	    
 		waitforElement(routingNumberField);	    
 	    
 	    routingNumberField.click();
