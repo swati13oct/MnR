@@ -20,7 +20,7 @@ public class CancelOLEModal extends UhcDriver{
 	private WebElement CancellationModal;
 	
 	
-	@FindBy(xpath = "//*[@class='cta-button close-modal secondary']")
+	@FindBy(id = "backBtn")
 	private WebElement BackBtn;
 
 	public CancelOLEModal(WebDriver driver) {
