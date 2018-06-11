@@ -78,7 +78,7 @@ Examples:
  | planType| memberType| drug |
  | MAPD|IndividualDCEmember|lipitor|
  
-@Member_DCE
+@Member_DCE @regression_06_06_18
 Scenario Outline:I1.1 To Verify MR portal DCE flow covering step1 step 2 and step3 .
 Given I login with registered user
 | Plan Type   | <planType>   |
@@ -127,6 +127,7 @@ Then I should not see drug look up on home page
  | planType  | memberType|
  | Medsup    | Ship_AARP |
  | Group     | SSUP      |
+# | MA        |Federal_AARP |
  
  
 @Member_DCE_sso
