@@ -195,7 +195,7 @@ public class ReviewSubmitPage extends UhcDriver{
 			}else flag =false;
 		}
 		else{
-			String MedicareNumberDisplayed = MedicareNumberDisplay.getText();
+			String MedicareNumberDisplayed = MedicareNumberDisplay.getText().replaceAll("-", "");
 			if(MedicareNumberDisplayed.contains(MedicareNumber)){
 				flag = (!flag)?false:true;
 				System.out.println(MedicareNumber+" : "+MedicareNumberDisplayed+" : "+flag);
