@@ -12,6 +12,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import pages.redesign.HsidRegistrationPersonalInformationPage;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.login.ConfirmSecurityQuestion;
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
