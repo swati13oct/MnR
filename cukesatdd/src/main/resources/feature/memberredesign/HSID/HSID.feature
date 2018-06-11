@@ -113,7 +113,10 @@ Feature:To test HSID registration flow
     Examples:
       
    | planType|  memberType  | copayCategory | 
-   | MAPD    |  Individual  |  NON LIS      | 
+   | MAPD    |  Individual  |  NON LIS      |
+   | PCP     |  Individual  |  NON LIS      |
+   | Medica  |  Individual  |  NON LIS      |  
+   | MAGroup |  Individual  |  NON LIS      | 
    
    
 @validateStep1 @US968241
