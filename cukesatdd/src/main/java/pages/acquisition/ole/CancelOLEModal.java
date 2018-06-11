@@ -20,7 +20,7 @@ public class CancelOLEModal extends UhcDriver{
 	private WebElement CancellationModal;
 	
 	
-	@FindBy(xpath = "//*[@class='cta-button close-modal secondary']")
+	@FindBy(id = "backBtn")
 	private WebElement BackBtn;
 
 	public CancelOLEModal(WebDriver driver) {
@@ -51,6 +51,18 @@ public class CancelOLEModal extends UhcDriver{
 		else if(driver.getCurrentUrl().contains("medicare-information")){
 			System.out.println("OLE Medicare Information Page is Displayed");
 			return new MedicareInformationPage(driver);
+		}
+		else if(driver.getCurrentUrl().contains("preliminary-questions")){
+			System.out.println("OLE Preliminary Questions Page is Displayed");
+			return new PrelimineryQuestionsPage(driver);
+		}
+		else if(driver.getCurrentUrl().contains("personal-information")){
+			System.out.println("OLE Personal Information Page is Displayed");
+			return new PersonalInformationPage(driver);
+		}
+		else if(driver.getCurrentUrl().contains("special-election-period")){
+			System.out.println("OLE Special Election Period Page is Displayed");
+			return new SpecialElectionPeriodPage(driver);
 		}
 		return null;	
 	}

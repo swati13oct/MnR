@@ -271,27 +271,29 @@ Feature: C1.2To test Profile and Preferences page .
       | planType | 
       | MAPD     |
          
-@accountProfAndPref  @regressionAccountProf&Pref       
-Scenario Outline: To test end to end regression scenario for account profile page
+@accountProfAndPref  @regressionAccountProf&Pref  @regression_06_06_18   
+Scenario Outline: To test end to end regression scenario for account profile page aarp member
 Given login with following details logins in the member portal and validate elements
       | User Type   | <userType>    |  
 When the user navigates to Profile and Preferences page
-And I click the HEALTHSAFE ID PASSWORD link and validate username and password
+And I click the HEALTHSAFE ID PASSWORD link and validate username and password and verify edit password link
 Then I should see the breadcrumb  in the upper left side of the page
 And clicking the link should lead me back to the Account Settings page of the member site 
 And the user validates the Email section in UMS site  
+	|Member Type | <memberType> |
 And the user validates the Phone section
+	|Member Type | <memberType> |
 And the user Clicks on the the Edit phone Link and validates the elements
+	|Member Type | <memberType> |
 Then the user validates Communication Preferences section
-And the user clicks on edit preferences link
+And the user clicks on edit preferences link and validates the page
 And the user clicks on profile & preferences link to go back to Account settings page
-And the user validates permanent address section
-And the user validates the temporary address section
-And the user validates the fields and Buttons of temp address section
-And the user validates the Presence of edit button in Mailing Address section
-Then the user validates the fields under add mailing address button
+And the user validates the address section
+	|Member Type | <memberType> |
+
 Examples: 
-      | userType | 
-      | AARP    | 
-#      | UHC     |
+      | userType               | memberType |
+      | MAPD_AARPIndividual    |  AARP      |
+#	  | MAPD_UHCIndividual     | UHC        |
+
   

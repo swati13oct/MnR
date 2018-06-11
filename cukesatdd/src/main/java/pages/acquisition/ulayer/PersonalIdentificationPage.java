@@ -85,7 +85,7 @@ public class PersonalIdentificationPage extends UhcDriver{
 		
 		continueField.click();
 		//if(pageHeading.getText().equalsIgnoreCase("Check your email.")){
-		if(driver.getTitle().equalsIgnoreCase("AARP Medicare Plans |Username and Password Assistance")){
+		if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_AARP_MEDICARE_PLANS_USERNAME_PWD)){
 			return new LoginAssitanceMessagePage(driver);
 		}
 		return null;
@@ -94,7 +94,7 @@ public class PersonalIdentificationPage extends UhcDriver{
 	public LoginAssitanceMessagePage ContinueWithoutEnteringAnything()
 	{
 		continueField.click();
-		if(driver.getTitle().equalsIgnoreCase("AARP Medicare Plans |Username and Password Assistance")){
+		if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_AARP_MEDICARE_PLANS_USERNAME_PWD)){
 			return new LoginAssitanceMessagePage(driver);
 		}
 		return null;

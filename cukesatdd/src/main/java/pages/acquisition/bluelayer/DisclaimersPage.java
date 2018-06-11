@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.PageTitleConstants;
 
 /**
  * @author saduri
@@ -39,7 +40,7 @@ public class DisclaimersPage extends UhcDriver{
 		validate(agentAndBrokersLink);
 		agentAndBrokersLink.click();
 		validate(agentAndBrokersLink);
-		if(driver.getTitle().equalsIgnoreCase("Health Insurance Broker & Agent Resources | UnitedHealthcare®")){
+		if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_HEALTH_INSURANCE_BROKER_AGENT_RESOURCES)){
 			return new AgentsAndBrokersPage(driver);
 		}
 		return null;
@@ -53,7 +54,7 @@ public class DisclaimersPage extends UhcDriver{
 		if (driver
 				.getTitle()
 				.equalsIgnoreCase(
-						"Medicare Plans for Different Needs | UnitedHealthcare®")) {
+						PageTitleConstants.BLAYER_MEDICARE_PLANS_FOR_DIFFERENT_NEEDS)) {
 			return new AcquisitionHomePage(driver);
 		}
 		return null;

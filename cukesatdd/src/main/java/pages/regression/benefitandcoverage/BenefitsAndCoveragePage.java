@@ -4,7 +4,6 @@
 package pages.regression.benefitandcoverage;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -22,13 +21,13 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import pages.member.bluelayer.ProfilePreferencesPage;
+import pages.member.ulayer.ValueAddedServicepage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.member.bluelayer.ProfilePreferencesPage;
-import pages.member.ulayer.ValueAddedServicepage;
 
 /**
  * @Functionality : To check Benefits and Coverage page
@@ -40,7 +39,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	public PageData benefitsCoverage;
 
 	public JSONObject benefitsandcoverageJson;
-	
+
 	@FindBy(xpath=".//*[@id='pcpCard']/section/button")
 	 private WebElement Addaprovider;
 
@@ -69,6 +68,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	private WebElement Contactussection;
 
 	// private WebElement Contactussection;
+	
+	@FindBy(className = "atdd-needhelp-disclaimer-text")
+	private WebElement disclaimersLink;
+	
 
 	@FindBy(className = "atdd-needhelp-disclaimer-text")
 	private WebElement moreinformation;
@@ -127,7 +130,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-bnc-drugcostsheading")
 	private WebElement DrugCostHeader;
 
-    @FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[2]/div/div")
+	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[2]/div/div")
 	private WebElement DrugCostheaderandtext;
 
 	@FindBy(xpath = ".//*[@id='waystosave']/div/div/div[1]/div/h1")
@@ -150,7 +153,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(id = "mapdPageLis")
 	private WebElement RetailDrugCost_Table;
-
+	
 	@FindBy(id = "waystosave")
 	private WebElement waysToSave;
 
@@ -161,196 +164,325 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	private WebElement documents_label;
 
 	//@FindBy(className = "atdd-benefitsoverview-plantitle")
-	@FindBy(xpath=".//*[@class='h2 margin-none overview-heading atdd-benefitsoverview-plantitle ng-binding']")
-	private WebElement planName;
+		@FindBy(xpath=".//*[@class='h2 margin-none overview-heading atdd-benefitsoverview-plantitle ng-binding']")
+		private WebElement planName;
 
-	//@FindBy(className = "atdd-benefitsoverview-membernamelabel")
-	@FindBy(xpath=".//*[@class='bold atdd-benefitsoverview-membernamelabel']")
-	private WebElement nameLabel;
+		//@FindBy(className = "atdd-benefitsoverview-membernamelabel")
+		@FindBy(xpath=".//*[@class='bold atdd-benefitsoverview-membernamelabel']")
+		private WebElement nameLabel;
 
-	//@FindBy(className = "atdd-benefitsoverview-memberidlabel")
-	@FindBy(className = ".//*[@class='bold atdd-benefitsoverview-memberidlabel']")
-	private WebElement memberID;
+		//@FindBy(className = "atdd-benefitsoverview-memberidlabel")
+		@FindBy(className = ".//*[@class='bold atdd-benefitsoverview-memberidlabel']")
+		private WebElement memberID;
 
-	//@FindBy(className = "atdd-benefitsoverview-effectivedatelabel")
-	@FindBy(xpath=".//*[@class='bold atdd-benefitsoverview-effectivedatelabel']")
-	private WebElement effective_Date;
+		//@FindBy(className = "atdd-benefitsoverview-effectivedatelabel")
+		@FindBy(xpath=".//*[@class='bold atdd-benefitsoverview-effectivedatelabel']")
+		private WebElement effective_Date;
 
 
-	@FindBy(className = "atdd-benefitsoverview-groupidlabel")
-	private WebElement GroupId;
+		@FindBy(className = "atdd-benefitsoverview-groupidlabel")
+		private WebElement GroupId;
 
-	//@FindBy(className = "atdd-benefitsoverview-extrahelplevel-ma-label")
+		@FindBy(xpath=".//*[@class='bold atdd-benefitsoverview-extrahelplevel-ma-label ng-binding']")
+		private WebElement ExtraHelp;
+
+		@FindBy(xpath = ".//*[@id='benefitsMain']/div[2]/div/div[1]/div/div/div/div/div[1]/div/div/h1")
+		private WebElement BenefitsSummaryHeader;
+		
+		@FindBy(xpath = ".//*[@id='benefitsMain']/div[2]/div/div[1]/div/div/div/div/div[1]/div/h1")
+		private WebElement BenefitsSummaryHeadership;
+		
+
+		@FindBy(xpath = ".//*[@id='benefitsMain']/div[2]/div/div[1]/div/div/div/div/div[2]/div/div/div[1]/div/h3/b/span")
+		private WebElement Copayscoinsuranceheader;
+
+		@FindBy(className = "atdd-officevisits-title")
+		private WebElement OfficeVisits;
+
+		@FindBy(className = "atdd-emergencycare-title")
+		private WebElement EmergencyHeader;
+
+		@FindBy(className = "atdd-ambulance-title")
+		private WebElement AmbulanceHeader;
+
+		@FindBy(className = "atdd-hospitalvisits-title")
+		private WebElement HospitalVisits;
+
+		@FindBy(className = "atdd-outpatientsurgery-title")
+		private WebElement OutpatientSurgeryCenter;
+		
+		@FindBy(xpath = ".//*[@id='outPatientTileAtdd']/div/div")
+		private WebElement OutpatientSurgeryCenterValue;
+		
+		@FindBy(xpath = ".//*[@id='officeVisitTileAtdd']/div/section/div[1]/span")
+		private WebElement OfficVisitsValue;
+		
+
+		   @FindBy(id = "pcpCard")
+			private WebElement YourPrimaryCareProvider;
+
+			@FindBy(className = "changepcp-atdd")
+			private WebElement ChangeYourPcpButton;
+
+			@FindBy(id = "pcpCard2")
+			private WebElement SearchProvider;
+			
+			@FindBy(className = "start-search-atdd")
+			private WebElement StartSearch;
+
+			@FindBy(id = "benefitShipCard")
+			private WebElement ParticipatingHospitalStays1;
+
+		    @FindBy(id = "individualPcpHeaderText")
+			private WebElement PrimaryCareProviderHeaderInd;
+
+			@FindBy(className = "atdd-bncsummary-primarycareprvdrheader")
+			private WebElement PrimaryCareProviderHeaderHMO;
+
+			@FindBy(xpath = ".//*[@id='benefitsMain']/div[2]/div/div[1]/div/div/div/div/div[6]/div/div/div/p")
+			private WebElement PCPtext;
+
+			@FindBy(xpath = ".//*[@id='benefitsMain']/div[2]/div/div[1]/div/div/div/div/div[5]/div/div[1]/div/div/div/div/h3/span")
+			private WebElement OutofPocketMaximum;
+
+			@FindBy(xpath = ".//*[@id='benefitsMain']/div[2]/div/div[1]/div/div/div/div/div[5]/div/div[1]/div/div/div/div/p")
+			private WebElement OutofPocketMaximumText;
+
+			@FindBy(id = "oopInNetowrk")
+			private WebElement INNETWORK;
+
+			@FindBy(id = "oopOutNetowrk")
+			private WebElement OUTOFNETWORK;
+			
+			@FindBy(xpath = ".//*[@id='oopInNetowrk']/section/div/h1")
+			private WebElement INNETWORKTEXT;
+			
+			@FindBy(xpath = ".//*[@id='oopOutNetowrk']/section/div/h1")
+			private WebElement OUTOFNETWORKTEXT;
+
+			@FindBy(xpath = "//button[@id='dropdown-toggle--1']/span[contains(text(),'Profile')]")
+			private WebElement accountToggleDropdown;
+
+			@FindBy(xpath = "//a[@class='dropdown-option' and contains(text(),'Account Settings')]")
+			private WebElement accountSettingOption;
+
+			@FindBy(className = "atdd-gopaperless")
+			private WebElement gopaperlessbutton;
+
+			@FindBy(className = "atdd-bnc-anclry-disclaimer")
+			private WebElement Exclusivedisclaimer;
+
+			@FindBy(className = "atdd-exclsvehearing-arrowdwn")
+			private WebElement Disclaimertext;
+
+			@FindBy(className = "atdd-bnc-ancilry-learnmorbtn")
+			private WebElement LearnmoreButton;
+
+			@FindBy(className = "atdd-bnc-exclusivehrng-leavingpopuptxt")
+			private WebElement popup;
+
+			@FindBy(className = "atdd-anclrysection-leavingpopup-proceedbtn")
+			private WebElement ProceedButton;
+
+			@FindBy(className = "atdd-anclrysection-leavingpopup-cancelbtn")
+			private WebElement cancelbutton;
+
+			@FindBy(className = "atdd-exclusivehearing-levngpopup-topcancelbtn")
+			private WebElement cancelbutton1;
+
+			@FindBy(xpath = ".//*[@id='specialDisctServices']/div[1]/img")
+			private WebElement handimage;
+
+			@FindBy(id = "specialDisctServices")
+			private WebElement textdiscountservices;
+
+
+			@FindBy(className = "atdd-bnc-discounttitle")
+			private WebElement headerdiscountservices;
+
+			@FindBy(className = "atdd-bnc-discntlearnmorimg")
+			private WebElement learnmorebutton;
+
+			@FindBy(className = "atdd-need-help")
+			private WebElement NeedhelpShip;
+
+			@FindBy(className = "atdd-techsupport-block")
+			private WebElement TechnicalSupportShip;
+			
+			@FindBy(className = "atdd-tech-header")
+			private WebElement TechnicalSupport;
+			
+			@FindBy(className = "atdd-plan-header")
+			private WebElement PlanSupport;
+
+			@FindBy(className = "atdd-general-header")
+			private WebElement GeneralQuestionShip;
+
+			@FindBy(className = "atdd-claims-header")
+			private WebElement ClaimsSupportShip;
+
+			@FindBy(id = "ccs-header")
+			private WebElement catastrophicCoverageStage;
+			
+			@FindBy(xpath = "//div/span[@class='bold atdd-benefitsoverview-monthlypremium-label']")
+			private WebElement monthlypremiumlabel;
+			
+			@FindBy(how = How.XPATH , using = ".//*[@id='plan_benefit_documents']/section[2]/div/div[2]/div/div[1]/div[1]/div/div/div[7]/div/div/div[1]/div[1]/ul/li/a")
+			                                   
+			private WebElement Medicationlinkinpdfsec;
+			
+			@FindBy(how = How.XPATH , using = ".//*[@id='plan_benefit_documents']/section[2]/div/div[2]/div/div[1]/div[1]/div/div/div[7]/div/div/div[2]/div[1]/ul/li/a")
+			private WebElement Viewotherdocsinpdf;
+			
+			@FindBy(how = How.XPATH , using = ".//*[@id='plan_benefit_documents']/section[2]/div/div[2]/div/div[1]/div[1]/div/div/div[6]/div/div/div[1]/div[1]/ul/li/a")
+		    
+			private WebElement Medicationlinkinpdfsecpdp;
+			
+			@FindBy(how = How.XPATH , using = ".//*[@id='plan_benefit_documents']/section[2]/div/div[2]/div/div[1]/div[1]/div/div/div[6]/div/div/div[2]/div[1]/ul/li/a")
+			private WebElement Viewotherdocsinpdfpdp;
+			
+
+	@FindBy(css = "img.img-responsive")
+	private WebElement logoImage;
+
+	@FindBy(xpath = ".//*[@id='drug-benefits']/div[5]/div[10]/div/div[1]/div/div")
+	private WebElement hartfortdrugtable;
+
+	@FindBy(className = "atdd-bnc-CTgrouptable")
+	private WebElement GreenwichTable;
+
+	@FindBy(className = "atdd-bnc-pharmacydropdwn")
+	private WebElement pharmacyDropdown;
+
+	@FindBy(id = "Txers-drug-costs")
+	private WebElement pharmacyDropdownTexas;
+	@FindBy(className = "atdd-bnc-drugcostsheading")
+	private WebElement drugCostsHeader;
+
+	@FindBy(className = "atdd-bnc-txers-retailcostsharing-table")
+	private WebElement retailTable;
+
 	
-	@FindBy(xpath=".//*[@class='bold atdd-benefitsoverview-extrahelplevel-ma-label ng-binding']")
-	private WebElement ExtraHelp;
 
-	@FindBy(xpath = ".//*[@id='benefitsMain']/div[2]/div/div[1]/div/div/div/div/div[1]/div/div/h1")
-	private WebElement BenefitsSummaryHeader;
+	@FindBy(xpath = "//*[@id='officeVisitTileAtdd']/div/section/div[1]/span")
+	private WebElement pcpValue;
+
+	@FindBy(xpath = "//*[@id='officeVisitTileAtdd']/div/section/span")
+	private WebElement specialistValue;
+
+	@FindBy(id = "outPatientTileAtdd")
+	private WebElement outpatientsurgeryVisits;
 	
-	@FindBy(xpath = ".//*[@id='benefitsMain']/div[2]/div/div[1]/div/div/div/div/div[1]/div/h1")
-	private WebElement BenefitsSummaryHeadership;
+	@FindBy(id = "hospitalVisitTileAtdd")
+	private WebElement hospitalVisitsSection;
+	
+	@FindBy(id = "outPatientTileAtdd")
+	private WebElement OutpatientSurgeryCenterSection;
+
+	@FindBy(id = "outOfPocketTile")
+	private WebElement outOfPocketSection;
+
+	@FindBy(className = "atdd-innetwrk-title")
+	private WebElement inNetworkSeection;
+
+	@FindBy(className = "atdd-outnetwrktitle")
+	private WebElement outOfNetworkSection;
+	
+	@FindBy(className = "mail-table")
+	private WebElement MailOrderTable;
 	
 
-	@FindBy(xpath = ".//*[@id='benefitsMain']/div[2]/div/div[1]/div/div/div/div/div[2]/div/div/div[1]/div/h3/b/span")
-	private WebElement Copayscoinsuranceheader;
-
-	@FindBy(className = "atdd-officevisits-title")
-	private WebElement OfficeVisits;
-
-	@FindBy(className = "atdd-emergencycare-title")
-	private WebElement EmergencyHeader;
-
-	@FindBy(className = "atdd-ambulance-title")
-	private WebElement AmbulanceHeader;
-
-	@FindBy(className = "atdd-hospitalvisits-title")
-	private WebElement HospitalVisits;
-
-	@FindBy(className = "atdd-outpatientsurgery-title")
-	private WebElement OutpatientSurgeryCenter;
 	
-	@FindBy(xpath = ".//*[@id='outPatientTileAtdd']/div/div")
-	private WebElement OutpatientSurgeryCenterValue;
+	@FindBy(xpath = ".//[@class='table-subheader']/td[1]")
+	private List<WebElement> ICStage31to60MailOrder;
+
+	@FindBy(xpath = ".//[@class='table-subheader']/td[2]")
+	private List<WebElement> ICStage61to90MailOrder;
 	
-	@FindBy(xpath = ".//*[@id='officeVisitTileAtdd']/div/section/div[1]/span")
-	private WebElement OfficVisitsValue;
+	@FindBy(xpath = ".//[@id='retailCostAnnualPresDeduct']/following-sibling::td[1]")
+	private WebElement ICTier1Value;
+
+	@FindBy(xpath = ".//[@class='table-subheader']/following-sibling::tr[1]/td[2]")
+	private WebElement ICTier1ValueMailOrder;
+
 	
+	@FindBy(xpath = ".//*[@class='table-subheader']/td[1]")
+	private List<WebElement> ICStage30dayNonMain;
+
+	@FindBy(xpath = ".//*[@class='table-subheader']/td[2]")
+	private List<WebElement> ICStage30dayMain;
+
+	@FindBy(xpath = ".//*[@class='table-subheader']/td[3]")
+	private List<WebElement> ICStage31to60;
+
+	@FindBy(xpath = ".//*[@class='table-subheader']/td[4]")
+	private List<WebElement> ICStage61to90;
+
 	
-    @FindBy(id = "pcpCard")
-	private WebElement YourPrimaryCareProvider;
+	@FindBy(id = "waystosave")
+	private WebElement waysToSaveSection;
 
-	@FindBy(className = "changepcp-atdd")
-	private WebElement ChangeYourPcpButton;
-
-	@FindBy(id = "pcpCard2")
-	private WebElement SearchProvider;
+	@FindBy(xpath = "//img[@alt='drugslogo']")
+	private WebElement lowTierdrugs;
 	
-	@FindBy(className = "start-search-atdd")
-	private WebElement StartSearch;
-
-	@FindBy(id = "benefitShipCard")
-	private WebElement ParticipatingHospitalStays1;
-
-    @FindBy(id = "individualPcpHeaderText")
-	private WebElement PrimaryCareProviderHeaderInd;
-
-	@FindBy(className = "atdd-bncsummary-primarycareprvdrheader")
-	private WebElement PrimaryCareProviderHeaderHMO;
-
-	@FindBy(xpath = ".//*[@id='benefitsMain']/div[2]/div/div[1]/div/div/div/div/div[6]/div/div/div/p")
-	private WebElement PCPtext;
-
-	@FindBy(xpath = ".//*[@id='benefitsMain']/div[2]/div/div[1]/div/div/div/div/div[5]/div/div[1]/div/div/div/div/h3/span")
-	private WebElement OutofPocketMaximum;
-
-	@FindBy(xpath = ".//*[@id='benefitsMain']/div[2]/div/div[1]/div/div/div/div/div[5]/div/div[1]/div/div/div/div/p")
-	private WebElement OutofPocketMaximumText;
-
-	@FindBy(id = "oopInNetowrk")
-	private WebElement INNETWORK;
-
-	@FindBy(id = "oopOutNetowrk")
-	private WebElement OUTOFNETWORK;
+	@FindBy(className = "atdd-bnc-rx187grptable")
+	private WebElement PeehipTable;
 	
-	@FindBy(xpath = ".//*[@id='oopInNetowrk']/section/div/h1")
-	private WebElement INNETWORKTEXT;
+	@FindBy(id = "rxcustomgroup_ads-header")
+	private List<WebElement> annualDeductibleColumn ;
 	
-	@FindBy(xpath = ".//*[@id='oopOutNetowrk']/section/div/h1")
-	private WebElement OUTOFNETWORKTEXT;
+	@FindBy(id = "rxcustomgroup_ics-header")
+	private List<WebElement> initialCoverageColumn ;
 	
-    @FindBy(xpath = "//button[@id='dropdown-toggle--1']/span[contains(text(),'Profile')]")
-	private WebElement accountToggleDropdown;
-
-	@FindBy(xpath = "//a[@class='dropdown-option' and contains(text(),'Account Settings')]")
-	private WebElement accountSettingOption;
-
-	@FindBy(className = "atdd-gopaperless")
-	private WebElement gopaperlessbutton;
-
-	@FindBy(className = "atdd-bnc-anclry-disclaimer")
-	private WebElement Exclusivedisclaimer;
-
-	@FindBy(className = "atdd-exclsvehearing-arrowdwn")
-	private WebElement Disclaimertext;
-
-	@FindBy(className = "atdd-bnc-ancilry-learnmorbtn")
-	private WebElement LearnmoreButton;
-
-	@FindBy(className = "atdd-bnc-exclusivehrng-leavingpopuptxt")
-	private WebElement popup;
-
-	@FindBy(className = "atdd-anclrysection-leavingpopup-proceedbtn")
-	private WebElement ProceedButton;
-
-	@FindBy(className = "atdd-anclrysection-leavingpopup-cancelbtn")
-	private WebElement cancelbutton;
-
-	@FindBy(className = "atdd-exclusivehearing-levngpopup-topcancelbtn")
-	private WebElement cancelbutton1;
-
-	@FindBy(xpath = ".//*[@id='specialDisctServices']/div[1]/img")
-	private WebElement handimage;
-
-	@FindBy(id = "specialDisctServices")
-	private WebElement textdiscountservices;
-
-
-	@FindBy(className = "atdd-bnc-discounttitle")
-	private WebElement headerdiscountservices;
-
-	@FindBy(className = "atdd-bnc-discntlearnmorimg")
-	private WebElement learnmorebutton;
-
-	@FindBy(className = "atdd-need-help")
-	private WebElement NeedhelpShip;
-
-	@FindBy(className = "atdd-techsupport-block")
-	private WebElement TechnicalSupportShip;
+	@FindBy(id = "rxcustomgroup_cgp-header")
+	private List<WebElement>  coverageGaStageColumn;
+	
+	@FindBy(id = "rxcustomgroup_ccs-header")
+	private List<WebElement> catastrophicCoverageStageColumn;
+	
+	@FindBy(xpath = "//table[@class='table-white atdd-bnc-rx187grptable']/tbody/tr[2]/td[3]/div[1]")
+	private WebElement PeehipTier1ValueIC ;
+	@FindBy(xpath = "//table[@class='table-white atdd-bnc-rx187grptable']/tbody/tr[2]/td[4]/div[1]")
+	private WebElement  PeehipTier1ValueCG;
+	@FindBy(xpath = "//table[@class='table-white atdd-bnc-rx187grptable']/tbody/tr[2]/td[5]/div[1]")
+	private  List<WebElement> PeehipTier1ValueCC;
+	
+	@FindBy(xpath = "//img[@alt=' walgreenpharmacylogo']")
+	private WebElement wallGreensWidget;
+	@FindBy(xpath = "//img[@alt='mailservicelogo']/parent::div/following-sibling::div/p")
+	private WebElement mailOrderWidget;
+	
+	@FindBy(id = "waystosave")
+	private List<WebElement> waysToSaveSectionvalidate;
+	
+	@FindBy(className = "atdd-benefitssummary-plnbnftdcmnt-title")
+	private WebElement planDocumentsTitle;
+	
+	@FindBy(id = "lang-select-2")
+	private WebElement planDocumentsLangDropdown;
+	@FindBy(className = "document-list-new")
+	private WebElement otherDocuments;
+	
+	@FindBy(className = "benefitsSummary")
+	private WebElement benefitsSummarySection;
+	
+	@FindBy(id = "needhelpsectioncontactus")
+	private WebElement needHelpSection;
 	
 	@FindBy(className = "atdd-tech-header")
-	private WebElement TechnicalSupport;
+	private WebElement techSupportHeader;
 	
 	@FindBy(className = "atdd-plan-header")
-	private WebElement PlanSupport;
+	private WebElement planSupportHeader;
+	
 
-	@FindBy(className = "atdd-general-header")
-	private WebElement GeneralQuestionShip;
-
-	@FindBy(className = "atdd-claims-header")
-	private WebElement ClaimsSupportShip;
-
-	@FindBy(id = "ccs-header")
-	private WebElement catastrophicCoverageStage;
-	
-	@FindBy(xpath = "//div/span[@class='bold atdd-benefitsoverview-monthlypremium-label']")
-	private WebElement monthlypremiumlabel;
-	
-	@FindBy(how = How.XPATH , using = ".//*[@id='plan_benefit_documents']/section[2]/div/div[2]/div/div[1]/div[1]/div/div/div[7]/div/div/div[1]/div[1]/ul/li/a")
-	                                   
-	private WebElement Medicationlinkinpdfsec;
-	
-	@FindBy(how = How.XPATH , using = ".//*[@id='plan_benefit_documents']/section[2]/div/div[2]/div/div[1]/div[1]/div/div/div[7]/div/div/div[2]/div[1]/ul/li/a")
-	private WebElement Viewotherdocsinpdf;
-	
-	@FindBy(how = How.XPATH , using = ".//*[@id='plan_benefit_documents']/section[2]/div/div[2]/div/div[1]/div[1]/div/div/div[6]/div/div/div[1]/div[1]/ul/li/a")
-    
-	private WebElement Medicationlinkinpdfsecpdp;
-	
-	@FindBy(how = How.XPATH , using = ".//*[@id='plan_benefit_documents']/section[2]/div/div[2]/div/div[1]/div[1]/div/div/div[6]/div/div/div[2]/div[1]/ul/li/a")
-	private WebElement Viewotherdocsinpdfpdp;
-	
-	private static String PAGE_URL = MRConstants.STAGE_DASHBOARD_NEW_DOMAIN_URL;
-	
-	@FindBy(xpath = "//div[@id='white-label']/a/img")
-	private WebElement logoImage;
 	
 	@FindBy(xpath = "//div[@id='white-label']/a/img[2]")
 	private WebElement cologoImage;
 	
-	
-	
-	
+	private static String PAGE_URL = MRConstants.STAGE_DASHBOARD_NEW_DOMAIN_URL;
+
+
 	public static final String learnmorestagetext_xpath = ".//*[@id='collapseStages']";
 
 	public static final String learnmorelinktiertext_xpath = ".//*[@id='collapseTiers']";
@@ -1545,7 +1677,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
         {
         	
         	 {
-             	System.out.println("NO PDFs in chinese yet.if PDFs come then above same code can be used");
+             	System.out.println("NO PDFs in spanish yet.if PDFs come then above same code can be used");
              	checkflag = true;
              }
     
@@ -1736,6 +1868,249 @@ public boolean vasnotdisplayed() {
 		
 		
 	}
-	
 }
+
+	public void ancillarynotdisplayed() {
+		if (Headersection.isDisplayed()) {
+			Assert.assertFalse("The element" + Headersection.getText() + "is not display", false);
+			System.out.println("The element " + Headersection.getText() + "is not display");
+		} else {
+			Assert.assertTrue(true);
+		}
+	}
+
+	public void validatehartfortprescriptiondrugtable() {
+
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto generated catch block
+			e.printStackTrace();
+
+		}
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,-500)", "");
+		validateNew(hartfortdrugtable);
+	}
+
+	public void validateTownOfGreenwichdrugtable() {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto generated catch block
+			e.printStackTrace();
+		}
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,-500)", "");
+		validateNew(GreenwichTable);
+	}
+
+	public void validatedrugCostSectionTexas() {
+		// TODO Auto-generated method stub
+		/*
+		 * try { Thread.sleep(10000); } catch (InterruptedException e) { // TODO
+		 * Auto-generated catch block e.printStackTrace(); }
+		 */
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,-500)", "");
+		validateNew(pharmacyDropdownTexas);
+
+	}
+
+	public void validateRetailCostSharingdrugtable() {
+		// TODO Auto-generated method stub
+		Select drpPharmacy = new Select(pharmacyDropdownTexas);
+		drpPharmacy.selectByValue("Retail Cost Sharing");
+		System.out.println("Retail Cost Sharing dropdown value selected");
+		validateNew(retailTable);
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,-150)", "");
+		if (ICStage30dayNonMain.size() > 1 && ICStage30dayMain.size() > 1 && ICStage31to60.size() > 1
+				&& ICStage61to90.size() > 1) {
+			Assert.assertTrue("The columns are correct in texas Ers table", true);
+
+		} else {
+			Assert.assertFalse("The columns are incorrect in texas Ers table", true);
+		}
+
+		if (ICTier1Value.getText().trim().length() > 1) {
+			Assert.assertTrue("Value in the IC stage tier 1 cell exists", true);
+		} else {
+			Assert.assertFalse("No value in the IC stage tier 1 cell", true);
+
+		}
+
+	}
+
+	public void validateMailOrderCostSharing_Drugtable() {
+		// TODO Auto-generated method stub
+
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,+200)", "");
+		Select drpPharmacy = new Select(pharmacyDropdownTexas);
+		drpPharmacy.selectByValue("Mail Order Cost Sharing");
+
+		waitforElementNew(MailOrderTable);
+		/*
+		 * WebDriverWait wait = new WebDriverWait(driver, 60);
+		 * wait.until(ExpectedConditions.visibilityOf(MailOrderTable));
+		 */
+
+		if (ICStage31to60MailOrder.size() > 1 || ICStage61to90MailOrder.size() > 1) {
+			Assert.assertTrue("The columns are correct in texas Ers  mail ordertable", true);
+		} else {
+			Assert.assertFalse("The columns are incorrect in texas Ers  mail ordertable", true);
+		}
+
+		if (ICTier1ValueMailOrder.getText().trim().length() > 1) {
+			Assert.assertTrue("value in the IC stage tier 1 cell exists", true);
+		} else {
+			Assert.assertFalse("No value in the IC stage tier 1 cell", true);
+		}
+
+	}
+
+	public void validateOfficeVisitssection() {
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,-100)", "");
+
+		validateNew(OfficeVisits);
+		validateNew(pcpValue);
+		validateNew(specialistValue);
+
+		String input = pcpValue.getText();
+		Pattern pattern = Pattern.compile("^\\$\\d{2,3}\\.\\d{2}$");
+		if (pattern.matcher(input).matches()) {
+			Assert.assertTrue("PCP values exists", true);
+		} else {
+			throw new IllegalArgumentException("Invalid String");
+		}
+
+		String input1 = specialistValue.getText();
+		if (pattern.matcher(input1).matches()) {
+			Assert.assertTrue("Specialist values exists", true);
+		} else {
+			throw new IllegalArgumentException("Invalid String");
+		}
+
+	}
+
+	public void validateoutpatientsurgerycenterVisitssection() {
+		// TODO Auto-generated method stub
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,-50)", "");
+
+		validateNew(outpatientsurgeryVisits);
+
+	}
+
+	public void validateWaysToSaveSection(String memberType) {
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,800)", "");
+
+		// TODO Auto-generated method stub
+		if (memberType.equalsIgnoreCase("Wallgreens")) {
+			validateNew(waysToSaveSection);
+			validateNew(lowTierdrugs);
+			validateNew(wallGreensWidget);
+		} else if (memberType.equalsIgnoreCase("MailOrderPharamacy")) {
+			validateNew(waysToSaveSection);
+			validateNew(lowTierdrugs);
+			validateNew(mailOrderWidget);
+			validateNew(wallGreensWidget);
+		} else if (memberType.equalsIgnoreCase("Group")) {
+			if (waysToSaveSectionvalidate.size() < 1) {
+				Assert.assertTrue("ways to save section doesnt exist for a non PDP memeber", true);
+			} else {
+				Assert.assertFalse("ways to save section exists for a non PDP memeber", true);
+			}
+
+		} else {
+			System.out.println("Please provide a valid member .Refer Notes in feature file");
+		}
+
+	}
+
+	public void ValidatePeehipsection() {
+
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,700)", "");
+		validateNew(PeehipTable);
+
+		System.out.println(annualDeductibleColumn.size() + initialCoverageColumn.size() + coverageGaStageColumn.size()
+				+ catastrophicCoverageStageColumn.size());
+		if (annualDeductibleColumn.size() > 1 && initialCoverageColumn.size() > 1 && coverageGaStageColumn.size() > 1
+				&& catastrophicCoverageStageColumn.size() > 1) {
+			Assert.assertTrue("The columns are correct in Peehip table", true);
+
+		} else {
+			Assert.assertFalse("The columns are incorrect in Peehip table", true);
+		}
+
+		validateNew(PeehipTier1ValueIC);
+		String input = PeehipTier1ValueIC.getText();
+		Pattern pattern = Pattern.compile("^\\$\\d{2,3}\\.\\d{2}$");
+		if (pattern.matcher(input).matches()) {
+			Assert.assertTrue("value  in IC column exists", true);
+		} else {
+			throw new IllegalArgumentException("Invalid String");
+		}
+		validateNew(PeehipTier1ValueCG);
+
+		input = PeehipTier1ValueCG.getText();
+		if (pattern.matcher(input).matches()) {
+			Assert.assertTrue("Value in Coverage gap stage column exists", true);
+		} else {
+			throw new IllegalArgumentException("Invalid String");
+		}
+
+		if (PeehipTier1ValueCC.size() > 1) {
+			Assert.assertTrue("Catastrophic Coverage stage has some value", true);
+
+		} else {
+			Assert.assertFalse("Catastrophic Coverage stage doesn't have any value", true);
+		}
+
+	}
+
+	public void ValidateMAsection() {
+		// plan Overview section
+		validateNew(planName);
+		validateNew(nameLabel);
+		validateNew(memberID);
+		validateNew(effective_Date);
+
+		// benefits summary section
+		validateNew(benefitsSummarySection);
+		validateNew(OfficeVisits);
+		validateNew(hospitalVisitsSection);
+		validateNew(OutpatientSurgeryCenterSection);
+
+		// out of pocket maximum section
+
+		validateNew(outOfPocketSection);
+		validateNew(inNetworkSeection);
+		validateNew(outOfNetworkSection);
+		validate(INNETWORK);
+		validate(OUTOFNETWORK);
+
+		// Primary care provider section
+
+		validateNew(PrimaryCareProviderHeaderInd);
+		validateNew(YourPrimaryCareProvider);
+		validateNew(ChangeYourPcpButton);
+		validateNew(StartSearch);
+
+		// plan documents section
+		validateNew(planDocumentsTitle);
+		validateNew(planDocumentsLangDropdown);
+		validateNew(view_label);
+		validateNew(otherDocuments);
+
+		// Need help section
+		validateNew(needHelpSection);
+		validateNew(NeedHelpHeader);
+		validateNew(contactUslink);
+		validateNew(disclaimersLink);
+	}
 }

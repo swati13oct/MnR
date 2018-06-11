@@ -20,7 +20,7 @@ public class ExplanationOfBenefitsPage extends UhcDriver {
 
 	
 
-	@FindBy(xpath = ".//span[contains(text(),'Last 18 Months')]")
+			@FindBy(xpath = ".//span[contains(text(),'Last 18 Months')]")
 	private WebElement EOBTypeResult;
 
 	@FindBy(id = "date-range-1")
@@ -148,4 +148,6 @@ public class ExplanationOfBenefitsPage extends UhcDriver {
 
 		}
 	}
-}
+}
+
+

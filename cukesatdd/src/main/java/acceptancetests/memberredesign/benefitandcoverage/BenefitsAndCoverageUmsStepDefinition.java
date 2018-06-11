@@ -1177,4 +1177,108 @@ public class BenefitsAndCoverageUmsStepDefinition {
  	
 	
 	
+	/** 
+	 * @toDo : Validates the Drug costs table  for  a City Of Hartford group member
+	 * @author mrani101
+	 */
+	@And("the user validates City of Hartford prescription Drug Benefits table")
+	public void user_validate_hartfort_prescription_drugtable() {
+				
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.validatehartfortprescriptiondrugtable();
+						
+	}
+	
+	/** 
+	 * @toDo : Validates the Drug costs table  for  a  Town Of Greenwich group member
+	 * @author mrani101
+	 */
+	@And("the user validates Town Of Greenwich table")
+	public void user_validate_TownOfGreenwich_drugtable() {
+				
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.validateTownOfGreenwichdrugtable();
+						
+	}
+	
+	
+	@And("the user validates the Drug costs Section")
+	public void user_validate_drugCostSectionTexas() {
+				
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.validatedrugCostSectionTexas();
+						
+	}
+	@And("the user verifies the Retail Cost sharing table")
+	public void user_validate_RetailCostSharing_Drugtable() {
+				
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.validateRetailCostSharingdrugtable();
+						
+	}
+	@And("the user verifies the Mail Order Cost sharing table")
+	public void user_validate_MailOrderCostSharing_Drugtable() {
+				
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.validateMailOrderCostSharing_Drugtable();
+						
+	}
+	
+	@And("the user validates the Office Visits section")
+	public void user_validate_OfficeVisitssection() {
+				
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.validateOfficeVisitssection();
+		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+		
+						
+	}
+	@And("the user validates the Outpatient Surgery Center Visits section")
+	public void user_validate_outpatientSurgeryVisitssection() {
+				
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.validateoutpatientsurgerycenterVisitssection();
+						
+	}
+	@And("the user validates the ways to save section")
+	public void userValidateWaysToSaveSection() {
+				
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		String memberType = (String) getLoginScenario().getBean(LoginCommonConstants.MEMBERTYPE);
+		planBenefitsCoverage.validateWaysToSaveSection(memberType);
+						
+	}
+	
+	@And("the user validates the Benefits for Peehip member")
+	public void userValidatesPeehipsection() {
+				
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.ValidatePeehipsection();
+						
+	}
+
+	@And("the user validates the Benefits for MA member")
+	public void userValidatesMAsection() {
+				
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.ValidateMAsection();
+						
+	}
+	
+	
+	
+
+	
+	
+	
 }

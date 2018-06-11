@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.claims.ClaimDetailsPage;
 import pages.regression.claims.ClaimSummarypage;
+import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -328,21 +329,19 @@ public class ClaimsMemberRedesignStepDefinition {
 	@When("^I navigate to the Claim Details page in AARP site$")	
 	public void i_navigate_to_member_redesign_claim_details_page(){
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		ClaimDetailsPage newClaimDetailsPage = accountHomePage.navigateToClaimDetailsPage();
-		//getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
-		if(newClaimDetailsPage != null)
-			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
+		ClaimDetailsPage claimDetailsPage =accountHomePage.navigateToClaimDetailsPage();
+		//aimDetailsPage claimsdetailspage =  (ClaimDetailsPage) getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, claimsdetailspage);
+	 getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, claimDetailsPage);
+
 	}
 	/**
 	 * @toDo : validate the Learn more section in claims details page
 	 */
 	@Then("^I validate the Learn more section in claims details page in AARP site$")
 	public void validate_Learn_More_details_AARP(){
-		/*ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
-		claimDetailspage.validateLearnMoreInDetailsPage();		*/
 		
-		ClaimDetailsPage newclaimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
-		newclaimDetailspage.validateLearnMoreInDetailsPage();	
+		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
+		claimDetailspage.validateLearnMoreInDetailsPage();		
 	}
 	/**
 	 * @toDo : validate the header in claims details page.
@@ -545,12 +544,21 @@ public class ClaimsMemberRedesignStepDefinition {
 		claimSummarypage.validatefromDateLaterThanToDateError();
 
 	}
-	
-	@When("^I validate the error message for a PHIP Member on the screen$")
-	public void i_validate_the_error_message_for_a_PHIP_Member_on_the_screen() throws Throwable {
-		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		 claimSummarypage.ValidatePHIPErrorMessage();
-	   // throw new PendingException();
-	 
+	@Then("^I can validate the claims summary header$")
+	public void i_can_validate_the_claims_summary_header()  {
+		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario()
+				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+		newClaimsSummaryPage.validateClaimsFromDropDowns1();
+		newClaimsSummaryPage.validateClaimsPlantype();
+		
+		newClaimsSummaryPage.validateClaimsHeaderCopyText();
+	    
+	}
+
+	@Then("^I can see the pagination if more than 10 clams records is displayed$")
+	public void i_can_see_the_pagination()  {
+		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario()
+				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+		newClaimsSummaryPage.validatePagination();	    
 	}
 }

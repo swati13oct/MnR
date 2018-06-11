@@ -29,6 +29,9 @@ public class MemberAuthLoginPage extends UhcDriver {
 	@FindBy(xpath =".//*[@id='memAuthLoginBox']//span[@class='redError']")
 	private WebElement unpswdIncorrecterrormsg;
 	
+	@FindBy(id="userName")
+	private WebElement memberUsername;
+	
 	private static String MEMBER_AUTH = MRConstants.MEMBER_AUTH;
 	
 	public MemberAuthLoginPage(WebDriver driver) {
