@@ -19,7 +19,7 @@ import atdd.framework.UhcDriver;
  */
 public class ssoTestHarnessPage extends UhcDriver {
 
-	@FindBy(id="ssosource")
+	@FindBy(name="ssosource")
 	private WebElement ssoPartnerdropdown;
 	
 	@FindBy(name="FIRSTNAME")
@@ -54,7 +54,7 @@ public class ssoTestHarnessPage extends UhcDriver {
 
 	/*This method will select the value of SSO Partner from the dropdown , the expected value is obtained from feature file */
 	public void selectBenefitFocusFromSSOPartnerDropdown(String ssopartner) {
-		driver.switchTo().frame("cq-cf-frame");
+		//driver.switchTo().frame("cq-cf-frame");
 		
 		 Select dropdown= new Select(ssoPartnerdropdown);
 	    dropdown.selectByVisibleText(ssopartner);

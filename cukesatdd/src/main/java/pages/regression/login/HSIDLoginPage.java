@@ -136,7 +136,7 @@ MRScenario loginScenario;
 		signInButton.click();
 		
 		try {
-			Thread.sleep(12000);
+			Thread.sleep(15000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -148,9 +148,17 @@ MRScenario loginScenario;
 			
 			ConfirmSecurityQuestion cs = new ConfirmSecurityQuestion(driver);
 		    try {
+		    	Thread.sleep(5000);
 				cs.enterValidSecurityAnswer();
 				System.out.println(driver.getCurrentUrl());
 			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		    
+		    try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -161,7 +169,7 @@ MRScenario loginScenario;
 		else if(currentUrl().contains("testharness.html") || currentUrl().contains("/dashboard"))
 		{
 			
-				
+			    
 				System.out.println(driver.getCurrentUrl());
 			    return new AccountHomePage(driver);
 		}
