@@ -87,7 +87,7 @@ Feature:1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
       | Rider Flag | <riderflag> |
     Then the user validates required fields for Authorization Page
     Then the user navigates to Review and Submit Page
-    #Then the user validates the Plan and Member details on Review and Submit Page
+    Then the user validates the Plan and Member details on Review and Submit Page
     
     Examples: 
        | zipcode | county             | plantype | planName                                             | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                      | optiondata        | pdpFlag | longTermFlag | riderflag |
