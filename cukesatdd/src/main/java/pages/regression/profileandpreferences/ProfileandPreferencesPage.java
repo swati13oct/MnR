@@ -16,6 +16,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.mysql.jdbc.Driver;
+
 import pages.member.bluelayer.GoGreenPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
@@ -460,6 +462,21 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	
 	@FindBy(id="contact")
 	private WebElement contactInfoBox;
+	
+	@FindBy (xpath = "//iframe[@id='contact']")
+	private WebElement EPMPIframe;
+	
+	@FindBy (id = "epmp-contact")
+	private WebElement EPMPContactInfoHeader;
+	
+	@FindBy (id = "emailview")
+	private WebElement EPMPEmailAddress;
+	
+	@FindBy (id = "phoneview")
+   private WebElement EPMPPhoneNumbersSection;
+	
+	@FindBy (id = "addressview")
+	private WebElement EPMPaddressview;
 
 	public PageData ProfileandPreferences;
 
@@ -467,7 +484,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() throws InterruptedException {
-		// TODO Auto-generated method stub
+		validateFeedbackPopup();
 
 	}
 	
@@ -1478,6 +1495,45 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			Assert.assertTrue(true);
 		else
 			Assert.fail("Not able to validate mailing address error message");
+		
+	}
+
+	public void validateEpmpIframe() {
+		
+		if (driver.getCurrentUrl().contains("member/account/profile"))
+		{
+			System.out.println("Account profile page is loaded ==========>> "+driver.getCurrentUrl());
+			try {
+				Thread.sleep(10000);
+				validate(EPMPIframe);
+				validate(EPMPaddressview);
+				validate(EPMPContactInfoHeader);
+				validate(EPMPEmailAddress);
+				System.out.println("EPMP iframe Successfully loaded");
+				
+			} catch (InterruptedException e) {
+				System.out.println("EPMP iframe is failed to load");
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else
+		{
+			System.out.println("Account profile page is not loaded >>>>>>> "+ driver.getCurrentUrl());
+			Assert.fail();
+		}
+		
+		
+		
+		
+	}
+
+	public void validatecommunicationpreferncessection() {
+		if(validate(communicationpreferncessection))
+			Assert.assertTrue(true);
+		else
+			Assert.fail("Not able to validate the communicationpreferncessection ");
+		   		
 		
 	}
 }

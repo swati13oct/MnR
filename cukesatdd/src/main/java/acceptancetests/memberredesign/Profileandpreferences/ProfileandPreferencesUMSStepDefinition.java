@@ -912,12 +912,23 @@ public class ProfileandPreferencesUMSStepDefinition {
 	
 	}
 	
-	
+	@And("^I should see the EPMP i frame on profile page$")
+	public void i_should_see_the_EPMP_i_frame_on_profile_page()  {
+	    // Write code here that turns the phrase above into concrete actions
+		ProfileandPreferencesPage profilePreferencesPage = ( ProfileandPreferencesPage) getLoginScenario().getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+		profilePreferencesPage.validateEpmpIframe();
+
+	    
+	}
+	@And("^I should see the communicationpreferncessection$")
+	public void i_should_see_the_communicationpreferncessection()  {
+	    // Write code here that turns the phrase above into concrete actions
+		ProfileandPreferencesPage profilePreferencesPage = ( ProfileandPreferencesPage) getLoginScenario().getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+		profilePreferencesPage.validatecommunicationpreferncessection();
 
 
 
-
-
+}
 }
 
 
