@@ -46,9 +46,9 @@ public class AddDrugDetails extends UhcDriver {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		//CommonUtility.waitForPageLoad(driver, addDrugDetailsPage, 10);
-		String fileName = CommonConstants.ADD_DRUG_DETAILS_PAGE_DATA;
-		adddrugdetails = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_DCE_MEMBER);
-		openAndValidate();
+//		String fileName = CommonConstants.ADD_DRUG_DETAILS_PAGE_DATA;
+//		adddrugdetails = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_DCE_MEMBER);
+//		openAndValidate();
 	}
 
 	@Override
@@ -81,28 +81,39 @@ public class AddDrugDetails extends UhcDriver {
 	}
 
 	/** select Dosage of the drug
+	 * @throws InterruptedException 
 	 * 
 	 */
-	public void selectDosage(String dosage){
+	public AddDrugDetails selectDosage(String dosage) throws InterruptedException{
 
+	//	Thread.sleep(20000);
 		WebElement element = driver.findElement(By.xpath("//input[@value='"+dosage+"']"));
+		WebElement element_label = driver.findElement(By.xpath("//input[@value='"+dosage+"']/following-sibling::label"));
+		CommonUtility.waitForPageLoad(driver, element_label, 20);
 		if(!element.isSelected()){
-			element.click();
+			element_label.click();
+		Thread.sleep(2000);
 		}
+		
+		Assert.assertTrue("Expected Dosage not selected ", element.isSelected());
+		return new AddDrugDetails(driver);
 	}
 
 	/** select quantity qnty of the drug
 	 * 
 	 */
-	public void selectQnty(String qnty){
-		waitforElement(quantityField);
+	public AddDrugDetails selectQnty(String qnty){
+		//waitforElement(quantityField);
+		CommonUtility.waitForPageLoad(driver, quantityField, 20);
 		sendkeys(quantityField, qnty);
+		return new AddDrugDetails(driver);
 	}
+
 
 	/** select frequency of the drug
 	 * 
 	 */
-	public void selectFrequency(String frquency){
+	public AddDrugDetails selectFrequency(String frquency){
 		Select options = new Select(selectYourFrequencyDropdown);
 		if(frquency.equalsIgnoreCase("Every 1 month")){
 			options.selectByValue("30");
@@ -110,26 +121,26 @@ public class AddDrugDetails extends UhcDriver {
 		if(frquency.equalsIgnoreCase("Every 3 months")){
 			options.selectByValue("90");
 		}
+		
+		return new AddDrugDetails(driver);
 	}
 
 	/** Click on continue button 
 	 * For branded drug 
 	 * returns new SavingsOppurtunity
 	 */
-	public SavingsOppurtunity continueAddDrugDetailsModal() throws InterruptedException{
-		waitforElement(continueButton);
-		continueButton.click();
-		//continueButton.click();
-		Thread.sleep(12000);
-		return new SavingsOppurtunity(driver);
-	}
-
+	public SavingsOppurtunity continueAddDrugDetailsBranded() throws InterruptedException{
+		    CommonUtility.waitForPageLoad(driver, continueButton, 20);
+			continueButton.click();
+			return new SavingsOppurtunity(driver);
+		}
+	
 	/** Click on continue button 
 	 * For generic drug
 	 * returns new DrugCostEstimatorPage
 	 */
-	public DrugCostEstimatorPage continueAddDrugDetailsMod() throws InterruptedException{
-		waitforElement(continueButton);
+	public DrugCostEstimatorPage continueAddDrugDetailsGeneric() throws InterruptedException{
+		CommonUtility.waitForPageLoad(driver, continueButton, 20);
 		continueButton.click();
 		Thread.sleep(12000);
 		return new DrugCostEstimatorPage(driver);
