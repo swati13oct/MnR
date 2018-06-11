@@ -116,7 +116,8 @@ Feature:To test HSID registration flow
    | MAPD    |  Individual  |  NON LIS      |
    | PCP     |  Individual  |  NON LIS      |
    | Medica  |  Individual  |  NON LIS      |  
-   | MAGroup |  Individual  |  NON LIS      | 
+   | MAGroup |  Individual  |  NON LIS      |
+   | MAPDGroup|  Individual  |  NON LIS      | 
    
    
 @validateStep1 @US968241
