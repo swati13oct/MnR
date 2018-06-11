@@ -381,7 +381,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='subnav_2']//button[@class='zip-button']")
 	public WebElement findPlans;
 	
-	@FindBy(xpath = ".//*[@id='drug-cost-card-acq']/div[2]//*[contains(text(),'EDIT DRUGS LIST')]")
+	@FindBy(id = "atddEditDrugList")
 	public WebElement step3EditDrugsList;
 	
 	@Override
