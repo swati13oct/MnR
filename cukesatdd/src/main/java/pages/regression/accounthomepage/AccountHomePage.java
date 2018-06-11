@@ -861,7 +861,7 @@ public class AccountHomePage extends UhcDriver {
 		System.out.println("Actual logo's source on Dashboard page is   "+logo_src+" and Expected logo source    "+logoToBeDisplayedOnDashboard+" .");	
 		System.out.println("logo's alt text on Dashboard page is   "+logo_alt);		
 		Assert.assertTrue(logo_src.contains(logoToBeDisplayedOnDashboard));
-
+	}
 	public void validateCoLogoImagePresent(String cologoToBeDisplayedOnDashboard) throws InterruptedException {
 		Thread.sleep(2000);	
 		String cologo_src = cologoImage.getAttribute("src");
