@@ -1,3 +1,4 @@
+
 package pages.regression.accounthomepage;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+
 
 //import pages.member.redesign.ContactUsPage;
 import pages.member.ulayer.OneTimePaymentsPage;
@@ -119,6 +121,9 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(xpath = "//button[@id='dropdown-toggle--1']/span[contains(text(),'Profile')]")
 	private WebElement accountToggleDropdown;
+	
+	//@FindBy(id = "dropdown-toggle--1")
+	//private WebElement accountToggleDropdown;	
 
 	@FindBy(xpath = ".//*[@id='dropdown-options--1']/a[contains(text(),'Account Settings')]")
 	private WebElement accountSettingOption;
@@ -200,6 +205,9 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@id='white-label']/a/img")
 	private WebElement logoImage;
+	
+	@FindBy(xpath = "//div[@id='white-label']/a/img[2]")
+	private WebElement cologoImage;
 
 	@FindBy(xpath = "//*[@ng-src='/images/icons/icon-pharmacy-locator.svg']")
 	private WebElement pharmacySearchLink;
@@ -267,9 +275,15 @@ public class AccountHomePage extends UhcDriver {
 			{
 				System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
 				driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
+				try {
+					Thread.sleep(20000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				System.out.println(driver.getCurrentUrl());
 				CommonUtility.waitForPageLoad(driver, heading, 30);
-				if (driver.getTitle().equalsIgnoreCase("Benefits Overview")) {
+				if (driver.getTitle().contains("Benefits Overview")) {
 					System.out.println(driver.getTitle());
 					return new BenefitsAndCoveragePage(driver);
 				}
@@ -480,6 +494,12 @@ public class AccountHomePage extends UhcDriver {
 			{
 
 				accountToggleDropdown.click();
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					// TODO Auto generated catch block
+					e.printStackTrace();
+				}
 				validate(accountSettingOption);
 				accountSettingOption.click();
 				try {
@@ -841,7 +861,15 @@ public class AccountHomePage extends UhcDriver {
 		System.out.println("Actual logo's source on Dashboard page is   "+logo_src+" and Expected logo source    "+logoToBeDisplayedOnDashboard+" .");	
 		System.out.println("logo's alt text on Dashboard page is   "+logo_alt);		
 		Assert.assertTrue(logo_src.contains(logoToBeDisplayedOnDashboard));
-
+	}
+	public void validateCoLogoImagePresent(String cologoToBeDisplayedOnDashboard) throws InterruptedException {
+		Thread.sleep(2000);	
+		String cologo_src = cologoImage.getAttribute("src");
+		String cologo_alt = cologoImage.getAttribute("alt");
+		System.out.println("Actual cologo's source on Dashboard page is   "+cologo_src+" and Expected cologo source    "+cologoToBeDisplayedOnDashboard+" .");	
+		System.out.println("cologo's alt text on Dashboard page is   "+cologo_alt);		
+		Assert.assertTrue(cologo_src.contains(cologoToBeDisplayedOnDashboard));
+		System.out.println("Dashboard page cologo assert condition is passed");
 	}
 
 	public ClaimSummarypage navigateToClaimsSummaryPage() {
