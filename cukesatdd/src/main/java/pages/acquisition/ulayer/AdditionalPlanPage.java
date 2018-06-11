@@ -58,7 +58,7 @@ public class AdditionalPlanPage extends UhcDriver{
 		}
 
 		if (getTitle().equalsIgnoreCase(
-				"AARP Medicare Plans | Registration")) {
+				PageTitleConstants.ULAYER_AARP_MEDICARE_PLANS)) {
 			return new PlanConfirmationPage(driver);
 		}
 		return null;

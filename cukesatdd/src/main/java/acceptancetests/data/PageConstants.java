@@ -575,7 +575,6 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 
 	public static final String CREATE_ACCOUNT_PAGE = "createAccountPage";
 
-
 	public static final String Payments_History_Page =  "paymentHistoryPage";
 	
 	public static final String DashPage =  "DashboradPage";
@@ -587,9 +586,19 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 	public static final String SECURITY_QUESTIONS_PAGE = "securityQuestionsPage";
 	
 	public static final String PLAN_SELECTOR_NEW_PAGE = "planSelectorNewPage";
-
 		
 	public static final String SSO_TEST_HARNESS_PAGE = "ssoTestHarnessPage";
+	
+	public static final String Member_Auth_Login = "MemberAuthLogin";
+	
+	public static final String Member_Auth_PopUp = "MemberAuthPopUp";
+	
+	public static final String New_Window = "NewWindow";
+
+	public static final String footer_page = null;
+
+	
+	
 
 	
 }

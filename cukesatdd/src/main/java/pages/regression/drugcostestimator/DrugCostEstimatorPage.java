@@ -18,6 +18,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import acceptancetests.util.CommonUtility;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
@@ -178,9 +181,15 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id = "total_annualcost")
 	public WebElement left_rail_tot_cost;
 
-	@FindBy(xpath = "//ul[@class='pharmacy-list']/li[1]//a[@class='btn btn--secondary select-pharmacy']")
+	@FindBy(id = "select-pharmacy-buttons_1")
 	public WebElement first_pharmacy_select_btn;
 
+	@FindBy(xpath = "//ul[@class='pharmacy-list']/li[@class='selected']")
+	public WebElement pharmacy_selected;
+
+	@FindBy(xpath = "//div[@id='pharInfoId_1']/span")
+	public WebElement first_pharmacy_name;
+	
 	@FindBy(id = "mail-service-select")
 	public WebElement mail_service_select_btn;
 
@@ -199,13 +208,13 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = "//p[contains(text(),'STEP3:')]/following-sibling::span[p[contains(text(),'COST')]]")
 	public WebElement step3;
 	
-	@FindBy(xpath = ".//*[@id='costsTabId']/a")
+	@FindBy(xpath = "//li[@id='costsTabId']/a")
 	public WebElement costTab;
 
 	@FindBy(id = "total_annauldeductible")
 	public WebElement left_rail_deductible;
 
-	@FindBy(xpath = "//div[@id='drugdetails']/div[1]/div[1]//a[@class='delete-drug']")
+	@FindBy(xpath = "//div[@id='drugcontainer_0']//a[@class='delete-drug']")
 	public WebElement first_delete_link;
 
 	@FindBy(xpath = ".//*[@id='zipcode-button']")
@@ -261,25 +270,63 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='drugsTabId']/a")
 	public WebElement step1DrugTab;
+	
+	@FindBy(id = "switchToGenericBtnId")
+	public WebElement btnSwitchUpd;
+
+	@FindBy(xpath = "//div[@id='drugModal']//h3[2]")
+	public WebElement genericDrugText;
+
+	@FindBy(xpath = "//*[@id='IPEinvL']/map/area[3]")
+	private WebElement iPerceptionAutoPopUp;
+
+	@FindBy(id = "IPerceptionsEmbed")
+	public WebElement iPerceptionframe;
+
+	@FindBy(id = "closeButton")
+	public WebElement iPerceptionclosebtn;
+
+	@FindBy(xpath = "//div[@class='dce-nav-btns']/button[2]")
+	public WebElement delDrgConfirm;
+
+	@FindBy(xpath = "//div[@class='loading-dialog']")
+	public WebElement overlay;
 
 	@Override
 	public void openAndValidate() {
 
-		JSONObject jsonObject = new JSONObject();
-		for (String key : savedrugpage.getExpectedData().keySet()) {
-			WebElement element = findElement(savedrugpage.getExpectedData().get(key));
-			validate(element);
-			try {
-				jsonObject.put(key, element.getText());
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//		JSONObject jsonObject = new JSONObject();
+//		for (String key : savedrugpage.getExpectedData().keySet()) {
+//			WebElement element = findElement(savedrugpage.getExpectedData().get(key));
+//			validate(element);
+//			try {
+//				jsonObject.put(key, element.getText());
+//			} catch (JSONException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//
+//		}
+//		savedrugpageJson = jsonObject;
+//
+//		System.out.println("savedrugpageJson----->" + savedrugpageJson);
+		
+		validate(validateIntroductoryText);
+		System.out.println("You are on DCE page now ");
+	}
+	
+	public void feebackpopupClose() throws InterruptedException
+	{ //waitForloader(driver,overlay, 20);
+		Thread.sleep(20000);
+		if (validate(iPerceptionframe)) {
 
+			switchToNewIframe(iPerceptionframe);
+			iPerceptionclosebtn.click();
+			driver.switchTo().defaultContent();
+			//iPerceptionAutoPopUp.click();
+		} else {
+			System.out.println("iPerception Pop Up not displayed");
 		}
-		savedrugpageJson = jsonObject;
-
-		System.out.println("savedrugpageJson----->" + savedrugpageJson);
 	}
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
@@ -453,11 +500,12 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	 * Navigate to step 2 pharmacy tab
 	 */
 	public void navigateToStep2() throws InterruptedException {
-		//waitforElement(step2Pharmacy);
-		Thread.sleep(10000);
+		
+		Thread.sleep(5000);
+		CommonUtility.waitForPageLoad(driver, step2Pharmacy, 20);
 		step2Pharmacy.click();
-		Thread.sleep(10000);
-		waitforElement(pharmacy_form);
+	
+		CommonUtility.waitForPageLoad(driver, pharmacy_form, 20);
 
 	}
 
@@ -480,12 +528,20 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	 * validate pharmacy information step 2 tab, zipcode, miles selection, search link
 	 */
 	public void pharmacyInformation(String zipcode, String radius) {
-		validate(step2PharmacyTab);
-		validate(zipcodeInput);
-		validate(milesSelection);
-		step2PharmacyTab.click();
-		sendkeys(zipcodeInput, zipcode); // not sure what webelement to use
-		SearchLink.click();
+		if (validate(zipcodeInput)) {
+			Assert.assertTrue(true);
+		} else Assert.assertTrue("zipcodeInput is not present", false);	
+
+
+		if (validate(milesSelection)) {
+			Assert.assertTrue(true);
+		} else Assert.assertTrue("milesSelection is not present", false);	
+
+		sendkeys(zipcodeInput, zipcode);
+		if (validate(btnSearch)) {
+			btnSearch.click();
+			Assert.assertTrue(true);
+		} else Assert.assertTrue("btnSearch is not present", false);
 		Select options = new Select(milesSelection);
 		options.selectByVisibleText(radius);
 
@@ -557,6 +613,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 				+ "')]/following-sibling::ul//li/a[@class='delete-drug']";
 		WebElement deletedrug = driver.findElement(By.xpath(deleteDrugXpath));
 		deletedrug.click();
+		CommonUtility.waitForPageLoad(driver, delDrgConfirm, 10);
+		delDrgConfirm.click();
 		Thread.sleep(5000);
 
 	}
@@ -909,12 +967,33 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	 * select first pharmacy result
 	 */
 	public void select_first_pharmacy_result() throws InterruptedException {
-		// waitforElement(first_pharmacy_select_btn);
-		Thread.sleep(10000);
-		first_pharmacy_select_btn.click();
-		Thread.sleep(15000);
+		waitForloader(driver, overlay, 20);
+		CommonUtility.waitForPageLoad(driver, first_pharmacy_select_btn, 20);
+		Thread.sleep(2000);
+
+		String temp_pharm = first_pharmacy_name.getText();
+
+		System.out.println("------------temp_pharm-----"+ temp_pharm);
+		System.out.println("--------first_pharmacy_select_btn.click----------------"+ first_pharmacy_select_btn.getText());
+		//first_pharmacy_select_btn.click();
+		jsClickNew(first_pharmacy_select_btn);
+		waitForloader(driver, overlay, 20);
+		Thread.sleep(2000);
+		Assert.assertTrue("expected Pharmacy is not selected", pharmacy_selected.getText().contains(temp_pharm));
 	}
 
+	
+	public void verifycost() { 
+
+		waitforElement(left_rail_tot_cost);
+		System.out.println("left_rail_tot_cost-------------------"+left_rail_tot_cost.getText());
+		if(left_rail_tot_cost.getText().contentEquals(summary_tot_cost.getText())){
+			Assert.assertTrue(true);
+		}
+		else Assert.assertTrue("total cost and summary cost is not matching", false);
+
+	}
+	
 	/** 
 	 * verifies summary cost
 	 */
@@ -986,9 +1065,12 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	 * Navigates to step 3 
 	 */
 	public void navigateToStep3() throws InterruptedException {
-		//waitforElement(step2);
+		waitforElement(costTab);
+		Thread.sleep(2000);
 		costTab.click();
-		Thread.sleep(10000);
+		//	jsClick(costTab);
+		Thread.sleep(2000);
+		System.out.println("on cost tab step 3 ");
 	}
 
 	/** 
@@ -997,7 +1079,11 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public void delete_all_drugs() throws InterruptedException {
 
 		while (driver.findElements(By.className("delete-drug")).size() > 0) {
+			CommonUtility.waitForPageLoad(driver, first_delete_link, 20);
+			Thread.sleep(2000);
 			first_delete_link.click();
+			CommonUtility.waitForPageLoad(driver, delDrgConfirm, 10);
+			delDrgConfirm.click();
 			Thread.sleep(2000);
 		}
 	}
@@ -1275,8 +1361,14 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	 * Click on learn more tiers link
 	 */
 	public void clicklearnmoreTiersLink() throws InterruptedException {
+		System.out.println("learnmoreTiers.getClass()---------"+learnmoreTiers.getAttribute("aria-expanded"));
+		System.out.println("learnmoreTiers.gettext()---------"+learnmoreTiers.getText());
+		learnmoreTiers.getAttribute("class");
+		Assert.assertTrue("learnmoreTiers is not expanded", learnmoreTiers.getAttribute("aria-expanded").toString().contentEquals("false"));
 		learnmoreTiers.click();
-		Thread.sleep(3000);
+		Thread.sleep(2000);
+		System.out.println("learnmoreTiers.getClass()---------"+learnmoreTiers.getAttribute("aria-expanded"));
+		Assert.assertTrue("learnmoreTiers is not expanded", learnmoreTiers.getAttribute("aria-expanded").toString().contentEquals("true"));
 	}
 
 
@@ -1284,8 +1376,10 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	 * Click on learn more stages link
 	 */
 	public void clicklearnmoreStagesLink() throws InterruptedException {
+		Assert.assertTrue("learnmoreStages is not expanded", learnmoreStages.getAttribute("aria-expanded").toString().contentEquals("false"));
 		learnmoreStages.click();
 		Thread.sleep(3000);
+		Assert.assertTrue("learnmoreStages is not expanded", learnmoreStages.getAttribute("aria-expanded").toString().contentEquals("true"));
 	}
 
 	/** 
@@ -1493,9 +1587,12 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	 * 
 	 */
 	public void clickSwitchToGeneric() throws InterruptedException {
-		WebElement btnSwitchToGeneric = driver.findElement(By.id("switchToGenericBtnId"));
-		btnSwitchToGeneric.click();
-		Thread.sleep(3000);
+		if(validate(btnSwitchUpd))
+		{
+			btnSwitchUpd.click();
+			Assert.assertTrue(true);
+		}
+		else Assert.assertTrue("update switch to generic button is not present", false);
 	}
 
 	/** Validates whether branded drug switched to generic drug ATORVASTATIN
@@ -1537,6 +1634,93 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		Thread.sleep(15000);
 	}
 
+	//====================================================================
+		//=====================================================================
+		// New Methods for DCE
 
 
-}
+		/** 
+		 * Add branded drug
+		 */
+		public void addBrandedDrug(String drug, String dosage, String quantity, String frequency ) throws InterruptedException {
+			AddNewDrugModal addNewDrugModal = new AddNewDrugModal(driver);
+			this.clickOnAddDrug();
+			addNewDrugModal.typeDrugName(drug);
+			addNewDrugModal.submit();
+
+			//addNewDrugModal.selectDrug(drug);
+
+			//	addNewDrugModal.continueAddNewDrugModal();
+			//Thread.sleep(5000);
+			AddDrugDetails addDrugDetails = new AddDrugDetails(driver);
+			addDrugDetails.selectDosage(dosage);
+			addDrugDetails.selectQnty(quantity);
+			addDrugDetails.selectFrequency(frequency);
+
+			addDrugDetails.continueAddDrugDetailsBranded();
+
+			// if(addDrugDetails.continueAddDrugDetails()!=null){
+			SavingsOppurtunity savings_oppurtunity = new SavingsOppurtunity(driver);
+			savings_oppurtunity.savedrugbutton();
+			// }
+			//Thread.sleep(20000);
+
+
+		}
+
+		public void switchToGenericDrug(String branddosage, String gendosage) throws InterruptedException{
+
+			WebElement switchNowLink = driver.findElement(By.xpath("//p[contains(text(), '"+ branddosage+"')]/ancestor::section//a[contains(text(), 'SWITCH NOW')]"));
+			//p[contains(text(), 'Exelon Transdermal Patch DIS 9.5MG/24')]/ancestor::section//a[contains(text(), 'SWITCH NOW')]
+			//CommonUtility.waitForPageLoad(driver, switchNowLink, 20);
+			waitForloader(driver, overlay, 20);
+			Thread.sleep(10000);
+
+			if (validate(switchNowLink)){
+				switchNowLink.click();
+
+			}	
+			else Assert.assertTrue("Unable to see switch now link", false);
+
+			CommonUtility.waitForPageLoad(driver, genericDrugText, 20);
+			//	waitForPageLoad(WebDriver driver, WebElement element, long timeout)
+
+			Assert.assertEquals("Generic drug is not matching", gendosage, genericDrugText.getText());
+			clickSwitchToGeneric();
+
+		}
+
+
+
+
+		public static void waitForloader(WebDriver driver, WebElement element, long timeout) {
+
+			WebDriverWait wait = new WebDriverWait(driver, timeout);
+			try {
+				WebElement elementExpected = wait.until(ExpectedConditions.visibilityOf(element));
+
+				System.out.println("-------elementExpected======"+elementExpected);
+
+
+				if (!(elementExpected.getAttribute("style").isEmpty() || elementExpected.getText() == null)) {
+					timeout = timeout - 5;
+					if (timeout > 0) {
+						waitForloader(driver, element, timeout);
+					}
+				}
+
+			} catch (Exception e) {
+				timeout = timeout - 5;
+				if (timeout > 0) {
+					waitForloader(driver, element, timeout);
+				} else {
+					System.out.println("Not able to locate this " + element + " on page");
+					return;
+				}
+			}
+
+		}
+
+	}
+
+

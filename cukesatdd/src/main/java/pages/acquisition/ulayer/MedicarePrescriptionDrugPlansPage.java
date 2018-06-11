@@ -23,7 +23,7 @@ public LearnAboutMedicarePage learnAboutMedicareFooterClick() {
 		validate(medicareSupplementInsurancePlansLink);
 		learnAboutMedicareLink.click();
 		validate(medicareSupplementInsurancePlansLink);
-		if (driver.getTitle().equalsIgnoreCase("Learn About Medicare | AARP® Medicare Plans from UnitedHealthcare®")) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_LEARN_ABOUT_MEDICARE)) {
 			return new LearnAboutMedicarePage(driver);
 		}else{
 		
@@ -38,7 +38,7 @@ public PrescriptionDrugRequestMoreHelpPage requestPersonalhelpInformationClick()
 	validate(prescriptiondrugPlansRequestMoreHelpLink);
 	prescriptiondrugPlansRequestMoreHelpLink.click();
 	validate(prescriptiondrugPlansRequestMoreHelpLink);
-	if(driver.getTitle().equalsIgnoreCase("More Help & Information - Medicare Part D Plans | AARP® Medicare Plans from UnitedHealthcare®")){
+	if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_MORE_HELP_INFORMATION)){
 		return new PrescriptionDrugRequestMoreHelpPage(driver);
 	}
 	return null;

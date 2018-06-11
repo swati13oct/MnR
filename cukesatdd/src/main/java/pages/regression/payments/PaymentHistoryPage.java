@@ -9,11 +9,13 @@ import java.util.Map;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import pages.Global.Member.Footer;
 import pages.member.ulayer.SetupAutoPaymentPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
@@ -86,7 +88,7 @@ public class PaymentHistoryPage extends UhcDriver{
 	@FindBy(className="modal-body")
 	private WebElement iPerceptionPopUp;
 	
-	@FindBy(xpath="//*[@id='IPEinvL']/map/area[3]")
+	@FindBy(xpath="//*[@id='nav']/button[2]")
 	private WebElement iPerceptionAutoPopUp;
 	
 	@FindBy(xpath="//*[@id='editAutomaticPaymentsModal']//div[@class='modal-footer']/a[1]")
@@ -98,6 +100,11 @@ public class PaymentHistoryPage extends UhcDriver{
 	@FindBy(xpath = "//*[@class='payment-method-btn'][2]/a")
 	private WebElement SetUpAutoPayButton;
 
+	@FindBy(xpath = "(//*[@id='paymentOverviewApp']//div[@class='col-md-12'])[2]//div[@class='margin-small']/span[@class='payment-method-btn'][3]/a")
+	private WebElement MemAuthEditPay;
+	
+	@FindBy(id = "closeButton")
+	private WebElement iPerceptionCloseButton;
 	
 	private PageData paymentHistory;
 	
@@ -272,16 +279,19 @@ public class PaymentHistoryPage extends UhcDriver{
 	
 	 public PaymentHistoryPage oneTimepayment() throws InterruptedException
 	 {
-
-		    	/*WebDriverWait wait = new WebDriverWait(driver, 10);
-					wait.until(ImplectedConditions.elementToBeClickable(coveragebenf));
-*/
-		    	if(	validate(iPerceptionPopUp)) {
-		    		iPerceptionPopUp.click();
-		    	}
-		    	else  {
-		    		System.out.println("iPerception Pop Up not displayed");
-		    	}
+               
+		 try {   
+	    	  Thread.sleep(2000); 		
+	    		driver.switchTo().frame("IPerceptionsEmbed");
+	    		System.out.println("iPerception Pop Up is Present");
+	    		iPerceptionCloseButton.click();
+	    		driver.switchTo().defaultContent();
+	    		Thread.sleep(5000);
+	    		}
+	    		catch (Exception e) {
+	    		System.out.println("iPerception Pop Up is not Present");
+	    		}
+		    	
 		    	waitforElement(paymentslink);
 		    	
 		    	if (validate(paymentslink)) {
@@ -296,46 +306,53 @@ public class PaymentHistoryPage extends UhcDriver{
 	 }
 	 
 	 public OneTimePaymentPage OTPbtn(){
-		 
-		 try{
-		 if(validate(iPerceptionAutoPopUp)) {
-	    		iPerceptionAutoPopUp.click();
-	    	}
-		 }catch(Exception e)
-		 {
-			 System.out.println("No iperception Pop Up displayed");
-		 }	    	
+	
+		 try {   
+	    	  Thread.sleep(2000); 		
+	    		driver.switchTo().frame("IPerceptionsEmbed");
+	    		System.out.println("iPerception Pop Up is Present");
+	    		iPerceptionCloseButton.click();
+	    		driver.switchTo().defaultContent();
+	    		Thread.sleep(5000);
+	    		}
+	    		catch (Exception e) {
+	    		System.out.println("iPerception Pop Up is not Present");
+	    		}
 		
 	   try
-	   {
-		if(onetimepaymentbtn.isDisplayed()){
-			onetimepaymentbtn.click();
+	   {	
+		 Thread.sleep(2000);
+		 onetimepaymentbtn.click();
 		 System.out.println("clicked on make OTP button");		 
-		 return new  OneTimePaymentPage(driver);
-		}
-		else if(onetimepaymentbtnPDP.isDisplayed())
-		{
-			onetimepaymentbtnPDP.click();
-			System.out.println("clicked on make OTP button");
-			return new  OneTimePaymentPage(driver);
-		}		
+		 return new  OneTimePaymentPage(driver);		
+				
 	   }catch(Exception e)
 	   {
-		   System.out.println("One time Payment Button not displayed");
-		   return null;
+		   System.out.println("Normal One time Payment Button not displayed");
+		  
 	   }
-	   return new  OneTimePaymentPage(driver);
+	   
+			onetimepaymentbtnPDP.click();
+			System.out.println("clicked on make OTP PDP button");
+			return new  OneTimePaymentPage(driver);  
+
 	    
 		    }
 	 
 public OneTimePaymentPage AutoPay(){
 		 
-		 if(validate(iPerceptionAutoPopUp)) {
-			 iPerceptionAutoPopUp.click();
-	    	}
-	    	else  {
-	    		System.out.println("iPerception Pop Up not displayed");
-	    	}
+	try {   
+  	  Thread.sleep(2000); 		
+  		driver.switchTo().frame("IPerceptionsEmbed");
+  		System.out.println("iPerception Pop Up is Present");
+  		iPerceptionCloseButton.click();
+  		driver.switchTo().defaultContent();
+  		Thread.sleep(5000);
+  		}
+  		catch (Exception e) {
+  		System.out.println("iPerception Pop Up is not Present");
+  		}
+	
 		 
 		 try{
 			 if(SetUpAutoPayButton.isDisplayed())
@@ -343,21 +360,19 @@ public OneTimePaymentPage AutoPay(){
 				 SetUpAutoPayButton.click();
 				 System.out.println("clicked on Setup New Payment button");
 				 try{
-					 waitforElement(SetUpNewPayment);
-					 
+					 Thread.sleep(2000);					 
 					 if (validate(SetUpNewPayment)){
 						 SetUpNewPayment.click();
 						 System.out.println("clicked on Setup New Payment button");		 
 					 return new  OneTimePaymentPage(driver);
 					 }
 					 else
-						 return null;
+						 return new OneTimePaymentPage(driver);
 				 }catch(Exception e)
 				 {
-					 
-				 }
-					 
-				 return new  OneTimePaymentPage(driver);
+					System.out.println("Set up Pop up not displayed"); 
+				 }					 
+				 
 			 }
 			 else
 			 {
@@ -366,7 +381,7 @@ public OneTimePaymentPage AutoPay(){
 			 
 		 }catch(Exception e)
 		 {
-			 System.out.println("No Edit payment button exists");
+			 System.out.println("No Auto payment button exists");
 		 }		
 		 
 		 waitforElement(AutoPayButton);  		
@@ -383,6 +398,41 @@ public OneTimePaymentPage AutoPay(){
 		 return null;
 }
 		
+public OneTimePaymentPage MemAuthAutoPay(){
+	
+	try {   
+  	  Thread.sleep(2000); 		
+  		driver.switchTo().frame("IPerceptionsEmbed");
+  		System.out.println("iPerception Pop Up is Present");
+  		iPerceptionCloseButton.click();
+  		driver.switchTo().defaultContent();
+  		Thread.sleep(5000);
+  		}
+  		catch (Exception e) {
+  		System.out.println("iPerception Pop Up is not Present");
+  		}	 
+	
+	 waitforElement(MemAuthEditPay);  		
+	 if(!(MemAuthEditPay.isEnabled()))
+	 {
+		 System.out.println("Edit/Setup Pay buton disabled");
+	
+	/* waitforElement(SetUpNewPayment);
+	 
+	 if (validate(SetUpNewPayment)){
+		 SetUpNewPayment.click();
+		 System.out.println("clicked on Setup New Payment button");	*/	 
+	 return new  OneTimePaymentPage(driver);		 
+	 }
+	 else
+	 return null;
+}
+  public Footer validatePageFooter(){
+	  	  
+	  	 
+	  	 return new Footer(driver);
+  }
+
 }
 
 		

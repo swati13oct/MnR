@@ -28,7 +28,7 @@ public class TermsnConditionsAARPPage extends GlobalWebElements{
 		validate(footerDisclaimersLink);
 		footerDisclaimersLink.click();
 		validate(footerDisclaimersLink);
-		if(driver.getTitle().equalsIgnoreCase("Disclaimers | AARP® Medicare Plans from UnitedHealthcare®")) {
+		if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_DISCLAIMERS_AARP_MEDICARE_PLANS)) {
 			return new DisclaimersAARPPage(driver);
 		}
 		return null;

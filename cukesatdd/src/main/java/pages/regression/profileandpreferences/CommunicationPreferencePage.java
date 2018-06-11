@@ -13,6 +13,9 @@ public class CommunicationPreferencePage extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@class='page-header']//a[contains(text(),'Profile & Preferences')]")
 	private WebElement profAndPrefLink;
+	
+	@FindBy(id= "save-prefs-btn-FEDERAL-INDIVIDUAL")
+	private WebElement savePrefButton;
 
 
 	public CommunicationPreferencePage(WebDriver driver) {
@@ -33,6 +36,14 @@ public class CommunicationPreferencePage extends UhcDriver {
 		validate(profAndPrefLink);
 		
 
+	}
+
+	public boolean validatePage() {
+		// TODO Auto-generated method stub
+		if(validateNew(savePrefButton)&&validateNew(profAndPrefLink))
+			return true;
+		else 
+			return false;
 	}
 	
 	/**

@@ -2,6 +2,8 @@ package pages.acquisition.bluelayer;
 
 import org.openqa.selenium.WebDriver;
 
+import pages.acquisition.ulayer.PageTitleConstants;
+
 public class MedicareSpecialNeedsPlansuhcPage extends GlobalWebElements{
 	
 	
@@ -21,7 +23,7 @@ public class MedicareSpecialNeedsPlansuhcPage extends GlobalWebElements{
 		validate(learnAboutMedicareLink);
 		learnAboutMedicareLink.click();
 		validate(learnAboutMedicareLink);
-		if(driver.getTitle().equalsIgnoreCase("Learn About Medicare | UnitedHealthcare®"))
+		if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_LEARN_ABOUT_MEDICARE))
 		{
 		return new LearnAboutMedicareuhcPage(driver);
 		}
@@ -33,7 +35,7 @@ public class MedicareSpecialNeedsPlansuhcPage extends GlobalWebElements{
 		validate(specialNeedPlansGetEnrollmentInformationLink);
 		specialNeedPlansGetEnrollmentInformationLink.click();
 		validate(specialNeedPlansGetEnrollmentInformationLink);
-		if(driver.getTitle().equalsIgnoreCase("Medicare Special Needs Plans Enrollment | UnitedHealthcare®"))
+		if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_SPECIAL_PLANS_ENROLLMENT))
 		{
 		return new SpecialNeedGetEnrollmentInformationPage(driver);
 		}

@@ -242,11 +242,11 @@ public class PharmacySearchPage extends UhcDriver {
 		}
 
 		if (driver.getTitle().equalsIgnoreCase(
-				"Locate a Pharmacy | UnitedHealthcare®")) {
+				PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE)) {
 			return new PharmacySearchPage(driver);
 		}
 		if (driver.getTitle().equalsIgnoreCase(
-				"Find a Pharmacy | AARP® Medicare Plans from UnitedHealthcare®")) {
+				PageTitleConstants.BLAYER_FIND_A_PHARMACY_AARP_MEDICARE_PLANS_FROM_UNITEDHEALTHCARE)) {
 			return new PharmacySearchPage(driver);
 		}
 		else {
@@ -267,7 +267,7 @@ public class PharmacySearchPage extends UhcDriver {
 		}
 
 		if (driver.getTitle().equalsIgnoreCase(
-				"Locate a Pharmacy | UnitedHealthcare®")) {
+				PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE)) {
 			return new PharmacySearchPage(driver);
 		}
 		
@@ -322,7 +322,7 @@ public class PharmacySearchPage extends UhcDriver {
 		}
 
 		if (driver.getTitle().equalsIgnoreCase(
-				"Locate a Pharmacy | UnitedHealthcare®")) {
+				PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE)) {
 			return new PharmacySearchPage(driver);
 		}
 		return null;
@@ -495,7 +495,7 @@ public PharmacyResultPage ValidateShowOnMapResult() {
 		driver.manage().timeouts().implicitlyWait(300, TimeUnit.SECONDS);
 		showonmap.click();
 		if (driver.getTitle().equalsIgnoreCase(
-				"Member Claims")) {
+				PageTitleConstants.ULAYER_MEMBER_CLAIMS)) {
 			return new PharmacyResultPage(driver);
 		}
 		return null;

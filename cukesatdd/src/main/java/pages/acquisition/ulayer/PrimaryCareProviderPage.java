@@ -60,7 +60,7 @@ public class PrimaryCareProviderPage extends UhcDriver {
 		saveandcontinuepcp.click();
 
 		if (driver.getTitle()
-				.equalsIgnoreCase("Medicare Advantage Enrollment | AARP® Medicare Plans from UnitedHealthcare®")) {
+				.equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_ADVANTAGE_ENROLLMENT)) {
 			return new PlanPaymentOptions(driver);
 		}
 		return null;
