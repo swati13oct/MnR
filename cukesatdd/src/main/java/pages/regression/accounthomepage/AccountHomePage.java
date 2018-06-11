@@ -1,3 +1,4 @@
+
 package pages.regression.accounthomepage;
 
 import java.util.ArrayList;
@@ -14,6 +15,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+
+
 //import pages.member.redesign.ContactUsPage;
 import pages.member.ulayer.OneTimePaymentsPage;
 import pages.member.ulayer.PlanComparePage;
@@ -22,7 +25,7 @@ import pages.member.ulayer.TestHarness;
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.regression.claims.ClaimDetailsPage;
 import pages.regression.claims.ClaimSummarypage;
-import pages.regression.claims.ClaimSummarypage;
+//import pages.regression.claims.ClaimSummarypage;
 import pages.regression.contactus.ContactUsPage;
 import pages.regression.explanationofbenefits.EOBPage;
 import pages.regression.formsandresources.FormsAndResourcesPage;
@@ -37,6 +40,7 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.regression.drugcostestimator.*;
 
 
 
@@ -44,41 +48,29 @@ import atdd.framework.UhcDriver;
 
 public class AccountHomePage extends UhcDriver {
 
-	@FindBy(id = "plan_material_fnr2018")
-    private WebElement PlanMaterialSection;
-    
-	  @FindBy(css = "a.fd_myPersonalHealthRecord")
-      private WebElement phrTab;
-
-      @FindBy(id = "plan_box")
-      private WebElement planBox;
-
-      @FindBy(linkText = "Order plan materials")
-      private WebElement orderPlanMaterials;
-
-      @FindBy(xpath = "//div[@class='myProfileMid']/div[1]/div/div[2]/h2")
-      private WebElement myProfilesHeading;
-
-      @FindBy(linkText = "estimate costs")
-      private WebElement estimateCostLink;
-
-      @FindBy(linkText = "Contact Us")
-      private WebElement contactUsLink;
-
-      @FindBy(linkText = "Plan Benefits")
-      private WebElement benefitsLink;
-
-      @FindBy(id = "disclosure_link")
-      private WebElement logOut;
-      
-	@FindBy(linkText = "Premium payment information")
+	@FindBy(xpath = "(//*[@class='ng-scope']//a[text()='Premium Payments'])[1]")
 	private WebElement paymentsLink;
+
+	@FindBy(xpath = "//area[@href='javascript:clWin()'][@alt = 'close']")
+	private WebElement FeedbackModal;	
+
+	@FindBy(className = "footerContainer")
+	private WebElement footerSection;
+
+	@FindBy(id = "claimsummaryC1")
+	private WebElement claimSummary;
+
+	@FindBy(id = "eobC1")
+	private WebElement explainationOfBenefits;
 
 	@FindBy(linkText = "medical providers")
 	private WebElement medicalProviders;
 
+	@FindBy(id = "claims_1")
+	private WebElement claims;
+
 	/*@FindBy(xpath = "//li[@id='fd_myMenu']/a")
-*/
+	 */
 	@FindBy(xpath = "//li[@id='fd_myMenu']/a")
 	private WebElement myMenuNavigator;
 
@@ -117,189 +109,26 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(id = "pcpLogoPrint1left")
 	private WebElement validateLogo;
-	
-	@FindBy(xpath = "//a[contains(text(),'UnitedHealthcare MedicareComplete Choice (PPO)')]")
-    private WebElement uhcMedicareCompleteChoicePPO;
-
-    @FindBy(xpath = "//*[@id='healthwellness']/a")
-    private WebElement healthAndWellnessTab;
-
-    @FindBy(xpath = "html/body/div[3]/div/div[1]/header/div/div/div/div/div/div/p/a[2]")
-    private WebElement backToPreviousPage;
-
-    @FindBy(xpath = "//*[@id='gogreenmeter']/a")
-    private WebElement goGreenLink;
 
 	@FindBy(xpath = "/html/body/div[2]/div[2]/div/div[1]/div/div/div/h1")
 	private WebElement paymentsHeading;
-	
-	@FindBy(xpath = "//*[@id='gogreenlogin_box']/div[4]/div/a")
-    private WebElement gogreenPopupClose;
-
-    @FindBy(xpath = "//*[@id='gogreenlogin_box']/div[4]/div")
-    private WebElement gogreenPopup;
-
-    @FindBy(linkText = "My Documents")
-    private WebElement MyDocumentLink;
-
-    @FindBy(linkText = "Back to previous page")
-    private WebElement backTopreviouspageLink;
-
-    @FindBy(xpath = "//html/body/title")
-    private WebElement newClaimsPageHeading;
-
-    @FindBy(linkText = "View/Download")
-    private WebElement viewanddownloadLink;
-
-    @FindBy(xpath = "//*[@id='myDocuments']/div/div[2]/div/p[2]/ul/li[4]/a")
-    private WebElement paginationLink;
-
-    @FindBy(xpath = "//*[@id='myDocuments']/div/div[1]/div/form/div/div[2]/div[2]/div[2]/div[1]/div/input")
-    private WebElement fromdate;
-
-    @FindBy(xpath = "//*[@id='myDocuments']/div/div[1]/div/form/div/div[2]/div[2]/div[2]/div[2]/div/input")
-    private WebElement todate;
-
-    @FindBy(xpath = "//*[@id='myDocuments']/div/div[1]/div/form/div/div[2]/div[2]/div[2]/div[3]/button")
-    private WebElement searchLink;
-
-    @FindBy(linkText = "Date")
-    private WebElement dateLink;
-
-    @FindBy(xpath = ".//*[@id='plan_box']/div/div[2]/div/table/tbody/tr[3]/td[2]")
-    private WebElement status;
-
-    @FindBy(xpath = ".//*[@id='plan_box']/div/div[2]/div/table/tbody/tr[2]/td[2]")
-    private WebElement memberId;
-
-    @FindBy(xpath = ".//*[@id='plan_box']/div/div[2]/div/table/tbody/tr[1]/td[2]")
-    private WebElement groupId;
-
-    @FindBy(id = "_content_uhcm_home_my-account-home_jcr_content_contentPar_myresource_contentParResource_teaser")
-    private WebElement myResource;
-
-    @FindBy(linkText = "mental health or substance use")
-    private WebElement MentalHealthOrSubstanceUse;
-
-    @FindBy(xpath = ".//*[@id='_content_campaigns_uhcm_home-myresources-main_home-myresources-main_jcr_content_par_teaser_2']/div/div[2]")
-    private WebElement drugLookup;
-
-    @FindBy(xpath = ".//*[@id='contentRow']")
-    private WebElement homePageContent;
-
-    @FindBy(xpath = ".//*[@id='_content_campaigns_uhcm_home-myresources-main_home-myresources-main_jcr_content_par_teaser_2']/div/div[2]")
-    private WebElement drugLookupBox;
-
-    @FindBy(xpath = ".//*[@id='_content_campaigns_uhcm_home-myresources-main_home-myresources-main_jcr_content_par_teaser_2']/div/div[2]/a/span")
-    private WebElement estimateCostsBtn;
-
-    @FindBy(xpath = ".//*[@id='contentRow']/td/table/tbody/tr/td/div/div[2]/div[3]/div[3]/div[2]")
-    private WebElement myResourcesContent;
-
-    @FindBy(xpath = "//*[@class='zip']/span[1]")
-    private WebElement RallyZipcode;
-
-    @FindBy(xpath = "//*[@id='IPEinvL']/map/area[3]")
-    private WebElement closebtn;
-
-    @FindBy(xpath = "//a[contains(text(),'Provider search')]")
-    private WebElement providerSearchinPanelNavigation;
-
-    @FindBy(xpath = "//a[contains(text(),'Medical Explanation of Benefits (EOB)')]")
-    private WebElement medicalEOBLinkInPanelNavigation;
-
-    @FindBy(id = "btn_searchforaprovider")
-    private WebElement medicalEOBproviderlink;
-
-    @FindBy(linkText = "Medical Explanation of Benefits (EOB)")
-    private WebElement medicalEOBlink;
-
-    @FindBy(id = "zipCode")
-    private WebElement zipCode;
-
-    @FindBy(id = "fd_myMenu")
-    private WebElement myMenu;
-
-    @FindBy(linkText = "Benefits and Coverage")
-    private WebElement benefitsAndCoveragelink;
-
-    @FindBy(xpath = "//button[@id='dropdown-toggle--1']/span[contains(text(),'Profile')]")
-    private WebElement accountToggleDropdown;
-
-    @FindBy(xpath = "//a[@class='dropdown-option' and contains(text(),'Account Settings')]")
-    private WebElement accountSettingOption;
-
-    @FindBy(xpath = "//a[contains(text(),'Search for a provider')]")
-    private WebElement providerlinkinPCPSection;
-
-    @FindBy(css = "li#accountdetails>a")
-    private WebElement accountHome;
-
-    @FindBy(id = "widgetbuttoncontainer")
-    private WebElement searchLinkinClaimsPage;
-
-    @FindBy(id = "phr_widget_3")
-    private WebElement showLink;
-
-    @FindBy(xpath = "//div[@class='phr_greybox_mid']/p[contains(text(),'Looking for a doctor')]/following-sibling::p/a")
-    private WebElement providerSearchinPHPage;
-
-    // @FindBy(xpath="//*[@id='phr_widget_3_box']/div[233]/p[2]/a")
-    // private WebElement providerSearchinPHPage1;
-
-    // @FindBy(xpath="div[@class='phr_greybox_mid']/p[contains(text(),'Need to
-    // find a facility?')]/following-sibling::p/a")
-    // private WebElement providerSearchinPHPage1;
-
-    @FindBy(xpath = "(//a[@id='btn_searchforaprovider'])[1]")
-    private WebElement providerSearchinPHPage1;
-
-    @FindBy(linkText = "Claims")
-    private WebElement claimsLink;
-
-    @FindBy(xpath = "(//a[contains(@href,'my-plans/forms-and-resources')])[4]")
-    private WebElement FormsandResourcesLinkn;
-
-    @FindBy(xpath = "//a[contains(text(),'search for providers')]")
-    private WebElement searchforproviderlinkinClaimsPage;
-
-    @FindBy(xpath = "//*[@id='btn_searchforaprovider']")
-    private WebElement providerLink;
-
-    @FindBy(xpath = "//a[@class='searchforproviders margin_top_5px']")
-    private WebElement searchProviderinFormsandResourcePage;
-
-    @FindBy(xpath = "//span[text()='search providers']")
-    private WebElement searchProviderLinkinFormsandResourcePage;
-
-    @FindBy(xpath = "html/body/div[2]/div/div[4]/div[2]/div/table/tbody/tr[4]/td[2]/a")
-    private WebElement linkbenefit;
-
-    @FindBy(xpath = "//a[contains(text(),'Go to benefits and coverage page')]")
-    private WebElement benefitcoveragelink;
-
-
-    @FindBy(linkText = "Go to profile page")
-    private WebElement profilenpreferenceslink1;
-
-    @FindBy(xpath = "//sticky[@id='sticky-nav']//nav[@id='main-nav']//a[contains(text(),'Coverage & Benefits')]")
-    private WebElement BnClink;
-
-    //@FindBy(css = "img.primary-logo")
-//private WebElement logoImage;
- 
 
 	@FindBy(xpath = ".//*[@id='plan_box']/div/div[2]/div/p/a")
 	private WebElement planNameLink;
-	
+
 	@FindBy(id = "dropdown-toggle--1")
 	private WebElement accountProfileBtn;
 
 	@FindBy(xpath = "//button[@id='dropdown-toggle--1']/span[contains(text(),'Profile')]")
 	private WebElement accountToggleDropdown;
+	
+	//@FindBy(id = "dropdown-toggle--1")
+	//private WebElement accountToggleDropdown;	
 
 	@FindBy(xpath = ".//*[@id='dropdown-options--1']/a[contains(text(),'Account Settings')]")
-	private WebElement accountSettingOption;	@FindBy(xpath = "//header//h1")
+	private WebElement accountSettingOption;
+
+	@FindBy(xpath = "//header//h1")
 	private WebElement heading;
 
 	// @FindBy(xpath="//*[@id='phr_widget_3_box']/div[233]/p[2]/a")
@@ -310,11 +139,11 @@ public class AccountHomePage extends UhcDriver {
 	// private WebElement providerSearchinPHPage1;
 
 	@FindBy(xpath=".//*[@id='IPEinvL']/map/area[2]")
-    private WebElement iPerceptionPopUp;
-	
+	private WebElement iPerceptionPopUp;
+
 	@FindBy(xpath="//dashboard//a[contains(text(),'Contact')]")
 	private WebElement linkContactUs;
-	
+
 	@FindBy(xpath="//a[contains(text(),'Contact Us page')]")
 	private WebElement helpAndContactUslink;
 
@@ -329,11 +158,14 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(id = "continueSubmitButton")
 	private WebElement continueButton;
 
-	@FindBy(xpath = "//*[@id='IPEinvL']/map/area[3]")
+	@FindBy(xpath = "//*[@id='nav']/button[2]")
 	private WebElement iPerceptionAutoPopUp;
 
 	@FindBy(xpath = "//*[@id='sticky-nav']//div[@ng-switch-when='M&R']/a[5]")
 	private WebElement PremiumPayment;
+
+	@FindBy(xpath = "//*[@id='sticky-nav']//div[@ng-switch-when='M&R']/a[4]")
+	private WebElement ShipPremiumPayment;
 
 	@FindBy(id = "payment-date")
 	private WebElement HistoryDropdown;
@@ -341,64 +173,62 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "(//*[@id='paymentTable'])[1]")
 	private WebElement HistoryTable;
 
-	@FindBy(xpath = "//*[@id='paymentOverviewApp']//div[@class='container']//div[@class='col-md-12']/h1")
+	@FindBy(xpath = "//*[@id='paymentOverviewApp']//div[@class='container']//div[@class='col-md-12']/h2[1]")
 	private WebElement PaymentHeading;
-	
+
 	@FindBy(linkText = "Compare 2017 Plans")
 	private WebElement planCompareLink;
-	
+
 	@FindBy(xpath = "//div[@class='prefermain_mid mapd_div']/div/h3")
 	private WebElement planCompareHeader;
 
 	@FindBy(xpath=".//*[contains(text(),'search for providers')]")
 	private WebElement searchForProviders;
-	
+
 	@FindBy(linkText = "Order drugs from your Preferred Mail Service Pharmacy")
 	private WebElement drugPreferredMailServicePharmacyLink;
-	
+
 	@FindBy(xpath = "//div[@class='claim-results']//table[not (contains(@class,'ng-hide'))]//tbody//tr[2]//a[text()='MORE INFO']")
 	private WebElement claimstablemoreinfolink;
-  
+
 	@FindBy (css = ".claimDetTableMainSection")
 	private WebElement claimDetTableMainSection;
-  
+
 	@FindBy(xpath = "//*[@id='dashboard']//span[text()='View Your Claims']")
 	private WebElement claimsDashboardLink;
-	
+
+	@FindBy(xpath = "//span[contains (text(), 'Look up Drugs')]")
+	private WebElement drugLookup;
 
 	//@FindBy(css = "img.primary-logo")
-    //private WebElement logoImage;
-	
+	//private WebElement logoImage;
+
 	@FindBy(xpath = "//div[@id='white-label']/a/img")
 	private WebElement logoImage;
+	
+	@FindBy(xpath = "//div[@id='white-label']/a/img[2]")
+	private WebElement cologoImage;
 
 	@FindBy(xpath = "//*[@ng-src='/images/icons/icon-pharmacy-locator.svg']")
 	private WebElement pharmacySearchLink;
 
-	
+
 	//Added by Sneha - Navigate to Order Plan Materials 
 	@FindBy(xpath = "//div[@id='ui-view-page']//a[@track='ORDER_MATERIALS']")
 	private WebElement OrderMaterial_Dashboard;
 
 	@FindBy(xpath = "//h1[@class='h4 margin-none']")
 	private WebElement orderplanHeadertxt;
-	
 
-	//For Header
-		@FindBy(id = "premiumpayment_3")
-		private WebElement premiumPayment;
-		
-		@FindBy(id = "paymentOverviewApp")
-		public static WebElement paymentsOverview;
-		
-		@FindBy(linkText = "FIND CARE & COSTS")
-		private WebElement findCareCost;
-		
-		@FindBy(xpath = ".//header[@class='hide-mobile']//a[contains(text(),'Find Care & Costs')]")
-		private WebElement findCare;
+	@FindBy(xpath = "//*[@class='tabs-desktop']//li[@role='listitem'][2]/a")
+	private WebElement ShipTab;
 
+	@FindBy(xpath = "//*[@class='table-body margin-large']/div[2]//p")
+	private WebElement PayDate;
 
-	
+	@FindBy(id = "closeButton")
+	private WebElement iPerceptionCloseButton;
+
 	private PageData myAccountHome;
 
 	public JSONObject accountHomeJson;
@@ -424,8 +254,15 @@ public class AccountHomePage extends UhcDriver {
 	public AccountHomePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		
-		// openAndValidate();
+		try {
+
+			if (iPerceptionPopUp.isDisplayed()) {
+				iPerceptionPopUp.click();
+			}
+		}catch(Exception e)        {
+			System.out.println("iPerception Pop Up not displayed");
+		}
+		//openAndValidate();
 	}
 
 	public BenefitsAndCoveragePage navigateDirectToBnCPag() {
@@ -438,9 +275,15 @@ public class AccountHomePage extends UhcDriver {
 			{
 				System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
 				driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
+				try {
+					Thread.sleep(20000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				System.out.println(driver.getCurrentUrl());
 				CommonUtility.waitForPageLoad(driver, heading, 30);
-				if (driver.getTitle().equalsIgnoreCase("Benefits Overview")) {
+				if (driver.getTitle().contains("Benefits Overview")) {
 					System.out.println(driver.getTitle());
 					return new BenefitsAndCoveragePage(driver);
 				}
@@ -496,7 +339,7 @@ public class AccountHomePage extends UhcDriver {
 				System.out.println("Current Url is " + driver.getCurrentUrl());
 				CommonUtility.waitForPageLoad(driver, heading, 50);
 
-				if (driver.getTitle().equalsIgnoreCase("Profile")) {
+				if (driver.getCurrentUrl().contains("profile")) {
 
 					return new ProfileandPreferencesPage(driver);
 				}
@@ -505,7 +348,7 @@ public class AccountHomePage extends UhcDriver {
 		}
 
 		if (MRScenario.environment.equals("team-ci1") || MRScenario.environment.equals("team-h")
-				|| MRScenario.environment.equals("test-a") || MRScenario.environment.equals("team-e")) {
+				|| MRScenario.environment.equals("test-a") || MRScenario.environment.equals("team-e") || MRScenario.environment.equals("stage")) {
 
 			driver.navigate().to(PAGE_URL + "medicare/member/account/profile.html");
 
@@ -651,6 +494,12 @@ public class AccountHomePage extends UhcDriver {
 			{
 
 				accountToggleDropdown.click();
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					// TODO Auto generated catch block
+					e.printStackTrace();
+				}
 				validate(accountSettingOption);
 				accountSettingOption.click();
 				try {
@@ -714,15 +563,17 @@ public class AccountHomePage extends UhcDriver {
 
 	public AccountHomePage navigateToAutoPaymentHistoryPage(){
 
-		/*
-		 * WebDriverWait wait = new WebDriverWait(driver, 30);
-		 * wait.until(ExpectedConditions.elementToBeClickable(paymentslink));
-		 */
-		if (validate(iPerceptionAutoPopUp)) {
-			iPerceptionAutoPopUp.click();
-		} else {
-			System.out.println("iPerception Pop Up not displayed");
+		try {   
+			Thread.sleep(2000); 		
+			driver.switchTo().frame("IPerceptionsEmbed");
+			System.out.println("iPerception Pop Up is Present");
+			iPerceptionCloseButton.click();
+			driver.switchTo().defaultContent();
+			Thread.sleep(5000);
 		}
+		catch (Exception e) {
+			System.out.println("iPerception Pop Up is not Present");
+		}	
 
 		// Thread.sleep(16000);
 
@@ -742,17 +593,90 @@ public class AccountHomePage extends UhcDriver {
 			return null;
 		}
 	}
-	
-	public PaymentHistoryPage navigateToOneTimePaymentHistoryPage(){
 
-		
-		if (validate(iPerceptionAutoPopUp)) {
-			iPerceptionAutoPopUp.click();
-		} else {
-			System.out.println("iPerception Pop Up not displayed");
+
+	public AccountHomePage navigateToSHIPAutoPaymentHistoryPage(){
+
+		/*
+		 * WebDriverWait wait = new WebDriverWait(driver, 30);
+		 * wait.until(ExpectedConditions.elementToBeClickable(paymentslink));
+		 */
+		try {   
+			Thread.sleep(2000); 		
+			driver.switchTo().frame("IPerceptionsEmbed");
+			System.out.println("iPerception Pop Up is Present");
+			iPerceptionCloseButton.click();
+			driver.switchTo().defaultContent();
+			Thread.sleep(5000);
+		}
+		catch (Exception e) {
+			System.out.println("iPerception Pop Up is not Present");
 		}
 
 		// Thread.sleep(16000);
+
+		waitforElement(ShipPremiumPayment);
+		System.out.println("payment link is displayed on the header");
+		ShipPremiumPayment.click();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if (PaymentHeading.getText().contains("Premium Payments Overview")) {
+			System.out.println("Payment Overview page displayed");
+			return new AccountHomePage(driver);
+		} else {
+			System.out.println("payment overview page not displayed");
+			return null;
+		}
+	}
+
+	public AccountHomePage navigateToSHIPTab(){	        
+
+		try {   
+			Thread.sleep(2000); 		
+			driver.switchTo().frame("IPerceptionsEmbed");
+			System.out.println("iPerception Pop Up is Present");
+			iPerceptionCloseButton.click();
+			driver.switchTo().defaultContent();
+			Thread.sleep(5000);
+		}
+		catch (Exception e) {
+			System.out.println("iPerception Pop Up is not Present");
+		}
+
+		waitforElement(ShipTab);
+		System.out.println("Ship tab loaded");
+		ShipTab.click();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if (PayDate.getText().contains("Paid through Date")) {
+			System.out.println("ShipTab with amount displayed");
+			return new AccountHomePage(driver);
+		} else {
+			System.out.println("Ship tab issue");
+			return null;
+		}
+	}
+
+
+	public PaymentHistoryPage navigateToOneTimePaymentHistoryPage(){
+
+		try {   
+			Thread.sleep(2000); 		
+			driver.switchTo().frame("IPerceptionsEmbed");
+			System.out.println("iPerception Pop Up is Present");
+			iPerceptionCloseButton.click();
+			driver.switchTo().defaultContent();
+			Thread.sleep(5000);
+		}
+		catch (Exception e) {
+			System.out.println("iPerception Pop Up is not Present");
+		}
 
 		waitforElement(PremiumPayment);
 		System.out.println("payment link is displayed on the header");
@@ -773,7 +697,7 @@ public class AccountHomePage extends UhcDriver {
 
 	public pages.regression.payments.PaymentHistoryPage scrollDownAndUp() throws InterruptedException {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		jse.executeScript("window.scrollBy(0,500)", "");
+		jse.executeScript("window.scrollBy(0,550)", "");
 
 		waitforElement(HistoryDropdown);
 
@@ -785,36 +709,39 @@ public class AccountHomePage extends UhcDriver {
 		try{			
 			if (HistoryTable.isDisplayed()) {
 				System.out.println("Payment History Exists");
-				jse.executeScript("window.scrollBy(0,-600)", "");
-				Thread.sleep(3000);			
+				jse.executeScript("window.scrollBy(0,-1100)", "");
+				Thread.sleep(5000);			
 			} }
-			catch(Exception e)
-			{
-				System.out.println("History table not present for this member");
-				jse.executeScript("window.scrollBy(0,-600)", "");
-				Thread.sleep(3000);				
-			}
-			return new pages.regression.payments.PaymentHistoryPage(driver);
+		catch(Exception e)
+		{
+			System.out.println("History table not present for this member");	
+
 		}
 
-	
-	
-public ContactUsPage navigateToContactUsPage() {
-		
+		jse.executeScript("window.scrollBy(0,-1000)", "");
+		Thread.sleep(5000);
+
+		return new pages.regression.payments.PaymentHistoryPage(driver);
+	}
+
+
+
+	public ContactUsPage navigateToContactUsPage() {
+
 		JavascriptExecutor js = (JavascriptExecutor)driver;
-		
+
 		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		if (validate(iPerceptionPopUp)) {
-            iPerceptionPopUp.click();
-            System.out.println("iPerception Pop Up displayed");
+			iPerceptionPopUp.click();
+			System.out.println("iPerception Pop Up displayed");
 		}
 		if (MRScenario.environmentMedicare.equals("team-ci1") || MRScenario.environmentMedicare.equals("team-h") || MRScenario.environmentMedicare.equals("test-a") || MRScenario.environmentMedicare.equals("team-e")) {
 			js.executeScript("arguments[0].click();", helpAndContactUslink);
-			
+
 		}else{
 			linkContactUs.click();
 		}
@@ -825,10 +752,10 @@ public ContactUsPage navigateToContactUsPage() {
 		}
 		return null;
 	}
-	
 
-	
-		public pages.dashboard.member.ulayer.PaymentHistoryPage changeUrlToNewPaymentHistoryPage() {
+
+
+	public pages.dashboard.member.ulayer.PaymentHistoryPage changeUrlToNewPaymentHistoryPage() {
 
 		String NewPayHistoryUrl = "content/dashboard/home/Payments.html";
 
@@ -845,45 +772,45 @@ public ContactUsPage navigateToContactUsPage() {
 
 		return null;
 	}
-	
-	
+
+
 	public PlanComparePage navigateToPlanCompare() {
 		//Compare 2017 Plans
 		planCompareLink.click();
-		
+
 		CommonUtility.waitForPageLoad(driver, planCompareHeader, 20);
-		
+
 		if(getTitle().equalsIgnoreCase("Compare 2017 Plans"))
 		{
 			return new PlanComparePage(driver);
-			
-					}
+
+		}
 		return null;
 	}
 
-	
+
 	public Rallytool_Page navigateToRallyPage() { 
 		driver.manage().window().maximize(); 
 		try{
-		searchForProviders.click();
-		//switch to Rally Page
-		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
-		driver.switchTo().window(tabs.get(1));
-		if (driver.getTitle().equalsIgnoreCase("Find Care")) {
-		return new Rallytool_Page(driver);
-		}
-		else{
-			Assert.fail();
-		}
+			searchForProviders.click();
+			//switch to Rally Page
+			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+			driver.switchTo().window(tabs.get(1));
+			if (driver.getTitle().equalsIgnoreCase("Find Care")) {
+				return new Rallytool_Page(driver);
+			}
+			else{
+				Assert.fail();
+			}
 		}
 		catch(Exception e){
-					
-		Assert.fail("Link is not Present");
+
+			Assert.fail("Link is not Present");
 		} 
 
 		return null;
-		}
-	
+	}
+
 
 	public OneTimePaymentsPage navigateToOneTimePaymentsPage() throws InterruptedException {
 		driver.navigate().to("https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/content/dashboard/home/one-time-payments.html");
@@ -901,23 +828,23 @@ public ContactUsPage navigateToContactUsPage() {
 			return true;
 		}
 		return false;
-		
+
 	}
 
-	
-	  public TestHarness navigateToTestHarnesspage() {
-          driver.navigate().to("https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/home/testharness.html");
-          System.out.println("title  "+driver.getTitle());
-          if(driver.getTitle().equalsIgnoreCase("testharness")){
-                  return new TestHarness(driver);
-          }
-          return null;
-  }
 
-	
-	
+	public TestHarness navigateToTestHarnesspage() {
+		driver.navigate().to("https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/home/testharness.html");
+		System.out.println("title  "+driver.getTitle());
+		if(driver.getTitle().equalsIgnoreCase("testharness")){
+			return new TestHarness(driver);
+		}
+		return null;
+	}
+
+
+
 	public void validateDrugsPreferredMailOderLink() {
-		
+
 		if(validate(drugPreferredMailServicePharmacyLink))
 		{
 			System.out.println("Drug Preferred Mail Service Link is displaying in footer");	
@@ -934,11 +861,19 @@ public ContactUsPage navigateToContactUsPage() {
 		System.out.println("Actual logo's source on Dashboard page is   "+logo_src+" and Expected logo source    "+logoToBeDisplayedOnDashboard+" .");	
 		System.out.println("logo's alt text on Dashboard page is   "+logo_alt);		
 		Assert.assertTrue(logo_src.contains(logoToBeDisplayedOnDashboard));
-	
 	}
-	
-public ClaimSummarypage navigateToClaimsSummaryPage() {
-		
+	public void validateCoLogoImagePresent(String cologoToBeDisplayedOnDashboard) throws InterruptedException {
+		Thread.sleep(2000);	
+		String cologo_src = cologoImage.getAttribute("src");
+		String cologo_alt = cologoImage.getAttribute("alt");
+		System.out.println("Actual cologo's source on Dashboard page is   "+cologo_src+" and Expected cologo source    "+cologoToBeDisplayedOnDashboard+" .");	
+		System.out.println("cologo's alt text on Dashboard page is   "+cologo_alt);		
+		Assert.assertTrue(cologo_src.contains(cologoToBeDisplayedOnDashboard));
+		System.out.println("Dashboard page cologo assert condition is passed");
+	}
+
+	public ClaimSummarypage navigateToClaimsSummaryPage() {
+
 		if (MRScenario.environmentMedicare.equalsIgnoreCase("team-h") || MRScenario.environmentMedicare.equalsIgnoreCase("test-a") || (MRScenario.environmentMedicare.equalsIgnoreCase("team-t") || MRScenario.environment.equalsIgnoreCase("team-ci1"))) {
 			System.out.println("Go to claims link is present "+driver.findElement(By.xpath("//a[text()='Go to Claims page']")).isDisplayed());
 			driver.findElement(By.xpath("//a[text()='Go to Claims page']")).click();			
@@ -951,13 +886,13 @@ public ClaimSummarypage navigateToClaimsSummaryPage() {
 				claimsDashboardLink.click();
 				try {
 					Thread.sleep(10000);	
-					
+
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
-				
+
 		}
 		else 
 		{
@@ -969,196 +904,177 @@ public ClaimSummarypage navigateToClaimsSummaryPage() {
 			try {
 				Thread.sleep(10000);
 				ClaimSummarypage comboTab = new ClaimSummarypage(driver).comboTabSelection();
-                comboTab.comboTabSelection();
-                
+				comboTab.comboTabSelection();
+
 			} catch (InterruptedException e) {
-				
+
 				e.printStackTrace();
 			}	
 
-}
+		}
 		return new ClaimSummarypage(driver);
-}
+	}
 
-public ClaimDetailsPage navigateToClaimDetailsPage() {
-	CommonUtility.waitForPageLoad(driver, claimstablemoreinfolink, 60);
-	claimstablemoreinfolink.click();
-	CommonUtility.waitForPageLoad(driver, claimDetTableMainSection, 60);
+	public ClaimDetailsPage navigateToClaimDetailsPage() {
+		CommonUtility.waitForPageLoad(driver, claimstablemoreinfolink, 60);
+		claimstablemoreinfolink.click();
+		CommonUtility.waitForPageLoad(driver, claimDetTableMainSection, 60);
 
-	//driver.findElement(By.xpath("//a[contains(text(),'MORE INFO')]")).click();
-	/*
-	 * try { Thread.sleep(1000); } catch (InterruptedException e) { // TODO
-	 * Auto-generated catch block e.printStackTrace(); }
-	 */
-	System.out.println(driver.getTitle());
-	if (driver.getTitle().equalsIgnoreCase("Claims")) {
+		//driver.findElement(By.xpath("//a[contains(text(),'MORE INFO')]")).click();
+		/*
+		 * try { Thread.sleep(1000); } catch (InterruptedException e) { // TODO
+		 * Auto-generated catch block e.printStackTrace(); }
+		 */
+		System.out.println(driver.getTitle());
+		if (driver.getTitle().equalsIgnoreCase("Claims")) {
+			return new ClaimDetailsPage(driver);
+
+		}
 		return new ClaimDetailsPage(driver);
+	}
 
-	}
-	return new ClaimDetailsPage(driver);
-}
+	public PharmacySearchPage navigateToRedesignPharmacyLocaterPage() {
+		if (validate(iPerceptionAutoPopUp)) {
+			iPerceptionAutoPopUp.click();
+		} else {
+			System.out.println("iPerception Pop Up not displayed");
+		}
+		if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a") || MRScenario.environmentMedicare.equalsIgnoreCase("test-a") || MRScenario.environment.equalsIgnoreCase("team-ci1")) {
+			System.out.println("Go to Pharmacy locator is present "+ pharmacySearchLink.isDisplayed());
+			pharmacySearchLink.click();			
+		}
+		else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {	
+			if(driver.getCurrentUrl().contains("/dashboard"));
+			{
+				System.out.println("User is on dashboard page and URL is ====>"+driver.getCurrentUrl());
+				pharmacySearchLink.click();
+				try {
+					Thread.sleep(10000);	
 
-public PharmacySearchPage navigateToRedesignPharmacyLocaterPage() {
-	if (validate(iPerceptionAutoPopUp)) {
-		iPerceptionAutoPopUp.click();
-	} else {
-		System.out.println("iPerception Pop Up not displayed");
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+		}
+		return new PharmacySearchPage(driver);
 	}
-	if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a") || MRScenario.environmentMedicare.equalsIgnoreCase("test-a") || MRScenario.environment.equalsIgnoreCase("team-ci1")) {
-		System.out.println("Go to Pharmacy locator is present "+ pharmacySearchLink.isDisplayed());
-		pharmacySearchLink.click();			
+
+	/**
+	 * @return the pharmacySearchLink
+	 */
+	public boolean checkPharmacyLinkNotAvailable() {
+		try {
+			if(pharmacySearchLink.isDisplayed()) {
+				System.out.println("Pharmacy link is present");
+				return false;
+			}
+			else {
+
+			}
+		}
+		catch(Exception e) {
+			System.out.println("Pharmacy link is not present");
+			return true;
+		}
+		return false;
 	}
-	else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {	
+
+	// to navigate to forms and resources page
+	public pages.regression.formsandresources.FormsAndResourcesPage navigatetoFormsnResources() {
+
+		if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a") || MRScenario.environmentMedicare.equalsIgnoreCase("test-a") || MRScenario.environment.equalsIgnoreCase("team-ci1")) {
+			System.out.println("Go to claims link is present "+driver.findElement(By.xpath("//a[text()='Go to Pharmacy Locator page']")).isDisplayed());
+			driver.findElement(By.xpath("//a[text()='Go to Pharmacy Locator page']")).click();			
+		}
+		/*else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
+		System.out.println("user is on Stage login page");						
 		if(driver.getCurrentUrl().contains("/dashboard"));
 		{
 			System.out.println("User is on dashboard page and URL is ====>"+driver.getCurrentUrl());
-			pharmacySearchLink.click();
+			claimsDashboardLink.click();
 			try {
 				Thread.sleep(10000);	
-	
+
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-			
+
 	}
-	return new PharmacySearchPage(driver);
-}
-
-		/**
-		 * @return the pharmacySearchLink
+	else 
+	{
+		System.out.println("This script is only intended to be run using test harness on team-b or team-h. Update condition for your own environment");	
+	}
+	System.out.println(driver.getTitle());
 		 */
-		public boolean checkPharmacyLinkNotAvailable() {
-			try {
-				if(pharmacySearchLink.isDisplayed()) {
-				System.out.println("Pharmacy link is present");
-				return false;
-				}
-				else {
-				
-			}
-			}
-			catch(Exception e) {
-				System.out.println("Pharmacy link is not present");
-				return true;
-			}
-			return false;
-		}
+		/*if (driver.getTitle().equalsIgnoreCase("Claims")) {
+		try {
+			Thread.sleep(10000);
+			ClaimSummarypage comboTab = new ClaimSummarypage(driver).comboTabSelection();
+            comboTab.comboTabSelection();
 
-		// to navigate to forms and resources page
-		public FormsAndResourcesPage navigatetoFormsnResources() throws InterruptedException {
-		                if (validate(iPerceptionAutoPopUp)) {
-		                                iPerceptionAutoPopUp.click();
-		                } else {
-		                                System.out.println("iPerception Pop Up not displayed");
-		                }
-		    if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a") || MRScenario.environmentMedicare.equalsIgnoreCase("test-a") || MRScenario.environment.equalsIgnoreCase("team-ci1")) {
-		        System.out.println("Go to claims link is present "+driver.findElement(By.xpath("//a[text()='Go to Pharmacy Locator page']")).isDisplayed());
-		        driver.findElement(By.xpath("//a[text()='Go to Pharmacy Locator page']")).click();              
-		                                 }
-		                                else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
-		                                        System.out.println("user is on Stage login page");                                       
-		                                        if(driver.getCurrentUrl().contains("/aarp/dashboard"))
-		                                        {
-		                                               System.out.println("User is on dashboard page and URL is ====>"+driver.getCurrentUrl());
-		                                               Thread.sleep(2000);
-		                                               driver.navigate().to(PAGE_URL + "aarp/member/documents/overview.html");
-		                                               https://stage-mymedicareaccount.uhc.com/pcp/member/documents/overview.html
-		                                                                                                System.out.println(driver.getCurrentUrl());
-		                                                                                                CommonUtility.waitForPageLoad(driver, PlanMaterialSection, 20);
-		                                                                                                if (driver.getTitle().equalsIgnoreCase("Documents Overview")) {
-		                                                                                                                System.out.println(driver.getTitle());}
-		                                              
-		                                                                                   System.out.println(driver.getTitle());
-		                                               
-		                                        } }
-		                                else if(driver.getCurrentUrl().contains("/pcp/dashboard"))
-		                                
-		                                                 {
-		                               System.out.println("User is on pcp dashboard page and URL is ====>"+driver.getCurrentUrl());
-		                               Thread.sleep(2000);
-		                               driver.navigate().to("https://stage-mymedicareaccount.uhc.com/pcp/member/documents/overview.html");
-		                               
-		                                                                                System.out.println(driver.getCurrentUrl());
-		                                                                                CommonUtility.waitForPageLoad(driver, PlanMaterialSection, 20);
-		                                                                                if (driver.getTitle().equalsIgnoreCase("Documents Overview")) {
-		                                                                                                System.out.println(driver.getTitle());}
-		                                }
-		                                
-		                                 else if(driver.getCurrentUrl().contains("/retiree/dashboard"))
-		                                                
-		                                 {
-		               System.out.println("User is on  dashboard page and URL is ====>"+driver.getCurrentUrl());
-		               Thread.sleep(2000);
-		               driver.navigate().to(PAGE_URL + "retiree/member/documents/overview.html");
-		               
-		                                                                System.out.println(driver.getCurrentUrl());
-		                                                                CommonUtility.waitForPageLoad(driver, PlanMaterialSection, 20);
-		                                                                if (driver.getTitle().equalsIgnoreCase("Documents Overview")) {
-		                                                                                System.out.println(driver.getTitle());
-		                                                                                }
-		                }
-		                                else if(driver.getCurrentUrl().contains("/medica/dashboard"))
-		                                                
-		                                 {
-		               System.out.println("User is on dashboard page and URL is ====>"+driver.getCurrentUrl());
-		               Thread.sleep(2000);
-		               driver.navigate().to("https://stage-mymedicareaccount.uhc.com/medica/member/documents/overview.html");
-		                                                                System.out.println(driver.getCurrentUrl());
-		                                                                CommonUtility.waitForPageLoad(driver, PlanMaterialSection, 20);
-		                                                                if (driver.getTitle().equalsIgnoreCase("Documents Overview")) {
-		                                                                                System.out.println(driver.getTitle());}
-		                }
+		} catch (InterruptedException e) {
 
-		                return new FormsAndResourcesPage(driver);
-		}
-	
+			e.printStackTrace();
+		}	
+
+}*/
+		return new FormsAndResourcesPage(driver);
+		//return null;
+	}
+
 	public PaymentHistoryPage navigateToPaymentHistoryPage() throws InterruptedException
-	 {
+	{
 
-	 	    	/*WebDriverWait wait = new WebDriverWait(driver, 30);
+		/*WebDriverWait wait = new WebDriverWait(driver, 30);
 	 				wait.until(ExpectedConditions.elementToBeClickable(paymentslink));
-	 */
-	 	    	if(	validate(iPerceptionPopUp)) {
-	 	    		iPerceptionPopUp.click();
-	 	    	}
-	 	    	else  {
-	 	    		System.out.println("iPerception Pop Up not displayed");
-	 	    	}
-	 	    	
-	 	        Thread.sleep(6000);
+		 */
+		try {
+			System.out.println("iPerception Pop Up is Present");
+			driver.switchTo().frame("IPerceptionsEmbed");
+			iPerceptionCloseButton.click();
+			//driver.switchTo().defaultContent();
+			Thread.sleep(5000);
+		}
+		catch (Exception e) {
+			System.out.println("iPerception Pop Up is not Present");
+		}
 
-	 	    	if (validate(paymentsLink)) {
+		Thread.sleep(6000);
 
-	 	    		System.out.println("payment link is displayed on the header");
-	 	    		paymentsLink.click();
-	 	    		return new PaymentHistoryPage(driver);
-	 	    	}else{
-	 	    		System.out.println("payment link is not displayed on the header");
-	 	    		return null;
-	 	    	}
-	 	    	/*else{
+		if (validate(paymentsLink)) {
+
+			System.out.println("payment link is displayed on the header");
+			paymentsLink.click();
+			return new PaymentHistoryPage(driver);
+		}else{
+			System.out.println("payment link is not displayed on the header");
+			return null;
+		}
+		/*else{
 	 	    		CoverageAndBenefits.click();
-		 	    	
+
 		 	    	WebDriverWait wait = new WebDriverWait(driver, 30);
 		 			wait.until(ExpectedConditions.elementToBeClickable(paymentslink));
-		 	    	
+
 		 	    	validate(paymentslink);
 		 	    	paymentslink.click();
 		 	    	return new PaymentHistoryPage(driver);
 	 	    	}*/
-	 	
 
-	//return new PaymentHistoryPage(driver);
-}
+
+		//return new PaymentHistoryPage(driver);
+	}
 
 	/*
 	 * Added by Sneha - To Navigate to Order plan Materials page by clicking on link in Rally Dashboard
 	 * 
 	 */
 	public OrderMaterialsPage navigateToOrderPlanMaterialsPage() throws InterruptedException {
-		
+
 		CommonUtility.checkPageIsReady(driver);
 		if(validate(OrderMaterial_Dashboard)){
 			System.out.println("Order Materials link found on dashboard");
@@ -1179,95 +1095,57 @@ public PharmacySearchPage navigateToRedesignPharmacyLocaterPage() {
 			e.printStackTrace();
 		}
 		CommonUtility.checkPageIsReady(driver);
-		
-//		CommonUtility.waitForPageLoadNew(driver, orderplanHeadertxt, 30);
+		//		CommonUtility.waitForPageLoadNew(driver, orderplanHeadertxt, 30);
 		if (orderplanHeadertxt.isDisplayed()) {
 			return new OrderMaterialsPage(driver);
 		}
 		return null;
 	}
-    public EOBPage navigateDirectToEOBPag(){
-        /*WebDriverWait wait = new WebDriverWait(driver, 10);
+	public EOBPage navigateDirectToEOBPag(){
+		/*WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.elementToBeClickable(eobLink));*/
-        try{
-                        if (iPerceptionPopUp.isDisplayed()) {
-                                        iPerceptionPopUp.click();
-                        }
-        }catch(Exception e)        {
-                        System.out.println("iPerception Pop Up not displayed");
-        }
-
-        validate(medicalEobLink);
-        medicalEobLink.click();
-        return new EOBPage(driver);
-}
-
-	public void clickPremiumPayment() {
-	if(premiumPayment.isDisplayed()){
-			premiumPayment.click();
-	}
-	
-	}
-		/**
-		 * validate the Premium payment Page
-		 */
-		public void validatePremiumPage (){
-			Assert.assertTrue("Premium payment overivew is not displayed", paymentsOverview.isDisplayed());
+		try{
+			if (iPerceptionPopUp.isDisplayed()) {
+				iPerceptionPopUp.click();
+			}
+		}catch(Exception e)        {
+			System.out.println("iPerception Pop Up not displayed");
 		}
 
-		/*validate that the Premium payment tab is not displayed on the header
-		 */
-
-		public boolean premiumPaymentsNotAvailable() {
-			
-			if(validate(premiumPayment)==false)
-			{
-				Assert.assertFalse("premium payment is not displayed", validate(premiumPayment));
-				return true;
-				
-			}
-			else {
-				Assert.fail("premium payment is displayed");
-				return false;
-			}
-			}
-
-/*validate that the Find care tab is not displayed on the header
- */
-
-public boolean findCareNotAvailable() {
-	
-	if(validate(findCare)==false)
-	{
-		Assert.assertFalse("find care is not displayed", validate(findCare));
-		return true;
-		
-	}
-	else {
-		Assert.fail("find care is displayed");
-		return false;
-	}
+		validate(medicalEobLink);
+		medicalEobLink.click();
+		return new EOBPage(driver);
 	}
 
+	public void validateClaimsL2Tabs(){
+		if(claims.isDisplayed()){
+			claims.click();
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			Assert.assertTrue("claimSummary is not displayed", claimSummary.isDisplayed());
+			Assert.assertTrue("explainationOfBenefits is not displayed", explainationOfBenefits.isDisplayed());
+		}
+	}
 
-/**
- * validate Find Care Cost Tab
- */
+	public void validateFooterSection() {		
 
-public void validateFindCareCostTab(){
-	Assert.assertTrue("Find Care and Cost tab is not displayed", findCareCost.isDisplayed());
+		JavascriptExecutor jse = (JavascriptExecutor) driver; 
+		Assert.assertTrue("Footer section is not displayed", footerSection.isDisplayed());
+	}
 
-	
+	public DrugCostEstimatorPage navigate_to_dce(){
+		waitforElement(drugLookup);
+		drugLookup.click();
+		Assert.assertTrue("drugLookup link is not present", true);
+
+		return new DrugCostEstimatorPage(driver);
+	}
+
+	public  void dce_not_present(){
+		Assert.assertFalse("Drug look up link is not present", drugLookup.isDisplayed());	
+	}
 }
-
-public void validateFindCarePage(){
-		
-if(driver.getCurrentUrl().contains("/find-care"));
-	{
-	System.out.println("User is on find care page and URL is ====>"+driver.getCurrentUrl()); 
-	}
-
-} }
-
-		
-	

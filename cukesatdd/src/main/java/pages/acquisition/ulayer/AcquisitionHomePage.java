@@ -259,8 +259,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		sendkeys(zipCodeField, zipcode);
 		viewPlansButton.click();
 		
-		if (getTitle().equalsIgnoreCase(
-				PageTitleConstants.ULAYER_OUR_MEDICARE_PLANS)) {
+		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
 		}
 		return null;
