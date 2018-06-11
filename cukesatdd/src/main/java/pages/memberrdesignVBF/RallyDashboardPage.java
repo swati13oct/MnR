@@ -163,10 +163,10 @@ public class RallyDashboardPage extends UhcDriver {
 	@FindBy(partialLinkText = "Asistencia de Idiomas | Aviso de no Discriminación (PDF)")
 	private WebElement languageAssistanceSpanish;
 
-	@FindBy(xpath = "//a[starts-with(@id,'ACCdropdown_') and contains(text(),'Log Out')]")
+	@FindBy(xpath = "//ul[@id='dropdynamic']//a[contains(text(),'Log Out')]")
 	private WebElement NavAccountProfSignOut;
 
-	@FindBy(xpath = "//a[starts-with(@id,'ACCdropdown_') and contains(text(),'Account Settings')]")
+	@FindBy(xpath = "//ul[@id='dropdynamic']//a[contains(text(),'Account Settings')]")
 	private WebElement NavAccountProfSetting;
 
 	@FindBy(xpath = "//h2[text() = 'Common Services & Costs']")
