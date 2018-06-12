@@ -40,7 +40,7 @@ public class HsidRegistrationStepDefinition {
 	
 	@Given("^the user is on medicare sign in page$")
 	public void the_user_is_on_medicare_sign_in_page() throws Throwable {
-		WebDriver wd = getLoginScenario().getWebDriver();
+		WebDriver wd = getLoginScenario().getWebDriverNew();
 		HSIDLoginPage hsidLoginPage = new HSIDLoginPage(wd);
 		getLoginScenario().saveBean(PageConstants.HSID_LOGIN_PAGE, hsidLoginPage);
 	}

@@ -64,7 +64,7 @@ public class HSIDStepDefinition {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
 		}
-
+        
 		String category = memberAttributesMap.get("Member Type");
 		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
 		List<String> desiredAttributes = new ArrayList<String>();
@@ -91,6 +91,7 @@ public class HSIDStepDefinition {
 			System.out.println("Password is..." + pwd);
 			getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
+			
 		}
          
 		WebDriver wd = getLoginScenario().getWebDriverNew();
