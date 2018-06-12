@@ -31,6 +31,9 @@ public class HsidRegistrationPersonalInformationPage extends UhcDriver {
 	////button[contains(.,'Register now')]
     @FindBy(xpath = "//button[@class='button button--primary ng-scope' and contains(.,'Continue')]")
     public WebElement continuebutton;
+    
+    @FindBy(xpath = "//button[@class='button button--primary ng-scope' and contains(.,'Try Again')]")
+    public WebElement tryagainbutton;
 	
 	@FindBy(xpath = "//label[@for='piFirstName']/span[@class='error']")
 	private WebElement firstNameErrorMsg;
@@ -91,9 +94,22 @@ public class HsidRegistrationPersonalInformationPage extends UhcDriver {
 	
 	public HsidRegistrationPersonalCreateAccount clickContinue(){
 		continuebutton.click();
-		
+		try {
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(tryagainbutton.isDisplayed())
+		{
+			while(tryagainbutton.isDisplayed())
+			{
+			tryagainbutton.click();
+			}
+		}
 
 		while(!currentUrl().contains("register/createAccount")){
+			
 			System.out.println("create account page is loading");
 			try {
 				Thread.sleep(3000);

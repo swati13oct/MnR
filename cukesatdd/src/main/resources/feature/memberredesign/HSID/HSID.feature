@@ -54,7 +54,9 @@ Feature:To test HSID registration flow
  
    | planType|  memberType  | copayCategory | firstname | lastname        |   dob 	            | memberid 	  | zipcode  | userName 	       | password   |   email	  			          | question1 | question2 | question3 |
    | MAPD    |  Individual  |  NON LIS      | AFAFBBF   | AECFEC          | 05/15/1950          | 954668573-1 | 78501	 |q1_feb_uhc042        | Password@1 | codetransformers@gmail.com      | number1   | name1     | color1    |
-   
+   | PDP     |  Individual  |  NON LIS      | FBDDE     | BCCDF           | 11/05/1948          | 018948860-1 | 01702	 |q1_feb_uhc042        | Password@1 | codetransformers@gmail.com      | number1   | name1     | color1    |
+   | SHIP    |  Individual  |  NON LIS      | AFAFBBF   | AECFEC          | 05/15/1950          | 954668573-1 | 78501	 |q1_feb_uhc042        | Password@1 | codetransformers@gmail.com      | number1   | name1     | color1    |
+   | PCP     |  Individual  |  NON LIS      | AFAFBBF   | AECFEC          | 05/15/1950          | 954668573-1 | 78501	 |q1_feb_uhc042        | Password@1 | codetransformers@gmail.com      | number1   | name1     | color1    |
    
    
    @AssistiveRegistration @US968323
