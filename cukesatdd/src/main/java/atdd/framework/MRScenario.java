@@ -300,7 +300,9 @@ public class MRScenario {
     }
                
               public static  void getRecordsFrom_mbr_table(String firstName, String lastName) throws SQLException {
-            	   Connection con = getPDBDBConnection(props);
+            	  try
+            	  {
+            	  Connection con = getPDBDBConnection(props);
              	   Statement stmt = null;
                   
                     stmt = con.createStatement();
@@ -314,11 +316,21 @@ public class MRScenario {
                     rs1.close();
                     stmt.close();
                     con.close();
+            	  }
+            	  catch (SQLException e) {
+                      // TODO Auto-generated catch block
+                      e.printStackTrace();
+       }
+            	  
                }
                
                
                
                public static void deleteRecordsFrom_mbr_table(String firstName, String lastName) throws SQLException {
+            	   try
+            	   {
+            		   
+            	   
             	   Connection con = getPDBDBConnection(props);
             	   Statement stmt = null;
                    ResultSet rs = null;
@@ -345,11 +357,17 @@ public class MRScenario {
            		} else {
            			System.out.println("Still Records exist in the table: mbr");
            		}
+            	   }
+            	   catch (SQLException e) {
+                       // TODO Auto-generated catch block
+                       e.printStackTrace();
+        }
 
            	} 
                
                public static void deleteRecordsFrom_mbr_prtl_table(String firstName, String lastName) throws SQLException {
-
+                                try
+                                {
            		// The following steps will return no. of selected records based on
            		// first name and last name
             	   Connection con = getPDBDBConnection(props);
@@ -379,9 +397,16 @@ public class MRScenario {
            		} else {
            			System.out.println("Still Records exist in the table: mbr_prtl");
            		}
+                                }
+                                catch (SQLException e) {
+                                    // TODO Auto-generated catch block
+                                    e.printStackTrace();
+                     }
            	}
 
            	public static void deleteRecordsFrom_mbr_extrm_scl_dtl_table(String firstName, String lastName) throws SQLException {
+           		try
+           		{
            		// The following steps will return no. of selected records based on
            		// first name and last name
            		Connection con = getPDBDBConnection(props);
@@ -413,6 +438,11 @@ public class MRScenario {
            		} else {
            			System.out.println("Still Records exist in the table: mbr_extrm_scl_dtl");
            		}
+           		}
+           		catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+     }
            	}
 
                public void removeMember() {
