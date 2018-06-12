@@ -127,7 +127,7 @@ Then I should not see drug look up on home page
  | planType  | memberType|
  | Medsup    | Ship_AARP |
  | Group     | SSUP      |
- 
+ | MA		| AARPIndividual|
  
 @Member_DCE_sso
 Scenario Outline:I1.3 To Verify MR portal group members DCE should redirect to optum rx sso landing page. 
