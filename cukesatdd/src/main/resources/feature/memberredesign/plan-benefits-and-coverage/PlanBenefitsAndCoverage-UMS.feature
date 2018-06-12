@@ -33,7 +33,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     And the user validates static links
     And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully
        | Language | <language> |
-    And the user verifies that the correct pdfs are coming in the plan material section
+    And the user verifies that the correct pdfs are there in the plan material section
        |Summary of Benefits | <SummaryofBenefits> |
        |Evidence of Coverage| <EvidenceofCoverage> |
        |Comprehensive Formulary - Drug List| <ComprehensiveFormularyDrug List>|
@@ -80,7 +80,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     And the user validates links for pdp in pdf section
     And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully
        | Language | <language> |
-    And the user verifies that the correct pdfs are coming in the plan material section
+    And the user verifies that the correct pdfs are there in the plan material section
        |Summary of Benefits | <SummaryofBenefits> |
        |Evidence of Coverage| <EvidenceofCoverage> |
        |Comprehensive Formulary - Drug List| <ComprehensiveFormularyDrug List>|
@@ -482,7 +482,7 @@ And the user validates Lis member plan overview section
  And the user validates static links
 And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully
  | Language | <language> |
-And the user verifies that the correct pdfs are coming in the plan material section
+And the user verifies that the correct pdfs are there in the plan material section
  |Summary of Benefits | <SummaryofBenefits> |
  |Evidence of Coverage| <EvidenceofCoverage> |
  |Comprehensive Formulary - Drug List| <ComprehensiveFormularyDrug List>|
@@ -521,7 +521,7 @@ And the user validates view and document label
  And the user validates static links
 And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully
  | Language | <language> |
-And the user verifies that the correct pdfs are coming in the plan material section
+And the user verifies that the correct pdfs are there in the plan material section
  |Summary of Benefits | <SummaryofBenefits> |
  |Evidence of Coverage| <EvidenceofCoverage> |
  |Comprehensive Formulary - Drug List| <ComprehensiveFormularyDrug List>|

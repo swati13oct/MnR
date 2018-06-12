@@ -66,7 +66,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 	@FindBy(xpath = "//a[contains(text(), 'Primary Care Physician')]")
 	private WebElement SelectPCPLink;
 
-	@FindBy(xpath = "//*[contains(text(), 'Assign as PCP')]")
+	@FindBy(xpath = "//*[contains(text(), 'Select PCP')]")
 	private List <WebElement> AssinPCPLinks;
 
 	@FindBy(xpath = ".//*[@id='label_selectedLocation0_acceptingExistingPatientsOnly' or @id = 'label_selectedLocation0_accepting']")
