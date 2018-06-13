@@ -336,6 +336,15 @@ public class ContactusRedesignStepDefinition {
 				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
 						contactusPage);
 		}
+		
+		/***
+		 * 
+		 */
+		@Then("^user should only see the Technical Support and Plan Support components$")
+		public void user_should_only_see_the_Technical_Support_and_Plan_Support_components() {
+			ContactUsPage contactusPage = (ContactUsPage) getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+			contactusPage.validateWidgetsForTerminatedMembers();
+		}
 
 	}
 
