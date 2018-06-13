@@ -182,6 +182,12 @@ public class CommonUtility {
 
 		WebDriver wd = mrScenario.getWebDriverNew();
 		wd.get(completeDateUrl);
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		wd.quit();
 	}
 
@@ -214,6 +220,12 @@ public class CommonUtility {
 
 		WebDriver wd = mrScenario.getWebDriverNew();
 		wd.get(completeDateUrl);
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		wd.quit();
 	}
 
@@ -222,6 +234,12 @@ public class CommonUtility {
 		String completeDateUrl = MRREST_TIME_ADMIN_URL + dateURL;
 		WebDriver wd = mrScenario.getWebDriverNew();
 		wd.get(completeDateUrl);
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		wd.quit();
 	}
 
@@ -230,6 +248,12 @@ public class CommonUtility {
 		String completeDateUrl = PARTD_TIME_ADMIN_URL + dateURL;
 		WebDriver wd = mrScenario.getWebDriverNew();
 		wd.get(completeDateUrl);
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		wd.quit();
 
 	}
@@ -380,6 +404,12 @@ public class CommonUtility {
 				writer.close();
 			} catch (Exception e) {
 				System.out.println("ERROR creating version text file");
+			}
+			try {
+				Thread.sleep(4000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 			wd.quit();
 		}

@@ -809,6 +809,12 @@ public class MRScenario {
 
                public void nullifyWebDriver() {
                               if (null != webDriver) {
+                            	  try {
+									Thread.sleep(40000);
+								} catch (InterruptedException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
                                              webDriver.close();
                                              webDriver = null;
                               }
