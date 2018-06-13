@@ -32,7 +32,7 @@ public class HsidRegistrationPersonalInformationPage extends UhcDriver {
     @FindBy(xpath = "//button[@class='button button--primary ng-scope' and contains(.,'Continue')]")
     public WebElement continuebutton;
     
-    @FindBy(xpath = "//button[@class='button button--primary ng-scope' and contains(.,'Try Again')]")
+    @FindBy(xpath = "//button[@class='button button--primary ng-scope' and contains(text(),'Try Again')]")
     public WebElement tryagainbutton;
 	
 	@FindBy(xpath = "//label[@for='piFirstName']/span[@class='error']")
