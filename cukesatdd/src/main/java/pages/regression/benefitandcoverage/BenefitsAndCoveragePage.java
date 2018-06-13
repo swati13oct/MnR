@@ -477,7 +477,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	
 
 	
-	@FindBy(xpath = "//div[@id='white-label']/a/img[2]")
+	@FindBy(xpath = "(//img[@alt='CoLogo'])[1]")	
 	private WebElement cologoImage;
 	
 	private static String PAGE_URL = MRConstants.STAGE_DASHBOARD_NEW_DOMAIN_URL;
