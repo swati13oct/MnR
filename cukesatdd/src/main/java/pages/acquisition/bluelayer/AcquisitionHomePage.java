@@ -82,7 +82,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
         @FindBy(xpath="//a[contains(text(),'Request More')]")
     	private WebElement moreHelpInfoLink;
 
-        @FindBy(xpath="//a[contains(text(),'Request More')]")
+        @FindBy(xpath="//a[contains(text(),'Request More Help')]")
         private WebElement pdp_moreHelpInfoLink;
 
         @FindBys(value = { @FindBy(xpath = "//table[@id='selectcountytable']/tbody/tr/td") })
