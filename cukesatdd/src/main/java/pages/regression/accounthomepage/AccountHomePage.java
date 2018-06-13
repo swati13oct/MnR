@@ -16,17 +16,24 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.MRConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
+import atdd.framework.UhcDriver;
 //import pages.member.redesign.ContactUsPage;
 import pages.member.ulayer.OneTimePaymentsPage;
 import pages.member.ulayer.PlanComparePage;
 import pages.member.ulayer.Rallytool_Page;
 import pages.member.ulayer.TestHarness;
+import pages.regression.IDCardPage.IDCardPage;
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.regression.claims.ClaimDetailsPage;
 import pages.regression.claims.ClaimSummarypage;
 //import pages.regression.claims.ClaimSummarypage;
 import pages.regression.contactus.ContactUsPage;
+import pages.regression.drugcostestimator.DrugCostEstimatorPage;
 import pages.regression.explanationofbenefits.EOBPage;
 import pages.regression.formsandresources.FormsAndResourcesPage;
 import pages.regression.ordermaterials.OrderMaterialsPage;
@@ -34,13 +41,6 @@ import pages.regression.payments.PaymentHistoryPage;
 import pages.regression.pharmacylocator.PharmacySearchPage;
 //import pages.member.bluelayer.BenefitsAndCoveragePage;
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.MRConstants;
-import acceptancetests.data.PageData;
-import acceptancetests.util.CommonUtility;
-import atdd.framework.MRScenario;
-import atdd.framework.UhcDriver;
-import pages.regression.drugcostestimator.*;
 
 
 
@@ -48,6 +48,9 @@ import pages.regression.drugcostestimator.*;
 
 public class AccountHomePage extends UhcDriver {
 
+	@FindBy(css=".view-id-link")
+	private WebElement idCardLink;
+	
 	@FindBy(xpath = "(//*[@class='ng-scope']//a[text()='Premium Payments'])[1]")
 	private WebElement paymentsLink;
 
@@ -211,6 +214,19 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@ng-src='/images/icons/icon-pharmacy-locator.svg']")
 	private WebElement pharmacySearchLink;
+	
+	//for Header
+	@FindBy(id = "premiumpayment_3")
+	private WebElement premiumPayment;
+	
+	@FindBy(id = "paymentOverviewApp")
+	public static WebElement paymentsOverview;
+	
+	@FindBy(linkText = "FIND CARE & COSTS")
+	private WebElement findCareCost;
+	
+	@FindBy(xpath = ".//header[@class='hide-mobile']//a[contains(text(),'Find Care & Costs')]")
+	private WebElement findCare;
 
 
 	//Added by Sneha - Navigate to Order Plan Materials 
@@ -984,7 +1000,7 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	// to navigate to forms and resources page
-	public pages.regression.formsandresources.FormsAndResourcesPage navigatetoFormsnResources() {
+	public pages.regression.formsandresources.FormsAndResourcesPage navigatetoFormsnResources() throws InterruptedException {
 
 		if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a") || MRScenario.environmentMedicare.equalsIgnoreCase("test-a") || MRScenario.environment.equalsIgnoreCase("team-ci1")) {
 			System.out.println("Go to claims link is present "+driver.findElement(By.xpath("//a[text()='Go to Pharmacy Locator page']")).isDisplayed());
@@ -1150,4 +1166,92 @@ public class AccountHomePage extends UhcDriver {
 	public  void dce_not_present(){
 		Assert.assertFalse("Drug look up link is not present", drugLookup.isDisplayed());	
 	}
+	
+	
+
+	public void clickPremiumPayment() {
+		if(premiumPayment.isDisplayed()){
+				premiumPayment.click();
+		}
+		
+		}
+			/**
+			 * validate the Premium payment Page
+			 */
+			public void validatePremiumPage (){
+				Assert.assertTrue("Premium payment overivew is not displayed", paymentsOverview.isDisplayed());
+			}
+
+			/*validate that the Premium payment tab is not displayed on the header
+			 */
+
+			public boolean premiumPaymentsNotAvailable() {
+				
+				if(validate(premiumPayment)==false)
+				{
+					Assert.assertFalse("premium payment is not displayed", validate(premiumPayment));
+					return true;
+					
+				}
+				else {
+					Assert.fail("premium payment is displayed");
+					return false;
+				}
+				}
+
+	/*validate that the Find care tab is not displayed on the header
+	 */
+
+	public boolean findCareNotAvailable() {
+		
+		if(validate(findCare)==false)
+		{
+			Assert.assertFalse("find care is not displayed", validate(findCare));
+			return true;
+			
+		}
+		else {
+			Assert.fail("find care is displayed");
+			return false;
+		}
+		}
+
+
+	/**
+	 * validate Find Care Cost Tab
+	 */
+
+	public void validateFindCareCostTab(){
+		Assert.assertTrue("Find Care and Cost tab is not displayed", findCareCost.isDisplayed());
+
+		
+	}
+
+	public void validateFindCarePage(){
+			
+	if(driver.getCurrentUrl().contains("/find-care"));
+		{
+		System.out.println("User is on find care page and URL is ====>"+driver.getCurrentUrl()); 
+		}
+
+	}
+	
+	/**
+	 * This method used to view ID Card 
+	 * @return
+	 */
+	public IDCardPage viewIDCard(){
+        try{
+                        if (iPerceptionPopUp.isDisplayed()) {
+                                        iPerceptionPopUp.click();
+                        }
+        }catch(Exception e)        {
+                        System.out.println("iPerception Pop Up not displayed");
+        }
+
+        validate(idCardLink);
+        idCardLink.click();
+        return new IDCardPage(driver);
+	}
 }
+
