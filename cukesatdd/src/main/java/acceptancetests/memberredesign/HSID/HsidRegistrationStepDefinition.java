@@ -21,6 +21,7 @@ import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
+import cucumber.api.java.After;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -330,6 +331,14 @@ public class HsidRegistrationStepDefinition {
 		hsidRegistrationConfirmInformationPage.getregistrationflowcompleteemail();
 	}
 	
+	
+	@After
+    public void DriverQuit()
+
+    {
+		WebDriver wd = (WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.quit();
+    }
 	
 	
 	
