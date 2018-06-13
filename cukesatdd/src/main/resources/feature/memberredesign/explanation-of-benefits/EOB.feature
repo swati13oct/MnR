@@ -126,5 +126,16 @@ Then the user validates content displayed on EOB page
        | MA          |  comboEOB      | 18 Months |Medical  |     0     | 	MA			 | HIP    |
        
 	
-	
+Scenario Outline: To verify error message for PHIP member on EOB Page
+Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+Then the user navigates to EOB page_hsid 
+Then the user validates content displayed on EOB page
+      |Plan Tab     | <planTab1>  |
+And the user gets the error message for PHIP member	
+      
+Examples:
+       | planType      | memberType     | 
+       | PHIP          |  SHIP          |
  

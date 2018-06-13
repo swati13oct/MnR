@@ -351,7 +351,11 @@ if (eobPage!=null){
 
     }
 
-
+    @And("^the user gets the error message for PHIP member$")
+	public void user_gets_error_message_PHIP(){
+		EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		eobPage.validatePHIPErorrMessage();	
+ 	}
 
 	/*@After
 	public void tearDown() {

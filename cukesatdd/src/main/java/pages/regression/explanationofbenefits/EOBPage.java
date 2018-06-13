@@ -645,8 +645,7 @@ public class EOBPage extends UhcDriver{
 		Assert.assertTrue(getURL.contains(".pdf"));
 	}
 	
-		
-	public void validatePaginationText(){
+	public void validatePHIPErorrMessage(){
 		
 	}
  }
