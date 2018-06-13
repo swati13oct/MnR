@@ -475,10 +475,27 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-plan-header")
 	private WebElement planSupportHeader;
 	
-
-	
 	@FindBy(xpath = "//div[@id='white-label']/a/img[2]")
 	private WebElement cologoImage;
+	
+	@FindBy(className= "atdd-bnc-standrdretailpharmcytable")
+	private WebElement drugTableNonLisMember;
+	
+	@FindBy(id = "standard_ads-header")
+	private List<WebElement> annualDeductibleColumnFederal ;
+	
+	@FindBy(id = "standard_ics-header")
+	private List<WebElement> initialCoverageColumnFederal ;
+	
+	@FindBy(id = "standard_cgp-header")
+	private List<WebElement>  coverageGaStageColumnFederal;
+	
+	@FindBy(id = "standard_ccs-header")
+	private List<WebElement> catastrophicCoverageStageColumnFederal;
+	
+	@FindBy(xpath = "//table[@class='table-white atdd-bnc-standrdretailpharmcytable']/tbody/tr[2]/td[3]")
+	private WebElement federalValueIC ;
+	
 	
 	private static String PAGE_URL = MRConstants.STAGE_DASHBOARD_NEW_DOMAIN_URL;
 
@@ -1925,8 +1942,8 @@ public boolean vasnotdisplayed() {
 		validateNew(retailTable);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,-150)", "");
-		if (ICStage30dayNonMain.size() > 1 && ICStage30dayMain.size() > 1 && ICStage31to60.size() > 1
-				&& ICStage61to90.size() > 1) {
+		if (ICStage30dayNonMain.size() > 0 && ICStage30dayMain.size() > 0 && ICStage31to60.size() > 0
+				&& ICStage61to90.size() > 0) {
 			Assert.assertTrue("The columns are correct in texas Ers table", true);
 
 		} else {
@@ -1956,7 +1973,7 @@ public boolean vasnotdisplayed() {
 		 * wait.until(ExpectedConditions.visibilityOf(MailOrderTable));
 		 */
 
-		if (ICStage31to60MailOrder.size() > 1 || ICStage61to90MailOrder.size() > 1) {
+		if (ICStage31to60MailOrder.size() > 0 || ICStage61to90MailOrder.size() > 0) {
 			Assert.assertTrue("The columns are correct in texas Ers  mail ordertable", true);
 		} else {
 			Assert.assertFalse("The columns are incorrect in texas Ers  mail ordertable", true);
@@ -2039,8 +2056,8 @@ public boolean vasnotdisplayed() {
 
 		System.out.println(annualDeductibleColumn.size() + initialCoverageColumn.size() + coverageGaStageColumn.size()
 				+ catastrophicCoverageStageColumn.size());
-		if (annualDeductibleColumn.size() > 1 && initialCoverageColumn.size() > 1 && coverageGaStageColumn.size() > 1
-				&& catastrophicCoverageStageColumn.size() > 1) {
+		if (annualDeductibleColumn.size() > 0 && initialCoverageColumn.size() > 0 && coverageGaStageColumn.size() > 0
+				&& catastrophicCoverageStageColumn.size() > 0) {
 			Assert.assertTrue("The columns are correct in Peehip table", true);
 
 		} else {
@@ -2113,4 +2130,39 @@ public boolean vasnotdisplayed() {
 		validateNew(contactUslink);
 		validateNew(disclaimersLink);
 	}
+
+	public void validateCopayCoinsuranceInDrugTable() {
+		validateNew(drugTableNonLisMember);
+
+	
+		if (annualDeductibleColumnFederal.size() > 0 && initialCoverageColumnFederal.size() > 0 && coverageGaStageColumnFederal.size() > 0
+				&& catastrophicCoverageStageColumnFederal.size() > 0) {
+			Assert.assertTrue("The columns are correct in Drug Costs table", true);
+
+		} else {
+			Assert.assertFalse("The columns are incorrect in drug Costs table", true);
+		}
+
+		validateNew(federalValueIC);
+		String input = federalValueIC.getText();
+		Pattern pattern = Pattern.compile("^\\$\\d{2,3}\\.\\d{2}$");
+		if (pattern.matcher(input).matches()) {
+			Assert.assertTrue("value  in IC column exists", true);
+			
+		} else {
+			throw new IllegalArgumentException("Invalid String");
+		}
+		
+
+	
+		
+	}
+
+	
+		
+		
+		
+
+		
+
 }

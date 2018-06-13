@@ -1276,6 +1276,17 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	}
 	
 	
+	@And("the user validates the copay coinsurance in drug costs table")
+	public void userValidatesCopayCoinsuranceindrugTable() {
+				
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.validateCopayCoinsuranceInDrugTable();
+						
+	}
+	
+
+	
 	
 
 	
