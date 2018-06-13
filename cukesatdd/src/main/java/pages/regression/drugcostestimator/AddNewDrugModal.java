@@ -45,6 +45,9 @@ public class AddNewDrugModal extends UhcDriver {
 
 	@FindBy(id = "drug-alt-search-button")
 	public WebElement continueButton;
+	
+	@FindBy(id = "drug-dosage-button")
+	public WebElement continueDrugBtn;
 
 	@FindBy(xpath = "//span[contains(text(),'Your Drug List can contain a maximum of 25 drugs.')]")
 	public WebElement exceededError;
@@ -155,9 +158,9 @@ public class AddNewDrugModal extends UhcDriver {
 	 */
 	public AddDrugDetails submit() throws InterruptedException{
 		searchButton.click();
-		waitforElement(continueButton);
+		CommonUtility.waitForPageLoad(driver, continueButton, 20);
 		continueButton.click();
-		Thread.sleep(5000);
+		CommonUtility.waitForElementToDisappear(driver, continueButton, 20);
 		return new AddDrugDetails(driver);
 	}
 
@@ -184,14 +187,8 @@ public class AddNewDrugModal extends UhcDriver {
 	 * return new AddDrugDetails
 	 */
 	public AddDrugDetails continueAddNewDrugModal(){
-		waitforElement(continueButton);
-		//		try {
-		//			Thread.sleep(20000);
-		//		} catch (InterruptedException e) {
-		//			// TODO Auto-generated catch block
-		//			e.printStackTrace();
-		//		}
-		continueButton.click();
+		CommonUtility.waitForPageLoad(driver, continueDrugBtn, 20);
+		continueDrugBtn.click();
 		return new AddDrugDetails(driver);
 	}
 

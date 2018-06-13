@@ -218,8 +218,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("county box not found");
 		}
 		
-		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_OUR_MEDICARE_PLANS)) {
-			System.out.println("title matches");
+		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
 		}
 		return null;
@@ -253,8 +252,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		sendkeys(zipCodeField, zipcode);
 		viewPlansButton.click();
 		
-		if (getTitle().equalsIgnoreCase(
-				PageTitleConstants.ULAYER_OUR_MEDICARE_PLANS)) {
+		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
 		}
 		return null;
