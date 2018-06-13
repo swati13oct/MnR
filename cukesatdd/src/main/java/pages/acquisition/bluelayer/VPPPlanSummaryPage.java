@@ -1366,7 +1366,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		System.out.println("Plan Name is : "+PlanName);
 		
-		WebElement PremiumForPlan = driver.findElement(By.xpath("//h2[contains(text(), '"+PlanName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//li[contains(text(),'Monthly Premium')]//span[contains(text(),'$')]"));
+		WebElement PremiumForPlan = driver.findElement(By.xpath("//h3[contains(text(), '"+PlanName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//li[contains(text(),'Monthly Premium')]//span[contains(text(),'$')]"));
 		String PlanPremium = PremiumForPlan.getText();
 		
 		System.out.println("Premium for Plan : "+PlanPremium);
@@ -1383,7 +1383,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public WelcomePage Enroll_OLE_Plan(String planName) throws InterruptedException {
 		
 		System.out.println("Enroll in Plan for Plan : "+planName);
-		WebElement EnrollForPlan = driver.findElement(By.xpath("//h2[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(), 'Enroll in')]"));
+		WebElement EnrollForPlan = driver.findElement(By.xpath("//h3[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(), 'Enroll in')]"));
 		try {
 		validate(EnrollForPlan);
 		

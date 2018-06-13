@@ -956,7 +956,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	 * @author njain112
 	 */
 	
-	@And("^the user verifies that the correct pdfs are coming in the plan material section$")
+	@And("^the user verifies that the correct pdfs are there in the plan material section$")
 	   public void verifypdfscoming(DataTable givenAttributes) throws InterruptedException   {
 	         
 		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
