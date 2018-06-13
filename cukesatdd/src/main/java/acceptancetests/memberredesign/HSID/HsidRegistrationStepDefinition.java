@@ -288,7 +288,7 @@ public class HsidRegistrationStepDefinition {
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
 		
-		String userName = memberAttributesMap.get("userName");
+		
 		String password = memberAttributesMap.get("password");
 		
 		WebDriver wd = getLoginScenario().getWebDriver();
@@ -297,11 +297,10 @@ public class HsidRegistrationStepDefinition {
 		HSIDLoginPage loginPage = new HSIDLoginPage(wd);
 		loginPage.validateelements();
 
-        
+		String userName  = (String) getLoginScenario().getBean(LoginCommonConstants.Username);
 		pages.regression.accounthomepage.AccountHomePage accountHomePage = (pages.regression.accounthomepage.AccountHomePage) loginPage.doLoginWith(userName, password);
 
-		/*String userName =  (String)getLoginScenario().getBean(LoginCommonConstants.Username);
-        AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, password);*/
+	
 
         if (accountHomePage!= null) {
         	loginScenario.saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);

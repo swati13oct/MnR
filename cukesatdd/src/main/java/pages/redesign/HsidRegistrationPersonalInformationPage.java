@@ -1,7 +1,10 @@
 package pages.redesign;
 
+
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -95,7 +98,21 @@ public class HsidRegistrationPersonalInformationPage extends UhcDriver {
 	public HsidRegistrationPersonalCreateAccount clickContinue(){
 		continuebutton.click();
 		
-
+		try
+		{
+          if(tryagainbutton.isDisplayed())
+          {
+        	  while(tryagainbutton.isDisplayed())
+        	  {
+        	  tryagainbutton.click();
+        	  }
+          }
+		}
+		catch (NoSuchElementException e)
+		{
+			System.out.println("test");
+		}
+          
 		while(!currentUrl().contains("register/createAccount")){
 			
 			System.out.println("create account page is loading");
@@ -106,6 +123,7 @@ public class HsidRegistrationPersonalInformationPage extends UhcDriver {
 				e.printStackTrace();
 			}
 		}
+          
 		System.out.println("create account page is loaded"+currentUrl());
 		try {
 			Thread.sleep(20000);

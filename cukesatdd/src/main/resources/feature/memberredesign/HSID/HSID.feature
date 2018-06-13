@@ -44,10 +44,10 @@ Feature:To test HSID registration flow
   And user is navigated to Confirm email page
   And user should see a latest unread mail recieved in provided email address
   Then user should copy the confirm email url to browser
+  And user should see the email confirmation message "Email confirmed: Please sign in with your new username and password." in Sign In form
   And user should be at Sign In page
        | userName   | <userName>   |  
        | password   | <password>   |  
-  And user should see the email confirmation message "Email confirmed: Please sign in with your new username and password." in Sign In form
   Then user should see a latest unread mail recieved  in mail server
    
    Examples:
