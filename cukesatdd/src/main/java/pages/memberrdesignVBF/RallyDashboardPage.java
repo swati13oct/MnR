@@ -561,7 +561,7 @@ else{
 	driver.switchTo().defaultContent();
 }
 			counter++;
-		} while (counter < 1);
+		} while (counter < 2);
 	}
 
 	/***
