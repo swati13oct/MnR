@@ -64,25 +64,25 @@ public class AuthorizationPage extends UhcDriver{
 	@FindBy(id = "firstName0")
 	private WebElement Authorized_FirstName;
 
-	@FindBy(id = "firstName0")
+	@FindBy(id = "lastName0")
 	private WebElement Authorized_LastName;
 	
-	@FindBy(id = "firstName0")
+	@FindBy(id = "authorizedPersonRelationship0")
 	private WebElement Authorized_Relation;
 	
-	@FindBy(id = "firstName0")
+	@FindBy(id = "address10")
 	private WebElement Authorized_Address;
 	
-	@FindBy(id = "firstName0")
+	@FindBy(id = "city0")
 	private WebElement Authorized_City;
 	
-	@FindBy(id = "firstName0")
+	@FindBy(id = "state0")
 	private WebElement Authorized_State;
 	
-	@FindBy(id = "firstName0")
+	@FindBy(id = "Zip0")
 	private WebElement Authorized_ZipCode;
 	
-	@FindBy(id = "firstName0")
+	@FindBy(id = "authorizedPersonPhone0")
 	private WebElement Authorized_PhNo;
 
 	//Read and Agree to the Statement of Understanding
@@ -92,7 +92,7 @@ public class AuthorizationPage extends UhcDriver{
 	@FindBy(id = "AgreeDisagree")
 	private WebElement SoU_DisagreeRadio;
 	
-	@FindBy(xpath = "//*[contains(text(), 'sorry, you cannot complete the application without agreeing to the Statement of Understanding')]")
+	@FindBy(id= "icon-alert-sign")
 	private WebElement SoU_DisagreeError;
 	
 	@FindBy(id = "ole-force-cancel-button")

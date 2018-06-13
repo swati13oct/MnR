@@ -14,10 +14,10 @@ And the user validates the available plans for selected plan types in the AARP s
 Then the user clicks on Enroll Now for AARP site to start the OLE flow
 	| Plan Name | <planName> |
 Then the user validates the Plan details on OLE 
-Then the user validates TFN in Welcome OLE Right Rail
-Then the user validates Learn more modal for Welcome OLE
-Then the user validates Leave OLE modal for Welcome OLE
-Then the user validates cancellation modal for Welcome OLE
+#Then the user validates TFN in Welcome OLE Right Rail
+#Then the user validates Learn more modal for Welcome OLE
+#Then the user validates Leave OLE modal for Welcome OLE
+#Then the user validates cancellation modal for Welcome OLE
 Then the user validates and selects the Disclaimer Checkbox
 Then the user navigates to Medicare Information Page
 Then the user validates Medicare Information Page required fields
@@ -29,21 +29,21 @@ Then the user enters following required Medicare Information
 	| PartA Date | <partadate> |
 	| PartB Date | <partbdate> |
 	| Card Type | <cardtype> |
-Then the user validates TFN in Medicare Info OLE Right Rail
-Then the user validates the Plan details in Medicare Info OLE Right Rail 
+#Then the user validates TFN in Medicare Info OLE Right Rail
+#Then the user validates the Plan details in Medicare Info OLE Right Rail 
 #Then the user validates Learn more modal for Medicare Information Page
 #Then the user validates Leave OLE modal for Medicare Information Page
 #Then the user validates cancellation modal for Medicare Information Page
 Then the user navigates to Preliminary Questions Page
-    Then the user validates requierd fields for Preliminary Questions Page
-      | MedicaidNumber | <medicaidnumber> |
-    Then the user validates the Plan details in Preliminary Questions Pag OLE Right Rail
-    #    Then the user validates TFN in Right Rail on Preliminary Questions Page
-    #    Then the user validates Leave OLE modal for Preliminary Questions Page
-    #    Then the user validates Learn more modal for Preliminary Questions Page
-    #    Then the user validates cancellation modal for Preliminary Questions Page
-    Then the user navigates to Personal Information Page
-    Then the user enters following required information in Personal Information Page
+Then the user validates requierd fields for Preliminary Questions Page
+     | MedicaidNumber | <medicaidnumber> |
+#Then the user validates the Plan details in Preliminary Questions Pag OLE Right Rail
+#    Then the user validates TFN in Right Rail on Preliminary Questions Page
+#    Then the user validates Leave OLE modal for Preliminary Questions Page
+#    Then the user validates Learn more modal for Preliminary Questions Page
+#    Then the user validates cancellation modal for Preliminary Questions Page
+Then the user navigates to Personal Information Page
+Then the user enters following required information in Personal Information Page
       | DOB                      | <dob>                    |
       | Gender                   | <gender>                 |
       | Perm_Street              | <permstreet>             |
@@ -55,40 +55,40 @@ Then the user navigates to Preliminary Questions Page
       | Mailing_Zip              | <mailingzip>             |
       | Email                    | <email>                  |
       | MedicaidNumber           | <medicaidnumber>         |
-    Then the user validates the Plan details in Personal Information Page OLE Right Rail
-    Then the user validates the Member details dynamic display in Personal Information Page
-    #    Then the user validates TFN in Right Rail on Personal Information Page
-    #    Then the user validates Leave OLE modal for Personal Information Page
-    #    Then the user validates Learn more modal for Personal Information Page
-    #    Then the user validates cancellation modal for Personal Information Page
-    Then the user navigates to SEP Page
-    #    Then the user validates the Plan details in SEP Page OLE Right Rail
-    #    Then the user validates TFN in Right Rail on SEP Page
-    #    Then the user validates Leave OLE modal for SEP Page
-    #    Then the user validates Learn more modal for SEP Page
-    #    Then the user validates cancellation modal for SEP Page
-    Then the user validates SEP options and Required Fields for PlanType in SEP Page
-    Then the user selects the following options for SEP Page
+Then the user validates the Plan details in Personal Information Page OLE Right Rail
+Then the user validates the Member details dynamic display in Personal Information Page
+#    Then the user validates TFN in Right Rail on Personal Information Page
+#    Then the user validates Leave OLE modal for Personal Information Page
+#    Then the user validates Learn more modal for Personal Information Page
+#    Then the user validates cancellation modal for Personal Information Page
+Then the user navigates to SEP Page
+#    Then the user validates the Plan details in SEP Page OLE Right Rail
+#    Then the user validates TFN in Right Rail on SEP Page
+#    Then the user validates Leave OLE modal for SEP Page
+#    Then the user validates Learn more modal for SEP Page
+#    Then the user validates cancellation modal for SEP Page
+Then the user validates SEP options and Required Fields for PlanType in SEP Page
+Then the user selects the following options for SEP Page
       | Select Options | <selectoptions> |
       | Option Data    | <optiondata>    |
-    Then the user navigates to Coverage and Health Information Page
-    Then the user validates the dispalyed sections for the Plan Type in Coverage and Health Information Page
-    Then the user answers following questions in Coverage and Health Information Page
+Then the user navigates to Coverage and Health Information Page
+Then the user validates the dispalyed sections for the Plan Type in Coverage and Health Information Page
+Then the user answers following questions in Coverage and Health Information Page
       | PDP Question      | <pdpFlag>      |
       | LongTerm Question | <longTermFlag> |
-    Then the user navigates to Proposed Effective Date Page
-    Then the user validates Proposed Effective Date is Displayed
-    Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
-    Then the user validates PCP page for MA and MAPD PFFS plans
-    Then the user validates Look up Provider for MA MAPD and DSNP plans.
-    Then the user navigates to Monthly Plan Premium Page
-    Then the user navigates to Optional Benefits Page for following plans with available Riders
+Then the user navigates to Proposed Effective Date Page
+Then the user validates Proposed Effective Date is Displayed
+Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
+#    Then the user validates PCP page for MA and MAPD PFFS plans
+#   Then the user validates Look up Provider for MA MAPD and DSNP plans.
+Then the user navigates to Monthly Plan Premium Page
+Then the user navigates to Optional Benefits Page for following plans with available Riders
       | Rider Flag | <riderflag> |
-    Then the user navigates to Authorization Page for plan as per following rider options
+Then the user navigates to Authorization Page for plan as per following rider options
       | Rider Flag | <riderflag> |
-    Then the user validates required fields for Authorization Page
-    Then the user navigates to Review and Submit Page
-    Then the user validates the Plan and Member details on Review and Submit Page
+Then the user validates required fields for Authorization Page
+Then the user navigates to Review and Submit Page
+Then the user validates the Plan and Member details on Review and Submit Page
 	
 Examples:
 | zipcode | county             | plantype | planName                                             | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                      | optiondata        | pdpFlag | longTermFlag | riderflag |
