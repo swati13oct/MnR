@@ -757,13 +757,18 @@ public class MRScenario {
               //capabilities.setCapability("name", "MRATDD-TestSuite");
               capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
               String jobName = "VBF Execution - Using " + capabilities.getBrowserName() + " in  " + System.getProperty("environment") +" environment";
-              capabilities.setCapability("name", jobName);
+              
                 try {
                                 webDriver = new RemoteWebDriver(new URL(URL), capabilities);
+                                
+                                Thread.sleep(1000);
                  } catch (MalformedURLException e) {
                                 // TODO Auto-generated catch block
                               e.printStackTrace();
-               }
+               } catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
               
             	
                
@@ -874,10 +879,19 @@ public class MRScenario {
                }
 
                
-               public void DriverQuit()
+               public void DriverQuit() 
           
                {
-            	   webDriver.quit();
+            	
+            	   webDriver.close();
+            	    try {
+						Thread.sleep(4000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+            	    webDriver.quit();
+            	   
                }
 
 	public Map<String, String> getmemberRedesignVbfWithDesiredAttributes(
@@ -914,8 +928,9 @@ public class MRScenario {
 		scenario.embed(screenshot, "image/png");
 
 	}
-	public void nullifyWebDriverNew() {
+	public void nullifyWebDriverNew() throws InterruptedException {
 		if (null != webDriver) {
+			Thread.sleep(4000);
 			webDriver.quit();
 			webDriver = null;
 		}
