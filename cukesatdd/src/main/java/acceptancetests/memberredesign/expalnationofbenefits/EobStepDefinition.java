@@ -256,7 +256,7 @@ public class EobStepDefinition {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
-		String planType = memberAttributesMap.get("Plan Type");
+		String planType = memberAttributesMap.get("Plan Tab");
  		EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
  		
  		eobPage.navigatePlanTabs(planType);
