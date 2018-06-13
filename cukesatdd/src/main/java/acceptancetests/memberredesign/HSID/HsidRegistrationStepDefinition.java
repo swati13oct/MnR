@@ -42,6 +42,7 @@ public class HsidRegistrationStepDefinition {
 	public void the_user_is_on_medicare_sign_in_page() throws Throwable {
 		WebDriver wd = getLoginScenario().getWebDriverNew();
 		HSIDLoginPage hsidLoginPage = new HSIDLoginPage(wd);
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.HSID_LOGIN_PAGE, hsidLoginPage);
 	}
 
@@ -87,7 +88,7 @@ public class HsidRegistrationStepDefinition {
 		System.out.println("firstName: "+firstName +"lastName: "+lastName +"dob: "+dob+"memberId: "+memberId +"zipcode: " + zipcode);
 		hsidRegistrationPersonalInfoPage.populatefields(firstName, lastName, dob,zipcode, memberId);
 		HsidRegistrationPersonalCreateAccount hsidRegistrationPersonalCreateAccount 
-																= hsidRegistrationPersonalInfoPage.clickContinue();
+										= hsidRegistrationPersonalInfoPage.clickContinue();
 		getLoginScenario().saveBean(PageConstants.HSID_REGISTRATION_PERSONALCREATEACCOUNT, hsidRegistrationPersonalCreateAccount);
 		
 	}
@@ -96,6 +97,7 @@ public class HsidRegistrationStepDefinition {
 	public void user_is_navigated_to_step_two_create_account_page() throws Throwable {
 		HsidRegistrationPersonalCreateAccount hsidRegistrationPersonalCreateAccount = 
 				(HsidRegistrationPersonalCreateAccount) loginScenario.getBean(PageConstants.HSID_REGISTRATION_PERSONALCREATEACCOUNT);
+		System.out.println("test");
 		hsidRegistrationPersonalCreateAccount.verifyCreateAccountSection();
 		
 	}
@@ -122,8 +124,8 @@ public class HsidRegistrationStepDefinition {
 		String password = memberAttributesMap.get("password");
 		String email = memberAttributesMap.get("email");
 	
-		WebDriver wd = getLoginScenario().getWebDriver();
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		
+		WebDriver wd = (WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DeregisterPage deregister = new DeregisterPage(wd);
 		String userName = deregister.getUserName();
 		getLoginScenario().saveBean(LoginCommonConstants.Username, userName);

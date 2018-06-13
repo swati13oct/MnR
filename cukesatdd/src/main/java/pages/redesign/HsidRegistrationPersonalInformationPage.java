@@ -115,6 +115,7 @@ public class HsidRegistrationPersonalInformationPage extends UhcDriver {
 		}
 	    
 		if(currentUrl().contains("register/createAccount")){
+			
 			return new HsidRegistrationPersonalCreateAccount(driver);
 		}else{
 			Assert.assertTrue("Errors in Registration Personal Info page and not navigated to Create Account page",false);
