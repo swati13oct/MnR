@@ -41,7 +41,7 @@ public class HsidRegistrationStepDefinition {
 	
 	@Given("^the user is on medicare sign in page$")
 	public void the_user_is_on_medicare_sign_in_page() throws Throwable {
-		WebDriver wd = getLoginScenario().getWebDriverNew();
+		WebDriver wd = getLoginScenario().getWebDriver();
 		HSIDLoginPage hsidLoginPage = new HSIDLoginPage(wd);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.HSID_LOGIN_PAGE, hsidLoginPage);
@@ -331,20 +331,19 @@ public class HsidRegistrationStepDefinition {
 		hsidRegistrationConfirmInformationPage.getregistrationflowcompleteemail();
 	}
 	
-	
-	@After
-    public void DriverQuit()
 
-    {
-		WebDriver wd = (WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		wd.quit();
-    }
-	
-	
-	
-
-
-
-	
-
+  
 }
+	
+	
+	
+   
+	
+	
+	
+
+
+
+	
+
+

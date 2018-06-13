@@ -47,6 +47,7 @@ import org.springframework.stereotype.Component;
 
 import acceptancetests.data.CommonConstants;
 import cucumber.api.Scenario;
+import cucumber.api.java.After;
 
 /**
 * 
@@ -90,8 +91,8 @@ public class MRScenario {
 
                //public static final String ACCESS_KEY = System.getenv("SAUCE_ACCESS_KEY");
 
-               public static final String URL = "https://" + USERNAME + ":" + ACCESS_KEY
-                                             + "@ondemand.saucelabs.com:443/wd/hub";
+               public static final String URL = "http://" + USERNAME + ":" + ACCESS_KEY
+                                             + "@ondemand.saucelabs.com:80/wd/hub";
 
                public void saveBean(String id, Object object) {
                               scenarioObjectMap.put(id, object);
@@ -831,7 +832,7 @@ public class MRScenario {
                               webDriver = new ChromeDriver(capabilities);
                               return webDriver;
                }
-
+               
                public void nullifyWebDriver() {
                               if (null != webDriver) {
                                              webDriver.close();
@@ -1077,8 +1078,10 @@ public class MRScenario {
                 } catch (MalformedURLException e) {
                        Assert.fail("Invalid Sauce URL: [" + URL + "]");
                 }
-                
+                saveBean(CommonConstants.WEBDRIVER, webDriver);
+                return webDriver;
  			}
+
         }
                       return webDriver;
                
