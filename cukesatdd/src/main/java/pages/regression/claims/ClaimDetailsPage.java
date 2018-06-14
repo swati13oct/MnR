@@ -2,8 +2,6 @@ package pages.regression.claims;
 /**
  * 
  */
-import junit.framework.Assert;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,6 +10,8 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.UhcDriver;
+import cucumber.api.java.en.And;
+import junit.framework.Assert;
 
 /**
  * Functionality : this page validates Claims Details Page. 
@@ -212,6 +212,11 @@ public class ClaimDetailsPage extends UhcDriver{
 
 	@SuppressWarnings("deprecation")
 	public void validateClaimsTableInDetailsPage() {
+		//wait.until(ExpectedConditions.visibilityOf(rememberThisDeviceSection));
+		if (driver.getCurrentUrl().contains("member/claims/overview.html#/details"))
+		System.out.println("The URL of the Claims page is---------->"+driver.getCurrentUrl());
+		System.out.println("The title of Claims page is-------->"+driver.getTitle());
+		
 		System.out.println("!!! Validating the elements on the Claims Details page !!!");
 		validate(medicalClaimDetailsText);
 		System.out.println("!!! Medical Claims Details text is seen on the Claims Details page !!!");

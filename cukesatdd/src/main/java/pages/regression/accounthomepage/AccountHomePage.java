@@ -290,6 +290,7 @@ public class AccountHomePage extends UhcDriver {
 				;
 			{
 				System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
+				
 				driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
 				try {
 					Thread.sleep(20000);
@@ -877,6 +878,7 @@ public class AccountHomePage extends UhcDriver {
 		System.out.println("Actual logo's source on Dashboard page is   "+logo_src+" and Expected logo source    "+logoToBeDisplayedOnDashboard+" .");	
 		System.out.println("logo's alt text on Dashboard page is   "+logo_alt);		
 		Assert.assertTrue(logo_src.contains(logoToBeDisplayedOnDashboard));
+		System.out.println("Dashboard page Primary logo assert condition is passed");
 	}
 	public void validateCoLogoImagePresent(String cologoToBeDisplayedOnDashboard) throws InterruptedException {
 		Thread.sleep(2000);	
