@@ -165,15 +165,15 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	//@FindBy(className = "atdd-benefitsoverview-plantitle")
 		@FindBy(xpath=".//*[@class='h2 margin-none overview-heading atdd-benefitsoverview-plantitle ng-binding']")
-		private WebElement planName;
+		private WebElement planName2;
 
 		//@FindBy(className = "atdd-benefitsoverview-membernamelabel")
 		@FindBy(xpath=".//*[@class='bold atdd-benefitsoverview-membernamelabel']")
-		private WebElement nameLabel;
+		private WebElement nameLabel1;
 
 		//@FindBy(className = "atdd-benefitsoverview-memberidlabel")
 		@FindBy(className = ".//*[@class='bold atdd-benefitsoverview-memberidlabel']")
-		private WebElement memberID;
+		private WebElement memberID1;
 
 		//@FindBy(className = "atdd-benefitsoverview-effectivedatelabel")
 		@FindBy(xpath=".//*[@class='bold atdd-benefitsoverview-effectivedatelabel']")
@@ -296,6 +296,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			@FindBy(id = "specialDisctServices")
 			private WebElement textdiscountservices;
 
+			//@FindBy(id="drug-benefits")
+			@FindBy(xpath= ".//*[contains (text(),'DRUG LOOKUP')]")
+			private WebElement DrugLookUpLink;
+			
 
 			@FindBy(className = "atdd-bnc-discounttitle")
 			private WebElement headerdiscountservices;
@@ -469,6 +473,18 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(id = "needhelpsectioncontactus")
 	private WebElement needHelpSection;
 	
+	@FindBy(className = "atdd-benefitsoverview-plantitle")
+	private WebElement planName;
+
+	@FindBy(className = "atdd-benefitsoverview-membernamelabel")
+	private WebElement nameLabel;
+
+	@FindBy(className = "atdd-benefitsoverview-memberidlabel")
+	private WebElement memberID;
+
+	@FindBy(className = "atdd-benefitsoverview-effectivedatelabel")
+	private WebElement effective_Date1;
+	
 	@FindBy(className = "atdd-tech-header")
 	private WebElement techSupportHeader;
 	
@@ -588,8 +604,21 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(NeedHelpHeader);
 		validate(TechnicalSupport);
 		validate(PlanSupport);
+	}
+	
+	/**
+	 * @toDo : The user validates the headers in Need help section
+	 */
+
+	public void validateNeedhelpheader1() {
+
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,3000)", "");
+		validate(NeedHelpHeader);
+		System.out.println("!!Need help header is validated !!");
 
 	}
+
 
 	/**
 	 * @toDo : The user validates the Contact us section in Need help section
@@ -1225,8 +1254,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	public void validate_lisdrugcopayheaderntext() {
 		validate(lisDrugCopayHeader);
-		validate(lisDrugCopayText);
-
+		//validate(lisDrugCopayText);
+		System.out.println(" ***********Drug Copay & discount  is validated ***********");
+		lisDrugCopayHeader.getText();
+		lisDrugCopayText.getText();
 	}
 
 	/**
@@ -1287,6 +1318,24 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		Assert.assertEquals(driver.findElement(By.xpath("//div[@id='planBenefitsApp']//div[contains(text(),effectivedate)]")).getText(),effectivedate);
 		
 			
+	}
+	
+	/**
+	 * @toDo Validate Plan overview for PDP Individual Members 
+	 */
+	public void validatePlanOverviewSectionForMembers(){
+		validate(planName2);
+		validate(nameLabel1);
+		validate(memberID1);
+		validate(effective_Date1);
+	}
+	/**
+	 * @toDo: Validate Drug Look Up Link 
+	 */
+	public void validate_druglookuplink() {
+		validate(DrugLookUpLink);
+		System.out.println("************Drug Look Up LINK is seen********************");
+
 	}
 
 	/**
