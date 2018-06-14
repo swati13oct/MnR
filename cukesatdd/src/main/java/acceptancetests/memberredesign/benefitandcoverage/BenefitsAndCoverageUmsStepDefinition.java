@@ -109,7 +109,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	 * @toDo : The user navigates to Benefits and coverage page from Rally Dashboard
 	 */
 
-	@Then("^the user navigates to Benefits and coverage page$")
+	@Then("^The user navigates to Benefits and Coverage page$")
 	public void user_views_BenefitsAndCoveragejenkins1() {
 
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);

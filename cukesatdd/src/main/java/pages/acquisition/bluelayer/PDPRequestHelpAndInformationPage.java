@@ -15,7 +15,7 @@ import atdd.framework.UhcDriver;
 public class PDPRequestHelpAndInformationPage extends UhcDriver{
 	
 	
-	@FindBy(xpath = ".//*[@id='subPageLeft']/div/div/div/div[2]/div/div[1]/p[2]/a")
+	@FindBy(xpath = ".//*[@id='subPageLeft']//*[contains(text(),'Information and Enrollment')]")
 	private WebElement pdpEnquiryKitLink;
 
 	public PDPRequestHelpAndInformationPage(WebDriver driver) {

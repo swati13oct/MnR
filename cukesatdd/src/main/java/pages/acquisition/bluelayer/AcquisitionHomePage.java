@@ -1132,10 +1132,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
                 Actions actions = new Actions(driver);
                 actions.moveToElement(ourPlansHoverLink);
-                actions.moveToElement(pdp_moreHelpInfoLink);
+                actions.moveToElement(moreHelpInfoLink);
                 actions.click().build().perform();
 
-                if (currentUrl().contains("prescription-drug-plans/request-information.html")) {
+                if (currentUrl().contains("request-information.html")) {
                         return new PDPRequestHelpAndInformationPage(driver);
                 }
 
