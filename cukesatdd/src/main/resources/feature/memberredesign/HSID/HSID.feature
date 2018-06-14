@@ -101,8 +101,8 @@ Feature:To test HSID registration flow
     
    Examples:
  
-   | planType|  memberType  | copayCategory | firstName | lastName        |   dob 	             | memberid 	  | zipcode  | userName 	         | password   |   email	  			           | question1 | question2 | question3 |
-   | MAPD    |  Individual  |  NON LIS       | BBABFAD   | BEDD            | 09/17/1946          | 002238311-1  | 92024	   |AUTO_q2_apr_uhc100   | Password@1 | codetransformers@gmail.com | number1   | name1     | color1    |
+   | planType|  memberType  | copayCategory  | userName 	       | password   |   email	  			     | question1 | question2 | question3 |
+   | MAPD    |  Individual  |  NON LIS       |AUTO_q2_apr_uhc100   | Password@1 | codetransformers@gmail.com | number1   | name1     | color1    |
    
    
    @Login @US968315

@@ -42,10 +42,10 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     And the user validates contactus section
     
     Examples: 
-       | planType|  memberType  | copayCategory | language | SummaryofBenefits    | EvidenceofCoverage       | ComprehensiveFormularyDrug List     | name    | memberid    | effectivedate | monthlypremium |   UpdatedLanguage | DisplayFlag|
-       | MAPD    |  Individual  |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | DDE BCBF| 006798725-01| 01/01/2018    | Not Available  | Tier 2            | true       |
-      #| MAPD    |  Individual  |  NON LIS      | SPANISH  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | DDE BCBF| 006798725-01| 01/01/2018    | Not Available  | Tier 2            | true       |
-      #| MAPD    |  Individual  |  NON LIS      | CHINESE  |                      |                          |                                     | DDE BCBF| 006798725-01| 01/01/2018    | Not Available  | Tier 2            | true       |
+       | planType|  memberType  | copayCategory | language | SummaryofBenefits    | EvidenceofCoverage       | ComprehensiveFormularyDrug List     | name          | memberid    | effectivedate | monthlypremium |   UpdatedLanguage | DisplayFlag|
+       | MAPD    |  Individual  |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | EAF DCDEFCEFCF| 006542949-01| 01/01/2018    | Not Available  | Tier 2            | true       |
+      #| MAPD    |  Individual  |  NON LIS      | SPANISH  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | DDE BCBF      | 006798725-01| 01/01/2018    | Not Available  | Tier 2            | true       |
+      #| MAPD    |  Individual  |  NON LIS      | CHINESE  |                      |                          |                                     | DDE BCBF      | 006798725-01| 01/01/2018    | Not Available  | Tier 2            | true       |
       #| Medica  |  Individual  |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List |
       #| Medica  |  Individual  |  NON LIS      | SPANISH  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 |
       #| PCP     |  Individual  |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List |
