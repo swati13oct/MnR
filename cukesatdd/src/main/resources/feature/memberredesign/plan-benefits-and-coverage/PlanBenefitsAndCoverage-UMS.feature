@@ -289,6 +289,50 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
      | MAPD    |  Group       |  NON LIS      | 
       
       
+      
+         
+    @CMPlanOverviewIndividualNonLisPDP  @regression_06_06_18 
+    Scenario Outline: Verify that Plan Overview  is in place on Benefits and Coverage page for Non LIS Members
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>  |
+      | Member Type    | <memberType>|
+      | Copay Category | <copayCategory>|
+    Then the user navigates to Benefits and coverage page
+    And the user validates Ind plan overview  section
+
+    Examples: 
+      
+      | planType|  memberType  | copayCategory |
+      | PDP     |  Individual  |  NON LIS      | 
+      
+       @regression_06_06_18     @CMGroupmembersPDPLIS_TC26
+    Scenario Outline: Verify Group LIS 1/2 values on Benefits and Coverage page
+    Given login with following details logins in the member portal and validate elements
+       | Plan Type      | <planType>     |
+       | Member Type    | <memberType>|
+       | Copay Category | <copayCategory>|
+    Then the user navigates to Benefits coverage page
+    And the user view the LIS Drug Copays & Discounts header
+    And the user view the Drug Cost header and text
+    And the drugcost dropdown should not display
+    And the user validates the Learn More section link for stage
+    And the user validates tier link should not display 
+    And the user validated the Look up Drugs link 
+    And the user validates text for the Locate a Pharmacy section
+    And the user validates Locate a Pharmacy button should be visible  
+    And the user should see drug cost table for Lis members
+    And the user validates view and document label
+    And the user validates spanish and chinese should not display in dropdown
+    And the user validates Needhelp header
+    And the user clicks on More Information link
+    And the user validates contactus section
+    
+
+    Examples: 
+      | planType|  memberType  | copayCategory |
+      | PDP     |  Group       |  LIS 1        |       
+         
+      
     @CMPlanOverviewNonLis
     Scenario Outline: Verify that Plan Overview  is in place on Benefits and Coverage page for Non LIS Members
      Given login with following details logins in the member portal and validate elements
