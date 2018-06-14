@@ -732,6 +732,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		benefitsCoveragePage.validatePlanOverviewSectionForMembers();
 	}
 	
+	
 	/** 
 	 * @toDo : Validates the Drug Look up link 
 	 */
@@ -751,6 +752,18 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validateNeedhelpheader1();
 	}
+	
+	/** 
+	 * @toDo : Validates the  Plan overview section for Ind Member with LEP amount 
+	 */
+	@And("^the user validates Ind plan overview LEP amount and payment due$")
+	
+	public void user_validate_IndplanOverviewsectionLEPAmount() throws InterruptedException {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validatePlanOverviewLEP();
+		
+			}
 	/***
 	 * 
 	 */
@@ -847,7 +860,18 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	 * @toDo : Validates the headers for ship members
 	 */
 
-	@And("the user validates plan overview and summary on Bnc page for ship members")
+	@And("^the user validates headers on Bnc page for ship members$")
+	public void user_validate_Headers_ForShip() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validateHeadersShip();
+	}
+	
+	/** 
+	 * @toDo : Validates the headers for ship members
+	 */
+
+	@And("^the user validates plan overview and summary on Bnc page for ship members$")
 	public void user_validate_Headers_Ship() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
