@@ -54,6 +54,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='planBenefitsApp']/section/div/div[1]/div/div/div/div/h1")
 	private WebElement planName1;
+	
+	
 
 	@FindBy(id = "contactUsAtdd")
 	private WebElement contactUslink;
@@ -485,6 +487,26 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-benefitsoverview-effectivedatelabel")
 	private WebElement effective_Date1;
 	
+	@FindBy(className ="atdd-benefitsoverview-monthlypremium-label")
+	private WebElement Monthly_Premium;
+	
+	@FindBy(className="atdd-benefitsoverview-lateenrollmentwithout-plancategoryid-label")
+	//@FindBy(xpath="//*[contains(text(),'Late Enrollment Penalty')]or @class='atdd-benefitsoverview-lateenrollmentwithout-plancategoryid-label'")
+	private WebElement LEPAmount;
+	
+	//@FindBy(xpath="(//*[contains(text(),'Member Name')])   ")
+	@FindBy(xpath=".//*[@class='bold atdd-benefitsoverview-membernamelabel']")
+	private WebElement MemberName;
+	
+	//@FindBy(xpath="(//*[contains(text(),'Member ID')])   ")
+	@FindBy(xpath= ".//*[@class='bold atdd-benefitsoverview-memberidlabel']")
+	private WebElement MemberId;
+	
+	//@FindBy(xpath="(//*[contains(text(),'Effective Date')])")
+	@FindBy(xpath= ".//*[@class='bold atdd-benefitsoverview-effectivedatelabel']")
+	private WebElement EffectiveDate;
+		
+	
 	@FindBy(className = "atdd-tech-header")
 	private WebElement techSupportHeader;
 	
@@ -615,7 +637,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,3000)", "");
 		validate(NeedHelpHeader);
-		System.out.println("!!Need help header is validated !!");
+		System.out.println("***Need help header is validated ***");
 
 	}
 
@@ -1351,6 +1373,29 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(ExtraHelp);
 
 	}
+	
+	/**
+	 * @toDo : Validates the Plan overview section for a individual members with LEP amount 
+	 */
+
+	public void validatePlanOverviewLEP() throws InterruptedException {
+      System.out.println("validate LEP amount ");
+		
+		validate(planName);
+		validate(nameLabel);
+		validate(memberID);
+		validate(effective_Date);
+		validate(Monthly_Premium);
+		//validate(ExtraHelp);
+        validate (LEPAmount);
+        try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 
 	/**
 	 * @toDo : Validates the headers section for individual members
@@ -1537,14 +1582,15 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	 * @toDo : Validates the headers for ship members
 	 */
 	public void validateHeadersShip() {
-		// TODO Auto-generated method stub
-
-		validate(BenefitsSummaryHeadership);
+		System.out.println("member is on B& C page ");
+        validate (MemberName);
+        System.out.println("*****Member Name is seen for SHIP member on B&C page *****");
+        validate(MemberId);
+        validate(EffectiveDate);
+		//validate(BenefitsSummaryHeadership);
 		validate(ParticipatingHospitalStays1);
-		validate(nameLabel);
-		validate(memberID);
-	    validate(effective_Date);
-
+		System.out.println("****Hospital stay is seen ==>"+ParticipatingHospitalStays1.isDisplayed());
+		
 	}
 
 	/**
