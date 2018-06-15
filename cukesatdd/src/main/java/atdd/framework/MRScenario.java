@@ -61,7 +61,9 @@ public class MRScenario {
 
                private static Map<String, List<String>> ampMemberAttributesMap = new LinkedHashMap<String, List<String>>();
 
-               private static Map<String, List<String>> umsMemberAttributesMap = new LinkedHashMap<String, List<String>>();
+               //private static Map<String, List<String>> umsMemberAttributesMap = new LinkedHashMap<String, List<String>>();
+               //Changing to type String,String
+               private static Map<String, String> umsMemberAttributesMap = new LinkedHashMap<String, String>();
 
                private static List<String> userNamesAddedList = new ArrayList<String>();
 
@@ -228,7 +230,15 @@ public class MRScenario {
                                                             List<String> attrList = Arrays.asList(memberAttributes)
                                                                                           .subList(1, memberAttributes.length);
                                                             String uhcUserName = null;
-                                                            if (memberAttributes[0].contains("/")) {
+                                                            // Added by Sneha - Swapping username to be value and parameter to be Key
+                                                            uhcUserName = memberAttributes[0];
+                                                            
+                                                            String attrStringKey = "";
+                                                            for(String CurrentAttr : attrList){
+                                                            	attrStringKey = attrStringKey+CurrentAttr;
+                                                            }
+                                                            umsMemberAttributesMap.put(attrStringKey, uhcUserName);
+/*                                                            if (memberAttributes[0].contains("/")) {
                                                                            String[] memberAttributArr = memberAttributes[0].split("/");
                                                                            uhcUserName = memberAttributArr[0];
 
@@ -238,7 +248,7 @@ public class MRScenario {
                                                             //if (userNamesAddedList.contains(uhcUserName)) {
                                                                            umsMemberAttributesMap.put(uhcUserName, attrList);
                                                             //}
-
+*/
                                              }
                               } catch (IOException e) {
                                              // TODO Auto-generated catch block
@@ -532,17 +542,22 @@ public class MRScenario {
 
                public Map<String, String> getUMSMemberWithDesiredAttributes(
                                              List<String> desiredAttributes) {
+            	   String desiredAttrString = "";
+            	   for(String currAttr : desiredAttributes){
+            		   desiredAttrString = desiredAttrString+currAttr;
+            	   }
                               Map<String, String> loginCreds = new HashMap<String, String>();
-                              for (Entry<String, List<String>> currEntry : umsMemberAttributesMap
+                              //Changing to String String 
+                              for (Entry<String, String> currEntry : umsMemberAttributesMap
                                                             .entrySet()) {
-                                             if (currEntry.getValue().equals(desiredAttributes)) {
-                                                            if (currEntry.getKey().contains("/")) {
-                                                                           String[] keyArr = currEntry.getKey().split("/");
+                                             if (currEntry.getKey().equals(desiredAttrString)) {
+                                                            if (currEntry.getValue().contains("/")) {
+                                                                           String[] keyArr = currEntry.getValue().split("/");
                                                                            loginCreds.put("user", keyArr[0]);
                                                                            loginCreds.put("pwd", keyArr[1]);
                                                                            return loginCreds;
                                                             } else {
-                                                                           loginCreds.put("user", currEntry.getKey());
+                                                                           loginCreds.put("user", currEntry.getValue());
                                                                            loginCreds.put("pwd", "Password@1");
                                                                            return loginCreds;
                                                             }
@@ -631,7 +646,7 @@ public class MRScenario {
                               }
                }
 
-            public WebDriver getWebDriver() {
+          /*  public WebDriver getWebDriver() {*/
 
                               /*
                               * 
@@ -696,8 +711,8 @@ public class MRScenario {
                                              * TODO: pperugu :: Need to update the headless browser code below
                                              * for local
                                              */
-
-/*                                         String phantomjs = System.getProperty("phantomjs");
+/*
+                                         String phantomjs = System.getProperty("phantomjs");
                                              String agent = "Mozilla/5.0 (Linux; U; Android 2.3.3; en-us; LG-LU3000 Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
                                              DesiredCapabilities caps = new DesiredCapabilities();
                                              if (StringUtils.isBlank(phantomjs)) {
@@ -722,32 +737,33 @@ public class MRScenario {
 
                               }
                               return webDriver;
-               }
-
-               public WebDriver getWebDriver() {
-                              File pathToBinary = new File("C:\\firefox 29\\firefox.exe");
-                              FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
-                              FirefoxProfile firefoxProfile = new FirefoxProfile();       
-                              webDriver = new FirefoxDriver(ffBinary,firefoxProfile);
-                              webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-                              //webDriver.manage().window().maximize();
-                              return webDriver;
-               }
-         
-               public WebDriver getWebDriver() {
-            	   
-            	   if (null == webDriver) {              
-         	           File pathToBinary = new File("C:\\Users\\njain112\\Documents\\Chrome\\Application\\Chrome.exe");
-         	           Map<String, Object> chromeOptions = new HashMap<String, Object>();
-         	           chromeOptions.put("binary", pathToBinary);
-         	           DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-         	           capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-         	           System.setProperty("webdriver.chrome.driver","C:\\Users\\njain112\\Documents\\chromedriver.exe");
-         	           webDriver = new ChromeDriver();
-            	   }
-               return webDriver;
-            	*/   
-                 DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+               }*/
+                             
+            	public WebDriver getWebDriver() {
+ 
+/*            	   File pathToBinary = new File("C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe");     	           Map<String, Object> chromeOptions = new HashMap<String, Object>();
+      	          chromeOptions.put("binary", pathToBinary);
+      	         ChromeOptions options = new ChromeOptions();
+      	        options.addArguments("--disable-extensions");
+      	        //chromeOptions.addArgument("disable-infobars");
+      	           DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+      	           capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+      	           capabilities.setCapability("chrome.switches", Arrays.asList("--disable-extensions"));
+      	           System.setProperty("webdriver.chrome.driver","C:\\Tools\\chromedriver_win32\\chromedriver.exe");
+      	           webDriver = new ChromeDriver(capabilities);
+         	   
+            return webDriver;*/
+         	  
+             	
+/*             File pathToBinary = new File("C:\\Tools\\FF_45\\firefox.exe");
+             FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
+             FirefoxProfile firefoxProfile = new FirefoxProfile();       
+             webDriver = new FirefoxDriver(ffBinary,firefoxProfile);
+             webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+             //webDriver.manage().window().maximize();
+             return webDriver;*/
+             
+            DesiredCapabilities capabilities = DesiredCapabilities.firefox();
                                             
                  capabilities.setCapability("platform", "Windows 7");
                  capabilities.setCapability("version", "45.0");
@@ -764,11 +780,9 @@ public class MRScenario {
                                 // TODO Auto-generated catch block
                               e.printStackTrace();
                }
-              
-            	
-               
                return webDriver;
-               }
+ 
+                             }
                
                public WebDriver getIEDriver() {
                               System.setProperty("webdriver.ie.driver",

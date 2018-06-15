@@ -16,18 +16,24 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-
-
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.MRConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
+import atdd.framework.UhcDriver;
 //import pages.member.redesign.ContactUsPage;
 import pages.member.ulayer.OneTimePaymentsPage;
 import pages.member.ulayer.PlanComparePage;
 import pages.member.ulayer.Rallytool_Page;
 import pages.member.ulayer.TestHarness;
+import pages.regression.IDCardPage.IDCardPage;
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.regression.claims.ClaimDetailsPage;
 import pages.regression.claims.ClaimSummarypage;
 //import pages.regression.claims.ClaimSummarypage;
 import pages.regression.contactus.ContactUsPage;
+import pages.regression.drugcostestimator.DrugCostEstimatorPage;
 import pages.regression.explanationofbenefits.EOBPage;
 import pages.regression.formsandresources.FormsAndResourcesPage;
 import pages.regression.ordermaterials.OrderMaterialsPage;
@@ -35,13 +41,6 @@ import pages.regression.payments.PaymentHistoryPage;
 import pages.regression.pharmacylocator.PharmacySearchPage;
 //import pages.member.bluelayer.BenefitsAndCoveragePage;
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.MRConstants;
-import acceptancetests.data.PageData;
-import acceptancetests.util.CommonUtility;
-import atdd.framework.MRScenario;
-import atdd.framework.UhcDriver;
-import pages.regression.drugcostestimator.*;
 
 
 
@@ -49,6 +48,9 @@ import pages.regression.drugcostestimator.*;
 
 public class AccountHomePage extends UhcDriver {
 
+	@FindBy(css=".view-id-link")
+	private WebElement idCardLink;
+	
 	@FindBy(xpath = "(//*[@class='ng-scope']//a[text()='Premium Payments'])[1]")
 	private WebElement paymentsLink;
 
@@ -291,6 +293,7 @@ public class AccountHomePage extends UhcDriver {
 				;
 			{
 				System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
+				
 				driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
 				try {
 					Thread.sleep(20000);
@@ -878,6 +881,7 @@ public class AccountHomePage extends UhcDriver {
 		System.out.println("Actual logo's source on Dashboard page is   "+logo_src+" and Expected logo source    "+logoToBeDisplayedOnDashboard+" .");	
 		System.out.println("logo's alt text on Dashboard page is   "+logo_alt);		
 		Assert.assertTrue(logo_src.contains(logoToBeDisplayedOnDashboard));
+		System.out.println("Dashboard page Primary logo assert condition is passed");
 	}
 	public void validateCoLogoImagePresent(String cologoToBeDisplayedOnDashboard) throws InterruptedException {
 		Thread.sleep(2000);	
@@ -1234,6 +1238,25 @@ public class AccountHomePage extends UhcDriver {
 		}
 
 	}
+
+	/**
+	 * This method used to view ID Card 
+	 * @return
+	 */
+	public IDCardPage viewIDCard(){
+        try{
+                        if (iPerceptionPopUp.isDisplayed()) {
+                                        iPerceptionPopUp.click();
+                        }
+        }catch(Exception e)        {
+                        System.out.println("iPerception Pop Up not displayed");
+        }
+
+        validate(idCardLink);
+        idCardLink.click();
+        return new IDCardPage(driver);
+	}
+
 
 	public boolean validateOrderMaterialsLink() {
 		if(validate(OrderMaterial_Dashboard))

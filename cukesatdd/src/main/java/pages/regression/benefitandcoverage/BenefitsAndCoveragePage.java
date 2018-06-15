@@ -54,6 +54,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='planBenefitsApp']/section/div/div[1]/div/div/div/div/h1")
 	private WebElement planName1;
+	
+	
 
 	@FindBy(id = "contactUsAtdd")
 	private WebElement contactUslink;
@@ -165,15 +167,15 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	//@FindBy(className = "atdd-benefitsoverview-plantitle")
 		@FindBy(xpath=".//*[@class='h2 margin-none overview-heading atdd-benefitsoverview-plantitle ng-binding']")
-		private WebElement planName;
+		private WebElement planName2;
 
 		//@FindBy(className = "atdd-benefitsoverview-membernamelabel")
 		@FindBy(xpath=".//*[@class='bold atdd-benefitsoverview-membernamelabel']")
-		private WebElement nameLabel;
+		private WebElement nameLabel1;
 
 		//@FindBy(className = "atdd-benefitsoverview-memberidlabel")
 		@FindBy(className = ".//*[@class='bold atdd-benefitsoverview-memberidlabel']")
-		private WebElement memberID;
+		private WebElement memberID1;
 
 		//@FindBy(className = "atdd-benefitsoverview-effectivedatelabel")
 		@FindBy(xpath=".//*[@class='bold atdd-benefitsoverview-effectivedatelabel']")
@@ -296,6 +298,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			@FindBy(id = "specialDisctServices")
 			private WebElement textdiscountservices;
 
+			//@FindBy(id="drug-benefits")
+			@FindBy(xpath= ".//*[contains (text(),'DRUG LOOKUP')]")
+			private WebElement DrugLookUpLink;
+			
 
 			@FindBy(className = "atdd-bnc-discounttitle")
 			private WebElement headerdiscountservices;
@@ -469,6 +475,38 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(id = "needhelpsectioncontactus")
 	private WebElement needHelpSection;
 	
+	@FindBy(className = "atdd-benefitsoverview-plantitle")
+	private WebElement planName;
+
+	@FindBy(className = "atdd-benefitsoverview-membernamelabel")
+	private WebElement nameLabel;
+
+	@FindBy(className = "atdd-benefitsoverview-memberidlabel")
+	private WebElement memberID;
+
+	@FindBy(className = "atdd-benefitsoverview-effectivedatelabel")
+	private WebElement effective_Date1;
+	
+	@FindBy(className ="atdd-benefitsoverview-monthlypremium-label")
+	private WebElement Monthly_Premium;
+	
+	@FindBy(className="atdd-benefitsoverview-lateenrollmentwithout-plancategoryid-label")
+	//@FindBy(xpath="//*[contains(text(),'Late Enrollment Penalty')]or @class='atdd-benefitsoverview-lateenrollmentwithout-plancategoryid-label'")
+	private WebElement LEPAmount;
+	
+	//@FindBy(xpath="(//*[contains(text(),'Member Name')])   ")
+	@FindBy(xpath=".//*[@class='bold atdd-benefitsoverview-membernamelabel']")
+	private WebElement MemberName;
+	
+	//@FindBy(xpath="(//*[contains(text(),'Member ID')])   ")
+	@FindBy(xpath= ".//*[@class='bold atdd-benefitsoverview-memberidlabel']")
+	private WebElement MemberId;
+	
+	//@FindBy(xpath="(//*[contains(text(),'Effective Date')])")
+	@FindBy(xpath= ".//*[@class='bold atdd-benefitsoverview-effectivedatelabel']")
+	private WebElement EffectiveDate;
+		
+	
 	@FindBy(className = "atdd-tech-header")
 	private WebElement techSupportHeader;
 	
@@ -477,7 +515,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	
 
 	
-	@FindBy(xpath = "//div[@id='white-label']/a/img[2]")
+	@FindBy(xpath = "(//img[@alt='CoLogo'])[1]")	
 	private WebElement cologoImage;
 	
 	private static String PAGE_URL = MRConstants.STAGE_DASHBOARD_NEW_DOMAIN_URL;
@@ -588,8 +626,21 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(NeedHelpHeader);
 		validate(TechnicalSupport);
 		validate(PlanSupport);
+	}
+	
+	/**
+	 * @toDo : The user validates the headers in Need help section
+	 */
+
+	public void validateNeedhelpheader1() {
+
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,3000)", "");
+		validate(NeedHelpHeader);
+		System.out.println("***Need help header is validated ***");
 
 	}
+
 
 	/**
 	 * @toDo : The user validates the Contact us section in Need help section
@@ -1225,8 +1276,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	public void validate_lisdrugcopayheaderntext() {
 		validate(lisDrugCopayHeader);
-		validate(lisDrugCopayText);
-
+		//validate(lisDrugCopayText);
+		System.out.println(" ***********Drug Copay & discount  is validated ***********");
+		lisDrugCopayHeader.getText();
+		lisDrugCopayText.getText();
 	}
 
 	/**
@@ -1288,6 +1341,24 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		
 			
 	}
+	
+	/**
+	 * @toDo Validate Plan overview for PDP Individual Members 
+	 */
+	public void validatePlanOverviewSectionForMembers(){
+		validate(planName2);
+		validate(nameLabel1);
+		validate(memberID1);
+		validate(effective_Date1);
+	}
+	/**
+	 * @toDo: Validate Drug Look Up Link 
+	 */
+	public void validate_druglookuplink() {
+		validate(DrugLookUpLink);
+		System.out.println("************Drug Look Up LINK is seen********************");
+
+	}
 
 	/**
 	 * @toDo : Validates the Plan overview section for a lis member
@@ -1301,6 +1372,29 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		// validate(Monthly_Premium);
 		validate(ExtraHelp);
 
+	}
+	
+	/**
+	 * @toDo : Validates the Plan overview section for a individual members with LEP amount 
+	 */
+
+	public void validatePlanOverviewLEP() throws InterruptedException {
+      System.out.println("validate LEP amount ");
+		
+		validate(planName);
+		validate(nameLabel);
+		validate(memberID);
+		validate(effective_Date);
+		validate(Monthly_Premium);
+		//validate(ExtraHelp);
+        validate (LEPAmount);
+        try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	/**
@@ -1488,14 +1582,15 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	 * @toDo : Validates the headers for ship members
 	 */
 	public void validateHeadersShip() {
-		// TODO Auto-generated method stub
-
-		validate(BenefitsSummaryHeadership);
+		System.out.println("member is on B& C page ");
+        validate (MemberName);
+        System.out.println("*****Member Name is seen for SHIP member on B&C page *****");
+        validate(MemberId);
+        validate(EffectiveDate);
+		//validate(BenefitsSummaryHeadership);
 		validate(ParticipatingHospitalStays1);
-		validate(nameLabel);
-		validate(memberID);
-	    validate(effective_Date);
-
+		System.out.println("****Hospital stay is seen ==>"+ParticipatingHospitalStays1.isDisplayed());
+		
 	}
 
 	/**
