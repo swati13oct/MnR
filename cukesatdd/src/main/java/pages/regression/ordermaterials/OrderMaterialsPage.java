@@ -22,22 +22,25 @@ import atdd.framework.UhcDriver;
  *
  */
 public class OrderMaterialsPage extends UhcDriver  {
-	@FindBy(xpath = "//area[@href='javascript:clWin()'][@alt = 'close']")
-	private WebElement FeedbackModal;
+	@FindBy(xpath = "//*[contains(text() ''We value your feedback!)]")
+	private WebElement iPerceptionPopUp;
+
+	@FindBy(xpath = "//*[@id = 'closeButton']")
+	private WebElement iPerceptionClose;
 	
 	@FindBy(xpath = "//a[contains(text(), 'Medicare Advantage Plan')]")
 	private WebElement MAPlanTab;
 
-	@FindBy(xpath = "//a[contains(text(), 'Hospital Indemnity')]")
+	@FindBy(xpath = "//[contains(text(), 'Hospital Indemnity')]")
 	private WebElement HIPplanTab;
 	
-	@FindBy(xpath = "//a[contains(text(), 'Medicare Prescription Drug Plan')]")
+	@FindBy(xpath = "//[contains(text(), 'Medicare Prescription Drug Plan')]")
 	private WebElement PDPPlanTab;
 
-	@FindBy(xpath = "//a[contains(text(), 'Medicare Supplement Insurance Plan')]")
+	@FindBy(xpath = "//[contains(text(), 'Medicare Supplement Insurance Plan')]")
 	private WebElement MedSuppPlanTab;
 	
-	@FindBy(xpath = "//a[contains(text(), 'Senior Supplement Plan')]")
+	@FindBy(xpath = "//[contains(text(), 'Senior Supplement Plan')]")
 	private WebElement SrSuppTab;
 
 	@FindBy(xpath = "//*[@id = 'member-materials']/..")
@@ -109,14 +112,16 @@ public class OrderMaterialsPage extends UhcDriver  {
 		Thread.sleep(5000);
 		CommonUtility.checkPageIsReady(driver);
 		try{
-			FeedbackModal.click();
-			System.out.println("FeedBack Modal Present");
-			if (validate(FeedbackModal)){
-				System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
+			if(validate(iPerceptionPopUp)){
+				System.out.println("FeedBack Modal Present");
+
+				iPerceptionClose.click();
+				if (validate(iPerceptionPopUp)){
+					System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
+				}
+				else
+					System.out.println("FeedBack Modal Closed");
 			}
-			System.out.println("FeedBack Modal Closed");
-			//Thread.sleep(3000);
-			
 		}
 		catch (Exception e) {
 			System.out.println("FeedBack Modal NOT Present");
@@ -309,15 +314,20 @@ public class OrderMaterialsPage extends UhcDriver  {
 			e.printStackTrace();
 		}
 		try{
-			FeedbackModal.click();
-			System.out.println("FeedBack Modal Present");
-			if (validate(FeedbackModal)){
-				System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
+			if(validate(iPerceptionPopUp)){
+				System.out.println("FeedBack Modal Present");
+
+				iPerceptionClose.click();
+				if (validate(iPerceptionPopUp)){
+					System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
+				}
+				else
+					System.out.println("FeedBack Modal Closed");
 			}
-			System.out.println("FeedBack Modal Closed");
 		}
 		catch (Exception e) {
 			System.out.println("FeedBack Modal NOT Present");
+
 		}
 
 		CommonUtility.checkPageIsReady(driver);

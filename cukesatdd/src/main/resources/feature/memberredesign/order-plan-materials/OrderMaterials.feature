@@ -20,10 +20,10 @@ Feature:P1.5 To test order materials in Redesign site
       | planType | memberType | option           |
       | MA      |  MA_AARPIndividual | Replacement ID card |
       | MAPD     | MAPD_AARPIndividual  | Replacement ID card      |
-#      | MAPD     | PCP_OrderMaterials  | Replacement ID card      |
-#      | MAPD     | Medica_OrderMaterials  | Replacement ID card      |
+      | MAPD     | PCP_OrderMaterials  | Replacement ID card      |
+      | MAPD     | Medica_OrderMaterials  | Replacement ID card      |
       | PDP      |  PDP_AARPIndividual | Welcome Guide    |
-      | SHIP     | SHIP_AARPIndividual  | Member ID Card |
+      | SHIP     | SHIP_AARPIndividual  | Claims Envelope |
 
   @ValidateSHIPErrorMessage
   Scenario Outline: Verify SHIP Invalid selection Order Materials Page Error Message
@@ -58,16 +58,24 @@ Feature:P1.5 To test order materials in Redesign site
       | PDP      | PDP_UHCGroup      | Welcome Guide |
       | MAPD     | MAPD_UHCGroup      | Replacement ID card |
 
-#  @ValidateHeaderComboTabs
-#  Scenario Outline: Verify Aarp Order Materials Page Header - All Combo Plan Types
-#    Given Redesign login for following redesign member in the member portal
-#      | Member Type  | <memberType> |
-#    When the user views order materials in Member Redesign Order Materials page
-#    Then user navigates to Order Materials page for all Plans
-#      | Combo Plans | <comboPlans> |
-#    And user Validates Page Header and Sub-Header text
-
-#    Examples: 
-#            | planType  | memberType | comboPlans |
-#            | 	PDP		| PDPwithMedSupp | PDP,MedSupp |
+  @ValidateHeaderComboTabs
+  Scenario Outline: Verify Aarp Order Materials Page Header - All Combo Plan Types
+    Given Redesign login for following redesign member in the member portal
+      | Member Type | <memberType> |
+    When the user views order materials in Member Redesign Order Materials page
+    Then user navigates to Order Materials page for all Plans
+      | Combo Plans | <comboPlans> |
+    And user Validates Page Header and Sub-Header text
+    Examples: 
+            | planType  | memberType | comboPlans |
+#            | 	MAPD		| MAPDwithMedSupp | MAPD,MedSupp |
            
+@TerminatedMemberNegativeScenario
+  Scenario Outline: Verify Aarp Order Materials Page Header - All Combo Plan Types
+    Given Redesign login for following redesign member in the member portal
+      | Member Type | <memberType> |
+    Then the user should not see Order Materials Link for terminated member
+    Then user validates header navigation is not available for Terminated member
+    Examples: 
+            | memberType |
+            | TerminatedMember |

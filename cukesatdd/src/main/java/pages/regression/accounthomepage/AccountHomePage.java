@@ -231,6 +231,9 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='ui-view-page']//a[@track='ORDER_MATERIALS']")
 	private WebElement OrderMaterial_Dashboard;
 
+	@FindBy(xpath = "//*[@id='ordermaterials']")
+	private WebElement OrderMaterialsTab_BnCPage;
+	
 	@FindBy(xpath = "//h1[@class='h4 margin-none']")
 	private WebElement orderplanHeadertxt;
 
@@ -1230,5 +1233,37 @@ public class AccountHomePage extends UhcDriver {
 		System.out.println("User is on find care page and URL is ====>"+driver.getCurrentUrl()); 
 		}
 
-	} }
+	}
+
+	public boolean validateOrderMaterialsLink() {
+		if(validate(OrderMaterial_Dashboard))
+			return true;
+		return false;
+	}
+
+	public boolean validateOrderMaterialsPageHeaderNavigation() {
+		if (driver.getCurrentUrl().contains("/dashboard"))
+		{
+			System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
+			driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
+			try {
+				Thread.sleep(20000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println(driver.getCurrentUrl());
+			CommonUtility.waitForPageLoad(driver, heading, 30);
+			if (driver.getTitle().contains("Benefits Overview")) {
+				System.out.println(driver.getTitle());
+				if(validate(OrderMaterialsTab_BnCPage)){
+					System.out.println("Order Plan Materials Tab displayed in B&C Page");
+					return true;
+				}					
+			}
+
+		}		
+		return false;
+	} 
+}
 
