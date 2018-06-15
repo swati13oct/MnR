@@ -1134,7 +1134,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
                 actions.moveToElement(ourPlansHoverLink);
                 actions.moveToElement(moreHelpInfoLink);
                 actions.click().build().perform();
-
+                try {
+					Thread.sleep(4000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
                 if (currentUrl().contains("request-information.html")) {
                         return new PDPRequestHelpAndInformationPage(driver);
                 }
