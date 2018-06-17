@@ -3,35 +3,27 @@
  */
 package acceptancetests.memberredesign.ordermaterials;
 
-import java.util.ArrayList;
+import gherkin.formatter.model.DataTableRow;
+
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.junit.Assert;
 import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.LoginCommonConstants;
+import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.ordermaterials.OrderMaterialsPage;
+import pages.regression.ordermaterials.OrderPlanMaterialConfirmationPage;
 import acceptancetests.data.PageConstantsMnR;
-import acceptancetests.memberredesign.claims.ClaimsCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
-import pages.redesign.OrderplanmaterialsPage;
-import pages.redesign.PlanMaterialConfirmationPage;
-import pages.redesign.RedesignLoginPage;
-import pages.redesign.UlayerHomePage;
+
 /**
  * @author sdwaraka
  *
@@ -50,11 +42,11 @@ public class OrderPlanMaterialsAarpStepDefinition {
 	/**
 	* @todo : Verifying order materials page based on plan type attributes
 	*/
-	@Given("^registered Redesign member for Order Plan Materials with following attributes$")
+	/*@Given("^registered Redesign member for Order Plan Materials with following attributes$")
 	public void registered_member_orderplanmaterials_redesign(
 			DataTable memberAttributes) throws InterruptedException {
 
-		/* Reading the given attribute from feature file */
+		 Reading the given attribute from feature file 
 		List<DataTableRow> memberAttributesRow = memberAttributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
@@ -118,15 +110,15 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		else {
 			Assert.fail("***** Error in loading  Redesign Account Landing Page *****");
 		}
-	}
+	}*/
 	/**
 	* @todo : Verifying the order materials in dashboard page
 	*/
 	@When("^the user views order materials in Member Redesign Order Materials page$")
 	public void views_order_materials_in_Ums_site() throws InterruptedException {
-		UlayerHomePage accountHomePage = (UlayerHomePage) getLoginScenario()
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage
+		OrderMaterialsPage orderPlanMaterialsPage = accountHomePage
 				.navigateToOrderPlanMaterialsPage();
 		if (orderPlanMaterialsPage != null) {
 			getLoginScenario().saveBean(PageConstantsMnR.ORDER_PLAN_MATERIALS_PAGE,
@@ -143,7 +135,7 @@ public class OrderPlanMaterialsAarpStepDefinition {
 	@And("^the user selects an option from the orderp list in Redesign site$")
 	public void user_selects_member_materials(DataTable givenAttributes) throws InterruptedException {
 
-		OrderplanmaterialsPage orderPlanMaterialsPage = (OrderplanmaterialsPage) getLoginScenario().getBean(PageConstantsMnR.ORDER_PLAN_MATERIALS_PAGE);
+		OrderMaterialsPage orderPlanMaterialsPage = (OrderMaterialsPage) getLoginScenario().getBean(PageConstantsMnR.ORDER_PLAN_MATERIALS_PAGE);
 		
 		List<DataTableRow> givenAttributesRow = givenAttributes
 				.getGherkinRows();
@@ -164,13 +156,22 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		boolean TabPresent = orderPlanMaterialsPage.navigatePlanTabs(plantype);
 */
 		System.out.println("**************Radio Option to Select is : "+option+"+++++++++++++");
-		PlanMaterialConfirmationPage planMaterialConfirmationPage = orderPlanMaterialsPage.selectsOption(option);
+		OrderPlanMaterialConfirmationPage planMaterialConfirmationPage = orderPlanMaterialsPage.selectsOption(option);
 		if (planMaterialConfirmationPage != null) {
 			getLoginScenario().saveBean(PageConstantsMnR.PLAN_MATERIALS_CONFIRMATION_PAGE,
 					planMaterialConfirmationPage);
 			System.out.print("Order Plan Material Confirmation Page displayed");
 		}
 		else{
+			//retry order submit
+			System.out.print("Order Plan Material Confirmation Page not displayed : Retrying Order Submission");
+			planMaterialConfirmationPage = orderPlanMaterialsPage.selectsOption(option);
+			if (planMaterialConfirmationPage != null) {
+				getLoginScenario().saveBean(PageConstantsMnR.PLAN_MATERIALS_CONFIRMATION_PAGE,
+						planMaterialConfirmationPage);
+				System.out.print("Order Plan Material Confirmation Page displayed");
+			}
+			else
 			getLoginScenario().saveBean(PageConstantsMnR.ORDER_PLAN_MATERIALS_PAGE,
 					orderPlanMaterialsPage);
 			System.out.print("Order Plan Material Confirmation Page not displayed");
@@ -181,9 +182,9 @@ public class OrderPlanMaterialsAarpStepDefinition {
 	*/
 	@And("^the user validate order additional material and click to add other order additional material in Order Confirmation Page$")
 	public void validate_add_order_additional_material_for_pdp_in_Redesign_site() throws InterruptedException {
-		PlanMaterialConfirmationPage planMaterialConfirmationPage = (PlanMaterialConfirmationPage) getLoginScenario()
+		OrderPlanMaterialConfirmationPage planMaterialConfirmationPage = (OrderPlanMaterialConfirmationPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PLAN_MATERIALS_CONFIRMATION_PAGE);
-		OrderplanmaterialsPage orderPlanMaterialsPage = (OrderplanmaterialsPage) getLoginScenario().getBean(PageConstantsMnR.ORDER_PLAN_MATERIALS_PAGE);
+		OrderMaterialsPage orderPlanMaterialsPage = (OrderMaterialsPage) getLoginScenario().getBean(PageConstantsMnR.ORDER_PLAN_MATERIALS_PAGE);
 		
 		if (planMaterialConfirmationPage == null){
 			System.out.println("@@@@@@@@@@  Order Material Failed  @@@@@@@@@@");
@@ -202,7 +203,7 @@ public class OrderPlanMaterialsAarpStepDefinition {
 	*/
 	@Then("^the user verify need help component in Redesign site$")
 	public void validate_needhelp_component() throws InterruptedException{
-		OrderplanmaterialsPage orderPlanMaterialsPage = (OrderplanmaterialsPage) getLoginScenario().getBean(PageConstantsMnR.ORDER_PLAN_MATERIALS_PAGE);
+		OrderMaterialsPage orderPlanMaterialsPage = (OrderMaterialsPage) getLoginScenario().getBean(PageConstantsMnR.ORDER_PLAN_MATERIALS_PAGE);
 		orderPlanMaterialsPage = orderPlanMaterialsPage.verifyneedHelpcomponent();
 		if (orderPlanMaterialsPage != null) {
 			getLoginScenario().saveBean(PageConstantsMnR.ORDER_PLAN_MATERIALS_PAGE,
@@ -221,7 +222,7 @@ public class OrderPlanMaterialsAarpStepDefinition {
 	@Then("^user navigates to Order Materials page for all Plans$")
 	public void user_navigates_Plan_Tabs(DataTable givenAttributes) {
 
-		OrderplanmaterialsPage orderPlanMaterialsPage = (OrderplanmaterialsPage) getLoginScenario().getBean(PageConstantsMnR.ORDER_PLAN_MATERIALS_PAGE);
+		OrderMaterialsPage orderPlanMaterialsPage = (OrderMaterialsPage) getLoginScenario().getBean(PageConstantsMnR.ORDER_PLAN_MATERIALS_PAGE);
 		
 		List<DataTableRow> givenAttributesRow = givenAttributes
 				.getGherkinRows();
@@ -248,7 +249,7 @@ public class OrderPlanMaterialsAarpStepDefinition {
 	*/	
 	@And("^user Validates Page Header and Sub-Header text$")
 	public void user_validates_orderMaterialsHeader(){
-		OrderplanmaterialsPage orderPlanMaterialsPage = (OrderplanmaterialsPage) getLoginScenario().getBean(PageConstantsMnR.ORDER_PLAN_MATERIALS_PAGE);
+		OrderMaterialsPage orderPlanMaterialsPage = (OrderMaterialsPage) getLoginScenario().getBean(PageConstantsMnR.ORDER_PLAN_MATERIALS_PAGE);
 		if(!orderPlanMaterialsPage.ValidateHeader()){
 			System.out.println("Header Text and Subtext not displayed for Order materials Page");
 		}
@@ -261,7 +262,7 @@ public class OrderPlanMaterialsAarpStepDefinition {
 	
 	@And("^user validates all Order material Options for the plantype$")
 	public void user_validates_orderMaterialsOptions(DataTable givenAttributes){
-		OrderplanmaterialsPage orderPlanMaterialsPage = (OrderplanmaterialsPage) getLoginScenario().getBean(PageConstantsMnR.ORDER_PLAN_MATERIALS_PAGE);
+		OrderMaterialsPage orderPlanMaterialsPage = (OrderMaterialsPage) getLoginScenario().getBean(PageConstantsMnR.ORDER_PLAN_MATERIALS_PAGE);
 		
 		List<DataTableRow> givenAttributesRow = givenAttributes
 				.getGherkinRows();
@@ -283,8 +284,8 @@ public class OrderPlanMaterialsAarpStepDefinition {
 	*/	
 	@And("^the user click Submit without any selection$")
 	public void user_submits_with_no_option_selected() throws InterruptedException{
-		OrderplanmaterialsPage orderPlanMaterialsPage = (OrderplanmaterialsPage) getLoginScenario().getBean(PageConstantsMnR.ORDER_PLAN_MATERIALS_PAGE);
-		PlanMaterialConfirmationPage planMaterialConfirmationpage = orderPlanMaterialsPage.selectsOption("None");
+		OrderMaterialsPage orderPlanMaterialsPage = (OrderMaterialsPage) getLoginScenario().getBean(PageConstantsMnR.ORDER_PLAN_MATERIALS_PAGE);
+		OrderPlanMaterialConfirmationPage planMaterialConfirmationpage = orderPlanMaterialsPage.selectsOption("None");
 		
 		if(planMaterialConfirmationpage == null){
 			System.out.println("In Order Materials Page");
@@ -302,7 +303,7 @@ public class OrderPlanMaterialsAarpStepDefinition {
 	*/
 	@Then("^the user validates error message in Order Materials page$")
 	public void user_validates_error_message() throws InterruptedException{
-		OrderplanmaterialsPage orderPlanMaterialsPage = (OrderplanmaterialsPage) getLoginScenario().getBean(PageConstantsMnR.ORDER_PLAN_MATERIALS_PAGE);
+		OrderMaterialsPage orderPlanMaterialsPage = (OrderMaterialsPage) getLoginScenario().getBean(PageConstantsMnR.ORDER_PLAN_MATERIALS_PAGE);
 		
 		if(!orderPlanMaterialsPage.ValidateErrorMessage()){
 			System.out.println("Error Message not displayed for Order materials Page");
@@ -311,11 +312,12 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		
 	}
 	/**
-	* @todo : Verify error messages in order materials page for ship member
+	* @throws InterruptedException 
+	 * @todo : Verify error messages in order materials page for ship member
 	*/
 	@Then("^the user validates error message for SHIP invalid selection in Order Materials page$")
-	public void user_validates_SHIP_error_message(){
-		OrderplanmaterialsPage orderPlanMaterialsPage = (OrderplanmaterialsPage) getLoginScenario().getBean(PageConstantsMnR.ORDER_PLAN_MATERIALS_PAGE);
+	public void user_validates_SHIP_error_message() throws InterruptedException{
+		OrderMaterialsPage orderPlanMaterialsPage = (OrderMaterialsPage) getLoginScenario().getBean(PageConstantsMnR.ORDER_PLAN_MATERIALS_PAGE);
 		
 		if(!orderPlanMaterialsPage.ValidateSHIPErrorMessage()){
 			System.out.println("Error Message not displayed for Order materials Page");

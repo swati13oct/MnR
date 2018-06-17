@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -55,14 +54,15 @@ public class IntroductionInformationPage extends UhcDriver{
 	@FindBy(id="beginOnlineEnrollmentbtn")
 	private WebElement enrollmentNext;
 	
-	@FindBy(id = "beginOnlineEnrollmentBtn")
-	private WebElement beginOnlineEnrBtn;
-	
 	@FindBy(xpath = "//div[@id='beginOnlineEnrollment']/span")
 	private WebElement alreadyEnrolledErrorMsg;
 	
 	@FindBy(id = "medicalclaimnumerr")
 	private WebElement MedicareIDErrorMsg;
+	
+	@FindBy(id = "step2Heading")
+	private WebElement NextStepPage;
+	
 	
 	private PageData introductionInformation;
 
@@ -227,8 +227,11 @@ public class IntroductionInformationPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}			
-			System.out.println("Medicare ID provided is Valid Format"+MedicareValidFlag);
-			if(validate(MedicareIDErrorMsg)){
+			System.out.println("Medicare ID provided : "+claimNumberField.getText()+" ; is Valid Format"+MedicareValidFlag);
+			
+			boolean MedicareErrorDisplayed = validate(MedicareIDErrorMsg)?true:false;
+			boolean NextStepPageDisplayed = validate(NextStepPage)?true:false;
+			if(MedicareErrorDisplayed){
 				if(MedicareValidFlag ==false){
 					System.out.println("Error Message Displayed for InCorrect Medicare ID Format");
 					return true;
@@ -242,9 +245,9 @@ public class IntroductionInformationPage extends UhcDriver{
 					return false;
 				}
 			}
-			else if(!validate(MedicareIDErrorMsg)){
+			else if(!MedicareErrorDisplayed &&  NextStepPageDisplayed){
 				if(MedicareValidFlag ==true){
-					System.out.println("Error Message is NOT Displayed for Correct Medicare ID Format");
+					System.out.println("Error Message is NOT Displayed for Correct Medicare ID Format; Step 2 Page Displayed");
 					return true;
 				}
 				else{

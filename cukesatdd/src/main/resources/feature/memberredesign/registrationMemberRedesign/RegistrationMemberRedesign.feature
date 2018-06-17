@@ -31,18 +31,19 @@ Feature: G1.8To test registration flow in redesign portal
       | CREATE_ACCOUNT_CONFIRM_EMAIL    | <email>    |
     And click on confirm registration
     Then member navigate to plan confirmation page
-    And Verify correct member name is displayed
-      | Member name | <membername> |
-    And correct Member DOB value is displayed
+    And Verify correct first name is displayed
+      | FIRST_NAME | <firstname> |
+          And Verify correct last name is displayed
+      | LAST_NAME | <lastname> |
+    And verify correct member information is displayed
       | Date of birth | <dateOfBirth> |
-    And correct username is displayed
-      | User Name | <userName> |
-    And correct email is displayed
-      | Email | <email> |
-    When member click on go to home page button
-    Then member navigate to Rally dashboard home page
+    
+      | CREATE_ACCOUNT_USER_NAME | <userName> |
+    
+      | CREATE_ACCOUNT_EMAIL | <email> |
+
 
     Examples: 
-      | planMemberId | dateOfBirth | planname                          | membername      | userName   | password   | email          |
-      | 949291584    | 02-17-1952  | Preferred Choice Palm Beach (HMO) | ECCFF BFACFDAFA | Username@1 | Password@1 | member@uhc.com |
+      | planMemberId | dateOfBirth | planname                          | membername      | userName   | password   | email          |firstname  | lastname|
+      | 949291584    | 02-17-1952  | Preferred Choice Palm Beach (HMO) | ECCFF BFACFDAFA | Username@1 | Password@1 | member@uhc.com |ECCFF     | BFACFDAFA|
 

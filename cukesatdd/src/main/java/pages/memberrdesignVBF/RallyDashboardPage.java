@@ -200,7 +200,7 @@ public class RallyDashboardPage extends UhcDriver {
 		validateNew(panelPremiumPayment);
 		panelPremiumPayment.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getTitle().contains("Overview")) {
+		if (driver.getTitle().contains("Payment")) {
 			return new PaymentsOverview(driver);
 		}
 		return null;

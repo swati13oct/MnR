@@ -3,6 +3,8 @@
  */
 package pages.member.ulayer;
 
+import gherkin.formatter.model.DataTableRow;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -27,7 +29,6 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import cucumber.api.DataTable;
-import gherkin.formatter.model.DataTableRow;
 
 /**
  * @author pagarwa5

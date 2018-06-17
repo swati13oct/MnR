@@ -170,7 +170,7 @@ public class PharmacyResultPage extends UhcDriver{
 		}
 		System.out.println(driver.getTitle());
 		if (driver.getTitle().equalsIgnoreCase(
-				"Find a Pharmacy | AARP® Medicare Plans from UnitedHealthcare®")) {
+				PageTitleConstants.BLAYER_FIND_A_PHARMACY_AARP_MEDICARE_PLANS_FROM_UNITEDHEALTHCARE)) {
 			return new PharmacySearchPage(driver);
 		}
 		return null;

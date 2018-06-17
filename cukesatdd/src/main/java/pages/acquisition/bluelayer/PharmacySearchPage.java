@@ -5,6 +5,9 @@ package pages.acquisition.bluelayer;
 
 import java.util.List;
 
+import junit.framework.Assert;
+import pages.acquisition.ulayer.PageTitleConstants;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
@@ -22,7 +25,6 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import junit.framework.Assert;
 
 /**
  * @author pagarwa5
@@ -107,7 +109,8 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(className = "errorPoints")
 	WebElement errorPoints;
 	
-	@FindBy(xpath = "//div/h2[contains(@class, 'pharmacy-count')]")
+	//@FindBy(xpath = "//div/h2[contains(@class, 'pharmacy-count')]")
+	@FindBy(xpath = "//*[contains(@class, 'pharmacy-count')]")
 	private WebElement pharmacyCount;
 
 	@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[2]")
@@ -116,17 +119,20 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[1]")
 	WebElement zeropharmacyResults;
 
-	@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[2]/div/ul[@class='map-toggle']")
+	//@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[2]/div/ul[@class='map-toggle']")
+	@FindBy(xpath = "//*[@class='map-toggle']")
 	WebElement mapToggleElement;
 
 	@FindBy(id="collapseMap")
 	//@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[2]/div/div[@class='collapse-wrapper']/div")
 	WebElement mapView;
 
-	@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[2]/div/ul[@class='pharmacy-list']")
+	//@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']//ol[@class='pharmacy-list']")
+	@FindBy(xpath = "//*[@class='pharmacy-list']")
 	WebElement pharmacyList;
 
-	@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[2]/div/ul[@class='pharmacy-list']/li")
+	//@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']//ol[@class='pharmacy-list']/li")
+	@FindBy(xpath = "//*[@class='pharmacy-list']/li")
 	List<WebElement> pharmacyListItems;
 	
 	@FindBys(value = { @FindBy(xpath = "//ul[1][@class='filter-list']/li/label") })
@@ -205,11 +211,11 @@ public class PharmacySearchPage extends UhcDriver {
 		}
 		System.out.println(driver.getTitle());
 		if (driver.getTitle().equalsIgnoreCase(
-				"Locate a Pharmacy | UnitedHealthcare®")) {
+				PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE)) {
 			return new PharmacySearchPage(driver);
 		}
 		if (driver.getTitle().equalsIgnoreCase(
-				"Find a Pharmacy | AARP® Medicare Plans from UnitedHealthcare®")) {
+				PageTitleConstants.BLAYER_FIND_A_PHARMACY_AARP_MEDICARE_PLANS_FROM_UNITEDHEALTHCARE)) {
 			return new PharmacySearchPage(driver);
 		}
 		return null;
@@ -227,7 +233,7 @@ public class PharmacySearchPage extends UhcDriver {
 			
 		}
 		if (driver.getTitle().equalsIgnoreCase(
-				"Locate a Pharmacy | UnitedHealthcare®")) {
+				PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE)) {
 			return new PharmacySearchPage(driver);
 		}
 		return null;
@@ -560,7 +566,7 @@ public PharmacySearchPage selectPharmacyandServices(String pharmacytype) {
 		}
 
 		if (driver.getTitle().equalsIgnoreCase(
-				"Locate a Pharmacy | UnitedHealthcare®")) {
+				PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE)) {
 			return new PharmacySearchPage(driver);
 		}
 		return null;

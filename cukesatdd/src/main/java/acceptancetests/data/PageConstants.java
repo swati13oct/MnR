@@ -145,6 +145,8 @@ public static final String ACCOUNT_HOME_PAGE = "accountHomePage";
 	public static final String ABOUT_US_PAGE = "aboutUsPage";
 
 	public static final String CONTACT_US_PAGE = "contactUsPage";
+	
+	public static final String ID_CARD_PAGE = "iDCardPage";
 
 	public static final String PRIVACY_POLICY_PAGE = "privacyPolicyPage";
 
@@ -418,6 +420,14 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 	
 	   public static final String MEDICAL_EOB_PAGE = "medicalEobPage";
 	   
+	   public static final String HSID_LOGIN_PAGE = "hsidLoginPage";
+	   
+	   public static final String HSID_REGISTRATION_PERSONALINFOPAGE = "HsidRegistrationPersonalInformationPage";
+	   
+	   public static final String HSID_REGISTRATION_PERSONALCREATEACCOUNT = "hsidRegistrationPersonalCreateAccount";
+	   
+	   public static final String HSID_REGISTRATION_CONFIRM_INFORMATION = "hsidRegistrationConfirmInformation";
+	   
 		// ************************** New Constant  ***************************************
 
 	   
@@ -565,10 +575,27 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 	public static final String PLAN_CONFIRMATION_PAGE = "planConfirmationPage";
 
 	public static final String CREATE_ACCOUNT_PAGE = "createAccountPage";
-	public static final String SECURITY_QUESTIONS_PAGE = "accountHomePage";
-	   public static final String HSID_REGISTRATION_PERSONALINFOPAGE = "HsidRegistrationPersonalInformationPage";
-	   
-	   public static final String HSID_REGISTRATION_PERSONALCREATEACCOUNT = "hsidRegistrationPersonalCreateAccount";
-	   
-	   public static final String HSID_REGISTRATION_CONFIRM_INFORMATION = "hsidRegistrationConfirmInformation";
+	
+	public static final String Payments_History_Page =  "paymentHistoryPage";
+	
+	public static final String DashPage =  "DashboradPage";
+
+	public static final String One_Time_Payments_Page = "oneTimePaymentPage";
+
+	public static final String Review_OneTime_Page = "reviewOneTimePaymentPage";
+
+	public static final String SECURITY_QUESTIONS_PAGE = "securityQuestionsPage";
+	
+	public static final String PLAN_SELECTOR_NEW_PAGE = "planSelectorNewPage";
+		
+	public static final String SSO_TEST_HARNESS_PAGE = "ssoTestHarnessPage";
+	
+	public static final String Member_Auth_Login = "MemberAuthLogin";
+	
+	public static final String Member_Auth_PopUp = "MemberAuthPopUp";
+	
+	public static final String New_Window = "NewWindow";
+
+	public static final String footer_page = null;
+	//public static final String SECURITY_QUESTIONS_PAGE = "accountHomePage";
 }

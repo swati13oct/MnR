@@ -71,10 +71,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(partialLinkText = "PREFERENCES")
 	private WebElement EditPreferenceButton;
 
-	@FindBy(className = "atdd-goGreenHeader")
+	@FindBy(xpath = "//h2[contains(@class,'atdd-goGreenHeader')]")
 	private WebElement GoGreenHeader;
 
-	@FindBy(className = "atdd-goGreensubHeader")
+	@FindBy(xpath = "//p[@class='atdd-goGreensubHeader']/following-sibling::p[text()][1]")
 	private WebElement GoGreenText;
 	
     @FindBy(id = "hsidPwdLink")

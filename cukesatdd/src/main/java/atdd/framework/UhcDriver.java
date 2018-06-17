@@ -9,9 +9,10 @@ import java.util.concurrent.TimeUnit;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
-
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -22,8 +23,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
-import org.junit.Assert;
-import org.openqa.selenium.JavascriptExecutor;
 
 /**
  * @author pjaising
@@ -116,7 +115,7 @@ public abstract class UhcDriver {
     		}
     		return false;
 
-    		/*//CM code
+    		/*//CM
     		
     		JavascriptExecutor jse = (JavascriptExecutor)driver;
     		jse.executeScript("window.scrollBy(0,-50)", "");

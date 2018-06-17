@@ -11,6 +11,11 @@ public class PageConstantsMnR {
 
 	public static final String ACCOUNT_HOME_PAGE = "accountHomePage";
 	
+	public static final String ASSISTIVE_REGISTRATION_PAGE = "AssistiveRegistrationPage";
+	
+	
+	public static final String HSID_LOGIN_PAGE = "hsidloginpage";
+	
 	public static final String  dashboardPage="dashboardPage";	
 public static final String CUSTOM_RANGE = "customRange";
 	
@@ -265,4 +270,12 @@ public static final String DASHBOARD_PAGE = "dashboardPage";public static final 
 	public static final String PROFILEANDPREFERENCES_PAGE = null;
 
 	public static final String MEM_AUTH_PAGE = null;
+	
+	public static final String PROFILE_AND_PREFERENCES_PAGE_HSID = "ProfilePageHsid";
+	
+	public static final String COMMUNICATION_PREFERENCE_PAGE = "communicationPrefPage";
+	
+	public static final String Payments_History_Page = "PaymentsHistoryPage";
+	
+	public static final String ComboTab =  "ComboTab";
 }

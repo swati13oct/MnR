@@ -10,8 +10,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.data.MRConstants;
 import pages.acquisition.uhcretiree.Rallytool_Page;
+import acceptancetests.data.MRConstants;
 
 /**
  * @author rkodumur
@@ -27,8 +27,12 @@ public class SiteMapAARPPage extends GlobalWebElements {
 
 	@Override
 	public void openAndValidate() {
-		start(AARP_SITE_MAP_PAGE_URL);
-	
+		String en=System.getProperty("environment");
+		if ("offline".equalsIgnoreCase(en)){
+			start(AARP_SITE_MAP_PAGE_URL_OFFLINE);
+		}else{
+			start(AARP_SITE_MAP_PAGE_URL);
+		}
 		validate(footerPrivacyPolicyLink);
 		
 	}
@@ -38,11 +42,12 @@ public class SiteMapAARPPage extends GlobalWebElements {
 	public WebElement providerlinkonaarpsitemaplink;
 
 	private static String AARP_SITE_MAP_PAGE_URL = MRConstants.AARP_SITE_MAP_PAGE_URL;
+	private static String AARP_SITE_MAP_PAGE_URL_OFFLINE = MRConstants.AARP_SITE_MAP_PAGE_URL_OFFLINE;
 	public PrivacyPolicyAARPPage privacypolicyFooterClick() {
 		validate(footerPrivacyPolicyLink);
 		footerPrivacyPolicyLink.click();
 		validate(footerPrivacyPolicyLink);
-		if (driver.getTitle().equalsIgnoreCase("Privacy Policy | AARP® Medicare Plans from UnitedHealthcare®")) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_PRIVACY_POLICY)) {
 			return new PrivacyPolicyAARPPage(driver);
 		}
 		return null;

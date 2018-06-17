@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import pages.regression.payments.OneTimePaymentPage;
 import atdd.framework.UhcDriver;
 
 /**
@@ -69,17 +70,13 @@ public class OneTimePaymentsPage extends UhcDriver{
          private WebElement CancelButton;
         
         @FindBy(xpath=".//*[@id='paymentHistoryApp']/div/div/div/div/h1")
-         private WebElement PaymentHistoryText;
-        
-             
+         private WebElement PaymentHistoryText;      
         
         @FindBy(id = "middle-name")
         private WebElement middleNameField;        
         
         @FindBy(id="review-continue")                        
         private WebElement continueButton;
-        
-    
         
         @FindBy(xpath = "//*[@id='atdd_otheramount_label']/label")                        
         private WebElement otherAmtRadioButton;

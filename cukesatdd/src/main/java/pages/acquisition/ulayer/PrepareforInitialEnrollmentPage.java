@@ -57,7 +57,7 @@ public class PrepareforInitialEnrollmentPage extends GlobalWebElements {
 		validate(medicareSupplementInsurancePlansLink);
 		exploreChangingPlansLink.click();
 		validate(medicareSupplementInsurancePlansLink);
-		if (driver.getTitle().equalsIgnoreCase("Change Medicare Plans | AARP® Medicare Plans from UnitedHealthcare®")) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_CHANGE_MEDICARE_PLANS)) {
 			return new ExploreChangingPlansPage(driver);
 		}else{
 		
@@ -73,7 +73,7 @@ public class PrepareforInitialEnrollmentPage extends GlobalWebElements {
         actions.moveToElement(navigationSectionMedicareEducationLink);
         actions.moveToElement(discoverMoreResourcesMedicareEducationLink);
         actions.click().build().perform();
-        if (driver.getTitle().equalsIgnoreCase("More Medicare Resources | AARP® Medicare Plans from UnitedHealthcare®")) {
+        if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_MORE_MEDICARE_RESOURCES)) {
 			return new DiscoverMoreResourcesPage(driver);
 		}else{
 		

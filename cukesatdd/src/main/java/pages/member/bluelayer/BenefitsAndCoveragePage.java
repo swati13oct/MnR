@@ -18,11 +18,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import pages.member.ulayer.ValueAddedServicepage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.member.ulayer.ValueAddedServicepage;
 
 /**
  * @Functionality : To check Benefits and Coverage page
@@ -267,12 +267,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='specialDisctServices']/div[1]/img")
 	private WebElement handimage;
 
-	@FindBy(className = "atdd-bnc-discountsubtitle")
+	@FindBy(id = "specialDisctServices")
 	private WebElement textdiscountservices;
-
-
-	@FindBy(className = "atdd-bnc-discounttitle")
-	private WebElement headerdiscountservices;
 
 	@FindBy(className = "atdd-bnc-discntlearnmorimg")
 	private WebElement learnmorebutton;
@@ -291,6 +287,12 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(id = "ccs-header")
 	private WebElement catastrophicCoverageStage;
+	
+	@FindBy(xpath = ".//*[@id='drug-benefits']/div[5]/div[10]/div/div[1]/div/div")
+	private WebElement hartfortdrugtable;
+	
+	@FindBy(className = "atdd-bnc-CTgrouptable")
+	private WebElement GreenwichTable;
 	
 	public static final String learnmorestagetext_xpath = ".//*[@id='collapseStages']";
 
@@ -1262,8 +1264,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	 */
 	public void vasSection() {
 
-		validate(textdiscountservices);
-		validate(headerdiscountservices);
+		 validate(textdiscountservices);
+		
 	}
 
 	/**
@@ -1359,4 +1361,32 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		if(copayType.equals("wotCMSValue")){
 		}
 	}
+	
+	/**
+	 * @toDo : Validates the hartfort prescription drug benefit table
+	 * @author mrani101     
+	 */
+	
+	public void validatehartfortprescriptiondrugtable() {
+		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto generated catch block
+			e.printStackTrace();
+		}
+		validateNew(hartfortdrugtable);
+	}
+	
+	public void validateTownOfGreenwichdrugtable() {
+		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto generated catch block
+			e.printStackTrace();
+		}
+		validateNew(GreenwichTable);
+	}
+
 }

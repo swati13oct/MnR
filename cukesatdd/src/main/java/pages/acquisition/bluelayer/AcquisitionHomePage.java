@@ -2,9 +2,11 @@ package pages.acquisition.bluelayer;
 
 /*@author pagarwa5*/
 
-import java.util.ArrayList;
-import java.util.List;
-
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.MRConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.NoSuchElementException;
@@ -15,16 +17,15 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+import pages.acquisition.ulayer.PageTitleConstants;
+
+import java.util.ArrayList;
+import java.util.List;
 
 //import pages.member.bluelayer.AccountHomePage;
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.MRConstants;
-import acceptancetests.data.PageData;
-import acceptancetests.util.CommonUtility;
 //import pages.acquisition.ulayer.MaViewPlansAndPricingPage;
 //import pages.acquisition.ulayer.MsViewPlansAndPricingPage;
 //import pages.acquisition.ulayer.PdpViewPlansAndPricingPage;
-import atdd.framework.MRScenario;
 
 public class AcquisitionHomePage extends GlobalWebElements {
 
@@ -75,10 +76,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
         private WebElement learnfindPlansButton;
 
 
-        @FindBy(id = "atdd_ma_plans")
+        @FindBy(xpath = "//*[@id='planTypesColumn']/h3[1]/a")
         private WebElement ma_moreHelpInfoLink;
+        
+        @FindBy(xpath="//a[contains(text(),'Request More')]")
+    	private WebElement moreHelpInfoLink;
 
-        @FindBy(id = "atdd_mpd_plans")
+        @FindBy(xpath="//a[contains(text(),'Request More Help')]")
         private WebElement pdp_moreHelpInfoLink;
 
         @FindBys(value = { @FindBy(xpath = "//table[@id='selectcountytable']/tbody/tr/td") })
@@ -90,6 +94,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
         @FindBy(id = "Find a pharmacy near you")
         private WebElement pharmacyNearLink_MA;
 
+        @FindBy(id = "Find a pharmacy near you")
+        private WebElement findPharmacyNearYou;
+        
         @FindBy(id = "Find a pharmacy near you")
         private WebElement pharmacyNearLink;
 
@@ -118,6 +125,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
         @FindBy(id = "cobrowse-disclaimer")
         private WebElement cobrowsemodelwindow;
+        
+        @FindBy(xpath = "//a[@class='cta-button']")
+        private WebElement takeTheQuizBtn;
 
         private PageData homePageDisclaimer;
         public JSONObject homePageDisclaimerJson;
@@ -161,7 +171,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
                 for(int i = 0; i<10;i++){
                         if (driver.getTitle().equalsIgnoreCase(
-                                        "Our Medicare Plan Types | UnitedHealthcare®")) {
+                                        PageTitleConstants.BLAYER_MEDICARE_PLAN_TYPES_TITLE)) {
 
                                 return new GetStartedPage(driver);
                         }else{
@@ -328,7 +338,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
                 validate(footerSiteMapLink);
                 footerSiteMapLink.click();
                 validate(footerSiteMapLink);
-                if (driver.getTitle().equalsIgnoreCase("Site Map | UnitedHealthcare®")) {
+                if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_SITEMAP)) {
                         return new SiteMapUMSPage(driver);
                 }
                 return null;
@@ -383,8 +393,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
                 }
-                if (driver.getTitle().equalsIgnoreCase(
-                                "Our Medicare Plan Types | UnitedHealthcare®")) {
+                if (driver.getCurrentUrl().contains("plan-summary")) {
                         return new VPPPlanSummaryPage(driver);
                 }
                 return null;
@@ -400,7 +409,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
                     e.printStackTrace();
             }
             if (driver.getTitle().equalsIgnoreCase(
-                            "Our Medicare Plan Types | UnitedHealthcare®")) {
+                            PageTitleConstants.BLAYER_MEDICARE_PLAN_TYPES_TITLE)) {
                     return new VPPPlanSummaryPage(driver);
             }
             return null;
@@ -424,7 +433,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
                         System.out.println("county box not found");
                 }
                 if (getTitle().equalsIgnoreCase(
-                                "Our Medicare Plan Types | UnitedHealthcare®")) {
+                                PageTitleConstants.BLAYER_MEDICARE_PLAN_TYPES_TITLE)) {
                         return new VPPPlanSummaryPage(driver);
                 }
                 return null;
@@ -440,7 +449,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
                 medicareAdvantagePlansLink.click();
                 validate(medicareAdvantagePlansLink);
                 if (driver.getTitle().equalsIgnoreCase(
-                                "Medicare Advantage Plans | UnitedHealthcare®")) {
+                                PageTitleConstants.BLAYER_MEDICARE_ADVANTAGE_PLANS)) {
                         return new MedicareAdvantagePlansuhcPage(driver);
                 }
 
@@ -471,7 +480,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
                 importantDisclosuresLink.click();
                 validate(importantDisclosuresLink);
                 if (driver.getTitle().equalsIgnoreCase(
-                                "Disclaimers | UnitedHealthcare®")) {
+                                PageTitleConstants.BLAYER_DISCLAIMERS)) {
                         return new DisclaimersPage(driver);
                 }
                 return null;
@@ -482,7 +491,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
                 navigationSectionHomeLink.click();
                 validate(navigationSectionHomeLink);
                 if (driver.getTitle().equalsIgnoreCase(
-                                "Medicare Plans for Different Needs | UnitedHealthcare®")) {
+                                PageTitleConstants.BLAYER_MEDICARE_PLANS_FOR_DIFFERENT_NEEDS)) {
                         return new AcquisitionHomePage(driver);
                 }
 
@@ -591,7 +600,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
                 driver.switchTo().window(tabs1.get(2));
                 validate(medicareTitleText);
                 if (driver.getTitle().equalsIgnoreCase(
-                                "UnitedHealthcare Medicare Solutions | Registration")) {
+                                PageTitleConstants.BLAYER_MEDICARE_SOLUTIONS_REGISTRATION)) {
                         return new RegistrationHomePage(driver);
                 }
                 return null;
@@ -675,7 +684,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
                 actions.moveToElement(learnAboutMedicareMedicareEducationLink);
                 actions.click().build().perform();
                 if (driver.getTitle().equalsIgnoreCase(
-                                "Learn About Medicare | UnitedHealthcare®")) {
+                                PageTitleConstants.BLAYER_LEARN_ABOUT_MEDICARE)) {
                         return new LearnAboutMedicareuhcPage(driver);
                 }
 
@@ -695,13 +704,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
         }
 
         public void navigateToRequestMoreHelpAndInformation(String planType){
-                Actions action = new Actions(driver);
-                action.moveToElement(Home).moveToElement(ourPlans).build().perform();
-                if(planType.contains("MA"))
-                        ma_moreHelpInfoLink.click();
-                else if(planType.contains("PDP")){
-                        pdp_moreHelpInfoLink.click();                
-                }
+        	 Actions actions = new Actions(driver);
+             actions.moveToElement(ourPlansHoverLink);
+             actions.moveToElement(moreHelpInfoLink);
+            actions.click().build().perform();
+            
                 for(int i=0;i<10;i++){
                         try {
                                 Thread.sleep(2000);
@@ -718,13 +725,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
         public PharmacySearchPage navigateToPharmacyLocator(String planType) {
 
     		driver.manage().window().maximize();
-                if(planType.contains("MA"))
+               /* if(planType.contains("MA"))
                         pharmacyNearLink_MA.click();
                 else if(planType.contains("PDP")){
                         pharmacyNearLink.click();                
-                }
+                }*/
 
-
+    		findPharmacyNearYou.click();
+    		
                 for(int i=0;i<10;i++){
                         try {
                                 Thread.sleep(6000);
@@ -736,7 +744,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
                                 break;
                 }
                 if (driver.getTitle().equalsIgnoreCase(
-                                "Locate a Pharmacy | UnitedHealthcare®")) {
+                                PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE)) {
                         return new PharmacySearchPage(driver);
                 }
                 return null;
@@ -761,7 +769,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
                 zipcodeField.sendKeys(zipCode);
                 findPlansButton.click();
                 if (driver.getTitle().equalsIgnoreCase(
-                                "Our Medicare Plan Types | UnitedHealthcare®")) {
+                                PageTitleConstants.BLAYER_MEDICARE_PLAN_TYPES_TITLE)) {
                         return new OurPlansPage(driver);
                 }
                 return null;
@@ -958,7 +966,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
                 navigationSectionOurPlansLink.click();
                 if (getTitle()
                                 .equalsIgnoreCase(
-                                                "Our Medicare Plan Types | UnitedHealthcare®")) {
+                                                PageTitleConstants.BLAYER_MEDICARE_PLAN_TYPES_TITLE)) {
                         return new OurPlansPage(driver);
                 }
 
@@ -976,11 +984,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
                 }
 
                 if (currentUrl().contains("/medicare-education/about")) {
-                        if(getTitle().equals("Learn About Medicare | UnitedHealthcare®")){
+                        if(getTitle().equals(PageTitleConstants.BLAYER_LEARN_ABOUT_MEDICARE)){
                                 return new LearnAboutMedicareuhcPage(driver);
                         }
                 } else if(currentUrl().contains("medicare-education/enroll")){
-                        if(getTitle().equals("Prepare for Your Medicare Initial Enrollment Period | UnitedHealthcare®")){
+                        if(getTitle().equals(PageTitleConstants.BLAYER_PREPARE_FOR_YOUR_MEDICARE_INITIAL_ENROLLMENT_PERIOD)){
                                 return new PrepareForInitialEnrollmentuhcPage(driver);
                         }
                 }
@@ -1021,7 +1029,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
                 Actions actions = new Actions(driver);
                 actions.moveToElement(ourPlansHoverLink);
-                actions.moveToElement(ma_moreHelpInfoLink);
+                actions.moveToElement(moreHelpInfoLink);
                 actions.click().build().perform();
 
                 try {
@@ -1055,8 +1063,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
                 sendkeys(zipCodeField, zipcode);
                 viewPlansButton.click();
                 
-                if (getTitle().equalsIgnoreCase(
-                                "Our Medicare Plan Types | UnitedHealthcare®")) {
+                if (driver.getCurrentUrl().contains("plan-summary")) {
                         return new VPPPlanSummaryPage(driver);
                 }
                 return null;
@@ -1115,8 +1122,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
                                         } catch (Exception e) {
                                                 System.out.println("county box not found");
                                         }*/
-                if (driver.getTitle().equalsIgnoreCase(
-                                "Our Medicare Plan Types | UnitedHealthcare®")) {
+                if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_PLAN_TYPES_TITLE)) {
                         return new VPPPlanSummaryPage(driver);
                 }
                 return null;
@@ -1126,10 +1132,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
                 Actions actions = new Actions(driver);
                 actions.moveToElement(ourPlansHoverLink);
-                actions.moveToElement(pdp_moreHelpInfoLink);
+                actions.moveToElement(moreHelpInfoLink);
                 actions.click().build().perform();
-
-                if (currentUrl().contains("prescription-drug-plans/request-information.html")) {
+                try {
+					Thread.sleep(4000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+                if (currentUrl().contains("request-information.html")) {
                         return new PDPRequestHelpAndInformationPage(driver);
                 }
 
@@ -1165,4 +1176,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
                 
                 return flag;
         }
+        
+        public PlanSelectorNewPage quizButton() {
+        	waitforElement(ourPlans);
+    		Actions action = new Actions(driver);		
+    		action.moveToElement(ourPlans).build().perform();
+    		waitforElement(takeTheQuizBtn);
+    		takeTheQuizBtn.click();
+			return new PlanSelectorNewPage(driver);
+    	}
 }

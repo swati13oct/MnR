@@ -13,12 +13,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import pages.member.bluelayer.ContactUsPage;
+import pages.regression.pharmacylocator.PharmacySearchPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.member.bluelayer.ContactUsPage;
-
 
 /**
  * @author sdwaraka

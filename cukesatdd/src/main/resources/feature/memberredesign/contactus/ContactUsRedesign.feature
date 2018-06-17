@@ -1,9 +1,10 @@
+@regression_06_06_18
 @velocityDashers
 Feature: V1.1To test Send us a question Widget and Click to call functionality in contact us redesign pages in UHCM site
 
   @secureEmailWidgetCancel
   Scenario Outline: Verify Secure Email Us Widget section in contact us redesign page
-    Given registered UMS member with following attributes
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |
       | Member Type | <memberType> |
     When the user navigates to contact us page in UHC site
@@ -18,7 +19,7 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
 
   @GroupEmailConfirmMessage
   Scenario Outline: Verify Group Email Widget Confirm Request in contact us redesign page
-    Given registered UMS member with following attributes
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |
       | Member Type | <memberType> |
     When the user navigates to contact us page in UHC site
@@ -39,7 +40,7 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
 
   @GroupEmailAQuestionFiledValidations
   Scenario Outline: Verify Group Email Widget Confirm Request in contact us redesign page
-    Given registered UMS member with following attributes
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |
       | Member Type | <memberType> |
     When the user navigates to contact us page in UHC site
@@ -62,7 +63,7 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
 
   @SHIPEmailUsFunctionality
   Scenario Outline: Verify SHIP Email Us Widget Confirm Request in contact us redesign page
-    Given registered UMS member with following attributes
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |
       | Member Type | <memberType> |
     When the user navigates to contact us page in UHC site
@@ -89,7 +90,7 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
 
   @goToInbox
   Scenario Outline: Verify go To Inbox button on contactUS redesign page for opted in member
-    Given registered UMS member with following attributes
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |
       | Member Type | <memberType> |
     When the user navigates to contact us page in UHC site
@@ -101,7 +102,7 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
 
   @clickToCallCancel
   Scenario Outline: Verify clickToCall Widget Expansion (Drop-Down, Text Box and Button UI) and click on cancel on contactUS redesign page
-    Given registered UMS member with following attributes
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |
       | Member Type | <memberType> |
     When the user navigates to contact us page in UHC site
@@ -115,7 +116,7 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
 
   @clickToCallConfirmation
   Scenario Outline: Verify Click to Call Widget Drop-Down Request Routing and Confirmation message functionality on contactUS redesign page
-    Given registered UMS member with following attributes
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |
       | Member Type | <memberType> |
     When the user navigates to contact us page in UHC site
@@ -132,7 +133,7 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
 
   @sendUsQuestionPDP
   Scenario Outline: Verify sendUs A Question Widget page for PDP display section in contact us redesign page
-    Given registered UMS member with following attributes
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |
       | Member Type | <memberType> |
     When the user navigates to contact us page in UHC site
@@ -141,3 +142,18 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
     Examples: 
       | plantype | memberType |
       | PDP      | rx_eob     |
+      
+  @regressionContactUsForTerminatedMembers
+  Scenario Outline: Verify terminated members view on contact us redesign page
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <plantype>   |
+      | Member Type | <memberType> |
+    When the user navigates to contact us page in UHC site
+    Then user should only see the Technical Support and Plan Support components
+
+    Examples: 
+      | plantype | memberType                 |
+      | SHIP     | Terminated_MAPDwithMedSupp |
+      | MAPD     | Terminated_CALPERSGroup    |
+      | PDP      | Terminated_rx_eob          |
+      

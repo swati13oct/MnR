@@ -1,26 +1,20 @@
 package pages.acquisition.ulayer;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
-import org.openqa.selenium.support.PageFactory;
-
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
+import org.openqa.selenium.support.PageFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author pperugu
@@ -74,12 +68,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "/html/body/div[3]/div/table/tbody/tr[3]/td/table/tbody/tr[2]/td/div/div[2]/div/div/div[2]/div/ul/li[2]/a")
 	WebElement zipCodebtn;
-	                 
-	@FindBy(id = "atdd_mpd_plans")
+
+	@FindBy(xpath="//a[contains(text(),'Request More Help')]")
 	private WebElement pdp_moreHelpInfoLink;
 
-	@FindBy(id = "atdd_ma_plans")
+	@FindBy(xpath = ".//*[@id='atdd_ma_plans']/span")
 	private WebElement ma_moreHelpInfoLink;
+	
+	@FindBy(xpath="//a[contains(text(),'Request More')]")
+	private WebElement moreHelpInfoLink;
 
 	@FindBy(id = "ghn_lnk_1")
 	public static WebElement navigationSectionHomeLink;
@@ -109,7 +106,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public static WebElement registerherelink;
 
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
-	
 	private static String AARP_ACQISITION_OFFLINE_PAGE_URL = MRConstants.AARP_URL_OFFLINE;
 
 	private PageData globalFooter;
@@ -204,6 +200,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public VPPPlanSummaryPage searchPlans(String zipcode, String countyName) {
 		
+		
+		try {
+			Thread.sleep(10000);
+			} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		sendkeys(zipCodeField, zipcode);
 		
 		viewPlansButton.click();
@@ -215,8 +218,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("county box not found");
 		}
 		
-		if (driver.getTitle().equalsIgnoreCase("Our Medicare Plans | AARP® Medicare Plans From UnitedHealthcare®")) {
-			System.out.println("title matches");
+		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
 		}
 		return null;
@@ -250,8 +252,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		sendkeys(zipCodeField, zipcode);
 		viewPlansButton.click();
 		
-		if (getTitle().equalsIgnoreCase(
-				"Our Medicare Plans | AARP® Medicare Plans From UnitedHealthcare®")) {
+		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
 		}
 		return null;
@@ -659,11 +660,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public void navigateToRequestMoreHelpAndInformation(String planType){
 		Actions action = new Actions(driver);
 		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
-		if(planType.contains("MA"))
+		/*if(planType.contains("MA"))
 				ma_moreHelpInfoLink.click();
 		else if(planType.contains("PDP")){
 				pdp_moreHelpInfoLink.click();		
-		}
+		}*/
+		moreHelpInfoLink.click();
 		for(int i=0;i<10;i++){
 			try {
 				Thread.sleep(2000);
@@ -690,7 +692,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			if(driver.getCurrentUrl().contains("-pharmacy."))
 				break;
 		}
-		if (driver.getTitle().equalsIgnoreCase("Locate a Pharmacy | UnitedHealthcare®")) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE)) {
 			return new PharmacySearchPage(driver);
 		}
 		return null;
@@ -713,7 +715,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		Actions actions = new Actions(driver);
 		actions.moveToElement(ourPlansHoverLink);
-		actions.moveToElement(ma_moreHelpInfoLink);
+		actions.moveToElement(moreHelpInfoLink);
 		actions.click().build().perform();
 
 		try {

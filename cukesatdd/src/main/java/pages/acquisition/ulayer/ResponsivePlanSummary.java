@@ -17,17 +17,17 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.ElementData;
-import acceptancetests.data.PageData;
-import acceptancetests.util.CommonUtility;
-import atdd.framework.UhcDriver;
 import pages.acquisition.bluelayer.PlanComparePage;
 import pages.member.ulayer.Rallytool_Page;
 import pages.mobile.acquisition.ulayer.VPPAarpNeedAStepBackWidget;
 import pages.mobile.acquisition.ulayer.VPPAarpNeedHelpWidgetPage;
 import pages.mobile.acquisition.ulayer.VPPNeedMoreInformationWidget;
 import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPage;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.ElementData;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
+import atdd.framework.UhcDriver;
 
 public class ResponsivePlanSummary extends UhcDriver{
 	
@@ -685,7 +685,7 @@ public void comparePlanslnk() throws InterruptedException{
 									e.printStackTrace();
 								}
 				                System.out.println(driver.getTitle());
-				                if(driver.getTitle().equalsIgnoreCase("Medicare Advantage Enrollment | AARP® Medicare Plans from UnitedHealthcare®")){
+				                if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_ADVANTAGE_ENROLLMENT)){
 				                	System.out.println("Page displayed successfully");
 				                	Assert.assertTrue(true);
 				                }else{
@@ -1069,7 +1069,7 @@ public void comparePlanslnk() throws InterruptedException{
                             }
                             
                             if (driver.getTitle().equalsIgnoreCase(
-                            "Our Medicare Plan Types | AARP® Medicare Plans from UnitedHealthcare®") || driver.getTitle().equalsIgnoreCase("estimate-drug-costs")) {
+                            PageTitleConstants.ULAYER_OUR_MEDICARE_PLAN_TYPES) || driver.getTitle().equalsIgnoreCase("estimate-drug-costs")) {
                             return new VPPPlanSummaryPage(driver);
                             }
                     
@@ -1087,7 +1087,7 @@ public void comparePlanslnk() throws InterruptedException{
 				 public VPPPlanSummaryPage enrollNowbtn(){
                      driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
                          enrollNowbtn.click();
-                         if(driver.getTitle().equalsIgnoreCase("Medicare Advantage Enrollment | AARP® Medicare Plans from UnitedHealthcare®"))                
+                         if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_ADVANTAGE_ENROLLMENT))                
                          System.out.println("Online enrollment tool launched");
                          driver.navigate().back();
                          System.out.println("Back to plan summary page");

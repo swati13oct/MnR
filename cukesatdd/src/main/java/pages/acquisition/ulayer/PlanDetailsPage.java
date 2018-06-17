@@ -16,6 +16,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
+import pages.acquisition.ole.WelcomePage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
@@ -81,7 +82,18 @@ public class PlanDetailsPage extends UhcDriver {
 	
 	@FindBy(id="plancosts")
 	private WebElement planCostsTab;
+	
+	//Right Rail Element - TFN
+	@FindBy(xpath="//*[@class='tel ng-binding']")
+	private WebElement RightRail_TFN;
 
+	@FindBy(xpath="//a[contains(text(), 'Enroll in plan')]")
+	private WebElement EnrollinPlan;
+
+	@FindBy(xpath="//*[@id='medicalBenefits']/div[1]/table/tbody/tr[1]/td[4]/strong")
+	private WebElement PremiumForPlan;
+	
+	
 	public JSONObject vppPlanDetailsJson;
 	
 	@FindBy(xpath="//*[@id='bf3dfe9a-aba6-449b-865c-b5628cb03a60']/a[6]")
@@ -125,7 +137,7 @@ public class PlanDetailsPage extends UhcDriver {
 	{
 		enrollInPlanBtn.click();
 		System.out.println(driver.getTitle());
-		if (driver.getTitle().equalsIgnoreCase("AARP Medicare Complete Online Application") || driver.getTitle().equalsIgnoreCase("AARP Medicarerx Online Application")|| driver.getTitle().equalsIgnoreCase("Enrollment Information"))
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_AARP_MEDICARE_COMLETE_ONLINE_APP) || driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_AARP_MEDICARERX_ONLINE_APPLICATION)|| driver.getTitle().equalsIgnoreCase("Enrollment Information"))
 		{
 			System.out.println("in if");
 			return new PlanInformationPage(driver, planName);
@@ -270,7 +282,9 @@ public class PlanDetailsPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		presDrugTab.click();
-		estimateDrugBtn.click();
+		CommonUtility.waitForPageLoad(driver, estimateDrugBtn, 20);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", estimateDrugBtn);
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", estimateDrugBtn);
 		try {
 			Thread.sleep(4000);
 		} catch (InterruptedException e) {
@@ -293,7 +307,7 @@ public class PlanDetailsPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(compareMessageBox.getText().contains("2 plans added") && compareMessageBox.getText().contains("Compare plans") )
+		if(compareMessageBox.getText().contains("1 plan added"))
 			return true;
 		return false;
 	}
@@ -330,4 +344,85 @@ public void browserBack() {
 
 driver.navigate().back();
 }
+
+/**
+ * Methods added for OLE Flow validations
+ * @author sdwaraka
+ * @param PlanName
+ * @return
+ */
+public String getPlanPremium(String PlanName) {
+	
+	try {
+		Thread.sleep(5000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	System.out.println("Plan Name is : "+PlanName);
+	
+	String PlanPremium = PremiumForPlan.getText();
+	
+	System.out.println("Premium for Plan : "+PlanPremium);
+	return PlanPremium;
+}
+
+/**
+ * @author sdwaraka
+ * Method Added for OLE Flow - Navigate to OLE from Plan Details Page
+ * @param planName
+ * @return
+ * @throws InterruptedException
+ */
+public WelcomePage Enroll_OLE_Plan(String planName) throws InterruptedException {
+	
+	try {
+		Thread.sleep(10000);
+		} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	System.out.println("Enroll in Plan for Plan : "+planName);
+	try {
+		if(validate(EnrollinPlan))
+			System.out.println("Found Enroll IN Plan Button for the Plan : "+planName);
+		else
+			System.out.println("Enroll in Plan Button is Not Displayed ");
+
+	}catch(Exception e){
+		System.out.println("Enroll in Plan Button is Not Displayed ");
+	}
+	
+	EnrollinPlan.click();
+	
+	try {
+		Thread.sleep(5000);
+		} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	if(driver.getCurrentUrl().contains("enrollment")){
+		System.out.println("OLE Welcome Page is Displayed");
+		return new WelcomePage(driver);
+	}
+	return null;
+}
+
+/**
+ * @author sdwaraka
+ * Method added for OLE Flow Validations
+ * @return
+ */
+public String GetTFNforPlanType() {
+	if(validate(RightRail_TFN)){
+		System.out.println("TFN is displayed in Right Rail");
+		String TFN_Number = RightRail_TFN.getText();
+		return TFN_Number;
+	}
+	System.out.println("TFN is not Displayed for PlanType in VPP page");
+	
+	return null;
+}
+
 }

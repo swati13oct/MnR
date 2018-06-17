@@ -77,7 +77,7 @@ public class AddNewDrugModal extends UhcDriver {
 
 	public AddDrugDetails clickonSearchButton(String DrugName) throws InterruptedException {
 
-		drugsearchinput.sendKeys(DrugName);
+		drugsearchinput.sendKeys(DrugName.toLowerCase());
 		Thread.sleep(3000);
 		searchButton.click();  
 		waitforElement(continueButton);

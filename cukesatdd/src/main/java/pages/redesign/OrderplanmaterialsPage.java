@@ -5,6 +5,8 @@ package pages.redesign;
 
 import java.util.NoSuchElementException;
 
+import junit.framework.Assert;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -14,7 +16,6 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import junit.framework.Assert;
 
 /**
  * @author sdwaraka
@@ -260,7 +261,7 @@ public class OrderplanmaterialsPage extends UhcDriver {
 		Thread.sleep(3000);
 		if (validate(OrderMaterialsErrorMsg)){
 			System.out.println("*************Error Message Displayed displayed for Order materials Page***************");
-			System.out.println("*************Error Message : "+OrderMaterialsErrorMsg.getText()+" ***************");
+			System.err.println("*************Error Message : "+OrderMaterialsErrorMsg.getText()+" ***************");
 			return true;
 		}
 		else{ 

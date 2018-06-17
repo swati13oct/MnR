@@ -1,10 +1,10 @@
-@codeMonkeys
+@codeMonkeys1
 Feature: C1.2To test Profile and Preferences page .
 
 
-    @CMNeedhelp
+  @CMNeedhelp
   Scenario Outline: To verify the NeedHelp Section On Account Profile page
-    Given registered member with following details for Profile and Preferences flow
+    Given login with following details logins in the member portal and validate elements
      | Plan Type      | <planType>  |
     When the user navigates to Profile and Preferences page
     And the user validates the need help section
@@ -20,7 +20,7 @@ Feature: C1.2To test Profile and Preferences page .
 
 @CMNeedhelpShip
   Scenario Outline: To verify the NeedHelp Section On Account Profile page for ship members
-    Given registered member with following details for Profile and Preferences flow
+    Given login with following details logins in the member portal and validate elements
      | Plan Type      | <planType>  |
     When the user navigates to Profile and Preferences page
     And the user validate the need help section for ship member
@@ -33,7 +33,7 @@ Feature: C1.2To test Profile and Preferences page .
 
   @CMValidatePlanNamemembernameIDAccountSectionUMS
   Scenario Outline: To verify Plan Name, Member name, Member ID and account section in UMS site
-    Given registered member with following details for Profile and Preferences flow
+    Given login with following details logins in the member portal and validate elements
        | Plan Type      | <planType>  |
     Then the user navigates to Profile and Preferences page
     Then the user validates the Plan Name, Member name, Member ID and account section in UMS site
@@ -47,7 +47,7 @@ Feature: C1.2To test Profile and Preferences page .
 
   @CMPasswordEdit
   Scenario Outline: To verify the edit functionality in Account Profile section in UMS site
-    Given registered member with following details for Profile and Preferences flow
+    Given login with following details logins in the member portal and validate elements
         | Plan Type      | <planType>  |
     When the user navigates to Profile and Preferences page
     Then the user validates the elements on clicking the edit link
@@ -62,7 +62,7 @@ Feature: C1.2To test Profile and Preferences page .
           
            @CMPasswordEdit1
   Scenario Outline: To verify the edit functionality in Account Profile section in UMS site without entering the mandatory fields
-    Given registered member with following details for Profile and Preferences flow
+    Given login with following details logins in the member portal and validate elements
         | Plan Type      | <planType>  |
     When the user navigates to Profile and Preferences page
     Then the user validates the elements on clicking the edit link
@@ -75,10 +75,9 @@ Feature: C1.2To test Profile and Preferences page .
           |SHIP      |
           
 
-
-   @CMPasswordEdit3
+@CMPasswordEdit3
   Scenario Outline: To verify the edit functionality in Account Profile section in UMS site when user enters different password in confirm new password field
-    Given registered member with following details for Profile and Preferences flow
+    Given login with following details logins in the member portal and validate elements
        | Plan Type      | <planType>  |
     When the user navigates to Profile and Preferences page
     Then the user validates the elements on clicking the edit link
@@ -91,39 +90,9 @@ Feature: C1.2To test Profile and Preferences page .
          |SHIP      |
 
 
-@CMTemporaryaddress
-    Scenario Outline: To verify Temporary address section
-    Given registered member with following details for Profile and Preferences flow
-       | Plan Type      | <planType>  |
-    Then the user navigates to Profile and Preferences page
-    Then the user validates the temporary address section
-    Then the user validates the fields and Buttons of temp address section
-    Then the user checks the Edit Button on the top changes to Cancel Button
-    #Then the user validates the functionality of save Button in Temporary adrress section
-    Then the user validates the functionality of Cancel Button In Temporary adrress section
-
-    Examples: 
-       | planType |
-       | MAPD     |
-       | PDP       |
-
-       
-        @CMTemporaryaddressShip
-    Scenario Outline: To verify Temporary address section
-    Given registered member with following details for Profile and Preferences flow
-        | Plan Type      | <planType>  |
-    Then the user navigates to Profile and Preferences page
-    Then the user validate the temporary address section for ship member
-
-
-    Examples: 
-       | planType |
-       | SHIP     |
-      
-
 @CMValidateEmail
     Scenario Outline: To verify Email section in member Redesign site
-    Given registered member with following details for Profile and Preferences flow
+    Given login with following details logins in the member portal and validate elements
        | Plan Type      | <planType>  |
     Then the user navigates to Profile and Preferences page
     Then the user validates the Email section in UMS site
@@ -135,10 +104,9 @@ Feature: C1.2To test Profile and Preferences page .
           |SHIP      |
 
 
-
   @CMEmailEdit1
   Scenario Outline: To verify Email edit functionality in Redesign site 
-    Given registered member with following details for Profile and Preferences flow
+    Given login with following details logins in the member portal and validate elements
    | Plan Type      | <planType>  |
     When the user navigates to Profile and Preferences page
     Then the user clicks on edit button
@@ -151,12 +119,11 @@ Feature: C1.2To test Profile and Preferences page .
         |PDP       |
          |SHIP      |
           
-          
-          
+
 @CMEmailEdit2
 
  Scenario Outline: To verify validations on email secton in member redesign site
-    Given registered member with following details for Profile and Preferences flow
+    Given login with following details logins in the member portal and validate elements
         | Plan Type      | <planType>  |
     When the user navigates to Profile and Preferences page
     Then the user clicks on edit button
@@ -168,12 +135,10 @@ Feature: C1.2To test Profile and Preferences page .
          | MAPD     |
          |PDP       |
          |SHIP      |
-          
 
-         
-          @CMPermanentAddress
+@CMPermanentAddress
   Scenario Outline: To verify the Permanent Address section
-    Given registered member with following details for Profile and Preferences flow
+    Given login with following details logins in the member portal and validate elements
        | Plan Type      | <planType>  |
     When the user navigates to Profile and Preferences page
     Then the user validates permanent address section
@@ -182,89 +147,153 @@ Feature: C1.2To test Profile and Preferences page .
     Examples: 
          | planType|
          | MAPD     |
-          | MA       |
-          |PDP       |
-          #|SHIP      |
+         |PDP       |
 
-
-  @CMCommunicationPreferences
+@CMCommunicationPreferences
   Scenario Outline: To verify Communication Preferences section
-    Given registered member with following details for Profile and Preferences flow
+    Given login with following details logins in the member portal and validate elements
         | Plan Type      | <planType>  |
     When the user navigates to Profile and Preferences page
     Then the user validates Communication Preferences section
     And the user validates Go paperless button and on clicking button go green page should come
-    #And the user validates on clicking Profilenpreferences arrow user should route to Profile and Preferences page
+  
 
     Examples: 
           | planType |
           | MAPD     |
-          | MA       |
           |PDP       |
-         |SHIP      |
+          |SHIP      |
+
 @CMPhone
       Scenario Outline: To verify Phone in Aarp site
-      Given registered member with following details for Profile and Preferences flow
+      Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>  |
       Then the user navigates to Profile and Preferences page
       Then the user validates the Phone section
       Then the user Clicks on the the Edit Link and validates the elements
       Then the user checks the Edit Button changes to Cancel Button
-      Then the user validates the functionality of save Button in Phoneeditsection 
-      Then the user validates the functionality of Cancel Button In phoneeditSection
+      Then the user checks the functionality of save Button in Phoneeditsection
+      Then the user validate the functionality of Cancel Button In phoneeditSection
       
 
     Examples: 
       | planType |
       | MAPD     |
-      | MA       |
       |PDP       |
       |SHIP      |
       
+
+
+
+
+
         @CMGoGreen
     Scenario Outline: To verify Go Green page
-    Given registered member with following details for Profile and Preferences flow
+    Given login with following details logins in the member portal and validate elements
         | Plan Type      | <planType>  |
     Then the user navigates to Profile and Preferences page
     Then the user validates Go paperless button and on clicking button go green page should come
     Then the user validates the presence of Communication preferences header
     Then the user validates headers on green page
-    ##Then the user validates the Go Green Header
     Then the user validates the presence of Plan Name
-    Then the user validates the Note section
+    #Then the user validates the Note section
     Then the user validates the I have read checkbox and check it
     Then the user validates the Save Preferences Button
     Then the user validates the presence of Back to Profile and Preferences links
     
-    
-    
+
      Examples: 
-       | planType |
+      | planType |
       | MAPD     |
-      | MA       |
       |PDP       |
      #|SHIP      |
-     
-      @CMNokiaMemberValidateEmailPhoneEdit
-    Scenario Outline: To verify Email section in member Redesign site
-    Given registered member with following details for Profile and Preferences flow
+
+@CMTemporaryaddress
+    Scenario Outline: To verify Temporary address section
+    Given login with following details logins in the member portal and validate elements
+       | Plan Type      | <planType>  |
+    Then the user navigates to Profile and Preferences page
+    Then the user validates the temporary address section
+    Then the user validates the fields and Buttons of temp address section
+    Then the user checks the Edit Button on the top changes to Cancel Button
+    #Then the user validates the functionality of save Button in Temporary adrress section
+  
+
+    Examples: 
+       | planType |
+       | MAPD     |
+       | PDP       |
+
+@CMTemporaryaddressShip
+    Scenario Outline: To verify Temporary address section for a ship member
+    Given login with following details logins in the member portal and validate elements
         | Plan Type      | <planType>  |
+    Then the user navigates to Profile and Preferences page
+    Then the user validate the temporary address section for ship member
+
+
+    Examples: 
+       | planType |
+       | SHIP     |
+ 
+ 
+   @US957739
+    Scenario Outline: To verify  the sections on Profile and Preferences page for a NOKIA member
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>  |
       | Member Type    | <memberType>|
     Then the user navigates to Profile and Preferences page
     Then the user validates the Presence of edit button in email section
     Then the user validates the Presence of edit button in Phone section
-     Then the user validates the Presence of edit button in Temporary Address section
- Then the user validates the Presence of edit button in Mailing Address section
+    Then the user validates the Presence of edit button in Temporary Address section
+    Then the user validates the Presence of edit button in Mailing Address section
  
  
     Examples: 
        | planType| memberType  |
-       | MA    | NOKIA       | 
+       | MA      | NOKIA       | 
        | MAPD    | NOKIA       | 
-      
        
+  
+
+       @thePredators @AprilRelease2018  @ProfilePageHSIDLinks
+  Scenario Outline: To test the Profile Page after HSID login
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>    |  
+    When the user navigates to Profile and Preferences page
+    And I click the HEALTHSAFE ID PASSWORD link and validate username and password
+    Then I should see the breadcrumb  in the upper left side of the page
+    And clicking the link should lead me back to the Account Settings page of the member site
+    And I click the HEALTHSAFE ID ACCOUNT RECOVERY AND SECURITY link
+    
+
+    Examples: 
+      | planType | 
+      | MAPD     |
          
+@accountProfAndPref  @regressionAccountProf&Pref  @regression_06_06_18   
+Scenario Outline: To test end to end regression scenario for account profile page aarp member
+Given login with following details logins in the member portal and validate elements
+      | User Type   | <userType>    |  
+When the user navigates to Profile and Preferences page
+And I click the HEALTHSAFE ID PASSWORD link and validate username and password and verify edit password link
+Then I should see the breadcrumb  in the upper left side of the page
+And clicking the link should lead me back to the Account Settings page of the member site 
+And the user validates the Email section in UMS site  
+	|Member Type | <memberType> |
+And the user validates the Phone section
+	|Member Type | <memberType> |
+And the user Clicks on the the Edit phone Link and validates the elements
+	|Member Type | <memberType> |
+Then the user validates Communication Preferences section
+And the user clicks on edit preferences link and validates the page
+And the user clicks on profile & preferences link to go back to Account settings page
+And the user validates the address section
+	|Member Type | <memberType> |
 
+Examples: 
+      | userType               | memberType |
+      | MAPD_AARPIndividual    |  AARP      |
+#	  | MAPD_UHCIndividual     | UHC        |
 
-      
   

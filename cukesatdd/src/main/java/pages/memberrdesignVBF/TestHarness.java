@@ -87,7 +87,7 @@ public class TestHarness extends UhcDriver {
 		validateNew(PaymentPageLik);
 		PaymentPageLik.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getTitle().contains("Overview")) {
+		if (driver.getTitle().contains("Payment")) {
 			return new PaymentsOverview(driver);
 		}
 		// }

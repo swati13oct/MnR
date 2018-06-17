@@ -5,8 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.data.MRConstants;
 import pages.acquisition.bluelayer.GlobalWebElements;
+import acceptancetests.data.MRConstants;
 
 public class SignInPage extends GlobalWebElements {
 	
@@ -48,7 +48,7 @@ public class SignInPage extends GlobalWebElements {
 	public RegistrationHomePage RegistrationHomePage(){
 		registerNow.click();
 		if(driver.getTitle().equalsIgnoreCase(
-				"UnitedHealthcare Medicare Solutions | Registration")){
+				PageTitleConstants.BLAYER_MEDICARE_SOLUTIONS_REGISTRATION)){
 			return new RegistrationHomePage(driver);
 		}
 		return null;
