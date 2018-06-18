@@ -30,6 +30,9 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 	@FindBy(xpath =".//*[@id='medicareTitle']/h1")
 	private WebElement headerText;
 	
+	@FindBy(xpath = ".//*[@id='subPageLeft']//*[contains(text(),'Information and Enrollment')]")
+	private WebElement pdpEnquiryKitLink;
+	
 	public RequestHelpAndInformationPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -76,5 +79,21 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 		if(validate(findUnitedHealthcareLink)&&findUnitedHealthcareLink.getText().contains("Find UnitedHealthcare in Your Community"))
 			return true;
 		return false;
+	}
+	
+	public PDPEnrollementGuidePage navigatesToPdpEnquiryKit() {
+		CommonUtility.waitForPageLoad(driver, pdpEnquiryKitLink, 20);
+		pdpEnquiryKitLink.click();
+		try {
+			Thread.sleep(15000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if(currentUrl().contains("/prescription-drug-plans/request-information/inquirykit.html")){
+			return new  PDPEnrollementGuidePage(driver);
+		}
+		return null;
+		
+		
 	}
 }

@@ -620,4 +620,12 @@ public class ContactUsPage extends UhcDriver{
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Validate the widgets which should not present for the terminated members
+	 */
+	public void validateWidgetsForTerminatedMembers(){
+		Assert.assertTrue(!getStartedButton.isDisplayed());
+		Assert.assertTrue(!fillOutFormButton.isDisplayed());
+	}
 }

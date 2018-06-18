@@ -86,7 +86,7 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(), 'Birth Date')]//following-sibling::p")
 	private WebElement DOBDisplay;
 
-	@FindBy(xpath = "//*[contains(text(), ' your gender')]//following-sibling::p")
+	@FindBy(xpath = "//*[contains(text(), ' Gender')]//following-sibling::p")
 	private WebElement GenderDisplay;
 
 	//Permanent Address Display

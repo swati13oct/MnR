@@ -1,10 +1,9 @@
-@claimspage @theTransformers
+@claimspage @theTransformers @regression_06_06_18 
 Feature: T1.1To validate the new changes related to claims page on the member redesigned site
 
-  @claimsSummaryFED @theTransformers
+  @claimsSummaryFED @theTransformers @regression_06_06_18 
   Scenario Outline: To validate the claims present for the Federal member on claims sumamry page for AARP site
-    Given login with following details logins in the member portal and validate elements
-      # Given I am an Individual or Group member on the redesigned site
+   Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>     |
       | Test Data Type | <claimssystem> |
     When I navigate to the claims Summary page in redesigned site
@@ -20,10 +19,13 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 
     Examples: 
       | planType | claimPeriod    | domain | claimssystem |
-     # | MAPD     | Last 24 months | COSMOS | COSMOSCLAIMS |
-      #| MA       | Last 24 months | NICE   | NICECLAIMS   |
-     | PDP      | Last 24 months | RX     | RXCLAIMS     |
-     # | MA       | Last 24 months | COSMOS  | COSMOSCLAIMS   |
+      | MAPD     | Last 24 months | COSMOS | COSMOSCLAIMS |
+      | MA       | Last 24 months | NICE   | NICECLAIMS   |
+      | PDP      | Last 24 months | RX     | RXCLAIMS     |
+      | MA       | Last 24 months | COSMOS | COSMOSCLAIMS   |
+      | MAPD     | Last 24 months | NICE   | NICECLAIMS   |
+      
+      
   @claimsSummarySHIP @theTransformers
   Scenario Outline: To validate the claims present for the SHIP member on claims sumamry page for AARP site
     Given login with following details logins in the member portal and validate elements
@@ -42,10 +44,9 @@ Feature: T1.1To validate the new changes related to claims page on the member re
       | planType | claimPeriod    | domain | claimssystem |
       | SHIP     | Last 24 Months | NA     | SHIPCALIMS   |
 
-  @claimsDetailsTableFED @theTransformers
+  @claimsDetailsTableFED @theTransformers @regression_06_06_18 
   Scenario Outline: To Verify Claim Table on Claims Details Page
-    Given login with following details logins in the member portal and validate elements
-      # Given I am an Individual or Group member on the redesigned site
+  Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>     |
       | Test Data Type | <claimssystem> |
     When I navigate to the claims Summary page in redesigned site
@@ -84,7 +85,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
       | planType | claimPeriod    | claimssystem |
       | SHIP     | Last 24 Months | SHIPCALIMS   |
 
-  @claimsPHIP @theTransformers
+  @claimsPHIP @theTransformers @regression_06_06_18 
   Scenario Outline: To validate the Error Message for a PHIP  member on claims sumamry page
     #Given I am an Individual or Group member on the redesigned site
     Given login with following details logins in the member portal and validate elements

@@ -1,3 +1,4 @@
+@regression_06_06_18
 @velocityDashers
 Feature: V1.1To test Send us a question Widget and Click to call functionality in contact us redesign pages in UHCM site
 
@@ -141,3 +142,18 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
     Examples: 
       | plantype | memberType |
       | PDP      | rx_eob     |
+      
+  @regressionContactUsForTerminatedMembers
+  Scenario Outline: Verify terminated members view on contact us redesign page
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <plantype>   |
+      | Member Type | <memberType> |
+    When the user navigates to contact us page in UHC site
+    Then user should only see the Technical Support and Plan Support components
+
+    Examples: 
+      | plantype | memberType                 |
+      | SHIP     | Terminated_MAPDwithMedSupp |
+      | MAPD     | Terminated_CALPERSGroup    |
+      | PDP      | Terminated_rx_eob          |
+      

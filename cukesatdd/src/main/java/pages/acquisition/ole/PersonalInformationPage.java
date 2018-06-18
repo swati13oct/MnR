@@ -86,7 +86,7 @@ public class PersonalInformationPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(), 'State:')]//..")
 	private WebElement StateDisplay;
 
-	@FindBy(xpath = "//*[contains(text(), 'ZIP')]//..")
+	@FindBy(xpath = "//*[contains(text(), 'ZIP Code:')]//..")
 	private WebElement ZipDisplay;
 
 	@FindBy(id = "sameMailingAddressYes")
