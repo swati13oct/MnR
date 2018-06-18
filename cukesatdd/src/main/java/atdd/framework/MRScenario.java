@@ -743,10 +743,10 @@ public class MRScenario {
 
 
 
-		DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 
 		capabilities.setCapability("platform", "Windows 7");
-		capabilities.setCapability("version", "45.0");
+		capabilities.setCapability("version", "66.0");
 		capabilities.setCapability("parent-tunnel", "sauce_admin");
 		capabilities.setCapability("tunnelIdentifier",
 				"OptumSharedTunnel-Stg");
