@@ -871,7 +871,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 					//findChildElement(elementData, plan).click();
 
-					WebElement ProviderSearchLink = driver.findElement(By.xpath("//h2[contains(text(),'"+planName+"')]/following::a[contains(text(),'Is')][1]"));
+					WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/following::a[contains(text(),'Is my provider')]"));
 					System.out.println(ProviderSearchLink.getText());
 					ProviderSearchLink.click();
 
@@ -1028,7 +1028,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	{
 
 		WebElement ProviderSearchLink1 = driver.findElement
-				(By.xpath("//h2[contains(text(),'"+planName+"')]/following::span[contains(text(),'covered')][1]"));
+				(By.xpath("//*[contains(text(),'"+planName+"')]/following::span[contains(text(),'covered')]"));
 		String mproviderinfo=ProviderSearchLink1.getText();
         System.out.println(mproviderinfo);
 		if(mproviderinfo.contains("1 providers covered"))
