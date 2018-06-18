@@ -21,7 +21,7 @@ Feature: To test branding functionality
       | MAPD     | UHCIndividual    | NON LIS       | images/branding/unitedhealth.svg     | dam/UCP/Images/logo/UHC.svg         | TC_05_ Branding for Branding for UHC Plan member     |
       | MAPD     | TEXASERS         | NON LIS       | images/branding/ers.svg              | dam/UCP/Images/logo/TEXAS%20ERS.svg | TC_06_ Branding for Texas ERS member                 |
 
-  @regression @regression_branding
+  @regression @regression_branding @regression_06_06_18
   Scenario Outline: Verify that correct brand logos and cologos are displayed on Dashboard and Secondary Pages for Group members.
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -41,4 +41,4 @@ Feature: To test branding functionality
          | MAPD     | Villages   | NON LIS       | images/branding/unitedhealth.svg | dam/UCP/Images/logo/UHC.svg      | optum/MRH1045025/TheVillages-01.svg | dam/UCP/Images/Images/logos-cobranding/Villages.svg           | TC_10_ Co-branding for The Villages Individual Plan member |
          | MAPD     | NCSHP      | NON LIS       | images/branding/unitedhealth.svg | dam/UCP/Images/logo/UHC.svg      | optum/MR12309/NCSHP_Logo.svg        | dam/UCP/Images/Images/logos-cobranding/NCSHP_Logo.svg         | TC_11_ Co-branding for Group Retiree Plans                 |
          | MAPD     | Calpers    | NON LIS       | images/branding/unitedhealth.svg | dam/UCP/Images/logo/UHC.svg      | optum/MR12775/CalPERS.svg           | dam/UCP/Images/Images/logos-cobranding/CalPERS_Logo_Large.svg | TC_11_ Co-branding for Group Retiree Plans                 |
-         | MAPD     | SHBP       | NON LIS       | images/branding/unitedhealth.svg | dam/UCP/Images/logo/UHC.svg      | optum/MR12472/gadch.svg             | dam/UCP/Images/Images/logos-cobranding/SHBP.svg               | TC_11_ Co-branding for Group Retiree Plans                 |
+         | MAPD     | SHBP       | NON LIS       | images/branding/unitedhealth.svg | dam/UCP/Images/logo/UHC.svg      | optum/MR12472/gadch.svg             | dam/UCP/Images/Images/logos-cobranding/SHBP.svg               | TC_11_ Co-branding for Group Retiree Plans                | 
