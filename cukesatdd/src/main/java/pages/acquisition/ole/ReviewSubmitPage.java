@@ -98,10 +98,10 @@ public class ReviewSubmitPage extends UhcDriver{
 
 
 	//Mailing Address Display
-	@FindBy(xpath = "//*[contains(text(), 'Is your mailing address the same as your permanent residence street address?')]//following-sibling::p")
+	@FindBy(xpath = "//*[contains(text(), 'Is your mailing address the same as')]//following-sibling::p")
 	private WebElement MailingQiuestionDisplay;
 	
-	@FindBy(xpath = "//*[contains(text(), 'Gender')]/ancestor::*[@class = 'review-step']//*[contains(text(), 'State')]//following-sibling::p")
+	@FindBy(xpath = "//*[contains(text(), 'mailing address')]/ancestor::*[@class = 'review-step']//*[contains(text(), 'State')]//following-sibling::p")
 	private WebElement MailStateDisplay;
 	
 	@FindBy(xpath = "//*[contains(text(), 'ZIP')]//following-sibling::p")

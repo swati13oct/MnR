@@ -16,6 +16,12 @@ import atdd.framework.UhcDriver;
  */
 public class OrderPlanMaterialConfirmationPage extends UhcDriver {
 	
+	@FindBy(xpath = "//*[contains(text() 'We value your feedback')]")
+	private WebElement iPerceptionPopUp;
+
+	@FindBy(xpath = "//*[@id = 'closeButton']")
+	private WebElement iPerceptionClose;
+	
 	@FindBy(id ="disclosure_link")
 	private WebElement logOut;
 	
@@ -39,6 +45,23 @@ public class OrderPlanMaterialConfirmationPage extends UhcDriver {
 
 	public OrderMaterialsPage navigateToValidateOrderConfirmationInRedesignPage() throws InterruptedException {
 		Thread.sleep(5000);
+		try{
+			if(validate(iPerceptionPopUp)){
+				System.out.println("FeedBack Modal Present");
+
+				iPerceptionClose.click();
+				if (validate(iPerceptionPopUp)){
+					System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
+				}
+				else
+					System.out.println("FeedBack Modal Closed");
+			}
+		}
+		catch (Exception e) {
+			System.out.println("FeedBack Modal NOT Present");
+
+		}
+
 		addordermaterialLink.click();
 		Thread.sleep(3000);
 		if(driver.getTitle().equalsIgnoreCase("Order Plan Materials")){
