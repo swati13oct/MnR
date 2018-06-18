@@ -12,6 +12,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import pages.redesign.HsidRegistrationPersonalInformationPage;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.login.ConfirmSecurityQuestion;
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
@@ -147,7 +148,7 @@ MRScenario loginScenario;
 		signInButton.click();
 		
 		try {
-			Thread.sleep(18000);
+			Thread.sleep(30000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -162,6 +163,12 @@ MRScenario loginScenario;
 				cs.enterValidSecurityAnswer();
 				System.out.println(driver.getCurrentUrl());
 			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		    try {
+				Thread.sleep(20000);
+			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
