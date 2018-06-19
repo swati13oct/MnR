@@ -18,8 +18,10 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.dashboard.memberAuth.MemberAuthLoginPage;
+import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.contactus.ContactUsPage;
+import pages.regression.explanationofbenefits.EOBPage;
 import pages.regression.memberauth.MemberAuthPage;
 import pages.regression.memberauth.MemberInformationPage;
 import pages.regression.memberauth.MemberSearchPage;
@@ -259,5 +261,23 @@ public class MemberAuthStepDefinition{
 		Assert.assertEquals(message, contactUsPage.getMemberAuthNotAuthorizedToSendUsQuestionMessage());
 		
 	}
+	
+	@And("^user clicks on member to select$")
+	public void member_clicks_on_user_to_select() throws InterruptedException{
+		MemberAuthPage memberAuthPage = (MemberAuthPage) getLoginScenario().getBean(PageConstants.Member_Auth_PopUp);
+		AccountHomePage accountHomePage =  memberAuthPage.userSelectsMemberEntered();
+		
+		if(accountHomePage!=null){
+			getLoginScenario().saveBean(PageConstants.DashPage, accountHomePage);
+		}
+	
+	}
+	@Then ("^the user click on EOB link and navigates to EOB page$")
+	public void the_user_click_on_EOB_link_navigates_t0_EOB_page(){
+		AccountHomePage rallyDashBoardPage = (AccountHomePage) getLoginScenario().getBean(PageConstants.DashPage);
+		EOBPage eobPage = rallyDashBoardPage.navigateDirectToEOBPag();
+		getLoginScenario().saveBean(PageConstants.EOB_Page, eobPage);
+		
+	}																																																										
 
 }

@@ -104,7 +104,7 @@ public class MemberAuthPage extends UhcDriver {
 	public MemberAuthPage FirstLogin(String loginname, String  loginpassword) throws InterruptedException{
 		username.sendKeys(loginname);
 		password.sendKeys(loginpassword);
-		search.click();
+ 		search.click();
 		waitforElement(memberUsername);
 		if (memberUsername.isDisplayed()){
 			System.out.println("member auth Login successfull");			
@@ -173,6 +173,25 @@ public MemberAuthPage NewTabValidation() throws InterruptedException{
 			System.out.println("Premium Payment Link not found");
 		return null;			
 	}
+
+public AccountHomePage userSelectsMemberEntered() throws InterruptedException{
 	
+	waitforElement(MemberPopUpLogin);
+	Thread.sleep(2000);
+	if (MemberPopUpLogin.isDisplayed()){
+		System.out.println("Pop up Login Button is displayed");	
+		Thread.sleep(2000);
+		MemberPopUpLogin.click();	
+		System.out.println("popup login button clicked");
+		Thread.sleep(20000);
+		switchToNewTab();
+		System.out.println("Switched to new tab");
+		return new AccountHomePage(driver);
+	}else{
+		System.out.println("not able to switch to new window");
+	    return null;
+	}
+	
+}
 }
 
