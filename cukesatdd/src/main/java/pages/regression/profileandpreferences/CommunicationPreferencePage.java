@@ -14,7 +14,7 @@ public class CommunicationPreferencePage extends UhcDriver {
 	@FindBy(xpath = ".//*[@class='page-header']//a[contains(text(),'Profile & Preferences')]")
 	private WebElement profAndPrefLink;
 	
-	@FindBy(id= "save-prefs-btn-FEDERAL-INDIVIDUAL")
+	@FindBy(xpath= ".//*[@id='skipToBodyContent']/div[2]/div[1]//button[@id='savePaperlessSettings']")
 	private WebElement savePrefButton;
 
 

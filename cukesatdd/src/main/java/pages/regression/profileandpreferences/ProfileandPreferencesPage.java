@@ -1480,4 +1480,14 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			Assert.fail("Not able to validate mailing address error message");
 		
 	}
+	//method to refresh the page incase of the Feedback Popup
+	public void pageRefresh(){
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		driver.navigate().refresh();
+	}
 }

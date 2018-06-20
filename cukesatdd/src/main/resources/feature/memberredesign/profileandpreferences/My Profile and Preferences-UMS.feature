@@ -296,4 +296,12 @@ Examples:
       | MAPD_AARPIndividual    |  AARP      |
 #	  | MAPD_UHCIndividual     | UHC        |
 
-  
+@goGreen @regression_06_06_18
+Scenario Outline: To verify Edit preferences section for Go Green
+Given login with following details logins in the member portal and validate elements
+      | User Type   | <userType>    |  
+When the user navigates to Profile and Preferences page 
+And the user clicks on edit preferences link and validates the page     
+Examples:
+	| userType |
+	| MAPD_AARP |
