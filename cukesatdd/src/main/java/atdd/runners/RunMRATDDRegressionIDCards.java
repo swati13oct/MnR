@@ -18,7 +18,7 @@ import cucumber.api.CucumberOptions;
 jsonReport = "target/cucumber-RunMRATDDRegressionIDCards.json",detailedReport = true, detailedAggregatedReport = true,
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionIDCards")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
-features = { "src/main/resources/feature/memberredesign" }, plugin = {
+features = { "src/main/resources/feature/memberredesign/idcards" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionIDCards.json" }, tags = { "@regression_06_06_18" })
 public class RunMRATDDRegressionIDCards {
 

@@ -18,7 +18,7 @@ import cucumber.api.CucumberOptions;
 jsonReport = "target/cucumber-RunMRATDDRegressionBenefitNCoverage.json",detailedReport = true, detailedAggregatedReport = true,
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionBenefitNCoverage")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
-features = { "src/main/resources/feature/memberredesign" }, plugin = {
+features = { "src/main/resources/feature/memberredesign/benefitsandcoverage" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionBenefitNCoverage.json" }, tags = { "@regression_06_06_18" })
 public class RunMRATDDRegressionBenefitNCoverage {
 
