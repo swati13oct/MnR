@@ -30,9 +30,84 @@ Feature: S1.1 To test Member Auth Dashboard page.
       | username  | password  | member                               | disclaimer                                                                                                      | Message                          |
       | qavgogine | qavgogine | 4B152296-7C31-49C7-B49F-8739EB9A84A2 | You are viewing this site with member authorized read only access. Remember to LOGOUT at the end of the session | You are not authorized to submit |
       
-      
-      @regressionMemberAuth   
-  Scenario Outline: To validate the error message for invalid user name and correct password or viseversa.
+       
+ @regressionMemberAuth      
+  Scenario Outline: TC09_Save_Prefrences WRT member auth
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password 
+   	  | Username | <username> |
+      | Password | <password> |	
+    And Member Enters the Username he wants to search
+      | MemUsername   | <member> |
+    And user clicks on member to select 
+    Then the user navigates to profile and preference page 
+    And the user validates the save preference functionality WRT member auth
+    Examples:
+    | username  | password  |member            |  
+    | qavgogine | qavgogine |q2_jun_uhc0008  	 |
+ 
+ @regressionMemberAuth   
+    Scenario Outline: TC08_Edit_Temporary_Address WRT member auth
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password 
+   	  | Username | <username> |
+      | Password | <password> |	
+    And Member Enters the Username he wants to search
+      | MemUsername   | <member> |
+    And user clicks on member to select 
+    Then the user navigates to profile and preference page 
+    And the user validates edit temproray address functionality WRT member auth
+    Examples:
+    | username  | password  |member            |  
+    | qavgogine | qavgogine |q2_jun_uhc0008  	 |
+    
+@regressionMemberAuth    
+    Scenario Outline: TC07_Edit_alternative_Address WRT member auth
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password 
+   	  | Username | <username> |
+      | Password | <password> |	
+    And Member Enters the Username he wants to search
+      | MemUsername   | <member> |
+    And user clicks on member to select 
+    Then the user navigates to profile and preference page 
+    And the user validates edit alternative address functionality WRT member auth
+    Examples:
+    | username  | password  |member            |  
+    | qavgogine | qavgogine |q2_jun_uhc0008  	 |
+    
+@regressionMemberAuth    
+    Scenario Outline: TC06_Edit_Email WRT member auth
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password 
+   	  | Username | <username> |
+      | Password | <password> |	
+    And Member Enters the Username he wants to search
+      | MemUsername   | <member> |
+    And user clicks on member to select 
+    Then the user navigates to profile and preference page 
+    And the user validates edit email functionality WRT member auth
+    Examples:
+    | username  | password  |member            |  
+    | qavgogine | qavgogine |q2_jun_uhc0008  	 |
+    
+@regressionMemberAuth    
+    Scenario Outline: TC05_Edit_Phone WRT member auth
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password 
+   	  | Username | <username> |
+      | Password | <password> |	
+    And Member Enters the Username he wants to search
+      | MemUsername   | <member> |
+    And user clicks on member to select 
+    Then the user navigates to profile and preference page 
+    And the user validates edit phone functionality WRT member auth
+    Examples:
+    | username  | password  |member            |  
+    | qavgogine | qavgogine |q2_jun_uhc0008  	 |
+ 
+ @regressionMemberAuth   
+  Scenario Outline: TC18_Check EOB page is accessible using Member Auth Tool WRT member auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password 
    	  | Username | <username> |
@@ -47,17 +122,4 @@ Feature: S1.1 To test Member Auth Dashboard page.
   | EOB Type         |<eobType>   |
     Examples: 
       | username  | password  |member            |planType   | dateRange  | eobType 		 |
-      | qavgogine | qavgogine |q2_jun_aarp0101	 | PDP       | 18 Months  |Prescription  |
- 
- 			@regressionMemberAuth     
-  Scenario Outline: To validate save preference on profile and preference page
-    Given the user is on member auth login flow page
-    When the member is able to login with correct username and password 
-   	  | Username | <username> |
-      | Password | <password> |	
-    And Member Enters the Username he wants to search
-      | MemUsername   | <member> |
-    And user clicks on member to select 
-    Examples:
-    | username  | password  |member            |  
-    | qavgogine | qavgogine |q2_jun_uhc0008  	 |
+      | qavgogine | qavgogine |q2_jun_aarp0101	 | PDP       | 18 Months  |Prescription  |   

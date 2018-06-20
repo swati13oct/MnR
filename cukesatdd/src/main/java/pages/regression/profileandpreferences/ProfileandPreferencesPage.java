@@ -1480,4 +1480,20 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			Assert.fail("Not able to validate mailing address error message");
 		
 	}
+	
+	public void validateSavePreferenceWithMemberAuth(){
+		
+	}
+	public void validateTemproraryAddressWithMemberAuth(){
+		
+	}
+	public void validateAlternativeAddressWithMemberAuth(){
+		
+	}
+	public void validateEditEmailWithMemberAuth(){
+		
+	}
+	public void validateEditPhoneWithMemberAuth(){
+		
+	}
 }

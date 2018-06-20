@@ -25,6 +25,7 @@ import pages.regression.explanationofbenefits.EOBPage;
 import pages.regression.memberauth.MemberAuthPage;
 import pages.regression.memberauth.MemberInformationPage;
 import pages.regression.memberauth.MemberSearchPage;
+import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 
 /**
  * 
@@ -274,10 +275,48 @@ public class MemberAuthStepDefinition{
 	}
 	@Then ("^the user click on EOB link and navigates to EOB page$")
 	public void the_user_click_on_EOB_link_navigates_t0_EOB_page(){
-		AccountHomePage rallyDashBoardPage = (AccountHomePage) getLoginScenario().getBean(PageConstants.DashPage);
-		EOBPage eobPage = rallyDashBoardPage.navigateDirectToEOBPag();
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.DashPage);
+		EOBPage eobPage = accountHomePage.navigateDirectToEOBPag();
 		getLoginScenario().saveBean(PageConstants.EOB_Page, eobPage);
 		
-	}																																																										
+	}
+	
+	@Then("^the user navigates to profile and preference page$")
+	public void the_user_navigates_to_profile_and_preference_page() throws Throwable {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.DashPage);
+		ProfileandPreferencesPage profilePreferencePage = accountHomePage.navigateDirectToProfilePage();
+		if(profilePreferencePage!=null){
+			getLoginScenario().getBean(PageConstants.ProfilePreferencesPage);
+		}else{
+			System.out.println("==================Profile and preference page not displayed======================");
+			Assert.fail();
+		}
+  	}
+
+	@And("^the user validates the save preference functionality WRT member auth$")
+	public void the_user_validates_the_save_preference_functionality_WRT_member_auth() throws Throwable {
+		ProfileandPreferencesPage profilePreferencePage = (ProfileandPreferencesPage) getLoginScenario().getBean(PageConstants.ProfilePreferencesPage);
+		
+	}
+	
+	@And("^the user validates edit temproray address functionality WRT member auth$")
+	public void the_user_validates_edit_temproray_address_functionality_WRT_member_auth() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+ 	}
+
+	@And("^the user validates edit alternative address functionality WRT member auth$")
+	public void the_user_validates_edit_alternative_address_functionality_WRT_member_auth() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+ 	}
+
+	@And("^the user validates edit email functionality WRT member auth$")
+	public void the_user_validates_edit_email_functionality_WRT_member_auth() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+ 	}
+
+	@And("^the user validates edit phone functionality WRT member auth$")
+	public void the_user_validates_edit_phone_functionality_WRT_member_auth() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+ 	}
 
 }
