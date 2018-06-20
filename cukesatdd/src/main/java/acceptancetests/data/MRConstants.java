@@ -329,9 +329,9 @@ public class MRConstants {
 	//public static final String HSIDURL = "https://" + MRScenario.environment + "-medicare.uhc.com/";
   public static final String TESTHARNESS = "https://"+ MRScenario.environment +"-medicare."+MRScenario.domain+"/content/medicare/login/overview.html/?testharness=true";
   public static final String TEAMCI_TESTHARNESS ="https://"+MRScenario.environment +"-medicare."+MRScenario.domain+"/?testharness=true";
-  public static final String DASHBOARD = "https://"+ MRScenario.environment +"-medicare."+MRScenario.domain+"/";
-	    
-	
+  public static final String DASHBOARD = "https://"+ MRScenario.environment +"-medicare.uhc.com/";
+	   
+
   /** DeRegister URLs*/
   public static final String STAGE_DEREGISTER_URL = "https://apsrs0261."+MRScenario.domain+":9443/PartDPortalWeb/deregister.jsp ";
   public static final String TEANCI_DEREGISTER_URL = " http://partdexternal-"+MRScenario.environment +"."+MRScenario.domain+"/PartDPortalWeb/deregister.jsp";
@@ -357,3 +357,5 @@ public class MRConstants {
   public static final String MEMBER_AUTH_PLM_REDESIGN_URL = "https://stage-generic.uhc.com/content/medicare/memberauth.html#/memberAuthLogin";
 
 }
+
+

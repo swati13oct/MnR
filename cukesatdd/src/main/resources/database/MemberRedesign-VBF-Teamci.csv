@@ -17,7 +17,7 @@ q2_jun_ship0001/Password@1,SHIP,SHIPCLAIMS,ShipInd
 q2_jun_uhc0002/Password@1,UhcIndMAPDPayments
 q4_dec_aarp571/Password@1,AARPIndMAPDPayments
 q1_feb_uhc_eft014/Password@1,GroupRetireePayment
-q1_apr_uhc009/Password@1MAPD,UHCIndividualCosmosEOB,Medical
+q1_apr_uhc009/Password@1,MAPD,UHCIndividualCosmosEOB,Medical
 q2_jun_uhc0083/Test2day,MAPD,UHCIndividualEOB,Prescription Drug
 q1_aarp_apr158141/Password@1,MAPD,AARPIndividualCosmosEOB,Medical
 q1_apr_aarpeob002/Test2day,MAPD,AARPIndividualNiceEOB,Medical
