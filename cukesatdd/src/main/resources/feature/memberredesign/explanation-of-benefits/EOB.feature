@@ -108,8 +108,12 @@ Then the user validates EOB count
  
            Examples:
        | planType    | memberType    |dateRange  | eobType |  eobCount |
-       | MAPD        | NICE_EOB      | 18 Months |Medical  |     8     |
-       | MA          | COSMOS_EOB      | 18 Months |Medical  |     1     |
+       | MAPD        | NICE_EOB_R      | 18 Months |Medical  |     1     |
+       | MA          | COSMOS_EOB_R      | 18 Months |Medical  |     16     |
+       | PDPI         | COSMOS_EOB_R     | 18 Months |Medical  |     0     |
+       | SHIP_ACTIVE  | SHIP_EOB      | 12-18 Months |Medical  |     1     |
+       | SHIP_Termnated| SHIP_EOB      | 12-18 Months |Medical  |     1     |
+       | MAPD          | NICETermin_EOB_R | 18 Months |Medical  |     1     |
        
 @HSIDCombo
 Scenario Outline: To verify EOB accessible for PDP + MEDSup Plan
