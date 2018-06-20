@@ -1,6 +1,7 @@
 
 package pages.regression.profileandpreferences;
 
+import static org.testng.Assert.fail;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -13,10 +14,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.By.ByXPath;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import com.mysql.jdbc.Driver;
+//import com.sun.org.apache.xerces.internal.impl.xpath.XPath;
+//import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 
 import pages.member.bluelayer.GoGreenPage;
 import acceptancetests.data.CommonConstants;
@@ -463,20 +467,52 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(id="contact")
 	private WebElement contactInfoBox;
 	
-	@FindBy (xpath = "//iframe[@id='contact']")
+	@FindBy (xpath = "//iframe[@id='contact']")//EPMP i frame 
+	//@FindBy (id = .//*[@id='contact'])
 	private WebElement EPMPIframe;
 	
-	@FindBy (id = "epmp-contact")
+	@FindBy (id = "epmp-contact")//EPMP contact info Header on Iframe
 	private WebElement EPMPContactInfoHeader;
 	
-	@FindBy (id = "emailview")
+	@FindBy (id = "emailview")//EPMP Primary Email Address
 	private WebElement EPMPEmailAddress;
 	
 	@FindBy (id = "phoneview")
    private WebElement EPMPPhoneNumbersSection;
 	
-	@FindBy (id = "addressview")
+	@FindBy (xpath = ".//*[@id='emailview']/div[1]/div[1]/div/strong")//EPMP email address Header
+	//@FindBy (css = "#emailview")
 	private WebElement EPMPaddressview;
+	
+	@FindBy (xpath = ".//*[@id='emailview']/div/i")//Email Address Arrow Bottton to update email
+	private WebElement editEmailAddressArrowbutton;
+	
+	@FindBy (xpath = ".//*[@id='go-to-back-email']/span")//Back to Iframe Contact Info section
+	private WebElement backToEmailButton;
+	
+	@FindBy (xpath =".//*[@id='editEmail_P']/span[2]")//Edit Primary Email Button
+	private WebElement editPrimaryEmailButton;
+	
+	@FindBy (xpath =".//*[@id='Email-Address-Edit-Section']//div[@class='email-box']")//Primary Email Address mail box
+	private WebElement primaryEmailAddresMialBox;
+	
+	@FindBy (xpath ="(//*[@class='email-box']/div[1])[2]")
+	private WebElement healthSafeIdAccountRecoveryEmailAddresMialBox;
+	
+	@FindBy (xpath = ".//*[@class='ng-scope hsidlink']//a/u")
+	private WebElement signInAndSecuritySettingsLinkHSID;
+	
+	@FindBy (xpath = "html//div//div[@class='epmp-css']//iframe[@id='contact']")//Iframe To perform switch
+	private WebElement iframeEPMP;	
+	
+	@FindBy (xpath = "//input[@id='email_P']")// EPMP Edit Primary Email Address Text Box
+	private WebElement editPrimaryEmailAddressTeXtBox;
+	
+	@FindBy (xpath = ".//button[@id='updatedisable']")//Save preferences Button
+	private WebElement savePrimaryEmailButton;
+	
+	
+	
 
 	public PageData ProfileandPreferences;
 
@@ -1500,20 +1536,43 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	public void validateEpmpIframe() {
 		
+		
+		try {
+			WebElement surveyPopUp = driver.findElement(By.id("iPerceptionsFrame"));
+			WebElement noThanks = driver.findElement(By.xpath(".//*[@id='nav']/button[2]"));
+			Thread.sleep(5000);
+			if(surveyPopUp.isDisplayed())
+			{
+				driver.switchTo().frame(surveyPopUp);
+				Thread.sleep(1000);
+				noThanks.click();
+				driver.switchTo().defaultContent();
+				
+				
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 		if (driver.getCurrentUrl().contains("member/account/profile"))
 		{
 			System.out.println("Account profile page is loaded ==========>> "+driver.getCurrentUrl());
 			try {
-				Thread.sleep(10000);
-				validate(EPMPIframe);
-				validate(EPMPaddressview);
+				Thread.sleep(15000);
+				validate(EPMPIframe);				   
+				driver.switchTo().frame(iframeEPMP);
+				System.out.println("Swith to Iframe is Performed");
+				Thread.sleep(3000);				
+				if(EPMPaddressview.isDisplayed())
+				{
+					System.err.println("Iframe is Validated");
+				}
 				validate(EPMPContactInfoHeader);
 				validate(EPMPEmailAddress);
 				System.out.println("EPMP iframe Successfully loaded");
 				
 			} catch (InterruptedException e) {
 				System.out.println("EPMP iframe is failed to load");
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -1528,6 +1587,11 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		
 	}
 
+	private By ByXPath(String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	public void validatecommunicationpreferncessection() {
 		if(validate(communicationpreferncessection))
 			Assert.assertTrue(true);
@@ -1536,4 +1600,61 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		   		
 		
 	}
+
+	public void validateEmailaddressSection() {
+		//validateEpmpIframe();
+		editEmailAddressArrowbutton.click();
+		System.out.println("i clicked =================");
+		if(validate(primaryEmailAddresMialBox))
+		{
+			validate(editPrimaryEmailButton);
+			validate(backToEmailButton);
+			//validate(healthSafeIdAccountRecoveryEmailAddresMialBox);
+			//validate(signInAndSecuritySettingsLinkHSID);
+			//System.out.println("HSID Link is "+signInAndSecuritySettingsLinkHSID.getText());
+			Assert.assertTrue(true);
+			System.out.println("Email address section is loaded");
+			
+		}else
+		{
+			System.out.println("Email addresses section is not present");
+			fail();
+		}
+		
+		
+	}
+
+	public void validateEmailEditUpdates() {
+		WebElement element = driver.findElement(By.xpath(".//*[@id='Email-Address-Edit-Section']//p"));
+		String email = element.getText();
+		editPrimaryEmailButton.click();
+		if(email.contains("koppuravuri"))
+		{
+			editPrimaryEmailAddressTeXtBox.clear();
+			editPrimaryEmailAddressTeXtBox.sendKeys("chaitanya_test@optum.com");
+		}else
+		{
+			editPrimaryEmailAddressTeXtBox.sendKeys("chaitanya_koppuravuri@optum.com");
+					
+		}	
+		savePrimaryEmailButton.click();	
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String newemail = element.getText();
+		if(email!=newemail)
+		{
+			System.out.println("new email updated");
+			
+		}else
+		{
+			System.out.println("email not updated");
+		}
+		
+	}
+	
+	
 }

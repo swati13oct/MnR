@@ -925,10 +925,15 @@ public class ProfileandPreferencesUMSStepDefinition {
 	    // Write code here that turns the phrase above into concrete actions
 		ProfileandPreferencesPage profilePreferencesPage = ( ProfileandPreferencesPage) getLoginScenario().getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 		profilePreferencesPage.validatecommunicationpreferncessection();
-
-
-
 }
+	@And("^I should be able to see edit email address and to view read only HSID email$")
+	public void i_should_be_able_to_view_emailaddress_section()  {
+	    // Write code here that turns the phrase above into concrete actions
+		ProfileandPreferencesPage profilePreferencesPage = ( ProfileandPreferencesPage) getLoginScenario().getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+		profilePreferencesPage.validateEmailaddressSection();
+		profilePreferencesPage.validateEmailEditUpdates();
+}
+	
 }
 
 
