@@ -128,7 +128,8 @@ public class AccountHomePage extends UhcDriver {
 	//@FindBy(id = "dropdown-toggle--1")
 	//private WebElement accountToggleDropdown;	
 
-	@FindBy(xpath = ".//*[@id='dropdown-options--1']/a[contains(text(),'Account Settings')]")
+	//@FindBy(xpath = ".//*[@id='dropdown-options--1']/a[contains(text(),'Account Settings')]")
+	@FindBy (xpath= ".//*[@id='dropdown-options--1']//a[contains(text(),'Account Settings')]")
 	private WebElement accountSettingOption;
 
 	@FindBy(xpath = "//header//h1")
@@ -359,7 +360,7 @@ public class AccountHomePage extends UhcDriver {
 				System.out.println("Current Url is " + driver.getCurrentUrl());
 				CommonUtility.waitForPageLoad(driver, heading, 50);
 
-				if (driver.getCurrentUrl().contains("profile")) {
+				if (driver.getTitle().contains("Profile")) {
 
 					return new ProfileandPreferencesPage(driver);
 				}

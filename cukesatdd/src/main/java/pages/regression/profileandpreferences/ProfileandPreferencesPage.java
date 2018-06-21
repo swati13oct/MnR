@@ -42,40 +42,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	public ProfileandPreferencesPage(WebDriver driver) {
 		super(driver);
-		PageFactory.initElements(driver, this);
-		// String fileName =
-		// CommonConstants.PROFILE_AND_PREFERENCES_REDESIGN_PAGE_DATA;
-		// ProfileandPreferences =
-		// CommonUtility.readPageData(fileName,CommonConstants.PAGE_OBJECT_DIRECTORY_BLAYER_MEMBER);
-		driver.manage().window().maximize();
-		/*try{
-			Thread.sleep(2000);
-			((JavascriptExecutor) driver).executeScript("arguments[0].click",FeedbackModal);
-			//FeedbackModal.click();
-			System.out.println("FeedBack Modal Present");
-			if (validate(FeedbackModal)){
-			System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
-			}
-			System.out.println("FeedBack Modal Closed");
-			//Thread.sleep(3000);
-
-			}
-			catch (Exception e) {
-			System.out.println("FeedBack Modal NOT Present");
-
-			}*/
-		try {
-			openAndValidate();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
-	
-		/*if (iPerceptionPopUp.size() > 0) {
-			iPerceptionPopUp.get(0).click();
-			System.out.println("iPerception Pop Up displayed");
-		}*/
 	}
 
 	@FindBy(id = "closeButton")
@@ -543,6 +510,12 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='phone']/p")
 	private WebElement homePhoneNumberValue;
 	
+	@FindBy (id = "etype_ARE")//HSID header on EPMP iframe under Email Addresses Section
+	private WebElement healthSafeIdHeader;
+	
+	@FindBy (xpath = ".//*[@id='Email-Address-Edit-Section']//p/a/u")//EPMP HSID sign in and security settings links on iframe
+	private WebElement hsidSignInAndSecurityLink;
+	
 
 
 	public PageData ProfileandPreferences;
@@ -557,13 +530,19 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	
 	public void validateFeedbackPopup(){
 		try {
+			WebElement surveyPopUp = driver.findElement(By.xpath("html//iframe[@id='IPerceptionsEmbed']"));
+			driver.switchTo().frame(surveyPopUp);
 			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if(validate(feedbackPopup)){
-			feedbackClose.click();
+			if(surveyPopUp.isDisplayed())
+			{
+				WebElement noThanks = driver.findElement(By.xpath(".//*[@id='nav']/button[2]"));				
+				Thread.sleep(1000);
+				noThanks.click();
+				driver.switchTo().defaultContent();				
+				
+			}
+		} catch (Exception e) {
+			System.out.println("Survey Pop Uo is not present");
 		}
 	}
 
@@ -1658,13 +1637,19 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	public void validateEmailEditUpdates() {
 		WebElement element = driver.findElement(By.xpath(".//*[@id='Email-Address-Edit-Section']//p"));
 		String email = element.getText();
+		System.out.println(email);
 		editPrimaryEmailButton.click();
 		if(email.contains("koppuravuri"))
 		{
 			editPrimaryEmailAddressTeXtBox.clear();
+			JavascriptExecutor js = (JavascriptExecutor)driver;
+			js.executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 5000);");
 			editPrimaryEmailAddressTeXtBox.sendKeys("chaitanya_test@optum.com");
 		}else
 		{
+			editPrimaryEmailAddressTeXtBox.clear();
+			JavascriptExecutor js = (JavascriptExecutor)driver;
+			js.executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 5000);");
 			editPrimaryEmailAddressTeXtBox.sendKeys("chaitanya_koppuravuri@optum.com");
 					
 		}	
@@ -1672,13 +1657,17 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		try {
 			Thread.sleep(6000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
+			System.out.println("save Primary Email Not clicked");
 			e.printStackTrace();
 		}
-		String newemail = element.getText();
+		WebElement element2 = driver.findElement(By.xpath(".//*[@id='Email-Address-Edit-Section']//p"));
+		String newemail = element2.getText();
+		System.out.println("new email = "+newemail);
 		if(email!=newemail)
 		{
 			System.out.println("new email updated");
+			System.out.println("Old Email = "+email + "< =========== >New Email = " +newemail );
+			
 			
 		}else
 		{
@@ -1691,22 +1680,6 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	public void validatePhoneSection() {
 		
-	/*	try {
-			Thread.sleep(15000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		validate(EPMPIframe);				   
-		driver.switchTo().frame(iframeEPMP);
-		System.out.println("Switch to Iframe is Performed");
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}				
-*/
 		validateNew(EPMPPhoneNumbersSection);
 		validateNew(phoneEditArrowOnTheRight);
 		phoneEditArrowOnTheRight.click();
@@ -1770,6 +1743,21 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 		
 	}
+public void validateEPMPHealthSafeIdLink() {
+		
+		if(healthSafeIdHeader.isDisplayed())
+			
+		{
+			validateNew(hsidSignInAndSecurityLink);
+			System.out.println(hsidSignInAndSecurityLink.getText()+"HSID SIGN and Security Link is present");
+			
+		}else
+		{
+			System.err.println("HealthSafe id account recovery settings Email is not present for the use Please de register and register the member again ");
+		}
+		}
+	
+	
 	
 	
 }
