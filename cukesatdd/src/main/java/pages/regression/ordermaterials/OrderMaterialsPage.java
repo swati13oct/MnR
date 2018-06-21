@@ -55,7 +55,7 @@ public class OrderMaterialsPage extends UhcDriver  {
 	@FindBy(xpath = "//*[@id='eft-id']/..")
 	private WebElement EFTbrochureField;
 
-	@FindBy(xpath = "//*[@id='order-materials-serviceFail-error']/p")
+	@FindBy(xpath = "//*[@id='order-materials-serviceFail-error']")
 	private WebElement SHIPerrorMsg;
 	
 	@FindBy(id = "order-materials-error")
@@ -282,6 +282,7 @@ public class OrderMaterialsPage extends UhcDriver  {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		if (validate(SHIPerrorMsg)){
 			if(SHIPerrorMsg.getText().contains("request cannot be processed at this time")){
 			System.out.println("*************Error Message Displayed displayed for SHIP invalid Selection in Order materials Page***************");

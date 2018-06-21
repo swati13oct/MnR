@@ -270,13 +270,16 @@ public class MemberAuthStepDefinition{
 		AccountHomePage accountHomePage =  memberAuthPage.userSelectsMemberEntered();
 		
 		if(accountHomePage!=null){
-			getLoginScenario().saveBean(PageConstants.DashPage, accountHomePage);
+			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
 		}
-	
+		else{
+			System.out.println("==================CSR Page for Member not displayed======================");
+			Assert.fail();
+		}
 	}
 	@Then ("^the user click on EOB link and navigates to EOB page$")
 	public void the_user_click_on_EOB_link_navigates_t0_EOB_page(){
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.DashPage);
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		EOBPage eobPage = accountHomePage.navigateDirectToEOBPag();
 		getLoginScenario().saveBean(PageConstants.EOB_Page, eobPage);
 		
@@ -284,7 +287,7 @@ public class MemberAuthStepDefinition{
 	
 	@Then("^the user navigates to profile and preference page$")
 	public void the_user_navigates_to_profile_and_preference_page() throws Throwable {
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.DashPage);
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		ProfileandPreferencesPage profilePreferencePage = accountHomePage.navigateDirectToProfilePage();
 		if(profilePreferencePage!=null){
 			getLoginScenario().saveBean(PageConstants.ProfilePreferencesPage, profilePreferencePage);

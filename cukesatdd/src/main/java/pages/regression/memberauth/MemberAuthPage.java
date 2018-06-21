@@ -50,6 +50,9 @@ public class MemberAuthPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='sticky-nav']//div[@ng-switch-when='M&R']/a[5]")
 	private WebElement PremiumPayment;
 	
+	@FindBy(id="super-user-banner")
+	private WebElement SuperUser_DashboardBanner;
+
 	private static String MEMBER_AUTH = MRConstants.MEMBER_AUTH;
 	
 	public MemberAuthPage(WebDriver driver) {
@@ -186,12 +189,22 @@ public AccountHomePage userSelectsMemberEntered() throws InterruptedException{
 		Thread.sleep(20000);
 		switchToNewTab();
 		System.out.println("Switched to new tab");
-		return new AccountHomePage(driver);
+		waitforElement(SuperUser_DashboardBanner);
+		if (driver.getCurrentUrl().contains("/dashboard") && SuperUser_DashboardBanner.isDisplayed()){
+			System.out.println("CSR Dashboard Page is displayed for the Member");	
+			return new AccountHomePage(driver);		
+			}
+		else
+			System.out.println("CSR Dashboard Page is NOT displayed for the Member");
+		return null;			
+
 	}else{
 		System.out.println("not able to switch to new window");
 	    return null;
 	}
 	
 }
+
+
 }
 
