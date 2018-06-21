@@ -14,6 +14,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.PageTitleConstants;
 
 /**
  * @author pperugu
@@ -21,14 +22,6 @@ import atdd.framework.UhcDriver;
  */
 public class EnrollPlanInfoPage extends UhcDriver{
 
-	@FindBy(xpath = "//div[@id='chooseplan']/div/div[3]/div/table/tbody/tr[1]/td[2]")
-	private WebElement planName;
-
-	@FindBy(xpath = "//div[@id='chooseplan']/div/div[3]/div/table/tbody/tr[2]/td[2]")
-	private WebElement zipcode;
-
-	@FindBy(xpath = "//div[@id='chooseplan']/div/div[3]/div/table/tbody/tr[3]/td[2]")
-	private WebElement premium;
 
 	@FindBy(id = "continueEnrollment")
 	private WebElement continueEnrollmentButton;
@@ -119,7 +112,7 @@ public class EnrollPlanInfoPage extends UhcDriver{
 
 		continueEnrollmentButton.click();
 		System.out.println(driver.getTitle());
-		if(driver.getTitle().equalsIgnoreCase("Medicare Advantage Plan Enrollment Information | UnitedHealthcare®") || driver.getTitle().equalsIgnoreCase("Prescription Drug Plan Enrollment | UnitedHealthcare®")){
+		if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_ADVANTAGE_PLAN_ENROLLMENT_INFORMATION) || driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_PRESCRIPTION_DRUG_PLAN_ENROLLMENT)){
 			return new PlanInformationPage(driver,planName);
 		}
 		return null;

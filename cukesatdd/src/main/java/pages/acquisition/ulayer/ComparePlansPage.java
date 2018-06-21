@@ -1,25 +1,15 @@
 package pages.acquisition.ulayer;
-import java.util.List;
-import java.util.Map;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageData;
-import acceptancetests.util.CommonUtility;
-import atdd.framework.UhcDriver;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
+import pages.acquisition.ole.WelcomePage;
+import atdd.framework.UhcDriver;
 public class ComparePlansPage extends UhcDriver {
 
-	private PageData compareplan;
 	
 	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div/div/div/div[1]/div/div[1]/a")
 	private WebElement backToAllPlansLink;
@@ -49,8 +39,40 @@ public class ComparePlansPage extends UhcDriver {
 			return new VPPPlanSummaryPage(driver);
 		return null;
 	}
-	
-	
+
+
+	/**
+	 * @author sdwaraka
+	 * Method Added for OLE Flow - Navigate to OLE from Plan Summary Page
+	 * @param planName
+	 * @return
+	 * @throws InterruptedException
+	 */
+	public WelcomePage Enroll_OLE_Plan(String planName) throws InterruptedException {
+		
+		System.out.println("Enroll in Plan for Plan : "+planName);
+		WebElement EnrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[@id='innerdiv']//*[contains(text(), 'Enroll in plan')]"));
+		try {
+		validate(EnrollForPlan);
+		
+		System.out.println("Found Enroll IN Plan Button for the Plan : "+planName);
+		}catch(Exception e){
+			System.out.println("Enroll in Plan Button is Not Displayed ");
+		}
+		EnrollForPlan.click();
+		
+		try {
+			Thread.sleep(5000);
+			} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(driver.getCurrentUrl().contains("enrollment")){
+			System.out.println("OLE Welcome Page is Displayed");
+			return new WelcomePage(driver);
+		}
+		return null;
+	}
 
 
 }

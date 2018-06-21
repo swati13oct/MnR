@@ -1,10 +1,8 @@
 package pages.dashboard.member.ulayer;
-import java.security.PublicKey;
 import java.util.List;
-import java.util.Map;
 
-import org.junit.internal.runners.statements.Fail;
-import org.omg.CORBA.PUBLIC_MEMBER;
+import junit.framework.Assert;
+
 import org.openqa.selenium.By;
 /**
  * 
@@ -12,23 +10,18 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import pages.member.ulayer.DrugClaimSummaryPage;
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import junit.framework.Assert;
 
 /**
  * Functionality : this page validates the Claim Summary page.
  */
 public class ClaimSummarypage extends UhcDriver{
 
-	private PageData newClaimsSummarypage;
+	
 
 	@FindBy (xpath=".//*[@id='MA']")
 	private WebElement MA;
@@ -45,9 +38,6 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy(css = ".claim-results")
 	private WebElement ClaimsSummaryPage;
 
-	@FindBy(xpath=".//h2[contains(.,'Plan Name Lorem Ipsum')]")
-	private WebElement  planName;
-
 	@FindBy(xpath="//div[normalize-space()='Medical']")
 	private WebElement claimTypeMA;
 
@@ -56,9 +46,6 @@ public class ClaimSummarypage extends UhcDriver{
 
 	@FindBy(xpath = "//option[@value = 'custom-search']")
 	private WebElement customSearch;
-
-	@FindBy(xpath = "//div[2]/section/div/div/div/form/fieldset/div/div/div[2]/div/select/option[@value='6 months']")
-	private WebElement last6Months;
 	
 	@FindBy (xpath = "//div[@class='medical-claims']//h2[@ng-bind-html='planName']/parent::div//*[@id='document-date']//option[contains(@value,'24 months')]")
 	private WebElement last24months;
@@ -118,17 +105,8 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy (xpath=".//a[@class='downloadMyDataLink']")
 	private WebElement downloadmydatabutton;
 
-	@FindBy (xpath="//button[contains(.,'Proceed')]")
-	private WebElement proceedbutton;
-
 	@FindBy (xpath=".//*[@id='siteleaving-popup-overlay']")
 	private WebElement proceedToDownloadPopUp;
-
-	@FindBy(id="replace-current-rider")
-	private WebElement proceedButtonDownloadPopUp;
-
-	@FindBy (xpath = "//a[contains(text(),'CANCEL')]")
-	private WebElement cancelButtonDownloadPopUp;
 
 	//@FindBy (xpath="(//button[@class="btn btn--primary margin-none"])[1]")
 	@FindBy (xpath ="(//*[text()='Search'])[1]")

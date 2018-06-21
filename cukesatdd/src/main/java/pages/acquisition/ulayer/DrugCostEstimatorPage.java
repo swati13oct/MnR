@@ -2,16 +2,12 @@ package pages.acquisition.ulayer;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,7 +18,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -138,7 +133,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='pharmacy-results']//span[contains(@class,'pharmacy-name')]")
 	public List<WebElement> pharmacies;
 	               
-	@FindBy(xpath = ".//*[@id='pharmacy-results']/div[2]/ul[1]/li[1]/div/div[2]/button")
+	@FindBy(xpath = ".//*[@id='select-pharmacy-button' or @id='select-pharmacy-button-0']")
 	public WebElement select_btn_first;
 
 	@FindBy(id = "saverSavingSpan")
@@ -191,6 +186,15 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(id = "costsTabId")
 	public WebElement step3;
+	
+	@FindBy(id= "drugcosts")
+	private WebElement step3Info;
+	
+	@FindBy(id= "drug-cost-card-acq")
+	private WebElement drugCostCard;
+	
+	@FindBy(xpath= ".//*[@id='acqsummary']/div[3]/div[1]")
+	private WebElement step3DrugSummaryInfo;
 
 	@FindBy(id = "total_annauldeductible")
 	public WebElement left_rail_deductible;
@@ -365,7 +369,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id="switchToGenericBtnId")
 	private WebElement updateBtn;
 	
-	@FindBy(xpath = ".//*[@id='acqsummary']/div[3]/div[4]/div/p")
+	@FindBy(id = "total_annualcost_acq")
 	private WebElement costText;
 	
 	@FindBy(id = "ghn_lnk_2")
@@ -373,7 +377,13 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	
 	@FindBy(id = "nav-zipcode")
 	public WebElement enterZipcode;
-
+	
+	@FindBy(xpath = ".//*[@id='subnav_2']//button[@class='zip-button']")
+	public WebElement findPlans;
+	
+	@FindBy(id = "atddEditDrugList")
+	public WebElement step3EditDrugsList;
+	
 	@Override
 	public void openAndValidate() {
 
@@ -409,7 +419,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	public void changeUrlToNewDCEPage() throws InterruptedException {
 
-		String Current_url = driver.getCurrentUrl();
+		
 		String NewDCEUrl;
 
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
@@ -567,7 +577,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 		String deleteDrugXpath = "//div[@id='drugs-tab']//p[contains (text(), '" + dosage + "')]";
 		try {
-			WebElement dosagedrug = driver.findElement(By.xpath(deleteDrugXpath));
+			driver.findElement(By.xpath(deleteDrugXpath));
 			Assert.assertFalse(true);
 		} catch (NoSuchElementException e) {
 			Assert.assertFalse(false);
@@ -731,12 +741,13 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	public void select_first_pharmacy() throws InterruptedException {
 		driver.manage().window().maximize();
-		Thread.sleep(10000);
+		Thread.sleep(15000);
 
 		//waitforElement(select_btn_first);
 		System.out.println("first pharmacy");
-		if (select_btn_first.isDisplayed()) {
-			select_btn_first.click();
+		
+		if (validateNew(select_btn_first)) {
+			((JavascriptExecutor)driver).executeScript("arguments[0].click();", select_btn_first);
 		}
 		System.out.println("first pharmacy 2");
 		Thread.sleep(10000);
@@ -991,7 +1002,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		// addNewDrugModal.selectDrug(drug);
 		AddDrugDetails addDrugDetails = new AddDrugDetails(driver);
 		// addDrugDetails.selectQnty(60 + "");
-		SavingsOppurtunity savingsOppurtunity = addDrugDetails.continueAddDrugDetails();
+		addDrugDetails.continueAddDrugDetails();
 		SavingsOppurtunity savingsOppurtunity1 = new SavingsOppurtunity(driver);
 		savingsOppurtunity1.switchToGeneric();
 		savingsOppurtunity1.savedrugbutton();
@@ -1279,11 +1290,13 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public void clickSwitchNow() throws InterruptedException {
 		Thread.sleep(5000);
 		String brandedCost = costText.getText();
+		step3EditDrugsList.click();
 		System.out.println(brandedCost);
 		JavascriptExecutor js = (JavascriptExecutor)driver;
 		js.executeScript("arguments[0].click();", switchNowBtn);
 		updateBtn.click();
 		Thread.sleep(6000);
+		navigateToStep3();
 		String genericCost = costText.getText();System.out.println(genericCost);
 		if(brandedCost.equals(genericCost))
 			Assert.fail("Error in calculating costs after switching to generic");
@@ -1668,7 +1681,14 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='acqsummary']/div[3]/div[1]")
 	private WebElement step3drugInfo;
 	public boolean validateDrugOnStep3(String drug) {
-		if(step3drugInfo.getText().contains(drug))
+		if(step3Info.getText().contains(drug)&&validateNew(drugCostCard))
+			return true;
+		return false;
+		
+	}
+	
+	public boolean validateStep3FromHomePage(String drug) {
+		if(step3DrugSummaryInfo.getText().contains(drug))
 			return true;
 		return false;
 		
@@ -1681,7 +1701,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		returnLink.click();	
+		((JavascriptExecutor)driver).executeScript("arguments[0].click();", returnLink);
 		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
@@ -1699,6 +1719,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	private WebElement selectedPharmSection;
 
 	public void switchYear(){
+		if(btn2017!=null)
 		btn2017.click();
 		
 	}
@@ -1719,7 +1740,15 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		if(ourPlansTab.isDisplayed()){
 		Actions actions = new Actions(driver);
 		actions.moveToElement(ourPlansTab).build().perform();
-		enterZipcode.sendKeys(zipCode, Keys.ENTER);
+		enterZipcode.sendKeys(zipCode);
+		findPlans.click();
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		driver.navigate().refresh();
 		return new VPPPlanSummaryPage(driver);
 		}else{
 			System.out.println("====================Our Plans tab not displayed================");

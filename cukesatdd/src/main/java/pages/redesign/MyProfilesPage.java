@@ -4,13 +4,12 @@ package pages.redesign;
  */
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
-import org.json.JSONException;
+import junit.framework.Assert;
+
 import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -20,10 +19,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import junit.framework.Assert;
 
 public class MyProfilesPage extends UhcDriver{
 	
@@ -72,8 +69,7 @@ public class MyProfilesPage extends UhcDriver{
 	@FindBy(id = "updateEmail")
 	private WebElement EmailSaveButton;
 	
-	@FindBy(xpath = "//*[@id='email-form']//a")
-	private WebElement EmailCancelButton;
+	
 	
 	//Edit email error messages - Text changes, error lement is same
 	@FindBy(id = "emailNew-error")
@@ -95,8 +91,7 @@ public class MyProfilesPage extends UhcDriver{
 	@FindBy(id = "altStreet2")
 	private WebElement TempAddressLine2;
 	
-	@FindBy(id = "altCity")
-	private WebElement TempAddressCity;
+	
 	
 	@FindBy(id = "altState")
 	private WebElement TempAddressStateDropDown;
@@ -125,8 +120,7 @@ public class MyProfilesPage extends UhcDriver{
 	@FindBy(xpath = "//*[@id='address-temporary-form']//button")
 	private WebElement TempAddressSaveButton;
 	
-	@FindBy(xpath = "//*[@id='address-temporary-form']/fieldset//a")
-	private WebElement TempAddressCancelLink;
+	
 	
 	//Temporary Address Error Messages
 	
@@ -163,8 +157,7 @@ public class MyProfilesPage extends UhcDriver{
 	@FindBy(xpath = "//*[@id='temporaryEndDateisGreaterThan6Months-error']/p")
 	private WebElement EndDate6monthsError;
 	
-	@FindBy(id = "temporaryStreet2-error")
-	private WebElement StreetAdd2Error;
+	
 	
 	//Password, Ph No Modal Elements
 	
@@ -207,16 +200,16 @@ public class MyProfilesPage extends UhcDriver{
 	@FindBy(xpath="(.//*[contains(text(),'Save')])[2]")
 	private WebElement phonesavebtn;
 
-	private PageData myProfiles;
+	
 
 	public JSONObject myProfilesJson;
 
 	public MyProfilesPage(WebDriver driver) throws InterruptedException {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		String fileName = CommonConstants.MY_PROFILES_PAGE_DATA;
+		/*String fileName = CommonConstants.MY_PROFILES_PAGE_DATA;
 		myProfiles = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
+				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);*/
 		Thread.sleep(5000);
 		CommonUtility.checkPageIsReady(driver);
 		try{

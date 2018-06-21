@@ -1,11 +1,7 @@
 package pages.acquisition.ulayer;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
-import atdd.framework.UhcDriver;
 
 public class ContactUsAARPPage extends GlobalWebElements{
 	 
@@ -27,7 +23,7 @@ public class ContactUsAARPPage extends GlobalWebElements{
 		validate(footerSiteMapLink);
 		footerSiteMapLink.click();
 		validate(footerSiteMapLink);
-		if (driver.getTitle().equalsIgnoreCase("Site Map | AARP® Medicare Plans from UnitedHealthcare®")) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_SITEMAP_AARP_MEDICARE_PLANS)) {
 			return new SiteMapAARPPage(driver);
 		}
 		return null;

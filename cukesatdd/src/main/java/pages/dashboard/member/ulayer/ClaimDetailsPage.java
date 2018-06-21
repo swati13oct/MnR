@@ -1,29 +1,20 @@
 package pages.dashboard.member.ulayer;
-import java.security.PublicKey;
-import java.util.List;
-import java.util.Map;
-
-import org.omg.CORBA.PUBLIC_MEMBER;
 /**
  * 
  */
+import junit.framework.Assert;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageData;
-import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import junit.framework.Assert;
 /**
  * Functionality : this page validates Claims Details Page. 
  */
 public class ClaimDetailsPage extends UhcDriver{
-	private PageData newClaimDetailspage;
+	
 
 	@FindBy (xpath=".//*[@id='claimSearchButton']/p/b")
 	private WebElement claimSearch;
@@ -31,17 +22,12 @@ public class ClaimDetailsPage extends UhcDriver{
 	@FindBy(xpath = "//html/body/div[2]/div/div/div/div/main/div/div[1]/div[2]/header/div/div/div/div/div/div/h2")
 	private  WebElement myCaimsDetailsText;
 
-	@FindBy(xpath=".//*[@id='claimdetailspage']")
-	private WebElement ClaimDetailsPage;
 
 	@FindBy(xpath=".//*[@id='dateRange']")
 	private  WebElement  dateRange;
 
 	@FindBy(xpath=".//*[@id='providerName']")
 	private  WebElement providerName;
-
-	@FindBy(id="claim-type")
-	private WebElement claimTypeMAPD;
 
 
 	@FindBy(xpath=".//*[@id='claimNumberLabel']")
@@ -91,12 +77,6 @@ public class ClaimDetailsPage extends UhcDriver{
 	
 	@FindBy(xpath = ".//*[@id='ship_eob']/div/section/a/p")
 	private WebElement EOB;
-	
-	@FindBy(xpath = ".//*[@id='cltotshippartb']/div/div[1]/div")
-	private WebElement claimsTotalSHIP;
-	
-	@FindBy(xpath = ".//*[@id='cltotmednice']/div/div[1]/div/div")
-	private WebElement claimsTotalFED;
 	
 	public ClaimDetailsPage(WebDriver driver) {
 		super(driver);

@@ -12,20 +12,21 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
+import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
-import acceptancetests.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
-import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
+import pages.Global.Member.Footer;
 import pages.dashboard.member.drugcostestimator.blayer.DrugCostEstimatorPage;
-import pages.memberredesign.bluelayer.AccountHomePage;
 import pages.memberredesign.bluelayer.LoginPage;
+import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.payments.PaymentHistoryPage;
 
 /**
  * Functionality : Covers all step definition methods related to member redesign footer section.
@@ -129,29 +130,59 @@ public class MemberRedesignFooterStepDefinition {
 	/**
 	 *  @toDo : On member page and checks for footer sections - check model popup, validate claims level 2 tab, validate footer section
 	 */
-	@When("^I am on the member page then I should be able to see the footer sections Footer$")
-	public void I_am_on_the_member_page_then_I_should_be_able_to_see_the_footer_sections() {
-		// Express the Regexp above with the code you wish you had
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
-		accountHomePage.checkModelPopup();
-		accountHomePage.validateClaimsL2Tabs();
-		accountHomePage.checkModelPopup();
-		accountHomePage.validateFooterSection();
+	@Then("^the user navigates to payment history page$")
+	public void user_views_payment_history() throws InterruptedException {		
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+		PaymentHistoryPage paymentHistoryPage = accountHomePage.navigateToPaymentHistoryPage();
+      if (paymentHistoryPage!=null){
+    	     	  getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
+			System.out.println("user is on one time payment page"); 
+      }else{
+    	  System.out.println("Null value returned");
+      }	
+		
 	}
+
+      
+      @Then("^the user navigates to the footer section$")
+      public void user_validates_footer(){
+    	  PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
+    	  Footer footer = paymentHistoryPage.validatePageFooter();
+    	  if (footer!=null){
+	     	  getLoginScenario().saveBean(PageConstants.footer_page,footer);
+    	  
+      }else{
+    	  Assert.fail();
+      }
+      
+      }
+      @And("^the user validates the footer section$")
+      public void validate() throws InterruptedException{
+    	  Footer footerPage = (Footer) getLoginScenario().getBean(PageConstants.footer_page);
+    	  footerPage.validateFooterLinks();
+      }
+      
+}
+
+
+		
+		
+		
+	
 
 	/**
 	 *  @toDo : Checks for Member support and links under it
 	 */
-	@When("^Member Support and links under it should be displayed Footer$")
+	/*@When("^Member Support and links under it should be displayed Footer$")
 	public void Member_Support_and_links_under_it_should_be_displayed() {
 		// Express the Regexp above with the code you wish you had
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
 		accountHomePage.validateMemberSupport();
 	}
 
-	/**
+	*//**
 	 *  @toDo : Checks quick links and links under it
-	 */
+	 *//*
 	@When("^Quick links and links under it should be displayed Footer$")
 	public void Quick_links_and_links_under_it_should_be_displayed() {
 		// Express the Regexp above with the code you wish you had
@@ -159,14 +190,14 @@ public class MemberRedesignFooterStepDefinition {
 		accountHomePage.validateQuickLinks();
 	}
 
-	/**
+	*//**
 	 *  @toDo : Access to Rally Provider Search Tool and check for saved option under quick links
-	 */
+	 *//*
 	@When("^I have access to the Rally Provider Search Tool and I see the Saved option under Quick Links Footer$")
 	public void I_have_access_to_the_Rally_Provider_Search_Tool_and_I_see_the_Saved_option_under_Quick_Links() {
 		// Express the Regexp above with the code you wish you had
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
 		accountHomePage.validateSavedLink();
-	}
+	}*/
 
-}
+

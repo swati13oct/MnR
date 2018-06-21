@@ -11,12 +11,12 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
 import pages.acquisition.ulayer.GetStartedPage;
 import pages.acquisition.ulayer.IntroductionInformationPage;
 import pages.acquisition.ulayer.ManageDrugPage;
+import pages.acquisition.ulayer.PageTitleConstants;
 import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.ulayer.PlanInformationPage;
 import pages.acquisition.ulayer.ProviderSearchPage;
@@ -47,31 +47,12 @@ public class VPPAarpPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='disabledprint ng-scope']")
 	List<WebElement> pdpPlanElement;
 	
-	@FindBy(id = "medicalinsursectionheading")
-	private WebElement pageHeading;
 
-	@FindBy(id = "editDrugMA")
-	private WebElement editDrugListLink;
-	
-	@FindBy(linkText = "All Primary Care Physicians")
-	private WebElement allPrimaryCarePhysicians;
-	
-	@FindBy(linkText = "Complete my list")
-	private WebElement completeMyList;
-	
-	@FindBys(value = { @FindBy(className = "firstTierFilterItem") })
-	private List<WebElement> physcianSearchTypes;
-	
-	
-	@FindBys(value = { @FindBy(xpath = "//div[@id='providerResultsContainer']/div") })
-	private List<WebElement> providerNameList;
 	
 	
 	@FindBy(id = "pageHeader")
 	private WebElement pageHeader;
-	
-	@FindBy(id = "providerSearchFrame")
-	private WebElement providerSearchIframe;
+
 	
 
 	@FindBy(className = "switchPlanYear")
@@ -88,8 +69,7 @@ public class VPPAarpPlanSummaryPage extends UhcDriver {
 	@FindBy(css="#pdpplans_container .planCompareBtn")
 	private WebElement comparePDPPlanChkBox;
 	
-	@FindBy(id="pdpplans")
-	private WebElement pdpShowPlansLnk;
+
 	
 	@FindBy(css="#maplans_container .compareHeading>p")
 	private WebElement compareUpto3PlansPopup;
@@ -177,7 +157,7 @@ public class VPPAarpPlanSummaryPage extends UhcDriver {
 		}
 		CommonUtility.checkPageIsReady(driver);
 		/*if (driver.getTitle().equalsIgnoreCase("Plan Details | AARP® Medicare Plans from UnitedHealthcare®")
-				|| driver.getTitle().equalsIgnoreCase("Plan Detail")) {
+				|| driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_PLAN_DETAIL)) {
 			return new PlanDetailsPage(driver,planType);
 		}*/
 
@@ -382,7 +362,7 @@ public class VPPAarpPlanSummaryPage extends UhcDriver {
 			}
 		}
 		if (driver.getTitle().equalsIgnoreCase(
-				"AARP Medicare Complete Online Application") || driver.getTitle().equalsIgnoreCase("AARP Medicarerx Online Application")) {
+				"AARP Medicare Complete Online Application") || driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_AARP_MEDICARERX_ONLINE_APPLICATION)) {
 			return new PlanInformationPage(driver,planName);
 		}
 		
@@ -408,7 +388,7 @@ public class VPPAarpPlanSummaryPage extends UhcDriver {
 			}
 		}
 		if (driver.getTitle().equalsIgnoreCase(
-				"AARP Medicare Complete Online Application") || driver.getTitle().equalsIgnoreCase("AARP Medicarerx Online Application")) {
+				"AARP Medicare Complete Online Application") || driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_AARP_MEDICARERX_ONLINE_APPLICATION)) {
 			return new IntroductionInformationPage(driver);
 		}
 		

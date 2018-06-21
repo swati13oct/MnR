@@ -1,17 +1,12 @@
 package pages.redesign;
 
-import java.util.List;
-import java.util.NoSuchElementException;
-
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
-import pages.member.redesign.PreferencesPage;
+
 import acceptancetests.data.MRConstants;
 import atdd.framework.UhcDriver;
 
@@ -23,10 +18,9 @@ public class ExplanationOfBenefitsPage extends UhcDriver {
 	@FindBy(xpath = "//a[text()='Go to EOB Search page']")
 	private WebElement linkEOB;
 
-	@FindBy(id = "eob-type")
-	private WebElement EOBTypeRadioButton;
+	
 
-	@FindBy(xpath = ".//span[contains(text(),'Last 18 Months')]")
+			@FindBy(xpath = ".//span[contains(text(),'Last 18 Months')]")
 	private WebElement EOBTypeResult;
 
 	@FindBy(id = "date-range-1")
@@ -154,4 +148,6 @@ public class ExplanationOfBenefitsPage extends UhcDriver {
 
 		}
 	}
-}
+}
+
+

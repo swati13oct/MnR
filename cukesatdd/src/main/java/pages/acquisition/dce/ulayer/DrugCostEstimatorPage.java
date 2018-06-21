@@ -2,15 +2,12 @@ package pages.acquisition.dce.ulayer;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,11 +17,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import acceptancetests.data.CommonConstants;
+import pages.acquisition.ulayer.PageTitleConstants;
+import pages.acquisition.ulayer.PlanDetailsPage;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.ulayer.PlanDetailsPage;
 
 public class DrugCostEstimatorPage extends UhcDriver {
 
@@ -408,7 +405,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		waitforElement(addDrug);
 		addDrug.click();
 
-if (driver.getTitle().equalsIgnoreCase("estimate-drug-costs") || driver.getTitle().equalsIgnoreCase("Medicare Plan Drug Costs | AARP® Medicare Plans from UnitedHealthcare®")) {
+if (driver.getTitle().equalsIgnoreCase("estimate-drug-costs") || driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_PLAN_DRUG_COSTS)) {
 			return new AddNewDrugModal(driver);
 		}
 		return null;
@@ -416,7 +413,7 @@ if (driver.getTitle().equalsIgnoreCase("estimate-drug-costs") || driver.getTitle
 
 	public void changeUrlToNewDCEPage() throws InterruptedException {
 
-		String Current_url = driver.getCurrentUrl();
+		
 		String NewDCEUrl;
 
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
@@ -580,7 +577,7 @@ sendkeys(zipcodeInput, zipcode); // not sure what webelement to use
 
 		String deleteDrugXpath = "//div[@id='drugs-tab']//p[contains (text(), '" + dosage + "')]";
 		try {
-			WebElement dosagedrug = driver.findElement(By.xpath(deleteDrugXpath));
+			 driver.findElement(By.xpath(deleteDrugXpath));
 			Assert.assertFalse(true);
 		} catch (NoSuchElementException e) {
 			Assert.assertFalse(false);
@@ -652,8 +649,8 @@ sendkeys(zipcodeInput, zipcode); // not sure what webelement to use
 	}
 
 	public void selectRadius() {
-		int index = 5;
-		Select options = new Select(milesSelection);
+		
+		 new Select(milesSelection);
 		//options.selectByIndex(index);
 		// options.getAllSelectedOptions();
 	}
@@ -1007,7 +1004,7 @@ sendkeys(zipcodeInput, zipcode); // not sure what webelement to use
 		// addNewDrugModal.selectDrug(drug);
 		AddDrugDetails addDrugDetails = new AddDrugDetails(driver);
 		// addDrugDetails.selectQnty(60 + "");
-		SavingsOppurtunity savingsOppurtunity = addDrugDetails.continueAddDrugDetails();
+		addDrugDetails.continueAddDrugDetails();
 		SavingsOppurtunity savingsOppurtunity1 = new SavingsOppurtunity(driver);
 		savingsOppurtunity1.switchToGeneric();
 		savingsOppurtunity1.savedrugbutton();

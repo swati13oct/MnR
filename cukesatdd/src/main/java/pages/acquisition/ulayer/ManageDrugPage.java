@@ -16,7 +16,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import pages.member.bluelayer.SelectPharmacyPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
@@ -37,8 +36,7 @@ public class ManageDrugPage extends UhcDriver {
        /*@FindBy(css = "div > img[alt=\"Plus Image\"]")
        WebElement plusSign;*/
 
-       @FindBy(xpath = "//div[@class='reduceCosts generic']")
-       private WebElement reduceCostPath;
+      
 
        @FindBy(linkText = "Reduce costs")
        WebElement reduceCostLink;

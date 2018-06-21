@@ -6,9 +6,8 @@ package pages.acquisition.bluelayer;
 import java.util.List;
 
 import junit.framework.Assert;
+import pages.acquisition.ulayer.PageTitleConstants;
 
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
@@ -36,23 +35,12 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(id = "zipcodeTxt")
 	private WebElement zipcodeField;
 
-	@FindBy(id = "showresults")
-	private WebElement distanceField;
-
-	@FindBy(id = "continue")
-	private WebElement continueField;
 	
 	@FindBy(id = "zipcode-button")
 	private WebElement zipcodeSearchButton;
 
 	@FindBy(id = "selectcounty_box")
 	private WebElement countyPopOut;
-
-	@FindBy(id = "selectcountytable")
-	private WebElement selectcountytable;
-
-	@FindBy(id = "plan")
-	private WebElement planNameDropDown;
 
 	@FindBys(value = { @FindBy(xpath = "//select[@id='plan-type']/option") })
 	private List<WebElement> planNamesList;
@@ -67,9 +55,6 @@ public class PharmacySearchPage extends UhcDriver {
 	private List<WebElement> countyList;
 	
 
-	@FindBy(id = "pharmacies")
-	private WebElement allPharmacies;
-
 	@FindBy(id = "services")
 	private WebElement particularServices;
 
@@ -82,8 +67,6 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBys(value = { @FindBy(xpath = "//ul[@id='pharm_services']/li") })
 	private List<WebElement> pharmacyTypesCheckboxes;
 
-	@FindBy(xpath = "//form[@id='searchCriteria']/div[3]/p[2]/span")
-	private WebElement narrowYourSearchContent;
 
 	//@FindBy(xpath = "//div[@id='medicareTitle']/h1")
 	@FindBy(xpath = "//*[@id='site-wrapper']/div[4]/div/div/div/div/div/main/div/div[3]/div/div[1]/div/div[1]/div/div/div[1]/h2")
@@ -110,17 +93,6 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(id = "pharmacy-standard")
 	private WebElement standardPharmacy;
 	
-	@FindBy(xpath = "//div[@class='showPharmacies']/div/input[@id='pharmacies']")
-	private WebElement allPharmacieselection;
-	
-	@FindBy(xpath = "//div[@class='showPharmacies']/div/input[@id='services']")
-	private WebElement allServices;
-	
-	@FindBy(xpath = "//div[@class='showPharmacies']/ul/li")
-	private List<WebElement> pharmaciesList;
-	
-	@FindBy(xpath = "//div[@class='showPharmacies']/ul/li/input")
-	private List<WebElement> pharmaciesListCheckbox;
 	
 	@FindBy(className = "dceBlueBtn")
 	WebElement selectLink;
@@ -137,7 +109,8 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(className = "errorPoints")
 	WebElement errorPoints;
 	
-	@FindBy(xpath = "//div/h2[contains(@class, 'pharmacy-count')]")
+	//@FindBy(xpath = "//div/h2[contains(@class, 'pharmacy-count')]")
+	@FindBy(xpath = "//*[contains(@class, 'pharmacy-count')]")
 	private WebElement pharmacyCount;
 
 	@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[2]")
@@ -146,17 +119,20 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[1]")
 	WebElement zeropharmacyResults;
 
-	@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[2]/div/ul[@class='map-toggle']")
+	//@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[2]/div/ul[@class='map-toggle']")
+	@FindBy(xpath = "//*[@class='map-toggle']")
 	WebElement mapToggleElement;
 
 	@FindBy(id="collapseMap")
 	//@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[2]/div/div[@class='collapse-wrapper']/div")
 	WebElement mapView;
 
-	@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[2]/div/ul[@class='pharmacy-list']")
+	//@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']//ol[@class='pharmacy-list']")
+	@FindBy(xpath = "//*[@class='pharmacy-list']")
 	WebElement pharmacyList;
 
-	@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[2]/div/ul[@class='pharmacy-list']/li")
+	//@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']//ol[@class='pharmacy-list']/li")
+	@FindBy(xpath = "//*[@class='pharmacy-list']/li")
 	List<WebElement> pharmacyListItems;
 	
 	@FindBys(value = { @FindBy(xpath = "//ul[1][@class='filter-list']/li/label") })
@@ -235,11 +211,11 @@ public class PharmacySearchPage extends UhcDriver {
 		}
 		System.out.println(driver.getTitle());
 		if (driver.getTitle().equalsIgnoreCase(
-				"Locate a Pharmacy | UnitedHealthcare®")) {
+				PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE)) {
 			return new PharmacySearchPage(driver);
 		}
 		if (driver.getTitle().equalsIgnoreCase(
-				"Find a Pharmacy | AARP® Medicare Plans from UnitedHealthcare®")) {
+				PageTitleConstants.BLAYER_FIND_A_PHARMACY_AARP_MEDICARE_PLANS_FROM_UNITEDHEALTHCARE)) {
 			return new PharmacySearchPage(driver);
 		}
 		return null;
@@ -257,7 +233,7 @@ public class PharmacySearchPage extends UhcDriver {
 			
 		}
 		if (driver.getTitle().equalsIgnoreCase(
-				"Locate a Pharmacy | UnitedHealthcare®")) {
+				PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE)) {
 			return new PharmacySearchPage(driver);
 		}
 		return null;
@@ -590,7 +566,7 @@ public PharmacySearchPage selectPharmacyandServices(String pharmacytype) {
 		}
 
 		if (driver.getTitle().equalsIgnoreCase(
-				"Locate a Pharmacy | UnitedHealthcare®")) {
+				PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE)) {
 			return new PharmacySearchPage(driver);
 		}
 		return null;

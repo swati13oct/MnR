@@ -12,16 +12,18 @@ import java.util.Set;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Assert;import org.openqa.selenium.By;
+import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.CommonConstants;
+import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
-import acceptancetests.data.LoginCommonConstants;import atdd.framework.UhcDriver;
+import atdd.framework.UhcDriver;
 
 /**
  * @author pagarwa5
@@ -47,17 +49,6 @@ public class PharmacyResultPage extends UhcDriver {
 	@FindBy(xpath = "(//div[@class='startedsearchtop headingtop1'])[3]/h2")
 	private WebElement contactOptumRxWidgetDisplayed;
 
-	@FindBy(xpath = "//a[text()='ä¸¬æ–‡']")
-	private WebElement chineseContent;
-
-	@FindBy(xpath = "//a[text()='search']")
-	private WebElement chineseSearch;
-
-	@FindBy(xpath = "//a[text()='espaÃ±ol']")
-	private WebElement spanishContent;
-
-	@FindBy(xpath = "//a[text()='search']")
-	private WebElement spanishSearch;
 	
 	@FindBy(xpath = "//div[contains(@class,'Pharmacyresults')]/table[@class='searchResults']/tbody/tr/td[3]/div/ul/li[2]/a")
 	private WebElement viewMaplink;
@@ -68,8 +59,6 @@ public class PharmacyResultPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='mapContainer']/div/div/div/div/div[4]/div[4]/div/div[2]/div/div/p")
 	private List<WebElement> viewMapresult;
 
-	@FindBy(xpath = "//a[@id='find_searchagainbtn']")
-	private WebElement searchAgainButton;
 
 	@FindBy(linkText = "Create PDF")
 	private WebElement createPDFlink;

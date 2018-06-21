@@ -5,8 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.PageTitleConstants;
 
 /**
  * @author pagarwa5
@@ -19,9 +19,6 @@ public class AdditionalPlanPage extends UhcDriver {
 
 	@FindBy(id = "popupSubmit")
 	private WebElement popupSubmitButton;
-	
-	@FindBy(xpath = "//tr[@id='contentRow']/td/div[2]/div[2]/div/div/div/div/form/div/div[2]/div[2]/div/div/h3")
-	private WebElement planConformationHeader;
 	
 	@FindBy(id = "memberId1")
 	private WebElement memberId1;
@@ -51,7 +48,7 @@ public class AdditionalPlanPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		if (driver.getTitle().equalsIgnoreCase(
-				"UnitedHealthcare Medicare Solutions | Registration"))
+				PageTitleConstants.BLAYER_MEDICARE_SOLUTIONS_REGISTRATION))
 			return new PlanConfirmationPage(driver);
 		return null;
 

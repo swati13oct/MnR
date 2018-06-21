@@ -3,12 +3,14 @@
  */
 package pages.member.ulayer;
 
-import java.util.List;import java.util.Map;
+import java.util.List;
+import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
-import org.openqa.selenium.By; import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -43,12 +45,7 @@ public class ContactUsPage extends UhcDriver{
 	
 	@FindBy(xpath="//*[@id='message-form']/fieldset/div[2]/div")
 	private WebElement useDifferentEmailRadioButton;
-	
-	@FindBy(xpath = "//*[@id='message-email']")
-	private WebElement newemailId;
-	
-	@FindBy(xpath = "//*[@id='message-email-confirm']") 
-	private WebElement confirmemailId;
+
 	
 	@FindBy(xpath = "//*[@id='message-form']/fieldset/div[1]/div/div/label")
 	private WebElement emailAddressonFile;
@@ -62,8 +59,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath = "//*[@id='message-send']")
 	private WebElement sendAmessageButton;
 	
-	@FindBy(xpath = "//*[@id='messageModal']/div/div/div[1]")
-	private WebElement secureModel;
+
 	
 	@FindBy(xpath = "//*[@id='messageModal']/div/div/div[3]/button/span")
 	private WebElement secureModelContinueButton;
@@ -71,8 +67,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath = "//*[@id='messageModal']/div/div/div[3]/a")
 	private WebElement secureModelCancel;
 
-	@FindBy(xpath = " //*[@id='messageModal']/div/div/div[2]/div/div/div/ul/li[2]/p/a")
-	private WebElement prescriptionLink;
+
 	
 	
 	@FindBy(xpath = "//div[contains(@class,'parsys click-to-call')]/div/div[not (contains(@class,'ng-hide'))]//div[@class='card-header']/p[1]")
@@ -85,11 +80,6 @@ public class ContactUsPage extends UhcDriver{
 	private WebElement requestCall;;
 	
 	
-	@FindBy(xpath = "/*[@id='call-question-about'] ")
-	private WebElement contactoption;
-		
-	@FindBy(xpath = "//*[@id='call-question-about'] ")
-	private WebElement other;
 	
 	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div/div[3]//form//a[@id='call-cancel']")
 	private WebElement callCancel;
@@ -104,18 +94,9 @@ public class ContactUsPage extends UhcDriver{
 	private JSONObject secureemailwidgetDataJson;
 	
 	public JSONObject contactUsJson;
-	@FindBy(xpath="//*[@id='secureWidget']/div[2]/p[4]/a/span")
-	private WebElement getstartedlink;
+
 	
-	@FindBy(xpath="//*[@id='modelContent']/div[1]")
-	private WebElement emialUslink;
-	
-	
-	@FindBy(xpath="//*[@id='contActButton']")
-	private WebElement continuelink;
-	
-	@FindBy(css="#secureWidget")
-	private WebElement securewidgetlink;
+
 	@FindBy(xpath="//*[@id='question-btn']")
 	private WebElement fillOutFormButton;	
 	

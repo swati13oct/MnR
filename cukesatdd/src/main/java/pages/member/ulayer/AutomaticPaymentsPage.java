@@ -3,7 +3,6 @@
  */
 package pages.member.ulayer;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,12 +16,7 @@ import atdd.framework.UhcDriver;
  */
 public class AutomaticPaymentsPage extends UhcDriver{
 	
-	
-	@FindBy(xpath="//div[@id='atdd_otheramount_label']/label")
-	private WebElement otherAmountRadio;
-	
-	@FindBy(id = "other-amount-number")
-	private WebElement otherAmountNumber;
+
 	
 	@FindBy(id = "routing-number")
 	private WebElement routingNumberField;

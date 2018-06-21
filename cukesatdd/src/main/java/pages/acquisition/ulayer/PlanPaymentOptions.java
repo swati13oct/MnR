@@ -33,23 +33,14 @@ public class PlanPaymentOptions extends UhcDriver{
 	@FindBy(id="disclaimerAgreeBtnplanpayment")
 	private WebElement ppodisclaimerAgreeBtn;
 	
-	@FindBy(id = "pcpprevious")
-	private WebElement pcpprevious;
-	
 	@FindBy(id = "planPaymentOptionSaveBtnId")
 	private WebElement pposaveandcont;
-	
-	@FindBy(id = "ppcpcancel")
-	private WebElement pcpcancel;
 	
 	@FindBy(xpath = ".//*[@id='disclaimerAgreeBtnplanpayment']")
 	private WebElement disclaimerppoagreebutton;
 	
 	@FindBy(xpath = ".//*[@id='planPaymentOptionSaveBtnId']")
 	private WebElement saveandcontinuebutton;
-	
-	@FindBy(xpath = "//*[@id='pcpsaveandcont']")
-	private WebElement saveandcontinuepcp;
 	
 	@FindBy(xpath = ".//*[@id='planpaymentLink']")
 	private WebElement disclaimerppo;
@@ -91,7 +82,7 @@ public class PlanPaymentOptions extends UhcDriver{
 	}
 
 	public void clickplanproviderInformation(Map<String, String> personalAttributesMap) {
-		String othradiooption = personalAttributesMap.get("othradiooption");
+		
 		planpaymentLink.click();	
 		try {
 			Thread.sleep(1000);
@@ -150,7 +141,7 @@ public class PlanPaymentOptions extends UhcDriver{
 		validate(saveandcontinuebutton);
 		saveandcontinuebutton.click();
 		
-		if (driver.getTitle().equalsIgnoreCase("Medicare Advantage Enrollment | AARP® Medicare Plans from UnitedHealthcare®")) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_ADVANTAGE_ENROLLMENT)) {
 			return new OptionalRidersPage(driver);
 		}
 		return null;

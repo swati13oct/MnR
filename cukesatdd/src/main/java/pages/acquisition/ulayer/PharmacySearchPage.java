@@ -6,14 +6,11 @@ package pages.acquisition.ulayer;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import junit.framework.Assert;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -21,14 +18,11 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.ulayer.PharmacyResultPage;
-import junit.framework.Assert;
 
 /**
  * @author pagarwa5
@@ -40,25 +34,13 @@ public class PharmacySearchPage extends UhcDriver {
 	private WebElement zipcodeField;
 	
 	@FindBy(id = "zipcode-button")
-	private WebElement searchbtn;
-
-	@FindBy(id = "distance")
-	private WebElement distanceField;
-
-	@FindBy(id = "zipcode-button")
-	private WebElement continueField;
-
-	@FindBy(id = "zipcode-button")
-	private WebElement zipcodeSearchButton;
+	private WebElement searchbtn;;
 
 	@FindBy(id = "selectcounty_box")
 	private WebElement countyPopOut;
 
 	@FindBy(xpath = "//div/h2[contains(@class, 'pharmacy-count')]")
 	private WebElement pharmacyCount;
-
-	@FindBy(id = "selectcountytable")
-	private WebElement selectcountytable;
 
 	@FindBy(id = "zipcodeTxt")
     private WebElement txtZipCode;
@@ -68,9 +50,6 @@ public class PharmacySearchPage extends UhcDriver {
 
     @FindBy(id = "city")
     private WebElement txtCity;
-	
-	@FindBy(id = "plan")
-	private WebElement planNameDropDown;
 
 	@FindBys(value = { @FindBy(xpath = "//select[@id='plan-type']/option") })
 	private List<WebElement> planNamesList;
@@ -102,18 +81,6 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(id = "pharmacy-standard")
 	private WebElement standardPharmacy;
 
-	@FindBy(xpath = "//div[@class='showPharmacies']/div/input[@id='pharmacies']")
-	private WebElement allPharmacieselection;
-
-	@FindBy(xpath = "//div[@class='showPharmacies']/div/input[@id='services']")
-	private WebElement allServices;
-
-	@FindBy(xpath = "//div[@class='showPharmacies']/ul/li")
-	private List<WebElement> pharmaciesList;
-
-	@FindBy(xpath = "//div[@class='showPharmacies']/ul/li/input")
-	private List<WebElement> pharmaciesListCheckbox;
-
 	@FindBys(value = { @FindBy(xpath = "//ul[@id='pharm_services']/li") })
 	private List<WebElement> pharmacyTypesCheckboxes;
 	
@@ -121,9 +88,6 @@ public class PharmacySearchPage extends UhcDriver {
 	
 	@FindBys(value = { @FindBy(xpath = "//ul[1][@class='filter-list']/li/label") })
 	private List<WebElement> pharmacyTypesandServices;
-
-	@FindBy(xpath = "//form[@id='searchCriteria']/div[3]/h3")
-	private WebElement narrowYourSearchContent;
 
 	@FindBy(xpath = "//div[@id='medicareTitle']/h1")
 	private WebElement pharmacyResultHeader;
@@ -139,15 +103,6 @@ public class PharmacySearchPage extends UhcDriver {
 
     @FindBy(css = "#zipcode-button>span")
     private WebElement btnContinue;
-    
-    @FindBy(id="distance")
-    private WebElement drpDistance;
-    
-    @FindBy(xpath="//span[contains(text(),'Standard Network Pharmacy')]")
-    private WebElement txtStandardNetworkPharmacy;
-    
-    @FindBy(xpath="//span[contains(text(),'Preferred Pharmacy')]")
-    private WebElement txtPreferredPharmacy;
 	
 	@FindBy(id = "services")
 	private WebElement pharmacyTypeSelectionRadioButton;
@@ -163,36 +118,6 @@ public class PharmacySearchPage extends UhcDriver {
 	
 	@FindBy(xpath = "//a[contains(text(),'VIEW RESULT AS PDF')]")
 	private WebElement viewsearchpdf;
-	
-	@FindBy(xpath = "(.//*[@id='subPageRight']/div[2]/div[2]/ul/li[3]/a")
-    private WebElement pharmacyloc;
-	
-	@FindBy(xpath = "//h2[contains(text(),'Pharmacy Saver offers prescriptions as low as $XX.XX')]")
-	private WebElement pharmacySaverWidget;
-	
-	@FindBy(id = "plan-year")
-	private WebElement planYearDropDown;	
-
-	//@FindBy(xpath = ".//*[@for='pharmacy-saver']")
-	@FindBy(xpath = "//a[@class='h5 filter-button bold color-blue-link margin-none']")
-	private WebElement filterLink;
-	
-	
-	@FindBy(xpath = "(//*[@id='lang-select']//option)[2]")
-	private WebElement chineseLink;
-	
-	@FindBy(xpath = ".//*[@tabindex='0']")
-	private WebElement toolTip;
-	
-	@FindBy(xpath = ".//*[@id='pharmacy-saver']")
-	private WebElement multilangfilter;
-
-	@FindBy(xpath="//*[contains(text(), 'Please enter ZIP code')]")
-	private WebElement noZipcode;
-	
-	@FindBy(xpath="//*[contains(text(), 'Please enter your ZIP code as 5 numbers like this: 12345')]")
-	private WebElement invalidZip;
-
 
 	@FindBy(xpath = "//div[contains(@class,'callus')]")
 	WebElement customercare;
@@ -209,17 +134,20 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[1]")
 	WebElement zeropharmacyResults;
 
-	@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[2]/div/ul[@class='map-toggle']")
+	//@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[2]/div/ul[@class='map-toggle']")
+	@FindBy(xpath = "//*[@class='map-toggle']")
 	WebElement mapToggleElement;
 	
 	@FindBy(id="collapseMap")
 	//@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[2]/div/div[@class='collapse-wrapper']/div")
 	WebElement mapView;
 
-	@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[2]/div/ul[@class='pharmacy-list']")
+	//@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']//ol[@class='pharmacy-list']")
+	@FindBy(xpath = "//*[@class='pharmacy-list']")
 	WebElement pharmacyList;
 
-	@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[2]/div/ul[@class='pharmacy-list']/li")
+	//@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']//ol[@class='pharmacy-list']/li")
+	@FindBy(xpath = "//*[@class='pharmacy-list']/li")
 	List<WebElement> pharmacyListItems;
 
 	@FindBy(linkText = "VIEW RESULT AS PDF")
@@ -314,11 +242,11 @@ public class PharmacySearchPage extends UhcDriver {
 		}
 
 		if (driver.getTitle().equalsIgnoreCase(
-				"Locate a Pharmacy | UnitedHealthcare®")) {
+				PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE)) {
 			return new PharmacySearchPage(driver);
 		}
 		if (driver.getTitle().equalsIgnoreCase(
-				"Find a Pharmacy | AARP® Medicare Plans from UnitedHealthcare®")) {
+				PageTitleConstants.BLAYER_FIND_A_PHARMACY_AARP_MEDICARE_PLANS_FROM_UNITEDHEALTHCARE)) {
 			return new PharmacySearchPage(driver);
 		}
 		else {
@@ -339,7 +267,7 @@ public class PharmacySearchPage extends UhcDriver {
 		}
 
 		if (driver.getTitle().equalsIgnoreCase(
-				"Locate a Pharmacy | UnitedHealthcare®")) {
+				PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE)) {
 			return new PharmacySearchPage(driver);
 		}
 		
@@ -394,7 +322,7 @@ public class PharmacySearchPage extends UhcDriver {
 		}
 
 		if (driver.getTitle().equalsIgnoreCase(
-				"Locate a Pharmacy | UnitedHealthcare®")) {
+				PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE)) {
 			return new PharmacySearchPage(driver);
 		}
 		return null;
@@ -567,7 +495,7 @@ public PharmacyResultPage ValidateShowOnMapResult() {
 		driver.manage().timeouts().implicitlyWait(300, TimeUnit.SECONDS);
 		showonmap.click();
 		if (driver.getTitle().equalsIgnoreCase(
-				"Member Claims")) {
+				PageTitleConstants.ULAYER_MEMBER_CLAIMS)) {
 			return new PharmacyResultPage(driver);
 		}
 		return null;

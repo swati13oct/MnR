@@ -1,8 +1,5 @@
 package pages.acquisition.bluelayer;
 
-import java.util.List;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -12,6 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.MRConstants;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.PageTitleConstants;
 
 public class PortfolioTeamCUhc extends UhcDriver {
 
@@ -59,7 +57,7 @@ public class PortfolioTeamCUhc extends UhcDriver {
 		 * System.out.println(countyActuals.get(i).getText());
 		 * countyActuals.get(i).click(); break; } }
 		 */
-		if (driver.getTitle().contains("Our Medicare Plan Types")) {
+		if (driver.getTitle().contains(PageTitleConstants.BLAYER_OUR_MEDICARE_PLAN_TYPES)) {
 			return new ResponsivePlanSummaryUhc(driver);
 		}
 		return null;

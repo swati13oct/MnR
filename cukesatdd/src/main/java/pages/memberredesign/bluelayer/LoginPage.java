@@ -10,17 +10,16 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import acceptancetests.deprecated.atdd.data.MRConstants;
+import pages.member.bluelayer.TerminatedHomePage;
+import acceptancetests.data.MRConstants;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.memberredesign.bluelayer.AccountHomePage;
-import pages.member.bluelayer.TerminatedHomePage;
 
 public class LoginPage extends UhcDriver {
 
 	private static String PAGE_URL_MEM_REDESIGN = MRConstants.REDESIGN_LOGIN_URL;
 
-	private static String PAGE_URL_TEST_HARNESS = MRConstants.UHCM_URL_TEAMB_TESTHARNESS;
+	
 	
 	private static String PAGE_URL_TEAM_H_TEST_HARNESS = MRConstants.TEAMH_URL_TESTHARNES;
 	

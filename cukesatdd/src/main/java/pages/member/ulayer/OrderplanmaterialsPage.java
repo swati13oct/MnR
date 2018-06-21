@@ -3,6 +3,8 @@
  */
 package pages.member.ulayer;
 
+import junit.framework.Assert;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,7 +13,6 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import junit.framework.Assert;
 
 /**
  * @author pperugu
@@ -75,9 +76,7 @@ public class OrderplanmaterialsPage extends UhcDriver {
 	@FindBy(className = "orderplanmaterials")
 	private WebElement OrderPlanMaterialsSection;
 	
-	//@FindBy(id = "shipDocumentStateCodeId")
-	@FindBy(id = "state")
-	private WebElement shipDocumentStateCodeId;
+
 
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;

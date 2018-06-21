@@ -1,5 +1,4 @@
 package pages.acquisition.dce.bluelayer;
-import java.util.List;
 import java.util.Map;
 
 import org.json.JSONException;
@@ -16,6 +15,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.PageTitleConstants;
 
 public class AddDrugDetails extends UhcDriver {
 
@@ -118,7 +118,7 @@ public class AddDrugDetails extends UhcDriver {
 		
 		waitforElement(continueButton);
 		continueButton.click();
-		if (driver.getTitle().equalsIgnoreCase("SAVINGS OPPORTUNITY")) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_SAVINGS_OPPORTUNITY)) {
 			return new SavingsOppurtunity(driver);
 		}
 		return null;

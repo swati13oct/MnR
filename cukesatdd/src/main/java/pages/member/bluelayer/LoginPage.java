@@ -12,13 +12,15 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import pages.acquisition.bluelayer.LoginAssistancePage;
+import pages.regression.accounthomepage.AccountHomePage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.LoginAssistancePage;
 
 /**
  * @author pagarwa5
@@ -52,8 +54,7 @@ public class LoginPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='accessURAccountBTN']")
 	private WebElement signInButton;
 	
-	@FindBy(xpath = "//*[@id='fd_signInPanel']/div[2]/div[4]/button")
-	private WebElement signInNewButton;
+
 	
 
 	@FindBy(linkText = "Forgot your username or password?")
@@ -303,11 +304,6 @@ System.out.println(signInButton.isEnabled());
 			return new TerminatedHomePage(driver);
 		}
 		return null;
-	}
-
-	private void While(boolean b) {
-		// TODO Auto-generated method stub
-		
 	}
 
 

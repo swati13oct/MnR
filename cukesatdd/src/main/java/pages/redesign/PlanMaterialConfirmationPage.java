@@ -3,21 +3,12 @@
  */
 package pages.redesign;
 
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageData;
-import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.redesign.OrderplanmaterialsPage;
 
 /**
  * @author sdwaraka
@@ -35,7 +26,7 @@ public class PlanMaterialConfirmationPage extends UhcDriver {
 	public PlanMaterialConfirmationPage(WebDriver driver){
 		super(driver);
 		PageFactory.initElements(driver, this);
-		String fileName = CommonConstants.ORDER_PLAN_MATERIALS_PAGE_DATA;
+		//String fileName = CommonConstants.ORDER_PLAN_MATERIALS_PAGE_DATA;
 //		planMaterials = CommonUtility.readPageData(fileName,
 //				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
 		openAndValidate();

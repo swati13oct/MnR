@@ -8,13 +8,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import pages.acquisition.ulayer.LoginAssistancePage;
+import pages.regression.accounthomepage.AccountHomePage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.acquisition.ulayer.LoginAssistancePage;
 
 public class TeamCLoginUlayer extends UhcDriver {
 
@@ -42,8 +43,7 @@ public class TeamCLoginUlayer extends UhcDriver {
 		@FindBy(id = "usercheckbox")
 		private WebElement userNameCheckBox;
 		
-		@FindBy(xpath = "html/body/div[2]/div/div/div/div/div/main/div/div/div/div/div/div/div/a")
-		private WebElement BackToSignInPage;
+
 
 		private PageData browserCheckData;
 

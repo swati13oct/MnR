@@ -3,7 +3,6 @@ package pages.member.ulayer;
 import java.util.List;
 import java.util.Map;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
@@ -11,12 +10,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
-import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageData;
-import acceptancetests.util.CommonUtility;
 import acceptancetests.memberredesign.claims.ClaimsCommonConstants;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -91,14 +88,6 @@ public class MedicalClaimSummaryPage extends UhcDriver {
 	@FindBy(className = "claimssection")
 	private WebElement claimsSection;
 
-	@FindBy(id = "searchResultMsg")
-	private WebElement searchResultMessage;
-
-	@FindBy(id = "customResultMsg")
-	private WebElement customResultMessage;
-
-	@FindBy(id = "noClaimsFoundMsg")
-	private WebElement noClaimsFoundMessage;
 
 	@FindBy(id = "radioDrug")
 	private WebElement radioDrug;
@@ -127,7 +116,7 @@ public class MedicalClaimSummaryPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='searchResultMsg']/p")
 	private WebElement searchResultMsg;
 
-	private PageData medicalClaimsSummary;
+	
 
 	public JSONObject medicalClaimsSummaryJson;
 
@@ -137,9 +126,7 @@ public class MedicalClaimSummaryPage extends UhcDriver {
 	/*	CommonUtility.waitForPageLoad(driver, searchResultMessage, CommonConstants.TIMEOUT_30);
 		CommonUtility.waitForPageLoad(driver, customResultMessage, CommonConstants.TIMEOUT_30);
 		CommonUtility.waitForPageLoad(driver, noClaimsFoundMessage, CommonConstants.TIMEOUT_30);*/
-		String fileName = CommonConstants.MEDICAL_CLAIMS_SUMMARY_PAGE_DATA;
-		medicalClaimsSummary = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
+		
 		//openAndValidate();
 	}
 

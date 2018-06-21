@@ -43,9 +43,6 @@ public class LongTermCarePage extends UhcDriver{
 	@FindBy(id = "ltc-date")
 	private WebElement longtermcaredate;
 	
-	@FindBy(id = "longtermcareprevious")
-	private WebElement longtermcareprevious;
-	
 	@FindBy(id = "longtermcaresaveandcont")
 	private WebElement longtermcaredsaveandcontinue;
 	

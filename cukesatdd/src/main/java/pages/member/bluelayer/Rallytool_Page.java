@@ -21,9 +21,6 @@ public class Rallytool_Page extends UhcDriver{
 	@FindBy(xpath="//tr[2]/td[1]/div/ul/li[3]/a")
 	private WebElement findDoctor;
 	
-	@FindBy(xpath="//*[text()='Find a Provider']")
-	private WebElement findProvider;
-	
 	public Rallytool_Page(WebDriver driver) {
 		super(driver);
 		// TODO Auto-generated constructor stub

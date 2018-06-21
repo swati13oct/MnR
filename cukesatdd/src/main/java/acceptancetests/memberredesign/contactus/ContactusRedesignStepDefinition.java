@@ -2,31 +2,23 @@ package acceptancetests.memberredesign.contactus;
 
 
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import gherkin.formatter.model.DataTableRow;
+
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
-import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.data.CommonConstants;
+import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.contactus.ContactUsPage;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
-import acceptancetests.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
-import pages.member.redesign.ContactUsPage;
-import pages.member.ulayer.AccountHomePage;
-import pages.member.ulayer.LoginPage;
 
 /**
  * 
@@ -48,18 +40,18 @@ public class ContactusRedesignStepDefinition {
 		
 		/**
 		 * 		@toDO : user login with the registered member
-		 */
+		 *//*
 		@Given("^registered UMS member with following attributes$")
 		public void registered_member_orderplanmaterials_ums(DataTable givenAttributes) throws InterruptedException {
 
-			/* Reading the given attribute from feature file */
+			 Reading the given attribute from feature file 
 			List<DataTableRow> memberAttributesRow = givenAttributes
 					.getGherkinRows();
 			for (int i = 0; i < memberAttributesRow.size(); i++) {
 
 				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
 			}
-			String planType = memberAttributesMap.get("Plan Type");
+			
 			Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
 			List<String> desiredAttributes = new ArrayList<String>();
 			for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator.hasNext();) {
@@ -99,7 +91,7 @@ public class ContactusRedesignStepDefinition {
 				getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
 				Assert.assertTrue(true);
 			}
-		}
+		}*/
 		
 		/**
 		 *  @toDO : the user navigate to the contact us page
@@ -266,6 +258,17 @@ public class ContactusRedesignStepDefinition {
 		/**
 		 * @toDO : the user validates request to call confirmation
 		 */
+		@And("^user clicks on cancel button on Request a call widget$")
+		public void user_clicks_on_cancel_button_on_Request_a_call_widget(DataTable givenAttributes)
+		{
+			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+			
+			contactusPage.reqACall_Cancel(givenAttributes);
+		}
+		
+		/**
+		 * @toDO : the user validates request to call confirmation
+		 */
 		@And("^user clicks on Request Confirmation Click$")
 		public void RequestcallConfimration_click(DataTable givenAttributes)
 		{
@@ -332,6 +335,15 @@ public class ContactusRedesignStepDefinition {
 			if(contactusPage != null)				
 				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
 						contactusPage);
+		}
+		
+		/***
+		 * 
+		 */
+		@Then("^user should only see the Technical Support and Plan Support components$")
+		public void user_should_only_see_the_Technical_Support_and_Plan_Support_components() {
+			ContactUsPage contactusPage = (ContactUsPage) getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+			contactusPage.validateWidgetsForTerminatedMembers();
 		}
 
 	}

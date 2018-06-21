@@ -1,13 +1,10 @@
 package pages.acquisition.bluelayer;
-import java.util.ArrayList;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import pages.acquisition.uhcretiree.Rallytool_Page;
-import pages.acquisition.ulayer.AcquisitionHomePage;
 import acceptancetests.data.MRConstants;
 import atdd.framework.UhcDriver;
 

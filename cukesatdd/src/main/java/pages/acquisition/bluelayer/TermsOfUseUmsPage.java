@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.PageTitleConstants;
 
 /**
  * @author saduri
@@ -36,7 +37,7 @@ public class TermsOfUseUmsPage extends UhcDriver{
 		validate(disclaimersLink);
 		disclaimersLink.click();
 		validate(disclaimersLink);
-		if(driver.getTitle().equalsIgnoreCase("Disclaimers | UnitedHealthcare®")){
+		if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_DISCLAIMERS)){
 			return new DisclaimersPage(driver);
 		}
 		return null;

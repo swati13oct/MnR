@@ -4,14 +4,12 @@
 package pages.acquisition.bluelayer;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
 import pages.acquisition.uhcretiree.Rallytool_Page;
@@ -31,11 +29,7 @@ public class SiteMapUMSPage extends UhcDriver{
 	
 	@FindBy(id = "medicareTitle")
 	private WebElement medicareTitle;
-	
-	@FindBy(id = "gf_lnk_4")
-	private WebElement privacyPolicyLink;
-	
-	//@FindBy(xpath = "/html/body/div[4]/div/table/tbody/tr[2]/td/table/tbody/tr[3]/td/div[1]/div/div/div/div[2]/div/ul/li[2]/ul/li[4]/a") 
+
 	@FindBy(id="PO7link")
 	private WebElement SearchforaProviderFacility ;
 	

@@ -1,10 +1,5 @@
 package pages.member.bluelayer;
 
-/*@sunya*/
-
-import java.util.List;
-import java.util.Map;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
@@ -21,8 +16,7 @@ import atdd.framework.UhcDriver;
 
 public class HealthAndWellnessPage extends UhcDriver {
 
-	@FindBy(xpath = "//a[contains(text(),'UnitedHealthcare MedicareComplete Choice (PPO)')]")
-	private WebElement uhcMedicareCompleteChoicePPO;
+	
 
 	@FindBy(xpath = ".//*[@id='hl-hw-banner']/a")
 	private WebElement healthAndWellnessBanner;

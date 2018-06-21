@@ -6,7 +6,7 @@ package pages.acquisition.bluelayer;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.acquisition.bluelayer.GlobalWebElements;
+import pages.acquisition.ulayer.PageTitleConstants;
 
 /**
  * @author rkodumur
@@ -31,7 +31,7 @@ public class MedicareSupplementPlansuhcPage extends GlobalWebElements{
 		validate(medicarePrescriptionDrug_PlansLink);
 		medicarePrescriptionDrug_PlansLink.click();
 		validate(medicarePrescriptionDrug_PlansLink);
-		if(driver.getTitle().equalsIgnoreCase("Medicare Prescription Drug Plans | UnitedHealthcare®")){
+		if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_PRESCRIPTION_DRUG_PLANS)){
 			return new MedicarePrescriptionDrugPlansuhcPage(driver);
 		}
 		return null;
@@ -42,7 +42,7 @@ public class MedicareSupplementPlansuhcPage extends GlobalWebElements{
 		validate(medicareSelectHosipitalDirectoryLink);
 		medicareSelectHosipitalDirectoryLink.click();
 		validate(medicareSelectHosipitalDirectoryLink);
-		if(driver.getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Medicare Select Hospital Directory")){
+		if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_SOLUTIONS)){
 			return new MedicareSelectHospitalDirectoryPage(driver);
 		}
 		return null;

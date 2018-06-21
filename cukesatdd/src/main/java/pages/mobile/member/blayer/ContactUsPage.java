@@ -3,7 +3,6 @@
  */
 package pages.mobile.member.blayer;
 
-import java.util.List;
 import java.util.Map;
 
 import org.json.JSONException;
@@ -30,68 +29,18 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;
 	
-	@FindBy(xpath="//*[@id='secureWidget']/div[1]")
-	private WebElement securewidget;
 	
-	@FindBy(xpath="//*[@id='message-btn']")
-	private WebElement getStartedButton;
-
 	@FindBy(xpath="//*[@id='question-cancel']")
 	private WebElement questionCancelLink;
 	
-	@FindBy(xpath="//*[@id='message-submit']/span")
-	private WebElement continueButton;
-	
-	
-	@FindBy(xpath="//*[@id='message-form']/fieldset/div[2]/div")
-	private WebElement useDifferentEmailRadioButton;
-	
-	@FindBy(xpath = "//*[@id='message-email']")
-	private WebElement newemailId;
-	
-	@FindBy(xpath = "//*[@id='message-email-confirm']") 
-	private WebElement confirmemailId;
-	
-	@FindBy(xpath = "//*[@id='message-form']/fieldset/div[1]/div/div/label")
-	private WebElement emailAddressonFile;
-		
-	@FindBy(xpath = "//*[@id='message-btn']")
-	private WebElement goToInboxButton;
-	
-	@FindBy(xpath = "//*[@id='confirmationWidget']/div")
-	private WebElement ConfirmationWidgetButton;
-	
-	@FindBy(xpath = "//*[@id='message-send']")
-	private WebElement sendAmessageButton;
-	
-	@FindBy(xpath = "//*[@id='messageModal']/div/div/div[1]")
-	private WebElement secureModel;
-	
-	@FindBy(xpath = "//*[@id='messageModal']/div/div/div[3]/button/span")
-	private WebElement secureModelContinueButton;
-	 
-	@FindBy(xpath = "//*[@id='messageModal']/div/div/div[3]/a")
-	private WebElement secureModelCancel;
 
-	@FindBy(xpath = " //*[@id='messageModal']/div/div/div[2]/div/div/div/ul/li[2]/p/a")
-	private WebElement prescriptionLink;
-	
-	
-	@FindBy(xpath = "/html/body/div[2]/div/div/div/div[4]/div/div/div[1]/div/div/div/div/div/div/div/div[1]/p[1]")
-	private WebElement haveUsCallYou;
 	
 	@FindBy(xpath = "//*[@id='call-btn']")
 	private WebElement sendArequest;
 	
 	@FindBy(xpath = "//*[@id='call-submit']/span")
 	private WebElement requestCall;;
-	
-	
-	@FindBy(xpath = "/*[@id='call-question-about'] ")
-	private WebElement contactoption;
-		
-	@FindBy(xpath = "//*[@id='call-question-about'] ")
-	private WebElement other;
+
 	
 	@FindBy(xpath = "//*[@id='call-cancel'] ")
 	private WebElement callCancel;
@@ -127,9 +76,7 @@ public class ContactUsPage extends UhcDriver{
 	
 	@FindBy(xpath="//*[@id='question-alt-phone-confirm']")	
 	private WebElement confirmAlternativePhneNumber;
-	
-	@FindBy(xpath="/html/body/div[2]/div/div/div/div[5]/div/div/div[2]/div/div[1]/div/div/div/div/div/div[2]/div[3]/div[1]")	
-	private WebElement conformationMessage;
+
 	
 	@FindBy(xpath="//*[@id='question-message']")
 	private WebElement questionMessage;
@@ -158,8 +105,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath="//div[not (contains(@class,'hidden')) and (@id='alt-phone-wrapper')]//div[2]//label[@id='message-email-error']")
 	private WebElement confirmPhneErrorMsg;
 	
-	@FindBy(css="div.field.ask-question-message.field-has-error div.field-input label#message-email-error.error")
-	private WebElement questionAboutEmailErrorMsg;
+
 	
 	
 	public ContactUsPage(WebDriver driver) {

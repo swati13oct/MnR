@@ -46,6 +46,12 @@ public class BeneficiaryInformationPage extends UhcDriver{
         @FindBy(id = "enrollment.medicareBeneficiary.medicareClaimNumber")
         private WebElement claimNumberField;
         
+    	@FindBy(id = "enrollment.medicareBeneficiary.medicareClaimNumber.errors")
+    	private WebElement MedicareIDErrorMsg;
+
+    	@FindBy(id = "longTermCareFacility")
+    	private WebElement NextStepPage;
+        
         @FindBy(id = "enrollment.medicareBeneficiary.partAEffectiveDate.strDate")
         private WebElement partAStartDateField;
         
@@ -189,7 +195,7 @@ public class BeneficiaryInformationPage extends UhcDriver{
 	        	String firstName = personalAttributesMap.get("First Name");
 	            String middleName = personalAttributesMap.get("Middle Initial");
 	            String lastName = personalAttributesMap.get("Last Name");
-	            String dob = personalAttributesMap.get("Birth Date").replaceAll("[/-]", "");
+	            String dob = personalAttributesMap.get("Birth Date").replaceAll("[/-]","");
 	            String gender = personalAttributesMap.get("Gender");
 	            String medicareClaimNumber = personalAttributesMap.get("Medicare Claim Number").replaceAll("-", "");
                 String partAStartDate = personalAttributesMap.get("Hospital (Part A) Effective Date").replaceAll("[/-]", "");
@@ -250,5 +256,51 @@ public class BeneficiaryInformationPage extends UhcDriver{
                 return null;
 
         }
+        
+		public boolean ValidateMedicareIDformat(boolean MedicareValidFlag) {
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            enrollmentNext.click();
+
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}			
+			System.out.println("Medicare ID provided : "+claimNumberField.getText()+" ; is Valid Format"+MedicareValidFlag);
+			boolean MedicareErrorDisplayed = validate(MedicareIDErrorMsg)?true:false;
+			boolean NextStepPageDisplayed = validate(NextStepPage)?true:false;
+			if(MedicareErrorDisplayed){
+				if(MedicareValidFlag ==false){
+					System.out.println("Error Message Displayed for InCorrect Medicare ID Format");
+					return true;
+				}
+				else if(MedicareValidFlag ==true){
+					System.out.println("Error Message Displayed for Correct Medicare ID Format");
+					return false;
+				}
+				else{
+					System.out.println("Please provide true/false for Medicare ID format provided is Valid"+MedicareValidFlag);
+					return false;
+				}
+			}
+			else if(!MedicareErrorDisplayed &&  NextStepPageDisplayed){
+				if(MedicareValidFlag ==true){
+					System.out.println("Error Message is NOT Displayed for Correct Medicare ID Format; Step 2 Page Displayed");
+					return true;
+				}
+				else{
+					System.out.println("Please provide true/false for Medicare ID format provided is Valid"+MedicareValidFlag);
+					return false;
+				}
+			}
+			return false;
+		
+		}
 
 }

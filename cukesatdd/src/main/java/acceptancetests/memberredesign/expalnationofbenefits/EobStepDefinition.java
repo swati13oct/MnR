@@ -1,5 +1,7 @@
 package acceptancetests.memberredesign.expalnationofbenefits;
 
+import gherkin.formatter.model.DataTableRow;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -12,19 +14,20 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.regression.explanationofbenefits.EOBPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
+import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
-import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
-import pages.dashboard.eob.EOBPage;
- 
+//import gherkin.formatter.model.DataTableRow;
+import pages.regression.accounthomepage.AccountHomePage;
+//import pages.regression.explanationofbenefits.EOBPage;
+
 public class EobStepDefinition {
 	@Autowired
 	MRScenario loginScenario;
@@ -34,11 +37,12 @@ public class EobStepDefinition {
 	}
 	
 	/**
-	*@toDo: get the required parameters from the feature files
+	*@throws InterruptedException 
+	 * @toDo: get the required parameters from the feature files
 	*/
 	
 	@Given("^registered AMP with for EOB flow$")
-	public void registered_AMP_with_attribute_eob_aarp(DataTable memberAttributes){
+	public void registered_AMP_with_attribute_eob_aarp(DataTable memberAttributes) throws InterruptedException{
 		//get the required parameters from the feature files
 				WebDriver wd = getLoginScenario().getWebDriver();
 				getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -92,6 +96,7 @@ public class EobStepDefinition {
 		        }
 
 	}
+	
 	
 	/**
 	*@toDo: get the required parameters from the feature files 
@@ -320,7 +325,34 @@ public class EobStepDefinition {
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
 		eobPage.validateEOBStatements(eobCount);
 	}
+
+	@And("^the user clicks on first eob from the list$")
+	public void the_user_clicks_on_first_eob_from_the_list() throws InterruptedException {
+		
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
 	
+		eobPage.clickOnEob();
+	}
+
+    @Then("^the user navigates to EOB page_hsid$")
+    public void user_views_EOBpagehsid() throws InterruptedException {                  
+                    AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+                    //AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
+                    pages.regression.explanationofbenefits.EOBPage eobPage = accountHomePage.navigateDirectToEOBPag();
+                                                                    
+                    //PaymentHistoryPage paymenthistory = PaymentHis
+                    
+                    
+                    
+if (eobPage!=null){
+                      getLoginScenario().saveBean(PageConstants.EOB_Page, eobPage);
+                                    System.out.println("user is on the EOB page"); 
+}        
+
+    }
+
+
+
 	/*@After
 	public void tearDown() {
 

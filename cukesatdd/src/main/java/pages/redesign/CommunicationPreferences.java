@@ -1,7 +1,6 @@
 package pages.redesign;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -10,8 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
-import pages.member.redesign.PreferencesPage;
+
 import acceptancetests.data.MRConstants;
 import atdd.framework.UhcDriver;
 
@@ -23,8 +21,7 @@ public class CommunicationPreferences extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='IPEinvL']/map/area[2]")
 	private WebElement iPerceptionPopUp;
 
-	@FindBy(xpath = "(//div[contains(@class,'preferences-wrapper')]/div[@class='ng-scope'])[1]/div[4]/fieldset/div[1]/div/label")
-	private WebElement PaperlessPrefRadioButtons;
+	
 
 	@FindBy(xpath = ".//*[@id='save-prefs-btn']")
 	private WebElement SavePreferences;

@@ -4,7 +4,8 @@
 package pages.redesign;
 
 import java.util.NoSuchElementException;
-import java.util.concurrent.TimeUnit;
+
+import junit.framework.Assert;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -15,7 +16,6 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import junit.framework.Assert;
 
 /**
  * @author sdwaraka
@@ -81,11 +81,7 @@ public class OrderplanmaterialsPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id = 'coi-id']/..")
 	private WebElement certificateInsurance;
 	
-	@FindBy(xpath = "//label[@for='member-materials']")
-	private WebElement radiokitLink;
 	
-	@FindBy(xpath = "//p[contains(text(),'Replacement ID card')]")
-	private WebElement radioidLink;
 
 	@FindBy(xpath="//h3[contains(text(),'Technical Support') or contains(text(),'Plan Support')]/ancestor::div[@class='col-md-4']")
 	private WebElement needhelpcomponent;
@@ -107,9 +103,6 @@ public class OrderplanmaterialsPage extends UhcDriver {
 	@FindBy(className = "orderplanmaterials")
 	private WebElement OrderPlanMaterialsSection;
 	
-	//@FindBy(id = "shipDocumentStateCodeId")
-	@FindBy(id = "state")
-	private WebElement shipDocumentStateCodeId;
 
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;
@@ -268,7 +261,7 @@ public class OrderplanmaterialsPage extends UhcDriver {
 		Thread.sleep(3000);
 		if (validate(OrderMaterialsErrorMsg)){
 			System.out.println("*************Error Message Displayed displayed for Order materials Page***************");
-			System.out.println("*************Error Message : "+OrderMaterialsErrorMsg.getText()+" ***************");
+			System.err.println("*************Error Message : "+OrderMaterialsErrorMsg.getText()+" ***************");
 			return true;
 		}
 		else{ 

@@ -3,24 +3,18 @@
  */
 package pages.redesign;
 
-import java.util.concurrent.TimeUnit;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.Alert;
-import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-//import pages.acquisition.ulayer.LoginAssistancePage;
-import pages.redesign.UlayerHomePage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
-import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 /**
@@ -44,11 +38,7 @@ public class UlayerLoginPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='fd_userPassSection']/button")
 	private WebElement signInButton;
 
-	@FindBy(linkText = "Forgot your username or password?")
-	private WebElement forgotUsernamePasswordLink;
-
-	@FindBy(id = "usercheckbox")
-	private WebElement userNameCheckBox;
+	
 
 	private PageData browserCheckData;
 

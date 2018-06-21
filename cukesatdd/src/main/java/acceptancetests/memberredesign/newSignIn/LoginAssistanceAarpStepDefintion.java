@@ -4,16 +4,7 @@
 package acceptancetests.memberredesign.newSignIn;
 
 import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.ulayer.LoginAssistancePage;
-import pages.acquisition.ulayer.LoginAssitanceMessagePage;
-import pages.acquisition.ulayer.PersonalIdentificationPage;
-import pages.member.ulayer.LoginAssistanceConfirmationJava;
-import pages.member.ulayer.LoginPage;
-import pages.member.ulayer.PersonalIdentificationPageNew;
-import pages.member.ulayer.PersonalIdentityUlayerPage;
-import pages.member.ulayer.UNPWAssistancePage;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -21,19 +12,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
-import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.acquisition.ulayer.LoginAssitanceMessagePage;
+import pages.acquisition.ulayer.PersonalIdentificationPage;
+import pages.member.ulayer.LoginAssistanceConfirmationJava;
+import pages.member.ulayer.LoginPage;
+import pages.member.ulayer.PersonalIdentificationPageNew;
+import pages.member.ulayer.PersonalIdentityUlayerPage;
+import pages.member.ulayer.UNPWAssistancePage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
-import acceptancetests.memberredesign.newSignIn.LoginAssistanceCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
-import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -141,7 +134,7 @@ public class LoginAssistanceAarpStepDefintion {
 
 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		LoginPage loginPage = new LoginPage(wd);
+		
 		LoginAssistanceConfirmationJava LoginAssistance = new LoginAssistanceConfirmationJava(
 				wd);
 		Thread.sleep(2000);
@@ -318,8 +311,7 @@ public class LoginAssistanceAarpStepDefintion {
 
 	@Then("^the user validates the successfully mail sent message in AARP site$")
 	public void user_validates_successfully_mail_sent_message_aarp() {
-		LoginAssitanceMessagePage loginAssitanceMessagePage = (LoginAssitanceMessagePage) getLoginScenario()
-				.getBean(PageConstants.LOGIN_ASSISTANCE_MESSAGE_PAGE);
+		
 		/*JSONObject loginAssistanceMessageActual = loginAssitanceMessagePage.loginAssistanceMessageJson;
 
 		 Get expected data 
@@ -368,7 +360,7 @@ public class LoginAssistanceAarpStepDefintion {
 			throws InterruptedException {
 		LoginAssitanceMessagePage loginAssitanceMessagePage = (LoginAssitanceMessagePage) getLoginScenario()
 				.getBean(PageConstants.LOGIN_ASSISTANCE_MESSAGE_PAGE);
-		LoginAssitanceMessagePage loginErrorMessages = loginAssitanceMessagePage
+		loginAssitanceMessagePage
 				.ErrorMessageValidation();
 		if (loginAssitanceMessagePage != null) {
 			getLoginScenario().saveBean(PageConstants.Error_Message,

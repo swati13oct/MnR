@@ -13,9 +13,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import pages.member.ulayer.PlanMaterialConfirmationPage;
-import acceptancetests.data.CommonConstants;
-import acceptancetests.util.CommonUtility;
 import acceptancetests.data.LoginCommonConstants;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -36,8 +35,7 @@ public class OrderplanmaterialsPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='orderplanconttext']/h3")
 	private WebElement planMaterialHeading;
 
-	@FindBy(id = "shipDocumentStateCodeId")
-	private WebElement shipDocumentStateCodeId;
+
 
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;

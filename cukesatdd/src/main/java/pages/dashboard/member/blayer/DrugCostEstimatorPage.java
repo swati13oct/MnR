@@ -12,11 +12,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
-import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 public class DrugCostEstimatorPage extends UhcDriver{
 
@@ -24,10 +22,7 @@ public class DrugCostEstimatorPage extends UhcDriver{
 		super(driver);
 		PageFactory.initElements(driver, this);
 	//	CommonUtility.waitForPageLoad(driver, SaveDrugPage, 10);
-		String fileName = CommonConstants.SAVE_DRUG_PAGE_DATA;
-		//savedrugpage = CommonUtility.readPageData(fileName,
-			//	CommonConstants.PAGE_OBJECT_DIRECTORY_BLAYER_MEMBER);
-		//openAndValidate();
+		
 	}
 	private PageData savedrugpage;
 

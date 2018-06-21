@@ -1,5 +1,7 @@
 package acceptancetests.memberredesign.myProfileAndPreferences;
 
+import gherkin.formatter.model.DataTableRow;
+
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,25 +10,15 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.member.redesign.NewLoginPage;
+import pages.redesign.CommunicationPreferences;
 import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
-import pages.member.redesign.DeregisterPage;
-import pages.member.redesign.GoGreenSplashPage;
-import pages.member.redesign.NewLoginPage;
-import pages.member.redesign.NewRegistrationPage;
-import pages.member.redesign.PreferencesPage;
-import pages.member.redesign.RegistrationConfirmationPage;
-import pages.member.redesign.TestHarnessPage;
-import pages.member.ulayer.RallyDashboard;
-import pages.member.ulayer.UNPWAssistancePage;
-import pages.redesign.CommunicationPreferences;
 
 public class MyprofileandPreferencesRedesignStepDefinition {
 	/**
@@ -63,11 +55,11 @@ public class MyprofileandPreferencesRedesignStepDefinition {
 
 		NewLoginPage loginPage = new NewLoginPage(wd);
 		CommunicationPreferences compp = new CommunicationPreferences(wd);
-		CommunicationPreferences compp1 = new CommunicationPreferences(wd);
+		//CommunicationPreferences compp1 = new CommunicationPreferences(wd);
 		/*compp1 = (CommunicationPreferences) loginPage.loginWith(userName,
 				passWord);*/
 		
-		RallyDashboard rallyDashboardPAge = (RallyDashboard) loginPage.loginWith(userName, passWord);
+		 loginPage.loginWith(userName, passWord);
 
 		if (compp != null) {
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);

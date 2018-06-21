@@ -2,32 +2,16 @@
  * 
  */
 package pages.redesign;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.member.bluelayer.PharmacySearchPage;
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.ElementData;
-import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import cucumber.api.DataTable;
-import gherkin.formatter.model.DataTableRow;
 
 /**
  * @author sdwaraka
@@ -44,15 +28,12 @@ public class EoBSearchPage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(), '(Terminated)')]")
 	private List<WebElement> TerminatedTabs;
 
-	private PageData planBenefitsCoverage;
 
 	
 	public EoBSearchPage(WebDriver driver) throws InterruptedException {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		String fileName = CommonConstants.MEDICAL_EOB_PAGE_DATA;
-		planBenefitsCoverage = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
+		
 		Thread.sleep(5000);
 		CommonUtility.checkPageIsReady(driver);
 		try{
@@ -104,6 +85,5 @@ public class EoBSearchPage extends UhcDriver {
 		}
 		return false;
 	}
-
 
 }

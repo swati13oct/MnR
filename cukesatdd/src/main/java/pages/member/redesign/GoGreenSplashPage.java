@@ -3,25 +3,13 @@
  */
 package pages.member.redesign;
 
-import java.util.List;
-import java.util.Map;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.MRConstants;
-import acceptancetests.data.PageData;
-import acceptancetests.util.CommonUtility;
-import acceptancetests.data.LoginCommonConstants;
-import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 /**@author bnaveen4
@@ -30,8 +18,7 @@ import atdd.framework.UhcDriver;
  */
 public class GoGreenSplashPage extends UhcDriver{
 
-	@FindBy(id = "disclosure_link")
-	private WebElement logOut;
+	
 	
 	@FindBy(id="save-prefs-btn")
 	private WebElement btnSavePreferences;
@@ -44,9 +31,7 @@ public class GoGreenSplashPage extends UhcDriver{
 	
 	@FindBy(xpath="//div[@class='message-block--full-width success margin-large']/div[1]/span")
 	private WebElement successMessageHeading;
-	
-	@FindBy(xpath="//div[@class='message-block--full-width success margin-large']/div[2]/p[2]")
-	private WebElement confirmationMessageText;
+
 	
 	@FindBy(id="goPaperless")
 	private WebElement mustAgreeTerms;
@@ -63,8 +48,6 @@ public class GoGreenSplashPage extends UhcDriver{
 	@FindBy(xpath="//a[@title='Back to My Profile']/p")
 	private WebElement btnGoToMyAccount;
 	
-	@FindBy(xpath="//h2[@class='h3 medium margin-small']/p")
-	private WebElement goGreenHeading;
 	
 	public GoGreenSplashPage(WebDriver driver) {
 		super(driver);

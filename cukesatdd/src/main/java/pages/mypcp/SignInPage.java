@@ -12,8 +12,7 @@ public class SignInPage extends GlobalWebElements {
 	
 	private static String MY_PCP_PAGE_URL = MRConstants.PCP_PAGE_URL;	
 	
-	@FindBy(linkText = "About Us")
-	private WebElement aboutUsLink;
+
 	
 	@FindBy(xpath = "//a[contains(.,'Access Your Account')]")
 	private WebElement accessYourAccountLink;
@@ -21,8 +20,7 @@ public class SignInPage extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='accessURAccountBTN']/span")
 	private WebElement signInButton;
 	
-	@FindBy(xpath = "//span[contains(.,'register now')]")
-	private WebElement registerNow;
+	
 
 	public SignInPage(WebDriver driver) {
 		super(driver);
@@ -50,7 +48,7 @@ public class SignInPage extends GlobalWebElements {
 	public RegistrationHomePage RegistrationHomePage(){
 		registerNow.click();
 		if(driver.getTitle().equalsIgnoreCase(
-				"UnitedHealthcare Medicare Solutions | Registration")){
+				PageTitleConstants.BLAYER_MEDICARE_SOLUTIONS_REGISTRATION)){
 			return new RegistrationHomePage(driver);
 		}
 		return null;

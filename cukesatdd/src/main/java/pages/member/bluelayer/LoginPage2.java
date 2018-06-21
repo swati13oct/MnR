@@ -3,23 +3,16 @@
  */
 package pages.member.bluelayer;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.UnsupportedCommandException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.acquisition.ulayer.LoginAssistancePage;
-import acceptancetests.data.CommonConstants;
+import pages.regression.accounthomepage.AccountHomePage;
 import acceptancetests.data.MRConstants;
-import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
@@ -30,13 +23,9 @@ import atdd.framework.UhcDriver;
  */
 public class LoginPage2 extends UhcDriver {
 
-	// Page URL
-	private static String PAGE_URL = MRConstants.BNCBURL;
-
-	private static String PAGE_URL2 = MRConstants.DASHBOARD_URL;
-
-	@FindBy(id = "fd_memberSignInButton")
-	private WebElement loginIn;
+	private static String PAGE_URL_TEAM_MEDICARE_TESTHARNESS = MRConstants.TEAM_MEDICARE_TESTHARNESS;
+	
+	private static String STAGE_DASHBOARD_URL = MRConstants.STAGE_DASHBOARD_NEW_DOMAIN_URL;
 
 	@FindBy(id = "username")
 	private WebElement userNameField;
@@ -56,6 +45,16 @@ public class LoginPage2 extends UhcDriver {
 
 	@FindBy(id = "accessURAccountBTN")
 	private WebElement Signin;
+	
+	@FindBy(id = "hsid-username")
+	private WebElement hsiduserNameField;
+
+	@FindBy(id = "hsid-password")
+	private WebElement hsidpasswordField;
+	
+	@FindBy(id = "hsid-submit")
+	private WebElement signInHsidButton;
+	
 
 	public LoginPage2(WebDriver driver) {
 		super(driver);
@@ -190,11 +189,57 @@ public class LoginPage2 extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		System.out.println("Entering page" + PAGE_URL2);
-		start(PAGE_URL2);
-
+		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage"))
+		{
+			start(STAGE_DASHBOARD_URL);
+			
+		}
+		else if (MRScenario.environment.equalsIgnoreCase("team-ci1")) {
+			
+			start(MRConstants.REDESIGN_LOGIN_URL);
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println(driver.getCurrentUrl());
+			System.out.println("user is on Team-Ci1 Environment");
+		}
+		else
+			
+		{
+			start(PAGE_URL_TEAM_MEDICARE_TESTHARNESS);
+			System.out.println("User is on Medicare Test harness page");	
+		}
 		// validate(loginIn);
 
+	}
+	
+	public void navigateToNewDashboardUrl(){
+		if (MRScenario.environment.equalsIgnoreCase("stage"))
+		{
+			start(STAGE_DASHBOARD_URL);
+			System.out.println("User is Navigating to Stage Dashboard");
+		}
+		else if (MRScenario.environment.equalsIgnoreCase("team-ci1")) {
+			
+			start(MRConstants.REDESIGN_LOGIN_URL);
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println(driver.getCurrentUrl());
+			System.out.println("user is on Team-Ci1 Environment");
+		}
+		else
+			
+		{
+			start(PAGE_URL_TEAM_MEDICARE_TESTHARNESS);
+			System.out.println("User is on Medicare Test harness page");	
+		}
 	}
 
 	public static boolean isAlertPresent(WebDriver wd) {
@@ -256,6 +301,90 @@ public class LoginPage2 extends UhcDriver {
 		else if (currentUrl().contains("terminated-plan.html")) {
 			return new TerminatedHomePage(driver);
 		}
+		return null;
+	}
+	
+	public Object doLoginWith(String username, String password) {
+
+        System.out.println(driver.getCurrentUrl());
+		sendkeys(userNameField, username);
+		sendkeys(passwordField, password);
+		signInButton.click();
+		
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if ( MRScenario.environmentMedicare.equals("team-e") || MRScenario.environmentMedicare.equals("team-ci1")){
+
+			Alert alert = driver.switchTo().alert();
+			alert.accept();
+		} 
+		
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(currentUrl().contains("testharness.html") || currentUrl().contains("/dashboard"))
+        {
+			System.out.println("test");
+			System.out.println(driver.getCurrentUrl());
+			
+			
+			return new AccountHomePage(driver);
+		}
+		else if(currentUrl().contains("home/my-account-home.html")  || currentUrl().contains("/login.html") ) {
+			return new AccountHomePage(driver);
+		}
+		else if (currentUrl().contains("terminated-plan.html")) {
+			return new TerminatedHomePage(driver);
+		}
+
+		System.out.println("teamhloginWith is returing null. Please Update the above condition As per your Needs");
+
+		return null;
+	}
+
+	public Object doLoginWithHsid(String username, String password) {
+
+	    System.out.println("Driver url"+driver.getCurrentUrl());
+		sendkeys(hsiduserNameField, username);
+		sendkeys(hsidpasswordField, password);
+		signInHsidButton.click();
+		
+		try {
+			Thread.sleep(50000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(currentUrl().contains("testharness.html") || currentUrl().contains("/dashboard"))
+	    {
+			
+			System.out.println(driver.getCurrentUrl());
+			try {
+				Thread.sleep(30000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println(driver.getCurrentUrl());
+			return new AccountHomePage(driver);
+		}
+		else if(currentUrl().contains("healthsafe-id.com")  || currentUrl().contains("securityQuestion") ) {
+			return new AccountHomePage(driver);
+		}
+		else if (currentUrl().contains("terminated-plan.html")) {
+			return new TerminatedHomePage(driver);
+		}
+
+		System.out.println("Please Update the above condition As per your Needs");
+
 		return null;
 	}
 

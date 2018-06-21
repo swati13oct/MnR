@@ -6,21 +6,18 @@ package pages.member.bluelayer;
 import java.util.List;
 import java.util.Map;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import pages.member.bluelayer.AddPlanPopUpPage;
+
 import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageData;
-import acceptancetests.util.CommonUtility;
 import acceptancetests.data.LoginCommonConstants;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -48,10 +45,6 @@ public class PlanSummaryPage extends UhcDriver {
 	//private WebElement searchDrugClaimsBtn;
 	
 	
-	
-	@FindBy(id = "btn_viewclaims1")
-	private WebElement searchDrugClaimsBtn;
-	
 	@FindBy(id = "btn_searchallclaims1")
 	private WebElement searchAllClaimsBtn;
 
@@ -64,11 +57,6 @@ public class PlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//div[@id='main_content']//h3[contains(.,'Claim Activity')]")
 	private WebElement claimSectionHeading;
 	
-	@FindBy(xpath = "/html/body/div[6]/div/div/table/tbody/tr[5]/td/div[2]/div/div[2]/div[2]/div[2]/div/div[160]/div[2]/div[1]/div[2]/div/div[3]/div[2]/div[2]/div/div/p/a")
-	private WebElement viewdetailbutton;
-	
-	@FindBy(xpath=".//*[contains(text(),'search providers')]")
-	private WebElement searchProvider;
 
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;
@@ -79,31 +67,26 @@ public class PlanSummaryPage extends UhcDriver {
 	@FindBy(id = "plan_box")
 	private WebElement claimsPlanBox;
 	
-	private PageData planSummary;
+	
 
 	public JSONObject planSummaryJson;
 
 	public PlanSummaryPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		String fileName = CommonConstants.PLAN_SUMMARY_PAGE_DATA;
 
 		//CommonUtility.waitForPageLoad(driver, planInformationHeading,CommonConstants.TIMEOUT_30);
 		//CommonUtility.waitForPageLoad(driver, claimSectionHeading,CommonConstants.TIMEOUT_30);
-
-		planSummary = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);
 		openAndValidate();
 	}
 
 	public PlanSummaryPage(WebDriver driver, String category) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		String fileName = CommonConstants.PLAN_SUMMARY_PAGE_DATA;
+		
 		CommonUtility.waitForPageLoad(driver, planInformationHeading,10);
 		CommonUtility.waitForPageLoad(driver, claimSectionHeading,10);
-		planSummary = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);
+		
 		openAndValidate();
 	}
 

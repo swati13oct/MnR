@@ -12,7 +12,6 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
-import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 
@@ -21,8 +20,7 @@ public class TeamHLoginUlayer extends UhcDriver{
 	
 	private static String PAGE_URL = MRConstants.TeamH_ULayer_Member_URL;
 	
-	@FindBy(id = "fd_memberSignInButton")
-	private WebElement loginIn;
+	
 
 	@FindBy(id = "username")
 	private WebElement userNameField;

@@ -8,8 +8,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.acquisition.bluelayer.AcquisitionHomePage;
 import acceptancetests.util.CommonUtility;
+import pages.acquisition.ulayer.PageTitleConstants;
 
 /**
  * @author pperugu
@@ -19,14 +19,14 @@ public class SearchResultsPage {
 	
 	
 
-	@FindBy(linkText = "Medicare Plans for Different Needs | UnitedHealthcare®")                          
+	@FindBy(linkText = PageTitleConstants.BLAYER_MEDICARE_PLANS_FOR_DIFFERENT_NEEDS)                          
 	private WebElement umsPageLinkGoogle;
 			
 	@FindBy(xpath = "//div[@class='dd algo qrd0s68 fst Sr']/div/h3/a")                          
 	private WebElement umsPageLinkYahoo;
 	
 //	@FindBy(id = "//a[@h='ID=SERP,5134.1']")
-	@FindBy(linkText = "Medicare Plans for Different Needs | UnitedHealthcare®")        
+	@FindBy(linkText = PageTitleConstants.BLAYER_MEDICARE_PLANS_FOR_DIFFERENT_NEEDS)        
 	private WebElement umsPageLinkBing;
 	
 	
@@ -55,7 +55,7 @@ public class SearchResultsPage {
 		}
 		
 		CommonUtility.checkPageIsReady(driver);
-		if(driver.getTitle().equalsIgnoreCase("Medicare Plans for Different Needs | UnitedHealthcare®"))
+		if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_PLANS_FOR_DIFFERENT_NEEDS))
 		{
 		       return new AcquisitionHomePage(driver);
 		}

@@ -78,7 +78,7 @@ public class RegistrationHomePage extends UhcDriver{
 		}
 
 		if (driver.getTitle().equalsIgnoreCase(
-				"AARP Medicare Plans | Registration"))
+				PageTitleConstants.ULAYER_AARP_MEDICARE_PLANS))
 			return new PlanConfirmationPage(driver);
 		else
 			return null;
@@ -102,7 +102,7 @@ public class RegistrationHomePage extends UhcDriver{
 	
 	public RegistrationAARPErrorPage navigateToErrorPage() {		
 		if (driver.getTitle().equalsIgnoreCase(
-				"AARP Medicare Plans | Registration")) {
+				PageTitleConstants.ULAYER_AARP_MEDICARE_PLANS)) {
 			return new RegistrationAARPErrorPage(driver);
 		}
 		return null;

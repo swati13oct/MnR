@@ -1,5 +1,5 @@
 @gladiators
-@existingMemberErrorPage
+@negativeErrors
 Feature: G1.5To test Start Over link present on existing member error page
 
 @existinMemberError
@@ -12,13 +12,13 @@ Scenario Outline: To verify already existing member error message page
       | Date of birth | <dateOfBirth> |
     When member click Next
     Then the member validate existing member error message
-    When member click on start over link on existing member page
+    When member click on start over link on  existing member page
     Then the member navigate to the personal Information page
     And no previously information is retained
 
     Examples: 
       | planMemberId | dateOfBirth |
-      | 914429086    | 08-28-1927  |
+      | 004606801-1    | 05-28-1947  |
 
 @navigationToPasswordHelpPage
   Scenario Outline: To verify member is navigated to the username and password help page from existing member error page
@@ -35,7 +35,7 @@ Scenario Outline: To verify already existing member error message page
 
     Examples: 
       | planMemberId | dateOfBirth |
-      | 914429086    | 08-28-1927  |
+      | 004606801-1    | 05-28-1947  |
 
 @navigationToSignInPage
   Scenario Outline: To verify member is navigated to the sign In page from existing member error page
@@ -52,7 +52,7 @@ Scenario Outline: To verify already existing member error message page
 
     Examples: 
       | planMemberId | dateOfBirth |
-      | 914429086    | 08-28-1927  |
+      | 004606801-1    | 05-28-1947  |
 
   @futureEffectivePlanError
   Scenario Outline: To verify future effective member error message page

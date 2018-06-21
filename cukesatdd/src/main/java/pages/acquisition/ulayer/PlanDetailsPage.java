@@ -10,18 +10,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
+import pages.acquisition.ole.WelcomePage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.ulayer.DrugCostEstimatorPage;
 
 /**
  * @author gumeshna
@@ -32,14 +31,8 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(id = "planDetailsPage")
 	private WebElement plandetails;
 
-	@FindBy(id = "learnmorebtnDetails")
-	private WebElement waysToSaveLink;
-
 	@FindBy(xpath=".//*[@id='highlights']/div/a")
 	private WebElement enrollInPlanBtn;
-
-	@FindBy(xpath = "//*[@id='detailplanNameBox']/div/div/div/span/h3")
-	private WebElement planName;
 
 	@FindBy(xpath = "//*[@id='yourDruglist']/div[1]/p[4]")
 	private WebElement errorMessage;
@@ -62,10 +55,6 @@ public class PlanDetailsPage extends UhcDriver {
 	
 	@FindBy(xpath = ".//*[@id='highlights']/div/div/span[2]/span")
 	private WebElement compareMessageBox;
-
-
-       @FindBy(id = "yourDceInitial")
-	private WebElement enterDrugInfoLink;
 	
 	    @FindBy(xpath = "//*[@id='yourDruglist']/div[2]/table/tbody/tr[3]/td/span[2]")
     private WebElement drugListCost;
@@ -81,9 +70,6 @@ public class PlanDetailsPage extends UhcDriver {
 	
 	@FindBy(xpath="//*[@id='detail-0']/div/div/div[1]")
 	private WebElement medBenefitsSection;
-	
-	@FindBy(xpath="//*[@id='detail-0']/div/div/div[2]")
-	private WebElement addBenefitsSection;
 
 	@FindBy(id = "prescriptiondrug")
     private WebElement presDrugTab;
@@ -91,30 +77,33 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(xpath=".//*[@id='drugBenefits']")
 	private WebElement drugBenefitsSection;
 	
-	@FindBy(xpath=".//*[@id='DrugListDetails']")
-	private WebElement drugListEditBtn;
-	
 	@FindBy(id = "estimateYourDrugsLink")
 	private WebElement estimateDrugBtn;
-	
-	@FindBy(xpath="//*[@id='detailTabs']/div[1]/a[1]")
-	private WebElement optRidersTab;
-	
-	@FindBy(xpath=".//*[@id='optionalRiders']")
-	private WebElement optRiderSection;
 	
 	@FindBy(id="plancosts")
 	private WebElement planCostsTab;
 	
-	@FindBy(id="planCosts")
-	private WebElement planCostsSection;
-	
-	private PageData vppPlanDetails;
+	//Right Rail Element - TFN
+	@FindBy(xpath="//*[@class='tel ng-binding']")
+	private WebElement RightRail_TFN;
 
+	@FindBy(xpath="//a[contains(text(), 'Enroll in plan')]")
+	private WebElement EnrollinPlan;
+
+	@FindBy(xpath="//*[@id='medicalBenefits']/div[1]/table/tbody/tr[1]/td[4]/strong")
+	private WebElement PremiumForPlan;
+	
+	
 	public JSONObject vppPlanDetailsJson;
 	
 	@FindBy(xpath="//*[@id='bf3dfe9a-aba6-449b-865c-b5628cb03a60']/a[6]")
 	private WebElement pdfLink;
+	
+	@FindBy(xpath="//div[@class='content-section plan-details-content mb-content ng-scope']/div[1]//a[@class='back-to-plans backtoplans-plandetail ng-scope']")
+	private WebElement topbackToPlanslink;
+	
+	@FindBy(xpath="//div[@class='content-section plan-details-content mb-content ng-scope']/div[2]//a[@class='back-to-plans backtoplans-plandetail ng-scope']")
+	private WebElement downbackToPlanslink;
 	
 	private PageData planDocsPDF;
 	
@@ -148,7 +137,7 @@ public class PlanDetailsPage extends UhcDriver {
 	{
 		enrollInPlanBtn.click();
 		System.out.println(driver.getTitle());
-		if (driver.getTitle().equalsIgnoreCase("AARP Medicare Complete Online Application") || driver.getTitle().equalsIgnoreCase("AARP Medicarerx Online Application")|| driver.getTitle().equalsIgnoreCase("Enrollment Information"))
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_AARP_MEDICARE_COMLETE_ONLINE_APP) || driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_AARP_MEDICARERX_ONLINE_APPLICATION)|| driver.getTitle().equalsIgnoreCase("Enrollment Information"))
 		{
 			System.out.println("in if");
 			return new PlanInformationPage(driver, planName);
@@ -293,7 +282,9 @@ public class PlanDetailsPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		presDrugTab.click();
-		estimateDrugBtn.click();
+		CommonUtility.waitForPageLoad(driver, estimateDrugBtn, 20);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", estimateDrugBtn);
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", estimateDrugBtn);
 		try {
 			Thread.sleep(4000);
 		} catch (InterruptedException e) {
@@ -316,13 +307,122 @@ public class PlanDetailsPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(compareMessageBox.getText().contains("2 plans added") && compareMessageBox.getText().contains("Compare plans") )
+		if(compareMessageBox.getText().contains("1 plan added"))
 			return true;
 		return false;
 	}
 
-   	
+	public void validatetopbacktoplanslink() throws InterruptedException{
+    	
+    	waitforElement(topbackToPlanslink);
+    	topbackToPlanslink.click();
+    	Thread.sleep(3000);
+    	if (driver.getCurrentUrl().contains("health-plans.html#/plan-summary"))
+    	{
+    		Assert.assertTrue(true);
+    	}
+    	
+    	else Assert.assertTrue(false);
+  
+	}
+	
+public void validatedownbacktoplanslink() throws InterruptedException{
+    	
+    	waitforElement(downbackToPlanslink);
+    	downbackToPlanslink.click();
+    	Thread.sleep(3000);
+    	if (driver.getCurrentUrl().contains("health-plans.html#/plan-summary"))
+    	{
+    		Assert.assertTrue(true);
+    	}
+    	
+    	else Assert.assertTrue(false);
+  
+	}
 
+public void browserBack() {
 
+driver.navigate().back();
+}
+
+/**
+ * Methods added for OLE Flow validations
+ * @author sdwaraka
+ * @param PlanName
+ * @return
+ */
+public String getPlanPremium(String PlanName) {
+	
+	try {
+		Thread.sleep(5000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	System.out.println("Plan Name is : "+PlanName);
+	
+	String PlanPremium = PremiumForPlan.getText();
+	
+	System.out.println("Premium for Plan : "+PlanPremium);
+	return PlanPremium;
+}
+
+/**
+ * @author sdwaraka
+ * Method Added for OLE Flow - Navigate to OLE from Plan Details Page
+ * @param planName
+ * @return
+ * @throws InterruptedException
+ */
+public WelcomePage Enroll_OLE_Plan(String planName) throws InterruptedException {
+	
+	try {
+		Thread.sleep(10000);
+		} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	System.out.println("Enroll in Plan for Plan : "+planName);
+	try {
+		if(validate(EnrollinPlan))
+			System.out.println("Found Enroll IN Plan Button for the Plan : "+planName);
+		else
+			System.out.println("Enroll in Plan Button is Not Displayed ");
+
+	}catch(Exception e){
+		System.out.println("Enroll in Plan Button is Not Displayed ");
+	}
+	
+	EnrollinPlan.click();
+	
+	try {
+		Thread.sleep(5000);
+		} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	if(driver.getCurrentUrl().contains("enrollment")){
+		System.out.println("OLE Welcome Page is Displayed");
+		return new WelcomePage(driver);
+	}
+	return null;
+}
+
+/**
+ * @author sdwaraka
+ * Method added for OLE Flow Validations
+ * @return
+ */
+public String GetTFNforPlanType() {
+	if(validate(RightRail_TFN)){
+		System.out.println("TFN is displayed in Right Rail");
+		String TFN_Number = RightRail_TFN.getText();
+		return TFN_Number;
+	}
+	System.out.println("TFN is not Displayed for PlanType in VPP page");
+	
+	return null;
+}
 
 }

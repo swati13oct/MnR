@@ -1,9 +1,5 @@
 package pages.acquisition.ulayer;
 
-import java.util.List;
-
-import org.openqa.selenium.By;
-
 /*@author pagarwa5*/
 
 import org.openqa.selenium.WebDriver;
@@ -11,9 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.acquisition.ulayer.GetStartedPage;
-import pages.acquisition.ulayer.AddDrugPage;
-import pages.acquisition.ulayer.LocationSearchPage;
 import atdd.framework.UhcDriver;
 
 

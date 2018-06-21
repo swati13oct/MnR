@@ -3,6 +3,8 @@
  */
 package pages.member.redesign;
 
+import gherkin.formatter.model.DataTableRow;
+
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +25,6 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import cucumber.api.DataTable;
-import gherkin.formatter.model.DataTableRow;
 
 /**
  * @author pperugu
@@ -49,24 +50,15 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(css = "a#message-btn:last-child")
 	private WebElement goToInboxButton;
 	
-	@FindBy(xpath = "//*[@id='confirmationWidget']/div")
-	private WebElement ConfirmationWidgetButton;
-	
-	@FindBy(id = "message-send")
-	private WebElement sendAmessageButton;
-	
-	
-	@FindBy(xpath="//div[contains(@class,'click-to-call')][1]/div[1]//div[@class='card-slide']/a")
-	private WebElement memberAuthRequestACall;
-	
-	@FindBy(xpath = "//div[contains(@class,'parsys click-to-call')]/div/div[not (contains(@class,'ng-hide'))]//a[@id='call-btn']")
-	private WebElement sendArequest;
 	
 	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//a[@id='call-btn']")
-	private WebElement requestACall;;
+	private WebElement requestACall;
 	
-	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//button[@id='call-submit']")
+	@FindBy(id = "call-submit")
 	private WebElement requestCall;
+	
+	@FindBy(id = "call-cancel")
+	private WebElement requestCall_Cancel;
 	
 	@FindBy(id="call-question-about")
 	private WebElement callQuestionAbout;
@@ -74,20 +66,8 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath="//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='call-number']")
 	private WebElement requestACallPhoneNumber;
 	
-	@FindBy(xpath="//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//div[@class='message-block-body']//p[2]")
-	private WebElement reqConfirmationMessage;
-	
 	@FindBy(xpath="//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//div[@class='message-block-body']//p[4]")
 	private WebElement reqACallPhoneNumber;
-	
-	@FindBy(xpath = "/*[@id='call-question-about'] ")
-	private WebElement contactoption;
-		
-	@FindBy(xpath = "//*[@id='call-question-about'] ")
-	private WebElement other;
-	
-	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//button/following-sibling::a")
-	private WebElement callCancel;
 	
 	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//div[@class='message-block--full-width success margin-none']")
 	private WebElement reqConfirmation;
@@ -97,9 +77,7 @@ public class ContactUsPage extends UhcDriver{
 	
 	@FindBy(xpath=".//*[@id='IPEinvL']/map/area[2]")
     private WebElement iPerceptionPopUp;
-	
-	@FindBy(id = "addAnotherPlanLink")
-	private WebElement addPlan;
+
 	
 	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//a[@id='question-btn']")
 	private WebElement fillOutFormButton;	
@@ -107,11 +85,6 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))]//a[@id='question-btn']")
 	private WebElement memberAuth_fillOutFormButton;
 	
-	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//a[@id='question-cancel']")
-	private WebElement questionCancelLink;
-	
-	@FindBy(xpath="//*[@id='question-about']")
-	private WebElement questionAbout;
 	
 	
 	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//textarea[@id='question-message']")
@@ -140,41 +113,27 @@ public class ContactUsPage extends UhcDriver{
 	
 	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-phone-confirm']")	
 	private WebElement confirmAlternativePhneNumber;
-	
-	@FindBy(xpath="/html/body/div[2]/div/div/div/div[5]/div/div/div[2]/div/div[1]/div/div/div/div/div/div[2]/div[3]/div[1]")	
-	private WebElement conformationMessage;
+
 	
 	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//select[@id='question-about']")
 	private WebElement questionAboutDropDown;
 
-	@FindBy(xpath="//*[@id='question-about']")	
-	private WebElement alternativeEmailHeader;
-	
-	@FindBy(xpath="//*[@id='alt-email-wrapper']/div[2]/label]")	
-	private WebElement confirmEmailHeader;
-	
-	@FindBy(xpath="//*[@id='message-email-error2']")	
-	private WebElement messageEmailError;
-	
-	@FindBy(css="div.field.ask-question-message.field-has-error span")	
-	private WebElement questionEmailmessageError;
 	
 
-	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-email']/following-sibling::span[1]")
+	@FindBy(xpath="//input[@id='question-alt-email']/following-sibling::span[not (contains(@class,'hide'))]")
 	private WebElement alternativemessageEmailError;
 	
 	
-	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-email-confirm']/following-sibling::span[2]")
+	@FindBy(xpath="//input[@id='question-alt-email-confirm']/following-sibling::span[not (contains(@class,'hide'))]")
 	private WebElement confirmMsgEmailError;
 	
-	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-phone']/following-sibling::span[1]")
+	@FindBy(xpath="//input[@id='question-alt-phone']/following-sibling::span[not (contains(@class,'hide'))]")
 	private WebElement invalidPhneErrorMsg;
 	
-	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-phone-confirm']/following-sibling::span[2]")
+	@FindBy(xpath="//input[@id='question-alt-phone-confirm']/following-sibling::span[not (contains(@class,'hide'))]")
 	private WebElement confirmPhneErrorMsg;
 	
-	@FindBy(css="div.field.ask-question-message.field-has-error div.field-input label#message-email-error.error")
-	private WebElement questionAboutEmailErrorMsg;
+
 	
 	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//div[contains(@class,'success') and (not (contains(@class,'ng-hide')))]/div[@class='message-block-header']//p")
 	private WebElement requestReceivedMessageHeader;
@@ -376,7 +335,7 @@ public class ContactUsPage extends UhcDriver{
 		try {
 			requestACall.click();
 			Thread.sleep(5000);
-			Select dropdown = new Select(callQuestionAbout);
+			new Select(callQuestionAbout);
 			Thread.sleep(5000);
 			requestACallPhoneNumber.sendKeys(phoneNumber);
 			requestCall.click();
@@ -385,6 +344,33 @@ public class ContactUsPage extends UhcDriver{
 			e.printStackTrace();
 		}
 		waitforElement(reqConfirmation);
+	}
+	
+	/**
+	 * this method is used to click on Request to call widget and validate the cancel link
+	 */
+	public void reqACall_Cancel(DataTable givenAttributes)
+	{	
+		/* Reading the given attribute from feature file */
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String phoneNumber = memberAttributesMap.get("Phone Number");
+		try {
+			requestACall.click();
+			Thread.sleep(5000);
+			new Select(callQuestionAbout);
+			Thread.sleep(5000);
+			requestACallPhoneNumber.sendKeys(phoneNumber);
+			requestCall_Cancel.click();
+			Thread.sleep(5000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		waitforElement(requestACall);
 	}
 
 	public JSONObject getsecurewidget() {

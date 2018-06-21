@@ -7,7 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.acquisition.ulayer.AgentAppointmentConfirmationPage;
 //import pages.acquisition.ulayer.ZipcodeLookupHomePage;
 //import pages.acquisition.ulayer.ZipcodeSelectionHomePage;
 import acceptancetests.data.CommonConstants;
@@ -48,8 +47,6 @@ public class VPPRequestSendEmailPage extends UhcDriver {
 	@FindBy(xpath="//a[@class='cta-button close-modal']")
 	private WebElement okButton;
 
-	@FindBy(xpath="//*[contains(text(),'Email Updates')]/parent::div/following-sibling::div/div/p")
-    private WebElement emailBodyContent;
 	
 	public VPPRequestSendEmailPage(WebDriver driver) {
 		super(driver);

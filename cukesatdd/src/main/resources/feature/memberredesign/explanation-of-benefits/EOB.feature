@@ -1,12 +1,12 @@
-@fastandfurious @theSpartans
+@fastandfurious @theSpartans @febRelease2018
 @eob
 Feature:F1.1To test EOB on Dashboard page
 @Eobsiteleavingpopup 
 Scenario Outline: Allowed Domains – Authors need ability to define messages and domains for leaving member sites (ATDD)
-Given registered AMP with for EOB flow
-	| Plan Type      |<planType>  |
-	| Member Type    |<memberType>|
-Then the user navigates to EOB page 
+Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+Then the user navigates to EOB page_hsid 
 Then the user validates site leaving pop up         
 Examples:
        | planType    | memberType                      |  
@@ -16,10 +16,10 @@ Examples:
 
   @eobCountdaterange
 Scenario Outline: To verify EOB result list
-Given registered AMP with for EOB flow
-	| Plan Type      |<planType>  |
-	| Member Type    |<memberType>|
-Then the user navigates to EOB page	
+Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+Then the user navigates to EOB page_hsid	
 And the user slects the desired date range
   | Plan Type      |<planType>  |
   | Date Range     |<dateRange> |
@@ -29,34 +29,34 @@ Then the user validates EOB count
 	Examples:
 	| planType    | memberType                |dateRange					   | eobType           |eobCount |
  	| PCP         | withEOB                   | 18 Months            | Medical           |		4		 |
-	| MAPD        |aarpWithEOB 			          | 90 Days    			     | Medical 	         |		5		 |
-	| MAPD        |aarpWithEOB 			          | 6 Months    		     | Medical 	         |		5		 |
-	| MAPD        |aarpWithEOB 			          | 12 Months    		     | Medical 	         |		5		 |
-	| MAPD        |aarpWithEOB 			          | 18 Months    		     | Medical 	         |		5		 |
+	| MAPD        |aarpWithEOB 			          | 90 Days    			     | Medical 	         |		4		 |
+	| MAPD        |aarpWithEOB 			          | 6 Months    		     | Medical 	         |		8		 |
+	| MAPD        |aarpWithEOB 			          | 12 Months    		     | Medical 	         |		8		 |
+	| MAPD        |aarpWithEOB 			          | 18 Months    		     | Medical 	         |		8		 |
 	| MAPD        |aarpWithEOB 			          | 6 Months   			     | Prescription Drug |		1		 |
 	| MAPD        |aarpWithEOB 			          | 12 Months  			     | Prescription Drug |		1		 |
 	| MAPD        |aarpWithEOB 			          | 18 Months   		     | Prescription Drug |		1		 |
 
  
 
-@planTypeValidation
+@planTypeValidation @hsideob2
 Scenario Outline: To verify different plan types under combo tabs
-Given registered AMP with for EOB flow
-	| Plan Type      |<planType>  |
-	| Member Type    |<memberType>|
-And the user navigates to EOB page  
+Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+And the user navigates to EOB page_hsid  
 Then the user validates content displayed on EOB page without combo tabs
   | Plan Type      |<planType>  |
 Examples: 
 | planType    | memberType   					         |
-| MAPD        | IndividualAARPWOEOB						 |
-| MA          | IndividualAARPWOEOB						 |
+| MAPD        | NICE_EOB 						 |
+#| MA          | IndividualAARPWOEOB						 |
   
 @dropDownFuntion 
 Scenario Outline: To validate page functionality with different dropdowns
-Given registered AMP with for EOB flow
-	| Plan Type      |<planType>  |
-	| Member Type    |<memberType>|	
+Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
 Then the user navigates to EOB page and validates the page
  |Date Range|<dateRange>  |
  |Plan Type |<planType>   |
@@ -75,9 +75,9 @@ Examples:
   
 @learnAboutMedicalEOB 
 Scenario Outline: To verify How to read a medical EOB PDF
-Given registered AMP with for EOB flow
-	| Plan Type      |<planType>  |
-	| Member Type    |<memberType>|
+Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
 Then the user navigates to EOB page and validates the page
  |Date Range|<dateRange>  |
  |Plan Type |<planType>   |
@@ -91,9 +91,25 @@ And the user validates how to read medical eob PDF
 	| MAPD        |aarpWithEOB 			          | 12 Months    		 | Medical 	         |
 	| MAPD        |aarpWithEOB 			          | 18 Months    		 | Medical 	         |
 
-
+@febRelease2018 @hsideob @regression_06_06_18
+Scenario Outline: To verify NICE EOB and click on the pdf
+Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+Then the user navigates to EOB page_hsid 
+And the user slects the desired date range
+  | Plan Type      |<planType>  |
+  | Date Range     |<dateRange> |
+  | EOB Type         |<eobType>   |
+Then the user validates EOB count
+       | EOB COUNT                | <eobCount>|
+ And the user clicks on first eob from the list
+ #And the user validates how to read medical eob PDF
  
+           Examples:
+       | planType    | memberType    |dateRange  | eobType |  eobCount |
+       | MAPD        | NICE_EOB      | 18 Months |Medical  |     8     |
+       | MA          | COSMOS_EOB      | 18 Months |Medical  |     1     |
+	
+	
  
- 
- 
-

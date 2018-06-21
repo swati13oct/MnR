@@ -17,7 +17,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.member.ulayer.AddDrugPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
@@ -32,8 +31,6 @@ public class ManageDrugPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[5]/a[1]/span")
 	private WebElement addDrugLink;
 	
-	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[5]/a[2]/span")
-	private WebElement selectPharmacyBtn;
 
 	@FindBy(linkText = "Delete")
 	private WebElement deleteLink;
@@ -55,9 +52,7 @@ public class ManageDrugPage extends UhcDriver {
 	
 	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[2]/div[1]/input")
 	private WebElement standardRadioBtn;
-	
-	@FindBy(xpath = "//div[@id='dce.member']/div/div[6]/div/div/form/div/div/div/div[2]/p")
-	private WebElement pharmacyPageHeading;
+
 
 	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[1]/h3[2]")
 	WebElement pharmacyTab;
@@ -76,9 +71,7 @@ public class ManageDrugPage extends UhcDriver {
 	
 	@FindBy(xpath = ".//*[@id='dce.member']/div/div[5]/div/div/div[1]/div[2]/div[4]/div/div/div[5]/a")
 	private WebElement editDrugLink;
-	
-	@FindBy(xpath = ".//*[@id='dce.member']div/div[5]/div/div/div[1]/div[2]/div[4]/div/div/div[6]/a")
-	private WebElement deleteDrugLink;
+
 	
 	@FindBys(value = { @FindBy(name = "typeofdrug") })
 	private List<WebElement> genericDrugs;

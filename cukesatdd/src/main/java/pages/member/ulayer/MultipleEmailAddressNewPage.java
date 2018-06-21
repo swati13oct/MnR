@@ -1,17 +1,13 @@
 package pages.member.ulayer;
 
-import org.json.JSONObject;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import pages.regression.accounthomepage.AccountHomePage;
 import acceptancetests.data.MRConstants;
-import acceptancetests.data.PageData;
-import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.dashboard.eob.EOBPage;
 
 public class MultipleEmailAddressNewPage extends UhcDriver{	
 
@@ -44,18 +40,7 @@ public class MultipleEmailAddressNewPage extends UhcDriver{
        
 		@FindBy(id = "email-2")
 		private WebElement SecondOption;	
-		
-		@FindBy(xpath = ".//*[@id='email-modal-form']/fieldset/div[1]/div[1]/div/div/label")
-		private WebElement FirstOption;
-		
-		@FindBy(id = "new-email")
-		private WebElement newEmail;
-		
-		@FindBy(id = "new-email-confirm")
-		private WebElement ConfirmNewEmail;
-		
-		@FindBy(xpath = ".//*[@id='email-modal-form']/div/button/span")
-		private WebElement ContinueButton1;
+
 
 
 		public MultipleEmailAddressNewPage(WebDriver driver) {

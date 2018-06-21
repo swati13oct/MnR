@@ -3,35 +3,21 @@
  */
 package pages.redesign;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.NoSuchElementException;
-import java.util.concurrent.TimeUnit;
 
-import org.joda.time.DateTime;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.regression.ordermaterials.OrderMaterialsPage;
+import pages.regression.pharmacylocator.PharmacySearchPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.redesign.EoBSearchPage;
-import pages.redesign.*;
 
 /**
  * @author sdwaraka
@@ -53,7 +39,9 @@ public class UlayerHomePage extends UhcDriver {
 	@FindBy(xpath = "//h1[contains(text(), 'Explanation of Benefits')]")
 	private WebElement EOBPageHeader;
 
-
+	@FindBy(xpath = "//*[contains(text(), 'Plan Benefits Summary')]")
+	private WebElement BnCPageHeader;
+	
 	@FindBy(xpath = "//a[contains(text(), 'Go to My Profile and Preferences_Redesign')]")
 	private WebElement MyProfileLink;
 
@@ -168,9 +156,16 @@ public class UlayerHomePage extends UhcDriver {
 		}
 	}
 
-	public EoBSearchPage navigateToBenefitsAndCoverage() throws InterruptedException {
-		driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/eob.html");
+	public EoBSearchPage navigateToEOBsearchPage() throws InterruptedException {
+		driver.navigate().to(Page_URL+".com/content/medicare/member/eob.html");
 		//EOBsearchLink.click();
+		
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		CommonUtility.checkPageIsReady(driver);
 
@@ -182,6 +177,30 @@ public class UlayerHomePage extends UhcDriver {
 		}
 	}
 
+	/**
+	 * 
+	 * 
+	 */
+	public BenefitsCoveragePage navigateToBenefitsAndCoverage() throws InterruptedException {
+		driver.navigate().to(Page_URL+".com/content/medicare/member/benefits/overview.html");
+		//EOBsearchLink.click();
+		
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		CommonUtility.checkPageIsReady(driver);
+
+		if (validate(BnCPageHeader)) {
+			System.out.println("Benefits and Coverage Page loaded");
+			return new BenefitsCoveragePage(driver);
+		} else {
+			return null;
+		}
+	}
 	@Override
 	public void openAndValidate() {
 		CommonUtility.checkPageIsReady(driver);
@@ -194,12 +213,12 @@ public class UlayerHomePage extends UhcDriver {
 	}
 
 
-	public OrderplanmaterialsPage navigateToOrderPlanMaterialsPage() throws InterruptedException {
+	public OrderMaterialsPage navigateToOrderPlanMaterialsPage() throws InterruptedException {
 		driver.navigate().to(Page_URL+".com/content/medicare/member/order-materials/overview.html");
 		//OrderPlanMaterialslnk.click();
 		CommonUtility.checkPageIsReady(driver);
 		if (orderplanHeadertxt.isDisplayed()) {
-			return new OrderplanmaterialsPage(driver);
+			return new OrderMaterialsPage(driver);
 		}
 		return null;
 	}

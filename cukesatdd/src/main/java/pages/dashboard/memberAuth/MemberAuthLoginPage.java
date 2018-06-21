@@ -1,6 +1,8 @@
 package pages.dashboard.memberAuth;
 
 import org.json.JSONObject;
+//import junit.framework.Assert;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,7 +11,6 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import junit.framework.Assert;
 
 public class MemberAuthLoginPage extends UhcDriver {
 	
@@ -25,8 +26,11 @@ public class MemberAuthLoginPage extends UhcDriver {
 	@FindBy(id="find_searchbtn")
 	private WebElement search;
 	
-	@FindBy(id ="memAuthLoginBox")
+	@FindBy(xpath =".//*[@id='memAuthLoginBox']//span[@class='redError']")
 	private WebElement unpswdIncorrecterrormsg;
+	
+	@FindBy(id="userName")
+	private WebElement memberUsername;
 	
 	private static String MEMBER_AUTH = MRConstants.MEMBER_AUTH;
 	
@@ -64,16 +68,18 @@ public class MemberAuthLoginPage extends UhcDriver {
 	/** 
 	 * @todo : Validate Error message
 	 */
-	public void validateErrorMessage(String loginname, String  loginpassword, String Errormessage) throws InterruptedException{
+	public MemberAuthLoginPage validateErrorMessage(String loginname, String  loginpassword, String Errormessage) throws InterruptedException{
 		username.sendKeys(loginname);
 		password.sendKeys(loginpassword);
 		search.click();
 		Thread.sleep(5000);
 		if (!(unpswdIncorrecterrormsg.isDisplayed())){
-						Assert.fail("Error message mismatch");	
+						Assert.fail("Error message mismatch");
 			
 		}
 		//if(!(this.unpswdIncorrecterrormsg.getText().trim().contains(Errormessage)))
+		
+		return null;
 			
 	}
 }

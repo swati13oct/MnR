@@ -1,5 +1,4 @@
 package pages.acquisition.dce.ulayer;
-import java.util.List;
 import java.util.Map;
 
 import org.json.JSONException;

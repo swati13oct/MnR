@@ -18,9 +18,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.data.CommonConstants;
+import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
-import acceptancetests.data.LoginCommonConstants;
 import atdd.framework.UhcDriver;
 
 /**
@@ -41,15 +41,12 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(id = "addAnotherPlanLink")
 	private WebElement addPlan;
 	
-	@FindBy(css="#secureWidget")
-	private WebElement securewidgetlink;
 	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//a[@id='question-btn']")
-	private WebElement fillOutFormButton;		
+	private WebElement fillOutFormButton;	
+	
 	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//a[@id='question-cancel']")
 	private WebElement questionCancelLink;
 	
-@FindBy(xpath="//*[@id='question-about']")
-	private WebElement questionAbout;
 	
 	
 	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//textarea[@id='question-message']")
@@ -77,18 +74,6 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-phone-confirm']")	
 	private WebElement confirmAlternativePhneNumber;
 	
-	@FindBy(xpath="/html/body/div[2]/div/div/div/div[5]/div/div/div[2]/div/div[1]/div/div/div/div/div/div[2]/div[3]/div[1]")	
-	private WebElement conformationMessage;
-	
-
-	@FindBy(xpath="//*[@id='question-about']")	
-	private WebElement alternativeEmailHeader;
-	
-	@FindBy(xpath="//*[@id='alt-email-wrapper']/div[2]/label]")	
-	private WebElement confirmEmailHeader;
-	
-	@FindBy(xpath="//*[@id='message-email-error2']")	
-	private WebElement messageEmailError;
 	
 	@FindBy(css="div.field.ask-question-message.field-has-error label#message-email-error.error")	
 	private WebElement questionEmailmessageError;
@@ -107,15 +92,13 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-phone-confirm']/following::label[@id='message-email-error'][2]")
 	private WebElement confirmPhneErrorMsg;
 	
-	@FindBy(css="div.field.ask-question-message.field-has-error div.field-input label#message-email-error.error")
-	private WebElement questionAboutEmailErrorMsg;
 	
 	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//span[contains(@class,'color-green-dark bold')]")
 	private WebElement requestReceivedMessageHeader;
 	
 	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//div[contains(@class,'message-block-body')]/p")
 	private WebElement thankYouMessage;
-		private PageData contactUs;
+		
 
 	public JSONObject contactUsJson;
 	

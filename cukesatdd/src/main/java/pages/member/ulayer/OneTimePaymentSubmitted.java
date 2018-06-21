@@ -1,24 +1,11 @@
 package pages.member.ulayer;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.Assert;
-import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.MRConstants;
-import acceptancetests.data.PageData;
-import acceptancetests.util.CommonUtility;
-import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 /**
@@ -44,9 +31,7 @@ public class OneTimePaymentSubmitted extends UhcDriver {
 	
 	@FindBy(xpath="//*[@id='atdd_reviewonetime_label']/div[6]/div[2]/span")
 	private WebElement AccountHolderNamePaymentSubmittedpage;
-	
-	@FindBy(xpath="/html/body/div[2]/div/div/div[2]/div[3]/div/div/div/button")
-	private WebElement SubmitButton;
+
 	
 	@FindBy(xpath="html/body/div[2]/div/div[2]/div/div/div[1]/div/div/div[1]/div[2]/span")
 	private WebElement PaymentType;
