@@ -3,13 +3,18 @@
  */
 package pages.member.ulayer;
 
+import org.junit.Assert;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
+import static org.hamcrest.CoreMatchers.*;
 
 /**
  * @author pjaising
@@ -49,6 +54,9 @@ public class ValueAddedServicepage extends UhcDriver {
 	
 	@FindBy(xpath=".//*[@id='collapseLargeCard1']/div/div[1]/div/div/div/a")
 	private WebElement disclaimers;
+	
+	@FindBy(xpath = ".//*[@id='collapseLargeCard1']/div/div[1]/p[5]/a")
+	private WebElement Healthlink;
 	
 	//private PageData valueAddedservicePage; 
 
@@ -97,10 +105,7 @@ public class ValueAddedServicepage extends UhcDriver {
 		
 	}
 	
-	public void validatemainctabutton() {
-		// TODO Auto-generated method stub
-		validate(maincta);
-	}
+
 	
 	public void validateviewmorelinkexpand() {
 		// TODO Auto-generated method stub
@@ -128,6 +133,25 @@ public class ValueAddedServicepage extends UhcDriver {
 		}
 		validate(disclaimers);
 		disclaimers.click();
+	}
+	
+	public void healthlink() 
+	{
+		Healthlink.click();
+		try {
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Assert.assertThat(driver.getCurrentUrl(),containsString("www.healthyourway.com"));
+		Actions builder = new Actions(driver);
+		Action movetab = builder.keyDown(Keys.CONTROL)
+		                 .sendKeys(Keys.TAB)
+		                 .keyUp(Keys.CONTROL)
+		                 .build();
+		movetab.perform();
+		
 	}
 	
 	

@@ -9,13 +9,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.member.bluelayer.AccountHomePage;
-import pages.member.bluelayer.AssistiveRegistrationPage;
-import pages.member.bluelayer.TerminatedHomePage;
 import acceptancetests.data.MRConstants;
-import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.login.AssistiveRegistrationPage;
+import pages.regression.login.ConfirmSecurityQuestion;
+import pages.regression.login.TerminatedHomePage;
 
 public class LoginPage extends UhcDriver {
 	
@@ -43,9 +43,6 @@ public class LoginPage extends UhcDriver {
 		
 	    @FindBy(xpath=".//*[@id='IPEinvL']/map/area[1]")
 	    private WebElement iPerceptionPopUp;
-	    
-	    @FindBy(xpath="//*[@class='ng-scope nav-ready']//a[contains(text(),'Coverage & Benefits')]")
-		private WebElement bencovtab;
 	    
 	    MRScenario loginScenario;
 		
@@ -135,7 +132,6 @@ public class LoginPage extends UhcDriver {
 				
 					System.out.println("test");
 					System.out.println(driver.getCurrentUrl());
-					CommonUtility.waitForPageLoad(driver, bencovtab, 20);
 				    return new AccountHomePage(driver);
 			}
 			

@@ -47,6 +47,7 @@ import org.springframework.stereotype.Component;
 
 import acceptancetests.data.CommonConstants;
 import cucumber.api.Scenario;
+import cucumber.api.java.After;
 
 /**
 * 
@@ -90,8 +91,8 @@ public class MRScenario {
 
                //public static final String ACCESS_KEY = System.getenv("SAUCE_ACCESS_KEY");
 
-               public static final String URL = "https://" + USERNAME + ":" + ACCESS_KEY
-                                             + "@ondemand.saucelabs.com:443/wd/hub";
+               public static final String URL = "http://" + USERNAME + ":" + ACCESS_KEY
+                                             + "@ondemand.saucelabs.com:80/wd/hub";
 
                public void saveBean(String id, Object object) {
                               scenarioObjectMap.put(id, object);
@@ -300,7 +301,9 @@ public class MRScenario {
     }
                
               public static  void getRecordsFrom_mbr_table(String firstName, String lastName) throws SQLException {
-            	   Connection con = getPDBDBConnection(props);
+            	  try
+            	  {
+            	  Connection con = getPDBDBConnection(props);
              	   Statement stmt = null;
                   
                     stmt = con.createStatement();
@@ -314,11 +317,21 @@ public class MRScenario {
                     rs1.close();
                     stmt.close();
                     con.close();
+            	  }
+            	  catch (SQLException e) {
+                      // TODO Auto-generated catch block
+                      e.printStackTrace();
+       }
+            	  
                }
                
                
                
                public static void deleteRecordsFrom_mbr_table(String firstName, String lastName) throws SQLException {
+            	   try
+            	   {
+            		   
+            	   
             	   Connection con = getPDBDBConnection(props);
             	   Statement stmt = null;
                    ResultSet rs = null;
@@ -345,11 +358,17 @@ public class MRScenario {
            		} else {
            			System.out.println("Still Records exist in the table: mbr");
            		}
+            	   }
+            	   catch (SQLException e) {
+                       // TODO Auto-generated catch block
+                       e.printStackTrace();
+        }
 
            	} 
                
                public static void deleteRecordsFrom_mbr_prtl_table(String firstName, String lastName) throws SQLException {
-
+                                try
+                                {
            		// The following steps will return no. of selected records based on
            		// first name and last name
             	   Connection con = getPDBDBConnection(props);
@@ -379,9 +398,16 @@ public class MRScenario {
            		} else {
            			System.out.println("Still Records exist in the table: mbr_prtl");
            		}
+                                }
+                                catch (SQLException e) {
+                                    // TODO Auto-generated catch block
+                                    e.printStackTrace();
+                     }
            	}
 
            	public static void deleteRecordsFrom_mbr_extrm_scl_dtl_table(String firstName, String lastName) throws SQLException {
+           		try
+           		{
            		// The following steps will return no. of selected records based on
            		// first name and last name
            		Connection con = getPDBDBConnection(props);
@@ -413,6 +439,11 @@ public class MRScenario {
            		} else {
            			System.out.println("Still Records exist in the table: mbr_extrm_scl_dtl");
            		}
+           		}
+           		catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+     }
            	}
 
                public void removeMember() {
@@ -801,7 +832,7 @@ public class MRScenario {
                               webDriver = new ChromeDriver(capabilities);
                               return webDriver;
                }
-
+               
                public void nullifyWebDriver() {
                               if (null != webDriver) {
                                              webDriver.close();
@@ -1047,8 +1078,10 @@ public class MRScenario {
                 } catch (MalformedURLException e) {
                        Assert.fail("Invalid Sauce URL: [" + URL + "]");
                 }
-                
+                saveBean(CommonConstants.WEBDRIVER, webDriver);
+                return webDriver;
  			}
+
         }
                       return webDriver;
                
