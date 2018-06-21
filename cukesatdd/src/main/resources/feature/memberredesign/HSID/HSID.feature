@@ -2,7 +2,7 @@
 Feature:To test HSID registration flow
 
  
-   @US968241 @hsidregistration
+   @US968241 @hsidregistration 
    Scenario Outline:Verify HSID registration.
      Given the user connect to DB
      And the user select record from database
@@ -57,7 +57,7 @@ Feature:To test HSID registration flow
    
    
    
-   @AssistiveRegistration @US968323
+   @AssistiveRegistration @US968323 
    Scenario Outline:Verify HSID assistive registration.
    Given the user connect to DB
     And the user select record from database
