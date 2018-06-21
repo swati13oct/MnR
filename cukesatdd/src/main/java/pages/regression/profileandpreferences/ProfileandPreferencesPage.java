@@ -42,6 +42,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	public ProfileandPreferencesPage(WebDriver driver) {
 		super(driver);
+		PageFactory.initElements(driver, this);
 		
 	}
 
@@ -1545,25 +1546,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	}
 
 	public void validateEpmpIframe() {
-		
-		
-		try {
-			WebElement surveyPopUp = driver.findElement(By.id("iPerceptionsFrame"));
-			WebElement noThanks = driver.findElement(By.xpath(".//*[@id='nav']/button[2]"));
-			Thread.sleep(5000);
-			if(surveyPopUp.isDisplayed())
-			{
-				driver.switchTo().frame(surveyPopUp);
-				Thread.sleep(1000);
-				noThanks.click();
-				driver.switchTo().defaultContent();
-				
-				
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		
+
 		if (driver.getCurrentUrl().contains("member/account/profile"))
 		{
 			System.out.println("Account profile page is loaded ==========>> "+driver.getCurrentUrl());
@@ -1572,7 +1555,23 @@ public class ProfileandPreferencesPage extends UhcDriver {
 				validate(EPMPIframe);				   
 				driver.switchTo().frame(iframeEPMP);
 				System.out.println("Swith to Iframe is Performed");
-				Thread.sleep(3000);				
+				Thread.sleep(3000);	
+
+				try {
+					WebElement surveyPopUp = driver.findElement(By.id("iPerceptionsFrame"));
+					Thread.sleep(5000);
+					if(surveyPopUp.isDisplayed())
+					{
+						driver.switchTo().frame(surveyPopUp);
+						WebElement noThanks = driver.findElement(By.xpath(".//*[@id='nav']/button[2]"));
+						Thread.sleep(1000);
+						noThanks.click();
+						driver.switchTo().defaultContent();				
+						
+					}
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
 				if(EPMPaddressview.isDisplayed())
 				{
 					System.err.println("Iframe is Validated");
@@ -1590,16 +1589,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		{
 			System.out.println("Account profile page is not loaded >>>>>>> "+ driver.getCurrentUrl());
 			Assert.fail();
-		}
-		
-		
-		
-		
-	}
-
-	private By ByXPath(String string) {
-		// TODO Auto-generated method stub
-		return null;
+		}		
 	}
 
 	public void validatecommunicationpreferncessection() {
@@ -1707,6 +1697,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			
 		}
 		else{
+			homePhoneNumberTextField.clear();
 			homePhoneNumberTextField.sendKeys("1234567890");	
 			
 		}
