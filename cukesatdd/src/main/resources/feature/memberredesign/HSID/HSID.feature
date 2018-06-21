@@ -44,17 +44,19 @@ Feature:To test HSID registration flow
   And user is navigated to Confirm email page
   And user should see a latest unread mail recieved in provided email address
   Then user should copy the confirm email url to browser
+  And user should see the email confirmation message "Email confirmed: Please sign in with your new username and password." in Sign In form
   And user should be at Sign In page
        | userName   | <userName>   |  
        | password   | <password>   |  
-  And user should see the email confirmation message "Email confirmed: Please sign in with your new username and password." in Sign In form
   Then user should see a latest unread mail recieved  in mail server
    
    Examples:
  
-   | planType|  memberType  | copayCategory | firstname | lastname        |   dob 	            | memberid 	  | zipcode  | userName 	       | password   |   email	  			          | question1 | question2 | question3 |
-   | MAPD    |  Individual  |  NON LIS      | AFAFBBF   | AECFEC          | 05/15/1950          | 954668573-1 | 78501	 |q1_feb_uhc042        | Password@1 | codetransformers@gmail.com      | number1   | name1     | color1    |
-   
+    | planType|  memberType  | copayCategory | firstname | lastname        |   dob 	            | memberid 	  | zipcode  | userName 	       | password   |   email	  			          | question1 | question2 | question3 |
+    | MAPD    |  Individual  |  NON LIS      | AFAFBBF   | AECFEC          | 05/15/1950          | 954668573-1 | 78501	 |q1_feb_uhc042        | Password@1 | codetransformers@gmail.com      | number1   | name1     | color1    |
+    | PDP     |  Individual  |  NON LIS      | FBDDE     | BCCDF           | 11/05/1948          | 018948860-1 | 01702	 |q1_feb_uhc042        | Password@1 | codetransformers@gmail.com      | number1   | name1     | color1    |
+    | SHIP    |  Individual  |  NON LIS      | EQNBXLQQ  | BNSXXZJU        | 02/01/1939          | 373488822-11| 89125	 |q2_jun_ship0084      | Password@1 | codetransformers@gmail.com      | number1   | name1     | color1    |
+    | Combo   |  Individual  |  NON LIS      | DCCB      | AEFAD           | 05/22/1927          | 014429204-11| 82009	 |q2_june_combo0015    | Password@1 | codetransformers@gmail.com      | number1   | name1     | color1    |
    
    
    @AssistiveRegistration @US968323
@@ -92,15 +94,15 @@ Feature:To test HSID registration flow
   And user is navigated to Confirm email page
   And user should see a latest unread mail recieved in provided email address
   Then user should copy the confirm email url to browser
-  And user should be at Sign In page
   And user should see the email confirmation message "Email confirmed: Please sign in with your new username and password." in Sign In form
+  And user should be at Sign In page
   Then user should see a latest unread mail recieved  in mail server
    
     
    Examples:
  
-   | planType|  memberType  | copayCategory | firstName | lastName        |   dob 	             | memberid 	  | zipcode  | userName 	         | password   |   email	  			           | question1 | question2 | question3 |
-   | MAPD    |  Individual  |  NON LIS       | BBABFAD   | BEDD            | 09/17/1946          | 002238311-1  | 92024	   |AUTO_q2_apr_uhc100   | Password@1 | codetransformers@gmail.com | number1   | name1     | color1    |
+   | planType|  memberType  | copayCategory  | userName 	       | password   |   email	  			     | question1 | question2 | question3 |
+   | MAPD    |  Individual  |  NON LIS       |AUTO_q2_apr_uhc100   | Password@1 | codetransformers@gmail.com | number1   | name1     | color1    |
    
    
    @Login @US968315
@@ -113,7 +115,11 @@ Feature:To test HSID registration flow
     Examples:
       
    | planType|  memberType  | copayCategory | 
-   | MAPD    |  Individual  |  NON LIS      | 
+   | MAPD    |  Individual  |  NON LIS      |
+   | PCP     |  Individual  |  NON LIS      |
+   | Medica  |  Individual  |  NON LIS      |  
+   | MAGroup |  Individual  |  NON LIS      |
+   | MAPDGroup|  Individual  |  NON LIS      | 
    
    
 @validateStep1 @US968241

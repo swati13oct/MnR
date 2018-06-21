@@ -694,7 +694,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			e.printStackTrace();
 		}
 		
-		Assert.assertTrue(getTitle().equalsIgnoreCase("Contact Us"));
+		Assert.assertTrue(getTitle().contains("Overview"));
 		try {
 			Thread.sleep(20000);
 		} catch (InterruptedException e) {
@@ -1317,13 +1317,13 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	/**
 	 * @toDo : Validates the Plan overview section for a Non lis member
 	 */
-	public void validatePlanOverview() 
+	public void validatePlanOverviewgroup() 
 	{
 	    validate(planName);
 		validate(nameLabel);
 		validate(memberID);
 		validate(effective_Date);
-	  //validate(Monthly_Premium);
+		validate(monthlypremiumlabel);
         validate(GroupId);
     }
 
@@ -1333,11 +1333,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(memberID);
 		validate(effective_Date);
 		validate(monthlypremiumlabel);
-		String[] firstname = name.trim().split("//s+");
+		System.out.println(driver.findElement(By.xpath(".//*[@id='planBenefitsAppSum']/section/div/div[4]/div[1]/div/div[1]/div[2]")).getText());
 		
-		Assert.assertEquals(driver.findElement(By.xpath("//div[@id='planBenefitsApp']//div[contains(text(),name)]")).getText(),name);
-		Assert.assertEquals(driver.findElement(By.xpath("//div[@id='planBenefitsApp']//div[contains(text(),memberid)]")).getText(),memberid);
-		Assert.assertEquals(driver.findElement(By.xpath("//div[@id='planBenefitsApp']//div[contains(text(),effectivedate)]")).getText(),effectivedate);
+		Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='planBenefitsAppSum']/section/div/div[4]/div[1]/div/div[1]/div[2]")).getText(),name);
+		Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='planBenefitsAppSum']/section/div/div[4]/div[1]/div/div[2]/div[2]")).getText(),memberid);
+		Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='planBenefitsAppSum']/section/div/div[4]/div[1]/div/div[4]/div[2]")).getText(),effectivedate);
 		
 			
 	}
@@ -1411,9 +1411,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(OutpatientSurgeryCenterValue);
 		validate(OfficVisitsValue);
 		
-		Assert.assertEquals(OfficeVisits.getText(), "OFFICE VISITS");
+		Assert.assertEquals(OfficeVisits.getText(), "OFFICE VISITS ");
 		Assert.assertEquals(OutpatientSurgeryCenter.getText(),"OUTPATIENT SURGERY CENTER VISITS");
-		Assert.assertEquals(HospitalVisits.getText(),"HOSPITAL VISITS");
+		Assert.assertEquals(HospitalVisits.getText(),"HOSPITAL VISITS ");
 		
 		
 		if(StringUtils.isEmpty(OutpatientSurgeryCenterValue.getText()))
@@ -1440,6 +1440,21 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(HospitalVisits);
 		validate(OfficeVisits);
 		validate(OutpatientSurgeryCenter);
+		Assert.assertEquals(OfficeVisits.getText(), "OFFICE VISITS ");
+		Assert.assertEquals(OutpatientSurgeryCenter.getText(),"OUTPATIENT SURGERY CENTER VISITS");
+		Assert.assertEquals(HospitalVisits.getText(),"HOSPITAL VISITS ");
+		
+		
+		if(StringUtils.isEmpty(OutpatientSurgeryCenterValue.getText()))
+		{
+			
+			Assert.fail();
+		}
+		if(StringUtils.isEmpty(OfficVisitsValue.getText()))
+		{
+			
+			Assert.fail();
+		}
 
 	}
 
@@ -1658,6 +1673,39 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	}
 
+	
+	public ValueAddedServicepage navigateToValueAddServicetest() {
+		validate(learnmorebutton);
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,3000)", "");
+		learnmorebutton.click();
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (this.driver.getTitle().equalsIgnoreCase("Value Added Services")) {
+			System.out.println(driver.getTitle());
+			return new ValueAddedServicepage(driver);
+		}
+		
+		
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+
+	}
 	/**
 	 * @toDo : Validates the Need help section headers for a ship member
 	 */

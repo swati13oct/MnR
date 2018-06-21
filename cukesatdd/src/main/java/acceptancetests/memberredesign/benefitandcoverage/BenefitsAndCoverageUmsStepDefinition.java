@@ -690,11 +690,11 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	/** 
 	 * @toDo : Validates the  Plan overview section for  a Non lis member 
 	 */
-	@And("the user validates plan overview section")
+	@And("the user validates plan overview section for group")
 	public void user_validate_planOverview() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		benefitsCoveragePage.validatePlanOverview();
+		benefitsCoveragePage.validatePlanOverviewgroup();
 	}
 	
 	/** 
@@ -958,6 +958,29 @@ public class BenefitsAndCoverageUmsStepDefinition {
 			getLoginScenario().saveBean(PageConstantsMnR.VALUE_ADDED_SERVICES, valueaddedservices);
 		}
 	}
+	
+	@And("^the user validate Value Add Service page comes on clicking additional info button$")
+	public void validate_Value_Add_pagetest()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		ValueAddedServicepage valueaddedservices= benefitsCoveragePage.navigateToValueAddServicetest();
+		if (valueaddedservices!= null) {
+			getLoginScenario().saveBean(PageConstantsMnR.VALUE_ADDED_SERVICES, valueaddedservices);
+		}
+	}
+	
+	@And("^the user validate view more link$")
+	public void validate_link()
+	{
+		ValueAddedServicepage valueaddedservices = (ValueAddedServicepage) getLoginScenario()
+				.getBean(PageConstantsMnR.VALUE_ADDED_SERVICES);
+		valueaddedservices.validateviewmorelink();
+		valueaddedservices.validateviewmorelinkexpand();
+		
+	}
+	
+	
 	
 	@And("^the user validates pdfs and link for ship$")
 	public void validate_pdf_links_ship()
