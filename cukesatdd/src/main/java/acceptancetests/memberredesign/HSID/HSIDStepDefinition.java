@@ -94,7 +94,7 @@ public class HSIDStepDefinition {
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 		}
          
-		WebDriver wd = getLoginScenario().geChromeDriver();
+		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		HSIDLoginPage loginPage = new HSIDLoginPage(wd);
 		loginPage.validateelements();
