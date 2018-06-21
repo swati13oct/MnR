@@ -115,7 +115,7 @@ Then the user validates EOB count
        | SHIP_Termnated| SHIP_EOB      | 12-18 Months |Medical  |     1     |
        | MAPD          | NICETermin_EOB_R | 18 Months |Medical  |     1     |
        
-@HSIDCombo
+@regression_06_06_18FnF
 Scenario Outline: To verify EOB accessible for PDP + MEDSup Plan
 Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -126,11 +126,56 @@ Then the user validates content displayed on EOB page
 Then the user validates content displayed on EOB page
       |Plan Tab     | <planTab2>  |
  Examples:
-       | planType    | memberType     |dateRange  | eobType |  eobCount | planTab1   |planTab2 |
-       | MA          |  comboEOB      | 18 Months |Medical  |     0     | 	MA			 | HIP    |
+       | planType     | memberType     |dateRange  | eobType |  eobCount | planTab1   |planTab2 |
+       | PDP          |  comboEOBMedSup      | 18 Months |Medical  |     0     | 	PDP			 | MedSup     |
        
-	
-Scenario Outline: To verify error message for PHIP member on EOB Page
+@regression_06_06_18FnF
+Scenario Outline: TC009_Check EOB is accessible for PCP Individual - Active Plan
+Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+Then the user navigates to EOB page_hsid 
+And the user slects the desired date range
+  | Plan Type      |<planType>  |
+  | Date Range     |<dateRange> |
+  | EOB Type       |<eobType>   |
+Then the user validates EOB count
+       | EOB COUNT                | <eobCount>|
+And the user clicks on first eob from the list
+Examples:
+       | planType    | memberType    |dateRange  | eobType |  eobCount |
+       | PCP        | eobData      | 18 Months |Medical  |     1     |
+
+@regression_06_06_18FnF     
+Scenario Outline: TC013_Check EOB is accessible for TEXAS ERS  - Active Plan
+Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+Then the user navigates to EOB page_hsid 
+And the user slects the desired date range
+  | Plan Type      |<planType>  |
+  | Date Range     |<dateRange> |
+  | EOB Type       |<eobType>   |
+Examples:
+       | planType    | memberType    	 |dateRange  | eobType |   
+       | PDP        | texasERS      | 18 Months |Medical  |      
+
+@regression_06_06_18FnF
+Scenario Outline: TC011_Check EOB is accessible for MEDICA Individual - Active Plan
+Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+Then the user navigates to EOB page_hsid 
+And the user slects the desired date range
+  | Plan Type      |<planType>  |
+  | Date Range     |<dateRange> |
+  | EOB Type       |<eobType>   |
+Examples:
+       | planType    | memberType    	 |dateRange  | eobType |   
+       | MA        | Medica      | 18 Months |Medical  |
+
+@regression_06_06_18FnF
+Scenario Outline: TC010_Check EOB displays error message_ PHIP- Active Plan member
 Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -142,4 +187,15 @@ And the user gets the error message for PHIP member
 Examples:
        | planType      | memberType     | 
        | PHIP          |  SHIP          |
+
+
+Scenario Outline: TC008_Check EOB is accessible for MedsSupp ( Terminated) + PHIP (Active) Plan member
+
+Scenario Outline: TC007_Check EOB is accessible for  MedsSupp ( Active) + PHIP (Terminated) Plan member
+
+
+        
+ 
+
+|
  

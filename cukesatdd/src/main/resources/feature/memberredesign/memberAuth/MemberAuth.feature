@@ -31,7 +31,7 @@ Feature: S1.1 To test Member Auth Dashboard page.
       | qavgogine | qavgogine | 4B152296-7C31-49C7-B49F-8739EB9A84A2 | You are viewing this site with member authorized read only access. Remember to LOGOUT at the end of the session | You are not authorized to submit |
       
        
- @regressionMemberAuth      
+ @regressionMemberAuth     @regression_06_06_18FnF
   Scenario Outline: TC09_Save_Prefrences WRT member auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password 
@@ -42,11 +42,12 @@ Feature: S1.1 To test Member Auth Dashboard page.
     And user clicks on member to select 
     Then the user navigates to profile and preference page 
     And the user validates the save preference functionality WRT member auth
+    	|Error Mesage		|<errorMessage>|
     Examples:
-    | username  | password  |member            |  
-    | qavgogine | qavgogine |q2_jun_uhc0008  	 |
+    | username  | password  |member            |  errorMessage|
+    | qavgogine | qavgogine |q2_jun_uhc0008  	 |You are not authorized to change preferences on behalf of the member.|
  
- @regressionMemberAuth   
+ @regressionMemberAuth  @regression_06_06_18FnF
     Scenario Outline: TC08_Edit_Temporary_Address WRT member auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password 
@@ -57,11 +58,12 @@ Feature: S1.1 To test Member Auth Dashboard page.
     And user clicks on member to select 
     Then the user navigates to profile and preference page 
     And the user validates edit temproray address functionality WRT member auth
+    	|Error Mesage		|<errorMessage>|
     Examples:
-    | username  | password  |member            |  
-    | qavgogine | qavgogine |q2_jun_uhc0008  	 |
+    | username  | password  |member            |  errorMessage|
+    | qavgogine | qavgogine |q2_jun_uhc0008  	 |you are not authorized to update the address number on behalf of member|
     
-@regressionMemberAuth    
+@regressionMemberAuth   @regression_06_06_18FnF
     Scenario Outline: TC07_Edit_alternative_Address WRT member auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password 
@@ -72,11 +74,12 @@ Feature: S1.1 To test Member Auth Dashboard page.
     And user clicks on member to select 
     Then the user navigates to profile and preference page 
     And the user validates edit alternative address functionality WRT member auth
+    |Error Mesage		|<errorMessage>|
     Examples:
-    | username  | password  |member            |  
-    | qavgogine | qavgogine |q2_jun_uhc0008  	 |
+    | username  | password  |member            |  errorMessage|
+    | qavgogine | qavgogine |q2_jun_uhc0008  	 |you are not authorized to update the address number on behalf of member|
     
-@regressionMemberAuth    
+@regressionMemberAuth    @regression_06_06_18FnF
     Scenario Outline: TC06_Edit_Email WRT member auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password 
@@ -87,11 +90,12 @@ Feature: S1.1 To test Member Auth Dashboard page.
     And user clicks on member to select 
     Then the user navigates to profile and preference page 
     And the user validates edit email functionality WRT member auth
+    	|Error Mesage		|<errorMessage>|
     Examples:
-    | username  | password  |member            |  
-    | qavgogine | qavgogine |q2_jun_uhc0008  	 |
+    | username  | password  |member            |  errorMessage|
+    | qavgogine | qavgogine |q2_jun_uhc0008  	 |you are not authorized to update the email address on behalf of member.|
     
-@regressionMemberAuth    
+@regressionMemberAuth    @regression_06_06_18FnF
     Scenario Outline: TC05_Edit_Phone WRT member auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password 
@@ -102,11 +106,12 @@ Feature: S1.1 To test Member Auth Dashboard page.
     And user clicks on member to select 
     Then the user navigates to profile and preference page 
     And the user validates edit phone functionality WRT member auth
+    |Error Mesage		|<errorMessage>|
     Examples:
-    | username  | password  |member            |  
-    | qavgogine | qavgogine |q2_jun_uhc0008  	 |
+    | username  | password  |member            |  errorMessage|
+    | qavgogine | qavgogine |q2_jun_uhc0008  	 |you are not authorized to update the phone number on behalf of member|
  
- @regressionMemberAuth   
+ @regressionMemberAuth   @regression_06_06_18FnF
   Scenario Outline: TC18_Check EOB page is accessible using Member Auth Tool WRT member auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password 

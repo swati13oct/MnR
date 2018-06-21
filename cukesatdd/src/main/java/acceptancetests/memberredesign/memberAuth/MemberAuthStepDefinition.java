@@ -1,5 +1,6 @@
 package acceptancetests.memberredesign.memberAuth;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -286,7 +287,7 @@ public class MemberAuthStepDefinition{
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.DashPage);
 		ProfileandPreferencesPage profilePreferencePage = accountHomePage.navigateDirectToProfilePage();
 		if(profilePreferencePage!=null){
-			getLoginScenario().getBean(PageConstants.ProfilePreferencesPage);
+			getLoginScenario().saveBean(PageConstants.ProfilePreferencesPage, profilePreferencePage);
 		}else{
 			System.out.println("==================Profile and preference page not displayed======================");
 			Assert.fail();
@@ -294,29 +295,84 @@ public class MemberAuthStepDefinition{
   	}
 
 	@And("^the user validates the save preference functionality WRT member auth$")
-	public void the_user_validates_the_save_preference_functionality_WRT_member_auth() throws Throwable {
+	public void the_user_validates_the_save_preference_functionality_WRT_member_auth(DataTable  errorText){
+		List<DataTableRow> memberAttributesRow = errorText
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String errorMessageExpected = memberAttributesMap.get("Error Mesage");
 		ProfileandPreferencesPage profilePreferencePage = (ProfileandPreferencesPage) getLoginScenario().getBean(PageConstants.ProfilePreferencesPage);
-		
+		profilePreferencePage.validateSavePreferenceWithMemberAuth(errorMessageExpected);
 	}
 	
 	@And("^the user validates edit temproray address functionality WRT member auth$")
-	public void the_user_validates_edit_temproray_address_functionality_WRT_member_auth() throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
+	public void the_user_validates_edit_temproray_address_functionality_WRT_member_auth(DataTable  errorText) {
+		List<DataTableRow> memberAttributesRow = errorText
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String errorMessageExpected = memberAttributesMap.get("Error Mesage");
+		ProfileandPreferencesPage profilePreferencePage = (ProfileandPreferencesPage) getLoginScenario().getBean(PageConstants.ProfilePreferencesPage);
+		profilePreferencePage.validateTemproraryAddressWithMemberAuth(errorMessageExpected);
  	}
 
 	@And("^the user validates edit alternative address functionality WRT member auth$")
-	public void the_user_validates_edit_alternative_address_functionality_WRT_member_auth() throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
+	public void the_user_validates_edit_alternative_address_functionality_WRT_member_auth(DataTable  errorText) {
+		List<DataTableRow> memberAttributesRow = errorText
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String errorMessageExpected = memberAttributesMap.get("Error Mesage");
+		ProfileandPreferencesPage profilePreferencePage = (ProfileandPreferencesPage) getLoginScenario().getBean(PageConstants.ProfilePreferencesPage);
+		profilePreferencePage.validateAlternativeAddressWithMemberAuth(errorMessageExpected);
  	}
 
 	@And("^the user validates edit email functionality WRT member auth$")
-	public void the_user_validates_edit_email_functionality_WRT_member_auth() throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
- 	}
+	public void the_user_validates_edit_email_functionality_WRT_member_auth(DataTable  errorText){
+		List<DataTableRow> memberAttributesRow = errorText
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String errorMessageExpected = memberAttributesMap.get("Error Mesage");
+		ProfileandPreferencesPage profilePreferencePage = (ProfileandPreferencesPage) getLoginScenario().getBean(PageConstants.ProfilePreferencesPage);	
+		profilePreferencePage.validateEditEmailWithMemberAuth(errorMessageExpected);
+		
+	}
 
 	@And("^the user validates edit phone functionality WRT member auth$")
-	public void the_user_validates_edit_phone_functionality_WRT_member_auth() throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
+	public void the_user_validates_edit_phone_functionality_WRT_member_auth(DataTable  errorText) {
+		List<DataTableRow> memberAttributesRow = errorText
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String errorMessageExpected = memberAttributesMap.get("Error Mesage");
+		ProfileandPreferencesPage profilePreferencePage = (ProfileandPreferencesPage) getLoginScenario().getBean(PageConstants.ProfilePreferencesPage);
+		profilePreferencePage.validateEditPhoneWithMemberAuth(errorMessageExpected);
  	}
 
 }
