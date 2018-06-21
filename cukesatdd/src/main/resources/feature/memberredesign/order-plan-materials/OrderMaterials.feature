@@ -82,20 +82,22 @@ Feature:P1.5 To test order materials in Redesign site
 
             
 @MemberAuth_OrderMaterialsErrorMessage
-Scenario Outline: To validate the oneTime Payment flow for Member Auth
+Scenario Outline: To validate Order Submission Error for Member Auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username      | <username>     |
       | Password      | <password>     |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |   
-    And User Clicks on the Pop up displayed
+    And user clicks on member to select
     When the user views order materials in Member Redesign Order Materials page
     And the user selects an option from the orderp list in Redesign site
       | Option    | <option>   |
       | Plan Type | <planType> |
+    Then the user validates CSR error message for Order Submission
+     | CSR Error	| <csrError> |
     
    Examples: 
-      | username  | password  |MemUserName    | planType |  option           |
-#      | qavgogine | qavgogine | q2_jun_aarp0017 | MAPD     | Replacement ID card      |
+      | username  | password  |MemUserName    | planType |  option           |csrError |
+      | qavgogine | qavgogine | q2_jun_aarp0017 | MAPD     | Replacement ID card      | are not authorized to order material |
  

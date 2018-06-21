@@ -128,3 +128,51 @@ Feature: S1.1 To test Member Auth Dashboard page.
     Examples: 
       | username  | password  |member            |planType   | dateRange  | eobType 		 |
       | qavgogine | qavgogine |q2_jun_aarp0101	 | PDP       | 18 Months  |Prescription  |   
+      
+      
+ @MemberAuth_PharmacyLocatorDefaultZip  @regression_06_06_18
+ Scenario Outline: To validate Pharmacy Locator view for Member Auth
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username      | <username>     |
+      | Password      | <password>     |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |   
+    And user clicks on member to select
+        When the user navigates to pharmacy search page in Redesign site
+    And the user enters distance details in Redesign site
+      | Distance | <distance> |
+    And the user selects Pharmacy Types to Filter in Redesign Site
+      | Pharmacy Type | <pharmacyType> |
+    Then the user validates the pharmacies available in Redesign site
+    And the user Validates show on map link in Redesign Site
+    And the user validate more information content based on plan type in Redesign Site
+#    And the user Validates view search PDF link in Redesign Site
+
+    Examples: 
+      | username  | password  |MemUserName    | distance | pharmacyType                |
+      | qavgogine | qavgogine | q2_jun_aarp0017 |      25 | Open 24 hours               |
+ 
+  @MemberAuth_PharmacyLocatorValidateLanguage  @regression_06_06_18
+ Scenario Outline: To validate Pharmacy Locator Multiple Language and Zipcode entry for Member Auth
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username      | <username>     |
+      | Password      | <password>     |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |   
+    And user clicks on member to select
+    When the user navigates to pharmacy search page in Redesign site
+#    And the user enters following details for pharmacy search in Redesign Site
+#      | Zip Code | <zipcode>  |
+#      | Distance | <distance> |
+    Then the user validates the pharmacies available in Redesign site
+    When the user Selects Chinese Language in Redesign Site
+    Then the user searches multi lang for pharmacy search results available in Redesign site
+    When the user Selects Spanish Language in Redesign site
+    Then the user searches multi lang for pharmacy search results available in Redesign site
+
+    Examples: 
+      | username  | password  |MemUserName    | zipcode | distance |
+      | qavgogine | qavgogine | q2_jun_aarp0017 |    10980 |       10 |
+ 
