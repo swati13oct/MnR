@@ -934,6 +934,20 @@ public class ProfileandPreferencesUMSStepDefinition {
 		profilePreferencesPage.validateEmailEditUpdates();
 }
 	
+	
+	@And("^I should be able to view and edit phone numbers$")
+	public void iShouldBeAbleToViewAndEditPhoneNumbers() {
+		
+		ProfileandPreferencesPage profilePreferencesPage = ( ProfileandPreferencesPage) getLoginScenario().getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+		profilePreferencesPage.validatePhoneSection();
+		profilePreferencesPage.validatePhoneUpdate();
+		
+		
+	
+	}
+
+
+	
 }
 
 

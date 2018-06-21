@@ -675,16 +675,17 @@ And the user verifies that the correct pdfs are there in the plan material secti
   Scenario Outline: Verify the Benefits for TexasERSMember
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
+      | Member Type | <memberType>    |
     Then the user navigates to Benefits and coverage page
     And the user validates the Drug costs Section
     Then the user verifies the Retail Cost sharing table
     Then the user verifies the Mail Order Cost sharing table
 
     Examples: 
-      | planType |
-      | Texas    |
+    | planType | memberType |
+    | PDP    | TEXASERSGroup  | 
       
-     @OfficeVisitswithoutprovidertiering @regression @regression_06_06_18
+       @OfficeVisitswithoutprovidertiering @regression @regression_06_06_18
   Scenario Outline: Verify the Office visits widget for a member withoutprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
@@ -694,6 +695,7 @@ And the user verifies that the correct pdfs are there in the plan material secti
     Examples: 
       | planType |
       | MAPD     |
+
 
 @WaystoSaveforPdp @regression @regression_06_06_18
   Scenario Outline: Verify the ways to save  widget for a PDP member
@@ -752,7 +754,8 @@ And the user verifies that the correct pdfs are there in the plan material secti
       | planType | 
       | MAPD     |  
    
-     @BenefitsForAlPeehipMember @regression @regression_06_06_18
+
+   @BenefitsForAlPeehipMember @regression @regression_06_06_18
   Scenario Outline: Verify the benefits for an AL peehip member
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
@@ -781,8 +784,9 @@ And the user verifies that the correct pdfs are there in the plan material secti
       | MedSupp  |Ship        |
       
       
-       @CopayCoinsuranceInDrugCostTable @regression @regression_06_06_18
-  Scenario Outline: Verify the copay coinsurance in drugcosts table 
+       
+     @CopayCoinsuranceInDrugCostTable @regression @regression_06_06_18
+    Scenario Outline: Verify the copay coinsurance in drugcosts table 
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
      | Member Type | <memberType>    |
@@ -793,5 +797,3 @@ And the user verifies that the correct pdfs are there in the plan material secti
       | planType |memberType |
       | MAPD     |Individual  |
       
-
-   

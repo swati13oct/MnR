@@ -480,6 +480,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy (id = "phoneview")
    private WebElement EPMPPhoneNumbersSection;
 	
+	
 	@FindBy (xpath = ".//*[@id='emailview']/div[1]/div[1]/div/strong")//EPMP email address Header
 	//@FindBy (css = "#emailview")
 	private WebElement EPMPaddressview;
@@ -511,8 +512,38 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy (xpath = ".//button[@id='updatedisable']")//Save preferences Button
 	private WebElement savePrimaryEmailButton;
 	
+	@FindBy(xpath = "//*[@id='phoneview']/div[2]/i")
+	private WebElement phoneEditArrowOnTheRight;
+
+	@FindBy(className = "edit-text")
+	private WebElement editButtonInPhoneSection;
+
+	@FindBy(className = "icon-arrow_wtail_left")
+	private WebElement buttonToGoBackInPhoneSection;
 	
 	
+	@FindBy(id = "phone_1")
+	private WebElement homePhoneNumberTextField;
+
+	@FindBy(id = "phone_12")
+	private WebElement additionalPhoneNumberTextField;
+
+	@FindBy(id = "phone_2")
+	private WebElement workPhoneNumberTextField;
+
+	@FindBy(id = "phone_4")
+	private WebElement mobilePhoneNumberTextField;
+
+	@FindBy(id = "cancelUpdateEmailBtn_")
+	private WebElement cancelButtonInPhoneEdit;
+
+	@FindBy(id = "updatedisable")
+	private WebElement saveButtonInPhoneEdit;
+
+	@FindBy(xpath = "//*[@class='phone']/p")
+	private WebElement homePhoneNumberValue;
+	
+
 
 	public PageData ProfileandPreferences;
 
@@ -1653,6 +1684,90 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		{
 			System.out.println("email not updated");
 		}
+		
+		backToEmailButton.click();
+		
+	}
+
+	public void validatePhoneSection() {
+		
+	/*	try {
+			Thread.sleep(15000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validate(EPMPIframe);				   
+		driver.switchTo().frame(iframeEPMP);
+		System.out.println("Switch to Iframe is Performed");
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}				
+*/
+		validateNew(EPMPPhoneNumbersSection);
+		validateNew(phoneEditArrowOnTheRight);
+		phoneEditArrowOnTheRight.click();
+		
+		validateNew(buttonToGoBackInPhoneSection);
+		
+		if(editButtonInPhoneSection.isDisplayed())
+		Assert.assertTrue(true);
+		else{
+			Assert.fail("Not able to validate the phone section ");
+		}
+		
+		
+	}
+
+	public void validatePhoneUpdate() {
+		int lengthOfTextInTextField;
+		editButtonInPhoneSection.click();
+
+		validateNew(homePhoneNumberTextField);
+		lengthOfTextInTextField=homePhoneNumberTextField.getText().length();
+		if(lengthOfTextInTextField>0){
+			homePhoneNumberTextField.clear();
+			homePhoneNumberTextField.sendKeys("1234567890");
+			
+		}
+		else{
+			homePhoneNumberTextField.sendKeys("1234567890");	
+			
+		}
+		validateNew(additionalPhoneNumberTextField);
+		validateNew(workPhoneNumberTextField);
+		validateNew(mobilePhoneNumberTextField);
+
+		validateNew(cancelButtonInPhoneEdit);
+		validateNew(saveButtonInPhoneEdit);
+		
+
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		
+		saveButtonInPhoneEdit.click();
+		
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		validateNew(homePhoneNumberValue);
+		if(homePhoneNumberValue.getText().contains("123-456-7890"))
+			Assert.assertTrue(true);
+			else{
+				Assert.fail("Not able to validate the phone update functionality");
+			}	
+
+
 		
 	}
 	

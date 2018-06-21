@@ -367,8 +367,6 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-bnc-txers-retailcostsharing-table")
 	private WebElement retailTable;
 
-	
-
 	@FindBy(xpath = "//*[@id='officeVisitTileAtdd']/div/section/div[1]/span")
 	private WebElement pcpValue;
 
@@ -396,20 +394,20 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "mail-table")
 	private WebElement MailOrderTable;
 	
-
 	
-	@FindBy(xpath = ".//[@class='table-subheader']/td[1]")
+	@FindBy(xpath = "//*[@class='table-subheader']/td[1]")
 	private List<WebElement> ICStage31to60MailOrder;
 
-	@FindBy(xpath = ".//[@class='table-subheader']/td[2]")
+	@FindBy(xpath = "//*[@class='table-subheader']/td[2]")
 	private List<WebElement> ICStage61to90MailOrder;
 	
-	@FindBy(xpath = ".//[@id='retailCostAnnualPresDeduct']/following-sibling::td[1]")
+	@FindBy(xpath = ".//*[@class='table-white atdd-bnc-txers-retailcostsharing-table']/tbody/tr[3]/td[2]")
 	private WebElement ICTier1Value;
 
-	@FindBy(xpath = ".//[@class='table-subheader']/following-sibling::tr[1]/td[2]")
+	@FindBy(xpath = ".//*[@class='table-white atdd-bnc-txers-mailordersharing-table']/tbody/tr[3]/td[2]")
 	private WebElement ICTier1ValueMailOrder;
-
+	
+	
 	
 	@FindBy(xpath = ".//*[@class='table-subheader']/td[1]")
 	private List<WebElement> ICStage30dayNonMain;
@@ -422,6 +420,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@class='table-subheader']/td[4]")
 	private List<WebElement> ICStage61to90;
+	
 
 	
 	@FindBy(id = "waystosave")
@@ -432,6 +431,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	
 	@FindBy(className = "atdd-bnc-rx187grptable")
 	private WebElement PeehipTable;
+	
 	
 	@FindBy(id = "rxcustomgroup_ads-header")
 	private List<WebElement> annualDeductibleColumn ;
@@ -449,7 +449,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	private WebElement PeehipTier1ValueIC ;
 	@FindBy(xpath = "//table[@class='table-white atdd-bnc-rx187grptable']/tbody/tr[2]/td[4]/div[1]")
 	private WebElement  PeehipTier1ValueCG;
-	@FindBy(xpath = "//table[@class='table-white atdd-bnc-rx187grptable']/tbody/tr[2]/td[5]/div[1]")
+	@FindBy(xpath = "//table[@class='table-white atdd-bnc-rx187grptable']/tbody/tr[5]/td[3]")
 	private  List<WebElement> PeehipTier1ValueCC;
 	
 	@FindBy(xpath = "//img[@alt=' walgreenpharmacylogo']")
@@ -2029,7 +2029,6 @@ public boolean vasnotdisplayed() {
 	}
 
 	public void validateRetailCostSharingdrugtable() {
-		// TODO Auto-generated method stub
 		Select drpPharmacy = new Select(pharmacyDropdownTexas);
 		drpPharmacy.selectByValue("Retail Cost Sharing");
 		System.out.println("Retail Cost Sharing dropdown value selected");
@@ -2090,7 +2089,7 @@ public boolean vasnotdisplayed() {
 		validateNew(specialistValue);
 
 		String input = pcpValue.getText();
-		Pattern pattern = Pattern.compile("^\\$\\d{2,3}\\.\\d{2}$");
+		Pattern pattern = Pattern.compile("^\\$\\d{1,4}\\.\\d{2}$");
 		if (pattern.matcher(input).matches()) {
 			Assert.assertTrue("PCP values exists", true);
 		} else {
@@ -2160,7 +2159,7 @@ public boolean vasnotdisplayed() {
 
 		validateNew(PeehipTier1ValueIC);
 		String input = PeehipTier1ValueIC.getText();
-		Pattern pattern = Pattern.compile("^\\$\\d{2,3}\\.\\d{2}$");
+		Pattern pattern = Pattern.compile("^\\$\\d{1,4}\\.\\d{2}$");
 		if (pattern.matcher(input).matches()) {
 			Assert.assertTrue("value  in IC column exists", true);
 		} else {
@@ -2175,13 +2174,12 @@ public boolean vasnotdisplayed() {
 			throw new IllegalArgumentException("Invalid String");
 		}
 
-		if (PeehipTier1ValueCC.size() > 1) {
+		if (PeehipTier1ValueCC.size() > 0) {
 			Assert.assertTrue("Catastrophic Coverage stage has some value", true);
 
 		} else {
 			Assert.assertFalse("Catastrophic Coverage stage doesn't have any value", true);
 		}
-
 	}
 
 	public void ValidateMAsection() {
@@ -2228,7 +2226,7 @@ public boolean vasnotdisplayed() {
 	public void validateCopayCoinsuranceInDrugTable() {
 		validateNew(drugTableNonLisMember);
 
-	
+		
 		if (annualDeductibleColumnFederal.size() > 0 && initialCoverageColumnFederal.size() > 0 && coverageGaStageColumnFederal.size() > 0
 				&& catastrophicCoverageStageColumnFederal.size() > 0) {
 			Assert.assertTrue("The columns are correct in Drug Costs table", true);
@@ -2239,7 +2237,7 @@ public boolean vasnotdisplayed() {
 
 		validateNew(federalValueIC);
 		String input = federalValueIC.getText();
-		Pattern pattern = Pattern.compile("^\\$\\d{2,3}\\.\\d{2}$");
+		Pattern pattern = Pattern.compile("^\\$\\d{1,4}\\.\\d{2}$");
 		if (pattern.matcher(input).matches()) {
 			Assert.assertTrue("value  in IC column exists", true);
 			
@@ -2247,7 +2245,6 @@ public boolean vasnotdisplayed() {
 			throw new IllegalArgumentException("Invalid String");
 		}
 		
-
 	
 		
 	}

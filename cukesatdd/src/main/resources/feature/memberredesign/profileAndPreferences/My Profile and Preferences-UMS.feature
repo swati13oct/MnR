@@ -293,8 +293,9 @@ Feature: C1.2To test Profile and Preferences page .
       | Member Type | <memberType> |
       #|data type    | <dataType>   |
     When the user navigates to Profile and Preferences page
-    And I should see the EPMP i frame on profile page
-    And I should be able to see edit email address and to view read only HSID email
+   And I should see the EPMP i frame on profile page
+   And I should be able to see edit email address and to view read only HSID email
+    And I should be able to view and edit phone numbers
     
      Examples: 
       | planType | memberType  |   dataType   |
