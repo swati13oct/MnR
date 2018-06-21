@@ -1,0 +1,14 @@
+{
+"url":null,
+"expectedData":{
+"summaryHeading":{
+"identifier":"xpath",
+"elementName":"//div[@id='pdpplans_container']/h1"
+},
+"planNames":{
+"identifier":"className",
+"elementName":"vppplanheading"
+}
+
+}
+}

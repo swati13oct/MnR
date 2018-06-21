@@ -1,0 +1,33 @@
+{
+"url":null,
+"expectedData":{
+"drugs":{
+"identifier":"className",
+"elementName":"drugList"
+},
+"currentPharmacy":{
+"identifier":"className",
+"elementName":"bottomPharmacyName"
+},
+"selectPharmacy":{
+"identifier":"xpath",
+"elementName":"//div[@id='dcemodal']/div/div/div[8]/div[4]/a[2]"
+},
+"addDrugHeading":{
+"identifier":"className",
+"elementName":"drugDetailsMessage"
+},
+"annualDrugCost":{
+"identifier":"className",
+"elementName":"estimateDrug"
+},
+"planResultsLink":{
+"identifier":"linkText",
+"elementName":"View plan results"
+},
+"applyChangesLink":{
+"identifier":"linkText",
+"elementName":"Close and apply changes"
+}
+}
+}
