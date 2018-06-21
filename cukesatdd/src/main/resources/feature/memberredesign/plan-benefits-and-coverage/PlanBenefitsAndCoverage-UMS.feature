@@ -649,7 +649,7 @@ And the user verifies that the correct pdfs are there in the plan material secti
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
      | Member Type | <memberType>    |
-    Then the user navigates to Benefits and coverage page
+    Then the user navigates to Benefits coverage page
     And the user validates City of Hartford prescription Drug Benefits table
     Examples: 
       | planType | memberType |
@@ -661,7 +661,7 @@ And the user verifies that the correct pdfs are there in the plan material secti
   Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
      | Member Type | <memberType>    |
-    Then the user navigates to Benefits and coverage page
+    Then the user navigates to Benefits coverage page
     And the user validates Town Of Greenwich table
 
     Examples: 
@@ -676,7 +676,7 @@ And the user verifies that the correct pdfs are there in the plan material secti
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
       | Member Type | <memberType>    |
-    Then the user navigates to Benefits and coverage page
+    Then the user navigates to Benefits coverage page
     And the user validates the Drug costs Section
     Then the user verifies the Retail Cost sharing table
     Then the user verifies the Mail Order Cost sharing table
@@ -689,7 +689,7 @@ And the user verifies that the correct pdfs are there in the plan material secti
   Scenario Outline: Verify the Office visits widget for a member withoutprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
-    Then the user navigates to Benefits and coverage page
+    Then the user navigates to Benefits coverage page
     And the user validates the Office Visits section
 
     Examples: 
@@ -702,13 +702,13 @@ And the user verifies that the correct pdfs are there in the plan material secti
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
       | Member Type | <memberType> |
-    Then the user navigates to Benefits and coverage page
+    Then the user navigates to Benefits coverage page
     And the user validates the ways to save section
 
     Examples: 
       | planType |memberType |
-     # | PDP      |Wallgreens |
-      | PDP      |MailOrderPharamacy|
+    | PDP      |Wallgreens |
+     | PDP      |MailOrderPharamacy|
       | MAPD     |Group |
    
    
@@ -718,7 +718,7 @@ And the user verifies that the correct pdfs are there in the plan material secti
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType> |
       #| Member Type   | <memberType> |
-    Then the user navigates to Benefits and coverage page
+    Then the user navigates to Benefits coverage page
     And the user validates the Outpatient Surgery Center Visits section
 
 
@@ -730,7 +730,7 @@ And the user verifies that the correct pdfs are there in the plan material secti
     Scenario Outline: Verify the Office visits widget for a member withprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
-    Then the user navigates to Benefits and coverage page
+    Then the user navigates to Benefits coverage page
     And the user validates the Office Visits section
 
 
@@ -745,7 +745,7 @@ And the user verifies that the correct pdfs are there in the plan material secti
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType> |
       #| Member Type   | <memberType> |
-    Then the user navigates to Benefits and coverage page
+    Then the user navigates to Benefits coverage page
     And the user validates the Outpatient Surgery Center Visits section
 
 
@@ -760,7 +760,7 @@ And the user verifies that the correct pdfs are there in the plan material secti
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
      | Member Type | <memberType>    |
-    Then the user navigates to Benefits and coverage page
+    Then the user navigates to Benefits coverage page
     And the user validates the Benefits for Peehip member
 
     Examples: 
@@ -774,7 +774,7 @@ And the user verifies that the correct pdfs are there in the plan material secti
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
      | Member Type | <memberType>    |
-    Then the user navigates to Benefits and coverage page
+    Then the user navigates to Benefits coverage page
     And the user validates the Benefits for MA member
 
     Examples: 
@@ -790,7 +790,7 @@ And the user verifies that the correct pdfs are there in the plan material secti
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
      | Member Type | <memberType>    |
-    Then the user navigates to Benefits and coverage page
+    Then the user navigates to Benefits coverage page
     And the user validates the copay coinsurance in drug costs table
 
     Examples: 

@@ -50,13 +50,10 @@ public class HSIDStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
- 
-	
 
-
-	
 	@And("^login with following details logins in the member portal and validate elements$")
 	public void login_with_member(DataTable memberAttributes) throws InterruptedException {
+		
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -76,7 +73,11 @@ public class HSIDStepDefinition {
 
 		}
 		System.out.println("desiredAttributes.." + desiredAttributes);
-
+		if(desiredAttributes.size()>1)
+		{
+		getLoginScenario().saveBean(LoginCommonConstants.MEMBERTYPE, desiredAttributes.get(1));
+		}
+		
 		Map<String, String> loginCreds = loginScenario.getUMSMemberWithDesiredAttributes(desiredAttributes);
 		String userName = null;
 		String pwd = null;
@@ -93,7 +94,7 @@ public class HSIDStepDefinition {
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 		}
          
-		WebDriver wd = getLoginScenario().getWebDriver();
+		WebDriver wd = getLoginScenario().geChromeDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		HSIDLoginPage loginPage = new HSIDLoginPage(wd);
 		loginPage.validateelements();
@@ -114,6 +115,7 @@ public class HSIDStepDefinition {
 		else {
 			Assert.fail("***** Error in loading  Assistive Registration Page *****");
 		}*/
+
 
 	}
 	
