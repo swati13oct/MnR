@@ -94,6 +94,47 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       #| PDP     |  Individual  |  NON LIS      | SPANISH  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | FBFFABB AAFBCB|0131768761|03/01/2018     |Not Available   |Tier 2             |true        |
       #| PDP     |  Individual  |  NON LIS      | CHINESE  |                      |                          |                                     | FBFFABB AAFBCB|0131768761|03/01/2018     |Not Available   |Tier 2             |true        |
       
+     
+     
+     @CMGroupNonLis
+    Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>  |
+      | Member Type    | <memberType>|
+      | Copay Category | <copayCategory>|
+    Then the user navigates to Benefits and coverage page
+    And the user validates plan overview section for group
+    And the user validates headers on Bnc page for group members
+    And the user validates the Primarycare Provider section for Group 
+    And the user view the Drug Copays & Discounts header 
+    And the user validates the Learn More section for stage and tier
+    And the user validates dropdown selection functionality
+    And the user validates Drug coverage header and text under the section
+    And the user validates text for the Look Up Drugs section
+    And the user validates Look Up Drugs button should be visible
+    And the user validates text for the Locate a Pharmacy section
+    And the user validates Locate a Pharmacy button should be visible
+    And the user should see drug copay and discount table
+       | Updated Language | <UpdatedLanguage> |
+       | Display Flag     | <DisplayFlag>     | 
+    And the user validates the user click on the link it expands and when user clicks it again it should collapse
+    And the user validates view and document label
+    And the user validates static links
+    And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully
+       | Language | <language> |
+    And the user verifies that the correct pdfs are coming in the plan material section
+       |Summary of Benefits | <SummaryofBenefits> |
+       |Evidence of Coverage| <EvidenceofCoverage> |
+       |Comprehensive Formulary - Drug List| <ComprehensiveFormularyDrug List>|
+    And the user validates Needhelp section
+    And the user clicks on More Information link
+    And the user validates contactus section
+    
+    Examples: 
+       | planType|  memberType  | copayCategory | language | SummaryofBenefits    | EvidenceofCoverage       | ComprehensiveFormularyDrug List     | name          | memberid    | effectivedate | monthlypremium |   UpdatedLanguage | DisplayFlag|
+       | MAPD    |  Group       |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | EAF DCDEFCEFCF| 006542949-01| 01/01/2018    | Not Available  | Tier 2            | true       |
+      #| MAPD    |  Group       |  NON LIS      | SPANISH  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | DDE BCBF      | 006798725-01| 01/01/2018    | Not Available  | Tier 2            | true       |
+      #| MAPD    |  Group       |  NON LIS      | CHINESE  |                      |                          |                                     | DDE BCBF      | 006798725-01| 01/01/2018    | Not Available  | Tier 2            | true       |
       
     @CMFedNonLisVillage
     Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
@@ -142,21 +183,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
        | MAPD    |  Group       |  NON LIS      |
        | MA      |  Group       |  HMO          |    
 
-    @CMvalidatePdfsectionindividual
-    Scenario Outline: Verify PDF section is in place on Benefits and     Coverage page
-     Given login with following details logins in the member portal and validate elements
-      | Plan Type      | <planType>  |
-      | Member Type    | <memberType>|
-      | Copay Category | <copayCategory>|
-    Then the user navigates to Benefits and coverage page
-    And the user validates static links
-   
-            
-   Examples: 
-       | planType|  memberType  | copayCategory | language | 
-       | PDP     |  Individual  |  NON LIS      | ENGLISH  |
-      #| MAPD    |  Individual  |  NON LIS      | SPANISH  | 
-      #| MAPD    |  Individual  |  NON LIS      | CHINESE  | 
+  
    
      @CMAncillarysection1
     Scenario Outline: Verify Ancilliary section is in place on Benefits and Coverage page
@@ -219,25 +246,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       
 
       
-    @CMdrugcopaysectionlis
-    Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
-    Given registered member with following details logins in the member portal 
-       | Plan Type      | <planType>     |
-       | Member Type    | <memberType>|
-       | Copay Category | <copayCategory>|
-    Then the user navigates to Benefits coverage page
-    And the user view the LIS Drug Copays & Discounts header
-    And the drugcost dropdown should not display
-    And the user validates the Learn More section link for stage
-    And the user validates tier link should not display 
-    #And the user validates the user click on the link it expands and when user clicks it again it should collapse
-
-    Examples: 
-      | planType|  memberType  | copayCategory |
-      | MAPD    |  Ind         |   LIS 1       | 
-     #| MA      |  Individual  |   LIS 1       |
-      | PDP     |  Individual  |   LIS 4       |
-           
+   
       
       
     @CMPlanOverviewGroup
@@ -259,17 +268,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       
       
     
-    @CMBncHeadersIndividual
-    Scenario Outline: Verify that Page Headers are in place on Benefits and Coverage page
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type      | <planType>  |
-      | Member Type    | <memberType>|
-      | Copay Category | <copayCategory>|
-    Then the user navigates to Benefits and coverage page
-    And the user validates headers on Bnc page for indi members
-     Examples: 
-      | planType|  memberType  | copayCategory |
-      | MAPD    |  Individual  |  NON LIS      | 
+    
       
     
      
@@ -289,58 +288,13 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
      | MAPD    |  Group       |  NON LIS      | 
       
       
-    @CMPlanOverviewNonLis
-    Scenario Outline: Verify that Plan Overview  is in place on Benefits and Coverage page for Non LIS Members
-     Given login with following details logins in the member portal and validate elements
-      | Plan Type      | <planType>  |
-      | Member Type    | <memberType>|
-      | Copay Category | <copayCategory>|
-    Then the user navigates to Benefits and coverage page
-    And the user validates Ind plan overview 
-      | Name           | <name>  |
-      | Member ID      | <memberid>|
-      | Effective Date | <effectivedate>|
-      | Monthly premium| <monthlypremium>|  
-
-    Examples: 
-      
-      | planType|  memberType  | copayCategory | name    | memberid    | effectivedate | monthlypremium |
-      | MAPD    |  Individual  |  NON LIS      | DDE BCBF| 006798725-01| 01/01/2018    | Not Available  |
-   
-      
-    @CMPlanOverviewLis
-    Scenario Outline: Verify that Plan Overview is in place on Benefits and Coverage page for LIS Members
-    Given registered member with following details logins in the member portal 
-       | Plan Type      | <planType>     |
-      | Member Type    | <memberType>|
-      | Copay Category | <copayCategory>|
-    Then the user navigates to Benefits and coverage page
-    And the user validates Lis member plan overview section
-
-    Examples: 
-      | planType|  memberType  | copayCategory |
-      | MAPD    |  Ind         |   LIS 1       | 
-      | MA      |  Individual  |   LIS 1       | 
-      | PDP     |  Individual  |   LIS 4       | 
-      | MA      |  Group       |   LIS 1       |
+    
       
     
     
-
-   @CMPrimaryCareProviderIndi
-    Scenario Outline: Verify the Promary Care provider  is in place on Benefits and Coverage page
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type      | <planType>  |
-      | Member Type    | <memberType>|
-      | Copay Category | <copayCategory>|
-    Then the user navigates to Benefits and coverage page    
-    And the user validates the Primarycare Provider section
     
-    Examples: 
-      | planType|  memberType  | copayCategory | 
-      | MAPD    |  Individual  |  NON LIS      |
-     
-     
+
+  
      
     
     
@@ -359,18 +313,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
        | MAPD    |  Group       |  NON LIS      |
     
    
-    @CMOutOfPocketMax
-    Scenario Outline: Verify the out of pocket section is in place on Benefits and Coverage page
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type      | <planType>  |
-      | Member Type    | <memberType>|
-      | Copay Category | <copayCategory>|
-    Then the user navigates to Benefits and coverage page    
-    And the user validates the Out of Pocket Max section
-    
-      Examples: 
-      | planType|  memberType  | copayCategory | 
-      | MAPD    |  Individual  |  NON LIS      | 
+   
       
       
       
@@ -399,23 +342,23 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
    Examples: 
        | planType|  memberType  | language | PlanBenefitsTable   | PlanOverview  |
        | HIP     |  SHIP        | ENGLISH  | Plan Benefits Table | Plan Overview |
-       | HIP     |  SHIP        | SPANISH  | Plan Benefits Table | Plan Overview |
-       | HIP     |  SHIP        | CHINESE  | Plan Benefits Table | Plan Overview |
+      #| HIP     |  SHIP        | SPANISH  | Plan Benefits Table | Plan Overview |
+      #| HIP     |  SHIP        | CHINESE  | Plan Benefits Table | Plan Overview |
       
-    @CMneedHelpFederal
-    Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
-     Given login with following details logins in the member portal and validate elements
+      
+      
+      @CMShipVAS
+    Scenario Outline: Verify that Page Headers are in place on Benefits and Coverage page
+    Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>  |
       | Member Type    | <memberType>|
-    When the user navigates to Benefits and coverage page
-    And the user validates Needhelp header
-    And the user clicks on More Information link
-    And the user validates contactus section
-    
-    Examples: 
-      | planType|  memberType  | copayCategory |
-      | MAPD    |  Individual  |  NON LIS      | 
-      
+    Then the user navigates to Benefits and coverage page
+    Then the user validate Value Add Service page comes on clicking additional info button
+    And the user validate view more link
+    #And the user clicks healthlink
+      Examples: 
+       | planType|  memberType  |
+       | HIP     |  SHIP        |
 
       
       
