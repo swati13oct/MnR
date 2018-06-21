@@ -9,6 +9,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+<<<<<<< HEAD
+=======
+import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.login.AssistiveRegistrationPage;
+import pages.regression.login.ConfirmSecurityQuestion;
+import pages.regression.login.TerminatedHomePage;
+
+>>>>>>> remotes/origin/develop
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
@@ -152,7 +160,7 @@ public class LoginPage extends UhcDriver {
 			} 
 			
 			try {
-				Thread.sleep(20000);
+				Thread.sleep(25000);
 			} catch (InterruptedException e) 
 			{
 			// TODO Auto-generated catch block
@@ -171,6 +179,24 @@ public class LoginPage extends UhcDriver {
 				return new TerminatedHomePage(driver);
 			}
 
+			else{
+				driver.navigate().refresh();
+				try {
+					Thread.sleep(25000);
+				} catch (InterruptedException e) 
+				{
+				// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				if(currentUrl().contains("testharness.html") || currentUrl().contains("/dashboard"))
+		        {
+					System.out.println("test");
+					System.out.println(driver.getCurrentUrl());
+					return new AccountHomePage(driver);
+				}
+
+			}
 			return null;
 		}
 }

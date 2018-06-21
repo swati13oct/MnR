@@ -79,7 +79,7 @@ public class AuthorizationPage extends UhcDriver{
 	@FindBy(id = "state0")
 	private WebElement Authorized_State;
 	
-	@FindBy(id = "Zip0")
+	@FindBy(xpath = "//*[@id = 'Zip0' or @id = 'zipCode0']")
 	private WebElement Authorized_ZipCode;
 	
 	@FindBy(id = "authorizedPersonPhone0")

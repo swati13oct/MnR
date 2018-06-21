@@ -129,6 +129,25 @@ public class OrderPlanMaterialsAarpStepDefinition {
 			Assert.fail("Error in loading  orderPlanMaterialsPage");
 		}
 	}
+	@Then("^the user should not see Order Materials Link for terminated member$")
+	public void the_user_should_not_see_Order_Materials_Link_for_terminated_member() throws Throwable {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+		boolean LinkPresent = accountHomePage.validateOrderMaterialsLink();
+		getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
+			Assert.assertTrue("Order Materials link ist dispalyed for Terminated Member ", !LinkPresent);
+	}
+
+	@Then("^user validates header navigation is not available for Terminated member$")
+	public void user_validates_header_navigation_is_not_available_for_Terminated_member() throws Throwable {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+		boolean NavigationPresent = accountHomePage.validateOrderMaterialsPageHeaderNavigation();
+		getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
+		Assert.assertTrue("Order Materials link is dispalyed for Terminated Member in B&C Page ", !NavigationPresent);
+	}
+
+
 	/**
 	* @todo : User select any one of options available in order materials page
 	*/
@@ -164,7 +183,7 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		}
 		else{
 			//retry order submit
-			System.out.print("Order Plan Material Confirmation Page not displayed : Retrying Order Submission");
+/*			System.out.print("Order Plan Material Confirmation Page not displayed : Retrying Order Submission");
 			planMaterialConfirmationPage = orderPlanMaterialsPage.selectsOption(option);
 			if (planMaterialConfirmationPage != null) {
 				getLoginScenario().saveBean(PageConstantsMnR.PLAN_MATERIALS_CONFIRMATION_PAGE,
@@ -174,7 +193,7 @@ public class OrderPlanMaterialsAarpStepDefinition {
 			else
 			getLoginScenario().saveBean(PageConstantsMnR.ORDER_PLAN_MATERIALS_PAGE,
 					orderPlanMaterialsPage);
-			System.out.print("Order Plan Material Confirmation Page not displayed");
+*/			System.out.print("Order Plan Material Confirmation Page not displayed");
 		}
 	}
 	/**
@@ -333,12 +352,12 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		getLoginScenario().flushBeans();
 	}*/
 
-	public static boolean isAlertPresent(FirefoxDriver wd) {
+	/*public static boolean isAlertPresent(FirefoxDriver wd) {
 		try {
 			wd.switchTo().alert();
 			return true;
 		} catch (NoAlertPresentException e) {
 			return false;
 		}
-	}
+	}*/
 }

@@ -110,6 +110,32 @@ Then the user validates EOB count
        | planType    | memberType    |dateRange  | eobType |  eobCount |
        | MAPD        | NICE_EOB      | 18 Months |Medical  |     8     |
        | MA          | COSMOS_EOB      | 18 Months |Medical  |     1     |
+       
+@HSIDCombo
+Scenario Outline: To verify EOB accessible for PDP + MEDSup Plan
+Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+Then the user navigates to EOB page_hsid 
+Then the user validates content displayed on EOB page
+      |Plan Tab     | <planTab1>  |
+Then the user validates content displayed on EOB page
+      |Plan Tab     | <planTab2>  |
+ Examples:
+       | planType    | memberType     |dateRange  | eobType |  eobCount | planTab1   |planTab2 |
+       | MA          |  comboEOB      | 18 Months |Medical  |     0     | 	MA			 | HIP    |
+       
 	
-	
+Scenario Outline: To verify error message for PHIP member on EOB Page
+Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+Then the user navigates to EOB page_hsid 
+Then the user validates content displayed on EOB page
+      |Plan Tab     | <planTab1>  |
+And the user gets the error message for PHIP member	
+      
+Examples:
+       | planType      | memberType     | 
+       | PHIP          |  SHIP          |
  

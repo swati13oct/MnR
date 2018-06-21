@@ -297,6 +297,12 @@ public class PlanDetailsPage extends UhcDriver {
 	}
 
 	public boolean validateCompareBoxMessage() {
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		JavascriptExecutor je = ((JavascriptExecutor) driver);
 		je.executeScript("arguments[0].scrollIntoView(true);",compareChkBox);
 		CommonUtility.waitForPageLoad(driver, drugBenefitsSection, 20);
