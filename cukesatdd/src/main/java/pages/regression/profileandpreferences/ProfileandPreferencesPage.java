@@ -1518,7 +1518,16 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			Assert.fail("Not able to validate mailing address error message");
 		
 	}
-	
+	//method to refresh the page incase of the Feedback Popup
+	public void pageRefresh(){
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			driver.navigate().refresh();
+		}
+	}
 	public void validateSavePreferenceWithMemberAuth(String errorMessageExpected){
 		//click on edit preference link
 		waitforElement(editPreferencesLink);
@@ -1535,6 +1544,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			System.out.println("InCorrect Error Message displayed ==="+errorMessage.getText());
 			Assert.fail();
 		}
+
 	}
 	public void validateTemproraryAddressWithMemberAuth(String errorMessageExpected){
 		maillingAddressEditButton.click();
@@ -1588,3 +1598,5 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		}
 	}
 }
+
+
