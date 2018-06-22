@@ -260,6 +260,8 @@ public class OrderPlanMaterialsAarpStepDefinition {
 			if(!orderPlanMaterialsPage.ValidateHeader()){
 				System.out.println("Header Text and Subtext not displayed for "+currentPlan);
 			}
+			orderPlanMaterialsPage.ValidateOptions(currentPlan);
+
 		}
 	}
 	
