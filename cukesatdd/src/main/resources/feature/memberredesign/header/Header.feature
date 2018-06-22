@@ -2,7 +2,7 @@
 @member_redesign
 Feature:I1.3Header/Navigation for Member Site Redesign
 
-@member_redesign_header @IncrediblesHeader
+@member_redesign_header @IncrediblesHeader @regression_06_06_18
 Scenario Outline:Verify HSID login functionality and header
   Given login with following details logins in the member portal and validate elements
 | Plan Type   | <planType>   |
@@ -28,8 +28,8 @@ Examples:
  | planType  | memberType  |
  | MAPD      |IndividualDCEmember |
  
- 
- @premiumpaymentsheader
+
+ @premiumpaymentsheader @regression_06_06_18
 Scenario Outline:To check the Premium Payments Tab in the header
  Given login with following details logins in the member portal and validate elements
 | Plan Type   | <planType>   |
@@ -57,7 +57,7 @@ Examples:
  | MAPD    |  UHCGroup  	  |
  
  
- @findcarecostsheader
+ @findcarecostsheader @regression_06_06_18
  Scenario Outline:To check that the Find Care and Costs Tab is displayed in the header
 Given login with following details logins in the member portal and validate elements
 | Plan Type   | <planType>   |
@@ -73,8 +73,7 @@ Examples:
  #| Medica  | OrderMaterials |
  
  
- @findcarecostsheader_negativescenario
- 
+ @findcarecostsheader_negativescenario @regression_06_06_18
 Scenario Outline:To check that the Find Care and Costs Tab is displayed in the header
 Given login with following details logins in the member portal and validate elements
 | Plan Type   | <planType>   |

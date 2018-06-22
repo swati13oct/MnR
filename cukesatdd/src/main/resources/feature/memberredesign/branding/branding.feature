@@ -21,7 +21,7 @@ Feature: To test branding functionality
       | MAPD     | UHCIndividual    | NON LIS       | images/branding/unitedhealth.svg     | dam/UCP/Images/logo/UHC.svg         | TC_05_ Branding for Branding for UHC Plan member     |
       | MAPD     | TEXASERS         | NON LIS       | images/branding/ers.svg              | dam/UCP/Images/logo/TEXAS%20ERS.svg | TC_06_ Branding for Texas ERS member                 |
 
-  @regression @regression_branding
+  @regression @regression_branding @regression_06_06_18
   Scenario Outline: Verify that correct brand logos and cologos are displayed on Dashboard and Secondary Pages for Group members.
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
