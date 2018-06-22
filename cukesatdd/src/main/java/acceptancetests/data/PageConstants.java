@@ -145,6 +145,8 @@ public static final String ACCOUNT_HOME_PAGE = "accountHomePage";
 	public static final String ABOUT_US_PAGE = "aboutUsPage";
 
 	public static final String CONTACT_US_PAGE = "contactUsPage";
+	
+	public static final String ID_CARD_PAGE = "iDCardPage";
 
 	public static final String PRIVACY_POLICY_PAGE = "privacyPolicyPage";
 

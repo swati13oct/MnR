@@ -18,12 +18,12 @@ Feature:P1.5 To test order materials in Redesign site
 
     Examples: 
       | planType | memberType | option           |
-      | MA      |  MA_AARPIndividual | Replacement ID card |
+#      | MA      |  MA_AARPIndividual | Replacement ID card |
       | MAPD     | MAPD_AARPIndividual  | Replacement ID card      |
-#      | MAPD     | PCP_OrderMaterials  | Replacement ID card      |
-#      | MAPD     | Medica_OrderMaterials  | Replacement ID card      |
+      | MAPD     | PCP_OrderMaterials  | Replacement ID card      |
+      | MAPD     | Medica_OrderMaterials  | Replacement ID card      |
       | PDP      |  PDP_AARPIndividual | Welcome Guide    |
-      | SHIP     | SHIP_AARPIndividual  | Member ID Card |
+      | SHIP     | SHIP_AARPIndividual  | Claims Envelope |
 
   @ValidateSHIPErrorMessage
   Scenario Outline: Verify SHIP Invalid selection Order Materials Page Error Message
@@ -58,16 +58,48 @@ Feature:P1.5 To test order materials in Redesign site
       | PDP      | PDP_UHCGroup      | Welcome Guide |
       | MAPD     | MAPD_UHCGroup      | Replacement ID card |
 
-#  @ValidateHeaderComboTabs
-#  Scenario Outline: Verify Aarp Order Materials Page Header - All Combo Plan Types
-#    Given Redesign login for following redesign member in the member portal
-#      | Member Type  | <memberType> |
-#    When the user views order materials in Member Redesign Order Materials page
-#    Then user navigates to Order Materials page for all Plans
-#      | Combo Plans | <comboPlans> |
-#    And user Validates Page Header and Sub-Header text
+  @ValidateHeaderComboTabs
+  Scenario Outline: Verify Aarp Order Materials Page Header - All Combo Plan Types
+    Given Redesign login for following redesign member in the member portal
+      | Member Type | <memberType> |
+    When the user views order materials in Member Redesign Order Materials page
+    Then user navigates to Order Materials page for all Plans
+      | Combo Plans | <comboPlans> |
+  
+    And user Validates Page Header and Sub-Header text
+    Examples: 
+            | planType  | memberType | comboPlans |
+            | 	MAPD	| MAPDwithMedSupp | MAPD,MedSupp |
+            | SSUP		| PDPwithSSUP	|	PDP,SSUP	|
+            
+@TerminatedMemberNegativeScenario
+  Scenario Outline: Verify Terminated members cannot access Order Plan materials Page
+    Given Redesign login for following redesign member in the member portal
+      | Member Type | <memberType> |
+    Then the user should not see Order Materials Link for terminated member
+    Then user validates header navigation is not available for Terminated member
+    Examples: 
+            | memberType |
+            | TerminatedMember |
 
-#    Examples: 
-#            | planType  | memberType | comboPlans |
-#            | 	PDP		| PDPwithMedSupp | PDP,MedSupp |
-           
+            
+@MemberAuth_OrderMaterialsErrorMessage
+Scenario Outline: To validate Order Submission Error for Member Auth
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username      | <username>     |
+      | Password      | <password>     |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |   
+    And user clicks on member to select
+    When the user views order materials in Member Redesign Order Materials page
+    And the user selects an option from the orderp list in Redesign site
+      | Option    | <option>   |
+      | Plan Type | <planType> |
+    Then the user validates CSR error message for Order Submission
+     | CSR Error	| <csrError> |
+    
+   Examples: 
+      | username  | password  |MemUserName    | planType |  option           |csrError |
+      | qavgogine | qavgogine | q2_jun_aarp0017 | MAPD     | Replacement ID card      | are not authorized to order material |
+ 

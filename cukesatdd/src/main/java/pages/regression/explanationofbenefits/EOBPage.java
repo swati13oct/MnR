@@ -61,10 +61,10 @@ public class EOBPage extends UhcDriver{
 	@FindBy(className="modal-body")
 	private WebElement iPerceptionPopUp;
 
-	@FindBy(xpath = "//a[contains(text(), 'Medicare Advantage Plan')]")
+	@FindBy(xpath = ".//*[@id='56884830']")
 	private WebElement MAPlanTab;
 
-	@FindBy(xpath = "//a[contains(text(), 'Hospital Indemnity')]")
+	@FindBy(xpath = ".//*[@id='23758777']/a")
 	private WebElement HIPplanTab;
 
 	@FindBy(xpath = "//a[contains(text(), 'Medicare Prescription Drug Plan')]")
@@ -467,11 +467,24 @@ public class EOBPage extends UhcDriver{
 	/**
 	*@toDo: this method is used to navigate plan tabs on the eob page
 	*/
+		public boolean navigatePlanTabs(String PlanType){
+			if (PlanType.contentEquals("MA") || PlanType.contentEquals("MAPD")){
+				System.out.println("*************Displaying Medicare Advantage Plan Tab **********");
+				return true;
+			}else if(PlanType.contentEquals("HIP")){
+				HIPplanTab.click();
+				//Assert.assertTrue("Cant navigate to HIP Plan Tab", MemberIDcardField.isDisplayed());
+				System.out.println("*************Displaying SHIP - HIP Plan Tab **********");
+				return true;
+			}
+			return false;
+		}
 	
-		public boolean navigatePlanTabs(String PlanType){	
+		/*public boolean navigatePlanTabs(String PlanType){	
 		if (PlanType.contentEquals("MA") || PlanType.contentEquals("MAPD")) {
 			if (validate(MAPlanTab)){
-				MAPlanTab.click();
+				if(MAPlanTab.isEnabled()){
+				MAPlanTab.click();}
 				//Assert.assertTrue("Cant navigate to MA / MAPD Plan Tab", memberMaterialsfield.isDisplayed());
 				System.out.println("*************Displaying Medicare Advantage Plan Tab **********");
 				return true;
@@ -533,7 +546,7 @@ public class EOBPage extends UhcDriver{
 		}
 		System.out.println("@@@@@@@@@@@@ Invalid Plan Type / Plan Tab not found @@@@@@@@@@@@@@");
 		return false;
-	}
+	}*/
 	
 		/**
 		*@toDo: this method is used to enter the dates for Custom Search on eob page
@@ -632,8 +645,7 @@ public class EOBPage extends UhcDriver{
 		Assert.assertTrue(getURL.contains(".pdf"));
 	}
 	
-		
-	public void validatePaginationText(){
+	public void validatePHIPErorrMessage(){
 		
 	}
  }

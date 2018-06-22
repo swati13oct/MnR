@@ -50,6 +50,9 @@ public class MemberAuthPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='sticky-nav']//div[@ng-switch-when='M&R']/a[5]")
 	private WebElement PremiumPayment;
 	
+	@FindBy(id="super-user-banner")
+	private WebElement SuperUser_DashboardBanner;
+
 	private static String MEMBER_AUTH = MRConstants.MEMBER_AUTH;
 	
 	public MemberAuthPage(WebDriver driver) {
@@ -104,7 +107,7 @@ public class MemberAuthPage extends UhcDriver {
 	public MemberAuthPage FirstLogin(String loginname, String  loginpassword) throws InterruptedException{
 		username.sendKeys(loginname);
 		password.sendKeys(loginpassword);
-		search.click();
+ 		search.click();
 		waitforElement(memberUsername);
 		if (memberUsername.isDisplayed()){
 			System.out.println("member auth Login successfull");			
@@ -173,6 +176,35 @@ public MemberAuthPage NewTabValidation() throws InterruptedException{
 			System.out.println("Premium Payment Link not found");
 		return null;			
 	}
+
+public AccountHomePage userSelectsMemberEntered() throws InterruptedException{
 	
+	waitforElement(MemberPopUpLogin);
+	Thread.sleep(2000);
+	if (MemberPopUpLogin.isDisplayed()){
+		System.out.println("Pop up Login Button is displayed");	
+		Thread.sleep(2000);
+		MemberPopUpLogin.click();	
+		System.out.println("popup login button clicked");
+		Thread.sleep(20000);
+		switchToNewTab();
+		System.out.println("Switched to new tab");
+		waitforElement(SuperUser_DashboardBanner);
+		if (driver.getCurrentUrl().contains("/dashboard") && SuperUser_DashboardBanner.isDisplayed()){
+			System.out.println("CSR Dashboard Page is displayed for the Member");	
+			return new AccountHomePage(driver);		
+			}
+		else
+			System.out.println("CSR Dashboard Page is NOT displayed for the Member");
+		return null;			
+
+	}else{
+		System.out.println("not able to switch to new window");
+	    return null;
+	}
+	
+}
+
+
 }
 
