@@ -280,25 +280,36 @@ Feature: C1.2To test Profile and Preferences page .
     When the user navigates to Profile and Preferences page
     And I should see the EPMP i frame on profile page
     And I should see the communicationpreferncessection
-    
 
     Examples: 
       | planType | memberType  |
       | MAPD     | EPMPEnabled |
 
-        @EPMPProfilePageContactusInformation
+  @EPMPProfilePageContactusInformation @regression_06_06_18
   Scenario Outline: To test end to end regression scenario for EPMP profile page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-      #|data type    | <dataType>   |
+    #|data type    | <dataType>   |
     When the user navigates to Profile and Preferences page
-   And I should see the EPMP i frame on profile page
-   And I should be able to see edit email address and to view read only HSID email
+    And I should see the EPMP i frame on profile page
+    And I should be able to see edit email address and to view read only HSID email
     And I should be able to view and edit phone numbers
-    
-     Examples: 
-      | planType | memberType  |   dataType   |
-      | MAPD     | EPMPEnabled |  Individual  |
-      
-      
+
+    Examples: 
+      | planType | memberType  | dataType   |
+      | MAPD     | EPMPEnabled | Individual |
+
+  @profilePageForShip @regression_06_06_18
+  Scenario Outline: To test end to end regression scenario for EPMP profile page
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type | <planType> |
+    When the user navigates to Profile and Preferences page
+    And the user validate the email section on profile page for ship member
+    And the user validate the Phone section on profile page for ship member
+    And the user validate the Permanent Address section on profile page for ship member
+    And the user validate the temporary section on profile page for ship member
+
+    Examples: 
+      | planType |
+      | SHIP     |
