@@ -1,3 +1,4 @@
+@BAT_GateFeature
 @pdpInquiryKit
 @fixedTestCaseTest
 Feature:2.06-VBF-Acq-To test PDP inquiry flow in AARP site

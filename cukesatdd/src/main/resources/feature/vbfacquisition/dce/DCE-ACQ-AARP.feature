@@ -1,3 +1,4 @@
+@BAT_GateFeature
 @acq_drug_cost_estimator
 Feature:1.23-VBF-Acq-Drug Cost Estimator (DCE) - To test DCE flows on aarp acq site
 

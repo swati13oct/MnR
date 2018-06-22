@@ -1,3 +1,4 @@
+@BAT_GateFeature
 @AcqSEO
 @UlayerAcqSEO
 Feature:2.02-VBF-Acq-To test 301 redirects in AARP site Ulayer

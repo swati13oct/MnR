@@ -1,3 +1,4 @@
+@BAT_GateFeature
 @fixedTestCaseTest
 @pharmacylocatorblayer
 Feature:1.19-VBF-Acq-To test Locate a Pharmacy in acqusition flow UMS site

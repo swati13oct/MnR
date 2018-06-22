@@ -1,3 +1,4 @@
+@BAT_GateFeature
 @fixedTestCaseTest
 @enrollInPlanulayer
 Feature:1.12-VBF-Acq-To test enroll in plan on AARP site

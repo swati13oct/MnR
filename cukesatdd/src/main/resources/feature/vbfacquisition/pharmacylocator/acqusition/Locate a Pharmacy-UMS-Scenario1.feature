@@ -1,3 +1,4 @@
+@BAT_GateFeature
 @pharmacylocatorUHC
 Feature:1.20-To test Locate a Pharmacy in acqusition flow UMS site TEST1
 @pharmacySearch

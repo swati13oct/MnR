@@ -1,3 +1,4 @@
+@BAT_GateFeature
 @fixedTestCaseTest
 @AcqProviderSearchUlayer
 Feature:1.17-VBF-Acq-To test Provider Search Flow  in AARP site

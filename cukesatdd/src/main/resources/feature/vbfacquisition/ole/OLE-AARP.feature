@@ -1,3 +1,4 @@
+@BAT_GateFeature
 @fastandfurious @OLE
 @OLE_Ulayer
 Feature:1.12-VBF-ACQ-To test OLE common tool flow in AARP site

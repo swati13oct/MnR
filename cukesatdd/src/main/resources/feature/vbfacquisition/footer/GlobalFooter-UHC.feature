@@ -1,3 +1,4 @@
+@BAT_GateFeature
 @fixedTestCaseTest
 @globalfooter
 @globalfooterUMS
