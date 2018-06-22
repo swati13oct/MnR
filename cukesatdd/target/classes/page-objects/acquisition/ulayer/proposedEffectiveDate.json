@@ -1,9 +1,0 @@
-{
-"url":null,
-"expectedData":{
-"summaryHeading":{
-"identifier":"xpath",
-"elementName":"//*[@id='enrollment-step-1-part-10']/div[1]/div/div[1]"
-}
-}
-}
