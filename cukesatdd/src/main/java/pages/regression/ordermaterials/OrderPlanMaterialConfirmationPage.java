@@ -3,6 +3,7 @@
  */
 package pages.regression.ordermaterials;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -76,6 +77,18 @@ public class OrderPlanMaterialConfirmationPage extends UhcDriver {
 	public void openAndValidate() {
 		
 		validate(addordermaterialLink);
+	}
+
+	public boolean ValidateCSRErrorMessage(String cSR_Error) {
+		WebElement CSR_OrderConfirm_Error = driver.findElement(By.xpath("//*[contains(text(), '"+cSR_Error+"')]"));
+		if(validate(CSR_OrderConfirm_Error)){
+			System.out.println("CSR error message is Displayed for Order Submission in Member Auth");
+			return true;
+		}
+		else
+			System.out.println("CSR error message is NOT Displayed for Order Submission in Member Auth");
+
+		return false;
 	}
 
 }
