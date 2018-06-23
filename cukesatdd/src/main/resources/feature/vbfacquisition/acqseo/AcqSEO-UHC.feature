@@ -1,4 +1,3 @@
-@BAT_GateFeature
 @AcqSEO
 @BlayerAcqSEO
 Feature:2.01-VBF-Acq-To test 301 redirects in UMS site Blayer

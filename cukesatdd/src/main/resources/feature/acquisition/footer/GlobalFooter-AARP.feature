@@ -1,4 +1,3 @@
-@BAT_GateFeature
 @fixedTestCaseTest
 @globalfooter
 @globalfooterAARP

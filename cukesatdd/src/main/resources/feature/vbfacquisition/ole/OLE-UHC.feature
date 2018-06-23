@@ -1,4 +1,3 @@
-@BAT_GateFeature
 @fastandfurious @OLE
 @OLE_UHC
 Feature:1.13-VBF-ACQ-To test OLE common tool flow flow UMS site

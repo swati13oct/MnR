@@ -1,4 +1,3 @@
-@BAT_GateFeature
 @agentAppointment
 @fixedTestCaseTest
 Feature:1.06-VBF-Acq-To test request an appointment with an agent flow in AARP site

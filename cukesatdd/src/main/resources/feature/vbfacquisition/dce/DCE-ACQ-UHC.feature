@@ -1,4 +1,3 @@
-@BAT_GateFeature
 @acq_dce_UHC
 Feature:1.24-VBF-Acq-Drug Cost Estimator (DCE) - To test DCE flows on UMS acq site
 
