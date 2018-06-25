@@ -113,7 +113,7 @@ public class AuthorizationPage extends UhcDriver{
 
 	public boolean validate_required_field() {
 		boolean validation_Flag = true;
-		if(NextBtn.isEnabled()){
+		if(!NextBtn.isEnabled()){
 			System.out.println("Next Button is Disabled : Required fields present");
 			SoU_DisagreeRadio.click();
 			if(validate(SoU_DisagreeError) && validate(CancelEnrollButton)){
@@ -132,7 +132,7 @@ public class AuthorizationPage extends UhcDriver{
 			}*/
 			SoU_AgreeRadio.click();
 			AuthorizedRepresentativeRadio.click();
-			if(NextBtn.isEnabled() && validate(Authorized_FirstName) && validate(Authorized_LastName) 
+			if(!NextBtn.isEnabled() && validate(Authorized_FirstName) && validate(Authorized_LastName) 
 					&& validate(Authorized_Relation) && validate(Authorized_Address) && validate(Authorized_City) && validate(Authorized_State)
 					&& validate(Authorized_ZipCode) && validate(Authorized_PhNo)){
 				System.out.println("Required Fields are displayed for Authorized Representative Details entry : Next Button is disabled");

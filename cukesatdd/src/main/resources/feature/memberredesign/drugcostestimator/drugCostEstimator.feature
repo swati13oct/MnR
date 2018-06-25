@@ -129,21 +129,14 @@ Then I should not see drug look up on home page
  | Group     | SSUP      |
  | MA		| AARPIndividual|
  
-@Member_DCE_sso @regression_06_06_18
+@Member_DCE_sso
 Scenario Outline:I1.3 To Verify MR portal group members DCE should redirect to optum rx sso landing page. 
-Given login with following details logins in the member portal and validate elements
+Given I login with registered user
 | Plan Type   | <planType>   |
-Then I click on drug lookup tile which takes me to optum rx sso landing page  
+| Member Type	  | <memberType> |
+When I navigate to drug look up page
+Then I should be optum rx sso landing page  
   Examples:
- | planType | 
- | MAPD_GROUP_DCE  |
- |PDP_GROUP_DCE |
+ | planType | memberType |
+ | MAPD    | GROUP  |
  
-@drugToolNotDisplayed @regression_06_06_18
-Scenario Outline:To verify DCE drug tile is not displayed for certain members
-Given login with following details logins in the member portal and validate elements
-| Plan Type   | <planType>   |
-Then I should not see drug look up on home page
-Examples:
-	|  planType |
-	|MA_FED_DCE |

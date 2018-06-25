@@ -1,14 +1,11 @@
 package pages.regression.profileandpreferences;
 
 
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 public class CommunicationPreferencePage extends UhcDriver {
@@ -17,39 +14,13 @@ public class CommunicationPreferencePage extends UhcDriver {
 	@FindBy(xpath = ".//*[@class='page-header']//a[contains(text(),'Profile & Preferences')]")
 	private WebElement profAndPrefLink;
 	
-	@FindBy(id= "savePaperlessSettings")
+	@FindBy(xpath= ".//*[@id='skipToBodyContent']/div[2]/div[1]//button[@id='savePaperlessSettings']")
 	private WebElement savePrefButton;
-	
-	@FindBy(id = "contact")
-	private WebElement iframeEPMP;
-	
-	@FindBy(xpath = "//div[@class='tile-block paperless']/div[3]//div[@class='row']/div[1]//div[@class='control__indicator input-options']")
-	private WebElement paperlessRadioBtn;
-	
-	@FindBy(xpath = "//div[@class='tile-block paperless']/div[3]//div[@class='row']/div[2]//div[@class='control__indicator input-options']")
-	private WebElement mailRadioBtn;
 
-	@FindBy(xpath = "//div[@class='tile-block paperless']//div[@class='row consent-row']//div[@class='control__indicator red-color-status']")
-	private WebElement agreeCheckBox;
-	
-	@FindBy(id = "IPerceptionsEmbed")
-	private WebElement iPerceptionPopUp;
 
 	public CommunicationPreferencePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		try{
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-			if(validate(iPerceptionPopUp)){
-				System.out.println("Iperception popup found");
-				driver.navigate().refresh();
-			}
-				
-			}
-		catch (Exception e) {
-			System.out.println("Iperception popup NOT Present");
-
-		}
 		//openAndValidate();
 	}
 	
@@ -62,49 +33,16 @@ public class CommunicationPreferencePage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		validateNew(profAndPrefLink);
+		validate(profAndPrefLink);
 		
 
 	}
 
 	public boolean validatePage() {
 		// TODO Auto-generated method stub
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		CommonUtility.waitForPageLoad(driver, iframeEPMP, 30);
-		System.out.println("validating frame");
-		validateNew(iframeEPMP);
-		System.out.println("frame validated");
-		driver.switchTo().frame(iframeEPMP);
-		System.out.println("switched to frame");
-		
-		if(validateNew(savePrefButton))
+		if(validateNew(savePrefButton)&&validateNew(profAndPrefLink))
 			return true;
 		else 
-			return false;
-	}
-	
-	public boolean changeAndVerifyOnlinePreference(){
-		if(validateNew(paperlessRadioBtn) && !(paperlessRadioBtn.isSelected())){
-			paperlessRadioBtn.click();
-			if(validateNew(agreeCheckBox)){
-				agreeCheckBox.click();
-				System.out.println("agree button verified and clicked");
-			}
-			savePrefButton.click();
-			System.out.println("paperless button clicked and saved");
-			return true;
-		}else if(validateNew(mailRadioBtn)&& !(mailRadioBtn.isSelected())){
-			mailRadioBtn.click();
-			savePrefButton.click();
-			System.out.println("mail button clicked and saved");
-			return true;
-		}else
 			return false;
 	}
 	

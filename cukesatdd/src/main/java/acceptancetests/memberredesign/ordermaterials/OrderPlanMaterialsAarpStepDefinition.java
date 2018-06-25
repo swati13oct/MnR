@@ -295,7 +295,7 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		String PlanTypes = givenAttributesMap.get("Combo Plans");
 		String[] Plans= PlanTypes.split(",");
 		for(String currentPlan: Plans){
-//			orderPlanMaterialsPage.navigatePlanTabs(currentPlan);
+			orderPlanMaterialsPage.navigatePlanTabs(currentPlan);
 			orderPlanMaterialsPage.ValidateOptions(currentPlan);
 		}
 	}

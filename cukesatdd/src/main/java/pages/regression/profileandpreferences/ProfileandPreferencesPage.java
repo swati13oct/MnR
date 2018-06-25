@@ -43,17 +43,22 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		// ProfileandPreferences =
 		// CommonUtility.readPageData(fileName,CommonConstants.PAGE_OBJECT_DIRECTORY_BLAYER_MEMBER);
 		driver.manage().window().maximize();
-		try{
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-			if(validate(iPerceptionPopUp)){
-				System.out.println("Iperception popup found");
-				driver.navigate().refresh();
+		/*try{
+			Thread.sleep(2000);
+			((JavascriptExecutor) driver).executeScript("arguments[0].click",FeedbackModal);
+			//FeedbackModal.click();
+			System.out.println("FeedBack Modal Present");
+			if (validate(FeedbackModal)){
+			System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
 			}
-		}
-		catch (Exception e) {
-			System.out.println("Iperception popup NOT Present");
+			System.out.println("FeedBack Modal Closed");
+			//Thread.sleep(3000);
 
-		}
+			}
+			catch (Exception e) {
+			System.out.println("FeedBack Modal NOT Present");
+
+			}*/
 		try {
 			openAndValidate();
 		} catch (InterruptedException e) {
@@ -397,8 +402,8 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(id = "hsidRecLink")
 	private WebElement hsidAccountLink;
 
-	@FindBy(id = "IPerceptionsEmbed")
-	private WebElement iPerceptionPopUp;
+	@FindBy(xpath = ".//*[@id='IPEinvL']/map/area[2]")
+	private List<WebElement> iPerceptionPopUp;
 
 	@FindBy(xpath = "//*[@id='temporaryAddress']/div[1]/a[1]")
 	private List<WebElement> tempEditButton;
@@ -501,7 +506,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@Override
 	public void openAndValidate() throws InterruptedException {
 		// TODO Auto-generated method stub
-		
+
 	}
 	
 	public void validateFeedbackPopup(){
@@ -511,7 +516,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(validateNew(iPerceptionPopUp)){
+		if(validate(feedbackPopup)){
 			feedbackClose.click();
 		}
 	}
@@ -1519,9 +1524,9 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();	
+			e.printStackTrace();
+			driver.navigate().refresh();
 		}
-		driver.navigate().refresh();
 	}
 	public void validateSavePreferenceWithMemberAuth(String errorMessageExpected){
 		//click on edit preference link
