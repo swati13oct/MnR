@@ -797,10 +797,11 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		System.out.println(memberid);
 		String effectivedate = memberAttributesMap.get("Effective Date");
 	    String monthlypremium = memberAttributesMap.get("Monthly premium");
+	    String extrahelp =memberAttributesMap.get("Extra Help");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		
-		benefitsCoveragePage.validatePlanOverviewIndlis(membername,memberid,effectivedate,monthlypremium);
+		benefitsCoveragePage.validatePlanOverviewIndlis(membername,memberid,effectivedate,monthlypremium,extrahelp);
 	}
 
 	/** 
