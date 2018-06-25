@@ -118,14 +118,29 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfileandPreferencesPage profilePreferencesPage = accountHomePage.navigateDirectToProfilePage();
 		
 		if (profilePreferencesPage!= null) {
-			
+
 			getLoginScenario().saveBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE, profilePreferencesPage);
 		}
 		else
 			Assert.fail("Profile preference page not loaded");
 
 	}
-	
+	/*@Then("^the user navigates to Profile page")
+	public void user_navigate_toProfilepage() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+		profilePreferencesPage profilePreferencesPage = accountHomePage.navigateDirectToProfilePage();
+
+		if (profilePreferencesPage != null) {
+			getLoginScenario().saveBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE, profilePreferencesPage);
+		}
+		if (profilePreferencesPage == null) {
+			System.out.println(" Variable is NULL!");
+
+		}
+	}*/
+
+
+
 	/** 
 	 * @toDo : The user validates the Account information of the logged in member 
 	 */
@@ -447,6 +462,21 @@ public class ProfileandPreferencesUMSStepDefinition {
 			 getLoginScenario().saveBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE,communicationPrefPage);
 		 }
 	}
+	
+	@Then("^the user changes the online preference and saves the change")
+	public void userChangesOnlinePref() {
+		CommunicationPreferencePage communicationPrefPage = (CommunicationPreferencePage) getLoginScenario()
+				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
+
+		 
+		 if(communicationPrefPage.changeAndVerifyOnlinePreference())
+		 {
+			System.out.println("Communication preference online preference changed and verified");
+			 getLoginScenario().saveBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE,communicationPrefPage);
+		 }else
+			 Assert.fail("Error in changing and saving online preference");
+	}
+	
 	/** 
 	 * @toDo : Clicks on Profile & Preferences link to return to account settings page
 	 */

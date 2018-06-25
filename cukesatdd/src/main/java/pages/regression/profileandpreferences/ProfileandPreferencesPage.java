@@ -48,12 +48,12 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			if(validate(iPerceptionPopUp)){
 				System.out.println("Iperception popup found");
 				driver.navigate().refresh();
-				}
 			}
-			catch (Exception e) {
-			System.out.println("FeedBack Modal NOT Present");
+		}
+		catch (Exception e) {
+			System.out.println("Iperception popup NOT Present");
 
-			}
+		}
 		try {
 			openAndValidate();
 		} catch (InterruptedException e) {
@@ -501,7 +501,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@Override
 	public void openAndValidate() throws InterruptedException {
 		// TODO Auto-generated method stub
-
+		
 	}
 	
 	public void validateFeedbackPopup(){
@@ -511,7 +511,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(validate(iPerceptionPopUp)){
+		if(validateNew(iPerceptionPopUp)){
 			feedbackClose.click();
 		}
 	}
@@ -1519,8 +1519,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-			
+			e.printStackTrace();	
 		}
 		driver.navigate().refresh();
 	}
