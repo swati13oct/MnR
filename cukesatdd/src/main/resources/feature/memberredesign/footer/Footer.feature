@@ -1,8 +1,9 @@
 @theIncredibles
 @member_redesign_footer
+@regression_06_06_18
 Feature:I1.2Footer for Member Site Redesign
 
-@member_redesign_footer @IncrediblesFooter
+@member_redesign_footer @IncrediblesFooter 
 Scenario Outline: an authenticated member on the new Member site, I want to check Footer section.
  Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |

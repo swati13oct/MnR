@@ -103,7 +103,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 	 * @toDo : The user navigates to Profile and Preferences page from Rally
 	 *       Dashboard
 	 */
-	@Then("^the user navigates to Profile and Preferences page")
+	@Then("^the user navigates to Profile and Preferences page$")
 	public void user_navigate_toProfileandPreferencespage() throws InterruptedException {
 
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
@@ -112,6 +112,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfileandPreferencesPage profilePreferencesPage = accountHomePage.navigateDirectToProfilePage();
 
 		if (profilePreferencesPage != null) {
+			profilePreferencesPage.pageRefresh();
 			getLoginScenario().saveBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE, profilePreferencesPage);
 		} else
 			Assert.fail("Profile preference page not loaded");

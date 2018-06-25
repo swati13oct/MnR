@@ -1,6 +1,5 @@
 @theSpartans @profilepreferencesPage
 Feature:S1.2 Save profile preferences
-
   @profilepreferencesSpartans
   Scenario Outline: To verify My Preferences and edit preferences
     Given PreferencesSpartans Login to the application
