@@ -124,7 +124,7 @@ public class MedicareInformationPage extends UhcDriver{
 		boolean flag = false;
 		
 		if(!RadioCardA.isSelected() && !RadioCardA.isSelected()){
-			if(!NextBtn.isEnabled() && !validate(firstNameField)&& !validate(lastNameField) && !validate(claimNumberField)
+			if(NextBtn.isEnabled() && !validate(firstNameField)&& !validate(lastNameField) && !validate(claimNumberField)
 					&& !validate(partAStartDateField)&& !validate(partBStartDateField)){
 				System.out.println("Medicare Information Fields are not Displayed when Card Type is not selected");
 				flag= true;
