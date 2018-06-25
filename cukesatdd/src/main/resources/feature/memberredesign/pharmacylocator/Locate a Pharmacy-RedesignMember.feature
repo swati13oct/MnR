@@ -3,8 +3,7 @@
 @PharmacylocatorRedesign
 @regression_06_06_18
 Feature: P1.6To test Locate a Pharmacy tool in Redesign site
-
-  @PharmacyDistanceDefaultZip
+ @PharmacyDistanceDefaultZip
   Scenario Outline: To verify for default zipcode, filters, Show on map, View PDF, More Info in Redesign site
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
