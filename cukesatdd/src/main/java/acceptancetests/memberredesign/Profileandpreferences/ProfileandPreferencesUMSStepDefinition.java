@@ -118,29 +118,14 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfileandPreferencesPage profilePreferencesPage = accountHomePage.navigateDirectToProfilePage();
 		
 		if (profilePreferencesPage!= null) {
-			profilePreferencesPage.pageRefresh();
+			
 			getLoginScenario().saveBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE, profilePreferencesPage);
 		}
 		else
 			Assert.fail("Profile preference page not loaded");
 
 	}
-	/*@Then("^the user navigates to Profile page")
-	public void user_navigate_toProfilepage() {
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		profilePreferencesPage profilePreferencesPage = accountHomePage.navigateDirectToProfilePage();
-
-		if (profilePreferencesPage != null) {
-			getLoginScenario().saveBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE, profilePreferencesPage);
-		}
-		if (profilePreferencesPage == null) {
-			System.out.println(" Variable is NULL!");
-
-		}
-	}*/
-
-
-
+	
 	/** 
 	 * @toDo : The user validates the Account information of the logged in member 
 	 */

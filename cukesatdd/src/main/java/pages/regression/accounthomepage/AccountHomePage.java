@@ -273,14 +273,14 @@ public class AccountHomePage extends UhcDriver {
 	public AccountHomePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		try {
+		/*try {
 
 			if (iPerceptionPopUp.isDisplayed()) {
 				iPerceptionPopUp.click();
 			}
 		}catch(Exception e)        {
 			System.out.println("iPerception Pop Up not displayed");
-		}
+		}*/
 		//openAndValidate();
 	}
 
@@ -1287,6 +1287,29 @@ public class AccountHomePage extends UhcDriver {
 
 		}		
 		return false;
-	} 
-}
+	}	
+	
+	public DrugCostEstimatorPage navigate_to_optumrxPage() {	
+		waitforElement(drugLookup);	
+	drugLookup.click();	
+			
+		String mainwindow=driver.getWindowHandle();	
+		Set<String> allWindowHandles = driver.getWindowHandles();	
+		for (String currentWindowHandle : allWindowHandles) {	
+			if (!currentWindowHandle.equals(mainwindow)) {	
+				driver.switchTo().window(currentWindowHandle);	
+			}	
+		}	
+		try {	
+			Thread.sleep(4000);	
+		} catch (InterruptedException e) {	
+			// TODO Auto-generated catch block	
+			e.printStackTrace();	
+		}	
+		if(driver.getCurrentUrl().equals("https://chp-stage.optumrx.com/public/sso-landing"))	
+			return new DrugCostEstimatorPage(driver);	
+	return null;			
+ 	} 	 
+ }	 
+ 
 

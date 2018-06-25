@@ -301,7 +301,13 @@ Scenario Outline: To verify Edit preferences section for Go Green
 Given login with following details logins in the member portal and validate elements
       | User Type   | <userType>    |  
 When the user navigates to Profile and Preferences page 
-And the user clicks on edit preferences link and validates the page     
+And the user clicks on edit preferences link and validates the page
+Then the user changes the online preference and saves the change   	
 Examples:
-	| userType |
-	| MAPD_AARP |
+ 	| userType |
+  | MAPD_AARP_GOGreen | 
+	| MA_AARP_GOGreen   |	
+	| PDP_AARP_GOGreen  |	
+	| MA_UHC_GOGreen |	
+	| MAPD_UHC_GOGreen |	
+	| MAPD_GROUP_GOGreen|
