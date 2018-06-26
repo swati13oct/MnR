@@ -15,9 +15,9 @@ import cucumber.api.CucumberOptions;
 		jsonReport = "target/cucumber-RunMRATDDfastandfuriousAcquisitionTest.json",detailedReport = true, 
 		detailedAggregatedReport = true, overviewReport = true, toPDF = true, 
 		outputFolder = "target/RunMRATDDfastandfuriousAcquisitionTest")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
-		features = { "src/main/resources/feature/memberredesign" }, 
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, 
+		features = { "src/main/resources/feature/acquisition" }, 
 		plugin = {"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDfastandfuriousAcquisitionTest.json" }, 
-		tags = {"@regressionMemberAuth"})
+		tags = {"@OLE_VPP_AARP"})
 public class RunMRATDDfastandfuriousAcquisitionTest { 
 }
