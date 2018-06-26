@@ -20,7 +20,7 @@ public class CommunicationPreferencePage extends UhcDriver {
 	@FindBy(id= "savePaperlessSettings")
 	private WebElement savePrefButton;
 	
-	@FindBy(id = "contact")
+	@FindBy(xpath = ".//*[@id='contact' or @id='preferences']")
 	private WebElement iframeEPMP;
 	
 	@FindBy(xpath = "//div[@class='tile-block paperless']/div[3]//div[@class='row']/div[1]//div[@class='control__indicator input-options']")
