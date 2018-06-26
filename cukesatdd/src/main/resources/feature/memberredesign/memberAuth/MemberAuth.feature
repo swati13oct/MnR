@@ -31,7 +31,7 @@ Feature: S1.1 To test Member Auth Dashboard page.
       | qavgogine | qavgogine | 4B152296-7C31-49C7-B49F-8739EB9A84A2 | You are viewing this site with member authorized read only access. Remember to LOGOUT at the end of the session | You are not authorized to submit |
       
        
- @regressionMemberAuth     @regression_06_06_18FnF
+ @regressionMemberAuth     @regression_06_06_18
   Scenario Outline: TC09_Save_Prefrences WRT member auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password 
@@ -47,7 +47,7 @@ Feature: S1.1 To test Member Auth Dashboard page.
     | username  | password  |member            |  errorMessage|
     | qavgogine | qavgogine |q2_jun_uhc0008  	 |You are not authorized to change preferences on behalf of the member.|
  
- @regressionMemberAuth  @regression_06_06_18FnF
+ @regressionMemberAuth  @regression_06_06_18
     Scenario Outline: TC08_Edit_Temporary_Address WRT member auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password 
@@ -63,7 +63,7 @@ Feature: S1.1 To test Member Auth Dashboard page.
     | username  | password  |member            |  errorMessage|
     | qavgogine | qavgogine |q2_jun_uhc0008  	 |you are not authorized to update the address number on behalf of member|
     
-@regressionMemberAuth   @regression_06_06_18FnF
+@regressionMemberAuth   @regression_06_06_18
     Scenario Outline: TC07_Edit_alternative_Address WRT member auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password 
@@ -79,7 +79,7 @@ Feature: S1.1 To test Member Auth Dashboard page.
     | username  | password  |member            |  errorMessage|
     | qavgogine | qavgogine |q2_jun_uhc0008  	 |you are not authorized to update the address number on behalf of member|
     
-@regressionMemberAuth    @regression_06_06_18FnF
+@regressionMemberAuth    @regression_06_06_18
     Scenario Outline: TC06_Edit_Email WRT member auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password 
@@ -95,7 +95,7 @@ Feature: S1.1 To test Member Auth Dashboard page.
     | username  | password  |member            |  errorMessage|
     | qavgogine | qavgogine |q2_jun_uhc0008  	 |you are not authorized to update the email address on behalf of member.|
     
-@regressionMemberAuth    @regression_06_06_18FnF
+@regressionMemberAuth    @regression_06_06_18
     Scenario Outline: TC05_Edit_Phone WRT member auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password 
@@ -111,7 +111,7 @@ Feature: S1.1 To test Member Auth Dashboard page.
     | username  | password  |member            |  errorMessage|
     | qavgogine | qavgogine |q2_jun_uhc0008  	 |you are not authorized to update the phone number on behalf of member|
  
- @regressionMemberAuth   @regression_06_06_18FnF
+ @regressionMemberAuth   @regression_06_06_18
   Scenario Outline: TC18_Check EOB page is accessible using Member Auth Tool WRT member auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password 
@@ -163,9 +163,6 @@ Feature: S1.1 To test Member Auth Dashboard page.
       | MemUsername | <MemUserName> |   
     And user clicks on member to select
     When the user navigates to pharmacy search page in Redesign site
-#    And the user enters following details for pharmacy search in Redesign Site
-#      | Zip Code | <zipcode>  |
-#      | Distance | <distance> |
     Then the user validates the pharmacies available in Redesign site
     When the user Selects Chinese Language in Redesign Site
     Then the user searches multi lang for pharmacy search results available in Redesign site
@@ -173,6 +170,27 @@ Feature: S1.1 To test Member Auth Dashboard page.
     Then the user searches multi lang for pharmacy search results available in Redesign site
 
     Examples: 
-      | username  | password  |MemUserName    | zipcode | distance |
-      | qavgogine | qavgogine | q2_jun_aarp0017 |    10980 |       10 |
+      | username  | password  |MemUserName    | 
+      | qavgogine | qavgogine | q2_jun_aarp0017 |   
+      
+             
+@MemberAuth_OrderMaterialsErrorMessage   @regression_06_06_18
+Scenario Outline: To validate Order Submission Error for Member Auth
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username      | <username>     |
+      | Password      | <password>     |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |   
+    And user clicks on member to select
+    When the user views order materials in Member Redesign Order Materials page
+    And the user selects an option from the orderp list in Redesign site
+      | Option    | <option>   |
+      | Plan Type | <planType> |
+    Then the user validates CSR error message for Order Submission
+     | CSR Error	| <csrError> |
+    
+   Examples: 
+      | username  | password  |MemUserName    | planType |  option           |csrError |
+      | qavgogine | qavgogine | q2_jun_aarp0017 | MAPD     | Replacement ID card      | are not authorized to order material |
  

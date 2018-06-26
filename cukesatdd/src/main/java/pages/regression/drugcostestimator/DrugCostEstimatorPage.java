@@ -1721,6 +1721,12 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 		}
 
+		public boolean validateOptumRxPage() {
+			if(driver.getCurrentUrl().contains("optumrx.com/public/sso-landing"))
+				return true;
+			return false;
+		}
+
 	}
 
 
