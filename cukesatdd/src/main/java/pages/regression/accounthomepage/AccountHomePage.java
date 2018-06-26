@@ -227,6 +227,52 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(xpath = ".//header[@class='hide-mobile']//a[contains(text(),'Find Care & Costs')]")
 	private WebElement findCare;
+	
+	@FindBy(className = "menuL1")
+	private WebElement header;
+	
+
+	@FindBy(id = "coveragebenefits_2")
+	private WebElement coverageBenefits;
+	
+	@FindBy(id = "benefitssummary")
+	private WebElement benefitsSummary;
+	
+	@FindBy(id = "formsandresourcesC1")
+	private WebElement formsAndResources;
+	
+	@FindBy(id = "ordermaterials")
+	private WebElement orderMaterials;
+	
+	@FindBy(id = "accountprofile")
+	private WebElement accountProfile;
+
+	@FindBy(id = "Help")
+	private WebElement help;
+	
+	@FindBy(xpath = ".//*[@id='dropdynamic']/li/a[contains(text(),'Log Out')]")
+	private WebElement logOut;
+	
+	@FindBy(id = "main-nav")
+	private WebElement dashboardHeader;
+	
+	//Terminated view
+	
+	@FindBy(xpath = ".//header[@class='hide-mobile']//a[contains(text(),'Premium Payments')]")
+	private WebElement dashbaordPremiumPayment;
+	
+	@FindBy(xpath = ".//header[@class='hide-mobile']//a[contains(text(),'Coverage & Benefits')]")
+	private WebElement coverageBenefitsDashboard;
+	
+	@FindBy(xpath = ".//header[@class='hide-mobile']//a[contains(text(),'Claims')]")
+	private WebElement claimsDashboard;
+	
+	@FindBy(className = "help-link")
+	private WebElement helpDashboard;	
+	
+	@FindBy(xpath = ".//header[@class='hide-mobile']//a[contains(text(),'Find Care & Costs')]")
+	private WebElement dashboardFindCare;
+
 
 
 	//Added by Sneha - Navigate to Order Plan Materials 
@@ -1310,5 +1356,297 @@ public class AccountHomePage extends UhcDriver {
 			return new DrugCostEstimatorPage(driver);
 		return null;		
 	} 
+
+
+
+/**
+ * Validate the Header of the page
+ */
+	
+public void validateHeader(){
+	Assert.assertTrue("Header is not displayed", header.isDisplayed());
 }
+
+/**
+ * Validate claims Tab
+ */
+public void validateClaims(){
+	Assert.assertTrue("Claims tab is not displayed", claims.isDisplayed());
+}
+
+
+/**
+ * Validate Feedback Model
+ */
+public void checkModelPopup() {
+	try {
+		FeedbackModal.click();
+		System.out.println("FeedBack Modal Present");
+		if (validate(FeedbackModal)) {
+			System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
+		}
+		System.out.println("FeedBack Modal Closed");
+	} catch (Exception e) {
+		System.out.println("FeedBack Modal NOT Present");
+
+	}
+}
+/**
+ * Click on claims summary
+ */
+public void clickClaimsSummary(){
+	if(claims.isDisplayed()){
+		claims.click();
+		if(claimSummary.isDisplayed()){
+			claimSummary.click();
+		}
+	}
+}
+
+/**
+ * Click on claims followed by EOB
+ */
+public void clickeob(){
+	if(claims.isDisplayed()){
+		claims.click();
+		if(explainationOfBenefits.isDisplayed()){
+			explainationOfBenefits.click();
+		}
+	}
+}
+
+/**
+ * Validate coverage and Benefits tab
+ */
+public void validateCoverageBenefits(){
+	try {
+		Thread.sleep(2000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	waitforElement(coverageBenefits);
+	Assert.assertTrue("coverageBenefits tab is displayed", coverageBenefits.isDisplayed());
+}
+
+/**
+ * Validate Coverage and Benefits Level 2 Tabs
+ */
+public void validateCoverageBenefitsL2Tabs(){
+	waitforElement(coverageBenefits);
+	if(coverageBenefits.isDisplayed()){
+		coverageBenefits.click();
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Assert.assertTrue("benefitsSummary is displayed", benefitsSummary.isDisplayed());
+		Assert.assertTrue("formsAndResources is displayed", formsAndResources.isDisplayed());
+		Assert.assertTrue("orderMaterials is displayed", orderMaterials.isDisplayed());
+	}
+}
+
+/**
+ * click on Benefits Summary
+ */
+public void clickBenefitsSummary(){
+	if(coverageBenefits.isDisplayed()){
+		coverageBenefits.click();
+		if(benefitsSummary.isDisplayed()){
+			benefitsSummary.click();
+		}
+	}
+}
+
+/**
+ * click on forms And Resources
+ */
+public void clickFormsResources(){
+	if(coverageBenefits.isDisplayed()){
+		coverageBenefits.click();
+		if(formsAndResources.isDisplayed()){
+			formsAndResources.click();
+		}
+	}
+}
+
+
+/**
+ * click on Order Materials
+ */
+public void clickOrderMaterials() {
+	try {
+		Thread.sleep(2000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	if (coverageBenefits.isDisplayed()) {
+		coverageBenefits.click();
+		if (orderMaterials.isDisplayed()) {
+			orderMaterials.click();
+		}
+	}
+}
+
+public void validateHelp(){
+	Assert.assertTrue("Help tab is displayed", help.isDisplayed());
+}
+
+
+public void validateAccountProfile(){
+	if (logOut.isDisplayed()){
+		Assert.assertTrue("Account/Profile tab is displayed", accountProfile.isDisplayed());
+		clickAccountProfile(); 
+		clickLogout();
+	} else Assert.assertFalse("Account/Profile tab is not displayed", !accountProfile.isDisplayed());
+	
+	
+}
+
+/**
+ * Validate the Header on the dasboard
+ */
+public void validateDashboardHeader() {
+	Assert.assertTrue("Header is displayed", dashboardHeader.isDisplayed());
+}
+
+public void clickAccountProfile() {
+	if(accountProfile.isDisplayed()){
+		accountProfile.click();
+	}
+	
+}
+
+public void clickLogout() {
+	if(logOut.isDisplayed()){
+		logOut.click();
+		if(driver.getTitle().equals("UnitedHealthcare Medicare Member Sign In"))
+		Assert.assertTrue("user is logged out", true);
+		
+		}
+	
+}
+
+// Header in a Terminated view
+
+
+/**
+ * Validate claims Tab on dashboard
+ */
+	public void validateDashboardClaims(){
+	Assert.assertTrue("Claims tab is displayed", claimsDashboard.isDisplayed());
+	
+}
+
+	public void validateDashboardClaimsL2Tabs(){
+	if(claimsDashboard.isDisplayed()){
+		claimsDashboard.click();
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Assert.assertTrue("claimSummary is not displayed", claimSummary.isDisplayed());
+		Assert.assertTrue("explainationOfBenefits is not displayed", explainationOfBenefits.isDisplayed());
+			
+	}
+
+}
+	
+		/**
+	 * validate help link on dashboard
+	 */
+	public void validateDashboardHelp(){
+		Assert.assertTrue("help link is displayed", helpDashboard.isDisplayed());
+	}
+/**
+ * Validate coverage & Benefits Tab on dashboard
+ */
+	public void validateDashboardCoverageBenefits(){
+	Assert.assertTrue("coverageBenefits tab is displayed", coverageBenefitsDashboard.isDisplayed());
+	
+	}
+	
+	public void validateDashboardCoverageBenefitsL2Tabs(){
+		waitforElement(coverageBenefits);
+		if(coverageBenefitsDashboard.isDisplayed()){
+			coverageBenefitsDashboard.click();
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			Assert.assertFalse("benefitsSummary is Not displayed", benefitsSummary.isDisplayed());
+			Assert.assertTrue("formsAndResources is displayed", formsAndResources.isDisplayed());
+			Assert.assertFalse("orderMaterials is Not displayed", orderMaterials.isDisplayed());
+		}
+	}
+		
+
+	public void validateDasboardHelp(){
+	Assert.assertTrue("Help tab is displayed", helpDashboard.isDisplayed());
+}
+
+
+/*validate that the Premium payment tab is not displayed for a 	terminated member
+*/
+
+			public boolean dashboardPremiumPaymentsNotAvailable() {
+				
+				if(validate(premiumPayment)==false)
+				{
+					Assert.assertFalse("premium payment is not displayed", validate(dashbaordPremiumPayment));
+					return true;
+					
+				}
+				else {
+					Assert.fail("premium payment is displayed");
+					return false;
+				}
+				}
+
+/*validate that the Find care tab is not displayed on the header in a terminated view
+	 */
+
+	public boolean dashboardFindCareNotAvailable() {
+		
+		if(validate(dashboardFindCare)==false)
+		{
+			Assert.assertFalse("find care is not displayed", validate(dashboardFindCare));
+			return true;
+			
+		}
+		else {
+			Assert.fail("find care is displayed");
+			return false;
+		}
+		}
+	
+	/**
+	 * validate forms and resources
+	 */
+	
+	public void validateFormsResources(){
+		if(coverageBenefitsDashboard.isDisplayed()){
+			coverageBenefitsDashboard.click();
+		}
+
+		}
+
+	public void validateFormsResourcesPage(){
+			
+	if(driver.getCurrentUrl().contains("/documents/overview.html"));
+		{
+		System.out.println("User is on forms resources page and URL is ====>"+driver.getCurrentUrl()); 
+		}
+
+	}
+	
+}
+	
 
