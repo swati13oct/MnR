@@ -1213,7 +1213,9 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public  void dce_not_present(){
-		Assert.assertFalse("Drug look up link is not present", drugLookup.isDisplayed());	
+		if(validate(drugLookup)){
+			Assert.fail("Error: drug lookup tile should not be displayed");
+		}
 	}
 	
 	
