@@ -266,24 +266,29 @@ Feature: C1.2To test Profile and Preferences page .
     And the user clicks on profile & preferences link to go back to Account settings page
     And the user validates the address section
       | Member Type | <memberType> |
-Examples: 
+
+    Examples: 
       | userType            | memberType |
       | MAPD_AARPIndividual | AARP       |
-@goGreen @regression_06_06_18
-Scenario Outline: To verify Edit preferences section for Go Green
-Given login with following details logins in the member portal and validate elements
-      | User Type   | <userType>    |  
-When the user navigates to Profile and Preferences page 
-And the user clicks on edit preferences link and validates the page  
-Then the user changes the online preference and saves the change   
-Examples:
-	| userType |
-| MAPD_AARP_GOGreen |
-	| MA_AARP_GOGreen   |
-	| PDP_AARP_GOGreen  |
-	| MA_UHC_GOGreen |
-	| MAPD_UHC_GOGreen |
-	| MAPD_GROUP_GOGreen|@EPMPProfilePage
+
+  @goGreen @regression_06_06_18
+  Scenario Outline: To verify Edit preferences section for Go Green
+    Given login with following details logins in the member portal and validate elements
+      | User Type | <userType> |
+    When the user navigates to Profile and Preferences page
+    And the user clicks on edit preferences link and validates the page
+    Then the user changes the online preference and saves the change
+
+    Examples: 
+      | userType           |
+      | MAPD_AARP_GOGreen  |
+      | MA_AARP_GOGreen    |
+      | PDP_AARP_GOGreen   |
+      | MA_UHC_GOGreen     |
+      | MAPD_UHC_GOGreen   |
+      | MAPD_GROUP_GOGreen |
+
+  @EPMPProfilePage
   Scenario Outline: To test end to end regression scenario for EPMP profile page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
