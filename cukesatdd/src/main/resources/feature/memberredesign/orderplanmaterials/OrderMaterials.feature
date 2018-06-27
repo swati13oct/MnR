@@ -15,7 +15,6 @@ Feature:P1.5 To test order materials in Redesign site
       | Option    | <option>   |
       | Plan Type | <planType> |
     And the user validate order additional material and click to add other order additional material in Order Confirmation Page
-
     Examples: 
       | planType | memberType | option           |
       | MA      |  MA_AARPIndividual | Replacement ID card |

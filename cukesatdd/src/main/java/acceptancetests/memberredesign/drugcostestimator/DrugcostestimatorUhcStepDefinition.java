@@ -1379,11 +1379,20 @@ public class DrugcostestimatorUhcStepDefinition {
 		account_home_page.dce_not_present();
 	}
 
-	@Then("^I should be optum rx sso landing page$")
+//	@Then("^I should be optum rx sso landing page$")
+
+	@Then("^I click on drug lookup tile which takes me to optum rx sso landing page$")
 	public void I_should_be_optum_rx_sso_landing_page() throws Throwable {
-		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
-				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		AccountHomePage account_home_page = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		// Need to add the code
+
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) account_home_page.navigate_to_optumrxPage();
+		getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
+		
+		if(dce!=null){
+			Assert.assertTrue(true);
+		}else
+			Assert.fail("Error in landing on the optum rx sso page");
 
 	}
 }

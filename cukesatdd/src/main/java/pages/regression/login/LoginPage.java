@@ -166,6 +166,8 @@ public class LoginPage extends UhcDriver {
 			// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
+			
 			if(currentUrl().contains("testharness.html") || currentUrl().contains("/dashboard"))
 	        {
 				System.out.println("test");

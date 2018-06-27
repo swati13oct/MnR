@@ -1,6 +1,5 @@
 @loginAssistance
 Feature: To test Login Assistance flow on AARP site
-
   Scenario Outline: Verify Login Assistance flow in AARP site when forgot username
     Given user navigates to login assistance page from member AARP site
     When the user selects the username or password checkbox in AARP site

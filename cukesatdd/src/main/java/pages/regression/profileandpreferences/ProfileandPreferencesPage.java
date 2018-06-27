@@ -17,6 +17,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import pages.member.bluelayer.GoGreenPage;
+import pages.regression.memberauth.MemberAuthPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
@@ -42,22 +43,17 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		// ProfileandPreferences =
 		// CommonUtility.readPageData(fileName,CommonConstants.PAGE_OBJECT_DIRECTORY_BLAYER_MEMBER);
 		driver.manage().window().maximize();
-		/*try{
-			Thread.sleep(2000);
-			((JavascriptExecutor) driver).executeScript("arguments[0].click",FeedbackModal);
-			//FeedbackModal.click();
-			System.out.println("FeedBack Modal Present");
-			if (validate(FeedbackModal)){
-			System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
+		try{
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			if(validate(iPerceptionPopUp)){
+				System.out.println("Iperception popup found");
+				driver.navigate().refresh();
 			}
-			System.out.println("FeedBack Modal Closed");
-			//Thread.sleep(3000);
+		}
+		catch (Exception e) {
+			System.out.println("Iperception popup NOT Present");
 
-			}
-			catch (Exception e) {
-			System.out.println("FeedBack Modal NOT Present");
-
-			}*/
+		}
 		try {
 			openAndValidate();
 		} catch (InterruptedException e) {
@@ -401,8 +397,8 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(id = "hsidRecLink")
 	private WebElement hsidAccountLink;
 
-	@FindBy(xpath = ".//*[@id='IPEinvL']/map/area[2]")
-	private List<WebElement> iPerceptionPopUp;
+	@FindBy(id = "IPerceptionsEmbed")
+	private WebElement iPerceptionPopUp;
 
 	@FindBy(xpath = "//*[@id='temporaryAddress']/div[1]/a[1]")
 	private List<WebElement> tempEditButton;
@@ -460,7 +456,44 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	
 	@FindBy(id="contact")
 	private WebElement contactInfoBox;
-
+	
+	@FindBy(xpath=".//*[@id='preferences-form0']/div/div[1]/div[2]/div[2]/div/fieldset/div[1]/div/label")
+	private WebElement onlineDeliveryRadionButton;
+	
+	@FindBy(id="save-prefs-btn-FEDERAL-INDIVIDUAL")
+	private WebElement savePrefernceSettingButton;
+	
+	@FindBy(id="//div[@class='']/span")
+	private WebElement errorMessage;
+	
+	@FindBy(className="edit-btn edit-btn-email")
+	private WebElement emailAddressEditButton;
+	
+	@FindBy(id="emailNew")
+	private WebElement newEmailAddressTextField;
+	
+	@FindBy(id="emailNewConfirm")
+	private WebElement confirmEmailAddressTextField;
+	
+	@FindBy(xpath=".//*[@id='email-form']/div[3]/div/span")
+	private WebElement memberAuthEmailErrorMessages;
+	
+	@FindBy(xpath="(//*[@class='edit-btn'])[1]")
+	private WebElement memberAuthphoneEditButton;
+	
+	@FindBy(xpath=".//*[@id='phone-form']/div[3]/div/div/span")
+	private WebElement membrAutphoneErrorMessage;
+	
+	@FindBy(xpath=".//*[@id='mailingAddress']/div[1]/a[1]")
+	private WebElement maillingAddressEditButton;	
+	
+	@FindBy(xpath=".//*[@id='address-mailing-form']/fieldset/div[7]/div/div/span")
+	private WebElement altMaillingAddressErrorMessage;
+	
+	
+	@FindBy(xpath=".//*[@id='address-temporary-form']/fieldset/div[7]/div/div/span")
+	private WebElement memberAutTempAddressErrorMessage;
+		
 	public PageData ProfileandPreferences;
 
 	public JSONObject ProfileandPreferencesPageJson;
@@ -468,7 +501,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@Override
 	public void openAndValidate() throws InterruptedException {
 		// TODO Auto-generated method stub
-
+		
 	}
 	
 	public void validateFeedbackPopup(){
@@ -478,7 +511,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(validate(feedbackPopup)){
+		if(validateNew(iPerceptionPopUp)){
 			feedbackClose.click();
 		}
 	}
@@ -1486,8 +1519,79 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e.printStackTrace();	
 		}
 		driver.navigate().refresh();
 	}
+	public void validateSavePreferenceWithMemberAuth(String errorMessageExpected){
+		//click on edit preference link
+		waitforElement(editPreferencesLink);
+		editPreferencesLink.click();
+		//change the preference and save
+		waitforElement(onlineDeliveryRadionButton);
+		onlineDeliveryRadionButton.click();
+		savePrefernceSettingButton.click();	
+		//validate the error message displayed
+		if(errorMessage.getText().equals(errorMessageExpected)){
+			System.out.println("Error message displayed ==="+errorMessage.getText());
+			Assert.assertTrue(true);
+		}else{
+			System.out.println("InCorrect Error Message displayed ==="+errorMessage.getText());
+			Assert.fail();
+		}
+
+	}
+	public void validateTemproraryAddressWithMemberAuth(String errorMessageExpected){
+		maillingAddressEditButton.click();
+		mailingStreetAddress2.clear();
+		mailingStreetAddress2.sendKeys("afoaf");
+		mailingSaveButtontempAddress.click();
+		if(altMaillingAddressErrorMessage.getText().equals(errorMessageExpected)){
+			System.out.println("Error message displayed ==="+altMaillingAddressErrorMessage.getText());
+			Assert.assertTrue(true);
+		}else{
+			System.out.println("InCorrect Error Message displayed ==="+altMaillingAddressErrorMessage.getText());
+			Assert.fail();
+		}
+	}
+	public void validateAlternativeAddressWithMemberAuth(String errorMessageExpected){
+		addTempAddressLink.click();
+		StreetAddress2.sendKeys("asdfgh");
+		SaveButtontempAddress.click();
+		if(memberAutTempAddressErrorMessage.getText().equals(errorMessageExpected)){
+			System.out.println("Error message displayed ==="+memberAutTempAddressErrorMessage.getText());
+			Assert.assertTrue(true);
+		}else{
+			System.out.println("InCorrect Error Message displayed ==="+memberAutTempAddressErrorMessage.getText());
+			Assert.fail();
+		}		
+	}
+	public void validateEditEmailWithMemberAuth(String errorMessageExpected){
+		emailAddressEditButton.click();
+		newEmailAddressTextField.sendKeys("testing@optum.com");
+		confirmEmailAddressTextField.sendKeys("testing@optum.com");
+		saveEmailButton.click();
+		if(memberAuthEmailErrorMessages.getText().equals(errorMessageExpected)){
+			System.out.println("Error message displayed ==="+memberAuthEmailErrorMessages.getText());
+			Assert.assertTrue(true);
+		}else{
+			System.out.println("InCorrect Error Message displayed ==="+memberAuthEmailErrorMessages.getText());
+			Assert.fail();
+		}
+	}
+	public void validateEditPhoneWithMemberAuth(String errorMessageExpected){
+		memberAuthphoneEditButton.click();
+		daytimePhoneTextField.clear();
+		daytimePhoneTextField.sendKeys("1111111111");
+		phoneSaveButton.click();
+		if(membrAutphoneErrorMessage.getText().equals(errorMessageExpected)){
+			System.out.println("Error message displayed ==="+membrAutphoneErrorMessage.getText());
+			Assert.assertTrue(true);
+		}else{
+			System.out.println("InCorrect Error Message displayed ==="+membrAutphoneErrorMessage.getText());
+			Assert.fail();
+		}
+	}
 }
+
+

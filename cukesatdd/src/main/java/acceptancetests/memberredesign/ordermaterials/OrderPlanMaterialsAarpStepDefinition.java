@@ -260,6 +260,8 @@ public class OrderPlanMaterialsAarpStepDefinition {
 			if(!orderPlanMaterialsPage.ValidateHeader()){
 				System.out.println("Header Text and Subtext not displayed for "+currentPlan);
 			}
+			orderPlanMaterialsPage.ValidateOptions(currentPlan);
+
 		}
 	}
 	
@@ -293,7 +295,7 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		String PlanTypes = givenAttributesMap.get("Combo Plans");
 		String[] Plans= PlanTypes.split(",");
 		for(String currentPlan: Plans){
-			orderPlanMaterialsPage.navigatePlanTabs(currentPlan);
+//			orderPlanMaterialsPage.navigatePlanTabs(currentPlan);
 			orderPlanMaterialsPage.ValidateOptions(currentPlan);
 		}
 	}
@@ -343,6 +345,24 @@ public class OrderPlanMaterialsAarpStepDefinition {
 			Assert.fail("Error Message failed");
 		}
 		
+	}
+	
+	@Then("^the user validates CSR error message for Order Submission$")
+	public void the_user_validates_CSR_error_message_for_Order_Submission(DataTable arg1) throws Throwable {
+		OrderPlanMaterialConfirmationPage planMaterialConfirmationPage = (OrderPlanMaterialConfirmationPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PLAN_MATERIALS_CONFIRMATION_PAGE);
+
+		List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		String CSR_Error = givenAttributesMap.get("CSR Error");
+		if(!planMaterialConfirmationPage.ValidateCSRErrorMessage(CSR_Error)){
+			System.out.println("Error Message not displayed for Order materials Page");
+			Assert.fail("Error Message failed");
+		}
 	}
 
 	/*@After
