@@ -464,19 +464,19 @@ public class ProfileandPreferencesUMSStepDefinition {
 				getLoginScenario().saveBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE, communicationPrefPage);
 		}
 	}
-	 */
-@Then("^the user changes the online preference and saves the change")
+
+	@Then("^the user changes the online preference and saves the change")
 	public void userChangesOnlinePref() {
 		CommunicationPreferencePage communicationPrefPage = (CommunicationPreferencePage) getLoginScenario()
 				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
 
-		 
-		 if(communicationPrefPage.changeAndVerifyOnlinePreference())
-		 {
+
+		if(communicationPrefPage.changeAndVerifyOnlinePreference())
+		{
 			System.out.println("Communication preference online preference changed and verified");
-			 getLoginScenario().saveBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE,communicationPrefPage);
-		 }else
-			 Assert.fail("Error in changing and saving online preference");
+			getLoginScenario().saveBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE,communicationPrefPage);
+		}else
+			Assert.fail("Error in changing and saving online preference");
 	}
 	@Then("^the user clicks on profile & preferences link to go back to Account settings page")
 	public void navigateBackToAccountSettingsPage() {
