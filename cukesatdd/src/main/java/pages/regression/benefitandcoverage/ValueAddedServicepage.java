@@ -1,7 +1,7 @@
 /**
  * 
  */
-package pages.member.ulayer;
+package pages.regression.benefitandcoverage;
 
 import org.junit.Assert;
 import org.openqa.selenium.JavascriptExecutor;
@@ -43,7 +43,7 @@ public class ValueAddedServicepage extends UhcDriver {
 	@FindBy(className = "atdd-vas-descrptiontext")
 	private WebElement vastext2;
 	
-	@FindBy(className = "atdd-vas-viewmorlnk")
+	@FindBy(xpath = ".//*[@id='servccontroller']/div/section/div/div/div/div/div/div/div/div/div[2]/div/a/span[1]")
 	private WebElement viewmore;
 	
 	@FindBy(className = "atdd-vas-maincta-button")
@@ -116,13 +116,7 @@ public class ValueAddedServicepage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		validate(viewlinkexpand);
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,1000)", "");
 		try {
@@ -145,6 +139,7 @@ public class ValueAddedServicepage extends UhcDriver {
 			e.printStackTrace();
 		}
 		Assert.assertThat(driver.getCurrentUrl(),containsString("www.healthyourway.com"));
+		
 		Actions builder = new Actions(driver);
 		Action movetab = builder.keyDown(Keys.CONTROL)
 		                 .sendKeys(Keys.TAB)

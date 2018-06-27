@@ -11,7 +11,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.redesign.HsidRegistrationPersonalInformationPage;
+import pages.regression.login.HsidRegistrationPersonalInformationPage;
+
+import pages.regression.login.AssistiveRegistrationPage;
 import pages.regression.accounthomepage.AccountHomePage;
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;

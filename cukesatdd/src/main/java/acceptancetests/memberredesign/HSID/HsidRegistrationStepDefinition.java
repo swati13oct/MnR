@@ -10,17 +10,18 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.member.bluelayer.HSIDLoginPage;
-import pages.member.redesign.DeregisterPage;
-import pages.redesign.HsidRegistrationConfirmInformation;
-import pages.redesign.HsidRegistrationPersonalCreateAccount;
-import pages.redesign.HsidRegistrationPersonalInformationPage;
+import pages.regression.login.HSIDLoginPage;
+import pages.regression.login.DeregisterPage;
+import pages.regression.login.HsidRegistrationConfirmInformation;
+import pages.regression.login.HsidRegistrationPersonalCreateAccount;
+import pages.regression.login.HsidRegistrationPersonalInformationPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
+import cucumber.api.java.After;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -42,6 +43,7 @@ public class HsidRegistrationStepDefinition {
 	public void the_user_is_on_medicare_sign_in_page() throws Throwable {
 		WebDriver wd = getLoginScenario().getWebDriver();
 		HSIDLoginPage hsidLoginPage = new HSIDLoginPage(wd);
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.HSID_LOGIN_PAGE, hsidLoginPage);
 	}
 
@@ -87,7 +89,7 @@ public class HsidRegistrationStepDefinition {
 		System.out.println("firstName: "+firstName +"lastName: "+lastName +"dob: "+dob+"memberId: "+memberId +"zipcode: " + zipcode);
 		hsidRegistrationPersonalInfoPage.populatefields(firstName, lastName, dob,zipcode, memberId);
 		HsidRegistrationPersonalCreateAccount hsidRegistrationPersonalCreateAccount 
-																= hsidRegistrationPersonalInfoPage.clickContinue();
+										= hsidRegistrationPersonalInfoPage.clickContinue();
 		getLoginScenario().saveBean(PageConstants.HSID_REGISTRATION_PERSONALCREATEACCOUNT, hsidRegistrationPersonalCreateAccount);
 		
 	}
@@ -96,6 +98,7 @@ public class HsidRegistrationStepDefinition {
 	public void user_is_navigated_to_step_two_create_account_page() throws Throwable {
 		HsidRegistrationPersonalCreateAccount hsidRegistrationPersonalCreateAccount = 
 				(HsidRegistrationPersonalCreateAccount) loginScenario.getBean(PageConstants.HSID_REGISTRATION_PERSONALCREATEACCOUNT);
+		System.out.println("test");
 		hsidRegistrationPersonalCreateAccount.verifyCreateAccountSection();
 		
 	}
@@ -122,8 +125,8 @@ public class HsidRegistrationStepDefinition {
 		String password = memberAttributesMap.get("password");
 		String email = memberAttributesMap.get("email");
 	
-		WebDriver wd = getLoginScenario().getWebDriver();
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		
+		WebDriver wd = (WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DeregisterPage deregister = new DeregisterPage(wd);
 		String userName = deregister.getUserName();
 		getLoginScenario().saveBean(LoginCommonConstants.Username, userName);
@@ -286,7 +289,7 @@ public class HsidRegistrationStepDefinition {
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
 		
-		String userName = memberAttributesMap.get("userName");
+		
 		String password = memberAttributesMap.get("password");
 		
 		WebDriver wd = getLoginScenario().getWebDriver();
@@ -295,11 +298,10 @@ public class HsidRegistrationStepDefinition {
 		HSIDLoginPage loginPage = new HSIDLoginPage(wd);
 		loginPage.validateelements();
 
-        
+		String userName  = (String) getLoginScenario().getBean(LoginCommonConstants.Username);
 		pages.regression.accounthomepage.AccountHomePage accountHomePage = (pages.regression.accounthomepage.AccountHomePage) loginPage.doLoginWith(userName, password);
 
-		/*String userName =  (String)getLoginScenario().getBean(LoginCommonConstants.Username);
-        AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, password);*/
+	
 
         if (accountHomePage!= null) {
         	loginScenario.saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
@@ -329,12 +331,19 @@ public class HsidRegistrationStepDefinition {
 		hsidRegistrationConfirmInformationPage.getregistrationflowcompleteemail();
 	}
 	
-	
-	
-	
 
-
-
-	
-
+  
 }
+	
+	
+	
+   
+	
+	
+	
+
+
+
+	
+
+
