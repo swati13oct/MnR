@@ -12,7 +12,7 @@ import atdd.framework.UhcDriver;
 
 public class HsidRegistrationPersonalCreateAccount extends UhcDriver {
 	
-	@FindBy(className = "form__step2")
+	@FindBy(xpath = ".//*[@class = 'form__step2 ng-scope']")
 	private WebElement createAccountSection;
 	
 	@FindBy(id = "username")
@@ -80,7 +80,9 @@ public class HsidRegistrationPersonalCreateAccount extends UhcDriver {
 		try {
 			Thread.sleep(2000);
 			return createAccountSection.isDisplayed();
-		} catch (Exception e) {
+		} 
+		catch (Exception e) 
+		{
 			return false;
 		}
 	}

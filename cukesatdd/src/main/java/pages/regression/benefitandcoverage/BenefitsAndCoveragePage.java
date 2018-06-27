@@ -22,7 +22,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import pages.member.bluelayer.ProfilePreferencesPage;
-import pages.member.ulayer.ValueAddedServicepage;
+import pages.regression.benefitandcoverage.ValueAddedServicepage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
@@ -55,6 +55,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='planBenefitsApp']/section/div/div[1]/div/div/div/div/h1")
 	private WebElement planName1;
 	
+	 @FindBy(xpath=".//*[@id='mapdPageLis']/div[1]/div/div/table/tbody/tr[2]/th")
+	 private WebElement columncoveragegenericdrugs;
 
 	@FindBy(id = "contactUsAtdd")
 	private WebElement contactUslink;
@@ -710,7 +712,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			e.printStackTrace();
 		}
 		
-		Assert.assertTrue(getTitle().equalsIgnoreCase("Contact Us"));
+		Assert.assertTrue(getTitle().contains("Overview"));
 		try {
 			Thread.sleep(20000);
 		} catch (InterruptedException e) {
@@ -1315,6 +1317,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	public void validatedrugcosttable() {
 		// TODO Auto-generated method stub
 		validate(RetailDrugCost_Table);
+		validate(columncoveragegenericdrugs);
+		Assert.assertEquals(driver.findElement(By.xpath("//*[@id='mapdPageLis']//table[@class='table-white atdd-bnc-drgcsttable']//tbody/tr[2]/th/p")).getText(),"Covered Generic Drugs" );
 
 	}
 
@@ -1333,13 +1337,13 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	/**
 	 * @toDo : Validates the Plan overview section for a Non lis member
 	 */
-	public void validatePlanOverview() 
+	public void validatePlanOverviewgroup() 
 	{
 	    validate(planName);
 		validate(nameLabel);
 		validate(memberID);
 		validate(effective_Date);
-	  //validate(Monthly_Premium);
+		validate(monthlypremiumlabel);
         validate(GroupId);
     }
 
@@ -1349,11 +1353,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(memberID);
 		validate(effective_Date);
 		validate(monthlypremiumlabel);
-		String[] firstname = name.trim().split("//s+");
+		System.out.println(driver.findElement(By.xpath(".//*[@id='planBenefitsAppSum']/section/div/div[4]/div[1]/div/div[1]/div[2]")).getText());
 		
-		Assert.assertEquals(driver.findElement(By.xpath("//div[@id='planBenefitsApp']//div[contains(text(),name)]")).getText(),name);
-		Assert.assertEquals(driver.findElement(By.xpath("//div[@id='planBenefitsApp']//div[contains(text(),memberid)]")).getText(),memberid);
-		Assert.assertEquals(driver.findElement(By.xpath("//div[@id='planBenefitsApp']//div[contains(text(),effectivedate)]")).getText(),effectivedate);
+		Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='planBenefitsAppSum']/section/div/div[4]/div[1]/div/div[1]/div[2]")).getText(),name);
+		Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='planBenefitsAppSum']/section/div/div[4]/div[1]/div/div[2]/div[2]")).getText(),memberid);
+		Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='planBenefitsAppSum']/section/div/div[4]/div[1]/div/div[4]/div[2]")).getText(),effectivedate);
 		
 			
 	}
@@ -1427,9 +1431,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(OutpatientSurgeryCenterValue);
 		validate(OfficVisitsValue);
 		
-		Assert.assertEquals(OfficeVisits.getText(), "OFFICE VISITS");
+		Assert.assertEquals(OfficeVisits.getText(), "OFFICE VISITS ");
 		Assert.assertEquals(OutpatientSurgeryCenter.getText(),"OUTPATIENT SURGERY CENTER VISITS");
-		Assert.assertEquals(HospitalVisits.getText(),"HOSPITAL VISITS");
+		Assert.assertEquals(HospitalVisits.getText(),"HOSPITAL VISITS ");
 		
 		
 		if(StringUtils.isEmpty(OutpatientSurgeryCenterValue.getText()))
@@ -1456,6 +1460,21 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(HospitalVisits);
 		validate(OfficeVisits);
 		validate(OutpatientSurgeryCenter);
+		Assert.assertEquals(OfficeVisits.getText(), "OFFICE VISITS ");
+		Assert.assertEquals(OutpatientSurgeryCenter.getText(),"OUTPATIENT SURGERY CENTER VISITS");
+		Assert.assertEquals(HospitalVisits.getText(),"HOSPITAL VISITS ");
+		
+		
+		if(StringUtils.isEmpty(OutpatientSurgeryCenterValue.getText()))
+		{
+			
+			Assert.fail();
+		}
+		if(StringUtils.isEmpty(OfficVisitsValue.getText()))
+		{
+			
+			Assert.fail();
+		}
 
 	}
 
@@ -1674,6 +1693,42 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	}
 
+	
+	public ValueAddedServicepage navigateToValueAddServicetest() 
+	{
+		validate(learnmorebutton);
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,3000)", "");
+		learnmorebutton.click();
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (this.driver.getTitle().contains("Value Added Services")) {
+		
+			System.out.println(driver.getTitle());
+			return new ValueAddedServicepage(driver);
+		}
+		
+		
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+	
 	/**
 	 * @toDo : Validates the Need help section headers for a ship member
 	 */
@@ -1949,7 +2004,7 @@ public void validateCoLogoImagePresent(String cologoToBeDisplayedOnSecondaryPage
 	}
 
 
-public void validatePlanOverviewIndlis(String name , String memberid , String effectivedate , String monthlypremium) {
+public void validatePlanOverviewIndlis(String name , String memberid , String effectivedate , String monthlypremium, String extrahelp) {
 	validate(planName);
 	validate(nameLabel);
 	validate(memberID);
@@ -1957,13 +2012,15 @@ public void validatePlanOverviewIndlis(String name , String memberid , String ef
 	validate(monthlypremiumlabel);
 	validate(ExtraHelp);
 	
-	String[] firstname = name.trim().split("//s+");
+
 	
 	
 	Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='planBenefitsAppSum']/section/div/div[4]/div[1]/div/div[1]/div[2]")).getText(),name);
 	
 	Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='planBenefitsAppSum']/section/div/div[4]/div[1]/div/div[2]/div[2]")).getText(),memberid);
 	Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='planBenefitsAppSum']/section/div/div[4]/div[1]/div/div[4]/div[2]")).getText(),effectivedate);
+
+	Assert.assertEquals((ExtraHelp).getText(),extrahelp);
 	
 	
 }
