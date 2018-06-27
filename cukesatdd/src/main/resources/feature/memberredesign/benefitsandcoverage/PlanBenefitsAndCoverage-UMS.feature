@@ -649,7 +649,7 @@ And the user verifies that the correct pdfs are there in the plan material secti
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
      | Member Type | <memberType>    |
-    Then The user navigates to Benefits and Coverage page
+    Then the user navigates to Benefits coverage page
     And the user validates City of Hartford prescription Drug Benefits table
     Examples: 
       | planType | memberType |
@@ -661,7 +661,7 @@ And the user verifies that the correct pdfs are there in the plan material secti
   Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
      | Member Type | <memberType>    |
-    Then The user navigates to Benefits and Coverage page
+    Then the user navigates to Benefits coverage page
     And the user validates Town Of Greenwich table
 
     Examples: 
@@ -675,38 +675,40 @@ And the user verifies that the correct pdfs are there in the plan material secti
   Scenario Outline: Verify the Benefits for TexasERSMember
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
-    Then The user navigates to Benefits and Coverage page
+      | Member Type | <memberType>    |
+    Then the user navigates to Benefits coverage page
     And the user validates the Drug costs Section
     Then the user verifies the Retail Cost sharing table
     Then the user verifies the Mail Order Cost sharing table
 
     Examples: 
-      | planType |
-      | Texas    |
+    | planType | memberType |
+    | PDP    | TEXASERSGroup  | 
       
-     @OfficeVisitswithoutprovidertiering @regression @regression_06_06_18
+       @OfficeVisitswithoutprovidertiering @regression @regression_06_06_18
   Scenario Outline: Verify the Office visits widget for a member withoutprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
-    Then The user navigates to Benefits and Coverage page
+    Then the user navigates to Benefits coverage page
     And the user validates the Office Visits section
 
     Examples: 
       | planType |
       | MAPD     |
 
+
 @WaystoSaveforPdp @regression @regression_06_06_18
   Scenario Outline: Verify the ways to save  widget for a PDP member
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
       | Member Type | <memberType> |
-    Then The user navigates to Benefits and Coverage page
+    Then the user navigates to Benefits coverage page
     And the user validates the ways to save section
 
     Examples: 
       | planType |memberType |
-     # | PDP      |Wallgreens |
-      | PDP      |MailOrderPharamacy|
+    | PDP      |Wallgreens |
+     | PDP      |MailOrderPharamacy|
       | MAPD     |Group |
    
    
@@ -716,7 +718,7 @@ And the user verifies that the correct pdfs are there in the plan material secti
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType> |
       #| Member Type   | <memberType> |
-    Then The user navigates to Benefits and Coverage page
+    Then the user navigates to Benefits coverage page
     And the user validates the Outpatient Surgery Center Visits section
 
 
@@ -728,7 +730,7 @@ And the user verifies that the correct pdfs are there in the plan material secti
     Scenario Outline: Verify the Office visits widget for a member withprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
-    Then The user navigates to Benefits and Coverage page
+    Then the user navigates to Benefits coverage page
     And the user validates the Office Visits section
 
 
@@ -743,7 +745,7 @@ And the user verifies that the correct pdfs are there in the plan material secti
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType> |
       #| Member Type   | <memberType> |
-    Then The user navigates to Benefits and Coverage page
+    Then the user navigates to Benefits coverage page
     And the user validates the Outpatient Surgery Center Visits section
 
 
@@ -752,12 +754,13 @@ And the user verifies that the correct pdfs are there in the plan material secti
       | planType | 
       | MAPD     |  
    
-     @BenefitsForAlPeehipMember @regression @regression_06_06_18
+
+   @BenefitsForAlPeehipMember @regression @regression_06_06_18
   Scenario Outline: Verify the benefits for an AL peehip member
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
      | Member Type | <memberType>    |
-    Then The user navigates to Benefits and Coverage page
+    Then the user navigates to Benefits coverage page
     And the user validates the Benefits for Peehip member
 
     Examples: 
@@ -771,7 +774,7 @@ And the user verifies that the correct pdfs are there in the plan material secti
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
      | Member Type | <memberType>    |
-    Then The user navigates to Benefits and Coverage page
+    Then the user navigates to Benefits coverage page
     And the user validates the Benefits for MA member
 
     Examples: 
@@ -779,3 +782,18 @@ And the user verifies that the correct pdfs are there in the plan material secti
       | MA       |Individual  |
       | SSUP     |Individual  |
       | MedSupp  |Ship        |
+      
+      
+       
+     @CopayCoinsuranceInDrugCostTable @regression @regression_06_06_18
+    Scenario Outline: Verify the copay coinsurance in drugcosts table 
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type | <planType> |
+     | Member Type | <memberType>    |
+    Then the user navigates to Benefits coverage page
+    And the user validates the copay coinsurance in drug costs table
+
+    Examples: 
+      | planType |memberType |
+      | MAPD     |Individual  |
+      
