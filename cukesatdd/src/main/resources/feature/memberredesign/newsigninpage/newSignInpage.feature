@@ -1,7 +1,6 @@
 @theSpartans
 Feature: S1.3To validate the new changes related to new SignIn page  on the member redesigned site
-
-  @signInErrorMessages1
+ @signInErrorMessages1
   Scenario: To Verify Error Messages In Both username and password fields
     Given I am a  member on the sign-in page
     When I have not entred any thing in both username and password fields

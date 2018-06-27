@@ -18,7 +18,7 @@ import cucumber.api.CucumberOptions;
 jsonReport = "target/cucumber-RunMRATDDRegressionPharmacyLocator.json",detailedReport = true, detailedAggregatedReport = true,
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPharmacyLocator")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
-features = { "src/main/resources/feature/memberredesign/pharmacy-locator" }, plugin = {
+features = { "src/main/resources/feature/memberredesign/pharmacylocator" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPharmacyLocator.json" }, tags = { "@regression_06_06_18" })
 public class RunMRATDDRegressionPharmacyLocator {
 

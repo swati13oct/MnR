@@ -1,7 +1,7 @@
 @dashBoardFormsAndResources @gladiators
 
 Feature: G1.1 To validate forms and resources page in dashboard site
-
+ 
   @fnrmapdaarpindividualvalidation
   Scenario Outline: 
     Given login with following details logins in the member portal and validate elements
