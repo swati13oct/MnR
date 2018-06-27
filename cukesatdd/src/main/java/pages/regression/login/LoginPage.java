@@ -9,22 +9,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-<<<<<<< HEAD
-=======
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.login.AssistiveRegistrationPage;
 import pages.regression.login.ConfirmSecurityQuestion;
 import pages.regression.login.TerminatedHomePage;
 
->>>>>>> remotes/origin/develop
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 //import pages.member.bluelayer.AccountHomePage;
-import pages.member.bluelayer.AssistiveRegistrationPage;
-import pages.member.bluelayer.TerminatedHomePage;
-import pages.regression.accounthomepage.AccountHomePage;
 
 public class LoginPage extends UhcDriver {
 	

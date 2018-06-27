@@ -119,7 +119,7 @@ Examples:
  | COMBO    |ComboDCEmember  |Lipitor|Lipitor TAB 10MG|31|Every 1 month|Lipitor TAB 20MG|Lipitor TAB 20MG|atorvastatin calcium TAB 20MG|90210|25 miles|100|Every 3 months|
  
  
-@Member_dce_not
+@Member_dce_not @regression_06_06_18
 Scenario Outline:I1.2 To Verify MR portal members DCE should not come for AARP federal members
 Given I login with registered user
 | Plan Type   | <planType>   |
@@ -130,7 +130,6 @@ Then I should not see drug look up on home page
  | planType  | memberType|
  | Medsup    | Ship_AARP |
  | Group     | SSUP      |
-# | MA        |Federal_AARP |
  | MA		| AARPIndividual|
 
  
