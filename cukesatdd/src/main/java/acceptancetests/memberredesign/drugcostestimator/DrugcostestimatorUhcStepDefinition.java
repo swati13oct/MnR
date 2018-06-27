@@ -1250,6 +1250,32 @@ public class DrugcostestimatorUhcStepDefinition {
 		dce.validateAddedDrug(dosage, quantity, frequency);
 
 	}
+	
+	@When("^I add generic drug$")
+	public void i_add_generic_drug(DataTable memberAttributes) throws Throwable {
+
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String drug = memberAttributesMap.get("Drug");
+		System.out.println("------Drug-----------"+ drug);
+		String dosage = memberAttributesMap.get("Dosage");
+		System.out.println("-------Dosage----------"+ dosage);
+		String quantity = memberAttributesMap.get("Quantity");
+		System.out.println("-------Quantity----------"+ quantity);
+		String frequency = memberAttributesMap.get("Frequency");
+		System.out.println("--------Frequency---------"+ frequency);
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.addGenricDrug(drug, dosage, quantity, frequency);
+		dce.validateAddedDrug(dosage, quantity, frequency);
+
+	}
 
 	@When("^I switch to its generic durg$")
 	public void i_switch_to_its_generic_durg(DataTable memberAttributes) throws Throwable {
@@ -1353,9 +1379,12 @@ public class DrugcostestimatorUhcStepDefinition {
 		account_home_page.dce_not_present();
 	}
 
+//	@Then("^I should be optum rx sso landing page$")
+
 	@Then("^I click on drug lookup tile which takes me to optum rx sso landing page$")
 	public void I_should_be_optum_rx_sso_landing_page() throws Throwable {
 		AccountHomePage account_home_page = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		// Need to add the code
 
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) account_home_page.navigate_to_optumrxPage();
 		getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);

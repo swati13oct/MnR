@@ -375,7 +375,7 @@ Feature: To test the payment flow on AARP site
 
 
 @TestmemberAuth @15170 @regression_06_06_18
- Scenario Outline: To validate the oneTime Payment flow for Member Auth
+ Scenario Outline: To validate the Edit Payment flow for Member Auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username      | <username>     |
@@ -389,7 +389,7 @@ Feature: To test the payment flow on AARP site
 
     Examples: 
       | username  | password  |MemUserName    | 
-      | qavgogine | qavgogine | q2_jun_uhc0042 |
+      | qavgogine | qavgogine | q2_jun_aarp0057 |
  
  
  @TestmemberAuthOTP @regression_06_06_18
@@ -442,7 +442,7 @@ Feature: To test the payment flow on AARP site
       | SHIP     | IndividualAARPSPayments | 123123123 |        123123123 |     12345 |          12345 | first     | second     | third    |   1.00 |
 
     @paymentsCombo @15144 @regression_06_06_18
-    Scenario Outline: Verify Recurring Payment for SHIP member
+    Scenario Outline: Verify Payment for Combo member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |    
