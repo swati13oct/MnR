@@ -1,4 +1,5 @@
 
+
 package acceptancetests.memberredesign.formsandresources;
 
 import gherkin.formatter.model.DataTableRow;
@@ -40,7 +41,7 @@ import acceptancetests.data.LoginCommonConstants;
               
               @Autowired
               MRScenario loginScenario;
-              WebDriver wd = null;
+              
               public MRScenario getLoginScenario() {
                      return loginScenario;
               }  
@@ -83,8 +84,8 @@ import acceptancetests.data.LoginCommonConstants;
                            getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
                      }
                    
-                     //WebDriver wd = getLoginScenario().getWebDriverNew();
-                      wd = getLoginScenario().getWebDriverNew();
+                     WebDriver wd = getLoginScenario().getWebDriverNew();
+                     
                      getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
                      HSIDLoginPage loginPage = new HSIDLoginPage(wd);
                      loginPage.validateelements();
@@ -140,7 +141,7 @@ import acceptancetests.data.LoginCommonConstants;
    
   
   /**
-   * @toDo : correct pdfs are coming
+  * @toDo : correct pdfs are coming
    */
   @And("^the user verifies that the correct pdfs are coming in the plan material section$")
    public void verifypdfscoming(DataTable givenAttributes) throws InterruptedException   {
@@ -815,4 +816,5 @@ System.out.println("forms and resources page");
        
                   
        
+
 
