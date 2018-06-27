@@ -1,59 +1,113 @@
+
+
 package acceptancetests.memberredesign.formsandresources;
 
 import gherkin.formatter.model.DataTableRow;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.NoSuchElementException;
 import java.util.Set;
 
 import junit.framework.Assert;
 
-import org.json.JSONObject;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.member.bluelayer.HSIDLoginPage;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.formsandresources.FormsAndResourcesPage;
-
-import pages.member.bluelayer.HSIDLoginPage;
-import pages.member.redesign.NewLoginPage;
-
-import pages.member.ulayer.LoginPage;
-import pages.member.ulayer.RallyDashboard;
 import atdd.framework.*;
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
-import acceptancetests.util.CommonUtility;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.LoginCommonConstants;
+
 /**
 * @Functionality : Forms and resources page navigation from dashboard and sections validation
 */
 
 
+       @SuppressWarnings("deprecation")
        public class DashboardFormsnResourcesStepDefinition {
 
               
               @Autowired
               MRScenario loginScenario;
-
+              
               public MRScenario getLoginScenario() {
                      return loginScenario;
-              }            
+              }  
+              
+              @Given("^login with following details logins in the member redesign portal$")
+              public void login_with_member(DataTable memberAttributes) throws InterruptedException {
+                     List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+                     Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+                     for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+                           memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+                                         memberAttributesRow.get(i).getCells().get(1));
+                     }
+
+                     memberAttributesMap.get("Member Type");
+                     Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+                     List<String> desiredAttributes = new ArrayList<String>();
+                     for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator.hasNext();) {
+                           {
+                                  String key = iterator.next();
+                                  desiredAttributes.add(memberAttributesMap.get(key));
+                           }
+
+                     }
+                     System.out.println("desiredAttributes.." + desiredAttributes);
+
+                     Map<String, String> loginCreds = loginScenario.getUMSMemberWithDesiredAttributes(desiredAttributes);
+                     String userName = null;
+                     String pwd = null;
+                     if (loginCreds == null) {
+                           // no match found
+                           System.out.println("Member Type data could not be setup !!!");
+                           Assert.fail("unable to find a " + desiredAttributes + " member");
+                     } else {
+                           userName = loginCreds.get("user");
+                           pwd = loginCreds.get("pwd");
+                           System.out.println("User is..." + userName);
+                           System.out.println("Password is..." + pwd);
+                           getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
+                           getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
+                     }
+                   
+                     WebDriver wd = getLoginScenario().getWebDriverNew();
+                     
+                     getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+                     HSIDLoginPage loginPage = new HSIDLoginPage(wd);
+                     loginPage.validateelements();
+                  AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
+                     
+                     if (accountHomePage!= null) {
+                            getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
+                           Assert.assertTrue(true);
+                     }
+                     else {
+                           Assert.fail("***** Error in loading  Redesign Account Landing Page *****");
+                     }
+                     /*AssistiveRegistrationPage assistiveregistration = (AssistiveRegistrationPage) loginPage.doLoginWith(userName, pwd);
+                     if (assistiveregistration != null) {
+                            getLoginScenario().saveBean(PageConstantsMnR.ASSISTIVE_REGISTRATION_PAGE,assistiveregistration);
+                           Assert.assertTrue(true);
+                     }
+                     else {
+                           Assert.fail("***** Error in loading  Assistive Registration Page *****");
+                     }*/
+
+              }
                               
   /**
    * @toDo : navigation to the forms and resources page from dashboard for terminated member
@@ -87,10 +141,9 @@ import cucumber.api.java.en.When;
    
   
   /**
-   * @toDo : correct pdfs are coming
+  * @toDo : correct pdfs are coming
    */
-  @SuppressWarnings("deprecation")
-@And("^the user verifies that the correct pdfs are coming in the plan material section$")
+  @And("^the user verifies that the correct pdfs are coming in the plan material section$")
    public void verifypdfscoming(DataTable givenAttributes) throws InterruptedException   {
          
  FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
@@ -271,6 +324,14 @@ Thread.sleep(6000);
                                                                     
             }
    
+     @And("^validates the pdp texas logo")
+     public void validatepdptexaslogo() throws InterruptedException 
+     {
+        FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+         Thread.sleep(2000);
+         Assert.assertTrue(formsAndResourcesPage.getpdptexaslogo().isDisplayed());
+     }
+   
    
    @Then("^validate that the EOB section is displayed$")
    public void eobsec() throws InterruptedException
@@ -298,14 +359,13 @@ Thread.sleep(6000);
           FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);  
        formsAndResourcesPage.scroll();
        Thread.sleep(2000); 
-       formsAndResourcesPage.checkanocforPCP();
+      Assert.assertTrue( formsAndResourcesPage.checkanocforPCP());
    }
    
    
    /** @throws InterruptedException 
       @toDo :for MAPD member both types of EOB are present */
    
-   @SuppressWarnings("deprecation")
 @And("^both the Drug and Medical EOB links are displayed$")
    public void bothEOBSpresent() throws InterruptedException
    {
@@ -334,7 +394,6 @@ Thread.sleep(6000);
    }
    
          /* to verify the my doc section*/
-@SuppressWarnings("deprecation")
 @Then("^validate that My document section is displayed$")
    public void mydocumentsectionisdispayed() throws InterruptedException
    {
@@ -354,7 +413,7 @@ Thread.sleep(6000);
       
    }
       
- @SuppressWarnings("deprecation")
+
 @Then("^validate that the anoc section is displayed$")
    public void anocsec() throws InterruptedException
    {  
@@ -510,6 +569,24 @@ Thread.sleep(6000);
                  
   }
 
+@Then("^validate that the PDPTexas document is present")
+public void validatePDPtexasdocument() throws InterruptedException {
+     FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+     formsAndResourcesPage.getmedicationforms().click();
+        if(formsAndResourcesPage.getpdptexaslogo().isDisplayed())
+             {   System.out.println(formsAndResourcesPage.getpdptexasdocument().getText());  
+                    
+              
+             Assert.assertTrue(true);
+             }
+             else 
+             {
+             Assert.fail("pdp texas doc is not present");
+                   }
+                  
+
+      }
+
           /**
    * @throws InterruptedException 
  * @toDo : verifies the eob statemnets for ship member
@@ -542,6 +619,41 @@ public void validateEOBship() throws  InterruptedException {
                     }
                    
 
+       }
+  
+@Then("^the user verifies the error message for ship if particular pdf is not present")
+       public void errormessagepresentforship() throws InterruptedException
+       {  
+              FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+       Thread.sleep(10000);
+       System.out.println("passed");
+       int arraylen=formsAndResourcesPage.checkshipdocuments();
+       if((arraylen==0) || (arraylen==1))
+       {
+          Assert.assertTrue(formsAndResourcesPage.geterrormessgaeforship().isDisplayed());
+       }
+       else if(arraylen==2)
+       {   
+          
+                 Assert.assertTrue(formsAndResourcesPage.checkerrormessageforship());
+       }
+       }
+
+       
+
+       @Then("^verifies that Electronic Funds pdf for ship is displayed")
+       public void verifyshipfnrdocument() throws InterruptedException
+       {  
+              FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+              Thread.sleep(2000);
+              
+              if(formsAndResourcesPage.geteftpdfforship().isDisplayed())
+                {     
+                      System.out.println("the eft pdf is present for ship");
+                      Assert.assertTrue(true);
+                }
+                   else 
+                       Assert.fail("the document for ship is not coming");  
        }
               
   /**
@@ -672,17 +784,37 @@ FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginSc
    }
   
   @Then("^validate that the EOB section and both the type of Eobs are not displayed")
-       void eobpresentornot()
+      public void eobpresentornot()
        {
          
-	     FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+            FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
          Assert.assertTrue(formsAndResourcesPage.checkeobsection());
          Assert.assertTrue(formsAndResourcesPage.checkdrugeobforMA());
          Assert.assertTrue(formsAndResourcesPage.checkmedicaleob());
          
         }
+  
+  @And("^user clicks on the view document and resources link and navigate to forms and resource page from member auth page")
+  public void navigatofnrpage() throws InterruptedException
+  { 
+         AccountHomePage accounthomepage = (AccountHomePage) loginScenario.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+      Thread.sleep(20000);
+
+FormsAndResourcesPage formsAndResourcesPage = accounthomepage.navigatetoFormsnResourcesfrommemauth();
+System.out.println("navigation worked fine from member auth");
+Thread.sleep(5000);
+formsAndResourcesPage.waitforFNRpage();
+getLoginScenario().saveBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE, formsAndResourcesPage);
+System.out.println("forms and resources page");
+      
+         
+  }
+  
+
   }
        
        
                   
        
+
+
