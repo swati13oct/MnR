@@ -78,7 +78,7 @@ Examples:
  | planType| memberType| drug |
  | MAPD|IndividualDCEmember|lipitor|
  
-@Member_DCE
+@Member_DCE @regression_06_06_18
 Scenario Outline:I1.1 To Verify MR portal DCE flow covering step1 step 2 and step3 .
 Given I login with registered user
 | Plan Type   | <planType>   |
@@ -112,11 +112,14 @@ Then I should see learn more about the drug tiers and learn more about the drug 
 
 
 Examples:
- | planType  | memberType  |drug1|dosage1|quantity1|frequency1|dosage2|brandeddrug|genericdosage|zipcode|radius|quantity2|frequency2|
- | MAPD      |IndividualDCEmember |Lipitor|Lipitor TAB 10MG|31|Every 1 month|Lipitor TAB 20MG|Lipitor TAB 20MG|atorvastatin calcium TAB 20MG|90210|25 miles|100|Every 3 months|
+ | planType | memberType  |drug1|dosage1|quantity1|frequency1|dosage2|brandeddrug|genericdosage|zipcode|radius|quantity2|frequency2|
+ | MAPD     |AARPFederalDCEmember |Lipitor|Lipitor TAB 10MG|31|Every 1 month|Lipitor TAB 20MG|Lipitor TAB 20MG|atorvastatin calcium TAB 20MG|90210|25 miles|100|Every 3 months|
+ | PDP      |NonLISSplittier  |Lipitor|Lipitor TAB 10MG|31|Every 1 month|Lipitor TAB 20MG|Lipitor TAB 20MG|atorvastatin calcium TAB 20MG|90210|25 miles|100|Every 3 months|
+ | MAPD     |IndividualDCEmember  |Lipitor|Lipitor TAB 10MG|31|Every 1 month|Lipitor TAB 20MG|Lipitor TAB 20MG|atorvastatin calcium TAB 20MG|90210|25 miles|100|Every 3 months|
+ | COMBO    |ComboDCEmember  |Lipitor|Lipitor TAB 10MG|31|Every 1 month|Lipitor TAB 20MG|Lipitor TAB 20MG|atorvastatin calcium TAB 20MG|90210|25 miles|100|Every 3 months|
  
  
-@Member_dce_not
+@Member_dce_not @regression_06_06_18
 Scenario Outline:I1.2 To Verify MR portal members DCE should not come for AARP federal members
 Given I login with registered user
 | Plan Type   | <planType>   |
@@ -128,15 +131,23 @@ Then I should not see drug look up on home page
  | Medsup    | Ship_AARP |
  | Group     | SSUP      |
  | MA		| AARPIndividual|
+
  
-@Member_DCE_sso
+@Member_DCE_sso @regression_06_06_18
 Scenario Outline:I1.3 To Verify MR portal group members DCE should redirect to optum rx sso landing page. 
-Given I login with registered user
+Given login with following details logins in the member portal and validate elements
 | Plan Type   | <planType>   |
-| Member Type	  | <memberType> |
-When I navigate to drug look up page
-Then I should be optum rx sso landing page  
+Then I click on drug lookup tile which takes me to optum rx sso landing page  
   Examples:
- | planType | memberType |
- | MAPD    | GROUP  |
+ | planType | 
+ | MAPD_GROUP_DCE  |
+ |PDP_GROUP_DCE |
  
+@drugToolNotDisplayed @regression_06_06_18
+Scenario Outline:To verify DCE drug tile is not displayed for certain members
+Given login with following details logins in the member portal and validate elements
+| Plan Type   | <planType>   |
+Then I should not see drug look up on home page
+Examples:
+	|  planType |
+	|MA_FED_DCE |

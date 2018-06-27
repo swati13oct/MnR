@@ -30,31 +30,167 @@ Feature: S1.1 To test Member Auth Dashboard page.
       | username  | password  | member                               | disclaimer                                                                                                      | Message                          |
       | qavgogine | qavgogine | 4B152296-7C31-49C7-B49F-8739EB9A84A2 | You are viewing this site with member authorized read only access. Remember to LOGOUT at the end of the session | You are not authorized to submit |
       
-      @memauthidcard
-Scenario Outline: To validate id card on member auth
-Given the user is on member auth login flow page
-When the member is able to login with correct username and password
-      | Username | <username> |
-      | Password | <password> |
+       
+ @regressionMemberAuth     @regression_06_06_18
+  Scenario Outline: TC09_Save_Prefrences WRT member auth
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password 
+   	  | Username | <username> |
+      | Password | <password> |	
     And Member Enters the Username he wants to search
-      | MemUsername | <member> |
-    And User Clicks on the Pop up displayed
-    When the user clicks on View and Print Member ID cards link
-    Then user validates Coverage Status as of Today
-      | Coverage Status | <coverageStatus> |
-    And validate the headers
-      | Medical Plan    | <medicalPlan>    |
-      | Member Id       | <memberId>       |
-      | Member Name     | <memberName>     |
-      | Scubscriber DOB | <dob>            |
-      | Coverage Start  | <covergaeStart>  |
-      | Coverage Status | <coverageStatus> |
-    Examples: 
-      | username  | password  | member              | disclaimer                                                                                                      | Message                          | medicalPlan                                       | memberId          | memberName             | dob                           | covergaeStart | coverageStatus |
-      | qavgogine | qavgogine | q2_jun_grp0004      | You are viewing this site with member authorized read only access. Remember to LOGOUT at the end of the session | You are not authorized to submit |UnitedHealthcare Group Medicare Advantage (PPO)    | 974087401-00      | Lillian Stettnisch     | Subscriber - DOB 10/11/1941   | 01/01/18      | Active         |            
-      
-      
-      
-      
+      | MemUsername   | <member> |
+    And user clicks on member to select 
+    Then the user navigates to profile and preference page 
+    And the user validates the save preference functionality WRT member auth
+    	|Error Mesage		|<errorMessage>|
+    Examples:
+    | username  | password  |member            |  errorMessage|
+    | qavgogine | qavgogine |q2_jun_uhc0008  	 |You are not authorized to change preferences on behalf of the member.|
+ 
+ @regressionMemberAuth  @regression_06_06_18
+    Scenario Outline: TC08_Edit_Temporary_Address WRT member auth
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password 
+   	  | Username | <username> |
+      | Password | <password> |	
+    And Member Enters the Username he wants to search
+      | MemUsername   | <member> |
+    And user clicks on member to select 
+    Then the user navigates to profile and preference page 
+    And the user validates edit temproray address functionality WRT member auth
+    	|Error Mesage		|<errorMessage>|
+    Examples:
+    | username  | password  |member            |  errorMessage|
+    | qavgogine | qavgogine |q2_jun_uhc0008  	 |you are not authorized to update the address number on behalf of member|
     
+@regressionMemberAuth   @regression_06_06_18
+    Scenario Outline: TC07_Edit_alternative_Address WRT member auth
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password 
+   	  | Username | <username> |
+      | Password | <password> |	
+    And Member Enters the Username he wants to search
+      | MemUsername   | <member> |
+    And user clicks on member to select 
+    Then the user navigates to profile and preference page 
+    And the user validates edit alternative address functionality WRT member auth
+    |Error Mesage		|<errorMessage>|
+    Examples:
+    | username  | password  |member            |  errorMessage|
+    | qavgogine | qavgogine |q2_jun_uhc0008  	 |you are not authorized to update the address number on behalf of member|
+    
+@regressionMemberAuth    @regression_06_06_18
+    Scenario Outline: TC06_Edit_Email WRT member auth
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password 
+   	  | Username | <username> |
+      | Password | <password> |	
+    And Member Enters the Username he wants to search
+      | MemUsername   | <member> |
+    And user clicks on member to select 
+    Then the user navigates to profile and preference page 
+    And the user validates edit email functionality WRT member auth
+    	|Error Mesage		|<errorMessage>|
+    Examples:
+    | username  | password  |member            |  errorMessage|
+    | qavgogine | qavgogine |q2_jun_uhc0008  	 |you are not authorized to update the email address on behalf of member.|
+    
+@regressionMemberAuth    @regression_06_06_18
+    Scenario Outline: TC05_Edit_Phone WRT member auth
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password 
+   	  | Username | <username> |
+      | Password | <password> |	
+    And Member Enters the Username he wants to search
+      | MemUsername   | <member> |
+    And user clicks on member to select 
+    Then the user navigates to profile and preference page 
+    And the user validates edit phone functionality WRT member auth
+    |Error Mesage		|<errorMessage>|
+    Examples:
+    | username  | password  |member            |  errorMessage|
+    | qavgogine | qavgogine |q2_jun_uhc0008  	 |you are not authorized to update the phone number on behalf of member|
+ 
+ @regressionMemberAuth   @regression_06_06_18
+  Scenario Outline: TC18_Check EOB page is accessible using Member Auth Tool WRT member auth
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password 
+   	  | Username | <username> |
+      | Password | <password> |	
+    And Member Enters the Username he wants to search
+      | MemUsername   | <member> |
+    And user clicks on member to select  
+    Then the user click on EOB link and navigates to EOB page
+    And the user slects the desired date range
+  | Plan Type      |<planType>  |
+  | Date Range     |<dateRange> |
+  | EOB Type         |<eobType>   |
+    Examples: 
+      | username  | password  |member            |planType   | dateRange  | eobType 		 |
+      | qavgogine | qavgogine |q2_jun_aarp0101	 | PDP       | 18 Months  |Prescription  |   
       
+      
+ @MemberAuth_PharmacyLocatorDefaultZip  @regression_06_06_18
+ Scenario Outline: To validate Pharmacy Locator view for Member Auth
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username      | <username>     |
+      | Password      | <password>     |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |   
+    And user clicks on member to select
+        When the user navigates to pharmacy search page in Redesign site
+    And the user enters distance details in Redesign site
+      | Distance | <distance> |
+    And the user selects Pharmacy Types to Filter in Redesign Site
+      | Pharmacy Type | <pharmacyType> |
+    Then the user validates the pharmacies available in Redesign site
+    And the user Validates show on map link in Redesign Site
+    And the user validate more information content based on plan type in Redesign Site
+#    And the user Validates view search PDF link in Redesign Site
+
+    Examples: 
+      | username  | password  |MemUserName    | distance | pharmacyType                |
+      | qavgogine | qavgogine | q2_jun_aarp0017 |      25 | Open 24 hours               |
+ 
+  @MemberAuth_PharmacyLocatorValidateLanguage  @regression_06_06_18
+ Scenario Outline: To validate Pharmacy Locator Multiple Language and Zipcode entry for Member Auth
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username      | <username>     |
+      | Password      | <password>     |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |   
+    And user clicks on member to select
+    When the user navigates to pharmacy search page in Redesign site
+    Then the user validates the pharmacies available in Redesign site
+    When the user Selects Chinese Language in Redesign Site
+    Then the user searches multi lang for pharmacy search results available in Redesign site
+    When the user Selects Spanish Language in Redesign site
+    Then the user searches multi lang for pharmacy search results available in Redesign site
+
+    Examples: 
+      | username  | password  |MemUserName    | 
+      | qavgogine | qavgogine | q2_jun_aarp0017 |   
+      
+             
+@MemberAuth_OrderMaterialsErrorMessage   @regression_06_06_18
+Scenario Outline: To validate Order Submission Error for Member Auth
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username      | <username>     |
+      | Password      | <password>     |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |   
+    And user clicks on member to select
+    When the user views order materials in Member Redesign Order Materials page
+    And the user selects an option from the orderp list in Redesign site
+      | Option    | <option>   |
+      | Plan Type | <planType> |
+    Then the user validates CSR error message for Order Submission
+     | CSR Error	| <csrError> |
+    
+   Examples: 
+      | username  | password  |MemUserName    | planType |  option           |csrError |
+      | qavgogine | qavgogine | q2_jun_aarp0017 | MAPD     | Replacement ID card      | are not authorized to order material |
+ 

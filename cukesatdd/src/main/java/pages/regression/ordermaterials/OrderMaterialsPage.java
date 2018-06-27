@@ -3,6 +3,7 @@
  */
 package pages.regression.ordermaterials;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import junit.framework.Assert;
@@ -22,22 +23,25 @@ import atdd.framework.UhcDriver;
  *
  */
 public class OrderMaterialsPage extends UhcDriver  {
-	@FindBy(xpath = "//area[@href='javascript:clWin()'][@alt = 'close']")
-	private WebElement FeedbackModal;
+	@FindBy(xpath = "//*[contains(text() ''We value your feedback!)]")
+	private WebElement iPerceptionPopUp;
+
+	@FindBy(xpath = "//*[@id = 'closeButton']")
+	private WebElement iPerceptionClose;
 	
 	@FindBy(xpath = "//a[contains(text(), 'Medicare Advantage Plan')]")
 	private WebElement MAPlanTab;
 
-	@FindBy(xpath = "//a[contains(text(), 'Hospital Indemnity')]")
+	@FindBy(xpath = "//[contains(text(), 'Hospital Indemnity')]")
 	private WebElement HIPplanTab;
 	
-	@FindBy(xpath = "//a[contains(text(), 'Medicare Prescription Drug Plan')]")
+	@FindBy(xpath = "//[contains(text(), 'Medicare Prescription Drug Plan')]")
 	private WebElement PDPPlanTab;
 
-	@FindBy(xpath = "//a[contains(text(), 'Medicare Supplement Insurance Plan')]")
+	@FindBy(xpath = "//[contains(text(), 'Medicare Supplement Insurance Plan')]")
 	private WebElement MedSuppPlanTab;
 	
-	@FindBy(xpath = "//a[contains(text(), 'Senior Supplement Plan')]")
+	@FindBy(xpath = "//[contains(text(), 'Senior Supplement Plan')]")
 	private WebElement SrSuppTab;
 
 	@FindBy(xpath = "//*[@id = 'member-materials']/..")
@@ -52,7 +56,7 @@ public class OrderMaterialsPage extends UhcDriver  {
 	@FindBy(xpath = "//*[@id='eft-id']/..")
 	private WebElement EFTbrochureField;
 
-	@FindBy(xpath = "//*[@id='order-materials-serviceFail-error']/p")
+	@FindBy(xpath = "//*[@id='order-materials-serviceFail-error']")
 	private WebElement SHIPerrorMsg;
 	
 	@FindBy(id = "order-materials-error")
@@ -76,7 +80,9 @@ public class OrderMaterialsPage extends UhcDriver  {
 	@FindBy(xpath = "//*[@id = 'coi-id']/..")
 	private WebElement certificateInsurance;
 	
-	
+	@FindBy(xpath = "//*[@class='nav nav-tabs']//a")
+	private List <WebElement> ComboTabs;
+
 
 	@FindBy(xpath="//h3[contains(text(),'Technical Support') or contains(text(),'Plan Support')]/ancestor::div[@class='col-md-4']")
 	private WebElement needhelpcomponent;
@@ -109,14 +115,16 @@ public class OrderMaterialsPage extends UhcDriver  {
 		Thread.sleep(5000);
 		CommonUtility.checkPageIsReady(driver);
 		try{
-			FeedbackModal.click();
-			System.out.println("FeedBack Modal Present");
-			if (validate(FeedbackModal)){
-				System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
+			if(validate(iPerceptionPopUp)){
+				System.out.println("FeedBack Modal Present");
+
+				iPerceptionClose.click();
+				if (validate(iPerceptionPopUp)){
+					System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
+				}
+				else
+					System.out.println("FeedBack Modal Closed");
 			}
-			System.out.println("FeedBack Modal Closed");
-			//Thread.sleep(3000);
-			
 		}
 		catch (Exception e) {
 			System.out.println("FeedBack Modal NOT Present");
@@ -130,68 +138,105 @@ public class OrderMaterialsPage extends UhcDriver  {
 
 	@SuppressWarnings("deprecation")
 	public boolean navigatePlanTabs(String PlanType){
+		driver.navigate().refresh();
 		
-		if (PlanType.contentEquals("MA") || PlanType.contentEquals("MAPD")) {
-			if (validate(MAPlanTab)){
-				MAPlanTab.click();
-				//Assert.assertTrue("Cant navigate to MA / MAPD Plan Tab", memberMaterialsfield.isDisplayed());
-				System.out.println("*************Displaying Medicare Advantage Plan Tab **********");
-				return true;
+		try {
+			Thread.sleep(3000);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try{
+			if(validate(iPerceptionPopUp)){
+				System.out.println("FeedBack Modal Present");
+
+				iPerceptionClose.click();
+				if (validate(iPerceptionPopUp)){
+					System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
+				}
+				else
+					System.out.println("FeedBack Modal Closed");
 			}
 		}
-		
-		else if (PlanType.contentEquals("SHIP")) {
-			if (validate(MedSuppPlanTab)){
-				MedSuppPlanTab.click();
-				//Assert.assertTrue("Cant navigate to Med Supp PlanTab Plan Tab", MemberIDcardField.isDisplayed());
-				System.out.println("*************Displaying SHIP - Med Supp Plan Tab Plan Tab **********");
-				return true;
-			}
-			else if (validate(HIPplanTab)){
-				HIPplanTab.click();
-				//Assert.assertTrue("Cant navigate to HIP Plan Tab", MemberIDcardField.isDisplayed());
-				System.out.println("*************Displaying SHIP - HIP Plan Tab **********");
-				return true;
-			}
-			else {
-				System.out.println("*************No SHIP Plans available for this Member **********");
-				return false;
-			}
+		catch (Exception e) {
+			System.out.println("FeedBack Modal NOT Present");
 		}
 
-		else if (PlanType.contentEquals("HIP")) {
-			if (validate(HIPplanTab)){
-				HIPplanTab.click();
-				//Assert.assertTrue("Cant navigate to HIP Plan Tab", MemberIDcardField.isDisplayed());
-				System.out.println("*************Displaying SHIP - HIP Plan Tab **********");
-				return true;
+		CommonUtility.checkPageIsReady(driver);
+
+		if(validate(ComboTabs.get(0))){
+			WebElement FirstTab = ComboTabs.get(0);
+			WebElement Secondtab = ComboTabs.get(1);
+			System.out.println("First Tab ====> "+FirstTab.getText());
+			System.out.println("Second Tab ====> "+Secondtab.getText());
+
+			System.out.println("Combo Tabs are Displayed - Member with multiple Plans");
+			if (PlanType.contentEquals("MA") || PlanType.contentEquals("MAPD")) {
+				if (validate(FirstTab)){
+					FirstTab.click();
+					//Assert.assertTrue("Cant navigate to MA / MAPD Plan Tab", memberMaterialsfield.isDisplayed());
+					System.out.println("*************Displaying Medicare Advantage Plan Tab **********");
+					return true;
+				}
 			}
 			
-		}
-		else if (PlanType.contentEquals("PDP")) {
-			if (validate(PDPPlanTab)){
-				PDPPlanTab.click();
-				//Assert.assertTrue("Cant navigate to PDP Plan Tab", memberMaterialsfield.isDisplayed());
-				System.out.println("*************Displaying PDP Plan Tab **********");
-				return true;
+			else if (PlanType.contentEquals("SHIP")) {
+				if (validate(Secondtab)){
+					Secondtab.click();
+					//Assert.assertTrue("Cant navigate to Med Supp PlanTab Plan Tab", MemberIDcardField.isDisplayed());
+					System.out.println("*************Displaying SHIP - Med Supp Plan Tab Plan Tab **********");
+					return true;
+				}
+				else if (validate(Secondtab)){
+					Secondtab.click();
+					//Assert.assertTrue("Cant navigate to HIP Plan Tab", MemberIDcardField.isDisplayed());
+					System.out.println("*************Displaying SHIP - HIP Plan Tab **********");
+					return true;
+				}
+				else {
+					System.out.println("*************No SHIP Plans available for this Member **********");
+					return false;
+				}
 			}
-			
-		}
-		else if (PlanType.contentEquals("MedSupp")) {
-			if (validate(MedSuppPlanTab)){
-				MedSuppPlanTab.click();
-				//Assert.assertTrue("Cant navigate to Med Supp PlanTab Plan Tab", MemberIDcardField.isDisplayed());
-				System.out.println("*************Displaying SHIP - Med Supp Plan Tab Plan Tab **********");
-				return true;
+
+			else if (PlanType.contentEquals("HIP")) {
+				if (validate(Secondtab)){
+					Secondtab.click();
+					//Assert.assertTrue("Cant navigate to HIP Plan Tab", MemberIDcardField.isDisplayed());
+					System.out.println("*************Displaying SHIP - HIP Plan Tab **********");
+					return true;
+				}
+				
 			}
-		}
-		else if (PlanType.contentEquals("SSUP")) {
-			if (validate(SrSuppTab)){
-				SrSuppTab.click();
-				//Assert.assertTrue("Cant navigate to Med Supp PlanTab Plan Tab", MemberIDcardField.isDisplayed());
-				System.out.println("*************Displaying UHC Senior Supplement Plan Tab **********");
-				return true;
+			else if (PlanType.contentEquals("PDP")) {
+				if (validate(FirstTab)){
+					FirstTab.click();
+					//Assert.assertTrue("Cant navigate to PDP Plan Tab", memberMaterialsfield.isDisplayed());
+					System.out.println("*************Displaying PDP Plan Tab **********");
+					return true;
+				}
+				
 			}
+			else if (PlanType.contentEquals("MedSupp")) {
+				if (validate(Secondtab)){
+					Secondtab.click();
+					//Assert.assertTrue("Cant navigate to Med Supp PlanTab Plan Tab", MemberIDcardField.isDisplayed());
+					System.out.println("*************Displaying SHIP - Med Supp Plan Tab Plan Tab **********");
+					return true;
+				}
+			}
+			else if (PlanType.contentEquals("SSUP")) {
+				if (validate(Secondtab)){
+					Secondtab.click();
+					//Assert.assertTrue("Cant navigate to Med Supp PlanTab Plan Tab", MemberIDcardField.isDisplayed());
+					System.out.println("*************Displaying UHC Senior Supplement Plan Tab **********");
+					return true;
+				}
+			}
+
+			System.out.println("@@@@@@@@@@@@ Invalid Plan Type / Plan Tab not found @@@@@@@@@@@@@@");
+			return false;
+
 		}
 
 		System.out.println("@@@@@@@@@@@@ Invalid Plan Type / Plan Tab not found @@@@@@@@@@@@@@");
@@ -204,7 +249,7 @@ public class OrderMaterialsPage extends UhcDriver  {
 	@SuppressWarnings("deprecation")
 	public void ValidateOptions(String PlanType){
 		
-		if (PlanType.contentEquals("MA") || PlanType.contentEquals("MAPD") || PlanType.contentEquals("PDP")) {
+		if (PlanType.contentEquals("MA") || PlanType.contentEquals("MAPD") || PlanType.contentEquals("PDP")|| PlanType.contentEquals("SSUP")) {
 			if (validate(memberMaterialsfield) && validate(replacementIdField) ){
 				Assert.assertTrue(true);
 				System.out.println("*************Displaying All Order Plan Material Options for "+PlanType+ "**********");
@@ -277,6 +322,7 @@ public class OrderMaterialsPage extends UhcDriver  {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		if (validate(SHIPerrorMsg)){
 			if(SHIPerrorMsg.getText().contains("request cannot be processed at this time")){
 			System.out.println("*************Error Message Displayed displayed for SHIP invalid Selection in Order materials Page***************");
@@ -309,15 +355,20 @@ public class OrderMaterialsPage extends UhcDriver  {
 			e.printStackTrace();
 		}
 		try{
-			FeedbackModal.click();
-			System.out.println("FeedBack Modal Present");
-			if (validate(FeedbackModal)){
-				System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
+			if(validate(iPerceptionPopUp)){
+				System.out.println("FeedBack Modal Present");
+
+				iPerceptionClose.click();
+				if (validate(iPerceptionPopUp)){
+					System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
+				}
+				else
+					System.out.println("FeedBack Modal Closed");
 			}
-			System.out.println("FeedBack Modal Closed");
 		}
 		catch (Exception e) {
 			System.out.println("FeedBack Modal NOT Present");
+
 		}
 
 		CommonUtility.checkPageIsReady(driver);
