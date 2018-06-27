@@ -29,13 +29,13 @@ import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
 import pages.redesign.HsidRegistrationPersonalCreateAccount;
 import pages.regression.accounthomepage.AccountHomePage;
-import pages.member.bluelayer.AssistiveRegistrationPage;
-import pages.member.bluelayer.BenefitsAndCoveragePage;
+import pages.regression.login.AssistiveRegistrationPage;
+import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.member.bluelayer.DashboardPage;
-import pages.member.bluelayer.HSIDLoginPage;
+import pages.regression.login.HSIDLoginPage;
 import pages.member.bluelayer.LoginPage2;
 import pages.member.ulayer.ValueAddedServicepage;
-import pages.member.redesign.DeregisterPage;
+import pages.regression.login.DeregisterPage;
 
 /**
  * Functionality: Benefits and Coverage page

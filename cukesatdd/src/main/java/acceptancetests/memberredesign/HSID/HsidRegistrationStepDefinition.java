@@ -10,8 +10,8 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.member.bluelayer.HSIDLoginPage;
-import pages.member.redesign.DeregisterPage;
+import pages.regression.login.HSIDLoginPage;
+import pages.regression.login.DeregisterPage;
 import pages.regression.login.HsidRegistrationConfirmInformation;
 import pages.regression.login.HsidRegistrationPersonalCreateAccount;
 import pages.regression.login.HsidRegistrationPersonalInformationPage;

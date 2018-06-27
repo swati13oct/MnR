@@ -22,7 +22,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import pages.member.bluelayer.ProfilePreferencesPage;
-import pages.member.ulayer.ValueAddedServicepage;
+import pages.regression.benefitandcoverage.ValueAddedServicepage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
