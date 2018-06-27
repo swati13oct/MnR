@@ -560,6 +560,7 @@ And the user validates Lis member plan overview section
       | Member ID      | <memberid>      |
       | Effective Date | <effectivedate> |
       | Monthly premium| <monthlypremium>|
+      | Extra Help     | <extrahelp>     |
  And the user validates headers on Bnc page for indi members
  And the user validates the Primarycare Provider section
  And the user validates the Out of Pocket Max section 
@@ -586,8 +587,8 @@ And the user verifies that the correct pdfs are there in the plan material secti
  And the user clicks on More Information link
  And the user validates contactus section
  Examples:
- | planType|  memberType  | copayCategory | language    | SummaryofBenefits        | EvidenceofCoverage           | ComprehensiveFormularyDrug List         | name               | memberid      | effectivedate | monthlypremium |
- | MAPD    |  Individual  |  LIS          | ENGLISH     | Summary of Benefits      | Evidence of Coverage         | Comprehensive Formulary - Drug List     | DABDCAE CFCFFCF    | 910114420-00  | 01/01/2018     | Not Available  | 
+ | planType|  memberType  | copayCategory | language    | SummaryofBenefits        | EvidenceofCoverage           | ComprehensiveFormularyDrug List         | name               | memberid      | effectivedate | monthlypremium  | extrahelp            |               
+ | MAPD    |  Individual  |  LIS          | ENGLISH     | Summary of Benefits      | Evidence of Coverage         | Comprehensive Formulary - Drug List     | DABDCAE CFCFFCF    | 910114420-00  | 01/01/2018     | Not Available  | Extra Help Level : 1 |
  
  @CMpdpindlis
 Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
@@ -601,6 +602,7 @@ And the user validates Lis member plan overview section
       | Member ID      | <memberid>      |
       | Effective Date | <effectivedate> |
       | Monthly premium| <monthlypremium>|
+      | Extra Help     | <extrahelp>     |
 And the user validates headers on Bnc page for indi members
 And the user view the LIS Drug Copays & Discounts header
 And the user should see drug cost table for Lis members
@@ -625,8 +627,8 @@ And the user verifies that the correct pdfs are there in the plan material secti
  And the user clicks on More Information link
  And the user validates contactus section
  Examples:
- | planType|  memberType  | copayCategory | language    | SummaryofBenefits        | EvidenceofCoverage           | ComprehensiveFormularyDrug List         | name               | memberid      | effectivedate | monthlypremium |
- | PDP    |  Individual  |  LIS          | ENGLISH     | Summary of Benefits      | Evidence of Coverage         | Comprehensive Formulary - Drug List     | DABDCAE CFCFFCF    | 910114420-00  | 01/01/2018     | Not Available  | 
+ | planType|  memberType  | copayCategory | language    | SummaryofBenefits        | EvidenceofCoverage           | ComprehensiveFormularyDrug List         | name               | memberid      | effectivedate | monthlypremium |extrahelp            |
+ | PDP    |  Individual   |  LIS          | ENGLISH      | Summary of Benefits      | Evidence of Coverage         | Comprehensive Formulary - Drug List     | DABDCAE CFCFFCF    | 910114420-00  | 01/01/2018     | Not Available  | Extra Help Level : 1|
  
  
  @CMvasnegativescenario

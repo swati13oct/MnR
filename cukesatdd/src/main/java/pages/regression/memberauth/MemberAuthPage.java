@@ -143,18 +143,18 @@ public class MemberAuthPage extends UhcDriver {
 			switchToNewTab();
 			System.out.println("Switched to new tab");
 		    Thread.sleep(10000);
-		    waitforElement(PremiumPayment);
+		   /* waitforElement(PremiumPayment);
 		    if(PremiumPayment.isEnabled())
 		    {
-		    PremiumPayment.click();		    
+		    PremiumPayment.click();	*/	    
 			return new AccountHomePage(driver);		
-			}else
+			}/*else
 			{
 				System.out.println("Payment Link not displayed");
 			}
 		}
 		else
-			System.out.println("Member Pop up Login not found");
+			System.out.println("Member Pop up Login not found");*/
 		return null;			
 	}
 	

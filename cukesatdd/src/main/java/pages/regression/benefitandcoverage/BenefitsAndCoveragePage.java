@@ -55,7 +55,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='planBenefitsApp']/section/div/div[1]/div/div/div/div/h1")
 	private WebElement planName1;
 	
-	
+	 @FindBy(xpath=".//*[@id='mapdPageLis']/div[1]/div/div/table/tbody/tr[2]/th")
+	 private WebElement columncoveragegenericdrugs;
 
 	@FindBy(id = "contactUsAtdd")
 	private WebElement contactUslink;
@@ -1299,6 +1300,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	public void validatedrugcosttable() {
 		// TODO Auto-generated method stub
 		validate(RetailDrugCost_Table);
+		validate(columncoveragegenericdrugs);
+		Assert.assertEquals(driver.findElement(By.xpath("//*[@id='mapdPageLis']//table[@class='table-white atdd-bnc-drgcsttable']//tbody/tr[2]/th/p")).getText(),"Covered Generic Drugs" );
 
 	}
 
@@ -1981,7 +1984,7 @@ public void validateCoLogoImagePresent(String cologoToBeDisplayedOnSecondaryPage
 	}
 
 
-public void validatePlanOverviewIndlis(String name , String memberid , String effectivedate , String monthlypremium) {
+public void validatePlanOverviewIndlis(String name , String memberid , String effectivedate , String monthlypremium, String extrahelp) {
 	validate(planName);
 	validate(nameLabel);
 	validate(memberID);
@@ -1989,13 +1992,15 @@ public void validatePlanOverviewIndlis(String name , String memberid , String ef
 	validate(monthlypremiumlabel);
 	validate(ExtraHelp);
 	
-	String[] firstname = name.trim().split("//s+");
+
 	
 	
 	Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='planBenefitsAppSum']/section/div/div[4]/div[1]/div/div[1]/div[2]")).getText(),name);
 	
 	Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='planBenefitsAppSum']/section/div/div[4]/div[1]/div/div[2]/div[2]")).getText(),memberid);
 	Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='planBenefitsAppSum']/section/div/div[4]/div[1]/div/div[4]/div[2]")).getText(),effectivedate);
+
+	Assert.assertEquals((ExtraHelp).getText(),extrahelp);
 	
 	
 }
