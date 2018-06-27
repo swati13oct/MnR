@@ -132,8 +132,7 @@ private WebElement PlanMaterialSection;
 	@FindBy (xpath= ".//*[@id='dropdown-options--1']//a[contains(text(),'Account Settings')]")
 	private WebElement accountSettingOption;
 
-       @FindBy(xpath = ".//*[@id='dropdown-options--1']/a[contains(text(),'Account Settings')]")
-       private WebElement accountSettingOption;
+     
 
        @FindBy(xpath = "//header//h1")
        private WebElement heading;
@@ -435,11 +434,12 @@ private WebElement PlanMaterialSection;
               }
               CommonUtility.waitForPageLoad(driver, heading, 50);
               if (driver.getTitle().equalsIgnoreCase("Profile")) {
-                     return new ProfileandPreferencesPage(driver);
-              }
-
-              return null;
+            	  return new ProfileandPreferencesPage(driver);          
+              }   
+              }return null;
        }
+              
+       
 
        public void rallytoolexist() {
               String mainwindow = driver.getWindowHandle();
@@ -560,11 +560,10 @@ private WebElement PlanMaterialSection;
               if (MRScenario.environment.equalsIgnoreCase("stage")) {
                      System.out.println("user is on Stage login page");
                      // CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);
-                     if (driver.getCurrentUrl().contains("/dashboard"))
-                           ;
+                     if (driver.getCurrentUrl().contains("/dashboard"));
                      {
 
-                           accountToggleDropdown.click();
+                    	 accountProfileBtn.click();
                            try {
                                   Thread.sleep(3000);
                            } catch (InterruptedException e) {
