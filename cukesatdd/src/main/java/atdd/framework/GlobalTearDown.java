@@ -61,6 +61,12 @@ public class GlobalTearDown {
 			scenario.embed(screenshot, "image/png");
 			 MRScenario mrScen=new MRScenario();
 			//Clean up the existing webdriver.
+			 try {
+					Thread.sleep(4000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			 mrScen.DriverQuit();
 		}
 

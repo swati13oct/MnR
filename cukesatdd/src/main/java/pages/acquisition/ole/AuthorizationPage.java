@@ -64,25 +64,25 @@ public class AuthorizationPage extends UhcDriver{
 	@FindBy(id = "firstName0")
 	private WebElement Authorized_FirstName;
 
-	@FindBy(id = "firstName0")
+	@FindBy(id = "lastName0")
 	private WebElement Authorized_LastName;
 	
-	@FindBy(id = "firstName0")
+	@FindBy(id = "authorizedPersonRelationship0")
 	private WebElement Authorized_Relation;
 	
-	@FindBy(id = "firstName0")
+	@FindBy(id = "address10")
 	private WebElement Authorized_Address;
 	
-	@FindBy(id = "firstName0")
+	@FindBy(id = "city0")
 	private WebElement Authorized_City;
 	
-	@FindBy(id = "firstName0")
+	@FindBy(id = "state0")
 	private WebElement Authorized_State;
 	
-	@FindBy(id = "firstName0")
+	@FindBy(xpath = "//*[@id = 'Zip0' or @id = 'zipCode0']")
 	private WebElement Authorized_ZipCode;
 	
-	@FindBy(id = "firstName0")
+	@FindBy(id = "authorizedPersonPhone0")
 	private WebElement Authorized_PhNo;
 
 	//Read and Agree to the Statement of Understanding
@@ -92,7 +92,7 @@ public class AuthorizationPage extends UhcDriver{
 	@FindBy(id = "AgreeDisagree")
 	private WebElement SoU_DisagreeRadio;
 	
-	@FindBy(xpath = "//*[contains(text(), 'sorry, you cannot complete the application without agreeing to the Statement of Understanding')]")
+	@FindBy(id= "icon-alert-sign")
 	private WebElement SoU_DisagreeError;
 	
 	@FindBy(id = "ole-force-cancel-button")
@@ -113,7 +113,7 @@ public class AuthorizationPage extends UhcDriver{
 
 	public boolean validate_required_field() {
 		boolean validation_Flag = true;
-		if(!NextBtn.isEnabled()){
+		if(NextBtn.isEnabled()){
 			System.out.println("Next Button is Disabled : Required fields present");
 			SoU_DisagreeRadio.click();
 			if(validate(SoU_DisagreeError) && validate(CancelEnrollButton)){
@@ -124,10 +124,15 @@ public class AuthorizationPage extends UhcDriver{
 				System.out.println("Error message and Cancel Enrollment Button are NOT displaeyd for Disagree to SoU selection : Validation Failed");
 				validation_Flag = false;
 			}
+/*			if(validate(SoU_AgreeRadio)){
+				SoU_AgreeRadio.click();
+			}
+			if(validate(AuthorizedRepresentativeRadio)){
+				AuthorizedRepresentativeRadio.click();
+			}*/
 			SoU_AgreeRadio.click();
-			
 			AuthorizedRepresentativeRadio.click();
-			if(!NextBtn.isEnabled() && validate(Authorized_FirstName) && validate(Authorized_LastName) 
+			if(NextBtn.isEnabled() && validate(Authorized_FirstName) && validate(Authorized_LastName) 
 					&& validate(Authorized_Relation) && validate(Authorized_Address) && validate(Authorized_City) && validate(Authorized_State)
 					&& validate(Authorized_ZipCode) && validate(Authorized_PhNo)){
 				System.out.println("Required Fields are displayed for Authorized Representative Details entry : Next Button is disabled");

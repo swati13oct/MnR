@@ -381,7 +381,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='subnav_2']//button[@class='zip-button']")
 	public WebElement findPlans;
 	
-	@FindBy(xpath = ".//*[@id='drug-cost-card-acq']/div[2]//*[contains(text(),'EDIT DRUGS LIST')]")
+	@FindBy(id = "atddEditDrugList")
 	public WebElement step3EditDrugsList;
 	
 	@Override
@@ -1703,7 +1703,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		}
 		((JavascriptExecutor)driver).executeScript("arguments[0].click();", returnLink);
 		try {
-			Thread.sleep(10000);
+			Thread.sleep(15000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

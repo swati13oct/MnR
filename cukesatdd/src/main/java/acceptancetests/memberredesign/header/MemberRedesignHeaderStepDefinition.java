@@ -14,7 +14,8 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.dashboard.member.drugcostestimator.blayer.DrugCostEstimatorPage;
-import pages.memberredesign.bluelayer.AccountHomePage;
+//import pages.memberredesign.bluelayer.AccountHomePage;
+import pages.regression.accounthomepage.AccountHomePage;
 import pages.memberredesign.bluelayer.LoginPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
@@ -121,8 +122,9 @@ public class MemberRedesignHeaderStepDefinition {
 
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
 		dce.changeUrlToNewDCEPage();
+		
 		AccountHomePage accountHomePage = new AccountHomePage(wd);
-		getLoginScenario().saveBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE, accountHomePage);
+		getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
 	}
 
 	/**
@@ -131,8 +133,9 @@ public class MemberRedesignHeaderStepDefinition {
 	@Then("^I should be able to see and use the Home tab Header$")
 	public void I_should_be_able_to_see_and_use_the_Home_tab() {
 		// Express the Regexp above with the code you wish you had
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
-		accountHomePage.validateHeader();
+		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+				accountHomePage.validateHeader();
 	}
 
 	/**
@@ -141,9 +144,26 @@ public class MemberRedesignHeaderStepDefinition {
 	@Then("^I should be able to see and use the Find Care & Costs tab Header$")
 	public void I_should_be_able_to_see_and_use_the_Find_Care_Costs_tab() {
 		// Express the Regexp above with the code you wish you had
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
-		accountHomePage.validateFindCareCostTab();
+		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean
+				(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+						accountHomePage.validateFindCareCostTab();
+						accountHomePage.validateFindCarePage();
+					}
+	
+	
+	/**
+	 * @toDo : verify that the Find Care & Costs tab is not displayed for ex: ship plan
+	 */
+	@Then("^I should not be able to see the Find Care & Costs tab Header$")
+	public void I_should_not_be_able_to_see_the_Find_Care_Costs_tab() {
+		// Express the Regexp above with the code you wish you had
+		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+		accountHomePage.findCareNotAvailable();
+		
 	}
+	
 
 	/**
 	 *  @toDo : see and validate Claims tab Header
@@ -151,8 +171,9 @@ public class MemberRedesignHeaderStepDefinition {
 	@Then("^I should be able to see and use the Claims tab Header$")
 	public void I_should_be_able_to_see_and_use_the_Claims_tab() {
 		// Express the Regexp above with the code you wish you had
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
-		accountHomePage.validateClaims();
+		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+				accountHomePage.validateClaims();
 
 	}
 
@@ -162,7 +183,8 @@ public class MemberRedesignHeaderStepDefinition {
 	@Then("^clicking on the Claims tab should allow me to see links for the Claims Summary tab and Explanation of Benefits tab on the second level navigation Header$")
 	public void clicking_on_the_Claims_tab_should_allow_me_to_see_links_for_the_Claims_Summary_tab_and_Explanation_of_Benefits_tab_on_the_second_level_navigation() {
 		// Express the Regexp above with the code you wish you had
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
+		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 		accountHomePage.validateClaimsL2Tabs();
 	}
 
@@ -172,7 +194,8 @@ public class MemberRedesignHeaderStepDefinition {
 	@Then("^then click the Claims Summary tab and I should be directed to the Claims Summary Page Header$")
 	public void then_click_the_Claims_Summary_tab() {
 		// Express the Regexp above with the code you wish you had
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
+		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 		accountHomePage.checkModelPopup();
 		accountHomePage.clickClaimsSummary();
 	}
@@ -183,7 +206,8 @@ public class MemberRedesignHeaderStepDefinition {
 	@Then("^then click the Explanation of Benefits tab and I should be directed to the Explanation of Benefits Page Header$")
 	public void then_click_the_Explanation_of_Benefits_tab() {
 		// Express the Regexp above with the code you wish you had
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
+		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 		accountHomePage.checkModelPopup();
 		accountHomePage.clickeob();
 	}
@@ -194,7 +218,8 @@ public class MemberRedesignHeaderStepDefinition {
 	@Then("^I should be able to see and use the Coverage & Benefits tab Header$")
 	public void I_should_be_able_to_see_and_use_the_Coverage_Benefits_tab() {
 		// Express the Regexp above with the code you wish you had
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
+		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 		accountHomePage.validateCoverageBenefits();
 	}
 
@@ -205,7 +230,8 @@ public class MemberRedesignHeaderStepDefinition {
 	public void clicking_on_the_Coverage_Benefits_tab_should_allow_me_to_see_links_for_the_Benefits_Summary_tab_the_Forms_Resources_tab_and_Explanation_of_Benefits_tab_on_the_second_level_navigation() {
 		// Express the Regexp above with the code you wish you had
 		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
-		//accountHomePage.validateCoverageBenefitsL2Tabs();
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+		accountHomePage.validateCoverageBenefitsL2Tabs();
 
 	}
 	/**
@@ -215,7 +241,8 @@ public class MemberRedesignHeaderStepDefinition {
 	public void then_click_the_Benefits_Summary_tab_and_I_should_be_directed_to_the_Benefits_Summary_Page() {
 		// Express the Regexp above with the code you wish you had
 		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
-		//accountHomePage.clickBenefitsSummary();
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+		accountHomePage.clickBenefitsSummary();
 
 	}
 
@@ -226,7 +253,8 @@ public class MemberRedesignHeaderStepDefinition {
 	public void then_click_the_Forms_Resources_tab_and_I_should_be_directed_to_the_Forms_Resources_Page() {
 		// Express the Regexp above with the code you wish you had
 		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
-		//accountHomePage.clickFormsResources();
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+		accountHomePage.clickFormsResources();
 	}
 
 	/**
@@ -236,7 +264,8 @@ public class MemberRedesignHeaderStepDefinition {
 	public void then_click_the_Order_Materials_tab_and_I_should_be_directed_to_the_Order_Materials_Page() {
 		// Express the Regexp above with the code you wish you had
 		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
-		//accountHomePage.clickOrderMaterials();
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+		accountHomePage.clickOrderMaterials();
 
 	}
 
@@ -246,25 +275,32 @@ public class MemberRedesignHeaderStepDefinition {
 	@Then("^I should be able to see and use the Premium Payments tab Header$")
 	public void I_should_be_able_to_see_and_use_the_Premium_Payments_tab() {
 		// Express the Regexp above with the code you wish you had
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
+		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 		accountHomePage.clickPremiumPayment();
+		accountHomePage.validatePremiumPage();
 	}
 
 	/**
-	 *  @toDo : clicks on Premium Payments tab and navigate to the Premium Payments Overview Page
+	 *  @toDo : verify that the Premium payment tab is not displayed when premium subsidy is 100%
 	 */
-	@Then("^upon clicking the Premium Payments tab I should navigate to the Premium Payments Overview Page Header$")
+	
+	@Then("^I should not be able to see the Premium Payments tab Header$")
 	public void upon_clicking_the_Premium_Payments_tab_I_should_navigate_to_the_Premium_Payments_Overview_Page() {
 		// Express the Regexp above with the code you wish you had
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean
+				(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+						accountHomePage.premiumPaymentsNotAvailable();
 
 	}
 	/**
 	 *  @toDo : See and Validate Help button present on header
 	 */
-	@Then("^I should be able to see and use the help button Header$")
-	public void I_should_be_able_to_see_and_use_the_help_button() {
+	@Then("^I should be able to see the help button Header$")
+	public void I_should_be_able_to_see_the_help_button() {
 		// Express the Regexp above with the code you wish you had
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
+		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 		accountHomePage.validateHelp();
 
 	}
@@ -272,24 +308,27 @@ public class MemberRedesignHeaderStepDefinition {
 	/**
 	 * @toDo : see and validates the Account/Profile dropdown and its options 
 	 */
-	@Then("^I should be able to see and use the Account/Profile dropdown and its options Header$")
+	@Then("^I should be able to see and use the Account/Profile dropdown and logout$")
 	public void I_should_be_able_to_see_and_use_the_Account_Profile_dropdown_and_its_options() {
 		// Express the Regexp above with the code you wish you had
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
+		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 		accountHomePage.validateAccountProfile();
-
+		accountHomePage.clickLogout();
+	
 	}
-
+		
+	
 	/**
 	 *  @toDo : From Member page i see footer section and validate claims , check pop up and validate footer section
 	 */
 	@When("^I am on the member page then I should be able to see the footer sections Header$")
 	public void I_am_on_the_member_page_then_I_should_be_able_to_see_the_footer_sections() {
 		// Express the Regexp above with the code you wish you had
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
-		accountHomePage.validateClaimsL2Tabs();
-		accountHomePage.checkModelPopup();
-		accountHomePage.validateFooterSection();
+		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
+		//accountHomePage.validateClaimsL2Tabs();
+		//accountHomePage.checkModelPopup();
+		//accountHomePage.validateFooterSection();
 	}
 
 	/**
@@ -298,8 +337,8 @@ public class MemberRedesignHeaderStepDefinition {
 	@When("^Member Support and links under it should be displayed Header$")
 	public void Member_Support_and_links_under_it_should_be_displayed() {
 		// Express the Regexp above with the code you wish you had
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
-		accountHomePage.validateMemberSupport();
+		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
+		//accountHomePage.validateMemberSupport();
 	}
 
 	/**
@@ -308,8 +347,8 @@ public class MemberRedesignHeaderStepDefinition {
 	@When("^Quick links and links under it should be displayed Header$")
 	public void Quick_links_and_links_under_it_should_be_displayed() {
 		// Express the Regexp above with the code you wish you had
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
-		accountHomePage.validateQuickLinks();
+		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
+		//accountHomePage.validateQuickLinks();
 	}
 
 	/**
@@ -318,8 +357,32 @@ public class MemberRedesignHeaderStepDefinition {
 	@When("^I have access to the Rally Provider Search Tool and I see the Saved option under Quick Links Header$")
 	public void I_have_access_to_the_Rally_Provider_Search_Tool_and_I_see_the_Saved_option_under_Quick_Links() {
 		// Express the Regexp above with the code you wish you had
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
-		accountHomePage.validateSavedLink();
+		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
+		//accountHomePage.validateSavedLink();
 	}
 
-}
+
+
+/**
+ * @toDo : To check the header tab for a terminated member
+ */
+
+	@Then("^I should be able to see and use the Home tab on Dashboard$")
+	public void I_should_be_able_to_see_and_use_Home_tab_on_Dashboard() {
+	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+	accountHomePage.validateDashboardHelp();
+	accountHomePage.dashboardFindCareNotAvailable();
+	accountHomePage.dashboardPremiumPaymentsNotAvailable();
+	accountHomePage.validateDashboardClaims();
+	accountHomePage.validateFormsResources();
+	accountHomePage.validateFormsResourcesPage();
+	
+	}
+	
+	
+	
+	}
+	
+	
+
+

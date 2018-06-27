@@ -1,4 +1,4 @@
-@fastandfurious @OLE 
+@fastandfurious @OLE
 @OLE_UHC
 Feature:1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
 
@@ -13,11 +13,11 @@ Feature:1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
-    Then the user validates TFN in Welcome OLE Right Rail
-    Then the user validates Learn more modal for Welcome OLE
-    Then the user validates Leave OLE modal for Welcome OLE
-    Then the user validates cancellation modal for Welcome OLE
-    Then the user validates and selects the Disclaimer Checkbox
+#    Then the user validates TFN in Welcome OLE Right Rail
+#    Then the user validates Learn more modal for Welcome OLE
+#    Then the user validates Leave OLE modal for Welcome OLE
+#    Then the user validates cancellation modal for Welcome OLE
+   Then the user validates and selects the Disclaimer Checkbox
     Then the user navigates to Medicare Information Page
     Then the user validates Medicare Information Page required fields
     Then the user enters following required Medicare Information
@@ -28,15 +28,15 @@ Feature:1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
       | PartA Date      | <partadate>      |
       | PartB Date      | <partbdate>      |
       | Card Type       | <cardtype>       |
-    Then the user validates TFN in Medicare Info OLE Right Rail
-    Then the user validates the Plan details in Medicare Info OLE Right Rail
-    Then the user validates Leave OLE modal for Medicare Information Page
-    Then the user validates Learn more modal for Medicare Information Page
-    Then the user validates cancellation modal for Medicare Information Page
+#    Then the user validates TFN in Medicare Info OLE Right Rail
+#    Then the user validates the Plan details in Medicare Info OLE Right Rail
+#    Then the user validates Leave OLE modal for Medicare Information Page
+#    Then the user validates Learn more modal for Medicare Information Page
+#    Then the user validates cancellation modal for Medicare Information Page
     Then the user navigates to Preliminary Questions Page
 	Then the user validates requierd fields for Preliminary Questions Page
       | MedicaidNumber | <medicaidnumber> |
-    Then the user validates the Plan details in Preliminary Questions Pag OLE Right Rail
+#    Then the user validates the Plan details in Preliminary Questions Pag OLE Right Rail
     #   Then the user validates TFN in Right Rail on Preliminary Questions Page
     #   Then the user validates Leave OLE modal for Preliminary Questions Page
     #   Then the user validates Learn more modal for Preliminary Questions Page
@@ -78,7 +78,7 @@ Feature:1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
     Then the user navigates to Proposed Effective Date Page
     Then the user validates Proposed Effective Date is Displayed
     Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
-    Then the user validates PCP page for MA and MAPD PFFS plans
+   # Then the user validates PCP page for MA and MAPD PFFS plans
     #Then the user validates Look up Provider for MA MAPD and DSNP plans.
     Then the user navigates to Monthly Plan Premium Page
     Then the user navigates to Optional Benefits Page for following plans with available Riders
