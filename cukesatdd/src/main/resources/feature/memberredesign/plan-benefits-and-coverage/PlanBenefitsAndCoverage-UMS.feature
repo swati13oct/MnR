@@ -298,7 +298,20 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
        | HIP     |  SHIP        | SPANISH  | Plan Benefits Table | Plan Overview |
        | HIP     |  SHIP        | CHINESE  | Plan Benefits Table | Plan Overview |
       
-    
+   
+     @CMShipVAS
+  Scenario Outline: Verify that Page Headers are in place on Benefits and Coverage page
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    Then the user navigates to Benefits and coverage page
+    Then the user validate Value Add Service page comes on clicking additional info button
+
+    Examples: 
+      | planType | memberType |
+      | HIP      | SHIP       |
+      
+       
     @aprilRelease2018Fnf @regressiontestcase-ATDDtags
     Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
     Given registered member with following details logins in the member portal 

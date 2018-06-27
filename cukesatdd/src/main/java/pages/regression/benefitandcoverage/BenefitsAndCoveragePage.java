@@ -1677,7 +1677,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	}
 
 	
-	public ValueAddedServicepage navigateToValueAddServicetest() {
+	public ValueAddedServicepage navigateToValueAddServicetest() 
+	{
 		validate(learnmorebutton);
 		try {
 			Thread.sleep(30000);
@@ -1694,7 +1695,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (this.driver.getTitle().equalsIgnoreCase("Value Added Services")) {
+		if (this.driver.getTitle().contains("Value Added Services")) {
+		
 			System.out.println(driver.getTitle());
 			return new ValueAddedServicepage(driver);
 		}
@@ -1709,6 +1711,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		return null;
 
 	}
+	
 	/**
 	 * @toDo : Validates the Need help section headers for a ship member
 	 */
