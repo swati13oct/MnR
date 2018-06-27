@@ -370,11 +370,25 @@ private WebElement PlanMaterialSection;
               } else {
                      driver.navigate().to(
                                   "https://team-ci1-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
+              }
+              CommonUtility.waitForPageLoad(driver, heading, 50);
+      		if (driver.getTitle().equalsIgnoreCase("Benefits Overview")) {
+      			return new BenefitsAndCoveragePage(driver);
+      		}
+
+      		return null;
+       }
+       public void waitForHomePage() {
+
+       	waitforElement(helloPerson);
+
+       }
 	
 	/*
 	 * This function clicks on Benefits and Coverage link from Dashboard after waiting
 	 * for Hello-Person name text to be displayed on page
 	 */
+       
 	public BenefitsAndCoveragePage navigateToBandCPage() {
 
 		waitForHomePage();
@@ -429,20 +443,7 @@ private WebElement PlanMaterialSection;
 	}
 
 
-	public ProfileandPreferencesPage navigateDirectToProfilePage() throws InterruptedException {
 
-              /*
-              * if (validate(iPerceptionPopUp)) { iPerceptionPopUp.click();
-              * System.out.println("iPerception Pop Up displayed"); }
-              */
-
-              CommonUtility.waitForPageLoad(driver, heading, 50);
-              if (driver.getTitle().equalsIgnoreCase("Benefits Overview")) {
-                     return new BenefitsAndCoveragePage(driver);
-              }
-
-              return null;
-       }
 
        public ProfileandPreferencesPage navigateDirectToProfilePage() throws InterruptedException {
 
@@ -1494,11 +1495,7 @@ public void validateHeader(){
 	/**
      * Wait till page is loaded button is enabled.
      */
-    public void waitForHomePage() {
-
-    	waitforElement(helloPerson);
-
-    }
+   
 }
 
 /**
