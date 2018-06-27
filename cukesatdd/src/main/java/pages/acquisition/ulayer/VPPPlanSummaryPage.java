@@ -298,7 +298,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	public VPPPlanSummaryPage clicksOnIsProviderCovered(String planName) {
 		if (planName.contains("HMO")) {
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 			
 			if(maPlansList!=null){
 			for (WebElement plan : maPlansList) {
@@ -392,7 +392,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	public boolean providerinfo(String planName)
 	{
-		
+		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		WebElement ProviderSearchLink1 = driver.findElement
 				(By.xpath("//*[contains(text(),'"+planName+"')]/following::span[contains(text(),'covered')]"));
 		String mproviderinfo=ProviderSearchLink1.getText();
