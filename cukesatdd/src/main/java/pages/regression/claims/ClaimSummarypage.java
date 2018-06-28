@@ -133,7 +133,7 @@ public class ClaimSummarypage extends UhcDriver{
 	private WebElement messageaftersrch;
 
 	//@FindBy (id="DownloadLinkBtnAtdd")
-	@FindBy (xpath=".//*[@id='DownloadLinkBtnAtdd']")
+	@FindBy (xpath=".//*[@id='downloadHypLinkAtdd']")
 	private WebElement downloadmydatabutton;
 
 	//@FindBy (xpath=".//*[@id='siteleaving-popup-overlay']")
@@ -645,11 +645,11 @@ public class ClaimSummarypage extends UhcDriver{
 			if(driver.getTitle().contains("Claims")){
 				System.out.println("Cancel button functionality is working as expected");
 				//now again validate site leaving popup
-				downloadmydatabutton.click();
+				//downloadmydatabutton.click();
 				//now click on proceed and validate new tab opens
 				//proceedToDownloadPopUp.click();
-			waitforElement(leavingsitepopup);
-			System.out.println("Site leaving pop up is displayed ===>"+(leavingsitepopup.isDisplayed()));
+			//waitforElement(leavingsitepopup);
+			//System.out.println("Site leaving pop up is displayed ===>"+(leavingsitepopup.isDisplayed()));
 			//now click on proceed and validate new tab opens
 			//proceedToDownloadPopUp.click();
 			/*if(leavingsitepopup.isDisplayed()){

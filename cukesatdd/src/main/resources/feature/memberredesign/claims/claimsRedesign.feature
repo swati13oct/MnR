@@ -160,6 +160,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
       | Plan Type      | <planType>     |
       | Test Data Type | <claimssystem> |
     When I navigate to the claims Summary page in redesigned site
+    Then I can validate the claims summary header
     And I can search claims for the following claim period on redesigned site
       | Plan Type    | <planType>    |
       | Claim Period | <claimPeriod> |
