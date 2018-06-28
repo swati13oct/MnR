@@ -16,14 +16,16 @@ Feature: T1.1To validate the new changes related to claims page on the member re
       | Domain     | <domain>      |
       | Plan Type  | <planType>    |
     And the user validates the DownloadMyData section in redesigned site
+    #Then I navigate to the Claim Details page in redesigned site
+    #And I validate the Claims Total in claims details page in AARP site
 
     Examples: 
       | planType | claimPeriod    | domain | claimssystem |
-      | MAPD     | Last 24 months | COSMOS | COSMOSCLAIMS |
-      | MA       | Last 24 months | NICE   | NICECLAIMS   |
+      #| MAPD     | Last 24 months | COSMOS | COSMOSCLAIMS |
+      #| MA       | Last 24 months | NICE   | NICECLAIMS   |
       | PDP      | Last 24 months | RX     | RXCLAIMS     |
-      | MA       | Last 24 months | COSMOS | COSMOSCLAIMS   |
-      | MAPD     | Last 24 months | NICE   | NICECLAIMS   |
+      #| MA       | Last 24 months | COSMOS | COSMOSCLAIMS   |
+      
       
       
   @claimsSummarySHIP @theTransformers
@@ -33,16 +35,23 @@ Feature: T1.1To validate the new changes related to claims page on the member re
       | Plan Type      | <planType>     |
       | Test Data Type | <claimssystem> |
     When I navigate to the claims Summary page in redesigned site
+    Then I can validate the claims summary header
     And I can search claims for the following claim period on redesigned site
       | Plan Type    | <planType>    |
       | Claim Period | <claimPeriod> |
+      
     Then I can see the claims displayed based on the selection in redesigned site
+    And I validate the pagination on the claims summary page 
     And the user validates the EOB section based on domain in redesigned site
-      | Domain | <domain> |
+    
+     | Domain       | <domain>      |
+      | Plan Type      | <planType>     |
+      Then I navigate to the Claim Details page in redesigned site
+      Then I validate the Claims Table in claims details page in redesigned site    
 
     Examples: 
       | planType | claimPeriod    | domain | claimssystem |
-      | SHIP     | Last 24 Months | NA     | SHIPCALIMS   |
+      | SHIP     | Last 24 Months | NA     | SHIPCLAIMS   |
 
   @claimsDetailsTableFED @theTransformers @regression_06_06_18 
   Scenario Outline: To Verify Claim Table on Claims Details Page
@@ -143,3 +152,29 @@ Feature: T1.1To validate the new changes related to claims page on the member re
     #Examples: 
       #| planType | claimPeriod   | claimToDate | claimFromDate |
       #| MAPD     | Custom Search | 10/10/2017  | 06/14/2012    |
+      
+      
+  @claimsSummaryAndDetails
+  Scenario Outline: To validate the claims present for the Federal member on claims sumamry page for AARP site
+   Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>     |
+      | Test Data Type | <claimssystem> |
+    When I navigate to the claims Summary page in redesigned site
+    And I can search claims for the following claim period on redesigned site
+      | Plan Type    | <planType>    |
+      | Claim Period | <claimPeriod> |
+    Then I can see the claims displayed based on the selection in redesigned site
+    And I validate the pagination on the claims summary page 
+   	And the user validates the EOB section based on domain in redesigned site
+      | Domain     | <domain>      |
+      | Plan Type  | <planType>    |
+    And the user validates the DownloadMyData section in redesigned site
+    And I navigate to the Claim Details page in AARP site
+    Then I validate the Claims Table in claims details page in AARP site
+    And I validate the Claims Total in claims details page in AARP site
+
+    Examples: 
+      | planType | claimPeriod    | domain | claimssystem |
+      | MAPD     | Last 24 months | NICE   | NICECLAIMS   | 
+
+     
