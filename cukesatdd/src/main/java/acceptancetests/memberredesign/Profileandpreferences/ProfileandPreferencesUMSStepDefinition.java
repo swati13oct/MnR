@@ -1000,5 +1000,14 @@ public class ProfileandPreferencesUMSStepDefinition {
 		profilePreferencesPage.validateTempAddressSectionForShip();
 
 	}
+	@And("^I should not be able to edit the Phone numbers section for specific group members$")
+	public void i_should_not_be_able_to_edit_phoneNumbers_for_Specific_Group_Members() {
+		// Write code here that turns the phrase above into concrete actions
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+		profilePreferencesPage.validateGroupsPhoneNumbersSection();
+
+	}
+
 
 }

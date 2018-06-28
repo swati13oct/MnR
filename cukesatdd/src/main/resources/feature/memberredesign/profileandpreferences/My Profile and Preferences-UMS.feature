@@ -329,3 +329,17 @@ Feature: C1.2To test Profile and Preferences page .
     Examples: 
       | planType |
       | SHIP     |
+      
+   @EPMPProfilePageContactusGroup @regression_06_06_18
+  Scenario Outline: To test end to end regression scenario for EPMP profile page
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    #|data type    | <dataType>   |
+    When the user navigates to Profile and Preferences page
+    And I should see the EPMP i frame on profile page
+    And I should not be able to edit the Phone numbers section for specific group members
+    
+    Examples: 
+      | planType | memberType  | dataType   |
+      | MAPD     | EPMPEnabled | group      |

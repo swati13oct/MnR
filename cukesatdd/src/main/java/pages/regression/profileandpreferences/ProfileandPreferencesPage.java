@@ -2,6 +2,7 @@
 package pages.regression.profileandpreferences;
 
 import static org.testng.Assert.fail;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -14,20 +15,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.By.ByXPath;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import com.mysql.jdbc.Driver;
-//import com.sun.org.apache.xerces.internal.impl.xpath.XPath;
-//import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
-
-import pages.member.bluelayer.GoGreenPage;
-import pages.regression.memberauth.MemberAuthPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.member.bluelayer.GoGreenPage;
 
 /**
  * @author akapoo18
@@ -2040,6 +2035,25 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		}
 
 }
+
+	public void validateGroupsPhoneNumbersSection() {
+		phoneEditArrowOnTheRight.click();
+		//validateNew(homePhoneNumberTextField);
+		boolean phone = validate(phoneEditIcon);
+		if(phone==false)
+		{
+		System.out.println("Edit Link is not Displayed for Specific groups");
+		Assert.assertTrue(true);	
+		}
+		else
+		{
+			fail();
+			System.out.println("edit ");
+		}
+		
+		
+		
+	}
 	
 }
 
