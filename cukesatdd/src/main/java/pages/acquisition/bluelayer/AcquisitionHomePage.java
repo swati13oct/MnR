@@ -21,6 +21,7 @@ import pages.acquisition.ulayer.PageTitleConstants;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 //import pages.member.bluelayer.AccountHomePage;
 //import pages.acquisition.ulayer.MaViewPlansAndPricingPage;
@@ -374,6 +375,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
         public VPPPlanSummaryPage searchPlans(String zipcode, String countyName) {
                 sendkeys(zipCodeField, zipcode);
                 viewPlansButton.click();
+        		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
                 try {
                         if (countyModal.isDisplayed()) {
                                 for (WebElement county : countyRows) {

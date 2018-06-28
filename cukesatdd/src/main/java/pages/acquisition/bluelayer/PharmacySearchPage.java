@@ -4,6 +4,7 @@
 package pages.acquisition.bluelayer;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import junit.framework.Assert;
 import pages.acquisition.ulayer.PageTitleConstants;
@@ -109,8 +110,7 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(className = "errorPoints")
 	WebElement errorPoints;
 	
-	//@FindBy(xpath = "//div/h2[contains(@class, 'pharmacy-count')]")
-	@FindBy(xpath = "//*[contains(@class, 'pharmacy-count')]")
+	@FindBy(id = "showpharmacycount_id")
 	private WebElement pharmacyCount;
 
 	@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[2]")
@@ -222,16 +222,9 @@ public class PharmacySearchPage extends UhcDriver {
 	}
 
 	public PharmacySearchPage selectsPlanName(String planName) {
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		selectFromDropDown(planNamesList, planName);
-		for(int i=0;i<10;i++){
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		}
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		if (driver.getTitle().equalsIgnoreCase(
 				PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE)) {
 			return new PharmacySearchPage(driver);
@@ -537,7 +530,7 @@ public PharmacySearchPage selectPharmacyandServices(String pharmacytype) {
 		}
 		boolean flag = true;
 		System.out.println(pharmacyCount.getText());
-		if(pharmacyCount.getText().split(" ")[0].equals("") || Integer.parseInt(pharmacyCount.getText().split(" ")[0])==0)
+		if(pharmacyCount.getText().equals("") || Integer.parseInt(pharmacyCount.getText())==0)
 			flag =  false;
 
 		if(pharmacyResults.getAttribute("class").toString().contains("ng-hide"))
