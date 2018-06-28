@@ -159,14 +159,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private WebElement GetStarted;
 	
 
-	@FindBy(xpath="//h3[text()='People']/preceding::div[1]/img")
+	@FindBy(xpath="//*[text()='People']/preceding::div[1]/img")
 	private WebElement People;
 	
-	@FindBy(xpath="//h3[text()='Primary Care']")
+	@FindBy(xpath="//*[text()='Primary Care']")
 	private WebElement Primary;
 	
 	
-	@FindBy(xpath="//a[contains(text(),'Primary Care Physician')]")
+	@FindBy(xpath="//*[contains(text(),'Primary Care Physician')]")
 	private WebElement Physician;
 
 	@FindBy(xpath="//div[contains(@class,'first')]//div[@class='hidden-phone']/button[not(contains(@class,'hidden'))]/span")
@@ -248,11 +248,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 
 	public VPPPlanSummaryPage viewPlanSummary(String planType) {
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+
 		
 		if (planType.equalsIgnoreCase("PDP")) {
 //	WebElement hidePdpPlans invalid
@@ -275,6 +272,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 	
 	public VPPPlanSummaryPage viewPlanSummaryButton(String planType) {
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		if (planType.equalsIgnoreCase("PDP")) {
 			if(validate(showPdpPlans)){
 			showPdpPlans.click();
@@ -394,7 +392,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	{
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		WebElement ProviderSearchLink1 = driver.findElement
-				(By.xpath("//*[contains(text(),'"+planName+"')]/following::span[contains(text(),'covered')]"));
+				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide ng-scope')]/descendant::span[contains(text(),'covered')]"));
 		String mproviderinfo=ProviderSearchLink1.getText();
         System.out.println(mproviderinfo);
 		if(mproviderinfo.contains("1 providers covered"))
