@@ -71,6 +71,7 @@ public PrepareforInitialEnrollmentPage prepareforInitialEnrollmentFooterClick() 
 public ExploreChangingPlansPage exploreChangingPlansClick() {
 	validate(navigationSectionMedicareEducationLink);
 	Actions actions = new Actions(driver);
+	PageFactory.initElements(driver, this);
     actions.moveToElement(navigationSectionMedicareEducationLink);
     actions.moveToElement(exploreChangingPlansMedicareEducationLink);
     actions.click().build().perform();

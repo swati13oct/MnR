@@ -67,7 +67,7 @@ public class GlobalTearDown {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			 mrScen.DriverQuit();
+			 //mrScen.DriverQuit();
 		}
 
 	}

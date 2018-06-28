@@ -76,6 +76,7 @@ public class PrepareForInitialEnrollmentuhcPage extends GlobalWebElements{
 	public DiscoverMoreResourcesuhcPage discoverMoreResourcesClick() {
 		validate(discoverMoreResourcesMedicareEducationLink);
 		Actions actions = new Actions(driver);
+		PageFactory.initElements(driver, this);
         actions.moveToElement(navigationSectionMedicareEducationLink);
         actions.moveToElement(discoverMoreResourcesMedicareEducationLink);
         actions.click().build().perform();

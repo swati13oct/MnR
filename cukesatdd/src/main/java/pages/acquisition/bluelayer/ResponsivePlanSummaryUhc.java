@@ -949,6 +949,7 @@ public void comparePlanslnk(){
  					executor.executeScript("document.getElementById('zipcode').click()");
 					System.out.println("clicked inside tet box");
  					Actions action = new Actions(driver);
+ 					PageFactory.initElements(driver, this);
 					action.moveToElement(zipCodeField).perform();
 					action.doubleClick();
 					action.perform();
@@ -1020,6 +1021,7 @@ public void comparePlanslnk(){
  							driver.manage().window().maximize();
 						//	zipCodeField.sendKeys(invalidzipcode);
  							Actions action = new Actions(driver);
+ 							PageFactory.initElements(driver, this);
  							action.moveToElement(zipCodeField).perform();
  							action.doubleClick();
  							action.perform();

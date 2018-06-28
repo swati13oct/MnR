@@ -641,6 +641,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
                 validate(navigationSectionMedicareEducationLink);
 
                 Actions actions = new Actions(driver);
+                PageFactory.initElements(driver, this);
                 actions.moveToElement(navigationSectionMedicareEducationLink);
                 actions.moveToElement(learnAboutMedicareMedicareEducationLink);
                 actions.perform();
@@ -680,6 +681,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
         public LearnAboutMedicareuhcPage learnAboutMedicareClick() {
                 validate(navigationSectionMedicareEducationLink);
                 Actions actions = new Actions(driver);
+                PageFactory.initElements(driver, this);
                 actions.moveToElement(navigationSectionMedicareEducationLink);
                 actions.moveToElement(learnAboutMedicareMedicareEducationLink);
                 actions.click().build().perform();
@@ -705,6 +707,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
         public void navigateToRequestMoreHelpAndInformation(String planType){
         	 Actions actions = new Actions(driver);
+        	 PageFactory.initElements(driver, this);
              actions.moveToElement(ourPlansHoverLink);
              actions.moveToElement(moreHelpInfoLink);
             actions.click().build().perform();
@@ -799,6 +802,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
                 }
 
                 Actions actions = new Actions(driver);
+                PageFactory.initElements(driver, this);
                 actions.moveToElement(ourPlans);
 
                 if (planType.equalsIgnoreCase("MA")) {
@@ -1028,6 +1032,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
         public RequestHelpAndInformationPage navigateToMaMoreHelpAndInfo() {
 
                 Actions actions = new Actions(driver);
+                PageFactory.initElements(driver, this);
                 actions.moveToElement(ourPlansHoverLink);
                 actions.moveToElement(moreHelpInfoLink);
                 actions.click().build().perform();
@@ -1131,6 +1136,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
         public PDPRequestHelpAndInformationPage navigateToPDPMoreHelpAndInfo() {
 
                 Actions actions = new Actions(driver);
+                PageFactory.initElements(driver, this);
                 actions.moveToElement(ourPlansHoverLink);
                 actions.moveToElement(moreHelpInfoLink);
                 actions.click().build().perform();
@@ -1179,7 +1185,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
         
         public PlanSelectorNewPage quizButton() {
         	waitforElement(ourPlans);
-    		Actions action = new Actions(driver);		
+    		Actions action = new Actions(driver);	
+    		PageFactory.initElements(driver, this);
     		action.moveToElement(ourPlans).build().perform();
     		waitforElement(takeTheQuizBtn);
     		takeTheQuizBtn.click();

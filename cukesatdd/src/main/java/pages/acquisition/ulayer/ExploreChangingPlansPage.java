@@ -35,6 +35,7 @@ public class ExploreChangingPlansPage extends GlobalWebElements {
 	public PrepareforInitialEnrollmentPage prepareForInitialEnrollmentClick() {
 		validate(prepareForInitialEnrollmentMedicareEducationLink);
 		Actions actions = new Actions(driver);
+		PageFactory.initElements(driver, this);
 	    actions.moveToElement(navigationSectionMedicareEducationLink);
 	    actions.moveToElement(prepareForInitialEnrollmentMedicareEducationLink);
 	    actions.click().build().perform();

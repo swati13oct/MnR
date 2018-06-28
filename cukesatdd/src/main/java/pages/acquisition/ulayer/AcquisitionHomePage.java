@@ -431,6 +431,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validate(OurPlansLink1);
 		// Hover over text
 		Actions action = new Actions(driver);
+		PageFactory.initElements(driver, this);
 		action.moveToElement(OurPlansLink1).build().perform();
 
 		// to click
@@ -462,6 +463,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public void ourPlansHover() {
 		Actions actions = new Actions(driver);
+		PageFactory.initElements(driver, this);
 		actions.moveToElement(ourPlansHoverLink);
 		actions.moveToElement(ourPlansDropdownText);
 		actions.click();
@@ -572,6 +574,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validate(hoverhealthandwellnesslink);
 		// Hover over text
 		Actions action = new Actions(driver);
+		PageFactory.initElements(driver, this);
 		action.moveToElement(hoverhealthandwellnesslink).build().perform();
 
 		// TODO Auto-generated method stub
@@ -659,6 +662,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public void navigateToRequestMoreHelpAndInformation(String planType){
 		Actions action = new Actions(driver);
+		PageFactory.initElements(driver, this);
 		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
 		/*if(planType.contains("MA"))
 				ma_moreHelpInfoLink.click();
@@ -701,6 +705,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public PDPRequestHelpAndInformationPage navigateToPDPMoreHelpAndInfo() {
 
 		Actions actions = new Actions(driver);
+		PageFactory.initElements(driver, this);
 		actions.moveToElement(ourPlansHoverLink);
 		actions.moveToElement(pdp_moreHelpInfoLink);
 		actions.click().build().perform();
@@ -714,6 +719,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public RequestHelpAndInformationPage navigateToMaMoreHelpAndInfo() {
 
 		Actions actions = new Actions(driver);
+		PageFactory.initElements(driver, this);
 		actions.moveToElement(ourPlansHoverLink);
 		actions.moveToElement(moreHelpInfoLink);
 		actions.click().build().perform();
