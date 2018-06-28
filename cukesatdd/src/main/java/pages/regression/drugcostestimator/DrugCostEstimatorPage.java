@@ -1077,10 +1077,11 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	 * Delete all drug
 	 */
 	public void delete_all_drugs() throws InterruptedException {
+		waitForloader(driver,overlay,20);
 
 		while (driver.findElements(By.className("delete-drug")).size() > 0) {
 			CommonUtility.waitForPageLoad(driver, first_delete_link, 20);
-			Thread.sleep(2000);
+			Thread.sleep(5000);
 			first_delete_link.click();
 			CommonUtility.waitForPageLoad(driver, delDrgConfirm, 10);
 			delDrgConfirm.click();
@@ -1668,6 +1669,21 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 		}
 
+		/** 
+		 * Add Generic drug
+		 */
+		public void addGenricDrug(String drug, String dosage, String quantity, String frequency ) throws InterruptedException {
+			AddNewDrugModal addNewDrugModal = new AddNewDrugModal(driver);
+			this.clickOnAddDrug();
+			addNewDrugModal.typeDrugName(drug);
+			addNewDrugModal.submit();
+			AddDrugDetails addDrugDetails = new AddDrugDetails(driver);
+			addDrugDetails.selectDosage(dosage);
+			addDrugDetails.selectQnty(quantity);
+			addDrugDetails.selectFrequency(frequency);
+            addDrugDetails.continueAddDrugDetailsGeneric();
+		 }
+		
 		public void switchToGenericDrug(String branddosage, String gendosage) throws InterruptedException{
 
 			WebElement switchNowLink = driver.findElement(By.xpath("//p[contains(text(), '"+ branddosage+"')]/ancestor::section//a[contains(text(), 'SWITCH NOW')]"));

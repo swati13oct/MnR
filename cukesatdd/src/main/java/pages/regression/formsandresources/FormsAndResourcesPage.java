@@ -1,9 +1,12 @@
 
 
+
+
 package pages.regression.formsandresources;
 import java.util.*;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -30,8 +33,15 @@ public class FormsAndResourcesPage extends UhcDriver {
                     
                     @FindBy(xpath="//*[@class='h3 medium margin-large']")
                     private WebElement ordermatpage;
-                 
-                 @FindBy(linkText="VIEW DOCUMENTS & RESOURCES")
+                    
+                    @FindBy(xpath="(//*[@alt='TEXAS ERS logo'])[1]")
+                    private WebElement pdptexaslogo;
+                    
+                    @FindBy(xpath="//*[contains(text(),'Redetermination Request Form for HealthSelect of TX')]")
+                    private WebElement pdptexasdocument;
+                    
+                    
+                  @FindBy(linkText="VIEW DOCUMENTS & RESOURCES")
                   private WebElement DOCUMENTSRESOURCES;
 
                 /** The member signin link. */
@@ -56,8 +66,9 @@ public class FormsAndResourcesPage extends UhcDriver {
                 
               
               /**Link for perception popup**/
-              @FindBy(xpath="//*[@id='IPEinvL']/map/area[3]")
+              @FindBy(xpath="html/body/div[5]/div[1]/h1")
                 private WebElement perceptionpopup; 
+              
               
               @FindBy(className="btn btn-no")
               private WebElement nothanksbutton; 
@@ -77,8 +88,8 @@ public class FormsAndResourcesPage extends UhcDriver {
                 
                 
                 /** Renew Magazine Section - Forms And Resources page */
-                @FindBy(xpath = "//*[@class='customsegments parbase section']//div[@class='otherPages']//*[@href='/wellness/health/health-wellness-programs-pastissues-renew?type=lifestyle']")
-                private WebElement renewMagazineSection;
+                @FindBy(xpath = "//*[@class='otherPages']//*[@class='h4 margin-extra-small'][contains(text(),'Renew Magazine')]")
+                                                private WebElement renewMagazineSection;
                 
                 /** My DocumentSection - Forms And Resources page */
                 @FindBy(id = "myDocHeader")
@@ -172,6 +183,9 @@ public class FormsAndResourcesPage extends UhcDriver {
                 
                 @FindBy(xpath = "//*[@class='otherPages']//*[@class='reimbursementforms']")
                 private WebElement reimbursementforms;
+               
+                @FindBy(xpath="//*[@class='otherPages']//*[@class='medicationauthorizationforms']")
+                private WebElement medicationauthorizationforms;
                 
                 @FindBy(xpath = "//*[@class='otherPages']//*[@class='authorizationforms']")
                 private WebElement authorizationforms;
@@ -179,31 +193,49 @@ public class FormsAndResourcesPage extends UhcDriver {
                 @FindBy(xpath = "//*[@class='otherPages']//*[@class='otherresources']")
                 private WebElement otherresources;
                 
-                public FormsAndResourcesPage(WebDriver driver) throws InterruptedException {
+             @FindBy(xpath="//*[@class='clearfix ship']//*[contains(text(),'Plan Overview')]")
+             private WebElement planoverviewpdf;
+                
+             @FindBy(xpath="//*[@class='clearfix ship']//*[contains(text(),'Benefits Table')]")
+             private WebElement benefitstable;
+                
+             @FindBy(xpath="//*[@class='clearfix ship']//*[contains(text(),'Outline of Coverage')]")
+             private WebElement outlineofcoverage;
+             
+             @FindBy(className="noPdfMessageClass")
+             private WebElement errormessageforship;
+
+             @FindBy(xpath="//*[@class='otherPages']//*[@href='/content/dam/UCP/SHIP/eft_content.pdf']")
+             private WebElement eftpdfforship;
+                
+             /** i perception pop up objects*/
+                @FindBy(id = "goto-header-first")
+                private WebElement iPerceptionBody;
+
+                @FindBy(id = "closeButton")
+                private WebElement iPerceptionCloseButton;
+                
+               public FormsAndResourcesPage(WebDriver driver) throws InterruptedException {
                                 super(driver);
                                 PageFactory.initElements(driver, this);
                                 CommonUtility.checkPageIsReady(driver);
-                                  //Thread.sleep(5000);
+                        
                                   CommonUtility.checkPageIsReady(driver);
-                                  try{
-                                    
-                                           WebDriverWait wait = new WebDriverWait(driver, 30);
-                                          
-                                         if (validate(perceptionpopup)) {
-                                                perceptionpopup.click();
-                                         } 
-                                         else {
-                                                }
-                                    
+                                  Thread.sleep(5000);
+                                  try {
+                                                  Thread.sleep(5000);
+                                                                driver.switchTo().frame("IPerceptionsEmbed");
+                                                                Thread.sleep(5000);
+                                                                iPerceptionCloseButton.click();
+                                                                System.out.println("iPerception Pop Up is Present");
+                                                                driver.switchTo().defaultContent();
+                                                                Thread.sleep(5000);
+                                                                }
+                                                                catch (Exception e) {
+                                                                System.out.println("iPerception Pop Up is not Present");
+                                                                }
                                   
-                                  }
-                                  catch (Exception e) {
-                                  
-                                  {
-                                         System.out.println("iPerception Pop Up not displayed");
-                                    }
-                                  }
-                                  try{
+/*                                  try{
                                   FeedbackModal.click();
                                   System.out.println("FeedBack Modal Present");
                                   if (validate(FeedbackModal)){
@@ -213,7 +245,7 @@ public class FormsAndResourcesPage extends UhcDriver {
                                   }
                                   catch (Exception e) {
                                   System.out.println("FeedBack Modal NOT Present");
-                                  }
+                                  }*/
                                openAndValidate();
                 }
                 
@@ -315,24 +347,14 @@ public class FormsAndResourcesPage extends UhcDriver {
                              return PharmacyLocatorLink;  
                 }
                 
-                /**
-                 * @toDo : clicking on perception
-                 */
-                 public void clickonperceptionpopup()
-                 {
-                        perceptionpopup.click();
-                        perceptionpopup.click();
-                        driver.findElement(By.xpath("html/body/div[5]/div[2]/button[2]"));
-                        
-                 }
-         
+                
                 
                 /**
                  * @toDo : plan materials section
                  */
                 public WebElement getplanmaterialsection()
                 {   
-                       CommonUtility.waitForPageLoad(driver, documentheader, 40);
+                     /*  CommonUtility.waitForPageLoad(driver, documentheader, 40);*/
                      return PlanMaterialSection;
                 }
                 /**
@@ -347,21 +369,18 @@ public class FormsAndResourcesPage extends UhcDriver {
                  */
                 public void validateOrderPlanMaterial() throws InterruptedException
                 {
-                     try{
-                        if (perceptionpopup.isDisplayed()) {
-                             driver.switchTo().frame("iPerceptionsFrame");
-                             Thread.sleep(3000);
-                             nothanksbutton.click();
-                      } 
-                        else{
-                             
-                            }
-                        }
-                        catch (Exception e) {
-                        
-                        
-                           System.out.println("iPerception Pop Up not displayed");
-                      }
+                                try {
+                                  Thread.sleep(5000);
+                                                driver.switchTo().frame("IPerceptionsEmbed");
+                                                Thread.sleep(5000);
+                                                iPerceptionCloseButton.click();
+                                                System.out.println("iPerception Pop Up is Present");
+                                                driver.switchTo().defaultContent();
+                                                Thread.sleep(5000);
+                                                }
+                                                catch (Exception e) {
+                                                System.out.println("iPerception Pop Up is not Present");
+                                                }
                     if((OrderPlanMaterialLink).isDisplayed())
                      {
                      OrderPlanMaterialLink.click();
@@ -507,7 +526,7 @@ public class FormsAndResourcesPage extends UhcDriver {
                          if(langdropdwn.getFirstSelectedOption().getText().contains("ENGLISH"))
                            {
 
-                           java.util.List<WebElement> pdfs = driver.findElements(By.xpath("//div[contains(@class,'plan-material')]//span//li/a"));
+                           java.util.List<WebElement> pdfs = driver.findElements(By.xpath("(//*[@class='col-md-8']//*[@class='planDocuments parsys'])[1]//li"));
                            System.out.println(pdfs.size());
                            for (int i=0;i<pdfs.size();i++)
                            {  
@@ -535,7 +554,7 @@ public class FormsAndResourcesPage extends UhcDriver {
                               
                           java.util.List<WebElement> pdfs = driver.findElements(By.xpath(".//*[@class='PlanPdf section']/div/div[1]/div[2]/span/div/ul/li[2]/a"));
                           System.out.println("Size"+pdfs.size());
-                         for (int i=0;i<pdfs.size();i++)
+                        for (int i=0;i<pdfs.size();i++)
                          {  
                             String pdfnames = null;
                             pdfnames= (pdfs.get(i).getText()) ;
@@ -564,62 +583,62 @@ public class FormsAndResourcesPage extends UhcDriver {
                          return checkflag;
                      }
                      /**
-                      * This mthod verifies the PDF links present for the ANOC section on forms and resoourcse page
+                      * This method verifies the PDF links present for the ANOC section on forms and resource page
                       * @param a --> This will collect the PDF link names
-                      * @return --> tru/false
+                      * @return --> true/false
+                     * @throws InterruptedException 
                       */
-                     public boolean verifypdfnamesforanocdocuments(String a[])
-                     {   
-                           java.util.List<WebElement> anocpdfs =driver.findElements(By.xpath("//*[@class='otherPages']//div[@class='sectionWise_div_2018']//*[@class='document-list-new margin-small']"));
-                          
+                     public boolean verifypdfnamesforanocdocuments(String a[]) throws InterruptedException
+                     
+                     {    Thread.sleep(2000);
+                        scroll();
+                                 boolean checkflag =true;
+                           java.util.List<WebElement> anocpdfs =driver.findElements(By.xpath("(//*[@class='otherPages']//*[@class='col-md-8']//*[@class='planDocuments parsys'])[2]//li"));
                            System.out.println(anocpdfs.size());
                            for (int i=0;i<anocpdfs.size();i++)
                            {  
                               String pdfnames = null;
-                              pdfnames= (anocpdfs.get(i).getText()) ;
+                              pdfnames= (anocpdfs.get(i).getText());
                               System.out.println(pdfnames);
                            }
                               
                                                 if(anocpdfs.size()==0)
                                                 {
                                                    Assert.fail("no pdfs are coming");
-                                                   return false;
+                                                    checkflag=false;
+                                                   
                                                 }
                                                 else if (anocpdfs.size()!=a.length)
-                                                {
+                                               {
                                                    Assert.fail("less or more pdfs are coming");
-                                                   return false;
+                                                   checkflag=false;
+                                                   
                                                 }
-                                         else 
-                                         {   
-                                          boolean checkflag =true;
-                                         
-                                       
+                                                 else 
+                                                                         {   
+
                                          for (int i=0;i<anocpdfs.size();i++)
                                          {  
-                                           String pdf[] = anocpdfs.get(i).getText().split(Pattern.quote("("));
-                                            if(pdf[0].contains(a[i])){
-                                                   System.out.println(pdf[0]);
-                                                  checkflag = true; 
+                                          String pdf[] = anocpdfs.get(i).getText().split(Pattern.quote("("));
+                                           if(pdf[0].contains(a[i])){
+                                                  System.out.println(pdf[0]);
+                                                 checkflag = true; 
+                                                                      }
+                                           else {
+                                                  checkflag=false;
+                                                  break;
                                                 }
-                                            else {
-                                                   checkflag=false;
-                                                   break;
-                                                 }
-                                                              
-                                         }
-                                         return checkflag;
-                                         }
-                                         
-                                       
+                                          } 
+                                                                         
                                         
-                                                                 
+                                         }           
+                         return checkflag;                                        
                      }
 
                      
                      public void waitforFNRpage()
                      {
-                WebDriverWait wait = new WebDriverWait(this.driver, 60);
+                WebDriverWait wait = new WebDriverWait(this.driver, 40);
                 wait.until(new ExpectedCondition<Boolean>() {
                     public Boolean apply(WebDriver driver) {
                                 if (driver.getTitle().contains("Documents Overview"))
@@ -639,7 +658,7 @@ public class FormsAndResourcesPage extends UhcDriver {
                                   System.out.println("Order Plan Material Link link is present");
                                   return false;
                                   }
-                                  else {
+                                 else {
                                   
                            }
                            }
@@ -858,7 +877,7 @@ public class FormsAndResourcesPage extends UhcDriver {
                            public boolean checkanocforPCP()
                            {
                                   try {
-                                  if(AnocSection.isDisplayed()) {
+                                  if(driver.findElement(By.xpath("//*[@class='otherPages']//*[@id='anoc_headerfnr']")).isDisplayed()) {
                                   System.out.println("Anoc sec is present for PCP");
                                   return false;
                                   }
@@ -922,20 +941,101 @@ public class FormsAndResourcesPage extends UhcDriver {
                                   
                            }
                            
+                           public WebElement getoutlineofcoverage()
+                           {
+                                   return outlineofcoverage;
+                           }
                            
-                           
+                           public WebElement getbenefitstable()
+                           {
+                                   return benefitstable;
+                           }
+                          
+                           public WebElement geterrormessgaeforship()
+                           {
+                                   return errormessageforship;
+                           }
+
                            public void selectlanguagedropdown(String language)
                            {
                                   Select langdropdwn = new Select(languagedropdown);
                                   langdropdwn.selectByVisibleText(language);
                            }
                            
+                           public WebElement geteftpdfforship()
+                           {
+                                   return eftpdfforship;
+                           }
+                           
+                           public int checkshipdocuments()
+                           {
+                                   java.util.List<WebElement> pdfs = driver.findElements(By.xpath("(//*[@class='col-md-8']//*[@class='planDocuments parsys'])[1]//li"));
+                                   
+                                   String pdfnames[] = new String[pdfs.size()];
+                                   for(int i =0;i<pdfs.size();i++){
+                                                   pdfnames[i]= (pdfs.get(i).getText()) ;
+                                                 }
+                                 
+                                                                   
+                                                                   int pdfCount = 0;
+                                                                   if (ArrayUtils.isNotEmpty(pdfnames)) {
+                                                                  
+                                                                   if (ArrayUtils.contains(pdfnames, "Benefit")) {
+                                                                      pdfCount = pdfCount + 1;
+
+                                                                   }
+                                                                   if (ArrayUtils.contains(pdfnames, "Outline")) {
+                                                                      pdfCount = pdfCount + 1;
+                                                                   }
+                                                                 
+                                                               }
+                                                                                                                                                return pdfCount;
+
+                           }
+                           
+                           public boolean checkerrormessageforship()
+                           {
+                                   try {
+                                   if(errormessageforship.isDisplayed()) {
+                                   System.out.println("error for ship is present");
+                                   return false;
+                                   }
+                                   else {
+                                   
+                            }
+                            }
+                            catch(Exception e) {
+                                   System.out.println("error for ship is not present");
+                                   return true;
+                            }
+                            return false;
+                            }
+                           
+
                       
                            public void scrollUp() {
-	                     JavascriptExecutor jse = (JavascriptExecutor)driver;
-	                     jse.executeScript("window.scrollBy(0,400)", "");
+                                     JavascriptExecutor jse = (JavascriptExecutor)driver;
+                                     jse.executeScript("window.scrollBy(0,400)", "");
                      
                             }
+
+
+                                                                                                public WebElement getpdptexaslogo() {
+                                                                                                                
+                                                                                                                return pdptexaslogo;
+                                                                                                }
+
+
+                                                                                                public WebElement getmedicationforms() {
+                                                                                                                // TODO Auto-generated method stub
+                                                                                                                return medicationauthorizationforms;
+                                                                                                }
+
+
+                                                                                                public WebElement getpdptexasdocument() {
+                                                                                                                // TODO Auto-generated method stub
+                                                                                                                return pdptexasdocument;
+                                                                                                } 
                         
      
      
