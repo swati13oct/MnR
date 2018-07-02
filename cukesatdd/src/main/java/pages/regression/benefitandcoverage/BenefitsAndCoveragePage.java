@@ -153,6 +153,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(id = "mapdPageNonLis")
 	private WebElement drugcopaytable;
+	
+	@FindBy(xpath = ".//*[@id='mapdPageNonLisForSRetail']/div/div[1]/div/div/div/div/table/tbody/tr[2]/td[3]/div")
+	private WebElement tabledynamicdata;
+
 
 	@FindBy(id = "mapdPageLis")
 	private WebElement RetailDrugCost_Table;
@@ -2013,7 +2017,20 @@ public boolean Validate_Catastrophic_Stage_Language(String updatedLanguage, Stri
 			System.out.println("Updated Language validation : Failed");
 			return false;
 		}
+		
+		
 	}
+
+public void tabledynamicdata()
+{
+	System.out.println(tabledynamicdata.getText());
+	if(StringUtils.isEmpty(tabledynamicdata.getText()))
+	{
+		
+		Assert.fail();
+	}
+}
+
 
 public void validateImagePresent(String logoToBeDisplayedOnSecondaryPage) {
 	

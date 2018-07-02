@@ -661,6 +661,9 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		else{
 			Assert.fail("ERROR Validating Coverage Gap  Stage Value");
 		}
+		
+		benefitsCoveragePage.tabledynamicdata();
+		
 
 		
 		
