@@ -450,11 +450,9 @@ private WebElement PlanMaterialSection;
               if (MRScenario.environment.equalsIgnoreCase("stage")) {
                      System.out.println("user is on Stage login page");
                      // CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);
-                     if (driver.getCurrentUrl().contains("/dashboard"))
-                           ;
-                     {
+                     if (driver.getCurrentUrl().contains("/dashboard")){
 
-				if (driver.getTitle().contains("Profile")) {
+				
                            /*
                            * accountToggleDropdown.click();
                            * validate(accountSettingOption); accountSettingOption.click();
@@ -470,14 +468,12 @@ private WebElement PlanMaterialSection;
                            CommonUtility.waitForPageLoad(driver, heading, 50);
 
                            if (driver.getCurrentUrl().contains("profile")) {
-
                                   return new ProfileandPreferencesPage(driver);
                            }
-
+                           return null;
                      }
-              }
 
-              if (MRScenario.environment.equals("team-ci1") || MRScenario.environment.equals("team-h")
+              }else if (MRScenario.environment.equals("team-ci1") || MRScenario.environment.equals("team-h")
                            || MRScenario.environment.equals("test-a") || MRScenario.environment.equals("team-e") || MRScenario.environment.equals("stage")) {
 
                      driver.navigate().to(PAGE_URL + "medicare/member/account/profile.html");
@@ -496,7 +492,7 @@ private WebElement PlanMaterialSection;
               if (driver.getTitle().equalsIgnoreCase("Profile")) {
             	  return new ProfileandPreferencesPage(driver);          
               }   
-              }return null;
+              return null;
        }
               
        
