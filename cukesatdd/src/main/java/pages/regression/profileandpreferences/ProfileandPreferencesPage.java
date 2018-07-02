@@ -3,6 +3,7 @@ package pages.regression.profileandpreferences;
 
 import static org.testng.Assert.fail;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -2044,16 +2045,29 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	}
 
-	public void validateGroupsPhoneNumbersSection() {
+	public void validateGroupsPhoneNumbersSection(String groupPlanName) {
 		phoneEditArrowOnTheRight.click();
+		System.err.println(groupPlanName);
+		System.err.println(groupPlanName);
 		// validateNew(homePhoneNumberTextField);
-		boolean phone = validate(phoneEditIcon);
-		if (phone == false) {
-			System.out.println("Edit Link is not Displayed for Specific groups");
-			Assert.assertTrue(true);
-		} else {
-			fail();
-			System.out.println("edit ");
+		List<String> groupPlanNames = Arrays.asList( "Nokia","HealthSelectRx", "ALPEEHIP", "AT&T", "Illinois","JohnDeere", "Navistar", "TEACHERS RET SYSTEM KY", "ArcelorMittal");
+
+		for (String ss : groupPlanNames) {
+
+			if (groupPlanName.toString().contentEquals(ss)) {
+				boolean phone = validate(phoneEditIcon);
+				if (phone == false) {
+					System.out.println("Edit Link is not Displayed for Specific groups");
+					Assert.assertTrue(true);
+					break;
+				} else {
+					fail();
+					System.out.println("edit ");
+				}
+
+			} else {
+				continue;
+			}
 		}
 
 	}
