@@ -3,7 +3,7 @@
  * @author sdwaraka
  * 
  */
-package acceptancetests.memberredesign.comboFramework;
+package acceptancetests.memberredesign.comboframework;
 import gherkin.formatter.model.DataTableRow;
 
 import java.util.ArrayList;
