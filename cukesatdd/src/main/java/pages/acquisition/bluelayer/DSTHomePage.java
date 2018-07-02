@@ -31,6 +31,7 @@ public class DSTHomePage extends UhcDriver {
 	public DSTHomePage viewQuizButtonButton()
 	{
 		Actions action = new Actions(driver);		
+		PageFactory.initElements(driver, this);
 		action.moveToElement(OurPlans).moveToElement(QuizButton).click().build().perform();
 		
 		return null;

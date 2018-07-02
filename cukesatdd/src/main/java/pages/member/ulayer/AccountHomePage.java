@@ -906,6 +906,7 @@ driver.switchTo().window(mainwindow);
 
 	public void validatePreferredMailOderLink() {
 		Actions actions = new Actions(driver);
+		PageFactory.initElements(driver, this);
 		actions.moveToElement(myMenuLinkAarp);
 		actions.perform();
 		if(validate(preferredMailServicePharmacyLink))

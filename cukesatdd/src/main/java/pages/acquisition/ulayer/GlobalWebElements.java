@@ -216,6 +216,7 @@ public class GlobalWebElements  extends UhcDriver{
 	
 	public void ourPlansHover() {
 		Actions actions = new Actions(driver);
+		PageFactory.initElements(driver, this);
 		actions.moveToElement(ourPlansHoverLink);
 		actions.moveToElement(ourPlansDropdownText);
 		actions.click();
