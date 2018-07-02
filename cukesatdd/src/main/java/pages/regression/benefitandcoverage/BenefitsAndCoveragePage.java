@@ -1222,8 +1222,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	public void validate_learnmoreaboutlink() {
 		validate(Learnmoretierslink);
 		validate(Learnmorestagelink);
-		System.out.println(Learnmoretierslink.getLocation());
-		System.out.println(Learnmorestagelink.getLocation());
+		//System.out.println(Learnmoretierslink.getLocation());
+		//System.out.println(Learnmorestagelink.getLocation());
 
 	}
 
@@ -1803,7 +1803,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
         if(langdropdwn.getFirstSelectedOption().getText().contains("ENGLISH"))
         		{
 		List<WebElement> pdfs = driver.findElements(By.xpath(".//*[@class='PlanPdf section']/div/div[1]/div[1]/span/div/ul/li[2]/a"));
-		
+		                                                     
 		System.out.println("Size"+pdfs.size());
         for (int i=0;i<pdfs.size();i++)
         {  
@@ -1842,10 +1842,42 @@ public class BenefitsAndCoveragePage extends UhcDriver {
         else if(langdropdwn.getFirstSelectedOption().getText().contains("SPANISH"))
         {
         	
-        	 {
-             	System.out.println("NO PDFs in spanish yet.if PDFs come then above same code can be used");
-             	checkflag = true;
-             }
+        	List<WebElement> pdfs = driver.findElements(By.xpath(".//*[@class='PlanPdf section']/div[1]/div[1]/div[2]/span/div/ul/li[2]/a"));
+    		
+    		System.out.println("Size"+pdfs.size());
+            for (int i=0;i<pdfs.size();i++)
+            {  
+               String pdfnames = null;
+               pdfnames= (pdfs.get(i).getText());
+               System.out.println(pdfnames);
+            }
+            
+            if(a.length==pdfs.size())
+            {
+            for (int i=0;i<pdfs.size();i++)
+            {  
+              String pdf1[] = pdfs.get(i).getText().split(Pattern.quote("("));
+              if(StringUtils.isNotEmpty(pdf1[0]))
+              {
+              System.out.println(pdf1[0]);
+               if(pdf1[0].contains(a[i])){
+                     checkflag = true;
+                    }
+               else {
+                      checkflag=false;
+                      break;
+               }
+              }
+            else
+            {
+            	Assert.fail();
+            }
+           }
+            }
+            else
+            {
+            	Assert.fail();
+            }
     
         }
         else if(langdropdwn.getFirstSelectedOption().getText().contains("CHINESE"))
@@ -1966,7 +1998,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 public boolean Validate_Catastrophic_Stage_Language(String updatedLanguage, String displayFlag) {
 		
 		List <WebElement> UpdatedLanguageCount = driver.findElements(By.xpath("//*[contains(text(),'"+updatedLanguage+"')]"));
-		System.out.println(updatedLanguage);
+		//System.out.println(updatedLanguage);
 		System.out.println(UpdatedLanguageCount.get(0));
 		boolean Expectedflag = (displayFlag.equalsIgnoreCase("true"))?true:false ;
 		System.out.println(Expectedflag);

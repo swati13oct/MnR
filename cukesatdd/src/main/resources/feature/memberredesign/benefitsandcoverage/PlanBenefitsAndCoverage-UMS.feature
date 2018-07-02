@@ -8,7 +8,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | Plan Type      | <planType>  |
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
-    Then the user navigates to Benefits and coverage page
+    Then The user navigates to Benefits and Coverage page
     And the user validates Ind plan overview
       | Name           | <name>  |
       | Member ID      | <memberid>|
@@ -42,14 +42,14 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     And the user validates contactus section
     
     Examples: 
-       | planType|  memberType  | copayCategory | language | SummaryofBenefits    | EvidenceofCoverage       | ComprehensiveFormularyDrug List     | name    | memberid    | effectivedate | monthlypremium |   UpdatedLanguage | DisplayFlag|
-       | MAPD    |  Individual  |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | DDE BCBF| 006798725-01| 01/01/2018    | Not Available  | Tier 2            | true       |
-       | MAPD    |  Individual  |  NON LIS      | SPANISH  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | DDE BCBF| 006798725-01| 01/01/2018    | Not Available  | Tier 2            | true       |
-       | MAPD    |  Individual  |  NON LIS      | CHINESE  |                      |                          |                                     | DDE BCBF| 006798725-01| 01/01/2018    | Not Available  | Tier 2            | true       |
-       | Medica  |  Individual  |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List |
-       | Medica  |  Individual  |  NON LIS      | SPANISH  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 |
-       | PCP     |  Individual  |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List |
-       | PCP     |  Individual  |  NON LIS      | SPANISH  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 |
+       | planType|  memberType  | copayCategory  | language | SummaryofBenefits    | EvidenceofCoverage       | ComprehensiveFormularyDrug List     | name       | memberid     | effectivedate | monthlypremium |   UpdatedLanguage | DisplayFlag|
+       #| MAPD    |  Individual  |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | DDCEE DAADF| 954016383-00 | 01/01/2018    | Not Available  | Tier 2            | true       |
+        | MAPD    |  Individual  |  NON LIS      | SPANISH  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | DDCEE DAADF| 954016383-00 | 01/01/2018    | Not Available  | Tier 2            | true       |
+       #| MAPD    |  Individual  |  NON LIS      | CHINESE  |                      |                          |                                     | DDE BCBF| 006798725-01| 01/01/2018    | Not Available  | Tier 2            | true       |
+       #| Medica  |  Individual  |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List |
+       #| Medica  |  Individual  |  NON LIS      | SPANISH  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 |
+       #| PCP     |  Individual  |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List |
+       #| PCP     |  Individual  |  NON LIS      | SPANISH  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 |
       
       
     @CMFedPDPNonLis
@@ -144,7 +144,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
        | MA      |  Group       |  HMO          |    
 
    
-     @CMAncillarysection1
+    @CMAncillarysection1
     Scenario Outline: Verify Ancilliary section is in place on Benefits and Coverage page
     Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>  |
@@ -536,7 +536,7 @@ And the user verifies that the correct pdfs are there in the plan material secti
       | MAPD     |
 
 
-@WaystoSaveforPdp @regression @regression_06_06_18
+   @WaystoSaveforPdp @regression @regression_06_06_18
   Scenario Outline: Verify the ways to save  widget for a PDP member
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
