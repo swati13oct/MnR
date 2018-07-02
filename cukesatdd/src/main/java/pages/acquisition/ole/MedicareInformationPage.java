@@ -35,6 +35,9 @@ public class MedicareInformationPage extends UhcDriver{
 	@FindBy(xpath = "//*[@id='ole-form-cancel-button' or @id = 'cancel-enrollment']")
 	private WebElement CancelEnrollmentLink;
 	
+	@FindBy(xpath = "//*[@class = 'enrollmentAllowed-error-msg']")
+	private WebElement RequiredField_ErrorMessage;
+	
 	//Right Rail Elements
 
 	@FindBy(xpath = "//*[@id='learn-more-ole']/a")
@@ -381,7 +384,7 @@ public boolean validate_negative_values() {
 	boolean NextBtnFlag = NextBtn.isEnabled();
 	System.out.println("Next Button enabled : "+NextBtnFlag);
 
-	if(ErrorMessagesCount>0 && !NextBtnFlag){
+	if(ErrorMessagesCount>0 && validate(RequiredField_ErrorMessage)){
 		System.out.println("Count Error Messages Displayed");
 		System.out.println("Next Button is disabled");
 		System.out.println("Validation Passed");

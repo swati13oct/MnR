@@ -65,7 +65,7 @@ Feature: To test OLE common tool flow flow UMS site
     #    Then the user validates Leave OLE modal for SEP Page
     #    Then the user validates Learn more modal for SEP Page
     #    Then the user validates cancellation modal for SEP Page
-    Then the user validates SEP options and Required Fields for PlanType in SEP Page
+#    Then the user validates SEP options and Required Fields for PlanType in SEP Page
     Then the user selects the following options for SEP Page
       | Select Options | <selectoptions> |
       | Option Data    | <optiondata>    |
