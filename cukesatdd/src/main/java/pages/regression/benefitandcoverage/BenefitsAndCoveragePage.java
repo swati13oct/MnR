@@ -533,6 +533,18 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "//table[@class='table-white atdd-bnc-standrdretailpharmcytable']/tbody/tr[2]/td[3]")
 	private WebElement federalValueIC ;
 	
+
+	@FindBy(xpath = "//div[@class='tabs-desktop']/ul[@class='nav nav-tabs']/li")
+	private List<WebElement>  tabsForComboMember ;
+
+	@FindBy(xpath = "//*[@class='table-body']/div[2]/div[2]")
+	private WebElement  memberIdForPlan ;
+	
+	@FindBy(className = "atdd-claims-header")
+	private WebElement  shipClaimsSupportHeader ;
+	
+	@FindBy(className = "drugCopaysAndDiscounts")
+	private WebElement  drugCopaysAndDiscount ;
 	
 	private static String PAGE_URL = MRConstants.STAGE_DASHBOARD_NEW_DOMAIN_URL;
 
@@ -2244,6 +2256,47 @@ public boolean vasnotdisplayed() {
 		} else {
 			throw new IllegalArgumentException("Invalid String");
 		}
+	}
+		
+		
+		public void ValidatesBenefitsForCombo() {
+			int numberOfTabsForCombo;
+			// TODO Auto-generated method stub
+			numberOfTabsForCombo=tabsForComboMember.size();
+			if(numberOfTabsForCombo>1)
+			{
+				String memberid1;
+				validateNew(memberIdForPlan);
+				memberid1=memberIdForPlan.getText();
+				if(memberid1.contains("-11"))
+				{
+					JavascriptExecutor jse = (JavascriptExecutor) driver;
+					jse.executeScript("window.scrollBy(0,900)", "");
+				System.out.println("User is on ship page");
+				validateNew(shipClaimsSupportHeader);
+				}
+				else{
+				validateNew(drugCopaysAndDiscount);
+				}
+				
+				tabsForComboMember.get(1).click();
+				validateNew(memberIdForPlan);
+				 memberid1=memberIdForPlan.getText();
+				if(memberid1.contains("-11"))
+				{
+				System.out.println("User is on ship page");
+				
+				JavascriptExecutor jse = (JavascriptExecutor) driver;
+				jse.executeScript("window.scrollBy(0,900)", "");
+				validateNew(shipClaimsSupportHeader);
+				}
+				else{
+				validateNew(drugCopaysAndDiscount);
+				}
+				
+				
+			}
+		
 		
 	
 		

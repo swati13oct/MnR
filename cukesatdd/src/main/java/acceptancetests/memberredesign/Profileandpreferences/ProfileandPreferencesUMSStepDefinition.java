@@ -1008,6 +1008,52 @@ public class ProfileandPreferencesUMSStepDefinition {
 		profilePreferencesPage.validateGroupsPhoneNumbersSection();
 
 	}
+	
+	/** 
+	 * @toDo : The user checks the email section 
+	 */
+	@Then("^the user validate the Email section in UMS site")
+	public void user_Validate_email() {
+
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+
+		profilePreferencesPage.validateEmailForPCPMedica();
+		profilePreferencesPage.validateEmailEditElements();
+
+	}
+	
+	
+	
+	@Then("^the user validates that  Communication Preferences section doesn't come for PCP medica member$")
+	public void userValidatescommunicationpreferncesSectionForPCP() {
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+		profilePreferencesPage.validateCommunicationPreferencesForPcpMedica();
+	}
+	
+	
+	@Then("^the user validates that  Communication Preferences section comes up for Ship Member$")
+	public void userValidatescommunicationpreferncesSectionForShip() {
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+		profilePreferencesPage.validateCommunicationPreferencesForShip();
+	}
+	
+
+	@Then("^the user validates the Go Green page for a ship member$")
+	public void userValidatesGoGreenSectionForShip() {
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+		profilePreferencesPage.validateGoGreenSectionForShip();
+	}
+
+	@Then("^the user validates that  Communication Preferences section doesn't come for terminated members$")
+	public void userValidatescommunicationpreferncesSectionForTerminated() {
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+		profilePreferencesPage.validateCommunicationPreferencesForTerminated();
+	}
 
 
 }

@@ -1348,6 +1348,16 @@ public class BenefitsAndCoverageUmsStepDefinition {
 						
 	}
 	
+	@And("the user validates the benefits for a combo member")
+	public void userValidatesBenefitsForCombo() {
+				
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.ValidatesBenefitsForCombo();
+						
+	}
+
+	
 
 	
 	

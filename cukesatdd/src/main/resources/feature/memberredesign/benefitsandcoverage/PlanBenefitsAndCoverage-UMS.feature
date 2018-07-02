@@ -797,3 +797,15 @@ And the user verifies that the correct pdfs are there in the plan material secti
       | planType |memberType |
       | MAPD     |Individual  |
       
+       @BenefitsForCombo   @regression @regression_06_06_18
+    Scenario Outline: Verify the Benefits for a combo member
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type | <planType> |
+      | Member Type | <memberType>    |
+    Then the user navigates to Benefits coverage page
+    And the user validates the benefits for a combo member
+
+    Examples: 
+      | planType |memberType |
+      | Combo     |   MAPDANDSHIP      |
+      

@@ -365,9 +365,6 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(className = "atdd-claims-header")
 	private WebElement ClaimsSupportSection;
 
-	@FindBy(id = "mailingAddress")
-	private WebElement mailingAddressAddButton;
-
 	@FindBy(className = "atdd-gopaperless")
 	private List<WebElement> gopaperlessbutton1;
 
@@ -439,44 +436,43 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	@FindBy(id = "contact")
 	private WebElement contactInfoBox;
-	
-	@FindBy(xpath=".//*[@id='preferences-form0']/div/div[1]/div[2]/div[2]/div/fieldset/div[1]/div/label")
+
+	@FindBy(xpath = ".//*[@id='preferences-form0']/div/div[1]/div[2]/div[2]/div/fieldset/div[1]/div/label")
 	private WebElement onlineDeliveryRadionButton;
-	
-	@FindBy(id="save-prefs-btn-FEDERAL-INDIVIDUAL")
+
+	@FindBy(id = "save-prefs-btn-FEDERAL-INDIVIDUAL")
 	private WebElement savePrefernceSettingButton;
-	
-	@FindBy(id="//div[@class='']/span")
+
+	@FindBy(id = "//div[@class='']/span")
 	private WebElement errorMessage;
-	
-	@FindBy(className="edit-btn edit-btn-email")
+
+	@FindBy(className = "edit-btn edit-btn-email")
 	private WebElement emailAddressEditButton;
-	
-	@FindBy(id="emailNew")
+
+	@FindBy(id = "emailNew")
 	private WebElement newEmailAddressTextField;
-	
-	@FindBy(id="emailNewConfirm")
+
+	@FindBy(id = "emailNewConfirm")
 	private WebElement confirmEmailAddressTextField;
-	
-	@FindBy(xpath=".//*[@id='email-form']/div[3]/div/span")
+
+	@FindBy(xpath = ".//*[@id='email-form']/div[3]/div/span")
 	private WebElement memberAuthEmailErrorMessages;
-	
-	@FindBy(xpath="(//*[@class='edit-btn'])[1]")
+
+	@FindBy(xpath = "(//*[@class='edit-btn'])[1]")
 	private WebElement memberAuthphoneEditButton;
-	
-	@FindBy(xpath=".//*[@id='phone-form']/div[3]/div/div/span")
+
+	@FindBy(xpath = ".//*[@id='phone-form']/div[3]/div/div/span")
 	private WebElement membrAutphoneErrorMessage;
-	
-	@FindBy(xpath=".//*[@id='mailingAddress']/div[1]/a[1]")
-	private WebElement maillingAddressEditButton;	
-	
-	@FindBy(xpath=".//*[@id='address-mailing-form']/fieldset/div[7]/div/div/span")
+
+	@FindBy(xpath = ".//*[@id='mailingAddress']/div[1]/a[1]")
+	private WebElement maillingAddressEditButton;
+
+	@FindBy(xpath = ".//*[@id='address-mailing-form']/fieldset/div[7]/div/div/span")
 	private WebElement altMaillingAddressErrorMessage;
-	
-	
-	@FindBy(xpath=".//*[@id='address-temporary-form']/fieldset/div[7]/div/div/span")
+
+	@FindBy(xpath = ".//*[@id='address-temporary-form']/fieldset/div[7]/div/div/span")
 	private WebElement memberAutTempAddressErrorMessage;
-		
+
 	@FindBy(xpath = "//iframe[@id='contact']") // EPMP i frame
 	// @FindBy (id = .//*[@id='contact'])
 	private WebElement EPMPIframe;
@@ -650,6 +646,27 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	@FindBy(className = "tempadd")
 	private WebElement temporaryAddressSectionShip;
+
+	@FindBy(className = "edit-btn-email")
+	private WebElement EmailEditbutton;
+
+	@FindBy(id = "updateEmail")
+	private WebElement SaveEmailButton;
+
+	@FindBy(xpath = "//*[@id='email-form']/div[3]/div/a")
+	private WebElement CanceEmaillButton;
+
+	@FindBy(xpath = "//*[@id='communicationAddressCardHeight' or @id='communicationAddress']")
+	private List<WebElement> communicationPreferncessection;
+
+	@FindBy(xpath = "//*[@id='mailingAddress']/div[1]/a[@class='edit-btn']")
+	private WebElement mailingAddressEditLink;
+
+	@FindBy(xpath = "//*[@id='mailingAddress']/div[2]/div[1]/div/div/a[@class='add-address-btn']")
+	private WebElement mailingAddressAddButton;
+
+	@FindBy(xpath = "//*[@id='communicationAddress']/div[3]/a")
+	private WebElement communicationPreferncesEditLink;
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 
@@ -1059,9 +1076,8 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		if (memType.equals("AARP")) {
 			validateNew(permanentAddressSection);
 			validateNew(tempAddressSection);
-			validatetempaddressEditElements(); // clicks on edit temporary
+			validatetempaddressEditElements(); // clicks on edit temporary //
 												// address and validated fields
-			validateMailAddEditButton(); // validates mailing address button
 			validateMailingAddressFields(); // validates the fields under
 											// mailing address
 
@@ -1232,6 +1248,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 				Assert.assertTrue(true);
 			else
 				Assert.fail("Could not validate the error message for incorrect phone number");
+
 		} else if (memType.equals("UHC")) {
 			phoneEditButtonUhc.click();
 			validate(homePhoneUhc);
@@ -1613,13 +1630,14 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	}
 
 	public void validateMailingAddressFields() {
-		if (mailingAddressAddButton.isDisplayed()) {
+		if (mailingAddressEditLink.isDisplayed())
+			mailingAddressEditLink.click();
+		else if (mailingAddressAddButton.isDisplayed())
 			mailingAddressAddButton.click();
-		}
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 		validateNew(mailingStreetAddress2);
@@ -1628,17 +1646,10 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		validateNew(mailingZip);
 		validateNew(mailingStartDateMM);
 		validateNew(mailingStartDateYr);
-		validateNew(mailingEndDateMM);
-		validateNew(mailingEndDateDD);
 		validateNew(mailingEndDateYYYY);
 		validateNew(mailingSaveButtontempAddress);
 		validateNew(mailingCancelButtontempAddress);
 		validateNew(mailingCancelButtontoptempAddress);
-		mailingSaveButtontempAddress.click();
-		if (validate(mailAddressErrorMessage))
-			Assert.assertTrue(true);
-		else
-			Assert.fail("Not able to validate mailing address error message");
 
 	}
 
@@ -1756,20 +1767,11 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	}
 
 	public void validatePhoneUpdate() {
-		int lengthOfTextInTextField;
 		editButtonInPhoneSection.click();
 
 		validateNew(homePhoneNumberTextField);
-		lengthOfTextInTextField = homePhoneNumberTextField.getText().length();
-		if (lengthOfTextInTextField > 0) {
-			homePhoneNumberTextField.clear();
-			homePhoneNumberTextField.sendKeys("1234567890");
-
-		} else {
-			homePhoneNumberTextField.clear();
-			homePhoneNumberTextField.sendKeys("1234567890");
-
-		}
+		homePhoneNumberTextField.clear();
+		homePhoneNumberTextField.sendKeys("1234567890");
 		validateNew(additionalPhoneNumberTextField);
 		validateNew(workPhoneNumberTextField);
 		validateNew(mobilePhoneNumberTextField);
@@ -1778,7 +1780,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		validateNew(saveButtonInPhoneEdit);
 
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1787,7 +1789,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		saveButtonInPhoneEdit.click();
 
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1955,8 +1957,9 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		// TODO Auto-generated method stub
 
 	}
-//method to refresh the page incase of the Feedback Popup
-	public void pageRefresh(){
+
+	// method to refresh the page incase of the Feedback Popup
+	public void pageRefresh() {
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
@@ -1965,97 +1968,161 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			driver.navigate().refresh();
 		}
 	}
-	public void validateSavePreferenceWithMemberAuth(String errorMessageExpected){
-		//click on edit preference link
+
+	public void validateSavePreferenceWithMemberAuth(String errorMessageExpected) {
+		// click on edit preference link
 		waitforElement(editPreferencesLink);
 		editPreferencesLink.click();
-		//change the preference and save
+		// change the preference and save
 		waitforElement(onlineDeliveryRadionButton);
 		onlineDeliveryRadionButton.click();
-		savePrefernceSettingButton.click();	
-		//validate the error message displayed
-		if(errorMessage.getText().equals(errorMessageExpected)){
-			System.out.println("Error message displayed ==="+errorMessage.getText());
+		savePrefernceSettingButton.click();
+		// validate the error message displayed
+		if (errorMessage.getText().equals(errorMessageExpected)) {
+			System.out.println("Error message displayed ===" + errorMessage.getText());
 			Assert.assertTrue(true);
-		}else{
-			System.out.println("InCorrect Error Message displayed ==="+errorMessage.getText());
+		} else {
+			System.out.println("InCorrect Error Message displayed ===" + errorMessage.getText());
 			Assert.fail();
 		}
 
 	}
-	public void validateTemproraryAddressWithMemberAuth(String errorMessageExpected){
+
+	public void validateTemproraryAddressWithMemberAuth(String errorMessageExpected) {
 		maillingAddressEditButton.click();
 		mailingStreetAddress2.clear();
 		mailingStreetAddress2.sendKeys("afoaf");
 		mailingSaveButtontempAddress.click();
-		if(altMaillingAddressErrorMessage.getText().equals(errorMessageExpected)){
-			System.out.println("Error message displayed ==="+altMaillingAddressErrorMessage.getText());
+		if (altMaillingAddressErrorMessage.getText().equals(errorMessageExpected)) {
+			System.out.println("Error message displayed ===" + altMaillingAddressErrorMessage.getText());
 			Assert.assertTrue(true);
-		}else{
-			System.out.println("InCorrect Error Message displayed ==="+altMaillingAddressErrorMessage.getText());
+		} else {
+			System.out.println("InCorrect Error Message displayed ===" + altMaillingAddressErrorMessage.getText());
 			Assert.fail();
 		}
 	}
-	public void validateAlternativeAddressWithMemberAuth(String errorMessageExpected){
+
+	public void validateAlternativeAddressWithMemberAuth(String errorMessageExpected) {
 		addTempAddressLink.click();
 		StreetAddress2.sendKeys("asdfgh");
 		SaveButtontempAddress.click();
-		if(memberAutTempAddressErrorMessage.getText().equals(errorMessageExpected)){
-			System.out.println("Error message displayed ==="+memberAutTempAddressErrorMessage.getText());
+		if (memberAutTempAddressErrorMessage.getText().equals(errorMessageExpected)) {
+			System.out.println("Error message displayed ===" + memberAutTempAddressErrorMessage.getText());
 			Assert.assertTrue(true);
-		}else{
-			System.out.println("InCorrect Error Message displayed ==="+memberAutTempAddressErrorMessage.getText());
+		} else {
+			System.out.println("InCorrect Error Message displayed ===" + memberAutTempAddressErrorMessage.getText());
 			Assert.fail();
-		}		
+		}
 	}
-	public void validateEditEmailWithMemberAuth(String errorMessageExpected){
+
+	public void validateEditEmailWithMemberAuth(String errorMessageExpected) {
 		emailAddressEditButton.click();
 		newEmailAddressTextField.sendKeys("testing@optum.com");
 		confirmEmailAddressTextField.sendKeys("testing@optum.com");
 		saveEmailButton.click();
-		if(memberAuthEmailErrorMessages.getText().equals(errorMessageExpected)){
-			System.out.println("Error message displayed ==="+memberAuthEmailErrorMessages.getText());
+		if (memberAuthEmailErrorMessages.getText().equals(errorMessageExpected)) {
+			System.out.println("Error message displayed ===" + memberAuthEmailErrorMessages.getText());
 			Assert.assertTrue(true);
-		}else{
-			System.out.println("InCorrect Error Message displayed ==="+memberAuthEmailErrorMessages.getText());
+		} else {
+			System.out.println("InCorrect Error Message displayed ===" + memberAuthEmailErrorMessages.getText());
 			Assert.fail();
 		}
 	}
-	public void validateEditPhoneWithMemberAuth(String errorMessageExpected){
+
+	public void validateEditPhoneWithMemberAuth(String errorMessageExpected) {
 		memberAuthphoneEditButton.click();
 		daytimePhoneTextField.clear();
 		daytimePhoneTextField.sendKeys("1111111111");
 		phoneSaveButton.click();
-		if(membrAutphoneErrorMessage.getText().equals(errorMessageExpected)){
-			System.out.println("Error message displayed ==="+membrAutphoneErrorMessage.getText());
+		if (membrAutphoneErrorMessage.getText().equals(errorMessageExpected)) {
+			System.out.println("Error message displayed ===" + membrAutphoneErrorMessage.getText());
 			Assert.assertTrue(true);
-		}else{
-			System.out.println("InCorrect Error Message displayed ==="+membrAutphoneErrorMessage.getText());
+		} else {
+			System.out.println("InCorrect Error Message displayed ===" + membrAutphoneErrorMessage.getText());
 			Assert.fail();
 		}
 
-}
+	}
 
 	public void validateGroupsPhoneNumbersSection() {
 		phoneEditArrowOnTheRight.click();
-		//validateNew(homePhoneNumberTextField);
+		// validateNew(homePhoneNumberTextField);
 		boolean phone = validate(phoneEditIcon);
-		if(phone==false)
-		{
-		System.out.println("Edit Link is not Displayed for Specific groups");
-		Assert.assertTrue(true);	
-		}
-		else
-		{
+		if (phone == false) {
+			System.out.println("Edit Link is not Displayed for Specific groups");
+			Assert.assertTrue(true);
+		} else {
 			fail();
 			System.out.println("edit ");
 		}
-		
-		
-		
+
 	}
-	
+
+	public void validateEmailForPCPMedica() {
+
+		validateNew(EmailLabel);
+		validateNew(EmailAddressLabel);
+
+	}
+
+	public void validateEmailEditElements() {
+		// TODO Auto-generated method stub
+
+		validateNew(EmailEditbutton);
+		EmailEditbutton.click();
+
+		try {
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validateNew(newEmail);
+		validateNew(emailConfirm);
+		validateNew(SaveEmailButton);
+		validateNew(CanceEmaillButton);
+
+	}
+
+	public void validateCommunicationPreferencesForShip() {
+
+		if (communicationPreferncessection.size() > 0) {
+			Assert.assertTrue(true);
+
+		} else {
+			Assert.assertFalse("Communication preferences section should  be coming for a ship member", true);
+
+		}
+
+	}
+
+	public void validateCommunicationPreferencesForPcpMedica() {
+
+		if (communicationPreferncessection.size() > 0) {
+			Assert.assertFalse("Communication preferences section should not be coming for pcp medica member", true);
+		} else {
+			Assert.assertTrue(true);
+		}
+
+	}
+
+	public void validateGoGreenSectionForShip() {
+
+		validateNew(communicationPreferncesEditLink);
+		communicationPreferncesEditLink.click();
+		CommunicationPreferencePage goGreenPage = new CommunicationPreferencePage(driver);
+
+		goGreenPage.validateGoGreenSectionForShip();
+
+	}
+
+	public void validateCommunicationPreferencesForTerminated() {
+
+		if (communicationPreferncessection.size() > 0) {
+			Assert.assertFalse("Communication preferences section should not be coming for terminated member", true);
+		} else {
+			Assert.assertTrue(true);
+		}
+
+	}
 }
-
-
-

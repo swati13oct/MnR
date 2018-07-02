@@ -3,6 +3,7 @@ package pages.regression.profileandpreferences;
 
 import java.util.concurrent.TimeUnit;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -34,6 +35,47 @@ public class CommunicationPreferencePage extends UhcDriver {
 	
 	@FindBy(id = "IPerceptionsEmbed")
 	private WebElement iPerceptionPopUp;
+	
+	@FindBy(className = "atdd-go-green-img")
+	private WebElement gogreenleaf;
+
+	@FindBy(className = "atdd-goGreenHeader")
+	private WebElement goggreenheader;
+	
+	@FindBy(id = "requiredplan")
+	private WebElement iHavereadCheckbox;
+	
+	@FindBy(id = "Claims2")
+	private WebElement onlineDeliveryRadioButton;
+	
+	@FindBy(id = "Claims12")
+	private WebElement mailRadioButton;
+	
+	@FindBy(xpath = "//*[@id='Claims2']/following-sibling::label")
+	private WebElement onlineDelivery;
+	
+	@FindBy(xpath = "//*[@id='Claims12']/following-sibling::label")
+	private WebElement mailLabel;
+	
+	@FindBy(className = "atdd-plan-name")
+	private WebElement planNameGoGreen;
+
+	@FindBy(className = "h4 margin-none atdd-section-heading")
+	private WebElement communicationPreferences;
+
+	@FindBy(className = "atdd-banklink-prefernce")
+	private WebElement backLink1;
+
+	@FindBy(className = "atdd-notes")
+	private WebElement NoteSection;
+
+	@FindBy(id = "save-prefs-btn-SHIP")
+	private WebElement savePreferencesButton;
+
+	@FindBy(partialLinkText = "PREFERENCES")
+	private WebElement EditPreferenceButton;
+
+	
 
 	public CommunicationPreferencePage(WebDriver driver) {
 		super(driver);
@@ -108,10 +150,57 @@ public class CommunicationPreferencePage extends UhcDriver {
 			return false;
 	}
 	
-	/**
-	 * Below method will validate plan name: 'uhcMedicareCompleteChoicePPO'
-	 * Added as part of commandos team
-	 * @return
-	 */
+	public void validateGoGreenSectionForShip() {
+
+		validateNew(gogreenleaf);
+		validateNew(goggreenheader);
+		validateNew(onlineDeliveryRadioButton);
+		validateNew(mailRadioButton);
+		boolean flag1=onlineDeliveryRadioButton.isSelected();
+		System.out.println("Value of Online delivery flag is"+flag1);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(flag1=true){
+			validateNew(mailLabel);
+			mailLabel.click();
+		}
+		else{
+			validateNew(onlineDelivery);
+			onlineDelivery.click();
+		}
+		
+		if (iHavereadCheckbox.isDisplayed()) {
+			iHavereadCheckbox.click();
+		}
+		validateNew(savePreferencesButton);
+		savePreferencesButton.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+			if (EditPreferenceButton.isDisplayed()) {
+				EditPreferenceButton.click();
+				boolean flag2=onlineDeliveryRadioButton.isSelected();
+				if(!flag1==flag2)
+				Assert.assertTrue(true);
+				
+			} else {
+				Assert.assertFalse(true);
+		
+			}
+			validateNew(backLink1);
+
+		}
+
+	
+	
+	
 
 }

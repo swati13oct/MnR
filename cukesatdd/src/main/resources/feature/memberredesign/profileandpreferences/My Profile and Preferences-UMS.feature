@@ -343,3 +343,61 @@ Feature: C1.2To test Profile and Preferences page .
     Examples: 
       | planType | memberType  | dataType   |
       | MAPD     | EPMPEnabled | group      |
+
+      
+        @regressionPCPMedica @regression_06_06_18
+  Scenario Outline: To test end to end regression scenario for account profile page aarp member
+    Given login with following details logins in the member portal and validate elements
+      | User Type | <userType> |
+    When the user navigates to Profile and Preferences page
+    And I click the HEALTHSAFE ID PASSWORD link and validate username and password and verify edit password link
+    Then I should see the breadcrumb  in the upper left side of the page
+    And clicking the link should lead me back to the Account Settings page of the member site
+    And the user validate the Email section in UMS site
+    And the user fill new email address and click save then user should see new updated email on page
+    And the user validates the Phone section
+      | Member Type | <memberType> |
+    And the user Clicks on the the Edit phone Link and validates the elements
+      | Member Type | <memberType> |
+    Then the user checks the functionality of save Button in Phoneeditsection
+    Then the user validate the functionality of Cancel Button In phoneeditSection
+    Then the user validates that  Communication Preferences section doesn't come for PCP medica member
+    And the user validates the address section
+     | Member Type | <memberType> |
+
+
+    Examples: 
+      | userType            |memberType |
+      | PCP                 |AARP       |
+      
+       @regressionPreferencesForShip @regression_06_06_18
+  Scenario Outline: To test end to end regression scenario for account profile page SHIP member
+    Given login with following details logins in the member portal and validate elements
+      | User Type | <userType> |
+    When the user navigates to Profile and Preferences page
+    Then the user validates that  Communication Preferences section comes up for Ship Member
+    Then the user validates the Go Green page for a ship member
+    
+      Examples: 
+      | userType            |
+      | SHIP                |
+      
+      
+        @profilePageForTerminated @regression_06_06_18
+  Scenario Outline: To test end to end regression scenario for account profile page SHIP member
+    Given login with following details logins in the member portal and validate elements
+        | Plan Type   | <planType>   |
+       | Member Type | <memberType> |
+        |data type    | <dataType>   |
+    When the user navigates to Profile and Preferences page
+    And I should see the EPMP i frame on profile page
+   And I should be able to see edit email address and to view read only HSID email
+   And I should be able to view and edit phone numbers
+  Then the user validates that  Communication Preferences section doesn't come for terminated members
+    
+     Examples: 
+      | planType | memberType  |   dataType   |
+      | MAPD     | EPMPEnabled |  Terminated  |
+      
+      
+      
