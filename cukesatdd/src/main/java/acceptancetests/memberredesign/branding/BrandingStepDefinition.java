@@ -86,11 +86,13 @@ public void verifyCorrectLogoAndCoLogoDisplayedOnDashboardHomePage(DataTable giv
 public void userClicksOnBenefitAndCoveragePage() throws Throwable {
 	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 	Thread.sleep(3000);
-	BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag();
+	BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateToBandCPage();
 	getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
 	
 }
 	
+
+
 @And("^verify that correct logo is displayed on the secondary page$")
 public void verifyCorrectLogoDisplayedOnSecondaryPage(DataTable givenAttributes) throws Throwable {
 	

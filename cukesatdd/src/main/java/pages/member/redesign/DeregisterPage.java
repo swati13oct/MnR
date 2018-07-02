@@ -54,9 +54,7 @@ public class DeregisterPage extends UhcDriver {
      */
     @Override
     public void openAndValidate() {
-	start(MRConstants.DEREGISTER_STAGE_URL);
-	WebDriverWait wait = new WebDriverWait(driver,40);
-	wait.until(ExpectedConditions.visibilityOf(userNameField));
+	
     }
 
     /**

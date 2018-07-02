@@ -1,7 +1,10 @@
 package pages.redesign;
 
+
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,8 +32,11 @@ public class HsidRegistrationPersonalInformationPage extends UhcDriver {
 	public WebElement memberId;
 
 	////button[contains(.,'Register now')]
-    @FindBy(xpath = "html/body/div[1]/div/div[2]/flex[2]/flex-content[1]/div/form/div/div[2]/p/button")
+    @FindBy(xpath = "//button[@class='button button--primary ng-scope' and contains(.,'Continue')]")
     public WebElement continuebutton;
+    
+    @FindBy(xpath = "//button[@class='button button--primary ng-scope']/span[1]")
+    public WebElement tryagainbutton;
 	
 	@FindBy(xpath = "//label[@for='piFirstName']/span[@class='error']")
 	private WebElement firstNameErrorMsg;
@@ -91,8 +97,24 @@ public class HsidRegistrationPersonalInformationPage extends UhcDriver {
 	
 	public HsidRegistrationPersonalCreateAccount clickContinue(){
 		continuebutton.click();
-
+		
+		try
+		{
+          if(tryagainbutton.isDisplayed())
+          {
+        	  while(tryagainbutton.isDisplayed())
+        	  {
+        	  tryagainbutton.click();
+        	  }
+          }
+		}
+		catch (NoSuchElementException e)
+		{
+			System.out.println("test");
+		}
+          
 		while(!currentUrl().contains("register/createAccount")){
+			
 			System.out.println("create account page is loading");
 			try {
 				Thread.sleep(3000);
@@ -101,8 +123,17 @@ public class HsidRegistrationPersonalInformationPage extends UhcDriver {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("create account page is loaded");
+          
+		System.out.println("create account page is loaded"+currentUrl());
+		try {
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
 		if(currentUrl().contains("register/createAccount")){
+			
 			return new HsidRegistrationPersonalCreateAccount(driver);
 		}else{
 			Assert.assertTrue("Errors in Registration Personal Info page and not navigated to Create Account page",false);

@@ -29,13 +29,13 @@ import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
 import pages.redesign.HsidRegistrationPersonalCreateAccount;
 import pages.regression.accounthomepage.AccountHomePage;
-import pages.member.bluelayer.AssistiveRegistrationPage;
-import pages.member.bluelayer.BenefitsAndCoveragePage;
+import pages.regression.login.AssistiveRegistrationPage;
+import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.member.bluelayer.DashboardPage;
-import pages.member.bluelayer.HSIDLoginPage;
+import pages.regression.login.HSIDLoginPage;
 import pages.member.bluelayer.LoginPage2;
 import pages.member.ulayer.ValueAddedServicepage;
-import pages.member.redesign.DeregisterPage;
+import pages.regression.login.DeregisterPage;
 
 /**
  * Functionality: Benefits and Coverage page
@@ -61,7 +61,7 @@ public class HSIDStepDefinition {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
 		}
-
+        
 		String category = memberAttributesMap.get("Member Type");
 		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
 		List<String> desiredAttributes = new ArrayList<String>();
@@ -92,6 +92,7 @@ public class HSIDStepDefinition {
 			System.out.println("Password is..." + pwd);
 			getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
+			
 		}
          
 		WebDriver wd = getLoginScenario().getWebDriver();

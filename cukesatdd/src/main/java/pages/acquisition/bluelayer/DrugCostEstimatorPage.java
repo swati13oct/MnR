@@ -1818,6 +1818,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public VPPPlanSummaryPage mouseHoverOurPlans(String zipCode){
 		if(ourPlansTab.isDisplayed()){
 		Actions actions = new Actions(driver);
+		PageFactory.initElements(driver, this);
 		actions.moveToElement(ourPlansTab).build().perform();
 		enterZipcode.sendKeys(zipCode, Keys.ENTER);
 		return new VPPPlanSummaryPage(driver);

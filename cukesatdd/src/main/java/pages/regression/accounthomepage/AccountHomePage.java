@@ -17,7 +17,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
-
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
@@ -281,6 +280,9 @@ private WebElement PlanMaterialSection;
        //Added by Sneha - Navigate to Order Plan Materials 
        @FindBy(xpath = "//div[@id='ui-view-page']//a[@track='ORDER_MATERIALS']")
        private WebElement OrderMaterial_Dashboard;
+	
+	@FindBy(id = "hello-person")
+	private WebElement helloPerson;
 
        @FindBy(xpath = "//*[@id='ordermaterials']")
        private WebElement OrderMaterialsTab_BnCPage;
@@ -368,22 +370,80 @@ private WebElement PlanMaterialSection;
               } else {
                      driver.navigate().to(
                                   "https://team-ci1-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
-
-                     System.out.println(driver.getCurrentUrl());
               }
-
-              /*
-              * if (validate(iPerceptionPopUp)) { iPerceptionPopUp.click();
-              * System.out.println("iPerception Pop Up displayed"); }
-              */
-
               CommonUtility.waitForPageLoad(driver, heading, 50);
-              if (driver.getTitle().equalsIgnoreCase("Benefits Overview")) {
-                     return new BenefitsAndCoveragePage(driver);
-              }
+      		if (driver.getTitle().equalsIgnoreCase("Benefits Overview")) {
+      			return new BenefitsAndCoveragePage(driver);
+      		}
 
-              return null;
+      		return null;
        }
+       public void waitForHomePage() {
+
+       	waitforElement(helloPerson);
+
+       }
+	
+	/*
+	 * This function clicks on Benefits and Coverage link from Dashboard after waiting
+	 * for Hello-Person name text to be displayed on page
+	 */
+       
+	public BenefitsAndCoveragePage navigateToBandCPage() {
+
+		waitForHomePage();
+		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
+			System.out.println("user is on Stage login page");
+			// CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);
+			if (driver.getCurrentUrl().contains("/dashboard"))
+				;
+			{
+				System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
+				
+				driver.findElement(By.xpath("//a[contains(text(),'Coverage & Benefits')]")).click();
+				try {
+					Thread.sleep(20000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println(driver.getCurrentUrl());
+				CommonUtility.waitForPageLoad(driver, heading, 30);
+				if (driver.getTitle().contains("Benefits Overview")) {
+					System.out.println(driver.getTitle());
+					return new BenefitsAndCoveragePage(driver);
+				}
+
+			}
+		}
+
+		else if (MRScenario.environmentMedicare.equals("team-h") || MRScenario.environmentMedicare.equals("test-a")
+				|| MRScenario.environmentMedicare.equals("team-e")) {
+
+			driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
+			System.out.println(driver.getCurrentUrl());
+		} else {
+			driver.navigate().to(
+					"https://team-ci1-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
+
+			System.out.println(driver.getCurrentUrl());
+		}
+
+		/*
+		 * if (validate(iPerceptionPopUp)) { iPerceptionPopUp.click();
+		 * System.out.println("iPerception Pop Up displayed"); }
+		 */
+
+		CommonUtility.waitForPageLoad(driver, heading, 50);
+		if (driver.getTitle().equalsIgnoreCase("Benefits Overview")) {
+			return new BenefitsAndCoveragePage(driver);
+		}
+
+		return null;
+	}
+
+
+
 
        public ProfileandPreferencesPage navigateDirectToProfilePage() throws InterruptedException {
 
@@ -1432,6 +1492,10 @@ if (driver.getTitle().equalsIgnoreCase("Documents Overview")) {
        
 public void validateHeader(){
        Assert.assertTrue("Header is not displayed", header.isDisplayed());
+	/**
+     * Wait till page is loaded button is enabled.
+     */
+   
 }
 
 /**
