@@ -13,7 +13,8 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.dashboard.member.drugcostestimator.blayer.DrugCostEstimatorPage;
+//import pages.dashboard.member.drugcostestimator.blayer.DrugCostEstimatorPage;
+import pages.regression.drugcostestimator.DrugCostEstimatorPage;
 //import pages.memberredesign.bluelayer.AccountHomePage;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.memberredesign.bluelayer.LoginPage;
@@ -122,7 +123,12 @@ public class MemberRedesignHeaderStepDefinition {
 
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
 		dce.changeUrlToNewDCEPage();
-		
+		try {
+			dce.feebackpopupClose();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		AccountHomePage accountHomePage = new AccountHomePage(wd);
 		getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
 	}
@@ -174,6 +180,13 @@ public class MemberRedesignHeaderStepDefinition {
 		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 				accountHomePage.validateClaims();
+				try {
+					accountHomePage.feebackpopupClose();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
 
 	}
 
@@ -186,6 +199,13 @@ public class MemberRedesignHeaderStepDefinition {
 		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 		accountHomePage.validateClaimsL2Tabs();
+		try {
+			accountHomePage.feebackpopupClose();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 	/**
@@ -198,6 +218,13 @@ public class MemberRedesignHeaderStepDefinition {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 		accountHomePage.checkModelPopup();
 		accountHomePage.clickClaimsSummary();
+		try {
+			accountHomePage.feebackpopupClose();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 	/**
