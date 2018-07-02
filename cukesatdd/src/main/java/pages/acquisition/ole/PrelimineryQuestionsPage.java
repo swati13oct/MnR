@@ -31,6 +31,12 @@ public class PrelimineryQuestionsPage extends UhcDriver{
 	
 	@FindBy(id = "ole-form-back-button")
 	private WebElement BackBtn;
+	
+	@FindBy(xpath = "//*[@class = 'enrollmentAllowed-error-msg']")
+	private WebElement RequiredField_ErrorMessage;
+
+	@FindBy(xpath = "//*[@class = 'subques-err-msg']")
+	private WebElement MedicaidRequired_ErrorMessage;
 
 	@FindBy(xpath = "//*[@id='ole-form-cancel-button' or @id = 'cancel-enrollment']")
 	private WebElement CancelEnrollmentLink;
@@ -220,19 +226,20 @@ public class PrelimineryQuestionsPage extends UhcDriver{
 				//validation_Flag = (validation_Flag==false)?false:true;
 				medicaiddyes.click();
 				System.out.println("Medicaid question : YES clicked"+medicaiddyes.isSelected());
-				if(!validate(MedicaidError) && !validate(CancelButton) && !NextBtn.isEnabled()){
-					System.out.println("Medicaid Number Required : Next Button is Disabled");
+				NextBtn.click();
+				if(validate(RequiredField_ErrorMessage) && validate(MedicaidRequired_ErrorMessage)){
+					System.out.println("Medicaid Number Required : Error Message is Disabled");
 					Medicaid_Validation = true;
 					medicaidnumTxtBx.sendKeys(medicaidNumber);
 					System.out.println("Medicare Number is enetered : "+medicaidNumber);
-					if(NextBtn.isEnabled())
+					if(!validate(RequiredField_ErrorMessage)&& !validate(MedicaidRequired_ErrorMessage))
 					{
-						System.out.println("Next Button is enabled when Medicaid Number is entered");
+						System.out.println("Error Message is not Displayed when Medicaid Number is entered");
 						Medicaid_Validation = true;
 					}
 				}
 				else{
-					System.out.println("Medicaid Number Required FAILED : Next Button is NOT Disabled");
+					System.out.println("Medicaid Number Required FAILED : Error Message is NOT Disabled");
 					Medicaid_Validation = false;
 				}
 			}
