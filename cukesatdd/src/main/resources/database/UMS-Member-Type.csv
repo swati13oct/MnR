@@ -157,10 +157,12 @@ q2_jun_grp0080/Password@1,MAPD_GROUP_GOGreen,
 q2_jun_grp0013/Password@1,MAPD_GROUP_DCE,
 q2_jun_grp0020/Password@1,PDP_GROUP_DCE,
 q2_jun_aarp0043/Password@1,MA_FED_DCE,
-q2_jun_aarp0158/Password@1,MAPD,IndividualDCEmember,
+q2_jun_aarp0158/Password@1,MAPD,IndividualMember,
 q2_jun_aarp0016/Password@1,MAPD,AARPTerminatedmember,
 q2_jun_grp0005/Password@1,MAPD,UHCGroup,
 q2_jun_ship0001/Password@1,SHIP,Individual,
+q1_feb_uhc_eft008/Password@1,MAPD,GroupLessSubsidy,
+q2_jun_sofl0019/Password@1,MAPD,Medica,
 q2_jun_aarp0101/Password@1,PDP,NonLISSplittier
 q1_apr_uhc177/Password@1,MAPD,IndividualDCEmember
 q2_june_combo0007/Password@1,COMBO,ComboDCEmember

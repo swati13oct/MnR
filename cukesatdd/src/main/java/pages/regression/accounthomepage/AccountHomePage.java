@@ -17,6 +17,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
@@ -233,6 +234,11 @@ private WebElement PlanMaterialSection;
        @FindBy(className = "menuL1")
        private WebElement header;
        
+       @FindBy(id = "IPerceptionsEmbed")
+   	   public WebElement iPerceptionframe;
+       
+       @FindBy(id = "closeButton")
+   	   public WebElement iPerceptionclosebtn;       
 
        @FindBy(id = "coveragebenefits_2")
        private WebElement coverageBenefits;
@@ -1774,7 +1780,26 @@ public void clickLogout() {
 
        }
        
-}
        
+ 	/**
+ 	 * iPerception popup
+ 	 */
+
+public void feebackpopupClose() throws InterruptedException
+{ //waitForloader(driver,overlay, 20);
+	Thread.sleep(20000);
+	if (validate(iPerceptionframe)) {
+
+		switchToNewIframe(iPerceptionframe);
+		iPerceptionclosebtn.click();
+		driver.switchTo().defaultContent();
+		//iPerceptionAutoPopUp.click();
+	} else {
+		System.out.println("iPerception Pop Up not displayed");
+	}
+}
+
+}
+ 			
 
 
