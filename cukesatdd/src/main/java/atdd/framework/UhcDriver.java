@@ -73,7 +73,7 @@ public abstract class UhcDriver {
                         }
 
                 } catch (Exception e) {
-                        driver.quit();
+                        // driver.quit(); Commented to fix parallel test cases issue
                         System.out.println("Element not found/not visible");
                 }
                 return false;
