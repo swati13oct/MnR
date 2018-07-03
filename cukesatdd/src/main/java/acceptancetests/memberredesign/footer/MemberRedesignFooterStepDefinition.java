@@ -170,16 +170,13 @@ public class MemberRedesignFooterStepDefinition {
     	 
     	  Footer footerPage = (Footer) getLoginScenario().getBean(PageConstants.footer_page);
     	  ClaimSummarypage claimsummarypage= footerPage.NavigateToClaimsPage();
-    	  if(claimsummarypage!=null){
+    	  
 		getLoginScenario().saveBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE, claimsummarypage);
       }
-    	  else {
-    		  Assert.fail();
-    	  }
+    	  
       }
     	  
     	  
-      }
       
       
 

@@ -12,7 +12,7 @@ Given login with following details logins in the member portal and validate elem
     Then the user navigates to payment history
     Then the user navigates to the footer section
     And the user validates the footer section in payments page
- #   Then the user navigates to claims page
+    Then the user navigates to claims page
  #   And the user validates the footer section
  #   Then the user navigates to EOB page
   #  And the user validates the footer section
