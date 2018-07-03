@@ -1,4 +1,4 @@
-@codeMonkeys1
+@codeMonkeys1 @thePredators
 Feature: C1.2To test Profile and Preferences page .
 
   @CMNeedhelp
