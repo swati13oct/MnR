@@ -5,6 +5,7 @@ package pages.acquisition.ole;
 
 import java.util.Map;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,7 +20,15 @@ import atdd.framework.UhcDriver;
  */
 public class WelcomePage extends UhcDriver{
 	
+	@FindBy(xpath = "//*[@id='PoweredByiPerceptions']")
+	private WebElement iPerceptionPopUp;
+
+	@FindBy(xpath = "//*[@id='closeButton']")
+	private WebElement iPerceptionClose;
 	
+	@FindBy(xpath = "//*[@id='IPerceptionsEmbed']")
+	private WebElement WelcomePage_iPerceptionPresent;
+
 	//OLE Common Elements
 	@FindBy(xpath = "//*[@class = 'logo']//img")
 	private WebElement SiteLogo;
@@ -90,12 +99,40 @@ public class WelcomePage extends UhcDriver{
 		
 		System.out.println("Validating Welcome Page for OLE");
 		try {
-			Thread.sleep(6000);
+			Thread.sleep(12000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		try {
+			WelcomePage_iPerceptionPresent.click();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		try{
+			Alert alert = driver.switchTo().alert();
+			System.out.println("FeedBack Modal Alert Present");
+
+			if(validate(iPerceptionPopUp)){
+				System.out.println("FeedBack Modal Present");
+
+				iPerceptionClose.click();
+				if (validate(iPerceptionPopUp)){
+					System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
+				}
+				else
+					System.out.println("FeedBack Modal Closed");
+			}
+		}
+		catch (Exception e) {
+			System.out.println("FeedBack Modal NOT Present");
+
+		}
+
 		validate(WelcomePageHeader);
+//		WelcomePage_iPerceptionPresent.click();
 		validate(PlanYear_PlanName);
 	}
 
