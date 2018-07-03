@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.PageData;
 import atdd.framework.UhcDriver;
+import pages.regression.claims.ClaimSummarypage;
 
 public class Footer extends UhcDriver {
 
@@ -57,6 +58,9 @@ public class Footer extends UhcDriver {
 	@FindBy(xpath= "//footer//div[contains(@class,'iparys_inherited')]/div/div/div[2]//div[@class='row footerLinks']//p[3]")
 	private WebElement OtherLanguageLink;
 	
+	@FindBy(id= "claims_1")
+	private  WebElement claimsLink;
+	
 	private PageData footer;
 
 	public Footer(WebDriver driver) {
@@ -72,7 +76,7 @@ public class Footer extends UhcDriver {
   
 	}
 
-	public Boolean validateFooterLinks() throws InterruptedException{
+	public Object validateFooterLinks() throws InterruptedException{
 		
 		Thread.sleep(10000);
 		
@@ -109,13 +113,27 @@ public class Footer extends UhcDriver {
 
 
 
-	public boolean validatePageFooter() {
-		// TODO Auto-generated method stub
- 	
 	
-		System.out.println("MemberSupportFrame is displayed");
-		return false;
+	
+	
+	public ClaimSummarypage NavigateToClaimsPage(){
+		validate(claimsLink);
+		if(claimsLink.isDisplayed()){
+		System.out.println("Claims link is displayed");
+		claimsLink.click();
+		System.out.println("Claims link is clicked");
+		
+		
+		}
+		
+		
+		return null;
 	}
+	  public Footer validatePageFooter(){
+		  	  
+		  	 
+		  	 return new Footer(driver);
+	  }
 }
 
 
