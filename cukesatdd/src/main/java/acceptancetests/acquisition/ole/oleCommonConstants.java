@@ -19,7 +19,7 @@ public class oleCommonConstants {
 	public static final String OLE_PLAN_PREMIUM = "premium";
 	public static final String OLE_TFN = "tfn";
 	public static final String ACQ_SITE_NAME = "acq_site";
-	
+	public static final String ALREADY_ENROLLED_FLAG = "true";
 	//member details
 	public static final String FIRST_NAME = "firstname";
 	public static final String LAST_NAME = "lastname";
