@@ -470,14 +470,13 @@ public class ProfileandPreferencesUMSStepDefinition {
 		CommunicationPreferencePage communicationPrefPage = (CommunicationPreferencePage) getLoginScenario()
 				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
 
-
-		if(communicationPrefPage.changeAndVerifyOnlinePreference())
-		{
+		if (communicationPrefPage.changeAndVerifyOnlinePreference()) {
 			System.out.println("Communication preference online preference changed and verified");
-			getLoginScenario().saveBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE,communicationPrefPage);
-		}else
+			getLoginScenario().saveBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE, communicationPrefPage);
+		} else
 			Assert.fail("Error in changing and saving online preference");
 	}
+
 	@Then("^the user clicks on profile & preferences link to go back to Account settings page")
 	public void navigateBackToAccountSettingsPage() {
 		CommunicationPreferencePage communicationPreferencePage = (CommunicationPreferencePage) getLoginScenario()
@@ -958,6 +957,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 		profilePreferencesPage.validateEmailaddressSection();
 		profilePreferencesPage.validateEmailEditUpdates();
+
 	}
 
 	@And("^I should be able to view and edit phone numbers$")
@@ -975,6 +975,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 		profilePreferencesPage.validateEmailSectionForShip();
+		profilePreferencesPage.validateEmailUpdateSectionForShip();
 
 	}
 
@@ -998,6 +999,103 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 		profilePreferencesPage.validateTempAddressSectionForShip();
+
+	}
+
+	@And("^I should not be able to edit the Phone numbers section for specific group members$")
+	public void i_should_not_be_able_to_edit_phoneNumbers_for_Specific_Group_Members(DataTable groupAttributes) {
+		// Write code here that turns the phrase above into concrete actions
+		List<DataTableRow> memberAttributesRow = groupAttributes.getGherkinRows();
+		// Map<String, String> memberAttributesMap = new LinkedHashMap<String,
+		// String>();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String groupPlanName = memberAttributesMap.get("Group Plan Name");
+		System.out.println(groupPlanName);
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+		profilePreferencesPage.validateGroupsPhoneNumbersSection(groupPlanName);
+
+	}
+
+	/**
+	 * @toDo : The user checks the email section
+	 */
+	@Then("^the user validate the Email section in UMS site")
+	public void user_Validate_email() {
+
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+
+		profilePreferencesPage.validateEmailForPCPMedica();
+		profilePreferencesPage.validateEmailEditElements();
+
+	}
+
+	@Then("^the user validates that  Communication Preferences section doesn't come for PCP medica member$")
+	public void userValidatescommunicationpreferncesSectionForPCP() {
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+		profilePreferencesPage.validateCommunicationPreferencesForPcpMedica();
+	}
+
+	@Then("^the user validates that  Communication Preferences section comes up for Ship Member$")
+	public void userValidatescommunicationpreferncesSectionForShip() {
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+		profilePreferencesPage.validateCommunicationPreferencesForShip();
+	}
+
+	@Then("^the user validates the Go Green page for a ship member$")
+	public void userValidatesGoGreenSectionForShip() {
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+		profilePreferencesPage.validateGoGreenSectionForShip();
+	}
+
+	@Then("^the user validates that  Communication Preferences section doesn't come for terminated members$")
+	public void userValidatescommunicationpreferncesSectionForTerminated() {
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+		profilePreferencesPage.validateCommunicationPreferencesForTerminated();
+	}
+
+	@Then("^I should see the combo tabs on Account Profile page and user validates the elements on individual tabs$")
+	public void userValidatesComboTabsOnProfilePage() {
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+		profilePreferencesPage.validateComboTabForAccountProfile();
+	}
+
+	@And("^I should see the combo tabs on Preferences page and user validates the elements on individual tabs$")
+	public void iShouldSeeTheComboTabsOnPreferencesPageAndUserValidatesTheElementsOnIndividualTabs() {
+
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+
+		CommunicationPreferencePage communicationPrefPage = profilePreferencesPage
+				.navigateToCommunicationPreferencePage();
+		if (communicationPrefPage != null) {
+			if (!communicationPrefPage.validateifEPMPIframeIsPresent()) {
+				communicationPrefPage.validateGoGreenSectionForShip();
+			} else {
+				communicationPrefPage.switchToFrameOnPreferences();
+				communicationPrefPage.changeAndVerifyOnlinePreference();
+			}
+			communicationPrefPage.switchTabForComboMember();
+			if (!communicationPrefPage.validateifEPMPIframeIsPresent()) {
+				communicationPrefPage.validateGoGreenSectionForShip();
+			} else {
+				communicationPrefPage.switchToFrameOnPreferences();
+				communicationPrefPage.changeAndVerifyOnlinePreference();
+			}
+
+		}
 
 	}
 
