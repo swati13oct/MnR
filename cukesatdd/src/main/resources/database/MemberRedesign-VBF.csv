@@ -4,6 +4,8 @@ q1_grp_feb009/Test2day,GroupRetireeMapd
 q2_jun_ship0001/Password@1,Ship
 q2_jun_sofl0007/Password@1,PCP
 q2_jun_sofl0013/Password@1,Medica
+q2_june_combo0007/Password@1,ComboMAPDANDSHIP
+q2_jun_aarp0016/Password@1,TerminatedFedAARP
 q2_jun_aarp0021/Password@1,MAPD,NICECLAIMS,ULayerInd
 q2_jun_aarp0042/Password@1,MAPD,COSMOSCLAIMS,ULayerInd
 q2_jun_aarp0021/Password@1,MAPD,RxCLAIMS,ULayerInd
@@ -28,3 +30,4 @@ q2_jun_aarp0042/Password@1,BncnonlisAARPIndividual
 q1_apr_uhc002/Password@1,BncnonlisUHCIndividual
 q1_grp_apr031/Password@1,BncnonlisGroupRetiree
 q1_grp_apr275/Password@1,MAPD,GrpRetireeOrderPlan
+q2_jun_aarp0022/Password@1,AARPMapdIndEPMP
