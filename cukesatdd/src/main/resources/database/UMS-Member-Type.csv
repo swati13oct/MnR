@@ -3,7 +3,7 @@ q1_apr_sfl017942/Password@1,MAPD,Medica,NON LIS,
 q1_feb_sfl023_hsid/Password@1,MAPD,PCP,NON LIS,
 q2_jun_grp0086,MAPD,GEORGIAGroup,
 q2_jun_grp0076/Password@1,MAPD,TEXASERSGroup,
-q2_jun_grp0001/Password@1,MAPD,CALPERSGroup,
+q2_jun_grp0004/Password@1,MAPD,CALPERSGroup,
 q1_aarp_feb291,PDP,RXCLAIMS,,,q1_ship_feb031,SHIP,MedSupRider,
 q2_jun_grp0007/Password@1,MAPD,GROUP,
 q2_jun_aarp0070/Password@1,MA,AARPIndividual,
@@ -86,9 +86,7 @@ q1_ship_apr006/Password@1,SHIP,IndPharmacyFnR,
 q1_aarp_ma001/Password@1,MA,IndAARPPharmacyFnR,
 q1_uhc_ma001/Password@1,MA,IndUHCPharmacyFnR,
 q1_grp_feb026,MAPD,GEORGIAGroup,
-q1_grp_feb094,MAPD,CALPERSGroup,
 q1_grp_feb032,MAPD,SDCERAGroup,
-q1_aarp_feb291,PDP,RXCLAIMS,
 q1_ship_feb031,SHIP,MedSupRider,
 q1_combo_feb008,MAPD,MAPDwithMedSupp,
 ATDD_ULAYER_PDP_RX_EOB_01/Password@1,PDP,rx_eob,
@@ -185,4 +183,8 @@ q1_apr_uhc032/Password@1,MAPD,IndUHCPharmacyFnR
 q2_jun_ship0001/Password@1,SHIP,IndPharmacyFnR
 q1_aarp_ma001/Password@1,MA,IndAARPPharmacyFnR
 q1_uhc_ma001/Password@1,MA,IndUHCPharmacyFnR
-
+q2_jun_grp0408/Password@1,MA,Terminated_Group_MA_NICE
+q2_jun_grp0440/Password@1,MAPD,Terminated_Group_MAPD_COSMOS
+q2_jun_grp0282/Password@1,SSP,Terminated_Group_SSP
+q2_jun_aarp0070/Password@1,MA,Terminated_Individual_MA_COSMOS
+q2_jun_aarp0025/Password@1,MAPD,Terminated_Individual_MAPD_NICE
