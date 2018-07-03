@@ -669,6 +669,12 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='communicationAddress']/div[3]/a")
 	private WebElement communicationPreferncesEditLink;
 
+	@FindBy(xpath = "//*[@class='nav nav-tabs']/li")
+	private List<WebElement> tabsForComboMember;
+
+	@FindBy(xpath = "//*[@class='h4 color-blue medium margin-small atdd-profile-planname ng-binding ng-scope']/following-sibling::p[2]")
+	private WebElement memberIdForPlan;
+
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 
 		/* get PnP expected data */
@@ -1773,7 +1779,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		validateNew(homePhoneNumberTextField);
 		homePhoneNumberTextField.clear();
 		homePhoneNumberTextField.sendKeys("1234567890");
-		validateNew(additionalPhoneNumberTextField);
+		// validateNew(additionalPhoneNumberTextField);
 		validateNew(workPhoneNumberTextField);
 		validateNew(mobilePhoneNumberTextField);
 
@@ -1859,12 +1865,16 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	public void validateEmailSectionForShip() {
 
 		checkModelPopup(driver);
-		Random rand = new Random();
-		int randomNumber = rand.nextInt(50);
 
-		String emailAddress = "alisha_kapoor" + randomNumber + "@optum.com";
 		validateNew(emailAddressSection);
 		validateNew(emailAddressRightArrow);
+
+	}
+
+	public void validateEmailUpdateSectionForShip() {
+		Random rand = new Random();
+		int randomNumber = rand.nextInt(50);
+		String emailAddress = "alisha_kapoor" + randomNumber + "@optum.com";
 		emailAddressRightArrow.click();
 		validateNew(emailAddressHeader);
 		validateNew(emailEditIcon);
@@ -1892,7 +1902,6 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			Assert.fail("Not able to validate the email update functionality for a ship member");
 		}
 		backButtonOnEmailField.click();
-
 	}
 
 	public void validatePhoneSectionForShip() {
@@ -2050,7 +2059,8 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		System.err.println(groupPlanName);
 		System.err.println(groupPlanName);
 		// validateNew(homePhoneNumberTextField);
-		List<String> groupPlanNames = Arrays.asList( "Nokia","HealthSelectRx", "ALPEEHIP", "AT&T", "Illinois","JohnDeere", "Navistar", "TEACHERS RET SYSTEM KY", "ArcelorMittal");
+		List<String> groupPlanNames = Arrays.asList("Nokia", "HealthSelectRx", "ALPEEHIP", "AT&T", "Illinois",
+				"JohnDeere", "Navistar", "TEACHERS RET SYSTEM KY", "ArcelorMittal");
 
 		for (String ss : groupPlanNames) {
 
@@ -2139,4 +2149,62 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		}
 
 	}
+
+	public void validateComboTabForAccountProfile() {
+		int numberOfTabsForCombo;
+		// TODO Auto-generated method stub
+		numberOfTabsForCombo = tabsForComboMember.size();
+		System.out.println("size for combo1" + tabsForComboMember.size());
+		if (numberOfTabsForCombo > 1) {
+			String memberid1;
+			validateNew(memberIdForPlan);
+			memberid1 = memberIdForPlan.getText();
+			if (memberid1.contains("-11")) {
+				JavascriptExecutor jse = (JavascriptExecutor) driver;
+				jse.executeScript("window.scrollBy(0,500)", "");
+				System.out.println("User is on ship page");
+
+				validateEmailSectionForShip();
+				validatePhoneSectionForShip();
+				validatePermanentAddressSectionForShip();
+				validateTempAddressSectionForShip();
+
+			} else {
+				validateEpmpIframe();
+				validateEmailaddressSection();
+				validateEmailEditUpdates();
+				validatePhoneSection();
+				validatePhoneUpdate();
+
+			}
+			driver.switchTo().defaultContent();
+			System.out.println("size for combo2" + tabsForComboMember.size());
+
+			tabsForComboMember.get(1).click();
+			validateNew(memberIdForPlan);
+			memberid1 = memberIdForPlan.getText();
+			if (memberid1.contains("-11")) {
+				System.out.println("User is on ship page");
+				JavascriptExecutor jse = (JavascriptExecutor) driver;
+				jse.executeScript("window.scrollBy(0,500)", "");
+				validateEmailSectionForShip();
+				validatePhoneSectionForShip();
+				validatePermanentAddressSectionForShip();
+				validateTempAddressSectionForShip();
+
+			} else {
+				validateEpmpIframe();
+				validateEmailaddressSection();
+				validateEmailEditUpdates();
+				validatePhoneSection();
+				validatePhoneUpdate();
+
+			}
+
+			// TODO Auto-generated method stub
+
+		}
+
+	}
+
 }

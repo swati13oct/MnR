@@ -247,7 +247,7 @@ Feature: C1.2To test Profile and Preferences page .
       | planType |
       | MAPD     |
 
-  @accountProfAndPref @regressionAccountProf&Pref @regression_06_06_18
+  @accountProfAndPref @regressionAccountProf&Pref 
   Scenario Outline: To test end to end regression scenario for account profile page aarp member
     Given login with following details logins in the member portal and validate elements
       | User Type | <userType> |
@@ -398,4 +398,15 @@ Feature: C1.2To test Profile and Preferences page .
       | planType | memberType  | dataType   |
       | MAPD     | EPMPEnabled | Terminated |
 
- 
+  @preferencesForComboOnProfile @regression_06_06_18
+  Scenario Outline: To test end to end regression scenario for account profile page SHIP member
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When the user navigates to Profile and Preferences page
+    And I should see the combo tabs on Account Profile page and user validates the elements on individual tabs
+    And I should see the combo tabs on Preferences page and user validates the elements on individual tabs
+
+    Examples: 
+      | planType | memberType  |
+      | Combo    | EPMPEnabled |
