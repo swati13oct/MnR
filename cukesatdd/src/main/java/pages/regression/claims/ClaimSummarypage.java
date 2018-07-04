@@ -192,13 +192,11 @@ public class ClaimSummarypage extends UhcDriver{
 	
 
 	@FindBy (xpath= "//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li")
-	private List<WebElement> comboTabsOnclaimsPage;
-	
-<<<<<<< HEAD
+	private List<WebElement> comboTabsOnclaimsPage;	
+
 	@FindBy(id= "claims_1")
 	private static WebElement claimsLink;
 
-=======
 	@FindBy(id="fed-document-date")
 	private WebElement claimFromDropDown1;
 	
@@ -207,7 +205,6 @@ public class ClaimSummarypage extends UhcDriver{
 	
 	@FindBy(xpath="//*[@id='skipToBodyContent']//div[@class='reviewclaimstextFed parsys']//p")
 	private WebElement clamsSummaryCopyText;
->>>>>>> remotes/origin/develop
 	
 
 
@@ -815,7 +812,7 @@ public boolean ValidatePHIPErrorMessage(){
      }
      }
      
-<<<<<<< HEAD
+
 
 
 public void NavigateToClaimsPage(){
@@ -834,7 +831,7 @@ public void NavigateToClaimsPage(){
 	  	 
 	  	 return new Footer(driver);
   }
-=======
+
      public void validateClaimsHeaderCopyText() {
  		// TODO Auto-generated method stub
  		if (clamsSummaryCopyText.getText().contains("Review your claims search"))
@@ -890,7 +887,7 @@ public void NavigateToClaimsPage(){
 			return null;
 		}
 
->>>>>>> remotes/origin/develop
+
 }
 
 
