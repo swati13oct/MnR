@@ -1,9 +1,7 @@
-@thePredators
-@pharmacylocator
-@PharmacylocatorRedesign
-@regression_06_06_18
+@thePredators @pharmacylocator @PharmacylocatorRedesign @regression_06_06_18
 Feature: P1.6To test Locate a Pharmacy tool in Redesign site
- @PharmacyDistanceDefaultZip
+
+  @PharmacyDistanceDefaultZip
   Scenario Outline: To verify for default zipcode, filters, Show on map, View PDF, More Info in Redesign site
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -23,8 +21,8 @@ Feature: P1.6To test Locate a Pharmacy tool in Redesign site
       | MAPD     | IndAARPPharmacyFnR |       25 | Open 24 hours               |
       | PDP      | IndAARPPharmacyFnR |       25 | E-Prescribing               |
       | MAPD     | GroupPharmacyFnR   |       25 | Long-term care              |
-      #| MAPD     | MedicaPharmacyFnR  |       25 | Home Infusion and Specialty |
-      #| MAPD     | PCPPharmacyFnR     |       25 | Retail Pharmacy (90-day)    |
+      | MAPD     | MedicaPharmacyFnR  |       25 | Home Infusion and Specialty |
+      | MAPD     | PCPFnR             |       25 | Retail Pharmacy (90-day)    |
       | PDP      | TexasRxPharmacyFnR |       25 | Long-term care              |
       | MAPD     | IndUHCPharmacyFnR  |       25 | E-Prescribing               |
 
@@ -48,8 +46,8 @@ Feature: P1.6To test Locate a Pharmacy tool in Redesign site
       | MAPD     | IndAARPPharmacyFnR |   10980 |       10 |
       | PDP      | IndAARPPharmacyFnR |   10980 |       10 |
       | MAPD     | GroupPharmacyFnR   |   61443 |       10 |
-      #| MAPD     | MedicaPharmacyFnR  |   33321 |       10 |
-      #| MAPD     | PCPPharmacyFnR     |   33174 |       10 |
+      | MAPD     | MedicaPharmacyFnR  |   33321 |       10 |
+      | MAPD     | PCPFnR             |   33174 |       10 |
       | PDP      | TexasRxPharmacyFnR |   14867 |       25 |
       | MAPD     | IndUHCPharmacyFnR  |   29148 |       10 |
 
@@ -72,10 +70,10 @@ Feature: P1.6To test Locate a Pharmacy tool in Redesign site
       | PDP      | IndAARPPharmacyFnR |    9999 |       10 |
       | MAPD     | GroupPharmacyFnR   |         |        5 |
       | MAPD     | GroupPharmacyFnR   |    9999 |       10 |
-      #| MAPD     | MedicaPharmacyFnR  |         |        5 |
-      #| MAPD     | MedicaPharmacyFnR  |    9999 |       10 |
-      #| MAPD     | PCPPharmacyFnR     |         |        5 |
-      #| MAPD     | PCPPharmacyFnR     |    9999 |       10 |
+      | MAPD     | MedicaPharmacyFnR  |         |        5 |
+      | MAPD     | MedicaPharmacyFnR  |    9999 |       10 |
+      | MAPD     | PCPFnR             |         |        5 |
+      | MAPD     | PCPFnR             |    9999 |       10 |
       | PDP      | TexasRxPharmacyFnR |         |        5 |
       | PDP      | TexasRxPharmacyFnR |    9999 |       10 |
       | MAPD     | IndUHCPharmacyFnR  |         |        5 |
@@ -91,5 +89,6 @@ Feature: P1.6To test Locate a Pharmacy tool in Redesign site
     Examples: 
       | planType | memberType         |
       | MA       | IndAARPPharmacyFnR |
-      #| SHIP     | IndPharmacyFnR     |
+      | SHIP     | IndPharmacyFnR     |
       | MA       | IndUHCPharmacyFnR  |
+
