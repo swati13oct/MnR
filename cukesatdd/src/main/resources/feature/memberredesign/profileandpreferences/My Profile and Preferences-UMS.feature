@@ -317,7 +317,7 @@ Feature: C1.2To test Profile and Preferences page .
       | MAPD     | EPMPEnabled | Individual |
 
   @profilePageForShip @regression_06_06_18
-  Scenario Outline: To test end to end regression scenario for EPMP profile page
+  Scenario Outline: To test end to end regression scenario for EPMP profile page for ship
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
     When the user navigates to Profile and Preferences page
@@ -331,7 +331,7 @@ Feature: C1.2To test Profile and Preferences page .
       | SHIP     |
 
   @EPMPProfilePageContactusGroup @regression_06_06_18
-  Scenario Outline: To test end to end regression scenario for EPMP profile page
+  Scenario Outline: To test end to end regression scenario for EPMP profile page for group members
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -347,7 +347,7 @@ Feature: C1.2To test Profile and Preferences page .
       | MAPD     | EPMPEnabled | group    | HealthSelectRx |
 
   @regressionPCPMedica @regression_06_06_18
-  Scenario Outline: To test end to end regression scenario for account profile page aarp member
+  Scenario Outline: To test end to end regression scenario for account profile page for PCP medica members
     Given login with following details logins in the member portal and validate elements
       | User Type | <userType> |
     When the user navigates to Profile and Preferences page
@@ -371,7 +371,7 @@ Feature: C1.2To test Profile and Preferences page .
       | PCP      | AARP       |
 
   @regressionPreferencesForShip @regression_06_06_18
-  Scenario Outline: To test end to end regression scenario for account profile page SHIP member
+  Scenario Outline: To test end to end regression scenario for preferences of a SHIP member
     Given login with following details logins in the member portal and validate elements
       | User Type | <userType> |
     When the user navigates to Profile and Preferences page
@@ -383,7 +383,7 @@ Feature: C1.2To test Profile and Preferences page .
       | SHIP     |
 
   @profilePageForTerminated @regression_06_06_18
-  Scenario Outline: To test end to end regression scenario for account profile page SHIP member
+  Scenario Outline: To test end to end regression scenario for account profile  page for a terminated member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -399,7 +399,7 @@ Feature: C1.2To test Profile and Preferences page .
       | MAPD     | EPMPEnabled | Terminated |
 
   @preferencesForComboOnProfile @regression_06_06_18
-  Scenario Outline: To test end to end regression scenario for account profile page SHIP member
+  Scenario Outline: To test end to end regression scenario for account profile and preferences for a combo member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
