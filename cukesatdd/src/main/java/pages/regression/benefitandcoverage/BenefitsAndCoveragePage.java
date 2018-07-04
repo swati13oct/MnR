@@ -155,7 +155,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	private WebElement drugcopaytable;
 	
 	@FindBy(xpath = ".//*[@id='mapdPageNonLisForSRetail']/div/div[1]/div/div/div/div/table/tbody/tr[2]/td[3]/div")
-	private WebElement tabledynamicdata;
+	private WebElement tabledynamicdatamapd;
+	
+	@FindBy(xpath = ".//*[@id='preferredRetailBenefit']/div/div[1]/div/div/div/table/tbody/tr[3]/td[1]/div")
+	private WebElement tabledynamicdatapdp;
 
 
 	@FindBy(id = "mapdPageLis")
@@ -1824,6 +1827,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
           if(StringUtils.isNotEmpty(pdf1[0]))
           {
           System.out.println(pdf1[0]);
+          System.out.println(a[i]);
            if(pdf1[0].contains(a[i])){
                  checkflag = true;
                 }
@@ -2021,16 +2025,15 @@ public boolean Validate_Catastrophic_Stage_Language(String updatedLanguage, Stri
 		
 	}
 
-public void tabledynamicdata()
-{
-	System.out.println(tabledynamicdata.getText());
-	if(StringUtils.isEmpty(tabledynamicdata.getText()))
+ public void tabledynamicdata()
+ {
+	List<WebElement> rows =  driver.findElements(By.xpath(".//*[@id='preferredRetailBenefit']/div/div[1]/div/div/div/table/tbody/tr/th"));
+	List<WebElement> cols =  driver.findElements(By.xpath(".//*[@id='preferredRetailBenefit']/div/div[1]/div/div/div/table/tbody/tr/td[1]"));
+	for(int i = 0 ; i<cols.size();i++)
 	{
-		
-		Assert.fail();
+		System.out.println(rows.get(i).getText());
 	}
 }
-
 
 public void validateImagePresent(String logoToBeDisplayedOnSecondaryPage) {
 	
