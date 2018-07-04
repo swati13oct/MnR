@@ -72,6 +72,7 @@ public class LearnAboutMedicareuhcPage extends GlobalWebElements{
 	public ExploreChangingPlansuhcPage exploreChangingPlansClick() {
 		validate(exploreChangingPlansMedicareEducationLink);
 		Actions actions = new Actions(driver);
+		PageFactory.initElements(driver, this);
 	    actions.moveToElement(navigationSectionMedicareEducationLink);
 	    actions.moveToElement(exploreChangingPlansMedicareEducationLink);
 	    actions.click().build().perform();

@@ -72,7 +72,11 @@ Feature: P1.6To test Locate a Pharmacy tool in Redesign site
       | MAPD     | GroupPharmacyFnR   |    9999 |       10 |
       | MAPD     | MedicaPharmacyFnR  |         |        5 |
       | MAPD     | MedicaPharmacyFnR  |    9999 |       10 |
+<<<<<<< HEAD
       | MAPD     | PCPFnR             |         |        5 |
+=======
+      | MAPD     | PCPPharmacyFnR     |         |        5 |
+>>>>>>> remotes/origin/develop
       | MAPD     | PCPFnR             |    9999 |       10 |
       | PDP      | TexasRxPharmacyFnR |         |        5 |
       | PDP      | TexasRxPharmacyFnR |    9999 |       10 |

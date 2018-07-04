@@ -15,6 +15,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author pperugu
@@ -210,6 +211,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		sendkeys(zipCodeField, zipcode);
 		
 		viewPlansButton.click();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		try {
 			if (countyModal.isDisplayed()) {
 				driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='"+countyName+"']")).click();
@@ -431,6 +433,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validate(OurPlansLink1);
 		// Hover over text
 		Actions action = new Actions(driver);
+		PageFactory.initElements(driver, this);
 		action.moveToElement(OurPlansLink1).build().perform();
 
 		// to click
@@ -462,6 +465,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public void ourPlansHover() {
 		Actions actions = new Actions(driver);
+		PageFactory.initElements(driver, this);
 		actions.moveToElement(ourPlansHoverLink);
 		actions.moveToElement(ourPlansDropdownText);
 		actions.click();
@@ -572,6 +576,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validate(hoverhealthandwellnesslink);
 		// Hover over text
 		Actions action = new Actions(driver);
+		PageFactory.initElements(driver, this);
 		action.moveToElement(hoverhealthandwellnesslink).build().perform();
 
 		// TODO Auto-generated method stub
@@ -659,6 +664,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public void navigateToRequestMoreHelpAndInformation(String planType){
 		Actions action = new Actions(driver);
+		PageFactory.initElements(driver, this);
 		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
 		/*if(planType.contains("MA"))
 				ma_moreHelpInfoLink.click();
@@ -701,6 +707,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public PDPRequestHelpAndInformationPage navigateToPDPMoreHelpAndInfo() {
 
 		Actions actions = new Actions(driver);
+		PageFactory.initElements(driver, this);
 		actions.moveToElement(ourPlansHoverLink);
 		actions.moveToElement(pdp_moreHelpInfoLink);
 		actions.click().build().perform();
@@ -714,6 +721,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public RequestHelpAndInformationPage navigateToMaMoreHelpAndInfo() {
 
 		Actions actions = new Actions(driver);
+		PageFactory.initElements(driver, this);
 		actions.moveToElement(ourPlansHoverLink);
 		actions.moveToElement(moreHelpInfoLink);
 		actions.click().build().perform();
