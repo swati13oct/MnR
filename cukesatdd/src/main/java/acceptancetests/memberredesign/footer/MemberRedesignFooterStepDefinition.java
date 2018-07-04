@@ -26,6 +26,7 @@ import pages.Global.Member.Footer;
 import pages.dashboard.member.drugcostestimator.blayer.DrugCostEstimatorPage;
 import pages.memberredesign.bluelayer.LoginPage;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.claims.ClaimSummarypage;
 import pages.regression.payments.PaymentHistoryPage;
 
 /**
@@ -33,6 +34,7 @@ import pages.regression.payments.PaymentHistoryPage;
  */
 public class MemberRedesignFooterStepDefinition {
 
+	private static final ClaimSummarypage PaymentHistoryPage = null;
 	@Autowired
 	MRScenario loginScenario;
 
@@ -156,13 +158,28 @@ public class MemberRedesignFooterStepDefinition {
       }
       
       }
-      @And("^the user validates the footer section$")
+      @And("^the user validates the footer section in payments page$")
       public void validate() throws InterruptedException{
     	  Footer footerPage = (Footer) getLoginScenario().getBean(PageConstants.footer_page);
     	  footerPage.validateFooterLinks();
+    	  getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
       }
       
-}
+      @Then("^the user navigates to claims page$")
+      public void user_navigates_to_claims_page(){
+    	 
+    	  Footer footerPage = (Footer) getLoginScenario().getBean(PageConstants.footer_page);
+    	  ClaimSummarypage claimsummarypage= footerPage.NavigateToClaimsPage();
+    	  
+		getLoginScenario().saveBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE, claimsummarypage);
+      }
+    	  
+      }
+    	  
+    	  
+      
+      
+
 
 
 		

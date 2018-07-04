@@ -392,7 +392,7 @@ Feature: To test the payment flow on AARP site
       | qavgogine | qavgogine | q2_jun_aarp0057 |
  
  
- @TestmemberAuthOTP @regression_06_06_18
+ @TestmemberAuthOTP @15163 @regression_06_06_18
  Scenario Outline: To validate the oneTime Payment flow for Member Auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
