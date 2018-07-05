@@ -2087,19 +2087,20 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validateNew(specialistValue);
 
 		String input = pcpValue.getText();
-		/*
-		 * Pattern pattern = Pattern.compile("^\\$\\d{1,4}\\.\\d{2}$"); if
-		 * (pattern.matcher(input).matches()) {
-		 * Assert.assertTrue("PCP values exists", true); } else { throw new
-		 * IllegalArgumentException("Invalid String"); }
-		 */
+		
+		 Pattern pattern = Pattern.compile("^\\$\\d{1,4}\\.\\d{2}$"); if
+		 (pattern.matcher(input).matches()) {
+		 Assert.assertTrue("PCP values exists", true); } else { throw new
+		  IllegalArgumentException("Invalid String"); }
+		 
 
 		String input1 = specialistValue.getText();
-		/*
-		 * if (pattern.matcher(input1).matches()) {
-		 * Assert.assertTrue("Specialist values exists", true); } else { throw
-		 * new IllegalArgumentException("Invalid String"); }
-		 */
+		
+		 if (pattern.matcher(input1).matches()) {
+		 Assert.assertTrue("Specialist values exists", true); } 
+		 else { throw
+		 new IllegalArgumentException("Invalid String"); }
+		 
 
 	}
 
