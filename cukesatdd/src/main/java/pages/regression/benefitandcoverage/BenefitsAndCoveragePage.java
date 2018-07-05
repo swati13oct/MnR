@@ -2027,11 +2027,18 @@ public boolean Validate_Catastrophic_Stage_Language(String updatedLanguage, Stri
 
  public void tabledynamicdata()
  {
+	int i =0;
+	int j = 0;
 	List<WebElement> rows =  driver.findElements(By.xpath(".//*[@id='preferredRetailBenefit']/div/div[1]/div/div/div/table/tbody/tr/th"));
 	List<WebElement> cols =  driver.findElements(By.xpath(".//*[@id='preferredRetailBenefit']/div/div[1]/div/div/div/table/tbody/tr/td[1]"));
-	for(int i = 0 ; i<cols.size();i++)
+	WebElement tabletext  = driver.findElement(By.xpath(".//*[@id='preferredRetailBenefit']/div/div[1]/div/div/div/table/tbody/tr[i]/td[j]/div"));
+	
+	for( i = 0 ; i<rows.size();i++)
 	{
-		System.out.println(rows.get(i).getText());
+		for ( j = 0 ; j<cols.size();j++)
+		{
+		System.out.println(driver.findElement(By.xpath(".//*[@id='preferredRetailBenefit']/div/div[1]/div/div/div/table/tbody/tr["+i+"]/td["+j+"]/div")).getText());
+		}
 	}
 }
 

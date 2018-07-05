@@ -42,11 +42,11 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     And the user validates contactus section
     
     Examples: 
-       | planType|  memberType  | copayCategory  | language | SummaryofBenefits    | EvidenceofCoverage       | ComprehensiveFormularyDrug List     | name       | memberid     | effectivedate | monthlypremium |   UpdatedLanguage | DisplayFlag|
-       #| MAPD    |  Individual  |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | DDCEE DAADF| 954016383-00 | 01/01/2018    | Not Available  | Tier 2            | true       |
-        | MAPD    |  Individual  |  NON LIS      | SPANISH  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | DDCEE DAADF| 954016383-00 | 01/01/2018    | Not Available  | Tier 2            | true       |
-       #| MAPD    |  Individual  |  NON LIS      | CHINESE  |                      |                          |                                     | DDE BCBF| 006798725-01| 01/01/2018    | Not Available  | Tier 2            | true       |
-       #| Medica  |  Individual  |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List |
+        | planType|  memberType  | copayCategory  | language | SummaryofBenefits    | EvidenceofCoverage       | ComprehensiveFormularyDrug List     | name        | memberid     | effectivedate | monthlypremium |   UpdatedLanguage | DisplayFlag|
+        #| MAPD    |  Individual  |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | DDCEE DAADF | 954016383-00 | 01/01/2018    | Not Available  | Tier 2            | true       |
+        #| MAPD    |  Individual  |  NON LIS      | SPANISH  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | DDCEE DAADF | 954016383-00 | 01/01/2018    | Not Available  | Tier 2            | true       |
+        #| MAPD    |  Individual  |  NON LIS      | CHINESE  |                      |                          |                                     | DDE BCBF    | 006798725-01 | 01/01/2018    | Not Available  | Tier 2            | true       |
+         | Medica  |  Individual  |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | EABAB AEADBD|903610182-1   | 01/01/2018    | Not Available  | Tier 2            | true       |
        #| Medica  |  Individual  |  NON LIS      | SPANISH  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 |
        #| PCP     |  Individual  |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List |
        #| PCP     |  Individual  |  NON LIS      | SPANISH  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 |
@@ -58,7 +58,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | Plan Type      | <planType>  |
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
-    Then the user navigates to Benefits and coverage page
+    Then The user navigates to Benefits and Coverage page
     And the user validates Ind plan overview
       | Name           | <name>  |
       | Member ID      | <memberid>|
@@ -89,10 +89,10 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     And the user validates contactus section
     
     Examples: 
-       | planType|  memberType  | copayCategory | language | SummaryofBenefits    | EvidenceofCoverage       | ComprehensiveFormularyDrug List     | name          | memberid | effectivedate | monthlypremium | UpdatedLanguage   | DisplayFlag|
-       | PDP     |  Individual  |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | FBFFABB AAFBCB|0131768761|03/01/2018     |Not Available   |Tier 2             |true        |
-       | PDP     |  Individual  |  NON LIS      | SPANISH  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | FBFFABB AAFBCB|0131768761|03/01/2018     |Not Available   |Tier 2             |true        |
-       | PDP     |  Individual  |  NON LIS      | CHINESE  |                      |                          |                                     | FBFFABB AAFBCB|0131768761|03/01/2018     |Not Available   |Tier 2             |true        |
+       | planType|  memberType  | copayCategory | language | SummaryofBenefits    | EvidenceofCoverage       | ComprehensiveFormularyDrug List     | name          | memberid  | effectivedate | monthlypremium | UpdatedLanguage   | DisplayFlag|
+       | PDP     |  Individual  |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | EACBD BEF     |0182297421 |01/01/2017     |Not Available   |Tier 2             |true        |
+       | PDP     |  Individual  |  NON LIS      | SPANISH  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | EACBD BEF     |0182297421 |01/01/2017     |Not Available   |Tier 2             |true        |
+       | PDP     |  Individual  |  NON LIS      | CHINESE  |                      |                          |                                     | EACBD BEF     |0182297421 |01/01/2017     |Not Available   |Tier 2             |true        |
       
       
     @CMFedNonLisVillage

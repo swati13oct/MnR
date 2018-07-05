@@ -24,7 +24,7 @@ import atdd.framework.UhcDriver;
 * @author pjaising
 *
 */
-public class HSIDLoginPage extends UhcDriver {
+public abstract class HSIDLoginPage extends UhcDriver {
 
                 // Page URL
                 private static String PAGE_URL = MRConstants.HSIDURL;
@@ -195,7 +195,9 @@ MRScenario loginScenario;
                                 
                                 try {
                                                 Thread.sleep(20000);
-                                } catch (InterruptedException e) {
+                                } 
+                                
+                                catch (InterruptedException e) {
                                                 // TODO Auto-generated catch block
                                                 e.printStackTrace();
                                 }
