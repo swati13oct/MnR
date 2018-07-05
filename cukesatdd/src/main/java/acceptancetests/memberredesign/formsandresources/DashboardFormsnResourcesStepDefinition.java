@@ -84,7 +84,7 @@ import acceptancetests.data.LoginCommonConstants;
                            getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
                      }
                    
-                     WebDriver wd = getLoginScenario().getWebDriverNew();
+                     WebDriver wd = getLoginScenario().getWebDriver();
                      
                      getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
                      HSIDLoginPage loginPage = new HSIDLoginPage(wd);
