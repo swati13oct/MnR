@@ -23,7 +23,7 @@ import atdd.framework.UhcDriver;
  *
  */
 public class OrderMaterialsPage extends UhcDriver  {
-	@FindBy(xpath = "//*[contains(text() ''We value your feedback!)]")
+	@FindBy(xpath = "//*[@id='PoweredByiPerceptions']")
 	private WebElement iPerceptionPopUp;
 
 	@FindBy(xpath = "//*[@id = 'closeButton']")
