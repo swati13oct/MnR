@@ -32,6 +32,10 @@ public class MedicareInformationPage extends UhcDriver{
 	@FindBy(id = "ole-form-back-button")
 	private WebElement BackBtn;
 
+	@FindBy(xpath = "//*[@class = 'enrollmentAllowed-error-msg']")
+	private WebElement AlreadyEnrolled_ErrorMessage;
+
+	
 	@FindBy(xpath = "//*[@id='ole-form-cancel-button' or @id = 'cancel-enrollment']")
 	private WebElement CancelEnrollmentLink;
 	
@@ -398,5 +402,14 @@ public boolean validate_negative_values() {
 	}
 	System.out.println("Validation Failed : Error Messages not displayed / Next button is enabled for invalid entries");
 		return false;
+}
+
+public boolean validate_alreadyEnrolled_ErrorMessage() {
+	// TODO Auto-generated method stub
+	if(validate(AlreadyEnrolled_ErrorMessage)){
+		System.out.println("Already Enrolled Error message displayed :  ===>  "+AlreadyEnrolled_ErrorMessage.getText());
+		return true;
+	}
+	return false;
 }
 }

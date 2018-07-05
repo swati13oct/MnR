@@ -15,6 +15,7 @@ import org.openqa.selenium.support.ui.Select;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import junit.framework.Assert;
+import pages.Global.Member.Footer;
 
 /**
  * Functionality : this page validates the Claim Summary page.
@@ -191,8 +192,11 @@ public class ClaimSummarypage extends UhcDriver{
 	
 
 	@FindBy (xpath= "//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li")
-	private List<WebElement> comboTabsOnclaimsPage;
-	
+	private List<WebElement> comboTabsOnclaimsPage;	
+
+	@FindBy(id= "claims_1")
+	private static WebElement claimsLink;
+
 	@FindBy(id="fed-document-date")
 	private WebElement claimFromDropDown1;
 	
@@ -808,6 +812,26 @@ public boolean ValidatePHIPErrorMessage(){
      }
      }
      
+
+
+
+public void NavigateToClaimsPage(){
+	validate(claimsLink);
+	if(claimsLink.isDisplayed()){
+	System.out.println("Claims link is displayed");
+	claimsLink.click();
+	System.out.println("Claims link is clicked");
+	
+	
+	}
+	
+}
+  public Footer validatePageFooter(){
+	  	  
+	  	 
+	  	 return new Footer(driver);
+  }
+
      public void validateClaimsHeaderCopyText() {
  		// TODO Auto-generated method stub
  		if (clamsSummaryCopyText.getText().contains("Review your claims search"))
@@ -862,6 +886,7 @@ public boolean ValidatePHIPErrorMessage(){
 			}
 			return null;
 		}
+
 
 }
 

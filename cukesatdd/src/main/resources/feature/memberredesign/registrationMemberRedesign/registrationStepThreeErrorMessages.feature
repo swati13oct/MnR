@@ -1,4 +1,4 @@
-@registrationStepThreeErrormessages @gladiators
+@registrationStepThreeErrormessages 
 Feature: G1.10To test the error messages on create account page in redesign portal
 
 @blankUsernameFieldError
