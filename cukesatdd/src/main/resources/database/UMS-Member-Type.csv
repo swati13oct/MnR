@@ -95,7 +95,6 @@ q1_apr_uhc032/Password@1,MAPD,IndUHCPharmacyFnR,
 q1_ship_apr006/Password@1,SHIP,IndPharmacyFnR,
 q1_aarp_ma001/Password@1,MA,IndAARPPharmacyFnR,
 q1_uhc_ma001/Password@1,MA,IndUHCPharmacyFnR,
-q1_grp_feb026,MAPD,GEORGIAGroup,
 q1_grp_feb032,MAPD,SDCERAGroup,
 q1_ship_feb031,SHIP,MedSupRider,
 q1_combo_feb008,MAPD,MAPDwithMedSupp,
@@ -174,9 +173,7 @@ q2_jun_sofl0019/Password@1,MAPD,Medica,
 q2_jun_aarp0101/Password@1,PDP,NonLISSplittier
 q1_apr_uhc177/Password@1,MAPD,IndividualDCEmember
 q2_june_combo0007/Password@1,COMBO,ComboDCEmember
-<<<<<<< HEAD
 q2_jun_aarp0054/Password@1,MAPD,IndividualDCEmembers
-=======
 q2_jun_aarp0014/Password@1,MAPD,IndAARPPharmacyFnR,
 q1_grp_apr026/Password@1,MAPD,GroupPharmacyFnR,
 q1_aarp_apr286/Password@1,PDP,IndAARPFnR,
@@ -201,4 +198,3 @@ q2_jun_grp0440/Password@1,MAPD,Terminated_Group_MAPD_COSMOS
 q2_jun_grp0282/Password@1,SSP,Terminated_Group_SSP
 q2_jun_aarp0070/Password@1,MA,Terminated_Individual_MA_COSMOS
 q2_jun_aarp0025/Password@1,MAPD,Terminated_Individual_MAPD_NICE
->>>>>>> remotes/origin/develop
