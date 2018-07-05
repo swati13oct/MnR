@@ -627,8 +627,10 @@ public class ContactUsPage extends UhcDriver{
 	 * Validate the widgets which should not present for the terminated members
 	 */
 	public void validateWidgetsForTerminatedMembers(){
-		Assert.assertTrue(!getStartedButton.isDisplayed());
-		Assert.assertTrue(!fillOutFormButton.isDisplayed());
+		Assert.assertTrue(!validate(getStartedButton));
+		Assert.assertTrue(!validate(fillOutFormButton));
+		Assert.assertTrue(!validate(requestCall));
+		Assert.assertTrue(!validate(email_EmailForm));
 	}
 	
 	public void feebackpopupClose() throws InterruptedException
