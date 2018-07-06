@@ -1,7 +1,3 @@
-@member_redesign_footer @regression_06_06_18
-Feature: C1.1 To test footer on UMS site
-
-<<<<<<< HEAD
 @member_redesign_footer  @regression_06_06_18
 Feature: Footer validation
 @IncrediblesFooter
@@ -12,7 +8,7 @@ Given login with following details logins in the member portal and validate elem
       | Member Type | <memberType> |
 
 
-=======
+
   @IncrediblesFooter
   Scenario Outline: Verify footer section is in place
     Given login with following details logins in the member portal and validate elements
@@ -21,7 +17,6 @@ Given login with following details logins in the member portal and validate elem
     Then the user navigates to payment history
     Then the user navigates to the footer section
     And the user validates the footer section
->>>>>>> remotes/origin/develop
     Then the user navigates to payment history
     Then the user navigates to the footer section
     And the user validates the footer section in payments page
