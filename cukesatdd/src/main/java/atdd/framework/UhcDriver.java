@@ -6,7 +6,6 @@ package atdd.framework;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.regex.Pattern;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,11 +20,10 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.itextpdf.text.log.SysoCounter;
-
 import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
+import java.util.regex.Pattern;
 
 /**
  * @author pjaising
@@ -50,8 +48,9 @@ public abstract class UhcDriver {
 	}
 
 	public void switchToNewTab() {
-		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-		driver.switchTo().window(tabs.get(1));
+        ArrayList<String> tabs = new ArrayList<String>(
+                        driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(1));
 	}
 
 	public WebDriver switchToNewIframe(String iframeName) {
@@ -75,7 +74,7 @@ public abstract class UhcDriver {
 			}
 
 		} catch (Exception e) {
-			driver.quit();
+				// driver.quit(); Commented to fix parallel test cases issue
 			System.out.println("Element not found/not visible");
 		}
 		return false;
@@ -104,176 +103,215 @@ public abstract class UhcDriver {
 	}
 
 	public boolean validate(WebElement element) {
-		try {
-			if (element.isDisplayed()) {
-				System.out.println("Element found!!!!");
-				return true;
-			} else {
-				System.out.println("Element not found/not visible");
-			}
+    	try {
+		if (element.isDisplayed()) {
+		System.out.println("Element found!!!!");
+		return true;
+		} else {
+		System.out.println("Element not found/not visible");
+		}
 		} catch (Exception e) {
-			System.out.println("Exception: Element not found/not visible");
+		System.out.println("Exception: Element not found/not visible");
 
 		}
 		return false;
 
-		/*
-		 * //CM
-		 * 
-		 * JavascriptExecutor jse = (JavascriptExecutor)driver;
-		 * jse.executeScript("window.scrollBy(0,-50)", ""); try {
-		 * waitforElement(element); if (element.isDisplayed()) { Actions actions
-		 * = new Actions(driver); actions.moveToElement(element);
-		 * actions.perform(); Assert.assertTrue("@@@The element " +
-		 * element.getText() + "is found@@@", element.isDisplayed());
-		 * System.out.println("@@@The element " + element.getText() +
-		 * "is found@@@"); } } catch (Exception e) { Assert.fail("The element "
-		 * + element.getText() + "is not  found"); return false; }
-		 * 
-		 * return true;
-		 */
-	}
+		/*//CM
+		
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,-50)", "");
+	        try {
+	         waitforElement(element);
+	            if (element.isDisplayed()) {
+	                   Actions actions = new Actions(driver);
+	                   actions.moveToElement(element);
+	                   actions.perform();
+	                   Assert.assertTrue("@@@The element " + element.getText() + "is found@@@", element.isDisplayed());
+	                   System.out.println("@@@The element " + element.getText() + "is found@@@");
+	            }
+	     } catch (Exception e) {
+	            Assert.fail("The element " + element.getText() + "is not  found");
+	         return false;
+	     }
+	     
+	        return true;*/
+    }
 
 	public WebElement findElement(ElementData elementData) {
-		WebElement element = null;
-		try {
-			if (elementData.getIdentifier().equalsIgnoreCase("id")) {
-				driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-				element = driver.findElement(By.id(elementData.getElementName()));
-			} else if (elementData.getIdentifier().equalsIgnoreCase("className")) {
-				driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-				element = driver.findElement(By.className(elementData.getElementName()));
-			} else if (elementData.getIdentifier().equalsIgnoreCase("xpath")) {
-				driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-				element = driver.findElement(By.xpath(elementData.getElementName()));
-			} else if (elementData.getIdentifier().equalsIgnoreCase("linkText")) {
-				driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-				element = driver.findElement(By.linkText(elementData.getElementName()));
-			} else if (elementData.getIdentifier().equalsIgnoreCase("name")) {
-				driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-				element = driver.findElement(By.name(elementData.getElementName()));
-			} else if (elementData.getIdentifier().equalsIgnoreCase("tagName")) {
-				driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-				element = driver.findElement(By.tagName(elementData.getElementName()));
-			}
+        WebElement element = null;
+        try {
+                if (elementData.getIdentifier().equalsIgnoreCase("id")) {
+                        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+                        element = driver
+                                        .findElement(By.id(elementData.getElementName()));
+                } else if (elementData.getIdentifier()
+                                .equalsIgnoreCase("className")) {
+                        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+                        element = driver.findElement(By.className(elementData
+                                        .getElementName()));
+                } else if (elementData.getIdentifier().equalsIgnoreCase("xpath")) {
+                        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+                        element = driver.findElement(By.xpath(elementData
+                                        .getElementName()));
+                } else if (elementData.getIdentifier().equalsIgnoreCase("linkText")) {
+                        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+                        element = driver.findElement(By.linkText(elementData
+                                        .getElementName()));
+                } else if (elementData.getIdentifier().equalsIgnoreCase("name")) {
+                        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+                        element = driver.findElement(By.name(elementData
+                                        .getElementName()));
+                } else if (elementData.getIdentifier().equalsIgnoreCase("tagName")) {
+                        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+                        element = driver.findElement(By.tagName(elementData
+                                        .getElementName()));
+                }
 
-			return element;
-		} catch (Exception e) {
-			return null;
-		}
+                return element;
+        } catch (Exception e) {
+                return null;
+        }
 
+}
+
+	public WebElement findChildElement(ElementData elementData,
+            WebElement parentElement) {
+    WebElement element = null;
+    try {
+            if (elementData.getIdentifier().equalsIgnoreCase("id")) {
+
+                    driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+                    element = parentElement.findElement(By.id(elementData
+                                    .getElementName()));
+            } else if (elementData.getIdentifier()
+                            .equalsIgnoreCase("className")) {
+                    driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+                    element = parentElement.findElement(By.className(elementData
+                                    .getElementName()));
+            } else if (elementData.getIdentifier().equalsIgnoreCase("xpath")) {
+                    driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+                    element = parentElement.findElement(By.xpath(elementData
+                                    .getElementName()));
+            } else if (elementData.getIdentifier().equalsIgnoreCase("linkText")) {
+                    driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+                    element = parentElement.findElement(By.linkText(elementData
+                                    .getElementName()));
+
+            } else if (elementData.getIdentifier().equalsIgnoreCase("name")) {
+                    driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+                    element = parentElement.findElement(By.name(elementData
+                                    .getElementName()));
+
+            } else if (elementData.getIdentifier().equalsIgnoreCase("tagName")) {
+                    driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+                    element = parentElement.findElement(By.tagName(elementData
+                                    .getElementName()));
+
+        }
+        return element;
+} catch (Exception e) {
+        return element;
+}
+}
+
+public List<WebElement> findChildElements(ElementData elementData,
+        WebElement parentElement) {
+List<WebElement> element = null;
+try {
+        if (elementData.getIdentifier().equalsIgnoreCase("id")) {
+
+                driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+                element = parentElement.findElements(By.id(elementData
+                                .getElementName()));
+        } else if (elementData.getIdentifier()
+                        .equalsIgnoreCase("className")) {
+                driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+                element = parentElement.findElements(By.className(elementData
+                                .getElementName()));
+        } else if (elementData.getIdentifier().equalsIgnoreCase("xpath")) {
+                driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+                element = parentElement.findElements(By.xpath(elementData
+                                .getElementName()));
+        } else if (elementData.getIdentifier().equalsIgnoreCase("linkText")) {
+                driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+                element = parentElement.findElements(By.linkText(elementData
+                                .getElementName()));
+        } else if (elementData.getIdentifier().equalsIgnoreCase("name")) {
+                driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+                element = parentElement.findElements(By.name(elementData
+                                .getElementName()));
+
+        } else if (elementData.getIdentifier().equalsIgnoreCase("tagName")) {
+                driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+                element = parentElement.findElements(By.tagName(elementData
+                                .getElementName()));
+        }
+        return element;
+} catch (Exception e) {
+        return element;
+}
+}
+
+public List<WebElement> findElements(ElementData elementData) {
+List<WebElement> element = null;
+try {
+        if (elementData.getIdentifier().equalsIgnoreCase("id")) {
+                driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+                element = driver.findElements(By.id(elementData
+                                .getElementName()));
+        } else if (elementData.getIdentifier()
+                        .equalsIgnoreCase("className")) {
+                driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+                element = driver.findElements(By.className(elementData
+                                .getElementName()));
+        } else if (elementData.getIdentifier().equalsIgnoreCase("xpath")) {
+                driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+                element = driver.findElements(By.xpath(elementData
+                                .getElementName()));
+        } else if (elementData.getIdentifier().equalsIgnoreCase("linkText")) {
+                driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+                element = driver.findElements(By.linkText(elementData
+                                .getElementName()));
+        } else if (elementData.getIdentifier().equalsIgnoreCase("name")) {
+                driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+                element = driver.findElements(By.name(elementData
+                                .getElementName()));
+        } else if (elementData.getIdentifier().contains("select:")) {
+                driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+                String[] identifierArr = elementData.getIdentifier().split(":");
+                if (identifierArr[1].equalsIgnoreCase("className")) {
+                        WebElement selectElement = driver.findElement(By
+                                        .className(elementData.getElementName()));
+                        Select select = new Select(selectElement);
+                        element = select.getOptions();
+                } else if (identifierArr[1].equalsIgnoreCase("id")) {
+                        WebElement selectElement = driver.findElement(By
+                                        .id(elementData.getElementName()));
+                        Select select = new Select(selectElement);
+                        element = select.getOptions();
+                }
+        }
+	        return element;
+	} catch (Exception e) {
+	        return element;
 	}
-
-	public WebElement findChildElement(ElementData elementData, WebElement parentElement) {
-		WebElement element = null;
-		try {
-			if (elementData.getIdentifier().equalsIgnoreCase("id")) {
-
-				driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-				element = parentElement.findElement(By.id(elementData.getElementName()));
-			} else if (elementData.getIdentifier().equalsIgnoreCase("className")) {
-				driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-				element = parentElement.findElement(By.className(elementData.getElementName()));
-			} else if (elementData.getIdentifier().equalsIgnoreCase("xpath")) {
-				driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-				element = parentElement.findElement(By.xpath(elementData.getElementName()));
-			} else if (elementData.getIdentifier().equalsIgnoreCase("linkText")) {
-				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-				element = parentElement.findElement(By.linkText(elementData.getElementName()));
-
-			} else if (elementData.getIdentifier().equalsIgnoreCase("name")) {
-				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-				element = parentElement.findElement(By.name(elementData.getElementName()));
-
-			} else if (elementData.getIdentifier().equalsIgnoreCase("tagName")) {
-				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-				element = parentElement.findElement(By.tagName(elementData.getElementName()));
-
-			}
-			return element;
-		} catch (Exception e) {
-			return element;
-		}
 	}
-
-	public List<WebElement> findChildElements(ElementData elementData, WebElement parentElement) {
-		List<WebElement> element = null;
-		try {
-			if (elementData.getIdentifier().equalsIgnoreCase("id")) {
-
-				driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-				element = parentElement.findElements(By.id(elementData.getElementName()));
-			} else if (elementData.getIdentifier().equalsIgnoreCase("className")) {
-				driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-				element = parentElement.findElements(By.className(elementData.getElementName()));
-			} else if (elementData.getIdentifier().equalsIgnoreCase("xpath")) {
-				driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-				element = parentElement.findElements(By.xpath(elementData.getElementName()));
-			} else if (elementData.getIdentifier().equalsIgnoreCase("linkText")) {
-				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-				element = parentElement.findElements(By.linkText(elementData.getElementName()));
-			} else if (elementData.getIdentifier().equalsIgnoreCase("name")) {
-				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-				element = parentElement.findElements(By.name(elementData.getElementName()));
-
-			} else if (elementData.getIdentifier().equalsIgnoreCase("tagName")) {
-				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-				element = parentElement.findElements(By.tagName(elementData.getElementName()));
-			}
-			return element;
-		} catch (Exception e) {
-			return element;
-		}
-	}
-
-	public List<WebElement> findElements(ElementData elementData) {
-		List<WebElement> element = null;
-		try {
-			if (elementData.getIdentifier().equalsIgnoreCase("id")) {
-				driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-				element = driver.findElements(By.id(elementData.getElementName()));
-			} else if (elementData.getIdentifier().equalsIgnoreCase("className")) {
-				driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-				element = driver.findElements(By.className(elementData.getElementName()));
-			} else if (elementData.getIdentifier().equalsIgnoreCase("xpath")) {
-				driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-				element = driver.findElements(By.xpath(elementData.getElementName()));
-			} else if (elementData.getIdentifier().equalsIgnoreCase("linkText")) {
-				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-				element = driver.findElements(By.linkText(elementData.getElementName()));
-			} else if (elementData.getIdentifier().equalsIgnoreCase("name")) {
-				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-				element = driver.findElements(By.name(elementData.getElementName()));
-			} else if (elementData.getIdentifier().contains("select:")) {
-				driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-				String[] identifierArr = elementData.getIdentifier().split(":");
-				if (identifierArr[1].equalsIgnoreCase("className")) {
-					WebElement selectElement = driver.findElement(By.className(elementData.getElementName()));
-					Select select = new Select(selectElement);
-					element = select.getOptions();
-				} else if (identifierArr[1].equalsIgnoreCase("id")) {
-					WebElement selectElement = driver.findElement(By.id(elementData.getElementName()));
-					Select select = new Select(selectElement);
-					element = select.getOptions();
-				}
-			}
-			return element;
-		} catch (Exception e) {
-			return element;
-		}
-	}
-
+	
 	public WebElement findDynamicElement(By locator) {
-		WebElement element = null;
-		FluentWait<WebDriver> wait = new WebDriverWait(driver, Long.parseLong(System.getProperty("base.timeout", "1")))
-				.withTimeout(Long.parseLong(System.getProperty("base.timeout", "1")), TimeUnit.SECONDS);
-		try {
-			element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-		} catch (Exception e) {
-			return element;
-		}
-
-		return element;
+	WebElement element = null;
+	FluentWait<WebDriver> wait = new WebDriverWait(driver,
+	                Long.parseLong(System.getProperty("base.timeout", "1")))
+	                .withTimeout(
+	                                Long.parseLong(System.getProperty("base.timeout", "1")),
+	                                TimeUnit.SECONDS);
+	try {
+	        element = wait.until(ExpectedConditions
+	                        .visibilityOfElementLocated(locator));
+	} catch (Exception e) {
+	        return element;
+	}
+	
+	return element;
 	}
 
 	public String currentUrl() {
@@ -288,61 +326,67 @@ public abstract class UhcDriver {
 		return driver.manage().getCookieNamed(cookieName);
 	}
 
-	public abstract void openAndValidate() throws InterruptedException;
+    public abstract void openAndValidate() throws InterruptedException;
+    
+    /*
+     * Generic method to capture the dtm data both static and dynamic. The variable dtm files are kept under page-objects/dtm-common-data/
+     * Currently only member and aquisition files are there. More foles can be added if required.
+     * Input params are
+     * fileName: Json file name containing the web elements names and id, so that they can be read from current page.
+     * filePath: Path to the folder containing fileName
+     * dtmFilePath: Json file name containing the dynamic dtm tags variable and their path 
+     * dtmDir: Path to the dtmFilePath
+     */
+    public  JSONObject getDTMPageJson(String fileName, String filePath, String dtmFilePath, String dtmDir){
+            PageData pageData = CommonUtility.readPageData(fileName,filePath);
+            JSONObject jsonObject = new JSONObject();
+            for (String key : pageData.getExpectedData().keySet()) {
+                    WebElement element = findElement(pageData.getExpectedData()
+                                    .get(key));
+                    if (element != null) {
+                            if (validate(element)) {
 
-	/*
-	 * Generic method to capture the dtm data both static and dynamic. The
-	 * variable dtm files are kept under page-objects/dtm-common-data/ Currently
-	 * only member and aquisition files are there. More foles can be added if
-	 * required. Input params are fileName: Json file name containing the web
-	 * elements names and id, so that they can be read from current page.
-	 * filePath: Path to the folder containing fileName dtmFilePath: Json file
-	 * name containing the dynamic dtm tags variable and their path dtmDir: Path
-	 * to the dtmFilePath
-	 */
-	public JSONObject getDTMPageJson(String fileName, String filePath, String dtmFilePath, String dtmDir) {
-		PageData pageData = CommonUtility.readPageData(fileName, filePath);
-		JSONObject jsonObject = new JSONObject();
-		for (String key : pageData.getExpectedData().keySet()) {
-			WebElement element = findElement(pageData.getExpectedData().get(key));
-			if (element != null) {
-				if (validate(element)) {
+                                    JSONObject dtmObject = new JSONObject();
+                                    if (element.getAttribute("dtmname") != null
+                                                    && element.getAttribute("dtmid") != null) {
+                                            try {
+                                                    dtmObject.put("dtmid", element.getAttribute("dtmid"));
+                                                    dtmObject.put("dtmname",
+                                                                    element.getAttribute("dtmname"));
+                                            } catch (JSONException e) {
+                                                    // TODO Auto-generated catch block
+                                                    e.printStackTrace();
+                                            }
 
-					JSONObject dtmObject = new JSONObject();
-					if (element.getAttribute("dtmname") != null && element.getAttribute("dtmid") != null) {
-						try {
-							dtmObject.put("dtmid", element.getAttribute("dtmid"));
-							dtmObject.put("dtmname", element.getAttribute("dtmname"));
-						} catch (JSONException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+                                    
+                                    try {
+                                            jsonObject.put(key, dtmObject);
+                                    } catch (JSONException e) {
+                                            // TODO Auto-generated catch block
+                                            e.printStackTrace();
+                                    }
+                                    }
+                                    else{
+                                            System.out.println("DTM id or DTM name was not found for Element:"+key);
+                                    }
+                            
+                            }
+                            else{
+                                    System.out.println("Validation failed for element::"+key);
+                            }
+                    }
+            }
+            
+            try {
+                    jsonObject.put("dtmPageData", CommonUtility.checkForVariable(driver,dtmFilePath,dtmDir));
+            } catch (JSONException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+            }
+            
 
-						try {
-							jsonObject.put(key, dtmObject);
-						} catch (JSONException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					} else {
-						System.out.println("DTM id or DTM name was not found for Element:" + key);
-					}
-
-				} else {
-					System.out.println("Validation failed for element::" + key);
-				}
-			}
-		}
-
-		try {
-			jsonObject.put("dtmPageData", CommonUtility.checkForVariable(driver, dtmFilePath, dtmDir));
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return jsonObject;
-	}
+            return jsonObject;
+    }
 
 	/***
 	 * the method clicks on an element using javaScriptExecutor

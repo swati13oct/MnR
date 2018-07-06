@@ -16,6 +16,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 /**
@@ -232,11 +233,16 @@ public class ContactUsPage extends UhcDriver {
      public void validateSSOInbox(){
             try {
                    validateNew(btnContinue);
+                   if ((!(MRScenario.environment).toLowerCase().contains("team-ci"))) {
                    switchToNewTabNew(btnContinue);
                    CommonUtility.checkPageIsReadyNew(driver);
                    Assert.assertTrue(driver.getTitle().equals("Messenger"));
                    CommonUtility.waitForPageLoadNew(driver, messengerComposeBtn, 60);
                    validateNew(messengerSignIn);
+                   }
+                   else{
+                	   System.out.println("Skipping Go To Inbox functionslity in Team-ci environment");
+                   }
             } catch (Exception e) {
                    e.printStackTrace();
             }

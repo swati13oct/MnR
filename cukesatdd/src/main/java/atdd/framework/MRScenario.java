@@ -91,7 +91,12 @@ public class MRScenario {
 
 	public static final String ACCESS_KEY = "2817affd-616e-4c96-819e-4583348d7b37";
 
-	public static final String URL = "https://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:443/wd/hub";
+	//public static final String USERNAME = System.getenv("SAUCE_USERNAME");
+
+	//public static final String ACCESS_KEY = System.getenv("SAUCE_ACCESS_KEY");
+
+	public static final String URL = "https://" + USERNAME + ":" + ACCESS_KEY
+			+ "@ondemand.saucelabs.com:443/wd/hub";
 
 	public void saveBean(String id, Object object) {
 		scenarioObjectMap.put(id, object);
@@ -228,14 +233,163 @@ public class MRScenario {
 		}
 		Connection connection = null;
 		try {
-			connection = DriverManager.getConnection(props.get(CommonConstants.DB_URL),
-					props.get(CommonConstants.DB_USERNAME), props.get(CommonConstants.DB_PASSWORD));
+			connection = DriverManager.getConnection(
+					props.get(CommonConstants.DB_URL),
+					props.get(CommonConstants.DB_USERNAME),
+					props.get(CommonConstants.DB_PASSWORD));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return connection;
 
+	}
+
+	public static Connection getPDBDBConnection(Map<String, String> props) {
+
+		try 
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+		} 
+		catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		Connection con = null;
+		String env = props.get(CommonConstants.HSID_ENV);
+		String user = props.get(CommonConstants.HSIDDB_USERNAME);
+		String pwd = props.get(CommonConstants.HSIDDB_PASSWORD);
+		String url = props.get(CommonConstants.HSIDDB_URL);
+		try {
+			con = DriverManager.getConnection(url,user,pwd);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+		System.out.println("Connected to: " + env.toUpperCase() + " database");
+
+		return con;
+
+	}
+
+	public static  void getRecordsFrom_mbr_table(String firstName, String lastName) throws SQLException {
+		Connection con = getPDBDBConnection(props);
+		Statement stmt = null;
+
+		stmt = con.createStatement();
+		String sql;
+		sql = "SELECT HLTHSF_ID FROM mbr where MDM_FST_NM = '" + firstName
+				+ "' and MDM_LST_NM = '" + lastName + "'";
+		ResultSet rs1 = stmt.executeQuery(sql);
+		rs1.first();
+		String HLTHSF_ID  = rs1.getString("HLTHSF_ID");
+		System.out.println(HLTHSF_ID);
+		rs1.close();
+		stmt.close();
+		con.close();
+	}
+
+
+
+	public static void deleteRecordsFrom_mbr_table(String firstName, String lastName) throws SQLException {
+		Connection con = getPDBDBConnection(props);
+		Statement stmt = null;
+		ResultSet rs = null;
+		stmt = con.createStatement();   
+		rs = stmt.executeQuery(
+				"SELECT COUNT(*) FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName + "'");
+		int initialrowcount = 0;
+		while (rs.next()) {
+			initialrowcount = rs.getInt(1);
+		}
+		System.out.println("Total selected records to delete from mbr table are: " + initialrowcount);
+		stmt.executeUpdate(
+				"delete from mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName + "'");
+
+		rs = stmt.executeQuery(
+				"SELECT COUNT(*) FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName + "'");
+		int finalrowcount = 0;
+		while (rs.next()) {
+			finalrowcount = rs.getInt(1);
+		}
+		System.out.println("Total selected records to delete from mbr table are: " + finalrowcount);
+		if (finalrowcount == 0) {
+			System.out.println("Records deleted successfully from table: mbr");
+		} else {
+			System.out.println("Still Records exist in the table: mbr");
+		}
+
+	} 
+
+	public static void deleteRecordsFrom_mbr_prtl_table(String firstName, String lastName) throws SQLException {
+
+		// The following steps will return no. of selected records based on
+		// first name and last name
+		Connection con = getPDBDBConnection(props);
+		Statement stmt = null;
+		ResultSet rs = null;
+		stmt = con.createStatement();
+		rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr_prtl where MBR_PRTL_FST_NM = '" + firstName
+				+ "' and MBR_PRTL_LST_NM = '" + lastName + "'");
+		int initialrowcount = 0;
+		while (rs.next()) {
+			initialrowcount = rs.getInt(1);
+		}
+		System.out.println("Total selected records to delete from mbr_prtl table are: " + initialrowcount);
+
+
+		stmt.executeUpdate("delete from mbr_prtl where MBR_PRTL_FST_NM = '" + firstName + "' and MBR_PRTL_LST_NM = '"
+				+ lastName + "'");
+		rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr_prtl where MBR_PRTL_FST_NM = '" + firstName
+				+ "' and MBR_PRTL_LST_NM = '" + lastName + "'");
+		int finalrowcount = 0;
+		while (rs.next()) {
+			finalrowcount = rs.getInt(1);
+		}
+		System.out.println("Total selected records to delete from mbr_prtl table are: " + finalrowcount);
+		if (finalrowcount == 0) {
+			System.out.println("Records deleted successfully from table: mbr_prtl");
+		} else {
+			System.out.println("Still Records exist in the table: mbr_prtl");
+		}
+	}
+
+	public static void deleteRecordsFrom_mbr_extrm_scl_dtl_table(String firstName, String lastName) throws SQLException {
+		// The following steps will return no. of selected records based on
+		// first name and last name
+		Connection con = getPDBDBConnection(props);
+		Statement stmt = null;
+		ResultSet rs = null;
+		stmt = con.createStatement();
+		String sql;
+		sql = "SELECT HLTHSF_ID FROM mbr where MDM_FST_NM = '" + firstName
+				+ "' and MDM_LST_NM = '" + lastName + "'";
+		ResultSet rs1 = stmt.executeQuery(sql);
+		rs1.first();
+		String HLTHSF_ID  = rs1.getString("HLTHSF_ID");
+		System.out.println(HLTHSF_ID);
+		rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr_extrm_scl_dtl where HLTHSF_ID = '" + HLTHSF_ID + "'");
+		int initialrowcount = 0;
+		while (rs.next()) {
+			initialrowcount = rs.getInt(1);
+		}
+		System.out.println("Total selected records to delete from mbr_extrm_scl_dtl table are: " + initialrowcount);
+		stmt.executeUpdate("delete from mbr_extrm_scl_dtl where HLTHSF_ID = '" + HLTHSF_ID + "'");
+		rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr_extrm_scl_dtl where HLTHSF_ID = '" + HLTHSF_ID + "'");
+		int finalrowcount = 0;
+		while (rs.next()) {
+			finalrowcount = rs.getInt(1);
+		}
+		System.out.println("Total selected records to delete from mbr_extrm_scl_dtl table are: " + finalrowcount);
+		if (finalrowcount == 0) {
+			System.out.println("Records deleted successfully from table: mbr_extrm_scl_dtl");
+		} else {
+			System.out.println("Still Records exist in the table: mbr_extrm_scl_dtl");
+		}
 	}
 
 	public void removeMember() {
@@ -253,7 +407,8 @@ public class MRScenario {
 		for (String userName : userNamesAddedList) {
 			try {
 				stmt = con.createStatement();
-				String query = "select * from " + defaultSchema + ".PORTAL_USER where USER_NAME='" + userName + "'";
+				String query = "select * from " + defaultSchema
+						+ ".PORTAL_USER where USER_NAME='" + userName + "'";
 				rs = stmt.executeQuery(query);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -265,18 +420,23 @@ public class MRScenario {
 				if (rs.next()) {
 					stmt = con.createStatement();
 
-					String query = "DELETE FROM " + defaultSchema
+					String query = "DELETE FROM "
+							+ defaultSchema
 							+ ".PORTAL_USER_ACCOUNT where PORTAL_USER_ID in (select PORTAL_USER_ID from "
-							+ defaultSchema + ".PORTAL_USER where USER_NAME='" + userName + "')";
-					String query1 = "DELETE FROM " + defaultSchema + ".PORTAL_USER where USER_NAME='" + userName + "'";
+							+ defaultSchema + ".PORTAL_USER where USER_NAME='"
+							+ userName + "')";
+					String query1 = "DELETE FROM " + defaultSchema
+							+ ".PORTAL_USER where USER_NAME='" + userName + "'";
 					rs = stmt.executeQuery(query);
 					rs = stmt.executeQuery(query1);
 
-					System.out.println("USERNAME " + userName + " :: deleted from PORTAL_USER table");
+					System.out.println("USERNAME " + userName
+							+ " :: deleted from PORTAL_USER table");
 
 				} else {
 
-					System.out.println("USERNAME " + userName + " :: member not found in database");
+					System.out.println("USERNAME " + userName
+							+ " :: member not found in database");
 				}
 
 			} catch (SQLException e) {
@@ -298,16 +458,20 @@ public class MRScenario {
 		Map<String, String> props = new HashMap<String, String>();
 		Properties prop = new Properties();
 		String propertiesFileToPick = System.getProperty("environment");
-		System.out.println("Using properties for environment ...." + propertiesFileToPick);
+		System.out.println("Using properties for environment ...."
+				+ propertiesFileToPick);
 		if (StringUtils.isBlank(propertiesFileToPick)) {
-			System.out.println("Using CI as default since environment was not passed in !!!");
+			System.out
+			.println("Using CI as default since environment was not passed in !!!");
 			propertiesFileToPick = CommonConstants.DEFAULT_ENVIRONMENT_CI;
 		}
 		// Read properties from classpath
-		StringBuffer propertyFilePath = new StringBuffer(CommonConstants.PROPERTY_FILE_FOLDER);
+		StringBuffer propertyFilePath = new StringBuffer(
+				CommonConstants.PROPERTY_FILE_FOLDER);
 		propertyFilePath.append("/").append(propertiesFileToPick).append("/")
-				.append(CommonConstants.PROPERTY_FILE_NAME);
-		InputStream is = ClassLoader.class.getResourceAsStream(propertyFilePath.toString());
+		.append(CommonConstants.PROPERTY_FILE_NAME);
+		InputStream is = ClassLoader.class.getResourceAsStream(propertyFilePath
+				.toString());
 		try {
 			prop.load(is);
 		} catch (IOException e) {
@@ -412,125 +576,134 @@ public class MRScenario {
 		}
 	}
 
+	/*  public WebDriver getWebDriver() {*/
+
 	/*
-	 * public WebDriver getWebDriver() {
-	 * 
-	 * /*
 	 * 
 	 * Below code excecutes if webdriver value is passed in build command ::
 	 * either saucelabs or headless
 	 */
-	/*
-	 * if (null != System.getProperty("webdriverhost") &&
-	 * !(System.getProperty("webdriverhost").equalsIgnoreCase(""))) {
-	 * 
-	 * if (System.getProperty("webdriverhost").equalsIgnoreCase( "saucelabs")) {
-	 * DesiredCapabilities capabilities = DesiredCapabilities .firefox();
-	 * capabilities.setCapability("platform", "Windows 7");
-	 * capabilities.setCapability("version", "45.0");
-	 * capabilities.setCapability("parent-tunnel", "sauce_admin");
-	 * capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
-	 * //capabilities.setCapability("name", "MRATDD-TestSuite");
-	 * capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" +
-	 * System.getenv("RUNNER_NUMBER")); String jobName =
-	 * "VBF Execution - Using " + capabilities.getBrowserName() + " in  " +
-	 * System.getProperty("environment") +" environment";
-	 * capabilities.setCapability("name", jobName); try { webDriver = new
-	 * RemoteWebDriver(new URL(URL), capabilities); } catch
-	 * (MalformedURLException e) { // TODO Auto-generated catch block
-	 * e.printStackTrace(); } } else { /* Below code snippet is for triggering
-	 * HeadLess Browser (PhantomJS)
-	 */
-	/*
-	 * String phantomjs = System.getProperty("phantomjs"); DesiredCapabilities
-	 * caps = new DesiredCapabilities(); if (StringUtils.isBlank(phantomjs)) {
-	 * caps.setCapability(
-	 * PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
-	 * props.get("HeadlessBrowserPath")); } else { caps.setCapability(
-	 * PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
-	 * System.getProperty("phantomjs")); } caps.setJavascriptEnabled(true);
-	 * caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, new
-	 * String[] { "--web-security=false", "--ignore-ssl-errors=true",
-	 * "--ssl-protocol=any" }); String userAgent =
-	 * "Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1"
-	 * ; System.setProperty("phantomjs.page.settings.userAgent", userAgent);
-	 * webDriver = new PhantomJSDriver(caps); }
-	 * 
-	 * } else {/* Below code excecutes if webdriver value is not passed in build
-	 * command :: mostly running locally and triggering runner class directly
-	 */
-	/*
-	 * TODO: pperugu :: Need to update the headless browser code below for local
-	 */
+	/*                          if (null != System.getProperty("webdriverhost")
+                                                            && !(System.getProperty("webdriverhost").equalsIgnoreCase(""))) {
 
-	/*
-	 * String phantomjs = System.getProperty("phantomjs"); String agent =
-	 * "Mozilla/5.0 (Linux; U; Android 2.3.3; en-us; LG-LU3000 Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1"
-	 * ; DesiredCapabilities caps = new DesiredCapabilities(); if
-	 * (StringUtils.isBlank(phantomjs)) { caps.setCapability(
-	 * PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
-	 * props.get("HeadlessBrowserPath")); } else { caps.setCapability(
-	 * PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
-	 * System.getProperty("phantomjs")); } caps.setCapability(
-	 * PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX + "userAgent",
-	 * agent); caps.setJavascriptEnabled(true);
-	 * caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, new
-	 * String[] { "--web-security=false", "--ignore-ssl-errors=true",
-	 * "--ssl-protocol=any" }); String userAgent =
-	 * "Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1"
-	 * ; System.setProperty("phantomjs.page.settings.userAgent", userAgent);
-	 * webDriver = new PhantomJSDriver(caps);
-	 * 
-	 * } return webDriver; }
-	 * 
-	 * public WebDriver getWebDriver() { File pathToBinary = new File(
-	 * "C:\\firefox 29\\firefox.exe"); FirefoxBinary ffBinary = new
-	 * FirefoxBinary(pathToBinary); FirefoxProfile firefoxProfile = new
-	 * FirefoxProfile(); webDriver = new FirefoxDriver(ffBinary,firefoxProfile);
-	 * webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-	 * //webDriver.manage().window().maximize(); return webDriver; }
+                                             if (System.getProperty("webdriverhost").equalsIgnoreCase(
+                                                                           "saucelabs")) {
+                                                            DesiredCapabilities capabilities = DesiredCapabilities
+                                                                                          .firefox();
+                                                            capabilities.setCapability("platform", "Windows 7");
+                                                            capabilities.setCapability("version", "45.0");
+                                                            capabilities.setCapability("parent-tunnel", "sauce_admin");
+                                                            capabilities.setCapability("tunnelIdentifier",
+                                                                                          "OptumSharedTunnel-Prd");
+                                                            //capabilities.setCapability("name", "MRATDD-TestSuite");
+                                                            capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
+                                                            String jobName = "VBF Execution - Using " + capabilities.getBrowserName() + " in  " + System.getProperty("environment") +" environment";
+                capabilities.setCapability("name", jobName);
+                                                            try {
+                                                                           webDriver = new RemoteWebDriver(new URL(URL), capabilities);
+                                                            } catch (MalformedURLException e) {
+                                                                           // TODO Auto-generated catch block
+                                                                           e.printStackTrace();
+                                                            }
+                                             } else {
+                                                            /*
+	 * Below code snippet is for triggering HeadLess Browser
+	 * (PhantomJS)
+	 */
+	/*                                                        String phantomjs = System.getProperty("phantomjs");
+                                                            DesiredCapabilities caps = new DesiredCapabilities();
+                                                            if (StringUtils.isBlank(phantomjs)) {
+                                                                           caps.setCapability(
+                                                                                                         PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
+                                                                                                         props.get("HeadlessBrowserPath"));
+                                                            } else {
+                                                                           caps.setCapability(
+                                                                                                         PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
+                                                                                                         System.getProperty("phantomjs"));
+                                                            }
+                                                            caps.setJavascriptEnabled(true);
+                                                            caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS,
+                                                                                          new String[] { "--web-security=false",
+                                                                                                                        "--ignore-ssl-errors=true",
+                                                                                                                        "--ssl-protocol=any" });
+                                                            String userAgent = "Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1";
+                                                            System.setProperty("phantomjs.page.settings.userAgent",
+                                                                                          userAgent);
+                                                            webDriver = new PhantomJSDriver(caps);
+                                             }
+
+                              } else {/*
+	 * Below code excecutes if webdriver value is not passed in
+	 * build command :: mostly running locally and triggering runner
+	 * class directly
 	 */
 	/*
-	 * public WebDriver getWebDriver() {
-	 * 
-	 * DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-	 * 
-	 * capabilities.setCapability("platform", "Windows 7");
-	 * capabilities.setCapability("version", "45.0");
-	 * capabilities.setCapability("parent-tunnel", "sauce_admin");
-	 * capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
-	 * //capabilities.setCapability("name", "MRATDD-TestSuite");
-	 * capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" +
-	 * System.getenv("RUNNER_NUMBER")); String jobName =
-	 * "VBF Execution - Using " + capabilities.getBrowserName() + " in  " +
-	 * System.getProperty("environment") +" environment";
-	 * capabilities.setCapability("name", jobName); try { webDriver = new
-	 * RemoteWebDriver(new URL(URL), capabilities); } catch
-	 * (MalformedURLException e) { // TODO Auto-generated catch block
-	 * e.printStackTrace(); }
-	 * 
-	 * return webDriver; }
+	 * TODO: pperugu :: Need to update the headless browser code below
+	 * for local
 	 */
+	/*
+                                         String phantomjs = System.getProperty("phantomjs");
+                                             String agent = "Mozilla/5.0 (Linux; U; Android 2.3.3; en-us; LG-LU3000 Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
+                                             DesiredCapabilities caps = new DesiredCapabilities();
+                                             if (StringUtils.isBlank(phantomjs)) {
+                                                            caps.setCapability(
+                                                                                          PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
+                                                                                          props.get("HeadlessBrowserPath"));
+                                             } else {
+                                                            caps.setCapability(
+                                                                                          PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
+                                                                                          System.getProperty("phantomjs"));
+                                             }
+                                             caps.setCapability(
+                                                                           PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX
+                                                                                                         + "userAgent", agent);
+                                             caps.setJavascriptEnabled(true);
+                                             caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS,
+                                                                           new String[] { "--web-security=false",
+                                                                                                         "--ignore-ssl-errors=true", "--ssl-protocol=any" });
+                                             String userAgent = "Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1";
+                                             System.setProperty("phantomjs.page.settings.userAgent", userAgent);
+                                             webDriver = new PhantomJSDriver(caps);
+
+                              }
+                              return webDriver;
+               }*/
 
 	public WebDriver getWebDriver() {
 
-		if (null == webDriver) {
-			File pathToBinary = new File("C:\\Users\\njain112\\Documents\\Chrome\\Application\\Chrome.exe");
-			Map<String, Object> chromeOptions = new HashMap<String, Object>();
-			chromeOptions.put("binary", pathToBinary);
-			DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-			capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-			System.setProperty("webdriver.chrome.driver", "C:\\Users\\njain112\\Documents\\chromedriver.exe");
-			webDriver = new ChromeDriver();
+
+
+		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+
+		capabilities.setCapability("platform", "Windows 7");
+		capabilities.setCapability("version", "66.0");
+		capabilities.setCapability("parent-tunnel", "sauce_admin");
+		capabilities.setCapability("tunnelIdentifier",
+				"OptumSharedTunnel-Stg");
+		//capabilities.setCapability("name", "MRATDD-TestSuite");
+		capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
+		String jobName = "VBF Execution - Using " + capabilities.getBrowserName() + " in  " + System.getProperty("environment") +" environment";
+		capabilities.setCapability("name", jobName);
+		try {
+			webDriver = new RemoteWebDriver(new URL(URL), capabilities);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return webDriver;
+
 	}
 
 	public WebDriver getIEDriver() {
 		System.setProperty("webdriver.ie.driver",
-				"C:/Users/pgupta15/Downloads/IEDriverServer_x64_2.27.0/IEDriverServer.exe");
+				"./IEDriverServer.exe");
 		DesiredCapabilities ieCaps = DesiredCapabilities.internetExplorer();
-		ieCaps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+		ieCaps.setCapability(
+				InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,
+				true);
+		ieCaps.setCapability(
+				InternetExplorerDriver.IGNORE_ZOOM_SETTING,
+				true);
 		webDriver = new InternetExplorerDriver(ieCaps);
 		webDriver.manage().window().maximize();
 		return webDriver;
@@ -539,13 +712,16 @@ public class MRScenario {
 
 	public WebDriver getMobileWebDriver() {
 		Map<String, String> mobileEmulation = new HashMap<String, String>();
-		mobileEmulation.put("deviceName", props.get(CommonConstants.DEVICE_NAME));
+		mobileEmulation.put("deviceName",
+				props.get(CommonConstants.DEVICE_NAME));
 		Map<String, Object> chromeOptions = new HashMap<String, Object>();
 		chromeOptions.put("mobileEmulation", mobileEmulation);
 		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-		capabilities.setCapability("chrome.switches", Arrays.asList("--start-maximized"));
+		capabilities.setCapability("chrome.switches",
+				Arrays.asList("--start-maximized"));
 		capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-		System.setProperty("webdriver.chrome.driver", props.get(CommonConstants.CHROME_DRIVER));
+		System.setProperty("webdriver.chrome.driver",
+				props.get(CommonConstants.CHROME_DRIVER));
 		webDriver = new ChromeDriver(capabilities);
 		return webDriver;
 	}
@@ -574,7 +750,8 @@ public class MRScenario {
 		ResultSet rs = null;
 		try {
 			stmt = con.createStatement();
-			String query = "select * from " + defaultSchema + ".PORTAL_USER where USER_NAME='" + userName + "'";
+			String query = "select * from " + defaultSchema
+					+ ".PORTAL_USER where USER_NAME='" + userName + "'";
 			rs = stmt.executeQuery(query);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -585,18 +762,23 @@ public class MRScenario {
 			/* Checking in DataBase */
 			if (rs.next()) {
 				stmt = con.createStatement();
-				String query = "DELETE FROM " + defaultSchema
-						+ ".PORTAL_USER_ACCOUNT where PORTAL_USER_ID in (select PORTAL_USER_ID from " + defaultSchema
-						+ ".PORTAL_USER where USER_NAME='" + userName + "')";
-				String query1 = "DELETE FROM " + defaultSchema + ".PORTAL_USER where USER_NAME='" + userName + "'";
+				String query = "DELETE FROM "
+						+ defaultSchema
+						+ ".PORTAL_USER_ACCOUNT where PORTAL_USER_ID in (select PORTAL_USER_ID from "
+						+ defaultSchema + ".PORTAL_USER where USER_NAME='"
+						+ userName + "')";
+				String query1 = "DELETE FROM " + defaultSchema
+						+ ".PORTAL_USER where USER_NAME='" + userName + "'";
 				rs = stmt.executeQuery(query);
 				rs = stmt.executeQuery(query1);
 
-				System.out.println("USERNAME " + userName + " :: deleted from PORTAL_USER table");
+				System.out.println("USERNAME " + userName
+						+ " :: deleted from PORTAL_USER table");
 
 			} else {
 
-				System.out.println("USERNAME " + userName + " :: member not found in database");
+				System.out.println("USERNAME " + userName
+						+ " :: member not found in database");
 			}
 
 		} catch (SQLException e) {
@@ -830,175 +1012,5 @@ public class MRScenario {
 		//}
 		return webDriver;
 
-	}
-
-	public static Connection getPDBDBConnection(Map<String, String> props) {
-
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		Connection con = null;
-		String env = props.get(CommonConstants.HSID_ENV);
-		String user = props.get(CommonConstants.HSIDDB_USERNAME);
-		String pwd = props.get(CommonConstants.HSIDDB_PASSWORD);
-		String url = props.get(CommonConstants.HSIDDB_URL);
-		try {
-			con = DriverManager.getConnection(url, user, pwd);
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		System.out.println("Connected to: " + env.toUpperCase() + " database");
-
-		return con;
-
-	}
-
-	public static void getRecordsFrom_mbr_table(String firstName, String lastName) throws SQLException {
-		System.out.println("Getting records from MBR table");
-		Connection con = getPDBDBConnection(props);
-		Statement stmt = null;
-
-		stmt = con.createStatement();
-		String sql;
-		sql = "SELECT HLTHSF_ID FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName + "'";
-		System.out.println("SQL Query:" + sql);
-		ResultSet rs1 = stmt.executeQuery(sql);
-		// rs1.first();
-		if (rs1.first()) {
-			System.out.println("Record exists...");
-			String HLTHSF_ID = rs1.getString("HLTHSF_ID");
-			System.out.println("HSID: " + HLTHSF_ID);
-
-		} else {
-			System.out.println("No record found!!!");
-			// Assert.fail("No record found!!!");
-		}
-		rs1.close();
-		stmt.close();
-		con.close();
-	}
-
-	public static void deleteRecordsFrom_mbr_table(String firstName, String lastName) throws SQLException {
-		Connection con = getPDBDBConnection(props);
-		Statement stmt = null;
-		ResultSet rs = null;
-		stmt = con.createStatement();
-		rs = stmt.executeQuery(
-				"SELECT COUNT(*) FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName + "'");
-		int initialrowcount = 0;
-		if (rs.first()) {
-			while (rs.next()) {
-				initialrowcount = rs.getInt(1);
-			}
-			System.out.println("Total selected records to delete from mbr table are: " + initialrowcount);
-			stmt.executeUpdate(
-					"delete from mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName + "'");
-
-			rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '"
-					+ lastName + "'");
-			int finalrowcount = 0;
-			while (rs.next()) {
-				finalrowcount = rs.getInt(1);
-			}
-			System.out.println("Total selected records to delete from mbr table are: " + finalrowcount);
-			if (finalrowcount == 0) {
-				System.out.println("Records deleted successfully from table: mbr");
-			} else {
-				System.out.println("Still Records exist in the table: mbr");
-			}
-		} else {
-			System.out.println("No Records found in the table: mbr !!!");
-		}
-		rs.close();
-		stmt.close();
-		con.close();
-	}
-
-	public static void deleteRecordsFrom_mbr_prtl_table(String firstName, String lastName) throws SQLException {
-
-		// The following steps will return no. of selected records based on
-		// first name and last name
-		Connection con = getPDBDBConnection(props);
-		Statement stmt = null;
-		ResultSet rs = null;
-		stmt = con.createStatement();
-		rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr_prtl where MBR_PRTL_FST_NM = '" + firstName
-				+ "' and MBR_PRTL_LST_NM = '" + lastName + "'");
-		int initialrowcount = 0;
-		if (rs.first()) {
-			while (rs.next()) {
-				initialrowcount = rs.getInt(1);
-			}
-			System.out.println("Total selected records to delete from mbr_prtl table are: " + initialrowcount);
-
-			stmt.executeUpdate("delete from mbr_prtl where MBR_PRTL_FST_NM = '" + firstName
-					+ "' and MBR_PRTL_LST_NM = '" + lastName + "'");
-			rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr_prtl where MBR_PRTL_FST_NM = '" + firstName
-					+ "' and MBR_PRTL_LST_NM = '" + lastName + "'");
-			int finalrowcount = 0;
-			while (rs.next()) {
-				finalrowcount = rs.getInt(1);
-			}
-			System.out.println("Total selected records to delete from mbr_prtl table are: " + finalrowcount);
-			if (finalrowcount == 0) {
-				System.out.println("Records deleted successfully from table: mbr_prtl");
-			} else {
-				System.out.println("Still Records exist in the table: mbr_prtl");
-			}
-		} else {
-			System.out.println("No Records found in the table: mbr_prtl !!!");
-		}
-		rs.close();
-		stmt.close();
-		con.close();
-	}
-
-	public static void deleteRecordsFrom_mbr_extrm_scl_dtl_table(String firstName, String lastName)
-			throws SQLException {
-		// The following steps will return no. of selected records based on
-		// first name and last name
-		Connection con = getPDBDBConnection(props);
-		Statement stmt = null;
-		ResultSet rs = null;
-		stmt = con.createStatement();
-		String sql;
-		sql = "SELECT HLTHSF_ID FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName + "'";
-
-		System.out.println("SQL Query:" + sql);
-		ResultSet rs1 = stmt.executeQuery(sql);
-		if (rs1.first()) {
-			String HLTHSF_ID = rs1.getString("HLTHSF_ID");
-			System.out.println(HLTHSF_ID);
-			rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr_extrm_scl_dtl where HLTHSF_ID = '" + HLTHSF_ID + "'");
-			int initialrowcount = 0;
-			while (rs.next()) {
-				initialrowcount = rs.getInt(1);
-			}
-			System.out.println("Total selected records to delete from mbr_extrm_scl_dtl table are: " + initialrowcount);
-			stmt.executeUpdate("delete from mbr_extrm_scl_dtl where HLTHSF_ID = '" + HLTHSF_ID + "'");
-			rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr_extrm_scl_dtl where HLTHSF_ID = '" + HLTHSF_ID + "'");
-			int finalrowcount = 0;
-			while (rs.next()) {
-				finalrowcount = rs.getInt(1);
-			}
-			System.out.println("Total selected records to delete from mbr_extrm_scl_dtl table are: " + finalrowcount);
-			if (finalrowcount == 0) {
-				System.out.println("Records deleted successfully from table: mbr_extrm_scl_dtl");
-			} else {
-				System.out.println("Still Records exist in the table: mbr_extrm_scl_dtl");
-			}
-		} else {
-			System.out.println("No Records found in the table: mbr_extrm_scl_dtl");
-		}
-		rs1.close();
-		stmt.close();
-		con.close();
 	}
 }

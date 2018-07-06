@@ -4,11 +4,9 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.testng.Assert;
 
 import acceptancetests.data.CommonConstants;
 import cucumber.api.Scenario;
-
 // To be added
 import cucumber.api.java.After;
 
@@ -63,7 +61,13 @@ public class GlobalTearDown {
 			scenario.embed(screenshot, "image/png");
 			 MRScenario mrScen=new MRScenario();
 			//Clean up the existing webdriver.
-			 mrScen.DriverQuit();
+			 try {
+					Thread.sleep(4000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			 //mrScen.DriverQuit();
 		}
 
 	}
@@ -71,9 +75,10 @@ public class GlobalTearDown {
 	/**
 	 * 
 	 * @param scenario
-	 *//*
-	@After
-	public void tearDown(Scenario scenario) {
+	 */
+	/*@After
+	public void tearDown(Scenario scenario) 
+	//{
 
 		if (null != getLoginScenario() && null != getLoginScenario().getBean(CommonConstants.WEBDRIVER)) {
 			//To get the report embedded in the report
@@ -83,7 +88,7 @@ public class GlobalTearDown {
 			getLoginScenario().nullifyWebDriverNew();
 		} else {
 			Assert.fail("Screenshot not captured and webdriver not quitted...");
-		}
+    }
 
 	}*/
 
