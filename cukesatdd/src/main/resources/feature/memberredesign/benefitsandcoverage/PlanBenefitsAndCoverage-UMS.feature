@@ -1,4 +1,4 @@
-@codeMonkeys @regression_06_06_18
+@codeMonkeys @regression_06_06_18 @thePredators
 Feature: C1.1 To test plan benefits and Coverage on UMS site
 
 
