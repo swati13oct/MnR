@@ -159,14 +159,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private WebElement GetStarted;
 	
 
-	@FindBy(xpath="//h3[text()='People']/preceding::div[1]/img")
+	@FindBy(xpath="//*[text()='People']/preceding::div[1]/img")
 	private WebElement People;
 	
-	@FindBy(xpath="//h3[text()='Primary Care']")
+	@FindBy(xpath="//*[text()='Primary Care']")
 	private WebElement Primary;
 	
 	
-	@FindBy(xpath="//a[contains(text(),'Primary Care Physician')]")
+	@FindBy(xpath="//*[contains(text(),'Primary Care Physician')]")
 	private WebElement Physician;
 
 	@FindBy(xpath="//div[contains(@class,'first')]//div[@class='hidden-phone']/button[not(contains(@class,'hidden'))]/span")
@@ -248,11 +248,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 
 	public VPPPlanSummaryPage viewPlanSummary(String planType) {
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+
 		
 		if (planType.equalsIgnoreCase("PDP")) {
 //	WebElement hidePdpPlans invalid
@@ -275,6 +272,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 	
 	public VPPPlanSummaryPage viewPlanSummaryButton(String planType) {
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		if (planType.equalsIgnoreCase("PDP")) {
 			if(validate(showPdpPlans)){
 			showPdpPlans.click();
@@ -298,7 +296,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	public VPPPlanSummaryPage clicksOnIsProviderCovered(String planName) {
 		if (planName.contains("HMO")) {
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 			
 			if(maPlansList!=null){
 			for (WebElement plan : maPlansList) {
@@ -315,7 +313,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 					//findChildElement(elementData, plan).click();
 					
-					WebElement ProviderSearchLink = driver.findElement(By.xpath("//h2[contains(text(),'"+planName+"')]/following::a[contains(text(),'Is')][1]"));
+					WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/following::a[contains(text(),'Is my provider covered')]"));
 					System.out.println(ProviderSearchLink.getText());
 					ProviderSearchLink.click();
 
@@ -392,9 +390,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	public boolean providerinfo(String planName)
 	{
-		
+		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		WebElement ProviderSearchLink1 = driver.findElement
-				(By.xpath("//h2[contains(text(),'"+planName+"')]/following::span[contains(text(),'covered')][1]"));
+				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide ng-scope')]/descendant::span[contains(text(),'covered')]"));
 		String mproviderinfo=ProviderSearchLink1.getText();
         System.out.println(mproviderinfo);
 		if(mproviderinfo.contains("1 providers covered"))
@@ -752,7 +750,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		driver.manage().window().maximize();
 	
 		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {	
-		WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//h2[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@id = 'viewmoredetlinkmapd' or @id='viewmoredetlinkmapdplan']"));
+		WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//a[contains(text(),'View plan and drug coverage details')]"));
 			validate(MAmoreDetailsLink);
 			MAmoreDetailsLink.click();
 			System.out.println("View Plan Details Link is clicked for MA plan"+planName);

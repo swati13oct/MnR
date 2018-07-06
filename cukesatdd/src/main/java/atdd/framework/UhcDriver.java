@@ -73,12 +73,14 @@ public abstract class UhcDriver {
 				return false;
 			}
 
-		} catch (Exception e) {
-				// driver.quit(); Commented to fix parallel test cases issue
-			System.out.println("Element not found/not visible");
-		}
-		return false;
-	}
+
+                } catch (Exception e) {
+                        // driver.quit(); Commented to fix parallel test cases issue
+                        System.out.println("Element not found/not visible");
+                }
+                return false;
+        }
+
 
 	public void sendkeys(WebElement element, String message) {
 		element.click();

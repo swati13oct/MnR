@@ -70,6 +70,7 @@ public class PrepareforInitialEnrollmentPage extends GlobalWebElements {
 	public DiscoverMoreResourcesPage discoverMoreResourcesClick() {
 		validate(discoverMoreResourcesMedicareEducationLink);
 		Actions actions = new Actions(driver);
+		PageFactory.initElements(driver, this);
         actions.moveToElement(navigationSectionMedicareEducationLink);
         actions.moveToElement(discoverMoreResourcesMedicareEducationLink);
         actions.click().build().perform();

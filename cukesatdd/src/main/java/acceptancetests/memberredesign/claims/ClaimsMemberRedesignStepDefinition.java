@@ -8,6 +8,7 @@ import java.util.Map;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -179,8 +180,9 @@ public class ClaimsMemberRedesignStepDefinition {
 
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
-		String planType = memberAttributesMap.get("Plan Type");
 		String domain  = memberAttributesMap.get("Domain");
+		String planType = memberAttributesMap.get("Plan Type");
+		
 
 		ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		newclaimsSummarypage.validateEobfordifferentDomainType(domain, planType);
@@ -573,7 +575,38 @@ public class ClaimsMemberRedesignStepDefinition {
 		newClaimsSummaryPage.validateCustomSearch();
 	}
 	
+	@Then("^I can validate the claims summary header$")
+	public void i_can_validate_the_claims_summary_header()  {
+		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario()
+				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+		newClaimsSummaryPage.validateClaimsFromDropDowns1();
+		newClaimsSummaryPage.validateClaimsPlantype();
+		
+		newClaimsSummaryPage.validateClaimsHeaderCopyText();
+	    
+	}
 	
+	@When("^I navigate to the Claim Details page in redesigned site$")
+	public void i_navigate_to_member_redesign_claim_details() throws InterruptedException {
+		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario()
+				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+		ClaimDetailsPage newClaimDetailsPage = claimSummarypage.navigateToClaimDetailsPage();
+		if (null != newClaimDetailsPage)
+			getLoginScenario().saveBean(PageConstants.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
+		else {
+			Assert.fail("Claims details page is not loaded!!!");
+		}
+
+	}
+
+
+	@And("^I validate the Claims Table in claims details page in redesigned site$")
+	public void validate_claimsTable_claimsDetails() {
+		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario()
+				.getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+		claimDetailspage.validateClaimsTableInDetailsPage();
+	}
+
 	
 	
 }

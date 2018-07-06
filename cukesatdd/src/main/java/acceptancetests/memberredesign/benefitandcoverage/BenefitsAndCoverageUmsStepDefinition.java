@@ -28,7 +28,7 @@ import gherkin.formatter.model.DataTableRow;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.member.bluelayer.LoginPage2;
-import pages.member.ulayer.ValueAddedServicepage;
+import pages.regression.benefitandcoverage.ValueAddedServicepage;
 import pages.redesign.BenefitsCoveragePage;
 import pages.redesign.RedesignLoginPage;
 import pages.redesign.UlayerHomePage;
@@ -690,11 +690,11 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	/** 
 	 * @toDo : Validates the  Plan overview section for  a Non lis member 
 	 */
-	@And("the user validates plan overview section")
+	@And("the user validates plan overview section for group")
 	public void user_validate_planOverview() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		benefitsCoveragePage.validatePlanOverview();
+		benefitsCoveragePage.validatePlanOverviewgroup();
 	}
 	
 	/** 
@@ -797,10 +797,11 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		System.out.println(memberid);
 		String effectivedate = memberAttributesMap.get("Effective Date");
 	    String monthlypremium = memberAttributesMap.get("Monthly premium");
+	    String extrahelp =memberAttributesMap.get("Extra Help");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		
-		benefitsCoveragePage.validatePlanOverviewIndlis(membername,memberid,effectivedate,monthlypremium);
+		benefitsCoveragePage.validatePlanOverviewIndlis(membername,memberid,effectivedate,monthlypremium,extrahelp);
 	}
 
 	/** 
@@ -958,6 +959,29 @@ public class BenefitsAndCoverageUmsStepDefinition {
 			getLoginScenario().saveBean(PageConstantsMnR.VALUE_ADDED_SERVICES, valueaddedservices);
 		}
 	}
+	
+	@And("^the user validate Value Add Service page comes on clicking additional info button$")
+	public void validate_Value_Add_pagetest()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		ValueAddedServicepage valueaddedservices= benefitsCoveragePage.navigateToValueAddServicetest();
+		if (valueaddedservices!= null) {
+			getLoginScenario().saveBean(PageConstantsMnR.VALUE_ADDED_SERVICES, valueaddedservices);
+		}
+	}
+	
+	@And("^the user validate view more link$")
+	public void validate_link()
+	{
+		ValueAddedServicepage valueaddedservices = (ValueAddedServicepage) getLoginScenario()
+				.getBean(PageConstantsMnR.VALUE_ADDED_SERVICES);
+		valueaddedservices.validateviewmorelink();
+		valueaddedservices.validateviewmorelinkexpand();
+		
+	}
+	
+	
 	
 	@And("^the user validates pdfs and link for ship$")
 	public void validate_pdf_links_ship()
@@ -1338,6 +1362,48 @@ public class BenefitsAndCoverageUmsStepDefinition {
 						
 	}
 	
+	
+	@And("the user validates the copay coinsurance in drug costs table")
+	public void userValidatesCopayCoinsuranceindrugTable() {
+				
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.validateCopayCoinsuranceInDrugTable();
+						
+	}
+	
+	@And("the user validates the benefits for a combo member")
+	public void userValidatesBenefitsForCombo() {
+				
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.ValidatesBenefitsForCombo();
+						
+	}
+
+
+	@And("^the user validates the Add Rider functionality$")
+	public void theUserValidatesTheAddRiderFunctionality()  {
+		
+		
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.validatesAddRider();
+		
+	}
+
+
+	@Then("^the user validates the remove Rider functionality$")
+	public void theUserValidatesTheRemoveRiderFunctionality() {
+		
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.validatesRemoveRider();
+		
+	}
+
+	
+
 	
 	
 
