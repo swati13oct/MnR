@@ -724,7 +724,7 @@ public class MRScenario {
 		// back.
 		// This has to happen to preserve the state of webDriver so that we can
 		// take screenshots at the end.
-		if (null == webDriver) {
+	//	if (null == webDriver) {
 			System.out.println("New WebDriver CREATED");
 
 			// Choose your browser based on name. The name value is what is in
@@ -793,7 +793,7 @@ public class MRScenario {
 					System.out.println("Inside firefox");
 					capabilities = DesiredCapabilities.firefox();
 					capabilities.setCapability("platform", "Windows 7");
-					capabilities.setCapability("version", "52");
+					capabilities.setCapability("version", "57");
 				} else if (browserName.equalsIgnoreCase("IE")) {
 					capabilities = DesiredCapabilities.internetExplorer();
 					capabilities.setCapability("platform", "Windows 7");
@@ -827,7 +827,7 @@ public class MRScenario {
 				}
 
 			}
-		}
+		//}
 		return webDriver;
 
 	}

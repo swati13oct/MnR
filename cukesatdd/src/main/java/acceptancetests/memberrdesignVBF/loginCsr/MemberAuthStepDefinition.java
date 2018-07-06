@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.SendKeysAction;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
@@ -20,6 +21,7 @@ import pages.memberrdesignVBF.MemberAuthLoginPage;
 import pages.memberrdesignVBF.MemberInformationPage;
 import pages.memberrdesignVBF.MemberSearchPage;
 import pages.memberrdesignVBF.RallyDashboardPage;
+import pages.memberrdesignVBF.RegistrationInformationPage;
 import pages.memberrdesignVBF.TestHarness;
 
 public class MemberAuthStepDefinition {
@@ -75,7 +77,8 @@ public class MemberAuthStepDefinition {
 		MemberSearchPage memberSearchPage = (MemberSearchPage) getLoginScenario()
 				.getBean(PageConstants.MEMBER_AUTHS_SEARCH_PAGE);
 
-		MemberInformationPage memberInformationPage = memberSearchPage.memberSearch(member);
+		memberSearchPage.enterMemberUserName(member);
+		MemberInformationPage memberInformationPage = memberSearchPage.memberSearch();
 
 		if (memberInformationPage != null)
 			getLoginScenario().saveBean(PageConstants.MEMBER_AUTH_INFORMATION_PAGE, memberInformationPage);
@@ -169,6 +172,40 @@ public class MemberAuthStepDefinition {
 
 		Assert.assertEquals(message, contactUsPage.getMemberAuthNotAuthorizedToSendUsQuestionMessage());
 
+	}
+
+	/***
+	 * 
+	 * @param givenAttributes
+	 * @throws InterruptedException
+	 */
+	@When("^the member enter the member ID and DOB into Member ID field$")
+	public void enterMemberID_DOB(DataTable givenAttributes) throws InterruptedException {
+		// get test variables
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		// get member ID
+		String memberId = memberAttributesMap.get("Member ID");
+		// get date of birth
+		String dateOfBirth = memberAttributesMap.get("Date of birth");
+		String[] splitDate = dateOfBirth.split("-");
+		String month = splitDate[0];
+		String date = splitDate[1];
+		String year = splitDate[2];
+		MemberSearchPage memberSearchPage = (MemberSearchPage) getLoginScenario()
+				.getBean(PageConstants.MEMBER_AUTHS_SEARCH_PAGE);
+		memberSearchPage.enterMemberID(memberId);
+		memberSearchPage.enterDOB(month, date, year);
+
+		MemberInformationPage memberInformationPage = memberSearchPage.memberSearch();
+
+		if (memberInformationPage != null)
+			getLoginScenario().saveBean(PageConstants.MEMBER_AUTH_INFORMATION_PAGE, memberInformationPage);
 	}
 
 }

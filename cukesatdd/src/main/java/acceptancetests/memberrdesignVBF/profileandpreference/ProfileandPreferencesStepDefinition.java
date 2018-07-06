@@ -1,9 +1,11 @@
 package acceptancetests.memberrdesignVBF.profileandpreference;
 
+import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.memberrdesignVBF.TestHarness;
+import pages.memberrdesignVBF.CommunicationPreferencePage;
 import pages.memberrdesignVBF.ProfilePreferencesPage;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
@@ -146,8 +148,13 @@ public class ProfileandPreferencesStepDefinition {
 		ProfilePreferencesPage ProfilePreferencesPage = (pages.memberrdesignVBF.ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstants.ProfilePreferencesPage);
 
-		ProfilePreferencesPage.clickEditPreferencesButton();
-
+		CommunicationPreferencePage communicationPrefPage = ProfilePreferencesPage.clickEditPreferencesButton();
+		if (communicationPrefPage != null) {
+			if (!communicationPrefPage.validatePage())
+				Assert.fail("Error in validating communication preferences page");
+			else
+				getLoginScenario().saveBean(PageConstants.COMMUNICATION_PREFERENCE_PAGE, communicationPrefPage);
+		}
 	}
 
 	/**
@@ -196,4 +203,65 @@ public class ProfileandPreferencesStepDefinition {
 		}
 	}
 
+	@And("^I should see the EPMP i frame on profile page$")
+	public void i_should_see_the_EPMP_i_frame_on_profile_page() {
+		ProfilePreferencesPage profilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstants.ProfilePreferencesPage);
+		profilePreferencesPage.validateEpmpIframe();
+
+	}
+
+	@And("^I should see the communicationpreferncessection$")
+	public void i_should_see_the_communicationpreferncessection() {
+		// Write code here that turns the phrase above into concrete actions
+		ProfilePreferencesPage profilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstants.ProfilePreferencesPage);
+		profilePreferencesPage.validatecommunicationpreferncessection();
+	}
+
+	@And("^I should be able to see view email address$")
+	public void i_should_be_able_to_view_emailaddress_section() {
+		// Write code here that turns the phrase above into concrete actions
+		ProfilePreferencesPage profilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstants.ProfilePreferencesPage);
+		profilePreferencesPage.validateEmailaddressSection();
+	}
+
+	@And("^I should be able to view phone numbers$")
+	public void iShouldBeAbleToViewAndEditPhoneNumbers() {
+
+		ProfilePreferencesPage profilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstants.ProfilePreferencesPage);
+		profilePreferencesPage.validatePhoneSection();
+
+	}
+
+	@Then("^the user changes the online preference and saves the change")
+	public void userChangesOnlinePref() {
+		CommunicationPreferencePage communicationPrefPage = (CommunicationPreferencePage) getLoginScenario()
+				.getBean(PageConstants.COMMUNICATION_PREFERENCE_PAGE);
+
+		Assert.assertTrue("Communication preference online preference changed and verified",
+				communicationPrefPage.changeAndVerifyOnlinePreference());
+	}
+
+	@And("^the user validates navigates back to Profile page")
+	public void user_navigates_back_to_profile_page() {
+
+		CommunicationPreferencePage communicationPrefPage = (CommunicationPreferencePage) getLoginScenario()
+				.getBean(PageConstants.COMMUNICATION_PREFERENCE_PAGE);
+		boolean isNavigationSuccess = communicationPrefPage.navigateBackToProfilePage();
+		if (false == isNavigationSuccess) {
+			System.out.println(" Variable is NULL!");
+
+		}
+	}
+
+	@Then("^the user validates that changes have been saved")
+	public void user_validates_changes_have_been_saved() {
+		CommunicationPreferencePage communicationPrefPage = (CommunicationPreferencePage) getLoginScenario()
+				.getBean(PageConstants.COMMUNICATION_PREFERENCE_PAGE);
+		communicationPrefPage.userValidatesChanges();
+
+	}
 }

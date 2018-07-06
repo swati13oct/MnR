@@ -11,13 +11,13 @@ Feature: 1.03-VBF-MemRedesign-To test contact us page
       | PhoneNumber    | <phonenumber> |
     Then member should navigate to Home page
     When the user navigates to contact us page in UHC site
-    Then user validates secure email widget UI in redesign contact us page
     Then user validates clickToCallButton display on contactUS redesign page
     And user clicks on Request Confirmation Click
+    Then user validates secure email widget UI in redesign contact us page
 
     Examples: 
       | memberType | friendname | favcolor | phonenumber |
-      | UhcMapdInd | name1      | color1   | number1     |
+      | UhcMapdIndContactUs | name1      | color1   | number1     |
 
   @smokeTest_contactusGrp @rallyDashboard @testharness
   Scenario Outline: Verify Click to Call and email Widget section on contact us page for Group member
@@ -29,11 +29,9 @@ Feature: 1.03-VBF-MemRedesign-To test contact us page
       | PhoneNumber    | <phonenumber> |
     Then member should navigate to Home page
     When the user navigates to contact us page in UHC site
-    # Then user validates Group secure email widget  in redesign contact us page
-    Then user validates secure email widget UI in redesign contact us page
     Then user validates clickToCallButton display on contactUS redesign page
     And user clicks on Request Confirmation Click
-
+    Then user validates secure email widget UI in redesign contact us page
     Examples: 
       | memberType       | friendname | favcolor | phonenumber |
-      | GroupRetireeMapd | name1      | color1   | number1     |
+      | GroupRetireeMapdContactUs | name1      | color1   | number1     |

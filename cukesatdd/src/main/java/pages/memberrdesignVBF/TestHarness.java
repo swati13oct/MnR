@@ -1,5 +1,7 @@
 package pages.memberrdesignVBF;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -9,6 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
+import acceptancetests.memberrdesignVBF.common.CommonStepDefinition;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.memberrdesignVBF.HealthAndWellness;
@@ -57,6 +60,11 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath = "//h1[@class='h4 margin-none']")
 	private WebElement orderplanHeadertxt;
 
+	@FindBy(xpath = "//div[@class='tabs-desktop']/ul[@class='nav nav-tabs']/li")
+	private List<WebElement> tabsForComboMember;
+
+	String category = null;
+
 	public TestHarness(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -65,10 +73,17 @@ public class TestHarness extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
+		category = CommonStepDefinition.getMemberAttributeMap().get("Member Type");
 		RallyDashboardPage.checkModelPopup(driver);
 		validateNew(heading);
 		validateNew(orderPlanPageLink);
 		validateNew(claimsPageLink);
+		if (category.contains(CommonConstants.CATEGORY_TERMIATED)) {
+			validateNew(tabsForComboMember.get(0));
+			Assert.assertTrue("Terminated Tab exists...",
+					tabsForComboMember.get(0).getText().toUpperCase().contains("TERMINATED"));
+		}
+
 	}
 
 	/***
@@ -128,6 +143,10 @@ public class TestHarness extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (!(("GroupRetireeMapd").equalsIgnoreCase(Category))) {
 			validateNew(PaymentPageLik);
+		}
+		if (("ComboMAPDANDSHIP").equalsIgnoreCase(Category)) {
+			validateNew(tabsForComboMember.get(0));
+			validateNew(tabsForComboMember.get(1));
 		}
 		validateNew(formsPageLink);
 		validateNew(claimsPageLink);
@@ -334,6 +353,7 @@ public class TestHarness extends UhcDriver {
 		} while (!(driver.getTitle().contains("Find Care")));
 		return null;
 	}
+
 	/***
 	 * 
 	 * @return
@@ -343,7 +363,6 @@ public class TestHarness extends UhcDriver {
 		jse.executeScript("window.scrollBy(0,50)", "");
 		scrollToView(formsPageLink);
 		jsClickNew(formsPageLink);
-
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println(driver.getTitle());
 

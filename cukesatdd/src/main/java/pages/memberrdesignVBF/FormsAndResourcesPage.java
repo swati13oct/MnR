@@ -7,6 +7,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+
+import acceptancetests.data.CommonConstants;
+import acceptancetests.memberrdesignVBF.common.CommonStepDefinition;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
@@ -118,9 +121,24 @@ public class FormsAndResourcesPage extends UhcDriver {
 
 	@FindBy(id = "pageHeader")
 	private WebElement pageHeader;
+	
+	@FindBy(id = "benefitssummary")
+	private List<WebElement> L2benefitssummary;
+	
+	@FindBy(id = "ordermaterials")
+	private List<WebElement> orderMaterials;
 
+	@FindBy(id = "premiumpayment_3")
+	private List<WebElement> premiumPayment;
+
+	@FindBy(id = "healthwellness_3")
+	private List<WebElement> healthWellness;
+	
+	String category = null;
+	
 	public FormsAndResourcesPage(WebDriver driver) {
 		super(driver);
+		category = CommonStepDefinition.getMemberAttributeMap().get("Member Type");
 		PageFactory.initElements(driver, this);
 		CommonUtility.checkPageIsReadyNew(driver);
 
@@ -132,6 +150,15 @@ public class FormsAndResourcesPage extends UhcDriver {
 	public void openAndValidate() {
 		validateNew(pageHeader);
 		validateNew(PlanMaterialSection);
+		validateNew(myDocumentSection);
+		validateNew(FormsnResources);
+		validateNew(FormsnResourcesLinks);
+		if (category.contains(CommonConstants.CATEGORY_TERMIATED)) {
+			Assert.assertTrue("PASS !!! Benefits not displayed for terminated", L2benefitssummary.isEmpty());
+			Assert.assertTrue("PASS !!! orderMaterials not displayed for terminated", orderMaterials.isEmpty());
+			Assert.assertTrue("PASS !!! premiumPayment not displayed for terminated", premiumPayment.isEmpty());
+			Assert.assertTrue("PASS !!! healthWellness not displayed for terminated", healthWellness.isEmpty());			
+		}
 	}
 
 	/**

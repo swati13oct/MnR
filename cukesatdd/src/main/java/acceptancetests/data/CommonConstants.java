@@ -855,6 +855,7 @@ public class CommonConstants {
 
 	public static final String COMMONSTEPDEFINITIONMEMVBF = "commonStepDefinition";
 	public static final String IS_HSID_COMPATIBLE	 = "isHSIDCompatible";
+	public static final String CATEGORY_TERMIATED	 = "TerminatedFed";
 	
 
 }

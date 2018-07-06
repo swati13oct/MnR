@@ -13,7 +13,7 @@ import cucumber.api.CucumberOptions;
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=2, screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDMemberRedesignSanityLoginCsrVBF.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDMemberRedesignSanityLoginCsrVBF")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberrdesignVBF" }, features = { "src/main/resources/feature/member-redesign-vbf/member-auth" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDMemberRedesignSanityLoginCsrVBF.json" }, tags = { "@smokeTest_CsrLogin" },monochrome = true)
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDMemberRedesignSanityLoginCsrVBF.json" }, tags = { "@smokeTest_CsrLoginMemID" },monochrome = true)
 
 public class RunMRATDDMemberRedesignSanityLoginCsrVBF {
 

@@ -46,16 +46,6 @@ public class ContactusStepDefinition {
 			Assert.fail("Contact Us page not loaded!!!");
 	}
 
-	/***
-	 * 
-	 */
-	@Then("^user validates Group secure email widget  in redesign contact us page$")
-	public void user_validates_email_widget_func() {
-		ContactUsPage contactusPage = (ContactUsPage) getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
-
-		contactusPage.validateEmailWidgetfunctionality();
-
-	}
 
 	/***
 	 * 
@@ -88,15 +78,4 @@ public class ContactusStepDefinition {
 		contactusPage.reqCallclickConformation();
 	}
 	
-	/**
-	 * @toDO : the user validates go to inbox
-	 */
-	@Then("^user validates go To Inbox button in redesign contact us page$")
-	public void user_validates_go_To_Inbox_button_in_redesign_contact_us_page()
-	{
-		ContactUsPage contactus=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
-		
-		contactus.validateGoToInbox();
-		
-	}
 }

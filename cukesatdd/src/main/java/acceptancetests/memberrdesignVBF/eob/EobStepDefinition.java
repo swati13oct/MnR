@@ -79,7 +79,14 @@ public class EobStepDefinition {
 		String planType = memberAttributesMap.get("Plan Type");
 		String eobTypeData = memberAttributesMap.get("EOB Type");
 		EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		if(eobTypeData.toLowerCase().contains("medical") || eobTypeData.toLowerCase().contains("prescription")){
 		eobPage.selectDateRange(dateRange, planType, eobTypeData);
+		}else if(eobTypeData.toLowerCase().contains("ship")){
+		eobPage.selectDateRangeSHIP(dateRange);
+		}
+		else{
+			Assert.fail("Eror!!! Specify valid EOB Type");
+		}
 	}
 
 	/***

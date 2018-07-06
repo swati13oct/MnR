@@ -10,6 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.CommonConstants;
+import acceptancetests.memberrdesignVBF.common.CommonStepDefinition;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.memberrdesignVBF.HealthAndWellness;
@@ -20,13 +21,13 @@ public class RallyDashboardPage extends UhcDriver {
 	private WebElement panelFindCareCost1;
 
 	@FindBy(xpath = "(//nav[@id='main-nav']//a[contains(text(),'Find Care')])[1]")
-	private WebElement panelFindCareCost;
+	private List<WebElement> panelFindCareCost;
 
 	@FindBy(xpath = "(//nav[@id='main-nav']//a[contains(text(),'Coverage & Benefits')])[1]")
 	private WebElement panelBnC;
 
 	@FindBy(xpath = "(//nav[@id='main-nav']//a[contains(text(),'Premium Payments')])[1]")
-	private WebElement panelPremiumPayment;
+	private List<WebElement> panelPremiumPayment;
 
 	@FindBy(xpath = "(//nav[@id='main-nav']//a[contains(text(),'Home')])[1]")
 	private WebElement panelHome;
@@ -52,8 +53,14 @@ public class RallyDashboardPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='ui-view-page']//span[contains(text(),'Claims')]")
 	private WebElement Claims_Dashboard;
 
+	@FindBy(xpath = "//div[@id='ui-view-page']//span[contains(text(),'Discounts')]")
+	private WebElement discount_Dashboard;
+
 	@FindBy(xpath = "//div[@id='ui-view-page']//span[contains(text(),'Find a Provider')]")
 	private WebElement provider_Dashboard;
+
+	@FindBy(xpath = "//div[@id='ui-view-page']//span[contains(text(),'EOB')]")
+	private WebElement EobTile_Dashboard;
 
 	@FindBy(xpath = "//span[contains(text(),'Locate a Pharmacy')]/ancestor::a/img")
 	private WebElement PharmacyLocator_Dashboard;
@@ -63,6 +70,12 @@ public class RallyDashboardPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@id='ui-view-page']//a[@track='VIEW_DOCUMENTS_AND_RESOURCES']")
 	private WebElement formsResources_Dashboard;
+
+	@FindBy(xpath = "//div[@id='ui-view-page']//div[@class='container']//a[@track='VIEW_DISCOUNTS_AND_SERVICES']")
+	private WebElement discountLink_Dashboard;
+
+	@FindBy(xpath = "//div[@id='ui-view-page']//div[@class='container']//a[@track='AARP']")
+	private WebElement aarpOrg_Dashboard;
 
 	@FindBy(xpath = "//div[@id='ui-view-page']//a[@track='ORDER_MATERIALS']")
 	private WebElement OrderMaterials_Dashboard;
@@ -170,10 +183,21 @@ public class RallyDashboardPage extends UhcDriver {
 	private WebElement NavAccountProfSetting;
 
 	@FindBy(xpath = "//h2[text() = 'Common Services & Costs']")
-	private WebElement CommonCostServiceHeading;
+	private List<WebElement> CommonCostServiceHeading;
 
 	@FindBy(className = "cost-col")
-	private WebElement CommonCostTable;
+	private List<WebElement> CommonCostTable;
+
+	@FindBy(xpath = "//div[@class='id-card-links']/ul[contains(@class,'account-info')]/li/span")
+	private List<WebElement> memberIDs;
+
+	@FindBy(xpath = "//div[contains(@class,'costs')]//div[@class='cost-col ng-scope no-cost-items']/a[contains(text(),'View plan detail')]")
+	private WebElement commonCostSectionShip;
+
+	@FindBy(xpath = "(//div[@class='inactive-coverage-status ng-scope']//span[contains(text(),'Coverage Ended:')])[1]")
+	private WebElement coverageEndedText;
+
+	String category = null;
 
 	public RallyDashboardPage(WebDriver driver) {
 		super(driver);
@@ -183,11 +207,16 @@ public class RallyDashboardPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
+		category = CommonStepDefinition.getMemberAttributeMap().get("Member Type");
 		checkModelPopup(driver);
 		CommonUtility.waitForPageLoadNew(driver, panelHome, 60);
 		validateNew(panelClaims);
 		validateNew(panelHome);
 		validateNew(HelloMessage);
+
+		if (category != null && category.contains(CommonConstants.CATEGORY_TERMIATED)) {
+			validateNew(coverageEndedText);
+		}
 	}
 
 	/***
@@ -197,8 +226,8 @@ public class RallyDashboardPage extends UhcDriver {
 	 */
 	public PaymentsOverview navigateToPaymentOverview() throws InterruptedException {
 		System.out.println("Inside navigateToPaymentOverview functions");
-		validateNew(panelPremiumPayment);
-		panelPremiumPayment.click();
+		validateNew(panelPremiumPayment.get(0));
+		panelPremiumPayment.get(0).click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getTitle().contains("Payment")) {
 			return new PaymentsOverview(driver);
@@ -231,7 +260,6 @@ public class RallyDashboardPage extends UhcDriver {
 	 * @return
 	 */
 	public BenefitsAndCoveragePage navigateDirectToBnCPag() {
-
 		validateNew(BnClink);
 		BnClink.click();
 
@@ -530,36 +558,34 @@ public class RallyDashboardPage extends UhcDriver {
 
 			System.out.println("current value of conter: " + counter);
 			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
-			
-if(IPerceptionsFrame.isEmpty()){
-	if (driver.findElements(By.xpath("//area[@href='javascript:clWin()'][@alt = 'no']")).isEmpty()) {
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			System.out.println(e.getMessage());
-		}
 
-	}
-	else {
-		System.out.println("FeedBack Modal Present and counter value is:" + counter);
-		try {
-			Thread.sleep(2000);
-			WebElement NoThanks = driver.findElement(By.xpath("//*[@id='IPEinvL']/map/area[3]"));
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript("arguments[0].scrollIntoView();", NoThanks);
-			js.executeScript("arguments[0].click();", NoThanks);
-			break;
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+			if (IPerceptionsFrame.isEmpty()) {
+				if (driver.findElements(By.xpath("//area[@href='javascript:clWin()'][@alt = 'no']")).isEmpty()) {
+					try {
+						Thread.sleep(5000);
+					} catch (InterruptedException e) {
+						System.out.println(e.getMessage());
+					}
 
-	}
-}
-else{
-	driver.switchTo().frame(IPerceptionsFrame.get(0));
-	driver.findElement(By.className("btn-no")).click();
-	driver.switchTo().defaultContent();
-}
+				} else {
+					System.out.println("FeedBack Modal Present and counter value is:" + counter);
+					try {
+						Thread.sleep(2000);
+						WebElement NoThanks = driver.findElement(By.xpath("//*[@id='IPEinvL']/map/area[3]"));
+						JavascriptExecutor js = (JavascriptExecutor) driver;
+						js.executeScript("arguments[0].scrollIntoView();", NoThanks);
+						js.executeScript("arguments[0].click();", NoThanks);
+						break;
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+
+				}
+			} else {
+				driver.switchTo().frame(IPerceptionsFrame.get(0));
+				driver.findElement(By.className("btn-no")).click();
+				driver.switchTo().defaultContent();
+			}
 			counter++;
 		} while (counter < 2);
 	}
@@ -605,38 +631,72 @@ else{
 	 * @param Category
 	 */
 	public void validateDashboardElements(String Category) {
-		CommonUtility.checkPageIsReadyNew(driver);
-		if (!(("Ship").equalsIgnoreCase(Category))) {
-			validateNew(panelFindCareCost);
-		}
-		if (!(("GroupRetireeMapd").equalsIgnoreCase(Category))) {
-			validateNew(panelPremiumPayment);
-		}
-		validateNew(panelClaims);
-		validateNew(panelHealth);
-		validateNew(accountToggleDropdown);
-		validateNew(Claims_Dashboard);
-		validateNew(IDLinkDashboard);
-		validateNew(CommonCostServiceHeading);
-		validateNew(CommonCostTable);
-		validateNew(formsResources_Dashboard);
-		validateNew(OrderMaterials_Dashboard);
-		validateNew(promoTile_Dashboard);
-		validateNew(ContactUsLink);
-		validateNew(HelloMessage);
-		validateNew(helpnContactUs);
-		validateNew(accountnSettings);
 
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (Category.contains(CommonConstants.CATEGORY_TERMIATED)) {
+			Assert.assertTrue("Common Cost Service Heading not display", CommonCostServiceHeading.isEmpty());
+			Assert.assertTrue("Common Cost Service table not display", CommonCostTable.isEmpty());
+			Assert.assertTrue("Find Care and Cost not display", panelFindCareCost.isEmpty());
+			validateNew(HelloMessage);
+			validateNew(EobTile_Dashboard);
+			validateNew(Claims_Dashboard);
+			validateNew(IDLinkDashboard);
+			validateNew(EOB_Dashboard);
+			validateNew(formsResources_Dashboard);
+			validateNew(ContactUsLink);
+			validateNew(helpnContactUs);
+			validateNew(accountnSettings);
+
+		} else {
+			if (!(("Ship").equalsIgnoreCase(Category))) {
+				validateNew(panelFindCareCost.get(0));
+			}
+			if (!(("GroupRetireeMapd").equalsIgnoreCase(Category))) {
+				validateNew(panelPremiumPayment.get(0));
+			}
+			if (("ComboMAPDANDSHIP").equalsIgnoreCase(Category)) {
+				validateNew(memberIDs.get(0));
+				Assert.assertTrue("The first member ID:" + memberIDs.get(0).getText() + " is a non ship plan",
+						memberIDs.get(0).getText().contains("-00"));
+				validateNew(memberIDs.get(1));
+				Assert.assertTrue("The first member ID:" + memberIDs.get(1).getText() + " is a ship plan",
+						memberIDs.get(1).getText().contains("-11"));
+				validateNew(commonCostSectionShip);
+				/*
+				 * validateNew(discount_Dashboard);
+				 * validateNew(discountLink_Dashboard);
+				 */
+				validateNew(aarpOrg_Dashboard);
+			}
+			validateNew(panelClaims);
+			validateNew(panelHealth);
+			validateNew(accountToggleDropdown);
+			validateNew(Claims_Dashboard);
+			validateNew(IDLinkDashboard);
+			validateNew(CommonCostServiceHeading.get(0));
+			validateNew(CommonCostTable.get(0));
+			validateNew(formsResources_Dashboard);
+			validateNew(OrderMaterials_Dashboard);
+			validateNew(promoTile_Dashboard);
+			validateNew(ContactUsLink);
+			validateNew(HelloMessage);
+			validateNew(helpnContactUs);
+			validateNew(accountnSettings);
+		}
 	}
+
 	/***
 	 * 
 	 * @return
 	 */
 	public FormsAndResourcesPage navigateDirectToFnRPage() {
-
-		validateNew(formsResources_Dashboard);
-		formsResources_Dashboard.click();
-
+		if (category.contains(CommonConstants.CATEGORY_TERMIATED)) {
+			validateNew(BnClink);
+			BnClink.click();
+		} else {
+			validateNew(formsResources_Dashboard);
+			formsResources_Dashboard.click();
+		}
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println(driver.getTitle());
 
@@ -645,14 +705,13 @@ else{
 		}
 		return null;
 	}
-	
-	
+
 	/***
 	 * 
 	 * @return
 	 */
 	public FormsAndResourcesPage clickFormsAndResourcesTab() {
-		
+
 		validateNew(formsAndResources);
 		formsAndResources.click();
 

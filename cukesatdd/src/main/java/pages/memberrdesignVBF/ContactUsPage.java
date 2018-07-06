@@ -3,6 +3,8 @@
  */
 package pages.memberrdesignVBF;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -23,7 +25,7 @@ import atdd.framework.UhcDriver;
 public class ContactUsPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))]//a[contains(@class,'message-btn')][1]")
-	private WebElement getStartedButton;
+	private List<WebElement> getStartedButton;
 
 	@FindBy(xpath = "//*[@id='message-cancel']")
 	private WebElement cancelLink;
@@ -50,7 +52,7 @@ public class ContactUsPage extends UhcDriver {
 	private WebElement sendAmessageButton;
 	
 	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//a[contains(@class,'call-btn')]")
-	private WebElement requestACall;;
+	private WebElement requestACall;
 
 	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//button[@id='call-submit']/span")
 	private WebElement requestCall;
@@ -83,8 +85,18 @@ public class ContactUsPage extends UhcDriver {
 	private WebElement clickToCallInputNum;
 	
 	@FindBy(xpath = "//a[contains(@class,'goToInbox') and @ng-show='isSecureMailBoxEnabled']")
-	private WebElement goToInboxButton;
-
+	private List<WebElement> goToInboxButton;
+	
+	@FindBy(xpath = "//div[@id='messageModal']//button/span[text()='CONTINUE']")
+	private WebElement btnContinue;
+	
+	@FindBy(id = "compose-button")
+	private WebElement messengerComposeBtn;
+	
+	@FindBy(id = "signed-in")
+	private WebElement messengerSignIn;
+	
+	
 	public ContactUsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -103,12 +115,15 @@ public class ContactUsPage extends UhcDriver {
 	 */
 	public void validateEmailWidgetSection() {
 		try {
-			validateNew(requestACall);
-			if(goToInboxButton.isDisplayed()){
-				Assert.assertTrue(validateNew(goToInboxButton));
+			JavascriptExecutor jse = (JavascriptExecutor) driver;
+			jse.executeScript("window.scrollBy(0,500)", "");
+			if(!goToInboxButton.isEmpty()){
+				Assert.assertTrue(validateNew(goToInboxButton.get(0)));
+				goToInboxButton.get(0).click();
+				validateSSOInbox();
 			}else{
-			validateNew(getStartedButton);
-			getStartedButton.click();
+			validateNew(getStartedButton.get(0));
+			getStartedButton.get(0).click();
 			waitforElementNew(useDifferentEmailRadioButton);
 			useDifferentEmailRadioButton.click();
 			validateNew(emailAddressonFile);
@@ -122,29 +137,6 @@ public class ContactUsPage extends UhcDriver {
 			System.out.println(ex.getMessage());
 			Assert.fail("Secure widget is not  displayed");
 
-		}
-	}
-
-	/***
-	 * 
-	 */
-	public void validateEmailWidgetfunctionality() {
-		validateNew(getStartedButton);
-		if (getStartedButton.isDisplayed()) {
-			System.out.println("email widget is displayed");
-			getStartedButton.click();
-			validateNew(useDifferentEmailRadioButton);
-			useDifferentEmailRadioButton.click();
-			sendkeysNew(newemailId, "miasdgaarp@gmail.com");
-			sendkeysNew(confirmemailId, "miasdgaarp@gmail.com");
-			validateNew(continueButton);
-			continueButton.click();
-			validateNew(ConfirmationWidgetButton);
-			validateNew(sendAmessageButton);
-			sendAmessageButton.click();
-		} else {
-			Assert.fail("Secure widget is not  displayed");
-			System.out.println("Secure widget is not  displayed");
 		}
 	}
 
@@ -235,15 +227,19 @@ public class ContactUsPage extends UhcDriver {
 	}
 
 	/**
-	 * Validate the go to inbox button for a member who has already opted out for secure email
-	 */
-	public void validateGoToInbox(){
-		try {
-			waitforElement(goToInboxButton);
-			Assert.assertTrue(validate(goToInboxButton));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+     * Validate the go to inbox button for a member who has already opted out for secure email and navigate to SSO inbox
+     */
+     public void validateSSOInbox(){
+            try {
+                   validateNew(btnContinue);
+                   switchToNewTabNew(btnContinue);
+                   CommonUtility.checkPageIsReadyNew(driver);
+                   Assert.assertTrue(driver.getTitle().equals("Messenger"));
+                   CommonUtility.waitForPageLoadNew(driver, messengerComposeBtn, 60);
+                   validateNew(messengerSignIn);
+            } catch (Exception e) {
+                   e.printStackTrace();
+            }
+     }
 
 }

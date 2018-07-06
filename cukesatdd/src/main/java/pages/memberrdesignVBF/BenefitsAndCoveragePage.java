@@ -3,6 +3,8 @@
  */
 package pages.memberrdesignVBF;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -18,15 +20,6 @@ import atdd.framework.UhcDriver;
  *
  */
 public class BenefitsAndCoveragePage extends UhcDriver {
-
-	@FindBy(xpath = "//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[2]/div[1]/span")
-	private WebElement memberId;
-
-	@FindBy(xpath = "//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[1]/div[1]/span")
-	private WebElement memberName;
-
-	@FindBy(xpath = "//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[4]/div[1]/span")
-	private WebElement effectiveDate;
 
 	@FindBy(className = "atdd-need-help")
 	private WebElement NeedHelpHeader;
@@ -123,25 +116,69 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	public static final String disclaimertextarea_xpath = "//*[@id='collapseDisclaimer']";
 
+	@FindBy(xpath = "//div[@class='tabs-desktop']/ul[@class='nav nav-tabs']/li")
+	private List<WebElement> tabsForComboMember;
+
+	@FindBy(xpath = "//*[@class='table-body']/div[2]/div[2]")
+	private WebElement memberId;
+
+	@FindBy(className = "atdd-claims-header")
+	private WebElement shipClaimsSupportHeader;
+
+	@FindBy(className = "drugCopaysAndDiscounts")
+	private WebElement drugCopaysAndDiscount;
+
+	@FindBy(xpath = "//span[contains(@class,'atdd-benefitsoverview-membernamelabel')]/parent::div/following-sibling::div")
+	private WebElement memberNameValue;
+
+	@FindBy(xpath = "//span[contains(@class,'atdd-benefitsoverview-memberidlabel')]/parent::div/following-sibling::div")
+	private WebElement memberIDValue;
+
+	@FindBy(xpath = "//span[contains(@class,'atdd-benefitsoverview-effectivedatelabel')]/parent::div/following-sibling::div")
+	private WebElement effectiveDateValue;
+
+	@FindBy(xpath = "//div[@id='oopInNetowrk']/section//h1")
+	private WebElement INNETWORKValue;
+
+	@FindBy(xpath = "//div[@id='oopOutNetowrk']/section//h1")
+	private WebElement OUTOFNETWORKValue;
+
+	@FindBy(xpath = ".//*[@id='officeVisitTileAtdd']/div/section/div[1]")
+	private WebElement pcpValue;
+
+	@FindBy(xpath = "//*[@id='officeVisitTileAtdd']/div/section/span")
+	private WebElement specialistValue;
+
+	@FindBy(className = "atdd-bnc-standrdretailpharmcytable")
+	private WebElement drugTableNonLisMember;
+
+	@FindBy(id = "standard_ads-header")
+	private List<WebElement> annualDeductibleColumnFederal;
+
+	@FindBy(id = "standard_ics-header")
+	private List<WebElement> initialCoverageColumnFederal;
+
+	@FindBy(id = "standard_cgp-header")
+	private List<WebElement> coverageGaStageColumnFederal;
+
+	@FindBy(id = "standard_ccs-header")
+	private List<WebElement> catastrophicCoverageStageColumnFederal;
+
+	@FindBy(xpath = "//table[@class='table-white atdd-bnc-standrdretailpharmcytable']/tbody/tr[2]/td[3]")
+	private WebElement federalValueIC;
+
 	public BenefitsAndCoveragePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		RallyDashboardPage.checkModelPopup(driver);
+		openAndValidate();
 	}
 
 	public void validateFieldsOnBenefitsAndCoveragePage() {
-
-		try {
-			validateNew(planName);
-
-			validateNew(memberId);
-
-			validateNew(memberName);
-
-			validateNew(effectiveDate);
-
-		} catch (Exception e) {
-			System.out.println("Elements are not found ...");
+		if (!tabsForComboMember.isEmpty()) {
+			ValidatesBenefitsForCombo();
+		} else {
+			validatePlanOverview();
 		}
 	}
 
@@ -244,7 +281,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	 * 
 	 */
 	public void validatedrugcopaytable() {
-		//CT team created an empty method. Need to follow up on this with them 
+		// CT team created an empty method. Need to follow up on this with them
 	}
 
 	/***
@@ -256,6 +293,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validateNew(memberID);
 		validateNew(effective_Date);
 
+		//validateTextUsingRegex(memberNameValue, "\\w+");
+		//validateTextUsingRegex(memberIDValue, "\\d{9,10}.+");
+		//validateTextUsingRegex(effectiveDateValue, "\\d{2}\\/\\d{2}\\/\\d{4}");
 	}
 
 	/***
@@ -297,7 +337,58 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validateNew(OutofPocketMaximum);
 		validateNew(INNETWORK);
 		validateNew(OUTOFNETWORK);
+	//	validateTextUsingRegex(INNETWORKValue, "([NA]{1})|(\\$\\d{1,3}\\,\\d+\\.\\d{2})");
+		//validateTextUsingRegex(OUTOFNETWORKValue, "([NA]{1})|(\\$\\d{1,3}\\,\\d+\\.\\d{2})");
+	}
+
+	public void ValidatesBenefitsForCombo() {
+		int numberOfTabsForCombo;
+		numberOfTabsForCombo = tabsForComboMember.size();
+		if (2 == numberOfTabsForCombo) {
+			String memberid1 = null;
+			for (int currentTab = 0; currentTab < numberOfTabsForCombo; currentTab++) {
+				tabsForComboMember.get(currentTab).click();
+				validateNew(memberId);
+				memberid1 = memberId.getText();
+				if (memberid1.contains("-11")) {
+					JavascriptExecutor jse = (JavascriptExecutor) driver;
+					jse.executeScript("window.scrollBy(0,900)", "");
+					System.out.println("User is on ship page");
+					validateNew(shipClaimsSupportHeader);
+				} else {
+					validateNew(drugCopaysAndDiscount);
+				}
+			}
+
+		} else {
+			Assert.fail("!!! Please check test data as number of plans are not 2 !!!");
+		}
+	}
+
+	public void validateOfficeVisitssection() {
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,-100)", "");
+
+		validateNew(OfficeVisits);
+		validateNew(pcpValue);
+		validateNew(specialistValue);
+		//validateTextUsingRegex(pcpValue, "\\$\\d{1,4}\\.\\d{2}");
+		//validateTextUsingRegex(specialistValue, "\\$\\d{1,4}\\.\\d{2}");
 
 	}
 
+	public void validateCopayCoinsuranceInDrugTable() {
+		validateNew(drugTableNonLisMember);
+
+		if (annualDeductibleColumnFederal.size() > 0 && initialCoverageColumnFederal.size() > 0
+				&& coverageGaStageColumnFederal.size() > 0 && catastrophicCoverageStageColumnFederal.size() > 0) {
+			Assert.assertTrue("The columns are correct in Drug Costs table", true);
+
+		} else {
+			Assert.assertFalse("The columns are incorrect in drug Costs table", true);
+		}
+
+		validateNew(federalValueIC);
+		//validateTextUsingRegex(federalValueIC, "\\$\\d{1,4}\\.\\d{2}");
+	}
 }
