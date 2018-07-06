@@ -17,7 +17,7 @@ import junit.framework.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.member.bluelayer.HSIDLoginPage;
+import pages.regression.login.HSIDLoginPage;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.formsandresources.FormsAndResourcesPage;
 import atdd.framework.*;

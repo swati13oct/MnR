@@ -937,6 +937,7 @@ public class MRScenario {
 				webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 
 				webDriver.get("google.com");
+				
 				return webDriver;
 
 			} else if (browser.equalsIgnoreCase(CommonConstants.CHROME_BROWSER)) {

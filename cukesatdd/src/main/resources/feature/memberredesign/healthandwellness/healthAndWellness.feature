@@ -18,8 +18,8 @@ And then click the Rewards tab and I should be directed to Rewards Page HW
 Examples:
  | planType  | memberType   |
  | MAPD      |RewardsMember |
- | MA        |RewardsMember |
- | PDP       |RewardsMember |
+ #| MA        |RewardsMember |
+ #| PDP       |RewardsMember |
  
  @member_redesign_H&W @regressiongenericpagesH&W @regression_06_06_18
 Scenario Outline:As an authenticated member on the new Member site, I want to check health and wellness and its Lifestyle, Learning and Rewards tabs
@@ -38,4 +38,4 @@ And then click the Rewards tab and I should be directed to Rewards Page HW
 Examples:
  | planType  | memberType   |
  | MAPD      |RewardsMember |
- | PDP       |RewardsMember |
+# | PDP       |RewardsMember |

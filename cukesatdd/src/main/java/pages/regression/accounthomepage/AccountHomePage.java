@@ -341,9 +341,12 @@ private WebElement PlanMaterialSection;
               //openAndValidate();
        }
 
-       public BenefitsAndCoveragePage navigateDirectToBnCPag() {
+       public BenefitsAndCoveragePage navigateDirectToBnCPag(String Plantype) {
 
-              if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
+              
+    	   if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
+    		   if(Plantype.equalsIgnoreCase("MAPD") || Plantype.equalsIgnoreCase("PDP") || Plantype.equalsIgnoreCase("HIP"))
+    		   {
                      System.out.println("user is on Stage login page");
                      // CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);
                      if (driver.getCurrentUrl().contains("/dashboard"))
@@ -367,6 +370,59 @@ private WebElement PlanMaterialSection;
 
                      }
               }
+    		   
+    		   else if (Plantype.equalsIgnoreCase("MEDICA"))
+    		   {
+                   System.out.println("user is on Stage login page");
+                   // CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);
+                   if (driver.getCurrentUrl().contains("/dashboard"))
+                         ;
+                   {
+                         System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
+                         
+                         driver.navigate().to("https://"+MRScenario.environmentMedicare+"-mymedicareaccount.uhc.com/medica/member/benefits-coverage.html");
+                         try {
+                                Thread.sleep(20000);
+                         } catch (InterruptedException e) {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                         }
+                         System.out.println(driver.getCurrentUrl());
+                         CommonUtility.waitForPageLoad(driver, heading, 30);
+                         if (driver.getTitle().contains("Benefits Overview")) {
+                                System.out.println(driver.getTitle());
+                                return new BenefitsAndCoveragePage(driver);
+                         }
+
+                   }
+            }
+    		   else if (Plantype.equalsIgnoreCase("PCP"))
+    		   {
+                   System.out.println("user is on Stage login page");
+                   // CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);
+                   if (driver.getCurrentUrl().contains("/dashboard"))
+                         ;
+                   {
+                         System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
+                         
+                         driver.navigate().to("https://"+MRScenario.environmentMedicare+"-mymedicareaccount.uhc.com/pcp/member/benefits-coverage.html");
+                         try {
+                                Thread.sleep(20000);
+                         } catch (InterruptedException e) {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                         }
+                         System.out.println(driver.getCurrentUrl());
+                         CommonUtility.waitForPageLoad(driver, heading, 30);
+                         if (driver.getTitle().contains("Benefits Overview")) {
+                                System.out.println(driver.getTitle());
+                                return new BenefitsAndCoveragePage(driver);
+                         }
+
+                   }
+            }
+    	   }
+    		   
 
               else if (MRScenario.environmentMedicare.equals("team-h") || MRScenario.environmentMedicare.equals("test-a")
                            || MRScenario.environmentMedicare.equals("team-e")) {
