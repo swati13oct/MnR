@@ -27,6 +27,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 /**
@@ -755,6 +756,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,3000)", "");
 		validate(moreinformation);	
+		moreinformation.click();
 	}
 
 	/**
@@ -1049,7 +1051,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	/**
 	 * @toDo : Validates Look Up Drugs button in the DrugCosts section
 	 */
-	public void validatelookupdrugsbutton() 
+	public void validatelookupdrugsbutton(String plantype) 
 	{
 		try {
 			Thread.sleep(10000);
@@ -1071,7 +1073,18 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		{
 			Assert.fail();
 		}
+		if(plantype.equalsIgnoreCase("MAPD") || plantype.equalsIgnoreCase("PDP"))
+		{
 		driver.navigate().to(PAGE_URL+"medicare/member/benefits-coverage.html");
+		}
+		else if (plantype.equalsIgnoreCase("Medica"))
+		{
+		driver.navigate().to("https://"+MRScenario.environmentMedicare+"-mymedicareaccount.uhc.com/medica/member/benefits-coverage.html");
+	    }
+		else if (plantype.equalsIgnoreCase("PCP"))
+		{
+		driver.navigate().to("https://"+MRScenario.environmentMedicare+"-mymedicareaccount.uhc.com/pcp/member/benefits-coverage.html");
+	    }
 		try {
 			Thread.sleep(20000);
 		} catch (InterruptedException e) {
@@ -1108,11 +1121,16 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(DrugCostheaderandtext);
 
 	}
+	
+	public void validate_locatepharmacy() {
+		validate(locateapharmacysection);
+
+	}
 
 	/**
 	 * @toDo : Validates the text in locate a pharmacy section
 	 */
-	public void validate_locateapharmacysection() {
+	public void validate_locateapharmacysection(String plantype) {
 		validate(locateapharmacysection);
 		validate(locateapharmacybutton);
 		
@@ -1129,7 +1147,18 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		{
 			Assert.fail();
 		}
+		if(plantype.equalsIgnoreCase("MAPD") || plantype.equalsIgnoreCase("PDP"))
+		{
 		driver.navigate().to(PAGE_URL+"medicare/member/benefits-coverage.html");
+		}
+		else if (plantype.equalsIgnoreCase("Medica"))
+		{
+		driver.navigate().to("https://"+MRScenario.environmentMedicare+"-mymedicareaccount.uhc.com/medica/member/benefits-coverage.html");
+	    }
+		else if (plantype.equalsIgnoreCase("PCP"))
+		{
+		driver.navigate().to("https://"+MRScenario.environmentMedicare+"-mymedicareaccount.uhc.com/pcp/member/benefits-coverage.html");
+	    }
 		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
@@ -1489,7 +1518,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	 * @toDo : Validates the Primary care provider section
 	 */
 
-	public void validatePrimaryCareProvider() {
+	public void validatePrimaryCareProvider(String plantype) {
 
 		validate(PrimaryCareProviderHeaderInd);
 		validate(YourPrimaryCareProvider);
@@ -1521,8 +1550,18 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			Assert.fail();
 			
 		}
+		if(plantype.equalsIgnoreCase("MAPD") || plantype.equalsIgnoreCase("PDP"))
+		{
 		driver.navigate().to(PAGE_URL+"medicare/member/benefits-coverage.html");
-	
+		}
+		else if (plantype.equalsIgnoreCase("Medica"))
+		{
+		driver.navigate().to("https://"+MRScenario.environmentMedicare+"-mymedicareaccount.uhc.com/medica/member/benefits-coverage.html");
+	    }
+		else if (plantype.equalsIgnoreCase("PCP"))
+		{
+		driver.navigate().to("https://"+MRScenario.environmentMedicare+"-mymedicareaccount.uhc.com/pcp/member/benefits-coverage.html");
+	    }
 		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
@@ -1546,14 +1585,28 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		{
 			Assert.assertTrue(true);
 		}
+		else if (driver.getCurrentUrl().contains("systest3.myuhc.com"))
+		{
+			Assert.assertTrue(true);
+	    }
 		else
 		{
-			Assert.fail();
-			
+			Assert.fail();	
 		}
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(0));
+        if(plantype.equalsIgnoreCase("MAPD") || plantype.equalsIgnoreCase("PDP"))
+		{
 		driver.navigate().to(PAGE_URL+"medicare/member/benefits-coverage.html");
+		}
+		else if (plantype.equalsIgnoreCase("Medica"))
+		{
+		driver.navigate().to("https://"+MRScenario.environmentMedicare+"-mymedicareaccount.uhc.com/medica/member/benefits-coverage.html");
+	    }
+		else if (plantype.equalsIgnoreCase("PCP"))
+		{
+		driver.navigate().to("https://"+MRScenario.environmentMedicare+"-mymedicareaccount.uhc.com/pcp/member/benefits-coverage.html");
+	    }
 		
 
 	}
@@ -1626,12 +1679,15 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	public void validateHeadersShip() {
 		System.out.println("member is on B& C page ");
         validate (MemberName);
-        System.out.println("*****Member Name is seen for SHIP member on B&C page *****");
         validate(MemberId);
         validate(EffectiveDate);
-		//validate(BenefitsSummaryHeadership);
-		validate(ParticipatingHospitalStays1);
-		System.out.println("****Hospital stay is seen ==>"+ParticipatingHospitalStays1.isDisplayed());
+		validate(BenefitsSummaryHeadership);
+		int i = 0 ;
+		List<WebElement> tilelist = driver.findElements(By.xpath("(.//*[@id='benefitShipCard'])["+i+"]"));
+		for(i=1;i<=tilelist.size();i++)
+		{
+		validate(tilelist.get(i));
+		}
 		
 	}
 
@@ -1783,7 +1839,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		System.out.println("Title is " + getTitle());
 		driver.navigate().to(PAGE_URL+"medicare/member/benefits-coverage.html");
 
-		// Assert.assertTrue(getTitle().equalsIgnoreCase("Contact Us"));
+		 //Assert.assertTrue(getTitle().equalsIgnoreCase("Contact"));
 
 	}
  
@@ -1904,7 +1960,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
         
 
 
-	public void validatestaticlinksinpdf()
+	public void validatestaticlinksinpdf(String plantype)
 	{
 	validate(Medicationlinkinpdfsec);
 	try {
@@ -1923,7 +1979,18 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	{
 		Assert.fail();
 	}
+	if(plantype.equalsIgnoreCase("MAPD") || plantype.equalsIgnoreCase("PDP"))
+	{
 	driver.navigate().to(PAGE_URL+"medicare/member/benefits-coverage.html");
+	}
+	else if (plantype.equalsIgnoreCase("Medica"))
+	{
+	driver.navigate().to("https://"+MRScenario.environmentMedicare+"-mymedicareaccount.uhc.com/medica/member/benefits-coverage.html");
+    }
+	else if (plantype.equalsIgnoreCase("PCP"))
+	{
+	driver.navigate().to("https://"+MRScenario.environmentMedicare+"-mymedicareaccount.uhc.com/pcp/member/benefits-coverage.html");
+    }
 	validate(Viewotherdocsinpdf);
 	Viewotherdocsinpdf.click();
 	if(driver.getCurrentUrl().contains("/member/documents/overview.html"))
@@ -1941,11 +2008,22 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
+	if(plantype.equalsIgnoreCase("MAPD") || plantype.equalsIgnoreCase("PDP"))
+	{
 	driver.navigate().to(PAGE_URL+"medicare/member/benefits-coverage.html");
+	}
+	else if (plantype.equalsIgnoreCase("Medica"))
+	{
+	driver.navigate().to("https://"+MRScenario.environmentMedicare+"-mymedicareaccount.uhc.com/medica/member/benefits-coverage.html");
+    }
+	else if (plantype.equalsIgnoreCase("PCP"))
+	{
+	driver.navigate().to("https://"+MRScenario.environmentMedicare+"-mymedicareaccount.uhc.com/pcp/member/benefits-coverage.html");
+    }
 	
 	}
 	
-	public void validatestaticlinksinpdfpdp()
+	public void validatestaticlinksinpdfpdp(String plantype)
 	{
 	validate(Medicationlinkinpdfsecpdp);
 	try {
@@ -1964,7 +2042,18 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	{
 		Assert.fail();
 	}
+	if(plantype.equalsIgnoreCase("MAPD") || plantype.equalsIgnoreCase("PDP"))
+	{
 	driver.navigate().to(PAGE_URL+"medicare/member/benefits-coverage.html");
+	}
+	else if (plantype.equalsIgnoreCase("Medica"))
+	{
+	driver.navigate().to("https://"+MRScenario.environmentMedicare+"-mymedicareaccount.uhc.com/medica/member/benefits-coverage.html");
+    }
+	else if (plantype.equalsIgnoreCase("PCP"))
+	{
+	driver.navigate().to("https://"+MRScenario.environmentMedicare+"-mymedicareaccount.uhc.com/pcp/member/benefits-coverage.html");
+    }
 	validate(Viewotherdocsinpdfpdp);
 	Viewotherdocsinpdfpdp.click();
 	if(driver.getCurrentUrl().contains("/member/documents/overview.html"))
@@ -1982,7 +2071,19 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
+	if(plantype.equalsIgnoreCase("MAPD") || plantype.equalsIgnoreCase("PDP"))
+	{
 	driver.navigate().to(PAGE_URL+"medicare/member/benefits-coverage.html");
+	}
+	else if (plantype.equalsIgnoreCase("Medica"))
+	{
+	driver.navigate().to("https://"+MRScenario.environmentMedicare+"-mymedicareaccount.uhc.com/medica/member/benefits-coverage.html");
+    }
+	else if (plantype.equalsIgnoreCase("PCP"))
+	{
+	driver.navigate().to("https://"+MRScenario.environmentMedicare+"-mymedicareaccount.uhc.com/pcp/member/benefits-coverage.html");
+    }
+	
 	
 	}
 	
