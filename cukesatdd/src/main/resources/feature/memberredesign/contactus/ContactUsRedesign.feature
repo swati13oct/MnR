@@ -1,5 +1,4 @@
-@regression_06_06_18
-@velocityDashers
+@regression_06_06_18 @velocityDashers
 Feature: V1.1To test Send us a question Widget and Click to call functionality in contact us redesign pages in UHCM site
 
   @secureEmailWidgetCancel
@@ -13,9 +12,9 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
       | NewConfirm Email | <newConfirmEmail> |
 
     Examples: 
-      | plantype | memberType  | newEmail       | newConfirmEmail |
-      | PDP      | RXCLAIMS    | test@optum.com | test@optum.com  |
-      | MAPD     | SDCERAGroup | test@optum.com | test@optum.com  |
+      | plantype | memberType       | newEmail       | newConfirmEmail |
+      | PDP      | IDCardmember     | test@optum.com | test@optum.com  |
+      | MAPD     | IndividualMember | test@optum.com | test@optum.com  |
 
   @GroupEmailConfirmMessage
   Scenario Outline: Verify Group Email Widget Confirm Request in contact us redesign page
@@ -34,7 +33,7 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
 
     Examples: 
       | plantype | memberType    | enquiryType                 | alternativeEmailId | confirmAlternativeEmailId | alternativePhoneNumber | confirmAlternativePhoneNumber | expectedMessage                                                                                                                                                                 |
-      | MAPD     | CALPERSGroup  | Payment Information         | test@optum.com     | test@optum.com            |             9999999999 |                    9999999999 | Thank you for your inquiry. We value your input, and would be happy to answer your questions. A Customer Service Advocate will review your question and respond to you shortly. |
+     	| MAPD     | CALPERSGroup  | Payment Information         | test@optum.com     | test@optum.com            |             9999999999 |                    9999999999 | Thank you for your inquiry. We value your input, and would be happy to answer your questions. A Customer Service Advocate will review your question and respond to you shortly. |
       | MAPD     | GEORGIAGroup  | Finding a Pharmacy          | test@optum.com     | test@optum.com            |             9999999999 |                    9999999999 | Thank you for your inquiry. We value your input, and would be happy to answer your questions. A Customer Service Advocate will review your question and respond to you shortly. |
       | MAPD     | TEXASERSGroup | Updating Member information | test@optum.com     | test@optum.com            |             9999999999 |                    9999999999 | Thank you for your inquiry. We value your input, and would be happy to answer your questions. A Customer Service Advocate will review your question and respond to you shortly. |
 
@@ -83,10 +82,8 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
       | Expected Message | <expectedMessage> |
 
     Examples: 
-      Examples:
-
-      | plantype | memberType  | enquiryType | message | aarpMemberShipNumber | firstName | lastName | emailAddress   | confirmEmailAddress | date | month | year | expectedMessage                                                                                                                          |
-      | SHIP     | MedSupRider | Claims      | Testing |           1234567890 | test      | test     | test@optum.com | test@optum.com      |   01 |    01 | 1950 | We value your input and will be happy to answer your questions. A UnitedHealthcare Customer Service representative will respond shortly. |
+      | plantype | memberType     | enquiryType | message | aarpMemberShipNumber | firstName | lastName | emailAddress   | confirmEmailAddress | date | month | year | expectedMessage                                                                                                                          |
+      | SHIP     | IndPharmacyFnR | Claims      | Testing |           1234567890 | test      | test     | test@optum.com | test@optum.com      |   01 |    01 | 1950 | We value your input and will be happy to answer your questions. A UnitedHealthcare Customer Service representative will respond shortly. |
 
   @goToInbox
   Scenario Outline: Verify go To Inbox button on contactUS redesign page for opted in member
@@ -140,9 +137,9 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
     Then user validates PDP page display in redesign contact us page
 
     Examples: 
-      | plantype | memberType |
-      | PDP      | rx_eob     |
-      
+      | plantype | memberType   |
+      | PDP      | IDCardmember |
+
   @regressionContactUsForTerminatedMembers
   Scenario Outline: Verify terminated members view on contact us redesign page
     Given login with following details logins in the member portal and validate elements
@@ -152,8 +149,9 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
     Then user should only see the Technical Support and Plan Support components
 
     Examples: 
-      | plantype | memberType                 |
-      | SHIP     | Terminated_MAPDwithMedSupp |
-      | MAPD     | Terminated_CALPERSGroup    |
-      | PDP      | Terminated_rx_eob          |
-      
+      | plantype | memberType                      |
+      | MA       | Terminated_Group_MA_NICE        |
+      | MAPD     | Terminated_Group_MAPD_COSMOS    |
+      | SSP      | Terminated_Group_SSP            |
+      | MA       | Terminated_Individual_MA_COSMOS |
+      | MAPD     | Terminated_Individual_MAPD_NICE |

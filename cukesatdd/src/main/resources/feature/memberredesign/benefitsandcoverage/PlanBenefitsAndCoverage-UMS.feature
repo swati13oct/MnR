@@ -1,4 +1,4 @@
-@codeMonkeys @regression_06_06_18
+@codeMonkeys @regression_06_06_18 @thePredators
 Feature: C1.1 To test plan benefits and Coverage on UMS site
 
 
@@ -533,7 +533,7 @@ And the user verifies that the correct pdfs are there in the plan material secti
     | planType | memberType |
     | PDP    | TEXASERSGroup  | 
       
-       @OfficeVisitswithoutprovidertiering @regression @regression_06_06_18
+    @OfficeVisitswithoutprovidertiering @regression @regression_06_06_18
   Scenario Outline: Verify the Office visits widget for a member withoutprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
@@ -556,8 +556,8 @@ And the user verifies that the correct pdfs are there in the plan material secti
     Examples: 
       | planType |memberType |
     | PDP      |Wallgreens |
-     | PDP      |MailOrderPharamacy|
-      | MAPD     |Group |
+    | PDP      |MailOrderPharamacy|
+    | MAPD     |Group |
    
    
   
@@ -628,8 +628,8 @@ And the user verifies that the correct pdfs are there in the plan material secti
     Examples: 
       | planType |memberType |
       | MA       |Individual  |
-      | SSUP     |Individual  |
-      | MedSupp  |Ship        |
+      #| SSUP     |Individual  |
+      #| MedSupp  |Ship        |
       
       
        
@@ -644,4 +644,29 @@ And the user verifies that the correct pdfs are there in the plan material secti
     Examples: 
       | planType |memberType |
       | MAPD     |Individual  |
+      
+       @BenefitsForCombo   @regression @regression_06_06_18
+    Scenario Outline: Verify the Benefits for a combo member
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type | <planType> |
+      | Member Type | <memberType>    |
+    Then the user navigates to Benefits coverage page
+    And the user validates the benefits for a combo member
+
+    Examples: 
+      | planType |memberType |
+      | Combo     |   MAPDANDSHIP      |
+      
+      
+        @BenefitsRiderFunctionality   @regression @regression_06_06_18
+    Scenario Outline: Verify the Benefits for a combo member
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type | <planType> |
+      | Member Type | <memberType>    |
+    Then the user navigates to Benefits coverage page
+    And the user validates the Add Rider functionality
+    Then the user validates the remove Rider functionality
+    Examples: 
+      | planType |memberType |
+      | MAPD     |   withRider      |
       

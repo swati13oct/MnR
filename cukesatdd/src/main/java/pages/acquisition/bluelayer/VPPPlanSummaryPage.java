@@ -167,7 +167,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	//@FindBy(xpath="//*[contains(text(),'People')]")
 
-	@FindBy(xpath=".//*[@class='gs-option']//h3[contains(text(),'People')]")
+	@FindBy(xpath=".//*[@class='gs-option']//*[contains(text(),'People')]")
 	private WebElement People;
 	
 	@FindBy(xpath="//div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[1]/div/*[@class='trigger-closed']")
@@ -187,7 +187,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	//"
 
 	//@FindBy(xpath="//*[contains(text(),'Primary Care')]")
-	@FindBy(xpath=".//*[@class='gs-option']//h3[contains(text(),'Primary Care')]")
+	@FindBy(xpath=".//*[@class='gs-option']//*[contains(text(),'Primary Care')]")
 	private WebElement Primary;
 
 	@FindBy(xpath="//*[contains(text(),'Primary Care Physician')] ")
@@ -1023,12 +1023,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		return false;
 	}
-
+	
 	public boolean providerinfo(String planName)
 	{
 
 		WebElement ProviderSearchLink1 = driver.findElement
-				(By.xpath("//*[contains(text(),'"+planName+"')]/following::span[contains(text(),'covered')]"));
+				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide ng-scope')]/descendant::span[contains(text(),'covered')]"));
 		String mproviderinfo=ProviderSearchLink1.getText();
         System.out.println(mproviderinfo);
 		if(mproviderinfo.contains("1 providers covered"))
@@ -1366,7 +1366,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		System.out.println("Plan Name is : "+PlanName);
 		
-		WebElement PremiumForPlan = driver.findElement(By.xpath("//h3[contains(text(), '"+PlanName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//li[contains(text(),'Monthly Premium')]//span[contains(text(),'$')]"));
+		WebElement PremiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '"+PlanName+"')]/ancestor::*[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(),'Monthly Premium')]//*[contains(text(),'$')]"));
 		String PlanPremium = PremiumForPlan.getText();
 		
 		System.out.println("Premium for Plan : "+PlanPremium);
@@ -1383,7 +1383,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public WelcomePage Enroll_OLE_Plan(String planName) throws InterruptedException {
 		
 		System.out.println("Enroll in Plan for Plan : "+planName);
-		WebElement EnrollForPlan = driver.findElement(By.xpath("//h3[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(), 'Enroll in')]"));
+		WebElement EnrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(), 'Enroll in')]"));
 		try {
 		validate(EnrollForPlan);
 		

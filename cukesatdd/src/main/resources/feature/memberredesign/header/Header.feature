@@ -26,7 +26,7 @@ Then I should be able to see and use the Account/Profile dropdown and logout
 
 Examples:
  | planType  | memberType  |
- | MAPD      |IndividualDCEmember |
+ | MAPD      |IndividualMember |
  
 
  @premiumpaymentsheader @regression_06_06_18
@@ -40,8 +40,8 @@ Then I should be able to see and use the Premium Payments tab Header
 
 Examples:
  | planType  | memberType  |
- | MAPD      |IndividualDCEmember |
- #| MAPD    |GroupLessSubsidy |
+ | MAPD      |IndividualMember |
+ | MAPD    |GroupLessSubsidy |
  
  
  @premiumpaymentsheader_100%subisdy
@@ -67,10 +67,10 @@ Then I should be able to see and use the Find Care & Costs tab Header
 
 Examples:
  | planType|  memberType  	| 
-| MAPD    |  UHCGroup  	  |
- #| MAPD    | IndividualDCEmember |
- #| PCP     | OrderMaterials |
- #| Medica  | OrderMaterials |
+ | MAPD    |  UHCGroup  	  |
+ | MAPD    | IndividualMember |
+#| MAPD    | PCP |
+ | MAPD  | Medica |
  
  
  @no_findcareheader @regression_06_06_18
@@ -83,7 +83,7 @@ Then I should not be able to see the Find Care & Costs tab Header
 
 Examples:
  | planType|  memberType  	| 
-| SHIP    |    	Individual  |
+ | SHIP    |   Individual  |
 #| SSUP    |   UHCGroup 	  |
  
 
@@ -96,8 +96,5 @@ Then I should be able to see and use the Home tab on Dashboard
 
 Examples:
  | planType|  memberType  	| 
-| MAPD    |  AARPTerminatedmember 	  |
-|MA		| UHCTerminatedmember|
-
- 
- 
+ | MAPD    |  AARPTerminatedmember 	  |
+#|MA		| UHCTerminatedmember|

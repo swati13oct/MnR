@@ -103,9 +103,11 @@ public class ConfirmOneTimePaymentPage extends UhcDriver{
 		waitforElement(TermsCheckRadioButton);
 		TermsCheckRadioButton.click();
 		System.out.println("Terms and conditions radio button clicked");
+		Thread.sleep(2000);
 		if(SubmitPaymentButton.isEnabled())
 			SubmitPaymentButton.click();
 		     System.out.println("Submit Payment Button clicked");
+		     Thread.sleep(2000);
 		CommonUtility.checkPageIsReady(driver);
 		Thread.sleep(5000);
 		if(driver.getTitle().equalsIgnoreCase("overview") || driver.getTitle().equalsIgnoreCase("AARP Medicare Plans from UnitedHealthCare - overview")){

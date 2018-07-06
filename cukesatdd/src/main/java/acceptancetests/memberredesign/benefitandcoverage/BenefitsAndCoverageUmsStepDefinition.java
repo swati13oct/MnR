@@ -1502,6 +1502,37 @@ public class BenefitsAndCoverageUmsStepDefinition {
 						
 	}
 	
+	@And("the user validates the benefits for a combo member")
+	public void userValidatesBenefitsForCombo() {
+				
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.ValidatesBenefitsForCombo();
+						
+	}
+
+
+	@And("^the user validates the Add Rider functionality$")
+	public void theUserValidatesTheAddRiderFunctionality()  {
+		
+		
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.validatesAddRider();
+		
+	}
+
+
+	@Then("^the user validates the remove Rider functionality$")
+	public void theUserValidatesTheRemoveRiderFunctionality() {
+		
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.validatesRemoveRider();
+		
+	}
+
+	
 
 	
 	

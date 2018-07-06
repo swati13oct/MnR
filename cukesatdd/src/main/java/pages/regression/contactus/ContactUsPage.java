@@ -32,7 +32,7 @@ import cucumber.api.DataTable;
  */
 public class ContactUsPage extends UhcDriver{
 
-	@FindBy(css="a#message-btn:first-child")
+	@FindBy(css="a.btn.btn--primary.message-btn:first-child")
 	private WebElement getStartedButton;
 
 	@FindBy(id="message-cancel")
@@ -50,8 +50,13 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(css = "a#message-btn:last-child")
 	private WebElement goToInboxButton;
 	
+	@FindBy(id = "IPerceptionsEmbed")
+	public WebElement iPerceptionframe;
 	
-	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//a[@id='call-btn']")
+	@FindBy(id = "closeButton")
+	public WebElement iPerceptionclosebtn;
+	
+	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//a[@class='btn btn--primary call-btn']")
 	private WebElement requestACall;
 	
 	@FindBy(id = "call-submit")
@@ -79,7 +84,7 @@ public class ContactUsPage extends UhcDriver{
     private WebElement iPerceptionPopUp;
 
 	
-	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//a[@id='question-btn']")
+	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//a[@class='btn btn--primary question-btn']")
 	private WebElement fillOutFormButton;	
 	
 	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))]//a[@id='question-btn']")
@@ -90,7 +95,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//textarea[@id='question-message']")
 	private WebElement questionMessage;
 	
-	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//button[@id='question-submit']")
+	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//button[@name='question-submit']")
 	private WebElement questionSubmit;
 	
 	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))]//button[@id='question-submit']")
@@ -207,13 +212,10 @@ public class ContactUsPage extends UhcDriver{
 		super(driver);
 		try {
 			Thread.sleep(8000);
-			if (validate(iPerceptionPopUp)) {
-	            iPerceptionPopUp.click();
-	            System.out.println("iPerception Pop Up displayed");
-			}
 			PageFactory.initElements(driver, this);
 			CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_30);
 			openAndValidate();
+			feebackpopupClose();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -627,5 +629,19 @@ public class ContactUsPage extends UhcDriver{
 	public void validateWidgetsForTerminatedMembers(){
 		Assert.assertTrue(!getStartedButton.isDisplayed());
 		Assert.assertTrue(!fillOutFormButton.isDisplayed());
+	}
+	
+	public void feebackpopupClose() throws InterruptedException
+	{ //waitForloader(driver,overlay, 20);
+		Thread.sleep(20000);
+		if (validate(iPerceptionframe)) {
+
+			switchToNewIframe(iPerceptionframe);
+			iPerceptionclosebtn.click();
+			driver.switchTo().defaultContent();
+			//iPerceptionAutoPopUp.click();
+		} else {
+			System.out.println("iPerception Pop Up not displayed");
+		}
 	}
 }
