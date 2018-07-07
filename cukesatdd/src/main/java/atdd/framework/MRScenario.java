@@ -827,7 +827,7 @@ public class MRScenario {
 		else if (attributeMapToUse.equalsIgnoreCase("ampMemberAttributesMap"))
 			return ampMemberAttributesMap;
 		else if (attributeMapToUse.equalsIgnoreCase("umsMemberAttributesMap"))
-			return ampMemberAttributesMap;
+			return umsMemberAttributesMap;
 		else
 			return null;
 	}
