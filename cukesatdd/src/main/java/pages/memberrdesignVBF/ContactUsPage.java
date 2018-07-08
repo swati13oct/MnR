@@ -233,11 +233,11 @@ public class ContactUsPage extends UhcDriver {
      public void validateSSOInbox(){
             try {
                    validateNew(btnContinue);
-                   if ((!(MRScenario.environment).toLowerCase().contains("team-ci"))) {
+                   if (!((MRScenario.environment).toLowerCase().contains("team-ci"))) {
                    switchToNewTabNew(btnContinue);
                    CommonUtility.checkPageIsReadyNew(driver);
-                   Assert.assertTrue(driver.getTitle().equals("Messenger"));
                    CommonUtility.waitForPageLoadNew(driver, messengerComposeBtn, 60);
+                   Assert.assertTrue(driver.getTitle().equals("Messenger"));                  
                    validateNew(messengerSignIn);
                    }
                    else{
