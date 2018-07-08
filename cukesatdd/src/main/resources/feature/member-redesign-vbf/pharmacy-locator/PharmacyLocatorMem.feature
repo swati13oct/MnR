@@ -4,7 +4,7 @@ Feature: 1.12-VBF-MemRedesign-To test Locate a Pharmacy tool
   @smokeTest_PharmacyLocatorMem @rallyDashboard @testharness
   Scenario Outline: Verify all available pharmacies for default zipcode in Redesign site
     Given I am a authenticated member on the member redesign site for Direct Login
-      | Plan Type   | <planType>   |
+   #   | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When the above plantype user logs in member redesign for Direct Login
       | friendname     | <friendname>  |
@@ -19,7 +19,7 @@ Feature: 1.12-VBF-MemRedesign-To test Locate a Pharmacy tool
     Then the user validate more information content based on plan type in Redesign Site
 
     Examples: 
-      | planType | memberType       | distance | friendname | favcolor | phonenumber |
-      #	| MAPD	   | UhcIndOrderPlan  |   25      |name1      | color1   | number1     |
-      | MAPD     | AARPIndOrderPlan |       25 | name1      | color1   | number1     |
-		#	| MAPD	   | GrpRetireeOrderPlan  |   25      |  name1      | color1   | number1     |
+		| memberType       | distance | friendname | favcolor | phonenumber |
+		| UhcMapdInd  |   25      |name1      | color1   | number1     |
+		# | AARPMapdInd |       25 | name1      | color1   | number1     |
+		#| GroupRetireeMapd  |   25      |  name1      | color1   | number1     |

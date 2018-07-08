@@ -351,7 +351,11 @@ public class MRConstants {
   public static final String UHCM_REGISTRATION_URL = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/guest/registration.html";
   public static final String MEMBER_AUTH_REDESIGN_LOGIN_URL = "https://awe-stage-generic.uhc.com/content/medicare/memberauth.html ";	
   public static final String REDESIGN_REGISTRATION_URL = "https://stage-medicare.uhc.com/medicare/member-registration.html";*/
-  
- }
+  public static final String LEGACY_REDESIGN ="/content/medicare/login/memberRedesign.html";
+  public static final String LEGACY_TESTHARNESS = "https://" + MRScenario.environment + "-medicare."+ MRScenario.domain + LEGACY_REDESIGN + "/?testharness=true";
+  public static final String LEGACY_DASHBOARD = "https://" + MRScenario.environment + "-medicare."+ MRScenario.domain + LEGACY_REDESIGN;
+  public static final String MEMBER_AUTH_PLM_REDESIGN_URL = "https://stage-generic.uhc.com/content/medicare/memberauth.html#/memberAuthLogin";
 
-	    
+}
+
+
