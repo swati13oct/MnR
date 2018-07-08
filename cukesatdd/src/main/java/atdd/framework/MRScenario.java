@@ -164,7 +164,7 @@ public class MRScenario {
 			memberAmpTypeReader = new BufferedReader(new InputStreamReader(memberTypeStream));
 			System.out.println("Inside AMP-Member-Type csv...........");
 			while ((line = memberAmpTypeReader.readLine()) != null) {
-				formattedMemberString = formatMemberData(line, formattedMemberString);
+				formattedMemberString = formatMemberData(line);
 
 				ampMemberAttributesMap.put(formattedMemberString, UserName);
 			}
@@ -173,7 +173,7 @@ public class MRScenario {
 			memberUmsTypeReader = new BufferedReader(new InputStreamReader(memberTypeStream1));
 			System.out.println("Inside UMS-Member-Type csv...........");
 			while ((line = memberUmsTypeReader.readLine()) != null) {
-				formattedMemberString = formatMemberData(line, formattedMemberString);
+				formattedMemberString = formatMemberData(line);
 				umsMemberAttributesMap.put(formattedMemberString, UserName);
 			}
 			InputStream memberTypeStream2;
@@ -186,7 +186,7 @@ public class MRScenario {
 			System.out.println("Inside member redesign VBF csv...........");
 			while ((line = memberRedesignVbfTypeReader.readLine()) != null) {
 				
-				formattedMemberString = formatMemberData(line, formattedMemberString);
+				formattedMemberString = formatMemberData(line);
 				memberRedesignVbfAttributesMap.put(formattedMemberString, UserName);
 
 			}
@@ -197,8 +197,8 @@ public class MRScenario {
 
 	}
 
-	public static String formatMemberData(String line, String formattedMemberString) {
-		formattedMemberString = "";
+	public static String formatMemberData(String line) {
+		String formattedMemberString = "";
 		String[] memberAttributes = line.split(cvsSplitBy);
 
 		/*for (int i = 0; i <= memberAttributes.length - 2; i++) {
@@ -217,7 +217,7 @@ public class MRScenario {
 					formattedMemberString = formattedMemberString.concat(memberAttributes[i]).concat(cvsSplitBy);
 			}
 		}
-		System.out.println("formattedMemberString---" + formattedMemberString);
+		//System.out.println("formattedMemberString---" + formattedMemberString);
 		UserName = null;
 		//UserName = memberAttributes[memberAttributes.length - 1];
 		UserName = memberAttributes[0];
