@@ -52,7 +52,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
         | planType|  memberType  | copayCategory  | language | SummaryofBenefits    | EvidenceofCoverage       | ComprehensiveFormularyDrug List     | name        | memberid     | effectivedate | monthlypremium |   UpdatedLanguage | DisplayFlag|
          | MAPD    |  Individual  |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | DDCEE DAADF | 954016383-00 | 01/01/2018    | Not Available  | Tier 2            | true       |
          | MAPD    |  Individual  |  NON LIS      | SPANISH  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | DDCEE DAADF | 954016383-00 | 01/01/2018    | Not Available  | Tier 2            | true       |
-         | MAPD    |  Individual  |  NON LIS      | CHINESE  |                      |                          |                                     | DDE BCBF    | 006798725-01 | 01/01/2018    | Not Available  | Tier 2            | true       |
+         | MAPD    |  Individual  |  NON LIS      | CHINESE  |                      |                          |                                     | DDCEE DAADF | 954016383-00 | 01/01/2018    | Not Available  | Tier 2            | true       |
          | Medica  |  Individual  |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | EABAB AEADBD|903610182-00    | 05/01/2018    | Not Available  | Tier 2            | true       |
          | Medica  |  Individual  |  NON LIS      | SPANISH  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | EABAB AEADBD|903610182-00    | 05/01/2018    | Not Available  | Tier 2            | true       |
          |PCP     |  Individual  |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | DABDCAE AEAEEAC|928100285-00 | 01/01/2018 | Not Available  | Tier 2            | true       |
@@ -381,7 +381,6 @@ And the user validates Lis member plan overview section
  And the drugcost dropdown should not display
  And the user validates the Learn More section link for stage
  And the user validates tier link should not display 
- And the lis user validates the user click on the link it expands and when user clicks it again it should collapse
  And the user validates view and document label
  And the user validates static links
 And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully
@@ -395,7 +394,7 @@ And the user verifies that the correct pdfs are there in the plan material secti
  And the user validates contactus section
  Examples:
  | planType|  memberType  | copayCategory | language    | SummaryofBenefits        | EvidenceofCoverage           | ComprehensiveFormularyDrug List         | name               | memberid      | effectivedate | monthlypremium  | extrahelp            |               
- | MAPD    |  Individual  |  LIS          | ENGLISH     | Summary of Benefits      | Evidence of Coverage         | Comprehensive Formulary - Drug List     | DABDCAE CFCFFCF    | 910114420-00  | 01/01/2018     | Not Available  | Extra Help Level : 1 |
+ | MAPD    |  Individual  |  LIS           | ENGLISH     | Summary of Benefits      | Evidence of Coverage         | Comprehensive Formulary - Drug List     | DABDCAE CFCFFCF    | 910114420-00  | 01/01/2018     | Not Available  | Extra Help Level : 1 |
  
  @CMpdpindlis
 Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
