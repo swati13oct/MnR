@@ -59,34 +59,37 @@ public class MRScenario {
 
 	private Map<String, Object> scenarioObjectMap = new HashMap<String, Object>();
 
-	private static Map<String, List<String>> ampMemberAttributesMap = new LinkedHashMap<String, List<String>>();
+	private static Map<String, String> ampMemberAttributesMap = new LinkedHashMap<String, String>();
 
-	//private static Map<String, List<String>> umsMemberAttributesMap = new LinkedHashMap<String, List<String>>();
-	//Changing to type String,String
 	private static Map<String, String> umsMemberAttributesMap = new LinkedHashMap<String, String>();
+	private static Map<String, String> memberRedesignVbfAttributesMap = new LinkedHashMap<String, String>();
 
 	private static List<String> userNamesAddedList = new ArrayList<String>();
 
 	private static Map<String, String> props = new HashMap<String, String>();
-	private static Map<String, List<String>> memberRedesignVbfAttributesMap = new LinkedHashMap<String, List<String>>();
 
 	private static Map<String, Map<String, JSONObject>> expectedDataMapUlayer = new LinkedHashMap<String, Map<String, JSONObject>>();
 
-
 	private static Map<String, Map<String, JSONObject>> expectedDataMapBluelayer = new LinkedHashMap<String, Map<String, JSONObject>>();
+	private static Map<String, String> loginCreds = new HashMap<String, String>();
 	public static String environment;
-	public static String environmentMedicare;
 	public static String isTestHarness;
+	public static String environmentMedicare;
+	public static String isHSIDCompatible;
+	public static String UserName = null;
+	public static String formattedMemberString = null;
 	public static String domain;
+	public static String line = "";
+	public static final String cvsSplitBy = ",";
+	public static String compositeDesiredAttributes;
+	public static String attributeMapToUse = "";
 	private static final String DIRECTORY = "/src/main/resources/";
 
 	public static int count = 0;
 
-
 	public static final String USERNAME = "ucpadmin";
 
-	public static final String ACCESS_KEY ="2817affd-616e-4c96-819e-4583348d7b37";
-
+	public static final String ACCESS_KEY = "2817affd-616e-4c96-819e-4583348d7b37";
 
 	//public static final String USERNAME = System.getenv("SAUCE_USERNAME");
 
@@ -123,24 +126,27 @@ public class MRScenario {
 		/* Set acqusisition and member urls */
 		environment = props.get("Environment");
 
-		if(environment.equals("awe-test-a")){
-			environmentMedicare ="test-a";
-		}else if(environment.equals("awe-stage")){
-			environmentMedicare ="stage";
-		}else{
-			environmentMedicare =environment;
+		if (environment.equals("awe-test-a")) {
+			environmentMedicare = "test-a";
+		} else if (environment.equals("awe-stage")) {
+			environmentMedicare = "stage";
+		} else {
+			environmentMedicare = environment;
 		}
 
-
-		if(props.containsKey("Domain")) {
+		if (props.containsKey("Domain")) {
 			domain = props.get("Domain");
 		} else {
 			domain = null;
 		}
+		isTestHarness = (null == System.getProperty(CommonConstants.IS_TESTHARNESS) ? props.get("isTestHarness")
+				: System.getProperty(CommonConstants.IS_TESTHARNESS));
+		isHSIDCompatible = (null == System.getProperty(CommonConstants.IS_HSID_COMPATIBLE)
+				? props.get("isHSIDCompatible") : System.getProperty(CommonConstants.IS_HSID_COMPATIBLE));
 
 		// Setting permission to the scripts , so that jenkins server can access
-		File shellScript  =  new File("src/main/resources/pdfReportGenerator.sh");
-		File groovyScript  =  new File("src/main/resources/pdfReporter.groovy");
+		File shellScript = new File("src/main/resources/pdfReportGenerator.sh");
+		File groovyScript = new File("src/main/resources/pdfReporter.groovy");
 
 		shellScript.setReadable(true);
 		shellScript.setWritable(true);
@@ -149,112 +155,73 @@ public class MRScenario {
 		groovyScript.setReadable(true);
 		groovyScript.setWritable(true);
 		groovyScript.setExecutable(true);
-
-		/* Set up DB */
-		//                           Connection con = getDBConnection(props);
-
-		/* Default Schema */
-		///                         String defaultSchema = props.get(CommonConstants.DB_SCHEMA);
-		String line = "";
-		String cvsSplitBy = ",";
-		//            String userName = null;
-		/*
-                              InputStream massRegisStream = ClassLoader.class
-                                                            .getResourceAsStream("/database/mass-registration.csv");
-                              BufferedReader massRegisStreamReader = new BufferedReader(
-                                                            new InputStreamReader(massRegisStream));
-
-                              String line = "";
-                              String cvsSplitBy = ",";
-                              String userName = null;
-
-                              try {
-                                             while ((line = massRegisStreamReader.readLine()) != null) {
-                                                            String[] massRegisStreamAttributes = line.split(cvsSplitBy);
-                                                            pperugu: To skip the first line in CSV file 
-                                                            if (!(massRegisStreamAttributes[0].equalsIgnoreCase("USERNAME"))) {
-                                                                           userName = massRegisStreamAttributes[0];
-
-		 * pperugu ::Approach followed :: to remove the already
-		 * registered member and register the members again
-
-                                                                           if (checkMemberFound(userName, con, defaultSchema)) {
-                                                                                          removeMemberFound(userName, con, defaultSchema);
-                                                                           }
-                                                                           addMember(userName, con, defaultSchema,
-                                                                                                         massRegisStreamAttributes);
-                                                                           userNamesAddedList.add(userName);
-                                                            }
-                                             }
-                              } catch (IOException e1) {
-                                             // TODO Auto-generated catch block
-                                             e1.printStackTrace();
-                              }
-		 */
 		BufferedReader memberAmpTypeReader = null;
 		BufferedReader memberUmsTypeReader = null;
+		BufferedReader memberRedesignVbfTypeReader = null;
 
 		try {
-			InputStream memberTypeStream = ClassLoader.class
-					.getResourceAsStream("/database/AMP-Member-Type.csv");
-			memberAmpTypeReader = new BufferedReader(new InputStreamReader(
-					memberTypeStream));
-
+			InputStream memberTypeStream = ClassLoader.class.getResourceAsStream("/database/AMP-Member-Type.csv");
+			memberAmpTypeReader = new BufferedReader(new InputStreamReader(memberTypeStream));
+			System.out.println("Inside AMP-Member-Type csv...........");
 			while ((line = memberAmpTypeReader.readLine()) != null) {
-				// use comma as separator
-				String[] memberAttributes = line.split(cvsSplitBy);
-				List<String> attrList = Arrays.asList(memberAttributes)
-						.subList(1, memberAttributes.length);
-				String ampUserName = null;
-				if (memberAttributes[0].contains("/")) {
-					String[] memberAttributArr = memberAttributes[0].split("/");
-					ampUserName = memberAttributArr[0];
+				formattedMemberString = formatMemberData(line);
 
-				} else {
-					ampUserName = memberAttributes[0];
-				}
-
-				//                           if (userNamesAddedList.contains(ampUserName)) {
-				ampMemberAttributesMap.put(ampUserName, attrList);
-				//            }
+				ampMemberAttributesMap.put(formattedMemberString, UserName);
 			}
 
-			InputStream memberTypeStream1 = ClassLoader.class
-					.getResourceAsStream("/database/UMS-Member-Type.csv");
-			memberUmsTypeReader = new BufferedReader(new InputStreamReader(
-					memberTypeStream1));
-
+			InputStream memberTypeStream1 = ClassLoader.class.getResourceAsStream("/database/UMS-Member-Type.csv");
+			memberUmsTypeReader = new BufferedReader(new InputStreamReader(memberTypeStream1));
+			System.out.println("Inside UMS-Member-Type csv...........");
 			while ((line = memberUmsTypeReader.readLine()) != null) {
-				// use comma as separator
-				String[] memberAttributes = line.split(cvsSplitBy);
-				List<String> attrList = Arrays.asList(memberAttributes)
-						.subList(1, memberAttributes.length);
-				String uhcUserName = null;
-				// Added by Sneha - Swapping username to be value and parameter to be Key
-				uhcUserName = memberAttributes[0];
+				formattedMemberString = formatMemberData(line);
+				umsMemberAttributesMap.put(formattedMemberString, UserName);
+			}
+			InputStream memberTypeStream2;
+			if (environment.contains("team-ci")) {
+				memberTypeStream2 = ClassLoader.class.getResourceAsStream("/database/MemberRedesign-VBF-Teamci.csv");
+			} else {
+				memberTypeStream2 = ClassLoader.class.getResourceAsStream("/database/MemberRedesign-VBF.csv");
+			}
+			memberRedesignVbfTypeReader = new BufferedReader(new InputStreamReader(memberTypeStream2));
+			System.out.println("Inside member redesign VBF csv...........");
+			while ((line = memberRedesignVbfTypeReader.readLine()) != null) {
+				
+				formattedMemberString = formatMemberData(line);
+				memberRedesignVbfAttributesMap.put(formattedMemberString, UserName);
 
-				String attrStringKey = "";
-				for(String CurrentAttr : attrList){
-					attrStringKey = attrStringKey+CurrentAttr;
-				}
-				umsMemberAttributesMap.put(attrStringKey, uhcUserName);
-				/*                                                            if (memberAttributes[0].contains("/")) {
-                                                                           String[] memberAttributArr = memberAttributes[0].split("/");
-                                                                           uhcUserName = memberAttributArr[0];
-
-                                                            } else {
-                                                                           uhcUserName = memberAttributes[0];
-                                                            }
-                                                            //if (userNamesAddedList.contains(uhcUserName)) {
-                                                                           umsMemberAttributesMap.put(uhcUserName, attrList);
-                                                            //}
-				 */
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
+	}
+
+	public static String formatMemberData(String line) {
+		String formattedMemberString = "";
+		String[] memberAttributes = line.split(cvsSplitBy);
+
+		/*for (int i = 0; i <= memberAttributes.length - 2; i++) {
+			if (2 == memberAttributes.length || i == memberAttributes.length - 2) {
+				formattedMemberString = formattedMemberString.concat(memberAttributes[i]);
+			} else {
+				if (i != memberAttributes.length - 2)
+					formattedMemberString = formattedMemberString.concat(memberAttributes[i]).concat(cvsSplitBy);
+			}
+		}*/
+		for (int i = 1; i <= memberAttributes.length - 1; i++) {
+			if (2 == memberAttributes.length || i == memberAttributes.length - 1) {
+				formattedMemberString = formattedMemberString.concat(memberAttributes[i]);
+			} else {
+				if (i != memberAttributes.length - 1)
+					formattedMemberString = formattedMemberString.concat(memberAttributes[i]).concat(cvsSplitBy);
+			}
+		}
+		//System.out.println("formattedMemberString---" + formattedMemberString);
+		UserName = null;
+		//UserName = memberAttributes[memberAttributes.length - 1];
+		UserName = memberAttributes[0];
+		return formattedMemberString;
 	}
 
 	private static Connection getDBConnection(Map<String, String> props) {
@@ -517,55 +484,20 @@ public class MRScenario {
 		return props;
 	}
 
-	public Map<String, String> getAMPMemberWithDesiredAttributes(
-			List<String> desiredAttributes) {
-		Map<String, String> loginCreds = new HashMap<String, String>();
-		for (Entry<String, List<String>> currEntry : ampMemberAttributesMap
-				.entrySet()) {
-			if (currEntry.getValue().equals(desiredAttributes)) {
-				if (currEntry.getKey().contains("/")) {
-					String[] keyArr = currEntry.getKey().split("/");
-					loginCreds.put("user", keyArr[0]);
-					loginCreds.put("pwd", keyArr[1]);
-					return loginCreds;
-				} else {
-					loginCreds.put("user", currEntry.getKey());
-					loginCreds.put("pwd", "Password@1");
-					return loginCreds;
-				}
+	public Map<String, String> getAMPMemberWithDesiredAttributes(List<String> desiredAttributes) {
+		formCompositeDesiredAttributes(desiredAttributes);
+		attributeMapToUse = "ampMemberAttributesMap";
+		returnLoginCredentials();
 
-			}
-		}
-		// No match found
-		return null;
+		return loginCreds;
 	}
 
-	public Map<String, String> getUMSMemberWithDesiredAttributes(
-			List<String> desiredAttributes) {
-		String desiredAttrString = "";
-		for(String currAttr : desiredAttributes){
-			desiredAttrString = desiredAttrString+currAttr;
-		}
-		Map<String, String> loginCreds = new HashMap<String, String>();
-		//Changing to String String 
-		for (Entry<String, String> currEntry : umsMemberAttributesMap
-				.entrySet()) {
-			if (currEntry.getKey().equals(desiredAttrString)) {
-				if (currEntry.getValue().contains("/")) {
-					String[] keyArr = currEntry.getValue().split("/");
-					loginCreds.put("user", keyArr[0]);
-					loginCreds.put("pwd", keyArr[1]);
-					return loginCreds;
-				} else {
-					loginCreds.put("user", currEntry.getValue());
-					loginCreds.put("pwd", "Password@1");
-					return loginCreds;
-				}
+	public Map<String, String> getUMSMemberWithDesiredAttributes(List<String> desiredAttributes) {
+		formCompositeDesiredAttributes(desiredAttributes);
+		attributeMapToUse = "umsMemberAttributesMap";
+		returnLoginCredentials();
 
-			}
-		}
-		// No match found
-		return null;
+		return loginCreds;
 	}
 
 	public static JSONObject readExpectedJson(String fileName, String directory) {
@@ -584,8 +516,7 @@ public class MRScenario {
 		}
 		FileInputStream stream = null;
 		try {
-			stream = new FileInputStream(parentDirectory + DIRECTORY
-					+ directory + fileName);
+			stream = new FileInputStream(parentDirectory + DIRECTORY + directory + fileName);
 		} catch (FileNotFoundException e) {
 			return jsonObject;
 		}
@@ -609,7 +540,6 @@ public class MRScenario {
 			bb.get(bytes);
 		}
 		String response = new String(bytes, Charset.forName("UTF-8"));
-		/* String response = Charset.defaultCharset().decode(bb).toString(); */
 		try {
 			stream.close();
 		} catch (IOException e) {
@@ -867,47 +797,81 @@ public class MRScenario {
 
 	}
 
-
 	public void DriverQuit()
 
 	{
 		webDriver.quit();
 	}
 
-	public Map<String, String> getmemberRedesignVbfWithDesiredAttributes(
-			List<String> desiredAttributes) {
-		Map<String, String> loginCreds = new HashMap<String, String>();
-		for (Entry<String, List<String>> currEntry : memberRedesignVbfAttributesMap
-				.entrySet()) {
-			System.out.println("Current value entry  - "+currEntry.getValue());
-			if (currEntry.getValue().equals(desiredAttributes)) {
-				System.out.println("Current key entry - "+currEntry.getKey());
-				if (currEntry.getKey().contains("/")) {
-					String[] keyArr = currEntry.getKey().split("/");
-					loginCreds.put("user", keyArr[0]);
-					loginCreds.put("pwd", keyArr[1]);
-					return loginCreds;
+	public Map<String, String> getmemberRedesignVbfWithDesiredAttributes(List<String> desiredAttributes) {
+		formCompositeDesiredAttributes(desiredAttributes);
+		attributeMapToUse = "memberRedesignVbfAttributesMap";
+		returnLoginCredentials();
+		return loginCreds;
+	}
+
+	public void formCompositeDesiredAttributes(List<String> desiredAttributes) {
+		compositeDesiredAttributes = "";
+		for (int i = 0; i < desiredAttributes.size(); i++) {
+			if (i == desiredAttributes.size() - 1) {
+				compositeDesiredAttributes = compositeDesiredAttributes.concat(desiredAttributes.get(i));
+			} else {
+				compositeDesiredAttributes = compositeDesiredAttributes.concat(desiredAttributes.get(i)).concat(",");
+			}
+		}
+	}
+
+	public static Map<String, String> returnMemberAttributeMap() {
+		if (attributeMapToUse.equalsIgnoreCase("memberRedesignVbfAttributesMap"))
+			return memberRedesignVbfAttributesMap;
+		else if (attributeMapToUse.equalsIgnoreCase("ampMemberAttributesMap"))
+			return ampMemberAttributesMap;
+		else if (attributeMapToUse.equalsIgnoreCase("umsMemberAttributesMap"))
+			return umsMemberAttributesMap;
+		else
+			return null;
+	}
+
+	public static void returnLoginCredentials() {
+		for (Entry<String, String> currEntry : returnMemberAttributeMap().entrySet()) {
+		/*	System.out.println("Current value entry  - " + currEntry.getValue());
+			if (currEntry.getKey().equals(compositeDesiredAttributes)) {
+				System.out.println("Current key entry - " + currEntry.getKey());
+				if (currEntry.getValue().contains("/")) {
+					String[] valArr = currEntry.getValue().split("/");
+					loginCreds.put("user", valArr[0]);
+					loginCreds.put("pwd", valArr[1]);
 				} else {
-					loginCreds.put("user", currEntry.getKey());
+					loginCreds.put("user", currEntry.getValue());
 					loginCreds.put("pwd", "Password@1");
-					return loginCreds;
+				}
+
+			}
+		}*/
+			System.out.println("Current key entry  - " + currEntry.getKey());
+			if (currEntry.getKey().equals(compositeDesiredAttributes)) {
+				System.out.println("Current value entry - " + currEntry.getValue());
+				if (currEntry.getValue().contains("/")) {
+					String[] valArr = currEntry.getValue().split("/");
+					loginCreds.put("user", valArr[0]);
+					loginCreds.put("pwd", valArr[1]);
+				} else {
+					loginCreds.put("user", currEntry.getValue());
+					loginCreds.put("pwd", "Password@1");
 				}
 
 			}
 		}
-		// No match found
-		return null;
 	}
-
-
 
 	public void CaptureScreenshot(Scenario scenario) {
 		final byte[] screenshot = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BYTES);
 		System.out.println("Screenshot captured!!!");
-		//To get the report embedded in the report
+		// To get the report embedded in the report
 		scenario.embed(screenshot, "image/png");
 
 	}
+
 	public void nullifyWebDriverNew() {
 		if (null != webDriver) {
 			webDriver.quit();
@@ -929,8 +893,7 @@ public class MRScenario {
 		// JENKINS and
 		// will prefer those browser properties.
 		String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
-				? props.get(CommonConstants.DESKTOP_WEBDRIVER)
-						: System.getProperty(CommonConstants.JENKINS_BROWSER));
+				? props.get(CommonConstants.DESKTOP_WEBDRIVER) : System.getProperty(CommonConstants.JENKINS_BROWSER));
 
 		String browserName = (null == System.getProperty(CommonConstants.BROWSER_NAME) ? props.get("BrowserName")
 				: System.getProperty(CommonConstants.BROWSER_NAME));
@@ -943,7 +906,7 @@ public class MRScenario {
 		// back.
 		// This has to happen to preserve the state of webDriver so that we can
 		// take screenshots at the end.
-		if (null == webDriver) {
+	//	if (null == webDriver) {
 			System.out.println("New WebDriver CREATED");
 
 			// Choose your browser based on name. The name value is what is in
@@ -1009,17 +972,17 @@ public class MRScenario {
 			} else if (browser.equalsIgnoreCase(CommonConstants.SAUCE_BROWSER_WEB)) {
 				System.out.println("Execution is Going to Start on SauceLabs Web.....!!!!!");
 				DesiredCapabilities capabilities = null;
-				if(browserName.equalsIgnoreCase("firefox")){
+				if (browserName.equalsIgnoreCase("firefox")) {
 					System.out.println("Inside firefox");
 					capabilities = DesiredCapabilities.firefox();
 					capabilities.setCapability("platform", "Windows 7");
-					capabilities.setCapability("version", "52");
-				}else if(browserName.equalsIgnoreCase("IE")){
+					capabilities.setCapability("version", "57");
+				} else if (browserName.equalsIgnoreCase("IE")) {
 					capabilities = DesiredCapabilities.internetExplorer();
 					capabilities.setCapability("platform", "Windows 7");
 					capabilities.setCapability("version", "11.0");
 					capabilities.setCapability("screenResolution", "1024x768");
-				}else if(browserName.equalsIgnoreCase("chrome")){
+				} else if (browserName.equalsIgnoreCase("chrome")) {
 					System.out.println("Inside chrome");
 					capabilities = DesiredCapabilities.chrome();
 					capabilities.setCapability("platform", "Windows 7");
@@ -1027,10 +990,13 @@ public class MRScenario {
 				}
 				capabilities.setCapability("autoAcceptsAlerts", true);
 				capabilities.setCapability("parent-tunnel", "sauce_admin");
-				capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
+				capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Stg");
 				String SAUCE_USERNAME = props.get("SAUCE_USERNAME");
 				String SAUCE_ACCESS_KEY = props.get("SAUCE_ACCESS_KEY");
+				// String URL = "http://" + SAUCE_USERNAME + ":" +
+				// SAUCE_ACCESS_KEY + "@162.222.75.33:80/wd/hub";
 				String URL = "http://" + SAUCE_USERNAME + ":" + SAUCE_ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
+				System.out.println("URL:" + URL);
 				if (SAUCE_USERNAME == null || SAUCE_ACCESS_KEY == null) {
 					Assert.fail(
 							"Missing value for environment variable(s) SAUCE_USERNAME or SAUCE_ACCESS_KEY.  Check environment configuration and try again");
@@ -1044,11 +1010,8 @@ public class MRScenario {
 				}
 
 			}
-		}
+		//}
 		return webDriver;
 
-
 	}
-
-
 }

@@ -13,6 +13,7 @@ Feature: 1.01-VBF-MemRedesign-To test plan benefits and Coverage functionality
     And the user navigates to Rally Dashboard Page for bnc
     And the user validates plan overview section
     And the user validates headers on Bnc page for indi members
+    And the user validates the Office Visits section
     And the user validates the Out of Pocket Max section
     And the user validates the Primarycare Provider section
     And the user view the Drug Copays & Discounts header
@@ -20,6 +21,7 @@ Feature: 1.01-VBF-MemRedesign-To test plan benefits and Coverage functionality
     And the user validates dropdown selection functionality
     And the user validates Drug coverage header and text under the section
     And the user validates Look Up Drugs button should be visible
+    And the user validates the copay coinsurance in drug costs table
     And the user validates Locate a Pharmacy button should be visible
     #And the user should see drug copay and discount table(no code)
     And the user validates Needhelp header and disclaimer link
@@ -28,8 +30,8 @@ Feature: 1.01-VBF-MemRedesign-To test plan benefits and Coverage functionality
 
     Examples: 
       | memberType              | friendname | favcolor | phonenumber |
-       |  BncnonlisUHCIndividual   | name1      | color1   | number1     |
-      #| BncnonlisAARPIndividual | name1      | color1   | number1     |
+      # |  BncnonlisUHCIndividual   | name1      | color1   | number1     |
+      | BncnonlisAARPIndividual | name1      | color1   | number1     |
 
   @smokeTest_BenefitsAndCoverageGrp @rallyDashboard @testharness
   Scenario Outline: Verify multiple sections on Benefits and Coverage page for non-LIS group member
