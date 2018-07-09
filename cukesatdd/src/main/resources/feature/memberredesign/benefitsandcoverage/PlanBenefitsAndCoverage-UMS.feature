@@ -361,7 +361,7 @@ Given login with following details logins in the member portal and validate elem
       | Plan Type      | <planType>  |
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
- Then the user navigates to Benefits coverage page
+ Then The user navigates to Benefits and Coverage page
 And the user validates Lis member plan overview section
  	  | Name           | <name>          |
       | Member ID      | <memberid>      |
@@ -370,19 +370,23 @@ And the user validates Lis member plan overview section
       | Extra Help     | <extrahelp>     |
  And the user validates headers on Bnc page for indi members
  And the user validates the Primarycare Provider section
+       | Plan Type      | <planType>  |
  And the user validates the Out of Pocket Max section 
  And the user view the LIS Drug Copays & Discounts header
  And the user should see drug cost table for Lis members
  And the user validates Drug coverage header and text under the section
  And the user validates text for the Look Up Drugs section
  And the user validates Look Up Drugs button should be visible
+      | Plan Type      | <planType>  |
  And the user validates text for the Locate a Pharmacy section
  And the user validates Locate a Pharmacy button should be visible
+      | Plan Type      | <planType>  |
  And the drugcost dropdown should not display
  And the user validates the Learn More section link for stage
  And the user validates tier link should not display 
  And the user validates view and document label
  And the user validates static links
+    | Plan Type      | <planType>  |
 And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully
  | Language | <language> |
 And the user verifies that the correct pdfs are there in the plan material section
@@ -402,7 +406,7 @@ Given login with following details logins in the member portal and validate elem
       | Plan Type      | <planType>  |
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
- Then the user navigates to Benefits coverage page
+ Then The user navigates to Benefits and Coverage page
 And the user validates Lis member plan overview section
  	  | Name           | <name>          |
       | Member ID      | <memberid>      |
@@ -415,14 +419,17 @@ And the user should see drug cost table for Lis members
 And the user validates Drug coverage header and text under the section
 And the user validates text for the Look Up Drugs section
 And the user validates Look Up Drugs button should be visible
+  | Plan Type      | <planType>  |
 And the user validates text for the Locate a Pharmacy section
 And the user validates Locate a Pharmacy button should be visible
+  | Plan Type      | <planType>  |
 And the drugcost dropdown should not display
 And the user validates the Learn More section link for stage
 And the user validates tier link should not display 
 And the lis user validates the user click on the link it expands and when user clicks it again it should collapse
 And the user validates view and document label
  And the user validates static links
+   | Plan Type      | <planType>  |
 And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully
  | Language | <language> |
 And the user verifies that the correct pdfs are there in the plan material section
