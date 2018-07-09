@@ -57,7 +57,7 @@ public class OrderplanmaterialsPage extends UhcDriver {
 	@FindBy(id = "additionalMaterialsText")
 	private WebElement OrderConfirmation_addordermaterialLink;
 
-	@FindBy(xpath = "//h1[@class='h4 margin-none']")
+	@FindBy(xpath = "//h1[@class='main-heading margin-none']")
 	private WebElement orderMaterialHeading1;
 
 	@FindBy(xpath = "//h2[@class='h3 medium margin-large']")

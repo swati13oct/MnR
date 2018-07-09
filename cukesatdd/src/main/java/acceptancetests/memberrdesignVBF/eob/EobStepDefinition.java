@@ -1,22 +1,20 @@
 package acceptancetests.memberrdesignVBF.eob;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.memberrdesignVBF.EOBPage;
-import pages.memberrdesignVBF.RallyDashboardPage;
-import pages.memberrdesignVBF.TestHarness;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
+import cucumber.api.DataTable;
+import gherkin.formatter.model.DataTableRow;
+import pages.memberrdesignVBF.RallyDashboardPage;
+import pages.memberrdesignVBF.TestHarness;
+import pages.memberrdesignVBF.EOBPage;
 
 public class EobStepDefinition {
 	@Autowired
@@ -81,7 +79,14 @@ public class EobStepDefinition {
 		String planType = memberAttributesMap.get("Plan Type");
 		String eobTypeData = memberAttributesMap.get("EOB Type");
 		EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		if(eobTypeData.toLowerCase().contains("medical") || eobTypeData.toLowerCase().contains("prescription")){
 		eobPage.selectDateRange(dateRange, planType, eobTypeData);
+		}else if(eobTypeData.toLowerCase().contains("ship")){
+		eobPage.selectDateRangeSHIP(dateRange);
+		}
+		else{
+			Assert.fail("Eror!!! Specify valid EOB Type");
+		}
 	}
 
 	/***
