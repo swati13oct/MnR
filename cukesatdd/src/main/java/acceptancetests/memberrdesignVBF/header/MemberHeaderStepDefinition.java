@@ -3,16 +3,17 @@ package acceptancetests.memberrdesignVBF.header;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.memberrdesignVBF.BenefitsAndCoveragePage;
-import pages.memberrdesignVBF.ClaimSummarypage;
-import pages.memberrdesignVBF.RallyDashboardPage;
-import pages.memberrdesignVBF.TestHarness;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
+import pages.memberrdesignVBF.BenefitsAndCoveragePage;
+import pages.memberrdesignVBF.ClaimSummarypage;
+import pages.memberrdesignVBF.FormsAndResourcesPage;
+import pages.memberrdesignVBF.RallyDashboardPage;
+import pages.memberrdesignVBF.TestHarness;
 
-public class MemberRedesignHeaderStepDefinition {
+public class MemberHeaderStepDefinition {
 
 	@Autowired
 	MRScenario loginScenario;
@@ -124,11 +125,14 @@ public class MemberRedesignHeaderStepDefinition {
 	@Then("^then click the Forms & Resources tab and I should be directed to the Forms & Resources Page$")
 	public void then_click_the_Forms_Resources_tab_and_I_should_be_directed_to_the_Forms_Resources_Page() {
 		// Express the Regexp above with the code you wish you had
-		/*
-		 * RallyDashboardPage rallyDashboard = (RallyDashboardPage)
-		 * getLoginScenario() .getBean(PageConstants.RALLY_DASHBOARD_PAGE);
-		 * rallyDashboard.clickFormsResources();
-		 */
+		
+		  RallyDashboardPage rallyDashboard = (RallyDashboardPage)
+		  getLoginScenario() .getBean(PageConstants.RALLY_DASHBOARD_PAGE);
+		  FormsAndResourcesPage FormsAndResourcesPage =  rallyDashboard.clickFormsAndResourcesTab();
+			if (null == FormsAndResourcesPage) {
+				Assert.fail("Forms and Resources page is not loaded");
+			}
+
 	}
 
 	/***

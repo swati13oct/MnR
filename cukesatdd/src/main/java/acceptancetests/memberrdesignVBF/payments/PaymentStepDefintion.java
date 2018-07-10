@@ -3,11 +3,11 @@ package acceptancetests.memberrdesignVBF.payments;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.memberrdesignVBF.OneTimePaymentsPage;
-import pages.memberrdesignVBF.PaymentsOverview;
 import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.memberrdesignVBF.ReviewOneTimePaymentsPage;
 import pages.memberrdesignVBF.TestHarness;
+import pages.memberrdesignVBF.OneTimePaymentsPage;
+import pages.memberrdesignVBF.PaymentsOverview;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.java.en.And;
