@@ -52,7 +52,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
         | planType|  memberType  | copayCategory  | language | SummaryofBenefits    | EvidenceofCoverage       | ComprehensiveFormularyDrug List     | name        | memberid     | effectivedate | monthlypremium |   UpdatedLanguage | DisplayFlag|
          | MAPD    |  Individual  |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | DDCEE DAADF | 954016383-00 | 01/01/2018    | Not Available  | Tier 2            | true       |
          | MAPD    |  Individual  |  NON LIS      | SPANISH  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | DDCEE DAADF | 954016383-00 | 01/01/2018    | Not Available  | Tier 2            | true       |
-         | MAPD    |  Individual  |  NON LIS      | CHINESE  |                      |                          |                                     | DDE BCBF    | 006798725-01 | 01/01/2018    | Not Available  | Tier 2            | true       |
+         | MAPD    |  Individual  |  NON LIS      | CHINESE  |                      |                          |                                     | DDCEE DAADF | 954016383-00 | 01/01/2018    | Not Available  | Tier 2            | true       |
          | Medica  |  Individual  |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | EABAB AEADBD|903610182-00    | 05/01/2018    | Not Available  | Tier 2            | true       |
          | Medica  |  Individual  |  NON LIS      | SPANISH  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | EABAB AEADBD|903610182-00    | 05/01/2018    | Not Available  | Tier 2            | true       |
          |PCP     |  Individual  |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | DABDCAE AEAEEAC|928100285-00 | 01/01/2018 | Not Available  | Tier 2            | true       |
@@ -361,7 +361,7 @@ Given login with following details logins in the member portal and validate elem
       | Plan Type      | <planType>  |
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
- Then the user navigates to Benefits coverage page
+ Then The user navigates to Benefits and Coverage page
 And the user validates Lis member plan overview section
  	  | Name           | <name>          |
       | Member ID      | <memberid>      |
@@ -370,20 +370,23 @@ And the user validates Lis member plan overview section
       | Extra Help     | <extrahelp>     |
  And the user validates headers on Bnc page for indi members
  And the user validates the Primarycare Provider section
+       | Plan Type      | <planType>  |
  And the user validates the Out of Pocket Max section 
  And the user view the LIS Drug Copays & Discounts header
  And the user should see drug cost table for Lis members
  And the user validates Drug coverage header and text under the section
  And the user validates text for the Look Up Drugs section
  And the user validates Look Up Drugs button should be visible
+      | Plan Type      | <planType>  |
  And the user validates text for the Locate a Pharmacy section
  And the user validates Locate a Pharmacy button should be visible
+      | Plan Type      | <planType>  |
  And the drugcost dropdown should not display
  And the user validates the Learn More section link for stage
  And the user validates tier link should not display 
- And the lis user validates the user click on the link it expands and when user clicks it again it should collapse
  And the user validates view and document label
  And the user validates static links
+    | Plan Type      | <planType>  |
 And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully
  | Language | <language> |
 And the user verifies that the correct pdfs are there in the plan material section
@@ -395,7 +398,7 @@ And the user verifies that the correct pdfs are there in the plan material secti
  And the user validates contactus section
  Examples:
  | planType|  memberType  | copayCategory | language    | SummaryofBenefits        | EvidenceofCoverage           | ComprehensiveFormularyDrug List         | name               | memberid      | effectivedate | monthlypremium  | extrahelp            |               
- | MAPD    |  Individual  |  LIS          | ENGLISH     | Summary of Benefits      | Evidence of Coverage         | Comprehensive Formulary - Drug List     | DABDCAE CFCFFCF    | 910114420-00  | 01/01/2018     | Not Available  | Extra Help Level : 1 |
+ | MAPD    |  Individual  |  LIS           | ENGLISH     | Summary of Benefits      | Evidence of Coverage         | Comprehensive Formulary - Drug List     | DABDCAE CFCFFCF    | 910114420-00  | 01/01/2018     | Not Available  | Extra Help Level : 1 |
  
  @CMpdpindlis
 Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
@@ -403,7 +406,7 @@ Given login with following details logins in the member portal and validate elem
       | Plan Type      | <planType>  |
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
- Then the user navigates to Benefits coverage page
+ Then The user navigates to Benefits and Coverage page
 And the user validates Lis member plan overview section
  	  | Name           | <name>          |
       | Member ID      | <memberid>      |
@@ -416,14 +419,17 @@ And the user should see drug cost table for Lis members
 And the user validates Drug coverage header and text under the section
 And the user validates text for the Look Up Drugs section
 And the user validates Look Up Drugs button should be visible
+  | Plan Type      | <planType>  |
 And the user validates text for the Locate a Pharmacy section
 And the user validates Locate a Pharmacy button should be visible
+  | Plan Type      | <planType>  |
 And the drugcost dropdown should not display
 And the user validates the Learn More section link for stage
 And the user validates tier link should not display 
 And the lis user validates the user click on the link it expands and when user clicks it again it should collapse
 And the user validates view and document label
  And the user validates static links
+   | Plan Type      | <planType>  |
 And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully
  | Language | <language> |
 And the user verifies that the correct pdfs are there in the plan material section
@@ -567,26 +573,27 @@ And the user verifies that the correct pdfs are there in the plan material secti
     Scenario Outline: Verify the outpatient widget for a member withprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType> |
-      #| Member Type   | <memberType> |
+      | Member Type   | <memberType> |
     Then the user navigates to Benefits coverage page
     And the user validates the Outpatient Surgery Center Visits section
 
 
     Examples: 
-      | planType | 
-      | MAPD     |     
+      | planType | memberType |
+      | MAPD     | MAPDCOSMOS |    
 
 	@primarycareproviderspecialist   @regressionprimarycareprovider  @regression_06_06_18
     Scenario Outline: Verify the Office visits widget for a member withprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
+      | Member Type   | <memberType> |
     Then the user navigates to Benefits coverage page
     And the user validates the Office Visits section
 
 
     Examples: 
-      | planType |
-      | MAPD    |
+      | planType | memberType |
+      | MAPD     | COSMOSOfficevisit |
     
     
 
@@ -594,15 +601,15 @@ And the user verifies that the correct pdfs are there in the plan material secti
     Scenario Outline: Verify the outpatient widget for a member withprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType> |
-      #| Member Type   | <memberType> |
+      | Member Type   | <memberType> |
     Then the user navigates to Benefits coverage page
     And the user validates the Outpatient Surgery Center Visits section
 
 
 
     Examples: 
-      | planType | 
-      | MAPD     |  
+      | planType | memberType |
+      | MAPD     | NICEBenefits |
    
 
    @BenefitsForAlPeehipMember @regression @regression_06_06_18

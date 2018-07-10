@@ -17,7 +17,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
-
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
@@ -440,11 +441,12 @@ private WebElement PlanMaterialSection;
 
       		return null;
        }
-       public void waitForHomePage() {
-
-       	waitforElement(helloPerson);
-
-       }
+       
+       public void waitForHomePage(WebElement element) {
+	       WebDriverWait wait = new WebDriverWait(driver, 90);
+           wait.until(ExpectedConditions.visibilityOf(element));
+   
+   }
 	
 	/*
 	 * This function clicks on Benefits and Coverage link from Dashboard after waiting
@@ -453,7 +455,7 @@ private WebElement PlanMaterialSection;
        
 	public BenefitsAndCoveragePage navigateToBandCPage() {
 
-		waitForHomePage();
+		waitForHomePage(helloPerson);
 		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
 			System.out.println("user is on Stage login page");
 			// CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);
@@ -743,6 +745,7 @@ private WebElement PlanMaterialSection;
        }
 
        public void verifyPageTitle() throws InterruptedException {
+    	      waitForHomePage(helloPerson);
               String title = driver.getTitle();
               // Assert.assertEquals(title, "Home | UnitedHealthcare");
               Assert.assertTrue(title.contains("UnitedHealthcare"));
