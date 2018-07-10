@@ -29,7 +29,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
       
       
       
-  @claimsSummarySHIP @theTransformers
+  @claimsSummarySHIP @theTransformers @regression_06_06_18
   Scenario Outline: To validate the claims present for the SHIP member on claims sumamry page for AARP site
     Given login with following details logins in the member portal and validate elements
       #  Given I am an Individual or Group member on the redesigned site
@@ -155,7 +155,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
       #| MAPD     | Custom Search | 10/10/2017  | 06/14/2012    |
       
       
-  @claimsSummaryAndDetails
+  @claimsSummaryAndDetails @regression_06_06_18
   Scenario Outline: To validate the claims present for the Federal member on claims sumamry page for AARP site
    Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>     |
