@@ -87,20 +87,30 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(className = "atdd-benefitssummary-ancillaryHearingText")
 	private WebElement Hearingsection;
+	
+	@FindBy(xpath = ".//*[@id='ancillary']/div/div/div/div/div/div[2]/div[1]/div/div[2]/div/div[1]/p[2]")
+	private WebElement HearingContent;
+	
+	@FindBy(xpath= ".//*[@id='ancillary']/div/div/div/div/div/div[2]/div[3]/div[1]/div/div[2]/div/div[1]/div[1]/p[2]")
+	private WebElement VisionContent;
 
 	@FindBy(className = "atdd-benefitssummary-exclusivehearing")
 	private WebElement Hearingaid;
 
-	@FindBy(xpath = "atdd-benefitssummary-vision")
+	@FindBy(className = "atdd-benefitssummary-vision")
 	private WebElement Visionsection;
 
-	@FindBy(xpath = "atdd-benefitssummary-dental")
+	@FindBy(className = "atdd-benefitssummary-dental")
 	private WebElement Dentalsection;
+	
+	@FindBy(xpath = ".//*[@id='ancillary']/div/div/div/div/div/div[2]/div[3]/div[2]/div/div[2]/div/div[1]/p[2]")
+	private WebElement DentalContent;
+	
 
 	@FindBy(className = "atdd-benefitssummary-ancillaryHeader")
 	private WebElement Headersection;
 
-	@FindBy(xpath = ".//*[@id='ancillary']/div[2]/div[4]/div/div")
+	@FindBy(className = ".//*[@id='ancillary']/div[2]/div[4]/div/div")
 	private WebElement chiropracticsection;
 
 	@FindBy(className = "atdd-bnc-drgcvrgeinfo")
@@ -843,7 +853,13 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		} catch (Exception e) {
 			System.out.println("Elements is not found ...");
 		}
-	}
+		try {
+			validate(HearingContent);
+			System.out.println(HearingContent.getText());
+		} catch (Exception e) {
+			System.out.println("Elements is not found ...");
+		}
+		}
 
 	/**
 	 * @toDo : The user validates the Hearing aid section of Ancillary Benefits
@@ -868,6 +884,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		} catch (Exception e) {
 			System.out.println("Elements is not found ...");
 		}
+		try {
+			validate(VisionContent);
+		} catch (Exception e) {
+			System.out.println("Elements is not found ...");
+		}
 	}
 
 	/**
@@ -875,12 +896,18 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	 */
 
 	public void Dental() {
-
+        
 		try {
 			validate(Dentalsection);
 		} catch (Exception e) {
 			System.out.println("Elements is not found ...");
 		}
+		try {
+			validate(DentalContent);
+		} catch (Exception e) {
+			System.out.println("Elements is not found ...");
+		}
+		
 	}
 
 	/**
@@ -1023,6 +1050,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		} else {
 			Assert.fail("The element " + ProceedButton.getText() + "is not found");
 		}
+		
 		return true;
 	}
 
