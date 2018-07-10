@@ -57,7 +57,7 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath = "//header//h1")
 	private WebElement heading;
 
-	@FindBy(xpath = "//h1[@class='h4 margin-none']")
+	@FindBy(xpath = "//h1[contains(@class,'margin-none')]")
 	private WebElement orderplanHeadertxt;
 
 	@FindBy(xpath = "//div[@class='tabs-desktop']/ul[@class='nav nav-tabs']/li")
