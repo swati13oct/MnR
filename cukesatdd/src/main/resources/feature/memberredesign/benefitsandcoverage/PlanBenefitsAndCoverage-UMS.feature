@@ -173,7 +173,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
      Examples: 
        | planType|  memberType  | copayCategory |
        | MAPD    |  Group       |  NON LIS      |
-      #| MA      |  Group       |  HMO          | 
+       | MA      |  Group       |  NON LIS      | 
       
       
    @CMAncillarysection2
@@ -182,7 +182,8 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | Plan Type      | <planType>  |
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
-    When The user navigates to Benefits and Coverage page
+    Then The user navigates to Benefits and Coverage page
+     | Plan Type      | <planType>  |
     Then user validates and clicks on Disclaimers link under Exclusive hearing
     Then user validates and clicks on Learn More button under Exclusive hearing section
     And user validates the Leaving  popup
@@ -191,7 +192,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
      
      Examples: 
        | planType|  memberType  | copayCategory |
-       #| MA      |  Group       |  HMO          |
+       | MA      |  Group       |  NON LIS      |
        | MAPD    |  Group       |  NON LIS      |
             
     

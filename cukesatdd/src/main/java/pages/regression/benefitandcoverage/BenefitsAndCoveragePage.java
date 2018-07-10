@@ -88,10 +88,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-benefitssummary-ancillaryHearingText")
 	private WebElement Hearingsection;
 	
-	@FindBy(xpath = ".//*[@id='ancillary']/div/div/div/div/div/div[2]/div[1]/div/div[2]/div/div[1]/p[2]")
+	@FindBy(xpath = ".//*[@class='bold margin-small atdd-bnc-hearingtxt-subtitle']//following-sibling::p")
 	private WebElement HearingContent;
 	
-	@FindBy(xpath= ".//*[@id='ancillary']/div/div/div/div/div/div[2]/div[3]/div[1]/div/div[2]/div/div[1]/div[1]/p[2]")
+	@FindBy(xpath= ".//*[@class='margin-small bold atdd-benefitssummary-eyewear']//following-sibling::p")
 	private WebElement VisionContent;
 
 	@FindBy(className = "atdd-benefitssummary-exclusivehearing")
@@ -103,9 +103,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-benefitssummary-dental")
 	private WebElement Dentalsection;
 	
-	@FindBy(xpath = ".//*[@id='ancillary']/div/div/div/div/div/div[2]/div[3]/div[2]/div/div[2]/div/div[1]/p[2]")
+	@FindBy(xpath = ".//*[@class='bold margin-small atdd-benefitssummary-routine-dental']//following-sibling::p")
 	private WebElement DentalContent;
-	
 
 	@FindBy(className = "atdd-benefitssummary-ancillaryHeader")
 	private WebElement Headersection;
