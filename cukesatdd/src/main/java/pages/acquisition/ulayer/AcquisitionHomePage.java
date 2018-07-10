@@ -183,11 +183,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validate(navigationSectionOurPlansLink);
 		validate(navigationSectionMedicareEducationLink);
 		validate(navigationSectionEnterSearch);
-		validate(getStartedButton);
+		//validate(getStartedButton);
 
 		validate(zipCodeField);
 		validate(viewPlansButton);
-		validate(po7Link);
+		//validate(po7Link);
 
 		validate(footerAboutUsLink);
 		validate(footerContactUsLink);

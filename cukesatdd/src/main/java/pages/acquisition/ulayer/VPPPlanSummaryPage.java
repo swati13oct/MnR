@@ -112,7 +112,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[1]//*[@class='trigger-closed']")
 	private WebElement viewPlans;
 	
-	@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='plan-overview-wrapper']/div[2]/div[3]//span[@class='trigger-closed']")
+	@FindBy(xpath = "div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[3]//*[@class='trigger-closed']")
 	private WebElement viewPDPPlans;
 	
 	@FindBy(className = "switchPlanYear")
@@ -757,26 +757,17 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 
 		} else if (planType.equalsIgnoreCase("PDP")) {
-//			ElementData elementData = new ElementData("id", "viewmoredetlinkpdp");
-//			WebElement element = getViewPlanDetailsElement(pdpPlanElement, elementData, planName);
 			WebElement PDPmoreDetailsLink = driver.findElement(By.xpath("//h2[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@id = 'viewmoredetlinkpdp']"));
 			validate(PDPmoreDetailsLink);
 			PDPmoreDetailsLink.click();
 			System.out.println("View Plan Details Link is clicked for PDP plan"+planName);
 			
-/*			if (element != null) {
-				element.click();
-			}
-*/
 		}
 		
 		CommonUtility.checkPageIsReady(driver);
-		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_AARPMP)
-				|| driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_PLAN_DETAIL) || validate(backToPlansLink)) {
-				//|| driver.getTitle().equalsIgnoreCase("Plan Detail") || driver.getCurrentUrl().contains("/details")) {
+		if (driver.getCurrentUrl().contains("#/details")) {	
 			return new PlanDetailsPage(driver);
 		}
-
 		return null;
 	}
 	
@@ -1057,6 +1048,19 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return null;
 	}
 
+	public DrugCostEstimatorPage navigateToDCEFromVPP(String plantype, String planName){
+		if(plantype.equals("MA")||plantype.equals("MAPD")){
+			WebElement dceLink = driver.findElement
+					(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide ng-scope')]/descendant::a[contains(text(),'Enter drug information')]"));
+			if(validate(dceLink))
+				dceLink.click();
+			
+		}else{}
+		
+		if(currentUrl().contains("/estimate-drug-costs.html#/drug-cost-estimator"))
+			return new DrugCostEstimatorPage(driver);
+		return null;
+	}
 }
 
 	

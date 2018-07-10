@@ -312,7 +312,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id = "step3DisclaimerVPP")
 	public WebElement step3DisclaimerVPP;
 
-	@FindBy(id = "dce")
+	@FindBy(id= "dce")
 	public WebElement getStarted;
 
 	@FindBy(id = "zipcode-costs")
@@ -1703,7 +1703,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		}
 		((JavascriptExecutor)driver).executeScript("arguments[0].click();", returnLink);
 		try {
-			Thread.sleep(15000);
+			Thread.sleep(30000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1748,13 +1748,15 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		driver.navigate().refresh();
+		//driver.navigate().refresh();
 		return new VPPPlanSummaryPage(driver);
 		}else{
 			System.out.println("====================Our Plans tab not displayed================");
 			return null;
 		}
 	}
-	
+	public void clicksOnReturnLink(){
+		returnLink.click();	
+	}
 
 }
