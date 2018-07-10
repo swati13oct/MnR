@@ -1,5 +1,7 @@
 package pages.memberrdesignVBF;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -7,9 +9,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
+import acceptancetests.memberrdesignVBF.common.CommonStepDefinition;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.memberrdesignVBF.HealthAndWellness;
 
 public class TestHarness extends UhcDriver {
 
@@ -55,6 +60,11 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath = "//h1[@class='h4 margin-none']")
 	private WebElement orderplanHeadertxt;
 
+	@FindBy(xpath = "//div[@class='tabs-desktop']/ul[@class='nav nav-tabs']/li")
+	private List<WebElement> tabsForComboMember;
+
+	String category = null;
+
 	public TestHarness(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -63,9 +73,17 @@ public class TestHarness extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
+		category = CommonStepDefinition.getMemberAttributeMap().get("Member Type");
+		RallyDashboardPage.checkModelPopup(driver);
 		validateNew(heading);
 		validateNew(orderPlanPageLink);
 		validateNew(claimsPageLink);
+		if (category.contains(CommonConstants.CATEGORY_TERMIATED)) {
+			validateNew(tabsForComboMember.get(0));
+			Assert.assertTrue("Terminated Tab exists...",
+					tabsForComboMember.get(0).getText().toUpperCase().contains("TERMINATED"));
+		}
+
 	}
 
 	/***
@@ -84,7 +102,7 @@ public class TestHarness extends UhcDriver {
 		validateNew(PaymentPageLik);
 		PaymentPageLik.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getTitle().equalsIgnoreCase("Overview")) {
+		if (driver.getTitle().contains("Payment")) {
 			return new PaymentsOverview(driver);
 		}
 		// }
@@ -126,6 +144,10 @@ public class TestHarness extends UhcDriver {
 		if (!(("GroupRetireeMapd").equalsIgnoreCase(Category))) {
 			validateNew(PaymentPageLik);
 		}
+		if (("ComboMAPDANDSHIP").equalsIgnoreCase(Category)) {
+			validateNew(tabsForComboMember.get(0));
+			validateNew(tabsForComboMember.get(1));
+		}
 		validateNew(formsPageLink);
 		validateNew(claimsPageLink);
 		validateNew(benefitsPageLink);
@@ -146,7 +168,7 @@ public class TestHarness extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println(driver.getTitle());
 
-		if (driver.getTitle().equalsIgnoreCase("Benefits Overview")) {
+		if (driver.getTitle().contains("Benefits Overview")) {
 			return new BenefitsAndCoveragePage(driver);
 		}
 		return null;
@@ -161,7 +183,7 @@ public class TestHarness extends UhcDriver {
 		validateNew(claimsPageLink);
 		claimsPageLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getTitle().equalsIgnoreCase("Claims")) {
+		if (driver.getTitle().contains("Claims")) {
 			return new ClaimSummarypage(driver);
 		}
 		return null;
@@ -172,10 +194,19 @@ public class TestHarness extends UhcDriver {
 	 * @return
 	 */
 	public ContactUsPage navigateToContactUsPage() {
+
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,-500)", "");
 		validateNew(contactUsPageLink);
 		contactUsPageLink.click();
-		CommonUtility.waitForPageLoadNew(driver, heading, 10);
-		if (driver.getTitle().equalsIgnoreCase("Overview")) {
+		CommonUtility.waitForPageLoadNew(driver, heading, CommonConstants.TIMEOUT_30);
+		try {
+			Thread.sleep(3000L);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (driver.getTitle().trim().contains("Overview")) {
 			return new ContactUsPage(driver);
 		}
 		return null;
@@ -204,7 +235,7 @@ public class TestHarness extends UhcDriver {
 		validateNew(eobPageLink);
 		eobPageLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (!(driver.getTitle().equalsIgnoreCase("EOB Search"))) {
+		if (!(driver.getTitle().contains("EOB Search"))) {
 			Assert.fail("EOB page not getting displayed");
 			return null;
 		} else {
@@ -291,7 +322,7 @@ public class TestHarness extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println(driver.getTitle());
 
-		if ("Profile".equalsIgnoreCase(driver.getTitle())) {
+		if ("Profile".contains(driver.getTitle())) {
 			System.out.println("Pass!");
 			return new ProfilePreferencesPage(driver);
 		}
@@ -320,6 +351,24 @@ public class TestHarness extends UhcDriver {
 			}
 
 		} while (!(driver.getTitle().contains("Find Care")));
+		return null;
+	}
+
+	/***
+	 * 
+	 * @return
+	 */
+	public FormsAndResourcesPage navigateDirectToFnRPage() {
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,50)", "");
+		scrollToView(formsPageLink);
+		jsClickNew(formsPageLink);
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println(driver.getTitle());
+
+		if (driver.getTitle().contains("Documents Overview")) {
+			return new FormsAndResourcesPage(driver);
+		}
 		return null;
 	}
 
