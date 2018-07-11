@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import junit.framework.Assert;
+import pages.acquisition.ulayer.PageTitleConstants;
+import pages.acquisition.ulayer.PharmacyResultPage;
 
 import org.json.JSONException;
 import org.json.JSONObject;

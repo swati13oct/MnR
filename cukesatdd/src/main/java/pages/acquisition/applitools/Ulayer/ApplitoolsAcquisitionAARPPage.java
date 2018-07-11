@@ -1,4 +1,4 @@
-package pages.acquisition.applitools;
+package pages.acquisition.applitools.Ulayer;
 
 import org.openqa.selenium.WebDriver;
 
