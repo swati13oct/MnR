@@ -1,4 +1,6 @@
 package pages.regression.claims;
+import java.util.List;
+
 /**
  * 
  */
@@ -9,6 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import cucumber.api.java.en.And;
 import junit.framework.Assert;
@@ -80,6 +83,24 @@ public class ClaimDetailsPage extends UhcDriver{
 	
 	@FindBy(xpath =".//*[@id='claimDetailsHeaders']/p")
 	private WebElement medicalClaimDetailsText;
+	
+	@FindBy(css= "#claimSearchButtonBottom")
+	public WebElement claimsHistoryLink;
+	
+	@FindBy(css="#claimSearchButton")
+	private WebElement claimsearch;
+	
+	@FindBy(xpath=".//*[@id='learnmoredetailstoggle']")
+	private WebElement learnmoreCost;
+	
+	@FindBy(xpath="//span[text()='Ship EOB']/parent::a")
+	private WebElement EOBshipcombo;
+	
+	@FindBy(xpath=".//*[@id='shipIndSNFDetailsTable']")
+	private WebElement shipcombotable;
+	
+	@FindBy (xpath= "//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li")
+	private List<WebElement> comboTabsOnclaimsPage;
 	
 	@FindBy(xpath = ".//*[@id='ship_eob']/div/section/a/p")
 	private WebElement EOB;
@@ -293,5 +314,54 @@ public class ClaimDetailsPage extends UhcDriver{
 		}
 		
 	}
+	/**
+	 * 
+	 */
+	public void validateClaimSearchLINK(){
+		CommonUtility.waitForPageLoad(driver, claimsHistoryLink, 90);
+		validate(claimsearch);
+		System.out.println("*** Claim search Link is seen on the page ===>"+claimsearch.isDisplayed());
+		if (driver.getTitle().equalsIgnoreCase("/details")) {
+			System.out.println("*** Combo Member is on Claims Details Page ***");
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void learnMoreCostLink(){
+		validate(learnmoreCost);
+		System.out.println("Learm more cost break down link is seen" +learnmoreCost.isDisplayed());
+		//learnmoreCost.click();		
+	}
+	public void shipdetailcombo(){
+		validate(shipcombotable);
+		System.out.println("Cliam detail table is seen for Ship combo member");
+	}
+	public void EOBShipcombo(){
+		validate(EOBshipcombo);
+		System.out.println("EOB for combo ship plan is seen on claim details page");
+}
+	public void validateClaimHistory(){
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	validate(claimsHistoryLink);
+	System.out.println("claimsHistoryLink.isDisplayed==>"+claimsHistoryLink.isDisplayed());
 	
 }
+	public void comboTabs() {
+		
+		for (WebElement webElement : comboTabsOnclaimsPage) {
+			System.out.println("The COMBO plans names seen on the page are ==> " + webElement.getText());
+			webElement.click();
+			System.out.println(driver.getCurrentUrl());
+		}
+ }
+  }
