@@ -65,10 +65,26 @@ When the user clicks on PDP plans and takes screenshot
 And the user goes to the view plan details page for PDP plan and takes screenshots
 	|Plan Type2| <planType2> |
 	|Plan Name2| <planName2> |
-And the user clicks on Request More Help and Info link in Our plans and takes screenshots
-And the user clicks on Request Agent appointment link and takes screenshots
-And the user clicks on Find Uhc in your community link and takes screenshots
-And the user clicks on Request PDP Info and enrollment link and takes screenshots
+And the user goes to Request More Help and Info link page in Our plans and takes screenshot
+And the user goes to Request Agent appointment link page and takes screenshot
+And the user goes to Find Uhc in your community link page and takes screenshot
+And the user goes to Request PDP Inquiry Kit page and takes screenshot
+And the user goes to Medicare Advantage Plans Link page under Our plans and takes screenshot
+And the user goes to How do I enroll under Medicare Advantage page and takes screenshot
+And the user goes to Resources and Materials page under Medicare Advantage page and takes screenshot
+And the user goes to Prescription Drug Plans page from Our Plans and takes screenshot
+And the user goes to How do I enroll under Prescription Drug Plans page and takes screenshot
+And the user goes to Resources and Materials page under Prescription Drug Plans page and takes screenshot
+And the user goes to Plan Selector page from Our Plans tab and takes screenshot
+And the user goes to pharmacy locator page from Our Plans tab and takes screenshot
+And the user goes to about us page from the footer and takes screenshot
+And the user goes to contact us page from the footer and takes screenshot
+And the user goes to sitemap page from the footer and takes screenshot
+And the user goes to privacy policy page from the footer and takes screenshot
+And the user goes to terms and conditions page from the footer and takes screenshot
+And the user goes to disclaimer page from the footer and takes screenshot
+And the user goes to agents and brokers page from the footer and takes screenshot
+And the user goes to Accessibility page from the footer and takes screenshot
 
 Examples:
 	| zipcode 	| planType | planName 										  |  drug            |planType2 | planName2 						  | 

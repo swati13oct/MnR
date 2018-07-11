@@ -29,7 +29,7 @@ public class ApplitoolsObject {
 	
 	public void takeScreenshot(WebDriver wd, String appName, String testName, String windowName ){
 		eyes.setMatchLevel(MatchLevel.CONTENT);
-		eyes.open(wd, appName, testName,new RectangleSize(1280, 960));
+		eyes.open(wd, appName, testName,new RectangleSize(1024, 700));
 		eyes.checkWindow(windowName);
 		eyes.close();
 	}

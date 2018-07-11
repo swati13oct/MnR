@@ -6,12 +6,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.json.JSONObject;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import acceptancetests.vbfacquisition.vpp.VPPCommonConstants;
@@ -26,30 +20,16 @@ import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import cucumber.api.java.Before;
 import cucumber.api.DataTable;
-import cucumber.api.java.After;
-import pages.acquisition.applitools.ApplitoolsAcquisitionAARPPage;
+
+import pages.acquisition.applitools.Ulayer.ApplitoolsAcquisitionAARPPage;
 import pages.acquisition.ulayer.AboutUsAARPPage;
-import pages.acquisition.ulayer.AcquisitionHomePage;
-import pages.acquisition.ulayer.AgentsnBrokersAARPPage;
-import pages.acquisition.ulayer.ContactUsAARPPage;
-import pages.acquisition.ulayer.DisclaimersAARPPage;
-import pages.acquisition.ulayer.DrugCostEstimatorPage;
-import pages.acquisition.ulayer.PlanDetailsPage;
-import pages.acquisition.ulayer.PrivacyPolicyAARPPage;
-import pages.acquisition.ulayer.RequestAgentAppointmentPage;
-import pages.acquisition.ulayer.RequestHelpAndInformationPage;
-import pages.acquisition.ulayer.SiteMapAARPPage;
-import pages.acquisition.ulayer.TermsnConditionsAARPPage;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
-import com.applitools.eyes.selenium.Eyes;
-import com.applitools.eyes.BatchInfo;
-import com.applitools.eyes.MatchLevel;
-import com.applitools.eyes.RectangleSize;
-import com.applitools.eyes.TestResults;
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.TakesScreenshot;
-import java.io.File;
-import java.io.IOException;
+import pages.acquisition.applitools.Ulayer.AcquisitionHomePage;
+
+import pages.acquisition.applitools.Ulayer.DrugCostEstimatorPage;
+import pages.acquisition.applitools.Ulayer.PlanDetailsPage;
+
+import pages.acquisition.applitools.Ulayer.VPPPlanSummaryPage;
+
 /**
  *Functionality:Global Header Footer 
  */
@@ -65,8 +45,9 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 	@Before
 	public void setApplitools() {
 		 appObj = new ApplitoolsObject();
-		appObj.setBatch("Test batch");
+		appObj.setBatch(MRScenario.environment+" batch");
 		appObj.setApplitools();
+		
 	}
 	
 	
@@ -113,7 +94,7 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 
 		String plantype =memberAttributesRow.get(0).getCells().get(1);
 		String planName = memberAttributesRow.get(1).getCells().get(1);
-		String drug = memberAttributesRow.get(2).getCells().get(1);
+		//String drug = memberAttributesRow.get(2).getCells().get(1);
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) loginScenario.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		DrugCostEstimatorPage dce = plansummaryPage.navigateToDCEFromVPP(plantype,planName);
 		appObj.takeScreenshot(wd,"Acquisition AARP", "DCE Step 1", "dce_step1");
@@ -184,7 +165,7 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 		loginScenario.saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 	}
 	
-	@And("^the user clicks on Request More Help and Info link in Our plans and takes screenshots$")
+	@And("^the user goes to Request More Help and Info link page in Our plans and takes screenshot$")
 	public void clickOnRequestMoreHelpAndInfoLink(){
 		WebDriver wd = (WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		String url = "https://www.stage-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/request-information.html";
@@ -194,7 +175,7 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 
 	}
 	
-	@And("^the user clicks on Request Agent appointment link and takes screenshots$")
+	@And("^the user goes to Request Agent appointment link page and takes screenshot$")
 	public void clickOnRequestAgentAppt(){
 		WebDriver wd = (WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		String url = "https://www.stage-aarpmedicareplans.uhc.com/content/aarpmedicareplans/en/health-plans/medicare-advantage-plans/request-information/agentebrc.html";
@@ -204,7 +185,7 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 		
 	}
 	
-	@And("^the user clicks on Find Uhc in your community link and takes screenshots$")
+	@And("^the user goes to Find Uhc in your community link page and takes screenshot$")
 	public void clickOnFindCommunity(){
 		WebDriver wd = (WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		String url = "https://www.stage-aarpmedicareplans.uhc.com/content/aarpmedicareplans/en/health-plans/medicare-advantage-plans/request-information/attend.html";
@@ -213,8 +194,17 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 		appObj.takeScreenshot(wd,"Acquisition AARP", "Find Uhc in community Page", "communityPage");
 	}
 	
-	@And("^the user clicks on Request PDP Info and enrollment link and takes screenshots$")
-	public void clickOnPDPInquiry(){
+	@And("^the user goes to Request PDP Inquiry Kit page and takes screenshot$")
+	public void goesToPDPInfoEnrollmentPage(){
+		WebDriver wd = (WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		String url = "https://www.stage-aarpmedicareplans.uhc.com/health-plans/prescription-drug-plans/request-information/inquirykit.html";
+		
+		ApplitoolsAcquisitionAARPPage appAcqpage = new ApplitoolsAcquisitionAARPPage(wd,url);
+		appObj.takeScreenshot(wd,"Acquisition AARP", "PDP Inquiry Kit Page", "pdpInquiryPage");
+	}
+	
+	@And("^the user goes to Medicare Advantage Plans Link page under Our plans and takes screenshot$")
+	public void clickOnMedicareAdvantagePlans(){
 		WebDriver wd = (WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		String url = "https://www.stage-aarpmedicareplans.uhc.com/content/aarpmedicareplans/en/health-plans/prescription-drug-plans/request-information/inquirykit.html";
 		
@@ -222,5 +212,139 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 		appObj.takeScreenshot(wd,"Acquisition AARP", "PDP Info and Enrollment Materials page", "pdpInfoAndEnrollment");
 	}
 	
+	@And("^the user goes to How do I enroll under Medicare Advantage page and takes screenshot$")
+	public void howDoIEnrollPage(){
+			WebDriver wd = (WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+			String url = "https://www.stage-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/medicare-enrollment.html";
+			
+			ApplitoolsAcquisitionAARPPage appAcqpage = new ApplitoolsAcquisitionAARPPage(wd,url);
+			appObj.takeScreenshot(wd,"Acquisition AARP", "How do I Enroll Page", "howDoIEnrollPage");
+	}
+	
+	@And("^the user goes to Resources and Materials page under Medicare Advantage page and takes screenshot$")
+	public void resourcesMaterialsPage(){
+			WebDriver wd = (WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+			String url = "https://www.stage-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/resources-plan-material.html";
+			
+			ApplitoolsAcquisitionAARPPage appAcqpage = new ApplitoolsAcquisitionAARPPage(wd,url);
+			appObj.takeScreenshot(wd,"Acquisition AARP", "Resoureces Materials MA Plans Page", "resourcesMaterialsPage");
+	}	
+	
+	@And("^the user goes to Prescription Drug Plans page from Our Plans and takes screenshot$")
+	public void pdpPlansPage(){
+			WebDriver wd = (WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+			String url = "https://www.stage-aarpmedicareplans.uhc.com/health-plans/prescription-drug-plans.html";
+			
+			ApplitoolsAcquisitionAARPPage appAcqpage = new ApplitoolsAcquisitionAARPPage(wd,url);
+			appObj.takeScreenshot(wd,"Acquisition AARP", "Prescription Drug Plans Page", "presDrugPlansPage");
+	}	
+	
+	@And("^the user goes to How do I enroll under Prescription Drug Plans page and takes screenshot$")
+	public void howDoIEnrollPagePDP(){
+			WebDriver wd = (WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+			String url = "https://www.stage-aarpmedicareplans.uhc.com/health-plans/prescription-drug-plans/medicare-application.html";
+			
+			ApplitoolsAcquisitionAARPPage appAcqpage = new ApplitoolsAcquisitionAARPPage(wd,url);
+			appObj.takeScreenshot(wd,"Acquisition AARP", "How do I Enroll PDP Page", "howDoIEnrollPDPPage");
+	}
+	
+	@And("^the user goes to Resources and Materials page under Prescription Drug Plans page and takes screenshot$")
+	public void resourcesMaterialsPagePDP(){
+			WebDriver wd = (WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+			String url = "https://www.stage-aarpmedicareplans.uhc.com/health-plans/prescription-drug-plans/resources.html";
+			
+			ApplitoolsAcquisitionAARPPage appAcqpage = new ApplitoolsAcquisitionAARPPage(wd,url);
+			appObj.takeScreenshot(wd,"Acquisition AARP", "Resoureces Materials PDP Page", "resourcesMaterialsPDPPage");
+	}
+	
+	@And("^the user goes to Plan Selector page from Our Plans tab and takes screenshot$")
+	public void planSelectorPage(){
+			WebDriver wd = (WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+			String url = "https://www.aarpmedicareplans.com/content/aarpmedicareplans/en/medicare-plans.html";
+			
+			ApplitoolsAcquisitionAARPPage appAcqpage = new ApplitoolsAcquisitionAARPPage(wd,url);
+			appObj.takeScreenshot(wd,"Acquisition AARP", "Plan Selector Page", "planSelectorPage");
+	}
+	
+	@And("^the user goes to pharmacy locator page from Our Plans tab and takes screenshot$")
+	public void pharmacyLocatorPage(){
+			WebDriver wd = (WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+			String url = "https://www.aarpmedicareplans.com/health-plans/aarp-pharmacy.html#/Pharmacy-Search-English";
+			
+			ApplitoolsAcquisitionAARPPage appAcqpage = new ApplitoolsAcquisitionAARPPage(wd,url);
+			appObj.takeScreenshot(wd,"Acquisition AARP", "Pharmacy Locator Page", "pharmacyLocatorPage");
+	}
+	
+	@And("^the user goes to about us page from the footer and takes screenshot$")
+	public void aboutUsPage(){
+			WebDriver wd = (WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+			String url = "https://www.aarpmedicareplans.com/content/aarpmedicareplans/en/about-us.html";
+			
+			ApplitoolsAcquisitionAARPPage appAcqpage = new ApplitoolsAcquisitionAARPPage(wd,url);
+			appObj.takeScreenshot(wd,"Acquisition AARP", "About Us Page", "aboutUsPage");
+	}
+	
+	@And("^the user goes to contact us page from the footer and takes screenshot$")
+	public void contactUsPage(){
+			WebDriver wd = (WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+			String url = "https://www.aarpmedicareplans.com/content/aarpmedicareplans/en/contact-us.html";
+			
+			ApplitoolsAcquisitionAARPPage appAcqpage = new ApplitoolsAcquisitionAARPPage(wd,url);
+			appObj.takeScreenshot(wd,"Acquisition AARP", "Contact Us Page", "contactUsPage");
+	}
+	
+	@And("^the user goes to sitemap page from the footer and takes screenshot$")
+	public void sitemapPage(){
+			WebDriver wd = (WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+			String url = "https://www.aarpmedicareplans.com/content/aarpmedicareplans/en/sitemap.html";
+			
+			ApplitoolsAcquisitionAARPPage appAcqpage = new ApplitoolsAcquisitionAARPPage(wd,url);
+			appObj.takeScreenshot(wd,"Acquisition AARP", "Sitemap Page", "sitemapPage");
+	}
+	
+	@And("^the user goes to privacy policy page from the footer and takes screenshot$")
+	public void privacy_policyPage(){
+			WebDriver wd = (WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+			String url = "https://www.aarpmedicareplans.com/content/aarpmedicareplans/en/privacy_policy.html";
+			
+			ApplitoolsAcquisitionAARPPage appAcqpage = new ApplitoolsAcquisitionAARPPage(wd,url);
+			appObj.takeScreenshot(wd,"Acquisition AARP", "Privacy Policy Page", "privacyPolicyPage");
+	}
+	
+	@And("^the user goes to terms and conditions page from the footer and takes screenshot$")
+	public void terms_and_conditionsPage(){
+			WebDriver wd = (WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+			String url = "https://www.aarpmedicareplans.com/content/aarpmedicareplans/en/terms_and_conditions.html";
+			
+			ApplitoolsAcquisitionAARPPage appAcqpage = new ApplitoolsAcquisitionAARPPage(wd,url);
+			appObj.takeScreenshot(wd,"Acquisition AARP", "Terms and Conditions Page", "terms_and_conditionsPage");
+	}
+	
+	@And("^the user goes to disclaimer page from the footer and takes screenshot$")
+	public void disclaimerPage(){
+			WebDriver wd = (WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+			String url = "https://www.aarpmedicareplans.com/content/aarpmedicareplans/en/disclaimer.html";
+			
+			ApplitoolsAcquisitionAARPPage appAcqpage = new ApplitoolsAcquisitionAARPPage(wd,url);
+			appObj.takeScreenshot(wd,"Acquisition AARP", "Disclaimer Page", "disclaimerPage");
+	}
+	
+	@And("^the user goes to agents and brokers page from the footer and takes screenshot$")
+	public void agentAndBrokersPage(){
+			WebDriver wd = (WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+			String url = "https://www.aarpmedicareplans.com/content/aarpmedicareplans/en/health-insurance-brokers.html";
+			
+			ApplitoolsAcquisitionAARPPage appAcqpage = new ApplitoolsAcquisitionAARPPage(wd,url);
+			appObj.takeScreenshot(wd,"Acquisition AARP", "Agents & Brokers Page", "agentsBrokersPage");
+	}
+	
+	@And("^the user goes to Accessibility page from the footer and takes screenshot$")
+	public void accessibilityPage(){
+			WebDriver wd = (WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+			String url = "https://www.uhc.com/legal/accessibility";
+			
+			ApplitoolsAcquisitionAARPPage appAcqpage = new ApplitoolsAcquisitionAARPPage(wd,url);
+			appObj.takeScreenshot(wd,"Acquisition AARP", "Accessibility Page", "accessibilityPage");
+	}
 	
 }
