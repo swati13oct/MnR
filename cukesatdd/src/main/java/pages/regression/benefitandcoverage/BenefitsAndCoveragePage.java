@@ -87,20 +87,29 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(className = "atdd-benefitssummary-ancillaryHearingText")
 	private WebElement Hearingsection;
+	
+	@FindBy(xpath = ".//*[@class='bold margin-small atdd-bnc-hearingtxt-subtitle']//following-sibling::p")
+	private WebElement HearingContent;
+	
+	@FindBy(xpath= ".//*[@class='margin-small bold atdd-benefitssummary-eyewear']//following-sibling::p")
+	private WebElement VisionContent;
 
 	@FindBy(className = "atdd-benefitssummary-exclusivehearing")
 	private WebElement Hearingaid;
 
-	@FindBy(xpath = "atdd-benefitssummary-vision")
+	@FindBy(className = "atdd-benefitssummary-vision")
 	private WebElement Visionsection;
 
-	@FindBy(xpath = "atdd-benefitssummary-dental")
+	@FindBy(className = "atdd-benefitssummary-dental")
 	private WebElement Dentalsection;
+	
+	@FindBy(xpath = ".//*[@class='bold margin-small atdd-benefitssummary-routine-dental']//following-sibling::p")
+	private WebElement DentalContent;
 
 	@FindBy(className = "atdd-benefitssummary-ancillaryHeader")
 	private WebElement Headersection;
 
-	@FindBy(xpath = ".//*[@id='ancillary']/div[2]/div[4]/div/div")
+	@FindBy(className = ".//*[@id='ancillary']/div[2]/div[4]/div/div")
 	private WebElement chiropracticsection;
 
 	@FindBy(className = "atdd-bnc-drgcvrgeinfo")
@@ -843,7 +852,13 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		} catch (Exception e) {
 			System.out.println("Elements is not found ...");
 		}
-	}
+		try {
+			validate(HearingContent);
+			System.out.println(HearingContent.getText());
+		} catch (Exception e) {
+			System.out.println("Elements is not found ...");
+		}
+		}
 
 	/**
 	 * @toDo : The user validates the Hearing aid section of Ancillary Benefits
@@ -868,6 +883,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		} catch (Exception e) {
 			System.out.println("Elements is not found ...");
 		}
+		try {
+			validate(VisionContent);
+		} catch (Exception e) {
+			System.out.println("Elements is not found ...");
+		}
 	}
 
 	/**
@@ -875,12 +895,18 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	 */
 
 	public void Dental() {
-
+        
 		try {
 			validate(Dentalsection);
 		} catch (Exception e) {
 			System.out.println("Elements is not found ...");
 		}
+		try {
+			validate(DentalContent);
+		} catch (Exception e) {
+			System.out.println("Elements is not found ...");
+		}
+		
 	}
 
 	/**
@@ -1023,6 +1049,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		} else {
 			Assert.fail("The element " + ProceedButton.getText() + "is not found");
 		}
+		
 		return true;
 	}
 
@@ -1495,7 +1522,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		Assert.assertEquals(OfficeVisits.getText(), "OFFICE VISITS ");
 		Assert.assertEquals(OutpatientSurgeryCenter.getText(), "OUTPATIENT SURGERY CENTER VISITS");
 		Assert.assertEquals(HospitalVisits.getText(), "HOSPITAL VISITS ");
-
+		System.out.println(AmbulanceHeader.getText());
+		Assert.assertEquals(AmbulanceHeader.getText(), "AMBULANCE");
+		System.out.println(EmergencyHeader.getText());
+		Assert.assertEquals(EmergencyHeader.getText(), "EMERGENCY CARE");
 		if (StringUtils.isEmpty(OutpatientSurgeryCenterValue.getText())) {
 
 			Assert.fail();

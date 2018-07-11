@@ -352,7 +352,7 @@ private WebElement PlanMaterialSection;
 
               
     	   if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
-    		   if(Plantype.equalsIgnoreCase("MAPD") || Plantype.equalsIgnoreCase("PDP") || Plantype.equalsIgnoreCase("HIP"))
+    		   if(Plantype.equalsIgnoreCase("MAPD") || Plantype.equalsIgnoreCase("PDP") || Plantype.equalsIgnoreCase("HIP") || Plantype.equalsIgnoreCase("MA"))
     		   {
                      System.out.println("user is on Stage login page");
                      // CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);

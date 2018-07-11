@@ -600,7 +600,8 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	}
 
 	/** 
-	 * @toDo : Validates the Locate a Pharmacy button in locate a pharmacy section
+	 * @toDo : Validates the Locate a Pharmacy button in locate a phaThe user navigates to Benefits and Coverage page
+	 * rmacy section
 	 */
 	@And("^the user validates Locate a Pharmacy button should be visible")
 	public void user_validate_locatepharmacybutton(DataTable memberAttributes) {
