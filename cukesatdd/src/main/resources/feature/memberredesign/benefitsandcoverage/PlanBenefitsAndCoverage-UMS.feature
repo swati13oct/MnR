@@ -49,7 +49,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     And the user validates contactus section
     
     Examples: 
-        | planType|  memberType  | copayCategory  | language | SummaryofBenefits    | EvidenceofCoverage       | ComprehensiveFormularyDrug List     | name        | memberid     | effectivedate | monthlypremium |   UpdatedLanguage | DisplayFlag|
+         | planType|  memberType  | copayCategory  | language | SummaryofBenefits    | EvidenceofCoverage       | ComprehensiveFormularyDrug List     | name        | memberid     | effectivedate | monthlypremium |   UpdatedLanguage | DisplayFlag|
          | MAPD    |  Individual  |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | DDCEE DAADF | 954016383-00 | 01/01/2018    | Not Available  | Tier 2            | true       |
          | MAPD    |  Individual  |  NON LIS      | SPANISH  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | DDCEE DAADF | 954016383-00 | 01/01/2018    | Not Available  | Tier 2            | true       |
          | MAPD    |  Individual  |  NON LIS      | CHINESE  |                      |                          |                                     | DDCEE DAADF | 954016383-00 | 01/01/2018    | Not Available  | Tier 2            | true       |
@@ -450,24 +450,28 @@ And the user verifies that the correct pdfs are there in the plan material secti
        | Plan Type      | <planType>  | 
        | Member Type    | <memberType>| 
        | Copay Category | <copayCategory>| 
-    Then the user navigates to Benefits and coverage page 
+    Then The user navigates to Benefits and Coverage page
+       | Plan Type      | <planType>  |
     And the user validates plan overview section for group 
     And the user validates headers on Bnc page for group members 
-    And the user validates the Primarycare Provider section for Group  
+    And the user validates the Group Primarycare Provider section 
     And the user view the Drug Copays & Discounts header  
     And the user validates the Learn More section for stage and tier 
     And the user validates dropdown selection functionality 
     And the user validates Drug coverage header and text under the section 
     And the user validates text for the Look Up Drugs section 
-    And the user validates Look Up Drugs button should be visible 
+    And the user validates Look Up Drugs button should be visible
+      | Plan Type      | <planType>  | 
     And the user validates text for the Locate a Pharmacy section 
-    And the user validates Locate a Pharmacy button should be visible 
+    And the user validates Locate a Pharmacy button should be visible
+       | Plan Type      | <planType>  | 
     And the user should see drug copay and discount table 
         | Updated Language | <UpdatedLanguage> | 
         | Display Flag     | <DisplayFlag>     |  
     And the user validates the user click on the link it expands and when user clicks it again it should collapse 
     And the user validates view and document label 
     And the user validates static links 
+        | Plan Type      | <planType>  |
     And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully 
         | Language | <language> | 
     And the user verifies that the correct pdfs are coming in the plan material section 
@@ -479,6 +483,7 @@ And the user verifies that the correct pdfs are there in the plan material secti
      And the user validates contactus section 
       
      Examples:  
+     | planType|  memberType  | copayCategory  | language | SummaryofBenefits    | EvidenceofCoverage      | ComprehensiveFormularyDrug List     | name        | memberid     | effectivedate | monthlypremium |   UpdatedLanguage | DisplayFlag|
      | MAPD    |  Group       |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | NVKLSDS LKASDFJ| 970345148-00| 07/01/2018   | Not Available  | Tier 2            | true       | 
     #| MAPD    |  Group       |  NON LIS      | SPANISH  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | DDE BCBF      | 006798725-01| 01/01/2018    | Not Available  | Tier 2            | true       | 
     #| MAPD    |  Group       |  NON LIS      | CHINESE  |                      |                          |     

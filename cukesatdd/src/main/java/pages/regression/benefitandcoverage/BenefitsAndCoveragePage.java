@@ -1522,7 +1522,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		Assert.assertEquals(OfficeVisits.getText(), "OFFICE VISITS ");
 		Assert.assertEquals(OutpatientSurgeryCenter.getText(), "OUTPATIENT SURGERY CENTER VISITS");
 		Assert.assertEquals(HospitalVisits.getText(), "HOSPITAL VISITS ");
-
+		System.out.println(AmbulanceHeader.getText());
+		Assert.assertEquals(AmbulanceHeader.getText(), "AMBULANCE");
+		System.out.println(EmergencyHeader.getText());
+		Assert.assertEquals(EmergencyHeader.getText(), "EMERGENCY CARE");
 		if (StringUtils.isEmpty(OutpatientSurgeryCenterValue.getText())) {
 
 			Assert.fail();
