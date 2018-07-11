@@ -122,7 +122,7 @@ public class RallyDashboardPage extends UhcDriver {
 	@FindBy(id = "premiumpayment_3")
 	private WebElement premiumPayment;
 
-	@FindBy(id = "healthwellness_3")
+	@FindBy(id = "healthwellness_4")
 	private WebElement healthWellness;
 
 	@FindBy(id = "Help")
