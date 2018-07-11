@@ -726,13 +726,6 @@ public class MRScenario {
 		return webDriver;
 	}
 
-	public void nullifyWebDriver() {
-		if (null != webDriver) {
-			webDriver.close();
-			webDriver = null;
-		}
-
-	}
 
 	public void removeMember(String userName) {
 
@@ -800,7 +793,7 @@ public class MRScenario {
 	public void DriverQuit()
 
 	{
-		webDriver.quit();
+		//webDriver.quit();
 	}
 
 	public Map<String, String> getmemberRedesignVbfWithDesiredAttributes(List<String> desiredAttributes) {
@@ -874,7 +867,7 @@ public class MRScenario {
 
 	public void nullifyWebDriverNew() {
 		if (null != webDriver) {
-			webDriver.quit();
+			//webDriver.quit();
 			webDriver = null;
 		}
 
