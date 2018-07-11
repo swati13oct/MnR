@@ -679,7 +679,7 @@ public class MRScenario {
 		capabilities.setCapability("version", "66.0");
 		capabilities.setCapability("parent-tunnel", "sauce_admin");
 		capabilities.setCapability("tunnelIdentifier",
-				"OptumSharedTunnel-Stg");
+				"OptumSharedTunnel-Prd");
 		//capabilities.setCapability("name", "MRATDD-TestSuite");
 		capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
 		String jobName = "VBF Execution - Using " + capabilities.getBrowserName() + " in  " + System.getProperty("environment") +" environment";
@@ -726,13 +726,6 @@ public class MRScenario {
 		return webDriver;
 	}
 
-	public void nullifyWebDriver() {
-		if (null != webDriver) {
-			webDriver.close();
-			webDriver = null;
-		}
-
-	}
 
 	public void removeMember(String userName) {
 
@@ -800,7 +793,7 @@ public class MRScenario {
 	public void DriverQuit()
 
 	{
-		webDriver.quit();
+		//webDriver.quit();
 	}
 
 	public Map<String, String> getmemberRedesignVbfWithDesiredAttributes(List<String> desiredAttributes) {
@@ -874,7 +867,7 @@ public class MRScenario {
 
 	public void nullifyWebDriverNew() {
 		if (null != webDriver) {
-			webDriver.quit();
+			//webDriver.quit();
 			webDriver = null;
 		}
 
@@ -990,7 +983,7 @@ public class MRScenario {
 				}
 				capabilities.setCapability("autoAcceptsAlerts", true);
 				capabilities.setCapability("parent-tunnel", "sauce_admin");
-				capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Stg");
+				capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
 				String SAUCE_USERNAME = props.get("SAUCE_USERNAME");
 				String SAUCE_ACCESS_KEY = props.get("SAUCE_ACCESS_KEY");
 				// String URL = "http://" + SAUCE_USERNAME + ":" +
