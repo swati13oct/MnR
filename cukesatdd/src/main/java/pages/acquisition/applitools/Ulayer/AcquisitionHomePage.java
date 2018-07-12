@@ -46,7 +46,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private WebElement FindPlansButton1;
 
 	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
-	private WebElement OurPlansLink1;
+	private WebElement OurPlansLink;
+	
+	@FindBy(xpath = "//*[@id='ghn_lnk_3']")
+	private WebElement medEdLink;
 
 	@FindBy(id = "zipcodebtn")
 	private WebElement findPlansButton;
@@ -215,7 +218,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 		sendkeys(zipCodeField, zipcode);
 		viewPlansButton.click();
-		
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
 		}
@@ -346,22 +354,23 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	
 
-	public void hoverourplanslink() {
-		validate(OurPlansLink1);
+	public void hoverOverOurPlanslink() {
 		// Hover over text
 		Actions action = new Actions(driver);
 		PageFactory.initElements(driver, this);
-		action.moveToElement(OurPlansLink1).build().perform();
+		action.moveToElement(OurPlansLink).build().perform();
 
-		// to click
-		// action.click().build().perform();
-
-		validate(OurPlansLink1);
-
-		// TODO Auto-generated method stub
 
 	}
 
+	public void hoverOverMedEdlink() {
+		// Hover over text
+		Actions action = new Actions(driver);
+		PageFactory.initElements(driver, this);
+		action.moveToElement(medEdLink).build().perform();
+
+
+	}
 	public AcquisitionHomePage findplansbuttonclick() {
 		validate(FindPlansButton1);
 		FindPlansButton1.click();

@@ -49,7 +49,7 @@ Examples:
 	|zipcode | plantype | planName |
 	|90210 | MA |  AARP MedicareComplete SecureHorizons Plan 2 (HMO)    |
 	
-@appAcqPagesTest
+@applitoolsAcqAARP
 Scenario Outline:To directly hit acquisition pages urls and take screenshots
 Given the user goes to aarp homepage and takes full screenshot
 When the user enter the zipcode and goes to VPP page and takes screenshot for MAPD plans
@@ -85,6 +85,61 @@ And the user goes to terms and conditions page from the footer and takes screens
 And the user goes to disclaimer page from the footer and takes screenshot
 And the user goes to agents and brokers page from the footer and takes screenshot
 And the user goes to Accessibility page from the footer and takes screenshot
+And the user goes to medicare eligibility page from the Medicare Eductation nav panel and takes screenshot
+And the user goes to coverage choices page from the Medicare Eductation nav panel and takes screenshot
+And the user goes to prescription provider and benefits page from the Medicare Eductation nav panel and takes screenshot
+And the user goes to cost medicare advantage plnas page from the Medicare Eductation nav panel and takes screenshot
+And the user goes to cost basics page from the Medicare Eductation nav panel and takes screenshot
+And the user goes to pdp plans from the Medicare Eductation nav panel and takes screenshot
+And the user goes to enrollment basics page from the Medicare Eductation nav panel and takes screenshot
+
+Examples:
+	| zipcode 	| planType | planName 										  |  drug            |planType2 | planName2 						  | 
+	| 90210     | MA	   | AARP MedicareComplete SecureHorizons Plan 1 (HMO)| Lipitor TAB 10MG | PDP 	   | AARP MedicareRx Walgreens (PDP)  |
+	
+@applitoolsAcqUHC
+Scenario Outline:To directly hit acquisition pages urls and take screenshots
+Given the user goes to uhc homepage and takes full screenshot
+When the user enter the zipcode and goes to VPP page and takes screenshot for MAPD plans uhc
+	|Zipcode| <zipcode>|
+And the user accesses the DCE tool from vpp aarp page for MAPD plan and takes screenshot uhc
+	|Plan Type| <planType> |
+	|Plan Name| <planName> |
+	|Drug     | <drug>     |
+And the user goes to the view plan details page for MAPD plan and takes screenshots uhc
+	|Plan Type| <planType> |
+	|Plan Name| <planName> |
+When the user clicks on PDP plans and takes screenshot uhc
+And the user goes to the view plan details page for PDP plan and takes screenshots uhc
+	|Plan Type2| <planType2> |
+	|Plan Name2| <planName2> |
+And the user goes to Request More Help and Info link page in Our plans and takes screenshot uhc
+And the user goes to Request Agent appointment link page and takes screenshot uhc
+And the user goes to Find Uhc in your community link page and takes screenshot uhc
+And the user goes to Request PDP Inquiry Kit page and takes screenshot uhc
+And the user goes to Medicare Advantage Plans Link page under Our plans and takes screenshot uhc
+And the user goes to How do I enroll under Medicare Advantage page and takes screenshot uhc
+And the user goes to Resources and Materials page under Medicare Advantage page and takes screenshot uhc
+And the user goes to Prescription Drug Plans page from Our Plans and takes screenshot uhc
+And the user goes to How do I enroll under Prescription Drug Plans page and takes screenshot uhc
+And the user goes to Resources and Materials page under Prescription Drug Plans page and takes screenshot uhc
+And the user goes to Plan Selector page from Our Plans tab and takes screenshot uhc
+And the user goes to pharmacy locator page from Our Plans tab and takes screenshot uhc
+And the user goes to about us page from the footer and takes screenshot uhc
+And the user goes to contact us page from the footer and takes screenshot uhc
+And the user goes to sitemap page from the footer and takes screenshot uhc
+And the user goes to privacy policy page from the footer and takes screenshot uhc
+And the user goes to terms and conditions page from the footer and takes screenshot uhc
+And the user goes to disclaimer page from the footer and takes screenshot uhc
+And the user goes to agents and brokers page from the footer and takes screenshot uhc
+And the user goes to Accessibility page from the footer and takes screenshot uhc
+And the user goes to medicare eligibility page from the Medicare Eductation nav panel and takes screenshot
+And the user goes to coverage choices page from the Medicare Eductation nav panel and takes screenshot
+And the user goes to prescription provider and benefits page from the Medicare Eductation nav panel and takes screenshot
+And the user goes to cost medicare advantage plnas page from the Medicare Eductation nav panel and takes screenshot
+And the user goes to cost basics page from the Medicare Eductation nav panel and takes screenshot
+And the user goes to pdp plans from the Medicare Eductation nav panel and takes screenshot
+And the user goes to enrollment basics page from the Medicare Eductation nav panel and takes screenshot
 
 Examples:
 	| zipcode 	| planType | planName 										  |  drug            |planType2 | planName2 						  | 

@@ -4,11 +4,11 @@ import org.openqa.selenium.WebDriver;
 
 import atdd.framework.UhcDriver;
 
-public class ApplitoolsAcquisitionAARPPage extends UhcDriver{
+public class ApplitoolsAcquisitionPage extends UhcDriver{
 
-	public ApplitoolsAcquisitionAARPPage(WebDriver driver, String url) {
+	public ApplitoolsAcquisitionPage(WebDriver driver) {
 		super(driver);
-		start(url);
+		
 		// TODO Auto-generated constructor stub
 	}
 
