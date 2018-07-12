@@ -620,26 +620,27 @@ And the user verifies that the correct pdfs are there in the plan material secti
     Scenario Outline: Verify the outpatient widget for a member withprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType> |
-      #| Member Type   | <memberType> |
+      | Member Type   | <memberType> |
     Then the user navigates to Benefits coverage page
     And the user validates the Outpatient Surgery Center Visits section
 
 
     Examples: 
-      | planType | 
-      | MAPD     |     
+      | planType | memberType |
+      | MAPD     | MAPDCOSMOS |    
 
 	@primarycareproviderspecialist   @regressionprimarycareprovider  @regression_06_06_18
     Scenario Outline: Verify the Office visits widget for a member withprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
+      | Member Type   | <memberType> |
     Then the user navigates to Benefits coverage page
     And the user validates the Office Visits section
 
 
     Examples: 
-      | planType |
-      | MAPD    |
+      | planType | memberType |
+      | MAPD     | COSMOSOfficevisit |
     
     
 
@@ -647,15 +648,15 @@ And the user verifies that the correct pdfs are there in the plan material secti
     Scenario Outline: Verify the outpatient widget for a member withprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType> |
-      #| Member Type   | <memberType> |
+      | Member Type   | <memberType> |
     Then the user navigates to Benefits coverage page
     And the user validates the Outpatient Surgery Center Visits section
 
 
 
     Examples: 
-      | planType | 
-      | MAPD     |  
+      | planType | memberType |
+      | MAPD     | NICEBenefits |
    
 
    @BenefitsForAlPeehipMember @regression @regression_06_06_18
