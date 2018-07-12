@@ -1078,6 +1078,30 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(DrugCoverageHeader);
 		validate(DrugCoveragetext);
 	}
+	
+	/**
+	 * @toDo : The user validates the DrugCoverage section headers and text for group
+	 */
+	public void validatedrugcoverageheaderandtextgroup() {
+	
+		if(DrugCoverageHeader.isDisplayed())
+		{
+			Assert.fail("Drug coverage should not display");
+		}
+		else
+		{
+			Assert.assertTrue(true);
+		}
+		if(DrugCoveragetext.isDisplayed())
+		{
+			Assert.fail("Drug coverage should not display");
+		}
+		else
+		{
+			Assert.assertTrue(true);
+		}
+		
+	}
 
 	/**
 	 * @toDo : Validates Look Up Drugs button in the DrugCosts section
@@ -1123,7 +1147,29 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}
 
 	}
-
+	
+	public void validategrouplookupdrugsbutton() 
+	{
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		validate(LookUpDrugsButton);
+		LookUpDrugsButton.click();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (driver.getCurrentUrl().contains("optumrx.com"))
+			Assert.assertTrue(true);
+		else {
+			Assert.fail();
+		}
+	}
 	/**
 	 * @toDo : Validates the text for the Look Up Drugs section
 	 */
