@@ -827,23 +827,7 @@ public class MRScenario {
 
 	public static void returnLoginCredentials() {
 		for (Entry<String, String> currEntry : returnMemberAttributeMap().entrySet()) {
-		/*	System.out.println("Current value entry  - " + currEntry.getValue());
 			if (currEntry.getKey().equals(compositeDesiredAttributes)) {
-				System.out.println("Current key entry - " + currEntry.getKey());
-				if (currEntry.getValue().contains("/")) {
-					String[] valArr = currEntry.getValue().split("/");
-					loginCreds.put("user", valArr[0]);
-					loginCreds.put("pwd", valArr[1]);
-				} else {
-					loginCreds.put("user", currEntry.getValue());
-					loginCreds.put("pwd", "Password@1");
-				}
-
-			}
-		}*/
-			System.out.println("Current key entry  - " + currEntry.getKey());
-			if (currEntry.getKey().equals(compositeDesiredAttributes)) {
-				System.out.println("Current value entry - " + currEntry.getValue());
 				if (currEntry.getValue().contains("/")) {
 					String[] valArr = currEntry.getValue().split("/");
 					loginCreds.put("user", valArr[0]);
@@ -984,16 +968,9 @@ public class MRScenario {
 				capabilities.setCapability("autoAcceptsAlerts", true);
 				capabilities.setCapability("parent-tunnel", "sauce_admin");
 				capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
-				String SAUCE_USERNAME = props.get("SAUCE_USERNAME");
-				String SAUCE_ACCESS_KEY = props.get("SAUCE_ACCESS_KEY");
-				// String URL = "http://" + SAUCE_USERNAME + ":" +
-				// SAUCE_ACCESS_KEY + "@162.222.75.33:80/wd/hub";
-				String URL = "http://" + SAUCE_USERNAME + ":" + SAUCE_ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
-				System.out.println("URL:" + URL);
-				if (SAUCE_USERNAME == null || SAUCE_ACCESS_KEY == null) {
-					Assert.fail(
-							"Missing value for environment variable(s) SAUCE_USERNAME or SAUCE_ACCESS_KEY.  Check environment configuration and try again");
-				}
+				capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
+				String jobName = "VBF Execution - Using " + capabilities.getBrowserName() + " in  " + System.getProperty("environment") +" environment";
+				capabilities.setCapability("name", jobName);
 				try {
 
 					webDriver = new RemoteWebDriver(new URL(URL), capabilities);
