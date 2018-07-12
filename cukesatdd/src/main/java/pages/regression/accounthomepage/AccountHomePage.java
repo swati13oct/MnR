@@ -1126,6 +1126,7 @@ private WebElement PlanMaterialSection;
        }
 
        public PharmacySearchPage navigateToRedesignPharmacyLocaterPage() {
+    	   	  waitForHomePage(helloPerson);
               if (validate(iPerceptionAutoPopUp)) {
                      iPerceptionAutoPopUp.click();
               } else {
@@ -1175,6 +1176,7 @@ private WebElement PlanMaterialSection;
 
     // to navigate to forms and resources page
     public FormsAndResourcesPage navigatetoFormsnResources() throws InterruptedException {
+    				waitForHomePage(helloPerson);
                     if (validate(iPerceptionAutoPopUp)) {
                                     iPerceptionAutoPopUp.click();
                     } else {
