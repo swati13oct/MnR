@@ -59,7 +59,8 @@ public class GlobalTearDown {
 			
 			//To get the report embedded in the report
 			scenario.embed(screenshot, "image/png");
-			String html = MRScenario.returnJobURL();
+			//String html = MRScenario.returnJobURL();
+			String html = "<strong>SauceLabs video link</strong><br />"; html = html.concat("<a href="+MRScenario.returnJobURL()+">Go to video</a>"); 
 			scenario.embed(html.getBytes(), "text/html");
 			 MRScenario mrScen=new MRScenario();
 			//Clean up the existing webdriver.
