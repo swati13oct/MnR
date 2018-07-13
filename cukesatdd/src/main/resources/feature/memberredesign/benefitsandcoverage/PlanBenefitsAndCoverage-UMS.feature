@@ -726,3 +726,18 @@ And the user verifies that the correct pdfs are there in the plan material secti
       | planType |memberType |
       | MAPD     |   withRider      |
       
+    
+    @ancillarybenefitnegativescenarioscodemonkeys
+Scenario Outline: Verify ancillary benefits are not displayed other than Group memnbers
+Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>  |
+      | Member Type    | <memberType>|
+      | Copay Category | <copayCategory>|
+    Then the user navigates to Benefits and coverage page
+    Then verify ancillary benefit section is not displayed
+        Examples: 
+       | planType|  memberType  | copayCategory |
+      #| PDP     |  Group       |  NON LIS      |
+       | MAPD    |  Individual  |  NON LIS      |
+      #| MA      |  Group       |  HMO          | 
+      

@@ -1533,6 +1533,14 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		planBenefitsCoverage.validatesRemoveRider();
 		
 	}
+	
+@Then("^verify ancillary benefit section is not displayed$")
+ 	
+ 	public void ancillary_not_displayed() {
+	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+	Assert.assertTrue(benefitsCoveragePage.ancillarynotdisplayed());
+ 	}
 
 	
 

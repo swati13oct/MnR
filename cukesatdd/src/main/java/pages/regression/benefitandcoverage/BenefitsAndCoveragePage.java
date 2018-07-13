@@ -2252,13 +2252,16 @@ public void validateImagePresent(String logoToBeDisplayedOnSecondaryPage) {
 		}
 	}
 
-	public void ancillarynotdisplayed() {
+	public boolean ancillarynotdisplayed() {
 		if (Headersection.isDisplayed()) {
-			Assert.assertFalse("The element" + Headersection.getText() + "is not display", false);
-			System.out.println("The element " + Headersection.getText() + "is not display");
+			
+			System.out.println("Ancillary is present");
+			return false;
 		} else {
-			Assert.assertTrue(true);
-		}
+			 System.out.println("ancillary is not present");
+		
+		return true;
+	}
 	}
 
 	public void validatehartfortprescriptiondrugtable() {
