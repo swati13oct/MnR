@@ -289,6 +289,18 @@ public class ClaimsMemberRedesignStepDefinition {
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		Assert.assertTrue(claimSummarypage.verifyClaimsTableAndPagination());
 	   	}
+	@And("^I validate the pagination on the claims summary page combo member PDP plan$")
+		public void i_validate_the_pagination_on_the_claims_summary_page_COMBOmember_PDP() throws Throwable {
+			ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
+			Assert.assertTrue(claimSummarypage.verifyClaimsTableAndPagination1());
+		   	}
+	@And("^I validate the pagination on the claims summary page for members$")
+		public void i_validate_the_pagination_on_the_claims_summary_page_members() throws Throwable {
+			ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
+			Assert.assertTrue(claimSummarypage.verifyClaimsTableAndPagination1());
+		   	}
+		
+	
 	/**
 	 * @toDo :view an Explanation of Benefits component with the Medical and/or Prescription Drug EOB search buttons based on my plan type
 	 */
@@ -556,7 +568,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	public void i_validate_the_error_message_for_a_PHIP_Member_on_the_screen() throws Throwable {
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		 claimSummarypage.ValidatePHIPErrorMessage();
-	   // throw new PendingException();
+	  
 	 
 	}
 	
@@ -586,6 +598,14 @@ public class ClaimsMemberRedesignStepDefinition {
 	    
 	}
 	
+	@Then("^I validate the claim summary header$")
+	public void i_validate_the_claims_summary_header()  {
+		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario()
+				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+		newClaimsSummaryPage.validateClaimsFromDropDown2();		
+		newClaimsSummaryPage.validateYouHavemessage();
+		//newClaimsSummaryPage.validateLearnmoreaboutsection1();
+	}
 	@When("^I navigate to the Claim Details page in redesigned site$")
 	public void i_navigate_to_member_redesign_claim_details() throws InterruptedException {
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario()
@@ -606,7 +626,75 @@ public class ClaimsMemberRedesignStepDefinition {
 				.getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
 		claimDetailspage.validateClaimsTableInDetailsPage();
 	}
+	/**
+	 * 
+	 */
+	@And("^I validate the Claim Search link on top$")
+	public void i_validate_claimSearch_link_on_DetailsPage() {
+		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
+		claimDetailspage.validateClaimSearchLINK();			
+	}
+	/**
+	 * 
+	 */
+	@And("^I validate the LEARN MORE ABOUT COST BreakDown Link$")	 
+	public void i_validate_learmMore_costbreakdown_link() {
+		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
+		claimDetailspage.learnMoreCostLink();	
+		
+	}
+	/**
+	 * 
+	 */
+	@Then("^I validate the Claims Table in claims details page for Combo$")
+	public void i_validate_the_calims_deatails_table(){
+		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
+		claimDetailspage.shipdetailcombo();
+	}
+	/**
+	 * 
+	 */
+	@And("^I validate EOB$")
+	public void i_validate_EOB_COMBO(){
+		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
+		claimDetailspage.EOBShipcombo();
+	}
+	/**
+	 * 
+	 */
+	@Then("^I can view a claim search back button in Claims Details page in AARP site$")
+	public void validate_claim_search_button()
+	{
+		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
 
-	
-	
+		claimDetailspage.validateClaimHistory();
+	}
+	/**
+	 * 
+	 */
+	@And("^I validate the two COMBO tabs on the page$")
+	public void i_validate_COMBO_tabs() {
+		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
+		claimDetailspage.comboTabs();			
 }
+     /**
+      * 
+      */
+	@And("^I validate the two COMBO tabs on the claim Summary page$")
+	public void I_validate_combo_tab_claim_summary_page(){
+		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
+		claimSummarypage.comboTabSelection1();	   
+	}
+	/**
+	 * @toDo : navigate to the Claim Details page for combo member 
+	 */
+	@And("^I navigate to the Claim Details page in AARP site for COMBO member$")	
+	public void i_navigate_to_member_redesign_claim_details_page_COMBOMember()  {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+		ClaimDetailsPage newClaimDetailsPage = accountHomePage.navigateToClaimDetailsPageCombo();
+		getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
+		if(newClaimDetailsPage  != null)
+			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
+		
+	}
+          }
