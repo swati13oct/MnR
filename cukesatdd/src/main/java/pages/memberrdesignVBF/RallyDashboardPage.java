@@ -89,7 +89,7 @@ public class RallyDashboardPage extends UhcDriver {
 	@FindBy(className = "promo-tile")
 	private WebElement promoTile_Dashboard;
 
-	@FindBy(xpath = "//h1[@class='main-heading margin-none']")
+	@FindBy(xpath = "//h1[contains(@class,'margin-none')]")
 	private WebElement orderplanHeadertxt;
 
 	@FindBy(xpath = "//sticky[@id='sticky-nav']//nav[@id='main-nav']//a[contains(text(),'Coverage & Benefits')]")
@@ -122,7 +122,7 @@ public class RallyDashboardPage extends UhcDriver {
 	@FindBy(id = "premiumpayment_3")
 	private WebElement premiumPayment;
 
-	@FindBy(id = "healthwellness_3")
+	@FindBy(id = "healthwellness_4")
 	private WebElement healthWellness;
 
 	@FindBy(id = "Help")

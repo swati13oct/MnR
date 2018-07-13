@@ -57,7 +57,7 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath = "//header//h1")
 	private WebElement heading;
 
-	@FindBy(xpath = "//h1[@class='h4 margin-none']")
+	@FindBy(xpath = "//h1[contains(@class,'margin-none')]")
 	private WebElement orderplanHeadertxt;
 
 	@FindBy(xpath = "//div[@class='tabs-desktop']/ul[@class='nav nav-tabs']/li")
@@ -79,9 +79,13 @@ public class TestHarness extends UhcDriver {
 		validateNew(orderPlanPageLink);
 		validateNew(claimsPageLink);
 		if (category.contains(CommonConstants.CATEGORY_TERMIATED)) {
-			validateNew(tabsForComboMember.get(0));
-			Assert.assertTrue("Terminated Tab exists...",
-					tabsForComboMember.get(0).getText().toUpperCase().contains("TERMINATED"));
+			if (1 == tabsForComboMember.size()) {
+				validateNew(tabsForComboMember.get(0));
+				Assert.assertTrue("Terminated Tab exists...",
+						tabsForComboMember.get(0).getText().toUpperCase().contains("TERMINATED"));
+			} else {
+				Assert.fail("Check number of plans. Current plans:" + tabsForComboMember.size());
+			}
 		}
 
 	}
