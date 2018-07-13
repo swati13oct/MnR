@@ -672,7 +672,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
                 Actions actions = new Actions(driver);
                 PageFactory.initElements(driver, this);
-                actions.moveToElement(ourPlans);
+                actions.moveToElement(ourPlansLink);
 
                 if (planType.equalsIgnoreCase("MA")) {
                         actions.moveToElement(maVppLink);
