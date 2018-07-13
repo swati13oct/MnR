@@ -1,7 +1,7 @@
 @claimspage @theTransformers @regression_06_06_18 
 Feature: T1.1To validate the new changes related to claims page on the member redesigned site
 
-  @claimsSummaryFED @theTransformers @regression_06_06_18 
+  @claimsSummaryFED @theTransformers @regression_06_06_18 @TC03_PDP
   Scenario Outline: To validate the claims present for the Federal member on claims sumamry page for AARP site
    Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>     |
@@ -23,13 +23,13 @@ Feature: T1.1To validate the new changes related to claims page on the member re
     Examples: 
       | planType | claimPeriod    | domain | claimssystem |
       #| MAPD     | Last 24 months | COSMOS | COSMOSCLAIMS |
-      #| MA       | Last 24 months | NICE   | NICECLAIMS   |
+     # | MA       | Last 24 months | NICE   | NICECLAIMS   |
       | PDP      | Last 24 months | RX     | RXCLAIMS     |
       #| MA       | Last 24 months | COSMOS | COSMOSCLAIMS   |
+         
+         
       
-      
-      
-  @claimsSummarySHIP @theTransformers @regression_06_06_18
+  @claimsSummarySHIP @theTransformers
   Scenario Outline: To validate the claims present for the SHIP member on claims sumamry page for AARP site
     Given login with following details logins in the member portal and validate elements
       #  Given I am an Individual or Group member on the redesigned site
@@ -53,6 +53,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
     Examples: 
       | planType | claimPeriod    | domain | claimssystem |
       | SHIP     | Last 24 Months | NA     | SHIPCLAIMS   |
+      
 
   @claimsDetailsTableFED @theTransformers @regression_06_06_18 
   Scenario Outline: To Verify Claim Table on Claims Details Page
@@ -76,6 +77,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
       #| MA       | Last 24 months | NICECLAIMS   |
       | MAPD     | Last 24 months | COSMOSCLAIMS |
 
+
   @ClaimsDetailsSHIP @theTransformers
   Scenario Outline: To Verify Learn more section on Claims Details Page
     Given login with following details logins in the member portal and validate elements
@@ -95,7 +97,9 @@ Feature: T1.1To validate the new changes related to claims page on the member re
       | planType | claimPeriod    | claimssystem |
       | SHIP     | Last 24 Months | SHIPCALIMS   |
       
-      @regression_06_06_18 @TC01_FED_AARP_Individual_NICE @TC10_COMBO
+ 
+      
+      @regression_06_06_18  @TC10_COMBO
   Scenario Outline: To validate the claims present for the Combo member on claims sumamry page & the Details on the Claims Details page 
    Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>     |
@@ -118,15 +122,13 @@ Feature: T1.1To validate the new changes related to claims page on the member re
    And I can view a claim search back button in Claims Details page in AARP site
    And I validate the two COMBO tabs on the page 
    And I validate the two COMBO tabs on the claim Summary page 
-  And the user validates the DownloadMyData section in redesigned site
-   
-   
+  And the user validates the DownloadMyData section in redesigned site   
    
     Examples: 
       | planType | claimPeriod    | domain | claimssystem |
       | SHIP    | Last 24 months  | NA      |    COSMOSCLAIMS |
 
-  @claimsPHIP @theTransformers @regression_06_06_18 
+  @TC_09claimsPHIP @theTransformers @regression_06_06_18 
   Scenario Outline: To validate the Error Message for a PHIP  member on claims sumamry page
     #Given I am an Individual or Group member on the redesigned site
     Given login with following details logins in the member portal and validate elements
@@ -134,11 +136,33 @@ Feature: T1.1To validate the new changes related to claims page on the member re
       | Test Data Type | <claimssystem> |
     When I navigate to the claims Summary page in redesigned site
     And I validate the error message for a PHIP Member on the screen
-       | Domain     | <domain>      |
-      | Plan Type  | <planType>    |
+      # | Domain     | <domain>      |
+      #| Plan Type  | <planType>    |
     Examples: 
       | planType | claimssystem |
       | SHIP     | SHIPCALIMS   |
+      
+      @regression_06_06_18  @TC01_MANICE_CLAIMS @TC04_MACOSMOS_CLAIMS
+  Scenario Outline: To validate the claims present for the Federal member on claims sumamry page for AARP site
+   Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>     |
+      | Test Data Type | <claimssystem> |
+    When I navigate to the claims Summary page in redesigned site
+    #Then I validate the claims summary header
+    And I can search claims for the following claim period on redesigned site
+      | Plan Type    | <planType>    |
+      | Claim Period | <claimPeriod> |
+    Then I can see the claims displayed based on the selection in redesigned site
+    And I validate the pagination on the claims summary page combo member PDP plan
+   	And the user validates the EOB section based on domain in redesigned site
+      | Domain     | <domain>      |
+      | Plan Type  | <planType>    |
+    And the user validates the DownloadMyData section in redesigned site 
+      | MA       | Last 24 months | NICE   | NICECLAIMS   |
+      #| MA       | Last 24 months | COSMOS | COSMOSCLAIMS   |
+      
+      
+     
   # This Scenario can only execute when max claims indicator as true
   #@MaxClaimsResultsError
   #Scenario Outline: To Verify the Drug Claims History: Reached Maximum Claim Results Error
@@ -186,7 +210,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
       #| MAPD     | Custom Search | 10/10/2017  | 06/14/2012    |
       
       
-  @claimsSummaryAndDetails @regression_06_06_18
+  @claimsSummaryAndDetails
   Scenario Outline: To validate the claims present for the Federal member on claims sumamry page for AARP site
    Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>     |
@@ -210,4 +234,51 @@ Feature: T1.1To validate the new changes related to claims page on the member re
       | planType | claimPeriod    | domain | claimssystem |
       | MAPD     | Last 24 months | NICE   | NICECLAIMS   | 
 
+    @regression_06_06_18 @TC03_FEDAARPIndividualPDP   
+    Scenario Outline: To validate the claims present for the Federal member on claims sumamry page for AARP site
+    Given login with following details logins in the member portal and validate elements
+      
+      | Plan Type      | <planType>     |
+      | Test Data Type | <claimssystem> |
+    When I navigate to the claims Summary page in redesigned site
+    And I can search claims for the following claim period on redesigned site
+      | Plan Type    | <planType>    |
+      | Claim Period | <claimPeriod> |
+    Then I can see the claims displayed based on the selection in redesigned site
+    And I validate the pagination on the claims summary page 
+   	And the user validates the EOB section based on domain in redesigned site
+      | Domain     | <domain>      |
+      | Plan Type  | <planType>    |
+    And the user validates the DownloadMyData section in redesigned site
+
+    Examples: 
+      | planType | claimPeriod    | domain | claimssystem |
+      | PDP      | Last 24 months | RX     | RXCLAIMS     |
+      
+       @regression_06_06_18 @TC01_FED_AARP_Individual_NICE @TC04_FED_UHC_Individual_COSMOS
+  Scenario Outline: To validate the claims present for the Federal member on claims sumamry page & the Details on the Claims Details page 
+   Given login with following details logins in the member portal and validate elements
      
+      | Plan Type      | <planType>     |
+      | Test Data Type | <claimssystem> |
+    When I navigate to the claims Summary page in redesigned site
+    Then I validate the claim summary header
+    And I can search claims for the following claim period on redesigned site
+      | Plan Type    | <planType>    |
+      | Claim Period | <claimPeriod> |
+    Then I can see the claims displayed based on the selection in redesigned site
+    And I validate the pagination on the claims summary page for members
+   	And the user validates the EOB section based on domain in redesigned site
+      | Domain     | <domain>      |
+      | Plan Type  | <planType>    |
+ 	  And I navigate to the Claim Details page in AARP site
+    Then I validate the Claims Table in claims details page in AARP site
+    And I validate the Claims Total in claims details page in AARP site
+    And I can view a claim search back button in Claims Details page in AARP site
+    And the user validates the DownloadMyData section in redesigned site
+   
+    Examples: 
+      | planType | claimPeriod    | domain | claimssystem |
+      | MA       | Last 24 months | NICE   | NICECLAIMS   |
+    #  | MA       | Last 24 months | COSMOS | COSMOSCLAIMS |
+    

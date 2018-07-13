@@ -235,7 +235,11 @@ public class ClaimDetailsPage extends UhcDriver{
 	public void validateClaimsTableInDetailsPage() {
 		//wait.until(ExpectedConditions.visibilityOf(rememberThisDeviceSection));
 		if (driver.getCurrentUrl().contains("member/claims/overview.html#/details"))
+		{
 		System.out.println("The URL of the Claims page is---------->"+driver.getCurrentUrl());
+		}
+		
+		
 		System.out.println("The title of Claims page is-------->"+driver.getTitle());
 		
 		System.out.println("!!! Validating the elements on the Claims Details page !!!");

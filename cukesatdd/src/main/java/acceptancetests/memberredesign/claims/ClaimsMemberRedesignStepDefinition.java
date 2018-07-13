@@ -294,6 +294,13 @@ public class ClaimsMemberRedesignStepDefinition {
 			ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 			Assert.assertTrue(claimSummarypage.verifyClaimsTableAndPagination1());
 		   	}
+	@And("^I validate the pagination on the claims summary page for members$")
+		public void i_validate_the_pagination_on_the_claims_summary_page_members() throws Throwable {
+			ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
+			Assert.assertTrue(claimSummarypage.verifyClaimsTableAndPagination1());
+		   	}
+		
+	
 	/**
 	 * @toDo :view an Explanation of Benefits component with the Medical and/or Prescription Drug EOB search buttons based on my plan type
 	 */
@@ -561,7 +568,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	public void i_validate_the_error_message_for_a_PHIP_Member_on_the_screen() throws Throwable {
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		 claimSummarypage.ValidatePHIPErrorMessage();
-	   // throw new PendingException();
+	  
 	 
 	}
 	
@@ -591,6 +598,14 @@ public class ClaimsMemberRedesignStepDefinition {
 	    
 	}
 	
+	@Then("^I validate the claim summary header$")
+	public void i_validate_the_claims_summary_header()  {
+		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario()
+				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+		newClaimsSummaryPage.validateClaimsFromDropDown2();		
+		newClaimsSummaryPage.validateYouHavemessage();
+		//newClaimsSummaryPage.validateLearnmoreaboutsection1();
+	}
 	@When("^I navigate to the Claim Details page in redesigned site$")
 	public void i_navigate_to_member_redesign_claim_details() throws InterruptedException {
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario()
