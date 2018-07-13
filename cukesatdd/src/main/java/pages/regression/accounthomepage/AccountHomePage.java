@@ -923,24 +923,24 @@ private WebElement PlanMaterialSection;
 
               try {
                      Thread.sleep(10000);
+		              if (validate(iPerceptionframe)) {
+		                     feebackpopupClose();
+		                     System.out.println("iPerception Pop Up displayed");
+		             }
+		              if (MRScenario.environmentMedicare.equals("team-ci1") || MRScenario.environmentMedicare.equals("team-h") || MRScenario.environmentMedicare.equals("test-a") || MRScenario.environmentMedicare.equals("team-e")) {
+		                     js.executeScript("arguments[0].click();", helpAndContactUslink);
+		
+		             }else{
+		                     linkContactUs.click();
+		             }
+		              CommonUtility.waitForPageLoad(driver, heading, 10);
+		              if(driver.getTitle().equalsIgnoreCase("Overview"))
+		              {
+		                     return new ContactUsPage(driver);
+		              }
               } catch (InterruptedException e) {
-                     e.printStackTrace();
-              }
-              if (validate(iPerceptionPopUp)) {
-                     iPerceptionPopUp.click();
-                     System.out.println("iPerception Pop Up displayed");
-              }
-              if (MRScenario.environmentMedicare.equals("team-ci1") || MRScenario.environmentMedicare.equals("team-h") || MRScenario.environmentMedicare.equals("test-a") || MRScenario.environmentMedicare.equals("team-e")) {
-                     js.executeScript("arguments[0].click();", helpAndContactUslink);
-
-              }else{
-                     linkContactUs.click();
-              }
-              CommonUtility.waitForPageLoad(driver, heading, 10);
-              if(driver.getTitle().equalsIgnoreCase("Overview"))
-              {
-                     return new ContactUsPage(driver);
-              }
+                  e.printStackTrace();
+           }
               return null;
        }
 
