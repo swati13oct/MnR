@@ -88,8 +88,8 @@ public class MRScenario {
 	public static String compositeDesiredAttributes;
 	public static String attributeMapToUse = "";
 	private static final String DIRECTORY = "/src/main/resources/";
-	private String sessionId;
-	private String JobURL = null;
+	private static String sessionId;
+	private static String JobURL = null;
 	public static int count = 0;
 
 	public static final String USERNAME = "ucpadmin";
@@ -851,9 +851,7 @@ public class MRScenario {
 		System.out.println("Screenshot captured!!!");
 		// To get the report embedded in the report
 		scenario.embed(screenshot, "image/png");
-		String html = returnJobURL();
-		System.out.println("Job link text in report:"+html);
-		scenario.embed(html.getBytes(), "text/html");
+		
 	}
 
 	public void nullifyWebDriverNew() {
@@ -982,7 +980,7 @@ public class MRScenario {
 				try {
 
 					webDriver = new RemoteWebDriver(new URL(URL), capabilities);
-					this.sessionId = ((RemoteWebDriver) webDriver).getSessionId().toString();
+					MRScenario.sessionId = ((RemoteWebDriver) webDriver).getSessionId().toString();
 					System.out.println("Session ID:" + (((RemoteWebDriver) webDriver).getSessionId()).toString());
 					getJobURL(getSessionId());
 					webDriver.manage().deleteAllCookies();
@@ -1001,7 +999,7 @@ public class MRScenario {
 	}
 
 	
-	public String returnJobURL() {
+	public static String returnJobURL() {
 		return JobURL;
 	}
 	public void getJobURL(String jobID) {
