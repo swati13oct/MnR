@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.MappedByteBuffer;
@@ -47,6 +48,9 @@ import org.springframework.stereotype.Component;
 
 import acceptancetests.data.CommonConstants;
 import cucumber.api.Scenario;
+import java.security.*;
+import javax.crypto.*;
+import javax.crypto.spec.SecretKeySpec;
 
 /**
  * 
@@ -84,7 +88,8 @@ public class MRScenario {
 	public static String compositeDesiredAttributes;
 	public static String attributeMapToUse = "";
 	private static final String DIRECTORY = "/src/main/resources/";
-
+	private String sessionId;
+	private String JobURL = null;
 	public static int count = 0;
 
 	public static final String USERNAME = "ucpadmin";
@@ -846,7 +851,8 @@ public class MRScenario {
 		System.out.println("Screenshot captured!!!");
 		// To get the report embedded in the report
 		scenario.embed(screenshot, "image/png");
-
+		String html = getJobURL();
+		scenario.embed(html.getBytes(), "text/html");
 	}
 
 	public void nullifyWebDriverNew() {
@@ -964,6 +970,7 @@ public class MRScenario {
 					capabilities = DesiredCapabilities.chrome();
 					capabilities.setCapability("platform", "Windows 7");
 					capabilities.setCapability("version", "52.0");
+					capabilities.setCapability("recordMp4", true);
 				}
 				capabilities.setCapability("autoAcceptsAlerts", true);
 				capabilities.setCapability("parent-tunnel", "sauce_admin");
@@ -974,6 +981,9 @@ public class MRScenario {
 				try {
 
 					webDriver = new RemoteWebDriver(new URL(URL), capabilities);
+					this.sessionId = ((RemoteWebDriver) webDriver).getSessionId().toString();
+					System.out.println("Session ID:" + (((RemoteWebDriver) webDriver).getSessionId()).toString());
+					getJobURL(getSessionId());
 					webDriver.manage().deleteAllCookies();
 				} catch (MalformedURLException e) {
 					Assert.fail("Invalid Sauce URL: [" + URL + "]");
@@ -983,5 +993,44 @@ public class MRScenario {
 		//}
 		return webDriver;
 
+	}
+	
+	public String getSessionId() {
+		return sessionId;
+	}
+
+	
+	public String getJobURL() {
+		return JobURL;
+	}
+	public void getJobURL(String jobID) {
+		String digest = hmacDigest(jobID, USERNAME + ":" + ACCESS_KEY, "HmacMD5");
+		String JobURL = "https://saucelabs.com/jobs/" + jobID + "?auth=" + digest;
+		System.out.println("JobURL ---" + JobURL);
+	}
+
+	public static String hmacDigest(String msg, String keyString, String algo) {
+		String digest = null;
+		try {
+			SecretKeySpec key = new SecretKeySpec((keyString).getBytes("UTF-8"), algo);
+			Mac mac = Mac.getInstance(algo);
+			mac.init(key);
+
+			byte[] bytes = mac.doFinal(msg.getBytes("ASCII"));
+
+			StringBuffer hash = new StringBuffer();
+			for (int i = 0; i < bytes.length; i++) {
+				String hex = Integer.toHexString(0xFF & bytes[i]);
+				if (hex.length() == 1) {
+					hash.append('0');
+				}
+				hash.append(hex);
+			}
+			digest = hash.toString();
+		} catch (UnsupportedEncodingException e) {
+		} catch (InvalidKeyException e) {
+		} catch (NoSuchAlgorithmException e) {
+		}
+		return digest;
 	}
 }
