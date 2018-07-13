@@ -1,6 +1,4 @@
-@codeMonkeys 
-@regression_06_06_18 
-@thePredators
+@codeMonkeys @thePredators
 Feature: C1.1 To test plan benefits and Coverage on UMS site
 
 
@@ -316,7 +314,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    Then the user navigates to Benefits and coverage page
+    Then the user navigates to Benefits coverage page
     Then the user validate Value Add Service page comes on clicking additional info button
 
     Examples: 
@@ -330,7 +328,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | Plan Type      | <planType>  |
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
-    When the user navigates to Benefits and coverage page
+    When the user navigates to Benefits coverage page
     And the user can see the values for catastrophic values
     Examples: 
       | planType |  memberType  |  copayCategory    |

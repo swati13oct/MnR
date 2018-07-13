@@ -204,30 +204,12 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	 */
 
 	@Then("^the user navigates to Benefits coverage page$")
-	public void user_views_BenefitsAndCoveragejenkins(DataTable memberAttributes) {
-		
-		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
-		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-
-		String plantype = memberAttributesMap.get("Plan Type");
-		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
-		List<String> desiredAttributes = new ArrayList<String>();
-		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator.hasNext();) {
-			{
-				String key = iterator.next();
-				desiredAttributes.add(memberAttributesMap.get(key));
-			}
-
-		}
+	public void user_views_BenefitsAndCoveragejenkins() {
+	
 
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 
-		BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag(plantype);
+		BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag();
 
 		if (benefitsCoveragePage != null) {
 			getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
