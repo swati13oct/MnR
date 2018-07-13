@@ -851,7 +851,8 @@ public class MRScenario {
 		System.out.println("Screenshot captured!!!");
 		// To get the report embedded in the report
 		scenario.embed(screenshot, "image/png");
-		String html = getJobURL();
+		String html = returnJobURL();
+		System.out.println("Job link text in report:"+html);
 		scenario.embed(html.getBytes(), "text/html");
 	}
 
@@ -1000,12 +1001,12 @@ public class MRScenario {
 	}
 
 	
-	public String getJobURL() {
+	public String returnJobURL() {
 		return JobURL;
 	}
 	public void getJobURL(String jobID) {
 		String digest = hmacDigest(jobID, USERNAME + ":" + ACCESS_KEY, "HmacMD5");
-		String JobURL = "https://saucelabs.com/jobs/" + jobID + "?auth=" + digest;
+		JobURL = "https://saucelabs.com/jobs/" + jobID + "?auth=" + digest;
 		System.out.println("JobURL ---" + JobURL);
 	}
 
