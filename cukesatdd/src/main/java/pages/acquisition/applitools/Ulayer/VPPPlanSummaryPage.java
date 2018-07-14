@@ -1,7 +1,7 @@
 /**
  * 
  */
-package pages.acquisition.ulayer;
+package pages.acquisition.applitools.Ulayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +20,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.ulayer.IntroductionInformationPage;
 import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPage;
 import acceptancetests.data.ElementData;
 import acceptancetests.util.CommonUtility;
@@ -40,7 +41,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[1]/div/span/span[@class='ng-binding']")
 	private WebElement maPlansNumber;
 	
-	//@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='plan-overview-wrapper']//div[@class='overview-tabs module-tabs-tabs']/div[1]//span[@class='trigger-closed']")
 	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[1]//*[@class='trigger-closed']")
 	private WebElement maPlansViewLink;
 	
@@ -84,10 +84,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='disabledprint ng-scope']")
 	List<WebElement> pdpPlanElement;
 	
-	//Change PDP Plan Element identifier. Same as for MA/MAPD plans
-/*	@FindBy(xpath = "//div[@class='module-plan-overview module swiper-slide ng-scope']")
-	List<WebElement> pdpPlanElement;
-*/
 	@FindBy(xpath="//div[contains(@ng-repeat,'plan in planModel.maPlans')]")
 	List<WebElement> maPlans;
 	
@@ -118,7 +114,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(className = "switchPlanYear")
 	private WebElement toggleplanYear;
 	
-	//@FindBy(xpath = "//div[@id='maplans_container']/div[3]/div/div[2]/div[1]/div/div[1]/div[1]/div/div[1]/div[2]/table/tbody/tr/td[3]/div/div[2]/div[3]/div[1]/p/a")
 	@FindBy(xpath=".//*[@id='doctorCoverMA']")
 	private WebElement MaProviderLink;
 	
@@ -181,7 +176,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='plan-list-1']//div[@class='module-plan-overview module swiper-slide ng-scope']")
 	List<WebElement> maPlansList;
 	
-	//Right Rail Element - TFN
 	@FindBy(xpath="//*[@class='tel ng-binding']")
 	private WebElement RightRail_TFN;
 	
@@ -195,17 +189,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		super(driver);
 		
 		PageFactory.initElements(driver, this);
-			openAndValidate();
+			//openAndValidate();
 	}
-
-	public VPPPlanSummaryPage(WebDriver driver, String planType) {
-		super(driver);
-		PageFactory.initElements(driver, this);
-		openAndValidate();
-
-	}
-
-	
 
 	private WebElement getSpecificPlanSummary(
 			List<WebElement> planElement,
@@ -268,7 +253,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				msPlansViewLink.click();
 			}
 		}
-		return new VPPPlanSummaryPage(driver, planType);
+		return new VPPPlanSummaryPage(driver);
 	}
 	
 	public VPPPlanSummaryPage viewPlanSummaryButton(String planType) {
@@ -291,7 +276,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				showMsPlans.click();
 			}
 		}
-		return new VPPPlanSummaryPage(driver, planType);
+		return new VPPPlanSummaryPage(driver);
 	}
 	
 	public VPPPlanSummaryPage clicksOnIsProviderCovered(String planName) {
@@ -453,7 +438,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if (toggleplanYear != null) {
 			toggleplanYear.click();
 		}
-		return new VPPPlanSummaryPage(driver, planType);
+		return new VPPPlanSummaryPage(driver);
 	}
 
 	public boolean clicksOnMAProviderCoveredLink() {
