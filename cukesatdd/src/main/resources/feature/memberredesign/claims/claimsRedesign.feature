@@ -282,7 +282,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
       | MA       | Last 24 months | NICE   | NICECLAIMS   |
     #  | MA       | Last 24 months | COSMOS | COSMOSCLAIMS |
     
-     @claimsSummaryAndDetails @TC11_PCP
+    @TC11_PCP
   Scenario Outline: To validate the claims present for the Federal member on claims sumamry page for AARP site
    Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>     |
