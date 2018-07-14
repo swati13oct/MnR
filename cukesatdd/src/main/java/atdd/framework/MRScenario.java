@@ -90,6 +90,7 @@ public class MRScenario {
 	private static final String DIRECTORY = "/src/main/resources/";
 	private static String sessionId;
 	private static String JobURL = null;
+	public static boolean isSauceLabSelected = false;
 	public static int count = 0;
 
 	public static final String USERNAME = "ucpadmin";
@@ -677,7 +678,7 @@ public class MRScenario {
 	public WebDriver getWebDriver() {
 
 
-
+		isSauceLabSelected = true;
 		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 
 		capabilities.setCapability("platform", "Windows 7");
@@ -689,8 +690,12 @@ public class MRScenario {
 		capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
 		String jobName = "VBF Execution - Using " + capabilities.getBrowserName() + " in  " + System.getProperty("environment") +" environment";
 		capabilities.setCapability("name", jobName);
+		capabilities.setCapability("recordMp4", true);
 		try {
 			webDriver = new RemoteWebDriver(new URL(URL), capabilities);
+			MRScenario.sessionId = ((RemoteWebDriver) webDriver).getSessionId().toString();
+			System.out.println("Session ID:" + (((RemoteWebDriver) webDriver).getSessionId()).toString());
+			getJobURL(getSessionId());
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -953,6 +958,7 @@ public class MRScenario {
 				return webDriver;
 			} else if (browser.equalsIgnoreCase(CommonConstants.SAUCE_BROWSER_WEB)) {
 				System.out.println("Execution is Going to Start on SauceLabs Web.....!!!!!");
+				isSauceLabSelected = true;
 				DesiredCapabilities capabilities = null;
 				if (browserName.equalsIgnoreCase("firefox")) {
 					System.out.println("Inside firefox");
