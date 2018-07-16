@@ -2,6 +2,7 @@ package pages.regression.claims;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 /**
  * 
@@ -87,6 +88,9 @@ public class ClaimSummarypage extends UhcDriver{
 	
 	@FindBy (id = "ship")
 	private WebElement claimsTableSHIP;
+	
+	@FindBy(className="modal-body")
+	private WebElement iPerceptionPopUp;
 	
 	//@FindBy (xpath=".//*[@id='summaryview']/div/div/main/div/div[2]/section/div/div/div[2]/div/div/ul")
 	//@FindBy(xpath ="(//*[contains(text(),'items found. Displaying ')]")
@@ -200,8 +204,30 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy(id="fed-document-date")
 	private WebElement claimFromDropDown1;
 	
+		
 	@FindBy(id="claim-type")
 	private WebElement clamtypeFromDropDown;
+	
+	@FindBy(xpath = "//*[@id='IPerceptionsEmbed']")
+	private WebElement WelcomePage_iPerceptionPresent;
+	
+	@FindBy(xpath = "//*[@id='PoweredByiPerceptions']")
+	private WebElement iPerceptionPopUp1;
+
+	@FindBy(xpath = "//*[@id='closeButton']")
+	private WebElement iPerceptionClose;
+	
+	@FindBy(xpath=".//*[@id='atddPagination']/p")
+	private WebElement verifyClaimSummaryAndPagination1;
+	
+	@FindBy(xpath="//.[contains(text(),'Review your claims search results below or enter new dates to search again')]")
+	private WebElement clamisSummCopyText;
+	
+	@FindBy(xpath=".//*[@id='learnmoresummarytoggle']")
+	private WebElement learmore;
+
+	@FindBy(id="claimType")
+	private WebElement Youhave;
 	
 	@FindBy(xpath="//*[@id='skipToBodyContent']//div[@class='reviewclaimstextFed parsys']//p")
 	private WebElement clamsSummaryCopyText;
@@ -305,6 +331,21 @@ public class ClaimSummarypage extends UhcDriver{
 		e.printStackTrace();
 	}return true;
 	}
+	
+	public boolean verifyClaimsTableAndPagination1(){
+				
+	       try {
+	    	   Thread.sleep(5000);
+	    	   
+			validate (verifyClaimSummaryAndPagination1);
+			   System.out.println("Pagination is seen ===>"+verifyClaimSummaryAndPagination.getText());
+			
+		} catch (Exception e) {
+			System.out.println("Pagination is not displayed as records are less");
+			e.printStackTrace();
+		}return true;
+		}
+	
 		
 	/**
 	 * @toDo : this method validates EOB 
@@ -330,7 +371,7 @@ public class ClaimSummarypage extends UhcDriver{
 		}
 		else if ((domain.equals("NICE")&&plantype.equals("MA")))
 		{
-			System.out.println("Medical EOB is not Displayed for MA NICE member");
+			System.out.println("Medical EOB is Displayed for MA NICE member" + (medicalEobText.isDisplayed()));
 			return true;
 		}
 		//SHIP CLAIMS EOB
@@ -494,11 +535,72 @@ public class ClaimSummarypage extends UhcDriver{
 	 * @toDo : this method validates Claims by time period 
 	 */
 	public void searchClaimsByTimePeriod(String planType,String claimPeriod) throws InterruptedException {
-		
+		try {
+			Thread.sleep(12000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			WelcomePage_iPerceptionPresent.click();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		try{
+			Alert alert = driver.switchTo().alert();
+			System.out.println("FeedBack Modal Alert Present");
+
+			if(validate(iPerceptionPopUp1)){
+				System.out.println("FeedBack Modal Present");
+
+				iPerceptionClose.click();
+				if (validate(iPerceptionPopUp1)){
+					System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
+				}
+				else
+					System.out.println("FeedBack Modal Closed");
+			}
+		}
+		catch (Exception e) {
+			System.out.println("FeedBack Modal NOT Present");
+
+		}
+
+		/*Thread.sleep(1000);
+		try{
+			if (iPerceptionPopUp.isDisplayed()) {
+				iPerceptionPopUp.click();
+			}
+		}catch(Exception e)        {
+			System.out.println("iPerception Pop Up not displayed");
+		}*/
+		/*
 		//System.out.println("The title of Claims page is-------->"+driver.getTitle());
 		//System.out.println("The URL of the Claims page is---------->"+driver.getCurrentUrl());
+		if(driver.getCurrentUrl().equalsIgnoreCase("Claims")){	
+			System.out.println("!!! The member is on Claims Summary page !!!");
+			try { Thread.sleep(1000); } 
+			catch (InterruptedException e) {						
+				// TODO Auto-generated catch block 
+				e.printStackTrace();
+				}
+			//System.out.println("!!! Going to select Last 24 months from the dropdown !!! ");
+			if(planType.contains("SHIP")){
+				System.out.println(planType +"SHIP plan type last 24 moths is going to select");
+						
+				last24months = driver.findElement(By.xpath("//div[@class='medical-claims shipCompSection']//div//*[@id='document-date']//option[contains(@value,'24 months')]"));
+				//last24months = driver.findElement(By.id(".//*[@id='dateShip24MAtdd']"));
+				//last24months.click();
+			}
+		System.out.println("The title of Claims page is-------->"+driver.getTitle());
+		//System.out.println("The URL of the Claims page is---------->"+driver.getCurrentUrl());
+		
 		if(driver.getTitle().equalsIgnoreCase("Claims")){	
 			System.out.println("!!! The member is on Claims Summary page !!!");
+			validate(planame);
+			System.out.println("The Plan Name is ===>"+(planame.getText()));*/
 			try { Thread.sleep(1000); } 
 			catch (InterruptedException e) {						
 				// TODO Auto-generated catch block 
@@ -509,8 +611,7 @@ public class ClaimSummarypage extends UhcDriver{
 				System.out.println(planType+"SHIP plan type last 24 moths is going to select");
 						
 				last24months = driver.findElement(By.xpath("//div[@class='medical-claims shipCompSection']//div//*[@id='document-date']//option[contains(@value,'24 months')]"));
-				//last24months = driver.findElement(By.id(".//*[@id='dateShip24MAtdd']"));
-				last24months.click();
+			
 			}
 			
 			else if (planType.contains("MAPD")){
@@ -590,7 +691,7 @@ public class ClaimSummarypage extends UhcDriver{
 			//validate(claimsTablePagination);
 			//System.out.println(" !!! Pagination is seen on Claims Summary page under the claims table ===>"+claimsTablePagination.isDisplayed());
 		}
-	}
+	
 	
 	/**
 	 * @toDo : this method validates claims table
@@ -606,7 +707,7 @@ public class ClaimSummarypage extends UhcDriver{
 			e.printStackTrace();
 		}
 		validate(claimstablemoreinfolink);
-		System.out.println("more info seen code summary page line 586");
+		System.out.println("more info seen claim summary page ==>" +claimstablemoreinfolink);
 		
 		if(claimsTableMedical.isDisplayed() || claimsTablePrescriptionDrug.isDisplayed() || claimsTableSHIP.isDisplayed()){
 			if (claimsTableMedical.isDisplayed())System.out.println("!!! Claims Table is seen for Federal members on Claims Summary page!!!");
@@ -832,29 +933,69 @@ public void NavigateToClaimsPage(){
 	  	 return new Footer(driver);
   }
 
-     public void validateClaimsHeaderCopyText() {
- 		// TODO Auto-generated method stub
- 		if (clamsSummaryCopyText.getText().contains("Review your claims search"))
+     public void validateYouHavemessage() {
+ 		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	 validate(Youhave);
+ 		if (Youhave.getText().contains("You have"))
  		{
- 			System.out.println(clamsSummaryCopyText.getText());
- 			System.out.println("claims Summary page copy test is dipalyed ");
- 			Assert.assertTrue(clamsSummaryCopyText.getText().contains("Review your claims search")+"copy text is displayed", true);
+ 			System.out.println(Youhave.getText());
+ 			System.out.println("You have claims messgae displayed ");
+ 			Assert.assertTrue(Youhave.getText().contains("You have")+"message is displayed", true);
  		
  		}	
  		
- 	}
-
+ 	}   
+     
+     public void validateClaimsHeaderCopyText() {
+  		// TODO Auto-generated method stub
+  		if (clamsSummaryCopyText.getText().contains("Review your claims search"))
+  		{
+  			System.out.println(clamsSummaryCopyText.getText());
+  			System.out.println("claims Summary page copy text is dipalyed ");
+  			Assert.assertTrue(clamsSummaryCopyText.getText().contains("Review your claims search")+"copy text is displayed", true);
+  		
+  		}	
+  		
+  	}
 
  public void validateClaimsFromDropDowns1() {
- 		// TODO Auto-generated method stub
+ 		
+		 
  		Select select = new Select(claimFromDropDown1);
  		System.out.println("Slected value is  =>" +select.getFirstSelectedOption());
  		for(int i=0;i<select.getOptions().size();i++){
  			System.out.println(select.getOptions().get(i).getAttribute("value"));
- 		}
- 		
- 		
+ 		} 		
  	}
+ public void validateClaimsFromDropDown2() {
+		
+ System.out.println("The title of Claims page is-------->"+driver.getTitle());
+	//System.out.println("The URL of the Claims page is---------->"+driver.getCurrentUrl());
+	
+	if(driver.getTitle().equalsIgnoreCase("Claims")){
+		System.out.println("!!! The member is on Claims Summary page !!!");
+		validate(planame);
+		System.out.println("The Plan Name is ===>"+(planame.getText()));
+		validate(claimFromDropDown1);
+		 System.out.println("*** Drop down for months visible***");	
+		 
+	 		Select select = new Select(claimFromDropDown1);
+	 		System.out.println("Slected value is  =>" +select.getFirstSelectedOption());
+	 		for(int i=0;i<select.getOptions().size();i++){
+	 			System.out.println(select.getOptions().get(i).getAttribute("value"));
+	 		} 	
+	 		  }
+	             }	
+		
+ public void validateLearnmoreaboutsection1(){
+	 validate(learmore);
+	 System.out.println("***Laearn More link is seen on the claim summart page ***");
+ }
 
 
 	 public void validateClaimsPlantype() {
@@ -884,13 +1025,27 @@ public void NavigateToClaimsPage(){
 				return new pages.regression.claims.ClaimDetailsPage(driver);
 		
 			}
-			return null;
-		}
+			return null; 
+			}
+		
 
+		public 	 ClaimSummarypage comboTabSelection1(){
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			for (WebElement webElement : comboTabsOnclaimsPage) {
+				System.out.println(webElement.getText());
+				webElement.click();
+				
 
 }
-
-
+			return new ClaimSummarypage(driver);	
+			}
+		
+           }
 
 
 

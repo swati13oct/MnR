@@ -1,4 +1,4 @@
-package pages.acquisition.ulayer;
+package pages.acquisition.applitools.Ulayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +21,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.AddDrugDetails;
+import pages.acquisition.ulayer.AddNewDrugModal;
+import pages.acquisition.ulayer.EditDrugDetails;
+import pages.acquisition.ulayer.SavingsOppurtunity;
 
 public class DrugCostEstimatorPage extends UhcDriver {
 

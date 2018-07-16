@@ -606,9 +606,9 @@ public class oleStepDefinition {
 		MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
 		PrelimineryQuestionsPage prelimineryQuestionsPage = medicareInfoPage.navigate_to_Preliminary_Questions_page();
 		if (prelimineryQuestionsPage != null) {
-
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE,
 					prelimineryQuestionsPage);
+			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"false");
 			System.out.println("OLE Preliminary Questions Page is Displayed");
 			Assert.assertTrue(true);
 		}
