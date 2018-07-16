@@ -928,11 +928,7 @@ private WebElement PlanMaterialSection;
               JavascriptExecutor js = (JavascriptExecutor)driver;
 
               try {
-                     Thread.sleep(10000);
-		              if (validate(iPerceptionframe)) {
-		                     feebackpopupClose();
-		                     System.out.println("iPerception Pop Up displayed");
-		             }
+		              feebackpopupClose();
 		              if (MRScenario.environmentMedicare.equals("team-ci1") || MRScenario.environmentMedicare.equals("team-h") || MRScenario.environmentMedicare.equals("test-a") || MRScenario.environmentMedicare.equals("team-e")) {
 		                     js.executeScript("arguments[0].click();", helpAndContactUslink);
 		

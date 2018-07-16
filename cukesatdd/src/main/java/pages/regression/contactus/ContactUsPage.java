@@ -213,9 +213,9 @@ public class ContactUsPage extends UhcDriver{
 		try {
 			Thread.sleep(8000);
 			PageFactory.initElements(driver, this);
+			feebackpopupClose();
 			CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_30);
 			openAndValidate();
-			feebackpopupClose();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
