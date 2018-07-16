@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.itextpdf.text.log.SysoCounter;
+
 import acceptancetests.data.PageData;
 import atdd.framework.UhcDriver;
 import pages.regression.claims.ClaimSummarypage;
@@ -61,6 +63,27 @@ public class Footer extends UhcDriver {
 	@FindBy(id= "claims_1")
 	private  WebElement claimsLink;
 	
+	@FindBy(id= "eobC1")
+	private WebElement EOBLink;
+	
+	@FindBy(id= "contactUS_1")
+	private WebElement contactUSLink;
+	
+	@FindBy(xpath= "//*[contains(text(),'Locate a Pharmacy')]")
+	private WebElement LocateAPharmacy;
+	
+	@FindBy(xpath ="//*[contains(text(),'Look up Drugs')]")
+	private WebElement LookUpDrug;
+	
+	@FindBy(id="home_2")
+	private WebElement homeBtn;
+	
+	@FindBy(id="overagebenefits_2")
+	private WebElement benefits;
+	
+	@FindBy(xpath = "//a[@class='dropdown-option' and contains(text(),'Account Settings')]")
+	private WebElement accountSettingOption;
+	
 	private PageData footer;
 
 	public Footer(WebDriver driver) {
@@ -108,15 +131,7 @@ public class Footer extends UhcDriver {
 			return null;}
 			
 				
-					
-					
-
-
-
-	
-	
-	
-	public ClaimSummarypage NavigateToClaimsPage(){
+	public Footer NavigateToClaimsPage(){
 		validate(claimsLink);
 		if(claimsLink.isDisplayed()){
 		System.out.println("Claims link is displayed");
@@ -128,7 +143,104 @@ public class Footer extends UhcDriver {
 		
 		
 		return null;
+	}	
+			
+	
+	public Footer NavigateToEOBPage(){
+		validate(EOBLink);
+		if(EOBLink.isDisplayed()){
+		System.out.println("EOB link is displayed");
+		EOBLink.click();
+		System.out.println("EOB link is clicked");
+				
+		}
+				
+		return null;
+			}
+
+	public Footer NavigateToContactUsPage(){
+		validate(HelpandContactUs);
+		if(HelpandContactUs.isDisplayed()){
+		System.out.println("contactUSLink link is displayed");
+		HelpandContactUs.click();
+		System.out.println("contactUS link is clicked");
+				
+		}
+				
+		return null;
+			}
+	
+	public Footer NavigateToBenefitsPage(){
+		validate(benefits);
+		if(benefits.isDisplayed()){
+		System.out.println("contactUSLink link is displayed");
+		benefits.click();
+		System.out.println("contactUS link is clicked");
+				
+		}
+				
+		return null;
+			}
+	
+	public Footer NavigateToPharmacyLocator(){
+		validate(homeBtn);
+		if(homeBtn.isDisplayed()){
+			System.out.println("Home button is displayed");
+			homeBtn.click();
+			System.out.println("Home button is clicked");
+			
+			waitforElement(LocateAPharmacy);
+			if(LocateAPharmacy.isDisplayed()){
+				System.out.println("Pharmacy link is displayed");
+				LocateAPharmacy.click();
+				System.out.println("pharmacy link is displayed");
+			}
+			
+		}
+		return null;
 	}
+
+	public Footer NavigateToDCE(){
+		validate(homeBtn);
+		if(homeBtn.isDisplayed()){
+			System.out.println("Home button is displayed");
+			homeBtn.click();
+			System.out.println("Home button is clicked");
+			
+			waitforElement(LookUpDrug);
+			if(LookUpDrug.isDisplayed()){
+				System.out.println("Pharmacy link is displayed");
+				LookUpDrug.click();
+				System.out.println("pharmacy link is displayed");
+			}
+			
+		}
+		return null;
+	}
+	
+	public Footer NavigateToProfileandPref(){
+		validate(homeBtn);
+		if(homeBtn.isDisplayed()){
+			System.out.println("Home button is displayed");
+			homeBtn.click();
+			System.out.println("Home button is clicked");
+			
+			waitforElement(accountSettingOption);
+			if(accountSettingOption.isDisplayed()){
+				System.out.println("Profile and referance link is displayed");
+				accountSettingOption.click();
+				System.out.println("Profile and referance link is clicked");
+			}
+		}
+			return null;
+			
+	}
+	
+
+	
+	
+	
+	
 	  public Footer validatePageFooter(){
 		  	  
 		  	 
