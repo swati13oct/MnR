@@ -108,7 +108,7 @@ Then the user validates EOB count
  
            Examples:
        | planType    | memberType    |dateRange  | eobType |  eobCount |
-       | MAPD        | NICE_EOB_R      | 18 Months |Medical  |     1     |
+       | MAPD        | NICE_EOB_R      | 18 Months |Medical  |     8     |
        | MA          | COSMOS_EOB_R      | 18 Months |Medical  |     16     |
        | PDPI         | COSMOS_EOB_R     | 18 Months |Medical  |     0     |
        | SHIP_ACTIVE  | SHIP_EOB      | Last 6-12 months |Medical  |     1     |
@@ -144,7 +144,7 @@ Then the user validates EOB count
 And the user clicks on first eob from the list
 Examples:
        | planType    | memberType    |dateRange  | eobType |  eobCount |
-       | PCP        | eobData      | 18 Months |Medical  |     1     |
+       | PCP        | eobData      | 18 Months |Medical  |     6     |
 
 @regression_06_06_18FnF     
 Scenario Outline: TC013_Check EOB is accessible for TEXAS ERS  - Active Plan
