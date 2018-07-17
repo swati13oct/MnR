@@ -697,4 +697,17 @@ public class ClaimsMemberRedesignStepDefinition {
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
 		
 	}
+	@And("^I validate the claims history Button$")
+	public void validate_claims_History_Button(){
+		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario()
+				.getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+		claimDetailspage.claimshistorylink();
+          }
+
+	@Then("^I validate the text for PCP & medica members$")
+	public void i_validate_the_text_for_PCP_members(){
+		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario()
+				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+		newClaimsSummaryPage.validatePCPtext();
+	}
           }
