@@ -229,6 +229,9 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy(id="claimType")
 	private WebElement Youhave;
 	
+	@FindBy(xpath=".//*[@id='globalContentIdForSkipLink']/div[3]/div[1]/div/div/main/div/div[1]/section/div[1]/div/div/div/div/div[3]/div/p")
+	private WebElement PCPtext;
+	
 	@FindBy(xpath="//*[@id='skipToBodyContent']//div[@class='reviewclaimstextFed parsys']//p")
 	private WebElement clamsSummaryCopyText;
 	
@@ -1044,6 +1047,11 @@ public void NavigateToClaimsPage(){
 }
 			return new ClaimSummarypage(driver);	
 			}
+		
+		 public void validatePCPtext(){
+			 validate(PCPtext);
+			 System.out.println("PCP text is seen on the page");
+		 }
 		
            }
 
