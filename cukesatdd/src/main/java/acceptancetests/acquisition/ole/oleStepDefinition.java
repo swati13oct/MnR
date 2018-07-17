@@ -610,6 +610,9 @@ public class oleStepDefinition {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE,
 					prelimineryQuestionsPage);
 			System.out.println("OLE Preliminary Questions Page is Displayed");
+			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"false");
+
+			
 			Assert.assertTrue(true);
 		}
 		else{
