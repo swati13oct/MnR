@@ -469,7 +469,7 @@ public class ApplitoolsStepDefinition_ACQ_UHC {
 			appObj.takeScreenshot(wd,"Acquisition AARP", "Enrollment Basics Med Ed Page", "enrollmentMedEdPage");
 			appObj.saveBean(PageConstants.APPLITOOLS_ACQ_PAGE, applitoolsAcqPage);
 	}
-	@Then("^the user clicks on the enroll in plan button for mapd plan and goes to med info page$")
+	@Then("^the user clicks on the enroll in plan button for mapd plan and goes to med info page uhc$")
 	public void the_user_clicks_on_Enroll_Now_to_start_the_OLE_flow(DataTable planAttributes) throws Throwable {
 		WebDriver wd = (WebDriver)appObj.getBean(CommonConstants.WEBDRIVER);
 		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
@@ -482,7 +482,7 @@ public class ApplitoolsStepDefinition_ACQ_UHC {
 		appObj.takeScreenshot(wd,"Acquisition AARP", "OLE Medicare Info Page", "oleMedInfoPage");
 		appObj.saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE, medicareInfoPage);
 	}
-	@Then("^the user enters info for pages in OLE flow and takes screenshots of each page$")
+	@Then("^the user enters info for pages in OLE flow and takes screenshots of each page uhc$")
 	public void the_user_enters_Medicare_Details_in_medicare_info_page(DataTable planAttributes) throws Throwable {
 		WebDriver wd = (WebDriver)appObj.getBean(CommonConstants.WEBDRIVER);
 		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
