@@ -1893,6 +1893,7 @@ public ClaimDetailsPage navigateToClaimDetailsPageCombo(){
 		
 	}
 	return new ClaimDetailsPage(driver);
+}
 
 public BenefitsAndCoveragePage navigateDirectToBnCPag() {
 		
@@ -1948,7 +1949,7 @@ public BenefitsAndCoveragePage navigateDirectToBnCPag() {
 	}
 
 }
-}
+
  			
 
 
