@@ -81,8 +81,17 @@ public class Footer extends UhcDriver {
 	@FindBy(id="overagebenefits_2")
 	private WebElement benefits;
 	
-	@FindBy(xpath = "//a[@class='dropdown-option' and contains(text(),'Account Settings')]")
+	@FindBy(id = "dropdown-toggle--1")
+	private WebElement accountprofile;
+	
+	@FindBy(xpath = ".//*[@id='dropdown-options--1']/a[2]")
 	private WebElement accountSettingOption;
+	
+	@FindBy(id = "closeButton")
+	public WebElement iPerceptionclosebtn;
+	
+	@FindBy(id = "IPerceptionsEmbed")
+	public WebElement iPerceptionframe;
 	
 	private PageData footer;
 
@@ -98,16 +107,34 @@ public class Footer extends UhcDriver {
 		// TODO Auto-generated method stub
   
 	}
+	
+	public void feebackpopupClose() throws InterruptedException
+	{ //waitForloader(driver,overlay, 20);
+	Thread.sleep(20000);
+	if (validate(iPerceptionframe)) {
+
+	switchToNewIframe(iPerceptionframe);
+	iPerceptionclosebtn.click();
+	driver.switchTo().defaultContent();
+	//iPerceptionAutoPopUp.click();
+	} else {
+	System.out.println("iPerception Pop Up not displayed");
+	}
+	}
 
 	public Object validateFooterLinks() throws InterruptedException{
 		
+		
+		
 		Thread.sleep(10000);
 		
-		
+		feebackpopupClose();
 		
 			
 				if (HelpandContactUs.isDisplayed() && AccountSettings.isDisplayed() 
-						&& LegalNoticesAndDisclosures.isDisplayed() && Accessibility.isDisplayed() && Saved.isDisplayed() &&
+						&& LegalNoticesAndDisclosures.isDisplayed() 
+						&& Accessibility.isDisplayed() 
+						&& Saved.isDisplayed() &&
 						Logout.isDisplayed()){
 			
 				System.out.println("======================Member support and Quick links are displayed =========================");
@@ -222,11 +249,14 @@ public class Footer extends UhcDriver {
 		validate(homeBtn);
 		if(homeBtn.isDisplayed()){
 			System.out.println("Home button is displayed");
+			waitforElement(homeBtn);
 			homeBtn.click();
 			System.out.println("Home button is clicked");
 			
-			waitforElement(accountSettingOption);
-			if(accountSettingOption.isDisplayed()){
+			waitforElement(accountprofile);
+			if(accountprofile.isDisplayed()){
+				accountprofile.click();
+				waitforElement(accountSettingOption);
 				System.out.println("Profile and referance link is displayed");
 				accountSettingOption.click();
 				System.out.println("Profile and referance link is clicked");

@@ -1025,14 +1025,13 @@ public void NavigateToClaimsPage(){
 				return new pages.regression.claims.ClaimDetailsPage(driver);
 		
 			}
-<<<<<<< HEAD
+
 			return null;
 		}
 		
-=======
-			return null; 
-			}
->>>>>>> remotes/origin/develop
+
+			
+
 		
 
 		public 	 ClaimSummarypage comboTabSelection1(){

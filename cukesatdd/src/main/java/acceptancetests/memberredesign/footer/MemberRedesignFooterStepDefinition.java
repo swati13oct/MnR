@@ -181,7 +181,7 @@ public class MemberRedesignFooterStepDefinition {
     	  getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
       }
       
-      @Then("^the user navigates to EOB page$")
+      @Then("^the user navigates to EOB page to validate footer$")
       public void user_navigates_to_EOB_page(){
     	  Footer footerPage = (Footer) getLoginScenario().getBean(PageConstants.footer_page);
     	  footerPage.NavigateToEOBPage();
