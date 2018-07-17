@@ -297,7 +297,7 @@ private WebElement PlanMaterialSection;
        @FindBy(xpath = "//*[@id='ordermaterials']")
        private WebElement OrderMaterialsTab_BnCPage;
        
-       @FindBy(xpath = "//h1[@class='h4 margin-none']")
+       @FindBy(xpath = "//*[@class = 'main-heading margin-none']")
        private WebElement orderplanHeadertxt;
 
        @FindBy(xpath = "//*[@class='tabs-desktop']//li[@role='listitem'][2]/a")
