@@ -117,6 +117,9 @@ private WebElement PlanMaterialSection;
        @FindBy(xpath = "//span[contains(.,'Print temporary ID card')]")
        private WebElement viewIDCard;
 
+       @FindBy (xpath="//div[@class='claim-results']//table[not (contains(@class,'ng-hide'))]//tbody//tr[2]//a[text()='MORE INFO']")
+    	private WebElement claimstablemoreinfolinkCombo;
+       
        @FindBy(id = "pcpLogoPrint1left")
        private WebElement validateLogo;
 
@@ -302,6 +305,9 @@ private WebElement PlanMaterialSection;
 
        @FindBy(xpath = "//*[@class='table-body margin-large']/div[2]//p")
        private WebElement PayDate;
+       
+       @FindBy(xpath=".//*[@id='cltotshipindsnf']")
+   	  private WebElement claimtotalcomb;
 
        @FindBy(id = "closeButton")
        private WebElement iPerceptionCloseButton;
@@ -346,7 +352,7 @@ private WebElement PlanMaterialSection;
 
               
     	   if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
-    		   if(Plantype.equalsIgnoreCase("MAPD") || Plantype.equalsIgnoreCase("PDP") || Plantype.equalsIgnoreCase("HIP"))
+    		   if(Plantype.equalsIgnoreCase("MAPD") || Plantype.equalsIgnoreCase("PDP") || Plantype.equalsIgnoreCase("HIP") || Plantype.equalsIgnoreCase("MA"))
     		   {
                      System.out.println("user is on Stage login page");
                      // CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);
@@ -1126,6 +1132,7 @@ private WebElement PlanMaterialSection;
        }
 
        public PharmacySearchPage navigateToRedesignPharmacyLocaterPage() {
+    	   	  waitForHomePage(helloPerson);
               if (validate(iPerceptionAutoPopUp)) {
                      iPerceptionAutoPopUp.click();
               } else {
@@ -1175,6 +1182,7 @@ private WebElement PlanMaterialSection;
 
     // to navigate to forms and resources page
     public FormsAndResourcesPage navigatetoFormsnResources() throws InterruptedException {
+    				waitForHomePage(helloPerson);
                     if (validate(iPerceptionAutoPopUp)) {
                                     iPerceptionAutoPopUp.click();
                     } else {
@@ -1857,7 +1865,36 @@ public void feebackpopupClose() throws InterruptedException
 		System.out.println("iPerception Pop Up not displayed");
 	}
 }
+public ClaimDetailsPage navigateToClaimDetailsPageCombo(){
+	try {
+		Thread.sleep(10000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		}	
+	validate(claimstablemoreinfolinkCombo);
+	System.out.println("more info link is seen for combo member ===>"+claimstablemoreinfolinkCombo.isDisplayed());
+	try {
+		Thread.sleep(2000);
+		} catch (InterruptedException e) {
+		e.printStackTrace();
+		}
 
+	JavascriptExecutor executor = (JavascriptExecutor)driver;
+	executor.executeScript("arguments[0].click();", claimstablemoreinfolinkCombo);
+
+
+	//claimstablemoreinfolinkCombo.click();
+	CommonUtility.waitForPageLoad(driver, claimtotalcomb, 30);	
+	System.out.println(driver.getTitle());
+	//System.out.println("*** Combo Member is on Claims Details Page ***");
+	if (driver.getTitle().equalsIgnoreCase("/details")) {
+		System.out.println("*** Combo Member is on Claims Details Page ***");
+		
+	}
+	return new ClaimDetailsPage(driver);
+
+}
 }
  			
 

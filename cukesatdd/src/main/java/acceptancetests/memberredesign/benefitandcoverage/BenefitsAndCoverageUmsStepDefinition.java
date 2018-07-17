@@ -206,28 +206,11 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@Then("^the user navigates to Benefits coverage page$")
 	public void user_views_BenefitsAndCoveragejenkins(DataTable memberAttributes) {
 		
-		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
-		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-
-		String plantype = memberAttributesMap.get("Plan Type");
-		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
-		List<String> desiredAttributes = new ArrayList<String>();
-		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator.hasNext();) {
-			{
-				String key = iterator.next();
-				desiredAttributes.add(memberAttributesMap.get(key));
-			}
-
-		}
+		
 
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 
-		BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag(plantype);
+		BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateToBandCPage();
 
 		if (benefitsCoveragePage != null) {
 			getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
@@ -518,6 +501,14 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validatedrugcoverageheaderandtext();
 	}
+	
+	@And("^the user validates group Drug coverage header and text under the section ")
+	public void user_validates__groupdrugcoverage_section() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validatedrugcoverageheaderandtextgroup();
+	}
+	
 	/** 
 	 * @toDo : Validates the text for the Look Up Drugs section
 	 */
@@ -556,6 +547,16 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validatelookupdrugsbutton(plantype);
 	}
+	
+	@And("^the user validates group Look Up Drugs button should be visible$")
+	public void user_validates_grouplookupdrugs()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validategrouplookupdrugsbutton();
+	}
+		
+	
 
 	/** 
 	 * @toDo : Validates the headers in DrugCopays and Discount section
@@ -600,7 +601,8 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	}
 
 	/** 
-	 * @toDo : Validates the Locate a Pharmacy button in locate a pharmacy section
+	 * @toDo : Validates the Locate a Pharmacy button in locate a phaThe user navigates to Benefits and Coverage page
+	 * rmacy section
 	 */
 	@And("^the user validates Locate a Pharmacy button should be visible")
 	public void user_validate_locatepharmacybutton(DataTable memberAttributes) {
@@ -931,7 +933,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	 */
 
 
-	@And("the user validates the Primarycare Provider section for Group")
+	@And("the user validates the Group Primarycare Provider section")
 	public void user_validate_PrimaryCareProvForHmo() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
@@ -1531,6 +1533,14 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		planBenefitsCoverage.validatesRemoveRider();
 		
 	}
+	
+@Then("^verify ancillary benefit section is not displayed$")
+ 	
+ 	public void ancillary_not_displayed() {
+	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+	Assert.assertTrue(benefitsCoveragePage.ancillarynotdisplayed());
+ 	}
 
 	
 
