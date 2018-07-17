@@ -111,12 +111,12 @@ Then the user validates EOB count
        | MAPD        | NICE_EOB_R      | 18 Months |Medical  |     1     |
        | MA          | COSMOS_EOB_R      | 18 Months |Medical  |     16     |
        | PDPI         | COSMOS_EOB_R     | 18 Months |Medical  |     0     |
-       | SHIP_ACTIVE  | SHIP_EOB      | 12-18 Months |Medical  |     1     |
-       | SHIP_Termnated| SHIP_EOB      | 12-18 Months |Medical  |     1     |
+       | SHIP_ACTIVE  | SHIP_EOB      | Last 6-12 months |Medical  |     1     |
+       | SHIP_Termnated| SHIP_EOB      | Last 6-12 months |Medical  |     1     |
        | MAPD          | NICETermin_EOB_R | 18 Months |Medical  |     1     |
        
 @regression_06_06_18FnF
-Scenario Outline: To verify EOB accessible for PDP + MEDSup Plan
+Scenario Outline: To verify EOB accessible for PDP + MEDSup Plan_TC12
 Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -144,7 +144,7 @@ Then the user validates EOB count
 And the user clicks on first eob from the list
 Examples:
        | planType    | memberType    |dateRange  | eobType |  eobCount |
-       | PCP        | eobData      | 18 Months |Medical  |     1     |
+       | PCP        | eobData      | 18 Months |Medical  |     6     |
 
 @regression_06_06_18FnF     
 Scenario Outline: TC013_Check EOB is accessible for TEXAS ERS  - Active Plan
