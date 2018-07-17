@@ -190,7 +190,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
       #| MAPD     | Custom Search | 10/10/2017  | 06/14/2012    |
       
       
-  @claimsSummaryAndDetails
+  @claimsSummaryAndDetails @regression_06_06_18
   Scenario Outline: To validate the claims present for the Federal member on claims sumamry page for AARP site
    Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>     |
@@ -224,11 +224,9 @@ Feature: T1.1To validate the new changes related to claims page on the member re
     And I can search claims for the following claim period on redesigned site
       | Plan Type    | <planType>    |
       | Claim Period | <claimPeriod> |
-    Then I can see the claims displayed based on the selection in redesigned site
-    And I validate the pagination on the claims summary page 
-   	And the user validates the EOB section based on domain in redesigned site
-      | Domain     | <domain>      |
-      | Plan Type  | <planType>    |
+    Then  I can see the claims displayed based on the selection in redesigned site for PDP plans 
+    And I validate the pagination on the claims summary page for members  
+    And the user validates the EOB section in redesigned site    
     And the user validates the DownloadMyData section in redesigned site
 
     Examples: 

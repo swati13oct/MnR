@@ -75,7 +75,7 @@ public class ClaimDetailsPage extends UhcDriver{
 	public WebElement claimstotalTable;
 	
 	//@FindBy(id = "learnmoretoggleship")
-	@FindBy(xpath = ".//*[@id='learnmoredetailstoggle']/p")
+	@FindBy(xpath = ".//*[@id='learnmoredetailstoggle']/div[1]/p")
 	private WebElement learnMoreLink;
 	
 	@FindBy(id = "eobClass")
