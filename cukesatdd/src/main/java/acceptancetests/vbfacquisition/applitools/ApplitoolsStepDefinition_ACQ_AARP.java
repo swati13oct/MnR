@@ -2,6 +2,7 @@ package acceptancetests.vbfacquisition.applitools;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +14,9 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import acceptancetests.vbfacquisition.vpp.VPPCommonConstants;
+import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.data.CommonConstants;
+import acceptancetests.data.OLE_PageConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.ApplitoolsObject;
 import atdd.framework.MRScenario;
@@ -33,6 +36,8 @@ import pages.acquisition.applitools.Ulayer.DrugCostEstimatorPage;
 import pages.acquisition.applitools.Ulayer.PlanDetailsPage;
 
 import pages.acquisition.applitools.Ulayer.VPPPlanSummaryPage;
+import pages.acquisition.applitools.OLE.*;
+
 import com.applitools.eyes.selenium.Eyes;
 import com.applitools.eyes.BatchInfo;
 import com.applitools.eyes.MatchLevel;
@@ -43,9 +48,7 @@ import com.applitools.eyes.TestResults;
  */
 public class ApplitoolsStepDefinition_ACQ_AARP {
 
-	@Autowired
-	MRScenario loginScenario;
-
+	
 	
 	ApplitoolsObject appObj;
 	
@@ -69,11 +72,12 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 		
 		
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
+		/*aquisitionhomepage.clickOnViewDisclaimerLink();
 		appObj.takeScreenshot(wd,"Acquisition AARP", "Home Page", "homepage");
 		aquisitionhomepage.hoverOverOurPlanslink();
 		appObj.takeScreenshot(wd,"Acquisition AARP", "Our Plans Window Homepage", "ourPlansHomepage");
 		aquisitionhomepage.hoverOverMedEdlink();
-		appObj.takeScreenshot(wd,"Acquisition AARP", "Medicare Education Window Homepage", "medEdWindowHomepage");
+		appObj.takeScreenshot(wd,"Acquisition AARP", "Medicare Education Window Homepage", "medEdWindowHomepage");*/
 		appObj.saveBean(PageConstants.ACQUISITION_HOME_PAGE,
 				aquisitionhomepage);
 		appObj.saveBean(CommonConstants.WEBDRIVER, wd);
@@ -88,10 +92,10 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 		String zipcode = memberAttributesRow.get(0).getCells().get(1);
 		
 		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.navigateToVpp(zipcode);
-		appObj.takeScreenshot(wd,"Acquisition AARP", "VPP Page", "vpppage"); 
+	//	appObj.takeScreenshot(wd,"Acquisition AARP", "VPP Page", "vpppage"); 
 		plansummaryPage.clickonViewPlans(); // click on View Plans for MA/MAPD 
-		appObj.takeScreenshot(wd,"Acquisition AARP", "VPP Page MAPD Plans", "vpppageMAPD");
-		
+	//	appObj.takeScreenshot(wd,"Acquisition AARP", "VPP Page MAPD Plans", "vpppageMAPD");
+		appObj.saveBean(CommonConstants.WEBDRIVER, wd);
 		appObj.saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 	}
 	
@@ -105,23 +109,23 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 		String plantype =memberAttributesRow.get(0).getCells().get(1);
 		String planName = memberAttributesRow.get(1).getCells().get(1);
 		String drug = memberAttributesRow.get(2).getCells().get(1);
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) loginScenario.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) appObj.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		DrugCostEstimatorPage dce = plansummaryPage.navigateToDCEFromVPP(plantype,planName);
-		appObj.takeScreenshot(wd,"Acquisition AARP", "DCE Step 1", "dce_step1");
+	//	appObj.takeScreenshot(wd,"Acquisition AARP", "DCE Step 1", "dce_step1");
 		dce.addDrug(drug.split(" ")[0]);
-		appObj.takeScreenshot(wd,"Acquisition AARP", "DCE Step 1 Drug added", "dce_step1_drug");
+	//	appObj.takeScreenshot(wd,"Acquisition AARP", "DCE Step 1 Drug added", "dce_step1_drug");
 		dce.navigateToStep2();
-		appObj.takeScreenshot(wd,"Acquisition AARP", "DCE Step 2", "dce_step2");
+		//appObj.takeScreenshot(wd,"Acquisition AARP", "DCE Step 2", "dce_step2");
 		dce.select_first_pharmacy();
-		appObj.takeScreenshot(wd,"Acquisition AARP", "DCE Step 2 Pharmacy Selected", "dce_step2_pharmacy");
+	//	appObj.takeScreenshot(wd,"Acquisition AARP", "DCE Step 2 Pharmacy Selected", "dce_step2_pharmacy");
 		dce.navigateToStep3();
-		appObj.takeScreenshot(wd,"Acquisition AARP", "DCE Step 3", "dce_step3");
+		//appObj.takeScreenshot(wd,"Acquisition AARP", "DCE Step 3", "dce_step3");
 		dce.clicksOnReturnLink();
 		
-		if(dce!=null){
-			loginScenario.saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
+		
+			appObj.saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
 			appObj.saveBean(CommonConstants.WEBDRIVER, wd);
-		}
+		
 	}
 	
 	@And("^the user goes to the view plan details page for MAPD plan and takes screenshots$")
@@ -147,9 +151,9 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 	}
 
 	@When("^the user clicks on PDP plans and takes screenshot$")
-	public void user_goes_to_VPPpage_PDP(DataTable memberAttributes)throws InterruptedException{
+	public void user_goes_to_VPPpage_PDP()throws InterruptedException{
 		WebDriver wd = (WebDriver)appObj.getBean(CommonConstants.WEBDRIVER);
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) loginScenario.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) appObj.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		
 		plansummaryPage.clickOnPDPPlans(); //click on View plans for PDP and take screenshot
 		appObj.takeScreenshot(wd,"Acquisition AARP", "VPP Page PDP Plans", "vpppagePDP");
@@ -171,7 +175,7 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 		planDetailsPage.clickOnPlanCostsTab();
 		appObj.takeScreenshot(wd,"Acquisition AARP", "Plan Details PDP Plan Costs Tab", "planDetailsPDP2");
 		planDetailsPage.backtoPlanSummary();
-		
+		plansummaryPage.clickonViewPlans();
 		appObj.saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 	}
 	
@@ -470,5 +474,57 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 			applitoolsAcqPage.start(url);
 			appObj.takeScreenshot(wd,"Acquisition AARP", "Enrollment Basics Med Ed Page", "enrollmentMedEdPage");
 			appObj.saveBean(PageConstants.APPLITOOLS_ACQ_PAGE, applitoolsAcqPage);
+	}
+	
+	@Then("^the user clicks on the enroll in plan button for mapd plan and goes to med info page$")
+	public void the_user_clicks_on_Enroll_Now_to_start_the_OLE_flow(DataTable planAttributes) throws Throwable {
+		WebDriver wd = (WebDriver)appObj.getBean(CommonConstants.WEBDRIVER);
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		String PlanName = givenAttributesRow.get(0).getCells().get(1);
+	    VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) appObj.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			
+		WelcomePage welcomePage = planSummaryPage.Enroll_OLE_Plan(PlanName);
+		appObj.takeScreenshot(wd,"Acquisition AARP", "OLE Welcome Page", "oleWelcomePage");
+		MedicareInformationPage medicareInfoPage = welcomePage.navigate_to_medicare_info_page();
+		appObj.takeScreenshot(wd,"Acquisition AARP", "OLE Medicare Info Page", "oleMedInfoPage");
+		appObj.saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE, medicareInfoPage);
+	}
+	@Then("^the user enters info for pages in OLE flow and takes screenshots of each page$")
+	public void the_user_enters_Medicare_Details_in_medicare_info_page(DataTable planAttributes) throws Throwable {
+		WebDriver wd = (WebDriver)appObj.getBean(CommonConstants.WEBDRIVER);
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		String planType = MemberDetailsMap.get("Plan Type");
+		MedicareInformationPage medicareInfoPage = (MedicareInformationPage) appObj.getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+
+	    medicareInfoPage.enter_required_Medicare_details(MemberDetailsMap);
+	    PrelimineryQuestionsPage prelimineryQuestionsPage = medicareInfoPage.navigate_to_Preliminary_Questions_page();
+	    appObj.takeScreenshot(wd,"Acquisition AARP", "OLE Preliminary Questions Page", "prelimQuestionPage");
+	    prelimineryQuestionsPage.clickNoESRD();
+	    PersonalInformationPage personalInformationPage = prelimineryQuestionsPage.navigate_to_Personal_Information_page();
+	    appObj.takeScreenshot(wd,"Acquisition AARP", "OLE Personal Info Page", "persionalInfoPage");
+	    personalInformationPage.enter_member_details(MemberDetailsMap);
+	    SpecialElectionPeriodPage specialElectPage = personalInformationPage.navigate_to_SEP_page();
+	    appObj.takeScreenshot(wd,"Acquisition AARP", "OLE Special electtion Page", "specialElectionPage");
+	    CoverageInformationPage coverageInfoPage = specialElectPage.navigate_to_Coverage_Information_page();
+	    appObj.takeScreenshot(wd,"Acquisition AARP", "OLE Coverage Information Page", "coverageInfoPage");
+	    ProposedEffectiveDatePage effectiveDatePage = coverageInfoPage.navigate_to_Proposed_Effective_Date_Page();
+	    appObj.takeScreenshot(wd,"Acquisition AARP", "OLE Proposed Effective Date Page", "effectiveDatePage");
+	    PrimaryCarePhysicianPage pcpPage = (PrimaryCarePhysicianPage) effectiveDatePage.navigate_to_PCP_Page(planType);
+	    appObj.takeScreenshot(wd,"Acquisition AARP", "OLE Primary Care Physician Page", "pcpPage");
+	    PlanPremiumPage planPremPage = pcpPage.navigate_to_Plan_Premium_Page();
+	    appObj.takeScreenshot(wd,"Acquisition AARP", "OLE Plan Premium Page", "planPremiumPage");
+	    SupplementalBenefitsPage suppBenefitsPage = planPremPage.navigate_to_Supplemental_Riders_Page();
+	    appObj.takeScreenshot(wd,"Acquisition AARP", "OLE Supplemental Benefits Page", "suppBenefitsPage");
+	    AuthorizationPage authPage =  suppBenefitsPage.navigate_to_Authorization_Page();
+	    appObj.takeScreenshot(wd,"Acquisition AARP", "OLE Authorization Page", "authPage");
+	    authPage.enter_required_fields();
+	    authPage.navigate_to_Review_Submit_Page();
+	    appObj.takeScreenshot(wd,"Acquisition AARP", "OLE Review and Submit Page", "reviewSubmitPage");
 	}
 }

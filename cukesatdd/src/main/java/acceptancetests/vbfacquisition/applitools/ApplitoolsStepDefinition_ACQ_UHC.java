@@ -3,13 +3,15 @@ package acceptancetests.vbfacquisition.applitools;
 import static org.hamcrest.CoreMatchers.startsWith;
 import static org.junit.Assert.assertEquals;
 
-
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import acceptancetests.vbfacquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
+import acceptancetests.data.OLE_PageConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.ApplitoolsObject;
 import atdd.framework.MRScenario;
@@ -28,6 +30,17 @@ import pages.acquisition.applitools.Blayer.DrugCostEstimatorPage;
 import pages.acquisition.applitools.Blayer.PlanDetailsPage;
 
 import pages.acquisition.applitools.Blayer.VPPPlanSummaryPage;
+import pages.acquisition.applitools.OLE.AuthorizationPage;
+import pages.acquisition.applitools.OLE.CoverageInformationPage;
+import pages.acquisition.applitools.OLE.MedicareInformationPage;
+import pages.acquisition.applitools.OLE.PersonalInformationPage;
+import pages.acquisition.applitools.OLE.PlanPremiumPage;
+import pages.acquisition.applitools.OLE.PrelimineryQuestionsPage;
+import pages.acquisition.applitools.OLE.PrimaryCarePhysicianPage;
+import pages.acquisition.applitools.OLE.ProposedEffectiveDatePage;
+import pages.acquisition.applitools.OLE.SpecialElectionPeriodPage;
+import pages.acquisition.applitools.OLE.SupplementalBenefitsPage;
+import pages.acquisition.applitools.OLE.WelcomePage;
 
 /**
  *Functionality:Global Header Footer 
@@ -57,6 +70,7 @@ public class ApplitoolsStepDefinition_ACQ_UHC {
 		
 		
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
+		aquisitionhomepage.clickOnViewDisclaimerLink();
 		appObj.takeScreenshot(wd,"Acquisition AARP", "Home Page", "homepage");
 		aquisitionhomepage.hoverOverOurPlanslink();
 		appObj.takeScreenshot(wd,"Acquisition AARP", "Our Plans Window Homepage", "ourPlansHomepage");
@@ -455,5 +469,55 @@ public class ApplitoolsStepDefinition_ACQ_UHC {
 			appObj.takeScreenshot(wd,"Acquisition AARP", "Enrollment Basics Med Ed Page", "enrollmentMedEdPage");
 			appObj.saveBean(PageConstants.APPLITOOLS_ACQ_PAGE, applitoolsAcqPage);
 	}
-	
+	@Then("^the user clicks on the enroll in plan button for mapd plan and goes to med info page$")
+	public void the_user_clicks_on_Enroll_Now_to_start_the_OLE_flow(DataTable planAttributes) throws Throwable {
+		WebDriver wd = (WebDriver)appObj.getBean(CommonConstants.WEBDRIVER);
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		String PlanName = givenAttributesRow.get(0).getCells().get(1);
+	    VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) appObj.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			
+		WelcomePage welcomePage = planSummaryPage.Enroll_OLE_Plan(PlanName);
+		appObj.takeScreenshot(wd,"Acquisition AARP", "OLE Welcome Page", "oleWelcomePage");
+		MedicareInformationPage medicareInfoPage = welcomePage.navigate_to_medicare_info_page();
+		appObj.takeScreenshot(wd,"Acquisition AARP", "OLE Medicare Info Page", "oleMedInfoPage");
+		appObj.saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE, medicareInfoPage);
+	}
+	@Then("^the user enters info for pages in OLE flow and takes screenshots of each page$")
+	public void the_user_enters_Medicare_Details_in_medicare_info_page(DataTable planAttributes) throws Throwable {
+		WebDriver wd = (WebDriver)appObj.getBean(CommonConstants.WEBDRIVER);
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		String planType = MemberDetailsMap.get("Plan Type");
+		MedicareInformationPage medicareInfoPage = (MedicareInformationPage) appObj.getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+
+	    medicareInfoPage.enter_required_Medicare_details(MemberDetailsMap);
+	    PrelimineryQuestionsPage prelimineryQuestionsPage = medicareInfoPage.navigate_to_Preliminary_Questions_page();
+	    appObj.takeScreenshot(wd,"Acquisition AARP", "OLE Preliminary Questions Page", "prelimQuestionPage");
+	    prelimineryQuestionsPage.clickNoESRD();
+	    PersonalInformationPage personalInformationPage = prelimineryQuestionsPage.navigate_to_Personal_Information_page();
+	    appObj.takeScreenshot(wd,"Acquisition AARP", "OLE Personal Info Page", "persionalInfoPage");
+	    personalInformationPage.enter_member_details(MemberDetailsMap);
+	    SpecialElectionPeriodPage specialElectPage = personalInformationPage.navigate_to_SEP_page();
+	    appObj.takeScreenshot(wd,"Acquisition AARP", "OLE Special electtion Page", "specialElectionPage");
+	    CoverageInformationPage coverageInfoPage = specialElectPage.navigate_to_Coverage_Information_page();
+	    appObj.takeScreenshot(wd,"Acquisition AARP", "OLE Coverage Information Page", "coverageInfoPage");
+	    ProposedEffectiveDatePage effectiveDatePage = coverageInfoPage.navigate_to_Proposed_Effective_Date_Page();
+	    appObj.takeScreenshot(wd,"Acquisition AARP", "OLE Proposed Effective Date Page", "effectiveDatePage");
+	    PrimaryCarePhysicianPage pcpPage = (PrimaryCarePhysicianPage) effectiveDatePage.navigate_to_PCP_Page(planType);
+	    appObj.takeScreenshot(wd,"Acquisition AARP", "OLE Primary Care Physician Page", "pcpPage");
+	    PlanPremiumPage planPremPage = pcpPage.navigate_to_Plan_Premium_Page();
+	    appObj.takeScreenshot(wd,"Acquisition AARP", "OLE Plan Premium Page", "planPremiumPage");
+	    SupplementalBenefitsPage suppBenefitsPage = planPremPage.navigate_to_Supplemental_Riders_Page();
+	    appObj.takeScreenshot(wd,"Acquisition AARP", "OLE Supplemental Benefits Page", "suppBenefitsPage");
+	    AuthorizationPage authPage =  suppBenefitsPage.navigate_to_Authorization_Page();
+	    appObj.takeScreenshot(wd,"Acquisition AARP", "OLE Authorization Page", "authPage");
+	    authPage.enter_required_fields();
+	    authPage.navigate_to_Review_Submit_Page();
+	    appObj.takeScreenshot(wd,"Acquisition AARP", "OLE Review and Submit Page", "reviewSubmitPage");
+	}
 }

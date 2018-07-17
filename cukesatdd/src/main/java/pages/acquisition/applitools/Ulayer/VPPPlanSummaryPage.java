@@ -19,9 +19,10 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.applitools.OLE.*;
 import pages.acquisition.ulayer.IntroductionInformationPage;
 import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPage;
+import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -108,7 +109,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[1]//*[@class='trigger-closed']")
 	private WebElement viewPlans;
 	
-	@FindBy(xpath = "div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[3]//*[@class='trigger-closed']")
+	@FindBy(xpath = "//div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[3]//*[@class='trigger-closed']")
 	private WebElement viewPDPPlans;
 	
 	@FindBy(className = "switchPlanYear")
@@ -732,17 +733,22 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 	}
 	public PlanDetailsPage navigateToPlanDetails(String planName, String planType) {
-		driver.manage().window().maximize();
-	
+		
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {	
 		WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//a[contains(text(),'View plan and drug coverage details')]"));
-			validate(MAmoreDetailsLink);
+		validate(MAmoreDetailsLink);
 			MAmoreDetailsLink.click();
 			System.out.println("View Plan Details Link is clicked for MA plan"+planName);
 
 
 		} else if (planType.equalsIgnoreCase("PDP")) {
-			WebElement PDPmoreDetailsLink = driver.findElement(By.xpath("//h2[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@id = 'viewmoredetlinkpdp']"));
+			WebElement PDPmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@id = 'viewmoredetlinkpdp']"));
 			validate(PDPmoreDetailsLink);
 			PDPmoreDetailsLink.click();
 			System.out.println("View Plan Details Link is clicked for PDP plan"+planName);
@@ -960,12 +966,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	 */
 	public WelcomePage Enroll_OLE_Plan(String planName) throws InterruptedException {
 		
-		System.out.println("Enroll in Plan for Plan : "+planName);
+		
 		WebElement EnrollForPlan = driver.findElement(By.xpath("//h3[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(), 'Enroll in plan')]"));
 		try {
 		validate(EnrollForPlan);
 		
-		System.out.println("Found Enroll IN Plan Button for the Plan : "+planName);
 		}catch(Exception e){
 			System.out.println("Enroll in Plan Button is Not Displayed ");
 		}
@@ -1040,7 +1045,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			if(validate(dceLink))
 				dceLink.click();
 			
-		}else{}
+		}
+		try {
+			Thread.sleep(15000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		if(currentUrl().contains("/estimate-drug-costs.html#/drug-cost-estimator"))
 			return new DrugCostEstimatorPage(driver);
