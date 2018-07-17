@@ -1,10 +1,14 @@
-package pages.acquisition.ulayer;
+package pages.acquisition.applitools.Ulayer;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
+import pages.acquisition.ulayer.AboutUsAARPPage;
+import pages.acquisition.ulayer.GlobalWebElements;
+import pages.acquisition.ulayer.PageTitleConstants;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.*;
@@ -42,7 +46,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private WebElement FindPlansButton1;
 
 	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
-	private WebElement OurPlansLink1;
+	private WebElement OurPlansLink;
+	
+	@FindBy(xpath = "//*[@id='ghn_lnk_3']")
+	private WebElement medEdLink;
 
 	@FindBy(id = "zipcodebtn")
 	private WebElement findPlansButton;
@@ -145,32 +152,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	
-	public JSONObject accessingGlobalHeader() {
-
-		String fileName = CommonConstants.GLOBAL_HEADER_PAGE_DATA;
-		globalHeader = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
-
-		JSONObject jsonObject = new JSONObject();
-		for (String key : globalHeader.getExpectedData().keySet()) {
-			WebElement element = findElement(globalHeader.getExpectedData().get(key));
-			if (element != null) {
-				if (validate(element)) {
-					try {
-						jsonObject.put(key, element.getText());
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			}
-		}
-		globalHeaderJson = jsonObject;
-
-		return globalHeaderJson;
-
-	}
-
-
+	
 
 	@Override
 	public void openAndValidate() {
@@ -179,23 +161,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}else{
 			start(AARP_ACQISITION_PAGE_URL);
 		}
-		validate(navigationSectionHomeLink);
-		validate(navigationSectionOurPlansLink);
-		validate(navigationSectionMedicareEducationLink);
-		validate(navigationSectionEnterSearch);
-		//validate(getStartedButton);
-
-		validate(zipCodeField);
-		validate(viewPlansButton);
-		//validate(po7Link);
-
-		validate(footerAboutUsLink);
-		validate(footerContactUsLink);
-		validate(footerSiteMapLink);
-		validate(footerPrivacyPolicyLink);
-		validate(footerTermsAndConditionsLink);
-		validate(footerDisclaimersLink);
-		validate(footerAgentsAndBrokersLink);
 
 	}
 
@@ -253,7 +218,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 		sendkeys(zipCodeField, zipcode);
 		viewPlansButton.click();
-		
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
 		}
@@ -339,25 +309,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	}
 
-
-	public Boolean validate_textField() {
-
-		validate(usernameField);
-		usernameField.click();
-		usernameField.sendKeys("q1ulayer");
-		String user = usernameField.getAttribute("value");
-		validate(passwordField);
-		passwordField.click();
-		passwordField.sendKeys("Password");
-		String pass = passwordField.getAttribute("value");
-		if (user.equalsIgnoreCase("q1ulayer") && pass.equalsIgnoreCase("Password")) {
-			return true;
-		}
-		return false;
-	}
-
-	
-
 	public AcquisitionHomePage navigationSectionHomeLinkClick() {
 		validate(navigationSectionHomeLink);
 		navigationSectionHomeLink.click();
@@ -382,34 +333,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return false;
 	}
 
-	
 
 	
-
-	public Boolean enterInvalidUserNamePassword() {
-		validate(usernameField);
-		usernameField.click();
-		usernameField.sendKeys("");
-		// usernameField.sendKeys(givenAttributesRow.get(0).getCells().get(0));
-		String user = usernameField.getAttribute("value");
-		validate(passwordField);
-		passwordField.click();
-		passwordField.sendKeys("pas");
-		// passwordField.sendKeys(givenAttributesRow.get(0).getCells().get(1));
-		String pass = passwordField.getAttribute("value");
-		if (user.equalsIgnoreCase("") && pass.equalsIgnoreCase("pas")) {
-			return true;
-		}
-		return false;
-	}
-
-	public Boolean checkErrorMessage() {
-		validate(signInButton);
-		signInButton.click();
-		validate(signInButton);
-		return validate(alreadyMemberInvalidCredsErrorMessage);
-	}
-
 	public Boolean enterValidUserNamePassword() {
 		validate(usernameField);
 		usernameField.click();
@@ -429,22 +354,23 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	
 
-	public void hoverourplanslink() {
-		validate(OurPlansLink1);
+	public void hoverOverOurPlanslink() {
 		// Hover over text
 		Actions action = new Actions(driver);
 		PageFactory.initElements(driver, this);
-		action.moveToElement(OurPlansLink1).build().perform();
+		action.moveToElement(OurPlansLink).build().perform();
 
-		// to click
-		// action.click().build().perform();
-
-		validate(OurPlansLink1);
-
-		// TODO Auto-generated method stub
 
 	}
 
+	public void hoverOverMedEdlink() {
+		// Hover over text
+		Actions action = new Actions(driver);
+		PageFactory.initElements(driver, this);
+		action.moveToElement(medEdLink).build().perform();
+
+
+	}
 	public AcquisitionHomePage findplansbuttonclick() {
 		validate(FindPlansButton1);
 		FindPlansButton1.click();
@@ -456,12 +382,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return null;
 	}
 
-	
 
-	// private PageData ourPlansNav;
-	public JSONObject ourPlansNavJson;
-
-	
 
 	public void ourPlansHover() {
 		Actions actions = new Actions(driver);
@@ -492,84 +413,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return false;
 	}
 
-	public Boolean alreadyMemberActiveValid() {
-
-		validate(signInButton);
-		String timerId = alreadyPlanMemberButtonInactive.getAttribute("id");
-		if (timerId.contains("cookie")) {
-			if (cookieValid()) {
-				driver.navigate().refresh();
-				String[] parts = timerId.split("-");
-				String timerString = parts[1];
-				int timer = Integer.parseInt(timerString);
-				if (timer > 0) {
-					return validate(signInButton);
-				}
-			}
-		} else if (timerId.contains("visitor")) {
-			String[] parts = timerId.split("-");
-			String timerString = parts[1];
-			int timer = Integer.parseInt(timerString);
-			if (timer > 0) {
-				return validate(signInButton);
-			}
-
-		}
-		return false;
-	}
-
-	public Boolean cookieTimerValid() {
-		driver.navigate().refresh();
-		validate(signInButton);
-		String timerId = alreadyPlanMemberButtonInactive.getAttribute("id");
-		if (timerId.contains("cookie") || timerId.contains("visitor")) {
-			String[] parts = timerId.split("-");
-			String timerString = parts[1];
-			int timer = Integer.parseInt(timerString);
-			timer = timer * 1000;
-			try {
-				Thread.sleep(timer);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-		return validate(signInButton);
-	}
-
-	public Boolean stopTimerValid() {
-		validate(signInButton);
-		String timerId = alreadyPlanMemberButtonInactive.getAttribute("id");
-		if (timerId.contains("cookie")) {
-			if (cookieValid()) {
-				driver.navigate().refresh();
-				String[] parts = timerId.split("-");
-				String timerString = parts[1];
-				int timer = Integer.parseInt(timerString);
-				timer = timer * 1000;
-				usernameField.click();
-				try {
-					Thread.sleep(timer);
-					return validate(signInButton);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-
-			}
-		} else if (timerId.contains("visitor")) {
-			String[] parts = timerId.split("-");
-			String timerString = parts[1];
-			int timer = Integer.parseInt(timerString);
-			try {
-				Thread.sleep(timer);
-				return validate(signInButton);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-
-		}
-		return null;
-	}
-
 	
 	public void hoverhealthandwellnesslink() {
 
@@ -582,61 +425,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		// TODO Auto-generated method stub
 
 	}
-
-	public JSONObject accessinghealthandwellnesslink() {
-
-		hoverhealthandwellnesslink();
-		return getHealthandWellnessDropdownJson();
-	}
-
-	
-
-	
-
-	
-
-	public JSONObject getHealthandWellnessDropdownJson() {
-
-		String fileName = CommonConstants.HEALTH_AND_WELLNESS_DROPDOWN_DATA;
-		healthandwellnessdropdown = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
-
-		JSONObject jsonObject = new JSONObject();
-		for (String key : healthandwellnessdropdown.getExpectedData().keySet()) {
-			WebElement element = findElement(healthandwellnessdropdown.getExpectedData().get(key));
-			if (element != null) {
-				if (validate(element)) {
-					try {
-						jsonObject.put(key, element.getText());
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			}
-		}
-		healthandwellnessdropdownJson = jsonObject;
-
-		return healthandwellnessdropdownJson;
-
-	}
-
-
-
-	
-
-
-	public JSONObject validatesDTMTags() {
-		String fileName = CommonConstants.GLOBAL_FOOTER_PAGE_DATA;
-		String filePath = CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ;
-		String dtmFilePath = CommonConstants.DTM_TAG_ACQ_FILENAME;
-		String dtmDir = CommonConstants.PAGE_OBJECT_DTM_TAG_DIR;
-		globalFooterDTMJson = getDTMPageJson(fileName, filePath, dtmFilePath, dtmDir);
-		return globalFooterDTMJson;
-
-	}
-
-
 	public void multiple_county(String zipcode)
 	{
 		System.out.println("Hi");
@@ -704,47 +492,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return null;
 
 	}
-	public PDPRequestHelpAndInformationPage navigateToPDPMoreHelpAndInfo() {
-
-		Actions actions = new Actions(driver);
-		PageFactory.initElements(driver, this);
-		actions.moveToElement(ourPlansHoverLink);
-		actions.moveToElement(pdp_moreHelpInfoLink);
-		actions.click().build().perform();
-		if (currentUrl().contains("prescription-drug-plans/request-information.html")) {
-			return new PDPRequestHelpAndInformationPage(driver);
-		}
-
-		return null;
-
-	}
-	public RequestHelpAndInformationPage navigateToMaMoreHelpAndInfo() {
-
-		Actions actions = new Actions(driver);
-		PageFactory.initElements(driver, this);
-		actions.moveToElement(ourPlansHoverLink);
-		actions.moveToElement(moreHelpInfoLink);
-		actions.click().build().perform();
-
-		try {
-			if (zipCodeField.isDisplayed()) {
-				CommonUtility.waitForElementToDisappear(driver, zipCodeField,
-						20);
-			}
-		} catch (NoSuchElementException e) {
-			System.out.println("zipCodeField not found");
-		} catch (TimeoutException ex) {
-			System.out.println("zipCodeField not found");
-		} catch (Exception e) {
-			System.out.println("zipCodeField not found");
-		}
-		if (currentUrl().contains(
-				"medicare-advantage-plans/request-information.html")) {
-			return new RequestHelpAndInformationPage(driver);
-		}
-
-		return null;
-	}
+	
+	
 	
 	public AboutUsAARPPage aboutUsFooterClick() {
 		validate(GlobalWebElements.footerAboutUsLink);
@@ -799,12 +548,4 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return true;
 	}
 
-	public GetStartedPage navigateToPrescriptionDrug() {
-        enterYourDrugListButton.click();
-        if (getTitle().equalsIgnoreCase("Our Medicare Plan Types | AARP® Medicare Plans from UnitedHealthcare®")) {
-                return new GetStartedPage(driver);
-        } else {
-                return null;
-        }
-
-}}
+}
