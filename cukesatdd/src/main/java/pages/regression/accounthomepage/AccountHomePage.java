@@ -297,7 +297,7 @@ private WebElement PlanMaterialSection;
        @FindBy(xpath = "//*[@id='ordermaterials']")
        private WebElement OrderMaterialsTab_BnCPage;
        
-       @FindBy(xpath = "//h1[@class='h4 margin-none']")
+       @FindBy(xpath = "//*[@class = 'main-heading margin-none']")
        private WebElement orderplanHeadertxt;
 
        @FindBy(xpath = "//*[@class='tabs-desktop']//li[@role='listitem'][2]/a")
@@ -1132,6 +1132,7 @@ private WebElement PlanMaterialSection;
        }
 
        public PharmacySearchPage navigateToRedesignPharmacyLocaterPage() {
+    	   	  waitForHomePage(helloPerson);
               if (validate(iPerceptionAutoPopUp)) {
                      iPerceptionAutoPopUp.click();
               } else {
@@ -1181,6 +1182,7 @@ private WebElement PlanMaterialSection;
 
     // to navigate to forms and resources page
     public FormsAndResourcesPage navigatetoFormsnResources() throws InterruptedException {
+    				waitForHomePage(helloPerson);
                     if (validate(iPerceptionAutoPopUp)) {
                                     iPerceptionAutoPopUp.click();
                     } else {
