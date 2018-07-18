@@ -113,6 +113,8 @@ public class ClaimSummarypage extends UhcDriver{
 	//@FindBy (xpath = "//div[@class='parsys summaryParsys']/div/div[not (contains(@class,'ng-hide'))][1]//p[text()='Prescription Drug EOB']/following::a[contains(@class,'btn btn--secondary')][1]")
 	private WebElement PrescriptionEobText;
 	
+	@FindBy (xpath = "//div[@class='summaryParsys parsys']/div/div[not (contains(@class,'ng-hide'))][1]//p[text()='Prescription Drug EOB']/following::a[contains(@class,'btn btn--secondary')][1]")
+    private WebElement PrescriptionEobText1;
 	@FindBy (xpath="//span[text()='Ship EOB']/parent::a")
 	private WebElement ShipClaimsEobText;
 
@@ -124,6 +126,9 @@ public class ClaimSummarypage extends UhcDriver{
 	
 	@FindBy (xpath=".//*[@id='dateCustomSearchAtdd']")
 	private WebElement customSearchText;
+	
+	@FindBy(id = "atddPagination")
+	private WebElement verifyClaimSummaryAndPagination3;
 	
 	@FindBy (xpath=".//*[@id='custom_from_date_fed']")
 	private WebElement fromDate;
@@ -228,6 +233,9 @@ public class ClaimSummarypage extends UhcDriver{
 
 	@FindBy(id="claimType")
 	private WebElement Youhave;
+	
+	@FindBy(xpath=".//*[@id='globalContentIdForSkipLink']/div[3]/div[1]/div/div/main/div/div[1]/section/div[1]/div/div/div/div/div[3]/div/p")
+	private WebElement PCPtext;
 	
 	@FindBy(xpath="//*[@id='skipToBodyContent']//div[@class='reviewclaimstextFed parsys']//p")
 	private WebElement clamsSummaryCopyText;
@@ -339,6 +347,19 @@ public class ClaimSummarypage extends UhcDriver{
 	    	   
 			validate (verifyClaimSummaryAndPagination1);
 			   System.out.println("Pagination is seen ===>"+verifyClaimSummaryAndPagination.getText());
+			
+		} catch (Exception e) {
+			System.out.println("Pagination is not displayed as records are less");
+			e.printStackTrace();
+		}return true;
+		}
+	public boolean verifyClaimsTableAndPagination3(){
+		
+	       try {
+	    	   Thread.sleep(5000);
+	    	   
+			validate (verifyClaimSummaryAndPagination3);
+			   System.out.println("Pagination is seen ===>"+verifyClaimSummaryAndPagination3.getText());
 			
 		} catch (Exception e) {
 			System.out.println("Pagination is not displayed as records are less");
@@ -541,7 +562,7 @@ public class ClaimSummarypage extends UhcDriver{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		try {
+		/*try {
 			WelcomePage_iPerceptionPresent.click();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -565,8 +586,8 @@ public class ClaimSummarypage extends UhcDriver{
 		}
 		catch (Exception e) {
 			System.out.println("FeedBack Modal NOT Present");
-
-		}
+*/
+	
 
 		/*Thread.sleep(1000);
 		try{
@@ -1048,6 +1069,33 @@ public void NavigateToClaimsPage(){
 
 }
 			return new ClaimSummarypage(driver);	
+			}
+		
+		 public void validatePCPtext(){
+			 validate(PCPtext);
+			 System.out.println("PCP text is seen on the page");
+		 }
+		 
+		 public void validateEobPDP(){
+				try {
+					Thread.sleep(5000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				validate(PrescriptionEobText1);
+				System.out.println("PDP EOB is displayed"  +  PrescriptionEobText.isDisplayed());
+			}
+		 public void validateClaimsTablePDP() {
+				CommonUtility.waitForPageLoad(driver, ClaimsSummaryPage,60);
+				validate(claimsTablePrescriptionDrug);
+				System.out.println("!!! Claims Table is seen on the Claims Summary page!!!"+claimsTablePrescriptionDrug.isDisplayed());
+				try {
+					Thread.sleep(5000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		
            }

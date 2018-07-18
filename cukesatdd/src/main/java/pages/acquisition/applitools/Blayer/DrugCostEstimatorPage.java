@@ -1833,6 +1833,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 
 	public void clicksOnReturnLink(){
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", returnLink);
 		returnLink.click();	
 	}
 

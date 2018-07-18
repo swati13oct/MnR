@@ -64,7 +64,7 @@ public class PlanDetailsPage extends UhcDriver {
     @FindBy(xpath = "//*[@id='yourDruglist']/div[2]/table/tbody/tr[4]/td/div[1]/p[1]")
     private WebElement drugListPharmacyName;
 	
-	@FindBy(linkText = "Back to all plans")
+	@FindBy(id = "backToPlanSummaryTop")
 	private WebElement backToAllPlans;
 	
 	@FindBy(id="medicalbenefits")
@@ -155,6 +155,7 @@ public class PlanDetailsPage extends UhcDriver {
 
 	public VPPPlanSummaryPage backtoPlanSummary() {
 		validate(backToAllPlans);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", backToAllPlans);
 		if(backToAllPlans != null){
 		backToAllPlans.click();		
 		return new VPPPlanSummaryPage(driver);
