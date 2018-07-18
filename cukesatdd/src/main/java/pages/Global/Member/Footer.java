@@ -78,7 +78,7 @@ public class Footer extends UhcDriver {
 	@FindBy(id="home_2")
 	private WebElement homeBtn;
 	
-	@FindBy(id="overagebenefits_2")
+	@FindBy(id="coveragebenefits_2")
 	private WebElement benefits;
 	
 	@FindBy(id = "dropdown-toggle--1")
@@ -200,9 +200,9 @@ public class Footer extends UhcDriver {
 	public Footer NavigateToBenefitsPage(){
 		validate(benefits);
 		if(benefits.isDisplayed()){
-		System.out.println("contactUSLink link is displayed");
+		System.out.println("Benefits link is displayed");
 		benefits.click();
-		System.out.println("contactUS link is clicked");
+		System.out.println("Benefits link is clicked");
 				
 		}
 				
@@ -236,9 +236,9 @@ public class Footer extends UhcDriver {
 			
 			waitforElement(LookUpDrug);
 			if(LookUpDrug.isDisplayed()){
-				System.out.println("Pharmacy link is displayed");
+				System.out.println("DCE link is displayed");
 				LookUpDrug.click();
-				System.out.println("pharmacy link is displayed");
+				System.out.println("DCE link is displayed");
 			}
 			
 		}
