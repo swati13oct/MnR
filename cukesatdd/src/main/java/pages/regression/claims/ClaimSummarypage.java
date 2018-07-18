@@ -1046,8 +1046,13 @@ public void NavigateToClaimsPage(){
 				return new pages.regression.claims.ClaimDetailsPage(driver);
 		
 			}
-			return null; 
-			}
+
+			return null;
+		}
+		
+
+			
+
 		
 
 		public 	 ClaimSummarypage comboTabSelection1(){
