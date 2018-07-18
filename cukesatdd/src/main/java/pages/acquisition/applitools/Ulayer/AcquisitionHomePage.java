@@ -112,6 +112,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[@id='subnav_4']/div/div/div[2]/div/span[2]/a")
 	public static WebElement registerherelink;
+	
+	@FindBy(xpath = ".//*[@id='site-wrapper']//*[@class='globaldisclaimer parbase section']//*[contains(text(),'View all disclaimer information')]")
+	private WebElement viewDisclaimerLink;
 
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
 	private static String AARP_ACQISITION_OFFLINE_PAGE_URL = MRConstants.AARP_URL_OFFLINE;
@@ -546,6 +549,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		if(!validate(zipCodeField)&&!validate(findPlansButton)&&!validate(lookzip))
 			return false; //if all three elements return false for validation then this condition passes due to ! and returns false meaning all three elements were not found on page
 		return true;
+	}
+	
+	public void clickOnViewDisclaimerLink(){
+		viewDisclaimerLink.click();
 	}
 
 }

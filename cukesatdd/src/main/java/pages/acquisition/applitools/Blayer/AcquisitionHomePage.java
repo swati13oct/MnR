@@ -71,6 +71,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
         @FindBy(id = "dce")
         private WebElement prescriptionsLink;
         
+        @FindBy(xpath = ".//*[@id='site-wrapper']//*[@class='globaldisclaimer parbase section']//*[contains(text(),'View all disclaimer information')]")
+    	private WebElement viewDisclaimerLink;
 
         @FindBy(id = "learn-zipcode")
         private WebElement learnzipCodeField;
@@ -964,5 +966,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 
     	}
+
+		public void clickOnViewDisclaimerLink() {
+			viewDisclaimerLink.click();			
+		}
        
 }
