@@ -48,12 +48,12 @@ public class MemberHealthnWellnessStepDefinition {
 	/***
 	 * 
 	 */
-	@When("^I should see the H&W Generic dashboard and lifestyle,learning and rewards L2 tabs$")
+	@When("^I should see the H&W Generic dashboard and lifestyle,learning and rewards$")
 	public void I_should_see_the_H_W_Generic_dashboard_and_tabs() {
 		// Express the Regexp above with the code you wish you had
 		HealthAndWellness healthnWellnessPage = (HealthAndWellness) getLoginScenario()
 				.getBean(PageConstants.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE);
-		healthnWellnessPage.validateHnWDashboardnL2Tabs();
+		healthnWellnessPage.validateHnWDashboard();
 
 	}
 

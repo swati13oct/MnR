@@ -44,7 +44,7 @@ public class RallyDashboardPage extends UhcDriver {
 	@FindBy(xpath = "//a[@class='dropdown-option' and contains(text(),'Account Settings')]")
 	private WebElement accountSettingOption;
 
-	@FindBy(xpath = "//header//h1")
+	@FindBy(xpath = "//h1[contains(@class,'main-heading')]")
 	private WebElement heading;
 
 	@FindBy(xpath = "//div[@id='ui-view-page']//span[contains(text(),'Look up Drugs')]")
@@ -605,7 +605,7 @@ public class RallyDashboardPage extends UhcDriver {
 		validateNew(EOB_Dashboard);
 		EOB_Dashboard.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (!(driver.getTitle().contains("EOB Search"))) {
+		if (!(driver.getTitle().contains("Explanation of Benefits"))) {
 			Assert.fail("EOB page not getting displayed");
 			return null;
 		} else {

@@ -24,7 +24,7 @@ public class EOBPage extends UhcDriver {
 	@FindBy(id = "date-range-1")
 	private WebElement eobMonthDateRange;
 
-	@FindBy(xpath = "//h2[@class='h4 margin-none']")
+	@FindBy(xpath = "//span[contains(@class,'days-title')][@ng-show='shipPlan']")
 	private WebElement eobDetailsHeader;
 
 	@FindBy(id = "adobesitelink")

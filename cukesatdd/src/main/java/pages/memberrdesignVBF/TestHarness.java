@@ -54,7 +54,7 @@ public class TestHarness extends UhcDriver {
 	@FindBy(linkText = "Go to payment link page")
 	private WebElement TeamCPaymentPage;
 
-	@FindBy(xpath = "//header//h1")
+	@FindBy(xpath = "//h1[contains(@class,'main-heading')]")
 	private WebElement heading;
 
 	@FindBy(xpath = "//h1[contains(@class,'margin-none')]")
@@ -239,7 +239,7 @@ public class TestHarness extends UhcDriver {
 		validateNew(eobPageLink);
 		eobPageLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (!(driver.getTitle().contains("EOB Search"))) {
+		if (!(driver.getTitle().contains("Explanation of Benefits"))) {
 			Assert.fail("EOB page not getting displayed");
 			return null;
 		} else {
