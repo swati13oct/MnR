@@ -75,7 +75,7 @@ public class ClaimDetailsPage extends UhcDriver{
 	public WebElement claimstotalTable;
 	
 	//@FindBy(id = "learnmoretoggleship")
-	@FindBy(xpath = ".//*[@id='learnmoredetailstoggle']/p")
+	@FindBy(xpath = ".//*[@id='learnmoredetailstoggle']/div[1]/p")
 	private WebElement learnMoreLink;
 	
 	@FindBy(id = "eobClass")
@@ -102,6 +102,9 @@ public class ClaimDetailsPage extends UhcDriver{
 	@FindBy (xpath= "//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li")
 	private List<WebElement> comboTabsOnclaimsPage;
 	
+	@FindBy (xpath =".//*[@id='claimSearchButtonBottom']")
+	private WebElement historylink;
+		
 	@FindBy(xpath = ".//*[@id='ship_eob']/div/section/a/p")
 	private WebElement EOB;
 	
@@ -368,4 +371,22 @@ public class ClaimDetailsPage extends UhcDriver{
 			System.out.println(driver.getCurrentUrl());
 		}
  }
+	public void claimshistorylink(){
+		validate (historylink);
+		System.out.println("history link is seen");
+		historylink.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+		if (driver.getCurrentUrl().contains("/overview"))
+		{
+		System.out.println("The member has navigated from details page to Summary page ---------->"+driver.getCurrentUrl());
+		}
+			
+		
+	}
   }
