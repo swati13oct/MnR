@@ -99,6 +99,12 @@ public class ClaimsMemberRedesignStepDefinition {
 
 		if(newClaimsSummaryPage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
+		try {
+			accountHomePage.feebackpopupClose();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	/**
 	 * @toDo : The user search claims for the following time interval in redesigned site
@@ -297,7 +303,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	@And("^I validate the pagination on the claims summary page for members$")
 		public void i_validate_the_pagination_on_the_claims_summary_page_members() throws Throwable {
 			ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-			Assert.assertTrue(claimSummarypage.verifyClaimsTableAndPagination1());
+			Assert.assertTrue(claimSummarypage.verifyClaimsTableAndPagination3());
 		   	}
 		
 	
@@ -594,7 +600,7 @@ public class ClaimsMemberRedesignStepDefinition {
 		newClaimsSummaryPage.validateClaimsFromDropDowns1();
 		newClaimsSummaryPage.validateClaimsPlantype();
 		
-		newClaimsSummaryPage.validateClaimsHeaderCopyText();
+	//	newClaimsSummaryPage.validateClaimsHeaderCopyText();
 	    
 	}
 	
@@ -696,5 +702,35 @@ public class ClaimsMemberRedesignStepDefinition {
 		if(newClaimDetailsPage  != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
 		
+	}
+	@And("^I validate the claims history Button$")
+	public void validate_claims_History_Button(){
+		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario()
+				.getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+		claimDetailspage.claimshistorylink();
+          }
+
+	@Then("^I validate the text for PCP & medica members$")
+	public void i_validate_the_text_for_PCP_members(){
+		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario()
+				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+		newClaimsSummaryPage.validatePCPtext();
+	}
+	@And("^the user validates the EOB section in redesigned site$")
+	public void validate_PDPEOB (){
+		ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
+		newclaimsSummarypage.validateEobPDP();
+
+		if(newclaimsSummarypage != null)
+			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newclaimsSummarypage);
+		
+	}
+	@Then("^I can see the claims displayed based on the selection in redesigned site for PDP plans$") 
+	public void validate_claims_table_PDPmember_site(){
+		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
+		newClaimsSummaryPage.validateClaimsTablePDP();
+
+		if(newClaimsSummaryPage != null)
+			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
 	}
           }
