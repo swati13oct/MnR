@@ -684,8 +684,8 @@ And the user verifies that the correct pdfs are there in the plan material secti
     Examples: 
       | planType |memberType |
       | MA       |Individual  |
-      #| SSUP     |Individual  |
-      #| MedSupp  |Ship        |
+      #| SSUP     |Group  |
+ 
       
       
        
