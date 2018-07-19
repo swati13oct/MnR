@@ -413,7 +413,7 @@ public class RallyDashboardPage extends UhcDriver {
 		validateNew(explainationOfBenefits);
 		explainationOfBenefits.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (!(driver.getTitle().contains("EOB Search"))) {
+		if (!(driver.getTitle().contains("Explanation of Benefits"))) {
 			Assert.fail("EOB page not getting displayed");
 		}
 	}
@@ -438,7 +438,7 @@ public class RallyDashboardPage extends UhcDriver {
 		validateNew(benefitsSummary);
 		benefitsSummary.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getTitle().contains("Benefits Overview")) {
+		if (driver.getTitle().contains("Benefits")) {
 			return new BenefitsAndCoveragePage(driver);
 		}
 		return null;
@@ -454,7 +454,7 @@ public class RallyDashboardPage extends UhcDriver {
 		validateNew(premiumPayment);
 		premiumPayment.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getTitle().contains("Overview")) {
+		if (driver.getTitle().contains("Payment")) {
 			return new PaymentsOverview(driver);
 		}
 		return null;
@@ -718,7 +718,7 @@ public class RallyDashboardPage extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println(driver.getTitle());
 
-		if (driver.getTitle().contains("Documents Overview")) {
+		if (driver.getTitle().contains("Documents")) {
 			return new FormsAndResourcesPage(driver);
 		}
 		return null;
