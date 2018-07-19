@@ -266,7 +266,7 @@ public class RallyDashboardPage extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println(driver.getTitle());
 
-		if (driver.getTitle().contains("Benefits Overview")) {
+		if (driver.getTitle().contains("Benefits")) {
 			return new BenefitsAndCoveragePage(driver);
 		}
 		return null;
@@ -280,7 +280,7 @@ public class RallyDashboardPage extends UhcDriver {
 		validateNew(ContactUsLink);
 		ContactUsLink.click();
 		CommonUtility.waitForPageLoadNew(driver, heading, CommonConstants.TIMEOUT_30);
-		if (driver.getTitle().trim().contains("Overview")) {
+		if (driver.getTitle().trim().contains("Contact Us")) {
 			return new ContactUsPage(driver);
 		}
 		return null;
@@ -700,7 +700,7 @@ public class RallyDashboardPage extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println(driver.getTitle());
 
-		if (driver.getTitle().contains("Documents Overview")) {
+		if (driver.getTitle().contains("Documents")) {
 			return new FormsAndResourcesPage(driver);
 		}
 		return null;
@@ -724,4 +724,20 @@ public class RallyDashboardPage extends UhcDriver {
 		return null;
 
 	}
+	/***
+	 * 
+	 * @return
+	 */
+	public HealthAndWellness clickHealthnWellnessSecondaryTab() {
+		validateNew(healthWellness);
+		jsClickNew(healthWellness);
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getTitle().contains("Health")) {
+			return new HealthAndWellness(driver);
+		}
+		return null;
+
+	}
+	
+	
 }

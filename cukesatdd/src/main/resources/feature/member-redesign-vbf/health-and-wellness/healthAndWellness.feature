@@ -13,6 +13,7 @@ Feature: 1.07-VBF-MemRedesign-To test Health and Wellness functionality
     When then click the health and wellness tab
     When I should see the H&W Generic dashboard and lifestyle,learning and rewards
     When then click the Lifestyle tab and I should be directed to Lifestyle Page
+    When user then click again on health and wellness tab
     When then click the Learning tab and I should be directed to Learning Page
 
     Examples: 

@@ -40,7 +40,7 @@ public class HealthAndWellness extends UhcDriver {
 	
 	@FindBy(id = "hw-learningCenter")
 	private WebElement hnwLearningCenter;
-	
+
 
 	public HealthAndWellness(WebDriver driver) {
 		super(driver);
@@ -78,8 +78,8 @@ public class HealthAndWellness extends UhcDriver {
 	 * 
 	 */
 	public void clickLifestyleTab() {
-		if (lifestyleTab.isDisplayed()) {
-			lifestyleTab.click();
+		if (lifestyleIcon.isDisplayed()) {
+			lifestyleIcon.click();
 			CommonUtility.checkPageIsReadyNew(driver);
 		}
 	}
@@ -96,9 +96,9 @@ public class HealthAndWellness extends UhcDriver {
 	 * 
 	 */
 	public void clickLearningTab() {
-		scrollToView(learningTab);
-		if (learningTab.isDisplayed()) {
-			learningTab.click();
+		scrollToView(learningIcon);
+		if (learningIcon.isDisplayed()) {
+			learningIcon.click();
 			CommonUtility.checkPageIsReadyNew(driver);
 		}
 	}

@@ -82,5 +82,24 @@ public class MemberHealthnWellnessStepDefinition {
 		healthnWellnessPage.validateLearningPage();
 
 	}
+	@When("^user then click again on health and wellness tab$")
+	public void user_then_click_again_health_and_wellness_tab() throws InterruptedException {
+		HealthAndWellness healthAndWellness;
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
 
+			healthAndWellness = testHarness.clickHealthnWellnessTab();
+		} else {
+			RallyDashboardPage rallyDashboardPage = (RallyDashboardPage) getLoginScenario()
+					.getBean(PageConstants.RALLY_DASHBOARD_PAGE);
+			healthAndWellness = rallyDashboardPage.clickHealthnWellnessSecondaryTab();
+		}
+		if (healthAndWellness != null) {
+			getLoginScenario().saveBean(PageConstants.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE, healthAndWellness);
+		}
+		if (healthAndWellness == null) {
+			System.out.println(" Variable is NULL!");
+			Assert.fail();
+		}
+	}
 }

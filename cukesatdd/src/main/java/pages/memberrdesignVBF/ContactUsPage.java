@@ -67,7 +67,7 @@ public class ContactUsPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//div[@class='message-block--full-width success margin-none']")
 	private WebElement reqConfirmation;
 
-	@FindBy(xpath = "//header//h1")
+	@FindBy(xpath = "//h1[contains(@class,'main-heading')]")
 	private WebElement heading;
 
 	@FindBy(xpath = "//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))]//a[@id='question-btn']")

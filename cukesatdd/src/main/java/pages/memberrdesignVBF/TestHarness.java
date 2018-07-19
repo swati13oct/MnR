@@ -172,7 +172,7 @@ public class TestHarness extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println(driver.getTitle());
 
-		if (driver.getTitle().contains("Benefits Overview")) {
+		if (driver.getTitle().contains("Benefits")) {
 			return new BenefitsAndCoveragePage(driver);
 		}
 		return null;
@@ -210,7 +210,7 @@ public class TestHarness extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (driver.getTitle().trim().contains("Overview")) {
+		if (driver.getTitle().trim().contains("Contact Us")) {
 			return new ContactUsPage(driver);
 		}
 		return null;
@@ -370,7 +370,7 @@ public class TestHarness extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println(driver.getTitle());
 
-		if (driver.getTitle().contains("Documents Overview")) {
+		if (driver.getTitle().contains("Documents")) {
 			return new FormsAndResourcesPage(driver);
 		}
 		return null;
