@@ -182,3 +182,12 @@ q2_jun_grp0408/Password@1,MA,Terminated_Group_MA_NICE
 q2_jun_grp0440/Password@1,MAPD,Terminated_Group_MAPD_COSMOS
 q2_jun_grp0282/Password@1,SSP,Terminated_Group_SSP
 q2_jun_aarp0070/Password@1,MA,Terminated_Individual_MA_COSMOS
+q2_jun_aarp0077/Password@1,PDP,RXCLAIMS
+q2_jun_PHIP01/Password@1,PHIP,SHIPCLAIMS
+q2_june_combo0003/Password@1,SHIP,SHIPCLAIMS
+q2_jun_aarp0070/Password@1,MA,COSMOSCLAIMS
+q2_jun_sofl0003/Password@1,PCP,eobData,
+q2_june_combo0007/Password@1,PDP,comboEOBMedSup,
+q2_jun_grp0073/Password@1,PDP,texasERS,
+q2_jun_PHIP01/Password@1,PHIP,SHIP,
+q2_jun_sofl0010/Password@1,PCP,COSMOSCLAIMS,

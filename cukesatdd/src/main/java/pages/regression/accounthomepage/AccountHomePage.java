@@ -1132,6 +1132,7 @@ private WebElement PlanMaterialSection;
        }
 
        public PharmacySearchPage navigateToRedesignPharmacyLocaterPage() {
+    	   	  waitForHomePage(helloPerson);
               if (validate(iPerceptionAutoPopUp)) {
                      iPerceptionAutoPopUp.click();
               } else {
@@ -1181,6 +1182,7 @@ private WebElement PlanMaterialSection;
 
     // to navigate to forms and resources page
     public FormsAndResourcesPage navigatetoFormsnResources() throws InterruptedException {
+    				waitForHomePage(helloPerson);
                     if (validate(iPerceptionAutoPopUp)) {
                                     iPerceptionAutoPopUp.click();
                     } else {
@@ -1891,9 +1893,63 @@ public ClaimDetailsPage navigateToClaimDetailsPageCombo(){
 		
 	}
 	return new ClaimDetailsPage(driver);
+}
+
+public BenefitsAndCoveragePage navigateDirectToBnCPag() {
+		
+		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
+			System.out.println("user is on Stage login page");
+			// CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);
+			if (driver.getCurrentUrl().contains("/dashboard"))
+				;
+			{
+				System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
+				
+				driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
+				try {
+					Thread.sleep(20000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println(driver.getCurrentUrl());
+				CommonUtility.waitForPageLoad(driver, heading, 30);
+				if (driver.getTitle().contains("Benefits Overview")) {
+					System.out.println(driver.getTitle());
+					return new BenefitsAndCoveragePage(driver);
+				}
+
+			}
+		}
+
+		else if (MRScenario.environmentMedicare.equals("team-h") || MRScenario.environmentMedicare.equals("test-a")
+				|| MRScenario.environmentMedicare.equals("team-e")) {
+
+			driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
+			System.out.println(driver.getCurrentUrl());
+		} else {
+			driver.navigate().to(
+					"https://team-ci1-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
+
+			System.out.println(driver.getCurrentUrl());
+		}
+
+		/*
+		 * if (validate(iPerceptionPopUp)) { iPerceptionPopUp.click();
+		 * System.out.println("iPerception Pop Up displayed"); }
+		 */
+
+		CommonUtility.waitForPageLoad(driver, heading, 50);
+		if (driver.getTitle().equalsIgnoreCase("Benefits Overview")) {
+			return new BenefitsAndCoveragePage(driver);
+		}
+
+		return null;
+		
+	}
 
 }
-}
+
  			
 
 
