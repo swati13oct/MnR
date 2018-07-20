@@ -54,7 +54,7 @@ public class TestHarness extends UhcDriver {
 	@FindBy(linkText = "Go to payment link page")
 	private WebElement TeamCPaymentPage;
 
-	@FindBy(xpath = "//h1[contains(text(),'Testharness')]")
+	@FindBy(xpath = "//h1")
 	private WebElement heading;
 
 	@FindBy(xpath = "//h1[contains(@class,'margin-none')]")
