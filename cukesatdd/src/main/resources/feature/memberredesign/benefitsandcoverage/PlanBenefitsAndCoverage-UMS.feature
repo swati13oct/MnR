@@ -221,7 +221,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
        | Plan Type      | <planType>     |
        | Member Type    | <memberType>|
        | Copay Category | <copayCategory>|
-    Then the user navigates to Benefits coverage page
+    Then user navigates to Benefits coverage page
     And the user view the LIS Drug Copays & Discounts header
     And the user view the Drug Cost header and text
     And the drugcost dropdown should not display
@@ -229,7 +229,8 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     And the user validates tier link should not display 
     And the user validated the Look up Drugs link 
     And the user validates text for the Locate a Pharmacy section
-    And the user validates Locate a Pharmacy button should be visible  
+    And user validates Locate a Pharmacy button should be visible  
+      | Plan Type      | <na>     |
     And the user should see drug cost table for Lis members
     And the user validates view and document label
     And the user validates spanish and chinese should not display in dropdown

@@ -56,7 +56,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='planBenefitsApp']/section/div/div[1]/div/div/div/div/h1")
 	private WebElement planName1;
 
-	@FindBy(xpath = ".//*[@id='mapdPageLis']/div[1]/div/div/table/tbody/tr[2]/th")
+	//@FindBy(xpath = ".//*[@id='mapdPageLis']/div[1]/div/div/table/tbody/tr[2]/th")
+	@FindBy(xpath =".//*[@id='mapdPageLis'] or contains(text0,'Covered Generic Drugs')")
 	private WebElement columncoveragegenericdrugs;
 
 	@FindBy(id = "contactUsAtdd")
@@ -142,8 +143,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-bnc-drugcostsheading")
 	private WebElement DrugCostHeader;
 
-	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[2]/div/div")
+	//@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[2]/div/div")
+	@FindBy(xpath =".//*[@id='drug-benefits']//span[text()='DRUG LOOKUP']")
 	private WebElement DrugCostheaderandtext;
+	
+	
 
 	@FindBy(xpath = ".//*[@id='waystosave']/div/div/div[1]/div/h1")
 	private WebElement TextWaystoSave;
@@ -154,11 +158,14 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-bnc-drgstgtiers")
 	private WebElement Learnmorestagelink;
 
-	@FindBy(xpath = ".//*[@id='drug-benefits']/div[8]/div[2]")
-	private WebElement locateapharmacysection;
+	//@FindBy(xpath = "atdd-bnc-locatephrmcy-info")
+		@FindBy(xpath=".//*[contains (text(),'PHARMACY LOCATOR')]")
+		private WebElement locateapharmacysection;
 
-	@FindBy(className = "atdd-bnc-locatepharmacybtn")
-	private WebElement locateapharmacybutton;
+		//@FindBy(className = "atdd-bnc-locatepharmacybtn")
+		@FindBy(xpath=".//*[contains (text(),'Locate a Pharmacy')]")
+		//@FindBy(className = "btn btn--secondary atdd-bnc-locatepharmacybtn")
+		private WebElement locateapharmacybutton;
 
 	@FindBy(id = "mapdPageNonLis")
 	private WebElement drugcopaytable;
@@ -170,9 +177,12 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	private WebElement tabledynamicdatapdp;
 
 
-	@FindBy(id = "mapdPageLis")
+	@FindBy(xpath = ".//*[@id='mapdPageLis']")
 	private WebElement RetailDrugCost_Table;
 
+	@FindBy(xpath = ".//*[@id='mapdPageLis']")
+	private WebElement RetailDrugCost_Table1; 
+	
 	@FindBy(id = "waystosave")
 	private WebElement waysToSave;
 
@@ -1199,6 +1209,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	
 	public void validate_locatepharmacy() {
 		validate(locateapharmacysection);
+		validate(locateapharmacybutton);
+		System.out.println("*******Pharmacy locator button is seen ==>"+locateapharmacybutton.isDisplayed());
 
 	}
 
@@ -1414,12 +1426,20 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	public void validatedrugcosttable() {
 		// TODO Auto-generated method stub
 		validate(RetailDrugCost_Table);
+		System.out.println("********** Drug cost table is seen ==>"+RetailDrugCost_Table.isDisplayed());
 		validate(columncoveragegenericdrugs);
 		Assert.assertEquals(driver
 				.findElement(By
 						.xpath("//*[@id='mapdPageLis']//table[@class='table-white atdd-bnc-drgcsttable']//tbody/tr[2]/th/p"))
 				.getText(), "Covered Generic Drugs");
 
+	}
+	public void validatedrugcosttable1() {
+		// TODO Auto-generated method stub
+		validate(RetailDrugCost_Table1);
+		System.out.println("********** Drug cost table is seen ==>"+RetailDrugCost_Table1.isDisplayed());
+		validate(columncoveragegenericdrugs);
+		
 	}
 
 	/**
@@ -2600,5 +2620,13 @@ public void validateImagePresent(String logoToBeDisplayedOnSecondaryPage) {
 			Assert.assertFalse(true);
 
 	}
+	public void validate_locateapharmacysection1() {
+		validate(locateapharmacysection);
+		System.out.println("Pharmacy locator text is seen");
+		validate(locateapharmacybutton);
+		System.out.println("*******Pharmacy locator button is seen ==>"+locateapharmacybutton.isDisplayed());
+
+	}
+
 
 }

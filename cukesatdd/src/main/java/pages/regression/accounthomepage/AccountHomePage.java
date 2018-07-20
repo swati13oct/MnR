@@ -498,12 +498,7 @@ private WebElement PlanMaterialSection;
 
 			System.out.println(driver.getCurrentUrl());
 		}
-
-		/*
-		 * if (validate(iPerceptionPopUp)) { iPerceptionPopUp.click();
-		 * System.out.println("iPerception Pop Up displayed"); }
-		 */
-
+		
 		CommonUtility.waitForPageLoad(driver, heading, 50);
 		if (driver.getTitle().equalsIgnoreCase("Benefits Overview")) {
 			return new BenefitsAndCoveragePage(driver);

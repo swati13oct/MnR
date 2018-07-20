@@ -224,6 +224,27 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		}
 
 	}
+	
+	@Then("^user navigates to Benefits coverage page$")
+		public void user_views_BenefitsAndCoveragejenkins() {
+
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+
+			pages.regression.benefitandcoverage.BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateToBandCPage();
+
+			if (benefitsCoveragePage != null) {
+				getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
+
+			}
+
+			else
+
+			{
+				System.out.println("Benefits and Coverage page object is Null ");
+			}
+
+		}
+	
 
 
 	/** 
@@ -601,8 +622,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	}
 
 	/** 
-	 * @toDo : Validates the Locate a Pharmacy button in locate a phaThe user navigates to Benefits and Coverage page
-	 * rmacy section
+	 * @toDo : Validates the Locate a Pharmacy button 
 	 */
 	@And("^the user validates Locate a Pharmacy button should be visible")
 	public void user_validate_locatepharmacybutton(DataTable memberAttributes) {
@@ -628,7 +648,12 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validate_locateapharmacysection(plantype);
 	}
-
+	@And("^user validates Locate a Pharmacy button should be visible")
+	public void user_validate_locatepharmacybutton() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validate_locateapharmacysection1();
+	}
 	/** 
 	 * @toDo : Validates the Learnmore tiers links for a Lis member
 	 */
