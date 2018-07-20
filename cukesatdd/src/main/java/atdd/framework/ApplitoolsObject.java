@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -35,7 +36,7 @@ public class ApplitoolsObject {
 	public void setApplitools(){
 		
 		eyes.setMatchTimeout(3000);
-		eyes.setForceFullPageScreenshot(true);
+		
 		eyes.setWaitBeforeScreenshots(4000);
 	}
 	
@@ -44,12 +45,44 @@ public class ApplitoolsObject {
 		eyes.setBatch(batch);
 	}
 	
-	public void takeScreenshot(WebDriver wd, String appName, String testName, String windowName ){
-		eyes.setMatchLevel(MatchLevel.CONTENT);
+	public void takeScreenshotFullPage(WebDriver wd, String appName, String testName, String windowName ){
+			eyes.setMatchLevel(MatchLevel.CONTENT);
+			eyes.setForceFullPageScreenshot(true);
+			eyes.open(wd, appName, testName,new RectangleSize(1280, 960));
+			eyes.checkWindow(windowName);
+			eyes.close(false);
 		
-		eyes.open(wd, appName, testName,new RectangleSize(1280, 960));
-		eyes.checkWindow(windowName);
-		eyes.close(false);
+	}
+	
+	public void takeScreenshot(WebDriver wd, String appName, String testName, String windowName){
+		
+			eyes.setForceFullPageScreenshot(false);
+			eyes.setMatchLevel(MatchLevel.CONTENT);
+			eyes.open(wd, appName, testName,new RectangleSize(1280, 960));
+			eyes.checkWindow(windowName);
+			eyes.close(false);
+		
+		
+	}
+	public void takeScreenshotFullPage(WebDriver wd, String appName, String testName, String windowName, boolean takeScreenshot ){
+		if(takeScreenshot==true){
+			eyes.setMatchLevel(MatchLevel.CONTENT);
+			eyes.setForceFullPageScreenshot(true);
+			eyes.open(wd, appName, testName,new RectangleSize(1280, 960));
+			eyes.checkWindow(windowName);
+			eyes.close(false);
+		}
+	}
+	
+	public void takeScreenshot(WebDriver wd, String appName, String testName, String windowName, boolean takeScreenshot){
+		if(takeScreenshot==true){
+			eyes.setForceFullPageScreenshot(false);
+			eyes.setMatchLevel(MatchLevel.CONTENT);
+			eyes.open(wd, appName, testName,new RectangleSize(1280, 960));
+			eyes.checkWindow(windowName);
+			eyes.close(false);
+		}
+		
 	}
 
 	public WebDriver getWebDriver() {
