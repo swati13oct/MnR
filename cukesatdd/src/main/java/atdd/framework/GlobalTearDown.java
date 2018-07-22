@@ -61,7 +61,8 @@ public class GlobalTearDown {
 			scenario.embed(screenshot, "image/png");
 			if (MRScenario.isSauceLabSelected) {
 				String html = "<strong>SauceLabs video link</strong><br />";
-				html = html.concat("<a href=" + MRScenario.returnJobURL() + " target=_blank"+" >Go to video</a>");
+				//html = html.concat("<a href=" + MRScenario.returnJobURL() + " target=_blank"+" >Go to video</a>");
+				html = html.concat("<a href=# onclick='window.open("+MRScenario.returnJobURL()+");return false;'>Go to video</a>");
 				scenario.embed(html.getBytes(), "text/html");
 			}
 			MRScenario mrScen = new MRScenario();
