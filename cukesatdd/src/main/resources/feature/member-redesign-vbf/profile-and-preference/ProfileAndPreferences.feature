@@ -34,7 +34,7 @@ Feature: 1.13-VBF-MemRedesign-To test My Profile & Preferences and Go Green flow
       | PhoneNumber    | <phonenumber> |
     Then member should navigate to Home page
     And the user navigates to Rally Dashboard Page for profile and preference
-    And the user clicks on Edit Preferences
+    And the user clicks on Edit Preferences for EPMP
     Then the user changes the online preference and saves the change
     And the user validates navigates back to Profile page
     And the user clicks on Edit Preferences

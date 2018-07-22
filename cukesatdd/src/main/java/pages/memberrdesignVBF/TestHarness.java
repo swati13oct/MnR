@@ -62,6 +62,24 @@ public class TestHarness extends UhcDriver {
 
 	@FindBy(xpath = "//div[@class='tabs-desktop']/ul[@class='nav nav-tabs']/li")
 	private List<WebElement> tabsForComboMember;
+	
+	@FindBy(id = "home_2")
+	private WebElement panelHome;
+	
+	@FindBy(id = "claims_1")
+	private WebElement panelClaims;
+	
+	@FindBy(id = "coveragebenefits_1")
+	private WebElement panelBenefits;
+	
+	@FindBy(id = "healthwellness_4")
+	private List<WebElement> panelHealthWellness;
+	
+	@FindBy(id = "findcarecost2")
+	private List<WebElement> panelFindcarecost;
+	
+	
+	
 
 	String category = null;
 
@@ -76,17 +94,17 @@ public class TestHarness extends UhcDriver {
 		category = CommonStepDefinition.getMemberAttributeMap().get("Member Type");
 		RallyDashboardPage.checkModelPopup(driver);
 		validateNew(heading);
-		validateNew(orderPlanPageLink);
-		validateNew(claimsPageLink);
+		validateNew(panelHome);
+		validateNew(panelClaims);
 		if (category.contains(CommonConstants.CATEGORY_TERMIATED)) {
-			if (1 == tabsForComboMember.size()) {
-				validateNew(tabsForComboMember.get(0));
-				Assert.assertTrue("Terminated Tab exists...",
-						tabsForComboMember.get(0).getText().toUpperCase().contains("TERMINATED"));
+			if (0 == panelHealthWellness.size() && 0 == panelFindcarecost.size()) {
+				Assert.assertTrue("Terminated view is present",true);
 			} else {
-				Assert.fail("Check number of plans. Current plans:" + tabsForComboMember.size());
+				Assert.fail("Check member termination date!!!");
 			}
 		}
+		validateNew(orderPlanPageLink);
+		validateNew(claimsPageLink);
 
 	}
 
@@ -326,7 +344,7 @@ public class TestHarness extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println(driver.getTitle());
 
-		if ("Profile".contains(driver.getTitle())) {
+		if (driver.getTitle().contains("Profile")) {
 			System.out.println("Pass!");
 			return new ProfilePreferencesPage(driver);
 		}

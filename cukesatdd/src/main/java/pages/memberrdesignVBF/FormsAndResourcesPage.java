@@ -116,7 +116,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(),'Search Documents')]")
 	private WebElement searchDocuments;
 
-	@FindBy(xpath = "//div[@class='customsegments parbase section']//div[@class='otherPages']//div[@class='explanationbenefits parbase section']//h2[contains(text(),'Explanation')]")
+	@FindBy(xpath = "//div[@class='customsegments parbase section']//div[@class='otherPages']//div[@class='explanationbenefits parbase section']//*[contains(text(),'Explanation')]")
 	private WebElement eobSectionHeader;
 
 	@FindBy(id = "pageHeader")
@@ -274,22 +274,12 @@ public class FormsAndResourcesPage extends UhcDriver {
 	 */
 	public void validateIDCard() throws InterruptedException {
 		String IDCardAttribute = getTemporaryIdcardlink().getAttribute("href");
-		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
 
-			if (IDCardAttribute.contains("test-harness")) {
-				Assert.assertTrue(true);
-			} else {
-				Assert.fail("Some wrong link is coming for member id cards");
-			}
-
-		} else if ("NO".equalsIgnoreCase(MRScenario.isTestHarness)) {
 			if (IDCardAttribute.contains("int.uhc.com")) {
 				Assert.assertTrue(true);
 			} else {
 				Assert.fail("The member id cards link is wrong");
 			}
-
-		}
 	}
 
 	/**

@@ -560,13 +560,13 @@ public class RallyDashboardPage extends UhcDriver {
 			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
 
 			if (IPerceptionsFrame.isEmpty()) {
-				if (driver.findElements(By.xpath("//area[@href='javascript:clWin()'][@alt = 'no']")).isEmpty()) {
+				//if (driver.findElements(By.xpath("//area[@href='javascript:clWin()'][@alt = 'no']")).isEmpty()) {
 					try {
 						Thread.sleep(5000);
 					} catch (InterruptedException e) {
 						System.out.println(e.getMessage());
 					}
-
+/*
 				} else {
 					System.out.println("FeedBack Modal Present and counter value is:" + counter);
 					try {
@@ -580,7 +580,7 @@ public class RallyDashboardPage extends UhcDriver {
 						e.printStackTrace();
 					}
 
-				}
+				}*/
 			} else {
 				driver.switchTo().frame(IPerceptionsFrame.get(0));
 				driver.findElement(By.className("btn-no")).click();
