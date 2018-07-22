@@ -1,4 +1,4 @@
-package pages.acquisition.bluelayer;
+package pages.acquisition.applitools.Blayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +22,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.bluelayer.AddDrugDetails;
+import pages.acquisition.bluelayer.AddNewDrugModal;
+import pages.acquisition.bluelayer.EditDrugDetails;
+import pages.acquisition.bluelayer.SavingsOppurtunity;
 
 public class DrugCostEstimatorPage extends UhcDriver {
 
@@ -338,7 +342,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id = "step3DisclaimerVPP")
 	public WebElement step3DisclaimerVPP;
 
-	@FindBy(xpath = ".//*[@id='colhowdoesthiswork_dce']//*[@itemprop='significantLink']/*[@class='cta-button secondary']")
+	@FindBy(id = "dce")
 	public WebElement getStarted;
 
 	@FindBy(id = "zipcode-costs")
@@ -1826,6 +1830,11 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			System.out.println("====================Our Plans tab not displayed================");
 			return null;
 		}
+	}
+
+	public void clicksOnReturnLink(){
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", returnLink);
+		returnLink.click();	
 	}
 
 }

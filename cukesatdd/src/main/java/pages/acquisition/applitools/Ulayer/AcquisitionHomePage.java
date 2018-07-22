@@ -46,7 +46,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private WebElement FindPlansButton1;
 
 	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
-	private WebElement OurPlansLink1;
+	private WebElement OurPlansLink;
+	
+	@FindBy(xpath = "//*[@id='ghn_lnk_3']")
+	private WebElement medEdLink;
 
 	@FindBy(id = "zipcodebtn")
 	private WebElement findPlansButton;
@@ -109,6 +112,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[@id='subnav_4']/div/div/div[2]/div/span[2]/a")
 	public static WebElement registerherelink;
+	
+	@FindBy(xpath = ".//*[@id='site-wrapper']//*[@class='globaldisclaimer parbase section']//*[contains(text(),'View all disclaimer information')]")
+	private WebElement viewDisclaimerLink;
 
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
 	private static String AARP_ACQISITION_OFFLINE_PAGE_URL = MRConstants.AARP_URL_OFFLINE;
@@ -215,7 +221,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 		sendkeys(zipCodeField, zipcode);
 		viewPlansButton.click();
-		
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
 		}
@@ -346,22 +357,23 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	
 
-	public void hoverourplanslink() {
-		validate(OurPlansLink1);
+	public void hoverOverOurPlanslink() {
 		// Hover over text
 		Actions action = new Actions(driver);
 		PageFactory.initElements(driver, this);
-		action.moveToElement(OurPlansLink1).build().perform();
+		action.moveToElement(OurPlansLink).build().perform();
 
-		// to click
-		// action.click().build().perform();
-
-		validate(OurPlansLink1);
-
-		// TODO Auto-generated method stub
 
 	}
 
+	public void hoverOverMedEdlink() {
+		// Hover over text
+		Actions action = new Actions(driver);
+		PageFactory.initElements(driver, this);
+		action.moveToElement(medEdLink).build().perform();
+
+
+	}
 	public AcquisitionHomePage findplansbuttonclick() {
 		validate(FindPlansButton1);
 		FindPlansButton1.click();
@@ -537,6 +549,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		if(!validate(zipCodeField)&&!validate(findPlansButton)&&!validate(lookzip))
 			return false; //if all three elements return false for validation then this condition passes due to ! and returns false meaning all three elements were not found on page
 		return true;
+	}
+	
+	public void clickOnViewDisclaimerLink(){
+		viewDisclaimerLink.click();
 	}
 
 }

@@ -117,6 +117,9 @@ private WebElement PlanMaterialSection;
        @FindBy(xpath = "//span[contains(.,'Print temporary ID card')]")
        private WebElement viewIDCard;
 
+       @FindBy (xpath="//div[@class='claim-results']//table[not (contains(@class,'ng-hide'))]//tbody//tr[2]//a[text()='MORE INFO']")
+    	private WebElement claimstablemoreinfolinkCombo;
+       
        @FindBy(id = "pcpLogoPrint1left")
        private WebElement validateLogo;
 
@@ -294,7 +297,7 @@ private WebElement PlanMaterialSection;
        @FindBy(xpath = "//*[@id='ordermaterials']")
        private WebElement OrderMaterialsTab_BnCPage;
        
-       @FindBy(xpath = "//h1[@class='h4 margin-none']")
+       @FindBy(xpath = "//*[@class = 'main-heading margin-none']")
        private WebElement orderplanHeadertxt;
 
        @FindBy(xpath = "//*[@class='tabs-desktop']//li[@role='listitem'][2]/a")
@@ -302,6 +305,9 @@ private WebElement PlanMaterialSection;
 
        @FindBy(xpath = "//*[@class='table-body margin-large']/div[2]//p")
        private WebElement PayDate;
+       
+       @FindBy(xpath=".//*[@id='cltotshipindsnf']")
+   	  private WebElement claimtotalcomb;
 
        @FindBy(id = "closeButton")
        private WebElement iPerceptionCloseButton;
@@ -346,7 +352,7 @@ private WebElement PlanMaterialSection;
 
               
     	   if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
-    		   if(Plantype.equalsIgnoreCase("MAPD") || Plantype.equalsIgnoreCase("PDP") || Plantype.equalsIgnoreCase("HIP"))
+    		   if(Plantype.equalsIgnoreCase("MAPD") || Plantype.equalsIgnoreCase("PDP") || Plantype.equalsIgnoreCase("HIP") || Plantype.equalsIgnoreCase("MA"))
     		   {
                      System.out.println("user is on Stage login page");
                      // CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);
@@ -1126,6 +1132,7 @@ private WebElement PlanMaterialSection;
        }
 
        public PharmacySearchPage navigateToRedesignPharmacyLocaterPage() {
+    	   	  waitForHomePage(helloPerson);
               if (validate(iPerceptionAutoPopUp)) {
                      iPerceptionAutoPopUp.click();
               } else {
@@ -1175,6 +1182,7 @@ private WebElement PlanMaterialSection;
 
     // to navigate to forms and resources page
     public FormsAndResourcesPage navigatetoFormsnResources() throws InterruptedException {
+    				waitForHomePage(helloPerson);
                     if (validate(iPerceptionAutoPopUp)) {
                                     iPerceptionAutoPopUp.click();
                     } else {
@@ -1857,8 +1865,91 @@ public void feebackpopupClose() throws InterruptedException
 		System.out.println("iPerception Pop Up not displayed");
 	}
 }
+public ClaimDetailsPage navigateToClaimDetailsPageCombo(){
+	try {
+		Thread.sleep(10000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		}	
+	validate(claimstablemoreinfolinkCombo);
+	System.out.println("more info link is seen for combo member ===>"+claimstablemoreinfolinkCombo.isDisplayed());
+	try {
+		Thread.sleep(2000);
+		} catch (InterruptedException e) {
+		e.printStackTrace();
+		}
+
+	JavascriptExecutor executor = (JavascriptExecutor)driver;
+	executor.executeScript("arguments[0].click();", claimstablemoreinfolinkCombo);
+
+
+	//claimstablemoreinfolinkCombo.click();
+	CommonUtility.waitForPageLoad(driver, claimtotalcomb, 30);	
+	System.out.println(driver.getTitle());
+	//System.out.println("*** Combo Member is on Claims Details Page ***");
+	if (driver.getTitle().equalsIgnoreCase("/details")) {
+		System.out.println("*** Combo Member is on Claims Details Page ***");
+		
+	}
+	return new ClaimDetailsPage(driver);
+}
+
+public BenefitsAndCoveragePage navigateDirectToBnCPag() {
+		
+		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
+			System.out.println("user is on Stage login page");
+			// CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);
+			if (driver.getCurrentUrl().contains("/dashboard"))
+				;
+			{
+				System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
+				
+				driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
+				try {
+					Thread.sleep(20000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println(driver.getCurrentUrl());
+				CommonUtility.waitForPageLoad(driver, heading, 30);
+				if (driver.getTitle().contains("Benefits Overview")) {
+					System.out.println(driver.getTitle());
+					return new BenefitsAndCoveragePage(driver);
+				}
+
+			}
+		}
+
+		else if (MRScenario.environmentMedicare.equals("team-h") || MRScenario.environmentMedicare.equals("test-a")
+				|| MRScenario.environmentMedicare.equals("team-e")) {
+
+			driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
+			System.out.println(driver.getCurrentUrl());
+		} else {
+			driver.navigate().to(
+					"https://team-ci1-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
+
+			System.out.println(driver.getCurrentUrl());
+		}
+
+		/*
+		 * if (validate(iPerceptionPopUp)) { iPerceptionPopUp.click();
+		 * System.out.println("iPerception Pop Up displayed"); }
+		 */
+
+		CommonUtility.waitForPageLoad(driver, heading, 50);
+		if (driver.getTitle().equalsIgnoreCase("Benefits Overview")) {
+			return new BenefitsAndCoveragePage(driver);
+		}
+
+		return null;
+		
+	}
 
 }
+
  			
 
 

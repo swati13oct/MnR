@@ -23,6 +23,13 @@ import atdd.framework.UhcDriver;
  *
  */
 public class OrderMaterialsPage extends UhcDriver  {
+	
+    @FindBy(xpath = "//*[@class = 'main-heading margin-none']")
+    private WebElement orderplanHeadertxt;
+       
+    @FindBy(xpath = "//*[@class = 'med-heading medium margin-large']")
+    private WebElement OrderMaterialsHeaderSubText;
+    
 	@FindBy(xpath = "//*[@id='PoweredByiPerceptions']")
 	private WebElement iPerceptionPopUp;
 
@@ -282,9 +289,10 @@ public class OrderMaterialsPage extends UhcDriver  {
 
 	
 	public boolean ValidateHeader(){
-		if (driver.findElement(By.xpath("//h1[@class='h4 margin-none']")).isDisplayed() && driver.findElement(By.xpath("//h2[@class='h3 medium margin-large']")).isDisplayed()){
+		if (validate(orderplanHeadertxt) && validate(OrderMaterialsHeaderSubText)){
 			System.out.println("*************Header Text and Subtext displayed for Order materials Page***************");
-			
+			System.out.println(orderplanHeadertxt.getText());
+			System.out.println(OrderMaterialsHeaderSubText.getText());
 			return true;
 		}
 		else{ 
