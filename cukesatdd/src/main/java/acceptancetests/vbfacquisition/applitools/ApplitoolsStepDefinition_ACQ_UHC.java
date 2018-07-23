@@ -54,7 +54,7 @@ public class ApplitoolsStepDefinition_ACQ_UHC {
 	public void setApplitools() {
 		 appObj = new ApplitoolsObject();
 		appObj.setBatch(MRScenario.environment+" UHC batch");
-		appObj.setApplitools();
+		
 		
 	}
 	
