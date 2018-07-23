@@ -478,8 +478,7 @@ private WebElement PlanMaterialSection;
 					e.printStackTrace();
 				}
 				System.out.println(driver.getCurrentUrl());
-				CommonUtility.waitForPageLoad(driver, heading, 30);
-				if (driver.getTitle().contains("Benefits Overview")) {
+				if (driver.getTitle().contains("Benefits")) {
 					System.out.println(driver.getTitle());
 					return new BenefitsAndCoveragePage(driver);
 				}
