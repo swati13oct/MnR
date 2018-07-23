@@ -44,7 +44,7 @@ public class RallyDashboardPage extends UhcDriver {
 	@FindBy(xpath = "//a[@class='dropdown-option' and contains(text(),'Account Settings')]")
 	private WebElement accountSettingOption;
 
-	@FindBy(xpath = "//header//h1")
+	@FindBy(xpath = "//h1[contains(@class,'main-heading')]")
 	private WebElement heading;
 
 	@FindBy(xpath = "//div[@id='ui-view-page']//span[contains(text(),'Look up Drugs')]")
@@ -266,7 +266,7 @@ public class RallyDashboardPage extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println(driver.getTitle());
 
-		if (driver.getTitle().contains("Benefits Overview")) {
+		if (driver.getTitle().contains("Benefits")) {
 			return new BenefitsAndCoveragePage(driver);
 		}
 		return null;
@@ -280,7 +280,7 @@ public class RallyDashboardPage extends UhcDriver {
 		validateNew(ContactUsLink);
 		ContactUsLink.click();
 		CommonUtility.waitForPageLoadNew(driver, heading, CommonConstants.TIMEOUT_30);
-		if (driver.getTitle().trim().contains("Overview")) {
+		if (driver.getTitle().trim().contains("Contact Us")) {
 			return new ContactUsPage(driver);
 		}
 		return null;
@@ -413,7 +413,7 @@ public class RallyDashboardPage extends UhcDriver {
 		validateNew(explainationOfBenefits);
 		explainationOfBenefits.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (!(driver.getTitle().contains("EOB Search"))) {
+		if (!(driver.getTitle().contains("Explanation of Benefits"))) {
 			Assert.fail("EOB page not getting displayed");
 		}
 	}
@@ -438,7 +438,7 @@ public class RallyDashboardPage extends UhcDriver {
 		validateNew(benefitsSummary);
 		benefitsSummary.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getTitle().contains("Benefits Overview")) {
+		if (driver.getTitle().contains("Benefits")) {
 			return new BenefitsAndCoveragePage(driver);
 		}
 		return null;
@@ -454,7 +454,7 @@ public class RallyDashboardPage extends UhcDriver {
 		validateNew(premiumPayment);
 		premiumPayment.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getTitle().contains("Overview")) {
+		if (driver.getTitle().contains("Payment")) {
 			return new PaymentsOverview(driver);
 		}
 		return null;
@@ -560,27 +560,26 @@ public class RallyDashboardPage extends UhcDriver {
 			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
 
 			if (IPerceptionsFrame.isEmpty()) {
-				if (driver.findElements(By.xpath("//area[@href='javascript:clWin()'][@alt = 'no']")).isEmpty()) {
-					try {
-						Thread.sleep(5000);
-					} catch (InterruptedException e) {
-						System.out.println(e.getMessage());
-					}
-
-				} else {
-					System.out.println("FeedBack Modal Present and counter value is:" + counter);
-					try {
-						Thread.sleep(2000);
-						WebElement NoThanks = driver.findElement(By.xpath("//*[@id='IPEinvL']/map/area[3]"));
-						JavascriptExecutor js = (JavascriptExecutor) driver;
-						js.executeScript("arguments[0].scrollIntoView();", NoThanks);
-						js.executeScript("arguments[0].click();", NoThanks);
-						break;
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-
+				// if
+				// (driver.findElements(By.xpath("//area[@href='javascript:clWin()'][@alt
+				// = 'no']")).isEmpty()) {
+				try {
+					Thread.sleep(5000);
+				} catch (InterruptedException e) {
+					System.out.println(e.getMessage());
 				}
+				/*
+				 * } else { System.out.println(
+				 * "FeedBack Modal Present and counter value is:" + counter);
+				 * try { Thread.sleep(2000); WebElement NoThanks =
+				 * driver.findElement(By.xpath("//*[@id='IPEinvL']/map/area[3]")
+				 * ); JavascriptExecutor js = (JavascriptExecutor) driver;
+				 * js.executeScript("arguments[0].scrollIntoView();", NoThanks);
+				 * js.executeScript("arguments[0].click();", NoThanks); break; }
+				 * catch (InterruptedException e) { e.printStackTrace(); }
+				 * 
+				 * }
+				 */
 			} else {
 				driver.switchTo().frame(IPerceptionsFrame.get(0));
 				driver.findElement(By.className("btn-no")).click();
@@ -605,7 +604,7 @@ public class RallyDashboardPage extends UhcDriver {
 		validateNew(EOB_Dashboard);
 		EOB_Dashboard.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (!(driver.getTitle().contains("EOB Search"))) {
+		if (!(driver.getTitle().contains("Explanation of Benefits"))) {
 			Assert.fail("EOB page not getting displayed");
 			return null;
 		} else {
@@ -700,7 +699,7 @@ public class RallyDashboardPage extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println(driver.getTitle());
 
-		if (driver.getTitle().contains("Documents Overview")) {
+		if (driver.getTitle().contains("Documents")) {
 			return new FormsAndResourcesPage(driver);
 		}
 		return null;
@@ -718,10 +717,26 @@ public class RallyDashboardPage extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println(driver.getTitle());
 
-		if (driver.getTitle().contains("Documents Overview")) {
+		if (driver.getTitle().contains("Documents")) {
 			return new FormsAndResourcesPage(driver);
 		}
 		return null;
 
 	}
+
+	/***
+	 * 
+	 * @return
+	 */
+	public HealthAndWellness clickHealthnWellnessSecondaryTab() {
+		validateNew(healthWellness);
+		jsClickNew(healthWellness);
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getTitle().contains("Health")) {
+			return new HealthAndWellness(driver);
+		}
+		return null;
+
+	}
+
 }
