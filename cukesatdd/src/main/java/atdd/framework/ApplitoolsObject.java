@@ -31,12 +31,7 @@ public class ApplitoolsObject {
 	public ApplitoolsObject(){
 		eyes = new Eyes();
 		eyes.setApiKey("sAdOjZCjfkyK5G111xeuEgLb4OcNhdPNzO6c0CaCovsds110");
-
-	}
-	public void setApplitools(){
-		
 		eyes.setMatchTimeout(3000);
-		
 		eyes.setWaitBeforeScreenshots(4000);
 	}
 	

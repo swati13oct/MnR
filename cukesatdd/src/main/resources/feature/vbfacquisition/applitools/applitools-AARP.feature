@@ -28,9 +28,6 @@ Given the user goes to aarp homepage and takes full screenshot
 When the user enter the zipcode and goes to VPP page and takes screenshot for MAPD plans
 	|Zipcode| <zipcode>|
 	|VPP Screenshot| <screenshot2>|
-And the user goes to the view plan details page for MAPD plan and takes screenshots
-	|Plan Type| <planType> |
-	|Plan Name| <planName> |
 Then the user accesses the DCE tool from vpp aarp page for MAPD plan and takes screenshot
 	|Plan Type| <planType> |
 	|Plan Name| <planName> |
