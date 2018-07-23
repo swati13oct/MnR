@@ -535,7 +535,7 @@ private WebElement PlanMaterialSection;
                            accountSettingOption.click();
                            System.out.println("title is " + driver.getTitle());
                            System.out.println("Current Url is " + driver.getCurrentUrl());
-                           CommonUtility.waitForPageLoad(driver, heading, 50);
+                           CommonUtility.waitForPageLoad(driver, heading, 10);
 
                            if (driver.getCurrentUrl().contains("profile")) {
                                   return new ProfileandPreferencesPage(driver);

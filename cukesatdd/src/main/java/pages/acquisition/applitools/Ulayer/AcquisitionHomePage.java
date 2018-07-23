@@ -26,7 +26,16 @@ import java.util.concurrent.TimeUnit;
  *
  */
 public class AcquisitionHomePage extends GlobalWebElements {
-
+	
+	@FindBy(id = "_pac_maincontainer")
+	private WebElement chatBox;
+	
+	@FindBy(id = "_pac_allowPrompts")
+	private WebElement chatCheckBox;
+	
+	@FindBy(id = "_pac_cancelbutton")
+	private WebElement chatBoxExitBtn;
+	
 	@FindBy(id = "cta-zipcode")
 	private WebElement zipCodeField;
 
@@ -93,7 +102,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public static WebElement ourPlansHoverLink;
 	
 	@FindBy(id = "subnav_2")
-	public static WebElement ourPlansDropdownText;
+	public static WebElement ourPlansPopUp;
 
 	@FindBy(xpath = "//html[@id='ctl00_MasterHtmlTag']/head/title")
 	public static WebElement test;
@@ -152,6 +161,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
+		CommonUtility.waitForPageLoad(driver, chatBox, 10);
+		closeChatBoxPopup();
 	}
 
 	
@@ -555,4 +566,16 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		viewDisclaimerLink.click();
 	}
 
+	public void closeChatBoxPopup(){
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(validate(chatBox)){
+			chatCheckBox.click();
+			chatBoxExitBtn.click();
+		}
+	}
 }

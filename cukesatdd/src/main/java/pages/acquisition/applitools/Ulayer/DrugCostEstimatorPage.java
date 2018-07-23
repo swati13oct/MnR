@@ -31,12 +31,24 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public DrugCostEstimatorPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
+		CommonUtility.waitForPageLoad(driver, chatBox, 10);
+		checkModelPopup(driver);
+		closeChatBoxPopup();
 	}
 
 	private PageData savedrugpage;
 
 	public JSONObject savedrugpageJson;
-
+	
+	@FindBy(id = "_pac_maincontainer")
+	public WebElement chatBox;
+	
+	@FindBy(id = "_pac_allowPrompts")
+	private WebElement chatCheckBox;
+	
+	@FindBy(id = "_pac_cancelbutton")
+	private WebElement chatBoxExitBtn;
+	
 	// @FindBy(xpath = "//div[@id='drugs-tab']//a[@id='add-drug']")
 	@FindBy(id = "add-drug")
 	public WebElement addDrug;
@@ -754,7 +766,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			((JavascriptExecutor)driver).executeScript("arguments[0].click();", select_btn_first);
 		}
 		System.out.println("first pharmacy 2");
-		Thread.sleep(10000);
+		Thread.sleep(4000);
 	}
 
 	public void validate_cost_saving_present(String pharmacy_type) {
@@ -912,7 +924,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 
 	public void navigateToStep3() throws InterruptedException {
-		Thread.sleep(10000);
+		Thread.sleep(6000);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", step3);
 		step3.click();
 		Thread.sleep(10000);
 	}
@@ -1770,4 +1783,53 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		}
 	}
 
+	public void closeChatBoxPopup(){
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(validate(chatBox)){
+			chatCheckBox.click();
+			chatBoxExitBtn.click();
+		}
+	}
+	public static void checkModelPopup(WebDriver driver) {
+		int counter = 0;
+		do {
+
+			System.out.println("current value of conter: " + counter);
+			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
+
+			if (IPerceptionsFrame.isEmpty()) {
+				if (driver.findElements(By.xpath("//area[@href='javascript:clWin()'][@alt = 'no']")).isEmpty()) {
+					try {
+						Thread.sleep(5000);
+					} catch (InterruptedException e) {
+						System.out.println(e.getMessage());
+					}
+
+				} else {
+					System.out.println("FeedBack Modal Present and counter value is:" + counter);
+					try {
+						Thread.sleep(2000);
+						WebElement NoThanks = driver.findElement(By.xpath("//*[@id='IPEinvL']/map/area[3]"));
+						JavascriptExecutor js = (JavascriptExecutor) driver;
+						js.executeScript("arguments[0].scrollIntoView();", NoThanks);
+						js.executeScript("arguments[0].click();", NoThanks);
+						break;
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+
+				}
+			} else {
+				driver.switchTo().frame(IPerceptionsFrame.get(0));
+				driver.findElement(By.className("btn-no")).click();
+				driver.switchTo().defaultContent();
+			}
+			counter++;
+		} while (counter < 1);
+	}
 }
