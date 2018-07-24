@@ -345,7 +345,7 @@ private WebElement PlanMaterialSection;
 
               
     	   if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
-    		   if(Plantype.equalsIgnoreCase("MAPD") || Plantype.equalsIgnoreCase("PDP") || Plantype.equalsIgnoreCase("HIP"))
+    		   if(Plantype.equalsIgnoreCase("MAPD") || Plantype.equalsIgnoreCase("PDP") || Plantype.equalsIgnoreCase("HIP") || Plantype.equalsIgnoreCase("MA"))
     		   {
                      System.out.println("user is on Stage login page");
                      // CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);
@@ -363,7 +363,7 @@ private WebElement PlanMaterialSection;
                            }
                            System.out.println(driver.getCurrentUrl());
                            CommonUtility.waitForPageLoad(driver, heading, 30);
-                           if (driver.getTitle().contains("Benefits Overview")) {
+                           if (driver.getTitle().contains("Benefits")) {
                                   System.out.println(driver.getTitle());
                                   return new BenefitsAndCoveragePage(driver);
                            }
@@ -382,14 +382,14 @@ private WebElement PlanMaterialSection;
                          
                          driver.navigate().to("https://"+MRScenario.environmentMedicare+"-mymedicareaccount.uhc.com/medica/member/benefits-coverage.html");
                          try {
-                                Thread.sleep(20000);
+                                Thread.sleep(40000);
                          } catch (InterruptedException e) {
                                 // TODO Auto-generated catch block
                                 e.printStackTrace();
                          }
                          System.out.println(driver.getCurrentUrl());
                          CommonUtility.waitForPageLoad(driver, heading, 30);
-                         if (driver.getTitle().contains("Benefits Overview")) {
+                         if (driver.getTitle().contains("Benefits")) {
                                 System.out.println(driver.getTitle());
                                 return new BenefitsAndCoveragePage(driver);
                          }
@@ -414,7 +414,7 @@ private WebElement PlanMaterialSection;
                          }
                          System.out.println(driver.getCurrentUrl());
                          CommonUtility.waitForPageLoad(driver, heading, 30);
-                         if (driver.getTitle().contains("Benefits Overview")) {
+                         if (driver.getTitle().contains("Benefits")) {
                                 System.out.println(driver.getTitle());
                                 return new BenefitsAndCoveragePage(driver);
                          }
@@ -434,12 +434,13 @@ private WebElement PlanMaterialSection;
                                   "https://team-ci1-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
               }
               CommonUtility.waitForPageLoad(driver, heading, 50);
-      		if (driver.getTitle().equalsIgnoreCase("Benefits Overview")) {
+      		if (driver.getTitle().equalsIgnoreCase("Benefits")) {
       			return new BenefitsAndCoveragePage(driver);
       		}
 
       		return null;
        }
+       
        public void waitForHomePage() {
 
        	waitforElement(helloPerson);

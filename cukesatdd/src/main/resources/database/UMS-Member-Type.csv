@@ -11,6 +11,8 @@ q1_apr_sfl017942/Password@1,MAPD,Medica,NON LIS,
 ABBCDD1938/Password@1,MAPD,EPMPEnabled,Group,
 q1_feb_sfl023_hsid/Password@1,MAPD,PCP,NON LIS,
 q2_jun_grp0010/Password@1,MAPD,Group,NON LIS,
+q2_jun_grp0390/Password@1,MA,Group,NON LIS
+q2_jun_grp0166/Password@1,PDP,Group,NON LIS
 q2_jun_grp0086,MAPD,GEORGIAGroup,
 q2_jun_grp0076/Password@1,MAPD,TEXASERSGroup,
 q2_jun_grp0004/Password@1,MAPD,CALPERSGroup,
