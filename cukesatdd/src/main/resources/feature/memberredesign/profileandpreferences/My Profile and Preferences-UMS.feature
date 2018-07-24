@@ -369,6 +369,7 @@ Feature: C1.2To test Profile and Preferences page .
     Examples: 
       | userType | memberType |
       | PCP      | AARP       |
+      | Medica   | AARP       |
 
   @regressionPreferencesForShip @regression_06_06_18
   Scenario Outline: To test end to end regression scenario for preferences of a SHIP member

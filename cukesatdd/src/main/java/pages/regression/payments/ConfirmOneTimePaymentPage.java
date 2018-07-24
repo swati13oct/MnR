@@ -113,7 +113,7 @@ public class ConfirmOneTimePaymentPage extends UhcDriver{
 		     Thread.sleep(5000);
 		CommonUtility.checkPageIsReady(driver);
 		Thread.sleep(7000);
-		if(driver.getTitle().equalsIgnoreCase("overview") || driver.getTitle().equalsIgnoreCase("AARP Medicare Plans from UnitedHealthCare - overview")){
+		if(driver.getTitle().equalsIgnoreCase("overview") || driver.getTitle().equalsIgnoreCase("Premium Payments") || driver.getTitle().equalsIgnoreCase("AARP Medicare Plans from UnitedHealthCare - Premium Payments")){
 			System.out.println("Title matched");
 			Thread.sleep(8000);
 		}			

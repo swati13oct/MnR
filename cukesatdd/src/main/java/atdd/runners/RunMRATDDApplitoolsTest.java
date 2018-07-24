@@ -19,7 +19,7 @@ jsonReport = "target/cucumber.json",detailedReport = true, detailedAggregatedRep
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDApplitoolsTest")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.vbfacquisition" }, 
 features = { "src/main/resources/feature/vbfacquisition" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber.json" }, tags = { "@appAcqPagesTest" })
+		"pretty", "html:reports/test-report", "json:target/cucumber.json" }, tags = { "@applitoolsAARP_VPP,@applitoolsAARP_DCE" })
 public class RunMRATDDApplitoolsTest {
 
 }

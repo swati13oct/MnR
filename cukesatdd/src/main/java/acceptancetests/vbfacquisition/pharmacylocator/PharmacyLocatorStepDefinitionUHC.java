@@ -144,7 +144,7 @@ public class PharmacyLocatorStepDefinitionUHC {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
 					pharmacySearchPage);
 			Assert.assertTrue(true);
-			pharmacySearchPage.validatePharmaciesSectionAfterplanSelection();
+			
 		} else {
 			Assert.fail("Failed to load Pharmacy search page");
 		}

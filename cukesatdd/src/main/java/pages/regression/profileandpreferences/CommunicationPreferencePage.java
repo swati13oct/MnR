@@ -20,7 +20,7 @@ public class CommunicationPreferencePage extends UhcDriver {
 	@FindBy(id = "savePaperlessSettings")
 	private WebElement savePrefButton;
 
-	@FindBy(xpath = ".////iframe[@class='preferences']")
+	@FindBy(xpath = ".//iframe[@class='preferences']")
 	private WebElement iframeEPMP;
 
 	@FindBy(xpath = "//div[@class='tile-block paperless']/div[3]//div[@class='row']/div[1]//div[@class='control__indicator input-options']")
@@ -119,7 +119,7 @@ public class CommunicationPreferencePage extends UhcDriver {
 			e.printStackTrace();
 		}
 
-		CommonUtility.waitForPageLoad(driver, iframeEPMP, 30);
+		CommonUtility.waitForPageLoad(driver, iframeEPMP, 15);
 		System.out.println("validating frame");
 		validateNew(iframeEPMP);
 		System.out.println("frame validated");

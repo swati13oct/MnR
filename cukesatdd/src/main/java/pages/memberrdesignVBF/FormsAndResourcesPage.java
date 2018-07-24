@@ -116,15 +116,15 @@ public class FormsAndResourcesPage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(),'Search Documents')]")
 	private WebElement searchDocuments;
 
-	@FindBy(xpath = "//div[@class='customsegments parbase section']//div[@class='otherPages']//div[@class='explanationbenefits parbase section']//h1[contains(text(),'Explanation')]")
+	@FindBy(xpath = "//div[@class='customsegments parbase section']//div[@class='otherPages']//div[@class='explanationbenefits parbase section']//*[contains(text(),'Explanation')]")
 	private WebElement eobSectionHeader;
 
 	@FindBy(id = "pageHeader")
 	private WebElement pageHeader;
-	
+
 	@FindBy(id = "benefitssummary")
 	private List<WebElement> L2benefitssummary;
-	
+
 	@FindBy(id = "ordermaterials")
 	private List<WebElement> orderMaterials;
 
@@ -133,15 +133,20 @@ public class FormsAndResourcesPage extends UhcDriver {
 
 	@FindBy(id = "healthwellness_3")
 	private List<WebElement> healthWellness;
-	
+
 	String category = null;
-	
+
 	public FormsAndResourcesPage(WebDriver driver) {
 		super(driver);
 		category = CommonStepDefinition.getMemberAttributeMap().get("Member Type");
 		PageFactory.initElements(driver, this);
 		CommonUtility.checkPageIsReadyNew(driver);
-
+		try {
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		RallyDashboardPage.checkModelPopup(driver);
 		openAndValidate();
 	}
@@ -157,7 +162,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 			Assert.assertTrue("PASS !!! Benefits not displayed for terminated", L2benefitssummary.isEmpty());
 			Assert.assertTrue("PASS !!! orderMaterials not displayed for terminated", orderMaterials.isEmpty());
 			Assert.assertTrue("PASS !!! premiumPayment not displayed for terminated", premiumPayment.isEmpty());
-			Assert.assertTrue("PASS !!! healthWellness not displayed for terminated", healthWellness.isEmpty());			
+			Assert.assertTrue("PASS !!! healthWellness not displayed for terminated", healthWellness.isEmpty());
 		}
 	}
 
@@ -269,22 +274,12 @@ public class FormsAndResourcesPage extends UhcDriver {
 	 */
 	public void validateIDCard() throws InterruptedException {
 		String IDCardAttribute = getTemporaryIdcardlink().getAttribute("href");
-		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
 
-			if (IDCardAttribute.contains("test-harness")) {
-				Assert.assertTrue(true);
-			} else {
-				Assert.fail("Some wrong link is coming for member id cards");
-			}
-
-		} else if ("NO".equalsIgnoreCase(MRScenario.isTestHarness)) {
 			if (IDCardAttribute.contains("int.uhc.com")) {
 				Assert.assertTrue(true);
 			} else {
 				Assert.fail("The member id cards link is wrong");
 			}
-
-		}
 	}
 
 	/**

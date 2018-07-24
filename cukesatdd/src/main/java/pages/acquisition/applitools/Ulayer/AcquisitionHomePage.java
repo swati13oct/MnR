@@ -26,7 +26,16 @@ import java.util.concurrent.TimeUnit;
  *
  */
 public class AcquisitionHomePage extends GlobalWebElements {
-
+	
+	@FindBy(id = "_pac_maincontainer")
+	private WebElement chatBox;
+	
+	@FindBy(id = "_pac_allowPrompts")
+	private WebElement chatCheckBox;
+	
+	@FindBy(id = "_pac_cancelbutton")
+	private WebElement chatBoxExitBtn;
+	
 	@FindBy(id = "cta-zipcode")
 	private WebElement zipCodeField;
 
@@ -93,7 +102,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public static WebElement ourPlansHoverLink;
 	
 	@FindBy(id = "subnav_2")
-	public static WebElement ourPlansDropdownText;
+	public static WebElement ourPlansPopUp;
 
 	@FindBy(xpath = "//html[@id='ctl00_MasterHtmlTag']/head/title")
 	public static WebElement test;
@@ -112,6 +121,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[@id='subnav_4']/div/div/div[2]/div/span[2]/a")
 	public static WebElement registerherelink;
+	
+	@FindBy(xpath = ".//*[@id='site-wrapper']//*[@class='globaldisclaimer parbase section']//*[contains(text(),'View all disclaimer information')]")
+	private WebElement viewDisclaimerLink;
 
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
 	private static String AARP_ACQISITION_OFFLINE_PAGE_URL = MRConstants.AARP_URL_OFFLINE;
@@ -149,6 +161,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
+		CommonUtility.waitForPageLoad(driver, chatBox, 10);
+		closeChatBoxPopup();
 	}
 
 	
@@ -547,5 +561,21 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			return false; //if all three elements return false for validation then this condition passes due to ! and returns false meaning all three elements were not found on page
 		return true;
 	}
+	
+	public void clickOnViewDisclaimerLink(){
+		viewDisclaimerLink.click();
+	}
 
+	public void closeChatBoxPopup(){
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(validate(chatBox)){
+			chatCheckBox.click();
+			chatBoxExitBtn.click();
+		}
+	}
 }

@@ -2,6 +2,7 @@ package acceptancetests.vbfacquisition.applitools;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +14,9 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import acceptancetests.vbfacquisition.vpp.VPPCommonConstants;
+import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.data.CommonConstants;
+import acceptancetests.data.OLE_PageConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.ApplitoolsObject;
 import atdd.framework.MRScenario;
@@ -33,6 +36,8 @@ import pages.acquisition.applitools.Ulayer.DrugCostEstimatorPage;
 import pages.acquisition.applitools.Ulayer.PlanDetailsPage;
 
 import pages.acquisition.applitools.Ulayer.VPPPlanSummaryPage;
+import pages.acquisition.applitools.OLE.*;
+
 import com.applitools.eyes.selenium.Eyes;
 import com.applitools.eyes.BatchInfo;
 import com.applitools.eyes.MatchLevel;
@@ -43,9 +48,7 @@ import com.applitools.eyes.TestResults;
  */
 public class ApplitoolsStepDefinition_ACQ_AARP {
 
-	@Autowired
-	MRScenario loginScenario;
-
+	
 	
 	ApplitoolsObject appObj;
 	
@@ -64,16 +67,22 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 	
 	
 	@Given("^the user goes to aarp homepage and takes full screenshot$")
-	public void user_is_on_acquisition_home_page_of_AARP_Site() {
+	public void user_is_on_acquisition_home_page_of_AARP_Site(DataTable memberAttributes) throws InterruptedException{
 		WebDriver wd = appObj.getWebDriver();
-		
-		
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		String takeScreenshot = memberAttributesRow.get(0).getCells().get(1);
+		boolean flag = false;
+		if(takeScreenshot.equals("yes"))
+			flag = true;
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
-		appObj.takeScreenshot(wd,"Acquisition AARP", "Home Page", "homepage");
-		aquisitionhomepage.hoverOverOurPlanslink();
-		appObj.takeScreenshot(wd,"Acquisition AARP", "Our Plans Window Homepage", "ourPlansHomepage");
-		aquisitionhomepage.hoverOverMedEdlink();
-		appObj.takeScreenshot(wd,"Acquisition AARP", "Medicare Education Window Homepage", "medEdWindowHomepage");
+		
+			aquisitionhomepage.clickOnViewDisclaimerLink();
+			appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "Home Page", "homepage",flag);
+			aquisitionhomepage.hoverOverOurPlanslink();
+			appObj.takeScreenshot(wd, "Acquisition AARP", "Our Plans Homepage", "ourPlansHomepage",flag);
+			aquisitionhomepage.hoverOverMedEdlink();
+			appObj.takeScreenshot(wd,"Acquisition AARP", "Medicare Education Window Homepage", "medEdWindowHomepage",flag);
+		
 		appObj.saveBean(PageConstants.ACQUISITION_HOME_PAGE,
 				aquisitionhomepage);
 		appObj.saveBean(CommonConstants.WEBDRIVER, wd);
@@ -86,12 +95,15 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 		List<DataTableRow> memberAttributesRow = memberAttributes
 				.getGherkinRows();
 		String zipcode = memberAttributesRow.get(0).getCells().get(1);
-		
+		String takeScreenshot = memberAttributesRow.get(1).getCells().get(1);
+		boolean flag = false;
+		if(takeScreenshot.equals("yes"))
+			flag = true;
 		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.navigateToVpp(zipcode);
-		appObj.takeScreenshot(wd,"Acquisition AARP", "VPP Page", "vpppage"); 
+		appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "VPP Page", "vpppage",flag); 
 		plansummaryPage.clickonViewPlans(); // click on View Plans for MA/MAPD 
-		appObj.takeScreenshot(wd,"Acquisition AARP", "VPP Page MAPD Plans", "vpppageMAPD");
-		
+		appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "VPP Page MAPD Plans", "vpppageMAPD",flag);
+		appObj.saveBean(CommonConstants.WEBDRIVER, wd);
 		appObj.saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 	}
 	
@@ -105,23 +117,23 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 		String plantype =memberAttributesRow.get(0).getCells().get(1);
 		String planName = memberAttributesRow.get(1).getCells().get(1);
 		String drug = memberAttributesRow.get(2).getCells().get(1);
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) loginScenario.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) appObj.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		DrugCostEstimatorPage dce = plansummaryPage.navigateToDCEFromVPP(plantype,planName);
-		appObj.takeScreenshot(wd,"Acquisition AARP", "DCE Step 1", "dce_step1");
+		appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "DCE Step 1", "dce_step1");
 		dce.addDrug(drug.split(" ")[0]);
-		appObj.takeScreenshot(wd,"Acquisition AARP", "DCE Step 1 Drug added", "dce_step1_drug");
+		appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "DCE Step 1 Drug added", "dce_step1_drug");
 		dce.navigateToStep2();
-		appObj.takeScreenshot(wd,"Acquisition AARP", "DCE Step 2", "dce_step2");
+		appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "DCE Step 2", "dce_step2");
 		dce.select_first_pharmacy();
-		appObj.takeScreenshot(wd,"Acquisition AARP", "DCE Step 2 Pharmacy Selected", "dce_step2_pharmacy");
+		appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "DCE Step 2 Pharmacy Selected", "dce_step2_pharmacy");
 		dce.navigateToStep3();
-		appObj.takeScreenshot(wd,"Acquisition AARP", "DCE Step 3", "dce_step3");
+		appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "DCE Step 3", "dce_step3");
 		dce.clicksOnReturnLink();
 		
-		if(dce!=null){
-			loginScenario.saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
+		
+			appObj.saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
 			appObj.saveBean(CommonConstants.WEBDRIVER, wd);
-		}
+		
 	}
 	
 	@And("^the user goes to the view plan details page for MAPD plan and takes screenshots$")
@@ -134,25 +146,25 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) appObj.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		PlanDetailsPage planDetailsPage = plansummaryPage.navigateToPlanDetails(planName, planType);
-		appObj.takeScreenshot(wd,"Acquisition AARP", "Plan Details Medical Benefits Tab", "planDetails1");
+		appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "Plan Details Medical Benefits Tab", "planDetails1");
 		planDetailsPage.clickOnDrugTab();
-		appObj.takeScreenshot(wd,"Acquisition AARP", "Plan Details Prescription Drug Tab", "planDetails2");
+		appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "Plan Details Prescription Drug Tab", "planDetails2");
 		planDetailsPage.clickOnRidersTab();
-		appObj.takeScreenshot(wd,"Acquisition AARP", "Plan Details Riders Tab", "planDetails3");
+		appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "Plan Details Riders Tab", "planDetails3");
 		planDetailsPage.clickOnPlanCostsTab();
-		appObj.takeScreenshot(wd,"Acquisition AARP", "Plan Details Plan Costs Tab", "planDetails1");
+		appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "Plan Details Plan Costs Tab", "planDetails1");
 		planDetailsPage.backtoPlanSummary();
 		
 		appObj.saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 	}
 
 	@When("^the user clicks on PDP plans and takes screenshot$")
-	public void user_goes_to_VPPpage_PDP(DataTable memberAttributes)throws InterruptedException{
+	public void user_goes_to_VPPpage_PDP()throws InterruptedException{
 		WebDriver wd = (WebDriver)appObj.getBean(CommonConstants.WEBDRIVER);
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) loginScenario.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) appObj.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		
 		plansummaryPage.clickOnPDPPlans(); //click on View plans for PDP and take screenshot
-		appObj.takeScreenshot(wd,"Acquisition AARP", "VPP Page PDP Plans", "vpppagePDP");
+		appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "VPP Page PDP Plans", "vpppagePDP");
 		
 		appObj.saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 	}
@@ -167,23 +179,24 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) appObj.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		PlanDetailsPage planDetailsPage = plansummaryPage.navigateToPlanDetails(planName, planType);
-		appObj.takeScreenshot(wd,"Acquisition AARP", "Plan Details PDP Prescription Drug Tab", "planDetailsPDP1");
+		appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "Plan Details PDP Prescription Drug Tab", "planDetailsPDP1");
 		planDetailsPage.clickOnPlanCostsTab();
-		appObj.takeScreenshot(wd,"Acquisition AARP", "Plan Details PDP Plan Costs Tab", "planDetailsPDP2");
+		appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "Plan Details PDP Plan Costs Tab", "planDetailsPDP2");
 		planDetailsPage.backtoPlanSummary();
-		
+		plansummaryPage.clickonViewPlans();
 		appObj.saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 	}
 	
 	@And("^the user goes to Request More Help and Info link page in Our plans and takes screenshot$")
 	public void clickOnRequestMoreHelpAndInfoLink(){
-		WebDriver wd = (WebDriver)appObj.getBean(CommonConstants.WEBDRIVER);
+		WebDriver wd = appObj.getWebDriver();
 		String url = "https://www.stage-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/request-information.html";
 		
 		ApplitoolsAcquisitionPage applitoolsAcqPage = new ApplitoolsAcquisitionPage(wd);
 		applitoolsAcqPage.start(url);
-		appObj.takeScreenshot(wd,"Acquisition AARP", "Request More Help and Info", "requestHelpInfo");
+		appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "Request More Help and Info", "requestHelpInfo");
 		appObj.saveBean(PageConstants.APPLITOOLS_ACQ_PAGE, applitoolsAcqPage);
+		appObj.saveBean(CommonConstants.WEBDRIVER, wd);
 	}
 	
 	@And("^the user goes to Request Agent appointment link page and takes screenshot$")
@@ -193,7 +206,7 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 		
 		ApplitoolsAcquisitionPage applitoolsAcqPage = new ApplitoolsAcquisitionPage(wd);
 		applitoolsAcqPage.start(url);
-		appObj.takeScreenshot(wd,"Acquisition AARP", "Agent Appointment Form", "agentAppt");
+		appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "Agent Appointment Form", "agentAppt");
 		appObj.saveBean(PageConstants.APPLITOOLS_ACQ_PAGE, applitoolsAcqPage);
 		
 	}
@@ -205,7 +218,7 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 		
 		ApplitoolsAcquisitionPage applitoolsAcqPage = new ApplitoolsAcquisitionPage(wd);
 		applitoolsAcqPage.start(url);
-		appObj.takeScreenshot(wd,"Acquisition AARP", "Find Uhc in community Page", "communityPage");
+		appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "Find Uhc in community Page", "communityPage");
 		appObj.saveBean(PageConstants.APPLITOOLS_ACQ_PAGE, applitoolsAcqPage);
 	}
 	
@@ -216,7 +229,7 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 		
 		ApplitoolsAcquisitionPage applitoolsAcqPage = new ApplitoolsAcquisitionPage(wd);
 		applitoolsAcqPage.start(url);
-		appObj.takeScreenshot(wd,"Acquisition AARP", "PDP Inquiry Kit Page", "pdpInquiryPage");
+		appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "PDP Inquiry Kit Page", "pdpInquiryPage");
 		appObj.saveBean(PageConstants.APPLITOOLS_ACQ_PAGE, applitoolsAcqPage);
 	}
 	
@@ -227,7 +240,7 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 		
 		ApplitoolsAcquisitionPage applitoolsAcqPage = new ApplitoolsAcquisitionPage(wd);
 		applitoolsAcqPage.start(url);
-		appObj.takeScreenshot(wd,"Acquisition AARP", "PDP Info and Enrollment Materials page", "pdpInfoAndEnrollment");
+		appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "PDP Info and Enrollment Materials page", "pdpInfoAndEnrollment");
 		appObj.saveBean(PageConstants.APPLITOOLS_ACQ_PAGE, applitoolsAcqPage);
 	}
 	
@@ -238,7 +251,7 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 			
 			ApplitoolsAcquisitionPage applitoolsAcqPage = new ApplitoolsAcquisitionPage(wd);
 			applitoolsAcqPage.start(url);
-			appObj.takeScreenshot(wd,"Acquisition AARP", "How do I Enroll Page", "howDoIEnrollPage");
+			appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "How do I Enroll Page", "howDoIEnrollPage");
 			appObj.saveBean(PageConstants.APPLITOOLS_ACQ_PAGE, applitoolsAcqPage);
 	}
 	
@@ -249,7 +262,7 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 			
 			ApplitoolsAcquisitionPage applitoolsAcqPage = new ApplitoolsAcquisitionPage(wd);
 			applitoolsAcqPage.start(url);
-			appObj.takeScreenshot(wd,"Acquisition AARP", "Resoureces Materials MA Plans Page", "resourcesMaterialsPage");
+			appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "Resoureces Materials MA Plans Page", "resourcesMaterialsPage");
 			appObj.saveBean(PageConstants.APPLITOOLS_ACQ_PAGE, applitoolsAcqPage);
 	}	
 	
@@ -260,7 +273,7 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 			
 			ApplitoolsAcquisitionPage applitoolsAcqPage = new ApplitoolsAcquisitionPage(wd);
 			applitoolsAcqPage.start(url);
-			appObj.takeScreenshot(wd,"Acquisition AARP", "Prescription Drug Plans Page", "presDrugPlansPage");
+			appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "Prescription Drug Plans Page", "presDrugPlansPage");
 			appObj.saveBean(PageConstants.APPLITOOLS_ACQ_PAGE, applitoolsAcqPage);
 	}	
 	
@@ -271,7 +284,7 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 			
 			ApplitoolsAcquisitionPage applitoolsAcqPage = new ApplitoolsAcquisitionPage(wd);
 			applitoolsAcqPage.start(url);
-			appObj.takeScreenshot(wd,"Acquisition AARP", "How do I Enroll PDP Page", "howDoIEnrollPDPPage");
+			appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "How do I Enroll PDP Page", "howDoIEnrollPDPPage");
 			appObj.saveBean(PageConstants.APPLITOOLS_ACQ_PAGE, applitoolsAcqPage);
 	}
 	
@@ -282,7 +295,7 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 			
 			ApplitoolsAcquisitionPage applitoolsAcqPage = new ApplitoolsAcquisitionPage(wd);
 			applitoolsAcqPage.start(url);
-			appObj.takeScreenshot(wd,"Acquisition AARP", "Resoureces Materials PDP Page", "resourcesMaterialsPDPPage");
+			appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "Resoureces Materials PDP Page", "resourcesMaterialsPDPPage");
 			appObj.saveBean(PageConstants.APPLITOOLS_ACQ_PAGE, applitoolsAcqPage);
 	}
 	
@@ -293,7 +306,7 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 			
 			ApplitoolsAcquisitionPage applitoolsAcqPage = new ApplitoolsAcquisitionPage(wd);
 			applitoolsAcqPage.start(url);
-			appObj.takeScreenshot(wd,"Acquisition AARP", "Plan Selector Page", "planSelectorPage");
+			appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "Plan Selector Page", "planSelectorPage");
 			appObj.saveBean(PageConstants.APPLITOOLS_ACQ_PAGE, applitoolsAcqPage);
 	}
 	
@@ -304,7 +317,7 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 			
 			ApplitoolsAcquisitionPage applitoolsAcqPage = new ApplitoolsAcquisitionPage(wd);
 			applitoolsAcqPage.start(url);
-			appObj.takeScreenshot(wd,"Acquisition AARP", "Pharmacy Locator Page", "pharmacyLocatorPage");
+			appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "Pharmacy Locator Page", "pharmacyLocatorPage");
 			appObj.saveBean(PageConstants.APPLITOOLS_ACQ_PAGE, applitoolsAcqPage);
 	}
 	
@@ -315,7 +328,7 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 			
 			ApplitoolsAcquisitionPage applitoolsAcqPage = new ApplitoolsAcquisitionPage(wd);
 			applitoolsAcqPage.start(url);
-			appObj.takeScreenshot(wd,"Acquisition AARP", "About Us Page", "aboutUsPage");
+			appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "About Us Page", "aboutUsPage");
 			appObj.saveBean(PageConstants.APPLITOOLS_ACQ_PAGE, applitoolsAcqPage);
 	}
 	
@@ -326,19 +339,20 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 			
 			ApplitoolsAcquisitionPage applitoolsAcqPage = new ApplitoolsAcquisitionPage(wd);
 			applitoolsAcqPage.start(url);
-			appObj.takeScreenshot(wd,"Acquisition AARP", "Contact Us Page", "contactUsPage");
+			appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "Contact Us Page", "contactUsPage");
 			appObj.saveBean(PageConstants.APPLITOOLS_ACQ_PAGE, applitoolsAcqPage);
 	}
 	
 	@And("^the user goes to sitemap page from the footer and takes screenshot$")
 	public void sitemapPage(){
-			WebDriver wd = (WebDriver)appObj.getBean(CommonConstants.WEBDRIVER);
+			WebDriver wd = appObj.getWebDriver();
 			String url = "https://www.stage-aarpmedicareplans.uhc.com/content/aarpmedicareplans/en/sitemap.html";
 			
 			ApplitoolsAcquisitionPage applitoolsAcqPage = new ApplitoolsAcquisitionPage(wd);
 			applitoolsAcqPage.start(url);
-			appObj.takeScreenshot(wd,"Acquisition AARP", "Sitemap Page", "sitemapPage");
+			appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "Sitemap Page", "sitemapPage");
 			appObj.saveBean(PageConstants.APPLITOOLS_ACQ_PAGE, applitoolsAcqPage);
+			appObj.saveBean(CommonConstants.WEBDRIVER, wd);
 	}
 	
 	@And("^the user goes to privacy policy page from the footer and takes screenshot$")
@@ -348,7 +362,7 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 			
 			ApplitoolsAcquisitionPage applitoolsAcqPage = new ApplitoolsAcquisitionPage(wd);
 			applitoolsAcqPage.start(url);
-			appObj.takeScreenshot(wd,"Acquisition AARP", "Privacy Policy Page", "privacyPolicyPage");
+			appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "Privacy Policy Page", "privacyPolicyPage");
 			appObj.saveBean(PageConstants.APPLITOOLS_ACQ_PAGE, applitoolsAcqPage);
 	}
 	
@@ -359,7 +373,7 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 			
 			ApplitoolsAcquisitionPage applitoolsAcqPage = new ApplitoolsAcquisitionPage(wd);
 			applitoolsAcqPage.start(url);
-			appObj.takeScreenshot(wd,"Acquisition AARP", "Terms and Conditions Page", "terms_and_conditionsPage");
+			appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "Terms and Conditions Page", "terms_and_conditionsPage");
 			appObj.saveBean(PageConstants.APPLITOOLS_ACQ_PAGE, applitoolsAcqPage);
 	}
 	
@@ -370,7 +384,7 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 			
 			ApplitoolsAcquisitionPage applitoolsAcqPage = new ApplitoolsAcquisitionPage(wd);
 			applitoolsAcqPage.start(url);
-			appObj.takeScreenshot(wd,"Acquisition AARP", "Disclaimer Page", "disclaimerPage");
+			appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "Disclaimer Page", "disclaimerPage");
 			appObj.saveBean(PageConstants.APPLITOOLS_ACQ_PAGE, applitoolsAcqPage);
 	}
 	
@@ -381,7 +395,7 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 			
 			ApplitoolsAcquisitionPage applitoolsAcqPage = new ApplitoolsAcquisitionPage(wd);
 			applitoolsAcqPage.start(url);
-			appObj.takeScreenshot(wd,"Acquisition AARP", "Agents & Brokers Page", "agentsBrokersPage");
+			appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "Agents & Brokers Page", "agentsBrokersPage");
 			appObj.saveBean(PageConstants.APPLITOOLS_ACQ_PAGE, applitoolsAcqPage);
 	}
 	
@@ -392,7 +406,7 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 			
 			ApplitoolsAcquisitionPage applitoolsAcqPage = new ApplitoolsAcquisitionPage(wd);
 			applitoolsAcqPage.start(url);
-			appObj.takeScreenshot(wd,"Acquisition AARP", "Accessibility Page", "accessibilityPage");
+			appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "Accessibility Page", "accessibilityPage");
 			appObj.saveBean(PageConstants.APPLITOOLS_ACQ_PAGE, applitoolsAcqPage);
 	}
 	@And("^the user goes to medicare eligibility page from the Medicare Eductation nav panel and takes screenshot$")
@@ -402,7 +416,7 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 			
 			ApplitoolsAcquisitionPage applitoolsAcqPage = (ApplitoolsAcquisitionPage) appObj.getBean(PageConstants.APPLITOOLS_ACQ_PAGE);
 			applitoolsAcqPage.start(url);
-			appObj.takeScreenshot(wd,"Acquisition AARP", "Medicare Eligibility Page", "eligibilityPage");
+			appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "Medicare Eligibility Page", "eligibilityPage");
 			appObj.saveBean(PageConstants.APPLITOOLS_ACQ_PAGE, applitoolsAcqPage);
 	}
 	
@@ -413,7 +427,7 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 			
 			ApplitoolsAcquisitionPage applitoolsAcqPage = (ApplitoolsAcquisitionPage) appObj.getBean(PageConstants.APPLITOOLS_ACQ_PAGE);
 			applitoolsAcqPage.start(url);
-			appObj.takeScreenshot(wd,"Acquisition AARP", "Coverage Choices Page", "coverageChoicesPage");
+			appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "Coverage Choices Page", "coverageChoicesPage");
 			appObj.saveBean(PageConstants.APPLITOOLS_ACQ_PAGE, applitoolsAcqPage);
 	}
 	
@@ -424,7 +438,7 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 			
 			ApplitoolsAcquisitionPage applitoolsAcqPage = (ApplitoolsAcquisitionPage) appObj.getBean(PageConstants.APPLITOOLS_ACQ_PAGE);
 			applitoolsAcqPage.start(url);
-			appObj.takeScreenshot(wd,"Acquisition AARP", "Provider Benefits Page", "proivderBenefitsPage");
+			appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "Provider Benefits Page", "proivderBenefitsPage");
 			appObj.saveBean(PageConstants.APPLITOOLS_ACQ_PAGE, applitoolsAcqPage);
 	}
 	
@@ -435,7 +449,7 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 			
 			ApplitoolsAcquisitionPage applitoolsAcqPage = (ApplitoolsAcquisitionPage) appObj.getBean(PageConstants.APPLITOOLS_ACQ_PAGE);
 			applitoolsAcqPage.start(url);
-			appObj.takeScreenshot(wd,"Acquisition AARP", "MA Med Ed Page", "maMedEdPage");
+			appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "MA Med Ed Page", "maMedEdPage");
 			appObj.saveBean(PageConstants.APPLITOOLS_ACQ_PAGE, applitoolsAcqPage);
 	}
 	
@@ -446,7 +460,7 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 			
 			ApplitoolsAcquisitionPage applitoolsAcqPage = (ApplitoolsAcquisitionPage) appObj.getBean(PageConstants.APPLITOOLS_ACQ_PAGE);
 			applitoolsAcqPage.start(url);
-			appObj.takeScreenshot(wd,"Acquisition AARP", "Cost Basics Page", "costBasicsPage");
+			appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "Cost Basics Page", "costBasicsPage");
 			appObj.saveBean(PageConstants.APPLITOOLS_ACQ_PAGE, applitoolsAcqPage);
 	}
 	
@@ -457,7 +471,7 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 			
 			ApplitoolsAcquisitionPage applitoolsAcqPage = (ApplitoolsAcquisitionPage) appObj.getBean(PageConstants.APPLITOOLS_ACQ_PAGE);
 			applitoolsAcqPage.start(url);
-			appObj.takeScreenshot(wd,"Acquisition AARP", "PDP Plans Med Ed Page", "pdpMedEdPage");
+			appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "PDP Plans Med Ed Page", "pdpMedEdPage");
 			appObj.saveBean(PageConstants.APPLITOOLS_ACQ_PAGE, applitoolsAcqPage);
 	}
 	
@@ -468,7 +482,59 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 			
 			ApplitoolsAcquisitionPage applitoolsAcqPage = (ApplitoolsAcquisitionPage) appObj.getBean(PageConstants.APPLITOOLS_ACQ_PAGE);
 			applitoolsAcqPage.start(url);
-			appObj.takeScreenshot(wd,"Acquisition AARP", "Enrollment Basics Med Ed Page", "enrollmentMedEdPage");
+			appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "Enrollment Basics Med Ed Page", "enrollmentMedEdPage");
 			appObj.saveBean(PageConstants.APPLITOOLS_ACQ_PAGE, applitoolsAcqPage);
+	}
+	
+	@Then("^the user clicks on the enroll in plan button for mapd plan and goes to med info page$")
+	public void the_user_clicks_on_Enroll_Now_to_start_the_OLE_flow(DataTable planAttributes) throws Throwable {
+		WebDriver wd = (WebDriver)appObj.getBean(CommonConstants.WEBDRIVER);
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		String PlanName = givenAttributesRow.get(0).getCells().get(1);
+	    VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) appObj.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			
+		WelcomePage welcomePage = planSummaryPage.Enroll_OLE_Plan(PlanName);
+		appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "OLE Welcome Page", "oleWelcomePage");
+		MedicareInformationPage medicareInfoPage = welcomePage.navigate_to_medicare_info_page();
+		appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "OLE Medicare Info Page", "oleMedInfoPage");
+		appObj.saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE, medicareInfoPage);
+	}
+	@Then("^the user enters info for pages in OLE flow and takes screenshots of each page$")
+	public void the_user_enters_Medicare_Details_in_medicare_info_page(DataTable planAttributes) throws Throwable {
+		WebDriver wd = (WebDriver)appObj.getBean(CommonConstants.WEBDRIVER);
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		String planType = MemberDetailsMap.get("Plan Type");
+		MedicareInformationPage medicareInfoPage = (MedicareInformationPage) appObj.getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+
+	    medicareInfoPage.enter_required_Medicare_details(MemberDetailsMap);
+	    PrelimineryQuestionsPage prelimineryQuestionsPage = medicareInfoPage.navigate_to_Preliminary_Questions_page();
+	    appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "OLE Preliminary Questions Page", "prelimQuestionPage");
+	    prelimineryQuestionsPage.clickNoESRD();
+	    PersonalInformationPage personalInformationPage = prelimineryQuestionsPage.navigate_to_Personal_Information_page();
+	    appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "OLE Personal Info Page", "persionalInfoPage");
+	    personalInformationPage.enter_member_details(MemberDetailsMap);
+	    SpecialElectionPeriodPage specialElectPage = personalInformationPage.navigate_to_SEP_page();
+	    appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "OLE Special electtion Page", "specialElectionPage");
+	    CoverageInformationPage coverageInfoPage = specialElectPage.navigate_to_Coverage_Information_page();
+	    appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "OLE Coverage Information Page", "coverageInfoPage");
+	    ProposedEffectiveDatePage effectiveDatePage = coverageInfoPage.navigate_to_Proposed_Effective_Date_Page();
+	    appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "OLE Proposed Effective Date Page", "effectiveDatePage");
+	    PrimaryCarePhysicianPage pcpPage = (PrimaryCarePhysicianPage) effectiveDatePage.navigate_to_PCP_Page(planType);
+	    appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "OLE Primary Care Physician Page", "pcpPage");
+	    PlanPremiumPage planPremPage = pcpPage.navigate_to_Plan_Premium_Page();
+	    appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "OLE Plan Premium Page", "planPremiumPage");
+	    SupplementalBenefitsPage suppBenefitsPage = planPremPage.navigate_to_Supplemental_Riders_Page();
+	    appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "OLE Supplemental Benefits Page", "suppBenefitsPage");
+	    AuthorizationPage authPage =  suppBenefitsPage.navigate_to_Authorization_Page();
+	    appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "OLE Authorization Page", "authPage");
+	    authPage.enter_required_fields();
+	    authPage.navigate_to_Review_Submit_Page();
+	    appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "OLE Review and Submit Page", "reviewSubmitPage");
 	}
 }
