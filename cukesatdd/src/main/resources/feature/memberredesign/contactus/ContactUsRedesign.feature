@@ -83,7 +83,7 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
 
     Examples: 
       | plantype | memberType     | enquiryType | message | aarpMemberShipNumber | firstName | lastName | emailAddress   | confirmEmailAddress | date | month | year | expectedMessage                                                                                                                          |
-      | SHIP     | IndPharmacyFnR | Claims      | Testing |           1234567890 | test      | test     | test@optum.com | test@optum.com      |   01 |    01 | 1950 | We value your input and will be happy to answer your questions. A UnitedHealthcare Customer Service representative will respond shortly. |
+      | PHIP     | SHIPCLAIMS | Claims      | Testing |           1234567890 | test      | test     | test@optum.com | test@optum.com      |   01 |    01 | 1950 | We value your input and will be happy to answer your questions. A UnitedHealthcare Customer Service representative will respond shortly. |
 
   @goToInbox
   Scenario Outline: Verify go To Inbox button on contactUS redesign page for opted in member
@@ -95,7 +95,7 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
 
     Examples: 
       | plantype | memberType      |
-      | MAPD     | MAPDwithMedSupp |
+      | MA     | MA_AARP_GOGreen |
 
   @clickToCallCancel
   Scenario Outline: Verify clickToCall Widget Expansion (Drop-Down, Text Box and Button UI) and click on cancel on contactUS redesign page
