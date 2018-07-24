@@ -179,7 +179,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		} else {
 			userName = loginCreds.get("user");
 			pwd = loginCreds.get("pwd");
-			System.out.println("User is..." + userName);
+			System.out.println("User is.." + userName);
 			System.out.println("Password is..." + pwd);
 			getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);

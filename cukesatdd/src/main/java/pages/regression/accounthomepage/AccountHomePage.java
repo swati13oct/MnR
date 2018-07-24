@@ -373,7 +373,7 @@ private WebElement PlanMaterialSection;
     		   
     		   else if (Plantype.equalsIgnoreCase("MEDICA"))
     		   {
-                   System.out.println("user is on Stage login page");
+                   System.out.println("user is on Stage login page.");
                    // CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);
                    if (driver.getCurrentUrl().contains("/dashboard"))
                          ;

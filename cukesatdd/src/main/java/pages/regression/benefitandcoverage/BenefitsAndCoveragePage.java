@@ -1080,7 +1080,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	}
 	
 	/**
-	 * @toDo : The user validates the DrugCoverage section headers and text for group
+	 * @toDo : The user validates the DrugCoverage section headers and text for group.
 	 */
 	public void validatedrugcoverageheaderandtextgroup() {
 	
