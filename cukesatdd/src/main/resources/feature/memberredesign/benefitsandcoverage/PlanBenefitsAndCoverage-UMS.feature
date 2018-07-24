@@ -221,7 +221,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
        | Plan Type      | <planType>     |
        | Member Type    | <memberType>|
        | Copay Category | <copayCategory>|
-    Then the user navigates to Benefits coverage page
+    Then user navigates to Benefits coverage page
     And the user view the LIS Drug Copays & Discounts header
     And the user view the Drug Cost header and text
     And the drugcost dropdown should not display
@@ -229,7 +229,8 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     And the user validates tier link should not display 
     And the user validated the Look up Drugs link 
     And the user validates text for the Locate a Pharmacy section
-    And the user validates Locate a Pharmacy button should be visible  
+    And user validates Locate a Pharmacy button should be visible  
+      | Plan Type      | <na>     |
     And the user should see drug cost table for Lis members
     And the user validates view and document label
     And the user validates spanish and chinese should not display in dropdown
@@ -620,26 +621,27 @@ And the user verifies that the correct pdfs are there in the plan material secti
     Scenario Outline: Verify the outpatient widget for a member withprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType> |
-      #| Member Type   | <memberType> |
+      | Member Type   | <memberType> |
     Then the user navigates to Benefits coverage page
     And the user validates the Outpatient Surgery Center Visits section
 
 
     Examples: 
-      | planType | 
-      | MAPD     |     
+      | planType | memberType |
+      | MAPD     | MAPDCOSMOS |    
 
 	@primarycareproviderspecialist   @regressionprimarycareprovider  @regression_06_06_18
     Scenario Outline: Verify the Office visits widget for a member withprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
+      | Member Type   | <memberType> |
     Then the user navigates to Benefits coverage page
     And the user validates the Office Visits section
 
 
     Examples: 
-      | planType |
-      | MAPD    |
+      | planType | memberType |
+      | MAPD     | COSMOSOfficevisit |
     
     
 
@@ -647,15 +649,15 @@ And the user verifies that the correct pdfs are there in the plan material secti
     Scenario Outline: Verify the outpatient widget for a member withprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType> |
-      #| Member Type   | <memberType> |
+      | Member Type   | <memberType> |
     Then the user navigates to Benefits coverage page
     And the user validates the Outpatient Surgery Center Visits section
 
 
 
     Examples: 
-      | planType | 
-      | MAPD     |  
+      | planType | memberType |
+      | MAPD     | NICEBenefits |
    
 
    @BenefitsForAlPeehipMember @regression @regression_06_06_18
@@ -724,4 +726,19 @@ And the user verifies that the correct pdfs are there in the plan material secti
     Examples: 
       | planType |memberType |
       | MAPD     |   withRider      |
+      
+    
+    @ancillarybenefitnegativescenarioscodemonkeys
+Scenario Outline: Verify ancillary benefits are not displayed other than Group memnbers
+Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>  |
+      | Member Type    | <memberType>|
+      | Copay Category | <copayCategory>|
+    Then the user navigates to Benefits and coverage page
+    Then verify ancillary benefit section is not displayed
+        Examples: 
+       | planType|  memberType  | copayCategory |
+      #| PDP     |  Group       |  NON LIS      |
+       | MAPD    |  Individual  |  NON LIS      |
+      #| MA      |  Group       |  HMO          | 
       

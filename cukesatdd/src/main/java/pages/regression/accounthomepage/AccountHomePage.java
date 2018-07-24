@@ -17,7 +17,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
-
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
@@ -116,6 +117,9 @@ private WebElement PlanMaterialSection;
        @FindBy(xpath = "//span[contains(.,'Print temporary ID card')]")
        private WebElement viewIDCard;
 
+       @FindBy (xpath="//div[@class='claim-results']//table[not (contains(@class,'ng-hide'))]//tbody//tr[2]//a[text()='MORE INFO']")
+    	private WebElement claimstablemoreinfolinkCombo;
+       
        @FindBy(id = "pcpLogoPrint1left")
        private WebElement validateLogo;
 
@@ -293,7 +297,7 @@ private WebElement PlanMaterialSection;
        @FindBy(xpath = "//*[@id='ordermaterials']")
        private WebElement OrderMaterialsTab_BnCPage;
        
-       @FindBy(xpath = "//h1[@class='h4 margin-none']")
+       @FindBy(xpath = "//*[@class = 'main-heading margin-none']")
        private WebElement orderplanHeadertxt;
 
        @FindBy(xpath = "//*[@class='tabs-desktop']//li[@role='listitem'][2]/a")
@@ -301,6 +305,9 @@ private WebElement PlanMaterialSection;
 
        @FindBy(xpath = "//*[@class='table-body margin-large']/div[2]//p")
        private WebElement PayDate;
+       
+       @FindBy(xpath=".//*[@id='cltotshipindsnf']")
+   	  private WebElement claimtotalcomb;
 
        @FindBy(id = "closeButton")
        private WebElement iPerceptionCloseButton;
@@ -441,11 +448,11 @@ private WebElement PlanMaterialSection;
       		return null;
        }
        
-       public void waitForHomePage() {
-
-       	waitforElement(helloPerson);
-
-       }
+       public void waitForHomePage(WebElement element) {
+	       WebDriverWait wait = new WebDriverWait(driver, 90);
+           wait.until(ExpectedConditions.visibilityOf(element));
+   
+   }
 	
 	/*
 	 * This function clicks on Benefits and Coverage link from Dashboard after waiting
@@ -454,7 +461,7 @@ private WebElement PlanMaterialSection;
        
 	public BenefitsAndCoveragePage navigateToBandCPage() {
 
-		waitForHomePage();
+		waitForHomePage(helloPerson);
 		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
 			System.out.println("user is on Stage login page");
 			// CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);
@@ -471,8 +478,7 @@ private WebElement PlanMaterialSection;
 					e.printStackTrace();
 				}
 				System.out.println(driver.getCurrentUrl());
-				CommonUtility.waitForPageLoad(driver, heading, 30);
-				if (driver.getTitle().contains("Benefits Overview")) {
+				if (driver.getTitle().contains("Benefits")) {
 					System.out.println(driver.getTitle());
 					return new BenefitsAndCoveragePage(driver);
 				}
@@ -491,12 +497,7 @@ private WebElement PlanMaterialSection;
 
 			System.out.println(driver.getCurrentUrl());
 		}
-
-		/*
-		 * if (validate(iPerceptionPopUp)) { iPerceptionPopUp.click();
-		 * System.out.println("iPerception Pop Up displayed"); }
-		 */
-
+		
 		CommonUtility.waitForPageLoad(driver, heading, 50);
 		if (driver.getTitle().equalsIgnoreCase("Benefits Overview")) {
 			return new BenefitsAndCoveragePage(driver);
@@ -744,6 +745,7 @@ private WebElement PlanMaterialSection;
        }
 
        public void verifyPageTitle() throws InterruptedException {
+    	      waitForHomePage(helloPerson);
               String title = driver.getTitle();
               // Assert.assertEquals(title, "Home | UnitedHealthcare");
               Assert.assertTrue(title.contains("UnitedHealthcare"));
@@ -1124,6 +1126,7 @@ private WebElement PlanMaterialSection;
        }
 
        public PharmacySearchPage navigateToRedesignPharmacyLocaterPage() {
+    	   	  waitForHomePage(helloPerson);
               if (validate(iPerceptionAutoPopUp)) {
                      iPerceptionAutoPopUp.click();
               } else {
@@ -1173,6 +1176,7 @@ private WebElement PlanMaterialSection;
 
     // to navigate to forms and resources page
     public FormsAndResourcesPage navigatetoFormsnResources() throws InterruptedException {
+    				waitForHomePage(helloPerson);
                     if (validate(iPerceptionAutoPopUp)) {
                                     iPerceptionAutoPopUp.click();
                     } else {
@@ -1855,7 +1859,36 @@ public void feebackpopupClose() throws InterruptedException
 		System.out.println("iPerception Pop Up not displayed");
 	}
 }
+public ClaimDetailsPage navigateToClaimDetailsPageCombo(){
+	try {
+		Thread.sleep(10000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		}	
+	validate(claimstablemoreinfolinkCombo);
+	System.out.println("more info link is seen for combo member ===>"+claimstablemoreinfolinkCombo.isDisplayed());
+	try {
+		Thread.sleep(2000);
+		} catch (InterruptedException e) {
+		e.printStackTrace();
+		}
 
+	JavascriptExecutor executor = (JavascriptExecutor)driver;
+	executor.executeScript("arguments[0].click();", claimstablemoreinfolinkCombo);
+
+
+	//claimstablemoreinfolinkCombo.click();
+	CommonUtility.waitForPageLoad(driver, claimtotalcomb, 30);	
+	System.out.println(driver.getTitle());
+	//System.out.println("*** Combo Member is on Claims Details Page ***");
+	if (driver.getTitle().equalsIgnoreCase("/details")) {
+		System.out.println("*** Combo Member is on Claims Details Page ***");
+		
+	}
+	return new ClaimDetailsPage(driver);
+
+}
 }
  			
 
