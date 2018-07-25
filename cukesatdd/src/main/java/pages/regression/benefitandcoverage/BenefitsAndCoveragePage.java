@@ -381,7 +381,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-bnc-txers-retailcostsharing-table")
 	private WebElement retailTable;
 
-	@FindBy(xpath = ".//*[@id='officeVisitTileAtdd']/div/section/div[1]")
+	@FindBy(xpath = ".//*[@id='officeVisitTileAtdd']/div/section/div[1]/span")
 	private WebElement pcpValue;
 
 	@FindBy(xpath = "//*[@id='officeVisitTileAtdd']/div/section/span")
@@ -546,8 +546,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@class='table-body']/div[2]/div[2]")
 	private WebElement memberIdForPlan;
-
-	@FindBy(className = "atdd-claims-header")
+	
+        @FindBy(xpath = "//*[@class='claims section']")
 	private WebElement shipClaimsSupportHeader;
 
 	@FindBy(className = "drugCopaysAndDiscounts")

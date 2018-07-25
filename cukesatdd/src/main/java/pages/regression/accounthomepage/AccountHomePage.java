@@ -1110,7 +1110,23 @@ private WebElement PlanMaterialSection;
        }
 
        public ClaimDetailsPage navigateToClaimDetailsPage() {
+    	   try {
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    		if (validate(iPerceptionframe)) {
+
+    			switchToNewIframe(iPerceptionframe);
+    			iPerceptionclosebtn.click();
+    			driver.switchTo().defaultContent();
+    			//iPerceptionAutoPopUp.click();
+    		} else {
+    			System.out.println("iPerception Pop Up not displayed");
+    		}    	   
               CommonUtility.waitForPageLoad(driver, claimstablemoreinfolink, 60);
+              
               claimstablemoreinfolink.click();
               CommonUtility.waitForPageLoad(driver, claimDetTableMainSection, 60);
 
