@@ -1128,8 +1128,7 @@ private WebElement PlanMaterialSection;
     			//iPerceptionAutoPopUp.click();
     		} else {
     			System.out.println("iPerception Pop Up not displayed");
-    		}
-    	   
+    		}    	   
               CommonUtility.waitForPageLoad(driver, claimstablemoreinfolink, 60);
               
               claimstablemoreinfolink.click();
