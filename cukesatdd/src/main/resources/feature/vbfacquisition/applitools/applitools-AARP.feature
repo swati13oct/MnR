@@ -43,9 +43,6 @@ Given the user goes to aarp homepage and takes full screenshot
 When the user enter the zipcode and goes to VPP page and takes screenshot for MAPD plans
 	|Zipcode| <zipcode>|
 	|VPP Screenshot| <screenshot2>|
-And the user goes to the view plan details page for MAPD plan and takes screenshots
-	|Plan Type| <planType> |
-	|Plan Name| <planName> |
 And the user clicks on the enroll in plan button for mapd plan and goes to med info page
 	|Plan Name| <planName> |
 Then the user enters info for pages in OLE flow and takes screenshots of each page

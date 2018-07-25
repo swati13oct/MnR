@@ -19,7 +19,7 @@ jsonReport = "target/RunMRATDDApplitoolsTest.json",detailedReport = true, detail
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDApplitoolsTest")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.vbfacquisition" }, 
 features = { "src/main/resources/feature/vbfacquisition" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDApplitoolsTest.json" }, tags = { "@applitoolsAARP_VPP,@applitoolsAARP_DCE" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDApplitoolsTest.json" }, tags = { "@applitoolsAARP_VPP,@applitoolsAARP_DCE,@applitoolsAARP_OLE" })
 public class RunMRATDDApplitoolsTest {
 
 }
