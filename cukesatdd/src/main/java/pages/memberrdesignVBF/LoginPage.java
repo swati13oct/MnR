@@ -194,7 +194,7 @@ public class LoginPage extends UhcDriver {
 		}
 		int counter = 0;
 		do {
-			if (counter <= 20) {
+			if (counter <= 9) {
 				Thread.sleep(5000);
 				System.out.println("Time elapsed post sign In clicked --" + counter + "*5 sec.");
 			} else {
