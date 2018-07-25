@@ -138,7 +138,7 @@ private WebElement PlanMaterialSection;
 
      
 
-       @FindBy(xpath = "//header//h1")
+       @FindBy(xpath = "//h1")
        private WebElement heading;
 
        // @FindBy(xpath="//*[@id='phr_widget_3_box']/div[233]/p[2]/a")
@@ -928,25 +928,21 @@ private WebElement PlanMaterialSection;
               JavascriptExecutor js = (JavascriptExecutor)driver;
 
               try {
-                     Thread.sleep(10000);
+		              feebackpopupClose();
+		              if (MRScenario.environmentMedicare.equals("team-ci1") || MRScenario.environmentMedicare.equals("team-h") || MRScenario.environmentMedicare.equals("test-a") || MRScenario.environmentMedicare.equals("team-e")) {
+		                     js.executeScript("arguments[0].click();", helpAndContactUslink);
+		
+		             }else{
+		                     linkContactUs.click();
+		             }
+		              CommonUtility.waitForPageLoad(driver, heading, 10);
+		              if(driver.getTitle().contains("Contact Us"))
+		              {
+		                     return new ContactUsPage(driver);
+		              }
               } catch (InterruptedException e) {
-                     e.printStackTrace();
-              }
-              if (validate(iPerceptionPopUp)) {
-                     iPerceptionPopUp.click();
-                     System.out.println("iPerception Pop Up displayed");
-              }
-              if (MRScenario.environmentMedicare.equals("team-ci1") || MRScenario.environmentMedicare.equals("team-h") || MRScenario.environmentMedicare.equals("test-a") || MRScenario.environmentMedicare.equals("team-e")) {
-                     js.executeScript("arguments[0].click();", helpAndContactUslink);
-
-              }else{
-                     linkContactUs.click();
-              }
-              CommonUtility.waitForPageLoad(driver, heading, 10);
-              if(driver.getTitle().equalsIgnoreCase("Overview"))
-              {
-                     return new ContactUsPage(driver);
-              }
+                  e.printStackTrace();
+           }
               return null;
        }
 
