@@ -77,7 +77,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//div[@class='message-block--full-width success margin-none']")
 	private WebElement reqConfirmation;
 	
-	@FindBy(xpath="//header//h1")
+	@FindBy(xpath="//h1")
 	private WebElement heading;
 	
 	@FindBy(xpath=".//*[@id='IPEinvL']/map/area[2]")
@@ -211,7 +211,6 @@ public class ContactUsPage extends UhcDriver{
 	public ContactUsPage(WebDriver driver) {
 		super(driver);
 		try {
-			Thread.sleep(8000);
 			PageFactory.initElements(driver, this);
 			feebackpopupClose();
 			CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_30);
