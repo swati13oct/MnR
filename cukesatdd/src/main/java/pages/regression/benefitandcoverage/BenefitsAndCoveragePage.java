@@ -381,7 +381,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-bnc-txers-retailcostsharing-table")
 	private WebElement retailTable;
 
-	@FindBy(xpath = ".//*[@id='officeVisitTileAtdd']/div/section/div[1]")
+	@FindBy(xpath = ".//*[@id='officeVisitTileAtdd']/div/section/div[1]/span")
 	private WebElement pcpValue;
 
 	@FindBy(xpath = "//*[@id='officeVisitTileAtdd']/div/section/span")
