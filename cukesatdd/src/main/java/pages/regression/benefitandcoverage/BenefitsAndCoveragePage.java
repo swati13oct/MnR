@@ -158,13 +158,13 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-bnc-drgstgtiers")
 	private WebElement Learnmorestagelink;
 
-	//@FindBy(xpath = "atdd-bnc-locatephrmcy-info")
-		@FindBy(xpath=".//*[contains (text(),'PHARMACY LOCATOR')]")
+	    @FindBy(className = "atdd-bnc-locatephrmcy-info")
+		//@FindBy(xpath=".//*[contains (text(),'PHARMACY LOCATOR')]")
 		private WebElement locateapharmacysection;
 
 		//@FindBy(className = "atdd-bnc-locatepharmacybtn")
-		@FindBy(xpath=".//*[contains (text(),'Locate a Pharmacy')]")
-		//@FindBy(className = "btn btn--secondary atdd-bnc-locatepharmacybtn")
+		//@FindBy(xpath=".//*[contains (text(),'Locate a Pharmacy')]")
+		@FindBy(className = "atdd-bnc-locatepharmacybtn")
 		private WebElement locateapharmacybutton;
 
 	@FindBy(id = "mapdPageNonLis")
@@ -356,18 +356,18 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "//div/span[@class='bold atdd-benefitsoverview-monthlypremium-label']")
 	private WebElement monthlypremiumlabel;
 
-	@FindBy(how = How.XPATH, using = ".//*[@id='plan_benefit_documents']/section[2]/div/div[2]/div/div[1]/div[1]/div/div/div[7]/div/div/div[1]/div[1]/ul/li/a")
+	@FindBy(how = How.XPATH, using = "//div[@class='PlanPdf section']//ul/li/a[contains(text(),'Medication')]")
 
 	private WebElement Medicationlinkinpdfsec;
 
-	@FindBy(how = How.XPATH, using = ".//*[@id='plan_benefit_documents']/section[2]/div/div[2]/div/div[1]/div[1]/div/div/div[7]/div/div/div[2]/div[1]/ul/li/a")
+	@FindBy(how = How.XPATH, using = "//div[@class='PlanPdf section']//ul/li/a[contains(text(),'VIEW OTHER')]")
 	private WebElement Viewotherdocsinpdf;
 
-	@FindBy(how = How.XPATH, using = ".//*[@id='plan_benefit_documents']/section[2]/div/div[2]/div/div[1]/div[1]/div/div/div[6]/div/div/div[1]/div[1]/ul/li/a")
+	@FindBy(how = How.XPATH, using = "//div[@class='PlanPdf section']//ul/li/a[contains(text(),'Medication')]")
 
 	private WebElement Medicationlinkinpdfsecpdp;
 
-	@FindBy(how = How.XPATH, using = ".//*[@id='plan_benefit_documents']/section[2]/div/div[2]/div/div[1]/div[1]/div/div/div[6]/div/div/div[2]/div[1]/ul/li/a")
+	@FindBy(how = How.XPATH, using = "//div[@class='PlanPdf section']//ul/li/a[contains(text(),'VIEW OTHER')]")
 	private WebElement Viewotherdocsinpdfpdp;
 
 	@FindBy(css = "img.img-responsive")
@@ -1169,16 +1169,14 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(LookUpDrugsButton);
 		LookUpDrugsButton.click();
 		try {
-			Thread.sleep(10000);
+			Thread.sleep(40000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (driver.getCurrentUrl().contains("optumrx.com"))
-			Assert.assertTrue(true);
-		else {
-			Assert.fail();
-		}
+		ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles());
+		driver.switchTo().window(tabs2.get(0));
+		
 	}
 	/**
 	 * @toDo : Validates the text for the Look Up Drugs section
@@ -2038,7 +2036,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	public void validatestaticlinksinpdf(String plantype) {
 		validate(Medicationlinkinpdfsec);
 		try {
-			Thread.sleep(10000);
+			Thread.sleep(20000);
 		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -2062,6 +2060,12 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		{
 		driver.navigate().to("https://"+MRScenario.environmentMedicare+"-mymedicareaccount.uhc.com/pcp/member/benefits-coverage.html");
 	    }
+		try {
+			Thread.sleep(20000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		validate(Viewotherdocsinpdf);
 		Viewotherdocsinpdf.click();
 		if (driver.getCurrentUrl().contains("/member/documents/overview.html")) {

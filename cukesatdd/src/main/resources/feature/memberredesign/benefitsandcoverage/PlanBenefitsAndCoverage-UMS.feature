@@ -462,7 +462,6 @@ And the user verifies that the correct pdfs are there in the plan material secti
     And the user view the Drug Copays & Discounts header  
     And the user validates the Learn More section for stage and tier 
     And the user validates dropdown selection functionality 
-    And the user validates group Drug coverage header and text under the section 
     And the user validates text for the Look Up Drugs section 
     And the user validates group Look Up Drugs button should be visible
     And the user validates text for the Locate a Pharmacy section 
@@ -488,8 +487,7 @@ And the user verifies that the correct pdfs are there in the plan material secti
      Examples:  
      | planType|  memberType  | copayCategory  | language | SummaryofBenefits    | EvidenceofCoverage      | ComprehensiveFormularyDrug List     | name           | memberid    | effectivedate| monthlypremium |   UpdatedLanguage | DisplayFlag|
      | MAPD    |  Group       |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | NVKLSDS LKASDFJ| 970345148-00| 07/01/2018   | Not Available  | Tier 2            | true       | 
-     | MAPD    |  Group       |  NON LIS      | SPANISH  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | NVKLSDS LKASDFJ| 970345148-00| 07/01/2018   | Not Available  | Tier 2            | true       | 
-     | MAPD    |  Group       |  NON LIS      | CHINESE  |                      |                          |     
+     
  
     @CMPDPGroupNonLis 
     Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page 
@@ -502,8 +500,7 @@ And the user verifies that the correct pdfs are there in the plan material secti
     And the user validates plan overview section for group
     And the user view the Drug Copays & Discounts header  
     And the user validates the Learn More section for stage and tier 
-    And the user validates dropdown selection functionality 
-    And the user validates group Drug coverage header and text under the section 
+    And the user validates dropdown selection functionality
     And the user validates text for the Look Up Drugs section 
     And the user validates group Look Up Drugs button should be visible
     And the user validates text for the Locate a Pharmacy section 
@@ -529,9 +526,7 @@ And the user verifies that the correct pdfs are there in the plan material secti
      Examples:  
      | planType|  memberType  | copayCategory | language | SummaryofBenefits    | EvidenceofCoverage      | ComprehensiveFormularyDrug List      | name           | memberid    | effectivedate| monthlypremium |   UpdatedLanguage | DisplayFlag|
      | PDP     |  Group       |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | DDCCFD ADFFCCFB| 002058600-1 | 04/01/2013   | Not Available  | Tier 2            | true       | 
-     | PDP     |  Group       |  NON LIS      | SPANISH  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | DDCCFD ADFFCCFB| 002058600-1 | 04/01/2013   | Not Available  | Tier 2            | true       | 
-     | PDP     |  Group       |  NON LIS      | CHINESE  |                      |                          |     
- 
+     
  
     @CMvasnegativescenario
     Scenario Outline: Verify that DisocuntServices section is visible on Benefits and coverage page
