@@ -241,7 +241,7 @@ public class OneTimePaymentAarpStepDefintion {
 	}
 	
 	
-	@And("^the user makes one time payment in AARP site$")
+	@And("^the user makes one time payment and navigate futher$")
 	public void makes_one_time_payment_aarp(DataTable givenAttributes) {
 			
 		

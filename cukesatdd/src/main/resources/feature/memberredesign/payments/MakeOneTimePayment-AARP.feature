@@ -299,7 +299,7 @@ Feature: To test the payment flow on AARP site
       | Member Type | <memberType> |
     Then the user navigates to payment history
     And the user clicks on One Time Payment button
-    And the user makes one time payment in AARP site
+    And the user makes one time payment and navigate futher
       | Amount to be paid          | <Amount>           |
       | Routing number             | <routingNo>        |
       | Confirm routing number     | <confirmRoutingNo> |
