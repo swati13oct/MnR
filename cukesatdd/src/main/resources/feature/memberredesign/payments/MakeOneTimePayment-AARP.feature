@@ -292,7 +292,7 @@ Feature: To test the payment flow on AARP site
       | planType |
       | SHIP     |
 
-  @paymentsFInal @paymentsOneTimePayments
+  @paymentsFInal @paymentsOneTimePayments @regression_06_06_18
   Scenario Outline: Verify if the user is able to make one time payment.
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
