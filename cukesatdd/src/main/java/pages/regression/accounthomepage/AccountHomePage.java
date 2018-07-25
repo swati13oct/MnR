@@ -138,7 +138,7 @@ private WebElement PlanMaterialSection;
 
      
 
-       @FindBy(xpath = "//header//h1")
+       @FindBy(xpath = "//h1")
        private WebElement heading;
 
        // @FindBy(xpath="//*[@id='phr_widget_3_box']/div[233]/p[2]/a")

@@ -158,13 +158,13 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))]//div[contains(@class,'message-block-body')][1]//h3")
 	private WebElement memberAuthNotAuthorizedToSendUsQuestionMessage;
 	
-	@FindBy(css="div#confrmmatchheightonce #question-btn")
+	@FindBy(css="div#confrmmatchheightonce a.btn.btn--primary.question-btn")
 	private WebElement btn_EmailForm;
 	
-	@FindBy(id="question-about")
+	@FindBy(id="question-about-ship")
 	private WebElement questionAboutDropdown_EmailForm;
 	
-	@FindBy(id="question-message")
+	@FindBy(id="question-message-ship")
 	private WebElement questionMessage_EmailForm;
 	
 	@FindBy(id="question-member-number")
@@ -191,7 +191,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(id="date-yyyy")
 	private WebElement dateyyyy_EmailForm;
 	
-	@FindBy(name="question-submit")
+	@FindBy(css=".question-submit>span")
 	private WebElement btnSubmit_EmailForm;
 	
 	@FindBy(css="div#confrmmatchheightonce div.message-block-body p:nth-child(2)")
@@ -602,9 +602,10 @@ public class ContactUsPage extends UhcDriver{
 			dateDD_EmailForm.sendKeys(date);
 			dateMM_EmailForm.sendKeys(month);
 			dateyyyy_EmailForm.sendKeys(year);
+			confirmEmail_EmailForm.click();
 			Thread.sleep(2000);
 			btnSubmit_EmailForm.click();
-			Thread.sleep(5000);
+			Thread.sleep(8000);
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}
