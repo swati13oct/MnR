@@ -936,7 +936,7 @@ private WebElement PlanMaterialSection;
 		                     linkContactUs.click();
 		             }
 		              CommonUtility.waitForPageLoad(driver, heading, 10);
-		              if(driver.getTitle().equalsIgnoreCase("Overview"))
+		              if(driver.getTitle().contains("Contact Us"))
 		              {
 		                     return new ContactUsPage(driver);
 		              }
