@@ -1290,9 +1290,7 @@ if (driver.getTitle().equalsIgnoreCase("Documents Overview")) {
        public PaymentHistoryPage navigateToPaymentHistoryPage() throws InterruptedException
        {
 
-              /*WebDriverWait wait = new WebDriverWait(driver, 30);
-                                 wait.until(ExpectedConditions.elementToBeClickable(paymentslink));
-              */
+             
               try {
                      System.out.println("iPerception Pop Up is Present");
                      driver.switchTo().frame("IPerceptionsEmbed");
@@ -1947,6 +1945,8 @@ public BenefitsAndCoveragePage navigateDirectToBnCPag() {
 		return null;
 		
 	}
+
+
 
 }
 
