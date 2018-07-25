@@ -88,14 +88,13 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
   @goToInbox
   Scenario Outline: Verify go To Inbox button on contactUS redesign page for opted in member
     Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <plantype>   |
       | Member Type | <memberType> |
     When the user navigates to contact us page in UHC site
     Then user validates go To Inbox button in redesign contact us page
 
     Examples: 
-      | plantype | memberType      |
-      | MA       | MA_AARP_GOGreen |
+      | memberType      |
+      | MA_AARP_GOGreen |
 
   @clickToCallCancel
   Scenario Outline: Verify clickToCall Widget Expansion (Drop-Down, Text Box and Button UI) and click on cancel on contactUS redesign page

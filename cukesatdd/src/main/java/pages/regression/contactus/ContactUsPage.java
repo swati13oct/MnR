@@ -47,7 +47,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(id = "message-email-confirms") 
 	private WebElement confirmemailId;
 	
-	@FindBy(css = "a#message-btn:last-child")
+	@FindBy(css = "a.goToInbox.btn.btn--primary.message-btn")
 	private WebElement goToInboxButton;
 	
 	@FindBy(id = "IPerceptionsEmbed")
