@@ -89,7 +89,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-outpatientsurgery-title")
 	private WebElement OutpatientSurgeryCenter;
 
-	@FindBy(xpath = "//div[@id='pcpCard']/header/span[contains(text(),'PRIMARY CARE PROVIDER')]")
+	@FindBy(xpath = "//div[@id='pcpCard']//span[contains(text(),'PRIMARY CARE PROVIDER')]")
 	private WebElement YourPrimaryCareProvider;
 
 	@FindBy(className = "changepcp-atdd")
