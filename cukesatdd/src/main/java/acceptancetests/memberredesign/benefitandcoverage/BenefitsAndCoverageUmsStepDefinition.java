@@ -204,13 +204,10 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	 */
 
 	@Then("^the user navigates to Benefits coverage page$")
-	public void user_views_BenefitsAndCoveragejenkins(DataTable memberAttributes) {
-		
-		
+	public void user_views_BenefitsAndCoveragejenkins() {
+	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-
-		BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateToBandCPage();
+		BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateToBandCPag();
 
 		if (benefitsCoveragePage != null) {
 			getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
