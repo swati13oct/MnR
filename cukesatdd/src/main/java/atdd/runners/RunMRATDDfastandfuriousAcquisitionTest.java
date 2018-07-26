@@ -18,6 +18,7 @@ import cucumber.api.CucumberOptions;
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, 
 		features = { "src/main/resources/feature/acquisition" }, 
 		plugin = {"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDfastandfuriousAcquisitionTest.json" }, 
-		tags = {"@OLE_VPP_AARP,@OLE_VPP_UHC"})
+		tags = {"@OLE_VPP_AARP,@OLE_VPP_UHC,@september_release_2018"})
 public class RunMRATDDfastandfuriousAcquisitionTest { 
+	//@OLE_VPP_AARP,@OLE_VPP_UHC
 }
