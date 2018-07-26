@@ -28,4 +28,4 @@ Feature: Footer validation
 
     Examples: 
       | planType | memberType           |
-      | MAPD     | IndividualDCEmembers |
+      | MAPD     | AARPFederalDCEmember |

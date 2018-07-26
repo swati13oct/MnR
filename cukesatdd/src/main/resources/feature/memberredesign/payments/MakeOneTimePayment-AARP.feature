@@ -292,14 +292,14 @@ Feature: To test the payment flow on AARP site
       | planType |
       | SHIP     |
 
-  @paymentsFInal @paymentsOneTimePayments
+  @paymentsFInal @paymentsOneTimePayments @regression_06_06_18
   Scenario Outline: Verify if the user is able to make one time payment.
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     Then the user navigates to payment history
     And the user clicks on One Time Payment button
-    And the user makes one time payment in AARP site
+    And the user makes one time payment and navigate futher
       | Amount to be paid          | <Amount>           |
       | Routing number             | <routingNo>        |
       | Confirm routing number     | <confirmRoutingNo> |
