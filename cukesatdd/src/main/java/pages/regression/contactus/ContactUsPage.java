@@ -47,7 +47,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(id = "message-email-confirms") 
 	private WebElement confirmemailId;
 	
-	@FindBy(css = "a#message-btn:last-child")
+	@FindBy(css = "a.goToInbox.btn.btn--primary.message-btn")
 	private WebElement goToInboxButton;
 	
 	@FindBy(id = "IPerceptionsEmbed")
@@ -77,7 +77,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//div[@class='message-block--full-width success margin-none']")
 	private WebElement reqConfirmation;
 	
-	@FindBy(xpath="//header//h1")
+	@FindBy(xpath="//h1")
 	private WebElement heading;
 	
 	@FindBy(xpath=".//*[@id='IPEinvL']/map/area[2]")
@@ -158,13 +158,13 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))]//div[contains(@class,'message-block-body')][1]//h3")
 	private WebElement memberAuthNotAuthorizedToSendUsQuestionMessage;
 	
-	@FindBy(css="div#confrmmatchheightonce #question-btn")
+	@FindBy(css="div#confrmmatchheightonce a.btn.btn--primary.question-btn")
 	private WebElement btn_EmailForm;
 	
-	@FindBy(id="question-about")
+	@FindBy(id="question-about-ship")
 	private WebElement questionAboutDropdown_EmailForm;
 	
-	@FindBy(id="question-message")
+	@FindBy(id="question-message-ship")
 	private WebElement questionMessage_EmailForm;
 	
 	@FindBy(id="question-member-number")
@@ -191,7 +191,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(id="date-yyyy")
 	private WebElement dateyyyy_EmailForm;
 	
-	@FindBy(id="question-submit")
+	@FindBy(css=".question-submit>span")
 	private WebElement btnSubmit_EmailForm;
 	
 	@FindBy(css="div#confrmmatchheightonce div.message-block-body p:nth-child(2)")
@@ -211,11 +211,10 @@ public class ContactUsPage extends UhcDriver{
 	public ContactUsPage(WebDriver driver) {
 		super(driver);
 		try {
-			Thread.sleep(8000);
 			PageFactory.initElements(driver, this);
+			feebackpopupClose();
 			CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_30);
 			openAndValidate();
-			feebackpopupClose();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -603,9 +602,10 @@ public class ContactUsPage extends UhcDriver{
 			dateDD_EmailForm.sendKeys(date);
 			dateMM_EmailForm.sendKeys(month);
 			dateyyyy_EmailForm.sendKeys(year);
+			confirmEmail_EmailForm.click();
 			Thread.sleep(2000);
 			btnSubmit_EmailForm.click();
-			Thread.sleep(5000);
+			Thread.sleep(8000);
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}
@@ -627,8 +627,10 @@ public class ContactUsPage extends UhcDriver{
 	 * Validate the widgets which should not present for the terminated members
 	 */
 	public void validateWidgetsForTerminatedMembers(){
-		Assert.assertTrue(!getStartedButton.isDisplayed());
-		Assert.assertTrue(!fillOutFormButton.isDisplayed());
+		Assert.assertTrue(!validate(getStartedButton));
+		Assert.assertTrue(!validate(fillOutFormButton));
+		Assert.assertTrue(!validate(requestCall));
+		Assert.assertTrue(!validate(email_EmailForm));
 	}
 	
 	public void feebackpopupClose() throws InterruptedException
