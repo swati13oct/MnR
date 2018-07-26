@@ -616,7 +616,7 @@ And the user verifies that the correct pdfs are there in the plan material secti
    
    
   
-	@outpatientcenterwithprovidertier   @regressionoutpatient @regression_06_06_18
+	@outpatientcenterwithprovidertier   @thepredators  @regressionoutpatient @regression_06_06_18
     Scenario Outline: Verify the outpatient widget for a member withprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType> |
@@ -629,13 +629,13 @@ And the user verifies that the correct pdfs are there in the plan material secti
       | planType | memberType |
       | MAPD     | MAPDCOSMOS |    
 
-	@primarycareproviderspecialist   @regressionprimarycareprovider  @regression_06_06_18
+	@primarycareproviderspecialist   @thepredators  @regressionprimarycareprovider  @regression_06_06_18
     Scenario Outline: Verify the Office visits widget for a member withprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
       | Member Type   | <memberType> |
     Then the user navigates to Benefits coverage page
-    And the user validates the Office Visits section
+    And the user validates the Office Visits section widgets
 
 
     Examples: 
@@ -644,8 +644,8 @@ And the user verifies that the correct pdfs are there in the plan material secti
     
     
 
-@outpatientcenterwithoutprovidertier   @regressionoutpatientwithoutprovider @regression_06_06_18
-    Scenario Outline: Verify the outpatient widget for a member withprovidertiering
+@outpatientcenterwithoutprovidertier   @thepredators  @regressionoutpatientwithoutprovider @regression_06_06_18
+    Scenario Outline: Verify the outpatient widget for a member withoutprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType> |
       | Member Type   | <memberType> |
