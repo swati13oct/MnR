@@ -55,7 +55,7 @@ public class TestHarness extends UhcDriver {
 	@FindBy(linkText = "Go to payment link page")
 	private WebElement TeamCPaymentPage;
 
-	@FindBy(xpath = "//header//h1")
+	@FindBy(xpath = "//div[contains(@class,'page-header--left') or contains(@class,'testharness')]/h1[normalize-space()=contains(text(),' ')][not (contains(@class,'ng-hide'))]")
 	private WebElement heading;
 
 	@FindBy(xpath = "//div[@class='tabs-desktop']/ul[@class='nav nav-tabs']/li")
