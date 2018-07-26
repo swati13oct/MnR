@@ -51,6 +51,7 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 	
 	
 	ApplitoolsObject appObj;
+	
 
 	@Before
 	public void setApplitools() {

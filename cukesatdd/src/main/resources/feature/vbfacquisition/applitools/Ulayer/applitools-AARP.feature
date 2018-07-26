@@ -2,7 +2,7 @@
 @applitools
 Feature:2.04-VBF-Acq-To test applitools in AARP and UHC sites
 	
-@applitoolsAARP_VPP
+@applitoolsAARP_VPP1
 Scenario Outline:To use applitools to take screenshots of the vpp pages
 Given the user goes to aarp homepage and takes full screenshot
 	|Home Screenshot| <screenshot1>|
@@ -21,7 +21,7 @@ Examples:
 	| zipcode 	| screenshot1 |screenshot2 | planType | planName 										  |  planType2 | planName2 						  | 
 	| 90210     |   yes       | yes        |   MA	   | AARP MedicareComplete SecureHorizons Plan 1 (HMO)|  PDP 	   | AARP MedicareRx Walgreens (PDP)      |
 
-@applitoolsAARP_DCE
+@applitoolsAARP_DCE1
 Scenario Outline:To use applitools to take screenshots of the DCE pages
 Given the user goes to aarp homepage and takes full screenshot
 	|Home Screenshot| <screenshot1>|
