@@ -40,6 +40,12 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	public PageData benefitsCoverage;
 
 	public JSONObject benefitsandcoverageJson;
+	
+	@FindBy(id = "IPerceptionsEmbed")
+	   public WebElement iPerceptionframe;
+    
+    @FindBy(id = "closeButton")
+	   public WebElement iPerceptionclosebtn; 
 
 	@FindBy(xpath = ".//*[@id='pcpCard']/section/button")
 	private WebElement Addaprovider;
@@ -652,6 +658,20 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 		System.out.println("BenefitsCoverageJson----->" + benefitsandcoverageJson);
 
+	}
+	
+	public void feebackpopupClose() throws InterruptedException
+	{ //waitForloader(driver,overlay, 20);
+		Thread.sleep(20000);
+		if (validate(iPerceptionframe)) {
+
+			switchToNewIframe(iPerceptionframe);
+			iPerceptionclosebtn.click();
+			driver.switchTo().defaultContent();
+			//iPerceptionAutoPopUp.click();
+		} else {
+			System.out.println("iPerception Pop Up not displayed");
+		}
 	}
 
 	/**
@@ -2383,10 +2403,18 @@ public void validateImagePresent(String logoToBeDisplayedOnSecondaryPage) {
 
 	public void validateoutpatientsurgerycenterVisitssection() {
 		// TODO Auto-generated method stub
-		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		jse.executeScript("window.scrollBy(0,-50)", "");
+		try {
+			
+			feebackpopupClose();
+			JavascriptExecutor jse = (JavascriptExecutor) driver;
+			jse.executeScript("window.scrollBy(0,-50)", "");
 
-		validateNew(outpatientsurgeryVisits);
+			validateNew(outpatientsurgeryVisits);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 
 	}
 
@@ -2600,6 +2628,24 @@ public void validateImagePresent(String logoToBeDisplayedOnSecondaryPage) {
 		else
 			Assert.assertFalse(true);
 
+	}
+
+	public void validateOfficeVisitssectionWidget() {
+		try {
+			Thread.sleep(2000);
+			feebackpopupClose();
+			
+			JavascriptExecutor jse = (JavascriptExecutor) driver;
+			jse.executeScript("window.scrollBy(0,-100)", "");
+
+			validateNew(OfficeVisits);
+			validateNew(pcpValue);
+			validateNew(specialistValue);
+			
+		} catch (Exception e) {
+			
+		}
+		
 	}
 
 }
