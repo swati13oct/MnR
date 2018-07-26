@@ -17,10 +17,10 @@ public class HealthAndWellness extends UhcDriver {
 	@FindBy(id = "learning_desk1")
 	private WebElement learningTab;
 
-	@FindBy(xpath = ".//*[@id='hl-hw-buckets']/div/div[1]/a/img")
+	@FindBy(xpath = "//div[@class='hw-bucket-container']/div/a/img[contains(@alt,'Lifestyle')]")
 	private WebElement lifestyleIcon;
 
-	@FindBy(xpath = ".//*[@id='hl-hw-buckets']/div/div[2]/a/img")
+	@FindBy(xpath = "//div[@class='hw-bucket-container']/div/a/img[contains(@alt,'Learning')]")
 	private WebElement learningIcon;
 
 	@FindBy(id = "hl-hw-banner-lifestyle")
@@ -28,6 +28,19 @@ public class HealthAndWellness extends UhcDriver {
 
 	@FindBy(id = "hl-hw-banner-learning")
 	private WebElement hnwLearningBanner;
+	
+	@FindBy(id = "hl-hw-banner")
+	private WebElement hnwBanner;
+	
+	@FindBy(className = "hl-hw-listContent")
+	private WebElement hnwlistContent;
+	
+	@FindBy(id = "hw-featuredContent")
+	private WebElement hnwFeaturedContent;
+	
+	@FindBy(id = "hw-learningCenter")
+	private WebElement hnwLearningCenter;
+
 
 	public HealthAndWellness(WebDriver driver) {
 		super(driver);
@@ -46,23 +59,27 @@ public class HealthAndWellness extends UhcDriver {
 	/***
 	 * 
 	 */
-	public void validateHnWDashboardnL2Tabs() {
-		scrollToView(lifestyleIcon);
-		Assert.assertTrue("Lifestyle icon is not displayed", lifestyleIcon.isDisplayed());
+	public void validateHnWDashboard() {
+		scrollToView(hnwBanner);
+		Assert.assertTrue("Health and Wellness main banner is not displayed", hnwBanner.isDisplayed());
 		scrollToView(learningIcon);
 		Assert.assertTrue("Learning icon is not displayed", learningIcon.isDisplayed());
-		scrollToView(lifestyleTab);
-		Assert.assertTrue("Lifestyle tab is not displayed", lifestyleTab.isDisplayed());
-		scrollToView(learningTab);
-		Assert.assertTrue("Learning tab is not displayed", learningTab.isDisplayed());
+		scrollToView(lifestyleIcon);
+		Assert.assertTrue("lifestyleIcon icon is not displayed", lifestyleIcon.isDisplayed());
+		scrollToView(hnwlistContent);
+		Assert.assertTrue("hnwlistContent is not displayed", hnwlistContent.isDisplayed());
+		scrollToView(hnwFeaturedContent);
+		Assert.assertTrue("hnwFeaturedContent is not displayed", hnwFeaturedContent.isDisplayed());
+		scrollToView(hnwLearningCenter);
+		Assert.assertTrue("hnwLearningCenter is not displayed", hnwLearningCenter.isDisplayed());
 	}
 
 	/***
 	 * 
 	 */
 	public void clickLifestyleTab() {
-		if (lifestyleTab.isDisplayed()) {
-			lifestyleTab.click();
+		if (lifestyleIcon.isDisplayed()) {
+			lifestyleIcon.click();
 			CommonUtility.checkPageIsReadyNew(driver);
 		}
 	}
@@ -79,9 +96,9 @@ public class HealthAndWellness extends UhcDriver {
 	 * 
 	 */
 	public void clickLearningTab() {
-		scrollToView(learningTab);
-		if (learningTab.isDisplayed()) {
-			learningTab.click();
+		scrollToView(learningIcon);
+		if (learningIcon.isDisplayed()) {
+			learningIcon.click();
 			CommonUtility.checkPageIsReadyNew(driver);
 		}
 	}

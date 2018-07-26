@@ -39,7 +39,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	public ProfileandPreferencesPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-
+		openAndValidate();
 	}
 
 	public PageData ProfileandPreferences;
