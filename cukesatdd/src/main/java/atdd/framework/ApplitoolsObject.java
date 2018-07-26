@@ -31,13 +31,7 @@ public class ApplitoolsObject {
 	public ApplitoolsObject(){
 		eyes = new Eyes();
 		eyes.setApiKey("sAdOjZCjfkyK5G111xeuEgLb4OcNhdPNzO6c0CaCovsds110");
-
-	}
-	public void setApplitools(){
 		
-		eyes.setMatchTimeout(3000);
-		
-		eyes.setWaitBeforeScreenshots(4000);
 	}
 	
 	public void setBatch(String batchName){
@@ -47,9 +41,10 @@ public class ApplitoolsObject {
 	
 	public void takeScreenshotFullPage(WebDriver wd, String appName, String testName, String windowName ){
 			eyes.setMatchLevel(MatchLevel.CONTENT);
+			eyes.setWaitBeforeScreenshots(4000);
 			eyes.setForceFullPageScreenshot(true);
 			eyes.open(wd, appName, testName,new RectangleSize(1280, 960));
-			eyes.checkWindow(windowName);
+			eyes.checkWindow(4000,windowName);
 			eyes.close(false);
 		
 	}
