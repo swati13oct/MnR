@@ -1,27 +1,13 @@
-@member_redesign_footer @regression_06_06_18
-Feature: C1.1 To test footer on UMS site
-
-<<<<<<< HEAD
 @member_redesign_footer  @regression_06_06_18
 Feature: Footer validation
 @IncrediblesFooter
-Scenario Outline: an authenticated member on the new Member site, I want to check Footer section.
-
-Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-
-
-=======
-  @IncrediblesFooter
-  Scenario Outline: Verify footer section is in place
+    Scenario Outline: an authenticated member on the new Member site, I want to check Footer section.
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     Then the user navigates to payment history
     Then the user navigates to the footer section
     And the user validates the footer section
->>>>>>> remotes/origin/develop
     Then the user navigates to payment history
     Then the user navigates to the footer section
     And the user validates the footer section in payments page
