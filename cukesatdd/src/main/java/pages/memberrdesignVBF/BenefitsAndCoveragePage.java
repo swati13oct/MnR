@@ -57,10 +57,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-bnc-locatepharmacybtn")
 	private WebElement locateapharmacybutton;
 
-	@FindBy(xpath = ".//*[@id='plan_benefit_documents']/section/div/div[2]/div/form/span[1]")
+	@FindBy(id = "viewTextAtdd")
 	private WebElement view_label;
 
-	@FindBy(xpath = ".//*[@id='plan_benefit_documents']/section/div/div[2]/div/form/span[2]")
+	@FindBy(xpath = "(//div[@id='plan_benefit_documents']/section[2]//ul/li[not (contains(@class,'ng-hide'))])[1]")
 	private WebElement documents_label;
 
 	@FindBy(xpath = "//div[@id='planBenefitsAppSum']/section//div/span[contains(@class,'atdd-benefitsoverview-plantitle')]")
@@ -89,7 +89,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-outpatientsurgery-title")
 	private WebElement OutpatientSurgeryCenter;
 
-	@FindBy(xpath = "//div[@id='pcpCard']/header/span[contains(text(),'PRIMARY CARE PROVIDER')]")
+	@FindBy(xpath = "//div[@id='pcpCard']//span[contains(text(),'PRIMARY CARE PROVIDER')]")
 	private WebElement YourPrimaryCareProvider;
 
 	@FindBy(className = "changepcp-atdd")

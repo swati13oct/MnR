@@ -176,10 +176,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(id = "waystosave")
 	private WebElement waysToSave;
 
-	@FindBy(xpath = ".//*[@id='plan_benefit_documents']/section[2]/div/div[2]/div/form/span[1]")
+	
+	@FindBy(id = "viewTextAtdd")
 	private WebElement view_label;
 
-	@FindBy(className = "atdd-document-text")
+@FindBy(xpath = "(//div[@id='plan_benefit_documents']/section[2]//ul/li[not (contains(@class,'ng-hide'))])[1]")
 	private WebElement documents_label;
 
 	// @FindBy(className = "atdd-benefitsoverview-plantitle")
@@ -380,7 +381,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-bnc-txers-retailcostsharing-table")
 	private WebElement retailTable;
 
-	@FindBy(xpath = ".//*[@id='officeVisitTileAtdd']/div/section/div[1]")
+	@FindBy(xpath = ".//*[@id='officeVisitTileAtdd']/div/section/div[1]/span")
 	private WebElement pcpValue;
 
 	@FindBy(xpath = "//*[@id='officeVisitTileAtdd']/div/section/span")
@@ -545,8 +546,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@class='table-body']/div[2]/div[2]")
 	private WebElement memberIdForPlan;
-
-	@FindBy(className = "atdd-claims-header")
+	
+        @FindBy(xpath = "//*[@class='claims section']")
 	private WebElement shipClaimsSupportHeader;
 
 	@FindBy(className = "drugCopaysAndDiscounts")
@@ -2396,13 +2397,13 @@ public void validateImagePresent(String logoToBeDisplayedOnSecondaryPage) {
 		// TODO Auto-generated method stub
 		if (memberType.equalsIgnoreCase("Wallgreens")) {
 			validateNew(waysToSaveSection);
-			validateNew(lowTierdrugs);
+			//validateNew(lowTierdrugs);
 			validateNew(wallGreensWidget);
 		} else if (memberType.equalsIgnoreCase("MailOrderPharamacy")) {
 			validateNew(waysToSaveSection);
-			validateNew(lowTierdrugs);
+			//validateNew(lowTierdrugs);
 			validateNew(mailOrderWidget);
-			validateNew(wallGreensWidget);
+			//validateNew(wallGreensWidget);
 		} else if (memberType.equalsIgnoreCase("Group")) {
 			if (waysToSaveSectionvalidate.size() < 1) {
 				Assert.assertTrue("ways to save section doesnt exist for a non PDP memeber", true);

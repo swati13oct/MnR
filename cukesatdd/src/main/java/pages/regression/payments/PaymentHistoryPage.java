@@ -34,7 +34,7 @@ public class PaymentHistoryPage extends UhcDriver{
 	@FindBy(id = "paymentSearchRangeGovt")
 	private WebElement paymentSearchRangeGovt;
 	
-	@FindBy(xpath = "//*[@class='payment-method-btn'][1]/a")
+	@FindBy(xpath = "//a[not (contains(@class,'ng-hide')) and contains(text(),'Make a One-Time Payment')]")
 	private WebElement onetimepaymentbtn;
 	
 	@FindBy(xpath = "//*[@class='payment-method-btn'][1]/a[2]")
@@ -57,6 +57,9 @@ public class PaymentHistoryPage extends UhcDriver{
 	
 	@FindBy(xpath = "//div[@id='paymentHistoryApp']/div/div/div/div/div[2]/table[1]/tbody/tr[4]/td[2]")
 	private WebElement paymentMethodGovt;
+	
+	   @FindBy(xpath = "(//*[@class='ng-scope']//a[text()='Premium Payments'])[1]")
+       private WebElement paymentsLink;
 	
 	@FindBy(xpath = "//div[@class='automaticpaymentspopupcontainer']/div/div[2]/div[1]/table/tbody/tr/td[2]/div/a/div[2]/p")
 	private WebElement setUpAutoPaymentsButtonGovt;
@@ -102,6 +105,12 @@ public class PaymentHistoryPage extends UhcDriver{
 
 	@FindBy(xpath = "(//*[@id='paymentOverviewApp']//div[@class='col-md-12'])[2]//div[@class='margin-small']/span[@class='payment-method-btn'][3]/a")
 	private WebElement MemAuthEditPay;
+	
+	@FindBy(id = "IPerceptionsEmbed")
+	public WebElement iPerceptionframe;
+	
+	@FindBy(id = "closeButton")
+	public WebElement iPerceptionclosebtn;
 	
 	@FindBy(id = "closeButton")
 	private WebElement iPerceptionCloseButton;
@@ -189,24 +198,27 @@ public class PaymentHistoryPage extends UhcDriver{
 		
 	}
 	
-	public Object navigateToOnetimePayment(String businessType)
-	{
-		if(businessType == "GOVT")
-		{
-			oneTimePaymentButtonGovt.click();
-		}
-		else
-		{
-			onetimepaymentbtn.click();
-		}
-		CommonUtility.checkPageIsReady(driver);
-		if(driver.getTitle().equalsIgnoreCase("Make Online Payment")){
-			return new OneTimePaymentPage(driver);
-		}
-		return null;
-		
-		
-	}
+	 public PaymentHistoryPage navigateToPaymentHistoryPage() throws InterruptedException
+     {
+
+           
+            feebackpopupClose();
+           
+
+            Thread.sleep(6000);
+
+            if (validate(paymentsLink)) {
+
+                   System.out.println("payment link is displayed on the header");
+                   paymentsLink.click();
+                   return new PaymentHistoryPage(driver);
+            }else{
+                   System.out.println("payment link is not displayed on the header");
+                   return null;
+            }
+           
+     }
+
 
 	public SetupAutoPaymentPage navigateToSetupAutoPayments(
 			String businessType) {
@@ -305,35 +317,12 @@ public class PaymentHistoryPage extends UhcDriver{
 		    		return null;
 	 }
 	 
-	 public OneTimePaymentPage OTPbtn(){
-	
-		 try {   
-	    	  Thread.sleep(2000); 		
-	    		driver.switchTo().frame("IPerceptionsEmbed");
-	    		System.out.println("iPerception Pop Up is Present");
-	    		iPerceptionCloseButton.click();
-	    		driver.switchTo().defaultContent();
-	    		Thread.sleep(5000);
-	    		}
-	    		catch (Exception e) {
-	    		System.out.println("iPerception Pop Up is not Present");
-	    		}
-		
-	   try
-	   {	
+	 public OneTimePaymentPage OTPbtn() throws InterruptedException{
+	  
+		 feebackpopupClose();  
 		 Thread.sleep(2000);
 		 onetimepaymentbtn.click();
-		 System.out.println("clicked on make OTP button");		 
-		 return new  OneTimePaymentPage(driver);		
-				
-	   }catch(Exception e)
-	   {
-		   System.out.println("Normal One time Payment Button not displayed");
-		  
-	   }
-	   
-			onetimepaymentbtnPDP.click();
-			System.out.println("clicked on make OTP PDP button");
+		 System.out.println("clicked on make OTP button");		
 			return new  OneTimePaymentPage(driver);  
 
 	    
@@ -432,6 +421,20 @@ public OneTimePaymentPage MemAuthAutoPay(){
 	  	 
 	  	 return new Footer(driver);
   }
+  
+  public void feebackpopupClose() throws InterruptedException
+	{ //waitForloader(driver,overlay, 20);
+		Thread.sleep(20000);
+		if (validate(iPerceptionframe)) {
+
+			switchToNewIframe(iPerceptionframe);
+			iPerceptionclosebtn.click();
+			driver.switchTo().defaultContent();
+			//iPerceptionAutoPopUp.click();
+		} else {
+			System.out.println("iPerception Pop Up not displayed");
+		}
+	}
 
 }
 

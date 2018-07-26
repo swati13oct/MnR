@@ -2,7 +2,7 @@
 Feature: 1.13-VBF-MemRedesign-To test My Profile & Preferences and Go Green flows
 
 
-     @smokeTest_ProfileAndPreferenceEPMP @rallyDashboard @testharness
+     @smokeTest_ProfileAndPreferenceEPMP 
   Scenario Outline: To test end to end regression scenario for EPMP profile page
    Given I am a authenticated member on the member redesign site for Direct Login
       | Member Type | <memberType> |
@@ -24,7 +24,7 @@ Feature: 1.13-VBF-MemRedesign-To test My Profile & Preferences and Go Green flow
       | memberType  | friendname | favcolor | phonenumber | 
      | AARPMapdIndEPMP | name1      | color1   | number1     |
       
-  @smokeTest_GoGreenEPMP @rallyDashboard @testharness
+  @smokeTest_GoGreenEPMP 
   Scenario Outline: To verify Edit preferences section for Go Green
     Given I am a authenticated member on the member redesign site for Direct Login
       | Member Type | <memberType> |
@@ -34,7 +34,7 @@ Feature: 1.13-VBF-MemRedesign-To test My Profile & Preferences and Go Green flow
       | PhoneNumber    | <phonenumber> |
     Then member should navigate to Home page
     And the user navigates to Rally Dashboard Page for profile and preference
-    And the user clicks on Edit Preferences
+    And the user clicks on Edit Preferences for EPMP
     Then the user changes the online preference and saves the change
     And the user validates navigates back to Profile page
     And the user clicks on Edit Preferences
@@ -45,7 +45,7 @@ Feature: 1.13-VBF-MemRedesign-To test My Profile & Preferences and Go Green flow
      | AARPMapdIndEPMP | name1      | color1   | number1     |
      
      
-  @smokeTest_ProfileAndPreference
+  @smokeTest_ProfileAndPreference @rallyDashboard @testharness
   Scenario Outline: Verify Plan Name, Member name, Member ID and account section
     Given I am a authenticated member on the member redesign site for Direct Login
       | Member Type | <memberType> |
@@ -66,7 +66,7 @@ Feature: 1.13-VBF-MemRedesign-To test My Profile & Preferences and Go Green flow
       # | UhcMapdInd     |name1      | color1   | number1     |
       | AARPMapdInd | name1      | color1   | number1     |
 
-  @smokeTest_GoGreen
+  @smokeTest_GoGreen @rallyDashboard @testharness
   Scenario Outline: To verify Go Green page
     Given I am a authenticated member on the member redesign site for Direct Login
       | Member Type | <memberType> |
