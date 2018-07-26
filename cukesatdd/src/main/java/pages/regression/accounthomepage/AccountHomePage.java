@@ -198,7 +198,8 @@ private WebElement PlanMaterialSection;
        @FindBy(linkText = "Order drugs from your Preferred Mail Service Pharmacy")
        private WebElement drugPreferredMailServicePharmacyLink;
 
-       @FindBy(xpath = "//div[@class='claim-results']//table[not (contains(@class,'ng-hide'))]//tbody//tr[2]//a[text()='MORE INFO']")
+       //@FindBy(xpath = "//div[@class='claim-results']//table[not (contains(@class,'ng-hide'))]//tbody//tr[2]//a[text()='MORE INFO']")     
+       @FindBy(xpath = "//div[@class='claim-results']//tbody//tr[2]//td//span[@id='moreInfoLinkAtdd0']")
        private WebElement claimstablemoreinfolink;
 
        @FindBy (css = ".claimDetTableMainSection")
