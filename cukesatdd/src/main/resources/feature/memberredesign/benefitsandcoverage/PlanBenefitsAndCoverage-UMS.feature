@@ -635,7 +635,7 @@ And the user verifies that the correct pdfs are there in the plan material secti
       | Plan Type | <planType> |
       | Member Type   | <memberType> |
     Then the user navigates to Benefits coverage page
-    And the user validates the Office Visits section widgets
+    And user validates the Office Visits section widgets
 
 
     Examples: 

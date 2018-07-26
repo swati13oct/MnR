@@ -2631,8 +2631,8 @@ public void validateImagePresent(String logoToBeDisplayedOnSecondaryPage) {
 	}
 
 	public void validateOfficeVisitssectionWidget() {
-		// TODO Auto-generated method stub
 		try {
+			Thread.sleep(2000);
 			feebackpopupClose();
 			
 			JavascriptExecutor jse = (JavascriptExecutor) driver;

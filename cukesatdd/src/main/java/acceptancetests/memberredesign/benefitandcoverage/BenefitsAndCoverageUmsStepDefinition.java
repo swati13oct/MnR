@@ -1457,14 +1457,11 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	}
 	
 	
-	@And("the user validates the Office Visits section widgets")
-	public void user_validate_OfficeVisit_section_widgets() {
-				
+	@And("user validates the Office Visits section widgets")
+	public void validate_OfficeVisit_Section_Widgets(){		
 		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		planBenefitsCoverage.validateOfficeVisitssectionWidget();
-		
-		
 						
 	}
 	
