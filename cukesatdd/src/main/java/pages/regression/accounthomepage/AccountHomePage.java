@@ -1114,7 +1114,7 @@ private WebElement PlanMaterialSection;
     	   	
     	   	try{
     	   			feebackpopupClose();
-                
+    	   			driver.switchTo().defaultContent();
     	   			CommonUtility.waitForPageLoad(driver, claimstablemoreinfolink, 60);
                   
                   claimstablemoreinfolink.click();
