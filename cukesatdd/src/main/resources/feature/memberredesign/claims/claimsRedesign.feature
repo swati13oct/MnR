@@ -212,7 +212,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 
     Examples: 
       | planType | claimPeriod    | domain | claimssystem |
-      | MAPD     | Last 24 months | NICE   | NICECLAIMS   | 
+      | MAPD     | Last 24 months | NICE   | MAPDAARPNICECLAIMS   | 
 
     @regression_06_06_18 @TC03_FEDAARPIndividualPDP   
     Scenario Outline: To validate the claims present for the Federal member on claims sumamry page for AARP site
