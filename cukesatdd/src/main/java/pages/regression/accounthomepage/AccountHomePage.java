@@ -1115,10 +1115,10 @@ private WebElement PlanMaterialSection;
     	   	try{
     	   			feebackpopupClose();
     	   			driver.switchTo().defaultContent();
-    	   			CommonUtility.waitForPageLoad(driver, claimstablemoreinfolink, 60);
-                  
+    	   			//CommonUtility.waitForPageLoad(driver, claimstablemoreinfolink, 60);
+                  //Thread.sleep(20);
                   claimstablemoreinfolink.click();
-                  CommonUtility.waitForPageLoad(driver, claimDetTableMainSection, 60);                 
+                  //CommonUtility.waitForPageLoad(driver, claimDetTableMainSection, 60);                 
                   System.out.println(driver.getTitle());
                   if (driver.getTitle().equalsIgnoreCase("Claims")) {
                          return new ClaimDetailsPage(driver);
