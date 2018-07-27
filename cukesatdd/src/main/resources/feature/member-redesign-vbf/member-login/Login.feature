@@ -2,7 +2,7 @@
 Feature: 1.09-VBF-MemRedesign-To test sign functionality
 
   @smokeTest_DirectLogin @rallyDashboard @testharness
-  Scenario Outline: Validate that member is successfully getting logged in to Rally Dashboard
+  Scenario Outline: Validate that member is successfully getting logged in to Rally Dashboard for memberType <memberType>
     Given I am a authenticated member on the member redesign site for Direct Login
       | Member Type | <memberType> |
     When the above plantype user logs in member redesign for Direct Login
