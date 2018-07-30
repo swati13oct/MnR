@@ -2,7 +2,7 @@
 @applitools
 Feature:2.04-VBF-Acq-To test applitools in AARP and UHC sites
 	
-@applitoolsAARP_VPP
+@applitoolsAARP_VPP1
 Scenario Outline:To use applitools to take screenshots of the vpp pages
 Given the user goes to aarp homepage and takes full screenshot
 	|Home Screenshot| <screenshot1>|
@@ -21,16 +21,13 @@ Examples:
 	| zipcode 	| screenshot1 |screenshot2 | planType | planName 										  |  planType2 | planName2 						  | 
 	| 90210     |   yes       | yes        |   MA	   | AARP MedicareComplete SecureHorizons Plan 1 (HMO)|  PDP 	   | AARP MedicareRx Walgreens (PDP)      |
 
-@applitoolsAARP_DCE
+@applitoolsAARP_DCE1
 Scenario Outline:To use applitools to take screenshots of the DCE pages
 Given the user goes to aarp homepage and takes full screenshot
 	|Home Screenshot| <screenshot1>|
 When the user enter the zipcode and goes to VPP page and takes screenshot for MAPD plans
 	|Zipcode| <zipcode>|
 	|VPP Screenshot| <screenshot2>|
-And the user goes to the view plan details page for MAPD plan and takes screenshots
-	|Plan Type| <planType> |
-	|Plan Name| <planName> |
 Then the user accesses the DCE tool from vpp aarp page for MAPD plan and takes screenshot
 	|Plan Type| <planType> |
 	|Plan Name| <planName> |
@@ -46,9 +43,6 @@ Given the user goes to aarp homepage and takes full screenshot
 When the user enter the zipcode and goes to VPP page and takes screenshot for MAPD plans
 	|Zipcode| <zipcode>|
 	|VPP Screenshot| <screenshot2>|
-And the user goes to the view plan details page for MAPD plan and takes screenshots
-	|Plan Type| <planType> |
-	|Plan Name| <planName> |
 And the user clicks on the enroll in plan button for mapd plan and goes to med info page
 	|Plan Name| <planName> |
 Then the user enters info for pages in OLE flow and takes screenshots of each page

@@ -52,12 +52,11 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 	
 	ApplitoolsObject appObj;
 	
+
 	@Before
 	public void setApplitools() {
 		 appObj = new ApplitoolsObject();
-		appObj.setBatch(MRScenario.environment+" AARP batch");
-		appObj.setApplitools();
-		
+		appObj.setBatch(MRScenario.environment+" AARP");
 	}
 	
 	

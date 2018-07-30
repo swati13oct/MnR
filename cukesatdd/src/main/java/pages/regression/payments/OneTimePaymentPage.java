@@ -107,7 +107,7 @@ public class OneTimePaymentPage extends UhcDriver{
 		otheramountfield.click();
 		
 		otheramountfield.clear();		
-		otheramountfield.sendKeys("1.12");
+		otheramountfield.sendKeys();
 		
 		routingNumberField.click();
 		routingNumberField.clear();

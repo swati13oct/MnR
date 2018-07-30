@@ -9,6 +9,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
@@ -48,7 +49,8 @@ public class MemberAuthStepDefinition{
 	 */
 	@Given("^the user is on member auth login page$")
 	public void the_user_is_on_member_auth_login_page(){
-		WebDriver wd = getLoginScenario().getWebDriver();	
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		MemberAuthLoginPage memberauth = new MemberAuthLoginPage(wd);
 		memberauth.navigateToLoginURL();
