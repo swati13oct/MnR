@@ -214,7 +214,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='pharmacyTabId']/div/p[2]")
 	public WebElement step2Pharmacy;
 
-	@FindBy(xpath = ".//*[@id='drug-cost-card-acq']/div[2]//*[contains(text(),'EDIT DRUGS LIST')]")
+	@FindBy(xpath = ".//*[@id='atddEditDrugList']")
 	public WebElement step3EditDrugsList;
 
 	@FindBy(xpath = ".//*[@id='total_pharmacysavings']/div[2]/a")
@@ -338,7 +338,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id = "step3DisclaimerVPP")
 	public WebElement step3DisclaimerVPP;
 
-	@FindBy(id = "dce")
+	@FindBy(xpath = ".//*[@id='colhowdoesthiswork_dce']//*[@itemprop='significantLink']/*[@class='cta-button secondary']")
 	public WebElement getStarted;
 
 	@FindBy(id = "zipcode-costs")
@@ -1818,6 +1818,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public VPPPlanSummaryPage mouseHoverOurPlans(String zipCode){
 		if(ourPlansTab.isDisplayed()){
 		Actions actions = new Actions(driver);
+		PageFactory.initElements(driver, this);
 		actions.moveToElement(ourPlansTab).build().perform();
 		enterZipcode.sendKeys(zipCode, Keys.ENTER);
 		return new VPPPlanSummaryPage(driver);

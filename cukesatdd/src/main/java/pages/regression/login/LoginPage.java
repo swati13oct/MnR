@@ -9,13 +9,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.data.MRConstants;
-import atdd.framework.MRScenario;
-import atdd.framework.UhcDriver;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.login.AssistiveRegistrationPage;
 import pages.regression.login.ConfirmSecurityQuestion;
 import pages.regression.login.TerminatedHomePage;
+
+import acceptancetests.data.MRConstants;
+import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
+import atdd.framework.UhcDriver;
+//import pages.member.bluelayer.AccountHomePage;
 
 public class LoginPage extends UhcDriver {
 	
@@ -43,6 +46,9 @@ public class LoginPage extends UhcDriver {
 		
 	    @FindBy(xpath=".//*[@id='IPEinvL']/map/area[1]")
 	    private WebElement iPerceptionPopUp;
+	    
+	    @FindBy(xpath="//*[@class='ng-scope nav-ready']//a[contains(text(),'Coverage & Benefits')]")
+		private WebElement bencovtab;
 	    
 	    MRScenario loginScenario;
 		
@@ -132,6 +138,7 @@ public class LoginPage extends UhcDriver {
 				
 					System.out.println("test");
 					System.out.println(driver.getCurrentUrl());
+					CommonUtility.waitForPageLoad(driver, bencovtab, 20);
 				    return new AccountHomePage(driver);
 			}
 			
@@ -147,12 +154,14 @@ public class LoginPage extends UhcDriver {
 			} 
 			
 			try {
-				Thread.sleep(20000);
+				Thread.sleep(25000);
 			} catch (InterruptedException e) 
 			{
 			// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
+			
 			if(currentUrl().contains("testharness.html") || currentUrl().contains("/dashboard"))
 	        {
 				System.out.println("test");
@@ -166,6 +175,24 @@ public class LoginPage extends UhcDriver {
 				return new TerminatedHomePage(driver);
 			}
 
+			else{
+				driver.navigate().refresh();
+				try {
+					Thread.sleep(25000);
+				} catch (InterruptedException e) 
+				{
+				// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				if(currentUrl().contains("testharness.html") || currentUrl().contains("/dashboard"))
+		        {
+					System.out.println("test");
+					System.out.println(driver.getCurrentUrl());
+					return new AccountHomePage(driver);
+				}
+
+			}
 			return null;
 		}
 }

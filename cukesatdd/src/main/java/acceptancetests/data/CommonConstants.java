@@ -851,9 +851,12 @@ public class CommonConstants {
     public static final String JENKINS_BROWSER_AGENT_STRING = "JENKINS_BROWSER_AGENT_STRING";
 	public static final String ACCOUNT_USER_NAME = null;
 
-	public static final String IS_TESTHARNESS = "istestharness";
+	public static final String IS_TESTHARNESS = "IS_TESTHARNESS";
 
 	public static final String COMMONSTEPDEFINITIONMEMVBF = "commonStepDefinition";
-	
+	public static final String IS_HSID_COMPATIBLE	 = "isHSIDCompatible";
+	public static final String CATEGORY_TERMIATED	 = "TerminatedFed";
+	public static final long TIMEOUT_60 = 60;
+	public static final long TIMEOUT_90 = 90;
 
 }

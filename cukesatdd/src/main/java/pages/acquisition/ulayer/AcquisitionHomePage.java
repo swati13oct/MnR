@@ -1,26 +1,21 @@
 package pages.acquisition.ulayer;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
-import org.openqa.selenium.support.PageFactory;
-
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
+import org.openqa.selenium.support.PageFactory;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author pperugu
@@ -74,8 +69,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "/html/body/div[3]/div/table/tbody/tr[3]/td/table/tbody/tr[2]/td/div/div[2]/div/div/div[2]/div/ul/li[2]/a")
 	WebElement zipCodebtn;
-	                 
-	@FindBy(id = "atdd_mpd_plans")
+
+	@FindBy(xpath="//a[contains(text(),'Request More Help')]")
 	private WebElement pdp_moreHelpInfoLink;
 
 	@FindBy(xpath = ".//*[@id='atdd_ma_plans']/span")
@@ -188,11 +183,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validate(navigationSectionOurPlansLink);
 		validate(navigationSectionMedicareEducationLink);
 		validate(navigationSectionEnterSearch);
-		validate(getStartedButton);
+		//validate(getStartedButton);
 
 		validate(zipCodeField);
 		validate(viewPlansButton);
-		validate(po7Link);
+		//validate(po7Link);
 
 		validate(footerAboutUsLink);
 		validate(footerContactUsLink);
@@ -216,6 +211,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		sendkeys(zipCodeField, zipcode);
 		
 		viewPlansButton.click();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		try {
 			if (countyModal.isDisplayed()) {
 				driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='"+countyName+"']")).click();
@@ -224,8 +220,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("county box not found");
 		}
 		
-		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_OUR_MEDICARE_PLANS)) {
-			System.out.println("title matches");
+		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
 		}
 		return null;
@@ -438,6 +433,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validate(OurPlansLink1);
 		// Hover over text
 		Actions action = new Actions(driver);
+		PageFactory.initElements(driver, this);
 		action.moveToElement(OurPlansLink1).build().perform();
 
 		// to click
@@ -469,6 +465,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public void ourPlansHover() {
 		Actions actions = new Actions(driver);
+		PageFactory.initElements(driver, this);
 		actions.moveToElement(ourPlansHoverLink);
 		actions.moveToElement(ourPlansDropdownText);
 		actions.click();
@@ -579,6 +576,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validate(hoverhealthandwellnesslink);
 		// Hover over text
 		Actions action = new Actions(driver);
+		PageFactory.initElements(driver, this);
 		action.moveToElement(hoverhealthandwellnesslink).build().perform();
 
 		// TODO Auto-generated method stub
@@ -666,6 +664,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public void navigateToRequestMoreHelpAndInformation(String planType){
 		Actions action = new Actions(driver);
+		PageFactory.initElements(driver, this);
 		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
 		/*if(planType.contains("MA"))
 				ma_moreHelpInfoLink.click();
@@ -708,6 +707,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public PDPRequestHelpAndInformationPage navigateToPDPMoreHelpAndInfo() {
 
 		Actions actions = new Actions(driver);
+		PageFactory.initElements(driver, this);
 		actions.moveToElement(ourPlansHoverLink);
 		actions.moveToElement(pdp_moreHelpInfoLink);
 		actions.click().build().perform();
@@ -721,6 +721,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public RequestHelpAndInformationPage navigateToMaMoreHelpAndInfo() {
 
 		Actions actions = new Actions(driver);
+		PageFactory.initElements(driver, this);
 		actions.moveToElement(ourPlansHoverLink);
 		actions.moveToElement(moreHelpInfoLink);
 		actions.click().build().perform();

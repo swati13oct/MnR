@@ -74,6 +74,7 @@ public class OurPlansPage extends UhcDriver {
 
 		validate(OurPlansLink);
 		Actions action = new Actions(driver);
+		PageFactory.initElements(driver, this);
 		action.moveToElement(OurPlansLink).build().perform();
 		validate(OurPlansLink);
 	}
@@ -92,6 +93,7 @@ public class OurPlansPage extends UhcDriver {
 	public AcquisitionHomePage ErrorMessage() {
 		validate(errormessage);
 		Actions action = new Actions(driver);
+		PageFactory.initElements(driver, this);
 		action.moveToElement(errormessage);
 
 		validate(errormessage);
@@ -113,6 +115,7 @@ public class OurPlansPage extends UhcDriver {
 	public AcquisitionHomePage errormessage() {
 		validate(errormessage);
 		Actions action = new Actions(driver);
+		PageFactory.initElements(driver, this);
 		action.moveToElement(errormessage);
 
 		validate(errormessage);

@@ -1,4 +1,4 @@
-@gladiators
+
 @registrationAccConfirmation
 Feature: G1.8To test registration flow in redesign portal
 

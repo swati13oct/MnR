@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -86,7 +87,7 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(), 'Birth Date')]//following-sibling::p")
 	private WebElement DOBDisplay;
 
-	@FindBy(xpath = "//*[contains(text(), ' your gender')]//following-sibling::p")
+	@FindBy(xpath = "//*[contains(text(), 'Gender')]//following-sibling::p")
 	private WebElement GenderDisplay;
 
 	//Permanent Address Display
@@ -98,13 +99,13 @@ public class ReviewSubmitPage extends UhcDriver{
 
 
 	//Mailing Address Display
-	@FindBy(xpath = "//*[contains(text(), 'Is your mailing address the same as your permanent residence street address?')]//following-sibling::p")
+	@FindBy(xpath = "//*[contains(text(), 'Is your mailing address the same as')]//following-sibling::p")
 	private WebElement MailingQiuestionDisplay;
 	
-	@FindBy(xpath = "//*[contains(text(), 'your gender')]/ancestor::*[@class = 'review-step']//*[contains(text(), 'State')]//following-sibling::p")
+	@FindBy(xpath = "//*[contains(text(), 'mailing address')]/ancestor::*[@class = 'review-step']//*[contains(text(), 'State')]//following-sibling::p")
 	private WebElement MailStateDisplay;
 	
-	@FindBy(xpath = "//*[contains(text(), 'Zip')]//following-sibling::p")
+	@FindBy(xpath = "//*[contains(text(), 'ZIP')]//following-sibling::p")
 	private WebElement MailZipDisplay;
 	
 	//Submit Application Disclaimer
@@ -188,14 +189,14 @@ public class ReviewSubmitPage extends UhcDriver{
 		}else flag =false;
 
 		if(CardType.contains("HICN")){
-			String MedicareNumberDisplayed = MedicareClaimNumberDisplay.getText();
+			String MedicareNumberDisplayed = MedicareClaimNumberDisplay.getText().replaceAll("-", "");
 			if(MedicareNumberDisplayed.contains(MedicareNumber)){
 				flag = (!flag)?false:true;
 				System.out.println(MedicareNumber+" : "+MedicareNumberDisplayed+" : "+flag);
 			}else flag =false;
 		}
 		else{
-			String MedicareNumberDisplayed = MedicareNumberDisplay.getText();
+			String MedicareNumberDisplayed = MedicareNumberDisplay.getText().replaceAll("-", "");
 			if(MedicareNumberDisplayed.contains(MedicareNumber)){
 				flag = (!flag)?false:true;
 				System.out.println(MedicareNumber+" : "+MedicareNumberDisplayed+" : "+flag);
@@ -291,6 +292,25 @@ public class ReviewSubmitPage extends UhcDriver{
 		
 		return flag;
 	}
+
+	public OLEconfirmationPage submitEnrollment() {
+		
+		validate(SubmitApplicationBtn);
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", SubmitApplicationBtn);
+
+		//NextBtn.click();
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(driver.getCurrentUrl().contains("confirmation")){
+			System.out.println("OLE Enrollment Submission Confirmation Page is Displayed");
+			return new OLEconfirmationPage(driver);
+		}
+		return null;	}
 
 
 

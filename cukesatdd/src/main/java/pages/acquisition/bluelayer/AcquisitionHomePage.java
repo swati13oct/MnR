@@ -2,9 +2,11 @@ package pages.acquisition.bluelayer;
 
 /*@author pagarwa5*/
 
-import java.util.ArrayList;
-import java.util.List;
-
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.MRConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.NoSuchElementException;
@@ -15,17 +17,16 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+import pages.acquisition.ulayer.PageTitleConstants;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 //import pages.member.bluelayer.AccountHomePage;
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.MRConstants;
-import acceptancetests.data.PageData;
-import acceptancetests.util.CommonUtility;
 //import pages.acquisition.ulayer.MaViewPlansAndPricingPage;
 //import pages.acquisition.ulayer.MsViewPlansAndPricingPage;
 //import pages.acquisition.ulayer.PdpViewPlansAndPricingPage;
-import atdd.framework.MRScenario;
-import pages.acquisition.ulayer.PageTitleConstants;
 
 public class AcquisitionHomePage extends GlobalWebElements {
 
@@ -82,7 +83,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
         @FindBy(xpath="//a[contains(text(),'Request More')]")
     	private WebElement moreHelpInfoLink;
 
-        @FindBy(xpath = "//*[@id='planTypesColumn']/h3[2]/a")
+        @FindBy(xpath="//a[contains(text(),'Request More Help')]")
         private WebElement pdp_moreHelpInfoLink;
 
         @FindBys(value = { @FindBy(xpath = "//table[@id='selectcountytable']/tbody/tr/td") })
@@ -374,6 +375,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
         public VPPPlanSummaryPage searchPlans(String zipcode, String countyName) {
                 sendkeys(zipCodeField, zipcode);
                 viewPlansButton.click();
+        		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
                 try {
                         if (countyModal.isDisplayed()) {
                                 for (WebElement county : countyRows) {
@@ -641,6 +643,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
                 validate(navigationSectionMedicareEducationLink);
 
                 Actions actions = new Actions(driver);
+                PageFactory.initElements(driver, this);
                 actions.moveToElement(navigationSectionMedicareEducationLink);
                 actions.moveToElement(learnAboutMedicareMedicareEducationLink);
                 actions.perform();
@@ -680,6 +683,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
         public LearnAboutMedicareuhcPage learnAboutMedicareClick() {
                 validate(navigationSectionMedicareEducationLink);
                 Actions actions = new Actions(driver);
+                PageFactory.initElements(driver, this);
                 actions.moveToElement(navigationSectionMedicareEducationLink);
                 actions.moveToElement(learnAboutMedicareMedicareEducationLink);
                 actions.click().build().perform();
@@ -705,6 +709,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
         public void navigateToRequestMoreHelpAndInformation(String planType){
         	 Actions actions = new Actions(driver);
+        	 PageFactory.initElements(driver, this);
              actions.moveToElement(ourPlansHoverLink);
              actions.moveToElement(moreHelpInfoLink);
             actions.click().build().perform();
@@ -799,6 +804,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
                 }
 
                 Actions actions = new Actions(driver);
+                PageFactory.initElements(driver, this);
                 actions.moveToElement(ourPlans);
 
                 if (planType.equalsIgnoreCase("MA")) {
@@ -1028,6 +1034,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
         public RequestHelpAndInformationPage navigateToMaMoreHelpAndInfo() {
 
                 Actions actions = new Actions(driver);
+                PageFactory.initElements(driver, this);
                 actions.moveToElement(ourPlansHoverLink);
                 actions.moveToElement(moreHelpInfoLink);
                 actions.click().build().perform();
@@ -1131,11 +1138,17 @@ public class AcquisitionHomePage extends GlobalWebElements {
         public PDPRequestHelpAndInformationPage navigateToPDPMoreHelpAndInfo() {
 
                 Actions actions = new Actions(driver);
+                PageFactory.initElements(driver, this);
                 actions.moveToElement(ourPlansHoverLink);
-                actions.moveToElement(pdp_moreHelpInfoLink);
+                actions.moveToElement(moreHelpInfoLink);
                 actions.click().build().perform();
-
-                if (currentUrl().contains("prescription-drug-plans/request-information.html")) {
+                try {
+					Thread.sleep(4000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+                if (currentUrl().contains("request-information.html")) {
                         return new PDPRequestHelpAndInformationPage(driver);
                 }
 
@@ -1174,7 +1187,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
         
         public PlanSelectorNewPage quizButton() {
         	waitforElement(ourPlans);
-    		Actions action = new Actions(driver);		
+    		Actions action = new Actions(driver);	
+    		PageFactory.initElements(driver, this);
     		action.moveToElement(ourPlans).build().perform();
     		waitforElement(takeTheQuizBtn);
     		takeTheQuizBtn.click();

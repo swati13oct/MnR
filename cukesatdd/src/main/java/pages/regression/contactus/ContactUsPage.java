@@ -32,7 +32,7 @@ import cucumber.api.DataTable;
  */
 public class ContactUsPage extends UhcDriver{
 
-	@FindBy(css="a#message-btn:first-child")
+	@FindBy(css="a.btn.btn--primary.message-btn:first-child")
 	private WebElement getStartedButton;
 
 	@FindBy(id="message-cancel")
@@ -47,11 +47,16 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(id = "message-email-confirms") 
 	private WebElement confirmemailId;
 	
-	@FindBy(css = "a#message-btn:last-child")
+	@FindBy(css = "a.goToInbox.btn.btn--primary.message-btn")
 	private WebElement goToInboxButton;
 	
+	@FindBy(id = "IPerceptionsEmbed")
+	public WebElement iPerceptionframe;
 	
-	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//a[@id='call-btn']")
+	@FindBy(id = "closeButton")
+	public WebElement iPerceptionclosebtn;
+	
+	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//a[@class='btn btn--primary call-btn']")
 	private WebElement requestACall;
 	
 	@FindBy(id = "call-submit")
@@ -72,14 +77,14 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//div[@class='message-block--full-width success margin-none']")
 	private WebElement reqConfirmation;
 	
-	@FindBy(xpath="//header//h1")
+	@FindBy(xpath="//h1")
 	private WebElement heading;
 	
 	@FindBy(xpath=".//*[@id='IPEinvL']/map/area[2]")
     private WebElement iPerceptionPopUp;
 
 	
-	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//a[@id='question-btn']")
+	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//a[@class='btn btn--primary question-btn']")
 	private WebElement fillOutFormButton;	
 	
 	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))]//a[@id='question-btn']")
@@ -90,7 +95,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//textarea[@id='question-message']")
 	private WebElement questionMessage;
 	
-	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//button[@id='question-submit']")
+	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//button[@name='question-submit']")
 	private WebElement questionSubmit;
 	
 	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))]//button[@id='question-submit']")
@@ -153,13 +158,13 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))]//div[contains(@class,'message-block-body')][1]//h3")
 	private WebElement memberAuthNotAuthorizedToSendUsQuestionMessage;
 	
-	@FindBy(css="div#confrmmatchheightonce #question-btn")
+	@FindBy(css="div#confrmmatchheightonce a.btn.btn--primary.question-btn")
 	private WebElement btn_EmailForm;
 	
-	@FindBy(id="question-about")
+	@FindBy(id="question-about-ship")
 	private WebElement questionAboutDropdown_EmailForm;
 	
-	@FindBy(id="question-message")
+	@FindBy(id="question-message-ship")
 	private WebElement questionMessage_EmailForm;
 	
 	@FindBy(id="question-member-number")
@@ -186,7 +191,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(id="date-yyyy")
 	private WebElement dateyyyy_EmailForm;
 	
-	@FindBy(id="question-submit")
+	@FindBy(css=".question-submit>span")
 	private WebElement btnSubmit_EmailForm;
 	
 	@FindBy(css="div#confrmmatchheightonce div.message-block-body p:nth-child(2)")
@@ -206,12 +211,8 @@ public class ContactUsPage extends UhcDriver{
 	public ContactUsPage(WebDriver driver) {
 		super(driver);
 		try {
-			Thread.sleep(8000);
-			if (validate(iPerceptionPopUp)) {
-	            iPerceptionPopUp.click();
-	            System.out.println("iPerception Pop Up displayed");
-			}
 			PageFactory.initElements(driver, this);
+			feebackpopupClose();
 			CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_30);
 			openAndValidate();
 		} catch (InterruptedException e) {
@@ -601,9 +602,10 @@ public class ContactUsPage extends UhcDriver{
 			dateDD_EmailForm.sendKeys(date);
 			dateMM_EmailForm.sendKeys(month);
 			dateyyyy_EmailForm.sendKeys(year);
+			confirmEmail_EmailForm.click();
 			Thread.sleep(2000);
 			btnSubmit_EmailForm.click();
-			Thread.sleep(5000);
+			Thread.sleep(8000);
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}
@@ -618,6 +620,30 @@ public class ContactUsPage extends UhcDriver{
 			Assert.assertTrue(validate(goToInboxButton));
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Validate the widgets which should not present for the terminated members
+	 */
+	public void validateWidgetsForTerminatedMembers(){
+		Assert.assertTrue(!validate(getStartedButton));
+		Assert.assertTrue(!validate(fillOutFormButton));
+		Assert.assertTrue(!validate(requestCall));
+		Assert.assertTrue(!validate(email_EmailForm));
+	}
+	
+	public void feebackpopupClose() throws InterruptedException
+	{ //waitForloader(driver,overlay, 20);
+		Thread.sleep(20000);
+		if (validate(iPerceptionframe)) {
+
+			switchToNewIframe(iPerceptionframe);
+			iPerceptionclosebtn.click();
+			driver.switchTo().defaultContent();
+			//iPerceptionAutoPopUp.click();
+		} else {
+			System.out.println("iPerception Pop Up not displayed");
 		}
 	}
 }

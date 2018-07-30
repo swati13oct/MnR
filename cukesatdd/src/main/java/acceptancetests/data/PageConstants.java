@@ -145,6 +145,8 @@ public static final String ACCOUNT_HOME_PAGE = "accountHomePage";
 	public static final String ABOUT_US_PAGE = "aboutUsPage";
 
 	public static final String CONTACT_US_PAGE = "contactUsPage";
+	
+	public static final String ID_CARD_PAGE = "iDCardPage";
 
 	public static final String PRIVACY_POLICY_PAGE = "privacyPolicyPage";
 
@@ -596,6 +598,10 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 	public static final String New_Window = "NewWindow";
 
 	public static final String footer_page = null;
+
+	public static final String COMMUNICATION_PREFERENCE_PAGE = "communicationPrefPage";
+
+	public static final String APPLITOOLS_ACQ_PAGE = null;
 
 	
 	

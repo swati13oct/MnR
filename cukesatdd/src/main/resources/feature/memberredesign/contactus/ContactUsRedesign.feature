@@ -1,4 +1,4 @@
-@velocityDashers
+@regression_06_06_18 @velocityDashers
 Feature: V1.1To test Send us a question Widget and Click to call functionality in contact us redesign pages in UHCM site
 
   @secureEmailWidgetCancel
@@ -12,9 +12,9 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
       | NewConfirm Email | <newConfirmEmail> |
 
     Examples: 
-      | plantype | memberType  | newEmail       | newConfirmEmail |
-      | PDP      | RXCLAIMS    | test@optum.com | test@optum.com  |
-      | MAPD     | SDCERAGroup | test@optum.com | test@optum.com  |
+      | plantype | memberType       | newEmail       | newConfirmEmail |
+      | PDP      | IDCardmember     | test@optum.com | test@optum.com  |
+      | MAPD     | IndividualMember | test@optum.com | test@optum.com  |
 
   @GroupEmailConfirmMessage
   Scenario Outline: Verify Group Email Widget Confirm Request in contact us redesign page
@@ -82,22 +82,19 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
       | Expected Message | <expectedMessage> |
 
     Examples: 
-      Examples:
-
-      | plantype | memberType  | enquiryType | message | aarpMemberShipNumber | firstName | lastName | emailAddress   | confirmEmailAddress | date | month | year | expectedMessage                                                                                                                          |
-      | SHIP     | MedSupRider | Claims      | Testing |           1234567890 | test      | test     | test@optum.com | test@optum.com      |   01 |    01 | 1950 | We value your input and will be happy to answer your questions. A UnitedHealthcare Customer Service representative will respond shortly. |
+      | plantype | memberType | enquiryType | message | aarpMemberShipNumber | firstName | lastName | emailAddress   | confirmEmailAddress | date | month | year | expectedMessage                                                                                                                          |
+      | PHIP     | SHIPCLAIMS | Claims      | Testing |           1234567890 | test      | test     | test@optum.com | test@optum.com      |   01 |    01 | 1950 | We value your input and will be happy to answer your questions. A UnitedHealthcare Customer Service representative will respond shortly. |
 
   @goToInbox
   Scenario Outline: Verify go To Inbox button on contactUS redesign page for opted in member
     Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <plantype>   |
       | Member Type | <memberType> |
     When the user navigates to contact us page in UHC site
     Then user validates go To Inbox button in redesign contact us page
 
     Examples: 
-      | plantype | memberType      |
-      | MAPD     | MAPDwithMedSupp |
+      | memberType      |
+      | MA_AARP_GOGreen |
 
   @clickToCallCancel
   Scenario Outline: Verify clickToCall Widget Expansion (Drop-Down, Text Box and Button UI) and click on cancel on contactUS redesign page
@@ -139,5 +136,21 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
     Then user validates PDP page display in redesign contact us page
 
     Examples: 
-      | plantype | memberType |
-      | PDP      | rx_eob     |
+      | plantype | memberType   |
+      | PDP      | IDCardmember |
+
+  @regressionContactUsForTerminatedMembers
+  Scenario Outline: Verify terminated members view on contact us redesign page
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <plantype>   |
+      | Member Type | <memberType> |
+    When the user navigates to contact us page in UHC site
+    Then user should only see the Technical Support and Plan Support components
+
+    Examples: 
+      | plantype | memberType                      |
+      | MA       | Terminated_Group_MA_NICE        |
+      | MAPD     | Terminated_Group_MAPD_COSMOS    |
+      | SSP      | Terminated_Group_SSP            |
+      | MA       | Terminated_Individual_MA_COSMOS |
+      | MAPD     | Terminated_Individual_MAPD_NICE |

@@ -1,5 +1,6 @@
 package acceptancetests.memberredesign.memberAuth;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
@@ -18,11 +20,14 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.dashboard.memberAuth.MemberAuthLoginPage;
+import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.contactus.ContactUsPage;
+import pages.regression.explanationofbenefits.EOBPage;
 import pages.regression.memberauth.MemberAuthPage;
 import pages.regression.memberauth.MemberInformationPage;
 import pages.regression.memberauth.MemberSearchPage;
+import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 
 /**
  * 
@@ -44,7 +49,8 @@ public class MemberAuthStepDefinition{
 	 */
 	@Given("^the user is on member auth login page$")
 	public void the_user_is_on_member_auth_login_page(){
-		WebDriver wd = getLoginScenario().getWebDriver();	
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		MemberAuthLoginPage memberauth = new MemberAuthLoginPage(wd);
 		memberauth.navigateToLoginURL();
@@ -259,5 +265,119 @@ public class MemberAuthStepDefinition{
 		Assert.assertEquals(message, contactUsPage.getMemberAuthNotAuthorizedToSendUsQuestionMessage());
 		
 	}
+	
+	@And("^user clicks on member to select$")
+	public void member_clicks_on_user_to_select() throws InterruptedException{
+		MemberAuthPage memberAuthPage = (MemberAuthPage) getLoginScenario().getBean(PageConstants.Member_Auth_PopUp);
+		AccountHomePage accountHomePage =  memberAuthPage.userSelectsMemberEntered();
+		
+		if(accountHomePage!=null){
+			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
+		}
+		else{
+			System.out.println("==================CSR Page for Member not displayed======================");
+			Assert.fail();
+		}
+	}
+	@Then ("^the user click on EOB link and navigates to EOB page$")
+	public void the_user_click_on_EOB_link_navigates_t0_EOB_page(){
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		EOBPage eobPage = accountHomePage.navigateDirectToEOBPag();
+		getLoginScenario().saveBean(PageConstants.EOB_Page, eobPage);
+		
+	}
+	
+	@Then("^the user navigates to profile and preference page$")
+	public void the_user_navigates_to_profile_and_preference_page() throws Throwable {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		ProfileandPreferencesPage profilePreferencePage = accountHomePage.navigateDirectToProfilePage();
+		if(profilePreferencePage!=null){
+			getLoginScenario().saveBean(PageConstants.ProfilePreferencesPage, profilePreferencePage);
+		}else{
+			System.out.println("==================Profile and preference page not displayed======================");
+			Assert.fail();
+		}
+  	}
+
+	@And("^the user validates the save preference functionality WRT member auth$")
+	public void the_user_validates_the_save_preference_functionality_WRT_member_auth(DataTable  errorText){
+		List<DataTableRow> memberAttributesRow = errorText
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String errorMessageExpected = memberAttributesMap.get("Error Mesage");
+		ProfileandPreferencesPage profilePreferencePage = (ProfileandPreferencesPage) getLoginScenario().getBean(PageConstants.ProfilePreferencesPage);
+		profilePreferencePage.validateSavePreferenceWithMemberAuth(errorMessageExpected);
+	}
+	
+	@And("^the user validates edit temproray address functionality WRT member auth$")
+	public void the_user_validates_edit_temproray_address_functionality_WRT_member_auth(DataTable  errorText) {
+		List<DataTableRow> memberAttributesRow = errorText
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String errorMessageExpected = memberAttributesMap.get("Error Mesage");
+		ProfileandPreferencesPage profilePreferencePage = (ProfileandPreferencesPage) getLoginScenario().getBean(PageConstants.ProfilePreferencesPage);
+		profilePreferencePage.validateTemproraryAddressWithMemberAuth(errorMessageExpected);
+ 	}
+
+	@And("^the user validates edit alternative address functionality WRT member auth$")
+	public void the_user_validates_edit_alternative_address_functionality_WRT_member_auth(DataTable  errorText) {
+		List<DataTableRow> memberAttributesRow = errorText
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String errorMessageExpected = memberAttributesMap.get("Error Mesage");
+		ProfileandPreferencesPage profilePreferencePage = (ProfileandPreferencesPage) getLoginScenario().getBean(PageConstants.ProfilePreferencesPage);
+		profilePreferencePage.validateAlternativeAddressWithMemberAuth(errorMessageExpected);
+ 	}
+
+	@And("^the user validates edit email functionality WRT member auth$")
+	public void the_user_validates_edit_email_functionality_WRT_member_auth(DataTable  errorText){
+		List<DataTableRow> memberAttributesRow = errorText
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String errorMessageExpected = memberAttributesMap.get("Error Mesage");
+		ProfileandPreferencesPage profilePreferencePage = (ProfileandPreferencesPage) getLoginScenario().getBean(PageConstants.ProfilePreferencesPage);	
+		profilePreferencePage.validateEditEmailWithMemberAuth(errorMessageExpected);
+		
+	}
+
+	@And("^the user validates edit phone functionality WRT member auth$")
+	public void the_user_validates_edit_phone_functionality_WRT_member_auth(DataTable  errorText) {
+		List<DataTableRow> memberAttributesRow = errorText
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String errorMessageExpected = memberAttributesMap.get("Error Mesage");
+		ProfileandPreferencesPage profilePreferencePage = (ProfileandPreferencesPage) getLoginScenario().getBean(PageConstants.ProfilePreferencesPage);
+		profilePreferencePage.validateEditPhoneWithMemberAuth(errorMessageExpected);
+ 	}
 
 }

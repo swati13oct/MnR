@@ -26,6 +26,7 @@ import pages.Global.Member.Footer;
 import pages.dashboard.member.drugcostestimator.blayer.DrugCostEstimatorPage;
 import pages.memberredesign.bluelayer.LoginPage;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.claims.ClaimSummarypage;
 import pages.regression.payments.PaymentHistoryPage;
 
 /**
@@ -33,6 +34,7 @@ import pages.regression.payments.PaymentHistoryPage;
  */
 public class MemberRedesignFooterStepDefinition {
 
+	private static final ClaimSummarypage PaymentHistoryPage = null;
 	@Autowired
 	MRScenario loginScenario;
 
@@ -156,13 +158,117 @@ public class MemberRedesignFooterStepDefinition {
       }
       
       }
-      @And("^the user validates the footer section$")
+      @And("^the user validates the footer section in payments page$")
       public void validate() throws InterruptedException{
     	  Footer footerPage = (Footer) getLoginScenario().getBean(PageConstants.footer_page);
     	  footerPage.validateFooterLinks();
+    	  getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
       }
       
+      @Then("^the user navigates to claims page$")
+      public void user_navigates_to_claims_page(){
+    	 
+    	  Footer footerPage = (Footer) getLoginScenario().getBean(PageConstants.footer_page);
+    	  footerPage.NavigateToClaimsPage();
+    	  
+    	  getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+      }
+      
+      @And("^the user validates the footer section in claims page$")
+      public void user_validates_footer_in_claimsPage() throws InterruptedException{
+    	  Footer footerPage = (Footer) getLoginScenario().getBean(PageConstants.footer_page);
+    	  footerPage.validateFooterLinks();
+    	  getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+      }
+      
+      @Then("^the user navigates to EOB page to validate footer$")
+      public void user_navigates_to_EOB_page(){
+    	  Footer footerPage = (Footer) getLoginScenario().getBean(PageConstants.footer_page);
+    	  footerPage.NavigateToEOBPage();
+    	  getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+      }
+      
+      @And("^the user validates the footer section in EOB page$")
+      public void user_validates_footer_in_EobPage() throws InterruptedException{
+    	  Footer footerPage = (Footer) getLoginScenario().getBean(PageConstants.footer_page);
+    	  footerPage.validateFooterLinks();
+    	  getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+      }
+      
+      @Then("^the user navigates to Pharmacy locator page$")
+      public void user_navigates_to_PharmacyLocator_page(){
+    	  Footer footerPage = (Footer) getLoginScenario().getBean(PageConstants.footer_page);
+    	  footerPage.NavigateToPharmacyLocator();
+    	  getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+      }
+      
+      @And("^the user validates the footer section in pharmacy locator page$")
+      public void user_validates_footer_in_pharmacyLocatorPage() throws InterruptedException{
+    	  Footer footerPage = (Footer) getLoginScenario().getBean(PageConstants.footer_page);
+    	  footerPage.validateFooterLinks();
+    	  getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+      }
+      
+      @Then("^the user navigates to DCE home page$")
+      public void user_navigates_to_DCE_page(){
+    	  Footer footerPage = (Footer) getLoginScenario().getBean(PageConstants.footer_page);
+    	  footerPage.NavigateToDCE();
+    	  getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+      }
+      
+      @And("^the user validates the footer section in DCE page$")
+      public void user_validates_footer_in_DCE() throws InterruptedException{
+    	  Footer footerPage = (Footer) getLoginScenario().getBean(PageConstants.footer_page);
+    	  footerPage.validateFooterLinks();
+    	  getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+      }
+      
+      @Then("^the user navigates to profile and pref page$")
+      public void user_navigates_to_PandP_page(){
+    	  Footer footerPage = (Footer) getLoginScenario().getBean(PageConstants.footer_page);
+    	  footerPage.NavigateToProfileandPref();
+    	  getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+      }
+      
+      @And("^the user validates the footer section in pref page$")
+      public void user_validates_footer_in_PandP() throws InterruptedException{
+    	  Footer footerPage = (Footer) getLoginScenario().getBean(PageConstants.footer_page);
+    	  footerPage.validateFooterLinks();
+    	  getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+      }
+      @Then("^the user navigates to Contact us page$")
+      public void user_navigates_to_contactUS_page(){
+    	  Footer footerPage = (Footer) getLoginScenario().getBean(PageConstants.footer_page);
+    	  footerPage.NavigateToContactUsPage();
+    	  getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+      }
+      
+      @And("^the user validates the footer section in contact us page$")
+      public void user_validates_footer_in_contactUS() throws InterruptedException{
+    	  Footer footerPage = (Footer) getLoginScenario().getBean(PageConstants.footer_page);
+    	  footerPage.validateFooterLinks();
+    	  getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+      }
+      
+      @Then("^the user navigates to Benefits page$")
+      public void user_navigates_to_benefits_page(){
+    	  Footer footerPage = (Footer) getLoginScenario().getBean(PageConstants.footer_page);
+    	  footerPage.NavigateToBenefitsPage();
+    	  getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+      }
+      
+      @And("^the user validates the footer section in Benefits page$")
+      public void user_validates_footer_in_BenefitsPage() throws InterruptedException{
+    	  Footer footerPage = (Footer) getLoginScenario().getBean(PageConstants.footer_page);
+    	  footerPage.validateFooterLinks();
+    	  getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+      }
 }
+    	  
+    	  
+      
+      
+
 
 
 		

@@ -312,7 +312,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id = "step3DisclaimerVPP")
 	public WebElement step3DisclaimerVPP;
 
-	@FindBy(id = "dce")
+	@FindBy(xpath= ".//*[@id='colhowdoesthiswork_dce']//*[@itemprop='significantLink']/*[@class='cta-button secondary']")
 	public WebElement getStarted;
 
 	@FindBy(id = "zipcode-costs")
@@ -381,7 +381,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='subnav_2']//button[@class='zip-button']")
 	public WebElement findPlans;
 	
-	@FindBy(xpath = ".//*[@id='drug-cost-card-acq']/div[2]//*[contains(text(),'EDIT DRUGS LIST')]")
+	@FindBy(id = "atddEditDrugList")
 	public WebElement step3EditDrugsList;
 	
 	@Override
@@ -1703,7 +1703,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		}
 		((JavascriptExecutor)driver).executeScript("arguments[0].click();", returnLink);
 		try {
-			Thread.sleep(10000);
+			Thread.sleep(30000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1748,13 +1748,15 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		driver.navigate().refresh();
+		//driver.navigate().refresh();
 		return new VPPPlanSummaryPage(driver);
 		}else{
 			System.out.println("====================Our Plans tab not displayed================");
 			return null;
 		}
 	}
-	
+	public void clicksOnReturnLink(){
+		returnLink.click();	
+	}
 
 }

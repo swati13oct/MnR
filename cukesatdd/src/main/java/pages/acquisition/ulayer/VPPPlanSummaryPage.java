@@ -59,7 +59,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[3]//span[@class='ng-binding']")
 	private WebElement pdpPlansNumber;
 	
-	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[3]//span[@class='trigger-closed']")
+	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[3]//*[@class='trigger-closed']")
 	private WebElement pdpPlansViewLink;
 
 	@FindBy(xpath = "//div[@class='overview-main']/h2")
@@ -112,7 +112,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[1]//*[@class='trigger-closed']")
 	private WebElement viewPlans;
 	
-	@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='plan-overview-wrapper']/div[2]/div[3]//span[@class='trigger-closed']")
+	@FindBy(xpath = "div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[3]//*[@class='trigger-closed']")
 	private WebElement viewPDPPlans;
 	
 	@FindBy(className = "switchPlanYear")
@@ -159,14 +159,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private WebElement GetStarted;
 	
 
-	@FindBy(xpath="//h3[text()='People']/preceding::div[1]/img")
+	@FindBy(xpath="//*[text()='People']/preceding::div[1]/img")
 	private WebElement People;
 	
-	@FindBy(xpath="//h3[text()='Primary Care']")
+	@FindBy(xpath="//*[text()='Primary Care']")
 	private WebElement Primary;
 	
 	
-	@FindBy(xpath="//a[contains(text(),'Primary Care Physician')]")
+	@FindBy(xpath="//*[contains(text(),'Primary Care Physician')]")
 	private WebElement Physician;
 
 	@FindBy(xpath="//div[contains(@class,'first')]//div[@class='hidden-phone']/button[not(contains(@class,'hidden'))]/span")
@@ -248,11 +248,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 
 	public VPPPlanSummaryPage viewPlanSummary(String planType) {
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+
 		
 		if (planType.equalsIgnoreCase("PDP")) {
 //	WebElement hidePdpPlans invalid
@@ -275,6 +272,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 	
 	public VPPPlanSummaryPage viewPlanSummaryButton(String planType) {
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		if (planType.equalsIgnoreCase("PDP")) {
 			if(validate(showPdpPlans)){
 			showPdpPlans.click();
@@ -298,7 +296,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	public VPPPlanSummaryPage clicksOnIsProviderCovered(String planName) {
 		if (planName.contains("HMO")) {
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 			
 			if(maPlansList!=null){
 			for (WebElement plan : maPlansList) {
@@ -315,7 +313,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 					//findChildElement(elementData, plan).click();
 					
-					WebElement ProviderSearchLink = driver.findElement(By.xpath("//h2[contains(text(),'"+planName+"')]/following::a[contains(text(),'Is')][1]"));
+					WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/following::a[contains(text(),'Is my provider covered')]"));
 					System.out.println(ProviderSearchLink.getText());
 					ProviderSearchLink.click();
 
@@ -392,9 +390,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	public boolean providerinfo(String planName)
 	{
-		
+		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		WebElement ProviderSearchLink1 = driver.findElement
-				(By.xpath("//h2[contains(text(),'"+planName+"')]/following::span[contains(text(),'covered')][1]"));
+				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide ng-scope')]/descendant::span[contains(text(),'covered')]"));
 		String mproviderinfo=ProviderSearchLink1.getText();
         System.out.println(mproviderinfo);
 		if(mproviderinfo.contains("1 providers covered"))
@@ -752,33 +750,24 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		driver.manage().window().maximize();
 	
 		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {	
-		WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//h2[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@id = 'viewmoredetlinkmapd' or @id='viewmoredetlinkmapdplan']"));
+		WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//a[contains(text(),'View plan and drug coverage details')]"));
 			validate(MAmoreDetailsLink);
 			MAmoreDetailsLink.click();
 			System.out.println("View Plan Details Link is clicked for MA plan"+planName);
 
 
 		} else if (planType.equalsIgnoreCase("PDP")) {
-//			ElementData elementData = new ElementData("id", "viewmoredetlinkpdp");
-//			WebElement element = getViewPlanDetailsElement(pdpPlanElement, elementData, planName);
 			WebElement PDPmoreDetailsLink = driver.findElement(By.xpath("//h2[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@id = 'viewmoredetlinkpdp']"));
 			validate(PDPmoreDetailsLink);
 			PDPmoreDetailsLink.click();
 			System.out.println("View Plan Details Link is clicked for PDP plan"+planName);
 			
-/*			if (element != null) {
-				element.click();
-			}
-*/
 		}
 		
 		CommonUtility.checkPageIsReady(driver);
-		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_AARPMP)
-				|| driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_PLAN_DETAIL) || validate(backToPlansLink)) {
-				//|| driver.getTitle().equalsIgnoreCase("Plan Detail") || driver.getCurrentUrl().contains("/details")) {
+		if (driver.getCurrentUrl().contains("#/details")) {	
 			return new PlanDetailsPage(driver);
 		}
-
 		return null;
 	}
 	
@@ -970,7 +959,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		System.out.println("Plan Name is : "+PlanName);
 		
-		WebElement PremiumForPlan = driver.findElement(By.xpath("//h2[contains(text(), '"+PlanName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//li[contains(text(),'Monthly Premium')]//span[contains(text(),'$')]"));
+		WebElement PremiumForPlan = driver.findElement(By.xpath("//h3[contains(text(), '"+PlanName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//li[contains(text(),'Monthly Premium')]//span[contains(text(),'$')]"));
 		String PlanPremium = PremiumForPlan.getText();
 		
 		System.out.println("Premium for Plan : "+PlanPremium);
@@ -987,7 +976,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public WelcomePage Enroll_OLE_Plan(String planName) throws InterruptedException {
 		
 		System.out.println("Enroll in Plan for Plan : "+planName);
-		WebElement EnrollForPlan = driver.findElement(By.xpath("//h2[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(), 'Enroll in plan')]"));
+		WebElement EnrollForPlan = driver.findElement(By.xpath("//h3[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(), 'Enroll in plan')]"));
 		try {
 		validate(EnrollForPlan);
 		
@@ -1059,6 +1048,19 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return null;
 	}
 
+	public DrugCostEstimatorPage navigateToDCEFromVPP(String plantype, String planName){
+		if(plantype.equals("MA")||plantype.equals("MAPD")){
+			WebElement dceLink = driver.findElement
+					(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide ng-scope')]/descendant::a[contains(text(),'Enter drug information')]"));
+			if(validate(dceLink))
+				dceLink.click();
+			
+		}else{}
+		
+		if(currentUrl().contains("/estimate-drug-costs.html#/drug-cost-estimator"))
+			return new DrugCostEstimatorPage(driver);
+		return null;
+	}
 }
 
 	

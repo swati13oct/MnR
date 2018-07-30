@@ -16,6 +16,7 @@ import java.util.Map;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+
 //import pages.member.bluelayer.AccountHomePage;
 //import pages.member.bluelayer.ProfilePageHsid;
 import pages.regression.accounthomepage.AccountHomePage;
@@ -155,17 +156,5 @@ public void security_and_password_reset_link_should_not_be_visible() throws Thro
 	profilePageHsid.validateHealthSafePasswordLinkNOTPresent();
 	profilePageHsid.validateHealthSafeAccountLinkNOTPresent();
 	
-}
-/**
- * This methods quits the web driver and flushes all saved beans.
- * Essentially a destructor.
- */
-@After
-public void tearDown() {
-WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-if (wd != null) {
-    wd.quit();
-}
-getLoginScenario().flushBeans();
 }
 }

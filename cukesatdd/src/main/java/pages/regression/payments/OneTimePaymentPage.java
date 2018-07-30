@@ -107,7 +107,7 @@ public class OneTimePaymentPage extends UhcDriver{
 		otheramountfield.click();
 		
 		otheramountfield.clear();		
-		otheramountfield.sendKeys("1.12");
+		otheramountfield.sendKeys();
 		
 		routingNumberField.click();
 		routingNumberField.clear();
@@ -213,7 +213,7 @@ public class OneTimePaymentPage extends UhcDriver{
 	    
 	     System.out.println(driver.getTitle());
 	     
-	    if(driver.getTitle().equalsIgnoreCase("overview") || driver.getTitle().equalsIgnoreCase("AARP Medicare Plans from UnitedHealthCare - overview")){
+	    if(driver.getTitle().equalsIgnoreCase("overview") || driver.getTitle().equalsIgnoreCase("Premium Payments") || driver.getTitle().equalsIgnoreCase("AARP Medicare Plans from UnitedHealthCare - Premium Payments")){
 	    	System.out.println("Validated review page title");
 	            return new ConfirmOneTimePaymentPage(driver);
 	    }

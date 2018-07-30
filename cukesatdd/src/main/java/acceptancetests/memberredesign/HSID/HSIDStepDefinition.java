@@ -29,13 +29,13 @@ import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
 import pages.redesign.HsidRegistrationPersonalCreateAccount;
 import pages.regression.accounthomepage.AccountHomePage;
-import pages.member.bluelayer.AssistiveRegistrationPage;
-import pages.member.bluelayer.BenefitsAndCoveragePage;
+import pages.regression.login.AssistiveRegistrationPage;
+import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.member.bluelayer.DashboardPage;
-import pages.member.bluelayer.HSIDLoginPage;
+import pages.regression.login.HSIDLoginPage;
 import pages.member.bluelayer.LoginPage2;
 import pages.member.ulayer.ValueAddedServicepage;
-import pages.member.redesign.DeregisterPage;
+import pages.regression.login.DeregisterPage;
 
 /**
  * Functionality: Benefits and Coverage page
@@ -50,13 +50,10 @@ public class HSIDStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
- 
-	
 
-
-	
 	@And("^login with following details logins in the member portal and validate elements$")
 	public void login_with_member(DataTable memberAttributes) throws InterruptedException {
+		
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -76,7 +73,11 @@ public class HSIDStepDefinition {
 
 		}
 		System.out.println("desiredAttributes.." + desiredAttributes);
-
+		if(desiredAttributes.size()>1)
+		{
+		getLoginScenario().saveBean(LoginCommonConstants.MEMBERTYPE, desiredAttributes.get(1));
+		}
+		
 		Map<String, String> loginCreds = loginScenario.getUMSMemberWithDesiredAttributes(desiredAttributes);
 		String userName = null;
 		String pwd = null;
@@ -94,7 +95,7 @@ public class HSIDStepDefinition {
 			
 		}
          
-		WebDriver wd = getLoginScenario().getWebDriverNew();
+		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		HSIDLoginPage loginPage = new HSIDLoginPage(wd);
 		loginPage.validateelements();
@@ -115,6 +116,12 @@ public class HSIDStepDefinition {
 		else {
 			Assert.fail("***** Error in loading  Assistive Registration Page *****");
 		}*/
+		try {
+			accountHomePage.feebackpopupClose();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 	

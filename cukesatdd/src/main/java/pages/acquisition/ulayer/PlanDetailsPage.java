@@ -83,6 +83,9 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(id="plancosts")
 	private WebElement planCostsTab;
 	
+	@FindBy(id = "optionalservices")
+    private WebElement ridersTab;
+	
 	//Right Rail Element - TFN
 	@FindBy(xpath="//*[@class='tel ng-binding']")
 	private WebElement RightRail_TFN;
@@ -148,11 +151,11 @@ public class PlanDetailsPage extends UhcDriver {
 
 	
 
-	public VPPPlanSummaryPage backtoPlanSummary(String planType) {
+	public VPPPlanSummaryPage backtoPlanSummary() {
 		validate(backToAllPlans);
 		if(backToAllPlans != null){
 		backToAllPlans.click();		
-		return new VPPPlanSummaryPage(driver, planType);
+		return new VPPPlanSummaryPage(driver);
 		}
 		
 	return null;
@@ -297,6 +300,12 @@ public class PlanDetailsPage extends UhcDriver {
 	}
 
 	public boolean validateCompareBoxMessage() {
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		JavascriptExecutor je = ((JavascriptExecutor) driver);
 		je.executeScript("arguments[0].scrollIntoView(true);",compareChkBox);
 		CommonUtility.waitForPageLoad(driver, drugBenefitsSection, 20);
@@ -425,4 +434,13 @@ public String GetTFNforPlanType() {
 	return null;
 }
 
+public void clickOnDrugTab(){
+	presDrugTab.click();
+}
+public void clickOnRidersTab(){
+	ridersTab.click();
+}
+public void clickOnPlanCostsTab(){
+	planCostsTab.click();
+}
 }

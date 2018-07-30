@@ -14,10 +14,10 @@ import cucumber.api.CucumberOptions;
  */
 
 @RunWith(ExtendedParallelCucumber.class)
-@ExtendedCucumberOptions(threadsCount=15, screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunBuildAcceptanceTest.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunBuildAcceptanceTest")
+@ExtendedCucumberOptions(threadsCount=15, screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunBuildAcceptanceParallelTest.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunBuildAcceptanceParallelTest")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.vbfacquisition" }, features = { "src/main/resources/feature/vbfacquisition" }, plugin = {
-		"html:reports/test-report", "json:target/cucumber-RunBuildAcceptanceTest.json" }, tags = { "@BAT_CommunityMeetings,@BAT_AgentAppointment,@BAT_acq_providersearch,@BAT_acq_pharmacylocator" })
+		"html:reports/test-report", "json:target/cucumber-RunBuildAcceptanceParallelTest.json" }, tags = { "@pharmacylocatorblayer,@communityMeeting_UHC,@OLE_Ulayer,@BAT_AgentAppointment" })
 public class RunBuildAcceptanceParallelTest {
 
-	//@BAT_acq_dce,@BAT_acq_providersearch,@BAT_acq_pharmacylocator,@BAT_CommunityMeetings,
+	//@globalfooter,@AcqProviderSearchUlayer,@pharmacylocatorblayer,@pharmacylocatorUHC,@OLE_Ulayer,@OLE_UHC,@BAT_CommunityMeetings,@BAT_AgentAppointment
 }
