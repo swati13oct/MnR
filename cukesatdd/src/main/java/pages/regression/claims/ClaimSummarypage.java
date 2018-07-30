@@ -884,9 +884,26 @@ public void NavigateToClaimsPage(){
 				return new pages.regression.claims.ClaimDetailsPage(driver);
 		
 			}
+
 			return null;
 		}
+		
 
+			
+
+		
+
+		public 	 ClaimSummarypage comboTabSelection1(){
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			for (WebElement webElement : comboTabsOnclaimsPage) {
+				System.out.println(webElement.getText());
+				webElement.click();
+				
 
 }
 

@@ -144,18 +144,27 @@ public class LoginPage extends UhcDriver {
 	}*/
 
 	// Updated loginWith to include RallyDashboard navigation
-		public SecurityQuestionsPage loginWith(String username, String password) throws InterruptedException {
-			sendkeysNew(hsiduserNameField, username);
-			sendkeysNew(hsidpasswordField, password);
-			signInHsidButton.click();
-			System.out.println("Sign In clicked");
-			try {
-				Alert alert = driver.switchTo().alert();
-				alert.accept();
-				Alert alert1 = driver.switchTo().alert();
-				alert1.accept();
-			} catch (Exception e) {
-				System.out.println("No Such alert displayed");
+	public SecurityQuestionsPage loginWith(String username, String password) throws InterruptedException {
+		sendkeysNew(hsiduserNameField, username);
+		sendkeysNew(hsidpasswordField, password);
+		signInHsidButton.click();
+		System.out.println("Sign In clicked");
+		try {
+			Alert alert = driver.switchTo().alert();
+			alert.accept();
+			Alert alert1 = driver.switchTo().alert();
+			alert1.accept();
+		} catch (Exception e) {
+			System.out.println("No Such alert displayed");
+		}
+		int counter = 0;
+		do {
+			if (counter <= 9) {
+				Thread.sleep(5000);
+				System.out.println("Time elapsed post sign In clicked --" + counter + "*5 sec.");
+			} else {
+				System.out.println("TimeOut!!!");
+				return null;
 			}
 			int counter = 0;
 			do {

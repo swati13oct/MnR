@@ -141,8 +141,8 @@ public class ProfileandPreferencesStepDefinition {
 	 * 
 	 * @throws InterruptedException
 	 */
-	@And("^the user clicks on Edit Preferences$")
-	public void user_click_editPreferences_link() throws InterruptedException {
+	@And("^the user clicks on Edit Preferences for EPMP$")
+	public void user_click_editPreferences_link_EPMP() throws InterruptedException {
 		ProfilePreferencesPage ProfilePreferencesPage = (pages.memberrdesignVBF.ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstants.ProfilePreferencesPage);
 
@@ -150,6 +150,21 @@ public class ProfileandPreferencesStepDefinition {
 
 	}
 
+	/***
+	 * 
+	 * @throws InterruptedException
+	 */
+	@And("^the user clicks on Edit Preferences$")
+	public void user_click_editPreferences_link() throws InterruptedException {
+		ProfilePreferencesPage ProfilePreferencesPage = (pages.memberrdesignVBF.ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstants.ProfilePreferencesPage);
+
+		CommunicationPreferencePage communicationPrefPage = ProfilePreferencesPage.clickEditPreferencesButton();
+		if (communicationPrefPage != null)
+			getLoginScenario().saveBean(PageConstants.COMMUNICATION_PREFERENCE_PAGE, communicationPrefPage);				
+			else
+				Assert.fail("Error in validating communication preferences page");	
+	}
 	/**
 	 * @toDo : The user clicks on health safe Id password
 	 */

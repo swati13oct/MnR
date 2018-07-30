@@ -62,7 +62,7 @@ public class ContactUsPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//div[@class='message-block--full-width success margin-none']")
 	private WebElement reqConfirmation;
 
-	@FindBy(xpath = "//header//h1")
+	@FindBy(xpath = "//h1[contains(text(),'Contact')]")
 	private WebElement heading;
 
 	@FindBy(xpath = "//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))]//a[@id='question-btn']")
@@ -79,7 +79,20 @@ public class ContactUsPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='call-number']")
 	private WebElement clickToCallInputNum;
-
+	
+	@FindBy(xpath = "//a[contains(@class,'goToInbox') and @ng-show='isSecureMailBoxEnabled'][not(contains(@class,'ng-hide'))]")
+	private List<WebElement> goToInboxButton;
+	
+	@FindBy(xpath = "//div[@id='messageModal']//button/span[text()='CONTINUE']")
+	private WebElement btnContinue;
+	
+	@FindBy(id = "compose-button")
+	private WebElement messengerComposeBtn;
+	
+	@FindBy(id = "signed-in")
+	private WebElement messengerSignIn;
+	
+	
 	public ContactUsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);

@@ -48,12 +48,12 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 	/***
 	 * 
 	 */
-	@When("^I should see the H&W Generic dashboard and lifestyle,learning and rewards L2 tabs$")
+	@When("^I should see the H&W Generic dashboard and lifestyle,learning and rewards$")
 	public void I_should_see_the_H_W_Generic_dashboard_and_tabs() {
 		// Express the Regexp above with the code you wish you had
 		HealthAndWellness healthnWellnessPage = (HealthAndWellness) getLoginScenario()
 				.getBean(PageConstants.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE);
-		healthnWellnessPage.validateHnWDashboardnL2Tabs();
+		healthnWellnessPage.validateHnWDashboard();
 
 	}
 
@@ -82,5 +82,24 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 		healthnWellnessPage.validateLearningPage();
 
 	}
+	@When("^user then click again on health and wellness tab$")
+	public void user_then_click_again_health_and_wellness_tab() throws InterruptedException {
+		HealthAndWellness healthAndWellness;
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
 
+			healthAndWellness = testHarness.clickHealthnWellnessTab();
+		} else {
+			RallyDashboardPage rallyDashboardPage = (RallyDashboardPage) getLoginScenario()
+					.getBean(PageConstants.RALLY_DASHBOARD_PAGE);
+			healthAndWellness = rallyDashboardPage.clickHealthnWellnessSecondaryTab();
+		}
+		if (healthAndWellness != null) {
+			getLoginScenario().saveBean(PageConstants.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE, healthAndWellness);
+		}
+		if (healthAndWellness == null) {
+			System.out.println(" Variable is NULL!");
+			Assert.fail();
+		}
+	}
 }

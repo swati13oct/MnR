@@ -39,7 +39,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	public ProfileandPreferencesPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-
+		openAndValidate();
 	}
 
 	public PageData ProfileandPreferences;
@@ -88,8 +88,9 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(id = "passwordNotMatch-error")
 	private WebElement passworderrormessage3;
 
-	@FindBy(xpath = ".//*[@id='email' or @id='emailCardHeight']/div[1]/p")
+	@FindBy(xpath = ".//*[@id='email' or @id='emailCardHeight']/div[1]/h4")
 	private WebElement EmailLabel;
+
 
 	@FindBy(id = "emailview")
 	private WebElement emailBoxUhc;
@@ -585,7 +586,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@class='col-sm-12 editEmail margin-small']/span[3]")
 	private WebElement emailAddressRightArrow;
 
-	@FindBy(xpath = "//*[@id='email']/div[1]/p")
+	@FindBy(xpath = "//*[@id='email']/div[1]/h4")
 	private WebElement emailAddressHeader;
 
 	@FindBy(xpath = "//*[@class='edit-btn edit-btn-email']")
@@ -606,7 +607,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(id = "profileemailaddress")
 	private WebElement updatedEmailAfterSave;
 
-	@FindBy(xpath = "//*[@id='email']/div[1]/p/span")
+	@FindBy(xpath = "//*[@id='email']/div[1]/h4/span")
 	private WebElement backButtonOnEmailField;
 
 	@FindBy(xpath = "//*[@class='ng-scope emailShip']")
@@ -615,8 +616,9 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='col-sm-12 margin-small editEmail']/div[1]/span[4]")
 	private WebElement phoneRightArrowShip;
 
-	@FindBy(xpath = "//*[@id='phone']/div[1]/p")
+	@FindBy(xpath = "//*[@id='phone']/div[1]/h4")
 	private WebElement phoneNumberHeader;
+
 
 	@FindBy(xpath = "//a[@class='edit-btn']")
 	private WebElement phoneEditIcon;
@@ -639,7 +641,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='phone']/div[2]/div[1]/div[2]/div/span[2]")
 	private WebElement updatedEvetimePhoneAfterSave;
 
-	@FindBy(xpath = "//*[@id='phone']/div[1]/p/span")
+	@FindBy(xpath = "//*[@id='phone']/div[1]/h4/span")
 	private WebElement backButtonOnPhoneShip;
 
 	@FindBy(id = "permanenet")

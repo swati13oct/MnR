@@ -111,8 +111,8 @@ Then the user validates EOB count
        | MAPD        | NICE_EOB_R      | 18 Months |Medical  |     1     |
        | MA          | COSMOS_EOB_R      | 18 Months |Medical  |     16     |
        | PDPI         | COSMOS_EOB_R     | 18 Months |Medical  |     0     |
-       | SHIP_ACTIVE  | SHIP_EOB      | 12-18 Months |Medical  |     1     |
-       | SHIP_Termnated| SHIP_EOB      | 12-18 Months |Medical  |     1     |
+       | SHIP_ACTIVE  | SHIP_EOB      | 6-12 Months |Medical  |     1     |
+       | SHIP_Termnated| SHIP_EOB      | 6-12 Months |Medical  |     1     |
        | MAPD          | NICETermin_EOB_R | 18 Months |Medical  |     1     |
        
 @regression_06_06_18FnF

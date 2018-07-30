@@ -405,6 +405,12 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.6</version>
 		</dependency>
+		<dependency>
+    <groupId>com.saucelabs</groupId>
+    <artifactId>saucerest</artifactId>
+    <version>1.0.38</version>
+    <scope>test</scope>
+  </dependency>
 	</dependencies>
 	
 </project>
