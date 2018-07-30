@@ -3,6 +3,9 @@ package pages.memberrdesignVBF;
 /**
  * 
  */
+import java.util.List;
+import java.util.regex.Pattern;
+
 import junit.framework.Assert;
 
 import org.openqa.selenium.WebDriver;
@@ -24,6 +27,9 @@ public class ClaimDetailsPage extends UhcDriver {
 
 	@FindBy(css = ".claimsTotalTable")
 	public WebElement claimstotalTable;
+	
+	@FindBy(xpath = "//div[@class='claimDetTableMainSection']//div[@class='card-body']//div/p[contains(text(),'$')]")
+	public List<WebElement> claimTableValues;
 
 	public ClaimDetailsPage(WebDriver driver) {
 		super(driver);
@@ -54,8 +60,6 @@ public class ClaimDetailsPage extends UhcDriver {
 				throw new IllegalArgumentException("Invalid String");
 			}
 		}
-	}
-
 	}
 
 	/***

@@ -71,6 +71,8 @@ public class ProfilePreferencesPage extends UhcDriver {
     
     @FindBy(xpath = "//*[@id='header']/h1/a")
     private WebElement breadCrumbToNavigateBack;
+    
+    public static boolean isPaperLessSelected = false;
 
 	public ProfilePreferencesPage(WebDriver driver) {
 		super(driver);
@@ -156,12 +158,18 @@ public class ProfilePreferencesPage extends UhcDriver {
 		validateNew(GoGreenText);
 	}
 
+	
 	/***
 	 * 
 	 */
-	public void clickEditPreferencesButton() {
+	public CommunicationPreferencePage  clickEditPreferencesButton() {
 		validateNew(EditPreferenceButton);
 		EditPreferenceButton.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("preferences")) {
+			return new CommunicationPreferencePage(driver);
+		}
+		return null;
 	}
 	
     public void validateHealthSafeIdLink() throws InterruptedException {

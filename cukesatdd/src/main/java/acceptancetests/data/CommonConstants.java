@@ -852,7 +852,6 @@ public class CommonConstants {
 	public static final String ACCOUNT_USER_NAME = null;
 
 	public static final String IS_TESTHARNESS = "IS_TESTHARNESS";
-	public static final String IS_TESTHARNESS = "istestharness";
 
 	public static final String COMMONSTEPDEFINITIONMEMVBF = "commonStepDefinition";
 	public static final String IS_HSID_COMPATIBLE	 = "isHSIDCompatible";

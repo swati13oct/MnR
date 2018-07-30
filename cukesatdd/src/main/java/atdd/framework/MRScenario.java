@@ -80,6 +80,7 @@ public class MRScenario {
 	private static Map<String, Map<String, JSONObject>> expectedDataMapBluelayer = new LinkedHashMap<String, Map<String, JSONObject>>();
 	public static String environment;
 	public static String environmentMedicare;
+	public static String isHSIDCompatible;
 	public static String isTestHarness;
 	public static String domain;
 	private static final String DIRECTORY = "/src/main/resources/";

@@ -1,5 +1,7 @@
 package pages.memberrdesignVBF;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -8,22 +10,23 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.data.CommonConstants;
+import acceptancetests.memberrdesignVBF.common.CommonStepDefinition;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 public class RallyDashboardPage extends UhcDriver {
-
 	@FindBy(id = "findcarecost2")
 	private WebElement panelFindCareCost1;
 
 	@FindBy(xpath = "(//nav[@id='main-nav']//a[contains(text(),'Find Care')])[1]")
-	private WebElement panelFindCareCost;
+	private List<WebElement> panelFindCareCost;
 
 	@FindBy(xpath = "(//nav[@id='main-nav']//a[contains(text(),'Coverage & Benefits')])[1]")
 	private WebElement panelBnC;
 
 	@FindBy(xpath = "(//nav[@id='main-nav']//a[contains(text(),'Premium Payments')])[1]")
-	private WebElement panelPremiumPayment;
+	private List<WebElement> panelPremiumPayment;
 
 	@FindBy(xpath = "(//nav[@id='main-nav']//a[contains(text(),'Home')])[1]")
 	private WebElement panelHome;
@@ -49,8 +52,14 @@ public class RallyDashboardPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='ui-view-page']//span[contains(text(),'Claims')]")
 	private WebElement Claims_Dashboard;
 
+	@FindBy(xpath = "//div[@id='ui-view-page']//span[contains(text(),'Discounts')]")
+	private WebElement discount_Dashboard;
+
 	@FindBy(xpath = "//div[@id='ui-view-page']//span[contains(text(),'Find a Provider')]")
 	private WebElement provider_Dashboard;
+
+	@FindBy(xpath = "//div[@id='ui-view-page']//span[contains(text(),'EOB')]")
+	private WebElement EobTile_Dashboard;
 
 	@FindBy(xpath = "//span[contains(text(),'Locate a Pharmacy')]/ancestor::a/img")
 	private WebElement PharmacyLocator_Dashboard;
@@ -60,6 +69,12 @@ public class RallyDashboardPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@id='ui-view-page']//a[@track='VIEW_DOCUMENTS_AND_RESOURCES']")
 	private WebElement formsResources_Dashboard;
+
+	@FindBy(xpath = "//div[@id='ui-view-page']//div[@class='container']//a[@track='VIEW_DISCOUNTS_AND_SERVICES']")
+	private WebElement discountLink_Dashboard;
+
+	@FindBy(xpath = "//div[@id='ui-view-page']//div[@class='container']//a[@track='AARP']")
+	private WebElement aarpOrg_Dashboard;
 
 	@FindBy(xpath = "//div[@id='ui-view-page']//a[@track='ORDER_MATERIALS']")
 	private WebElement OrderMaterials_Dashboard;
@@ -73,7 +88,7 @@ public class RallyDashboardPage extends UhcDriver {
 	@FindBy(className = "promo-tile")
 	private WebElement promoTile_Dashboard;
 
-	@FindBy(xpath = "//h1[@class='h4 margin-none']")
+	@FindBy(xpath = "//h1[contains(@class,'margin-none')]")
 	private WebElement orderplanHeadertxt;
 
 	@FindBy(xpath = "//sticky[@id='sticky-nav']//nav[@id='main-nav']//a[contains(text(),'Coverage & Benefits')]")
@@ -106,7 +121,7 @@ public class RallyDashboardPage extends UhcDriver {
 	@FindBy(id = "premiumpayment_3")
 	private WebElement premiumPayment;
 
-	@FindBy(id = "healthwellness_3")
+	@FindBy(id = "healthwellness_4")
 	private WebElement healthWellness;
 
 	@FindBy(id = "Help")
@@ -115,8 +130,17 @@ public class RallyDashboardPage extends UhcDriver {
 	@FindBy(id = "accountprofile")
 	private WebElement accountProfile;
 
+	@FindBy(className = "menuL1")
+	private WebElement header;
+
 	@FindBy(id = "arcade-footer")
 	private WebElement footerSection;
+
+	@FindBy(xpath = "//*[@id='IPEinvL']/map/area[3]")
+	private static WebElement FeedbackModal;
+
+	@FindBy(xpath = "//area[@href='javascript:clWin()'][@alt = 'no']")
+	private static List<WebElement> FeedbackModalList;
 
 	@FindBy(linkText = "Help & Contact Us")
 	private WebElement helpnContactUs;
@@ -151,17 +175,28 @@ public class RallyDashboardPage extends UhcDriver {
 	@FindBy(partialLinkText = "Asistencia de Idiomas | Aviso de no Discriminación (PDF)")
 	private WebElement languageAssistanceSpanish;
 
-	@FindBy(xpath = "//a[starts-with(@id,'ACCdropdown_') and contains(text(),'Log Out')]")
+	@FindBy(xpath = "//ul[@id='dropdynamic']//a[contains(text(),'Log Out')]")
 	private WebElement NavAccountProfSignOut;
 
-	@FindBy(xpath = "//a[starts-with(@id,'ACCdropdown_') and contains(text(),'Account Settings')]")
+	@FindBy(xpath = "//ul[@id='dropdynamic']//a[contains(text(),'Account Settings')]")
 	private WebElement NavAccountProfSetting;
 
 	@FindBy(xpath = "//h2[text() = 'Common Services & Costs']")
-	private WebElement CommonCostServiceHeading;
+	private List<WebElement> CommonCostServiceHeading;
 
 	@FindBy(className = "cost-col")
-	private WebElement CommonCostTable;
+	private List<WebElement> CommonCostTable;
+
+	@FindBy(xpath = "//div[@class='id-card-links']/ul[contains(@class,'account-info')]/li/span")
+	private List<WebElement> memberIDs;
+
+	@FindBy(xpath = "//div[contains(@class,'costs')]//div[@class='cost-col ng-scope no-cost-items']/a[contains(text(),'View plan detail')]")
+	private WebElement commonCostSectionShip;
+
+	@FindBy(xpath = "(//div[@class='inactive-coverage-status ng-scope']//span[contains(text(),'Coverage Ended:')])[1]")
+	private WebElement coverageEndedText;
+
+	String category = null;
 
 	public RallyDashboardPage(WebDriver driver) {
 		super(driver);
@@ -171,11 +206,16 @@ public class RallyDashboardPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
+		category = CommonStepDefinition.getMemberAttributeMap().get("Member Type");
 		checkModelPopup(driver);
 		CommonUtility.waitForPageLoadNew(driver, panelHome, 60);
 		validateNew(panelClaims);
 		validateNew(panelHome);
 		validateNew(HelloMessage);
+
+		if (category != null && category.contains(CommonConstants.CATEGORY_TERMIATED)) {
+			validateNew(coverageEndedText);
+		}
 	}
 
 	/***
@@ -185,10 +225,10 @@ public class RallyDashboardPage extends UhcDriver {
 	 */
 	public PaymentsOverview navigateToPaymentOverview() throws InterruptedException {
 		System.out.println("Inside navigateToPaymentOverview functions");
-		validateNew(panelPremiumPayment);
-		panelPremiumPayment.click();
+		validateNew(panelPremiumPayment.get(0));
+		panelPremiumPayment.get(0).click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getTitle().equalsIgnoreCase("Overview")) {
+		if (driver.getTitle().contains("Payment")) {
 			return new PaymentsOverview(driver);
 		}
 		return null;
@@ -207,7 +247,7 @@ public class RallyDashboardPage extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println(driver.getTitle());
 
-		if (driver.getTitle().equalsIgnoreCase("Profile")) {
+		if (driver.getTitle().contains("Profile")) {
 			System.out.println("Pass!");
 			return new ProfilePreferencesPage(driver);
 		}
@@ -219,7 +259,6 @@ public class RallyDashboardPage extends UhcDriver {
 	 * @return
 	 */
 	public BenefitsAndCoveragePage navigateDirectToBnCPag() {
-
 		validateNew(BnClink);
 		BnClink.click();
 
@@ -316,7 +355,7 @@ public class RallyDashboardPage extends UhcDriver {
 		validateNew(Claims_Dashboard);
 		Claims_Dashboard.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getTitle().equalsIgnoreCase("Claims")) {
+		if (driver.getTitle().contains("Claims")) {
 			return new ClaimSummarypage(driver);
 		}
 		return null;
@@ -351,7 +390,7 @@ public class RallyDashboardPage extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		panelClaims.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getTitle().equalsIgnoreCase("Claims")) {
+		if (driver.getTitle().contains("Claims")) {
 			return new pages.memberrdesignVBF.ClaimSummarypage(driver);
 		}
 		return null;
@@ -432,11 +471,11 @@ public class RallyDashboardPage extends UhcDriver {
 	 */
 	public void validateAccountProfile() {
 		Assert.assertTrue("Account/Profile tab is not displayed", accountProfile.isDisplayed());
-		accountProfile.click();
+		jsClickNew(accountProfile);
 		validateNew(NavAccountProfSignOut);
 		validateNew(NavAccountProfSetting);
 		scrollToView(accountProfile);
-		accountProfile.click();
+		jsClickNew(accountProfile);
 	}
 
 	/***
@@ -458,7 +497,7 @@ public class RallyDashboardPage extends UhcDriver {
 	 */
 	public HealthAndWellness validateHealthnWellnessPage() {
 		validateNew(healthWellness);
-		healthWellness.click();
+		jsClickNew(healthWellness);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getTitle().contains("Health")) {
 			return new HealthAndWellness(driver);
@@ -514,10 +553,10 @@ public class RallyDashboardPage extends UhcDriver {
 
 	public static void checkModelPopup(WebDriver driver) {
 		int counter = 0;
-		System.out.println("Initial value of conter: " + counter);
 		do {
 
 			System.out.println("current value of conter: " + counter);
+			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
 
 			if (IPerceptionsFrame.isEmpty()) {
 				// if
@@ -527,17 +566,6 @@ public class RallyDashboardPage extends UhcDriver {
 					Thread.sleep(5000);
 				} catch (InterruptedException e) {
 					System.out.println(e.getMessage());
-			else {
-				System.out.println("FeedBack Modal Present and counter value is:" + counter);
-				try {
-					Thread.sleep(2000);
-					WebElement NoThanks = driver.findElement(By.xpath("//*[@id='IPEinvL']/map/area[3]"));
-					JavascriptExecutor js = (JavascriptExecutor) driver;
-					js.executeScript("arguments[0].scrollIntoView();", NoThanks);
-					js.executeScript("arguments[0].click();", NoThanks);
-					break;
-				} catch (InterruptedException e) {
-					e.printStackTrace();
 				}
 				/*
 				 * } else { System.out.println(
@@ -557,7 +585,7 @@ public class RallyDashboardPage extends UhcDriver {
 				driver.switchTo().defaultContent();
 			}
 			counter++;
-		} while (counter < 1);
+		} while (counter < 2);
 	}
 
 	/***
@@ -601,27 +629,74 @@ public class RallyDashboardPage extends UhcDriver {
 	 * @param Category
 	 */
 	public void validateDashboardElements(String Category) {
+
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (!(("Ship").equalsIgnoreCase(Category))) {
-			validateNew(panelFindCareCost);
+		if (Category.contains(CommonConstants.CATEGORY_TERMIATED)) {
+			Assert.assertTrue("Common Cost Service Heading not display", CommonCostServiceHeading.isEmpty());
+			Assert.assertTrue("Common Cost Service table not display", CommonCostTable.isEmpty());
+			Assert.assertTrue("Find Care and Cost not display", panelFindCareCost.isEmpty());
+			validateNew(HelloMessage);
+			validateNew(EobTile_Dashboard);
+			validateNew(Claims_Dashboard);
+			validateNew(IDLinkDashboard);
+			validateNew(EOB_Dashboard);
+			validateNew(formsResources_Dashboard);
+			validateNew(ContactUsLink);
+			validateNew(helpnContactUs);
+			validateNew(accountnSettings);
+
+		} else {
+			if (!(("Ship").equalsIgnoreCase(Category))) {
+				validateNew(panelFindCareCost.get(0));
+			}
+			if (!(("GroupRetireeMapd").equalsIgnoreCase(Category))) {
+				validateNew(panelPremiumPayment.get(0));
+			}
+			if (("ComboMAPDANDSHIP").equalsIgnoreCase(Category)) {
+				validateNew(memberIDs.get(0));
+				Assert.assertTrue("The first member ID:" + memberIDs.get(0).getText() + " is a non ship plan",
+						memberIDs.get(0).getText().contains("-00"));
+				validateNew(memberIDs.get(1));
+				Assert.assertTrue("The first member ID:" + memberIDs.get(1).getText() + " is a ship plan",
+						memberIDs.get(1).getText().contains("-11"));
+				validateNew(commonCostSectionShip);
+				/*
+				 * validateNew(discount_Dashboard);
+				 * validateNew(discountLink_Dashboard);
+				 */
+				validateNew(aarpOrg_Dashboard);
+			}
+			validateNew(panelClaims);
+			validateNew(panelHealth);
+			validateNew(accountToggleDropdown);
+			validateNew(Claims_Dashboard);
+			validateNew(IDLinkDashboard);
+			validateNew(CommonCostServiceHeading.get(0));
+			validateNew(CommonCostTable.get(0));
+			validateNew(formsResources_Dashboard);
+			validateNew(OrderMaterials_Dashboard);
+			validateNew(promoTile_Dashboard);
+			validateNew(ContactUsLink);
+			validateNew(HelloMessage);
+			validateNew(helpnContactUs);
+			validateNew(accountnSettings);
 		}
-		if (!(("GroupRetireeMapd").equalsIgnoreCase(Category))) {
-			validateNew(panelPremiumPayment);
+	}
+
+	/***
+	 * 
+	 * @return
+	 */
+	public FormsAndResourcesPage navigateDirectToFnRPage() {
+		if (category.contains(CommonConstants.CATEGORY_TERMIATED)) {
+			validateNew(BnClink);
+			BnClink.click();
+		} else {
+			validateNew(formsResources_Dashboard);
+			formsResources_Dashboard.click();
 		}
-		validateNew(panelClaims);
-		validateNew(panelHealth);
-		validateNew(accountToggleDropdown);
-		validateNew(Claims_Dashboard);
-		validateNew(IDLinkDashboard);
-		validateNew(CommonCostServiceHeading);
-		validateNew(CommonCostTable);
-		validateNew(formsResources_Dashboard);
-		validateNew(OrderMaterials_Dashboard);
-		validateNew(promoTile_Dashboard);
-		validateNew(ContactUsLink);
-		validateNew(HelloMessage);
-		validateNew(helpnContactUs);
-		validateNew(accountnSettings);
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println(driver.getTitle());
 
 		if (driver.getTitle().contains("Documents")) {
 			return new FormsAndResourcesPage(driver);

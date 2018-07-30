@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.memberrdesignVBF.BenefitsAndCoveragePage;
 import pages.memberrdesignVBF.ClaimSummarypage;
+import pages.memberrdesignVBF.FormsAndResourcesPage;
 import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.memberrdesignVBF.TestHarness;
 import acceptancetests.data.PageConstants;

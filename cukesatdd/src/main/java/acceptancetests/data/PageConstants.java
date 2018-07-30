@@ -599,8 +599,8 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 
 	public static final String footer_page = null;
 
+	public static final String COMMUNICATION_PREFERENCE_PAGE = "communicationPrefPage";
 	
-	
-
+	public static final String APPLITOOLS_ACQ_PAGE = null;
 	
 }

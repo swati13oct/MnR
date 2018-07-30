@@ -1,5 +1,6 @@
 package acceptancetests.memberrdesignVBF.profileandpreference;
 
+import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.memberrdesignVBF.ProfilePreferencesPage;
@@ -10,7 +11,7 @@ import atdd.framework.MRScenario;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-
+import pages.memberrdesignVBF.CommunicationPreferencePage;
 /**
  * @author akapoo18
  *

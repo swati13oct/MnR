@@ -20,6 +20,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pages.acquisition.applitools.OLE.*;
+import pages.acquisition.ulayer.ComparePlansPage;
 import pages.acquisition.ulayer.IntroductionInformationPage;
 import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPage;
 import acceptancetests.data.CommonConstants;

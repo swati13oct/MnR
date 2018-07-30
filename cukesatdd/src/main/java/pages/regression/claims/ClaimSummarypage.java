@@ -887,11 +887,7 @@ public void NavigateToClaimsPage(){
 
 			return null;
 		}
-		
 
-			
-
-		
 
 		public 	 ClaimSummarypage comboTabSelection1(){
 			try {
@@ -904,8 +900,11 @@ public void NavigateToClaimsPage(){
 				System.out.println(webElement.getText());
 				webElement.click();
 				
-
-}
+			}
+			
+			return new ClaimSummarypage(driver);	
+		}
+}	
 
 
 
