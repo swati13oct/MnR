@@ -52,11 +52,13 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 	
 	ApplitoolsObject appObj;
 	
+	
 
 	@Before
 	public void setApplitools() {
 		 appObj = new ApplitoolsObject();
 		appObj.setBatch(MRScenario.environment+" AARP");
+		
 	}
 	
 	
@@ -122,7 +124,7 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 		dce.addDrug(drug.split(" ")[0]);
 		appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "DCE Step 1 Drug added", "dce_step1_drug");
 		dce.navigateToStep2();
-		appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "DCE Step 2", "dce_step2");
+		//appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "DCE Step 2", "dce_step2");
 		dce.select_first_pharmacy();
 		appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "DCE Step 2 Pharmacy Selected", "dce_step2_pharmacy");
 		dce.navigateToStep3();

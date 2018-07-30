@@ -526,7 +526,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		Thread.sleep(5000);
 		//waitforElement(step2);
 		step2.click();
-		Thread.sleep(5000);
+		
 
 	}
 
@@ -756,8 +756,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 
 	public void select_first_pharmacy() throws InterruptedException {
-		driver.manage().window().maximize();
-		Thread.sleep(15000);
+		/*driver.manage().window().maximize();
+		Thread.sleep(15000);*/
 
 		//waitforElement(select_btn_first);
 		System.out.println("first pharmacy");
@@ -766,7 +766,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			((JavascriptExecutor)driver).executeScript("arguments[0].click();", select_btn_first);
 		}
 		System.out.println("first pharmacy 2");
-		Thread.sleep(4000);
+		Thread.sleep(2000);
 	}
 
 	public void validate_cost_saving_present(String pharmacy_type) {

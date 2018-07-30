@@ -1,8 +1,7 @@
-@fixedTestCaseTest
 @applitools
 Feature:2.04-VBF-Acq-To test applitools in AARP and UHC sites
 	
-@applitoolsAARP_VPP1
+@applitoolsAARP_VPP
 Scenario Outline:To use applitools to take screenshots of the vpp pages
 Given the user goes to aarp homepage and takes full screenshot
 	|Home Screenshot| <screenshot1>|
@@ -21,7 +20,7 @@ Examples:
 	| zipcode 	| screenshot1 |screenshot2 | planType | planName 										  |  planType2 | planName2 						  | 
 	| 90210     |   yes       | yes        |   MA	   | AARP MedicareComplete SecureHorizons Plan 1 (HMO)|  PDP 	   | AARP MedicareRx Walgreens (PDP)      |
 
-@applitoolsAARP_DCE1
+@applitoolsAARP_DCE
 Scenario Outline:To use applitools to take screenshots of the DCE pages
 Given the user goes to aarp homepage and takes full screenshot
 	|Home Screenshot| <screenshot1>|
@@ -117,28 +116,10 @@ When the user clicks on PDP plans and takes screenshot uhc
 And the user goes to the view plan details page for PDP plan and takes screenshots uhc
 	|Plan Type2| <planType2> |
 	|Plan Name2| <planName2> |
-And the user accesses the DCE tool from vpp aarp page for MAPD plan and takes screenshot uhc
-	|Plan Type| <planType> |
-	|Plan Name| <planName> |
-	|Drug     | <drug>     |
-And the user clicks on the enroll in plan button for mapd plan and goes to med info page uhc
-	|Plan Name| <planName> |
-Then the user enters info for pages in OLE flow and takes screenshots of each page uhc
-	| Plan Type                | <planType> |
-	| First Name               | <firstname> |
-	| Last Name                | <lastname> |
-	| Medicare Number          | <medicarenumber> |
-	| PartA Date               | <partadate> |
-	| PartB Date               | <partbdate> |
-	| Card Type                | <cardtype> |
-	| DOB                      | <dob>                    |
-    | Gender                   | <gender>                 |
-    | Perm_Street              | <permstreet>             |
-    | Perm_city                | <permcity>               |
 
 Examples:
-	| zipcode 	| screenshot1 |screenshot2  | planType | planName 										  |  drug            |planType2 | planName2 						  | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate  | dob      | gender | permstreet  | permcity      | 
-	| 90210     | yes         | yes         |   MA	   | AARP MedicareComplete SecureHorizons Plan 1 (HMO)| Lipitor TAB 10MG | PDP 	    | AARP MedicareRx Walgreens (PDP)     |HICN      | John      | Doe      | 123213123a    | false   |  01012010 |  01012010    | 01011941 | Female | 123 Perm Rd | Los Angeles   |      
+	| zipcode 	| screenshot1 |screenshot2  | planType | planName 										  |  drug            |planType2 | planName2 						  | 
+	| 90210     | yes         | yes         |   MA	   | AARP MedicareComplete SecureHorizons Plan 1 (HMO)| Lipitor TAB 10MG | PDP 	    | AARP MedicareRx Walgreens (PDP)     |      
 
 @applitools_UHC_OLE
 Scenario Outline:To go through OLE flow on UHC site and take screenshots
@@ -199,7 +180,9 @@ And the user goes to Plan Selector page from Our Plans tab and takes screenshot 
 And the user goes to pharmacy locator page from Our Plans tab and takes screenshot uhc
 And the user goes to about us page from the footer and takes screenshot uhc
 And the user goes to contact us page from the footer and takes screenshot uhc
-
+Examples:
+	|<placeholder>|
+	|place holder |
 
 @applitoolsUHC_Batch3
 Scenario Outline:To take screenshots of batch 3 pages for acquisition uhc
@@ -218,5 +201,5 @@ And the user goes to pdp plans from the Medicare Eductation nav panel and takes 
 And the user goes to enrollment basics page from the Medicare Eductation nav panel and takes screenshot
 
 Examples:
-	| zipcode 	| screenshot1 |screenshot2  | planType | planName 										  |  drug            |planType2 | planName2 						  | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate  | dob      | gender | permstreet  | permcity      | 
-	| 90210     | yes         | yes         |   MA	   | AARP MedicareComplete SecureHorizons Plan 1 (HMO)| Lipitor TAB 10MG | PDP 	    | AARP MedicareRx Walgreens (PDP)     |HICN      | John      | Doe      | 123213123a    | false   |  01012010 |  01012010    | 01011941 | Female | 123 Perm Rd | Los Angeles   |      
+	|<placeholder>|
+	|place holder |
