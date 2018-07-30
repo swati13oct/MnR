@@ -202,8 +202,7 @@ public class OneTimePaymentAarpStepDefintion {
 	
 	@And("^the user clicks on Make One Time Payment button$")
 		public void click_on_OTP_btn() throws InterruptedException{
-		//AccountHomePage accountHomePage = (AccountHomePage)getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-			//PaymentHistoryPage paymenthistory = (PaymentHistoryPage) accountHomePage.navigateToAutoPaymentHistoryPage();
+		
 		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);	
 		OneTimePaymentPage oneTimePayment = paymenthistory.OTPbtn();
 			
@@ -214,6 +213,7 @@ public class OneTimePaymentAarpStepDefintion {
 			
 		}
 	
+		
 	
 
 	@And("^the user clicks on Edit Automatic Payment button$")

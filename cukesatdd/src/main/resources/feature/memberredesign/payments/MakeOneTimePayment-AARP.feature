@@ -310,12 +310,11 @@ Feature: To test the payment flow on AARP site
       | Account holder last name   | <lastName>         |
     And the user confirms the payment in AARP site
 
-    
     Examples: 
       | planType | memberType            | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
       | MAPD     | IndividualUHCPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
       | SHIP     | IndividualUHCPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
- 
+
   @paymentsAutoPay @15301 @regression_06_06_18
   Scenario Outline: Verify Recurring Payment for Different Types of Member
     Given login with following details logins in the member portal and validate elements
@@ -333,13 +332,12 @@ Feature: To test the payment flow on AARP site
       | Account holder middle name | <middleName>       |
       | Account holder last name   | <lastName>         |
     And the user confirms the Autopayment in UHC site
-   
+
     Examples: 
       | planType | memberType            | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
       | MAPD     | IndividualUHCPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
 
- 
- @paymentsMoreThanOnePay @15142 @regression_06_06_18
+  @paymentsMoreThanOnePay @15142 @regression_06_06_18
   Scenario Outline: Verify More Than one Payment Per day error message
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -347,7 +345,8 @@ Feature: To test the payment flow on AARP site
     When the user navigates to Recurring payment history
     Then User Scrolls down to validate Payment History and Scrolls up
     And the user clicks on Make One Time Payment button
-    And the user makes one time payment in AARP site
+    And the user makes one time payment and navigate futher
+      | Amount to be paid          | <Amount>           |
       | Routing number             | <routingNo>        |
       | Confirm routing number     | <confirmRoutingNo> |
       | Account number             | <accountNo>        |
@@ -358,7 +357,7 @@ Feature: To test the payment flow on AARP site
     And the user confirms the Autopayment in UHC site
     And the user moves to Go to Payment History Page button
     And the user clicks on Make One Time Payment button
-    And the user makes one time payment in AARP site
+    And the user makes one time payment in AARP site by entering required details
       | Routing number             | <routingNo>        |
       | Confirm routing number     | <confirmRoutingNo> |
       | Account number             | <accountNo>        |
@@ -367,43 +366,40 @@ Feature: To test the payment flow on AARP site
       | Account holder middle name | <middleName>       |
       | Account holder last name   | <lastName>         |
     And the user confirms the Autopayment in UHC site
-       
 
     Examples: 
       | planType | memberType              | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
-      | MAPD      | IndividualAARPRPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.12 |
+      | MAPD     | IndividualAARPRPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.12 |
 
-
-@TestmemberAuth @15170 @regression_06_06_18
- Scenario Outline: To validate the Edit Payment flow for Member Auth
+  @TestmemberAuth @15170 @regression_06_06_18
+  Scenario Outline: To validate the Edit Payment flow for Member Auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
-      | Username      | <username>     |
-      | Password      | <password>     |
+      | Username | <username> |
+      | Password | <password> |
     And Member Enters the Username he wants to search
-      | MemUsername | <MemUserName> |   
+      | MemUsername | <MemUserName> |
     And User Clicks on the Pop up displayed
     Then User Scrolls down to validate Payment History and Scrolls up
     And the user clicks on MemAuth Edit Automatic Payment button
-      
 
     Examples: 
-      | username  | password  |MemUserName    | 
+      | username  | password  | MemUserName     |
       | qavgogine | qavgogine | q2_jun_aarp0057 |
- 
- 
- @TestmemberAuthOTP @15163 @regression_06_06_18
- Scenario Outline: To validate the oneTime Payment flow for Member Auth
+
+  @TestmemberAuthOTP @15163 @regression_06_06_18
+  Scenario Outline: To validate the oneTime Payment flow for Member Auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
-      | Username      | <username>     |
-      | Password      | <password>     |
+      | Username | <username> |
+      | Password | <password> |
     And Member Enters the Username he wants to search
-      | MemUsername | <MemUserName> |   
+      | MemUsername | <MemUserName> |
     And User Clicks on the Pop up displayed
     Then User Scrolls down to validate Payment History and Scrolls up
     And the user clicks on Make One Time Payment button
-    And the user makes one time payment in AARP site
+    And the user makes one time payment in AARP site by entering required details
+      | Amount to be paid          | <Amount>           |
       | Routing number             | <routingNo>        |
       | Confirm routing number     | <confirmRoutingNo> |
       | Account number             | <accountNo>        |
@@ -412,13 +408,11 @@ Feature: To test the payment flow on AARP site
       | Account holder middle name | <middleName>       |
       | Account holder last name   | <lastName>         |
     And the user confirms the Submit disabled in Member site
-      
 
     Examples: 
-      | username  | password  |MemUserName    |routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
-      | qavgogine | qavgogine | q2_jun_uhc0042 |123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.12 |
- 
- 
+      | username  | password  | MemUserName    | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
+      | qavgogine | qavgogine | q2_jun_uhc0042 | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.12 |
+
   @paymentsShip @15320 @regression_06_06_18
   Scenario Outline: Verify Recurring Payment for SHIP member
     Given login with following details logins in the member portal and validate elements
@@ -436,16 +430,16 @@ Feature: To test the payment flow on AARP site
       | Account holder middle name | <middleName>       |
       | Account holder last name   | <lastName>         |
     And the user confirms the Autopayment in UHC site
-   
-    Examples: 
-      | planType | memberType            | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
-      | SHIP     | IndividualAARPSPayments | 123123123 |        123123123 |     12345 |          12345 | first     | second     | third    |   1.00 |
 
-    @paymentsCombo @15144 @regression_06_06_18
-    Scenario Outline: Verify Payment for Combo member
+    Examples: 
+      | planType | memberType              | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
+      | SHIP     | IndividualAARPSPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
+
+  @paymentsCombo @15144 @regression_06_06_18
+  Scenario Outline: Verify Payment for Combo member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
-      | Member Type | <memberType> |    
+      | Member Type | <memberType> |
     When the user navigates to Combo payment history page
     When the user navigates to Ship tab and validates the amount
     Then User Scrolls down to validate Payment History and Scrolls up
@@ -461,7 +455,8 @@ Feature: To test the payment flow on AARP site
     And the user confirms the Autopayment in UHC site
     And the user moves to Go to Payment History Page button
     And the user clicks on Make One Time Payment button
-    And the user makes one time payment in AARP site
+    And the user makes one time payment in AARP site by entering required details
+      | Amount to be paid          | <Amount>           |
       | Routing number             | <routingNo>        |
       | Confirm routing number     | <confirmRoutingNo> |
       | Account number             | <accountNo>        |
@@ -470,10 +465,7 @@ Feature: To test the payment flow on AARP site
       | Account holder middle name | <middleName>       |
       | Account holder last name   | <lastName>         |
     And the user confirms the Autopayment in UHC site
-   
+
     Examples: 
-      | planType | memberType            | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
-      | COMBO     | COMBOAARPPayments | 123123123 |        123123123 |     12345 |          12345 | first     | second     | third    |   1.00 |
- 
-  
- 
+      | planType | memberType        | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
+      | COMBO    | COMBOAARPPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |

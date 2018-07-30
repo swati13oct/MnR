@@ -317,7 +317,7 @@ public class PaymentHistoryPage extends UhcDriver{
 		    		return null;
 	 }
 	 
-	 public OneTimePaymentPage OTPbtn() throws InterruptedException{
+	/* public OneTimePaymentPage OTPbtn1() throws InterruptedException{
 	  
 		 feebackpopupClose();  
 		 Thread.sleep(2000);
@@ -326,7 +326,40 @@ public class PaymentHistoryPage extends UhcDriver{
 			return new  OneTimePaymentPage(driver);  
 
 	    
+		    }*/
+	 
+	 public OneTimePaymentPage OTPbtn(){
+		 	
+		 		 try {   
+		     	  Thread.sleep(2000); 		
+		 	    		driver.switchTo().frame("IPerceptionsEmbed");
+		 	    		System.out.println("iPerception Pop Up is Present");
+		     		iPerceptionCloseButton.click();
+		 	    		driver.switchTo().defaultContent();
+		     		Thread.sleep(5000);
+		 	    		}
+		 	    		catch (Exception e) {
+		 	    		}
+		 		
+		 	   try
+		 	   {	
+		 	
+		  		 onetimepaymentbtn.click();
+		 	 System.out.println("clicked on make OTP button");		 
+		 		 return new  OneTimePaymentPage(driver);		
+		 				
+		 	   }catch(Exception e)
+		 	   {
+		 		   System.out.println("Normal One time Payment Button not displayed");
+		 	  
 		    }
+		 	   
+		 			onetimepaymentbtnPDP.click();
+		 		System.out.println("clicked on make OTP PDP button");
+		 			
+		  			return new  OneTimePaymentPage(driver);  
+		  
+		 	   }
 	 
 public OneTimePaymentPage AutoPay(){
 		 
