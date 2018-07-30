@@ -55,7 +55,7 @@ public class TestHarness extends UhcDriver {
 	@FindBy(linkText = "Go to payment link page")
 	private WebElement TeamCPaymentPage;
 
-	@FindBy(xpath = "//div[contains(@class,'page-header--left') or contains(@class,'testharness')]/h1[normalize-space()=contains(text(),' ')][not (contains(@class,'ng-hide'))]")
+	@FindBy(xpath = "//div[contains(@class,'header') or contains(@class,'testharness')]/h1[normalize-space()=contains(text(),' ')][not (contains(@class,'ng-hide'))]")
 	private WebElement heading;
 
 	@FindBy(xpath = "//div[@class='tabs-desktop']/ul[@class='nav nav-tabs']/li")
@@ -144,6 +144,9 @@ public class TestHarness extends UhcDriver {
 
 	@FindBy(partialLinkText = "Asistencia de Idiomas | Aviso de no Discriminación (PDF)")
 	private WebElement languageAssistanceSpanish;
+	
+	@FindBy(xpath = "//h1[@id='pageHeader']")
+	private WebElement formsPageHeading;
 
 	String category = null;
 
@@ -450,7 +453,7 @@ public class TestHarness extends UhcDriver {
 		scrollToView(formsPageLink);
 		jsClickNew(formsPageLink);
 		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoadNew(driver, heading, CommonConstants.TIMEOUT_90);
+		CommonUtility.waitForPageLoadNew(driver, formsPageHeading, CommonConstants.TIMEOUT_90);
 
 		if (driver.getTitle().contains("Documents")) {
 			return new FormsAndResourcesPage(driver);
@@ -533,7 +536,7 @@ public class TestHarness extends UhcDriver {
 		formsAndResources.click();
 
 		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoadNew(driver, heading, CommonConstants.TIMEOUT_90);
+		CommonUtility.waitForPageLoadNew(driver, formsPageHeading, CommonConstants.TIMEOUT_90);
 		System.out.println(driver.getTitle());
 
 		if (driver.getTitle().contains("Documents")) {
