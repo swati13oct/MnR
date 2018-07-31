@@ -50,6 +50,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(id = "plan-list-3")
 	private WebElement pdpPlanList;
 	
+	@FindBy(id = "plan-list-4")
+	private WebElement snpPlanList;
+	
 	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[2]//span[@class='ng-binding']")
 	private WebElement msPlansNumber;
 	
@@ -57,10 +60,16 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private WebElement msPlansViewLink;
 	
 	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[3]//span[@class='ng-binding']")
-	private WebElement pdpPlansNumber;
+	private WebElement pdpPlansNumber;	
 	
 	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[3]//*[@class='trigger-closed']")
 	private WebElement pdpPlansViewLink;
+	
+	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[4]//span[@class='ng-binding']")
+	private WebElement snpPlansNumber;
+	
+	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[4]//*[@class='trigger-closed']")
+	private WebElement snpPlansViewLink;
 
 	@FindBy(xpath = "//div[@class='overview-main']/h2")
 	private WebElement vppTop;
@@ -267,6 +276,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			if(validate(hidePdpPlans)){
 				msPlansViewLink.click();
 			}
+		} else if (planType.equalsIgnoreCase("SNP")) {
+				snpPlansViewLink.click();
 		}
 		return new VPPPlanSummaryPage(driver, planType);
 	}
@@ -590,6 +601,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		else if (planName.contains("Regional PPO")) {
 			//ElementData elementData = new ElementData("id", "viewDetailsMA");
 			 element = getSpecificPlanSummary(findChildElements(elementData, maPlanList), planName);
+		} else if (planName.contains("PPO SNP")) {
+			//ElementData elementData = new ElementData("id", "viewDetailsMA");
+			 element = getSpecificPlanSummary(findChildElements(elementData, snpPlanList), planName);
 		}
 		
 		return validate(element);
@@ -627,6 +641,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			int maPlans = Integer.valueOf(maPlansNumber.getText());
 			 //driver.findElement(By.className("module-plan-overview"));
 			return maPlans == findChildElements(elementData, maPlanList).size();
+		} else if (planType.equalsIgnoreCase("SNP")) {
+			int snpPlans = Integer.valueOf(snpPlansNumber.getText());
+			return snpPlans == findChildElements(elementData, snpPlanList)
+					.size();
 		}
 		return false;
 	}
@@ -637,18 +655,20 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		maPlansNumber = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='overview-tabs module-tabs-tabs']/div[1]/div/span/span[@class='ng-binding']")));
 		msPlansNumber = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='overview-tabs module-tabs-tabs']/div[2]//span[@class='ng-binding']")));
 		pdpPlansNumber = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='overview-tabs module-tabs-tabs']/div[3]//span[@class='ng-binding']")));
-
+		snpPlansNumber = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='overview-tabs module-tabs-tabs']/div[4]//span[@class='ng-binding']")));
 		validate(vppTop);
 		validate(maPlansNumber);
 		validate(msPlansNumber);
 		validate(pdpPlansNumber);
+		validate(snpPlansNumber);
 
 		int allPlans = Integer.valueOf(vppTop.getText().substring(10, 12));
 		int maPlans = Integer.valueOf(maPlansNumber.getText());
 		int msPlans = Integer.valueOf(msPlansNumber.getText());
 		int pdpPlans = Integer.valueOf(pdpPlansNumber.getText());
+		int snpPlans = Integer.valueOf(snpPlansNumber.getText());
 
-		if (allPlans == maPlans + msPlans + pdpPlans) {
+		if (allPlans == maPlans + msPlans + pdpPlans + snpPlans) {
 			return true;
 		}
 		return false;
