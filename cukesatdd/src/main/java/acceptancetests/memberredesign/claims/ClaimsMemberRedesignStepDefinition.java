@@ -607,6 +607,22 @@ public class ClaimsMemberRedesignStepDefinition {
 		claimDetailspage.validateClaimsTableInDetailsPage();
 	}
 	
+	@Then("^I validate the claim summary header$")
+	public void i_validate_the_claims_summary_header()  {
+		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario()
+				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+		newClaimsSummaryPage.validateClaimsFromDropDown2();		
+		newClaimsSummaryPage.validateYouHavemessage();
+		//newClaimsSummaryPage.validateLearnmoreaboutsection1();
+	}
+	@Then("^I can view a claim search back button in Claims Details page in AARP site$")
+	public void validate_claim_search_button()
+	{
+		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
+
+		claimDetailspage.validateClaimHistory();
+	}
+	
 
 	@Then("^I validate the text for PCP & medica members$")
 	public void i_validate_the_text_for_PCP_members(){

@@ -209,6 +209,9 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy(id="claim-type")
 	private WebElement clamtypeFromDropDown;
 	
+	@FindBy(id="claimType")
+	private WebElement Youhave;
+	
 	@FindBy(xpath="//*[@id='skipToBodyContent']//div[@class='reviewclaimstextFed parsys']//p")
 	private WebElement clamsSummaryCopyText;
 	
@@ -926,7 +929,42 @@ public void NavigateToClaimsPage(){
 				System.out.println("Pagination is not displayed as records are less");
 				e.printStackTrace();
 			}return true;
-			}
+			} public void validateClaimsFromDropDown2() {
+				
+				 System.out.println("The title of Claims page is-------->"+driver.getTitle());
+					//System.out.println("The URL of the Claims page is---------->"+driver.getCurrentUrl());
+					
+					if(driver.getTitle().equalsIgnoreCase("Claims")){
+						System.out.println("!!! The member is on Claims Summary page !!!");
+						validate(planame);
+						System.out.println("The Plan Name is ===>"+(planame.getText()));
+						validate(claimFromDropDown1);
+						 System.out.println("*** Drop down for months visible***");	
+						 
+					 		Select select = new Select(claimFromDropDown1);
+					 		System.out.println("Slected value is  =>" +select.getFirstSelectedOption());
+					 		for(int i=0;i<select.getOptions().size();i++){
+					 			System.out.println(select.getOptions().get(i).getAttribute("value"));
+					 		} 	
+					 		  }
+					             }	
+			 public void validateYouHavemessage() {
+			 		try {
+						Thread.sleep(2000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+			    	 validate(Youhave);
+			 		if (Youhave.getText().contains("You have"))
+			 		{
+			 			System.out.println(Youhave.getText());
+			 			System.out.println("You have claims messgae displayed ");
+			 			Assert.assertTrue(Youhave.getText().contains("You have")+"message is displayed", true);
+			 		
+			 		}	
+			 		
+			 	}   
 		 
 }	
 

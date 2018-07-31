@@ -32,6 +32,9 @@ public class ClaimDetailsPage extends UhcDriver{
 	@FindBy(xpath=".//*[@id='providerName']")
 	private  WebElement providerName;
 	
+	@FindBy(css= "#claimSearchButtonBottom")
+	public WebElement claimsHistoryLink;
+	
 	@FindBy (xpath =".//*[@id='claimSearchButtonBottom']")
 	private WebElement historylink;
 
@@ -313,5 +316,16 @@ public class ClaimDetailsPage extends UhcDriver{
 			
 		
 	}
+	public void validateClaimHistory(){
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	validate(claimsHistoryLink);
+	System.out.println("claimsHistoryLink.isDisplayed==>"+claimsHistoryLink.isDisplayed());
+	
+}
 	
 }
