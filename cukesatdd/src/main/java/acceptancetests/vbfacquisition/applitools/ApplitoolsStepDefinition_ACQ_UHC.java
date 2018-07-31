@@ -186,13 +186,14 @@ public class ApplitoolsStepDefinition_ACQ_UHC {
 	
 	@And("^the user goes to Request More Help and Info link page in Our plans and takes screenshot uhc$")
 	public void clickOnRequestMoreHelpAndInfoLink(){
-		WebDriver wd = (WebDriver)appObj.getBean(CommonConstants.WEBDRIVER);
+		WebDriver wd = appObj.getWebDriver();
 		String url = "https://www.stage-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/request-information.html";
 		
 		ApplitoolsAcquisitionPage applitoolsAcqPage = new ApplitoolsAcquisitionPage(wd);
 		applitoolsAcqPage.start(url);
 		appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "Request More Help and Info", "requestHelpInfo");
 		appObj.saveBean(PageConstants.APPLITOOLS_ACQ_PAGE, applitoolsAcqPage);
+		appObj.saveBean(CommonConstants.WEBDRIVER, wd);
 	}
 	
 	@And("^the user goes to Request Agent appointment link page and takes screenshot uhc$")
@@ -337,13 +338,14 @@ public class ApplitoolsStepDefinition_ACQ_UHC {
 	
 	@And("^the user goes to sitemap page from the footer and takes screenshot uhc$")
 	public void sitemapPage(){
-			WebDriver wd = (WebDriver)appObj.getBean(CommonConstants.WEBDRIVER);
+			WebDriver wd = appObj.getWebDriver();
 			String url = "https://www.stage-uhcmedicaresolutions.uhc..com/content/aarpmedicareplans/en/sitemap.html";
 			
 			ApplitoolsAcquisitionPage applitoolsAcqPage = (ApplitoolsAcquisitionPage) appObj.getBean(PageConstants.APPLITOOLS_ACQ_PAGE);
 			applitoolsAcqPage.start(url);
 			appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "Sitemap Page", "sitemapPage");
 			appObj.saveBean(PageConstants.APPLITOOLS_ACQ_PAGE, applitoolsAcqPage);
+			appObj.saveBean(CommonConstants.WEBDRIVER, wd);
 	}
 	
 	@And("^the user goes to privacy policy page from the footer and takes screenshot uhc$")
