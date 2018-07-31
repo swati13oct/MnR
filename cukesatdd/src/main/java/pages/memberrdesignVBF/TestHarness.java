@@ -145,6 +145,9 @@ public class TestHarness extends UhcDriver {
 	@FindBy(partialLinkText = "Asistencia de Idiomas | Aviso de no Discriminación (PDF)")
 	private WebElement languageAssistanceSpanish;
 
+	@FindBy(xpath = "//h1[@id='pageHeader']")
+	private WebElement formsPageHeading;
+	
 	String category = null;
 
 	public TestHarness(WebDriver driver) {
@@ -450,7 +453,7 @@ public class TestHarness extends UhcDriver {
 		scrollToView(formsPageLink);
 		jsClickNew(formsPageLink);
 		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoadNew(driver, heading, CommonConstants.TIMEOUT_90);
+		CommonUtility.waitForPageLoadNew(driver, formsPageHeading, CommonConstants.TIMEOUT_90);
 
 		if (driver.getTitle().contains("Documents")) {
 			return new FormsAndResourcesPage(driver);
@@ -533,7 +536,7 @@ public class TestHarness extends UhcDriver {
 		formsAndResources.click();
 
 		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoadNew(driver, heading, CommonConstants.TIMEOUT_90);
+		CommonUtility.waitForPageLoadNew(driver, formsPageHeading, CommonConstants.TIMEOUT_90);
 		System.out.println(driver.getTitle());
 
 		if (driver.getTitle().contains("Documents")) {
