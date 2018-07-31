@@ -2,7 +2,7 @@
 Feature: 1.15-VBF-MemRedesign-To test HSID registration flow
 
 @smokeTest_HSIDregistration @rallyDashboard @testharness
-   Scenario Outline:Verify HSID registration.
+   Scenario Outline:Verify HSID registration for <membertype>
      And the user select record from database
        | Firstname  | <firstname>  |
        | Lastname   | <lastname>   |
@@ -43,7 +43,7 @@ Feature: 1.15-VBF-MemRedesign-To test HSID registration flow
    
    Examples:
  
- | firstname  | lastname |    dob 	    | memberid 	    | zipcode | password   |   				email	  			    | friendname | favcolor | phonenumber |
- | FABCAEAD   | EFCEAA   | 09/22/1949   | 961861481-1   | 34748	  | Password@1 | codetransformers@gmail.com | name1      | color1   | number1     |
- | SGFXTEFI   | NHKBOHYG | 12/01/1941   | 375989563-11  | 46221   | Password@1 | codetransformers@gmail.com | name1      | color1   | number1     |
-# | FABCAEAD   | EFCEAA   | 09/22/1949   | 961861481-1   | 34748  	| Password@1 | codetransformers@gmail.com | name1      | color1   | number1     |    
+ | membertype | firstname  | lastname |    dob 	    | memberid 	    | zipcode | password   |   				email	  			    | friendname | favcolor | phonenumber |
+ | federal    | FABCAEAD   | EFCEAA   | 09/22/1949   | 961861481-1   | 34748	  | Password@1 | codetransformers@gmail.com | name1      | color1   | number1     |
+ | Ship 		  | SGFXTEFI   | NHKBOHYG | 12/01/1941   | 375989563-11  | 46221   | Password@1 | codetransformers@gmail.com | name1      | color1   | number1     |
+#| Federal    | FABCAEAD   | EFCEAA   | 09/22/1949   | 961861481-1   | 34748  	| Password@1 | codetransformers@gmail.com | name1      | color1   | number1     |    
