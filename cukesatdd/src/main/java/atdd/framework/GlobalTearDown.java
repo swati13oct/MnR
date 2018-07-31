@@ -64,37 +64,9 @@ public class GlobalTearDown {
 				html = html.concat("<a href=" + MRScenario.returnJobURL()+" >Go to video</a>");
 				scenario.embed(html.getBytes(), "text/html");
 			}
-			MRScenario mrScen = new MRScenario();
-			// Clean up the existing webdriver.
-			try {
-					Thread.sleep(4000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			 //mrScen.DriverQuit();
+			
 		}
 
 	}
-	// to be added
-	/**
-	 * 
-	 * @param scenario
-	 */
-	/*@After
-	public void tearDown(Scenario scenario) 
-	//{
-
-		if (null != getLoginScenario() && null != getLoginScenario().getBean(CommonConstants.WEBDRIVER)) {
-			//To get the report embedded in the report
-			getLoginScenario().CaptureScreenshot(scenario);
-
-			// Clean up the existing webdriver.
-			getLoginScenario().nullifyWebDriverNew();
-		} else {
-			Assert.fail("Screenshot not captured and webdriver not quitted...");
-    }
-
-	}*/
 
 }
