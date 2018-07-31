@@ -64,7 +64,7 @@ Examples:
 | 90210   | Los Angeles County | MA	  | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    |
 
 	
-@snpplansulayer
+@snpplansulayer @september_release_2018 @predators
 Scenario Outline: Verify plan summary in AARP site
 Given the user is on AARP medicare acquisition site landing page
 When the user performs plan search using following information in the AARP site
