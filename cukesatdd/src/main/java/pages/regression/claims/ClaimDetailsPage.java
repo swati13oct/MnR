@@ -31,7 +31,9 @@ public class ClaimDetailsPage extends UhcDriver{
 
 	@FindBy(xpath=".//*[@id='providerName']")
 	private  WebElement providerName;
-
+	
+	@FindBy (xpath =".//*[@id='claimSearchButtonBottom']")
+	private WebElement historylink;
 
 	@FindBy(xpath=".//*[@id='claimNumberLabel']")
 	private WebElement claimNumber;
@@ -291,6 +293,24 @@ public class ClaimDetailsPage extends UhcDriver{
 		else{
 			Assert.assertTrue("Claims Total is not present in Claims Details Page", false);
 		}
+		
+	}
+	public void claimshistorylink(){
+		validate (historylink);
+		System.out.println("history link is seen");
+		historylink.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+		if (driver.getCurrentUrl().contains("/overview"))
+		{
+		System.out.println("The member has navigated from details page to Summary page ---------->"+driver.getCurrentUrl());
+		}
+			
 		
 	}
 	

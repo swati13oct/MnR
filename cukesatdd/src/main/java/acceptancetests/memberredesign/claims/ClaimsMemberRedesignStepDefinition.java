@@ -606,6 +606,25 @@ public class ClaimsMemberRedesignStepDefinition {
 				.getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
 		claimDetailspage.validateClaimsTableInDetailsPage();
 	}
+	
+
+	@Then("^I validate the text for PCP & medica members$")
+	public void i_validate_the_text_for_PCP_members(){
+		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario()
+				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+		newClaimsSummaryPage.validatePCPtext();
+	}
+	@And("^I validate the pagination on the claims summary page for members$")
+	public void i_validate_the_pagination_on_the_claims_summary_page_members() throws Throwable {
+		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
+		Assert.assertTrue(claimSummarypage.verifyClaimsTableAndPagination3());
+	   	}
+	@And("^I validate the claims history Button$")
+	public void validate_claims_History_Button(){
+		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario()
+				.getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+		claimDetailspage.claimshistorylink();
+          }
 
 	
 	

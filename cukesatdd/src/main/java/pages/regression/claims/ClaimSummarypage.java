@@ -132,7 +132,13 @@ public class ClaimSummarypage extends UhcDriver{
 	
 	@FindBy (xpath= ".//*[@id='validDivErr']")
 	private WebElement messageaftersrch;
+	
+	@FindBy(id = "atddPagination")
+	private WebElement verifyClaimSummaryAndPagination3;
 
+	@FindBy(xpath=".//*[@id='globalContentIdForSkipLink']/div[3]/div[1]/div/div/main/div/div[1]/section/div[1]/div/div/div/div/div[3]/div/p")
+	private WebElement PCPtext;
+	
 	//@FindBy (id="DownloadLinkBtnAtdd")
 	@FindBy (xpath=".//*[@id='downloadHypLinkAtdd']")
 	private WebElement downloadmydatabutton;
@@ -904,6 +910,24 @@ public void NavigateToClaimsPage(){
 			
 			return new ClaimSummarypage(driver);	
 		}
+		 public void validatePCPtext(){
+			 validate(PCPtext);
+			 System.out.println("PCP text is seen on the page");
+		 }
+		 public boolean verifyClaimsTableAndPagination3(){
+				
+		       try {
+		    	   Thread.sleep(5000);
+		    	   
+				validate (verifyClaimSummaryAndPagination3);
+				   System.out.println("Pagination is seen ===>"+verifyClaimSummaryAndPagination3.getText());
+				
+			} catch (Exception e) {
+				System.out.println("Pagination is not displayed as records are less");
+				e.printStackTrace();
+			}return true;
+			}
+		 
 }	
 
 
