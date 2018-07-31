@@ -56,7 +56,7 @@ public class WelcomePage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(), 'chosen to enroll in:')]/following-sibling::h2")
 	private WebElement PlanYear_PlanName;
 	
-	@FindBy(xpath = "//*[contains(text(), 'ZIP:')]/..")
+	@FindBy(xpath = "//*[contains(text(), 'Zip:')]/..")
 	private WebElement ZipCode_County;
 	
 	@FindBy(xpath = "//*[contains(text(), 'Premium:')]/..")
