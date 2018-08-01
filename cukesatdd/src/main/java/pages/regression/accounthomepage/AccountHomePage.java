@@ -198,7 +198,8 @@ private WebElement PlanMaterialSection;
        @FindBy(linkText = "Order drugs from your Preferred Mail Service Pharmacy")
        private WebElement drugPreferredMailServicePharmacyLink;
 
-       @FindBy(xpath = "//div[@class='claim-results']//table[not (contains(@class,'ng-hide'))]//tbody//tr[2]//a[text()='MORE INFO']")
+       //@FindBy(xpath = "//div[@class='claim-results']//table[not (contains(@class,'ng-hide'))]//tbody//tr[2]//a[text()='MORE INFO']")     
+       @FindBy(xpath = "//div[@class='claim-results']//tbody//tr[2]//td//span[@id='moreInfoLinkAtdd0']")
        private WebElement claimstablemoreinfolink;
 
        @FindBy (css = ".claimDetTableMainSection")
@@ -706,9 +707,13 @@ private WebElement PlanMaterialSection;
                            }
                            System.out.println("title is " + driver.getTitle());
                            System.out.println("Current Url is " + driver.getCurrentUrl());
-                           CommonUtility.waitForPageLoad(driver, heading, 50);
-
-                           if (driver.getTitle().equalsIgnoreCase("Profile")) {
+                           try {
+                               Thread.sleep(5000);
+                        } catch (InterruptedException e) {
+                               // TODO Auto generated catch block
+                               e.printStackTrace();
+                        }
+                           if (driver.getTitle().contains("Profile")) {
 
                                   return new ProfileandPreferencesPage(driver);
                            }
@@ -740,8 +745,8 @@ private WebElement PlanMaterialSection;
               } else {
                      profilenpreferenceslink.click();
               }
-              CommonUtility.waitForPageLoad(driver, heading, 50);
-              if (driver.getTitle().equalsIgnoreCase("Profile")) {
+              CommonUtility.waitForPageLoad(driver, heading, 5);
+              if (driver.getTitle().contains("Profile")) {
                      System.out.println("here");
                      return new ProfileandPreferencesPage(driver);
               }
@@ -751,11 +756,14 @@ private WebElement PlanMaterialSection;
        }
 
        public void verifyPageTitle() throws InterruptedException {
+    	      System.out.println("Checking for Hello Name element");
     	      waitForHomePage(helloPerson);
+    	      System.out.println("Hello Name element was displayed");
               String title = driver.getTitle();
+              System.out.println(title);
               // Assert.assertEquals(title, "Home | UnitedHealthcare");
               Assert.assertTrue(title.contains("UnitedHealthcare"));
-
+              System.out.println("Assert condition on title of dashboard page was passed");
        }
 
        public AccountHomePage navigateToAutoPaymentHistoryPage(){
@@ -1110,36 +1118,23 @@ private WebElement PlanMaterialSection;
        }
 
        public ClaimDetailsPage navigateToClaimDetailsPage() {
-    	   try {
-			Thread.sleep(20000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    		if (validate(iPerceptionframe)) {
+    	   	
+    	   	try{
+    	   			feebackpopupClose();
+                
+    	   			CommonUtility.waitForPageLoad(driver, claimstablemoreinfolink, 60);
+                  
+                  claimstablemoreinfolink.click();
+                  CommonUtility.waitForPageLoad(driver, claimDetTableMainSection, 60);                 
+                  System.out.println(driver.getTitle());
+                  if (driver.getTitle().equalsIgnoreCase("Claims")) {
+                         return new ClaimDetailsPage(driver);
 
-    			switchToNewIframe(iPerceptionframe);
-    			iPerceptionclosebtn.click();
-    			driver.switchTo().defaultContent();
-    			//iPerceptionAutoPopUp.click();
-    		} else {
-    			System.out.println("iPerception Pop Up not displayed");
-    		}    	   
-              CommonUtility.waitForPageLoad(driver, claimstablemoreinfolink, 60);
-              
-              claimstablemoreinfolink.click();
-              CommonUtility.waitForPageLoad(driver, claimDetTableMainSection, 60);
-
-              //driver.findElement(By.xpath("//a[contains(text(),'MORE INFO')]")).click();
-              /*
-              * try { Thread.sleep(1000); } catch (InterruptedException e) { // TODO
-              * Auto-generated catch block e.printStackTrace(); }
-              */
-              System.out.println(driver.getTitle());
-              if (driver.getTitle().equalsIgnoreCase("Claims")) {
-                     return new ClaimDetailsPage(driver);
-
-              }
+                  }
+    	   	}catch(Exception ex){
+    	   		return null;
+    	   	}
+    	   	
               return new ClaimDetailsPage(driver);
        }
 

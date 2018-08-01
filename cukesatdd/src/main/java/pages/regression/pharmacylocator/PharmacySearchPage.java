@@ -103,41 +103,30 @@ public class PharmacySearchPage extends UhcDriver{
                
                @FindBy(id = "closeButton")
                private WebElement iPerceptionCloseButton;
+               
+           	@FindBy(className = "loading-block")
+        	private WebElement loadingImage;
 
 
                public PharmacySearchPage(WebDriver driver) {
-                              super(driver);
-                              PageFactory.initElements(driver, this);
-                              CommonUtility.checkPageIsReady(driver);
-                              //Thread.sleep(5000);
-                              CommonUtility.checkPageIsReady(driver);
-/*                          try{
-                                             FeedbackModal.click();
-                                             System.out.println("FeedBack Modal Present");
-                                             if (validate(FeedbackModal)){
-                                                            System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
-                                             }
-                                             System.out.println("FeedBack Modal Closed");
-                              }
-                              catch (Exception e) {
-                                             System.out.println("FeedBack Modal NOT Present");
-                              }*/
-                              try {
-          Thread.sleep(2000);
-          driver.switchTo().frame("IPerceptionsEmbed");
-          iPerceptionCloseButton.click();
-          System.out.println("iPerception Pop Up is Present");
-          driver.switchTo().defaultContent();
-          Thread.sleep(5000);
-          }
-          catch (Exception e) {
-          System.out.println("iPerception Pop Up is not Present");
-          }
-/*                          if(validate(PharmacyLocatorPageHeader)){
-                                             
-                              }
-*/                          
-                              openAndValidate();
+                  super(driver);
+                  PageFactory.initElements(driver, this);
+                  CommonUtility.checkPageIsReady(driver);
+                  //Thread.sleep(5000);
+                  CommonUtility.checkPageIsReady(driver);
+                      try {
+						Thread.sleep(2000);
+						driver.switchTo().frame("IPerceptionsEmbed");
+						iPerceptionCloseButton.click();
+						System.out.println("iPerception Pop Up is Present");
+						driver.switchTo().defaultContent();
+						Thread.sleep(5000);
+						  }
+                      catch (Exception e) {
+						 System.out.println("iPerception Pop Up is not Present");
+						  }
+                        
+                  openAndValidate();
                }
                /**
                * @todo : Select the distance from drop down
@@ -146,7 +135,7 @@ public class PharmacySearchPage extends UhcDriver{
                public PharmacySearchPage enterDistanceDetails(String distance) throws InterruptedException {
                               Thread.sleep(3000);
                               CommonUtility.checkPageIsReady(driver);
-
+                              CommonUtility.waitForElementToDisappear(driver, loadingImage, 60);
                               Select select = new Select(distanceDropDownField);           
                               String DistanceSelection = distance+" miles";
                               select.selectByVisibleText(DistanceSelection);
@@ -169,7 +158,7 @@ public class PharmacySearchPage extends UhcDriver{
                               
                               Thread.sleep(20000);
                               CommonUtility.checkPageIsReady(driver);
-
+                              CommonUtility.waitForElementToDisappear(driver, loadingImage, 60);
                               int PharmacyCount = PharmacyResultList.size();
 
                               if(PharmacyCount>0){
@@ -196,7 +185,7 @@ public class PharmacySearchPage extends UhcDriver{
                               String[] pharmacyTypeArray = givenPharmacyTypes.split(",");
                               CommonUtility.checkPageIsReady(driver);
                               //pharmacyTypeSelectionRadioButton.click();
-
+                              CommonUtility.waitForElementToDisappear(driver, loadingImage, 60);
                               List<WebElement> pharmacyTypesCheckboxes = pharmacyTypes.findElements(By.tagName("li"));
                               for(String pharmacyType : pharmacyTypeArray )
                               {
@@ -232,7 +221,7 @@ public class PharmacySearchPage extends UhcDriver{
                public PharmacySearchPage Select_PlanType_Filter(String PlanType) throws InterruptedException{
                               
                               Thread.sleep(3000);
-
+                              CommonUtility.waitForElementToDisappear(driver, loadingImage, 60);
                               driver.findElement(By.xpath("//*[contains(text(), '"+PlanType+"')]")).click();
                               Thread.sleep(3000);
                               CommonUtility.checkPageIsReady(driver);
@@ -253,7 +242,7 @@ public class PharmacySearchPage extends UhcDriver{
 
                               Thread.sleep(50000);
                               CommonUtility.checkPageIsReady(driver);
-
+                              CommonUtility.waitForElementToDisappear(driver, loadingImage, 60);
                               Select select = new Select(distanceDropDownField);           
                               String DistanceSelection = distance+" miles";
                               select.selectByVisibleText(DistanceSelection);
