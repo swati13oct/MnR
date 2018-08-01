@@ -244,8 +244,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(className = "atdd-outpatientsurgery-title")
 	private WebElement OutpatientSurgeryCenter;
-
-	@FindBy(xpath = ".//*[@id='outPatientTileAtdd']/div/div")
+	
+	@FindBy(className = "outpatientsurgery-tier1-atdd")
+	private WebElement OutpatientSurgeryCenter2;
+	
+    @FindBy(xpath = ".//*[@id='outPatientTileAtdd']/div/div")
 	private WebElement OutpatientSurgeryCenterValue;
 
 	@FindBy(xpath = ".//*[@id='officeVisitTileAtdd']/div/section/div[1]/span")
@@ -1568,7 +1571,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	 * @toDo : Validates the headers section for individual members
 	 */
 
-	public void validateHeaders() {
+	public void validateHeaders(String planType) {
 
 		validate(BenefitsSummaryHeader);
 		validate(Copayscoinsuranceheader);
@@ -1579,13 +1582,27 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(OfficVisitsValue);
 
 		Assert.assertEquals(OfficeVisits.getText(), "OFFICE VISITS ");
+		if(planType.contains("Medica"))
+		{
+			Assert.assertEquals(OutpatientSurgeryCenter.getText(), "OUTPATIENT SURGERY CENTER VISITS ");	
+		}
+		else
+		{
 		Assert.assertEquals(OutpatientSurgeryCenter.getText(), "OUTPATIENT SURGERY CENTER VISITS");
+		}
 		Assert.assertEquals(HospitalVisits.getText(), "HOSPITAL VISITS ");
+		if(planType.contains("Medica"))
+		{
+			if (StringUtils.isEmpty(OutpatientSurgeryCenter2.getText())) {
 
-		if (StringUtils.isEmpty(OutpatientSurgeryCenterValue.getText())) {
+				Assert.fail();
+			}	
+		}
+		else if (StringUtils.isEmpty(OutpatientSurgeryCenterValue.getText())) {
 
 			Assert.fail();
 		}
+		
 		if (StringUtils.isEmpty(OfficVisitsValue.getText())) {
 
 			Assert.fail();
@@ -2237,6 +2254,29 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	}
 }
 
+ public void grouptabledynamicdata()
+ {
+	int i =1;
+	int j = 1;
+	List<WebElement> rows =  driver.findElements(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr"));
+	List<WebElement> cols =  driver.findElements(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr/td[1]"));
+	WebElement tabletext  = driver.findElement(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr[i]/td[j]/div"));
+	
+	
+	System.out.println(rows);
+	System.out.println(cols);
+	for( i = 2 ; i<rows.size();i++)
+	{
+		for ( j = 1 ; j<cols.size();j++)
+		{
+			if(i==2)
+			{
+		(driver.findElement(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr["+i+"]/td[3]"))).getText();
+		}
+		}
+	}
+}
+ 
 public void validateImagePresent(String logoToBeDisplayedOnSecondaryPage) {
 	
 	String logo_src = logoImage.getAttribute("src");

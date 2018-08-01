@@ -203,40 +203,40 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	 * @toDo : The user navigates to Benefits and coverage page from Rally Dashboard
 	 */
 
-	@Then("^The user navigates to Benefits and Coverage page$")
-	public void user_views_BenefitsAndCoveragejenkins(DataTable memberAttributes) {
-		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
-		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-
-		String plantype = memberAttributesMap.get("Plan Type");
-		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
-		List<String> desiredAttributes = new ArrayList<String>();
-		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator.hasNext();) {
-			{
-				String key = iterator.next();
-				desiredAttributes.add(memberAttributesMap.get(key));
-			}
-
-		}
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-
-		BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag(plantype);
-
-		if (benefitsCoveragePage != null) {
-			getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
-		}
-		else
-
-		{
-			System.out.println("Benefits and Coverage page object is Null ");
-		}
-
-	}
+//	@Then("^The user navigates to Benefits and Coverage page$")
+//	public void user_views_BenefitsAndCoveragejenkins(DataTable memberAttributes) {
+//		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+//		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+//		for (int i = 0; i < memberAttributesRow.size(); i++) {
+//
+//			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+//					memberAttributesRow.get(i).getCells().get(1));
+//		}
+//
+//		String plantype = memberAttributesMap.get("Plan Type");
+//		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+//		List<String> desiredAttributes = new ArrayList<String>();
+//		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator.hasNext();) {
+//			{
+//				String key = iterator.next();
+//				desiredAttributes.add(memberAttributesMap.get(key));
+//			}
+//
+//		}
+//		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+//
+//		BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag(plantype);
+//
+//		if (benefitsCoveragePage != null) {
+//			getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
+//		}
+//		else
+//
+//		{
+//			System.out.println("Benefits and Coverage page object is Null ");
+//		}
+//
+//	}
 	
 	@Then("^user navigates to Benefits coverage page$")
 		public void user_views_BenefitsAndCoveragejenkins() {
@@ -923,10 +923,28 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	 * @toDo : Validates the  headers section for individual members
 	 */
 	@And("the user validates headers on Bnc page for indi members")
-	public void user_validate_Headers() {
+	public void user_validate_Headers(DataTable memberAttributes) {
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String plantype = memberAttributesMap.get("Plan Type");
+		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+		List<String> desiredAttributes = new ArrayList<String>();
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator.hasNext();) {
+			{
+				String key = iterator.next();
+				desiredAttributes.add(memberAttributesMap.get(key));
+			}
+
+		}
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		benefitsCoveragePage.validateHeaders();
+		benefitsCoveragePage.validateHeaders(plantype);
 	}
 
 	/** 
