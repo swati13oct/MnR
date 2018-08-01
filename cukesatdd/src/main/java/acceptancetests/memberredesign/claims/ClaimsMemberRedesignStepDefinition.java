@@ -133,7 +133,7 @@ public class ClaimsMemberRedesignStepDefinition {
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
 	}
 	/**
-	 * @throws InterruptedException 
+	 *
 	 * @toDo: Member is able to select claims from the "View Claims From" drop-down. 
 	 */
 
@@ -295,11 +295,18 @@ public class ClaimsMemberRedesignStepDefinition {
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		Assert.assertTrue(claimSummarypage.verifyClaimsTableAndPagination());
 	   	}
+	/**
+	 * @toDo:validate the pagination on the claims summary page for combo member - PDP plan
+	 */
 	@And("^I validate the pagination on the claims summary page combo member PDP plan$")
 		public void i_validate_the_pagination_on_the_claims_summary_page_COMBOmember_PDP() throws Throwable {
 			ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 			Assert.assertTrue(claimSummarypage.verifyClaimsTableAndPagination1());
 		   	}
+	
+	/**
+	 * @toDo:validate the pagination on the claims summary page
+	 */
 	@And("^I validate the pagination on the claims summary page for members$")
 		public void i_validate_the_pagination_on_the_claims_summary_page_members() throws Throwable {
 			ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
@@ -335,7 +342,8 @@ public class ClaimsMemberRedesignStepDefinition {
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 
 		Assert.assertTrue(claimSummarypage.validateLearnmoreaboutsection());
-	}
+		}
+	
 	/**
 	 * @toDo : View and validate the download my data button in calims summary page
 	 */
@@ -569,7 +577,9 @@ public class ClaimsMemberRedesignStepDefinition {
 		claimSummarypage.validatefromDateLaterThanToDateError();
 
 	}
-	
+	/**
+	 * @toDo :Validate error message for PHIP member on Claims Summary page
+	 */
 	@When("^I validate the error message for a PHIP Member on the screen$")
 	public void i_validate_the_error_message_for_a_PHIP_Member_on_the_screen() throws Throwable {
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
@@ -592,6 +602,9 @@ public class ClaimsMemberRedesignStepDefinition {
 		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		newClaimsSummaryPage.validateCustomSearch();
 	}
+	/**
+	 * @toDo : Validate claims header for PCP member
+	 */
 	
 	@Then("^I can validate the claims summary header$")
 	public void i_can_validate_the_claims_summary_header()  {
@@ -601,8 +614,10 @@ public class ClaimsMemberRedesignStepDefinition {
 		newClaimsSummaryPage.validateClaimsPlantype();
 		
 	//	newClaimsSummaryPage.validateClaimsHeaderCopyText();
-	    
-	}
+	    	}
+	/**
+	 * @toDo : Validate claims header 
+	 */
 	
 	@Then("^I validate the claim summary header$")
 	public void i_validate_the_claims_summary_header()  {
@@ -650,7 +665,7 @@ public class ClaimsMemberRedesignStepDefinition {
 		
 	}
 	/**
-	 * 
+	 * @toDo: Validate Claims Table in claims details page for Combo
 	 */
 	@Then("^I validate the Claims Table in claims details page for Combo$")
 	public void i_validate_the_calims_deatails_table(){
@@ -658,7 +673,7 @@ public class ClaimsMemberRedesignStepDefinition {
 		claimDetailspage.shipdetailcombo();
 	}
 	/**
-	 * 
+	 * @toDo : Validate EOB for Combo members 
 	 */
 	@And("^I validate EOB$")
 	public void i_validate_EOB_COMBO(){
@@ -666,7 +681,7 @@ public class ClaimsMemberRedesignStepDefinition {
 		claimDetailspage.EOBShipcombo();
 	}
 	/**
-	 * 
+	 * @toDo : validate Claim History Button
 	 */
 	@Then("^I can view a claim search back button in Claims Details page in AARP site$")
 	public void validate_claim_search_button()
@@ -676,7 +691,7 @@ public class ClaimsMemberRedesignStepDefinition {
 		claimDetailspage.validateClaimHistory();
 	}
 	/**
-	 * 
+	 * @toDo :validate the two COMBO tabs on the claims Summary page
 	 */
 	@And("^I validate the two COMBO tabs on the page$")
 	public void i_validate_COMBO_tabs() {
@@ -684,7 +699,7 @@ public class ClaimsMemberRedesignStepDefinition {
 		claimDetailspage.comboTabs();			
 }
      /**
-      * 
+      * @toDo: navigate to the Claim Details page in AARP site for COMBO member
       */
 	@And("^I validate the two COMBO tabs on the claim Summary page$")
 	public void I_validate_combo_tab_claim_summary_page(){
@@ -703,6 +718,9 @@ public class ClaimsMemberRedesignStepDefinition {
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
 		
 	}
+	/**
+	 * @toDo : validate the Claims History Button in claims details page
+	 */
 	@And("^I validate the claims history Button$")
 	public void validate_claims_History_Button(){
 		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario()
@@ -716,6 +734,10 @@ public class ClaimsMemberRedesignStepDefinition {
 				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
 		newClaimsSummaryPage.validatePCPtext();
 	}
+	
+	/**
+	 * @toDo : Validate EOB section for PDP plans 
+	 */
 	@And("^the user validates the EOB section in redesigned site$")
 	public void validate_PDPEOB (){
 		ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
@@ -725,6 +747,9 @@ public class ClaimsMemberRedesignStepDefinition {
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newclaimsSummarypage);
 		
 	}
+	/**
+	 * @toDo : Validate claims table for PDP plans
+	 */
 	@Then("^I can see the claims displayed based on the selection in redesigned site for PDP plans$") 
 	public void validate_claims_table_PDPmember_site(){
 		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);

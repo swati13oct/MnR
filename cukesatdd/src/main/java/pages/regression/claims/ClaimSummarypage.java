@@ -339,7 +339,9 @@ public class ClaimSummarypage extends UhcDriver{
 		e.printStackTrace();
 	}return true;
 	}
-	
+	/**
+	 * @toDo : Validate Pagination under the claims table  
+	 */
 	public boolean verifyClaimsTableAndPagination1(){
 				
 	       try {
@@ -353,6 +355,10 @@ public class ClaimSummarypage extends UhcDriver{
 			e.printStackTrace();
 		}return true;
 		}
+	
+	/**
+	 * @toDo:validate the pagination on the claims summary page
+	 */
 	public boolean verifyClaimsTableAndPagination3(){
 		
 	       try {
@@ -748,7 +754,7 @@ public class ClaimSummarypage extends UhcDriver{
 		
 	}
 	/**
-	 * @toDo : this method validates Download My Data
+	 * @toDo: On Claims Summary page the member Validates the Download my data section.
 	 */
 	public void validateDownloadMyData() {
 		CommonUtility.waitForPageLoad(driver, downloadmydatabutton, 60);
@@ -891,6 +897,9 @@ public class ClaimSummarypage extends UhcDriver{
 		}
 		return new ClaimSummarypage(driver);
 	}
+	/**
+	 * @toDo :Validate error message for PHIP member on Claims Summary page
+	 */
 public boolean ValidatePHIPErrorMessage(){
 	
 	     //if(driver.getTitle().equalsIgnoreCase("Claims")){	
@@ -953,6 +962,10 @@ public void NavigateToClaimsPage(){
 	  	 
 	  	 return new Footer(driver);
   }
+  
+  /**
+	 * @toDo : Validate You have text 
+	 */
 
      public void validateYouHavemessage() {
  		try {
@@ -993,6 +1006,9 @@ public void NavigateToClaimsPage(){
  			System.out.println(select.getOptions().get(i).getAttribute("value"));
  		} 		
  	}
+ /**
+	 * @toDo : Validate claims FROM DROP DOWN
+	 */
  public void validateClaimsFromDropDown2() {
 		
  System.out.println("The title of Claims page is-------->"+driver.getTitle());
@@ -1076,6 +1092,10 @@ public void NavigateToClaimsPage(){
 			 System.out.println("PCP text is seen on the page");
 		 }
 		 
+		    /**
+			 * @toDo : Validate EOB section for PDP plans 
+			 */
+		 
 		 public void validateEobPDP(){
 				try {
 					Thread.sleep(5000);
@@ -1086,6 +1106,9 @@ public void NavigateToClaimsPage(){
 				validate(PrescriptionEobText1);
 				System.out.println("PDP EOB is displayed"  +  PrescriptionEobText.isDisplayed());
 			}
+		    /**
+			 * @toDo : Validate claims table for PDP plans
+			 */
 		 public void validateClaimsTablePDP() {
 				CommonUtility.waitForPageLoad(driver, ClaimsSummaryPage,60);
 				validate(claimsTablePrescriptionDrug);

@@ -1,8 +1,8 @@
 @claimspage @theTransformers @regression_06_06_18 
 Feature: T1.1To validate the new changes related to claims page on the member redesigned site
 
-  @claimsSummaryFED @theTransformers @regression_06_06_18
-  Scenario Outline: To validate the claims present for the Federal member on claims sumamry page for AARP site
+   @claimsSummaryFED @theTransformers @regression_06_06_18
+   Scenario Outline: To validate the claims present for the Federal member on claims sumamry page for AARP site
    Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>     |
       | Test Data Type | <claimssystem> |
@@ -39,16 +39,14 @@ Feature: T1.1To validate the new changes related to claims page on the member re
     Then I can validate the claims summary header
     And I can search claims for the following claim period on redesigned site
       | Plan Type    | <planType>    |
-      | Claim Period | <claimPeriod> |
-      
+      | Claim Period | <claimPeriod> |      
     Then I can see the claims displayed based on the selection in redesigned site
     And I validate the pagination on the claims summary page 
-    And the user validates the EOB section based on domain in redesigned site
-    
+    And the user validates the EOB section based on domain in redesigned site    
      | Domain       | <domain>      |
-      | Plan Type      | <planType>     |
-      Then I navigate to the Claim Details page in redesigned site
-      Then I validate the Claims Table in claims details page in redesigned site    
+     | Plan Type    | <planType>    |
+    Then I navigate to the Claim Details page in redesigned site
+    Then I validate the Claims Table in claims details page in redesigned site    
 
     Examples: 
       | planType | claimPeriod    | domain | claimssystem |
@@ -99,8 +97,8 @@ Feature: T1.1To validate the new changes related to claims page on the member re
       
  
       
-      @regression_06_06_18  @TC10_COMBO
-  Scenario Outline: To validate the claims present for the Combo member on claims sumamry page & the Details on the Claims Details page 
+   @regression_06_06_18  @TC10_COMBO
+   Scenario Outline: To validate the claims present for the Combo member on claims sumamry page & the Details on the Claims Details page 
    Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>     |
       | Test Data Type | <claimssystem> |
@@ -112,8 +110,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
     And I validate the pagination on the claims summary page combo member PDP plan
    	And the user validates the EOB section based on domain in redesigned site
       | Domain     | <domain>      |
-      | Plan Type  | <planType>    |
- 	
+      | Plan Type  | <planType>    | 	
  	 And I navigate to the Claim Details page in AARP site for COMBO member
  	 And I validate the Claim Search link on top    
    And I validate the LEARN MORE ABOUT COST BreakDown Link 
@@ -122,15 +119,14 @@ Feature: T1.1To validate the new changes related to claims page on the member re
    And I can view a claim search back button in Claims Details page in AARP site
    And I validate the two COMBO tabs on the page 
    And I validate the two COMBO tabs on the claim Summary page 
-  And the user validates the DownloadMyData section in redesigned site   
+   And the user validates the DownloadMyData section in redesigned site   
    
     Examples: 
       | planType | claimPeriod    | domain | claimssystem |
       | SHIP    | Last 24 months  | NA      |    COSMOSCLAIMS |
 
   @TC_09claimsPHIP @theTransformers @regression_06_06_18 
-  Scenario Outline: To validate the Error Message for a PHIP  member on claims sumamry page
-    #Given I am an Individual or Group member on the redesigned site
+  Scenario Outline: To validate the Error Message for a PHIP  member on claims sumamry page    
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>     |
       | Test Data Type | <claimssystem> |
@@ -216,8 +212,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 
     @regression_06_06_18 @TC03_FEDAARPIndividualPDP   
     Scenario Outline: To validate the claims present for the Federal member on claims sumamry page for AARP site
-    Given login with following details logins in the member portal and validate elements
-      
+    Given login with following details logins in the member portal and validate elements      
       | Plan Type      | <planType>     |
       | Test Data Type | <claimssystem> |
     When I navigate to the claims Summary page in redesigned site
@@ -260,10 +255,9 @@ Feature: T1.1To validate the new changes related to claims page on the member re
       | MAPD     | Last 24 months | COSMOS| COSMOSCLAIMS   |
      
       
-       @regression_06_06_18 @TC01_FED_AARP_Individual_NICE @TC04_FED_UHC_Individual_COSMOS
-  Scenario Outline: To validate the claims present for the Federal member on claims sumamry page & the Details on the Claims Details page 
-   Given login with following details logins in the member portal and validate elements
-     
+   @regression_06_06_18 @TC01_FED_AARP_Individual_NICE @TC04_FED_UHC_Individual_COSMOS
+   Scenario Outline: To validate the claims present for the Federal member on claims sumamry page & the Details on the Claims Details page 
+   Given login with following details logins in the member portal and validate elements     
       | Plan Type      | <planType>     |
       | Test Data Type | <claimssystem> |
     When I navigate to the claims Summary page in redesigned site
@@ -287,8 +281,8 @@ Feature: T1.1To validate the new changes related to claims page on the member re
       | MA       | Last 24 months | NICE   | NICECLAIMS   |
       | MA       | Last 24 months | COSMOS | COSMOSCLAIMS |
       
-      @TC11_PCP @regression_06_06_18
-  Scenario Outline: To validate the claims present for the Federal member on claims sumamry page for AARP site
+   @TC11_PCP @regression_06_06_18
+   Scenario Outline: To validate the claims present for the Federal member on claims sumamry page for AARP site
    Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>     |
       | Test Data Type | <claimssystem> |
