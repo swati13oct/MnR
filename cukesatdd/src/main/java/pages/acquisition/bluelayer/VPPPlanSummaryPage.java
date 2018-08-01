@@ -205,7 +205,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//*[@class='action-btn lt']")
 	private WebElement Viewsavebtn;
 
-	@FindBy(xpath=".//*[@id='connectHeader']//div[@class='exportSavedProvidersContainer']//div[@class='exportSavedProviders']/form/button")
+	@FindBy(xpath="//button[@class='action-btn negative']")
 	private WebElement Checkcoverage;
 
 	@FindBy(xpath="//*[@id='physicians_info']")
@@ -1273,12 +1273,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public DrugCostEstimatorPage navigateToDCEAfterDrugAdded(String plantype) {
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		waitforElement(viewPlans);
 		if(plantype.equals("MA")||plantype.equals("MAPD")){
 			if(validate(viewPlans)){
 			viewPlans.click();

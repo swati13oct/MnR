@@ -37,8 +37,7 @@ public class ApplitoolsObject {
 	}
 	
 	public void setApplitools(){
-		eyes.setMatchTimeout(3000);
-		
+		eyes.setMatchTimeout(3000);	
 	}
 	
 	public void setBatch(String batchName){
@@ -54,6 +53,7 @@ public class ApplitoolsObject {
 			eyes.setMatchLevel(MatchLevel.CONTENT);
 			
 			eyes.setForceFullPageScreenshot(true);
+			eyes.setWaitBeforeScreenshots(4000);
 			eyes.open(wd, appName, testName,new RectangleSize(1280, 960));
 			eyes.checkWindow(windowName);
 			eyes.close(false);
@@ -63,6 +63,7 @@ public class ApplitoolsObject {
 	public void takeScreenshot(WebDriver wd, String appName, String testName, String windowName){
 		
 			eyes.setForceFullPageScreenshot(false);
+			eyes.setWaitBeforeScreenshots(2000);
 			eyes.setMatchLevel(MatchLevel.CONTENT);
 			eyes.open(wd, appName, testName,new RectangleSize(1280, 960));
 			eyes.checkWindow(windowName);
@@ -74,6 +75,7 @@ public class ApplitoolsObject {
 		if(takeScreenshot==true){
 			eyes.setMatchLevel(MatchLevel.CONTENT);
 			eyes.setForceFullPageScreenshot(true);
+			eyes.setWaitBeforeScreenshots(2000);
 			eyes.open(wd, appName, testName,new RectangleSize(1280, 960));
 			eyes.checkWindow(windowName);
 			eyes.close(false);
@@ -83,6 +85,7 @@ public class ApplitoolsObject {
 	public void takeScreenshot(WebDriver wd, String appName, String testName, String windowName, boolean takeScreenshot){
 		if(takeScreenshot==true){
 			eyes.setForceFullPageScreenshot(false);
+			eyes.setWaitBeforeScreenshots(2000);
 			eyes.setMatchLevel(MatchLevel.CONTENT);
 			eyes.open(wd, appName, testName,new RectangleSize(1280, 960));
 			eyes.checkWindow(windowName);
