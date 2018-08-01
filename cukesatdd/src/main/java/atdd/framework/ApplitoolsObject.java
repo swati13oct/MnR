@@ -31,6 +31,7 @@ public class ApplitoolsObject {
 	public ApplitoolsObject(){
 		eyes = new Eyes();
 		eyes.setApiKey("sAdOjZCjfkyK5G111xeuEgLb4OcNhdPNzO6c0CaCovsds110");
+		eyes.setMatchTimeout(3000);
 		
 	}
 	
@@ -41,7 +42,7 @@ public class ApplitoolsObject {
 	
 	public void takeScreenshotFullPage(WebDriver wd, String appName, String testName, String windowName ){
 			eyes.setMatchLevel(MatchLevel.CONTENT);
-			eyes.setWaitBeforeScreenshots(4000);
+			eyes.setWaitBeforeScreenshots(3000);
 			eyes.setForceFullPageScreenshot(true);
 			eyes.open(wd, appName, testName,new RectangleSize(1280, 960));
 			eyes.checkWindow(4000,windowName);
@@ -84,7 +85,7 @@ public class ApplitoolsObject {
 
 		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 		capabilities.setCapability("platform", "Windows 7");
-		capabilities.setCapability("version", "52.0");
+		capabilities.setCapability("version", "66.0");
 		capabilities.setCapability("screenResolution", "2560x1600");
 		capabilities.setCapability("parent-tunnel", "sauce_admin");
 		capabilities.setCapability("tunnelIdentifier",

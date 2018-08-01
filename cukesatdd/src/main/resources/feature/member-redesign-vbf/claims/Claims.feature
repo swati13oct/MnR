@@ -2,7 +2,7 @@
 Feature: 1.02-VBF-MemRedesign-To test claim functionality
 
   @smokeTest_Claims @rallyDashboard @testharness
-  Scenario Outline: To validate that claims are present on claims summary page and claims details page
+  Scenario Outline: To validate that claims are present on claims summary page and claims details page for <claimssystem>
     Given I am a authenticated member on the member redesign site for Direct Login
       | Plan Type    | <planType>    |
       | ClaimSystem | <claimssystem> |
