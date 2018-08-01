@@ -105,7 +105,7 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(), 'mailing address')]/ancestor::*[@class = 'review-step']//*[contains(text(), 'State')]//following-sibling::p")
 	private WebElement MailStateDisplay;
 	
-	@FindBy(xpath = "//*[contains(text(), 'ZIP')]//following-sibling::p")
+	@FindBy(xpath = "//*[contains(text(), 'Zip Code')]//following-sibling::p")
 	private WebElement MailZipDisplay;
 	
 	//Submit Application Disclaimer
