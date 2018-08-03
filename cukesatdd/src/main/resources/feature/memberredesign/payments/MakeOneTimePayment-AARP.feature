@@ -323,7 +323,7 @@ Feature: To test the payment flow on AARP site
     When the user navigates to Recurring payment history
     Then User Scrolls down to validate Payment History and Scrolls up
     And the user clicks on Edit Automatic Payment button
-    And the user makes auto payment in AARP site
+    And the user makes auto payment in AARP site      
       | Routing number             | <routingNo>        |
       | Confirm routing number     | <confirmRoutingNo> |
       | Account number             | <accountNo>        |
@@ -357,7 +357,8 @@ Feature: To test the payment flow on AARP site
     And the user confirms the Autopayment in UHC site
     And the user moves to Go to Payment History Page button
     And the user clicks on Make One Time Payment button
-    And the user makes one time payment in AARP site by entering required details
+    And the user makes one time payment and navigate futher
+      | Amount to be paid          | <Amount>           |
       | Routing number             | <routingNo>        |
       | Confirm routing number     | <confirmRoutingNo> |
       | Account number             | <accountNo>        |
@@ -398,7 +399,7 @@ Feature: To test the payment flow on AARP site
     And User Clicks on the Pop up displayed
     Then User Scrolls down to validate Payment History and Scrolls up
     And the user clicks on Make One Time Payment button
-    And the user makes one time payment in AARP site by entering required details
+    And the user makes one time payment and navigate futher
       | Amount to be paid          | <Amount>           |
       | Routing number             | <routingNo>        |
       | Confirm routing number     | <confirmRoutingNo> |
@@ -455,7 +456,7 @@ Feature: To test the payment flow on AARP site
     And the user confirms the Autopayment in UHC site
     And the user moves to Go to Payment History Page button
     And the user clicks on Make One Time Payment button
-    And the user makes one time payment in AARP site by entering required details
+    And the user makes one time payment and navigate futher
       | Amount to be paid          | <Amount>           |
       | Routing number             | <routingNo>        |
       | Confirm routing number     | <confirmRoutingNo> |
