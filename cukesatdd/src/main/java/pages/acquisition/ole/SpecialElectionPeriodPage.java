@@ -262,7 +262,7 @@ public boolean validate_SEPoptions_for_planType(String planType) {
 		}
 	}
 	if(planType.contentEquals("SNP")){
-		if(validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer) && validate(MovedOutside_ServiceArea) && validate(DualEligible_DSNP) ){
+		if(validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer) && validate(MovedOutside_ServiceArea) ){
 			System.out.println("All Options for SNP Plan are displayed in SEP pahe OLE flow : Validation Passed");
 			Validation_Flag = true;
 		}
