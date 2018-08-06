@@ -58,6 +58,7 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 	public void setApplitools() {
 		 appObj = new ApplitoolsObject();
 		appObj.setBatch(MRScenario.environment+" AARP");
+		appObj.setApplitools();
 		
 	}
 	
@@ -129,7 +130,6 @@ public class ApplitoolsStepDefinition_ACQ_AARP {
 		appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "DCE Step 2 Pharmacy Selected", "dce_step2_pharmacy");
 		dce.navigateToStep3();
 		appObj.takeScreenshotFullPage(wd,"Acquisition AARP", "DCE Step 3", "dce_step3");
-		dce.clicksOnReturnLink();
 		
 		
 			appObj.saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
