@@ -461,27 +461,27 @@ private WebElement PlanMaterialSection;
 	 */
        
 	public BenefitsAndCoveragePage navigateToBandCPage() {
-
+		System.out.println("Checking for Hello PersonName on Dashboard home page now");
 		waitForHomePage(helloPerson);
+		System.out.println("Hello PersonName on Dashboard home page was found");
 		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
-			System.out.println("user is on Stage login page");
-			// CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);
+			System.out.println("User is on Stage environment");
+			
 			if (driver.getCurrentUrl().contains("/dashboard"))
 				;
 			{
 				System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
-				
 				driver.findElement(By.xpath("//a[contains(text(),'Coverage & Benefits')]")).click();
+				System.out.println("Now waiting for 20 seconds");
 				try {
 					Thread.sleep(20000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				System.out.println(driver.getCurrentUrl());
-				CommonUtility.waitForPageLoad(driver, heading, 30);
-				if (driver.getTitle().contains("Benefits Overview")) {
-					System.out.println(driver.getTitle());
+				System.out.println("Current URL is " +driver.getCurrentUrl());
+				if (driver.getTitle().contains("Benefits")) {
+					System.out.println("Title of Current Page is "+ driver.getTitle());
 					return new BenefitsAndCoveragePage(driver);
 				}
 
