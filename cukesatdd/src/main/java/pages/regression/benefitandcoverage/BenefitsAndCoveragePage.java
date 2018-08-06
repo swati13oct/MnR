@@ -606,7 +606,14 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		PageFactory.initElements(driver, this);
 		String fileName = CommonConstants.BENEFITS_AND_COVERAGE_PAGE_DATA;
 		benefitsCoverage = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_BLAYER_MEMBER);
-		// openAndValidate();
+		try
+		{
+		openAndValidate();
+		}
+		catch(Exception e)
+		{
+			
+		}
 	}
 
 	/**
@@ -632,44 +639,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	 * @toDo : To check benefits and coverage page has opened
 	 */
 
-	public void openAndValidate() {
+	public void openAndValidate() throws InterruptedException  {
 
-		JSONObject jsonObject = new JSONObject();
-		for (String key : benefitsCoverage.getExpectedData().keySet()) {
-			List<WebElement> elements = findElements(benefitsCoverage.getExpectedData().get(key));
-			/*
-			 * if (elements.size() == 1) { validate(elements.get(0)); try {
-			 * jsonObject.put(key, elements.get(0).getText());
-			 * //System.out.println("Text"+elements.get(0).getText()); } catch
-			 * (JSONException e) { // TODO Auto-generated catch block
-			 * e.printStackTrace(); } } else if (elements.size() > 1) {
-			 */
-			JSONArray jsonArray = new JSONArray();
-			for (WebElement element : elements) {
-
-				// validate(element);
-				try {
-					JSONObject jsonObjectForArray = new JSONObject();
-					jsonObjectForArray.put(benefitsCoverage.getExpectedData().get(key).getElementName(),
-							element.getText());
-					jsonArray.put(jsonObjectForArray);
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			try {
-				jsonObject.put(key, jsonArray);
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		}
-
-		benefitsandcoverageJson = jsonObject;
-
-		System.out.println("BenefitsCoverageJson----->" + benefitsandcoverageJson);
+		checkModelPopup(driver);
 
 	}
 	
@@ -2738,6 +2710,42 @@ public void validateImagePresent(String logoToBeDisplayedOnSecondaryPage) {
 			
 		}
 		
+	}
+	public static void checkModelPopup(WebDriver driver) {
+		int counter = 0;
+		do {
+
+			System.out.println("current value of conter: " + counter);
+			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
+
+			if (IPerceptionsFrame.isEmpty()) {
+				// if
+				// (driver.findElements(By.xpath("//area[@href='javascript:clWin()'][@alt
+				// = 'no']")).isEmpty()) {
+				try {
+					Thread.sleep(5000);
+				} catch (InterruptedException e) {
+					System.out.println(e.getMessage());
+				}
+				/*
+				 * } else { System.out.println(
+				 * "FeedBack Modal Present and counter value is:" + counter);
+				 * try { Thread.sleep(2000); WebElement NoThanks =
+				 * driver.findElement(By.xpath("//*[@id='IPEinvL']/map/area[3]")
+				 * ); JavascriptExecutor js = (JavascriptExecutor) driver;
+				 * js.executeScript("arguments[0].scrollIntoView();", NoThanks);
+				 * js.executeScript("arguments[0].click();", NoThanks); break; }
+				 * catch (InterruptedException e) { e.printStackTrace(); }
+				 * 
+				 * }
+				 */
+			} else {
+				driver.switchTo().frame(IPerceptionsFrame.get(0));
+				driver.findElement(By.className("btn-no")).click();
+				driver.switchTo().defaultContent();
+			}
+			counter++;
+		} while (counter < 2);
 	}
 
 }
