@@ -437,13 +437,25 @@ public String GetTFNforPlanType() {
 	return null;
 }
 
+@FindBy(id = "timeoutPopUp")
+private WebElement timeoutPopup;
+
+@FindBy(id = "timeoutPopUp")
+private WebElement popupStayOnPageBtn;
+
 public void clickOnDrugTab(){
+	if(validate(timeoutPopup))
+		popupStayOnPageBtn.click();
 	presDrugTab.click();
 }
 public void clickOnRidersTab(){
+	if(validate(timeoutPopup))
+		popupStayOnPageBtn.click();
 	ridersTab.click();
 }
 public void clickOnPlanCostsTab(){
+	if(validate(timeoutPopup))
+		popupStayOnPageBtn.click();
 	planCostsTab.click();
 }
 }
