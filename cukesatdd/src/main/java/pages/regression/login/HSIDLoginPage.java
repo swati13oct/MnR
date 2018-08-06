@@ -136,7 +136,7 @@ MRScenario loginScenario;
 		signInButton.click();
 		
 		try {
-			Thread.sleep(55000);
+			Thread.sleep(66000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -148,7 +148,7 @@ MRScenario loginScenario;
 			
 			ConfirmSecurityQuestion cs = new ConfirmSecurityQuestion(driver);
 		    try {
-		    	Thread.sleep(5000);
+		    	Thread.sleep(10000);
 				cs.enterValidSecurityAnswer();
 				System.out.println(driver.getCurrentUrl());
 			} catch (Exception e) {
@@ -157,7 +157,7 @@ MRScenario loginScenario;
 			}
 		    
 		    try {
-				Thread.sleep(30000);
+				Thread.sleep(40000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
