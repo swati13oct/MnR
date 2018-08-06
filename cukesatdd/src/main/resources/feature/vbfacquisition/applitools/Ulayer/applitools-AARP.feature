@@ -192,13 +192,13 @@ And the user goes to terms and conditions page from the footer and takes screens
 And the user goes to disclaimer page from the footer and takes screenshot uhc
 And the user goes to agents and brokers page from the footer and takes screenshot uhc
 And the user goes to Accessibility page from the footer and takes screenshot uhc
-And the user goes to medicare eligibility page from the Medicare Eductation nav panel and takes screenshot
-And the user goes to coverage choices page from the Medicare Eductation nav panel and takes screenshot
-And the user goes to prescription provider and benefits page from the Medicare Eductation nav panel and takes screenshot
-And the user goes to cost medicare advantage plnas page from the Medicare Eductation nav panel and takes screenshot
-And the user goes to cost basics page from the Medicare Eductation nav panel and takes screenshot
-And the user goes to pdp plans from the Medicare Eductation nav panel and takes screenshot
-And the user goes to enrollment basics page from the Medicare Eductation nav panel and takes screenshot
+And the user goes to medicare eligibility page from the Medicare Eductation nav panel and takes screenshot uhc
+And the user goes to coverage choices page from the Medicare Eductation nav panel and takes screenshot uhc
+And the user goes to prescription provider and benefits page from the Medicare Eductation nav panel and takes screenshot uhc
+And the user goes to cost medicare advantage plnas page from the Medicare Eductation nav panel and takes screenshot uhc
+And the user goes to cost basics page from the Medicare Eductation nav panel and takes screenshot uhc
+And the user goes to pdp plans from the Medicare Eductation nav panel and takes screenshot uhc
+And the user goes to enrollment basics page from the Medicare Eductation nav panel and takes screenshot uhc
 
 Examples:
 	|<placeholder>|
