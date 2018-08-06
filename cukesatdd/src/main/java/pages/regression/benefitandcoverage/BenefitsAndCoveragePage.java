@@ -2053,7 +2053,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}
 		Medicationlinkinpdfsec.click();
 		try {
-			Thread.sleep(10000);
+			Thread.sleep(20000);
 		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -2085,7 +2085,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(Viewotherdocsinpdf);
 		Viewotherdocsinpdf.click();
 		try {
-			Thread.sleep(10000);
+			Thread.sleep(20000);
 		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -2097,7 +2097,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			Assert.fail();
 		}
 		try {
-			Thread.sleep(20000);
+			Thread.sleep(30000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
