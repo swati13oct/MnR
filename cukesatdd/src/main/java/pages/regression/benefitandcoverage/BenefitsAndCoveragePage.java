@@ -1245,7 +1245,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 		locateapharmacybutton.click();
 		try {
-			Thread.sleep(10000);
+			Thread.sleep(20000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -2080,6 +2080,12 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			e1.printStackTrace();
 		}
 		Medicationlinkinpdfsec.click();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		if (driver.getCurrentUrl().contains("/documents/medication-program")) {
 			System.out.println(driver.getCurrentUrl());
 			Assert.assertTrue(true);
@@ -2106,6 +2112,12 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}
 		validate(Viewotherdocsinpdf);
 		Viewotherdocsinpdf.click();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		if (driver.getCurrentUrl().contains("/member/documents/overview.html")) {
 			System.out.println(driver.getCurrentUrl());
 			Assert.assertTrue(true);
@@ -2256,25 +2268,33 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
  public void grouptabledynamicdata()
  {
-	int i =1;
-	int j = 1;
-	List<WebElement> rows =  driver.findElements(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr"));
-	List<WebElement> cols =  driver.findElements(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr/td[1]"));
-	WebElement tabletext  = driver.findElement(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr[i]/td[j]/div"));
-	
-	
-	System.out.println(rows);
-	System.out.println(cols);
-	for( i = 2 ; i<rows.size();i++)
-	{
-		for ( j = 1 ; j<cols.size();j++)
-		{
-			if(i==2)
-			{
-		(driver.findElement(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr["+i+"]/td[3]"))).getText();
-		}
-		}
+    Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr[2]/td[3]")).getText(),"$10.00");
+	Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr[2]/td[4]")).getText(),"$10.00");
+	Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr[2]/td[5]")).getText(),"$10.00");
+	Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr[3]/td[1]")).getText(),"$20.00");
+	Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr[3]/td[2]")).getText(),"$20.00");
+	Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr[3]/td[3]")).getText(),"$20.00");
+	Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr[4]/td[1]")).getText(),"$35.00");
+	Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr[4]/td[2]")).getText(),"$35.00");
+	Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr[4]/td[3]")).getText(),"$35.00");
+	Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr[5]/td[1]")).getText(),"25%");
+	Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr[5]/td[2]")).getText(),"25%");
+	Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr[5]/td[3]")).getText(),"25%");
+	Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr[2]/td[2]")).getText(),"No Deductible");
+	System.out.println(annualDeductibleColumn.size() + initialCoverageColumn.size() + coverageGaStageColumn.size()
+			+ catastrophicCoverageStageColumn.size());
+	if (annualDeductibleColumn.size() > 0 && initialCoverageColumn.size() > 0 && coverageGaStageColumn.size() > 0
+			&& catastrophicCoverageStageColumn.size() > 0) {
+		Assert.assertTrue("The columns are correct in Peehip table", true);
+
+	} else {
+		Assert.assertFalse("The columns are incorrect in Peehip table", true);
 	}
+	Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr[2]/th")).getText(),"Tier 1 ");
+	Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr[3]/th")).getText(),"Tier 2 ");
+	Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr[4]/th")).getText(),"Tier 3 ");
+	Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr[5]/th")).getText(),"Tier 4 ");
+	
 }
  
 public void validateImagePresent(String logoToBeDisplayedOnSecondaryPage) {

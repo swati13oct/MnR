@@ -536,7 +536,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		benefitsCoveragePage.validatedrugcoverageheaderandtext();
 	}
 	
-	@And("^the user validates group Drug coverage header and text under the section ")
+	@And("^the user validates group Drug coverage header and text under the section")
 	public void user_validates__groupdrugcoverage_section() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
