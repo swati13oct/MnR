@@ -74,7 +74,7 @@ public class OneTimePaymentPage extends UhcDriver{
 
 	public ConfirmOneTimePaymentPage enterPaymentDetails(Map<String, String> accountAttributessMap) {
 		
-		accountAttributessMap.get("Amount to be paid");		
+		String Amount = accountAttributessMap.get("Amount to be paid");		
 		String routingNumber = accountAttributessMap.get("Routing number");
 		String confirmRoutingNumber = accountAttributessMap.get("Confirm routing number");
 		String accountNumber = accountAttributessMap.get("Account number");
@@ -107,7 +107,7 @@ public class OneTimePaymentPage extends UhcDriver{
 		otheramountfield.click();
 		
 		otheramountfield.clear();		
-		otheramountfield.sendKeys();
+		otheramountfield.sendKeys(Amount);
 		
 		routingNumberField.click();
 		routingNumberField.clear();
