@@ -1243,11 +1243,21 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		if(plantype.equals("MA")||plantype.equals("MAPD")){
+			if(validate(viewPlans)){
+				AssertTrue("No plans for MA",false);
+			}else			
 			viewPlans.click();
 		}else
 			viewPDPPlans.click();
 
 	}
+
+	private void AssertTrue(String string, boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 
 	public DrugCostEstimatorPage navigateToDCE(String plantype) {
 		if(plantype.equals("MA")||plantype.equals("MAPD")){

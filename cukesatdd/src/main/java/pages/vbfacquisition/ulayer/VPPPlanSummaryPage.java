@@ -269,7 +269,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			//}
 		} else if (planType.equalsIgnoreCase("MA")
 				|| planType.equalsIgnoreCase("MAPD")) {
+			if(validate(maPlansViewLink)){		
 				maPlansViewLink.click();
+			}else{
+				Assert.assertTrue("There are no plans for MA", false);
+			}
 		
 			
 			//validate(hideMaPlans);

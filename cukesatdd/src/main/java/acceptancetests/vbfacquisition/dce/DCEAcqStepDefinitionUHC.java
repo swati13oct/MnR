@@ -170,6 +170,8 @@ public class DCEAcqStepDefinitionUHC {
 
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) loginScenario.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 			dce.addDrug(drug.split(" ")[0]);
+			
+			dce.aepyearselection();
 
 	}
 
