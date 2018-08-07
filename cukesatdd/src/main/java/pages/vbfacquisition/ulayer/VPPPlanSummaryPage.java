@@ -44,8 +44,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private WebElement snpPlansNumber;
 
 	
-	//@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='plan-overview-wrapper']//div[@class='overview-tabs module-tabs-tabs']/div[1]//span[@class='trigger-closed']")
-	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[1]//*[@class='trigger-closed']")
+	@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='plan-overview-wrapper']//div[@class='overview-tabs module-tabs-tabs']/div[1]//span[@class='trigger-closed']")
+	//@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[1]//*[@class='trigger-closed']")
 	private WebElement maPlansViewLink;
 	
 	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[1]//*[@class='trigger-closed']")
