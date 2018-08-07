@@ -10,26 +10,26 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.bluelayer.PlanComparePage;
-import pages.acquisition.ole.AuthorizationPage;
-import pages.acquisition.ole.CancelOLEModal;
-import pages.acquisition.ole.CoverageInformationPage;
-import pages.acquisition.ole.LearnMoreModal;
-import pages.acquisition.ole.LeavingOLEmodal;
-import pages.acquisition.ole.MedicareInformationPage;
-import pages.acquisition.ole.OLEconfirmationPage;
-import pages.acquisition.ole.PersonalInformationPage;
-import pages.acquisition.ole.PlanPremiumPage;
-import pages.acquisition.ole.PrelimineryQuestionsPage;
-import pages.acquisition.ole.PrimaryCarePhysicianPage;
-import pages.acquisition.ole.ProposedEffectiveDatePage;
-import pages.acquisition.ole.ReviewSubmitPage;
-import pages.acquisition.ole.SpecialElectionPeriodPage;
-import pages.acquisition.ole.SupplementalBenefitsPage;
-import pages.acquisition.ole.WelcomePage;
-import pages.acquisition.ulayer.ComparePlansPage;
-import pages.acquisition.ulayer.PlanDetailsPage;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import pages.vbfacquisition.bluelayer.PlanComparePage;
+import pages.vbfacquisition.ole.AuthorizationPage;
+import pages.vbfacquisition.ole.CancelOLEModal;
+import pages.vbfacquisition.ole.CoverageInformationPage;
+import pages.vbfacquisition.ole.LearnMoreModal;
+import pages.vbfacquisition.ole.LeavingOLEmodal;
+import pages.vbfacquisition.ole.MedicareInformationPage;
+import pages.vbfacquisition.ole.OLEconfirmationPage;
+import pages.vbfacquisition.ole.PersonalInformationPage;
+import pages.vbfacquisition.ole.PlanPremiumPage;
+import pages.vbfacquisition.ole.PrelimineryQuestionsPage;
+import pages.vbfacquisition.ole.PrimaryCarePhysicianPage;
+import pages.vbfacquisition.ole.ProposedEffectiveDatePage;
+import pages.vbfacquisition.ole.ReviewSubmitPage;
+import pages.vbfacquisition.ole.SpecialElectionPeriodPage;
+import pages.vbfacquisition.ole.SupplementalBenefitsPage;
+import pages.vbfacquisition.ole.WelcomePage;
+import pages.vbfacquisition.ulayer.ComparePlansPage;
+import pages.vbfacquisition.ulayer.PlanDetailsPage;
+import pages.vbfacquisition.ulayer.VPPPlanSummaryPage;
 import acceptancetests.vbfacquisition.vpp.VPPCommonConstants;
 import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.data.CommonConstants;
@@ -133,7 +133,7 @@ public class oleStepDefinition {
 		SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);	
 		WelcomePage welcomePage;
 		if(SiteName.contains("UHC_ACQ")){
-			pages.acquisition.bluelayer.VPPPlanSummaryPage planSummaryPage = (pages.acquisition.bluelayer.VPPPlanSummaryPage) getLoginScenario()
+			VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			TFN = planSummaryPage.GetTFNforPlanType();
 
@@ -197,7 +197,7 @@ public class oleStepDefinition {
 		WelcomePage welcomePage;
 		if(SiteName.contains("UHC_ACQ")){
 
-			pages.acquisition.bluelayer.PlanDetailsPage vppPlanDetailsPage = (pages.acquisition.bluelayer.PlanDetailsPage) getLoginScenario()
+			PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 			TFN = vppPlanDetailsPage.GetTFNforPlanType();
 			welcomePage = vppPlanDetailsPage.Enroll_OLE_Plan(PlanName);
@@ -250,7 +250,7 @@ public class oleStepDefinition {
 		WelcomePage welcomePage;
 		if(SiteName.contains("UHC_ACQ")){
 
-			pages.acquisition.bluelayer.PlanComparePage comparePlansPage = (PlanComparePage) getLoginScenario()
+			PlanComparePage comparePlansPage = (PlanComparePage) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);
 			welcomePage = comparePlansPage.Enroll_OLE_Plan(PlanName);
 		}
