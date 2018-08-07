@@ -81,7 +81,7 @@
 					<reuseForks>true</reuseForks>
 					<testSourceDirectory>${basedir}/src/main/java/</testSourceDirectory>
 					<testClassesDirectory>${project.build.directory}/classes/</testClassesDirectory>
-					<argLine>-Xmx512m -XX:MaxPermSize=512m</argLine>
+					<argLine>-Xmx512m -XX:MaxPermSize=1024m</argLine>
 					<systemPropertyVariables>
 						<environment>${environment}</environment>
 						<webdriverhost>${webdriverhost}</webdriverhost>
