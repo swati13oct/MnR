@@ -1090,22 +1090,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	 */
 	public void validatedrugcoverageheaderandtextgroup() {
 	
-		if(DrugCoverageHeader.isDisplayed())
-		{
-			Assert.fail("Drug coverage should not display");
-		}
-		else
-		{
-			Assert.assertTrue(true);
-		}
-		if(DrugCoveragetext.isDisplayed())
-		{
-			Assert.fail("Drug coverage should not display");
-		}
-		else
-		{
-			Assert.assertTrue(true);
-		}
+		Assert.assertTrue(!validate(DrugCoverageHeader));
+		Assert.assertTrue(!validate(DrugCoveragetext));
+		
 		
 	}
 
@@ -1654,7 +1641,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		driver.navigate().to("https://"+MRScenario.environmentMedicare+"-mymedicareaccount.uhc.com/pcp/member/benefits-coverage.html");
 	    }
 		try {
-			Thread.sleep(10000);
+			Thread.sleep(20000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -2118,6 +2105,12 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	{
 		Assert.fail();
 	}
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	
 	}
 	public void validatestaticlinksinpdfpdp(String plantype)

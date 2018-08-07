@@ -121,7 +121,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
 
   @CMvalidatePdfsectiongroupenglish
   Scenario Outline: Verify PDF section is in place on Benefits and     Coverage page
-    Given registered member with following details logins in the member portal
+    Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Copay Category | <copayCategory> |
@@ -138,7 +138,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
 
   @CMvalidatePdfsectiongroupspanishchinese
   Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
-    Given registered member with following details logins in the member portal
+    Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Copay Category | <copayCategory> |
@@ -480,8 +480,8 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
      And the user validates contactus section 
       
      Examples:  
-     | planType|  memberType  | copayCategory  | language | SummaryofBenefits    | EvidenceofCoverage      | ComprehensiveFormularyDrug List     | name           | memberid    | effectivedate| monthlypremium |   UpdatedLanguage | DisplayFlag|
-     | MAPD    |  Group       |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | NVKLSDS LKASDFJ| 970345148-00| 07/01/2018   | Not Available  | Tier 2            | true       | 
+     | planType|  memberType  | copayCategory | language | SummaryofBenefits    | Evidenceof Coverage      | ComprehensiveFormularyDrug List     | name          | memberid    | effectivedate| monthlypremium |   UpdatedLanguage | DisplayFlag|
+     | MAPD    |  Group       |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | EACD BEBFFFAF| 921836941-00 | 08/01/2018   | Not Available  | Tier 2            | true       | 
      
  
  @TableTest
