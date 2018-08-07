@@ -54,10 +54,10 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
             #| MAPD    |  Individual  |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | DDCEE DAADF | 954016383-00 | 01/01/2018    | Not Available  | Tier 2            | true       |
             #| MAPD    |  Individual  |  NON LIS      | SPANISH  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | DDCEE DAADF | 954016383-00 | 01/01/2018    | Not Available  | Tier 2            | true       |
             #| MAPD    |  Individual  |  NON LIS      | CHINESE  |                      |                          |                                     | DDCEE DAADF | 954016383-00 | 01/01/2018    | Not Available  | Tier 2            | true       |
-            #| Medica  |  Individual  |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | AADECDC FEDFACEDBACBB|954283936-00    | 04/01/2018    | Not Available  | Tier 2            | true       |
-            #| Medica  |  Individual  |  NON LIS      | SPANISH  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | AADECDC FEDFACEDBACBB|954283936-00    | 04/01/2018    | Not Available  | Tier 2            | true       |
-             | PCP     |  Individual  |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | BDFAEC CBADEADF|945007888-00 | 01/01/2018 | Not Available  | Tier 2            | true       |
-             | PCP     |  Individual  |  NON LIS      | SPANISH  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | BDFAEC CBADEADF|945007888-00 | 01/01/2018 | Not Available  | Tier 2            | true       |
+             | Medica  |  Individual  |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | AADECDC FEDFACEDBACBB|954283936-00    | 04/01/2018    | Not Available  | Tier 2            | true       |
+             | Medica  |  Individual  |  NON LIS      | SPANISH  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | AADECDC FEDFACEDBACBB|954283936-00    | 04/01/2018    | Not Available  | Tier 2            | true       |
+            #| PCP     |  Individual  |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | BDFAEC CBADEADF|945007888-00 | 01/01/2018 | Not Available  | Tier 2            | true       |
+            #| PCP     |  Individual  |  NON LIS      | SPANISH  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | BDFAEC CBADEADF|945007888-00 | 01/01/2018 | Not Available  | Tier 2            | true       |
         
 
   @CMFedPDPNonLis
