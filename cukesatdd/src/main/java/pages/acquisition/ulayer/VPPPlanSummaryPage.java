@@ -48,7 +48,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[1]//*[@class='trigger-closed']")
 	private WebElement maPlansViewLink;
 	
-	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[1]//*[@class='trigger-closed']")
+	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[4]//*[@class='trigger-closed']")
 	private WebElement snpPlansViewLink;
 
 	@FindBy(id = "plan-list-1")
@@ -287,9 +287,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				snpPlansViewLink.click();
 		}
 		else if (planType.equalsIgnoreCase("SNP")) {
-			if(validate(hidePdpPlans)){
-				snpPlansViewLink.click();
-			}
+			snpPlansViewLink.click();
 		}
 		return new VPPPlanSummaryPage(driver, planType);
 	}

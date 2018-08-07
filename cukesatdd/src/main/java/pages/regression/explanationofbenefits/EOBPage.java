@@ -126,7 +126,7 @@ public class EOBPage extends UhcDriver{
 			select = new Select(eobMonthDateRange1);
 		}
 		System.out.println(dateRange);
-		select.selectByValue(dateRange);
+		select.selectByVisibleText(dateRange);
 		validateDateRangeContentDisplayed(dateRange);
  		return new EOBPage(driver);
 	}
