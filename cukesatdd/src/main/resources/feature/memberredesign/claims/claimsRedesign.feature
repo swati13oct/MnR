@@ -220,6 +220,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
       | Plan Type    | <planType>    |
       | Claim Period | <claimPeriod> |
     Then  I can see the claims displayed based on the selection in redesigned site for PDP plans 
+    And I validate the message on summary page You Have 
     And I validate the pagination on the claims summary page for members  
     And the user validates the EOB section in redesigned site    
     And the user validates the DownloadMyData section in redesigned site
@@ -251,7 +252,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
    
     Examples: 
       | planType | claimPeriod    | domain | claimssystem |
-      | MAPD     | Last 24 months | NICE   | NICECLAIMS   |
+    #  | MAPD     | Last 24 months | NICE   | NICECLAIMS   |
       | MAPD     | Last 24 months | COSMOS| COSMOSCLAIMS   |
      
       
@@ -279,7 +280,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
     Examples: 
       | planType | claimPeriod    | domain | claimssystem |
       | MA       | Last 24 months | NICE   | NICECLAIMS   |
-      | MA       | Last 24 months | COSMOS | COSMOSCLAIMS |
+     # | MA       | Last 24 months | COSMOS | COSMOSCLAIMS |
       
    @TC11_PCP @regression_06_06_18
    Scenario Outline: To validate the claims present for the Federal member on claims sumamry page for AARP site

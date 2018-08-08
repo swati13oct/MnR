@@ -583,9 +583,11 @@ public class ClaimsMemberRedesignStepDefinition {
 	@When("^I validate the error message for a PHIP Member on the screen$")
 	public void i_validate_the_error_message_for_a_PHIP_Member_on_the_screen() throws Throwable {
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		 claimSummarypage.ValidatePHIPErrorMessage();
-	  
-	 
+			if(!claimSummarypage.ValidatePHIPErrorMessage()){
+			System.out.println("Error Message not displayed for PHIP member on Claims Summary Page ");
+			Assert.fail("Error Message failed");
+
+	 	}
 	}
 	
 	@When("^I Validate the plan name$")
@@ -758,4 +760,17 @@ public class ClaimsMemberRedesignStepDefinition {
 		if(newClaimsSummaryPage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
 	}
+	/**
+	 * @toDo : Validate the you have message 
+	 */
+	@And("^I validate the message on summary page You Have$")
+	public void validate_you_have_message()throws Throwable {
+		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
+		newClaimsSummaryPage.validateYouHavemessage();
+		if(!newClaimsSummaryPage.validateYouHavemessage1()){
+			System.out.println("*** You have message not displayed ***");}
+		else {
+			Assert.fail("Error Message failed");
+			}
+			}
           }

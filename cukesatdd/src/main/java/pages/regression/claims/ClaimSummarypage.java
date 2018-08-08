@@ -898,12 +898,13 @@ public class ClaimSummarypage extends UhcDriver{
 		return new ClaimSummarypage(driver);
 	}
 	/**
+	 * @throws InterruptedException 
 	 * @toDo :Validate error message for PHIP member on Claims Summary page
 	 */
-public boolean ValidatePHIPErrorMessage(){
-	
+public boolean ValidatePHIPErrorMessage() throws InterruptedException{
+	    Thread.sleep(3000);
 	     //if(driver.getTitle().equalsIgnoreCase("Claims")){	
-		 System.out.println("!!! The member is on Claims Summary page with PHIP Plan  !!!");
+		// System.out.println("!!! The member is on Claims Summary page with PHIP Plan  !!!");
 		 validate(PHIPerrorMsg);		
 		if (PHIPerrorMsg.isDisplayed()){			
 			System.out.println("*************Error Message Displayed for PHIP Member on claims Summary page***************");
@@ -913,10 +914,10 @@ public boolean ValidatePHIPErrorMessage(){
 			else
 				System.out.println("************Error message not displayed for PHIP Member on claims Summary page ***************");
 				return false;
+				}
 
-		}
 
-
+		
      public void validateCustomSearch(){
     	 System.out.println("The title of the page is-------->"+driver.getTitle());
  		if(driver.getTitle().equalsIgnoreCase("Claims")){
@@ -979,11 +980,30 @@ public void NavigateToClaimsPage(){
  		{
  			System.out.println(Youhave.getText());
  			System.out.println("You have claims messgae displayed ");
- 			Assert.assertTrue(Youhave.getText().contains("You have")+"message is displayed", true);
+ 			//Assert.assertTrue(Youhave.getText().contains("You have")+"message is displayed", true);
  		
  		}	
  		
- 	}   
+ 	} 
+     /**
+ 	 * @toDo : Validate You have text 
+ 	 */
+	public boolean validateYouHavemessage1() throws InterruptedException {  	
+ 			Thread.sleep(2000); 		
+     	 validate(Youhave);
+  		//if (Youhave.getText().contains("You have"))
+     	if (Youhave.isDisplayed())
+     	{
+  			System.out.println(Youhave.getText());
+  			System.out.println("You have claims messgae displayed ");
+  			System.out.println("**** Error Message : "+Youhave.getText()+ " ****");
+  			return true;  			
+  		}
+     	else
+				System.out.println("************Error message not displayed for PHIP Member on claims Summary page ***************");
+				return false;
+				} 		
+   
      
      public void validateClaimsHeaderCopyText() {
   		// TODO Auto-generated method stub
@@ -994,7 +1014,6 @@ public void NavigateToClaimsPage(){
   			Assert.assertTrue(clamsSummaryCopyText.getText().contains("Review your claims search")+"copy text is displayed", true);
   		
   		}	
-  		
   	}
 
  public void validateClaimsFromDropDowns1() {
@@ -1087,9 +1106,21 @@ public void NavigateToClaimsPage(){
 			return new ClaimSummarypage(driver);	
 			}
 		
-		 public void validatePCPtext(){
+		// @SuppressWarnings("deprecation")
+		public void validatePCPtext(){
+			/* WebElement t = PCPtext;
+			 if (t.getText().contains ("plan members can view claims"))
+			 //if(driver.getCurrentUrl().contains("/documents/medication-program"))
+				{
+					System.out.println(t.getText());
+					Assert.assertTrue(true);
+				}
+				else
+				{
+					Assert.fail();
+				}*/
 			 validate(PCPtext);
-			 System.out.println("PCP text is seen on the page");
+			 System.out.println("PCP text is seen on the page" + PCPtext.isDisplayed());
 		 }
 		 
 		    /**
