@@ -322,7 +322,7 @@ public class ClaimSummarypage extends UhcDriver{
 	       try {
 	    	   Thread.sleep(5000);
 	    	   
-			validate (verifyClaimSummaryAndPagination1);
+			//validate (verifyClaimSummaryAndPagination1);
 			   System.out.println("Pagination is seen ===>"+verifyClaimSummaryAndPagination.getText());
 			
 		} catch (Exception e) {
@@ -331,14 +331,7 @@ public class ClaimSummarypage extends UhcDriver{
 		}return true;
 		}
 	
-	/**
-	 * @toDo:validate the pagination on the claims summary page
-	 */
-	public boolean verifyClaimsTableAndPagination3(){
-		
-	/**
-	 * @toDo : this method validates EOB 
-	 */
+	
 	public boolean validateEobfordifferentDomainType(String domain, String plantype){
 
 		if (domain.equals("COSMOS")&& plantype.equals("MAPD"))
@@ -870,17 +863,7 @@ public void NavigateToClaimsPage(){
 	 * @toDo : Validate You have text 
 	 */
 
-     public void validateClaimsHeaderCopyText() {
- 		// TODO Auto-generated method stub
- 		if (clamsSummaryCopyText.getText().contains("Review your claims search"))
- 		{
- 			System.out.println(Youhave.getText());
- 			System.out.println("You have claims messgae displayed ");
- 			//Assert.assertTrue(Youhave.getText().contains("You have")+"message is displayed", true);
- 		
- 		}	
- 		
- 	} 
+    
      /**
  	 * @toDo : Validate You have text 
  	 */
@@ -926,30 +909,8 @@ public void NavigateToClaimsPage(){
  /**
 	 * @toDo : Validate claims FROM DROP DOWN
 	 */
- public void validateClaimsFromDropDown2() {
-		
- System.out.println("The title of Claims page is-------->"+driver.getTitle());
-	//System.out.println("The URL of the Claims page is---------->"+driver.getCurrentUrl());
-	
-	if(driver.getTitle().equalsIgnoreCase("Claims")){
-		System.out.println("!!! The member is on Claims Summary page !!!");
-		validate(planame);
-		System.out.println("The Plan Name is ===>"+(planame.getText()));
-		validate(claimFromDropDown1);
-		 System.out.println("*** Drop down for months visible***");	
-		 
-	 		Select select = new Select(claimFromDropDown1);
-	 		System.out.println("Slected value is  =>" +select.getFirstSelectedOption());
-	 		for(int i=0;i<select.getOptions().size();i++){
-	 			System.out.println(select.getOptions().get(i).getAttribute("value"));
-	 		} 	
-	 		  }
-	             }	
-		
- public void validateLearnmoreaboutsection1(){
-	 validate(learmore);
-	 System.out.println("***Laearn More link is seen on the claim summart page ***");
- }
+
+ 
 
 
 	 public void validateClaimsPlantype() {
@@ -1075,7 +1036,7 @@ public void NavigateToClaimsPage(){
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				validate(PrescriptionEobText1);
+				//validate(PrescriptionEobText1);
 				System.out.println("PDP EOB is displayed"  +  PrescriptionEobText.isDisplayed());
 			}
 		    /**
