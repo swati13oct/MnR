@@ -1778,6 +1778,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		
 	}
 
+	
+
 	/**
 	 * @toDo : Validates the hand image in discount and services section for
 	 *       ship members

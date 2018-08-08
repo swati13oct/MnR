@@ -3,7 +3,10 @@
  */
 package pages.regression.benefitandcoverage;
 
+import java.util.List;
+
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -104,6 +107,26 @@ public class ValueAddedServicepage extends UhcDriver {
 		
 		
 	}
+	
+	/**
+	 * @toDo : Validates the vastiles on vas page
+	 */
+	
+	public void vastiles()
+	{
+		int i =0;
+		List<WebElement> tilelist = driver.findElements(By.xpath("(.//*[@id='servccontroller']/div/section/div/div/div/div)[6])["+i+"]"));
+		for(i=1;i<=tilelist.size();i++)
+		{
+		if (i==1 || i==3||i==6)
+		validate(tilelist.get(i));
+		else
+		{
+			i++;
+		}
+		}
+	}
+		
 	
 
 	

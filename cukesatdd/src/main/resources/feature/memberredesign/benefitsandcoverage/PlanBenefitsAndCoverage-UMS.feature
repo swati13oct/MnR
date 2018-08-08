@@ -312,6 +312,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     Then The user navigates to Benefits and Coverage page
       | Plan Type | <planType> |
     Then the user validate Value Add Service page comes on clicking additional info button
+    And the user validate vas tiles on vas page
 
     Examples: 
       | planType | memberType |
@@ -483,7 +484,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
      | MAPD    |  Group       |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | EACD BEBFFFAF| 921836941-00 | 08/01/2018   | Not Available  | Tier 2            | true       | 
      
  @CMGroupTable
- Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
+ Scenario Outline: Verify Group table data on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |

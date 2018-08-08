@@ -1131,6 +1131,16 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		benefitsCoveragePage.grouptabledynamicdata(plantype);
 	}
 	
+	
+	@Then("^the user validate vas tiles on vas page")
+	public void validatevastiles()
+	{
+	ValueAddedServicepage valueaddedservices = (ValueAddedServicepage) getLoginScenario()
+	.getBean(PageConstantsMnR.VALUE_ADDED_SERVICES);
+	valueaddedservices.vastiles();
+	
+	}
+	
 	/** 
 	 * @toDo : Validates the static links in pdf section pdp non lis
 	 */
