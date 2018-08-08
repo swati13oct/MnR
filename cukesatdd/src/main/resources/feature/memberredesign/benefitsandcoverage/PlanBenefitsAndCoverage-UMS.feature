@@ -483,7 +483,23 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
      | planType|  memberType  | copayCategory | language | SummaryofBenefits    | Evidenceof Coverage      | ComprehensiveFormularyDrug List     | name          | memberid    | effectivedate| monthlypremium |   UpdatedLanguage | DisplayFlag|
      | MAPD    |  Group       |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | EACD BEBFFFAF| 921836941-00 | 08/01/2018   | Not Available  | Tier 2            | true       | 
      
- 
+ @CMGroupTable
+ Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      | Copay Category | <copayCategory> |
+    Then The user navigates to Benefits and Coverage page
+       | Plan Type      | <planType>  |
+    And the user able to see table and values in it 
+       | Plan Type      | <planType>  |
+    
+    Examples:  
+     | planType|  memberType  | copayCategory |
+     | MAPD    |  Group       |  NON LIS      |
+     | MAPDRX  |  Group       |  NON LIS      |
+     
+     
  @TableTest
  Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements

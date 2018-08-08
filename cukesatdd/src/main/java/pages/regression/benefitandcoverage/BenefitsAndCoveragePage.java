@@ -471,6 +471,18 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(id = "rxcustomgroup_ccs-header")
 	private List<WebElement> catastrophicCoverageStageColumn;
+	
+	@FindBy(xpath = ".//*[@id='standard_ads-header']/span/p")
+	private WebElement annualDeductibleColumnheader;
+
+	@FindBy(xpath = ".//*[@id='standard_ics-header']/span/p")
+	private WebElement initialCoverageColumnheader;
+
+	@FindBy(xpath = ".//*[@id='standard_cgp-header']/span/p")
+	private WebElement coverageGaStageColumnheader;
+
+	@FindBy(xpath = ".//*[@id='standard_ccs-header']/span/p")
+	private WebElement catastrophicCoverageStageColumnheader;
 
 	@FindBy(xpath = "//table[@class='table-white atdd-bnc-rx187grptable']/tbody/tr[2]/td[3]/div[1]")
 	private WebElement PeehipTier1ValueIC;
@@ -2231,35 +2243,52 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	}
 }
 
- public void grouptabledynamicdata()
+ public void grouptabledynamicdata(String plantype)
  {
-    Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr[2]/td[3]")).getText(),"$10.00");
-	Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr[2]/td[4]")).getText(),"$10.00");
-	Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr[2]/td[5]")).getText(),"$10.00");
-	Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr[3]/td[1]")).getText(),"$20.00");
-	Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr[3]/td[2]")).getText(),"$20.00");
-	Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr[3]/td[3]")).getText(),"$20.00");
-	Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr[4]/td[1]")).getText(),"$35.00");
-	Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr[4]/td[2]")).getText(),"$35.00");
-	Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr[4]/td[3]")).getText(),"$35.00");
-	Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr[5]/td[1]")).getText(),"25%");
-	Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr[5]/td[2]")).getText(),"25%");
-	Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr[5]/td[3]")).getText(),"25%");
-	Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr[2]/td[2]")).getText(),"No Deductible");
-	System.out.println(annualDeductibleColumn.size() + initialCoverageColumn.size() + coverageGaStageColumn.size()
-			+ catastrophicCoverageStageColumn.size());
-	if (annualDeductibleColumn.size() > 0 && initialCoverageColumn.size() > 0 && coverageGaStageColumn.size() > 0
-			&& catastrophicCoverageStageColumn.size() > 0) {
-		Assert.assertTrue("The columns are correct in Peehip table", true);
-
-	} else {
-		Assert.assertFalse("The columns are incorrect in Peehip table", true);
-	}
-	Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr[2]/th")).getText(),"Tier 1 ");
-	Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr[3]/th")).getText(),"Tier 2 ");
-	Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr[4]/th")).getText(),"Tier 3 ");
-	Assert.assertEquals(driver.findElement(By.xpath(".//*[@id='drug-benefits']/div[5]/div[4]/div/div[1]/div/div/table/tbody/tr[5]/th")).getText(),"Tier 4 ");
-	
+	 if (plantype.contentEquals("MAPD"))
+	 {
+	//System.out.println(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[2]/td[3]")).getText());
+    Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[2]/td[3]")).getText(),"$5.00");
+	Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[2]/td[4]")).getText(),"$5.00");
+	Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[2]/td[5]")).getText(),"Greater of $3.35 or 5.00%");
+	Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[3]//td[1]")).getText(),"$20.00");
+	Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[3]//td[2]")).getText(),"$20.00");
+	Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[3]//td[3]")).getText(),"Greater of $8.35 or 5.00%");
+	Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[4]//td[1]")).getText(),"$50.00");
+	Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[4]//td[2]")).getText(),"$50.00");
+	Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[4]//td[3]")).getText(),"Greater of $8.35 or 5.00%");
+	Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[5]//td[1]")).getText(),"$20.00");
+	Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[5]//td[2]")).getText(),"$20.00");
+	Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[5]//td[3]")).getText(),"Greater of $8.35 or 5.00%");
+	Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[2]/td[2]")).getText(),"No Deductible");
+	validate(annualDeductibleColumnheader);
+	validate(initialCoverageColumnheader);
+	validate(coverageGaStageColumnheader);
+	validate(catastrophicCoverageStageColumnheader);
+	Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[2]/th")).getText(),"Tier 1 ");
+	Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[3]/th")).getText(),"Tier 2 ");
+	Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[4]/th")).getText(),"Tier 3 ");
+	Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[5]/th")).getText(),"Tier 4 ");
+	 }
+	 else if (plantype.contentEquals("MAPDRX"))
+	 {
+		    Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-rx187grptable']//tr[2]/td[3]")).getText(),"$10.00");
+			Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-rx187grptable']//tr[2]/td[4]")).getText(),"$10.00");
+			Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-rx187grptable']//tr[2]/td[5]")).getText(),"$10.00");
+			Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-rx187grptable']//tr[3]/td[1]")).getText(),"$25.00");
+			Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-rx187grptable']//tr[3]/td[2]")).getText(),"$25.00");
+			Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-rx187grptable']//tr[3]/td[3]")).getText(),"$25.00");
+			Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-rx187grptable']//tr[4]/td[1]")).getText(),"$40.00");
+			Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-rx187grptable']//tr[4]/td[1]")).getText(),"$40.00");
+			Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-rx187grptable']//tr[4]/td[1]")).getText(),"$40.00");
+			Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-rx187grptable']//tr[5]/td[1]")).getText(),"25%");
+			Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-rx187grptable']//tr[5]/td[2]")).getText(),"25%");
+			Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-rx187grptable']//tr[5]/td[3]")).getText(),"25%");
+			Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-rx187grptable']//tr[2]/th")).getText(),"Tier 1 ");
+			Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-rx187grptable']//tr[3]/th")).getText(),"Tier 2 ");
+			Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-rx187grptable']//tr[4]/th")).getText(),"Tier 3 ");
+			Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-rx187grptable']//tr[5]/th")).getText(),"Tier 4 ");
+	 }
 }
  
 public void validateImagePresent(String logoToBeDisplayedOnSecondaryPage) {
