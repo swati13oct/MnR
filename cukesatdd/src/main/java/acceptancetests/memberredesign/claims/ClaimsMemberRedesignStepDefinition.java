@@ -685,7 +685,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	@And("^I validate the two COMBO tabs on the page$")
 	public void i_validate_COMBO_tabs() {
 		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
-		claimDetailspage.comboTabs();			
+		//claimDetailspage.comboTabs();			
 }
      /**
       * @toDo: navigate to the Claim Details page in AARP site for COMBO member

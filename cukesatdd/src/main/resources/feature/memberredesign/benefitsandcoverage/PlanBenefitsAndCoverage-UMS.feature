@@ -452,7 +452,6 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     And the user validates dropdown selection functionality 
     And the user validates plan overview section for group
     And the user validates headers on Bnc page for group members
-    And the user validates the Group Primarycare Provider section
     And the user view the Drug Copays & Discounts header
     And the user validates the Learn More section for stage and tier
     And the user validates dropdown selection functionality
