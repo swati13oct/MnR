@@ -2,7 +2,7 @@
 Feature: 1.05-VBF-MemRedesign-To test EOB functionality
 
   @smokeTest_EOB @rallyDashboard @testharness
-  Scenario Outline: Validate that member can search for eob statement
+  Scenario Outline: Validate that member can search for eob statement for <eobType>
     Given I am a authenticated member on the member redesign site for Direct Login
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |

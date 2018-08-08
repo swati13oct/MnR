@@ -108,12 +108,12 @@ Then the user validates EOB count
  
            Examples:
        | planType    | memberType    |dateRange  | eobType |  eobCount |
-       | MAPD        | NICE_EOB_R      | 18 Months |Medical  |     1     |
-       | MA          | COSMOS_EOB_R      | 18 Months |Medical  |     16     |
-       | PDPI         | COSMOS_EOB_R     | 18 Months |Medical  |     0     |
-       | SHIP_ACTIVE  | SHIP_EOB      | 6-12 Months |Medical  |     1     |
-       | SHIP_Termnated| SHIP_EOB      | 6-12 Months |Medical  |     1     |
-       | MAPD          | NICETermin_EOB_R | 18 Months |Medical  |     1     |
+       | MAPD        | NICE_EOB_R      | Last 18 Months |Medical  |     1     |
+       | MA          | COSMOS_EOB_R      | Last 18 Months |Medical  |     16     |
+       | PDPI         | COSMOS_EOB_R     | Last 18 Months |Medical  |     0     |
+       | SHIP_ACTIVE  | SHIP_EOB      | Last 6-12 months |Medical  |     1     |
+       | SHIP_Termnated| SHIP_EOB     | Last 6-12 months |Medical  |     1     |
+       | MAPD          | NICETermin_EOB_R | Last 18 Months |Medical  |     1     |
        
 @regression_06_06_18FnF
 Scenario Outline: To verify EOB accessible for PDP + MEDSup Plan
@@ -127,7 +127,7 @@ Then the user validates content displayed on EOB page
       |Plan Tab     | <planTab2>  |
  Examples:
        | planType     | memberType     |dateRange  | eobType |  eobCount | planTab1   |planTab2 |
-       | PDP          |  comboEOBMedSup      | 18 Months |Medical  |     0     | 	PDP			 | MedSup     |
+       | PDP          |  comboEOBMedSup      | Last 18 Months |Medical  |     0     | 	PDP			 | MedSup     |
        
 @regression_06_06_18FnF
 Scenario Outline: TC009_Check EOB is accessible for PCP Individual - Active Plan
@@ -144,7 +144,7 @@ Then the user validates EOB count
 And the user clicks on first eob from the list
 Examples:
        | planType    | memberType    |dateRange  | eobType |  eobCount |
-       | PCP        | eobData      | 18 Months |Medical  |     1     |
+       | PCP        | eobData      | Last 18 Months |Medical  |     6     |
 
 @regression_06_06_18FnF     
 Scenario Outline: TC013_Check EOB is accessible for TEXAS ERS  - Active Plan
@@ -158,7 +158,7 @@ And the user slects the desired date range
   | EOB Type       |<eobType>   |
 Examples:
        | planType    | memberType    	 |dateRange  | eobType |   
-       | PDP        | texasERS      | 18 Months |Medical  |      
+       | PDP        | texasERS      | Last 18 Months |Medical  |      
 
 @regression_06_06_18FnF
 Scenario Outline: TC011_Check EOB is accessible for MEDICA Individual - Active Plan
@@ -172,7 +172,7 @@ And the user slects the desired date range
   | EOB Type       |<eobType>   |
 Examples:
        | planType    | memberType    	 |dateRange  | eobType |   
-       | MA        | Medica      | 18 Months |Medical  |
+       | MA        | Medica      | Last 18 Months |Medical  |
 
 @regression_06_06_18FnF
 Scenario Outline: TC010_Check EOB displays error message_ PHIP- Active Plan member

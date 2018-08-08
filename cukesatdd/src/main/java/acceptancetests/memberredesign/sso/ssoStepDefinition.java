@@ -154,8 +154,9 @@ public void security_and_password_reset_link_should_not_be_visible() throws Thro
 	ProfileandPreferencesPage profilePageHsid = (ProfileandPreferencesPage) getLoginScenario()
 			.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE_HSID);
 	profilePageHsid.validateHealthSafePasswordLinkNOTPresent();
+	System.out.println("Health Safe Password Link was not present as expected");
 	profilePageHsid.validateHealthSafeAccountLinkNOTPresent();
-	
+	System.out.println("Health Safe Account Link was not present as expected");
 }
 /**
  * This methods quits the web driver and flushes all saved beans.

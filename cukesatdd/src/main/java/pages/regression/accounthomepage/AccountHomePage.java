@@ -461,26 +461,27 @@ private WebElement PlanMaterialSection;
 	 */
        
 	public BenefitsAndCoveragePage navigateToBandCPage() {
-
+		System.out.println("Checking for Hello PersonName on Dashboard home page now");
 		waitForHomePage(helloPerson);
+		System.out.println("Hello PersonName on Dashboard home page was found");
 		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
-			System.out.println("user is on Stage login page");
-			// CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);
+			System.out.println("User is on Stage environment");
+			
 			if (driver.getCurrentUrl().contains("/dashboard"))
 				;
 			{
 				System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
-				
 				driver.findElement(By.xpath("//a[contains(text(),'Coverage & Benefits')]")).click();
+				System.out.println("Now waiting for 20 seconds");
 				try {
 					Thread.sleep(20000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				System.out.println(driver.getCurrentUrl());
+				System.out.println("Current URL is " +driver.getCurrentUrl());
 				if (driver.getTitle().contains("Benefits")) {
-					System.out.println(driver.getTitle());
+					System.out.println("Title of Current Page is "+ driver.getTitle());
 					return new BenefitsAndCoveragePage(driver);
 				}
 
@@ -701,9 +702,13 @@ private WebElement PlanMaterialSection;
                            }
                            System.out.println("title is " + driver.getTitle());
                            System.out.println("Current Url is " + driver.getCurrentUrl());
-                           CommonUtility.waitForPageLoad(driver, heading, 50);
-
-                           if (driver.getTitle().equalsIgnoreCase("Profile")) {
+                           try {
+                               Thread.sleep(5000);
+                        } catch (InterruptedException e) {
+                               // TODO Auto generated catch block
+                               e.printStackTrace();
+                        }
+                           if (driver.getTitle().contains("Profile")) {
 
                                   return new ProfileandPreferencesPage(driver);
                            }
@@ -735,8 +740,8 @@ private WebElement PlanMaterialSection;
               } else {
                      profilenpreferenceslink.click();
               }
-              CommonUtility.waitForPageLoad(driver, heading, 50);
-              if (driver.getTitle().equalsIgnoreCase("Profile")) {
+              CommonUtility.waitForPageLoad(driver, heading, 5);
+              if (driver.getTitle().contains("Profile")) {
                      System.out.println("here");
                      return new ProfileandPreferencesPage(driver);
               }
@@ -746,11 +751,14 @@ private WebElement PlanMaterialSection;
        }
 
        public void verifyPageTitle() throws InterruptedException {
+    	      System.out.println("Checking for Hello Name element");
     	      waitForHomePage(helloPerson);
+    	      System.out.println("Hello Name element was displayed");
               String title = driver.getTitle();
+              System.out.println(title);
               // Assert.assertEquals(title, "Home | UnitedHealthcare");
               Assert.assertTrue(title.contains("UnitedHealthcare"));
-
+              System.out.println("Assert condition on title of dashboard page was passed");
        }
 
        public AccountHomePage navigateToAutoPaymentHistoryPage(){

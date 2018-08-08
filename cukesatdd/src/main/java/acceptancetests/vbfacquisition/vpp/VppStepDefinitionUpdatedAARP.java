@@ -10,10 +10,10 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.ulayer.AcquisitionHomePage;
-import pages.acquisition.ulayer.ComparePlansPage;
-import pages.acquisition.ulayer.PlanDetailsPage;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import pages.vbfacquisition.ulayer.AcquisitionHomePage;
+import pages.vbfacquisition.ulayer.ComparePlansPage;
+import pages.vbfacquisition.ulayer.PlanDetailsPage;
+import pages.vbfacquisition.ulayer.VPPPlanSummaryPage;
 import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;

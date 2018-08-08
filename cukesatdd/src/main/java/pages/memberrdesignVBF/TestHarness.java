@@ -142,10 +142,10 @@ public class TestHarness extends UhcDriver {
 
 	@FindBy(partialLinkText = "Asistencia de Idiomas | Aviso de no Discriminación (PDF)")
 	private WebElement languageAssistanceSpanish;
-	
+
 	@FindBy(xpath = "//h1[@id='pageHeader']")
 	private WebElement formsPageHeading;
-
+	
 	String category = null;
 
 	public TestHarness(WebDriver driver) {

@@ -40,15 +40,25 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[1]/div/span/span[@class='ng-binding']")
 	private WebElement maPlansNumber;
 	
+	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[4]/div/span/span[@class='ng-binding']")
+	private WebElement snpPlansNumber;
+
+	
 	//@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='plan-overview-wrapper']//div[@class='overview-tabs module-tabs-tabs']/div[1]//span[@class='trigger-closed']")
 	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[1]//*[@class='trigger-closed']")
 	private WebElement maPlansViewLink;
 	
+	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[4]//*[@class='trigger-closed']")
+	private WebElement snpPlansViewLink;
+
 	@FindBy(id = "plan-list-1")
 	private WebElement maPlanList;
 	
 	@FindBy(id = "plan-list-3")
 	private WebElement pdpPlanList;
+	
+	@FindBy(id = "plan-list-4")
+	private WebElement snpPlanList;
 	
 	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[2]//span[@class='ng-binding']")
 	private WebElement msPlansNumber;
@@ -267,6 +277,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			if(validate(hidePdpPlans)){
 				msPlansViewLink.click();
 			}
+		}
+		else if (planType.equalsIgnoreCase("SNP")) {
+			snpPlansViewLink.click();
 		}
 		return new VPPPlanSummaryPage(driver, planType);
 	}
@@ -628,6 +641,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			 //driver.findElement(By.className("module-plan-overview"));
 			return maPlans == findChildElements(elementData, maPlanList).size();
 		}
+		else if (planType.equalsIgnoreCase("SNP")) {
+
+			int snpPlans = Integer.valueOf(snpPlansNumber.getText());
+			 //driver.findElement(By.className("module-plan-overview"));
+			return snpPlans == findChildElements(elementData, snpPlanList).size();
+		}
 		return false;
 	}
 	
@@ -967,8 +986,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		
 		System.out.println("Plan Name is : "+PlanName);
-		
-		WebElement PremiumForPlan = driver.findElement(By.xpath("//h3[contains(text(), '"+PlanName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//li[contains(text(),'Monthly Premium')]//span[contains(text(),'$')]"));
+		//
+		//WebElement PremiumForPlan = driver.findElement(By.xpath("//h3[contains(text(), '"+PlanName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//li[contains(text(),'Monthly Premium')]//span[contains(text(),'$')]"));
+		WebElement PremiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '"+PlanName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//li[1]//span[contains(text(),'$')]"));
 		String PlanPremium = PremiumForPlan.getText();
 		
 		System.out.println("Premium for Plan : "+PlanPremium);
@@ -985,7 +1005,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public WelcomePage Enroll_OLE_Plan(String planName) throws InterruptedException {
 		
 		System.out.println("Enroll in Plan for Plan : "+planName);
-		WebElement EnrollForPlan = driver.findElement(By.xpath("//h3[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(), 'Enroll in plan')]"));
+		WebElement EnrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(), 'Enroll in plan')]"));
 		try {
 		validate(EnrollForPlan);
 		

@@ -214,7 +214,9 @@ public class ClaimDetailsPage extends UhcDriver{
 		return learnmoreMA.isDisplayed() || learnmorePDP.isDisplayed();
 
 	}
-
+    /**
+     * @toDo : validateClaimsTableInDetailsPage
+     */
 	@SuppressWarnings("deprecation")
 	public void validateClaimsTableInDetailsPage() {
 		//wait.until(ExpectedConditions.visibilityOf(rememberThisDeviceSection));
@@ -298,6 +300,80 @@ public class ClaimDetailsPage extends UhcDriver{
 		}
 		
 	}
+	/**
+	 * @toDo :validateClaimSearchLINK
+	 */
+	public void validateClaimSearchLINK(){
+		CommonUtility.waitForPageLoad(driver, claimsHistoryLink, 90);
+		validate(claimsearch);
+		System.out.println("*** Claim search Link is seen on the page ===>"+claimsearch.isDisplayed());
+		if (driver.getTitle().equalsIgnoreCase("/details")) {
+			System.out.println("*** Combo Member is on Claims Details Page ***");
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	/**
+	 * @toDo: Validate learnMoreCostLink
+	 */
+	public void learnMoreCostLink(){
+		validate(learnmoreCost);
+		System.out.println("Learm more cost break down link is seen" +learnmoreCost.isDisplayed());
+		//learnmoreCost.click();		
+	}
+	/**
+	 * @toDo : Validate Claims Table in claims details page for Combo
+	 */
+	public void shipdetailcombo(){
+		validate(shipcombotable);
+		System.out.println("Cliam detail table is seen for Ship combo member");
+	}
+	/**
+	 * @toDo : Validate EOB for Combo members 
+	 */
+	public void EOBShipcombo(){
+		validate(EOBshipcombo);
+		System.out.println("EOB for combo ship plan is seen on claim details page");
+}
+	/**
+	 * @toDo : validate Claim History Button
+	 */
+	public void validateClaimHistory(){
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	validate(claimsHistoryLink);
+	System.out.println("claimsHistoryLink.isDisplayed==>"+claimsHistoryLink.isDisplayed());
+	claimsHistoryLink.click();
+	if (driver.getCurrentUrl().contains("/overview"))
+	{
+	System.out.println("The member has navigated from details page to Summary page ---------->"+driver.getCurrentUrl());
+	}
+	
+}
+	
+
+	/**
+	 * @toDo :validate the two COMBO tabs on the claims Summary page
+	 */
+	public void comboTabs() {
+		
+		for (WebElement webElement : comboTabsOnclaimsPage) {
+			System.out.println("The COMBO plans names seen on the page are ==> " + webElement.getText());
+			webElement.click();
+			System.out.println(driver.getCurrentUrl());
+		}
+ }
+	/**
+	 * @toDo : validate the Claims History Button
+	 */
 	public void claimshistorylink(){
 		validate (historylink);
 		System.out.println("history link is seen");

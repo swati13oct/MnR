@@ -21,5 +21,5 @@ overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDApplitoolsT
 features = { "src/main/resources/feature/vbfacquisition" }, plugin = {
 		 "html:reports/test-report", "json:target/cucumber-RunMRATDDApplitoolsTest.json" }, tags = { "@applitools" })
 public class RunMRATDDApplitoolsTest {
-
+ 
 }
