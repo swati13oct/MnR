@@ -1133,7 +1133,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	}
 	
 	/** 
-	 * @toDo : Validates the group drug table
+	 * @toDo : Validates the fed drug table
 	 */
 	@Then("^the user able to see drug table for fed and values in it")
 	public void validategroupdrugtable() {
@@ -1142,6 +1142,18 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.fedtabledata();
 	}
+	/** 
+	 * @toDo : Validates the group drug table
+	 */
+	@Then("^the user able to see drug table for pdp and values in it")
+	public void validatepdpdrugtable() {
+		
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.fedpdptabledata();
+	}
+	
+	
 	
 	
 	@Then("^the user validate vas tiles on vas page")
