@@ -97,6 +97,7 @@ public class MemberAuthStepDefinition{
 	@Given("^the user is on member auth login flow page$")
 	public void member_auth_login_flow_page(){
 		WebDriver wd = getLoginScenario().getWebDriver();	
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		MemberAuthPage memberauth = new MemberAuthPage(wd);
 		memberauth.navigateToLoginURL();
