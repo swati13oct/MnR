@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.PlanComparePage;
 import pages.acquisition.bluelayer.PlanDetailsPage;
+import pages.acquisition.bluelayer.TeamCAcqHome;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.vbfacquisition.vpp.VPPCommonConstants;
@@ -53,6 +54,21 @@ public class VppStepDefinitionUHC {
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
 				aquisitionhomepage);
 	}
+	
+	/**
+	 * @toDo:user is on the uhcmedicaresolutions site landing page on Team-c
+	 */
+	@Given("^the user is on TeamC UHC medicare acquisition site landing page$")
+	public void the_user_on_TeamC_UHC_Medicaresolutions_Site() {
+		WebDriver wd = getLoginScenario().getWebDriver();
+
+		TeamCAcqHome aquisitionhomepage = new TeamCAcqHome(wd);
+
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+				aquisitionhomepage);
+	}
+
 
 
 	/**
@@ -93,6 +109,44 @@ public class VppStepDefinitionUHC {
 	}
 	
 	/**
+	 * @toDo : the user enters the zip code to search plans on team-c
+	 */
+	@When("^the user performs plan search TeamC using following information in UMS site$")
+	public void zipcode_details_in_TeamC_site(DataTable givenAttributes) {
+
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String zipcode = memberAttributesMap.get("Zip Code");
+		String county = memberAttributesMap.get("County Name");
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+
+		TeamCAcqHome aquisitionhomepage = (TeamCAcqHome) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.searchPlans(
+				zipcode, county);
+
+		if (plansummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
+					plansummaryPage);
+			if(plansummaryPage.validateVPPPlanSummaryPage())
+				Assert.assertTrue(true);
+			else
+				Assert.fail("Error in validating the Plan Summary Page");
+
+		}
+
+	}
+
+	
+	/**
 	 * @throws InterruptedException 
 	 * @toDo:user views plans of the below plan type
 	 */
@@ -123,6 +177,23 @@ public class VppStepDefinitionUHC {
 			Assert.fail("Error validating availables plans for selected plantype in  VPP plan summary page");
 		}
 	}
+	
+	
+	@Then("^the user validates the Enroll Now Button present for the plan type$")
+	public void Enroll_now_button_validation(DataTable givenAttributes) {
+		
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		String PlanName = memberAttributesRow.get(0).getCells().get(1); 
+				getLoginScenario().saveBean(
+				VPPCommonConstants.PLAN_NAME,PlanName);
+		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		String PlanPremium = vppPlanSummaryPage.EnrollmentValidation(PlanName);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
+
+	}
+
 	
 	/**
 	 * @toDo:user view plan details of the above selected plan

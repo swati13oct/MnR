@@ -1448,6 +1448,30 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	System.out.println("Compare Plans Link not displayed");
 		return null;
 	}
+	
+public String EnrollmentValidation(String PlanName) {
+		
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
+		System.out.println("Plan Name is : "+PlanName);
+		
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,1300)", "");
+		
+		WebElement EnrollmentButton = driver.findElement(By.xpath("//*[@class='enrollment']/div[@class='acqplans ng-scope']/a/span"));
+		String Enrollment = EnrollmentButton.getText();
+		if(EnrollmentButton.isDisplayed())
+			EnrollmentButton.click();
+		System.out.println("Enrollment Button present and clicked");
+		return Enrollment;
+	}
+
 
 }
 
