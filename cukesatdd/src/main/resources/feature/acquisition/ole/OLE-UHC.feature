@@ -284,6 +284,6 @@ Feature: To test OLE common tool flow flow UMS site
       
  Examples: 
       | zipcode | county   | plantype  |      planName                              | 
-      |   80011 | Arapahoe County | SNP | UnitedHealthcare Dual Complete (HMO SNP)  |
+      |   28105 | Union County | SNP | UnitedHealthcare Dual Complete RP (Regional PPO SNP)  |
       
  

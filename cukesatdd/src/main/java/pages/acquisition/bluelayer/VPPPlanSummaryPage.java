@@ -1462,9 +1462,9 @@ public String EnrollmentValidation(String PlanName) {
 		System.out.println("Plan Name is : "+PlanName);
 		
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
-		jse.executeScript("window.scrollBy(0,1200)", "");
+		jse.executeScript("window.scrollBy(0,1300)", "");
 		
-		WebElement EnrollmentButton = driver.findElement(By.xpath("(//*[@class='enrollment']/div[@class='swiper-content ng-scope']/a/span)[4]"));
+		WebElement EnrollmentButton = driver.findElement(By.xpath("//*[@class='enrollment']/div[@class='acqplans ng-scope']/a/span"));
 		String Enrollment = EnrollmentButton.getText();
 		if(EnrollmentButton.isDisplayed())
 			EnrollmentButton.click();
