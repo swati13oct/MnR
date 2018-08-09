@@ -1119,7 +1119,8 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		String plantype = memberAttributesMap.get("Plan Type");
 		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
 		List<String> desiredAttributes = new ArrayList<String>();
-		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator.hasNext();) {
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator.hasNext();) 
+		{
 			{
 				String key = iterator.next();
 				desiredAttributes.add(memberAttributesMap.get(key));
@@ -1129,6 +1130,17 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.grouptabledynamicdata(plantype);
+	}
+	
+	/** 
+	 * @toDo : Validates the group drug table
+	 */
+	@Then("^the user able to see drug table for fed and values in it")
+	public void validategroupdrugtable() {
+		
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.fedtabledata();
 	}
 	
 	

@@ -106,6 +106,21 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | PDP      | Individual | NON LIS       | SPANISH  | Resumen de Beneficios | Comprobante de Cobertura | Formulario Completo                 | EACBD BEF | 0182297421 | 01/01/2017    | Not Available  | Tier 2          | true        |
       | PDP      | Individual | NON LIS       | CHINESE  |                       |                          |                                     | EACBD BEF | 0182297421 | 01/01/2017    | Not Available  | Tier 2          | true        |
 
+
+ @CMFedTable
+ Scenario Outline: Verify fed table data on Benefits and Coverage page
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      | Copay Category | <copayCategory> |
+    Then The user navigates to Benefits and Coverage page
+       | Plan Type      | <planType>  |
+    And the user able to see drug table for fed and values in it
+    
+    Examples:  
+     | planType|  memberType  | copayCategory |
+     | MAPD    |  Individual  |  NON LIS      |
+
   @CMFedNonLisVillage
   Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
     Given registered member with following details logins in the member portal
