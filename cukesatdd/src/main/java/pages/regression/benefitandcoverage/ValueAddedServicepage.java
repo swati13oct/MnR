@@ -114,7 +114,7 @@ public class ValueAddedServicepage extends UhcDriver {
 	
 	public void vastiles()
 	{
-		int i =0;
+		int i =1;
 		List<WebElement> tilelist = driver.findElements(By.xpath("(.//*[@id='servccontroller']/div/section/div/div/div/div)[6])["+i+"]"));
 		for(i=1;i<=tilelist.size();i++)
 		{
@@ -126,9 +126,6 @@ public class ValueAddedServicepage extends UhcDriver {
 		}
 		}
 	}
-		
-	
-
 	
 	public void validateviewmorelinkexpand() {
 		// TODO Auto-generated method stub
