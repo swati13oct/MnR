@@ -137,11 +137,12 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
 
   @CMFedNonLisVillage
   Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
-    Given registered member with following details logins in the member portal
+    Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Copay Category | <copayCategory> |
     Then The user navigates to Benefits and Coverage page
+      | Plan Type | <planType> |
     Then the user validates text in table "no more than 44% for generic drugs or 35% for brand name drugs"
 
     Examples: 

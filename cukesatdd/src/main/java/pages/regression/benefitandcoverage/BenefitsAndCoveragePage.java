@@ -1857,7 +1857,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		jse.executeScript("window.scrollBy(0,3000)", "");
 		learnmorebutton.click();
 		try {
-			Thread.sleep(30000);
+			Thread.sleep(20000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

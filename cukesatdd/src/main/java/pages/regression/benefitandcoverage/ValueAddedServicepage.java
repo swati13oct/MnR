@@ -114,17 +114,10 @@ public class ValueAddedServicepage extends UhcDriver {
 	
 	public void vastiles()
 	{
-		int i =1;
-		List<WebElement> tilelist = driver.findElements(By.xpath("(.//*[@id='servccontroller']/div/section/div/div/div/div)[6])["+i+"]"));
-		for(i=1;i<=tilelist.size();i++)
-		{
-		if (i==1 || i==3||i==6)
-		validate(tilelist.get(i));
-		else
-		{
-			i++;
-		}
-		}
+		
+		validate(driver.findElement(By.xpath("(.//*[@id='servccontroller']/div/section/div/div/div/div)[1]")));
+		validate(driver.findElement(By.xpath("(.//*[@id='servccontroller']/div/section/div/div/div/div)[6]")));
+		
 	}
 	
 	public void validateviewmorelinkexpand() {
@@ -147,6 +140,11 @@ public class ValueAddedServicepage extends UhcDriver {
 		}
 		validate(disclaimers);
 		disclaimers.click();
+	}
+	
+	public void fedtabledata()
+	{
+		
 	}
 	
 	public void healthlink() 
