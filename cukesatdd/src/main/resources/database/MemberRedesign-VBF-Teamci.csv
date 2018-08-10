@@ -7,10 +7,10 @@ ATDD_Team-ci1_q2_jun_sofl0013/Password@1,Medica
 ATDD_Team-ci1_q2_june_combo0007/Password@1,ComboMAPDANDSHIP
 ATDD_Team-ci1_q2_jun_aarp0015/Password@1,TerminatedFedAARP
 ATDD_Team-ci1_q2_jun_aarp0021/Password@1,MAPD,NICECLAIMS,ULayerInd
-ATDD_Team-ci1_q2_jun_aarp0042/Password@1,MAPD,COSMOSCLAIMS,ULayerInd
+ATDD_Team-ci1_q2_q2_jun_aarp0045/Password@1,MAPD,COSMOSCLAIMS,ULayerInd
 ATDD_Team-ci1_q2_jun_aarp0021/Password@1,MAPD,RxCLAIMS,ULayerInd
 ATDD_Team-ci1_q1_apr_uhc083/Password@1,MAPD,NICECLAIMS,BlueLayerInd
-ATDD_Team-ci1_q1_apr_uhc177/Password@1,MAPD,COSMOSCLAIMS,BlueLayerInd
+ATDD_Team-ci1q2_jun_uhc0001/Password@1,MAPD,COSMOSCLAIMS,BlueLayerInd
 ATDD_Team-ci1_q1_apr_uhc083/Password@1,MAPD,RxCLAIMS,BlueLayerInd
 ATDD_Team-ci1_q1_grp_apr005/Password@1,MAPD,NICECLAIMS,GroupRetiree
 ATDD_Team-ci1_q2_jun_grp0082/Password@1,MAPD,COSMOSCLAIMS,GroupRetiree
@@ -34,3 +34,4 @@ ATDD_Team-ci1_q1_grp_apr005/Password@1,MAPD,GrpRetireeOrderPlan
 ATDD_Team-ci1_q2_jun_aarp0022/Password@1,AARPMapdIndEPMP
 ATDD_Team-ci1_q1_apr_uhc002/Password@1,UhcMapdIndContactUs
 ATDD_Team-ci1_q1_grp_apr005/Password@1,GroupRetireeMapdContactUs
+ATDD_Team-ci1_q2_aarp_jun0001/Password@1,AARPMapdIndNonEPMP
