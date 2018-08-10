@@ -1359,11 +1359,11 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	 * To validate text in table for village members
 	 * @author njain112
 	 */
-	@And("^the user validates text in table \"[^\"]*\"$")
+	@And("^the user validates text in table$")
 	public void validatevillagetabletext(String text) throws InterruptedException   {
 		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		benefitsnCoveragepage.validatevillagetabletext(text);
+		benefitsnCoveragepage.validatevillagetabletext();
 	
 	}
 	/**

@@ -2191,16 +2191,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	
 	}
 	
-	public void validatevillagetabletext(String text1)
+	public void validatevillagetabletext()
 	{
-		WebElement villagetabletext = driver.findElement(By.xpath(".//*[@id='preferredRetailBenefit']/div/div[1]/div/div/div/table/tbody/tr[2]/td[4]/div[3]/div[2]"));
-		if(villagetabletext.getText().equalsIgnoreCase(text1))
-		{
-			 System.out.println(villagetabletext.getText());
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail();
-		}
+		
+		Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferdmailpharmcytable']//tr[3]/td[2]")).getText(),"no more than 44% for generic drugs or 35% for brand name drugs");
+		
 		
 
 	}

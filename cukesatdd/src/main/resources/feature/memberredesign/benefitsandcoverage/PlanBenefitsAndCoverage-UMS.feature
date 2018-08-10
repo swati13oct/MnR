@@ -142,12 +142,12 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | Member Type    | <memberType>    |
       | Copay Category | <copayCategory> |
     Then The user navigates to Benefits and Coverage page
-      | Plan Type | <planType> |
-    Then the user validates text in table "no more than 44% for generic drugs or 35% for brand name drugs"
+      | Plan Type      | <planType>  |
+    Then the user validates text in table
 
     Examples: 
       | planType | memberType | copayCategory |
-      | MAPD     | Individual | NON LIS       |
+      | MAPDVill | Individual | NON LIS       |
 
   @CMvalidatePdfsectiongroupenglish
   Scenario Outline: Verify PDF section is in place on Benefits and     Coverage page
