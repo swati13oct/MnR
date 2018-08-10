@@ -613,9 +613,10 @@ public class DrugCostEstimatorPage extends UhcDriver {
 				+ "')]/following-sibling::ul//li/a[@class='delete-drug']";
 		WebElement deletedrug = driver.findElement(By.xpath(deleteDrugXpath));
 		deletedrug.click();
-		CommonUtility.waitForPageLoad(driver, delDrgConfirm, 10);
+//		CommonUtility.waitForPageLoad(driver, delDrgConfirm, 10);
 		delDrgConfirm.click();
 		Thread.sleep(5000);
+		waitForloader(driver, overlay, 30);
 
 	}
 
@@ -967,7 +968,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	 * select first pharmacy result
 	 */
 	public void select_first_pharmacy_result() throws InterruptedException {
-		waitForloader(driver, overlay, 20);
+		waitForloader(driver, overlay, 30);
 		CommonUtility.waitForPageLoad(driver, first_pharmacy_select_btn, 20);
 		Thread.sleep(2000);
 
@@ -977,7 +978,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		System.out.println("--------first_pharmacy_select_btn.click----------------"+ first_pharmacy_select_btn.getText());
 		//first_pharmacy_select_btn.click();
 		jsClickNew(first_pharmacy_select_btn);
-		waitForloader(driver, overlay, 20);
+		Thread.sleep(2000);
+		waitForloader(driver, overlay, 30);
 		Thread.sleep(2000);
 		Assert.assertTrue("expected Pharmacy is not selected", pharmacy_selected.getText().contains(temp_pharm));
 	}
@@ -1081,11 +1083,12 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 		while (driver.findElements(By.className("delete-drug")).size() > 0) {
 			CommonUtility.waitForPageLoad(driver, first_delete_link, 20);
-			Thread.sleep(5000);
+			Thread.sleep(10000);
 			first_delete_link.click();
 			CommonUtility.waitForPageLoad(driver, delDrgConfirm, 10);
 			delDrgConfirm.click();
-			Thread.sleep(2000);
+			Thread.sleep(4000);
+			waitForloader(driver, overlay, 30);
 		}
 	}
 
@@ -1591,6 +1594,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		if(validate(btnSwitchUpd))
 		{
 			btnSwitchUpd.click();
+			waitForloader(driver, overlay, 30);
 			Assert.assertTrue(true);
 		}
 		else Assert.assertTrue("update switch to generic button is not present", false);
@@ -1689,7 +1693,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			WebElement switchNowLink = driver.findElement(By.xpath("//p[contains(text(), '"+ branddosage+"')]/ancestor::section//a[contains(text(), 'SWITCH NOW')]"));
 			//p[contains(text(), 'Exelon Transdermal Patch DIS 9.5MG/24')]/ancestor::section//a[contains(text(), 'SWITCH NOW')]
 			//CommonUtility.waitForPageLoad(driver, switchNowLink, 20);
-			waitForloader(driver, overlay, 20);
+			waitForloader(driver, overlay, 30);
 			Thread.sleep(10000);
 
 			if (validate(switchNowLink)){
@@ -1715,10 +1719,10 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			try {
 				WebElement elementExpected = wait.until(ExpectedConditions.visibilityOf(element));
 
-				System.out.println("-------elementExpected======"+elementExpected);
+				System.out.println("----waitForloader---elementExpected======"+elementExpected);
 
 
-				if (!(elementExpected.getAttribute("style").isEmpty() || elementExpected.getText() == null)) {
+				if ((elementExpected.getAttribute("style").isEmpty() || elementExpected.getText() == null)) {
 					timeout = timeout - 5;
 					if (timeout > 0) {
 						waitForloader(driver, element, timeout);

@@ -402,6 +402,15 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id = "nav-zipcode")
 	public WebElement enterZipcode;
 	
+	@FindBy(xpath=".//*[@id='borderContainer']/div/div[2]/div[1]/span/p")
+	public WebElement aepyears;
+	
+	@FindBy(xpath=".//*[@id='aepcurrentyear']")
+	public WebElement currentaepyear;
+	
+	@FindBy(xpath=".//*[@id='aepnextyear']")
+	public WebElement nextaepyear;
+	
 	@Override
 	public void openAndValidate() {
 
@@ -746,6 +755,12 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		Assert.assertEquals(3, pharmacies.size());
 	}
 
+	public void aepyearselection() throws InterruptedException {
+		if(validate(aepyears))
+		currentaepyear.click();	
+		
+	}
+	
 	public void select_first_pharmacy() throws InterruptedException {
 		Thread.sleep(10000);
 

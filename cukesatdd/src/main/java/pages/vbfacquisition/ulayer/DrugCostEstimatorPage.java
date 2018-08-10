@@ -384,6 +384,16 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id = "atddEditDrugList")
 	public WebElement step3EditDrugsList;
 	
+	@FindBy(xpath=".//*[@id='borderContainer']/div/div[2]/div[1]/span/p")
+	public WebElement aepyears;
+	
+	@FindBy(xpath=".//*[@id='aepcurrentyear']")
+	public WebElement currentaepyear;
+	
+	@FindBy(xpath=".//*[@id='aepnextyear']")
+	public WebElement nextaepyear;
+	
+	
 	@Override
 	public void openAndValidate() {
 
@@ -738,19 +748,26 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public void validatePharmacylist() {
 		Assert.assertEquals(3, pharmacies.size());
 	}
+	
+	public void aepyearselection() throws InterruptedException {
+		if(validate(aepyears))
+		currentaepyear.click();	
+		
+	}
 
 	public void select_first_pharmacy() throws InterruptedException {
 		driver.manage().window().maximize();
-		Thread.sleep(15000);
+		Thread.sleep(1000);
 
 		//waitforElement(select_btn_first);
 		System.out.println("first pharmacy");
 		
-		if (validateNew(select_btn_first)) {
-			((JavascriptExecutor)driver).executeScript("arguments[0].click();", select_btn_first);
-		}
-		System.out.println("first pharmacy 2");
-		Thread.sleep(10000);
+					if (validateNew(select_btn_first)) {
+				((JavascriptExecutor)driver).executeScript("arguments[0].click();", select_btn_first);
+			}
+			System.out.println("first pharmacy 2");
+			Thread.sleep(10000);
+		
 	}
 
 	public void validate_cost_saving_present(String pharmacy_type) {
