@@ -355,6 +355,7 @@ public class MRConstants {
   public static final String LEGACY_TESTHARNESS = "https://" + MRScenario.environment + "-medicare."+ MRScenario.domain + LEGACY_REDESIGN + "/?testharness=true";
   public static final String LEGACY_DASHBOARD = "https://" + MRScenario.environment + "-medicare."+ MRScenario.domain + LEGACY_REDESIGN;
   public static final String MEMBER_AUTH_PLM_REDESIGN_URL = "https://stage-generic.uhc.com/content/medicare/memberauth.html#/memberAuthLogin";
+  public static final String TeamC_UHC_URL="https://www.team-c-uhcmedicaresolutions.ose-elr-core.optum.com";
 
 }
 
