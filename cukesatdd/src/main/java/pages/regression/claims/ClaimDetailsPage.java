@@ -1,4 +1,6 @@
 package pages.regression.claims;
+import java.util.List;
+
 /**
  * 
  */
@@ -85,6 +87,9 @@ public class ClaimDetailsPage extends UhcDriver{
 	
 	@FindBy(xpath =".//*[@id='claimDetailsHeaders']/p")
 	private WebElement medicalClaimDetailsText;
+	
+	@FindBy (xpath= "//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li")
+	private List<WebElement> comboTabsOnclaimsPage;
 	
 	@FindBy(xpath = ".//*[@id='ship_eob']/div/section/a/p")
 	private WebElement EOB;
@@ -403,5 +408,16 @@ public class ClaimDetailsPage extends UhcDriver{
 	System.out.println("claimsHistoryLink.isDisplayed==>"+claimsHistoryLink.isDisplayed());
 	
 }
+	/**
+	 * @toDo :validate the two COMBO tabs on the claims Summary page
+	 */
+	public void comboTabs() {
+		
+		for (WebElement webElement : comboTabsOnclaimsPage) {
+			System.out.println("The COMBO plans names seen on the page are ==> " + webElement.getText());
+			webElement.click();
+			System.out.println(driver.getCurrentUrl());
+		}
+ }
 	
 }
