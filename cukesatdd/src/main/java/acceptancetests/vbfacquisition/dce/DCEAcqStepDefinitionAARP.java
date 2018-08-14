@@ -11,10 +11,10 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.ulayer.AcquisitionHomePage;
-import pages.acquisition.ulayer.DrugCostEstimatorPage;
-import pages.acquisition.ulayer.PlanDetailsPage;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import pages.vbfacquisition.ulayer.AcquisitionHomePage;
+import pages.vbfacquisition.ulayer.DrugCostEstimatorPage;
+import pages.vbfacquisition.ulayer.PlanDetailsPage;
+import pages.vbfacquisition.ulayer.VPPPlanSummaryPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
@@ -147,6 +147,8 @@ public class DCEAcqStepDefinitionAARP {
 		if(!isDrugPresent){
 			dce.addDrug(drug.split(" ")[0]);
 		}
+		
+		dce.aepyearselection();
 
 	}
 
