@@ -269,3 +269,21 @@ Feature: To test OLE common tool flow flow UMS site
       | zipcode | county             | plantype | planName                                          |
       |   90210 | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |
       |   90210 | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                   |
+
+      
+ @DSNP_Enroll_Now @september_release_2018
+  Scenario Outline: To test OLE Button for DSNP Plans Landing from VPP Plan Summary
+    Given the user is on TeamC UHC medicare acquisition site landing page
+    When the user performs plan search TeamC using following information in UMS site
+      | Zip Code    | <zipcode> |
+      | County Name | <county>  |
+    When user views plans of the below plan type in UMS site
+      | Plan Type | <plantype> |        
+    Then the user validates the Enroll Now Button present for the plan type
+      | Plan Name | <planName> |    
+      
+ Examples: 
+      | zipcode | county   | plantype  |      planName                              | 
+      |   28105 | Union County | SNP | UnitedHealthcare Dual Complete RP (Regional PPO SNP)  |
+      
+ 

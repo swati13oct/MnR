@@ -11,9 +11,9 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.bluelayer.AcquisitionHomePage;
-import pages.acquisition.bluelayer.DrugCostEstimatorPage;
-import pages.acquisition.bluelayer.VPPPlanSummaryPage;
+import pages.vbfacquisition.bluelayer.AcquisitionHomePage;
+import pages.vbfacquisition.bluelayer.DrugCostEstimatorPage;
+import pages.vbfacquisition.bluelayer.VPPPlanSummaryPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
@@ -170,6 +170,8 @@ public class DCEAcqStepDefinitionUHC {
 
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) loginScenario.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 			dce.addDrug(drug.split(" ")[0]);
+			
+			dce.aepyearselection();
 
 	}
 

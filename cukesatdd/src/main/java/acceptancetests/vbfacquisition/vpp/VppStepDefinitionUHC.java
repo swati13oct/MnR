@@ -13,10 +13,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.bluelayer.AcquisitionHomePage;
-import pages.acquisition.bluelayer.PlanDetailsPage;
-import pages.acquisition.bluelayer.VPPPlanSummaryPage;
-import acceptancetests.acquisition.ole.oleCommonConstants;
+import pages.vbfacquisition.bluelayer.AcquisitionHomePage;
+import pages.vbfacquisition.bluelayer.PlanDetailsPage;
+import pages.vbfacquisition.bluelayer.VPPPlanSummaryPage;
+import acceptancetests.vbfacquisition.enrollinplan.oleCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
