@@ -1,6 +1,6 @@
 @fixedTestCaseTest
 @pharmacylocatorblayer
-Feature:1.19-VBF-Acq-To test Locate a Pharmacy in acqusition flow UMS site
+Feature:1.19-VBF-Acq-To test Locate a Pharmacy in acqusition flow UMS site (GATED)
 @PharmacyLocatorBlayerSmoke
 Scenario Outline:To verify available pharmacies in UMS site
 Given the user is on the UMS Medicare Site landing page
