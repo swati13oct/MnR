@@ -1,7 +1,7 @@
 @BAT_AgentAppointment
 @fixedTestCaseTest
 @agentAppointment
-Feature:1.05-VBF-Acq-To test request an appointment with an agent flow in UHC site
+Feature:1.05-VBF-Acq-To test request an appointment with an agent flow in UHC site (GATED)
 @agentAppointmentBlayerSmoke
 Scenario Outline: Verify request an appointment with an agent flow in UHC site
 Given the user is on the UHCM site landing page

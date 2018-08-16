@@ -1,5 +1,5 @@
 @smokeTest
-Feature: 1.15-VBF-MemRedesign-To test registration flow
+Feature: 1.15-VBF-MemRedesign-To test registration flow (GATED)
 @smokeTest_registrationRedesign @rallyDashboard @testharness
   Scenario Outline: Verify member with no additional plan is successfully registered and navigate to Home page
     Given the member is on registration page of redesign portal
