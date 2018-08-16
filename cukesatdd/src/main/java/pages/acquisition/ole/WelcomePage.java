@@ -154,10 +154,11 @@ public class WelcomePage extends UhcDriver{
 			flag = true;
 			System.out.println("Plan Name is Validated : "+flag);
 		}else flag =false;
-		if(PlanYear_PlanName_Text.contains(Expected_PlanYear)){
+		//Plan Year commented for AEP validation
+/*		if(PlanYear_PlanName_Text.contains(Expected_PlanYear)){
 			flag = (flag==false)?false:true;
 			System.out.println("Plan Year is Validated : "+flag);
-		}else flag =false;
+		}else flag =false;*/
 		if(Zip_County_Text.contains(Expected_County)){
 			flag = (flag==false)?false:true;
 			System.out.println("Plan County is Validated : "+flag);
