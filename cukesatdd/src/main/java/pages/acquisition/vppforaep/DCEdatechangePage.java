@@ -22,12 +22,18 @@ public class DCEdatechangePage extends UhcDriver{
 	@FindBy(id = "systemTime")
 	private WebElement currentTime;
 	
-	
 	@FindBy(id = "datetimepicker")
 	private WebElement setDateTxtBx;
 
 	@FindBy(id = "setTimeButton")
 	private WebElement setTimeBtn;
+
+	@FindBy(id = "resetTimeButton")
+	private WebElement ResetBtn;
+	
+	@FindBy(id = "isSystemTime")
+	private WebElement IsSystemTime;
+
 
 	public DCEdatechangePage(WebDriver driver) {
 		super(driver);
@@ -46,7 +52,22 @@ public class DCEdatechangePage extends UhcDriver{
 	public boolean setAndValidate_DCEserverDate(String dCEdate) {
 		String SetDate = dCEdate.concat(" 08:00");
 		String currentDCEdate = currentTime.getText();
-
+		if(dCEdate.contains("reset")){
+			ResetBtn.click();
+			driver.navigate().refresh();
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(IsSystemTime.getText().contentEquals("true")){
+				currentDCEdate = currentTime.getText();
+				System.out.println("Current date changed to : "+currentDCEdate);
+				System.out.println("DCE date changed successfully");
+				return true;
+			}
+		}
 		setDateTxtBx.sendKeys(SetDate);
 		setTimeBtn.click();
 		driver.navigate().refresh();
@@ -57,8 +78,7 @@ public class DCEdatechangePage extends UhcDriver{
 			e.printStackTrace();
 		}
 		currentDCEdate = currentTime.getText();
-		System.out.println("Current date display : "+currentDCEdate);
-		System.out.println("Current date changed to : "+SetDate);
+		System.out.println("Current date changed to : "+currentDCEdate);
 
 		if(currentDCEdate.contentEquals(SetDate)){
 			System.out.println("DCE date changed successfully");

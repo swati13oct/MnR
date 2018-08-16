@@ -324,14 +324,14 @@ public SpecialElectionPeriodPage select_option_and_enter_data(String selectoptio
 		System.out.println("Entering data for option : "+currentOptionData);
 
 			try {
-				WebElement dataTextBx = driver.findElement(By.xpath("//*[contains(text(), '"+currentOption+"')]//..//fieldset//input"));
+				WebElement dataTextBx = driver.findElement(By.xpath("//*[contains(text(), '"+currentOption+"')]//..//*[@class='subquestionfield']//input"));
 				if(validate(dataTextBx))
 					dataTextBx.sendKeys(currentOptionData);
 			} 
 			catch (Exception e) {
 			}
 			try {
-				WebElement dataTextBx = driver.findElement(By.xpath("//*[contains(text(), '"+currentOption+"')]//..//fieldset//textarea"));
+				WebElement dataTextBx = driver.findElement(By.xpath("//*[contains(text(), '"+currentOption+"')]//..//*[@class='subquestionfield']//textarea"));
 				if(validate(dataTextBx))
 						dataTextBx.sendKeys(currentOptionData);
 			} catch (Exception e) {

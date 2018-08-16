@@ -1,15 +1,6 @@
 @AEP_VPP @AEP_VPP_Bluelayer
 Feature: test plan summary and Plan Details in vpp flow UHCMS site for AEP scenarios
 
- # @teamF_DCEdateChange
- # Scenario Outline: To change DCE server date for Team-F for AEP testing
- #   Given the user is on team-f dce date change url and changes DCE server date to following date
- #     | DCE Date | <dcedate> |
-
- #   Examples: 
- #     | dcedate    |
- #     | 10/01/2018 |
-
   @Bluelayer10_01
   Scenario Outline: Verify plan summary and Plan Details in UHCMS site for server date 10/01 pre-AEP period
         Given the user is on team-f dce date change url and changes DCE server date to following date
@@ -81,3 +72,13 @@ Feature: test plan summary and Plan Details in vpp flow UHCMS site for AEP scena
     Examples: 
       | dcedate    | zipcode | county             | plantype | planName                                          |
       | 12/01/2018 |   90210 | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
+ 
+
+  @teamF_DCEdateChange
+  Scenario Outline: To change DCE server date for Team-F for AEP testing
+    Given the user is on team-f dce date change url and changes DCE server date to following date
+      | DCE Date | <dcedate> |
+
+   Examples: 
+     | dcedate    |
+     | reset 			|
