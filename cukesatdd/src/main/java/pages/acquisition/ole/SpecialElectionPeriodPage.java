@@ -131,10 +131,11 @@ public class SpecialElectionPeriodPage extends UhcDriver{
 			flag = true;
 			System.out.println("Plan Name is Validated : "+flag);
 		}else flag =false;
+		/*//Plan Year commented for AEP validation
 		if(PlanYear_PlanName_Text.contains(Expected_PlanYear)){
 			flag = (flag==false)?false:true;
 			System.out.println("Plan Year is Validated : "+flag);
-		}else flag =false;
+		}else flag =false;*/
 		if(Zip_County_Text.contains(Expected_County)){
 			flag = (flag==false)?false:true;
 			System.out.println("Plan County is Validated : "+flag);
@@ -323,14 +324,14 @@ public SpecialElectionPeriodPage select_option_and_enter_data(String selectoptio
 		System.out.println("Entering data for option : "+currentOptionData);
 
 			try {
-				WebElement dataTextBx = driver.findElement(By.xpath("//*[contains(text(), '"+currentOption+"')]//..//fieldset//input"));
+				WebElement dataTextBx = driver.findElement(By.xpath("//*[contains(text(), '"+currentOption+"')]//..//*[@class='subquestionfield']//input"));
 				if(validate(dataTextBx))
 					dataTextBx.sendKeys(currentOptionData);
 			} 
 			catch (Exception e) {
 			}
 			try {
-				WebElement dataTextBx = driver.findElement(By.xpath("//*[contains(text(), '"+currentOption+"')]//..//fieldset//textarea"));
+				WebElement dataTextBx = driver.findElement(By.xpath("//*[contains(text(), '"+currentOption+"')]//..//*[@class='subquestionfield']//textarea"));
 				if(validate(dataTextBx))
 						dataTextBx.sendKeys(currentOptionData);
 			} catch (Exception e) {

@@ -54,7 +54,16 @@ public static final String PRIMARYCARE = "primarycare";
 	public static final String PRESCRIPTIONDRUG = "prescriptiondrug";
 
 	public static final String PLAN_TYPE_CRITERIA = "urlType";
+	
+/*
+ * Additional Constants for AEP period VPP
+ */
 
+	public static final String AEP_FLAG = "aepflag";
+
+	public static final String CURRENT_YEAR = "2018";
+
+	public static final String NEXT_YEAR = "2019";
 
 }
 
