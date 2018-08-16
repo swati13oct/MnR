@@ -95,7 +95,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
       
  
       
-   @regression_06_06_18  @TC10_COMBO
+   @TC10_COMBO @regression_06_06_18 
    Scenario Outline: To validate the claims present for the Combo member on claims sumamry page & the Details on the Claims Details page 
    Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>     |
@@ -123,7 +123,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
       | planType | claimPeriod    | domain | claimssystem |
       | SHIP    | Last 24 months  | NA      |    COSMOSCLAIMS |
 
-  @TC_09claimsPHIP @theTransformers @regression_06_06_18 
+  @TC_09claimsPHIP  @regression_06_06_18 
   Scenario Outline: To validate the Error Message for a PHIP  member on claims sumamry page    
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>     |
@@ -208,7 +208,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
       | planType | claimPeriod    | domain | claimssystem |
       | MAPD     | Last 24 months | NICE   | NICECLAIMS   | 
 
-    @regression_06_06_18 @TC03_FEDAARPIndividualPDP   
+   @TC03_FEDAARPIndividualPDP    @regression_06_06_18
     Scenario Outline: To validate the claims present for the Federal member on claims sumamry page for AARP site
     Given login with following details logins in the member portal and validate elements      
       | Plan Type      | <planType>     |
@@ -254,7 +254,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
       | MAPD     | Last 24 months | COSMOS| COSMOSCLAIMS   |
      
       
-   @regression_06_06_18 @TC01_FED_AARP_Individual_NICE @TC04_FED_UHC_Individual_COSMOS
+   @TC01_FED_AARP_Individual_NICE @TC04_FED_UHC_Individual_COSMOS  @regression_06_06_18
    Scenario Outline: To validate the claims present for the Federal member on claims sumamry page & the Details on the Claims Details page 
    Given login with following details logins in the member portal and validate elements     
       | Plan Type      | <planType>     |

@@ -407,6 +407,7 @@ public class ClaimDetailsPage extends UhcDriver{
 	validate(claimsHistoryLink);
 	System.out.println("claimsHistoryLink.isDisplayed==>"+claimsHistoryLink.isDisplayed());
 	claimsHistoryLink.click();
+	
 }
 	/**
 	 * @toDo :validate the two COMBO tabs on the claims Summary page
@@ -419,5 +420,6 @@ public class ClaimDetailsPage extends UhcDriver{
 			System.out.println(driver.getCurrentUrl());
 		}
  }
+	
 	
 }
