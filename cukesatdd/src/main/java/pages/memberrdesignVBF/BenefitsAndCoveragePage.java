@@ -63,7 +63,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "(//div[@id='plan_benefit_documents']/section[2]//ul/li[not (contains(@class,'ng-hide'))])[1]")
 	private WebElement documents_label;
 
-	@FindBy(xpath = "//div[@id='planBenefitsAppSum']/section//div/span[contains(@class,'atdd-benefitsoverview-plantitle')]")
+	@FindBy(xpath = "//div[@id='planBenefitsAppSum']/section//div/*[contains(@class,'atdd-benefitsoverview-plantitle')]")
 	private WebElement planName;
 
 	@FindBy(className = "atdd-benefitsoverview-membernamelabel")

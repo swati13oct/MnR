@@ -20,15 +20,6 @@ import atdd.framework.UhcDriver;
  */
 public class WelcomePage extends UhcDriver{
 	
-	@FindBy(xpath = "//*[@id='PoweredByiPerceptions']")
-	private WebElement iPerceptionPopUp;
-
-	@FindBy(xpath = "//*[@id='closeButton']")
-	private WebElement iPerceptionClose;
-	
-	@FindBy(xpath = "//*[@id='IPerceptionsEmbed']")
-	private WebElement WelcomePage_iPerceptionPresent;
-
 	//OLE Common Elements
 	@FindBy(xpath = "//*[@class = 'logo']//img")
 	private WebElement SiteLogo;
@@ -104,35 +95,8 @@ public class WelcomePage extends UhcDriver{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		try {
-			WelcomePage_iPerceptionPresent.click();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		try{
-			Alert alert = driver.switchTo().alert();
-			System.out.println("FeedBack Modal Alert Present");
-
-			if(validate(iPerceptionPopUp)){
-				System.out.println("FeedBack Modal Present");
-
-				iPerceptionClose.click();
-				if (validate(iPerceptionPopUp)){
-					System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
-				}
-				else
-					System.out.println("FeedBack Modal Closed");
-			}
-		}
-		catch (Exception e) {
-			System.out.println("FeedBack Modal NOT Present");
-
-		}
 
 		validate(WelcomePageHeader);
-//		WelcomePage_iPerceptionPresent.click();
 		validate(PlanYear_PlanName);
 	}
 
@@ -154,10 +118,11 @@ public class WelcomePage extends UhcDriver{
 			flag = true;
 			System.out.println("Plan Name is Validated : "+flag);
 		}else flag =false;
-		if(PlanYear_PlanName_Text.contains(Expected_PlanYear)){
+		//Plan Year commented for AEP validation
+/*		if(PlanYear_PlanName_Text.contains(Expected_PlanYear)){
 			flag = (flag==false)?false:true;
 			System.out.println("Plan Year is Validated : "+flag);
-		}else flag =false;
+		}else flag =false;*/
 		if(Zip_County_Text.contains(Expected_County)){
 			flag = (flag==false)?false:true;
 			System.out.println("Plan County is Validated : "+flag);
