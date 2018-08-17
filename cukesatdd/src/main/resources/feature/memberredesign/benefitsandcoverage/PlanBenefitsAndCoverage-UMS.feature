@@ -567,8 +567,8 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     And the user validates the Office Visits section
 
     Examples: 
-      | planType |
-      | MAPD     |
+      | planType | memberType    |
+      | MAPD     |memberWithoutProviderTiering |
 
   @WaystoSaveforPdp @regression @regression_06_06_18
   Scenario Outline: Verify the ways to save  widget for a PDP member
