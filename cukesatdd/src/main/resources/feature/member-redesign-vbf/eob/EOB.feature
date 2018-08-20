@@ -1,5 +1,5 @@
 @smokeTest
-Feature: 1.05-VBF-MemRedesign-To test EOB functionality
+Feature: 1.05-VBF-MemRedesign-To test EOB functionality (GATED)
 
   @smokeTest_EOB @rallyDashboard @testharness
   Scenario Outline: Validate that member can search for eob statement for <eobType>

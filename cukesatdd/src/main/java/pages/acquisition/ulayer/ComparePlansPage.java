@@ -11,7 +11,7 @@ import atdd.framework.UhcDriver;
 public class ComparePlansPage extends UhcDriver {
 
 	
-	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div/div/div/div[1]/div/div[1]/a")
+	@FindBy(id = "backtoplansummarypage")
 	private WebElement backToAllPlansLink;
 	
 	public ComparePlansPage(WebDriver driver) {

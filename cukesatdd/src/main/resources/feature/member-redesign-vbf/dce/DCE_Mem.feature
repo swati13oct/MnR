@@ -1,5 +1,5 @@
 @smokeTest
-Feature: 1.04-VBF-MemRedesign-To test Drug Cost Estimator functionality
+Feature: 1.04-VBF-MemRedesign-To test Drug Cost Estimator functionality (GATED)
 
   @smokeTest_DceMem @rallyDashboard @testharness
   Scenario Outline: To Verify member is able to add drug, change pharmacy and view costs

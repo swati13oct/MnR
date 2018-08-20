@@ -1,5 +1,5 @@
 @smokeTest
-Feature: 1.11-VBF-MemRedesign-To test the payment history
+Feature: 1.11-VBF-MemRedesign-To test the payment history (GATED)
 
   @smokeTest_Payment @rallyDashboard @testharness
   Scenario Outline: Validate that member view Payment history table

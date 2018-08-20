@@ -66,46 +66,46 @@ public class ReviewSubmitPage extends UhcDriver{
 	private WebElement PlanZipDisplay;
 
 	//Member Details Display
-	@FindBy(xpath = "//*[contains(text(), 'First Name')]//following-sibling::p")
+	@FindBy(xpath = "//*[contains(text(), 'First Name')]//following-sibling::*")
 	private WebElement FirstNameDisplay;
 	
-	@FindBy(xpath = "//*[contains(text(), 'Last Name')]//following-sibling::p")
+	@FindBy(xpath = "//*[contains(text(), 'Last Name')]//following-sibling::*")
 	private WebElement LastNameDisplay;
 
-	@FindBy(xpath = "//*[contains(text(), 'Medicare Claim Number')]//following-sibling::p")
+	@FindBy(xpath = "//*[contains(text(), 'Medicare Claim Number')]//following-sibling::*")
 	private WebElement MedicareClaimNumberDisplay;
 	
-	@FindBy(xpath = "//*[contains(text(), 'Medicare Number')]//following-sibling::p")
+	@FindBy(xpath = "//*[contains(text(), 'Medicare Number')]//following-sibling::*")
 	private WebElement MedicareNumberDisplay;
 	
-	@FindBy(xpath = "//*[contains(text(), 'Hospital (Part A) Effective Date')]//following-sibling::p")
+	@FindBy(xpath = "//*[contains(text(), 'Hospital (Part A) Effective Date')]//following-sibling::*")
 	private WebElement PartADisplay;
 	
-	@FindBy(xpath = "//*[contains(text(), 'Medical (Part B) Effective Date')]//following-sibling::p")
+	@FindBy(xpath = "//*[contains(text(), 'Medical (Part B) Effective Date')]//following-sibling::*")
 	private WebElement PartBDisplay;
 	
-	@FindBy(xpath = "//*[contains(text(), 'Birth Date')]//following-sibling::p")
+	@FindBy(xpath = "//*[contains(text(), 'Birth Date')]//following-sibling::*")
 	private WebElement DOBDisplay;
 
-	@FindBy(xpath = "//*[contains(text(), 'Gender')]//following-sibling::p")
+	@FindBy(xpath = "//*[contains(text(), 'Gender')]//following-sibling::*")
 	private WebElement GenderDisplay;
 
 	//Permanent Address Display
-	@FindBy(xpath = "//*[contains(text(), 'Street Address')]//following-sibling::p")
+	@FindBy(xpath = "//*[contains(text(), 'Street Address')]//following-sibling::*")
 	private List <WebElement> StreetDisplays;
 
-	@FindBy(xpath = "//*[contains(text(), 'City')]//following-sibling::p")
+	@FindBy(xpath = "//*[contains(text(), 'City')]//following-sibling::*")
 	private List <WebElement> CityDisplays;
 
 
 	//Mailing Address Display
-	@FindBy(xpath = "//*[contains(text(), 'Is your mailing address the same as')]//following-sibling::p")
+	@FindBy(xpath = "//*[contains(text(), 'Is your mailing address the same as')]//following-sibling::*")
 	private WebElement MailingQiuestionDisplay;
 	
-	@FindBy(xpath = "//*[contains(text(), 'mailing address')]/ancestor::*[@class = 'review-step']//*[contains(text(), 'State')]//following-sibling::p")
+	@FindBy(xpath = "//*[contains(text(), 'mailing address')]/ancestor::*[@class = 'review-step']//*[contains(text(), 'State')]//following-sibling::*")
 	private WebElement MailStateDisplay;
 	
-	@FindBy(xpath = "//*[contains(text(), 'Zip Code')]//following-sibling::p")
+	@FindBy(xpath = "//*[contains(text(), 'Zip Code')]//following-sibling::*")
 	private WebElement MailZipDisplay;
 	
 	//Submit Application Disclaimer

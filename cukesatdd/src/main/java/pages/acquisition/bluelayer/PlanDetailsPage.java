@@ -84,10 +84,10 @@ public class PlanDetailsPage extends UhcDriver{
 	 @FindBy(xpath = ".//*[@id='highlights']/div/div/span[1]/label")
 	 private WebElement compareBox;
 	 
-	 @FindBy(xpath = ".//*[@id='highlights']/div/div/span[2]/span/span")
+	 @FindBy(xpath = ".//*[@id='highlights']//span[contains(@class,'added-num ng-scope')]")
 	 private WebElement compareBoxMessage;
 	 
-	 @FindBy(xpath = ".//*[@id='highlights']/div/div/span[2]/span")
+	 @FindBy(xpath = ".//*[@id='highlights']//span[contains(@class,'added-num ng-scope')]")
 	 private WebElement compareBoxMessagePDP;
 	 
 	 
@@ -362,14 +362,14 @@ public class PlanDetailsPage extends UhcDriver{
 
 	   
 		public boolean validateCompareBox() {
-			clickCompareBox();
+			
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 			clickCompareBox();
-			if(compareBoxMessage.getText().contains("plans added") && compareBoxMessage.getText().contains("Compare plans"))
+			if(compareBoxMessage.getText().contains("plan added"))
 				return true;
 			return false;
 		}
@@ -379,7 +379,6 @@ public class PlanDetailsPage extends UhcDriver{
 		}
 		
 		public boolean validateCompareBoxPDP() {
-			clickCompareBox();
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {

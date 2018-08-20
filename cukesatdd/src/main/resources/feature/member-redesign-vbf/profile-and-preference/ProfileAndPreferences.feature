@@ -1,5 +1,5 @@
 @smokeTest
-Feature: 1.13-VBF-MemRedesign-To test My Profile & Preferences and Go Green flows
+Feature: 1.13-VBF-MemRedesign-To test My Profile & Preferences and Go Green flows (GATED)
 
 
      @smokeTest_ProfileAndPreferenceEPMP 
@@ -64,7 +64,7 @@ Feature: 1.13-VBF-MemRedesign-To test My Profile & Preferences and Go Green flow
       | memberType  | friendname | favcolor | phonenumber |
     #  | GroupRetireeMapd|name1      | color1   | number1     |
       # | UhcMapdInd     |name1      | color1   | number1     |
-      | AARPMapdInd | name1      | color1   | number1     |
+      | AARPMapdNonEPMP | name1      | color1   | number1     |
 
   @smokeTest_GoGreen @rallyDashboard @testharness
   Scenario Outline: To verify Go Green page
@@ -88,4 +88,4 @@ Feature: 1.13-VBF-MemRedesign-To test My Profile & Preferences and Go Green flow
       | memberType  | friendname | favcolor | phonenumber |
       # | GroupRetireeMapd|name1      | color1   | number1     |
       # | UhcMapdInd     |name1      | color1   | number1     |
-      | AARPMapdInd | name1      | color1   | number1     |
+      | AARPMapdNonEPMP | name1      | color1   | number1     |
