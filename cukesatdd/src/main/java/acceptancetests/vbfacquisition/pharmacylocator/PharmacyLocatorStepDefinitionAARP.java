@@ -2,6 +2,12 @@ package acceptancetests.vbfacquisition.pharmacylocator;
 
 import gherkin.formatter.model.DataTableRow;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,6 +57,69 @@ public class PharmacyLocatorStepDefinitionAARP {
 					acqusitionHomePage);
 			Assert.assertTrue(true);
 		}
+		
+		
+		
+		
+		
+			
+
+	     /*   BufferedReader br = null;
+Date obj= new Date();
+		System.out.println("date==="+obj);
+	        try {
+
+	            URL url=null;
+	            String dateDCEServer=null;
+				try {
+					url = new URL("http://apsrt0197:9083/DCERestWAR/dcerest/timeAdmin");
+				} catch (MalformedURLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	            try {
+					br = new BufferedReader(new InputStreamReader(url.openStream()));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+	            String line;
+
+	            StringBuilder sb = new StringBuilder();
+
+	            try {
+					while ((line = br.readLine()) != null) {
+						
+						//System.out.println("date find===="+line);
+						
+						if(line.contains("systemTime")){
+						
+							dateDCEServer=line;
+							break;
+						}
+					    sb.append(line);
+					    sb.append(System.lineSeparator());
+					}
+					System.out.println("dateDCEServer=="+dateDCEServer);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+//	            System.out.println(sb);
+	        } finally {
+
+	            if (br != null) {
+	                try {
+						br.close();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+	            }
+	        }*/
+		
 	}
 	
 	/**
@@ -59,7 +128,7 @@ public class PharmacyLocatorStepDefinitionAARP {
 	@When("^the user hovers to Our Plans and select Request More Help and Information for following plan type in AARP Site$")
 	public void user_hovers_to_our_plans_and_select_request_more_help_and_information_aarp(DataTable planAttributes){
 		
-		String planType = planAttributes.getGherkinRows().get(0).getCells()
+ 		String planType = planAttributes.getGherkinRows().get(0).getCells()
 				.get(0);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PLAN_TYPE, planType);
 		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
@@ -119,6 +188,7 @@ public class PharmacyLocatorStepDefinitionAARP {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
 					pharmacySearchPage);
 			Assert.assertTrue(true);
+			
 			pharmacySearchPage.validateChoosePlanSectionAfterzipcodeSearch();
 		} else {
 			Assert.fail("Failed to load Pharmacy search page");
@@ -162,10 +232,37 @@ public class PharmacyLocatorStepDefinitionAARP {
 
 		String planName = planAttributes.getGherkinRows().get(0).getCells()
 				.get(0);
+		
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PLAN_NAME, planName);
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		pharmacySearchPage = pharmacySearchPage.selectsPlanName(planName);
+
+		if (pharmacySearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
+					pharmacySearchPage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Failed to load Pharmacy search page");
+		}
+
+	}
+	
+	
+	/**
+	 * @toDo:user chooses a plan from dropdown
+	 */
+	@And("^the user chooses year from planyear in AARP Site$")
+	public void user_chooses_year_dropdown_aarp(DataTable planAttributes) {
+
+		String year = planAttributes.getGherkinRows().get(0).getCells()
+				.get(0);
+		
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.PLAN_YEAR, year);
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		System.out.println("plan===year"+year);
+		pharmacySearchPage = pharmacySearchPage.selectsPlanYear(year);
 
 		if (pharmacySearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,

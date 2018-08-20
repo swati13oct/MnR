@@ -659,21 +659,24 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public boolean validateVPPPlanSummaryPage() {
 		WebDriverWait wait = new WebDriverWait(driver, 60000);
 		vppTop = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='overview-main']/h2")));
-		maPlansNumber = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='overview-tabs module-tabs-tabs']/div[1]/div/span/span[@class='ng-binding']")));
+		maPlansNumber = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='overview-tabs module-tabs-tabs']/div[1]//span[@class='ng-binding']")));
 		msPlansNumber = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='overview-tabs module-tabs-tabs']/div[2]//span[@class='ng-binding']")));
 		pdpPlansNumber = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='overview-tabs module-tabs-tabs']/div[3]//span[@class='ng-binding']")));
-
+		snpPlansNumber = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='overview-tabs module-tabs-tabs']/div[4]//span[@class='ng-binding']")));
+		
 		validate(vppTop);
 		validate(maPlansNumber);
 		validate(msPlansNumber);
 		validate(pdpPlansNumber);
+		validate(snpPlansNumber);
 
 		int allPlans = Integer.valueOf(vppTop.getText().substring(10, 12));
 		int maPlans = Integer.valueOf(maPlansNumber.getText());
 		int msPlans = Integer.valueOf(msPlansNumber.getText());
 		int pdpPlans = Integer.valueOf(pdpPlansNumber.getText());
-
-		if (allPlans == maPlans + msPlans + pdpPlans) {
+		int snpPlans = Integer.valueOf(snpPlansNumber.getText());
+		
+		if (allPlans == maPlans + msPlans + pdpPlans+snpPlans) {
 			return true;
 		}
 		return false;

@@ -13,9 +13,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.vbfacquisition.bluelayer.AcquisitionHomePage;
-import pages.vbfacquisition.bluelayer.PlanDetailsPage;
-import pages.vbfacquisition.bluelayer.VPPPlanSummaryPage;
+import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.acquisition.bluelayer.PlanDetailsPage;
+import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import acceptancetests.vbfacquisition.enrollinplan.oleCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
@@ -182,9 +182,18 @@ public class VppStepDefinitionUHC {
 	@And("^I click on add to compare checkbox and click on view details link$")
 	public void I_click_on_compare_checkbox(){
 		VPPPlanSummaryPage vppplansummarypage = (VPPPlanSummaryPage) loginScenario.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		vppplansummarypage.clickonViewPlans();
 		vppplansummarypage.clickCompareChkBox();
 		PlanDetailsPage plandetailspage = vppplansummarypage.clickViewDetails();
+		if(plandetailspage!=null){
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, plandetailspage);
+		}
+	}
+	
+	@And("^I click on add to compare checkbox for pdp plan and click on view details link$")
+	public void I_click_on_compare_checkbox_pdp(){
+		VPPPlanSummaryPage vppplansummarypage = (VPPPlanSummaryPage) loginScenario.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		vppplansummarypage.clickCompareChkBoxPDP();
+		PlanDetailsPage plandetailspage = vppplansummarypage.clickViewDetailsPDP();
 		if(plandetailspage!=null){
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, plandetailspage);
 		}
@@ -206,7 +215,7 @@ public class VppStepDefinitionUHC {
 	/**
 	 * @toDo:check compare box and verify right info is shown
 	 */
-	@Then("^I check compare box and verify right info is shown$")
+	@Then("^I check compare box and verify right info is shown for pdp$")
 	public void I_check_compare_box_and_verify(){
 		PlanDetailsPage plandetailspage = (PlanDetailsPage) loginScenario.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		if(plandetailspage.validateCompareBoxPDP()){
