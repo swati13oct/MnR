@@ -59,7 +59,7 @@ public class PlanDetailsPage extends UhcDriver{
 	private WebElement planCost4;
 	
 
-	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/a")
+	@FindBy(xpath = ".//*[@id='backToPlanSummaryTop']")
 	private WebElement backToAllPlans;
 	
 	@FindBy(xpath = "//*[@id='yourDruglist']/div[2]/table/tbody/tr[3]/td/span[2]")
