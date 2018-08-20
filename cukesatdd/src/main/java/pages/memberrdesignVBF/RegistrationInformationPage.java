@@ -42,7 +42,7 @@ public class RegistrationInformationPage extends UhcDriver {
 
 	/** The month field. */
 
-	@FindBy(id = "month-dropdown")
+	@FindBy(xpath = "//span[@id='month-dropdown']//span[@class='select2-selection__arrow']")
 	private WebElement monthToEnter;
 
 	@FindBy(className = "select2-search__field")
@@ -53,7 +53,7 @@ public class RegistrationInformationPage extends UhcDriver {
 
 	/** The date field. */
 
-	@FindBy(id = "date-dropdown")
+	@FindBy(xpath = "//span[@id='date-dropdown']//span[@class='select2-selection__arrow']")
 	private WebElement dayToEnter;
 
 	@FindBy(id = "select2-date-dd-results")
@@ -61,7 +61,7 @@ public class RegistrationInformationPage extends UhcDriver {
 
 	/** The year field. */
 
-	@FindBy(id = "year-dropdown")
+	@FindBy(xpath = "//span[@id='year-dropdown']//span[@class='select2-selection__arrow']")
 	private WebElement yearToEnter;
 
 	@FindBy(id = "select2-date-yyyy-results")
@@ -415,6 +415,7 @@ public class RegistrationInformationPage extends UhcDriver {
 	 * @return the month to enter
 	 */
 	public WebElement getEnterMonth() {
+		validateNew(monthToEnter);
 		return monthToEnter;
 	}
 
