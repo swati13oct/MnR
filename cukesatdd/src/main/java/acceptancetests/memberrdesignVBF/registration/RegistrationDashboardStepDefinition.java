@@ -85,7 +85,6 @@ public class RegistrationDashboardStepDefinition {
 
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
 				.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
-
 		registrationInformationPage.getEnterMonth().click();
 		registrationInformationPage.enterMonth(month);
 		registrationInformationPage.clickMonthresults();

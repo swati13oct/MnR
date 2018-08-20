@@ -53,6 +53,9 @@ public class PharmacySearchPage extends UhcDriver {
 
 	@FindBys(value = { @FindBy(xpath = "//select[@id='plan-type']/option") })
 	private List<WebElement> planNamesList;
+	
+	@FindBys(value = { @FindBy(xpath = "//select[@id='plan-year']/option") })
+	private List<WebElement> planYearList;
 
 	@FindBys(value = { @FindBy(xpath = "//select[@id='lang-select']/option") })
 	private List<WebElement> langList;
@@ -112,6 +115,9 @@ public class PharmacySearchPage extends UhcDriver {
 	
 	@FindBy(id = "plan-type")
 	private WebElement planType;
+	
+	@FindBy(id = "plan-year")
+	private WebElement planYearsel;
 	
 	@FindBy(xpath = "//*[@id='site-wrapper']/div[4]/div/div/div/div/main/div/div/div/div[1]/div/div[2]/div/ul[2]/li[2]/div/div[3]/div/div/a[1]")
 	private WebElement showonmap;
@@ -270,6 +276,24 @@ public class PharmacySearchPage extends UhcDriver {
 		
 		Select select = new Select(planType);	
 		select.selectByVisibleText(planName);
+		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
+		return new PharmacySearchPage(driver);
+	}
+	
+	public PharmacySearchPage selectsPlanYear(String planYear) {
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		selectFromDropDown(planYearList, planYear);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+		if (driver.getTitle().equalsIgnoreCase(
+				PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE)) {
+			return new PharmacySearchPage(driver);
+		}
+		
+		driver.manage().timeouts().implicitlyWait(5000, TimeUnit.SECONDS);
+		
+		Select select = new Select(planYearsel);	
+		select.selectByVisibleText(planYear);
 		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
 		return new PharmacySearchPage(driver);
 	}
