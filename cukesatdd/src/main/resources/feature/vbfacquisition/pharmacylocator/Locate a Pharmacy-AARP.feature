@@ -18,7 +18,7 @@ Then the user validates the available pharmacies page in AARP site
 	
 Examples:
 	| zipcode     | distance  | county       |  planName 			               	  |  plantype|
-	| 80002       | 25 miles     | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | MA |
+	| 90210       | 25 miles     | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | MA |
 #	| 80002       | 15 miles     | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | MA |
 	
 @availablePharmAARP
@@ -40,7 +40,7 @@ Then the user should see choose a plan in AARP site
 
 Examples:
 	| zipcode     | distance  | county       |  planName 			               	  |  plantype|languageName|
-	| 80002       | 25 miles     | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | MA |Spanish |
+	| 90210       | 25 miles     | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | MA |Spanish |
 #	| 80002       | 15 miles     | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | MA |Spanish |
 #	| 90210       | 2        |      | AARP MedicareRx Preferred (PDP)                    | PDP |
 
@@ -65,7 +65,7 @@ Then the user validates the available pharmacies page in AARP site
 	
 Examples:
 	| zipcode     | distance  | county       |  planName 			               	  |  plantype| pharmacytype |servicetype|
-	| 80002       | 25 miles     | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | MA |Standard Network Pharmacy|Open 24 hours|
+	| 90210       | 25 miles     | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | MA |Standard Network Pharmacy|Open 24 hours|
 
 @pharmaciesSelPharmacyTypesAARP
 Scenario Outline:To verify available pharmacies for particular pharmacy types in AARP site
