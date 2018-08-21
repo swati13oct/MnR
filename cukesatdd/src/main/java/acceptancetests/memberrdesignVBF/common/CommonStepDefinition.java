@@ -15,10 +15,12 @@ import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
+import pages.memberrdesignVBF.HealthAndWellness;
 import pages.memberrdesignVBF.LoginPage;
 import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.memberrdesignVBF.SecurityQuestionsPage;
@@ -190,4 +192,65 @@ public class CommonStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.COMMONSTEPDEFINITIONMEMVBF, commonStepDefinition);
 
 	}
+	/***
+	 * 
+	 */
+	@Then("^I should see Need Help section at the bottom$")
+	public void I_should_see_nned_help_section_at_botom() {
+		// Express the Regexp above with the code you wish you had
+		RallyDashboardPage rallyDashboard = (RallyDashboardPage) getLoginScenario()
+				.getBean(PageConstants.RALLY_DASHBOARD_PAGE);
+		rallyDashboard.validateNeedHelpSection();
+
+	}
+	
+	/***
+	 * 
+	 */
+	@And("^I am on the member page then I should be able to see the footer sections$")
+	public void I_am_on_the_member_page_then_I_should_be_able_to_see_the_footer_sections() {
+		// Express the Regexp above with the code you wish you had
+		if (("YES").equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
+			testHarness.validateFooterSection();
+		}else{
+		RallyDashboardPage rallyDashboard = (RallyDashboardPage) getLoginScenario()
+				.getBean(PageConstants.RALLY_DASHBOARD_PAGE);
+		rallyDashboard.validateFooterSection();
+		}
+	}
+
+	/***
+	 * 
+	 */
+	@And("^Member Support and links under it should be displayed$")
+	public void Member_Support_and_links_under_it_should_be_displayed() {
+		// Express the Regexp above with the code you wish you had
+		if (("YES").equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
+			testHarness.validateMemberSupport();
+		}else{
+		RallyDashboardPage rallyDashboard = (RallyDashboardPage) getLoginScenario()
+				.getBean(PageConstants.RALLY_DASHBOARD_PAGE);
+		rallyDashboard.validateMemberSupport();
+		}
+	}
+
+	/***
+	 * 
+	 */
+	@And("^Quick links and links under it should be displayed$")
+	public void Quick_links_and_links_under_it_should_be_displayed() {
+		// Express the Regexp above with the code you wish you had
+		if (("YES").equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
+			testHarness.validateQuickLinks();
+		}else{
+		RallyDashboardPage rallyDashboard = (RallyDashboardPage) getLoginScenario()
+				.getBean(PageConstants.RALLY_DASHBOARD_PAGE);
+		rallyDashboard.validateQuickLinks();
+		}
+	}
 }
+
+
