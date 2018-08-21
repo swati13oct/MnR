@@ -14,6 +14,9 @@ import atdd.framework.MRScenario;
 
 public class TeamCAcqHome extends GlobalWebElements {
 	
+	 private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
+     private static String UMS_ACQISITION_OFFLINE_PAGE_URL = MRConstants.UHC_URL_OFFLINE;
+	
 	 @FindBy(id = "cta-zipcode")
      private WebElement zipCodeField;
 	 
@@ -41,8 +44,16 @@ public class TeamCAcqHome extends GlobalWebElements {
         driver.manage().window().maximize();
 }
 
-	public void openAndValidate() {		               
+	public void openAndValidate() {	
+		 if ( MRScenario.environment.equals("Team-c"))
+		 {
 	       start(TeamC_ACQUISITION_PAGE_URL);
+		 }
+		 else if ( MRScenario.environment.equals("offline")) {
+               start(UMS_ACQISITION_OFFLINE_PAGE_URL);
+       }else{
+               start(UMS_ACQISITION_PAGE_URL);
+       }
 	}
 
 	public VPPPlanSummaryPage searchPlans(String zipcode, String countyName) {
