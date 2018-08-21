@@ -20,6 +20,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.vppforaep.AepVppPlanSummaryPage;
 import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPage;
 import acceptancetests.data.ElementData;
 import acceptancetests.util.CommonUtility;
@@ -259,9 +260,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 
 	public VPPPlanSummaryPage viewPlanSummary(String planType) {
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
-		
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (planType.equalsIgnoreCase("PDP")) {
 //	WebElement hidePdpPlans invalid
 			//if(validate(hidePdpPlans)){
@@ -667,19 +673,20 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		msPlansNumber = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='overview-tabs module-tabs-tabs']/div[2]//span[@class='ng-binding']")));
 		pdpPlansNumber = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='overview-tabs module-tabs-tabs']/div[3]//span[@class='ng-binding']")));
 		snpPlansNumber = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='overview-tabs module-tabs-tabs']/div[4]//span[@class='ng-binding']")));
+		
 		validate(vppTop);
 		validate(maPlansNumber);
 		validate(msPlansNumber);
 		validate(pdpPlansNumber);
 		validate(snpPlansNumber);
-
+		
 		int allPlans = Integer.valueOf(vppTop.getText().substring(10, 12));
 		int maPlans = Integer.valueOf(maPlansNumber.getText());
 		int msPlans = Integer.valueOf(msPlansNumber.getText());
 		int pdpPlans = Integer.valueOf(pdpPlansNumber.getText());
 		int snpPlans = Integer.valueOf(snpPlansNumber.getText());
-
-		if (allPlans == maPlans + msPlans + pdpPlans + snpPlans) {
+		
+		if (allPlans == maPlans + msPlans + pdpPlans+snpPlans) {
 			return true;
 		}
 		return false;
@@ -856,6 +863,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public ComparePlansPage clickOnCompareLink(){
+		List<WebElement> compareLinks = driver.findElements(By.xpath(".//*[@id='plan-list-1']//*[contains(@class,'compare-link')]"));	
+		compareLinks.get(0).click();
 
 
 		try {
@@ -1091,6 +1100,27 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		if(currentUrl().contains("/estimate-drug-costs.html#/drug-cost-estimator"))
 			return new DrugCostEstimatorPage(driver);
+		return null;
+	}
+
+	public AepVppPlanSummaryPage validate_aepPlanYearLinks(String currentYear, String nextYear) {
+		System.out.println("Next Year : "+nextYear);
+		System.out.println("Current Year : "+currentYear);
+
+
+		WebElement CurrentYearLink = driver.findElement(By.xpath("//a[contains(text(), '"+currentYear+"')]"));
+		System.out.println("Current Year link on VPP Page : "+CurrentYearLink.getText());
+
+		List <WebElement> NextYearHeadings = driver.findElements(By.xpath("//*[contains(text(), '"+nextYear+"')]"));
+		if( validate(CurrentYearLink) && NextYearHeadings.size()>0){
+			System.out.println("Current and Next year toggle displayed for AEP");
+			return new AepVppPlanSummaryPage(driver);
+		}
+		else{
+			System.out.println("Current and Next year toggle NOT displayed for AEP");
+		}
+			
+		// TODO Auto-generated method stub
 		return null;
 	}
 }

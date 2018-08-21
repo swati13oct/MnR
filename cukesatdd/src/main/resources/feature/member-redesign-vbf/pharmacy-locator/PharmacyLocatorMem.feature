@@ -1,5 +1,5 @@
 @smokeTest
-Feature: 1.12-VBF-MemRedesign-To test Locate a Pharmacy tool
+Feature: 1.12-VBF-MemRedesign-To test Locate a Pharmacy tool (GATED)
 
   @smokeTest_PharmacyLocatorMem @rallyDashboard @testharness
   Scenario Outline: Verify all available pharmacies for default zipcode in Redesign site

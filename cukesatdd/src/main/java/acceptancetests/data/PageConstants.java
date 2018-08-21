@@ -603,6 +603,9 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 
 	public static final String APPLITOOLS_ACQ_PAGE = null;
 
+	public static final String AEP_VPP_PLAN_SUMMARY_PAGE = null;
+	public static final String AEP_VPP_PLAN_DETAILS_PAGE = null;
+
 	
 	
 
