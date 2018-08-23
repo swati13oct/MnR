@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Pattern;
 
 import org.json.JSONObject;
 import org.junit.Assert;
@@ -265,14 +266,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 
 	public VPPPlanSummaryPage viewPlanSummary(String planType) {
-		//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
-		try {
+		/*try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		if (planType.equalsIgnoreCase("PDP")) {
 //	WebElement hidePdpPlans invalid
 			//if(validate(hidePdpPlans)){
@@ -670,6 +671,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		msPlansNumber = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='overview-tabs module-tabs-tabs']/div[2]//span[@class='ng-binding']")));
 		pdpPlansNumber = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='overview-tabs module-tabs-tabs']/div[3]//span[@class='ng-binding']")));
 		snpPlansNumber = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='overview-tabs module-tabs-tabs']/div[4]//span[@class='ng-binding']")));
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		
 		validate(vppTop);
 		validate(maPlansNumber);
@@ -677,7 +679,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		validate(pdpPlansNumber);
 		validate(snpPlansNumber);
 		
-		int allPlans = Integer.valueOf(vppTop.getText().substring(10, 12));
+		int allPlans = Integer.valueOf(vppTop.getText().substring(10, 12).trim());
 		int maPlans = Integer.valueOf(maPlansNumber.getText());
 		int msPlans = Integer.valueOf(msPlansNumber.getText());
 		int pdpPlans = Integer.valueOf(pdpPlansNumber.getText());
@@ -783,7 +785,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 	public PlanDetailsPage navigateToPlanDetails(String planName, String planType) {
 		driver.manage().window().maximize();
-	
+		
 		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {	
 		WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//a[contains(text(),'View plan and drug coverage details')]"));
 			validate(MAmoreDetailsLink);
@@ -798,7 +800,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			System.out.println("View Plan Details Link is clicked for PDP plan"+planName);
 			
 		}
-		
 		CommonUtility.checkPageIsReady(driver);
 		if (driver.getCurrentUrl().contains("#/details")) {	
 			return new PlanDetailsPage(driver);
@@ -860,7 +861,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public ComparePlansPage clickOnCompareLink(){
-		List<WebElement> compareLinks = driver.findElements(By.xpath(".//*[@id='plan-list-1']//*[contains(@class,'compare-link')]"));	
+		List<WebElement> compareLinks = driver.findElements(By.xpath(".//*[@id='plan-list-1']//button[contains(text(),'Compare plans')]"));	
 		compareLinks.get(0).click();
 
 

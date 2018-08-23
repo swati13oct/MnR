@@ -89,7 +89,7 @@ Then the user navigates to Authorization Page for plan as per following rider op
 Then the user validates required fields for Authorization Page
 Then the user navigates to Review and Submit Page
 Then the user validates the Plan and Member details on Review and Submit Page
-And user clicks on Submit Enrollment to complete enrollment
+And the user clicks on Submit Enrollment to complete enrollment
 Then the user validates Plan and Member Details on Confirmation Page
 	
 Examples:

@@ -20,6 +20,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pages.vbfacquisition.ole.WelcomePage;
+import pages.vbfacquisition.ulayer.ComparePlansPage;
 import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPage;
 import acceptancetests.data.ElementData;
 import acceptancetests.util.CommonUtility;
@@ -44,8 +45,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private WebElement snpPlansNumber;
 
 	
-	@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='plan-overview-wrapper']//div[@class='overview-tabs module-tabs-tabs']/div[1]//span[@class='trigger-closed']")
-	//@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[1]//*[@class='trigger-closed']")
+	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[1]//*[@class='trigger-closed']")
 	private WebElement maPlansViewLink;
 	
 	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[1]//*[@class='trigger-closed']")
@@ -119,7 +119,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='plan-overview-wrapper']//div[@class='overview-tabs module-tabs-tabs']/div[3]//span[@class='trigger-closed']")
 	private WebElement pdpPlansCount;
 	
-	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[1]//*[@class='trigger-closed']")
+	@FindBy(xpath = "//div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[1]//*[@class='trigger-closed']")
 	private WebElement viewPlans;
 	
 	@FindBy(xpath = "div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[3]//*[@class='trigger-closed']")
@@ -663,6 +663,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		msPlansNumber = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='overview-tabs module-tabs-tabs']/div[2]//span[@class='ng-binding']")));
 		pdpPlansNumber = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='overview-tabs module-tabs-tabs']/div[3]//span[@class='ng-binding']")));
 		snpPlansNumber = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='overview-tabs module-tabs-tabs']/div[4]//span[@class='ng-binding']")));
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		
 		validate(vppTop);
 		validate(maPlansNumber);
@@ -670,7 +671,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		validate(pdpPlansNumber);
 		validate(snpPlansNumber);
 
-		int allPlans = Integer.valueOf(vppTop.getText().substring(10, 12));
+		int allPlans = Integer.valueOf(vppTop.getText().substring(10, 12).trim());
 		int maPlans = Integer.valueOf(maPlansNumber.getText());
 		int msPlans = Integer.valueOf(msPlansNumber.getText());
 		int pdpPlans = Integer.valueOf(pdpPlansNumber.getText());
@@ -853,6 +854,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public ComparePlansPage clickOnCompareLink(){
+		List<WebElement> compareLinks = driver.findElements(By.xpath(".//*[@id='plan-list-1']//button[contains(text(),'Compare plans')]"));	
+		compareLinks.get(0).click();
 
 
 		try {
@@ -887,12 +890,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		if(plantype.equals("MA")||plantype.equals("MAPD")){
-			
+			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 			if(validate(viewPlans)){
 				viewPlans.click();
 				List<WebElement> maDCELink = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[@class='mabenefittable']//a[contains(@dtmname, 'Plans Landing:Plan:MA:Drug Cost Estimator')]"));
 				((JavascriptExecutor)driver).executeScript("arguments[0].click();", maDCELink.get(0));
 				//maDCELink.get(0).click();
+				System.out.println("Entered DCE");
 				}else{
 					Assert.assertTrue("This scenario is for AEP period", true);
 					
