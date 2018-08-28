@@ -60,7 +60,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(id = "viewTextAtdd")
 	private WebElement view_label;
 
-	@FindBy(xpath = "(//div[@id='plan_benefit_documents']/section[2]//ul/li[not (contains(@class,'ng-hide'))])[1]")
+	@FindBy(xpath = "(//div[@id='plan_benefit_documents']/section//ul/li[not (contains(@class,'ng-hide'))])[1]")
 	private WebElement documents_label;
 
 	@FindBy(xpath = "//div[@id='planBenefitsAppSum']/section//div/*[contains(@class,'atdd-benefitsoverview-plantitle')]")
@@ -75,7 +75,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-benefitsoverview-effectivedatelabel")
 	private WebElement effective_Date;
 
-	@FindBy(xpath = "//div[@class='page-header--left']/h1[contains(.,'Benefits Summary')]")
+	@FindBy(xpath = "//div[contains(@class,'benefitsSummary')]//*[contains(text(),'Benefits Summary')]")
 	private WebElement BenefitsSummaryHeader;
 
 	@FindBy(xpath = "//span[contains(text(),'Medical Copays or Coinsurance')]")
@@ -101,7 +101,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-bncsummary-primarycareprvdrheader")
 	private WebElement PrimaryCareProviderHeaderHMO;
 
-	@FindBy(xpath = "//div[@id='benefitsMain']//span[contains(text(),'Out-of-Pocket Maximum')]")
+	@FindBy(xpath = "//div[@id='outOfPocketTile']//span[contains(text(),'Out-of-Pocket Maximum')]")
 	private WebElement OutofPocketMaximum;
 
 	@FindBy(className = "atdd-innetwrk-title")
@@ -140,13 +140,13 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='oopInNetowrk']/section//h1")
 	private WebElement INNETWORKValue;
 
-	@FindBy(xpath = "//div[@id='oopOutNetowrk']/section//h1")
+	@FindBy(xpath = "//div[@id='oopOutNetowrk']/div[@class='card-body']//span")
 	private WebElement OUTOFNETWORKValue;
 
-	@FindBy(xpath = ".//*[@id='officeVisitTileAtdd']/div/section/div[1]")
+	@FindBy(xpath = ".//div[@id='officeVisitTileAtdd']//span[contains(text(),'Primary care provider:')]/parent::*/following-sibling::span")
 	private WebElement pcpValue;
 
-	@FindBy(xpath = "//*[@id='officeVisitTileAtdd']/div/section/span")
+	@FindBy(xpath = "//div[@id='officeVisitTileAtdd']//span[contains(text(),'Specialist:')]/parent::*/following-sibling::span")
 	private WebElement specialistValue;
 
 	@FindBy(className = "atdd-bnc-standrdretailpharmcytable")
