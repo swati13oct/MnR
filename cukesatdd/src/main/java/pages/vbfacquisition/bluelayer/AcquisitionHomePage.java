@@ -1073,7 +1073,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				
 				
 				 sendkeys(zipCodeField, zipcode);	
--                viewPlansButton.click();
+                viewPlansButton.click();
 
                 if (driver.getCurrentUrl().contains("plan-summary")) {
                         return new VPPPlanSummaryPage(driver);
