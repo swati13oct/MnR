@@ -1211,13 +1211,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public void clickonViewPlans() {
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if(validate(viewPlans)){
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			
+		if(!validate(viewPlans)){
 		viewPlans.click();
 		}
 
