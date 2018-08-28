@@ -97,6 +97,8 @@ public class ContactUsPage extends UhcDriver {
 	@FindBy(id = "signed-in")
 	private WebElement messengerSignIn;
 	
+	@FindBy(xpath = "//div[@id='list-folders']/ul/li//a[contains(text(),'Inbox')]")
+	private WebElement messengerInbox;
 	
 	public ContactUsPage(WebDriver driver) {
 		super(driver);
@@ -238,7 +240,7 @@ public class ContactUsPage extends UhcDriver {
                    CommonUtility.checkPageIsReadyNew(driver);
                    CommonUtility.waitForPageLoadNew(driver, messengerComposeBtn, 60);
                    Assert.assertTrue(driver.getTitle().equals("Messenger"));                  
-                   validateNew(messengerSignIn);
+                   validateNew(messengerInbox);
                    }
                    else{
                 	   System.out.println("Skipping Go To Inbox functionslity in Team-ci environment");
