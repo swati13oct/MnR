@@ -253,12 +253,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 		sendkeys(zipCodeField, zipcode);
 		viewPlansButton.click();
-		try {
-			Thread.sleep(4000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
 		}
