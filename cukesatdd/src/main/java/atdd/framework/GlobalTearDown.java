@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
-import acceptancetests.data.LoginCommonConstants;
+
 import cucumber.api.Scenario;
 // To be added
 import cucumber.api.java.After;
@@ -66,9 +66,7 @@ public class GlobalTearDown {
 				scenario.embed(html.getBytes(), "text/html");
 			}
 					
-			if(null != getLoginScenario().getBean(LoginCommonConstants.USERNAME)){
-				scenario.write("USER NAME USED : " + getLoginScenario().getBean(LoginCommonConstants.USERNAME));
-			}
+			
 			MRScenario mrScen = new MRScenario();
 			// Clean up the existing webdriver.
 			try {
