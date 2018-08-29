@@ -243,6 +243,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(id = "collapseHomeDel")
 	public WebElement homeDeliveryContent;
+	
+	@FindBy(id = "cta-zipcode")
+    private WebElement zipCodeField;
 
 	// @FindBy(xpath =
 	// ".//*[@id='drugdetails']/div[1]/div[1]/div/div/section/div")
@@ -1825,7 +1828,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(currentUrl().contains("https://www.awe-test-a-uhcmedicaresolutions.uhc.com/"))
+		if(validate(zipCodeField))
 			return new AcquisitionHomePage(driver);
 		return null;
 	}
