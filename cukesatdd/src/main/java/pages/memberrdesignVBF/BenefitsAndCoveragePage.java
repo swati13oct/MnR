@@ -391,4 +391,5 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validateNew(federalValueIC);
 		//validateTextUsingRegex(federalValueIC, "\\$\\d{1,4}\\.\\d{2}");
 	}
+	
 }
