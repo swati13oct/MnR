@@ -756,8 +756,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 
 	public void select_first_pharmacy() throws InterruptedException {
-		//driver.manage().window().maximize();
-		//Thread.sleep(1000);
+		driver.manage().window().maximize(); 
+		Thread.sleep(1000);
 
 		//waitforElement(select_btn_first);
 		System.out.println("first pharmacy");

@@ -1237,8 +1237,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public void clickOnViewPlans(String plantype) {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		
+
 		if(plantype.equals("MA")||plantype.equals("MAPD")){
-			if(!validate(viewPlans)){
+			if(!validate(viewPlans))	 {
 				AssertTrue("No plans for MA",false);
 			}else			
 				viewPlans.click();

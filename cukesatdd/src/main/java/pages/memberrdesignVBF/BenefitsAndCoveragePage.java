@@ -60,7 +60,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(id = "viewTextAtdd")
 	private WebElement view_label;
 
-	@FindBy(xpath = "(//div[@id='plan_benefit_documents']/section//ul/li[not (contains(@class,'ng-hide'))])[1]")
+	@FindBy(xpath = "(//div[@id='plan_benefit_documents']/section[2]//ul/li[not (contains(@class,'ng-hide'))])[1]")
 	private WebElement documents_label;
 
 	@FindBy(xpath = "//div[@id='planBenefitsAppSum']/section//div/*[contains(@class,'atdd-benefitsoverview-plantitle')]")
@@ -140,13 +140,13 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='oopInNetowrk']/section//h1")
 	private WebElement INNETWORKValue;
 
-	@FindBy(xpath = "//div[@id='oopOutNetowrk']/div[@class='card-body']//span")
+	@FindBy(xpath = "//div[@id='oopOutNetowrk']/section//h1")
 	private WebElement OUTOFNETWORKValue;
 
-	@FindBy(xpath = "//div[@id='officeVisitTileAtdd']//span[contains(text(),'Primary care provider:')]/parent::*/following-sibling::span")
+	@FindBy(xpath = ".//*[@id='officeVisitTileAtdd']/div/section/div[1]")
 	private WebElement pcpValue;
 
-	@FindBy(xpath = "//div[@id='officeVisitTileAtdd']//span[contains(text(),'Specialist:')]/parent::*/following-sibling::span")
+	@FindBy(xpath = "//*[@id='officeVisitTileAtdd']/div/section/span")
 	private WebElement specialistValue;
 
 	@FindBy(className = "atdd-bnc-standrdretailpharmcytable")
