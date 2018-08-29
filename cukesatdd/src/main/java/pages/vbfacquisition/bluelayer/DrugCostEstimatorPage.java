@@ -299,6 +299,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	
 	@FindBy(id = "total_annualcost_acq")
 	private WebElement step3CostValue;
+	
+	@FindBy(id = "cta-zipcode")
+    private WebElement zipCodeField;
 
 	//@FindBy(xpath = ".//*[@id='acqsummary']/div[2]/div[2]/a/p")
 	//@FindBy(xpath = "//p[contains(text(),'Pharmacy')]")
@@ -1825,7 +1828,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(currentUrl().contains("https://www.awe-test-a-uhcmedicaresolutions.uhc.com/"))
+		if(validate(zipCodeField))
 			return new AcquisitionHomePage(driver);
 		return null;
 	}

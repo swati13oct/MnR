@@ -1243,10 +1243,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		if(plantype.equals("MA")||plantype.equals("MAPD")){
-			if(validate(viewPlans)){
+			if(!validate(viewPlans)){
 				AssertTrue("No plans for MA",false);
 			}else			
-			viewPlans.click();
+				viewPlans.click();
 		}else
 			viewPDPPlans.click();
 
