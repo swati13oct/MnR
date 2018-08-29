@@ -1061,9 +1061,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
         public VPPPlanSummaryPage navigateToVpp(String zipcode)
         {
-               sendkeys(zipCodeField, zipcode);	
+
+            sendkeys(zipCodeField, zipcode);	
                 viewPlansButton.click();
-            
                 
                 try {
 					Thread.sleep(4000);
@@ -1073,7 +1073,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				}
 				
 				
-				 
 
                 if (driver.getCurrentUrl().contains("plan-summary")) {
                         return new VPPPlanSummaryPage(driver);
