@@ -2,6 +2,7 @@ package pages.vbfacquisition.ulayer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -253,7 +254,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='dce-nav-btns']/button[contains(text(),'Delete')]")
 	public WebElement confdelpopup_del_button;
 
-	@FindBy(id = "returnLink")
+	@FindBy(xpath = ".//*[@id='returnLink']/p")
 	public WebElement returnLink;
 
 	@FindBy(id = "drugcostestimatorDetails")
@@ -756,16 +757,17 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 
 	public void select_first_pharmacy() throws InterruptedException {
-		driver.manage().window().maximize();
+		driver.manage().window().maximize(); 
 		Thread.sleep(1000);
 
 		//waitforElement(select_btn_first);
-		System.out.println("first pharmacy");
+		System.out.println("before pharmacy selection");
 		
-					if (validateNew(select_btn_first)) {
+		if (validateNew(select_btn_first)) {
 				((JavascriptExecutor)driver).executeScript("arguments[0].click();", select_btn_first);
-			}
-			System.out.println("first pharmacy 2");
+				System.out.println("pharmacy selected");
+		}
+			
 			Thread.sleep(10000);
 		
 	}
@@ -925,7 +927,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 
 	public void navigateToStep3() throws InterruptedException {
-		waitforElement(step3);
+		driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
+		//waitforElement(step3);
 		step3.click();
 		Thread.sleep(10000);
 	}
