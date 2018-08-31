@@ -30,10 +30,10 @@ public class HealthAndWellnessPage extends UhcDriver{
 	@FindBy(id = "learning_desk1")
 	private WebElement learningTab;
 
-	@FindBy(xpath = ".//*[@id='hl-hw-buckets']/div/div[1]/a/img")
+	@FindBy(xpath = "//*[@id='root']/div/main/div[1]/div/header/div/div[1]/h1/span")
 	private WebElement lifestyleIcon;
 
-	@FindBy(xpath = ".//*[@id='hl-hw-buckets']/div/div[2]/a/img")
+	@FindBy(xpath = "//*[@id='quick-links']/div/div[4]/article/div/a")
 	private WebElement learningIcon;
 
 	@FindBy(id = "hl-hw-banner-lifestyle")
