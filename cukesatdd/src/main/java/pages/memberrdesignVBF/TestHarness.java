@@ -11,9 +11,11 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
+import acceptancetests.memberrdesignVBF.common.CommonStepDefinition;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.memberrdesignVBF.HealthAndWellness;
 
 public class TestHarness extends UhcDriver {
 
@@ -156,6 +158,8 @@ public class TestHarness extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
+		category = CommonStepDefinition.getMemberAttributeMap().get("Member Type");
+		RallyDashboardPage.checkModelPopup(driver);
 		validateNew(heading);
 		validateNew(panelHome);
 		validateNew(panelClaims);
@@ -224,6 +228,10 @@ public class TestHarness extends UhcDriver {
 		if (!(("GroupRetireeMapd").equalsIgnoreCase(Category))) {
 			validateNew(PaymentPageLik);
 		}
+		if (("ComboMAPDANDSHIP").equalsIgnoreCase(Category)) {
+			validateNew(tabsForComboMember.get(0));
+			validateNew(tabsForComboMember.get(1));
+		}
 		validateNew(formsPageLink);
 		validateNew(claimsPageLink);
 		validateNew(benefitsPageLink);
@@ -272,6 +280,9 @@ public class TestHarness extends UhcDriver {
 	 * @return
 	 */
 	public ContactUsPage navigateToContactUsPage() {
+
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,-500)", "");
 		validateNew(contactUsPageLink);
 		contactUsPageLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);

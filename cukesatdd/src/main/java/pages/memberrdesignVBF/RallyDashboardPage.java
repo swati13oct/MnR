@@ -1,7 +1,6 @@
 package pages.memberrdesignVBF;
 
 import java.util.List;
-
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -14,8 +13,10 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.memberrdesignVBF.common.CommonStepDefinition;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.memberrdesignVBF.HealthAndWellness;
 
 public class RallyDashboardPage extends UhcDriver {
+
 	@FindBy(id = "findcarecost2")
 	private WebElement panelFindCareCost1;
 

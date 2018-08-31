@@ -62,6 +62,9 @@ public class EOBPage extends UhcDriver {
 
 	@FindBy(className = "loading-block")
 	public List<WebElement> loadingImages;
+	
+	@FindBy(id = "date-range")
+	private WebElement eobMonthDateRangeShip;
 
 	private static String EOB_DIRECT_URL = MRConstants.EOB_DIRECT_URL;
 
@@ -100,6 +103,20 @@ public class EOBPage extends UhcDriver {
 			selectType.selectByValue(eobTypeData);
 			System.out.println(eobTypeData);
 		}
+		validateDateRangeContentDisplayed(dateRange);
+	}
+	
+	/***
+	 * 
+	 * @param dateRange
+	 * @param planType
+	 * @param eobTypeData
+	 */
+	public void selectDateRangeSHIP(String dateRange) {
+		validateNew(eobMonthDateRangeShip);
+		Select select = new Select(eobMonthDateRangeShip);
+		System.out.println(dateRange);
+		select.selectByValue(dateRange);
 		validateDateRangeContentDisplayed(dateRange);
 	}
 
