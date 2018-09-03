@@ -671,12 +671,13 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
   Scenario Outline: Verify the Office visits widget for a member withoutprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
+      | Member Type | <memberType> |
     Then the user navigates to Benefits coverage page
     And the user validates the Office Visits section
 
     Examples: 
-      | planType |
-      | MAPD     |
+      | planType | memberType    |
+      | MAPD     |memberWithoutProviderTiering |
 
   @WaystoSaveforPdp @regression @regression_06_06_18
   Scenario Outline: Verify the ways to save  widget for a PDP member
