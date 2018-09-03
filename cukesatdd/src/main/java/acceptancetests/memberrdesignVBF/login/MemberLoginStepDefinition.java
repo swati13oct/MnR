@@ -4,17 +4,15 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.LoginCommonConstants;
-import acceptancetests.data.PageConstants;
-import acceptancetests.memberrdesignVBF.common.CommonStepDefinition;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Then;
 import pages.memberrdesignVBF.BenefitsAndCoveragePage;
-import pages.memberrdesignVBF.FormsAndResourcesPage;
 import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.memberrdesignVBF.TestHarness;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageConstants;
+import acceptancetests.memberrdesignVBF.common.CommonStepDefinition;
 import atdd.framework.MRScenario;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Then;
 
 public class MemberLoginStepDefinition {
 	@Autowired
@@ -52,34 +50,18 @@ public class MemberLoginStepDefinition {
 	@And("^User should be ale to navigate to secondary page$")
 	public void user_validate_seconday_page_navigation() throws InterruptedException {
 		BenefitsAndCoveragePage benefitsAndCoveragePage = null;
-		FormsAndResourcesPage formsAndResourcesPage = null;
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
 			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
-			if (category.contains(CommonConstants.CATEGORY_TERMIATED)) {
-				formsAndResourcesPage = testHarness.navigateDirectToFnRPage();
-			} else {
-				benefitsAndCoveragePage = testHarness.navigateDirectToBnCPag();
-			}
+
+			benefitsAndCoveragePage = testHarness.navigateDirectToBnCPag();
 		} else {
 			RallyDashboardPage rallyDashboard = (RallyDashboardPage) getLoginScenario()
 					.getBean(PageConstants.RALLY_DASHBOARD_PAGE);
-			if (category.contains(CommonConstants.CATEGORY_TERMIATED)) {
-				formsAndResourcesPage = rallyDashboard.navigateDirectToFnRPage();
-			} else {
-				benefitsAndCoveragePage = rallyDashboard.navigateDirectToBnCPag();
-			}
-
+			benefitsAndCoveragePage = rallyDashboard.navigateDirectToBnCPag();
 		}
-		if (category.contains(CommonConstants.CATEGORY_TERMIATED)) {
-			if (formsAndResourcesPage == null)
-				Assert.fail("FnR page is not loaded");
-			else
-				Assert.assertTrue("FnR page is loaded", true);
-		} else {
-			if (benefitsAndCoveragePage == null)
-				Assert.fail("BnC page is not loaded");
-			else
-				Assert.assertTrue("BnC page is loaded", true);
+
+		if (benefitsAndCoveragePage == null) {
+			Assert.fail("BnC page is not loaded");
 		}
 	}
 
@@ -103,12 +85,6 @@ public class MemberLoginStepDefinition {
 			Assert.assertTrue(wd.getCurrentUrl().contains("/pcp/dashboard"));
 		else if (category.equalsIgnoreCase("Medica"))
 			Assert.assertTrue(wd.getCurrentUrl().contains("/medica/dashboard"));
-		else if (category.equalsIgnoreCase("ComboMAPDANDSHIP"))
-			Assert.assertTrue(wd.getCurrentUrl().contains("/aarp/dashboard"));
-		else if (category.equalsIgnoreCase("TerminatedFedAARP"))
-			Assert.assertTrue(wd.getCurrentUrl().contains("/aarp/dashboard"));
-		else if (category.equalsIgnoreCase("TerminatedFedUHC"))
-			Assert.assertTrue(wd.getCurrentUrl().contains("/medicare/dashboard"));
 		else {
 			System.out.println("Please specifiy a specific member type ");
 			Assert.fail("Please specifiy a specific member type ");

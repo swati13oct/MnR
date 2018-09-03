@@ -8,25 +8,26 @@ import gherkin.formatter.model.DataTableRow;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.memberrdesignVBF.RallyDashboardPage;
-import pages.memberrdesignVBF.TestHarness;
 import pages.memberrdesignVBF.PharmacyResultPage;
 import pages.memberrdesignVBF.PharmacySearchPage;
+import pages.memberrdesignVBF.RallyDashboardPage;
+import pages.memberrdesignVBF.TestHarness;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
+import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import cucumber.api.DataTable;
 
 /**
  * @author sdwaraka
  *
  */
-public class PharmacyLocatorMemStepDefinition {
+public class PharmacyLocatorRedesignMemStepDefinition {
 
 	@Autowired
 	MRScenario loginScenario;
