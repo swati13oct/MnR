@@ -116,12 +116,7 @@ public class HSIDStepDefinition {
 		else {
 			Assert.fail("***** Error in loading  Assistive Registration Page *****");
 		}*/
-		try {
-			accountHomePage.feebackpopupClose();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 
 	}
 	
@@ -165,7 +160,7 @@ public class HSIDStepDefinition {
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 		}
          
-		WebDriver wd = getLoginScenario().getWebDriver();
+		WebDriver wd = getLoginScenario().getWebDriverNew();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		HSIDLoginPage loginPage = new HSIDLoginPage(wd);
 		loginPage.validateelements();

@@ -1,5 +1,6 @@
 package pages.vbfacquisition.ulayer;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -56,10 +57,10 @@ public class SavingsOppurtunity extends UhcDriver{
 	}
 	
 	public void savedrugbutton() throws InterruptedException {
-		Thread.sleep(10000);
-		waitforElement(savedrugbutton);
+		
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		savedrugbutton.click();
-		Thread.sleep(15000);
+		Thread.sleep(3000);
 		// TODO Auto-generated method stub
 		
 	}

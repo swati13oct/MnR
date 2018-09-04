@@ -83,9 +83,6 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(id="plancosts")
 	private WebElement planCostsTab;
 	
-	@FindBy(id = "optionalservices")
-    private WebElement ridersTab;
-	
 	//Right Rail Element - TFN
 	@FindBy(xpath="//*[@class='tel ng-binding']")
 	private WebElement RightRail_TFN;
@@ -151,11 +148,11 @@ public class PlanDetailsPage extends UhcDriver {
 
 	
 
-	public VPPPlanSummaryPage backtoPlanSummary() {
+	public VPPPlanSummaryPage backtoPlanSummary(String planType) {
 		validate(backToAllPlans);
 		if(backToAllPlans != null){
 		backToAllPlans.click();		
-		return new VPPPlanSummaryPage(driver);
+		return new VPPPlanSummaryPage(driver, planType);
 		}
 		
 	return null;
@@ -434,13 +431,4 @@ public String GetTFNforPlanType() {
 	return null;
 }
 
-public void clickOnDrugTab(){
-	presDrugTab.click();
-}
-public void clickOnRidersTab(){
-	ridersTab.click();
-}
-public void clickOnPlanCostsTab(){
-	planCostsTab.click();
-}
 }
