@@ -112,8 +112,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath =".//*[@id='pdpplans_container']")
 	List<WebElement> pdpPlanElement;
 
-	@FindBy(xpath =".//*[@id='viewDetailsMA']")
-	private WebElement viewDetailsBtnMA;
+	@FindBy(xpath =".//*[@id='plan-list-1']//a[contains(@class,'view-more-link']")
+	List<WebElement> viewDetailsBtnMA;
 
 	@FindBy(xpath="//div[@id='snpplans_container']")
 	List<WebElement> snpPlanElement;
@@ -430,14 +430,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public PlanDetailsPage navigateToPlanDetails(String planName) {
 		System.out.println("******");
 		System.out.println(planName);
-/*		if (planName.contains("HMO") || (planName.contains("Regional PPO"))) {
-			ElementData elementData = new ElementData("id", "viewmoredetlinkmapd");
-			WebElement element = getViewPlanDetailsElement(maPlanElement, elementData, planName);
-			if (element != null) {
-				element.click();
-			}
-			System.out.println(driver.getCurrentUrl());
-		} else */
 		
 		if (planName.contains("PDP")) {
 //			ElementData elementData = new ElementData("id", "viewmoredetlinkpdp");
@@ -476,7 +468,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		CommonUtility.checkPageIsReady(driver);
+		//CommonUtility.checkPageIsReady(driver);
 		System.out.println("Title is :"+driver.getTitle());
 		System.out.println(driver.getCurrentUrl());
 		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_ADVANTAGE_PLAN_DETAILS)
@@ -490,7 +482,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	private WebElement getViewPlanDetailsElement(List<WebElement> maPlanElement2, ElementData elementData,
 			String planName) {
-		CommonUtility.waitForPageLoad(driver,viewDetailsBtnMA,CommonConstants.TIMEOUT_30);
+
 		for (WebElement plan : maPlanElement2) {
 			System.out.println(plan.getText());
 			try {
@@ -511,7 +503,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public VPPPlanSummaryPage viewPlanSummary(String planType) {
-		WebDriverWait wait = new WebDriverWait(driver, 45000);
+		WebDriverWait wait = new WebDriverWait(driver, 10000);
 
 		if (planType.equalsIgnoreCase("PDP")) {
 			if(viewPDPPlans.isDisplayed()){
@@ -1144,6 +1136,22 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 
 	}
+	
+	public void clickCompareChkBoxPDP(){
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<WebElement> allMAPlans = driver.findElements(By.xpath(".//*[@id='plan-list-3']//label[contains(text(),'Add to compare')]"));
+
+		if(allMAPlans !=null){
+				allMAPlans.get(0).click();
+				
+		}
+
+	}
 	public boolean validatepassportData() {
 		try {
 			Thread.sleep(20000);
@@ -1191,22 +1199,22 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 
 	public PlanDetailsPage clickViewDetails() {
-		List<WebElement> viewPlansLinks = driver.findElements(By.id("viewmoredetlinkma"));
+		List<WebElement> viewPlansLinks = driver.findElements(By.xpath(".//*[@id='plan-list-1']//a[contains(@class,'view-more-link')]"));
 		if(viewPlansLinks !=null){
-		viewPlansLinks.get(3).click();
+		viewPlansLinks.get(1).click();
 		
 		}
-		if(getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_PLAN_TYPES_TITLE))
+		if(currentUrl().contains("#/details"))
 			return new PlanDetailsPage(driver);
 		return null;
 	}
-
+	
 	public PlanDetailsPage clickViewDetailsPDP() {
 		if(validate(viewDetailsPDP)){
 			viewDetailsPDP.click();
 			}
 	
-		if(getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_PLAN_TYPES_TITLE))
+		if(currentUrl().contains("#/details"))
 			return new PlanDetailsPage(driver);
 		return null;
 	}

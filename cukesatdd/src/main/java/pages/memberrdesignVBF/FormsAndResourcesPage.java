@@ -48,7 +48,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	private WebElement perceptionpopup;
 
 	/** Medical button in EOB section - Forms And Resources page */
-	@FindBy(xpath = "//*[@class='customsegments parbase section']//div[@class='otherPages']//div[@class='explanationbenefits parbase section']//section[@class='block-body']/a[text()='SEARCH MEDICAL EOB HISTORY']")
+	@FindBy(xpath = "//*[@class='customsegments parbase section']//div[@class='otherPages']//div[@class='explanationbenefits parbase section']//*[@class='block-body']/a[text()='SEARCH MEDICAL EOB HISTORY']")
 	private WebElement eobMedicalButton;
 
 	/** Drug button in EOB section */
