@@ -9,6 +9,7 @@ import pages.memberredesign.bluelayer.LoginPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.When;
 import pages.regression.healthandwellness.HealthAndWellnessPage;
 /**
@@ -50,7 +51,7 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 	/**
 	 * @toDo : See health n Wellness Generic dashboard and lifestyle , learning and rewards level 2 tabs
 	 */
-	@When("^I should see the H&W Generic dashboard and lifestyle,learning and rewards L2 tabs HW$")
+	@And("^I should see the H&W Generic dashboard$")
 	public void I_should_see_the_H_W_Generic_dashboard_and_tabs() {
 		// Express the Regexp above with the code you wish you had
 		HealthAndWellnessPage healthnWellnessPage = (HealthAndWellnessPage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE);
