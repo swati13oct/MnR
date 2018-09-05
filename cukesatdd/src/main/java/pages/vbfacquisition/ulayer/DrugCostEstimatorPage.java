@@ -394,6 +394,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath=".//*[@id='aepnextyear']")
 	public WebElement nextaepyear;
 	
+	@FindBy(xpath=".//*[@id='prescriptiondrug']")
+	public WebElement prescDrugTab;
+
 	
 	@Override
 	public void openAndValidate() {
@@ -1728,6 +1731,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		validate(prescDrugTab);
 		if(currentUrl().contains("#/details"))
 			return new PlanDetailsPage(driver);
 		return null;
