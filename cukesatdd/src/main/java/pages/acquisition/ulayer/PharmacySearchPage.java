@@ -608,6 +608,7 @@ public PharmacyResultPage ValidateShowOnMapResult() {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		boolean flag = true;
 		System.out.println(pharmacyCount.getText());
 		if(pharmacyCount.getText().equals("") || Integer.parseInt(pharmacyCount.getText())==0)
