@@ -1,6 +1,3 @@
-/**
- * 
- */
 package pages.memberrdesignVBF.hsidRegistration;
 
 import org.junit.Assert;
@@ -119,7 +116,6 @@ MRScenario loginScenario;
 	 * @toDo : To login through hsid via entering security questions
 	 *//*
 	public Object doLoginWith(String username, String password) {
-
         System.out.println(driver.getCurrentUrl());
 		sendkeys(userNameField, username);
 		sendkeys(passwordField, password);
@@ -162,7 +158,6 @@ MRScenario loginScenario;
 		}
 		
 		if ( MRScenario.environmentMedicare.equals("team-e") || MRScenario.environmentMedicare.equals("team-ci1")){
-
 			Alert alert = driver.switchTo().alert();
 			alert.accept();
 		} 
@@ -186,9 +181,7 @@ MRScenario loginScenario;
 		else if (currentUrl().contains("terminated-plan.html")) {
 			return new TerminatedHomePage(driver);
 		}
-
 		
-
 		return null;
 	}
 */
@@ -206,5 +199,3 @@ MRScenario loginScenario;
 	
 	
 	}
-
-

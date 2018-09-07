@@ -11,7 +11,6 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
-import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import cucumber.api.java.en.And;
 import junit.framework.Assert;
@@ -34,7 +33,12 @@ public class ClaimDetailsPage extends UhcDriver{
 
 	@FindBy(xpath=".//*[@id='providerName']")
 	private  WebElement providerName;
-
+	
+	@FindBy(css= "#claimSearchButtonBottom")
+	public WebElement claimsHistoryLink;
+	
+	@FindBy (xpath =".//*[@id='claimSearchButtonBottom']")
+	private WebElement historylink;
 
 	@FindBy(xpath=".//*[@id='claimNumberLabel']")
 	private WebElement claimNumber;
@@ -75,7 +79,7 @@ public class ClaimDetailsPage extends UhcDriver{
 	public WebElement claimstotalTable;
 	
 	//@FindBy(id = "learnmoretoggleship")
-	@FindBy(xpath = ".//*[@id='learnmoredetailstoggle']/div[1]/p")
+	@FindBy(xpath = ".//*[@id='learnmoredetailstoggle']/p")
 	private WebElement learnMoreLink;
 	
 	@FindBy(id = "eobClass")
@@ -84,27 +88,9 @@ public class ClaimDetailsPage extends UhcDriver{
 	@FindBy(xpath =".//*[@id='claimDetailsHeaders']/p")
 	private WebElement medicalClaimDetailsText;
 	
-	@FindBy(css= "#claimSearchButtonBottom")
-	public WebElement claimsHistoryLink;
-	
-	@FindBy(css="#claimSearchButton")
-	private WebElement claimsearch;
-	
-	@FindBy(xpath=".//*[@id='learnmoredetailstoggle']")
-	private WebElement learnmoreCost;
-	
-	@FindBy(xpath="//span[text()='Ship EOB']/parent::a")
-	private WebElement EOBshipcombo;
-	
-	@FindBy(xpath=".//*[@id='shipIndSNFDetailsTable']")
-	private WebElement shipcombotable;
-	
 	@FindBy (xpath= "//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li")
 	private List<WebElement> comboTabsOnclaimsPage;
 	
-	@FindBy (xpath =".//*[@id='claimSearchButtonBottom']")
-	private WebElement historylink;
-		
 	@FindBy(xpath = ".//*[@id='ship_eob']/div/section/a/p")
 	private WebElement EOB;
 	
@@ -233,16 +219,14 @@ public class ClaimDetailsPage extends UhcDriver{
 		return learnmoreMA.isDisplayed() || learnmorePDP.isDisplayed();
 
 	}
-
+    /**
+     * @toDo : validateClaimsTableInDetailsPage
+     */
 	@SuppressWarnings("deprecation")
 	public void validateClaimsTableInDetailsPage() {
 		//wait.until(ExpectedConditions.visibilityOf(rememberThisDeviceSection));
 		if (driver.getCurrentUrl().contains("member/claims/overview.html#/details"))
-		{
 		System.out.println("The URL of the Claims page is---------->"+driver.getCurrentUrl());
-		}
-		
-		
 		System.out.println("The title of Claims page is-------->"+driver.getTitle());
 		
 		System.out.println("!!! Validating the elements on the Claims Details page !!!");
@@ -322,12 +306,12 @@ public class ClaimDetailsPage extends UhcDriver{
 		
 	}
 	/**
-	 * 
+	 * @toDo :validateClaimSearchLINK
 	 */
 	public void validateClaimSearchLINK(){
-		CommonUtility.waitForPageLoad(driver, claimsHistoryLink, 90);
-		validate(claimsearch);
-		System.out.println("*** Claim search Link is seen on the page ===>"+claimsearch.isDisplayed());
+		//CommonUtility.waitForPageLoad(driver, claimsHistoryLink, 90);
+		//validate(claimsearch);
+		//System.out.println("*** Claim search Link is seen on the page ===>"+claimsearch.isDisplayed());
 		if (driver.getTitle().equalsIgnoreCase("/details")) {
 			System.out.println("*** Combo Member is on Claims Details Page ***");
 			try {
@@ -338,21 +322,32 @@ public class ClaimDetailsPage extends UhcDriver{
 			}
 		}
 	}
-	
+	/**
+	 * @toDo: Validate learnMoreCostLink
+	 */
 	public void learnMoreCostLink(){
-		validate(learnmoreCost);
-		System.out.println("Learm more cost break down link is seen" +learnmoreCost.isDisplayed());
+		//validate(learnmoreCost);
+		//System.out.println("Learm more cost break down link is seen" +learnmoreCost.isDisplayed());
 		//learnmoreCost.click();		
 	}
+	/**
+	 * @toDo : Validate Claims Table in claims details page for Combo
+	 */
 	public void shipdetailcombo(){
-		validate(shipcombotable);
+		//validate(shipcombotable);
 		System.out.println("Cliam detail table is seen for Ship combo member");
 	}
+	/**
+	 * @toDo : Validate EOB for Combo members 
+	 */
 	public void EOBShipcombo(){
-		validate(EOBshipcombo);
+		//validate(EOBshipcombo);
 		System.out.println("EOB for combo ship plan is seen on claim details page");
 }
-	public void validateClaimHistory(){
+	/**
+	 * @toDo : validate Claim History Button
+	 */
+	/*public void validateClaimHistory(){
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
@@ -361,16 +356,29 @@ public class ClaimDetailsPage extends UhcDriver{
 		}
 	validate(claimsHistoryLink);
 	System.out.println("claimsHistoryLink.isDisplayed==>"+claimsHistoryLink.isDisplayed());
+	claimsHistoryLink.click();
+	if (driver.getCurrentUrl().contains("/overview"))
+	{
+	System.out.println("The member has navigated from details page to Summary page ---------->"+driver.getCurrentUrl());
+	}
 	
 }
-	public void comboTabs() {
+	
+
+	/**
+	 * @toDo :validate the two COMBO tabs on the claims Summary page
+	 */
+	/*public void comboTabs() {
 		
 		for (WebElement webElement : comboTabsOnclaimsPage) {
 			System.out.println("The COMBO plans names seen on the page are ==> " + webElement.getText());
 			webElement.click();
 			System.out.println(driver.getCurrentUrl());
-		}
- }
+		}*/
+ //}
+	/**
+	 * @toDo : validate the Claims History Button
+	 */
 	public void claimshistorylink(){
 		validate (historylink);
 		System.out.println("history link is seen");
@@ -389,4 +397,29 @@ public class ClaimDetailsPage extends UhcDriver{
 			
 		
 	}
-  }
+	public void validateClaimHistory(){
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	validate(claimsHistoryLink);
+	System.out.println("claimsHistoryLink.isDisplayed==>"+claimsHistoryLink.isDisplayed());
+	claimsHistoryLink.click();
+	
+}
+	/**
+	 * @toDo :validate the two COMBO tabs on the claims Summary page
+	 */
+	public void comboTabs() {
+		
+		for (WebElement webElement : comboTabsOnclaimsPage) {
+			System.out.println("The COMBO plans names seen on the page are ==> " + webElement.getText());
+			webElement.click();
+			System.out.println(driver.getCurrentUrl());
+		}
+ }
+	
+	
+}

@@ -116,7 +116,7 @@ Then the user validates EOB count
        | MAPD          | NICETermin_EOB_R | Last 18 Months |Medical  |     1     |
        
 @regression_06_06_18FnF
-Scenario Outline: To verify EOB accessible for PDP + MEDSup Plan_TC12
+Scenario Outline: To verify EOB accessible for PDP + MEDSup Plan
 Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |

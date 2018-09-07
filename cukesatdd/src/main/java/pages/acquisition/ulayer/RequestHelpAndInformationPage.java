@@ -21,10 +21,10 @@ import atdd.framework.UhcDriver;
 public class RequestHelpAndInformationPage extends UhcDriver {
 	
 	
-	@FindBy(xpath =".//*[@id='subPageLeft']/div/div/div/div[2]/div/div[1]/p[2]/a")
+	@FindBy(xpath =".//*[@id='subPageLeft']//*[contains(text(),'Request an Appointment with a Licensed Agent')]")
 	private WebElement ma_requestAgentAppointmentLink;
-         
-	@FindBy(xpath =".//*[@id='subPageLeft']/div/div/div/div[2]/div/div[1]/p[3]/a")
+	                 
+	@FindBy(xpath =".//*[@id='subPageLeft']//*[contains(text(),'Find UnitedHealthcare in Your Community ')]")
 	private WebElement findUnitedHealthcareLink;
 	
 	@FindBy(xpath =".//*[@id='medicareTitle']/h1")
@@ -45,7 +45,7 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 		
 	}
 	
-	public RequestAgentAppointmentPage nagiateToAgentAppointmentRequest()
+	public RequestAgentAppointmentPage navigateToAgentAppointmentRequest()
 	{
 		ma_requestAgentAppointmentLink.click();
 		
