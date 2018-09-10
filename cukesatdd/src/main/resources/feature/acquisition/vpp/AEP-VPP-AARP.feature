@@ -26,7 +26,7 @@ Feature: test plan summary and Plan Details in vpp flow AARP site for AEP scenar
       | 10/01/2018 |   90210 | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 
   @Ulayer10_15
-  Scenario Outline: Verify plan summary and Plan Details in AARP site for server date 10/01 pre-AEP period
+  Scenario Outline: Verify plan summary and Plan Details in AARP site for server date 10/15 AEP enrollment period
     Given the user is on team-f dce date change url and changes DCE server date to following date
       | DCE Date | <dcedate> |
     Given the user is on AARP medicare acquisition site landing page
@@ -50,7 +50,7 @@ Feature: test plan summary and Plan Details in vpp flow AARP site for AEP scenar
       | 10/15/2018 |   90210 | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
       
    @Ulayer12_01
-  Scenario Outline: Verify plan summary and Plan Details in AARP site for server date 10/01 pre-AEP period
+  Scenario Outline: Verify plan summary and Plan Details in AARP site for server date 12/01 AEP period for Next Year and No -enrollment for current year
     Given the user is on team-f dce date change url and changes DCE server date to following date
       | DCE Date | <dcedate> |
     Given the user is on AARP medicare acquisition site landing page
