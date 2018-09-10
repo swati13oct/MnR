@@ -1,9 +1,11 @@
 @codeMonkeys @regression_06_06_18 @thePredators
 Feature: C1.1 To test plan benefits and Coverage on UMS site
 
-  @CMFedDrugNonLis
-  Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
-    Given login with following details logins in the member portal and validate elements
+
+
+    @CMFedDrugNonLis
+    Scenario Outline: Verify all sections for Ind NonLIS member on Benefits and Coverage page
+   Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Copay Category | <copayCategory> |
@@ -15,6 +17,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | Effective Date  | <effectivedate>  |
       | Monthly premium | <monthlypremium> |
     And the user validates headers on Bnc page for indi members
+       | Plan Type | <planType> |
     And the user validates the Primarycare Provider section
       | Plan Type | <planType> |
     And the user validates the Out of Pocket Max section
@@ -45,15 +48,17 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     And the user clicks on More Information link
     And the user validates contactus section
 
+    
     Examples: 
-      | planType | memberType | copayCategory | language | SummaryofBenefits     | EvidenceofCoverage       | ComprehensiveFormularyDrug List     | name            | memberid     | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
-      | MAPD     | Individual | NON LIS       | ENGLISH  | Summary of Benefits   | Evidence of Coverage     | Comprehensive Formulary - Drug List | DDCEE DAADF     | 954016383-00 | 01/01/2018    | Not Available  | Tier 2          | true        |
-      | MAPD     | Individual | NON LIS       | SPANISH  | Resumen de Beneficios | Comprobante de Cobertura | Formulario Completo                 | DDCEE DAADF     | 954016383-00 | 01/01/2018    | Not Available  | Tier 2          | true        |
-      | MAPD     | Individual | NON LIS       | CHINESE  |                       |                          |                                     | DDCEE DAADF     | 954016383-00 | 01/01/2018    | Not Available  | Tier 2          | true        |
-      | Medica   | Individual | NON LIS       | ENGLISH  | Summary of Benefits   | Evidence of Coverage     | Comprehensive Formulary - Drug List | EABAB AEADBD    | 903610182-00 | 05/01/2018    | Not Available  | Tier 2          | true        |
-      | Medica   | Individual | NON LIS       | SPANISH  | Resumen de Beneficios | Comprobante de Cobertura | Formulario Completo                 | EABAB AEADBD    | 903610182-00 | 05/01/2018    | Not Available  | Tier 2          | true        |
-      | PCP      | Individual | NON LIS       | ENGLISH  | Summary of Benefits   | Evidence of Coverage     | Comprehensive Formulary - Drug List | DABDCAE AEAEEAC | 928100285-00 | 01/01/2018    | Not Available  | Tier 2          | true        |
-      | PCP      | Individual | NON LIS       | SPANISH  | Resumen de Beneficios | Comprobante de Cobertura | Formulario Completo                 | DABDCAE AEAEEAC | 928100285-00 | 01/01/2018    | Not Available  | Tier 2          | true        |
+             | planType|  memberType  | copayCategory  | language | SummaryofBenefits    | EvidenceofCoverage       | ComprehensiveFormularyDrug List    | name        | memberid     | effectivedate | monthlypremium |   UpdatedLanguage | DisplayFlag|
+             | MAPD    |  Individual  |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | DDCEE DAADF | 954016383-00 | 01/01/2018    | Not Available  | Tier 2            | true       |
+             | MAPD    |  Individual  |  NON LIS      | SPANISH  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | DDCEE DAADF | 954016383-00 | 01/01/2018    | Not Available  | Tier 2            | true       |
+             | MAPD    |  Individual  |  NON LIS      | CHINESE  |                      |                          |                                     | DDCEE DAADF | 954016383-00 | 01/01/2018    | Not Available  | Tier 2            | true       |
+             | Medica  |  Individual  |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | AADECDC FEDFACEDBACBB|954283936-00    | 04/01/2018    | Not Available  | Tier 2            | true       |
+             | Medica  |  Individual  |  NON LIS      | SPANISH  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | AADECDC FEDFACEDBACBB|954283936-00    | 04/01/2018    | Not Available  | Tier 2            | true       |
+             | PCP     |  Individual  |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | BDFAEC CBADEADF|945007888-00 | 01/01/2018 | Not Available  | Tier 2            | true       |
+             | PCP     |  Individual  |  NON LIS      | SPANISH  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | BDFAEC CBADEADF|945007888-00 | 01/01/2018 | Not Available  | Tier 2            | true       |
+        
 
   @CMFedPDPNonLis
   Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
@@ -101,22 +106,52 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | PDP      | Individual | NON LIS       | SPANISH  | Resumen de Beneficios | Comprobante de Cobertura | Formulario Completo                 | EACBD BEF | 0182297421 | 01/01/2017    | Not Available  | Tier 2          | true        |
       | PDP      | Individual | NON LIS       | CHINESE  |                       |                          |                                     | EACBD BEF | 0182297421 | 01/01/2017    | Not Available  | Tier 2          | true        |
 
-  @CMFedNonLisVillage
-  Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
-    Given registered member with following details logins in the member portal
+
+   @CMMapdFedTable
+   Scenario Outline: Verify fed table data on Benefits and Coverage page
+    Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Copay Category | <copayCategory> |
     Then The user navigates to Benefits and Coverage page
-    Then the user validates text in table "no more than 44% for generic drugs or 35% for brand name drugs"
+       | Plan Type      | <planType>  |
+    And the user able to see drug table for fed and values in it
+    
+    Examples:  
+     | planType|  memberType  | copayCategory |
+     | MAPD    |  Individual  |  NON LIS      |
+     
+   @CMPdpFedTable
+   Scenario Outline: Verify fed table data on Benefits and Coverage page
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      | Copay Category | <copayCategory> |
+    Then The user navigates to Benefits and Coverage page
+       | Plan Type      | <planType>  |
+    And the user able to see drug table for pdp and values in it
+    
+    Examples:  
+     | planType|  memberType  | copayCategory |
+     | PDP     |  Individual  |  NON LIS      |
+
+  @CMFedNonLisVillage
+  Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      | Copay Category | <copayCategory> |
+    Then The user navigates to Benefits and Coverage page
+      | Plan Type      | <planType>  |
+    Then the user validates text in table
 
     Examples: 
       | planType | memberType | copayCategory |
-      | MAPD     | Individual | NON LIS       |
+      | MAPDVill | Individual | NON LIS       |
 
   @CMvalidatePdfsectiongroupenglish
   Scenario Outline: Verify PDF section is in place on Benefits and     Coverage page
-    Given registered member with following details logins in the member portal
+    Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Copay Category | <copayCategory> |
@@ -133,7 +168,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
 
   @CMvalidatePdfsectiongroupspanishchinese
   Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
-    Given registered member with following details logins in the member portal
+    Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Copay Category | <copayCategory> |
@@ -203,6 +238,10 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
   @regression_06_06_18 @CMGroupmembersTC25
   Scenario Outline: Verify Group LIS 3/4 on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
+       | Plan Type      | <planType>     |
+       | Member Type    | <memberType>|
+       | Copay Category | <copayCategory>|
+    Then user navigates to Benefits coverage page
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Copay Category | <copayCategory> |
@@ -214,6 +253,8 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     And the user validates tier link should not display
     And the user validated the Look up Drugs link
     And the user validates text for the Locate a Pharmacy section
+    And user validates Locate a Pharmacy button should be visible  
+      | Plan Type      | <na>     |
     And the user validates Locate a Pharmacy button should be visible
     And the user should see drug cost table for Lis members
     And the user validates view and document label
@@ -301,6 +342,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     Then The user navigates to Benefits and Coverage page
       | Plan Type | <planType> |
     Then the user validate Value Add Service page comes on clicking additional info button
+    And the user validate vas tiles on vas page
 
     Examples: 
       | planType | memberType |
@@ -432,10 +474,15 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | Member Type    | <memberType>    |
       | Copay Category | <copayCategory> |
     Then The user navigates to Benefits and Coverage page
-      | Plan Type | <planType> |
+       | Plan Type      | <planType>  |
+    And the user validates plan overview section for group 
+    And the user validates headers on Bnc page for group members 
+    And the user validates the Group Primarycare Provider section 
+    And the user view the Drug Copays & Discounts header  
+    And the user validates the Learn More section for stage and tier 
+    And the user validates dropdown selection functionality 
     And the user validates plan overview section for group
     And the user validates headers on Bnc page for group members
-    And the user validates the Group Primarycare Provider section
     And the user view the Drug Copays & Discounts header
     And the user validates the Learn More section for stage and tier
     And the user validates dropdown selection functionality
@@ -444,27 +491,59 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     And the user validates group Look Up Drugs button should be visible
     And the user validates text for the Locate a Pharmacy section
     And the user validates Locate a Pharmacy button should be visible
-      | Plan Type | <planType> |
-    And the user should see drug copay and discount table
-      | Updated Language | <UpdatedLanguage> |
-      | Display Flag     | <DisplayFlag>     |
-    And the user validates the user click on the link it expands and when user clicks it again it should collapse
-    And the user validates view and document label
-    And the user validates static links
-      | Plan Type | <planType> |
-    And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully
-      | Language | <language> |
-    And the user verifies that the correct pdfs are coming in the plan material section
-      | Summary of Benefits                 | <SummaryofBenefits>               |
-      | Evidence of Coverage                | <EvidenceofCoverage>              |
-      | Comprehensive Formulary - Drug List | <ComprehensiveFormularyDrug List> |
-    And the user validates Needhelp section
-    And the user clicks on More Information link
-    And the user validates contactus section
-
-    Examples: 
-      | planType | memberType | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List     | name            | memberid     | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
-      | MAPD     | Group      | NON LIS       | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | NVKLSDS LKASDFJ | 970345148-00 | 07/01/2018    | Not Available  | Tier 2          | true        |
+       | Plan Type      | <planType>  | 
+    And the user should see drug copay and discount table 
+        | Updated Language | <UpdatedLanguage> | 
+        | Display Flag     | <DisplayFlag>     |  
+    And the user validates the user click on the link it expands and when user clicks it again it should collapse 
+    And the user validates view and document label 
+    And the user validates static links 
+        | Plan Type      | <planType>  |
+    And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully 
+        | Language | <language> | 
+    And the user verifies that the correct pdfs are coming in the plan material section 
+        |Summary of Benefits                | <SummaryofBenefits> | 
+        |Evidence of Coverage               | <EvidenceofCoverage> | 
+        |Comprehensive Formulary - Drug List| <ComprehensiveFormularyDrug List>| 
+     And the user validates Needhelp section 
+     And the user clicks on More Information link 
+     And the user validates contactus section 
+      
+     Examples:  
+     | planType|  memberType  | copayCategory | language | SummaryofBenefits    | Evidenceof Coverage      | ComprehensiveFormularyDrug List     | name          | memberid    | effectivedate| monthlypremium |   UpdatedLanguage | DisplayFlag|
+     | MAPD    |  Group       |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | EACD BEBFFFAF| 921836941-00 | 08/01/2018   | Not Available  | Tier 2            | true       | 
+     
+ @CMGroupTable
+ Scenario Outline: Verify Group table data on Benefits and Coverage page
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      | Copay Category | <copayCategory> |
+    Then The user navigates to Benefits and Coverage page
+       | Plan Type      | <planType>  |
+    And the user able to see table and values in it 
+       | Plan Type      | <planType>  |
+    
+    Examples:  
+     | planType|  memberType  | copayCategory |
+     | MAPD    |  Group       |  NON LIS      |
+     | MAPDRX  |  Group       |  NON LIS      |
+     
+     
+ @TableTest
+ Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      | Copay Category | <copayCategory> |
+    Then The user navigates to Benefits and Coverage page
+       | Plan Type      | <planType>  |
+    And the user validate table
+    
+    Examples:  
+     | planType|  memberType  | copayCategory |
+     | MAPD    |  Group       |  NON LIS      |
+    
 
   @CMPDPGroupNonLis
   Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
@@ -475,6 +554,10 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     Then The user navigates to Benefits and Coverage page
       | Plan Type | <planType> |
     And the user validates plan overview section for group
+    And the user view the Drug Copays & Discounts header  
+    And the user validates the Learn More section for stage and tier 
+    And the user validates dropdown selection functionality
+    And the user validates text for the Look Up Drugs section 
     And the user view the Drug Copays & Discounts header
     And the user validates the Learn More section for stage and tier
     And the user validates dropdown selection functionality
@@ -483,6 +566,31 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     And the user validates group Look Up Drugs button should be visible
     And the user validates text for the Locate a Pharmacy section
     And the user validates Locate a Pharmacy button should be visible
+       | Plan Type      | <planType>  | 
+    And the user should see drug copay and discount table 
+        | Updated Language | <UpdatedLanguage> | 
+        | Display Flag     | <DisplayFlag>     |  
+    And the user validates the user click on the link it expands and when user clicks it again it should collapse 
+    And the user validates view and document label 
+    And the user validates static links 
+        | Plan Type      | <planType>  |
+    And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully 
+        | Language | <language> | 
+    And the user verifies that the correct pdfs are coming in the plan material section 
+        |Summary of Benefits                | <SummaryofBenefits> | 
+        |Evidence of Coverage               | <EvidenceofCoverage> | 
+        |Comprehensive Formulary - Drug List| <ComprehensiveFormularyDrug List>| 
+     And the user validates Needhelp section 
+     And the user clicks on More Information link 
+     And the user validates contactus section 
+      
+     Examples:  
+     | planType|  memberType  | copayCategory | language | SummaryofBenefits    | EvidenceofCoverage      | ComprehensiveFormularyDrug List      | name           | memberid    | effectivedate| monthlypremium |   UpdatedLanguage | DisplayFlag|
+     | PDP     |  Group       |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | DDCCFD ADFFCCFB| 002058600-1 | 04/01/2013   | Not Available  | Tier 2            | true       | 
+     
+ 
+    @CMvasnegativescenario
+    Scenario Outline: Verify that DisocuntServices section is visible on Benefits and coverage page
       | Plan Type | <planType> |
     And the user should see drug copay and discount table
       | Updated Language | <UpdatedLanguage> |
@@ -563,12 +671,13 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
   Scenario Outline: Verify the Office visits widget for a member withoutprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
+      | Member Type | <memberType> |
     Then the user navigates to Benefits coverage page
     And the user validates the Office Visits section
 
     Examples: 
-      | planType |
-      | MAPD     |
+      | planType | memberType    |
+      | MAPD     |memberWithoutProviderTiering |
 
   @WaystoSaveforPdp @regression @regression_06_06_18
   Scenario Outline: Verify the ways to save  widget for a PDP member

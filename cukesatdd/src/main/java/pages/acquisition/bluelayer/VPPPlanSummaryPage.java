@@ -198,12 +198,16 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	//private WebElement Savebtn;
 
 
-	@FindBy(xpath="//div[contains(@class,'first')]//div[@class='hidden-phone']/button[@class='section action-btn saved-provider-button']")
+	@FindBy(xpath="//div[contains(@class,'first')]//div[@class='hidden-phone']//button")
 	private WebElement Savebtn;
 
-	//@FindBy(xpath=".//*[@id='label_unsaved_selectedLocation0']")
+	@FindBy(id="label_unsaved_selectedLocation0")
+	private WebElement firstLocation;
 
-	@FindBy(xpath="//*[@class='action-btn lt']")
+	@FindBy(xpath="//button[@class='action-btn']")
+	private WebElement secondSaveBtn;
+
+	@FindBy(xpath="//*[contains(text(),'View Saved')]")
 	private WebElement Viewsavebtn;
 
 	@FindBy(xpath="//button[@class='action-btn negative']")
@@ -912,10 +916,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		//Savebtn.click();
 		JavascriptExecutor js = (JavascriptExecutor)driver;
 		js.executeScript("arguments[0].click();", Savebtn);
+		firstLocation.click();
+		secondSaveBtn.click();
 		waitforElement(Viewsavebtn);
-
 		Viewsavebtn.click();
-
 		waitforElement(Checkcoverage);
 		try {
 			Thread.sleep(3000);
@@ -1472,13 +1476,26 @@ public String EnrollmentValidation(String PlanName) {
 		
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
 		jse.executeScript("window.scrollBy(0,1300)", "");
-		
+		try{
 		WebElement EnrollmentButton = driver.findElement(By.xpath("//*[@class='enrollment']/div[@class='acqplans ng-scope']/a/span"));
 		String Enrollment = EnrollmentButton.getText();
 		if(EnrollmentButton.isDisplayed())
 			EnrollmentButton.click();
 		System.out.println("Enrollment Button present and clicked");
 		return Enrollment;
+		}
+		catch(Exception e)
+		{
+			jse.executeScript("window.scrollBy(0,800)", "");
+			WebElement EnrollmentButton = driver.findElement(By.xpath("(//*[@class='enrollment']/div[@class='swiper-content ng-scope'])[8]/a/span"));
+			String Enrollment = EnrollmentButton.getText();
+			if(EnrollmentButton.isDisplayed())
+				EnrollmentButton.click();
+			System.out.println("Enrollment Button present and clicked");
+			return Enrollment;
+		}
+		
+		
 	}
 
 

@@ -231,7 +231,7 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy(xpath=".//*[@id='learnmoresummarytoggle']")
 	private WebElement learmore;
 
-	@FindBy(id="claimType")
+	@FindBy(id="numDays2")
 	private WebElement Youhave;
 	
 	@FindBy(xpath=".//*[@id='globalContentIdForSkipLink']/div[3]/div[1]/div/div/main/div/div[1]/section/div[1]/div/div/div/div/div[3]/div/p")
@@ -339,7 +339,9 @@ public class ClaimSummarypage extends UhcDriver{
 		e.printStackTrace();
 	}return true;
 	}
-	
+	/**
+	 * @toDo : Validate Pagination under the claims table  
+	 */
 	public boolean verifyClaimsTableAndPagination1(){
 				
 	       try {
@@ -353,20 +355,58 @@ public class ClaimSummarypage extends UhcDriver{
 			e.printStackTrace();
 		}return true;
 		}
-	public boolean verifyClaimsTableAndPagination3(){
-		
-	       try {
-	    	   Thread.sleep(5000);
-	    	   
-			validate (verifyClaimSummaryAndPagination3);
-			   System.out.println("Pagination is seen ===>"+verifyClaimSummaryAndPagination3.getText());
-			
-		} catch (Exception e) {
-			System.out.println("Pagination is not displayed as records are less");
-			e.printStackTrace();
-		}return true;
-		}
 	
+	/**
+	 * @toDo:validate the pagination on the claims summary page
+	 *//*
+	public boolean verifyClaimsTableAndPagination3(){
+		     
+	    	   try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    	   
+			validateNew (verifyClaimSummaryAndPagination3);
+			if 
+			(verifyClaimSummaryAndPagination3.isDisplayed())
+			{
+			System.out.println("Pagination is seen ===>"+verifyClaimSummaryAndPagination3.getText());
+			return true;
+	              }	
+			else {
+		System.out.println("************Pagination is not displayed as records are less***************");
+		return false;
+	}
+	}	*/
+	
+	/**
+	 * @toDo:validate the pagination on the claims summary page
+	 */
+	public boolean verifyClaimsTableAndPagination3(){
+		     
+	    	   try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    	   
+			validateNew (verifyClaimSummaryAndPagination3);
+			if 
+			(verifyClaimSummaryAndPagination3.isDisplayed())
+			{
+			System.out.println("Pagination is seen ===>"+verifyClaimSummaryAndPagination3.getText());
+			return true;
+	              }	
+			else {
+		System.out.println("************Pagination is not displayed as records are less***************");
+		return false;
+	}
+	}	
+		
+		
 		
 	/**
 	 * @toDo : this method validates EOB 
@@ -748,7 +788,7 @@ public class ClaimSummarypage extends UhcDriver{
 		
 	}
 	/**
-	 * @toDo : this method validates Download My Data
+	 * @toDo: On Claims Summary page the member Validates the Download my data section.
 	 */
 	public void validateDownloadMyData() {
 		CommonUtility.waitForPageLoad(driver, downloadmydatabutton, 60);
@@ -891,10 +931,14 @@ public class ClaimSummarypage extends UhcDriver{
 		}
 		return new ClaimSummarypage(driver);
 	}
-public boolean ValidatePHIPErrorMessage(){
-	
+	/**
+	 * @throws InterruptedException 
+	 * @toDo :Validate error message for PHIP member on Claims Summary page
+	 */
+public boolean ValidatePHIPErrorMessage() throws InterruptedException{
+	    Thread.sleep(3000);
 	     //if(driver.getTitle().equalsIgnoreCase("Claims")){	
-		 System.out.println("!!! The member is on Claims Summary page with PHIP Plan  !!!");
+		// System.out.println("!!! The member is on Claims Summary page with PHIP Plan  !!!");
 		 validate(PHIPerrorMsg);		
 		if (PHIPerrorMsg.isDisplayed()){			
 			System.out.println("*************Error Message Displayed for PHIP Member on claims Summary page***************");
@@ -904,10 +948,10 @@ public boolean ValidatePHIPErrorMessage(){
 			else
 				System.out.println("************Error message not displayed for PHIP Member on claims Summary page ***************");
 				return false;
+				}
 
-		}
 
-
+		
      public void validateCustomSearch(){
     	 System.out.println("The title of the page is-------->"+driver.getTitle());
  		if(driver.getTitle().equalsIgnoreCase("Claims")){
@@ -953,6 +997,10 @@ public void NavigateToClaimsPage(){
 	  	 
 	  	 return new Footer(driver);
   }
+  
+  /**
+	 * @toDo : Validate You have text 
+	 */
 
      public void validateYouHavemessage() {
  		try {
@@ -966,11 +1014,31 @@ public void NavigateToClaimsPage(){
  		{
  			System.out.println(Youhave.getText());
  			System.out.println("You have claims messgae displayed ");
- 			Assert.assertTrue(Youhave.getText().contains("You have")+"message is displayed", true);
+ 			//Assert.assertTrue(Youhave.getText().contains("You have")+"message is displayed", true);
+ 			
  		
  		}	
  		
- 	}   
+ 	} 
+     /**
+ 	 * @toDo : Validate You have text 
+ 	 */
+	public boolean validateYouHavemessage1() throws InterruptedException {  	
+ 			Thread.sleep(2000); 		
+     	 validate(Youhave);
+  		//if (Youhave.getText().contains("You have"))
+     	if (Youhave.isDisplayed())
+     	{
+  			System.out.println(Youhave.getText());
+  			System.out.println("You have claims messgae displayed ");
+  			System.out.println("**** Message : "+Youhave.getText()+ " ****");
+  			return true;  			
+  		}
+     	else
+				System.out.println("************You have message not displayed *****");
+		return false;
+				} 		
+   
      
      public void validateClaimsHeaderCopyText() {
   		// TODO Auto-generated method stub
@@ -981,7 +1049,6 @@ public void NavigateToClaimsPage(){
   			Assert.assertTrue(clamsSummaryCopyText.getText().contains("Review your claims search")+"copy text is displayed", true);
   		
   		}	
-  		
   	}
 
  public void validateClaimsFromDropDowns1() {
@@ -993,6 +1060,9 @@ public void NavigateToClaimsPage(){
  			System.out.println(select.getOptions().get(i).getAttribute("value"));
  		} 		
  	}
+ /**
+	 * @toDo : Validate claims FROM DROP DOWN
+	 */
  public void validateClaimsFromDropDown2() {
 		
  System.out.println("The title of Claims page is-------->"+driver.getTitle());
@@ -1071,12 +1141,29 @@ public void NavigateToClaimsPage(){
 			return new ClaimSummarypage(driver);	
 			}
 		
-		 public void validatePCPtext(){
+		// @SuppressWarnings("deprecation")
+		public void validatePCPtext(){
+			/* WebElement t = PCPtext;
+			 if (t.getText().contains ("plan members can view claims"))
+			 //if(driver.getCurrentUrl().contains("/documents/medication-program"))
+				{
+					System.out.println(t.getText());
+					Assert.assertTrue(true);
+				}
+				else
+				{
+					Assert.fail();
+				}*/
 			 validate(PCPtext);
-			 System.out.println("PCP text is seen on the page");
+			 System.out.println("PCP text is seen on the page" + PCPtext.isDisplayed());
 		 }
 		 
-		 public void validateEobPDP(){
+		    /**
+			 * @toDo : Validate EOB section for PDP plans 
+			 */
+		 
+		 public  boolean validateEobPDP() throws InterruptedException{
+			 
 				try {
 					Thread.sleep(5000);
 				} catch (InterruptedException e) {
@@ -1084,8 +1171,23 @@ public void NavigateToClaimsPage(){
 					e.printStackTrace();
 				}
 				validate(PrescriptionEobText1);
-				System.out.println("PDP EOB is displayed"  +  PrescriptionEobText.isDisplayed());
-			}
+				
+				  		
+     	if (PrescriptionEobText1.isDisplayed())
+	     	{
+	  			System.out.println(PrescriptionEobText1.getText());
+	  			System.out.println("EOB text displayed ");
+	  			//System.out.println("**** Error Message : "+Youhave.getText()+ " ****");
+	  			return true;  			
+	  		}
+	     	else
+					System.out.println("*** EOB text not displayed summary page  *****");
+			return false;
+					} 		
+	   
+		    /**
+			 * @toDo : Validate claims table for PDP plans
+			 */
 		 public void validateClaimsTablePDP() {
 				CommonUtility.waitForPageLoad(driver, ClaimsSummaryPage,60);
 				validate(claimsTablePrescriptionDrug);

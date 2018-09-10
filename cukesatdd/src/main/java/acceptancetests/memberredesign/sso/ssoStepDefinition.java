@@ -158,4 +158,23 @@ public void security_and_password_reset_link_should_not_be_visible() throws Thro
 	profilePageHsid.validateHealthSafeAccountLinkNOTPresent();
 	System.out.println("Health Safe Account Link was not present as expected");
 }
+/**
+ * This methods quits the web driver and flushes all saved beans.
+ * Essentially a destructor.
+ */
+@After
+public void tearDown() {
+WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+if (wd != null) {
+	
+	try {
+		Thread.sleep(4000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+    wd.quit();
+}
+getLoginScenario().flushBeans();
+}
 }

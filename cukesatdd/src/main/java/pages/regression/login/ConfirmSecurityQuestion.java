@@ -2,7 +2,6 @@ package pages.regression.login;
 
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,8 +19,6 @@ public class ConfirmSecurityQuestion extends UhcDriver {
 	@FindBy(how = How.CLASS_NAME, using = "rememberThisDevice")
 	private WebElement rememberThisDeviceSection;
 	
-	@FindBy(id="continueSubmitButton")
-	private WebElement continueSubmitButton;
 	
 
     public ConfirmSecurityQuestion(WebDriver driver) {
@@ -66,12 +63,10 @@ public class ConfirmSecurityQuestion extends UhcDriver {
 			throw new Exception("unknown challenge " + SecurityQtn);
 		}
 		//formContent.click();
-		/*WebElement submitbutton = driver.findElement(By.id("continueSubmitButton"));
+		WebElement submitbutton = driver.findElement(By.id("continueSubmitButton"));
 		submitbutton.click();
-		Thread.sleep(5000);*/
-		System.out.println("question answered");
-		JavascriptExecutor executor = (JavascriptExecutor)driver;
-		executor.executeScript("arguments[0].click();", continueSubmitButton);
+		Thread.sleep(5000);
+
 
 
 	}

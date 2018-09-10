@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Pattern;
 
 import org.json.JSONObject;
 import org.junit.Assert;
@@ -68,10 +69,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private WebElement msPlansViewLink;
 	
 	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[3]//span[@class='ng-binding']")
-	private WebElement pdpPlansNumber;
+	private WebElement pdpPlansNumber;	
 	
 	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[3]//*[@class='trigger-closed']")
 	private WebElement pdpPlansViewLink;
+	
 
 	@FindBy(xpath = "//div[@class='overview-main']/h2")
 	private WebElement vppTop;
@@ -180,10 +182,16 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//*[contains(text(),'Primary Care Physician')]")
 	private WebElement Physician;
 
-	@FindBy(xpath="//div[contains(@class,'first')]//div[@class='hidden-phone']/button[not(contains(@class,'hidden'))]/span")
+	@FindBy(xpath="//div[contains(@class,'first')]//div[@class='hidden-phone']//button")
 	private WebElement Savebtn;
+	
+	@FindBy(id="label_unsaved_selectedLocation0")
+	private WebElement firstLocation;
 
-	@FindBy(xpath="//*[@class='action-btn lt']")
+	@FindBy(xpath="//button[@class='action-btn']")
+	private WebElement secondSaveBtn;
+	
+	@FindBy(xpath="//*[contains(text(),'View Saved')]")
 	private WebElement Viewsavebtn;
 
 	@FindBy(xpath="//button[@class='action-btn negative']")
@@ -259,10 +267,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 
 	public VPPPlanSummaryPage viewPlanSummary(String planType) {
-		//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
 		try {
-			Thread.sleep(10000);
+			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -283,6 +291,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			if(validate(hidePdpPlans)){
 				msPlansViewLink.click();
 			}
+		} else if (planType.equalsIgnoreCase("SNP")) {
+				snpPlansViewLink.click();
 		}
 		else if (planType.equalsIgnoreCase("SNP")) {
 			snpPlansViewLink.click();
@@ -380,10 +390,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		Physician.click();
 
 		waitforElement(Savebtn);
-		
-		//Savebtn.click();
+			
 		JavascriptExecutor js = (JavascriptExecutor)driver;
 		js.executeScript("arguments[0].click();", Savebtn);
+		firstLocation.click();
+		secondSaveBtn.click();
 		waitforElement(Viewsavebtn);
 		
 		Viewsavebtn.click();
@@ -609,6 +620,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		else if (planName.contains("Regional PPO")) {
 			//ElementData elementData = new ElementData("id", "viewDetailsMA");
 			 element = getSpecificPlanSummary(findChildElements(elementData, maPlanList), planName);
+		} else if (planName.contains("PPO SNP")) {
+			//ElementData elementData = new ElementData("id", "viewDetailsMA");
+			 element = getSpecificPlanSummary(findChildElements(elementData, snpPlanList), planName);
 		}
 		
 		return validate(element);
@@ -646,6 +660,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			int maPlans = Integer.valueOf(maPlansNumber.getText());
 			 //driver.findElement(By.className("module-plan-overview"));
 			return maPlans == findChildElements(elementData, maPlanList).size();
+		} else if (planType.equalsIgnoreCase("SNP")) {
+			int snpPlans = Integer.valueOf(snpPlansNumber.getText());
+			return snpPlans == findChildElements(elementData, snpPlanList)
+					.size();
 		}
 		else if (planType.equalsIgnoreCase("SNP")) {
 
@@ -663,6 +681,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		msPlansNumber = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='overview-tabs module-tabs-tabs']/div[2]//span[@class='ng-binding']")));
 		pdpPlansNumber = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='overview-tabs module-tabs-tabs']/div[3]//span[@class='ng-binding']")));
 		snpPlansNumber = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='overview-tabs module-tabs-tabs']/div[4]//span[@class='ng-binding']")));
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		
 		validate(vppTop);
 		validate(maPlansNumber);
@@ -670,7 +689,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		validate(pdpPlansNumber);
 		validate(snpPlansNumber);
 		
-		int allPlans = Integer.valueOf(vppTop.getText().substring(10, 12));
+		int allPlans = Integer.valueOf(vppTop.getText().substring(10, 12).trim());
 		int maPlans = Integer.valueOf(maPlansNumber.getText());
 		int msPlans = Integer.valueOf(msPlansNumber.getText());
 		int pdpPlans = Integer.valueOf(pdpPlansNumber.getText());
@@ -776,7 +795,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 	public PlanDetailsPage navigateToPlanDetails(String planName, String planType) {
 		driver.manage().window().maximize();
-	
+		
 		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {	
 		WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//a[contains(text(),'View plan and drug coverage details')]"));
 			validate(MAmoreDetailsLink);
@@ -791,7 +810,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			System.out.println("View Plan Details Link is clicked for PDP plan"+planName);
 			
 		}
-		
 		CommonUtility.checkPageIsReady(driver);
 		if (driver.getCurrentUrl().contains("#/details")) {	
 			return new PlanDetailsPage(driver);
@@ -853,7 +871,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public ComparePlansPage clickOnCompareLink(){
-		List<WebElement> compareLinks = driver.findElements(By.xpath(".//*[@id='plan-list-1']//*[contains(@class,'compare-link')]"));	
+		List<WebElement> compareLinks = driver.findElements(By.xpath(".//*[@id='plan-list-1']//button[contains(text(),'Compare plans')]"));	
 		compareLinks.get(0).click();
 
 
