@@ -182,7 +182,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//*[contains(text(),'Primary Care Physician')]")
 	private WebElement Physician;
 
-	@FindBy(xpath="//div[contains(@class,'first')]//div[@class='hidden-phone']/button[not(contains(@class,'hidden'))]/span")
+	@FindBy(xpath="//div[contains(@class,'first')]//div[@class='hidden-phone']//button")
 	private WebElement Savebtn;
 	
 	@FindBy(id="label_unsaved_selectedLocation0")
@@ -269,12 +269,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public VPPPlanSummaryPage viewPlanSummary(String planType) {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
-		/*try {
-			Thread.sleep(10000);
+		try {
+			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
 		if (planType.equalsIgnoreCase("PDP")) {
 //	WebElement hidePdpPlans invalid
 			//if(validate(hidePdpPlans)){
