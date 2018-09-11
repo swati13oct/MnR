@@ -128,7 +128,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[3]//*[@class='trigger-closed']")
 	private WebElement viewPDPPlans;
 	
-	@FindBy(className = "switchPlanYear")
+	@FindBy(xpath = ".//*[@id='togglenextYear']/a")
 	private WebElement toggleplanYear;
 	
 	//@FindBy(xpath = "//div[@id='maplans_container']/div[3]/div/div[2]/div[1]/div/div[1]/div[1]/div/div[1]/div[2]/table/tbody/tr/td[3]/div/div[2]/div[3]/div[1]/p/a")
@@ -182,7 +182,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//*[contains(text(),'Primary Care Physician')]")
 	private WebElement Physician;
 
-	@FindBy(xpath="//div[contains(@class,'first')]//div[@class='hidden-phone']/button[not(contains(@class,'hidden'))]/span")
+	@FindBy(xpath="//div[contains(@class,'first')]//div[@class='hidden-phone']//button")
 	private WebElement Savebtn;
 	
 	@FindBy(id="label_unsaved_selectedLocation0")
@@ -269,12 +269,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public VPPPlanSummaryPage viewPlanSummary(String planType) {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
-		/*try {
-			Thread.sleep(10000);
+		try {
+			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
 		if (planType.equalsIgnoreCase("PDP")) {
 //	WebElement hidePdpPlans invalid
 			//if(validate(hidePdpPlans)){
@@ -297,6 +297,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		else if (planType.equalsIgnoreCase("SNP")) {
 			snpPlansViewLink.click();
 		}
+		if(toggleplanYear!=null)
+			toggleplanYear.click();
 		return new VPPPlanSummaryPage(driver, planType);
 	}
 	
