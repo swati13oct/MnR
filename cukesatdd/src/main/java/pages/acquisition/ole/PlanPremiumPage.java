@@ -51,6 +51,9 @@ public class PlanPremiumPage extends UhcDriver{
 	@FindBy(xpath = "//*[@id='ole-premium']")
 	private WebElement PremiumDisplay;
 	
+	@FindBy(xpath=".//*[@id='ole-form-content']//label[contains(text(),'I have read and agree')]")
+	private WebElement agreeBtn;
+	
 	public PlanPremiumPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -64,6 +67,7 @@ public class PlanPremiumPage extends UhcDriver{
 	}
 
 	public SupplementalBenefitsPage navigate_to_Supplemental_Riders_Page() {
+		agreeBtn.click();
 		validate(NextBtn);
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);
