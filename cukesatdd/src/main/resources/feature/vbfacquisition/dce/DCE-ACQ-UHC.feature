@@ -36,7 +36,7 @@ And I navigate to step3 page and validate the drug info
 	
 Examples:
 | zipcode  |plantype |   drug   | 
-| 90210    | MA 	 |Lipitor TAB 20MG|
+| 90210    | MA 	 |Lipitor TAB 2880MG|
 
 @switchNowStep3Blayer
 Scenario Outline: To test the dce vpp flow with switch now option
@@ -71,7 +71,7 @@ Then I validate preferred retail pharmacy type is displayed
 
 Examples:
 | zipcode  | plantype |  drug   | 
-| 90210    | PDP	  |ipitor TAB 10MG|
+| 90210    | PDP	  |Lipitor TAB 10MG|
 
 #AEP period scenario that requires changing the year to 2017
 @defect3255
