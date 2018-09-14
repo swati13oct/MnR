@@ -36,7 +36,7 @@ And I navigate to step3 page and validate the drug info
 	
 Examples:
 | zipcode  |plantype |   drug   | 
-| 90210    | MA 	 |Lipitor TAB 2880MG|
+| 90210    | MA 	 |Lipitor TAB 20MG|
 
 @switchNowStep3Blayer
 Scenario Outline: To test the dce vpp flow with switch now option
