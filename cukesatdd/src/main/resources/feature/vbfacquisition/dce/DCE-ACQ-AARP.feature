@@ -36,7 +36,7 @@ And I navigate to step3 page and validate
 	
 Examples:
 | zipcode  |   drug   | plantype |
-| 90210    | TAPAZOLE TAB 5MG| MA |
+| 90210    | Lipitor TAB 10MG| MA |
 
 
 @switchNowStep3
@@ -56,25 +56,9 @@ Then I switch to generic drug and validate
 	
 Examples:
 | zipcode  |   drug          | plantype |
-| 90210    | TAPAZOLE TAB 5MG| MA|
+| 90210    | Lipitor TAB 10MG| MA|
 
-@defect3235
-Scenario Outline: To go through dce flow from prescription drugs tab and verify right message when clicked on add to compare
-Given the user is on ulayer medicare acq site landing page
-When I access the vpp page using below zipcode on aarp site
-	|Zip Code| <zipcode> |
-And I go to the view plan details page and access DCE flow from prescription drugs tab
-	|Plan Name | <planname> |
-	|Plan Type | <plantype> |
-And I have added a drug to my drug list
-	|Drug|<drug>|
-And I navigate to step2 page
-And I select the first pharmacy
-Then I navigate back to plan details page and verify correct message shows when clicked on compare check box
-	
-Examples:
-| zipcode  |   drug          | planname 										| plantype | 
-| 90210    | TAPAZOLE TAB 5MG|AARP MedicareComplete SecureHorizons Plan 1 (HMO) | MA	|
+
 
 @defect2291
 Scenario Outline: To select a pharmacy in DCE under 2018 and then change year to 2017 and check the pharmacy selected isn't there
