@@ -50,6 +50,7 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 	{
 		CommonUtility.waitForPageLoad(driver, requestAgentApptDropdown, 20);
 		requestAgentApptDropdown.click();
+		CommonUtility.waitForPageLoad(driver, ma_requestAgentAppointmentLink, 20);
 		ma_requestAgentAppointmentLink.click();
 		String mainwindow=driver.getWindowHandle();
 
