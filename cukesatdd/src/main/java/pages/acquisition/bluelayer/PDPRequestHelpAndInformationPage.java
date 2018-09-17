@@ -1,5 +1,7 @@
 package pages.acquisition.bluelayer;
 
+import java.util.Set;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,8 +17,11 @@ import atdd.framework.UhcDriver;
 public class PDPRequestHelpAndInformationPage extends UhcDriver{
 	
 	
-	@FindBy(xpath = ".//*[@id='subPageLeft']//*[contains(text(),'Information and Enrollment')]")
+	@FindBy(xpath = ".//*[@id='article_mededaccordion2']//*[contains(text(),'Information and Enrollment')]")
 	private WebElement pdpEnquiryKitLink;
+	
+	@FindBy(xpath = ".//*[@id='collapse2heading_article_mededaccordion2']")
+	private WebElement pdpInquiryKitDropdown;
 
 	public PDPRequestHelpAndInformationPage(WebDriver driver) {
 		super(driver);
@@ -31,8 +36,17 @@ public class PDPRequestHelpAndInformationPage extends UhcDriver{
 	}
 
 	public PDPEnrollementGuidePage navigatesToPdpEnquiryKit() {
-		CommonUtility.waitForPageLoad(driver, pdpEnquiryKitLink, 20);
+		CommonUtility.waitForPageLoad(driver, pdpInquiryKitDropdown, 20);
+		pdpInquiryKitDropdown.click();
 		pdpEnquiryKitLink.click();
+		String mainwindow=driver.getWindowHandle();
+
+		Set<String> allWindowHandles = driver.getWindowHandles();
+		for (String currentWindowHandle : allWindowHandles) {
+			if (!currentWindowHandle.equals(mainwindow)) {
+				driver.switchTo().window(currentWindowHandle);
+			}
+		}
 		 try {
 				Thread.sleep(4000);
 			} catch (InterruptedException e) {
