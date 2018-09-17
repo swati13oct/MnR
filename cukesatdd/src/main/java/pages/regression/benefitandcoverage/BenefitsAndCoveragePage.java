@@ -13,7 +13,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -22,9 +24,12 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import pages.member.bluelayer.ProfilePreferencesPage;
+import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.benefitandcoverage.ValueAddedServicepage;
+import pages.regression.formsandresources.FormsAndResourcesPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
+import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
@@ -40,6 +45,15 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	public PageData benefitsCoverage;
 
 	public JSONObject benefitsandcoverageJson;
+	
+	@FindBy(linkText = "VIEW PLAN DOCUMENTS")
+	 public WebElement viewPlanDocumentsButton;
+	
+	@FindBy(xpath = ".//*[@id='globalContentIdForSkipLink']/div[3]/div/div/div[2]/div/div/div/p[1]")
+	private WebElement messageForPreeffective;
+	
+	@FindBy(linkText = "1-888-980-8125")
+	 public WebElement preEffectiveTechSupportNumber;
 	
 	@FindBy(id = "IPerceptionsEmbed")
 	   public WebElement iPerceptionframe;
@@ -2820,7 +2834,7 @@ public void validateImagePresent(String logoToBeDisplayedOnSecondaryPage) {
 		int counter = 0;
 		do {
 
-			System.out.println("current value of conter: " + counter);
+			System.out.println("current value of counter: " + counter);
 			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
 
 			if (IPerceptionsFrame.isEmpty()) {
@@ -2853,4 +2867,120 @@ public void validateImagePresent(String logoToBeDisplayedOnSecondaryPage) {
 		} while (counter < 2);
 	}
 
-}
+	/*
+	 * this method checks that Plan Benefits Summary Sub Navigation Link 
+	 * under Benefits and Coverage is NOT displayed. This method is very useful when
+	 * element is available in DOM but element is not displayed on UI
+	 */ 
+	public void validatePlanBenefitsSummarySubNavNotDisplayed() throws InterruptedException 
+	{
+	    Thread.sleep(2000);  
+	    System.out.println("Now checking for Plan Benefits Summary sub navigation of Benefits and Coverage");
+	     
+		Dimension size = driver.findElement(By.id("benefitssummary")).getSize();
+		System.out.println(size);
+		int height = size.getHeight();
+		System.out.println("Height is "+height);
+		int width = size.getWidth();
+		System.out.println("Width is "+width);
+		if (height == 0)
+		{
+			System.out.println("Plan Benefits Summary Sub Navigation Link under Benefits and Coverage was NOT displayed");
+	 	}
+	    	
+		else 
+		{
+			System.out.println("Plan Benefits Summary Sub Navigation Link under Benefits and Coverage was displayed, Test step is failed due to it");
+	    	Assert.fail("Plan Benefits Summary Sub Navigation Link under Benefits and Coverage was displayed, Test step is failed due to it");	
+		}
+		
+	}   	
+	
+	/*
+	 * this method checks that Plan Documents and Resources Sub Navigation Link 
+	 * under Benefits and Coverage is NOT displayed
+	 */
+	public void validatePlanDocumentsResourcesSubNavNotDisplayed() throws InterruptedException 
+	{
+	    Thread.sleep(2000);  
+	    System.out.println("Now checking for Plan Documents and Resources sub navigation of Benefits and Coverage");
+	     
+		Dimension size = driver.findElement(By.id("formsandresourcesC1")).getSize();
+		System.out.println(size);
+		int height = size.getHeight();
+		System.out.println("Height is "+height);
+		int width = size.getWidth();
+		System.out.println("Width is "+width);
+		if (height == 0)
+		{
+			System.out.println("Plan Documents and Resources Sub Navigation Link under Benefits and Coverage was NOT displayed");
+	 	}
+	    	
+		else 
+		{
+			System.out.println("Plan Documents and Resources Sub Navigation Link under Benefits and Coverage was displayed, Test step is failed due to it");
+	    	Assert.fail("Plan Documents and Resources Sub Navigation Link under Benefits and Coverage was displayed, Test step is failed due to it");	
+		}
+		
+	} 
+	
+	/*
+	 * this method checks that Order Plan Materials Sub Navigation Link 
+	 * under Benefits and Coverage is NOT displayed
+	 */
+	public void validateOrderPlanMaterialsSubNavNotDisplayed() throws InterruptedException 
+	{
+	    Thread.sleep(2000);  
+	    System.out.println("Now checking for Order Plan Materials sub navigation of Benefits and Coverage");
+	     
+		Dimension size = driver.findElement(By.id("ordermaterials")).getSize();
+		System.out.println(size);
+		int height = size.getHeight();
+		System.out.println("Height is "+height);
+		int width = size.getWidth();
+		System.out.println("Width is "+width);
+		if (height == 0)
+		{
+			System.out.println("Order Plan Materials Sub Navigation Link under Benefits and Coverage was NOT displayed");
+	 	}
+	    	
+		else 
+		{
+			System.out.println("Order Plan Materials Sub Navigation Link under Benefits and Coverage was displayed, Test step is failed due to it");
+	    	Assert.fail("Order Plan Materials Sub Navigation Link under Benefits and Coverage was displayed, Test step is failed due to it");	
+		}
+		
+	}
+
+	public void verifyCorrectMessageForPreEffectiveMembers() throws InterruptedException 
+	{
+	    Thread.sleep(2000);  
+	    System.out.println("Now checking for message on Benefits and Coverage Page for Pre-effective members");
+	    System.out.println("The message displayed on screen is "+messageForPreeffective.getText());
+		Assert.assertEquals(messageForPreeffective.getText(),"When your plan starts, this is where you’ll find an overview of your plan benefits and coverage information. You can also view your plan documents to find important plan details and information.");
+		System.out.println("Assert for correct Message was passed");
+		System.out.println("Now checking for display View Plan Documents button");
+	    viewPlanDocumentsButton.isDisplayed();
+	    System.out.println("View Plan Documents button was displayed");
+	}
+	
+	public void verifyCorrectTechSupportNumberForPreEffectiveMembers() throws InterruptedException 
+	{
+		
+	    System.out.println("Now checking for Tech Support Number for Pre-effective members");
+	    System.out.println("The Tech Support phone number displayed on screen is "+preEffectiveTechSupportNumber.getText());
+		Assert.assertEquals(preEffectiveTechSupportNumber.getText(),"1-888-980-8125");
+		System.out.println("Assert for correct Tech Suppport Phone Number  was passed");
+		
+	}
+
+	public FormsAndResourcesPage clickViewPlanDocumentsButton() throws InterruptedException 
+	{
+		
+	    System.out.println("Now clicking the View Plan Documents Button");
+	    viewPlanDocumentsButton.click();
+	    
+	    return new FormsAndResourcesPage(driver);
+     }
+	
+	}
