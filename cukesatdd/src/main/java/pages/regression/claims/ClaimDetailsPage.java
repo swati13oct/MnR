@@ -40,7 +40,7 @@ public class ClaimDetailsPage extends UhcDriver{
 	@FindBy (xpath =".//*[@id='claimSearchButtonBottom']")
 	private WebElement historylink;
 
-	@FindBy(xpath=".//*[@id='claimNumberLabel']")
+	@FindBy(xpath=".//*[@id='claimNumberLabel']/p/b")
 	private WebElement claimNumber;
 
 	@FindBy(xpath=".//*[@id='claimDynamicNum']")
@@ -79,7 +79,7 @@ public class ClaimDetailsPage extends UhcDriver{
 	public WebElement claimstotalTable;
 	
 	//@FindBy(id = "learnmoretoggleship")
-	@FindBy(xpath = ".//*[@id='learnmoredetailstoggle']/p")
+	@FindBy(xpath = ".//*[@id='learnmoredetailstoggle']")
 	private WebElement learnMoreLink;
 	
 	@FindBy(id = "eobClass")
@@ -230,12 +230,18 @@ public class ClaimDetailsPage extends UhcDriver{
 		System.out.println("The title of Claims page is-------->"+driver.getTitle());
 		
 		System.out.println("!!! Validating the elements on the Claims Details page !!!");
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		validate(medicalClaimDetailsText);
-		System.out.println("!!! Medical Claims Details text is seen on the Claims Details page !!!");
+		System.out.println("!!! Medical Claims Details text is seen on the Claims Details page !!!  "+ medicalClaimDetailsText.isDisplayed());
 		validate(claimNumber);
 		System.out.println("!!!Claim Number is displayed===>"+claimNumber.isDisplayed());
 		validate(learnMoreLink);
-		System.out.println("!!!Learn More link is seen on the Claims Details Page !!!");
+		System.out.println("!!!Learn More link is seen on the Claims Details Page !!!"+ learnMoreLink.isDisplayed());
 				validate(claimDetTableMainSection);
 		System.out.println("!!! Claims table is seen in the Cliams details page ===>"+claimDetTableMainSection.isDisplayed());
 		if(claimDetTableMainSection.isDisplayed()){
