@@ -27,7 +27,7 @@ public class AboutUsAARPPage extends GlobalWebElements{
 		validate(footerContactUsLink);
 		footerContactUsLink.click();
 		validate(footerContactUsLink);
-		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_CONTACT_UNITEDHEALTHCARE_AARP_MEDICARE)) {
+		if (driver.getCurrentUrl().contains("contact-us")) {
 			return new ContactUsAARPPage(driver);
 		}
 		return null;
