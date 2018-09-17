@@ -3,6 +3,8 @@
  */
 package pages.acquisition.bluelayer;
 
+import java.util.Set;
+
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -20,11 +22,17 @@ import atdd.framework.UhcDriver;
  */
 public class RequestHelpAndInformationPage extends UhcDriver {
 	
-	@FindBy(xpath =".//*[@id='subPageLeft']//*[contains(text(),'Request an Appointment with an Agent')]")
+	@FindBy(xpath =".//*[@id='article_mededaccordion0']//*[contains(text(),'Request an Appointment')]")
 	private WebElement ma_requestAgentAppointmentLink;
 	                 
 	@FindBy(xpath =".//*[@id='subPageLeft']//*[contains(text(),'Find UnitedHealthcare in Your Community ')]")
 	private WebElement findUnitedHealthcareLink;
+	
+	@FindBy(xpath =".//*[@id='collapse2heading_article_mededaccordion0']")
+	private WebElement requestAgentApptDropdown;
+	
+	@FindBy(xpath =".//*[@id='collapse2heading_article_mededaccordion1']")
+	private WebElement communityMeetingDropdown;
 	
 	public RequestHelpAndInformationPage(WebDriver driver) {
 		super(driver);
@@ -40,8 +48,17 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 	
 	public RequestAgentAppointmentPage navigateToAgentAppointmentRequest()
 	{
+		CommonUtility.waitForPageLoad(driver, requestAgentApptDropdown, 20);
+		requestAgentApptDropdown.click();
 		ma_requestAgentAppointmentLink.click();
-		
+		String mainwindow=driver.getWindowHandle();
+
+		Set<String> allWindowHandles = driver.getWindowHandles();
+		for (String currentWindowHandle : allWindowHandles) {
+			if (!currentWindowHandle.equals(mainwindow)) {
+				driver.switchTo().window(currentWindowHandle);
+			}
+		}
 		try {
 			if (ma_requestAgentAppointmentLink.isDisplayed()) {
 				CommonUtility.waitForElementToDisappear(driver, ma_requestAgentAppointmentLink,
@@ -62,7 +79,7 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 		return null;
 	}
 	public boolean validateUhcLink(){
-		if(validate(findUnitedHealthcareLink)&&findUnitedHealthcareLink.getText().contains("Find UnitedHealthcare in Your Community"))
+		if(validate(communityMeetingDropdown)&&communityMeetingDropdown.getText().contains("Find UnitedHealthcare in Your Community"))
 			return true;
 		return false;
 	}
