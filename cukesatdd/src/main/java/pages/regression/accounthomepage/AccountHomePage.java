@@ -1,9 +1,7 @@
-
-
-
 package pages.regression.accounthomepage;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -12,6 +10,7 @@ import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,6 +18,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
@@ -45,21 +45,20 @@ import pages.regression.pharmacylocator.PharmacySearchPage;
 //import pages.member.bluelayer.BenefitsAndCoveragePage;
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 
-
-
-
-
 public class AccountHomePage extends UhcDriver {
-       
+                
+    @FindBy(xpath = "//h2[@class='ng-scope' and @translate='FUTURE_MESSAGE_COVERAGE_START']")
+    private WebElement preEffectiveMessage;    
+                                     
     @FindBy(id = "plan_material_fnr2018")
-private WebElement PlanMaterialSection;
+    private WebElement PlanMaterialSection;
 
 
-       @FindBy(css=".view-id-link")
-       private WebElement idCardLink;
-       
-       @FindBy(xpath = "(//*[@class='ng-scope']//a[text()='Premium Payments'])[1]")
-       private WebElement paymentsLink;
+    @FindBy(css=".view-id-link")
+    private WebElement idCardLink;
+      
+    @FindBy(xpath = "(//*[@class='ng-scope']//a[text()='Premium Payments'])[1]")
+    private WebElement paymentsLink;
 
        @FindBy(xpath = "//area[@href='javascript:clWin()'][@alt = 'close']")
        private WebElement FeedbackModal; 
@@ -118,7 +117,7 @@ private WebElement PlanMaterialSection;
        private WebElement viewIDCard;
 
        @FindBy (xpath="//div[@class='claim-results']//table[not (contains(@class,'ng-hide'))]//tbody//tr[2]//a[text()='MORE INFO']")
-    	private WebElement claimstablemoreinfolinkCombo;
+       private WebElement claimstablemoreinfolinkCombo;
        
        @FindBy(id = "pcpLogoPrint1left")
        private WebElement validateLogo;
@@ -132,9 +131,9 @@ private WebElement PlanMaterialSection;
        @FindBy(id = "dropdown-toggle--1")
        private WebElement accountProfileBtn;
 
-	//@FindBy(xpath = ".//*[@id='dropdown-options--1']/a[contains(text(),'Account Settings')]")
-	@FindBy (xpath= ".//*[@id='dropdown-options--1']//a[contains(text(),'Account Settings')]")
-	private WebElement accountSettingOption;
+               //@FindBy(xpath = ".//*[@id='dropdown-options--1']/a[contains(text(),'Account Settings')]")
+       @FindBy (xpath= ".//*[@id='dropdown-options--1']//a[contains(text(),'Account Settings')]")
+        private WebElement accountSettingOption;
 
      
 
@@ -240,10 +239,10 @@ private WebElement PlanMaterialSection;
        private WebElement header;
        
        @FindBy(id = "IPerceptionsEmbed")
-   	   public WebElement iPerceptionframe;
+       public WebElement iPerceptionframe;
        
        @FindBy(id = "closeButton")
-   	   public WebElement iPerceptionclosebtn;       
+       public WebElement iPerceptionclosebtn;       
 
        @FindBy(id = "coveragebenefits_2")
        private WebElement coverageBenefits;
@@ -291,9 +290,9 @@ private WebElement PlanMaterialSection;
        //Added by Sneha - Navigate to Order Plan Materials 
        @FindBy(xpath = "//div[@id='ui-view-page']//a[@track='ORDER_MATERIALS']")
        private WebElement OrderMaterial_Dashboard;
-	
-	@FindBy(id = "hello-person")
-	private WebElement helloPerson;
+               
+       @FindBy(id = "hello-person")
+       private WebElement helloPerson;
 
        @FindBy(xpath = "//*[@id='ordermaterials']")
        private WebElement OrderMaterialsTab_BnCPage;
@@ -308,7 +307,7 @@ private WebElement PlanMaterialSection;
        private WebElement PayDate;
        
        @FindBy(xpath=".//*[@id='cltotshipindsnf']")
-   	  private WebElement claimtotalcomb;
+                 private WebElement claimtotalcomb;
 
        @FindBy(id = "closeButton")
        private WebElement iPerceptionCloseButton;
@@ -352,9 +351,9 @@ private WebElement PlanMaterialSection;
        public BenefitsAndCoveragePage navigateDirectToBnCPag(String Plantype) {
 
               
-    	   if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
-    		   if(Plantype.equalsIgnoreCase("MAPD") || Plantype.equalsIgnoreCase("PDP") || Plantype.equalsIgnoreCase("HIP") || Plantype.equalsIgnoreCase("MA")||Plantype.equalsIgnoreCase("MAPDRX") || Plantype.equalsIgnoreCase("MAPDVill"))
-    		   {
+                  if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
+                                 if(Plantype.equalsIgnoreCase("MAPD") || Plantype.equalsIgnoreCase("PDP") || Plantype.equalsIgnoreCase("HIP") || Plantype.equalsIgnoreCase("MA")||Plantype.equalsIgnoreCase("MAPDRX") || Plantype.equalsIgnoreCase("MAPDVill"))
+                                 {
                      System.out.println("user is on Stage login page");
                      // CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);
                      if (driver.getCurrentUrl().contains("/dashboard"))
@@ -378,9 +377,9 @@ private WebElement PlanMaterialSection;
 
                      }
               }
-    		   
-    		   else if (Plantype.equalsIgnoreCase("MEDICA"))
-    		   {
+                                 
+                                 else if (Plantype.equalsIgnoreCase("MEDICA"))
+                                 {
                    System.out.println("user is on Stage login page.");
                    // CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);
                    if (driver.getCurrentUrl().contains("/dashboard"))
@@ -404,8 +403,8 @@ private WebElement PlanMaterialSection;
 
                    }
             }
-    		   else if (Plantype.equalsIgnoreCase("PCP"))
-    		   {
+                                 else if (Plantype.equalsIgnoreCase("PCP"))
+                                 {
                    System.out.println("user is on Stage login page");
                    // CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);
                    if (driver.getCurrentUrl().contains("/dashboard"))
@@ -429,8 +428,8 @@ private WebElement PlanMaterialSection;
 
                    }
             }
-    	   }
-    		   
+                  }
+                                 
 
               else if (MRScenario.environmentMedicare.equals("team-h") || MRScenario.environmentMedicare.equals("test-a")
                            || MRScenario.environmentMedicare.equals("team-e")) {
@@ -442,71 +441,71 @@ private WebElement PlanMaterialSection;
                                   "https://team-ci1-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
               }
               CommonUtility.waitForPageLoad(driver, heading, 50);
-      		if (driver.getTitle().equalsIgnoreCase("Benefits")) {
-      			return new BenefitsAndCoveragePage(driver);
-      		}
+                              if (driver.getTitle().equalsIgnoreCase("Benefits")) {
+                                             return new BenefitsAndCoveragePage(driver);
+                              }
 
-      		return null;
+                              return null;
        }
        
        public void waitForHomePage(WebElement element) {
-	       WebDriverWait wait = new WebDriverWait(driver, 90);
+                      WebDriverWait wait = new WebDriverWait(driver, 90);
            wait.until(ExpectedConditions.visibilityOf(element));
    
    }
-	
-	/*
-	 * This function clicks on Benefits and Coverage link from Dashboard after waiting
-	 * for Hello-Person name text to be displayed on page
-	 */
+               
+               /*
+               * This function clicks on Benefits and Coverage link from Dashboard after waiting
+               * for Hello-Person name text to be displayed on page
+               */
        
-	public BenefitsAndCoveragePage navigateToBandCPage() {
-		System.out.println("Checking for Hello PersonName on Dashboard home page now");
-		waitForHomePage(helloPerson);
-		System.out.println("Hello PersonName on Dashboard home page was found");
-		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
-			System.out.println("User is on Stage environment");
-			
-			if (driver.getCurrentUrl().contains("/dashboard"))
-				;
-			{
-				System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
-				driver.findElement(By.xpath("//a[contains(text(),'Coverage & Benefits')]")).click();
-				System.out.println("Now waiting for 20 seconds");
-				try {
-					Thread.sleep(20000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				System.out.println("Current URL is " +driver.getCurrentUrl());
-				if (driver.getTitle().contains("Benefits")) {
-					System.out.println("Title of Current Page is "+ driver.getTitle());
-					return new BenefitsAndCoveragePage(driver);
-				}
+               public BenefitsAndCoveragePage navigateToBandCPage() {
+                              System.out.println("Checking for Hello PersonName on Dashboard home page now");
+                              waitForHomePage(helloPerson);
+                              System.out.println("Hello PersonName on Dashboard home page was found");
+                              if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
+                                             System.out.println("User is on Stage environment");
+                                             
+                                             if (driver.getCurrentUrl().contains("/dashboard"))
+                                                            ;
+                                             {
+                                                            System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
+                                                            driver.findElement(By.xpath("//a[contains(text(),'Coverage & Benefits')]")).click();
+                                                            System.out.println("Now waiting for 20 seconds");
+                                                            try {
+                                                                           Thread.sleep(20000);
+                                                            } catch (InterruptedException e) {
+                                                                           // TODO Auto-generated catch block
+                                                                           e.printStackTrace();
+                                                            }
+                                                            System.out.println("Current URL is " +driver.getCurrentUrl());
+                                                            if (driver.getTitle().contains("Benefits")) {
+                                                                           System.out.println("Title of Current Page is "+ driver.getTitle());
+                                                                           return new BenefitsAndCoveragePage(driver);
+                                                            }
 
-			}
-		}
+                                             }
+                              }
 
-		else if (MRScenario.environmentMedicare.equals("team-h") || MRScenario.environmentMedicare.equals("test-a")
-				|| MRScenario.environmentMedicare.equals("team-e")) {
+                              else if (MRScenario.environmentMedicare.equals("team-h") || MRScenario.environmentMedicare.equals("test-a")
+                                                            || MRScenario.environmentMedicare.equals("team-e")) {
 
-			driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
-			System.out.println(driver.getCurrentUrl());
-		} else {
-			driver.navigate().to(
-					"https://team-ci1-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
+                                             driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
+                                             System.out.println(driver.getCurrentUrl());
+                              } else {
+                                             driver.navigate().to(
+                                                                           "https://team-ci1-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
 
-			System.out.println(driver.getCurrentUrl());
-		}
-		
-		CommonUtility.waitForPageLoad(driver, heading, 50);
-		if (driver.getTitle().equalsIgnoreCase("Benefits Overview")) {
-			return new BenefitsAndCoveragePage(driver);
-		}
+                                             System.out.println(driver.getCurrentUrl());
+                              }
+                              
+                              CommonUtility.waitForPageLoad(driver, heading, 50);
+                              if (driver.getTitle().equalsIgnoreCase("Benefits Overview")) {
+                                             return new BenefitsAndCoveragePage(driver);
+                              }
 
-		return null;
-	}
+                              return null;
+               }
 
 
 
@@ -518,7 +517,7 @@ private WebElement PlanMaterialSection;
                      // CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);
                      if (driver.getCurrentUrl().contains("/dashboard")){
 
-				
+                                                            
                            /*
                            * accountToggleDropdown.click();
                            * validate(accountSettingOption); accountSettingOption.click();
@@ -550,13 +549,13 @@ private WebElement PlanMaterialSection;
               } else {
                      driver.navigate().to(
                                   "https://team-ci1-medicare.ose-elr-core.optum.com/content/medicare/member/account/profile.html");
-                     System.out.println("title is " + driver.getTitle());
+                    System.out.println("title is " + driver.getTitle());
                      System.out.println("Current Url is " + driver.getCurrentUrl());
 
               }
               CommonUtility.waitForPageLoad(driver, heading, 50);
               if (driver.getTitle().equalsIgnoreCase("Profile")) {
-            	  return new ProfileandPreferencesPage(driver);          
+                 return new ProfileandPreferencesPage(driver);          
               }   
               return null;
        }
@@ -650,7 +649,7 @@ private WebElement PlanMaterialSection;
               Thread.sleep(10000);
               if (getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | My Account Home")) {
                      Assert.assertTrue(true);
-              } else {
+             } else {
                      Assert.assertTrue(false);
               }
 
@@ -685,7 +684,7 @@ private WebElement PlanMaterialSection;
                      if (driver.getCurrentUrl().contains("/dashboard"));
                      {
 
-                    	 accountProfileBtn.click();
+                               accountProfileBtn.click();
                            try {
                                   Thread.sleep(3000);
                            } catch (InterruptedException e) {
@@ -717,7 +716,7 @@ private WebElement PlanMaterialSection;
               }
 
               Thread.sleep(5000);
-              if (validate(iPerceptionPopUp)) {
+             if (validate(iPerceptionPopUp)) {
                      iPerceptionPopUp.click();
                      System.out.println("iPerception Pop Up displayed");
               }
@@ -751,9 +750,9 @@ private WebElement PlanMaterialSection;
        }
 
        public void verifyPageTitle() throws InterruptedException {
-    	      System.out.println("Checking for Hello Name element");
-    	      waitForHomePage(helloPerson);
-    	      System.out.println("Hello Name element was displayed");
+                     System.out.println("Checking for Hello Name element");
+                     waitForHomePage(helloPerson);
+                     System.out.println("Hello Name element was displayed");
               String title = driver.getTitle();
               System.out.println(title);
               // Assert.assertEquals(title, "Home | UnitedHealthcare");
@@ -931,18 +930,18 @@ private WebElement PlanMaterialSection;
               JavascriptExecutor js = (JavascriptExecutor)driver;
 
               try {
-		              feebackpopupClose();
-		              if (MRScenario.environmentMedicare.equals("team-ci1") || MRScenario.environmentMedicare.equals("team-h") || MRScenario.environmentMedicare.equals("test-a") || MRScenario.environmentMedicare.equals("team-e")) {
-		                     js.executeScript("arguments[0].click();", helpAndContactUslink);
-		
-		             }else{
-		                     linkContactUs.click();
-		             }
-		              CommonUtility.waitForPageLoad(driver, heading, 10);
-		              if(driver.getTitle().contains("Contact Us"))
-		              {
-		                     return new ContactUsPage(driver);
-		              }
+                                            feebackpopupClose();
+                                            if (MRScenario.environmentMedicare.equals("team-ci1") || MRScenario.environmentMedicare.equals("team-h") || MRScenario.environmentMedicare.equals("test-a") || MRScenario.environmentMedicare.equals("team-e")) {
+                                                   js.executeScript("arguments[0].click();", helpAndContactUslink);
+                              
+                                           }else{
+                                                   linkContactUs.click();
+                                           }
+                                            CommonUtility.waitForPageLoad(driver, heading, 10);
+                                            if(driver.getTitle().contains("Contact Us"))
+                                            {
+                                                   return new ContactUsPage(driver);
+                                            }
               } catch (InterruptedException e) {
                   e.printStackTrace();
            }
@@ -1113,11 +1112,11 @@ private WebElement PlanMaterialSection;
        }
 
        public ClaimDetailsPage navigateToClaimDetailsPage() {
-    	   	
-    	   	try{
-    	   			feebackpopupClose();
-    	   			driver.switchTo().defaultContent();
-    	   			//CommonUtility.waitForPageLoad(driver, claimstablemoreinfolink, 60);
+                              
+                              try{
+                                                            feebackpopupClose();
+                                                            driver.switchTo().defaultContent();
+                                                            //CommonUtility.waitForPageLoad(driver, claimstablemoreinfolink, 60);
                   //Thread.sleep(20);
                   claimstablemoreinfolink.click();
                   //CommonUtility.waitForPageLoad(driver, claimDetTableMainSection, 60);                 
@@ -1126,15 +1125,15 @@ private WebElement PlanMaterialSection;
                          return new ClaimDetailsPage(driver);
 
                   }
-    	   	}catch(Exception ex){
-    	   		return null;
-    	   	}
-    	   	
+                              }catch(Exception ex){
+                                             return null;
+                              }
+                              
               return new ClaimDetailsPage(driver);
        }
 
        public PharmacySearchPage navigateToRedesignPharmacyLocaterPage() {
-    	   	  waitForHomePage(helloPerson);
+                                waitForHomePage(helloPerson);
               if (validate(iPerceptionAutoPopUp)) {
                      iPerceptionAutoPopUp.click();
               } else {
@@ -1183,8 +1182,9 @@ private WebElement PlanMaterialSection;
        }
 
     // to navigate to forms and resources page
-    public FormsAndResourcesPage navigatetoFormsnResources() throws InterruptedException {
-    				waitForHomePage(helloPerson);
+    @SuppressWarnings("unused")
+	public FormsAndResourcesPage navigatetoFormsnResources() throws InterruptedException {
+                                                            waitForHomePage(helloPerson);
                     if (validate(iPerceptionAutoPopUp)) {
                                     iPerceptionAutoPopUp.click();
                     } else {
@@ -1260,7 +1260,7 @@ private WebElement PlanMaterialSection;
                    System.out.println("User is on dashboard page and URL is ====>"+driver.getCurrentUrl());
                    Thread.sleep(2000);
                    driver.navigate().to("https://stage-mymedicareaccount.uhc.com/medica/member/documents/overview.html");
-                   System.out.println(driver.getCurrentUrl());
+                  System.out.println(driver.getCurrentUrl());
 CommonUtility.waitForPageLoad(driver, PlanMaterialSection, 20);
 if (driver.getTitle().equalsIgnoreCase("Documents Overview")) {
            System.out.println(driver.getTitle());}                                               
@@ -1394,7 +1394,8 @@ if (driver.getTitle().equalsIgnoreCase("Documents Overview")) {
               }
        }
 
-       public void validateFooterSection() {           
+       @SuppressWarnings("unused")
+	public void validateFooterSection() {           
 
               JavascriptExecutor jse = (JavascriptExecutor) driver; 
               Assert.assertTrue("Footer section is not displayed", footerSection.isDisplayed());
@@ -1563,7 +1564,7 @@ if (driver.getTitle().equalsIgnoreCase("Documents Overview")) {
        
 public void validateHeader(){
        Assert.assertTrue("Header is not displayed", header.isDisplayed());
-	/**
+               /**
      * Wait till page is loaded button is enabled.
      */
    
@@ -1612,7 +1613,7 @@ public void clickeob(){
        if(claims.isDisplayed()){
               claims.click();
               if(explainationOfBenefits.isDisplayed()){
-                     explainationOfBenefits.click();
+                    explainationOfBenefits.click();
               }
        }
 }
@@ -1670,7 +1671,7 @@ public void clickFormsResources(){
               coverageBenefits.click();
               if(formsAndResources.isDisplayed()){
                      formsAndResources.click();
-              }
+             }
        }
 }
 
@@ -1850,161 +1851,224 @@ public void clickLogout() {
        }
        
        
- 	/**
- 	 * iPerception popup
- 	 */
+               /**
+               * iPerception popup
+               */
 
 public void feebackpopupClose() throws InterruptedException
 { //waitForloader(driver,overlay, 20);
-	Thread.sleep(20000);
-	if (validate(iPerceptionframe)) {
+               Thread.sleep(20000);
+               if (validate(iPerceptionframe)) {
 
-		switchToNewIframe(iPerceptionframe);
-		iPerceptionclosebtn.click();
-		driver.switchTo().defaultContent();
-		//iPerceptionAutoPopUp.click();
-	} else {
-		System.out.println("iPerception Pop Up not displayed");
-	}
+                              switchToNewIframe(iPerceptionframe);
+                              iPerceptionclosebtn.click();
+                              driver.switchTo().defaultContent();
+                              //iPerceptionAutoPopUp.click();
+               } else {
+                              System.out.println("iPerception Pop Up not displayed");
+               }
 }
 public ClaimDetailsPage navigateToClaimDetailsPageCombo(){
-	try {
-		Thread.sleep(10000);
-	} catch (InterruptedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-		}	
-	validate(claimstablemoreinfolinkCombo);
-	System.out.println("more info link is seen for combo member ===>"+claimstablemoreinfolinkCombo.isDisplayed());
-	try {
-		Thread.sleep(2000);
-		} catch (InterruptedException e) {
-		e.printStackTrace();
-		}
+               try {
+                              Thread.sleep(10000);
+               } catch (InterruptedException e) {
+                              // TODO Auto-generated catch block
+                              e.printStackTrace();
+                              }              
+               validate(claimstablemoreinfolinkCombo);
+               System.out.println("more info link is seen for combo member ===>"+claimstablemoreinfolinkCombo.isDisplayed());
+               try {
+                              Thread.sleep(2000);
+                              } catch (InterruptedException e) {
+                              e.printStackTrace();
+                              }
 
-	JavascriptExecutor executor = (JavascriptExecutor)driver;
-	executor.executeScript("arguments[0].click();", claimstablemoreinfolinkCombo);
+               JavascriptExecutor executor = (JavascriptExecutor)driver;
+               executor.executeScript("arguments[0].click();", claimstablemoreinfolinkCombo);
 
 
-	//claimstablemoreinfolinkCombo.click();
-	CommonUtility.waitForPageLoad(driver, claimtotalcomb, 30);	
-	System.out.println(driver.getTitle());
-	//System.out.println("*** Combo Member is on Claims Details Page ***");
-	if (driver.getTitle().equalsIgnoreCase("/details")) {
-		System.out.println("*** Combo Member is on Claims Details Page ***");
-		
-	}
-	return new ClaimDetailsPage(driver);
+               //claimstablemoreinfolinkCombo.click();
+               CommonUtility.waitForPageLoad(driver, claimtotalcomb, 30);       
+               System.out.println(driver.getTitle());
+               //System.out.println("*** Combo Member is on Claims Details Page ***");
+               if (driver.getTitle().equalsIgnoreCase("/details")) {
+                              System.out.println("*** Combo Member is on Claims Details Page ***");
+                              
+               }
+               return new ClaimDetailsPage(driver);
 }
 
 public BenefitsAndCoveragePage navigateDirectToBnCPag() {
-		
-		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
-			System.out.println("user is on Stage login page");
-			// CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);
-			if (driver.getCurrentUrl().contains("/dashboard"))
-				;
-			{
-				System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
-				
-				driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
-				try {
-					Thread.sleep(20000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				System.out.println(driver.getCurrentUrl());
-				CommonUtility.waitForPageLoad(driver, heading, 30);
-				if (driver.getTitle().contains("Benefits Overview")) {
-					System.out.println(driver.getTitle());
-					return new BenefitsAndCoveragePage(driver);
-				}
+                              
+                              if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
+                                             System.out.println("user is on Stage login page");
+                                             // CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);
+                                             if (driver.getCurrentUrl().contains("/dashboard"))
+                                                            ;
+                                             {
+                                                            System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
+                                                            
+                                                            driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
+                                                            try {
+                                                                           Thread.sleep(20000);
+                                                            } catch (InterruptedException e) {
+                                                                           // TODO Auto-generated catch block
+                                                                           e.printStackTrace();
+                                                            }
+                                                            System.out.println(driver.getCurrentUrl());
+                                                            CommonUtility.waitForPageLoad(driver, heading, 30);
+                                                            if (driver.getTitle().contains("Benefits Overview")) {
+                                                                           System.out.println(driver.getTitle());
+                                                                           return new BenefitsAndCoveragePage(driver);
+                                                            }
 
-			}
-		}
+                                             }
+                              }
 
-		else if (MRScenario.environmentMedicare.equals("team-h") || MRScenario.environmentMedicare.equals("test-a")
-				|| MRScenario.environmentMedicare.equals("team-e")) {
+                              else if (MRScenario.environmentMedicare.equals("team-h") || MRScenario.environmentMedicare.equals("test-a")
+                                                            || MRScenario.environmentMedicare.equals("team-e")) {
 
-			driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
-			System.out.println(driver.getCurrentUrl());
-		} else {
-			driver.navigate().to(
-					"https://team-ci1-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
+                                             driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
+                                             System.out.println(driver.getCurrentUrl());
+                              } else {
+                                             driver.navigate().to(
+                                                                           "https://team-ci1-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
 
-			System.out.println(driver.getCurrentUrl());
-		}
+                                             System.out.println(driver.getCurrentUrl());
+                              }
 
-		/*
-		 * if (validate(iPerceptionPopUp)) { iPerceptionPopUp.click();
-		 * System.out.println("iPerception Pop Up displayed"); }
-		 */
+                              /*
+                              * if (validate(iPerceptionPopUp)) { iPerceptionPopUp.click();
+                              * System.out.println("iPerception Pop Up displayed"); }
+                              */
 
-		CommonUtility.waitForPageLoad(driver, heading, 50);
-		if (driver.getTitle().equalsIgnoreCase("Benefits Overview")) {
-			return new BenefitsAndCoveragePage(driver);
-		}
+                              CommonUtility.waitForPageLoad(driver, heading, 50);
+                              if (driver.getTitle().equalsIgnoreCase("Benefits Overview")) {
+                                             return new BenefitsAndCoveragePage(driver);
+                              }
 
-		return null;
-		
-	}
+                              return null;
+                              
+               }
 
 public BenefitsAndCoveragePage navigateToBandCPag() {
-	
-	if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
-		System.out.println("user is on Stage login page");
-		// CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);
-		if (driver.getCurrentUrl().contains("/dashboard"))
-			;
-		{
-			System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
-			
-			driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
-			try {
-				Thread.sleep(20000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			System.out.println(driver.getCurrentUrl());
-			//CommonUtility.waitForPageLoad(driver, heading, 30);
-			if (driver.getTitle().contains("Plan Benefits Summary")) {
-				System.out.println(driver.getTitle());
-				return new BenefitsAndCoveragePage(driver);
-			}
+               
+               if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
+                              System.out.println("user is on Stage login page");
+                              // CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);
+                              if (driver.getCurrentUrl().contains("/dashboard"))
+                                             ;
+                              {
+                                             System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
+                                             
+                                             driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
+                                             try {
+                                                            Thread.sleep(20000);
+                                             } catch (InterruptedException e) {
+                                                            // TODO Auto-generated catch block
+                                                            e.printStackTrace();
+                                             }
+                                             System.out.println(driver.getCurrentUrl());
+                                             //CommonUtility.waitForPageLoad(driver, heading, 30);
+                                             if (driver.getTitle().contains("Plan Benefits Summary")) {
+                                                            System.out.println(driver.getTitle());
+                                                            return new BenefitsAndCoveragePage(driver);
+                                             }
 
-		}
-	}
+                              }
+               }
 
-	else if (MRScenario.environmentMedicare.equals("team-h") || MRScenario.environmentMedicare.equals("test-a")
-			|| MRScenario.environmentMedicare.equals("team-e")) {
+               else if (MRScenario.environmentMedicare.equals("team-h") || MRScenario.environmentMedicare.equals("test-a")
+                                             || MRScenario.environmentMedicare.equals("team-e")) {
 
-		driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
-		System.out.println(driver.getCurrentUrl());
-	} else {
-		driver.navigate().to(
-				"https://team-ci1-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
+                              driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
+                              System.out.println(driver.getCurrentUrl());
+               } else {
+                              driver.navigate().to(
+                                                            "https://team-ci1-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
 
-		System.out.println(driver.getCurrentUrl());
-	}
+                              System.out.println(driver.getCurrentUrl());
+               }
 
-	/*
-	 * if (validate(iPerceptionPopUp)) { iPerceptionPopUp.click();
-	 * System.out.println("iPerception Pop Up displayed"); }
-	 */
+               /*
+               * if (validate(iPerceptionPopUp)) { iPerceptionPopUp.click();
+               * System.out.println("iPerception Pop Up displayed"); }
+               */
 
-	//CommonUtility.waitForPageLoad(driver, heading, 50);
-	if (driver.getTitle().equalsIgnoreCase("Plan Benefits Summary")) {
-		return new BenefitsAndCoveragePage(driver);
-	}
+               //CommonUtility.waitForPageLoad(driver, heading, 50);
+               if (driver.getTitle().equalsIgnoreCase("Plan Benefits Summary")) {
+                              return new BenefitsAndCoveragePage(driver);
+               }
 
-	return null;
-	
+                return null;
+                
+                
+                
 }
 
+/*
+* This method checks that Premium Payment tab is not displayed for Pre-Effective members
+*/
+public void validatePremiumPaymentTabNotDisplayed() throws InterruptedException 
+{
+    Thread.sleep(2000);  
+    System.out.println("Now checking for Premium Payment Tab on Dashboard");
+     
+try {
+                driver.findElement(By.xpath("//a[contains(text(),'Premium Payments')]"));
+                System.out.println("Premium Payment tab was displayed on Dashboard");
+                Assert.fail("Premium Payment tab was displayed, Test step is failed");
+} catch (NoSuchElementException e) {
+        // TODO Auto-generated catch block
+                   System.out.println("Premium Payment tab was not displayed on Dashboard, Test Step is Passed ");
+  }
+     
 }
 
- 			
+/*
+* This method checks that correct pre-Effective message 
+ * is displayed on Dashboard for Pre-Effective members
+*/
+public void validatePreEffectiveMessagePresent() throws InterruptedException 
+{
+    Thread.sleep(2000);  
+    String preMessage_text = preEffectiveMessage.getAttribute("innerText");
+    System.out.println("Message displayed on Dashboard for this member is:"  +preMessage_text);
+    Assert.assertTrue(preMessage_text.contains("Use this site to find helpful information while you’re getting ready for your plan to start on"));
+    System.out.println("First assert on the preeffective message is passed");
+    Assert.assertTrue(preMessage_text.contains("Depending on your plan coverage, you can find a provider, locate a pharmacy, or view important plan documents."));
+    System.out.println("Second assert on the preeffective message is passed");
+}
 
+public BenefitsAndCoveragePage clickOnBenefitsandCoverageTab() throws InterruptedException 
+{
+                System.out.println("Now clicking on Benefits and Coverage Tab on Dashboard");
+                driver.findElement(By.xpath("//a[contains(text(),'Coverage & Benefits')]")).click();
+                System.out.println("Now waiting for 20 seconds");
+                return new BenefitsAndCoveragePage(driver);
+                
+}
 
+public static void checkForIPerceptionModel(WebDriver driver) {
+                int counter = 0;
+                do {
+
+                                System.out.println("current value of counter: " + counter);
+                                List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
+
+                                if (IPerceptionsFrame.isEmpty()) {
+                                                                try {
+                                                                Thread.sleep(5000);
+                                                } catch (InterruptedException e) {
+                                                                System.out.println(e.getMessage());
+                                                }
+                                                
+                                } else {
+                                                driver.switchTo().frame(IPerceptionsFrame.get(0));
+                                                driver.findElement(By.className("btn-no")).click();
+                                                driver.switchTo().defaultContent();
+                                }
+                                counter++;
+                } while (counter < 2);
+}
+}
