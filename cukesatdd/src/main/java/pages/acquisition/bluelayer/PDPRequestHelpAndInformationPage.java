@@ -53,7 +53,7 @@ public class PDPRequestHelpAndInformationPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		if(currentUrl().contains("/prescription-drug-plans/request-information/inquirykit.html")){
+		if(currentUrl().contains("prescription-drug-plans/request-information/inquirykit")){
 			return new  PDPEnrollementGuidePage(driver);
 		}
 		return null;
