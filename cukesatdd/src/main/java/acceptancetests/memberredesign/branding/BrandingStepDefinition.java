@@ -2,7 +2,7 @@
  * 
  */
 /**
- * @author jkuma14
+* @author jkuma14
  *
  */
 package acceptancetests.memberredesign.branding;
@@ -54,7 +54,8 @@ public void verifyCorrectLogoDisplayedOnDashboardHomePage(DataTable givenAttribu
 	String logoToBeDisplayedOnDashboard = memberAttributesMap.get("Dashboard Logo");
 	Thread.sleep(3000);
 	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		Thread.sleep(3000);
+	Thread.sleep(3000);
+	AccountHomePage.checkForIPerceptionModel(accountHomePage.driver);	
 	accountHomePage.validateImagePresent(logoToBeDisplayedOnDashboard);	
 	getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
 	
@@ -75,7 +76,8 @@ public void verifyCorrectLogoAndCoLogoDisplayedOnDashboardHomePage(DataTable giv
 	String cologoToBeDisplayedOnDashboard = memberAttributesMap.get("Dashboard CoLogo");
 	Thread.sleep(3000);
 	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		Thread.sleep(3000);
+	Thread.sleep(3000);
+	AccountHomePage.checkForIPerceptionModel(accountHomePage.driver);
 	accountHomePage.validateImagePresent(logoToBeDisplayedOnDashboard);	
 	accountHomePage.validateCoLogoImagePresent(cologoToBeDisplayedOnDashboard);		
 	getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
@@ -86,6 +88,7 @@ public void verifyCorrectLogoAndCoLogoDisplayedOnDashboardHomePage(DataTable giv
 public void userClicksOnBenefitAndCoveragePage() throws Throwable {
 	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 	Thread.sleep(3000);
+	AccountHomePage.checkForIPerceptionModel(accountHomePage.driver);
 	BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateToBandCPage();
 	getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
 	
@@ -108,6 +111,7 @@ public void verifyCorrectLogoDisplayedOnSecondaryPage(DataTable givenAttributes)
 	String logoToBeDisplayedOnSecondaryPage = memberAttributesMap.get("Secondary Page Logo");
 	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 			.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+	BenefitsAndCoveragePage.checkModelPopup(benefitsCoveragePage.driver);
 	benefitsCoveragePage.validateImagePresent(logoToBeDisplayedOnSecondaryPage);
 }
 
@@ -128,6 +132,7 @@ public void verifyCorrectCoLogoDisplayedOnSecondaryPage(DataTable givenAttribute
 	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 			.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 	Thread.sleep(5000);
+	BenefitsAndCoveragePage.checkModelPopup(benefitsCoveragePage.driver);
 	benefitsCoveragePage.validateImagePresent(logoToBeDisplayedOnSecondaryPage);
 	benefitsCoveragePage.validateCoLogoImagePresent(cologoToBeDisplayedOnSecondaryPage);
 }

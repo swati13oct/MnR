@@ -1,29 +1,30 @@
 package pages.regression.claims;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-/**
- * 
- */
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
-
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import junit.framework.Assert;
 import pages.Global.Member.Footer;
+@SuppressWarnings("deprecation")
 
 /**
  * Functionality : this page validates the Claim Summary page.
  */
 public class ClaimSummarypage extends UhcDriver{
 
+	@FindBy(xpath = ".//*[@id='globalContentIdForSkipLink']/div[3]/div[1]/div/div/div/div/div/p")
+	private WebElement messageForPreeffective;
 	
+	@FindBy(linkText = "1-888-980-8125")
+	public WebElement preEffectiveTechSupportNumber;
 
 	@FindBy (xpath=".//*[@id='MA']")
 	private WebElement MA;
@@ -260,7 +261,6 @@ public class ClaimSummarypage extends UhcDriver{
 	}
 
 
-	@SuppressWarnings("deprecation")
 	public void validateHeader() {
 		// TODO Auto-generated method stub
 		if(myCaimsText.getText().equals("My Claims")){
@@ -887,7 +887,6 @@ public class ClaimSummarypage extends UhcDriver{
 	/**
 	 * @toDo : this method validates Error message greater than 24 months.
 	 */	
-	@SuppressWarnings("deprecation")
 	public void validateFedGreaterThan24MonthsErrorMsg() {
 		validate(messageaftersrch);
 		System.out.println("!!! The error message is seen. !!! ");
@@ -1200,7 +1199,126 @@ public void NavigateToClaimsPage(){
 				}
 			}
 		
-           }
+		 
+		 
+			/*
+			 * this method checks that Claims Summary Sub Navigation Link 
+			 * under Claims is NOT displayed
+			 */
+			
+			public void validateClaimsSummarySubNavNotDisplayed() throws InterruptedException 
+			{
+			    Thread.sleep(2000);  
+			    System.out.println("Now checking for claims summary sub navigation of Claims");
+			     
+				Dimension size = driver.findElement(By.id("claimsummaryC1")).getSize();
+				System.out.println(size);
+				int height = size.getHeight();
+				System.out.println("Height is "+height);
+				int width = size.getWidth();
+				System.out.println("Width is "+width);
+				if (height == 0)
+				{
+					System.out.println("Claims Summary Sub Navigation Link under Claims was NOT displayed");
+			 	}
+			    	
+				else 
+				{
+					System.out.println("Claims Summary Sub Navigation Link under Claims was displayed, Test step is failed due to it");
+			    	Assert.fail("Claims Summary Sub Navigation Link under Claims was displayed, Test step is failed due to it");	
+				}
+				
+			}		 
+		
+			/*
+			 * this method checks that Claims Summary Sub Navigation Link 
+			 * under Claims is NOT displayed
+			 */
+			
+			public void validateExplanationOfBenefitsSubNavNotDisplayed() throws InterruptedException 
+			{
+			    Thread.sleep(2000);  
+			    System.out.println("Now checking for Explanation of benefits sub navigation of Claims");
+			     
+				Dimension size = driver.findElement(By.id("eobC1")).getSize();
+				System.out.println(size);
+				int height = size.getHeight();
+				System.out.println("Height is "+height);
+				int width = size.getWidth();
+				System.out.println("Width is "+width);
+				if (height == 0)
+				{
+					System.out.println("Explanation of Benefits Sub Navigation Link under Claims was NOT displayed");
+			 	}
+			    	
+				else 
+				{
+					System.out.println("Explanation of Benefits Sub Navigation Link under Claims was displayed, Test step is failed due to it");
+			    	Assert.fail("Explanation of Benefits Sub Navigation Link under Claims was displayed, Test step is failed due to it");	
+				}
+				
+			}	
+			
+			
+			public void verifyCorrectMessageForPreEffectiveMembers() throws InterruptedException 
+			{
+			    Thread.sleep(2000);  
+			    System.out.println("Now checking for message on Claims Page for Pre-effective members");
+			    System.out.println("The message displayed on screen is "+messageForPreeffective.getText());
+				Assert.assertEquals(messageForPreeffective.getText(),"When your plan starts, this is where you can search for recent or past claims activity and view your Explanation of Benefits documents.");
+				System.out.println("Assert for preeffective message on claims page was passed");
+				
+			}
+			
+			
+			public void verifyCorrectTechSupportNumberForPreEffectiveMembers() throws InterruptedException 
+			{
+				
+			    System.out.println("Now checking for Tech Support Number for Pre-effective members on claims page");
+			    System.out.println("The Tech Support phone number displayed on screen is "+preEffectiveTechSupportNumber.getText());
+				Assert.assertEquals(preEffectiveTechSupportNumber.getText(),"1-888-980-8125");
+				System.out.println("Assert for correct Tech Suppport Phone Number on claims page was passed");
+				
+			}
+			public void verifyPaymentTabIsNotDisplayedForPreEffectiveMembers() throws InterruptedException 
+			{
+				
+				try {
+			    	driver.findElement(By.xpath("//a[contains(text(),'Premium Payments')]"));
+			    	System.out.println("Premium Payment tab was displayed on Claims secondary page");
+			    	Assert.fail("Premium Payment tab was displayed, Test step is failed");
+			 } catch (NoSuchElementException e) {
+			        // TODO Auto-generated catch block
+				   System.out.println("Premium Payment tab was not displayed on Claims secondary page, Test Step is Passed ");
+			  }
+			    
+			}	
+			
+			public static void checkForIPerceptionModel(WebDriver driver) {
+				int counter = 0;
+				do {
+
+					System.out.println("current value of counter: " + counter);
+					List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
+
+					if (IPerceptionsFrame.isEmpty()) {
+							try {
+							Thread.sleep(5000);
+						} catch (InterruptedException e) {
+							System.out.println(e.getMessage());
+						}
+						
+					} else {
+						driver.switchTo().frame(IPerceptionsFrame.get(0));
+						driver.findElement(By.className("btn-no")).click();
+						driver.switchTo().defaultContent();
+					}
+					counter++;
+				} while (counter < 2);
+			}
+					
+}
+
 
 
 
