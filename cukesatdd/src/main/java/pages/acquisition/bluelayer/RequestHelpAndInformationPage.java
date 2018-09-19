@@ -79,6 +79,7 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 		return null;
 	}
 	public boolean validateUhcLink(){
+		CommonUtility.waitForPageLoad(driver, communityMeetingDropdown, 20);
 		if(validate(communityMeetingDropdown)&&communityMeetingDropdown.getText().contains("Find UnitedHealthcare in Your Community"))
 			return true;
 		return false;
