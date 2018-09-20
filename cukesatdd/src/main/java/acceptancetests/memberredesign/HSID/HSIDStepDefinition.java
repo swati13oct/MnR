@@ -9,18 +9,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
-import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageConstants;
-import acceptancetests.data.PageConstantsMnR;
-
 //import acceptancetests.deprecated.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonConstants;
 import acceptancetests.data.LoginCommonConstants;
+import acceptancetests.data.PageConstants;
+import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
@@ -30,12 +27,8 @@ import gherkin.formatter.model.DataTableRow;
 import pages.redesign.HsidRegistrationPersonalCreateAccount;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.login.AssistiveRegistrationPage;
-import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
-import pages.member.bluelayer.DashboardPage;
-import pages.regression.login.HSIDLoginPage;
-import pages.member.bluelayer.LoginPage2;
-import pages.member.ulayer.ValueAddedServicepage;
 import pages.regression.login.DeregisterPage;
+import pages.regression.login.HSIDLoginPage;
 
 /**
  * Functionality: Benefits and Coverage page
@@ -94,20 +87,39 @@ public class HSIDStepDefinition {
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 			
 		}
-         
+        System.out.println("Selected Environment======>"+MRScenario.environment +"ANd Selected Domain from MRScenario"+ MRScenario.domain); 
 		WebDriver wd = getLoginScenario().getWebDriver();
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		HSIDLoginPage loginPage = new HSIDLoginPage(wd);
-		loginPage.validateelements();
-        AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
+		if ((MRScenario.environment).equalsIgnoreCase("stage"))
+		{
+			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+			HSIDLoginPage loginPage = new HSIDLoginPage(wd);
+			loginPage.validateelements();
+	        AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
+			
+			if (accountHomePage!= null) {
+				 getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
+				Assert.assertTrue(true);
+			}
+			else {
+				Assert.fail("***** Error in loading  Redesign Account Landing Page *****");
+			}
+			
+		}else 
+		{
+			//LoginPage loginPage = new LoginPage(wd);
+			HSIDLoginPage loginPage = new HSIDLoginPage(wd);
+			
+			
+			{
+				loginPage.navigateToNewDashboardUrl();
+				getLoginScenario().saveBean(PageConstantsMnR.LOGIN_PAGE, loginPage);
+				AccountHomePage accountHomePage = (AccountHomePage) loginPage.teamhloginWith(userName, pwd);
+				getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+				getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
+				Assert.assertTrue(true);
+			}
+		}
 		
-		if (accountHomePage!= null) {
-			 getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
-			Assert.assertTrue(true);
-		}
-		else {
-			Assert.fail("***** Error in loading  Redesign Account Landing Page *****");
-		}
 		/*AssistiveRegistrationPage assistiveregistration = (AssistiveRegistrationPage) loginPage.doLoginWith(userName, pwd);
 		if (assistiveregistration != null) {
 			 getLoginScenario().saveBean(PageConstantsMnR.ASSISTIVE_REGISTRATION_PAGE,assistiveregistration);

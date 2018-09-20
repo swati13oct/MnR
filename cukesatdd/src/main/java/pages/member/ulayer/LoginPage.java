@@ -286,7 +286,8 @@ public class LoginPage extends UhcDriver {
 		}
 		else{
 
-			start(MRConstants.REDESIGN_LOGIN_URL);
+			start(MRConstants.REDESIGN_LOGIN_URL+"?testharness=true");
+			System.out.println("Selected URL is ===========>" + MRConstants.REDESIGN_LOGIN_URL);
 			System.out.println("user is on Testharness Environment");
 		}
 		/*else
@@ -348,7 +349,7 @@ public class LoginPage extends UhcDriver {
 		sendkeys(thPassword, password);
 		thSignIn.click();
 
-		if ( MRScenario.environmentMedicare.equalsIgnoreCase("team-ci1") || (MRScenario.environmentMedicare.equalsIgnoreCase("team-t"))) {
+		if ( MRScenario.environmentMedicare.equalsIgnoreCase("team-ci1") || (MRScenario.environmentMedicare.equalsIgnoreCase("team-a"))) {
 
 			Alert alert = driver.switchTo().alert();
 			alert.accept();
