@@ -1070,7 +1070,7 @@ public class AccountHomePage extends UhcDriver {
 
        public ClaimSummarypage navigateToClaimsSummaryPage() {
 
-              if (MRScenario.environmentMedicare.equalsIgnoreCase("team-h") || MRScenario.environmentMedicare.equalsIgnoreCase("test-a") || MRScenario.environmentMedicare.equalsIgnoreCase("team")|| (MRScenario.environmentMedicare.equalsIgnoreCase("team-t") || MRScenario.environment.equalsIgnoreCase("team-ci1"))) {
+              if (MRScenario.environmentMedicare.equalsIgnoreCase("team-h") || MRScenario.environmentMedicare.equalsIgnoreCase("test-a") || MRScenario.environmentMedicare.equalsIgnoreCase("team-a")|| (MRScenario.environmentMedicare.equalsIgnoreCase("team-t") || MRScenario.environment.equalsIgnoreCase("team-ci1"))) {
                      System.out.println("Go to claims link is present "+driver.findElement(By.xpath("//a[text()='Go to Claims page']")).isDisplayed());
                      driver.findElement(By.xpath("//a[text()='Go to Claims page']")).click();
                      return new ClaimSummarypage(driver);
