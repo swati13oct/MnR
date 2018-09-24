@@ -131,7 +131,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(id = "mapdPageLis")
 	private WebElement RetailDrugCost_Table;
 
-	@FindBy(xpath = "//div[contains(@class,'benefitsSummary')]//*[contains(text(),'Benefits Summary')]")
+	@FindBy(className = "atdd-benefitssummary-headertitle")
 	private WebElement BenefitsSummaryHeader;
 
 	@FindBy(className = "atdd-benefitssummary-subheadertitle")

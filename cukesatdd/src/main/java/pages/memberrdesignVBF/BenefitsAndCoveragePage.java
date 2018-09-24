@@ -75,7 +75,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-benefitsoverview-effectivedatelabel")
 	private WebElement effective_Date;
 
-	@FindBy(xpath = "//div[@class='page-header--left']/h1[contains(.,'Benefits Summary')]")
+	@FindBy(xpath = "//div[contains(@class,'benefitsSummary')]//*[contains(text(),'Benefits Summary')]")
 	private WebElement BenefitsSummaryHeader;
 
 	@FindBy(xpath = "//span[contains(text(),'Medical Copays or Coinsurance')]")
