@@ -10,12 +10,11 @@ When the user performs plan search using following information in the AARP site
 Then user validates plan count for all plan types on plan summary page in the AARP site
 And the user views the plans of the below plan type in AARP site
 	| Plan Type | <plantype> |
-And the user validates the available plans for selected plan types in the AARP site
-Then the user validates plan summary for the below plan in the AARP site
-	| Plan Name | <planName> |
+Then the user validates the available plans for selected plan types in the AARP site
+
 Examples:
-| zipcode | county             | plantype | planName                                         |
-| 80001   | Los Angeles County | MA	  | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    |
+| zipcode | county             | plantype |
+| 80001   | Los Angeles County | MA	  | 
 
 @vppPlanDetailsAarp
 Scenario Outline: Verify plan details in AARP site
