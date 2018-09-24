@@ -170,7 +170,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-benefitsoverview-extrahelplevel-ma-label")
 	private WebElement ExtraHelp;
 
-	@FindBy(xpath = "//div[contains(@class,'benefitsSummary')]//*[contains(text(),'Benefits Summary')]")
+	@FindBy(xpath = ".//*[@id='benefitsMain']/div[2]/div/div[1]/div/div/div/div/div[1]/div/div/h1")
 	private WebElement BenefitsSummaryHeader;
 	
 	@FindBy(xpath = ".//*[@id='benefitsMain']/div[2]/div/div[1]/div/div/div/div/div[1]/div/h1")
