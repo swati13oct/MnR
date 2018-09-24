@@ -6,6 +6,7 @@ package pages.acquisition.ulayer;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.rules.Timeout;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -121,6 +122,7 @@ public class RequestAgentAppointmentPage extends UhcDriver{
 	}
 	
 	public boolean validateRequestApptPage(){
+		CommonUtility.waitForPageLoad(driver, requestAppointmentButton,20);
 		if(validate(firstName)&&validate(lastName)&&validate(address)&&validate(city)&&
 		validate(state)&&validate(zip)&&validate(phoneField)&&validate(requestAppointmentButton))
 			return true;
