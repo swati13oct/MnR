@@ -108,12 +108,12 @@ Then the user validates EOB count
  
            Examples:
        | planType    | memberType    |dateRange  | eobType |  eobCount |
-       | MAPD        | NICE_EOB_R      | Last 18 Months |Medical  |     1     |
-       | MA          | COSMOS_EOB_R      | Last 18 Months |Medical  |     16     |
-       | PDPI         | COSMOS_EOB_R     | Last 18 Months |Medical  |     0     |
+       | MAPD        | NICE_EOB_R      | Last 18 months |Medical  |     1     |
+#       | MA          | COSMOS_EOB_R      | Last 18 months |Medical  |     16     |
+#       | PDPI         | COSMOS_EOB_R     | Last 18 months |Medical  |     0     |
        | SHIP_ACTIVE  | SHIP_EOB      | Last 6-12 months |Medical  |     1     |
-       | SHIP_Termnated| SHIP_EOB     | Last 6-12 months |Medical  |     1     |
-       | MAPD          | NICETermin_EOB_R | Last 18 Months |Medical  |     1     |
+#       | SHIP_Termnated| SHIP_EOB     | Last 6-12 months |Medical  |     1     |
+#       | MAPD          | NICETermin_EOB_R | Last 18 months |Medical  |     1     |
        
 @regression_06_06_18FnF
 Scenario Outline: To verify EOB accessible for PDP + MEDSup Plan
@@ -188,6 +188,25 @@ Examples:
        | planType      | memberType     | 
        | PHIP          |  SHIP          |
 
+@EOBnullpointerFix
+Scenario Outline: To verify NICE EOB and click on the pdf
+Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+Then the user navigates to EOB page_hsid 
+And the user slects the desired date range
+  | Plan Type      |<planType>  |
+  | Date Range     |<dateRange> |
+  | EOB Type         |<eobType>   |
+Then the user validates EOB count
+       | EOB COUNT                | <eobCount>|
+ And the user clicks on first eob from the list
+ #And the user validates how to read medical eob PDF
+ 
+           Examples:
+       | planType    | memberType    |dateRange  | eobType |  eobCount |
+       | MAPD        | NICE_EOB_R      | Last 18 months |Medical  |     1     |
+       | SHIP_ACTIVE  | SHIP_EOB      | Last 6-12 months |Medical  |     1     |
 
 Scenario Outline: TC008_Check EOB is accessible for MedsSupp ( Terminated) + PHIP (Active) Plan member
 
