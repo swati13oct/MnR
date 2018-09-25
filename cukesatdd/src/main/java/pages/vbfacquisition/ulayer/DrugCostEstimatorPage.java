@@ -313,7 +313,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id = "step3DisclaimerVPP")
 	public WebElement step3DisclaimerVPP;
 
-	@FindBy(xpath= ".//*[@id='colhowdoesthiswork_dce']//*[@itemprop='significantLink']/*[@class='cta-button secondary']")
+	@FindBy(xpath= ".//*[@id='colhowdoesthiswork_dce']//*[@class='cta-button secondary'and contains(text(),'Get started')]")
 	public WebElement getStarted;
 
 	@FindBy(id = "zipcode-costs")
