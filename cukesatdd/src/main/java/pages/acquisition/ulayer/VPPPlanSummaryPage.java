@@ -39,7 +39,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div[1]/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div/span[3]")
 	private WebElement showMaPlans;
 	
-	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[1]/div/span/span[@class='ng-binding']")
+	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']//span[@class='title']/span")
 	private WebElement maPlansNumber;
 	
 	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[4]/div/span/span[@class='ng-binding']")
@@ -227,14 +227,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 
 	private WebElement getSpecificPlanSummary(
-			List<WebElement> planElement,
+			WebElement maPlan,
 			String planName) {
-		for (WebElement plan : planElement) {
-			if (plan.getText().contains(planName)) {
+	//	for (WebElement plan : maPlanList2) {
+		System.out.println("plan info: "+maPlan.getText());
+			if (maPlan.getText().contains(planName)) {
+				return maPlan;
 
-				return plan;
-
-			}
+		//	}
 		}
 		return null;
 	}
@@ -297,7 +297,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		else if (planType.equalsIgnoreCase("SNP")) {
 			snpPlansViewLink.click();
 		}
-		if(toggleplanYear!=null)
+		if(validate(toggleplanYear))
 			toggleplanYear.click();
 		return new VPPPlanSummaryPage(driver, planType);
 	}
@@ -610,12 +610,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		WebElement element = null;
 		ElementData elementData = new ElementData("className",
-				"module-plan-overview");
+				"plan-overview-list");
 		if (planName.contains("HMO")) {
 			//ElementData elementData = new ElementData("id", "viewDetailsMA");
-			 element = getSpecificPlanSummary(findChildElements(elementData, maPlanList), planName);
+			 element = getSpecificPlanSummary(maPlanList, planName);
 
-		} else if (planName.contains("PDP")) {
+		}/* else if (planName.contains("PDP")) {
 			//ElementData elementData = new ElementData("id", "viewDetailsPDP");
 			 element = getSpecificPlanSummary(findChildElements(elementData, pdpPlanList), planName);
 		} 
@@ -625,7 +625,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		} else if (planName.contains("PPO SNP")) {
 			//ElementData elementData = new ElementData("id", "viewDetailsMA");
 			 element = getSpecificPlanSummary(findChildElements(elementData, snpPlanList), planName);
-		}
+		}*/
 		
 		return validate(element);
 	}

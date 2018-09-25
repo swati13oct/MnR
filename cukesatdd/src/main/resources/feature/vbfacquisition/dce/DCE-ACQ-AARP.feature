@@ -17,7 +17,7 @@ And I navigate to step3 page and validate for DCE homepage flow
 
  Examples:
 | drug|zipcode| radius|
-| Lipitor TAB 10MG| 90210 | 15miles |
+#| LIPITOR TAB 10MG| 90210 | 15miles |
 
 
 @dceVppUlayer
@@ -36,7 +36,7 @@ And I navigate to step3 page and validate
 	
 Examples:
 | zipcode  |   drug   | plantype |
-| 90210    | Lipitor TAB 10MG| MA |
+| 90210    | LIPITOR TAB 10MG| MA |
 
 
 @switchNowStep3
@@ -56,7 +56,7 @@ Then I switch to generic drug and validate
 	
 Examples:
 | zipcode  |   drug          | plantype |
-| 90210    | Lipitor TAB 10MG| MA|
+| 90210    | LIPITOR TAB 10MG| MA|
 
 
 
@@ -88,6 +88,6 @@ And I hover or click on Our Plans in the top navigation and enter zipcode Ulayer
 Then I should be directed to the VPP Plan Summary Page Ulayer and I should see the Plan Count Overlay populated appropriately
 Examples:
 	| zipcode |
-  | 90210   |
+ # | 90210   |
  #| 30210   |
 #| 10002   |
