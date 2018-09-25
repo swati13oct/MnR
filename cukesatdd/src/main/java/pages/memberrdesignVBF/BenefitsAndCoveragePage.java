@@ -101,7 +101,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-bncsummary-primarycareprvdrheader")
 	private WebElement PrimaryCareProviderHeaderHMO;
 
-	@FindBy(xpath = "//div[@id='benefitsMain']//span[contains(text(),'Out-of-Pocket Maximum')]")
+	@FindBy(xpath = "//div[@id='outOfPocketTile']//span[contains(text(),'Out-of-Pocket Maximum')]")
 	private WebElement OutofPocketMaximum;
 
 	@FindBy(className = "atdd-innetwrk-title")
