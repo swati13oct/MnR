@@ -50,6 +50,7 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 	{
 		CommonUtility.waitForPageLoad(driver, requestAgentApptDropdown, 20);
 		requestAgentApptDropdown.click();
+		CommonUtility.waitForPageLoad(driver, ma_requestAgentAppointmentLink, 20);
 		ma_requestAgentAppointmentLink.click();
 		String mainwindow=driver.getWindowHandle();
 
@@ -80,7 +81,7 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 	}
 	public boolean validateUhcLink(){
 		CommonUtility.waitForPageLoad(driver, communityMeetingDropdown, 20);
-		if(validate(communityMeetingDropdown)&&communityMeetingDropdown.getText().contains("Find UnitedHealthcare in Your Community"))
+		if(validate(communityMeetingDropdown)&&communityMeetingDropdown.getText().contains("Community"))
 			return true;
 		return false;
 	}
