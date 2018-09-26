@@ -373,6 +373,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
         }
 
         public VPPPlanSummaryPage searchPlans(String zipcode, String countyName) {
+        	CommonUtility.waitForPageLoad(driver, zipCodeField, 20);
                 sendkeys(zipCodeField, zipcode);
                 viewPlansButton.click();
         		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
