@@ -243,6 +243,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(id = "collapseHomeDel")
 	public WebElement homeDeliveryContent;
+	
+	@FindBy(id = "cta-zipcode")
+    private WebElement zipCodeField;
 
 	// @FindBy(xpath =
 	// ".//*[@id='drugdetails']/div[1]/div[1]/div/div/section/div")
@@ -299,9 +302,6 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	
 	@FindBy(id = "total_annualcost_acq")
 	private WebElement step3CostValue;
-	
-	@FindBy(id = "cta-zipcode")
-    private WebElement zipCodeField;
 
 	//@FindBy(xpath = ".//*[@id='acqsummary']/div[2]/div[2]/a/p")
 	//@FindBy(xpath = "//p[contains(text(),'Pharmacy')]")
@@ -1368,6 +1368,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		String brandedCost = step3CostValue.getText();
 		step3EditDrugsList.click();
 		System.out.println(brandedCost);
+		CommonUtility.waitForPageLoad(driver, switchNowBtn, 25);
 		if(switchNowBtn.isDisplayed())
 			switchNowBtn.click();
 		Thread.sleep(3000);
@@ -1476,6 +1477,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		 * driver.get(NewDCEUrl);
 		 */
 		driver.manage().window().maximize();
+		CommonUtility.waitForPageLoad(driver, getStarted, 20);
 		getStarted.click();
 
 		Thread.sleep(5000);
