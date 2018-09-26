@@ -11,6 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import cucumber.api.java.en.And;
 import junit.framework.Assert;
@@ -93,6 +94,10 @@ public class ClaimDetailsPage extends UhcDriver{
 	
 	@FindBy(xpath = ".//*[@id='ship_eob']/div/section/a/p")
 	private WebElement EOB;
+	
+	@FindBy(xpath = ".//*[@id='medicalEOB']/span/p/b")
+	private WebElement EOBunavailable;
+	
 	
 	public ClaimDetailsPage(WebDriver driver) {
 		super(driver);
@@ -426,6 +431,16 @@ public class ClaimDetailsPage extends UhcDriver{
 			System.out.println(driver.getCurrentUrl());
 		}
  }
+
+	public void validateEobInDetailsPage() {
+		if(MRScenario.environment.equalsIgnoreCase("team-a"))
+		{
+		validate(EOBunavailable);
+		System.out.println("Unavailable = "+driver.getTitle());
+		}else{
+			System.out.println("Available = "+driver.getTitle());	
+		}
+	}
 	
 	
 }
