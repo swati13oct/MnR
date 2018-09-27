@@ -1368,6 +1368,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		String brandedCost = step3CostValue.getText();
 		step3EditDrugsList.click();
 		System.out.println(brandedCost);
+		CommonUtility.waitForPageLoad(driver, switchNowBtn, 25);
 		if(switchNowBtn.isDisplayed())
 			switchNowBtn.click();
 		Thread.sleep(3000);

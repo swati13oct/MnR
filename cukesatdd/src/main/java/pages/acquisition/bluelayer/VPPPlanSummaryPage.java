@@ -531,7 +531,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				wait.until(ExpectedConditions.elementToBeClickable(medsupplans)).click();
 			}	
 		}
-		if(toggleplanYear!=null)
+		if(validate(toggleplanYear))
 			toggleplanYear.click();
 		return new VPPPlanSummaryPage(driver, planType);
 	}

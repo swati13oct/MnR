@@ -17,8 +17,8 @@ Feature: 1.02-VBF-MemRedesign-To test claim functionality
       | Plan Type    | <planType>    |
       | Claim Period | <claimPeriod> |
     Then user validates the claims displayed based on the selection in redesigned site
-    And the user validates the EOB section based on domain in redesigned site
-      | Domain | <domain> |
+#    And the user validates the EOB section based on domain in redesigned site
+#     | Domain | <domain> |
     And the user validates the DownloadMyData section in redesigned site
     And I navigate to the Claim Details page in AARP site
     Then I validate the Claims Table in claims details page in AARP site
