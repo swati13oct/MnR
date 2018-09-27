@@ -185,7 +185,10 @@ public class MRScenario {
 			InputStream memberTypeStream2;
 			if (environment.contains("team-ci")) {
 				memberTypeStream2 = ClassLoader.class.getResourceAsStream("/database/MemberRedesign-VBF-Teamci.csv");
-			} else {
+			} 
+			else if (environment.contains("team-a")) {
+				memberTypeStream2 = ClassLoader.class.getResourceAsStream("/database/MemberRedesign-team-a.csv");
+			}else {
 				memberTypeStream2 = ClassLoader.class.getResourceAsStream("/database/MemberRedesign-VBF.csv");
 			}
 			memberRedesignVbfTypeReader = new BufferedReader(new InputStreamReader(memberTypeStream2));
