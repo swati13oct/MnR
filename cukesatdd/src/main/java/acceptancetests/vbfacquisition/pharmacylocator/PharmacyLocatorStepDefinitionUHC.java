@@ -72,18 +72,26 @@ public class PharmacyLocatorStepDefinitionUHC {
 	 * @toDo:user navigates to pharmacy search page in UMS Site
 	 */
 	@When("^the user navigates to pharmacy search page in UMS Site$")
-	public void user_views_pharmacy_locator_UMS() {
+	public void user_views_pharmacy_locator_UMS(DataTable planAttributes) {
+		List<DataTableRow> zipAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> zipAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < zipAttributesRow.size(); i++) {
+
+			zipAttributesMap.put(zipAttributesRow.get(i).getCells().get(0),
+					zipAttributesRow.get(i).getCells().get(1));
+		}
+		String planname = zipAttributesMap.get("planname");
+		
 		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		String planType = (String) getLoginScenario().getBean(PharmacySearchCommonConstants.PLAN_TYPE);
-		PharmacySearchPage pharmacySearchPage = acqusitionHomePage
-				.navigateToPharmacyLocator(planType);
+		//String planType = (String) getLoginScenario().getBean(PharmacySearchCommonConstants.PLAN_TYPE);
+		PharmacySearchPage pharmacySearchPage = acqusitionHomePage.navigateToPharmacyLocator();
 
 		if (pharmacySearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
 					pharmacySearchPage);
 			Assert.assertTrue(true);
-			pharmacySearchPage.validateDefaultChooseaPlanSection();
+			pharmacySearchPage.validateDefaultChooseaPlanSection(planname);
 		} else {
 			Assert.fail("Failed to load Pharmacy search page");
 		}

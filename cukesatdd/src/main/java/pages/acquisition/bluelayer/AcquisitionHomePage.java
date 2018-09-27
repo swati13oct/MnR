@@ -728,7 +728,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
         }
 
-        public PharmacySearchPage navigateToPharmacyLocator(String planType) {
+        public PharmacySearchPage navigateToPharmacyLocator() {
 
     		driver.manage().window().maximize();
                /* if(planType.contains("MA"))
