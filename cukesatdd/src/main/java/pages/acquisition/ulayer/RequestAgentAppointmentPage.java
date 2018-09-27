@@ -103,7 +103,7 @@ public class RequestAgentAppointmentPage extends UhcDriver{
 		try {
 			if (requestAppointmentButton.isDisplayed()) {
 				CommonUtility.waitForElementToDisappear(driver, requestAppointmentButton,
-						CommonConstants.TIMEOUT_30);
+						CommonConstants.TIMEOUT_60);
 			}
 		} catch (NoSuchElementException e) {
 			System.out.println("requestAppointmentButton not found");
