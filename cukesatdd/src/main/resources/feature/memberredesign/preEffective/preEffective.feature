@@ -29,3 +29,18 @@ Feature: To test pre-effective functionality
       | GroupMAPD | preeffectiveGroupMAPD | NON LIS       |
       | GroupSSUP | preeffectiveGroupSSUP | NON LIS       |
       | GroupPDP  | preeffectiveGroupPDP  | NON LIS       |
+
+  @regression @regression_preeffective_account @codetransformers
+  Scenario Outline: Verify that a preffective member is able to see the Account settings page
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      | Copay Category | <copayCategory> |
+    And verify that preeffective message is displayed on the home page
+    And the user clicks on Account Profile tab & selects Account Settings from the drop down
+    And user is navigated to Account Settings page
+    And verify that the pre effecctive member can access the account settings page to view security and sign-in preferences
+
+    Examples: 
+      | planType | memberType        | copayCategory |
+      | IndMA    | preeffectiveIndMA | NON LIS       |

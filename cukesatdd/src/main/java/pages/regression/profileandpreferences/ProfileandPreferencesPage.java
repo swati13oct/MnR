@@ -1078,6 +1078,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		validateNew(permanentAddressSection);
+		System.out.println("*** Permananet Address is seen " + permanentAddressSection.isDisplayed());
 
 	}
 
