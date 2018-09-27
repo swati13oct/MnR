@@ -731,13 +731,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
         public PharmacySearchPage navigateToPharmacyLocator() {
 
     		driver.manage().window().maximize();
+    		start("https://www.team-ci1-uhcmedicaresolutions.ose-elr-core.optum.com/health-plans/aarp-pharmacy.html#/Pharmacy-Search-English");
                /* if(planType.contains("MA"))
                         pharmacyNearLink_MA.click();
                 else if(planType.contains("PDP")){
                         pharmacyNearLink.click();                
                 }*/
 
-    		findPharmacyNearYou.click();
+    		/*findPharmacyNearYou.click();
     		
                 for(int i=0;i<10;i++){
                         try {
@@ -748,7 +749,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
                         }
                         if(driver.getCurrentUrl().contains("-pharmacy."))
                                 break;
-                }
+                }*/
+    		
+    		 try {
+                 Thread.sleep(6000);
+         } catch (InterruptedException e) {
+                 // TODO Auto-generated catch block
+                 e.printStackTrace();
+         }
                 if (driver.getTitle().equalsIgnoreCase(
                                 PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE)) {
                         return new PharmacySearchPage(driver);
