@@ -21,11 +21,11 @@ Then the user validates the available pharmacies page in UMS site
 Examples:
 	| zipcode     | distance  | county       |  planName 			               	  			  | planYear 	|
 	| 90210       | 25        | None     	 | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | 2018    	|
-	| 80002       | 10        | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | 2018 		|
-	| 90210       | 2         |   None       | AARP MedicareRx Preferred (PDP)                    | 2018		|
-	| 90210       | 25        | None     	 | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | 2019    	|
-	| 80002       | 10        | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | 2019 		|
-	| 90210       | 2         |   None       | AARP MedicareRx Preferred (PDP)                    | 2019		|
+#	| 80002       | 10        | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | 2018 		|
+#	| 90210       | 2         |   None       | AARP MedicareRx Preferred (PDP)                    | 2018		|
+#	| 90210       | 25        | None     	 | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | 2019    	|
+#	| 80002       | 10        | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | 2019 		|
+#	| 90210       | 2         |   None       | AARP MedicareRx Preferred (PDP)                    | 2019		|
 	
 @LangDropdownSelectorUMS
 Scenario Outline:To verify available pharmacies with language in UMS site
@@ -49,10 +49,10 @@ Then the user should see choose a plan in UMS site
 Examples:
 	| zipcode     | distance  | county       |  planName 			               	  			  | planYear |plantype|languageName|
 	| 90210       | 25        | None         | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | 2018     | MA	  |Spanish|
-	| 80002       | 15        | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | 2018     |MA      |Spanish|
-	| 90210       | 2         |   None       | AARP MedicareRx Preferred (PDP)                    | 2018	 |MA      |Spanish|
-	| 90210       | 25        | None         | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | 2019     | MA	  |Spanish|
-	| 80002       | 15        | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | 2019     |MA      |Spanish|
+#	| 80002       | 15        | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | 2018     |MA      |Spanish|
+#	| 90210       | 2         |   None       | AARP MedicareRx Preferred (PDP)                    | 2018	 |MA      |Spanish|
+#	| 90210       | 25        | None         | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | 2019     | MA	  |Spanish|
+#	| 80002       | 15        | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | 2019     |MA      |Spanish|
 	| 90210       | 2         |   None       | AARP MedicareRx Preferred (PDP)                    | 2019	 |MA      |Spanish|
 
 @pharmacyServicesUMS
