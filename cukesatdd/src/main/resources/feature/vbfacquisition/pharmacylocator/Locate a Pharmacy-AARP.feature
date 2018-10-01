@@ -25,7 +25,7 @@ Examples:
 #	| 90210       | 2         |   None       | AARP MedicareRx Preferred (PDP)                    | 2018		|
 #	| 90210       | 25        | None     	 | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | 2019    	|
 #	| 80002       | 10        | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | 2019 		|
-#	| 90210       | 2         |   None       | AARP MedicareRx Preferred (PDP)                    | 2019		|
+	| 90210       | 2         |   None       | AARP MedicareRx Preferred (PDP)                    | 2019		|
 	
 	
 @availablePharmAARP
@@ -40,7 +40,8 @@ And the user enters following details for pharmacy search in AARP Site
 	| Distance	| <distance>	|
 	| County Name	| <county>	|
 And the user chooses a plan from dropdown in AARP Site
-	| <planName> |
+		| planname | <planName> |
+		| planyear | <planYear> |
 Then the user validates the available pharmacies page in AARP site
 When the user selects a language from dropdown in AARP Site
 	| <languageName> |
@@ -79,6 +80,6 @@ Then the user validates the available pharmacies page in AARP site
 	
 Examples:
 	| zipcode     | distance  | county       	  |  planName 			               	 			   | planYear	| plantype	| pharmacytype			  |servicetype|
-	| 90210       | 25 miles  | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | 2018		|MA			|Standard Network Pharmacy|Open 24 hours|
-	| 90210       | 25 miles  | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | 2019		|MA			|Standard Network Pharmacy|Open 24 hours|
+	| 90210       | 25 miles  | None			      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | 2018		|MA			|Standard Network Pharmacy|Open 24 hours|
+	| 90210       | 25 miles  | None				    | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | 2019		|MA			|Standard Network Pharmacy|Open 24 hours|
 	
