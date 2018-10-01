@@ -676,6 +676,15 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@class='h4 color-blue medium margin-small atdd-profile-planname ng-binding ng-scope']/following-sibling::p[2]")
 	private WebElement memberIdForPlan;
+	
+	@FindBy(xpath=".//*[@id='email']")
+	private WebElement emailsection;
+	
+	@FindBy (xpath =".//*[@id='phone']")
+	private WebElement phoneNumberSection;
+	
+	@FindBy (xpath =".//*[@id='permanenet']")
+	private WebElement permanentAdresSection;
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 
@@ -2208,6 +2217,40 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 		}
 
+	}
+	
+	public void verifyAccountSettingsPreffectivemember() throws Throwable{
+		Thread.sleep(2000);    
+		System.out.println("Now checking Email section for Pre-effective members");
+	    System.out.println("The Email section is dispalyed for preffective members on Account Settings Page ==> " +emailsection.isDisplayed());
+		System.out.println("Now Checking Phone Number Section for Pre-effective members");
+		System.out.println("Phone Number Section is seen for preffective members on Account Settings Page ==> " +phoneNumberSection.isDisplayed());
+		System.out.println("Now Checking Permenant address Section for Pre-effective members");
+		System.out.println("Permanent Address Section is seen on Account Settings Page " +permanentAdresSection.isDisplayed());
+
+	}
+	
+	public static void checkForIPerceptionModel(WebDriver driver) {
+		int counter = 0;
+		do {
+
+			System.out.println("current value of counter: " + counter);
+			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
+
+			if (IPerceptionsFrame.isEmpty()) {
+					try {
+					Thread.sleep(5000);
+				} catch (InterruptedException e) {
+					System.out.println(e.getMessage());
+				}
+				
+			} else {
+				driver.switchTo().frame(IPerceptionsFrame.get(0));
+				driver.findElement(By.className("btn-no")).click();
+				driver.switchTo().defaultContent();
+			}
+			counter++;
+		} while (counter < 2);
 	}
 
 }
