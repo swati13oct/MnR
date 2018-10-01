@@ -36,6 +36,8 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(id = "zipcodeTxt")
 	private WebElement zipcodeField;
 
+	@FindBy(id = "plan-year-label")
+	private WebElement planYeartext;
 	
 	@FindBy(id = "zipcode-button")
 	private WebElement zipcodeSearchButton;
@@ -45,6 +47,9 @@ public class PharmacySearchPage extends UhcDriver {
 
 	@FindBys(value = { @FindBy(xpath = "//select[@id='plan-type']/option") })
 	private List<WebElement> planNamesList;
+	
+	@FindBys(value = { @FindBy(xpath = "//select[@id='plan-year']/option") })
+	private List<WebElement> planYearList;
 	
 	@FindBys(value = { @FindBy(xpath = "//select[@id='lang-select']/option") })
 	private List<WebElement> langList;
@@ -87,6 +92,9 @@ public class PharmacySearchPage extends UhcDriver {
 	
 	@FindBy(xpath = "//select[@id='plan-type']")
 	private WebElement seletPlandropdown;
+	
+	@FindBy(xpath = "//select[@id='plan-type']/option")
+	private List<WebElement> selectPlandropdown;
 
 	@FindBy(id = "pharmacy-preffered")
 	private WebElement preferredPharmacy;
@@ -158,7 +166,7 @@ public class PharmacySearchPage extends UhcDriver {
 		//pharmacyInfo = CommonUtility.readPageData(pharmacyInfoFileName,
 				//CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
 
-		openAndValidate();
+		//openAndValidate();
 	}
 
 	public PharmacySearchPage enterZipDistanceDetails(String zipcode,
@@ -177,31 +185,35 @@ public class PharmacySearchPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		CommonUtility.checkPageIsReady(driver);
-		try{
-		if (countyPopOut.isDisplayed()) {
-			for (WebElement webElement : countyList) {
-				try {
-					Thread.sleep(2000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				if (webElement.getText().contains(county)) {
-					try {
-						Thread.sleep(2000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+		
+		if(!county.equalsIgnoreCase("None"))	{
+				try{
+				if (countyPopOut.isDisplayed()) {
+					for (WebElement webElement : countyList) {
+						try {
+							Thread.sleep(2000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						if (webElement.getText().contains(county)) {
+							try {
+								Thread.sleep(2000);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							WebElement countylink = driver.findElement(By.linkText(webElement.getText()));
+		
+							countylink.click();
+							break;
+						}
 					}
-					WebElement countylink = driver.findElement(By.linkText(webElement.getText()));
-
-					countylink.click();
-					break;
 				}
-			}
-		}
-		}catch(Exception e ){
-			System.out.println("County not exists");
+				}catch(Exception e ){
+					System.out.println("County not exists");
+				}
+				
 		}
 		try {
 			Thread.sleep(5000);
@@ -220,6 +232,15 @@ public class PharmacySearchPage extends UhcDriver {
 		}
 		return null;
 	}
+	
+	public boolean isPlanYear() {
+		
+		if(planYeartext.isDisplayed()){
+				return true;
+		}else{
+			return false;
+		}
+	}
 
 	public PharmacySearchPage selectsPlanName(String planName) {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -227,6 +248,15 @@ public class PharmacySearchPage extends UhcDriver {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		if (driver.getTitle().equalsIgnoreCase(
 				PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE)) {
+			return new PharmacySearchPage(driver);
+		}
+		return null;
+	}
+	
+	public PharmacySearchPage selectsPlanYear(String planYear) {
+			selectFromDropDown(planYearList, planYear);
+			if (driver.getTitle().equalsIgnoreCase(
+			PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE)) {
 			return new PharmacySearchPage(driver);
 		}
 		return null;
@@ -449,16 +479,21 @@ public PharmacySearchPage selectPharmacyandServices(String pharmacytype) {
 	}
 	
 	@SuppressWarnings("deprecation")
-	public void validateDefaultChooseaPlanSection(){
+	public void validateDefaultChooseaPlanSection(String planName){
 		int[] expectedDropdownmiles ={1,2,5,10,15,25};
 		for(int i=0;(i<distanceDropDown.size());i++){
 			System.out.println(distanceDropDown.get(i).getText());
 			Assert.assertTrue("Expected dropdown miles is not available",Integer.parseInt(distanceDropDown.get(i).getText().split(" ")[0])==expectedDropdownmiles[i]);
 		}
 
-		Assert.assertTrue("Select Plan drop down is not disabled", !seletPlandropdown.isEnabled());
+		for (WebElement planOptions : selectPlandropdown) {
+			if (planOptions.getText().equalsIgnoreCase(planName)) {
+			planOptions.click();
+			}
+		}
+		/*Assert.assertTrue("Select Plan drop down is not disabled", !seletPlandropdown.isEnabled());
 		Assert.assertTrue("Preferred Pharmacy is selected by default",!preferredPharmacy.isSelected());
-		Assert.assertTrue("Standard Pharmacy is selected by default",!standardPharmacy.isSelected());
+		Assert.assertTrue("Standard Pharmacy is selected by default",!standardPharmacy.isSelected());*/
 
 		/*for(int i = 0; i<pharmaciesList.size();i++){
 			Assert.assertTrue("Pharmacies List not displayed", pharmaciesList.get(i).isDisplayed());
@@ -468,10 +503,16 @@ public PharmacySearchPage selectPharmacyandServices(String pharmacytype) {
 	
 	@SuppressWarnings("deprecation")
 	public void validateChoosePlanSectionAfterzipcodeSearch(){
-		Assert.assertTrue("Select Plan drop down is not enabled", seletPlandropdown.isEnabled());
+		int[] expectedDropdownmiles ={1,2,5,10,15,25};
+		for(int i=0;(i<distanceDropDown.size());i++){
+		System.out.println(distanceDropDown.get(i).getText());
+		Assert.assertTrue("Expected dropdown miles is not available",Integer.parseInt(distanceDropDown.get(i).getText().split(" ")[0])==expectedDropdownmiles[i]);
+		}
+		
+		/*Assert.assertTrue("Select Plan drop down is not enabled", seletPlandropdown.isEnabled());
 		Assert.assertTrue("Preferred Pharmacy is selected by default",!preferredPharmacy.isSelected());
 		Assert.assertTrue("Standard Pharmacy is selected by default",!standardPharmacy.isSelected());
-
+*/
 		/*for(int i = 0; i<pharmaciesList.size();i++){
 			Assert.assertTrue("Pharmacies List not displayed", pharmaciesList.get(i).isDisplayed());
 			Assert.assertTrue("Check box for "+ pharmaciesList.get(i).getText()+" is not disabled",pharmaciesListCheckbox.get(i).getAttribute("disabled").equals("true"));
