@@ -313,7 +313,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id = "step3DisclaimerVPP")
 	public WebElement step3DisclaimerVPP;
 
-	@FindBy(xpath= ".//*[@id='colhowdoesthiswork_dce']//*[@itemprop='significantLink']/*[@class='cta-button secondary']")
+	@FindBy(xpath= ".//*[@id='colhowdoesthiswork_dce']//*[@class='cta-button secondary'and contains(text(),'Get started')]")
 	public WebElement getStarted;
 
 	@FindBy(id = "zipcode-costs")
@@ -1315,8 +1315,10 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		String brandedCost = costText.getText();
 		step3EditDrugsList.click();
 		System.out.println(brandedCost);
+		CommonUtility.waitForPageLoad(driver,switchNowBtn, 20);
 		JavascriptExecutor js = (JavascriptExecutor)driver;
 		js.executeScript("arguments[0].click();", switchNowBtn);
+		CommonUtility.waitForPageLoad(driver,updateBtn, 20);
 		updateBtn.click();
 		Thread.sleep(6000);
 		navigateToStep3();

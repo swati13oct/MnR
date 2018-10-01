@@ -72,18 +72,26 @@ public class PharmacyLocatorStepDefinitionUHC {
 	 * @toDo:user navigates to pharmacy search page in UMS Site
 	 */
 	@When("^the user navigates to pharmacy search page in UMS Site$")
-	public void user_views_pharmacy_locator_UMS() {
+	public void user_views_pharmacy_locator_UMS(DataTable planAttributes) {
+		List<DataTableRow> zipAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> zipAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < zipAttributesRow.size(); i++) {
+
+			zipAttributesMap.put(zipAttributesRow.get(i).getCells().get(0),
+					zipAttributesRow.get(i).getCells().get(1));
+		}
+		String planname = zipAttributesMap.get("planname");
+		
 		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		String planType = (String) getLoginScenario().getBean(PharmacySearchCommonConstants.PLAN_TYPE);
 		PharmacySearchPage pharmacySearchPage = acqusitionHomePage
-				.navigateToPharmacyLocator(planType);
+				.navigateToPharmacyLocator();
 
 		if (pharmacySearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
 					pharmacySearchPage);
 			Assert.assertTrue(true);
-			pharmacySearchPage.validateDefaultChooseaPlanSection();
+			pharmacySearchPage.validateDefaultChooseaPlanSection(planname);
 		} else {
 			Assert.fail("Failed to load Pharmacy search page");
 		}
@@ -132,22 +140,34 @@ public class PharmacyLocatorStepDefinitionUHC {
 	 */
 	@And("^the user chooses a plan from dropdown in UMS Site$")
 	public void user_chooses_plan_dropdown_UMS(DataTable planAttributes) {
+		List<DataTableRow> zipAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> zipAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < zipAttributesRow.size(); i++) {
 
-		String planName = planAttributes.getGherkinRows().get(0).getCells()
-				.get(0);
+			zipAttributesMap.put(zipAttributesRow.get(i).getCells().get(0),
+					zipAttributesRow.get(i).getCells().get(1));
+		}
+		String planName = zipAttributesMap.get("planname");
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PLAN_NAME, planName);
+		String planYear = zipAttributesMap.get("planyear");
+		
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		Boolean isplanyear=pharmacySearchPage.isPlanYear();
+		if(isplanyear){
+			pharmacySearchPage = pharmacySearchPage.selectsPlanYear(planYear);
+		}
 		pharmacySearchPage = pharmacySearchPage.selectsPlanName(planName);
 
 		if (pharmacySearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
 					pharmacySearchPage);
 			Assert.assertTrue(true);
-			pharmacySearchPage.validatePharmaciesSectionAfterplanSelection();
+			
 		} else {
 			Assert.fail("Failed to load Pharmacy search page");
 		}
+
 
 	}
 

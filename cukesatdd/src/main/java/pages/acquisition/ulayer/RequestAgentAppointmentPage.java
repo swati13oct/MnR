@@ -121,6 +121,7 @@ public class RequestAgentAppointmentPage extends UhcDriver{
 	}
 	
 	public boolean validateRequestApptPage(){
+		CommonUtility.waitForPageLoad(driver, requestAppointmentButton, 20);
 		if(validate(firstName)&&validate(lastName)&&validate(address)&&validate(city)&&
 		validate(state)&&validate(zip)&&validate(phoneField)&&validate(requestAppointmentButton))
 			return true;

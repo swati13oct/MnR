@@ -75,7 +75,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-benefitsoverview-effectivedatelabel")
 	private WebElement effective_Date;
 
-	@FindBy(xpath = "//div[@class='page-header--left']/h1[contains(.,'Benefits Summary')]")
+	@FindBy(xpath = "//div[contains(@class,'benefitsSummary')]//*[contains(text(),'Benefits Summary')]")
 	private WebElement BenefitsSummaryHeader;
 
 	@FindBy(xpath = "//span[contains(text(),'Medical Copays or Coinsurance')]")
@@ -101,7 +101,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-bncsummary-primarycareprvdrheader")
 	private WebElement PrimaryCareProviderHeaderHMO;
 
-	@FindBy(xpath = "//div[@id='benefitsMain']//span[contains(text(),'Out-of-Pocket Maximum')]")
+	@FindBy(xpath = "//div[@id='outOfPocketTile']//span[contains(text(),'Out-of-Pocket Maximum')]")
 	private WebElement OutofPocketMaximum;
 
 	@FindBy(className = "atdd-innetwrk-title")
