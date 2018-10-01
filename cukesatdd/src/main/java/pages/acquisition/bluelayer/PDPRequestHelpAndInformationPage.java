@@ -38,6 +38,7 @@ public class PDPRequestHelpAndInformationPage extends UhcDriver{
 	public PDPEnrollementGuidePage navigatesToPdpEnquiryKit() {
 		CommonUtility.waitForPageLoad(driver, pdpInquiryKitDropdown, 20);
 		pdpInquiryKitDropdown.click();
+		CommonUtility.waitForPageLoad(driver, pdpEnquiryKitLink, 20);
 		pdpEnquiryKitLink.click();
 		String mainwindow=driver.getWindowHandle();
 
@@ -53,7 +54,7 @@ public class PDPRequestHelpAndInformationPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		if(currentUrl().contains("/prescription-drug-plans/request-information/inquirykit.html")){
+		if(currentUrl().contains("prescription-drug-plans/request-information/inquirykit")){
 			return new  PDPEnrollementGuidePage(driver);
 		}
 		return null;
