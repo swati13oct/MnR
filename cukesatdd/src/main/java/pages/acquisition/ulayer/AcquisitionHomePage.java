@@ -687,17 +687,18 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	public PharmacySearchPage navigateToPharmacyLocator() {
 		driver.manage().window().maximize();
-		pharmacyNearLink.click();
-		for(int i=0;i<10;i++){
+		start("https://www.team-ci1-aarpmedicareplans.ose-elr-core.optum.com/health-plans/aarp-pharmacy.html#/Pharmacy-Search-English");
+		/*pharmacyNearLink.click();
+		for(int i=0;i<10;i++){*/
 			try {
 				Thread.sleep(6000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			if(driver.getCurrentUrl().contains("-pharmacy."))
+		/*	if(driver.getCurrentUrl().contains("-pharmacy."))
 				break;
-		}
+		}*/
 		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE)) {
 			return new PharmacySearchPage(driver);
 		}
