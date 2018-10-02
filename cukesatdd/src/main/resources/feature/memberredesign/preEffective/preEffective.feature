@@ -30,7 +30,7 @@ Feature: To test pre-effective functionality
       | GroupSSUP | preeffectiveGroupSSUP | NON LIS       |
       | GroupPDP  | preeffectiveGroupPDP  | NON LIS       |
 
-  @regression @regression_preeffective_account @codetransformers
+  @regression @regression_Pre-Effective_AccountSettings_Page @codetransformers
   Scenario Outline: Verify that a preffective member is able to see the Account settings page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -49,4 +49,4 @@ Feature: To test pre-effective functionality
        | GroupMA   | preeffectiveGroupMA   | NON LIS       |
    #   | GroupMAPD | preeffectiveGroupMAPD | NON LIS       |
   #    | GroupSSUP | preeffectiveGroupSSUP | NON LIS       |
-   #   | GroupPDP  | preeffectiveGroupPDP  | NON LIS       |
+     | GroupPDP  | preeffectiveGroupPDP  | NON LIS       |
