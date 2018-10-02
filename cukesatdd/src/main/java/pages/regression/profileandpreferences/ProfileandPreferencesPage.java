@@ -564,7 +564,8 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='phone']/p")
 	private WebElement homePhoneNumberValue;
 	
-	@FindBy(xpath=".//*[@id='phone']")
+	//@FindBy(xpath=".//*[@id='phone']")
+	@FindBy(xpath=".//*[@id='phone' or @id='phoneCardHeight' ]")
 	private WebElement phoneSection1;
 
 	@FindBy(id = "etype_ARE") // HSID header on EPMP iframe under Email
@@ -680,10 +681,11 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='h4 color-blue medium margin-small atdd-profile-planname ng-binding ng-scope']/following-sibling::p[2]")
 	private WebElement memberIdForPlan;
 	
-	@FindBy(xpath=".//*[@id='email']")
+	//@FindBy(xpath=".//*[@id='email']")
+	@FindBy(xpath= ".//*[@id='emailCardHeight' or @id='email']")
 	private WebElement emailsection;
 	
-	@FindBy (xpath =".//*[@id='phone']")
+	@FindBy (xpath =".//*[@id='phone' or @id='phoneCardHeight']")
 	private WebElement phoneNumberSection;
 	
 	@FindBy (xpath =".//*[@id='permanenet']")
@@ -1096,7 +1098,8 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		System.out.println("*** Permananet Address is seen==> " + permanentAddressSection.isDisplayed());
 
 	}
-
+	
+	
 	public void validatesAddressSection(String memType) {
 		if (memType.equals("AARP")) {
 			validateNew(permanentAddressSection);
@@ -2273,6 +2276,8 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			
 
 }
+	
+
 	/**
 	 * @throws Throwable 
 	 * @toDo : Validates the elements of Phone section

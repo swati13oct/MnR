@@ -195,4 +195,13 @@ public void verify_preffectiev_member_can_access_the_page() throws Throwable {
 	ppp.validatePhonepreffective();
 	ppp.validatepreffectiveemail();
 }
+
+@Given("^verify that the pre effecctive group member can access the account settings page to view security and sign-in preferences$")
+public void verify_preffectiev_group_member_can_access_the_page() throws Throwable {
+	ProfileandPreferencesPage ppp = (ProfileandPreferencesPage) getLoginScenario().getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+	ProfileandPreferencesPage.checkForIPerceptionModel(ppp.driver);
+	ppp.validatepermanentaddress();
+	ppp.validatePhonepreffective();
+	//ppp.validatepreffectiveemail2();
+}
 }
