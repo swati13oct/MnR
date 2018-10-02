@@ -184,13 +184,15 @@ public void userClicksOn_Account_settings() throws Throwable {
 public void userlands_on_Account_Settings_Page() throws Throwable {
 	ProfileandPreferencesPage ppp = (ProfileandPreferencesPage) getLoginScenario().getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);      
 	ProfileandPreferencesPage.checkForIPerceptionModel(ppp.driver);
-	ppp.validatepermanentaddress();
+	ppp.validateprefrencepageURL();
 	
 }
 @Given("^verify that the pre effecctive member can access the account settings page to view security and sign-in preferences$")
-public void verify_preffectiev_member_can_access_the_page() throws InterruptedException {
+public void verify_preffectiev_member_can_access_the_page() throws Throwable {
 	ProfileandPreferencesPage ppp = (ProfileandPreferencesPage) getLoginScenario().getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
 	ProfileandPreferencesPage.checkForIPerceptionModel(ppp.driver);
 	ppp.validatepermanentaddress();
+	ppp.validatePhonepreffective();
+	ppp.validatepreffectiveemail();
 }
 }

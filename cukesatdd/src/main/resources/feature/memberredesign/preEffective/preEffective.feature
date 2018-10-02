@@ -42,5 +42,11 @@ Feature: To test pre-effective functionality
     And verify that the pre effecctive member can access the account settings page to view security and sign-in preferences
 
     Examples: 
-      | planType | memberType        | copayCategory |
-      | IndMA    | preeffectiveIndMA | NON LIS       |
+      | planType | memberType         | copayCategory |
+ #     | IndMA    | preeffectiveIndMA  | NON LIS       |
+ #     | IndMAPD   | preeffectiveIndMAPD   | NON LIS       |
+ #     | IndPDP   | preeffectiveIndPDP | NON LIS       |
+       | GroupMA   | preeffectiveGroupMA   | NON LIS       |
+   #   | GroupMAPD | preeffectiveGroupMAPD | NON LIS       |
+  #    | GroupSSUP | preeffectiveGroupSSUP | NON LIS       |
+   #   | GroupPDP  | preeffectiveGroupPDP  | NON LIS       |
