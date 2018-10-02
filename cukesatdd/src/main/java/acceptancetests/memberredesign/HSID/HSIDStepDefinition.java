@@ -430,7 +430,7 @@ public void isIPerceptionSurveyDisplayed() throws Throwable {
 	 * getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 	 * 
 	 * 
-	 * /* Method#2 on top (at class level) declare this - public WebDriver
+	 * /* Method#2 on top (at class level)  declare this - public WebDriver
 	 * driver ; format will be class object = new class(driver);
 	 * object.method(driver);
 	 */
