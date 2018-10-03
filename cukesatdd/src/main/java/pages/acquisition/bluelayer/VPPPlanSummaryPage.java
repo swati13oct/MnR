@@ -204,7 +204,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(id="label_unsaved_selectedLocation0")
 	private WebElement firstLocation;
 
-	@FindBy(xpath="//button[@class='action-btn']")
+	//@FindBy(xpath="//button[@class='action-btn']")
+	@FindBy(xpath=".//*[@id='skip-to-main-content']/div/div[1]/div[1]/location-result/div/div/div/div[2]/div[2]/div[1]/div/div/div[3]/toggle-saved-provider/button")
 	private WebElement secondSaveBtn;
 
 	@FindBy(xpath="//*[contains(text(),'View Saved')]")
@@ -914,12 +915,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		Physician.click();
 
-		waitforElement(Savebtn);
+		//waitforElement(Savebtn);
 
 		//Savebtn.click();
-		JavascriptExecutor js = (JavascriptExecutor)driver;
-		js.executeScript("arguments[0].click();", Savebtn);
-		firstLocation.click();
+		//JavascriptExecutor js = (JavascriptExecutor)driver;
+		//js.executeScript("arguments[0].click();", Savebtn);
+		//firstLocation.click();
 		secondSaveBtn.click();
 		waitforElement(Viewsavebtn);
 		Viewsavebtn.click();
