@@ -42,7 +42,7 @@ public class ProviderSearchStepDefinitionAARP {
 	/**
 	 * @toDo:user is on AARP medicare acquisition site landing page
 	 */
-	@Given("^the user is on AARP medicare acquisition site landing page$")
+	@Given("^the user is on AARP medicare acquisition site landing page for provider search$")
 	public void the_user_on_aarp_medicaresolutions_Site() {
 		WebDriver wd = getLoginScenario().getWebDriver();
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
@@ -57,7 +57,7 @@ public class ProviderSearchStepDefinitionAARP {
 	/**
 	 * @toDo:
 	 */	
-	@When("^I access the vpp page using below zipcode on aarp site$")
+	@When("^I access the vpp page for provider search using below zipcode on aarp site$")
 	public void I_access_the__vpp_page(DataTable memberAttributes) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = memberAttributes
 				.getGherkinRows();
@@ -79,7 +79,7 @@ public class ProviderSearchStepDefinitionAARP {
 	/**
 	 * @toDo:
 	 */
-	@And("^I click on view plans link on vpp page$")
+	@And("^I click on view plans link on vpp page for provider search$")
 	public void clickOnViewPlanDetails(DataTable attributes){
 		List<DataTableRow> memberAttributesRow = attributes
 				.getGherkinRows();
@@ -103,38 +103,7 @@ public class ProviderSearchStepDefinitionAARP {
 	}
 	
 	
-	/**
-	 * @toDo: user performs plan search using following information
-	 */
-	@When("^the user performs plan search using following information in the AARP site$")
-	public void zipcode_details_in_aarp_site(DataTable givenAttributes) {
-
-		List<DataTableRow> memberAttributesRow = givenAttributes
-				.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
-
-		String zipcode = memberAttributesMap.get("Zip Code");
-		String county = memberAttributesMap.get("County Name");
-		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
-		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
-
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.searchPlans(
-				zipcode, county);
-
-		if (plansummaryPage != null) {
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
-					plansummaryPage);
-		} else {
-			Assert.fail("Error Loading VPP plan summary page");
-		}
-	}
+	
 
 	/**
 	 * @toDo:user Click on Show Plans link 

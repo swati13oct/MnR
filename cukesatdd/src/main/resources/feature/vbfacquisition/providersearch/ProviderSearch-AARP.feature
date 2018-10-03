@@ -2,10 +2,10 @@
 @AcqProviderSearchUlayer
 Feature:1.17-VBF-Acq-To test Provider Search Flow  in AARP site
 Scenario Outline: Verify Provider Search  in AARP site
-Given the user is on AARP medicare acquisition site landing page
-When I access the vpp page using below zipcode on aarp site
+Given the user is on AARP medicare acquisition site landing page for provider search
+When I access the vpp page for provider search using below zipcode on aarp site
 	| Zip Code    | <zipcode>  |
-When I click on view plans link on vpp page
+When I click on view plans link on vpp page for provider search
 	| Plan Type | <plantype> |
 When the user Click on Is my Provider covered link Ulayer
 |PlanName| <planname>|
