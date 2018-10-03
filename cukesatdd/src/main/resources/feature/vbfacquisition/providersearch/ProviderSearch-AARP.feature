@@ -15,9 +15,3 @@ Examples:
 | zipcode |  plantype| planname |               
 #| 80001 | MA      | AARP MedicareComplete SecureHorizons Essential (HMO) |
 | 90210  |  MA      | AARP MedicareComplete SecureHorizons Essential (HMO) |
-
-
-	
-
-
-

@@ -801,9 +801,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {	
 		WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//a[contains(text(),'View plan and drug coverage details')]"));
-			validate(MAmoreDetailsLink);
-			MAmoreDetailsLink.click();
-			System.out.println("View Plan Details Link is clicked for MA plan"+planName);
+CommonUtility.waitForPageLoad(driver, MAmoreDetailsLink, 30);	
+		validate(MAmoreDetailsLink);
+		
+		MAmoreDetailsLink.click();
+		System.out.println("View Plan Details Link is clicked for MA plan"+planName);
 
 
 		} else if (planType.equalsIgnoreCase("PDP")) {

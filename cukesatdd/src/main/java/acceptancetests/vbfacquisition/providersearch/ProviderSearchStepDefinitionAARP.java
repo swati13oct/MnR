@@ -13,11 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
-import pages.vbfacquisition.ulayer.DrugCostEstimatorPage;
-import pages.vbfacquisition.ulayer.PlanDetailsPage;
-import acceptancetests.vbfacquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
+import acceptancetests.vbfacquisition.vpp.VPPCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
@@ -77,7 +75,7 @@ public class ProviderSearchStepDefinitionAARP {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo: click on view plans
 	 */
 	@And("^I click on view plans link on vpp page for provider search$")
 	public void clickOnViewPlanDetails(DataTable attributes){
