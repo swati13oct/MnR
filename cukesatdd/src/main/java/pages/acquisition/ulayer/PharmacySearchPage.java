@@ -18,6 +18,7 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import pages.acquisition.ulayer.PharmacySearchPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
@@ -32,6 +33,9 @@ public class PharmacySearchPage extends UhcDriver {
 
 	@FindBy(id = "zipcodeTxt")
 	private WebElement zipcodeField;
+	
+	@FindBy(id = "plan-year-label")
+	private WebElement planYeartext;
 	
 	@FindBy(id = "zipcode-button")
 	private WebElement searchbtn;;
@@ -74,9 +78,13 @@ public class PharmacySearchPage extends UhcDriver {
 
 	@FindBys(value = { @FindBy(xpath = "//select[@id='distance']/option") })
 	private List<WebElement> distanceDropDown;
+	
 
 	@FindBy(xpath = "//select[@id='plan-type']")
 	private WebElement seletPlandropdown;
+	
+	@FindBy(xpath = "//select[@id='plan-type']/option")
+	private List<WebElement> selectPlandropdown;
 
 	@FindBy(id = "pharmacy-preffered")
 	private WebElement preferredPharmacy;
@@ -195,6 +203,7 @@ public class PharmacySearchPage extends UhcDriver {
 	public PharmacySearchPage enterZipDistanceDetails(String zipcode,
 			String distance, String county) {
 		
+		selectFromDropDown(distanceDropDown, distance);
 		//driver.findElement(By.id("zipcodeTxt")).sendKeys("90210");
 		sendkeys(zipcodeField, zipcode);
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -212,6 +221,7 @@ public class PharmacySearchPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		CommonUtility.checkPageIsReady(driver);
+		if(!county.equalsIgnoreCase("None"))	{
 		try{
 			if (countyPopOut.isDisplayed()) {
 				for (WebElement webElement : countyList) {
@@ -239,13 +249,13 @@ public class PharmacySearchPage extends UhcDriver {
 			System.out.println("County not exists");
 		}
 
-
+		}/*
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 
 		if (driver.getTitle().equalsIgnoreCase(
 				PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE)) {
@@ -274,14 +284,31 @@ public class PharmacySearchPage extends UhcDriver {
 		
 		driver.manage().timeouts().implicitlyWait(5000, TimeUnit.SECONDS);
 		
-		Select select = new Select(planType);	
+		/*Select select = new Select(planType);	
 		select.selectByVisibleText(planName);
-		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);*/
 		return new PharmacySearchPage(driver);
 	}
 	
+
+	public boolean isPlanYear() {
+		
+		if(planYeartext.isDisplayed()){
+				return true;
+		}else{
+			return false;
+		}
+	}
+	
 	public PharmacySearchPage selectsPlanYear(String planYear) {
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		selectFromDropDown(planYearList, planYear);
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE)) {
+			return new PharmacySearchPage(driver);
+		}else
+			return null;
+		
+	
+		/*driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		selectFromDropDown(planYearList, planYear);
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
@@ -295,7 +322,7 @@ public class PharmacySearchPage extends UhcDriver {
 		Select select = new Select(planYearsel);	
 		select.selectByVisibleText(planYear);
 		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
-		return new PharmacySearchPage(driver);
+		return new PharmacySearchPage(driver);*/
 	}
 
 	
@@ -540,16 +567,22 @@ public PharmacyResultPage ValidateShowOnMapResult() {
  }
 
 	@SuppressWarnings("deprecation")
-	public void validateDefaultChooseaPlanSection(){
+	public void validateDefaultChooseaPlanSection(String planName){
 		int[] expectedDropdownmiles ={1,2,5,10,15,25};
 		for(int i=0;(i<distanceDropDown.size());i++){
 			System.out.println(distanceDropDown.get(i).getText());
 			Assert.assertTrue("Expected dropdown miles is not available",Integer.parseInt(distanceDropDown.get(i).getText().split(" ")[0])==expectedDropdownmiles[i]);
 		}
-
+		for (WebElement planOptions : selectPlandropdown) {
+			if (planOptions.getText().equalsIgnoreCase(planName)) {
+			planOptions.click();
+			}
+		}
+		
+/*
 		Assert.assertTrue("Select Plan drop down is not disabled", !seletPlandropdown.isEnabled());
 		Assert.assertTrue("Preferred Pharmacy is selected by default",!preferredPharmacy.isSelected());
-		Assert.assertTrue("Standard Pharmacy is selected by default",!standardPharmacy.isSelected());
+		Assert.assertTrue("Standard Pharmacy is selected by default",!standardPharmacy.isSelected());*/
 
 		/*for(int i = 0; i<pharmaciesList.size();i++){
 			Assert.assertTrue("Pharmacies List not displayed", pharmaciesList.get(i).isDisplayed());
@@ -559,9 +592,9 @@ public PharmacyResultPage ValidateShowOnMapResult() {
 
 	@SuppressWarnings("deprecation")
 	public void validateChoosePlanSectionAfterzipcodeSearch(){
-		Assert.assertTrue("Select Plan drop down is not enabled", seletPlandropdown.isEnabled());
+	/*	Assert.assertTrue("Select Plan drop down is not enabled", seletPlandropdown.isEnabled());
 		Assert.assertTrue("Preferred Pharmacy is selected by default",!preferredPharmacy.isSelected());
-		Assert.assertTrue("Standard Pharmacy is selected by default",!standardPharmacy.isSelected());
+		Assert.assertTrue("Standard Pharmacy is selected by default",!standardPharmacy.isSelected());*/
 
 		/*for(int i = 0; i<pharmaciesList.size();i++){
 			Assert.assertTrue("Pharmacies List not displayed", pharmaciesList.get(i).isDisplayed());
@@ -608,6 +641,7 @@ public PharmacyResultPage ValidateShowOnMapResult() {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		boolean flag = true;
 		System.out.println(pharmacyCount.getText());
 		if(pharmacyCount.getText().equals("") || Integer.parseInt(pharmacyCount.getText())==0)

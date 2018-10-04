@@ -143,7 +143,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='oopOutNetowrk']/div[@class='card-body']//span")
 	private WebElement OUTOFNETWORKValue;
 
-	@FindBy(xpath = ".//div[@id='officeVisitTileAtdd']//span[contains(text(),'Primary care provider:')]/parent::*/following-sibling::span")
+	@FindBy(xpath = "//div[@id='officeVisitTileAtdd']//span[contains(text(),'Primary care provider:')]/parent::*/following-sibling::span")
 	private WebElement pcpValue;
 
 	@FindBy(xpath = "//div[@id='officeVisitTileAtdd']//span[contains(text(),'Specialist:')]/parent::*/following-sibling::span")

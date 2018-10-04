@@ -3,7 +3,10 @@
  */
 package pages.regression.benefitandcoverage;
 
+import java.util.List;
+
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -105,7 +108,17 @@ public class ValueAddedServicepage extends UhcDriver {
 		
 	}
 	
-
+	/**
+	 * @toDo : Validates the vastiles on vas page
+	 */
+	
+	public void vastiles()
+	{
+		
+		validate(driver.findElement(By.xpath("(.//*[@id='servccontroller']/div/section/div/div/div/div)[1]")));
+		validate(driver.findElement(By.xpath("(.//*[@id='servccontroller']/div/section/div/div/div/div)[6]")));
+		
+	}
 	
 	public void validateviewmorelinkexpand() {
 		// TODO Auto-generated method stub
@@ -127,6 +140,11 @@ public class ValueAddedServicepage extends UhcDriver {
 		}
 		validate(disclaimers);
 		disclaimers.click();
+	}
+	
+	public void fedtabledata()
+	{
+		
 	}
 	
 	public void healthlink() 

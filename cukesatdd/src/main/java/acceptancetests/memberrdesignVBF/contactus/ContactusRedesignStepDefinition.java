@@ -1,18 +1,17 @@
 package acceptancetests.memberrdesignVBF.contactus;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.testng.Assert;
 
+import pages.memberrdesignVBF.ContactUsPage;
+import pages.memberrdesignVBF.RallyDashboardPage;
+import pages.memberrdesignVBF.TestHarness;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import pages.memberrdesignVBF.RallyDashboardPage;
-import pages.memberrdesignVBF.TestHarness;
-import pages.memberrdesignVBF.ContactUsPage;
 
-public class ContactusStepDefinition {
+public class ContactusRedesignStepDefinition {
 	/**
 	 * 
 	 */
@@ -42,10 +41,18 @@ public class ContactusStepDefinition {
 		}
 		if (contactUsPage != null)
 			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE, contactUsPage);
-		else
-			Assert.fail("Contact Us page not loaded!!!");
 	}
 
+	/***
+	 * 
+	 */
+	@Then("^user validates Group secure email widget  in redesign contact us page$")
+	public void user_validates_email_widget_func() {
+		ContactUsPage contactusPage = (ContactUsPage) getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+
+		contactusPage.validateEmailWidgetfunctionality();
+
+	}
 
 	/***
 	 * 
@@ -77,5 +84,5 @@ public class ContactusStepDefinition {
 
 		contactusPage.reqCallclickConformation();
 	}
-	
+
 }

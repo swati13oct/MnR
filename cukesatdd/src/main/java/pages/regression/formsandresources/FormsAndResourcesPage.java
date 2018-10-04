@@ -14,9 +14,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
+import pages.regression.claims.ClaimSummarypage;
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
@@ -1020,23 +1023,44 @@ public class FormsAndResourcesPage extends UhcDriver {
                             }
 
 
-                                                                                                public WebElement getpdptexaslogo() {
-                                                                                                                
-                                                                                                                return pdptexaslogo;
-                                                                                                }
+ public WebElement getpdptexaslogo() {                                                                                                                
+return pdptexaslogo;
+}
 
 
-                                                                                                public WebElement getmedicationforms() {
-                                                                                                                // TODO Auto-generated method stub
-                                                                                                                return medicationauthorizationforms;
-                                                                                                }
+ public WebElement getmedicationforms() {
+ // TODO Auto-generated method stub
+return medicationauthorizationforms;
+ }
 
-
-                                                                                                public WebElement getpdptexasdocument() {
-                                                                                                                // TODO Auto-generated method stub
-                                                                                                                return pdptexasdocument;
-                                                                                                } 
-                        
-     
-     
+ public WebElement getpdptexasdocument() {
+ // TODO Auto-generated method stub
+return pdptexasdocument;
+}                         
+                                                                                                
+public void verifyTitleOfPage() {
+System.out.println("Now checking the title of forms and resources page");
+String title = driver.getTitle();
+System.out.println(title);
+ Assert.assertTrue(title.contains("Plan Documents"));
+System.out.println("Assert condition on title of forms and resources page was passed");                                                                                            
+}
+                                                                                                
+public ClaimSummarypage clickonClaimsTab() throws InterruptedException{
+System.out.println("Now clicking on Claims Tab on Forms and Resources Page");
+driver.findElement(By.xpath("//a[contains(text(),'Claims')]")).click();
+System.out.println("Now waiting for 10 seconds");
+try 
+{
+Thread.sleep(10000);
+} 
+catch (InterruptedException e) 
+{
+// TODO Auto-generated catch block
+e.printStackTrace();
+}                                                                                                	
+String title = driver.getTitle();
+System.out.println("Now user is on this page:"+title);    
+return new ClaimSummarypage(driver);                                                                                                	
+}                                                                                                    
 }

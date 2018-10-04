@@ -232,7 +232,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//*[@class='tel ng-binding']")
 	private WebElement RightRail_TFN;
 	
-
+	@FindBy(xpath="//*[@id='togglecurrentYear']/a")
+	private WebElement YearToggle;
 
 	private PageData vppPlanSummary;
 
@@ -530,9 +531,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				wait.until(ExpectedConditions.elementToBeClickable(medsupplans)).click();
 			}	
 		}
-		if(toggleplanYear!=null)
-			toggleplanYear.click();
-		return new VPPPlanSummaryPage(driver, planType);
+if(validate(toggleplanYear))
+			toggleplanYear.click();		return new VPPPlanSummaryPage(driver, planType);
 	}
 
 	private JSONObject formJsonObject(PageData vppPlanSummary) {
@@ -913,11 +913,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		Physician.click();
 
-		waitforElement(Savebtn);
+		//waitforElement(Savebtn);
 
 		//Savebtn.click();
-		JavascriptExecutor js = (JavascriptExecutor)driver;
-		js.executeScript("arguments[0].click();", Savebtn);
+		//JavascriptExecutor js = (JavascriptExecutor)driver;
+		//js.executeScript("arguments[0].click();", Savebtn);
+		//firstLocation.click();
+		secondSaveBtn.click();
 		firstLocation.click();
 		secondSaveBtn.click();
 		waitforElement(Viewsavebtn);
@@ -1468,6 +1470,14 @@ public String EnrollmentValidation(String PlanName) {
 		
 		try {
 			Thread.sleep(5000);
+			try {
+			if(YearToggle.getText().contains("View 2019 Plans"))
+				YearToggle.click();
+			Thread.sleep(5000);
+			}catch(Exception e)
+			{
+				System.out.println("Toggle Not found");
+			}
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1485,11 +1495,11 @@ public String EnrollmentValidation(String PlanName) {
 			EnrollmentButton.click();
 		System.out.println("Enrollment Button present and clicked");
 		return Enrollment;
-		}
+}
 		catch(Exception e)
 		{
 			jse.executeScript("window.scrollBy(0,800)", "");
-			WebElement EnrollmentButton = driver.findElement(By.xpath("(//*[@class='enrollment']/div[@class='swiper-content ng-scope'])[8]/a/span"));
+			WebElement EnrollmentButton = driver.findElement(By.xpath("(//*[@class='module-plan-overview module swiper-slide ng-scope'])[9]//div[@class='enrollment']//a/span"));
 			String Enrollment = EnrollmentButton.getText();
 			if(EnrollmentButton.isDisplayed())
 				EnrollmentButton.click();
@@ -1497,8 +1507,7 @@ public String EnrollmentValidation(String PlanName) {
 			return Enrollment;
 		}
 		
-		
-	}
+			}
 
 
 	public AepVppPlanSummaryPage validate_aepPlanYearLinks(String currentYear, String nextYear) {

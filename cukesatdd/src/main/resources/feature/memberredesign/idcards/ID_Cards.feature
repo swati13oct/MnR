@@ -19,7 +19,7 @@ Feature: V1.1To This test scenario is to validate that ID card is accessible for
       | Coverage Status | <coverageStatus> |
 
     Examples: 
-      | plantype | memberType   | medicalPlan                                       | memberId     | memberName       | dob                         | covergaeStart | coverageStatus |
-      | MAPD     | IDCardmember | AARP MedicareComplete SecureHorizons Plan 3 (HMO) | 006443318-01 | Cbecabecf Dcafda | Subscriber - DOB 10/28/1933 | 01/01/18      | Active         |
-      | PDP      | IDCardmember | AARP MedicareRx Preferred (PDP)                   |   0019185151 | Fdcfd Cbfddec    | Subscriber - DOB 10/11/1934 | 01/01/06      | Active         |
-      | MA       | IDCardmember | UnitedHealthcare Group Medicare Advantage (HMO)   | 004244997-01 | Ffbeedf Ebcefce  | Subscriber - DOB 12/21/1934 | 01/01/18      | Active         |
+      | plantype | memberType   | medicalPlan                                                    | memberId     | memberName       | dob                         | covergaeStart | coverageStatus |
+      | MAPD     | IDCardmember | UnitedHealthcare MedicareComplete Choice Plan 1 (Regional PPO) | 858720673-00 | Abcfda Adfa | Subscriber - DOB 04/11/1934 | 01/01/18      | Active         |
+      | PDP      | IDCardmember | AARP MedicareRx Preferred (PDP)                                |   0019185151 | Fdcfd Cbfddec    | Subscriber - DOB 10/11/1934 | 01/01/06      | Active         |
+      | MA       | IDCardmember | AARP MedicareComplete Essential (HMO)               			 |  949014883-00 | Adad Fafcdcf  | Subscriber - DOB 09/05/1947 | 01/01/18      | Active         |

@@ -39,7 +39,6 @@ public class ContactUsUmsPage extends UhcDriver{
 		validate(privacyPolicyLink);
 		privacyPolicyLink.click();
 		validate(privacyPolicyLink);
-		
 		if(driver.getCurrentUrl().contains("privacy_policy")){
 			return new PrivacyPolicyUmsPage(driver);
 		}

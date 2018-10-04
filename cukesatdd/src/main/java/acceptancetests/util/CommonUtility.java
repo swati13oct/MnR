@@ -182,7 +182,13 @@ public class CommonUtility {
 
 		WebDriver wd = mrScenario.getWebDriverNew();
 		wd.get(completeDateUrl);
-		//wd.quit();
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		wd.quit();
 	}
 
 	public static void changePartDTime(MRScenario mrScenario, String date) {
@@ -214,7 +220,13 @@ public class CommonUtility {
 
 		WebDriver wd = mrScenario.getWebDriverNew();
 		wd.get(completeDateUrl);
-		//wd.quit();
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		wd.quit();
 	}
 
 	public static void resetMRRestTime(MRScenario mrScenario) {
@@ -222,7 +234,13 @@ public class CommonUtility {
 		String completeDateUrl = MRREST_TIME_ADMIN_URL + dateURL;
 		WebDriver wd = mrScenario.getWebDriverNew();
 		wd.get(completeDateUrl);
-		//wd.quit();
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		wd.quit();
 	}
 
 	public static void resetPartDTime(MRScenario mrScenario) {
@@ -230,7 +248,13 @@ public class CommonUtility {
 		String completeDateUrl = PARTD_TIME_ADMIN_URL + dateURL;
 		WebDriver wd = mrScenario.getWebDriverNew();
 		wd.get(completeDateUrl);
-		//wd.quit();
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		wd.quit();
 
 	}
 
@@ -285,7 +309,7 @@ public class CommonUtility {
 			driver.findElement(By.id("tobederegisteruser")).click();
 			driver.findElement(By.id("tobederegisteruser")).sendKeys(username);
 			driver.findElement(By.id("tobederegisteruser")).submit();
-			//driver.quit();
+			driver.quit();
 		}
 		if (System.getProperty("environment").equalsIgnoreCase("stage")) {
 			WebDriver driver = mrScenario.getWebDriverNew();
@@ -293,7 +317,7 @@ public class CommonUtility {
 			driver.findElement(By.id("tobederegisteruser")).click();
 			driver.findElement(By.id("tobederegisteruser")).sendKeys(username);
 			driver.findElement(By.id("tobederegisteruser")).submit();
-			//driver.quit();
+			driver.quit();
 		}
 		if (System.getProperty("environment").equalsIgnoreCase("test-a")) {
 			WebDriver driver = mrScenario.getWebDriverNew();
@@ -301,7 +325,7 @@ public class CommonUtility {
 			driver.findElement(By.id("tobederegisteruser")).click();
 			driver.findElement(By.id("tobederegisteruser")).sendKeys(username);
 			driver.findElement(By.id("tobederegisteruser")).submit();
-			//driver.quit();
+			driver.quit();
 		}
 		if (System.getProperty("environment").equalsIgnoreCase("test-b")) {
 			WebDriver driver = mrScenario.getWebDriverNew();
@@ -309,7 +333,7 @@ public class CommonUtility {
 			driver.findElement(By.id("tobederegisteruser")).click();
 			driver.findElement(By.id("tobederegisteruser")).sendKeys(username);
 			driver.findElement(By.id("tobederegisteruser")).submit();
-			//driver.quit();
+			driver.quit();
 		}
 
 	}
@@ -381,7 +405,13 @@ public class CommonUtility {
 			} catch (Exception e) {
 				System.out.println("ERROR creating version text file");
 			}
-			//wd.quit();
+			try {
+				Thread.sleep(4000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			wd.quit();
 		}
 	}
 
@@ -402,7 +432,7 @@ public class CommonUtility {
 			}
 
 		} catch (Exception e) {
-			Assert.fail("Not able to locate this element -- " + element + " on page");
+			System.out.println("Not able to locate this element -- " + element + " on page");
 			System.out.println(e.getMessage());
 		}
 

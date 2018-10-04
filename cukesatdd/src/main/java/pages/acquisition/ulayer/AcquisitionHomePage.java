@@ -105,6 +105,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[@id='subnav_4']/div/div/div[2]/div/span[2]/a")
 	public static WebElement registerherelink;
+	
+	@FindBy(xpath = "//div[@class='overview-main']/h2")
+	private WebElement vppTop;
 
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
 	private static String AARP_ACQISITION_OFFLINE_PAGE_URL = MRConstants.AARP_URL_OFFLINE;
@@ -183,11 +186,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validate(navigationSectionOurPlansLink);
 		validate(navigationSectionMedicareEducationLink);
 		validate(navigationSectionEnterSearch);
-		//validate(getStartedButton);
+		validate(getStartedButton);
 
 		validate(zipCodeField);
 		validate(viewPlansButton);
-		//validate(po7Link);
+		validate(po7Link);
 
 		validate(footerAboutUsLink);
 		validate(footerContactUsLink);
@@ -219,7 +222,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		} catch (Exception e) {
 			System.out.println("county box not found");
 		}
-		
+		CommonUtility.waitForPageLoad(driver, vppTop, 30);
+		validate(vppTop);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
 		}
@@ -687,17 +691,18 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	public PharmacySearchPage navigateToPharmacyLocator() {
 		driver.manage().window().maximize();
-		pharmacyNearLink.click();
-		for(int i=0;i<10;i++){
+		start("https://www.team-ci1-aarpmedicareplans.ose-elr-core.optum.com/health-plans/aarp-pharmacy.html#/Pharmacy-Search-English");
+		/*pharmacyNearLink.click();
+		for(int i=0;i<10;i++){*/
 			try {
 				Thread.sleep(6000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			if(driver.getCurrentUrl().contains("-pharmacy."))
+		/*	if(driver.getCurrentUrl().contains("-pharmacy."))
 				break;
-		}
+		}*/
 		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE)) {
 			return new PharmacySearchPage(driver);
 		}

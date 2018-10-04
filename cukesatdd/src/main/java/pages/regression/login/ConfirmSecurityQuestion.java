@@ -11,6 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 
@@ -19,6 +20,16 @@ public class ConfirmSecurityQuestion extends UhcDriver {
 	
 	@FindBy(how = How.CLASS_NAME, using = "rememberThisDevice")
 	private WebElement rememberThisDeviceSection;
+	
+	@FindBy(id = "new-email")
+    private WebElement NewEmailTxtBox;
+
+    @FindBy(id = "new-email-confirm")
+    private WebElement ConfirmNewEmailTxtBox;
+    
+    @FindBy(xpath = "//*[@id='email-modal-form']//button")
+    private WebElement NewEmailContinueBtn;
+
 	
 	@FindBy(id="continueSubmitButton")
 	private WebElement continueSubmitButton;
@@ -75,8 +86,23 @@ public class ConfirmSecurityQuestion extends UhcDriver {
 		System.out.println("question answered");
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", continueSubmitButton);
-
-
 	}
+	
+	{
+	try{
+        if(validate(NewEmailTxtBox)){
+        NewEmailTxtBox.sendKeys("uhcmnrportals@gmail.com");
+        ConfirmNewEmailTxtBox.sendKeys("uhcmnrportals@gmail.com");
+        System.out.println("@@@@@@@@@@@@ Enter New Email Page Displayed for ULayer Member@@@@@@@@@@@@");
+        NewEmailContinueBtn.click();
+        Thread.sleep(3000);
+        CommonUtility.checkPageIsReady(driver);
+        }
+ }
+ catch (Exception e) {
+        System.out.println("New Email Page NOT Present");
+ }
 
+
+}
 }

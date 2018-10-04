@@ -128,6 +128,7 @@ public void user_click_on_SSO_link_generated_on_the_page() throws Throwable {
 @Then("^user should be navigated to home page of rally dashboard$")
 public void user_should_be_navigated_to_home_page_of_rally_dashboard() throws Throwable {
 	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+	AccountHomePage.checkForIPerceptionModel(accountHomePage.driver);
 	accountHomePage.verifyPageTitle();	
 	Thread.sleep(2000);
 	}
@@ -135,6 +136,7 @@ public void user_should_be_navigated_to_home_page_of_rally_dashboard() throws Th
 @And("^user clicks on account setting link$")
 public void user_clicks_on_account_setting_link() throws Throwable {
 	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+	AccountHomePage.checkForIPerceptionModel(accountHomePage.driver);
 	ProfileandPreferencesPage profilePageHsid = accountHomePage.navigateDirectToProfilePageHsid();
 
 	if (profilePageHsid!= null) {
@@ -153,9 +155,29 @@ public void user_clicks_on_account_setting_link() throws Throwable {
 public void security_and_password_reset_link_should_not_be_visible() throws Throwable {
 	ProfileandPreferencesPage profilePageHsid = (ProfileandPreferencesPage) getLoginScenario()
 			.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE_HSID);
+	ProfileandPreferencesPage.checkModelPopup(profilePageHsid.driver);
 	profilePageHsid.validateHealthSafePasswordLinkNOTPresent();
 	System.out.println("Health Safe Password Link was not present as expected");
 	profilePageHsid.validateHealthSafeAccountLinkNOTPresent();
 	System.out.println("Health Safe Account Link was not present as expected");
+}
+/**
+ * This methods quits the web driver and flushes all saved beans.
+ * Essentially a destructor.
+ */
+@After
+public void tearDown() {
+WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+if (wd != null) {
+	
+	try {
+		Thread.sleep(4000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+    wd.quit();
+}
+getLoginScenario().flushBeans();
 }
 }
