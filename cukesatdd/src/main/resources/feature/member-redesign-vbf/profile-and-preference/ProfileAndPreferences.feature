@@ -24,7 +24,7 @@ Feature: 1.13-VBF-MemRedesign-To test My Profile & Preferences and Go Green flow
       | memberType  | friendname | favcolor | phonenumber | 
      | AARPMapdIndEPMP | name1      | color1   | number1     |
       
-  @smokeTest_GoGreenEPMP 
+  @smokeTest_GoGreenEPMP @rallyDashboard @testharness
   Scenario Outline: To verify Edit preferences section for Go Green
     Given I am a authenticated member on the member redesign site for Direct Login
       | Member Type | <memberType> |
@@ -66,7 +66,7 @@ Feature: 1.13-VBF-MemRedesign-To test My Profile & Preferences and Go Green flow
       # | UhcMapdInd     |name1      | color1   | number1     |
       | AARPMapdNonEPMP | name1      | color1   | number1     |
 
-  @smokeTest_GoGreen @rallyDashboard @testharness
+  @smokeTest_GoGreen
   Scenario Outline: To verify Go Green page
     Given I am a authenticated member on the member redesign site for Direct Login
       | Member Type | <memberType> |
