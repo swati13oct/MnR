@@ -133,11 +133,13 @@ public class PDPEnrollementGuidePage extends UhcDriver{
 		String zipCode = personalAttributesMap.get("Zip Code");
 		String dayTimePhNumber = personalAttributesMap.get("Daytime phone number");
 		
-		if(driver.findElement(By.xpath(".//*[@id='planGuideInformation']/div[2]")).getText().contains(planGuide))
+		if(driver.findElement(By.xpath(".//*[@id='planGuideInformation']/div[2]")).getText().contains(planGuide)){
+			CommonUtility.waitForPageLoad(driver, planGuide1, 20);
 			planGuide1.click();
-		else
+		}else{
+			CommonUtility.waitForPageLoad(driver, planGuide2, 20);
 			planGuide2.click();
-			
+		}
 		sendkeys(firstNameField, firstName);
 		sendkeys(lastNameField, lastName);
 		sendkeys(birthDateField, dob);

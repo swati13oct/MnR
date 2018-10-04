@@ -56,7 +56,9 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 	
 	public RequestAgentAppointmentPage navigateToAgentAppointmentRequest()
 	{
+		CommonUtility.waitForPageLoad(driver, requestAgentApptDropdown, 50);
 		requestAgentApptDropdown.click();
+		CommonUtility.waitForPageLoad(driver, ma_requestAgentAppointmentLink, 50);
 		ma_requestAgentAppointmentLink.click();
 		
 		String mainwindow=driver.getWindowHandle();
@@ -89,21 +91,23 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 	}
 	
 	public boolean validateHelpandInfoPage(){
-		CommonUtility.waitForPageLoad(driver, requestAgentApptDropdown, 20);
+		CommonUtility.waitForPageLoad(driver, requestAgentApptDropdown, 50);
 		if(!validate(requestAgentApptDropdown)&&!validate(communityMeetingDropdown))
 			return false;
 		return true;
 	}
 	
 	public boolean validateUhcLink(){
-		if(validate(communityMeetingDropdown)&&communityMeetingDropdown.getText().contains("Find UnitedHealthcare in Your Community"))
+		CommonUtility.waitForPageLoad(driver, communityMeetingDropdown, 50);
+		if(validate(communityMeetingDropdown)&&communityMeetingDropdown.getText().contains("Community"))
 			return true;
 		return false;
 	}
 	
 	public PDPEnrollementGuidePage navigatesToPdpEnquiryKit() {
-		CommonUtility.waitForPageLoad(driver, pdpInquityDropdown, 20);
+		CommonUtility.waitForPageLoad(driver, pdpInquityDropdown, 50);
 		pdpInquityDropdown.click();
+		CommonUtility.waitForPageLoad(driver, pdpEnquiryKitLink, 50);
 		pdpEnquiryKitLink.click();
 		String mainwindow=driver.getWindowHandle();
 
