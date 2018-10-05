@@ -1477,6 +1477,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		 * driver.get(NewDCEUrl);
 		 */
 		driver.manage().window().maximize();
+		CommonUtility.waitForPageLoad(driver, getStarted, 20);
 		getStarted.click();
 
 		Thread.sleep(5000);

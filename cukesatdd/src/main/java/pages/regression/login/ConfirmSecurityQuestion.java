@@ -35,6 +35,9 @@ public class ConfirmSecurityQuestion extends UhcDriver {
 	private WebElement continueSubmitButton;
 	
 
+	@FindBy(xpath = "//*[@id='authQuestionContent']")
+	private WebElement AuthQuestion;
+	
     public ConfirmSecurityQuestion(WebDriver driver) {
 	super(driver);
 	PageFactory.initElements(driver, this);
@@ -51,7 +54,7 @@ public class ConfirmSecurityQuestion extends UhcDriver {
     public void openAndValidate() {
 	
 	WebDriverWait wait = new WebDriverWait(driver,40);
-	wait.until(ExpectedConditions.visibilityOf(rememberThisDeviceSection));
+	wait.until(ExpectedConditions.visibilityOf(AuthQuestion));
     }
 
     

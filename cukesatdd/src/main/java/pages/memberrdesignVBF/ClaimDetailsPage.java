@@ -30,6 +30,10 @@ public class ClaimDetailsPage extends UhcDriver {
 	
 	@FindBy(xpath = "//div[@class='claimDetTableMainSection']//div[@class='card-body']//div/p[contains(text(),'$')]")
 	public List<WebElement> claimTableValues;
+	
+	@FindBy(xpath = "//*[@id='numDays1']/span[2]")
+	private WebElement noclaims;
+	
 
 	public ClaimDetailsPage(WebDriver driver) {
 		super(driver);
@@ -48,18 +52,23 @@ public class ClaimDetailsPage extends UhcDriver {
 	 */
 	@SuppressWarnings("deprecation")
 	public void validateClaimsTableInDetailsPage() {
-		CommonUtility.waitForPageLoadNew(driver, claimDetTableMainSection, 60);
-		Assert.assertTrue(claimDetTableMainSection.isDisplayed());
-		int columSize = claimTableValues.size();
-		for (int columnNum = 1; columnNum < columSize; columnNum++) {
-			String input = claimTableValues.get(columnNum).getText();
-			Pattern pattern = Pattern.compile("^[-]?\\$\\d+.*\\.\\d{2}$");
-			if (pattern.matcher(input).matches()) {
-				Assert.assertTrue("value exists in column - " + columnNum, true);
-			} else {
-				throw new IllegalArgumentException("Invalid String");
+		if(noclaims.getText().contains("0")){
+			Assert.assertTrue("There are no claims for this time period and therefore no table is there",true);
+		}else{
+			CommonUtility.waitForPageLoadNew(driver, claimDetTableMainSection, 60);
+			Assert.assertTrue(claimDetTableMainSection.isDisplayed());
+			int columSize = claimTableValues.size();
+			for (int columnNum = 1; columnNum < columSize; columnNum++) {
+				String input = claimTableValues.get(columnNum).getText();
+				Pattern pattern = Pattern.compile("^[-]?\\$\\d+.*\\.\\d{2}$");
+				if (pattern.matcher(input).matches()) {
+					Assert.assertTrue("value exists in column - " + columnNum, true);
+				} else {
+					throw new IllegalArgumentException("Invalid String");
+				}
 			}
 		}
+	
 	}
 
 	/***
@@ -67,11 +76,15 @@ public class ClaimDetailsPage extends UhcDriver {
 	 */
 	@SuppressWarnings("deprecation")
 	public void validateClaimsTotalInDetailsPage() {
-		validateNew(claimstotalTable);
-		if (claimstotalTable.isDisplayed()) {
-			Assert.assertTrue(true);
-		} else {
-			Assert.assertTrue("Claims Total is not present in Claims Details Page", false);
+		if(noclaims.getText().contains("0")){
+			Assert.assertTrue("There are no claims for this time period and therefore no table is there",true);
+		}else{
+			validateNew(claimstotalTable);
+			if (claimstotalTable.isDisplayed()) {
+				Assert.assertTrue(true);
+			} else {
+				Assert.assertTrue("Claims Total is not present in Claims Details Page", false);
+			}
 		}
 
 	}
