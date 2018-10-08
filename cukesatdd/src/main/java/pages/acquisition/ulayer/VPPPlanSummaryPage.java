@@ -268,7 +268,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 
 	public VPPPlanSummaryPage viewPlanSummary(String planType) {
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	WebDriverWait wait = new WebDriverWait(driver, 10000);
 
 		try {
 			Thread.sleep(5000);
