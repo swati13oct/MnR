@@ -14,4 +14,4 @@ Then Verify X out of Y provider covered information is displayed on Plan Summary
 |PlanName| <planname>|
 Examples:
 | zipcode | county             | plantype |   planname|                
-| 90210   | None | MA 		|AARP MedicareComplete SecureHorizons Plan 2 (HMO)|
+| 90210   | None | MA 		|AARP MedicareComplete SecureHorizons Essential (HMO)|
