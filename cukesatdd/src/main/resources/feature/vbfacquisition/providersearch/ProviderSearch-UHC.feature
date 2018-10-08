@@ -15,4 +15,4 @@ When the user Click on Show Plans link
  |PlanName| <planname>|
  Examples:
 | zipcode | county             | plantype |   planname|                
-| 90210   | None | MA 		|AARP MedicareComplete SecureHorizons Plan 2 (HMO)|
+| 90210   | None | MA 		|AARP MedicareComplete SecureHorizons Essential (HMO)|
