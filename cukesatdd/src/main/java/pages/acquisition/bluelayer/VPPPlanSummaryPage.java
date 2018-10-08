@@ -923,8 +923,8 @@ if(validate(toggleplanYear))
 		//firstLocation.click();
 		//secondSaveBtn.click();
 	//	firstLocation.click();
-		secondSaveBtn.click();
-		firstLocation.click();
+		//secondSaveBtn.click();
+		//firstLocation.click();
 		secondSaveBtn.click();
 		waitforElement(Viewsavebtn);
 		Viewsavebtn.click();
