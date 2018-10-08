@@ -11,7 +11,6 @@ import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import junit.framework.Assert;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.regression.claims.ClaimSummarypage;
@@ -184,19 +183,25 @@ public void userClicksOn_Account_settings() throws Throwable {
 @Given("^user is navigated to Account Settings page$")
 public void userlands_on_Account_Settings_Page() throws Throwable {
 	ProfileandPreferencesPage ppp = (ProfileandPreferencesPage) getLoginScenario().getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);      
-	ppp.validatepermanentaddress();
+	ProfileandPreferencesPage.checkForIPerceptionModel(ppp.driver);
+	ppp.validateprefrencepageURL();
 	
 }
 @Given("^verify that the pre effecctive member can access the account settings page to view security and sign-in preferences$")
-public void verify_preffectiev_member_can_access_the_page() throws InterruptedException 
-{
-    Thread.sleep(2000);  
-    System.out.println("Now checking Email section for Pre-effective members");
-    System.out.println("The Email section ");
-	System.out.println("Now Checking Phone Number Section for Pre-effective members");
-	System.out.println("Phone Number Section is seen");
-	System.out.println("Now Checking Permenant address Section for Pre-effective members");
-	System.out.println("Phone Number Section is seen");
-	
+public void verify_preffectiev_member_can_access_the_page() throws Throwable {
+	ProfileandPreferencesPage ppp = (ProfileandPreferencesPage) getLoginScenario().getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+	ProfileandPreferencesPage.checkForIPerceptionModel(ppp.driver);
+	ppp.validatepermanentaddress();
+	ppp.validatePhonepreffective();
+	ppp.validatepreffectiveemail();
+}
+
+@Given("^verify that the pre effecctive group member can access the account settings page to view security and sign-in preferences$")
+public void verify_preffectiev_group_member_can_access_the_page() throws Throwable {
+	ProfileandPreferencesPage ppp = (ProfileandPreferencesPage) getLoginScenario().getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+	ProfileandPreferencesPage.checkForIPerceptionModel(ppp.driver);
+	ppp.validatepermanentaddress();
+	ppp.validatePhonepreffective();
+	//ppp.validatepreffectiveemail2();
 }
 }

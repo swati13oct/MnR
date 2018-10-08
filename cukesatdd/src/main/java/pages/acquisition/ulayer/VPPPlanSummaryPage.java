@@ -347,7 +347,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 					WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/following::a[contains(text(),'Is my provider covered')]"));
 					System.out.println(ProviderSearchLink.getText());
 					ProviderSearchLink.click();
-
+					break;
 					
 				}
 			}
@@ -391,11 +391,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		Physician.click();
 
-		waitforElement(Savebtn);
+		/*waitforElement(Savebtn);
 			
 		JavascriptExecutor js = (JavascriptExecutor)driver;
-		js.executeScript("arguments[0].click();", Savebtn);
-		firstLocation.click();
+		js.executeScript("arguments[0].click();", Savebtn);*/
+//		firstLocation.click();*/
 		secondSaveBtn.click();
 		waitforElement(Viewsavebtn);
 		
@@ -800,10 +800,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {	
 		WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//a[contains(text(),'View plan and drug coverage details')]"));
-		CommonUtility.waitForPageLoad(driver, MAmoreDetailsLink, 20);	
+CommonUtility.waitForPageLoad(driver, MAmoreDetailsLink, 30);	
 		validate(MAmoreDetailsLink);
-			((JavascriptExecutor)driver).executeScript("arguments[0].click();", MAmoreDetailsLink);
-			System.out.println("View Plan Details Link is clicked for MA plan"+planName);
+		
+		MAmoreDetailsLink.click();
+		System.out.println("View Plan Details Link is clicked for MA plan"+planName);
 
 
 		} else if (planType.equalsIgnoreCase("PDP")) {

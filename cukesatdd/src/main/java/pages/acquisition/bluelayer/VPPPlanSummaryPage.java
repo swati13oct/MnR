@@ -531,9 +531,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				wait.until(ExpectedConditions.elementToBeClickable(medsupplans)).click();
 			}	
 		}
-		if(validate(toggleplanYear))
-			toggleplanYear.click();
-		return new VPPPlanSummaryPage(driver, planType);
+if(validate(toggleplanYear))
+			toggleplanYear.click();		return new VPPPlanSummaryPage(driver, planType);
 	}
 
 	private JSONObject formJsonObject(PageData vppPlanSummary) {
@@ -914,11 +913,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		Physician.click();
 
-		waitforElement(Savebtn);
+		//waitforElement(Savebtn);
 
 		//Savebtn.click();
-		JavascriptExecutor js = (JavascriptExecutor)driver;
-		js.executeScript("arguments[0].click();", Savebtn);
+		//JavascriptExecutor js = (JavascriptExecutor)driver;
+		//js.executeScript("arguments[0].click();", Savebtn);
+		//firstLocation.click();
+		secondSaveBtn.click();
 		firstLocation.click();
 		secondSaveBtn.click();
 		waitforElement(Viewsavebtn);
@@ -1494,7 +1495,7 @@ public String EnrollmentValidation(String PlanName) {
 			EnrollmentButton.click();
 		System.out.println("Enrollment Button present and clicked");
 		return Enrollment;
-		}
+}
 		catch(Exception e)
 		{
 			jse.executeScript("window.scrollBy(0,800)", "");
@@ -1506,8 +1507,7 @@ public String EnrollmentValidation(String PlanName) {
 			return Enrollment;
 		}
 		
-		
-	}
+			}
 
 
 	public AepVppPlanSummaryPage validate_aepPlanYearLinks(String currentYear, String nextYear) {

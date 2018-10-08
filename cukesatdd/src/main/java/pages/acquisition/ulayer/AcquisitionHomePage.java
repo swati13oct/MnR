@@ -105,6 +105,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[@id='subnav_4']/div/div/div[2]/div/span[2]/a")
 	public static WebElement registerherelink;
+	
+	@FindBy(xpath = "//div[@class='overview-main']/h2")
+	private WebElement vppTop;
 
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
 	private static String AARP_ACQISITION_OFFLINE_PAGE_URL = MRConstants.AARP_URL_OFFLINE;
@@ -219,7 +222,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		} catch (Exception e) {
 			System.out.println("county box not found");
 		}
-		
+		CommonUtility.waitForPageLoad(driver, vppTop, 30);
+		validate(vppTop);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
 		}

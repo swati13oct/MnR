@@ -20,7 +20,7 @@ Feature: 1.02-VBF-MemRedesign-To test claim functionality
 #    And the user validates the EOB section based on domain in redesigned site
 #     | Domain | <domain> |
     And the user validates the DownloadMyData section in redesigned site
-    And I navigate to the Claim Details page in AARP site
+#And I navigate to the Claim Details page in AARP site
     Then I validate the Claims Table in claims details page in AARP site
     And I validate the Claims Total in claims details page in AARP site
 

@@ -1,6 +1,6 @@
 Feature: To test pre-effective functionality
 
-  @regression @regression_preeffective @codetransformers
+  @regression  @codetransformers
   Scenario Outline: Verify that correct links and messages are displayed on Dashboard and Secondary Pages for pre-effective members.
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -30,7 +30,7 @@ Feature: To test pre-effective functionality
       | GroupSSUP | preeffectiveGroupSSUP | NON LIS       |
       | GroupPDP  | preeffectiveGroupPDP  | NON LIS       |
 
-  @regression @regression_preeffective_account @codetransformers
+  @regression @regression_Pre-Effective_AccountSettings_Page @codetransformers
   Scenario Outline: Verify that a preffective member is able to see the Account settings page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -42,5 +42,12 @@ Feature: To test pre-effective functionality
     And verify that the pre effecctive member can access the account settings page to view security and sign-in preferences
 
     Examples: 
-      | planType | memberType        | copayCategory |
-      | IndMA    | preeffectiveIndMA | NON LIS       |
+      | planType | memberType           | copayCategory |
+ #     | IndMA    | preeffectiveIndMA    | NON LIS       |
+   #   | IndMAPD  | preeffectiveIndMAPD  | NON LIS       |
+   #   | IndPDP   | preeffectiveIndPDP   | NON LIS       |
+   #   | GroupPDP | preeffectiveGroupPDP | NON LIS       |
+      | GroupSSUP | preeffectiveGroupSSUP | NON LIS       |
+  #    | GroupMA   | preeffectiveGroupMA   | NON LIS       |
+   #  | GroupMAPD | preeffectiveGroupMAPD | NON LIS       |
+ 
