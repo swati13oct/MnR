@@ -41,19 +41,48 @@ public class HealthAndWellness extends UhcDriver {
 	@FindBy(id = "hw-learningCenter")
 	private WebElement hnwLearningCenter;
 
-
+	@FindBy(id = "single-search-input")
+	private WebElement hnwSearch;
+	
+	@FindBy(className = "hw-title__image")
+	private WebElement hnwImage;
+	
+	@FindBy(className = "hw-hero__img")
+	private WebElement hnwHeroImage;
+	
+	@FindBy(id = "quick-links")
+	private WebElement quickLinksRenew;
+	
+	@FindBy(id = "featured-positivity-swiper")
+	private WebElement featuredPositivityBlock;
+	
+	@FindBy(id = "online-courses-swiper")
+	private WebElement onlineCoursesBlock;
+	
+	@FindBy(id = "health-content-swiper")
+	private WebElement healthContentBlock;
+	
+	@FindBy(id = "health-videos-swiper")
+	private WebElement healthVideoBlock;
+	
+	@FindBy(xpath = "//div[@id='health-videos-swiper']//div[@class='c-card__img']")
+	private WebElement firstHealthVideo;
+	
+	
 	public HealthAndWellness(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		RallyDashboardPage.checkModelPopup(driver);
 		openAndValidate();
 	}
+	
+	
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoadNew(driver, lifestyleIcon, 50);
-		validateNew(lifestyleIcon);
-		validateNew(learningIcon);
+		CommonUtility.waitForPageLoadNew(driver, hnwSearch, 60);
+		validateNew(hnwImage);
+		validateNew(hnwHeroImage);
 	}
 
 	/***
@@ -110,5 +139,19 @@ public class HealthAndWellness extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, hnwLearningBanner, 60);
 		Assert.assertTrue("Learning dashboard is not displayed", hnwLearningBanner.isDisplayed());
 	}
-
+	
+	public void validateHnWNewDashboard() {
+		scrollToView(quickLinksRenew);
+		Assert.assertTrue("quickLinksRenew is not displayed", quickLinksRenew.isDisplayed());
+		scrollToView(featuredPositivityBlock);
+		Assert.assertTrue("featuredPositivityBlock is not displayed", featuredPositivityBlock.isDisplayed());
+		scrollToView(onlineCoursesBlock);
+		Assert.assertTrue("onlineCoursesBlock is not displayed", onlineCoursesBlock.isDisplayed());
+		scrollToView(healthContentBlock);
+		Assert.assertTrue("healthContentBlock is not displayed", healthContentBlock.isDisplayed());
+		scrollToView(healthVideoBlock);
+		Assert.assertTrue("healthVideoBlock is not displayed", healthVideoBlock.isDisplayed());
+		scrollToView(firstHealthVideo);
+		Assert.assertTrue("firstHealthVideo is not displayed", firstHealthVideo.isDisplayed());
+	}
 }

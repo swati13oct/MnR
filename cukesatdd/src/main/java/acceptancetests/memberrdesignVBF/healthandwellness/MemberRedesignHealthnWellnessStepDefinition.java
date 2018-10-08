@@ -8,6 +8,7 @@ import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.memberrdesignVBF.TestHarness;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
+import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 public class MemberRedesignHealthnWellnessStepDefinition {
@@ -101,5 +102,18 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 			System.out.println(" Variable is NULL!");
 			Assert.fail();
 		}
+	}
+	
+	
+	/***
+	 * 
+	 */
+	@Then("^I should see the H&W Generic new dashboard$")
+	public void I_should_see_the_H_W_Generic_new_dashboard() {
+		// Express the Regexp above with the code you wish you had
+		HealthAndWellness healthnWellnessPage = (HealthAndWellness) getLoginScenario()
+				.getBean(PageConstants.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE);
+		healthnWellnessPage.validateHnWNewDashboard();
+
 	}
 }

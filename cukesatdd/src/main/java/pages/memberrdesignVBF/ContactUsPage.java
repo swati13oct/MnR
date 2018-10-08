@@ -94,6 +94,8 @@ public class ContactUsPage extends UhcDriver {
 	@FindBy(id = "signed-in")
 	private WebElement messengerSignIn;
 	
+	@FindBy(xpath = "//div[@id='list-folders']/ul/li//a[contains(text(),'Inbox')]")
+	private WebElement messengerInbox;
 	
 	public ContactUsPage(WebDriver driver) {
 		super(driver);
