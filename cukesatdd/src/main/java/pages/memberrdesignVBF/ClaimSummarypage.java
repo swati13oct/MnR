@@ -176,7 +176,7 @@ public class ClaimSummarypage extends UhcDriver{
 			System.out.println("Proceed button is displayed ===>"+(proceedToDownloadPopUp.isDisplayed()));
 			validateNew(cancelButtonDownloadPopUp);
 			cancelButtonDownloadPopUp.click();
-			return false;
+			return true;
 		}
 		else 
 		{
