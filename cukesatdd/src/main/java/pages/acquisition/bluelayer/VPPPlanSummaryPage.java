@@ -207,8 +207,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	//@FindBy(xpath="//button[@class='action-btn']")
 	@FindBy(xpath="//*[@id='skip-to-main-content']/div/div[1]/div[1]/location-result/div/div/div/div[2]/div[2]/div[1]/div/div/div[3]/toggle-saved-provider/button/span")
-
-	@FindBy(xpath="//button[@class='action-btn']")
 	private WebElement secondSaveBtn;
 
 	@FindBy(xpath="//*[contains(text(),'View Saved')]")
