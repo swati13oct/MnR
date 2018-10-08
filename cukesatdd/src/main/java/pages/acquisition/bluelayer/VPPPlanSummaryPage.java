@@ -204,7 +204,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(id="label_unsaved_selectedLocation0")
 	private WebElement firstLocation;
 
+<<<<<<< HEAD
+	//@FindBy(xpath="//button[@class='action-btn']")
+	@FindBy(xpath="//*[@id='skip-to-main-content']/div/div[1]/div[1]/location-result/div/div/div/div[2]/div[2]/div[1]/div/div/div[3]/toggle-saved-provider/button/span")
+=======
 	@FindBy(xpath="//button[@class='action-btn']")
+>>>>>>> ca38e1cae271b8900320060b3c3985e46eb36a39
 	private WebElement secondSaveBtn;
 
 	@FindBy(xpath="//*[contains(text(),'View Saved')]")
@@ -919,6 +924,8 @@ if(validate(toggleplanYear))
 		//JavascriptExecutor js = (JavascriptExecutor)driver;
 		//js.executeScript("arguments[0].click();", Savebtn);
 		//firstLocation.click();
+		//secondSaveBtn.click();
+	//	firstLocation.click();
 		secondSaveBtn.click();
 		firstLocation.click();
 		secondSaveBtn.click();
