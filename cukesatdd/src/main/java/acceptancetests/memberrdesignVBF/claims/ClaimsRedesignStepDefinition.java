@@ -116,9 +116,11 @@ public class ClaimsRedesignStepDefinition {
 		if(isDownloadOK){
 			ClaimDetailsPage newClaimDetailsPage = newclaimsSummarypage.navigateToClaimDetailsPage();
 			
-			if (null != newClaimDetailsPage)
+			if (null != newClaimDetailsPage){
 				getLoginScenario().saveBean(PageConstants.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
-			else {
+			
+			newClaimDetailsPage.validateClaimsTableInDetailsPage();
+				}else {
 				Assert.fail("Claims details page is not loaded!!!");
 			}
 		}else{
