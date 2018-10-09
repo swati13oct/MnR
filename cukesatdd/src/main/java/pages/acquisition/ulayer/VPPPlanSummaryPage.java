@@ -188,7 +188,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(id="label_unsaved_selectedLocation0")
 	private WebElement firstLocation;
 
-	@FindBy(xpath="//button[@class='action-btn']")
+	//@FindBy(xpath="//button[@class='action-btn']")
+	@FindBy(xpath="//*[@id='skip-to-main-content']/div/div[1]/div[1]/location-result/div/div/div/div[2]/div[2]/div[1]/div/div/div[3]/toggle-saved-provider/button/span")
 	private WebElement secondSaveBtn;
 	
 	@FindBy(xpath="//*[contains(text(),'View Saved')]")
@@ -267,7 +268,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 
 	public VPPPlanSummaryPage viewPlanSummary(String planType) {
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	WebDriverWait wait = new WebDriverWait(driver, 10000);
 
 		try {
 			Thread.sleep(5000);
