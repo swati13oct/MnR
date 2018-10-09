@@ -146,42 +146,6 @@ public class VppStepDefinitionUHC {
 	}
 
 	
-	@When("^the user performs plan search TeamF using following information in UMS site$")
-	public void zipcode_details_in_TeamF_site(DataTable givenAttributes) {
-
-		List<DataTableRow> memberAttributesRow = givenAttributes
-				.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
-
-		String zipcode = memberAttributesMap.get("Zip Code");
-		//String county = memberAttributesMap.get("County Name");
-		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
-		//getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
-
-		TeamCAcqHome aquisitionhomepage = (TeamCAcqHome) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.searchPlansF(zipcode);
-
-		if (plansummaryPage != null) {
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
-					plansummaryPage);
-			if(plansummaryPage.validateVPPPlanSummaryPage())
-				Assert.assertTrue(true);
-			else
-				Assert.fail("Error in validating the Plan Summary Page");
-
-		}
-
-	}
-
-	
-	
-	
 	/**
 	 * @throws InterruptedException 
 	 * @toDo:user views plans of the below plan type

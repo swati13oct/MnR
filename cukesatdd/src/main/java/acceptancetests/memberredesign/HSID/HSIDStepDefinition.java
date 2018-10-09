@@ -40,7 +40,6 @@ import pages.regression.login.DeregisterPage;
 /**
  * Functionality: Benefits and Coverage page
  */
-@SuppressWarnings("static-access")
 public class HSIDStepDefinition {
 
 	@Autowired
@@ -117,7 +116,12 @@ public class HSIDStepDefinition {
 		else {
 			Assert.fail("***** Error in loading  Assistive Registration Page *****");
 		}*/
-
+		try {
+			accountHomePage.feebackpopupClose();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 	
@@ -161,7 +165,7 @@ public class HSIDStepDefinition {
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 		}
          
-		WebDriver wd = getLoginScenario().getWebDriverNew();
+		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		HSIDLoginPage loginPage = new HSIDLoginPage(wd);
 		loginPage.validateelements();
@@ -370,86 +374,9 @@ public class HSIDStepDefinition {
 		//deregisterPage.enterUserName(username);
 		
 	}
-
-
-@Given("^User is on the sign-in page of medicare.uhc.com of the environment mentioned in config file$")
-public void userisonmedicaresigninpage(DataTable givenAttributes)
-		throws Throwable {
-	List<DataTableRow> memberAttributesRow = givenAttributes
-			.getGherkinRows();
-	Map<String, String> memberAttributesMap = new HashMap<String, String>();
-	for (int i = 0; i < memberAttributesRow.size(); i++) {
-		memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-				.get(0), memberAttributesRow.get(i).getCells().get(1));
-	}
-	String tobeappendedinURL = memberAttributesMap.get("URL");
-	System.out.println(tobeappendedinURL);
-	WebDriver wd = getLoginScenario().getWebDriver();
-	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-	HSIDLoginPage loginPage = new HSIDLoginPage(wd);
-	System.out.println("Currently testing on URL:");
-	System.out.println("https://" + MRScenario.environmentMedicare
-			+ "-medicare.uhc.com/" + tobeappendedinURL);
-	wd.get("https://" + MRScenario.environmentMedicare
-			+ "-medicare.uhc.com/" + tobeappendedinURL);
-	getLoginScenario()
-			.saveBean(PageConstantsMnR.HSID_LOGIN_PAGE, loginPage);
-}
-
-@Given("^User is on the sign-in page of mymedicareaccount.uhc.com of the environment mentioned in config file$")
-public void userisonmymedicareaccountsigninpage(DataTable givenAttributes)
-		throws Throwable {
-	List<DataTableRow> memberAttributesRow = givenAttributes
-			.getGherkinRows();
-	Map<String, String> memberAttributesMap = new HashMap<String, String>();
-	for (int i = 0; i < memberAttributesRow.size(); i++) {
-		memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-				.get(0), memberAttributesRow.get(i).getCells().get(1));
-	}
 	
-	String tobeappendedinURL = memberAttributesMap.get("URL");		
-	WebDriver wd = getLoginScenario().getWebDriver();
-	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-	HSIDLoginPage loginPage = new HSIDLoginPage(wd);
-	System.out.println("this will be appended in the URL:  "+tobeappendedinURL);
-	System.out.println("Currently testing on URL:");
-	System.out.println("https://" + MRScenario.environmentMedicare
-			+ "-mymedicareaccount.uhc.com/" + tobeappendedinURL);		
-	wd.get("https://" + MRScenario.environmentMedicare
-			+ "-mymedicareaccount.uhc.com/" + tobeappendedinURL);
-	getLoginScenario()
-			.saveBean(PageConstantsMnR.HSID_LOGIN_PAGE, loginPage);
-}
+	
+	
 
-@Then("^Iperception smiley survey is displayed after waiting for 20 seconds$")
-public void isIPerceptionSurveyDisplayed() throws Throwable {
-
-	/*
-	 * Method#1 This method can be used to call method from any other page
-	 * format will be class object = new class((WebDriver)
-	 * getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-	 * 
-	 * 
-	 * /* Method#2 on top (at class level)  declare this - public WebDriver
-	 * driver ; format will be class object = new class(driver);
-	 * object.method(driver);
-	 */
-
-	AccountHomePage cse = new AccountHomePage(
-			(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-	cse.checkForIPerceptionModel((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-
-	HSIDLoginPage loginPage = (HSIDLoginPage) getLoginScenario().getBean(PageConstantsMnR.HSID_LOGIN_PAGE);
-	loginPage.verifyIfIperceptionSmileySurveyIsDisplayed();
-
-}
-
-@Then("^User is able to successfully submit the survey$")
-public void iPerceptionSurvey() throws Throwable {
-
-	HSIDLoginPage loginPage = (HSIDLoginPage) getLoginScenario().getBean(
-			PageConstantsMnR.HSID_LOGIN_PAGE);
-	loginPage.switchToIperceptionSmileySurveyAndSubmit();
-
-}
+	
 }
