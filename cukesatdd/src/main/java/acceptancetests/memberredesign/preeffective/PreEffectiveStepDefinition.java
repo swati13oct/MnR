@@ -6,15 +6,29 @@
  *
  */
 package acceptancetests.memberredesign.preeffective;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
+import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.regression.claims.ClaimSummarypage;
 import pages.regression.formsandresources.FormsAndResourcesPage;
+import pages.regression.login.HSIDLoginPage;
+import pages.regression.login.HsidRegistrationPersonalCreateAccount;
+import pages.regression.login.HsidRegistrationPersonalInformationPage;
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 /**
  * 
@@ -203,5 +217,93 @@ public void verify_preffectiev_group_member_can_access_the_page() throws Throwab
 	ppp.validatepermanentaddress();
 	ppp.validatePhonepreffective();
 	//ppp.validatepreffectiveemail2();
+}
+@Given("^the preuser is on medicare sign in page$")
+public void the_user_is_on_medicare_sign_in_page() throws Throwable {
+	WebDriver wd = getLoginScenario().getWebDriver();
+	HSIDLoginPage hsidLoginPage = new HSIDLoginPage(wd);
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+	getLoginScenario().saveBean(PageConstants.HSID_LOGIN_PAGE, hsidLoginPage);
+}
+
+@When("^the preuser clicks on Register now link$")
+public void the_user_clicks_on_Register_now_link() throws Throwable {
+	
+	HSIDLoginPage hsidLoginPage = (HSIDLoginPage) loginScenario.getBean(PageConstants.HSID_LOGIN_PAGE);
+	HsidRegistrationPersonalInformationPage hsidRegistrationPersonalInfoPage = hsidLoginPage.clickRegister();
+	getLoginScenario().saveBean(PageConstants.HSID_REGISTRATION_PERSONALINFOPAGE, hsidRegistrationPersonalInfoPage);
+	
+}
+@When("^the pre enter first name, last name, date of birth, zip code, member id and click continue$")
+public void enter_first_name_last_name_date_of_birth_zip_code_member_id_and_click_continue(DataTable memberAttributes) throws Throwable {
+    // Write code here that turns the phrase above into concrete actions
+    // For automatic transformation, change DataTable to one of
+    // List<YourType>, List<List<E>>, List<Map<K,V>> or Map<K,V>.
+    // E,K,V must be a scalar (String, Integer, Date, enum etc)
+	HsidRegistrationPersonalInformationPage hsidRegistrationPersonalInfoPage = 
+			(HsidRegistrationPersonalInformationPage) loginScenario.getBean(PageConstants.HSID_REGISTRATION_PERSONALINFOPAGE);
+	
+	List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+	Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+				.get(0), memberAttributesRow.get(i).getCells().get(1));
+	}
+	
+	String firstName = memberAttributesMap.get("firstName");
+	String lastName = memberAttributesMap.get("lastName");
+	String dob = memberAttributesMap.get("dob");
+	String zipcode = memberAttributesMap.get("zipcode");
+	String memberId = memberAttributesMap.get("memberid");
+	System.out.println("firstName: "+firstName +"lastName: "+lastName +"dob: "+dob+"memberId: "+memberId +"zipcode: " + zipcode);
+	hsidRegistrationPersonalInfoPage.populatefields(firstName, lastName, dob,zipcode, memberId);
+	HsidRegistrationPersonalCreateAccount hsidRegistrationPersonalCreateAccount 
+									= hsidRegistrationPersonalInfoPage.clickContinue1();
+	if(hsidRegistrationPersonalCreateAccount!=null){
+		getLoginScenario().saveBean(PageConstants.HSID_REGISTRATION_PERSONALCREATEACCOUNT, hsidRegistrationPersonalCreateAccount);
+	System.out.println(" ***The page is not null *** ");
+
+	}	
+}
+@When("^preuser is navigated to step two:create account page$")
+public void user_is_navigated_to_step_two_create_account_page() throws Throwable {
+HsidRegistrationPersonalCreateAccount hsidRegistrationPersonalCreateAccount = (HsidRegistrationPersonalCreateAccount) loginScenario.getBean(PageConstants.HSID_REGISTRATION_PERSONALCREATEACCOUNT);
+	System.out.println("*** Test - navigated to create Account page ***");
+	
+	hsidRegistrationPersonalCreateAccount.verifyCreateAccountSection1();		
+}
+@When("^preuser enter username, password, re-enter password, email, re-enter email$")
+public void enter_username_password_re_enter_password_email_re_enter_email(DataTable memberAttributes) throws Throwable {
+    // Write code here that turns the phrase above into concrete actions
+    // For automatic transformation, change DataTable to one of
+    // List<YourType>, List<List<E>>, List<Map<K,V>> or Map<K,V>.
+    // E,K,V must be a scalar (String, Integer, Date, enum etc)
+	System.out.println("*** In method enter details ***");
+	
+	HsidRegistrationPersonalCreateAccount hsidRegistrationPersonalCreateAccount = 
+			(HsidRegistrationPersonalCreateAccount) loginScenario.getBean(PageConstants.HSID_REGISTRATION_PERSONALCREATEACCOUNT);
+	
+	List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+	Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+				.get(0), memberAttributesRow.get(i).getCells().get(1));
+	}
+	
+	String password = memberAttributesMap.get("password");
+	String email = memberAttributesMap.get("email");
+	
+	String userName = hsidRegistrationPersonalCreateAccount.getUserName();
+	getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
+	getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, password);
+	System.out.println("userName: "+userName +"password: "+password +"email: "+email);
+	hsidRegistrationPersonalCreateAccount.enterUsername(userName);
+	hsidRegistrationPersonalCreateAccount.enterPassword(password);
+	hsidRegistrationPersonalCreateAccount.enterConfirmPassword(password);
+	hsidRegistrationPersonalCreateAccount.enterEmail(email);
+	hsidRegistrationPersonalCreateAccount.enterConfirmEmail(email);	
+    
 }
 }

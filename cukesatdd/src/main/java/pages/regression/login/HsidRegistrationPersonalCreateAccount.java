@@ -1,5 +1,10 @@
 package pages.regression.login;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Random;
+
 import org.junit.Assert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -14,6 +19,9 @@ public class HsidRegistrationPersonalCreateAccount extends UhcDriver {
 	
 	@FindBy(className = "form__step2")
 	private WebElement createAccountSection;
+	
+	@FindBy(xpath ="contains(text(),'Create Account')")
+	private WebElement createAccountSection1;
 	
 	@FindBy(id = "username")
 	private WebElement userNameTextBox;
@@ -65,6 +73,8 @@ public class HsidRegistrationPersonalCreateAccount extends UhcDriver {
 	
 	@FindBy(id="username")
 	private WebElement usernameField;
+	
+	private static ThreadLocal<String> UserName = new ThreadLocal<String>();
 
 
 	public HsidRegistrationPersonalCreateAccount(WebDriver driver) {
@@ -198,5 +208,29 @@ public class HsidRegistrationPersonalCreateAccount extends UhcDriver {
 			Assert.fail("usernameField.getText() >>"+ usernameField.getText());	
 					}
 	}
+	public void verifyCreateAccountSection1() {
+		try {
+			Thread.sleep(10000);
+			System.out.println("*** Create Account ***");
+		createAccountSection1.isDisplayed();
+		} catch (Exception e) {
+			//return false;
+		}
+	}
+	 public static String getUserName() {
+
+			
+			DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+			Date date = new Date();
+
+			// For multithreaded execution, timestamp with seconds is not granular
+			// enough. Include random suffix
+			String rndSuffix = Integer.toString(new Random().nextInt(10)); //1000 is too long and is leading to issues in LAWW.
+			String appndTxt = dateFormat.format(date) + "_" + rndSuffix;
+
+			UserName.set("Auto" + appndTxt);
+			return UserName.get();
+
+		}
 
 }
