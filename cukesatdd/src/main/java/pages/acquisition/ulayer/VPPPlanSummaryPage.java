@@ -36,6 +36,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//a[text()='Passport Flyer (PDF)']")
 	private WebElement PassportFlyerPDF;
 	
+	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[3]/div/div[1]/div[2]/div/div/span[3]/button]")
+	WebElement compareLinks;
+	
 	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div[1]/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div/span[3]")
 	private WebElement showMaPlans;
 	
@@ -879,9 +882,8 @@ CommonUtility.waitForPageLoad(driver, MAmoreDetailsLink, 30);
 	public ComparePlansPage clickOnCompareLink(){
 		
 		//List<WebElement> compareLinks = driver.findElements(By.xpath(".//*[@id='plan-list-1']//button[contains(text(),'Compare plans')]"));
-		List<WebElement> compareLinks = driver.findElements(By.xpath("//*[@id='plan-list-1']/div/div[3]/div/div[1]/div[2]/div/div/span[3]/button]"));
 		
-		compareLinks.get(0).click();
+		compareLinks.click();
 
 
 		try {
