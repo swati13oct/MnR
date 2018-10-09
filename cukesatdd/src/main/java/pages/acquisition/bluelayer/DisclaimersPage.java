@@ -3,11 +3,13 @@
  */
 package pages.acquisition.bluelayer;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ulayer.PageTitleConstants;
 
@@ -38,7 +40,8 @@ public class DisclaimersPage extends UhcDriver{
 	}
 	public AgentsAndBrokersPage agentsAndBrokersClick() {
 		validate(agentAndBrokersLink);
-		agentAndBrokersLink.click();
+		CommonUtility.waitForPageLoad(driver, agentAndBrokersLink, 20);
+		((JavascriptExecutor)driver).executeScript("arguments[0].click();", agentAndBrokersLink);
 		validate(agentAndBrokersLink);
 		if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_HEALTH_INSURANCE_BROKER_AGENT_RESOURCES)){
 			return new AgentsAndBrokersPage(driver);

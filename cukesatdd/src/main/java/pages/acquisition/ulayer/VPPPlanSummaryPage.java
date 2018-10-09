@@ -188,7 +188,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(id="label_unsaved_selectedLocation0")
 	private WebElement firstLocation;
 
-	@FindBy(xpath="//button[@class='action-btn']")
+	//@FindBy(xpath="//button[@class='action-btn']")
+	@FindBy(xpath="//*[@id='skip-to-main-content']/div/div[1]/div[1]/location-result/div/div/div/div[2]/div[2]/div[1]/div/div/div[3]/toggle-saved-provider/button/span")
 	private WebElement secondSaveBtn;
 	
 	@FindBy(xpath="//*[contains(text(),'View Saved')]")
@@ -267,7 +268,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 
 	public VPPPlanSummaryPage viewPlanSummary(String planType) {
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	WebDriverWait wait = new WebDriverWait(driver, 10000);
 
 		try {
 			Thread.sleep(5000);
@@ -347,7 +348,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 					WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/following::a[contains(text(),'Is my provider covered')]"));
 					System.out.println(ProviderSearchLink.getText());
 					ProviderSearchLink.click();
-
+					break;
 					
 				}
 			}
@@ -391,11 +392,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		Physician.click();
 
-		waitforElement(Savebtn);
+		/*waitforElement(Savebtn);
 			
 		JavascriptExecutor js = (JavascriptExecutor)driver;
-		js.executeScript("arguments[0].click();", Savebtn);
-		firstLocation.click();
+		js.executeScript("arguments[0].click();", Savebtn);*/
+//		firstLocation.click();*/
 		secondSaveBtn.click();
 		waitforElement(Viewsavebtn);
 		
@@ -800,9 +801,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {	
 		WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//a[contains(text(),'View plan and drug coverage details')]"));
-			validate(MAmoreDetailsLink);
-			MAmoreDetailsLink.click();
-			System.out.println("View Plan Details Link is clicked for MA plan"+planName);
+CommonUtility.waitForPageLoad(driver, MAmoreDetailsLink, 30);	
+		validate(MAmoreDetailsLink);
+		
+		MAmoreDetailsLink.click();
+		System.out.println("View Plan Details Link is clicked for MA plan"+planName);
 
 
 		} else if (planType.equalsIgnoreCase("PDP")) {

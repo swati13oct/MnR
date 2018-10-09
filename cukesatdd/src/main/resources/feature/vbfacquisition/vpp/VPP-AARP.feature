@@ -29,7 +29,7 @@ Then the user view plan details of the above selected plan in AARP site and vali
 
 Examples:
 	| zipcode | county             | plantype |  planName                                             |
-	| 80001   | Adams County | MAPD     	  |  AARP MedicareComplete SecureHorizons Plan 2 (HMO)    |
+#	| 80001   | Adams County | MAPD     	  |  AARP MedicareComplete SecureHorizons Plan 2 (HMO)    |
 	
 @defect3281
 Scenario Outline: To check all 3 MA plans and go to estimate drug costs page and return to vpp to verify they're still selected
@@ -41,4 +41,4 @@ Then I click back to all plans button and verify that all 3 plans are still sele
 
 Examples:
 |zipcode|
-|80007 | 
+|80001 | 

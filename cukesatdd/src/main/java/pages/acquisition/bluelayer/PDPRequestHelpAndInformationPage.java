@@ -36,8 +36,9 @@ public class PDPRequestHelpAndInformationPage extends UhcDriver{
 	}
 
 	public PDPEnrollementGuidePage navigatesToPdpEnquiryKit() {
-		CommonUtility.waitForPageLoad(driver, pdpInquiryKitDropdown, 20);
+		CommonUtility.waitForPageLoad(driver, pdpInquiryKitDropdown, 50);
 		pdpInquiryKitDropdown.click();
+		CommonUtility.waitForPageLoad(driver, pdpEnquiryKitLink, 50);
 		pdpEnquiryKitLink.click();
 		String mainwindow=driver.getWindowHandle();
 

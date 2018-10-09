@@ -103,14 +103,29 @@ public class ClaimsRedesignStepDefinition {
 		newclaimsSummarypage.validateEobfordifferentDomainType(domain, planType);
 	}
 
-	/***
+	/**
+	 * @throws InterruptedException *
 	 * 
 	 */
 	@And("^the user validates the DownloadMyData section in redesigned site$")
-	public void validates_DownloadMyData_redesigned_site() {
+	public void validates_DownloadMyData_redesigned_site() throws InterruptedException {
 		ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario()
 				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
-		newclaimsSummarypage.validateDownloadMyData();
+		boolean isDownloadOK =newclaimsSummarypage.validateDownloadMyData();
+		
+		if(isDownloadOK){
+			ClaimDetailsPage newClaimDetailsPage = newclaimsSummarypage.navigateToClaimDetailsPage();
+			
+			if (null != newClaimDetailsPage){
+				getLoginScenario().saveBean(PageConstants.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
+			
+			newClaimDetailsPage.validateClaimsTableInDetailsPage();
+				}else {
+				Assert.fail("Claims details page is not loaded!!!");
+			}
+		}else{
+				Assert.fail("Download button is not there or it is not working");
+		}
 	}
 
 	/***
