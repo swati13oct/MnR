@@ -36,9 +36,9 @@ Scenario Outline: To check all 3 MA plans and go to estimate drug costs page and
 Given the user is on AARP medicare acquisition site landing page
 When the user performs plan search using following information in the AARP site
 	|Zip Code| <zipcode> |
-And I select all 3 plans to compare in MA and click on compare plan link
+And  I select all 3 plans to compare in MA and click on compare plan link
 Then I click back to all plans button and verify that all 3 plans are still selected
 
 Examples:
 |zipcode|
-|80001 | 
+#|80001 | 
