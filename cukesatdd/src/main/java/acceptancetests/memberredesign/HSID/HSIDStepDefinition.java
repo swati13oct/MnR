@@ -9,33 +9,28 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
-import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageConstants;
-import acceptancetests.data.PageConstantsMnR;
-
 //import acceptancetests.deprecated.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonConstants;
 import acceptancetests.data.LoginCommonConstants;
+import acceptancetests.data.PageConstants;
+import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
+import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.redesign.HsidRegistrationPersonalCreateAccount;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.login.AssistiveRegistrationPage;
-import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
-import pages.member.bluelayer.DashboardPage;
-import pages.regression.login.HSIDLoginPage;
-import pages.member.bluelayer.LoginPage2;
-import pages.member.ulayer.ValueAddedServicepage;
 import pages.regression.login.DeregisterPage;
+import pages.regression.login.HSIDLoginPage;
+import pages.regression.login.LoginPage;
 
 /**
  * Functionality: Benefits and Coverage page
@@ -97,17 +92,40 @@ public class HSIDStepDefinition {
          
 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		HSIDLoginPage loginPage = new HSIDLoginPage(wd);
-		loginPage.validateelements();
-        AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
 		
-		if (accountHomePage!= null) {
-			 getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
-			Assert.assertTrue(true);
-		}
-		else {
-			Assert.fail("***** Error in loading  Redesign Account Landing Page *****");
-		}
+		if ("YES".equalsIgnoreCase(MRScenario.isHSIDCompatible)) {
+			HSIDLoginPage loginPage = new HSIDLoginPage(wd);
+			loginPage.validateelements();
+	        AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
+	        if (accountHomePage!= null) {
+				 getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
+				Assert.assertTrue(true);
+			}
+			else {
+				Assert.fail("***** Error in loading  Redesign Account Landing Page *****");
+			}
+		} else {
+            if (("YES").equalsIgnoreCase(MRScenario.isTestHarness)) {
+            				LoginPage loginPage = new LoginPage(wd);
+            				
+            				AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWithLegacy(userName, pwd);
+                           if (accountHomePage != null) {
+                        	   getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
+                           } else {
+                                          Assert.fail("Login not successful...");
+                           }
+            } else {
+            				LoginPage loginPage = new LoginPage(wd);
+                           RallyDashboardPage rallyDashboard = (RallyDashboardPage) loginPage.loginWithLegacy(userName, pwd);
+                           if (rallyDashboard != null) {
+                                          getLoginScenario().saveBean(PageConstants.RALLY_DASHBOARD_PAGE, rallyDashboard);
+                           } else {
+                                          Assert.fail("Login not successful...");
+                           }
+            }
+}
+		
+		
 		/*AssistiveRegistrationPage assistiveregistration = (AssistiveRegistrationPage) loginPage.doLoginWith(userName, pwd);
 		if (assistiveregistration != null) {
 			 getLoginScenario().saveBean(PageConstantsMnR.ASSISTIVE_REGISTRATION_PAGE,assistiveregistration);

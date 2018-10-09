@@ -12,6 +12,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import pages.regression.accounthomepage.AccountHomePage;
 import acceptancetests.data.MRConstants;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
@@ -59,13 +60,37 @@ MRScenario loginScenario;
 	}
 	
 	public void openAndValidate() {
-		try {
-			Thread.sleep(20000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness) & "YES".equalsIgnoreCase(MRScenario.isHSIDCompatible)) {
+			if ("team-ci1".equalsIgnoreCase(MRScenario.environment)
+					|| "team-ci2".equalsIgnoreCase(MRScenario.environment)) {
+				PAGE_URL = MRConstants.TEAMCI_TESTHARNESS;
+			} else {
+				PAGE_URL = MRConstants.TESTHARNESS.replace("awe-", "");
+			}
+		} else if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)
+				& "NO".equalsIgnoreCase(MRScenario.isHSIDCompatible)) {
+			if ("team-ci1".equalsIgnoreCase(MRScenario.environment)
+					|| "team-ci2".equalsIgnoreCase(MRScenario.environment)) {
+				PAGE_URL = MRConstants.LEGACY_TESTHARNESS;
+			} else {
+				PAGE_URL = MRConstants.LEGACY_TESTHARNESS.replace("awe-", "");
+			}
+		} else if ("NO".equalsIgnoreCase(MRScenario.isTestHarness)
+				& "YES".equalsIgnoreCase(MRScenario.isHSIDCompatible)) {
+			PAGE_URL = MRConstants.DASHBOARD.replace("awe-", "");
+		} else if ("NO".equalsIgnoreCase(MRScenario.isTestHarness)
+				& "NO".equalsIgnoreCase(MRScenario.isHSIDCompatible)) {
+			PAGE_URL = MRConstants.LEGACY_DASHBOARD.replace("awe-", "");
 		}
-		start(PAGE_URL);
+
+		System.out.println("URL:" + PAGE_URL);
+		startNew(PAGE_URL);
+		CommonUtility.checkPageIsReadyNew(driver);
+		if ("NO".equalsIgnoreCase(MRScenario.isHSIDCompatible))
+			CommonUtility.waitForPageLoadNew(driver, signInButton, 60);
+			//validateNew(signInButton);
+		else
+			CommonUtility.waitForPageLoadNew(driver, signInButton, 60);
 	}
 	
 	public void validateelements()
