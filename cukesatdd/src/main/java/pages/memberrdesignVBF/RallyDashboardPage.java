@@ -196,7 +196,22 @@ public class RallyDashboardPage extends UhcDriver {
 
 	@FindBy(xpath = "(//div[@class='inactive-coverage-status ng-scope']//span[contains(text(),'Coverage Ended:')])[1]")
 	private WebElement coverageEndedText;
-
+	
+	@FindBy(className = "atdd-need-help")
+	private WebElement neepHelp;
+	
+	@FindBy(xpath = "//div[@class='technical section']//*[contains(@class,'atdd-tech-header')]")
+	private WebElement technicalSupportHeading;
+	
+	@FindBy(xpath = "//div[@class='plan section']//*[contains(@class,'atdd-plan-header')]")
+	private WebElement planSupportHeading;
+	
+	@FindBy(xpath = "//div[@class='technical section']//a[contains(@href,'tel:') and contains(@class,'display-inline-block')]")
+	private WebElement techSupportTelephone;
+	
+	@FindBy(xpath = "//div[@class='plan section']//a[contains(@href,'tel:') and contains(@class,'display-inline-block')]")
+	private WebElement planSupportTelephone;
+	
 	String category = null;
 
 	public RallyDashboardPage(WebDriver driver) {
@@ -739,4 +754,17 @@ public class RallyDashboardPage extends UhcDriver {
 
 	}
 
+	public void validateNeedHelpSection(){
+		scrollToView(neepHelp);
+		Assert.assertTrue("neepHelp is not displayed", neepHelp.isDisplayed());
+		scrollToView(technicalSupportHeading);
+		Assert.assertTrue("technicalSupportHeading is not displayed", technicalSupportHeading.isDisplayed());
+		scrollToView(planSupportHeading);
+		Assert.assertTrue("planSupportHeading is not displayed", planSupportHeading.isDisplayed());
+		scrollToView(techSupportTelephone);
+		Assert.assertTrue("techSupportTelephone is not displayed", techSupportTelephone.isDisplayed());
+		scrollToView(planSupportTelephone);
+		Assert.assertTrue("neepHelp is not displayed", planSupportTelephone.isDisplayed());
+		
+	}
 }

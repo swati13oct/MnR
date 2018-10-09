@@ -15,4 +15,4 @@ When the user Click on Show Plans link
  |PlanName| <planname>|
  Examples:
 | zipcode | county             | plantype |   planname|                
-| 80001   | Los Angeles County | MA 		|AARP MedicareComplete SecureHorizons Essential (HMO) |
+| 90210   | None | MA 		|AARP MedicareComplete SecureHorizons Essential (HMO)|

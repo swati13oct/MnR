@@ -59,6 +59,9 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy(xpath = "//div[@class='claim-results']//table[not (contains(@class,'ng-hide'))]//tbody//tr[2]//a[text()='MORE INFO']")
 	private WebElement claimstablemoreinfolink;
 	
+	@FindBy(xpath = "//*[@id='numDays1']/span[2]")
+	private WebElement noclaims;
+	
 	@FindBy(className = "loading-block")
 	public List<WebElement> loadingImages;
 	
@@ -155,14 +158,15 @@ public class ClaimSummarypage extends UhcDriver{
 		}	
 		else
 		{
+			
 			System.out.println("!!!!!!!!! NOT Able to find the claim table !!!!!!!!!");
-		Assert.fail("!!!!!!!!! NOT Able to find the claim table !!!!!!!!!");
+		Assert.assertTrue("There is no claims for this time period" , true); 
 		}
 	}
 /***
  * 
  */
-	public void validateDownloadMyData() {
+	public boolean validateDownloadMyData() {
 		scrollToView(downloadmydatabutton);
 		CommonUtility.waitForPageLoadNew(driver, downloadmydatabutton, 60);
 		if (downloadmydatabutton.isDisplayed()){				
@@ -172,10 +176,12 @@ public class ClaimSummarypage extends UhcDriver{
 			System.out.println("Proceed button is displayed ===>"+(proceedToDownloadPopUp.isDisplayed()));
 			validateNew(cancelButtonDownloadPopUp);
 			cancelButtonDownloadPopUp.click();
+			return true;
 		}
 		else 
 		{
 			System.out.println("Downlaod my data button is not displayed ");
+			return false;
 
 		}
 	}
@@ -186,23 +192,30 @@ public class ClaimSummarypage extends UhcDriver{
 	 * @throws InterruptedException
 	 */
 	public pages.memberrdesignVBF.ClaimDetailsPage navigateToClaimDetailsPage() throws InterruptedException {
-		CommonUtility.waitForPageLoadNew(driver, claimstablemoreinfolink, 60);
-		scrollToView(claimstablemoreinfolink);
-		claimstablemoreinfolink.click();
-		int counter =0;
-		do{
-			if(counter<=12)
-			Thread.sleep(5000);
-			else
-				return null;
-			counter++;
-		}
-		while(!(driver.getCurrentUrl().contains("/details")));
-		if (driver.getCurrentUrl().contains("/details")) {
-			return new pages.memberrdesignVBF.ClaimDetailsPage(driver);
+		if(noclaims.getText().contains("0")){
+			Assert.assertTrue("There are no claims for this time period and therefore no 'More Info' link",true);
+		}else{
+			
+			CommonUtility.waitForPageLoadNew(driver, claimstablemoreinfolink, 60);
+			scrollToView(claimstablemoreinfolink);
+			claimstablemoreinfolink.click();
+			int counter =0;
+			do{
+				if(counter<=12)
+				Thread.sleep(5000);
+				else
+					return null;
+				counter++;
+			}
+			while(!(driver.getCurrentUrl().contains("/details")));
+			if (driver.getCurrentUrl().contains("/details")) {
+				
 
+			}
+			
 		}
-		return null;
+	
+		return new pages.memberrdesignVBF.ClaimDetailsPage(driver);
 	}
 
 	

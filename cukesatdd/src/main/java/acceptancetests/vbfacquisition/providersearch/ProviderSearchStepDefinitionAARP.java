@@ -3,6 +3,7 @@ package acceptancetests.vbfacquisition.providersearch;
 import gherkin.formatter.model.DataTableRow;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,11 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
-import acceptancetests.vbfacquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
+import acceptancetests.vbfacquisition.vpp.VPPCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -35,31 +37,29 @@ public class ProviderSearchStepDefinitionAARP {
 		return loginScenario;
 				
 	}
-	
 	/**
-	 * @toDo: user is on AARP Ulayer medicare acquisition site
+	 * @toDo:user is on AARP medicare acquisition site landing page
 	 */
-	@Given("^the user is on AARP Ulayer medicare acquisition site landing page$")
-	public void user_AARP_Medicare()
-	{
+	@Given("^the user is on AARP medicare acquisition site landing page for provider search$")
+	public void the_user_on_aarp_medicaresolutions_Site() {
 		WebDriver wd = getLoginScenario().getWebDriver();
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
+
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
 				aquisitionhomepage);
-		
 	}
+
 	
+
 	/**
-	 * @toDo:user performs plan search using following information 
-	 */
-	@When("^the user performs plan search using following information in the Ulayer AARP site$")
-	public void zipcode_details_in_AARP_site(DataTable givenAttributes) 
-	{
-		List<DataTableRow> memberAttributesRow = givenAttributes
+	 * @toDo:
+	 */	
+	@When("^I access the vpp page for provider search using below zipcode on aarp site$")
+	public void I_access_the__vpp_page(DataTable memberAttributes) throws InterruptedException {
+		List<DataTableRow> memberAttributesRow = memberAttributes
 				.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
@@ -67,24 +67,42 @@ public class ProviderSearchStepDefinitionAARP {
 		}
 
 		String zipcode = memberAttributesMap.get("Zip Code");
-		String county = memberAttributesMap.get("County Name");
-		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
-		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)loginScenario.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.navigateToVpp(zipcode);
+		if(plansummaryPage!=null){
+			loginScenario.saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+		}
+	}
+	
+	/**
+	 * @toDo: click on view plans
+	 */
+	@And("^I click on view plans link on vpp page for provider search$")
+	public void clickOnViewPlanDetails(DataTable attributes){
+		List<DataTableRow> memberAttributesRow = attributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.searchPlans(
-				zipcode, county);
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
 
+		String planType = memberAttributesMap.get("Plan Type");
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) loginScenario.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		plansummaryPage = plansummaryPage.viewPlanSummary(planType);
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
 					plansummaryPage);
 		} else {
 			Assert.fail("Error Loading VPP plan summary page");
 		}
-		
 	}
 	
+	
+	
+
 	/**
 	 * @toDo:user Click on Show Plans link 
 	 */
