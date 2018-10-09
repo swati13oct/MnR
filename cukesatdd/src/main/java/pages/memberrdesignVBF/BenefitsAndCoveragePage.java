@@ -104,10 +104,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='outOfPocketTile']//span[contains(text(),'Out-of-Pocket Maximum')]")
 	private WebElement OutofPocketMaximum;
 
-	@FindBy(className = "atdd-innetwrk-title")
+	@FindBy(xpath = "//*[@id='IN-NETWORK-1']")
 	private WebElement INNETWORK;
 
-	@FindBy(className = "atdd-outnetwrktitle")
+	@FindBy(xpath = "//*[@id='OUT-OF-NETWORK-1']")
 	private WebElement OUTOFNETWORK;
 
 	public static final String learnmorestagetext_xpath = ".//*[@id='collapseStages']";
