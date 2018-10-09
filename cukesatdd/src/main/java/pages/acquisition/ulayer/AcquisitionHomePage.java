@@ -5,6 +5,7 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.*;
@@ -12,6 +13,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,6 +80,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath="//a[contains(text(),'Request More')]")
 	private WebElement moreHelpInfoLink;
+	
+	@FindBy(xpath="//*[@id='subnav_2']/div[1]/div/div[3]/div/h3[3]/a")
+	private WebElement pharmacylocator;
 
 	@FindBy(id = "ghn_lnk_1")
 	public static WebElement navigationSectionHomeLink;
@@ -105,6 +110,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[@id='subnav_4']/div/div/div[2]/div/span[2]/a")
 	public static WebElement registerherelink;
+	
+	@FindBy(xpath = "//div[@class='overview-main']/h2")
+	private WebElement vppTop;
 
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
 	private static String AARP_ACQISITION_OFFLINE_PAGE_URL = MRConstants.AARP_URL_OFFLINE;
@@ -219,7 +227,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		} catch (Exception e) {
 			System.out.println("county box not found");
 		}
-		
+		CommonUtility.waitForPageLoad(driver, vppTop, 30);
+		validate(vppTop);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
 		}
@@ -671,6 +680,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		else if(planType.contains("PDP")){
 				pdp_moreHelpInfoLink.click();		
 		}*/
+		
+		
+		
 		moreHelpInfoLink.click();
 		for(int i=0;i<10;i++){
 			try {
@@ -687,16 +699,31 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	public PharmacySearchPage navigateToPharmacyLocator() {
 		driver.manage().window().maximize();
-		start("https://www.team-ci1-aarpmedicareplans.ose-elr-core.optum.com/health-plans/aarp-pharmacy.html#/Pharmacy-Search-English");
-		/*pharmacyNearLink.click();
-		for(int i=0;i<10;i++){*/
+		Actions action = new Actions(driver);
+		PageFactory.initElements(driver, this);
+		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
+		pharmacylocator.click();
+		
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		/*String url= "https://www."+MRScenario.environment+"-aarpmedicareplans.ose-elr-core.optum.com/health-plans/aarp-pharmacy.html#/Pharmacy-Search-English";
+		
+		start();*/
+	/*	WebDriverWait wait = new WebDriverWait(driver, 10000);
+		pharmacyNearLink.click();
+		for(int i=0;i<10;i++){
 			try {
 				Thread.sleep(6000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		/*	if(driver.getCurrentUrl().contains("-pharmacy."))
+			if(driver.getCurrentUrl().contains("-pharmacy."))
 				break;
 		}*/
 		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE)) {

@@ -39,7 +39,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div[1]/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div/span[3]")
 	private WebElement showMaPlans;
 	
-	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[1]/div/span/span[@class='ng-binding']")
+	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']//span[@class='title']/span")
 	private WebElement maPlansNumber;
 	
 	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[4]/div/span/span[@class='ng-binding']")
@@ -188,8 +188,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(id="label_unsaved_selectedLocation0")
 	private WebElement firstLocation;
 
-//	@FindBy(xpath="//button[@class='action-btn']")
-	@FindBy(xpath=".//*[@id='skip-to-main-content']/div/div[1]/div[1]/location-result/div/div/div/div[2]/div[2]/div[1]/div/div/div[3]/toggle-saved-provider/button")
+	//@FindBy(xpath="//button[@class='action-btn']")
+	@FindBy(xpath="//*[@id='skip-to-main-content']/div/div[1]/div[1]/location-result/div/div/div/div[2]/div[2]/div[1]/div/div/div[3]/toggle-saved-provider/button/span")
 	private WebElement secondSaveBtn;
 	
 	@FindBy(xpath="//*[contains(text(),'View Saved')]")
@@ -228,14 +228,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 
 	private WebElement getSpecificPlanSummary(
-			List<WebElement> planElement,
+			WebElement maPlan,
 			String planName) {
-		for (WebElement plan : planElement) {
-			if (plan.getText().contains(planName)) {
+	//	for (WebElement plan : maPlanList2) {
+		System.out.println("plan info: "+maPlan.getText());
+			if (maPlan.getText().contains(planName)) {
+				return maPlan;
 
-				return plan;
-
-			}
+		//	}
 		}
 		return null;
 	}
@@ -268,7 +268,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 
 	public VPPPlanSummaryPage viewPlanSummary(String planType) {
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	WebDriverWait wait = new WebDriverWait(driver, 10000);
 
 		try {
 			Thread.sleep(5000);
@@ -298,7 +298,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		else if (planType.equalsIgnoreCase("SNP")) {
 			snpPlansViewLink.click();
 		}
-		if(toggleplanYear!=null)
+		if(validate(toggleplanYear))
 			toggleplanYear.click();
 		return new VPPPlanSummaryPage(driver, planType);
 	}
@@ -611,12 +611,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		WebElement element = null;
 		ElementData elementData = new ElementData("className",
-				"module-plan-overview");
+				"plan-overview-list");
 		if (planName.contains("HMO")) {
 			//ElementData elementData = new ElementData("id", "viewDetailsMA");
-			 element = getSpecificPlanSummary(findChildElements(elementData, maPlanList), planName);
+			 element = getSpecificPlanSummary(maPlanList, planName);
 
-		} else if (planName.contains("PDP")) {
+		}/* else if (planName.contains("PDP")) {
 			//ElementData elementData = new ElementData("id", "viewDetailsPDP");
 			 element = getSpecificPlanSummary(findChildElements(elementData, pdpPlanList), planName);
 		} 
@@ -626,7 +626,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		} else if (planName.contains("PPO SNP")) {
 			//ElementData elementData = new ElementData("id", "viewDetailsMA");
 			 element = getSpecificPlanSummary(findChildElements(elementData, snpPlanList), planName);
-		}
+		}*/
 		
 		return validate(element);
 	}
@@ -801,9 +801,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {	
 		WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//a[contains(text(),'View plan and drug coverage details')]"));
-			validate(MAmoreDetailsLink);
-			MAmoreDetailsLink.click();
-			System.out.println("View Plan Details Link is clicked for MA plan"+planName);
+CommonUtility.waitForPageLoad(driver, MAmoreDetailsLink, 30);	
+		validate(MAmoreDetailsLink);
+		
+		MAmoreDetailsLink.click();
+		System.out.println("View Plan Details Link is clicked for MA plan"+planName);
 
 
 		} else if (planType.equalsIgnoreCase("PDP")) {
