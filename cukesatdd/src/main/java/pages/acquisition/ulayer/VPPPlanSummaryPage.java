@@ -875,8 +875,12 @@ CommonUtility.waitForPageLoad(driver, MAmoreDetailsLink, 30);
 		
 	}
 
+
 	public ComparePlansPage clickOnCompareLink(){
-		List<WebElement> compareLinks = driver.findElements(By.xpath(".//*[@id='plan-list-1']//button[contains(text(),'Compare plans')]"));	
+		
+		//List<WebElement> compareLinks = driver.findElements(By.xpath(".//*[@id='plan-list-1']//button[contains(text(),'Compare plans')]"));
+		List<WebElement> compareLinks = driver.findElements(By.xpath("//*[@id='plan-list-1']/div/div[3]/div/div[1]/div[2]/div/div/span[3]/button]"));
+		
 		compareLinks.get(0).click();
 
 
