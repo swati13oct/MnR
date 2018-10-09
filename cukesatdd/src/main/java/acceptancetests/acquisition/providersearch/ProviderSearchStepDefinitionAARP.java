@@ -106,7 +106,7 @@ public class ProviderSearchStepDefinitionAARP {
 		
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		
-		plansummaryPage = plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage = plansummaryPage.viewPlanSummaryButton(planType);
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
 					plansummaryPage);

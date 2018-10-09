@@ -104,10 +104,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='outOfPocketTile']//span[contains(text(),'Out-of-Pocket Maximum')]")
 	private WebElement OutofPocketMaximum;
 
-	@FindBy(xpath = "//*[@id='IN-NETWORK-1']")
+	@FindBy(className = "atdd-innetwrk-title")
 	private WebElement INNETWORK;
 
-	@FindBy(xpath = "//*[@id='OUT-OF-NETWORK-1']")
+	@FindBy(className = "atdd-outnetwrktitle")
 	private WebElement OUTOFNETWORK;
 
 	public static final String learnmorestagetext_xpath = ".//*[@id='collapseStages']";
@@ -143,7 +143,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='oopOutNetowrk']/div[@class='card-body']//span")
 	private WebElement OUTOFNETWORKValue;
 
-	@FindBy(xpath = "//div[@id='officeVisitTileAtdd']//span[contains(text(),'Primary care provider:')]/parent::*/following-sibling::span")
+	@FindBy(xpath = ".//div[@id='officeVisitTileAtdd']//span[contains(text(),'Primary care provider:')]/parent::*/following-sibling::span")
 	private WebElement pcpValue;
 
 	@FindBy(xpath = "//div[@id='officeVisitTileAtdd']//span[contains(text(),'Specialist:')]/parent::*/following-sibling::span")

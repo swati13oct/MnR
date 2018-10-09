@@ -42,8 +42,9 @@ public class OneTimePaymentsPage extends UhcDriver {
 
 	@FindBy(id = "review-continue")
 	private WebElement reviewContinue;
-
-	@FindBy(xpath = "//div[@id='atdd_electronicsignature_label']//label[@for='consent']")
+	
+	/* @FindBy(xpath = "//div[@id='atdd_electronicsignature_label']/div/fieldset/label") */
+	@FindBy(xpath = "//div[@id='atdd_electronicsignature_label']//label")
 	private WebElement electronicSignatureCheck;
 
 	public OneTimePaymentsPage(WebDriver driver) {
