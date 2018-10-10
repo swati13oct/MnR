@@ -106,6 +106,9 @@ public class MedicareInformationPage extends UhcDriver{
 	@FindBy(xpath = "//*[@class = 'field-error-msg']")
 	private List <WebElement> FieldValidation_ErrorMessage;
 	
+	@FindBy(xpath = "//*[@id='medicareClaimNumber']/preceding-sibling::label")
+	private WebElement MedicareNumberLabel;
+	
 	public MedicareInformationPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -161,7 +164,7 @@ public class MedicareInformationPage extends UhcDriver{
 		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date");
 		String CardType = MedicareDetailsMap.get("Card Type");
 		String SSNflag = MedicareDetailsMap.get("SSN Flag");
-		WebElement MedicareNumberLabel = driver.findElement(By.xpath("//*[@id='medicareClaimNumber']/preceding-sibling::label"));
+		//WebElement MedicareNumberLabel = driver.findElement(By.xpath("//*[@id='medicareClaimNumber']/preceding-sibling::label"));
 		if(CardType.contains("HICN")){
 			SelectCardA.click();
 			if(MedicareNumberLabel.getText().contains("Medicare Claim Number")){

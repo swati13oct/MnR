@@ -533,7 +533,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				wait.until(ExpectedConditions.elementToBeClickable(medsupplans)).click();
 			}	
 		}
-if(validate(toggleplanYear))
+   if(validate(toggleplanYear))
 			toggleplanYear.click();		return new VPPPlanSummaryPage(driver, planType);
 	}
 
@@ -1512,6 +1512,38 @@ public String EnrollmentValidation(String PlanName) {
 		}
 		
 			}
+
+
+public WelcomePage EnrollmentValidationChronic(String PlanName) throws InterruptedException {
+	
+	try {
+		Thread.sleep(5000);		
+		try {
+		if(YearToggle.getText().contains("View 2019 Plans"))
+			YearToggle.click();
+		Thread.sleep(5000);
+		}catch(Exception e)
+		{
+			System.out.println("Toggle Not found");
+		}
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+
+	
+	System.out.println("Plan Name is : "+PlanName);	
+	JavascriptExecutor jse = (JavascriptExecutor)driver;
+	jse.executeScript("window.scrollBy(0,-100)", "");
+		Thread.sleep(2000);
+	WebElement EnrollmentButton = driver.findElement(By.xpath("(//*[@class='enrollment']/div[@class='swiper-content ng-scope']/a/span)[5]"));	
+	if(EnrollmentButton.isDisplayed())
+		EnrollmentButton.click();
+	System.out.println("Enrollment Button present and clicked");
+	Thread.sleep(2000);
+	return new WelcomePage(driver);
+	
+		}
 
 
 	public AepVppPlanSummaryPage validate_aepPlanYearLinks(String currentYear, String nextYear) {

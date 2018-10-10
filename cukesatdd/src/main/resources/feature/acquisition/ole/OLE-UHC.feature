@@ -302,18 +302,29 @@ Feature: To test OLE common tool flow flow UMS site
  
  
  @UHC_Disclosure @december_18
-  Scenario Outline: To test OLE Button for DSNP Plans Landing from VPP Plan Summary
+  Scenario Outline: To test Disclosure page for Chronic Plans Landing from VPP Plan Summary
     Given the user is on TeamC UHC medicare acquisition site landing page
     When the user performs plan search TeamC using following information in UMS site
       | Zip Code    | <zipcode> |
       | County Name | <county>  |
     When user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |        
-    Then the user validates the Enroll Now Button present for the plan type
+    Then the user validates the Enroll Now Button present for the Chronic plan type
       | Plan Name | <planName> |    
+    Then the user validates and selects the Disclaimer Checkbox
+    Then the user navigates to Medicare Information Page
+    Then the user enters following required Medicare Information
+      | First Name      | <firstname>      |
+      | Last Name       | <lastname>       |
+      | Medicare Number | <medicarenumber> |
+      | SSN Flag        | <ssnflag>        |
+      | PartA Date      | <partadate>      |
+      | PartB Date      | <partbdate>      |
+      | Card Type       | <cardtype>       |
+    Then the user validates the Plan details in Medicare Info OLE Right Rail
       
  Examples: 
-      | zipcode | county   | plantype  |      planName                              | 
-      |   78006 | Kendall County | SNP | UnitedHealthcare Chronic Complete (HMO SNP) |
+      | zipcode | county   | plantype  |      planName                              | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate |
+      |   78006 | Kendall County | SNP | UnitedHealthcare Chronic Complete (HMO SNP) |HICN     | John      | Doe      | 987456321t     | false   |  01012010 |  01012010 |
       
  

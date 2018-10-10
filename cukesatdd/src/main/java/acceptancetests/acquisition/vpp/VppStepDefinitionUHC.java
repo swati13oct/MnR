@@ -18,9 +18,11 @@ import pages.acquisition.bluelayer.PlanComparePage;
 import pages.acquisition.bluelayer.PlanDetailsPage;
 import pages.acquisition.bluelayer.TeamCAcqHome;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
+import pages.acquisition.ole.WelcomePage;
 import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.vbfacquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
+import acceptancetests.data.OLE_PageConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -230,6 +232,21 @@ public class VppStepDefinitionUHC {
 
 	}
 
+	
+	@Then("^the user validates the Enroll Now Button present for the Chronic plan type$")
+	public void Chronic_Enroll_now_button_validation(DataTable givenAttributes) throws InterruptedException {
+		
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		String PlanName = memberAttributesRow.get(0).getCells().get(1); 
+				getLoginScenario().saveBean(
+				VPPCommonConstants.PLAN_NAME,PlanName);
+		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		WelcomePage welcomePage = vppPlanSummaryPage.EnrollmentValidationChronic(PlanName);
+		getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
+
+	}
 	
 	/**
 	 * @toDo:user view plan details of the above selected plan
