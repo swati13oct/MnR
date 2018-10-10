@@ -285,19 +285,5 @@ Feature: To test OLE common tool flow flow UMS site
  Examples: 
       | zipcode | county   | plantype  |      planName                              | 
       |   28105 | Union County | SNP | UnitedHealthcare Dual Complete RP (Regional PPO SNP)  |
- 
- @CSNP_Enroll_Now @december_18
-  Scenario Outline: To test OLE Button for CSNP Plans Landing from VPP Plan Summary
-    Given the user is on TeamC UHC medicare acquisition site landing page
-    When the user performs plan search TeamF using following information in UMS site
-      | Zip Code    | <zipcode> |     
-    When user views plans of the below plan type in UMS site
-      | Plan Type | <plantype> |        
-    Then the user validates the Enroll Now Button present for the plan type
-      | Plan Name | <planName> |    
-      
- Examples: 
-      | zipcode | plantype  |      planName                              | 
-      |   73301 |  SNP | UnitedHealthcare Medicare Silver (Regional PPO SNP)  |
       
  

@@ -4,7 +4,7 @@ Feature: 1.10-VBF-MemRedesign-To test order materials functionality
   @smokeTest_OrderPlanMaterial @rallyDashboard @testharness
   Scenario Outline: Verify order materials confirmation page in Redesign site
     Given I am a authenticated member on the member redesign site for Direct Login
-      | Plan Type   | <planType>   |
+
       | Member Type | <memberType> |
     When the above plantype user logs in member redesign for Direct Login
       | friendname     | <friendname>  |
@@ -19,10 +19,10 @@ Feature: 1.10-VBF-MemRedesign-To test order materials functionality
     And the user validate order additional material and click to add other order additional material in Order Confirmation Page
 
     Examples: 
-      | planType | memberType       | option              | friendname | favcolor | phonenumber |
-   #  | MAPD     | UhcIndOrderPlan  | Replacement ID card      |name1      | color1   | number1     |
-      | MAPD     | AARPIndOrderPlan | Replacement ID card | name1      | color1   | number1     |
-   #   | MAPD     | GrpRetireeOrderPlan  | Replacement ID card      |name1      | color1   | number1     |
-   # | MA       |  UhcInd | Member Materials |name1      | color1   | number1     |
-   # | PDP      |  AARPInd | Welcome Guide    |name1      | color1   | number1     |
-   #  | SHIP     | Individual  | Member ID Card |name1      | color1   | number1     |
+		 | memberType       | option              | friendname | favcolor | phonenumber |
+		# | UhcMapdInd  | Replacement ID card      |name1      | color1   | number1     |
+		 | AARPMapdInd | Replacement ID card | name1      | color1   | number1     |
+		# | GroupRetireeMapd  | Replacement ID card      |name1      | color1   | number1     |
+		# |  UhcIndMA | Member Materials |name1      | color1   | number1     |
+		# |  AARPIndPDP | Welcome Guide    |name1      | color1   | number1     |
+		# | Ship  | Member ID Card |name1      | color1   | number1     |
