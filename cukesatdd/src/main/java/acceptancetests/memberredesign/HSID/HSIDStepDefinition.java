@@ -25,11 +25,11 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
 import pages.memberrdesignVBF.RallyDashboardPage;
-import pages.redesign.HsidRegistrationPersonalCreateAccount;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.login.AssistiveRegistrationPage;
 import pages.regression.login.DeregisterPage;
 import pages.regression.login.HSIDLoginPage;
+import pages.regression.login.HsidRegistrationPersonalCreateAccount;
 import pages.regression.login.LoginPage;
 
 /**
@@ -134,12 +134,6 @@ public class HSIDStepDefinition {
 		else {
 			Assert.fail("***** Error in loading  Assistive Registration Page *****");
 		}*/
-		try {
-			accountHomePage.feebackpopupClose();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
 	}
 	
