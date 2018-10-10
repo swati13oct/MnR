@@ -4,11 +4,17 @@
 package pages.regression.login;
 
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import pages.memberrdesignVBF.RallyDashboardPage;
+import pages.memberrdesignVBF.TestHarness;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.login.AssistiveRegistrationPage;
 import pages.regression.login.ConfirmSecurityQuestion;
@@ -28,15 +34,25 @@ public class LoginPage extends UhcDriver {
 
 		@FindBy(id = "fd_memberSignInButton")
 		private WebElement loginIn;
-
-		@FindBy(id = "hsid-username")
+		
+		@FindBy(id = "username")
 		private WebElement userNameField;
 
-		@FindBy(id = "hsid-password")
+		@FindBy(id = "password")
 		private WebElement passwordField;
 
-		@FindBy(id = "hsid-submit")
+		@FindBy(id = "sign-in-btn")
 		private WebElement signInButton;
+
+		@FindBy(id = "hsid-username")
+		private WebElement hsiduserNameField;
+
+		@FindBy(id = "hsid-password")
+		private WebElement hsidpasswordField;
+
+		@FindBy(id = "hsid-submit")
+		private WebElement signInHsidButton;
+
 		
 		@FindBy(id = "hsid-FUn")
 		private WebElement usernamelink;
@@ -65,7 +81,37 @@ public class LoginPage extends UhcDriver {
 		}
 		
 		public void openAndValidate() {
-			start(PAGE_URL);
+			if ("YES".equalsIgnoreCase(MRScenario.isTestHarness) & "YES".equalsIgnoreCase(MRScenario.isHSIDCompatible)) {
+				if ("team-ci1".equalsIgnoreCase(MRScenario.environment)
+						|| "team-ci2".equalsIgnoreCase(MRScenario.environment)) {
+					PAGE_URL = MRConstants.TEAMCI_TESTHARNESS;
+				} else {
+					PAGE_URL = MRConstants.TESTHARNESS.replace("awe-", "");
+				}
+			} else if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)
+					& "NO".equalsIgnoreCase(MRScenario.isHSIDCompatible)) {
+				if ("team-ci1".equalsIgnoreCase(MRScenario.environment)
+						|| "team-ci2".equalsIgnoreCase(MRScenario.environment)) {
+					PAGE_URL = MRConstants.LEGACY_TESTHARNESS;
+				} else {
+					PAGE_URL = MRConstants.LEGACY_TESTHARNESS.replace("awe-", "");
+				}
+			} else if ("NO".equalsIgnoreCase(MRScenario.isTestHarness)
+					& "YES".equalsIgnoreCase(MRScenario.isHSIDCompatible)) {
+				PAGE_URL = MRConstants.DASHBOARD.replace("awe-", "");
+			} else if ("NO".equalsIgnoreCase(MRScenario.isTestHarness)
+					& "NO".equalsIgnoreCase(MRScenario.isHSIDCompatible)) {
+				PAGE_URL = MRConstants.LEGACY_DASHBOARD.replace("awe-", "");
+			}
+
+			System.out.println("URL:" + PAGE_URL);
+			startNew(PAGE_URL);
+			CommonUtility.checkPageIsReadyNew(driver);
+			if ("NO".equalsIgnoreCase(MRScenario.isHSIDCompatible))
+				CommonUtility.waitForPageLoadNew(driver, signInButton, 60);
+				//validateNew(signInButton);
+			else
+				CommonUtility.waitForPageLoadNew(driver, signInButton, 60);
 		}
 		
 		public void validateelements()
@@ -86,9 +132,9 @@ public class LoginPage extends UhcDriver {
 		public Object doLoginWith2(String username, String password) {
 
 	        System.out.println(driver.getCurrentUrl());
-			sendkeys(userNameField, username);
-			sendkeys(passwordField, password);
-			signInButton.click();
+	        sendkeys(hsiduserNameField, username);
+			sendkeys(hsidpasswordField, password);
+			signInHsidButton.click();
 			try {
 				Thread.sleep(40000);
 			} catch (InterruptedException e) {
@@ -103,14 +149,66 @@ public class LoginPage extends UhcDriver {
 			return null;
 		}
 		
+		public Object loginWithLegacy(String username, String password) throws InterruptedException {
+			sendkeysNew(userNameField, username);
+			sendkeysNew(passwordField, password);
+			signInButton.click();
+			System.out.println("Sign In clicked");
+			try {
+				Alert alert = driver.switchTo().alert();
+				alert.accept();
+				Alert alert1 = driver.switchTo().alert();
+				alert1.accept();
+			} catch (Exception e) {
+				System.out.println("No Such alert displayed");
+			}
+			// CommonUtility.checkPageIsReady(driver);
+			WebDriverWait wait = new WebDriverWait(driver, 5);
+			Alert alert;
+			int counter = 0;
+
+			do {
+				if (counter <= 20) {
+					Thread.sleep(5000);
+					System.out.println("Time elapsed post sign In clicked --" + counter + "*5 sec.");
+				} else {
+					System.out.println("TimeOut!!!");
+					return null;
+				}
+				counter++;
+				try {
+					alert = wait.until(ExpectedConditions.alertIsPresent());
+					alert.accept();
+				} catch (NoAlertPresentException ex) {
+					System.out.println("NoAlertPresentException - No Aert Presernt...");
+				} catch (TimeoutException ex) {
+					System.out.println("TimeoutException - No Aert Presernt...");
+				}
+
+				if (driver.getTitle().contains("Internal Error") || driver.getTitle().contains("Sign In")) {
+					System.out.println("Error !!!");
+					return null;
+				}
+			} while (!((driver.getTitle().contains("Home")) || (driver.getTitle().contains("Test Harness"))));
+
+			System.out.println("Current URL: " + currentUrl());
+			if (currentUrl().contains("member/testharness.html")) {
+				return new AccountHomePage(driver);
+			} else if (currentUrl().contains("terminated-plan.html")) {
+				return new AccountHomePage(driver);
+			} else if (currentUrl().contains("/dashboard")) {
+				return new AccountHomePage(driver);
+			}
+			return null;
+		}
 		
 		
 		public Object doLoginWith(String username, String password) {
 
 	        System.out.println(driver.getCurrentUrl());
-			sendkeys(userNameField, username);
-			sendkeys(passwordField, password);
-			signInButton.click();
+			sendkeys(hsiduserNameField, username);
+			sendkeys(hsidpasswordField, password);
+			signInHsidButton.click();
 			
 			try {
 				Thread.sleep(20000);
