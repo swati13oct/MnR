@@ -7,6 +7,7 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.NoSuchElementException;
@@ -17,6 +18,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+
 import pages.acquisition.ulayer.PageTitleConstants;
 
 import java.util.ArrayList;
@@ -129,6 +131,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
         
         @FindBy(xpath = "//a[@class='cta-button']")
         private WebElement takeTheQuizBtn;
+        
+     
+        @FindBy(xpath = " //*[@id='subnav_2']/div[1]/div/div[3]/div/h3[3]/a")
+        private WebElement pharmacysearchbtn;
 
         private PageData homePageDisclaimer;
         public JSONObject homePageDisclaimerJson;
@@ -729,10 +735,22 @@ public class AcquisitionHomePage extends GlobalWebElements {
         }
 
         public PharmacySearchPage navigateToPharmacyLocator() {
-
-    		driver.manage().window().maximize();
+        	
+        	driver.manage().window().maximize();
+    		Actions action = new Actions(driver);
+    		PageFactory.initElements(driver, this);
+    		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
+    		pharmacysearchbtn.click();
+    		
+    		try {
+    			Thread.sleep(6000);
+    		} catch (InterruptedException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
+    		/*driver.manage().window().maximize();
     		start("https://www.team-ci1-uhcmedicaresolutions.ose-elr-core.optum.com/health-plans/aarp-pharmacy.html#/Pharmacy-Search-English");
-               /* if(planType.contains("MA"))
+            */   /* if(planType.contains("MA"))
                         pharmacyNearLink_MA.click();
                 else if(planType.contains("PDP")){
                         pharmacyNearLink.click();                
@@ -751,12 +769,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
                                 break;
                 }*/
     		
-    		 try {
-                 Thread.sleep(6000);
-         } catch (InterruptedException e) {
-                 // TODO Auto-generated catch block
-                 e.printStackTrace();
-         }
+    		
                 if (driver.getTitle().equalsIgnoreCase(
                                 PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE)) {
                         return new PharmacySearchPage(driver);

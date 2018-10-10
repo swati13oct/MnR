@@ -41,4 +41,4 @@ Then I click back to all plans button and verify that all 3 plans are still sele
 
 Examples:
 |zipcode|
-|80001 | 
+#|80001 | 
