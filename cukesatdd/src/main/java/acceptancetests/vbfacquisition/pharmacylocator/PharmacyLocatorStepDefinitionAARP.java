@@ -125,15 +125,13 @@ Date obj= new Date();
 	/**
 	 * @toDo:user hovers to Our Plans and select Request More Help and Information for following plan type
 	 */
-	@When("^the user hovers to Our Plans and select Request More Help and Information for following plan type in AARP Site$")
-	public void user_hovers_to_our_plans_and_select_request_more_help_and_information_aarp(DataTable planAttributes){
+	@When("^the user hovers to Our Plans and select pharmacy search for following plan type in AARP Site$")
+	public void user_hovers_to_our_plans_and_select_request_more_help_and_information_aarp(){
 		
- 		String planType = planAttributes.getGherkinRows().get(0).getCells()
-				.get(0);
-		getLoginScenario().saveBean(PharmacySearchCommonConstants.PLAN_TYPE, planType);
-		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
+ 		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		acqusitionHomePage.navigateToRequestMoreHelpAndInformation(planType);
+ 		PharmacySearchPage pharmacySearchPage =acqusitionHomePage.navigateToPharmacyLocator();
+ 		getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,pharmacySearchPage);
 	}
 
 	/**
@@ -190,8 +188,7 @@ Date obj= new Date();
 
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		pharmacySearchPage = pharmacySearchPage.enterZipDistanceDetails(
-				zipcode, distance, county);
+		pharmacySearchPage = pharmacySearchPage.enterZipDistanceDetails(zipcode, distance, county);
 
 		if (pharmacySearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,

@@ -26,7 +26,7 @@ Feature: test plan summary and Plan Details in vpp flow UHCMS site for AEP scena
       | 10/01/2018 |   90210 | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 
   @Bluelayer10_15
-  Scenario Outline: Verify plan summary and Plan Details in UHCMS site for server date 10/15 AEP enrollment period
+  Scenario Outline: Verify plan summary and Plan Details in UHCMS site for server date 10/01 pre-AEP period
     Given the user is on team-f dce date change url and changes DCE server date to following date
       | DCE Date | <dcedate> |
     Given the user is on the uhcmedicaresolutions site landing page
@@ -50,7 +50,7 @@ Feature: test plan summary and Plan Details in vpp flow UHCMS site for AEP scena
       | 10/15/2018 |   90210 | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
       
    @Bluelayer12_01
-  Scenario Outline: Verify plan summary and Plan Details in UHCMS site for server date 12/01 AEP period for Next Year and No -enrollment for current year
+  Scenario Outline: Verify plan summary and Plan Details in UHCMS site for server date 10/01 pre-AEP period
     Given the user is on team-f dce date change url and changes DCE server date to following date
       | DCE Date | <dcedate> |
     Given the user is on the uhcmedicaresolutions site landing page
