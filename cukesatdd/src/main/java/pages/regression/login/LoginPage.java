@@ -195,9 +195,9 @@ public class LoginPage extends UhcDriver {
 			if (currentUrl().contains("member/testharness.html")) {
 				return new AccountHomePage(driver);
 			} else if (currentUrl().contains("terminated-plan.html")) {
-				return new TerminatedHomePage(driver);
+				return new AccountHomePage(driver);
 			} else if (currentUrl().contains("/dashboard")) {
-				return new RallyDashboardPage(driver);
+				return new AccountHomePage(driver);
 			}
 			return null;
 		}
