@@ -1143,8 +1143,8 @@ public class AccountHomePage extends UhcDriver {
        }
 
        public PharmacySearchPage navigateToRedesignPharmacyLocaterPage() {
-/*                                waitForHomePage(helloPerson);
-              if (validate(iPerceptionAutoPopUp)) {
+              waitForHomePage(helloPerson);
+/*              if (validate(iPerceptionAutoPopUp)) {
                      iPerceptionAutoPopUp.click();
               } else {
                      System.out.println("iPerception Pop Up not displayed");
