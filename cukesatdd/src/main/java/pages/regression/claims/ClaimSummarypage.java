@@ -1172,8 +1172,7 @@ public void NavigateToClaimsPage(){
 			 * @toDo : Validate EOB section for PDP plans 
 			 */
 		 
-		 public  boolean validateEobPDP() throws InterruptedException{
-			 
+		 public void validateEobPDP(){
 				try {
 					Thread.sleep(5000);
 				} catch (InterruptedException e) {
@@ -1181,19 +1180,9 @@ public void NavigateToClaimsPage(){
 					e.printStackTrace();
 				}
 				validate(PrescriptionEobText1);
-				
-				  		
-     	if (PrescriptionEobText1.isDisplayed())
-	     	{
-	  			System.out.println(PrescriptionEobText1.getText());
-	  			System.out.println("EOB text displayed ");
-	  			//System.out.println("**** Error Message : "+Youhave.getText()+ " ****");
-	  			return true;  			
-	  		}
-	     	else
-					System.out.println("*** EOB text not displayed summary page  *****");
-			return false;
-					} 		
+				System.out.println("PDP EOB is displayed"  +  PrescriptionEobText.isDisplayed());
+			}
+		 
 	   
 		    /**
 			 * @toDo : Validate claims table for PDP plans

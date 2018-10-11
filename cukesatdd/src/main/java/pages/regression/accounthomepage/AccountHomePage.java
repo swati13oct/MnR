@@ -53,6 +53,8 @@ public class AccountHomePage extends UhcDriver {
     @FindBy(id = "plan_material_fnr2018")
     private WebElement PlanMaterialSection;
 
+    @FindBy(xpath = "//table[@class='componentTable']/tbody/tr/td/a[contains(.,'Contact Us')]")
+	private WebElement contactUsPageLink;
 
     @FindBy(css=".view-id-link")
     private WebElement idCardLink;
@@ -934,7 +936,15 @@ public class AccountHomePage extends UhcDriver {
                                             if (MRScenario.environmentMedicare.equals("team-ci1") || MRScenario.environmentMedicare.equals("team-h") || MRScenario.environmentMedicare.equals("test-a") || MRScenario.environmentMedicare.equals("team-e")) {
                                                    js.executeScript("arguments[0].click();", helpAndContactUslink);
                               
-                                           }else{
+                                           }else if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)){
+                                        	   JavascriptExecutor jse = (JavascriptExecutor) driver;
+                                       		jse.executeScript("window.scrollBy(0,-500)", "");
+                                       		validateNew(contactUsPageLink);
+                                       		contactUsPageLink.click();
+                                       		CommonUtility.checkPageIsReadyNew(driver);
+                                       		CommonUtility.waitForPageLoadNew(driver, heading, CommonConstants.TIMEOUT_60);
+                                       		Thread.sleep(3000L);
+                                       		}else{
                                                    linkContactUs.click();
                                            }
                                             CommonUtility.waitForPageLoad(driver, heading, 10);

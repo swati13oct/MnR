@@ -185,10 +185,9 @@ public class MRScenario {
 			InputStream memberTypeStream2;
 			if (environment.contains("team-ci")) {
 				memberTypeStream2 = ClassLoader.class.getResourceAsStream("/database/MemberRedesign-VBF-Teamci.csv");
-			} 
-			else if (environment.contains("team-a")) {
-				memberTypeStream2 = ClassLoader.class.getResourceAsStream("/database/MemberRedesign-team-a.csv");
-			}else {
+			}else if (environment.contains("team-a") || (environment.contains("team-e")) || (environment.contains("team-f")) || (environment.contains("team-g")) || (environment.contains("team-c")) || (environment.contains("team-t"))) {
+				memberTypeStream2 = ClassLoader.class.getResourceAsStream("/database/MemberRedesign-UUID.csv");
+			} else {
 				memberTypeStream2 = ClassLoader.class.getResourceAsStream("/database/MemberRedesign-VBF.csv");
 			}
 			memberRedesignVbfTypeReader = new BufferedReader(new InputStreamReader(memberTypeStream2));

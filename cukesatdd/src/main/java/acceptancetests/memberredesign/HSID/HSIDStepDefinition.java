@@ -24,11 +24,13 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
-import pages.redesign.HsidRegistrationPersonalCreateAccount;
+import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.login.AssistiveRegistrationPage;
 import pages.regression.login.DeregisterPage;
 import pages.regression.login.HSIDLoginPage;
+import pages.regression.login.HsidRegistrationPersonalCreateAccount;
+import pages.regression.login.LoginPage;
 
 /**
  * Functionality: Benefits and Coverage page
@@ -87,38 +89,42 @@ public class HSIDStepDefinition {
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 			
 		}
-        System.out.println("Selected Environment======>"+MRScenario.environment +"ANd Selected Domain from MRScenario"+ MRScenario.domain); 
+         
 		WebDriver wd = getLoginScenario().getWebDriver();
-		if ((MRScenario.environment).equalsIgnoreCase("stage"))
-		{
-			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		
+		if ("YES".equalsIgnoreCase(MRScenario.isHSIDCompatible)) {
 			HSIDLoginPage loginPage = new HSIDLoginPage(wd);
 			loginPage.validateelements();
 	        AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
-			
-			if (accountHomePage!= null) {
+	        if (accountHomePage!= null) {
 				 getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
 				Assert.assertTrue(true);
 			}
 			else {
 				Assert.fail("***** Error in loading  Redesign Account Landing Page *****");
 			}
-			
-		}else 
-		{
-			//LoginPage loginPage = new LoginPage(wd);
-			HSIDLoginPage loginPage = new HSIDLoginPage(wd);
-			
-			
-			{
-				loginPage.navigateToNewDashboardUrl();
-				getLoginScenario().saveBean(PageConstantsMnR.LOGIN_PAGE, loginPage);
-				AccountHomePage accountHomePage = (AccountHomePage) loginPage.teamhloginWith(userName, pwd);
-				getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-				getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
-				Assert.assertTrue(true);
-			}
-		}
+		} else {
+            if (("YES").equalsIgnoreCase(MRScenario.isTestHarness)) {
+            				LoginPage loginPage = new LoginPage(wd);
+            				
+            				AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWithLegacy(userName, pwd);
+                           if (accountHomePage != null) {
+                        	   getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
+                           } else {
+                                          Assert.fail("Login not successful...");
+                           }
+            } else {
+            				LoginPage loginPage = new LoginPage(wd);
+                           RallyDashboardPage rallyDashboard = (RallyDashboardPage) loginPage.loginWithLegacy(userName, pwd);
+                           if (rallyDashboard != null) {
+                                          getLoginScenario().saveBean(PageConstants.RALLY_DASHBOARD_PAGE, rallyDashboard);
+                           } else {
+                                          Assert.fail("Login not successful...");
+                           }
+            }
+}
+		
 		
 		/*AssistiveRegistrationPage assistiveregistration = (AssistiveRegistrationPage) loginPage.doLoginWith(userName, pwd);
 		if (assistiveregistration != null) {
@@ -128,7 +134,6 @@ public class HSIDStepDefinition {
 		else {
 			Assert.fail("***** Error in loading  Assistive Registration Page *****");
 		}*/
-
 
 	}
 	
@@ -172,7 +177,7 @@ public class HSIDStepDefinition {
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 		}
          
-		WebDriver wd = getLoginScenario().getWebDriverNew();
+		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		HSIDLoginPage loginPage = new HSIDLoginPage(wd);
 		loginPage.validateelements();
