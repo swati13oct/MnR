@@ -150,4 +150,19 @@ public class HsidRegistrationPersonalInformationPage extends UhcDriver {
 	public void validateMainErrorMessage(){
 		Assert.assertTrue("Main error message is not displayed",mainErrorMsg.isDisplayed());
 	}
+	
+	public HsidRegistrationPersonalCreateAccount clickContinue1(){
+		validate(continuebutton);
+		System.out.println("**** Big 5's entered , going to hit the continue button ****");		
+		continuebutton.click();
+		if(currentUrl().contains("register/createAccount")){
+			System.out.println("create account page is loaded");
+			return new HsidRegistrationPersonalCreateAccount(driver);
+		}
+		/*else{
+			Assert.assertTrue("Errors in Registration Personal Info page and not navigated to Create Account page",false);
+		}*/
+		//return null;
+		return new HsidRegistrationPersonalCreateAccount(driver);
+	}
 }

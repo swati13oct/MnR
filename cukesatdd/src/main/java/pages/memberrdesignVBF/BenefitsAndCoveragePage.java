@@ -107,7 +107,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-innetwrk-title")
 	private WebElement INNETWORK;
 
-	@FindBy(className = "atdd-outnetwrktitle")
+	@FindBy(xpath = "//*[contains(@id,'OUT-OF-NETWORK')]")
 	private WebElement OUTOFNETWORK;
 
 	public static final String learnmorestagetext_xpath = ".//*[@id='collapseStages']";
