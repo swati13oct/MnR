@@ -450,4 +450,31 @@ public boolean validate_alreadyEnrolled_ErrorMessage() {
 	}
 	return false;
 }
+
+/**
+* Generate a random number of given length
+* @param length Length of number to be generated
+* @return
+*/
+public static long generateRandomNumber(int length)
+{
+long randomNumber;
+
+String strNum = Double.toString(Math.random());
+strNum = strNum.replace(".","");
+
+if(strNum.length() > length)
+{
+strNum = strNum.substring(0,length); 
+}
+else
+{
+int remainingLength = length - strNum.length() + 1;
+randomNumber = generateRandomNumber(remainingLength);
+strNum = strNum.concat(Long.toString(randomNumber));
+}
+
+randomNumber=Long.parseLong(strNum);
+return randomNumber;
+}
 }
