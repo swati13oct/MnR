@@ -7,11 +7,13 @@ import static org.junit.Assert.fail;
 
 import java.util.Map;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import atdd.framework.UhcDriver;
 
@@ -112,6 +114,18 @@ public class PrelimineryQuestionsPage extends UhcDriver{
 	@FindBy(id = "hasEndStateRenalDisease")
 	private WebElement esrdError;
 	
+	@FindBy(xpath = "//*[@class='formset']//span/label[@for='disclosureHealth']")
+	private WebElement DisclosureCheckBox;
+	
+	@FindBy(id = "providerName")
+	private WebElement FirstName;
+	
+	@FindBy(id = "providerCity")
+	private WebElement City;
+	
+	@FindBy(id = "providerZip")
+	private WebElement Zip;
+	
 	public PrelimineryQuestionsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -141,6 +155,35 @@ public class PrelimineryQuestionsPage extends UhcDriver{
 		}
 		return null;
 	}
+	
+	
+public PersonalInformationPage Validate_use_and_disclosure_page() {
+		
+	if(DisclosureCheckBox.isDisplayed())
+		DisclosureCheckBox.click();
+	
+	FirstName.sendKeys("Test");
+	City.sendKeys("test");
+		
+	Select drpCountry = new Select(driver.findElement(By.id("state")));
+	drpCountry.selectByVisibleText("CALIFORNIA");
+	
+	Zip.sendKeys("90210");
+	NextBtn.click();
+	
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(driver.getCurrentUrl().contains("personal-information")){
+			System.out.println("OLE Personal Information Page is Displayed");
+			return new PersonalInformationPage(driver);
+		}
+		return null;
+	}
+	
 	
 	public boolean ValidateTFNPrelimQues(String PrelimQuesTFN) {
 		if(validate(RightRailTFN)){

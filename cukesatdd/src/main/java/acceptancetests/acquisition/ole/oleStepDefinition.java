@@ -631,6 +631,20 @@ public class oleStepDefinition {
 
 		}
 	}
+	
+	@Then("^the user navigates to Diabetic Preliminary Questions Page$")
+	public void the_user_navigates_to_Preliminary_Diabetic_Questions_Page() throws Throwable {
+		MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+		PrelimineryQuestionsPage prelimineryQuestionsPage = medicareInfoPage.navigate_to_Preliminary_Diabetes_Questions_page();
+		if (prelimineryQuestionsPage != null) {
+
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE,
+					prelimineryQuestionsPage);
+			System.out.println("OLE Preliminary Questions Page is Displayed");
+			Assert.assertTrue(true);
+		}
+		
+	}
 
 	@Then("^the user validates requierd fields for Preliminary Questions Page$")
 	public void the_user_validates_requierd_fields_for_Preliminary_Questions_Page(DataTable Flags) throws Throwable {
@@ -885,6 +899,27 @@ public class oleStepDefinition {
 				Assert.fail("OLE Personal Information Page is NOT Displayed");
 		}
 	}
+	
+	@Then("^the user navigates to Use and Disclosure Page$")
+	public void the_user_navigates_to_Use_and_Disclosure_page() throws Throwable {
+		
+			PrelimineryQuestionsPage prelimineryQuestionsPage = (PrelimineryQuestionsPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE);
+			PersonalInformationPage personalInformationPage = prelimineryQuestionsPage.Validate_use_and_disclosure_page();
+
+			if (personalInformationPage != null) {
+
+				getLoginScenario().saveBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE,
+						personalInformationPage);
+				System.out.println("OLE Personal Information Page is Displayed");
+				Assert.assertTrue(true);
+			}
+			else
+				Assert.fail("OLE Personal Information Page is NOT Displayed");
+		}
+	
+	
+	
+	
 
 	@Then("^the user enters following required information in Personal Information Page$")
 	public void the_user_enters_following_required_information_in_Personal_Information_Page(DataTable arg1) throws Throwable {
