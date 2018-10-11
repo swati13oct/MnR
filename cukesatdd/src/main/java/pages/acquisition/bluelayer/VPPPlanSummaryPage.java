@@ -533,8 +533,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				wait.until(ExpectedConditions.elementToBeClickable(medsupplans)).click();
 			}	
 		}
-   if(validate(toggleplanYear))
-			toggleplanYear.click();		return new VPPPlanSummaryPage(driver, planType);
+ /*  if(validate(toggleplanYear))
+			toggleplanYear.click();*/		return new VPPPlanSummaryPage(driver, planType);
 	}
 
 	private JSONObject formJsonObject(PageData vppPlanSummary) {
@@ -1533,8 +1533,8 @@ public WelcomePage EnrollmentValidationChronic(String PlanName) throws Interrupt
 
 	
 	System.out.println("Plan Name is : "+PlanName);	
-	JavascriptExecutor jse = (JavascriptExecutor)driver;
-	jse.executeScript("window.scrollBy(0,-100)", "");
+	/*JavascriptExecutor jse = (JavascriptExecutor)driver;
+	jse.executeScript("window.scrollBy(0,-10)", "");*/
 		Thread.sleep(2000);
 	WebElement EnrollmentButton = driver.findElement(By.xpath("(//*[@class='enrollment']/div[@class='swiper-content ng-scope']/a/span)[5]"));	
 	if(EnrollmentButton.isDisplayed())

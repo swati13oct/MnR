@@ -321,7 +321,8 @@ Feature: To test OLE common tool flow flow UMS site
       | PartA Date      | <partadate>      |
       | PartB Date      | <partbdate>      |
       | Card Type       | <cardtype>       |
-    Then the user validates the Plan details in Medicare Info OLE Right Rail
+    Then the user navigates to Diabetic Preliminary Questions Page
+    Then the user navigates to Use and Disclosure Page
       
  Examples: 
       | zipcode | county   | plantype  |      planName                              | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate |
