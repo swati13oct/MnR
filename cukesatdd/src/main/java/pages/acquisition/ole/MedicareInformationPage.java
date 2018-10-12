@@ -406,6 +406,7 @@ public boolean validate_negative_values() {
 }
 
 public boolean validate_alreadyEnrolled_ErrorMessage() {
+	
 	// TODO Auto-generated method stub
 	if(validate(AlreadyEnrolled_ErrorMessage)){
 		System.out.println("Already Enrolled Error message displayed :  ===>  "+AlreadyEnrolled_ErrorMessage.getText());

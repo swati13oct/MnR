@@ -609,6 +609,7 @@ public class oleStepDefinition {
 
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE,
 					prelimineryQuestionsPage);
+			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"false");
 			System.out.println("OLE Preliminary Questions Page is Displayed");
 			Assert.assertTrue(true);
 		}
@@ -1850,29 +1851,38 @@ public class oleStepDefinition {
 
 	@Then("^the user Validates Next Steps in Confirmation Page for the Plan Type\\.$")
 	public void the_user_Validates_Next_Steps_in_Confirmation_Page_for_the_Plan_Type() throws Throwable {
-		OLEconfirmationPage oleConfirmationPage = (OLEconfirmationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
-		if (oleConfirmationPage != null) {
-
-			String PlanType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
-
-			boolean Validation_Status = oleConfirmationPage.validate_nextSteps_for_Plantype(PlanType);
-			if(Validation_Status){
-				System.out.println("OLE Confirmation Page : Next Steps Validated");
-				getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE,
-						oleConfirmationPage);
-				Assert.assertTrue(true);
-			}
-			else{
-				System.out.println("Review and Submit Page : Next Steps  NOT validated");
-				Assert.fail();
-			}
+		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
+		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		if(alreadyEnrolled_Flag){
+			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+			Assert.assertTrue(true);
 		}
 		else{
-			getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE,
-					oleConfirmationPage);
-			System.out.println("OLE Confirmation Page is NOT Displayed : Already Enrolled or Enrollment Failed due to Service error");
-		}
 
+			OLEconfirmationPage oleConfirmationPage = (OLEconfirmationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
+			if (oleConfirmationPage != null) {
+
+				String PlanType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
+
+				boolean Validation_Status = oleConfirmationPage.validate_nextSteps_for_Plantype(PlanType);
+				if(Validation_Status){
+					System.out.println("OLE Confirmation Page : Next Steps Validated");
+					getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE,
+							oleConfirmationPage);
+					Assert.assertTrue(true);
+				}
+				else{
+					System.out.println("Review and Submit Page : Next Steps  NOT validated");
+					Assert.fail();
+				}
+			}
+			else{
+				getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE,
+						oleConfirmationPage);
+				System.out.println("OLE Confirmation Page is NOT Displayed : Already Enrolled or Enrollment Failed due to Service error");
+			}
+		}
 	}
 
 }

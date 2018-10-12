@@ -233,7 +233,7 @@ public boolean validate_SEPoptions_for_planType(String planType) {
 		e.printStackTrace();
 	}
 	if(planType.contentEquals("MA")){
-		if(validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer) && validate(MovedOutside_ServiceArea) && validate(Both_Medicare_Medicaid) && validate(Into_LongTerm) && validate(OutOf_LongTerm)){
+		if(validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer) && !validate(MovedOutside_ServiceArea) && validate(Both_Medicare_Medicaid) && validate(Into_LongTerm) && validate(OutOf_LongTerm)){
 			System.out.println("All Options for MA/MAPD Plan are displayed in SEP pahe OLE flow : Validation Passed");
 			Validation_Flag = true;
 		}
