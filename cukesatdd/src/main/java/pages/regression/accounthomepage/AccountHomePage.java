@@ -1143,12 +1143,13 @@ public class AccountHomePage extends UhcDriver {
        }
 
        public PharmacySearchPage navigateToRedesignPharmacyLocaterPage() {
-                                waitForHomePage(helloPerson);
-              if (validate(iPerceptionAutoPopUp)) {
+              waitForHomePage(helloPerson);
+/*              if (validate(iPerceptionAutoPopUp)) {
                      iPerceptionAutoPopUp.click();
               } else {
                      System.out.println("iPerception Pop Up not displayed");
-              }
+              }*/
+    	   	  checkForIPerceptionModel(driver);
               if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a") || MRScenario.environmentMedicare.equalsIgnoreCase("test-a") || MRScenario.environment.equalsIgnoreCase("team-ci1")) {
                      System.out.println("Go to Pharmacy locator is present "+ pharmacySearchLink.isDisplayed());
                      pharmacySearchLink.click();              

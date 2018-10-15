@@ -258,12 +258,13 @@ public void enter_first_name_last_name_date_of_birth_zip_code_member_id_and_clic
 	String memberId = memberAttributesMap.get("memberid");
 	System.out.println("firstName: "+firstName +"lastName: "+lastName +"dob: "+dob+"memberId: "+memberId +"zipcode: " + zipcode);
 	hsidRegistrationPersonalInfoPage.populatefields(firstName, lastName, dob,zipcode, memberId);
-	//HsidRegistrationPersonalCreateAccount hsidRegistrationPersonalCreateAccount = hsidRegistrationPersonalInfoPage.clickContinue1();
-	/*if(hsidRegistrationPersonalCreateAccount!=null){
+	/*HsidRegistrationPersonalCreateAccount hsidRegistrationPersonalCreateAccount 
+									= hsidRegistrationPersonalInfoPage.clickContinue1();
+	if(hsidRegistrationPersonalCreateAccount!=null){
 		getLoginScenario().saveBean(PageConstants.HSID_REGISTRATION_PERSONALCREATEACCOUNT, hsidRegistrationPersonalCreateAccount);
-	System.out.println(" ***The page is not null *** ");}*/
+	System.out.println(" ***The page is not null *** ");
 
-	
+	}*/	
 }
 @When("^preuser is navigated to step two:create account page$")
 public void user_is_navigated_to_step_two_create_account_page() throws Throwable {

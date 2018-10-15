@@ -66,6 +66,12 @@ public class TeamCAcqHome extends GlobalWebElements {
 	}
 
 	public VPPPlanSummaryPage searchPlans(String zipcode, String countyName) {
+		try{
+             Thread.sleep(3000);
+		}catch(InterruptedException e)
+		{
+			System.out.println("Zipcode CTA took time to load");
+		}
         sendkeys(zipCodeField, zipcode);
         viewPlansButton.click();
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
