@@ -65,7 +65,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 
 	/** Plan Material Section **/
 
-	@FindBy(id = "plan_material_fnr2018")
+	@FindBy(xpath = "(//div[contains(@class,'formsAndResourcesParsys')]//div[contains(@class,'planMaterial201') and not(contains(@class,'ng-hide'))]//div[contains(@id,'plan_material_fnr201')])[1]")
 	private WebElement PlanMaterialSection;
 
 	/* for active uhc member */
@@ -79,7 +79,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	@FindBy(xpath = "(//div[contains(@class,'planBenefitsHeaderParsys')]//div[@class='otherPages']//a[contains(text(),'ORDER PLAN MATERIALS')])[1]")
 	private WebElement OrderPlanMaterialLink;
 
-	@FindBy(xpath = "//*[@id='lang-select-2source-content-configurations_plan-material_jcr-content_overview_formsandresourcescon_formsAndResourcesParsys_customsegments2018_segmentContainer_planbenefitdocuments']")
+	@FindBy(xpath = "//div[contains(@class,'formsAndResourcesParsys')]//div[contains(@class,'planMaterial201') and not(contains(@class,'ng-hide'))]//select[contains(@id,'lang-select-2source-content-configurations_plan-material_jcr-content_overview_formsandresourcescon_formsAndResourcesParsys_customsegments')]")
 	private WebElement languagedropdown;
 
 	/** Anoc Section **/
