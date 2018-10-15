@@ -170,8 +170,8 @@ public class TestHarness extends UhcDriver {
 				Assert.fail("Check member termination date!!!");
 			}
 		}
-		validateNew(orderPlanPageLink);
-		validateNew(claimsPageLink);
+		//validateNew(orderPlanPageLink);
+		//validateNew(claimsPageLink);
 
 	}
 
