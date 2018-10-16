@@ -20,22 +20,22 @@ public class RallyDashboardPage extends UhcDriver {
 	@FindBy(id = "findcarecost2")
 	private WebElement panelFindCareCost1;
 
-	@FindBy(xpath = "(//nav[@id='main-nav']//a[contains(text(),'Find Care')])[1]")
+	@FindBy(xpath = "(//sticky[@id='sticky-nav']//a[contains(text(),'Find Care')])[1]")
 	private List<WebElement> panelFindCareCost;
 
-	@FindBy(xpath = "(//nav[@id='main-nav']//a[contains(text(),'Coverage & Benefits')])[1]")
+	@FindBy(xpath = "(//sticky[@id='sticky-nav']//a[contains(text(),'Coverage & Benefits')])[1]")
 	private WebElement panelBnC;
 
-	@FindBy(xpath = "(//nav[@id='main-nav']//a[contains(text(),'Premium Payments')])[1]")
+	@FindBy(xpath = "(//sticky[@id='sticky-nav']//a[contains(text(),'Premium Payments')])[1]")
 	private List<WebElement> panelPremiumPayment;
 
-	@FindBy(xpath = "(//nav[@id='main-nav']//a[contains(text(),'Home')])[1]")
+	@FindBy(xpath = "(//sticky[@id='sticky-nav']//a[contains(text(),'Home')])[1]")
 	private WebElement panelHome;
 
-	@FindBy(xpath = "(//nav[@id='main-nav']//a[contains(text(),'Claims')])[1]")
+	@FindBy(xpath = "(//sticky[@id='sticky-nav']//a[contains(text(),'Claims')])[1]")
 	private WebElement panelClaims;
 
-	@FindBy(xpath = "(//nav[@id='main-nav']//a[contains(text(),'Health')])[1]")
+	@FindBy(xpath = "(//sticky[@id='sticky-nav']//a[contains(text(),'Health')])[1]")
 	private WebElement panelHealth;
 
 	@FindBy(xpath = "//button[@id='dropdown-toggle--1']/span[contains(text(),'Profile')]")

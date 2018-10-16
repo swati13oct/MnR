@@ -991,7 +991,7 @@ public class MRScenario {
 					MRScenario.sessionId = ((RemoteWebDriver) webDriver).getSessionId().toString();
 					System.out.println("Session ID:" + (((RemoteWebDriver) webDriver).getSessionId()).toString());
 					getJobURL(getSessionId());
-					webDriver.manage().deleteAllCookies();
+					//webDriver.manage().deleteAllCookies();
 				} catch (MalformedURLException e) {
 					Assert.fail("Invalid Sauce URL: [" + URL + "]");
 				}
