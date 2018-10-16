@@ -1080,9 +1080,10 @@ public class AccountHomePage extends UhcDriver {
 
        public ClaimSummarypage navigateToClaimsSummaryPage() {
 
-              if (MRScenario.environmentMedicare.equalsIgnoreCase("team-h") || MRScenario.environmentMedicare.equalsIgnoreCase("test-a") || (MRScenario.environmentMedicare.equalsIgnoreCase("team-t") || MRScenario.environment.equalsIgnoreCase("team-ci1"))) {
+              if (MRScenario.environmentMedicare.equalsIgnoreCase("team-h") || MRScenario.environmentMedicare.equalsIgnoreCase("test-a") || MRScenario.environmentMedicare.equalsIgnoreCase("team-a")|| (MRScenario.environmentMedicare.equalsIgnoreCase("team-t") || MRScenario.environment.equalsIgnoreCase("team-ci1"))) {
                      System.out.println("Go to claims link is present "+driver.findElement(By.xpath("//a[text()='Go to Claims page']")).isDisplayed());
-                     driver.findElement(By.xpath("//a[text()='Go to Claims page']")).click();                 
+                     driver.findElement(By.xpath("//a[text()='Go to Claims page']")).click();
+                     return new ClaimSummarypage(driver);
               }
               else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
                      System.out.println("user is on Stage login page");                                       
@@ -1097,7 +1098,7 @@ public class AccountHomePage extends UhcDriver {
                                   // TODO Auto-generated catch block
                                   e.printStackTrace();
                            }
-                     }
+                     }return new ClaimSummarypage(driver);
 
               }
               else 
@@ -1118,7 +1119,7 @@ public class AccountHomePage extends UhcDriver {
                      }      
 
               }
-              return new ClaimSummarypage(driver);
+              return null;
        }
 
        public ClaimDetailsPage navigateToClaimDetailsPage() {

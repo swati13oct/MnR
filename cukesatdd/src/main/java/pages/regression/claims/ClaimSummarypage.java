@@ -1,6 +1,9 @@
 package pages.regression.claims;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NoSuchElementException;
@@ -10,6 +13,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import junit.framework.Assert;
 import pages.Global.Member.Footer;
@@ -240,6 +244,13 @@ public class ClaimSummarypage extends UhcDriver{
 	
 	@FindBy(xpath="//*[@id='skipToBodyContent']//div[@class='reviewclaimstextFed parsys']//p")
 	private WebElement clamsSummaryCopyText;
+	
+	@FindBy(id = "all-claims-print-claims-btn")
+	private WebElement validateclaimsprintbutton;
+	
+	@FindBy(id = "all-claims-download-btn")
+	private WebElement validateclaimsdownloadbutton;
+
 	
 
 
@@ -1305,9 +1316,35 @@ public void NavigateToClaimsPage(){
 					counter++;
 				} while (counter < 2);
 			}
-					
+			
+			public boolean verifyPrintAndDownloadOption() {
+				if(MRScenario.environment.equalsIgnoreCase("team-a"))
+				{
+					CommonUtility.waitForPageLoad(driver, ClaimsSummaryPage,60);				
+					validateNew (validateclaimsprintbutton);
+					validateNew (validateclaimsdownloadbutton);
+					return true;	
+				}else{
+					return true;
+				}
+								
+			}
+
+			public boolean validatePrintAndDownloadOption() {
+				if(MRScenario.environment.equalsIgnoreCase("team-a"))
+				{
+				CommonUtility.waitForPageLoad(driver, ClaimsSummaryPage,60);
+				String winHandleBefore = driver.getWindowHandle();
+				validateclaimsdownloadbutton.click();
+				validateclaimsprintbutton.click();
+				switchToNewTab();
+				System.out.println("New window = "+driver.getTitle());
+				driver.switchTo().window(winHandleBefore);
+				System.out.println("Main window = "+driver.getTitle());				
+				return true;
+				}else{
+					return true;
+				}
+			}
+			
 }
-
-
-
-
