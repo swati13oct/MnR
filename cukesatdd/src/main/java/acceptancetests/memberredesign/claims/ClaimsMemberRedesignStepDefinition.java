@@ -282,6 +282,20 @@ public class ClaimsMemberRedesignStepDefinition {
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		Assert.assertTrue(claimSummarypage.verifyDynamicText());
 	}
+	
+	
+	@And("^I can see the print and download option in claims details table$")
+	public void i_can_see_print_and_download_option_in_claims_table() throws Throwable {
+		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
+		Assert.assertTrue(claimSummarypage.verifyPrintAndDownloadOption());
+	   	}
+	
+	@And("I validate the print and download option in claims details table$")
+	
+	public void i_validate_print_and_download_option_in_claims_table() throws Throwable {
+		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
+		Assert.assertTrue(claimSummarypage.validatePrintAndDownloadOption());
+	   	}
 	/**
 	 * @toDo : Claims Table & pagination (if there are more than 10 claims.)
 	 */
@@ -631,6 +645,14 @@ public class ClaimsMemberRedesignStepDefinition {
 		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario()
 				.getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
 		claimDetailspage.validateClaimsTableInDetailsPage();
+	}
+	
+	
+	@And("^I validate the EOB option in claims details page in redesigned site$")
+	public void validate_EOB_option_claimsDetails() {
+		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario()
+				.getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+		claimDetailspage.validateEobInDetailsPage();
 	}
 	/**
 	 * 
