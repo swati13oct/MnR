@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import pages.member.ulayer.TerminatedHomePage;
 import pages.regression.accounthomepage.AccountHomePage;
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
@@ -21,7 +22,7 @@ import atdd.framework.UhcDriver;
  *
  */
 public class HSIDLoginPage extends UhcDriver {
-
+	private static String STAGE_DASHBOARD_URL = MRConstants.STAGE_DASHBOARD_NEW_DOMAIN_URL;
 	// Page URL
 	private static String PAGE_URL = MRConstants.HSIDURL;
 
@@ -42,6 +43,18 @@ public class HSIDLoginPage extends UhcDriver {
     
     @FindBy(xpath ="//div[@id='hsid-commonError']/p/span[2]")
     private WebElement EmailConfirmedtext;
+    
+    @FindBy(id = "username")
+	private WebElement thUserName;
+
+	@FindBy(id = "password")
+	private WebElement thPassword;
+
+	@FindBy(id = "sign-in-btn")
+	private WebElement thSignIn;
+
+	@FindBy(xpath=".//*[@id='IPEinvL']/map/area[1]")
+	private WebElement iPerceptionPopUp;
     
     private static String REGIRATION_URL = "https://st1.healthsafe-id.com/protected/register?HTTP_TARGETPORTAL=MNR&HTTP_ERRORURL=https://stage-medicare.uhc.com/&HTTP_TARGETURL=https%3A%2F%2Fstage-medicare.uhc.com%2Fmember%2Fpost-sign-in.html%3Ftarget%3Drallydashboard%26portalIndicator%3DUHC&HTTP_ELIGIBILITY=P&HTTP_GRADIENTCOLOR1=%23003DA1&HTTP_GRADIENTCOLOR2=%2300A8F7&HSID_DOMAIN_URL=https://st1.healthsafe-id.com&USE_TEST_RECAPTCHA=true";
 	
@@ -161,7 +174,7 @@ MRScenario loginScenario;
 		signInButton.click();
 		
 		try {
-			Thread.sleep(15000);
+			Thread.sleep(35000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -242,7 +255,82 @@ MRScenario loginScenario;
 	}
 	
 	
-	
+	public Object teamhloginWith(String username, String password) {
+		sendkeys(thUserName, username);
+		sendkeys(thPassword, password);
+		thSignIn.click();
+
+		if ( MRScenario.environmentMedicare.equalsIgnoreCase("team-ci1") || (MRScenario.environmentMedicare.equalsIgnoreCase("team-a"))) {
+
+			Alert alert = driver.switchTo().alert();
+			alert.accept();
+			//Alert alert1 = driver.switchTo().alert();
+			//alert1.accept();
+		} 
+
+		try{
+
+			if (MRScenario.environmentMedicare.equalsIgnoreCase("stage") || (MRScenario.environmentMedicare.equalsIgnoreCase("team-t")  || ( MRScenario.environmentMedicare.equalsIgnoreCase("team-ci1")))) {
+				Thread.sleep(50000);	
+			}else {
+
+				Thread.sleep(20000);
+			}
+
+			/*if (validate(iPerceptionPopUp)) {
+				System.out.println("iPerceptionPopUp is Displayed");
+				iPerceptionPopUp.click();
+			}*/
+		}catch(Exception e)        {
+			System.out.println("iPerception Pop Up not displayed");
+		}
+
+		if(currentUrl().contains("testharness.html") || currentUrl().contains("/dashboard"))
+
+		{
+			return new AccountHomePage(driver);
+		}
+		else if(currentUrl().contains("home/my-account-home.html")  || currentUrl().contains("/login.html") ) {
+			return new AccountHomePage(driver);
+		}
+		else if (currentUrl().contains("terminated-plan.html")) {
+			return new TerminatedHomePage(driver);
+		}
+
+		System.out.println("teamhloginWith is returing null. Please Update the above condition As per your Needs");
+
+		return null;
+	}
+
+	public void navigateToNewDashboardUrl(){
+		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage"))
+		{
+			System.out.println(STAGE_DASHBOARD_URL);
+			start(STAGE_DASHBOARD_URL);
+			System.out.println(STAGE_DASHBOARD_URL);
+			System.out.println("User is Navigating to Stage Dashboard");
+
+		}
+
+		else if (MRScenario.environmentMedicare.equalsIgnoreCase("team-c"))
+		{
+
+			start(MRConstants.MEDICARE_UHC_REDESIGN);
+			System.out.println("user is on Testharness Environment" + MRConstants.REDESIGN_LOGIN_URL);
+		}
+		else{
+
+			start(MRConstants.REDESIGN_LOGIN_URL+"?testharness=true");
+			System.out.println("Selected URL is ===========>" + MRConstants.REDESIGN_LOGIN_URL);
+			System.out.println("user is on Testharness Environment");
+		}
+		/*else
+		{
+			start(PAGE_URL_TEAM_MEDICARE_TESTHARNESS);
+			System.out.println("User is on Medicare Test harness page");	
+		}*/
+	}
+
 	
 	
 	}

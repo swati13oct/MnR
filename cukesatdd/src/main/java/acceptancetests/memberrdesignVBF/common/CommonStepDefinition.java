@@ -64,7 +64,6 @@ public class CommonStepDefinition {
 			System.out.println("Password is..." + pwd);
 			getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
-			launchBrowser();
 		}
 	}
 
@@ -76,6 +75,7 @@ public class CommonStepDefinition {
 	public void plantype_user_logs_in(DataTable memberattributes) throws InterruptedException {
 		String userName = (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
 		String pwd = (String) getLoginScenario().getBean(LoginCommonConstants.PASSWORD);
+		launchBrowser();
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
 		LoginPage loginPage = new LoginPage(wd);

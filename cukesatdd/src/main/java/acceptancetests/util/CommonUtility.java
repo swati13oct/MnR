@@ -419,15 +419,15 @@ public class CommonUtility {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 
 		for (int counter = 0; counter <= 23; counter++) {
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
 			if (js.executeScript("return document.readyState").toString().equals("complete")) {
 				System.out.println("Browser Page -- " + driver.getTitle() + " -- Is loaded.");
 				return true;
 			}
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}			
 		}
 		Assert.fail("TimeOut!!! Page not loaded");
 		return false;

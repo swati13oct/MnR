@@ -88,7 +88,7 @@ import acceptancetests.data.LoginCommonConstants;
                      
                      getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
                      HSIDLoginPage loginPage = new HSIDLoginPage(wd);
-                     loginPage.validateelements();
+                   /*  loginPage.validateelements();*/
                   AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
                      
                      if (accountHomePage!= null) {
@@ -133,7 +133,7 @@ import acceptancetests.data.LoginCommonConstants;
       FormsAndResourcesPage formsAndResourcesPage = accounthomepage.navigatetoFormsnResources();
       System.out.println("navigation worked");
       Thread.sleep(5000);
-      formsAndResourcesPage.waitforFNRpage();
+    /*  formsAndResourcesPage.waitforFNRpage();*/
       getLoginScenario().saveBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE, formsAndResourcesPage);
       System.out.println("forms and resources page");
                   
@@ -153,11 +153,11 @@ import acceptancetests.data.LoginCommonConstants;
       for (int i = 0; i < memberAttributesRow.size(); i++) {
                       memberAttributesMap.put(memberAttributesRow.get(i).getCells()
                                                       .get(0), memberAttributesRow.get(i).getCells().get(1));}
-                      Collection<String> values = memberAttributesMap.values();
-                      String[] targetArray = values.toArray(new String[values.size()]);
-                      System.out.println(values.size());
+    Collection<String> values = memberAttributesMap.values();
+    String[] targetArray = values.toArray(new String[values.size()]);
+     System.out.println(values.size());
                       
-                      boolean arraycheck = formsAndResourcesPage.verifypdfname(targetArray);
+                      boolean arraycheck = formsAndResourcesPage.xpathSelectionSectionwise(targetArray,"plan material");
                       if (arraycheck == true)
                       {
                       Assert.assertTrue(true);
@@ -232,7 +232,7 @@ Thread.sleep(6000);
         Assert.assertTrue(formsAndResourcesPage.checkPharmacyforgroup());
     }
     
-    @And ("^the Pharmacy locator link is displayed for PDP$")
+    @And ("^the Pharmacy locator link is displayed$")
     public void phamacypdp()
     {
        FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);                     
@@ -241,14 +241,30 @@ Thread.sleep(6000);
         if(formsAndResourcesPage.getPharmacyforPDP().isDisplayed())
         {
               Assert.assertTrue(true);
-              System.out.println("pharmacy locator link for PDP is present");
+              System.out.println("pharmacy locator link is present");
         }
         else 
         {
-              Assert.fail("pharmacy locator link for PDP is not present");
+              Assert.fail("pharmacy locator link is not present");
         }
     }
     
+    @And ("^the provider search link is displayed$")
+    public void providersearchdisplaying()
+    {
+       FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);                     
+       formsAndResourcesPage.scroll();
+       formsAndResourcesPage.scroll();
+        if(formsAndResourcesPage.getProviderforPDP().isDisplayed())
+        {
+              Assert.assertTrue(true);
+              System.out.println("provider link is present");
+        }
+        else 
+        {
+              Assert.fail("provider link is not present");
+        }
+    }
     
       @And("^the provider search link is not displayed for PDP")
       public void providerpdp()
@@ -272,6 +288,38 @@ Thread.sleep(6000);
           else 
           {
               Assert.fail("drug eob link for PDP is not present");
+          }
+      }
+    
+      @And("^the Drug EOB link is displayed for MAPD Group$")
+      public void eoblinkforpdpgrp()
+      {
+         FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);                     
+         formsAndResourcesPage.scroll();
+          if(formsAndResourcesPage.getDrugEOBforGroup().isDisplayed())
+          {
+              Assert.assertTrue(true);
+              System.out.println("drug eob link is present");
+          }
+          else 
+          {
+              Assert.fail("drug eob link is not present");
+          }
+      }
+     
+      @And("^the medical EOB link is displayed for MADP Group$")
+      public void eoblinkformapdgroup()
+      {
+         FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);                     
+         formsAndResourcesPage.scroll();
+          if(formsAndResourcesPage.getmedicalEOBforGroup().isDisplayed())
+          {
+              Assert.assertTrue(true);
+              System.out.println("medical eob link is present");
+          }
+          else 
+          {
+              Assert.fail("medical eob link is not present");
           }
       }
     
@@ -332,6 +380,13 @@ Thread.sleep(6000);
          Assert.assertTrue(formsAndResourcesPage.getpdptexaslogo().isDisplayed());
      }
    
+     @And("^the user verifies the alpeehip logo")
+     public void validatealpeehiplogo() throws InterruptedException 
+     {
+        FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+         Thread.sleep(2000);
+         Assert.assertTrue(formsAndResourcesPage.getalpeehiplogo().isDisplayed());
+     }
    
    @Then("^validate that the EOB section is displayed$")
    public void eobsec() throws InterruptedException
@@ -481,7 +536,7 @@ Thread.sleep(6000);
    }
     
    
-   @And("^the user verifies that the correct pdfs are coming in the anoc and annual directories section$")
+   @And("^the user verifies that the correct pdfs are coming in the anoc section$")
     public void verifyanocpdfscoming(DataTable givenAttributes) throws InterruptedException   {
        
     FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
@@ -495,7 +550,7 @@ Thread.sleep(6000);
     String[] targetArray = values.toArray(new String[values.size()]);
     System.out.println(values.size());
     
-    boolean arraycheck = formsAndResourcesPage.verifypdfnamesforanocdocuments(targetArray);
+    boolean arraycheck = formsAndResourcesPage.xpathSelectionSectionwise(targetArray,"anoc");
     if (arraycheck == true)
     {
          Assert.assertTrue(true);
@@ -621,22 +676,32 @@ public void validateEOBship() throws  InterruptedException {
 
        }
   
-@Then("^the user verifies the error message for ship if particular pdf is not present")
-       public void errormessagepresentforship() throws InterruptedException
+@Then("^the user verifies the pdfs for ship if particular pdf is not present")
+       public void errormessagepresentforship(DataTable givenAttributes) throws InterruptedException
        {  
-              FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
-       Thread.sleep(10000);
-       System.out.println("passed");
-       int arraylen=formsAndResourcesPage.checkshipdocuments();
-       if((arraylen==0) || (arraylen==1))
-       {
-          Assert.assertTrue(formsAndResourcesPage.geterrormessgaeforship().isDisplayed());
-       }
-       else if(arraylen==2)
-       {   
-          
-                 Assert.assertTrue(formsAndResourcesPage.checkerrormessageforship());
-       }
+	 FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+     List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+     System.out.println(memberAttributesRow);
+     Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+     for (int i = 0; i < memberAttributesRow.size(); i++) {
+                     memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+                                                     .get(0), memberAttributesRow.get(i).getCells().get(1));}
+   Collection<String> values = memberAttributesMap.values();
+   String[] targetArray = values.toArray(new String[values.size()]);
+    System.out.println(values.size());
+                     
+                     boolean arraycheck = formsAndResourcesPage.xpathSelectionSectionwise(targetArray,"ship plan material");
+                     if (arraycheck == true)
+                     {
+                     Assert.assertTrue(true);
+                     System.out.println("all pdfs are coming correctly");
+                     }
+                     else 
+                     {
+                     Assert.fail("pdfs not coming correctly");
+                     }
+                     Thread.sleep(2000);
+                     formsAndResourcesPage.scroll();
        }
 
        
@@ -678,16 +743,70 @@ public void validateEOBship() throws  InterruptedException {
                     
   }
   
-  @Then("^validate that the renew magazine section is displayed$")
+  @Then("^validate that the renew magazine section is displayed for MAPD$")
   public void validateRenewSection() throws InterruptedException {
                           
       FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
       
       formsAndResourcesPage.scroll();
       Thread.sleep(5000);
-    /*  formsAndResourcesPage.clickonperceptionpopup();*/
-  System.out.println("fnr section");
-         if(formsAndResourcesPage.getRenewMagazineSection().isDisplayed())
+      /*  formsAndResourcesPage.clickonperceptionpopup();*/
+       System.out.println("fnr section");
+         if(formsAndResourcesPage.getRenewMagazineSectionMAPD().isDisplayed())
+             {
+               System.out.println("renew sec is present");
+             }
+          else 
+                Assert.fail("renw sec not coming");
+                           
+         }
+  
+  @Then("^validate that the renew magazine section is displayed for PDP$")
+  public void validateRenewSectionPDP() throws InterruptedException {
+                          
+      FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+      
+      formsAndResourcesPage.scroll();
+      Thread.sleep(5000);
+      /*  formsAndResourcesPage.clickonperceptionpopup();*/
+       System.out.println("fnr section");
+         if(formsAndResourcesPage.getRenewMagazineSectionPDP().isDisplayed())
+             {
+               System.out.println("renew sec is present");
+             }
+          else 
+                Assert.fail("renw sec not coming");
+                           
+         }
+    
+  @Then("^validate that the renew magazine section is displayed for PDP UHC$")
+  public void validateRenewSectionPDPUHC() throws InterruptedException {
+                          
+      FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+      
+      formsAndResourcesPage.scroll();
+      Thread.sleep(5000);
+      /*  formsAndResourcesPage.clickonperceptionpopup();*/
+       System.out.println("fnr section");
+         if(formsAndResourcesPage.getRenewMagazineSectionPDPUHC().isDisplayed())
+             {
+               System.out.println("renew sec is present");
+             }
+          else 
+                Assert.fail("renw sec not coming");
+                           
+         }
+  
+  @Then("^validate that the renew magazine section is displayed for uhc grp$")
+  public void validateRenewSectionMAPDUHCGroup() throws InterruptedException {
+                          
+      FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+      
+      formsAndResourcesPage.scroll();
+      Thread.sleep(5000);
+      /*  formsAndResourcesPage.clickonperceptionpopup();*/
+       System.out.println("fnr section");
+         if(formsAndResourcesPage.getRenewMagazineSectionMAPDGroupUHC().isDisplayed())
              {
                System.out.println("renew sec is present");
              }
@@ -734,7 +853,7 @@ FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginSc
   public void medicaleobforMA()
   {
          FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
-         if(formsAndResourcesPage.getEOBMedicaButton().isDisplayed())
+         if(formsAndResourcesPage.getEOBMedicaButtonMA().isDisplayed())
       {
         System.out.println("medical eob for MA is present");
       }
@@ -756,13 +875,12 @@ FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginSc
                 Assert.fail("plan tab is missing");  
    }
       
-  @And("^the user scrolls till the end of the page to check the My Document and forms and resources section")
+  @And("^the user scrolls till the end of the page to check the forms and resources section")
   public void checkmydocumentandformsresourcessection()
   {
          FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
          formsAndResourcesPage.scroll();
          formsAndResourcesPage.scroll();
-         Assert.assertTrue(formsAndResourcesPage.getMyDocumentSection().isDisplayed());
          Assert.assertTrue(formsAndResourcesPage.getFormsandResourcesSection().isDisplayed());
   }
   
@@ -787,7 +905,7 @@ FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginSc
       public void eobpresentornot()
        {
          
-            FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+         FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
          Assert.assertTrue(formsAndResourcesPage.checkeobsection());
          Assert.assertTrue(formsAndResourcesPage.checkdrugeobforMA());
          Assert.assertTrue(formsAndResourcesPage.checkmedicaleob());
@@ -797,19 +915,45 @@ FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginSc
   @And("^user clicks on the view document and resources link and navigate to forms and resource page from member auth page")
   public void navigatofnrpage() throws InterruptedException
   { 
-         AccountHomePage accounthomepage = (AccountHomePage) loginScenario.getBean(PageConstants.ACCOUNT_HOME_PAGE);
-      Thread.sleep(20000);
+    AccountHomePage accounthomepage = (AccountHomePage) loginScenario.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+    Thread.sleep(20000);
 
-FormsAndResourcesPage formsAndResourcesPage = accounthomepage.navigatetoFormsnResourcesfrommemauth();
-System.out.println("navigation worked fine from member auth");
-Thread.sleep(5000);
-formsAndResourcesPage.waitforFNRpage();
-getLoginScenario().saveBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE, formsAndResourcesPage);
-System.out.println("forms and resources page");
+	FormsAndResourcesPage formsAndResourcesPage = accounthomepage.navigatetoFormsnResourcesfrommemauth();
+	System.out.println("navigation worked fine from member auth");
+	Thread.sleep(5000);
+	formsAndResourcesPage.waitforFNRpage();
+	getLoginScenario().saveBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE, formsAndResourcesPage);
+	System.out.println("forms and resources page");
       
          
   }
   
+  @Then("the member validate the correct Membership Materials section is coming")
+  public void validatemembershipmaterials(DataTable givenAttributes) throws InterruptedException
+  {
+	  FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+	  List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+      System.out.println(memberAttributesRow);
+      Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+      for (int i = 0; i < memberAttributesRow.size(); i++) {
+                      memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+                                                      .get(0), memberAttributesRow.get(i).getCells().get(1));}
+      Collection<String> values = memberAttributesMap.values();
+      String[] targetArray = values.toArray(new String[values.size()]);
+      System.out.println(values.size());
+      
+      boolean arraycheck = formsAndResourcesPage.verifypdfnamemembershipmaterials(targetArray);
+      if (arraycheck == true)
+      {
+      Assert.assertTrue(true);
+      System.out.println("all pdfs are coming correctly");
+      }
+      else 
+      {
+      Assert.fail("pdfs not coming correctly");
+      }
+      Thread.sleep(2000);
+  }
 
   }
        
