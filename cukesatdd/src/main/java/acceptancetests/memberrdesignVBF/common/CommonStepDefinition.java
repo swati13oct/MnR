@@ -190,4 +190,15 @@ public class CommonStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.COMMONSTEPDEFINITIONMEMVBF, commonStepDefinition);
 
 	}
+	/***
+	 * 
+	 */
+	@Then("^I should see Need Help section at the bottom$")
+	public void I_should_see_nned_help_section_at_botom() {
+		// Express the Regexp above with the code you wish you had
+		RallyDashboardPage rallyDashboard = (RallyDashboardPage) getLoginScenario()
+				.getBean(PageConstants.RALLY_DASHBOARD_PAGE);
+		rallyDashboard.validateNeedHelpSection();
+
+	}
 }
