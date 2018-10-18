@@ -12,6 +12,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.itextpdf.text.log.SysoCounter;
+
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
@@ -88,17 +91,15 @@ public class LoginPage extends UhcDriver {
 				& "NO".equalsIgnoreCase(MRScenario.isHSIDCompatible)) {
 			PAGE_URL = MRConstants.LEGACY_DASHBOARD.replace("awe-", "");
 		}
-
 		System.out.println("URL:" + PAGE_URL);
 		startNew(PAGE_URL);
-		CommonUtility.checkPageIsReadyNew(driver);
+		//CommonUtility.checkPageIsReadyNew(driver);
 		if ("NO".equalsIgnoreCase(MRScenario.isHSIDCompatible))
 			CommonUtility.waitForPageLoadNew(driver, signInButton, 60);
 			//validateNew(signInButton);
 		else
 			CommonUtility.waitForPageLoadNew(driver, signInHsidButton, 60);
 			//validateNew(signInHsidButton);
-
 	}
 
 	public JSONObject getBrowserCheck() {
@@ -126,8 +127,8 @@ public class LoginPage extends UhcDriver {
 
 	// loginWithLegacy tries to login from legacy page
 	public Object loginWithLegacy(String username, String password) throws InterruptedException {
-		sendkeysNew(userNameField, username);
-		sendkeysNew(passwordField, password);
+		sendkeys(userNameField, username);
+		sendkeys(passwordField, password);
 		signInButton.click();
 		System.out.println("Sign In clicked");
 		try {
@@ -139,32 +140,33 @@ public class LoginPage extends UhcDriver {
 			System.out.println("No Such alert displayed");
 		}
 		// CommonUtility.checkPageIsReady(driver);
-		WebDriverWait wait = new WebDriverWait(driver, 5);
+		WebDriverWait wait = new WebDriverWait(driver, 1);
 		Alert alert;
 		int counter = 0;
 
 		do {
-			if (counter <= 20) {
-				Thread.sleep(5000);
-				System.out.println("Time elapsed post sign In clicked --" + counter + "*5 sec.");
-			} else {
-				System.out.println("TimeOut!!!");
-				return null;
-			}
-			counter++;
+			
 			try {
 				alert = wait.until(ExpectedConditions.alertIsPresent());
 				alert.accept();
+				System.out.println("Alert accepted inside 2nd try block");
 			} catch (NoAlertPresentException ex) {
 				System.out.println("NoAlertPresentException - No Aert Presernt...");
 			} catch (TimeoutException ex) {
 				System.out.println("TimeoutException - No Aert Presernt...");
 			}
-
 			if (driver.getTitle().contains("Internal Error") || driver.getTitle().contains("Sign In")) {
 				System.out.println("Error !!!");
 				return null;
 			}
+			if (counter < 35) {
+				Thread.sleep(2000);
+				System.out.println("Time elapsed post sign In clicked --" + counter + "*2 sec.");
+			} else {
+				System.out.println("TimeOut!!!");
+				return null;
+			}
+			counter++;
 		} while (!((driver.getTitle().contains("Home")) || (driver.getTitle().contains("Test Harness"))));
 
 		System.out.println("Current URL: " + currentUrl());

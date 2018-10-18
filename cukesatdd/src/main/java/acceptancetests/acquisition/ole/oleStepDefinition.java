@@ -1924,6 +1924,21 @@ public class oleStepDefinition {
 
 	}
 
-}
+	@Then("^the user validates the presence for Preliminary Questions on Page$")	
+	public void the_user_validates_the_presence_for_Preliminary_Questions_on_Page(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> givenAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planname = givenAttributesMap.get("Plan Name");
+		PrelimineryQuestionsPage prelimineryQuestionsPage = (PrelimineryQuestionsPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE);
+		prelimineryQuestionsPage.VerifyPreliminaryQuestions(planname);
+	}
+} 
 
 

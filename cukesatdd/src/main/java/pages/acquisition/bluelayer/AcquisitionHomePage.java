@@ -10,6 +10,7 @@ import atdd.framework.MRScenario;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -59,7 +60,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
         @FindBy(xpath = "//div[@id='ipeL']/div[2]/map/area[3]")
         private WebElement popUpcloseLink;
 
-        @FindBy(id = "vpp_selectcounty_box")
+        @FindBy(xpath = "//div[@class='modal-title']")
         private WebElement countyModal;
 
         @FindBy(id = "ipeL")
@@ -383,19 +384,29 @@ public class AcquisitionHomePage extends GlobalWebElements {
                 sendkeys(zipCodeField, zipcode);
                 viewPlansButton.click();
         		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-                try {
-                        if (countyModal.isDisplayed()) {
-                                for (WebElement county : countyRows) {
-                                        if (county.getText().equalsIgnoreCase(countyName)) {
-                                                county.click();
-                                                break;
-                                        }
-
-                                }
-                        }
-                } catch (Exception e) {
-                        System.out.println("county box not found");
-                }
+               try {
+        			
+        			if (countyModal.isDisplayed()) {
+        				driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='"+countyName+"']")).click();
+        			}
+        			System.out.println("countyModal.getText() "+countyModal.getText());
+        			;
+        		} catch (Exception e) {
+        			System.out.println("county box not found");
+        		}
+//                try {
+//                        if (countyModal.isDisplayed()) {
+//                                for (WebElement county : countyRows) {
+//                                        if (county.getText().equalsIgnoreCase(countyName)) {
+//                                                county.click();
+//                                                break;
+//                                        }
+//
+//                                }
+//                        }
+//                } catch (Exception e) {
+//                        System.out.println("county box not found");
+//                }
                 try {
                         Thread.sleep(10000);
                 } catch (InterruptedException e) {
