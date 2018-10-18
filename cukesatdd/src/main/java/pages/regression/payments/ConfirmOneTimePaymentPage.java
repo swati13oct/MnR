@@ -84,7 +84,7 @@ public class ConfirmOneTimePaymentPage extends UhcDriver{
 
 	
     public ConfirmOneTimePaymentPage confirmsAutoPayment() throws InterruptedException  {
-    	
+    	Thread.sleep(2000); 
     	System.out.println("In Confirm auto pay method");
     	Thread.sleep(2000);    	
     	
