@@ -187,15 +187,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}else{
 			start(AARP_ACQISITION_PAGE_URL);
 		}
-		validate(navigationSectionHomeLink);
-		validate(navigationSectionOurPlansLink);
-		validate(navigationSectionMedicareEducationLink);
+		validateNew(navigationSectionHomeLink);
+		validateNew(navigationSectionOurPlansLink);
+		/*validate(navigationSectionMedicareEducationLink);
 		validate(navigationSectionEnterSearch);
-		validate(getStartedButton);
+		validate(getStartedButton);*/
 
-		validate(zipCodeField);
-		validate(viewPlansButton);
-		validate(po7Link);
+		validateNew(zipCodeField);
+		validateNew(viewPlansButton);
+		//validate(po7Link);
 
 		validate(footerAboutUsLink);
 		validate(footerContactUsLink);
