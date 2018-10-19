@@ -858,5 +858,7 @@ public class CommonConstants {
 	public static final String CATEGORY_TERMIATED	 = "TerminatedFed";
 	public static final long TIMEOUT_60 = 60;
 	public static final long TIMEOUT_90 = 90;
+	public static final String SAUCELABS_TUNNEL_IDENTIFIER = "SAUCELABS_TUNNEL_IDENTIFIER";
+	public static final String SAUCELABS_DEFAULT_TUNNEL = "OptumSharedTunnel-Stg";
 
 }

@@ -95,7 +95,7 @@ public class RallyDashboardPage extends UhcDriver {
 	@FindBy(xpath = "//sticky[@id='sticky-nav']//a[contains(text(),'Coverage & Benefits')]")
 	private WebElement BnClink;
 
-	@FindBy(xpath = "(//nav[@id='utility-nav']//a/span[contains(text(),'Help')])[1]")
+	@FindBy(xpath = "(//nav[contains(@class,'utility-nav')]//a/span[contains(text(),'Help')])[1]")
 	private WebElement ContactUsLink;
 
 	@FindBy(id = "hello-person")
