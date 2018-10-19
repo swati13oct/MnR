@@ -132,10 +132,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
         @FindBy(xpath = "//a[@class='cta-button']")
         private WebElement takeTheQuizBtn;
         
-     
+        @FindBy(xpath = ".//*[@id='colhowdoesthiswork_dce']//*[@itemprop='significantLink']/*[@class='cta-button secondary']")
+    	public WebElement getStarted;
+        
         @FindBy(xpath = " //*[@id='subnav_2']/div[1]/div/div[3]/div/h3[3]/a")
         private WebElement pharmacysearchbtn;
 
+        @FindBy(xpath = ".//*[@id='change-location']")
+        private WebElement changeLocationLink;
+        
         private PageData homePageDisclaimer;
         public JSONObject homePageDisclaimerJson;
         private PageData homePageDisclaimerHide;
@@ -173,27 +178,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
                 driver.manage().window().maximize();
         }
 
-        public GetStartedPage navigateToPrescriptionDrug() {
-                prescriptionsLink.click();
+        public DrugCostEstimatorPage navigateToDCEToolFromHome() throws InterruptedException {
 
-                for(int i = 0; i<10;i++){
-                        if (driver.getTitle().equalsIgnoreCase(
-                                        PageTitleConstants.BLAYER_MEDICARE_PLAN_TYPES_TITLE)) {
+    		driver.manage().window().maximize();
+    		getStarted.click();
 
-                                return new GetStartedPage(driver);
-                        }else{
-                                try {
-                                        Thread.sleep(1000);
-                                } catch (InterruptedException e) {
-                                        // TODO Auto-generated catch block
-                                        e.printStackTrace();
-                                }
-                        }
-                }
-
-                return null;
-
-        }
+    		if(driver.getCurrentUrl().contains("health-plans/estimate-drug-costs.html"))
+    				return new DrugCostEstimatorPage(driver);
+    		return null;
+    	}
 
         public ZipcodeLookupHomePage looksupforZipcodes() {
 
@@ -208,137 +201,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
                 }
                 return null;
 
-        }
-
-        public JSONObject accessingGlobalFooter() {
-
-                String fileName = CommonConstants.GLOBAL_FOOTER_PAGE_DATA;
-                globalFooter = CommonUtility.readPageData(fileName,
-                                CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
-
-                JSONObject jsonObject = new JSONObject();
-                for (String key : globalFooter.getExpectedData().keySet()) {
-                        WebElement element = findElement(globalFooter.getExpectedData()
-                                        .get(key));
-                        if (element != null) {
-                                if (validate(element)) {
-                                        try {
-                                                jsonObject.put(key, element.getText());
-                                        } catch (JSONException e) {
-                                                // TODO Auto-generated catch block
-                                                e.printStackTrace();
-                                        }
-                                }
-                        }
-                }
-                globalFooterJson = jsonObject;
-
-                return globalFooterJson;
-
-        }
-
-        public JSONObject accessingGlobalHeader() {
-
-                String fileName = CommonConstants.GLOBAL_HEADER_PAGE_DATA;
-                globalHeader = CommonUtility.readPageData(fileName,
-                                CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
-
-                JSONObject jsonObject = new JSONObject();
-                for (String key : globalHeader.getExpectedData().keySet()) {
-                        WebElement element = findElement(globalHeader.getExpectedData()
-                                        .get(key));
-                        if (element != null) {
-                                if (validate(element)) {
-                                        try {
-                                                jsonObject.put(key, element.getText());
-                                        } catch (JSONException e) {
-                                                // TODO Auto-generated catch block
-                                                e.printStackTrace();
-                                        }
-                                }
-                        }
-                }
-                globalHeaderJson = jsonObject;
-
-                return globalHeaderJson;
-
-        }
-
-        public JSONObject getBrowserCheck() {
-                String fileName = CommonConstants.UHC_BROWSER_CHECK_DATA;
-                browserCheckData = CommonUtility.readPageData(fileName,
-                                CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
-
-                JSONObject jsonObject = new JSONObject();
-                for (String key : browserCheckData.getExpectedData().keySet()) {
-                        WebElement element = findElement(browserCheckData.getExpectedData()
-                                        .get(key));
-                        if (element != null) {
-                                if (validate(element)) {
-                                        try {
-                                                jsonObject.put(key, element.getText());
-                                        } catch (JSONException e) {
-                                                // TODO Auto-generated catch block
-                                                e.printStackTrace();
-                                        }
-                                }
-                        }
-                }
-                browserCheckJson = jsonObject;
-
-                return browserCheckJson;
-        }
-
-        public JSONObject accessViewAllDisclaimerInformation() {
-                disclaimerViewLink.click();
-                String fileName = CommonConstants.HOME_PAGE_DISCLAIMER_DATA;
-                homePageDisclaimer = CommonUtility.readPageData(fileName,
-                                CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
-
-                JSONObject jsonObject = new JSONObject();
-                for (String key : homePageDisclaimer.getExpectedData().keySet()) {
-                        WebElement element = findElement(homePageDisclaimer
-                                        .getExpectedData().get(key));
-                        if (element != null) {
-                                if (validate(element)) {
-                                        try {
-                                                jsonObject.put(key, element.getText());
-                                        } catch (JSONException e) {
-                                                // TODO Auto-generated catch block
-                                                e.printStackTrace();
-                                        }
-                                }
-                        }
-                }
-                homePageDisclaimerJson = jsonObject;
-
-                return homePageDisclaimerJson;
-        }
-
-        public JSONObject accessViewAllDisclaimerHideInformation() {
-                disclaimerHideLink.click();
-                String fileName = CommonConstants.HOME_PAGE_DISCLAIMER_DATA;
-                homePageDisclaimerHide = CommonUtility.readPageData(fileName,
-                                CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
-
-                JSONObject jsonObject = new JSONObject();
-                for (String key : homePageDisclaimerHide.getExpectedData().keySet()) {
-                        WebElement element = findElement(homePageDisclaimerHide
-                                        .getExpectedData().get(key));
-                        if (element != null) {
-                                if (validate(element)) {
-                                        try {
-                                                jsonObject.put(key, element.getText());
-                                        } catch (JSONException e) {
-                                                // TODO Auto-generated catch block
-                                                e.printStackTrace();
-                                        }
-                                }
-                        }
-                }
-                homePageDisclaimerHideJson = jsonObject;
-
-                return homePageDisclaimerHideJson;
         }
 
         public SiteMapUMSPage siteMapFooterClick() {
@@ -396,12 +258,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
                 } catch (Exception e) {
                         System.out.println("county box not found");
                 }
-                try {
-                        Thread.sleep(10000);
-                } catch (InterruptedException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                }
+                CommonUtility.waitForPageLoad(driver, changeLocationLink, 30);
                 if (driver.getCurrentUrl().contains("plan-summary")) {
                         return new VPPPlanSummaryPage(driver);
                 }

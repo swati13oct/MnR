@@ -20,24 +20,6 @@ And I navigate to step3 page and validate drug info for DCE homepage flow uhc
 | Lipitor TAB 10MG| 90210 | 15miles |
 
 
-@dceVppBlayer
-Scenario Outline: To test the dce vpp flow
-Given the user is on blayer medicare acq site landing page
-When I access the vpp page using below zipcode on ums site
-	| Zip Code    | <zipcode>  |
-And I access the DCE tool
-	|Plan Type | <plantype> |
-And I have added a drug to my drug list on ums site
-	|Drug|<drug>|
-And I navigate to step2 page on ums site
-And I select the first pharmacy on there
-And I navigate to step3 page and validate the drug info
-	|Drug|<drug>|
-	
-Examples:
-| zipcode  |plantype |   drug   | 
-| 90210    | MA 	 |LIPITOR TAB 10MG|
-
 @switchNowStep3Blayer
 Scenario Outline: To test the dce vpp flow with switch now option
 Given the user is on blayer medicare acq site landing page

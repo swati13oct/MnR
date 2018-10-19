@@ -211,6 +211,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(id="backToPlanSummaryTop")
 	private WebElement backToPlansLink;
 	
+	@FindBy(id = "drugsTabId")
+	public WebElement step1;
+	
 	
 	public JSONObject vppPlanSummaryJson;
 
@@ -317,7 +320,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			}
 		} else if (planType.equalsIgnoreCase("MA")
 				|| planType.equalsIgnoreCase("MAPD")) {
-			if(validate(viewMAPlans)){
+			if(validate(viewPlans)){
 				((JavascriptExecutor)driver).executeScript("arguments[0].click();", viewMAPlans);
 			}
 			
@@ -910,12 +913,7 @@ CommonUtility.waitForPageLoad(driver, MAmoreDetailsLink, 30);
 	}
 	
 	public DrugCostEstimatorPage navigateToDCE(String plantype) {
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		if(plantype.equals("MA")||plantype.equals("MAPD")){
 			
 			if(validate(viewPlans)){
@@ -940,12 +938,8 @@ CommonUtility.waitForPageLoad(driver, MAmoreDetailsLink, 30);
 				}
 			
 		}
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		CommonUtility.waitForPageLoad(driver, step1, 30);
+		validateNew(step1);
 		if(currentUrl().contains("/estimate-drug-costs.html#/drug-cost-estimator"))
 			return new DrugCostEstimatorPage(driver);
 		return null;

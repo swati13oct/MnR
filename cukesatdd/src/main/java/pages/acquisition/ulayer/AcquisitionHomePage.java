@@ -5,6 +5,7 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
+import pages.acquisition.ulayer.DrugCostEstimatorPage;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -113,6 +114,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath = "//div[@class='overview-main']/h2")
 	private WebElement vppTop;
+	
+	@FindBy(xpath = ".//*[@id='colhowdoesthiswork_dce']//*[@itemprop='significantLink']/*[@class='cta-button secondary']")
+	public WebElement getStarted;
 
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
 	private static String AARP_ACQISITION_OFFLINE_PAGE_URL = MRConstants.AARP_URL_OFFLINE;
@@ -187,35 +191,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}else{
 			start(AARP_ACQISITION_PAGE_URL);
 		}
-		validate(navigationSectionHomeLink);
-		validate(navigationSectionOurPlansLink);
-		validate(navigationSectionMedicareEducationLink);
-		validate(navigationSectionEnterSearch);
-		validate(getStartedButton);
-
-		validate(zipCodeField);
-		validate(viewPlansButton);
-		validate(po7Link);
-
-		validate(footerAboutUsLink);
-		validate(footerContactUsLink);
-		validate(footerSiteMapLink);
-		validate(footerPrivacyPolicyLink);
-		validate(footerTermsAndConditionsLink);
-		validate(footerDisclaimersLink);
-		validate(footerAgentsAndBrokersLink);
 
 	}
 
 	public VPPPlanSummaryPage searchPlans(String zipcode, String countyName) {
 		
-		
-		try {
-			Thread.sleep(10000);
-			} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		CommonUtility.waitForPageLoad(driver, zipCodeField, 30);
 		sendkeys(zipCodeField, zipcode);
 		
 		viewPlansButton.click();
@@ -834,5 +815,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
         } else {
                 return null;
         }
+	}
+	  public DrugCostEstimatorPage navigateToDCEToolFromHome() throws InterruptedException {
 
-}}
+  		driver.manage().window().maximize();
+  		getStarted.click();
+
+  		if(driver.getCurrentUrl().contains("health-plans/estimate-drug-costs.html"))
+  				return new DrugCostEstimatorPage(driver);
+  		return null;
+  	}
+}

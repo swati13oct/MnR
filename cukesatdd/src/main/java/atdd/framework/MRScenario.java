@@ -687,7 +687,7 @@ public class MRScenario {
 		capabilities.setCapability("version", "66.0");
 		capabilities.setCapability("parent-tunnel", "sauce_admin");
 		capabilities.setCapability("tunnelIdentifier",
-				"OptumSharedTunnel-Prd");
+				"OptumSharedTunnel-Stg");
 		//capabilities.setCapability("name", "MRATDD-TestSuite");
 		capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
 		String jobName = "VBF Execution - Using " + capabilities.getBrowserName() + " in  " + System.getProperty("environment") +" environment";
