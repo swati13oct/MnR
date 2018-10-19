@@ -92,6 +92,7 @@ public class MRScenario {
 	private static String JobURL = null;
 	public static boolean isSauceLabSelected = false;
 	public static int count = 0;
+	public static String sauceLabsTunnelIdentifier;
 
 	public static final String USERNAME = "ucpadmin";
 
@@ -149,6 +150,9 @@ public class MRScenario {
 				: System.getProperty(CommonConstants.IS_TESTHARNESS));
 		isHSIDCompatible = (null == System.getProperty(CommonConstants.IS_HSID_COMPATIBLE)
 				? props.get("isHSIDCompatible") : System.getProperty(CommonConstants.IS_HSID_COMPATIBLE));
+		
+		sauceLabsTunnelIdentifier = (null == System.getProperty(CommonConstants.SAUCELABS_TUNNEL_IDENTIFIER) ? CommonConstants.SAUCELABS_DEFAULT_TUNNEL
+				: System.getProperty(CommonConstants.SAUCELABS_TUNNEL_IDENTIFIER));
 
 		// Setting permission to the scripts , so that jenkins server can access
 		File shellScript = new File("src/main/resources/pdfReportGenerator.sh");
@@ -687,8 +691,9 @@ public class MRScenario {
 		capabilities.setCapability("version", "66.0");
 		capabilities.setCapability("parent-tunnel", "sauce_admin");
 		capabilities.setCapability("tunnelIdentifier",
-				"OptumSharedTunnel-Stg");
-		//capabilities.setCapability("name", "MRATDD-TestSuite");
+sauceLabsTunnelIdentifier);		
+		/*capabilities.setCapability("tunnelIdentifier",
+				"OptumSharedTunnel-Prd");*/		//capabilities.setCapability("name", "MRATDD-TestSuite");
 		capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
 		String jobName = "VBF Execution - Using " + capabilities.getBrowserName() + " in  " + System.getProperty("environment") +" environment";
 		capabilities.setCapability("name", jobName);
@@ -980,8 +985,9 @@ public class MRScenario {
 					capabilities.setCapability("recordMp4", true);
 				}
 				capabilities.setCapability("autoAcceptsAlerts", true);
-				capabilities.setCapability("parent-tunnel", "sauce_admin");
-				capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
+				capabilities.setCapability("parent-tunnel", "sauce_admin");				
+				capabilities.setCapability("tunnelIdentifier", sauceLabsTunnelIdentifier);
+				//capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
 				capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
 				String jobName = "VBF Execution - Using " + capabilities.getBrowserName() + " in  " + System.getProperty("environment") +" environment";
 				capabilities.setCapability("name", jobName);

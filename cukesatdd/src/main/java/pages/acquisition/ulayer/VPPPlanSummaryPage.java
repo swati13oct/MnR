@@ -53,7 +53,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[1]//*[@class='trigger-closed']")
 	private WebElement maPlansViewLink;
 	
-	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[4]//*[@class='trigger-closed']")
+	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[4]//a[@class='trigger-closed']")
 	private WebElement snpPlansViewLink;
 
 	@FindBy(id = "plan-list-1")
@@ -1002,7 +1002,7 @@ CommonUtility.waitForPageLoad(driver, MAmoreDetailsLink, 30);
 	public String getPlanPremium(String PlanName) {
 		
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

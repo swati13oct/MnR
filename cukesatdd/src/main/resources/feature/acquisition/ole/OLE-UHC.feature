@@ -328,6 +328,43 @@ Feature: To test OLE common tool flow flow UMS site
       | zipcode | county   | plantype  |      planName                              | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate |
       |   78006 | Kendall County | SNP | UnitedHealthcare Chronic Complete (HMO SNP) |HICN     | John      | Doe      | 987456321t     | false   |  01012010 |  01012010 |
       
+      
+  #-------------------
+  @preliminaryQuestion @spartans @december_release2018
+ Scenario Outline: Test to check new question added to ole flow cardiovascular diabeties and chronic heart failure in UHC 
+    Given the user is on the uhcmedicaresolutions site landing page
+    When the user performs plan search using following information in UMS site
+      | Zip Code    | <zipcode> |
+      | County Name | <county>  |
+    When user views plans of the below plan type in UMS site
+      | Plan Type | <plantype> |
+    Then the user clicks on Enroll Now for AARP site to start the OLE flow
+      | Plan Name | <planName> |
+    #Then the user validates the Plan details on OLE
+    Then the user validates and selects the Disclaimer Checkbox
+    Then the user navigates to Medicare Information Page
+    #Then the user validates Medicare Information Page required fields
+    Then the user enters following required Medicare Information
+      | First Name      | <firstname>      |
+      | Last Name       | <lastname>       |
+      | Medicare Number | <medicarenumber> |
+      | SSN Flag        | <ssnflag>        |
+      | PartA Date      | <partadate>      |
+      | PartB Date      | <partbdate>      |
+      | Card Type       | <cardtype>       |
+    Then the user validates the Plan details in Medicare Info OLE Right Rail
+    Then the user navigates to Preliminary Questions Page
+    Then the user validates the presence for Preliminary Questions on Page
+    | Plan Name | <planName> |
+     
+    Examples: 
+      | zipcode | county             | plantype | planName                                          | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                      | optiondata        | pdpFlag | longTermFlag | riderflag |
+      |   78006 | Bexar County | SNP     | UnitedHealthcare Chronic Complete (HMO SNP) | HICN     | John      | Doe      | 987654333C     | false   |  01012010 |  01012010 |      231665465 | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | yes          | true      |
+      |   78006 | Bexar County | SNP     | UnitedHealthcare Medicare Silver (Regional PPO SNP)  | HICN     | John      | Doe      | 987654333C     | false   |  01012010 |  01012010 |      231665465 | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | yes          | true      |
+      
+   
+      
+ 
 @oleVBF @oleVppUhc
 Scenario Outline: OLE Landing from UHC Acquisition site VPP Plan Summary
 Given the user is on the uhcmedicaresolutions site landing page
