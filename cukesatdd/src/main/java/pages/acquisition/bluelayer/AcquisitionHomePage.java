@@ -222,22 +222,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
                 }else{
                         start(UMS_ACQISITION_PAGE_URL);
                 }
-                
-                validate(navigationSectionHomeLink);
-                validate(navigationSectionOurPlansLink);
-                validate(navigationSectionmedicareEducationLink);
-                validate(navigationSectionEnterSearch);
-
-                validate(zipCodeField);
-                validate(viewPlansButton);
-
-                validate(footerAboutUsLink);
-                validate(footerContactUsLink);
-                validate(footerSiteMapLink);
-                validate(footerPrivacyPolicyLink);
-                validate(footerTermsAndConditionsLink);
-                validate(footerDisclaimersLink);
-                validate(footerAgentsAndBrokersLink);
 
         }
 

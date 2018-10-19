@@ -1,4 +1,4 @@
-package acceptancetests.acquisition.agentflow;
+package acceptancetests.acquisition.communityMeeting;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
@@ -25,19 +25,6 @@ public class AttendCommunityMeetingStepDefinitionUHC {
 		return loginScenario;
 	}
 
-	/**
-	 * @toDo: user lands on the acquisition page
-	 */
-	@Given("^the user is on the UHC acquisition site home page$")
-	public void the_user_on_uhc_medicaresolutions_Site() {
-		WebDriver wd = getLoginScenario().getWebDriver();
-
-		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
-
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		getLoginScenario().saveBean(PageConstantsMnR.ACQUISITION_HOME_PAGE,
-				aquisitionhomepage);
-	}
 	
 	/**
 	 * @toDo: user navigates to request more help and information page
@@ -45,7 +32,7 @@ public class AttendCommunityMeetingStepDefinitionUHC {
 	@When("^the user navigates to request more help and information page in UHC site and validates$")
 	public void request_more_help_information()
 	{
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario().getBean(PageConstantsMnR.ACQUISITION_HOME_PAGE);
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		RequestHelpAndInformationPage requestHelpAndInformationPage = aquisitionhomepage.navigateToMaMoreHelpAndInfo();
 		
 		if(requestHelpAndInformationPage!=null){
