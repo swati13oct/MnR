@@ -79,11 +79,8 @@ public class VppStepDefinitionUpdatedAARP {
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
 					plansummaryPage);
-/*			if(plansummaryPage.validateVPPPlanSummaryPage())
-				Assert.assertTrue(true);
-			else
-				Assert.fail("Error in validating the Plan Summary Page");
-*/		} else {
+
+		} else {
 			Assert.fail("Error Loading VPP plan summary page");
 		}
 	}

@@ -159,6 +159,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[2]/div/div/div/span/a")
 	private WebElement view2017Plans;
+	
+	@FindBy(id = "drugsTabId")
+	public WebElement step1;
 
 	@FindBy(className = "planYear")
 	WebElement planYear;
@@ -1190,22 +1193,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 
 	public boolean validateVPPPlanSummaryPage(){
-		WebDriverWait wait = new WebDriverWait(driver, 45000);
-		boolean flag = false;
-		/*if(validate(viewPlans)){
-		viewPlans = wait.until(ExpectedConditions.elementToBeClickable(viewPlans));
-		}
-		if(validate(viewPDPPlans)){
-		viewPDPPlans = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[3]/div/span[3]")));
-		}
-		if(validate(changeLocationBtn)){
-		changeLocationBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Change location")));
-		}*/
-
+		
+		CommonUtility.waitForPageLoad(driver, viewPlans, 30);
 
 		if(validate(viewPlans)&&validate(viewPDPPlans)&&validate(changeLocationBtn))
-			flag = true;
-		return flag;
+			return true;
+		return false;
 	}
 
 
@@ -1257,12 +1250,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public void clickOnViewPlans(String plantype) {
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		CommonUtility.waitForPageLoad(driver, viewPlans, 30);
 		if(plantype.equals("MA")||plantype.equals("MAPD")){
 			viewPlans.click();
 		}else
@@ -1272,21 +1260,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public DrugCostEstimatorPage navigateToDCE(String plantype) {
 		if(plantype.equals("MA")||plantype.equals("MAPD")){
-			//viewPlans.click();
 			List<WebElement> maDCELink = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[@class='mabenefittable']//a[contains(@dtmname, 'Plans Landing:Plan:MA:Drug Cost Estimator')]"));
 			maDCELink.get(0).click();
 		}else{
-			//viewPDPPlans.click();
 			List<WebElement> view2017PDPPlans = driver.findElements(By.id("pdpDrugCostEstimatorLink"));
 			view2017PDPPlans.get(0).click();
 
 		}
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		CommonUtility.waitForPageLoad(driver, step1, 30);
 		if(currentUrl().contains("/estimate-drug-costs.html#/drug-cost-estimator"))
 			return new DrugCostEstimatorPage(driver);
 		return null;
