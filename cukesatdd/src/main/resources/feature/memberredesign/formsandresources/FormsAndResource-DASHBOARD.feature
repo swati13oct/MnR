@@ -1,6 +1,41 @@
 @dashBoardFormsAndResources @gladiators @regression_06_06_18
 Feature: G1.1 To validate forms and resources page in dashboard site
 
+#Pre-Effective Federal Cases
+@pre-effectivefnrmapdaarpindividualvalidation 
+Scenario Outline: 
+    Given login with following details logins in the member redesign portal
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+	And user clicks on the view document and resources link and navigate to forms and resource page   
+	And validates that plan material section is not displayed
+	And validate that english is default language in dropdown
+	Then the member validate the correct Membership Materials section is coming
+     | GETTING STARTED GUIDE    | <gettingstartedguide>     |
+     | BENEFIT-HIGHLIGHT        | <benefithighlight>        |
+     | COMPREHENSIVE FORMULARY  | <comprehensiveformulary>  |
+     | Alternative Drug List 	| <alternativedruglist>     |
+     | EVIDENCE OF COVERAGEMEM  | <evidenceofcoverage>      |
+     | PASSPORT					| <passport>    			|
+     | OVER THE COUNTER			| <overthecounter>    		|
+   # Then validate that the annual directories section is displayed
+    Then validate that My document section is displayed
+    And both Pharmacy and provider search links are displayed
+    | PlanType |<planType>|
+    Examples: 
+      
+    
+     | planType | memberType           			  | language | gettingstartedguide   | benefithighlight   |  comprehensiveformulary|alternativedruglist   | evidenceofcoverage   |passport                             | overthecounter  			   | comprehensiveformularymem  | providerdirectory   | vendorInformationsheet    |pharmacydirectoryinformation  |
+     | MAPD     | IndAARPPre-EffectiveFnR 		  | ENGLISH  | Getting Started Guide | Benefit Highlights | Comprehensive Formulary|Alternative Drug List | Evidence of Coverage |UnitedHealth Passport Program| OVER THE COUNTER ESSENTIALS   | Comprehensive Formulary    | Provider Directory  | Vendor Information Sheet  |Pharmacy Directory Information|
+
+
+
+
+
+
+
+
+#Effective Users
   @fnrmapdaarpindividualvalidation
   Scenario Outline: 
     Given login with following details logins in the member redesign portal
