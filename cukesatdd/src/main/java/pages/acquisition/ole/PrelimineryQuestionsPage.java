@@ -14,6 +14,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 
 import atdd.framework.UhcDriver;
 
@@ -125,6 +126,15 @@ public class PrelimineryQuestionsPage extends UhcDriver{
 	
 	@FindBy(id = "providerZip")
 	private WebElement Zip;
+	
+	@FindBy(id = "diabetes")
+	private WebElement diabetesLegend;
+
+	@FindBy(id = "chronicHeartFailure")
+	private WebElement chronicHeartFailureLegend;
+	
+	@FindBy(id = "thromboembolicdisorder")
+	private WebElement thromboembolicdisorderLegend;
 	
 	public PrelimineryQuestionsPage(WebDriver driver) {
 		super(driver);
@@ -435,4 +445,16 @@ public LeavingOLEmodal OpenLeaveOLEmodal() {
 	return null;
 }
 
+public void VerifyPreliminaryQuestions(String plantype) {
+	System.out.println("plantype :- "+ plantype);
+	Assert.assertTrue(validate(diabetesLegend), "Diabetes questions are not present");
+    Assert.assertTrue(validate(chronicHeartFailureLegend), "Chronic Heart Failure questions are not present");
+    
+    if(plantype.contains("Silver")) {
+    Assert.assertFalse(validate(thromboembolicdisorderLegend), "Thromboembolic Disorder questions are present");
+    }
+    else if (plantype.contains("Chronic")){
+    Assert.assertTrue(validate(thromboembolicdisorderLegend), "Thromboembolic Disorder questions are not present");
+    } 
+}
 }

@@ -17,12 +17,12 @@ Feature: 1.16-VBF-MemRedesign-To test FnR functionality
      | BENEFIT-HIGHLIGHT | <benefithighlight> |
      | SUMMARY-OF-BENEFIT |  <summaryofbenefits> |
      | EVIDENCE OF COVERAGE |  <evidenceofcoverage> |
-     |  UNITED HEALTH PASSPORT PROGRAM | <unitedhealthpassportprogram>  |
-     |  COMPREHENSIVE FORMULARY | <comprehensiveformulary> |
-     |  PRIOR AUTHORIZATION | <priorauth> |
-     |   STEP THERAPY |  <steptherapy> |
-     |  FORMULARY ADDITIONS| <formularyadd> |
-     |   FORMULARY DELETIONS| <formularydel> |
+    # |  UNITED HEALTH PASSPORT PROGRAM | <unitedhealthpassportprogram>  |
+    # |  COMPREHENSIVE FORMULARY | <comprehensiveformulary> |
+    # |  PRIOR AUTHORIZATION | <priorauth> |
+    # |   STEP THERAPY |  <steptherapy> |
+    # |  FORMULARY ADDITIONS| <formularyadd> |
+    # |   FORMULARY DELETIONS| <formularydel> |
    
     And for active member Temporary Id Card and Plan Order Material links are displayed
     And validates the view temporary id card link

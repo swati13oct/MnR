@@ -308,6 +308,8 @@ public class OneTimePaymentAarpStepDefintion {
 	
 	@And("^the user confirms the Autopayment in UHC site$")
 	public void confirms_payment_uhc() throws InterruptedException {
+		
+		Thread.sleep(2000);
 		ConfirmOneTimePaymentPage confirmOneTimePaymentsuccesspage = (ConfirmOneTimePaymentPage) getLoginScenario()
 				.getBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD);	
 		

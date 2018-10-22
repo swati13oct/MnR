@@ -78,7 +78,7 @@ public class FormsAndResourcesStepDefinition {
 		Collection<String> values = memberAttributesMap.values();
 		String[] targetArray = values.toArray(new String[values.size()]);
 		boolean arraycheck = formsAndResourcesPage.verifypdfname(targetArray);
-		if (arraycheck == true) {
+		if (arraycheck) {
 			Assert.assertTrue("all pdfs are coming correctly", true);
 			System.out.println("all pdfs are coming correctly");
 		} else {
@@ -190,7 +190,7 @@ public class FormsAndResourcesStepDefinition {
 	public void clicklinksonplanmaterials() throws InterruptedException {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
-		Thread.sleep(10000);
+		//Thread.sleep(10000);
 		formsAndResourcesPage.validateIDCard();
 
 	}

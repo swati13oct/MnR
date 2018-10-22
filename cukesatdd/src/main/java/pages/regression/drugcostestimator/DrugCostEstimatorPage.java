@@ -617,6 +617,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		delDrgConfirm.click();
 		Thread.sleep(5000);
 		waitForloader(driver, overlay, 30);
+		Thread.sleep(5000);
 
 	}
 
@@ -1071,7 +1072,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		Thread.sleep(2000);
 		costTab.click();
 		//	jsClick(costTab);
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		System.out.println("on cost tab step 3 ");
 	}
 

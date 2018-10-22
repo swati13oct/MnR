@@ -55,15 +55,8 @@ public class GlobalHeaderFooterStepDefinitionUHC {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		if(aquisitionhomepage != null){
-			JSONObject globalFooterActual = aquisitionhomepage
-					.accessingGlobalFooter();
-
-			System.out.println(globalFooterActual);
-			if (aquisitionhomepage.validateFooterLinks(globalFooterActual)) {
-				Assert.assertTrue(true);
-			} else {
-				Assert.fail("Error in validating foooter links check ");
-			}
+			
+			
 		}
 		else{
 			Assert.fail("Error in Home page");
