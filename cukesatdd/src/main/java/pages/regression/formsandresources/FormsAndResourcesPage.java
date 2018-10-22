@@ -134,8 +134,14 @@ public class FormsAndResourcesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='otherPages PlanDocumentsActiveCallouts2018']//*[contains(text(),'ORDER PLAN')]")
 	private WebElement OrderPlanMaterialLink;
 
-	@FindBy(xpath = "//*[@id='lang-select-2source-content-configurations_plan-material_jcr-content_overview_formsandresourcescon_formsAndResourcesParsys_customsegments_segmentContainer_planbenefitdocuments']")
-	private WebElement languagedropdown;
+	/*
+	 * @FindBy(xpath =
+	 * "//*[@id='lang-select-2source-content-configurations_plan-material_jcr-content_overview_formsandresourcescon_formsAndResourcesParsys_customsegments_segmentContainer_planbenefitdocuments']")
+	 * private WebElement languagedropdown;
+	 */
+
+	@FindBy(id = "lang-select-2overview_customsegments-welcomeKit-2018_segmentContainer_planbenefitdocuments")
+	private List<WebElement> languagedropdown;
 
 	/** Anoc Section **/
 	@FindBy(xpath = "(//*[@id=\"anoc_headerfnr\"])[1]/div/div/h2")
@@ -164,6 +170,10 @@ public class FormsAndResourcesPage extends UhcDriver {
 	// Locator')])[2]
 	@FindBy(xpath = "//*[@class='otherPages calloutBoth_AD']//*[contains(text(),'Pharmacy Locator')]")
 	private WebElement PharmacyLocatorLink;
+
+	/* PharmacyLocatorLink for MAPD */
+	@FindBy(xpath = "(//*[contains(text(),'Pharmacy Locator')])[7]")
+	private WebElement PharmacyLocatorLinkMAPD;
 
 	/* Provider Search link for PDP and MA */
 	@FindBy(xpath = "//*[@class='otherPages providerSearchCallout_AD']//*[text()='Provider Search']")
@@ -231,17 +241,31 @@ public class FormsAndResourcesPage extends UhcDriver {
 
 	@FindBy(xpath = "(//*[@class='document-list-new margin-small spanWithImmDiv divWithImmLi'])[1]/ul/li")
 	private List<WebElement> planmaterialxpath;
-	
-	
-	@FindBy(xpath ="(//*[@class='source-content-configurations_plan-material_jcr-content_overview_formsandresourcescon_formsAndResourcesParsys_customsegments_segmentContainer_planbenefitdocuments'])[1]/div/ul/li")
+
+	@FindBy(xpath = "(//*[@class='source-content-configurations_plan-material_jcr-content_overview_formsandresourcescon_formsAndResourcesParsys_customsegments_segmentContainer_planbenefitdocuments'])[1]/div/ul/li")
 	private List<WebElement> shipplanmaterialxpath;
-     
+
+	@FindBy(xpath = ("(//*[@alt='CoLogo'])[1]"))
+	private WebElement alpeehiplogo;
+
+	@FindBy(xpath = "//*[@class='overview_customsegments-welcomeKit-2018_segmentContainer_planbenefitdocuments']//li")
+	private List<WebElement> PreEffectiveMemMaterials;
+
 	
-	@FindBy(xpath =("(//*[@alt='CoLogo'])[1]"))
-    private WebElement alpeehiplogo;		
+	@FindBy(xpath = "//*[contains(text(),'Pharmacy Locator')])[7]")
+	private WebElement pharmacyLocatorLinkIndMAPDPreEffective;
+	
+	/**
+	 * @return the pharmacyLocatorLinkIndMAPDPreEffective
+	 */
+	public WebElement getPharmacyLocatorLinkIndMAPDPreEffective() {
+		return pharmacyLocatorLinkIndMAPDPreEffective;
+	}
+
 	/*
 	 * @FindBy(xpath="") private WebElement annualdirectoryxpath;
 	 */
+	String pDR = "Plan Documents & Resources";
 
 	public FormsAndResourcesPage(WebDriver driver) throws InterruptedException {
 		super(driver);
@@ -489,7 +513,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	 * @toDo : to verify english as a default language
 	 */
 	public void validateEngDefault() {
-		Select oselect = new Select(languagedropdown);
+		Select oselect = new Select(languagedropdown.get(0));
 		if (oselect.getFirstSelectedOption().getText().equals("ENGLISH")) {
 			System.out.println(oselect.getFirstSelectedOption().getText());
 			System.out.println("true");
@@ -506,10 +530,10 @@ public class FormsAndResourcesPage extends UhcDriver {
 	 */
 	public void changelanguage() throws InterruptedException {
 		/* CommonUtility.waitForPageLoad(driver, pdf, 20); */
-		Select oselect = new Select(languagedropdown);
+		Select oselect = new Select(languagedropdown.get(0));
 
 		Thread.sleep(3000);
-		languagedropdown.click();
+		languagedropdown.get(0).click();
 		oselect.selectByVisibleText("SPANISH");
 		System.out.println(oselect.getFirstSelectedOption().getText());
 		Thread.sleep(6000);
@@ -539,7 +563,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	public boolean verifypdfname(String a[]) throws InterruptedException {
 		boolean checkflag = true;
 
-		Select langdropdwn = new Select(languagedropdown);
+		Select langdropdwn = new Select(languagedropdown.get(0));
 		if (langdropdwn.getFirstSelectedOption().getText().contains("ENGLISH")) {
 
 			java.util.List<WebElement> pdfs = driver.findElements(
@@ -642,14 +666,14 @@ public class FormsAndResourcesPage extends UhcDriver {
 	}
 
 	public boolean verifypdfnamemembershipmaterials(String a[]) throws InterruptedException {
-		boolean checkflag = true;
+		boolean checkflag = false;
 
-		Select langdropdwn = new Select(languagedropdown);
+		Select langdropdwn = new Select(languagedropdown.get(0));
 		if (langdropdwn.getFirstSelectedOption().getText().contains("ENGLISH")) {
 
-			java.util.List<WebElement> pdfs = driver
-					.findElements(By.xpath("//*[@class='overview_customsegments-welcomeKit-2018_segmentContainer_planbenefitdocuments']/div/ul/li"));
+			java.util.List<WebElement> pdfs = PreEffectiveMemMaterials;
 			System.out.println(pdfs.size());
+			System.out.println(a.length);
 			for (int i = 0; i < pdfs.size(); i++) {
 				String pdfnames = null;
 				pdfnames = (pdfs.get(i).getText());
@@ -658,7 +682,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 
 			for (int i = 0; i < pdfs.size(); i++) {
 				String pdf[] = pdfs.get(i).getText().split(Pattern.quote("("));
-				if (pdf[0].contains(a[i])) {
+				if (pdf[0].trim().toLowerCase().contains(a[i].trim().toLowerCase())) {
 					System.out.println(pdf[0]);
 					checkflag = true;
 				} else {
@@ -669,8 +693,8 @@ public class FormsAndResourcesPage extends UhcDriver {
 
 		} else if (langdropdwn.getFirstSelectedOption().getText().contains("SPANISH")) {
 
-			java.util.List<WebElement> pdfs = driver
-					.findElements(By.xpath("//*[@class='overview_customsegments-welcomeKit-2018_segmentContainer_planbenefitdocuments']/div/ul/li"));
+			java.util.List<WebElement> pdfs = driver.findElements(By.xpath(
+					"//*[@class='overview_customsegments-welcomeKit-2018_segmentContainer_planbenefitdocuments']/div/ul/li"));
 			System.out.println("Size" + pdfs.size());
 			for (int i = 0; i < pdfs.size(); i++) {
 				String pdfnames = null;
@@ -701,7 +725,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 		WebDriverWait wait = new WebDriverWait(this.driver, 40);
 		wait.until(new ExpectedCondition<Boolean>() {
 			public Boolean apply(WebDriver driver) {
-				if (driver.getTitle().contains("Documents Overview"))
+				if (driver.getTitle().contains(pDR))
 					return true;
 				else
 					return false;
@@ -994,7 +1018,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	}
 
 	public void selectlanguagedropdown(String language) {
-		Select langdropdwn = new Select(languagedropdown);
+		Select langdropdwn = new Select(languagedropdown.get(0));
 		langdropdwn.selectByVisibleText(language);
 	}
 
@@ -1003,29 +1027,22 @@ public class FormsAndResourcesPage extends UhcDriver {
 	}
 
 	public void checkshipdocuments() {
-		java.util.List<WebElement> pdfs = driver
-				.findElements(By.xpath("(//*[@class='source-content-configurations_plan-material_jcr-content_overview_formsandresourcescon_formsAndResourcesParsys_customsegments_segmentContainer_planbenefitdocuments'])[1]/div/ul/li"));
+		java.util.List<WebElement> pdfs = driver.findElements(By.xpath(
+				"(//*[@class='source-content-configurations_plan-material_jcr-content_overview_formsandresourcescon_formsAndResourcesParsys_customsegments_segmentContainer_planbenefitdocuments'])[1]/div/ul/li"));
 
 		String pdfnames[] = new String[pdfs.size()];
 		for (int i = 0; i < pdfs.size(); i++) {
 			pdfnames[i] = (pdfs.get(i).getText());
 		}
 
-		/*int pdfCount = 0;
-		if (ArrayUtils.isNotEmpty(pdfnames)) {
-
-			if (ArrayUtils.contains(pdfnames, "Benefit")) {
-				pdfCount = pdfCount + 1;
-
-			}
-			if (ArrayUtils.contains(pdfnames, "Outline")) {
-				pdfCount = pdfCount + 1;
-			}
-    */
-		}
-		
-
-	
+		/*
+		 * int pdfCount = 0; if (ArrayUtils.isNotEmpty(pdfnames)) {
+		 * 
+		 * if (ArrayUtils.contains(pdfnames, "Benefit")) { pdfCount = pdfCount + 1;
+		 * 
+		 * } if (ArrayUtils.contains(pdfnames, "Outline")) { pdfCount = pdfCount + 1; }
+		 */
+	}
 
 	public boolean checkerrormessageforship() {
 		try {
@@ -1052,7 +1069,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 
 		return pdptexaslogo;
 	}
-	
+
 	public WebElement getalpeehiplogo() {
 
 		return alpeehiplogo;
@@ -1118,8 +1135,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 		} else if (section == "anoc") {
 			return verifypdfnamesfordocuments(a, anocxpath);
 
-		}
-		else if (section=="ship plan material") {
+		} else if (section == "ship plan material") {
 			return verifypdfnamesfordocuments(a, shipplanmaterialxpath);
 		}
 		/*
@@ -1131,31 +1147,29 @@ public class FormsAndResourcesPage extends UhcDriver {
 		return false;
 
 	}
+
 	public void verifyTitleOfPage() {
 		System.out.println("Now checking the title of forms and resources page");
 		String title = driver.getTitle();
 		System.out.println(title);
-		 Assert.assertTrue(title.contains("Plan Documents"));
-		System.out.println("Assert condition on title of forms and resources page was passed");                                                                                            
-		}
-		                                                                                                
-		public ClaimSummarypage clickonClaimsTab() throws InterruptedException{
+		Assert.assertTrue(title.contains("Plan Documents"));
+		System.out.println("Assert condition on title of forms and resources page was passed");
+	}
+
+	public ClaimSummarypage clickonClaimsTab() throws InterruptedException {
 		System.out.println("Now clicking on Claims Tab on Forms and Resources Page");
 		driver.findElement(By.xpath("//a[contains(text(),'Claims')]")).click();
 		System.out.println("Now waiting for 10 seconds");
-		try 
-		{
-		Thread.sleep(10000);
-		} 
-		catch (InterruptedException e) 
-		{
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-		}                                                                                                	
-		String title = driver.getTitle();
-		System.out.println("Now user is on this page:"+title);    
-		return new ClaimSummarypage(driver);                                                                                                	
-		}                                                                                                    
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		String title = driver.getTitle();
+		System.out.println("Now user is on this page:" + title);
+		return new ClaimSummarypage(driver);
+	}
 
-
+	
+}
