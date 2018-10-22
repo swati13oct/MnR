@@ -26,6 +26,8 @@ public class ClaimsStepDefinition {
 	// Map<String, String> memberAttributesMap = new LinkedHashMap<String,
 	// String>();
 	public static String claimType;
+	
+	public boolean isClaimSummaryTable=false;
 
 	public MRScenario getLoginScenario() {
 		return loginScenario;
@@ -67,6 +69,7 @@ public class ClaimsStepDefinition {
 		}
 
 		System.out.println(urlAttributesMap.get("Claim Period"));
+		
 		String period = urlAttributesMap.get("Claim Period");
 		String planType = urlAttributesMap.get("Plan Type");
 		String ClaimSystem = urlAttributesMap.get("ClaimSystem");
@@ -125,7 +128,6 @@ public class ClaimsStepDefinition {
 	 */
 	@And("^I navigate to the Claim Details page in AARP site$")
 	public void i_navigate_to_member_redesign_claim_details_page(DataTable timeAttributes) throws InterruptedException {
-		boolean isClaimSummaryTable=(boolean) getLoginScenario().getBean(ClaimsCommonConstants.CLAIMS_TABLE_FIND);
 		if(isClaimSummaryTable){
 			String ClaimSystem = CommonStepDefinition.getMemberAttributeMap().get("ClaimSystem");
 	
@@ -160,7 +162,6 @@ public class ClaimsStepDefinition {
 	 */
 	@Then("^I validate the Claims Table in claims details page in AARP site$")
 	public void validate_claimsTable_claimsDetails_AARP() {
-		boolean isClaimSummaryTable=(boolean) getLoginScenario().getBean(ClaimsCommonConstants.CLAIMS_TABLE_FIND);
 		if(isClaimSummaryTable){
 			if (claimType.equalsIgnoreCase("Medical")) {
 				ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario()
@@ -184,7 +185,6 @@ public class ClaimsStepDefinition {
 	@And("^I validate the Claims Total in claims details page in AARP site$")
 	public void validate_claims_total_AARP() {
 		
-		boolean isClaimSummaryTable=(boolean) getLoginScenario().getBean(ClaimsCommonConstants.CLAIMS_TABLE_FIND);
 		if(isClaimSummaryTable){
 			if (claimType.equalsIgnoreCase("Medical")) {
 				ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario()
