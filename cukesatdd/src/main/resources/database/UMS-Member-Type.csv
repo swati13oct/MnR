@@ -74,7 +74,7 @@ q2_jun_uhc0019/Password@1,MAPD_UHCIndividual,
 q2_june_combo0006,MAPDwithMedSupp,
 q2_jun_grp0230,PDPwithSSUP,
 q2_jun_uhc0018/Password@1,MAPD,IndividualUHCPayments,
-q2_jun_aarp0023/Password@1,MAPD,IndividualAARPRPayments,
+ucpuhcmapd01/Password@1,MAPD,IndividualAARPRPayments,
 q2_june_combo0012/Password@1,COMBO,COMBOAARPPayments,
 auto_test_dce_001/Password@1,MAPD,AARPFederalDCEmember,
 q1_grp_apr069/Password@1,MAPD,NCSHP,NON LIS,
@@ -155,7 +155,7 @@ ucpgrouppdptxers01/Password@1,PDP,TexasRxPharmacyFnR
 q2_jun_aarp0076/Password@1,PDP_AARP_GOGreen,
 q2_jun_aarp0055/Password@1,MAPD,IndAARPPharmacyFnR
 ANOCH2228049_01/Password@1,MAPD,RewardsMember
-q2_jun_ship0001/Password@1,SHIP,IndividualAARPSPayments,
+q2_jun_ship0003/Password@1,SHIP,IndividualAARPSPayments,
 q1_aarp_ma001/Password@1,MA,IndAARPPharmacyFnR,
 q2_jun_aarp0066/Password@1,MA,RewardsMember
 q2_jun_aarp0080/Password@1,PDP,RewardsMember
@@ -171,3 +171,7 @@ preeffectivegroupmapd01/Password@1,GroupMAPD,preeffectiveGroupMAPD,NON LIS
 ssuppreeffective00001/Password@1,GroupSSUP,preeffectiveGroupSSUP,NON LIS
 preeffectiveGroupPDP_001/Password@1,GroupPDP,preeffectiveGroupPDP,NON LIS
 q1_grp_apr031/Password@1,MAPDALPeehip,GroupAlPeehipFnR,
+q2_jun_aarp0065/Password@1,MAPD,IndAARPPre-EffectiveFnR
+q2_jun_grp0116/Password@1,MAPD,GRPAARPPre-EffectiveFnR
+q2_jun_uhc0040/Password@1,MAPD,IndUHCPre-EffectiveFnR
+q2_jun_aarp0043/Password@1,MA,IndAARPMAPre-EffectiveFnR
