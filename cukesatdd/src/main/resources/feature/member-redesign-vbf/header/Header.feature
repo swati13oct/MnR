@@ -1,4 +1,4 @@
-@smokeTest
+@smokeTest @MemberVBF
 Feature: 1.06-VBF-MemRedesign-To test Header Navigation functionality
 
   @smokeTest_Header @rallyDashboard

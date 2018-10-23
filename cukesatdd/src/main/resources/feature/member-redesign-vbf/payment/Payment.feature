@@ -1,4 +1,4 @@
-@smokeTest
+@smokeTest @MemberVBF
 Feature: 1.11-VBF-MemRedesign-To test the payment history (GATED)
 
   @smokeTest_Payment @rallyDashboard @testharness

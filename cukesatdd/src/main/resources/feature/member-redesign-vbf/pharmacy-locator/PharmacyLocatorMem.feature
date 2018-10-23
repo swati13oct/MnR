@@ -1,4 +1,4 @@
-@smokeTest
+@smokeTest @MemberVBF
 Feature: 1.12-VBF-MemRedesign-To test Locate a Pharmacy tool (GATED)
 
   @smokeTest_PharmacyLocatorMem @rallyDashboard @testharness
