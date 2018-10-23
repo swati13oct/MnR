@@ -186,7 +186,7 @@ public class ClaimSummarypage extends UhcDriver {
 	 * 
 	 */
 	@SuppressWarnings("deprecation")
-	public void validateClaimsTable() {
+	public boolean validateClaimsTable() {
 		CommonUtility.waitForPageLoadNew(driver, ClaimsSummaryPage, 60);
 		scrollToView(ClaimsSummaryPage);
 		if (claimsTableMedical.isDisplayed() || claimsTablePrescriptionDrug.isDisplayed()
@@ -222,9 +222,13 @@ public class ClaimSummarypage extends UhcDriver {
 				Assert.assertTrue("Claims table gets displayed", counter > 0);
 				validateNew(shipProviderNameValue);
 			}
+			
+			return true;
 		} else {
 			System.out.println("!!!!!!!!! NOT Able to find the claim table !!!!!!!!!");
-			Assert.fail("!!!!!!!!! NOT Able to find the claim table !!!!!!!!!");
+			Assert.assertTrue("!!!!!!!!! NOT Able to find the claim table !!!!!!!!!",true);
+			
+			return false;
 		}
 	}
 

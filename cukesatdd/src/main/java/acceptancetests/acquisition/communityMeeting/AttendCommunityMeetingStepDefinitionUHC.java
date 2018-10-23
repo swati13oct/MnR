@@ -36,13 +36,25 @@ public class AttendCommunityMeetingStepDefinitionUHC {
 		RequestHelpAndInformationPage requestHelpAndInformationPage = aquisitionhomepage.navigateToMaMoreHelpAndInfo();
 		
 		if(requestHelpAndInformationPage!=null){
-			getLoginScenario().saveBean(PageConstants.REQUEST_MORE_HELP_INFORMATION_PAGE, requestHelpAndInformationPage);
-			if(requestHelpAndInformationPage.validateUhcLink())
+			
+			if(requestHelpAndInformationPage.validateUhcLink()){
 				Assert.assertTrue(true);
-			else
-				Assert.fail("Error in validating the Uhc community link");
+				getLoginScenario().saveBean(PageConstants.REQUEST_MORE_HELP_INFORMATION_PAGE, requestHelpAndInformationPage);
+			}else
+				Assert.fail("Error in validating Uhc community link");
 		}else
 			Assert.fail("Error in loading the Request Help and Info Page");
 	}
 
+	@When("^the user navigates to community meeting page on UHC site and validates$")
+	public void navigateToAattendCommunity()
+	{
+		RequestHelpAndInformationPage requestHelpAndInformationPage = (RequestHelpAndInformationPage) getLoginScenario().getBean(PageConstants.REQUEST_MORE_HELP_INFORMATION_PAGE);
+	
+				if(requestHelpAndInformationPage.landingOnCommunityPage())
+					Assert.assertTrue(true);
+				else
+					Assert.fail("Error in navigating to the Uhc community page");
+		
+	}
 }

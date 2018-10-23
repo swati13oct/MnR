@@ -33,16 +33,27 @@ public class AttendCommunityMeetingStepDefinitionAARP {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		RequestHelpAndInformationPage requestHelpAndInformationPage = aquisitionhomepage.navigateToMaMoreHelpAndInfo();
 		
-		if(requestHelpAndInformationPage!=null){
-			if(requestHelpAndInformationPage.validateHelpandInfoPage()){
-				getLoginScenario().saveBean(PageConstants.REQUEST_MORE_HELP_INFORMATION_PAGE, requestHelpAndInformationPage);
-				if(requestHelpAndInformationPage.validateUhcLink())
+		if(requestHelpAndInformationPage!=null && requestHelpAndInformationPage.validateHelpandInfoPage()){
+			
+				if(requestHelpAndInformationPage.validateUhcLink()){
+					getLoginScenario().saveBean(PageConstants.REQUEST_MORE_HELP_INFORMATION_PAGE, requestHelpAndInformationPage);
+					Assert.assertTrue(true);
+				}else
+					Assert.fail("Error in navigating to the Uhc community page");
+		}else
+			Assert.fail("Loading error for Request More Help and Info Page: null exception");
+	}	
+	
+	@When("^the user navigates to community meeting page on AARP site and validates$")
+	public void navigateToAattendCommunity()
+	{
+		RequestHelpAndInformationPage requestHelpAndInformationPage = (RequestHelpAndInformationPage) getLoginScenario().getBean(PageConstants.REQUEST_MORE_HELP_INFORMATION_PAGE);
+	
+				if(requestHelpAndInformationPage.landingOnCommunityPage())
 					Assert.assertTrue(true);
 				else
-					Assert.fail("Error in validating the Uhc community link");
-			}else
-				Assert.fail("Page Loading Error: not able to validate the elements on the page");
-		}else
-			Assert.fail("Page Loading error: null exception");
-	}	
+					Assert.fail("Error in navigating to the Uhc community page");
+		
+	}
+	
 }

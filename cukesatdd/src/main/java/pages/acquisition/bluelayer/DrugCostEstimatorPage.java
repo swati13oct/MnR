@@ -1782,6 +1782,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 
 	public void validateDceLandingPage(){
+		CommonUtility.waitForPageLoad(driver, step1, 30);
 		validateNew(step1);
 		validateNew(step2);
 		validateNew(step3);
