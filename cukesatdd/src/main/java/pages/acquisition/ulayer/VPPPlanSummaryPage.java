@@ -298,8 +298,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		else if (planType.equalsIgnoreCase("SNP")) {
 			snpPlansViewLink.click();
 		}
-		if(validate(toggleplanYear))
-			toggleplanYear.click();
+/*		if(validate(toggleplanYear))
+			toggleplanYear.click();*/
 		return new VPPPlanSummaryPage(driver, planType);
 	}
 	
