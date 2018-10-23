@@ -1471,10 +1471,19 @@ public String EnrollmentValidation(String PlanName) {
 		
 		System.out.println("Plan Name is : "+PlanName);
 		
-		JavascriptExecutor jse = (JavascriptExecutor)driver;
-		jse.executeScript("window.scrollBy(0,1300)", "");
+		if(PlanName.equalsIgnoreCase("UnitedHealthcare Medicare Silver (Regional PPO SNP)" ))
+				{
+			WebElement EnrollmentButton = driver.findElement(By.xpath("(//*[@class='enrollment']/div[@class='swiper-content ng-scope']/a)[5]"));
+			String Enrollment = EnrollmentButton.getText();
+			if(EnrollmentButton.isDisplayed())
+				EnrollmentButton.click();
+			System.out.println("Enrollment Button present and clicked");
+			return Enrollment;
+				}
+		else
+		{		
 		try{
-		WebElement EnrollmentButton = driver.findElement(By.xpath("//*[@class='enrollment']/div[@class='acqplans ng-scope']/a/span"));
+		WebElement EnrollmentButton = driver.findElement(By.xpath("//*[@class='enrollment']/div[@class='acqplans ng-scope']/div/a/span"));
 		String Enrollment = EnrollmentButton.getText();
 		if(EnrollmentButton.isDisplayed())
 			EnrollmentButton.click();
@@ -1483,6 +1492,7 @@ public String EnrollmentValidation(String PlanName) {
 }
 		catch(Exception e)
 		{
+			JavascriptExecutor jse = (JavascriptExecutor)driver;
 			jse.executeScript("window.scrollBy(0,800)", "");
 			WebElement EnrollmentButton = driver.findElement(By.xpath("(//*[@class='module-plan-overview module swiper-slide ng-scope'])[9]//div[@class='enrollment']//a/span"));
 			String Enrollment = EnrollmentButton.getText();
@@ -1491,7 +1501,7 @@ public String EnrollmentValidation(String PlanName) {
 			System.out.println("Enrollment Button present and clicked");
 			return Enrollment;
 		}
-		
+		}
 			}
 
 
