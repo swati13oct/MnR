@@ -445,17 +445,19 @@ public class DashboardFormsnResourcesStepDefinition {
 
 	@Then("^validate that annual directory section is displayed$")
 	public void annualdirectory(DataTable memberType) {
-		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
 		formsAndResourcesPage.scroll();
-		
+
 		List<List<String>> data = memberType.raw();
 		// This is to get the first data of the set (First Row + First Column)
-		if (data.get(0).get(1).contains("Pre-Effective"))		
-			Assert.assertTrue("annual directory section is present", formsAndResourcesPage.getAnnualDirectorySection("Pre-Effective").isDisplayed());
-			else
-				Assert.assertTrue("annual directory section is present", formsAndResourcesPage.getAnnualDirectorySection("Effective").isDisplayed());	
-			
-				
+		if (data.get(0).get(1).contains("Pre-Effective"))
+			Assert.assertTrue("annual directory section is present",
+					formsAndResourcesPage.getAnnualDirectorySection("Pre-Effective").isDisplayed());
+		else
+			Assert.assertTrue("annual directory section is present",
+					formsAndResourcesPage.getAnnualDirectorySection("Effective").isDisplayed());
+
 	}
 
 	@And("^both the Pharmacy locator and provider search links are displayed$")
@@ -847,11 +849,9 @@ public class DashboardFormsnResourcesStepDefinition {
 	public void validatemembershipmaterials(DataTable givenAttributes) throws InterruptedException {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
-				formsAndResourcesPage.pdfValidationOfAllTypes(formsAndResourcesPage,givenAttributes, "memberShip");
-		
-	}
+		formsAndResourcesPage.pdfValidationOfAllTypes(formsAndResourcesPage, givenAttributes, "memberShip");
 
-	
+	}
 
 	@And("^validates that plan material section is not displayed$")
 	public void validates_that_plan_material_section_is_not_displayed() throws Throwable {
@@ -875,10 +875,12 @@ public class DashboardFormsnResourcesStepDefinition {
 		List<List<String>> data = planType.raw();
 		// This is to get the first data of the set (First Row + First Column)
 		if (data.get(0).get(0).contains("MAPD") && (data.get(0).get(1).contains("IndAARPPre-Effective"))) {
-			Assert.assertTrue("pharmacy locator is present",formsAndResourcesPage.getPharmacyLocatorLinkIndMAPDPreEffective().isDisplayed());
-		
-			Assert.assertTrue("provider search link is present", formsAndResourcesPage.getprovisesearchlink().isDisplayed());
-		
+			Assert.assertTrue("pharmacy locator is present",
+					formsAndResourcesPage.getPharmacyLocatorLinkIndMAPDPreEffective().isDisplayed());
+
+			Assert.assertTrue("provider search link is present",
+					formsAndResourcesPage.getprovisesearchlink().isDisplayed());
+
 		}
 	}
 

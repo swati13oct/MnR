@@ -161,7 +161,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	/** Annual Directories Section **/
 	@FindBy(id = "FnR_annualDirectory")
 	private WebElement AnnualDirectorySection;
-	
+
 	/** Annual Directories Section **/
 	@FindBy(xpath = "(//*[@id='FnR_annualDirectory']//h2[contains(text(),'Annual Directory')])[3]")
 	private WebElement preAnnualDirectorySection;
@@ -258,14 +258,13 @@ public class FormsAndResourcesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='overview_customsegments-welcomeKit-2018_segmentContainer_planbenefitdocuments']//li")
 	private List<WebElement> PreEffectiveMemMaterials;
 
-	
 	public List<WebElement> getPreEffectiveMemMaterials() {
 		return PreEffectiveMemMaterials;
 	}
 
 	@FindBy(xpath = "//*[contains(text(),'Pharmacy Locator')])[7]")
 	private WebElement pharmacyLocatorLinkIndMAPDPreEffective;
-	
+
 	/**
 	 * @return the pharmacyLocatorLinkIndMAPDPreEffective
 	 */
@@ -412,9 +411,9 @@ public class FormsAndResourcesPage extends UhcDriver {
 	 * @toDo : annual directory section
 	 */
 	public WebElement getAnnualDirectorySection(String memberType) {
-		
-		if(memberType=="Pre-Effective")
-		return preAnnualDirectorySection;
+
+		if (memberType == "Pre-Effective")
+			return preAnnualDirectorySection;
 		else
 			return AnnualDirectorySection;
 	}
@@ -680,7 +679,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 		return checkflag;
 	}
 
-	public boolean verifyPdfNames(String a[],List<WebElement> listOfPdf) throws InterruptedException {
+	public boolean verifyPdfNames(String a[], List<WebElement> listOfPdf) throws InterruptedException {
 		boolean checkflag = false;
 		Select langdropdwn = new Select(languagedropdown.get(0));
 		if (langdropdwn.getFirstSelectedOption().getText().contains("ENGLISH")) {
@@ -1164,8 +1163,9 @@ public class FormsAndResourcesPage extends UhcDriver {
 		System.out.println("Now user is on this page:" + title);
 		return new ClaimSummarypage(driver);
 	}
-	
-	public void pdfValidationOfAllTypes(FormsAndResourcesPage formsAndResourcesPage, DataTable givenAttributes,String materialType) throws InterruptedException {
+
+	public void pdfValidationOfAllTypes(FormsAndResourcesPage formsAndResourcesPage, DataTable givenAttributes,
+			String materialType) throws InterruptedException {
 		List<WebElement> temp = null;
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		System.out.println(memberAttributesRow);
@@ -1177,14 +1177,14 @@ public class FormsAndResourcesPage extends UhcDriver {
 		Collection<String> values = memberAttributesMap.values();
 		String[] targetArray = values.toArray(new String[values.size()]);
 		System.out.println(values.size());
-		if(materialType=="memberShip")
-			temp=getPreEffectiveMemMaterials();
-		else
-			if(materialType=="welcomeKit");
-				temp =getPreEffectiveMemMaterials();
-			
-		boolean arraycheck = formsAndResourcesPage.verifyPdfNames(targetArray,temp );
+		if (materialType == "memberShip")
+			temp = getPreEffectiveMemMaterials();
+		else if (materialType == "welcomeKit")
+			;
+		temp = getPreEffectiveMemMaterials();
+
+		boolean arraycheck = formsAndResourcesPage.verifyPdfNames(targetArray, temp);
 		Assert.assertTrue("all pdfs are coming correctly", arraycheck == true);
-		
+
 	}
 }
