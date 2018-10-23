@@ -18,9 +18,12 @@ import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.regression.claims.ClaimSummarypage;
 
 import acceptancetests.data.MRConstants;
+import acceptancetests.data.PageConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import cucumber.api.DataTable;
+import gherkin.formatter.model.DataTableRow;
 import junit.framework.Assert;
 
 @SuppressWarnings("deprecation")
@@ -158,6 +161,10 @@ public class FormsAndResourcesPage extends UhcDriver {
 	/** Annual Directories Section **/
 	@FindBy(id = "FnR_annualDirectory")
 	private WebElement AnnualDirectorySection;
+	
+	/** Annual Directories Section **/
+	@FindBy(xpath = "(//*[@id='FnR_annualDirectory']//h2[contains(text(),'Annual Directory')])[3]")
+	private WebElement preAnnualDirectorySection;
 
 	/* Provider Search Link for MAPD */
 	@FindBy(xpath = "//*[@class='otherPages calloutBoth_AD']//*[text()='Provider Search']")
@@ -252,6 +259,10 @@ public class FormsAndResourcesPage extends UhcDriver {
 	private List<WebElement> PreEffectiveMemMaterials;
 
 	
+	public List<WebElement> getPreEffectiveMemMaterials() {
+		return PreEffectiveMemMaterials;
+	}
+
 	@FindBy(xpath = "//*[contains(text(),'Pharmacy Locator')])[7]")
 	private WebElement pharmacyLocatorLinkIndMAPDPreEffective;
 	
@@ -400,8 +411,12 @@ public class FormsAndResourcesPage extends UhcDriver {
 	/**
 	 * @toDo : annual directory section
 	 */
-	public WebElement getAnnualDirectorySection() {
-		return AnnualDirectorySection;
+	public WebElement getAnnualDirectorySection(String memberType) {
+		
+		if(memberType=="Pre-Effective")
+		return preAnnualDirectorySection;
+		else
+			return AnnualDirectorySection;
 	}
 
 	/**
@@ -665,59 +680,38 @@ public class FormsAndResourcesPage extends UhcDriver {
 		return checkflag;
 	}
 
-	public boolean verifypdfnamemembershipmaterials(String a[]) throws InterruptedException {
+	public boolean verifyPdfNames(String a[],List<WebElement> listOfPdf) throws InterruptedException {
 		boolean checkflag = false;
-
 		Select langdropdwn = new Select(languagedropdown.get(0));
 		if (langdropdwn.getFirstSelectedOption().getText().contains("ENGLISH")) {
-
-			java.util.List<WebElement> pdfs = PreEffectiveMemMaterials;
-			System.out.println(pdfs.size());
-			System.out.println(a.length);
-			for (int i = 0; i < pdfs.size(); i++) {
-				String pdfnames = null;
-				pdfnames = (pdfs.get(i).getText());
-				System.out.println(pdfnames);
-			}
-
-			for (int i = 0; i < pdfs.size(); i++) {
-				String pdf[] = pdfs.get(i).getText().split(Pattern.quote("("));
-				if (pdf[0].trim().toLowerCase().contains(a[i].trim().toLowerCase())) {
-					System.out.println(pdf[0]);
-					checkflag = true;
-				} else {
-					checkflag = false;
-					break;
-				}
-			}
-
+			checkflag = pdfComparison(a, listOfPdf, checkflag);
 		} else if (langdropdwn.getFirstSelectedOption().getText().contains("SPANISH")) {
-
-			java.util.List<WebElement> pdfs = driver.findElements(By.xpath(
-					"//*[@class='overview_customsegments-welcomeKit-2018_segmentContainer_planbenefitdocuments']/div/ul/li"));
-			System.out.println("Size" + pdfs.size());
-			for (int i = 0; i < pdfs.size(); i++) {
-				String pdfnames = null;
-				pdfnames = (pdfs.get(i).getText());
-				System.out.println(pdfnames);
-			}
-
-			for (int i = 0; i < pdfs.size(); i++) {
-
-				String pdf[] = pdfs.get(i).getText().split(Pattern.quote("("));
-
-				System.out.println(pdf[0]);
-				if (pdf[0].contains(a[i])) {
-					checkflag = true;
-				} else {
-					checkflag = false;
-					break;
-				}
-
-			}
-
+			checkflag = pdfComparison(a, listOfPdf, checkflag);
 		}
 
+		return checkflag;
+	}
+
+	public boolean pdfComparison(String[] a, List<WebElement> listOfPdf, boolean checkflag) {
+		java.util.List<WebElement> pdfs = listOfPdf;
+		System.out.println(pdfs.size());
+		System.out.println(a.length);
+		for (int i = 0; i < pdfs.size(); i++) {
+			String pdfnames = null;
+			pdfnames = (pdfs.get(i).getText());
+			System.out.println(pdfnames);
+		}
+
+		for (int i = 0; i < pdfs.size(); i++) {
+			String pdf[] = pdfs.get(i).getText().split(Pattern.quote("("));
+			if (pdf[0].trim().toLowerCase().contains(a[i].trim().toLowerCase())) {
+				System.out.println(pdf[0]);
+				checkflag = true;
+			} else {
+				checkflag = false;
+				break;
+			}
+		}
 		return checkflag;
 	}
 
@@ -1170,6 +1164,27 @@ public class FormsAndResourcesPage extends UhcDriver {
 		System.out.println("Now user is on this page:" + title);
 		return new ClaimSummarypage(driver);
 	}
-
 	
+	public void pdfValidationOfAllTypes(FormsAndResourcesPage formsAndResourcesPage, DataTable givenAttributes,String materialType) throws InterruptedException {
+		List<WebElement> temp = null;
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		System.out.println(memberAttributesRow);
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		Collection<String> values = memberAttributesMap.values();
+		String[] targetArray = values.toArray(new String[values.size()]);
+		System.out.println(values.size());
+		if(materialType=="memberShip")
+			temp=getPreEffectiveMemMaterials();
+		else
+			if(materialType=="welcomeKit");
+				temp =getPreEffectiveMemMaterials();
+			
+		boolean arraycheck = formsAndResourcesPage.verifyPdfNames(targetArray,temp );
+		Assert.assertTrue("all pdfs are coming correctly", arraycheck == true);
+		
+	}
 }
