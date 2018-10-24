@@ -1196,7 +1196,7 @@ public class AccountHomePage extends UhcDriver {
     // to navigate to forms and resources page
     @SuppressWarnings("unused")
 	public FormsAndResourcesPage navigatetoFormsnResources() throws InterruptedException {
-                                                            waitForHomePage(helloPerson);
+                                                            //waitForHomePage(helloPerson);
                     if (validate(iPerceptionAutoPopUp)) {
                                     iPerceptionAutoPopUp.click();
                     } else {
