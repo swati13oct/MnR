@@ -1193,7 +1193,6 @@ public class FormsAndResourcesPage extends UhcDriver {
 			formsAndResourcesPage.scrollToView(preAnnualDirectorySection);
 			temp = getAnnualDirectoryPdfList();
 		}
-
 		boolean arraycheck = formsAndResourcesPage.verifyPdfNames(targetArray, temp);
 		Assert.assertTrue("Incorrect pdf's shown", arraycheck == true);
 	}
