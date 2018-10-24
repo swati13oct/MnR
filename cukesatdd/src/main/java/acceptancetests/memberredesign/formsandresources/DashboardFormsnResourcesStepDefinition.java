@@ -45,7 +45,7 @@ public class DashboardFormsnResourcesStepDefinition {
 	}
 
 	@Given("^login with following details logins in the member redesign portal$")
-	private void login_with_member(DataTable memberAttributes) throws InterruptedException {
+	public void login_with_member(DataTable memberAttributes) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
