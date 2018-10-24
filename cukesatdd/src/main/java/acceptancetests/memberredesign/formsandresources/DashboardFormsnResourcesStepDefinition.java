@@ -899,5 +899,4 @@ public class DashboardFormsnResourcesStepDefinition {
 		formsAndResourcesPage.pdfValidationOfAllTypes(formsAndResourcesPage, givenAttributes, "annualDirectory");
 
 	}
-
 }

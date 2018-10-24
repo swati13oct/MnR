@@ -2,9 +2,10 @@
 Feature: G1.1 To validate forms and resources page in dashboard site
 
 #Pre-Effective Federal Cases
+
 @pre-effectivefnrmapdaarpindividualvalidation 
 Scenario Outline: 
-    Given login with following details logins in the member redesign portal
+   	Given login with following details logins in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
 	And user clicks on the view document and resources link and navigate to forms and resource page   

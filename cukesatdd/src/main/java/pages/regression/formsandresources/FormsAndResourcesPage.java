@@ -1196,6 +1196,5 @@ public class FormsAndResourcesPage extends UhcDriver {
 
 		boolean arraycheck = formsAndResourcesPage.verifyPdfNames(targetArray, temp);
 		Assert.assertTrue("Incorrect pdf's shown", arraycheck == true);
-
 	}
 }
