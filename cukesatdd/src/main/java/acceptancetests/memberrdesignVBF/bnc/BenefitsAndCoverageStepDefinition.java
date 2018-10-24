@@ -49,6 +49,7 @@ public class BenefitsAndCoverageStepDefinition {
 	 */
 	@And("^the user validates view and document label$")
 	public void user_validates_view_and_document_label() {
+		System.out.println("***the user validates view and document label***");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE_VBF);
 

@@ -42,6 +42,12 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 	@FindBy(xpath =".//*[@id='collapse2heading_article_mededaccordion1']")
 	private WebElement communityMeetingDropdown;
 	
+	@FindBy(xpath =".//*[@id='article_mededaccordion1']//a[@class='icon-link-box']")
+	private WebElement communityMeetingLink;
+	
+	@FindBy(xpath =".//*[@id='ghn_lnk_1']")
+	private WebElement homeTab;
+	
 	public RequestHelpAndInformationPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -128,5 +134,16 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 		return null;
 		
 		
+	}
+
+	public boolean landingOnCommunityPage() {
+		CommonUtility.waitForPageLoad(driver, communityMeetingDropdown, 50);
+		communityMeetingDropdown.click();
+		CommonUtility.waitForPageLoad(driver, communityMeetingLink, 10);
+		communityMeetingLink.click();
+		CommonUtility.waitForPageLoad(driver, homeTab, 30);
+		if(driver.getCurrentUrl().contains("attend.html"))
+			return true;
+		return false;
 	}
 }

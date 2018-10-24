@@ -45,12 +45,13 @@ Given the user is on the uhcmedicaresolutions site landing page
 When I access the acquisition DCE tool from home page on ums site
 And I have added a drug to my drug list on ums site
 	|Drug|<drug>|
+And I navigate to step2 page on ums site
 And the user selects the pharmacy tab information
 	| Zipcode	  | <zipcode> |
 	| Radius  | <radius>   |
 And I select the first pharmacy on there
 And I click on the return link
-When I access the vpp page using below zipcode on ums site
+When the user performs plan search using following information in UMS site
 	| Zip Code    | <zipcode>  |
 And I access the DCE tool after adding drug
 	|Plan Type | <plantype> |

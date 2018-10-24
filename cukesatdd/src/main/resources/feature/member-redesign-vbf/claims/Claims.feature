@@ -27,17 +27,17 @@ Then I validate the Claims Table in claims details page in AARP site
 And I validate the Claims Total in claims details page in AARP site
 Examples: 
       | memberType   		| planType | claimPeriod     | domain | claimssystem | friendname | favcolor | phonenumber |
-#      |  ShipInd 	   		|SHIP      |  Last 24 months | NA     | SHIPCLAIMS   | name1      | color1   | number1     |
-#      |  ULayerInd 	 		|MAPD	   |  Last 24 months | COSMOS | COSMOSCLAIMS | name1      | color1   | number1     |
-#      |  ULayerInd 	 		|MAPD	   |  Last 12 months | COSMOS | COSMOSCLAIMS | name1      | color1   | number1     |
-#      |  ULayerInd		 	|MAPD      |  Last 6 months  | NICE   | NICECLAIMS   | name1      | color1   | number1     |
-#      |  ULayerInd		 	|MAPD      |  Last 90 days   | NICE   | NICECLAIMS   | name1      | color1   | number1     |
-#      | ULayerInd 			|MAPD 	   |  Last 30 days   | COSMOS | RxCLAIMS     | name1      | color1   | number1     |
-     | ULayerInd 			|MAPD 	   |  Custom search  | COSMOS | RxCLAIMS     | name1      | color1   | number1     |
-   #  | BlueLayerInd 		|MAPD      |  Last 24 months | COSMOS | COSMOSCLAIMS | name1      | color1   | number1     |
-   #  | BlueLayerInd 		|MAPD      |  Last 24 months | COSMOS | RxCLAIMS     | name1      | color1   | number1     |
-   #  | BlueLayerInd 		|MAPD      |  Last 24 months | NICE   | NICECLAIMS   | name1      | color1   | number1     |
-   #  |  GroupRetiree 		|MAPD      |  Last 24 months | COSMOS | COSMOSCLAIMS | name1      | color1   | number1     |
-   #  |  GroupRetiree 		|MAPD      |  Last 24 months | NICE   | NICECLAIMS   | name1      | color1   | number1     |
-   #  | GroupRetiree 		|MAPD      |  Last 24 months | Rx     | RxCLAIMS     | name1      | color1   | number1     |
+      |  ShipInd 	   		|SHIP      |  Last 24 months | NA     | SHIPCLAIMS   | name1      | color1   | number1     |
+      |  ULayerInd 	 		|MAPD	     |  Last 24 months | COSMOS | COSMOSCLAIMS | name1      | color1   | number1     |
+      |  ULayerInd 	 		|MAPD	     |  Last 12 months | COSMOS | COSMOSCLAIMS | name1      | color1   | number1     |
+      |  ULayerInd		 	|MAPD      |  Last 6 months  | NICE   | NICECLAIMS   | name1      | color1   | number1     |
+      |  ULayerInd		 	|MAPD      |  Last 90 days   | NICE   | NICECLAIMS   | name1      | color1   | number1     |
+      | ULayerInd 			|MAPD 	   |  Last 30 days   | COSMOS | RxCLAIMS     | name1      | color1   | number1     |
+      | ULayerInd 			|MAPD 	   |  Custom search  | COSMOS | RxCLAIMS     | name1      | color1   | number1     |
+ 		  | BlueLayerInd 		|MAPD      |  Last 24 months | COSMOS | COSMOSCLAIMS | name1      | color1   | number1     |
+      | BlueLayerInd 		|MAPD      |  Last 24 months | COSMOS | RxCLAIMS     | name1      | color1   | number1     |
+      | BlueLayerInd 		|MAPD      |  Last 24 months | NICE   | NICECLAIMS   | name1      | color1   | number1     |
+      |  GroupRetiree 	|MAPD      |  Last 24 months | COSMOS | COSMOSCLAIMS | name1      | color1   | number1     |
+      |  GroupRetiree 	|MAPD      |  Last 24 months | NICE   | NICECLAIMS   | name1      | color1   | number1     |
+      | GroupRetiree 		|MAPD      |  Last 24 months | Rx     | RxCLAIMS     | name1      | color1   | number1     |
       
