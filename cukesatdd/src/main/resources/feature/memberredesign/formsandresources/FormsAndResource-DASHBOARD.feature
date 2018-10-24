@@ -9,7 +9,7 @@ Scenario Outline:
       | Member Type | <memberType> |
 	And user clicks on the view document and resources link and navigate to forms and resource page   
 	And validates that plan material section is not displayed
-	And validate that english is default language in dropdown
+	And validate that english is default language in the dropdown
 	Then the member validate the correct Membership Materials section is coming
      | GETTING STARTED GUIDE    | <gettingstartedguide>     |
      | BENEFIT-HIGHLIGHT        | <benefithighlight>        |
@@ -18,8 +18,9 @@ Scenario Outline:
      | EVIDENCE OF COVERAGEMEM  | <evidenceofcoverage>      |
      | PASSPORT					| <passport>    			|
      | OVER THE COUNTER			| <overthecounter>    		|
-   # Then validate that the annual directories section is displayed
-    Then validate that My document section is displayed
+   Then validate that annual directory section is displayed
+  	| Member Type | <memberType> |
+   Then validate that My Document section is displayed
     And both Pharmacy and provider search links are displayed
     | PlanType |<planType>|
     Examples: 
@@ -28,8 +29,48 @@ Scenario Outline:
      | planType | memberType           			  | language | gettingstartedguide   | benefithighlight   |  comprehensiveformulary|alternativedruglist   | evidenceofcoverage   |passport                             | overthecounter  			   | comprehensiveformularymem  | providerdirectory   | vendorInformationsheet    |pharmacydirectoryinformation  |
      | MAPD     | IndAARPPre-EffectiveFnR 		  | ENGLISH  | Getting Started Guide | Benefit Highlights | Comprehensive Formulary|Alternative Drug List | Evidence of Coverage |UnitedHealth Passport Program| OVER THE COUNTER ESSENTIALS   | Comprehensive Formulary    | Provider Directory  | Vendor Information Sheet  |Pharmacy Directory Information|
 
+@IndAARPMAPre-EffectiveFnR 
+Scenario Outline: 
+    Given login with following details logins in the member redesign portal
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+	And user clicks on the view document and resources link and navigate to forms and resource page   
+	And validates that plan material section is not displayed
+	Then the member validate the correct Membership Materials section is coming
+     | GETTING STARTED GUIDE    | <gettingstartedguide>     |
+     | BENEFIT-HIGHLIGHT        | <benefithighlight>        |
+     | EVIDENCE OF COVERAGEMEM  | <evidenceofcoverage>      |
+    Then validate that annual directory section is displayed
+    And the user verifies that the correct pdfs are coming in the anoc section
+     # | ANNUAL NOTICE OF CHANGES     | <providerdirectory>                       |
+     # | EVIDENCE OF COVERAGEANOC     | <vendorInformationsheet>     |
+    Then validate that My Document section is displayed
+    |MemberType | memberType|
+    And the Pharmacy locator link is not displayed for MA
+    And the Provider Search link is displayed for MA
+    Examples: 
+      
+     | planType | memberType           	    | language | gettingstartedguide   | benefithighlight   | evidenceofcoverage   |providerdirectory   | vendorInformationsheet    |
+     | MA       | IndAARPMAPre-EffectiveFnR | ENGLISH  | Getting Started Guide | Benefit Highlights |Evidence of Coverage  |Provider Directory  | Vendor Information Sheet 	|
 
 
+@fnrpdpaarpindividualvalidationPre-Effective
+  Scenario Outline: 
+    Given login with following details logins in the member redesign portal
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    And user clicks on the view document and resources link and navigate to forms and resource page
+    #And validate that english is default language in the dropdown
+   # And the user validates the language dropdown and selects new value in dropdown successfully
+      | Language | <language> |
+    Then validate that annual directory section is displayed
+    Then validate that My Document section is displayed
+    And the Pharmacy locator link is displayed
+    And the provider search link is not displayed for PDP
+       
+    Examples: 
+      | planType | memberType | language | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | comprehensiveformulary  | priorauth           | steptherapy  | formularyadd        | formularydel        | anoc                     | evidenceofcoverageanoc | comprehensiveformularyanoc |
+      | PDP      | IndAARPPre-EffectivePDPFnR | ENGLISH  | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Annual Notice of Changes | Evidence Of Coverage   | Comprehensive Formulary    |
 
 
 
@@ -46,7 +87,7 @@ Scenario Outline:
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
     And validates the view temporary id card link
     Then validate that the plan materials section is displayed
-    And validate that english is default language in dropdown
+    And validate that english is default language in the dropdown
     And the user validates the language dropdown and selects new value in dropdown successfully
       | Language | <language> |
     And the user verifies that the correct pdfs are coming in the plan material section
@@ -63,13 +104,13 @@ Scenario Outline:
     #  | COMPREHENSIVE FORMULARY | <comprehensiveformulary> |
     #  | EVIDENCE OF COVERAGE    | <evidenceofcoverage>     |
     Then validate that the anoc section is displayed
-    Then validate that the annual directories section is displayed
+    Then validate that annual directory section is displayed
     And the user verifies that the correct pdfs are coming in the anoc section
       | ANNUAL NOTICE OF CHANGES    | <anoc>                       |
       | EVIDENCE OF COVERAGEANOC    | <evidenceofcoverageanoc>     |
       | COMPREHENSIVE FORMULARYANOC | <comprehensiveformularyanoc> |
     And both the Pharmacy locator and provider search links are displayed
-    Then validate that My document section is displayed
+    Then validate that My Document section is displayed
     And both the Drug and Medical EOB links are displayed
     Then validate that the forms and resources section is displayed
     Then validate that the renew magazine section is displayed for MAPD
@@ -88,7 +129,7 @@ Scenario Outline:
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
     And validates the view temporary id card link
     Then validate that the plan materials section is displayed
-    And validate that english is default language in dropdown
+    And validate that english is default language in the dropdown
     And the user validates the language dropdown and selects new value in dropdown successfully
       | Language | <language> |
     And the user verifies that the correct pdfs are coming in the plan material section
@@ -105,10 +146,10 @@ Scenario Outline:
    #   | COMPREHENSIVE FORMULARY | <comprehensiveformulary> |
    #   | EVIDENCE OF COVERAGE    | <evidenceofcoverage>     |
     Then validate that the anoc section is not displayed
-    Then validate that the annual directories section is displayed
+    Then validate that annual directory section is displayed
     And the Pharmacy locator link is displayed
     And the provider search link is not displayed for PDP
-    Then validate that My document section is displayed
+    Then validate that My Document section is displayed
     And the Drug EOB link is displayed for PDP
     And Medical EOB link is not displayed for PDP
     Then validate that the forms and resources section is displayed
@@ -128,7 +169,7 @@ Scenario Outline:
     And for active member Temporary Id Card and Plan Order Material links are displayed
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
     And validates the view temporary id card link
-    And validate that english is default language in dropdown
+    And validate that english is default language in the dropdown
     And the user validates the language dropdown and selects new value in dropdown successfully
       | Language | <language> |
     And the user verifies that the correct pdfs are coming in the plan material section
@@ -152,7 +193,7 @@ Scenario Outline:
      | EVIDENCE OF COVERAGEMEM     | <evidenceofcoveragemem>     |
      | CERTIFICATE OF COVERAGE  | <certificateofcoverage>  |
     Then validate that the anoc section is displayed for group
-    Then validate that the annual directories section is displayed
+    Then validate that annual directory section is displayed
     And the user verifies that the correct pdfs are coming in the anoc section
       | ANNUAL NOTICE OF CHANGES     | <anoc>                       |
       | EVIDENCE OF COVERAGEANOC     | <evidenceofcoverageanoc>     |
@@ -161,7 +202,7 @@ Scenario Outline:
       | ADDITIONAL DRUG COVERAGEANOC | <additionaldruganoc>         |
     And the Pharmacy locator link is displayed
     And the provider search link is displayed
-    Then validate that My document section is displayed
+    Then validate that My Document section is displayed
     And the medical EOB link is displayed for MADP Group
     And the Drug EOB link is displayed for MAPD Group
     Then validate that the forms and resources section is displayed
@@ -182,7 +223,7 @@ Scenario Outline:
     And for active member Temporary Id Card and Plan Order Material links are displayed
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
     And validates the view temporary id card link
-    And validate that english is default language in dropdown
+    And validate that english is default language in the dropdown
     And the user validates the language dropdown and selects new value in dropdown successfully
       | Language | <language> |
     And the user verifies that the correct pdfs are coming in the plan material section
@@ -200,14 +241,14 @@ Scenario Outline:
     # | ADDITIONAL DRUG COVERAGE | <additionaldrugcoverage> |
     #  | EVIDENCE OF COVERAGE     | <evidenceofcoverage>     |
     Then validate that the anoc section is displayed
-    Then validate that the annual directories section is displayed
+    Then validate that annual directory section is displayed
     And the user verifies that the correct pdfs are coming in the anoc section
       | ANNUAL NOTICE OF CHANGES    | <anoc>                       |
       | EVIDENCE OF COVERAGEANOC    | <evidenceofcoverageanoc>     |
       | COMPREHENSIVE FORMULARYANOC | <comprehensiveformularyanoc> |
     And the Pharmacy locator link is displayed
     And the provider search link is not displayed for PDP
-    Then validate that My document section is displayed
+    Then validate that My Document section is displayed
     And the Drug EOB link is displayed for PDP
     And Medical EOB link is not displayed for PDP
     Then validate that the forms and resources section is displayed
@@ -228,7 +269,7 @@ Scenario Outline:
     And for active member Temporary Id Card and Plan Order Material links are displayed
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
     And validates the view temporary id card link
-    And validate that english is default language in dropdown
+    And validate that english is default language in the dropdown
     And the user validates the language dropdown and selects new value in dropdown successfully
       | Language | <language> |
     And the user verifies that the correct pdfs are coming in the plan material section
@@ -256,10 +297,10 @@ Scenario Outline:
       | EVIDENCE OF COVERAGEANOC     | <evidenceofcoverageanoc>     |
       | COMPREHENSIVE FORMULARYANOC  | <comprehensiveformularyanoc> |
       | ADDITIONAL DRUG COVERAGEANOC | <additionaldruganoc>         |
-    Then validate that the annual directories section is displayed
+    Then validate that annual directory section is displayed
     And the Pharmacy locator link is displayed
     And the provider search link is not displayed for PDP
-    Then validate that My document section is displayed
+    Then validate that My Document section is displayed
     And the Drug EOB link is displayed for PDP
     And Medical EOB link is not displayed for PDP
     Then validate that the forms and resources section is displayed
@@ -280,7 +321,7 @@ Scenario Outline:
     And for active member Temporary Id Card and Plan Order Material links are displayed
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
     And validates the view temporary id card link
-    And validate that english is default language in dropdown
+    And validate that english is default language in the dropdown
     And the user validates the language dropdown and selects new value in dropdown successfully
       | Language | <language> |
     And the user verifies that the correct pdfs are coming in the plan material section
@@ -310,10 +351,10 @@ Scenario Outline:
        |CERTIFICATE 0F COVERAGE      |  <certificateofcoverage>  |
       | COMPREHENSIVE FORMULARYANOC  | <comprehensiveformularyanoc> |
       | ADDITIONAL DRUG COVERAGEANOC | <additionaldruganoc>         |
-    Then validate that the annual directories section is displayed
+    Then validate that annual directory section is displayed
     And the Pharmacy locator link is displayed
     And the provider search link is not displayed for PDP
-    Then validate that My document section is displayed
+    Then validate that My Document section is displayed
     And the Drug EOB link is displayed for PDP
     And Medical EOB link is not displayed for PDP
     Then validate that the forms and resources section is displayed
@@ -335,7 +376,7 @@ Scenario Outline:
     And for active member Temporary Id Card and Plan Order Material links are displayed
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
     And validates the view temporary id card link
-    And validate that english is default language in dropdown
+    And validate that english is default language in the dropdown
     And the user validates the language dropdown and selects new value in dropdown successfully
       | Language | <language> |
     And the user verifies that the correct pdfs are coming in the plan material section
@@ -349,13 +390,13 @@ Scenario Outline:
   #    | EVIDENCE OF COVERAGE           | <evidenceofcoverage>          |
   #    | UNITED HEALTH PASSPORT PROGRAM | <unitedhealthpassportprogram> |
     Then validate that the anoc section is displayed
-    Then validate that the annual directories section is displayed
+    Then validate that annual directory section is displayed
     And the user verifies that the correct pdfs are coming in the anoc section
       | ANNUAL NOTICE OF CHANGES  | <anoc>                   |
       | EVIDENCE OF COVERAGE ANOC | <evidenceofcoverageanoc> |
     And the Pharmacy locator link is not displayed for MA
     And the Provider Search link is displayed for MA
-    Then validate that My document section is displayed
+    Then validate that My Document section is displayed
     And the Drug EOB link is not displayed for MA
     And Medical EOB link is displayed for MA
     Then validate that the forms and resources section is displayed
@@ -401,7 +442,7 @@ Scenario Outline:
     #  | EVIDENCE OF COVERAGE     | <evidenceofcoverage>     |
     #  | CERTIFICATE OF COVERAGE  | <certificateofcoverage>  |
     Then validate that the anoc section is displayed for group
-    Then validate that the annual directories section is displayed
+    Then validate that annual directory section is displayed
     And the user verifies that the correct pdfs are coming in the anoc section
       #| ANNUAL NOTICE OF CHANGES     | <anoc>                       |
       | EVIDENCE OF COVERAGEANOC     | <evidenceofcoverageanoc>     |
@@ -410,7 +451,7 @@ Scenario Outline:
       | ADDITIONAL DRUG COVERAGEANOC | <additionaldrug>         |
     And the Pharmacy locator link is displayed
     And the provider search link is displayed
-    Then validate that My document section is displayed
+    Then validate that My Document section is displayed
     And the medical EOB link is displayed for MADP Group
     And the Drug EOB link is displayed for MAPD Group
     Then validate that the forms and resources section is displayed
@@ -430,7 +471,7 @@ Scenario Outline:
     And for active member Temporary Id Card and Plan Order Material links are displayed
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
     And validates the view temporary id card link
-    And validate that english is default language in dropdown
+    And validate that english is default language in the dropdown
     And the user validates the language dropdown and selects new value in dropdown successfully
       | Language | <language> |
     And the user verifies that the correct pdfs are coming in the plan material section
@@ -447,9 +488,9 @@ Scenario Outline:
       | COMPREHENSIVE FORMULARY | <comprehensiveformulary> |
       | EVIDENCE OF COVERAGE    | <evidenceofcoverage>     |
     Then validate that the anoc section is not displayed
-    Then validate that the annual directories section is displayed
+    Then validate that annual directory section is displayed
     And both the Pharmacy locator and provider search links are displayed
-    Then validate that My document section is displayed
+    Then validate that My Document section is displayed
     Then validate that the EOB section is displayed
     And both the Drug and Medical EOB links are displayed
     Then validate that the forms and resources section is displayed
@@ -470,7 +511,7 @@ Scenario Outline:
     And for active member Temporary Id Card and Plan Order Material links are displayed
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
     And validates the view temporary id card link
-    And validate that english is default language in dropdown
+    And validate that english is default language in the dropdown
     And the user verifies that the correct pdfs are coming in the plan material section
       | SCHEDULE_OF_BENEFITS      | <scheduleofbenefits>     |
       | CERTIFICATE_OF_COVERAGE   | <certificateofcoverage>  |
@@ -485,7 +526,7 @@ Scenario Outline:
     Then validate that the anoc section is not displayed
     Then validate that the annual directories section is not displayed
     And both the Pharmacy locator and provider search links are not displayed
-    Then validate that My document section is displayed
+    Then validate that My Document section is displayed
     Then validate that the EOB section and both the type of Eobs are not displayed
     Then validate that the forms and resources section is displayed
     Then validate that the renew magazine section is not displayed
@@ -525,7 +566,7 @@ Scenario Outline:
     Then validate that the anoc section is not displayed
     Then validate that the annual directories section is not displayed
     And both the Pharmacy locator and provider search links are not displayed
-    Then validate that My document section is displayed
+    Then validate that My Document section is displayed
     Then validate that the EOB section is displayed
     Then validate that the renew magazine section is not displayed
 
@@ -544,7 +585,7 @@ Scenario Outline:
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
     And validates the view temporary id card link
     Then validate that the plan materials section is displayed
-    And validate that english is default language in dropdown
+    And validate that english is default language in the dropdown
     Then the user verifies the pdfs for ship if particular pdf is not present
     | BENEFIT HIGHLIGHTS  |<benefitstable>    |
     | PLAN OVERVIEW | <planoverview>  |
@@ -572,7 +613,7 @@ Scenario Outline:
     And validates the view temporary id card link
     Then validate that the plan materials section is displayed
     Then validate that the anoc section is displayed
-    Then validate that the annual directories section is displayed
+    Then validate that annual directory section is displayed
     
 
     Examples: 
