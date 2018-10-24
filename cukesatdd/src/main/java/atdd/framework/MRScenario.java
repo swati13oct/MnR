@@ -207,18 +207,20 @@ public class MRScenario {
 				
 				String tagName=it.next();
 				
+				
 				 if  (tagName.equalsIgnoreCase("@MemberVBF")){
 						
-						if(environment.contains("team-ci"))
-					   csvName = "MemberRedesign-VBF-Teamci.csv";
-					
+						if(environment.contains("team-ci")){
+							csvName = "MemberRedesign-VBF-Teamci.csv";
+						}
+					  
 				else {
 					csvName = "MemberRedesign-VBF.csv";
 				}
 			}
 				
-				 else if ((environment.contains("team-a") || (environment.contains("team-e")) || (environment.contains("team-f")) || (environment.contains("team-g")) || (environment.contains("team-c")) || (environment.contains("team-t")))) {
-					csvName= "MemberRedesign-UUID.csv";
+				 else if ((environment.equalsIgnoreCase("team-a") || (environment.equalsIgnoreCase("team-e")) || (environment.equalsIgnoreCase("team-f")) || (environment.equalsIgnoreCase("team-g")) || (environment.equalsIgnoreCase("team-c")) || (environment.equalsIgnoreCase("team-t")))) {
+				csvName= "MemberRedesign-UUID.csv";
 				 }
 					else{
 				if (tagName.equalsIgnoreCase("@benefitsAndCoverage")) {
