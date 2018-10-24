@@ -1,5 +1,5 @@
 @fastandfurious @OLE @OLE_Ulayer
-Feature: To test OLE common tool flow in AARP site
+Feature:1.12-VBF-ACQ-To test OLE common tool flow in AARP site
 
   @OLE_VPP_AARP @junerelease2018
   Scenario Outline: OLE Landing from VPP Plan Summary
