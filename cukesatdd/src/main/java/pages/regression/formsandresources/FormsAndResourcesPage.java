@@ -258,6 +258,13 @@ public class FormsAndResourcesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='overview_customsegments-welcomeKit-2018_segmentContainer_planbenefitdocuments']//li")
 	private List<WebElement> PreEffectiveMemMaterials;
 
+	@FindBy(xpath = "//*[@class='overview_customsegments-AnnualDirectories-PreEffective_segmentContainer_planbenefitdocuments_2019']/div/ul/li")
+	private List<WebElement> annualDirectoryPdfList;
+
+	public List<WebElement> getAnnualDirectoryPdfList() {
+		return annualDirectoryPdfList;
+	}
+
 	public List<WebElement> getPreEffectiveMemMaterials() {
 		return PreEffectiveMemMaterials;
 	}
@@ -1177,14 +1184,18 @@ public class FormsAndResourcesPage extends UhcDriver {
 		Collection<String> values = memberAttributesMap.values();
 		String[] targetArray = values.toArray(new String[values.size()]);
 		System.out.println(values.size());
+
 		if (materialType == "memberShip")
 			temp = getPreEffectiveMemMaterials();
-		else if (materialType == "welcomeKit")
-			;
-		temp = getPreEffectiveMemMaterials();
+		else if (materialType == "welcomeGuide")
+			temp = getPreEffectiveMemMaterials();// same for both
+		else if (materialType == "annualDirectory") {
+			formsAndResourcesPage.scrollToView(preAnnualDirectorySection);
+			temp = getAnnualDirectoryPdfList();
+		}
 
 		boolean arraycheck = formsAndResourcesPage.verifyPdfNames(targetArray, temp);
-		Assert.assertTrue("all pdfs are coming correctly", arraycheck == true);
+		Assert.assertTrue("Incorrect pdf's shown", arraycheck == true);
 
 	}
 }

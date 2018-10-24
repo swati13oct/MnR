@@ -56,22 +56,30 @@ Scenario Outline:
 
 @fnrpdpaarpindividualvalidationPre-Effective
   Scenario Outline: 
-    Given login with following details logins in the member redesign portal
+     Given login with following details logins in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     And user clicks on the view document and resources link and navigate to forms and resource page
-    #And validate that english is default language in the dropdown
-   # And the user validates the language dropdown and selects new value in dropdown successfully
-      | Language | <language> |
+    Then validate pdf's in the welcome guide section
+     | GETTING STARTED GUIDE    | <gettingstartedguide>     |
+     | BENEFIT-HIGHLIGHT        | <benefithighlight>        |
+     | COMPREHENSIVE FORMULARY  | <comprehensiveformulary>  |
+     | Alternative Drug List 	| <alternativedruglist>     |
+     | EVIDENCE OF COVERAGEMEM  | <evidenceofcoverage>      |
+    And validate that english is default language in the dropdown
+   	And the user validates the language dropdown and selects new value in dropdown successfully
+   	 | Language | <language> |
     Then validate that annual directory section is displayed
-    Then validate that My Document section is displayed
+     | MemberType | <memberType> |
+    Then validate pdf's in annual directory section
+	 |Pharmacy Directory Information|<pharmacydirectoryinformation>|
+	Then validate that My Document section is displayed
     And the Pharmacy locator link is displayed
     And the provider search link is not displayed for PDP
        
     Examples: 
-      | planType | memberType | language | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | comprehensiveformulary  | priorauth           | steptherapy  | formularyadd        | formularydel        | anoc                     | evidenceofcoverageanoc | comprehensiveformularyanoc |
-      | PDP      | IndAARPPre-EffectivePDPFnR | ENGLISH  | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Annual Notice of Changes | Evidence Of Coverage   | Comprehensive Formulary    |
-
+      | planType | memberType 				  | language | benefithighlight   | gettingstartedguide   | benefithighlight   |comprehensiveformulary  |alternativedruglist  |evidenceofcoverage   |pharmacydirectoryinformation  |
+      | PDP      | IndAARPPre-EffectivePDPFnR | ENGLISH  | Benefit Highlights |Getting Started Guide  |Benefit Highlights  |Comprehensive Formulary |Alternative Drug List|Evidence Of Coverage |Pharmacy Directory Information|
 
 
 

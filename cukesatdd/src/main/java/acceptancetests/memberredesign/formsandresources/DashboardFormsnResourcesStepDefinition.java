@@ -884,4 +884,20 @@ public class DashboardFormsnResourcesStepDefinition {
 		}
 	}
 
+	@Then("^validate pdf's in the welcome guide section$")
+	public void validate_pdf_s_in_the_welcome_guide_section(DataTable givenAttributes) throws Throwable {
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+		formsAndResourcesPage.pdfValidationOfAllTypes(formsAndResourcesPage, givenAttributes, "welcomeGuide");
+
+	}
+
+	@Then("^validate pdf's in annual directory section$")
+	public void validate_pdf_s_in_annual_directory_section(DataTable givenAttributes) throws Throwable {
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+		formsAndResourcesPage.pdfValidationOfAllTypes(formsAndResourcesPage, givenAttributes, "annualDirectory");
+
+	}
+
 }
