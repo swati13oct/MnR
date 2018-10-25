@@ -45,7 +45,7 @@ public class DashboardFormsnResourcesStepDefinition {
 	}
 
 	@Given("^login with following details logins in the member redesign portal$")
-	public void login_with_member(DataTable memberAttributes) throws InterruptedException {
+	private void login_with_member(DataTable memberAttributes) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -411,7 +411,7 @@ public class DashboardFormsnResourcesStepDefinition {
 	}
 
 	/* to verify the my doc section */
-	@Then("^validate that My document section is displayed$")
+	@Then("^validate that My Document section is displayed$")
 	public void mydocumentsectionisdispayed() throws InterruptedException {
 
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
@@ -443,18 +443,21 @@ public class DashboardFormsnResourcesStepDefinition {
 
 	}
 
-	@Then("^validate that the annual directories section is displayed$")
-	public void annualdirectory() {
+	@Then("^validate that annual directory section is displayed$")
+	public void annualdirectory(DataTable memberType) {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
 		formsAndResourcesPage.scroll();
-		if (formsAndResourcesPage.getAnnualDirectorySection().isDisplayed()) {
-			Assert.assertTrue(true);
-			System.out.println("annual directory section is present");
 
-		} else {
-			Assert.fail("annual directory section is not present");
-		}
+		List<List<String>> data = memberType.raw();
+		// This is to get the first data of the set (First Row + First Column)
+		if (data.get(0).get(1).contains("Pre-Effective"))
+			Assert.assertTrue("annual directory section is present",
+					formsAndResourcesPage.getAnnualDirectorySection("Pre-Effective").isDisplayed());
+		else
+			Assert.assertTrue("annual directory section is present",
+					formsAndResourcesPage.getAnnualDirectorySection("Effective").isDisplayed());
+
 	}
 
 	@And("^both the Pharmacy locator and provider search links are displayed$")
@@ -538,7 +541,7 @@ public class DashboardFormsnResourcesStepDefinition {
 	/**
 	 * @toDo : verifies default language displayed in the drop down
 	 */
-	@And("^validate that english is default language in dropdown$")
+	@And("^validate that english is default language in the dropdown$")
 	public void validatelanguage() {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
@@ -846,25 +849,8 @@ public class DashboardFormsnResourcesStepDefinition {
 	public void validatemembershipmaterials(DataTable givenAttributes) throws InterruptedException {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		System.out.println(memberAttributesRow);
-		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-		Collection<String> values = memberAttributesMap.values();
-		String[] targetArray = values.toArray(new String[values.size()]);
-		System.out.println(values.size());
+		formsAndResourcesPage.pdfValidationOfAllTypes(formsAndResourcesPage, givenAttributes, "memberShip");
 
-		boolean arraycheck = formsAndResourcesPage.verifypdfnamemembershipmaterials(targetArray);
-		if (arraycheck == true) {
-			Assert.assertTrue(true);
-			System.out.println("all pdfs are coming correctly");
-		} else {
-			Assert.fail("pdfs not coming correctly");
-		}
-		// Thread.sleep(2000);
 	}
 
 	@And("^validates that plan material section is not displayed$")
@@ -889,10 +875,12 @@ public class DashboardFormsnResourcesStepDefinition {
 		List<List<String>> data = planType.raw();
 		// This is to get the first data of the set (First Row + First Column)
 		if (data.get(0).get(0).contains("MAPD") && (data.get(0).get(1).contains("IndAARPPre-Effective"))) {
-			Assert.assertTrue("pharmacy locator is present",formsAndResourcesPage.getPharmacyLocatorLinkIndMAPDPreEffective().isDisplayed());
-		
-			Assert.assertTrue("provider search link is present", formsAndResourcesPage.getprovisesearchlink().isDisplayed());
-		
+			Assert.assertTrue("pharmacy locator is present",
+					formsAndResourcesPage.getPharmacyLocatorLinkIndMAPDPreEffective().isDisplayed());
+
+			Assert.assertTrue("provider search link is present",
+					formsAndResourcesPage.getprovisesearchlink().isDisplayed());
+
 		}
 	}
 
