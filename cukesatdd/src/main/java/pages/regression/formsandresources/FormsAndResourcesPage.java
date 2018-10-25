@@ -144,7 +144,10 @@ public class FormsAndResourcesPage extends UhcDriver {
 	 */
 
 	@FindBy(id = "lang-select-2overview_customsegments-welcomeKit-2018_segmentContainer_planbenefitdocuments")
-	private List<WebElement> languagedropdown;
+	private WebElement languagedropdown;
+	
+	@FindBy(id = "lang-select-2overview_customsegments-welcomeKit-2018_segmentContainer_planbenefitdocuments")
+	private List<WebElement> languagedropdownPreEfffective;
 
 	/** Anoc Section **/
 	@FindBy(xpath = "(//*[@id=\"anoc_headerfnr\"])[1]/div/div/h2")
@@ -165,6 +168,15 @@ public class FormsAndResourcesPage extends UhcDriver {
 	/** Annual Directories Section **/
 	@FindBy(xpath = "(//*[@id='FnR_annualDirectory']//h2[contains(text(),'Annual Directory')])[3]")
 	private WebElement preAnnualDirectorySection;
+	
+	/** Annual Directories Section for pre-effective MAPD**/
+	@FindBy(xpath = "(//*[@id='FnR_annualDirectory'])[3]")
+	private WebElement preMAAnnualDirectorySection;
+	
+
+	public WebElement getPreMAAnnualDirectorySection() {
+		return preMAAnnualDirectorySection;
+	}
 
 	/* Provider Search Link for MAPD */
 	@FindBy(xpath = "//*[@class='otherPages calloutBoth_AD']//*[text()='Provider Search']")
@@ -185,6 +197,16 @@ public class FormsAndResourcesPage extends UhcDriver {
 	/* Provider Search link for PDP and MA */
 	@FindBy(xpath = "//*[@class='otherPages providerSearchCallout_AD']//*[text()='Provider Search']")
 	private WebElement ProviderSearchLinkPDP;
+	
+	/* Provider Search link for PDP and MA */
+	@FindBy(xpath = "//*[@class='otherPages provide_rSearch_Callout_PE']//*[text()='Provider Search']")
+	private WebElement ProviderSearchLinkPreEffectivePDPMA;
+	
+	
+
+	public WebElement getProviderSearchLinkPreEffectivePDPMA() {
+		return ProviderSearchLinkPreEffectivePDPMA;
+	}
 
 	/* Pharmacy Locator Link for PDP */
 	@FindBy(xpath = "//*[@class='otherPages PharmacyLocatorCallout_AD']//*[text()='Pharmacy Locator']")
@@ -260,6 +282,15 @@ public class FormsAndResourcesPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@class='overview_customsegments-AnnualDirectories-PreEffective_segmentContainer_planbenefitdocuments_2019']/div/ul/li")
 	private List<WebElement> annualDirectoryPdfList;
+
+	@FindBy(xpath = "//*[@id='home_2']")
+	private WebElement home;
+	
+	
+	
+	public WebElement getHome() {
+		return home;
+	}
 
 	public List<WebElement> getAnnualDirectoryPdfList() {
 		return annualDirectoryPdfList;
@@ -533,8 +564,13 @@ public class FormsAndResourcesPage extends UhcDriver {
 	/**
 	 * @toDo : to verify english as a default language
 	 */
-	public void validateEngDefault() {
-		Select oselect = new Select(languagedropdown.get(0));
+	public void validateEngDefault(String memberType) {
+		Select oselect;
+		if(memberType.contains("Pre-Effective"))
+			 oselect = new Select(languagedropdownPreEfffective.get(0));
+		else
+			 oselect = new Select(languagedropdown);
+		
 		if (oselect.getFirstSelectedOption().getText().equals("ENGLISH")) {
 			System.out.println(oselect.getFirstSelectedOption().getText());
 			System.out.println("true");
@@ -551,10 +587,10 @@ public class FormsAndResourcesPage extends UhcDriver {
 	 */
 	public void changelanguage() throws InterruptedException {
 		/* CommonUtility.waitForPageLoad(driver, pdf, 20); */
-		Select oselect = new Select(languagedropdown.get(0));
+		Select oselect = new Select(languagedropdownPreEfffective.get(0));
 
 		Thread.sleep(3000);
-		languagedropdown.get(0).click();
+		languagedropdownPreEfffective.get(0).click();
 		oselect.selectByVisibleText("SPANISH");
 		System.out.println(oselect.getFirstSelectedOption().getText());
 		Thread.sleep(6000);
@@ -584,7 +620,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	public boolean verifypdfname(String a[]) throws InterruptedException {
 		boolean checkflag = true;
 
-		Select langdropdwn = new Select(languagedropdown.get(0));
+		Select langdropdwn = new Select(languagedropdownPreEfffective.get(0));
 		if (langdropdwn.getFirstSelectedOption().getText().contains("ENGLISH")) {
 
 			java.util.List<WebElement> pdfs = driver.findElements(
@@ -688,7 +724,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 
 	public boolean verifyPdfNames(String a[], List<WebElement> listOfPdf) throws InterruptedException {
 		boolean checkflag = false;
-		Select langdropdwn = new Select(languagedropdown.get(0));
+		Select langdropdwn = new Select(languagedropdownPreEfffective.get(0));
 		if (langdropdwn.getFirstSelectedOption().getText().contains("ENGLISH")) {
 			checkflag = pdfComparison(a, listOfPdf, checkflag);
 		} else if (langdropdwn.getFirstSelectedOption().getText().contains("SPANISH")) {
@@ -1018,7 +1054,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	}
 
 	public void selectlanguagedropdown(String language) {
-		Select langdropdwn = new Select(languagedropdown.get(0));
+		Select langdropdwn = new Select(languagedropdownPreEfffective.get(0));
 		langdropdwn.selectByVisibleText(language);
 	}
 
@@ -1196,4 +1232,8 @@ public class FormsAndResourcesPage extends UhcDriver {
 		boolean arraycheck = formsAndResourcesPage.verifyPdfNames(targetArray, temp);
 		Assert.assertTrue("Incorrect pdf's shown", arraycheck == true);
 	}
+
+	
+
+	
 }
