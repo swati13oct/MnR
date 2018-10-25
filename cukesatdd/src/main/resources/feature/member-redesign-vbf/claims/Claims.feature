@@ -1,4 +1,4 @@
-@smokeTest
+@smokeTest @MemberVBF
 Feature: 1.02-VBF-MemRedesign-To test claim functionality
 
 @smokeTest_Claims @rallyDashboard @testharness

@@ -1,4 +1,4 @@
-@smokeTest
+@smokeTest @MemberVBF
 Feature: 1.08-VBF-MemRedesign-To test sign functionality via member auth
 @smokeTest_CsrLogin
 Scenario Outline: Validate that member is successfully getting logged in to Rally Dashboard via CSR

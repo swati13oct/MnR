@@ -50,7 +50,8 @@ public class CommonStepDefinition {
 
 		CommonStepDefinition.storeAttributesInMap(memberAttributes);
 		List<String> desiredAttributes = CommonStepDefinition.storeMapAttributesInList();
-		Map<String, String> loginCreds = loginScenario.getmemberRedesignVbfWithDesiredAttributes(desiredAttributes);
+		Map<String, String> loginCreds = loginScenario.getUMSMemberWithDesiredAttributes(desiredAttributes);
+		
 		String userName = null;
 		String pwd = null;
 		if (null == loginCreds) {

@@ -1,4 +1,4 @@
-@smokeTest
+@smokeTest @MemberVBF
 Feature: 1.03-VBF-MemRedesign-To test contact us page
 
   @smokeTest_contactusInd @rallyDashboard @testharness
