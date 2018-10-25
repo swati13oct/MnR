@@ -1,4 +1,4 @@
-@smokeTest
+@smokeTest @MemberVBF
 Feature: 1.13-VBF-MemRedesign-To test My Profile & Preferences and Go Green flows (GATED)
 
 

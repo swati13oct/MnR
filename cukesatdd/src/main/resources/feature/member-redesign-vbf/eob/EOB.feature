@@ -1,4 +1,4 @@
-@smokeTest
+@smokeTest @MemberVBF
 Feature: 1.05-VBF-MemRedesign-To test EOB functionality (GATED)
 
   @smokeTest_EOB @rallyDashboard @testharness
