@@ -314,7 +314,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
       | PCP      | Last 24 months | PCP   | COSMOSCLAIMS   |
       
      
-      @claimsprintanddownload @thePredators @claims
+      @claimsprintanddownload @thePredator
   	Scenario Outline: To validate the <claimssystem> on claims summary page
     Given login with following details logins in the member portal and validate elements
       #  Given I am an Individual or Group member on the redesigned site
