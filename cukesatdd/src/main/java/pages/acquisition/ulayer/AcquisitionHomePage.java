@@ -117,6 +117,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath = ".//*[@id='colhowdoesthiswork_dce']//*[@itemprop='significantLink']/*[@class='cta-button secondary']")
 	public WebElement getStarted;
+	
+	@FindBy(xpath =".//*[@id='collapse2heading_article_mededaccordion0']")
+	private WebElement requestAgentApptDropdown;
 
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
 	private static String AARP_ACQISITION_OFFLINE_PAGE_URL = MRConstants.AARP_URL_OFFLINE;
@@ -747,7 +750,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		} catch (Exception e) {
 			System.out.println("zipCodeField not found");
 		}
-		if (currentUrl().contains(
+		
+		CommonUtility.waitForPageLoad(driver, requestAgentApptDropdown, 30);
+		if (validateNew(requestAgentApptDropdown) && currentUrl().contains(
 				"medicare-advantage-plans/request-information.html")) {
 			return new RequestHelpAndInformationPage(driver);
 		}

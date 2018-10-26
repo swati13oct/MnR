@@ -171,14 +171,8 @@ public class PDPEnrollementGuidePage extends UhcDriver{
 
 	public EnquiryKitConfirmationPage submitsRequest() {
 		inquryKitSubmitLink.click();
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		CommonUtility.waitForPageLoad(driver, medicareTitle, 10);
-		if(currentUrl().contains("request-information/inquirykitconfirmation.html")){
+		CommonUtility.waitForPageLoad(driver, medicareTitle, 30);
+		if(validateNew(medicareTitle) && currentUrl().contains("request-information/inquirykitconfirmation.html")){
 			return  new EnquiryKitConfirmationPage(driver);
 		}
 		return null;
