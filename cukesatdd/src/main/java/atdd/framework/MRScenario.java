@@ -21,6 +21,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -93,7 +94,9 @@ public class MRScenario {
 	public static boolean isSauceLabSelected = false;
 	public static int count = 0;
 	public static String sauceLabsTunnelIdentifier;
-
+	static BufferedReader memberAmpTypeReader = null;
+	static BufferedReader memberUmsTypeReader = null;
+	static BufferedReader memberRedesignVbfTypeReader = null;
 	public static final String USERNAME = "ucpadmin";
 
 	public static final String ACCESS_KEY = "2817affd-616e-4c96-819e-4583348d7b37";
@@ -165,49 +168,111 @@ public class MRScenario {
 		groovyScript.setReadable(true);
 		groovyScript.setWritable(true);
 		groovyScript.setExecutable(true);
-		BufferedReader memberAmpTypeReader = null;
-		BufferedReader memberUmsTypeReader = null;
-		BufferedReader memberRedesignVbfTypeReader = null;
 
+	}
+	
+	
+
+	public static void loadCSV() {
+		// GlobalBeforeHook.beforeGlobal(scenario);
+		String csvName = getCsvName();
+		System.out.println(csvName);
+		putCsv(csvName);
+
+	}
+
+	private static void putCsv(String csvName) {
+		InputStream memberTypeStream1 = ClassLoader.class.getResourceAsStream("/database/"+csvName);
+		memberUmsTypeReader = new BufferedReader(new InputStreamReader(memberTypeStream1));
+		System.out.println("Inside ..........."+csvName);
 		try {
-			InputStream memberTypeStream = ClassLoader.class.getResourceAsStream("/database/AMP-Member-Type.csv");
-			memberAmpTypeReader = new BufferedReader(new InputStreamReader(memberTypeStream));
-			System.out.println("Inside AMP-Member-Type csv...........");
-			while ((line = memberAmpTypeReader.readLine()) != null) {
-				formattedMemberString = formatMemberData(line);
-
-				ampMemberAttributesMap.put(formattedMemberString, UserName);
-			}
-
-			InputStream memberTypeStream1 = ClassLoader.class.getResourceAsStream("/database/UMS-Member-Type.csv");
-			memberUmsTypeReader = new BufferedReader(new InputStreamReader(memberTypeStream1));
-			System.out.println("Inside UMS-Member-Type csv...........");
 			while ((line = memberUmsTypeReader.readLine()) != null) {
-				formattedMemberString = formatMemberData(line);
+				formattedMemberString = formatMemberData(line, formattedMemberString);
 				umsMemberAttributesMap.put(formattedMemberString, UserName);
-			}
-			InputStream memberTypeStream2;
-			if (environment.contains("team-ci")) {
-				memberTypeStream2 = ClassLoader.class.getResourceAsStream("/database/MemberRedesign-VBF-Teamci.csv");
-			}else if (environment.contains("team-a") || (environment.contains("team-e")) || (environment.contains("team-f")) || (environment.contains("team-g")) || (environment.contains("team-c")) || (environment.contains("team-t"))) {
-				memberTypeStream2 = ClassLoader.class.getResourceAsStream("/database/MemberRedesign-UUID.csv");
-			} else {
-				memberTypeStream2 = ClassLoader.class.getResourceAsStream("/database/MemberRedesign-VBF.csv");
-			}
-			memberRedesignVbfTypeReader = new BufferedReader(new InputStreamReader(memberTypeStream2));
-			System.out.println("Inside member redesign VBF csv...........");
-			while ((line = memberRedesignVbfTypeReader.readLine()) != null) {
-				
-				formattedMemberString = formatMemberData(line);
-				memberRedesignVbfAttributesMap.put(formattedMemberString, UserName);
-
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
+		
+		
+		public static String getCsvName() {
+
+			String csvName = null;
+			List<String> tagsList = atdd.framework.GlobalBeforeHook.tagsList;
+			System.out.println(tagsList.size());
+			Iterator<String> it= tagsList.iterator();
+			while(it.hasNext()){
+				
+				String tagName=it.next();
+				
+				
+				 if  (tagName.equalsIgnoreCase("@MemberVBF")){
+						
+						if(environment.contains("team-ci")){
+							csvName = "MemberRedesign-VBF-Teamci.csv";
+						}
+					  
+				else {
+					csvName = "MemberRedesign-VBF.csv";
+				}
+			}
+				
+				 else if ((environment.equalsIgnoreCase("team-a") || (environment.equalsIgnoreCase("team-e")) || (environment.equalsIgnoreCase("team-f")) || (environment.equalsIgnoreCase("team-g")) || (environment.equalsIgnoreCase("team-c")) || (environment.equalsIgnoreCase("team-t")))) {
+				csvName= "MemberRedesign-UUID.csv";
+				 }
+					else{
+				if (tagName.equalsIgnoreCase("@benefitsAndCoverage")) {
+					csvName = "benefitsAndCoverage.csv";
+				}
+
+				else if (tagName.equalsIgnoreCase("@profileAndPreferences")) {
+					csvName = "profileAndPreferences.csv";	
+				}
+				
+				else if (tagName.equalsIgnoreCase("@claimsSummary")) {
+					csvName = "claimsSummary.csv";	
+				}
+				
+					}
+			}
+				if(csvName!=null)
+					return csvName;
+				else 
+					csvName="UMS-Member-Type.csv";
+					return  csvName;		
+
+		}
+		
+		public static String formatMemberData(String line, String formattedMemberString) {
+			formattedMemberString = "";
+			String[] memberAttributes = line.split(cvsSplitBy);
+
+			/*
+			 * for (int i = 0; i <= memberAttributes.length - 2; i++) { if (2 ==
+			 * memberAttributes.length || i == memberAttributes.length - 2) {
+			 * formattedMemberString =
+			 * formattedMemberString.concat(memberAttributes[i]); } else { if (i !=
+			 * memberAttributes.length - 2) formattedMemberString =
+			 * formattedMemberString.concat(memberAttributes[i]).concat(cvsSplitBy);
+			 * } }
+			 */
+			for (int i = 1; i <= memberAttributes.length - 1; i++) {
+				if (2 == memberAttributes.length || i == memberAttributes.length - 1) {
+					formattedMemberString = formattedMemberString.concat(memberAttributes[i]);
+				} else {
+					if (i != memberAttributes.length - 1)
+						formattedMemberString = formattedMemberString.concat(memberAttributes[i]).concat(cvsSplitBy);
+				}
+			}
+			//System.out.println("formattedMemberString---" + formattedMemberString);
+			UserName = null;
+			// UserName = memberAttributes[memberAttributes.length - 1];
+			UserName = memberAttributes[0];
+			return formattedMemberString;
+		}
+		
 
 	public static String formatMemberData(String line) {
 		String formattedMemberString = "";
@@ -235,6 +300,7 @@ public class MRScenario {
 		UserName = memberAttributes[0];
 		return formattedMemberString;
 	}
+	
 
 	private static Connection getDBConnection(Map<String, String> props) {
 		try {
@@ -813,13 +879,13 @@ sauceLabsTunnelIdentifier);
 		//webDriver.quit();
 	}
 
-	public Map<String, String> getmemberRedesignVbfWithDesiredAttributes(List<String> desiredAttributes) {
+	/*public Map<String, String> getmemberRedesignVbfWithDesiredAttributes(List<String> desiredAttributes) {
 		formCompositeDesiredAttributes(desiredAttributes);
 		attributeMapToUse = "memberRedesignVbfAttributesMap";
 		returnLoginCredentials();
 		return loginCreds;
 	}
-
+*/
 	public void formCompositeDesiredAttributes(List<String> desiredAttributes) {
 		compositeDesiredAttributes = "";
 		for (int i = 0; i < desiredAttributes.size(); i++) {

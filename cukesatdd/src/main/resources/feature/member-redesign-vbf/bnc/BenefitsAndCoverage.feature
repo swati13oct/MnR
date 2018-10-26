@@ -1,4 +1,4 @@
-@smokeTest
+@smokeTest @MemberVBF
 Feature: 1.01-VBF-MemRedesign-To test plan benefits and Coverage functionality
 
   @smokeTest_BenefitsAndCoverageInd @rallyDashboard @testharness

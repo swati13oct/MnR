@@ -314,8 +314,8 @@ Feature: T1.1To validate the new changes related to claims page on the member re
       | PCP      | Last 24 months | PCP   | COSMOSCLAIMS   |
       
      
-      @claimsprintanddownload @thePredators
-  	Scenario Outline: To validate the claims present for the SHIP member on claims sumamry page for AARP site
+      @claimsprintanddownload @thePredator
+  	Scenario Outline: To validate the <claimssystem> on claims summary page
     Given login with following details logins in the member portal and validate elements
       #  Given I am an Individual or Group member on the redesigned site
       | Plan Type      | <planType>     |
@@ -338,7 +338,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 
     Examples: 
       | planType | claimPeriod    | domain | claimssystem |
-      | MAPD     | Last 24 Months | NA     | COSMOSCLAIMS   |
+      | MAPD     | Last 24 Months | COSMOS     | COSMOSCLAIMS   |
  
     
   
