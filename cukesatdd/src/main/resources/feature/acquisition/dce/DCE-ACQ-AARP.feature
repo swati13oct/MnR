@@ -17,7 +17,7 @@ And I navigate to step3 page and validate for DCE homepage flow
 
  Examples:
 | drug|zipcode| radius|
-| LIPITOR TAB 10MG| 90210 | 15miles |
+| Lipitor TAB 10MG| 90210 | 15miles |
 
 
 @switchNowStep3 @dceVBF
