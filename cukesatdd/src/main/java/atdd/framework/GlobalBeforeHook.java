@@ -1,5 +1,8 @@
 package atdd.framework;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import cucumber.api.java.Before;
@@ -16,7 +19,7 @@ public class GlobalBeforeHook implements BeforeHook {
 
 	@Autowired 
 	MRScenario globalScenario;
-	
+	static List<String> tagsList=new ArrayList<String>();
 
 	public MRScenario getGlobalScenario() {
 		return globalScenario;
@@ -41,8 +44,21 @@ public class GlobalBeforeHook implements BeforeHook {
 
 			}
 		});
-		
 	}
+		
+		@Before
+		public static List<String> beforeGlobal(cucumber.api.Scenario scenario){
+	           tagsList.clear();
+	        for(String tag : scenario.getSourceTagNames()){
+	        	
+	        	tagsList.add(tag);
+	          System.out.print("Tag: " + tag);
+	        }
+	        MRScenario.loadCSV();
+	       
+	       return tagsList;
+	    }
+	
 	
 	
 }

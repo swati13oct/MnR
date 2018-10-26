@@ -1,4 +1,4 @@
-@smokeTest
+@smokeTest @MemberVBF
 Feature: 1.10-VBF-MemRedesign-To test order materials functionality
 
   @smokeTest_OrderPlanMaterial @rallyDashboard @testharness

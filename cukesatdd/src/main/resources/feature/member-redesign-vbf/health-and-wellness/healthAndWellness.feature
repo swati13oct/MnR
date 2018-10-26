@@ -1,4 +1,4 @@
-@smokeTest
+@smokeTest @MemberVBF
 Feature: 1.07-VBF-MemRedesign-To test Health and Wellness functionality
 
   @smokeTest_H&W_Legacy
