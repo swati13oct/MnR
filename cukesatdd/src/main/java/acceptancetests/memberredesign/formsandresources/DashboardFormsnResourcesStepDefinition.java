@@ -45,7 +45,7 @@ public class DashboardFormsnResourcesStepDefinition {
 	}
 
 	@Given("^login with following details logins in the member redesign portal$")
-	private void login_with_member(DataTable memberAttributes) throws InterruptedException {
+	public void login_with_member(DataTable memberAttributes) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -452,10 +452,15 @@ public class DashboardFormsnResourcesStepDefinition {
 		List<List<String>> data = memberType.raw();
 		// This is to get the first data of the set (First Row + First Column)
 		if (data.get(0).get(1).contains("Pre-Effective"))
-			Assert.assertTrue("annual directory section is present",
-					formsAndResourcesPage.getAnnualDirectorySection("Pre-Effective").isDisplayed());
+			if(data.get(0).get(1).contains("MAPD"))
+						Assert.assertTrue("annual directory section isn't present",
+						formsAndResourcesPage.getPreMAAnnualDirectorySection().isDisplayed());
+					
+			else
+						Assert.assertTrue("annual directory section isn't present",
+						formsAndResourcesPage.getAnnualDirectorySection("Pre-Effective").isDisplayed());
 		else
-			Assert.assertTrue("annual directory section is present",
+						Assert.assertTrue("annual directory isn't section is present",
 					formsAndResourcesPage.getAnnualDirectorySection("Effective").isDisplayed());
 
 	}
@@ -542,11 +547,11 @@ public class DashboardFormsnResourcesStepDefinition {
 	 * @toDo : verifies default language displayed in the drop down
 	 */
 	@And("^validate that english is default language in the dropdown$")
-	public void validatelanguage() {
+	public void validatelanguage(DataTable attributeType) {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
-
-		formsAndResourcesPage.validateEngDefault();
+		List<List<String>> data = attributeType.raw();
+		formsAndResourcesPage.validateEngDefault(data.get(0).get(1));
 	}
 
 	/**
@@ -755,13 +760,19 @@ public class DashboardFormsnResourcesStepDefinition {
 	}
 
 	@And("^the Provider Search link is displayed for MA$")
-	public void providerlinkMA() {
+	public void providerlinkMA(DataTable attributes) {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
-		if (formsAndResourcesPage.getProviderSerachLinkMA().isDisplayed()) {
-			System.out.println("provider search for MA is present");
-		} else
-			Assert.fail("provider search for MA is not coming");
+
+		List<List<String>> data = attributes.raw();
+		// This is to get the first data of the set (First Row + First Column)
+		if (data.get(0).get(0).contains("MA") || data.get(0).get(0).contains("PDP"))
+			if (data.get(0).get(1).contains("Pre-Effective"))
+				Assert.assertTrue("Provider search link isn't present",
+						formsAndResourcesPage.getProviderSearchLinkPreEffectivePDPMA().isDisplayed());
+			else
+				Assert.assertTrue("Provider search link isn't present",
+						formsAndResourcesPage.getProviderSerachLinkMA().isDisplayed());
 
 	}
 
@@ -884,4 +895,18 @@ public class DashboardFormsnResourcesStepDefinition {
 		}
 	}
 
+	@Then("^validate pdf's in the welcome guide section$")
+	public void validate_pdf_s_in_the_welcome_guide_section(DataTable givenAttributes) throws Throwable {
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+		formsAndResourcesPage.pdfValidationOfAllTypes(formsAndResourcesPage, givenAttributes, "welcomeGuide");
+
+	}
+
+	@Then("^validate pdf's in annual directory section$")
+	public void validate_pdf_s_in_annual_directory_section(DataTable givenAttributes) throws Throwable {
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+		formsAndResourcesPage.pdfValidationOfAllTypes(formsAndResourcesPage, givenAttributes, "annualDirectory");
+	}
 }
