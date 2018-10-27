@@ -40,6 +40,9 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 	@FindBy(xpath =".//*[@id='ghn_lnk_1']")
 	private WebElement homeTab;
 	
+	@FindBy(xpath =".//*[@id='ym-first_name']")
+	private WebElement firstNameField;
+	
 	public RequestHelpAndInformationPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -58,6 +61,14 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 		requestAgentApptDropdown.click();
 		CommonUtility.waitForPageLoad(driver, ma_requestAgentAppointmentLink, 50);
 		ma_requestAgentAppointmentLink.click();
+		
+		//applying hard timeout here to give it couple of seconds to launch the second tab
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		String mainwindow=driver.getWindowHandle();
 
 		Set<String> allWindowHandles = driver.getWindowHandles();
@@ -78,7 +89,8 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 		} catch (Exception e) {
 			System.out.println("ma_requestAgentAppointmentLink not found");
 		}
-		if(currentUrl().contains("medicare-advantage-plans/request-information/agentebrc.html"))
+		CommonUtility.waitForPageLoad(driver, firstNameField, 30);
+		if(validateNew(firstNameField) &&currentUrl().contains("medicare-advantage-plans/request-information/agentebrc.html"))
 		{
 			return new RequestAgentAppointmentPage(driver);
 		}
