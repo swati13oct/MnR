@@ -10,6 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 public class AddNewDrugModal extends UhcDriver {
 
@@ -78,9 +79,9 @@ public class AddNewDrugModal extends UhcDriver {
 	public AddDrugDetails clickonSearchButton(String DrugName) throws InterruptedException {
 
 		drugsearchinput.sendKeys(DrugName.toLowerCase());
-		Thread.sleep(3000);
+		CommonUtility.waitForPageLoad(driver, searchButton, 20);
 		searchButton.click();  
-		waitforElement(continueButton);
+		CommonUtility.waitForPageLoad(driver, continueButton, 20);
 		continueButton.click();
 			return new AddDrugDetails(driver);
 		
