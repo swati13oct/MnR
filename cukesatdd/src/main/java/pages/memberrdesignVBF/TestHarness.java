@@ -254,7 +254,7 @@ public class TestHarness extends UhcDriver {
 		jsClickNew(benefitsPageLink);
 
 		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoadNew(driver, heading, CommonConstants.TIMEOUT_60);
+		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_60);
 		System.out.println(driver.getTitle());
 
 		if (driver.getTitle().contains("Benefits")) {
@@ -319,10 +319,11 @@ public class TestHarness extends UhcDriver {
 	 * @return
 	 */
 	public EOBPage navigateToEOBPage() {
+		CommonUtility.waitForPageLoad(driver, eobPageLink,30);
 		validateNew(eobPageLink);
 		eobPageLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoadNew(driver, heading, CommonConstants.TIMEOUT_60);
+		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_60);
 		if (!(driver.getTitle().contains("Explanation of Benefits"))) {
 			Assert.fail("EOB page not getting displayed");
 			return null;
