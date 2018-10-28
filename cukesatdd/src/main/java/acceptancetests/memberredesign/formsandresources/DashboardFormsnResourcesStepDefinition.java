@@ -44,7 +44,7 @@ public class DashboardFormsnResourcesStepDefinition {
 		return loginScenario;
 	}
 
-	@Given("^login with following details logins in the member redesign portal$")
+	@Given("^login with following details in the member redesign portal$")
 	public void login_with_member(DataTable memberAttributes) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
@@ -140,7 +140,7 @@ public class DashboardFormsnResourcesStepDefinition {
 	/**
 	 * @toDo : correct pdfs are coming
 	 */
-	@And("^the user verifies that the correct pdfs are coming in the plan material section$")
+	@And("^then user verifies that the correct pdfs are coming in the plan material section$")
 	public void verifypdfscoming(DataTable givenAttributes) throws InterruptedException {
 
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
@@ -318,15 +318,15 @@ public class DashboardFormsnResourcesStepDefinition {
 
 	}
 
-	@And("^for active member Temporary Id Card and Plan Order Material links are displayed$")
-	public void linksdisplayedforactivemembers() throws InterruptedException {
+	@And("^validate for active member Temporary Id Card and Plan Order Material links are displayed$")
+	public void validatelinksdisplayedforactivemembers() throws InterruptedException {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
-		Thread.sleep(2000);
+		//Thread.sleep(2000);
 
 		formsAndResourcesPage.getOrderPlanMaterialLink().isDisplayed();
 
-		Thread.sleep(2000);
+		//Thread.sleep(2000);
 		formsAndResourcesPage.getTemporaryIdcardlink().isDisplayed();
 
 	}
@@ -335,7 +335,7 @@ public class DashboardFormsnResourcesStepDefinition {
 	public void planmateriallink() throws InterruptedException {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
-		Thread.sleep(2000);
+		//Thread.sleep(2000);
 		formsAndResourcesPage.validateOrderPlanMaterial();
 
 	}
@@ -388,7 +388,29 @@ public class DashboardFormsnResourcesStepDefinition {
 	 * @toDo :for MAPD member both types of EOB are present
 	 */
 
-	@And("^both the Drug and Medical EOB links are displayed$")
+	@And("^both the drug and medical EOB links are displayed$")
+	public void both_the_drug_and_medical_EOB_links_are_displayed() throws Throwable {
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+		Thread.sleep(2000);
+		formsAndResourcesPage.scroll();
+		if (formsAndResourcesPage.getEOBMedicaButton().isDisplayed()) {
+			Assert.assertTrue(true);
+			System.out.println("medical eob present");
+		} else {
+			Assert.fail("medical eob is not present");
+		}
+
+		if (formsAndResourcesPage.getEOBDrugButton().isDisplayed()) {
+			Assert.assertTrue(true);
+			System.out.println("drug eob present");
+		} else {
+			Assert.fail("drug eob is not present");
+		}
+
+	}
+	
+	/*@And("^both the Drug and Medical EOB links are displayed$")
 	public void bothEOBSpresent() throws InterruptedException {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
@@ -409,7 +431,7 @@ public class DashboardFormsnResourcesStepDefinition {
 		}
 
 	}
-
+*/
 	/* to verify the my doc section */
 	@Then("^validate that My Document section is displayed$")
 	public void mydocumentsectionisdispayed() throws InterruptedException {
@@ -426,8 +448,23 @@ public class DashboardFormsnResourcesStepDefinition {
 		}
 
 	}
+		
+	@Then("^validate that the AnocSection is displayed$")
+	public void validate_that_the_Anoc_Section_is_displayed() throws Throwable {
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+		formsAndResourcesPage.scroll();
+		Thread.sleep(2000);
+		if (formsAndResourcesPage.getANOCSection().isDisplayed()) {
+			Assert.assertTrue(true);
+			System.out.println("anoc section is present");
 
-	@Then("^validate that the anoc section is displayed$")
+		} else {
+			Assert.fail("anoc section is not present");
+		}
+	}
+
+	/*@Then("^validate that the anoc section is displayed$")
 	public void anocsec() throws InterruptedException {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
@@ -442,7 +479,7 @@ public class DashboardFormsnResourcesStepDefinition {
 		}
 
 	}
-
+*/
 	@Then("^validate that annual directory section is displayed$")
 	public void annualdirectory(DataTable memberType) {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
@@ -516,7 +553,7 @@ public class DashboardFormsnResourcesStepDefinition {
 	 * @throws InterruptedException
 	 * @toDo : verifies the plan material section
 	 */
-	@Then("^validate that the plan materials section is displayed$")
+	/*@Then("^validate that the plan materials section is displayed$")
 	public void validatePlanMaterialSection() throws InterruptedException {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
@@ -529,11 +566,27 @@ public class DashboardFormsnResourcesStepDefinition {
 		}
 
 	}
-
+*/
+	@Then("^validate that the plan material section is displayed$")
+	public void validate_that_the_plan_material_section_is_displayed() throws Throwable {
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+		System.out.println("fnr page");
+		if (formsAndResourcesPage.getplanmaterialsection().isDisplayed()) {
+			System.out.println("plan materials");
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("plan material section is not present");
+		}
+	}
+	
+	
+	
+	
 	/**
 	 * @toDo : clicks order plan materials and view temporary id card links
 	 */
-	@And("^validates the view temporary id card link$")
+	/*@And("^validates the view temporary id card link$")
 	public void clicklinksonplanmaterials() throws InterruptedException {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
@@ -542,7 +595,19 @@ public class DashboardFormsnResourcesStepDefinition {
 		formsAndResourcesPage.getTemporaryIdcardlink().isDisplayed();
 		formsAndResourcesPage.validateIDCard();
 
+	}*/
+	
+	@And("^validate that the view temporary id card link is displayed$")
+	public void validate_that_the_view_temporary_id_card_link_is_displayed() throws Throwable {
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+		Thread.sleep(10000);
+
+		formsAndResourcesPage.getTemporaryIdcardlink().isDisplayed();
+		formsAndResourcesPage.validateIDCard();
+
 	}
+	
 
 	/**
 	 * @toDo : verifies default language displayed in the drop down
@@ -558,6 +623,8 @@ public class DashboardFormsnResourcesStepDefinition {
 	/**
 	 * @toDo : user switches to a different language than the default one
 	 */
+	
+	
 	@And("^the user validates the language dropdown and selects new value in dropdown successfully$")
 	public void validate_langdropdown_select(DataTable givenAttributes) throws InterruptedException {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
@@ -665,8 +732,25 @@ public class DashboardFormsnResourcesStepDefinition {
 	 * @throws InterruptedException
 	 * @toDo : verifies the forms and resources section
 	 */
-	@Then("^validate that the forms and resources section is displayed$")
+	/*@Then("^validate that the forms and resources section is displayed$")
 	public void validateFNRSection() throws InterruptedException {
+
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+
+		formsAndResourcesPage.scroll();
+		Thread.sleep(5000);
+		 formsAndResourcesPage.clickonperceptionpopup(); 
+		System.out.println("fnr section");
+		if (formsAndResourcesPage.getFormsandResourcesSection().isDisplayed()) {
+			System.out.println("true forms and resources sec is present");
+		} else
+			Assert.fail("false fnr not coming");
+
+	}*/
+
+	@Then("^validate that the forms & resources section is displayed$")
+	public void validate_that_the_form_and_resources_section_is_displayed() throws Throwable {
 
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
@@ -679,9 +763,11 @@ public class DashboardFormsnResourcesStepDefinition {
 			System.out.println("true forms and resources sec is present");
 		} else
 			Assert.fail("false fnr not coming");
-
 	}
-
+	
+	
+	
+	
 	@Then("^validate that the renew magazine section is displayed for MAPD$")
 	public void validateRenewSection() throws InterruptedException {
 
