@@ -10,6 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 public class SavingsOppurtunity extends UhcDriver{
 	
@@ -56,10 +57,10 @@ public class SavingsOppurtunity extends UhcDriver{
 	}
 	
 	public void savedrugbutton() throws InterruptedException {
-		Thread.sleep(10000);
-		waitforElement(savedrugbutton);
+		
+		CommonUtility.waitForPageLoad(driver, savedrugbutton, 30);
 		savedrugbutton.click();
-		Thread.sleep(15000);
+		
 		// TODO Auto-generated method stub
 		
 	}

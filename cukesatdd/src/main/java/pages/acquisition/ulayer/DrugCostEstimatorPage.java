@@ -404,8 +404,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 
 	public AddNewDrugModal clickOnAddDrug() throws InterruptedException {
-		Thread.sleep(10000);
-		waitforElement(addDrug);
+		CommonUtility.waitForPageLoad(driver, addDrug, 30);
 		addDrug.click();
 
 		if (validate(drugsearchinput)) {
@@ -1286,6 +1285,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		CommonUtility.waitForPageLoad(driver, updateBtn, 30);
 		updateBtn.click();
 		navigateToStep3();
+		if (!(loadingBlock.isEmpty())) {
+			CommonUtility.waitForElementToDisappear(driver, loadingBlock.get(0), 60);
+		}
 		String genericCost = costText.getText();System.out.println(genericCost);
 		if(brandedCost.equals(genericCost))
 			Assert.fail("Error in calculating costs after switching to generic");
