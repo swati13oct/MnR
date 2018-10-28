@@ -452,15 +452,16 @@ public class DashboardFormsnResourcesStepDefinition {
 		List<List<String>> data = memberType.raw();
 		// This is to get the first data of the set (First Row + First Column)
 		if (data.get(0).get(1).contains("Pre-Effective"))
-			if(data.get(0).get(1).contains("MAPD"))
-						Assert.assertTrue("annual directory section isn't present",
-						formsAndResourcesPage.getPreMAAnnualDirectorySection().isDisplayed());
-					
-			else
-						Assert.assertTrue("annual directory section isn't present",
+			if (data.get(0).get(0).contains("MAPD"))
+				Assert.assertTrue("annual directory section isn't present",
 						formsAndResourcesPage.getAnnualDirectorySection("Pre-Effective").isDisplayed());
+
+			else
+
+				Assert.assertTrue("annual directory section isn't present",
+						formsAndResourcesPage.getPreMAAnnualDirectorySection().isDisplayed());
 		else
-						Assert.assertTrue("annual directory isn't section is present",
+			Assert.assertTrue("annual directory isn't section is present",
 					formsAndResourcesPage.getAnnualDirectorySection("Effective").isDisplayed());
 
 	}
