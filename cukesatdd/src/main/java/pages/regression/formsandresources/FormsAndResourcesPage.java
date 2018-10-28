@@ -147,8 +147,19 @@ public class FormsAndResourcesPage extends UhcDriver {
 	@FindBy(id = "lang-select-2overview_customsegments-welcomeKit-2018_segmentContainer_planbenefitdocuments")
 	private WebElement languagedropdown;
 	
+	//AEP language xpath changed
+	@FindBy(id = "lang-select-2source-content-configurations_plan-material_jcr-content_overview_formsandresourcescon_formsAndResourcesParsys_customsegments_segmentContainer_planbenefitdocuments")
+	private WebElement languagedropdowncopy;
+	
+	
+	
+	
 	@FindBy(id = "lang-select-2overview_customsegments-welcomeKit-2018_segmentContainer_planbenefitdocuments")
 	private List<WebElement> languagedropdownPreEfffective;
+	
+	//AEP language xpath changed
+	@FindBy(id = "lang-select-2source-content-configurations_plan-material_jcr-content_overview_formsandresourcescon_formsAndResourcesParsys_customsegments_segmentContainer_planbenefitdocuments")
+	private List<WebElement> languagedropdownPreEfffectiveCopy;
 
 	/** Anoc Section **/
 	@FindBy(xpath = "(//*[@id=\"anoc_headerfnr\"])[1]/div/div/h2")
@@ -565,13 +576,17 @@ public class FormsAndResourcesPage extends UhcDriver {
 	 * @toDo : to verify english as a default language
 	 */
 	public void validateEngDefault(String memberType) {
-		Select oselect;
-		if(memberType.contains("Pre-Effective"))
-			 oselect = new Select(languagedropdownPreEfffective.get(0));
-		else
+		Select oselect,oselectCopy;
+		if(memberType.contains("Pre-Effective")){
+			oselect = new Select(languagedropdownPreEfffective.get(0));
+			oselectCopy= new Select(languagedropdownPreEfffectiveCopy.get(0));
+		}
+			 	
+		else {
 			 oselect = new Select(languagedropdown);
-		
-		if (oselect.getFirstSelectedOption().getText().equals("ENGLISH")) {
+			 oselectCopy= new Select(languagedropdowncopy);
+		}
+		if (oselect.getFirstSelectedOption().getText().equals("ENGLISH")||oselectCopy.getFirstSelectedOption().getText().equals("ENGLISH")) {
 			System.out.println(oselect.getFirstSelectedOption().getText());
 			System.out.println("true");
 			Assert.assertTrue(true);

@@ -135,7 +135,22 @@ public class FormsAndResourcesStepDefinition {
 
 	}
 
-	@Then("^validate that the anoc section is displayed$")
+	@Then("^validate that the Anoc Section is displayed$")
+	public void validate_that_the_Anoc_Section_is_displayed() throws Throwable {
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+		if (formsAndResourcesPage.getANOCSection().isDisplayed()) {
+			Assert.assertTrue("anoc section is present", true);
+			System.out.println("anoc section is present");
+
+		} else {
+			Assert.fail("anoc section is not present");
+		}
+	}
+	
+	
+	
+	/*@Then("^validate that the anoc section is displayed$")
 	public void anocsec() throws InterruptedException {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
@@ -147,7 +162,7 @@ public class FormsAndResourcesStepDefinition {
 			Assert.fail("anoc section is not present");
 		}
 
-	}
+	}*/
 
 	@Then("^validate that the annual directories section is displayed$")
 	public void annualdirectory() {
