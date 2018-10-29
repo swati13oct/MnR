@@ -88,6 +88,7 @@ public class PlanPremiumPage extends UhcDriver{
 	}	
 
 	public AuthorizationPage navigate_to_Authorization_Page() {
+		agreeBtn.click();
 		validate(NextBtn);
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);
