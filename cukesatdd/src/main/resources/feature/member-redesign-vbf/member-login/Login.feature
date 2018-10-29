@@ -1,4 +1,4 @@
-@smokeTest
+@smokeTest @MemberVBF
 Feature: 1.09-VBF-MemRedesign-To test sign functionality
 
   @smokeTest_DirectLogin @rallyDashboard @testharness

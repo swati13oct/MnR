@@ -1275,7 +1275,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public DrugCostEstimatorPage navigateToDCEAfterDrugAdded(String plantype) {
-		waitforElement(viewPlans);
+		CommonUtility.waitForPageLoad(driver, viewPlans, 30);
 		if(plantype.equals("MA")||plantype.equals("MAPD")){
 			if(validate(viewPlans)){
 			viewPlans.click();

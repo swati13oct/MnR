@@ -22,6 +22,9 @@ public class PDPRequestHelpAndInformationPage extends UhcDriver{
 	
 	@FindBy(xpath = ".//*[@id='collapse2heading_article_mededaccordion2']")
 	private WebElement pdpInquiryKitDropdown;
+	
+	@FindBy(id = "firstName")
+	private WebElement firstNameField;
 
 	public PDPRequestHelpAndInformationPage(WebDriver driver) {
 		super(driver);
@@ -40,6 +43,14 @@ public class PDPRequestHelpAndInformationPage extends UhcDriver{
 		pdpInquiryKitDropdown.click();
 		CommonUtility.waitForPageLoad(driver, pdpEnquiryKitLink, 50);
 		pdpEnquiryKitLink.click();
+		
+		//applying hard timeout here to give it couple of seconds to launch the second tab
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 		String mainwindow=driver.getWindowHandle();
 
 		Set<String> allWindowHandles = driver.getWindowHandles();
@@ -48,13 +59,8 @@ public class PDPRequestHelpAndInformationPage extends UhcDriver{
 				driver.switchTo().window(currentWindowHandle);
 			}
 		}
-		 try {
-				Thread.sleep(4000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		if(currentUrl().contains("prescription-drug-plans/request-information/inquirykit")){
+		CommonUtility.waitForPageLoad(driver, firstNameField, 30);
+		if(validateNew(firstNameField) && currentUrl().contains("prescription-drug-plans/request-information/inquirykit")){
 			return new  PDPEnrollementGuidePage(driver);
 		}
 		return null;

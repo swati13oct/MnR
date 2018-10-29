@@ -1,4 +1,4 @@
-@smokeTest
+@smokeTest @MemberVBF
 Feature: 1.14-VBF-MemRedesign-To test provider search (Rally) functionality
 
   @smokeTest_ProviderSearch @rallyDashboard

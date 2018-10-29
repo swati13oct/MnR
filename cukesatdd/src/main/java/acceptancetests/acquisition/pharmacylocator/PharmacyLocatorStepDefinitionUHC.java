@@ -1,11 +1,9 @@
 package acceptancetests.acquisition.pharmacylocator;
 
 import gherkin.formatter.model.DataTableRow;
-
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;

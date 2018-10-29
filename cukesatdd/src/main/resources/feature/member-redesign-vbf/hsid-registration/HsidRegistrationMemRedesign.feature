@@ -1,4 +1,4 @@
-@smokeTest
+@smokeTest @MemberVBF
 Feature: 1.15-VBF-MemRedesign-To test HSID registration flow
 
 @smokeTest_HSIDregistration @rallyDashboard @testharness

@@ -89,11 +89,10 @@ public class PDPEnquiryKitStepDefintionUHC {
 		pdpEnrollementGuidePage.entersDetails(personalAttributesMap);
 		EnquiryKitConfirmationPage enquiryKitConfirmationPage = pdpEnrollementGuidePage.submitsRequest();
 		if(enquiryKitConfirmationPage!=null){
-			if(enquiryKitConfirmationPage.validateConfPage())
 				Assert.assertTrue(true);
-			else
-				Assert.fail("Error in validating confirmation page");
-		}
+		}else
+			Assert.fail("Not able to submit the form. Confirmation page is null.");
+		
 	}		
 	
 	/**
