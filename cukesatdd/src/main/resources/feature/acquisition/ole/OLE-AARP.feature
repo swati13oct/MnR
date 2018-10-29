@@ -222,10 +222,10 @@ Then the user enters following required information in Personal Information Page
 Then the user validates the Plan details in Personal Information Page OLE Right Rail
 Then the user validates the Member details dynamic display in Personal Information Page
 Then the user navigates to SEP Page
-Then the user validates SEP options and Required Fields for PlanType in SEP Page
-Then the user selects the following options for SEP Page
-      | Select Options | <selectoptions> |
-      | Option Data    | <optiondata>    |
+#Then the user validates SEP options and Required Fields for PlanType in SEP Page
+#Then the user selects the following options for SEP Page
+#      | Select Options | <selectoptions> |
+#      | Option Data    | <optiondata>    |
 Then the user navigates to Coverage and Health Information Page
 Then the user validates the dispalyed sections for the Plan Type in Coverage and Health Information Page
 Then the user answers following questions in Coverage and Health Information Page
