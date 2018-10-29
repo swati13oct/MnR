@@ -172,6 +172,10 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='nav']/button[2]")
 	private WebElement iPerceptionAutoPopUp;
 
+	public WebElement getiPerceptionAutoPopUp() {
+		return iPerceptionAutoPopUp;
+	}
+
 	@FindBy(xpath = "//*[@id='sticky-nav']//div[@ng-switch-when='M&R']/a[5]")
 	private WebElement PremiumPayment;
 

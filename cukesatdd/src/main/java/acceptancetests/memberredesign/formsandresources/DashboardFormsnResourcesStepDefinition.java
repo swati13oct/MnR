@@ -226,7 +226,7 @@ public class DashboardFormsnResourcesStepDefinition {
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
 		formsAndResourcesPage.scroll();
 		formsAndResourcesPage.scroll();
-		if (formsAndResourcesPage.getPharmacyforPDP().isDisplayed()) {
+		if (formsAndResourcesPage.getPharmacyforPDP().isDisplayed()||formsAndResourcesPage.getPharmacyforPDP().isDisplayed()) {
 			Assert.assertTrue(true);
 			System.out.println("pharmacy locator link is present");
 		} else {
@@ -356,7 +356,7 @@ public class DashboardFormsnResourcesStepDefinition {
 		Assert.assertTrue(formsAndResourcesPage.getalpeehiplogo().isDisplayed());
 	}
 
-	@Then("^validate that the EOB section is displayed$")
+	@Then("^validate that the EOB Section is displayed$")
 	public void eobsec() throws InterruptedException {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
@@ -503,7 +503,7 @@ public class DashboardFormsnResourcesStepDefinition {
 
 	}
 
-	@And("^both the Pharmacy locator and provider search links are displayed$")
+	@And("^both the Pharmacy locator & provider search links are displayed$")
 	public void pharmacyprovider() {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);

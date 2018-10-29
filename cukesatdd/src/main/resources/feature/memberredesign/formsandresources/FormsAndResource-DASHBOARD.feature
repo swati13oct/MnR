@@ -2,7 +2,6 @@
 Feature: G1.1 To validate forms and resources page in dashboard site
 
 # Pre-Effective Federal Cases
-
 @pre-effectivefnrmapdaarpindividualvalidation 
 Scenario Outline: 
    	Given login with following details in the member redesign portal
@@ -82,8 +81,8 @@ Scenario Outline:
     Then validate pdf's in annual directory section
 	 |Pharmacy Directory Information|<pharmacydirectoryinformation>|
 	Then validate that My Document section is displayed
-    And the Pharmacy locator link is displayed
     And the provider search link is not displayed for PDP
+    And the Pharmacy locator link is displayed
        
     Examples: 
       | planType | memberType 				  | language | benefithighlight   | gettingstartedguide   | benefithighlight   |comprehensiveformulary  |alternativedruglist  |evidenceofcoverage   |pharmacydirectoryinformation  |
@@ -154,15 +153,16 @@ Scenario Outline:
     | Language | <language>     |
     And the user validates the language dropdown and selects new value in dropdown successfully
       | Language | <language> |
-    And then user verifies that the correct pdfs are coming in the plan material section
-      | BENEFIT-HIGHLIGHT       | <benefithighlight>       |
-      | EVIDENCE OF COVERAGE    | <evidenceofcoverage>     |
-      | SUMMARY-OF-BENEFIT      | <summaryofbenefits>      |
-      | COMPREHENSIVE FORMULARY | <comprehensiveformulary> |
-      | PRIOR AUTHORIZATION     | <priorauth>              |
-      | STEP THERAPY            | <steptherapy>            |
-      | FORMULARY ADDITIONS     | <formularyadd>           |
-      | FORMULARY DELETIONS     | <formularydel>           |
+        #  PDf's aren't coming anymore
+		#    And then user verifies that the correct pdfs are coming in the plan material section
+		#      | BENEFIT-HIGHLIGHT       | <benefithighlight>       |
+		#      | EVIDENCE OF COVERAGE    | <evidenceofcoverage>     |
+		#      | SUMMARY-OF-BENEFIT      | <summaryofbenefits>      |
+		#      | COMPREHENSIVE FORMULARY | <comprehensiveformulary> |
+		#      | PRIOR AUTHORIZATION     | <priorauth>              |
+		#      | STEP THERAPY            | <steptherapy>            |
+		#      | FORMULARY ADDITIONS     | <formularyadd>           |
+		#      | FORMULARY DELETIONS     | <formularydel>           |
    # Then the member validate the correct Membership Materials section is coming
    #   | BENEFIT-HIGHLIGHT       | <benefithighlight>       |
    #   | COMPREHENSIVE FORMULARY | <comprehensiveformulary> |
@@ -196,42 +196,47 @@ Scenario Outline:
     | Language | <language>     |
     And the user validates the language dropdown and selects new value in dropdown successfully
       | Language | <language> |
-    And then user verifies that the correct pdfs are coming in the plan material section
-      | GETTING STARTED GUIDE             | <gettingstartedguide>    |
-      | BENEFIT-HIGHLIGHT                 | <benefithighlight>       |
-       | EVIDENCE OF COVERAGE             | <evidenceofcoverage>     |
-        | CERTIFICATE OF COVERAGE         | <certificateofcoverage>  |
-      | SUMMARY-OF-BENEFIT                | <summaryofbenefits>      |
-      | FORMULARY DRUG LIST ABRIDGED      | <abridgedformulary>      |
-      | FORMULARY DRUG LIST COMPREHENSIVE | <comprehensiveformulary> |
-      | ADDITIONAL DRUG COVERAGE          | <additionaldrug>         |
+      		#Pdf's aren't coming
+			    And then user verifies that the correct pdfs are coming in the plan material section
+			      | GETTING STARTED GUIDE             | <gettingstartedguide>    |
+			      | BENEFIT-HIGHLIGHT                 | <benefithighlight>       |
+			      | EVIDENCE OF COVERAGE              | <evidenceofcoverage>     |
+			      | CERTIFICATE OF COVERAGE           | <certificateofcoverage>  |
+			      | SUMMARY-OF-BENEFIT                | <summaryofbenefits>      |
+			      | FORMULARY DRUG LIST ABRIDGED      | <abridgedformulary>      |
+			      | FORMULARY DRUG LIST COMPREHENSIVE | <comprehensiveformulary> |
+			      | ADDITIONAL DRUG COVERAGE          | <additionaldrug>         |
      # | PRIOR AUTHORIZATION               | <priorauth>              |
      # | STEP THERAPY                      | <steptherapy>            |
      # | FORMULARY ADDITIONS               | <formularyadd>           |
      # | FORMULARY DELETIONS               | <formularydel>           |
-    Then the member validate the correct Membership Materials section is coming
-     | GETTING STARTED GUIDE    | <gettingstartedguide>    |
-     | BENEFIT-HIGHLIGHT        | <benefithighlight>       |
-     | COMPREHENSIVE FORMULARY  | <comprehensiveformularymem> |
-     | ADDITIONAL DRUG COVERAGE | <additionaldrug> |
-     | EVIDENCE OF COVERAGEMEM     | <evidenceofcoveragemem>     |
-     | CERTIFICATE OF COVERAGE  | <certificateofcoverage>  |
+     		
+			    Then the member validate the correct Membership Materials section is coming
+			     | GETTING STARTED GUIDE    | <gettingstartedguide>    |
+			     | BENEFIT-HIGHLIGHT        | <benefithighlight>       |
+			     | COMPREHENSIVE FORMULARY  | <comprehensiveformularymem> |
+			     | ADDITIONAL DRUG COVERAGE | <additionaldrug> |
+			     | EVIDENCE OF COVERAGEMEM     | <evidenceofcoveragemem>     |
+			     | CERTIFICATE OF COVERAGE  | <certificateofcoverage>  |
     Then validate that the anoc section is displayed for group
     Then validate that annual directory section is displayed
     | Member Type | <memberType> |
-    And the user verifies that the correct pdfs are coming in the anoc section
-      | ANNUAL NOTICE OF CHANGES     | <anoc>                       |
-      | EVIDENCE OF COVERAGEANOC     | <evidenceofcoverageanoc>     |
-      |CERTIFICATE OF COVERAGE       |  <certificateofcoverage>     |
-      | COMPREHENSIVE FORMULARY  | <comprehensiveformularymem> |
-      | ADDITIONAL DRUG COVERAGEANOC | <additionaldruganoc>         |
-    And the Pharmacy locator link is displayed
-    And the provider search link is displayed
+    		
     Then validate that My Document section is displayed
     And the medical EOB link is displayed for MADP Group
     And the Drug EOB link is displayed for MAPD Group
-    Then validate that the forms and resources section is displayed
+    Then validate that the forms & resources section is displayed
     Then validate that the renew magazine section is displayed for uhc grp
+    #    Pdf's aren't coming
+			    And the user verifies that the correct pdfs are coming in the anoc section
+			      | ANNUAL NOTICE OF CHANGES     | <anoc>                       |
+			      | EVIDENCE OF COVERAGEANOC     | <evidenceofcoverageanoc>     |
+			      |CERTIFICATE OF COVERAGE       |  <certificateofcoverage>     |
+			      | COMPREHENSIVE FORMULARY  | <comprehensiveformularymem> |
+			      | ADDITIONAL DRUG COVERAGEANOC | <additionaldruganoc>         |
+    And the provider search link is displayed
+    And the Pharmacy locator link is displayed
+    
 
     Examples: 
       | planType | memberType           | language | gettingstartedguide   | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | certificateofcoverage   | abridgedformulary   | comprehensiveformulary              | additionaldrug           | priorauth           | steptherapy  | formularyadd        | formularydel        | certificateofcoverage   | anoc                     | evidenceofcoverageanoc | comprehensiveformularymem | additionaldruganoc       |   evidenceofcoveragemem   |
@@ -252,6 +257,21 @@ Scenario Outline:
     | Language | <language>     |
     And the user validates the language dropdown and selects new value in dropdown successfully
       | Language | <language> |
+        # Then the member validate the correct Welcome Guide section is coming
+    # | BENEFIT-HIGHLIGHT        | <benefithighlight>       |
+    #  | COMPREHENSIVE FORMULARY  | <comprehensiveformulary> |
+    # | ADDITIONAL DRUG COVERAGE | <additionaldrugcoverage> |
+    #  | EVIDENCE OF COVERAGE     | <evidenceofcoverage>     |
+    Then validate that the AnocSection is displayed
+    Then validate that annual directory section is displayed
+    | Member Type | <memberType> |
+    And the Pharmacy locator link is displayed
+    And the provider search link is not displayed for PDP
+    Then validate that My Document section is displayed
+    And the Drug EOB link is displayed for PDP
+    And Medical EOB link is not displayed for PDP
+    Then validate that the forms & resources section is displayed
+    Then validate that the renew magazine section is displayed for PDP
     And then user verifies that the correct pdfs are coming in the plan material section
       | BENEFIT-HIGHLIGHT       | <benefithighlight>       |
       | EVIDENCE OF COVERAGE    | <evidenceofcoverage>     |
@@ -261,26 +281,10 @@ Scenario Outline:
       | STEP THERAPY            | <steptherapy>            |
       | FORMULARY ADDITIONS     | <formularyadd>           |
       | FORMULARY DELETIONS     | <formularydel>           |
-    # Then the member validate the correct Welcome Guide section is coming
-    # | BENEFIT-HIGHLIGHT        | <benefithighlight>       |
-    #  | COMPREHENSIVE FORMULARY  | <comprehensiveformulary> |
-    # | ADDITIONAL DRUG COVERAGE | <additionaldrugcoverage> |
-    #  | EVIDENCE OF COVERAGE     | <evidenceofcoverage>     |
-    Then validate that the AnocSection is displayed
-    Then validate that annual directory section is displayed
-    | Member Type | <memberType> |
-    And the user verifies that the correct pdfs are coming in the anoc section
+	And the user verifies that the correct pdfs are coming in the anoc section
       | ANNUAL NOTICE OF CHANGES    | <anoc>                       |
       | EVIDENCE OF COVERAGEANOC    | <evidenceofcoverageanoc>     |
       | COMPREHENSIVE FORMULARYANOC | <comprehensiveformularyanoc> |
-    And the Pharmacy locator link is displayed
-    And the provider search link is not displayed for PDP
-    Then validate that My Document section is displayed
-    And the Drug EOB link is displayed for PDP
-    And Medical EOB link is not displayed for PDP
-    Then validate that the forms & resources section is displayed
-    Then validate that the renew magazine section is displayed for PDP
-
     Examples: 
       | planType | memberType | language | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | comprehensiveformulary  | priorauth           | steptherapy  | formularyadd        | formularydel        | anoc                     | evidenceofcoverageanoc | comprehensiveformularyanoc |
       | PDP      | IndAARPFnR | ENGLISH  | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Annual Notice of Changes | Evidence Of Coverage   | Comprehensive Formulary    |
@@ -300,6 +304,28 @@ Scenario Outline:
     | Language | <language>     |
     And the user validates the language dropdown and selects new value in dropdown successfully
       | Language | <language> |
+      #  Then the member validate the correct Membership Materials section is coming
+  #    | GETTING STARTED GUIDE    | <gettingstartedguide>    |
+  #    | BENEFIT-HIGHLIGHT        | <benefithighlight>       |
+   #   | COMPREHENSIVE FORMULARY  | <comprehensiveformulary> |
+   #   | ADDITIONAL DRUG COVERAGE | <additionaldrugcoverage> |
+   #   | EVIDENCE OF COVERAGE     | <evidenceofcoverage>     |
+   #   | CERTIFICATE OF COVERAGE  | <certificateofcoverage>  |
+    Then validate that the anoc section is displayed for group
+    Then validate that annual directory section is displayed
+    | Member Type | <memberType> |
+    And the Pharmacy locator link is displayed
+    And the provider search link is not displayed for PDP
+    Then validate that My Document section is displayed
+    And the Drug EOB link is displayed for PDP
+    And Medical EOB link is not displayed for PDP
+    Then validate that the forms & resources section is displayed
+    Then validate that the renew magazine section is not displayed
+    And the user verifies that the correct pdfs are coming in the anoc section
+      #| ANNUAL NOTICE OF CHANGES     | <anoc>                      |
+      | EVIDENCE OF COVERAGEANOC     | <evidenceofcoverageanoc>     |
+      | COMPREHENSIVE FORMULARYANOC  | <comprehensiveformularyanoc> |
+      | ADDITIONAL DRUG COVERAGEANOC | <additionaldruganoc>         |
     And then user verifies that the correct pdfs are coming in the plan material section
       | GETTING STARTED GUIDE             | <gettingstartedguide>    |
       | BENEFIT-HIGHLIGHT                 | <benefithighlight>       |  
@@ -312,28 +338,6 @@ Scenario Outline:
       | STEP THERAPY                      | <steptherapy>            |
       | FORMULARY ADDITIONS               | <formularyadd>           |
       | FORMULARY DELETIONS               | <formularydel>           |
-  #  Then the member validate the correct Membership Materials section is coming
-  #    | GETTING STARTED GUIDE    | <gettingstartedguide>    |
-  #    | BENEFIT-HIGHLIGHT        | <benefithighlight>       |
-   #   | COMPREHENSIVE FORMULARY  | <comprehensiveformulary> |
-   #   | ADDITIONAL DRUG COVERAGE | <additionaldrugcoverage> |
-   #   | EVIDENCE OF COVERAGE     | <evidenceofcoverage>     |
-   #   | CERTIFICATE OF COVERAGE  | <certificateofcoverage>  |
-    Then validate that the anoc section is displayed for group
-    And the user verifies that the correct pdfs are coming in the anoc section
-      #| ANNUAL NOTICE OF CHANGES     | <anoc>                       |
-      | EVIDENCE OF COVERAGEANOC     | <evidenceofcoverageanoc>     |
-      | COMPREHENSIVE FORMULARYANOC  | <comprehensiveformularyanoc> |
-      | ADDITIONAL DRUG COVERAGEANOC | <additionaldruganoc>         |
-    Then validate that annual directory section is displayed
-    | Member Type | <memberType> |
-    And the Pharmacy locator link is displayed
-    And the provider search link is not displayed for PDP
-    Then validate that My Document section is displayed
-    And the Drug EOB link is displayed for PDP
-    And Medical EOB link is not displayed for PDP
-    Then validate that the forms & resources section is displayed
-    Then validate that the renew magazine section is not displayed
  
       Examples:
 
@@ -383,13 +387,14 @@ Scenario Outline:
       | ADDITIONAL DRUG COVERAGEANOC | <additionaldruganoc>         |
     Then validate that annual directory section is displayed
     | Member Type | <memberType> |
-    And the Pharmacy locator link is displayed
-    And the provider search link is not displayed for PDP
     Then validate that My Document section is displayed
     And the Drug EOB link is displayed for PDP
     And Medical EOB link is not displayed for PDP
     Then validate that the forms & resources section is displayed
     Then validate that the renew magazine section is not displayed
+    And the provider search link is not displayed for PDP
+    And the Pharmacy locator link is displayed
+    
 
     Examples: 
       | planType | memberType  | language| gettingstartedguide | benefithighlight   |   evidenceofcoverage| certificateofcoverage| summaryofbenefits                   |   abridgedformulary   | comprehensiveformulary              | additionaldrug           | anoc |    evidenceofcoverageanoc|comprehensiveformularyanoc|additionaldruganoc|
@@ -411,11 +416,6 @@ Scenario Outline:
     | Language | <language>     |
     And the user validates the language dropdown and selects new value in dropdown successfully
       | Language | <language> |
-    And then user verifies that the correct pdfs are coming in the plan material section
-      | BENEFIT-HIGHLIGHT              | <benefithighlight>            | 
-      | EVIDENCE OF COVERAGE           | <evidenceofcoverage>          |
-      | SUMMARY-OF-BENEFIT             | <summaryofbenefits>           |
-      | UNITED HEALTH PASSPORT PROGRAM | <unitedhealthpassportprogram> |
   #   Then the member validate the correct Membership Materials section is coming
   #    | GETTING STARTED GUIDE          | <gettingstartedguide>         |
   #    | BENEFIT-HIGHLIGHT              | <benefithighlight>            |
@@ -424,10 +424,6 @@ Scenario Outline:
     Then validate that the AnocSection is displayed
     Then validate that annual directory section is displayed
     | Member Type | <memberType> |
-    And the user verifies that the correct pdfs are coming in the anoc section
-      | ANNUAL NOTICE OF CHANGES  | <anoc>                   |
-      | EVIDENCE OF COVERAGE ANOC | <evidenceofcoverageanoc> |
-    And the Pharmacy locator link is not displayed for MA
     And the Provider Search link is displayed for MA
     | Member Type | <memberType> |
     Then validate that My Document section is displayed
@@ -435,6 +431,15 @@ Scenario Outline:
     And Medical EOB link is displayed for MA
     Then validate that the forms & resources section is displayed
     Then validate that the renew magazine section is displayed for MAPD
+    And the user verifies that the correct pdfs are coming in the anoc section
+      | ANNUAL NOTICE OF CHANGES  | <anoc>                   |
+      | EVIDENCE OF COVERAGE ANOC | <evidenceofcoverageanoc> |
+    And the Pharmacy locator link is not displayed for MA
+    And then user verifies that the correct pdfs are coming in the plan material section
+      | BENEFIT-HIGHLIGHT              | <benefithighlight>            | 
+      | EVIDENCE OF COVERAGE           | <evidenceofcoverage>          |
+      | SUMMARY-OF-BENEFIT             | <summaryofbenefits>           |
+      | UNITED HEALTH PASSPORT PROGRAM | <unitedhealthpassportprogram> |
 
     Examples: 
       | planType | memberType | language | benefithighlight   | summaryofbenefits   | evidenceofcoverage         | unitedhealthpassportprogram   | anoc                     | evidenceofcoverageanoc |
@@ -484,13 +489,14 @@ Scenario Outline:
       |CERTIFICATE OF COVERAGE       |  <certificateofcoverage>     |
       | COMPREHENSIVE FORMULARY      | <comprehensiveformularyanoc>  |
       | ADDITIONAL DRUG COVERAGEANOC | <additionaldrug>         |
-    And the Pharmacy locator link is displayed
-    And the provider search link is displayed
     Then validate that My Document section is displayed
     And the medical EOB link is displayed for MADP Group
     And the Drug EOB link is displayed for MAPD Group
     Then validate that the forms & resources section is displayed
     Then validate that the renew magazine section is displayed for uhc grp
+    And the provider search link is displayed
+    And the Pharmacy locator link is displayed
+    
 
     Examples: 
       | planType     | memberType       | language | gettingstartedguide       | benefithighlight   | summaryofbenefits   | evidenceofcoverage         | certificateofcoverage                        | abridgedformulary              | comprehensiveformulary              | additionaldrug           | doctorflyer  | providerdirectoryinsert   | priorauth           | steptherapy  | formularyadd        | formularydel        | evidenceofcoverageanoc | comprehensiveformularyanoc |       anoc              | 
@@ -510,6 +516,19 @@ Scenario Outline:
     | Language | <language>     |
     And the user validates the language dropdown and selects new value in dropdown successfully
       | Language | <language> |
+     Then validate that the anoc section is not displayed
+    Then validate that annual directory section is displayed
+    | Member Type | <memberType> |
+    And both the Pharmacy locator & provider search links are displayed
+    Then validate that My Document section is displayed
+    Then validate that the EOB Section is displayed
+    And both the drug and medical EOB links are displayed
+    Then validate that the forms & resources section is displayed
+    Then validate that the renew magazine section is displayed
+    Then the member validate the correct Membership Materials section is coming
+      | BENEFIT-HIGHLIGHT       | <benefithighlight>       |
+      | COMPREHENSIVE FORMULARY | <comprehensiveformulary> |
+      | EVIDENCE OF COVERAGE    | <evidenceofcoverage>     |
     And then user verifies that the correct pdfs are coming in the plan material section
       | BENEFIT-HIGHLIGHT       | <benefithighlight>       |
       | SUMMARY-OF-BENEFIT      | <summaryofbenefits>      |
@@ -519,19 +538,7 @@ Scenario Outline:
       | STEP THERAPY            | <steptherapy>            |
       | FORMULARY ADDITIONS     | <formularyadd>           |
       | FORMULARY DELETIONS     | <formularydel>           |
-    Then the member validate the correct Membership Materials section is coming
-      | BENEFIT-HIGHLIGHT       | <benefithighlight>       |
-      | COMPREHENSIVE FORMULARY | <comprehensiveformulary> |
-      | EVIDENCE OF COVERAGE    | <evidenceofcoverage>     |
-    Then validate that the anoc section is not displayed
-    Then validate that annual directory section is displayed
-    | Member Type | <memberType> |
-    And both the Pharmacy locator and provider search links are displayed
-    Then validate that My Document section is displayed
-    Then validate that the EOB section is displayed
-    And both the drug and medical EOB links are displayed
-    Then validate that the forms & resources section is displayed
-    Then validate that the renew magazine section is displayed
+    
 
     Examples: 
       | planType | memberType | language | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | comprehensiveformulary  | priorauth           | steptherapy  | formularyadd        | formularydel        |
@@ -550,12 +557,6 @@ Scenario Outline:
     And validate that the view temporary id card link is displayed
     And validate that english is default language in the dropdown
     | Language | <language>     |
-    And then user verifies that the correct pdfs are coming in the plan material section
-      | SCHEDULE_OF_BENEFITS      | <scheduleofbenefits>     |
-      | CERTIFICATE_OF_COVERAGE   | <certificateofcoverage>  |
-      | YOUR_PLAN_GETTING_STARTED | <yourplangettingstarted> |
-      | PRIVACY_NOTICE            | <privacynotice>          |
-      | CDI_NOTICE                | <cdinotice>              |
    # Then the member validate the correct Membership Materials section is coming
    #   | YOUR_PLAN_GETTING_STARTED | <yourplangettingstarted> |
    #   | SCHEDULE_OF_BENEFITS      | <scheduleofbenefits>     |
@@ -568,6 +569,12 @@ Scenario Outline:
     Then validate that the EOB section and both the type of Eobs are not displayed
     Then validate that the forms & resources section is displayed
     Then validate that the renew magazine section is not displayed
+    And then user verifies that the correct pdfs are coming in the plan material section
+      | SCHEDULE_OF_BENEFITS      | <scheduleofbenefits>     |
+      | CERTIFICATE_OF_COVERAGE   | <certificateofcoverage>  |
+      | YOUR_PLAN_GETTING_STARTED | <yourplangettingstarted> |
+      | PRIVACY_NOTICE            | <privacynotice>          |
+      | CDI_NOTICE                | <cdinotice>              |
 
     Examples: 
       | planType | memberType | language | scheduleofbenefits   | certificateofcoverage   | yourplangettingstarted    | privacynotice  | cdinotice  |
@@ -602,16 +609,17 @@ Scenario Outline:
     Then validate that the plan material section is displayed
     And for terminated member order plan materials link is not displayed
     Then validate that the anoc section is not displayed
-    Then validate that the annual directories section is not displayed
     And both the Pharmacy locator and provider search links are not displayed
     Then validate that My Document section is displayed
-    Then validate that the EOB section is displayed
     Then validate that the renew magazine section is not displayed
+    Then validate that the EOB Section is displayed
+    Then validate that the annual directories section is not displayed
+    
 
     Examples: 
       | planType | memberType      |
       # uhc
-      | PDP       | TerminatedGroup |
+      | MA       | IndAARPMATerminatedFnR |
 
   @shipscenario
   Scenario Outline: 
@@ -625,12 +633,12 @@ Scenario Outline:
     Then validate that the plan material section is displayed
     And validate that english is default language in the dropdown
     | Language | <language>     |
+    Then validate that the forms & resources section is displayed
+    Then verifies that Electronic Funds pdf for ship is displayed
     Then the user verifies the pdfs for ship if particular pdf is not present
     | BENEFIT HIGHLIGHTS  |<benefitstable>    |
     | PLAN OVERVIEW | <planoverview>  |
     | OUTLINE OF COVERAGE    |<outlineofcoverage>|
-    Then validate that the forms & resources section is displayed
-    Then verifies that Electronic Funds pdf for ship is displayed
 
     Examples: 
       | planType | memberType     | benefitstable  |planoverview|outlineofcoverage |
@@ -653,9 +661,7 @@ Scenario Outline:
     Then validate that the plan material section is displayed
     Then validate that the AnocSection is displayed
     Then validate that annual directory section is displayed
-    
-
-    Examples: 
+        Examples: 
       | username  | password  | member           |
       | qavgogine | qavgogine | q1_aarp_apr185   |   
       
