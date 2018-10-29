@@ -22,7 +22,7 @@ Feature: P1.6To test Locate a Pharmacy tool in Redesign site
       | PDP      | IndAARPPharmacyFnR |       25 | E-Prescribing               |
       | MAPD     | GroupPharmacyFnR   |       25 | Long-term care              |
       | MAPD     | MedicaPharmacyFnR  |       25 | Home Infusion and Specialty |
-      | MAPD     | PCPFnR             |       25 | Retail Pharmacy (90-day)    |
+      | MAPD     | PCPPharmacyFnR     |       25 | Retail Pharmacy (90-day)    |
       | PDP      | TexasRxPharmacyFnR |       25 | Long-term care              |
       | MAPD     | IndUHCPharmacyFnR  |       25 | E-Prescribing               |
 
@@ -91,4 +91,3 @@ Feature: P1.6To test Locate a Pharmacy tool in Redesign site
       | MA       | IndAARPPharmacyFnR |
       | SHIP     | IndPharmacyFnR     |
       | MA       | IndUHCPharmacyFnR  |
-
