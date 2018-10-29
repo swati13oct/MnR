@@ -14,6 +14,12 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(id = "backtoplansummarypage")
 	private WebElement backToAllPlansLink;
 	
+	@FindBy(xpath=".//*[@id='printComparison']")
+	private WebElement validateprintbutton;
+	
+	@FindBy(xpath=".//*[@id='emailComparison']")
+	private WebElement validateemailbutton;
+	
 	public ComparePlansPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -72,6 +78,31 @@ public class ComparePlansPage extends UhcDriver {
 			return new WelcomePage(driver);
 		}
 		return null;
+	}
+
+
+	public void validateprintandemail() {
+		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}				
+		validate(validateprintbutton);
+		validate(validateemailbutton);
+		System.out.println("successfully validated the Print and email in plan compare page ");
+		
+	}
+
+
+	public void validatingprintandemail() {
+		// TODO Auto-generated method stub
+		validateemailbutton.click();
+		String MainWindow = driver.getWindowHandle();
+		System.out.println("New window = "+driver.getTitle());
+		driver.switchTo().window(MainWindow);
+		System.out.println("Main window = "+driver.getTitle());
 	}
 
 
