@@ -1534,45 +1534,6 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	}
 
-	
-	public void validateHeaders() {
-
-		validate(BenefitsSummaryHeader);
-		validate(Copayscoinsuranceheader);
-		validate(HospitalVisits);
-		validate(OfficeVisits);
-		validate(OutpatientSurgeryCenter);
-		validate(OutpatientSurgeryCenterValue);
-		validate(OfficVisitsValue);
-
-		Assert.assertEquals(OfficeVisits.getText(), "OFFICE VISITS ");
-		Assert.assertEquals(OutpatientSurgeryCenter.getText(), "OUTPATIENT SURGERY CENTER VISITS");
-		Assert.assertEquals(HospitalVisits.getText(), "HOSPITAL VISITS ");
-
-		if (StringUtils.isEmpty(OutpatientSurgeryCenterValue.getText())) {
-
-			Assert.fail();
-		}
-		if (StringUtils.isEmpty(OfficVisitsValue.getText())) {
-
-			Assert.fail();
-		}
-
-	}
-	public void validatevillagetabletext(String text1)
-	{
-		WebElement villagetabletext = driver.findElement(By.xpath(".//*[@id='preferredRetailBenefit']/div/div[1]/div/div/div/table/tbody/tr[2]/td[4]/div[3]/div[2]"));
-		if(villagetabletext.getText().equalsIgnoreCase(text1))
-		{
-			 System.out.println(villagetabletext.getText());
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail();
-		}
-		
-
-	}
-
 
 	public boolean validateWithValue(String value, WebElement element) {
 		try {
