@@ -232,7 +232,7 @@ public class DCEAcqStepDefinitionUHC {
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
 
-		String drugName = memberAttributesMap.get("Drug");
+		String drugName = memberAttributesMap.get("Drug").toUpperCase();
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		if(dce.isDrugPresent(drugName))
 			Assert.assertTrue(true);

@@ -171,8 +171,10 @@ preeffectivegroupmapd01/Password@1,GroupMAPD,preeffectiveGroupMAPD,NON LIS
 ssuppreeffective00001/Password@1,GroupSSUP,preeffectiveGroupSSUP,NON LIS
 preeffectiveGroupPDP_001/Password@1,GroupPDP,preeffectiveGroupPDP,NON LIS
 q1_grp_apr031/Password@1,MAPDALPeehip,GroupAlPeehipFnR,
-q2_jun_aarp0065/Password@1,MAPD,IndAARPPre-EffectiveFnR
+q2_june_combo0006/Password@1,SHIP,IndPharmacyShipFnR
+q2_jun_aarp0043/Password@1,MA,IndAARPMATerminatedFnR
+SierraIndTransUHC_001/Password@1,MAPD,IndAARPPre-EffectiveFnR
 q2_jun_grp0116/Password@1,MAPD,GRPAARPPre-EffectiveFnR
 q2_jun_uhc0040/Password@1,MAPD,IndUHCPre-EffectiveFnR
-q2_jun_aarp0043/Password@1,MA,IndAARPMAPre-EffectiveFnR
+q2_preEffective_MAuser_001/Password@2,MA,IndAARPMAPre-EffectiveFnR
 q2_jun_aarp0089/Password@1,PDP,IndAARPPre-EffectivePDPFnR

@@ -93,6 +93,7 @@ public class EOBPage extends UhcDriver {
 	 * @param eobTypeData
 	 */
 	public void selectDateRange(String dateRange, String planType, String eobTypeData) {
+		CommonUtility.waitForPageLoad(driver, eobMonthDateRange, 20);
 		validateNew(eobMonthDateRange);
 		Select select = new Select(eobMonthDateRange);
 		System.out.println(dateRange);
@@ -103,7 +104,11 @@ public class EOBPage extends UhcDriver {
 			selectType.selectByValue(eobTypeData);
 			System.out.println(eobTypeData);
 		}
-		validateDateRangeContentDisplayed(dateRange);
+		try{
+			validateDateRangeContentDisplayed(dateRange);
+		}catch(Exception e){
+			Assert.fail("Error in validating date range content");
+		}
 	}
 	
 	/***
@@ -170,6 +175,7 @@ public class EOBPage extends UhcDriver {
 			CommonUtility.waitForElementToDisappear(driver, loadingImages.get(0), 120);
 		}
 		String modifiedDateRange = dateRangeValue.replace('m', 'M');
+		CommonUtility.waitForPageLoad(driver, eobDetailsHeader, 30);
 		if (eobDetailsHeader.getText().contains(modifiedDateRange)) {
 			System.out.println(dateRangeValue + " displayed correctly");
 		} else {

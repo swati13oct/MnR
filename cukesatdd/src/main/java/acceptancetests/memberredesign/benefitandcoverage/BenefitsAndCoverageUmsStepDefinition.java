@@ -179,7 +179,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		} else {
 			userName = loginCreds.get("user");
 			pwd = loginCreds.get("pwd");
-			System.out.println("User is..." + userName);
+			System.out.println("User is.." + userName);
 			System.out.println("Password is..." + pwd);
 			getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
@@ -203,24 +203,61 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	 * @toDo : The user navigates to Benefits and coverage page from Rally Dashboard
 	 */
 
-	@Then("^the user navigates to Benefits coverage page$")
-	public void user_views_BenefitsAndCoveragejenkins() {
-	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+//	@Then("^The user navigates to Benefits and Coverage page$")
+//	public void user_views_BenefitsAndCoveragejenkins(DataTable memberAttributes) {
+//		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+//		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+//		for (int i = 0; i < memberAttributesRow.size(); i++) {
+//
+//			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+//					memberAttributesRow.get(i).getCells().get(1));
+//		}
+//
+//		String plantype = memberAttributesMap.get("Plan Type");
+//		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+//		List<String> desiredAttributes = new ArrayList<String>();
+//		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator.hasNext();) {
+//			{
+//				String key = iterator.next();
+//				desiredAttributes.add(memberAttributesMap.get(key));
+//			}
+//
+//		}
+//		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+//
+//		BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag(plantype);
+//
+//		if (benefitsCoveragePage != null) {
+//			getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
+//		}
+//		else
+//
+//		{
+//			System.out.println("Benefits and Coverage page object is Null ");
+//		}
+//
+//	}
+	
+	@Then("^user navigates to Benefits coverage page$")
+		public void user_views_BenefitsAndCoveragejenkins() {
 
-		BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateToBandCPag();
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 
-		if (benefitsCoveragePage != null) {
-			getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
+			pages.regression.benefitandcoverage.BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateToBandCPage();
+
+			if (benefitsCoveragePage != null) {
+				getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
+
+			}
+
+			else
+
+			{
+				System.out.println("Benefits and Coverage page object is Null ");
+			}
 
 		}
-
-		else
-
-		{
-			System.out.println("Benefits and Coverage page object is Null ");
-		}
-
-	}
+	
 
 
 	/** 
@@ -344,6 +381,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validate_langdropdown_first_selection();
+		
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -506,7 +544,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		benefitsCoveragePage.validatedrugcoverageheaderandtext();
 	}
 	
-	@And("^the user validates group Drug coverage header and text under the section ")
+	@And("^the user validates group Drug coverage header and text under the section")
 	public void user_validates__groupdrugcoverage_section() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
@@ -607,8 +645,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	}
 
 	/** 
-	 * @toDo : Validates the Locate a Pharmacy button in locate a phaThe user navigates to Benefits and Coverage page
-	 * rmacy section
+	 * @toDo : Validates the Locate a Pharmacy button 
 	 */
 	@And("^the user validates Locate a Pharmacy button should be visible")
 	public void user_validate_locatepharmacybutton(DataTable memberAttributes) {
@@ -634,7 +671,12 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validate_locateapharmacysection(plantype);
 	}
-
+	@And("^user validates Locate a Pharmacy button should be visible")
+	public void user_validate_locatepharmacybutton() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validate_locateapharmacysection1();
+	}
 	/** 
 	 * @toDo : Validates the Learnmore tiers links for a Lis member
 	 */
@@ -701,7 +743,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	 */
 	@And("^the user validates the user click on the link it expands and when user clicks it again it should collapse")
 	public void user_validate_linksworking() throws InterruptedException {
-		System.out.println("***the user validates the user click on the link it expands and when user clicks it again it should collapse***");
+	System.out.println("***the user validates the user click on the link it expands and when user clicks it again it should collapse***");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		// JSONObject benefitsandcoverageExectedJson = (JSONObject)
@@ -897,11 +939,29 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	 * @toDo : Validates the  headers section for individual members
 	 */
 	@And("the user validates headers on Bnc page for indi members")
-	public void user_validate_Headers() {
+	public void user_validate_Headers(DataTable memberAttributes) {
 		System.out.println("***the user validates headers on Bnc page for indi members***");
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String plantype = memberAttributesMap.get("Plan Type");
+		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+		List<String> desiredAttributes = new ArrayList<String>();
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator.hasNext();) {
+			{
+				String key = iterator.next();
+				desiredAttributes.add(memberAttributesMap.get(key));
+			}
+
+		}
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		benefitsCoveragePage.validateHeaders();
+		benefitsCoveragePage.validateHeaders(plantype);
 	}
 
 	/** 
@@ -1063,6 +1123,69 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	}
 	
 	/** 
+	 * @toDo : Validates the group drug table
+	 */
+	@Then("^the user able to see table and values in it")
+	public void validategroupdrugtable(DataTable memberAttributes) {
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String plantype = memberAttributesMap.get("Plan Type");
+		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+		List<String> desiredAttributes = new ArrayList<String>();
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator.hasNext();) 
+		{
+			{
+				String key = iterator.next();
+				desiredAttributes.add(memberAttributesMap.get(key));
+			}
+
+		}
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.grouptabledynamicdata(plantype);
+	}
+	
+	/** 
+	 * @toDo : Validates the fed drug table
+	 */
+	@Then("^the user able to see drug table for fed and values in it")
+	public void validategroupdrugtable() {
+		System.out.println("***the user able to see drug table for fed and values in it***");
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.fedtabledata();
+	}
+	/** 
+	 * @toDo : Validates the group drug table
+	 */
+	@Then("^the user able to see drug table for pdp and values in it")
+	public void validatepdpdrugtable() {
+		System.out.println("***the user able to see drug table for pdp and values in it***");
+		
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.fedpdptabledata();
+	}
+	
+	
+	
+	
+	@Then("^the user validate vas tiles on vas page")
+	public void validatevastiles()
+	{
+	ValueAddedServicepage valueaddedservices = (ValueAddedServicepage) getLoginScenario()
+	.getBean(PageConstantsMnR.VALUE_ADDED_SERVICES);
+	valueaddedservices.vastiles();
+	
+	}
+	
+	/** 
 	 * @toDo : Validates the static links in pdf section pdp non lis
 	 */
 	@Then("^the user validates links for pdp in pdf section")
@@ -1154,28 +1277,6 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		benefitsnCoveragepage.validateneedhelpheaderShip();
 
 	}
-	/** 
-	 * @toDo : Validates the fed drug table
-	 */
-	@Then("^the user able to see drug table for fed and values in it")
-	public void validategroupdrugtable() {
-		System.out.println("***the user able to see drug table for fed and values in it***");
-		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		benefitsCoveragePage.fedtabledata();
-	}
-	
-	/** 
-	 * @toDo : Validates the group drug table
-	 */
-	@Then("^the user able to see drug table for pdp and values in it")
-	public void validatepdpdrugtable() {
-		System.out.println("***the user able to see drug table for pdp and values in it***");
-		
-		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		benefitsCoveragePage.fedpdptabledata();
-	}
 
 	/** 
 	 * @toDo : Validates the see more ways to contact us section for ship members in Need help section
@@ -1215,6 +1316,38 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("^the user verifies that the correct pdfs are there in the plan material section$")
 	   public void verifypdfscoming(DataTable givenAttributes) throws InterruptedException   {
 		System.out.println("***the user verifies that the correct pdfs are there in the plan material section***");
+	         
+		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+	      List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+	      
+	      Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+	      for (int i = 0; i < memberAttributesRow.size(); i++) {
+	                      memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+	                                                      .get(0), memberAttributesRow.get(i).getCells().get(1));
+	                      
+	      }
+	                      Collection<String> values = memberAttributesMap.values();
+	                      String[] targetArray = values.toArray(new String[values.size()]);
+	                      System.out.println(values.size());
+	                      
+	                      boolean arraycheck = benefitsnCoveragepage.verifypdfname(targetArray);
+	                      System.out.println(arraycheck);
+	                      if (arraycheck == true)
+	                      {
+	                      Assert.assertTrue("all pdfs are coming correctly",true);
+	                      System.out.println("all pdfs are coming correctly");
+	                      }
+	                      else 
+	                      {
+	                      Assert.fail("pdfs not coming correctly");
+	                      System.out.println("pdfs not coming correctly");
+	                      }
+	      }
+	
+	@And("^the user verifies that the correct pdfs are coming in the plan material section for ship$")
+	   public void verifypdfscomingship(DataTable givenAttributes) throws InterruptedException   {
+	         
 		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 	      List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -1242,47 +1375,16 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	                      System.out.println("pdfs not coming correctly");
 	                      }
 	      }
-	
-	@And("^the user verifies that the correct pdfs are coming in the plan material section for ship$")
-	   public void verifypdfscomingship(DataTable givenAttributes) throws InterruptedException   {
-	         
-		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-	      List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-	      
-	      Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-	      for (int i = 0; i < memberAttributesRow.size(); i++) {
-	                      memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-	                                                      .get(0), memberAttributesRow.get(i).getCells().get(1));
-	                      
-	      }
-	                      Collection<String> values = memberAttributesMap.values();
-	                      String[] targetArray = values.toArray(new String[values.size()]);
-	                      System.out.println(values.size());
-	                      
-	                      boolean arraycheck = benefitsnCoveragepage.verifypdfname(targetArray);
-	                      System.out.println(arraycheck);
-	                      if (arraycheck == true)
-	                      {
-	                      Assert.assertTrue("all pdfs are coming correctly",true);
-	                      System.out.println("all pdfs are coming correctly");
-	                      }
-	                      else 
-	                      {
-	                    	  Assert.fail("pdfs not coming correctly");
-	                      System.out.println("pdfs not coming correctly");
-	                      }
-	      }
      
 	/**
 	 * To validate text in table for village members
 	 * @author njain112
 	 */
-	@And("^the user validates text in table \"[^\"]*\"$")
+	@And("^the user validates text in table$")
 	public void validatevillagetabletext(String text) throws InterruptedException   {
 		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		benefitsnCoveragepage.validatevillagetabletext(text);
+		benefitsnCoveragepage.validatevillagetabletext();
 	
 	}
 	/**

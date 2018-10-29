@@ -12,6 +12,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
@@ -144,7 +145,21 @@ public class FormsAndResourcesPage extends UhcDriver {
 	 */
 
 	@FindBy(id = "lang-select-2overview_customsegments-welcomeKit-2018_segmentContainer_planbenefitdocuments")
-	private List<WebElement> languagedropdown;
+	private WebElement languagedropdown;
+	
+	//AEP language xpath changed
+	@FindBy(id = "lang-select-2source-content-configurations_plan-material_jcr-content_overview_formsandresourcescon_formsAndResourcesParsys_customsegments_segmentContainer_planbenefitdocuments")
+	private WebElement languagedropdowncopy;
+	
+	
+	
+	
+	@FindBy(id = "lang-select-2overview_customsegments-welcomeKit-2018_segmentContainer_planbenefitdocuments")
+	private List<WebElement> languagedropdownPreEfffective;
+	
+	//AEP language xpath changed
+	@FindBy(id = "lang-select-2source-content-configurations_plan-material_jcr-content_overview_formsandresourcescon_formsAndResourcesParsys_customsegments_segmentContainer_planbenefitdocuments")
+	private List<WebElement> languagedropdownPreEfffectiveCopy;
 
 	/** Anoc Section **/
 	@FindBy(xpath = "(//*[@id=\"anoc_headerfnr\"])[1]/div/div/h2")
@@ -165,6 +180,15 @@ public class FormsAndResourcesPage extends UhcDriver {
 	/** Annual Directories Section **/
 	@FindBy(xpath = "(//*[@id='FnR_annualDirectory']//h2[contains(text(),'Annual Directory')])[3]")
 	private WebElement preAnnualDirectorySection;
+	
+	/** Annual Directories Section for pre-effective MAPD**/
+	@FindBy(xpath = "(//*[@id='FnR_annualDirectory'])[3]")
+	private WebElement preMAAnnualDirectorySection;
+	
+
+	public WebElement getPreMAAnnualDirectorySection() {
+		return preMAAnnualDirectorySection;
+	}
 
 	/* Provider Search Link for MAPD */
 	@FindBy(xpath = "//*[@class='otherPages calloutBoth_AD']//*[text()='Provider Search']")
@@ -185,6 +209,16 @@ public class FormsAndResourcesPage extends UhcDriver {
 	/* Provider Search link for PDP and MA */
 	@FindBy(xpath = "//*[@class='otherPages providerSearchCallout_AD']//*[text()='Provider Search']")
 	private WebElement ProviderSearchLinkPDP;
+	
+	/* Provider Search link for PDP and MA */
+	@FindBy(xpath = "//*[@class='otherPages provide_rSearch_Callout_PE']//*[text()='Provider Search']")
+	private WebElement ProviderSearchLinkPreEffectivePDPMA;
+	
+	
+
+	public WebElement getProviderSearchLinkPreEffectivePDPMA() {
+		return ProviderSearchLinkPreEffectivePDPMA;
+	}
 
 	/* Pharmacy Locator Link for PDP */
 	@FindBy(xpath = "//*[@class='otherPages PharmacyLocatorCallout_AD']//*[text()='Pharmacy Locator']")
@@ -258,6 +292,22 @@ public class FormsAndResourcesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='overview_customsegments-welcomeKit-2018_segmentContainer_planbenefitdocuments']//li")
 	private List<WebElement> PreEffectiveMemMaterials;
 
+	@FindBy(xpath = "//*[@class='overview_customsegments-AnnualDirectories-PreEffective_segmentContainer_planbenefitdocuments_2019']/div/ul/li")
+	private List<WebElement> annualDirectoryPdfList;
+
+	@FindBy(xpath = "//*[@id='home_2']")
+	private WebElement home;
+	
+	
+	
+	public WebElement getHome() {
+		return home;
+	}
+
+	public List<WebElement> getAnnualDirectoryPdfList() {
+		return annualDirectoryPdfList;
+	}
+
 	public List<WebElement> getPreEffectiveMemMaterials() {
 		return PreEffectiveMemMaterials;
 	}
@@ -276,6 +326,8 @@ public class FormsAndResourcesPage extends UhcDriver {
 	 * @FindBy(xpath="") private WebElement annualdirectoryxpath;
 	 */
 	String pDR = "Plan Documents & Resources";
+	WebDriverWait wait=null;
+	String iPerceptionframeName="iPerceptionBody";
 
 	public FormsAndResourcesPage(WebDriver driver) throws InterruptedException {
 		super(driver);
@@ -283,19 +335,9 @@ public class FormsAndResourcesPage extends UhcDriver {
 		CommonUtility.checkPageIsReady(driver);
 
 		CommonUtility.checkPageIsReady(driver);
-		Thread.sleep(5000);
-		try {
-			waitforElementNew(iPerceptionBody);
-			driver.switchTo().frame("IPerceptionsEmbed");
-			Thread.sleep(5000);
-			iPerceptionCloseButton.click();
-			System.out.println("iPerception Pop Up is Present");
-			driver.switchTo().defaultContent();
-			Thread.sleep(5000);
-		} catch (Exception e) {
-			System.out.println("issue with perception prpup Present");
-		}
-
+		//Thread.sleep(5000);
+		iPerceptionHandle("IPerceptionsEmbed");
+		
 		/*
 		 * try{ FeedbackModal.click(); System.out.println("FeedBack Modal Present"); if
 		 * (validate(FeedbackModal)){
@@ -304,6 +346,23 @@ public class FormsAndResourcesPage extends UhcDriver {
 		 * System.out.println("FeedBack Modal NOT Present"); }
 		 */
 		openAndValidate();
+	}
+
+	public void iPerceptionHandle(String frameName) {
+		wait = new WebDriverWait(driver, 15);
+		
+		try {
+			wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(frameName));
+			/*driver.switchTo().frame("iPerceptionBody");
+			Thread.sleep(5000);*/
+			System.out.println("iPerception Pop Up is Present");
+			iPerceptionCloseButton.click();
+
+			driver.switchTo().defaultContent();
+
+		} catch (Exception e) {
+			System.out.println("iPerception popup didn't appear");
+		}
 	}
 
 	@Override
@@ -451,18 +510,8 @@ public class FormsAndResourcesPage extends UhcDriver {
 	 * @toDo : to click order plan material link
 	 */
 	public void validateOrderPlanMaterial() throws InterruptedException {
-		try {
-			Thread.sleep(15000);
-			driver.switchTo().frame("iPerceptionBody");
-			Thread.sleep(5000);
-			System.out.println("iPerception Pop Up is Present");
-			iPerceptionCloseButton.click();
-
-			driver.switchTo().defaultContent();
-
-		} catch (Exception e) {
-			System.out.println("failed and exception in frame , popup has not come yet");
-		}
+		iPerceptionHandle(iPerceptionframeName);
+		
 		if ((OrderPlanMaterialLink).isDisplayed()) {
 			OrderPlanMaterialLink.click();
 		}
@@ -526,9 +575,18 @@ public class FormsAndResourcesPage extends UhcDriver {
 	/**
 	 * @toDo : to verify english as a default language
 	 */
-	public void validateEngDefault() {
-		Select oselect = new Select(languagedropdown.get(0));
-		if (oselect.getFirstSelectedOption().getText().equals("ENGLISH")) {
+	public void validateEngDefault(String memberType) {
+		Select oselect,oselectCopy;
+		if(memberType.contains("Pre-Effective")){
+			oselect = new Select(languagedropdownPreEfffective.get(0));
+			oselectCopy= new Select(languagedropdownPreEfffectiveCopy.get(0));
+		}
+			 	
+		else {
+			 oselect = new Select(languagedropdown);
+			 oselectCopy= new Select(languagedropdowncopy);
+		}
+		if (oselect.getFirstSelectedOption().getText().equals("ENGLISH")||oselectCopy.getFirstSelectedOption().getText().equals("ENGLISH")) {
 			System.out.println(oselect.getFirstSelectedOption().getText());
 			System.out.println("true");
 			Assert.assertTrue(true);
@@ -544,10 +602,10 @@ public class FormsAndResourcesPage extends UhcDriver {
 	 */
 	public void changelanguage() throws InterruptedException {
 		/* CommonUtility.waitForPageLoad(driver, pdf, 20); */
-		Select oselect = new Select(languagedropdown.get(0));
+		Select oselect = new Select(languagedropdownPreEfffective.get(0));
 
 		Thread.sleep(3000);
-		languagedropdown.get(0).click();
+		languagedropdownPreEfffective.get(0).click();
 		oselect.selectByVisibleText("SPANISH");
 		System.out.println(oselect.getFirstSelectedOption().getText());
 		Thread.sleep(6000);
@@ -577,7 +635,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	public boolean verifypdfname(String a[]) throws InterruptedException {
 		boolean checkflag = true;
 
-		Select langdropdwn = new Select(languagedropdown.get(0));
+		Select langdropdwn = new Select(languagedropdownPreEfffective.get(0));
 		if (langdropdwn.getFirstSelectedOption().getText().contains("ENGLISH")) {
 
 			java.util.List<WebElement> pdfs = driver.findElements(
@@ -681,7 +739,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 
 	public boolean verifyPdfNames(String a[], List<WebElement> listOfPdf) throws InterruptedException {
 		boolean checkflag = false;
-		Select langdropdwn = new Select(languagedropdown.get(0));
+		Select langdropdwn = new Select(languagedropdownPreEfffective.get(0));
 		if (langdropdwn.getFirstSelectedOption().getText().contains("ENGLISH")) {
 			checkflag = pdfComparison(a, listOfPdf, checkflag);
 		} else if (langdropdwn.getFirstSelectedOption().getText().contains("SPANISH")) {
@@ -715,7 +773,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	}
 
 	public void waitforFNRpage() {
-		WebDriverWait wait = new WebDriverWait(this.driver, 40);
+		wait = new WebDriverWait(this.driver, 40);
 		wait.until(new ExpectedCondition<Boolean>() {
 			public Boolean apply(WebDriver driver) {
 				if (driver.getTitle().contains(pDR))
@@ -1011,7 +1069,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	}
 
 	public void selectlanguagedropdown(String language) {
-		Select langdropdwn = new Select(languagedropdown.get(0));
+		Select langdropdwn = new Select(languagedropdownPreEfffective.get(0));
 		langdropdwn.selectByVisibleText(language);
 	}
 
@@ -1177,14 +1235,20 @@ public class FormsAndResourcesPage extends UhcDriver {
 		Collection<String> values = memberAttributesMap.values();
 		String[] targetArray = values.toArray(new String[values.size()]);
 		System.out.println(values.size());
+
 		if (materialType == "memberShip")
 			temp = getPreEffectiveMemMaterials();
-		else if (materialType == "welcomeKit")
-			;
-		temp = getPreEffectiveMemMaterials();
-
+		else if (materialType == "welcomeGuide")
+			temp = getPreEffectiveMemMaterials();// same for both
+		else if (materialType == "annualDirectory") {
+			formsAndResourcesPage.scrollToView(preAnnualDirectorySection);
+			temp = getAnnualDirectoryPdfList();
+		}
 		boolean arraycheck = formsAndResourcesPage.verifyPdfNames(targetArray, temp);
-		Assert.assertTrue("all pdfs are coming correctly", arraycheck == true);
-
+		Assert.assertTrue("Incorrect pdf's shown", arraycheck == true);
 	}
+
+	
+
+	
 }
