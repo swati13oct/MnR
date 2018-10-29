@@ -733,7 +733,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | planType | memberType |
       | Peehip   | Group      |
 
-  @BenefitsForMAMedsupSSUPMember @regression @regression_06_06_18
+  @BenefitsForMAMedsupSSUPMember @regression @regression_06_06_18 @benefitsAndCoverage
   Scenario Outline: Verify the Benefits for a  MA Member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
