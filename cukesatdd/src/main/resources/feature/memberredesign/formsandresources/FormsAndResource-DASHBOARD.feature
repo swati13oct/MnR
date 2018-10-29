@@ -2,7 +2,6 @@
 Feature: G1.1 To validate forms and resources page in dashboard site
 
 # Pre-Effective Federal Cases
-
 @pre-effectivefnrmapdaarpindividualvalidation 
 Scenario Outline: 
    	Given login with following details in the member redesign portal
