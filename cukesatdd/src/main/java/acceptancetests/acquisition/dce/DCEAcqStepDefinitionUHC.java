@@ -36,56 +36,6 @@ public class DCEAcqStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:user is on blayer medicare
-	 */
-	@Given("^the user is on blayer medicare acq site landing page$")
-	public void the_user_is_on_UMS_medicare_site_landing_page() {
-		
-		WebDriver wd = getLoginScenario().getWebDriver();
-
-		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
-
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
-				aquisitionhomepage);
-		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
-		getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
-		
-	}
-	
-	/**
-	 * @toDo:access the acquisition DCE tool from home page
-	 */
-	@When("^I access the acquisition DCE tool from home page on ums site$")
-	public void I_access_the_DCE_tool_home_page() throws InterruptedException {
-
-		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) loginScenario.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
-		dce.navigateToDCEToolFromHome();;
-	}
-	
-	/**
-	 * @toDo:access the vpp page using below zipcode
-	 */
-	@When("^I access the vpp page using below zipcode on ums site$")
-	public void I_access_the__vpp_page(DataTable memberAttributes) throws InterruptedException {
-		List<DataTableRow> memberAttributesRow = memberAttributes
-				.getGherkinRows();
-		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
-
-		String zipcode = memberAttributesMap.get("Zip Code");
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)loginScenario.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.navigateToVpp(zipcode);
-		if(plansummaryPage!=null){
-			loginScenario.saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
-		}
-	}
-	
-	/**
 	 * @toDo:choose the 2017 plan and go to DCE
 	 */
 	@And("^I choose the 2017 plan and go to DCE page$")
@@ -113,6 +63,21 @@ public class DCEAcqStepDefinitionUHC {
 		if(dce!=null){
 			loginScenario.saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
 		}
+	}
+	
+	/**
+	 * @toDo:access the acquisition DCE tool from home page
+	 */
+	@When("^I access the acquisition DCE tool from home page on ums site$")
+	public void I_access_the_DCE_tool_home_page() throws InterruptedException {
+
+		AcquisitionHomePage acquisitionHomePage = (AcquisitionHomePage) loginScenario.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) acquisitionHomePage.navigateToDCEToolFromHome();
+		if(dce!=null){
+			loginScenario.saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
+			dce.validateDceLandingPage();
+		}else
+			Assert.fail("DCE page object returned null");
 	}
 	
 	/**
@@ -156,7 +121,7 @@ public class DCEAcqStepDefinitionUHC {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) loginScenario.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		DrugCostEstimatorPage dce = plansummaryPage.navigateToDCEAfterDrugAdded(plantype);
 		if(dce!=null){
-			loginScenario.saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
+			Assert.assertTrue(true);
 		}
 	}
 	
@@ -267,7 +232,7 @@ public class DCEAcqStepDefinitionUHC {
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
 
-		String drugName = memberAttributesMap.get("Drug");
+		String drugName = memberAttributesMap.get("Drug").toUpperCase();
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		if(dce.isDrugPresent(drugName))
 			Assert.assertTrue(true);
@@ -325,6 +290,18 @@ public class DCEAcqStepDefinitionUHC {
 	public void should_be_directed_to_the_VPP_Plan_Summary_Page(){
 		VPPPlanSummaryPage vppPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		vppPage.validatePlanSummary();
+	}
+	
+	@Then("^I navigate to step3 page and validate drug info for DCE homepage flow uhc$")
+	public void I_navigate_to_step3_page(DataTable data) throws InterruptedException {
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		String drug = memberAttributesRow.get(0).getCells().get(1);
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.navigateToStep3();
+	   if(dce.validateDrugOnStep3FromHomePageFlow(drug))
+		   Assert.assertTrue(true);
+	   else
+		   Assert.fail("Error:the drug did not display on step 3 page"); 
 	}
 	
 }

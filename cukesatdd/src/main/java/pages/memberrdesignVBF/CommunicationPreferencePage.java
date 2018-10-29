@@ -21,7 +21,7 @@ public class CommunicationPreferencePage extends UhcDriver {
 	@FindBy(id = "savePaperlessSettings")
 	private WebElement savePrefButton;
 
-	@FindBy(xpath = "//div[@id='mail-preferences-selector-FEDERAL-INDIVIDUAL']//div[@class='epmp-css']//iframe[@class='contact' or @class='preferences']")
+	@FindBy(xpath = "//div[@id='preferenceEPMP']//div[@id='preferenceIfram']//iframe[@class='contact' or @class='preferences']")
 	private WebElement iframeEPMP;
 
 	@FindBy(xpath = "//input[@id='Required_documents_EM']")
@@ -30,10 +30,12 @@ public class CommunicationPreferencePage extends UhcDriver {
 	@FindBy(xpath = "//input[@id='Required_documents_PM']")
 	private WebElement mailRadioBtnInput;
 
-	@FindBy(xpath = "//div[@class='tile-block paperless']/div[3]//div[@class='row']/div[1]//div[@class='control__indicator input-options']")
+	//@FindBy(xpath = "//div[contains(@class,'paperless')]//input[@id='Required_documents_EM']")
+	@FindBy(xpath = "//div[@class='tile-block paperless']/div[3]//div[@class='row']/div[1]//div[contains(@class,'control__indicator') and contains(@class,'input-options')]")
 	private WebElement paperlessRadioBtn;
-
-	@FindBy(xpath = "//div[@class='tile-block paperless']/div[3]//div[@class='row']/div[2]//div[@class='control__indicator input-options']")
+	
+	//@FindBy(xpath = "//div[contains(@class,'paperless')]//input[@id='Required_documents_PM']")	
+	@FindBy(xpath = "//div[@class='tile-block paperless']/div[3]//div[@class='row']/div[2]//div[contains(@class,'control__indicator') and contains(@class,'input-options')]")
 	private WebElement mailRadioBtn;
 
 	@FindBy(xpath = "//div[@class='tile-block paperless']//div[@class='row consent-row']//div[@class='control__indicator red-color-status']")

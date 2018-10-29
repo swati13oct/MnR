@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -16,7 +17,7 @@ import atdd.framework.UhcDriver;
  */
 public class OneTimePaymentsPage extends UhcDriver {
 
-	@FindBy(xpath = "//*[@id='atdd_otheramount_label']/label")
+	@FindBy(xpath = ".//*[@id='otheramt']")
 	private WebElement otherAmountRadio;
 
 	@FindBy(id = "other-amount-number")
@@ -42,8 +43,8 @@ public class OneTimePaymentsPage extends UhcDriver {
 
 	@FindBy(id = "review-continue")
 	private WebElement reviewContinue;
-
-	@FindBy(xpath = "//div[@id='atdd_electronicsignature_label']//label[@for='consent']")
+	
+	@FindBy(xpath = ".//*[@id='atdd_electronicsignature_label']//label[@for='consent']")
 	private WebElement electronicSignatureCheck;
 
 	public OneTimePaymentsPage(WebDriver driver) {
@@ -55,6 +56,7 @@ public class OneTimePaymentsPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
+		CommonUtility.waitForPageLoad(driver, otherAmountRadio, 30);
 		validateNew(otherAmountRadio);
 		validateNew(otherAmountNumber);
 		validateNew(routingNumberField);

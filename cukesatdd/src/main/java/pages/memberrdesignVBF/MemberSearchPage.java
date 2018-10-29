@@ -26,7 +26,17 @@ public class MemberSearchPage extends UhcDriver {
 
 	@FindBy(css = "table.resultsTable tr:nth-child(2)>td>a")
 	private WebElement lnkMemberUsername;
+	
+	@FindBy(id = "date-mm")
+	private WebElement monthDropdown;
+	
+	@FindBy(id = "date-dd")
+	private WebElement dateDropdown;
+	
+	@FindBy(id = "date-yyyy")
+	private WebElement yearDropdown;
 
+	
 	public MemberSearchPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -40,8 +50,7 @@ public class MemberSearchPage extends UhcDriver {
 		validateNew(btnSearch);
 	}
 
-	public MemberInformationPage memberSearch(String strMemberUsername) {
-		sendkeysNew(memberUsername, strMemberUsername);
+	public MemberInformationPage memberSearch() {
 		btnSearch.click();
 		CommonUtility.waitForPageLoadNew(driver, lnkMemberUsername, 60);
 		scrollToView(lnkMemberUsername);
@@ -49,4 +58,20 @@ public class MemberSearchPage extends UhcDriver {
 		return new MemberInformationPage(driver);
 
 	}
+	public void enterMemberUserName(String text){
+		sendkeysNew(memberUsername, text);
+	}
+	
+	public void enterMemberID(String text){
+		sendkeysNew(memberIdField, text);
+	}
+	
+	public void enterDOB(String month, String date, String year){
+		sendkeysNew(monthDropdown, month);
+		sendkeysNew(dateDropdown, date);
+		sendkeysNew(yearDropdown, year);	
+	}
+	
+	
+	
 }

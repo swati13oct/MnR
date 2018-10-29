@@ -106,6 +106,15 @@ public class MedicareInformationPage extends UhcDriver{
 	@FindBy(xpath = "//*[@class = 'field-error-msg']")
 	private List <WebElement> FieldValidation_ErrorMessage;
 	
+	@FindBy(xpath = "//*[@id='medicareClaimNumber']/preceding-sibling::label")
+	private WebElement MedicareNumberLabel;
+	
+	@FindBy(xpath = "//*[@class='ole-form-container']//div[@id='ole-form-content']//div[@class='form-row'][3]/h3")
+	private WebElement DiabetesSection;
+	
+	@FindBy(id="hasEndStateRenalDiseaseNo")
+	private WebElement ESRD;
+	
 	public MedicareInformationPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -167,7 +176,7 @@ public class MedicareInformationPage extends UhcDriver{
 		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date");
 		String CardType = MedicareDetailsMap.get("Card Type");
 		String SSNflag = MedicareDetailsMap.get("SSN Flag");
-		WebElement MedicareNumberLabel = driver.findElement(By.xpath("//*[@id='medicareClaimNumber']/preceding-sibling::label"));
+		//WebElement MedicareNumberLabel = driver.findElement(By.xpath("//*[@id='medicareClaimNumber']/preceding-sibling::label"));
 		if(CardType.contains("HICN")){
 			SelectCardA.click();
 			if(MedicareNumberLabel.getText().contains("Medicare Claim Number")){
@@ -271,6 +280,34 @@ public class MedicareInformationPage extends UhcDriver{
 		if(driver.getCurrentUrl().contains("preliminary-questions")){
 			System.out.println("OLE Preliminary Questions page is Displayed");
 			System.out.println(driver.getCurrentUrl());
+			return new PrelimineryQuestionsPage(driver);
+		}
+		return null;
+	}
+
+	
+public PrelimineryQuestionsPage navigate_to_Preliminary_Diabetes_Questions_page() {
+	
+	NextBtn.click();
+	try {
+		Thread.sleep(3000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+		
+	    ESRD.click();
+		if(DiabetesSection.getText().contains("Diabetes"))			
+		NextBtn.click();
+				try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(driver.getCurrentUrl().contains("use-disclosure")){
+			System.out.println("OLE UseDisclosure page is Displayed");
 			return new PrelimineryQuestionsPage(driver);
 		}
 		return null;
@@ -420,5 +457,32 @@ public boolean validate_alreadyEnrolled_ErrorMessage() {
 		return true;
 	}
 	return false;
+}
+
+/**
+* Generate a random number of given length
+* @param length Length of number to be generated
+* @return
+*/
+public static long generateRandomNumber(int length)
+{
+long randomNumber;
+
+String strNum = Double.toString(Math.random());
+strNum = strNum.replace(".","");
+
+if(strNum.length() > length)
+{
+strNum = strNum.substring(0,length); 
+}
+else
+{
+int remainingLength = length - strNum.length() + 1;
+randomNumber = generateRandomNumber(remainingLength);
+strNum = strNum.concat(Long.toString(randomNumber));
+}
+
+randomNumber=Long.parseLong(strNum);
+return randomNumber;
 }
 }

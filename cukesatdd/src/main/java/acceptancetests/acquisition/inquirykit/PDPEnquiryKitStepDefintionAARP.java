@@ -14,6 +14,7 @@ import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.EnquiryKitConfirmationPage;
 import pages.acquisition.ulayer.PDPEnrollementGuidePage;
 import pages.acquisition.ulayer.PDPRequestHelpAndInformationPage;
+import pages.acquisition.ulayer.RequestHelpAndInformationPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
@@ -36,32 +37,15 @@ public class PDPEnquiryKitStepDefintionAARP {
 	}
 
 	/**
-	 * @toDo:the user is on the AARP acquisition Site home 
-	 */	
-	@Given("^the user is on the AARP acquisition Site home page$")
-	public void the_user_on_aarp_medicare_site_landing_page()
-	{
-
-		WebDriver wd = getLoginScenario().getWebDriver();
-
-		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
-
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
-				aquisitionhomepage);
-	
-	}
-	
-	/**
 	 * @toDo:user navigates to Request More Help and Information page under pdp section 
 	 */
 	@When("^the user navigates to Request More Help and Information page under pdp section in AARP Site$")
 	public void the_user_navigates_request_more_help_information_page_aarp()
 	{
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		PDPRequestHelpAndInformationPage pdpRequestHelpAndInformationPage = aquisitionhomepage.navigateToPDPMoreHelpAndInfo();
-		if(pdpRequestHelpAndInformationPage!=null){
-			getLoginScenario().saveBean(PageConstants.PDP_REQUEST_MORE_HELP_INFORMATION_PAGE, pdpRequestHelpAndInformationPage);
+		RequestHelpAndInformationPage requestHelpAndInformationPage = aquisitionhomepage.navigateToMaMoreHelpAndInfo();
+		if(requestHelpAndInformationPage!=null){
+			getLoginScenario().saveBean(PageConstants.REQUEST_MORE_HELP_INFORMATION_PAGE, requestHelpAndInformationPage);
 			Assert.assertTrue(true);
 		}
 		else{
@@ -75,9 +59,9 @@ public class PDPEnquiryKitStepDefintionAARP {
 	@And("^the user accesses the Request Plan Information and Enrollment Materials in AARP site$")
 	public void the_user_accessess_the_pdp_enquiry_kit_aarp()
 	{
-		PDPRequestHelpAndInformationPage pdpRequestHelpAndInformationPage = (PDPRequestHelpAndInformationPage) getLoginScenario().getBean(PageConstants.PDP_REQUEST_MORE_HELP_INFORMATION_PAGE);
+		RequestHelpAndInformationPage requestHelpAndInformationPage = (RequestHelpAndInformationPage) getLoginScenario().getBean(PageConstants.REQUEST_MORE_HELP_INFORMATION_PAGE);
 		
-		PDPEnrollementGuidePage pdpEnrollementGuidePage = pdpRequestHelpAndInformationPage.navigatesToPdpEnquiryKit();
+		PDPEnrollementGuidePage pdpEnrollementGuidePage = requestHelpAndInformationPage.navigatesToPdpEnquiryKit();
 		if(pdpEnrollementGuidePage!=null){
 			getLoginScenario().saveBean(PageConstants.PDP_ENROLLMENT_GUIDE_PAGE, pdpEnrollementGuidePage);
 			Assert.assertTrue(true);
@@ -107,11 +91,10 @@ public class PDPEnquiryKitStepDefintionAARP {
 		pdpEnrollementGuidePage.entersDetails(personalAttributesMap);
 		EnquiryKitConfirmationPage enquiryKitConfirmationPage = pdpEnrollementGuidePage.submitsRequest();
 		if(enquiryKitConfirmationPage!=null){
-			if(enquiryKitConfirmationPage.validateConfPage())
 				Assert.assertTrue(true);
-			else
-				Assert.fail("Error in validating confirmation page");
-		}
+		}else
+			Assert.fail("Not able to submit the form. Confirmation page is null.");
+	
 	}	
 	
 

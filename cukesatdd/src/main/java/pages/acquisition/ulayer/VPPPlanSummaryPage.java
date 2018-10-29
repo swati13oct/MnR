@@ -36,6 +36,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//a[text()='Passport Flyer (PDF)']")
 	private WebElement PassportFlyerPDF;
 	
+	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[3]/div/div[1]/div[2]/div/div/span[3]/button]")
+	WebElement compareLinks;
+	
 	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div[1]/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div/span[3]")
 	private WebElement showMaPlans;
 	
@@ -50,7 +53,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[1]//*[@class='trigger-closed']")
 	private WebElement maPlansViewLink;
 	
-	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[4]//*[@class='trigger-closed']")
+	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[4]//a[@class='trigger-closed']")
 	private WebElement snpPlansViewLink;
 
 	@FindBy(id = "plan-list-1")
@@ -208,6 +211,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(id="backToPlanSummaryTop")
 	private WebElement backToPlansLink;
 	
+	@FindBy(id = "drugsTabId")
+	public WebElement step1;
+	
 	
 	public JSONObject vppPlanSummaryJson;
 
@@ -268,7 +274,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 
 	public VPPPlanSummaryPage viewPlanSummary(String planType) {
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	WebDriverWait wait = new WebDriverWait(driver, 10000);
 
 		try {
 			Thread.sleep(5000);
@@ -314,7 +320,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			}
 		} else if (planType.equalsIgnoreCase("MA")
 				|| planType.equalsIgnoreCase("MAPD")) {
-			if(validate(viewMAPlans)){
+			if(validate(viewPlans)){
 				((JavascriptExecutor)driver).executeScript("arguments[0].click();", viewMAPlans);
 			}
 			
@@ -875,7 +881,9 @@ CommonUtility.waitForPageLoad(driver, MAmoreDetailsLink, 30);
 		
 	}
 
+
 	public ComparePlansPage clickOnCompareLink(){
+		
 		List<WebElement> compareLinks = driver.findElements(By.xpath(".//*[@id='plan-list-1']//button[contains(text(),'Compare plans')]"));	
 		compareLinks.get(0).click();
 
@@ -905,14 +913,9 @@ CommonUtility.waitForPageLoad(driver, MAmoreDetailsLink, 30);
 	}
 	
 	public DrugCostEstimatorPage navigateToDCE(String plantype) {
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		if(plantype.equals("MA")||plantype.equals("MAPD")){
-			
+			CommonUtility.waitForPageLoad(driver,viewPlans, 30);
 			if(validate(viewPlans)){
 				viewPlans.click();
 				List<WebElement> maDCELink = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[@class='mabenefittable']//a[contains(@dtmname, 'Plans Landing:Plan:MA:Drug Cost Estimator')]"));
@@ -935,12 +938,8 @@ CommonUtility.waitForPageLoad(driver, MAmoreDetailsLink, 30);
 				}
 			
 		}
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		CommonUtility.waitForPageLoad(driver, step1, 30);
+		validateNew(step1);
 		if(currentUrl().contains("/estimate-drug-costs.html#/drug-cost-estimator"))
 			return new DrugCostEstimatorPage(driver);
 		return null;
@@ -1003,7 +1002,7 @@ CommonUtility.waitForPageLoad(driver, MAmoreDetailsLink, 30);
 	public String getPlanPremium(String PlanName) {
 		
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

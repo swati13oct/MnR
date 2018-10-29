@@ -1,4 +1,4 @@
-@smokeTest
+@smokeTest @MemberVBF
 Feature: 1.04-VBF-MemRedesign-To test Drug Cost Estimator functionality (GATED)
 
   @smokeTest_DceMem @rallyDashboard @testharness

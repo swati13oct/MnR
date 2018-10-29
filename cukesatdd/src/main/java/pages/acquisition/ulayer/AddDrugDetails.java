@@ -10,6 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 public class AddDrugDetails extends UhcDriver {
@@ -88,10 +89,8 @@ public class AddDrugDetails extends UhcDriver {
 	}
 
 	public SavingsOppurtunity continueAddDrugDetailsModal() throws InterruptedException{
-		waitforElement(continueButton);
+		CommonUtility.waitForPageLoad(driver, continueButton, 20);
 		continueButton.click();
-		//continueButton.click();
-		Thread.sleep(12000);
 		return new SavingsOppurtunity(driver);
 		}
 	

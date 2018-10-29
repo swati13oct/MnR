@@ -28,36 +28,17 @@ public class EnquiryKitConfirmationPage extends UhcDriver{
 	public EnquiryKitConfirmationPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		String fileName = CommonConstants.ENQUIRY_KIT_CONFIRMATION_PAGE_DATA;
-		enquiryKitConfirmation = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
+		
 		openAndValidate();
 	}
 
 	@Override
 	public void openAndValidate() {
-		
-		JSONObject jsonObject = new JSONObject();
-		for (String key : enquiryKitConfirmation.getExpectedData().keySet()) {
-			WebElement element = findElement(enquiryKitConfirmation.getExpectedData()
-					.get(key));
-			if (null != element) {
-				if(validate(element))
-				{
-				try {
-					jsonObject.put(key, element.getText());
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				}
-			}
-		}
-		enquiryKitConfirmationJson = jsonObject;
-		
+	
 	}
 	
 	public boolean validateConfPage(){
+		CommonUtility.waitForPageLoad(driver, medicareTitle, 30);
 		if(validate(medicareTitle))
 			return true;
 		return false;

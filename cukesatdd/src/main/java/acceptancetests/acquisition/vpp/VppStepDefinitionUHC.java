@@ -18,9 +18,11 @@ import pages.acquisition.bluelayer.PlanComparePage;
 import pages.acquisition.bluelayer.PlanDetailsPage;
 import pages.acquisition.bluelayer.TeamCAcqHome;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
+import pages.acquisition.ole.WelcomePage;
 import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.vbfacquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
+import acceptancetests.data.OLE_PageConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -146,42 +148,6 @@ public class VppStepDefinitionUHC {
 	}
 
 	
-	@When("^the user performs plan search TeamF using following information in UMS site$")
-	public void zipcode_details_in_TeamF_site(DataTable givenAttributes) {
-
-		List<DataTableRow> memberAttributesRow = givenAttributes
-				.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
-
-		String zipcode = memberAttributesMap.get("Zip Code");
-		//String county = memberAttributesMap.get("County Name");
-		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
-		//getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
-
-		TeamCAcqHome aquisitionhomepage = (TeamCAcqHome) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.searchPlansF(zipcode);
-
-		if (plansummaryPage != null) {
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
-					plansummaryPage);
-			if(plansummaryPage.validateVPPPlanSummaryPage())
-				Assert.assertTrue(true);
-			else
-				Assert.fail("Error in validating the Plan Summary Page");
-
-		}
-
-	}
-
-	
-	
-	
 	/**
 	 * @throws InterruptedException 
 	 * @toDo:user views plans of the below plan type
@@ -230,6 +196,21 @@ public class VppStepDefinitionUHC {
 
 	}
 
+	
+	@Then("^the user validates the Enroll Now Button present for the Chronic plan type$")
+	public void Chronic_Enroll_now_button_validation(DataTable givenAttributes) throws InterruptedException {
+		
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		String PlanName = memberAttributesRow.get(0).getCells().get(1); 
+				getLoginScenario().saveBean(
+				VPPCommonConstants.PLAN_NAME,PlanName);
+		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		WelcomePage welcomePage = vppPlanSummaryPage.EnrollmentValidationChronic(PlanName);
+		getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
+
+	}
 	
 	/**
 	 * @toDo:user view plan details of the above selected plan

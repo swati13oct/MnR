@@ -159,6 +159,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[2]/div/div/div/span/a")
 	private WebElement view2017Plans;
+	
+	@FindBy(id = "drugsTabId")
+	public WebElement step1;
 
 	@FindBy(className = "planYear")
 	WebElement planYear;
@@ -533,8 +536,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				wait.until(ExpectedConditions.elementToBeClickable(medsupplans)).click();
 			}	
 		}
-if(validate(toggleplanYear))
-			toggleplanYear.click();		return new VPPPlanSummaryPage(driver, planType);
+ /*  if(validate(toggleplanYear))
+			toggleplanYear.click();*/		return new VPPPlanSummaryPage(driver, planType);
 	}
 
 	private JSONObject formJsonObject(PageData vppPlanSummary) {
@@ -1190,22 +1193,12 @@ if(validate(toggleplanYear))
 	
 
 	public boolean validateVPPPlanSummaryPage(){
-		WebDriverWait wait = new WebDriverWait(driver, 45000);
-		boolean flag = false;
-		/*if(validate(viewPlans)){
-		viewPlans = wait.until(ExpectedConditions.elementToBeClickable(viewPlans));
-		}
-		if(validate(viewPDPPlans)){
-		viewPDPPlans = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[3]/div/span[3]")));
-		}
-		if(validate(changeLocationBtn)){
-		changeLocationBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Change location")));
-		}*/
-
+		
+		CommonUtility.waitForPageLoad(driver, viewPlans, 30);
 
 		if(validate(viewPlans)&&validate(viewPDPPlans)&&validate(changeLocationBtn))
-			flag = true;
-		return flag;
+			return true;
+		return false;
 	}
 
 
@@ -1257,12 +1250,7 @@ if(validate(toggleplanYear))
 	}
 
 	public void clickOnViewPlans(String plantype) {
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		CommonUtility.waitForPageLoad(driver, viewPlans, 30);
 		if(plantype.equals("MA")||plantype.equals("MAPD")){
 			viewPlans.click();
 		}else
@@ -1272,21 +1260,14 @@ if(validate(toggleplanYear))
 
 	public DrugCostEstimatorPage navigateToDCE(String plantype) {
 		if(plantype.equals("MA")||plantype.equals("MAPD")){
-			//viewPlans.click();
 			List<WebElement> maDCELink = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[@class='mabenefittable']//a[contains(@dtmname, 'Plans Landing:Plan:MA:Drug Cost Estimator')]"));
 			maDCELink.get(0).click();
 		}else{
-			//viewPDPPlans.click();
 			List<WebElement> view2017PDPPlans = driver.findElements(By.id("pdpDrugCostEstimatorLink"));
 			view2017PDPPlans.get(0).click();
 
 		}
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		CommonUtility.waitForPageLoad(driver, step1, 30);
 		if(currentUrl().contains("/estimate-drug-costs.html#/drug-cost-estimator"))
 			return new DrugCostEstimatorPage(driver);
 		return null;
@@ -1294,7 +1275,7 @@ if(validate(toggleplanYear))
 	}
 
 	public DrugCostEstimatorPage navigateToDCEAfterDrugAdded(String plantype) {
-		waitforElement(viewPlans);
+		CommonUtility.waitForPageLoad(driver, viewPlans, 30);
 		if(plantype.equals("MA")||plantype.equals("MAPD")){
 			if(validate(viewPlans)){
 			viewPlans.click();
@@ -1490,10 +1471,19 @@ public String EnrollmentValidation(String PlanName) {
 		
 		System.out.println("Plan Name is : "+PlanName);
 		
-		JavascriptExecutor jse = (JavascriptExecutor)driver;
-		jse.executeScript("window.scrollBy(0,1300)", "");
+		if(PlanName.equalsIgnoreCase("UnitedHealthcare Medicare Silver (Regional PPO SNP)" ))
+				{
+			WebElement EnrollmentButton = driver.findElement(By.xpath("(//*[@class='enrollment']/div[@class='swiper-content ng-scope']/a)[5]"));
+			String Enrollment = EnrollmentButton.getText();
+			if(EnrollmentButton.isDisplayed())
+				EnrollmentButton.click();
+			System.out.println("Enrollment Button present and clicked");
+			return Enrollment;
+				}
+		else
+		{		
 		try{
-		WebElement EnrollmentButton = driver.findElement(By.xpath("//*[@class='enrollment']/div[@class='acqplans ng-scope']/a/span"));
+		WebElement EnrollmentButton = driver.findElement(By.xpath("//*[@class='enrollment']/div[@class='acqplans ng-scope']/div/a/span"));
 		String Enrollment = EnrollmentButton.getText();
 		if(EnrollmentButton.isDisplayed())
 			EnrollmentButton.click();
@@ -1502,6 +1492,7 @@ public String EnrollmentValidation(String PlanName) {
 }
 		catch(Exception e)
 		{
+			JavascriptExecutor jse = (JavascriptExecutor)driver;
 			jse.executeScript("window.scrollBy(0,800)", "");
 			WebElement EnrollmentButton = driver.findElement(By.xpath("(//*[@class='module-plan-overview module swiper-slide ng-scope'])[9]//div[@class='enrollment']//a/span"));
 			String Enrollment = EnrollmentButton.getText();
@@ -1510,8 +1501,40 @@ public String EnrollmentValidation(String PlanName) {
 			System.out.println("Enrollment Button present and clicked");
 			return Enrollment;
 		}
-		
+		}
 			}
+
+
+public WelcomePage EnrollmentValidationChronic(String PlanName) throws InterruptedException {
+	
+	try {
+		Thread.sleep(5000);		
+		try {
+		if(YearToggle.getText().contains("View 2019 Plans"))
+			YearToggle.click();
+		Thread.sleep(5000);
+		}catch(Exception e)
+		{
+			System.out.println("Toggle Not found");
+		}
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+
+	
+	System.out.println("Plan Name is : "+PlanName);	
+	/*JavascriptExecutor jse = (JavascriptExecutor)driver;
+	jse.executeScript("window.scrollBy(0,-10)", "");*/
+		Thread.sleep(2000);
+	WebElement EnrollmentButton = driver.findElement(By.xpath("(//*[@class='enrollment']/div[@class='swiper-content ng-scope']/a/span)[5]"));	
+	if(EnrollmentButton.isDisplayed())
+		EnrollmentButton.click();
+	System.out.println("Enrollment Button present and clicked");
+	Thread.sleep(2000);
+	return new WelcomePage(driver);
+	
+		}
 
 
 	public AepVppPlanSummaryPage validate_aepPlanYearLinks(String currentYear, String nextYear) {

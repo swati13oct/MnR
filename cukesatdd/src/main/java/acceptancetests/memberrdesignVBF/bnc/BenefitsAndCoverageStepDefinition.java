@@ -49,6 +49,7 @@ public class BenefitsAndCoverageStepDefinition {
 	 */
 	@And("^the user validates view and document label$")
 	public void user_validates_view_and_document_label() {
+		System.out.println("***the user validates view and document label***");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE_VBF);
 
@@ -204,4 +205,20 @@ public class BenefitsAndCoverageStepDefinition {
 
 	}
 
+	@And("the user validates the Office Visits section")
+	public void user_validate_OfficeVisitssection() {
+
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE_VBF);
+		planBenefitsCoverage.validateOfficeVisitssection();
+	}
+
+	@And("the user validates the copay coinsurance in drug costs table")
+	public void userValidatesCopayCoinsuranceindrugTable() {
+
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE_VBF);
+		planBenefitsCoverage.validateCopayCoinsuranceInDrugTable();
+
+	}
 }

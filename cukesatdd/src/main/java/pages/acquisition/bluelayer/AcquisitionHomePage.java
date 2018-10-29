@@ -7,8 +7,10 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -17,6 +19,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+
 import pages.acquisition.ulayer.PageTitleConstants;
 
 import java.util.ArrayList;
@@ -57,7 +60,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
         @FindBy(xpath = "//div[@id='ipeL']/div[2]/map/area[3]")
         private WebElement popUpcloseLink;
 
-        @FindBy(id = "vpp_selectcounty_box")
+        @FindBy(xpath = "//div[@class='modal-title']")
         private WebElement countyModal;
 
         @FindBy(id = "ipeL")
@@ -129,7 +132,19 @@ public class AcquisitionHomePage extends GlobalWebElements {
         
         @FindBy(xpath = "//a[@class='cta-button']")
         private WebElement takeTheQuizBtn;
+        
+        @FindBy(xpath = ".//*[@id='colhowdoesthiswork_dce']//*[@itemprop='significantLink']/*[@class='cta-button secondary']")
+    	public WebElement getStarted;
+        
+        @FindBy(xpath = " //*[@id='subnav_2']/div[1]/div/div[3]/div/h3[3]/a")
+        private WebElement pharmacysearchbtn;
 
+        @FindBy(xpath = ".//*[@id='change-location']")
+        private WebElement changeLocationLink;
+        
+        @FindBy(xpath =".//*[@id='collapse2heading_article_mededaccordion0']")
+    	private WebElement requestAgentApptDropdown;
+        
         private PageData homePageDisclaimer;
         public JSONObject homePageDisclaimerJson;
         private PageData homePageDisclaimerHide;
@@ -167,27 +182,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
                 driver.manage().window().maximize();
         }
 
-        public GetStartedPage navigateToPrescriptionDrug() {
-                prescriptionsLink.click();
+        public DrugCostEstimatorPage navigateToDCEToolFromHome() throws InterruptedException {
 
-                for(int i = 0; i<10;i++){
-                        if (driver.getTitle().equalsIgnoreCase(
-                                        PageTitleConstants.BLAYER_MEDICARE_PLAN_TYPES_TITLE)) {
+    		driver.manage().window().maximize();
+    		getStarted.click();
 
-                                return new GetStartedPage(driver);
-                        }else{
-                                try {
-                                        Thread.sleep(1000);
-                                } catch (InterruptedException e) {
-                                        // TODO Auto-generated catch block
-                                        e.printStackTrace();
-                                }
-                        }
-                }
-
-                return null;
-
-        }
+    		if(driver.getCurrentUrl().contains("health-plans/estimate-drug-costs.html"))
+    				return new DrugCostEstimatorPage(driver);
+    		return null;
+    	}
 
         public ZipcodeLookupHomePage looksupforZipcodes() {
 
@@ -202,137 +205,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
                 }
                 return null;
 
-        }
-
-        public JSONObject accessingGlobalFooter() {
-
-                String fileName = CommonConstants.GLOBAL_FOOTER_PAGE_DATA;
-                globalFooter = CommonUtility.readPageData(fileName,
-                                CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
-
-                JSONObject jsonObject = new JSONObject();
-                for (String key : globalFooter.getExpectedData().keySet()) {
-                        WebElement element = findElement(globalFooter.getExpectedData()
-                                        .get(key));
-                        if (element != null) {
-                                if (validate(element)) {
-                                        try {
-                                                jsonObject.put(key, element.getText());
-                                        } catch (JSONException e) {
-                                                // TODO Auto-generated catch block
-                                                e.printStackTrace();
-                                        }
-                                }
-                        }
-                }
-                globalFooterJson = jsonObject;
-
-                return globalFooterJson;
-
-        }
-
-        public JSONObject accessingGlobalHeader() {
-
-                String fileName = CommonConstants.GLOBAL_HEADER_PAGE_DATA;
-                globalHeader = CommonUtility.readPageData(fileName,
-                                CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
-
-                JSONObject jsonObject = new JSONObject();
-                for (String key : globalHeader.getExpectedData().keySet()) {
-                        WebElement element = findElement(globalHeader.getExpectedData()
-                                        .get(key));
-                        if (element != null) {
-                                if (validate(element)) {
-                                        try {
-                                                jsonObject.put(key, element.getText());
-                                        } catch (JSONException e) {
-                                                // TODO Auto-generated catch block
-                                                e.printStackTrace();
-                                        }
-                                }
-                        }
-                }
-                globalHeaderJson = jsonObject;
-
-                return globalHeaderJson;
-
-        }
-
-        public JSONObject getBrowserCheck() {
-                String fileName = CommonConstants.UHC_BROWSER_CHECK_DATA;
-                browserCheckData = CommonUtility.readPageData(fileName,
-                                CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
-
-                JSONObject jsonObject = new JSONObject();
-                for (String key : browserCheckData.getExpectedData().keySet()) {
-                        WebElement element = findElement(browserCheckData.getExpectedData()
-                                        .get(key));
-                        if (element != null) {
-                                if (validate(element)) {
-                                        try {
-                                                jsonObject.put(key, element.getText());
-                                        } catch (JSONException e) {
-                                                // TODO Auto-generated catch block
-                                                e.printStackTrace();
-                                        }
-                                }
-                        }
-                }
-                browserCheckJson = jsonObject;
-
-                return browserCheckJson;
-        }
-
-        public JSONObject accessViewAllDisclaimerInformation() {
-                disclaimerViewLink.click();
-                String fileName = CommonConstants.HOME_PAGE_DISCLAIMER_DATA;
-                homePageDisclaimer = CommonUtility.readPageData(fileName,
-                                CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
-
-                JSONObject jsonObject = new JSONObject();
-                for (String key : homePageDisclaimer.getExpectedData().keySet()) {
-                        WebElement element = findElement(homePageDisclaimer
-                                        .getExpectedData().get(key));
-                        if (element != null) {
-                                if (validate(element)) {
-                                        try {
-                                                jsonObject.put(key, element.getText());
-                                        } catch (JSONException e) {
-                                                // TODO Auto-generated catch block
-                                                e.printStackTrace();
-                                        }
-                                }
-                        }
-                }
-                homePageDisclaimerJson = jsonObject;
-
-                return homePageDisclaimerJson;
-        }
-
-        public JSONObject accessViewAllDisclaimerHideInformation() {
-                disclaimerHideLink.click();
-                String fileName = CommonConstants.HOME_PAGE_DISCLAIMER_DATA;
-                homePageDisclaimerHide = CommonUtility.readPageData(fileName,
-                                CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
-
-                JSONObject jsonObject = new JSONObject();
-                for (String key : homePageDisclaimerHide.getExpectedData().keySet()) {
-                        WebElement element = findElement(homePageDisclaimerHide
-                                        .getExpectedData().get(key));
-                        if (element != null) {
-                                if (validate(element)) {
-                                        try {
-                                                jsonObject.put(key, element.getText());
-                                        } catch (JSONException e) {
-                                                // TODO Auto-generated catch block
-                                                e.printStackTrace();
-                                        }
-                                }
-                        }
-                }
-                homePageDisclaimerHideJson = jsonObject;
-
-                return homePageDisclaimerHideJson;
         }
 
         public SiteMapUMSPage siteMapFooterClick() {
@@ -353,22 +225,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
                 }else{
                         start(UMS_ACQISITION_PAGE_URL);
                 }
-                
-                validate(navigationSectionHomeLink);
-                validate(navigationSectionOurPlansLink);
-                validate(navigationSectionmedicareEducationLink);
-                validate(navigationSectionEnterSearch);
-
-                validate(zipCodeField);
-                validate(viewPlansButton);
-
-                validate(footerAboutUsLink);
-                validate(footerContactUsLink);
-                validate(footerSiteMapLink);
-                validate(footerPrivacyPolicyLink);
-                validate(footerTermsAndConditionsLink);
-                validate(footerDisclaimersLink);
-                validate(footerAgentsAndBrokersLink);
 
         }
 
@@ -377,8 +233,31 @@ public class AcquisitionHomePage extends GlobalWebElements {
                 sendkeys(zipCodeField, zipcode);
                 viewPlansButton.click();
         		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+               try {
+        			
+        			if (countyModal.isDisplayed()) {
+        				driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='"+countyName+"']")).click();
+        			}
+        			System.out.println("countyModal.getText() "+countyModal.getText());
+        			;
+        		} catch (Exception e) {
+        			System.out.println("county box not found");
+        		}
+//                try {
+//                        if (countyModal.isDisplayed()) {
+//                                for (WebElement county : countyRows) {
+//                                        if (county.getText().equalsIgnoreCase(countyName)) {
+//                                                county.click();
+//                                                break;
+//                                        }
+//
+//                                }
+//                        }
+//                } catch (Exception e) {
+//                        System.out.println("county box not found");
+//                }
                 try {
-                        if (countyModal.isDisplayed()) {
+ if (countyModal.isDisplayed()) {
                                 for (WebElement county : countyRows) {
                                         if (county.getText().equalsIgnoreCase(countyName)) {
                                                 county.click();
@@ -390,13 +269,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
                 } catch (Exception e) {
                         System.out.println("county box not found");
                 }
-                try {
-                        Thread.sleep(10000);
-                } catch (InterruptedException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                }
-                if (driver.getCurrentUrl().contains("plan-summary")) {
+                CommonUtility.waitForPageLoad(driver, changeLocationLink, 30);                if (driver.getCurrentUrl().contains("plan-summary")) {
                         return new VPPPlanSummaryPage(driver);
                 }
                 return null;
@@ -729,10 +602,22 @@ public class AcquisitionHomePage extends GlobalWebElements {
         }
 
         public PharmacySearchPage navigateToPharmacyLocator() {
-
-    		driver.manage().window().maximize();
+        	
+        	driver.manage().window().maximize();
+    		Actions action = new Actions(driver);
+    		PageFactory.initElements(driver, this);
+    		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
+    		pharmacysearchbtn.click();
+    		
+    		try {
+    			Thread.sleep(6000);
+    		} catch (InterruptedException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
+    		/*driver.manage().window().maximize();
     		start("https://www.team-ci1-uhcmedicaresolutions.ose-elr-core.optum.com/health-plans/aarp-pharmacy.html#/Pharmacy-Search-English");
-               /* if(planType.contains("MA"))
+            */   /* if(planType.contains("MA"))
                         pharmacyNearLink_MA.click();
                 else if(planType.contains("PDP")){
                         pharmacyNearLink.click();                
@@ -751,12 +636,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
                                 break;
                 }*/
     		
-    		 try {
-                 Thread.sleep(6000);
-         } catch (InterruptedException e) {
-                 // TODO Auto-generated catch block
-                 e.printStackTrace();
-         }
+    		
                 if (driver.getTitle().equalsIgnoreCase(
                                 PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE)) {
                         return new PharmacySearchPage(driver);
@@ -1060,7 +940,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
                 } catch (Exception e) {
                         System.out.println("zipCodeField not found");
                 }
-                if (currentUrl().contains(
+                CommonUtility.waitForPageLoad(driver, requestAgentApptDropdown, 30);
+        		if (validateNew(requestAgentApptDropdown) && currentUrl().contains(
                                 "medicare-advantage-plans/request-information.html")) {
                         return new RequestHelpAndInformationPage(driver);
                 }
@@ -1152,12 +1033,20 @@ public class AcquisitionHomePage extends GlobalWebElements {
                 actions.moveToElement(moreHelpInfoLink);
                 actions.click().build().perform();
                 try {
-					Thread.sleep(4000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-                if (currentUrl().contains("request-information.html")) {
+        			if (zipCodeField.isDisplayed()) {
+        				CommonUtility.waitForElementToDisappear(driver, zipCodeField,
+        						20);
+        			}
+        		} catch (NoSuchElementException e) {
+        			System.out.println("zipCodeField not found");
+        		} catch (TimeoutException ex) {
+        			System.out.println("zipCodeField not found");
+        		} catch (Exception e) {
+        			System.out.println("zipCodeField not found");
+        		}
+                CommonUtility.waitForPageLoad(driver, requestAgentApptDropdown, 30);
+        		if (validateNew(requestAgentApptDropdown) && currentUrl().contains(
+        				"medicare-advantage-plans/request-information.html")) {
                         return new PDPRequestHelpAndInformationPage(driver);
                 }
 
