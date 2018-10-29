@@ -89,8 +89,19 @@ public class SpecialElectionPeriodPage extends UhcDriver{
 	// New Add - Leaving MAPD - OEP
 	@FindBy(xpath = "//*[@for = 'oepEffectiveDate']")
 	private WebElement Leaving_MAPD;
-
 	
+	// New Add - Change Dual
+	@FindBy(xpath = "//*[@for = 'changeDual']")
+	private WebElement ChangeDual;
+
+	// New Add - Change LIS
+	@FindBy(xpath = "//*[@for = 'changeLIS']")
+	private WebElement ChangeLIS;
+	
+	// New Add - CMS / State Assignment 
+	@FindBy(xpath = "//*[@for = 'assignment']")
+	private WebElement Assignment;
+
 	//MA, MAPD, PDP Common Option
 	
 	@FindBy(xpath = "//*[@for = 'moveIn']")
@@ -257,8 +268,8 @@ public boolean validate_SEPoptions_for_planType(String planType) {
 	}
 	if(planType.contentEquals("MA")){
 		if(validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer) && validate(MovedOutside_ServiceArea) 
-					&& validate(Into_LongTerm) && validate(OutOf_LongTerm) && validate(Disaster) && validate(DualSEP)
-					&& !validate(Both_Medicare_Medicaid)&& !validate(ExtraHelp_PrescriptionDrug) && !validate(LoSS_LIS)){
+					&& validate(Into_LongTerm) && validate(OutOf_LongTerm) && validate(Disaster) && validate(DualSEP) && validate(ChangeDual)
+					&& validate(ChangeLIS) && validate(Assignment) && !validate(Both_Medicare_Medicaid)&& !validate(ExtraHelp_PrescriptionDrug) && !validate(LoSS_LIS)){
 			System.out.println("All Options for MA/MAPD Plan are displayed in SEP pahe OLE flow : Validation Passed");
 			Validation_Flag = true;
 		}
@@ -269,7 +280,8 @@ public boolean validate_SEPoptions_for_planType(String planType) {
 	}
 	if(planType.contentEquals("MAPD")){
 		if(validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer) && validate(MovedOutside_ServiceArea)
-				 && validate(Into_LongTerm) && validate(OutOf_LongTerm) && validate(Disaster) && validate(DualSEP)
+				 && validate(Into_LongTerm) && validate(OutOf_LongTerm) && validate(Disaster) && validate(DualSEP) && validate(ChangeDual)
+				 && validate(ChangeLIS) && validate(Assignment) 
 				 && !validate(Both_Medicare_Medicaid) && !validate(ExtraHelp_PrescriptionDrug) && !validate(LoSS_LIS)){
 			System.out.println("All Options for MA/MAPD Plan are displayed in SEP pahe OLE flow : Validation Passed");
 			Validation_Flag = true;
@@ -282,8 +294,8 @@ public boolean validate_SEPoptions_for_planType(String planType) {
 	if(planType.contentEquals("PDP")){
 		if(validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer) && validate(MovedOutside_ServiceArea) 
 				&& validate(Into_LongTerm) && validate(OutOf_LongTerm) && validate(FiveStar_MAplan) && validate(DisEnrolling_MAPD)
-				&& validate(Disaster) && validate(DualSEP)
-				&& !validate(Both_Medicare_Medicaid) && !validate(ExtraHelp_PrescriptionDrug) && !validate(LoSS_LIS)){
+				&& validate(Disaster) && validate(DualSEP) && validate(ChangeDual) && validate(ChangeLIS) && validate(Assignment)
+				&& !validate(Both_Medicare_Medicaid) && !validate(ExtraHelp_PrescriptionDrug)){// && !validate(LoSS_LIS)
 			System.out.println("All Options for PDP Plan are displayed in SEP pahe OLE flow : Validation Passed");
 			Validation_Flag = true;
 		}
@@ -294,7 +306,7 @@ public boolean validate_SEPoptions_for_planType(String planType) {
 	}
 	if(planType.contentEquals("SNP")){
 		if(validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer) && validate(MovedOutside_ServiceArea)
-				&& validate(Disaster) && validate(DualSEP)){
+				&& validate(Disaster) && validate(DualSEP) && validate(ChangeDual) && validate(ChangeLIS) && validate(Assignment)){
 			System.out.println("All Options for SNP Plan are displayed in SEP pahe OLE flow : Validation Passed");
 			Validation_Flag = true;
 		}
@@ -331,6 +343,7 @@ public SpecialElectionPeriodPage select_option_and_enter_data(String selectoptio
 	String[] options = selectoptions.split("/");
 	String[] optiondata = optionsData.split("/");
 	int i=0;
+	boolean Option_Selected_Flag = true;
 	for(String currentOption : options){
 		System.out.println("Option to select : "+currentOption);
 /*		if(currentOption.contains("None apply")){
@@ -349,7 +362,7 @@ public SpecialElectionPeriodPage select_option_and_enter_data(String selectoptio
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			System.out.println("Not able to select option");
-			return null;
+			Option_Selected_Flag = false;
 		}
 		String currentOptionData = optiondata[i];
 		System.out.println("Entering data for option : "+currentOptionData);
@@ -373,6 +386,7 @@ public SpecialElectionPeriodPage select_option_and_enter_data(String selectoptio
 	}
 	
 	if(NextBtn.isEnabled()){
+		System.out.println("SEP options selection Status :  "+Option_Selected_Flag);
 		System.out.println("SEP options selected :  Next button is enabled");
 		return new SpecialElectionPeriodPage(driver);
 	}

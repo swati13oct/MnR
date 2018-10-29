@@ -32,10 +32,10 @@ public class PrelimineryQuestionsPage extends UhcDriver{
 	@FindBy(id = "ole-form-back-button")
 	private WebElement BackBtn;
 	
-	@FindBy(xpath = "//*[@class = 'enrollmentAllowed-error-msg']")
+	@FindBy(xpath = "//*[@class = 'enrollmentAllowed-error-msg req']")
 	private WebElement RequiredField_ErrorMessage;
 
-	@FindBy(xpath = "//*[@class = 'subques-err-msg']")
+	@FindBy(xpath = "//*[@class = 'subques-err-msg req']")
 	private WebElement MedicaidRequired_ErrorMessage;
 
 	@FindBy(xpath = "//*[@id='ole-form-cancel-button' or @id = 'cancel-enrollment']")
