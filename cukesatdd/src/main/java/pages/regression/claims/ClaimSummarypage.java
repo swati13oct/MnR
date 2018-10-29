@@ -1336,8 +1336,8 @@ public void NavigateToClaimsPage(){
 				CommonUtility.waitForPageLoad(driver, ClaimsSummaryPage,60);
 				String winHandleBefore = driver.getWindowHandle();
 				validateclaimsdownloadbutton.click();
-				validateclaimsprintbutton.click();
-				switchToNewTab();
+				//validateclaimsprintbutton.click();
+				//switchToNewTab();
 				System.out.println("New window = "+driver.getTitle());
 				driver.switchTo().window(winHandleBefore);
 				System.out.println("Main window = "+driver.getTitle());				

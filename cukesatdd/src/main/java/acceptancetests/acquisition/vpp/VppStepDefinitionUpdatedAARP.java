@@ -15,7 +15,6 @@ import pages.acquisition.ulayer.ComparePlansPage;
 import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import acceptancetests.acquisition.ole.oleCommonConstants;
-import acceptancetests.vbfacquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
@@ -144,9 +143,29 @@ public class VppStepDefinitionUpdatedAARP {
 		ComparePlansPage comparePlansPage = plansummaryPage.clickOnCompareLink();
 		if(comparePlansPage != null){
 			getLoginScenario().saveBean(PageConstants.TeamC_Plan_Compare_Page, comparePlansPage);
-			comparePlansPage.backToVPPPage();
+			//comparePlansPage.backToVPPPage();
 		}else
 			Assert.fail("Error in loading the compare plans page");
+	}
+	
+	/**
+	 * @toDo:user validate the print and email link option in plan compare
+	 */
+	@When("^the user validate the print and email link option in plan compare$")
+	public void user_validate_print_and_email_link_option_in_plan_compare(){
+		
+		ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.TeamC_Plan_Compare_Page);
+		comparePlansPage.validateprintandemail();
+	}
+	
+	/**
+	 * @toDo:the user validating email and print option in plan compare
+	 */
+	@Then("^the user validating email and print option in plan compare$")
+	public void user_validating_print_and_email_option_in_plan_compare(){
+		
+		ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.TeamC_Plan_Compare_Page);
+		comparePlansPage.validatingprintandemail();
 	}
 	
 	/**
