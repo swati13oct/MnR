@@ -12,6 +12,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
@@ -314,6 +315,8 @@ public class FormsAndResourcesPage extends UhcDriver {
 	 * @FindBy(xpath="") private WebElement annualdirectoryxpath;
 	 */
 	String pDR = "Plan Documents & Resources";
+	WebDriverWait wait=null;
+	String iPerceptionframeName="iPerceptionBody";
 
 	public FormsAndResourcesPage(WebDriver driver) throws InterruptedException {
 		super(driver);
@@ -321,19 +324,9 @@ public class FormsAndResourcesPage extends UhcDriver {
 		CommonUtility.checkPageIsReady(driver);
 
 		CommonUtility.checkPageIsReady(driver);
-		Thread.sleep(5000);
-		try {
-			waitforElementNew(iPerceptionBody);
-			driver.switchTo().frame("IPerceptionsEmbed");
-			Thread.sleep(5000);
-			iPerceptionCloseButton.click();
-			System.out.println("iPerception Pop Up is Present");
-			driver.switchTo().defaultContent();
-			Thread.sleep(5000);
-		} catch (Exception e) {
-			System.out.println("issue with perception prpup Present");
-		}
-
+		//Thread.sleep(5000);
+		iPerceptionHandle("IPerceptionsEmbed");
+		
 		/*
 		 * try{ FeedbackModal.click(); System.out.println("FeedBack Modal Present"); if
 		 * (validate(FeedbackModal)){
@@ -342,6 +335,23 @@ public class FormsAndResourcesPage extends UhcDriver {
 		 * System.out.println("FeedBack Modal NOT Present"); }
 		 */
 		openAndValidate();
+	}
+
+	public void iPerceptionHandle(String frameName) {
+		wait = new WebDriverWait(driver, 15);
+		
+		try {
+			wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(frameName));
+			/*driver.switchTo().frame("iPerceptionBody");
+			Thread.sleep(5000);*/
+			System.out.println("iPerception Pop Up is Present");
+			iPerceptionCloseButton.click();
+
+			driver.switchTo().defaultContent();
+
+		} catch (Exception e) {
+			System.out.println("iPerception popup didn't appear");
+		}
 	}
 
 	@Override
@@ -489,18 +499,8 @@ public class FormsAndResourcesPage extends UhcDriver {
 	 * @toDo : to click order plan material link
 	 */
 	public void validateOrderPlanMaterial() throws InterruptedException {
-		try {
-			Thread.sleep(15000);
-			driver.switchTo().frame("iPerceptionBody");
-			Thread.sleep(5000);
-			System.out.println("iPerception Pop Up is Present");
-			iPerceptionCloseButton.click();
-
-			driver.switchTo().defaultContent();
-
-		} catch (Exception e) {
-			System.out.println("failed and exception in frame , popup has not come yet");
-		}
+		iPerceptionHandle(iPerceptionframeName);
+		
 		if ((OrderPlanMaterialLink).isDisplayed()) {
 			OrderPlanMaterialLink.click();
 		}
@@ -758,7 +758,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	}
 
 	public void waitforFNRpage() {
-		WebDriverWait wait = new WebDriverWait(this.driver, 40);
+		wait = new WebDriverWait(this.driver, 40);
 		wait.until(new ExpectedCondition<Boolean>() {
 			public Boolean apply(WebDriver driver) {
 				if (driver.getTitle().contains(pDR))
