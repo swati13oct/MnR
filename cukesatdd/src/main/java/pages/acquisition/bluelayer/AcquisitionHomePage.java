@@ -142,6 +142,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
         @FindBy(xpath = ".//*[@id='change-location']")
         private WebElement changeLocationLink;
         
+        @FindBy(xpath =".//*[@id='collapse2heading_article_mededaccordion0']")
+    	private WebElement requestAgentApptDropdown;
+        
         private PageData homePageDisclaimer;
         public JSONObject homePageDisclaimerJson;
         private PageData homePageDisclaimerHide;
@@ -910,7 +913,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
                 } catch (Exception e) {
                         System.out.println("zipCodeField not found");
                 }
-                if (currentUrl().contains(
+                CommonUtility.waitForPageLoad(driver, requestAgentApptDropdown, 30);
+        		if (validateNew(requestAgentApptDropdown) && currentUrl().contains(
                                 "medicare-advantage-plans/request-information.html")) {
                         return new RequestHelpAndInformationPage(driver);
                 }
@@ -1002,12 +1006,20 @@ public class AcquisitionHomePage extends GlobalWebElements {
                 actions.moveToElement(moreHelpInfoLink);
                 actions.click().build().perform();
                 try {
-					Thread.sleep(4000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-                if (currentUrl().contains("request-information.html")) {
+        			if (zipCodeField.isDisplayed()) {
+        				CommonUtility.waitForElementToDisappear(driver, zipCodeField,
+        						20);
+        			}
+        		} catch (NoSuchElementException e) {
+        			System.out.println("zipCodeField not found");
+        		} catch (TimeoutException ex) {
+        			System.out.println("zipCodeField not found");
+        		} catch (Exception e) {
+        			System.out.println("zipCodeField not found");
+        		}
+                CommonUtility.waitForPageLoad(driver, requestAgentApptDropdown, 30);
+        		if (validateNew(requestAgentApptDropdown) && currentUrl().contains(
+        				"medicare-advantage-plans/request-information.html")) {
                         return new PDPRequestHelpAndInformationPage(driver);
                 }
 

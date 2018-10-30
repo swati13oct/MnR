@@ -20,7 +20,7 @@ import pages.memberrdesignVBF.HealthAndWellness;
 public class TestHarness extends UhcDriver {
 
 	@FindBy(xpath = "//table[@class='componentTable']/tbody/tr/td/a[contains(.,'Payment')]")
-	private WebElement PaymentPageLik;
+	private WebElement PaymentPageLink;
 
 	@FindBy(xpath = "//table[@class='componentTable']/tbody/tr/td/a[contains(.,'Claim')]")
 	private WebElement claimsPageLink;
@@ -148,6 +148,9 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath = "//h1[@id='pageHeader']")
 	private WebElement formsPageHeading;
 	
+	@FindBy(xpath = ".//*[@id='zipcode-button']")
+	private WebElement zipcode;
+	
 	String category = null;
 
 	public TestHarness(WebDriver driver) {
@@ -160,7 +163,7 @@ public class TestHarness extends UhcDriver {
 	public void openAndValidate() {
 		category = CommonStepDefinition.getMemberAttributeMap().get("Member Type");
 		RallyDashboardPage.checkModelPopup(driver);
-		validateNew(heading);
+		CommonUtility.waitForPageLoad(driver, panelHome, 30);
 		validateNew(panelHome);
 		validateNew(panelClaims);
 		if (category.contains(CommonConstants.CATEGORY_TERMIATED)) {
@@ -182,10 +185,11 @@ public class TestHarness extends UhcDriver {
 	 */
 	public PaymentsOverview navigateToPaymentOverview() throws InterruptedException {
 		System.out.println("Inside navigateToPaymentOverview functions");
-		validateNew(PaymentPageLik);
-		PaymentPageLik.click();
+		CommonUtility.waitForPageLoad(driver, PaymentPageLink, 30);
+		if(validateNew(PaymentPageLink))
+			PaymentPageLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoadNew(driver, heading, CommonConstants.TIMEOUT_60);
+		CommonUtility.waitForPageLoad(driver, heading, 60);
 		if (driver.getTitle().contains("Payment")) {
 			return new PaymentsOverview(driver);
 		}
@@ -226,7 +230,7 @@ public class TestHarness extends UhcDriver {
 		RallyDashboardPage.checkModelPopup(driver);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (!(("GroupRetireeMapd").equalsIgnoreCase(Category))) {
-			validateNew(PaymentPageLik);
+			validateNew(PaymentPageLink);
 		}
 		if (("ComboMAPDANDSHIP").equalsIgnoreCase(Category)) {
 			validateNew(tabsForComboMember.get(0));
@@ -250,7 +254,7 @@ public class TestHarness extends UhcDriver {
 		jsClickNew(benefitsPageLink);
 
 		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoadNew(driver, heading, CommonConstants.TIMEOUT_60);
+		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_60);
 		System.out.println(driver.getTitle());
 
 		if (driver.getTitle().contains("Benefits")) {
@@ -283,16 +287,11 @@ public class TestHarness extends UhcDriver {
 
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,-500)", "");
+		CommonUtility.waitForPageLoad(driver, contactUsPageLink, 30);
 		validateNew(contactUsPageLink);
 		contactUsPageLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoadNew(driver, heading, CommonConstants.TIMEOUT_60);
-		try {
-			Thread.sleep(3000L);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_60);
 		if (driver.getTitle().trim().contains("Contact Us")) {
 			return new ContactUsPage(driver);
 		}
@@ -320,10 +319,11 @@ public class TestHarness extends UhcDriver {
 	 * @return
 	 */
 	public EOBPage navigateToEOBPage() {
+		CommonUtility.waitForPageLoad(driver, eobPageLink,30);
 		validateNew(eobPageLink);
 		eobPageLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoadNew(driver, heading, CommonConstants.TIMEOUT_60);
+		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_60);
 		if (!(driver.getTitle().contains("Explanation of Benefits"))) {
 			Assert.fail("EOB page not getting displayed");
 			return null;
@@ -390,10 +390,11 @@ public class TestHarness extends UhcDriver {
 	public PharmacySearchPage navigateToPharmacyLocator() throws InterruptedException {
 
 		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoad(driver, pharmacyPageLink, 30);
 		validateNew(pharmacyPageLink);
 		pharmacyPageLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoadNew(driver, heading, CommonConstants.TIMEOUT_60);
+		CommonUtility.waitForPageLoad(driver, zipcode, 60);
 		if (driver.getTitle().contains("Pharmacy")) {
 			return new PharmacySearchPage(driver);
 		}
@@ -406,10 +407,11 @@ public class TestHarness extends UhcDriver {
 	 */
 	public pages.memberrdesignVBF.ProfilePreferencesPage navigateDirectToProfilePage() {
 		System.out.println(driver.getTitle());
+		CommonUtility.waitForPageLoad(driver, profilePageLink, 30);
 		validateNew(profilePageLink);
 		profilePageLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoadNew(driver, heading, CommonConstants.TIMEOUT_60);
+		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_60);
 
 		if (driver.getTitle().contains("Profile")) {
 			System.out.println("Pass!");
