@@ -885,7 +885,7 @@ CommonUtility.waitForPageLoad(driver, MAmoreDetailsLink, 30);
 	public ComparePlansPage clickOnCompareLink(){
 		
 		List<WebElement> compareLinks = driver.findElements(By.xpath(".//*[@id='plan-list-1']//button[contains(text(),'Compare plans')]"));	
-		compareLinks.get(0).click();
+		compareLinks.get(1).click();
 
 
 		try {

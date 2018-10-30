@@ -1,4 +1,6 @@
 package pages.acquisition.ulayer;
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,6 +22,12 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath=".//*[@id='emailComparison']")
 	private WebElement validateemailbutton;
 	
+	@FindBy(xpath=".//*[@id='emailcompareDescription']")
+	private WebElement leavingcomapreplansitepopup;
+	
+	@FindBy(xpath=".//*[@id='form-valid']/div[2]/button[1]")
+	private WebElement cancelButtonEmailPlanComparePopUp;
+		
 	public ComparePlansPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -99,10 +107,14 @@ public class ComparePlansPage extends UhcDriver {
 	public void validatingprintandemail() {
 		// TODO Auto-generated method stub
 		validateemailbutton.click();
-		String MainWindow = driver.getWindowHandle();
-		System.out.println("New window = "+driver.getTitle());
-		driver.switchTo().window(MainWindow);
-		System.out.println("Main window = "+driver.getTitle());
+		driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
+		validate(leavingcomapreplansitepopup);
+		System.out.println("!!!Leaving site popup is displayed ===>"+leavingcomapreplansitepopup.isDisplayed());
+		validate(cancelButtonEmailPlanComparePopUp);
+		System.out.println("!!!Cancel Button is displayed ===>"+cancelButtonEmailPlanComparePopUp.isDisplayed());
+		cancelButtonEmailPlanComparePopUp.click();
+		System.out.println("Success click of cancel email");
+		
 	}
 
 
