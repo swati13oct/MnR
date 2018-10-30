@@ -149,7 +149,7 @@ public class DashboardFormsnResourcesStepDefinition {
 		} catch (Exception ex) {
 			System.out.println(ex.getStackTrace());
 		}
-				Assert.assertFalse("PEEHIP Logo is not displayed which is the expected case",
+				Assert.assertFalse("PEEHIP Logo is displayed which is the Un-expected case",
 				flag);
 
 	}
