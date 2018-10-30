@@ -14,6 +14,7 @@ import pages.acquisition.bluelayer.PharmacyResultPage;
 import pages.acquisition.bluelayer.PharmacySearchPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
+import acceptancetests.vbfacquisition.pharmacylocator.PharmacySearchCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
@@ -30,6 +31,7 @@ public class PharmacyLocatorStepDefinitionUHC {
 
 	@Autowired
 	MRScenario loginScenario;
+	String langName;
 
 	public MRScenario getLoginScenario() {
 		return loginScenario;
@@ -42,28 +44,26 @@ public class PharmacyLocatorStepDefinitionUHC {
 	public void registered_member_located_pharmacy_UMS() {
 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-
 		AcquisitionHomePage acqusitionHomePage = new AcquisitionHomePage(wd);
-
-		if (acqusitionHomePage != null) {
-			getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
-					acqusitionHomePage);
-			Assert.assertTrue(true);
-		}
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acqusitionHomePage);
 	}
 
 	/**
 	 * @toDo:user hovers to Our Plans and select Request More Help and Information for following plan type
 	 */
-	@When("^the user hovers to Our Plans and select Request More Help and Information for following plan type$")
-	public void user_hovers_to_our_plans_and_select_request_more_help_and_information(DataTable planAttributes){
+	@When("^the user hovers to Our Plans and select pharmacy search for following plan type in uhc site$")
+	public void user_hovers_to_our_plans_and_select_pharmacy_search_uhc() {
 
-		String planType = planAttributes.getGherkinRows().get(0).getCells()
-				.get(0);
-		getLoginScenario().saveBean(PharmacySearchCommonConstants.PLAN_TYPE, planType);
 		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		acqusitionHomePage.navigateToRequestMoreHelpAndInformation(planType);
+		PharmacySearchPage pharmacySearchPage = acqusitionHomePage.navigateToPharmacyLocator();
+		if (pharmacySearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE, pharmacySearchPage);
+			Assert.assertTrue(true);
+
+		} else {
+			Assert.fail("Failed to load Pharmacy search page");
+		}
 	}
 
 	/**
@@ -112,17 +112,7 @@ public class PharmacyLocatorStepDefinitionUHC {
 
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		pharmacySearchPage = pharmacySearchPage.enterZipDistanceDetails(
-				zipcode, distance, county);
-
-		if (pharmacySearchPage != null) {
-			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
-					pharmacySearchPage);
-			Assert.assertTrue(true);
-			pharmacySearchPage.validateChoosePlanSectionAfterzipcodeSearch();
-		} else {
-			Assert.fail("Failed to load Pharmacy search page");
-		}
+		pharmacySearchPage.enterZipDistanceDetails(zipcode, distance, county);
 	}
 
 	/**
@@ -131,22 +121,23 @@ public class PharmacyLocatorStepDefinitionUHC {
 	@And("^the user chooses a plan from dropdown in UMS Site$")
 	public void user_chooses_plan_dropdown_UMS(DataTable planAttributes) {
 
-		String planName = planAttributes.getGherkinRows().get(0).getCells()
-				.get(0);
+		List<DataTableRow> zipAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> zipAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < zipAttributesRow.size(); i++) {
+
+			zipAttributesMap.put(zipAttributesRow.get(i).getCells().get(0), zipAttributesRow.get(i).getCells().get(1));
+		}
+		String planName = zipAttributesMap.get("planname");
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.PLAN_NAME, planName);
+		String planYear = zipAttributesMap.get("planyear");
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PLAN_NAME, planName);
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		pharmacySearchPage = pharmacySearchPage.selectsPlanName(planName);
-
-		if (pharmacySearchPage != null) {
-			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
-					pharmacySearchPage);
-			Assert.assertTrue(true);
-			pharmacySearchPage.validatePharmaciesSectionAfterplanSelection();
-		} else {
-			Assert.fail("Failed to load Pharmacy search page");
+		Boolean isplanyear = pharmacySearchPage.isPlanYear();
+		if (isplanyear) {
+			pharmacySearchPage.selectsPlanYear(planYear);
 		}
-
+		pharmacySearchPage.selectsPlanName(planName);
 	}
 
 	/**
@@ -155,19 +146,16 @@ public class PharmacyLocatorStepDefinitionUHC {
 	@Then("^the user chooses the Pharmacy Type blayer$")
 	public void the_user_chooses_the_pharmacy_type_blayer(DataTable pharmacyTypeAttribute){
 		
-		String PharmacyType = pharmacyTypeAttribute.getGherkinRows().get(0).getCells()
+		String pharmacyType = pharmacyTypeAttribute.getGherkinRows().get(0).getCells()
 				.get(0);
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		pharmacySearchPage = pharmacySearchPage.selectPharmacyandServices(PharmacyType);
-		
-		if (pharmacySearchPage != null) {
-			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
-					pharmacySearchPage);			 
-		} else {
-			Assert.fail("Failed to load Pharmacy search page");
+		boolean isPharmacySelected;
+		isPharmacySelected = pharmacySearchPage.selectPharmacyandServices(pharmacyType);
+
+		if (!isPharmacySelected) {
+			Assert.fail("Error in selecting pharmacy type!!!");
 		}
-		
 	}
 	
 	/**
@@ -180,16 +168,11 @@ public class PharmacyLocatorStepDefinitionUHC {
 				.get(0);
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		pharmacySearchPage = pharmacySearchPage.selectPharmacyandServices(serviceType);
-		
-		if (pharmacySearchPage != null) {
-			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
-					pharmacySearchPage);			 
-		} else {
-			Assert.fail("Failed to load Pharmacy search page");
+		boolean isServicesSelected;
+		isServicesSelected = pharmacySearchPage.selectPharmacyandServices(serviceType);
+		if (!isServicesSelected) {
+			Assert.fail("Error in selecting service type!!!");
 		}
-		
-		
 	}
 	
 	/**
@@ -324,26 +307,18 @@ public class PharmacyLocatorStepDefinitionUHC {
 	@And("^the user selects a language from dropdown in UMS Site$")
 	public void user_selects_language_ums(DataTable languageAttributes) {
 
-		String langName = languageAttributes.getGherkinRows().get(0).getCells()
-				.get(0);
-		if(langName.equals("Spanish")){
-			langName = "espa";	
-		}else if(langName.equals("Chinese")){
-			langName = "中文";	
-		}else{
-			langName = "English";	
+
+		langName = languageAttributes.getGherkinRows().get(0).getCells().get(0);
+		if (("Spanish").equalsIgnoreCase(langName)) {
+			langName = "es";
+		} else if (("Chinese").equalsIgnoreCase(langName)) {
+			langName = "zh";
+		} else {
+			langName = "en";
 		}
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		pharmacySearchPage = pharmacySearchPage.selectLanguage(langName);
-
-		if (pharmacySearchPage != null) {
-			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
-					pharmacySearchPage);
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail("Failed to load Pharmacy search page");
-		}
+		pharmacySearchPage.selectLanguage(langName);
 	}
 	
 	/**
@@ -380,5 +355,17 @@ public class PharmacyLocatorStepDefinitionUHC {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		pharmacySearchPage.validateChoosePlanSectionAfterzipcodeSearch();
+	}
+	
+	/**
+	 * @toDo:user validates the available pharmacies page
+	 */
+	@Then("^the user validates language changes in UMS site$")
+	public void user_validates_language_changes_uhc() {
+
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		Assert.assertTrue("Changes to language is not successful",
+				pharmacySearchPage.validateLanguageChanges(langName));
 	}
 }
