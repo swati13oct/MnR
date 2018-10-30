@@ -27,6 +27,13 @@ public class ComparePlansPage extends UhcDriver {
 	
 	@FindBy(xpath=".//*[@id='form-valid']/div[2]/button[1]")
 	private WebElement cancelButtonEmailPlanComparePopUp;
+	
+	@FindBy(xpath=".//*[@id='form-valid']/div[2]/button[2]")
+	private WebElement sendButtonEmailPlanComparePopUp;
+	
+	@FindBy(xpath=".//*[id='emailSuccessMsgPopUp']")
+	private WebElement validatesuccesspopup;
+	
 		
 	public ComparePlansPage(WebDriver driver) {
 		super(driver);
@@ -114,6 +121,17 @@ public class ComparePlansPage extends UhcDriver {
 		System.out.println("!!!Cancel Button is displayed ===>"+cancelButtonEmailPlanComparePopUp.isDisplayed());
 		cancelButtonEmailPlanComparePopUp.click();
 		System.out.println("Success click of cancel email");
+		validateemailbutton.click();
+		validate(leavingcomapreplansitepopup);
+		System.out.println("!!!Leaving site popup is displayed ===>"+leavingcomapreplansitepopup.isDisplayed());
+		validate(sendButtonEmailPlanComparePopUp);
+		System.out.println("!!!Cancel Button is displayed ===>"+sendButtonEmailPlanComparePopUp.isDisplayed());
+		driver.findElement(By.xpath(".//*[@id='email']")).sendKeys("rani_madadi@optum.com");
+		System.out.println("!!!Entered valid Email ");
+		sendButtonEmailPlanComparePopUp.click();
+		System.out.println("Email has success fully send to user");
+		validateNew(validatesuccesspopup);
+		System.out.println("Validated Thank you Message");
 		
 	}
 
