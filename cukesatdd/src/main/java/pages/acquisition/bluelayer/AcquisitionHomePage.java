@@ -216,14 +216,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
         }
 
         @Override
-        public void openAndValidate() {
-                if ( MRScenario.environment.equals("offline")) {
-                        start(UMS_ACQISITION_OFFLINE_PAGE_URL);
-                }else{
-                        start(UMS_ACQISITION_PAGE_URL);
-                }
-
-        }
+	public void openAndValidate() {
+		if (MRScenario.environment.equals("offline")) {
+			start(UMS_ACQISITION_OFFLINE_PAGE_URL);
+		} else {
+			start(UMS_ACQISITION_PAGE_URL);
+		}
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
+	}
 
         public VPPPlanSummaryPage searchPlans(String zipcode, String countyName) {
         	CommonUtility.waitForPageLoad(driver, zipCodeField, 20);
@@ -578,25 +579,25 @@ public class AcquisitionHomePage extends GlobalWebElements {
                 return null;
         }
 
-        public void navigateToRequestMoreHelpAndInformation(String planType){
-        	 Actions actions = new Actions(driver);
-        	 PageFactory.initElements(driver, this);
-             actions.moveToElement(ourPlansHoverLink);
-             actions.moveToElement(moreHelpInfoLink);
-            actions.click().build().perform();
-            
-                for(int i=0;i<10;i++){
-                        try {
-                                Thread.sleep(2000);
-                        } catch (InterruptedException e) {
-                                // TODO Auto-generated catch block
-                                e.printStackTrace();
-                        }
-                        if(driver.getCurrentUrl().contains("request-information"))
-                                break;
-                }
+	public void navigateToRequestMoreHelpAndInformation(String planType) {
+		Actions actions = new Actions(driver);
+		PageFactory.initElements(driver, this);
+		actions.moveToElement(ourPlansHoverLink);
+		actions.moveToElement(moreHelpInfoLink);
+		actions.click().build().perform();
 
-        }
+		for (int i = 0; i < 10; i++) {
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (driver.getCurrentUrl().contains("request-information"))
+				break;
+		}
+
+	}
 
         public PharmacySearchPage navigateToPharmacyLocator() {
         	
@@ -605,35 +606,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
     		PageFactory.initElements(driver, this);
     		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
     		pharmacysearchbtn.click();
-    		
-    		try {
-    			Thread.sleep(6000);
-    		} catch (InterruptedException e) {
-    			// TODO Auto-generated catch block
-    			e.printStackTrace();
-    		}
-    		/*driver.manage().window().maximize();
-    		start("https://www.team-ci1-uhcmedicaresolutions.ose-elr-core.optum.com/health-plans/aarp-pharmacy.html#/Pharmacy-Search-English");
-            */   /* if(planType.contains("MA"))
-                        pharmacyNearLink_MA.click();
-                else if(planType.contains("PDP")){
-                        pharmacyNearLink.click();                
-                }*/
-
-    		/*findPharmacyNearYou.click();
-    		
-                for(int i=0;i<10;i++){
-                        try {
-                                Thread.sleep(6000);
-                        } catch (InterruptedException e) {
-                                // TODO Auto-generated catch block
-                                e.printStackTrace();
-                        }
-                        if(driver.getCurrentUrl().contains("-pharmacy."))
-                                break;
-                }*/
-    		
-    		
+    		CommonUtility.checkPageIsReadyNew(driver);
                 if (driver.getTitle().equalsIgnoreCase(
                                 PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE)) {
                         return new PharmacySearchPage(driver);
