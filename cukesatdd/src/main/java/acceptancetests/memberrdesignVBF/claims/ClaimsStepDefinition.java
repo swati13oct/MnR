@@ -27,7 +27,7 @@ public class ClaimsStepDefinition {
 	// String>();
 	public static String claimType;
 	
-	public boolean isClaimSummaryTable=false;
+	
 
 	public MRScenario getLoginScenario() {
 		return loginScenario;
@@ -87,8 +87,7 @@ public class ClaimsStepDefinition {
 	public void validate_claims_table_redesigned_site() {
 		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario()
 				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
-		boolean isClaimsTableFound =newClaimsSummaryPage.validateClaimsTable();
-		getLoginScenario().saveBean(ClaimsCommonConstants.CLAIMS_TABLE_FIND, isClaimsTableFound);
+		newClaimsSummaryPage.validateClaimsTable();
 	}
 
 	/***
@@ -128,7 +127,7 @@ public class ClaimsStepDefinition {
 	 */
 	@And("^I navigate to the Claim Details page in AARP site$")
 	public void i_navigate_to_member_redesign_claim_details_page(DataTable timeAttributes) throws InterruptedException {
-		if(isClaimSummaryTable){
+		
 			String ClaimSystem = CommonStepDefinition.getMemberAttributeMap().get("ClaimSystem");
 	
 			if (ClaimSystem.equalsIgnoreCase("COSMOSCLAIMS") || ClaimSystem.equalsIgnoreCase("NICECLAIMS")
@@ -152,9 +151,7 @@ public class ClaimsStepDefinition {
 			} else {
 				Assert.fail("Please check Claim syatems!!!");
 			}
-		}else{
-			Assert.assertTrue("No claims table for this range!!!",true);
-		}
+		
 	}
 
 	/***
@@ -162,7 +159,7 @@ public class ClaimsStepDefinition {
 	 */
 	@Then("^I validate the Claims Table in claims details page in AARP site$")
 	public void validate_claimsTable_claimsDetails_AARP() {
-		if(isClaimSummaryTable){
+		
 			if (claimType.equalsIgnoreCase("Medical")) {
 				ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario()
 						.getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
@@ -174,9 +171,7 @@ public class ClaimsStepDefinition {
 						.getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
 				claimDetailspage.validateShipClaimsTableInDetailsPage();
 			}
-		}else{
-			Assert.assertTrue("No claims table for this range", true);
-		}
+	
 	}
 
 	/***
@@ -185,7 +180,7 @@ public class ClaimsStepDefinition {
 	@And("^I validate the Claims Total in claims details page in AARP site$")
 	public void validate_claims_total_AARP() {
 		
-		if(isClaimSummaryTable){
+	
 			if (claimType.equalsIgnoreCase("Medical")) {
 				ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario()
 						.getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
@@ -197,8 +192,6 @@ public class ClaimsStepDefinition {
 			} else if (claimType.equalsIgnoreCase("Drug")) {
 				System.out.println("Skipping Claim Details validation!!!");
 			}
-		}else{
-			Assert.assertTrue("No claims table for this range", true);
-		}
+		
 	}
 }
