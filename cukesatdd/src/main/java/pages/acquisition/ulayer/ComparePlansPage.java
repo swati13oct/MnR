@@ -31,7 +31,7 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath=".//*[@id='form-valid']/div[2]/button[2]")
 	private WebElement sendButtonEmailPlanComparePopUp;
 	
-	@FindBy(xpath=".//*[id='emailSuccessMsgPopUp']")
+	@FindBy(xpath=".//*[@id='emailSuccessMsgPopUp']")
 	private WebElement validatesuccesspopup;
 	
 		
