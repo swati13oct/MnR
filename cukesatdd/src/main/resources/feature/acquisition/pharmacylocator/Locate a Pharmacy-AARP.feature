@@ -106,32 +106,3 @@ And the user validates the error message for no pharmacies found for below pharm
 Examples:
 	| zipcode     | distance  | county       |  planName 			                 	  | pharmacytype				|plantype|
 #	| 90210       | 2        |       | AARP MedicareRx Preferred (PDP)                    |   Mail Order Pharmacy				|PDP|
-
-@pharmacylocatorulayerVBF
-Scenario Outline:To verify available pharmacies in AARP site for zipcode <zipcode> and county <county>
-Given the user is on the AARP Medicare Site landing page
-When the user hovers to Our Plans and select pharmacy search for following plan type in AARP Site
-And the user enters following details for pharmacy search in AARP Site
-	| Zip Code	| <zipcode>	|
-	| Distance	| <distance>	|
-	| County Name	| <county>	|
-And the user chooses a plan from dropdown in AARP Site
-	| planname | <planName> |
-		| planyear | <planYear> |
-Then the user validates the available pharmacies page in AARP site
-Then the user chooses the Pharmacy Type
-| <pharmacytype>|
-Then the user chooses the Pharmacy Type
-|<servicetype>|
-Then the user validates the available pharmacies page in AARP site
-When the user selects a language from dropdown in AARP Site
-	| <languageName> |
-And the user validates language changes in AARP site
-And the user chooses a plan from dropdown in AARP Site
-	| planname | <planName> |
-		| planyear | <planYear> |
-Then the user validates the available pharmacies page in AARP site
-Examples:
-	| zipcode | distance  | county     |                     planName 			                | planYear 	|         pharmacytype     | servicetype   |languageName|
-	| 80002  | 25 miles  | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | 2019    	|Standard Network Pharmacy | Open 24 hours |Spanish     |
-	| 90210  | 25 miles  | None     	 | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | 2019    	|Standard Network Pharmacy | Open 24 hours |Spanish     |

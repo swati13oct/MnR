@@ -130,7 +130,17 @@ public class PharmacyLocatorStepDefinitionUHC {
 
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		pharmacySearchPage.enterZipDistanceDetails(zipcode, distance, county);
+		pharmacySearchPage = pharmacySearchPage.enterZipDistanceDetails(
+				zipcode, distance, county);
+
+		if (pharmacySearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
+					pharmacySearchPage);
+			Assert.assertTrue(true);
+			pharmacySearchPage.validateChoosePlanSectionAfterzipcodeSearch();
+		} else {
+			Assert.fail("Failed to load Pharmacy search page");
+		}
 	}
 
 	/**
@@ -142,19 +152,29 @@ public class PharmacyLocatorStepDefinitionUHC {
 		Map<String, String> zipAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < zipAttributesRow.size(); i++) {
 
-			zipAttributesMap.put(zipAttributesRow.get(i).getCells().get(0), zipAttributesRow.get(i).getCells().get(1));
+			zipAttributesMap.put(zipAttributesRow.get(i).getCells().get(0),
+					zipAttributesRow.get(i).getCells().get(1));
 		}
 		String planName = zipAttributesMap.get("planname");
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PLAN_NAME, planName);
 		String planYear = zipAttributesMap.get("planyear");
-		getLoginScenario().saveBean(PharmacySearchCommonConstants.PLAN_NAME, planName);
+		
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		Boolean isplanyear = pharmacySearchPage.isPlanYear();
-		if (isplanyear) {
-			pharmacySearchPage.selectsPlanYear(planYear);
+		Boolean isplanyear=pharmacySearchPage.isPlanYear();
+		if(isplanyear){
+			pharmacySearchPage = pharmacySearchPage.selectsPlanYear(planYear);
 		}
-		pharmacySearchPage.selectsPlanName(planName);
+		pharmacySearchPage = pharmacySearchPage.selectsPlanName(planName);
+
+		if (pharmacySearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
+					pharmacySearchPage);
+			Assert.assertTrue(true);
+			
+		} else {
+			Assert.fail("Failed to load Pharmacy search page");
+		}
 	}
 
 	/**
@@ -167,12 +187,15 @@ public class PharmacyLocatorStepDefinitionUHC {
 				.get(0);
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		boolean isPharmacySelected;
-		isPharmacySelected = pharmacySearchPage.selectPharmacyandServices(PharmacyType);
-
-		if (!isPharmacySelected) {
-			Assert.fail("Error in selecting pharmacy type!!!");
+		pharmacySearchPage = pharmacySearchPage.selectPharmacyandServices(PharmacyType);
+		
+		if (pharmacySearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
+					pharmacySearchPage);			 
+		} else {
+			Assert.fail("Failed to load Pharmacy search page");
 		}
+		
 	}
 	
 	/**
@@ -185,12 +208,16 @@ public class PharmacyLocatorStepDefinitionUHC {
 				.get(0);
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		boolean isPharmacySelected;
-		isPharmacySelected = pharmacySearchPage.selectPharmacyandServices(serviceType);
-
-		if (!isPharmacySelected) {
-			Assert.fail("Error in selecting service type!!!");
+		pharmacySearchPage = pharmacySearchPage.selectPharmacyandServices(serviceType);
+		
+		if (pharmacySearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
+					pharmacySearchPage);			 
+		} else {
+			Assert.fail("Failed to load Pharmacy search page");
 		}
+		
+		
 	}
 	
 	/**
@@ -336,7 +363,15 @@ public class PharmacyLocatorStepDefinitionUHC {
 		}
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		pharmacySearchPage.selectLanguage(langName);
+		pharmacySearchPage = pharmacySearchPage.selectLanguage(langName);
+
+		if (pharmacySearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
+					pharmacySearchPage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Failed to load Pharmacy search page");
+		}
 	}
 	
 	/**
