@@ -36,6 +36,7 @@ public class PharmacyLocatorStepDefinitionAARP {
 
 	@Autowired
 	MRScenario loginScenario;
+	String langName;
 
 	public MRScenario getLoginScenario() {
 		return loginScenario;
@@ -188,18 +189,9 @@ Date obj= new Date();
 
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		pharmacySearchPage = pharmacySearchPage.enterZipDistanceDetails(zipcode, distance, county);
-
-		if (pharmacySearchPage != null) {
-			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
-					pharmacySearchPage);
-			Assert.assertTrue(true);
-			
+		pharmacySearchPage.enterZipDistanceDetails(zipcode, distance, county);
 			pharmacySearchPage.validateChoosePlanSectionAfterzipcodeSearch();
-		} else {
-			Assert.fail("Failed to load Pharmacy search page");
-		}
-	}
+		} 
 	
 	/**
 	 * @toDo:user selects a language from dropdown 
@@ -207,29 +199,19 @@ Date obj= new Date();
 	@And("^the user selects a language from dropdown in AARP Site$")
 	public void user_selects_language_aarp(DataTable languageAttributes) {
 
-		String langName = languageAttributes.getGherkinRows().get(0).getCells()
-				.get(0);
-		if(langName.equals("Spanish")){
-			langName = "espa";	
-		}else if(langName.equals("Chinese")){
-			langName = "中文";	
-		}else{
-			langName = "English";	
+		langName = languageAttributes.getGherkinRows().get(0).getCells().get(0);
+		if (("Spanish").equalsIgnoreCase(langName)) {
+			langName = "es";
+		} else if (("Chinese").equalsIgnoreCase(langName)) {
+			langName = "zh";
+		} else {
+			langName = "en";
 		}
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		pharmacySearchPage = pharmacySearchPage.selectLanguage(langName);
-
-		if (pharmacySearchPage != null) {
-			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
-					pharmacySearchPage);
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail("Failed to load Pharmacy search page");
-		}
-
-	
+		pharmacySearchPage.selectLanguage(langName);
 	}
+	
 	/**
 	 * @toDo:user chooses a plan from dropdown
 	 */
@@ -250,18 +232,10 @@ Date obj= new Date();
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		Boolean isplanyear=pharmacySearchPage.isPlanYear();
 		if(isplanyear){
-			pharmacySearchPage = pharmacySearchPage.selectsPlanYear(planYear);
+			pharmacySearchPage.selectsPlanYear(planYear);
 		}
-		pharmacySearchPage = pharmacySearchPage.selectsPlanName(planName);
+	pharmacySearchPage.selectsPlanName(planName);
 
-		if (pharmacySearchPage != null) {
-			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
-					pharmacySearchPage);
-			Assert.assertTrue(true);
-			
-		} else {
-			Assert.fail("Failed to load Pharmacy search page");
-		}
 	}
 	
 	
@@ -278,15 +252,15 @@ Date obj= new Date();
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		System.out.println("plan===year"+year);
-		pharmacySearchPage = pharmacySearchPage.selectsPlanYear(year);
+		pharmacySearchPage.selectsPlanYear(year);
 
-		if (pharmacySearchPage != null) {
+		/*if (pharmacySearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
 					pharmacySearchPage);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("Failed to load Pharmacy search page");
-		}
+		}*/
 
 	}
 	
@@ -295,20 +269,15 @@ Date obj= new Date();
 	 */
 	@Then("^the user chooses the Pharmacy Type$")
 	public void the_user_chooses_the_pharmacy_type(DataTable pharmacyTypeAttribute){
-		
-		String PharmacyType = pharmacyTypeAttribute.getGherkinRows().get(0).getCells()
-				.get(0);
+		String PharmacyType = pharmacyTypeAttribute.getGherkinRows().get(0).getCells().get(0);
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		pharmacySearchPage = pharmacySearchPage.selectPharmacyandServices(PharmacyType);
-		
-		if (pharmacySearchPage != null) {
-			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
-					pharmacySearchPage);			 
-		} else {
-			Assert.fail("Failed to load Pharmacy search page");
+		boolean isPharmacySelected;
+		isPharmacySelected = pharmacySearchPage.selectPharmacyandServices(PharmacyType);
+
+		if (!isPharmacySelected) {
+			Assert.fail("Error in selecting pharmacy type!!!");
 		}
-		
 	}
 	
 	/**
@@ -317,17 +286,13 @@ Date obj= new Date();
 	@Then("^the user chooses the Service Type$")
 	public void the_user_chooses_the_service_type(DataTable serviceTypeAttribute){
 		
-		String serviceType = serviceTypeAttribute.getGherkinRows().get(0).getCells()
-				.get(0);
+		String serviceType = serviceTypeAttribute.getGherkinRows().get(0).getCells().get(0);
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		pharmacySearchPage = pharmacySearchPage.selectPharmacyandServices(serviceType);
-		
-		if (pharmacySearchPage != null) {
-			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
-					pharmacySearchPage);			 
-		} else {
-			Assert.fail("Failed to load Pharmacy search page");
+		boolean isServicesSelected;
+		isServicesSelected = pharmacySearchPage.selectPharmacyandServices(serviceType);
+		if (!isServicesSelected) {
+			Assert.fail("Error in selecting service type!!!");
 		}
 	}
 	
