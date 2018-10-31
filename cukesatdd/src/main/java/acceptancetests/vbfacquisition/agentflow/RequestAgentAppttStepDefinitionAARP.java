@@ -71,10 +71,7 @@ public class RequestAgentAppttStepDefinitionAARP {
 		RequestAgentAppointmentPage requestAgentAppointmentPage = requestHelpAndInformationPage.navigateToAgentAppointmentRequest();
 		if(requestAgentAppointmentPage!=null){
 			getLoginScenario().saveBean(PageConstants.REQUEST_AGENT_APPOINTMENT_PAGE, requestAgentAppointmentPage);
-			if(requestAgentAppointmentPage.validateRequestApptPage())
-				Assert.assertTrue(true);
-			else
-				Assert.fail("Error in validating the requestAgentAppointmentPage");
+			
 		}
 		else{
 			Assert.fail("Error in loading requestAgentAppointmentPage");
