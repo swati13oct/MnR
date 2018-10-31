@@ -276,6 +276,15 @@ public class FormsAndResourcesPage extends UhcDriver {
 
 	@FindBy(id = "closeButton")
 	private WebElement iPerceptionCloseButton;
+	
+	@FindBy(xpath = "(//*[@class='img-responsive coLogo'])[1]")
+	private WebElement logoPEEHIP;
+	
+	
+
+	public WebElement getLogoPEEHIP() {
+		return logoPEEHIP;
+	}
 
 	@FindBy(xpath = "//*[@class='overview_customsegments-40_segmentContainer_planbenefitdocuments_2018']//*[@class='document-list-new margin-small spanWithImmDiv divWithImmLi']/ul/li")
 	private List<WebElement> anocxpath;
@@ -1247,6 +1256,8 @@ public class FormsAndResourcesPage extends UhcDriver {
 		boolean arraycheck = formsAndResourcesPage.verifyPdfNames(targetArray, temp);
 		Assert.assertTrue("Incorrect pdf's shown", arraycheck == true);
 	}
+
+
 
 	
 
