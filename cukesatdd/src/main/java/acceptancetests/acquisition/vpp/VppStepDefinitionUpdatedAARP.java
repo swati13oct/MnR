@@ -352,5 +352,23 @@ public class VppStepDefinitionUpdatedAARP {
 			Assert.fail("Error in Loading the Plan Compare Page");
 		
 	}
+	
+
+	@Then("^the user validate the print and email links on the plan Details Page$")
+	public void user_validate_print_and_email_links_on_the_plan_Details_Page(){
+		
+		PlanDetailsPage vppPlanDetailsPage =  ( PlanDetailsPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		vppPlanDetailsPage.validatePrintandEmailOnPlanDetails();
+	}
+	
+	/**
+	 * @toDo:the user validates the functionality of email and print buttons on the plan Details Page
+	 */
+	@Then("^the user validates the functionality of email and print buttons on the plan Details Page$")
+	public void user_validates_the_functionality_of_emailandprintbuttons_on_the_plan_Details_Page(){
+		
+		PlanDetailsPage vppPlanDetailsPage =  ( PlanDetailsPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		vppPlanDetailsPage.validatingFunctionalityOfPrintandEmailOnPlanDetails();
+	}
 
 }

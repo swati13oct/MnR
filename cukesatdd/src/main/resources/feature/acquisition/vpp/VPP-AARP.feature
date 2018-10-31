@@ -95,3 +95,22 @@ Examples:
 |90210 | 
 
 
+@emailandprintplanDetails @predators @decRelease2018
+Scenario Outline: Verify email  plan details in AARP site
+Given the user is on AARP medicare acquisition site landing page
+When the user performs plan search using following information in the AARP site
+	|Zip Code| <zipcode> |
+And the user views the plans of the below plan type in AARP site
+	| Plan Type | <plantype> |
+And the user validates the available plans for selected plan types in the AARP site
+Then the user view plan details of the above selected plan in AARP site and validates
+	| Plan Name | <planName> |
+Then the user validate the print and email links on the plan Details Page
+Then the user validates the functionality of email and print buttons on the plan Details Page
+	
+Examples:
+| zipcode |plantype | planName                                         |
+| 90210   |MA	      | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
+
+
+
