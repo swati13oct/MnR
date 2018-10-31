@@ -178,10 +178,10 @@ public class SpecialElectionPeriodPage extends UhcDriver{
 			flag = (flag==false)?false:true;
 			System.out.println("Plan ZIP CODE is Validated : "+flag);
 		}else flag =false;
-		if(Premium.contains(Expected_PlanPremium)){
+/*		if(Premium.contains(Expected_PlanPremium)){
 			flag = (flag==false)?false:true;
 			System.out.println("Plan Premium is Validated : "+flag);
-		}else flag =false;
+		}else flag =false;*/
 		System.out.println("Plan Details are Validated : "+flag);
 		return flag;
 	}
