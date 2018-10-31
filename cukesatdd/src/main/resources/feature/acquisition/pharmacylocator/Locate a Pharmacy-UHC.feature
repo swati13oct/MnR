@@ -107,3 +107,34 @@ And the user validates the error message for no pharmacies found for below pharm
 Examples:
 	| zipcode     | distance  | county       |  planName 			                 	  | pharmacytype				|plantype|
 	#| 90210       | 2        |      | AARP MedicareRx Preferred (PDP)                    |   Mail Order Pharmacy				|PDP|
+	
+	
+@pharmacylocatorBlayerVBF
+Scenario Outline:To verify available pharmacies in UMS site for zipcode <zipcode> and county <county>
+Given the user is on the UMS Medicare Site landing page
+When the user hovers to Our Plans and select pharmacy search for following plan type in uhc site
+And the user enters following details for pharmacy search in UMS Site
+	| Zip Code	| <zipcode>	|
+	| Distance	| <distance>	|
+	| County Name	| <county>	|
+And the user chooses a plan from dropdown in UMS Site
+	| planname | <planName> |
+		| planyear | <planYear> |
+Then the user validates the available pharmacies page in UMS site
+Then the user chooses the Pharmacy Type blayer
+| <pharmacytype>|
+Then the user chooses the Service Type blayer
+|<servicetype>|
+Then the user validates the available pharmacies page in UMS site
+When the user selects a language from dropdown in UMS Site
+	| <languageName> |
+And the user validates language changes in UMS site
+And the user chooses a plan from dropdown in UMS Site
+	| planname | <planName> |
+		| planyear | <planYear> |
+Then the user validates the available pharmacies page in UMS site
+Examples:
+	| zipcode | distance  | county     |                     planName 			                | planYear 	|         pharmacytype     | servicetype   |languageName|
+	| 80002  | 25 miles  | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | 2019    	|Standard Network Pharmacy | Open 24 hours |Spanish     |
+	| 90210  | 25 miles  | None     	 | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | 2019    	|Standard Network Pharmacy | Open 24 hours |Spanish     |
+	
