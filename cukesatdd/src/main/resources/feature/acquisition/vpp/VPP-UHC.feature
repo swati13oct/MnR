@@ -1,6 +1,6 @@
 @fixedTestCaseTest
 @vppBlayer
-Feature:1.09-VBF-Acq-To test plan summary in vpp flow UMS site
+Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
 @planDetailsUMS
 @vppBlayerSmoke
 Scenario Outline: Verify plan details in UMS site 
@@ -83,3 +83,17 @@ Then the user clicks on both top and bottom back to plans link and validates its
 Examples:
 |zipcode| planName | plantype |
 |33012 | AARP MedicareComplete Choice Plan 2 (Regional PPO) | MAPD |
+
+@emailandprintplancompareuhc @predatorsdecrelease2018
+Scenario Outline: Verify email plan compare plan details in UHC site
+Given the user is on the uhcmedicaresolutions site landing page
+When I access the vpp page
+	|Zip Code| <zipcode> |
+And I select all 3 plans to compare in MA and click on compare plan link in UHS site
+When the user validate the print and email link option in plan compare in UHS site
+Then the user validating email and print option in plan compare in UHS site
+#Then I click back to all plans button and verify that all 3 plans are still selected
+
+Examples:
+|zipcode|
+|90210 | 
