@@ -128,7 +128,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[1]//*[@class='trigger-closed']")
 	private WebElement viewPlans;
 	
-	@FindBy(xpath = "div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[3]//*[@class='trigger-closed']")
+	@FindBy(xpath = "//div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[3]//*[@class='trigger-closed']")
 	private WebElement viewPDPPlans;
 	
 	@FindBy(xpath = ".//*[@id='togglenextYear']/a")
@@ -856,7 +856,7 @@ CommonUtility.waitForPageLoad(driver, MAmoreDetailsLink, 30);
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(validate(viewPDPPlans)){
+		if(validateNew(viewPDPPlans)){
 		viewPDPPlans.click();
 		}else{
 			Assert.assertTrue("This scenario is for AEP period", true);
@@ -882,19 +882,17 @@ CommonUtility.waitForPageLoad(driver, MAmoreDetailsLink, 30);
 	}
 
 
-	public ComparePlansPage clickOnCompareLink(){
-		
-		List<WebElement> compareLinks = driver.findElements(By.xpath(".//*[@id='plan-list-1']//button[contains(text(),'Compare plans')]"));	
-		compareLinks.get(0).click();
-
-
+	public ComparePlansPage clickOnCompareLink() {
+		List<WebElement> compareLinks = driver
+				.findElements(By.xpath(".//*[@id='plan-list-1']//button[contains(text(),'Compare plans')]"));
+		compareLinks.get(1).click();
 		try {
 			Thread.sleep(6000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(currentUrl().contains("/health-plans.html#/plan-compare"))
+		if (currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPage(driver);
 		return null;
 	}
@@ -1133,6 +1131,44 @@ CommonUtility.waitForPageLoad(driver, MAmoreDetailsLink, 30);
 		}
 			
 		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public void checkAllPDPlans(){
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<WebElement> allPDPlans = driver.findElements(By.xpath(".//*[@id='plan-list-3']//div[contains(@class,'compare-box')]"));	
+
+		if(allPDPlans !=null){
+		for(int i = 0; i<allPDPlans.size(); i++){
+			allPDPlans.get(i).click();
+		}
+		}
+		
+	}
+	public ComparePlansPage clickOnCompareLinkAARP(String plantype){
+		
+		if (plantype.equalsIgnoreCase("MedicareAdvantage"))
+		{
+			List<WebElement> compareLinks = driver.findElements(By.xpath(".//*[@id='plan-list-1']//button[contains(text(),'Compare plans')]"));	
+			compareLinks.get(1).click();	
+		}else{
+			WebElement compareLinks2 = driver.findElement(By.xpath("(.//*[@id='plan-list-3']//button[contains(text(),'Compare plans')])[1]"));	
+			compareLinks2.click();	
+		}
+
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(currentUrl().contains("/health-plans.html#/plan-compare"))
+			return new ComparePlansPage(driver);
 		return null;
 	}
 }
