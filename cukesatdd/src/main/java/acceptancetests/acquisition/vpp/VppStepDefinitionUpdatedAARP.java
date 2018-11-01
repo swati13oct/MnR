@@ -135,12 +135,31 @@ public class VppStepDefinitionUpdatedAARP {
 	 * @toDo:select all 3 plans to compare in MA and click on compare plan  link
 	 */
 	@And("^I select all 3 plans to compare in MA and click on compare plan link$")
-	public void I_select_all_3_plans_to_compare(){
+	public void I_select_all_3_plans_to_compare(DataTable givenAttributes){
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.clickonViewPlans();
-		plansummaryPage.checkAllMAPlans();
-		ComparePlansPage comparePlansPage = plansummaryPage.clickOnCompareLink();
+		
+		List<DataTableRow> givenAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		String plantype = givenAttributesMap.get("plan type");
+		if (plantype.equalsIgnoreCase("MedicareAdvantage"))
+		{
+			plansummaryPage.clickonViewPlans();
+			plansummaryPage.checkAllMAPlans();
+		}else
+		{
+			plansummaryPage.clickOnPDPPlans();
+			plansummaryPage.checkAllPDPlans();
+		}
+		
+		
+		ComparePlansPage comparePlansPage = plansummaryPage.clickOnCompareLinkAARP(plantype);
 		if(comparePlansPage != null){
 			getLoginScenario().saveBean(PageConstants.TeamC_Plan_Compare_Page, comparePlansPage);
 			//comparePlansPage.backToVPPPage();
@@ -350,25 +369,25 @@ public class VppStepDefinitionUpdatedAARP {
 		}
 		else
 			Assert.fail("Error in Loading the Plan Compare Page");
-		
 	}
-	
-
-	@Then("^the user validate the print and email links on the plan Details Page$")
-	public void user_validate_print_and_email_links_on_the_plan_Details_Page(){
-		
-		PlanDetailsPage vppPlanDetailsPage =  ( PlanDetailsPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-		vppPlanDetailsPage.validatePrintandEmailOnPlanDetails();
-	}
-	
-	/**
-	 * @toDo:the user validates the functionality of email and print buttons on the plan Details Page
-	 */
-	@Then("^the user validates the functionality of email and print buttons on the plan Details Page$")
-	public void user_validates_the_functionality_of_emailandprintbuttons_on_the_plan_Details_Page(){
-		
-		PlanDetailsPage vppPlanDetailsPage =  ( PlanDetailsPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-		vppPlanDetailsPage.validatingFunctionalityOfPrintandEmailOnPlanDetails();
+    
+ 
+    @Then("^the user validate the print and email links on the plan Details Page$")
+    public void user_validate_print_and_email_links_on_the_plan_Details_Page(){
+        
+        PlanDetailsPage vppPlanDetailsPage =  ( PlanDetailsPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+        vppPlanDetailsPage.validatePrintandEmailOnPlanDetails();
+    }
+    
+    /**
+     * @toDo:the user validates the functionality of email and print buttons on the plan Details Page
+     */
+    @Then("^the user validates the functionality of email and print buttons on the plan Details Page$")
+    public void user_validates_the_functionality_of_emailandprintbuttons_on_the_plan_Details_Page(){
+        
+        PlanDetailsPage vppPlanDetailsPage =  ( PlanDetailsPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+        vppPlanDetailsPage.validatingFunctionalityOfPrintandEmailOnPlanDetails();
+ 	
 	}
 
 }
