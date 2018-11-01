@@ -18,6 +18,7 @@ import com.itextpdf.text.log.SysoCounter;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
+import acceptancetests.memberrdesignVBF.common.CommonStepDefinition;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
@@ -61,6 +62,8 @@ public class LoginPage extends UhcDriver {
 
 	private static String REGIRATION_URL = "https://st1.healthsafe-id.com/protected/register?HTTP_TARGETPORTAL=MNR&HTTP_ERRORURL=https://stage-medicare.uhc.com/&HTTP_TARGETURL=https%3A%2F%2Fstage-medicare.uhc.com%2Fmember%2Fpost-sign-in.html%3Ftarget%3Drallydashboard%26portalIndicator%3DUHC&HTTP_ELIGIBILITY=P&HTTP_GRADIENTCOLOR1=%23003DA1&HTTP_GRADIENTCOLOR2=%2300A8F7&HSID_DOMAIN_URL=https://st1.healthsafe-id.com&USE_TEST_RECAPTCHA=true";
 	
+	private String category;
+	
 	public LoginPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -71,7 +74,7 @@ public class LoginPage extends UhcDriver {
 	public void openAndValidate() {
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness) & "YES".equalsIgnoreCase(MRScenario.isHSIDCompatible)) {
 			if ("team-ci1".equalsIgnoreCase(MRScenario.environment)
-					|| "team-ci2".equalsIgnoreCase(MRScenario.environment)) {
+					|| "team-ci2".equalsIgnoreCase(MRScenario.environment)) {				
 				PAGE_URL = MRConstants.TEAMCI_TESTHARNESS;
 			} else {
 				PAGE_URL = MRConstants.TESTHARNESS.replace("awe-", "");
@@ -80,7 +83,12 @@ public class LoginPage extends UhcDriver {
 				& "NO".equalsIgnoreCase(MRScenario.isHSIDCompatible)) {
 			if ("team-ci1".equalsIgnoreCase(MRScenario.environment)
 					|| "team-ci2".equalsIgnoreCase(MRScenario.environment)) {
-				PAGE_URL = MRConstants.LEGACY_TESTHARNESS;
+				category = CommonStepDefinition.getMemberAttributeMap().get("Member Type");
+				if (category != null && (category.equalsIgnoreCase("pcp") || category.equalsIgnoreCase("medica"))) {
+					PAGE_URL = MRConstants.LEGACY_PCP_TESTHARNESS;
+				} else {
+					PAGE_URL = MRConstants.LEGACY_TESTHARNESS;
+				}
 			} else {
 				PAGE_URL = MRConstants.LEGACY_TESTHARNESS.replace("awe-", "");
 			}

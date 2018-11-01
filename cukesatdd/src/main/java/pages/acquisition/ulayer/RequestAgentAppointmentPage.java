@@ -47,26 +47,25 @@ public class RequestAgentAppointmentPage extends UhcDriver{
 	
 	@FindBy(xpath=".//*[@id='appointmentform']/fieldset/button")
 	private WebElement requestAppointmentButton;
+	
+	@FindBy(xpath=".//*[@id='ym-custom-container']//button[contains(text(),'Find plans')]")
+	private WebElement findPlansBtn;
 
 	public RequestAgentAppointmentPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
+		openAndValidate();
 	}
 
 	@Override
 	public void openAndValidate() {
-		validate(firstName);
-		validate(lastName);
-		validate(address);
-		validate(city);
-		validate(state);
-		validate(zip);
-		validate(phoneField);
-		validate(requestAppointmentButton);
+		validateNew(firstName);
+		validateNew(lastName);
+		validateNew(requestAppointmentButton);
 		
 	}
 	
-	public AgentAppointmentConfirmationPage requestAgentAppointment(Map<String,String> personalDetails)
+	public AgentAppointmentConfirmationPage submitAgentAppointment(Map<String,String> personalDetails)
 	{
 		sendkeys(firstName, personalDetails.get("First Name"));
 		sendkeys(lastName, personalDetails.get("Last Name"));
@@ -79,40 +78,17 @@ public class RequestAgentAppointmentPage extends UhcDriver{
 			if(personalDetails.get("State").equalsIgnoreCase(element.getText()))
 			{
 				element.click();
+				break;
 			}
 		}
-		sendkeys(zip, personalDetails.get("ZipCode"));
+		sendkeys(zip, personalDetails.get("Zipcode"));
 		
 		String phone = personalDetails.get("Phone");
 		sendkeys(phoneField, phone);
-		/*if(phone.contains("-"))
-		{
-			String[] phoneNumbers = phone.split("-");
-			
-			sendkeys(areacode, phoneNumbers[0]);
-			sendkeys(phoneField, phoneNumbers[1]);
-			sendkeys(phone2, phoneNumbers[2]);
-			
-			sendkeys(confirmAreacode, phoneNumbers[0]);
-			sendkeys(confirmPhone1, phoneNumbers[1]);
-			sendkeys(confirmPhone2, phoneNumbers[2]);
-			
-		}*/
+		
 		
 		requestAppointmentButton.click();
-		try {
-			if (requestAppointmentButton.isDisplayed()) {
-				CommonUtility.waitForElementToDisappear(driver, requestAppointmentButton,
-						CommonConstants.TIMEOUT_60);
-			}
-		} catch (NoSuchElementException e) {
-			System.out.println("requestAppointmentButton not found");
-		} catch (TimeoutException ex) {
-			System.out.println("requestAppointmentButton not found");
-		} catch (Exception e) {
-			System.out.println("requestAppointmentButton not found");
-		}
-		if(currentUrl().contains("medicare-advantage-plans/request-information/agentebrc.html"))
+		if(validateNew(findPlansBtn))
 		{
 			return new AgentAppointmentConfirmationPage(driver);
 		}
@@ -120,12 +96,5 @@ public class RequestAgentAppointmentPage extends UhcDriver{
 		return null;
 	}
 	
-	public boolean validateRequestApptPage(){
-		CommonUtility.waitForPageLoad(driver, requestAppointmentButton, 30);
-		if(validate(firstName)&&validate(lastName)&&validate(address)&&validate(city)&&
-		validate(state)&&validate(zip)&&validate(phoneField)&&validate(requestAppointmentButton))
-			return true;
-		return false;
-	}
 
 }

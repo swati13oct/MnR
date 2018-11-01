@@ -24,99 +24,67 @@ import atdd.framework.UhcDriver;
  */
 public class RequestAgentAppointmentPage extends UhcDriver{
 	
-	@FindBy(id="first_name")
+	@FindBy(id="ym-first_name")
 	private WebElement firstName;
 	
-	@FindBy(id="last_name")
+	@FindBy(id="ym-last_name")
 	private WebElement lastName;
 	
-	@FindBy(id="address1")
+	@FindBy(id="ym-address1")
 	private WebElement address;
 	
-	@FindBy(id="city")
+	@FindBy(id="ym-city")
 	private WebElement city;
 	
-	@FindBy(id="state")
+	@FindBy(id="ym-state")
 	private WebElement state;
 	
-	@FindBy(id="zip")
+	@FindBy(id="ym-zip")
 	private WebElement zip;
 	
-	@FindBy(id="areacode")
-	private WebElement areacode;
+	@FindBy(id="ym-phone")
+	private WebElement phoneField;
 	
-	@FindBy(id="phone1")
-	private WebElement phone1;
-	
-	@FindBy(id="phone2")
-	private WebElement phone2;
-	
-	@FindBy(id="confirm_areacode")
-	private WebElement confirmAreacode;
-	
-	@FindBy(id="confirm_phone1")
-	private WebElement confirmPhone1;
-	
-	@FindBy(id="confirm_phone2")
-	private WebElement confirmPhone2;
-	
-	@FindBy(xpath="//div[@id='submit-row']/a")
+	@FindBy(xpath=".//*[@id='appointmentform']/fieldset/button")
 	private WebElement requestAppointmentButton;
 
+	@FindBy(xpath=".//*[@id='ym-custom-container']//button[contains(text(),'Find plans')]")
+	private WebElement findPlansBtn;
+	
 	public RequestAgentAppointmentPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
+		openAndValidate();
 	}
 
 	@Override
 	public void openAndValidate() {
-		validate(firstName);
-		validate(lastName);
-		validate(address);
-		validate(city);
-		validate(state);
-		validate(zip);
-		validate(areacode);
-		validate(phone1);
-		validate(phone2);
-		validate(confirmAreacode);
-		validate(confirmPhone1);
-		validate(confirmPhone2);
-		validate(requestAppointmentButton);
+		validateNew(firstName);
+		validateNew(lastName);
+		validateNew(requestAppointmentButton);
 		
 	}
 	
-	public AgentAppointmentConfirmationPage requestAgentAppointment(Map<String,String> personalDetails)
+	public AgentAppointmentConfirmationPage submitAgentAppointment(Map<String,String> personalDetails)
 	{
 		sendkeys(firstName, personalDetails.get("First Name"));
 		sendkeys(lastName, personalDetails.get("Last Name"));
 		sendkeys(address, personalDetails.get("Address"));
 		sendkeys(city, personalDetails.get("City"));
-		ElementData elementData = new ElementData("select:id", "state");
+		ElementData elementData = new ElementData("select:id", "ym-state");
 		List<WebElement> stateOptions = findElements(elementData);
 		for(WebElement element : stateOptions)
 		{
 			if(personalDetails.get("State").equalsIgnoreCase(element.getText()))
 			{
 				element.click();
+				break;
 			}
 		}
-		sendkeys(zip, personalDetails.get("ZipCode"));
+		sendkeys(zip, personalDetails.get("Zipcode"));
 		
 		String phone = personalDetails.get("Phone");
-		if(phone.contains("-"))
-		{
-			String[] phoneNumbers = phone.split("-");
-			
-			sendkeys(areacode, phoneNumbers[0]);
-			sendkeys(phone1, phoneNumbers[1]);
-			sendkeys(phone2, phoneNumbers[2]);
-			
-			sendkeys(confirmAreacode, phoneNumbers[0]);
-			sendkeys(confirmPhone1, phoneNumbers[1]);
-			sendkeys(confirmPhone2, phoneNumbers[2]);
-			
-		}
+		sendkeys(phoneField, phone);
 		
 		requestAppointmentButton.click();
 		try {
@@ -124,14 +92,11 @@ public class RequestAgentAppointmentPage extends UhcDriver{
 				CommonUtility.waitForElementToDisappear(driver, requestAppointmentButton,
 						CommonConstants.TIMEOUT_30);
 			}
-		} catch (NoSuchElementException e) {
-			System.out.println("requestAppointmentButton not found");
-		} catch (TimeoutException ex) {
-			System.out.println("requestAppointmentButton not found");
-		} catch (Exception e) {
+		}catch (Exception e) {
 			System.out.println("requestAppointmentButton not found");
 		}
-		if(currentUrl().contains("medicare-advantage-plans/request-information/agentebrc.html"))
+		
+		if(validateNew(findPlansBtn))
 		{
 			return new AgentAppointmentConfirmationPage(driver);
 		}
