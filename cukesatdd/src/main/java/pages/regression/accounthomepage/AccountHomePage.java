@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -220,10 +221,10 @@ public class AccountHomePage extends UhcDriver {
 	// @FindBy(css = "img.primary-logo")
 	// private WebElement logoImage;
 
-	@FindBy(xpath = "//div[@id='white-label']/a/img")
+	@FindBy (xpath = "//*[@id='ui-view-page']/div/arcade-header/header[1]/div/div/a/img")
 	private WebElement logoImage;
 
-	@FindBy(xpath = "//div[@id='white-label']/a/img[2]")
+	@FindBy(xpath = "//*[@id='ui-view-page']/div/arcade-header/header[1]/div/div/a/img[2]")
 	private WebElement cologoImage;
 
 	@FindBy(xpath = "//*[@ng-src='/images/icons/icon-pharmacy-locator.svg']")
@@ -1037,7 +1038,8 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public void validateImagePresent(String logoToBeDisplayedOnDashboard) throws InterruptedException {
-		Thread.sleep(2000);
+		//Thread.sleep(2000);
+		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		String logo_src = logoImage.getAttribute("src");
 		String logo_alt = logoImage.getAttribute("alt");
 		System.out.println("Actual logo's source on Dashboard page is   " + logo_src + " and Expected logo source    "

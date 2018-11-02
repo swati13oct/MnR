@@ -127,7 +127,7 @@ public void verifyCorrectCoLogoDisplayedOnSecondaryPage(DataTable givenAttribute
 	String cologoToBeDisplayedOnSecondaryPage = memberAttributesMap.get("Secondary Page CoLogo");
 	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 			.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-	Thread.sleep(5000);
+	Thread.sleep(15000);
 	benefitsCoveragePage.validateImagePresent(logoToBeDisplayedOnSecondaryPage);
 	benefitsCoveragePage.validateCoLogoImagePresent(cologoToBeDisplayedOnSecondaryPage);
 }
