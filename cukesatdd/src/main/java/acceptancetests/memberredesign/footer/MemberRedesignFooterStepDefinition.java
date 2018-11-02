@@ -148,9 +148,10 @@ public class MemberRedesignFooterStepDefinition {
 
 	@Then("^the user navigates to the footer section$")
 	public void user_validates_footer(){
-		try {
+	
 			PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
-			try {
+					
+				try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
@@ -165,9 +166,7 @@ public class MemberRedesignFooterStepDefinition {
 			}else{
 				Assert.fail();
 			}
-		} catch (NullPointerException e) {
-			Assert.assertTrue("Unable to locate Preminum Payment Page as expected to proceed with futuer validation", false);
-		}
+		
 	}
 	
 	@And("^the user validates the footer section in payments page$")
