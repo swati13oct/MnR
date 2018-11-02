@@ -29,7 +29,7 @@ Given login with following details logins in the member portal and validate elem
 #When the above plantype user logs in UMS Site Desktop HW
 And I view the global navigation HW
 And then click the health and wellness tab HW
-And I should see the H&W Generic dashboard
+And I should see the H&W Generic dashboard and lifestyle,learning and rewards L2 tabs HW
 
 Examples:
  | planType  | memberType   |

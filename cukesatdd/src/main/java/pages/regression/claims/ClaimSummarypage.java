@@ -102,7 +102,7 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy (xpath =".//*[@id='graySection']/div/div/div[2]/div/div/ul")
 	private WebElement claimsTablePagination;
 	
-	@FindBy(xpath=".//*[@id='graySection']/div/div/div[2]/div/div/p[2]")
+	@FindBy(xpath="//*[@id='atddUhcPagination']/li[1]/p")	
 	private WebElement verifyClaimSummaryAndPagination;
 
 	//@FindBy (xpath="//div[not (contains(@class,'ng-hide')) and contains(@ng-show,'AEM')]//div[@id='ma_mapd']//a")
@@ -342,29 +342,42 @@ public class ClaimSummarypage extends UhcDriver{
 	 */
 	public boolean verifyClaimsTableAndPagination(){
        try {
-		validate (verifyClaimSummaryAndPagination);
-		   System.out.println("Pagination is seen ===>"+verifyClaimSummaryAndPagination.getText());
+		if(validate (verifyClaimSummaryAndPagination)){
+			System.out.println("Pagination is seen ===>"+verifyClaimSummaryAndPagination.getText());
+			return true;
+		}else{
+			System.out.println("Pagination is not displayed as records are less");
+		return false;
+		}
 		
 	} catch (Exception e) {
-		System.out.println("Pagination is not displayed as records are less");
-		e.printStackTrace();
-	}return true;
+			e.printStackTrace();
+			return false;
+		}
 	}
 	/**
 	 * @toDo : Validate Pagination under the claims table  
 	 */
 	public boolean verifyClaimsTableAndPagination1(){
 				
-	       try {
-	    	   Thread.sleep(5000);
-	    	   
-			validate (verifyClaimSummaryAndPagination1);
-			   System.out.println("Pagination is seen ===>"+verifyClaimSummaryAndPagination.getText());
-			
+	     try{
+	    	 
+	    	 if(validate (verifyClaimSummaryAndPagination1))
+	 		{
+	 			System.out.println("Pagination is seen ===>"+verifyClaimSummaryAndPagination.getText());
+	 			return true;
+	 		}else{
+	 			System.out.println("Pagination is not displayed as records are less");
+	 			return false;
+	 		}
+	 				
 		} catch (Exception e) {
-			System.out.println("Pagination is not displayed as records are less");
+			
 			e.printStackTrace();
-		}return true;
+			return false;
+		}
+	     
+	     
 		}
 	
 	/**
@@ -607,12 +620,12 @@ public class ClaimSummarypage extends UhcDriver{
 	 * @toDo : this method validates Claims by time period 
 	 */
 	public void searchClaimsByTimePeriod(String planType,String claimPeriod) throws InterruptedException {
-		try {
+		/*try {
 			Thread.sleep(12000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		/*try {
 			WelcomePage_iPerceptionPresent.click();
 		} catch (Exception e) {
@@ -673,12 +686,12 @@ public class ClaimSummarypage extends UhcDriver{
 			System.out.println("!!! The member is on Claims Summary page !!!");
 			validate(planame);
 			System.out.println("The Plan Name is ===>"+(planame.getText()));*/
-			try { Thread.sleep(1000); } 
+		/*	try { Thread.sleep(1000); } 
 			catch (InterruptedException e) {						
 				// TODO Auto-generated catch block 
 				e.printStackTrace();
 				}
-			//System.out.println("!!! Going to select Last 24 months from the dropdown !!! ");
+		*/	//System.out.println("!!! Going to select Last 24 months from the dropdown !!! ");
 			if(planType.contains("SHIP")){
 				System.out.println(planType+"SHIP plan type last 24 moths is going to select");
 						
@@ -693,7 +706,7 @@ public class ClaimSummarypage extends UhcDriver{
 				last24months = driver.findElement(By.id("date24MAtdd"));
 				last24months.click();
 				System.out.println("!!! Month Selected from the view claims from drop down is ====>"+(last24months.getText()));
-				Thread.sleep(2000);
+				//Thread.sleep(2000);
 				validate (Medical);
 				System.out.println("!! Claim type Medical is validated!!! ");
 				validate (Medical);
@@ -708,7 +721,7 @@ public class ClaimSummarypage extends UhcDriver{
 				*/
 				
 				System.out.println("!!! Claim Type PDP is clicked !!!");
-				Thread.sleep(3000);
+				//Thread.sleep(3000);
 				
 			
 				validate(claimsTablePrescriptionDrug);
@@ -747,13 +760,13 @@ public class ClaimSummarypage extends UhcDriver{
 			//CommonUtility.waitForPageLoad(driver, last24months, 60);
 			last24months.click();
 			System.out.println("!!! Month Selected from the view claims from drop down is ====>"+(last24months.getText()));
-			try { Thread.sleep(10000); } 
+			/*try { Thread.sleep(10000); } 
 			catch (InterruptedException e) {			
 				
 				// TODO Auto-generated catch block 
 				e.printStackTrace();
 				}
-			
+			*/
 			/*Select claimsFrom = new Select(viewClaimsFrom);
 			claimsFrom.selectByValue("24 months");*/
 			validate (claimsCopyText);
@@ -772,12 +785,12 @@ public class ClaimSummarypage extends UhcDriver{
 		CommonUtility.waitForPageLoad(driver, ClaimsSummaryPage,60);
 		validate(claimsTableMedical);
 		System.out.println("!!! Claims Table is seen on the Claims Summary page!!!");
-		try {
+		/*try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		validate(claimstablemoreinfolink);
 		System.out.println("more info seen claim summary page ==>" +claimstablemoreinfolink);
 		
@@ -1336,8 +1349,8 @@ public void NavigateToClaimsPage(){
 				CommonUtility.waitForPageLoad(driver, ClaimsSummaryPage,60);
 				String winHandleBefore = driver.getWindowHandle();
 				validateclaimsdownloadbutton.click();
-				//validateclaimsprintbutton.click();
-				//switchToNewTab();
+				validateclaimsprintbutton.click();
+				switchToNewTab();
 				System.out.println("New window = "+driver.getTitle());
 				driver.switchTo().window(winHandleBefore);
 				System.out.println("Main window = "+driver.getTitle());				

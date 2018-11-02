@@ -309,6 +309,8 @@ public class ClaimsMemberRedesignStepDefinition {
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		Assert.assertTrue(claimSummarypage.verifyClaimsTableAndPagination());
 	   	}
+	
+	
 	@And("^I validate the pagination on the claims summary page combo member PDP plan$")
 		public void i_validate_the_pagination_on_the_claims_summary_page_COMBOmember_PDP() throws Throwable {
 			ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
@@ -363,14 +365,31 @@ public class ClaimsMemberRedesignStepDefinition {
 	/**
 	 * @toDo : navigate to the Claim Details page
 	 */
-	@When("^I navigate to the Claim Details page in AARP site$")	
+	@When("^I navigate to the Claim Details page for federal members$")	
 	public void i_navigate_to_member_redesign_claim_details_page(){
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+		
 		ClaimDetailsPage newClaimDetailsPage = accountHomePage.navigateToClaimDetailsPage();
+		System.out.println("claims-============"+newClaimDetailsPage);
+		
 		//getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
 		if(newClaimDetailsPage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
 	}
+	
+	/**
+	 * @toDo : validate the Claims Table in claims details page
+	 */
+	@And("^I validate the Claims Table in claims details page for federal members$")
+	public void validate_claimsTable_claimsDetails_AARP(){
+		ClaimDetailsPage newclaimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
+		
+		
+		newclaimDetailspage.validateClaimsTableInDetailsPage();
+		if(newclaimDetailspage != null)
+			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newclaimDetailspage);
+	}
+	
 	/**
 	 * @toDo : validate the Learn more section in claims details page
 	 */
@@ -400,16 +419,7 @@ public class ClaimsMemberRedesignStepDefinition {
 		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
 		claimDetailspage.validateEOB();
 	}
-	/**
-	 * @toDo : validate the Claims Table in claims details page
-	 */
-	@And("^I validate the Claims Table in claims details page in AARP site$")
-	public void validate_claimsTable_claimsDetails_AARP(){
-		ClaimDetailsPage newclaimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
-		newclaimDetailspage.validateClaimsTableInDetailsPage();
-		if(newclaimDetailspage != null)
-			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newclaimDetailspage);
-	}
+	
 	/**
 	 * @toDo : validate the Claims Total in claims details page
 	 */

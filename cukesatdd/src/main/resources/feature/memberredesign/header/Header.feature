@@ -1,6 +1,7 @@
 @theIncredibles
 @member_redesign
 Feature:I1.3Header/Navigation for Member Site Redesign
+# note: if system is in future date, some testcases may fail due to expected tab(s) not showing up on page depending on user's data setup
 
 @member_redesign_header @IncrediblesHeader @regression_06_06_18
 Scenario Outline:Verify HSID login functionality and header
@@ -69,7 +70,7 @@ Examples:
  | planType|  memberType  	| 
  | MAPD    |  UHCGroup  	  |
  | MAPD    | IndividualMember |
-#| MAPD    | PCP |
+ | MAPD    | PCP |
  | MAPD  | Medica |
  
  
@@ -84,7 +85,7 @@ Then I should not be able to see the Find Care & Costs tab Header
 Examples:
  | planType|  memberType  	| 
  | SHIP    |   Individual  |
-#| SSUP    |   UHCGroup 	  |
+ | SSUP    |   UHCGroup 	  |
  
 
  @Terminated_view @regression_06_06_18
@@ -97,4 +98,4 @@ Then I should be able to see and use the Home tab on Dashboard
 Examples:
  | planType|  memberType  	| 
  | MAPD    |  AARPTerminatedmember 	  |
-#|MA		| UHCTerminatedmember|
+ | MA	   | UHCTerminatedmember|
