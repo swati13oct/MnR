@@ -82,7 +82,7 @@ When I navigate to the Claim Details page for federal members
 And I validate the Claims Table in claims details page for federal members
 Examples: 
    | planType | claimPeriod    | claimssystem |
-   | SHIP     | Last 24 Months | SHIPCALIMS   |
+   | SHIP     | Last 24 Months | SHIPCLAIMS   |
    
   
 @TC10_COMBO
