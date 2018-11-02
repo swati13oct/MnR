@@ -5,6 +5,7 @@ import gherkin.formatter.model.DataTableRow;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
@@ -122,7 +123,7 @@ public class oleStepDefinition {
 		String PlanName = givenAttributesMap.get("Plan Name");
 		//String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 
-		String PlanYear = "2018"; 
+		String PlanYear = "2019"; 
 		String PlanPremium;
 		String ZipCode = (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
 		String County = (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
@@ -185,7 +186,7 @@ public class oleStepDefinition {
 	@Then("^the user clicks on Enroll Now in Plan Details Page to start the OLE flow$")
 	public void the_user_clicks_on_Enroll_Now_in_Plan_Details_Page_to_start_the_OLE_flow() throws Throwable {
 		String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
-		String PlanYear = "2018"; 
+		String PlanYear = "2019"; 
 		String ZipCode = (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
 		String County = (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
 		String PlanType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
@@ -444,6 +445,11 @@ public class oleStepDefinition {
 			MedicareDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
 		}
+		Random rnd = new Random();
+		int n = 100000000 + rnd.nextInt(900000000);
+		String MedicareNumber = Integer.toString(n)+"C";
+		MedicareDetailsMap.put("Medicare Number", MedicareNumber);
+		
 		String SSNflag = MedicareDetailsMap.get("SSN Flag");
 		if(SSNflag.contains("true")){
 			MedicareDetailsMap.put("SSN Number", "123456789");

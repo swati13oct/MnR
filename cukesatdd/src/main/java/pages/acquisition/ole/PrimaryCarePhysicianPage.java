@@ -13,6 +13,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -58,7 +59,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 	
 	// Look up Provider - MA, MAPD and DSNP - NonPFFS
 	
-	@FindBy(xpath = "//a[contains(text(), 'Look up your provider')]")
+	@FindBy(xpath = "//button[contains(text(), 'Look up your provider')]")
 	private WebElement LookUpProviderBtn;
 	
 	//Rally - ProviderLookup
@@ -163,6 +164,8 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
+		CommonUtility.waitForPageLoad(driver, LookUpProviderBtn, 30);
+		validateNew(LookUpProviderBtn);
 		validate(PCPPageHeader);
 		System.out.println("Page header is Displayed"+PCPPageHeader.getText());	
 	}
@@ -316,12 +319,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 		validate(NextBtn);
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		if(driver.getCurrentUrl().contains("monthly-premium")){
 			System.out.println("OLE Monthly Plan Premium Page is Displayed");
 			return new PlanPremiumPage(driver);
