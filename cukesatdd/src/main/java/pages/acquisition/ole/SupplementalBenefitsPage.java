@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -51,6 +52,8 @@ public class SupplementalBenefitsPage extends UhcDriver{
 	@FindBy(xpath = "//*[@id='ole-premium']")
 	private WebElement PremiumDisplay;
 	
+	@FindBy(xpath = ".//*[@id='ole-form-content']//label[contains(text(),'No. I do not')]")
+	private WebElement ridersNoBtn;
 	
 	public SupplementalBenefitsPage(WebDriver driver) {
 		super(driver);
@@ -60,6 +63,8 @@ public class SupplementalBenefitsPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
+		CommonUtility.waitForPageLoad(driver, ridersNoBtn, 30);
+		validateNew(ridersNoBtn);
 		validate(PageHeader);
 		System.out.println("Page header is Displayed"+PageHeader.getText());	
 	}
@@ -68,12 +73,7 @@ public class SupplementalBenefitsPage extends UhcDriver{
 		validate(NextBtn);
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		if(driver.getCurrentUrl().contains("authorization")){
 			System.out.println("OLE Authorization page is Displayed : Navigation from Optional Benefits Page Passed");
 			return new AuthorizationPage(driver);
