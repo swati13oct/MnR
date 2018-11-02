@@ -750,7 +750,7 @@ public class MRScenario {
 	public WebDriver getWebDriver() {
 
 
-		/*isSauceLabSelected = true;
+		isSauceLabSelected = true;
 		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 
 		capabilities.setCapability("platform", "Windows 7");
@@ -773,18 +773,7 @@ sauceLabsTunnelIdentifier);
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return webDriver;*/
-
-		File PTB = new File("C:/Users/agoyal24/AppData/Local/Google/Chrome/Application/Chrome.exe");
-        Map<String, Object> chromeOptions = new HashMap<String, Object>();
-        chromeOptions.put("binary", PTB);
-        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-        capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-        System.setProperty("webdriver.chrome.driver","C:/Users/agoyal24/Videos/chromedriver.exe");
-        webDriver = new ChromeDriver();
-
-       
-       return webDriver;
+		return webDriver;	
 
 	}
 
