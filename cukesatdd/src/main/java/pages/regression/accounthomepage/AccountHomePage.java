@@ -1447,6 +1447,7 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public void clickPremiumPayment() {
+		waitforElement(premiumPayment);
 		if (premiumPayment.isDisplayed()) {
 			premiumPayment.click();
 		}
@@ -1634,10 +1635,20 @@ public class AccountHomePage extends UhcDriver {
 	 * Click on claims followed by EOB
 	 */
 	public void clickeob() {
+		waitforElement(claims);
 		if (claims.isDisplayed()) {
-			claims.click();
-			if (explainationOfBenefits.isDisplayed()) {
-				explainationOfBenefits.click();
+			//claims.click();
+			try {
+				if (explainationOfBenefits.isDisplayed()) {
+					explainationOfBenefits.click();
+				}
+			} catch (NoSuchElementException e) {
+				System.out.println("can't locate explainationOfBenefits element, will try to click coverageBenefits then try again before giving up "+e);
+				claims.click();
+				waitforElement(explainationOfBenefits);
+				if (explainationOfBenefits.isDisplayed()) {
+					explainationOfBenefits.click();
+				}
 			}
 		}
 	}
@@ -1679,10 +1690,20 @@ public class AccountHomePage extends UhcDriver {
 	 * click on Benefits Summary
 	 */
 	public void clickBenefitsSummary() {
+		waitforElement(coverageBenefits);
 		if (coverageBenefits.isDisplayed()) {
-			coverageBenefits.click();
-			if (benefitsSummary.isDisplayed()) {
-				benefitsSummary.click();
+			try{
+				//coverageBenefits.click();
+				if (benefitsSummary.isDisplayed()) {
+					benefitsSummary.click();
+				}
+			} catch (NoSuchElementException e) {
+				System.out.println("can't locate benefitsSummary element, will try to click coverageBenefits then try again before giving up "+e);
+				coverageBenefits.click();
+				waitforElement(benefitsSummary);
+				if (benefitsSummary.isDisplayed()) {
+					benefitsSummary.click();
+				}
 			}
 		}
 	}
@@ -1691,10 +1712,20 @@ public class AccountHomePage extends UhcDriver {
 	 * click on forms And Resources
 	 */
 	public void clickFormsResources() {
+		waitforElement(coverageBenefits);
 		if (coverageBenefits.isDisplayed()) {
-			coverageBenefits.click();
-			if (formsAndResources.isDisplayed()) {
-				formsAndResources.click();
+			try {
+				//coverageBenefits.click();
+				if (formsAndResources.isDisplayed()) {
+					formsAndResources.click();
+				}
+			} catch (NoSuchElementException e) {
+				System.out.println("can't locate formsAndResources element, will try to click coverageBenefits then try again before giving up "+e);
+				coverageBenefits.click();
+				waitforElement(formsAndResources);
+				if (formsAndResources.isDisplayed()) {
+					formsAndResources.click();
+				}
 			}
 		}
 	}
@@ -1709,10 +1740,20 @@ public class AccountHomePage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		waitforElement(coverageBenefits);
 		if (coverageBenefits.isDisplayed()) {
-			coverageBenefits.click();
-			if (orderMaterials.isDisplayed()) {
-				orderMaterials.click();
+			//coverageBenefits.click();
+			try {
+				if (orderMaterials.isDisplayed()) {
+					orderMaterials.click();
+				}
+			} catch (NoSuchElementException e) {
+				System.out.println("can't locate orderMaterials element, will try to click coverageBenefits then try again before giving up "+e);
+				coverageBenefits.click();
+				waitforElement(orderMaterials);
+				if (orderMaterials.isDisplayed()) {
+					orderMaterials.click();
+				}
 			}
 		}
 	}
@@ -2051,7 +2092,7 @@ public class AccountHomePage extends UhcDriver {
 		String preMessage_text = preEffectiveMessage.getAttribute("innerText");
 		System.out.println("Message displayed on Dashboard for this member is:" + preMessage_text);
 		Assert.assertTrue(preMessage_text.contains(
-				"Use this site to find helpful information while you’re getting ready for your plan to start on"));
+				"Use this site to find helpful information while youï¿½re getting ready for your plan to start on"));
 		System.out.println("First assert on the preeffective message is passed");
 		Assert.assertTrue(preMessage_text.contains(
 				"Depending on your plan coverage, you can find a provider, locate a pharmacy, or view important plan documents."));
