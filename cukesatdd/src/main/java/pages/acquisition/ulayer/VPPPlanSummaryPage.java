@@ -214,6 +214,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(id = "drugsTabId")
 	public WebElement step1;
 	
+	@FindBy(id = "enrollment-next-button")
+	private WebElement NextBtn;
 	
 	public JSONObject vppPlanSummaryJson;
 
@@ -276,35 +278,27 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public VPPPlanSummaryPage viewPlanSummary(String planType) {
 	WebDriverWait wait = new WebDriverWait(driver, 10000);
 
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		if (planType.equalsIgnoreCase("PDP")) {
-//	WebElement hidePdpPlans invalid
-			//if(validate(hidePdpPlans)){
+				CommonUtility.waitForPageLoad(driver, pdpPlansViewLink, 30);
 				pdpPlansViewLink.click();
 				System.out.println("PDP Plan Type Clicked");
-			//}
+			
 		} else if (planType.equalsIgnoreCase("MA")
 				|| planType.equalsIgnoreCase("MAPD")) {
+				CommonUtility.waitForPageLoad(driver, maPlansViewLink, 30);
 				maPlansViewLink.click();
 		
-			
-			//validate(hideMaPlans);
 		} else if (planType.equalsIgnoreCase("MS")) {
-			if(validate(hidePdpPlans)){
+			CommonUtility.waitForPageLoad(driver, msPlansViewLink, 30);
+			if(validate(msPlansViewLink)){
 				msPlansViewLink.click();
 			}
 		} else if (planType.equalsIgnoreCase("SNP")) {
+			CommonUtility.waitForPageLoad(driver, snpPlansViewLink, 30);
 				snpPlansViewLink.click();
 		}
-		else if (planType.equalsIgnoreCase("SNP")) {
-			snpPlansViewLink.click();
-		}
-/*		if(validate(toggleplanYear))
+		/*		if(validate(toggleplanYear))
 			toggleplanYear.click();*/
 		return new VPPPlanSummaryPage(driver, planType);
 	}
@@ -1001,18 +995,19 @@ CommonUtility.waitForPageLoad(driver, MAmoreDetailsLink, 30);
 	 */
 	public String getPlanPremium(String PlanName) {
 		
-		try {
+		/*try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 
 		
 		System.out.println("Plan Name is : "+PlanName);
 		//
 		//WebElement PremiumForPlan = driver.findElement(By.xpath("//h3[contains(text(), '"+PlanName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//li[contains(text(),'Monthly Premium')]//span[contains(text(),'$')]"));
 		WebElement PremiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '"+PlanName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//li[1]//span[contains(text(),'$')]"));
+		CommonUtility.waitForPageLoad(driver,PremiumForPlan, 30);
 		String PlanPremium = PremiumForPlan.getText();
 		
 		System.out.println("Premium for Plan : "+PlanPremium);
@@ -1039,12 +1034,7 @@ CommonUtility.waitForPageLoad(driver, MAmoreDetailsLink, 30);
 		}
 		EnrollForPlan.click();
 		
-		try {
-			Thread.sleep(5000);
-			} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		CommonUtility.waitForPageLoad(driver, NextBtn, 30);
 		if(driver.getCurrentUrl().contains("welcome")){
 			System.out.println("OLE Welcome Page is Displayed");
 			return new WelcomePage(driver);

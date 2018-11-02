@@ -101,12 +101,12 @@ public class CommonUtility {
 		WebDriverWait wait = new WebDriverWait(driver, timeout);
 		try {
 			WebElement elementExpected = wait.until(ExpectedConditions.visibilityOf(element));
-			/*if ((elementExpected.getText().isEmpty() || elementExpected.getText() == null)) {
+			if ((elementExpected.getText().isEmpty() || elementExpected.getText() == null)) {
 				timeout = timeout - 5;
 				if (timeout > 0) {
 					waitForPageLoad(driver, element, timeout);
 				}
-			}*/
+			}
 			System.out.println("The element: " + elementExpected + " is visible");
 			
 
