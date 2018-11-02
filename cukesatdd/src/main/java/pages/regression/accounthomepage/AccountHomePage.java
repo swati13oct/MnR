@@ -206,7 +206,8 @@ public class AccountHomePage extends UhcDriver {
 
 	// @FindBy(xpath = "//div[@class='claim-results']//table[not
 	// (contains(@class,'ng-hide'))]//tbody//tr[2]//a[text()='MORE INFO']")
-	@FindBy(xpath = "//div[@class='claim-results']//tbody//tr[2]//td//span[@id='moreInfoLinkAtdd0']")
+	//@FindBy(xpath = "//div[@class='claim-results']//tbody//tr[2]//td//span[@id='moreInfoLinkAtdd0']")
+	@FindBy(xpath = "//a[contains (text(), 'MORE INFO')]")
 	private WebElement claimstablemoreinfolink;
 
 	@FindBy(css = ".claimDetTableMainSection")
@@ -1112,17 +1113,29 @@ public class AccountHomePage extends UhcDriver {
 	public ClaimDetailsPage navigateToClaimDetailsPage() {
 
 		try {
-			feebackpopupClose();
-			driver.switchTo().defaultContent();
+		//	feebackpopupClose();
+			//driver.switchTo().defaultContent();
 			// CommonUtility.waitForPageLoad(driver, claimstablemoreinfolink, 60);
 			// Thread.sleep(20);
-			claimstablemoreinfolink.click();
-			// CommonUtility.waitForPageLoad(driver, claimDetTableMainSection, 60);
-			System.out.println(driver.getTitle());
-			if (driver.getTitle().equalsIgnoreCase("Claims")) {
-				return new ClaimDetailsPage(driver);
-
-			}
+								validate(claimstablemoreinfolink);
+							System.out.println("more info link is seen for  ===>" + claimstablemoreinfolink.isDisplayed());
+							try {
+								Thread.sleep(2000);
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
+					
+							JavascriptExecutor executor = (JavascriptExecutor) driver;
+							executor.executeScript("arguments[0].click();", claimstablemoreinfolink);
+					
+							// claimstablemoreinfolinkCombo.click();
+							//CommonUtility.waitForPageLoad(driver, claimtotalcomb, 30);
+							System.out.println(driver.getTitle());
+							// System.out.println("*** Combo Member is on Claims Details Page ***");
+							if (driver.getTitle().equalsIgnoreCase("Claims Summary")) {
+								System.out.println("*** Claims Details Page ***");
+					
+							}
 		} catch (Exception ex) {
 			return null;
 		}
