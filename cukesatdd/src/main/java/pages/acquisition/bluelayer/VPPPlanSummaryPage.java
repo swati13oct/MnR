@@ -25,6 +25,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.uhcretiree.Rallytool_Page;
+import pages.acquisition.bluelayer.ComparePlansPageBlayer;
 import pages.acquisition.ulayer.PageTitleConstants;
 import pages.acquisition.vppforaep.AepVppPlanSummaryPage;
 import acceptancetests.data.CommonConstants;
@@ -239,6 +240,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath="//*[@id='togglecurrentYear']/a")
 	private WebElement YearToggle;
+	
+	@FindBy(id = "enrollment-next-button")
+	private WebElement NextBtn;
 
 	private PageData vppPlanSummary;
 
@@ -516,28 +520,31 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		WebDriverWait wait = new WebDriverWait(driver, 10000);
 
 		if (planType.equalsIgnoreCase("PDP")) {
+			CommonUtility.waitForPageLoad(driver, viewPDPPlans, 30);
 			if(viewPDPPlans.isDisplayed()){
 			wait.until(ExpectedConditions.elementToBeClickable(viewPDPPlans)).click();
 			}
 		} else if (planType.equalsIgnoreCase("MA")
 				|| planType.equalsIgnoreCase("MAPD")) {
-		
+				CommonUtility.waitForPageLoad(driver, closedTrigger, 30);
 				if(validate(closedTrigger)){
 					wait.until(ExpectedConditions.elementToBeClickable(closedTrigger)).click();
 				}			
 			
 		} else if (planType.equalsIgnoreCase("SNP")) {
-
+			CommonUtility.waitForPageLoad(driver, snpplans, 30);
 			if(validate(snpplans)){
 				wait.until(ExpectedConditions.elementToBeClickable(snpplans)).click();
 			}					
 		} else {
+			CommonUtility.waitForPageLoad(driver, medsupplans, 30);
 			if(validate(medsupplans)){
 				wait.until(ExpectedConditions.elementToBeClickable(medsupplans)).click();
 			}	
 		}
  /*  if(validate(toggleplanYear))
-			toggleplanYear.click();*/		return new VPPPlanSummaryPage(driver, planType);
+			toggleplanYear.click();*/		
+		return new VPPPlanSummaryPage(driver, planType);
 	}
 
 	private JSONObject formJsonObject(PageData vppPlanSummary) {
@@ -1353,17 +1360,18 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	 */
 	public String getPlanPremium(String PlanName) {
 		
-		try {
+		/*try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 
 		
 		System.out.println("Plan Name is : "+PlanName);
 		
 		WebElement PremiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '"+PlanName+"')]/ancestor::*[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(),'Monthly Premium')]//*[contains(text(),'$')]"));
+		CommonUtility.waitForPageLoad(driver, PremiumForPlan, 30);
 		String PlanPremium = PremiumForPlan.getText();
 		
 		System.out.println("Premium for Plan : "+PlanPremium);
@@ -1390,12 +1398,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		EnrollForPlan.click();
 		
-		try {
-			Thread.sleep(5000);
-			} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		CommonUtility.waitForPageLoad(driver, NextBtn, 30);
 		if(driver.getCurrentUrl().contains("enrollment")){
 			System.out.println("OLE Welcome Page is Displayed");
 			return new WelcomePage(driver);
@@ -1553,9 +1556,55 @@ public WelcomePage EnrollmentValidationChronic(String PlanName) throws Interrupt
 		else{
 			System.out.println("Current and Next year toggle NOT displayed for AEP");
 		}
-			
+				
 		// TODO Auto-generated method stub
 		return null;
 	}
+public ComparePlansPageBlayer clickOnCompareLink(){
+		
+		List<WebElement> compareLinks = driver.findElements(By.xpath(".//*[@id='plan-list-1']//button[contains(text(),'Compare plans')]"));	
+		compareLinks.get(1).click();
+
+
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(currentUrl().contains("/health-plans.html#/plan-compare"))
+			return new ComparePlansPageBlayer(driver);
+		return null;
+	}
+public boolean validateAllPlansChecked() {
+	try {
+		Thread.sleep(6000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	List<WebElement> compareChkBoxes = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]"));	
+	if(compareChkBoxes.get(0).getText().contains("3 plans added")&&compareChkBoxes.get(1).getText().contains("3 plans added")&&compareChkBoxes.get(2).getText().contains("3 plans added"))
+		return true;
+	return false;
+}
+
+public void checkAllMAPlans(){
+	try {
+		Thread.sleep(2000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	List<WebElement> allMAPlans = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]"));	
+
+	if(allMAPlans !=null){
+	for(int i = 0; i<allMAPlans.size(); i++){
+		allMAPlans.get(i).click();
+	}
+	}
+	
+}
+
 }
 

@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -15,7 +16,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.Global.Member.Footer;
+import pages.regression.footer.FooterPage;
 import pages.member.ulayer.SetupAutoPaymentPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
@@ -449,10 +450,10 @@ public OneTimePaymentPage MemAuthAutoPay(){
 	 else
 	 return null;
 }
-  public Footer validatePageFooter(){
+  public FooterPage validatePageFooter(){
 	  	  
 	  	 
-	  	 return new Footer(driver);
+	  	 return new FooterPage(driver);
   }
   
   public void feebackpopupClose() throws InterruptedException
@@ -469,6 +470,21 @@ public OneTimePaymentPage MemAuthAutoPay(){
 		}
 	}
 
+	public boolean scrollToBottom() {
+		try {
+			System.out.println("Proceed to scoll to the bottom of page");
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+		} catch (Exception e) {
+
+			Assert.fail("Can't scroll to the bottom of page");
+			return false;
+		}
+
+		return true;
+	}
+
+  
 }
 
 		

@@ -750,7 +750,7 @@ public class MRScenario {
 	public WebDriver getWebDriver() {
 
 
-		isSauceLabSelected = true;
+		/*isSauceLabSelected = true;
 		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 
 		capabilities.setCapability("platform", "Windows 7");
@@ -758,8 +758,8 @@ public class MRScenario {
 		capabilities.setCapability("parent-tunnel", "sauce_admin");
 		capabilities.setCapability("tunnelIdentifier",
 sauceLabsTunnelIdentifier);		
-		/*capabilities.setCapability("tunnelIdentifier",
-				"OptumSharedTunnel-Prd");*/		//capabilities.setCapability("name", "MRATDD-TestSuite");
+		capabilities.setCapability("tunnelIdentifier",
+				"OptumSharedTunnel-Prd");		//capabilities.setCapability("name", "MRATDD-TestSuite");
 		capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
 		String jobName = "VBF Execution - Using " + capabilities.getBrowserName() + " in  " + System.getProperty("environment") +" environment";
 		capabilities.setCapability("name", jobName);
@@ -773,7 +773,18 @@ sauceLabsTunnelIdentifier);
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return webDriver;
+		return webDriver;*/
+
+		File PTB = new File("C:/Users/agoyal24/AppData/Local/Google/Chrome/Application/Chrome.exe");
+        Map<String, Object> chromeOptions = new HashMap<String, Object>();
+        chromeOptions.put("binary", PTB);
+        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+        capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+        System.setProperty("webdriver.chrome.driver","C:/Users/agoyal24/Videos/chromedriver.exe");
+        webDriver = new ChromeDriver();
+
+       
+       return webDriver;
 
 	}
 

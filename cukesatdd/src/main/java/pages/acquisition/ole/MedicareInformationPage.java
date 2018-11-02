@@ -271,12 +271,7 @@ public class MedicareInformationPage extends UhcDriver{
 		executor.executeScript("arguments[0].click();", NextBtn);
 
 		//NextBtn.click();
-		try {
-			Thread.sleep(6000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		if(driver.getCurrentUrl().contains("preliminary-questions")){
 			System.out.println("OLE Preliminary Questions page is Displayed");
 			System.out.println(driver.getCurrentUrl());

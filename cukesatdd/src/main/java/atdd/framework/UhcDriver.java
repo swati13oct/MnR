@@ -19,6 +19,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import com.google.common.base.Predicate;
 
 import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
@@ -101,7 +102,6 @@ public abstract class UhcDriver {
 				break;
 			}
 		}
-
 	}
 
 	public boolean validate(WebElement element) {
@@ -536,5 +536,34 @@ try {
 			System.out.println("Exception message: " + ex.getMessage());
 		}
 	}
+	
+	public void selectFromDropDownByText(WebDriver driver, WebElement dropdownElement, String value) {
+		Select dropdown = new Select(dropdownElement);
+		waitUntilSelectOptionsPopulated(dropdown);
+		dropdown.selectByVisibleText(value);
+		CommonUtility.checkPageIsReadyNew(driver);
+		waitUntilSelectOptionsPopulated(dropdown);
+		if (!dropdown.getFirstSelectedOption().getText().trim().equalsIgnoreCase(value))
+			Assert.fail("Expected value is not present in dropdown");
+	}
+	
+	public void selectFromDropDownByValue(WebElement dropdownElement, String value) {
+		Select dropdown = new Select(dropdownElement);
+		waitUntilSelectOptionsPopulated(dropdown);
+		dropdown.selectByValue(value);
+		CommonUtility.checkPageIsReadyNew(driver);
+		waitUntilSelectOptionsPopulated(dropdown);
+	if(!dropdown.getFirstSelectedOption().getAttribute("value").trim().equalsIgnoreCase(value))
+		Assert.fail("Expected value is not present in dropdown");
+	}
 
+	public void waitUntilSelectOptionsPopulated(final Select select) {
+		FluentWait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(60, TimeUnit.SECONDS)
+				.pollingEvery(2, TimeUnit.MILLISECONDS);
+		wait.until(new Predicate<WebDriver>() {
+			public boolean apply(WebDriver d) {
+				return (select.getOptions().size() > 1);
+			}
+		});
+	}
 }

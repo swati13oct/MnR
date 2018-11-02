@@ -26,7 +26,7 @@ Feature: 1.16-VBF-MemRedesign-To test FnR functionality
    
     And for active member Temporary Id Card and Plan Order Material links are displayed
     And validates the view temporary id card link
-    Then validate that the anoc section is displayed
+    Then validate that the Anoc Section is displayed
     Then validate that the annual directories section is displayed
     And both the Pharmacy locator and provider search links are displayed
     Then validate that My document section is displayed

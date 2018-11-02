@@ -12,7 +12,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -124,12 +127,8 @@ public class ReviewSubmitPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		CommonUtility.waitForPageLoad(driver, SubmitApplicationBtn, 30);
+		validateNew(SubmitApplicationBtn);
 		validate(PageHeader);
 		System.out.println("Page header is Displayed : "+PageHeader.getText());	
 	}
@@ -299,13 +298,8 @@ public class ReviewSubmitPage extends UhcDriver{
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", SubmitApplicationBtn);
 
-		//NextBtn.click();
-		try {
-			Thread.sleep(6000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		WebDriverWait wait = new WebDriverWait(driver, 30);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@class = 'cta-button confirm-button']")));
 		if(driver.getCurrentUrl().contains("confirmation")){
 			System.out.println("OLE Enrollment Submission Confirmation Page is Displayed");
 			return new OLEconfirmationPage(driver);

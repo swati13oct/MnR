@@ -128,7 +128,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[1]//*[@class='trigger-closed']")
 	private WebElement viewPlans;
 	
-	@FindBy(xpath = "div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[3]//*[@class='trigger-closed']")
+	@FindBy(xpath = "//div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[3]//*[@class='trigger-closed']")
 	private WebElement viewPDPPlans;
 	
 	@FindBy(xpath = ".//*[@id='togglenextYear']/a")
@@ -214,6 +214,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(id = "drugsTabId")
 	public WebElement step1;
 	
+	@FindBy(id = "enrollment-next-button")
+	private WebElement NextBtn;
 	
 	public JSONObject vppPlanSummaryJson;
 
@@ -276,35 +278,27 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public VPPPlanSummaryPage viewPlanSummary(String planType) {
 	WebDriverWait wait = new WebDriverWait(driver, 10000);
 
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		if (planType.equalsIgnoreCase("PDP")) {
-//	WebElement hidePdpPlans invalid
-			//if(validate(hidePdpPlans)){
+				CommonUtility.waitForPageLoad(driver, pdpPlansViewLink, 30);
 				pdpPlansViewLink.click();
 				System.out.println("PDP Plan Type Clicked");
-			//}
+			
 		} else if (planType.equalsIgnoreCase("MA")
 				|| planType.equalsIgnoreCase("MAPD")) {
+				CommonUtility.waitForPageLoad(driver, maPlansViewLink, 30);
 				maPlansViewLink.click();
 		
-			
-			//validate(hideMaPlans);
 		} else if (planType.equalsIgnoreCase("MS")) {
-			if(validate(hidePdpPlans)){
+			CommonUtility.waitForPageLoad(driver, msPlansViewLink, 30);
+			if(validate(msPlansViewLink)){
 				msPlansViewLink.click();
 			}
 		} else if (planType.equalsIgnoreCase("SNP")) {
+			CommonUtility.waitForPageLoad(driver, snpPlansViewLink, 30);
 				snpPlansViewLink.click();
 		}
-		else if (planType.equalsIgnoreCase("SNP")) {
-			snpPlansViewLink.click();
-		}
-/*		if(validate(toggleplanYear))
+		/*		if(validate(toggleplanYear))
 			toggleplanYear.click();*/
 		return new VPPPlanSummaryPage(driver, planType);
 	}
@@ -856,7 +850,7 @@ CommonUtility.waitForPageLoad(driver, MAmoreDetailsLink, 30);
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(validate(viewPDPPlans)){
+		if(validateNew(viewPDPPlans)){
 		viewPDPPlans.click();
 		}else{
 			Assert.assertTrue("This scenario is for AEP period", true);
@@ -882,19 +876,17 @@ CommonUtility.waitForPageLoad(driver, MAmoreDetailsLink, 30);
 	}
 
 
-	public ComparePlansPage clickOnCompareLink(){
-		
-		List<WebElement> compareLinks = driver.findElements(By.xpath(".//*[@id='plan-list-1']//button[contains(text(),'Compare plans')]"));	
-		compareLinks.get(0).click();
-
-
+	public ComparePlansPage clickOnCompareLink() {
+		List<WebElement> compareLinks = driver
+				.findElements(By.xpath(".//*[@id='plan-list-1']//button[contains(text(),'Compare plans')]"));
+		compareLinks.get(1).click();
 		try {
 			Thread.sleep(6000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(currentUrl().contains("/health-plans.html#/plan-compare"))
+		if (currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPage(driver);
 		return null;
 	}
@@ -1001,18 +993,19 @@ CommonUtility.waitForPageLoad(driver, MAmoreDetailsLink, 30);
 	 */
 	public String getPlanPremium(String PlanName) {
 		
-		try {
+		/*try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 
 		
 		System.out.println("Plan Name is : "+PlanName);
 		//
 		//WebElement PremiumForPlan = driver.findElement(By.xpath("//h3[contains(text(), '"+PlanName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//li[contains(text(),'Monthly Premium')]//span[contains(text(),'$')]"));
 		WebElement PremiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '"+PlanName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//li[1]//span[contains(text(),'$')]"));
+		CommonUtility.waitForPageLoad(driver,PremiumForPlan, 30);
 		String PlanPremium = PremiumForPlan.getText();
 		
 		System.out.println("Premium for Plan : "+PlanPremium);
@@ -1039,12 +1032,7 @@ CommonUtility.waitForPageLoad(driver, MAmoreDetailsLink, 30);
 		}
 		EnrollForPlan.click();
 		
-		try {
-			Thread.sleep(5000);
-			} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		CommonUtility.waitForPageLoad(driver, NextBtn, 30);
 		if(driver.getCurrentUrl().contains("welcome")){
 			System.out.println("OLE Welcome Page is Displayed");
 			return new WelcomePage(driver);
@@ -1133,6 +1121,44 @@ CommonUtility.waitForPageLoad(driver, MAmoreDetailsLink, 30);
 		}
 			
 		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public void checkAllPDPlans(){
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<WebElement> allPDPlans = driver.findElements(By.xpath(".//*[@id='plan-list-3']//div[contains(@class,'compare-box')]"));	
+
+		if(allPDPlans !=null){
+		for(int i = 0; i<allPDPlans.size(); i++){
+			allPDPlans.get(i).click();
+		}
+		}
+		
+	}
+	public ComparePlansPage clickOnCompareLinkAARP(String plantype){
+		
+		if (plantype.equalsIgnoreCase("MedicareAdvantage"))
+		{
+			List<WebElement> compareLinks = driver.findElements(By.xpath(".//*[@id='plan-list-1']//button[contains(text(),'Compare plans')]"));	
+			compareLinks.get(1).click();	
+		}else{
+			WebElement compareLinks2 = driver.findElement(By.xpath("(.//*[@id='plan-list-3']//button[contains(text(),'Compare plans')])[1]"));	
+			compareLinks2.click();	
+		}
+
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(currentUrl().contains("/health-plans.html#/plan-compare"))
+			return new ComparePlansPage(driver);
 		return null;
 	}
 }

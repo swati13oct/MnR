@@ -16,7 +16,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import junit.framework.Assert;
-import pages.Global.Member.Footer;
+import pages.regression.footer.FooterPage;
 @SuppressWarnings("deprecation")
 
 /**
@@ -1002,10 +1002,10 @@ public void NavigateToClaimsPage(){
 	}
 	
 }
-  public Footer validatePageFooter(){
+  public FooterPage validatePageFooter(){
 	  	  
 	  	 
-	  	 return new Footer(driver);
+	  	 return new FooterPage(driver);
   }
   
   /**
@@ -1336,8 +1336,8 @@ public void NavigateToClaimsPage(){
 				CommonUtility.waitForPageLoad(driver, ClaimsSummaryPage,60);
 				String winHandleBefore = driver.getWindowHandle();
 				validateclaimsdownloadbutton.click();
-				validateclaimsprintbutton.click();
-				switchToNewTab();
+				//validateclaimsprintbutton.click();
+				//switchToNewTab();
 				System.out.println("New window = "+driver.getTitle());
 				driver.switchTo().window(winHandleBefore);
 				System.out.println("Main window = "+driver.getTitle());				

@@ -12,12 +12,12 @@ import cucumber.api.CucumberOptions;
  */
 
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount=2,screenShotSize="", screenShotLocation="/screenshots/",
+@ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",
 jsonReport = "target/cucumber-RunMRATDDtheSpartansTest.json",detailedReport = true, detailedAggregatedReport = true, 
 	overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDtheSpartansTest")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign" }, plugin = {"pretty", "html:reports/test-report", 
-		"json:target/cucumber-RunMRATDDtheSpartansTest.json" }, tags = { "@theSpartans" })
+		"json:target/cucumber-RunMRATDDtheSpartansTest.json" }, tags = { "@15301" })
 public class RunMRATDDtheSpartansTest {
 
 }
