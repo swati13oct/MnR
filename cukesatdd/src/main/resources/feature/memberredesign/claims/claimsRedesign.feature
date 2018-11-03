@@ -121,7 +121,7 @@ When I navigate to the claims Summary page in redesigned site
 And I validate the error message for a PHIP Member on the screen
 Examples: 
    | planType | claimssystem |
-   | SHIP     | SHIPCALIMS   |
+   | SHIP     | SHIPCLAIMS   |
   
    # This Scenario can only execute when max claims indicator as true
   #@MaxClaimsResultsError
@@ -208,7 +208,6 @@ Examples:
     And I validate the pagination on the claims summary page for members  
     And the user validates the EOB section in redesigned site    
     And the user validates the DownloadMyData section in redesigned site
-
     Examples: 
       | planType | claimPeriod    | domain | claimssystem |
       | PDP      | Last 24 months | RX     | RXCLAIMS     |
