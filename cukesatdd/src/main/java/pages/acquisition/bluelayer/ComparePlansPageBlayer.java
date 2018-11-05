@@ -1,4 +1,4 @@
-package pages.acquisition.ulayer;
+package pages.acquisition.bluelayer;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -10,7 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.ole.WelcomePage;
 import atdd.framework.UhcDriver;
-public class ComparePlansPage extends UhcDriver {
+public class ComparePlansPageBlayer extends UhcDriver {
 
 	
 	@FindBy(id = "backtoplansummarypage")
@@ -35,7 +35,7 @@ public class ComparePlansPage extends UhcDriver {
 	private WebElement validatesuccesspopup;
 	
 		
-	public ComparePlansPage(WebDriver driver) {
+	public ComparePlansPageBlayer(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		//openAndValidate();

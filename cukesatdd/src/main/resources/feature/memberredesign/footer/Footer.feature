@@ -6,6 +6,7 @@ Feature: Footer validation
   @IncrediblesFooter
   Scenario Outline: Verify footer section is in place
   # note: not going to validate pages from Rally, i.e. Dashboard (DCE), Find Care & Costs
+  # note: if system is in future date, payment page may not show for user and this test will end up failing
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -25,4 +26,4 @@ Feature: Footer validation
 
     Examples: 
       | planType | memberType           |
-      | MAPD     | UHCIndividualDCEmembers |
+      | MAPD     | withRider |

@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -45,8 +46,8 @@ public class OLEconfirmationPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		
-		
+		CommonUtility.waitForPageLoad(driver,PlanYear_PlanName, 30);
+		validateNew(PlanYear_PlanName);
 	}
 
 	public boolean validate_plan_details(Map<String, String> planDetailsMap) {

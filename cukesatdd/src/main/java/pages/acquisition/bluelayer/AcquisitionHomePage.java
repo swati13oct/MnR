@@ -913,7 +913,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
                 } catch (Exception e) {
                         System.out.println("zipCodeField not found");
                 }
-                CommonUtility.waitForPageLoad(driver, requestAgentApptDropdown, 30);
+                CommonUtility.waitForPageLoad(driver, requestAgentApptDropdown, 60);
         		if (validateNew(requestAgentApptDropdown) && currentUrl().contains(
                                 "medicare-advantage-plans/request-information.html")) {
                         return new RequestHelpAndInformationPage(driver);
