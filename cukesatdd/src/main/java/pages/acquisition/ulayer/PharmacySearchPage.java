@@ -8,8 +8,6 @@ import java.util.concurrent.TimeUnit;
 
 import junit.framework.Assert;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,9 +17,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import pages.acquisition.ulayer.PharmacySearchPage;
-import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
-import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
@@ -29,6 +25,7 @@ import atdd.framework.UhcDriver;
  * @author pagarwa5
  *
  */
+@SuppressWarnings("deprecation")
 public class PharmacySearchPage extends UhcDriver {
 
 	@FindBy(id = "zipcodeTxt")
@@ -40,7 +37,7 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(id = "zipcode-button")
 	private WebElement searchbtn;;
 
-	@FindBy(id = "selectcounty_box")
+	@FindBy(id = "selectmultycounty_box")
 	private WebElement countyPopOut;
 
 	@FindBy(id = "showpharmacycount_id")
@@ -60,9 +57,6 @@ public class PharmacySearchPage extends UhcDriver {
 	
 	@FindBys(value = { @FindBy(xpath = "//select[@id='plan-year']/option") })
 	private List<WebElement> planYearList;
-
-	@FindBys(value = { @FindBy(xpath = "//select[@id='lang-select']/option") })
-	private List<WebElement> langList;
 
 	@FindBys(value = { @FindBy(xpath = "//div[@id='selectCounty']/p") })
 	private List<WebElement> countyList;
@@ -97,7 +91,7 @@ public class PharmacySearchPage extends UhcDriver {
 	
 	
 	
-	@FindBys(value = { @FindBy(xpath = "//ul[1][@class='filter-list']/li/label") })
+	@FindBys(value = { @FindBy(xpath = "//ul[contains(@class,'filter-list')]/li[not(contains(@class,'ng-hide'))]/label") })
 	private List<WebElement> pharmacyTypesandServices;
 
 	@FindBy(xpath = "//div[@id='medicareTitle']/h1")
@@ -164,215 +158,177 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='pharmacy-list']/li")
 	List<WebElement> pharmacyListItems;
 
-	@FindBy(linkText = "VIEW RESULT AS PDF")
+	@FindBy(id = "createpdf_id")
 	WebElement resultAsPDF;
 	
 	@FindBy(xpath = "//*[@id='15ec5a30-0a71-4aaa-b7df-074986ec97a9_toolTip']/parent::p")
 	WebElement standardNetworkPharmacy;
+	
+	@FindBy(id = "pharmacylocatorheader_id")
+	WebElement pharmacylocatorheader;
+	
+	@FindBy(className = "loading-block")
+	List<WebElement> loadingBlock;
+	
+	@FindBy(xpath = "//img[@alt='Standard Network']")
+	List<WebElement> standardNetworkMarker;
+	
+	@FindBy(xpath = "//img[@alt='PreferredNetwork']")
+	List<WebElement> PreferredNetworkMarker;
+	
+	@FindBy(xpath = "(//div[contains(@class,'pharmacy-list-links')]//a)[1]")
+	WebElement showOnMapLink;
+	
+	@FindBy(xpath = "(//div[contains(@class,'pharmacy-list-links')]//a[contains(@href,'google')])[1]")
+	WebElement getDirectionLink;
+	
+	@FindBy(xpath = "//div[contains(@class,'pharmacy-info')]/*[contains(@class,'pharmacy-name')]")
+	WebElement pharmacyNameLink;
+	
+	@FindBy(xpath = "//div[contains(@class,'callus')]")
+	WebElement questionsRightRailWidget;
+	
+	@FindBy(id = "lang-select")
+	WebElement langDropdown;
+	
+	@FindBy(xpath = "//div[@class='pharmacy-locator']//div[contains(@class,'col-md-12')]/*[contains(text(),'farmacia')]")
+	WebElement pharmacyBodyContentSpanish;
+	
+	@FindBy(xpath = "//div[@class='pharmacy-locator']//div[contains(@class,'col-md-12')]/*[contains(text(),'使用網上名冊搜尋藥房和藥房位置。')]")
+	WebElement pharmacyBodyContentChinese;
 
-	private PageData locatePharmacy;
-
-	public JSONObject locatePharmacyJson;
-
+	@FindBy(id = "distance")
+	WebElement distanceDropownID;
+	
 	public PharmacySearchPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		String fileName = CommonConstants.LOCATE_PHARMACIES_PAGE_DATA;
-		locatePharmacy = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
 		openAndValidate();
 	}
 
 	public boolean validateCountypopoup(){
-		boolean flag = false;
+		CommonUtility.checkPageIsReady(driver);
 
+		return validateNew(countyPopOut); 
+	}
+
+	public void enterZipDistanceDetails(String zipcode, String distance, String county) {
+		validateNew(distanceDropownID);
+		selectFromDropDownByText(driver, distanceDropownID, distance);
+		sendkeysNew(zipcodeField, zipcode);
+		searchbtn.click();
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		CommonUtility.checkPageIsReady(driver);
+		if (!county.equalsIgnoreCase("None")) {
+			try {
+				if (validateNew(countyPopOut)) {
+					for (WebElement webElement : countyList) {
+						if (webElement.getText().contains(county)) {
+							WebElement countylink = driver.findElement(By.linkText(webElement.getText()));
 
-		if (countyPopOut.isDisplayed()) 
-			flag=true;
-
-		return flag;
-	}
-
-	public PharmacySearchPage enterZipDistanceDetails(String zipcode,
-			String distance, String county) {
-		
-		selectFromDropDown(distanceDropDown, distance);
-		//driver.findElement(By.id("zipcodeTxt")).sendKeys("90210");
-		sendkeys(zipcodeField, zipcode);
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		
-		searchbtn.click();
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		System.out.println("*****Zipcode, distance and County details are entered******");
-
-		//zipcodeSearchButton.click();
-		
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		CommonUtility.checkPageIsReady(driver);
-		if(!county.equalsIgnoreCase("None"))	{
-		try{
-			if (countyPopOut.isDisplayed()) {
-				for (WebElement webElement : countyList) {
-					try {
-						Thread.sleep(5000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					if (webElement.getText().contains(county)) {
-						try {
-							Thread.sleep(5000);
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+							countylink.click();
+							break;
 						}
-						WebElement countylink = driver.findElement(By.linkText(webElement.getText()));
-
-						countylink.click();
-						break;
 					}
 				}
+			} catch (Exception e) {
+
+				System.out.println("Exception!!! County does not exists." + e.getMessage());
+				Assert.fail("Exception!!! County does not exists");
 			}
-		}catch(Exception e){
-			System.out.println("County not exists");
-		}
 
-		}/*
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-
-		if (driver.getTitle().equalsIgnoreCase(
-				PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE)) {
-			return new PharmacySearchPage(driver);
 		}
-		if (driver.getTitle().equalsIgnoreCase(
-				PageTitleConstants.BLAYER_FIND_A_PHARMACY_AARP_MEDICARE_PLANS_FROM_UNITEDHEALTHCARE)) {
-			return new PharmacySearchPage(driver);
-		}
-		else {
-			return null;
-		}
-		
-	}
-
-	//selectFromDropDown(planNamesList, planName);
-	public PharmacySearchPage selectsPlanName(String planName) {
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		selectFromDropDown(planNamesList, planName);
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-		if (driver.getTitle().equalsIgnoreCase(
-				PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE)) {
-			return new PharmacySearchPage(driver);
-		}
-		
-		driver.manage().timeouts().implicitlyWait(5000, TimeUnit.SECONDS);
-		
-		/*Select select = new Select(planType);	
-		select.selectByVisibleText(planName);
-		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);*/
-		return new PharmacySearchPage(driver);
-	}
-	
-
-	public boolean isPlanYear() {
-		
-		if(planYeartext.isDisplayed()){
-				return true;
-		}else{
-			return false;
-		}
-	}
-	
-	public PharmacySearchPage selectsPlanYear(String planYear) {
-		selectFromDropDown(planYearList, planYear);
-		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE)) {
-			return new PharmacySearchPage(driver);
-		}else
-			return null;
-		
-	
-		/*driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		selectFromDropDown(planYearList, planYear);
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-		if (driver.getTitle().equalsIgnoreCase(
-				PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE)) {
-			return new PharmacySearchPage(driver);
-		}
-		
-		driver.manage().timeouts().implicitlyWait(5000, TimeUnit.SECONDS);
-		
-		Select select = new Select(planYearsel);	
-		select.selectByVisibleText(planYear);
-		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
-		return new PharmacySearchPage(driver);*/
-	}
-
-	
-	public PharmacySearchPage selectPharmacyandServices(String pharmacytype) {
-		
-		
-		
-		for (WebElement webElement : pharmacyTypesandServices) {
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			if (webElement.getText().contains(pharmacytype)) {
+		System.out.println("*****Zipcode, distance and County details are entered******");
+		Select dropdown = new Select(seletPlandropdown);
+		waitUntilSelectOptionsPopulated(dropdown);
+		/*List<WebElement> options;
+		options = dropdown.getOptions();
+		int counter = 0;
+		while (options.isEmpty()) {
+			if (counter <= 30) {
 				try {
-					Thread.sleep(4000);
+					Thread.sleep(2000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				 //driver.findElement(By.linkText(webElement.getText())).click();;
-				System.out.println(webElement.getText());
-				waitforElement(webElement);
-				 webElement.click();
-				break;
-			}
-		}
-	
-			return new PharmacySearchPage(driver);
-  
+				options = dropdown.getOptions();
+			} else
+				Assert.fail("Plans not populated!!!");
+		}*/
 	}
-	
-	
-	public PharmacySearchPage selectLanguage(String langName) {
-		selectFromDropDown(langList, langName);
 
+	public void selectsPlanName(String planName) {
+		selectFromDropDownByText(driver, seletPlandropdown, planName);
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		if (driver.getTitle().equalsIgnoreCase(
-				PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE)) {
-			return new PharmacySearchPage(driver);
+		if (!loadingBlock.isEmpty()) {
+			CommonUtility.waitForElementToDisappear(driver, loadingBlock.get(0), 60);
 		}
-		return null;
+		if (!validateNew(pharmacyCount)) {
+			Assert.fail("Pharmacies not displayed");
+		}
 	}
+	
+
+	public boolean isPlanYear() {
+		if (!planYearList.isEmpty()) {
+			return drpYear.isDisplayed();
+		}
+		return false;
+	}
+	
+	public void selectsPlanYear(String planYear) {
+		selectFromDropDownByText(driver, drpYear, planYear);
+	}
+
+	
+	public boolean selectPharmacyandServices(String pharmacytype) {
+		int PharmacyTypeSelectedCount = driver.findElements(By.xpath("//label[contains(text(),'" + pharmacytype
+				+ "')]/preceding-sibling::input[contains(@class,'ng-dirty')]")).size();
+		System.out.println("PharmacyTypeSelectedCount" + PharmacyTypeSelectedCount);
+		boolean isTypeSelected = false;
+		for (WebElement webElement : pharmacyTypesandServices) {
+			System.out.println(webElement.getText());
+			if (webElement.getText().contains(pharmacytype) && PharmacyTypeSelectedCount == 0) {
+				System.out.println(webElement.getText());
+				webElement.click();
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				if (!loadingBlock.isEmpty()) {
+					System.out.println("Waiting till loading spinner gets disappear");
+					CommonUtility.waitForElementToDisappear(driver, loadingBlock.get(0), 60);
+				}
+				if (!driver.findElements(By.xpath("//label[contains(text(),'" + pharmacytype
+						+ "')]/preceding-sibling::input[contains(@class,'ng-dirty')]")).isEmpty()) {
+					isTypeSelected = true;
+					System.out.println("Pharmacy servce/type selected successfully!!!");
+				}
+				break;
+			} else if (webElement.getText().contains(pharmacytype) && PharmacyTypeSelectedCount == 1) {
+				isTypeSelected = true;
+				System.out.println("Pharmacy service/type already selected");
+			}
+		}
+		return isTypeSelected;
+	}
+	
+	public void selectLanguage(String langName) {
+		validateNew(langDropdown);
+		selectFromDropDownByValue(langDropdown, langName);
+		CommonUtility.waitForPageLoadNew(driver, zipcodeField, 60);
+	}
+	
 	public PharmacyResultPage searchesPharmacy() {
 
 		searchPharmaciesButton.click();
@@ -427,41 +383,8 @@ public class PharmacySearchPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		JSONObject jsonObject = new JSONObject();
-		for (String key : locatePharmacy.getExpectedData().keySet()) {
-			List<WebElement> elements = findElements(locatePharmacy
-					.getExpectedData().get(key));
-			if (elements.size() == 1) {
-				if (elements.get(0) != null) {
-					if (validate(elements.get(0))) {
-						try {
-							jsonObject.put(key, elements.get(0).getText());
-						} catch (JSONException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-				}
-			}else if(elements.size() > 1){
-				if (elements.get(0) != null) {
-					if (validate(elements.get(0))) {
-						try {
-							jsonObject.put(key, elements.get(0).getText());
-						} catch (JSONException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-				}
-			}
-		}
-		locatePharmacyJson = jsonObject;
-		System.out.println("locatePharmacyJson----->"
-				+ locatePharmacyJson);
-
-		validate(customercare);
-
-
+		CommonUtility.waitForPageLoadNew(driver, pharmacylocatorheader, 60);
+		validateNew(zipcodeField);
 	}
 	
 	public PharmacyResultPage clickOnContinue() {
@@ -566,7 +489,6 @@ public PharmacyResultPage ValidateShowOnMapResult() {
         return null;
  }
 
-	@SuppressWarnings("deprecation")
 	public void validateDefaultChooseaPlanSection(String planName){
 		int[] expectedDropdownmiles ={1,2,5,10,15,25};
 		for(int i=0;(i<distanceDropDown.size());i++){
@@ -590,8 +512,9 @@ public PharmacyResultPage ValidateShowOnMapResult() {
 		}*/
 	}
 
-	@SuppressWarnings("deprecation")
 	public void validateChoosePlanSectionAfterzipcodeSearch(){
+		
+		
 	/*	Assert.assertTrue("Select Plan drop down is not enabled", seletPlandropdown.isEnabled());
 		Assert.assertTrue("Preferred Pharmacy is selected by default",!preferredPharmacy.isSelected());
 		Assert.assertTrue("Standard Pharmacy is selected by default",!standardPharmacy.isSelected());*/
@@ -602,7 +525,6 @@ public PharmacyResultPage ValidateShowOnMapResult() {
 		}*/
 	}
 
-	@SuppressWarnings("deprecation")
 	public void validateNoPharmacyErrormsg(String[] pharmacyTypeArray){
 		pharmacyTypeSelectionRadioButton.click();
 		for (String pharmacyType : pharmacyTypeArray) {
@@ -628,38 +550,42 @@ public PharmacyResultPage ValidateShowOnMapResult() {
 		Assert.assertTrue("Incorrect error message displayed",expectedErrormsg.equals(errorHeader.getText() + errorPoints.getText()));
 	}
 
-	@SuppressWarnings("deprecation")
-	public void validatePharmaciesSectionAfterplanSelection(){
-		Assert.assertTrue("Preferred Pharmacy is selected by default",!preferredPharmacy.isSelected());
-		//Assert.assertTrue("Standard Pharmacy is selected by default",!standardPharmacy.isSelected());
+	public void validatePharmaciesSectionAfterplanSelection() {
+		Assert.assertTrue("Preferred Pharmacy is selected by default", !preferredPharmacy.isSelected());
+		// Assert.assertTrue("Standard Pharmacy is selected by
+		// default",!standardPharmacy.isSelected());
 	}
 
-	public boolean validatePharmacyResults(){
-		try {
-			Thread.sleep(20000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-		boolean flag = true;
+	public boolean validatePharmacyResults() {
 		System.out.println(pharmacyCount.getText());
-		if(pharmacyCount.getText().equals("") || Integer.parseInt(pharmacyCount.getText())==0)
-			flag =  false;
+		if (pharmacyCount.getText().equals("") || Integer.parseInt(pharmacyCount.getText()) == 0)
+			return false;
 
-		if(pharmacyResults.getAttribute("class").toString().contains("ng-hide"))
-			flag = false;
-		else{
-			if(!mapToggleElement.isDisplayed())
-				flag = false;
-			if(!pharmacyList.isDisplayed())
-				flag = false;
-			if(mapView.getAttribute("class").contains("ng-hide"))
-				flag = false;
-			if(!(pharmacyListItems.size()>1))
-				flag = false;
+		if (pharmacyResults.getAttribute("class").toString().contains("ng-hide"))
+			return false;
+		else {
+			if (!mapToggleElement.isDisplayed())
+				return false;
+			if (!pharmacyList.isDisplayed())
+				return false;
+			if (mapView.getAttribute("class").contains("ng-hide"))
+				return false;
+			if (!(pharmacyListItems.size() > 1))
+				return false;
+			if (!resultAsPDF.isDisplayed())
+				return false;
+			if (!(standardNetworkMarker.size() == 1 || PreferredNetworkMarker.size() == 1))
+				return false;
+			if (!showOnMapLink.isDisplayed())
+				return false;
+			if (!getDirectionLink.isDisplayed())
+				return false;
+			if (!pharmacyNameLink.isDisplayed())
+				return false;
+			if (!questionsRightRailWidget.isDisplayed())
+				return false;
 		}
-		return flag;
+		return true;
 	}
 	
 	public void selectCounty(String county){
@@ -691,5 +617,33 @@ public PharmacyResultPage ValidateShowOnMapResult() {
 			e.printStackTrace();
 		}
 	
+	}
+	
+	public boolean validateLanguageChanges(String language) {
+		if (("es").equalsIgnoreCase(language)) {
+			String headingText = pharmacylocatorheader.getText();
+			if (!headingText.contains("Farmacia"))
+				return false;
+			if (!pharmacyBodyContentSpanish.isDisplayed())
+				return false;
+			if (!btnContinue.getText().contains("CONTINUAR")) {
+				System.out.println("Text not matches - " + btnContinue.getText());
+				return false;
+			}
+
+		} else if (("zh").equalsIgnoreCase(language)) {
+			Assert.fail("Temporarily commented Chinese code. Please select Spanish or English");
+			/*String headingText = pharmacylocatorheader.getText();
+			if (!headingText.contains("尋找藥房"))
+				return false;
+			if (!pharmacyBodyContentChinese.isDisplayed())
+				return false;
+			if (!btnContinue.getText().contains("繼續"))
+				return false;*/
+		} else {
+			Assert.fail("Please select a valid language!!!");
+			return false;
+		}
+		return true;
 	}
 }

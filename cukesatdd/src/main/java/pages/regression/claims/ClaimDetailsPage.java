@@ -230,7 +230,10 @@ public class ClaimDetailsPage extends UhcDriver{
 	@SuppressWarnings("deprecation")
 	public void validateClaimsTableInDetailsPage() {
 		//wait.until(ExpectedConditions.visibilityOf(rememberThisDeviceSection));
-		if (driver.getCurrentUrl().contains("member/claims/overview.html#/details"))
+		if (driver.getCurrentUrl().contains("member/claims.html#/details"))
+			
+			//https://stage-medicare.uhc.com/member/claims.html#/details
+			//member/claims.html#/overview
 		System.out.println("The URL of the Claims page is---------->"+driver.getCurrentUrl());
 		System.out.println("The title of Claims page is-------->"+driver.getTitle());
 		

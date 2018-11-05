@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -65,6 +66,7 @@ public class ProposedEffectiveDatePage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
+		CommonUtility.waitForPageLoad(driver, ProposedEffectiveDatePageHeader, 30);
 		validate(ProposedEffectiveDatePageHeader);
 		
 		System.out.println("Page header is Displayed"+ProposedEffectiveDatePageHeader.getText());
@@ -93,12 +95,7 @@ public class ProposedEffectiveDatePage extends UhcDriver{
 		validate(NextBtn);
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		if(planType.contentEquals("PDP")){
 			if(driver.getCurrentUrl().contains("monthly-premium")){
 				System.out.println("OLE Monthly Plan Premium Page is Displayed");

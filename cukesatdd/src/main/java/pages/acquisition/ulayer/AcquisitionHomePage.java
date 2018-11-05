@@ -14,8 +14,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -194,7 +192,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}else{
 			start(AARP_ACQISITION_PAGE_URL);
 		}
-
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
 	}
 
 	public VPPPlanSummaryPage searchPlans(String zipcode, String countyName) {
@@ -655,61 +654,29 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return null;
 	}
 
-	public void navigateToRequestMoreHelpAndInformation(String planType){
+	public void navigateToRequestMoreHelpAndInformation(String planType) {
 		Actions action = new Actions(driver);
 		PageFactory.initElements(driver, this);
 		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
-		/*if(planType.contains("MA"))
-				ma_moreHelpInfoLink.click();
-		else if(planType.contains("PDP")){
-				pdp_moreHelpInfoLink.click();		
-		}*/
-		
-		
-		
 		moreHelpInfoLink.click();
-		for(int i=0;i<10;i++){
+		for (int i = 0; i < 10; i++) {
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			if(driver.getCurrentUrl().contains("request-information"))
+			if (driver.getCurrentUrl().contains("request-information"))
 				break;
 		}
-		
 	}
 	
 	public PharmacySearchPage navigateToPharmacyLocator() {
 		driver.manage().window().maximize();
 		Actions action = new Actions(driver);
-		PageFactory.initElements(driver, this);
 		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
 		pharmacylocator.click();
-		
-		try {
-			Thread.sleep(6000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		/*String url= "https://www."+MRScenario.environment+"-aarpmedicareplans.ose-elr-core.optum.com/health-plans/aarp-pharmacy.html#/Pharmacy-Search-English";
-		
-		start();*/
-	/*	WebDriverWait wait = new WebDriverWait(driver, 10000);
-		pharmacyNearLink.click();
-		for(int i=0;i<10;i++){
-			try {
-				Thread.sleep(6000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			if(driver.getCurrentUrl().contains("-pharmacy."))
-				break;
-		}*/
+		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE)) {
 			return new PharmacySearchPage(driver);
 		}
@@ -751,7 +718,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("zipCodeField not found");
 		}
 		
-		CommonUtility.waitForPageLoad(driver, requestAgentApptDropdown, 30);
+		CommonUtility.waitForPageLoad(driver, requestAgentApptDropdown, 60);
 		if (validateNew(requestAgentApptDropdown) && currentUrl().contains(
 				"medicare-advantage-plans/request-information.html")) {
 			return new RequestHelpAndInformationPage(driver);

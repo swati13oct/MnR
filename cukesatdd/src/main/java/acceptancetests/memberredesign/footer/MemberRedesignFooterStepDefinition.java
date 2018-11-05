@@ -22,7 +22,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
-import pages.Global.Member.Footer;
+import pages.regression.footer.FooterPage;
 import pages.dashboard.member.drugcostestimator.blayer.DrugCostEstimatorPage;
 import pages.memberredesign.bluelayer.LoginPage;
 import pages.regression.accounthomepage.AccountHomePage;
@@ -136,159 +136,170 @@ public class MemberRedesignFooterStepDefinition {
 	public void user_views_payment_history() throws InterruptedException {		
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 		PaymentHistoryPage paymentHistoryPage = accountHomePage.navigateToPaymentHistoryPage();
-      if (paymentHistoryPage!=null){
-    	     	  getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
+		if (paymentHistoryPage!=null){
+			getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
 			System.out.println("user is on one time payment page"); 
-      }else{
-    	  System.out.println("Null value returned");
-      }	
-		
+		}else{
+			System.out.println("Null value returned");
+		}	
+
 	}
 
-      
-      @Then("^the user navigates to the footer section$")
-      public void user_validates_footer(){
-    	  PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
-    	  Footer footer = paymentHistoryPage.validatePageFooter();
-    	  if (footer!=null){
-	     	  getLoginScenario().saveBean(PageConstants.footer_page,footer);
-    	  
-      }else{
-    	  Assert.fail();
-      }
-      
-      }
-      @And("^the user validates the footer section in payments page$")
-      public void validate() throws InterruptedException{
-    	  Footer footerPage = (Footer) getLoginScenario().getBean(PageConstants.footer_page);
-    	  footerPage.validateFooterLinks();
-    	  getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
-      }
-      
-      @Then("^the user navigates to claims page$")
-      public void user_navigates_to_claims_page(){
-    	 
-    	  Footer footerPage = (Footer) getLoginScenario().getBean(PageConstants.footer_page);
-    	  footerPage.NavigateToClaimsPage();
-    	  
-    	  getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
-      }
-      
-      @And("^the user validates the footer section in claims page$")
-      public void user_validates_footer_in_claimsPage() throws InterruptedException{
-    	  Footer footerPage = (Footer) getLoginScenario().getBean(PageConstants.footer_page);
-    	  footerPage.validateFooterLinks();
-    	  getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
-      }
-      
-      @Then("^the user navigates to EOB page to validate footer$")
-      public void user_navigates_to_EOB_page(){
-    	  Footer footerPage = (Footer) getLoginScenario().getBean(PageConstants.footer_page);
-    	  footerPage.NavigateToEOBPage();
-    	  getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
-      }
-      
-      @And("^the user validates the footer section in EOB page$")
-      public void user_validates_footer_in_EobPage() throws InterruptedException{
-    	  Footer footerPage = (Footer) getLoginScenario().getBean(PageConstants.footer_page);
-    	  footerPage.validateFooterLinks();
-    	  getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
-      }
-      
-      @Then("^the user navigates to Pharmacy locator page$")
-      public void user_navigates_to_PharmacyLocator_page(){
-    	  Footer footerPage = (Footer) getLoginScenario().getBean(PageConstants.footer_page);
-    	  footerPage.NavigateToPharmacyLocator();
-    	  getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
-      }
-      
-      @And("^the user validates the footer section in pharmacy locator page$")
-      public void user_validates_footer_in_pharmacyLocatorPage() throws InterruptedException{
-    	  Footer footerPage = (Footer) getLoginScenario().getBean(PageConstants.footer_page);
-    	  footerPage.validateFooterLinks();
-    	  getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
-      }
-      
-      @Then("^the user navigates to DCE home page$")
-      public void user_navigates_to_DCE_page(){
-    	  Footer footerPage = (Footer) getLoginScenario().getBean(PageConstants.footer_page);
-    	  footerPage.NavigateToDCE();
-    	  getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
-      }
-      
-      @And("^the user validates the footer section in DCE page$")
-      public void user_validates_footer_in_DCE() throws InterruptedException{
-    	  Footer footerPage = (Footer) getLoginScenario().getBean(PageConstants.footer_page);
-    	  footerPage.validateFooterLinks();
-    	  getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
-      }
-      
-      @Then("^the user navigates to profile and pref page$")
-      public void user_navigates_to_PandP_page(){
-    	  Footer footerPage = (Footer) getLoginScenario().getBean(PageConstants.footer_page);
-    	  footerPage.NavigateToProfileandPref();
-    	  getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
-      }
-      
-      @And("^the user validates the footer section in pref page$")
-      public void user_validates_footer_in_PandP() throws InterruptedException{
-    	  Footer footerPage = (Footer) getLoginScenario().getBean(PageConstants.footer_page);
-    	  footerPage.validateFooterLinks();
-    	  getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
-      }
-      @Then("^the user navigates to Contact us page$")
-      public void user_navigates_to_contactUS_page(){
-    	  Footer footerPage = (Footer) getLoginScenario().getBean(PageConstants.footer_page);
-    	  footerPage.NavigateToContactUsPage();
-    	  getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
-      }
-      
-      @And("^the user validates the footer section in contact us page$")
-      public void user_validates_footer_in_contactUS() throws InterruptedException{
-    	  Footer footerPage = (Footer) getLoginScenario().getBean(PageConstants.footer_page);
-    	  footerPage.validateFooterLinks();
-    	  getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
-      }
-      
-      @Then("^the user navigates to Benefits page$")
-      public void user_navigates_to_benefits_page(){
-    	  Footer footerPage = (Footer) getLoginScenario().getBean(PageConstants.footer_page);
-    	  footerPage.NavigateToBenefitsPage();
-    	  getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
-      }
-      
-      @And("^the user validates the footer section in Benefits page$")
-      public void user_validates_footer_in_BenefitsPage() throws InterruptedException{
-    	  Footer footerPage = (Footer) getLoginScenario().getBean(PageConstants.footer_page);
-    	  footerPage.validateFooterLinks();
-    	  getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
-      }
-}
-    	  
-    	  
-      
-      
 
-
-
-		
-		
-		
+	@Then("^the user navigates to the footer section$")
+	public void user_validates_footer(){
 	
+			PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
+					
+				try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			paymentHistoryPage.scrollToBottom();
+			FooterPage footer = paymentHistoryPage.validatePageFooter();
 
-	/**
-	 *  @toDo : Checks for Member support and links under it
-	 */
-	/*@When("^Member Support and links under it should be displayed Footer$")
+			if (footer!=null){
+				getLoginScenario().saveBean(PageConstants.footer_page,footer);
+
+			}else{
+				Assert.fail();
+			}
+		
+	}
+	
+	@And("^the user validates the footer section in payments page$")
+	public void validate() throws InterruptedException{
+		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		footerPage.validateFooterLinks();
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+	}
+
+	@Then("^the user navigates to claims page$")
+	public void user_navigates_to_claims_page(){
+
+		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		footerPage.NavigateToClaimsPage();
+
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+	}
+
+	@And("^the user validates the footer section in claims page$")
+	public void user_validates_footer_in_claimsPage() throws InterruptedException{
+		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		footerPage.validateFooterLinks();
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+	}
+
+	@Then("^the user navigates to EOB page to validate footer$")
+	public void user_navigates_to_EOB_page(){
+		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		footerPage.NavigateToEOBPage();
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+	}
+
+	@And("^the user validates the footer section in EOB page$")
+	public void user_validates_footer_in_EobPage() throws InterruptedException{
+		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		footerPage.validateFooterLinks();
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+	}
+
+	@Then("^the user navigates to Pharmacy locator page$")
+	public void user_navigates_to_PharmacyLocator_page(){
+		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		footerPage.NavigateToPharmacyLocator();
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+	}
+
+	@And("^the user validates the footer section in pharmacy locator page$")
+	public void user_validates_footer_in_pharmacyLocatorPage() throws InterruptedException{
+		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		footerPage.validateFooterLinks();
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+	}
+
+	@Then("^the user navigates to DCE home page$")
+	public void user_navigates_to_DCE_page(){
+		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		footerPage.NavigateToDCE();
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+	}
+
+	@And("^the user validates the footer section in DCE page$")
+	public void user_validates_footer_in_DCE() throws InterruptedException{
+		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		footerPage.validateFooterLinks();
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+	}
+
+	@Then("^the user navigates to profile and pref page$")
+	public void user_navigates_to_PandP_page(){
+		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		footerPage.NavigateToProfileandPref();
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+	}
+
+	@And("^the user validates the footer section in pref page$")
+	public void user_validates_footer_in_PandP() throws InterruptedException{
+		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		footerPage.validateFooterLinks();
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+	}
+	@Then("^the user navigates to Contact us page$")
+	public void user_navigates_to_contactUS_page(){
+		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		footerPage.NavigateToContactUsPage();
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+	}
+
+	@And("^the user validates the footer section in contact us page$")
+	public void user_validates_footer_in_contactUS() throws InterruptedException{
+		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		footerPage.validateFooterLinks();
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+	}
+
+	@Then("^the user navigates to Benefits page$")
+	public void user_navigates_to_benefits_page(){
+		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		footerPage.NavigateToBenefitsPage();
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+	}
+
+	@And("^the user validates the footer section in Benefits page$")
+	public void user_validates_footer_in_BenefitsPage() throws InterruptedException{
+		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		footerPage.validateFooterLinks();
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ *  @toDo : Checks for Member support and links under it
+ */
+/*@When("^Member Support and links under it should be displayed Footer$")
 	public void Member_Support_and_links_under_it_should_be_displayed() {
 		// Express the Regexp above with the code you wish you had
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
 		accountHomePage.validateMemberSupport();
 	}
 
-	*//**
-	 *  @toDo : Checks quick links and links under it
-	 *//*
+ *//**
+ *  @toDo : Checks quick links and links under it
+ *//*
 	@When("^Quick links and links under it should be displayed Footer$")
 	public void Quick_links_and_links_under_it_should_be_displayed() {
 		// Express the Regexp above with the code you wish you had
@@ -296,9 +307,9 @@ public class MemberRedesignFooterStepDefinition {
 		accountHomePage.validateQuickLinks();
 	}
 
-	*//**
-	 *  @toDo : Access to Rally Provider Search Tool and check for saved option under quick links
-	 *//*
+  *//**
+  *  @toDo : Access to Rally Provider Search Tool and check for saved option under quick links
+  *//*
 	@When("^I have access to the Rally Provider Search Tool and I see the Saved option under Quick Links Footer$")
 	public void I_have_access_to_the_Rally_Provider_Search_Tool_and_I_see_the_Saved_option_under_Quick_Links() {
 		// Express the Regexp above with the code you wish you had

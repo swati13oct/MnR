@@ -71,38 +71,10 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 		CommonUtility.waitForPageLoad(driver, requestAgentApptDropdown, 50);
 		requestAgentApptDropdown.click();
 		CommonUtility.waitForPageLoad(driver, ma_requestAgentAppointmentLink, 50);
-		ma_requestAgentAppointmentLink.click();
+		switchToNewTabNew(ma_requestAgentAppointmentLink);
 		
-		//applying hard timeout here to give it couple of seconds to launch the second tab
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		String mainwindow=driver.getWindowHandle();
 
-		Set<String> allWindowHandles = driver.getWindowHandles();
-		for (String currentWindowHandle : allWindowHandles) {
-			if (!currentWindowHandle.equals(mainwindow)) {
-				driver.switchTo().window(currentWindowHandle);
-			}
-		}
-		
-		try {
-			if (ma_requestAgentAppointmentLink.isDisplayed()) {
-				CommonUtility.waitForElementToDisappear(driver, ma_requestAgentAppointmentLink,
-						CommonConstants.TIMEOUT_30);
-			}
-		} catch (NoSuchElementException e) {
-			System.out.println("ma_requestAgentAppointmentLink not found");
-		} catch (TimeoutException ex) {
-			System.out.println("ma_requestAgentAppointmentLink not found");
-		} catch (Exception e) {
-			System.out.println("ma_requestAgentAppointmentLink not found");
-		}
-		CommonUtility.waitForPageLoad(driver, firstNameAgentAppt, 30);
-		if(validateNew(firstNameAgentAppt) &&currentUrl().contains("medicare-advantage-plans/request-information/agentebrc.html"))
+		if(currentUrl().contains("medicare-advantage-plans/request-information/agentebrc.html"))
 		{
 			return new RequestAgentAppointmentPage(driver);
 		}
