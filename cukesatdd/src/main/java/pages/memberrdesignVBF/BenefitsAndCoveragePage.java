@@ -175,7 +175,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	}
 
 	public void validateFieldsOnBenefitsAndCoveragePage() {
-		if (!tabsForComboMember.isEmpty()) {
+		if (tabsForComboMember.size() > 1) {
 			ValidatesBenefitsForCombo();
 		} else {
 			validatePlanOverview();

@@ -37,23 +37,7 @@ public class AgentAppointmentConfirmationPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		JSONObject jsonObject = new JSONObject();
-		for (String key : agentConfirmation.getExpectedData().keySet()) {
-			WebElement element = findElement(agentConfirmation
-					.getExpectedData().get(key));
-			if (validate(element)) {
-				try {
-					jsonObject.put(key, element.getText());
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-
-		}
-		agentConfirmationJson = jsonObject;
 		
-		System.out.println("agentConfirmationJson------->"+agentConfirmationJson);
 	}
 
 	public JSONObject getExpectedData() {

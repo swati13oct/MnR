@@ -151,6 +151,12 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='zipcode-button']")
 	private WebElement zipcode;
 	
+	@FindBy(xpath = "//div[contains(@class,'desktopLogoContainer')]//div[@class='myuhcTopContainer']//div[contains(@class,'logo-container')]//img[contains(@src,'PCP') or contains(@src,'MEDICA')]")
+	private WebElement pcpMedicaLogo;
+	
+	@FindBy(id = "home_1")
+	private WebElement panelHomePcpMedica;
+	
 	String category = null;
 
 	public TestHarness(WebDriver driver) {
@@ -163,8 +169,14 @@ public class TestHarness extends UhcDriver {
 	public void openAndValidate() {
 		category = CommonStepDefinition.getMemberAttributeMap().get("Member Type");
 		RallyDashboardPage.checkModelPopup(driver);
-		CommonUtility.waitForPageLoad(driver, panelHome, 30);
-		validateNew(panelHome);
+		if (category.equalsIgnoreCase("PCP") || category.equalsIgnoreCase("MEDICA")) {
+			CommonUtility.waitForPageLoad(driver, panelHomePcpMedica, 30);
+			validateNew(pcpMedicaLogo);		
+		}
+		else{
+			CommonUtility.waitForPageLoad(driver, panelHome, 30);
+		}	
+		//validateNew(panelHome);
 		validateNew(panelClaims);
 		if (category.contains(CommonConstants.CATEGORY_TERMIATED)) {
 			if (panelHealthWellness.isEmpty() && panelFindcarecost.isEmpty()) {

@@ -5,6 +5,7 @@ import gherkin.formatter.model.DataTableRow;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
@@ -122,7 +123,7 @@ public class oleStepDefinition {
 		String PlanName = givenAttributesMap.get("Plan Name");
 		//String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 
-		String PlanYear = "2018"; 
+		String PlanYear = "2019"; 
 		String PlanPremium;
 		String ZipCode = (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
 		String County = (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
@@ -185,7 +186,7 @@ public class oleStepDefinition {
 	@Then("^the user clicks on Enroll Now in Plan Details Page to start the OLE flow$")
 	public void the_user_clicks_on_Enroll_Now_in_Plan_Details_Page_to_start_the_OLE_flow() throws Throwable {
 		String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
-		String PlanYear = "2018"; 
+		String PlanYear = "2019"; 
 		String ZipCode = (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
 		String County = (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
 		String PlanType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
@@ -444,6 +445,11 @@ public class oleStepDefinition {
 			MedicareDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
 		}
+		Random rnd = new Random();
+		int n = 100000000 + rnd.nextInt(900000000);
+		String MedicareNumber = Integer.toString(n)+"C";
+		MedicareDetailsMap.put("Medicare Number", MedicareNumber);
+		
 		String SSNflag = MedicareDetailsMap.get("SSN Flag");
 		if(SSNflag.contains("true")){
 			MedicareDetailsMap.put("SSN Number", "123456789");
@@ -609,6 +615,7 @@ public class oleStepDefinition {
 
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE,
 					prelimineryQuestionsPage);
+			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"false");
 			System.out.println("OLE Preliminary Questions Page is Displayed");
 			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"false");
 
@@ -631,7 +638,7 @@ public class oleStepDefinition {
 
 		}
 	}
-	
+
 	@Then("^the user navigates to Diabetic Preliminary Questions Page$")
 	public void the_user_navigates_to_Preliminary_Diabetic_Questions_Page() throws Throwable {
 		MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
@@ -899,7 +906,7 @@ public class oleStepDefinition {
 				Assert.fail("OLE Personal Information Page is NOT Displayed");
 		}
 	}
-	
+
 	@Then("^the user navigates to Use and Disclosure Page$")
 	public void the_user_navigates_to_Use_and_Disclosure_page() throws Throwable {
 		
@@ -1890,8 +1897,6 @@ public class oleStepDefinition {
 	public void the_user_Validates_Next_Steps_in_Confirmation_Page_for_the_Plan_Type() throws Throwable {
 		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
 		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-
-		OLEconfirmationPage oleConfirmationPage = (OLEconfirmationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
 		if(alreadyEnrolled_Flag){
 			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
 			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
@@ -1899,6 +1904,7 @@ public class oleStepDefinition {
 		}
 		else{
 
+			OLEconfirmationPage oleConfirmationPage = (OLEconfirmationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
 			if (oleConfirmationPage != null) {
 
 				String PlanType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
@@ -1921,8 +1927,8 @@ public class oleStepDefinition {
 				System.out.println("OLE Confirmation Page is NOT Displayed : Already Enrolled or Enrollment Failed due to Service error");
 			}
 		}
-
 	}
+
 
 	@Then("^the user validates the presence for Preliminary Questions on Page$")	
 	public void the_user_validates_the_presence_for_Preliminary_Questions_on_Page(DataTable givenAttributes) throws Throwable {
@@ -1933,7 +1939,7 @@ public class oleStepDefinition {
 
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
+}
 
 		String planname = givenAttributesMap.get("Plan Name");
 		PrelimineryQuestionsPage prelimineryQuestionsPage = (PrelimineryQuestionsPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE);

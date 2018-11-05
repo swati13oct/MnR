@@ -107,16 +107,14 @@ public class CommonUtility {
 					waitForPageLoad(driver, element, timeout);
 				}
 			}
+			System.out.println("The element: " + elementExpected + " is visible");
+			
 
 		} catch (Exception e) {
-			timeout = timeout - 5;
-			if (timeout > 0) {
-				waitForPageLoad(driver, element, timeout);
-			} else {
-				System.out.println("Not able to locate this " + element + " on page");
-				return;
-			}
+			Assert.fail("Not able to locate this element -- " + element + " on page");
+			System.out.println(e.getMessage());
 		}
+
 
 	}
 

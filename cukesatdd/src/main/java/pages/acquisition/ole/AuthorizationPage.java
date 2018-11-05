@@ -3,12 +3,14 @@
  */
 package pages.acquisition.ole;
 
+import org.junit.Assert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -107,8 +109,12 @@ public class AuthorizationPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		validate(PageHeader);
-		System.out.println("Page header is Displayed : "+PageHeader.getText());	
+		CommonUtility.waitForPageLoad(driver, PageHeader,30);
+		if(PageHeader.getText().contains("Authorizations"))
+			System.out.println("Page header is Displayed : "+PageHeader.getText());
+		else
+			Assert.fail("Error in validating the Authorization page loaded");
+			
 	}
 
 	public boolean validate_required_field() {
@@ -164,13 +170,7 @@ public class AuthorizationPage extends UhcDriver{
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);
 		
-		//NextBtn.click();
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		if(driver.getCurrentUrl().contains("review")){
 			return new ReviewSubmitPage(driver);
 		}

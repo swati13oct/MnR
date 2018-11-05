@@ -28,10 +28,10 @@ public class ClaimSummarypage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='medical-claims']//h2[@ng-bind-html='planName']/parent::div//*[@id='document-date']//option[contains(@value,'24 months')]")
 	private WebElement last24months;
 
-	@FindBy(xpath = "//select[@name='document-date' and not(contains(@ng-hide,'todate'))]")
+	@FindBy(xpath = "//select[@id='fed-document-date' and not(contains(@ng-hide,'todate'))]")
 	private WebElement viewClaimsFrom;
 
-	@FindBy(xpath = "//select[@name='document-date' and contains(@ng-hide,'todate')]")
+	@FindBy(xpath = "//select[@id='document-date' and contains(@ng-hide,'todate')]")
 	private WebElement viewClaimsFromShip;
 
 	@FindBy(id = "medical")
@@ -98,6 +98,7 @@ public class ClaimSummarypage extends UhcDriver {
 	public void openAndValidate() {
 		try {
 			if (CommonStepDefinition.getMemberAttributeMap().get("ClaimSystem").equalsIgnoreCase("SHIPCLAIMS")) {
+				System.out.println("Claim System - Ship");
 				CommonUtility.waitForPageLoadNew(driver, viewClaimsFromShip, 60);
 
 			} else {
@@ -105,7 +106,6 @@ public class ClaimSummarypage extends UhcDriver {
 			}
 		} catch (NullPointerException excption) {
 			System.out.println("!!!ClaimsSystem not specified!!!");
-			CommonUtility.waitForPageLoadNew(driver, viewClaimsFrom, 60);
 		} catch (ClassCastException exception) {
 			Assert.fail("ClaimSystem is of an inappropriate type");
 		} catch (Exception ex) {
@@ -160,7 +160,6 @@ public class ClaimSummarypage extends UhcDriver {
 	public void searchClaimsByTimePeriod(String planType, String claimPeriod, String claimSystem) {
 
 		if (planType.contains("SHIP")) {
-			System.out.println(planType + "SHIP plan type last 24 moths is going to select");
 
 			last24months = driver.findElement(By.xpath(
 					"//div[@class='medical-claims shipCompSection']//div//*[@id='document-date']//option[contains(@value,'24 months')]"));
@@ -186,7 +185,7 @@ public class ClaimSummarypage extends UhcDriver {
 	 * 
 	 */
 	@SuppressWarnings("deprecation")
-	public boolean validateClaimsTable() {
+	public void validateClaimsTable() {
 		CommonUtility.waitForPageLoadNew(driver, ClaimsSummaryPage, 60);
 		scrollToView(ClaimsSummaryPage);
 		if (claimsTableMedical.isDisplayed() || claimsTablePrescriptionDrug.isDisplayed()
@@ -222,13 +221,10 @@ public class ClaimSummarypage extends UhcDriver {
 				Assert.assertTrue("Claims table gets displayed", counter > 0);
 				validateNew(shipProviderNameValue);
 			}
-			
-			return true;
-		} else {
+		}else{
 			System.out.println("!!!!!!!!! NOT Able to find the claim table !!!!!!!!!");
-			Assert.assertTrue("!!!!!!!!! NOT Able to find the claim table !!!!!!!!!",true);
+			Assert.fail("!!!!!!!!! NOT Able to find the claim table !!!!!!!!!");
 			
-			return false;
 		}
 	}
 

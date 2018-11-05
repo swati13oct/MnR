@@ -32,7 +32,7 @@ public class MedicareInformationPage extends UhcDriver{
 	@FindBy(id = "ole-form-back-button")
 	private WebElement BackBtn;
 
-	@FindBy(xpath = "//*[@class = 'enrollmentAllowed-error-msg']")
+	@FindBy(xpath = "//*[@class = 'enrollmentAllowed-error-msg']/p")
 	private WebElement AlreadyEnrolled_ErrorMessage;
 
 	
@@ -137,10 +137,10 @@ public class MedicareInformationPage extends UhcDriver{
 	}
 
 	public boolean validate_required_fields() {
-		boolean flag = false;
+		boolean flag = true;
 		
 		if(!RadioCardA.isSelected() && !RadioCardA.isSelected()){
-			if(NextBtn.isEnabled() && !validate(firstNameField)&& !validate(lastNameField) && !validate(claimNumberField)
+			if(!validate(firstNameField)&& !validate(lastNameField) && !validate(claimNumberField)
 					&& !validate(partAStartDateField)&& !validate(partBStartDateField)){
 				System.out.println("Medicare Information Fields are not Displayed when Card Type is not selected");
 				flag= true;
@@ -151,6 +151,12 @@ public class MedicareInformationPage extends UhcDriver{
 			}
 		}
 		SelectCardA.click();
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if(validate(firstNameField)&& validate(lastNameField) && validate(claimNumberField)
 				&& validate(partAStartDateField)&& validate(partBStartDateField)){
 			
@@ -265,19 +271,15 @@ public class MedicareInformationPage extends UhcDriver{
 		executor.executeScript("arguments[0].click();", NextBtn);
 
 		//NextBtn.click();
-		try {
-			Thread.sleep(6000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		if(driver.getCurrentUrl().contains("preliminary-questions")){
 			System.out.println("OLE Preliminary Questions page is Displayed");
+			System.out.println(driver.getCurrentUrl());
 			return new PrelimineryQuestionsPage(driver);
 		}
 		return null;
 	}
-	
+
 	
 public PrelimineryQuestionsPage navigate_to_Preliminary_Diabetes_Questions_page() {
 	
@@ -337,11 +339,11 @@ public PrelimineryQuestionsPage navigate_to_Preliminary_Diabetes_Questions_page(
 			flag = (flag==false)?false:true;
 			System.out.println("Plan ZIP CODE is Validated : "+flag);
 		}else flag =false;
-		/*if(Premium.contains(Expected_PlanPremium)){
+/*		if(Premium.contains(Expected_PlanPremium)){
 			flag = (flag==false)?false:true;
 			System.out.println("Plan Premium is Validated : "+flag);
-		}else flag =false;
-		System.out.println("Plan Details are Validated : "+flag);*/
+		}else flag =false;*/
+		System.out.println("Plan Details are Validated : "+flag);
 		return flag;
 	}
 
@@ -443,6 +445,7 @@ public boolean validate_negative_values() {
 }
 
 public boolean validate_alreadyEnrolled_ErrorMessage() {
+	
 	// TODO Auto-generated method stub
 	if(validate(AlreadyEnrolled_ErrorMessage)){
 		System.out.println("Already Enrolled Error message displayed :  ===>  "+AlreadyEnrolled_ErrorMessage.getText());
