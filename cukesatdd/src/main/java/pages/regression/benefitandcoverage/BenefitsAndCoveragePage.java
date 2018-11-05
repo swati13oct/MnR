@@ -5,7 +5,6 @@ package pages.regression.benefitandcoverage;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
@@ -79,7 +78,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	private WebElement planName1;
 
 	//@FindBy(xpath = ".//*[@id='mapdPageLis']/div[1]/div/div/table/tbody/tr[2]/th")
-	@FindBy(xpath =".//*[@id='mapdPageLis'] or contains(text0,'Covered Generic Drugs')")
+	@FindBy(xpath ="(//div[@id='mapdPageLis']//p[contains(text(),'Covered Generic Drugs')])[1]")
 	private WebElement columncoveragegenericdrugs;
 
 	@FindBy(id = "contactUsAtdd")
@@ -112,7 +111,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(id = "lang-select-2")
 	private WebElement langdropdown;
 
-	@FindBy(className = "atdd-benefitssummary-ancillaryHearingText")
+	@FindBy(xpath = "//span[contains(text(),'HEARING')]")
 	private WebElement Hearingsection;
 
 	@FindBy(xpath = ".//*[@class='bold margin-small atdd-bnc-hearingtxt-subtitle']//following-sibling::p")
@@ -121,19 +120,19 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath= ".//*[@class='margin-small bold atdd-benefitssummary-eyewear']//following-sibling::p")
 	private WebElement VisionContent;
 
-	@FindBy(className = "atdd-benefitssummary-exclusivehearing")
+	@FindBy(xpath = "//h4[contains(text(),'Exclusive hearing savings')]")
 	private WebElement Hearingaid;
 
-	@FindBy(className = "atdd-benefitssummary-vision")
+	@FindBy(xpath = "//span[contains(text(),'VISION')]")
 	private WebElement Visionsection;
 
-	@FindBy(className = "atdd-benefitssummary-dental")
+	@FindBy(xpath = "//span[contains(text(),'DENTAL')]")
 	private WebElement Dentalsection;
 
 	@FindBy(xpath = ".//*[@class='bold margin-small atdd-benefitssummary-routine-dental']//following-sibling::p")
 	private WebElement DentalContent;
 
-	@FindBy(className = "atdd-benefitssummary-ancillaryHeader")
+	@FindBy(xpath = "//h4[contains(text(),'ADDITIONAL BENEFITS')]")
 	private WebElement Headersection;
 
 	@FindBy(className = ".//*[@id='ancillary']/div[2]/div[4]/div/div")
@@ -247,7 +246,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	private WebElement nameLabel1;
 
 	// @FindBy(className = "atdd-benefitsoverview-memberidlabel")
-	@FindBy(className = ".//*[@class='bold atdd-benefitsoverview-memberidlabel']")
+	@FindBy(xpath = ".//*[@class='bold atdd-benefitsoverview-memberidlabel']")
 	private WebElement memberID1;
 
 	// @FindBy(className = "atdd-benefitsoverview-effectivedatelabel")
@@ -288,7 +287,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "//span[@class='subtitle atdd-outpatientsurgery-title ng-scope']")
 	private WebElement OutpatientSurgeryCenter;
 
-	@FindBy(className = "outpatientsurgery-tier1-atdd")
+	@FindBy(xpath = "//div[@class='table-body-cell outpatientsurgery-tier1-atdd ng-binding']")
 	private WebElement OutpatientSurgeryCenter2;
 
 	@FindBy(xpath = "//div[contains(@class,'outpatientsurgery')]")
@@ -572,7 +571,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	private WebElement memberIdValueBNC;
 
 
-	@FindBy(className = "atdd-benefitsoverview-effectivedatelabel")
+	@FindBy(xpath = "//span[@class='bold atdd-benefitsoverview-effectivedatelabel']")
 	private WebElement effective_Date1;
 
 	@FindBy(className = "atdd-benefitsoverview-monthlypremium-label")
@@ -914,30 +913,15 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	 * @toDo : The user validates the Hearing section of Ancillary
 	 */
 	public void HearingSection() {
-
-		try {
-			validate(Hearingsection);
-		} catch (Exception e) {
-			System.out.println("Elements is not found ...");
-		}
-		try {
-			validate(HearingContent);
-			System.out.println(HearingContent.getText());
-		} catch (Exception e) {
-			System.out.println("Elements is not found ...");
-		}
+			validateWithValue("HEARING", Hearingsection);
+			validateWithValue("Hearing Content", HearingContent);
 	}
 
 	/**
 	 * @toDo : The user validates the Hearing aid section of Ancillary Benefits
 	 */
 	public void HearingAid() {
-
-		try {
-			validate(Hearingaid);
-		} catch (Exception e) {
-			System.out.println("Elements is not found ...");
-		}
+			validateWithValue("Exclusive hearing savings", Hearingaid);
 	}
 
 	/**
@@ -945,17 +929,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	 */
 
 	public void Vision() {
-
-		try {
-			validate(Visionsection);
-		} catch (Exception e) {
-			System.out.println("Elements is not found ...");
-		}
-		try {
-			validate(VisionContent);
-		} catch (Exception e) {
-			System.out.println("Elements is not found ...");
-		}
+			validateWithValue("VISION header", Visionsection);
+			validateWithValue("Vision Content",VisionContent);
 	}
 
 	/**
@@ -963,18 +938,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	 */
 
 	public void Dental() {
-
-		try {
-			validate(Dentalsection);
-		} catch (Exception e) {
-			System.out.println("Elements is not found ...");
-		}
-		try {
-			validate(DentalContent);
-		} catch (Exception e) {
-			System.out.println("Elements is not found ...");
-		}
-
+		validateWithValue("DENTAL header", Dentalsection);
+		validateWithValue("Dental Content",DentalContent);
 	}
 
 	/**
@@ -982,12 +947,13 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	 */
 
 	public void Header() {
-
-		try {
-			validate(Headersection);
-		} catch (Exception e) {
-			System.out.println("Elements is not found ...");
-		}
+			validateWithValue("ADDITIONAL BENEFITS", Headersection);
+			if(Headersection.isDisplayed()){
+		Assert.assertTrue("ADDITIONAL BENEFITS header is displaying", true);
+			}
+			else{
+				Assert.fail("ADDITIONAL BENEFITS header is notdisplaying");
+			}
 	}
 
 	/**
@@ -1255,8 +1221,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	 * @toDo : Validates the text in locate a pharmacy section
 	 */
 	public void validate_locateapharmacysection(String plantype) {
-		validate(locateapharmacysection);
-		validate(locateapharmacybutton);
+		validateWithValue("PHARMACY LOCATOR",locateapharmacysection);
+		validateWithValue("LOCATE A PHARMACY button",locateapharmacybutton);
 
 		locateapharmacybutton.click();
 		try {
@@ -1372,10 +1338,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	 */
 	public void validate_learnmoreaboutstagelink() {
 
-		validate(Learnmorestagelink);
+		validateWithValue("LEARN MORE ABOUT DRUG PAYMENT STAGES link",Learnmorestagelink);
 		Learnmorestagelink.click();
 		try {
-			Thread.sleep(10000);
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1408,11 +1374,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		//validating collapsed stage of the link-LEARN MORE ABOUT DRUG TIERS
 		if(LearnmoretierslinkAfterCollapsed.getAttribute("aria-expanded").equalsIgnoreCase("false")){
 			System.out.println("LEARN MORE ABOUT DRUG TIERS link has been collapsed successfully");
-			Assert.assertTrue("LEARN MORE ABOUT DRUG PAYMENT STAGES link has been collapsed successfully", true);	
+			Assert.assertTrue("LEARN MORE ABOUT DRUG TIERS link has been collapsed successfully", true);	
 		}
 		else{
 			System.err.println("LEARN MORE ABOUT DRUG TIERS link has not been collapsed successfully");
-			Assert.fail("LEARN MORE ABOUT DRUG PAYMENT STAGES link has not been collapsed");
+			Assert.fail("LEARN MORE ABOUT DRUG TIERS link has not been collapsed");
 		}
 
 	}
@@ -1427,7 +1393,6 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validateWithValue(" LEARN MORE ABOUT DRUG PAYMENT STAGES ", Learnmorestagelink);
 		Learnmorestagelink.click();
 		Thread.sleep(2000);
-		System.out.println(LearnmorestageExpandedArea.getAttribute("aria-expanded"));
 		// validating expanded stage of the link-LEARN MORE ABOUT DRUG PAYMENT STAGES
 		if(LearnmorestageExpandedArea.getAttribute("aria-expanded").equalsIgnoreCase("true")){
 			System.out.println("LEARN MORE ABOUT DRUG PAYMENT STAGES link has  been expanded successfully");
@@ -1483,10 +1448,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(RetailDrugCost_Table);
 		System.out.println("********** Drug cost table is seen ==>"+RetailDrugCost_Table.isDisplayed());
 		validate(columncoveragegenericdrugs);
-		Assert.assertEquals(driver
-				.findElement(By
-						.xpath("//*[@id='mapdPageLis']//table[@class='table-white atdd-bnc-drgcsttable']//tbody/tr[2]/th/p"))
-				.getText(), "Covered Generic Drugs");
+		Assert.assertEquals(columncoveragegenericdrugs.getText(), "Covered Generic Drugs");
 
 	}
 	public void validatedrugcosttable1() {
@@ -1535,56 +1497,20 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	}
 
-	
-	public void validateHeaders() {
-
-		validate(BenefitsSummaryHeader);
-		validate(Copayscoinsuranceheader);
-		validate(HospitalVisits);
-		validate(OfficeVisits);
-		validate(OutpatientSurgeryCenter);
-		validate(OutpatientSurgeryCenterValue);
-		validate(OfficVisitsValue);
-
-		Assert.assertEquals(OfficeVisits.getText(), "OFFICE VISITS ");
-		Assert.assertEquals(OutpatientSurgeryCenter.getText(), "OUTPATIENT SURGERY CENTER VISITS");
-		Assert.assertEquals(HospitalVisits.getText(), "HOSPITAL VISITS ");
-
-		if (StringUtils.isEmpty(OutpatientSurgeryCenterValue.getText())) {
-
-			Assert.fail();
-		}
-		if (StringUtils.isEmpty(OfficVisitsValue.getText())) {
-
-			Assert.fail();
-		}
-
-	}
-	public void validatevillagetabletext(String text1)
-	{
-		WebElement villagetabletext = driver.findElement(By.xpath(".//*[@id='preferredRetailBenefit']/div/div[1]/div/div/div/table/tbody/tr[2]/td[4]/div[3]/div[2]"));
-		if(villagetabletext.getText().equalsIgnoreCase(text1))
-		{
-			 System.out.println(villagetabletext.getText());
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail();
-		}
-		
-
-	}
-
 
 	public boolean validateWithValue(String value, WebElement element) {
 		try {
 			if (element.isDisplayed()) {
 				System.out.println("Element " +value+ " found!!!!");
+				Assert.assertTrue("Element " +value+ " found!!!!", true);
 				return true;
 			} else {
 				System.out.println("Element " +value+ " not found/not visible");
+				Assert.fail("Element " +value+ " not found/not visible");
 			}
 		} catch (Exception e) {
 			System.err.println("Exception: Element " +value+ "  not found/not visible");
+			Assert.fail("Element " +value+ " not found/not visible");
 		}
 		return false;
 
@@ -1594,19 +1520,18 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	 * @toDo Validate Plan overview for PDP Individual Members
 	 */
 	public void validatePlanOverviewSectionForMembers() {
-		validate(planName2);
-		validate(nameLabel1);
-		validate(memberID1);
-		validate(effective_Date1);
+		validateWithValue("Paln name", planName2);
+		validateWithValue("Member Name: label", nameLabel1);
+		validateWithValue("Member ID: label", memberID1);
+		validateWithValue("Effective Date: label",effective_Date1);
 	}
 
 	/**
 	 * @toDo: Validate Drug Look Up Link
 	 */
 	public void validate_druglookuplink() {
-		validate(DrugLookUpLink);
-		System.out.println("************Drug Look Up LINK is seen********************");
-
+		validateWithValue("DRUG LOOKUP header",DrugLookUpLink);
+		validateWithValue("Look Up Drugs Button", LookUpDrugsButton);
 	}
 
 	/**
@@ -1664,15 +1589,20 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		Assert.assertEquals(OfficeVisits.getText(), "OFFICE VISITS ");
 		if(planType.contains("Medica"))
 		{
-			Assert.assertEquals(OutpatientSurgeryCenter.getText(), "OUTPATIENT SURGERY CENTER VISITS ");	
+			System.out.println(OutpatientSurgeryCenter.getText());
+			Assert.assertEquals(OutpatientSurgeryCenter.getText(), "OUTPATIENT SURGERY CENTER VISITS ");
 		}
 		else
 		{
 			Assert.assertEquals(OutpatientSurgeryCenter.getText(), "OUTPATIENT SURGERY CENTER VISITS");
+			System.out.println(OutpatientSurgeryCenter.getText());
 		}
+		System.out.println(HospitalVisits.getText());
 		Assert.assertEquals(HospitalVisits.getText(), "HOSPITAL VISITS ");
+		
 		if(planType.contains("Medica"))
 		{
+			System.out.println(OutpatientSurgeryCenter2.getText());
 			if (StringUtils.isEmpty(OutpatientSurgeryCenter2.getText())) {
 
 				Assert.fail();
@@ -1739,7 +1669,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			ChangeYourPcpButton.click();
 		}
 		try {
-			Thread.sleep(10000);
+			Thread.sleep(7000);
 		} catch (InterruptedException e) {
 			System.err.println("CHANGE YOUR PROVIDER page not loaded");
 		}
@@ -2291,7 +2221,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	{
 
 		Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferdmailpharmcytable']//tr[3]/td[2]")).getText(),"no more than 44% for generic drugs or 35% for brand name drugs");
-
+validateWithValue("no more than 44% for generic drugs or 35% for brand name drugs",driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferdmailpharmcytable']//tr[3]/td[2]")));
 
 
 	}
@@ -2384,8 +2314,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}
 	}
 
-	public void validateImagePresent(String logoToBeDisplayedOnSecondaryPage) throws InterruptedException {
-		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
+	public void validateImagePresent(String logoToBeDisplayedOnSecondaryPage) {
+
 		String logo_src = logoImage.getAttribute("src");
 		String logo_alt = logoImage.getAttribute("alt");
 		System.out.println("Actual logo's source on Dashboard page is   "+logo_src+" and Expected logo source is  "+logoToBeDisplayedOnSecondaryPage+" . ");		
@@ -2396,9 +2326,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 
 
-	public void validateCoLogoImagePresent(String cologoToBeDisplayedOnSecondaryPage) throws InterruptedException {
-		
-		try{
+	public void validateCoLogoImagePresent(String cologoToBeDisplayedOnSecondaryPage) {
+
 		String cologo_src = cologoImage.getAttribute("src");
 		String cologo_alt = cologoImage.getAttribute("alt");
 		System.out.println("Actual logo's source on Dashboard page is   " + cologo_src
@@ -2406,18 +2335,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		System.out.println("logo's alt text on secondary page is   " + cologo_alt);
 		Assert.assertTrue(cologo_src.contains(cologoToBeDisplayedOnSecondaryPage));
 		System.out.println("Secondary page co logo assert condition is passed");
-	} catch (Exception e)
-		{ Thread.sleep(6000);
-		String cologo_src = cologoImage.getAttribute("src");
-		String cologo_alt = cologoImage.getAttribute("alt");
-		System.out.println("Actual logo's source on Dashboard page is   " + cologo_src
-				+ " and Expected logo source is  " + cologoToBeDisplayedOnSecondaryPage + " . ");
-		System.out.println("logo's alt text on secondary page is   " + cologo_alt);
-		Assert.assertTrue(cologo_src.contains(cologoToBeDisplayedOnSecondaryPage));
-		System.out.println("Secondary page co logo assert condition is passed");
-		
-															}
-		}
+	}
 
 	public void validatePlanOverviewIndlis(String name, String memberid, String effectivedate, String monthlypremium,
 			String extrahelp) {
