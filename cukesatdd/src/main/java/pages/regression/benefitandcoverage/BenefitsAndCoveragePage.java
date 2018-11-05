@@ -5,6 +5,7 @@ package pages.regression.benefitandcoverage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
@@ -442,10 +443,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-bnc-txers-retailcostsharing-table")
 	private WebElement retailTable;
 
-	@FindBy(xpath = ".//*[@id='officeVisitTileAtdd']/div/div/div[1]/span")
+	@FindBy(xpath = ".//*[@id='officeVisitTileAtdd']/div/section/div[1]/span")
 	private WebElement pcpValue;
 
-	@FindBy(xpath = "//*[@id='officeVisitTileAtdd']/div/div/span")
+	@FindBy(xpath = "//*[@id='officeVisitTileAtdd']/div/section/span")
 	private WebElement specialistValue;
 
 	@FindBy(id = "outPatientTileAtdd")
@@ -1534,6 +1535,45 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	}
 
+	
+	public void validateHeaders() {
+
+		validate(BenefitsSummaryHeader);
+		validate(Copayscoinsuranceheader);
+		validate(HospitalVisits);
+		validate(OfficeVisits);
+		validate(OutpatientSurgeryCenter);
+		validate(OutpatientSurgeryCenterValue);
+		validate(OfficVisitsValue);
+
+		Assert.assertEquals(OfficeVisits.getText(), "OFFICE VISITS ");
+		Assert.assertEquals(OutpatientSurgeryCenter.getText(), "OUTPATIENT SURGERY CENTER VISITS");
+		Assert.assertEquals(HospitalVisits.getText(), "HOSPITAL VISITS ");
+
+		if (StringUtils.isEmpty(OutpatientSurgeryCenterValue.getText())) {
+
+			Assert.fail();
+		}
+		if (StringUtils.isEmpty(OfficVisitsValue.getText())) {
+
+			Assert.fail();
+		}
+
+	}
+	public void validatevillagetabletext(String text1)
+	{
+		WebElement villagetabletext = driver.findElement(By.xpath(".//*[@id='preferredRetailBenefit']/div/div[1]/div/div/div/table/tbody/tr[2]/td[4]/div[3]/div[2]"));
+		if(villagetabletext.getText().equalsIgnoreCase(text1))
+		{
+			 System.out.println(villagetabletext.getText());
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail();
+		}
+		
+
+	}
+
 
 	public boolean validateWithValue(String value, WebElement element) {
 		try {
@@ -2344,8 +2384,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}
 	}
 
-	public void validateImagePresent(String logoToBeDisplayedOnSecondaryPage) {
-
+	public void validateImagePresent(String logoToBeDisplayedOnSecondaryPage) throws InterruptedException {
+		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
 		String logo_src = logoImage.getAttribute("src");
 		String logo_alt = logoImage.getAttribute("alt");
 		System.out.println("Actual logo's source on Dashboard page is   "+logo_src+" and Expected logo source is  "+logoToBeDisplayedOnSecondaryPage+" . ");		
@@ -2356,8 +2396,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 
 
-	public void validateCoLogoImagePresent(String cologoToBeDisplayedOnSecondaryPage) {
-
+	public void validateCoLogoImagePresent(String cologoToBeDisplayedOnSecondaryPage) throws InterruptedException {
+		
+		try{
 		String cologo_src = cologoImage.getAttribute("src");
 		String cologo_alt = cologoImage.getAttribute("alt");
 		System.out.println("Actual logo's source on Dashboard page is   " + cologo_src
@@ -2365,7 +2406,18 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		System.out.println("logo's alt text on secondary page is   " + cologo_alt);
 		Assert.assertTrue(cologo_src.contains(cologoToBeDisplayedOnSecondaryPage));
 		System.out.println("Secondary page co logo assert condition is passed");
-	}
+	} catch (Exception e)
+		{ Thread.sleep(6000);
+		String cologo_src = cologoImage.getAttribute("src");
+		String cologo_alt = cologoImage.getAttribute("alt");
+		System.out.println("Actual logo's source on Dashboard page is   " + cologo_src
+				+ " and Expected logo source is  " + cologoToBeDisplayedOnSecondaryPage + " . ");
+		System.out.println("logo's alt text on secondary page is   " + cologo_alt);
+		Assert.assertTrue(cologo_src.contains(cologoToBeDisplayedOnSecondaryPage));
+		System.out.println("Secondary page co logo assert condition is passed");
+		
+															}
+		}
 
 	public void validatePlanOverviewIndlis(String name, String memberid, String effectivedate, String monthlypremium,
 			String extrahelp) {

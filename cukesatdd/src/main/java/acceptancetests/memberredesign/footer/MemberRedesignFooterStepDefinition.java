@@ -148,24 +148,27 @@ public class MemberRedesignFooterStepDefinition {
 
 	@Then("^the user navigates to the footer section$")
 	public void user_validates_footer(){
-		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		paymentHistoryPage.scrollToBottom();
-		FooterPage footer = paymentHistoryPage.validatePageFooter();
+	
+			PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
+					
+				try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			paymentHistoryPage.scrollToBottom();
+			FooterPage footer = paymentHistoryPage.validatePageFooter();
+
+			if (footer!=null){
+				getLoginScenario().saveBean(PageConstants.footer_page,footer);
+
+			}else{
+				Assert.fail();
+			}
 		
-		if (footer!=null){
-			getLoginScenario().saveBean(PageConstants.footer_page,footer);
-
-		}else{
-			Assert.fail();
-		}
-
 	}
+	
 	@And("^the user validates the footer section in payments page$")
 	public void validate() throws InterruptedException{
 		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);

@@ -43,7 +43,8 @@ public class HealthAndWellnessPage extends UhcDriver{
 	private WebElement hnwLearningBanner;
 
 	//@FindBy (xpath = "//header[@class='hide-mobile']//*[@id='main-nav']/div")
-	@FindBy (xpath = "//header[@class='hide-mobile']//div[@ng-switch-when='M&R']")
+	//@FindBy (xpath = "//header[@class='hide-mobile']//div[@ng-switch-when='M&R']")
+	@FindBy (xpath = "//header[@class='hide-mobile']//*[@id='sticky-nav']")
 	private WebElement dashboardHeader;
 	
 	@FindBy (id = "rewards_desk")
