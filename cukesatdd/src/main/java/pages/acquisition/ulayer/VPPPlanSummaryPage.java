@@ -298,7 +298,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			CommonUtility.waitForPageLoad(driver, snpPlansViewLink, 30);
 				snpPlansViewLink.click();
 		}
-		/*		if(validate(toggleplanYear))
+/*		if(validate(toggleplanYear))
 			toggleplanYear.click();*/
 		return new VPPPlanSummaryPage(driver, planType);
 	}
@@ -876,7 +876,7 @@ CommonUtility.waitForPageLoad(driver, MAmoreDetailsLink, 30);
 	}
 
 
-	public ComparePlansPage clickOnCompareLink() {
+	public ComparePlansPage clickOnCompareLink(){
 		List<WebElement> compareLinks = driver
 				.findElements(By.xpath(".//*[@id='plan-list-1']//button[contains(text(),'Compare plans')]"));
 		compareLinks.get(1).click();
@@ -886,7 +886,7 @@ CommonUtility.waitForPageLoad(driver, MAmoreDetailsLink, 30);
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (currentUrl().contains("/health-plans.html#/plan-compare"))
+		if(currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPage(driver);
 		return null;
 	}
@@ -1130,7 +1130,7 @@ CommonUtility.waitForPageLoad(driver, MAmoreDetailsLink, 30);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+}
 		List<WebElement> allPDPlans = driver.findElements(By.xpath(".//*[@id='plan-list-3']//div[contains(@class,'compare-box')]"));	
 
 		if(allPDPlans !=null){
@@ -1138,7 +1138,7 @@ CommonUtility.waitForPageLoad(driver, MAmoreDetailsLink, 30);
 			allPDPlans.get(i).click();
 		}
 		}
-		
+	
 	}
 	public ComparePlansPage clickOnCompareLinkAARP(String plantype){
 		
