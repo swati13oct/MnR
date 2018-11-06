@@ -52,13 +52,19 @@ public class FooterPage extends UhcDriver {
 	@FindBy(xpath= "//footer//div[contains(@class,'iparys_inherited')]/div/div/div[1]//div[@class='row footerLinks']//p[2]")
 	private WebElement LastUpdate;
 
-	@FindBy(xpath= "//footer//div[contains(@class,'iparys_inherited')]/div/div/div[2]//div[@class='row footerLinks']//p[1]")
+	//@FindBy(xpath= "//footer//div[contains(@class,'iparys_inherited')]/div/div/div[2]//div[@class='row footerLinks']//p[1]")
+	//private WebElement LanguageAssistance;
+	@FindBy(xpath= "//div[2]/div/ul/li/a/span")
 	private WebElement LanguageAssistance;
 
-	@FindBy(xpath= "//footer//div[contains(@class,'iparys_inherited')]/div/div/div[2]//div[@class='row footerLinks']//p[2]")
+	//@FindBy(xpath= "//footer//div[contains(@class,'iparys_inherited')]/div/div/div[2]//div[@class='row footerLinks']//p[2]")
+	//private WebElement Asistencia;
+	
+	@FindBy(xpath= "//li[2]/a/span")
 	private WebElement Asistencia;
 
-	@FindBy(xpath= "//footer//div[contains(@class,'iparys_inherited')]/div/div/div[2]//div[@class='row footerLinks']//p[3]")
+	@FindBy(xpath= "//a[contains(@href, '/content/dam/UCP/Individual/Non-Discrimination_Form_Chinese.pdf')]")
+	////footer//div[contains(@class,'iparys_inherited')]/div/div/div[2]//div[@class='row footerLinks']//p[3]
 	private WebElement OtherLanguageLink;
 
 	@FindBy(id= "claims_1")
