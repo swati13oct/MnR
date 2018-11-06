@@ -314,7 +314,8 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='table-body margin-large']/div[2]//p")
 	private WebElement PayDate;
 
-	@FindBy(xpath = ".//*[@id='cltotshipindsnf']")
+	//@FindBy(xpath = ".//*[@id='cltotshipindsnf']")
+	@FindBy(xpath = "//*[@id='cltotshippartb']/div/div[1]/div/div/div/div/div[1]/div/p")
 	private WebElement claimtotalcomb;
 
 	@FindBy(id = "closeButton")
