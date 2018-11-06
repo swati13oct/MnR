@@ -362,11 +362,11 @@ public PersonalInformationPage Validate_use_and_disclosure_page() {
 			flag = (flag==false)?false:true;
 			System.out.println("Plan ZIP CODE is Validated : "+flag);
 		}else flag =false;
-		if(Premium.contains(Expected_PlanPremium)){
+/*		if(Premium.contains(Expected_PlanPremium)){
 			flag = (flag==false)?false:true;
 			System.out.println("Plan Premium is Validated : "+flag);
 		}else flag =false;
-		System.out.println("Plan Details are Validated : "+flag);
+*/		System.out.println("Plan Details are Validated : "+flag);
 		return flag;
 	}
 

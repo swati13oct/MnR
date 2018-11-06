@@ -127,7 +127,7 @@ q2_jun_aarp0212/Password@1,PDP,IndAARPFnR,
 q1_grp_apr226/Password@1,PDP,TexasRxPharmacyFnRPage,
 q2_jun_grp0036/Password@1,PDP,UHCGroupFnR,
 q1_aarp_apr185/Password@1,MA,AARPIndFnR,
-q2_jun_sofl0007/Password@1,MAPD,PCP,NON LIS
+q2_jun_sofl0034/Password@1,MAPD,PCP,NON LIS
 q2_jun_grp0238/Password@1,UHC,SSUPFnR,
 q3_sept_ship0020/Password@1,Combo,ComboFnR,
 q2_jun_grp0035/Password@1,MA,TerminatedGroup,
@@ -180,7 +180,7 @@ q2_jun_grp0116/Password@1,MAPD,GRPAARPPre-EffectiveFnR,
 q2_jun_uhc0040/Password@1,MAPD,IndUHCPre-EffectiveFnR,
 q2_preEffective_MAuser_001/Password@2,MA,IndAARPMAPre-EffectiveFnR,
 q2_jun_aarp0089/Password@1,PDP,IndAARPPre-EffectivePDPFnR,
-q2_june_combo0020/Password@1,MA,PPO,NON LIS,
-q2_jun_ship0010/Password@1,SHIP,SHIPOnlyBranding,NON LIS,
+q2_june_combo0020/Password@1,MA,PPO,NON LIS
+q2_jun_ship0010/Password@1,SHIP,SHIPOnlyBranding,NON LIS
 q3_sep_uhc0061/Password@1,MA,UHCTerminatedmember,
 q2_jun_sofl0050/Password@1,MAPD,PCP,
