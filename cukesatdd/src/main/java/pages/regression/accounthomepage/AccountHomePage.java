@@ -62,6 +62,9 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(xpath = "(//*[@class='ng-scope']//a[text()='Premium Payments'])[1]")
 	private WebElement paymentsLink;
+	
+	@FindBy(xpath = "//*[@id='premiumpayment_3']")
+	private WebElement paymentsLink3; // after clicking benefit and coverage page this is the link for payment history
 
 	@FindBy(xpath = "//area[@href='javascript:clWin()'][@alt = 'close']")
 	private WebElement FeedbackModal;
@@ -1361,7 +1364,10 @@ public class AccountHomePage extends UhcDriver {
 			return new PaymentHistoryPage(driver);
 		} else {
 			System.out.println("payment link is not displayed on the header");
-			return null;
+			coverageBenefits.click();
+			WebDriverWait wait = new WebDriverWait(driver, 30);
+			paymentsLink3.click(); 
+			return new PaymentHistoryPage(driver); 
 		}
 		/*
 		 * else{ CoverageAndBenefits.click();
