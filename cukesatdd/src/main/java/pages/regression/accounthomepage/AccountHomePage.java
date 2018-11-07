@@ -1367,7 +1367,7 @@ public class AccountHomePage extends UhcDriver {
 			coverageBenefits.click();
 			WebDriverWait wait = new WebDriverWait(driver, 30);
 			paymentsLink3.click(); 
-			return new PaymentHistoryPage(driver); }
+			return new PaymentHistoryPage(driver); 
 		}
 		/*
 		 * else{ CoverageAndBenefits.click();
