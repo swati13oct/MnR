@@ -24,7 +24,6 @@ Examples:
      | MAPD     | Last 24 months | COSMOS | COSMOSCLAIMS |
      | MA       | Last 24 months | NICE   | NICECLAIMS   |
      | PDP      | Last 24 months | RX     | RXCLAIMS     |
-     | MA       | Last 24 months | COSMOS | COSMOSCLAIMS |
 
 @claimsSummarySHIP
 Scenario Outline: To validate the claims present for the SHIP member on claims summary page for SHIP members
@@ -107,7 +106,7 @@ Then I validate EOB
 And I can view a claim search back button in Claims Details page in AARP site
 And I validate the two COMBO tabs on the page 
 And I validate the two COMBO tabs on the claim Summary page 
-And the user validates the DownloadMyData section in redesigned site   
+#And the user validates the DownloadMyData section in redesigned site   
 Examples: 
    | planType | claimPeriod    | domain | claimssystem |
    | SHIP    | Last 24 months  | NA      |    COSMOSCLAIMS |
