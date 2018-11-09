@@ -62,6 +62,9 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(xpath = "(//*[@class='ng-scope']//a[text()='Premium Payments'])[1]")
 	private WebElement paymentsLink;
+	
+	@FindBy(xpath = "//*[@id='premiumpayment_3']")
+	private WebElement paymentsLink3; // after clicking benefit and coverage page this is the link for payment history
 
 	@FindBy(xpath = "//area[@href='javascript:clWin()'][@alt = 'close']")
 	private WebElement FeedbackModal;
@@ -120,7 +123,8 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//span[contains(.,'Print temporary ID card')]")
 	private WebElement viewIDCard;
 
-	@FindBy(xpath = "//div[@class='claim-results']//table[not (contains(@class,'ng-hide'))]//tbody//tr[2]//a[text()='MORE INFO']")
+	//@FindBy(xpath = "//div[@class='claim-results']//table[not (contains(@class,'ng-hide'))]//tbody//tr[2]//a[text()='MORE INFO']")
+	@FindBy(xpath = "//a[contains (text(), 'MORE INFO')]")
 	private WebElement claimstablemoreinfolinkCombo;
 
 	@FindBy(id = "pcpLogoPrint1left")
@@ -214,6 +218,7 @@ public class AccountHomePage extends UhcDriver {
 	private WebElement claimDetTableMainSection;
 
 	@FindBy(xpath = "//*[@id='dashboard']//span[text()='View Your Claims']")
+	//@FindBy(xpath = "//*[@id='claims_1']")
 	private WebElement claimsDashboardLink;
 
 	@FindBy(xpath = "//span[contains (text(), 'Look up Drugs')]")
@@ -313,7 +318,8 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='table-body margin-large']/div[2]//p")
 	private WebElement PayDate;
 
-	@FindBy(xpath = ".//*[@id='cltotshipindsnf']")
+	//@FindBy(xpath = ".//*[@id='cltotshipindsnf']")
+	@FindBy(xpath = "//*[@id='cltotshippartb']/div/div[1]/div/div/div/div/div[1]/div/p")
 	private WebElement claimtotalcomb;
 
 	@FindBy(id = "closeButton")
@@ -1040,7 +1046,7 @@ public class AccountHomePage extends UhcDriver {
 
 	public void validateImagePresent(String logoToBeDisplayedOnDashboard) throws InterruptedException {
 		//Thread.sleep(2000);
-		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+		CommonUtility.waitForPageLoad(driver,logoImage,15);
 		String logo_src = logoImage.getAttribute("src");
 		String logo_alt = logoImage.getAttribute("alt");
 		System.out.println("Actual logo's source on Dashboard page is   " + logo_src + " and Expected logo source    "
@@ -1051,7 +1057,7 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public void validateCoLogoImagePresent(String cologoToBeDisplayedOnDashboard) throws InterruptedException {
-		Thread.sleep(2000);
+		CommonUtility.waitForPageLoad(driver,cologoImage,15);
 		String cologo_src = cologoImage.getAttribute("src");
 		String cologo_alt = cologoImage.getAttribute("alt");
 		System.out.println("Actual cologo's source on Dashboard page is   " + cologo_src
@@ -1359,7 +1365,10 @@ public class AccountHomePage extends UhcDriver {
 			return new PaymentHistoryPage(driver);
 		} else {
 			System.out.println("payment link is not displayed on the header");
-			return null;
+			coverageBenefits.click();
+			WebDriverWait wait = new WebDriverWait(driver, 30);
+			paymentsLink3.click(); 
+			return new PaymentHistoryPage(driver); 
 		}
 		/*
 		 * else{ CoverageAndBenefits.click();
