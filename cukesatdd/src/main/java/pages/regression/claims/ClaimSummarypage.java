@@ -17,6 +17,7 @@ import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import junit.framework.Assert;
 import pages.regression.footer.FooterPage;
+
 @SuppressWarnings("deprecation")
 
 /**
@@ -523,28 +524,7 @@ public class ClaimSummarypage extends UhcDriver{
 			if(leavingsitepopup.isDisplayed()){
 				proceedButtonDownloadPopUp.click();
 				switchToNewTab();
-				driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
-				//capture next page title
-				String pageTitle = driver.getTitle();
-				System.out.println(pageTitle);
-				if(driver.getTitle().contains("Medicare.gov")){
-					System.out.println(driver.getTitle());
-				}
-				System.out.println("Proceed button functionality is working as expected");				
-			}			
-		}
-		else 
-		{
-			System.out.println("Downlaod my data button is not displayed ");
-
-		}
-		return  ; 
-		}
-	}
-	
-	
-		
-	/*	CommonUtility.waitForPageLoad(driver, downloadmydatabutton, 60);
+				driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);lity.waitForPageLoad(driver, downloadmydatabutton, 60);
 	if (downloadmydatabutton.isDisplayed())
 	{			
 		downloadmydatabutton.click();		
@@ -765,6 +745,14 @@ public class ClaimSummarypage extends UhcDriver{
 			//dropdown.selectByIndex(4);
 			//CommonUtility.waitForPageLoad(driver, last24months, 60);
 			last24months.click();
+			System.out.println("!!! Month Selected from the view claims from drop down iait(70, TimeUnit.SECONDS);
+			*/
+			
+			//Select dropdown = new Select(driver.findElement(By.xpath("//div[@class='medical-claims']//h2[@ng-bind-html='planName']/parent::div//*[@id='document-date']//option[contains(@value,'24 months')]")));
+			
+			//dropdown.selectByIndex(4);
+			//CommonUtility.waitForPageLoad(driver, last24months, 60);
+			last24months.click();
 			System.out.println("!!! Month Selected from the view claims from drop down is ====>"+(last24months.getText()));
 			/*try { Thread.sleep(10000); } 
 			catch (InterruptedException e) {			
@@ -973,6 +961,13 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{
 			}
 			else
 				System.out.println("************Error message not displayed for PHIP Member on claims Summary page ***************");
+				return false;
+				}
+
+
+		
+     public void validateCustomSearch(){
+    	 System.out.println("The t*******");
 				return false;
 				}
 
@@ -1241,14 +1236,7 @@ public void NavigateToClaimsPage(){
 				else 
 				{
 					System.out.println("Claims Summary Sub Navigation Link under Claims was displayed, Test step is failed due to it");
-			    	Assert.fail("Claims Summary Sub Navigation Link under Claims was displayed, Test step is failed due to it");	
-				}
-				
-			}		 
-		
-			/*
-			 * this method checks that Claims Summary Sub Navigation Link 
-			 * under Claims is NOT displayed
+			    	Assert.fail("Claims Summary Sub Navigation Link under Claims was displayed, Test step is failed due to itlaims is NOT displayed
 			 */
 			
 			public void validateExplanationOfBenefitsSubNavNotDisplayed() throws InterruptedException 

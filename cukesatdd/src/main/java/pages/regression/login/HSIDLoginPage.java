@@ -24,9 +24,9 @@ import atdd.framework.UhcDriver;
  */
 @SuppressWarnings("static-access")
 public class HSIDLoginPage extends UhcDriver {
-	//private static String STAGE_DASHBOARD_URL = MRConstants.STAGE_DASHBOARD_NEW_DOMAIN_URL;
+	private static String STAGE_DASHBOARD_URL = MRConstants.STAGE_DASHBOARD_NEW_DOMAIN_URL;
 	
-	private static String STAGE_DASHBOARD_URL = MRConstants.TESTHARNESS;
+	private static String STAGE_TESTHARNESS_DASHBOARD_URL = MRConstants.TESTHARNESS;
 	
 	// Page URL
 	private static String PAGE_URL = MRConstants.HSIDURL;
@@ -318,10 +318,20 @@ public class HSIDLoginPage extends UhcDriver {
 
 	public void navigateToNewDashboardUrl() {
 		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
+			
+			if(MRScenario.isTestHarness.equalsIgnoreCase("YES")){
+				System.out.println(STAGE_TESTHARNESS_DASHBOARD_URL);
+				start(STAGE_TESTHARNESS_DASHBOARD_URL);
+				System.out.println(STAGE_TESTHARNESS_DASHBOARD_URL);
+				System.out.println("User is Navigating to Stage Dashboard");
+			}else{
+				
+			
 			System.out.println(STAGE_DASHBOARD_URL);
 			start(STAGE_DASHBOARD_URL);
 			System.out.println(STAGE_DASHBOARD_URL);
 			System.out.println("User is Navigating to Stage Dashboard");
+			}
 
 		}
 
