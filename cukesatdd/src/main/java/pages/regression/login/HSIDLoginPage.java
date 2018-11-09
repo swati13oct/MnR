@@ -24,7 +24,10 @@ import atdd.framework.UhcDriver;
  */
 @SuppressWarnings("static-access")
 public class HSIDLoginPage extends UhcDriver {
-	private static String STAGE_DASHBOARD_URL = MRConstants.STAGE_DASHBOARD_NEW_DOMAIN_URL;
+	//private static String STAGE_DASHBOARD_URL = MRConstants.STAGE_DASHBOARD_NEW_DOMAIN_URL;
+	
+	private static String STAGE_DASHBOARD_URL = MRConstants.TESTHARNESS;
+	
 	// Page URL
 	private static String PAGE_URL = MRConstants.HSIDURL;
 

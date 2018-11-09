@@ -194,7 +194,7 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy  (xpath =".//*[@id='prescriptionDrug']/tbody/tr[1]/th[7]/p")
 	private WebElement RxNumberinthecalimstable;
 	
-	//@FindBy(xpath ="dtmname="claims search:claim type:Medical" value="medical" ])
+	//@FindBy(xpath ="dtmname="claims search:claim type:Medical" value="medical" ])
 	@FindBy (xpath =".//*[@id='claim-type']/option[1]")
 	private WebElement Medical;
 	
@@ -307,7 +307,6 @@ public class ClaimSummarypage extends UhcDriver{
 			List<WebElement> values = select.getOptions();
 			System.out.println(values.get(0));
 			System.out.println(values.get(1));
-
 			return values.get(0).equals("medical")&&values.get(1).equals("prescription drug");
 		}*/
 		}	
@@ -356,6 +355,19 @@ public class ClaimSummarypage extends UhcDriver{
 			return false;
 		}
 	}
+	
+	/**
+	 * @throws InterruptedException 
+	 * @toDo : this method validates Claims by time period 
+	 */
+	public void searchClaimsbyCustomDate(String planType,String claimPeriod) throws InterruptedException {
+	
+		validate (customSearch);
+		System.out.println("!!! Custom search is seen in the view Claims From drop down ===>"+(customSearch.getText()));
+		System.out.println("!!! Validating the drop down to select the claims !!!");
+	
+	}
+	
 	/**
 	 * @toDo : Validate Pagination under the claims table  
 	 */
@@ -534,7 +546,6 @@ public class ClaimSummarypage extends UhcDriver{
 		
 	/*	CommonUtility.waitForPageLoad(driver, downloadmydatabutton, 60);
 	if (downloadmydatabutton.isDisplayed())
-
 	{			
 		downloadmydatabutton.click();		
 		waitforElement(proceedToDownloadPopUp);
@@ -544,7 +555,6 @@ public class ClaimSummarypage extends UhcDriver{
 			proceedButtonDownloadPopUp.click();
 			System.out.println("Proceed button functionality is working as expected");
 		}
-
 		cancelButtonDownloadPopUp.click();
 		if(driver.getTitle().contains("Claims")){
 			System.out.println("Cancel button functionality is working as expected");
@@ -553,7 +563,6 @@ public class ClaimSummarypage extends UhcDriver{
 	else 
 	{
 		System.out.println("Downlaod my data button is not displayed ");
-
 	}
 	return null;
 }*/
@@ -633,14 +642,11 @@ public class ClaimSummarypage extends UhcDriver{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		try{
 			Alert alert = driver.switchTo().alert();
 			System.out.println("FeedBack Modal Alert Present");
-
 			if(validate(iPerceptionPopUp1)){
 				System.out.println("FeedBack Modal Present");
-
 				iPerceptionClose.click();
 				if (validate(iPerceptionPopUp1)){
 					System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
@@ -750,7 +756,6 @@ public class ClaimSummarypage extends UhcDriver{
 			month.selectByVisibleText("Last 24 months");
 			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 			CommonUtility.checkPageIsReady(driver);
-
 			System.out.println("Plan Year Selected is =====> "+lastwenty4months.getText());
 			driver.manage().timeouts().implicitlyWait(70, TimeUnit.SECONDS);
 			*/
@@ -870,7 +875,6 @@ public class ClaimSummarypage extends UhcDriver{
 	
 		/*CommonUtility.waitForPageLoad(driver, downloadmydatabutton, 60);
 		if (downloadmydatabutton.isDisplayed())
-
 		{			
 			downloadmydatabutton.click();		
 			waitforElement(proceedToDownloadPopUp);
@@ -880,7 +884,6 @@ public class ClaimSummarypage extends UhcDriver{
 				proceedButtonDownloadPopUp.click();
 				System.out.println("Proceed button functionality is working as expected");
 			}
-
 			cancelButtonDownloadPopUp.click();
 			if(driver.getTitle().contains("Claims")){
 				System.out.println("Cancel button functionality is working as expected");
@@ -889,7 +892,6 @@ public class ClaimSummarypage extends UhcDriver{
 		else 
 		{
 			System.out.println("Downlaod my data button is not displayed ");
-
 		}
 	}*/
 	
