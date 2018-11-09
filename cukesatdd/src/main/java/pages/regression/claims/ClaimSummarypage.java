@@ -524,28 +524,31 @@ public class ClaimSummarypage extends UhcDriver{
 			if(leavingsitepopup.isDisplayed()){
 				proceedButtonDownloadPopUp.click();
 				switchToNewTab();
-				driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);lity.waitForPageLoad(driver, downloadmydatabutton, 60);
-	if (downloadmydatabutton.isDisplayed())
-	{			
-		downloadmydatabutton.click();		
-		waitforElement(proceedToDownloadPopUp);
-		System.out.println("Proceed button is displayed ===>"+(proceedToDownloadPopUp.isDisplayed()));
-		//proceedToDownloadPopUp.click();
-		if(proceedToDownloadPopUp.isDisplayed()){
-			proceedButtonDownloadPopUp.click();
-			System.out.println("Proceed button functionality is working as expected");
+				driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);				CommonUtility.waitForPageLoad(driver, downloadmydatabutton, 60);
+			if (downloadmydatabutton.isDisplayed())
+			{			
+				downloadmydatabutton.click();		
+				waitforElement(leavingsitepopup);
+				System.out.println("Proceed button is displayed ===>"+(leavingsitepopup.isDisplayed()));
+				//proceedToDownloadPopUp.click();
+				if(leavingsitepopup.isDisplayed()){
+					proceedButtonDownloadPopUp.click();
+					System.out.println("Proceed button functionality is working as expected");
+				}
+				cancelButtonDownloadPopUp.click();
+				if(driver.getTitle().contains("Claims")){
+					System.out.println("Cancel button functionality is working as expected");
+				}
+			}
+			else 
+			{
+				System.out.println("Downlaod my data button is not displayed ");
+			}
+			}
+			}
 		}
-		cancelButtonDownloadPopUp.click();
-		if(driver.getTitle().contains("Claims")){
-			System.out.println("Cancel button functionality is working as expected");
-		}
-	}
-	else 
-	{
-		System.out.println("Downlaod my data button is not displayed ");
-	}
-	return null;
-}*/
+			
+}
 	/**
 	 * @toDo : this method validates required plan type
 	 */
@@ -604,6 +607,7 @@ public class ClaimSummarypage extends UhcDriver{
 				return false;
 
 		}
+	
 	
 	/**
 	 * @throws InterruptedException 
@@ -738,14 +742,6 @@ public class ClaimSummarypage extends UhcDriver{
 			CommonUtility.checkPageIsReady(driver);
 			System.out.println("Plan Year Selected is =====> "+lastwenty4months.getText());
 			driver.manage().timeouts().implicitlyWait(70, TimeUnit.SECONDS);
-			*/
-			
-			//Select dropdown = new Select(driver.findElement(By.xpath("//div[@class='medical-claims']//h2[@ng-bind-html='planName']/parent::div//*[@id='document-date']//option[contains(@value,'24 months')]")));
-			
-			//dropdown.selectByIndex(4);
-			//CommonUtility.waitForPageLoad(driver, last24months, 60);
-			last24months.click();
-			System.out.println("!!! Month Selected from the view claims from drop down iait(70, TimeUnit.SECONDS);
 			*/
 			
 			//Select dropdown = new Select(driver.findElement(By.xpath("//div[@class='medical-claims']//h2[@ng-bind-html='planName']/parent::div//*[@id='document-date']//option[contains(@value,'24 months')]")));
@@ -966,13 +962,7 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{
 
 
 		
-     public void validateCustomSearch(){
-    	 System.out.println("The t*******");
-				return false;
-				}
-
-
-		
+ 
      public void validateCustomSearch(){
     	 System.out.println("The title of the page is-------->"+driver.getTitle());
  		if(driver.getTitle().equalsIgnoreCase("Claims")){
@@ -1211,8 +1201,7 @@ public void NavigateToClaimsPage(){
 			}
 		
 		 
-		 
-			/*
+		 /*
 			 * this method checks that Claims Summary Sub Navigation Link 
 			 * under Claims is NOT displayed
 			 */
@@ -1236,8 +1225,10 @@ public void NavigateToClaimsPage(){
 				else 
 				{
 					System.out.println("Claims Summary Sub Navigation Link under Claims was displayed, Test step is failed due to it");
-			    	Assert.fail("Claims Summary Sub Navigation Link under Claims was displayed, Test step is failed due to itlaims is NOT displayed
-			 */
+			    	Assert.fail("Claims Summary Sub Navigation Link under Claims was displayed, Test step is failed due to it");	
+				}
+				
+			}	
 			
 			public void validateExplanationOfBenefitsSubNavNotDisplayed() throws InterruptedException 
 			{
