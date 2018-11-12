@@ -49,12 +49,12 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     Examples: 
       | planType | memberType | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List     | name        | memberid     | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
       | MAPD     | Individual | NON LIS       | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | DDCEE DAADF | 954016383-00 | 01/01/2018    | Not Available  | Tier 2          | true        |
-      | MAPD    |  Individual  |  NON LIS      | ESPAÃOL  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | DDCEE DAADF | 954016383-00 | 01/01/2018    | Not Available  | Tier 2            | true       |
-      | MAPD    |  Individual  |  NON LIS      | ä¸­æ  |                      |                          |                                     | DDCEE DAADF | 954016383-00 | 01/01/2018    | Not Available  | Tier 2            | true       |
-      | Medica  |  Individual  |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | AADECDC FEDFACEDBACBB|954283936-00    | 04/01/2018    | Not Available  | Tier 2            | true       |
-      | Medica  |  Individual  |  NON LIS      | ESPAÃOL  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | AADECDC FEDFACEDBACBB|954283936-00    | 04/01/2018    | Not Available  | Tier 2            | true       |
+      | MAPD    |  Individual  |  NON LIS      | ESPAÑOL  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | DDCEE DAADF | 954016383-00 | 01/01/2018    | Not Available  | Tier 2            | true       |
+      | MAPD    |  Individual  |  NON LIS      | 中文 |                      |                          |                                     | DDCEE DAADF | 954016383-00 | 01/01/2018    | Not Available  | Tier 2            | true       |
+     | Medica  |  Individual  |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | AADECDC FEDFACEDBACBB|954283936-00    | 04/01/2018    | Not Available  | Tier 2            | true       |
+     | Medica  |  Individual  |  NON LIS      | ESPAÑOL  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | AADECDC FEDFACEDBACBB|954283936-00    | 04/01/2018    | Not Available  | Tier 2            | true       |
       | PCP     |  Individual  |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | BDFAEC CBADEADF|945007888-00 | 01/01/2018 | Not Available  | Tier 2            | true       |
-      | PCP     |  Individual  |  NON LIS      | ESPAÃOL  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | BDFAEC CBADEADF|945007888-00 | 01/01/2018 | Not Available  | Tier 2            | true       |
+      | PCP     |  Individual  |  NON LIS      | ESPAÑOL  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | BDFAEC CBADEADF|945007888-00 | 01/01/2018 | Not Available  | Tier 2            | true       |
   @CMFedPDPNonLis
   Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
@@ -98,8 +98,8 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     Examples: 
       | planType | memberType | copayCategory | language | SummaryofBenefits     | EvidenceofCoverage       | ComprehensiveFormularyDrug List     | name      | memberid   | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
    		 | PDP      | Individual | NON LIS       | ENGLISH  | Summary of Benefits   | Evidence of Coverage     | Comprehensive Formulary - Drug List | EACBD BEF | 0182297421 | 01/01/2017    | Not Available  | Tier 2          | true        |
-      | PDP      | Individual | NON LIS       | ESPAÃOL  | Resumen de Beneficios | Comprobante de Cobertura | Formulario Completo                 | EACBD BEF | 0182297421 | 01/01/2017    | Not Available  | Tier 2          | true        |
-     | PDP      | Individual | NON LIS       | ä¸­æ  |                       |                          |                                     | EACBD BEF | 0182297421 | 01/01/2017    | Not Available  | Tier 2          | true        |
+      | PDP      | Individual | NON LIS       | ESPAÑOL  | Resumen de Beneficios | Comprobante de Cobertura | Formulario Completo                 | EACBD BEF | 0182297421 | 01/01/2017    | Not Available  | Tier 2          | true        |
+     | PDP      | Individual | NON LIS       | 中文 |                       |                          |                                     | EACBD BEF | 0182297421 | 01/01/2017    | Not Available  | Tier 2          | true        |
 
   @CMMapdFedTable
   Scenario Outline: Verify fed table data on Benefits and Coverage page
@@ -144,23 +144,6 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | MAPDVill | Individual | NON LIS       |
 
   @CMvalidatePdfsectiongroupenglish
-  Scenario Outline: Verify PDF section is in place on Benefits and     Coverage page
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type      | <planType>      |
-      | Member Type    | <memberType>    |
-      | Copay Category | <copayCategory> |
-    Then The user navigates to Benefits and Coverage page
-      | Plan Type | <planType> |
-    And the user validates view and document label
-    And the user validates the language dropdown and the value displayed by default should be English
-
-    Examples: 
-      | planType | memberType | copayCategory |
-      | PDP      | Group      | NON LIS       |
-      | MAPD     | Group      | NON LIS       |
-      | MA       | Group      | NON LIS       |
-
-  @CMvalidatePdfsectiongroupspanishchinese
   Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -169,12 +152,12 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     Then The user navigates to Benefits and Coverage page
       | Plan Type | <planType> |
     And the user validates view and document label
+    And the user validates the language dropdown and the value displayed by default should be English
     And the user validates spanish and chinese should not display in dropdown
-
     Examples: 
       | planType | memberType | copayCategory |
       | PDP      | Group      | NON LIS       |
-      | MAPD     | Group      | NON LIS       |
+     | MAPD     | Group      | NON LIS       |
       | MA       | Group      | NON LIS       |
 
   @CMAncillarysection1
@@ -216,30 +199,14 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | MA       | Group      | NON LIS       |
       | MAPD     | Group      | NON LIS       |
 
-  @regression_06_06_18 @CMPlanOverviewIndividualNonLisPDP
-  Scenario Outline: Verify that Plan Overview  is in place on Benefits and Coverage page for Non LIS Members
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type      | <planType>      |
-      | Member Type    | <memberType>    |
-      | Copay Category | <copayCategory> |
-    Then The user navigates to Benefits and Coverage page
-    And the user validates Ind plan overview  section
-
-    Examples: 
-      | planType | memberType | copayCategory |
-      | PDP      | Individual | NON LIS       |
-
   @regression_06_06_18 @CMGroupmembersTC25
   Scenario Outline: Verify Group LIS 3/4 on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Copay Category | <copayCategory> |
-    Then user navigates to Benefits coverage page
-      | Plan Type      | <planType>      |
-      | Member Type    | <memberType>    |
-      | Copay Category | <copayCategory> |
-    Then The user navigates to Benefits and Coverage page
+  Then The user navigates to Benefits and Coverage page
+      | Plan Type | <planType> |
     And the user view the LIS Drug Copays & Discounts header
     And the user view the Drug Cost header and text
     And the drugcost dropdown should not display
@@ -247,13 +214,12 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     And the user validates tier link should not display
     And the user validated the Look up Drugs link
     And the user validates text for the Locate a Pharmacy section
-    And user validates Locate a Pharmacy button should be visible
-      | Plan Type | <na> |
     And the user validates Locate a Pharmacy button should be visible
+      | Plan Type | <planType> |
     And the user should see drug cost table for Lis members
     And the user validates view and document label
     And the user validates spanish and chinese should not display in dropdown
-    And the user validates Needhelp header
+    And the user validates Needhelp section
     And the user clicks on More Information link
     And the user validates contactus section
 
@@ -267,7 +233,8 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Copay Category | <copayCategory> |
-    Then the user navigates to Benefits coverage page
+ Then The user navigates to Benefits and Coverage page
+      | Plan Type | <planType> |
     And the user view the LIS Drug Copays & Discounts header
     And the user view the Drug Cost header and text
     And the drugcost dropdown should not display
@@ -286,20 +253,6 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     Examples: 
       | planType | memberType | copayCategory |
       | PDP      | Group      | LIS 1         |
-
-  @regression_06_06_18 @CMPlanOverviewIndividualLEP
-  Scenario Outline: Verify that LEP amount & Payment Due is in place on Benefits and Coverage page for Non LIS Members
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type      | <planType>      |
-      | Member Type    | <memberType>    |
-      | Copay Category | <copayCategory> |
-    Then The user navigates to Benefits and Coverage page
-      | Plan Type | <planType> |
-    And the user validates Ind plan overview LEP amount and payment due
-
-    Examples: 
-      | planType | memberType | copayCategory |
-      | MAPD     | Individual | NON LIS       |
 
   @CMShip
   Scenario Outline: Verify that Page Headers are in place on Benefits and Coverage page
@@ -323,24 +276,12 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     And the user validates for ship see more ways to contact us section
     And the user validates for ship member on clicking contact us link it should route to contact us page
     And the user clicks on More Information link for ship
-
+     Then the user validate Value Add Service page comes on clicking additional info button
+    And the user validate vas tiles on vas page
     Examples: 
       | planType | memberType | language | PlanBenefitsTable   | PlanOverview  |
       | HIP      | SHIP       | ENGLISH  | Plan Benefits Table | Plan Overview |
 
-  @CMShipVAS
-  Scenario Outline: Verify that Page Headers are in place on Benefits and Coverage page
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    Then The user navigates to Benefits and Coverage page
-      | Plan Type | <planType> |
-    Then the user validate Value Add Service page comes on clicking additional info button
-    And the user validate vas tiles on vas page
-
-    Examples: 
-      | planType | memberType |
-      | HIP      | SHIP       |
 
   @aprilRelease2018Fnf @regressiontestcase-ATDDtags
   Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
@@ -377,7 +318,8 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Copay Category | <copayCategory> |
-    Then The user navigates to Benefits and Coverage page
+  Then The user navigates to Benefits and Coverage page
+      | Plan Type | <planType> |
     And the user validates Lis member plan overview section
       | Name            | <name>           |
       | Member ID       | <memberid>       |
@@ -415,7 +357,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
 
     Examples: 
       | planType | memberType | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List     | name            | memberid     | effectivedate | monthlypremium | extrahelp            |
-      | MAPD     | Individual | LIS           | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | DABDCAE CFCFFCF | 910114420-00 | 01/01/2018    | Not Available  | Extra Help Level : 1 |
+      | MAPD     | Individual | LIS 1        | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | DABDCAE CFCFFCF | 910114420-00 | 01/01/2018    | Not Available  | Extra Help Level : 1 |
 
   @CMpdpindlis
   Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
@@ -459,7 +401,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
 
     Examples: 
       | planType | memberType | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List     | name            | memberid     | effectivedate | monthlypremium | extrahelp            |
-      | PDP      | Individual | LIS           | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | DABDCAE CFCFFCF | 910114420-00 | 01/01/2018    | Not Available  | Extra Help Level : 1 |
+      | PDP      | Individual | LIS 1         | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | DABDCAE CFCFFCF | 910114420-00 | 01/01/2018    | Not Available  | Extra Help Level : 1 |
 
   @CMMapdGroupNonLis
   Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
@@ -611,7 +553,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Copay Category | <copayCategory> |
-    When the user navigates to Benefits and coverage page
+    When The user navigates to Benefits and Coverage page
     And the user validates the Vas section on benefits and coverage page is not displayed
 
     Examples: 
@@ -625,7 +567,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    Then the user navigates to Benefits coverage page
+    Then The user navigates to Benefits and Coverage page
     And the user validates City of Hartford prescription Drug Benefits table
 
     Examples: 
@@ -638,7 +580,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    Then the user navigates to Benefits coverage page
+    Then The user navigates to Benefits and Coverage page
     And the user validates Town Of Greenwich table
 
     Examples: 
@@ -650,7 +592,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    Then the user navigates to Benefits coverage page
+    Then The user navigates to Benefits and Coverage page
     And the user validates the Drug costs Section
     Then the user verifies the Retail Cost sharing table
     Then the user verifies the Mail Order Cost sharing table
@@ -664,7 +606,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    Then the user navigates to Benefits coverage page
+    Then The user navigates to Benefits and Coverage page
     And the user validates the Office Visits section
 
     Examples: 
@@ -676,7 +618,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    Then the user navigates to Benefits coverage page
+    Then The user navigates to Benefits and Coverage page
     And the user validates the ways to save section
 
     Examples: 
@@ -690,7 +632,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    Then the user navigates to Benefits coverage page
+    Then The user navigates to Benefits and Coverage page
     And the user validates the Outpatient Surgery Center Visits section
 
     Examples: 
@@ -702,7 +644,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    Then the user navigates to Benefits coverage page
+    Then The user navigates to Benefits and Coverage page
     And user validates the Office Visits section widgets
 
     Examples: 
@@ -714,7 +656,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    Then the user navigates to Benefits coverage page
+    Then The user navigates to Benefits and Coverage page
     And the user validates the Outpatient Surgery Center Visits section
 
     Examples: 
@@ -726,7 +668,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    Then the user navigates to Benefits coverage page
+    Then The user navigates to Benefits and Coverage page
     And the user validates the Benefits for Peehip member
 
     Examples: 
@@ -738,7 +680,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    Then the user navigates to Benefits coverage page
+    Then The user navigates to Benefits and Coverage page
     And the user validates the Benefits for MA member
 
     Examples: 
@@ -751,7 +693,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    Then the user navigates to Benefits coverage page
+    Then The user navigates to Benefits and Coverage page
     And the user validates the copay coinsurance in drug costs table
 
     Examples: 
@@ -763,7 +705,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    Then the user navigates to Benefits coverage page
+    Then The user navigates to Benefits and Coverage page
     And the user validates the benefits for a combo member
 
     Examples: 
@@ -775,7 +717,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    Then the user navigates to Benefits coverage page
+    Then The user navigates to Benefits and Coverage page
     And the user validates the Add Rider functionality
     Then the user validates the remove Rider functionality
 
@@ -789,7 +731,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Copay Category | <copayCategory> |
-    Then the user navigates to Benefits and coverage page
+    Then The user navigates to Benefits and Coverage page
     Then verify ancillary benefit section is not displayed
 
     Examples: 

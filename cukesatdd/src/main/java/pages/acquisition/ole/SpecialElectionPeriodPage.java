@@ -12,6 +12,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -143,7 +144,8 @@ public class SpecialElectionPeriodPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		validate(SEPPageHeader);
+		CommonUtility.waitForPageLoad(driver, SEPPageHeader, 30);
+		validateNew(SEPPageHeader);
 		System.out.println("Page header is Displayed : "+SEPPageHeader.getText());
 
 	}
@@ -178,10 +180,10 @@ public class SpecialElectionPeriodPage extends UhcDriver{
 			flag = (flag==false)?false:true;
 			System.out.println("Plan ZIP CODE is Validated : "+flag);
 		}else flag =false;
-		if(Premium.contains(Expected_PlanPremium)){
+/*		if(Premium.contains(Expected_PlanPremium)){
 			flag = (flag==false)?false:true;
 			System.out.println("Plan Premium is Validated : "+flag);
-		}else flag =false;
+		}else flag =false;*/
 		System.out.println("Plan Details are Validated : "+flag);
 		return flag;
 	}
@@ -325,13 +327,7 @@ public CoverageInformationPage navigate_to_Coverage_Information_page() {
 	JavascriptExecutor executor = (JavascriptExecutor)driver;
 	executor.executeScript("arguments[0].click();", NextBtn);
 
-	//NextBtn.click();
-	try {
-		Thread.sleep(6000);
-	} catch (InterruptedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+	
 	if(driver.getCurrentUrl().contains("coverage-info")){
 		System.out.println("OLE Coverage and Health Information page is Displayed");
 		return new CoverageInformationPage(driver);

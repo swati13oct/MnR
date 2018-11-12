@@ -12,6 +12,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -113,12 +114,13 @@ public class PersonalInformationPage extends UhcDriver{
 	public PersonalInformationPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		//openAndValidate();
+		openAndValidate();
 	}
 
 	@Override
 	public void openAndValidate() {
-
+		CommonUtility.waitForPageLoad(driver, DOBtxtFld, 30);
+		validateNew(DOBtxtFld);
 
 	}
 
@@ -147,12 +149,7 @@ public class PersonalInformationPage extends UhcDriver{
 		System.out.println("Mailing Question : "+MailingQuestion);
 		if(MailingQuestion.equalsIgnoreCase("no")){
 			SameMailingAddressNo.click();
-			try {
-				Thread.sleep(2000);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			CommonUtility.waitForPageLoad(driver,MailingAdd_Street, 30);
 			sendkeys(MailingAdd_Street,Mailing_Street);
 			sendkeys(MailingAdd_City,Mailing_City);
 			Select SelectState = new Select(MailingAdd_State_DropDown);
@@ -198,10 +195,10 @@ public class PersonalInformationPage extends UhcDriver{
 			flag = (flag==false)?false:true;
 			System.out.println("Plan ZIP CODE is Validated : "+flag);
 		}else flag =false;
-		if(Premium.contains(Expected_PlanPremium)){
+/*		if(Premium.contains(Expected_PlanPremium)){
 			flag = (flag==false)?false:true;
 			System.out.println("Plan Premium is Validated : "+flag);
-		}else flag =false;
+		}else flag =false;*/
 		System.out.println("Plan Details are Validated : "+flag);
 		return flag;
 	}
@@ -283,12 +280,7 @@ public class PersonalInformationPage extends UhcDriver{
 		validate(NextBtn);
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		if(driver.getCurrentUrl().contains("special-election-period")){
 			System.out.println("OLE SEP Page is Displayed");
 			return new SpecialElectionPeriodPage(driver);

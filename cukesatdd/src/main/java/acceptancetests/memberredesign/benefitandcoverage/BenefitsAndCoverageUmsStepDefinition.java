@@ -111,6 +111,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	@Then("^The user navigates to Benefits and Coverage page$")
 	public void user_views_BenefitsAndCoveragejenkins1(DataTable memberAttributes) {
+		System.out.println("***The user navigates to Benefits and Coverage page***");
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -240,6 +241,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	
 	@Then("^user navigates to Benefits coverage page$")
 		public void user_views_BenefitsAndCoveragejenkins() {
+		System.out.println("***user navigates to Benefits coverage page***");
 
 			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 
@@ -364,6 +366,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	@And("the user validates spanish and chinese should not display in dropdown")
 	public void user_validates_spanish_chinese_notvisible() {
+		System.out.println("***the user validates spanish and chinese should not display in dropdown***");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.languagevalidation();
@@ -399,6 +402,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	 */
 	@And("the user validates the language dropdown and the value displayed by default should be English")
 	public void user_validates_englishlanguage() {
+		System.out.println("***the user validates the language dropdown and the value displayed by default should be English***");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validate_langdropdown_first_selection();
@@ -410,6 +414,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	@Then("^the user validates Hearing section$")
 	public void user_validates__Hearing_section() {
+		System.out.println("***the user validates Hearing section***");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.HearingSection();
@@ -421,7 +426,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	@And("^the user validates the Hearing Aid section$")
 	public void user_validates__Hearing_Aid_section() {
-
+		System.out.println("***the user validates the Hearing Aid section***");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.HearingAid();
@@ -434,6 +439,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	@And("^the user validates the Vision section$")
 	public void user_validates__Vision_section() {
+		System.out.println("***the user validates the Vision section***");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.Vision();
@@ -446,6 +452,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	@And("^the user validates the Dental section$")
 	public void user_validates__Dental_section() {
+		System.out.println("***the user validates the Dental section***");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.Dental();
@@ -457,6 +464,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	@And("^the user validates Header section$")
 	public void user_validates__Header_section() {
+		System.out.println("***the user validates Header section***");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.Header();
@@ -469,6 +477,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	@And("^the user validates chiropractic section$")
 	public void user_validates__chiropractic_section() {
+		System.out.println("***the user validates chiropractic section***");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.chiropracticsection();
@@ -649,6 +658,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	 */
 	@And("^the user validates Locate a Pharmacy button should be visible")
 	public void user_validate_locatepharmacybutton(DataTable memberAttributes) {
+		System.out.println("***the user validates Locate a Pharmacy button should be visible***");
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -683,6 +693,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	@And("^the user validates tier link should not display")
 	public void user_validate_tierinkshouldnotdisplay() {
+		System.out.println("***the user validates tier link should not display***");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validate_tierlinknotdisplay();
@@ -727,14 +738,15 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	}
 
 	/** 
+	 * @throws InterruptedException 
 	 * @toDo : Validates the Learn More links for a  Lis member
 	 */
 	@And("^the user validates the Learn More section link for stage")
-	public void user_validate_stagelink() {
+	public void user_validate_stagelink() throws InterruptedException {
 		System.out.println("***the user validates the Learn More section link for stage***");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		benefitsCoveragePage.validate_learnmoreaboutstagelink();
+		benefitsCoveragePage.clickOnLearnmoreaboutlinkstage();
 	}
 
 	/** 
@@ -802,6 +814,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	@And("the user should see drug cost table for Lis members")
 	public void user_validate_drugcosttable() {
+		System.out.println("***the user should see drug cost table for Lis members***");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validatedrugcosttable();
@@ -856,8 +869,9 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	/**
 	 * @toDo :Validate plan overview section for Individual members NON LIS 
 	 */
-	@And("^the user validates Ind plan overview  section$")
+	@And("^section the user validates Ind plan overview$")
 	public void user_validate_IndplanOverviewsectionformembers() {
+		System.out.println("***the user validates Ind plan overview  section***");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validatePlanOverviewSectionForMembers();
@@ -890,6 +904,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("^the user validates Ind plan overview LEP amount and payment due$")
 	
 	public void user_validate_IndplanOverviewsectionLEPAmount() throws InterruptedException {
+		System.out.println("***the user validates Ind plan overview LEP amount and payment due***");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validatePlanOverviewLEP();
@@ -1382,6 +1397,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	 */
 	@And("^the user validates text in table$")
 	public void validatevillagetabletext(String text) throws InterruptedException   {
+		System.out.println("***the user validates text in table***");
 		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsnCoveragepage.validatevillagetabletext();
@@ -1470,8 +1486,11 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	
 	@Then("^the user navigates to Benefits and Coverage page$")
 	public void the_user_navigates_to_Redesign_BnC_page() throws InterruptedException{
-		UlayerHomePage accountHomePage = (UlayerHomePage) getLoginScenario()
-				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+	System.out.println("***the user navigates to Benefits and Coverage page***");
+	AccountHomePage accountHomePagew = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+	
+	
+		UlayerHomePage accountHomePage = (UlayerHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		BenefitsCoveragePage planBenefitsCoverage = accountHomePage.navigateToBenefitsAndCoverage();
 		if (planBenefitsCoverage != null) {
 			System.out.println("EOB page Loaded");

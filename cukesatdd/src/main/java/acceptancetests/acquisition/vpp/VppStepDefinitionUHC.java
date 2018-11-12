@@ -19,6 +19,7 @@ import pages.acquisition.bluelayer.PlanDetailsPage;
 import pages.acquisition.bluelayer.TeamCAcqHome;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.bluelayer.ComparePlansPageBlayer;
 import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.vbfacquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
@@ -167,7 +168,7 @@ public class VppStepDefinitionUHC {
 
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		Thread.sleep(7000);
+		
 		plansummaryPage = plansummaryPage.viewPlanSummary(plantype);
 		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "UHC_ACQ");
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, plantype);
@@ -437,6 +438,52 @@ public class VppStepDefinitionUHC {
 			Assert.fail("Error in Loading the Plan Compare Page");
 		
 	}
+	
+	
+	/**
+	 * @toDo:select all 3 plans to compare in MA and click on compare plan  link
+	 */
+	@And("^I select all 3 plans to compare in MA and click on compare plan link in UHS site$")
+	public void I_select_all_3_plans_to_compare(){
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.clickonViewPlans();
+		plansummaryPage.checkAllMAPlans();
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ComparePlansPageBlayer comparePlansPageblayer = plansummaryPage.clickOnCompareLink();
+		if(comparePlansPageblayer != null){
+			getLoginScenario().saveBean(PageConstants.TeamC_Plan_Compare_Page, comparePlansPageblayer);
+			//comparePlansPage.backToVPPPage();
+		}else
+			Assert.fail("Error in loading the compare plans page");
+	}
+	
+	/**
+	 * @toDo:user validate the print and email link option in plan compare
+	 */
+	@When("^the user validate the print and email link option in plan compare in UHS site$")
+	public void user_validate_print_and_email_link_option_in_plan_compare(){
+		
+		ComparePlansPageBlayer comparePlansPage = (ComparePlansPageBlayer) getLoginScenario().getBean(PageConstants.TeamC_Plan_Compare_Page);
+		comparePlansPage.validateprintandemail();
+	}
+	
+	/**
+	 * @toDo:the user validating email and print option in plan compare
+	 */
+	@Then("^the user validating email and print option in plan compare in UHS site$")
+	public void user_validating_print_and_email_option_in_plan_compare(){
+		
+		ComparePlansPageBlayer comparePlansPage = (ComparePlansPageBlayer) getLoginScenario().getBean(PageConstants.TeamC_Plan_Compare_Page);
+		comparePlansPage.validatingprintandemail();
+	}
+	
+
 
 	
 }
