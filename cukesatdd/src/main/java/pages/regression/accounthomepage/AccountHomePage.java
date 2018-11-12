@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -61,6 +62,9 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(xpath = "(//*[@class='ng-scope']//a[text()='Premium Payments'])[1]")
 	private WebElement paymentsLink;
+	
+	@FindBy(xpath = "//*[@id='premiumpayment_3']")
+	private WebElement paymentsLink3; // after clicking benefit and coverage page this is the link for payment history
 
 	@FindBy(xpath = "//area[@href='javascript:clWin()'][@alt = 'close']")
 	private WebElement FeedbackModal;
@@ -119,7 +123,8 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//span[contains(.,'Print temporary ID card')]")
 	private WebElement viewIDCard;
 
-	@FindBy(xpath = "//div[@class='claim-results']//table[not (contains(@class,'ng-hide'))]//tbody//tr[2]//a[text()='MORE INFO']")
+	//@FindBy(xpath = "//div[@class='claim-results']//table[not (contains(@class,'ng-hide'))]//tbody//tr[2]//a[text()='MORE INFO']")
+	@FindBy(xpath = "//a[contains (text(), 'MORE INFO')]")
 	private WebElement claimstablemoreinfolinkCombo;
 
 	@FindBy(id = "pcpLogoPrint1left")
@@ -208,13 +213,15 @@ public class AccountHomePage extends UhcDriver {
 
 	// @FindBy(xpath = "//div[@class='claim-results']//table[not
 	// (contains(@class,'ng-hide'))]//tbody//tr[2]//a[text()='MORE INFO']")
-	@FindBy(xpath = "//div[@class='claim-results']//tbody//tr[2]//td//span[@id='moreInfoLinkAtdd0']")
+	//@FindBy(xpath = "//div[@class='claim-results']//tbody//tr[2]//td//span[@id='moreInfoLinkAtdd0']")
+	@FindBy(xpath = "//a[contains (text(), 'MORE INFO')]")
 	private WebElement claimstablemoreinfolink;
 
 	@FindBy(css = ".claimDetTableMainSection")
 	private WebElement claimDetTableMainSection;
 
 	@FindBy(xpath = "//*[@id='dashboard']//span[text()='View Your Claims']")
+	//@FindBy(xpath = "//*[@id='claims_1']")
 	private WebElement claimsDashboardLink;
 
 	@FindBy(xpath = "//span[contains (text(), 'Look up Drugs')]")
@@ -223,10 +230,10 @@ public class AccountHomePage extends UhcDriver {
 	// @FindBy(css = "img.primary-logo")
 	// private WebElement logoImage;
 
-	@FindBy(xpath = "//div[@id='white-label']/a/img")
+	@FindBy (xpath = "//*[@id='ui-view-page']/div/arcade-header/header[1]/div/div/a/img")
 	private WebElement logoImage;
 
-	@FindBy(xpath = "//div[@id='white-label']/a/img[2]")
+	@FindBy(xpath = "//*[@id='ui-view-page']/div/arcade-header/header[1]/div/div/a/img[2]")
 	private WebElement cologoImage;
 
 	@FindBy(xpath = "//*[@ng-src='/images/icons/icon-pharmacy-locator.svg']")
@@ -314,7 +321,8 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='table-body margin-large']/div[2]//p")
 	private WebElement PayDate;
 
-	@FindBy(xpath = ".//*[@id='cltotshipindsnf']")
+	//@FindBy(xpath = ".//*[@id='cltotshipindsnf']")
+	@FindBy(xpath = "//*[@id='cltotshippartb']/div/div[1]/div/div/div/div/div[1]/div/p")
 	private WebElement claimtotalcomb;
 
 	@FindBy(id = "closeButton")
@@ -1040,7 +1048,8 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public void validateImagePresent(String logoToBeDisplayedOnDashboard) throws InterruptedException {
-		Thread.sleep(2000);
+		//Thread.sleep(2000);
+		CommonUtility.waitForPageLoad(driver,logoImage,15);
 		String logo_src = logoImage.getAttribute("src");
 		String logo_alt = logoImage.getAttribute("alt");
 		System.out.println("Actual logo's source on Dashboard page is   " + logo_src + " and Expected logo source    "
@@ -1051,7 +1060,7 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public void validateCoLogoImagePresent(String cologoToBeDisplayedOnDashboard) throws InterruptedException {
-		Thread.sleep(2000);
+		CommonUtility.waitForPageLoad(driver,cologoImage,15);
 		String cologo_src = cologoImage.getAttribute("src");
 		String cologo_alt = cologoImage.getAttribute("alt");
 		System.out.println("Actual cologo's source on Dashboard page is   " + cologo_src
@@ -1113,17 +1122,29 @@ public class AccountHomePage extends UhcDriver {
 	public ClaimDetailsPage navigateToClaimDetailsPage() {
 
 		try {
-			feebackpopupClose();
-			driver.switchTo().defaultContent();
+		//	feebackpopupClose();
+			//driver.switchTo().defaultContent();
 			// CommonUtility.waitForPageLoad(driver, claimstablemoreinfolink, 60);
 			// Thread.sleep(20);
-			claimstablemoreinfolink.click();
-			// CommonUtility.waitForPageLoad(driver, claimDetTableMainSection, 60);
-			System.out.println(driver.getTitle());
-			if (driver.getTitle().equalsIgnoreCase("Claims")) {
-				return new ClaimDetailsPage(driver);
-
-			}
+								validate(claimstablemoreinfolink);
+							System.out.println("more info link is seen for  ===>" + claimstablemoreinfolink.isDisplayed());
+							try {
+								Thread.sleep(2000);
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
+					
+							JavascriptExecutor executor = (JavascriptExecutor) driver;
+							executor.executeScript("arguments[0].click();", claimstablemoreinfolink);
+					
+							// claimstablemoreinfolinkCombo.click();
+							//CommonUtility.waitForPageLoad(driver, claimtotalcomb, 30);
+							System.out.println(driver.getTitle());
+							// System.out.println("*** Combo Member is on Claims Details Page ***");
+							if (driver.getTitle().equalsIgnoreCase("Claims Summary")) {
+								System.out.println("*** Claims Details Page ***");
+					
+							}
 		} catch (Exception ex) {
 			return null;
 		}
@@ -1347,7 +1368,10 @@ public class AccountHomePage extends UhcDriver {
 			return new PaymentHistoryPage(driver);
 		} else {
 			System.out.println("payment link is not displayed on the header");
-			return null;
+			coverageBenefits.click();
+			WebDriverWait wait = new WebDriverWait(driver, 30);
+			paymentsLink3.click(); 
+			return new PaymentHistoryPage(driver); 
 		}
 		/*
 		 * else{ CoverageAndBenefits.click();
@@ -1450,6 +1474,7 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public void clickPremiumPayment() {
+		waitforElement(premiumPayment);
 		if (premiumPayment.isDisplayed()) {
 			premiumPayment.click();
 		}
@@ -1637,10 +1662,20 @@ public class AccountHomePage extends UhcDriver {
 	 * Click on claims followed by EOB
 	 */
 	public void clickeob() {
+		waitforElement(claims);
 		if (claims.isDisplayed()) {
-			claims.click();
-			if (explainationOfBenefits.isDisplayed()) {
-				explainationOfBenefits.click();
+			//claims.click();
+			try {
+				if (explainationOfBenefits.isDisplayed()) {
+					explainationOfBenefits.click();
+				}
+			} catch (NoSuchElementException e) {
+				System.out.println("can't locate explainationOfBenefits element, will try to click coverageBenefits then try again before giving up "+e);
+				claims.click();
+				waitforElement(explainationOfBenefits);
+				if (explainationOfBenefits.isDisplayed()) {
+					explainationOfBenefits.click();
+				}
 			}
 		}
 	}
@@ -1682,10 +1717,20 @@ public class AccountHomePage extends UhcDriver {
 	 * click on Benefits Summary
 	 */
 	public void clickBenefitsSummary() {
+		waitforElement(coverageBenefits);
 		if (coverageBenefits.isDisplayed()) {
-			coverageBenefits.click();
-			if (benefitsSummary.isDisplayed()) {
-				benefitsSummary.click();
+			try{
+				//coverageBenefits.click();
+				if (benefitsSummary.isDisplayed()) {
+					benefitsSummary.click();
+				}
+			} catch (NoSuchElementException e) {
+				System.out.println("can't locate benefitsSummary element, will try to click coverageBenefits then try again before giving up "+e);
+				coverageBenefits.click();
+				waitforElement(benefitsSummary);
+				if (benefitsSummary.isDisplayed()) {
+					benefitsSummary.click();
+				}
 			}
 		}
 	}
@@ -1694,10 +1739,20 @@ public class AccountHomePage extends UhcDriver {
 	 * click on forms And Resources
 	 */
 	public void clickFormsResources() {
+		waitforElement(coverageBenefits);
 		if (coverageBenefits.isDisplayed()) {
-			coverageBenefits.click();
-			if (formsAndResources.isDisplayed()) {
-				formsAndResources.click();
+			try {
+				//coverageBenefits.click();
+				if (formsAndResources.isDisplayed()) {
+					formsAndResources.click();
+				}
+			} catch (NoSuchElementException e) {
+				System.out.println("can't locate formsAndResources element, will try to click coverageBenefits then try again before giving up "+e);
+				coverageBenefits.click();
+				waitforElement(formsAndResources);
+				if (formsAndResources.isDisplayed()) {
+					formsAndResources.click();
+				}
 			}
 		}
 	}
@@ -1712,10 +1767,20 @@ public class AccountHomePage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		waitforElement(coverageBenefits);
 		if (coverageBenefits.isDisplayed()) {
-			coverageBenefits.click();
-			if (orderMaterials.isDisplayed()) {
-				orderMaterials.click();
+			//coverageBenefits.click();
+			try {
+				if (orderMaterials.isDisplayed()) {
+					orderMaterials.click();
+				}
+			} catch (NoSuchElementException e) {
+				System.out.println("can't locate orderMaterials element, will try to click coverageBenefits then try again before giving up "+e);
+				coverageBenefits.click();
+				waitforElement(orderMaterials);
+				if (orderMaterials.isDisplayed()) {
+					orderMaterials.click();
+				}
 			}
 		}
 	}
@@ -2054,7 +2119,7 @@ public class AccountHomePage extends UhcDriver {
 		String preMessage_text = preEffectiveMessage.getAttribute("innerText");
 		System.out.println("Message displayed on Dashboard for this member is:" + preMessage_text);
 		Assert.assertTrue(preMessage_text.contains(
-				"Use this site to find helpful information while you’re getting ready for your plan to start on"));
+				"Use this site to find helpful information while youï¿½re getting ready for your plan to start on"));
 		System.out.println("First assert on the preeffective message is passed");
 		Assert.assertTrue(preMessage_text.contains(
 				"Depending on your plan coverage, you can find a provider, locate a pharmacy, or view important plan documents."));
