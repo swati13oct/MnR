@@ -45,6 +45,7 @@ q1_ship_feb232/Password@1,PHIP,SHIP,NON LIS
 q4_dec_grp306/Password@1,PDP,Group,
 q2_jun_aarp0045/Password@1,MAPDVill,Individual,NON LIS
 q4_dec_grp337,PDPwithSSUP,Group,
+q2_jun_grp0255,SSUP,Group,
 q1_aarp_feb252/Password@1,MAPD,Individualwithoutpharmacy,
 q1_grp_feb337/Password@1,PDPwithSSUP,Group,
 q2_jun_ship0003/Password@1,SHIP,Individual,
@@ -76,7 +77,7 @@ q2_jun_grp0230,PDPwithSSUP,,
 q2_jun_uhc0018/Password@1,MAPD,IndividualUHCPayments,
 ucpuhcmapd01/Password@1,MAPD,IndividualAARPRPayments,
 q2_june_combo0012/Password@1,COMBO,COMBOAARPPayments,
-auto_test_dce_001/Password@1,MAPD,AARPFederalDCEmember,
+q2_jun_aarp0045/Password@1,MAPD,AARPFederalDCEmember,
 q1_grp_apr069/Password@1,MAPD,NCSHP,NON LIS
 q1_grp_apr084/Password@1,MAPD,Calpers,NON LIS
 q1_grp_apr022/Password@1,MAPD,SHBP,NON LIS
@@ -117,14 +118,15 @@ q2_jun_grp0080/Password@1,MAPD,ALPEEHIP,NON LIS
 q2_jun_grp0013/Password@1,MAPD_GROUP_DCE,,
 q2_jun_grp0020/Password@1,PDP_GROUP_DCE,,
 q2_jun_aarp0070/Password@1,MA_FED_DCE,,
+q2_jun_aarp0070/Password@1,MA,AARPIndividual,,
 q2_jun_aarp0158/Password@1,MAPD,IndividualMember,
 q2_dec_aarp0016/Password@1,MAPD,AARPTerminatedmember,
 q2_jun_grp00054/Password@1,MAPD,UHCGroup,
 q1_feb_uhc_eft008/Password@1,MAPD,GroupLessSubsidy,
 q2_jun_sofl0019/Password@1,MAPD,Medica,
-auto_test_dce_003/Password@1,PDP,NonLISSplittier,
+q2_jun_aarp0075/Password@1,PDP,NonLISSplittier,
 q1_apr_uhc177/Password@1,MAPD,Villages,NON LIS
-q2_jun_aarp0054/Password@1,MAPD,IndividualDCEmembers,
+q2_jun_aarp0057/Password@1,MAPD,IndividualDCEmember,
 q1_grp_apr026/Password@1,MAPD,GroupPharmacyFnR,
 q2_jun_aarp0212/Password@1,PDP,IndAARPFnR,
 q1_grp_apr226/Password@1,PDP,TexasRxPharmacyFnRPage,
