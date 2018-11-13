@@ -55,7 +55,7 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy(xpath = ".//*[@id='planNameFed']")
 	private WebElement planame;
 	
-	@FindBy(xpath = "//option[@value = 'custom-search']")
+	@FindBy (xpath = "//*[@id='document-date']//option[contains(@value,'custom-search')]")
 	private WebElement customSearch;
 	
 	@FindBy (xpath = "//div[@class='medical-claims']//h2[@ng-bind-html='planName']/parent::div//*[@id='document-date']//option[contains(@value,'24 months')]")
@@ -166,11 +166,12 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy (xpath ="(//*[text()='Search'])[1]")
 	private WebElement searchButton;
 	
-	@FindBy (id="custom-from")
+	@FindBy (xpath="//*[@id='custom_from_date_fed']")
 	private WebElement from;
 
-	@FindBy (id="custom-to")
+	@FindBy (xpath="//*[@id='custom_to_date_fed']")
 	private WebElement to;
+	
 	@FindBy (xpath = ".//*[@id='errorMsg']/div/p")
 	private WebElement rxErrorMsg;
 	
@@ -362,7 +363,7 @@ public class ClaimSummarypage extends UhcDriver{
 	 * @toDo : this method validates Claims by time period 
 	 */
 	public void searchClaimsbyCustomDate(String planType,String claimPeriod) throws InterruptedException {
-	
+	customSearch = driver.findElement(By.id("dateCustomSearchAtdd"));
 		validate (customSearch);
 		System.out.println("!!! Custom search is seen in the view Claims From drop down ===>"+(customSearch.getText()));
 		System.out.println("!!! Validating the drop down to select the claims !!!");
@@ -581,9 +582,12 @@ public class ClaimSummarypage extends UhcDriver{
 
 	public void searchClaimsByTimeInterval(String toDate, String fromDate) {
 		System.out.println("The title of the page is-------->"+driver.getTitle());
-		if(driver.getTitle().equalsIgnoreCase("Claims")){
+	if(driver.getTitle().equalsIgnoreCase("Claims Summary")){
 
+			customSearch = driver.findElement(By.id("dateCustomSearchAtdd"));
 			customSearch.click();
+			
+
 
 			sendkeys(from,fromDate);
 			sendkeys(to,toDate);
