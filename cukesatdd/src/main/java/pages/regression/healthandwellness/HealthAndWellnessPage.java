@@ -3,6 +3,8 @@
  */
 package pages.regression.healthandwellness;
 
+import java.util.NoSuchElementException;
+
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,13 +19,18 @@ import atdd.framework.UhcDriver;
  */
 public class HealthAndWellnessPage extends UhcDriver{
 
-
+	@FindBy(xpath = "//div[@class='hw-header']//span[contains(text(),'Health & Wellness')]")
+	private WebElement titleText;
+	
 	@FindBy(linkText = "Health & Wellness")
 	private WebElement rallyHealthAndWellness;
 
 	@FindBy(xpath  = "//header[@class='hide-mobile']//a[contains(text(),'Health & Wellness')]")
 	private WebElement healthAndWellness;
 
+	@FindBy(id  = "healthwellness_4")
+	private WebElement healthAndWellness_harness;
+	
 	@FindBy(id = "lifestyle_desk1")
 	private WebElement lifestyleTab;
 
@@ -46,6 +53,8 @@ public class HealthAndWellnessPage extends UhcDriver{
 	//@FindBy (xpath = "//header[@class='hide-mobile']//div[@ng-switch-when='M&R']")
 	@FindBy (xpath = "//header[@class='hide-mobile']//*[@id='sticky-nav']")
 	private WebElement dashboardHeader;
+	@FindBy (className = "menuL1")
+	private WebElement dashboardHeader_harness;
 	
 	@FindBy (id = "rewards_desk")
 	private WebElement rewadsTab;
@@ -70,14 +79,15 @@ public class HealthAndWellnessPage extends UhcDriver{
 	 * clicks on Health n Wellness Tab
 	 */
 	public void clickHealthnWellnessTab(){
-		if(healthAndWellness.isDisplayed()){
+		try {
+			healthAndWellness.isDisplayed();
 			healthAndWellness.click();
-			try {
-				Thread.sleep(50000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			waitforElement(titleText);
+		} catch (Exception e) {
+			System.out.println("Unable to locate the xpath for healthAndWellness for stage and non-harness, try the one for stage and harness");
+			healthAndWellness_harness.isDisplayed();
+			healthAndWellness_harness.click();
+			waitforElement(titleText);
 		}
 	}
 
@@ -148,7 +158,14 @@ public class HealthAndWellnessPage extends UhcDriver{
 	 * validate Header on the  dashborad page
 	 */
 	public void validateHeaderOnDashborad(){
-		Assert.assertTrue("Learning dashboard is not displayed", dashboardHeader.isDisplayed());
+		try {
+			dashboardHeader.isDisplayed();
+			System.out.println("Located the expected dashboard header for stage and non-harness");
+		} catch (Exception e) {
+			System.out.println("Unable to located the expected dashboard header for stage and non-harness, try the xpath for stage and hardness. "+e);
+			Assert.assertTrue("Dashboard header is not displayed", dashboardHeader_harness.isDisplayed());
+		}
+		//Assert.assertTrue("Learning dashboard is not displayed", dashboardHeader.isDisplayed() || dashboardHeader_harness.isDisplayed());
 		System.out.println("=========================>Header is Diaplyed on Dashboard page");
 	}
 
