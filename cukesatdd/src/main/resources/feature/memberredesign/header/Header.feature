@@ -55,8 +55,7 @@ Then I should not be able to see the Premium Payments tab Header
 
 Examples:
  | planType|  memberType  | 
- |PDP|UHCGroupFnR|
- #| MAPD    |  UHCGroup  	  |
+ | MAPD    |  UHCGroup  	  |
  
  
  @findcarecostsheader @regression_06_06_18
@@ -69,8 +68,7 @@ Then I should be able to see and use the Find Care & Costs tab Header
 
 Examples:
  | planType|  memberType  	| 
-# | MAPD    |  UHCGroup  	  |
-  |PDP|UHCGroupFnR|
+ | MAPD    |  UHCGroup  	  |
  | MAPD    | IndividualMember |
  | MAPD    | PCP |
  | MAPD  | Medica |
