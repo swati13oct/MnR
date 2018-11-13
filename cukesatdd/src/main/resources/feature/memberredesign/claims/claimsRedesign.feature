@@ -206,7 +206,7 @@ Examples:
     Then  I can see the claims displayed based on the selection in redesigned site for PDP plans 
     And I validate the pagination on the claims summary page for members  
     And the user validates the EOB section in redesigned site    
-    And the user validates the DownloadMyData section in redesigned site
+   # And the user validates the DownloadMyData section in redesigned site
     Examples: 
       | planType | claimPeriod    | domain | claimssystem |
       | PDP      | Last 24 months | RX     | RXCLAIMS     |
@@ -258,12 +258,12 @@ Examples:
     And I validate the Claims Table in claims details page for federal members
     And I validate the Claims Total in claims details page in AARP site
     And I can view a claim search back button in Claims Details page in AARP site
-    And the user validates the DownloadMyData section in redesigned site
+    #And the user validates the DownloadMyData section in redesigned site
    
     Examples: 
       | planType | claimPeriod    | domain | claimssystem |
       | MA       | Last 24 months | NICE   | NICECLAIMS   |
-      | MA       | Last 24 months | COSMOS | COSMOSCLAIMS |
+      #| MA       | Last 24 months | COSMOS | COSMOSCLAIMS |
       
      
       @TC11_PCP
@@ -317,4 +317,21 @@ Examples:
     Examples: 
       | planType | claimPeriod    | domain | claimssystem |
       | MAPD     | Last 24 Months | COSMOS     | COSMOSCLAIMS   |
- 
+      
+      @claimsSummaryFEDError
+Scenario Outline: To validate the claims present for the Federal member on claims summary page for federal members
+Given login with following details logins in the member portal and validate elements
+  | Plan Type      | <planType>     |
+  | Test Data Type | <claimssystem> |
+When I navigate to the claims Summary page in redesigned site
+Then I can validate the claims summary header
+And I can search claims for the following claim period on redesigned site
+  | Plan Type    | <planType>    |
+  | Claim Period | <claimPeriod> |
+And the user search claims for the following time interval in redesigned site
+| Claims To Date   | <claimToDate>   |
+| Claims From Date | <claimFromDate>  |
+Then the user should be able to see the from date is greater than to date error message
+Examples: 
+     | planType | claimPeriod    | domain | claimssystem |claimToDate | claimFromDate |
+     | MAPD     |customsearch | COSMOS | COSMOSCLAIMS |03/13/2018  | 11/06/2018 |

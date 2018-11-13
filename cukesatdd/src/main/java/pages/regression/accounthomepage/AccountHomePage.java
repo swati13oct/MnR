@@ -223,6 +223,9 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='dashboard']//span[text()='View Your Claims']")
 	//@FindBy(xpath = "//*[@id='claims_1']")
 	private WebElement claimsDashboardLink;
+	
+	@FindBy(xpath = "//*[@id='row2link1']/td[2]/a")
+	private WebElement claimsTestharnessLink;
 
 	@FindBy(xpath = "//span[contains (text(), 'Look up Drugs')]")
 	private WebElement drugLookup;
@@ -1087,7 +1090,11 @@ public class AccountHomePage extends UhcDriver {
 				;
 			{
 				System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
-				claimsDashboardLink.click();
+				if(MRScenario.isTestHarness.equals("YES")){
+							claimsTestharnessLink.click();
+						}else{
+						claimsDashboardLink.click();
+						}
 				try {
 					Thread.sleep(10000);
 
