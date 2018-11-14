@@ -88,4 +88,4 @@ Scenario Outline: Verify Verizon MA SSO functionality and check that security an
 
  Examples: 
       | GroupName   | ssoPartner   | firstName | lastName  | dateOfBirth | uhcID     |eaID      | empNumber | userName      | passWord  |
-      | Verizon MAPD| conduent     | BBBCCB    | DACECC    |  02111944   |           |F0203F253 |   002203  | sso_dummy_user| Password@1 |
+      | Verizon MAPD| conduent     | DAFB    | DCFDECCD    |  02111944   |           |C6AC8162F |   002203  | sso_dummy_user| Password@1 |

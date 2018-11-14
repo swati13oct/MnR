@@ -112,25 +112,26 @@ public class ClaimsMemberRedesignStepDefinition {
 
 	@And("^the user search claims for the following time interval in redesigned site$")
 	
-	public void search_claims_redesigned_site(){
-	ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-	newClaimsSummaryPage.validateCustomSearch();
-	/*public void search_claims_redesigned_site(DataTable timeAttributes){
-		
-		List<DataTableRow> timeAttributesRow = timeAttributes.getGherkinRows();
-		Map<String, String> timeAttributesMap = new LinkedHashMap<String, String>();
-		for (int i = 0; i < timeAttributesRow.size(); i++) {
+	public void search_claims_redesigned_site(DataTable timeAttributes) throws InterruptedException{
+			List<DataTableRow> timeAttributesRow = timeAttributes.getGherkinRows();
+			Map<String, String> urlAttributesMap = new HashMap<String, String>();
 
-			timeAttributesMap.put(timeAttributesRow.get(i).getCells().get(0),
-					timeAttributesRow.get(i).getCells().get(1));
-		}
-		String toDate = timeAttributesMap.get(RedesignClaimsCommonConstants.CLAIMS_TO_DATE);
-		String fromDate = timeAttributesMap.get(RedesignClaimsCommonConstants.CLAIMS_FROM_DATE);
+			for (int i = 0; i < timeAttributesRow.size(); i++) {
+
+				urlAttributesMap .put(timeAttributesRow.get(i).getCells()
+						.get(0), timeAttributesRow.get(i).getCells().get(1));
+			}
+			
+		System.out.println(urlAttributesMap.get("Claim Period"));
+
+		String toDate = urlAttributesMap.get(RedesignClaimsCommonConstants.CLAIMS_TO_DATE);
+		String fromDate = urlAttributesMap.get(RedesignClaimsCommonConstants.CLAIMS_FROM_DATE);
 		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		newClaimsSummaryPage.searchClaimsByTimeInterval(toDate,fromDate);*/
+		newClaimsSummaryPage.searchClaimsByTimeInterval(toDate,fromDate);
 
 		if(newClaimsSummaryPage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
+
 	}
 	/**
 	 * @throws InterruptedException 
@@ -155,7 +156,11 @@ public class ClaimsMemberRedesignStepDefinition {
 		
 		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 
+		if(s.equals("customsearch")){
+			newClaimsSummaryPage.searchClaimsbyCustomDate(planType,s);
+		}else{
 		newClaimsSummaryPage.searchClaimsByTimePeriod(planType,s);
+		}
 
 		if(newClaimsSummaryPage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);

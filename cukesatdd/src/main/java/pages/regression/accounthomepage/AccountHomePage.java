@@ -220,6 +220,9 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='dashboard']//span[text()='View Your Claims']")
 	//@FindBy(xpath = "//*[@id='claims_1']")
 	private WebElement claimsDashboardLink;
+	
+	@FindBy(xpath = "//*[@id='row2link1']/td[2]/a")
+	private WebElement claimsTestharnessLink;
 
 	@FindBy(xpath = "//span[contains (text(), 'Look up Drugs')]")
 	private WebElement drugLookup;
@@ -287,13 +290,16 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = ".//header[@class='hide-mobile']//a[contains(text(),'Premium Payments')]")
 	private WebElement dashbaordPremiumPayment;
 
-	@FindBy(xpath = ".//header[@class='hide-mobile']//a[contains(text(),'Coverage & Benefits')]")
+	//@FindBy(xpath = ".//header[@class='hide-mobile']//a[contains(text(),'Coverage & Benefits')]")
+	@FindBy(xpath ="//header//*[contains(text(),'Coverage & Benefits')]")
 	private WebElement coverageBenefitsDashboard;
 
-	@FindBy(xpath = ".//header[@class='hide-mobile']//a[contains(text(),'Claims')]")
+	//@FindBy(xpath = ".//header[@class='hide-mobile']//a[contains(text(),'Claims')]")
+	@FindBy(xpath = "//header//*[contains(text(),'Claims')]")
 	private WebElement claimsDashboard;
 
-	@FindBy(className = "help-link")
+	//@FindBy(className = "help-link")
+	@FindBy(xpath = "//header//*[contains(text(),'Help')]")
 	private WebElement helpDashboard;
 
 	@FindBy(xpath = ".//header[@class='hide-mobile']//a[contains(text(),'Find Care & Costs')]")
@@ -1084,7 +1090,11 @@ public class AccountHomePage extends UhcDriver {
 				;
 			{
 				System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
-				claimsDashboardLink.click();
+				if(MRScenario.isTestHarness.equals("YES")){
+							claimsTestharnessLink.click();
+						}else{
+						claimsDashboardLink.click();
+						}
 				try {
 					Thread.sleep(10000);
 
