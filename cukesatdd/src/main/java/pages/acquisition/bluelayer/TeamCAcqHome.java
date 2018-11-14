@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
@@ -27,11 +28,22 @@ public class TeamCAcqHome extends GlobalWebElements {
 	 @FindBy(xpath = "//*[@id='js-ole-zip-search']/following-sibling::button")
      private WebElement StandalonSearch;
 	 
+	 @FindBy(xpath = "//*[@id='js-ole-plan-result']/p/following-sibling::button")
+     private WebElement StandaloneVPP;
+	 
 	 @FindBy(xpath = "//*[@class='btn--bottom']")
      private WebElement StandalonSearchCounty;
 	 
+	 @FindBy(xpath = "//*[@class='container meded-article-header']/h1']")
+     private WebElement MALandingHeading;
+	 
 	 @FindBy(id = "zipcodebtn")
      private WebElement viewPlansButton;
+	 
+	 
+	 
+	 @FindBy(xpath = "//*[@id='planTypesColumn']/h3[1]/a")
+     private WebElement MALandingLink;
 	 
 	 /*@FindBy(id = "vpp_selectcounty_box")
      private WebElement countyModal;*/
@@ -154,18 +166,72 @@ public class TeamCAcqHome extends GlobalWebElements {
                 if (countyDropdown.isDisplayed()) {                      
                 	countyDropdown.click();
                 	Thread.sleep(3000);
-                	StandalonSearchCounty.click();
-
+                	//StandalonSearchCounty.click();
                         }
                
         } catch (Exception e) {
                 System.out.println("county box not found");
         }
+        jse.executeScript("window.scrollBy(0,100)", "");
+        try{
+            Thread.sleep(2000);
+		}catch(InterruptedException e)
+		{
+			System.out.println("page took time to load");
+		}
+        StandaloneVPP.click();
         
         if (driver.getCurrentUrl().contains("plan-summary")) {
                 return new VPPPlanSummaryPage(driver);
         }
         return null;
 }	
+	
+public VPPPlanSummaryPage MALanding(String zipcode) {
+	
+	Actions action = new Actions(driver);
+	action.moveToElement(OurPlans).build().perform();		
+		
+		 MALandingLink.click();
+		 
+		 try {
+             Thread.sleep(15000);
+             System.out.println("Thread Sleep completed");
+     } catch (InterruptedException e) {
+             // TODO Auto-generated catch block
+             e.printStackTrace();
+     }
+		 
+		 
+			 JavascriptExecutor jse = (JavascriptExecutor)driver;
+				jse.executeScript("window.scrollBy(0,1100)", "");
+    
+		 StandaloneZipcode.sendKeys(zipcode);
+		 StandalonSearchCounty.click();
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	        try {
+	                if (countyDropdown.isDisplayed()) {                      
+	                	countyDropdown.click();
+	                	Thread.sleep(3000);
+	                	//StandalonSearchCounty.click();
+	                        }
+	               
+	        } catch (Exception e) {
+	                System.out.println("county box not found");
+	        }
+	        jse.executeScript("window.scrollBy(0,100)", "");
+	        try{
+	            Thread.sleep(2000);
+			}catch(InterruptedException e)
+			{
+				System.out.println("page took time to load");
+			}
+	        StandaloneVPP.click();
+       
+        if (driver.getCurrentUrl().contains("medicare-advantage-plans")) {
+                return new VPPPlanSummaryPage(driver);
+        }
+        return null;
+}
 
 }

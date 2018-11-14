@@ -356,12 +356,18 @@ Examples:
   Scenario Outline: To reach VPP page via standalone Zipcode
     Given the user is on TeamC UHC medicare acquisition site landing page
     When the user performs Standalone zipcode search on TeamC using following information in UMS site
-      | Zip Code    | <zipcode> |        
-#    When user views plans of the below plan type in UMS site
-#      | Plan Type | <plantype> |        
-#    Then the user validates the Enroll Now Button present for the plan type
-#      | Plan Name | <planName> |    
+      | Zip Code    | <zipcode> |    
       
  Examples: 
       | zipcode | 
-      |   73301 | 
+      |   78006 | 
+      
+ @StandaloneMA @Feb_18
+  Scenario Outline: To reach VPP page via standalone Zipcode
+    Given the user is on TeamC UHC medicare acquisition site landing page
+    When the user goes to MA Landing page
+      | Zip Code    | <zipcode> |    
+      
+ Examples: 
+      | zipcode | 
+      |   78006 | 
