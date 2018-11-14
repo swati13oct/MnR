@@ -3,6 +3,7 @@ package pages.acquisition.bluelayer;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,6 +20,15 @@ public class TeamCAcqHome extends GlobalWebElements {
 	
 	 @FindBy(id = "cta-zipcode")
      private WebElement zipCodeField;
+	 
+	 @FindBy(id = "js-ole-zip-search")
+     private WebElement StandaloneZipcode;
+	 
+	 @FindBy(xpath = "//*[@id='js-ole-zip-search']/following-sibling::button")
+     private WebElement StandalonSearch;
+	 
+	 @FindBy(xpath = "//*[@class='btn--bottom']")
+     private WebElement StandalonSearchCounty;
 	 
 	 @FindBy(id = "zipcodebtn")
      private WebElement viewPlansButton;
@@ -37,6 +47,9 @@ public class TeamCAcqHome extends GlobalWebElements {
 	 
 	 @FindBy(xpath = "//*[@class='textalign']//p[2]/a")
      private WebElement county;
+	 
+	 @FindBy(xpath = "//*[@id='ole-county-select']/option[@value=1]")
+     private WebElement countyDropdown;
 	
 	 @FindBy(xpath = "//*[@id='ghn_lnk_2']")
      private WebElement OurPlans;
@@ -124,6 +137,35 @@ public class TeamCAcqHome extends GlobalWebElements {
         return null;
 }
 	
-	
+	public VPPPlanSummaryPage GotoVPP(String zipcode) {
+		try{
+             Thread.sleep(3000);
+		}catch(InterruptedException e)
+		{
+			System.out.println("page took time to load");
+		}
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,300)", "");
+		
+        sendkeys(StandaloneZipcode, zipcode);
+        StandalonSearchCounty.click();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        try {
+                if (countyDropdown.isDisplayed()) {                      
+                	countyDropdown.click();
+                	Thread.sleep(3000);
+                	StandalonSearchCounty.click();
+
+                        }
+               
+        } catch (Exception e) {
+                System.out.println("county box not found");
+        }
+        
+        if (driver.getCurrentUrl().contains("plan-summary")) {
+                return new VPPPlanSummaryPage(driver);
+        }
+        return null;
+}	
 
 }
