@@ -82,8 +82,8 @@ public class PDPEnrollementGuidePage extends UhcDriver{
 	@FindBy(id = "dayPhone")
 	private WebElement dayPhoneField;
 	
-	@FindBy(id = "medicareTitle")
-	private WebElement medicareTitle;
+	@FindBy(id = "nameInfo")
+	private WebElement nameInfoConfPage;
 		
 	public PDPEnrollementGuidePage(WebDriver driver) {
 		super(driver);
@@ -166,8 +166,8 @@ public class PDPEnrollementGuidePage extends UhcDriver{
 
 	public EnquiryKitConfirmationPage submitsRequest() {
 		inquryKitSubmitLink.click();
-		CommonUtility.waitForPageLoad(driver, medicareTitle, 30);
-		if(validateNew(medicareTitle) && currentUrl().contains("request-information/inquirykitconfirmation.html")){
+		CommonUtility.waitForPageLoad(driver, nameInfoConfPage, 30);
+		if(currentUrl().contains("request-information/inquirykitconfirmation.html")){
 			return  new EnquiryKitConfirmationPage(driver);
 		}
 		return null;

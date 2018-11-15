@@ -1282,8 +1282,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		System.out.println(brandedCost);
 		JavascriptExecutor js = (JavascriptExecutor)driver;
 		js.executeScript("arguments[0].click();", switchNowBtn);
-		CommonUtility.waitForPageLoad(driver, updateBtn, 30);
-		updateBtn.click();
+		CommonUtility.waitForPageLoad(driver, updateBtn, 60);
+		js.executeScript("arguments[0].click();", updateBtn);
 		navigateToStep3();
 		if (!(loadingBlock.isEmpty())) {
 			CommonUtility.waitForElementToDisappear(driver, loadingBlock.get(0), 60);
@@ -1733,6 +1733,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		}
 	}
 	public void validateDceLandingPage(){
+		CommonUtility.waitForPageLoad(driver, step1, 30);
 		validateNew(step1);
 		validateNew(step2);
 		validateNew(step3);
