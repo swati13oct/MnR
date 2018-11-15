@@ -260,22 +260,6 @@ public class FooterPage extends UhcDriver {
 	}
 
 	public FooterPage NavigateToProfileandPref(){
-		/* tbd validate(homeBtn);
-		if(homeBtn.isDisplayed()){
-			System.out.println("Home button is displayed");
-			waitforElement(homeBtn);
-			homeBtn.click();
-			System.out.println("Home button is clicked");
-
-			waitforElement(accountprofile);
-			if(accountprofile.isDisplayed()){
-				accountprofile.click();
-				waitforElement(accountSettingOption);
-				System.out.println("Profile and referance link is displayed");
-				accountSettingOption.click();
-				System.out.println("Profile and referance link is clicked");
-			}
-		} */
 		validate(accountprofile);
 		if(accountprofile.isDisplayed()){
 			System.out.println("accountprofile button is displayed");

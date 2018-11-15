@@ -293,13 +293,16 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = ".//header[@class='hide-mobile']//a[contains(text(),'Premium Payments')]")
 	private WebElement dashbaordPremiumPayment;
 
-	@FindBy(xpath = ".//header[@class='hide-mobile']//a[contains(text(),'Coverage & Benefits')]")
+	//@FindBy(xpath = ".//header[@class='hide-mobile']//a[contains(text(),'Coverage & Benefits')]")
+	@FindBy(xpath ="//header//*[contains(text(),'Coverage & Benefits')]")
 	private WebElement coverageBenefitsDashboard;
 
-	@FindBy(xpath = ".//header[@class='hide-mobile']//a[contains(text(),'Claims')]")
+	//@FindBy(xpath = ".//header[@class='hide-mobile']//a[contains(text(),'Claims')]")
+	@FindBy(xpath = "//header//*[contains(text(),'Claims')]")
 	private WebElement claimsDashboard;
 
-	@FindBy(className = "help-link")
+	//@FindBy(className = "help-link")
+	@FindBy(xpath = "//header//*[contains(text(),'Help')]")
 	private WebElement helpDashboard;
 
 	@FindBy(xpath = ".//header[@class='hide-mobile']//a[contains(text(),'Find Care & Costs')]")

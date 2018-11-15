@@ -694,7 +694,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		int allPlans = Integer.valueOf(vppTop.getText().substring(10, 12).trim());
 		int maPlans = Integer.valueOf(maPlansNumber.getText());
-		int msPlans = Integer.valueOf(msPlansNumber.getText());
+		int msPlans = 0;
+		try {
+			msPlans = Integer.valueOf(msPlansNumber.getText());
+		} catch (NumberFormatException e) {				
+			msPlans = 0;
+		}	
 		int pdpPlans = Integer.valueOf(pdpPlansNumber.getText());
 		int snpPlans = Integer.valueOf(snpPlansNumber.getText());
 		

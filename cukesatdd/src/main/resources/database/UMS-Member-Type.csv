@@ -45,7 +45,7 @@ q1_ship_feb232/Password@1,PHIP,SHIP,NON LIS
 q4_dec_grp306/Password@1,PDP,Group,
 q2_jun_aarp0045/Password@1,MAPDVill,Individual,NON LIS
 q4_dec_grp337,PDPwithSSUP,Group,
-q2_jun_grp0255,SSUP,Group,
+q4_dec_ssp01/Password@1,SSUP,Group,
 q1_aarp_feb252/Password@1,MAPD,Individualwithoutpharmacy,
 q1_grp_feb337/Password@1,PDPwithSSUP,Group,
 q2_jun_ship0003/Password@1,SHIP,Individual,
@@ -121,7 +121,7 @@ q2_jun_aarp0070/Password@1,MA_FED_DCE,,
 q2_jun_aarp0070/Password@1,MA,AARPIndividual,,
 q2_jun_aarp0158/Password@1,MAPD,IndividualMember,
 q2_dec_aarp0016/Password@1,MAPD,AARPTerminatedmember,
-q2_jun_grp00054/Password@1,MAPD,UHCGroup,
+q2_jun_grp0054/Password@1,MAPD,UHCGroup,
 q1_feb_uhc_eft008/Password@1,MAPD,GroupLessSubsidy,
 q2_jun_sofl0019/Password@1,MAPD,Medica,
 q2_jun_aarp0075/Password@1,PDP,NonLISSplittier,
@@ -187,3 +187,4 @@ q3_sep_uhc0061/Password@1,MA,UHCTerminatedmember,
 q2_jun_sofl0050/Password@1,MAPD,PCP,
 q2_jun_grp0085/Password@1,MAPD,GEORGIAGroup,
 q2_jun_grp0291/Password@1,PDP,Group,LIS 1
+q2_jun_ship0259/Password@1,PHIP,SHIPCLAIMS
