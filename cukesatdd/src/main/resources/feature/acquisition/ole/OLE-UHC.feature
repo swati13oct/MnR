@@ -371,3 +371,13 @@ Examples:
  Examples: 
       | zipcode | 
       |   78006 | 
+      
+  @MALandigPlanOptions @Feb_18
+  Scenario Outline: To reach VPP page via standalone Zipcode
+    Given the user is on TeamC UHC medicare acquisition site landing page
+    When the user goes to MA Landing page Options
+      | Zip Code    | <zipcode> |    
+      
+ Examples: 
+      | zipcode | 
+      |   78006 | 
