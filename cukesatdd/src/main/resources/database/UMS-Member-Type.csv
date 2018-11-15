@@ -9,7 +9,7 @@ q2_jun_grp0052/Password@1,MAPDRX,Group,NON LIS
 q2_jun_grp0390/Password@1,MA,Group,NON LIS
 q2_jun_grp0166/Password@1,PDP,Group,NON LIS
 q2_jun_grp0076/Password@1,MAPD,TEXASERS,NON LIS
-q2_jun_grp0004/Password@1,MAPD,CALPERSGroup,
+q2_jun_grp0014/Password@1,MAPD,CALPERSGroup,
 q2_jun_aarp0088/Password@1,PDP,Walgreens,
 q2_jun_aarp0208/Password@1,PDP,IDCardmember,
 q1_grp_feb086/Password@1,MA,NOKIA,
@@ -40,6 +40,7 @@ q1_aarp_feb005/Password@1,MA,,
 q1_grp_feb495/Password@1,MA,Group,HMO
 q1_grp_feb043/Password@1,MA,Group,LIS 1
 q1_ship_feb120/Password,HIP,SHIP,NON LIS
+q2_jun_grp0230/Password@1,SSUP,PDPwithSSUP,,
 q2_jun_ship0007/Password@1,SHIP,,
 q1_ship_feb232/Password@1,PHIP,SHIP,NON LIS
 q4_dec_grp306/Password@1,PDP,Group,
@@ -57,13 +58,15 @@ q1_feb_uhceob001/Password@1,MAPD,aarpWithEOB,
 q1_feb_aarpeob001/Password@1,MAPD,NICE_EOB,
 q1_feb_aarpeob004/Password@1,MA,NICE_EOB,
 q1_feb_grpeob002/Password@1,MAPD_GRP,NICE_EOB,
+q2_jun_grp0121/Password@1,MA,Terminated_Individual_MA_COSMOS,
+q2_jun_grp0064/Password@1,MAPD,Terminated_Individual_MAPD_NICE,
 q1_grp_feb031/Password@1,MAPD,Group,wotCMSValue
 ucpmedicamapd01/Password@1,MAPD,MedicaPharmacyFnR,
 Shipeff_001/Password@1,SHIP,IndPharmacyFnR,
 q1_uhc_ma001/Password@1,MA,IndUHCPharmacyFnR,
 q1_grp_feb032,MAPD,SDCERAGroup,
 q1_ship_feb031,SHIP,MedSupRider,
-q1_combo_feb008,MAPD,MAPDwithMedSupp,
+q4_dec_combo0009,MAPD,MAPDwithMedSupp,
 ATDD_ULAYER_PDP_RX_EOB_01/Password@1,PDP,rx_eob,
 q2_jun_ship0019/Password@1,SHIP_AARPIndividual,,
 q2_jun_aarp0041/Password@1,MAPD_AARPIndividual,,
@@ -122,6 +125,7 @@ q2_jun_aarp0070/Password@1,MA,AARPIndividual,,
 q2_jun_aarp0158/Password@1,MAPD,IndividualMember,
 q2_dec_aarp0016/Password@1,MAPD,AARPTerminatedmember,
 q2_jun_grp0054/Password@1,MAPD,UHCGroup,
+q1_apr_uhc144/Password@1,MA,UHCGroup,
 q1_feb_uhc_eft008/Password@1,MAPD,GroupLessSubsidy,
 q2_jun_sofl0019/Password@1,MAPD,Medica,
 q2_jun_aarp0075/Password@1,PDP,NonLISSplittier,
@@ -189,3 +193,8 @@ q2_jun_sofl0050/Password@1,MAPD,PCP,
 q2_jun_grp0085/Password@1,MAPD,GEORGIAGroup,
 q2_jun_grp0291/Password@1,PDP,Group,LIS 1
 q2_jun_ship0259/Password@1,PHIP,SHIPCLAIMS
+q2_jun_ship0003/Password@1,SHIP,AARPIndividual,,
+q2_jun_aarp0112/Password@1,PDP,AARPIndividual,,
+q2_jun_sofl0050/Password@1,MAPD,Medica2,
+q2_jun_grp0089/Password@1,MAPD,UHCGroup2,,
+ q2_jun_grp0071/Password@1,PDP,UHCGroup,,
