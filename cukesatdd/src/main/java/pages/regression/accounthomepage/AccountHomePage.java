@@ -143,10 +143,12 @@ public class AccountHomePage extends UhcDriver {
 	// Settings')]")
 	@FindBy(xpath = ".//*[@id='dropdown-options--1']//a[contains(text(),'Account Settings')]")
 	private WebElement accountSettingOption;
-
+	
 	@FindBy(xpath = "//h1")
 	private WebElement heading;
-
+	
+	@FindBy(xpath = "//html//body//div//div//div[1]//div[2]//div//div//header//div//div[1]//nav")
+	private WebElement headingContactUs;
 	// @FindBy(xpath="//*[@id='phr_widget_3_box']/div[233]/p[2]/a")
 	// private WebElement providerSearchinPHPage1;
 
@@ -220,6 +222,9 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='dashboard']//span[text()='View Your Claims']")
 	//@FindBy(xpath = "//*[@id='claims_1']")
 	private WebElement claimsDashboardLink;
+	
+	@FindBy(xpath = "//*[@id='row2link1']/td[2]/a")
+	private WebElement claimsTestharnessLink;
 
 	@FindBy(xpath = "//span[contains (text(), 'Look up Drugs')]")
 	private WebElement drugLookup;
@@ -229,6 +234,8 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy (xpath = "//*[@id='ui-view-page']/div/arcade-header/header[1]/div/div/a/img")
 	private WebElement logoImage;
+	@FindBy (xpath = "//*[@id='ui-view-page']/div/arcade-header/header[1]/div/div/a/img")
+	private WebElement logoImage1;																				  
 
 	@FindBy(xpath = "//*[@id='ui-view-page']/div/arcade-header/header[1]/div/div/a/img[2]")
 	private WebElement cologoImage;
@@ -287,13 +294,16 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = ".//header[@class='hide-mobile']//a[contains(text(),'Premium Payments')]")
 	private WebElement dashbaordPremiumPayment;
 
-	@FindBy(xpath = ".//header[@class='hide-mobile']//a[contains(text(),'Coverage & Benefits')]")
+	//@FindBy(xpath = ".//header[@class='hide-mobile']//a[contains(text(),'Coverage & Benefits')]")
+	@FindBy(xpath ="//header//*[contains(text(),'Coverage & Benefits')]")
 	private WebElement coverageBenefitsDashboard;
 
-	@FindBy(xpath = ".//header[@class='hide-mobile']//a[contains(text(),'Claims')]")
+	//@FindBy(xpath = ".//header[@class='hide-mobile']//a[contains(text(),'Claims')]")
+	@FindBy(xpath = "//header//*[contains(text(),'Claims')]")
 	private WebElement claimsDashboard;
 
-	@FindBy(className = "help-link")
+	//@FindBy(className = "help-link")
+	@FindBy(xpath = "//header//*[contains(text(),'Help')]")
 	private WebElement helpDashboard;
 
 	@FindBy(xpath = ".//header[@class='hide-mobile']//a[contains(text(),'Find Care & Costs')]")
@@ -305,6 +315,8 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(id = "hello-person")
 	private WebElement helloPerson;
+    @FindBy(xpath = "//*[@id='dashboard']/div[1]/section[1]/account-info/div/div[1]/h1")
+	private WebElement welcome;
 
 	@FindBy(xpath = "//*[@id='ordermaterials']")
 	private WebElement OrderMaterialsTab_BnCPage;
@@ -470,9 +482,13 @@ public class AccountHomePage extends UhcDriver {
 	 */
 
 	public BenefitsAndCoveragePage navigateToBandCPage() {
-		System.out.println("Checking for Hello PersonName on Dashboard home page now");
-		waitForHomePage(helloPerson);
-		System.out.println("Hello PersonName on Dashboard home page was found");
+		System.out.println("Checking for Welcome or Hello on Dashboard home page now");
+		if(helloPerson.isDisplayed()){
+			System.out.println("Hello PersonName on Dashboard home page was found");
+		} else{
+			waitForHomePage(welcome);
+			System.out.println("Welcome on Dashboard home page was found");
+		}				
 		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
 			System.out.println("User is on Stage environment");
 
@@ -481,9 +497,9 @@ public class AccountHomePage extends UhcDriver {
 			{
 				System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
 				driver.findElement(By.xpath("//a[contains(text(),'Coverage & Benefits')]")).click();
-				System.out.println("Now waiting for 20 seconds");
+				System.out.println("Now waiting for 6 seconds");
 				try {
-					Thread.sleep(20000);
+					Thread.sleep(6000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -756,9 +772,13 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public void verifyPageTitle() throws InterruptedException {
-		System.out.println("Checking for Hello Name element");
-		waitForHomePage(helloPerson);
-		System.out.println("Hello Name element was displayed");
+		System.out.println("Checking for Hello Name or welcome  element");
+		if(helloPerson.isDisplayed()){
+			System.out.println("Hello Name element was displayed");
+		} else{
+		waitForHomePage(welcome);
+		System.out.println("Welcome element was displayed");
+		}			   
 		String title = driver.getTitle();
 		System.out.println(title);
 		// Assert.assertEquals(title, "Home | UnitedHealthcare");
@@ -939,12 +959,12 @@ public class AccountHomePage extends UhcDriver {
 				validateNew(contactUsPageLink);
 				contactUsPageLink.click();
 				CommonUtility.checkPageIsReadyNew(driver);
-				CommonUtility.waitForPageLoadNew(driver, heading, CommonConstants.TIMEOUT_60);
+				CommonUtility.waitForPageLoadNew(driver, headingContactUs, CommonConstants.TIMEOUT_60);
 				Thread.sleep(3000L);
 			} else {
 				linkContactUs.click();
 			}
-			CommonUtility.waitForPageLoad(driver, heading, 10);
+			CommonUtility.waitForPageLoad(driver, headingContactUs, 10);
 			if (driver.getTitle().contains("Contact Us")) {
 				return new ContactUsPage(driver);
 			}
@@ -1046,14 +1066,27 @@ public class AccountHomePage extends UhcDriver {
 
 	public void validateImagePresent(String logoToBeDisplayedOnDashboard) throws InterruptedException {
 		//Thread.sleep(2000);
-		CommonUtility.waitForPageLoad(driver,logoImage,15);
-		String logo_src = logoImage.getAttribute("src");
-		String logo_alt = logoImage.getAttribute("alt");
-		System.out.println("Actual logo's source on Dashboard page is   " + logo_src + " and Expected logo source    "
-				+ logoToBeDisplayedOnDashboard + " .");
-		System.out.println("logo's alt text on Dashboard page is   " + logo_alt);
-		Assert.assertTrue(logo_src.contains(logoToBeDisplayedOnDashboard));
-		System.out.println("Dashboard page Primary logo assert condition is passed");
+	driver.findElement(By.id("home_2")).click();
+		System.out.println("Home button is clicked on TestHarness Home Page to go to Home Page");
+		//CommonUtility.waitForPageLoad(driver,logoImage,30);
+		Thread.sleep(8000);
+		if(logoImage.isDisplayed()){
+			String logo_src = logoImage.getAttribute("src");
+			String logo_alt = logoImage.getAttribute("alt");
+			System.out.println("Actual logo's source on Dashboard page is   " + logo_src + " and Expected logo source    "
+					+ logoToBeDisplayedOnDashboard + " .");
+			System.out.println("logo's alt text on Dashboard page is   " + logo_alt);
+			Assert.assertTrue(logo_src.contains(logoToBeDisplayedOnDashboard));
+			System.out.println("Dashboard page Primary logo assert condition is passed");}
+		else if(logoImage1.isDisplayed())
+		{
+			String logo_src = logoImage1.getAttribute("src");
+			String logo_alt = logoImage1.getAttribute("alt");
+			System.out.println("Actual logo's source on Dashboard page is   " + logo_src + " and Expected logo source    "
+					+ logoToBeDisplayedOnDashboard + " .");
+			System.out.println("logo's alt text on Dashboard page is   " + logo_alt);
+			Assert.assertTrue(logo_src.contains(logoToBeDisplayedOnDashboard));
+			System.out.println("Dashboard page Primary logo assert condition is passed");}
 	}
 
 	public void validateCoLogoImagePresent(String cologoToBeDisplayedOnDashboard) throws InterruptedException {
@@ -1084,7 +1117,11 @@ public class AccountHomePage extends UhcDriver {
 				;
 			{
 				System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
-				claimsDashboardLink.click();
+				if(MRScenario.isTestHarness.equals("YES")){
+							claimsTestharnessLink.click();
+						}else{
+						claimsDashboardLink.click();
+						}
 				try {
 					Thread.sleep(10000);
 
@@ -1364,7 +1401,7 @@ public class AccountHomePage extends UhcDriver {
 			paymentsLink.click();
 			return new PaymentHistoryPage(driver);
 		} else {
-			System.out.println("payment link is not displayed on the header");
+			System.out.println("payment link is not displayed on the header");  // when in future date
 			coverageBenefits.click();
 			WebDriverWait wait = new WebDriverWait(driver, 30);
 			paymentsLink3.click(); 
