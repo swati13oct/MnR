@@ -350,4 +350,34 @@ Then the user validates Plan and Member Details on Confirmation Page
 Examples: 
        | zipcode | county             | plantype | planName                                             | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                      | optiondata        | pdpFlag | longTermFlag | riderflag |
       |   90210 | Los Angeles County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    | HICN     | John      | Doe      | 123456787t     | false   |  01012010 |  01012010 |      231665465 | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | CA   |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | no           | true      |
-  
+      
+      
+ @StandaloneZipcode @Feb_18
+  Scenario Outline: To reach VPP page via standalone Zipcode
+    Given the user is on TeamC UHC medicare acquisition site landing page
+    When the user performs Standalone zipcode search on TeamC using following information in UMS site
+      | Zip Code    | <zipcode> |    
+      
+ Examples: 
+      | zipcode | 
+      |   78006 | 
+      
+ @StandaloneMA @Feb_18
+  Scenario Outline: To reach VPP page via standalone Zipcode
+    Given the user is on TeamC UHC medicare acquisition site landing page
+    When the user goes to MA Landing page
+      | Zip Code    | <zipcode> |    
+      
+ Examples: 
+      | zipcode | 
+      |   78006 | 
+      
+  @MALandigPlanOptions @Feb_18
+  Scenario Outline: To reach VPP page via standalone Zipcode
+    Given the user is on TeamC UHC medicare acquisition site landing page
+    When the user goes to MA Landing page Options
+      | Zip Code    | <zipcode> |    
+      
+ Examples: 
+      | zipcode | 
+      |   78006 | 

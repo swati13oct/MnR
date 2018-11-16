@@ -185,6 +185,9 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id='sticky-nav']//div[@ng-switch-when='M&R']/a[5]")
 	private WebElement PremiumPayment;
+	
+	@FindBy(xpath = "//*[@id='premiumpayment_3']")
+	private WebElement PremiumPaymentTestHarness;
 
 	@FindBy(xpath = "//*[@id='sticky-nav']//div[@ng-switch-when='M&R']/a[4]")
 	private WebElement ShipPremiumPayment;
