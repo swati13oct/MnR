@@ -181,6 +181,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id = "total_annualcost")
 	public WebElement left_rail_tot_cost;
 
+	@FindBy(xpath = "//*[contains(@id,'select-pharmacy-buttons')]")
+	public WebElement first_pharmacy_select_LNK;
+	
 	@FindBy(id = "select-pharmacy-buttons_1")
 	public WebElement first_pharmacy_select_btn;
 
@@ -970,7 +973,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	 */
 	public void select_first_pharmacy_result() throws InterruptedException {
 		waitForloader(driver, overlay, 30);
-		CommonUtility.waitForPageLoad(driver, first_pharmacy_select_btn, 20);
+		CommonUtility.waitForPageLoad(driver, first_pharmacy_select_LNK, 20);
 		Thread.sleep(2000);
 
 		String temp_pharm = first_pharmacy_name.getText();
@@ -1649,8 +1652,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		 * Add branded drug
 		 */
 		public void addBrandedDrug(String drug, String dosage, String quantity, String frequency ) throws InterruptedException {
-			AddNewDrugModal addNewDrugModal = new AddNewDrugModal(driver);
 			this.clickOnAddDrug();
+			AddNewDrugModal addNewDrugModal = new AddNewDrugModal(driver);
 			addNewDrugModal.typeDrugName(drug);
 			addNewDrugModal.submit();
 
