@@ -28,7 +28,7 @@ public class AddNewDrugModal extends UhcDriver {
 	public WebElement searchButton;
 
 
-	@FindBy(xpath = "//header[@class='add-drug-slide-header']/span[contains(text(),'ADD A NEW DRUG')]")
+	@FindBy(xpath = "//header[@class='add-drug-slide-header']/span[normalize-space(text())='Add a Drug']")
 	public WebElement addNewDrugHeading;
 
 	@FindBy(xpath = "//a[text()='Cancel']")

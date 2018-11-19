@@ -282,7 +282,9 @@ public class OrderMaterialsPage extends UhcDriver  {
 
 	
 	public boolean ValidateHeader(){
-		if (driver.findElement(By.xpath("//h1[@class='h4 margin-none']")).isDisplayed() && driver.findElement(By.xpath("//h2[@class='h3 medium margin-large']")).isDisplayed()){
+		String targetH1Xpath="//h1[@class='main-heading margin-none']";
+		String targetH2Xpath="//*[@id='globalContentIdForSkipLink']/div[4]/div/div/div/section[1]/div[2]/div[2]/div/h2";
+		if (driver.findElement(By.xpath(targetH1Xpath)).isDisplayed() && driver.findElement(By.xpath(targetH2Xpath)).isDisplayed()){
 			System.out.println("*************Header Text and Subtext displayed for Order materials Page***************");
 			
 			return true;
@@ -303,10 +305,10 @@ public class OrderMaterialsPage extends UhcDriver  {
 			System.out.println("*************Error Message Displayed displayed for Order materials Page***************");
 			System.out.println("*************Error Message : "+OrderMaterialsErrorMsg.getText()+" ***************");
 			return true;
-		}
-		else{ 
+		} else{ 
 			System.out.println("************Error message not displayed for Order materials Page***************");
-			return false;}
+			return false;
+		}
 	}
 
 	/**
@@ -315,29 +317,25 @@ public class OrderMaterialsPage extends UhcDriver  {
 	*/
 
 	public boolean ValidateSHIPErrorMessage() throws InterruptedException{
-		
 		try {
 			Thread.sleep(8000);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
+		} 
 		if (validate(SHIPerrorMsg)){
 			if(SHIPerrorMsg.getText().contains("request cannot be processed at this time")){
-			System.out.println("*************Error Message Displayed displayed for SHIP invalid Selection in Order materials Page***************");
-			System.out.println("*************Error Message : "+SHIPerrorMsg.getText()+"***************");
-			return true;
-			}
-			else
+				System.out.println("*************Error Message Displayed displayed for SHIP invalid Selection in Order materials Page***************");
+				System.out.println("*************Error Message : "+SHIPerrorMsg.getText()+"***************");
+				return true;
+			} else {
 				System.out.println("************Error message not displayed for SHIP invalid Selection - Order materials Page***************");
 				return false;
-
-		}
-		else
+			}
+		} else {
 			System.out.println("************Error message not displayed for SHIP invalid Selection - Order materials Page***************");
 			return false;
-		
+		}
 	}
 	
 	/**
@@ -345,30 +343,23 @@ public class OrderMaterialsPage extends UhcDriver  {
 	*/
 
 	public OrderPlanMaterialConfirmationPage selectsOption(String option) throws InterruptedException {
-		
+
 		driver.navigate().refresh();
-		
 		try {
 			Thread.sleep(3000);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		try{
-			if(validate(iPerceptionPopUp)){
-				System.out.println("FeedBack Modal Present");
+		} 
+		if(validate(iPerceptionPopUp)){
+			System.out.println("FeedBack Modal Present");
 
-				iPerceptionClose.click();
-				if (validate(iPerceptionPopUp)){
-					System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
-				}
-				else
-					System.out.println("FeedBack Modal Closed");
+			iPerceptionClose.click();
+			if (validate(iPerceptionPopUp)){
+				System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
 			}
-		}
-		catch (Exception e) {
-			System.out.println("FeedBack Modal NOT Present");
-
+			else
+				System.out.println("FeedBack Modal Closed");
 		}
 
 		CommonUtility.checkPageIsReady(driver);
@@ -449,8 +440,9 @@ public class OrderMaterialsPage extends UhcDriver  {
 			}
 
 		}
-		Thread.sleep(5000);
 		
+		Thread.sleep(5000);
+
 		//submitButton.submit();
 		if(validate(submitButton)){
 			
