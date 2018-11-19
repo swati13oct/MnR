@@ -35,7 +35,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath=  "//*[@id='cardslideID']/a[1]") 
 	private WebElement getStartedButton;
 
-	@FindBy(xpath = "//a[contains(text(),'CANCEL')]")
+	@FindBy(id = "message-cancel")
 	private WebElement cancelLink;
 	
 	@FindBy(xpath = "//*[@id='fillContactFormsShow']/form/fieldset/a")
@@ -141,8 +141,11 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath="//input[@id='question-alt-email-confirm']/following-sibling::span[not (contains(@class,'hide'))]")
 	private WebElement confirmMsgEmailError;
 	
-	@FindBy(xpath="//*[@id='alt-phone-wrapper']/div[1]/div/span[1]")
+	@FindBy(xpath="//*[@id='alt-phone-wrapper']/div[1]/div/span[2]")
 	private WebElement invalidPhneErrorMsg;
+	
+	@FindBy(xpath="//*[@id='alt-phone-wrapper']/div[1]/div/span[1]")
+	private WebElement invalidPhneErrorMsg1;
 	
 	@FindBy(xpath="//input[@id='question-alt-phone-confirm']/following-sibling::span[not (contains(@class,'hide'))]")
 	private WebElement confirmPhneErrorMsg;
@@ -318,7 +321,15 @@ public class ContactUsPage extends UhcDriver{
 		String inavlidEmailErrorMessage = "Enter your email address like this: yourname@emailprovider.com.";
 		String inavlidAConfirmEmailErrorMessage = "Your email confirmation and email address do not match.";
 		String errorphonemessage = invalidPhneErrorMsg.getText().trim();
+		String errorphonemessage1 = invalidPhneErrorMsg1.getText().trim();
+		
+		// error massage switches xpath according to data or emptyness in phone number input box
+		if(errorphonemessage.isEmpty()){
+			System.out.println("error massage didnt show 1st xpath as all required fiel is empty");
+			Assert.assertEquals(inavlidPhoneErrorMessage, errorphonemessage1);
+		} else{
 		Assert.assertEquals(inavlidPhoneErrorMessage, errorphonemessage);
+		}
 		Assert.assertEquals(inavlidAConfirmPhoneErrorMessage, confirmPhneErrorMsg.getText().trim());
 		Assert.assertEquals(inavlidEmailErrorMessage, alternativemessageEmailError.getText().trim());
 		Assert.assertEquals(inavlidAConfirmEmailErrorMessage, confirmMsgEmailError.getText().trim());
@@ -585,6 +596,8 @@ public class ContactUsPage extends UhcDriver{
 			confirmemailId.sendKeys(newConfirmEmailId);
 			//waitforElement(cancelLink);
 			//Thread.sleep(5000);
+			System.out.println(cancelLink);
+			System.out.println("found cancel link");
 			cancelLink.click();
 			Thread.sleep(2000);
 				

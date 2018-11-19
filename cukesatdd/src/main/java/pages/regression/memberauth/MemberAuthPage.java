@@ -3,12 +3,15 @@ package pages.regression.memberauth;
 import org.json.JSONObject;
 //import junit.framework.Assert;
 import org.junit.Assert;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.data.MRConstants;
+import acceptancetests.data.PageConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.regression.accounthomepage.AccountHomePage;
@@ -55,6 +58,19 @@ public class MemberAuthPage extends UhcDriver {
 
        private static String MEMBER_AUTH = MRConstants.MEMBER_AUTH;
        
+   	@FindBy(xpath = "(//*[@class='ng-scope']//a[text()='Premium Payments'])[1]")
+   	private WebElement paymentsLink;
+   	
+   	@FindBy(xpath = "//*[@id='premiumpayment_3']")
+   	private WebElement paymentsLink3; // after clicking benefit and coverage page this is the link for payment history
+
+	@FindBy(id = "coveragebenefits_2")
+	private WebElement coverageBenefits;
+
+	@FindBy(xpath = "//*[@id='sticky-nav']/sticky-content/nav/div/div/div/div/a[4]")
+	private WebElement dashboard_coverageBenefits;
+   
+   	
        public MemberAuthPage(WebDriver driver) {
               super(driver);
               PageFactory.initElements(driver, this);
@@ -146,6 +162,8 @@ public class MemberAuthPage extends UhcDriver {
                      switchToNewTab();
                      System.out.println("Switched to new tab");
                   Thread.sleep(10000);
+
+                  /* tbd
                   waitforElement(PremiumPayment);
                   if(PremiumPayment.isEnabled())
                   {
@@ -154,9 +172,25 @@ public class MemberAuthPage extends UhcDriver {
                      }else
                      {
                            System.out.println("Payment Link not displayed");
-                     }
-              }
-              else
+                     } 
+                   */
+          		if (validate(paymentsLink)) {
+        			System.out.println("payment link is displayed on the header");
+        			paymentsLink.click();
+        		} else {
+        			// NOTE:
+        			// work-around, when Home, data maintained by Rally, is out of sync, payment tab may not show
+        			// go to secondary page first then locate the payment tab.
+        			System.out.println("payment link is not displayed on the dashboard header - attempt the workaround");  
+        			try {
+        				coverageBenefits.click();
+        			} catch (NoSuchElementException e) {
+        				dashboard_coverageBenefits.click();
+        			}
+        			paymentsLink3.click();
+        		}
+          		return new AccountHomePage(driver);      
+              } else
                      System.out.println("Member Pop up Login not found");
               return null;               
        }
