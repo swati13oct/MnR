@@ -23,6 +23,7 @@ Examples:
      | planType | claimPeriod    | domain | claimssystem |
      | MAPD     | Last 24 months | COSMOS | COSMOSCLAIMS |
      | MA       | Last 24 months | NICE   | NICECLAIMS   |
+     | MAPD       | Last 24 months | NICE   | NICECLAIMS   |
      | PDP      | Last 24 months | RX     | RXCLAIMS     |
 
 @claimsSummarySHIP

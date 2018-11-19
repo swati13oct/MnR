@@ -31,7 +31,7 @@ public class SavingsOppurtunity extends UhcDriver{
 	@FindBy(id="save-drug-button")
 	public WebElement savedrugbutton;
 	
-	@FindBy(xpath=".//*[@id='popup4']/header/span[contains(text(),' SAVINGS OPPORTUNITY')]")
+	@FindBy(xpath=".//*[@id='popup4']/header/span[contains(text(),' Save by Switching to Generic')]")
 	public WebElement SwitchGenericPage;
 	
 	
