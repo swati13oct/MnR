@@ -228,6 +228,12 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@id='row2link1']/td[2]/a")
 	private WebElement claimsTestharnessLink;
+	
+	@FindBy(xpath = "//*[@id='row2link6']/td[2]/a")
+	private WebElement dceTestharnessLink;
+	
+	@FindBy(xpath = "//*[@id='row2link10']/td[2]/a")
+	private WebElement eobTestharnessLink;	
 
 	@FindBy(xpath = "//span[contains (text(), 'Look up Drugs')]")
 	private WebElement drugLookup;
@@ -1458,20 +1464,32 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public EOBPage navigateDirectToEOBPag() {
-		/*
-		 * WebDriverWait wait = new WebDriverWait(driver, 10);
-		 * wait.until(ExpectedConditions.elementToBeClickable(eobLink));
-		 */
-		try {
-			if (iPerceptionPopUp.isDisplayed()) {
-				iPerceptionPopUp.click();
-			}
-		} catch (Exception e) {
-			System.out.println("iPerception Pop Up not displayed");
-		}
+			if (MRScenario.environment.equalsIgnoreCase("team-ci1")) {
+				driver.findElement(By.xpath("//a[text()='Eob']")).click();
+				
+			} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
+					
+					if(MRScenario.isTestHarness.equals("YES")){
+								eobTestharnessLink.click();
+					}else if (driver.getCurrentUrl().contains("/dashboard")){
+						try {
+							if (iPerceptionPopUp.isDisplayed()) {
+								iPerceptionPopUp.click();
+							}
+						} catch (Exception e) {
+							System.out.println("iPerception Pop Up not displayed");
+						}
 
-		validate(medicalEobLink);
-		medicalEobLink.click();
+						validate(medicalEobLink);
+						medicalEobLink.click();
+				   	}
+			} else {
+			System.out.println(
+					"This script is only intended to be run using test harness on team-b or team-h. Update condition for your own environment");
+			}
+			
+			
+		
 		return new EOBPage(driver);
 	}
 
@@ -1497,9 +1515,23 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public DrugCostEstimatorPage navigate_to_dce() {
-		waitforElement(drugLookup);
-		drugLookup.click();
-		Assert.assertTrue("drugLookup link is not present", true);
+		if (MRScenario.environment.equalsIgnoreCase("team-ci1")) {
+						driver.findElement(By.xpath("//a[text()='Go to Claims page']")).click();
+			
+		} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
+					
+					if(MRScenario.isTestHarness.equals("YES")){
+								dceTestharnessLink.click();
+					}else if (driver.getCurrentUrl().contains("/dashboard")){
+						System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
+						waitforElement(drugLookup);
+						drugLookup.click();
+				   	}
+		} else {
+			System.out.println("This script is only intended to be run using test harness on team-b or team-h. Update condition for your own environment");
+		}
+		
+	
 
 		return new DrugCostEstimatorPage(driver);
 	}
