@@ -149,7 +149,7 @@ public class OneTimePaymentAarpStepDefintion {
       if (AHPage!=null){
     	     	  getLoginScenario().saveBean(PageConstants.DashPage, AHPage);
 			System.out.println("User is on Recurring Payment History");
-      }
+      } 
       
 	}
 	
@@ -185,12 +185,15 @@ public class OneTimePaymentAarpStepDefintion {
       if (AHPage!=null){
     	     	  getLoginScenario().saveBean(PageConstants.DashPage, AHPage);
 			System.out.println("User is on Recurring Payment History");
+      } else {
+    	  System.out.println("Unable to navegate to Ship tab");
       }
       
 	}
 	
 	@Then("^User Scrolls down to validate Payment History and Scrolls up$")
 	public void Validate_History_Payment() throws InterruptedException{
+		System.out.println("TEST Validate_History_Payment");
 		pages.regression.accounthomepage.AccountHomePage AHPage = (pages.regression.accounthomepage.AccountHomePage) getLoginScenario().getBean(PageConstants.DashPage);
 		PaymentHistoryPage paymentHistoryPage = AHPage.scrollDownAndUp();
 		if (paymentHistoryPage!=null){
@@ -236,6 +239,8 @@ public class OneTimePaymentAarpStepDefintion {
 		if(oneTimePayment!=null){
 			getLoginScenario().saveBean(PageConstants.One_Time_Payments_Page, oneTimePayment);
 			System.out.println("user is not able to click autopay");	
+		} else {
+			System.out.println("user is able to click autopay");
 		}
 		
 	}
@@ -243,47 +248,39 @@ public class OneTimePaymentAarpStepDefintion {
 	
 	@And("^the user makes one time payment and navigate futher$")
 	public void makes_one_time_payment_aarp(DataTable givenAttributes) {
-			
-		
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
-		    memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
-		
-		
+
 		OneTimePaymentPage oneTimePayment = (OneTimePaymentPage) getLoginScenario().getBean(PageConstants.One_Time_Payments_Page);
-		
 		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = oneTimePayment.enterPaymentDetails(memberAttributesMap);
-
-		
-
-		getLoginScenario().saveBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD,confirmOneTimePaymentPage);
-
+		if(confirmOneTimePaymentPage != null) {
+			getLoginScenario().saveBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD,confirmOneTimePaymentPage);
+			System.out.println("Payment details entered and moved successfully to next page");
+		} else {
+			System.out.println("Object issue - unable to obtain the confirmOneTimePaymentPage");
+		}
 	}
 	
 	@And("^the user makes auto payment in AARP site$")
 	public void makes_auto_payment_aarp(DataTable givenAttributes) {			
-		
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
-		    memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
 		}		
-		
-		OneTimePaymentPage oneTimePayment = (OneTimePaymentPage) getLoginScenario().getBean(PageConstants.One_Time_Payments_Page);
-		
-		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = oneTimePayment.enterAutoPaymentDetails(memberAttributesMap);
-		
-		if(confirmOneTimePaymentPage != null) {
-		getLoginScenario().saveBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD,confirmOneTimePaymentPage);
-		System.out.println("Payment details entered and moved successfully to next page");
-		}
-		else
-		{
-			System.out.println("Object issue");
-		}
 
+		OneTimePaymentPage oneTimePayment = (OneTimePaymentPage) getLoginScenario().getBean(PageConstants.One_Time_Payments_Page);
+		ConfirmOneTimePaymentPage confirmAutoPaymentPaymentPage = oneTimePayment.enterAutoPaymentDetails(memberAttributesMap);
+
+		if(confirmAutoPaymentPaymentPage != null) {
+			getLoginScenario().saveBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD,confirmAutoPaymentPaymentPage);
+			System.out.println("Payment details entered and moved successfully to next page");
+		} else {
+			System.out.println("Object issue - unable to obtain the confirmAutoPaymentPaymentPage");
+		}
 	}
 
 	
@@ -291,16 +288,11 @@ public class OneTimePaymentAarpStepDefintion {
 	public void confirmspayment_uhc() throws InterruptedException {
 		ConfirmOneTimePaymentPage confirmOneTimePaymentsuccesspage = (ConfirmOneTimePaymentPage) getLoginScenario()
 				.getBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD);	
-		
 		ConfirmOneTimePaymentPage oneTimePaymentSuccessPage = confirmOneTimePaymentsuccesspage.confirmsAutoPayment();
-        
 		if (oneTimePaymentSuccessPage != null) {
-			getLoginScenario().saveBean(
-					PageConstantsMnR.ONE_TIME_PAYMENT_SUCCESS_PAGE,
-					oneTimePaymentSuccessPage);
+			getLoginScenario().saveBean(PageConstantsMnR.ONE_TIME_PAYMENT_SUCCESS_PAGE,	oneTimePaymentSuccessPage);
 			Assert.assertTrue(true);
-	}
-		else
+		} else
 			System.out.println("Encountered More than one Payment per Business day error");
 	}
 
