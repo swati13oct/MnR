@@ -55,8 +55,13 @@ public class OneTimePaymentPage extends UhcDriver{
 	
 	@FindBy(xpath="//*[@id='IPEinvL']/map/area[3]")
 	private WebElement iPerceptionAutoPopUp;
+
 	
 	@FindBy(xpath ="//*[@id='consent']/following-sibling::label[contains(text(),'I have read and agree to the following')]")
+	private WebElement iHaveReadAndAgreeToTheFollowing;
+
+	//@FindBy(xpath ="//*[@id='consent']/following-sibling::label[contains(text(),'I have read and agree to the following')]")
+	@FindBy(xpath ="//*[@id='consent']/following-sibling::label[contains(text(),'Electronic Signature Consent')]")
 	private WebElement electronicsignature;
 	
 	@FindBy(xpath="//*[@class='overview parsys']//div[@class='row'][3]//div[@class='longform__row'][10]//div[@class='margin-medium']/a[2]")
@@ -147,9 +152,9 @@ public class OneTimePaymentPage extends UhcDriver{
 			System.out.println(e);
 		}
 		
-		if(driver.getTitle().equalsIgnoreCase("overview") || driver.getTitle().equalsIgnoreCase("AARP Medicare Plans from UnitedHealthCare - overview") || driver.getTitle().equalsIgnoreCase("Review Your One-Time Payment Information")){
+		if(driver.getTitle().equalsIgnoreCase("Review Payment") || driver.getTitle().equalsIgnoreCase("overview") || driver.getTitle().equalsIgnoreCase("AARP Medicare Plans from UnitedHealthCare - overview") || driver.getTitle().equalsIgnoreCase("Review Your One-Time Payment Information")){
 			return new ConfirmOneTimePaymentPage(driver);
-		}
+		} 
 		return null;		
 	}	
 	
@@ -206,26 +211,28 @@ public class OneTimePaymentPage extends UhcDriver{
 	    lastNameField.clear();
 	    lastNameField.sendKeys(lastName);
 	    
-	    electronicsignature.click();	                    
+	    //electronicsignature.click();	 
+	    iHaveReadAndAgreeToTheFollowing.click();
 	    continueAutoPayButton.click();
 	    System.out.println("Continue button clicked ");
-	    
+
 	    try{
-			Thread.sleep(5000);
-			System.out.println("Thread Woke up");
-	    }catch(Exception e)
-	    {
+	    	Thread.sleep(5000);
+	    	System.out.println("Thread Woke up");
+	    } catch(Exception e) {
 	    	System.out.println("thread issue");
 	    }
+
+	    System.out.println(driver.getTitle());
 	    
-	     System.out.println(driver.getTitle());
-	     
-	    if(driver.getTitle().equalsIgnoreCase("overview") || driver.getTitle().equalsIgnoreCase("Premium Payments") || driver.getTitle().equalsIgnoreCase("AARP Medicare Plans from UnitedHealthCare - Premium Payments")){
+	    if((driver.getTitle().contains("Review Your") && driver.getTitle().contains("Payments Information")) 
+	    		|| driver.getTitle().equalsIgnoreCase("overview") 
+	    		|| driver.getTitle().equalsIgnoreCase("Premium Payments") 
+	    		|| driver.getTitle().equalsIgnoreCase("AARP Medicare Plans from UnitedHealthCare - Premium Payments")){
 	    	System.out.println("Validated review page title");
-	            return new ConfirmOneTimePaymentPage(driver);
-	    }
-	    else{
-	    return null;
+	    	return new ConfirmOneTimePaymentPage(driver);
+	    } else{
+	    	return null;
 	    }
 	}  
 
