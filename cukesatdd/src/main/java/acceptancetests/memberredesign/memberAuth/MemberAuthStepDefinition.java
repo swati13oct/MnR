@@ -8,6 +8,7 @@ import java.util.Map;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.mysql.jdbc.Driver;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
@@ -149,6 +150,8 @@ public class MemberAuthStepDefinition{
 		
 		if(mauthPage!=null){
 			getLoginScenario().saveBean(PageConstants.Member_Auth_PopUp, mauthPage);
+		} else {
+			System.out.println("mauthPage is null");
 		}
 
 	}
@@ -162,8 +165,9 @@ public class MemberAuthStepDefinition{
 		
 		if(NewWindow!=null){
 			getLoginScenario().saveBean(PageConstants.DashPage, NewWindow);
+		} else {
+			System.out.println("NewWindow is null");
 		}
-	
 	}
 	
 	/*@And("^User switches to new Tab opened$")
