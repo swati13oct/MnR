@@ -130,6 +130,9 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(id = "pcpLogoPrint1left")
 	private WebElement validateLogo;
+	
+	@FindBy(id = "hello-person")
+	private WebElement HelloText;
 
 	@FindBy(xpath = "/html/body/div[2]/div[2]/div/div[1]/div/div/div/h1")
 	private WebElement paymentsHeading;
@@ -815,12 +818,23 @@ public class AccountHomePage extends UhcDriver {
 		}
 
 		// Thread.sleep(16000);
-
+		try{
+			HelloText.isDisplayed();
+			waitforElement(PremiumPayment);
+			System.out.println("payment link is displayed on the header");
+			PremiumPayment.click();
+				try {
+						Thread.sleep(10000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}		
+		}catch(Exception e)		
+		{
 		try {
 			navigateToPaymentHistoryPage();
 		} catch (Exception e1) {
 			System.out.println("Unable to navigate to premium payment page");
-		}
+		}}
 		//tbd		waitforElement(PremiumPayment);
 		//tbd		System.out.println("payment link is displayed on the header");
 		//tbd		PremiumPayment.click();
@@ -936,7 +950,7 @@ public class AccountHomePage extends UhcDriver {
 
 	public pages.regression.payments.PaymentHistoryPage scrollDownAndUp() throws InterruptedException {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		jse.executeScript("window.scrollBy(0,550)", "");
+		jse.executeScript("window.scrollBy(0,600)", "");
 
 		waitforElement(HistoryDropdown);
 
