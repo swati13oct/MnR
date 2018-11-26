@@ -1,5 +1,3 @@
-
-
 Feature:To verify New Payment History page
 Scenario Outline:To Verify Payment History section including the header and payment date range dropdown so that I can view and search for the history of my payments without having to call customer service.
 Given I am an AARP Individual member on the Dashboard site
@@ -150,8 +148,6 @@ Examples:
 
  
 #Moved from MakeOneTimePayment-AARP.feature to here for archive
-Feature: To test the payment flow on AARP site
-
   Scenario Outline: Verify one time payment for total ammount due in AARP site
     Given registered AARP with a planType member for AARP site
       | <planType> |

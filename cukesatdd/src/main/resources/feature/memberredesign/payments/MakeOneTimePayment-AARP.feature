@@ -1,4 +1,6 @@
-  @paymentsFInal @paymentsOneTimePayments @regression_06_06_18 
+Feature: To test the payment flow on AARP site
+
+ @paymentsFInal @paymentsOneTimePayments @regression_06_06_18 
   Scenario Outline: Verify if the user is able to make one time payment.
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -44,9 +46,6 @@
       | planType | memberType            | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
       | MAPD     | IndividualUHCPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
 
-#NOTE: This scenario may fail if run more than one time per day
-# because the first run will satisfied making first payment of the day
-# during re-running testcase will fail because that "first payment" is no longer the first payment test user in the test environment
   @paymentsMoreThanOnePay @15142 @regression_06_06_18
   Scenario Outline: Verify More Than one Payment Per day error message
     Given login with following details logins in the member portal and validate elements
@@ -81,8 +80,10 @@
     Examples: 
       | planType | memberType              | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
       | MAPD     | IndividualAARPRPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.12 |
+	#NOTE: This scenario may fail if run more than one time per day
+	# because the first run will satisfied making first payment of the day
+	# during re-running testcase will fail because that "first payment" is no longer the first payment test user in the test environment
 
-#NOTE: Nov2018 - q2_jun_aarp0057 didn't work, swap w/ q2_jun_aarp0058
   @TestmemberAuth @15170 @regression_06_06_18
   Scenario Outline: To validate the Edit Payment flow for Member Auth
     Given the user is on member auth login flow page
@@ -98,10 +99,10 @@
 
     Examples: 
       | username  | password  | MemUserName     |
+	  #NOTE: Nov2018 - q2_jun_aarp0057 didn't work, swap with another user
       #| qavgogine | qavgogine | q2_jun_aarp0057 |
       | qavgogine | qavgogine | q2_jun_aarp0058 |
 
-#NOTE: Nov2018 - q2_jun_uhc0042 didn't work, swap w/ q2_jun_uhc0043
   @TestmemberAuthOTP @15163 @regression_06_06_18
   Scenario Outline: To validate the oneTime Payment flow for Member Auth
     Given the user is on member auth login flow page
@@ -126,6 +127,7 @@
 
     Examples: 
       | username  | password  | MemUserName    | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
+	 #NOTE: Nov2018 - q2_jun_uhc0042 didn't work, swap with another user
      # | qavgogine | qavgogine | q2_jun_uhc0042 | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.12 |
       | qavgogine | qavgogine | q2_jun_uhc0043 | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.12 |
 
@@ -151,7 +153,6 @@
       | planType | memberType              | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
       | SHIP     | IndividualAARPSPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
 
-#NOTE: Nov2018 - q2_june_combo0012 didn't work, swap to use use q2_june_combo0017
   @paymentsCombo @15144 @regression_06_06_18
   Scenario Outline: Verify Payment for Combo member
     Given login with following details logins in the member portal and validate elements
@@ -185,5 +186,6 @@
 
     Examples: 
       | planType | memberType        | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
+	 #NOTE: Nov2018 - q2_june_combo0012 didn't work, swap with another user
      # | COMBO    | COMBOAARPPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
       | COMBO    | COMBOAARPPayments2 | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
