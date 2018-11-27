@@ -335,4 +335,4 @@ And the user search claims for the following time interval in redesigned site
 Then the user should be able to see the from date is greater than to date error message
 Examples: 
      | planType | claimPeriod    | domain | claimssystem |claimToDate | claimFromDate |
-     | MAPD     |customsearch | COSMOS | COSMOSCLAIMS |03/13/2018  | 11/06/2018 |
+     | MAPD     |customsearch | COSMOS | COSMOSCLAIMS |11/06/2018  | 01/02/2019 |

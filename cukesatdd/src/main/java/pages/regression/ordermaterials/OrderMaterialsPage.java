@@ -282,6 +282,7 @@ public class OrderMaterialsPage extends UhcDriver  {
 
 	
 	public boolean ValidateHeader(){
+		//if (driver.findElement(By.xpath("//h1[@class='h4 margin-none']")).isDisplayed() && driver.findElement(By.xpath("//h2[@class='h3 medium margin-large']")).isDisplayed()){
 		String targetH1Xpath="//h1[@class='main-heading margin-none']";
 		String targetH2Xpath="//*[@id='globalContentIdForSkipLink']/div[4]/div/div/div/section[1]/div[2]/div[2]/div/h2";
 		if (driver.findElement(By.xpath(targetH1Xpath)).isDisplayed() && driver.findElement(By.xpath(targetH2Xpath)).isDisplayed()){

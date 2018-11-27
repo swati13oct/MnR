@@ -80,9 +80,9 @@ Examples:
  
 @Member_DCE @regression_06_06_18
 Scenario Outline:I1.1 To Verify MR portal DCE flow covering step1 step 2 and step3 .
-Given I login with registered user
+Given login with following details logins in the member portal and validate elements
 | Plan Type   | <planType>   |
-| Member Type	  | <memberType> |
+| Member Type   | <memberType> |
 When I navigate to drug look up page
 When I delete all added drugs
 When I add branded drug
@@ -121,16 +121,16 @@ Examples:
  
 @Member_dce_not @regression_06_06_18
 Scenario Outline:I1.2 To Verify MR portal members DCE should not come for AARP federal members
-Given I login with registered user
+Given login with following details logins in the member portal and validate elements
 | Plan Type   | <planType>   |
-| Member Type	  | <memberType> |
+| Member Type   | <memberType> |
 Then I should not see drug look up on home page
  
  Examples:
  | planType  | memberType|
  | Medsup    | Ship_AARP |
- | Group     | SSUP      |
- | MA		| AARPIndividual|
+# | Group     | SSUP      |
+# | MA		| AARPIndividual|
 
  
 @Member_DCE_sso @regression_06_06_18
