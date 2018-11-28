@@ -44,7 +44,6 @@ public class TeamCAcqHome extends GlobalWebElements {
      private WebElement viewPlansButton;
 	 
 	 
-	 
 	 @FindBy(xpath = "//*[@id='planTypesColumn']/h3[1]/a")
      private WebElement MALandingLink;
 	 

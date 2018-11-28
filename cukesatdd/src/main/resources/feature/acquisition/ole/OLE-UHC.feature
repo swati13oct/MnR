@@ -191,7 +191,7 @@ Feature:1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
       
  @DSNP_Enroll_Now @september_release_2018
   Scenario Outline: To test OLE Button for DSNP Plans Landing from VPP Plan Summary
-    Given the user is on TeamC UHC medicare acquisition site landing page
+    Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search TeamC using following information in UMS site
       | Zip Code    | <zipcode> |
       | County Name | <county>  |
@@ -206,7 +206,7 @@ Feature:1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
  
  @CSNP_Enroll_Now @december_18
   Scenario Outline: To test OLE Button for CSNP Plans Landing from VPP Plan Summary
-    Given the user is on TeamC UHC medicare acquisition site landing page
+    Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search TeamC using following information in UMS site
       | Zip Code    | <zipcode> |     
     When user views plans of the below plan type in UMS site
@@ -221,7 +221,7 @@ Feature:1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
  
  @UHC_Disclosure @december_18
   Scenario Outline: To test Disclosure page for Chronic Plans Landing from VPP Plan Summary
-    Given the user is on TeamC UHC medicare acquisition site landing page
+    Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search TeamC using following information in UMS site
       | Zip Code    | <zipcode> |
       | County Name | <county>  |
@@ -354,7 +354,7 @@ Examples:
       
  @StandaloneZipcode @Feb_18
   Scenario Outline: To reach VPP page via standalone Zipcode
-    Given the user is on TeamC UHC medicare acquisition site landing page
+    Given the user is on the uhcmedicaresolutions site landing page
     When the user performs Standalone zipcode search on TeamC using following information in UMS site
       | Zip Code    | <zipcode> |    
       
@@ -364,7 +364,7 @@ Examples:
       
  @StandaloneMA @Feb_18
   Scenario Outline: To reach VPP page via standalone Zipcode
-    Given the user is on TeamC UHC medicare acquisition site landing page
+    Given the user is on the uhcmedicaresolutions site landing page
     When the user goes to MA Landing page
       | Zip Code    | <zipcode> |    
       
@@ -374,7 +374,7 @@ Examples:
       
   @MALandigPlanOptions @Feb_18
   Scenario Outline: To reach VPP page via standalone Zipcode
-    Given the user is on TeamC UHC medicare acquisition site landing page
+    Given the user is on the uhcmedicaresolutions site landing page
     When the user goes to MA Landing page Options
       | Zip Code    | <zipcode> |    
       

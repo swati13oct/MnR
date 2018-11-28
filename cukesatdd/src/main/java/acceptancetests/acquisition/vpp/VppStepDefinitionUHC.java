@@ -131,9 +131,11 @@ public class VppStepDefinitionUHC {
 		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
 		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
 
-		TeamCAcqHome aquisitionhomepage = (TeamCAcqHome) getLoginScenario()
+		/*TeamCAcqHome aquisitionhomepage = (TeamCAcqHome) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);*/
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.searchPlans(
+		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.searchPlans1(
 				zipcode, county);
 
 		if (plansummaryPage != null) {
@@ -165,8 +167,10 @@ public class VppStepDefinitionUHC {
 		//String county = memberAttributesMap.get("County Name");
 		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
 		//getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
-
+/*
 		TeamCAcqHome aquisitionhomepage = (TeamCAcqHome) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);*/
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.GotoVPP(
 				zipcode);
