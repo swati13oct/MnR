@@ -304,8 +304,13 @@ public class MemberRedesignHeaderStepDefinition {
 		// Express the Regexp above with the code you wish you had
 		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		accountHomePage.clickPremiumPayment();
-		accountHomePage.validatePremiumPage();
+		try {
+			accountHomePage.navigateToPaymentHistoryPage();
+			accountHomePage.validatePremiumPage();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		 
 	}
 
 	/**
