@@ -17,10 +17,10 @@ import atdd.framework.UhcDriver;
 public class PDPRequestHelpAndInformationPage extends UhcDriver{
 	
 	
-	@FindBy(xpath = ".//*[@id='article_mededaccordion2']//*[contains(text(),'Information and Enrollment')]")
+	@FindBy(xpath = ".//*[@id='article_mededaccordion1']//*[contains(text(),'Information')]")
 	private WebElement pdpEnquiryKitLink;
 	
-	@FindBy(xpath = ".//*[@id='collapse2heading_article_mededaccordion2']")
+	@FindBy(xpath = ".//*[@id='collapse2heading_article_mededaccordion1']")
 	private WebElement pdpInquiryKitDropdown;
 	
 	@FindBy(id = "firstName")

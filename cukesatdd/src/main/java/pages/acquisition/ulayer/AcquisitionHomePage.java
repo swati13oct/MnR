@@ -719,8 +719,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		
 		CommonUtility.waitForPageLoad(driver, requestAgentApptDropdown, 60);
-		if (validateNew(requestAgentApptDropdown) && currentUrl().contains(
-				"medicare-advantage-plans/request-information.html")) {
+		if (validateNew(requestAgentApptDropdown)) {
 			return new RequestHelpAndInformationPage(driver);
 		}
 
