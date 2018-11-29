@@ -1142,7 +1142,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public VPPPlanSummaryPage GotoVPP(String zipcode) {
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(8000);
+			System.out.println("Sleep done");
 		} catch (InterruptedException e) {
 			System.out.println("page took time to load");
 		}
@@ -1199,13 +1200,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		MALandingLink.click();
 
-		try {
-			Thread.sleep(15000);
-			System.out.println("Thread Sleep completed");
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 
 	}
 	
