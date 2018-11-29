@@ -353,9 +353,9 @@ Examples:
       
       
  @StandaloneZipcode @Feb_18
-  Scenario Outline: To reach VPP page via standalone Zipcode
+  Scenario Outline: Home Zipcode widget To reach VPP page via standalone Zipcode
     Given the user is on the uhcmedicaresolutions site landing page
-    When the user performs Standalone zipcode search on TeamC using following information in UMS site
+    When the user performs zipcode search using widget following information in the UHC site
       | Zip Code    | <zipcode> |    
       
  Examples: 
@@ -363,9 +363,9 @@ Examples:
       |   78006 | 
       
  @StandaloneMA @Feb_18
-  Scenario Outline: To reach VPP page via standalone Zipcode
+  Scenario Outline: MA Zipcode widget To reach VPP page via standalone Zipcode
     Given the user is on the uhcmedicaresolutions site landing page
-    When the user goes to MA Landing page
+    When the user goes to MA Landing and performs zipcode search using widget following information in the UHC site
       | Zip Code    | <zipcode> |    
       
  Examples: 
@@ -376,6 +376,16 @@ Examples:
   Scenario Outline: To reach VPP page via standalone Zipcode
     Given the user is on the uhcmedicaresolutions site landing page
     When the user goes to MA Landing page Options
+      | Zip Code    | <zipcode> |    
+      
+ Examples: 
+      | zipcode | 
+      |   78006 | 
+      
+      @StandalonePDP @Feb_18
+  Scenario Outline: PDP Zipcode widget To reach VPP page via standalone Zipcode
+   Given the user is on the uhcmedicaresolutions site landing page
+   When the user goes to PDP Landing and performs zipcode search using widget following information in the UHC site
       | Zip Code    | <zipcode> |    
       
  Examples: 
