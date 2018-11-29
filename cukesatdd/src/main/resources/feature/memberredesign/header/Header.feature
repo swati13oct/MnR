@@ -89,7 +89,7 @@ Examples:
  
 
  @Terminated_view @regression_06_06_18
- Scenario Outline:To check that the Find Care and Costs Tab is not displayed in the header
+ Scenario Outline:To check that the Find Care and Costs Tab is not displayed in the header for terminated user
 Given login with following details logins in the member portal and validate elements
 | Plan Type   | <planType>   |
 | Member Type   | <memberType> |
