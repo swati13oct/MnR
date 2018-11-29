@@ -907,6 +907,22 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public RequestHelpAndInformationPage navigateToMaMoreHelpAndInfo() {
+                try {
+                        if (zipCodeField.isDisplayed()) {
+                                CommonUtility.waitForElementToDisappear(driver, zipCodeField,
+                                                CommonConstants.TIMEOUT_30);
+                        }
+                } catch (NoSuchElementException e) {
+                        System.out.println("zipCodeField not found");
+                } catch (TimeoutException ex) {
+                        System.out.println("zipCodeField not found");
+                } catch (Exception e) {
+                        System.out.println("zipCodeField not found");
+                }
+                CommonUtility.waitForPageLoad(driver, requestAgentApptDropdown, 60);
+        		if (validateNew(requestAgentApptDropdown)) {
+                        return new RequestHelpAndInformationPage(driver);
+                }
 
 		Actions actions = new Actions(driver);
 		PageFactory.initElements(driver, this);
