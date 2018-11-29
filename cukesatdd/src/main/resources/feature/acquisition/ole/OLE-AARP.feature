@@ -248,3 +248,35 @@ Then the user validates Plan and Member Details on Confirmation Page
 Examples:
 | zipcode | county             | plantype | planName                                             | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                      | optiondata        | pdpFlag | longTermFlag | riderflag |
 |   90210 | Los Angeles County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    | HICN     | John      | Doe      | 987654333C     | false   |  01012010 |  01012010 |      231665465 | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | CA   |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | yes          | true      |
+
+
+
+@StandaloneZipcode @Feb_18
+  Scenario Outline: To reach VPP page via standalone Zipcode
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs zipcode search using widget following information in the AARP site
+      | Zip Code    | <zipcode> |
+
+    Examples: 
+      | zipcode |
+      |   90210 |
+      
+@StandaloneMA @Feb_18
+  Scenario Outline: To reach VPP page via standalone Zipcode
+   Given the user is on AARP medicare acquisition site landing page
+   When the user goes to MA Landing and performs zipcode search using widget following information in the AARP site
+      | Zip Code    | <zipcode> |    
+      
+ Examples: 
+      | zipcode | 
+      |   78006 |
+      
+@StandalonePDP @Feb_18
+  Scenario Outline: To reach VPP page via standalone Zipcode
+   Given the user is on AARP medicare acquisition site landing page
+     When the user goes to PDP Landing and performs zipcode search using widget following information in the AARP site
+      | Zip Code    | <zipcode> |    
+      
+ Examples: 
+      | zipcode | 
+      |   78006 | 

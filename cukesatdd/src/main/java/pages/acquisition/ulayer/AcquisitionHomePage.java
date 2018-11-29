@@ -1,22 +1,29 @@
 package pages.acquisition.ulayer;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
+import org.openqa.selenium.support.PageFactory;
+
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
-import pages.acquisition.ulayer.DrugCostEstimatorPage;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
-import org.openqa.selenium.support.PageFactory;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
+import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
 /**
  * @author pperugu
@@ -118,6 +125,37 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath =".//*[@id='collapse2heading_article_mededaccordion0']")
 	private WebElement requestAgentApptDropdown;
+	
+	 
+	 @FindBy(xpath = "//*[@class='textalign']//p[2]/a")
+     private WebElement county;
+	 
+	 @FindBy(xpath = "//*[@id='ole-county-select']/option[@value=1]")
+     private WebElement countyDropdown;
+	
+	@FindBy(id = "js-ole-zip-search")
+    private WebElement StandaloneZipcode;
+	 
+	 @FindBy(xpath = "//*[@id='js-ole-zip-search']/following-sibling::button")
+    private WebElement StandalonSearch;
+	 
+	 @FindBy(xpath = "//*[@id='js-ole-plan-result']/p/following-sibling::button")
+    private WebElement StandaloneVPP;
+	 
+	 @FindBy(xpath = "//button[text()='View Plans & Pricing']")
+	private WebElement ViewPlansPricingButton;
+	 
+	 @FindBy(xpath = "//*[@class='ng-pristine ng-invalid ng-invalid-required']//select//optgroup[@label='Special Needs Plans']/option[2]")
+    private WebElement StandaloneSNPoptions;
+	 
+	 @FindBy(xpath = "//*[@class='btn--bottom']")
+    private WebElement StandalonSearchCounty;
+	 
+	 @FindBy(xpath = "//*[@id='planTypesColumn']/h3[2]/a")
+     private WebElement PDPLandingLink;
+	 
+	 @FindBy(xpath = "//*[@id='planTypesColumn']/h3[1]/a")
+     private WebElement MALandingLink;
 
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
 	private static String AARP_ACQISITION_OFFLINE_PAGE_URL = MRConstants.AARP_URL_OFFLINE;
@@ -671,6 +709,40 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 	}
 	
+	public void PDPLanding() {
+		
+		Actions action = new Actions(driver);
+		action.moveToElement(navigationSectionOurPlansLink).build().perform();		
+			
+		PDPLandingLink.click();
+			 
+			 try {
+	             Thread.sleep(15000);
+	             System.out.println("Thread Sleep completed");
+	     } catch (InterruptedException e) {
+	             // TODO Auto-generated catch block
+	             e.printStackTrace();
+	     }
+	}
+	
+	public void MALanding() {
+		
+		Actions action = new Actions(driver);
+		action.moveToElement(navigationSectionOurPlansLink).build().perform();		
+			
+			 MALandingLink.click();
+			 
+			 
+			 try {
+	             Thread.sleep(15000);
+	             System.out.println("Thread Sleep completed");
+	     } catch (InterruptedException e) {
+	             // TODO Auto-generated catch block
+	             e.printStackTrace();
+	     }
+	}
+			
+	
 	public PharmacySearchPage navigateToPharmacyLocator() {
 		driver.manage().window().maximize();
 		Actions action = new Actions(driver);
@@ -796,4 +868,42 @@ public class AcquisitionHomePage extends GlobalWebElements {
   				return new DrugCostEstimatorPage(driver);
   		return null;
   	}
+	  
+	  public VPPPlanSummaryPage ZipcodeSearch(String zipcode) {
+			try{
+	             Thread.sleep(3000);
+			}catch(InterruptedException e)
+			{
+				System.out.println("page took time to load");
+			}
+			JavascriptExecutor jse = (JavascriptExecutor)driver;
+			jse.executeScript("window.scrollBy(0,300)", "");
+			
+	        sendkeys(StandaloneZipcode, zipcode);
+	        StandalonSearchCounty.click();
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	        try {
+	                if (countyDropdown.isDisplayed()) {                      
+	                	countyDropdown.click();
+	                	Thread.sleep(3000);
+	                	//StandalonSearchCounty.click();
+	                        }
+	               
+	        } catch (Exception e) {
+	                System.out.println("county box not found");
+	        }
+	        jse.executeScript("window.scrollBy(0,100)", "");
+	        try{
+	            Thread.sleep(2000);
+			}catch(InterruptedException e)
+			{
+				System.out.println("page took time to load");
+			}
+	        ViewPlansPricingButton.click();
+	        
+	        if (driver.getCurrentUrl().contains("plan-summary")) {
+	                return new VPPPlanSummaryPage(driver);
+	        }
+	        return null;
+	}	  
 }
