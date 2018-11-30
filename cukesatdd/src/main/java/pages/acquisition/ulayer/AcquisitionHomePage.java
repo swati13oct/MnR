@@ -23,6 +23,7 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
+import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
 /**
@@ -126,7 +127,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	 
 	 @FindBy(xpath = "//*[@id='ole-county-select']/option[@value=1]")
      private WebElement countyDropdown;
-	
+	 
+	 @FindBy(xpath = "//*[@id='js-ole-plan-select']//optgroup[1]/option[@value=0]")
+     private WebElement selectFirstOptionOnPlanSelect;
+	 
+	 @FindBy(xpath = "//*[@id='js-ole-plan-select']//following::button")
+     private WebElement enrollButton;
+	 
 	@FindBy(id = "js-ole-zip-search")
     private WebElement StandaloneZipcode;
 	 
@@ -813,7 +820,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		
 		CommonUtility.waitForPageLoad(driver, requestAgentApptDropdown, 60);
-		if (validateNew(requestAgentApptDropdown)) {
+		if (validateNew(requestAgentApptDropdown) && currentUrl().contains(
+				"medicare-advantage-plans/request-information.html")) {
 			return new RequestHelpAndInformationPage(driver);
 		}
 
@@ -928,6 +936,46 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	        }
 	        return null;
   }	  
+	  
+	  
+	  public WelcomePage ZipcodeSearchToOLE(String zipcode) {
+			try{
+	             Thread.sleep(3000);
+			}catch(InterruptedException e)
+			{
+				System.out.println("page took time to load");
+			}
+			JavascriptExecutor jse = (JavascriptExecutor)driver;
+			jse.executeScript("window.scrollBy(0,300)", "");
+			
+	        sendkeys(StandaloneZipcode, zipcode);
+	        StandalonSearchCounty.click();
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	        try {
+	                if (countyDropdown.isDisplayed()) {                      
+	                	countyDropdown.click();
+	                	Thread.sleep(3000);
+	                	//StandalonSearchCounty.click();
+	                        }
+	               
+	        } catch (Exception e) {
+	                System.out.println("county box not found");
+	        }
+	        jse.executeScript("window.scrollBy(0,100)", "");
+	        try{
+	            Thread.sleep(2000);
+			}catch(InterruptedException e)
+			{
+				System.out.println("page took time to load");
+			}
+	        selectFirstOptionOnPlanSelect.click();
+	        enrollButton.click();
+	        if (driver.getCurrentUrl().contains("welcome")) {
+	        	System.out.println("OLE Welcome Page is Displayed");
+	                return new WelcomePage(driver);
+	        }
+	        return null;
+}	  
 	  
 	  
 }

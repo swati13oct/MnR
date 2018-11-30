@@ -261,6 +261,16 @@ Examples:
       | zipcode |
       |   90210 |
       
+   @StandaloneZipcode @Feb_release_2019
+  Scenario Outline: Home Zipcode widget To reach Online Enrollment page via standalone Zipcode
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs zipcode search to welcome OLE Page using widget on the AARP site
+      | Zip Code    | <zipcode> |
+
+    Examples: 
+      | zipcode |
+      |   90210 |
+      
 #@StandaloneMA @Feb_18
   Scenario Outline: To reach VPP page via standalone Zipcode
    Given the user is on AARP medicare acquisition site landing page
