@@ -251,7 +251,7 @@ Examples:
 
 
 
-@StandaloneZipcode @Feb_18
+#@StandaloneZipcode @Feb_18
   Scenario Outline: To reach VPP page via standalone Zipcode
     Given the user is on AARP medicare acquisition site landing page
     When the user performs zipcode search using widget following information in the AARP site
@@ -261,7 +261,7 @@ Examples:
       | zipcode |
       |   90210 |
       
-@StandaloneMA @Feb_18
+#@StandaloneMA @Feb_18
   Scenario Outline: To reach VPP page via standalone Zipcode
    Given the user is on AARP medicare acquisition site landing page
    When the user goes to MA Landing and performs zipcode search using widget following information in the AARP site
@@ -271,7 +271,7 @@ Examples:
       | zipcode | 
       |   78006 |
       
-@StandalonePDP @Feb_18
+#@StandalonePDP @Feb_18
   Scenario Outline: To reach VPP page via standalone Zipcode
    Given the user is on AARP medicare acquisition site landing page
      When the user goes to PDP Landing and performs zipcode search using widget following information in the AARP site

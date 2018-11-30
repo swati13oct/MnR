@@ -109,7 +109,7 @@ public class MedicareInformationPage extends UhcDriver{
 	@FindBy(xpath = "//*[@id='medicareClaimNumber']/preceding-sibling::label")
 	private WebElement MedicareNumberLabel;
 	
-	@FindBy(xpath = "//*[@class='ole-form-container']//div[@id='ole-form-content']//div[@class='form-row'][3]/h3")
+	@FindBy(xpath = "//*[@class='ole-form-container']//div[@id='ole-form-content']//div[@class='form-row'][2]/h3")
 	private WebElement DiabetesSection;
 	
 	@FindBy(id="hasEndStateRenalDiseaseNo")
@@ -291,9 +291,9 @@ public PrelimineryQuestionsPage navigate_to_Preliminary_Diabetes_Questions_page(
 		e.printStackTrace();
 	}
 	
-		
+	if(DiabetesSection.getText().contains("Diabetes"))	
 	    ESRD.click();
-		if(DiabetesSection.getText().contains("Diabetes"))			
+				
 		NextBtn.click();
 				try {
 			Thread.sleep(2000);
