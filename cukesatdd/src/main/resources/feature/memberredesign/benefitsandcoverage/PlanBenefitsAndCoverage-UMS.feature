@@ -1,4 +1,4 @@
-@codeMonkeys @regression_06_06_18 @thePredators
+@codeMonkeys @regression_06_06_18 @thePredators 
 Feature: C1.1 To test plan benefits and Coverage on UMS site
 
   @CMFedDrugNonLis
@@ -587,12 +587,12 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | planType | memberType |
       | PDP      | Greenwich  |
 
-  @BenefitsforTexasERSMember @regression @regression_06_06_18
+  @BenefitsforTexasERSMember @regression @regression_06_06_18 @benefitsAndCoverage
   Scenario Outline: Verify the Benefits for TexasERSMember
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    Then The user navigates to Benefits and Coverage page
+    Then The user navigate to Benefits and Coverage page
     And the user validates the Drug costs Section
     Then the user verifies the Retail Cost sharing table
     Then the user verifies the Mail Order Cost sharing table
@@ -601,24 +601,24 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | planType | memberType    |
       | PDP      | TEXASERSGroup |
 
-  @OfficeVisitswithoutprovidertiering @regression @regression_06_06_18
+  @OfficeVisitswithoutprovidertiering @regression @regression_06_06_18 @benefitsAndCoverage
   Scenario Outline: Verify the Office visits widget for a member withoutprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    Then The user navigates to Benefits and Coverage page
+    Then The user navigate to Benefits and Coverage page
     And the user validates the Office Visits section
 
     Examples: 
       | planType | memberType                   |
       | MAPD     | memberWithoutProviderTiering |
 
-  @WaystoSaveforPdp @regression @regression_06_06_18
+  @WaystoSaveforPdp @regression @regression_06_06_18 @benefitsAndCoverage
   Scenario Outline: Verify the ways to save  widget for a PDP member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    Then The user navigates to Benefits and Coverage page
+    Then The user navigate to Benefits and Coverage page
     And the user validates the ways to save section
 
     Examples: 
@@ -639,7 +639,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | planType | memberType |
       | MAPD     | MAPDCOSMOS |
 
-  @primarycareproviderspecialist @thepredators @regressionprimarycareprovider @regression_06_06_18
+  @primarycareproviderspecialist @thepredators @regressionprimarycareprovider @regression_06_06_18 
   Scenario Outline: Verify the Office visits widget for a member withprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -651,36 +651,36 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | planType | memberType        |
       | MAPD     | COSMOSOfficevisit |
 
-  @outpatientcenterwithoutprovidertier @thepredators @regressionoutpatientwithoutprovider @regression_06_06_18
+  @outpatientcenterwithoutprovidertier @thepredators @regressionoutpatientwithoutprovider @regression_06_06_18 @benefitsAndCoverage
   Scenario Outline: Verify the outpatient widget for a member withoutprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    Then The user navigates to Benefits and Coverage page
+    Then The user navigate to Benefits and Coverage page
     And the user validates the Outpatient Surgery Center Visits section
 
     Examples: 
       | planType | memberType   |
       | MAPD     | NICEBenefits |
 
-  @BenefitsForAlPeehipMember @regression @regression_06_06_18
+  @BenefitsForAlPeehipMember @regression @regression_06_06_18 @benefitsAndCoverage
   Scenario Outline: Verify the benefits for an AL peehip member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    Then The user navigates to Benefits and Coverage page
+    Then The user navigate to Benefits and Coverage page
     And the user validates the Benefits for Peehip member
 
     Examples: 
       | planType | memberType |
       | Peehip   | Group      |
 
-  @BenefitsForMAMedsupSSUPMember @regression @regression_06_06_18
+  @BenefitsForMAMedsupSSUPMember @regression @regression_06_06_18 @benefitsAndCoverage
   Scenario Outline: Verify the Benefits for a  MA Member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    Then The user navigates to Benefits and Coverage page
+    Then The user navigate to Benefits and Coverage page
     And the user validates the Benefits for MA member
 
     Examples: 
@@ -688,36 +688,36 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | MA       | Individual |
 
   #| SSUP     |Group  |
-  @CopayCoinsuranceInDrugCostTable @regression @regression_06_06_18
+  @CopayCoinsuranceInDrugCostTable @regression @regression_06_06_18 @benefitsAndCoverage
   Scenario Outline: Verify the copay coinsurance in drugcosts table
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    Then The user navigates to Benefits and Coverage page
+    Then The user navigate to Benefits and Coverage page
     And the user validates the copay coinsurance in drug costs table
 
     Examples: 
       | planType | memberType |
       | MAPD     | Individual |
 
-  @BenefitsForCombo @regression @regression_06_06_18
+  @BenefitsForCombo @regression @regression_06_06_18 @benefitsAndCoverage
   Scenario Outline: Verify the Benefits for a combo member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    Then The user navigates to Benefits and Coverage page
+    Then The user navigate to Benefits and Coverage page
     And the user validates the benefits for a combo member
 
     Examples: 
       | planType | memberType  |
       | Combo    | MAPDANDSHIP |
 
-  @BenefitsRiderFunctionality @regression @regression_06_06_18
+  @BenefitsRiderFunctionality @regression @regression_06_06_18 @benefitsAndCoverage
   Scenario Outline: Verify the Benefits for a combo member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    Then The user navigates to Benefits and Coverage page
+    Then The user navigate to Benefits and Coverage page
     And the user validates the Add Rider functionality
     Then the user validates the remove Rider functionality
 

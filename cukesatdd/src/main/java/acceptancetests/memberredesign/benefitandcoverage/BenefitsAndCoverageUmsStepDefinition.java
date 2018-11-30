@@ -144,6 +144,26 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		}
 
 	}
+	
+	
+	@Then("^The user navigate to Benefits and Coverage page$")
+	public void user_views_BenefitsAndCoveragejenkins1() {
+		System.out.println("***The user navigates to Benefits and Coverage page***");
+		
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+
+		BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag();
+
+		if (benefitsCoveragePage != null) {
+			getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
+		}
+		else
+
+		{
+			System.out.println("Benefits and Coverage page object is Null ");
+		}
+
+	}
 	/** 
 	 * @toDo : The user logs in to legacy site  in Mobile view 
 	 */
