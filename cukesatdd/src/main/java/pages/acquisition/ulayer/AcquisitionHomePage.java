@@ -60,15 +60,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(id = "lookzip")
 	private WebElement lookzip;
-
-
-	@FindBy(id = "zipcodebtn")
-	private WebElement viewPlansButton;
 	
 	@FindBy(xpath = "//div[@class='modal-title']")
 	private WebElement countyModal;
 	
-
 	@FindBy(id = "homefooter")
 	private WebElement homefooter;
 
@@ -126,9 +121,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath =".//*[@id='collapse2heading_article_mededaccordion0']")
 	private WebElement requestAgentApptDropdown;
 	
-	 
-	 @FindBy(xpath = "//*[@class='textalign']//p[2]/a")
-     private WebElement county;
+	@FindBy(xpath = "//*[@class='textalign']//p[2]/a")
+    private WebElement county;
 	 
 	 @FindBy(xpath = "//*[@id='ole-county-select']/option[@value=1]")
      private WebElement countyDropdown;
@@ -156,6 +150,34 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	 
 	 @FindBy(xpath = "//*[@id='planTypesColumn']/h3[1]/a")
      private WebElement MALandingLink;
+	 
+	 @FindBy(xpath = "//*[@class='container meded-article-header']/h1']")
+     private WebElement MALandingHeading;
+	 
+	 @FindBy(id = "zipcodebtn")
+     private WebElement viewPlansButton;	
+	 
+	 /*@FindBy(id = "vpp_selectcounty_box")
+     private WebElement countyModal;*/
+	 
+	 @FindBy(id = "zipcode")
+     private WebElement zipCodeF;
+	 
+	 @FindBy(className = "textalign")
+     private WebElement countyModal1;
+	 
+	 /*@FindBys(value = { @FindBy(xpath = "//table[@id='selectcountytable']/tbody/tr/td") })
+     List<WebElement> countyRows;*/
+	
+	
+	 @FindBy(xpath = "//*[@id='ghn_lnk_2']")
+     private WebElement OurPlans;
+	 
+	 @FindBy(xpath = "(//*[@class='zip-button'])[2]")
+     private WebElement GoButton;
+	 
+	private static String TeamC_ACQUISITION_PAGE_URL = MRConstants.TeamC_UHC_URL;
+	 
 
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
 	private static String AARP_ACQISITION_OFFLINE_PAGE_URL = MRConstants.AARP_URL_OFFLINE;
@@ -791,8 +813,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		
 		CommonUtility.waitForPageLoad(driver, requestAgentApptDropdown, 60);
-		if (validateNew(requestAgentApptDropdown) && currentUrl().contains(
-				"medicare-advantage-plans/request-information.html")) {
+		if (validateNew(requestAgentApptDropdown)) {
 			return new RequestHelpAndInformationPage(driver);
 		}
 
@@ -906,5 +927,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	                return new VPPPlanSummaryPage(driver);
 	        }
 	        return null;
-	}	  
+  }	  
+	  
+	  
 }
