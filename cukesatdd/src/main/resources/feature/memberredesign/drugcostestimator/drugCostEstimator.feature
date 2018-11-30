@@ -10,7 +10,7 @@ Then I should not see drug look up on home page
  
  Examples:
  | planType  | memberType|
- | Medsup    | Ship_AARP |
+ | Medsup    | Ship_AARP_DCE |
 
 @drug_cost_estimator1
 Scenario Outline:I1.1 To Verify MR portal members using DCE on a desktop device Pharmacy search tab validation
@@ -100,14 +100,18 @@ Then I click on drug lookup tile which takes me to optum rx sso landing page
 # | MAPD_GROUP_DCE  |
  |PDP_GROUP_DCE |
  
-@drug_cost_estimator6 @switch_to_generic_case_1
+@drug_cost_estimator6 @switch_to_generic_case_1  
 Scenario Outline: To Verify MR portal members using DCE on a desktop device, I want to be able to switch from branded to generic drug, given that no pharmacy is selected and it suggests the user with an appropriate save money message.
 Given login with following details logins in the member portal and validate elements
 | Plan Type   | <planType>   |
 | Member Type	  | <memberType> |
 When I navigate to drug look up page
-And I have added a drug to my drug list and a generic equivalent is available for the drug I have selected
- 	|Drug|<drug>|
+When I delete all added drugs
+When I add branded drug
+| Drug      | <drug>     |
+| Dosage    | <dosage>   |
+| Quantity  | <quantity> |
+| Frequency	| <frequency>|
 And I have not yet selected pharmacy
 Then I should be presented the option to switch to the generic option
 And I will see a SWITCH NOW link in the drug tile with appropriate save message
@@ -116,18 +120,22 @@ And when I click on the button to accept the generic
 Then the drug name will automatically update within the Drug List
 
 Examples:
- | planType| memberType| drug |
- | MAPD|Individualwithoutpharmacy_DCE|lipitor|
+ | planType | memberType  |drug|dosage|quantity|frequency| 
+ | MAPD     |Individualwithpharmacy_DCE |Lipitor|Lipitor TAB 10MG|31|Every 1 month|
  
  
-@drug_cost_estimator7  @switch_to_generic_case_2 
+@drug_cost_estimator7  @switch_to_generic_case_2  
 Scenario Outline: To Verify MR portal members using DCE on a desktop device, I want to be able to switch from branded to generic drug, given that a pharmacy is selected and it suggests the user with an appropriate save money message and cost savings are also updated
 Given login with following details logins in the member portal and validate elements
 | Plan Type   | <planType>   |
 | Member Type	  | <memberType> |
 When I navigate to drug look up page
-And I have added a drug to my drug list and a generic equivalent is available for the drug I have selected
- 	|Drug|<drug>|
+When I delete all added drugs
+When I add branded drug
+| Drug      | <drug>     |
+| Dosage    | <dosage>   |
+| Quantity  | <quantity> |
+| Frequency	| <frequency>|
 And I have selected pharmacy
 Then I should be presented the option to switch to the generic option
 And I will see a SWITCH NOW link in the drug tile with a pharmacy savings cost value
@@ -137,8 +145,8 @@ Then the drug name will automatically update within the Drug List
 And any cost savings will be applied to my total cost savings in Step3
 
 Examples:
- | planType| memberType| drug |
- | MAPD|IndividualDCEmember_DCE|lipitor|
+ | planType | memberType  |drug|dosage|quantity|frequency| 
+ | MAPD     |Individualwithoutpharmacy_DCE |Lipitor|Lipitor TAB 10MG|31|Every 1 month|
 
 
 
