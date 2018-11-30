@@ -362,6 +362,16 @@ Examples:
       | zipcode | 
       |   78006 | 
       
+    @StandaloneZipcodeOLE @Feb_18
+  Scenario Outline: Home Zipcode widget To reach Online Enrollment page via standalone Zipcode
+    Given the user is on the uhcmedicaresolutions site landing page
+    When the user performs zipcode search to welcome OLE Page using widget on the UHC site
+      | Zip Code    | <zipcode> |
+
+    Examples: 
+      | zipcode |
+      |   90210 |
+      
  @StandaloneMA @Feb_18
   Scenario Outline: MA Zipcode widget To reach VPP page via standalone Zipcode
     Given the user is on the uhcmedicaresolutions site landing page
