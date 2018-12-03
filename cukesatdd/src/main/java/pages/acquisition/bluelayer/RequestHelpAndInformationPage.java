@@ -25,17 +25,14 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 	@FindBy(xpath =".//*[@id='article_mededaccordion0']//*[contains(text(),'Request an Appointment')]")
 	private WebElement ma_requestAgentAppointmentLink;
 	                 
-	@FindBy(xpath =".//*[@id='subPageLeft']//*[contains(text(),'Find UnitedHealthcare in Your Community ')]")
-	private WebElement findUnitedHealthcareLink;
+	@FindBy(xpath =".//*[@id='article_mededaccordion2']//*[contains(text(),'Find UnitedHealthcare')]")
+	private WebElement communityMeetingLink;
 	
 	@FindBy(xpath =".//*[@id='collapse2heading_article_mededaccordion0']")
 	private WebElement requestAgentApptDropdown;
 	
-	@FindBy(xpath =".//*[@id='collapse2heading_article_mededaccordion1']")
+	@FindBy(xpath =".//*[@id='collapse2heading_article_mededaccordion2']")
 	private WebElement communityMeetingDropdown;
-	
-	@FindBy(xpath =".//*[@id='article_mededaccordion1']//a[@class='icon-link-box']")
-	private WebElement communityMeetingLink;
 	
 	@FindBy(xpath =".//*[@id='ghn_lnk_1']")
 	private WebElement homeTab;
@@ -60,9 +57,10 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 		CommonUtility.waitForPageLoad(driver, requestAgentApptDropdown, 50);
 		requestAgentApptDropdown.click();
 		CommonUtility.waitForPageLoad(driver, ma_requestAgentAppointmentLink, 50);
-		switchToNewTabNew(ma_requestAgentAppointmentLink);
+		//switchToNewTabNew(ma_requestAgentAppointmentLink);
+		ma_requestAgentAppointmentLink.click();
 		
-		if(currentUrl().contains("medicare-advantage-plans/request-information/agentebrc.html"))
+		if(currentUrl().contains("agentebrc"))
 		{
 			return new RequestAgentAppointmentPage(driver);
 		}
@@ -82,7 +80,7 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 		CommonUtility.waitForPageLoad(driver, communityMeetingLink, 10);
 		communityMeetingLink.click();
 		CommonUtility.waitForPageLoad(driver, homeTab, 30);
-		if(driver.getCurrentUrl().contains("attend.html"))
+		if(driver.getCurrentUrl().contains("attend"))
 			return true;
 		return false;
 	}

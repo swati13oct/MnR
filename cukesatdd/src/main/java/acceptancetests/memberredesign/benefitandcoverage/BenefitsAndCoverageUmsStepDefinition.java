@@ -29,6 +29,7 @@ import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.member.bluelayer.LoginPage2;
 import pages.regression.benefitandcoverage.ValueAddedServicepage;
+import pages.regression.formsandresources.FormsAndResourcesPage;
 import pages.redesign.BenefitsCoveragePage;
 import pages.redesign.RedesignLoginPage;
 import pages.redesign.UlayerHomePage;
@@ -131,7 +132,12 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 		}
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-
+try {
+	Thread.sleep(10000);
+} catch (InterruptedException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+}
 		BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag(plantype);
 
 		if (benefitsCoveragePage != null) {
@@ -1711,11 +1717,31 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	Assert.assertTrue(benefitsCoveragePage.ancillarynotdisplayed());
  	}
 
-	
+@Then("^user verifies presence of jump links$")
+public void user_verifies_presence_of_jump_links(DataTable rows) throws Throwable {
+	List<List<String>> data = rows.raw();
+	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+			.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+	benefitsCoveragePage.verifyPresenceOfJumpLinksMAPD(data.get(0).get(1));
+    
+}
 
-	
-	
+@Then("^user clicks on the jump links and checks respective sections$")
+public void user_clicks_on_the_jump_links_and_checks_respective_sections(DataTable rows) throws Throwable {
+	List<List<String>> data = rows.raw();
+	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+			.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+	benefitsCoveragePage.clicksOnJumpLinksAndCheckRespectiveSectionsMAPD(data.get(0).get(1));
+}
 
+@Then("^verifies links irrelevant to the plan type are not displayed$")
+public void verifies_links_irrelevant_to_the_plan_type_are_not_displayed(DataTable count) throws Throwable {
+			List<List<String>> data = count.raw();
+	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+					.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+			benefitsCoveragePage.directoryLinksCount(Integer.parseInt(data.get(0).get(1)),data.get(1).get(1));
+   
+}
 	
 	
 	

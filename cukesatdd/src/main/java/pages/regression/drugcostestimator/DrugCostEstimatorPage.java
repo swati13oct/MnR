@@ -1528,7 +1528,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			List<WebElement> saveGenericMessage = driver
 					.findElements(By.id("generic-drug-saving-amount-"+(drugscount-1)));
 			String valSaveGenericMessage = saveGenericMessage.get(0).getText();
-			if (valSaveGenericMessage.equals("Save money")) {
+			if (valSaveGenericMessage.contains("Save")) {
 				Assert.assertTrue(true);
 			} else {
 				Assert.assertTrue("Save money message is incorect",false);
@@ -1551,7 +1551,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			List<WebElement> saveGenericMessage = driver
 					.findElements(By.id("generic-drug-saving-amount-"+(drugscount-1)));
 			String valSaveGenericMessage = saveGenericMessage.get(0).getText();
-			if (!valSaveGenericMessage.equals("Save money")) {
+			if (!valSaveGenericMessage.contains("Save money")) {
 				Assert.assertTrue(true);
 			} else {
 				Assert.assertTrue("Save dollar amount message is incorect",false);

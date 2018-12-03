@@ -1,6 +1,28 @@
 @codeMonkeys @regression_06_06_18 @thePredators
 Feature: C1.1 To test plan benefits and Coverage on UMS site
 
+@PlanBFSMAPD @Feb_release_2019
+  Scenario Outline: Verify all sections for Ind NonLIS member on Benefits and Coverage page
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      | Copay Category | <copayCategory> |
+      |Rider|<rider>|
+    Then The user navigates to Benefits and Coverage page
+      | Plan Type | <planType> |
+    Then user verifies presence of jump links
+      |Rider|<rider>|
+    And user clicks on the jump links and checks respective sections
+      |Rider|<rider>|
+    And verifies links irrelevant to the plan type are not displayed
+      |Count|<count>|
+      |Rider|<rider>|
+      
+   Examples: 
+      | planType | memberType | copayCategory | language |count|rider|
+      | MAPD     | Individual | NON LIS       | ENGLISH  | 6   |NoRider|
+	  | MAPD     | Individual | NON LIS       | ENGLISH  | 7   |Rider|
+ 
   @CMFedDrugNonLis
   Scenario Outline: Verify all sections for Ind NonLIS member on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
@@ -524,8 +546,10 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
 
   @CMvasnegativescenario
   Scenario Outline: Verify that DisocuntServices section is visible on Benefits and coverage page
-    | Plan Type | <planType> |
-
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      | Copay Category | <copayCategory> |
     And the user should see drug copay and discount table
       | Updated Language | <UpdatedLanguage> |
       | Display Flag     | <DisplayFlag>     |
