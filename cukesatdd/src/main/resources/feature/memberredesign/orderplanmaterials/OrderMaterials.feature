@@ -19,11 +19,11 @@ Feature:P1.5 To test order materials in Redesign site
     And the user validate order additional material and click to add other order additional material in Order Confirmation Page
     Examples: 
       | planType | memberType | option           |
-    ##  | MA      |  AARPIndividual | Replacement ID card |
-    ##  | MAPD     | AARPIndividual  | Replacement ID card      |
-    ##  | MAPD     | PCP  | Replacement ID card      |
-    ##  | MAPD     | Medica2  | Replacement ID card      | 
-   ##   | PDP      |  AARPIndividual | Welcome Guide    |
+      | MA      |  AARPIndividual | Replacement ID card |
+      | MAPD     | AARPIndividual  | Replacement ID card      |
+      | MAPD     | PCP  | Replacement ID card      |
+      | MAPD     | Medica2  | Replacement ID card      | 
+      | PDP      |  AARPIndividual | Welcome Guide    |
       #orig | SHIP     | AARPIndividual  | Claims Envelope |
       | SHIP     | AARPIndividual_order  | Claims Envelope |
 
@@ -58,8 +58,8 @@ Feature:P1.5 To test order materials in Redesign site
 
     Examples: 
       | planType | memberType | option   |
-  ##    | MA       | UHCGroup      | Replacement ID card |
-  ##    | PDP      | UHCGroup      | Welcome Guide |
+      | MA       | UHCGroup      | Replacement ID card |
+      | PDP      | UHCGroup      | Welcome Guide |
       | MAPD     | UHCGroup2      | Replacement ID card |
 
  @ValidateHeaderComboTabs 
