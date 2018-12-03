@@ -38,7 +38,7 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
       | MAPD     | TEXASERSGroup | Updating Member information | test@optum.com     | test@optum.com            |             9999999999 |                    9999999999 | Thank you for your inquiry. We value your input, and would be happy to answer your questions. A Customer Service Advocate will review your question and respond to you shortly. |
 
   @GroupEmailAQuestionFiledValidations
-  Scenario Outline: Verify Group Email Widget Confirm Request in contact us redesign page
+  Scenario Outline: Verify Group Email Widget Confirm Request in contact us redesign page with error messages
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |
       | Member Type | <memberType> |

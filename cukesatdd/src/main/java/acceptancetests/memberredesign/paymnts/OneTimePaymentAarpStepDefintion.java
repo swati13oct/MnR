@@ -193,7 +193,6 @@ public class OneTimePaymentAarpStepDefintion {
 	
 	@Then("^User Scrolls down to validate Payment History and Scrolls up$")
 	public void Validate_History_Payment() throws InterruptedException{
-		System.out.println("TEST Validate_History_Payment");
 		pages.regression.accounthomepage.AccountHomePage AHPage = (pages.regression.accounthomepage.AccountHomePage) getLoginScenario().getBean(PageConstants.DashPage);
 		PaymentHistoryPage paymentHistoryPage = AHPage.scrollDownAndUp();
 		if (paymentHistoryPage!=null){
