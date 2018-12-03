@@ -251,32 +251,73 @@ Examples:
 
 
 
-#@StandaloneZipcode @Feb_18
+  @StandaloneZipcode @Feb_release_2019
   Scenario Outline: To reach VPP page via standalone Zipcode
     Given the user is on AARP medicare acquisition site landing page
     When the user performs zipcode search using widget following information in the AARP site
-      | Zip Code    | <zipcode> |
+      | Zip Code | <zipcode> |
 
     Examples: 
       | zipcode |
       |   90210 |
-      
-#@StandaloneMA @Feb_18
+
+  @StandaloneZipcode @Feb_release_2019
+  Scenario Outline: Home Zipcode widget To reach Online Enrollment page via standalone Zipcode
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs zipcode search to welcome OLE Page using widget on the AARP site
+      | Zip Code | <zipcode> |
+
+    Examples: 
+      | zipcode |
+      |   90210 |
+
+  @StandaloneMA @Feb_release_2019
   Scenario Outline: To reach VPP page via standalone Zipcode
-   Given the user is on AARP medicare acquisition site landing page
-   When the user goes to MA Landing and performs zipcode search using widget following information in the AARP site
-      | Zip Code    | <zipcode> |    
-      
- Examples: 
-      | zipcode | 
+    Given the user is on AARP medicare acquisition site landing page
+    When the user goes to MA Landing and performs zipcode search using widget following information in the AARP site
+      | Zip Code | <zipcode> |
+
+    Examples: 
+      | zipcode |
+      |   78006 |
+
+  @StandaloneMA @Feb_release_2019
+  Scenario Outline: MA Zipcode widget To reach Online Enrollment via standalone Zipcode
+    Given the user is on AARP medicare acquisition site landing page
+    When the user goes to MA Landing and performs zipcode search using widget to welcome OLE Page using widget on the AARP site
+      | Zip Code | <zipcode> |
+
+    Examples: 
+      | zipcode |
       |   78006 |
       
-#@StandalonePDP @Feb_18
+      @StandaloneMASNP @Feb_release_2019
+  Scenario Outline: MA Special Need plans To reach OLE page via standalone Zipcode
+    Given the user is on AARP medicare acquisition site landing page
+    When the user goes to MA selects Special Need Plans and performs zipcode search using widget to welcome OLE Page using widget on the AARP site
+      | Zip Code | <zipcode> |
+
+    Examples: 
+      | zipcode |
+      |   78006 |
+
+  @StandalonePDP @Feb_release_2019
   Scenario Outline: To reach VPP page via standalone Zipcode
-   Given the user is on AARP medicare acquisition site landing page
-     When the user goes to PDP Landing and performs zipcode search using widget following information in the AARP site
-      | Zip Code    | <zipcode> |    
-      
- Examples: 
-      | zipcode | 
-      |   78006 | 
+    Given the user is on AARP medicare acquisition site landing page
+    When the user goes to PDP Landing and performs zipcode search using widget following information in the AARP site
+      | Zip Code | <zipcode> |
+
+    Examples: 
+      | zipcode |
+      |   78006 |
+
+  @StandalonePDP @Feb_release_2019
+  Scenario Outline: PDP Zipcode widget To reach Online Enrollment via standalone Zipcode
+    Given the user is on AARP medicare acquisition site landing page
+    When the user goes to PDP Landing and performs zipcode search using widget to welcome OLE Page using widget on the AARP site
+      | Zip Code | <zipcode> |
+
+    Examples: 
+      | zipcode |
+      |   78006 |
+ 

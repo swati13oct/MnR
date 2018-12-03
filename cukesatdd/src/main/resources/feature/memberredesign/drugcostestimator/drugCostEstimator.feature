@@ -11,7 +11,9 @@ Then I should not see drug look up on home page
  Examples:
  | planType  | memberType|
  | Medsup    | Ship_AARP_DCE |
-
+ | Group     | SSUP      |
+ | MA		| AARPIndividual_DCE|
+ 
 @drug_cost_estimator1
 Scenario Outline:I1.1 To Verify MR portal members using DCE on a desktop device Pharmacy search tab validation
 Given login with following details logins in the member portal and validate elements

@@ -352,42 +352,73 @@ Examples:
       |   90210 | Los Angeles County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    | HICN     | John      | Doe      | 123456787t     | false   |  01012010 |  01012010 |      231665465 | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | CA   |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | no           | true      |
       
       
- @StandaloneZipcode @Feb_18
+ @StandaloneZipcode @Feb_release_2019
   Scenario Outline: Home Zipcode widget To reach VPP page via standalone Zipcode
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs zipcode search using widget following information in the UHC site
-      | Zip Code    | <zipcode> |    
-      
- Examples: 
-      | zipcode | 
-      |   78006 | 
-      
- @StandaloneMA @Feb_18
+      | Zip Code | <zipcode> |
+
+    Examples: 
+      | zipcode |
+      |   78006 |
+
+  @StandaloneZipcodeOLE @Feb_release_2019
+  Scenario Outline: Home Zipcode widget To reach Online Enrollment page via standalone Zipcode
+    Given the user is on the uhcmedicaresolutions site landing page
+    When the user performs zipcode search to welcome OLE Page using widget on the UHC site
+      | Zip Code | <zipcode> |
+
+    Examples: 
+      | zipcode |
+      |   90210 |
+
+  @StandaloneMA @Feb_release_2019
   Scenario Outline: MA Zipcode widget To reach VPP page via standalone Zipcode
     Given the user is on the uhcmedicaresolutions site landing page
     When the user goes to MA Landing and performs zipcode search using widget following information in the UHC site
-      | Zip Code    | <zipcode> |    
-      
- Examples: 
-      | zipcode | 
-      |   78006 | 
-      
-  @MALandigPlanOptions @Feb_18
-  Scenario Outline: To reach VPP page via standalone Zipcode
+      | Zip Code | <zipcode> |
+
+    Examples: 
+      | zipcode |
+      |   78006 |
+
+  @StandaloneMA @Feb_release_2019
+  Scenario Outline: MA Zipcode widget To reach Online Enrollment via standalone Zipcode
     Given the user is on the uhcmedicaresolutions site landing page
-    When the user goes to MA Landing page Options
-      | Zip Code    | <zipcode> |    
-      
- Examples: 
-      | zipcode | 
-      |   78006 | 
-      
-      @StandalonePDP @Feb_18
+    When the user goes to MA Landing and performs zipcode search using widget to welcome OLE Page using widget on the UHC site
+      | Zip Code | <zipcode> |
+
+    Examples: 
+      | zipcode |
+      |   78006 |
+
+  @StandaloneMASNP @Feb_release_2019
+  Scenario Outline: MA Special Need plans To reach OLE page via standalone Zipcode
+    Given the user is on the uhcmedicaresolutions site landing page
+    When the user goes to MA selects Special Need Plans and performs zipcode search using widget to welcome OLE Page using widget on the UHC site
+      | Zip Code | <zipcode> |
+
+    Examples: 
+      | zipcode |
+      |   78006 |
+
+  @StandalonePDP @Feb_release_2019
   Scenario Outline: PDP Zipcode widget To reach VPP page via standalone Zipcode
-   Given the user is on the uhcmedicaresolutions site landing page
-   When the user goes to PDP Landing and performs zipcode search using widget following information in the UHC site
-      | Zip Code    | <zipcode> |    
-      
- Examples: 
-      | zipcode | 
-      |   78006 | 
+    Given the user is on the uhcmedicaresolutions site landing page
+    When the user goes to PDP Landing and performs zipcode search using widget following information in the UHC site
+      | Zip Code | <zipcode> |
+
+    Examples: 
+      | zipcode |
+      |   78006 |
+
+  @StandalonePDP @Feb_release_2019
+  Scenario Outline: PDP Zipcode widget To reach Online Enrollment via standalone Zipcode
+    Given the user is on the uhcmedicaresolutions site landing page
+    When the user goes to PDP Landing and performs zipcode search using widget to welcome OLE Page using widget on the UHC site
+      | Zip Code | <zipcode> |
+
+    Examples: 
+      | zipcode |
+      |   78006 |
+ 
