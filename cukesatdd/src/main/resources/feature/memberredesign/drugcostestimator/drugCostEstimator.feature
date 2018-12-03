@@ -11,7 +11,8 @@ Then I should not see drug look up on home page
  Examples:
  | planType  | memberType|
  | Medsup    | Ship_AARP_DCE |
-
+ | Group     | SSUP      |
+ | MA		| AARPIndividual_DCE|
 @drug_cost_estimator1
 Scenario Outline:I1.1 To Verify MR portal members using DCE on a desktop device Pharmacy search tab validation
 Given login with following details logins in the member portal and validate elements
@@ -48,7 +49,7 @@ Scenario Outline:I1.1 To Verify MR portal DCE flow covering step1 step 2 and ste
 | Plan Type   | <planType>   |
 | Member Type   | <memberType> |
 When I navigate to drug look up page
-When I delete all added drugs
+When I delete all all added drugs
 When I add branded drug
 | Drug      | <drug1>     |
 | Dosage    | <dosage1>   |
@@ -91,7 +92,7 @@ Examples:
 	|MA_FED_DCE |
 	
 @drug_cost_estimator5 @Member_DCE_sso
-Scenario Outline:I1.3 To Verify MR portal group members DCE should redirect to optum rx sso landing page. 
+Scenaritline:I1.3 To Verify MR portal group members DCE should redirect to optum rx sso landing page. 
 Given login with following details logins in the member portal and validate elements
 | Plan Type   | <planType>   |
 Then I click on drug lookup tile which takes me to optum rx sso landing page  
