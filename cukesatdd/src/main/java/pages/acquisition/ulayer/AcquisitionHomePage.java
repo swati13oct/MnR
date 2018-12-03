@@ -131,6 +131,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='js-ole-plan-select']//optgroup[1]/option[@value=0]")
 	private WebElement selectFirstOptionOnPlanSelect;
 
+	@FindBy(xpath = "//*[@id='js-ole-plan-select']//optgroup[2]/option[1]")
+	private WebElement StandaloneSNPoptions;
+
 	@FindBy(xpath = "//*[@id='js-ole-plan-select']//following::button")
 	private WebElement enrollButton;
 
@@ -145,9 +148,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "//button[text()='View Plans & Pricing']")
 	private WebElement ViewPlansPricingButton;
-
-	@FindBy(xpath = "//*[@class='ng-pristine ng-invalid ng-invalid-required']//select//optgroup[@label='Special Needs Plans']/option[2]")
-	private WebElement StandaloneSNPoptions;
 
 	@FindBy(xpath = "//*[@class='btn--bottom']")
 	private WebElement StandalonSearchCounty;
@@ -933,6 +933,43 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("page took time to load");
 		}
 		selectFirstOptionOnPlanSelect.click();
+		enrollButton.click();
+		if (driver.getCurrentUrl().contains("welcome")) {
+			System.out.println("OLE Welcome Page is Displayed");
+			return new WelcomePage(driver);
+		}
+		return null;
+	}
+
+	public WelcomePage SpecialNeedPlansZipcodeSearchToOLE(String zipcode) {
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			System.out.println("page took time to load");
+		}
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,300)", "");
+
+		sendkeys(StandaloneZipcode, zipcode);
+		StandalonSearchCounty.click();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		try {
+			if (countyDropdown.isDisplayed()) {
+				countyDropdown.click();
+				Thread.sleep(3000);
+				// StandalonSearchCounty.click();
+			}
+
+		} catch (Exception e) {
+			System.out.println("county box not found");
+		}
+		jse.executeScript("window.scrollBy(0,100)", "");
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			System.out.println("page took time to load");
+		}
+		StandaloneSNPoptions.click();
 		enrollButton.click();
 		if (driver.getCurrentUrl().contains("welcome")) {
 			System.out.println("OLE Welcome Page is Displayed");

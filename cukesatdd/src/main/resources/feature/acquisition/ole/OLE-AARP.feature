@@ -290,6 +290,16 @@ Examples:
     Examples: 
       | zipcode |
       |   78006 |
+      
+      @StandaloneMASNP @Feb_release_2019
+  Scenario Outline: MA Special Need plans To reach OLE page via standalone Zipcode
+    Given the user is on AARP medicare acquisition site landing page
+    When the user goes to MA selects Special Need Plans and performs zipcode search using widget to welcome OLE Page using widget on the AARP site
+      | Zip Code | <zipcode> |
+
+    Examples: 
+      | zipcode |
+      |   78006 |
 
   @StandalonePDP @Feb_release_2019
   Scenario Outline: To reach VPP page via standalone Zipcode
