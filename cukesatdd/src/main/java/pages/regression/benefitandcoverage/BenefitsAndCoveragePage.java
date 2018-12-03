@@ -36,6 +36,7 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import cucumber.api.DataTable;
 
 /**
  * @Functionality : To check Benefits and Coverage page
@@ -654,8 +655,126 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(xpath = "//input[@class='btn btn--primary btn_removeRider_atdd']")
 	private WebElement removeRiderButtonOnPopup;
-
+	
+	//backtotop
+	//*[@id="backToTopContainer"]/a/span/p
+	@FindBy(xpath = "//*[@id='backToTopContainer']/a/span/p")
+	private WebElement linkBackToTop;
+	
+	
+	
+	//MAPD_UHC jump links
+	
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']//*/li[1]/a[contains(text(),'Medical Copays or Coinsurance')]")
+	private WebElement jmpLinkToMedicalCopaysOrCoinsurance;
+		
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']//*/li[2]/a[contains(text(),'Out-of-Pocket Maximum')]")
+	private WebElement jmpLinkToOutofPocketMaximum;
+	
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']//*/li[3]/a[contains(text(),'Primary Care Provider')]")
+	private WebElement jmpLinkToPrimaryCareProvider;
+	
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']//*/li[5]/a[contains(text(),'Drug Copays & Discounts')]")
+	private WebElement jmpLinkToDrugCopaysAndDiscounts;
+	
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']//*/li[6]/a[contains(text(),'Drug Coverage')]")
+	private WebElement jmpLinkToDrugCoverage;
+	
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']//*/li[7]/a[contains(text(),'Plan Documents and Resources')]")
+	private WebElement jmpLinkToPlanDocumentsAndResources;
+	
+	@FindBy(xpath = "(//*[@id='globalContentIdForSkipLink']//*/li[4]/a)[1]")
+	private WebElement jmpLinkToOptionalServicesRiders;
+		
+	@FindBy(xpath = "(//*[contains(text(),'Out-of-Pocket Maximum')])[2]")
+	private WebElement outOfPocketSectionHeader;
+	
 	private static String PAGE_URL = MRConstants.STAGE_DASHBOARD_NEW_DOMAIN_URL;
+	
+	@FindBy(xpath = "//*[@id='drug-benefits']//*/h2")
+	private WebElement DrugCopaysAndDiscountsSectionHeader;
+	
+	@FindBy(xpath = "//*[@id='drugCoverage']//*/span")
+	private WebElement DrugCoverageSectionHeader;
+	
+	@FindBy(xpath = "//*[@id='plan_benefit_documents']//*/h2")
+	private WebElement PlanDocumentsAndResourcesSectionHeader;
+	
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']//*/div[5]/div/div/div/div/ul/li")
+	private List<WebElement> directorySection;
+	
+	@FindBy(xpath = "//*[@id='avail-riders']//*/h2")
+	private WebElement OptionalServicesRidersSectionHeader;
+	
+	
+	
+	
+	
+	public WebElement getJmpLinkToOptionalServicesRiders() {
+		return jmpLinkToOptionalServicesRiders;
+	}
+
+	public WebElement getOptionalServicesRidersSectionHeader() {
+		return OptionalServicesRidersSectionHeader;
+	}
+
+	public WebElement getLinkBackToTop() {
+		return linkBackToTop;
+	}
+	
+	public List<WebElement> getDirectorySection() {
+		return directorySection;
+	}
+
+	public WebElement getDrugCoverageSectionHeader() {
+		return DrugCoverageSectionHeader;
+	}
+
+	public WebElement getPlanDocumentsAndResourcesSectionHeader() {
+		return PlanDocumentsAndResourcesSectionHeader;
+	}
+	
+	
+	
+	public WebElement getDrugCopaysAndDiscountsSectionHeader() {
+		return DrugCopaysAndDiscountsSectionHeader;
+	}
+
+	public WebElement getOutOfPocketSectionHeader() {
+		return outOfPocketSectionHeader;
+	}
+
+	public WebElement getJmpLinkToMedicalCopaysOrCoinsurance() {
+		return jmpLinkToMedicalCopaysOrCoinsurance;
+	}
+
+	public WebElement getJmpLinkToOutofPocketMaximum() {
+		return jmpLinkToOutofPocketMaximum;
+	}
+
+	public WebElement getJmpLinkToPrimaryCareProvider() {
+		return jmpLinkToPrimaryCareProvider;
+	}
+
+	public WebElement getJmpLinkToDrugCopaysAndDiscounts() {
+		return jmpLinkToDrugCopaysAndDiscounts;
+	}
+
+	public WebElement getJmpLinkToDrugCoverage() {
+		return jmpLinkToDrugCoverage;
+	}
+
+	public WebElement getJmpLinkToPlanDocumentsAndResources() {
+		return jmpLinkToPlanDocumentsAndResources;
+	}
+	
+	public WebElement getCopayscoinsuranceheader() {
+		return Copayscoinsuranceheader;
+	}
+	
+	public WebElement getPrimaryCareProviderHeaderInd() {
+		return PrimaryCareProviderHeaderInd;
+	}
 
 	public static final String learnmorestagetext_xpath = ".//*[@id='collapseStages']";
 
@@ -3068,5 +3187,73 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 		return new FormsAndResourcesPage(driver);
 	}
+	
+	
+	public void verifyPresenceOfJumpLinksMAPD(String rider) {
+		CommonUtility.waitForPageLoad(driver,logoImage,15);
+		Assert.assertTrue("jmpLinkToMedicalCopaysOrCoinsurance isn't displayed", getJmpLinkToMedicalCopaysOrCoinsurance().isDisplayed());
+		Assert.assertTrue("jmpLinkToOutofPocketMaximum isn't displayed", getJmpLinkToOutofPocketMaximum().isDisplayed());
+		Assert.assertTrue("jmpLinkToPrimaryCareProvider isn't displayed", getJmpLinkToPrimaryCareProvider().isDisplayed());
+		if(rider.toString().trim().equals("Rider"))
+			Assert.assertTrue("jmpLinkToPrimaryCareProvider isn't displayed", getJmpLinkToOptionalServicesRiders().isDisplayed());
+		Assert.assertTrue("jmpLinkToDrugCopaysAndDiscounts isn't displayed", getJmpLinkToDrugCopaysAndDiscounts().isDisplayed());
+		Assert.assertTrue("jmpLinkToDrugCoverage isn't displayed", getJmpLinkToDrugCoverage().isDisplayed());
+		Assert.assertTrue("jmpLinkToPlanDocumentsAndResources isn't displayed", getJmpLinkToPlanDocumentsAndResources().isDisplayed());
+		System.out.println("All Jump links are displyed for the MAPD Plan");
+			
+	}
+
+	
+	public void clicksOnJumpLinksAndCheckRespectiveSectionsMAPD(String rider) {
+		
+		clicksOnLinkAndBackToTop(getJmpLinkToMedicalCopaysOrCoinsurance(),getCopayscoinsuranceheader());
+		clicksOnLinkAndBackToTop(getJmpLinkToOutofPocketMaximum(),getOutOfPocketSectionHeader());
+		clicksOnLinkAndBackToTop(getJmpLinkToPrimaryCareProvider(),getPrimaryCareProviderHeaderInd());
+		if(rider.toString().trim().equals("Rider"))
+			clicksOnLinkAndBackToTop(getJmpLinkToOptionalServicesRiders(),getOptionalServicesRidersSectionHeader());
+		clicksOnLinkAndBackToTop(getJmpLinkToDrugCopaysAndDiscounts(),getDrugCopaysAndDiscountsSectionHeader());
+		clicksOnLinkAndBackToTop(getJmpLinkToDrugCoverage(),getDrugCoverageSectionHeader());
+		clicksOnLinkAndBackToTop(getJmpLinkToPlanDocumentsAndResources(),getPlanDocumentsAndResourcesSectionHeader());
+		System.out.println("All sections are present for the MAPD Plan");
+			
+	}
+	
+	public void verifyElementPresence(WebElement element) {
+		Assert.assertTrue("Section/Link isn't displayed",element.isDisplayed());
+		System.out.println(element.getText());	
+	}
+	
+	public void clicksOnLinkAndBackToTop(WebElement element_1,WebElement element_2 ) {
+		element_1.click();
+		
+		try {
+			Thread.sleep(1000);        //Added sleep to mimic user interaction 
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		verifyElementPresence(element_2);
+		getLinkBackToTop().click();
+		try {
+			Thread.sleep(1000);		  //Added sleep to mimic user interaction 
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void directoryLinksCount(int linkCount,String rider) {
+		int count =getDirectorySection().size()-1;
+		if(rider.toString().trim().equals("Rider"))
+			count+=1;
+		
+		Assert.assertTrue("Irrelevant links are present", count==linkCount);
+		System.out.println("No irrelevant links found");
+		
+	}
+	
+	
+	
+	
 
 }
