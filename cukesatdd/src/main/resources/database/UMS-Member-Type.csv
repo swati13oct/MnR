@@ -171,9 +171,11 @@ q2_jun_uhc0018/Password@1,MAPD,IndividualUHCPayments,
 q2_jun_aarp0147/Password@1,MAPD,IndividualAARPRPayments,
 q2_june_combo0012/Password@1,COMBO,COMBOAARPPayments,
 q2_jun_ship0003/Password@1,PDP,UHCGroup,Ship_AARP_DCE
+q2_jun_ship0003/Password@1,Medsup,Ship_AARP_DCE
 q2_jun_aarp0057/Password@1,MAPD,IndividualDCEmember_DCE,
 q2_jun_aarp0058/Password@1,MAPD,Individualwithpharmacy_DCE
 q2_jun_aarp0059/Password@1,MAPD,Individualwithoutpharmacy_DCE
+q2_jun_aarp0070/Password@1,MA,AARPIndividual_DCE
 ATDD_q2_jun_blayer123/Password@1,MAPD,COSMOS_dce,
 q2_jun_grp0014/Password@1,MAPD_GROUP_DCE,,
 q2_jun_grp0022/Password@1,PDP_GROUP_DCE,,
