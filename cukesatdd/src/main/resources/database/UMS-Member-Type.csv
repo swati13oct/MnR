@@ -195,3 +195,5 @@ q2_jun_ship0010/Password@1,SHIP,SHIPOnlyBranding,NON LIS
 q2_jun_uhc0006/Password@1,MAPD,IDCardmember,
 q2_jun_aarp0070/Password@1,MA,IDCardmember,
 q2_jun_aarp0208/Password@1,PDP,IDCardmember,
+q2_jun_uhc0011/Password@1,MAPD,Individual,NON LIS,Rider
+q2_jun_uhc0001/Password@1,MAPD,Individual,NON LIS,NoRider
