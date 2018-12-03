@@ -45,6 +45,8 @@ public static final String ACCOUNT_HOME_PAGE = "accountHomePage";
 
 	public static final String ACQUISITION_HOME_PAGE = "acquisitionHomePage";
 	
+	public static final String OLE_WELCOME_PAGE = "welcomeOLEPage";
+	
 	public static final String ACQUISITION_PLANPREVIW_PAGE = "planpreviewPage";
 
 	public static final String UHCRETIREE_ACQ_HOME_PAGE = "uhcRetireeAcqHomePage";
