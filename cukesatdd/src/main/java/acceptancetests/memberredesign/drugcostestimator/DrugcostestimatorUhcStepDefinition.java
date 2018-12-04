@@ -45,7 +45,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		return loginScenario;
 	}
 
-	@Given("^I am a registered member using the new M&R member portal on a desktop computer blayer dce$")
+	@Given("^I am a registered member using the new M&R member portal on a desktop computer$")
 	public void i_am_an_uhc_individual_member_on_the_dashboard_site(DataTable memberAttributes) {
 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -95,7 +95,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
 
 	}
-	@Given("^I am an UHC Individual member on the Dashboard site SmartPhone blayer dce$")
+	@Given("^I am an UHC Individual member on the Dashboard site SmartPhone$")
 	public void i_am_an_uhc_individual_member_on_the_dashboard_site_smartphone(DataTable memberAttributes) {
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
@@ -135,7 +135,7 @@ public class DrugcostestimatorUhcStepDefinition {
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 		}
 	}
-	@When("^plantype user logs in mobile in UHC Site blayer dce$")
+	@When("^plantype user logs in mobile in UHC Site$")
 	public void the_above_plantype_user_logs_in_mobile() {
 		String userName = (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
 		String pwd = (String) getLoginScenario().getBean(LoginCommonConstants.PASSWORD);
@@ -152,7 +152,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
 
 	}
-	@When("^the above plantype user logs in UMS Site Desktop blayer dce$")
+	@When("^the above plantype user logs in UMS Site Desktop$")
 	public void plantype_user_logs_in() {
 		String userName = (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
 		String pwd = (String) getLoginScenario().getBean(LoginCommonConstants.PASSWORD);
@@ -168,7 +168,7 @@ public class DrugcostestimatorUhcStepDefinition {
 
 	}
 
-	@When("^I use the DCE tool to enter one or more drugs to my drug list blayer dce$")
+	@When("^I use the DCE tool to enter one or more drugs to my drug list$")
 	public void I_use_the_DCE_tool_to_enter_one_or_more_drugs_to_my_drug_list(DataTable data) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String drug = memberAttributesRow.get(1).getCells().get(0);
@@ -182,7 +182,7 @@ public class DrugcostestimatorUhcStepDefinition {
 	}
 
 
-	@Then("^I should be able to edit that list by either adding drugs up to a total of 25 or subtracting drugs at any time while using the tool blayer dce$")
+	@Then("^I should be able to edit that list by either adding drugs up to a total of 25 or subtracting drugs at any time while using the tool$")
 	public void i_navigate_edit_drugs() throws InterruptedException {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
@@ -193,18 +193,18 @@ public class DrugcostestimatorUhcStepDefinition {
 
 	}
 
-	@And("^I should see my drug list appear responsively to my device blayer dce$")
+	@And("^I should see my drug list appear responsively to my device$")
 	public void i_should_see_my_drug_lists(){
 	}
 
-	@Then("^I should be see dosage, package and frequency options returned from the DCE web service blayer dce$")
+	@Then("^I should be see dosage, package and frequency options returned from the DCE web service$")
 	public void i_should_be_see_dosage_package_and_frequency_options_returned_from_the_DCE_web_service(){
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		AddNewDrugModal addNewDrugModal = new AddNewDrugModal(wd);
 		addNewDrugModal.selectDrug("Lip-EX");
 	}
 
-	@And("^I should be able to change those options at any time blayer dce$")
+	@And("^I should be able to change those options at any time$")
 	public void i_should_be_able_to_change_those_options_at_any_time(){
 
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
@@ -212,7 +212,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		addDrugDetails.selectFrequency("Every 3 Months");
 		addDrugDetails.selectQnty("14");
 	}
-	@And("^I should have the ability to advance to the next step in the flow blayer dce$")
+	@And("^I should have the ability to advance to the next step in the flow$")
 	public void i_should_have_the_ability_to_advance_to_the_next_step_in_the_flow() throws InterruptedException{
 		System.out.println(" PASSED : ");
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
@@ -220,7 +220,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		addDrugDetails.continueAddDrugDetails();
 	}
 
-	@Then("^I should see the Pharmacy search tab as a clickable element within the DCE tool blayer dce$")
+	@Then("^I should see the Pharmacy search tab as a clickable element within the DCE tool$")
 	public void i_should_see_the_pharmacy_search() throws InterruptedException{
 		/*List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String drug = memberAttributesRow.get(1).getCells().get(0);
@@ -256,7 +256,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		dce.navigateToStep2();
 
 	}
-	@And("^I should be able to move forward or backward in the tool flow blayer dce$")
+	@And("^I should be able to move forward or backward in the tool flow$")
 	public void i_should_be_able_to_move_forward_backward() throws InterruptedException{
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		//dce.navigateToStep2();
@@ -264,23 +264,23 @@ public class DrugcostestimatorUhcStepDefinition {
 		dce.backwardToStep1();
 		dce.navigateToStep2();
 	}
-	@And("^I should see Drug List as an active tab in the DCE tool upon click blayer dce$")
+	@And("^I should see Drug List as an active tab in the DCE tool upon click$")
 	public void i_should_see_drug_list_as_active() throws InterruptedException{
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.changeUrlToNewDCEPage();
 	}
-	@And("^I should be able to click on Add a Drug blayer dce$")
+	@And("^I should be able to click on Add a Drug$")
 	public void i_should_be_able_to_click_AddDrug() throws InterruptedException{
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		AddNewDrugModal addNewDrugModal = dce.clickOnAddDrug();
 		getLoginScenario().saveBean(PageConstants.ADD_DRUG_PAGE, addNewDrugModal);
 	}
-	@And("^the Add a Drug search modal should launch blayer dce$")
+	@And("^the Add a Drug search modal should launch$")
 	public void the_add_a_drug_search_modal_should_launch(){
 		AddNewDrugModal addNewDrugModal = (AddNewDrugModal) getLoginScenario().getBean(PageConstants.ADD_DRUG_PAGE);
 		addNewDrugModal.openAndValidate();
 	}
-	@And("^I should be able to add up to 25 drugs to my drug list blayer dce$")
+	@And("^I should be able to add up to 25 drugs to my drug list$")
 	public void i_should_be_able_to_add_upto25_drugs(DataTable data) throws InterruptedException{
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String drug = memberAttributesRow.get(1).getCells().get(0);
@@ -288,20 +288,20 @@ public class DrugcostestimatorUhcStepDefinition {
 		dce.addDrugs(26,drug);
 
 	}
-	@And("^I should have the ability to advance to the next step in the DCE flow after successfully creating a drug list with at least one drug blayer dce$")
+	@And("^I should have the ability to advance to the next step in the DCE flow after successfully creating a drug list with at least one drug$")
 	public void i_should_be_able_to_advance_dceflows(){
 		AddNewDrugModal addNewDrugModal = (AddNewDrugModal) getLoginScenario().getBean(PageConstants.ADD_DRUG_PAGE);
 		addNewDrugModal.cancel();
 	}
 
-	@And("^I enter at least four characters of the drug name in the Enter Drug Name field but not the exact drug name blayer dce$")
+	@And("^I enter at least four characters of the drug name in the Enter Drug Name field but not the exact drug name$")
 	public void i_enter_at_least_four_chars_of_drugname(DataTable data){
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String drug = memberAttributesRow.get(1).getCells().get(0);
 		AddNewDrugModal addNewDrugModal = (AddNewDrugModal) getLoginScenario().getBean(PageConstants.ADD_DRUG_PAGE);
 		addNewDrugModal.typeDrugName(drug);
 	}
-	@Then("^I should see a list of approximate search results to choose from blayer dce$")
+	@Then("^I should see a list of approximate search results to choose from$")
 	public void i_should_see_a_list_of_search_results(DataTable data){
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String drug = memberAttributesRow.get(1).getCells().get(0);
@@ -309,7 +309,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		addNewDrugModal.selectAdrugFromAutoCompleteSuggestions(drug);
 
 	}
-	@Then("^I should be able to select a drug from the list blayer dce$")
+	@Then("^I should be able to select a drug from the list$")
 	public void i_should__be_able_to_select_a_drug_from_list() throws InterruptedException{
 		AddNewDrugModal addNewDrugModal = (AddNewDrugModal) getLoginScenario().getBean(PageConstants.ADD_DRUG_PAGE);
 		AddDrugDetails addDrugDetails = addNewDrugModal.submit();
@@ -317,7 +317,7 @@ public class DrugcostestimatorUhcStepDefinition {
 			getLoginScenario().saveBean(PageConstants.ADD_DRUG_DETAILS, addDrugDetails);
 		//addDrugDetails.validateThePage();
 	}
-	@Then("^the modal should refresh to the next step in the flow if I select one of the suggested results blayer dce$")
+	@Then("^the modal should refresh to the next step in the flow if I select one of the suggested results$")
 	public void the_modal_should_regresh() throws InterruptedException{
 		AddDrugDetails addDrugDetails = (AddDrugDetails) getLoginScenario().getBean(PageConstants.ADD_DRUG_DETAILS);
 		SavingsOppurtunity savingsOppurtunity = addDrugDetails.continueAddDrugDetails();
@@ -335,7 +335,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		System.out.println(" hurray : ");
 	}*/
 
-	@And("^the user selects the pharmacy tab information like miles, zipcode and pharmacy type blayer dce$")
+	@And("^the user selects the pharmacy tab information like miles, zipcode and pharmacy type$")
 	public void navigate_drugcostestimator_pharmacytab(DataTable memberAttributes) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = memberAttributes
 				.getGherkinRows();
@@ -356,13 +356,13 @@ public class DrugcostestimatorUhcStepDefinition {
 	}
 
 
-	@Then("^the user should be able to validate the pharmacy information blayer dce$")
+	@Then("^the user should be able to validate the pharmacy information$")
 	public void validate_pharmacy_information(){
 
 	}
 
 
-	@Then("^I should see enter your drugs text blayer dce$")
+	@Then("^I should see enter your drugs text$")
 	public void I_should_see_enter_your_drugs_text() {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
@@ -372,7 +372,7 @@ public class DrugcostestimatorUhcStepDefinition {
 	}
 
 
-	@Then("^I should see at most 3 drugs under drugs heading blayer dce$")
+	@Then("^I should see at most 3 drugs under drugs heading$")
 	public void I_should_see_at_most_3_drugs_under_drugs_heading(DataTable memberAttributes) {
 		List<DataTableRow> memberAttributesRow = memberAttributes
 				.getGherkinRows();
@@ -395,7 +395,7 @@ public class DrugcostestimatorUhcStepDefinition {
 	}
 
 
-	@Then("^I should see some others text on the page blayer dce$")
+	@Then("^I should see some others text on the page$")
 	public void I_should_see_some_x_others_text_on_the_page(DataTable data) {
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String otherscount = memberAttributesRow.get(1).getCells().get(0);
@@ -408,7 +408,7 @@ public class DrugcostestimatorUhcStepDefinition {
 	}
 
 
-	@Then("^I will see introductory text that will display the summary header blayer dce$")
+	@Then("^I will see introductory text that will display the summary header$")
 	public void I_will_see_introductory_text_that_will_display_the_summary_header() {
 		// Express the Regexp above with the code you wish you had
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
@@ -418,7 +418,7 @@ public class DrugcostestimatorUhcStepDefinition {
 	}
 
 
-	@When("^I access the page containing the DCE tool blayer dce$")
+	@When("^I access the page containing the DCE tool$")
 	public void I_access_the_page_containing_the_DCE_tool() throws InterruptedException {
 
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
@@ -429,7 +429,7 @@ public class DrugcostestimatorUhcStepDefinition {
 	}
 
 
-	@Then("^I should not see the drug with Dosage in the list blayer dce$")
+	@Then("^I should not see the drug with Dosage in the list$")
 	public void I_should_not_see_the_drug_with_Dosage_in_the_list(DataTable data) {
 
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
@@ -439,7 +439,7 @@ public class DrugcostestimatorUhcStepDefinition {
 	}
 
 
-	@When("^I delete the drug with Dosage blayer dce$")
+	@When("^I delete the drug with Dosage$")
 	public void I_delete_the_drug_with_Dosage(DataTable data) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String dosage = memberAttributesRow.get(0).getCells().get(1);
@@ -451,7 +451,7 @@ public class DrugcostestimatorUhcStepDefinition {
 
 
 
-	@When("^I edit the drug with Dosage and Quantity and frequency blayer dce$")
+	@When("^I edit the drug with Dosage and Quantity and frequency$")
 	public void I_edit_the_drug_as_with_Dosage_and_Quantity_and_frequency(DataTable memberAttributes) throws Exception {
 
 		List<DataTableRow> memberAttributesRow = memberAttributes
@@ -484,7 +484,7 @@ public class DrugcostestimatorUhcStepDefinition {
 
 
 
-	@Then("^I should see drug with Dosage and Quantity and frequency added to the list blayer dce$")
+	@Then("^I should see drug with Dosage and Quantity and frequency added to the list$")
 	public void I_should_see_drug_with_Dosage_and_Quantity_and_frequency_added_to_the_list(DataTable memberAttributes) {
 		// Express the Regexp above with the code you wish you had
 		//	WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
@@ -505,7 +505,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		dce.validateAddedDrug(dosage,quantity,frequency);
 	}
 
-	@Then("^I should validate drug with Dosage and Quantity and frequency edited to the list blayer dce$")
+	@Then("^I should validate drug with Dosage and Quantity and frequency edited to the list$")
 	public void I_should_validate_drug_with_Dosage_and_Quantity_and_frequency_edited_to_the_list(DataTable memberAttributes) {
 		// Express the Regexp above with the code you wish you had
 		//	WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
@@ -528,7 +528,7 @@ public class DrugcostestimatorUhcStepDefinition {
 
 
 
-	@When("^I add the drug which does not have its generic with Dosage and Quantity and frequency to the list blayer dce$")
+	@When("^I add the drug which does not have its generic with Dosage and Quantity and frequency to the list$")
 	public void I_add_the_drug_which_doesnot_have_its_generic_with_Dosage_and_Quantity_and_frequency_to_the_list(DataTable memberAttributes) throws Exception {
 		List<DataTableRow> memberAttributesRow = memberAttributes
 				.getGherkinRows();
@@ -563,7 +563,7 @@ public class DrugcostestimatorUhcStepDefinition {
 	}
 
 
-	@When("^I add the drug with Dosage and Quantity and frequency to the list blayer dce$")
+	@When("^I add the drug with Dosage and Quantity and frequency to the list$")
 	public void I_add_the_drug_as_with_Dosage_and_Quantity_and_frequency_to_the_list(DataTable memberAttributes) throws Exception {
 
 		List<DataTableRow> memberAttributesRow = memberAttributes
@@ -603,7 +603,7 @@ public class DrugcostestimatorUhcStepDefinition {
 
 	}
 
-	@Then("^the drug list tab will display drugs heading blayer dce$")
+	@Then("^the drug list tab will display drugs heading$")
 	public void the_drug_list_tab_will_display_drugs_heading(){
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
@@ -612,7 +612,7 @@ public class DrugcostestimatorUhcStepDefinition {
 	}
 
 
-	@And("^I navigate to step2 page blayer dce$")
+	@And("^I navigate to step2 page$")
 	public void I_navigate_to_step2_page () throws InterruptedException
 	{
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
@@ -620,7 +620,7 @@ public class DrugcostestimatorUhcStepDefinition {
 
 	}
 
-	@When("^we search the pharmacy within miles zipcode and pharmacy type blayer dce$")
+	@When("^we search the pharmacy within miles zipcode and pharmacy type$")
 	public void we_search_the_pharmacy_within_miles_zipcode_and_pharmacy_type(DataTable memberAttributes) throws InterruptedException{
 		List<DataTableRow> memberAttributesRow = memberAttributes
 				.getGherkinRows();
@@ -645,7 +645,7 @@ public class DrugcostestimatorUhcStepDefinition {
 
 	}
 
-	@Then("^I should see pharmacy results as per the filter blayer dce$")
+	@Then("^I should see pharmacy results as per the filter$")
 	public void we_search_the_pharmacy_within_miles_zipcode_and_pharmacy_type()
 	{
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
@@ -653,20 +653,20 @@ public class DrugcostestimatorUhcStepDefinition {
 
 	}
 
-	@Then("^I should able to select all miles option from dropdown blayer dce$")
+	@Then("^I should able to select all miles option from dropdown$")
 	public void I_should_able_to_select_all_miles_option_from_dropdown() throws InterruptedException {
 
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.validateselectRadius(); 
 	}
 
-	@Then("^I should able to select all the pharmacy type blayer dce$")
+	@Then("^I should able to select all the pharmacy type$")
 	public void I_should_able_to_select_all_the_pharmacy_type() throws InterruptedException {
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);  
 		dce.validateselectPharmacyType();
 
 	}
-	@Then("^I should see default miles zipcode and pharmacy type blayer dce$")
+	@Then("^I should see default miles zipcode and pharmacy type$")
 	public void I_should_see_default_miles_zipcode_and_pharmacy_type(DataTable memberAttributes) {
 
 		List<DataTableRow> memberAttributesRow = memberAttributes
@@ -690,7 +690,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		dce.validateDefaultStep2(zipcode, radius, Pharmacy_type);
 	}
 
-	@When("^I select the first pharmacy blayer dce$")
+	@When("^I select the first pharmacy$")
 	public void I_select_the_drug() throws InterruptedException {
 
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
@@ -698,7 +698,7 @@ public class DrugcostestimatorUhcStepDefinition {
 
 	}
 
-	@When("^I select the first pharmacy from the list blayer dce$")
+	@When("^I select the first pharmacy from the list$")
 	public void I_select_the_Pharmacy_type(DataTable arg1) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = arg1.getGherkinRows();
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
@@ -706,7 +706,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		dce.selectPharmacyType(phar_type);
 	}
 
-	@Then("^I should not see cost saving message for this pharmacy blayer dce$")
+	@Then("^I should not see cost saving message for this pharmacy$")
 	public void I_should_not_see_cost_saving_message_for_this_pharmacy() {
 
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
@@ -715,7 +715,7 @@ public class DrugcostestimatorUhcStepDefinition {
 	}
 
 
-	@Then("^I should see cost saving message for this pharmacy blayer dce$")
+	@Then("^I should see cost saving message for this pharmacy$")
 	public void I_should_see_cost_saving_message_for_this_pharmacy(DataTable arg1) {
 
 		List<DataTableRow> memberAttributesRow = arg1.getGherkinRows();
@@ -724,7 +724,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		dce.validate_cost_saving_present(pharmacy_type);
 	}
 
-	@Then("^I should not see pharmacy saver radio button under pharmacy type blayer dce$")
+	@Then("^I should not see pharmacy saver radio button under pharmacy type$")
 	public void I_should_not_see_pharmacy_saver_radio_button_under_pharmacy_type() {
 
 		//List<DataTableRow> memberAttributesRow = arg1.getGherkinRows();
@@ -734,7 +734,7 @@ public class DrugcostestimatorUhcStepDefinition {
 
 	}
 
-	@Then("^I should see pharmacy saver pharmacies in results blayer dce$")
+	@Then("^I should see pharmacy saver pharmacies in results$")
 	public void I_should_see_pharmacy_saver_pharmacies_in_results() {
 
 		//List<DataTableRow> memberAttributesRow = arg1.getGherkinRows();
@@ -743,7 +743,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		dce.validate_pharmacy_saver_result();
 	}
 
-	@And("^I fail to enter at least four characters of the drug name when attempting to advance in the flow blayer dce$")
+	@And("^I fail to enter at least four characters of the drug name when attempting to advance in the flow$")
 	public void  I_fail_to_enter_at_least_four_characters_of_the_drug_name_when_attempting_to_advance_in_the_flow(DataTable data){
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String drug = memberAttributesRow.get(1).getCells().get(0);
@@ -751,14 +751,14 @@ public class DrugcostestimatorUhcStepDefinition {
 		addNewDrugModal.typeDrugName(drug);
 	}
 
-	@And("^I should see a default system error message from the current state error messages in the portal database blayer dce$")
+	@And("^I should see a default system error message from the current state error messages in the portal database$")
 	public void  I_should_see_a_default_system_error_message_from_the_current_state_error_messages_in_the_portal_database(){
 
 		AddNewDrugModal addNewDrugModal = (AddNewDrugModal) getLoginScenario().getBean(PageConstants.ADD_DRUG_PAGE);
 		addNewDrugModal.validate_atleast_4_mesg();
 	}
 
-	@Then("^I should see pharmacy type radio button is selected blayer dce$")
+	@Then("^I should see pharmacy type radio button is selected$")
 	public void I_should_see_pharmacy_type_radio_button_is_selected(DataTable data) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String pharmacy_type = memberAttributesRow.get(0).getCells().get(1);
@@ -766,13 +766,13 @@ public class DrugcostestimatorUhcStepDefinition {
 		dce.validate_selected_pharmacy_type(pharmacy_type);
 	}
 
-	@Then("^I should see preferred retail pharmacies as per the filter blayer dce$")
+	@Then("^I should see preferred retail pharmacies as per the filter$")
 	public void I_should_see_preferred_retail_pharmacies_as_per_the_filter() {
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.verify_preferred_retail_pharmacy_result();
 	}
 
-	@When("^I select the pharmacy type blayer dce$")
+	@When("^I select the pharmacy type$")
 	public void I_select_the_pharmacy_type(DataTable data) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String pharmacy_type = memberAttributesRow.get(0).getCells().get(1);
@@ -780,7 +780,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		dce.selectPharmacyType(pharmacy_type);
 	}
 
-	@Then("^I should not see pharmacy button radio button under pharmacy type blayer dce$")
+	@Then("^I should not see pharmacy button radio button under pharmacy type$")
 	public void I_should_not_see_pharmacy_button_radio_button_under_pharmacy_type(DataTable data) {
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String pharmacy_type = memberAttributesRow.get(0).getCells().get(1);
@@ -788,7 +788,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		dce.validate_pharmacy_type_not_present(pharmacy_type);
 	}
 
-	@And("^I enter a US other territory zip code and click select blayer dce$")
+	@And("^I enter a US other territory zip code and click select$")
 	public void I_enter_a_US_other_territory_zip_code_and_click_select(DataTable memberAttributes){
 		List<DataTableRow> memberAttributesRow = memberAttributes
 				.getGherkinRows();
@@ -805,7 +805,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		dce.pharmacyInformation(zipcode);
 	}
 
-	@Then("^I should not see preferred mail service radio button under pharmacy type blayer dce$")
+	@Then("^I should not see preferred mail service radio button under pharmacy type$")
 	public void I_should_not_see_preferred_mail_service_radio_button_under_pharmacy_type(){
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
@@ -813,7 +813,7 @@ public class DrugcostestimatorUhcStepDefinition {
 
 	}
 
-	@And("^I should be able to select the preferred mail service pharmacy blayer dce$")
+	@And("^I should be able to select the preferred mail service pharmacy$")
 	public void I_should_be_able_to_select_the_preferred_mail_service_pharmacy(){
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
@@ -823,7 +823,7 @@ public class DrugcostestimatorUhcStepDefinition {
 	}
 
 
-	@And("^I should be able to select the preferred mail service radio button blayer dce$")
+	@And("^I should be able to select the preferred mail service radio button$")
 	public void I_should_be_able_to_select_the_preferred_mail_service_radio_button() throws InterruptedException{
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
@@ -832,7 +832,7 @@ public class DrugcostestimatorUhcStepDefinition {
 	}
 
 
-	@Then("^I should see preferred mail service radio button under pharmacy type blayer dce$")
+	@Then("^I should see preferred mail service radio button under pharmacy type$")
 	public void I_should_see_preferred_mail_service_radio_button_under_pharmacy_type() {
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
@@ -840,7 +840,7 @@ public class DrugcostestimatorUhcStepDefinition {
 
 	}
 
-	@Then("^I should be able to view the section on the left rail regarding drug cost saving with the link blayer dce$")
+	@Then("^I should be able to view the section on the left rail regarding drug cost saving with the link$")
 	public void drugCostSavingsSectionLeftRail() throws InterruptedException{
 		Thread.sleep(4000);
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
@@ -849,14 +849,14 @@ public class DrugcostestimatorUhcStepDefinition {
 		//dce.clickOnEditDrugListLink();
 	}
 
-	@And("^I should be able to click on the link to go back to step 1 blayer dce$")
+	@And("^I should be able to click on the link to go back to step 1$")
 	public void I_should_be_able_to_click_on_the_link_to_go_back_to_step_1(){
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
 		dce.clickOnEditDrugListLink();
 	}
 
-	@And("^I add lipitor generic and branded drug blayer dce$")
+	@And("^I add lipitor generic and branded drug$")
 	public void I_add_lipitor_generic_and_brand_drug() throws InterruptedException {
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
@@ -868,7 +868,7 @@ public class DrugcostestimatorUhcStepDefinition {
 
 	}
 
-	@And("^I add lipitor generic drug blayer dce$")
+	@And("^I add lipitor generic drug$")
 	public void I_add_lipitor_generic_drug() throws InterruptedException {
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
@@ -878,7 +878,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		//dce.addDrug("atorvastatin calcium");
 	}
 
-	@And("^I select first pharmacy from standard network pharmacy type blayer dce$")
+	@And("^I select first pharmacy from standard network pharmacy type$")
 	public void I_select_this_pharmacy_from_standard_network_pharmacy_type() throws InterruptedException{
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
@@ -887,7 +887,7 @@ public class DrugcostestimatorUhcStepDefinition {
 
 	}
 
-	@Then("^I should see that total estimated annual drug costs in summary section matches with left rail value blayer dce$")
+	@Then("^I should see that total estimated annual drug costs in summary section matches with left rail value$")
 	public void I_should_see_that_total_estimated_annual_drug_costs_in_summary_section_matches_with_left_rail_value(DataTable memberAttributes) throws InterruptedException{
 
 		List<DataTableRow> memberAttributesRow = memberAttributes
@@ -908,7 +908,7 @@ public class DrugcostestimatorUhcStepDefinition {
 
 	}
 
-	@And("^I should see that total available savings in summary section matches with left rail value blayer dce$")
+	@And("^I should see that total available savings in summary section matches with left rail value$")
 	public void I_should_see_that_total_available_savings_in_summary_section_matches_with_left_rail_value(DataTable memberAttributes){
 
 		List<DataTableRow> memberAttributesRow = memberAttributes
@@ -926,7 +926,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		dce.validatetotalAvailableSavings(totalAvailableSavings);
 	}
 
-	@And("^I should see this value for drug cost savings by switching to generics blayer dce$")
+	@And("^I should see this value for drug cost savings by switching to generics$")
 	public void I_should_see_this_value_for_drug_cost_savings_by_switching_to_generics(DataTable memberAttributes) {
 
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
@@ -944,7 +944,7 @@ public class DrugcostestimatorUhcStepDefinition {
 	}
 
 
-	@And("^I should see this value for pharmacy cost savings by switching to recommended pharmacies blayer dce$")
+	@And("^I should see this value for pharmacy cost savings by switching to recommended pharmacies$")
 	public void I_should_see_this_value_for_pharmacy_cost_savings_by_switching_to_recommended_pharmacies(DataTable memberAttributes) {
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
@@ -960,7 +960,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		dce.validatePharmacySavings(pharmacySavings);
 	}
 
-	@And("^I should see this value for initial coverage stage, Coverage Gap stage, Catastrophic Coverage Stage blayer dce$")
+	@And("^I should see this value for initial coverage stage, Coverage Gap stage, Catastrophic Coverage Stage$")
 	public void I_should_see_this_value_for_initial_coverage_stage_Coverage_Gap_stage_Catastrophic_Coverage_Stage(DataTable memberAttributes) {
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
@@ -977,7 +977,7 @@ public class DrugcostestimatorUhcStepDefinition {
 	}
 
 
-	@And("^I should be able to switch to drugs or pharmacy that the tool has recommended blayer dce$")
+	@And("^I should be able to switch to drugs or pharmacy that the tool has recommended$")
 	public void I_should_be_able_to_switch_to_drugs_or_pharmacy_that_the_tool_has_recommended(){
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
@@ -985,14 +985,14 @@ public class DrugcostestimatorUhcStepDefinition {
 	}
 
 
-	@And("^I should not see drug savings and be unable to switch the drugs blayer dce$")
+	@And("^I should not see drug savings and be unable to switch the drugs$")
 	public void I_should_not_see_drug_savings_and_be_unable_to_switch_the_drugs(){
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.validateEditDrugLinkNotPresent();
 	}
 
-	@When("^I use the DCE tool to enter one or more drugs to my drug list and complete the flow blayer dce$")
+	@When("^I use the DCE tool to enter one or more drugs to my drug list and complete the flow$")
 	public void I_use_the_DCE_tool_to_enter_one_or_more_drugs_to_my_drug_list_and_complete_the_flow(DataTable data) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String drug = memberAttributesRow.get(0).getCells().get(1);
@@ -1006,7 +1006,7 @@ public class DrugcostestimatorUhcStepDefinition {
 
 	}
 
-	@And("^I navigate to step2 page and I have selected a pharmacy blayer dce$")
+	@And("^I navigate to step2 page and I have selected a pharmacy$")
 	public void selectPharmacy() throws InterruptedException{
 
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
@@ -1017,7 +1017,7 @@ public class DrugcostestimatorUhcStepDefinition {
 
 	}
 
-	@And("^I navigate to step3 page blayer dce$")
+	@And("^I navigate to step3 page$")
 	public void I_navigate_to_step3_page() throws InterruptedException {
 
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
@@ -1031,20 +1031,20 @@ public class DrugcostestimatorUhcStepDefinition {
 
 
 
-	@Then("^I delete the existing drug if present blayer dce$")
+	@Then("^I delete the existing drug if present$")
 	public void I_delete_the_existing_drug_if_present() throws InterruptedException {
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		//Thread.sleep(10000);
 		dce.delete_all_drugs();
 	}
 
-	@When("^I select the Preferred Mail Service Pharmacy from the pharmacy result if not selected blayer dce$")
+	@When("^I select the Preferred Mail Service Pharmacy from the pharmacy result if not selected$")
 	public void I_select_the_Preferred_Mail_Service_Pharmacy_from_the_pharmacy_result_if_not_selected() throws InterruptedException {
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.selectPharmacyMailServicePharmacy();
 	}
 
-	@When("^I click Learn more about starting home delivery link blayer dce$")
+	@When("^I click Learn more about starting home delivery link$")
 	public void I_click_Learn_more_about_starting_home_delivery_link() throws InterruptedException {
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
@@ -1052,7 +1052,7 @@ public class DrugcostestimatorUhcStepDefinition {
 
 	}
 
-	@Then("^I should see user plan content blayer dce$")
+	@Then("^I should see user plan content$")
 	public void I_should_be_user_plan_content(DataTable data) {
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String plan = memberAttributesRow.get(0).getCells().get(1);
@@ -1064,7 +1064,7 @@ public class DrugcostestimatorUhcStepDefinition {
 
 
 
-	@And("^I have not yet selected pharmacy blayer dce$")
+	@And("^I have not yet selected pharmacy$")
 	public void I_have_not_yet_selected_pharmacy() throws InterruptedException{
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
@@ -1072,14 +1072,14 @@ public class DrugcostestimatorUhcStepDefinition {
 		dce.validatePharmacySelected();
 	}
 
-	@And("^I have selected pharmacy blayer dce$")
+	@And("^I have selected pharmacy$")
 	public void I_have_selected_pharmacy(){
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.validatePharmacySelected();
 	}
 
-	@Then("I should be presented the option to switch to the generic option blayer dce$")
+	@Then("I should be presented the option to switch to the generic option$")
 	public void I_should_be_presented_the_option_to_switch_to_the_generic_option(){
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
@@ -1087,7 +1087,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		dce.validateSwitchGenericOption();
 	}
 
-	@And("^I will see a SWITCH NOW link in the drug tile with appropriate save message blayer dce$")
+	@And("^I will see a SWITCH NOW link in the drug tile with appropriate save message$")
 	public void I_will_see_a_SWITCH_NOW_link_in_the_drug_tile_with_appropriate_save_message(){
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
@@ -1095,7 +1095,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		dce.validateSaveGenericMessage();
 	}
 
-	@And("^I will see a modal appear upon clicking on SWITCH NOW blayer dce$")
+	@And("^I will see a modal appear upon clicking on SWITCH NOW$")
 	public void I_will_see_a_modal_appear_upon_clicking_on_SWITCH_NOW() throws InterruptedException{
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
@@ -1104,14 +1104,14 @@ public class DrugcostestimatorUhcStepDefinition {
 
 	}
 
-	@And("^when I click on the button to accept the generic blayer dce$")
+	@And("^when I click on the button to accept the generic$")
 	public void when_I_click_on_the_button_to_accept_the_generic() throws InterruptedException{
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.clickSwitchToGeneric();
 	}
 
-	@And("^any cost savings will be applied to my total cost savings in Step3 blayer dce$")
+	@And("^any cost savings will be applied to my total cost savings in Step3$")
 	public void any_cost_savings_will_be_applied_to_my_total_cost_savings_in_Step3() throws InterruptedException{
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
@@ -1120,14 +1120,14 @@ public class DrugcostestimatorUhcStepDefinition {
 
 	}
 
-	@Then("^the drug name will automatically update within the Drug List blayer dce$")
+	@Then("^the drug name will automatically update within the Drug List$")
 	public void the_drug_name_will_automatically_update_within_the_Drug_List() throws InterruptedException{
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.isGeneric();
 	}
 
-	@Then("^I will see a SWITCH NOW link in the drug tile with a pharmacy savings cost value blayer dce$")
+	@Then("^I will see a SWITCH NOW link in the drug tile with a pharmacy savings cost value$")
 	public void I_will_see_a_SWITCH_NOW_link_in_the_drug_tile_with_a_pharmacy_savings_cost_value() throws InterruptedException {
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
@@ -1136,7 +1136,7 @@ public class DrugcostestimatorUhcStepDefinition {
 
 	}
 
-	@And("^I have added a drug to my drug list and a generic equivalent is available for the drug I have selected blayer dce$")
+	@And("^I have added a drug to my drug list and a generic equivalent is available for the drug I have selected$")
 	public void I_have_added_a_drug_to_my_drug_list_and_a_generic_equivalent_is_available_for_the_drug_I_have_selected(DataTable data) throws InterruptedException{
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String drug = memberAttributesRow.get(0).getCells().get(1);

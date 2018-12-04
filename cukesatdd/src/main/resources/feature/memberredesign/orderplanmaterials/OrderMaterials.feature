@@ -4,7 +4,7 @@
 @regression_06_06_18
 Feature:P1.5 To test order materials in Redesign site
 
-  @ConfirmationPage 
+  @ConfirmationPage
   Scenario Outline: Verify order materials confirmation page in Redesign site
     Given login with following details logins in the member portal and validate elements
     | Plan Type   | <planType>   |
@@ -24,9 +24,10 @@ Feature:P1.5 To test order materials in Redesign site
       | MAPD     | PCP  | Replacement ID card      |
       | MAPD     | Medica2  | Replacement ID card      | 
       | PDP      |  AARPIndividual | Welcome Guide    |
-      | SHIP     | AARPIndividual  | Claims Envelope |
+      #orig | SHIP     | AARPIndividual  | Claims Envelope |
+      | SHIP     | AARPIndividual_order  | Claims Envelope |
 
-  @ValidateSHIPErrorMessage 
+  @ValidateSHIPErrorMessage
   Scenario Outline: Verify SHIP Invalid selection Order Materials Page Error Message
      Given login with following details logins in the member portal and validate elements
     | Plan Type   | <planType>   |
@@ -41,9 +42,10 @@ Feature:P1.5 To test order materials in Redesign site
 
     Examples: 
       | planType | memberType          |option      | 
-      | SHIP     | AARPIndividual      |Coupon Book | 
+      #orig | SHIP     | AARPIndividual      |Coupon Book | 
+      | SHIP     | AARPIndividual_order      |Coupon Book | 
 
-  @GroupMemberOrderSelectionandConfirmation 
+  @GroupMemberOrderSelectionandConfirmation
   Scenario Outline: Verify order plan materials in Redesign site for radio button validation and Order Confirmation for UHC plan Members
     Given login with following details logins in the member portal and validate elements
     | Plan Type   | <planType>   |

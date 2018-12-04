@@ -49,22 +49,28 @@ public class FooterPage extends UhcDriver {
 	@FindBy(xpath= "//*[@id='termsofuseID']")
 	private WebElement TearmsOfUse;
 	
-	@FindBy(xpath= "//footer//div[contains(@class,'iparys_inherited')]/div/div/div[1]//div[@class='row footerLinks']//p[2]")
+	//@FindBy(xpath= "//footer//div[contains(@class,'iparys_inherited')]/div/div/div[1]//div[@class='row footerLinks']//p[2]")
+	//private WebElement LastUpdate;
+	
+	@FindBy(xpath = "//div[@class='row footerLinks']//*[@id='lastupdated']")
 	private WebElement LastUpdate;
 
-	//@FindBy(xpath= "//footer//div[contains(@class,'iparys_inherited')]/div/div/div[2]//div[@class='row footerLinks']//p[1]")
-	//private WebElement LanguageAssistance;
-	@FindBy(xpath= "//div[2]/div/ul/li/a/span")
+	@FindBy(xpath= "//footer//div[contains(@class,'iparys_inherited')]/div/div/div[2]//div[@class='row footerLinks']//p[1]")
 	private WebElement LanguageAssistance;
+	//note: comment this to use the one above
+	//@FindBy(xpath= "//div[2]/div/ul/li/a/span")
+	//private WebElement LanguageAssistance;
 
-	//@FindBy(xpath= "//footer//div[contains(@class,'iparys_inherited')]/div/div/div[2]//div[@class='row footerLinks']//p[2]")
-	//private WebElement Asistencia;
-	
-	@FindBy(xpath= "//li[2]/a/span")
+	@FindBy(xpath= "//footer//div[contains(@class,'iparys_inherited')]/div/div/div[2]//div[@class='row footerLinks']//p[2]")
 	private WebElement Asistencia;
+	//note: comment this to use the one above
+	//@FindBy(xpath= "//li[2]/a/span")
+	//private WebElement Asistencia;
 
-	@FindBy(xpath= "//a[contains(@href, '/content/dam/UCP/Individual/Non-Discrimination_Form_Chinese.pdf')]")
-	////footer//div[contains(@class,'iparys_inherited')]/div/div/div[2]//div[@class='row footerLinks']//p[3]
+	//@FindBy(xpath= "//a[contains(@href, '/content/dam/UCP/Individual/Non-Discrimination_Form_Chinese.pdf')]")
+	//private WebElement OtherLanguageLink;
+	//note: comment this to use the one below
+	@FindBy(xpath ="//footer//div[contains(@class,'iparys_inherited')]/div/div/div[2]//div[@class='row footerLinks']//p[3]")
 	private WebElement OtherLanguageLink;
 
 	@FindBy(id= "claims_1")
