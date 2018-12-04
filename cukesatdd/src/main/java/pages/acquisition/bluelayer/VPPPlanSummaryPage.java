@@ -470,11 +470,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			System.out.println("View Plan Details Link is clicked for SNP plan"+planName);
 
 		}else if (planName.contains("HMO") || planName.contains("Regional PPO")) {
-			ElementData elementData = new ElementData("id", "viewmoredetlinkmapd");
-			WebElement element = getViewPlanDetailsElement(maPlanElement, elementData, planName);
-			if (element != null) {
-				element.click();
-			}
+			WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//a[contains(text(),'View plan and drug coverage details')]"));
+			CommonUtility.waitForPageLoad(driver, MAmoreDetailsLink, 30);	
+					validate(MAmoreDetailsLink);
+					
+					MAmoreDetailsLink.click();
+					System.out.println("View Plan Details Link is clicked for MA plan"+planName);
+
 		}
 		try {
 			Thread.sleep(5000);
@@ -485,13 +487,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		//CommonUtility.checkPageIsReady(driver);
 		System.out.println("Title is :"+driver.getTitle());
 		System.out.println(driver.getCurrentUrl());
-		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_ADVANTAGE_PLAN_DETAILS)
-				|| driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_SPECIAL_NEEDS_PLAN_DETAILS)
-				|| driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_PRESCRIPTION_DRUG_PLAN_DETAILS)
-				|| driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_PLAN_TYPES_TITLE)) {
-			return new PlanDetailsPage(driver);
+		CommonUtility.checkPageIsReady(driver);
+		if (driver.getCurrentUrl().contains("#/details")) {	
+			return new pages.acquisition.bluelayer.PlanDetailsPage(driver);
 		}
 		return null;
+
 	}
 
 	private WebElement getViewPlanDetailsElement(List<WebElement> maPlanElement2, ElementData elementData,
