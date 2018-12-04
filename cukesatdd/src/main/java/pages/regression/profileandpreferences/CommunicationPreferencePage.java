@@ -20,16 +20,19 @@ public class CommunicationPreferencePage extends UhcDriver {
 	@FindBy(id = "savePaperlessSettings")
 	private WebElement savePrefButton;
 
-	@FindBy(xpath = ".//iframe[@class='preferences']")
+	@FindBy(xpath = ".//iframe[@class='preferences']")  
 	private WebElement iframeEPMP;
 
-	@FindBy(xpath = "//div[@class='tile-block paperless']/div[3]//div[@class='row']/div[1]//div[@class='control__indicator input-options']")
+	//@FindBy(xpath = "//div[@class='tile-block paperless']/div[3]//div[@class='row']/div[1]//div[@class='control__indicator input-options']")
+	@FindBy(xpath = "/html/body/div[2]/div/div/div/div/div/div/ui-view/div/div/div/div[2]/div/div/div[3]/fieldset/div[2]/div/div[1]/fieldset/label/div")
 	private WebElement paperlessRadioBtn;
 
-	@FindBy(xpath = "//div[@class='tile-block paperless']/div[3]//div[@class='row']/div[2]//div[@class='control__indicator input-options']")
+	//@FindBy(xpath = "//div[@class='tile-block paperless']/div[3]//div[@class='row']/div[2]//div[@class='control__indicator input-options']")
+	@FindBy(xpath = "/html/body/div[2]/div/div/div/div/div/div/ui-view/div/div/div/div[2]/div/div/div[3]/fieldset/div[2]/div/div[2]/fieldset/label/div")
 	private WebElement mailRadioBtn;
 
-	@FindBy(xpath = "//div[@class='tile-block paperless']//div[@class='row consent-row']//div[@class='control__indicator red-color-status']")
+	//@FindBy(xpath = "//div[@class='tile-block paperless']//div[@class='row consent-row']//div[@class='control__indicator red-color-status']")
+	@FindBy(xpath = "/html/body/div[2]/div/div/div/div/div/div/ui-view/div/div/div/div[2]/div/div/div[5]/div[1]/label/div[2]")
 	private WebElement agreeCheckBox;
 
 	@FindBy(id = "IPerceptionsEmbed")
@@ -68,7 +71,8 @@ public class CommunicationPreferencePage extends UhcDriver {
 	@FindBy(className = "atdd-notes")
 	private WebElement NoteSection;
 
-	@FindBy(id = "save-prefs-btn-SHIP")
+	//@FindBy(id = "save-prefs-btn-SHIP")
+	@FindBy(xpath = "//*[@id='savePaperlessSettings']")
 	private WebElement savePreferencesButton;
 
 	@FindBy(partialLinkText = "PREFERENCES")
