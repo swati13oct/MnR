@@ -281,12 +281,12 @@ Feature: C1.2To test Profile and Preferences page .
 
     Examples: 
       | userType           |
-      | MAPD_AARP_GOGreen |
-      | MA_AARP_GOGreen   |
-      | PDP_AARP_GOGreen  |
+      | MAPD_AARP_GOGreen_Profilepref |
+      | MA_AARP_GOGreen_Profilepref   |
+      | PDP_AARP_GOGreen_Profilepref  |
       | MA_UHC_GOGreen_Profilepref     |
       | MAPD_UHC_GOGreen_Profilepref   |
-      #| MAPD_GROUP_GOGreen_Profilepref |
+      | MAPD_GROUP_GOGreen_Profilepref |
 
   @EPMPProfilePage
   Scenario Outline: To test end to end regression scenario for EPMP profile page
@@ -317,7 +317,7 @@ Feature: C1.2To test Profile and Preferences page .
       | planType | memberType  | dataType   |
       #| MAPD     | EPMPEnabled | Individual |
 
-  @profilePageForShip  @regression_06_06_18
+  @EMPMprofilePageForShip  @regression_06_06_18
   Scenario Outline: To test end to end regression scenario for EPMP profile page for ship
    #Removed from Regression as EPMP is still in the pipeline for development
     Given login with following details logins in the member portal and validate elements
@@ -404,7 +404,7 @@ Feature: C1.2To test Profile and Preferences page .
       | planType | memberType  | dataType   |
     #  | MAPD     | EPMPEnabled | Terminated |
 
-  @preferencesForComboOnProfile  @regression_06_06_18
+  @EPMPpreferencesForComboOnProfile  @regression_06_06_18
   Scenario Outline: To test end to end regression scenario for account profile and preferences for a combo member
   #Removed from Regression as EPMP is still in the pipeline for development
     Given login with following details logins in the member portal and validate elements
