@@ -1763,6 +1763,14 @@ public void verifies_links_irrelevant_to_the_plan_type_are_not_displayed(DataTab
    
 }
 	
-	
+@And("the user validates the UpdatedText")
+public void userValidatesUpdatedTextSection() {
+			
+	BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+			.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+	planBenefitsCoverage.ValidatePDFTextSection();
+					
+}
+
 	
 }
