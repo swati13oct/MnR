@@ -21,6 +21,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
+import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.PageTitleConstants;
 
 import java.util.ArrayList;
@@ -153,7 +154,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='js-ole-plan-result']/button")
 	private WebElement StandaloneVPP;
 
-	@FindBy(xpath = "//*[@class='ng-pristine ng-invalid ng-invalid-required']//select//optgroup[@label='Special Needs Plans']/option[2]")
+	@FindBy(xpath = "//*[@id='js-ole-plan-select']//optgroup[2]/option[1]")
 	private WebElement StandaloneSNPoptions;
 
 	@FindBy(xpath = "//*[@class='btn--bottom']")
@@ -164,9 +165,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[@id='planTypesColumn']/h3[1]/a")
 	private WebElement MALandingLink;
-	
+
 	@FindBy(xpath = "//*[@id='planTypesColumn']/h3[2]/a")
-    private WebElement PDPLandingLink;
+	private WebElement PDPLandingLink;
 
 	/*
 	 * @FindBy(id = "vpp_selectcounty_box") private WebElement countyModal;
@@ -177,6 +178,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(className = "textalign")
 	private WebElement countyModal1;
+
+	@FindBy(xpath = "//*[@id='js-ole-plan-select']//optgroup[1]/option[@value=0]")
+	private WebElement selectFirstOptionOnPlanSelect;
+
+	@FindBy(xpath = "//*[@id='js-ole-plan-select']//following::button")
+	private WebElement enrollButton;
 
 	/*
 	 * @FindBys(value = { @FindBy(xpath =
@@ -907,22 +914,21 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public RequestHelpAndInformationPage navigateToMaMoreHelpAndInfo() {
-                try {
-                        if (zipCodeField.isDisplayed()) {
-                                CommonUtility.waitForElementToDisappear(driver, zipCodeField,
-                                                CommonConstants.TIMEOUT_30);
-                        }
-                } catch (NoSuchElementException e) {
-                        System.out.println("zipCodeField not found");
-                } catch (TimeoutException ex) {
-                        System.out.println("zipCodeField not found");
-                } catch (Exception e) {
-                        System.out.println("zipCodeField not found");
-                }
-                CommonUtility.waitForPageLoad(driver, requestAgentApptDropdown, 60);
-        		if (validateNew(requestAgentApptDropdown)) {
-                        return new RequestHelpAndInformationPage(driver);
-                }
+		try {
+			if (zipCodeField.isDisplayed()) {
+				CommonUtility.waitForElementToDisappear(driver, zipCodeField, CommonConstants.TIMEOUT_30);
+			}
+		} catch (NoSuchElementException e) {
+			System.out.println("zipCodeField not found");
+		} catch (TimeoutException ex) {
+			System.out.println("zipCodeField not found");
+		} catch (Exception e) {
+			System.out.println("zipCodeField not found");
+		}
+		CommonUtility.waitForPageLoad(driver, requestAgentApptDropdown, 60);
+		if (validateNew(requestAgentApptDropdown)) {
+			return new RequestHelpAndInformationPage(driver);
+		}
 
 		Actions actions = new Actions(driver);
 		PageFactory.initElements(driver, this);
@@ -1200,24 +1206,96 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		MALandingLink.click();
 
-		
-
 	}
-	
-public void OurPlansPDPLanding() {
-		
+
+	public void OurPlansPDPLanding() {
+
 		Actions action = new Actions(driver);
-		action.moveToElement(navigationSectionOurPlansLink).build().perform();		
-			
+		action.moveToElement(navigationSectionOurPlansLink).build().perform();
+
 		PDPLandingLink.click();
-			 
-			 try {
-	             Thread.sleep(15000);
-	             System.out.println("Thread Sleep completed");
-	     } catch (InterruptedException e) {
-	             // TODO Auto-generated catch block
-	             e.printStackTrace();
-	     }
+
+		try {
+			Thread.sleep(15000);
+			System.out.println("Thread Sleep completed");
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public WelcomePage ZipcodeSearchToOLE(String zipcode) {
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			System.out.println("page took time to load");
+		}
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,300)", "");
+
+		sendkeys(StandaloneZipcode, zipcode);
+		StandalonSearchCounty.click();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		try {
+			if (countyDropdown.isDisplayed()) {
+				countyDropdown.click();
+				Thread.sleep(3000);
+				// StandalonSearchCounty.click();
+			}
+
+		} catch (Exception e) {
+			System.out.println("county box not found");
+		}
+		jse.executeScript("window.scrollBy(0,100)", "");
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			System.out.println("page took time to load");
+		}
+		selectFirstOptionOnPlanSelect.click();
+		enrollButton.click();
+		if (driver.getCurrentUrl().contains("welcome")) {
+			System.out.println("OLE Welcome Page is Displayed");
+			return new WelcomePage(driver);
+		}
+		return null;
+	}
+
+	public WelcomePage SpecialNeedPlansZipcodeSearchToOLE(String zipcode) {
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			System.out.println("page took time to load");
+		}
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,300)", "");
+
+		sendkeys(StandaloneZipcode, zipcode);
+		StandalonSearchCounty.click();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		try {
+			if (countyDropdown.isDisplayed()) {
+				countyDropdown.click();
+				Thread.sleep(3000);
+				// StandalonSearchCounty.click();
+			}
+
+		} catch (Exception e) {
+			System.out.println("county box not found");
+		}
+		jse.executeScript("window.scrollBy(0,100)", "");
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			System.out.println("page took time to load");
+		}
+		StandaloneSNPoptions.click();
+		enrollButton.click();
+		if (driver.getCurrentUrl().contains("welcome")) {
+			System.out.println("OLE Welcome Page is Displayed");
+			return new WelcomePage(driver);
+		}
+		return null;
 	}
 
 }

@@ -52,7 +52,7 @@ public class FooterPage extends UhcDriver {
 	//@FindBy(xpath= "//footer//div[contains(@class,'iparys_inherited')]/div/div/div[1]//div[@class='row footerLinks']//p[2]")
 	//private WebElement LastUpdate;
 	
-	@FindBy(xpath = "//div[@class='row footerLinks']//span[@id='lastupdated']")
+	@FindBy(xpath = "//div[@class='row footerLinks']//*[@id='lastupdated']")
 	private WebElement LastUpdate;
 
 	@FindBy(xpath= "//footer//div[contains(@class,'iparys_inherited')]/div/div/div[2]//div[@class='row footerLinks']//p[1]")

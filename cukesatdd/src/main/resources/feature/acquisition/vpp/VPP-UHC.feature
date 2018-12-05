@@ -97,3 +97,22 @@ Then the user validating email and print option in plan compare in UHS site
 Examples:
 |zipcode|
 |90210 | 
+
+@emailAndPrintPlanDetailsuhc @predatorsdecrelease2018
+Scenario Outline: TO click Back to all plans from Top and bottom of the page and verify redirection back to the VPP-Summary page UHC site
+Given the user is on the uhcmedicaresolutions site landing page
+When I access the vpp page
+	|Zip Code| <zipcode> |
+When user views plans of the below plan type in UMS site
+	| Plan Type | <plantype> |
+And the user view plan details of the above selected plan in UMS site vpp 
+	| Plan Name | <planName> |
+Then the user validate the print and email links on the plan Details Page on uhc site
+Then the user validates the functionality of email and print buttons on the plan Details Page on uhc site
+
+Examples:
+|zipcode| planName | plantype |
+|33012 | AARP MedicareComplete Choice Plan 2 (Regional PPO) | MAPD |
+
+
+

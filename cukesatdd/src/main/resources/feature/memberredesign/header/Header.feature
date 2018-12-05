@@ -84,8 +84,8 @@ Then I should not be able to see the Find Care & Costs tab Header
 
 Examples:
  | planType|  memberType  	| 
- | SHIP    |   Individual  |
- | SSUP    |   UHCGroup 	  |
+ | SHIP    |   Individual_header  |
+ | SSUP    |   UHCGroup_header 	  |
  
 
  @Terminated_view @regression_06_06_18
