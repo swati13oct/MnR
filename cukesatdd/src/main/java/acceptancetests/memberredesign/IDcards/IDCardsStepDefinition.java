@@ -75,16 +75,31 @@ public class IDCardsStepDefinition {
 						iDCardPage);
 		}
 		
-		@And("^validate the headers$")
+		@And("^validate the headers for Independent user$")
 		public void validate_the_headers(DataTable givenAttributes)
 		{
+			
 			IDCardPage iDCardPage=(IDCardPage)getLoginScenario().getBean(PageConstants.ID_CARD_PAGE);
 			
-			iDCardPage.validateIDCardPage(givenAttributes);
+			iDCardPage.validateIDCardPage_Ind(givenAttributes);
 			
 			if(iDCardPage != null)				
 				getLoginScenario().saveBean(PageConstants.ID_CARD_PAGE,
 						iDCardPage);
 		}
-	}
+	
+
+@And("^validate the headers for Group User$")
+public void validate_the_headers_Grp(DataTable givenAttributes)
+{
+	
+	IDCardPage iDCardPage=(IDCardPage)getLoginScenario().getBean(PageConstants.ID_CARD_PAGE);
+
+	iDCardPage.validateIDCardPage_grp(givenAttributes);
+
+	if(iDCardPage != null)				
+		getLoginScenario().saveBean(PageConstants.ID_CARD_PAGE,
+				iDCardPage);
+}
+}
 
