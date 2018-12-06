@@ -1386,7 +1386,9 @@ try {
 	                      }
 	      }
 	
-	@And("^the user verifies that the correct pdfs are coming in the plan material section for ship$")
+	//note: Dec2018 - update the step text
+	//@And("^the user verifies that the correct pdfs are coming in the plan material section for ship$")
+	@And("^the user verifies that the correct pdfs are coming in the plan material section$")
 	   public void verifypdfscomingship(DataTable givenAttributes) throws InterruptedException   {
 	         
 		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -1680,12 +1682,16 @@ try {
 						
 	}
 
+	//note: added argument to support SSUP case
 	@And("the user validates the Benefits for MA member")
-	public void userValidatesMAsection() {
+	//public void userValidatesMAsection() {
+	public void userValidatesMAsection(DataTable rows) {
+		List<List<String>> data = rows.raw();				
 				
 		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		planBenefitsCoverage.ValidateMAsection();
+		//planBenefitsCoverage.ValidateMAsection();
+		planBenefitsCoverage.ValidateMAsection(data.get(0).get(1));
 						
 	}
 	
