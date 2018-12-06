@@ -704,10 +704,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	private List<WebElement> directorySection;
 	
 	@FindBy(xpath = "//*[@id='avail-riders']//*/h2")
-	private WebElement OptionalServicesRidersSectionHeader;
+	private WebElement OptionalServicesRidersSectionHeader;	
 	
-	
-	
+	@FindBy(xpath = "(//*[@class='PlanPdf section'])[2]//span[@class='document-list-new margin-none']//li[@class=' clearfix']//span[@class='ng-binding ng-scope'][2]")
+	private WebElement PDFUpdatedText;
 	
 	
 	public WebElement getJmpLinkToOptionalServicesRiders() {
@@ -3253,7 +3253,32 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	}
 	
 	
-	
+	public void ValidatePDFTextSection() {
+		
+		try{
+			Thread.sleep(5000);
+		}catch(Exception e)
+		{
+			System.out.println(e);
+		}
+
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,2900)", "");
+		System.out.println("Page scrolled down");
+		try{
+			Thread.sleep(2000);
+		}catch(Exception e)
+		{
+			System.out.println(e);
+		}
+        if(PDFUpdatedText.getText().contains("Updated"))
+        {		
+			Assert.assertTrue("The UpdatedText is present", true);
+		} else {
+			Assert.assertFalse("The UpdatedText is not present", true);
+		}
+		
+	}
 	
 
 }

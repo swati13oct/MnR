@@ -762,3 +762,15 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | planType | memberType | copayCategory |
       #| PDP     |  Group       |  NON LIS      |
       | MAPD     | Individual | NON LIS       |
+      
+  @UpdatedTextDocumentsAndResources @dec_release_2018
+  Scenario Outline: Verify updated text for Pdfs in Documents and Resources
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    | 
+    Then The user navigate to Benefits and Coverage page
+    And the user validates the UpdatedText
+
+    Examples: 
+      | planType | memberType |      
+      | MAPD     | IndividualUHCPayments |
