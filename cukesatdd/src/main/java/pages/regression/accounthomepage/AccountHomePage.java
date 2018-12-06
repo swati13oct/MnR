@@ -130,9 +130,6 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(id = "pcpLogoPrint1left")
 	private WebElement validateLogo;
-	
-	@FindBy(id = "hello-person")
-	private WebElement HelloText;
 
 	@FindBy(xpath = "/html/body/div[2]/div[2]/div/div[1]/div/div/div/h1")
 	private WebElement paymentsHeading;
@@ -472,19 +469,25 @@ public class AccountHomePage extends UhcDriver {
 		}
 
 		else if (MRScenario.environmentMedicare.equals("team-h") || MRScenario.environmentMedicare.equals("test-a")
-				|| MRScenario.environmentMedicare.equals("team-e")) {
+				|| MRScenario.environmentMedicare.equals("team-e") ||  MRScenario.environmentMedicare.equals("team-c")){
 
 			driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
 			System.out.println(driver.getCurrentUrl());
 		} else {
 			driver.navigate().to(
-					"https://team-ci1-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
+					"https://" +MRScenario.environmentMedicare+"-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
+			
+			
 		}
 		CommonUtility.waitForPageLoad(driver, heading, 50);
-		if (driver.getTitle().equalsIgnoreCase("Benefits")) {
+		/*if (driver.getTitle().equalsIgnoreCase("Benefits")) {
 			return new BenefitsAndCoveragePage(driver);
 		}
-
+*/
+		if (driver.getTitle().contains("Benefits")) {
+			return new BenefitsAndCoveragePage(driver);
+		}	
+		
 		return null;
 	}
 
@@ -790,18 +793,17 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public void verifyPageTitle() throws InterruptedException {
-		System.out.println("Checking for Hello Name or welcome  element");
-		if(helloPerson.isDisplayed()){
-			System.out.println("Hello Name element was displayed");
-		} else{
-			waitForHomePage(welcome);
-			System.out.println("Welcome element was displayed");
-		}			   
-		String title = driver.getTitle();
-		System.out.println(title);
-		// Assert.assertEquals(title, "Home | UnitedHealthcare");
-		Assert.assertTrue(title.contains("UnitedHealthcare"));
-		System.out.println("Assert condition on title of dashboard page was passed");
+		 System.out.println("Checking for Hello Name element after waiting for 20 seconds");
+		 Thread.sleep(20000);
+         waitForHomePage(helloPerson);
+         System.out.println("Hello Name element was displayed");
+  String title = driver.getTitle();
+  System.out.println(title);
+  Assert.assertTrue(title.contains("UnitedHealthcare"));
+  System.out.println("Assert condition on title of dashboard page was passed");
+
+		
+		
 	}
 
 	public AccountHomePage navigateToAutoPaymentHistoryPage() {
@@ -818,23 +820,12 @@ public class AccountHomePage extends UhcDriver {
 		}
 
 		// Thread.sleep(16000);
-		try{
-			HelloText.isDisplayed();
-			waitforElement(PremiumPayment);
-			System.out.println("payment link is displayed on the header");
-			PremiumPayment.click();
-				try {
-						Thread.sleep(10000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}		
-		}catch(Exception e)		
-		{
+
 		try {
 			navigateToPaymentHistoryPage();
 		} catch (Exception e1) {
 			System.out.println("Unable to navigate to premium payment page");
-		}}
+		}
 		//tbd		waitforElement(PremiumPayment);
 		//tbd		System.out.println("payment link is displayed on the header");
 		//tbd		PremiumPayment.click();
@@ -950,7 +941,7 @@ public class AccountHomePage extends UhcDriver {
 
 	public pages.regression.payments.PaymentHistoryPage scrollDownAndUp() throws InterruptedException {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		jse.executeScript("window.scrollBy(0,600)", "");
+		jse.executeScript("window.scrollBy(0,550)", "");
 
 		waitforElement(HistoryDropdown);
 
@@ -2113,7 +2104,7 @@ public class AccountHomePage extends UhcDriver {
 				}
 				System.out.println(driver.getCurrentUrl());
 				CommonUtility.waitForPageLoad(driver, heading, 30);
-				if (driver.getTitle().contains("Benefits Overview")) {
+				if (driver.getTitle().contains("Benefits")) {
 					System.out.println(driver.getTitle());
 					return new BenefitsAndCoveragePage(driver);
 				}
@@ -2122,16 +2113,23 @@ public class AccountHomePage extends UhcDriver {
 		}
 
 		else if (MRScenario.environmentMedicare.equals("team-h") || MRScenario.environmentMedicare.equals("test-a")
-				|| MRScenario.environmentMedicare.equals("team-e")) {
+				|| MRScenario.environmentMedicare.equals("team-e")){
 
 			driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
 			System.out.println(driver.getCurrentUrl());
-		} else {
+		} else if(MRScenario.environmentMedicare.equals("team-c")){
+			driver.navigate().to(
+					"https://team-c-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
+			System.out.println(driver.getCurrentUrl());
+			return new BenefitsAndCoveragePage(driver);
+		}else
+		{
 			driver.navigate().to(
 					"https://team-ci1-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
-
 			System.out.println(driver.getCurrentUrl());
+			return new BenefitsAndCoveragePage(driver);
 		}
+			
 
 		/*
 		 * if (validate(iPerceptionPopUp)) { iPerceptionPopUp.click();

@@ -191,7 +191,7 @@ Feature:1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
       
  @DSNP_Enroll_Now @september_release_2018
   Scenario Outline: To test OLE Button for DSNP Plans Landing from VPP Plan Summary
-    Given the user is on TeamC UHC medicare acquisition site landing page
+    Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search TeamC using following information in UMS site
       | Zip Code    | <zipcode> |
       | County Name | <county>  |
@@ -206,7 +206,7 @@ Feature:1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
  
  @CSNP_Enroll_Now @december_18
   Scenario Outline: To test OLE Button for CSNP Plans Landing from VPP Plan Summary
-    Given the user is on TeamC UHC medicare acquisition site landing page
+    Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search TeamC using following information in UMS site
       | Zip Code    | <zipcode> |     
     When user views plans of the below plan type in UMS site
@@ -221,7 +221,7 @@ Feature:1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
  
  @UHC_Disclosure @december_18
   Scenario Outline: To test Disclosure page for Chronic Plans Landing from VPP Plan Summary
-    Given the user is on TeamC UHC medicare acquisition site landing page
+    Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search TeamC using following information in UMS site
       | Zip Code    | <zipcode> |
       | County Name | <county>  |
@@ -352,32 +352,73 @@ Examples:
       |   90210 | Los Angeles County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    | HICN     | John      | Doe      | 123456787t     | false   |  01012010 |  01012010 |      231665465 | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | CA   |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | no           | true      |
       
       
- @StandaloneZipcode @Feb_18
-  Scenario Outline: To reach VPP page via standalone Zipcode
-    Given the user is on TeamC UHC medicare acquisition site landing page
-    When the user performs Standalone zipcode search on TeamC using following information in UMS site
-      | Zip Code    | <zipcode> |    
-      
- Examples: 
-      | zipcode | 
-      |   78006 | 
-      
- @StandaloneMA @Feb_18
-  Scenario Outline: To reach VPP page via standalone Zipcode
-    Given the user is on TeamC UHC medicare acquisition site landing page
-    When the user goes to MA Landing page
-      | Zip Code    | <zipcode> |    
-      
- Examples: 
-      | zipcode | 
-      |   78006 | 
-      
-  @MALandigPlanOptions @Feb_18
-  Scenario Outline: To reach VPP page via standalone Zipcode
-    Given the user is on TeamC UHC medicare acquisition site landing page
-    When the user goes to MA Landing page Options
-      | Zip Code    | <zipcode> |    
-      
- Examples: 
-      | zipcode | 
-      |   78006 | 
+ @StandaloneZipcode @Feb_release_2019
+  Scenario Outline: Home Zipcode widget To reach VPP page via standalone Zipcode
+    Given the user is on the uhcmedicaresolutions site landing page
+    When the user performs zipcode search using widget following information in the UHC site
+      | Zip Code | <zipcode> |
+
+    Examples: 
+      | zipcode |
+      |   78006 |
+
+  @StandaloneZipcodeOLE @Feb_release_2019
+  Scenario Outline: Home Zipcode widget To reach Online Enrollment page via standalone Zipcode
+    Given the user is on the uhcmedicaresolutions site landing page
+    When the user performs zipcode search to welcome OLE Page using widget on the UHC site
+      | Zip Code | <zipcode> |
+
+    Examples: 
+      | zipcode |
+      |   90210 |
+
+  @StandaloneMA @Feb_release_2019
+  Scenario Outline: MA Zipcode widget To reach VPP page via standalone Zipcode
+    Given the user is on the uhcmedicaresolutions site landing page
+    When the user goes to MA Landing and performs zipcode search using widget following information in the UHC site
+      | Zip Code | <zipcode> |
+
+    Examples: 
+      | zipcode |
+      |   78006 |
+
+  @StandaloneMA @Feb_release_2019
+  Scenario Outline: MA Zipcode widget To reach Online Enrollment via standalone Zipcode
+    Given the user is on the uhcmedicaresolutions site landing page
+    When the user goes to MA Landing and performs zipcode search using widget to welcome OLE Page using widget on the UHC site
+      | Zip Code | <zipcode> |
+
+    Examples: 
+      | zipcode |
+      |   78006 |
+
+  @StandaloneMASNP @Feb_release_2019
+  Scenario Outline: MA Special Need plans To reach OLE page via standalone Zipcode
+    Given the user is on the uhcmedicaresolutions site landing page
+    When the user goes to MA selects Special Need Plans and performs zipcode search using widget to welcome OLE Page using widget on the UHC site
+      | Zip Code | <zipcode> |
+
+    Examples: 
+      | zipcode |
+      |   78006 |
+
+  @StandalonePDP @Feb_release_2019
+  Scenario Outline: PDP Zipcode widget To reach VPP page via standalone Zipcode
+    Given the user is on the uhcmedicaresolutions site landing page
+    When the user goes to PDP Landing and performs zipcode search using widget following information in the UHC site
+      | Zip Code | <zipcode> |
+
+    Examples: 
+      | zipcode |
+      |   78006 |
+
+  @StandalonePDP @Feb_release_2019
+  Scenario Outline: PDP Zipcode widget To reach Online Enrollment via standalone Zipcode
+    Given the user is on the uhcmedicaresolutions site landing page
+    When the user goes to PDP Landing and performs zipcode search using widget to welcome OLE Page using widget on the UHC site
+      | Zip Code | <zipcode> |
+
+    Examples: 
+      | zipcode |
+      |   78006 |
+ 
