@@ -793,18 +793,17 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public void verifyPageTitle() throws InterruptedException {
-		System.out.println("Checking for Hello Name or welcome  element");
-		if(helloPerson.isDisplayed()){
-			System.out.println("Hello Name element was displayed");
-		} else{
-			waitForHomePage(welcome);
-			System.out.println("Welcome element was displayed");
-		}			   
-		String title = driver.getTitle();
-		System.out.println(title);
-		// Assert.assertEquals(title, "Home | UnitedHealthcare");
-		Assert.assertTrue(title.contains("UnitedHealthcare"));
-		System.out.println("Assert condition on title of dashboard page was passed");
+		 System.out.println("Checking for Hello Name element after waiting for 20 seconds");
+		 Thread.sleep(20000);
+         waitForHomePage(helloPerson);
+         System.out.println("Hello Name element was displayed");
+  String title = driver.getTitle();
+  System.out.println(title);
+  Assert.assertTrue(title.contains("UnitedHealthcare"));
+  System.out.println("Assert condition on title of dashboard page was passed");
+
+		
+		
 	}
 
 	public AccountHomePage navigateToAutoPaymentHistoryPage() {
