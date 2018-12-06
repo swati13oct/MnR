@@ -1703,20 +1703,17 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		
 	}
 	
-@Then("^verify ancillary benefit section is not displayed$")
- 	
+	@Then("^verify ancillary benefit section is not displayed$")
  	public void ancillary_not_displayed() {
 	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 	Assert.assertTrue(benefitsCoveragePage.ancillarynotdisplayed());
  	}
 
-	
-
-	
-	
-
-	
-	
-	
+	@Then("^user validates the Optum Rx link in Benefits and Coverage page$")
+	public void user_validates_the_Optum_Rx_link_in_Benefits_and_Coverage_page() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+			.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		Assert.assertTrue(benefitsCoveragePage.optumRxLinkdisplayed());
+	}
 }

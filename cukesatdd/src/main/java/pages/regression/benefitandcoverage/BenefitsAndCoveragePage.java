@@ -135,6 +135,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(className = "atdd-benefitssummary-ancillaryHeader")
 	private WebElement Headersection;
+	
+	@FindBy(id="//a[text()='OPTUM RX']")
+	private WebElement optumRxBtn;
 
 	@FindBy(className = ".//*[@id='ancillary']/div[2]/div[4]/div/div")
 	private WebElement chiropracticsection;
@@ -2455,6 +2458,16 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			System.out.println("ancillary is not present");
 
 			return true;
+		}
+	}
+	
+	public boolean optumRxLinkdisplayed() {
+		if (optumRxBtn.isDisplayed()) {
+			System.out.println("Optum Rx button is present");
+			return true;
+		} else {
+			System.out.println("Optum Rx button is not present");
+			return false;
 		}
 	}
 
