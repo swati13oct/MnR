@@ -560,7 +560,7 @@ public class AccountHomePage extends UhcDriver {
 
 			System.out.println("waitning for profile page");
 		// If we test through test harness , this is needed to navigate to profile page
-		if(driver.getCurrentUrl().contains("testharness.html")){
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)){
 			if(driver.findElement(By.id("home_1")).isDisplayed()){
 				driver.findElement(By.id("home_1")).click();
 			}else{

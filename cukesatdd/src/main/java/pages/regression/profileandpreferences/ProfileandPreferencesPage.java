@@ -1629,8 +1629,8 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//if (validateNew(currentPassword) && validateNew(newPassword) && validateNew(confirmPassword)) {
-		if (validateNew(newPassword) && validateNew(confirmPassword)) {	
+		if (validateNew(currentPassword) && validateNew(newPassword) && validateNew(confirmPassword)) {
+		
 			Assert.assertTrue(true);
 		} else
 			Assert.fail("Error in validating the edit password link box elements");
@@ -1910,7 +1910,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		checkModelPopup(driver);
 
 		validateNew(emailAddressSection);
-		//validateNew(emailAddressRightArrow);  // coudn't find in portal
+		//validateNew(emailAddressRightArrow);  // coudn't find in portal till EPMP gets enabled 
 
 	}
 
@@ -1918,7 +1918,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		Random rand = new Random();
 		int randomNumber = rand.nextInt(50);
 		String emailAddress = "alisha_kapoor" + randomNumber + "@optum.com";
-		//emailAddressRightArrow.click();  // not in portal
+		//emailAddressRightArrow.click();  // not in portal till EPMP gets enabled
 		validateNew(emailAddressHeader);
 		validateNew(emailEditIcon);
 		emailEditIcon.click();
@@ -1942,7 +1942,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		else {
 			Assert.fail("Not able to validate the email update functionality for a ship member");
 		}
-		//backButtonOnEmailField.click();   // not in portal
+		//backButtonOnEmailField.click();   // not in portal. As email saves it automatically comes back to profile page, so no need to hit back button
 	}
 
 	public void validatePhoneSectionForShip() {
@@ -1983,7 +1983,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			Assert.fail("Not able to validate the Phone  update functionality for a ship member");
 		}
 		//backButtonOnPhoneShip.click();  //Does not exist in the current portal
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub // As Phone saves it automatically comes back to profile page, so no need to hit back button or any other button
 
 	}
 
