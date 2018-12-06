@@ -75,7 +75,7 @@ public class IDCardsStepDefinition {
 						iDCardPage);
 		}
 		
-		@And("^validate the headers for Independent user$")
+		@And("^validate the headers for Individual user$")
 		public void validate_the_headers(DataTable givenAttributes)
 		{
 			
