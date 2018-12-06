@@ -560,13 +560,20 @@ public class AccountHomePage extends UhcDriver {
 
 			System.out.println("waitning for profile page");
 		// If we test through test harness , this is needed to navigate to profile page
-		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)){
-			if(driver.findElement(By.id("home_1")).isDisplayed()){
-				driver.findElement(By.id("home_1")).click();
-			}else{
-			driver.findElement(By.xpath("//*[@id='home_2']")).click();
-			Thread.sleep(6000);
-			}
+ 	
+			if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)){
+			 System.out.println("testing through test harness page");
+			 try{
+				 if(driver.findElement(By.id("home_1")).isDisplayed()){
+					 driver.findElement(By.id("home_1")).click();
+				 }else{
+					 driver.findElement(By.xpath("//*[@id='home_2']")).click();
+					 Thread.sleep(6000);
+				 }
+			 } catch (Exception e) {
+				 driver.findElement(By.xpath("//*[@id='home_2']")).click();
+				 Thread.sleep(6000);
+			 }
 			//CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//*[@id='dashboard']/div[1]/section[1]/account-info/div/div[1]/h1")), 30);
 		} else{
 			System.out.println("test is through stage");
