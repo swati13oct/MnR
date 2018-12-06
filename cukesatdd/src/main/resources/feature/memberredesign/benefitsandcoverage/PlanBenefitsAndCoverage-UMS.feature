@@ -1,28 +1,28 @@
-@codeMonkeys @regression_06_06_18 @thePredators 
+@codeMonkeys @regression_06_06_18 @thePredators
 Feature: C1.1 To test plan benefits and Coverage on UMS site
 
-@PlanBFSMAPD @Feb_release_2019
+  @PlanBFSMAPD @Feb_release_2019
   Scenario Outline: Verify all sections for Ind NonLIS member on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Copay Category | <copayCategory> |
-      |Rider|<rider>|
+      | Rider          | <rider>         |
     Then The user navigates to Benefits and Coverage page
       | Plan Type | <planType> |
     Then user verifies presence of jump links
-      |Rider|<rider>|
+      | Rider | <rider> |
     And user clicks on the jump links and checks respective sections
-      |Rider|<rider>|
+      | Rider | <rider> |
     And verifies links irrelevant to the plan type are not displayed
-      |Count|<count>|
-      |Rider|<rider>|
-      
-   Examples: 
-      | planType | memberType | copayCategory | language |count|rider|
-      | MAPD     | Individual | NON LIS       | ENGLISH  | 6   |NoRider|
-	  | MAPD     | Individual | NON LIS       | ENGLISH  | 7   |Rider|
- 
+      | Count | <count> |
+      | Rider | <rider> |
+
+    Examples: 
+      | planType | memberType | copayCategory | language | count | rider   |
+      | MAPD     | Individual | NON LIS       | ENGLISH  |     6 | NoRider |
+      | MAPD     | Individual | NON LIS       | ENGLISH  |     7 | Rider   |
+
   @CMFedDrugNonLis
   Scenario Outline: Verify all sections for Ind NonLIS member on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
@@ -665,7 +665,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | planType | memberType |
       | MAPD     | MAPDCOSMOS |
 
-  @primarycareproviderspecialist @thepredators @regressionprimarycareprovider @regression_06_06_18 
+  @primarycareproviderspecialist @thepredators @regressionprimarycareprovider @regression_06_06_18
   Scenario Outline: Verify the Office visits widget for a member withprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -775,16 +775,16 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
 
     Examples: 
       | planType | memberType |
-      | MAPDVill | Individual	|
-      
+      | MAPDVill | Individual |
+
   @UpdatedTextDocumentsAndResources @dec_release_2018
   Scenario Outline: Verify updated text for Pdfs in Documents and Resources
     Given login with following details logins in the member portal and validate elements
-      | Plan Type      | <planType>      |
-      | Member Type    | <memberType>    | 
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
     Then The user navigate to Benefits and Coverage page
     And the user validates the UpdatedText
 
     Examples: 
-      | planType | memberType |      
+      | planType | memberType            |
       | MAPD     | IndividualUHCPayments |
