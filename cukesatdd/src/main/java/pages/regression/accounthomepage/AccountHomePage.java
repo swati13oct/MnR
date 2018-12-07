@@ -353,6 +353,9 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(id = "closeButton")
 	private WebElement iPerceptionCloseButton;
+	
+	@FindBy(xpath ="//*[@id='paymentHistoryApp1']//div/p/span")
+	private WebElement PaymentHistorySection;
 
 	private PageData myAccountHome;
 
@@ -961,6 +964,22 @@ public class AccountHomePage extends UhcDriver {
 		}
 	}
 
+	public pages.regression.payments.PaymentHistoryPage validtaePaymentHistorySection() throws InterruptedException {
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,550)", "");
+
+		waitforElement(PaymentHistorySection);
+
+		//tbd		Select dateRange = new Select(HistoryDropdown);
+		//tbd		dateRange.selectByVisibleText("Last 6 months");
+
+		// note: need to mouse over to select
+		System.out.println("Payment History Exists");
+		jse.executeScript("window.scrollBy(0,-1100)", "");
+		
+		return new pages.regression.payments.PaymentHistoryPage(driver);
+	}
+	
 	public pages.regression.payments.PaymentHistoryPage scrollDownAndUp() throws InterruptedException {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,550)", "");

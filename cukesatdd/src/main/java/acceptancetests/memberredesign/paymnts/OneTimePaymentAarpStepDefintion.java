@@ -202,6 +202,17 @@ public class OneTimePaymentAarpStepDefintion {
 	}
 	
 	
+	@Then("^User Scrolls down to validate Payment History Section$")
+	public void Validate_History_Payment_section() throws InterruptedException{
+		pages.regression.accounthomepage.AccountHomePage AHPage = (pages.regression.accounthomepage.AccountHomePage) getLoginScenario().getBean(PageConstants.DashPage);
+		PaymentHistoryPage paymentHistoryPage = AHPage.validtaePaymentHistorySection();
+		if (paymentHistoryPage!=null){
+	     	  getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
+		System.out.println("user has scrolled up"); 
+}
+	}
+	
+	
 	@And("^the user clicks on Make One Time Payment button$")
 		public void click_on_OTP_btn() throws InterruptedException{
 		
@@ -229,6 +240,30 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 		
 	}	
+	
+	@And("^the user clicks on New flow Edit Automatic Payment button$")
+	public void click_on_Recurring_Payment_btn(){
+		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
+		PaymentHistoryPage PHoneTimePayment = paymenthistory.AutoPayNew();
+		
+		if(PHoneTimePayment!=null){
+			getLoginScenario().saveBean(PageConstants.NEW_CC_BUTTON, PHoneTimePayment);
+			System.out.println("user is on one time payment page");	
+		}
+		
+	}
+	
+	@And("^the user selects the Checking account option on New page$")
+	public void click_on_Checking_account_Payment_btn(){
+		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.NEW_CC_BUTTON);
+		OneTimePaymentPage oneTimePayment = paymenthistory.CheckingAccountbtn();
+		
+		if(oneTimePayment!=null){
+			getLoginScenario().saveBean(PageConstants.One_Time_Payments_Page, oneTimePayment);
+			System.out.println("user is on Automatic payment page");	
+		}
+		
+	}
 	
 	@And("^the user clicks on MemAuth Edit Automatic Payment button$")
 	public void click_on_MemAuth_Recurring_btn(){

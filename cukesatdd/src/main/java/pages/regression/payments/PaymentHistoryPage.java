@@ -130,6 +130,15 @@ public class PaymentHistoryPage extends UhcDriver{
 	@FindBy(id = "closeButton")
 	private WebElement iPerceptionCloseButton;
 
+	@FindBy(xpath = "//*[@class='radio']//input[@id='optionsRadios10']")
+	private WebElement CheckingAccountRadioButton;
+	
+	@FindBy(xpath = "//*[@class='payment-selection__actions']/button")
+	private WebElement NextButton;
+	
+	@FindBy(xpath = "(//*[@class='payments']//div[@class='container']//div[@class='col-md-12'])[1]//span[1]")
+	private WebElement AutoPayHeading;
+	
 	private PageData paymentHistory;
 
 	public JSONObject paymentHistoryJson;
@@ -437,6 +446,65 @@ public class PaymentHistoryPage extends UhcDriver{
 		else
 			return null;
 	}
+	
+	public PaymentHistoryPage AutoPayNew(){
+
+		try {   
+			Thread.sleep(2000); 		
+			driver.switchTo().frame("IPerceptionsEmbed");
+			System.out.println("iPerception Pop Up is Present");
+			iPerceptionCloseButton.click();
+			driver.switchTo().defaultContent();
+			Thread.sleep(5000);
+		}
+		catch (Exception e) {
+			System.out.println("iPerception Pop Up is not Present");
+		}
+
+
+		try{
+			if(SetUpAutoPayButton.isDisplayed())
+			{
+				SetUpAutoPayButton.click();
+				System.out.println("clicked on Setup New Payment button");
+				try{
+					Thread.sleep(2000);					 
+					if (validate(SetUpNewPayment)){
+						SetUpNewPayment.click();
+						System.out.println("clicked on Setup New Payment button");		 
+						return new PaymentHistoryPage(driver);
+					}
+					else
+						return new PaymentHistoryPage(driver);
+				}catch(Exception e)
+				{
+					System.out.println("Set up Pop up not displayed"); 
+				}					 
+
+			}
+			else
+			{
+				System.out.println("No Setup Automatic Payment Button, looking for Edit auto payment button");
+			}
+
+		}catch(Exception e)
+		{
+			System.out.println("No Auto payment button exists");
+		}		
+
+		waitforElement(AutoPayButton);  		
+		AutoPayButton.click();
+
+		waitforElement(SetUpNewPayment);
+
+		if (validate(SetUpNewPayment)){
+			SetUpNewPayment.click();
+			System.out.println("clicked on Setup New Payment button");		 
+			return new  PaymentHistoryPage(driver);		 
+		}
+		else
+			return null;
+	}
 
 	public OneTimePaymentPage MemAuthAutoPay(){
 
@@ -542,6 +610,33 @@ public class PaymentHistoryPage extends UhcDriver{
 		return true;
 	}
 
+	
+	public OneTimePaymentPage CheckingAccountbtn(){
+
+		try {   
+			Thread.sleep(2000); 		
+			driver.switchTo().frame("IPerceptionsEmbed");
+			System.out.println("iPerception Pop Up is Present");
+			iPerceptionCloseButton.click();
+			driver.switchTo().defaultContent();
+			Thread.sleep(5000);
+		}
+		catch (Exception e) {
+		}
+		
+
+		CheckingAccountRadioButton.click();
+		System.out.println("clicked on Checking account button");
+		NextButton.click();
+		
+		waitforElement(AutoPayHeading);
+		if(AutoPayHeading.getText().contains("Automatic Payments")){
+			return new  OneTimePaymentPage(driver); 
+		}else
+
+		return null;
+
+	}
 
 }
 
