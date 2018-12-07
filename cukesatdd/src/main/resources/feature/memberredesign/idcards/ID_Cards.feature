@@ -25,7 +25,7 @@ Feature: V1.1To This test scenario is to validate that ID card is accessible for
 	| MAPD      | IDCardmember  | UnitedHealthcare MedicareComplete Choice Plan 1 (Regional PPO) | 858720673-00  | Abcfda Adfa      | Subscriber - DOB 04/11/1934 | 01/01/18      | Active         | 
      
   @regressionIDCards_Group_User
-  Scenario Outline: Verify the fields in ID card page
+  Scenario Outline: Verify the fields in ID card page for group user
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |
       | Member Type | <memberType> |
