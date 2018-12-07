@@ -11,7 +11,7 @@ Then I should not see drug look up on home page
  Examples:
  | planType  | memberType|
  | Medsup    | Ship_AARP_DCE |
- | Group     | SSUP      |
+ | Group     | SSUP_DCE      |
  | MA		| AARPIndividual_DCE|
  
 @drug_cost_estimator1
