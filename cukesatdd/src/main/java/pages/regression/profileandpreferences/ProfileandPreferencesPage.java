@@ -64,7 +64,8 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(className = "bold atdd-profile-membernumber")
 	private WebElement memberId;
 
-	@FindBy(xpath = ".//*[@class='account_settings form__content']/div/flex/flex/flex-content[2]/p")
+	@FindBy(xpath = "//*[@class='account_settings form__content']/div/flex/flex/flex-content[2]/p")
+	
 	private WebElement usernameText;
 
 	@FindBy(xpath = ".//*[@id='password']/div/div/span[1]")
@@ -88,20 +89,23 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(id = "passwordNotMatch-error")
 	private WebElement passworderrormessage3;
 
-	@FindBy(xpath = ".//*[@id='email' or @id='emailCardHeight']/div[1]/h4")
+	//@FindBy(xpath = ".//*[@id='email' or @id='emailCardHeight']/div[1]/h4")
+	@FindBy(xpath = "//div[@id='email']//h5[@class='subtitle semi-bold margin-none card-title']")
 	private WebElement EmailLabel;
 
 
 	@FindBy(id = "emailview")
 	private WebElement emailBoxUhc;
 
-	@FindBy(xpath = ".//*[@id='emailCardHeight']//span[@class='bold atdd-email ng-scope']")
+	//@FindBy(xpath = ".//*[@id='emailCardHeight']//span[@class='bold atdd-email ng-scope']")
+	@FindBy(xpath = "//*[@id='email']/div[2]/div[1]/div/div/span[1]")
 	private WebElement EmailAddressLabel;
 
 	@FindBy(id = "profileemailaddress")
 	private WebElement emailAddress;
 
-	@FindBy(id = "currentPassword")
+	//@FindBy(id = "currentPassword") 
+	@FindBy(xpath = "//*[@name='currentPassword']")
 	private WebElement currentPassword;
 
 	@FindBy(id = "password")
@@ -187,7 +191,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='communicationAddressCardHeight' or @id='communicationAddress']")
 	private WebElement communicationpreferncessection;
 
-	@FindBy(xpath = ".//*[@id='phoneCardHeight' or @id='phoneview']")
+	@FindBy(xpath = ".//*[@id='phoneCardHeight' or @id='phone']")  // @id='phoneview' was there instead of phone
 	private WebElement phoneSection;
 
 	@FindBy(xpath = "//*[@id='phone' or @id='phoneCardHeight']//div[@class='card-header clearfix']//a[@class='edit-btn']")
@@ -370,7 +374,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(className = "atdd-gopaperless")
 	private List<WebElement> gopaperlessbutton1;
 
-	@FindBy(id = "hsidPwdLink")
+	@FindBy(xpath ="//*[@id='hsidPwdLink']")
 	private WebElement hsidPasswordLink;
 
 	@FindBy(xpath = "//*[@id='header']/h1/a")
@@ -385,13 +389,14 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='temporaryAddress']/div[1]/a[1]")
 	private List<WebElement> tempEditButton;
 
-	@FindBy(xpath = ".//*[@class='account_settings form__content']//flex-content[@class='ng-scope']/p/a/span[2]")
+	//@FindBy(xpath = "//*[@class='account_settings form__content']//flex-content[@class='ng-scope']/p/a/span[2]")
+	@FindBy(xpath = "//html//body//div//div//div[1]//div[1]//div//div[1]//flex//flex-content[1]//p//a//span[2]")
 	private WebElement passwordEditLink;
 
 	@FindBy(id = "main")
 	private WebElement feedbackPopup;
 
-	@FindBy(xpath = ".//*[@id='nav']/button[2]")
+	@FindBy(xpath = "//*[@id='nav']/button[2]")
 	private WebElement feedbackClose;
 
 	@FindBy(id = "addressview")
@@ -584,16 +589,18 @@ public class ProfileandPreferencesPage extends UhcDriver {
 																		// iframe
 	private WebElement hsidSignInAndSecurityLink;
 
-	@FindBy(className = "emailShip")
+	//@FindBy(className = "emailShip")
+	@FindBy(xpath = " //*[@id='email']//*[@class='subtitle semi-bold margin-none card-title']")
 	private WebElement emailAddressSection;
 
 	@FindBy(xpath = ".//*[@class='col-sm-12 editEmail margin-small']/span[3]")
 	private WebElement emailAddressRightArrow;
 
-	@FindBy(xpath = "//*[@id='email']/div[1]/h4")
+	//@FindBy(xpath = "//*[@id='email']/div[1]/h4")
+	@FindBy(xpath = " //*[@id='email']//*[@class='subtitle semi-bold margin-none card-title']")
 	private WebElement emailAddressHeader;
 
-	@FindBy(xpath = "//*[@class='edit-btn edit-btn-email']")
+	@FindBy(xpath = "//a[@class='edit-btn edit-btn-email']")
 	private WebElement emailEditIcon;
 
 	@FindBy(id = "emailNew")
@@ -602,29 +609,35 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(id = "emailNewConfirm")
 	private WebElement confirmEmailTextfield;
 
-	@FindBy(id = "updateEmail")
+	//@FindBy(id = "updateEmail")
+	@FindBy(xpath = "//*[@id='updateEmail']/span")
 	private WebElement saveButtonOnEmailSave;
 
-	@FindBy(className = "atdd-email-bottomcancel")
+	//@FindBy(className = "display-block align-center cancel-btn atdd-email-bottomcancel")
+	@FindBy(xpath = "//*[@id='email-form']/div[3]/div/a")
 	private WebElement cancelButtonOnEmailSave;
 
-	@FindBy(id = "profileemailaddress")
+	@FindBy(xpath = "//*[@id='profileemailaddress']")
 	private WebElement updatedEmailAfterSave;
 
 	@FindBy(xpath = "//*[@id='email']/div[1]/h4/span")
 	private WebElement backButtonOnEmailField;
 
-	@FindBy(xpath = "//*[@class='ng-scope emailShip']")
+	//@FindBy(xpath = "//*[@class='ng-scope emailShip']")
+	@FindBy(css=".atdd-phone-title")
 	private WebElement phoneSectionShip;
 
-	@FindBy(xpath = "//*[@class='col-sm-12 margin-small editEmail']/div[1]/span[4]")
+	//@FindBy(xpath = "//*[@class='col-sm-12 margin-small editEmail']/div[1]/span[4]")
+	@FindBy(xpath = "//*[@id='phone']//a[@class='edit-btn']")
 	private WebElement phoneRightArrowShip;
 
-	@FindBy(xpath = "//*[@id='phone']/div[1]/h4")
+	//@FindBy(xpath = "//*[@id='phone']/div[1]/h4")
+	@FindBy(css=".atdd-phone-title")
 	private WebElement phoneNumberHeader;
 
 
-	@FindBy(xpath = "//a[@class='edit-btn']")
+	//@FindBy(xpath = "//a[@class='edit-btn']")
+	@FindBy(xpath = "//*[@id='phone']//a[@class='edit-btn']")
 	private WebElement phoneEditIcon;
 
 	@FindBy(id = "daytimePhone")
@@ -633,7 +646,8 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(id = "eveningPhone")
 	private WebElement eveningTimeTextfield;
 
-	@FindBy(className = "atdd-phone-save")
+	//@FindBy(className = "atdd-phone-save")
+	@FindBy(xpath ="//*[@id='phone-form']/div[3]/div/div/button/span")
 	private WebElement saveButtonOnPhoneSave;
 
 	@FindBy(className = "atdd-phone-bottomcancel")
@@ -1598,9 +1612,10 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		validateNew(hsidPasswordLink);
 		hsidPasswordLink.click();
 
-		Thread.sleep(10000);
+		Thread.sleep(6000);
 		System.out.println("PageTitle " + driver.getTitle());
 		Assert.assertTrue(driver.getTitle().contains("HealthSafe ID"));
+		Thread.sleep(3000);
 		if (validateNew(usernameText) && validateNew(passwordEditLink))
 			return true;
 		return false;
@@ -1608,7 +1623,14 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	public void validateEditPasswordLinkBox() {
 		passwordEditLink.click();
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (validateNew(currentPassword) && validateNew(newPassword) && validateNew(confirmPassword)) {
+		
 			Assert.assertTrue(true);
 		} else
 			Assert.fail("Error in validating the edit password link box elements");
@@ -1888,7 +1910,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		checkModelPopup(driver);
 
 		validateNew(emailAddressSection);
-		validateNew(emailAddressRightArrow);
+		//validateNew(emailAddressRightArrow);  // coudn't find in portal till EPMP gets enabled 
 
 	}
 
@@ -1896,12 +1918,10 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		Random rand = new Random();
 		int randomNumber = rand.nextInt(50);
 		String emailAddress = "alisha_kapoor" + randomNumber + "@optum.com";
-		emailAddressRightArrow.click();
+		//emailAddressRightArrow.click();  // not in portal till EPMP gets enabled
 		validateNew(emailAddressHeader);
 		validateNew(emailEditIcon);
-
 		emailEditIcon.click();
-
 		validateNew(newEmailTextfield);
 		validateNew(confirmEmailTextfield);
 		validateNew(saveButtonOnEmailSave);
@@ -1922,14 +1942,14 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		else {
 			Assert.fail("Not able to validate the email update functionality for a ship member");
 		}
-		backButtonOnEmailField.click();
+		//backButtonOnEmailField.click();   // not in portal. As email saves it automatically comes back to profile page, so no need to hit back button
 	}
 
 	public void validatePhoneSectionForShip() {
 
 		validateNew(phoneSectionShip);
 		validateNew(phoneRightArrowShip);
-		phoneRightArrowShip.click();
+		//phoneRightArrowShip.click();
 		validateNew(phoneNumberHeader);
 
 		validateNew(phoneEditIcon);
@@ -1962,8 +1982,8 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		else {
 			Assert.fail("Not able to validate the Phone  update functionality for a ship member");
 		}
-		backButtonOnPhoneShip.click();
-		// TODO Auto-generated method stub
+		//backButtonOnPhoneShip.click();  //Does not exist in the current portal
+		// TODO Auto-generated method stub // As Phone saves it automatically comes back to profile page, so no need to hit back button or any other button
 
 	}
 

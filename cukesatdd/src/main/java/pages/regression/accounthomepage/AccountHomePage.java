@@ -58,7 +58,8 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//table[@class='componentTable']/tbody/tr/td/a[contains(.,'Contact Us')]")
 	private WebElement contactUsPageLink;
 
-	@FindBy(css = ".view-id-link")
+	//@FindBy(css = ".view-id-link")
+	@FindBy(xpath = "//*[@id='dashboard']/div[1]/section[1]/account-info/div/div/a/span[1]")
 	private WebElement idCardLink;
 
 	@FindBy(xpath = "(//*[@class='ng-scope']//a[text()='Premium Payments'])[1]")
@@ -137,7 +138,8 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='plan_box']/div/div[2]/div/p/a")
 	private WebElement planNameLink;
 
-	@FindBy(id = "dropdown-toggle--1")
+	//@FindBy(id = "dropdown-toggle--1")
+	@FindBy(xpath = "//*[@id='dropdown-toggle--1']")											 
 	private WebElement accountProfileBtn;
 
 	// @FindBy(xpath = ".//*[@id='dropdown-options--1']/a[contains(text(),'Account
@@ -469,7 +471,7 @@ public class AccountHomePage extends UhcDriver {
 		}
 
 		else if (MRScenario.environmentMedicare.equals("team-h") || MRScenario.environmentMedicare.equals("test-a")
-				|| MRScenario.environmentMedicare.equals("team-e")) {
+				|| MRScenario.environmentMedicare.equals("team-e") ||  MRScenario.environmentMedicare.equals("team-c")){
 
 			driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
 			System.out.println(driver.getCurrentUrl());
@@ -556,6 +558,26 @@ public class AccountHomePage extends UhcDriver {
 
 	public ProfileandPreferencesPage navigateDirectToProfilePage() throws InterruptedException {
 
+			System.out.println("waitning for profile page");
+		// If we test through test harness , this is needed to navigate to profile page
+ 	
+			if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)){
+			 System.out.println("testing through test harness page");
+			 try{
+				 if(driver.findElement(By.id("home_1")).isDisplayed()){
+					 driver.findElement(By.id("home_1")).click();
+				 }else{
+					 driver.findElement(By.xpath("//*[@id='home_2']")).click();
+					 Thread.sleep(6000);
+				 }
+			 } catch (Exception e) {
+				 driver.findElement(By.xpath("//*[@id='home_2']")).click();
+				 Thread.sleep(6000);
+			 }
+			//CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//*[@id='dashboard']/div[1]/section[1]/account-info/div/div[1]/h1")), 30);
+		} else{
+			System.out.println("test is through stage");
+		}									  																													
 		if (MRScenario.environment.equalsIgnoreCase("stage")) {
 			System.out.println("user is on Stage login page");
 			// CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);
@@ -597,7 +619,7 @@ public class AccountHomePage extends UhcDriver {
 			System.out.println("Current Url is " + driver.getCurrentUrl());
 
 		}
-		CommonUtility.waitForPageLoad(driver, heading, 50);
+		//CommonUtility.waitForPageLoad(driver, heading, 50);
 		if (driver.getTitle().equalsIgnoreCase("Profile")) {
 			return new ProfileandPreferencesPage(driver);
 		}
@@ -793,18 +815,17 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public void verifyPageTitle() throws InterruptedException {
-		System.out.println("Checking for Hello Name or welcome  element");
-		if(helloPerson.isDisplayed()){
-			System.out.println("Hello Name element was displayed");
-		} else{
-			waitForHomePage(welcome);
-			System.out.println("Welcome element was displayed");
-		}			   
-		String title = driver.getTitle();
-		System.out.println(title);
-		// Assert.assertEquals(title, "Home | UnitedHealthcare");
-		Assert.assertTrue(title.contains("UnitedHealthcare"));
-		System.out.println("Assert condition on title of dashboard page was passed");
+		 System.out.println("Checking for Hello Name element after waiting for 20 seconds");
+		 Thread.sleep(20000);
+         waitForHomePage(helloPerson);
+         System.out.println("Hello Name element was displayed");
+  String title = driver.getTitle();
+  System.out.println(title);
+  Assert.assertTrue(title.contains("UnitedHealthcare"));
+  System.out.println("Assert condition on title of dashboard page was passed");
+
+		
+		
 	}
 
 	public AccountHomePage navigateToAutoPaymentHistoryPage() {
@@ -1654,9 +1675,17 @@ public class AccountHomePage extends UhcDriver {
 			System.out.println("iPerception Pop Up not displayed");
 		}
 
+		if(driver.getCurrentUrl().contains("testharness")){
+			driver.findElement(By.id("home_2")).click();
+			CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//*[@id='dashboard']")), 10);											
 		validate(idCardLink);
 		idCardLink.click();
 		return new IDCardPage(driver);
+		} else{
+
+			validate(idCardLink);
+			idCardLink.click();
+			return new IDCardPage(driver);}				  
 	}
 
 	public boolean validateOrderMaterialsLink() {
@@ -2105,7 +2134,7 @@ public class AccountHomePage extends UhcDriver {
 				}
 				System.out.println(driver.getCurrentUrl());
 				CommonUtility.waitForPageLoad(driver, heading, 30);
-				if (driver.getTitle().contains("Benefits Overview")) {
+				if (driver.getTitle().contains("Benefits")) {
 					System.out.println(driver.getTitle());
 					return new BenefitsAndCoveragePage(driver);
 				}
@@ -2114,16 +2143,23 @@ public class AccountHomePage extends UhcDriver {
 		}
 
 		else if (MRScenario.environmentMedicare.equals("team-h") || MRScenario.environmentMedicare.equals("test-a")
-				|| MRScenario.environmentMedicare.equals("team-e")) {
+				|| MRScenario.environmentMedicare.equals("team-e")){
 
 			driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
 			System.out.println(driver.getCurrentUrl());
-		} else {
+		} else if(MRScenario.environmentMedicare.equals("team-c")){
+			driver.navigate().to(
+					"https://team-c-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
+			System.out.println(driver.getCurrentUrl());
+			return new BenefitsAndCoveragePage(driver);
+		}else
+		{
 			driver.navigate().to(
 					"https://team-ci1-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
-
 			System.out.println(driver.getCurrentUrl());
+			return new BenefitsAndCoveragePage(driver);
 		}
+			
 
 		/*
 		 * if (validate(iPerceptionPopUp)) { iPerceptionPopUp.click();

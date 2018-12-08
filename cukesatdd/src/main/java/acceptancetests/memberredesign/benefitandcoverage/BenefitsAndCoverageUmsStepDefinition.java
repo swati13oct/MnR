@@ -150,6 +150,26 @@ try {
 		}
 
 	}
+	
+	
+	@Then("^The user navigate to Benefits and Coverage page$")
+	public void user_views_BenefitsAndCoveragejenkins1() {
+		System.out.println("***The user navigates to Benefits and Coverage page***");
+		
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+
+		BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag();
+
+		if (benefitsCoveragePage != null) {
+			getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
+		}
+		else
+
+		{
+			System.out.println("Benefits and Coverage page object is Null ");
+		}
+
+	}
 	/** 
 	 * @toDo : The user logs in to legacy site  in Mobile view 
 	 */
@@ -1366,7 +1386,9 @@ try {
 	                      }
 	      }
 	
-	@And("^the user verifies that the correct pdfs are coming in the plan material section for ship$")
+	//note: Dec2018 - update the step text
+	//@And("^the user verifies that the correct pdfs are coming in the plan material section for ship$")
+	@And("^the user verifies that the correct pdfs are coming in the plan material section$")
 	   public void verifypdfscomingship(DataTable givenAttributes) throws InterruptedException   {
 	         
 		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -1660,12 +1682,16 @@ try {
 						
 	}
 
+	//note: added argument to support SSUP case
 	@And("the user validates the Benefits for MA member")
-	public void userValidatesMAsection() {
+	//public void userValidatesMAsection() {
+	public void userValidatesMAsection(DataTable rows) {
+		List<List<String>> data = rows.raw();				
 				
 		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		planBenefitsCoverage.ValidateMAsection();
+		//planBenefitsCoverage.ValidateMAsection();
+		planBenefitsCoverage.ValidateMAsection(data.get(0).get(1));
 						
 	}
 	
@@ -1709,14 +1735,19 @@ try {
 		
 	}
 	
-@Then("^verify ancillary benefit section is not displayed$")
- 	
+	@Then("^verify ancillary benefit section is not displayed$")
  	public void ancillary_not_displayed() {
 	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 	Assert.assertTrue(benefitsCoveragePage.ancillarynotdisplayed());
  	}
 
+	@Then("^user validates the Optum Rx link in Benefits and Coverage page$")
+	public void user_validates_the_Optum_Rx_link_in_Benefits_and_Coverage_page() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+			.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		Assert.assertTrue(benefitsCoveragePage.optumRxLinkdisplayed());
+	}
 @Then("^user verifies presence of jump links$")
 public void user_verifies_presence_of_jump_links(DataTable rows) throws Throwable {
 	List<List<String>> data = rows.raw();
@@ -1743,6 +1774,13 @@ public void verifies_links_irrelevant_to_the_plan_type_are_not_displayed(DataTab
    
 }
 	
-	
+@And("the user validates the UpdatedText")
+public void userValidatesUpdatedTextSection() {
+			
+	BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+			.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+	planBenefitsCoverage.ValidatePDFTextSection();
+					
+}
 	
 }

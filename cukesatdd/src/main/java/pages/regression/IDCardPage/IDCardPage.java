@@ -31,11 +31,21 @@ public class IDCardPage extends UhcDriver{
 	@FindBy(xpath=".//*[@id='IPEinvL']/map/area[2]")
     private WebElement iPerceptionPopUp;
 	
-	@FindBy(css="ul.coverage-details li:first-child dl>dd")
-	private WebElement planName;
+	//@FindBy(css="ul.coverage-details li:first-child dl>dd") // this is the locator for id
+	@FindBy(css=".long-plan-name .ng-binding")  
+	private WebElement planName_grp;
 	
-	@FindBy(css="ul.coverage-details li:nth-child(2) dd")
+	@FindBy(xpath="//*[@id='details-00_950035171695_2018-12-31']/li[1]/dl/dd") 
+	private WebElement planName_Ind;
+	
+	@FindBy(css="ul.coverage-details li:first-child dl>dd")
 	private WebElement id;
+	
+	@FindBy(xpath="//*[@id='details-00_950035171695_2018-12-31']/li[2]/dl/dd")
+	private WebElement id_ind;
+	
+	@FindBy(css="li:nth-child(2) > dl > .ng-binding")
+	private WebElement id_grp;
 	
 	@FindBy(css=".member-name.ng-binding")
 	private WebElement name;
@@ -88,7 +98,7 @@ public class IDCardPage extends UhcDriver{
 	 * This method is used to validate the all the fields on ID card page
 	 * @param givenAttributes
 	 */
-	public void validateIDCardPage(DataTable givenAttributes){
+	public void validateIDCardPage_Ind(DataTable givenAttributes){
 		
 		/* Reading the given attribute from feature file */
 		List<DataTableRow> memberAttributesRow = givenAttributes
@@ -100,15 +110,21 @@ public class IDCardPage extends UhcDriver{
 		String medicalPlan = memberAttributesMap.get("Medical Plan");
 		String memberId = memberAttributesMap.get("Member Id");
 		String memberName = memberAttributesMap.get("Member Name");
-		String dob = memberAttributesMap.get("Scubscriber DOB");
+		String dob = memberAttributesMap.get("Subscriber DOB");
 		String covergaeStart = memberAttributesMap.get("Coverage Start");
 		String coverageStatus = memberAttributesMap.get("Coverage Status");
 		
 		/**
 		 * Validates the details of the member
 		 */
-		Assert.assertEquals(medicalPlan, planName.getText().trim());
-		Assert.assertEquals(memberId, id.getText().trim());
+		System.out.println("the Plan Name is: " + planName_Ind.getText());
+		System.out.println("the ID is: " + id_ind.getText());
+		System.out.println("the name is: " + name.getText());
+		System.out.println("the DOB is: " + dateOfBirth.getText());
+		System.out.println("the start date is: " + start.getText());
+		System.out.println("the covrg status is: " + status.getText());
+		Assert.assertEquals(medicalPlan, planName_Ind.getText().trim());
+		Assert.assertEquals(memberId, id_ind.getText().trim());
 		Assert.assertEquals(memberName, name.getText().trim());
 		Assert.assertEquals(dob, dateOfBirth.getText().trim());
 		Assert.assertEquals(covergaeStart, start.getText().trim());
@@ -124,7 +140,53 @@ public class IDCardPage extends UhcDriver{
 		closeIDcard.click();
 	}
 	
-	public void validateCoverageStatus(String coverageStatus){
-		Assert.assertEquals(coverageStatus, status.getText().trim());
+
+
+
+public void validateIDCardPage_grp(DataTable givenAttributes){
+	
+	/* Reading the given attribute from feature file */
+	List<DataTableRow> memberAttributesRow = givenAttributes
+			.getGherkinRows();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
 	}
+	String medicalPlan = memberAttributesMap.get("Medical Plan");
+	String memberId = memberAttributesMap.get("Member Id");
+	String memberName = memberAttributesMap.get("Member Name");
+	String dob = memberAttributesMap.get("Subscriber DOB");
+	String covergaeStart = memberAttributesMap.get("Coverage Start");
+	String coverageStatus = memberAttributesMap.get("Coverage Status");
+	
+	/**
+	 * Validates the details of the member
+	 */
+	System.out.println("the Plan Name is: " + planName_grp.getText());
+	System.out.println("the ID is: " + id_grp.getText());
+	System.out.println("the name is: " + name.getText());
+	System.out.println("the DOB is: " + dateOfBirth.getText());
+	System.out.println("the start date is: " + start.getText());
+	System.out.println("the covrg status is: " + status.getText());
+	Assert.assertEquals(medicalPlan, planName_grp.getText().trim()); 
+	Assert.assertEquals(memberId, id_grp.getText().trim());
+	Assert.assertEquals(memberName, name.getText().trim());
+	Assert.assertEquals(dob, dateOfBirth.getText().trim());
+	Assert.assertEquals(covergaeStart, start.getText().trim());
+	Assert.assertEquals(coverageStatus, status.getText().trim());
+	
+	/**
+	 * Validate the links below the ID card
+	 */
+	Assert.assertEquals("MAIL ID CARD", mailIDCard.getText().trim());
+	Assert.assertEquals("VIEW BACK", btnViewBack.getText().trim());
+	Assert.assertEquals("PRINT ID CARD", printIDCard.getText().trim());
+	
+	closeIDcard.click();
+}
+public void validateCoverageStatus(String coverageStatus){
+	Assert.assertEquals(coverageStatus, status.getText().trim());
+}
+
+
 }

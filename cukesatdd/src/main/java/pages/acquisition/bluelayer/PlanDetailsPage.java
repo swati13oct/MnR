@@ -4,6 +4,7 @@ package pages.acquisition.bluelayer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -103,6 +104,26 @@ public class PlanDetailsPage extends UhcDriver{
 
 		@FindBy(xpath="//*[@id='medicalBenefits']/div[1]/table/tbody/tr[1]/td[4]/strong")
 		private WebElement PremiumForPlan;
+		
+		
+		@FindBy(xpath = ".//*[@id='printdetails']")
+		private WebElement validatePrintButtonOnPlanDetails;
+
+		@FindBy(xpath = ".//*[@id='emailPlanDetail']")
+		private WebElement validateEmailButtonOnPlanDetails;
+
+		@FindBy(xpath = ".//*[@id='emailPlanDetailPopUp']")
+		private WebElement emailPopup;
+
+		@FindBy(xpath = ".//*[@id='emailSuccessMsgPopUp']")
+		private WebElement validatesuccesspopup;
+
+		@FindBy(xpath = ".//*[@id='closepopup']")
+		private WebElement cancelButtonEmailPlanDetailsPopUp;
+
+		@FindBy(xpath = ".//*[@id='form-valid']//button[2]")
+		private WebElement sendButtonEmailPlanDetailsPopUp;
+		
 		
 
 	private PageData vppPlanDetails;
@@ -525,6 +546,46 @@ public String GetTFNforPlanType() {
 	System.out.println("TFN is not Displayed for PlanType in VPP page");
 	
 	return null;
+}
+
+public void validatePrintandEmailOnPlanDetails() {
+	// TODO Auto-generated method stub
+	
+	// TODO Auto-generated method stub
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		validateNew(validatePrintButtonOnPlanDetails);
+		validateNew(validateEmailButtonOnPlanDetails);
+		System.out.println("successfully validated the Print and email Buttons on plan details page.");
+	
+}
+
+public void validatingFunctionalityOfPrintandEmailOnPlanDetails() {
+	// TODO Auto-generated method stub
+
+	validateEmailButtonOnPlanDetails.click();
+	driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	validateNew(emailPopup);
+	validateNew(cancelButtonEmailPlanDetailsPopUp);
+	System.out.println("!!!Cancel Button is displayed ===>" + cancelButtonEmailPlanDetailsPopUp.isDisplayed());
+	cancelButtonEmailPlanDetailsPopUp.click();
+	;
+	validateEmailButtonOnPlanDetails.click();
+	validateNew(emailPopup);
+	validateNew(sendButtonEmailPlanDetailsPopUp);
+	System.out.println("!!!Cancel Button is displayed ===>" + sendButtonEmailPlanDetailsPopUp.isDisplayed());
+	driver.findElement(By.xpath(".//*[@id='email']")).sendKeys("alisha_kapoor@optum.com");
+	System.out.println("!!!Entered valid Email ");
+	sendButtonEmailPlanDetailsPopUp.click();
+	System.out.println("Email has success fully send to user");
+	validateNew(validatesuccesspopup);
+	System.out.println("Validated Thank you Message");
+
 }
 
 }
