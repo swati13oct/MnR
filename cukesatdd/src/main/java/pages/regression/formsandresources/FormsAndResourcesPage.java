@@ -138,11 +138,20 @@ public class FormsAndResourcesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='otherPages PlanDocumentsActiveCallouts2018']//*[contains(text(),'ORDER PLAN')]")
 	private WebElement OrderPlanMaterialLink;
 
+	@FindBy(xpath = "//*[@id='plan_material_fnr2018']/div/div[4]//ul/li[1]/a")
+	private WebElement pcpOrderPlanMaterialLink;
+	
+	//*[@id="plan_material_fnr2018"]/div/div[4]//ul/li[1]/a
+	
 	/*
 	 * @FindBy(xpath =
 	 * "//*[@id='lang-select-2source-content-configurations_plan-material_jcr-content_overview_formsandresourcescon_formsAndResourcesParsys_customsegments_segmentContainer_planbenefitdocuments']")
 	 * private WebElement languagedropdown;
 	 */
+
+	public WebElement getPcpOrderPlanMaterialLink() {
+		return pcpOrderPlanMaterialLink;
+	}
 
 	@FindBy(id = "lang-select-2overview_customsegments-welcomeKit-2018_segmentContainer_planbenefitdocuments")
 	private WebElement languagedropdown;
@@ -178,7 +187,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	private WebElement AnnualDirectorySection;
 
 	/** Annual Directories Section **/
-	@FindBy(xpath = "(//*[@id='FnR_annualDirectory']//h2[contains(text(),'Annual Directory')])[3]")
+	@FindBy(xpath = "(//*[@id='FnR_annualDirectory']//h2[contains(text(),'Provider and Pharmacy Directories')])[3]")
 	private WebElement preAnnualDirectorySection;
 	
 	/** Annual Directories Section for pre-effective MAPD**/
@@ -223,7 +232,10 @@ public class FormsAndResourcesPage extends UhcDriver {
 	/* Pharmacy Locator Link for PDP */
 	@FindBy(xpath = "//*[@class='otherPages PharmacyLocatorCallout_AD']//*[text()='Pharmacy Locator']")
 	private WebElement PharmacyLocatorLinkPDP;
-
+	
+	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[3]/div[9]//section/div/div[2]/div/div[1]/div[2]//ul/li/a")
+	private WebElement preEffectivePharmacyLocatorLinkPDP;
+	
 	/** Forms and Resources section **/
 	@FindBy(xpath = "//h2[@id='formsAndResHeader']")
 	private WebElement FormsnResources;
@@ -267,7 +279,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	@FindBy(className = "noPdfMessageClass")
 	private WebElement errormessageforship;
 
-	@FindBy(xpath = "(//*[@href='/content/dam/UCP/SHIP/eft_content.pdf'])[5]")
+	@FindBy(xpath = "//*[@id=\"resources\"]/div/div[2]/div/div/div[13]/div/div/div/ul/li[1]/a")
 	private WebElement eftpdfforship;
 
 	/** i perception pop up objects */
@@ -307,6 +319,9 @@ public class FormsAndResourcesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='home_2']")
 	private WebElement home;
 	
+	public WebElement getPreEffectivePharmacyLocatorLinkPDP() {
+		return preEffectivePharmacyLocatorLinkPDP;
+	}
 	
 	
 	public WebElement getHome() {
@@ -866,7 +881,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 
 	public WebElement geteobsectionall() {
 
-		return driver.findElement(By.xpath("//div[@class='otherPages EOB_PDP']//*[contains(text(),'Explanation')]"));
+		return driver.findElement(By.xpath("//*[@id='globalContentIdForSkipLink']/div[4]/div[12]/div/div/div/section/div/div[2]/div/div/div/h3"));
 
 	}
 
@@ -1256,6 +1271,10 @@ public class FormsAndResourcesPage extends UhcDriver {
 		boolean arraycheck = formsAndResourcesPage.verifyPdfNames(targetArray, temp);
 		Assert.assertTrue("Incorrect pdf's shown", arraycheck == true);
 	}
+
+
+	
+
 
 
 

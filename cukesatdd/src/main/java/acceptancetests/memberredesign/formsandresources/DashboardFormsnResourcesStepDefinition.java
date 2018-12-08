@@ -244,7 +244,7 @@ public class DashboardFormsnResourcesStepDefinition {
 		formsAndResourcesPage.scroll();
 		formsAndResourcesPage.scroll();
 		if (formsAndResourcesPage.getPharmacyforPDP().isDisplayed()
-				|| formsAndResourcesPage.getPharmacyforPDP().isDisplayed()) {
+				|| formsAndResourcesPage.getPreEffectivePharmacyLocatorLinkPDP().isDisplayed()) {
 			Assert.assertTrue(true);
 			System.out.println("pharmacy locator link is present");
 		} else {
@@ -342,7 +342,8 @@ public class DashboardFormsnResourcesStepDefinition {
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
 		// Thread.sleep(2000);
 
-		formsAndResourcesPage.getOrderPlanMaterialLink().isDisplayed();
+		
+			Assert.assertTrue("Ordeer material link is not present", formsAndResourcesPage.getOrderPlanMaterialLink().isDisplayed()||formsAndResourcesPage.getPcpOrderPlanMaterialLink().isDisplayed());
 
 		// Thread.sleep(2000);
 		formsAndResourcesPage.getTemporaryIdcardlink().isDisplayed();
@@ -999,5 +1000,14 @@ public class DashboardFormsnResourcesStepDefinition {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
 		formsAndResourcesPage.pdfValidationOfAllTypes(formsAndResourcesPage, givenAttributes, "annualDirectory");
+			
 	}
+	
+	@Then("^validate that the renew magazine section is displayed$")
+	public void validate_that_the_renew_magazine_section_is_displayed() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	   
+	}
+	
+	
 }
