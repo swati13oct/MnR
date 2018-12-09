@@ -687,6 +687,31 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']//*/li[7]/a[contains(text(),'Plan Documents and Resources')]")
 	private WebElement jmpLinkToPlanDocumentsAndResources;
 	
+	// MA user
+	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]//*/div[6]//*/ul/li[4]/a")
+	private WebElement jmpLinkToPlanDocumentsAndResourcesMA;
+
+	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[2]//*/div[2]//*/div[2]//*/div[6]//*/ul/li[1]/a")
+	private WebElement jmpLinkToMedicalCopaysOrCoinsuranceMA;
+
+	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[2]//*/div[2]/div/div[2]/div/div[6]//*/ul/li[2]/a")
+	private WebElement jmpLinkToOutofPocketMaximumMA;
+
+	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[2]//*/div[2]//*/div[2]//*/div[6]//*/ul/li[3]/a")
+	private WebElement jmpLinkToPrimaryCareProviderMA;
+
+	@FindBy(xpath = "//*[@class='jumplinks']//ul/li[4]")
+	private WebElement jmpLinkToPlanDocumentsAndResourcesMAGroup;
+
+	@FindBy(xpath = "//*[@class='jumplinks']//ul/li[1]")
+	private WebElement jmpLinkToMedicalCopaysOrCoinsuranceMAGroup;
+
+	@FindBy(xpath = "//*[@class='jumplinks']//ul/li[2]")
+	private WebElement jmpLinkToOutofPocketMaximumMAGroup;
+
+	@FindBy(xpath = "//*[@class='jumplinks']//ul/li[3]")
+	private WebElement jmpLinkToPrimaryCareProviderMAGroup;
+	
 	@FindBy(xpath = "(//*[@id='globalContentIdForSkipLink']//*/li[4]/a)[1]")
 	private WebElement jmpLinkToOptionalServicesRiders;
 		
@@ -704,12 +729,82 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='plan_benefit_documents']//*/h2")
 	private WebElement PlanDocumentsAndResourcesSectionHeader;
 	
-	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']//*/div[5]/div/div/div/div/ul/li")
+
+	@FindBy(xpath = "//*[@class='jumplinks']//li")
 	private List<WebElement> directorySection;
+
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/div[2]//*/div[2]/div/div[2]/div/div[1]//*//ul/li")
+	private List<WebElement> directorySectionMedSupp;
+
+	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[2]//*/div[2]/div/div[2]/div/div[4]//*/ul/li")
+	private List<WebElement> directorySectionPDP;
 	
 	@FindBy(xpath = "//*[@id='avail-riders']//*/h2")
 	private WebElement OptionalServicesRidersSectionHeader;	
 	
+	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[2]//*/div[2]/div/div[2]//*/div[6]//*/ul/li[5]/a")
+	private WebElement jmpLinkToOptionalServicesRidersMA;
+
+	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[2]//*/div[2]//*/div[2]//*/div[1]//*/ul/li[1]/a")
+	private WebElement jmpLinkToBenefitSummaryMedSupp;
+
+	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[2]//*/div[2]//*/div[2]//*/div[1]//*/ul/li[2]/a")
+	private WebElement jmpLinkToDiscountsAndServicesMedSupp;
+
+	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[2]//*/div[2]//*/div[2]//*/div[1]//*//ul/li[3]/a")
+	private WebElement jmpLinkToPlanDocumentsAndResourcesMedSupp;
+
+	@FindBy(xpath = "//*[@id='benefitsSummary']/div[1]//*/section/div[1]/div/h2")
+	private WebElement benefitsSummarySectionHeader;
+
+	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[2]//*/div[4]//*//ul/li[1]/a")
+	private WebElement jmpLinkToDrugCopaysAndDiscountsPDP;
+
+	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[2]//*/div[2]/div/div[2]/div/div[4]//*/ul/li[2]/a")
+	private WebElement jmpLinkToDrugCoveragePDP;
+
+	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[2]//*/div[2]/div/div[2]/div/div[4]//*//ul/li[3]")
+	private WebElement jmpLinkToPlanDocumentsAndResourcesPDP;
+
+	@FindBy(xpath = "//*[@class='jumplinks']//li[1]")
+	private WebElement jmpLinkToDrugCopaysAndDiscountsPDPUHC;
+
+	@FindBy(xpath = "//*[@class='jumplinks']//li[2]")
+	private WebElement jmpLinkToPlanDocumentsAndResourcesPDPUHC;
+
+	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]//*/div[4]//*/ul/li[4]/a")
+	private WebElement jmpLinkToWaysToSaveMoneyPDP;
+
+	@FindBy(xpath = "//*[@id=\"waystosave\"]//*/h2")
+	private WebElement waysToSaveMoneySectionHeader;
+
+	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[2]//*/div[2]//*/div[8]//*/ul/li[4]/a")
+	private WebElement jmpLinkToadditionalBenefits;
+
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/div[2]//div[2]/div/div[8]//ul/li[6]/a")
+	private WebElement jmpLinkToPlanDocumentsAndResourcesMAPDGroup;
+
+	@FindBy(xpath = "//*[@id='ancillary']/div/div/div/div/div/div[1]/div/h4")
+	private WebElement additionalBenefitsSectionHeader;
+
+	@FindBy(xpath = "//*[@id='primary-care-provider-atdd']")
+	private WebElement primaryCareProviderSectionHeaderGroup;
+
+	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/*//div/div[8]/div/div/div/div/ul/li")
+	private List<WebElement> directorySectionMAPDGroup;
+
+	@FindBy(xpath = "//*[@class='jumplinks']//li[1]")
+	private WebElement jmpLinkToMedicalCopaysOrCoinsuranceSSUP;
+
+	@FindBy(xpath = "//*[@class='jumplinks']//li[2]")
+	private WebElement jmpLinkToOutofPocketMaximumSSUP;
+
+	@FindBy(xpath = "//*[@class='jumplinks']//li[3]")
+	private WebElement jmpLinkToPrimaryCareProviderSSUP;
+
+	@FindBy(xpath = "//*[@class='jumplinks']//li[4]")
+	private WebElement jmpLinkToPlanDocumentsAndResourcesSSUP;
+		
 	@FindBy(xpath = "(//*[@class='PlanPdf section'])[2]//span[@class='document-list-new margin-none']//li[@class=' clearfix']//span[@class='ng-binding ng-scope'][2]")
 	private WebElement PDFUpdatedText;
 	
@@ -722,6 +817,181 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	
 	@FindBy(xpath="//*[@class='subtitle atdd-benefitssummary-dental']")
 	private WebElement ssupDental;
+	
+	public WebElement getJmpLinkToDrugCopaysAndDiscountsPDPUHC() {
+		return jmpLinkToDrugCopaysAndDiscountsPDPUHC;
+	}
+	
+	public WebElement getJmpLinkToPlanDocumentsAndResourcesPDPUHC() {
+		return jmpLinkToPlanDocumentsAndResourcesPDPUHC;
+	}
+
+	public WebElement getJmpLinkToMedicalCopaysOrCoinsuranceSSUP() {
+		return jmpLinkToMedicalCopaysOrCoinsuranceSSUP;
+	}
+
+	public WebElement getJmpLinkToOutofPocketMaximumSSUP() {
+		return jmpLinkToOutofPocketMaximumSSUP;
+	}
+
+	public WebElement getJmpLinkToPrimaryCareProviderSSUP() {
+		return jmpLinkToPrimaryCareProviderSSUP;
+	}
+
+	public WebElement getJmpLinkToPlanDocumentsAndResourcesSSUP() {
+		return jmpLinkToPlanDocumentsAndResourcesSSUP;
+	}
+
+	public WebElement getPrimaryCareProviderSectionHeaderGroup() {
+		return primaryCareProviderSectionHeaderGroup;
+	}
+
+	public WebElement getAdditionalBenefitsSectionHeader() {
+		return additionalBenefitsSectionHeader;
+	}
+
+	public WebElement getJmpLinkToPlanDocumentsAndResourcesMAPDGroup() {
+		return jmpLinkToPlanDocumentsAndResourcesMAPDGroup;
+	}
+
+	public WebElement getJmpLinkToadditionalBenefits() {
+		return jmpLinkToadditionalBenefits;
+	}
+
+	public List<WebElement> getDirectorySectionPDP() {
+		return directorySection;
+	}
+
+	public List<WebElement> getDirectorySectionSSUP() {
+		return directorySection;
+	}
+
+	public WebElement getWaysToSaveMoneySectionHeader() {
+		return waysToSaveMoneySectionHeader;
+	}
+
+	public WebElement getJmpLinkToDrugCopaysAndDiscountsPDP() {
+		return jmpLinkToDrugCopaysAndDiscountsPDP;
+	}
+
+	public WebElement getJmpLinkToDrugCoveragePDP() {
+		return jmpLinkToDrugCoveragePDP;
+	}
+
+	public WebElement getJmpLinkToPlanDocumentsAndResourcesPDP() {
+		return jmpLinkToPlanDocumentsAndResourcesPDP;
+	}
+
+	public WebElement getJmpLinkToWaysToSaveMoneyPDP() {
+		return jmpLinkToWaysToSaveMoneyPDP;
+	}
+
+	public List<WebElement> getDirectorySection(String memberType) {
+		// if (memberType.equalsIgnoreCase("Individual"))
+		return directorySection;
+		// else
+		// return directorySectionMAPDGroup;
+
+	}
+
+	public List<WebElement> getDirectorySection(String planType, String memberType) {
+		switch (planType) {
+
+		case "MAPD":
+			return getDirectorySection(memberType);
+
+		case "MA":
+			return getDirectorySectionMA();
+
+		case "MedSupp":
+			return getDirectorySectionMedSupp();
+
+		case "PDP":
+			return getDirectorySectionPDP();
+
+		case "SSUP":
+			return getDirectorySectionSSUP();
+
+		default:
+			System.out.println("Plan Not Found");
+			break;
+		}
+
+		return null;
+	}
+	
+	public List<WebElement> getDirectorySectionMA() {
+		return directorySection;
+	}
+
+	public List<WebElement> getDirectorySectionMedSupp() {
+		return directorySectionMedSupp;
+	}
+
+	public WebElement getTextdiscountservices() {
+		return textdiscountservices;
+	}
+
+	public WebElement getBenefitsSummarySectionHeader() {
+		return benefitsSummarySectionHeader;
+	}
+
+	public WebElement getJmpLinkToBenefitSummaryMedSupp() {
+		return jmpLinkToBenefitSummaryMedSupp;
+	}
+
+	public WebElement getJmpLinkToDiscountsAndServicesMedSupp() {
+		return jmpLinkToDiscountsAndServicesMedSupp;
+	}
+
+	public WebElement getJmpLinkToPlanDocumentsAndResourcesMedSupp() {
+		return jmpLinkToPlanDocumentsAndResourcesMedSupp;
+	}
+
+	public WebElement getJmpLinkToMedicalCopaysOrCoinsuranceMA(String memberType) {
+		if (memberType.equalsIgnoreCase("Individual"))
+			return jmpLinkToMedicalCopaysOrCoinsuranceMA;
+		else
+			return jmpLinkToMedicalCopaysOrCoinsuranceMAGroup;
+	}
+
+	public WebElement getJmpLinkToOutofPocketMaximumMA(String memberType) {
+		if (memberType.equalsIgnoreCase("Individual"))
+			return jmpLinkToOutofPocketMaximumMA;
+		else
+			return jmpLinkToOutofPocketMaximumMAGroup;
+	}
+
+	public WebElement getJmpLinkToPrimaryCareProviderMA(String memberType) {
+		if (memberType.equalsIgnoreCase("Individual"))
+			return jmpLinkToPrimaryCareProviderMA;
+		else
+			return jmpLinkToPrimaryCareProviderMAGroup;
+	}
+
+	public WebElement getJmpLinkToPlanDocumentsAndResourcesMA(String memberType) {
+		if (memberType.equalsIgnoreCase("Individual"))
+			return jmpLinkToPlanDocumentsAndResourcesMA;
+		else
+			return jmpLinkToPlanDocumentsAndResourcesMAGroup;
+	}
+
+	public WebElement getJmpLinkToOptionalServicesRiders(String planType) {
+		switch (planType) {
+
+		case "MAPD":
+			return jmpLinkToOptionalServicesRiders;
+
+		case "MA":
+			return jmpLinkToOptionalServicesRidersMA;
+
+		default:
+			System.out.println("Plan Not Found");
+			break;
+		}
+
+		return null;
+	}
 	
 	public WebElement getJmpLinkToOptionalServicesRiders() {
 		return jmpLinkToOptionalServicesRiders;
@@ -3252,34 +3522,221 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	}
 	
 	
-	public void verifyPresenceOfJumpLinksMAPD(String rider) {
-		CommonUtility.waitForPageLoad(driver,logoImage,15);
-		Assert.assertTrue("jmpLinkToMedicalCopaysOrCoinsurance isn't displayed", getJmpLinkToMedicalCopaysOrCoinsurance().isDisplayed());
-		Assert.assertTrue("jmpLinkToOutofPocketMaximum isn't displayed", getJmpLinkToOutofPocketMaximum().isDisplayed());
-		Assert.assertTrue("jmpLinkToPrimaryCareProvider isn't displayed", getJmpLinkToPrimaryCareProvider().isDisplayed());
-		if(rider.toString().trim().equals("Rider"))
-			Assert.assertTrue("jmpLinkToPrimaryCareProvider isn't displayed", getJmpLinkToOptionalServicesRiders().isDisplayed());
-		Assert.assertTrue("jmpLinkToDrugCopaysAndDiscounts isn't displayed", getJmpLinkToDrugCopaysAndDiscounts().isDisplayed());
-		Assert.assertTrue("jmpLinkToDrugCoverage isn't displayed", getJmpLinkToDrugCoverage().isDisplayed());
-		Assert.assertTrue("jmpLinkToPlanDocumentsAndResources isn't displayed", getJmpLinkToPlanDocumentsAndResources().isDisplayed());
-		System.out.println("All Jump links are displyed for the MAPD Plan");
-			
+	public void verifyPresenceOfJumpLinksMAPD(String rider, String planType, String memberType) {
+		CommonUtility.waitForPageLoad(driver, logoImage, 15);
+		Assert.assertTrue("jmpLinkToMedicalCopaysOrCoinsurance isn't displayed",
+				getJmpLinkToMedicalCopaysOrCoinsurance().isDisplayed());
+		Assert.assertTrue("jmpLinkToOutofPocketMaximum isn't displayed",
+				getJmpLinkToOutofPocketMaximum().isDisplayed());
+		Assert.assertTrue("jmpLinkToPrimaryCareProvider isn't displayed",
+				getJmpLinkToPrimaryCareProvider().isDisplayed());
+		if (rider.toString().trim().equals("Rider"))
+			Assert.assertTrue("jmpLinkToPrimaryCareProvider isn't displayed",
+					getJmpLinkToOptionalServicesRiders(planType).isDisplayed());
+		Assert.assertTrue("jmpLinkToDrugCopaysAndDiscounts isn't displayed",
+				getJmpLinkToDrugCopaysAndDiscounts().isDisplayed());
+
+		if (memberType.equalsIgnoreCase("Individual")) {
+			Assert.assertTrue("jmpLinkToDrugCoverage isn't displayed", getJmpLinkToDrugCoverage().isDisplayed());
+			Assert.assertTrue("jmpLinkToPlanDocumentsAndResources isn't displayed",
+					getJmpLinkToPlanDocumentsAndResources().isDisplayed());
+		} else {
+			Assert.assertTrue("jmpLinkToDrugCoverage isn't displayed", getJmpLinkToadditionalBenefits().isDisplayed()); // for
+																														// group
+																														// member
+			Assert.assertTrue("jmpLinkToDrugCoverage isn't displayed",
+					getJmpLinkToPlanDocumentsAndResourcesMAPDGroup().isDisplayed());
+
+		}
+
+		System.out.println("All Jump links are displayed for the MAPD Plan");
+
 	}
 
-	
-	public void clicksOnJumpLinksAndCheckRespectiveSectionsMAPD(String rider) {
-		
-		clicksOnLinkAndBackToTop(getJmpLinkToMedicalCopaysOrCoinsurance(),getCopayscoinsuranceheader());
-		clicksOnLinkAndBackToTop(getJmpLinkToOutofPocketMaximum(),getOutOfPocketSectionHeader());
-		clicksOnLinkAndBackToTop(getJmpLinkToPrimaryCareProvider(),getPrimaryCareProviderHeaderInd());
-		if(rider.toString().trim().equals("Rider"))
-			clicksOnLinkAndBackToTop(getJmpLinkToOptionalServicesRiders(),getOptionalServicesRidersSectionHeader());
-		clicksOnLinkAndBackToTop(getJmpLinkToDrugCopaysAndDiscounts(),getDrugCopaysAndDiscountsSectionHeader());
-		clicksOnLinkAndBackToTop(getJmpLinkToDrugCoverage(),getDrugCoverageSectionHeader());
-		clicksOnLinkAndBackToTop(getJmpLinkToPlanDocumentsAndResources(),getPlanDocumentsAndResourcesSectionHeader());
+	public void clicksOnJumpLinksAndCheckRespectiveSectionsMAPD(String rider, String planType, String memberType) {
+
+		clicksOnLinkAndBackToTop(getJmpLinkToMedicalCopaysOrCoinsurance(), getCopayscoinsuranceheader());
+		clicksOnLinkAndBackToTop(getJmpLinkToOutofPocketMaximum(), getOutOfPocketSectionHeader());
+		if (rider.toString().trim().equals("Rider"))
+			clicksOnLinkAndBackToTop(getJmpLinkToOptionalServicesRiders(planType),
+					getOptionalServicesRidersSectionHeader());
+		clicksOnLinkAndBackToTop(getJmpLinkToDrugCopaysAndDiscounts(), getDrugCopaysAndDiscountsSectionHeader());
+
+		if (memberType.equalsIgnoreCase("Individual")) {
+			clicksOnLinkAndBackToTop(getJmpLinkToPrimaryCareProvider(), getPrimaryCareProviderHeaderInd());
+			clicksOnLinkAndBackToTop(getJmpLinkToDrugCoverage(), getDrugCoverageSectionHeader());
+			clicksOnLinkAndBackToTop(getJmpLinkToPlanDocumentsAndResources(),
+					getPlanDocumentsAndResourcesSectionHeader());
+		} else {
+			clicksOnLinkAndBackToTop(getJmpLinkToPrimaryCareProvider(), getPrimaryCareProviderSectionHeaderGroup());
+			clicksOnLinkAndBackToTop(getJmpLinkToadditionalBenefits(), getAdditionalBenefitsSectionHeader()); // for
+																												// group
+																												// member
+			clicksOnLinkAndBackToTop(getJmpLinkToPlanDocumentsAndResourcesMAPDGroup(),
+					getPlanDocumentsAndResourcesSectionHeader());
+
+		}
+
 		System.out.println("All sections are present for the MAPD Plan");
-			
+
 	}
+
+	// For MA Plan
+	public void verifyPresenceOfJumpLinksMA(String rider, String planType, String memberType) {
+		CommonUtility.waitForPageLoad(driver, logoImage, 15);
+		Assert.assertTrue("jmpLinkToMedicalCopaysOrCoinsurance isn't displayed",
+				getJmpLinkToMedicalCopaysOrCoinsuranceMA(memberType).isDisplayed());
+		Assert.assertTrue("jmpLinkToOutofPocketMaximum isn't displayed",
+				getJmpLinkToOutofPocketMaximumMA(memberType).isDisplayed());
+		Assert.assertTrue("jmpLinkToPrimaryCareProvider isn't displayed",
+				getJmpLinkToPrimaryCareProviderMA(memberType).isDisplayed());
+		if (rider.toString().trim().equals("Rider"))
+			Assert.assertTrue("jmpLinkToPrimaryCareProvider isn't displayed",
+					getJmpLinkToOptionalServicesRiders(planType).isDisplayed());
+		Assert.assertTrue("jmpLinkToDrugCopaysAndDiscounts isn't displayed",
+				getJmpLinkToPlanDocumentsAndResourcesMA(memberType).isDisplayed());
+		/*
+		 * Assert.assertTrue("jmpLinkToDrugCoverage isn't displayed",
+		 * getJmpLinkToDrugCoverage().isDisplayed());
+		 * Assert.assertTrue("jmpLinkToPlanDocumentsAndResources isn't displayed",
+		 * getJmpLinkToPlanDocumentsAndResources().isDisplayed());
+		 */
+		System.out.println("All Jump links are displayed for the MAPD Plan");
+
+	}
+
+	public void clicksOnJumpLinksAndCheckRespectiveSectionsMA(String rider, String planType, String memberType) {
+
+		clicksOnLinkAndBackToTop(getJmpLinkToMedicalCopaysOrCoinsuranceMA(memberType), getCopayscoinsuranceheader());
+		clicksOnLinkAndBackToTop(getJmpLinkToOutofPocketMaximumMA(memberType), getOutOfPocketSectionHeader());
+
+		if (memberType.equalsIgnoreCase("Individual"))
+			clicksOnLinkAndBackToTop(getJmpLinkToPrimaryCareProviderMA(memberType), getPrimaryCareProviderHeaderInd());
+		else
+			clicksOnLinkAndBackToTop(getJmpLinkToPrimaryCareProviderMA(memberType),
+					getPrimaryCareProviderSectionHeaderGroup());
+
+		if (rider.toString().trim().equals("Rider"))
+			clicksOnLinkAndBackToTop(getJmpLinkToOptionalServicesRiders(planType),
+					getOptionalServicesRidersSectionHeader());
+		/*
+		 * clicksOnLinkAndBackToTop(getJmpLinkToDrugCopaysAndDiscounts(),
+		 * getDrugCopaysAndDiscountsSectionHeader());
+		 * clicksOnLinkAndBackToTop(getJmpLinkToDrugCoverage(),
+		 * getDrugCoverageSectionHeader());
+		 */
+		clicksOnLinkAndBackToTop(getJmpLinkToPlanDocumentsAndResourcesMA(memberType),
+				getPlanDocumentsAndResourcesSectionHeader());
+		System.out.println("All sections are present for the MAPD Plan");
+
+	}
+
+	// MedSupp
+
+	public void verifyPresenceOfJumpLinksMedSupp(String rider, String planType, String memberType) {
+		CommonUtility.waitForPageLoad(driver, logoImage, 15);
+		Assert.assertTrue("jmpLinkToMedicalCopaysOrCoinsurance isn't displayed",
+				getJmpLinkToBenefitSummaryMedSupp().isDisplayed());
+		Assert.assertTrue("jmpLinkToOutofPocketMaximum isn't displayed",
+				getJmpLinkToDiscountsAndServicesMedSupp().isDisplayed());
+		Assert.assertTrue("jmpLinkToPrimaryCareProvider isn't displayed",
+				getJmpLinkToPlanDocumentsAndResourcesMedSupp().isDisplayed());
+
+		System.out.println("All Jump links are displayed for the MedSupp Plan");
+
+	}
+
+	public void clicksOnJumpLinksAndCheckRespectiveSectionsMedSupp(String rider, String planType, String memberType) {
+
+		clicksOnLinkAndBackToTop(getJmpLinkToBenefitSummaryMedSupp(), getBenefitsSummarySectionHeader());
+		clicksOnLinkAndBackToTop(getJmpLinkToDiscountsAndServicesMedSupp(), getTextdiscountservices());
+		clicksOnLinkAndBackToTop(getJmpLinkToPlanDocumentsAndResourcesMedSupp(),
+				getPlanDocumentsAndResourcesSectionHeader());
+
+		System.out.println("All sections are present for the MedSupp Plan");
+
+	}
+
+	// PDP
+
+	public void verifyPresenceOfJumpLinksPDP(String rider, String planType, String memberType, String Identifier) {
+		CommonUtility.waitForPageLoad(driver, logoImage, 15);
+
+		if (Identifier.contains("UHC")) {
+			Assert.assertTrue("jmpLinkToMedicalCopaysOrCoinsurance isn't displayed",
+					getJmpLinkToDrugCopaysAndDiscountsPDPUHC().isDisplayed());
+
+			Assert.assertTrue("jmpLinkToMedicalCopaysOrCoinsurance isn't displayed",
+					getJmpLinkToPlanDocumentsAndResourcesPDPUHC().isDisplayed());
+		} else {
+			Assert.assertTrue("jmpLinkToMedicalCopaysOrCoinsurance isn't displayed",
+					getJmpLinkToDrugCopaysAndDiscountsPDP().isDisplayed());
+			Assert.assertTrue("JmpLinkToDrugCoveragePDP isn't displayed", getJmpLinkToDrugCoveragePDP().isDisplayed());
+			Assert.assertTrue("JmpLinkToPlanDocumentsAndResourcesPDP isn't displayed",
+					getJmpLinkToPlanDocumentsAndResourcesPDP().isDisplayed());
+			Assert.assertTrue("JmpLinkToWaysToSaveMoneyPDP isn't displayed",
+					getJmpLinkToWaysToSaveMoneyPDP().isDisplayed());
+		}
+		System.out.println("All Jump links are displayed for the PDP Plan");
+
+	}
+
+	public void clicksOnJumpLinksAndCheckRespectiveSectionsPDP(String rider, String planType, String memberType,
+			String Identifier) {
+
+		if (Identifier.contains("UHC")) {
+			clicksOnLinkAndBackToTop(getJmpLinkToDrugCopaysAndDiscountsPDPUHC(),
+					getDrugCopaysAndDiscountsSectionHeader());
+			clicksOnLinkAndBackToTop(getJmpLinkToPlanDocumentsAndResourcesPDPUHC(),
+					getPlanDocumentsAndResourcesSectionHeader());
+		} else {
+
+			clicksOnLinkAndBackToTop(getJmpLinkToDrugCopaysAndDiscountsPDP(), getDrugCopaysAndDiscountsSectionHeader());
+			clicksOnLinkAndBackToTop(getJmpLinkToDrugCoveragePDP(), getDrugCoverageSectionHeader());
+			clicksOnLinkAndBackToTop(getJmpLinkToPlanDocumentsAndResourcesPDP(),
+					getPlanDocumentsAndResourcesSectionHeader());
+			clicksOnLinkAndBackToTop(getJmpLinkToWaysToSaveMoneyPDP(), getWaysToSaveMoneySectionHeader());
+		}
+		System.out.println("All sections are present for the PDP Plan");
+
+	}
+
+	// SSUP
+	public void verifyPresenceOfJumpLinksSSUP(String rider, String planType, String memberType) {
+		CommonUtility.waitForPageLoad(driver, logoImage, 15);
+		Assert.assertTrue("jmpLinkToMedicalCopaysOrCoinsurance isn't displayed",
+				getJmpLinkToMedicalCopaysOrCoinsuranceSSUP().isDisplayed());
+		Assert.assertTrue("jmpLinkToOutofPocketMaximum isn't displayed",
+				getJmpLinkToOutofPocketMaximumSSUP().isDisplayed());
+		Assert.assertTrue("jmpLinkToPrimaryCareProvider isn't displayed",
+				getJmpLinkToPrimaryCareProviderSSUP().isDisplayed());
+		Assert.assertTrue("jmpLinkToDrugCopaysAndDiscounts isn't displayed",
+				getJmpLinkToPlanDocumentsAndResourcesSSUP().isDisplayed());
+
+		System.out.println("All Jump links are displayed for SSUP Plan");
+
+	}
+
+	public void clicksOnJumpLinksAndCheckRespectiveSectionsSSUP(String rider, String planType, String memberType) {
+
+		clicksOnLinkAndBackToTop(getJmpLinkToMedicalCopaysOrCoinsuranceSSUP(), getCopayscoinsuranceheader());
+		clicksOnLinkAndBackToTop(getJmpLinkToOutofPocketMaximumSSUP(), getOutOfPocketSectionHeader());
+
+		/*
+		 * if(memberType.equalsIgnoreCase("Individual"))
+		 * clicksOnLinkAndBackToTop(getJmpLinkToPrimaryCareProviderSSUP(),
+		 * getPrimaryCareProviderHeaderInd()); else
+		 */
+		clicksOnLinkAndBackToTop(getJmpLinkToPrimaryCareProviderSSUP(), getPrimaryCareProviderSectionHeaderGroup());
+
+		clicksOnLinkAndBackToTop(getJmpLinkToPlanDocumentsAndResourcesSSUP(),
+				getPlanDocumentsAndResourcesSectionHeader());
+		System.out.println("All sections are present for SSUP Plan");
+
+	}
+
+	// SSUP ends here
+
 	
 	public void verifyElementPresence(WebElement element) {
 		Assert.assertTrue("Section/Link isn't displayed",element.isDisplayed());
@@ -3305,15 +3762,25 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}
 	}
 	
-	public void directoryLinksCount(int linkCount,String rider) {
-		int count =getDirectorySection().size()-1;
-		if(rider.toString().trim().equals("Rider"))
-			count+=1;
-		
-		Assert.assertTrue("Irrelevant links are present", count==linkCount);
+	public void directoryLinksCount(int linkCount, String rider, String planType, String memberType) {
+		int count = 0;
+		if (planType.equals("MA") || planType.equals("MAPD")) {
+			if (memberType.equalsIgnoreCase("Individual")) {
+				count = getDirectorySection(planType, memberType).size() - 1;
+				if (rider.toString().trim().equals("Rider"))
+					count += 1;
+			} else if (memberType.equalsIgnoreCase("Group"))
+				count = getDirectorySection(planType, memberType).size() - 1;
+			else
+				count = getDirectorySection(planType, memberType).size();
+		} else
+			count = getDirectorySection(planType, memberType).size();
+		System.out.println("The link count is " + count);
+		Assert.assertTrue("Irrelevant links are present", count == linkCount);
 		System.out.println("No irrelevant links found");
-		
+
 	}
+
 	
 	
 	public void ValidatePDFTextSection() {

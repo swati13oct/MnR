@@ -2,27 +2,166 @@
 @codeMonkeys @thePredators
 Feature: C1.1 To test plan benefits and Coverage on UMS site
 
-  @PlanBFSMAPD @Feb_release_2019
-  Scenario Outline: Verify all sections for Ind NonLIS member on Benefits and Coverage page
+   @PlanBFSJMPLinks @Feb_release_2019 
+  Scenario Outline: Verify jump links for individual MAPD member
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
-      | Copay Category | <copayCategory> |
-      | Rider          | <rider>         |
+      |identifier|<Identifier>|
+      |Rider|<rider>|
+      
     Then The user navigates to Benefits and Coverage page
       | Plan Type | <planType> |
     Then user verifies presence of jump links
-      | Rider | <rider> |
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |MemberType|<memberType>|
+      |identifier|<Identifier>|
     And user clicks on the jump links and checks respective sections
-      | Rider | <rider> |
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |MemberType|<memberType>|
+      |identifier|<Identifier>|
     And verifies links irrelevant to the plan type are not displayed
-      | Count | <count> |
-      | Rider | <rider> |
-
-    Examples: 
-      | planType | memberType | copayCategory | language | count | rider   |
-      | MAPD     | Individual | NON LIS       | ENGLISH  |     6 | NoRider |
-      | MAPD     | Individual | NON LIS       | ENGLISH  |     7 | Rider   |
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |Count|<count>|
+      |MemberType|<memberType>|
+      
+   Examples: 
+       | planType | memberType |Identifier| language |count|rider|
+       | MAPD     | Individual |IndEffectiveAARP| ENGLISH  | 6   |NoRider|
+       | MAPD     | Individual |IndEffectiveAARP| ENGLISH  | 7   |Rider|
+       | MAPD     | Group |GrpEffectiveUHC| ENGLISH  | 6   |NoRider|
+       | MAPD     | Individual |IndEffectiveUHC| ENGLISH  | 6   |NoRider|
+	   | MAPD     | Individual |IndEffectiveUHC| ENGLISH  | 7   |Rider|
+	   | PCP     | Individual |IndEffectivePCP| ENGLISH  | 6   |NoRider|
+	   | MEDICA     | Individual |IndEffectiveMedica| ENGLISH  | 6   |NoRider|
+	   
+  
+  @PlanBFSJMPLinks @Feb_release_2019
+  Scenario Outline: Verify jump links for individual MA member
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      |identifier|<Identifier>|
+      |Rider|<rider>|
+    Then The user navigates to Benefits and Coverage page
+      | Plan Type | <planType> |
+    Then user verifies presence of jump links
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |MemberType|<memberType>|
+      |identifier|<Identifier>|
+    And user clicks on the jump links and checks respective sections
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |MemberType|<memberType>|
+      |identifier|<Identifier>|
+    And verifies links irrelevant to the plan type are not displayed
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |Count|<count>|
+      |MemberType|<memberType>|
+      
+   Examples: 
+      | planType | memberType |Identifier| language |count|rider|
+      | MA       | Group	  |GrpEffectiveUHC| ENGLISH   | 4   |NoRider|
+      | MA       | Individual |IndEffectiveUHC | ENGLISH  | 5   |Rider|
+      | MA       | Individual |IndEffectiveAARP| ENGLISH  | 5   |Rider|
+      | MA       | Individual |IndEffectiveAARP| ENGLISH  | 4   |NoRider|
+      
+      
+      
+	 
+  @PlanBFSJMPLinks @Feb_release_2019
+  Scenario Outline: Verify jump links for a MedSupp member
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      |identifier|<Identifier>|
+      |Rider|<rider>|
+    Then The user navigates to Benefits and Coverage page
+      | Plan Type | <planType> |
+    Then user verifies presence of jump links
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |MemberType|<memberType>|
+      |identifier|<Identifier>|
+    And user clicks on the jump links and checks respective sections
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |MemberType|<memberType>|
+      |identifier|<Identifier>|
+    And verifies links irrelevant to the plan type are not displayed
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |Count|<count>|
+      |MemberType|<memberType>|
+      
+   Examples: 
+      | planType | memberType |Identifier| language |count|rider|
+      | MedSupp  | Individual |EffectiveShipMedSupp| ENGLISH  | 3   |NoRider|
+      
+  @PlanBFSJMPLinks @Feb_release_2019
+  Scenario Outline: Verify jump links for individual PDP member
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      |identifier|<Identifier>|
+      |Rider|<rider>|
+    Then The user navigates to Benefits and Coverage page
+      | Plan Type | <planType> |
+    Then user verifies presence of jump links
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |MemberType|<memberType>|
+      |identifier|<Identifier>|
+    And user clicks on the jump links and checks respective sections
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |MemberType|<memberType>|
+      |identifier|<Identifier>|
+    And verifies links irrelevant to the plan type are not displayed
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |Count|<count>|
+      |MemberType|<memberType>|
+      
+   Examples: 
+      | planType | memberType |Identifier| language |count|rider|
+      | PDP | Individual |EffectivePDPAARP| ENGLISH  | 4   |NoRider|
+      | PDP | Individual |EffectivePDPUHC| ENGLISH  | 2   |NoRider|
+      #| PDP | Group |EffectivePDPUHC| ENGLISH  | 4   |NoRider|
+    
+    @PlanBFSJMPLinks @Feb_release_2019
+  Scenario Outline: Verify jump links for a SSUP member
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      |identifier|<Identifier>|
+      |Rider|<rider>|
+    Then The user navigates to Benefits and Coverage page
+      | Plan Type | <planType> |
+    Then user verifies presence of jump links
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      | Member Type    | <memberType>    |
+      |identifier|<Identifier>|
+    And user clicks on the jump links and checks respective sections
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      | Member Type    | <memberType>    |
+      |identifier|<Identifier>|
+    And verifies links irrelevant to the plan type are not displayed
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |Count|<count>|
+      | Member Type    | <memberType>    |
+      
+   Examples: 
+      | planType | memberType |Identifier| language |count|rider|
+      | SSUP | Group |GrpEffectiveSSUP| ENGLISH  | 4   |NoRider|
 
   @CMFedDrugNonLis
   Scenario Outline: Verify all sections for Ind NonLIS member on Benefits and Coverage page
