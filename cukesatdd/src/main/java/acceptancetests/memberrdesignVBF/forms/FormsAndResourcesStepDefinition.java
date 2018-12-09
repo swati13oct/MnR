@@ -250,4 +250,17 @@ public class FormsAndResourcesStepDefinition {
 			Assert.fail("renw sec not coming");
 
 	}
+	
+	@Then("^validate that the renew magazine section is displayed$")
+	public void validate_that_the_renew_magazine_section_is_displayed() throws Throwable {
+
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+
+		if (formsAndResourcesPage.getRenewMagazineSection().isDisplayed()) {
+			System.out.println("renew sec is present");
+		} else
+			Assert.fail("renw sec not coming");
+
+	}
 }
