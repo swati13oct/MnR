@@ -246,9 +246,7 @@ public class AccountHomePage extends UhcDriver {
 	// private WebElement logoImage;
 
 	@FindBy (xpath = "//*[@id='ui-view-page']/div/arcade-header/header[1]/div/div/a/img")
-	private WebElement logoImage;
-	@FindBy (xpath = "//*[@id='ui-view-page']/div/arcade-header/header[1]/div/div/a/img")
-	private WebElement logoImage1;																				  
+	private WebElement logoImage;								  
 
 	@FindBy(xpath = "//*[@id='ui-view-page']/div/arcade-header/header[1]/div/div/a/img[2]")
 	private WebElement cologoImage;
@@ -1118,32 +1116,17 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public void validateImagePresent(String logoToBeDisplayedOnDashboard) throws InterruptedException {
-		//Thread.sleep(2000);
-		driver.findElement(By.id("home_2")).click();
-		System.out.println("Home button is clicked on TestHarness Home Page to go to Home Page");
-		//CommonUtility.waitForPageLoad(driver,logoImage,30);
-		Thread.sleep(8000);
-		if(logoImage.isDisplayed()){
-			String logo_src = logoImage.getAttribute("src");
-			String logo_alt = logoImage.getAttribute("alt");
-			System.out.println("Actual logo's source on Dashboard page is   " + logo_src + " and Expected logo source    "
-					+ logoToBeDisplayedOnDashboard + " .");
-			System.out.println("logo's alt text on Dashboard page is   " + logo_alt);
-			Assert.assertTrue(logo_src.contains(logoToBeDisplayedOnDashboard));
-			System.out.println("Dashboard page Primary logo assert condition is passed");}
-		else if(logoImage1.isDisplayed())
-		{
-			String logo_src = logoImage1.getAttribute("src");
-			String logo_alt = logoImage1.getAttribute("alt");
-			System.out.println("Actual logo's source on Dashboard page is   " + logo_src + " and Expected logo source    "
-					+ logoToBeDisplayedOnDashboard + " .");
-			System.out.println("logo's alt text on Dashboard page is   " + logo_alt);
-			Assert.assertTrue(logo_src.contains(logoToBeDisplayedOnDashboard));
-			System.out.println("Dashboard page Primary logo assert condition is passed");}
+		CommonUtility.waitForPageLoad(driver,logoImage,30); 
+        String logo_src = logoImage.getAttribute("src");
+        String logo_alt = logoImage.getAttribute("alt");
+        System.out.println("Actual logo's source on Dashboard page is   "+logo_src+" and Expected logo source    "+logoToBeDisplayedOnDashboard+" .");   
+        System.out.println("logo's alt text on Dashboard page is   "+logo_alt);           
+        Assert.assertTrue(logo_src.contains(logoToBeDisplayedOnDashboard));
+        System.out.println("Dashboard page Primary logo assert condition is passed");
 	}
 
 	public void validateCoLogoImagePresent(String cologoToBeDisplayedOnDashboard) throws InterruptedException {
-		CommonUtility.waitForPageLoad(driver,cologoImage,15);
+		CommonUtility.waitForPageLoad(driver,cologoImage,30);
 		String cologo_src = cologoImage.getAttribute("src");
 		String cologo_alt = cologoImage.getAttribute("alt");
 		System.out.println("Actual cologo's source on Dashboard page is   " + cologo_src

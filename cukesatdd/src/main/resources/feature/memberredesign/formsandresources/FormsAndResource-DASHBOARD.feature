@@ -19,7 +19,7 @@ Scenario Outline:
      | Alternative Drug List 	| <alternativedruglist>     |
      | EVIDENCE OF COVERAGEMEM  | <evidenceofcoverage>      |
      | PASSPORT					| <passport>    			|
-     | OVER THE COUNTER			| <overthecounter>    		|
+    #| OVER THE COUNTER			| <overthecounter>    		|  # it is a link
    	Then validate that annual directory section is displayed
     | Member Type | <memberType> |
     Then validate pdf's in annual directory section
@@ -47,6 +47,7 @@ Scenario Outline:
      | GETTING STARTED GUIDE    | <gettingstartedguide>     |
      | BENEFIT-HIGHLIGHT        | <benefithighlight>        |
      | EVIDENCE OF COVERAGEMEM  | <evidenceofcoverage>      |
+     | PASSPORT					| <passport>    			|
     Then validate that annual directory section is displayed
     | Member Type | <memberType> |
      Then validate pdf's in annual directory section
@@ -58,8 +59,9 @@ Scenario Outline:
    	| Member Type | <memberType> |
     Examples: 
       
-     | planType | memberType           	    | language | gettingstartedguide   | benefithighlight   | evidenceofcoverage   |providerdirectory   | vendorInformationsheet    |
-     | MA       | IndAARPMAPre-EffectiveFnR | ENGLISH  | Getting Started Guide | Benefit Highlights |Evidence of Coverage  |Provider Directory  | Vendor Information Sheet 	|
+     | planType | memberType           	    | language | gettingstartedguide   | benefithighlight   | evidenceofcoverage   |providerdirectory   | vendorInformationsheet    |passport      |
+     | MA       | IndAARPMAPre-EffectiveFnR | ENGLISH  | Getting Started Guide | Benefit Highlights |Evidence of Coverage  |Provider Directory  | Vendor Information Sheet 	|UnitedHealth Passport Program|
+     
 
 
 @fnrpdpaarpindividualvalidationPre-Effective
@@ -193,7 +195,7 @@ Scenario Outline:
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     And user clicks on the view document and resources link and navigate to forms and resource page
-    And validates that PEEHIP logo is not displayed
+   # And validates that PEEHIP logo is not displayed
     Then validate that the plan material section is displayed
     And validate for active member Temporary Id Card and Plan Order Material links are displayed
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
@@ -302,7 +304,7 @@ Scenario Outline:
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     And user clicks on the view document and resources link and navigate to forms and resource page
-    And validates that PEEHIP logo is not displayed
+   #And validates that PEEHIP logo is not displayed
     And validates the pdp texas logo
     Then validate that the plan material section is displayed
     And validate for active member Temporary Id Card and Plan Order Material links are displayed
@@ -338,14 +340,14 @@ Scenario Outline:
       | GETTING STARTED GUIDE             | <gettingstartedguide>    |
       | BENEFIT-HIGHLIGHT                 | <benefithighlight>       |  
       | EVIDENCE OF COVERAGE              | <evidenceofcoverage>     |
-       | SUMMARY-OF-BENEFIT                | <summaryofbenefits>     |
+      | SUMMARY-OF-BENEFIT                | <summaryofbenefits>     |
       | FORMULARY DRUG LIST ABRIDGED      | <abridgedformulary>      |
       | FORMULARY DRUG LIST COMPREHENSIVE | <comprehensiveformulary> |
       | ADDITIONAL DRUG COVERAGE          | <additionaldrug>         |
-      | PRIOR AUTHORIZATION               | <priorauth>              |
-      | STEP THERAPY                      | <steptherapy>            |
-      | FORMULARY ADDITIONS               | <formularyadd>           |
-      | FORMULARY DELETIONS               | <formularydel>           |
+     #| PRIOR AUTHORIZATION               | <priorauth>              |
+     #| STEP THERAPY                      | <steptherapy>            |
+     #| FORMULARY ADDITIONS               | <formularyadd>           |
+     #| FORMULARY DELETIONS               | <formularydel>           |
  
       Examples:
 
@@ -441,10 +443,11 @@ Scenario Outline:
     And Medical EOB link is displayed for MA
     Then validate that the forms & resources section is displayed
     Then validate that the renew magazine section is displayed for MAPD
+    And the Pharmacy locator link is not displayed for MA
     And the user verifies that the correct pdfs are coming in the anoc section
       | ANNUAL NOTICE OF CHANGES  | <anoc>                   |
       | EVIDENCE OF COVERAGE ANOC | <evidenceofcoverageanoc> |
-    And the Pharmacy locator link is not displayed for MA
+    
     And then user verifies that the correct pdfs are coming in the plan material section
       | BENEFIT-HIGHLIGHT              | <benefithighlight>            | 
       | EVIDENCE OF COVERAGE           | <evidenceofcoverage>          |
@@ -461,7 +464,7 @@ Scenario Outline:
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     And user clicks on the view document and resources link and navigate to forms and resource page
-    And the user verifies the alpeehip logo
+   # And the user verifies the alpeehip logo
     Then validate that the plan material section is displayed
     And validate for active member Temporary Id Card and Plan Order Material links are displayed
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
@@ -520,7 +523,7 @@ Scenario Outline:
     And user clicks on the view document and resources link and navigate to forms and resource page
     And validates that PEEHIP logo is not displayed
     Then validate that the plan material section is displayed
-    And validate for active member Temporary Id Card and Plan Order Material links are displayed
+   # And validate for active member Temporary Id Card and Plan Order Material links are displayed
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
     And validate that the view temporary id card link is displayed
     And validate that english is default language in the dropdown
@@ -537,9 +540,9 @@ Scenario Outline:
     Then validate that the forms & resources section is displayed
     Then validate that the renew magazine section is displayed
     Then the member validate the correct Membership Materials section is coming
-      | BENEFIT-HIGHLIGHT       | <benefithighlight>       |
-      | COMPREHENSIVE FORMULARY | <comprehensiveformulary> |
-      | EVIDENCE OF COVERAGE    | <evidenceofcoverage>     |
+      #| BENEFIT-HIGHLIGHT       | <benefithighlight>       |
+      # | COMPREHENSIVE FORMULARY | <comprehensiveformulary> |
+      #| EVIDENCE OF COVERAGE    | <evidenceofcoverage>     |
     And then user verifies that the correct pdfs are coming in the plan material section
       | BENEFIT-HIGHLIGHT       | <benefithighlight>       |
       | SUMMARY-OF-BENEFIT      | <summaryofbenefits>      |
@@ -626,8 +629,9 @@ Scenario Outline:
     And both the Pharmacy locator and provider search links are not displayed
     Then validate that My Document section is displayed
     Then validate that the renew magazine section is not displayed
-    Then validate that the EOB Section is displayed
     Then validate that the annual directories section is not displayed
+    Then validate that the EOB Section is displayed
+    
     
 
     Examples: 
@@ -669,16 +673,16 @@ Scenario Outline:
     And Member Enters the Username he wants to search
       | MemUsername | <member> |
     And User Clicks on the Pop up displayed
-    And user clicks on the view document and resources link and navigate to forms and resource page from member auth page
-    And validates that PEEHIP logo is not displayed
-    And validate for active member Temporary Id Card and Plan Order Material links are displayed
-    And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
-    And validate that the view temporary id card link is displayed
-    Then validate that the plan material section is displayed
-    Then validate that the AnocSection is displayed
-    Then validate that annual directory section is displayed
+    #And user clicks on the view document and resources link and navigate to forms and resource page from member auth page
+    #And validates that PEEHIP logo is not displayed
+    #And validate for active member Temporary Id Card and Plan Order Material links are displayed
+    #And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
+    #And validate that the view temporary id card link is displayed
+    #Then validate that the plan material section is displayed
+   	#Then validate that the AnocSection is displayed
+    #Then validate that annual directory section is displayed
         Examples: 
       | username  | password  | member           |
-      | qavgogine | qavgogine | q1_aarp_apr185   |   
+      | qavgogine | qavgogine | q2_jun_aarp0055   |   
       
      
