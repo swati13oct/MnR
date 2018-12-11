@@ -638,7 +638,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | planType | memberType                       |
       | MAPD     | memberWithoutProviderTiering_BnC |
 
-  @WaystoSaveforPdp @regression @regression_06_06_18 @benefitsAndCoverage
+  @WaystoSaveforPdp @regression @regression_06_06_18 @benefitsAndCoverage 
   Scenario Outline: Verify the ways to save  widget for a PDP member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -698,7 +698,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
 
     Examples: 
       | planType | memberType |
-      | Peehip   | Group      |
+      | Peehip   | Group_BnC      |
 
   @BenefitsForMAMedsupSSUPMember @regression @regression_06_06_18 @benefitsAndCoverage
   Scenario Outline: Verify the Benefits for a  MA Member
