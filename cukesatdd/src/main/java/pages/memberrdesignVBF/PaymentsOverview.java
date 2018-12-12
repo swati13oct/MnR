@@ -25,7 +25,11 @@ public class PaymentsOverview extends UhcDriver {
 	@FindBy(xpath = "//table[@id='paymentTable']/tbody/tr/th[contains(text(),'Amount Paid')]")
 	private WebElement amountPaid;
 
-	@FindBy(id = "payment-date")
+	@FindBy(xpath = "//ul[@id='menu2']//a[contains(text(),'Last 24 months')]")
+	private WebElement menuLast24months;
+
+	//@FindBy(id = "payment-date")
+	@FindBy(xpath = ".//button[@id='menubutton']/span")
 	private WebElement paymentDropdown;
 
 	@FindBy(className = "loading-block")
@@ -64,9 +68,16 @@ public class PaymentsOverview extends UhcDriver {
 	 * @throws InterruptedException
 	 */
 	public void ScrollDownAndSelectRange() throws InterruptedException {
+		
 		scrollToView(paymentDropdown);
-		Select dropdown = new Select(paymentDropdown);
-		dropdown.selectByVisibleText("Last 24 months");
+		//Select dropdown = new Select(paymentDropdown);
+		//dropdown.selectByVisibleText("Last 24 months");
+		//paymentDropdown.click();
+		//CommonUtility.waitForPageLoad(driver, menuLast24months, 10);
+		jsClickNew(paymentDropdown);
+		Thread.sleep(2000);
+		menuLast24months.click();		
+
 		if (loadingImages.size() > 0) {
 			CommonUtility.waitForElementToDisappear(driver, loadingImages.get(0), 120);
 		}
