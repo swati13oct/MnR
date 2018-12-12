@@ -662,10 +662,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	
 	//backtotop
 	//*[@id="backToTopContainer"]/a/span/p
-	@FindBy(xpath = "//*[@id='backToTopContainer']/a/span/p")
+	@FindBy(xpath = "(//*[@id='backToTopContainer']/a/span/p)[1]")
 	private WebElement linkBackToTop;
 	
-	
+	@FindBy(xpath = "(//*[@id='backToTopContainer']/a/span/p)[2]")
+	private WebElement linkBackToTop_copy;
 	
 	//MAPD_UHC jump links
 	
@@ -729,8 +730,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='plan_benefit_documents']//*/h2")
 	private WebElement PlanDocumentsAndResourcesSectionHeader;
 	
-
-	@FindBy(xpath = "//*[@class='jumplinks']//li")
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']//*[@class='jumplinks']//li")
 	private List<WebElement> directorySection;
 
 	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/div[2]//*/div[2]/div/div[2]/div/div[1]//*//ul/li")
@@ -818,6 +818,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath="//*[@class='subtitle atdd-benefitssummary-dental']")
 	private WebElement ssupDental;
 	
+	public WebElement getLinkBackToTop_copy() {
+		return linkBackToTop_copy;
+	}
+	
 	public WebElement getJmpLinkToDrugCopaysAndDiscountsPDPUHC() {
 		return jmpLinkToDrugCopaysAndDiscountsPDPUHC;
 	}
@@ -895,21 +899,44 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	}
 
 	public List<WebElement> getDirectorySection(String planType, String memberType) {
-		switch (planType) {
+		int planId=0;
+		/*     Menu                                                     
+		 * 1-MAPD
+		 * 2-MA
+		 * 3-MedSupp
+		 * 4-PDP
+		 * 5-SSUP
+		 *  
+		 */
+		
+		if(planType.equalsIgnoreCase("MAPD"))
+			planId=1;
+		if(planType.equalsIgnoreCase("MA"))
+			planId=2;
+		if(planType.equalsIgnoreCase("MedSupp"))
+			planId=3;
+		if(planType.equalsIgnoreCase("PDP"))
+			planId=4;
+		if(planType.equalsIgnoreCase("SSUP"))
+			planId=5;
+		
+		
+		switch (planId) {
 
-		case "MAPD":
+		case 1:
+			
 			return getDirectorySection(memberType);
 
-		case "MA":
+		case 2:
 			return getDirectorySectionMA();
 
-		case "MedSupp":
+		case 3:
 			return getDirectorySectionMedSupp();
 
-		case "PDP":
+		case 4:
 			return getDirectorySectionPDP();
 
-		case "SSUP":
+		case 5:
 			return getDirectorySectionSSUP();
 
 		default:
@@ -921,7 +948,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	}
 	
 	public List<WebElement> getDirectorySectionMA() {
-		return directorySection;
+		
+		    return directorySection;
+		
 	}
 
 	public List<WebElement> getDirectorySectionMedSupp() {
@@ -977,12 +1006,35 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	}
 
 	public WebElement getJmpLinkToOptionalServicesRiders(String planType) {
-		switch (planType) {
+		int planId=0;
+		/*     Menu                                                     
+		 * 1-MAPD
+		 * 2-MA
+		 * 3-MedSupp
+		 * 4-PDP
+		 * 5-SSUP
+		 *  
+		 */
+		
+		if(planType.equalsIgnoreCase("MAPD"))
+			planId=1;
+		if(planType.equalsIgnoreCase("MA"))
+			planId=2;
+/*		if(planType.equalsIgnoreCase("MedSupp"))
+			planId=3;
+		if(planType.equalsIgnoreCase("PDP"))
+			planId=4;
+		if(planType.equalsIgnoreCase("SSUP"))
+			planId=5;*/
+		
+		
+		
+		switch (planId) {
 
-		case "MAPD":
+		case 1:
 			return jmpLinkToOptionalServicesRiders;
 
-		case "MA":
+		case 2:
 			return jmpLinkToOptionalServicesRidersMA;
 
 		default:
@@ -3601,7 +3653,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		 * Assert.assertTrue("jmpLinkToPlanDocumentsAndResources isn't displayed",
 		 * getJmpLinkToPlanDocumentsAndResources().isDisplayed());
 		 */
-		System.out.println("All Jump links are displayed for the MAPD Plan");
+		System.out.println("All Jump links are displayed for the MA Plan");
 
 	}
 
@@ -3627,7 +3679,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		 */
 		clicksOnLinkAndBackToTop(getJmpLinkToPlanDocumentsAndResourcesMA(memberType),
 				getPlanDocumentsAndResourcesSectionHeader());
-		System.out.println("All sections are present for the MAPD Plan");
+		System.out.println("All sections are present for the MA Plan");
 
 	}
 
@@ -3753,7 +3805,12 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			e.printStackTrace();
 		}
 		verifyElementPresence(element_2);
-		getLinkBackToTop().click();
+		try {
+			getLinkBackToTop_copy().click();
+		}catch(Exception ex){
+			getLinkBackToTop().click();
+			
+		}
 		try {
 			Thread.sleep(1000);		  //Added sleep to mimic user interaction 
 		} catch (InterruptedException e) {
@@ -3766,11 +3823,17 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		int count = 0;
 		if (planType.equals("MA") || planType.equals("MAPD")) {
 			if (memberType.equalsIgnoreCase("Individual")) {
+						
 				count = getDirectorySection(planType, memberType).size() - 1;
 				if (rider.toString().trim().equals("Rider"))
 					count += 1;
-			} else if (memberType.equalsIgnoreCase("Group"))
-				count = getDirectorySection(planType, memberType).size() - 1;
+				
+			} else if (memberType.equalsIgnoreCase("Group")) {
+				if (planType.equals("MAPD"))
+				count = getDirectorySection(planType, memberType).size();
+				else
+				count = getDirectorySection(planType, memberType).size()-1;
+			}
 			else
 				count = getDirectorySection(planType, memberType).size();
 		} else

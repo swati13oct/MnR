@@ -2,7 +2,7 @@
 @codeMonkeys @thePredators
 Feature: C1.1 To test plan benefits and Coverage on UMS site
 
-   @PlanBFSJMPLinks @Feb_release_2019 
+   @PlanBFSJMPLinks @Feb_release_2019 @gladiators
   Scenario Outline: Verify jump links for individual MAPD member
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -39,7 +39,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
 	   | MEDICA     | Individual |IndEffectiveMedica| ENGLISH  | 6   |NoRider|
 	   
   
-  @PlanBFSJMPLinks @Feb_release_2019
+  @PlanBFSJMPLinks @Feb_release_2019 @gladiators
   Scenario Outline: Verify jump links for individual MA member
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -74,7 +74,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       
       
 	 
-  @PlanBFSJMPLinks @Feb_release_2019
+  @PlanBFSJMPLinks @Feb_release_2019 @gladiators
   Scenario Outline: Verify jump links for a MedSupp member
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -103,7 +103,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | planType | memberType |Identifier| language |count|rider|
       | MedSupp  | Individual |EffectiveShipMedSupp| ENGLISH  | 3   |NoRider|
       
-  @PlanBFSJMPLinks @Feb_release_2019
+  @PlanBFSJMPLinks @Feb_release_2019 @gladiators
   Scenario Outline: Verify jump links for individual PDP member
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -134,7 +134,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | PDP | Individual |EffectivePDPUHC| ENGLISH  | 2   |NoRider|
       #| PDP | Group |EffectivePDPUHC| ENGLISH  | 4   |NoRider|
     
-    @PlanBFSJMPLinks @Feb_release_2019
+    @PlanBFSJMPLinks @Feb_release_2019 @gladiators
   Scenario Outline: Verify jump links for a SSUP member
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |

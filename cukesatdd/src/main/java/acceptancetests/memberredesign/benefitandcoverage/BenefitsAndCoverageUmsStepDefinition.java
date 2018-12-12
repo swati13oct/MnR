@@ -1754,6 +1754,7 @@ try {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		
+		int planId=0;
 		String planType=data.get(0).get(1).trim();
 		String rider=data.get(1).get(1).trim();
 		String memberType=data.get(2).get(1).trim();
@@ -1763,24 +1764,44 @@ try {
 			planType="MAPD";
 			//planType.replaceAll(planType, "MAPD").toString().trim();
 		
-		   switch (planType) { 
-	       case "MAPD": 
+		/*     Menu                                                     
+		 * 1-MAPD
+		 * 2-MA
+		 * 3-MedSupp
+		 * 4-PDP
+		 * 5-SSUP
+		 *  
+		 */
+		if(planType.equalsIgnoreCase("MAPD"))
+			planId=1;
+		if(planType.equalsIgnoreCase("MA"))
+			planId=2;
+		if(planType.equalsIgnoreCase("MedSupp"))
+			planId=3;
+		if(planType.equalsIgnoreCase("PDP"))
+			planId=4;
+		if(planType.equalsIgnoreCase("SSUP"))
+			planId=5;
+		
+				
+		   switch (planId) { 
+	       case 1: 
 	    	   benefitsCoveragePage.verifyPresenceOfJumpLinksMAPD(rider,planType,memberType);
 	           break; 
 	       
-	       case "MA": 
+	       case 2: 
 	    	   benefitsCoveragePage.verifyPresenceOfJumpLinksMA(rider,planType,memberType);
 	           break; 
 	       
-	       case "MedSupp": 
+	       case 3: 
 	    	   benefitsCoveragePage.verifyPresenceOfJumpLinksMedSupp(rider,planType,memberType);
 	           break;
 	       
-	       case "PDP": 
+	       case 4: 
 	    	   benefitsCoveragePage.verifyPresenceOfJumpLinksPDP(rider,planType,memberType,identifier);
 	           break;
 	       
-	       case "SSUP": 
+	       case 5: 
 	    	   benefitsCoveragePage.verifyPresenceOfJumpLinksSSUP(rider,planType,memberType);
 	           break;
 	            
@@ -1800,6 +1821,7 @@ try {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		
+	
 		String planType=data.get(0).get(1).trim();
 		String rider=data.get(1).get(1).trim();
 		String memberType=data.get(2).get(1).trim();
@@ -1807,25 +1829,46 @@ try {
 		//String count=data.get(2).get(1);
 		if(planType.equalsIgnoreCase("MEDICA")||planType.equalsIgnoreCase("PCP"))
 			planType="MAPD";
-			
-		   switch (planType) { 
-	       case "MAPD": 
+		
+		int planId=0;
+		/*     Menu                                                     
+		 * 1-MAPD
+		 * 2-MA
+		 * 3-MedSupp
+		 * 4-PDP
+		 * 5-SSUP
+		 *  
+		 */
+		
+		if(planType.equalsIgnoreCase("MAPD"))
+			planId=1;
+		if(planType.equalsIgnoreCase("MA"))
+			planId=2;
+		if(planType.equalsIgnoreCase("MedSupp"))
+			planId=3;
+		if(planType.equalsIgnoreCase("PDP"))
+			planId=4;
+		if(planType.equalsIgnoreCase("SSUP"))
+			planId=5;
+		
+		   switch (planId) { 
+	       case 1: 
 	    	   benefitsCoveragePage.clicksOnJumpLinksAndCheckRespectiveSectionsMAPD(rider,planType,memberType);
 	           break; 
 	       
-	       case "MA": 
+	       case 2: 
 	    	   benefitsCoveragePage.clicksOnJumpLinksAndCheckRespectiveSectionsMA(rider,planType,memberType);
 	           break;  
 	           
-	       case "MedSupp": 
+	       case 3: 
 	    	   benefitsCoveragePage.clicksOnJumpLinksAndCheckRespectiveSectionsMedSupp(rider,planType,memberType);
 	           break;
 	       
-	       case "PDP": 
+	       case 4: 
 	    	   benefitsCoveragePage.clicksOnJumpLinksAndCheckRespectiveSectionsPDP(rider,planType,memberType,identifier);
 	           break;  
 	       
-	       case "SSUP": 
+	       case 5: 
 	    	   benefitsCoveragePage.clicksOnJumpLinksAndCheckRespectiveSectionsSSUP(rider,planType,memberType);
 	           break;
 
