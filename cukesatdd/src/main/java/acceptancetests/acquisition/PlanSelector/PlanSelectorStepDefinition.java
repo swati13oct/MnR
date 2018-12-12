@@ -1,9 +1,7 @@
 package acceptancetests.acquisition.PlanSelector;
 
 import gherkin.formatter.model.DataTableRow;
-
 import java.util.List;
-
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
