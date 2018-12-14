@@ -79,8 +79,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='planBenefitsApp']/section/div/div[1]/div/div/div/div/h1")
 	private WebElement planName1;
 
-	//@FindBy(xpath = ".//*[@id='mapdPageLis']/div[1]/div/div/table/tbody/tr[2]/th")
-	@FindBy(xpath =".//*[@id='mapdPageLis'] or contains(text0,'Covered Generic Drugs')")
+	//note: Dec2018, rollback to the original xpath
+	@FindBy(xpath = ".//*[@id='mapdPageLis']/div[1]/div/div/table/tbody/tr[2]/th")
+	//@FindBy(xpath =".//*[@id='mapdPageLis'] or contains(text0,'Covered Generic Drugs')")
 	private WebElement columncoveragegenericdrugs;
 
 	@FindBy(id = "contactUsAtdd")
@@ -136,6 +137,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(className = "atdd-benefitssummary-ancillaryHeader")
 	private WebElement Headersection;
+	
+	@FindBy(id="//a[text()='OPTUM RX']")
+	private WebElement optumRxBtn;
 
 	@FindBy(className = ".//*[@id='ancillary']/div[2]/div[4]/div/div")
 	private WebElement chiropracticsection;
@@ -704,11 +708,20 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	private List<WebElement> directorySection;
 	
 	@FindBy(xpath = "//*[@id='avail-riders']//*/h2")
-	private WebElement OptionalServicesRidersSectionHeader;
+	private WebElement OptionalServicesRidersSectionHeader;	
 	
+	@FindBy(xpath = "(//*[@class='PlanPdf section'])[2]//span[@class='document-list-new margin-none']//li[@class=' clearfix']//span[@class='ng-binding ng-scope'][2]")
+	private WebElement PDFUpdatedText;
 	
+	//note: add to support SSUP
+	@FindBy(xpath="//*[@class='subtitle atdd-bnc-exclusivehearing-subtitle']")
+	private WebElement ssupExclusiveHearingSavings;
 	
+	@FindBy(xpath="//*[@class='subtitle atdd-benefitssummary-vision']")
+	private WebElement ssupVision;
 	
+	@FindBy(xpath="//*[@class='subtitle atdd-benefitssummary-dental']")
+	private WebElement ssupDental;
 	
 	public WebElement getJmpLinkToOptionalServicesRiders() {
 		return jmpLinkToOptionalServicesRiders;
@@ -1598,16 +1611,24 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	 */
 
 	public void validatedrugcosttable() {
+		CommonUtility.waitForPageLoad(driver, RetailDrugCost_Table, 15);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", RetailDrugCost_Table);
+		
 		// TODO Auto-generated method stub
 		validate(RetailDrugCost_Table);
 		System.out.println("********** Drug cost table is seen ==>"+RetailDrugCost_Table.isDisplayed());
 		validate(columncoveragegenericdrugs);
-		Assert.assertEquals(driver
-				.findElement(By
-						.xpath("//*[@id='mapdPageLis']//table[@class='table-white atdd-bnc-drgcsttable']//tbody/tr[2]/th/p"))
-				.getText(), "Covered Generic Drugs");
+		//Assert.assertEquals(driver
+		//		.findElement(By
+		//				.xpath("//*[@id='mapdPageLis']//table[@class='table-white atdd-bnc-drgcsttable']//tbody/tr[2]/th/p"))
+		//		.getText(), "Covered Generic Drugs");
 
+		//note: Dec2018 - updated xpath and the way to get the text
+		String targetXpath=".//*[@id='mapdPageLis']/div[1]/div/div/table/tbody/tr[2]/th/p";
+		WebElement targetElement=driver.findElement(By.xpath(targetXpath));
+		Assert.assertEquals(targetElement.getAttribute("innerHTML"), "Covered Generic Drugs");
 	}
+	
 	public void validatedrugcosttable1() {
 		// TODO Auto-generated method stub
 		validate(RetailDrugCost_Table1);
@@ -2565,15 +2586,31 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}
 	}
 
+	//note: Dec2018 - modified to handle NoSuchElement Exception
 	public boolean ancillarynotdisplayed() {
-		if (Headersection.isDisplayed()) {
+		try {
+			if (Headersection.isDisplayed()) {
 
-			System.out.println("Ancillary is present");
-			return false;
-		} else {
+				System.out.println("Ancillary is present");
+				return false;
+			} else {
+				System.out.println("ancillary is not present");
+
+				return true;
+			}
+		} catch (NoSuchElementException e) {
 			System.out.println("ancillary is not present");
-
 			return true;
+		}
+	}
+	
+	public boolean optumRxLinkdisplayed() {
+		if (optumRxBtn.isDisplayed()) {
+			System.out.println("Optum Rx button is present");
+			return true;
+		} else {
+			System.out.println("Optum Rx button is not present");
+			return false;
 		}
 	}
 
@@ -2609,6 +2646,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		 * try { Thread.sleep(10000); } catch (InterruptedException e) { // TODO
 		 * Auto-generated catch block e.printStackTrace(); }
 		 */
+		//note Dec2018 - wait for element to load before validation
+		CommonUtility.waitForPageLoad(driver, pharmacyDropdownTexas, 5);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,-500)", "");
 		validateNew(pharmacyDropdownTexas);
@@ -2668,6 +2707,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	}
 
 	public void validateOfficeVisitssection() {
+		//note: Dec2018 - wait for element to load before validation
+		CommonUtility.waitForPageLoad(driver, OfficeVisits, 5);
+
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,-100)", "");
 
@@ -2866,7 +2908,18 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}
 	}
 
-	public void ValidateMAsection() {
+	//note: Dec2018 - handle SSUP case
+	//public void ValidateMAsection() {
+	public void ValidateMAsection(String planType) {
+		if (planType.equalsIgnoreCase("SSUP")) {
+			System.out.println("proceed to locate senior supplement plan tab and click it");
+			WebElement ssupTab=driver.findElement(By.xpath("//ul[@class='nav nav-tabs']//li[2]"));
+			if (ssupTab.isDisplayed()) {
+				ssupTab.click();
+				System.out.println("located senior supplement plan tab and clicked it");
+			} 
+		} 
+
 		// plan Overview section
 		validateNew(planName);
 		validateNew(nameLabel);
@@ -2888,11 +2941,18 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(OUTOFNETWORK);
 
 		// Primary care provider section
-
-		validateNew(PrimaryCareProviderHeaderInd);
-		validateNew(YourPrimaryCareProvider);
-		validateNew(ChangeYourPcpButton);
-		validateNew(StartSearch);
+		if (planType.equalsIgnoreCase("SSUP")) {
+			System.out.println("For SSUP case");
+			validateNew(ssupExclusiveHearingSavings);
+			validateNew(ssupVision); 
+			validateNew(ssupDental);
+		} else {
+			System.out.println("For non SSUP case");
+			validateNew(PrimaryCareProviderHeaderInd);
+			validateNew(YourPrimaryCareProvider);
+			validateNew(ChangeYourPcpButton);
+			validateNew(StartSearch);
+		}
 
 		// plan documents section
 		validateNew(planDocumentsTitle);
@@ -2908,6 +2968,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	}
 
 	public void validateCopayCoinsuranceInDrugTable() {
+		//note: Dec2018 - wait for the element to show up before validation
+		CommonUtility.waitForPageLoad(driver, drugTableNonLisMember, 5);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTableNonLisMember);
+
 		validateNew(drugTableNonLisMember);
 
 		if (annualDeductibleColumnFederal.size() > 0 && initialCoverageColumnFederal.size() > 0
@@ -2964,7 +3028,6 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	public void validatesAddRider() {
 		// TODO Auto-generated method stub
-
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,1500)", "");
 		validateNew(addRiderSection);
@@ -3253,7 +3316,32 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	}
 	
 	
-	
+	public void ValidatePDFTextSection() {
+		
+		try{
+			Thread.sleep(5000);
+		}catch(Exception e)
+		{
+			System.out.println(e);
+		}
+
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,2900)", "");
+		System.out.println("Page scrolled down");
+		try{
+			Thread.sleep(2000);
+		}catch(Exception e)
+		{
+			System.out.println(e);
+		}
+        if(PDFUpdatedText.getText().contains("Updated"))
+        {		
+			Assert.assertTrue("The UpdatedText is present", true);
+		} else {
+			Assert.assertFalse("The UpdatedText is not present", true);
+		}
+		
+	}
 	
 
 }

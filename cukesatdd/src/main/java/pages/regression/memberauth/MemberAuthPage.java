@@ -152,11 +152,13 @@ public class MemberAuthPage extends UhcDriver {
        public AccountHomePage PopupClick() throws InterruptedException{
               
               waitforElement(MemberPopUpLogin);
-              Thread.sleep(2000);
+              Thread.sleep(20000);
               if (MemberPopUpLogin.isDisplayed()){
                      System.out.println("Pop up Login Button is displayed");       
-                     Thread.sleep(2000);
-                     MemberPopUpLogin.click();  
+                    
+                     scrollToView(MemberPopUpLogin);
+                     jsClickNew(MemberPopUpLogin);
+                                         
                      System.out.println("popup login button clicked");
                      Thread.sleep(20000);
                      switchToNewTab();
@@ -174,6 +176,7 @@ public class MemberAuthPage extends UhcDriver {
                            System.out.println("Payment Link not displayed");
                      } 
                    */
+                  waitforElement(paymentsLink);
           		if (validate(paymentsLink)) {
         			System.out.println("payment link is displayed on the header");
         			paymentsLink.click();
