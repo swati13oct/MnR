@@ -246,7 +246,7 @@ public class AccountHomePage extends UhcDriver {
 	// private WebElement logoImage;
 
 	@FindBy (xpath = "//*[@id='ui-view-page']/div/arcade-header/header[1]/div/div/a/img")
-	private WebElement logoImage;								  
+	private WebElement logoImage;								  																				  
 
 	@FindBy(xpath = "//*[@id='ui-view-page']/div/arcade-header/header[1]/div/div/a/img[2]")
 	private WebElement cologoImage;
