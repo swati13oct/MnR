@@ -47,7 +47,7 @@ public class CommunicationPreferencePage extends UhcDriver {
 	@FindBy(id = "requiredplan")
 	private WebElement iHavereadCheckbox;
 
-	@FindBy(id = "Claims2")
+	@FindBy(xpath ="//div[@id='mail-preferences-selector-SHIP']//*[@id='preferences-form0']/div/div[1]/div[2]/div[2]/div/fieldset/div[1]/div/label")
 	private WebElement onlineDeliveryRadioButton;
 
 	@FindBy(id = "Claims12")

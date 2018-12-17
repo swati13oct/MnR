@@ -91,7 +91,7 @@ And the user validates how to read medical eob PDF
 	| MAPD        |aarpWithEOB 			          | 12 Months    		 | Medical 	         |
 	| MAPD        |aarpWithEOB 			          | 18 Months    		 | Medical 	         |
 
-@febRelease2018 @hsideob @regression_06_06_18
+@febRelease2018 @hsideob @regressionMember
 Scenario Outline: To verify NICE EOB and click on the pdf
 Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |

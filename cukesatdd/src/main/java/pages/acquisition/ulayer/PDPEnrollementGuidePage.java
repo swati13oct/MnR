@@ -43,16 +43,16 @@ public class PDPEnrollementGuidePage extends UhcDriver{
 	@FindBy(id = "emailAddressConfirm")
 	private WebElement emailAddressConfirmField;
 	
-	@FindBy(id = "promotions_yes")
+	@FindBy(xpath = ".//label[@for='promotions_yes']")
 	private WebElement promotionsYes;
 	
-	@FindBy(id = "promotions_no")
+	@FindBy(xpath = ".//label[@for='promotions_no']")
 	private WebElement promotionsNo;
 	
-	@FindBy(id = "gender_male")
+	@FindBy(xpath = ".//label[@for='gender_male']")
 	private WebElement genderMale;
 	
-	@FindBy(id = "gender_female")
+	@FindBy(xpath = ".//label[@for='gender_female']")
 	private WebElement genderFemale;
 	
 	@FindBy(id = "medicareNumber")
