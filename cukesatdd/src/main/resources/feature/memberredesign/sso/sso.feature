@@ -1,6 +1,6 @@
 Feature: To test SSO functionality for SSO groups
 
-  @US1048825 @regression @regression_sso @regressionMember
+  @US1048825 @regression @regression_sso    @regressionMember
   Scenario Outline: Verify North Carolina SSO functionality and check that security and password reset links are not displayed on profile page.
     Given the user access AEM Test Harness Page and enters his AEM Stage username and password and click on signin button
       | CQ UserName | <userName> |
@@ -22,7 +22,7 @@ Feature: To test SSO functionality for SSO groups
       | GroupName | ssoPartner   | firstName | lastName | dateOfBirth | uhcID     | eaID      | empNumber | userName       | passWord   |
       | NC        | benefitfocus | EFBBF     | EEEDFAB  |    01251950 | BAB27F10F | BAB27F10F |           | sso_dummy_user | Password@1 |
 
-  @US1048825 @regression @regression_sso @regressionMember
+  @US1048825 @regression @regression_sso    @regressionMember
   Scenario Outline: Verify AT&T SSO functionality and check that security and password reset links are not displayed on profile page.
     Given the user access AEM Test Harness Page and enters his AEM Stage username and password and click on signin button
       | CQ UserName | <userName> |
