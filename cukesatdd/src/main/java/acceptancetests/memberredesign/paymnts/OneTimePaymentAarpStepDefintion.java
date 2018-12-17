@@ -206,6 +206,7 @@ public class OneTimePaymentAarpStepDefintion {
 	public void Validate_History_Payment_section() throws InterruptedException{
 		pages.regression.accounthomepage.AccountHomePage AHPage = (pages.regression.accounthomepage.AccountHomePage) getLoginScenario().getBean(PageConstants.DashPage);
 		PaymentHistoryPage paymentHistoryPage = AHPage.validtaePaymentHistorySection();
+		System.out.println("found the value");
 		if (paymentHistoryPage!=null){
 	     	  getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
 		System.out.println("user has scrolled up"); 

@@ -480,7 +480,7 @@ Feature: To test the payment flow on AARP site
       | COMBO    | COMBOAARPPayments2 | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
       
 
-   @paymentsAutoPayCancel @US1463204 @Feb_release_2019
+   @paymentsAutoPayCancel @US1463204 @Feb_release_2019 @Spartans
   Scenario Outline: Verify Recurring Payment cancellation for Different Types of Member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |

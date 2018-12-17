@@ -352,7 +352,9 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(id = "closeButton")
 	private WebElement iPerceptionCloseButton;
 	
-	@FindBy(xpath ="//*[@id='paymentHistoryApp1']//div/p/span")
+	/*@FindBy(xpath ="//*[@id='paymentHistoryApp1']//div/p/span")
+	private WebElement PaymentHistorySection;*/
+	@FindBy(xpath ="//*[@id='paymentHistoryApp1']//div//div[@class='col-md-12']/h2")
 	private WebElement PaymentHistorySection;
 
 	private PageData myAccountHome;
@@ -963,6 +965,8 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public pages.regression.payments.PaymentHistoryPage validtaePaymentHistorySection() throws InterruptedException {
+		
+		Thread.sleep(5000);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,550)", "");
 
