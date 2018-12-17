@@ -1,4 +1,3 @@
-#@codeMonkeys @regression_06_06_18 @thePredators
 @codeMonkeys @thePredators
 Feature: C1.1 To test plan benefits and Coverage on UMS site
 
@@ -363,7 +362,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | MA       | Group      | NON LIS       |
       | MAPD     | Group      | NON LIS       |
 
-  @regression_06_06_18 @CMGroupmembersTC25
+  @regressionMember @CMGroupmembersTC25
   Scenario Outline: Verify Group LIS 3/4 on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -391,7 +390,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | planType | memberType | copayCategory |
       | MAPD     | Group      | LIS 4         |
 
-  @regression_06_06_18 @CMGroupmembersPDPLIS_TC26
+  @regressionMember @CMGroupmembersPDPLIS_TC26
   Scenario Outline: Verify Group LIS 1/2 values on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -751,7 +750,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | planType | memberType |
       | PDP      | Greenwich  |
 
-  @BenefitsforTexasERSMember @regression @regression_06_06_18 @benefitsAndCoverage
+  @BenefitsforTexasERSMember @regression @regressionMember @benefitsAndCoverage
   Scenario Outline: Verify the Benefits for TexasERSMember
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -765,7 +764,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | planType | memberType        |
       | PDP      | TEXASERSGroup_BnC |
 
-  @OfficeVisitswithoutprovidertiering @regression @regression_06_06_18 @benefitsAndCoverage
+  @OfficeVisitswithoutprovidertiering @regression @regressionMember @benefitsAndCoverage
   Scenario Outline: Verify the Office visits widget for a member withoutprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -777,7 +776,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | planType | memberType                       |
       | MAPD     | memberWithoutProviderTiering_BnC |
 
-  @WaystoSaveforPdp @regression @regression_06_06_18 @benefitsAndCoverage 
+  @WaystoSaveforPdp @regression @regressionMember @benefitsAndCoverage 
   Scenario Outline: Verify the ways to save  widget for a PDP member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -791,7 +790,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | PDP      | MailOrderPharamacy_BnC |
       | MAPD     | withoutWaysToSave_BnC  |
 
-  @outpatientcenterwithprovidertier @thepredators @regressionoutpatient @regression_06_06_18
+  @outpatientcenterwithprovidertier @thepredators @regressionoutpatient @regressionMember
   Scenario Outline: Verify the outpatient widget for a member withprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -803,7 +802,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | planType | memberType     |
       | MAPD     | MAPDCOSMOS_BnC |
 
-  @primarycareproviderspecialist @thepredators @regressionprimarycareprovider @regression_06_06_18
+  @primarycareproviderspecialist @thepredators @regressionprimarycareprovider @regressionMember
   Scenario Outline: Verify the Office visits widget for a member withprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -815,7 +814,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | planType | memberType            |
       | MAPD     | COSMOSOfficevisit_BnC |
 
-  @outpatientcenterwithoutprovidertier @thepredators @regressionoutpatientwithoutprovider @regression_06_06_18 @benefitsAndCoverage
+  @outpatientcenterwithoutprovidertier @thepredators @regressionoutpatientwithoutprovider @regressionMember @benefitsAndCoverage
   Scenario Outline: Verify the outpatient widget for a member withoutprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -827,7 +826,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | planType | memberType       |
       | MAPD     | NICEBenefits_BnC |
 
-  @BenefitsForAlPeehipMember @regression @regression_06_06_18 @benefitsAndCoverage
+  @BenefitsForAlPeehipMember @regression @regressionMember @benefitsAndCoverage
   Scenario Outline: Verify the benefits for an AL peehip member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -839,7 +838,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | planType | memberType |
       | Peehip   | Group_BnC      |
 
-  @BenefitsForMAMedsupSSUPMember @regression @regression_06_06_18 @benefitsAndCoverage
+  @BenefitsForMAMedsupSSUPMember @regression @regressionMember @benefitsAndCoverage
   Scenario Outline: Verify the Benefits for a  MA Member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -853,7 +852,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | MA       | Individual_BnC |
       | SSUP     | Group_BnC      |
       
-  @CopayCoinsuranceInDrugCostTable @regression @regression_06_06_18 @benefitsAndCoverage
+  @CopayCoinsuranceInDrugCostTable @regression @regressionMember @benefitsAndCoverage
   Scenario Outline: Verify the copay coinsurance in drugcosts table
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -865,7 +864,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | planType | memberType      |
       | MAPD     | Individual_BnC2 |
 
-  @BenefitsForCombo @regression @regression_06_06_18 @benefitsAndCoverage
+  @BenefitsForCombo @regression @regressionMember @benefitsAndCoverage
   Scenario Outline: Verify the Benefits for a combo member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -880,7 +879,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
 # note: Due to timing that it takes for GPS to do the update (add or remove), 
 # this testcase result will not be stable. Since can't predict time for GPS to finish the update, 
 # so the add or remove button does't always show up within the time the code expects it to.
-  @BenefitsRiderFunctionality @regression @regression_06_06_18 @benefitsAndCoverage
+  @BenefitsRiderFunctionality @regression @regressionMember @benefitsAndCoverage
   Scenario Outline: Verify the Benefits for a combo member with Rider
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |

@@ -3,7 +3,7 @@ Feature: G1.1 To validate forms and resources page in dashboard site
 
 # Pre-Effective Federal Cases
 @pre-effectivefnrmapdaarpindividualvalidation 
-Scenario Outline: 
+Scenario Outline: To validate the forms and resources page MAPD AARP Individual Pre-Effective
    	Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -36,7 +36,7 @@ Scenario Outline:
      | MAPD     | IndAARPPre-EffectiveFnR 		  | ENGLISH  | Getting Started Guide | Benefit Highlights | Comprehensive Formulary|Alternative Drug List | Evidence of Coverage |UnitedHealth Passport Program| OVER THE COUNTER ESSENTIALS   | Comprehensive Formulary    | Provider Directory  | Vendor Information Sheet          |Pharmacy Directory Information|
 
 @IndAARPMAPre-EffectiveFnR 
-Scenario Outline: 
+Scenario Outline: To validate the forms and resources page MA AARP Individual Pre-Effective
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -65,7 +65,7 @@ Scenario Outline:
 
 
 @fnrpdpaarpindividualvalidationPre-Effective
-  Scenario Outline: 
+  Scenario Outline: To validate the forms and resources page PDP AARP Individual Pre-Effective
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -98,7 +98,7 @@ Scenario Outline:
 
 #Effective Users
   @fnrmapdaarpindividualvalidation
-  Scenario Outline: 
+  Scenario Outline: To validate the forms and resources page MAPD AARP Individual
    	Given login with following details in the member redesign portal
     	| Plan Type   | <planType>   |
      	| Member Type | <memberType> |
@@ -146,7 +146,7 @@ Scenario Outline:
       | MAPD     | IndAARPPharmacyFnR | ENGLISH  | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Annual Notice of Changes | Evidence Of Coverage   | Comprehensive Formulary    |
 
   @fnrpdpuhcindividual
-  Scenario Outline: 
+  Scenario Outline: To validate the forms and resources page PDP UHC Individual
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -190,7 +190,7 @@ Scenario Outline:
       | PDP      | PdpuhcindividualFnR | ENGLISH  | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Annual Notice of Changes | Evidence Of Coverage   | Comprehensive Formulary    |
 
   @fnrmapdgroupvalidation
-  Scenario Outline: 
+  Scenario Outline: To validate the forms and resources page MAPD group
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -252,7 +252,7 @@ Scenario Outline:
 
   # |MAPD     | GroupPharmacyFnR  | SPANISH           |Beneficios Importantes |Resumen de Beneficios |Comprobante de Cobertura |Comprehensive Formulary-Spanish |
   @fnrpdpaarpindividualvalidation
-  Scenario Outline: 
+  Scenario Outline: To validate the forms and resources page AARP Individual
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -299,7 +299,7 @@ Scenario Outline:
       | PDP      | IndAARPFnR | ENGLISH  | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Annual Notice of Changes | Evidence Of Coverage   | Comprehensive Formulary    |
 
   @fnrpdptexasgroupvalidation
-  Scenario Outline: 
+  Scenario Outline: To validate the forms and resources page Texas group
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -355,7 +355,7 @@ Scenario Outline:
       | PDP      | TexasRxPharmacyFnRPage | ENGLISH  | Getting Started Guide | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Formulary/Drug List | Formulary/Drug List - Comprehensive | Additional Drug Coverage | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Evidence of Coverage   | Comprehensive Formulary    | Additional Drug Coverage |  |
 
   @fnrpdpgroupvalidation
-  Scenario Outline: 
+  Scenario Outline: To validate the forms and resources page UHC group
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -414,7 +414,7 @@ Scenario Outline:
  
      
   @fnrmaindividualvalidation
-  Scenario Outline: 
+  Scenario Outline: To validate the forms and resources page  main Individual
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -459,7 +459,7 @@ Scenario Outline:
       | MA       | AARPIndFnR | ENGLISH  | Benefit Highlights | Summary of Benefits | Evidence of Coverage | UnitedHealth Passport Program | Annual Notice of Changes | Evidence Of Coverage   |
 
   @fnralpeehipgroupvalidation
-  Scenario Outline: 
+  Scenario Outline: To validate the forms and resources page alpeehip group 
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -516,7 +516,7 @@ Scenario Outline:
       | MAPDALPeehip | GroupAlPeehipFnR | ENGLISH  | Getting Started Guide | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Certificate of Coverage | Formulary/Drug List | Formulary/Drug List - Comprehensive | Additional Drug Coverage | Doctor Flyer | Provider Directory Insert | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Evidence of Coverage   | Comprehensive Formulary  | Additional Drug Coverage |Annual Notice of Changes|  
 
   @pcpfnrvalidation
-  Scenario Outline: 
+  Scenario Outline: To validate the forms and resources page for PCP
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -560,7 +560,7 @@ Scenario Outline:
 
   # | MAPD     | PCPFnR | SPANISH | Benefit Highlights  | Summary of Benefits  | Evidence of Coverage  | Comprehensive Formulary  | Prior Authorization  | Step Therapy  | Formulary Additions  | Formulary Deletions  |
   @ssupfnrvalidation
-  Scenario Outline: 
+  Scenario Outline: To validate the forms and resources page for ssupFnr 
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -597,7 +597,7 @@ Scenario Outline:
 
   #  | MAPD     | PCPFnR |  #SPANISH | Benefit Highlights  | Summary of Benefits  | Evidence of Coverage  | Comprehensive Formulary  | Prior Authorization  | Step Therapy  | Formulary Additions  | Formulary Deletions  |
   @combovalidation
-  Scenario Outline: 
+  Scenario Outline: To validate the forms and resources page for combo members
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -617,7 +617,7 @@ Scenario Outline:
       | Combo    | ComboFnR   |
 
   @terminatedmembervalidation
-  Scenario Outline: 
+  Scenario Outline: To validate the forms and resources page for Terminated Members
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -640,7 +640,7 @@ Scenario Outline:
       | MA       | IndAARPMATerminatedFnR |
 
   @shipscenario
-  Scenario Outline: 
+  Scenario Outline: To validate the forms and resources page for SHIP members
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
