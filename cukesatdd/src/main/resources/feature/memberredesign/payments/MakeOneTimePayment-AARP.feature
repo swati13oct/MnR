@@ -292,7 +292,7 @@ Feature: To test the payment flow on AARP site
       | planType |
       | SHIP     |
 
-  @paymentsFInal @paymentsOneTimePayments @regression_06_06_18 
+  @paymentsFInal @paymentsOneTimePayments @regressionMember 
   Scenario Outline: Verify if the user is able to make one time payment.
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -316,7 +316,7 @@ Feature: To test the payment flow on AARP site
    #   | SHIP     | IndividualUHCPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
       | SHIP     | IndividualAARPSPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
 
-  @paymentsAutoPay @15301 @regression_06_06_18
+  @paymentsAutoPay @15301 @regressionMember
   Scenario Outline: Verify Recurring Payment for Different Types of Member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -338,7 +338,7 @@ Feature: To test the payment flow on AARP site
       | planType | memberType            | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
       | MAPD     | IndividualUHCPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
 
-  @paymentsMoreThanOnePay @15142 @regression_06_06_18
+  @paymentsMoreThanOnePay @15142 @regressionMember
   Scenario Outline: Verify More Than one Payment Per day error message
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -374,7 +374,7 @@ Feature: To test the payment flow on AARP site
       | MAPD     | IndividualAARPRPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.12 |
 
 #NOTE: Nov2018 - q2_jun_aarp0057 didn't work, swap to use other user
-  @TestmemberAuth @15170 @regression_06_06_18
+  @TestmemberAuth @15170 @regressionMember
   Scenario Outline: To validate the Edit Payment flow for Member Auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -393,7 +393,7 @@ Feature: To test the payment flow on AARP site
       | qavgogine | qavgogine | q2_jun_aarp0058 |
 
 #NOTE: Nov2018 - q2_jun_uhc0042 didn't work, swap to use other user
-  @TestmemberAuthOTP @15163 @regression_06_06_18
+  @TestmemberAuthOTP @15163 @regressionMember
   Scenario Outline: To validate the oneTime Payment flow for Member Auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -420,7 +420,7 @@ Feature: To test the payment flow on AARP site
      # | qavgogine | qavgogine | q2_jun_uhc0042 | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.12 |
       | qavgogine | qavgogine | q2_jun_uhc0043 | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.12 |
 
-  @paymentsShip @15320 @regression_06_06_18
+  @paymentsShip @15320 @regressionMember
   Scenario Outline: Verify Recurring Payment for SHIP member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -443,7 +443,7 @@ Feature: To test the payment flow on AARP site
       | SHIP     | IndividualAARPSPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
 
 #NOTE: Nov2018 - q2_june_combo0012 didn't work, swap to use other user
-  @paymentsCombo @15144 @regression_06_06_18
+  @paymentsCombo @15144 @regressionMember
   Scenario Outline: Verify Payment for Combo member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |

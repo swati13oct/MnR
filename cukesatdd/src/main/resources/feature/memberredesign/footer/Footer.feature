@@ -1,4 +1,4 @@
-@member_redesign_footer @regression_06_06_18
+@member_redesign_footer @regressionMember
 Feature: Footer validation
 
 
