@@ -488,7 +488,8 @@ Feature: To test the payment flow on AARP site
     When the user navigates to Recurring payment history
     Then User Scrolls down to validate Payment History Section
     And the user clicks on New flow Edit Automatic Payment button
-    And the user selects the Checking account option on New page    
+    And the user selects the Checking account option on New page
+    And the user clicks on cancel button in new flow    
 
     
     Examples: 

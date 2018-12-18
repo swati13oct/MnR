@@ -266,6 +266,18 @@ public class OneTimePaymentAarpStepDefintion {
 		
 	}
 	
+	@And("^the user clicks on cancel button in new flow$")
+	public void click_on_Cancel_payment_btn(){
+		OneTimePaymentPage oneTimePayment = (OneTimePaymentPage) getLoginScenario().getBean(PageConstants.One_Time_Payments_Page);
+		OneTimePaymentPage OverviewPage = oneTimePayment.CancelPayments();
+		
+		if(OverviewPage!=null){
+			getLoginScenario().saveBean(PageConstants.Payments_History_Page, OverviewPage);
+			
+		}
+		
+	}
+	
 	@And("^the user clicks on MemAuth Edit Automatic Payment button$")
 	public void click_on_MemAuth_Recurring_btn(){
 		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);

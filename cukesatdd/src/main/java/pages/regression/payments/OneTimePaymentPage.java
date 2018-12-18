@@ -55,7 +55,6 @@ public class OneTimePaymentPage extends UhcDriver{
 	
 	@FindBy(xpath="//*[@id='IPEinvL']/map/area[3]")
 	private WebElement iPerceptionAutoPopUp;
-
 	
 	@FindBy(xpath ="//*[@id='consent']/following-sibling::label[contains(text(),'I have read and agree to the following')]")
 	private WebElement iHaveReadAndAgreeToTheFollowing;
@@ -69,6 +68,12 @@ public class OneTimePaymentPage extends UhcDriver{
 	
 	@FindBy(id = "closeButton")
 	private WebElement iPerceptionCloseButton;
+	
+	@FindBy(xpath="//*[@class='btn btn--secondary cancelbutton']")
+	private WebElement RecurringFormCancel;
+	
+	@FindBy(xpath="(//*[@id='paymentOverviewApp']//div[@class='container']//div[@class='col-md-12']/h2)[1]")
+	private WebElement PaymentOverviewtText;
 	
 	public OneTimePaymentPage(WebDriver driver) {
 		super(driver);
@@ -235,6 +240,32 @@ public class OneTimePaymentPage extends UhcDriver{
 	    	return null;
 	    }
 	}  
+	
+	
+public OneTimePaymentPage CancelPayments() {
+	System.out.println("In Cancel payment method");
+	
+	try{
+		Thread.sleep(2000);
+	}catch(Exception e)
+	{		
+	}
+	System.out.println("Going to scroll down");
+	JavascriptExecutor jse = (JavascriptExecutor) driver;
+	jse.executeScript("window.scrollBy(0,650)", "");
+	try{
+		Thread.sleep(2000);
+	}catch(Exception e)
+	{		
+	}
+	System.out.println("will click on cancel button");
+	RecurringFormCancel.click();
+	if(PaymentOverviewtText.isDisplayed())	
+		return new OneTimePaymentPage(driver);
+	else 
+		return null;
+			
+	}	
 
 	
 	@Override

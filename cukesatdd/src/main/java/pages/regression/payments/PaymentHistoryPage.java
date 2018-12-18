@@ -136,7 +136,10 @@ public class PaymentHistoryPage extends UhcDriver{
 	@FindBy(xpath = "//*[@class='payment-selection__actions']/button")
 	private WebElement NextButton;
 	
-	@FindBy(xpath = "(//*[@class='payments']//div[@class='container']//div[@class='col-md-12'])[1]//span[1]")
+	/*@FindBy(xpath = "(//*[@class='payments']//div[@class='container']//div[@class='col-md-12'])[1]//span[1]")
+	private WebElement AutoPayHeading;*/
+	
+	@FindBy(xpath = "//*[@class='payments']//div[@class='container']//div[@class='col-md-12']//div/h2")
 	private WebElement AutoPayHeading;
 	
 	private PageData paymentHistory;
@@ -630,7 +633,7 @@ public class PaymentHistoryPage extends UhcDriver{
 		NextButton.click();
 		
 		waitforElement(AutoPayHeading);
-		if(AutoPayHeading.getText().contains("Automatic Payments")){
+		if(AutoPayHeading.getText().contains("It’s easy to pay your premium.")){
 			return new  OneTimePaymentPage(driver); 
 		}else
 
