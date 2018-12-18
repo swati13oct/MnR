@@ -1748,39 +1748,155 @@ try {
 			.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		Assert.assertTrue(benefitsCoveragePage.optumRxLinkdisplayed());
 	}
-@Then("^user verifies presence of jump links$")
-public void user_verifies_presence_of_jump_links(DataTable rows) throws Throwable {
-	List<List<String>> data = rows.raw();
-	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-			.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-	benefitsCoveragePage.verifyPresenceOfJumpLinksMAPD(data.get(0).get(1));
-    
-}
-
-@Then("^user clicks on the jump links and checks respective sections$")
-public void user_clicks_on_the_jump_links_and_checks_respective_sections(DataTable rows) throws Throwable {
-	List<List<String>> data = rows.raw();
-	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-			.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-	benefitsCoveragePage.clicksOnJumpLinksAndCheckRespectiveSectionsMAPD(data.get(0).get(1));
-}
-
-@Then("^verifies links irrelevant to the plan type are not displayed$")
-public void verifies_links_irrelevant_to_the_plan_type_are_not_displayed(DataTable count) throws Throwable {
-			List<List<String>> data = count.raw();
-	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-					.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-			benefitsCoveragePage.directoryLinksCount(Integer.parseInt(data.get(0).get(1)),data.get(1).get(1));
-   
-}
-	
-@And("the user validates the UpdatedText")
-public void userValidatesUpdatedTextSection() {
+	@Then("^user verifies presence of jump links$")
+	public void user_verifies_presence_of_jump_links(DataTable rows) throws Throwable {
+		List<List<String>> data = rows.raw();
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		
+		int planId=0;
+		String planType=data.get(0).get(1).trim();
+		String rider=data.get(1).get(1).trim();
+		String memberType=data.get(2).get(1).trim();
+		String identifier=data.get(3).get(1).trim();
+		//String count=data.get(2).get(1);
+		if(planType.equalsIgnoreCase("MEDICA")||planType.equalsIgnoreCase("PCP"))
+			planType="MAPD";
+			//planType.replaceAll(planType, "MAPD").toString().trim();
+		
+		/*     Menu                                                     
+		 * 1-MAPD
+		 * 2-MA
+		 * 3-MedSupp
+		 * 4-PDP
+		 * 5-SSUP
+		 *  
+		 */
+		if(planType.equalsIgnoreCase("MAPD"))
+			planId=1;
+		if(planType.equalsIgnoreCase("MA"))
+			planId=2;
+		if(planType.equalsIgnoreCase("MedSupp"))
+			planId=3;
+		if(planType.equalsIgnoreCase("PDP"))
+			planId=4;
+		if(planType.equalsIgnoreCase("SSUP"))
+			planId=5;
+		
+				
+		   switch (planId) { 
+	       case 1: 
+	    	   benefitsCoveragePage.verifyPresenceOfJumpLinksMAPD(rider,planType,memberType);
+	           break; 
+	       
+	       case 2: 
+	    	   benefitsCoveragePage.verifyPresenceOfJumpLinksMA(rider,planType,memberType);
+	           break; 
+	       
+	       case 3: 
+	    	   benefitsCoveragePage.verifyPresenceOfJumpLinksMedSupp(rider,planType,memberType);
+	           break;
+	       
+	       case 4: 
+	    	   benefitsCoveragePage.verifyPresenceOfJumpLinksPDP(rider,planType,memberType,identifier);
+	           break;
+	       
+	       case 5: 
+	    	   benefitsCoveragePage.verifyPresenceOfJumpLinksSSUP(rider,planType,memberType);
+	           break;
+	            
+	 
+	       default: 
+	           System.out.println("Plan Not Found");
+	           break;
 			
-	BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
-			.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-	planBenefitsCoverage.ValidatePDFTextSection();
-					
-}
+			
+		}
+		    
+	}
+
+	@Then("^user clicks on the jump links and checks respective sections$")
+	public void user_clicks_on_the_jump_links_and_checks_respective_sections(DataTable rows) throws Throwable {
+		List<List<String>> data = rows.raw();
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		
 	
-}
+		String planType=data.get(0).get(1).trim();
+		String rider=data.get(1).get(1).trim();
+		String memberType=data.get(2).get(1).trim();
+		String identifier=data.get(3).get(1).trim();
+		//String count=data.get(2).get(1);
+		if(planType.equalsIgnoreCase("MEDICA")||planType.equalsIgnoreCase("PCP"))
+			planType="MAPD";
+		
+		int planId=0;
+		/*     Menu                                                     
+		 * 1-MAPD
+		 * 2-MA
+		 * 3-MedSupp
+		 * 4-PDP
+		 * 5-SSUP
+		 *  
+		 */
+		
+		if(planType.equalsIgnoreCase("MAPD"))
+			planId=1;
+		if(planType.equalsIgnoreCase("MA"))
+			planId=2;
+		if(planType.equalsIgnoreCase("MedSupp"))
+			planId=3;
+		if(planType.equalsIgnoreCase("PDP"))
+			planId=4;
+		if(planType.equalsIgnoreCase("SSUP"))
+			planId=5;
+		
+		   switch (planId) { 
+	       case 1: 
+	    	   benefitsCoveragePage.clicksOnJumpLinksAndCheckRespectiveSectionsMAPD(rider,planType,memberType);
+	           break; 
+	       
+	       case 2: 
+	    	   benefitsCoveragePage.clicksOnJumpLinksAndCheckRespectiveSectionsMA(rider,planType,memberType);
+	           break;  
+	           
+	       case 3: 
+	    	   benefitsCoveragePage.clicksOnJumpLinksAndCheckRespectiveSectionsMedSupp(rider,planType,memberType);
+	           break;
+	       
+	       case 4: 
+	    	   benefitsCoveragePage.clicksOnJumpLinksAndCheckRespectiveSectionsPDP(rider,planType,memberType,identifier);
+	           break;  
+	       
+	       case 5: 
+	    	   benefitsCoveragePage.clicksOnJumpLinksAndCheckRespectiveSectionsSSUP(rider,planType,memberType);
+	           break;
+
+	       default: 
+	           System.out.println("Plan Not Found");
+	           break;
+		   }
+		
+	         
+	}
+
+	@Then("^verifies links irrelevant to the plan type are not displayed$")
+	public void verifies_links_irrelevant_to_the_plan_type_are_not_displayed(DataTable rows) throws Throwable {
+				List<List<String>> data = rows.raw();
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+						.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		
+		String planType=data.get(0).get(1).trim();
+		String rider=data.get(1).get(1).trim();
+		int count=Integer.parseInt(data.get(2).get(1).trim());
+		String memberType=data.get(3).get(1).trim();
+		
+		if(planType.equalsIgnoreCase("MEDICA")||planType.equalsIgnoreCase("PCP"))
+			planType="MAPD";
+		
+		benefitsCoveragePage.directoryLinksCount(count,rider,planType,memberType);
+		
+	}
+
+
+	}//end of class
