@@ -274,8 +274,18 @@ public class OneTimePaymentAarpStepDefintion {
 		if(OverviewPage!=null){
 			getLoginScenario().saveBean(PageConstants.Payments_History_Page, OverviewPage);
 			
-		}
+		}		
+	}
+	
+	@And("^the user clicks on Authorize button to validate error message$")
+	public void click_on_Authorize_button(){
+		OneTimePaymentPage oneTimePayment = (OneTimePaymentPage) getLoginScenario().getBean(PageConstants.One_Time_Payments_Page);
+		OneTimePaymentPage OverviewPage = oneTimePayment.ErrorMessageValidation();
 		
+		if(OverviewPage!=null){
+			getLoginScenario().saveBean(PageConstants.Payments_History_Page, OverviewPage);
+			
+		}		
 	}
 	
 	@And("^the user clicks on MemAuth Edit Automatic Payment button$")

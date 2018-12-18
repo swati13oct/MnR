@@ -489,10 +489,24 @@ Feature: To test the payment flow on AARP site
     Then User Scrolls down to validate Payment History Section
     And the user clicks on New flow Edit Automatic Payment button
     And the user selects the Checking account option on New page
-    And the user clicks on cancel button in new flow    
-
+    And the user clicks on cancel button in new flow
     
     Examples: 
-      | planType | memberType            | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
-      | MAPD     | IndividualUHCPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
+      | planType | memberType            | 
+      | MAPD     | IndividualUHCPayments | 
+ 
+  @paymentsErrorMessage @US1474255 @Feb_release_2019 @Spartans
+  Scenario Outline: Verify Recurring Payment cancellation for Different Types of Member
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When the user navigates to Recurring payment history
+    Then User Scrolls down to validate Payment History Section
+    And the user clicks on New flow Edit Automatic Payment button
+    And the user selects the Checking account option on New page
+    And the user clicks on Authorize button to validate error message
+    
+    Examples: 
+      | planType | memberType            | 
+      | MAPD     | IndividualUHCPayments | 
     

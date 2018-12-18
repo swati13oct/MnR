@@ -75,6 +75,12 @@ public class OneTimePaymentPage extends UhcDriver{
 	@FindBy(xpath="(//*[@id='paymentOverviewApp']//div[@class='container']//div[@class='col-md-12']/h2)[1]")
 	private WebElement PaymentOverviewtText;
 	
+	@FindBy(xpath="(//*[@class='margin-medium']/span)[2]/a")
+	private WebElement AuthorizeButton;
+	
+	@FindBy(id = "form_routingNumber")
+	private WebElement Error1;
+	
 	public OneTimePaymentPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -261,6 +267,44 @@ public OneTimePaymentPage CancelPayments() {
 	System.out.println("will click on cancel button");
 	RecurringFormCancel.click();
 	if(PaymentOverviewtText.isDisplayed())	
+		return new OneTimePaymentPage(driver);
+	else 
+		return null;
+			
+	}	
+
+public OneTimePaymentPage ErrorMessageValidation() {	
+	
+	try{
+		Thread.sleep(2000);
+	}catch(Exception e)
+	{		
+	}
+	System.out.println("Going to scroll down");
+	JavascriptExecutor jse = (JavascriptExecutor) driver;
+	jse.executeScript("window.scrollBy(0,650)", "");
+	try{
+		Thread.sleep(2000);
+	}catch(Exception e)
+	{		
+	}
+	System.out.println("will click on Authorize button");
+	AuthorizeButton.click();	
+	try{
+		Thread.sleep(2000);
+		jse.executeScript("window.scrollBy(0,650)", "");
+	}catch(Exception e)
+	{		
+	}
+	AuthorizeButton.click();
+	try{
+		Thread.sleep(2000);
+		jse.executeScript("window.scrollBy(0,650)", "");
+	}catch(Exception e)
+	{		
+	}	
+	AuthorizeButton.click();
+	if(Error1.getText().contains("Please enter a valid Routing Number"))	
 		return new OneTimePaymentPage(driver);
 	else 
 		return null;
