@@ -3823,8 +3823,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		int count = 0;
 		if (planType.equals("MA") || planType.equals("MAPD")) {
 			if (memberType.equalsIgnoreCase("Individual")) {
-						
-				count = getDirectorySection(planType, memberType).size() - 1;
+				
+				if(getDirectorySection(planType, memberType).size()>=9)
+					count=getDirectorySection(planType, memberType).size()/2-1;
+				else					
+					count = getDirectorySection(planType, memberType).size() - 1;
 				if (rider.toString().trim().equals("Rider"))
 					count += 1;
 				
