@@ -1,4 +1,4 @@
-@claimspage @theTransformers @regression_06_06_18 
+@claimspage @theTransformers @regressionMember
 Feature: T1.1To validate the new changes related to claims page on the member redesigned site
 
 @claimsSummaryFED

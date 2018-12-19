@@ -3,7 +3,7 @@
 Feature:I1.3Header/Navigation for Member Site Redesign
 # note: if system is in future date, some testcases may fail due to expected tab(s) not showing up on page depending on user's data setup
 
-@member_redesign_header @IncrediblesHeader @regression_06_06_18
+@member_redesign_header @IncrediblesHeader @regressionMember
 Scenario Outline:Verify HSID login functionality and header
   Given login with following details logins in the member portal and validate elements
 | Plan Type   | <planType>   |
@@ -30,7 +30,7 @@ Examples:
  | MAPD      |IndividualMember |
  
 
- @premiumpaymentsheader @regression_06_06_18 
+ @premiumpaymentsheader @regressionMember 
 Scenario Outline:To check the Premium Payments Tab in the header
  Given login with following details logins in the member portal and validate elements
 | Plan Type   | <planType>   |
@@ -45,7 +45,7 @@ Examples:
  | MAPD    |GroupLessSubsidy |
  
  
- @premiumpaymentsheader_100%subisdy @regression_06_06_18
+ @premiumpaymentsheader_100%subisdy @regressionMember
  Scenario Outline:To check that the Premium Payments Tab is not displayed in the header
 Given login with following details logins in the member portal and validate elements
 | Plan Type   | <planType>   |
@@ -58,7 +58,7 @@ Examples:
  | MAPD    |  UHCGroup  	  |
  
  
- @findcarecostsheader @regression_06_06_18
+ @findcarecostsheader @regressionMember
  Scenario Outline:To check that the Find Care and Costs Tab is displayed in the header
 Given login with following details logins in the member portal and validate elements
 | Plan Type   | <planType>   |
@@ -74,7 +74,7 @@ Examples:
  | MAPD  | Medica |
  
  
- @no_findcareheader @regression_06_06_18  
+ @no_findcareheader @regressionMember  
 Scenario Outline:To check that the Find Care and Costs Tab is not displayed in the header
 Given login with following details logins in the member portal and validate elements
 | Plan Type   | <planType>   |
@@ -88,7 +88,7 @@ Examples:
  | SSUP    |   UHCGroup_header 	  |
  
 
- @Terminated_view @regression_06_06_18
+ @Terminated_view @regressionMember
  Scenario Outline:To check that the Find Care and Costs Tab is not displayed in the header for terminated user
 Given login with following details logins in the member portal and validate elements
 | Plan Type   | <planType>   |

@@ -644,7 +644,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
 		pharmacysearchbtn.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE)) {
+		if (driver.getTitle().toLowerCase().contains(PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE.toLowerCase())) {
 			return new PharmacySearchPage(driver);
 		}
 		return null;
@@ -925,10 +925,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		} catch (Exception e) {
 			System.out.println("zipCodeField not found");
 		}
-		CommonUtility.waitForPageLoad(driver, requestAgentApptDropdown, 60);
-		if (validateNew(requestAgentApptDropdown)) {
-			return new RequestHelpAndInformationPage(driver);
-		}
+		
 
 		Actions actions = new Actions(driver);
 		PageFactory.initElements(driver, this);
@@ -948,8 +945,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("zipCodeField not found");
 		}
 		CommonUtility.waitForPageLoad(driver, requestAgentApptDropdown, 60);
-		if (validateNew(requestAgentApptDropdown)
-				&& currentUrl().contains("medicare-advantage-plans/request-information.html")) {
+		if (validateNew(requestAgentApptDropdown)) {
 			return new RequestHelpAndInformationPage(driver);
 		}
 
@@ -1040,8 +1036,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("zipCodeField not found");
 		}
 		CommonUtility.waitForPageLoad(driver, requestAgentApptDropdown, 60);
-		if (validateNew(requestAgentApptDropdown)
-				&& currentUrl().contains("medicare-advantage-plans/request-information.html")) {
+		if (validateNew(requestAgentApptDropdown)) {
 			return new PDPRequestHelpAndInformationPage(driver);
 		}
 

@@ -18,7 +18,7 @@ public class PageTitleConstants {
 	public static final String BLAYER_PRESCRIPTION_DRUG_PLAN_ENROLLMENT = "Prescription Drug Plan Enrollment | UnitedHealthcare®";
 	public static final String BLAYER_UNITEDHEALTHCARE_MEDICARE_SOLUTIONS ="UnitedHealthcare Medicare Solutions | AARP Medicare Supplement Plans";
 	public static final String BLAYER_OUR_MEDICARE_PLAN_TYPES_UNTEDHEALTHCARE ="Our Medicare Plan Types | UnitedHealthcare";
-	public static final String BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE = "Locate a Pharmacy | UnitedHealthcare®";
+	public static final String BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE = "Locate a Pharmacy";
 	public static final String BLAYER_FIND_A_PHARMACY_AARP_MEDICARE_PLANS_FROM_UNITEDHEALTHCARE = "Find a Pharmacy | AARP® Medicare Plans from UnitedHealthcare®";
 	public static final String BLAYER_PLAN_DETAILS = "Plan Details";
 	public static final String BLAYER_PLAN_DETAIL = "Plan Detail";
