@@ -644,7 +644,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
 		pharmacysearchbtn.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE)) {
+		if (driver.getTitle().toLowerCase().contains(PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE.toLowerCase())) {
 			return new PharmacySearchPage(driver);
 		}
 		return null;
