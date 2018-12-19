@@ -78,8 +78,14 @@ public class OneTimePaymentPage extends UhcDriver{
 	@FindBy(xpath="(//*[@class='margin-medium']/span)[2]/a")
 	private WebElement AuthorizeButton;
 	
+	@FindBy(xpath="(//*[@class='modal-content']//div[@class='modal-footer'])[1]/a[1]")
+	private WebElement PaymentCancelPopup;
+	
 	@FindBy(id = "form_routingNumber")
 	private WebElement Error1;
+	
+	@FindBy(xpath = "//*[@id='paymentOverviewApp']//div[@class='container']//div[@class='col-md-12']/h2[1]")
+	private WebElement PaymentHeading;
 	
 	public OneTimePaymentPage(WebDriver driver) {
 		super(driver);
@@ -272,6 +278,37 @@ public OneTimePaymentPage CancelPayments() {
 		return null;
 			
 	}	
+
+public OneTimePaymentPage CancelPaymentsOneTime() {
+	System.out.println("In Cancel payment method for OneTime");	
+	try{
+		Thread.sleep(2000);
+	}catch(Exception e)
+	{		
+	}
+	System.out.println("Going to scroll down");
+	JavascriptExecutor jse = (JavascriptExecutor) driver;
+	jse.executeScript("window.scrollBy(0,650)", "");
+	try{
+		Thread.sleep(2000);
+	}catch(Exception e)
+	{		
+	}
+	System.out.println("will click on cancel button");
+	RecurringFormCancel.click();
+	waitforElement(PaymentCancelPopup); 
+	PaymentCancelPopup.click();
+	waitforElement(PaymentHeading);
+	if (PaymentHeading.getText().contains("Premium Payments Overview")) {
+		System.out.println("Payment Overview page displayed");
+		return new OneTimePaymentPage(driver);
+	}
+	else 
+		return null;
+			
+	}
+
+
 
 public OneTimePaymentPage ErrorMessageValidation() {	
 	

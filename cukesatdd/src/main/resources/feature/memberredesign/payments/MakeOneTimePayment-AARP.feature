@@ -509,4 +509,20 @@ Feature: To test the payment flow on AARP site
     Examples: 
       | planType | memberType            | 
       | MAPD     | IndividualUHCPayments | 
+      
+
+ @paymentsCancelButton @US1449078 @Feb_release_2019 @Spartans
+  Scenario Outline: Verify oneTime Payment cancellation for Different Types of Member
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When the user navigates to Recurring payment history
+    Then User Scrolls down to validate Payment History Section
+    And the user clicks on New flow OneTime Payment button
+    And the user selects the Checking account option on New page OTP
+    And the user clicks on cancel button in new flow for OneTimePay
+    
+    Examples: 
+      | planType | memberType            | 
+      | MAPD     | IndividualAARPRPayments | 
     

@@ -254,6 +254,18 @@ public class OneTimePaymentAarpStepDefintion {
 		
 	}
 	
+	@And("^the user clicks on New flow OneTime Payment button$")
+	public void click_on_OneTime_Payment_btn(){
+		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
+		PaymentHistoryPage PHoneTimePayment = paymenthistory.OneTimePayNew();
+		
+		if(PHoneTimePayment!=null){
+			getLoginScenario().saveBean(PageConstants.NEW_CC_BUTTON, PHoneTimePayment);
+			System.out.println("user is on one time payment page");	
+		}
+		
+	}
+	
 	@And("^the user selects the Checking account option on New page$")
 	public void click_on_Checking_account_Payment_btn(){
 		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.NEW_CC_BUTTON);
@@ -266,10 +278,33 @@ public class OneTimePaymentAarpStepDefintion {
 		
 	}
 	
+	@And("^the user selects the Checking account option on New page OTP$")
+	public void click_on_Checking_account_Payment_btn_OTP(){
+		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.NEW_CC_BUTTON);
+		OneTimePaymentPage oneTimePayment = paymenthistory.CheckingAccountbtnOTP();
+		
+		if(oneTimePayment!=null){
+			getLoginScenario().saveBean(PageConstants.One_Time_Payments_Page, oneTimePayment);
+			System.out.println("user is on Automatic payment page");	
+		}
+		
+	}
+	
 	@And("^the user clicks on cancel button in new flow$")
 	public void click_on_Cancel_payment_btn(){
 		OneTimePaymentPage oneTimePayment = (OneTimePaymentPage) getLoginScenario().getBean(PageConstants.One_Time_Payments_Page);
 		OneTimePaymentPage OverviewPage = oneTimePayment.CancelPayments();
+		
+		if(OverviewPage!=null){
+			getLoginScenario().saveBean(PageConstants.Payments_History_Page, OverviewPage);
+			
+		}		
+	}
+	
+	@And("^the user clicks on cancel button in new flow for OneTimePay$")
+	public void click_on_Cancel_payment_btn_OTP_flow_new(){
+		OneTimePaymentPage oneTimePayment = (OneTimePaymentPage) getLoginScenario().getBean(PageConstants.One_Time_Payments_Page);
+		OneTimePaymentPage OverviewPage = oneTimePayment.CancelPaymentsOneTime();
 		
 		if(OverviewPage!=null){
 			getLoginScenario().saveBean(PageConstants.Payments_History_Page, OverviewPage);
