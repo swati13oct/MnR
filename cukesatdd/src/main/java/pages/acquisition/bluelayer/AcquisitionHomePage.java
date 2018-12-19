@@ -925,10 +925,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		} catch (Exception e) {
 			System.out.println("zipCodeField not found");
 		}
-		CommonUtility.waitForPageLoad(driver, requestAgentApptDropdown, 60);
-		if (validateNew(requestAgentApptDropdown)) {
-			return new RequestHelpAndInformationPage(driver);
-		}
+		
 
 		Actions actions = new Actions(driver);
 		PageFactory.initElements(driver, this);
@@ -948,8 +945,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("zipCodeField not found");
 		}
 		CommonUtility.waitForPageLoad(driver, requestAgentApptDropdown, 60);
-		if (validateNew(requestAgentApptDropdown)
-				&& currentUrl().contains("medicare-advantage-plans/request-information.html")) {
+		if (validateNew(requestAgentApptDropdown)) {
 			return new RequestHelpAndInformationPage(driver);
 		}
 
@@ -1040,8 +1036,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("zipCodeField not found");
 		}
 		CommonUtility.waitForPageLoad(driver, requestAgentApptDropdown, 60);
-		if (validateNew(requestAgentApptDropdown)
-				&& currentUrl().contains("medicare-advantage-plans/request-information.html")) {
+		if (validateNew(requestAgentApptDropdown)) {
 			return new PDPRequestHelpAndInformationPage(driver);
 		}
 

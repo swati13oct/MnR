@@ -1,28 +1,166 @@
-#@codeMonkeys @regression_06_06_18 @thePredators
 @codeMonkeys @thePredators
 Feature: C1.1 To test plan benefits and Coverage on UMS site
 
-  @PlanBFSMAPD @Feb_release_2019
-  Scenario Outline: Verify all sections for Ind NonLIS member on Benefits and Coverage page
+   @PlanBFSJMPLinks @Feb_release_2019 @gladiators
+  Scenario Outline: Verify jump links for individual MAPD member
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
-      | Copay Category | <copayCategory> |
-      | Rider          | <rider>         |
+      |identifier|<Identifier>|
+      |Rider|<rider>|
+      
     Then The user navigates to Benefits and Coverage page
       | Plan Type | <planType> |
     Then user verifies presence of jump links
-      | Rider | <rider> |
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |MemberType|<memberType>|
+      |identifier|<Identifier>|
     And user clicks on the jump links and checks respective sections
-      | Rider | <rider> |
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |MemberType|<memberType>|
+      |identifier|<Identifier>|
     And verifies links irrelevant to the plan type are not displayed
-      | Count | <count> |
-      | Rider | <rider> |
-
-    Examples: 
-      | planType | memberType | copayCategory | language | count | rider   |
-      | MAPD     | Individual | NON LIS       | ENGLISH  |     6 | NoRider |
-      | MAPD     | Individual | NON LIS       | ENGLISH  |     7 | Rider   |
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |Count|<count>|
+      |MemberType|<memberType>|
+      
+   Examples: 
+       | planType | memberType |Identifier| language |count|rider|
+       | MAPD     | Individual |IndEffectiveAARP| ENGLISH  | 6   |NoRider|
+       | MAPD     | Individual |IndEffectiveAARP| ENGLISH  | 7   |Rider|
+       | MAPD     | Group |GrpEffectiveUHC| ENGLISH  | 6   |NoRider|
+       | MAPD     | Individual |IndEffectiveUHC| ENGLISH  | 6   |NoRider|
+	   | MAPD     | Individual |IndEffectiveUHC| ENGLISH  | 7   |Rider|
+	   | PCP     | Individual |IndEffectivePCP| ENGLISH  | 6   |NoRider|
+	   | MEDICA     | Individual |IndEffectiveMedica| ENGLISH  | 6   |NoRider|
+	   
+  
+  @PlanBFSJMPLinks @Feb_release_2019 @gladiators
+  Scenario Outline: Verify jump links for individual MA member
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      |identifier|<Identifier>|
+      |Rider|<rider>|
+    Then The user navigates to Benefits and Coverage page
+      | Plan Type | <planType> |
+    Then user verifies presence of jump links
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |MemberType|<memberType>|
+      |identifier|<Identifier>|
+    And user clicks on the jump links and checks respective sections
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |MemberType|<memberType>|
+      |identifier|<Identifier>|
+    And verifies links irrelevant to the plan type are not displayed
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |Count|<count>|
+      |MemberType|<memberType>|
+      
+   Examples: 
+      | planType | memberType |Identifier| language |count|rider|
+      | MA       | Group	  |GrpEffectiveUHC| ENGLISH   | 4   |NoRider|
+      | MA       | Individual |IndEffectiveUHC | ENGLISH  | 5   |Rider|
+      | MA       | Individual |IndEffectiveAARP| ENGLISH  | 5   |Rider|
+      | MA       | Individual |IndEffectiveAARP| ENGLISH  | 4   |NoRider|
+      
+      
+      
+	 
+  @PlanBFSJMPLinks @Feb_release_2019 @gladiators
+  Scenario Outline: Verify jump links for a MedSupp member
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      |identifier|<Identifier>|
+      |Rider|<rider>|
+    Then The user navigates to Benefits and Coverage page
+      | Plan Type | <planType> |
+    Then user verifies presence of jump links
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |MemberType|<memberType>|
+      |identifier|<Identifier>|
+    And user clicks on the jump links and checks respective sections
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |MemberType|<memberType>|
+      |identifier|<Identifier>|
+    And verifies links irrelevant to the plan type are not displayed
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |Count|<count>|
+      |MemberType|<memberType>|
+      
+   Examples: 
+      | planType | memberType |Identifier| language |count|rider|
+      | MedSupp  | Individual |EffectiveShipMedSupp| ENGLISH  | 3   |NoRider|
+      
+  @PlanBFSJMPLinks @Feb_release_2019 @gladiators
+  Scenario Outline: Verify jump links for individual PDP member
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      |identifier|<Identifier>|
+      |Rider|<rider>|
+    Then The user navigates to Benefits and Coverage page
+      | Plan Type | <planType> |
+    Then user verifies presence of jump links
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |MemberType|<memberType>|
+      |identifier|<Identifier>|
+    And user clicks on the jump links and checks respective sections
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |MemberType|<memberType>|
+      |identifier|<Identifier>|
+    And verifies links irrelevant to the plan type are not displayed
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |Count|<count>|
+      |MemberType|<memberType>|
+      
+   Examples: 
+      | planType | memberType |Identifier| language |count|rider|
+      | PDP | Individual |EffectivePDPAARP| ENGLISH  | 4   |NoRider|
+      | PDP | Individual |EffectivePDPUHC| ENGLISH  | 2   |NoRider|
+      #| PDP | Group |EffectivePDPUHC| ENGLISH  | 4   |NoRider|
+    
+    @PlanBFSJMPLinks @Feb_release_2019 @gladiators
+  Scenario Outline: Verify jump links for a SSUP member
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      |identifier|<Identifier>|
+      |Rider|<rider>|
+    Then The user navigates to Benefits and Coverage page
+      | Plan Type | <planType> |
+    Then user verifies presence of jump links
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      | Member Type    | <memberType>    |
+      |identifier|<Identifier>|
+    And user clicks on the jump links and checks respective sections
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      | Member Type    | <memberType>    |
+      |identifier|<Identifier>|
+    And verifies links irrelevant to the plan type are not displayed
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |Count|<count>|
+      | Member Type    | <memberType>    |
+      
+   Examples: 
+      | planType | memberType |Identifier| language |count|rider|
+      | SSUP | Group |GrpEffectiveSSUP| ENGLISH  | 4   |NoRider|
 
   @CMFedDrugNonLis
   Scenario Outline: Verify all sections for Ind NonLIS member on Benefits and Coverage page
@@ -224,7 +362,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | MA       | Group      | NON LIS       |
       | MAPD     | Group      | NON LIS       |
 
-  @regression_06_06_18 @CMGroupmembersTC25
+  @regressionMember @CMGroupmembersTC25
   Scenario Outline: Verify Group LIS 3/4 on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -252,7 +390,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | planType | memberType | copayCategory |
       | MAPD     | Group      | LIS 4         |
 
-  @regression_06_06_18 @CMGroupmembersPDPLIS_TC26
+  @regressionMember @CMGroupmembersPDPLIS_TC26
   Scenario Outline: Verify Group LIS 1/2 values on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -612,7 +750,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | planType | memberType |
       | PDP      | Greenwich  |
 
-  @BenefitsforTexasERSMember @regression @regression_06_06_18 @benefitsAndCoverage
+  @BenefitsforTexasERSMember @regression @regressionMember @benefitsAndCoverage
   Scenario Outline: Verify the Benefits for TexasERSMember
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -626,7 +764,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | planType | memberType        |
       | PDP      | TEXASERSGroup_BnC |
 
-  @OfficeVisitswithoutprovidertiering @regression @regression_06_06_18 @benefitsAndCoverage
+  @OfficeVisitswithoutprovidertiering @regression @regressionMember @benefitsAndCoverage
   Scenario Outline: Verify the Office visits widget for a member withoutprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -638,7 +776,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | planType | memberType                       |
       | MAPD     | memberWithoutProviderTiering_BnC |
 
-  @WaystoSaveforPdp @regression @regression_06_06_18 @benefitsAndCoverage 
+  @WaystoSaveforPdp @regression @regressionMember @benefitsAndCoverage 
   Scenario Outline: Verify the ways to save  widget for a PDP member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -652,7 +790,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | PDP      | MailOrderPharamacy_BnC |
       | MAPD     | withoutWaysToSave_BnC  |
 
-  @outpatientcenterwithprovidertier @thepredators @regressionoutpatient @regression_06_06_18
+  @outpatientcenterwithprovidertier @thepredators @regressionoutpatient @regressionMember
   Scenario Outline: Verify the outpatient widget for a member withprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -664,7 +802,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | planType | memberType     |
       | MAPD     | MAPDCOSMOS_BnC |
 
-  @primarycareproviderspecialist @thepredators @regressionprimarycareprovider @regression_06_06_18
+  @primarycareproviderspecialist @thepredators @regressionprimarycareprovider @regressionMember
   Scenario Outline: Verify the Office visits widget for a member withprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -676,7 +814,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | planType | memberType            |
       | MAPD     | COSMOSOfficevisit_BnC |
 
-  @outpatientcenterwithoutprovidertier @thepredators @regressionoutpatientwithoutprovider @regression_06_06_18 @benefitsAndCoverage
+  @outpatientcenterwithoutprovidertier @thepredators @regressionoutpatientwithoutprovider @regressionMember @benefitsAndCoverage
   Scenario Outline: Verify the outpatient widget for a member withoutprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -688,7 +826,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | planType | memberType       |
       | MAPD     | NICEBenefits_BnC |
 
-  @BenefitsForAlPeehipMember @regression @regression_06_06_18 @benefitsAndCoverage
+  @BenefitsForAlPeehipMember @regression @regressionMember @benefitsAndCoverage
   Scenario Outline: Verify the benefits for an AL peehip member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -700,7 +838,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | planType | memberType |
       | Peehip   | Group_BnC      |
 
-  @BenefitsForMAMedsupSSUPMember @regression @regression_06_06_18 @benefitsAndCoverage
+  @BenefitsForMAMedsupSSUPMember @regression @regressionMember @benefitsAndCoverage
   Scenario Outline: Verify the Benefits for a  MA Member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -714,7 +852,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | MA       | Individual_BnC |
       | SSUP     | Group_BnC      |
       
-  @CopayCoinsuranceInDrugCostTable @regression @regression_06_06_18 @benefitsAndCoverage
+  @CopayCoinsuranceInDrugCostTable @regression @regressionMember @benefitsAndCoverage
   Scenario Outline: Verify the copay coinsurance in drugcosts table
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -726,7 +864,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | planType | memberType      |
       | MAPD     | Individual_BnC2 |
 
-  @BenefitsForCombo @regression @regression_06_06_18 @benefitsAndCoverage
+  @BenefitsForCombo @regression @regressionMember @benefitsAndCoverage
   Scenario Outline: Verify the Benefits for a combo member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -741,7 +879,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
 # note: Due to timing that it takes for GPS to do the update (add or remove), 
 # this testcase result will not be stable. Since can't predict time for GPS to finish the update, 
 # so the add or remove button does't always show up within the time the code expects it to.
-  @BenefitsRiderFunctionality @regression @regression_06_06_18 @benefitsAndCoverage
+  @BenefitsRiderFunctionality @regression @regressionMember @benefitsAndCoverage
   Scenario Outline: Verify the Benefits for a combo member with Rider
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
