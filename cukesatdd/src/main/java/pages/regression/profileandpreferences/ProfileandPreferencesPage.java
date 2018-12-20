@@ -94,7 +94,8 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='emailCardHeight']/div[1]/h5")
 	private WebElement EmailLabel;
 	
-	@FindBy(css = "#emailCardHeight .subtitle")
+	//@FindBy(css = "#emailCardHeight .subtitle")
+	@FindBy(xpath = "//div[@class='card emailship']//h5[@class='subtitle semi-bold margin-none card-title']")
 	private WebElement EmailLabel_sofl;
 
 
