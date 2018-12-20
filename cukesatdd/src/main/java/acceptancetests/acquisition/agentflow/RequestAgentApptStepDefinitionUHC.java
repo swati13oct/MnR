@@ -70,7 +70,7 @@ public class RequestAgentApptStepDefinitionUHC {
 	
 	@Then("^the user fills the form out and submits the uhc agent appointment application$")
 	public void fillOutAndSubmitForm(DataTable attributes){
-		if(!MRScenario.environment.equals("team-ci1")){
+		
 			RequestAgentAppointmentPage requestAgentAppointmentPage = (RequestAgentAppointmentPage) getLoginScenario().getBean(PageConstants.REQUEST_AGENT_APPOINTMENT_PAGE);
 			List<DataTableRow> givenAttributesRow = attributes.getGherkinRows();
 			Map<String, String> givenAttributesMap = new HashMap<String, String>();
@@ -85,6 +85,6 @@ public class RequestAgentApptStepDefinitionUHC {
 			}else{
 				Assert.fail("Error submitting the form or loading the Confirmation page");
 			}
-		}
+		
 	}
 }

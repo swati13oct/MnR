@@ -1,4 +1,4 @@
-@aprilRelease2018  @regression_06_06_18
+@aprilRelease2018  @regressionMember
 Feature:To test HSID registration flow
 
  
