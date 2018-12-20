@@ -64,8 +64,8 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(className = "bold atdd-profile-membernumber")
 	private WebElement memberId;
 
-	@FindBy(xpath = "//*[@class='account_settings form__content']/div/flex/flex/flex-content[2]/p")
-	
+	//@FindBy(xpath = "//*[@class='account_settings form__content']/div/flex/flex/flex-content[2]/p")
+	@FindBy(css = "flex-content:nth-child(2) > .ng-binding")
 	private WebElement usernameText;
 
 	@FindBy(xpath = ".//*[@id='password']/div/div/span[1]")
