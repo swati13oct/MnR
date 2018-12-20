@@ -513,12 +513,17 @@ public class AccountHomePage extends UhcDriver {
 
 	public BenefitsAndCoveragePage navigateToBandCPage() {
 		System.out.println("Checking for Welcome or Hello on Dashboard home page now");
+	  try{
 		if(helloPerson.isDisplayed()){
 			System.out.println("Hello PersonName on Dashboard home page was found");
 		} else{
 			waitForHomePage(welcome);
 			System.out.println("Welcome on Dashboard home page was found");
-		}				
+		}	} catch	(Exception e){
+			waitForHomePage(welcome);
+			System.out.println("Welcome on Dashboard home page was found");
+			
+		}		
 		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
 			System.out.println("User is on Stage environment");
 
