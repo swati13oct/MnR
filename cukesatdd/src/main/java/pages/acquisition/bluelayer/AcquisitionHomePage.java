@@ -136,7 +136,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = ".//*[@id='colhowdoesthiswork_dce']//*[@itemprop='significantLink']/*[@class='cta-button secondary']")
 	public WebElement getStarted;
 
-	@FindBy(xpath = " //*[@id='subnav_2']/div[1]/div/div[3]/div/h3[3]/a")
+	@FindBy(xpath = "//div[@id='subnav_2']//h3/a[contains(text(),'Pharmacy')]")
 	private WebElement pharmacysearchbtn;
 
 	@FindBy(xpath = ".//*[@id='change-location']")
