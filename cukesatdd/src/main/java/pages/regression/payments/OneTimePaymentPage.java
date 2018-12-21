@@ -72,6 +72,9 @@ public class OneTimePaymentPage extends UhcDriver{
 	@FindBy(xpath="//*[@class='btn btn--secondary cancelbutton']")
 	private WebElement RecurringFormCancel;
 	
+	@FindBy(xpath="//*[@class='modal-footer']/a[1]")
+	private WebElement RecurringFormCancelPopup;
+	
 	@FindBy(xpath="(//*[@id='paymentOverviewApp']//div[@class='container']//div[@class='col-md-12']/h2)[1]")
 	private WebElement PaymentOverviewtText;
 	
@@ -272,6 +275,9 @@ public OneTimePaymentPage CancelPayments() {
 	}
 	System.out.println("will click on cancel button");
 	RecurringFormCancel.click();
+	waitforElement(RecurringFormCancelPopup); 
+	RecurringFormCancelPopup.click();
+	waitforElement(PaymentOverviewtText); 
 	if(PaymentOverviewtText.isDisplayed())	
 		return new OneTimePaymentPage(driver);
 	else 

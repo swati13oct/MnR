@@ -496,7 +496,7 @@ Feature: To test the payment flow on AARP site
       | MAPD     | IndividualUHCPayments | 
  
   @paymentsErrorMessage @US1474255 @Feb_release_2019 @Spartans
-  Scenario Outline: Verify Recurring Payment cancellation for Different Types of Member
+  Scenario Outline: Verify Recurring Payment Error Message for Different Types of Member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |

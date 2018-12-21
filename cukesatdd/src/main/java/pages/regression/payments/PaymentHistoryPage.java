@@ -663,11 +663,8 @@ public class PaymentHistoryPage extends UhcDriver{
 		}
 		catch (Exception e) {
 		}
-		waitforElement(OtherAmountButton); 
-		OtherAmountButton.click();
-		AmountInput.sendKeys("1.00");
-		System.out.println("entered the new amount");
-		CheckingAccountRadioButton.click();
+		waitforElement(CheckingAccountRadioButton); 
+		CheckingAccountRadioButton.click();		
 		System.out.println("clicked on Checking account button");
 		NextButton.click();		
 		waitforElement(AutoPayHeading);
