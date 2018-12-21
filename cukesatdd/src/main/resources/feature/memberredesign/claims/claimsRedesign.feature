@@ -1,4 +1,4 @@
-@claimspage @theTransformers @regression_06_06_18 
+@claimspage @theTransformers @regressionMember
 Feature: T1.1To validate the new changes related to claims page on the member redesigned site
 
 @claimsSummaryFED
@@ -239,7 +239,7 @@ Examples:
       | MAPD     | Last 24 months | COSMOS| COSMOSCLAIMS   |
      
   
-       @regression_06_06_18 @TC01_FED_AARP_Individual_NICE @TC04_FED_UHC_Individual_COSMOS
+       @TC01_FED_AARP_Individual_NICE @TC04_FED_UHC_Individual_COSMOS
   Scenario Outline: To validate the claims present for the Federal member on claims sumamry page & the Details on the Claims Details page 
    Given login with following details logins in the member portal and validate elements
      

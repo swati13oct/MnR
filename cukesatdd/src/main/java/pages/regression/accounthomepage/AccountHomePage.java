@@ -246,7 +246,7 @@ public class AccountHomePage extends UhcDriver {
 	// private WebElement logoImage;
 
 	@FindBy (xpath = "//*[@id='ui-view-page']/div/arcade-header/header[1]/div/div/a/img")
-	private WebElement logoImage;								  
+	private WebElement logoImage;								  																				  
 
 	@FindBy(xpath = "//*[@id='ui-view-page']/div/arcade-header/header[1]/div/div/a/img[2]")
 	private WebElement cologoImage;
@@ -474,10 +474,14 @@ public class AccountHomePage extends UhcDriver {
 			driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
 			System.out.println(driver.getCurrentUrl());
 		} else {
-			driver.navigate().to(
-					"https://" +MRScenario.environmentMedicare+"-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
-			
-			
+			if(Plantype.equalsIgnoreCase("PCP")) {driver.navigate().to("https://" + MRScenario.environmentMedicare
+					+ "-mymedicareaccount.uhc.com/pcp/member/benefits-coverage.html");}
+			else if (Plantype.equalsIgnoreCase("MEDICA")) {driver.navigate().to("https://" + MRScenario.environmentMedicare
+					+ "-mymedicareaccount.uhc.com/medica/member/benefits-coverage.html");}
+				else {
+				driver.navigate().to(
+						"https://" +MRScenario.environmentMedicare+"-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
+				}
 		}
 		CommonUtility.waitForPageLoad(driver, heading, 50);
 		/*if (driver.getTitle().equalsIgnoreCase("Benefits")) {
@@ -504,12 +508,17 @@ public class AccountHomePage extends UhcDriver {
 
 	public BenefitsAndCoveragePage navigateToBandCPage() {
 		System.out.println("Checking for Welcome or Hello on Dashboard home page now");
+	  try{
 		if(helloPerson.isDisplayed()){
 			System.out.println("Hello PersonName on Dashboard home page was found");
 		} else{
 			waitForHomePage(welcome);
 			System.out.println("Welcome on Dashboard home page was found");
-		}				
+		}	} catch	(Exception e){
+			waitForHomePage(welcome);
+			System.out.println("Welcome on Dashboard home page was found");
+			
+		}		
 		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
 			System.out.println("User is on Stage environment");
 

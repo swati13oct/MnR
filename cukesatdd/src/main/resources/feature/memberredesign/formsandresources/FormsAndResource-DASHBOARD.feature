@@ -1,9 +1,9 @@
-@dashBoardFormsAndResources @gladiators @regression_06_06_18
+@dashBoardFormsAndResources @gladiators 
 Feature: G1.1 To validate forms and resources page in dashboard site
 
 # Pre-Effective Federal Cases
-@pre-effectivefnrmapdaarpindividualvalidation 
-Scenario Outline: 
+@pre-effectivefnrmapdaarpindividualvalidation @regressionMember
+Scenario Outline: To validate the forms and resources page MAPD AARP Individual Pre-Effective
    	Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -19,7 +19,7 @@ Scenario Outline:
      | Alternative Drug List 	| <alternativedruglist>     |
      | EVIDENCE OF COVERAGEMEM  | <evidenceofcoverage>      |
      | PASSPORT					| <passport>    			|
-     | OVER THE COUNTER			| <overthecounter>    		|
+    #| OVER THE COUNTER			| <overthecounter>    		|  # it is a link
    	Then validate that annual directory section is displayed
     | Member Type | <memberType> |
     Then validate pdf's in annual directory section
@@ -35,8 +35,8 @@ Scenario Outline:
      | planType | memberType           			  | language | gettingstartedguide   | benefithighlight   |  comprehensiveformulary|alternativedruglist   | evidenceofcoverage   |passport                             | overthecounter  			   | comprehensiveformularymem  | providerdirectory   | vendorInformationsheet    |pharmacydirectoryinformation  |
      | MAPD     | IndAARPPre-EffectiveFnR 		  | ENGLISH  | Getting Started Guide | Benefit Highlights | Comprehensive Formulary|Alternative Drug List | Evidence of Coverage |UnitedHealth Passport Program| OVER THE COUNTER ESSENTIALS   | Comprehensive Formulary    | Provider Directory  | Vendor Information Sheet          |Pharmacy Directory Information|
 
-@IndAARPMAPre-EffectiveFnR 
-Scenario Outline: 
+@IndAARPMAPre-EffectiveFnR @regressionMember
+Scenario Outline: To validate the forms and resources page MA AARP Individual Pre-Effective
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -47,6 +47,7 @@ Scenario Outline:
      | GETTING STARTED GUIDE    | <gettingstartedguide>     |
      | BENEFIT-HIGHLIGHT        | <benefithighlight>        |
      | EVIDENCE OF COVERAGEMEM  | <evidenceofcoverage>      |
+     | PASSPORT					| <passport>    			|
     Then validate that annual directory section is displayed
     | Member Type | <memberType> |
      Then validate pdf's in annual directory section
@@ -58,12 +59,13 @@ Scenario Outline:
    	| Member Type | <memberType> |
     Examples: 
       
-     | planType | memberType           	    | language | gettingstartedguide   | benefithighlight   | evidenceofcoverage   |providerdirectory   | vendorInformationsheet    |
-     | MA       | IndAARPMAPre-EffectiveFnR | ENGLISH  | Getting Started Guide | Benefit Highlights |Evidence of Coverage  |Provider Directory  | Vendor Information Sheet 	|
+     | planType | memberType           	    | language | gettingstartedguide   | benefithighlight   | evidenceofcoverage   |providerdirectory   | vendorInformationsheet    |passport      |
+     | MA       | IndAARPMAPre-EffectiveFnR | ENGLISH  | Getting Started Guide | Benefit Highlights |Evidence of Coverage  |Provider Directory  | Vendor Information Sheet 	|UnitedHealth Passport Program|
+     
 
 
-@fnrpdpaarpindividualvalidationPre-Effective
-  Scenario Outline: 
+@fnrpdpaarpindividualvalidationPre-Effective  @regressionMember
+  Scenario Outline: To validate the forms and resources page PDP AARP Individual Pre-Effective
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -95,8 +97,8 @@ Scenario Outline:
 
 
 #Effective Users
-  @fnrmapdaarpindividualvalidation
-  Scenario Outline: 
+  @fnrmapdaarpindividualvalidation  @regressionMember
+  Scenario Outline: To validate the forms and resources page MAPD AARP Individual
    	Given login with following details in the member redesign portal
     	| Plan Type   | <planType>   |
      	| Member Type | <memberType> |
@@ -143,8 +145,8 @@ Scenario Outline:
       | planType | memberType         | language | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | comprehensiveformulary  | priorauth           | steptherapy  | formularyadd        | formularydel        | anoc                     | evidenceofcoverageanoc | comprehensiveformularyanoc |
       | MAPD     | IndAARPPharmacyFnR | ENGLISH  | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Annual Notice of Changes | Evidence Of Coverage   | Comprehensive Formulary    |
 
-  @fnrpdpuhcindividual
-  Scenario Outline: 
+  @fnrpdpuhcindividual  @regressionMember
+  Scenario Outline: To validate the forms and resources page PDP UHC Individual
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -187,13 +189,13 @@ Scenario Outline:
       | planType | memberType          | language | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | comprehensiveformulary  | priorauth           | steptherapy  | formularyadd        | formularydel        | anoc                     | evidenceofcoverageanoc | comprehensiveformularyanoc |
       | PDP      | PdpuhcindividualFnR | ENGLISH  | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Annual Notice of Changes | Evidence Of Coverage   | Comprehensive Formulary    |
 
-  @fnrmapdgroupvalidation
-  Scenario Outline: 
+  @fnrmapdgroupvalidation  @regressionMember
+  Scenario Outline: To validate the forms and resources page MAPD group
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     And user clicks on the view document and resources link and navigate to forms and resource page
-    And validates that PEEHIP logo is not displayed
+   # And validates that PEEHIP logo is not displayed
     Then validate that the plan material section is displayed
     And validate for active member Temporary Id Card and Plan Order Material links are displayed
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
@@ -249,8 +251,8 @@ Scenario Outline:
       | MAPD     | GroupMAPDPharmacyFnR | ENGLISH  | Getting Started Guide | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Certificate of Coverage | Formulary/Drug List | Formulary/Drug List - Comprehensive | Additional Drug Coverage | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Certificate of Coverage | Annual Notice of Changes | Evidence of Coverage   | Comprehensive Formulary    | Additional Drug Coverage | Evidence Of Coverage |
 
   # |MAPD     | GroupPharmacyFnR  | SPANISH           |Beneficios Importantes |Resumen de Beneficios |Comprobante de Cobertura |Comprehensive Formulary-Spanish |
-  @fnrpdpaarpindividualvalidation
-  Scenario Outline: 
+  @fnrpdpaarpindividualvalidation @regressionMember
+  Scenario Outline: To validate the forms and resources page AARP Individual
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -296,13 +298,13 @@ Scenario Outline:
       | planType | memberType | language | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | comprehensiveformulary  | priorauth           | steptherapy  | formularyadd        | formularydel        | anoc                     | evidenceofcoverageanoc | comprehensiveformularyanoc |
       | PDP      | IndAARPFnR | ENGLISH  | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Annual Notice of Changes | Evidence Of Coverage   | Comprehensive Formulary    |
 
-  @fnrpdptexasgroupvalidation
-  Scenario Outline: 
+  @fnrpdptexasgroupvalidation  @regressionMember
+  Scenario Outline: To validate the forms and resources page Texas group
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     And user clicks on the view document and resources link and navigate to forms and resource page
-    And validates that PEEHIP logo is not displayed
+   #And validates that PEEHIP logo is not displayed
     And validates the pdp texas logo
     Then validate that the plan material section is displayed
     And validate for active member Temporary Id Card and Plan Order Material links are displayed
@@ -338,22 +340,22 @@ Scenario Outline:
       | GETTING STARTED GUIDE             | <gettingstartedguide>    |
       | BENEFIT-HIGHLIGHT                 | <benefithighlight>       |  
       | EVIDENCE OF COVERAGE              | <evidenceofcoverage>     |
-       | SUMMARY-OF-BENEFIT                | <summaryofbenefits>     |
+      | SUMMARY-OF-BENEFIT                | <summaryofbenefits>     |
       | FORMULARY DRUG LIST ABRIDGED      | <abridgedformulary>      |
       | FORMULARY DRUG LIST COMPREHENSIVE | <comprehensiveformulary> |
       | ADDITIONAL DRUG COVERAGE          | <additionaldrug>         |
-      | PRIOR AUTHORIZATION               | <priorauth>              |
-      | STEP THERAPY                      | <steptherapy>            |
-      | FORMULARY ADDITIONS               | <formularyadd>           |
-      | FORMULARY DELETIONS               | <formularydel>           |
+     #| PRIOR AUTHORIZATION               | <priorauth>              |
+     #| STEP THERAPY                      | <steptherapy>            |
+     #| FORMULARY ADDITIONS               | <formularyadd>           |
+     #| FORMULARY DELETIONS               | <formularydel>           |
  
       Examples:
 
       | planType | memberType         | language | gettingstartedguide   | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | abridgedformulary   | comprehensiveformulary              | additionaldrug           | priorauth           | steptherapy  | formularyadd        | formularydel        | evidenceofcoverageanoc | comprehensiveformularyanoc | additionaldruganoc       |  |
       | PDP      | TexasRxPharmacyFnRPage | ENGLISH  | Getting Started Guide | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Formulary/Drug List | Formulary/Drug List - Comprehensive | Additional Drug Coverage | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Evidence of Coverage   | Comprehensive Formulary    | Additional Drug Coverage |  |
 
-  @fnrpdpgroupvalidation
-  Scenario Outline: 
+  @fnrpdpgroupvalidation  @regressionMember
+  Scenario Outline: To validate the forms and resources page UHC group
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -411,8 +413,8 @@ Scenario Outline:
 
  
      
-  @fnrmaindividualvalidation
-  Scenario Outline: 
+  @fnrmaindividualvalidation  @regressionMember
+  Scenario Outline: To validate the forms and resources page  main Individual
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -441,10 +443,11 @@ Scenario Outline:
     And Medical EOB link is displayed for MA
     Then validate that the forms & resources section is displayed
     Then validate that the renew magazine section is displayed for MAPD
+    And the Pharmacy locator link is not displayed for MA
     And the user verifies that the correct pdfs are coming in the anoc section
       | ANNUAL NOTICE OF CHANGES  | <anoc>                   |
       | EVIDENCE OF COVERAGE ANOC | <evidenceofcoverageanoc> |
-    And the Pharmacy locator link is not displayed for MA
+    
     And then user verifies that the correct pdfs are coming in the plan material section
       | BENEFIT-HIGHLIGHT              | <benefithighlight>            | 
       | EVIDENCE OF COVERAGE           | <evidenceofcoverage>          |
@@ -455,13 +458,13 @@ Scenario Outline:
       | planType | memberType | language | benefithighlight   | summaryofbenefits   | evidenceofcoverage         | unitedhealthpassportprogram   | anoc                     | evidenceofcoverageanoc |
       | MA       | AARPIndFnR | ENGLISH  | Benefit Highlights | Summary of Benefits | Evidence of Coverage | UnitedHealth Passport Program | Annual Notice of Changes | Evidence Of Coverage   |
 
-  @fnralpeehipgroupvalidation
-  Scenario Outline: 
+  @fnralpeehipgroupvalidation  @regressionMember
+  Scenario Outline: To validate the forms and resources page alpeehip group 
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     And user clicks on the view document and resources link and navigate to forms and resource page
-    And the user verifies the alpeehip logo
+   # And the user verifies the alpeehip logo
     Then validate that the plan material section is displayed
     And validate for active member Temporary Id Card and Plan Order Material links are displayed
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
@@ -512,15 +515,15 @@ Scenario Outline:
       | planType     | memberType       | language | gettingstartedguide       | benefithighlight   | summaryofbenefits   | evidenceofcoverage         | certificateofcoverage                        | abridgedformulary              | comprehensiveformulary              | additionaldrug           | doctorflyer  | providerdirectoryinsert   | priorauth           | steptherapy  | formularyadd        | formularydel        | evidenceofcoverageanoc | comprehensiveformularyanoc |       anoc              | 
       | MAPDALPeehip | GroupAlPeehipFnR | ENGLISH  | Getting Started Guide | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Certificate of Coverage | Formulary/Drug List | Formulary/Drug List - Comprehensive | Additional Drug Coverage | Doctor Flyer | Provider Directory Insert | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Evidence of Coverage   | Comprehensive Formulary  | Additional Drug Coverage |Annual Notice of Changes|  
 
-  @pcpfnrvalidation
-  Scenario Outline: 
+  @pcpfnrvalidation  @regressionMember
+  Scenario Outline: To validate the forms and resources page for PCP
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     And user clicks on the view document and resources link and navigate to forms and resource page
     And validates that PEEHIP logo is not displayed
     Then validate that the plan material section is displayed
-    And validate for active member Temporary Id Card and Plan Order Material links are displayed
+   # And validate for active member Temporary Id Card and Plan Order Material links are displayed
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
     And validate that the view temporary id card link is displayed
     And validate that english is default language in the dropdown
@@ -537,9 +540,9 @@ Scenario Outline:
     Then validate that the forms & resources section is displayed
     Then validate that the renew magazine section is displayed
     Then the member validate the correct Membership Materials section is coming
-      | BENEFIT-HIGHLIGHT       | <benefithighlight>       |
-      | COMPREHENSIVE FORMULARY | <comprehensiveformulary> |
-      | EVIDENCE OF COVERAGE    | <evidenceofcoverage>     |
+      #| BENEFIT-HIGHLIGHT       | <benefithighlight>       |
+      # | COMPREHENSIVE FORMULARY | <comprehensiveformulary> |
+      #| EVIDENCE OF COVERAGE    | <evidenceofcoverage>     |
     And then user verifies that the correct pdfs are coming in the plan material section
       | BENEFIT-HIGHLIGHT       | <benefithighlight>       |
       | SUMMARY-OF-BENEFIT      | <summaryofbenefits>      |
@@ -556,8 +559,8 @@ Scenario Outline:
       | MAPD     | PCPFnR     | ENGLISH  | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions |
 
   # | MAPD     | PCPFnR | SPANISH | Benefit Highlights  | Summary of Benefits  | Evidence of Coverage  | Comprehensive Formulary  | Prior Authorization  | Step Therapy  | Formulary Additions  | Formulary Deletions  |
-  @ssupfnrvalidation
-  Scenario Outline: 
+  @ssupfnrvalidation  @regressionMember
+  Scenario Outline: To validate the forms and resources page for ssupFnr 
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -593,8 +596,8 @@ Scenario Outline:
       | UHC      | SSUPFnR    | ENGLISH  | Schedule of Benefits | Certificate of Coverage | Your Plan Getting Started | Privacy Notice | CDI Long Notice |
 
   #  | MAPD     | PCPFnR |  #SPANISH | Benefit Highlights  | Summary of Benefits  | Evidence of Coverage  | Comprehensive Formulary  | Prior Authorization  | Step Therapy  | Formulary Additions  | Formulary Deletions  |
-  @combovalidation
-  Scenario Outline: 
+  @combovalidation  @regressionMember
+  Scenario Outline: To validate the forms and resources page for combo members
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -613,8 +616,8 @@ Scenario Outline:
       | planType | memberType |
       | Combo    | ComboFnR   |
 
-  @terminatedmembervalidation
-  Scenario Outline: 
+  @terminatedmembervalidation  @regressionMember
+  Scenario Outline: To validate the forms and resources page for Terminated Members
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -626,8 +629,9 @@ Scenario Outline:
     And both the Pharmacy locator and provider search links are not displayed
     Then validate that My Document section is displayed
     Then validate that the renew magazine section is not displayed
-    Then validate that the EOB Section is displayed
     Then validate that the annual directories section is not displayed
+    Then validate that the EOB Section is displayed
+    
     
 
     Examples: 
@@ -635,8 +639,8 @@ Scenario Outline:
       # uhc
       | MA       | IndAARPMATerminatedFnR |
 
-  @shipscenario
-  Scenario Outline: 
+  @shipscenario  @regressionMember
+  Scenario Outline: To validate the forms and resources page for SHIP members
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -660,7 +664,7 @@ Scenario Outline:
       # uhc
       | SHIP   | IndPharmacyShipFnR | Benefits Table |Plan Overview |Outline of Coverage |
 
-  @memberauthfnrpagevalidation
+  @memberauthfnrpagevalidation  @regressionMember
   Scenario Outline: To validate the forms and resources page through Member auth.
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -669,16 +673,16 @@ Scenario Outline:
     And Member Enters the Username he wants to search
       | MemUsername | <member> |
     And User Clicks on the Pop up displayed
-    And user clicks on the view document and resources link and navigate to forms and resource page from member auth page
-    And validates that PEEHIP logo is not displayed
-    And validate for active member Temporary Id Card and Plan Order Material links are displayed
-    And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
-    And validate that the view temporary id card link is displayed
-    Then validate that the plan material section is displayed
-    Then validate that the AnocSection is displayed
-    Then validate that annual directory section is displayed
+    #And user clicks on the view document and resources link and navigate to forms and resource page from member auth page
+    #And validates that PEEHIP logo is not displayed
+    #And validate for active member Temporary Id Card and Plan Order Material links are displayed
+    #And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
+    #And validate that the view temporary id card link is displayed
+    #Then validate that the plan material section is displayed
+   	#Then validate that the AnocSection is displayed
+    #Then validate that annual directory section is displayed
         Examples: 
       | username  | password  | member           |
-      | qavgogine | qavgogine | q1_aarp_apr185   |   
+      | qavgogine | qavgogine | q2_jun_aarp0055   |   
       
      

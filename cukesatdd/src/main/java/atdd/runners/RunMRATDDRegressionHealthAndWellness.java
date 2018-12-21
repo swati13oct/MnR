@@ -19,7 +19,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionHealthAndWellness.json",detaile
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionHealthAndWellness")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/healthandwellness" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionHealthAndWellness.json" }, tags = { "@regression_06_06_18" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionHealthAndWellness.json" }, tags = { "@regressionMember" })
 public class RunMRATDDRegressionHealthAndWellness {
 
 }
