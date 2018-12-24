@@ -181,7 +181,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     	| Plan Type   | <planType>   |
      	| Member Type | <memberType> |
     And user clicks on the view document and resources link and navigate to forms and resource page
-    And validates that PEEHIP logo is not displayed
+   # And validates that PEEHIP logo is not displayed
     And validate for active member Temporary Id Card and Plan Order Material links are displayed
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
     And validate that the view temporary id card link is displayed
@@ -229,7 +229,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     And user clicks on the view document and resources link and navigate to forms and resource page
-    And validates that PEEHIP logo is not displayed
+   # And validates that PEEHIP logo is not displayed
     And validate for active member Temporary Id Card and Plan Order Material links are displayed
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
     And validate that the view temporary id card link is displayed
@@ -335,7 +335,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     And user clicks on the view document and resources link and navigate to forms and resource page
-    And validates that PEEHIP logo is not displayed
+    #And validates that PEEHIP logo is not displayed
     Then validate that the plan material section is displayed
     And validate for active member Temporary Id Card and Plan Order Material links are displayed
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
@@ -438,7 +438,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     And user clicks on the view document and resources link and navigate to forms and resource page
-    And validates that PEEHIP logo is not displayed
+    #And validates that PEEHIP logo is not displayed
     Then validate that the plan material section is displayed
     And validate for active member Temporary Id Card and Plan Order Material links are displayed
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
@@ -497,7 +497,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     And user clicks on the view document and resources link and navigate to forms and resource page
-    And validates that PEEHIP logo is not displayed
+   # And validates that PEEHIP logo is not displayed
     Then validate that the plan material section is displayed
     And validate for active member Temporary Id Card and Plan Order Material links are displayed
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
@@ -599,7 +599,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     And user clicks on the view document and resources link and navigate to forms and resource page
-    And validates that PEEHIP logo is not displayed
+   #And validates that PEEHIP logo is not displayed
     Then validate that the plan material section is displayed
    # And validate for active member Temporary Id Card and Plan Order Material links are displayed
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
@@ -643,7 +643,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     And user clicks on the view document and resources link and navigate to forms and resource page
-    And validates that PEEHIP logo is not displayed
+   #And validates that PEEHIP logo is not displayed
     Then validate that the plan material section is displayed
     And validate for active member Temporary Id Card and Plan Order Material links are displayed
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
@@ -680,7 +680,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     And user clicks on the view document and resources link and navigate to forms and resource page
-    And validates that PEEHIP logo is not displayed
+   #And validates that PEEHIP logo is not displayed
     And user is on the forms and resources page for first plan tab
     Then validate that the plan material section is displayed
     And validate for active member Temporary Id Card and Plan Order Material links are displayed
@@ -700,7 +700,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     And user clicks on the view document and resources link and navigate to forms and resource page
-    And validates that PEEHIP logo is not displayed
+   # And validates that PEEHIP logo is not displayed
     Then validate that the plan material section is displayed
     And for terminated member order plan materials link is not displayed
     Then validate that the anoc section is not displayed
@@ -723,7 +723,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     And user clicks on the view document and resources link and navigate to forms and resource page
-    And validates that PEEHIP logo is not displayed
+   # And validates that PEEHIP logo is not displayed
     And validate for active member Temporary Id Card and Plan Order Material links are displayed
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
     And validate that the view temporary id card link is displayed
