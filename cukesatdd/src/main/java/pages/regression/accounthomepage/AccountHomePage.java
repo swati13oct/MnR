@@ -1401,6 +1401,16 @@ public class AccountHomePage extends UhcDriver {
 					System.out.println(driver.getTitle());
 				}
 			}
+		}else {
+			if (driver.getCurrentUrl().contains("mymedicareaccount") )
+				driver.navigate().to("https://" + MRScenario.environmentMedicare
+						+ "-mymedicareaccount.uhc.com/content/medicare/member/documents/overview.html");
+			 else {
+				driver.navigate().to("https://" + MRScenario.environmentMedicare
+						+ "-medicare.ose-elr-core.optum.com/content/medicare/member/documents/overview.html");
+			}
+			
+			
 		}
 		return new FormsAndResourcesPage(driver);
 	}

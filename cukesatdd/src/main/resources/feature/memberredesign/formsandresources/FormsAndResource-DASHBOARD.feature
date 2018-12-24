@@ -1,6 +1,84 @@
 @dashBoardFormsAndResources @gladiators 
 Feature: G1.1 To validate forms and resources page in dashboard site
 
+
+@F&RJMPLinks @Feb_release_2019 @gladiators
+Scenario Outline: To verify quicklinks for a MAPD member
+   	Given login with following details logins in the member portal and validate elements
+   	  | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      |identifier|<Identifier>|
+      |Rider|<rider>|
+	#And user naviagtes to Forms and Resources page
+	
+	And user clicks on the view document and resources link and navigate to forms and resource page
+	Then user verifies presence of jump links on F&R page
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |MemberType|<memberType>|
+      |identifier|<Identifier>|
+    And user clicks on the jump links and checks respective sections on F&R page
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |MemberType|<memberType>|
+      |identifier|<Identifier>|
+    And verifies links irrelevant to the plan type are not displayed on F&R page
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |Count|<count>|
+      |MemberType|<memberType>|
+      |identifier|<Identifier>|
+     
+	#Membership material comes dynamically based on the logic
+		
+	Examples: 
+      | planType | memberType |Identifier| language |count|rider|
+      | MAPD     | Individual |IndEffectiveAARP| ENGLISH  | 7   |NoRider|
+      | MAPD     | Individual |IndEffectiveAARP| ENGLISH  | 7   |Rider|
+      | MAPD     | Group |GrpEffectiveUHC| ENGLISH  | 7   |NoRider|
+      | MAPD     | Individual |IndEffectiveUHC| ENGLISH  | 6   |NoRider|
+	  | MAPD     | Individual |IndEffectiveUHC| ENGLISH  | 6   |Rider|
+	  | PCP     | Individual |IndEffectivePCP| ENGLISH  | 6   |NoRider|
+	  | MEDICA     | Individual |IndEffectiveMedica| ENGLISH  | 6   |NoRider|
+	  
+	  
+@F&RJMPLinks111 @Feb_release_2019 @gladiators
+  Scenario Outline: Verify jump links for individual MA member
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      |identifier|<Identifier>|
+      |Rider|<rider>|
+    And user clicks on the view document and resources link and navigate to forms and resource page
+    Then user verifies presence of jump links on F&R page
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |MemberType|<memberType>|
+      |identifier|<Identifier>|
+               
+    And user clicks on the jump links and checks respective sections on F&R page
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |MemberType|<memberType>|
+      |identifier|<Identifier>|
+      
+     And verifies links irrelevant to the plan type are not displayed on F&R page
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |Count|<count>|
+      |MemberType|<memberType>|
+      |identifier|<Identifier>|
+    
+      
+   Examples: 
+      | planType | memberType |Identifier| language |count|rider|
+      | MA       | Group	  |GrpEffectiveUHC| ENGLISH   | 6   |NoRider|
+      | MA       | Individual |IndEffectiveUHC | ENGLISH  | 6   |Rider|
+      | MA       | Individual |IndEffectiveAARP| ENGLISH  | 7   |Rider|
+      | MA       | Individual |IndEffectiveAARP| ENGLISH  | 7   |NoRider|
+	   
+
+
 # Pre-Effective Federal Cases
 @pre-effectivefnrmapdaarpindividualvalidation @regressionMember
 Scenario Outline: To validate the forms and resources page MAPD AARP Individual Pre-Effective
