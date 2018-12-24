@@ -203,22 +203,55 @@ public class HSIDLoginPage extends UhcDriver {
 				Thread.sleep(5000);
 				cs.enterValidSecurityAnswer();
 				System.out.println(driver.getCurrentUrl());
+				Thread.sleep(20000);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
-			try {
-				Thread.sleep(20000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+			//note: workaround - get URL again to check and see if it goes to the no-email.html page instead
+			if (driver.getCurrentUrl().contains("login/no-email.html")) {
+				System.out.println("User encounted no-email page, will enter email address to proceed");
+				try {
+					String workAroundEmail="UHCMNRPORTALS@GMAIL.COM";
+					WebElement newEmail=driver.findElement(By.xpath("//input[@ng-model='newEmail']")); 
+					newEmail.sendKeys(workAroundEmail);
+					WebElement confirmEmail=driver.findElement(By.xpath("//input[@ng-model='confirmEmail']")); 
+					confirmEmail.sendKeys(workAroundEmail);
+					WebElement continueButton=driver.findElement(By.xpath("//button//span[contains(text(),'Continue')]")); 
+					continueButton.click();
 
+					System.out.println("Clicked Continue button, wait and see if the 'Go To Homepage' button shows up");
+					try {
+						Thread.sleep(5000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					WebElement goToHomepage=driver.findElement(By.xpath("//button[@ng-click='goToHomePage()']"));
+					try {
+						System.out.println("'Go To Homepage' button showed up, click it");
+						goToHomepage.isDisplayed();
+						goToHomepage.click();
+					} catch (Exception e1) {
+						System.out.println("did not encounter 'Go To Homepage' System error message, moving on");
+					}
+					
+					try {
+						Thread.sleep(20000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				} catch (Exception e) {
+					System.out.println("Unable to resolve no-email page encounter");
+					System.out.println(e);
+				}
+			}
+
+		}
 		else if (currentUrl().contains("testharness.html")
 				|| currentUrl().contains("/dashboard")) {
-
 			System.out.println(driver.getCurrentUrl());
 			return new AccountHomePage(driver);
 		}
@@ -230,6 +263,7 @@ public class HSIDLoginPage extends UhcDriver {
 
 		if (MRScenario.environmentMedicare.equals("team-e")
 				|| MRScenario.environmentMedicare.equals("team-ci1")) {
+			System.out.println("TEST - 4");
 
 			Alert alert = driver.switchTo().alert();
 			alert.accept();
@@ -249,11 +283,11 @@ public class HSIDLoginPage extends UhcDriver {
 			return new AccountHomePage(driver);
 		} else if (currentUrl().contains("home/my-account-home.html")
 				|| currentUrl().contains("/login.html")) {
+
 			return new AccountHomePage(driver);
 		} else if (currentUrl().contains("terminated-plan.html")) {
 			return new TerminatedHomePage(driver);
 		}
-
 		return null;
 	}
 
