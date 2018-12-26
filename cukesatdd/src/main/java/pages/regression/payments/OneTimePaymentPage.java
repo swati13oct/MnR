@@ -55,7 +55,6 @@ public class OneTimePaymentPage extends UhcDriver{
 	
 	@FindBy(xpath="//*[@id='IPEinvL']/map/area[3]")
 	private WebElement iPerceptionAutoPopUp;
-
 	
 	@FindBy(xpath ="//*[@id='consent']/following-sibling::label[contains(text(),'I have read and agree to the following')]")
 	private WebElement iHaveReadAndAgreeToTheFollowing;
@@ -69,6 +68,27 @@ public class OneTimePaymentPage extends UhcDriver{
 	
 	@FindBy(id = "closeButton")
 	private WebElement iPerceptionCloseButton;
+	
+	@FindBy(xpath="//*[@class='btn btn--secondary cancelbutton']")
+	private WebElement RecurringFormCancel;
+	
+	@FindBy(xpath="//*[@class='modal-footer']/a[1]")
+	private WebElement RecurringFormCancelPopup;
+	
+	@FindBy(xpath="(//*[@id='paymentOverviewApp']//div[@class='container']//div[@class='col-md-12']/h2)[1]")
+	private WebElement PaymentOverviewtText;
+	
+	@FindBy(xpath="(//*[@class='margin-medium']/span)[2]/a")
+	private WebElement AuthorizeButton;
+	
+	@FindBy(xpath="(//*[@class='modal-content']//div[@class='modal-footer'])[1]/a[1]")
+	private WebElement PaymentCancelPopup;
+	
+	@FindBy(id = "form_routingNumber")
+	private WebElement Error1;
+	
+	@FindBy(xpath = "//*[@id='paymentOverviewApp']//div[@class='container']//div[@class='col-md-12']/h2[1]")
+	private WebElement PaymentHeading;
 	
 	public OneTimePaymentPage(WebDriver driver) {
 		super(driver);
@@ -235,6 +255,104 @@ public class OneTimePaymentPage extends UhcDriver{
 	    	return null;
 	    }
 	}  
+	
+	
+public OneTimePaymentPage CancelPayments() {
+	System.out.println("In Cancel payment method");
+	
+	try{
+		Thread.sleep(2000);
+	}catch(Exception e)
+	{		
+	}
+	System.out.println("Going to scroll down");
+	JavascriptExecutor jse = (JavascriptExecutor) driver;
+	jse.executeScript("window.scrollBy(0,650)", "");
+	try{
+		Thread.sleep(2000);
+	}catch(Exception e)
+	{		
+	}
+	System.out.println("will click on cancel button");
+	RecurringFormCancel.click();
+	waitforElement(RecurringFormCancelPopup); 
+	RecurringFormCancelPopup.click();
+	waitforElement(PaymentOverviewtText); 
+	if(PaymentOverviewtText.isDisplayed())	
+		return new OneTimePaymentPage(driver);
+	else 
+		return null;
+			
+	}	
+
+public OneTimePaymentPage CancelPaymentsOneTime() {
+	System.out.println("In Cancel payment method for OneTime");	
+	try{
+		Thread.sleep(2000);
+	}catch(Exception e)
+	{		
+	}
+	System.out.println("Going to scroll down");
+	JavascriptExecutor jse = (JavascriptExecutor) driver;
+	jse.executeScript("window.scrollBy(0,650)", "");
+	try{
+		Thread.sleep(2000);
+	}catch(Exception e)
+	{		
+	}
+	System.out.println("will click on cancel button");
+	RecurringFormCancel.click();
+	waitforElement(PaymentCancelPopup); 
+	PaymentCancelPopup.click();
+	waitforElement(PaymentHeading);
+	if (PaymentHeading.getText().contains("Premium Payments Overview")) {
+		System.out.println("Payment Overview page displayed");
+		return new OneTimePaymentPage(driver);
+	}
+	else 
+		return null;
+			
+	}
+
+
+
+public OneTimePaymentPage ErrorMessageValidation() {	
+	
+	try{
+		Thread.sleep(2000);
+	}catch(Exception e)
+	{		
+	}
+	System.out.println("Going to scroll down");
+	JavascriptExecutor jse = (JavascriptExecutor) driver;
+	jse.executeScript("window.scrollBy(0,650)", "");
+	try{
+		Thread.sleep(2000);
+	}catch(Exception e)
+	{		
+	}
+	System.out.println("will click on Authorize button");
+	AuthorizeButton.click();	
+	try{
+		Thread.sleep(2000);
+		jse.executeScript("window.scrollBy(0,650)", "");
+	}catch(Exception e)
+	{		
+	}
+	AuthorizeButton.click();
+	try{
+		Thread.sleep(2000);
+		jse.executeScript("window.scrollBy(0,650)", "");
+	}catch(Exception e)
+	{		
+	}	
+	AuthorizeButton.click();
+	if(Error1.getText().contains("Please enter a valid Routing Number"))	
+		return new OneTimePaymentPage(driver);
+	else 
+		return null;
+			
+	}	
 
 	
 	@Override

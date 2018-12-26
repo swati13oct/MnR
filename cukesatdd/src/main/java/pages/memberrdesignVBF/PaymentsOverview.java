@@ -13,6 +13,9 @@ import atdd.framework.UhcDriver;
 
 public class PaymentsOverview extends UhcDriver {
 	// updated element locator
+
+	//@FindBy(xpath = "//div[@class='margin-small']//a[contains(@ng-click,'gotoMakeOneTimePayment()') and not(contains(@class,'ng-hide'))]")
+
 	@FindBy(xpath = "//span[@class='payment-method-btn']//a[contains(@class,'onetimepayment') and not(contains(@class,'ng-hide'))]")
 	private WebElement OneTimePaymentButton;
 
