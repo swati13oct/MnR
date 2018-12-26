@@ -233,4 +233,19 @@ Feature: To test the payment flow on Member site
     Examples: 
       | planType | memberType            | 
       | MAPD     | IndividualAARPRPayments | 
+      
+  @BalanceSummaryValidation @US1448800 @Feb_release_2019 @Spartans
+  Scenario Outline: Verify Balance Summary for different types of members
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When the user navigates to Recurring payment history
+    Then User Scrolls down to validate Payment History Section
+    And the user clicks on New flow OneTime Payment button
+    And the user validates the Balance Summary option on New page OTP
+    
+    
+    Examples: 
+      | planType | memberType            | 
+      | MAPD     | IndividualAARPRPayments | 
     

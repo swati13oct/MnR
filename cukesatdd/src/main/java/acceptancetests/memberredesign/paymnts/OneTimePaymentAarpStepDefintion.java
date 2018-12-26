@@ -290,6 +290,18 @@ public class OneTimePaymentAarpStepDefintion {
 		
 	}
 	
+	@And("^the user validates the Balance Summary option on New page OTP$")
+	public void validate_Balance_Summary_Payment_on_OTP(){
+		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.NEW_CC_BUTTON);
+		OneTimePaymentPage oneTimePayment = paymenthistory.BalanceSummaryValidation();
+		
+		if(oneTimePayment!=null){
+			getLoginScenario().saveBean(PageConstants.One_Time_Payments_Page, oneTimePayment);
+			System.out.println("user is on Automatic payment page");	
+		}
+		
+	}
+	
 	@And("^the user clicks on cancel button in new flow$")
 	public void click_on_Cancel_payment_btn(){
 		OneTimePaymentPage oneTimePayment = (OneTimePaymentPage) getLoginScenario().getBean(PageConstants.One_Time_Payments_Page);

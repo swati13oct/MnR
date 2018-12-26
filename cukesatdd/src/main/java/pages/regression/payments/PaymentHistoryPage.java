@@ -142,6 +142,15 @@ public class PaymentHistoryPage extends UhcDriver{
 	@FindBy(id = "otherAmount")
 	private WebElement OtherAmountButton;
 	
+	@FindBy(xpath = "//*[@class='onetime-bill']/div[@class='ng-binding ng-scope']")
+	private WebElement NextPaymentSummary;
+	
+	@FindBy(xpath = "//*[@class='onetime-bill']/div[@class='ng-scope']")
+	private WebElement NextPaymentProcess;
+	
+	@FindBy(xpath = "//*[@class='dl-horizontal'][2]")
+	private WebElement RemainingAmountSummary;
+	
 	@FindBy(id = "amountInput")
 	private WebElement AmountInput;	
 	
@@ -699,8 +708,43 @@ public class PaymentHistoryPage extends UhcDriver{
 		}else
 		return null;
 	}
+	
+	public OneTimePaymentPage BalanceSummaryValidation(){
+
+		try {   
+			Thread.sleep(2000); 		
+			driver.switchTo().frame("IPerceptionsEmbed");
+			System.out.println("iPerception Pop Up is Present");
+			iPerceptionCloseButton.click();
+			driver.switchTo().defaultContent();
+			Thread.sleep(5000);
+		}
+		catch (Exception e) {
+		}
+		System.out.println("in new method for summary validation"); 
+		try{
+		if(NextPaymentSummary.isDisplayed() && RemainingAmountSummary.isDisplayed()) 
+		{
+			System.out.println("Next Payment due is : " +NextPaymentSummary.getText());
+			System.out.println("Remaining amount due is : "+RemainingAmountSummary.getText());
+			return new  OneTimePaymentPage(driver);
+		}}
+		catch(Exception e)
+		{
+			if(NextPaymentProcess.isDisplayed() && RemainingAmountSummary.isDisplayed()) 
+			{
+				System.out.println("Next Payment due is : " +NextPaymentProcess.getText());
+				System.out.println("Remaining amount due is : "+RemainingAmountSummary.getText());
+				return new  OneTimePaymentPage(driver);
+			}else
+				return null;
+		 }
+		
+		return null;
+	}
 
 }
+
 
 
 
