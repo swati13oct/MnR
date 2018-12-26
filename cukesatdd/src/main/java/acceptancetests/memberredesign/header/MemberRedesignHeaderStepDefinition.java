@@ -402,6 +402,7 @@ public class MemberRedesignHeaderStepDefinition {
 	@Then("^I should be able to see and use the Home tab on Dashboard$")
 	public void I_should_be_able_to_see_and_use_Home_tab_on_Dashboard() {
 	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+	accountHomePage.navigateDirectToBnCPag();
 	accountHomePage.validateDashboardHelp();
 	accountHomePage.dashboardFindCareNotAvailable();
 	accountHomePage.dashboardPremiumPaymentsNotAvailable();
