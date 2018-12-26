@@ -21,6 +21,9 @@ public class ConfirmOneTimePaymentPage extends UhcDriver{
 
 	@FindBy(xpath = "(.//*[@class='btn btn--primary'])[2]")
 	private WebElement SubmitPaymentButton;
+	
+	@FindBy(xpath = "(.//*[@class='btn btn--primary'])[1]")
+	private WebElement SubmitNewPaymentRevButton;
 
 	@FindBy(xpath = "(.//*[@class='btn btn--primary disabled']")
 	private WebElement MemAuthSubmitPaymentButton;
@@ -108,6 +111,51 @@ public class ConfirmOneTimePaymentPage extends UhcDriver{
 		Thread.sleep(2000);
 		if(SubmitPaymentButton.isEnabled())
 			SubmitPaymentButton.click();
+		System.out.println("Submit Payment Button clicked");
+		Thread.sleep(2000);
+		CommonUtility.checkPageIsReady(driver);
+		Thread.sleep(5000);
+		if(driver.getTitle().equalsIgnoreCase("overview") || driver.getTitle().equalsIgnoreCase("Premium Payments") || driver.getTitle().equalsIgnoreCase("AARP Medicare Plans from UnitedHealthCare - Premium Payments")){
+			System.out.println("Title matched");
+			Thread.sleep(8000);
+		}			
+		try {
+			if(SuccessPay.getText().contains("Thank you for your payment"))
+			{
+				System.out.println("Payment Success Page Reached");
+				return new ConfirmOneTimePaymentPage(driver);			
+			} else if(OneTimePaymentError.getText().contains("only one payment request can be submitted per business day")) {
+				System.out.println("Payment error message dispayed");
+				return null;
+			}
+		} catch(Exception e) {
+			System.out.println("Payment success page not displayed");
+		}	
+		return new ConfirmOneTimePaymentPage(driver);
+	}
+	
+	
+	public ConfirmOneTimePaymentPage confirmsNewOTPPayment() throws InterruptedException  {
+		Thread.sleep(2000); 
+		System.out.println("In new Review method");
+		Thread.sleep(2000);    	
+
+		try {   
+			Thread.sleep(2000); 		
+			driver.switchTo().frame("IPerceptionsEmbed");
+			System.out.println("iPerception Pop Up is Present");
+			iPerceptionCloseButton.click();
+			driver.switchTo().defaultContent();
+			Thread.sleep(5000);
+		} catch (Exception e) {
+			System.out.println("iPerception Pop Up is not Present");
+		}
+		waitforElement(TermsCheckRadioButton);
+		TermsCheckRadioButton.click();
+		System.out.println("Terms and conditions radio button clicked");
+		Thread.sleep(2000);
+		if(SubmitNewPaymentRevButton.isEnabled())
+			SubmitNewPaymentRevButton.click();
 		System.out.println("Submit Payment Button clicked");
 		Thread.sleep(2000);
 		CommonUtility.checkPageIsReady(driver);
