@@ -105,7 +105,8 @@ public class PaymentHistoryPage extends UhcDriver{
 	@FindBy(xpath = "//*[@class='payment-method-btn'][2]/a")
 	private WebElement SetUpAutoPayButton;
 	
-	@FindBy(xpath = "//*[@class='payment-method-btn'][1]/a[1]")
+	//@FindBy(xpath = "//*[@class='payment-method-btn'][1]/a[1]")
+	@FindBy(xpath = "//*[@class='payment-method-btn'][1]/a[2]")
 	private WebElement OneTimeNewFlowPayButton;
 
 	//@FindBy(xpath = "(//*[@id='paymentOverviewApp']//div[@class='col-md-12'])[2]//div[@class='margin-small']/span[@class='payment-method-btn'][3]/a")
