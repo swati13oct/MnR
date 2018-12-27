@@ -1,6 +1,6 @@
 Feature: To test branding functionality
 
-  @regression @regression_branding @regression_06_06_18
+  @regression @regression_branding @regressionMember
   Scenario Outline: Verify that correct brand logos are displayed on Dashboard and Secondary Pages for members.
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -23,7 +23,7 @@ Feature: To test branding functionality
       | MAPD     | ACTIVETERM       | NON LIS       | images/branding/aarp.svg             | dam/UCP/Images/logo/AARP.svg        | TC_03_ Branding for member with both active and termed plan with diff brands |
       | MAPD     | UHCAARPCOMBO     | NON LIS       | images/branding/aarp.svg             | dam/UCP/Images/logo/AARP.svg        | TC_04_ Branding for Members with multiple active plans                       |
 
-  @regression @regression_branding @regression_06_06_18
+  @regression @regression_branding @regressionMember
   Scenario Outline: Verify that correct brand logos and cologos are displayed on Dashboard and Secondary Pages for Group members.
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |

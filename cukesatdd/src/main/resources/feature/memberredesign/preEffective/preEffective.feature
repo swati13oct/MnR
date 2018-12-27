@@ -1,6 +1,6 @@
 Feature: To test pre-effective functionality
 
-  @regression @codetransformers
+  @regressionMember @codetransformers
   Scenario Outline: Verify that correct links and messages are displayed on Dashboard and Secondary Pages for pre-effective members.
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -30,7 +30,7 @@ Feature: To test pre-effective functionality
       | GroupSSUP | preeffectiveGroupSSUP | NON LIS       |
       | GroupPDP  | preeffectiveGroupPDP  | NON LIS       |
 
-  @regression @regression_Pre-Effective_AccountSettings_Page @codetransformers
+  @regressionMember @regression_Pre-Effective_AccountSettings_Page @codetransformers
   Scenario Outline: Verify that a preffective member is able to see the Account settings page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |

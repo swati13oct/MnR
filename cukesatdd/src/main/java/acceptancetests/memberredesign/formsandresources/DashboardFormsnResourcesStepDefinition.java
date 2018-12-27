@@ -1009,5 +1009,145 @@ public class DashboardFormsnResourcesStepDefinition {
 	   
 	}
 	
+	@Then("^user verifies presence of jump links on F&R page$")
+	public void user_verifies_presence_of_jump_links(DataTable rows) throws Throwable {
+		List<List<String>> data = rows.raw();
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+
+		int planId = 0;
+		String planType = data.get(0).get(1).trim();
+		String rider = data.get(1).get(1).trim();
+		String memberType = data.get(2).get(1).trim();
+		String identifier = data.get(3).get(1).trim();
+		// String count=data.get(2).get(1);
+		if (planType.equalsIgnoreCase("MEDICA") || planType.equalsIgnoreCase("PCP"))
+			planType = "MAPD";
+		// planType.replaceAll(planType, "MAPD").toString().trim();
+
+		/*
+		 * Menu 1-MAPD 2-MA 3-MedSupp 4-PDP 5-SSUP
+		 * 
+		 */
+		if (planType.equalsIgnoreCase("MAPD"))
+			planId = 1;
+		if (planType.equalsIgnoreCase("MA"))
+			planId = 2;
+		if (planType.equalsIgnoreCase("MedSupp"))
+			planId = 3;
+		if (planType.equalsIgnoreCase("PDP"))
+			planId = 4;
+		if (planType.equalsIgnoreCase("SSUP"))
+			planId = 5;
+
+		switch (planId) {
+		case 1:
+			formsAndResourcesPage.verifyPresenceOfJumpLinksMAPD(rider, planType, memberType,identifier);
+			break;
+
+		case 2:
+			formsAndResourcesPage.verifyPresenceOfJumpLinksMA(rider, planType, memberType,identifier);
+			break;
+
+		case 3:
+			formsAndResourcesPage.verifyPresenceOfJumpLinksMedSupp(rider, planType, memberType);
+			break;
+
+		case 4:
+			formsAndResourcesPage.verifyPresenceOfJumpLinksPDP(rider, planType, memberType, identifier);
+			break;
+
+		case 5:
+			formsAndResourcesPage.verifyPresenceOfJumpLinksSSUP(rider, planType, memberType);
+			break;
+
+		default:
+			System.out.println("Plan Not Found");
+			break;
+
+		}
+
+	}
+
+	@Then("^user clicks on the jump links and checks respective sections on F&R page$")
+	public void user_clicks_on_the_jump_links_and_checks_respective_sections(DataTable rows) throws Throwable {
+		List<List<String>> data = rows.raw();
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+
+		String planType = data.get(0).get(1).trim();
+		String rider = data.get(1).get(1).trim();
+		String memberType = data.get(2).get(1).trim();
+		String identifier = data.get(3).get(1).trim();
+		// String count=data.get(2).get(1);
+		if (planType.equalsIgnoreCase("MEDICA") || planType.equalsIgnoreCase("PCP"))
+			planType = "MAPD";
+
+		int planId = 0;
+		/*
+		 * Menu 1-MAPD 2-MA 3-MedSupp 4-PDP 5-SSUP
+		 * 
+		 */
+
+		if (planType.equalsIgnoreCase("MAPD"))
+			planId = 1;
+		if (planType.equalsIgnoreCase("MA"))
+			planId = 2;
+		if (planType.equalsIgnoreCase("MedSupp"))
+			planId = 3;
+		if (planType.equalsIgnoreCase("PDP"))
+			planId = 4;
+		if (planType.equalsIgnoreCase("SSUP"))
+			planId = 5;
+
+		switch (planId) {
+		case 1:
+			formsAndResourcesPage.clicksOnJumpLinksAndCheckRespectiveSectionsMAPD(rider, planType, memberType,identifier);
+			break;
+
+		case 2:
+			formsAndResourcesPage.clicksOnJumpLinksAndCheckRespectiveSectionsMA(rider, planType, memberType,identifier);
+			break;
+
+		case 3:
+			formsAndResourcesPage.clicksOnJumpLinksAndCheckRespectiveSectionsMedSupp(rider, planType, memberType);
+			break;
+
+		case 4:
+			formsAndResourcesPage.clicksOnJumpLinksAndCheckRespectiveSectionsPDP(rider, planType, memberType,
+					identifier);
+			break;
+
+		case 5:
+			formsAndResourcesPage.clicksOnJumpLinksAndCheckRespectiveSectionsSSUP(rider, planType, memberType);
+			break;
+
+		default:
+			System.out.println("Plan Not Found");
+			break;
+		}
+
+	}
+
+	@Then("^verifies links irrelevant to the plan type are not displayed on F&R page$")
+	public void verifies_links_irrelevant_to_the_plan_type_are_not_displayed(DataTable rows) throws Throwable {
+		List<List<String>> data = rows.raw();
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+
+		String planType = data.get(0).get(1).trim();
+		String rider = data.get(1).get(1).trim();
+		int count = Integer.parseInt(data.get(2).get(1).trim());
+		String memberType = data.get(3).get(1).trim();
+		String identifier = data.get(4).get(1).trim();
+
+		if (planType.equalsIgnoreCase("MEDICA") || planType.equalsIgnoreCase("PCP"))
+			planType = "MAPD";
+
+		formsAndResourcesPage.directoryLinksCount(count, rider, planType, memberType,identifier);
+
+	}
+	
+	
 	
 }
