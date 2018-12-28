@@ -2,6 +2,9 @@ package acceptancetests.acquisition.vpp;
 
 import gherkin.formatter.model.DataTableRow;
 
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -580,5 +583,26 @@ public class VppStepDefinitionUpdatedAARP {
 			Assert.fail("Error Loading OLE Welcome page");
 		}
 	}
+	
+	@Then("^the user validates the following Plan details for the plan$")
+	public void the_user_validates_the_following_Plan_details_for_the_plan(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String benefitType = memberAttributesMap.get("Benefit Type");
+		String expectedText = memberAttributesMap.get("Expected Text");
+		System.out.println("Validating the following Additional benefits : "+benefitType);
+		
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		boolean validationFlag = vppPlanDetailsPage.validatingAdditionalBenefitTextInPlanDetails(benefitType, expectedText);
+		Assert.assertTrue("Validation failed : Expected text not displayed for Additional Benefit - "+benefitType,validationFlag);
+	
+	}	
 
 }

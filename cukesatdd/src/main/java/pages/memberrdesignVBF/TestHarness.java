@@ -202,7 +202,7 @@ public class TestHarness extends UhcDriver {
 			PaymentPageLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoad(driver, heading, 60);
-		if (driver.getTitle().contains("Payment")) {
+		if (driver.getTitle().contains("Payments")) {
 			return new PaymentsOverview(driver);
 		}
 		// }
