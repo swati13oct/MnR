@@ -351,6 +351,11 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(id = "closeButton")
 	private WebElement iPerceptionCloseButton;
+	
+	/*@FindBy(xpath ="//*[@id='paymentHistoryApp1']//div/p/span")
+	private WebElement PaymentHistorySection;*/
+	@FindBy(xpath ="//*[@id='paymentHistoryApp1']//div//div[@class='col-md-12']/h2")
+	private WebElement PaymentHistorySection;
 
 	private PageData myAccountHome;
 
@@ -474,10 +479,14 @@ public class AccountHomePage extends UhcDriver {
 			driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
 			System.out.println(driver.getCurrentUrl());
 		} else {
-			driver.navigate().to(
-					"https://" +MRScenario.environmentMedicare+"-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
-			
-			
+			if(Plantype.equalsIgnoreCase("PCP")) {driver.navigate().to("https://" + MRScenario.environmentMedicare
+					+ "-mymedicareaccount.uhc.com/pcp/member/benefits-coverage.html");}
+			else if (Plantype.equalsIgnoreCase("MEDICA")) {driver.navigate().to("https://" + MRScenario.environmentMedicare
+					+ "-mymedicareaccount.uhc.com/medica/member/benefits-coverage.html");}
+				else {
+				driver.navigate().to(
+						"https://" +MRScenario.environmentMedicare+"-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
+				}
 		}
 		CommonUtility.waitForPageLoad(driver, heading, 50);
 		/*if (driver.getTitle().equalsIgnoreCase("Benefits")) {
@@ -504,12 +513,17 @@ public class AccountHomePage extends UhcDriver {
 
 	public BenefitsAndCoveragePage navigateToBandCPage() {
 		System.out.println("Checking for Welcome or Hello on Dashboard home page now");
+	  try{
 		if(helloPerson.isDisplayed()){
 			System.out.println("Hello PersonName on Dashboard home page was found");
 		} else{
 			waitForHomePage(welcome);
 			System.out.println("Welcome on Dashboard home page was found");
-		}				
+		}	} catch	(Exception e){
+			waitForHomePage(welcome);
+			System.out.println("Welcome on Dashboard home page was found");
+			
+		}		
 		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
 			System.out.println("User is on Stage environment");
 
@@ -593,7 +607,8 @@ public class AccountHomePage extends UhcDriver {
 				accountSettingOption.click();
 				System.out.println("title is " + driver.getTitle());
 				System.out.println("Current Url is " + driver.getCurrentUrl());
-				CommonUtility.waitForPageLoad(driver, heading, 10);
+				Thread.sleep(6000);	   
+				//CommonUtility.waitForPageLoad(driver, heading, 10);
 
 				if (driver.getCurrentUrl().contains("profile")) {
 					return new ProfileandPreferencesPage(driver);
@@ -959,6 +974,24 @@ public class AccountHomePage extends UhcDriver {
 		}
 	}
 
+	public pages.regression.payments.PaymentHistoryPage validtaePaymentHistorySection() throws InterruptedException {
+		
+		Thread.sleep(5000);
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,550)", "");
+
+		waitforElement(PaymentHistorySection);
+
+		//tbd		Select dateRange = new Select(HistoryDropdown);
+		//tbd		dateRange.selectByVisibleText("Last 6 months");
+
+		// note: need to mouse over to select
+		System.out.println("Payment History Exists");
+		jse.executeScript("window.scrollBy(0,-1100)", "");
+		
+		return new pages.regression.payments.PaymentHistoryPage(driver);
+	}
+	
 	public pages.regression.payments.PaymentHistoryPage scrollDownAndUp() throws InterruptedException {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,550)", "");
@@ -1391,6 +1424,16 @@ public class AccountHomePage extends UhcDriver {
 					System.out.println(driver.getTitle());
 				}
 			}
+		}else {
+			if (driver.getCurrentUrl().contains("mymedicareaccount") )
+				driver.navigate().to("https://" + MRScenario.environmentMedicare
+						+ "-mymedicareaccount.uhc.com/content/medicare/member/documents/overview.html");
+			 else {
+				driver.navigate().to("https://" + MRScenario.environmentMedicare
+						+ "-medicare.ose-elr-core.optum.com/content/medicare/member/documents/overview.html");
+			}
+			
+			
 		}
 		return new FormsAndResourcesPage(driver);
 	}

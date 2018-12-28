@@ -47,10 +47,12 @@ public class CommunicationPreferencePage extends UhcDriver {
 	@FindBy(id = "requiredplan")
 	private WebElement iHavereadCheckbox;
 
-	@FindBy(id = "Claims2")
+	//@FindBy(xpath ="//div[@id='mail-preferences-selector-SHIP']//*[@id='preferences-form0']/div/div[1]/div[2]/div[2]/div/fieldset/div[1]/div/label")
+	@FindBy(xpath ="//div[@class='otherPages SHIP']//input[@aria-label='Online Delivery']")
 	private WebElement onlineDeliveryRadioButton;
 
-	@FindBy(id = "Claims12")
+	//@FindBy(id = "Claims12")
+	@FindBy(xpath ="//div[@class='otherPages SHIP']//input[@aria-label='Mail']")
 	private WebElement mailRadioButton;
 
 	@FindBy(xpath = "//*[@id='Claims2']/following-sibling::label")
@@ -72,7 +74,8 @@ public class CommunicationPreferencePage extends UhcDriver {
 	private WebElement NoteSection;
 
 	//@FindBy(id = "save-prefs-btn-SHIP")
-	@FindBy(xpath = "//*[@id='savePaperlessSettings']")
+	//@FindBy(xpath = "//*[@id='savePaperlessSettings']")
+	@FindBy(xpath = "//div[@class='otherPages SHIP']//button[@class='btn save-prefs-btn']")
 	private WebElement savePreferencesButton;
 
 	@FindBy(partialLinkText = "PREFERENCES")

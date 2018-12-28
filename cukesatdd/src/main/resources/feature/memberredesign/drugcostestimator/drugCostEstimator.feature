@@ -1,4 +1,4 @@
-@drug_cost_estimator   @regression_06_06_18
+@drug_cost_estimator   @regressionMember
 Feature:I1.3DCE for Member Site Redesign
 
 @Member_dce_not

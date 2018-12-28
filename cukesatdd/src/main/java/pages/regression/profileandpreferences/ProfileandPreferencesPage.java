@@ -64,8 +64,8 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(className = "bold atdd-profile-membernumber")
 	private WebElement memberId;
 
-	@FindBy(xpath = "//*[@class='account_settings form__content']/div/flex/flex/flex-content[2]/p")
-	
+	//@FindBy(xpath = "//*[@class='account_settings form__content']/div/flex/flex/flex-content[2]/p")
+	@FindBy(css = "flex-content:nth-child(2) > .ng-binding")
 	private WebElement usernameText;
 
 	@FindBy(xpath = ".//*[@id='password']/div/div/span[1]")
@@ -90,16 +90,25 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	private WebElement passworderrormessage3;
 
 	//@FindBy(xpath = ".//*[@id='email' or @id='emailCardHeight']/div[1]/h4")
-	@FindBy(xpath = "//div[@id='email']//h5[@class='subtitle semi-bold margin-none card-title']")
+	//@FindBy(xpath = "//div[@id='email']//h5[@class='subtitle semi-bold margin-none card-title']")
+	@FindBy(xpath = "//*[@id='emailCardHeight']/div[1]/h5")
 	private WebElement EmailLabel;
+	
+	//@FindBy(css = "#emailCardHeight .subtitle")
+	@FindBy(xpath = "//div[@class='card emailship']//h5[@class='subtitle semi-bold margin-none card-title']")
+	private WebElement EmailLabel_sofl;
 
 
 	@FindBy(id = "emailview")
 	private WebElement emailBoxUhc;
 
-	//@FindBy(xpath = ".//*[@id='emailCardHeight']//span[@class='bold atdd-email ng-scope']")
-	@FindBy(xpath = "//*[@id='email']/div[2]/div[1]/div/div/span[1]")
+	@FindBy(xpath = ".//*[@id='emailCardHeight']//span[@class='bold atdd-email ng-scope']")
+	//@FindBy(xpath = "//*[@id='email']/div[2]/div[1]/div/div/span[1]")
+	//@FindBy(xpath = "//*[@id='emailCardHeight']/div[2]/div[1]/div/div/span[1]")
 	private WebElement EmailAddressLabel;
+	
+	@FindBy(css = ".atdd-email")
+	private WebElement EmailAddressLabel_sofl;
 
 	@FindBy(id = "profileemailaddress")
 	private WebElement emailAddress;
@@ -2125,8 +2134,8 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	public void validateEmailForPCPMedica() {
 
-		validateNew(EmailLabel);
-		validateNew(EmailAddressLabel);
+		validateNew(EmailLabel_sofl);
+		validateNew(EmailAddressLabel_sofl);
 
 	}
 
