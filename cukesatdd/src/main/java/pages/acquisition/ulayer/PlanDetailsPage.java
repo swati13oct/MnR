@@ -488,6 +488,25 @@ public void validatingFunctionalityOfPrintandEmailOnPlanDetails() {
 
 }
 
+public boolean validatingAdditionalBenefitTextInPlanDetails(String benefitType, String expectedText) {
+	boolean validationFlag = true;
+	WebElement AdditionalBenefitType = driver.findElement(By.xpath("//p[contains(text(), '"+benefitType+"')]/ancestor::td[@ng-hide]"));
+	System.out.println("The additional Benefit to Valuidate : "+benefitType);
+	WebElement ActualTextforBenefit =  driver.findElement(By.xpath("//p[contains(text(), '"+benefitType+"')]/ancestor::td[@ng-hide]/following-sibling::td"));
+	System.out.println("Text Displayed for the Additional Benefit on Plan Details : ");
+	String displayedText = ActualTextforBenefit.getText();
+	System.out.println(displayedText);
+	String[] Expected = expectedText.split("/");
+	
+	for(String str :Expected){
+		if(!displayedText.contains(str.trim())){
+			validationFlag = false;
+			System.out.println("Expected Text - "+str+" is NOT displayed");
+		}
+	}
+	return validationFlag;
+}
+
 
 
 }
