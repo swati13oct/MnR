@@ -61,7 +61,7 @@ public class OneTimePaymentPage extends UhcDriver{
 
 	//@FindBy(xpath ="//*[@id='consent']/following-sibling::label[contains(text(),'I have read and agree to the following')]")
 	@FindBy(xpath ="//*[@id='consent']/following-sibling::label[contains(text(),'Electronic Signature Consent')]")
-	private WebElement electronicsignature;
+	private WebElement electronicsignature;	
 	
 	@FindBy(xpath="//*[@class='overview parsys']//div[@class='row'][3]//div[@class='longform__row'][10]//div[@class='margin-medium']/a[2]")
 	private WebElement continueAutoPayButton;
@@ -177,6 +177,83 @@ public class OneTimePaymentPage extends UhcDriver{
 		} 
 		return null;		
 	}	
+	
+	
+public ConfirmOneTimePaymentPage enterNewPagePaymentDetails(Map<String, String> accountAttributessMap) {
+		
+			
+		String routingNumber = accountAttributessMap.get("Routing number");
+		String confirmRoutingNumber = accountAttributessMap.get("Confirm routing number");
+		String accountNumber = accountAttributessMap.get("Account number");
+		String confirmAccountNumber = accountAttributessMap.get("Confirm account number");
+		String firstName = accountAttributessMap.get("Account holder first name");
+		String middleName = accountAttributessMap.get("Account holder middle name");
+		String lastName = accountAttributessMap.get("Account holder last name");
+		
+		/*if(amountRadioButton.isSelected() && amountDisplayed.getText().equalsIgnoreCase("$0.00"))
+		{
+			//TODO:: if first radio button is selected??
+		}*/
+		
+		try {   
+	    	  Thread.sleep(2000); 		
+	    		driver.switchTo().frame("IPerceptionsEmbed");
+	    		System.out.println("iPerception Pop Up is Present");
+	    		iPerceptionCloseButton.click();
+	    		driver.switchTo().defaultContent();
+	    		Thread.sleep(5000);
+	    		}
+	    		catch (Exception e) {
+	    		System.out.println("iPerception Pop Up is not Present");
+	    		}
+
+		waitforElement(routingNumberField);		
+		
+		routingNumberField.click();
+		routingNumberField.clear();
+		routingNumberField.sendKeys(routingNumber);
+		
+		confirmRoutingNumberField.click();
+		confirmRoutingNumberField.clear();
+		confirmRoutingNumberField.sendKeys(confirmRoutingNumber);
+		
+		accountNumberField.click();
+		accountNumberField.clear();
+		accountNumberField.sendKeys(accountNumber);
+		
+		confirmAccountNumberField.click();
+		confirmAccountNumberField.clear();
+		confirmAccountNumberField.sendKeys(confirmAccountNumber);
+		
+		firstNameField.click();
+		firstNameField.clear();
+		firstNameField.sendKeys(firstName);
+		
+		middleNameField.click();
+		middleNameField.clear();
+		middleNameField.sendKeys(middleName);
+		
+		lastNameField.click();
+		lastNameField.clear();
+		lastNameField.sendKeys(lastName);
+		
+		AuthorizeButton.click();
+		
+		try{
+			Thread.sleep(6000);
+		}catch(Exception e)
+		{
+			System.out.println(e);
+		}
+		
+		if(driver.getTitle().equalsIgnoreCase("Review Payment") || driver.getTitle().equalsIgnoreCase("overview") || driver.getTitle().equalsIgnoreCase("AARP Medicare Plans from UnitedHealthCare - overview") || driver.getTitle().equalsIgnoreCase("Review Your One-Time Payment Information")){
+			return new ConfirmOneTimePaymentPage(driver);
+		} 
+		return null;		
+	}	
+	
+	
+	
 	
 	public ConfirmOneTimePaymentPage enterAutoPaymentDetails(Map<String, String> accountAttributessMap) {
 		  

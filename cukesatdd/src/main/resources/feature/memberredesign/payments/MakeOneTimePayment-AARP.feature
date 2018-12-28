@@ -242,10 +242,32 @@ Feature: To test the payment flow on Member site
     When the user navigates to Recurring payment history
     Then User Scrolls down to validate Payment History Section
     And the user clicks on New flow OneTime Payment button
-    And the user validates the Balance Summary option on New page OTP
-    
+    And the user validates the Balance Summary option on New page OTP    
     
     Examples: 
       | planType | memberType            | 
       | MAPD     | IndividualAARPRPayments | 
+      
+@paymentsEndtoEnd @US1483885 @Feb_release_2019 @Spartans
+  Scenario Outline: Verify oneTime Payment submission for Different Types of Member
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When the user navigates to Recurring payment history
+    Then User Scrolls down to validate Payment History Section
+    And the user clicks on New flow OneTime Payment button
+    And the user selects the Checking account option on New page OTP
+    And the user makes one time payment in new flow and navigate further   
+      | Routing number             | <routingNo>        |
+      | Confirm routing number     | <confirmRoutingNo> |
+      | Account number             | <accountNo>        |
+      | Confirm account number     | <confirmAccountNo> |
+      | Account holder first name  | <firstName>        |
+      | Account holder middle name | <middleName>       |
+      | Account holder last name   | <lastName>         |
+    And the user confirms the New flow OneTimePayment in UHC site
+    
+    Examples: 
+      | planType | memberType            | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
+      | MAPD     | IndividualUHCPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
     
