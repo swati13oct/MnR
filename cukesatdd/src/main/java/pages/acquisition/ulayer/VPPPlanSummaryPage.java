@@ -820,6 +820,13 @@ CommonUtility.waitForPageLoad(driver, MAmoreDetailsLink, 30);
 			System.out.println("View Plan Details Link is clicked for PDP plan"+planName);
 			
 		}
+		else if(planType.equalsIgnoreCase("SNP")){
+			WebElement SNPmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//a[contains(text(),'View plan and drug coverage details')]"));
+			CommonUtility.waitForPageLoad(driver, SNPmoreDetailsLink, 30);	
+			validate(SNPmoreDetailsLink);
+			SNPmoreDetailsLink.click();
+			System.out.println("View Plan Details Link is clicked for MA plan"+planName);
+		}
 		CommonUtility.checkPageIsReady(driver);
 		if (driver.getCurrentUrl().contains("#/details")) {	
 			return new PlanDetailsPage(driver);

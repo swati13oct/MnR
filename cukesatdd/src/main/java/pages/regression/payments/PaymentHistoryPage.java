@@ -105,7 +105,8 @@ public class PaymentHistoryPage extends UhcDriver{
 	@FindBy(xpath = "//*[@class='payment-method-btn'][2]/a")
 	private WebElement SetUpAutoPayButton;
 	
-	@FindBy(xpath = "//*[@class='payment-method-btn'][1]/a[1]")
+	//@FindBy(xpath = "//*[@class='payment-method-btn'][1]/a[1]")
+	@FindBy(xpath = "//*[@class='payment-method-btn'][1]/a[2]")
 	private WebElement OneTimeNewFlowPayButton;
 
 	//@FindBy(xpath = "(//*[@id='paymentOverviewApp']//div[@class='col-md-12'])[2]//div[@class='margin-small']/span[@class='payment-method-btn'][3]/a")
@@ -133,7 +134,7 @@ public class PaymentHistoryPage extends UhcDriver{
 	@FindBy(id = "closeButton")
 	private WebElement iPerceptionCloseButton;
 
-	@FindBy(xpath = "//*[@class='radio']//input[@id='optionsRadios10']")
+	@FindBy(xpath = "//*[@class='payment-selection']//input[@id='optionsRadios10']")
 	private WebElement CheckingAccountRadioButton;
 	
 	@FindBy(id = "optionsRadios1")
@@ -742,7 +743,9 @@ public class PaymentHistoryPage extends UhcDriver{
 		
 		return null;
 	}
-
+	
+	
+	
 }
 
 
