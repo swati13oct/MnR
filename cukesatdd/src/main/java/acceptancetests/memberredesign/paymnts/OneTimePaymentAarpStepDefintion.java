@@ -285,7 +285,7 @@ public class OneTimePaymentAarpStepDefintion {
 		
 		if(oneTimePayment!=null){
 			getLoginScenario().saveBean(PageConstants.One_Time_Payments_Page, oneTimePayment);
-			System.out.println("user is on Automatic payment page");	
+			
 		}
 		
 	}
@@ -368,6 +368,25 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 	}
 	
+	@And("^the user makes one time payment in new flow and navigate further$")
+	public void makes_one_time_payment_aarp_new_flow(DataTable givenAttributes) {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		OneTimePaymentPage oneTimePayment = (OneTimePaymentPage) getLoginScenario().getBean(PageConstants.One_Time_Payments_Page);
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = oneTimePayment.enterNewPagePaymentDetails(memberAttributesMap);
+		if(confirmOneTimePaymentPage != null) {
+			getLoginScenario().saveBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD,confirmOneTimePaymentPage);
+			System.out.println("Payment details entered and moved successfully to next page");
+		} else {
+			System.out.println("Object issue - unable to obtain the confirmOneTimePaymentPage");
+		}
+	}
+	
+	
 	@And("^the user makes auto payment in AARP site$")
 	public void makes_auto_payment_aarp(DataTable givenAttributes) {			
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -410,6 +429,25 @@ public class OneTimePaymentAarpStepDefintion {
 				.getBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD);	
 		
 		ConfirmOneTimePaymentPage oneTimePaymentSuccessPage = confirmOneTimePaymentsuccesspage.confirmsAutoPayment();
+        
+		if (oneTimePaymentSuccessPage != null) {
+			getLoginScenario().saveBean(
+					PageConstantsMnR.ONE_TIME_PAYMENT_SUCCESS_PAGE,
+					oneTimePaymentSuccessPage);
+			Assert.assertTrue(true);
+	}
+		else
+			System.out.println("Encountered More than one Payment per Business day error");
+	}
+	
+	@And("^the user confirms the New flow OneTimePayment in UHC site$")
+	public void confirms_One_time_payment_uhc() throws InterruptedException {
+		
+		Thread.sleep(2000);
+		ConfirmOneTimePaymentPage confirmOneTimePaymentsuccesspage = (ConfirmOneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD);	
+		
+		ConfirmOneTimePaymentPage oneTimePaymentSuccessPage = confirmOneTimePaymentsuccesspage.confirmsNewOTPPayment();
         
 		if (oneTimePaymentSuccessPage != null) {
 			getLoginScenario().saveBean(
