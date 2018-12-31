@@ -55,20 +55,44 @@ public class OneTimePaymentPage extends UhcDriver{
 	
 	@FindBy(xpath="//*[@id='IPEinvL']/map/area[3]")
 	private WebElement iPerceptionAutoPopUp;
-
 	
 	@FindBy(xpath ="//*[@id='consent']/following-sibling::label[contains(text(),'I have read and agree to the following')]")
 	private WebElement iHaveReadAndAgreeToTheFollowing;
 
 	//@FindBy(xpath ="//*[@id='consent']/following-sibling::label[contains(text(),'I have read and agree to the following')]")
 	@FindBy(xpath ="//*[@id='consent']/following-sibling::label[contains(text(),'Electronic Signature Consent')]")
-	private WebElement electronicsignature;
+	private WebElement electronicsignature;	
 	
 	@FindBy(xpath="//*[@class='overview parsys']//div[@class='row'][3]//div[@class='longform__row'][10]//div[@class='margin-medium']/a[2]")
 	private WebElement continueAutoPayButton;
 	
 	@FindBy(id = "closeButton")
 	private WebElement iPerceptionCloseButton;
+	
+	@FindBy(xpath="//*[@class='btn btn--secondary cancelbutton']")
+	private WebElement RecurringFormCancel;
+	
+	@FindBy(xpath="//*[@class='modal-footer']/a[1]")
+	private WebElement RecurringFormCancelPopup;
+	
+	@FindBy(xpath="(//*[@id='paymentOverviewApp']//div[@class='container']//div[@class='col-md-12']/h2)[1]")
+	private WebElement PaymentOverviewtText;
+	
+	@FindBy(xpath="(//*[@class='margin-medium']/span)[2]/a")
+	private WebElement AuthorizeButton;
+	
+	@FindBy(xpath="(//*[@class='modal-content']//div[@class='modal-footer'])[1]/a[1]")
+	private WebElement PaymentCancelPopup;
+	
+	@FindBy(id = "form_routingNumber")
+	private WebElement Error1;
+	
+	@FindBy(xpath = "//*[@id='paymentOverviewApp']//div[@class='container']//div[@class='col-md-12']/h2[1]")
+	private WebElement PaymentHeading;
+	
+	@FindBy(xpath = "//*[@class='page-header']//div[@class='row']//h1")
+	private WebElement PageHeader;	
+	
 	
 	public OneTimePaymentPage(WebDriver driver) {
 		super(driver);
@@ -158,6 +182,90 @@ public class OneTimePaymentPage extends UhcDriver{
 		return null;		
 	}	
 	
+	
+public ConfirmOneTimePaymentPage enterNewPagePaymentDetails(Map<String, String> accountAttributessMap) {
+		
+			
+		String routingNumber = accountAttributessMap.get("Routing number");
+		String confirmRoutingNumber = accountAttributessMap.get("Confirm routing number");
+		String accountNumber = accountAttributessMap.get("Account number");
+		String confirmAccountNumber = accountAttributessMap.get("Confirm account number");
+		String firstName = accountAttributessMap.get("Account holder first name");
+		String middleName = accountAttributessMap.get("Account holder middle name");
+		String lastName = accountAttributessMap.get("Account holder last name");
+		
+		/*if(amountRadioButton.isSelected() && amountDisplayed.getText().equalsIgnoreCase("$0.00"))
+		{
+			//TODO:: if first radio button is selected??
+		}*/
+		
+		try {   
+	    	  Thread.sleep(2000); 		
+	    		driver.switchTo().frame("IPerceptionsEmbed");
+	    		System.out.println("iPerception Pop Up is Present");
+	    		iPerceptionCloseButton.click();
+	    		driver.switchTo().defaultContent();
+	    		Thread.sleep(5000);
+	    		}
+	    		catch (Exception e) {
+	    		System.out.println("iPerception Pop Up is not Present");
+	    		}
+
+		waitforElement(routingNumberField);		
+		
+		routingNumberField.click();
+		routingNumberField.clear();
+		routingNumberField.sendKeys(routingNumber);
+		
+		confirmRoutingNumberField.click();
+		confirmRoutingNumberField.clear();
+		confirmRoutingNumberField.sendKeys(confirmRoutingNumber);
+		
+		accountNumberField.click();
+		accountNumberField.clear();
+		accountNumberField.sendKeys(accountNumber);
+		
+		confirmAccountNumberField.click();
+		confirmAccountNumberField.clear();
+		confirmAccountNumberField.sendKeys(confirmAccountNumber);
+		
+		firstNameField.click();
+		firstNameField.clear();
+		firstNameField.sendKeys(firstName);
+		
+		middleNameField.click();
+		middleNameField.clear();
+		middleNameField.sendKeys(middleName);
+		
+		lastNameField.click();
+		lastNameField.clear();
+		lastNameField.sendKeys(lastName);
+		
+		AuthorizeButton.click();
+		
+		try{
+			Thread.sleep(6000);
+		}catch(Exception e)
+		{
+			System.out.println(e);
+		}
+		
+		/*if(driver.getTitle().equalsIgnoreCase("Review Payment") || driver.getTitle().equalsIgnoreCase("overview") || driver.getTitle().equalsIgnoreCase("AARP Medicare Plans from UnitedHealthCare - overview") || driver.getTitle().equalsIgnoreCase("Review Your One-Time Payment Information") || driver.getTitle().contains("Review Your Automatic Payments Information for Medicare Prescription Drug Plan")){
+			System.out.println("match ho gaya");
+			return new ConfirmOneTimePaymentPage(driver);
+		} */
+		
+		if(PageHeader.isDisplayed())
+		{
+			return new ConfirmOneTimePaymentPage(driver);
+		}
+		
+		return null;		
+	}	
+	
+	
+	
+	
 	public ConfirmOneTimePaymentPage enterAutoPaymentDetails(Map<String, String> accountAttributessMap) {
 		  
 	    String routingNumber = accountAttributessMap.get("Routing number");
@@ -235,6 +343,104 @@ public class OneTimePaymentPage extends UhcDriver{
 	    	return null;
 	    }
 	}  
+	
+	
+public OneTimePaymentPage CancelPayments() {
+	System.out.println("In Cancel payment method");
+	
+	try{
+		Thread.sleep(2000);
+	}catch(Exception e)
+	{		
+	}
+	System.out.println("Going to scroll down");
+	JavascriptExecutor jse = (JavascriptExecutor) driver;
+	jse.executeScript("window.scrollBy(0,650)", "");
+	try{
+		Thread.sleep(2000);
+	}catch(Exception e)
+	{		
+	}
+	System.out.println("will click on cancel button");
+	RecurringFormCancel.click();
+	waitforElement(RecurringFormCancelPopup); 
+	RecurringFormCancelPopup.click();
+	waitforElement(PaymentOverviewtText); 
+	if(PaymentOverviewtText.isDisplayed())	
+		return new OneTimePaymentPage(driver);
+	else 
+		return null;
+			
+	}	
+
+public OneTimePaymentPage CancelPaymentsOneTime() {
+	System.out.println("In Cancel payment method for OneTime");	
+	try{
+		Thread.sleep(2000);
+	}catch(Exception e)
+	{		
+	}
+	System.out.println("Going to scroll down");
+	JavascriptExecutor jse = (JavascriptExecutor) driver;
+	jse.executeScript("window.scrollBy(0,650)", "");
+	try{
+		Thread.sleep(2000);
+	}catch(Exception e)
+	{		
+	}
+	System.out.println("will click on cancel button");
+	RecurringFormCancel.click();
+	waitforElement(PaymentCancelPopup); 
+	PaymentCancelPopup.click();
+	waitforElement(PaymentHeading);
+	if (PaymentHeading.getText().contains("Premium Payments Overview")) {
+		System.out.println("Payment Overview page displayed");
+		return new OneTimePaymentPage(driver);
+	}
+	else 
+		return null;
+			
+	}
+
+
+
+public OneTimePaymentPage ErrorMessageValidation() {	
+	
+	try{
+		Thread.sleep(2000);
+	}catch(Exception e)
+	{		
+	}
+	System.out.println("Going to scroll down");
+	JavascriptExecutor jse = (JavascriptExecutor) driver;
+	jse.executeScript("window.scrollBy(0,650)", "");
+	try{
+		Thread.sleep(2000);
+	}catch(Exception e)
+	{		
+	}
+	System.out.println("will click on Authorize button");
+	AuthorizeButton.click();	
+	try{
+		Thread.sleep(2000);
+		jse.executeScript("window.scrollBy(0,650)", "");
+	}catch(Exception e)
+	{		
+	}
+	AuthorizeButton.click();
+	try{
+		Thread.sleep(2000);
+		jse.executeScript("window.scrollBy(0,650)", "");
+	}catch(Exception e)
+	{		
+	}	
+	AuthorizeButton.click();
+	if(Error1.getText().contains("Please enter a valid Routing Number"))	
+		return new OneTimePaymentPage(driver);
+	else 
+		return null;
+			
+	}	
 
 	
 	@Override

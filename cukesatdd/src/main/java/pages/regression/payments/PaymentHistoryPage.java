@@ -104,6 +104,10 @@ public class PaymentHistoryPage extends UhcDriver{
 
 	@FindBy(xpath = "//*[@class='payment-method-btn'][2]/a")
 	private WebElement SetUpAutoPayButton;
+	
+	//@FindBy(xpath = "//*[@class='payment-method-btn'][1]/a[1]")
+	@FindBy(xpath = "//*[@class='payment-method-btn'][1]/a[2]")
+	private WebElement OneTimeNewFlowPayButton;
 
 	//@FindBy(xpath = "(//*[@id='paymentOverviewApp']//div[@class='col-md-12'])[2]//div[@class='margin-small']/span[@class='payment-method-btn'][3]/a")
 	@FindBy(xpath ="//*[@id='paymentOverviewApp']/div[2]/div[1]/div/div/div/div[1]/span[5]/a")
@@ -130,6 +134,39 @@ public class PaymentHistoryPage extends UhcDriver{
 	@FindBy(id = "closeButton")
 	private WebElement iPerceptionCloseButton;
 
+	@FindBy(xpath = "//*[@class='payment-selection']//input[@id='optionsRadios10']")
+	private WebElement CheckingAccountRadioButton;
+	
+	@FindBy(id = "optionsRadios1")
+	private WebElement DefaultPayAmount;
+	
+	@FindBy(id = "otherAmount")
+	private WebElement OtherAmountButton;
+	
+	@FindBy(xpath = "//*[@class='onetime-bill']/div[@class='ng-binding ng-scope']")
+	private WebElement NextPaymentSummary;
+	
+	@FindBy(xpath = "//*[@class='onetime-bill']/div[@class='ng-scope']")
+	private WebElement NextPaymentProcess;
+	
+	@FindBy(xpath = "//*[@class='dl-horizontal'][2]")
+	private WebElement RemainingAmountSummary;
+	
+	@FindBy(id = "amountInput")
+	private WebElement AmountInput;	
+	
+	@FindBy(xpath = "//*[@class='payment-selection__actions']/button")
+	private WebElement NextButton;
+	
+	/*@FindBy(xpath = "(//*[@class='payments']//div[@class='container']//div[@class='col-md-12'])[1]//span[1]")
+	private WebElement AutoPayHeading;*/
+	
+	@FindBy(xpath = "//*[@class='payments']//div[@class='container']//div[@class='col-md-12']//div/h2")
+	private WebElement AutoPayHeading;
+	
+	@FindBy(xpath = "//*[@class='col-md-9 col-xs-12']//div/p[@class='textfontsize']")
+	private WebElement OneTimePayHeading;
+	
 	private PageData paymentHistory;
 
 	public JSONObject paymentHistoryJson;
@@ -437,6 +474,63 @@ public class PaymentHistoryPage extends UhcDriver{
 		else
 			return null;
 	}
+	
+	public PaymentHistoryPage AutoPayNew(){
+
+		try {   
+			Thread.sleep(2000); 		
+			driver.switchTo().frame("IPerceptionsEmbed");
+			System.out.println("iPerception Pop Up is Present");
+			iPerceptionCloseButton.click();
+			driver.switchTo().defaultContent();
+			Thread.sleep(5000);
+		}
+		catch (Exception e) {
+			System.out.println("iPerception Pop Up is not Present");
+		}
+		try{
+			if(SetUpAutoPayButton.isDisplayed())
+			{
+				SetUpAutoPayButton.click();
+				System.out.println("clicked on Setup New Payment button");
+				try{
+					Thread.sleep(2000);					 
+					if (validate(SetUpNewPayment)){
+						SetUpNewPayment.click();
+						System.out.println("clicked on Setup New Payment button");		 
+						return new PaymentHistoryPage(driver);
+					}
+					else
+						return new PaymentHistoryPage(driver);
+				}catch(Exception e)
+				{
+					System.out.println("Set up Pop up not displayed"); 
+				}					 
+
+			}
+			else
+			{
+				System.out.println("No Setup Automatic Payment Button, looking for Edit auto payment button");
+			}
+
+		}catch(Exception e)
+		{
+			System.out.println("No Auto payment button exists");
+		}		
+
+		waitforElement(AutoPayButton);  		
+		AutoPayButton.click();
+
+		waitforElement(SetUpNewPayment);
+
+		if (validate(SetUpNewPayment)){
+			SetUpNewPayment.click();
+			System.out.println("clicked on Setup New Payment button");		 
+			return new  PaymentHistoryPage(driver);		 
+		}
+		else
+			return null;
+	}
 
 	public OneTimePaymentPage MemAuthAutoPay(){
 
@@ -527,6 +621,30 @@ public class PaymentHistoryPage extends UhcDriver{
 			System.out.println("iPerception Pop Up not displayed");
 		}
 	}
+	
+	
+	public PaymentHistoryPage OneTimePayNew(){
+
+		try {   
+			Thread.sleep(2000); 		
+			driver.switchTo().frame("IPerceptionsEmbed");
+			System.out.println("iPerception Pop Up is Present");
+			iPerceptionCloseButton.click();
+			driver.switchTo().defaultContent();
+			Thread.sleep(5000);
+		}
+		catch (Exception e) {
+			System.out.println("iPerception Pop Up is not Present");
+		}
+		waitforElement(OneTimeNewFlowPayButton);  		
+		OneTimeNewFlowPayButton.click();
+		waitforElement(AmountInput); 
+		if (validate(AmountInput)){						 
+			return new  PaymentHistoryPage(driver);		 
+		}
+		else
+			return null;
+	}
 
 	public boolean scrollToBottom() {
 		try {
@@ -542,8 +660,94 @@ public class PaymentHistoryPage extends UhcDriver{
 		return true;
 	}
 
+	
+	public OneTimePaymentPage CheckingAccountbtn(){
 
+		try {   
+			Thread.sleep(2000); 		
+			driver.switchTo().frame("IPerceptionsEmbed");
+			System.out.println("iPerception Pop Up is Present");
+			iPerceptionCloseButton.click();
+			driver.switchTo().defaultContent();
+			Thread.sleep(5000);
+		}
+		catch (Exception e) {
+		}
+		waitforElement(CheckingAccountRadioButton); 
+		CheckingAccountRadioButton.click();		
+		System.out.println("clicked on Checking account button");
+		NextButton.click();		
+		waitforElement(AutoPayHeading);
+		if(AutoPayHeading.getText().contains("It’s easy to pay your premium.")){
+			return new  OneTimePaymentPage(driver); 
+		}else
+		return null;
+	}
+	
+	public OneTimePaymentPage CheckingAccountbtnOTP(){
+
+		try {   
+			Thread.sleep(2000); 		
+			driver.switchTo().frame("IPerceptionsEmbed");
+			System.out.println("iPerception Pop Up is Present");
+			iPerceptionCloseButton.click();
+			driver.switchTo().defaultContent();
+			Thread.sleep(5000);
+		}
+		catch (Exception e) {
+		}
+		waitforElement(OtherAmountButton); 
+		OtherAmountButton.click();
+		AmountInput.sendKeys("1.00");
+		System.out.println("entered the new amount");
+		CheckingAccountRadioButton.click();
+		System.out.println("clicked on Checking account button");
+		NextButton.click();		
+		waitforElement(OneTimePayHeading);
+		if(OneTimePayHeading.getText().contains("Checking Account Information")){
+			return new  OneTimePaymentPage(driver); 
+		}else
+		return null;
+	}
+	
+	public OneTimePaymentPage BalanceSummaryValidation(){
+
+		try {   
+			Thread.sleep(2000); 		
+			driver.switchTo().frame("IPerceptionsEmbed");
+			System.out.println("iPerception Pop Up is Present");
+			iPerceptionCloseButton.click();
+			driver.switchTo().defaultContent();
+			Thread.sleep(5000);
+		}
+		catch (Exception e) {
+		}
+		System.out.println("in new method for summary validation"); 
+		try{
+		if(NextPaymentSummary.isDisplayed() && RemainingAmountSummary.isDisplayed()) 
+		{
+			System.out.println("Next Payment due is : " +NextPaymentSummary.getText());
+			System.out.println("Remaining amount due is : "+RemainingAmountSummary.getText());
+			return new  OneTimePaymentPage(driver);
+		}}
+		catch(Exception e)
+		{
+			if(NextPaymentProcess.isDisplayed() && RemainingAmountSummary.isDisplayed()) 
+			{
+				System.out.println("Next Payment due is : " +NextPaymentProcess.getText());
+				System.out.println("Remaining amount due is : "+RemainingAmountSummary.getText());
+				return new  OneTimePaymentPage(driver);
+			}else
+				return null;
+		 }
+		
+		return null;
+	}
+	
+	
+	
 }
+
 
 
 
