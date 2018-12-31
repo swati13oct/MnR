@@ -90,6 +90,10 @@ public class OneTimePaymentPage extends UhcDriver{
 	@FindBy(xpath = "//*[@id='paymentOverviewApp']//div[@class='container']//div[@class='col-md-12']/h2[1]")
 	private WebElement PaymentHeading;
 	
+	@FindBy(xpath = "//*[@class='page-header']//div[@class='row']//h1")
+	private WebElement PageHeader;	
+	
+	
 	public OneTimePaymentPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -246,9 +250,16 @@ public ConfirmOneTimePaymentPage enterNewPagePaymentDetails(Map<String, String> 
 			System.out.println(e);
 		}
 		
-		if(driver.getTitle().equalsIgnoreCase("Review Payment") || driver.getTitle().equalsIgnoreCase("overview") || driver.getTitle().equalsIgnoreCase("AARP Medicare Plans from UnitedHealthCare - overview") || driver.getTitle().equalsIgnoreCase("Review Your One-Time Payment Information")){
+		/*if(driver.getTitle().equalsIgnoreCase("Review Payment") || driver.getTitle().equalsIgnoreCase("overview") || driver.getTitle().equalsIgnoreCase("AARP Medicare Plans from UnitedHealthCare - overview") || driver.getTitle().equalsIgnoreCase("Review Your One-Time Payment Information") || driver.getTitle().contains("Review Your Automatic Payments Information for Medicare Prescription Drug Plan")){
+			System.out.println("match ho gaya");
 			return new ConfirmOneTimePaymentPage(driver);
-		} 
+		} */
+		
+		if(PageHeader.isDisplayed())
+		{
+			return new ConfirmOneTimePaymentPage(driver);
+		}
+		
 		return null;		
 	}	
 	

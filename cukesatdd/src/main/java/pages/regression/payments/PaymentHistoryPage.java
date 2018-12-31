@@ -134,7 +134,7 @@ public class PaymentHistoryPage extends UhcDriver{
 	@FindBy(id = "closeButton")
 	private WebElement iPerceptionCloseButton;
 
-	@FindBy(xpath = "//*[@class='radio']//input[@id='optionsRadios10']")
+	@FindBy(xpath = "//*[@class='payment-selection']//input[@id='optionsRadios10']")
 	private WebElement CheckingAccountRadioButton;
 	
 	@FindBy(id = "optionsRadios1")
@@ -743,7 +743,9 @@ public class PaymentHistoryPage extends UhcDriver{
 		
 		return null;
 	}
-
+	
+	
+	
 }
 
 
