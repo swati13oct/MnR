@@ -42,7 +42,7 @@ Scenario Outline: To verify quicklinks for a MAPD member
 	  | MEDICA     | Individual |IndEffectiveMedica| ENGLISH  | 6   |NoRider|
 	  
 	  
-@F&RJMPLinks111 @Feb_release_2019 @gladiators
+@F&RJMPLinks @Feb_release_2019 @gladiators
   Scenario Outline: Verify jump links for individual MA member
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -77,6 +77,101 @@ Scenario Outline: To verify quicklinks for a MAPD member
       | MA       | Individual |IndEffectiveAARP| ENGLISH  | 7   |Rider|
       | MA       | Individual |IndEffectiveAARP| ENGLISH  | 7   |NoRider|
 	   
+@F&RJMPLinks @Feb_release_2019 @gladiators
+  Scenario Outline: Verify jump links for a MedSupp member
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      |identifier|<Identifier>|
+      |Rider|<rider>|
+    And user clicks on the view document and resources link and navigate to forms and resource page
+    Then user verifies presence of jump links on F&R page
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |MemberType|<memberType>|
+      |identifier|<Identifier>|
+               
+    And user clicks on the jump links and checks respective sections on F&R page
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |MemberType|<memberType>|
+      |identifier|<Identifier>|
+      
+     And verifies links irrelevant to the plan type are not displayed on F&R page
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |Count|<count>|
+      |MemberType|<memberType>|
+      |identifier|<Identifier>|
+      
+   Examples: 
+      | planType | memberType |Identifier| language |count|rider|
+      | MedSupp  | Individual |EffectiveShipMedSupp| ENGLISH  | 3   |NoRider|
+
+ @F&RJMPLinks @Feb_release_2019 @gladiators
+  Scenario Outline: Verify jump links for individual PDP member
+        Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      |identifier|<Identifier>|
+      |Rider|<rider>|
+    And user clicks on the view document and resources link and navigate to forms and resource page
+    Then user verifies presence of jump links on F&R page
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |MemberType|<memberType>|
+      |identifier|<Identifier>|
+               
+    And user clicks on the jump links and checks respective sections on F&R page
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |MemberType|<memberType>|
+      |identifier|<Identifier>|
+      
+     And verifies links irrelevant to the plan type are not displayed on F&R page
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |Count|<count>|
+      |MemberType|<memberType>|
+      |identifier|<Identifier>|
+      
+   Examples: 
+      | planType | memberType |Identifier| language |count|rider|
+   	  | PDP | Individual |EffectivePDPAARP| ENGLISH  | 8   |NoRider|
+   #  | PDP | Individual |EffectivePDPUHC| ENGLISH  | 8   |NoRider|
+      | PDP | Group |EffectivePDPUHC| ENGLISH  | 7   |NoRider|
+      
+      
+@F&RJMPLinks @Feb_release_2019 @gladiators
+  Scenario Outline: Verify jump links for a SSUP member
+      Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      |identifier|<Identifier>|
+      |Rider|<rider>|
+    And user clicks on the view document and resources link and navigate to forms and resource page
+    Then user verifies presence of jump links on F&R page
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |MemberType|<memberType>|
+      |identifier|<Identifier>|
+               
+    And user clicks on the jump links and checks respective sections on F&R page
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |MemberType|<memberType>|
+      |identifier|<Identifier>|
+      
+     And verifies links irrelevant to the plan type are not displayed on F&R page
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |Count|<count>|
+      |MemberType|<memberType>|
+      |identifier|<Identifier>|
+      
+   Examples: 
+      | planType | memberType |Identifier| language |count|rider|
+      | SSUP | Group |GrpEffectiveSSUP| ENGLISH  | 4   |NoRider|
 
 
 # Pre-Effective Federal Cases
@@ -88,7 +183,7 @@ Scenario Outline: To validate the forms and resources page MAPD AARP Individual 
 	And user clicks on the view document and resources link and navigate to forms and resource page
 	And validates that PEEHIP logo is not displayed   
 	And validates that plan material section is not displayed
-	And validate that english is default language in the dropdown
+	And validate that english is default language in the dro//*[@id="forms-and-resources-quickLinksParsys"]/div[1]/div[1]/div[2]/div/div[5]/div/div/div/div/ul/lipdown
 	| Language | <language>     |
 	Then the member validate the correct Membership Materials section is coming
      | GETTING STARTED GUIDE    | <gettingstartedguide>     |
