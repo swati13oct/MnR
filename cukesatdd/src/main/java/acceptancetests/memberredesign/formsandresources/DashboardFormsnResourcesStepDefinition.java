@@ -1050,7 +1050,7 @@ public class DashboardFormsnResourcesStepDefinition {
 			break;
 
 		case 3:
-			formsAndResourcesPage.verifyPresenceOfJumpLinksMedSupp(rider, planType, memberType);
+			formsAndResourcesPage.verifyPresenceOfJumpLinksMedSupp(rider, planType, memberType,identifier);
 			break;
 
 		case 4:
@@ -1058,7 +1058,7 @@ public class DashboardFormsnResourcesStepDefinition {
 			break;
 
 		case 5:
-			formsAndResourcesPage.verifyPresenceOfJumpLinksSSUP(rider, planType, memberType);
+			formsAndResourcesPage.verifyPresenceOfJumpLinksSSUP(rider, planType, memberType,identifier);
 			break;
 
 		default:
@@ -1110,16 +1110,15 @@ public class DashboardFormsnResourcesStepDefinition {
 			break;
 
 		case 3:
-			formsAndResourcesPage.clicksOnJumpLinksAndCheckRespectiveSectionsMedSupp(rider, planType, memberType);
+			formsAndResourcesPage.clicksOnJumpLinksAndCheckRespectiveSectionsMedSupp(rider, planType, memberType,identifier);
 			break;
 
 		case 4:
-			formsAndResourcesPage.clicksOnJumpLinksAndCheckRespectiveSectionsPDP(rider, planType, memberType,
-					identifier);
+			formsAndResourcesPage.clicksOnJumpLinksAndCheckRespectiveSectionsPDP(rider, planType, memberType,identifier);
 			break;
 
 		case 5:
-			formsAndResourcesPage.clicksOnJumpLinksAndCheckRespectiveSectionsSSUP(rider, planType, memberType);
+		//	formsAndResourcesPage.clicksOnJumpLinksAndCheckRespectiveSectionsSSUP(rider, planType, memberType,identifier);
 			break;
 
 		default:
