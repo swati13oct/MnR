@@ -192,5 +192,5 @@ Scenario Outline: To validate Order Submission Error for Member Auth
     
    Examples: 
       | username  | password  |MemUserName    | planType |  option           |csrError |
-      | qavgogine | qavgogine | q2_jun_aarp0017 | MAPD     | Replacement ID card      | are not authorized to order material |
+      | qavgogine | qavgogine | q2_jun_aarp0101 | MAPD     | Replacement ID card      | are not authorized to order material |
  
