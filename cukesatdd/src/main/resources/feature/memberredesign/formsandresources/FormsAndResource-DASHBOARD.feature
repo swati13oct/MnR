@@ -183,7 +183,7 @@ Scenario Outline: To validate the forms and resources page MAPD AARP Individual 
 	And user clicks on the view document and resources link and navigate to forms and resource page
 	And validates that PEEHIP logo is not displayed   
 	And validates that plan material section is not displayed
-	And validate that english is default language in the dro//*[@id="forms-and-resources-quickLinksParsys"]/div[1]/div[1]/div[2]/div/div[5]/div/div/div/div/ul/lipdown
+	And validate that english is default language in the dropdown
 	| Language | <language>     |
 	Then the member validate the correct Membership Materials section is coming
      | GETTING STARTED GUIDE    | <gettingstartedguide>     |
