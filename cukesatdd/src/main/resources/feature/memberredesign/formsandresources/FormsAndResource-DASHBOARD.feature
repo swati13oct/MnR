@@ -192,7 +192,7 @@ Scenario Outline: To validate the forms and resources page MAPD AARP Individual 
      | Alternative Drug List 	| <alternativedruglist>     |
      | EVIDENCE OF COVERAGEMEM  | <evidenceofcoverage>      |
      | PASSPORT					| <passport>    			|
-    #| OVER THE COUNTER			| <overthecounter>    		|  # it is a link
+     | OVER THE COUNTER			| <overthecounter>    		|  
    	Then validate that annual directory section is displayed
     | Member Type | <memberType> |
     Then validate pdf's in annual directory section
@@ -221,6 +221,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
      | BENEFIT-HIGHLIGHT        | <benefithighlight>        |
      | EVIDENCE OF COVERAGEMEM  | <evidenceofcoverage>      |
      | PASSPORT					| <passport>    			|
+     |linkHEALTH PRODUCTS BENEFIT|<linkhealthproductsbenefit>|
     Then validate that annual directory section is displayed
     | Member Type | <memberType> |
      Then validate pdf's in annual directory section
@@ -232,8 +233,8 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
    	| Member Type | <memberType> |
     Examples: 
       
-     | planType | memberType           	    | language | gettingstartedguide   | benefithighlight   | evidenceofcoverage   |providerdirectory   | vendorInformationsheet    |passport      |
-     | MA       | IndAARPMAPre-EffectiveFnR | ENGLISH  | Getting Started Guide | Benefit Highlights |Evidence of Coverage  |Provider Directory  | Vendor Information Sheet 	|UnitedHealth Passport Program|
+     | planType | memberType           	    | language | gettingstartedguide   | benefithighlight   | evidenceofcoverage   |providerdirectory   | vendorInformationsheet    |passport      |linkhealthproductsbenefit|
+     | MA       | IndAARPMAPre-EffectiveFnR | ENGLISH  | Getting Started Guide | Benefit Highlights |Evidence of Coverage  |Provider Directory  | Vendor Information Sheet 	|UnitedHealth Passport Program|linkHEALTH PRODUCTS BENEFIT|
      
 
 
