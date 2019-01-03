@@ -19,10 +19,10 @@ Feature: V1.1To This test scenario is to validate that ID card is accessible for
       | Coverage Status | <coverageStatus> |
   # Added MAPD amd PDP user,  MA user was not provided  , also had to create a scenario for group user
     Examples: 
-    | plantype  | memberType    | medicalPlan                                                    | memberId      | memberName       | dob                         | covergaeStart | coverageStatus |
-    | PDP       | IDCardmember  | AARP MedicareRx Walgreens (PDP)                                | 0197340581    | Eabce Edecdb     | Subscriber - DOB 03/07/1953 | 04/01/18      | Active         |
-    | MA        | IDCardmember  | AARP MedicareComplete Essential (HMO)                          | 949014883-00  | Adad Fafcdcf     | Subscriber - DOB 09/05/1947 | 01/01/18      | Active         |
-	| MAPD      | IDCardmember  | UnitedHealthcare MedicareComplete Choice Plan 1 (Regional PPO) | 858720673-00  | Abcfda Adfa      | Subscriber - DOB 04/11/1934 | 01/01/18      | Active         | 
+    | plantype  | memberType    | medicalPlan                                                        | memberId      | memberName       | dob                         | covergaeStart | coverageStatus |
+    | PDP       | IDCardmember  | AARP MedicareRx Walgreens (PDP)                                   | 0197340581    | Eabce Edecdb     | Subscriber - DOB 03/07/1953 | 04/01/18      | Active         |
+    | MA        | IDCardmember  | UnitedHealthcare MedicareComplete Choice Essential (Regional PPO) | 979180267-00  | Cbbbaebe Cdcefdac| Subscriber - DOB 02/29/1944 | 01/01/19      | Active         |
+	| MAPD      | IDCardmember  | UnitedHealthcare MedicareComplete Choice (PPO)                    | 908949511-00  | Bcdbc Abaafb     | Subscriber - DOB 03/23/1948 | 01/01/19      | Active         | 
      
   @regressionIDCards_Group_User @regressionMember
   Scenario Outline: Verify the fields in ID card page for group user
@@ -42,6 +42,6 @@ Feature: V1.1To This test scenario is to validate that ID card is accessible for
  
     Examples: 
       | plantype | memberType       | medicalPlan                                      | memberId      | memberName       | dob                         | covergaeStart | coverageStatus |
-      | MAPD     | IDCardmember_grp | UnitedHealthcare Group Medicare Advantage (PPO)  | 921325326-00  | Fcdafde Aafbcb   | Subscriber - DOB 01/24/1951 | 01/01/16      | Active         |
+      | MAPD     | IDCardmember_grp | UnitedHealthcare Group Medicare Advantage (PPO)  | 832330997-00  |Debcbabff Ccba    | Subscriber - DOB 03/19/1939 | 01/01/15      | Active         |
   
      
