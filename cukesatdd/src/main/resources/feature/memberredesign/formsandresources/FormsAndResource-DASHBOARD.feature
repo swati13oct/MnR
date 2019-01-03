@@ -184,7 +184,7 @@ Scenario Outline: To validate the forms and resources page MAPD AARP Individual 
 	And validates that PEEHIP logo is not displayed   
 	And validates that plan material section is not displayed
 	And validate that english is default language in the dropdown
-	| Language | <language>     |
+	| Member Type | <memberType> |
 	Then the member validate the correct Membership Materials section is coming
      | GETTING STARTED GUIDE    | <gettingstartedguide>     |
      | BENEFIT-HIGHLIGHT        | <benefithighlight>        |
@@ -196,6 +196,7 @@ Scenario Outline: To validate the forms and resources page MAPD AARP Individual 
    	Then validate that annual directory section is displayed
     | Member Type | <memberType> |
     Then validate pdf's in annual directory section
+     |Member Type|<memberType>|
      | ProviderDirectory     		  | <providerdirectory>    |
      | Vendor Information Sheet       | <vendorInformationsheet> |
      |Pharmacy Directory Information  |<pharmacydirectoryinformation>|
@@ -208,7 +209,7 @@ Scenario Outline: To validate the forms and resources page MAPD AARP Individual 
      | planType | memberType           			  | language | gettingstartedguide   | benefithighlight   |  comprehensiveformulary|alternativedruglist   | evidenceofcoverage   |passport                             | overthecounter  			   | comprehensiveformularymem  | providerdirectory   | vendorInformationsheet    |pharmacydirectoryinformation  |
      | MAPD     | IndAARPPre-EffectiveFnR 		  | ENGLISH  | Getting Started Guide | Benefit Highlights | Comprehensive Formulary|Alternative Drug List | Evidence of Coverage |UnitedHealth Passport Program| OVER THE COUNTER ESSENTIALS   | Comprehensive Formulary    | Provider Directory  | Vendor Information Sheet          |Pharmacy Directory Information|
 
-@IndAARPMAPre-EffectiveFnR @regressionMember
+@IndAARPMAPre-EffectiveFnR @regressionMember @1234
 Scenario Outline: To validate the forms and resources page MA AARP Individual Pre-Effective
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
@@ -225,11 +226,12 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     Then validate that annual directory section is displayed
     | Member Type | <memberType> |
      Then validate pdf's in annual directory section
+     |Member Type|<memberType>|
      | ProviderDirectory     		  | <providerdirectory>    |
      | Vendor Information Sheet       | <vendorInformationsheet> |
     Then validate that My Document section is displayed
     And the Pharmacy locator link is not displayed for MA
-     And the Provider Search link is displayed for MA
+    And the Provider Search link is displayed for MA
    	| Member Type | <memberType> |
     Examples: 
       
@@ -238,7 +240,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
      
 
 
-@fnrpdpaarpindividualvalidationPre-Effective  @regressionMember
+@fnrpdpaarpindividualvalidationPre-Effective  @regressionMember 
   Scenario Outline: To validate the forms and resources page PDP AARP Individual Pre-Effective
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
@@ -252,16 +254,18 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
      | Alternative Drug List 	| <alternativedruglist>     |
      | EVIDENCE OF COVERAGEMEM  | <evidenceofcoverage>      |
     And validate that english is default language in the dropdown
-    | Language | <language>     |
+    | Member Type | <memberType> |
    	And the user validates the language dropdown and selects new value in dropdown successfully
    	 | Language | <language> |
     Then validate that annual directory section is displayed
-     | MemberType | <memberType> |
+     |Member Type|<memberType>|
     Then validate pdf's in annual directory section
+    |MemberType|<memberType>|
 	 |Pharmacy Directory Information|<pharmacydirectoryinformation>|
 	Then validate that My Document section is displayed
     And the provider search link is not displayed for PDP
     And the Pharmacy locator link is displayed
+    | Member Type | <memberType> |
        
     Examples: 
       | planType | memberType 				  | language | benefithighlight   | gettingstartedguide   | benefithighlight   |comprehensiveformulary  |alternativedruglist  |evidenceofcoverage   |pharmacydirectoryinformation  |
@@ -271,7 +275,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
 
 
 #Effective Users
-  @fnrmapdaarpindividualvalidation  @regressionMember
+  @fnrmapdaarpindividualvalidation  @regressionMember 
   Scenario Outline: To validate the forms and resources page MAPD AARP Individual
    	Given login with following details in the member redesign portal
     	| Plan Type   | <planType>   |
@@ -283,19 +287,20 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     And validate that the view temporary id card link is displayed
     Then validate that the plan material section is displayed
     And validate that english is default language in the dropdown
-    | Language | <language>     |
+    | Member Type | <memberType> |
     And the user validates the language dropdown and selects new value in dropdown successfully
       | Language | <language> |
-      		# No pdf's coming 
-			#	    And then user verifies that the correct pdfs are coming in the plan material section
-			#	      | BENEFIT-HIGHLIGHT       | <benefithighlight>       |
-			#	      | EVIDENCE OF COVERAGE    | <evidenceofcoverage>     |
-			#	      | SUMMARY-OF-BENEFIT      | <summaryofbenefits>      |
-			#	      | COMPREHENSIVE FORMULARY | <comprehensiveformulary> |
-			#	      | PRIOR AUTHORIZATION     | <priorauth>              |
-			#	      | STEP THERAPY            | <steptherapy>            |
-			#	      | FORMULARY ADDITIONS     | <formularyadd>           |
-			#	      | FORMULARY DELETIONS     | <formularydel>           |
+     And then user verifies that the correct pdfs are coming in the plan material section
+				      | BENEFIT-HIGHLIGHT       | <benefithighlight>       |
+				      | SUMMARY-OF-BENEFIT      | <summaryofbenefits>      |
+				      | EVIDENCE OF COVERAGE    | <evidenceofcoverage>     |
+				      |UnitedHealth Passport Program|<unitedhealthpassportprogram>|
+				      | COMPREHENSIVE FORMULARY | <comprehensiveformulary> |
+				      |Alternative Drug List    |<alternativedruglist>     |
+				      | PRIOR AUTHORIZATION     | <priorauth>              |
+				      | STEP THERAPY            | <steptherapy>            |
+				      | FORMULARY ADDITIONS     | <formularyadd>           |
+				      | FORMULARY DELETIONS     | <formularydel>           |
     # Then the member validate the correct Membership Materials section is coming
     #  | BENEFIT-HIGHLIGHT       | <benefithighlight>       |
     #  | COMPREHENSIVE FORMULARY | <comprehensiveformulary> |
@@ -303,21 +308,26 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     Then validate that the AnocSection is displayed
     Then validate that annual directory section is displayed
     | Member Type | <memberType> |
-    		# No pdf's coming 
-			#    And the user verifies that the correct pdfs are coming in the anoc section
-			#      | ANNUAL NOTICE OF CHANGES    | <anoc>                       |
-			#      | EVIDENCE OF COVERAGEANOC    | <evidenceofcoverageanoc>     |
-			#      | COMPREHENSIVE FORMULARYANOC | <comprehensiveformularyanoc> |
+    		
+	And the user verifies that the correct pdfs are coming in the anoc section
+			      | ANNUAL NOTICE OF CHANGES    | <anoc>                       |
+			      | EVIDENCE OF COVERAGEANOC    | <evidenceofcoverageanoc>     |
+			      | COMPREHENSIVE FORMULARYANOC | <comprehensiveformularyanoc> |
     And both Pharmacy and provider search links are displayed
     | PlanType |<planType>|
     Then validate that My Document section is displayed
     And both the drug and medical EOB links are displayed
     Then validate that the forms & resources section is displayed
     Then validate that the renew magazine section is displayed for MAPD
+    Then validate pdf's in annual directory section
+     |Member Type|<memberType>|
+     | ProviderDirectory     		  | <providerdirectory>    |
+     | Vendor Information Sheet       | <vendorInformationsheet> |
+     |Pharmacy Directory Information  |<pharmacydirectoryinformation>|
 
     Examples: 
-      | planType | memberType         | language | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | comprehensiveformulary  | priorauth           | steptherapy  | formularyadd        | formularydel        | anoc                     | evidenceofcoverageanoc | comprehensiveformularyanoc |
-      | MAPD     | IndAARPPharmacyFnR | ENGLISH  | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Annual Notice of Changes | Evidence Of Coverage   | Comprehensive Formulary    |
+      | planType | memberType         | language | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | comprehensiveformulary  | priorauth           | steptherapy  | formularyadd        | formularydel        | anoc                     | evidenceofcoverageanoc | comprehensiveformularyanoc |unitedhealthpassportprogram |alternativedruglist|providerdirectory   | vendorInformationsheet    |pharmacydirectoryinformation  |
+      | MAPD     | IndAARPPharmacyFnR | ENGLISH  | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Annual Notice of Changes | Evidence Of Coverage   | Comprehensive Formulary    |UnitedHealth Passport Program |Alternative Drug List| Provider Directory  | Vendor Information Sheet          |Pharmacy Directory Information|
 
   @fnrpdpuhcindividual  @regressionMember
   Scenario Outline: To validate the forms and resources page PDP UHC Individual
@@ -331,37 +341,49 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     And validate that the view temporary id card link is displayed
     Then validate that the plan material section is displayed
     And validate that english is default language in the dropdown
-    | Language | <language>     |
+      | Member Type | <memberType> |
     And the user validates the language dropdown and selects new value in dropdown successfully
       | Language | <language> |
-        #  PDf's aren't coming anymore
-		#    And then user verifies that the correct pdfs are coming in the plan material section
-		#      | BENEFIT-HIGHLIGHT       | <benefithighlight>       |
-		#      | EVIDENCE OF COVERAGE    | <evidenceofcoverage>     |
-		#      | SUMMARY-OF-BENEFIT      | <summaryofbenefits>      |
-		#      | COMPREHENSIVE FORMULARY | <comprehensiveformulary> |
-		#      | PRIOR AUTHORIZATION     | <priorauth>              |
-		#      | STEP THERAPY            | <steptherapy>            |
-		#      | FORMULARY ADDITIONS     | <formularyadd>           |
-		#      | FORMULARY DELETIONS     | <formularydel>           |
-   # Then the member validate the correct Membership Materials section is coming
-   #   | BENEFIT-HIGHLIGHT       | <benefithighlight>       |
-   #   | COMPREHENSIVE FORMULARY | <comprehensiveformulary> |
-   #   | EVIDENCE OF COVERAGE    | <evidenceofcoverage>     |
-    Then validate that the anoc section is not displayed
-    Then validate that annual directory section is displayed
+   	And then user verifies that the correct pdfs are coming in the plan material section
+	  | BENEFIT-HIGHLIGHT       | <benefithighlight>       |
+	  | SUMMARY-OF-BENEFIT      | <summaryofbenefits>      |
+      | EVIDENCE OF COVERAGE    | <evidenceofcoverage>     |
+      |COMPREHENSIVE FORMULARY  | <comprehensiveformulary> |
+      |Alternative Drug List    | <alternativedruglist>    |
+      | PRIOR AUTHORIZATION     | <priorauth>              |
+      | STEP THERAPY            | <steptherapy>            |
+      | FORMULARY ADDITIONS     | <formularyadd>           |
+      | FORMULARY DELETIONS     | <formularydel>           |
+   Then the member validate the correct Membership Materials section is coming
+      | GETTING STARTED GUIDE   | <gettingstartedguide>    |
+      | BENEFIT-HIGHLIGHT       | <benefithighlight>       |
+      | COMPREHENSIVE FORMULARY | <comprehensiveformulary> |
+      |Alternative Drug List    | <alternativedruglist>    |
+      | EVIDENCE OF COVERAGE    | <evidenceofcoverage>     |
+   Then validate that the anoc section is not displayed
+   Then validate that annual directory section is displayed
     | Member Type | <memberType> |
     And the Pharmacy locator link is displayed
+    | Member Type | <memberType> |
     And the provider search link is not displayed for PDP
     Then validate that My Document section is displayed
     And the Drug EOB link is displayed for PDP
     And Medical EOB link is not displayed for PDP
     Then validate that the forms & resources section is displayed
     Then validate that the renew magazine section is displayed for PDP UHC
+    And the user verifies that the correct pdfs are coming in the anoc section
+      | Member Type | <memberType> |
+      | ANNUAL NOTICE OF CHANGES    | <anoc>                       |
+      | EVIDENCE OF COVERAGEANOC    | <evidenceofcoverageanoc>     |
+      | COMPREHENSIVE FORMULARYANOC | <comprehensiveformularyanoc> |
+    Then validate pdf's in annual directory section
+     |Member Type|<memberType>|
+     |Pharmacy Directory Information  |<pharmacydirectoryinformation>|
+     
 
     Examples: 
-      | planType | memberType          | language | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | comprehensiveformulary  | priorauth           | steptherapy  | formularyadd        | formularydel        | anoc                     | evidenceofcoverageanoc | comprehensiveformularyanoc |
-      | PDP      | PdpuhcindividualFnR | ENGLISH  | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Annual Notice of Changes | Evidence Of Coverage   | Comprehensive Formulary    |
+      | planType | memberType          | language | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | comprehensiveformulary  | priorauth           | steptherapy  | formularyadd        | formularydel        | anoc                     | evidenceofcoverageanoc | comprehensiveformularyanoc |alternativedruglist|gettingstartedguide|pharmacydirectoryinformation|
+      | PDP      | PdpuhcindividualFnR | ENGLISH  | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Annual Notice of Changes | Evidence Of Coverage   | Comprehensive Formulary    |Alternative Drug List|Getting Started Guide|Pharmacy Directory Information|
 
   @fnrmapdgroupvalidation  @regressionMember
   Scenario Outline: To validate the forms and resources page MAPD group
@@ -375,50 +397,50 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
     And validate that the view temporary id card link is displayed
     And validate that english is default language in the dropdown
-    | Language | <language>     |
+    | Member Type | <memberType> |
     And the user validates the language dropdown and selects new value in dropdown successfully
       | Language | <language> |
       		#Pdf's aren't coming
-			    And then user verifies that the correct pdfs are coming in the plan material section
-			      | GETTING STARTED GUIDE             | <gettingstartedguide>    |
-			      | BENEFIT-HIGHLIGHT                 | <benefithighlight>       |
-			      | EVIDENCE OF COVERAGE              | <evidenceofcoverage>     |
-			      | CERTIFICATE OF COVERAGE           | <certificateofcoverage>  |
-			      | SUMMARY-OF-BENEFIT                | <summaryofbenefits>      |
-			      | FORMULARY DRUG LIST ABRIDGED      | <abridgedformulary>      |
-			      | FORMULARY DRUG LIST COMPREHENSIVE | <comprehensiveformulary> |
-			      | ADDITIONAL DRUG COVERAGE          | <additionaldrug>         |
-     # | PRIOR AUTHORIZATION               | <priorauth>              |
-     # | STEP THERAPY                      | <steptherapy>            |
-     # | FORMULARY ADDITIONS               | <formularyadd>           |
-     # | FORMULARY DELETIONS               | <formularydel>           |
-     		
-			    Then the member validate the correct Membership Materials section is coming
-			     | GETTING STARTED GUIDE    | <gettingstartedguide>    |
-			     | BENEFIT-HIGHLIGHT        | <benefithighlight>       |
-			     | COMPREHENSIVE FORMULARY  | <comprehensiveformularymem> |
-			     | ADDITIONAL DRUG COVERAGE | <additionaldrug> |
-			     | EVIDENCE OF COVERAGEMEM     | <evidenceofcoveragemem>     |
-			     | CERTIFICATE OF COVERAGE  | <certificateofcoverage>  |
+	And then user verifies that the correct pdfs are coming in the plan material section
+      | GETTING STARTED GUIDE             | <gettingstartedguide>    |
+      | BENEFIT-HIGHLIGHT                 | <benefithighlight>       |
+      | SUMMARY-OF-BENEFIT                | <summaryofbenefits>      |
+      | EVIDENCE OF COVERAGE              | <evidenceofcoverage>     |
+      | CERTIFICATE OF COVERAGE           | <certificateofcoverage>  |
+      #| FORMULARY DRUG LIST ABRIDGED      | <abridgedformulary>      |
+      | FORMULARY DRUG LIST COMPREHENSIVE | <comprehensiveformulary> |
+      | ADDITIONAL DRUG COVERAGE          | <additionaldrug>         |
+      | PRIOR AUTHORIZATION               | <priorauth>              |
+      | STEP THERAPY                      | <steptherapy>            |
+      | FORMULARY ADDITIONS               | <formularyadd>           |
+      | FORMULARY DELETIONS               | <formularydel>           |
+    # Membership Materials is based on continued plan flag & year logic. It appears when flage is true,displays only for a year from the day of enrollment.		
+	#Then the member validate the correct Membership Materials section is coming
+    # | GETTING STARTED GUIDE    | <gettingstartedguide>    |
+    # | BENEFIT-HIGHLIGHT        | <benefithighlight>       |
+    # | COMPREHENSIVE FORMULARY  | <comprehensiveformularymem> |
+    # | ADDITIONAL DRUG COVERAGE | <additionaldrug> |
+    # | EVIDENCE OF COVERAGEMEM     | <evidenceofcoveragemem>     |
+    # | CERTIFICATE OF COVERAGE  | <certificateofcoverage>  |
     Then validate that the anoc section is displayed for group
     Then validate that annual directory section is displayed
-    | Member Type | <memberType> |
-    		
+     | Member Type | <memberType> |
     Then validate that My Document section is displayed
     And the medical EOB link is displayed for MADP Group
     And the Drug EOB link is displayed for MAPD Group
     Then validate that the forms & resources section is displayed
     Then validate that the renew magazine section is displayed for uhc grp
-    #    Pdf's aren't coming
-			    And the user verifies that the correct pdfs are coming in the anoc section
-			      | ANNUAL NOTICE OF CHANGES     | <anoc>                       |
-			      | EVIDENCE OF COVERAGEANOC     | <evidenceofcoverageanoc>     |
-			      |CERTIFICATE OF COVERAGE       |  <certificateofcoverage>     |
-			      | COMPREHENSIVE FORMULARY  | <comprehensiveformularymem> |
-			      | ADDITIONAL DRUG COVERAGEANOC | <additionaldruganoc>         |
+    And the user verifies that the correct pdfs are coming in the anoc section
+      | Member Type | <memberType> |
+      | ANNUAL NOTICE OF CHANGES     | <anoc>                       |
+      | EVIDENCE OF COVERAGEANOC     | <evidenceofcoverageanoc>     |
+      |CERTIFICATE OF COVERAGE       |  <certificateofcoverage>     |
+      | COMPREHENSIVE FORMULARY  | <comprehensiveformularymem> |
+      | ADDITIONAL DRUG COVERAGEANOC | <additionaldruganoc>         |
     And the provider search link is displayed
+      | Member Type | <memberType> |
     And the Pharmacy locator link is displayed
-    
+      | Member Type | <memberType> |
 
     Examples: 
       | planType | memberType           | language | gettingstartedguide   | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | certificateofcoverage   | abridgedformulary   | comprehensiveformulary              | additionaldrug           | priorauth           | steptherapy  | formularyadd        | formularydel        | certificateofcoverage   | anoc                     | evidenceofcoverageanoc | comprehensiveformularymem | additionaldruganoc       |   evidenceofcoveragemem   |
@@ -437,9 +459,9 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
     And validate that the view temporary id card link is displayed
     And validate that english is default language in the dropdown
-    | Language | <language>     |
+    | Member Type | <memberType> |
     And the user validates the language dropdown and selects new value in dropdown successfully
-      | Language | <language> |
+      | Member Type | <memberType> |
         # Then the member validate the correct Welcome Guide section is coming
     # | BENEFIT-HIGHLIGHT        | <benefithighlight>       |
     #  | COMPREHENSIVE FORMULARY  | <comprehensiveformulary> |
@@ -449,6 +471,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     Then validate that annual directory section is displayed
     | Member Type | <memberType> |
     And the Pharmacy locator link is displayed
+    | Member Type | <memberType> |
     And the provider search link is not displayed for PDP
     Then validate that My Document section is displayed
     And the Drug EOB link is displayed for PDP
@@ -485,7 +508,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
     And validate that the view temporary id card link is displayed
     And validate that english is default language in the dropdown
-    | Language | <language>     |
+    | Member Type | <memberType> |
     And the user validates the language dropdown and selects new value in dropdown successfully
       | Language | <language> |
       #  Then the member validate the correct Membership Materials section is coming
@@ -499,6 +522,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     Then validate that annual directory section is displayed
     | Member Type | <memberType> |
     And the Pharmacy locator link is displayed
+    | Member Type | <memberType> |
     And the provider search link is not displayed for PDP
     Then validate that My Document section is displayed
     And the Drug EOB link is displayed for PDP
@@ -506,6 +530,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     Then validate that the forms & resources section is displayed
     Then validate that the renew magazine section is not displayed
     And the user verifies that the correct pdfs are coming in the anoc section
+      | Member Type | <memberType> |
       #| ANNUAL NOTICE OF CHANGES     | <anoc>                      |
       | EVIDENCE OF COVERAGEANOC     | <evidenceofcoverageanoc>     |
       | COMPREHENSIVE FORMULARYANOC  | <comprehensiveformularyanoc> |
@@ -540,7 +565,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
     And validate that the view temporary id card link is displayed
     And validate that english is default language in the dropdown
-    | Language | <language>     |
+    | Member Type | <memberType> |
     And the user validates the language dropdown and selects new value in dropdown successfully
       | Language | <language> |
     And then user verifies that the correct pdfs are coming in the plan material section
@@ -565,6 +590,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     #  | CERTIFICATE OF COVERAGE  | <certificateofcoverage>  |
     Then validate that the anoc section is displayed for group
     And the user verifies that the correct pdfs are coming in the anoc section
+      | Member Type | <memberType> |
       | ANNUAL NOTICE OF CHANGES     | <anoc>                       |
       | EVIDENCE OF COVERAGEANOC     | <evidenceofcoverageanoc>     |
        |CERTIFICATE 0F COVERAGE      |  <certificateofcoverage>  |
@@ -579,6 +605,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     Then validate that the renew magazine section is not displayed
     And the provider search link is not displayed for PDP
     And the Pharmacy locator link is displayed
+    | Member Type | <memberType> |
     
 
     Examples: 
@@ -599,7 +626,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
     And validate that the view temporary id card link is displayed
     And validate that english is default language in the dropdown
-    | Language | <language>     |
+    | Member Type | <memberType> |
     And the user validates the language dropdown and selects new value in dropdown successfully
       | Language | <language> |
   #   Then the member validate the correct Membership Materials section is coming
@@ -619,6 +646,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     Then validate that the renew magazine section is displayed for MAPD
     And the Pharmacy locator link is not displayed for MA
     And the user verifies that the correct pdfs are coming in the anoc section
+      | Member Type | <memberType> |
       | ANNUAL NOTICE OF CHANGES  | <anoc>                   |
       | EVIDENCE OF COVERAGE ANOC | <evidenceofcoverageanoc> |
     
@@ -671,6 +699,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     Then validate that annual directory section is displayed
     | Member Type | <memberType> |
     And the user verifies that the correct pdfs are coming in the anoc section
+      | Member Type | <memberType> |
       #| ANNUAL NOTICE OF CHANGES     | <anoc>                       |
       | EVIDENCE OF COVERAGEANOC     | <evidenceofcoverageanoc>     |
       |CERTIFICATE OF COVERAGE       |  <certificateofcoverage>     |
@@ -682,7 +711,9 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     Then validate that the forms & resources section is displayed
     Then validate that the renew magazine section is displayed for uhc grp
     And the provider search link is displayed
+    | Member Type | <memberType> |
     And the Pharmacy locator link is displayed
+    | Member Type | <memberType> |
     
 
     Examples: 
@@ -701,7 +732,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
     And validate that the view temporary id card link is displayed
     And validate that english is default language in the dropdown
-    | Language | <language>     |
+    | Member Type | <memberType> |
     And the user validates the language dropdown and selects new value in dropdown successfully
       | Language | <language> |
      Then validate that the anoc section is not displayed
@@ -745,7 +776,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
     And validate that the view temporary id card link is displayed
     And validate that english is default language in the dropdown
-    | Language | <language>     |
+    | Member Type | <memberType> |
    # Then the member validate the correct Membership Materials section is coming
    #   | YOUR_PLAN_GETTING_STARTED | <yourplangettingstarted> |
    #   | SCHEDULE_OF_BENEFITS      | <scheduleofbenefits>     |
@@ -816,8 +847,8 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
   @shipscenario  @regressionMember
   Scenario Outline: To validate the forms and resources page for SHIP members
     Given login with following details in the member redesign portal
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
+	      | Plan Type   | <planType>   |
+	      | Member Type | <memberType> |
     And user clicks on the view document and resources link and navigate to forms and resource page
    # And validates that PEEHIP logo is not displayed
     And validate for active member Temporary Id Card and Plan Order Material links are displayed
@@ -825,13 +856,14 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     And validate that the view temporary id card link is displayed
     Then validate that the plan material section is displayed
     And validate that english is default language in the dropdown
-    | Language | <language>     |
+    | Member Type | <memberType> |
     Then validate that the forms & resources section is displayed
     Then verifies that Electronic Funds pdf for ship is displayed
     Then the user verifies the pdfs for ship if particular pdf is not present
-    | BENEFIT HIGHLIGHTS  |<benefitstable>    |
-    | PLAN OVERVIEW | <planoverview>  |
-    | OUTLINE OF COVERAGE    |<outlineofcoverage>|
+		| Member Type | <memberType> |
+		| BENEFIT HIGHLIGHTS  |<benefitstable>    |
+		| PLAN OVERVIEW | <planoverview>  |
+		| OUTLINE OF COVERAGE    |<outlineofcoverage>|
 
     Examples: 
       | planType | memberType     | benefitstable  |planoverview|outlineofcoverage |

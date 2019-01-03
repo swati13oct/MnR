@@ -14,6 +14,7 @@ import java.util.Set;
 import junit.framework.Assert;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.regression.login.HSIDLoginPage;
@@ -86,9 +87,10 @@ public class DashboardFormsnResourcesStepDefinition {
 
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		HSIDLoginPage loginPage = new HSIDLoginPage(wd);
-		/* loginPage.validateelements(); */
+		loginPage.validateelements();
+		
 		AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
-
+		
 		if (accountHomePage != null) {
 			getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
 			Assert.assertTrue(true);
@@ -159,7 +161,7 @@ public class DashboardFormsnResourcesStepDefinition {
 	 */
 	@And("^then user verifies that the correct pdfs are coming in the plan material section$")
 	public void verifypdfscoming(DataTable givenAttributes) throws InterruptedException {
-
+		String memberType=null;
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -172,8 +174,14 @@ public class DashboardFormsnResourcesStepDefinition {
 		Collection<String> values = memberAttributesMap.values();
 		String[] targetArray = values.toArray(new String[values.size()]);
 		System.out.println(values.size());
+		
+		memberType=memberAttributesRow.get(0).getCells().get(1);
+		memberAttributesMap.remove("MemberType");
+		memberAttributesMap.remove("memberType");
+		
+		
 
-		boolean arraycheck = formsAndResourcesPage.xpathSelectionSectionwise(targetArray, "plan material");
+		boolean arraycheck = formsAndResourcesPage.xpathSelectionSectionwise(targetArray, "plan material",memberType);
 		if (arraycheck == true) {
 			Assert.assertTrue(true);
 			System.out.println("all pdfs are coming correctly");
@@ -238,31 +246,63 @@ public class DashboardFormsnResourcesStepDefinition {
 	}
 
 	@And("^the Pharmacy locator link is displayed$")
-	public void phamacypdp() {
+	public void phamacypdp(DataTable attributes) {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
 		formsAndResourcesPage.scroll();
 		formsAndResourcesPage.scroll();
-		if (formsAndResourcesPage.getPharmacyforPDP().isDisplayed()
-				|| formsAndResourcesPage.getPreEffectivePharmacyLocatorLinkPDP().isDisplayed()) {
-			Assert.assertTrue(true);
-			System.out.println("pharmacy locator link is present");
+
+		List<List<String>> data = attributes.raw();
+
+		if (data.get(0).get(1).contains("Group")) {
+			if (formsAndResourcesPage.getLnkPharmacyLocatorLinkMAPDGroup().isDisplayed()) {
+				Assert.assertTrue(true);
+				System.out.println("pharmacy locator link is present");
+			} else {
+				Assert.fail("pharmacy locator link is not present");
+			}
+			
+			
+
 		} else {
-			Assert.fail("pharmacy locator link is not present");
+
+			if (formsAndResourcesPage.getPharmacyforPDP().isDisplayed()
+					|| formsAndResourcesPage.getPreEffectivePharmacyLocatorLinkPDP().isDisplayed()) {
+				Assert.assertTrue(true);
+				System.out.println("pharmacy locator link is present");
+			} else {
+				Assert.fail("pharmacy locator link is not present");
+			}
 		}
 	}
 
 	@And("^the provider search link is displayed$")
-	public void providersearchdisplaying() {
+	public void providersearchdisplaying(DataTable attributes) {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
 		formsAndResourcesPage.scroll();
 		formsAndResourcesPage.scroll();
-		if (formsAndResourcesPage.getProviderforPDP().isDisplayed()) {
-			Assert.assertTrue(true);
-			System.out.println("provider link is present");
+		List<List<String>> data = attributes.raw();
+
+		if (data.get(0).get(1).contains("Group")) {
+			
+			if (formsAndResourcesPage.getLnkProviderSearchLinkMAPDGroup().isDisplayed()) {
+				Assert.assertTrue(true);
+				System.out.println("provider link is present");
+			} else {
+				Assert.fail("provider link is not present");
+			}
+			
+			
+
 		} else {
-			Assert.fail("provider link is not present");
+
+			if (formsAndResourcesPage.getProviderforPDP().isDisplayed()) {
+				Assert.assertTrue(true);
+				System.out.println("provider link is present");
+			} else {
+				Assert.fail("provider link is not present");
+			}
 		}
 	}
 
@@ -327,7 +367,7 @@ public class DashboardFormsnResourcesStepDefinition {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
 		Thread.sleep(2000);
-		if (formsAndResourcesPage.getAnocforgroup().isDisplayed()) {
+		if (formsAndResourcesPage.getAnocforgroup().get(1).isDisplayed()) {
 			Assert.assertTrue(true);
 			System.out.println("anoc for grp is present");
 		} else {
@@ -468,7 +508,7 @@ public class DashboardFormsnResourcesStepDefinition {
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
 		formsAndResourcesPage.scroll();
 		Thread.sleep(2000);
-		if (formsAndResourcesPage.getANOCSection().isDisplayed()) {
+		if (formsAndResourcesPage.getANOCSection().get(1).isDisplayed()) {
 			Assert.assertTrue(true);
 			System.out.println("anoc section is present");
 
@@ -536,7 +576,7 @@ public class DashboardFormsnResourcesStepDefinition {
 
 	@And("^the user verifies that the correct pdfs are coming in the anoc section$")
 	public void verifyanocpdfscoming(DataTable givenAttributes) throws InterruptedException {
-
+		String memberType=null;
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -546,11 +586,15 @@ public class DashboardFormsnResourcesStepDefinition {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
 		}
+		
+		memberType=memberAttributesRow.get(0).getCells().get(1);
+		memberAttributesMap.remove("Member Type");
+		memberAttributesMap.remove("MemberType");
 		Collection<String> values = memberAttributesMap.values();
 		String[] targetArray = values.toArray(new String[values.size()]);
 		System.out.println(values.size());
 
-		boolean arraycheck = formsAndResourcesPage.xpathSelectionSectionwise(targetArray, "anoc");
+		boolean arraycheck = formsAndResourcesPage.xpathSelectionSectionwise(targetArray, "anoc",memberType);
 		if (arraycheck == true) {
 			Assert.assertTrue(true);
 			System.out.println("all anoc and annual directory pdfs are coming correctly");
@@ -698,6 +742,8 @@ public class DashboardFormsnResourcesStepDefinition {
 
 	@Then("^the user verifies the pdfs for ship if particular pdf is not present")
 	public void errormessagepresentforship(DataTable givenAttributes) throws InterruptedException {
+		String memberType=null;
+		
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -711,7 +757,12 @@ public class DashboardFormsnResourcesStepDefinition {
 		String[] targetArray = values.toArray(new String[values.size()]);
 		System.out.println(values.size());
 
-		boolean arraycheck = formsAndResourcesPage.xpathSelectionSectionwise(targetArray, "ship plan material");
+		memberType=memberAttributesRow.get(0).getCells().get(1);
+		memberAttributesMap.remove("MemberType");
+		memberAttributesMap.remove("memberType");
+		
+		
+		boolean arraycheck = formsAndResourcesPage.xpathSelectionSectionwise(targetArray, "ship plan material",memberType);
 		if (arraycheck == true) {
 			Assert.assertTrue(true);
 			System.out.println("all pdfs are coming correctly");
