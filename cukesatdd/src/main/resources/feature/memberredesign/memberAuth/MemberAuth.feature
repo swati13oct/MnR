@@ -12,7 +12,7 @@ Feature: S1.1 To test Member Auth Dashboard page.
     Examples: 
       | username  | password  | errormessage                                    |
       | qavgogine |           | Either your UserName or Password was incorrect. |
-      | username  | qavgogine | Either your UserName or Password was incorrect. |
+      |           | qavgogine | Either your UserName or Password was incorrect. |
 
   Scenario Outline: To validate the contact us page through Member auth.
     Given the user is on member auth login page
