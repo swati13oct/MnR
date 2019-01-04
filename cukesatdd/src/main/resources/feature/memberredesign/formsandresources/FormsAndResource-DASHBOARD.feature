@@ -618,7 +618,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
 
  
      
-  @fnrmaindividualvalidation  @regressionMember
+  @fnrmaindividualvalidation  @regressionMember @1234
   Scenario Outline: To validate the forms and resources page  main Individual
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
@@ -667,7 +667,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
       | planType | memberType | language | benefithighlight   | summaryofbenefits   | evidenceofcoverage         | unitedhealthpassportprogram   | anoc                     | evidenceofcoverageanoc |providerdirectory   | vendorInformationsheet    |
       | MA       | AARPIndFnR | ENGLISH  | Benefit Highlights | Summary of Benefits | Evidence of Coverage | UnitedHealth Passport Program | Annual Notice of Changes | Evidence Of Coverage   |Provider Directory  | Vendor Information Sheet        |
 
-  @fnralpeehipgroupvalidation  @regressionMember
+  @fnralpeehipgroupvalidation  @regressionMember 
   Scenario Outline: To validate the forms and resources page alpeehip group 
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
@@ -681,20 +681,20 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     And the user validates the language dropdown and selects new value in dropdown successfully
       | Language | <language> |
     And then user verifies that the correct pdfs are coming in the plan material section
-      | GETTING STARTED GUIDE             | <gettingstartedguide>    |
+     # | GETTING STARTED GUIDE             | <gettingstartedguide>    |
       | BENEFIT-HIGHLIGHT                 | <benefithighlight>       |
+      | SUMMARY-OF-BENEFIT                | <summaryofbenefits>      |
       | EVIDENCE OF COVERAGE              | <evidenceofcoverage>     |
       | CERTIFICATE OF COVERAGE           | <certificateofcoverage>  |
-      | SUMMARY-OF-BENEFIT                | <summaryofbenefits>      |
       | FORMULARY DRUG LIST ABRIDGED      | <abridgedformulary>      |
       | FORMULARY DRUG LIST COMPREHENSIVE | <comprehensiveformulary> |
       | ADDITIONAL DRUG COVERAGE          | <additionaldrug>         |
-      |  DOCTOR FLYER                     | <doctorflyer>            |
-      |PROVIDER DIRECTORY INSERT          | <providerdirectoryinsert>|
-     # | PRIOR AUTHORIZATION               | <priorauth>              |
-     # | STEP THERAPY                      | <steptherapy>            |
-     # | FORMULARY ADDITIONS               | <formularyadd>           |
-     # | FORMULARY DELETIONS               | <formularydel>           |
+    # |  DOCTOR FLYER                     | <doctorflyer>            |
+    # |PROVIDER DIRECTORY INSERT          | <providerdirectoryinsert>|
+      | PRIOR AUTHORIZATION               | <priorauth>              |
+      | STEP THERAPY                      | <steptherapy>            |
+      | FORMULARY ADDITIONS               | <formularyadd>           |
+      | FORMULARY DELETIONS               | <formularydel>           |
     #Then the member validate the correct Membership Materials section is coming
     #  | GETTING STARTED GUIDE    | <gettingstartedguide>    |
     #  | BENEFIT-HIGHLIGHT        | <benefithighlight>       |
@@ -707,7 +707,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     | Member Type | <memberType> |
     And the user verifies that the correct pdfs are coming in the anoc section
       | Member Type | <memberType> |
-      #| ANNUAL NOTICE OF CHANGES     | <anoc>                       |
+      | ANNUAL NOTICE OF CHANGES     | <anoc>                       |
       | EVIDENCE OF COVERAGEANOC     | <evidenceofcoverageanoc>     |
       |CERTIFICATE OF COVERAGE       |  <certificateofcoverage>     |
       | COMPREHENSIVE FORMULARY      | <comprehensiveformularyanoc>  |
@@ -724,8 +724,8 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     
 
     Examples: 
-      | planType     | memberType       | language | gettingstartedguide       | benefithighlight   | summaryofbenefits   | evidenceofcoverage         | certificateofcoverage                        | abridgedformulary              | comprehensiveformulary              | additionaldrug           | doctorflyer  | providerdirectoryinsert   | priorauth           | steptherapy  | formularyadd        | formularydel        | evidenceofcoverageanoc | comprehensiveformularyanoc |       anoc              | 
-      | MAPDALPeehip | GroupAlPeehipFnR | ENGLISH  | Getting Started Guide | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Certificate of Coverage | Formulary/Drug List | Formulary/Drug List - Comprehensive | Additional Drug Coverage | Doctor Flyer | Provider Directory Insert | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Evidence of Coverage   | Comprehensive Formulary  | Additional Drug Coverage |Annual Notice of Changes|  
+      | planType     | memberType       | language | gettingstartedguide   | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | certificateofcoverage   | abridgedformulary   | comprehensiveformulary              | additionaldrug           | doctorflyer  | providerdirectoryinsert   | priorauth           | steptherapy  | formularyadd        | formularydel        | evidenceofcoverageanoc | comprehensiveformularyanoc |additionaldrug            |anoc              | 
+      | MAPDALPeehip | GroupAlPeehipFnR | ENGLISH  | Getting Started Guide | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Certificate of Coverage | Formulary/Drug List | Formulary/Drug List - Comprehensive | Additional Drug Coverage | Doctor Flyer | Provider Directory Insert | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Evidence of Coverage   | Comprehensive Formulary    | Additional Drug Coverage |Annual Notice of Changes|  
 
   @pcpfnrvalidation  @regressionMember
   Scenario Outline: To validate the forms and resources page for PCP
@@ -877,7 +877,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
       # uhc
       | SHIP   | IndPharmacyShipFnR | Benefits Table |Plan Overview |Outline of Coverage |
 
-  @memberauthfnrpagevalidation  @regressionMember
+  @memberauthfnrpagevalidation  @regressionMember @1234
   Scenario Outline: To validate the forms and resources page through Member auth.
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
