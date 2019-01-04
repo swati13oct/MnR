@@ -105,6 +105,9 @@ public class PaymentHistoryPage extends UhcDriver{
 	@FindBy(xpath = "//*[@class='payment-method-btn'][2]/a")
 	private WebElement SetUpAutoPayButton;
 	
+	@FindBy(xpath = "((//*[@class='container--base'])[2]//div[@class='margin-small']//span[@class='payment-method-btn'])[2]/a")
+	private WebElement SetUpAutoPayButtonCC;
+	
 	//@FindBy(xpath = "//*[@class='payment-method-btn'][1]/a[1]")
 	@FindBy(xpath = "//*[@class='payment-method-btn'][1]/a[2]")
 	private WebElement OneTimeNewFlowPayButton;
@@ -139,6 +142,15 @@ public class PaymentHistoryPage extends UhcDriver{
 	
 	@FindBy(id = "optionsRadios1")
 	private WebElement DefaultPayAmount;
+	
+	@FindBy(id = "optionsRadios20")
+	private WebElement SetUpNewCredirDebPaymet;
+	
+	@FindBy(xpath = "//*[@class='payment-selection__actions']/button[1]")
+	private WebElement CCNextButton;	
+	
+	@FindBy(className="accepted-cards")
+	private WebElement CCPageHead;
 	
 	@FindBy(id = "otherAmount")
 	private WebElement OtherAmountButton;
@@ -742,6 +754,71 @@ public class PaymentHistoryPage extends UhcDriver{
 		 }
 		
 		return null;
+	}
+	
+
+	public PaymentHistoryPage AutoPayNewCC(){
+
+		try {   
+			Thread.sleep(2000); 		
+			driver.switchTo().frame("IPerceptionsEmbed");
+			System.out.println("iPerception Pop Up is Present");
+			iPerceptionCloseButton.click();
+			driver.switchTo().defaultContent();
+			Thread.sleep(5000);
+		}
+		catch (Exception e) {
+			System.out.println("iPerception Pop Up is not Present");
+		}
+		try{
+			if(SetUpAutoPayButtonCC.isDisplayed())
+			{
+				SetUpAutoPayButtonCC.click();
+				System.out.println("clicked on Edit Recurring CC pay button");
+				try{
+					Thread.sleep(2000);					 
+					if (validate(SetUpNewCredirDebPaymet)){
+						SetUpNewCredirDebPaymet.click();
+						System.out.println("clicked on Setup New Payment button");	
+						CCNextButton.click();
+						Thread.sleep(7000);
+						if(CCPageHead.isDisplayed()){						
+						return new PaymentHistoryPage(driver);
+						}else
+							return null;
+					}
+					else
+						return new PaymentHistoryPage(driver);
+				}catch(Exception e)
+				{
+					System.out.println("Set up Pop up not displayed"); 
+				}					 
+
+			}
+			else
+			{
+				System.out.println("No Setup Automatic Payment Button, looking for Edit auto payment button");
+			}
+
+		}catch(Exception e)
+		{
+			System.out.println("No Auto payment button exists");
+		}		
+		
+		return new  PaymentHistoryPage(driver);
+
+		/*waitforElement(AutoPayButton);  		
+		AutoPayButton.click();
+
+		waitforElement(SetUpNewPayment);
+
+		if (validate(SetUpNewPayment)){
+			SetUpNewPayment.click();
+			System.out.println("clicked on Setup New Payment button");		 
+			return new  PaymentHistoryPage(driver);		 
+		}
+		else
+			return null;*/
 	}
 	
 	
