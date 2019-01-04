@@ -259,6 +259,12 @@ public class DashboardFormsnResourcesStepDefinition {
 				Assert.assertTrue(true);
 				System.out.println("pharmacy locator link is present");
 			} else {
+				
+				if(data.get(0).get(1).contains("UHCGroupFnR")&&formsAndResourcesPage.getLnkPharmacyLocatorLinkPDPUHCGroupFnR().isDisplayed()) {
+					Assert.assertTrue(true);
+				System.out.println("pharmacy locator link is present");
+				}
+				else
 				Assert.fail("pharmacy locator link is not present");
 			}
 			
@@ -590,6 +596,8 @@ public class DashboardFormsnResourcesStepDefinition {
 		memberType=memberAttributesRow.get(0).getCells().get(1);
 		memberAttributesMap.remove("Member Type");
 		memberAttributesMap.remove("MemberType");
+		memberAttributesMap.remove("memberType");
+				
 		Collection<String> values = memberAttributesMap.values();
 		String[] targetArray = values.toArray(new String[values.size()]);
 		System.out.println(values.size());
@@ -597,9 +605,9 @@ public class DashboardFormsnResourcesStepDefinition {
 		boolean arraycheck = formsAndResourcesPage.xpathSelectionSectionwise(targetArray, "anoc",memberType);
 		if (arraycheck == true) {
 			Assert.assertTrue(true);
-			System.out.println("all anoc and annual directory pdfs are coming correctly");
+			System.out.println("All anoc pdfs are coming correctly");
 		} else {
-			Assert.fail("anoc and annual directory pdfs not coming correctly");
+			Assert.fail("Anoc pdfs aren't coming correctly");
 		}
 	}
 

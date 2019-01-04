@@ -175,7 +175,7 @@ Scenario Outline: To verify quicklinks for a MAPD member
 
 
 # Pre-Effective Federal Cases
-@pre-effectivefnrmapdaarpindividualvalidation @regressionMember
+@pre-effectivefnrmapdaarpindividualvalidation @regressionMember @1234
 Scenario Outline: To validate the forms and resources page MAPD AARP Individual Pre-Effective
    	Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
@@ -240,7 +240,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
      
 
 
-@fnrpdpaarpindividualvalidationPre-Effective  @regressionMember 
+@fnrpdpaarpindividualvalidationPre-Effective  @regressionMember @1234
   Scenario Outline: To validate the forms and resources page PDP AARP Individual Pre-Effective
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
@@ -275,7 +275,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
 
 
 #Effective Users
-  @fnrmapdaarpindividualvalidation  @regressionMember 
+  @fnrmapdaarpindividualvalidation  @regressionMember  @1234
   Scenario Outline: To validate the forms and resources page MAPD AARP Individual
    	Given login with following details in the member redesign portal
     	| Plan Type   | <planType>   |
@@ -329,7 +329,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
       | planType | memberType         | language | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | comprehensiveformulary  | priorauth           | steptherapy  | formularyadd        | formularydel        | anoc                     | evidenceofcoverageanoc | comprehensiveformularyanoc |unitedhealthpassportprogram |alternativedruglist|providerdirectory   | vendorInformationsheet    |pharmacydirectoryinformation  |
       | MAPD     | IndAARPPharmacyFnR | ENGLISH  | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Annual Notice of Changes | Evidence Of Coverage   | Comprehensive Formulary    |UnitedHealth Passport Program |Alternative Drug List| Provider Directory  | Vendor Information Sheet          |Pharmacy Directory Information|
 
-  @fnrpdpuhcindividual  @regressionMember
+  @fnrpdpuhcindividual  @regressionMember @1234
   Scenario Outline: To validate the forms and resources page PDP UHC Individual
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
@@ -385,7 +385,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
       | planType | memberType          | language | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | comprehensiveformulary  | priorauth           | steptherapy  | formularyadd        | formularydel        | anoc                     | evidenceofcoverageanoc | comprehensiveformularyanoc |alternativedruglist|gettingstartedguide|pharmacydirectoryinformation|
       | PDP      | PdpuhcindividualFnR | ENGLISH  | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Annual Notice of Changes | Evidence Of Coverage   | Comprehensive Formulary    |Alternative Drug List|Getting Started Guide|Pharmacy Directory Information|
 
-  @fnrmapdgroupvalidation  @regressionMember
+  @fnrmapdgroupvalidation  @regressionMember @1234
   Scenario Outline: To validate the forms and resources page MAPD group
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
@@ -447,7 +447,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
       | MAPD     | GroupMAPDPharmacyFnR | ENGLISH  | Getting Started Guide | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Certificate of Coverage | Formulary/Drug List | Formulary/Drug List - Comprehensive | Additional Drug Coverage | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Certificate of Coverage | Annual Notice of Changes | Evidence of Coverage   | Comprehensive Formulary    | Additional Drug Coverage | Evidence Of Coverage |
 
   # |MAPD     | GroupPharmacyFnR  | SPANISH           |Beneficios Importantes |Resumen de Beneficios |Comprobante de Cobertura |Comprehensive Formulary-Spanish |
-  @fnrpdpaarpindividualvalidation @regressionMember
+  @fnrpdpaarpindividualvalidation @regressionMember @1234
   Scenario Outline: To validate the forms and resources page AARP Individual
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
@@ -461,7 +461,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     And validate that english is default language in the dropdown
     | Member Type | <memberType> |
     And the user validates the language dropdown and selects new value in dropdown successfully
-      | Member Type | <memberType> |
+      | Language | <language>     |
         # Then the member validate the correct Welcome Guide section is coming
     # | BENEFIT-HIGHLIGHT        | <benefithighlight>       |
     #  | COMPREHENSIVE FORMULARY  | <comprehensiveformulary> |
@@ -480,9 +480,10 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     Then validate that the renew magazine section is displayed for PDP
     And then user verifies that the correct pdfs are coming in the plan material section
       | BENEFIT-HIGHLIGHT       | <benefithighlight>       |
-      | EVIDENCE OF COVERAGE    | <evidenceofcoverage>     |
       | SUMMARY-OF-BENEFIT      | <summaryofbenefits>      |
+      | EVIDENCE OF COVERAGE    | <evidenceofcoverage>     |
       | COMPREHENSIVE FORMULARY | <comprehensiveformulary> |
+      | Alternative Drug List 	| <alternativedruglist>     |
       | PRIOR AUTHORIZATION     | <priorauth>              |
       | STEP THERAPY            | <steptherapy>            |
       | FORMULARY ADDITIONS     | <formularyadd>           |
@@ -491,11 +492,14 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
       | ANNUAL NOTICE OF CHANGES    | <anoc>                       |
       | EVIDENCE OF COVERAGEANOC    | <evidenceofcoverageanoc>     |
       | COMPREHENSIVE FORMULARYANOC | <comprehensiveformularyanoc> |
+    Then validate pdf's in annual directory section
+     |Member Type|<memberType>|
+     |Pharmacy Directory Information  |<pharmacydirectoryinformation>|  
     Examples: 
-      | planType | memberType | language | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | comprehensiveformulary  | priorauth           | steptherapy  | formularyadd        | formularydel        | anoc                     | evidenceofcoverageanoc | comprehensiveformularyanoc |
-      | PDP      | IndAARPFnR | ENGLISH  | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Annual Notice of Changes | Evidence Of Coverage   | Comprehensive Formulary    |
+      | planType | memberType | language | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | comprehensiveformulary  | priorauth           | steptherapy  | formularyadd        | formularydel        | anoc                     | evidenceofcoverageanoc | comprehensiveformularyanoc |alternativedruglist   |pharmacydirectoryinformation|
+      | PDP      | IndAARPFnR | ENGLISH  | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Annual Notice of Changes | Evidence Of Coverage   | Comprehensive Formulary    |Alternative Drug List |Pharmacy Directory Information|
 
-  @fnrpdptexasgroupvalidation  @regressionMember
+  @fnrpdptexasgroupvalidation  @regressionMember @1234
   Scenario Outline: To validate the forms and resources page Texas group
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
@@ -531,29 +535,29 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     Then validate that the renew magazine section is not displayed
     And the user verifies that the correct pdfs are coming in the anoc section
       | Member Type | <memberType> |
-      #| ANNUAL NOTICE OF CHANGES     | <anoc>                      |
+      | ANNUAL NOTICE OF CHANGES     | <anoc>                      |
       | EVIDENCE OF COVERAGEANOC     | <evidenceofcoverageanoc>     |
       | COMPREHENSIVE FORMULARYANOC  | <comprehensiveformularyanoc> |
       | ADDITIONAL DRUG COVERAGEANOC | <additionaldruganoc>         |
     And then user verifies that the correct pdfs are coming in the plan material section
-      | GETTING STARTED GUIDE             | <gettingstartedguide>    |
+     #| GETTING STARTED GUIDE             | <gettingstartedguide>    |
       | BENEFIT-HIGHLIGHT                 | <benefithighlight>       |  
-      | EVIDENCE OF COVERAGE              | <evidenceofcoverage>     |
       | SUMMARY-OF-BENEFIT                | <summaryofbenefits>     |
-      | FORMULARY DRUG LIST ABRIDGED      | <abridgedformulary>      |
+      | EVIDENCE OF COVERAGE              | <evidenceofcoverage>     |
+     #| FORMULARY DRUG LIST ABRIDGED      | <abridgedformulary>      |
       | FORMULARY DRUG LIST COMPREHENSIVE | <comprehensiveformulary> |
       | ADDITIONAL DRUG COVERAGE          | <additionaldrug>         |
-     #| PRIOR AUTHORIZATION               | <priorauth>              |
-     #| STEP THERAPY                      | <steptherapy>            |
-     #| FORMULARY ADDITIONS               | <formularyadd>           |
-     #| FORMULARY DELETIONS               | <formularydel>           |
+      | PRIOR AUTHORIZATION               | <priorauth>              |
+      | STEP THERAPY                      | <steptherapy>            |
+      | FORMULARY ADDITIONS               | <formularyadd>           |
+      | FORMULARY DELETIONS               | <formularydel>           |
  
       Examples:
 
-      | planType | memberType         | language | gettingstartedguide   | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | abridgedformulary   | comprehensiveformulary              | additionaldrug           | priorauth           | steptherapy  | formularyadd        | formularydel        | evidenceofcoverageanoc | comprehensiveformularyanoc | additionaldruganoc       |  |
-      | PDP      | TexasRxPharmacyFnRPage | ENGLISH  | Getting Started Guide | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Formulary/Drug List | Formulary/Drug List - Comprehensive | Additional Drug Coverage | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Evidence of Coverage   | Comprehensive Formulary    | Additional Drug Coverage |  |
+      | planType | memberType         | language | gettingstartedguide   | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | abridgedformulary   | comprehensiveformulary              | additionaldrug           | priorauth           | steptherapy  | formularyadd        | formularydel        | evidenceofcoverageanoc | comprehensiveformularyanoc | additionaldruganoc       |anoc        				   |
+      | PDP      | TexasRxPharmacyFnRPage | ENGLISH  | Getting Started Guide | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Formulary/Drug List | Formulary/Drug List - Comprehensive | Additional Drug Coverage | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Evidence of Coverage   | Comprehensive Formulary    | Additional Drug Coverage | Annual Notice of Changes |
 
-  @fnrpdpgroupvalidation  @regressionMember
+  @fnrpdpgroupvalidation  @regressionMember @1234
   Scenario Outline: To validate the forms and resources page UHC group
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
@@ -569,18 +573,18 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     And the user validates the language dropdown and selects new value in dropdown successfully
       | Language | <language> |
     And then user verifies that the correct pdfs are coming in the plan material section
-      | GETTING STARTED GUIDE             | <gettingstartedguide>    |
+     #| GETTING STARTED GUIDE             | <gettingstartedguide>    |
       | BENEFIT-HIGHLIGHT                 | <benefithighlight>       | 
-      | EVIDENCE OF COVERAGE              | <evidenceofcoverage>     |
-      |CERTIFICATE 0F COVERAGE            |  <certificateofcoverage>  |
       | SUMMARY-OF-BENEFIT               | <summaryofbenefits>      |
-      | FORMULARY DRUG LIST ABRIDGED      | <abridgedformulary>      |
+      |CERTIFICATE 0F COVERAGE            |  <certificateofcoverage>  |
+     #| EVIDENCE OF COVERAGE              | <evidenceofcoverage>     |
+     #| FORMULARY DRUG LIST ABRIDGED      | <abridgedformulary>      |
       | FORMULARY DRUG LIST COMPREHENSIVE | <comprehensiveformulary> |
       | ADDITIONAL DRUG COVERAGE          | <additionaldrug>         |
-     # | PRIOR AUTHORIZATION               | <priorauth>              |
-     # | STEP THERAPY                      | <steptherapy>            |
-     # | FORMULARY ADDITIONS               | <formularyadd>           |
-     # | FORMULARY DELETIONS               | <formularydel>           |
+      | PRIOR AUTHORIZATION               | <priorauth>              |
+      | STEP THERAPY                      | <steptherapy>            |
+      | FORMULARY ADDITIONS               | <formularyadd>           |
+      | FORMULARY DELETIONS               | <formularydel>           |
    # Then the member validate the correct Membership Materials section is coming
    #   | GETTING STARTED GUIDE    | <gettingstartedguide>    |
     #  | BENEFIT-HIGHLIGHT        | <benefithighlight>       |
@@ -592,12 +596,12 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     And the user verifies that the correct pdfs are coming in the anoc section
       | Member Type | <memberType> |
       | ANNUAL NOTICE OF CHANGES     | <anoc>                       |
-      | EVIDENCE OF COVERAGEANOC     | <evidenceofcoverageanoc>     |
-       |CERTIFICATE 0F COVERAGE      |  <certificateofcoverage>  |
+      |CERTIFICATE 0F COVERAGE      |  <certificateofcoverage>  |
+     #| EVIDENCE OF COVERAGEANOC     | <evidenceofcoverageanoc>     |
       | COMPREHENSIVE FORMULARYANOC  | <comprehensiveformularyanoc> |
       | ADDITIONAL DRUG COVERAGEANOC | <additionaldruganoc>         |
     Then validate that annual directory section is displayed
-    | Member Type | <memberType> |
+      | Member Type | <memberType> |
     Then validate that My Document section is displayed
     And the Drug EOB link is displayed for PDP
     And Medical EOB link is not displayed for PDP
@@ -605,12 +609,12 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     Then validate that the renew magazine section is not displayed
     And the provider search link is not displayed for PDP
     And the Pharmacy locator link is displayed
-    | Member Type | <memberType> |
+      | Member Type | <memberType> |
     
 
     Examples: 
-      | planType | memberType  | language| gettingstartedguide | benefithighlight   |   evidenceofcoverage| certificateofcoverage| summaryofbenefits                   |   abridgedformulary   | comprehensiveformulary              | additionaldrug           | anoc |    evidenceofcoverageanoc|comprehensiveformularyanoc|additionaldruganoc|
-      | PDP      | UHCGroupFnR | ENGLISH |   Getting Started Guide   |Benefit Highlights |Evidence of Coverage |Certificate of Coverage | Summary of Benefits |Formulary/Drug List | Formulary/Drug List - Comprehensive | Additional Drug Coverage  | Annual Notice of Changes |Evidence of Coverage   | Comprehensive Formulary    | Additional Drug Coverage |  |
+      | planType | memberType  | language| gettingstartedguide | benefithighlight   |   evidenceofcoverage| certificateofcoverage| summaryofbenefits                   |   abridgedformulary   | comprehensiveformulary              | additionaldrug           | anoc |    evidenceofcoverageanoc|comprehensiveformularyanoc|additionaldruganoc|priorauth           | steptherapy  | formularyadd        | formularydel        |
+      | PDP      | UHCGroupFnR | ENGLISH |   Getting Started Guide   |Benefit Highlights |Evidence of Coverage |Certificate of Coverage | Summary of Benefits |Formulary/Drug List | Formulary/Drug List - Comprehensive | Additional Drug Coverage  | Annual Notice of Changes |Evidence of Coverage   | Comprehensive Formulary    | Additional Drug Coverage |Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions |
 
  
      
@@ -649,16 +653,19 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
       | Member Type | <memberType> |
       | ANNUAL NOTICE OF CHANGES  | <anoc>                   |
       | EVIDENCE OF COVERAGE ANOC | <evidenceofcoverageanoc> |
-    
     And then user verifies that the correct pdfs are coming in the plan material section
       | BENEFIT-HIGHLIGHT              | <benefithighlight>            | 
-      | EVIDENCE OF COVERAGE           | <evidenceofcoverage>          |
       | SUMMARY-OF-BENEFIT             | <summaryofbenefits>           |
+      | EVIDENCE OF COVERAGE           | <evidenceofcoverage>          |
       | UNITED HEALTH PASSPORT PROGRAM | <unitedhealthpassportprogram> |
+    Then validate pdf's in annual directory section
+     |Member Type|<memberType>|
+     | ProviderDirectory     		  | <providerdirectory>    |
+     | Vendor Information Sheet       | <vendorInformationsheet> |
 
     Examples: 
-      | planType | memberType | language | benefithighlight   | summaryofbenefits   | evidenceofcoverage         | unitedhealthpassportprogram   | anoc                     | evidenceofcoverageanoc |
-      | MA       | AARPIndFnR | ENGLISH  | Benefit Highlights | Summary of Benefits | Evidence of Coverage | UnitedHealth Passport Program | Annual Notice of Changes | Evidence Of Coverage   |
+      | planType | memberType | language | benefithighlight   | summaryofbenefits   | evidenceofcoverage         | unitedhealthpassportprogram   | anoc                     | evidenceofcoverageanoc |providerdirectory   | vendorInformationsheet    |
+      | MA       | AARPIndFnR | ENGLISH  | Benefit Highlights | Summary of Benefits | Evidence of Coverage | UnitedHealth Passport Program | Annual Notice of Changes | Evidence Of Coverage   |Provider Directory  | Vendor Information Sheet        |
 
   @fnralpeehipgroupvalidation  @regressionMember
   Scenario Outline: To validate the forms and resources page alpeehip group 

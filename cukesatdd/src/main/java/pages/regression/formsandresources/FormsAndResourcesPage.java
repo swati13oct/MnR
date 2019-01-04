@@ -82,7 +82,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[3]/div[17]//section/div/div[2]/div[1]//a")
 	private WebElement btnEobMedicalButton;
 
-	@FindBy(xpath = " //*[@class='otherPages EOB_MA_COSMOS']//*[contains(text(),'SEARCH EOB HISTORY')]")
+	@FindBy(xpath = "//*[@class='otherPages EOB_MA_COSMOS']//*[contains(text(),'SEARCH EOB HISTORY')]")
 	private WebElement eobMedicalButtonMA;
 
 	/** Drug button in EOB section for MAPD */
@@ -272,6 +272,9 @@ public class FormsAndResourcesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[3]/div[8]//section/div/div[2]/div/div[1]/div[3]//ul/li[2]/a")
 	private WebElement lnkPharmacyLocatorLinkMAPDGroup;
 	
+	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[3]/div[8]//section/div/div[2]/div/div[1]/div[2]//ul/li/a")
+	private WebElement lnkPharmacyLocatorLinkPDPUHCGroupFnR;
+	
 	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[3]/div[9]//section/div/div[2]/div/div[1]/div[2]//ul/li/a")
 	private WebElement preEffectivePharmacyLocatorLinkPDP;
 	
@@ -339,6 +342,9 @@ public class FormsAndResourcesPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[3]/div[4]/div/div/div/div/section/div/div[2]/div/div[1]/div/div/div/div/ul/li")
 	private List<WebElement> anocxpath;
+	
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/div[3]/div[6]//section/div/div[2]/div/div[1]/div[1]//ul/li")
+	private List<WebElement> lstTexasRxanocxpath;
 	
 	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[3]/div[6]//section/div/div[2]/div/div[1]/div[1]//ul/li")
 	private List<WebElement> lstGRPanocxpath;
@@ -419,6 +425,13 @@ public class FormsAndResourcesPage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@id='forms-and-resources-quickLinksParsys']/div[1]/div[1]/div[2]/div/div[10]//ul/li")
 	private List<WebElement> jumpLinksSSUP;
+	
+	public WebElement getLnkPharmacyLocatorLinkPDPUHCGroupFnR() {
+		return lnkPharmacyLocatorLinkPDPUHCGroupFnR;
+	}
+	public List<WebElement> getLstTexasRxanocxpath() {
+		return lstTexasRxanocxpath;
+	}
 		
 	public WebElement getLnkPharmacyLocatorLinkMAPDGroup() {
 		return lnkPharmacyLocatorLinkMAPDGroup;
@@ -1271,13 +1284,14 @@ public class FormsAndResourcesPage extends UhcDriver {
 				System.out.println("Drug Eob sec is present for MA");
 				return false;
 			} else {
+				return true;
 
 			}
 		} catch (Exception e) {
 			System.out.println("Drug Eob section is not present");
 			return true;
 		}
-		return false;
+		//return false;
 	}
 
 	public boolean checkpharmacyforMA() {
@@ -1483,8 +1497,13 @@ public class FormsAndResourcesPage extends UhcDriver {
 
 			if (memberType.contains("Group"))
 				return verifypdfnamesfordocuments(a, getLstGRPanocxpath());
-			else
-				return verifypdfnamesfordocuments(a, anocxpath);
+			else {
+				if(memberType.contains("TexasRx"))
+					return  verifypdfnamesfordocuments(a, getLstTexasRxanocxpath());
+				else 
+					return verifypdfnamesfordocuments(a, anocxpath);
+			}
+			
 
 		} else if (section == "ship plan material") {
 			return verifypdfnamesfordocuments(a, shipplanmaterialxpath);
