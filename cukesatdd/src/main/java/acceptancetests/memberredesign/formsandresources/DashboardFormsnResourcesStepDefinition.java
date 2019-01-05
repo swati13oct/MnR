@@ -86,10 +86,23 @@ public class DashboardFormsnResourcesStepDefinition {
 		WebDriver wd = getLoginScenario().getWebDriver();
 
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		HSIDLoginPage loginPage = new HSIDLoginPage(wd);
-		loginPage.validateelements();
 		
-		AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
+		
+		//AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
+		AccountHomePage accountHomePage = null;
+		int i=0;
+		
+		for (i = 0; i < 3; i++) {
+			HSIDLoginPage loginPage = new HSIDLoginPage(wd);
+			loginPage.validateelements();
+			System.out.println("Login Attempt->" + (i + 1) + "\n");
+			accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
+			if (accountHomePage != null)
+				break;
+			Thread.sleep(1000);
+
+		}
+		
 		
 		if (accountHomePage != null) {
 			getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
