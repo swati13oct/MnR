@@ -155,6 +155,9 @@ public class FormsAndResourcesPage extends UhcDriver {
 	/* for active member */
 	@FindBy(xpath = "//*[@class='otherPages PlanDocumentsActiveCallouts2018']//*[contains(text(),'VIEW MEMBER')]")
 	private WebElement MemberIdCardlink;
+	
+	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]//div[2]//div[2]/div/div[2]//section/div/div[1]//div[4]//ul/li[2]/a")
+	private WebElement lnkMemberIdCardlink;
 
 	/* for terminated */
 	@FindBy(xpath = "(//a[contains(text(),'VIEW MEMBER ID CARD')])[1]")
@@ -163,8 +166,11 @@ public class FormsAndResourcesPage extends UhcDriver {
 	//@FindBy(xpath = "//*[@class='otherPages PlanDocumentsActiveCallouts2018']//*[contains(text(),'ORDER PLAN')]")
 	@FindBy(xpath = "//*[@class='otherPages PlanDocumentsActiveCallouts2019']//*[contains(text(),'ORDER PLAN')]")
 	private WebElement OrderPlanMaterialLink;
+	
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']//div[2]//div[2]/div/div[2]//section/div/div[1]//div[4]//ul/li[1]/a")
+	private WebElement lnkOrderPlanMaterialLink;
 
-	@FindBy(xpath = "//*[@id='plan_material_fnr2018']/div/div[4]//ul/li[1]/a")
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']//div[2]//div[2]/div/div[2]//section/div/div[1]//div[4]//ul/li[1]/a")
 	private WebElement pcpOrderPlanMaterialLink;
 	
 	@FindBy(xpath = "//*[@id='renew_magazine']//h2")
@@ -241,6 +247,9 @@ public class FormsAndResourcesPage extends UhcDriver {
 	// Locator')])[2]
 	@FindBy(xpath = "//*[@class='otherPages calloutBoth_AD']//*[contains(text(),'Pharmacy Locator')]")
 	private WebElement PharmacyLocatorLink;
+	
+	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[3]/div[8]//section/div/div[2]//div[1]/div[3]//ul/li[2]/a")
+	private WebElement lnkPharmacyLocatorLink;
 
 	/* PharmacyLocatorLink for MAPD */
 	@FindBy(xpath = "(//*[contains(text(),'Pharmacy Locator')])[7]")
@@ -426,6 +435,24 @@ public class FormsAndResourcesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='forms-and-resources-quickLinksParsys']/div[1]/div[1]/div[2]/div/div[10]//ul/li")
 	private List<WebElement> jumpLinksSSUP;
 	
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/div[3]/div[12]//section/div/div[2]//a")
+	private WebElement btnEobSectionall;
+	
+	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[3]/div[17]/div/div/div/section/div")
+	private WebElement eobSectionall;
+	
+	
+	public WebElement getEobSectionall() {
+		return eobSectionall;
+	}
+
+	public WebElement getLnkPharmacyLocatorLink() {
+		return lnkPharmacyLocatorLink;
+	}
+	
+	public WebElement getBtnEobSectionall() {
+		return btnEobSectionall;
+	}
 	public WebElement getLnkPharmacyLocatorLinkPDPUHCGroupFnR() {
 		return lnkPharmacyLocatorLinkPDPUHCGroupFnR;
 	}
@@ -817,9 +844,16 @@ public class FormsAndResourcesPage extends UhcDriver {
 	 */
 	public void validateOrderPlanMaterial() throws InterruptedException {
 		iPerceptionHandle(iPerceptionframeName);
-		
+		try {
 		if ((OrderPlanMaterialLink).isDisplayed()) {
 			OrderPlanMaterialLink.click();
+		}
+		}
+		catch(Exception e) {
+			if ((getPcpOrderPlanMaterialLink()).isDisplayed()) {
+				getPcpOrderPlanMaterialLink().click();
+			}
+						
 		}
 		CommonUtility.waitForPageLoad(driver, ordermatpage, 40);
 		if (driver.getCurrentUrl().contains("order-materials")) {
@@ -845,20 +879,24 @@ public class FormsAndResourcesPage extends UhcDriver {
 	/**
 	 * @toDo : temporary id card link
 	 */
-	public WebElement getTemporaryIdcardlink() {
+	public WebElement getTemporaryIdcardlink(String memberType) {
+		
+		if(memberType.toLowerCase().contains("pcp")||memberType.toLowerCase().contains("medica"))
+			return lnkMemberIdCardlink;
+		else
 		return MemberIdCardlink;
 	}
 
 	/**
 	 * @toDo : to click temporary id card link
 	 */
-	public void validateIDCard() throws InterruptedException {
+	public void validateIDCard(String memberType) throws InterruptedException {
 
 		if (MRScenario.environmentMedicare.equalsIgnoreCase("team-g")
 				|| MRScenario.environmentMedicare.equalsIgnoreCase("test-a")
 				|| MRScenario.environment.equalsIgnoreCase("team-ci1")) {
 
-			String s = getTemporaryIdcardlink().getAttribute("href");
+			String s = getTemporaryIdcardlink(memberType ).getAttribute("href");
 			if (s.contains("test-harness")) {
 				Assert.assertTrue(true);
 			} else {
@@ -868,13 +906,23 @@ public class FormsAndResourcesPage extends UhcDriver {
 		} else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage"))
 
 		{
-			String s = getTemporaryIdcardlink().getAttribute("href");
-			if (s.contains("int.uhc.com")) {
-				Assert.assertTrue(true);
-			} else {
-				Assert.fail("The member id cards link is wrong");
+			String s = getTemporaryIdcardlink(memberType).getAttribute("href");
+			if (memberType.equalsIgnoreCase("PCP")||memberType.equalsIgnoreCase("Medica")) {
+				if (s.contains("int.mymedicareaccount.uhc")) {
+					Assert.assertTrue(true);
+				} else {
+					Assert.fail("The member id cards link is wrong");
+				}
+
 			}
 
+			else {
+				if (s.contains("int.uhc.com")) {
+					Assert.assertTrue(true);
+				} else {
+					Assert.fail("The member id cards link is wrong");
+				}
+			}
 		}
 	}
 
@@ -1300,13 +1348,13 @@ public class FormsAndResourcesPage extends UhcDriver {
 				System.out.println("Pharmacy sec is present for MA");
 				return false;
 			} else {
-
+				return false;
 			}
 		} catch (Exception e) {
 			System.out.println("Pharmacy section is not present");
-			return true;
+			return false;
 		}
-		return false;
+		
 	}
 
 	public boolean checkanocforPCP() {
@@ -1345,15 +1393,14 @@ public class FormsAndResourcesPage extends UhcDriver {
 				System.out.println("Med Eob sec is present for SSUP");
 				return false;
 			} else {
-
+				return true;
 			}
 		} catch (Exception e) {
 			System.out.println("Med Eob section is not present for SSUP");
 			return true;
 		}
-		return false;
-
 	}
+	
 
 	public WebElement getfirstplantab() {
 		return FirstTab;

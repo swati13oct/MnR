@@ -99,7 +99,8 @@ public class DashboardFormsnResourcesStepDefinition {
 			accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
 			if (accountHomePage != null)
 				break;
-			Thread.sleep(1000);
+			//wd.navigate().back();
+			wd.navigate().refresh();
 
 		}
 		
@@ -125,11 +126,15 @@ public class DashboardFormsnResourcesStepDefinition {
 	 *       terminated member
 	 */
 	@And("^click on the forms and resource link and navigate to forms and resource page for terminated member$")
-	public void clickOnFormAndResourcesLink() throws InterruptedException {
+	public void clickOnFormAndResourcesLink(DataTable attributes) throws InterruptedException {
 		AccountHomePage accounthomepage = (AccountHomePage) loginScenario.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		Thread.sleep(5000);
+		List<List<String>> data = attributes.raw();
 
-		FormsAndResourcesPage formsAndResourcesPage = accounthomepage.navigatetoFormsnResources();
+		String planType=data.get(0).get(1);
+		String memberType=data.get(1).get(1);
+		
+		FormsAndResourcesPage formsAndResourcesPage = accounthomepage.navigatetoFormsnResources(memberType,planType);
 		getLoginScenario().saveBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE, formsAndResourcesPage);
 
 	}
@@ -139,11 +144,17 @@ public class DashboardFormsnResourcesStepDefinition {
 	 *       member
 	 */
 	@And("^user clicks on the view document and resources link and navigate to forms and resource page$")
-	public void clickOnFormAndResourcesLinkActive() throws InterruptedException {
+	public void clickOnFormAndResourcesLinkActive(DataTable attributes) throws InterruptedException {
 		AccountHomePage accounthomepage = (AccountHomePage) loginScenario.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		// Thread.sleep(20000);
+		
+		List<List<String>> data = attributes.raw();
 
-		FormsAndResourcesPage formsAndResourcesPage = accounthomepage.navigatetoFormsnResources();
+		String planType=data.get(0).get(1);
+		String memberType=data.get(1).get(1);
+		
+
+		FormsAndResourcesPage formsAndResourcesPage = accounthomepage.navigatetoFormsnResources(memberType,planType);
 		System.out.println("navigation worked");
 		// Thread.sleep(5000);
 		formsAndResourcesPage.waitforFNRpage();
@@ -254,8 +265,17 @@ public class DashboardFormsnResourcesStepDefinition {
 
 		formsAndResourcesPage.scroll();
 		Thread.sleep(6000);
-		Assert.assertTrue(formsAndResourcesPage.checkProviderforgroup());
-		Assert.assertTrue(formsAndResourcesPage.checkPharmacyforgroup());
+		try {
+			if(formsAndResourcesPage.getProviderSerachLinkMA().isDisplayed())
+			  Assert.assertFalse(true);
+				
+		}catch(Exception e) {
+			Assert.assertFalse(false);
+			
+		}
+		
+		
+		Assert.assertFalse(formsAndResourcesPage.checkpharmacyforMA());
 	}
 
 	@And("^the Pharmacy locator link is displayed$")
@@ -396,16 +416,21 @@ public class DashboardFormsnResourcesStepDefinition {
 	}
 
 	@And("^validate for active member Temporary Id Card and Plan Order Material links are displayed$")
-	public void validatelinksdisplayedforactivemembers() throws InterruptedException {
+	public void validatelinksdisplayedforactivemembers(DataTable attributeType) throws InterruptedException {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
 		// Thread.sleep(2000);
-
+		List<List<String>> data = attributeType.raw();
+		String memberType=data.get(0).get(1);
 		
-			Assert.assertTrue("Ordeer material link is not present", formsAndResourcesPage.getOrderPlanMaterialLink().isDisplayed()||formsAndResourcesPage.getPcpOrderPlanMaterialLink().isDisplayed());
+		if(memberType.toLowerCase().contains("pcp")||(memberType.toLowerCase().contains("medica")))
+			Assert.assertTrue("Ordeer material link is not present",formsAndResourcesPage.getPcpOrderPlanMaterialLink().isDisplayed());
+
+		else
+			Assert.assertTrue("Ordeer material link is not present", formsAndResourcesPage.getOrderPlanMaterialLink().isDisplayed());
 
 		// Thread.sleep(2000);
-		formsAndResourcesPage.getTemporaryIdcardlink().isDisplayed();
+		formsAndResourcesPage.getTemporaryIdcardlink(memberType).isDisplayed();
 
 	}
 
@@ -440,13 +465,20 @@ public class DashboardFormsnResourcesStepDefinition {
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
 		formsAndResourcesPage.scroll();
 		Thread.sleep(2000);
-		if (formsAndResourcesPage.geteobsectionall().isDisplayed()) {
+		
+		if (formsAndResourcesPage.getEobSectionall().isDisplayed()) {
 			Assert.assertTrue(true);
 			System.out.println("eob present");
 		} else {
-			Assert.fail("eob not present");
+			if (formsAndResourcesPage.getBtnEobSectionall().isDisplayed()) {
+				Assert.assertTrue(true);
+				System.out.println("eob present");
+			} else {
+				Assert.fail("eob not present");
+			}
 		}
 	}
+
 
 	/**
 	 * @throws InterruptedException
@@ -576,7 +608,7 @@ public class DashboardFormsnResourcesStepDefinition {
 	public void pharmacyprovider() {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
-		if (formsAndResourcesPage.getpharmacysearchlink().isDisplayed()) {
+		if (formsAndResourcesPage.getLnkPharmacyLocatorLink().isDisplayed()) {
 			Assert.assertTrue(true);
 			System.out.println("pharmacy locator is present");
 
@@ -672,13 +704,15 @@ public class DashboardFormsnResourcesStepDefinition {
 	 */
 
 	@And("^validate that the view temporary id card link is displayed$")
-	public void validate_that_the_view_temporary_id_card_link_is_displayed() throws Throwable {
+	public void validate_that_the_view_temporary_id_card_link_is_displayed(DataTable attributeType) throws Throwable {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
 		Thread.sleep(10000);
 
-		formsAndResourcesPage.getTemporaryIdcardlink().isDisplayed();
-		formsAndResourcesPage.validateIDCard();
+		List<List<String>> data = attributeType.raw();
+		String memberType=data.get(0).get(1);
+		formsAndResourcesPage.getTemporaryIdcardlink(memberType).isDisplayed();
+		formsAndResourcesPage.validateIDCard(memberType);
 
 	}
 
@@ -919,7 +953,7 @@ public class DashboardFormsnResourcesStepDefinition {
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
 
 		formsAndResourcesPage.scroll();
-		Assert.assertTrue(formsAndResourcesPage.checkpharmacyforMA());
+		Assert.assertFalse(formsAndResourcesPage.checkpharmacyforMA());
 
 	}
 
