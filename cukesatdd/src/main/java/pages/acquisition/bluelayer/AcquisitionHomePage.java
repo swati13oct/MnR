@@ -23,6 +23,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.PageTitleConstants;
+import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -202,6 +203,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "(//*[@class='zip-button'])[2]")
 	private WebElement GoButton;
+	
+	@FindBy(xpath = "//div[@class='overview-main']/h2")
+	private WebElement vppTop;
 
 	private PageData homePageDisclaimer;
 	public JSONObject homePageDisclaimerJson;
@@ -276,20 +280,28 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@Override
 	public void openAndValidate() {
 		if (MRScenario.environment.equals("offline")) {
-			start(UMS_ACQISITION_OFFLINE_PAGE_URL);
+			startNew(UMS_ACQISITION_OFFLINE_PAGE_URL);
 		} else {
-			start(UMS_ACQISITION_PAGE_URL);
+			startNew(UMS_ACQISITION_PAGE_URL);
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
+		checkModelPopup(driver);
 		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
 	}
 
-	public VPPPlanSummaryPage searchPlans(String zipcode, String countyName) {
-		CommonUtility.waitForPageLoad(driver, zipCodeField, 20);
+	public  VPPPlanSummaryPage searchPlans(String zipcode, String countyName) {
+		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 20);
 		sendkeys(zipCodeField, zipcode);
 		viewPlansButton.click();
-		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-		try {
+		CommonUtility.waitForPageLoad(driver, countyModal, 45);
+		driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
+		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			return new VPPPlanSummaryPage(driver);
+
+		}
+		return null;
+		/*try {
 
 			if (countyModal.isDisplayed()) {
 				driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
@@ -299,19 +311,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		} catch (Exception e) {
 			System.out.println("county box not found");
 		}
-		// try {
-		// if (countyModal.isDisplayed()) {
-		// for (WebElement county : countyRows) {
-		// if (county.getText().equalsIgnoreCase(countyName)) {
-		// county.click();
-		// break;
-		// }
-		//
-		// }
-		// }
-		// } catch (Exception e) {
-		// System.out.println("county box not found");
-		// }
+		
 		try {
 			if (countyModal.isDisplayed()) {
 				for (WebElement county : countyRows) {
@@ -329,7 +329,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
 		}
-		return null;
+		return null;*/
 	}
 
 	public VPPPlanSummaryPage searchPlans(String zipcode) {
@@ -1292,5 +1292,26 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		return null;
 	}
+	
+	public static void checkModelPopup(WebDriver driver) {
+		int counter = 0;
+		do {
 
+			System.out.println("current value of conter: " + counter);
+			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
+
+			if (IPerceptionsFrame.isEmpty()) {
+				try {
+					Thread.sleep(5000);
+				} catch (InterruptedException e) {
+					System.out.println(e.getMessage());
+				}
+			} else {
+				driver.switchTo().frame(IPerceptionsFrame.get(0));
+				driver.findElement(By.className("btn-no")).click();
+				driver.switchTo().defaultContent();
+			}
+			counter++;
+		} while (counter < 2);
+	}
 }

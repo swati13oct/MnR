@@ -7,14 +7,18 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
     When the user performs plan search using following information in UMS site
       | Zip Code    | <zipcode> |
       | County Name | <county>  |
+    Then user validates plan count for all plan types on plan summary page in the UMS site
     When user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
     Then the user view plan details of the above selected plan in UMS site and validates
-      | Plan Name | <planName> |
+    | Plan Name | <planName> |
+    Then User clicks on Back to Plans link and navigate back to plan summary in UMS site
+    Then User click on add to compare checkbox and click on view details link on UMS
+    Then I uncheck and go back to the vpp page to validate  
 
     Examples: 
       | zipcode | county       | plantype | planName                                          |
-      |   90210 | Adams County | MAPD     | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |
+      | 80002   | Adams County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 
   @defect1964
   Scenario Outline: To verify correct message shows on view details page after checking compare plans box
@@ -23,6 +27,7 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
       | Zip Code | <zipcode> |
     And I click on add to compare checkbox and click on view details link
     Then I uncheck and recheck the compare box and verify the message and link exists
+    Then I uncheck and go back to the vpp page to validate
 
     Examples: 
       | zipcode |

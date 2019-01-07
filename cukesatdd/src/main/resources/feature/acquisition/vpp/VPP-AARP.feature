@@ -13,10 +13,12 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
     And the user validates the available plans for selected plan types in the AARP site
     Then the user validates plan summary for the below plan in the AARP site
       | Plan Name | <planName> |
+    Then the user view plan details of the above selected plan in AARP site and validates
+      | Plan Name | <planName> |
 
     Examples: 
-      | zipcode | county             | plantype | planName                                          |
-      |   90210 | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
+      | zipcode | county       | plantype |               planName                            |
+      | 80002   | Adams County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 
   @vppPlanDetailsAarp
   Scenario Outline: Verify plan details in AARP site
