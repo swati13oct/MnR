@@ -38,7 +38,7 @@ q2_june_combo0017/Password@1,MAPD,UHCAARPCOMBO,NON LIS
 q1_aarp_apr125/Password@1,MAPD,AARPIndividual,NON LIS
 q1_aarp_feb405/Password@1,PDP,Individual,LIS 4
 q1_ship_feb031,SHIP,MedSupRider,
-q4_dec_combo006/Password@1,MAPD,MAPDwithMedSupp,
+q4_dec_comboo006/Password@1,MAPD,MAPDwithMedSupp,
 q2_jun_ship0013/Password@1,HIP,SHIP,
 q2_jun_uhc0032/Password@1,MAPD,withRider,
 q1_grp_feb031/Password@1,MAPD,Group,wotCMSValue
@@ -200,6 +200,7 @@ q2_jun_uhc0011/Password@1,MAPD,Individual,NON LIS,Rider
 q2_jun_uhc0001/Password@1,MAPD,Individual,NON LIS,NoRider
 q2_jun_ship0003486/Password@1,SHIP,Individual_header,
 q4_dec_ssp01/Password@1,SSUP,UHCGroup_header
+q2_jun_uhc0018/Password@1,MAPD,AARPIndividual_order
 q2_jun_ship0003486/Password@1,SHIP,AARPIndividual_order,
 q2_jun_uhc0050/Password@1,MA_UHC_GOGreen_Profilepref,
 q2_jun_aarp0035/Password@1,MA_AARP_GOGreen_Profilepref,
