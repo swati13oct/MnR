@@ -1746,8 +1746,16 @@ try {
 	public void user_validates_the_Optum_Rx_link_in_Benefits_and_Coverage_page() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 			.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		Assert.assertTrue(benefitsCoveragePage.optumRxLinkdisplayed());
+		Assert.assertTrue(benefitsCoveragePage.optumRxLinkdisplayed());		
 	}
+	
+	@And("^the user validates the UpdatedText$")
+	public void user_validates_the_updated_Text() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+			.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		Assert.assertTrue(benefitsCoveragePage.ValidatePDFTextSection());
+	}
+	
 	@Then("^user verifies presence of jump links$")
 	public void user_verifies_presence_of_jump_links(DataTable rows) throws Throwable {
 		List<List<String>> data = rows.raw();

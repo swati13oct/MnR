@@ -293,4 +293,23 @@ Feature: To test the payment flow on Member site
     Examples: 
       | planType | memberType            | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
       | MAPD     | IndividualAARPRPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
+      
+@paymentsAutoPayCC @Feb_release_2019 @Spartans
+  Scenario Outline: Verify AutoPay CC Payment submission for Different Types of Member
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When the user navigates to Recurring payment history
+    Then User Scrolls down to validate Payment History Section
+    And the user clicks on New flow Edit CC Automatic Payment button
+    And the user selects the Setup AutoCreditCard option on New page
+    And the user makes Auto payment in CC flow and navigate further   
+       | Name             | <Name>        |
+       | CreditCardNumber | <CreditCardNumber> |
+    #And the user confirms the New flow OneTimePayment in UHC site
+    
+    Examples: 
+     | planType | memberType              | Name |CreditCardNumber |
+     | PDP      | IndividualAARPCPayments | Test |4111111111111111 |
+        
         
