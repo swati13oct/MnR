@@ -3846,7 +3846,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	
 	
-	public void ValidatePDFTextSection() {
+	public boolean ValidatePDFTextSection() {
 		
 		try{
 			Thread.sleep(5000);
@@ -3867,8 +3867,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
         if(PDFUpdatedText.getText().contains("Updated"))
         {		
 			Assert.assertTrue("The UpdatedText is present", true);
+			return true;
 		} else {
 			Assert.assertFalse("The UpdatedText is not present", true);
+			return false;
 		}
 		
 	}

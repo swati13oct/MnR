@@ -277,6 +277,10 @@ public class MRConstants {
   
   public static final String MEMBER_AUTH = "https://"+MRScenario.environment+"-generic."+ getDomain()+"/content/medicare/memberauth.html#/memberAuthLogin";
 
+  public static final String MEMBER_AUTH_STAGE = "https://"+MRScenario.environment+"-generic.uhc.com/content/medicare/memberauth.html#/memberAuthLogin";
+
+  public static final String MEMBER_AUTH_TEAM = "https://"+MRScenario.environment+"-medicare.ose-elr-core.optum.com/content/medicare/memberauth.html#/memberAuthLogin";
+  
   public static final String PORTFOLIO_PAGE_URL = "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com";
 
   public static String CAMPAIGN_PAGE_URL1 = "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/available-plans.html?msg=nonzero&lang=sp&zipcode=90003&WT.mc_id=832467";
