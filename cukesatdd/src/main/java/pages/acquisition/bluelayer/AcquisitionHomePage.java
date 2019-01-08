@@ -1001,17 +1001,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public VPPPlanSummaryPage searchPlansWithOutCounty(String zipcode) {
+		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
 		sendkeys(zipCodeField, zipcode);
+
 		viewPlansButton.click();
-		/*
-		 * try { if (countyModal.isDisplayed()) { for (WebElement county :
-		 * countyRows) { if (county.getText().equalsIgnoreCase(countyName)) {
-		 * county.click(); break; }
-		 * 
-		 * } } } catch (Exception e) { System.out.println("county box not found"
-		 * ); }
-		 */
-		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_PLAN_TYPES_TITLE)) {
+		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
 		}
 		return null;
