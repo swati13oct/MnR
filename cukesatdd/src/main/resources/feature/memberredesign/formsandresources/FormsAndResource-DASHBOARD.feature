@@ -940,11 +940,11 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     | Member Type | <memberType> |
     Then validate that the forms & resources section is displayed
     Then verifies that Electronic Funds pdf for ship is displayed
-    Then the user verifies the pdfs for ship if particular pdf is not present
-		| Member Type | <memberType> |
-		| BENEFIT HIGHLIGHTS  |<benefitstable>    |
-		| PLAN OVERVIEW | <planoverview>  |
-		| OUTLINE OF COVERAGE    |<outlineofcoverage>|
+   # Then the user verifies the pdfs for ship if particular pdf is not present
+	#	| Member Type | <memberType> |
+	#	| BENEFIT HIGHLIGHTS  |<benefitstable>    |
+	#	| PLAN OVERVIEW | <planoverview>  |
+	#	| OUTLINE OF COVERAGE    |<outlineofcoverage>|
 
     Examples: 
       | planType | memberType     | benefitstable  |planoverview|outlineofcoverage |
@@ -959,7 +959,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <member> |
-    And User Clicks on the Pop up displayed
+    And user Clicks on the Pop up displayed and checks payment link
     #And user clicks on the view document and resources link and navigate to forms and resource page from member auth page
     #And validates that PEEHIP logo is not displayed
     #And validate for active member Temporary Id Card and Plan Order Material links are displayed
