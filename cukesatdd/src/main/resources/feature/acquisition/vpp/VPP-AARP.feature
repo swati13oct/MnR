@@ -137,3 +137,40 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
       |   65058 | Miller County       | SNP      | UnitedHealthcare Dual Complete (HMO SNP)                 | Eyewear     | Eyewear has a plan benefit limit up to |
       |   78006 | Kendall County      | SNP      | UnitedHealthcare Dual Complete Choice (Regional PPO SNP) | Eyewear     | No Coverage                            |
       |   03033 | Hillsborough County | MA       | UnitedHealthcare MedicareComplete Assure (PPO)           | Eyewear     | No Coverage                            |
+      
+
+ @F250062 @HomeMultiCOunty @fastandfurious @Feb_release_2019
+   Scenario Outline: Validate Cancel button for Multi Cunty Pop-up on Home Page
+    Given the user is on AARP medicare acquisition site landing page
+        When the user performs plan search using following MultiCounty Zip information in the AARP site
+      | Zip Code    | <MultiCOuntyzipcode> |
+ 			Then the user validates the Cancel button for Multi COunty Pop-up lands on enter Zip code Page
+ 			
+ 			Examples:
+ 			| MultiCOuntyzipcode |
+ 			| 78006 |
+ 			
+ 			
+ @F250062 @SubNavMultiCOunty @fastandfurious @Feb_release_2019
+   Scenario Outline: Validate Cancel button for Multi Cunty Pop-up on Sub-nav Plan Search
+    Given the user is on AARP medicare acquisition site landing page
+        When the user performs plan search using following MultiCounty Zip in Header Sun Nav in the AARP site
+      | Zip Code    | <MultiCOuntyzipcode> |
+ 			Then the user validates the Cancel button for Multi COunty Pop-up lands on enter Zip code Page
+ 			
+ 			Examples:
+ 			| MultiCOuntyzipcode |
+ 			| 78006 |
+
+ @F250062 @VPPChangeLocationMultiCOunty @fastandfurious @Feb_release_2019
+   Scenario Outline: Validate Cancel button for Multi Cunty Pop-up on VPP for Change Location
+     Given the user is on AARP medicare acquisition site landing page
+     When the user performs plan search using following information in the AARP site
+      | Zip Code    | <Zipcode> |
+     When the user performs Change Location on Plan Summary Page using following MultiCounty Zip information in the AARP site
+      | Zip Code    | <MultiCOuntyzipcode> |
+ 			Then the user validates the Cancel button for Multi COunty Pop-up lands on enter Zip code Page
+ 			
+ 			Examples:
+ 			| Zipcode | MultiCOuntyzipcode |
+ 			| 90210 | 80002 |

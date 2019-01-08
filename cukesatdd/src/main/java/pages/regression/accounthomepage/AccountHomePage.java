@@ -65,7 +65,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "(//*[@class='ng-scope']//a[text()='Premium Payments'])[1]")
 	private WebElement paymentsLink;
 
-	@FindBy(xpath = "(a[contains(text(),'Payments Page')])")
+	@FindBy(xpath = "(//a[contains(text(),'Payments Page')])")
 	private WebElement TestHarnesspaymentsLink;
 
 	@FindBy(xpath = "//*[@id='premiumpayment_3']")
@@ -1532,7 +1532,7 @@ public class AccountHomePage extends UhcDriver {
 			// OrderMaterial_Dashboard.click();
 		} else {
 			String Page_URL = "https://" + MRScenario.environment
-					+ "-medicare.uhc.com//member/order-plan-materials.html";
+					+ "-medicare."+MRScenario.domain+"//member/order-plan-materials.html";
 			// String Page_URL = driver.getCurrentUrl().split(".com")[0];
 			driver.navigate().to(Page_URL);
 			System.out.println("Navigated to Order materials Page URL : " + Page_URL);

@@ -183,6 +183,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
 	private WebElement OurPlans;
 
+	@FindBy(id = "nav-zipcode")
+	private WebElement OurPlans_zipfield;
+
+	@FindBy(xpath = "//*[@id = 'nav-zipcode']/following-sibling::button[@class = 'zip-button']")
+	public WebElement OurPlans_viewPlansButton;
+	
 	@FindBy(xpath = "(//*[@class='zip-button'])[2]")
 	private WebElement GoButton;
 
@@ -282,6 +288,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		return null;
 	}
+
 
 	public VPPPlanSummaryPage searchPlansForLearnFindPlans(String zipcode, String countyName) {
 		sendkeys(learnzipCodeField, zipcode);
@@ -973,6 +980,32 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		if (driver.getCurrentUrl().contains("welcome")) {
 			System.out.println("OLE Welcome Page is Displayed");
 			return new WelcomePage(driver);
+		}
+		return null;
+	}
+	public VPPPlanSummaryPage ValidateMultiCOuntyPopUp(String zipcode) {
+		
+		CommonUtility.waitForPageLoad(driver, zipCodeField, 30);
+		sendkeys(zipCodeField, zipcode);
+
+		viewPlansButton.click();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		if (countyModal.isDisplayed()) {
+			return new VPPPlanSummaryPage(driver);
+		}
+		return null;
+	}
+
+	public VPPPlanSummaryPage SubNav_ValidateMultiCOuntyPopUp(String zipcode) {
+		hoverourplanslink();
+		validate(OurPlans_zipfield);
+		OurPlans_zipfield.click();
+		OurPlans_zipfield.sendKeys(zipcode);
+		validate(OurPlans_viewPlansButton);
+		OurPlans_viewPlansButton.click();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		if (countyModal.isDisplayed()) {
+			return new VPPPlanSummaryPage(driver);
 		}
 		return null;
 	}

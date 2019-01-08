@@ -217,6 +217,21 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(id = "enrollment-next-button")
 	private WebElement NextBtn;
 	
+	@FindBy(id = "change-location")
+	private WebElement ChangeLocationLink;
+	
+	@FindBy(id = "zipcode")
+	private WebElement ZipCodeTxtBx;
+	
+	@FindBy(id = "submit")
+	private WebElement FIndPlansButton;
+	
+	@FindBy(xpath = "//div[@class='modal-title']")
+	private WebElement countyModal;
+
+	@FindBy(id = "multiCountyCancelBtn")
+	private WebElement MultiCOunty_CancelBtn;
+
 	public JSONObject vppPlanSummaryJson;
 
 	public VPPPlanSummaryPage(WebDriver driver) {
@@ -1172,6 +1187,40 @@ CommonUtility.waitForPageLoad(driver, MAmoreDetailsLink, 30);
 		if(currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPage(driver);
 		return null;
+	}
+
+	public VPPPlanSummaryPage VPP_ChangeLocationValidateMultiCOuntyPopUp(String zipcode) {
+		ChangeLocationLink.click();
+		validate(ZipCodeTxtBx);
+		ZipCodeTxtBx.click();
+		ZipCodeTxtBx.clear();
+		ZipCodeTxtBx.sendKeys(zipcode);
+		validate(FIndPlansButton);
+		FIndPlansButton.click();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		if (countyModal.isDisplayed()) {
+			return new VPPPlanSummaryPage(driver);
+		}
+		return null;
+	}
+
+	public boolean validateMultiCounty_CancelButton() {
+		validate(countyModal);
+		boolean ValidationFlag = true;
+		if(validate(MultiCOunty_CancelBtn)){
+			MultiCOunty_CancelBtn.click();
+			if(currentUrl().contains("health-plans.html#/zipcode") && ZipCodeTxtBx.getText().isEmpty()){
+				ValidationFlag = (!ValidationFlag)?false:true;
+			}else{
+				System.out.println("Zip code entry page is not displayed with Zip code field blank");
+				ValidationFlag = false;
+			}
+		}
+		else{
+			System.out.print("Cancel Button is not dispalyed in the Multy COunty Pop-up");
+			ValidationFlag = false;
+		}
+		return ValidationFlag;
 	}
 }
 
