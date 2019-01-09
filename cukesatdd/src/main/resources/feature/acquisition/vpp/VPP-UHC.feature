@@ -152,7 +152,7 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
      Given the user is on the uhcmedicaresolutions site landing page
         When the user performs plan search using following MultiCounty Zip in Header Sub Nav in the UHC site
       | Zip Code    | <MultiCOuntyzipcode> |
- 			Then the user validates the Cancel button for Multi COunty Pop-up lands on enter Zip code Page
+ 			Then the user validates the Cancel button for Multi COunty Pop-up lands on enter Zip code Page in UHC
  			
  			Examples:
  			| MultiCOuntyzipcode |
@@ -165,7 +165,7 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
       | Zip Code    | <Zipcode> |
      When the user performs Change Location on Plan Summary Page using following MultiCounty Zip information in the UHC site
       | Zip Code    | <MultiCOuntyzipcode> |
- 			Then the user validates the Cancel button for Multi COunty Pop-up lands on enter Zip code Page
+ 			Then the user validates the Cancel button for Multi COunty Pop-up lands on enter Zip code Page in UHC
  			
  			Examples:
  			| Zipcode | MultiCOuntyzipcode |
