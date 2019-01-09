@@ -27,6 +27,8 @@ import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.uhcretiree.Rallytool_Page;
 import pages.acquisition.bluelayer.ComparePlansPageBlayer;
 import pages.acquisition.ulayer.PageTitleConstants;
+
+//import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import pages.acquisition.vppforaep.AepVppPlanSummaryPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
@@ -185,7 +187,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//*[contains(text(), 'Special Needs Plans')]/following-sibling::*[@class = 'trigger-closed']")
 	private WebElement snpplans;			
 
+	@FindBy(id = "change-location")
+	private WebElement ChangeLocationLink;
 	
+	@FindBy(id = "submit")
+	private WebElement FIndPlansButton;
 
 	@FindBy(xpath="//div[@class='medsupplans_planbutton']/div[2]/div[1]/a")
 	private WebElement medsupplans;			
@@ -243,6 +249,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(id = "enrollment-next-button")
 	private WebElement NextBtn;
+	
+	@FindBy(xpath = "//div[@class='modal-title']")
+	private WebElement countyModal;
+	
+	@FindBy(id = "multiCountyCancelBtn")
+	private WebElement MultiCOunty_CancelBtn;
+	
+	@FindBy(id = "zipcode")
+	private WebElement ZipCodeTxtBx;
 
 	private PageData vppPlanSummary;
 
@@ -252,7 +267,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		super(driver);
 		PageFactory.initElements(driver, this);
 
-		//openAndValidate();
+//		openAndValidate();
 	}
 
 
@@ -595,10 +610,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		validate(showMaPlans);
-		validate(showMsPlans);
-		validate(showPdpPlans);
-		validate(showSnpPlans);
+		//validate(showMaPlans);
+//		validate(showMsPlans);
+//		validate(showPdpPlans);
+	//	validate(showSnpPlans);
 		vppPlanSummaryJson = formJsonObject(vppPlanSummary);
 	}
 
@@ -1605,6 +1620,40 @@ public void checkAllMAPlans(){
 	}
 	}
 	
+}
+
+public VPPPlanSummaryPage VPP_ChangeLocationValidateMultiCOuntyPopUp(String zipcode) {
+	ChangeLocationLink.click();
+	validate(ZipCodeTxtBx);
+	ZipCodeTxtBx.click();
+	ZipCodeTxtBx.clear();
+	ZipCodeTxtBx.sendKeys(zipcode);
+	validate(FIndPlansButton);
+	FIndPlansButton.click();
+	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	if (countyModal.isDisplayed()) {
+		return new VPPPlanSummaryPage(driver);
+	}
+	return null;
+}
+
+public boolean validateMultiCounty_CancelButton() {
+	validate(countyModal);
+	boolean ValidationFlag = true;
+	if(validate(MultiCOunty_CancelBtn)){
+		MultiCOunty_CancelBtn.click();
+		if(currentUrl().contains("health-plans.html#/zipcode") && ZipCodeTxtBx.getText().isEmpty()){
+			ValidationFlag = (!ValidationFlag)?false:true;
+		}else{
+			System.out.println("Zip code entry page is not displayed with Zip code field blank");
+			ValidationFlag = false;
+		}
+	}
+	else{
+		System.out.print("Cancel Button is not dispalyed in the Multy COunty Pop-up");
+		ValidationFlag = false;
+	}
+	return ValidationFlag;
 }
 
 }

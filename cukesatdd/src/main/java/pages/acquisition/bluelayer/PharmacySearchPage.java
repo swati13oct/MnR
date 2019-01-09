@@ -159,10 +159,6 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='pharmacy-locator']//div[contains(@class,'col-md-12')]/*[contains(text(),'farmacia')]")
 	WebElement pharmacyBodyContentSpanish;
 	
-	@FindBy(xpath = "//div[@class='pharmacy-locator']//div[contains(@class,'col-md-12')]/*[contains(text(),'使用網上名冊搜尋藥房和藥房位置。')]")
-	WebElement pharmacyBodyContentChinese;
-	@FindBy(id = "createpdf_id")
-	WebElement resultAsPDF;
 	
 	@FindBy(xpath = "//*[@id='15ec5a30-0a71-4aaa-b7df-074986ec97a9_toolTip']/parent::p")
 	WebElement standardNetworkPharmacy;
@@ -187,6 +183,25 @@ public class PharmacySearchPage extends UhcDriver {
 
     @FindBy(id = "plan-year")
     private WebElement drpYear;
+    
+    @FindBy(id = "zipcodeTxt")
+    private WebElement txtZipCode;
+    
+    @FindBy(id = "zipcode-button")
+	private WebElement searchbtn;;
+	
+	@FindBy(xpath = "//div[@class='modal-title']")
+	private WebElement countyModal;
+	
+	@FindBy(id = "multiCountyCancelBtn")
+	private WebElement MultiCOunty_CancelBtn;
+	
+
+	
+	@FindBy(xpath = "//div[@class='pharmacy-locator']//div[contains(@class,'col-md-12')]/*[contains(text(),'使用網上�  冊� �尋藥房和藥房� 置。')]")
+	WebElement pharmacyBodyContentChinese;
+		@FindBy(id = "createpdf_id")
+		WebElement resultAsPDF;
 	
 	
 	public PharmacySearchPage(WebDriver driver) {
@@ -655,5 +670,35 @@ public boolean selectPharmacyandServices(String pharmacytype) {
 			}
 			return true;
 		}
-
+		 public void enterZipCode(String zipCode) {
+//				txtZipCode.clear();
+				validate(txtZipCode);
+		    	txtZipCode.sendKeys(zipCode);
+				System.out.println("Zip code entered for Pharmacy Search : "+txtZipCode.getText());
+				searchbtn.click();
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			    }
+		 public boolean validate_MultiCounty_CancelBtn() {
+				validate(countyModal);
+				boolean ValidationFlag = true;
+				if(validate(MultiCOunty_CancelBtn)){
+					MultiCOunty_CancelBtn.click();
+					if(currentUrl().contains("Pharmacy-Search") && txtZipCode.getText().isEmpty()){
+						ValidationFlag = (!ValidationFlag)?false:true;
+					}else{
+						System.out.println("Zip code entry page is not displayed with Zip code field blank");
+						ValidationFlag = false;
+					}
+				}
+				else{
+					System.out.print("Cancel Button is not dispalyed in the Multy COunty Pop-up");
+					ValidationFlag = false;
+				}
+				return ValidationFlag;
+			}
 }

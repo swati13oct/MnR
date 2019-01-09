@@ -23,6 +23,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.PageTitleConstants;
+import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -114,6 +115,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(id = "ghn_lnk_2")
 	private WebElement ourPlans;
+	
+	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
+	private WebElement OurPlansLink1;
 
 	@FindBy(id = "ghn_lnk_1")
 	private WebElement Home;
@@ -123,6 +127,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(id = "findazip_box")
 	private WebElement zipCodeSearchPopup;
+	
+	@FindBy(id = "nav-zipcode")
+	private WebElement OurPlans_zipfield;
+	
+	@FindBy(xpath = "//*[@id = 'nav-zipcode']/following-sibling::button[@class = 'zip-button']")
+	public WebElement OurPlans_viewPlansButton;
 
 	@FindBy(xpath = "//div[@id='findazip_box']/div/div/div/h4")
 	private WebElement zipCodeSearchPopupHeading;
@@ -283,8 +293,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
 	}
-
-	public VPPPlanSummaryPage searchPlans(String zipcode, String countyName) {
+      
+	  public pages.acquisition.bluelayer.VPPPlanSummaryPage searchPlans(String zipcode, String countyName){
 		CommonUtility.waitForPageLoad(driver, zipCodeField, 20);
 		sendkeys(zipCodeField, zipcode);
 		viewPlansButton.click();
@@ -327,12 +337,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		CommonUtility.waitForPageLoad(driver, changeLocationLink, 30);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
-			return new VPPPlanSummaryPage(driver);
+			return new pages.acquisition.bluelayer.VPPPlanSummaryPage(driver);
 		}
 		return null;
 	}
 
-	public VPPPlanSummaryPage searchPlans(String zipcode) {
+	public pages.acquisition.bluelayer.VPPPlanSummaryPage searchPlans(String zipcode) {
 		sendkeys(zipCodeField, zipcode);
 		viewPlansButton.click();
 		try {
@@ -743,7 +753,22 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		return false;
 	}
+	
+	public void hoverourplanslink() {
+		validate(OurPlansLink1);
+		// Hover over text
+		Actions action = new Actions(driver);
+		PageFactory.initElements(driver, this);
+		action.moveToElement(OurPlansLink1).build().perform();
 
+		// to click
+		// action.click().build().perform();
+
+		validate(OurPlansLink1);
+
+		// TODO Auto-generated method stub
+
+	}
 	/*
 	 * public AccountHomePage signInValid() { validate(signInButton);
 	 * signInButton.click(); // validate(signInButton);
@@ -952,7 +977,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return null;
 	}
 
-	public VPPPlanSummaryPage navigateToVpp(String zipcode) {
+	public pages.acquisition.bluelayer.VPPPlanSummaryPage navigateToVpp(String zipcode) {
 		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
@@ -963,7 +988,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		viewPlansButton.click();
 
 		if (driver.getCurrentUrl().contains("plan-summary")) {
-			return new VPPPlanSummaryPage(driver);
+			return new pages.acquisition.bluelayer.VPPPlanSummaryPage(driver);
 		}
 		return null;
 	}
@@ -1141,7 +1166,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return null;
 	}
 
-	public VPPPlanSummaryPage GotoVPP(String zipcode) {
+	public pages.acquisition.bluelayer.VPPPlanSummaryPage GotoVPP(String zipcode) {
 		try {
 			Thread.sleep(8000);
 			System.out.println("Sleep done");
@@ -1173,7 +1198,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		StandaloneVPP.click();
 
 		if (driver.getCurrentUrl().contains("plan-summary")) {
-			return new VPPPlanSummaryPage(driver);
+			return new pages.acquisition.bluelayer.VPPPlanSummaryPage(driver);
 		}
 		return null;
 	}
@@ -1292,5 +1317,30 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		return null;
 	}
+public pages.acquisition.bluelayer.VPPPlanSummaryPage ValidateMultiCOuntyPopUp(String zipcode) {
+		
+		CommonUtility.waitForPageLoad(driver, zipCodeField, 30);
+		sendkeys(zipCodeField, zipcode);
 
+		viewPlansButton.click();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		if (countyModal.isDisplayed()) {
+			return new pages.acquisition.bluelayer.VPPPlanSummaryPage(driver);
+		}
+		return null;
+	}
+
+	public pages.acquisition.bluelayer.VPPPlanSummaryPage SubNav_ValidateMultiCOuntyPopUp(String zipcode) {
+		hoverourplanslink();
+		validate(OurPlans_zipfield);
+		OurPlans_zipfield.click();
+		OurPlans_zipfield.sendKeys(zipcode);
+		validate(OurPlans_viewPlansButton);
+		OurPlans_viewPlansButton.click();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		if (countyModal.isDisplayed()) {
+			return new pages.acquisition.bluelayer.VPPPlanSummaryPage(driver);
+		}
+		return null;
+	}
 }
