@@ -14,6 +14,7 @@ import java.util.Set;
 import junit.framework.Assert;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.regression.login.HSIDLoginPage;
@@ -85,10 +86,25 @@ public class DashboardFormsnResourcesStepDefinition {
 		WebDriver wd = getLoginScenario().getWebDriver();
 
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		HSIDLoginPage loginPage = new HSIDLoginPage(wd);
-		/* loginPage.validateelements(); */
-		AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
+		
+		
+		//AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
+		AccountHomePage accountHomePage = null;
+		int i=0;
+		
+		for (i = 0; i < 3; i++) {
+			HSIDLoginPage loginPage = new HSIDLoginPage(wd);
+			loginPage.validateelements();
+			System.out.println("Login Attempt->" + (i + 1) + "\n");
+			accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
+			if (accountHomePage != null)
+				break;
+			//wd.navigate().back();
+			wd.navigate().refresh();
 
+		}
+		
+		
 		if (accountHomePage != null) {
 			getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
 			Assert.assertTrue(true);
@@ -110,11 +126,15 @@ public class DashboardFormsnResourcesStepDefinition {
 	 *       terminated member
 	 */
 	@And("^click on the forms and resource link and navigate to forms and resource page for terminated member$")
-	public void clickOnFormAndResourcesLink() throws InterruptedException {
+	public void clickOnFormAndResourcesLink(DataTable attributes) throws InterruptedException {
 		AccountHomePage accounthomepage = (AccountHomePage) loginScenario.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		Thread.sleep(5000);
+		List<List<String>> data = attributes.raw();
 
-		FormsAndResourcesPage formsAndResourcesPage = accounthomepage.navigatetoFormsnResources();
+		String planType=data.get(0).get(1);
+		String memberType=data.get(1).get(1);
+		
+		FormsAndResourcesPage formsAndResourcesPage = accounthomepage.navigatetoFormsnResources(memberType,planType);
 		getLoginScenario().saveBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE, formsAndResourcesPage);
 
 	}
@@ -124,11 +144,17 @@ public class DashboardFormsnResourcesStepDefinition {
 	 *       member
 	 */
 	@And("^user clicks on the view document and resources link and navigate to forms and resource page$")
-	public void clickOnFormAndResourcesLinkActive() throws InterruptedException {
+	public void clickOnFormAndResourcesLinkActive(DataTable attributes) throws InterruptedException {
 		AccountHomePage accounthomepage = (AccountHomePage) loginScenario.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		// Thread.sleep(20000);
+		
+		List<List<String>> data = attributes.raw();
 
-		FormsAndResourcesPage formsAndResourcesPage = accounthomepage.navigatetoFormsnResources();
+		String planType=data.get(0).get(1);
+		String memberType=data.get(1).get(1);
+		
+
+		FormsAndResourcesPage formsAndResourcesPage = accounthomepage.navigatetoFormsnResources(memberType,planType);
 		System.out.println("navigation worked");
 		// Thread.sleep(5000);
 		formsAndResourcesPage.waitforFNRpage();
@@ -159,7 +185,7 @@ public class DashboardFormsnResourcesStepDefinition {
 	 */
 	@And("^then user verifies that the correct pdfs are coming in the plan material section$")
 	public void verifypdfscoming(DataTable givenAttributes) throws InterruptedException {
-
+		String memberType=null;
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -172,8 +198,14 @@ public class DashboardFormsnResourcesStepDefinition {
 		Collection<String> values = memberAttributesMap.values();
 		String[] targetArray = values.toArray(new String[values.size()]);
 		System.out.println(values.size());
+		
+		memberType=memberAttributesRow.get(0).getCells().get(1);
+		memberAttributesMap.remove("MemberType");
+		memberAttributesMap.remove("memberType");
+		
+		
 
-		boolean arraycheck = formsAndResourcesPage.xpathSelectionSectionwise(targetArray, "plan material");
+		boolean arraycheck = formsAndResourcesPage.xpathSelectionSectionwise(targetArray, "plan material",memberType);
 		if (arraycheck == true) {
 			Assert.assertTrue(true);
 			System.out.println("all pdfs are coming correctly");
@@ -233,36 +265,83 @@ public class DashboardFormsnResourcesStepDefinition {
 
 		formsAndResourcesPage.scroll();
 		Thread.sleep(6000);
-		Assert.assertTrue(formsAndResourcesPage.checkProviderforgroup());
-		Assert.assertTrue(formsAndResourcesPage.checkPharmacyforgroup());
+		try {
+			if(formsAndResourcesPage.getProviderSerachLinkMA().isDisplayed())
+			  Assert.assertFalse(true);
+				
+		}catch(Exception e) {
+			Assert.assertFalse(false);
+			
+		}
+		
+		
+		Assert.assertFalse(formsAndResourcesPage.checkpharmacyforMA());
 	}
 
 	@And("^the Pharmacy locator link is displayed$")
-	public void phamacypdp() {
+	public void phamacypdp(DataTable attributes) {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
 		formsAndResourcesPage.scroll();
 		formsAndResourcesPage.scroll();
-		if (formsAndResourcesPage.getPharmacyforPDP().isDisplayed()
-				|| formsAndResourcesPage.getPreEffectivePharmacyLocatorLinkPDP().isDisplayed()) {
-			Assert.assertTrue(true);
-			System.out.println("pharmacy locator link is present");
+
+		List<List<String>> data = attributes.raw();
+
+		if (data.get(0).get(1).contains("Group")) {
+			if (formsAndResourcesPage.getLnkPharmacyLocatorLinkMAPDGroup().isDisplayed()) {
+				Assert.assertTrue(true);
+				System.out.println("pharmacy locator link is present");
+			} else {
+				
+				if(data.get(0).get(1).contains("UHCGroupFnR")&&formsAndResourcesPage.getLnkPharmacyLocatorLinkPDPUHCGroupFnR().isDisplayed()) {
+					Assert.assertTrue(true);
+				System.out.println("pharmacy locator link is present");
+				}
+				else
+				Assert.fail("pharmacy locator link is not present");
+			}
+			
+			
+
 		} else {
-			Assert.fail("pharmacy locator link is not present");
+
+			if (formsAndResourcesPage.getPharmacyforPDP().isDisplayed()
+					|| formsAndResourcesPage.getPreEffectivePharmacyLocatorLinkPDP().isDisplayed()) {
+				Assert.assertTrue(true);
+				System.out.println("pharmacy locator link is present");
+			} else {
+				Assert.fail("pharmacy locator link is not present");
+			}
 		}
 	}
 
 	@And("^the provider search link is displayed$")
-	public void providersearchdisplaying() {
+	public void providersearchdisplaying(DataTable attributes) {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
 		formsAndResourcesPage.scroll();
 		formsAndResourcesPage.scroll();
-		if (formsAndResourcesPage.getProviderforPDP().isDisplayed()) {
-			Assert.assertTrue(true);
-			System.out.println("provider link is present");
+		List<List<String>> data = attributes.raw();
+
+		if (data.get(0).get(1).contains("Group")) {
+			
+			if (formsAndResourcesPage.getLnkProviderSearchLinkMAPDGroup().isDisplayed()) {
+				Assert.assertTrue(true);
+				System.out.println("provider link is present");
+			} else {
+				Assert.fail("provider link is not present");
+			}
+			
+			
+
 		} else {
-			Assert.fail("provider link is not present");
+
+			if (formsAndResourcesPage.getProviderforPDP().isDisplayed()) {
+				Assert.assertTrue(true);
+				System.out.println("provider link is present");
+			} else {
+				Assert.fail("provider link is not present");
+			}
 		}
 	}
 
@@ -327,7 +406,7 @@ public class DashboardFormsnResourcesStepDefinition {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
 		Thread.sleep(2000);
-		if (formsAndResourcesPage.getAnocforgroup().isDisplayed()) {
+		if (formsAndResourcesPage.getAnocforgroup().get(1).isDisplayed()) {
 			Assert.assertTrue(true);
 			System.out.println("anoc for grp is present");
 		} else {
@@ -337,16 +416,21 @@ public class DashboardFormsnResourcesStepDefinition {
 	}
 
 	@And("^validate for active member Temporary Id Card and Plan Order Material links are displayed$")
-	public void validatelinksdisplayedforactivemembers() throws InterruptedException {
+	public void validatelinksdisplayedforactivemembers(DataTable attributeType) throws InterruptedException {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
 		// Thread.sleep(2000);
-
+		List<List<String>> data = attributeType.raw();
+		String memberType=data.get(0).get(1);
 		
-			Assert.assertTrue("Ordeer material link is not present", formsAndResourcesPage.getOrderPlanMaterialLink().isDisplayed()||formsAndResourcesPage.getPcpOrderPlanMaterialLink().isDisplayed());
+		if(memberType.toLowerCase().contains("pcp")||(memberType.toLowerCase().contains("medica")))
+			Assert.assertTrue("Ordeer material link is not present",formsAndResourcesPage.getPcpOrderPlanMaterialLink().isDisplayed());
+
+		else
+			Assert.assertTrue("Ordeer material link is not present", formsAndResourcesPage.getOrderPlanMaterialLink().isDisplayed());
 
 		// Thread.sleep(2000);
-		formsAndResourcesPage.getTemporaryIdcardlink().isDisplayed();
+		formsAndResourcesPage.getTemporaryIdcardlink(memberType).isDisplayed();
 
 	}
 
@@ -381,13 +465,20 @@ public class DashboardFormsnResourcesStepDefinition {
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
 		formsAndResourcesPage.scroll();
 		Thread.sleep(2000);
-		if (formsAndResourcesPage.geteobsectionall().isDisplayed()) {
+		
+		if (formsAndResourcesPage.getEobSectionall().isDisplayed()) {
 			Assert.assertTrue(true);
 			System.out.println("eob present");
 		} else {
-			Assert.fail("eob not present");
+			if (formsAndResourcesPage.getBtnEobSectionall().isDisplayed()) {
+				Assert.assertTrue(true);
+				System.out.println("eob present");
+			} else {
+				Assert.fail("eob not present");
+			}
 		}
 	}
+
 
 	/**
 	 * @throws InterruptedException
@@ -468,7 +559,7 @@ public class DashboardFormsnResourcesStepDefinition {
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
 		formsAndResourcesPage.scroll();
 		Thread.sleep(2000);
-		if (formsAndResourcesPage.getANOCSection().isDisplayed()) {
+		if (formsAndResourcesPage.getANOCSection().get(1).isDisplayed()) {
 			Assert.assertTrue(true);
 			System.out.println("anoc section is present");
 
@@ -517,7 +608,7 @@ public class DashboardFormsnResourcesStepDefinition {
 	public void pharmacyprovider() {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
-		if (formsAndResourcesPage.getpharmacysearchlink().isDisplayed()) {
+		if (formsAndResourcesPage.getLnkPharmacyLocatorLink().isDisplayed()) {
 			Assert.assertTrue(true);
 			System.out.println("pharmacy locator is present");
 
@@ -536,7 +627,7 @@ public class DashboardFormsnResourcesStepDefinition {
 
 	@And("^the user verifies that the correct pdfs are coming in the anoc section$")
 	public void verifyanocpdfscoming(DataTable givenAttributes) throws InterruptedException {
-
+		String memberType=null;
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -546,16 +637,22 @@ public class DashboardFormsnResourcesStepDefinition {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
 		}
+		
+		memberType=memberAttributesRow.get(0).getCells().get(1);
+		memberAttributesMap.remove("Member Type");
+		memberAttributesMap.remove("MemberType");
+		memberAttributesMap.remove("memberType");
+				
 		Collection<String> values = memberAttributesMap.values();
 		String[] targetArray = values.toArray(new String[values.size()]);
 		System.out.println(values.size());
 
-		boolean arraycheck = formsAndResourcesPage.xpathSelectionSectionwise(targetArray, "anoc");
+		boolean arraycheck = formsAndResourcesPage.xpathSelectionSectionwise(targetArray, "anoc",memberType);
 		if (arraycheck == true) {
 			Assert.assertTrue(true);
-			System.out.println("all anoc and annual directory pdfs are coming correctly");
+			System.out.println("All anoc pdfs are coming correctly");
 		} else {
-			Assert.fail("anoc and annual directory pdfs not coming correctly");
+			Assert.fail("Anoc pdfs aren't coming correctly");
 		}
 	}
 
@@ -607,13 +704,15 @@ public class DashboardFormsnResourcesStepDefinition {
 	 */
 
 	@And("^validate that the view temporary id card link is displayed$")
-	public void validate_that_the_view_temporary_id_card_link_is_displayed() throws Throwable {
+	public void validate_that_the_view_temporary_id_card_link_is_displayed(DataTable attributeType) throws Throwable {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
 		Thread.sleep(10000);
 
-		formsAndResourcesPage.getTemporaryIdcardlink().isDisplayed();
-		formsAndResourcesPage.validateIDCard();
+		List<List<String>> data = attributeType.raw();
+		String memberType=data.get(0).get(1);
+		formsAndResourcesPage.getTemporaryIdcardlink(memberType).isDisplayed();
+		formsAndResourcesPage.validateIDCard(memberType);
 
 	}
 
@@ -698,6 +797,8 @@ public class DashboardFormsnResourcesStepDefinition {
 
 	@Then("^the user verifies the pdfs for ship if particular pdf is not present")
 	public void errormessagepresentforship(DataTable givenAttributes) throws InterruptedException {
+		String memberType=null;
+		
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -711,7 +812,12 @@ public class DashboardFormsnResourcesStepDefinition {
 		String[] targetArray = values.toArray(new String[values.size()]);
 		System.out.println(values.size());
 
-		boolean arraycheck = formsAndResourcesPage.xpathSelectionSectionwise(targetArray, "ship plan material");
+		memberType=memberAttributesRow.get(0).getCells().get(1);
+		memberAttributesMap.remove("MemberType");
+		memberAttributesMap.remove("memberType");
+		
+		
+		boolean arraycheck = formsAndResourcesPage.xpathSelectionSectionwise(targetArray, "ship plan material",memberType);
 		if (arraycheck == true) {
 			Assert.assertTrue(true);
 			System.out.println("all pdfs are coming correctly");
@@ -847,7 +953,7 @@ public class DashboardFormsnResourcesStepDefinition {
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
 
 		formsAndResourcesPage.scroll();
-		Assert.assertTrue(formsAndResourcesPage.checkpharmacyforMA());
+		Assert.assertFalse(formsAndResourcesPage.checkpharmacyforMA());
 
 	}
 
@@ -1050,7 +1156,7 @@ public class DashboardFormsnResourcesStepDefinition {
 			break;
 
 		case 3:
-			formsAndResourcesPage.verifyPresenceOfJumpLinksMedSupp(rider, planType, memberType);
+			formsAndResourcesPage.verifyPresenceOfJumpLinksMedSupp(rider, planType, memberType,identifier);
 			break;
 
 		case 4:
@@ -1058,7 +1164,7 @@ public class DashboardFormsnResourcesStepDefinition {
 			break;
 
 		case 5:
-			formsAndResourcesPage.verifyPresenceOfJumpLinksSSUP(rider, planType, memberType);
+			formsAndResourcesPage.verifyPresenceOfJumpLinksSSUP(rider, planType, memberType,identifier);
 			break;
 
 		default:
@@ -1110,16 +1216,15 @@ public class DashboardFormsnResourcesStepDefinition {
 			break;
 
 		case 3:
-			formsAndResourcesPage.clicksOnJumpLinksAndCheckRespectiveSectionsMedSupp(rider, planType, memberType);
+			formsAndResourcesPage.clicksOnJumpLinksAndCheckRespectiveSectionsMedSupp(rider, planType, memberType,identifier);
 			break;
 
 		case 4:
-			formsAndResourcesPage.clicksOnJumpLinksAndCheckRespectiveSectionsPDP(rider, planType, memberType,
-					identifier);
+			formsAndResourcesPage.clicksOnJumpLinksAndCheckRespectiveSectionsPDP(rider, planType, memberType,identifier);
 			break;
 
 		case 5:
-			formsAndResourcesPage.clicksOnJumpLinksAndCheckRespectiveSectionsSSUP(rider, planType, memberType);
+		//	formsAndResourcesPage.clicksOnJumpLinksAndCheckRespectiveSectionsSSUP(rider, planType, memberType,identifier);
 			break;
 
 		default:

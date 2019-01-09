@@ -252,6 +252,17 @@ public class OneTimePaymentAarpStepDefintion {
 			System.out.println("user is on one time payment page");	
 		}
 		
+	}	
+	
+	@And("^the user clicks on New flow Edit CC Automatic Payment button$")
+	public void click_on_Recurring_Payment_btn_CC(){
+		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
+		PaymentHistoryPage PHoneTimePayment = paymenthistory.AutoPayNewCC();		
+		if(PHoneTimePayment!=null){
+			getLoginScenario().saveBean(PageConstants.NEW_CC_BUTTON, PHoneTimePayment);
+			System.out.println("user is on one time payment page");	
+		}
+		
 	}
 	
 	@And("^the user clicks on New flow OneTime Payment button$")
@@ -274,8 +285,18 @@ public class OneTimePaymentAarpStepDefintion {
 		if(oneTimePayment!=null){
 			getLoginScenario().saveBean(PageConstants.One_Time_Payments_Page, oneTimePayment);
 			System.out.println("user is on Automatic payment page");	
-		}
+		}		
+	}
+	
+	@And("^the user selects the Setup AutoCreditCard option on New page$")
+	public void click_on_SetupCCA_Auto_Payment_btn(){
+		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.NEW_CC_BUTTON);
+		OneTimePaymentPage oneTimePayment = paymenthistory.SetUpCCbtn();
 		
+		if(oneTimePayment!=null){
+			getLoginScenario().saveBean(PageConstants.One_Time_Payments_Page, oneTimePayment);
+			System.out.println("user is on Automatic payment page");	
+		}		
 	}
 	
 	@And("^the user selects the Checking account option on New page OTP$")
@@ -381,6 +402,24 @@ public class OneTimePaymentAarpStepDefintion {
 		if(confirmOneTimePaymentPage != null) {
 			getLoginScenario().saveBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD,confirmOneTimePaymentPage);
 			System.out.println("Payment details entered and moved successfully to next page");
+		} else {
+			System.out.println("Object issue - unable to obtain the confirmOneTimePaymentPage");
+		}
+	}
+	
+	@And("^the user makes Auto payment in CC flow and navigate further$")
+	public void makes_Auto_payment_CC_flow(DataTable givenAttributes) {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		OneTimePaymentPage oneTimePayment = (OneTimePaymentPage) getLoginScenario().getBean(PageConstants.One_Time_Payments_Page);
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = oneTimePayment.enterNewPageCCDetails(memberAttributesMap);
+		if(confirmOneTimePaymentPage != null) {
+			getLoginScenario().saveBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD,confirmOneTimePaymentPage);
+			System.out.println("Payment CC details entered and moved successfully to next page");
 		} else {
 			System.out.println("Object issue - unable to obtain the confirmOneTimePaymentPage");
 		}
