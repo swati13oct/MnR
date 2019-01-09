@@ -163,6 +163,7 @@ q1_feb_aarpeob004/Password@1,MA,NICE_EOB,
 q1_feb_grpeob002/Password@1,MAPD_GRP,NICE_EOB,
 q4_dec_uhc002/Password@1,MAPD,Individual,Med_EOB
 ATDD_MAPD_IND_RX_EOB_01/Password@1,MAPD,Individual,rx_Eob
+q2_jun_aarp0141/Password@1,PDP,IndividualAARPCPayments
 q2_jun_ship0003486/Password@1,SHIP,IndividualAARPSPayments,
 q2_june_combo0017/Password@1,COMBO,COMBOAARPPayments2,
 q2_jun_uhc0018/Password@1,MAPD,IndividualUHCPayments,
