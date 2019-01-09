@@ -1,5 +1,5 @@
+@orderPlanMaterials
 @thePredators
-@ordermaterials
 @redesignOrderMaterials
 Feature:P1.5 To test order materials in Redesign site
 

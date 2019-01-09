@@ -1,5 +1,6 @@
+@footer
 @member_redesign_footer @regressionMember
-Feature: Footer validation
+Feature: F1.2Footer validation
 
 
 
