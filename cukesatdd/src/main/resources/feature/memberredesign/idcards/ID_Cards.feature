@@ -1,8 +1,8 @@
-
+@idCards
 @velocityDashers
 Feature: V1.1To This test scenario is to validate that ID card is accessible for all the members
 
-  @regressionIDCards @regressionMember
+  @idCards1 @regressionIDCards @regressionMember
   Scenario Outline: Verify the fields in ID card page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |
@@ -24,7 +24,7 @@ Feature: V1.1To This test scenario is to validate that ID card is accessible for
     | MA        | IDCardmember  | UnitedHealthcare MedicareComplete Choice Essential (Regional PPO) | 979180267-00  | Cbbbaebe Cdcefdac| Subscriber - DOB 02/29/1944 | 01/01/19      | Active         |
 	| MAPD      | IDCardmember  | UnitedHealthcare MedicareComplete Choice (PPO)                    | 908949511-00  | Bcdbc Abaafb     | Subscriber - DOB 03/23/1948 | 01/01/19      | Active         | 
      
-  @regressionIDCards_Group_User @regressionMember
+  @idCards2 @regressionIDCards_Group_User @regressionMember
   Scenario Outline: Verify the fields in ID card page for group user
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |
