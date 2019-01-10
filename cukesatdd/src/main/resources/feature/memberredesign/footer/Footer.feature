@@ -4,7 +4,7 @@ Feature: F1.2Footer validation
 
 
 
-  @IncrediblesFooter
+  @footer1 @IncrediblesFooter
   Scenario Outline: Verify footer section is in place
   # note: not going to validate pages from Rally, i.e. Dashboard (DCE), Find Care & Costs
   # note: if system is in future date, payment page may not show for user and this test will end up failing
