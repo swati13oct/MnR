@@ -282,7 +282,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		PageFactory.initElements(driver, this);
 
-		String fileName = null;
+/*		String fileName = null;
 		if (planType.equalsIgnoreCase("MA")
 				|| planType.equalsIgnoreCase("MAPD")) {
 			fileName = "maplans.json";
@@ -298,7 +298,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
 		vppPlanSummaryJson = formJsonObject(vppPlanSummary);
 
-	}
+*/	}
 
 	public boolean validatePlanSummary(){
 		boolean flag = true;

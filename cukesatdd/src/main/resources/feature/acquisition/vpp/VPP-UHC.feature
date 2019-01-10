@@ -161,8 +161,8 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
  @F250062 @VPPChangeLocationMultiCOunty @fastandfurious @Feb_release_2019
    Scenario Outline: Validate Cancel button for Multi Cunty Pop-up on VPP for Change Location
      Given the user is on the uhcmedicaresolutions site landing page
-     When the user performs plan search using following information in the UHC site
-      | Zip Code    | <Zipcode> |
+    When the user performs plan search using following information in UMS site
+      | Zip Code    | <zipcode> |
      When the user performs Change Location on Plan Summary Page using following MultiCounty Zip information in the UHC site
       | Zip Code    | <MultiCOuntyzipcode> |
  			Then the user validates the Cancel button for Multi COunty Pop-up lands on enter Zip code Page in UHC

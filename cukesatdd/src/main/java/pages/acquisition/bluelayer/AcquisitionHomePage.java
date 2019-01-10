@@ -294,7 +294,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
 	}
       
-	  public pages.acquisition.bluelayer.VPPPlanSummaryPage searchPlans(String zipcode, String countyName){
+	  public VPPPlanSummaryPage searchPlans(String zipcode, String countyName){
 		CommonUtility.waitForPageLoad(driver, zipCodeField, 20);
 		sendkeys(zipCodeField, zipcode);
 		viewPlansButton.click();
@@ -335,7 +335,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		} catch (Exception e) {
 			System.out.println("county box not found");
 		}
-		CommonUtility.waitForPageLoad(driver, changeLocationLink, 30);
+		
+		//CommonUtility.waitForPageLoad(driver, changeLocationLink, 60);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new pages.acquisition.bluelayer.VPPPlanSummaryPage(driver);
 		}
