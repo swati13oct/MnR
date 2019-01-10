@@ -1,9 +1,7 @@
-@thePredators
-@febRelease2018
-@F108803_HICN_MBI
+@hcnMbi @F108803_HICN_MBI @thePredators
 Feature:P1.2 ATDD implementation for HICN/MBI entry to Medicare ID field for Personal Identification Page in Registration Flow
  
-@HICN_MBI_Entry_Apr2018
+@hcnMbi1 @HICN_MBI_Entry_Apr2018
 Scenario Outline: Medicare ID filed should accept either HICN or MBI number for Server date 01 Apr 2018 without error for Personal identification
 Given Server Date is set to the following date
      | Server Date   | <ServerDateMilliSeconds>   |
@@ -23,7 +21,7 @@ Examples:
 | 1522562400000 				 | 001742786 | 11/01/1939 | MBI		 	 | 	1A11C11YK11	 |
 
 
-@HICN_MBI_Entry_Dec2019
+@hcnMbi2 @HICN_MBI_Entry_Dec2019
 Scenario Outline: Medicare ID filed should accept either HICN OR MBI number for Server date 31 Dec 2019 without error for Personal identification
 Given Server Date is set to the following date
      | Server Date   | <ServerDateMilliSeconds>   |
@@ -42,7 +40,7 @@ Examples:
 | 1577772000000 				 | 001742786 | 11/01/1939 | MBI		   | 	2A22C22YK22	 |
 | 1577772000000 				 | 001742786 | 11/01/1939 | MBI		   | 	1A11C11YK11	 |
 
-@MBI_Entry_Jan2020
+@hcnMbi3 @MBI_Entry_Jan2020
 Scenario Outline: Medicare ID filed should accept MBI number for Server date 01 Jan 2020 without error for Personal identification
 Given Server Date is set to the following date
      | Server Date   | <ServerDateMilliSeconds>   |
@@ -60,7 +58,7 @@ Examples:
 | 1577858460000 				 | 001742786 | 11/01/1939 | MBI		 | 	2A22C22YK22	 |
 | 1577858460000 				 | 001742786 | 11/01/1939 | MBI		 | 	1A11C11YK11	 |
 
-@HICN_Entry_Jan2020
+@hcnMbi4 @HICN_Entry_Jan2020
 Scenario Outline: Medicare ID filed should NOT accept HICN number for Server date 01 Jan 2020 without error for Personal identification
 Given Server Date is set to the following date
      | Server Date   | <ServerDateMilliSeconds>   |
@@ -77,7 +75,7 @@ Examples:
 | ServerDateMilliSeconds | MemberNo  | DOB 				| HICN_MBI | HICN_MBI_Value | 
 | 1577858460000 				 | 001742786 | 11/01/1939 | HICN		 | 	163344396A	 |
 
-@ErrorMessages_HICN_MBI
+@hcnMbi5 @ErrorMessages_HICN_MBI
 Scenario Outline: Medicare ID filed should NOT accept invalid HICN or MBI number for Server date 01 Apr 2018 and throw Error Message
 Given Server Date is set to the following date
      | Server Date   | <ServerDateMilliSeconds>   |
