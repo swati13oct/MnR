@@ -1,7 +1,8 @@
+@healthAndWellness
 @member_redesign_H&W
 Feature: I1.4Header/Navigation for Member Site Redesign
  
-@member_redesign_H&W @regressiongenericpagesH&W @regressionMember
+@healthAndWellness1 @member_redesign_H&W @regressiongenericpagesH&W @regressionMember
 Scenario Outline:As an authenticated member on the new Member site, I want to check health and wellness and its Lifestyle, Learning and Rewards tabs
 #Given I am a authenticated member on the member redesign site HW
 Given login with following details logins in the member portal and validate elements 
