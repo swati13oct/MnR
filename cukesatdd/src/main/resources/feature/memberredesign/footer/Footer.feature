@@ -1,9 +1,5 @@
-@footer
-@member_redesign_footer @regressionMember
+@footer @member_redesign_footer @regressionMember
 Feature: F1.2Footer validation
-
-
-
   @footer1 @IncrediblesFooter
   Scenario Outline: Verify footer section is in place
   # note: not going to validate pages from Rally, i.e. Dashboard (DCE), Find Care & Costs

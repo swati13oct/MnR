@@ -1,6 +1,4 @@
-@header
-@theIncredibles
-@member_redesign
+@header @theIncredibles @member_redesign
 Feature:I1.3Header/Navigation for Member Site Redesign
 # note: if system is in future date, some testcases may fail due to expected tab(s) not showing up on page depending on user's data setup
 
