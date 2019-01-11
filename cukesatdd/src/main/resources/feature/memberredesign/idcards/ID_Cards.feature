@@ -1,5 +1,4 @@
-@idCards
-@velocityDashers
+@idCards @velocityDashers
 Feature: V1.1To This test scenario is to validate that ID card is accessible for all the members
 
   @idCards1 @regressionIDCards @regressionMember

@@ -1,5 +1,4 @@
-@healthAndWellness
-@member_redesign_H&W
+@healthAndWellness @member_redesign_H&W
 Feature: I1.4Header/Navigation for Member Site Redesign
  
 @healthAndWellness1 @member_redesign_H&W @regressiongenericpagesH&W @regressionMember

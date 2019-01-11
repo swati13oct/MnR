@@ -1,5 +1,4 @@
-@contactUs
- @velocityDashers
+@contactUs @velocityDashers
 Feature: V1.1To test Send us a question Widget and Click to call functionality in contact us redesign pages in UHCM site
 
   @contactUs1 @secureEmailWidgetCancel @regressionMember
