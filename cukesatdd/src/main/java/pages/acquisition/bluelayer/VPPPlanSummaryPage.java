@@ -6,9 +6,6 @@ package pages.acquisition.bluelayer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
@@ -20,13 +17,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.uhcretiree.Rallytool_Page;
 import pages.acquisition.bluelayer.ComparePlansPageBlayer;
 import pages.acquisition.ulayer.PageTitleConstants;
+import pages.acquisition.bluelayer.ProviderSearchPage;
 import pages.acquisition.bluelayer.PlanDetailsPage;
 import pages.acquisition.vppforaep.AepVppPlanSummaryPage;
 import acceptancetests.data.CommonConstants;
@@ -174,7 +169,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath=".//*[@class='action-btn getStarted']")
 	private WebElement GetStarted;
 
-	//@FindBy(xpath="//*[contains(text(),'People')]")
 
 	@FindBy(xpath=".//*[@class='gs-option']//*[contains(text(),'People')]")
 	private WebElement People;
@@ -182,10 +176,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[1]/div/*[@class='trigger-closed']")
 	private WebElement closedTrigger;	
 	
-/*This SNP View Plans identifier is invalid
-	@FindBy(xpath="//div[@class='snpplans_planbutton']/div[2]/div[2]/div")
-	private WebElement snpplans;			
-*/
 	@FindBy(xpath="//*[contains(text(), 'Special Needs Plans')]/following-sibling::*[@class = 'trigger-closed']")
 	private WebElement snpplans;			
 
@@ -532,51 +522,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 	}
 
-	private JSONObject formJsonObject(PageData vppPlanSummary) {
-		JSONObject jsonObject = new JSONObject();
-		for (String key : vppPlanSummary.getExpectedData().keySet()) {
-			List<WebElement> elements = findElements(vppPlanSummary
-					.getExpectedData().get(key));
-			if (elements.size() == 1) {
-				if (validate(elements.get(0))) {
-					try {
-						jsonObject.put(key, elements.get(0).getText());
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			} else if (elements.size() > 1) {
-				JSONArray jsonArray = new JSONArray();
-				for (WebElement element : elements) {
-
-					if (validate(element)) {
-						try {
-							JSONObject jsonObjectForArray = new JSONObject();
-							jsonObjectForArray.put(vppPlanSummary
-									.getExpectedData().get(key)
-									.getElementName(), element.getText());
-							jsonArray.put(jsonObjectForArray);
-						} catch (JSONException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-				}
-				try {
-					jsonObject.put(key, jsonArray);
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-			}
-
-		}
-		return jsonObject;
-
-	}
-
 	@Override
 	public void openAndValidate() {
 		validateVPPPlanSummaryPage();
@@ -848,91 +793,17 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return null;
 	}
 
-	public VPPPlanSummaryPage clicksOnIsProviderCoveredB(String planName) {
-		if (planName.contains("HMO")) {
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-			for (WebElement plan : maPlanElement1) {
-				if (plan.getText().contains(planName)) {
-					//ElementData elementData = new ElementData("id",
-						//	"doctorCoverMA");
+	public ProviderSearchPage clicksOnIsProviderCoveredUms(String planName) {
 
-					//ElementData elementData = new ElementData("xpath",
+		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 
-//"//*[contains(text(),'Is my provider covered in my ZIP code/county')]");
-					//driver.findElement(By.xpath("//*[contains(text(),'Is my provider covered ')]")).click();
-
-					//driver.findElement(By.xpath("//*[@id='plan-list-1']/div/div[2]/div/div[1]/div[2]/div/div[1]/div[1]/a")).click();
-
-					//findChildElement(elementData, plan).click();
-
-					WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/following::a[contains(text(),'Is my provider')]"));
-					System.out.println(ProviderSearchLink.getText());
-					ProviderSearchLink.click();
-
-
-				}
-			}
+		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
+				+ "\')]/ancestor::div[contains(@class,'module-plan-overview')]//a[contains(text(),'Is my provider covered')]"));
+		switchToNewTabNew(ProviderSearchLink);
+		if (driver.getCurrentUrl().contains("werally")) {
+			return new ProviderSearchPage(driver);
 		}
-
-		String mainwindow=driver.getWindowHandle();
-
-		Set<String> allWindowHandles = driver.getWindowHandles();
-		for (String currentWindowHandle : allWindowHandles) {
-
-
-			if (!currentWindowHandle.equals(mainwindow)) {
-				driver.switchTo().window(currentWindowHandle);
-
-
-			}
-		}
-
-		driver.manage().window().maximize();
-		waitforElement(GetStarted);
-		GetStarted.click();
-
-
-
-		waitforElement(People);
-
-		System.out.println("Rally tool started");
-		((JavascriptExecutor) driver).executeScript("arguments[0].click();", People);
-
-
-		waitforElement(Primary);
-
-		Primary.click();
-
-		waitforElement(Physician);
-
-
-		Physician.click();
-
-		//waitforElement(Savebtn);
-
-		//Savebtn.click();
-		//JavascriptExecutor js = (JavascriptExecutor)driver;
-		//js.executeScript("arguments[0].click();", Savebtn);
-		//firstLocation.click();
-		//secondSaveBtn.click();
-	//	firstLocation.click();
-		//secondSaveBtn.click();
-		//firstLocation.click();
-		secondSaveBtn.click();
-		waitforElement(Viewsavebtn);
-		Viewsavebtn.click();
-		waitforElement(Checkcoverage);
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Checkcoverage.click();
-		driver.switchTo().window(mainwindow);
-
-
-		return new VPPPlanSummaryPage(driver);
+		return null;
 	}
 
 	public VPPPlanSummaryPage clicksOnIsProviderCoveredA(String planName) {
@@ -1025,9 +896,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public boolean providerinfo(String planName)
 	{
 
-		WebElement ProviderSearchLink1 = driver.findElement
-				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide ng-scope')]/descendant::span[contains(text(),'covered')]"));
-		String mproviderinfo=ProviderSearchLink1.getText();
+		WebElement ProviderSearchLink = driver.findElement
+				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]/descendant::span[contains(text(),'covered')]"));
+		String mproviderinfo=ProviderSearchLink.getText();
         System.out.println(mproviderinfo);
 		if(mproviderinfo.contains("1 providers covered"))
 		{

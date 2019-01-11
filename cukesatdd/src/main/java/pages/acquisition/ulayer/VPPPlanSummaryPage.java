@@ -5,11 +5,6 @@ package pages.acquisition.ulayer;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
-import java.util.regex.Pattern;
-
-import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -17,12 +12,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.vppforaep.AepVppPlanSummaryPage;
 import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPage;
+import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -99,11 +92,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@class='disabledprint ng-scope']")
 	List<WebElement> pdpPlanElement;
-	
-	//Change PDP Plan Element identifier. Same as for MA/MAPD plans
-/*	@FindBy(xpath = "//div[@class='module-plan-overview module swiper-slide ng-scope']")
-	List<WebElement> pdpPlanElement;
-*/
+
 	@FindBy(xpath="//div[contains(@ng-repeat,'plan in planModel.maPlans')]")
 	List<WebElement> maPlans;
 	
@@ -174,35 +163,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//div[@class='plan-overview-wrapper']/div[@class='overview-tabs module-tabs-tabs']/div[1]/div/*[@class='trigger-closed']")
 	private WebElement viewMAPlans;
 	
-	@FindBy(xpath="//button[contains(text(),'Get Started')]")
-	private WebElement GetStarted;
-	
 
-	@FindBy(xpath="//*[text()='People']/preceding::div[1]/img")
-	private WebElement People;
-	
-	@FindBy(xpath="//*[text()='Primary Care']")
-	private WebElement Primary;
-	
-	
-	@FindBy(xpath="//*[contains(text(),'Primary Care Physician')]")
-	private WebElement Physician;
-
-	@FindBy(xpath="//div[contains(@class,'first')]//div[@class='hidden-phone']//button")
-	private WebElement Savebtn;
-	
-	@FindBy(id="label_unsaved_selectedLocation0")
-	private WebElement firstLocation;
-
-	//@FindBy(xpath="//button[@class='action-btn']")
-	@FindBy(xpath="//*[@id='skip-to-main-content']/div/div[1]/div[1]/location-result/div/div/div/div[2]/div[2]/div[1]/div/div/div[3]/toggle-saved-provider/button/span")
-	private WebElement secondSaveBtn;
-	
-	@FindBy(xpath="//*[contains(text(),'View Saved')]")
-	private WebElement Viewsavebtn;
-
-	@FindBy(xpath="//button[@class='action-btn negative']")
-	private WebElement Checkcoverage;
 	
 	@FindBy(xpath = ".//*[@id='plan-list-1']//div[@class='module-plan-overview module swiper-slide ng-scope']")
 	List<WebElement> maPlansList;
@@ -226,8 +187,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='responsiveplan']")
 	private List<WebElement> medSuppPlanList;
 	
-	
-	public JSONObject vppPlanSummaryJson;
 
 	public VPPPlanSummaryPage(WebDriver driver) {
 		super(driver);
@@ -256,9 +215,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		validateNew(maPlansViewLink);
-		validateNew(msPlansViewLink);
-		validateNew(pdpPlansViewLink);
+		validateNew(maPlansCount);
+		validateNew(msPlansCount);
+		validateNew(pdpPlansCount);
+		validateNew(snpPlansCount);
 	}
 
 	
@@ -305,7 +265,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 	
 	public VPPPlanSummaryPage viewPlanSummaryButton(String planType) {
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		if (planType.equalsIgnoreCase("PDP")) {
 			if(validate(showPdpPlans)){
 			showPdpPlans.click();
@@ -327,89 +286,17 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return new VPPPlanSummaryPage(driver, planType);
 	}
 	
-	public VPPPlanSummaryPage clicksOnIsProviderCovered(String planName) {
-		if (planName.contains("HMO")) {
-			driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-			
-			if(maPlansList!=null){
-			for (WebElement plan : maPlansList) {
-				if (plan.getText().contains(planName)) {
-					//ElementData elementData = new ElementData("id",
-						//	"doctorCoverMA");
+	public ProviderSearchPage clicksOnIsProviderCovered(String planName) {
 
-					//ElementData elementData = new ElementData("xpath",
-						
-//"//*[contains(text(),'Is my provider covered in my ZIP code/county')]");
-					//driver.findElement(By.xpath("//*[contains(text(),'Is my provider covered ')]")).click();
+		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 
-					//driver.findElement(By.xpath("//*[@id='plan-list-1']/div/div[2]/div/div[1]/div[2]/div/div[1]/div[1]/a")).click();
-
-					//findChildElement(elementData, plan).click();
-					
-					WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/following::a[contains(text(),'Is my provider covered')]"));
-					System.out.println(ProviderSearchLink.getText());
-					ProviderSearchLink.click();
-					break;
-					
-				}
-			}
-			}
+		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
+				+ "\')]/ancestor::div[contains(@class,'module-plan-overview')]//a[contains(text(),'Is my provider covered')]"));
+		switchToNewTabNew(ProviderSearchLink);
+		if (driver.getCurrentUrl().contains("werally")) {
+			return new ProviderSearchPage(driver);
 		}
-		
-		String mainwindow=driver.getWindowHandle();
-
-		Set<String> allWindowHandles = driver.getWindowHandles();
-		for (String currentWindowHandle : allWindowHandles) {
-
-
-			if (!currentWindowHandle.equals(mainwindow)) {
-				driver.switchTo().window(currentWindowHandle);
-
-
-			}
-		}
-
-		driver.manage().window().maximize();
-		waitforElement(GetStarted);
-		GetStarted.click();
-		
-		
-       
-		waitforElement(People);
-		
-		System.out.println("Rally tool started");
-		People.click();
-				
-		
-		
-		waitforElement(Primary);
-		
-		
-
-		Primary.click();
-
-		waitforElement(Physician);
-		
-
-		Physician.click();
-
-		/*waitforElement(Savebtn);
-			
-		JavascriptExecutor js = (JavascriptExecutor)driver;
-		js.executeScript("arguments[0].click();", Savebtn);*/
-//		firstLocation.click();*/
-		secondSaveBtn.click();
-		waitforElement(Viewsavebtn);
-		
-		Viewsavebtn.click();
-	
-		waitforElement(Checkcoverage);
-		
-		Checkcoverage.click();
-		driver.switchTo().window(mainwindow);
-
-		
-		return new VPPPlanSummaryPage(driver);
+		return null;
 	}
 	
 	public void wAitt()
@@ -424,10 +311,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	public boolean providerinfo(String planName)
 	{
-		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-		WebElement ProviderSearchLink1 = driver.findElement
-				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide ng-scope')]/descendant::span[contains(text(),'covered')]"));
-		String mproviderinfo=ProviderSearchLink1.getText();
+		WebElement ProviderSearchLink = driver.findElement
+				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]/descendant::span[contains(text(),'covered')]"));
+		String mproviderinfo=ProviderSearchLink.getText();
         System.out.println(mproviderinfo);
 		if(mproviderinfo.contains("1 providers covered"))
 		{

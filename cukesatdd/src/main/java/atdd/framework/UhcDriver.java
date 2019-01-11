@@ -461,7 +461,7 @@ try {
 			driver.switchTo().window(tabs.get(i));
 			currentHandle = driver.getWindowHandle();
 			if (!currentHandle.contentEquals(parentHandle))
-				driver.switchTo().window(tabs.get(i));
+				break;
 		}
 	}
 
@@ -474,6 +474,16 @@ try {
 		System.out.println("Waiting for new window to get open");
 		WebDriverWait wait = new WebDriverWait(driver, 60);
 		wait.until(ExpectedConditions.numberOfWindowsToBe(initialCount + 1));
+	}
+	
+	/***
+	 * the method waits for 60 sec till current windows count decrement by 1
+	 * 
+	 * @param initialCount
+	 */
+	public void waitForCountDecrement(int initialCount) {
+		WebDriverWait wait = new WebDriverWait(driver, 60);
+		wait.until(ExpectedConditions.numberOfWindowsToBe(initialCount - 1));
 	}
 
 	/***

@@ -163,15 +163,8 @@ public class ProviderSearchStepDefinitionAARP {
 			String planName = plannameAttributesMap.get("PlanName");
 	
 					VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		if(plansummaryPage.providerinfo(planName))
-		{
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
-					plansummaryPage);
-		}
-	
-		else {
-			Assert.fail("Error Loading Provider search info");
-		}
+		Assert.assertTrue("1 Provider covered message not displayed", plansummaryPage.providerinfo(planName));
+
 	}
 		
 }
