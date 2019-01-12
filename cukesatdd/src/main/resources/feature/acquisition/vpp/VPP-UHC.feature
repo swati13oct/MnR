@@ -168,6 +168,6 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
  			Then the user validates the Cancel button for Multi COunty Pop-up lands on enter Zip code Page in UHC
  			
  			Examples:
- 			| Zipcode | MultiCOuntyzipcode |
+ 			| zipcode | MultiCOuntyzipcode |
  			| 90210 | 80002 |
       

@@ -1623,6 +1623,13 @@ public void checkAllMAPlans(){
 }
 
 public VPPPlanSummaryPage VPP_ChangeLocationValidateMultiCOuntyPopUp(String zipcode) {
+	try {
+		Thread.sleep(6000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	validate(ChangeLocationLink);
 	ChangeLocationLink.click();
 	validate(ZipCodeTxtBx);
 	ZipCodeTxtBx.click();

@@ -788,7 +788,6 @@ public class VppStepDefinitionUHC {
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			VPPPlanSummaryPage PlanSummaryPage = plansummaryPage.VPP_ChangeLocationValidateMultiCOuntyPopUp(
 					zipcode);
-
 			if (PlanSummaryPage != null) {
 				getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
 						PlanSummaryPage);
@@ -796,9 +795,5 @@ public class VppStepDefinitionUHC {
 				Assert.fail("Error Loading VPP plan summary page");
 			}
 		}
-
-
-		
-
 
 }

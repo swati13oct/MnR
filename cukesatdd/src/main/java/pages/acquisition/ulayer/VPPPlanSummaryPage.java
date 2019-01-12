@@ -1205,6 +1205,12 @@ CommonUtility.waitForPageLoad(driver, MAmoreDetailsLink, 30);
 	}
 
 	public boolean validateMultiCounty_CancelButton() {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		validate(countyModal);
 		boolean ValidationFlag = true;
 		if(validate(MultiCOunty_CancelBtn)){
