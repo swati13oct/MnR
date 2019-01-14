@@ -10,6 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 public class MemberAuthLoginPage extends UhcDriver {
@@ -33,6 +34,8 @@ public class MemberAuthLoginPage extends UhcDriver {
                 private WebElement memberUsername;
                 
                 private static String MEMBER_AUTH = MRConstants.MEMBER_AUTH;
+                private static String MEMBER_AUTH_STG = MRConstants.MEMBER_AUTH_STAGE;
+                private static String MEMBER_AUTH_TEM = MRConstants.MEMBER_AUTH_TEAM;
                 
                 public MemberAuthLoginPage(WebDriver driver) {
                                 super(driver);
@@ -49,7 +52,16 @@ public class MemberAuthLoginPage extends UhcDriver {
                  * @todo : Login to app
                 */
                 public MemberAuthLoginPage navigateToLoginURL(){
-                                start(MEMBER_AUTH);
+                	if(MRScenario.environment.contains("stage"))
+                    {
+                    start(MEMBER_AUTH_STG);
+                    }else if(MRScenario.environment.contains("team"))
+                    {
+                    start(MEMBER_AUTH_TEM);
+                    }
+
+
+   
                                 //driver.get("https://www.team-c-generic.uhc.com/content/dashboard/guest/memberauth.html#/memberAuthLogin");
                                 CommonUtility.waitForPageLoad(driver, username, 60);
                                 try {
@@ -91,7 +103,7 @@ public class MemberAuthLoginPage extends UhcDriver {
                                 search.click();
                                 Thread.sleep(5000);
                                 if (!(unpswdIncorrecterrormsg.isDisplayed())){
-                                                                                                Assert.fail("Error message mismatch");
+                                Assert.fail("Error message mismatch");
                                                 
                                 }
                                 //if(!(this.unpswdIncorrecterrormsg.getText().trim().contains(Errormessage)))

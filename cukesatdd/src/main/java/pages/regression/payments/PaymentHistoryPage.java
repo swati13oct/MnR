@@ -105,6 +105,9 @@ public class PaymentHistoryPage extends UhcDriver{
 	@FindBy(xpath = "//*[@class='payment-method-btn'][2]/a")
 	private WebElement SetUpAutoPayButton;
 	
+	@FindBy(xpath = "((//*[@class='container--base'])[2]//div[@class='margin-small']//span[@class='payment-method-btn'])[2]/a")
+	private WebElement SetUpAutoPayButtonCC;
+	
 	//@FindBy(xpath = "//*[@class='payment-method-btn'][1]/a[1]")
 	@FindBy(xpath = "//*[@class='payment-method-btn'][1]/a[2]")
 	private WebElement OneTimeNewFlowPayButton;
@@ -140,6 +143,15 @@ public class PaymentHistoryPage extends UhcDriver{
 	@FindBy(id = "optionsRadios1")
 	private WebElement DefaultPayAmount;
 	
+	@FindBy(id = "optionsRadios20")
+	private WebElement SetUpNewCredirDebPaymet;
+	
+	@FindBy(xpath = "//*[@class='payment-selection__actions']/button[1]")
+	private WebElement CCNextButton;	
+	
+	@FindBy(className="accepted-cards")
+	private WebElement CCPageHead;
+	
 	@FindBy(id = "otherAmount")
 	private WebElement OtherAmountButton;
 	
@@ -157,6 +169,9 @@ public class PaymentHistoryPage extends UhcDriver{
 	
 	@FindBy(xpath = "//*[@class='payment-selection__actions']/button")
 	private WebElement NextButton;
+	
+	@FindBy(xpath = "(//*[@class='payment-selection__actions']/button)[1]")
+	private WebElement NextCCButton;
 	
 	/*@FindBy(xpath = "(//*[@class='payments']//div[@class='container']//div[@class='col-md-12'])[1]//span[1]")
 	private WebElement AutoPayHeading;*/
@@ -684,6 +699,29 @@ public class PaymentHistoryPage extends UhcDriver{
 		return null;
 	}
 	
+	public OneTimePaymentPage SetUpCCbtn(){
+
+		try {   
+			Thread.sleep(2000); 		
+			driver.switchTo().frame("IPerceptionsEmbed");
+			System.out.println("iPerception Pop Up is Present");
+			iPerceptionCloseButton.click();
+			driver.switchTo().defaultContent();
+			Thread.sleep(5000);
+		}
+		catch (Exception e) {
+		}
+		SetUpNewCredirDebPaymet.click();		
+		System.out.println("clicked on Set up CC Radio button");
+		NextCCButton.click();		
+		waitforElement(CCPageHead);
+		if(CCPageHead.isDisplayed()){
+			return new  OneTimePaymentPage(driver); 
+		}else
+		return null;
+	}
+	
+	
 	public OneTimePaymentPage CheckingAccountbtnOTP(){
 
 		try {   
@@ -742,6 +780,57 @@ public class PaymentHistoryPage extends UhcDriver{
 		 }
 		
 		return null;
+	}
+	
+
+	public PaymentHistoryPage AutoPayNewCC(){
+
+		try {   
+			Thread.sleep(2000); 		
+			driver.switchTo().frame("IPerceptionsEmbed");
+			System.out.println("iPerception Pop Up is Present");
+			iPerceptionCloseButton.click();
+			driver.switchTo().defaultContent();
+			Thread.sleep(5000);
+		}
+		catch (Exception e) {
+			System.out.println("iPerception Pop Up is not Present");
+		}
+		
+			if(SetUpAutoPayButtonCC.isDisplayed())
+			{
+				SetUpAutoPayButtonCC.click();
+				System.out.println("clicked on Edit Recurring CC pay button");				
+				try{	
+				Thread.sleep(4000);	
+				}catch(Exception e)
+				{
+					System.out.println(e);
+				}
+					if (validate(SetUpNewCredirDebPaymet))									
+						return new PaymentHistoryPage(driver);
+						else
+							return null;
+					}				
+			else
+			{
+				System.out.println("No Edit Payment Button");
+			}
+		
+		return new  PaymentHistoryPage(driver);
+
+		/*waitforElement(AutoPayButton);  		
+		AutoPayButton.click();
+
+		waitforElement(SetUpNewPayment);
+
+		if (validate(SetUpNewPayment)){
+			SetUpNewPayment.click();
+			System.out.println("clicked on Setup New Payment button");		 
+			return new  PaymentHistoryPage(driver);		 
+		}
+		else
+			return null;*/
 	}
 	
 	
