@@ -115,16 +115,9 @@ public class VppStepDefinitionUHC {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		plansummaryPage = plansummaryPage.viewPlanSummary(plantype);
+		plansummaryPage.viewPlanSummary(plantype);
 		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "UHC_ACQ");
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, plantype);
-		if (plansummaryPage != null) {
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
-					plansummaryPage);
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail("Error validating availables plans for selected plantype in  VPP plan summary page");
-		}
 	}
 	
 	/**
@@ -140,8 +133,8 @@ public class VppStepDefinitionUHC {
 				VPPCommonConstants.PLAN_NAME,planName);
 		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-
-		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(planName);
+		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(planName,planType);
 		if (vppPlanDetailsPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE,
 					vppPlanDetailsPage);
@@ -276,5 +269,15 @@ public class VppStepDefinitionUHC {
 			return false;
 		}
 	}
-	
+	/**
+	 * @toDo:user validates plan count for all plan types on plan summary page
+	 */
+	@Then("^user validates plan count for all plan types on plan summary page in the UMS site$")
+	public void user_validates_following_benefits_ui_ums() {
+
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		Assert.assertTrue("Error validating plans in  VPP plan summary page",
+				plansummaryPage.validateVPPPlanSummaryPage());
+	}
 }

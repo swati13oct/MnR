@@ -68,13 +68,13 @@ public class PlanDetailsPage extends UhcDriver {
 	private WebElement backToAllPlans;
 	
 	@FindBy(id="medicalbenefits")
-	private WebElement medBenefitsTab;
+	private List<WebElement> medBenefitsTab;
 	
 	@FindBy(xpath="//*[@id='detail-0']/div/div/div[1]")
 	private WebElement medBenefitsSection;
 
 	@FindBy(id = "prescriptiondrug")
-    private WebElement presDrugTab;
+    private List<WebElement> presDrugTab;
 	
 	@FindBy(xpath=".//*[@id='drugBenefits']")
 	private WebElement drugBenefitsSection;
@@ -134,6 +134,12 @@ public class PlanDetailsPage extends UhcDriver {
 		PageFactory.initElements(driver, this);
 		openAndValidate();
 	}
+	
+	public PlanDetailsPage(WebDriver driver, String planType) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		openAndValidate(planType);
+	}
 
 	public String getContent() {
 		return plandetails.getText();
@@ -147,10 +153,24 @@ public class PlanDetailsPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		validate(medBenefitsTab);
-		validate(presDrugTab);
+		
+		CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
+		validate(presDrugTab.get(0));
 		validate(planCostsTab);
 		
+	}
+	
+	public void openAndValidate(String planType) {
+		if (planType.equalsIgnoreCase("MA")) {
+			CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
+			Assert.assertTrue(0 == presDrugTab.size(), "Prescription Drug tab not displayed for MA plans");
+
+		} else if (planType.equalsIgnoreCase("PDP")) {
+			CommonUtility.waitForPageLoadNew(driver, presDrugTab.get(0), 45);
+			Assert.assertTrue(0 == medBenefitsTab.size(), "Medical Benefit tab not displayed for PDP plans");
+		}
+		validate(planCostsTab);
+
 	}
 
 	public PlanInformationPage navigatetoenrollinplanlink(String planName)
@@ -285,7 +305,7 @@ public class PlanDetailsPage extends UhcDriver {
     
     public boolean validatePlanDetailsPage(){
 		
-		if(validate(medBenefitsTab)&&validate(presDrugTab)&&validate(planCostsTab)&&
+		if(validate(medBenefitsTab.get(0))&&validate(presDrugTab.get(0))&&validate(planCostsTab)&&
 				medBenefitsSection.getText().contains("Monthly Premium"))
 			return true;
 		return false;
@@ -301,7 +321,7 @@ public class PlanDetailsPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		presDrugTab.click();
+		presDrugTab.get(0).click();
 		CommonUtility.waitForPageLoad(driver, estimateDrugBtn, 20);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", estimateDrugBtn);
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", estimateDrugBtn);

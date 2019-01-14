@@ -112,17 +112,13 @@ public class EnrollInPlanStepDefinitionUHC {
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage = plansummaryPage.viewPlanSummary(plantype);
+		plansummaryPage.viewPlanSummary(plantype);
 
-		if (plansummaryPage != null) {
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
-					plansummaryPage);
 			if (plansummaryPage.validateAvailablePlans(plantype)) {
 				Assert.assertTrue(true);
 			} else {
 				Assert.fail("Error in validating available plans check ");
 			}
-		}
 	}
 
 	/**
