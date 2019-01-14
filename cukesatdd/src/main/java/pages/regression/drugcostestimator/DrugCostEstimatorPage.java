@@ -1577,8 +1577,10 @@ try {
 		int drugscount = getDrugsCount();
 		if (drugscount > 0) {
 			WebElement switchNowLink = driver.findElement(By.id("generic-drug-switch-btn-"+ (drugscount-1)));
+			Thread.sleep(500);
+			driver.manage().window().maximize();
 			switchNowLink.click();
-			Thread.sleep(5000);
+			Thread.sleep(3000);
 
 			//switchToGenericHeadingsId
 			if (driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")) {
