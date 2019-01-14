@@ -657,7 +657,14 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		.contains(arg2);
 		driver.findElement(By.xpath("//div[@id='drugs-tab']//p[contains (text(), '" + args1 + "')]")).getText()
 		.contains(arg3);
-
+try {
+			Thread.sleep(2000);
+			driver.manage().window().maximize();
+			
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		// driver.findElements(By.xpath("//div[@id='drugs-tab']//p[contains
 		// (text(), '"+args1+"')]).gettext();
 		return true;
@@ -1609,7 +1616,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	 */
 	public void isGeneric() throws InterruptedException {
 		Thread.sleep(5000);
-		List<WebElement> lbGenericdrug = driver.findElements(By.id("drugDosageStrengthId"));
+		//List<WebElement> lbGenericdrug = driver.findElements(By.id("drugDosageStrengthId"));
+		List<WebElement> lbGenericdrug = driver.findElements(By.xpath("//p[@class='subtitle drugdosagestrength ng-binding']"));  
 		int drugsCount = getDrugsCount();
 		if (drugsCount > 0) {
 			String[] genericDrug = lbGenericdrug.get(drugsCount-1).getText().split(" ");
