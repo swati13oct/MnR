@@ -1709,7 +1709,7 @@ try {
 			//CommonUtility.waitForPageLoad(driver, switchNowLink, 20);
 			waitForloader(driver, overlay, 30);
 			Thread.sleep(10000);
-
+driver.manage().window().maximize();
 			if (validate(switchNowLink)){
 				switchNowLink.click();
 
