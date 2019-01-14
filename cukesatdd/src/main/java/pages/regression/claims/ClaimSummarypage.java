@@ -184,7 +184,7 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy (css = ".color-red.semi-bold>p>span")
 	private WebElement fedDateRangeErrMsg;
 	
-	@FindBy (css = ".color-red.semi-bold>p>span")
+	@FindBy (xpath ="//*[@id='futureDateErrorDivErr']/p/span/text()")
 	private WebElement fromDateLaterThanToDateError;
 	
 	/*@FindBy (xpath =".//*[@id='moreInfoLinkAtdd0']/a")
@@ -914,10 +914,13 @@ public class ClaimSummarypage extends UhcDriver{
 	 * @toDo : this method validates ERROR message from date later than to date 
 	 */	
 	public void  validatefromDateLaterThanToDateError() {
-		
-		
+			if(!fromDateLaterThanToDateError.getText().contains("Your From date needs to come before or")){
+			Assert.fail(fromDateLaterThanToDateError + "is not beind dsiplayed");	
+		}
+		//fromDateLaterThanToDateError = driver.findElement(By.xpath("//*[@id="futureDateErrorDivErr"]/p/span/text()"));
+		/*	
 		if(!fromDateLaterThanToDateError.isDisplayed())
-			Assert.fail(fromDateLaterThanToDateError + "is not beind dsiplayed");		
+			Assert.fail(fromDateLaterThanToDateError + "is not beind dsiplayed");	*/	
 	}
 	/**
 	 * @toDo : this method validates combo tab section
