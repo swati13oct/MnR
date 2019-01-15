@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -35,14 +36,22 @@ public class IDCardPage extends UhcDriver{
 	@FindBy(css=".long-plan-name .ng-binding")  
 	private WebElement planName_grp;
 	
-	@FindBy(xpath="//*[@id='details-00_950035171695_2018-12-31']/li[1]/dl/dd") 
+	//@FindBy(xpath="//*[@id='details-00_950035171695_2018-12-31']/li[1]/dl/dd") 
+	@FindBy(css="li.ng-scope.long-plan-name > dl > dd")
 	private WebElement planName_Ind;
+	
+	@FindBy(xpath="//*[@id='details-00_950035171695_2019-12-31']/li[1]/dl/dd") //--- this is for PDP
+	private WebElement planName_PDP;
 	
 	@FindBy(css="ul.coverage-details li:first-child dl>dd")
 	private WebElement id;
 	
-	@FindBy(xpath="//*[@id='details-00_950035171695_2018-12-31']/li[2]/dl/dd")
+	//@FindBy(xpath="//*[@id='details-00_950035171695_2018-12-31']/li[2]/dl/dd")
+	@FindBy(css="li:nth-child(2) > dl > dd")
 	private WebElement id_ind;
+	
+	@FindBy(xpath="//*[@id='details-00_950035171695_2019-12-31']/li[2]/dl/dd") //--- this is for PDP
+	private WebElement id_PDP;
 	
 	@FindBy(css="li:nth-child(2) > dl > .ng-binding")
 	private WebElement id_grp;
@@ -117,14 +126,29 @@ public class IDCardPage extends UhcDriver{
 		/**
 		 * Validates the details of the member
 		 */
-		System.out.println("the Plan Name is: " + planName_Ind.getText());
-		System.out.println("the ID is: " + id_ind.getText());
+		try{
+			if(driver.findElement(By.cssSelector("#header-00_950035171695_2019-12-31 > ul > li > span")).getText().contains("PRESCRIPTION")){
+				System.out.println("the Plan Name is: " + planName_PDP.getText());
+				System.out.println("the ID is: " + id_PDP.getText());
+
+			}
+		} catch (Exception e){
+			System.out.println("the Plan Name is: " + planName_Ind.getText());
+			System.out.println("the ID is: " + id_ind.getText());
+		}
 		System.out.println("the name is: " + name.getText());
 		System.out.println("the DOB is: " + dateOfBirth.getText());
 		System.out.println("the start date is: " + start.getText());
 		System.out.println("the covrg status is: " + status.getText());
-		Assert.assertEquals(medicalPlan, planName_Ind.getText().trim());
-		Assert.assertEquals(memberId, id_ind.getText().trim());
+		try{
+			if(driver.findElement(By.cssSelector("#header-00_950035171695_2019-12-31 > ul > li > span")).getText().contains("PRESCRIPTION")){
+				Assert.assertEquals(medicalPlan, planName_PDP.getText().trim());
+				Assert.assertEquals(memberId, id_PDP.getText().trim());
+			}
+		} catch(Exception e){
+			Assert.assertEquals(medicalPlan, planName_Ind.getText().trim());
+			Assert.assertEquals(memberId, id_ind.getText().trim());
+		}
 		Assert.assertEquals(memberName, name.getText().trim());
 		Assert.assertEquals(dob, dateOfBirth.getText().trim());
 		Assert.assertEquals(covergaeStart, start.getText().trim());

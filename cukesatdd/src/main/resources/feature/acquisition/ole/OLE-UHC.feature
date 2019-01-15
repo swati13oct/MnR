@@ -8,6 +8,7 @@ Feature:1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
     When the user performs plan search using following information in UMS site
       | Zip Code    | <zipcode> |
       | County Name | <county>  |
+      | Is Multi County|  <isMultutiCounty> |
     When user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
@@ -94,25 +95,25 @@ Feature:1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
 #    Then the user Validates Next Steps in Confirmation Page for the Plan Type.
 
     Examples: 
-      | zipcode | county             | plantype | planName                                             | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                      | optiondata        | pdpFlag | longTermFlag | riderflag |
-#      |   90210 | Los Angeles County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    | HICN     | John      | Doe      | 987456321t     | false   |  01012010 |  01012010 |      231665465 | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | no           | true      |
-#      |   90210 | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                      | MBI      | John      | Doe      | 2A22C22cc22    | false   |  01012010 |  01012010 |                | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | no           | false     |
-#      |   90210 | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Essential (HMO) | HICN     | John      | Doe      | 987456321c     | false   |  01012010 |  01012010 |      231665465 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    |               |             | CA           |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | no           | false     |
-#      |   28035 | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete (HMO SNP)             | MBI      | John      | Doe      | 3A33C22YK22    | true    |  01012010 |  01012010 |     0123456789 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | no           | false     |
+      | zipcode |isMultutiCounty | county             | plantype | planName                                             | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                      | optiondata        | pdpFlag | longTermFlag | riderflag |
+#      |   90210 | NO            | Los Angeles County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    | HICN     | John      | Doe      | 987456321t     | false   |  01012010 |  01012010 |      231665465 | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | no           | true      |
+#      |   90210 | NO            | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                      | MBI      | John      | Doe      | 2A22C22cc22    | false   |  01012010 |  01012010 |                | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | no           | false     |
+#      |   90210 | NO            | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Essential (HMO) | HICN     | John      | Doe      | 987456321c     | false   |  01012010 |  01012010 |      231665465 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    |               |             | CA           |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | no           | false     |
+#      |   28035 | YES            | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete (HMO SNP)             | MBI      | John      | Doe      | 3A33C22YK22    | true    |  01012010 |  01012010 |     0123456789 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | no           | false     |
 
 
-#      |   35045 | Chilton County     | SNP      | UnitedHealthcare Dual Complete (HMO SNP)             | MBI      | John      | Doe      | 2A22C33YK33    | false   |  01012010 |  01012010 |      012345569 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | no           | false     |
-#      |   85923 | Navajo County      | MAPD     | UnitedHealthcare MedicareDirect Rx (PFFS)            | HICN     | John      | Doe      | 123456789d     | false   |  01012010 |  01012010 |      231665465 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    |               |             | CA           |      90210 | test@test.com | None apply                                         |                   | yes     | no           | false     |
-#      |   85923 | Navajo County      | MA       | UnitedHealthcare MedicareDirect Essential (PFFS)     | HICN     | John      | Doe      | 123456789f     | false   |  01012010 |  01012010 |      231665465 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    |               |             | CA           |      90210 | test@test.com | Other reason                                       | other reason text | yes     | no           | false     |
- #     |   33143 | Miami-Dade County | MAPD     | Preferred Choice Dade (HMO)                        | HICN     | John      | Doe      | 987654333p     | false   |  01012010 |  01012010 |      231665465 | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | yes          | false     |
-#      |   33143 | Miami-Dade County | MAPD     | Medica HealthCare Plans MedicareMax (HMO)          | MBI      | John      | Doe      | 1e11e11ee11    | false   |  01012010 |  01012010 |                | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | moved outside of the service area                  |          01012018 | yes     | no           | false     |
-#      |   33143 | Miami-Dade County | SNP      | Preferred Medicare Assist (HMO SNP)                | MBI      | John      | Doe      | 3A33C22YK22    | false   |  01012010 |  01012010 |     0123456789 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | no           | false     |
-#      |   33143 | Miami-Dade County | SNP      | Medica HealthCare Plans MedicareMax Plus (HMO SNP) | MBI      | John      | Doe      | 2A22C33YK33    | false   |  01012010 |  01012010 |      012345569 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | no           | false     |
+#      |   35045 | YES            | Chilton County     | SNP      | UnitedHealthcare Dual Complete (HMO SNP)             | MBI      | John      | Doe      | 2A22C33YK33    | false   |  01012010 |  01012010 |      012345569 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | no           | false     |
+#      |   85923 | YES            | Navajo County      | MAPD     | UnitedHealthcare MedicareDirect Rx (PFFS)            | HICN     | John      | Doe      | 123456789d     | false   |  01012010 |  01012010 |      231665465 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    |               |             | CA           |      90210 | test@test.com | None apply                                         |                   | yes     | no           | false     |
+#      |   85923 | YES            | Navajo County      | MA       | UnitedHealthcare MedicareDirect Essential (PFFS)     | HICN     | John      | Doe      | 123456789f     | false   |  01012010 |  01012010 |      231665465 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    |               |             | CA           |      90210 | test@test.com | Other reason                                       | other reason text | yes     | no           | false     |
+ #     |   33143 | YES            | Miami-Dade County | MAPD     | Preferred Choice Dade (HMO)                        | HICN     | John      | Doe      | 987654333p     | false   |  01012010 |  01012010 |      231665465 | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | yes          | false     |
+#      |   33143 | YES            | Miami-Dade County | MAPD     | Medica HealthCare Plans MedicareMax (HMO)          | MBI      | John      | Doe      | 1e11e11ee11    | false   |  01012010 |  01012010 |                | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | moved outside of the service area                  |          01012018 | yes     | no           | false     |
+#      |   33143 | YES            | Miami-Dade County | SNP      | Preferred Medicare Assist (HMO SNP)                | MBI      | John      | Doe      | 3A33C22YK22    | false   |  01012010 |  01012010 |     0123456789 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | no           | false     |
+#      |   33143 | YES            | Miami-Dade County | SNP      | Medica HealthCare Plans MedicareMax Plus (HMO SNP) | MBI      | John      | Doe      | 2A22C33YK33    | false   |  01012010 |  01012010 |      012345569 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | no           | false     |
 
-      |   90210 | Los Angeles County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    | HICN     | John      | Doe      | 987456321A1    | false   |  01012010 |  01012010 |      631665465 | false    | 01011901 | Male   | 001 Morris Rd | Los Angeles | No                     | 801 MailingSt | Mailing LA  | CA           |      90210 | test@test.com |  Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA)| /12202018/12202018/ / / / | yes     | no           | true      |
-      |   90210 | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                      | MBI      | John      | Doe      | 1EG4TE6MK78    | false   |  11012018 |  11012018 |                | false    | 01011902 | Female | 002 Morris Rd | Los Angeles | Yes                    | 802 MailingSt | Mailing LA  | CA           |      90210 | test@test.com |  Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA)| /12202018/12202018/ / /  | yes     | no           | false     |
-      |   90210 | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Essential (HMO) | HICN     | John      | Doe      | 987456321BB    | false   |  01012010 |  01012010 |      431665465 | true     | 01011903 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | CA           |      90210 | test@test.com |  Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA)| /12202018/12202018/ / / | yes     | no           | false     |
-      |   28035 | Mecklenburg County | SNP     | UnitedHealthcare Dual Complete (HMO SNP)             | HICN     | John     | Doe      | AAA998877665   | true    |  01012010 |  01012010 |     0523456789 | true     | 01011904 | Female | 004 Morris Rd | Los Angeles | Yes                    | 803 MailingSt | Mailing LA  | CA           |      78006 | test@test.com |  Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA)| /12202018/12202018/ / / | yes     | no           | false     | #     |   78006 | Bexar County       | CSNP     | UnitedHealthcare Chronic Complete (HMO SNP)          | HICN     | John      | Doe      | AA112233445    | true    |  01012010 |  01012010 |     0923456789 | true     | 01011905 | Male   | 005 Morris Rd | Los Angeles | Yes                    | 804 MailingSt | Mailing LA  | CA           |      78006 | test@test.com | (MA OEP)/ newly got Medicaid/Medicare (or my state)/ or my state helps pay for my Medicare premiums/ major disaster  | //01012018/01012018/// | yes     | no           | false     |
+      |   90210 | NO            | Los Angeles County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    | HICN     | John      | Doe      | 987456321A1    | false   |  01012010 |  01012010 |      631665465 | false    | 01011901 | Male   | 001 Morris Rd | Los Angeles | No                     | 801 MailingSt | Mailing LA  | CA           |      90210 | test@test.com |  Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA)| /12202018/12202018/ / / / | yes     | no           | true      |
+      |   90210 | NO            | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                      | MBI      | John      | Doe      | 1EG4TE6MK78    | false   |  11012018 |  11012018 |                | false    | 01011902 | Female | 002 Morris Rd | Los Angeles | Yes                    | 802 MailingSt | Mailing LA  | CA           |      90210 | test@test.com |  Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA)| /12202018/12202018/ / /  | yes     | no           | false     |
+      |   90210 | NO            | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Essential (HMO) | HICN     | John      | Doe      | 987456321BB    | false   |  01012010 |  01012010 |      431665465 | true     | 01011903 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | CA           |      90210 | test@test.com |  Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA)| /12202018/12202018/ / / | yes     | no           | false     |
+      |   28035 | YES            | Mecklenburg County | SNP     | UnitedHealthcare Dual Complete (HMO SNP)             | HICN     | John     | Doe      | AAA998877665   | true    |  01012010 |  01012010 |     0523456789 | true     | 01011904 | Female | 004 Morris Rd | Los Angeles | Yes                    | 803 MailingSt | Mailing LA  | CA           |      78006 | test@test.com |  Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA)| /12202018/12202018/ / / | yes     | no           | false     | #     |   78006 | Bexar County       | CSNP     | UnitedHealthcare Chronic Complete (HMO SNP)          | HICN     | John      | Doe      | AA112233445    | true    |  01012010 |  01012010 |     0923456789 | true     | 01011905 | Male   | 005 Morris Rd | Los Angeles | Yes                    | 804 MailingSt | Mailing LA  | CA           |      78006 | test@test.com | (MA OEP)/ newly got Medicaid/Medicare (or my state)/ or my state helps pay for my Medicare premiums/ major disaster  | //01012018/01012018/// | yes     | no           | false     |
 
 
   @NegativeValidations_MedicareInfoPage
@@ -121,6 +122,7 @@ Feature:1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
     When the user performs plan search using following information in UMS site
       | Zip Code    | <zipcode> |
       | County Name | <county>  |
+      | Is Multi County|  <isMultutiCounty> |
     When user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
@@ -144,11 +146,11 @@ Feature:1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
     Then the user validates error messages for Negative values and required fields on Medicare Info Page
 
     Examples: 
-      | zipcode | county             | plantype | planName                                          | cardtype | firstname          | lastname | medicarenumber | ssnflag | partadate | partbdate |
-      |   90210 | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 2 (HMO) | HICN     |                 34 |          |       12345679 | false   | aisu323   |  01012020 |
-      |   28035 | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete (HMO SNP)          | MBI      | Jo                 | Jo       |                | true    | 321651465 |  01012010 |
-      |   90210 | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                   | HICN     | )089$              | Doe      | 2A22C22YK22    | false   |  12042020 | aisu323   |
-      |   35045 | Chilton County     | SNP      | UnitedHealthcare Dual Complete (HMO SNP)          | MBI      | asdassdfsadfsdfsdf |    99898 | 123456789a     | false   |  01012010 |  01012010 |
+      | zipcode |isMultutiCounty | county             | plantype | planName                                          | cardtype | firstname          | lastname | medicarenumber | ssnflag | partadate | partbdate |
+      |   90210 | YES            | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 2 (HMO) | HICN     |                 34 |          |       12345679 | false   | aisu323   |  01012020 |
+      |   28035 | NO             | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete (HMO SNP)          | MBI      | Jo                 | Jo       |                | true    | 321651465 |  01012010 |
+      |   90210 | YES            | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                   | HICN     | )089$              | Doe      | 2A22C22YK22    | false   |  12042020 | aisu323   |
+      |   35045 | NO             | Chilton County     | SNP      | UnitedHealthcare Dual Complete (HMO SNP)          | MBI      | asdassdfsadfsdfsdf |    99898 | 123456789a     | false   |  01012010 |  01012010 |
 
   @OLE_PlanDetails_UHC
   Scenario Outline: OLE Landing from UHC Acquisition site VPP Plan Details
@@ -156,6 +158,7 @@ Feature:1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
     When the user performs plan search using following information in UMS site
       | Zip Code    | <zipcode> |
       | County Name | <county>  |
+      | Is Multi County|  <isMultutiCounty> |
     When user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
     Then the user view plan details of the above selected plan in UMS site vpp
@@ -164,10 +167,10 @@ Feature:1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
     Then the user validates the Plan details on OLE
 
     Examples: 
-      | zipcode | county             | plantype | planName                                          |
-      |   90210 | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |
-      |   90210 | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                   |
-      |   35045 | Chilton County     | SNP      | UnitedHealthcare Dual Complete (HMO SNP)          |
+      | zipcode |isMultutiCounty | county             | plantype | planName                                          |
+      |   90210 | NO             | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |
+      |   90210 | NO             | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                   |
+      |   35045 | YES            |  Chilton County     | SNP      | UnitedHealthcare Dual Complete (HMO SNP)          |
 
   @OLE_PlanCompare_UHC
   Scenario Outline: OLE Landing from UHC Acuisition site VPP Plan Compare
@@ -175,6 +178,7 @@ Feature:1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
     When the user performs plan search using following information in UMS site
       | Zip Code    | <zipcode> |
       | County Name | <county>  |
+      | Is Multi County|  <isMultutiCounty> |
     When user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
     Then the user selects plans to add to plan compare and navigates to Plan compare page in UHC site
@@ -184,9 +188,9 @@ Feature:1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
     Then the user validates the Plan details on OLE
 
     Examples: 
-      | zipcode | county             | plantype | planName                                          |
-      |   90210 | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |
-      |   90210 | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                   |
+      | zipcode |isMultutiCounty | county             | plantype | planName                                          |
+      |   90210 | NO             | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |
+      |   90210 | NO             | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                   |
 
       
  @DSNP_Enroll_Now @september_release_2018
@@ -254,6 +258,7 @@ Feature:1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
     When the user performs plan search using following information in UMS site
       | Zip Code    | <zipcode> |
       | County Name | <county>  |
+      | Is Multi County|  <isMultutiCounty> |
     When user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
@@ -276,9 +281,9 @@ Feature:1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
     | Plan Name | <planName> |
      
     Examples: 
-      | zipcode | county             | plantype | planName                                          | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                      | optiondata        | pdpFlag | longTermFlag | riderflag |
-      |   78006 | Bexar County | SNP     | UnitedHealthcare Chronic Complete (HMO SNP) | HICN     | John      | Doe      | 987654333C     | false   |  01012010 |  01012010 |      231665465 | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | yes          | true      |
-      |   78006 | Bexar County | SNP     | UnitedHealthcare Medicare Silver (Regional PPO SNP)  | HICN     | John      | Doe      | 987654333C     | false   |  01012010 |  01012010 |      231665465 | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | yes          | true      |
+      | zipcode |isMultutiCounty | county             | plantype | planName                                          | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                      | optiondata        | pdpFlag | longTermFlag | riderflag |
+      |   78006 | YES            | Bexar County | SNP     | UnitedHealthcare Chronic Complete (HMO SNP) | HICN     | John      | Doe      | 987654333C     | false   |  01012010 |  01012010 |      231665465 | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | yes          | true      |
+      |   78006 | YES            | Bexar County | SNP     | UnitedHealthcare Medicare Silver (Regional PPO SNP)  | HICN     | John      | Doe      | 987654333C     | false   |  01012010 |  01012010 |      231665465 | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | yes          | true      |
       
    
       
@@ -289,6 +294,7 @@ Given the user is on the uhcmedicaresolutions site landing page
 When the user performs plan search using following information in UMS site
       | Zip Code    | <zipcode> |
       | County Name | <county>  |
+      | Is Multi County|  <isMultutiCounty> |
 When user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
 Then the user clicks on Enroll Now for AARP site to start the OLE flow
@@ -348,8 +354,8 @@ Then the user validates the Plan and Member details on Review and Submit Page
 Then the user clicks on Submit Enrollment to complete enrollment
 Then the user validates Plan and Member Details on Confirmation Page
 Examples: 
-       | zipcode | county             | plantype | planName                                             | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                      | optiondata        | pdpFlag | longTermFlag | riderflag |
-      |   90210 | Los Angeles County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    | HICN     | John      | Doe      | 123456787t     | false   |  01012010 |  01012010 |      231665465 | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | CA   |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | no           | true      |
+       | zipcode | isMultutiCounty |county             | plantype | planName                                             | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                      | optiondata        | pdpFlag | longTermFlag | riderflag |
+       |   90210 |NO               | Los Angeles County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    | HICN     | John      | Doe      | 123456787t     | false   |  01012010 |  01012010 |      231665465 | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | CA   |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | no           | true      |
       
       
  @StandaloneZipcode @Feb_release_2019
