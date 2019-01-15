@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
+import pages.acquisition.bluelayer.ProviderSearchPage;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
@@ -104,22 +105,15 @@ public class ProviderSearchStepDefinitionUHC {
 		
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		
-		plansummaryPage = plansummaryPage.viewPlanSummary(planType);
-		if (plansummaryPage != null) {
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
-					plansummaryPage);
-		} else {
-			Assert.fail("Error Loading VPP plan summary page");
-		}
-		
+		plansummaryPage.viewPlanSummary(planType);
 	}
 	
 		
 	/**
-	 * @toDo:the user Click on Is my Provider covered link
+	 * @toDo:user Click on Is my Provider covered link ums
 	 */
-	@When("^the user Click on Is my Provider covered link$")
-	public void clickonProvidercoveredlink(DataTable Planname )
+	@When("^user Click on Is my Provider covered link ums$")
+	public void user_click_on_Providercoveredlink_ums(DataTable Planname )
 	{
 		List<DataTableRow> plannameAttributesRow = Planname
 				.getGherkinRows();
@@ -133,17 +127,18 @@ public class ProviderSearchStepDefinitionUHC {
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		
-		plansummaryPage.clicksOnIsProviderCoveredB(planName);
-		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
-				plansummaryPage);
+		ProviderSearchPage providerSearchPage = plansummaryPage.clicksOnIsProviderCoveredUms(planName);
+		if(providerSearchPage!=null) {
+			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
 	
+	}
 	}
 	
 	/**
 	 * @toDo:Verify X out of Y provider covered information is displayed on Plan Summary page
 	 */
-	@Then("^Verify X out of Y provider covered information is displayed on Plan Summary page$")
-		public void verifyproviderscovered(DataTable Planname)
+	@Then("^Verify X out of Y provider covered information is displayed on Plan Summary page ums$")
+		public void verify_providers_covered_ums(DataTable Planname)
 	{
 		
 		List<DataTableRow> plannameAttributesRow = Planname
@@ -157,13 +152,20 @@ public class ProviderSearchStepDefinitionUHC {
 		String planName = plannameAttributesMap.get("PlanName");
 		
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		if(plansummaryPage.providerinfo(planName))
+		Assert.assertTrue("Provider coverage Info not updated", plansummaryPage.providerinfo(planName));
+	}
+	
+	/**
+	 * @toDo:user user selects a provider
+	 */
+	@When("^user selects a provider and retuns to VPP page in ums$")
+	public void user_selects_provider_and_return_vpp_page_ums() {
 		{
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
-					plansummaryPage);
-		}
-		else {
-			Assert.fail("Error Loading Provider search info");
+			ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
+					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+			VPPPlanSummaryPage plansummaryPage = providerSearchPage.selectsProvider();
+			Assert.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+
 		}
 	}
 }

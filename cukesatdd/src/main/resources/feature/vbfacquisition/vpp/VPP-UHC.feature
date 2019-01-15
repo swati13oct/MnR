@@ -8,14 +8,15 @@ Given the user is on the uhcmedicaresolutions site landing page
 When the user performs plan search using following information in UMS site
 	| Zip Code    | <zipcode>|
 	| County Name |<county> |
+Then user validates plan count for all plan types on plan summary page in the UMS site
 When user views plans of the below plan type in UMS site
 	| Plan Type | <plantype> |
 Then the user view plan details of the above selected plan in UMS site and validates
 	| Plan Name | <planName> |
 
-Examples:
-	| zipcode | county             | plantype |  planName                                             |
-	| 80001   | Adams County       | MAPD     |  AARP MedicareComplete SecureHorizons Plan 2 (HMO)    |
+    Examples: 
+      | zipcode | county       | plantype |               planName                            |
+      | 80002   | Adams County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 	
 @defect1964
 Scenario Outline: To verify correct message shows on view details page after checking compare plans box

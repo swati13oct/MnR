@@ -1,7 +1,7 @@
- @velocityDashers
+@contactUs @velocityDashers
 Feature: V1.1To test Send us a question Widget and Click to call functionality in contact us redesign pages in UHCM site
 
-  @secureEmailWidgetCancel @regressionMember
+  @contactUs1 @secureEmailWidgetCancel @regressionMember
   Scenario Outline: Verify Secure Email Us Widget section in contact us redesign page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |
@@ -16,7 +16,7 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
       | PDP      | IDCardmember     | test@optum.com | test@optum.com  |
       | MAPD     | IndividualMember | test@optum.com | test@optum.com  |
 
-  @GroupEmailConfirmMessage @regressionMember
+  @contactUs2 @GroupEmailConfirmMessage @regressionMember
   Scenario Outline: Verify Group Email Widget Confirm Request in contact us redesign page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |
@@ -37,7 +37,7 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
       | MAPD     | GEORGIAGroup  | Finding a Pharmacy          | test@optum.com     | test@optum.com            |             9999999999 |                    9999999999 | Thank you for your inquiry. We value your input, and would be happy to answer your questions. A Customer Service Advocate will review your question and respond to you shortly. |
       | MAPD     | TEXASERSGroup | Updating Member information | test@optum.com     | test@optum.com            |             9999999999 |                    9999999999 | Thank you for your inquiry. We value your input, and would be happy to answer your questions. A Customer Service Advocate will review your question and respond to you shortly. |
 
-  @GroupEmailAQuestionFiledValidations  @regressionMember
+  @contactUs3 @GroupEmailAQuestionFiledValidations  @regressionMember
   Scenario Outline: Verify Group Email Widget Confirm Request in contact us redesign page with error messages
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |
@@ -60,7 +60,7 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
       | MAPD     | CALPERSGroup | Payment Information | abc                | xyz                       |                    123 |                           789 | Enter phone number like this: 111-111-1111. | Your confirmation alternative phone number and alternative phone number do not match. | Enter your email address like this: yourname@emailprovider.com. | Your email confirmation and email address do not match. |
       | MAPD     | GEORGIAGroup | Payment Information |                    |                           |                        |                               | Enter phone number like this: 111-111-1111. | Your confirmation alternative phone number and alternative phone number do not match. | Enter your email address like this: yourname@emailprovider.com. | Your email confirmation and email address do not match. |
 
-  @SHIPEmailUsFunctionality  @regressionMember
+  @contactUs4 @SHIPEmailUsFunctionality  @regressionMember
   Scenario Outline: Verify SHIP Email Us Widget Confirm Request in contact us redesign page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |
@@ -85,7 +85,7 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
       | plantype | memberType | enquiryType | message | aarpMemberShipNumber | firstName | lastName | emailAddress   | confirmEmailAddress | date | month | year | expectedMessage                                                                                                                          |
       | PHIP     | SHIPCLAIMS | Claims      | Testing |           1234567890 | test      | test     | test@optum.com | test@optum.com      |   01 |    01 | 1950 | We value your input and will be happy to answer your questions. A UnitedHealthcare Customer Service representative will respond shortly. |
 
-  @goToInbox  @regressionMember
+  @contactUs5 @goToInbox  @regressionMember
   Scenario Outline: Verify go To Inbox button on contactUS redesign page for opted in member
     Given login with following details logins in the member portal and validate elements
       | Member Type | <memberType> |
@@ -96,7 +96,7 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
       | memberType      |
       | MA_AARP_GOGreen |
 
-  @clickToCallCancel  @regressionMember
+  @contactUs6 @clickToCallCancel  @regressionMember
   Scenario Outline: Verify clickToCall Widget Expansion (Drop-Down, Text Box and Button UI) and click on cancel on contactUS redesign page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |
@@ -110,7 +110,7 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
       | plantype | memberType   | phoneNumber |
       | MAPD     | CALPERSGroup |  9999999999 |
 
-  @clickToCallConfirmation  @regressionMember
+  @contactUs7 @clickToCallConfirmation  @rgressionMember
   Scenario Outline: Verify Click to Call Widget Drop-Down Request Routing and Confirmation message functionality on contactUS redesign page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |
@@ -127,8 +127,8 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
       | plantype | memberType   | phoneNumber | formatPhoneNumber | expectedMessage                                                                                                                                                      |
       | MAPD     | CALPERSGroup |  9999999999 | 999-999-9999      | We value your input and will be happy to answer your questions. A UnitedHealthcare® Customer Service representative will call you shortly at the number you provided |
 
-  @sendUsQuestionPDP  @regressionMember
-  Scenario Outline: Verify sendUs A Question Widget page for PDP display section in contact us redesign page
+  @contactUs8 @sendUsQuestionPDP  @regressionMember
+  Scenario Outline: Verify send Us A Question Widget page for PDP display section in contact us redesign page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |
       | Member Type | <memberType> |
@@ -139,7 +139,7 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
       | plantype | memberType   |
       | PDP      | IDCardmember |
 
-  @regressionContactUsForTerminatedMembers  @regressionMember
+  @contactUs9 @regressionContactUsForTerminatedMembers  @regressionMember
   Scenario Outline: Verify terminated members view on contact us redesign page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |

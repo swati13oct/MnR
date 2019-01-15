@@ -1,9 +1,7 @@
-
-@aprilRelease2018
-@groupretireecustomgroup
+@groupretiree customgroup
 Feature:CTTest all group retiree member pages for sign in and registration.Make sure links are working to go to external hsid page to preform the action member needs.
 
-@groupretireecustom
+@groupretireecustomgroup1
 Scenario Outline:Verify custom group retiree for sign and registration are redirecting to external hsid page.
 Given the user is on group retiree acquisition home page
 When I find groups dropdown populated with different retiree group name
