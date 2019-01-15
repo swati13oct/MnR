@@ -235,7 +235,7 @@ Examples:
    
     Examples: 
       | planType | claimPeriod    | domain | claimssystem |
-      | MAPD     | Last 24 months | NICE   | NICECLAIMS   |
+   #   | MAPD     | Last 24 months | NICE   | NICECLAIMS   |
       | MAPD     | Last 24 months | COSMOS| COSMOSCLAIMS   |
      
   

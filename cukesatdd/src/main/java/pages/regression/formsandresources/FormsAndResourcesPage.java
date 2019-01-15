@@ -128,8 +128,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	/** Plan Material Section **/
 
 	//@FindBy(xpath = "//*[@id='plan_material_fnr2018']//*[not(contains(text(),'ng-hide'))]//*[contains(text(),'Plan Materials')]")
-	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/div[3]/div[1]/div[2]//div[2]/div/div[2]//section/div/div[1]//div[1]/h2")
-	
+	@FindBy(xpath = "(//*[contains(text(),\"Plan Materials\")])[4]")
 	public WebElement PlanMaterialSection;
 	
 	//*[@id="plan_material_fnr"]/div/div[1]/h2

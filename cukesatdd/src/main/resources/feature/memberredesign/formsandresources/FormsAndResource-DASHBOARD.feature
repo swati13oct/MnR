@@ -207,7 +207,7 @@ Scenario Outline: To validate the forms and resources page MAPD AARP Individual 
      | PASSPORT					| <passport>    			|
      | OVER THE COUNTER			| <overthecounter>    		|  
    	Then validate that annual directory section is displayed
-    | Member Type | <memberType> |
+     | Member Type | <memberType> |
     Then validate pdf's in annual directory section
      |Member Type|<memberType>|
      | ProviderDirectory     		  | <providerdirectory>    |
@@ -329,11 +329,6 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     Then validate that the AnocSection is displayed
     Then validate that annual directory section is displayed
     | Member Type | <memberType> |
-    		
-	And the user verifies that the correct pdfs are coming in the anoc section
-			      | ANNUAL NOTICE OF CHANGES    | <anoc>                       |
-			      | EVIDENCE OF COVERAGEANOC    | <evidenceofcoverageanoc>     |
-			      | COMPREHENSIVE FORMULARYANOC | <comprehensiveformularyanoc> |
     And both Pharmacy and provider search links are displayed
     | PlanType |<planType>|
     Then validate that My Document section is displayed
@@ -345,6 +340,11 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
      | ProviderDirectory     		  | <providerdirectory>    |
      | Vendor Information Sheet       | <vendorInformationsheet> |
      |Pharmacy Directory Information  |<pharmacydirectoryinformation>|
+     And the user verifies that the correct pdfs are coming in the anoc section
+      | Member Type|<memberType>|
+      | ANNUAL NOTICE OF CHANGES    | <anoc>                       |
+      | EVIDENCE OF COVERAGEANOC    | <evidenceofcoverageanoc>     |
+      | COMPREHENSIVE FORMULARYANOC | <comprehensiveformularyanoc> |
 
     Examples: 
       | planType | memberType         | language | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | comprehensiveformulary  | priorauth           | steptherapy  | formularyadd        | formularydel        | anoc                     | evidenceofcoverageanoc | comprehensiveformularyanoc |unitedhealthpassportprogram |alternativedruglist|providerdirectory   | vendorInformationsheet    |pharmacydirectoryinformation  |
@@ -522,6 +522,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
       | FORMULARY ADDITIONS     | <formularyadd>           |
       | FORMULARY DELETIONS     | <formularydel>           |
 	And the user verifies that the correct pdfs are coming in the anoc section
+	  |Member Type|<memberType>|
       | ANNUAL NOTICE OF CHANGES    | <anoc>                       |
       | EVIDENCE OF COVERAGEANOC    | <evidenceofcoverageanoc>     |
       | COMPREHENSIVE FORMULARYANOC | <comprehensiveformularyanoc> |
@@ -941,11 +942,11 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     | Member Type | <memberType> |
     Then validate that the forms & resources section is displayed
     Then verifies that Electronic Funds pdf for ship is displayed
-    Then the user verifies the pdfs for ship if particular pdf is not present
-		| Member Type | <memberType> |
-		| BENEFIT HIGHLIGHTS  |<benefitstable>    |
-		| PLAN OVERVIEW | <planoverview>  |
-		| OUTLINE OF COVERAGE    |<outlineofcoverage>|
+   # Then the user verifies the pdfs for ship if particular pdf is not present
+	#	| Member Type | <memberType> |
+	#	| BENEFIT HIGHLIGHTS  |<benefitstable>    |
+	#	| PLAN OVERVIEW | <planoverview>  |
+	#	| OUTLINE OF COVERAGE    |<outlineofcoverage>|
 
     Examples: 
       | planType | memberType     | benefitstable  |planoverview|outlineofcoverage |
@@ -960,7 +961,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <member> |
-    And User Clicks on the Pop up displayed
+    And user Clicks on the Pop up displayed and checks payment link
     #And user clicks on the view document and resources link and navigate to forms and resource page from member auth page
     #And validates that PEEHIP logo is not displayed
     #And validate for active member Temporary Id Card and Plan Order Material links are displayed
