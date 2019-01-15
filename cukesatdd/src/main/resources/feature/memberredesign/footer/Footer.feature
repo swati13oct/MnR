@@ -1,9 +1,6 @@
-@member_redesign_footer @regressionMember
-Feature: Footer validation
-
-
-
-  @IncrediblesFooter
+@footer @member_redesign_footer @regressionMember
+Feature: F1.2Footer validation
+  @footer1 @IncrediblesFooter
   Scenario Outline: Verify footer section is in place
   # note: not going to validate pages from Rally, i.e. Dashboard (DCE), Find Care & Costs
   # note: if system is in future date, payment page may not show for user and this test will end up failing

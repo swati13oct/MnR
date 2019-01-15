@@ -103,8 +103,7 @@ public class VppStepDefinitionUpdatedAARP {
 	 */
 	@And("^the user views the plans of the below plan type in AARP site$")
 	public void user_performs_planSearch_in_aarp_site(DataTable givenAttributes) {
-		List<DataTableRow> givenAttributesRow = givenAttributes
-				.getGherkinRows();
+		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -113,20 +112,12 @@ public class VppStepDefinitionUpdatedAARP {
 		}
 
 		String plantype = givenAttributesMap.get("Plan Type");
-		System.out.println("Select PlanType to view Plans for entered Zip"+plantype);
+		System.out.println("Select PlanType to view Plans for entered Zip" + plantype);
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		
-		plansummaryPage = plansummaryPage.viewPlanSummary(plantype);
 
-		if (plansummaryPage != null) {
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
-					plansummaryPage);
-			
-		} else {
-			Assert.fail("Error loading plans of desired plantype in  VPP plan summary page");
-		}
+		plansummaryPage.viewPlanSummary(plantype);
 
 	}
 	

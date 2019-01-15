@@ -1,7 +1,7 @@
-@claimspage @theTransformers @regressionMember
+@claims @theTransformers 
 Feature: T1.1To validate the new changes related to claims page on the member redesigned site
 
-@claimsSummaryFED
+@claims1 @claimsSummaryFED
 Scenario Outline: To validate the claims present for the Federal member on claims summary page for federal members
 Given login with following details logins in the member portal and validate elements
   | Plan Type      | <planType>     |
@@ -26,7 +26,7 @@ Examples:
      | MAPD       | Last 24 months | NICE   | NICECLAIMS   |
      | PDP      | Last 24 months | RX     | RXCLAIMS     |
 
-@claimsSummarySHIP
+@claims2 @claimsSummarySHIP @regressionMember @febrelease
 Scenario Outline: To validate the claims present for the SHIP member on claims summary page for SHIP members
 Given login with following details logins in the member portal and validate elements
   | Plan Type      | <planType>     |
@@ -47,7 +47,7 @@ Examples:
       | planType | claimPeriod    | domain | claimssystem |
       | SHIP     | Last 24 Months | NA     | SHIPCLAIMS   |
  
-@claimsDetailsTableFED 
+@claims3 @claimsDetailsTableFED 
 Scenario Outline: To Verify Claim Table on Claims Details Page for federal members
 Given login with following details logins in the member portal and validate elements
   | Plan Type      | <planType>     |
@@ -68,7 +68,7 @@ Examples:
   | MA       | Last 24 months | NICECLAIMS   |
   | MAPD     | Last 24 months | COSMOSCLAIMS |
     
-@ClaimsDetailsSHIP
+@claims4 @ClaimsDetailsSHIP
 Scenario Outline: To Verify Learn more section on Claims Details Page
 Given login with following details logins in the member portal and validate elements
   | Plan Type      | <planType>     |
@@ -85,7 +85,7 @@ Examples:
    | SHIP     | Last 24 Months | SHIPCLAIMS   |
    
   
-@TC10_COMBO
+@claims5 @TC10_COMBO
 Scenario Outline: To validate the claims present for the Combo member on claims sumamry page & the Details on the Claims Details page 
 Given login with following details logins in the member portal and validate elements
   | Plan Type      | <planType>     |
@@ -112,7 +112,7 @@ Examples:
    | planType | claimPeriod    | domain | claimssystem |
    | SHIP    | Last 24 months  | NA      |    COSMOSCLAIMS |
 
-@TC_09claimsPHIP 
+@claims6 @TC_09claimsPHIP 
 Scenario Outline: To validate the Error Message for a PHIP  member on claims sumamry page
 Given login with following details logins in the member portal and validate elements
   | Plan Type      | <planType>     |
@@ -169,7 +169,7 @@ Examples:
       #| planType | claimPeriod   | claimToDate | claimFromDate |
       #| MAPD     | Custom Search | 10/10/2017  | 06/14/2012    |
   
-  @claimsSummaryAndDetails 
+@claims7  @claimsSummaryAndDetails 
   Scenario Outline: To validate the claims present for the Federal member on claims sumamry page for AARP site
    Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>     |
@@ -194,7 +194,7 @@ Examples:
       | MAPD     | Last 24 months | NICE   | NICECLAIMS   | 
 
 
-@TC03_FEDAARPIndividualPDP   
+@claims8 @TC03_FEDAARPIndividualPDP   
     Scenario Outline: To validate the claims present for the Federal member on claims sumamry page for AARP site
     Given login with following details logins in the member portal and validate elements
       
@@ -213,7 +213,7 @@ Examples:
       | PDP      | Last 24 months | RX     | RXCLAIMS     |
      
         @Tc02 @Tc05
-  Scenario Outline: To validate the claims present for the Federal member on claims sumamry page for AARP site
+@claims9  Scenario Outline: To validate the claims present for the Federal member on claims sumamry page for AARP site
    Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>     |
       | Test Data Type | <claimssystem> |
@@ -239,7 +239,7 @@ Examples:
       | MAPD     | Last 24 months | COSMOS| COSMOSCLAIMS   |
      
   
-       @TC01_FED_AARP_Individual_NICE @TC04_FED_UHC_Individual_COSMOS
+@claims10  @TC01_FED_AARP_Individual_NICE @TC04_FED_UHC_Individual_COSMOS
   Scenario Outline: To validate the claims present for the Federal member on claims sumamry page & the Details on the Claims Details page 
    Given login with following details logins in the member portal and validate elements
      
@@ -267,7 +267,7 @@ Examples:
       #| MA       | Last 24 months | COSMOS | COSMOSCLAIMS |
       
      
-      @TC11_PCP
+@claims11   @TC11_PCP
   Scenario Outline: To validate the claims present for the Federal member on claims sumamry page for AARP site
    Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>     |
@@ -294,7 +294,7 @@ Examples:
       | PCP      | Last 24 months | PCP   | COSMOSCLAIMS   |
       
     
-      @claimsprintanddownload @thePredator
+@claims12  @claimsprintanddownload @thePredator
   	Scenario Outline: To validate the <claimssystem> on claims summary page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>     |
@@ -319,7 +319,7 @@ Examples:
       | planType | claimPeriod    | domain | claimssystem |
       | MAPD     | Last 24 Months | COSMOS     | COSMOSCLAIMS   |
       
-      @claimsSummaryFEDError
+@claims13   @claimsSummaryFEDError
 Scenario Outline: To validate the claims present for the Federal member on claims summary page for federal members
 Given login with following details logins in the member portal and validate elements
   | Plan Type      | <planType>     |
