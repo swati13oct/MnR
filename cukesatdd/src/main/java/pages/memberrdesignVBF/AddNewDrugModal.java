@@ -47,7 +47,7 @@ public class AddNewDrugModal extends UhcDriver {
 	public AddNewDrugModal(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		CommonUtility.waitForPageLoadNew(driver, addNewDrugHeading, 10);
+		CommonUtility.waitForPageLoadNew(driver, searchButton, 10);
 	}
 
 	@Override
