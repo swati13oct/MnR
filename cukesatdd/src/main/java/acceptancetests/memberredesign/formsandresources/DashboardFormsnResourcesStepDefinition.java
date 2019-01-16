@@ -675,11 +675,14 @@ public class DashboardFormsnResourcesStepDefinition {
 	 * }
 	 */
 	@Then("^validate that the plan material section is displayed$")
-	public void validate_that_the_plan_material_section_is_displayed() throws Throwable {
+	public void validate_that_the_plan_material_section_is_displayed(DataTable attribute) throws Throwable {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
 		System.out.println("fnr page");
-		if (formsAndResourcesPage.getplanmaterialsection().isDisplayed()) {
+		List<List<String>> data = attribute.raw();
+		String memberType=data.get(0).get(1);
+				
+		if (formsAndResourcesPage.getplanmaterialsection(memberType).isDisplayed()) {
 			System.out.println("plan materials");
 			Assert.assertTrue(true);
 		} else {
