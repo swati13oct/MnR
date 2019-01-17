@@ -212,8 +212,9 @@ Examples:
       | planType | claimPeriod    | domain | claimssystem |
       | PDP      | Last 24 months | RX     | RXCLAIMS     |
      
-        @Tc02 @Tc05
-@claims9  Scenario Outline: To validate the claims present for the Federal member on claims sumamry page for AARP site
+        
+@claims9  @Tc02 @Tc05
+Scenario Outline: To validate the claims present for the Federal member on claims sumamry page for AARP site
    Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>     |
       | Test Data Type | <claimssystem> |
@@ -235,7 +236,7 @@ Examples:
    
     Examples: 
       | planType | claimPeriod    | domain | claimssystem |
-      | MAPD     | Last 24 months | NICE   | NICECLAIMS   |
+   #   | MAPD     | Last 24 months | NICE   | NICECLAIMS   |
       | MAPD     | Last 24 months | COSMOS| COSMOSCLAIMS   |
      
   

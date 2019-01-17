@@ -18,6 +18,7 @@ import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.regression.login.HSIDLoginPage;
+import pages.regression.memberauth.MemberAuthPage;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.formsandresources.FormsAndResourcesPage;
 import atdd.framework.*;
@@ -1253,6 +1254,17 @@ public class DashboardFormsnResourcesStepDefinition {
 
 	}
 	
-	
-	
+	@And("^user Clicks on the Pop up displayed and checks payment link$")
+	public void member_clicks_popup() throws InterruptedException {
+
+		MemberAuthPage popupMauth = (MemberAuthPage) getLoginScenario().getBean(PageConstants.Member_Auth_PopUp);
+		Thread.sleep(10000);
+		popupMauth.PopupClick();
+		/*AccountHomePage NewWindow = popupMauth.PopupClick();
+		
+		 * Thread.sleep(10000); if(NewWindow!=null){
+		 * getLoginScenario().saveBean(PageConstants.DashPage, NewWindow); } else {
+		 * System.out.println("NewWindow is null"); } }
+		 */
+	}
 }
