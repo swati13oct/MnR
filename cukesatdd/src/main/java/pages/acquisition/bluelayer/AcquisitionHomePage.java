@@ -131,8 +131,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "cobrowse-disclaimer")
 	private WebElement cobrowsemodelwindow;
 
-	@FindBy(xpath = "//a[@class='cta-button']")
-	private WebElement takeTheQuizBtn;
+	/*@FindBy(xpath = "//a[@class='cta-button']")
+	private WebElement takeTheQuizBtn;*/
+	
+	@FindBy(xpath = "//a[contains(text(),'Plan Selector') or @ng-controller='emailwidgetCtrl'//div[@class='scroll-pane']//div[@class='nav-col nav-col-1'][3]//h3[4]/a]")
+	private WebElement PlanSelectorHeader;
 
 	@FindBy(xpath = ".//*[@id='colhowdoesthiswork_dce']//*[@itemprop='significantLink']/*[@class='cta-button secondary']")
 	public WebElement getStarted;
@@ -1073,8 +1076,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		Actions action = new Actions(driver);
 		PageFactory.initElements(driver, this);
 		action.moveToElement(ourPlans).build().perform();
-		waitforElement(takeTheQuizBtn);
-		takeTheQuizBtn.click();
+		waitforElement(PlanSelectorHeader);
+		PlanSelectorHeader.click();
 		return new PlanSelectorNewPage(driver);
 	}
 
