@@ -307,6 +307,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     And validate that the view temporary id card link is displayed
     | Member Type | <memberType> |
     Then validate that the plan material section is displayed
+    | Member Type | <memberType> |
     And validate that english is default language in the dropdown
     | Member Type | <memberType> |
     And the user validates the language dropdown and selects new value in dropdown successfully
@@ -365,6 +366,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     And validate that the view temporary id card link is displayed
     | Member Type | <memberType> |
     Then validate that the plan material section is displayed
+    | Member Type | <memberType> |
     And validate that english is default language in the dropdown
       | Member Type | <memberType> |
     And the user validates the language dropdown and selects new value in dropdown successfully
@@ -420,6 +422,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     | Member Type    | <memberType>    |
    # And validates that PEEHIP logo is not displayed
     Then validate that the plan material section is displayed
+    | Member Type | <memberType> |
     And validate for active member Temporary Id Card and Plan Order Material links are displayed
     | Member Type | <memberType> |
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
@@ -486,6 +489,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     | Member Type    | <memberType>    |
     #And validates that PEEHIP logo is not displayed
     Then validate that the plan material section is displayed
+    | Member Type | <memberType> |
     And validate for active member Temporary Id Card and Plan Order Material links are displayed
     | Member Type | <memberType> |
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
@@ -544,6 +548,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
    #And validates that PEEHIP logo is not displayed
     And validates the pdp texas logo
     Then validate that the plan material section is displayed
+    | Member Type | <memberType> |
     And validate for active member Temporary Id Card and Plan Order Material links are displayed
     | Member Type | <memberType> |
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
@@ -605,6 +610,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     | Member Type    | <memberType>    |
     #And validates that PEEHIP logo is not displayed
     Then validate that the plan material section is displayed
+    | Member Type | <memberType> |
     And validate for active member Temporary Id Card and Plan Order Material links are displayed
     | Member Type | <memberType> |
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
@@ -670,6 +676,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     | Member Type    | <memberType>    |
    # And validates that PEEHIP logo is not displayed
     Then validate that the plan material section is displayed
+    | Member Type | <memberType> |
     And validate for active member Temporary Id Card and Plan Order Material links are displayed
     | Member Type | <memberType> |
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
@@ -723,6 +730,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     | Member Type    | <memberType>    |
    # And the user verifies the alpeehip logo
     Then validate that the plan material section is displayed
+    | Member Type | <memberType> |
     And validate for active member Temporary Id Card and Plan Order Material links are displayed
     | Member Type | <memberType> |
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
@@ -789,6 +797,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     | Member Type | <memberType> |
    #And validates that PEEHIP logo is not displayed
     Then validate that the plan material section is displayed
+    | Member Type | <memberType> |
    And validate for active member Temporary Id Card and Plan Order Material links are displayed
     | Member Type | <memberType> |
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
@@ -798,7 +807,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     | Member Type | <memberType> |
     And the user validates the language dropdown and selects new value in dropdown successfully
       | Language | <language> |
-     Then validate that the anoc section is not displayed
+    Then validate that the anoc section is not displayed
     Then validate that annual directory section is displayed
     | Member Type | <memberType> |
     And both the Pharmacy locator & provider search links are displayed
@@ -843,6 +852,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     | Member Type    | <memberType>    |
    #And validates that PEEHIP logo is not displayed
     Then validate that the plan material section is displayed
+    | Member Type | <memberType> |
     And validate for active member Temporary Id Card and Plan Order Material links are displayed
     | Member Type | <memberType> |
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
@@ -885,11 +895,13 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
    #And validates that PEEHIP logo is not displayed
     And user is on the forms and resources page for first plan tab
     Then validate that the plan material section is displayed
+    | Member Type | <memberType> |
     And validate for active member Temporary Id Card and Plan Order Material links are displayed
     | Member Type | <memberType> |
     And the user scrolls till the end of the page to check the forms and resources section
     And the user changes the plan tab to view the forms and resources page for second plan
     Then validate that the plan material section is displayed
+    | Member Type | <memberType> |
     And validate for active member Temporary Id Card and Plan Order Material links are displayed
     | Member Type | <memberType> |
     And the user scrolls till the end of the page to check the forms and resources section
@@ -908,6 +920,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     | Member Type    | <memberType>    |
    # And validates that PEEHIP logo is not displayed
     Then validate that the plan material section is displayed
+    | Member Type | <memberType> |
     And for terminated member order plan materials link is not displayed
     Then validate that the anoc section is not displayed
     And both the Pharmacy locator and provider search links are not displayed
@@ -938,6 +951,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     And validate that the view temporary id card link is displayed
     | Member Type | <memberType> |
     Then validate that the plan material section is displayed
+    | Member Type | <memberType> |
     And validate that english is default language in the dropdown
     | Member Type | <memberType> |
     Then validate that the forms & resources section is displayed
