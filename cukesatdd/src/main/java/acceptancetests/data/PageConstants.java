@@ -590,6 +590,8 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 	public static final String SECURITY_QUESTIONS_PAGE = "securityQuestionsPage";
 	
 	public static final String PLAN_SELECTOR_NEW_PAGE = "planSelectorNewPage";
+	
+	public static final String PLAN_SELECTOR_QUESTIONNAIRE = "planSelectorQuestionnaire";
 		
 	public static final String SSO_TEST_HARNESS_PAGE = "ssoTestHarnessPage";
 	
