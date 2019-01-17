@@ -8,12 +8,10 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
-import pages.member.ulayer.ConfirmOneTimePaymentPage;
 
 public class AutomaticPaymentPage extends UhcDriver{
 
-	@FindBy(name = "amount")
-	private WebElement amountRadioButton;
+	
 	
 	@FindBy(name = "routingNumber")
 	private WebElement routingNumberField;
@@ -38,9 +36,7 @@ public class AutomaticPaymentPage extends UhcDriver{
 	
 	@FindBy(xpath = ".//*[@class='btn btn--primary']")			
 	private WebElement continueButton;
-	
-	@FindBy(xpath = "/html/body/div[6]/div/div/table/tbody/tr[5]/td/div[2]/div/div/div[2]/div[7]/div/div/div/div/form/div/div/div[2]/div/table[1]/tbody/tr[1]/td[2]")			
-	private WebElement amountDisplayed;
+
 	
 	@FindBy(xpath = "/html/body/div[6]/div/div/table/tbody/tr[5]/td/div[2]/div/div/div[2]/div[7]/div/div/div/div/form/div/div/div[2]/div/table[1]/tbody/tr[2]/td[1]/input")			
 	private WebElement otherAmtRadioButton;

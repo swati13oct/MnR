@@ -8,9 +8,9 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 
 public class PrepareforInitialEnrollmentPage extends GlobalWebElements {
 
@@ -57,7 +57,7 @@ public class PrepareforInitialEnrollmentPage extends GlobalWebElements {
 		validate(medicareSupplementInsurancePlansLink);
 		exploreChangingPlansLink.click();
 		validate(medicareSupplementInsurancePlansLink);
-		if (driver.getTitle().equalsIgnoreCase("Change Medicare Plans | AARP® Medicare Plans from UnitedHealthcare®")) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_CHANGE_MEDICARE_PLANS)) {
 			return new ExploreChangingPlansPage(driver);
 		}else{
 		
@@ -70,10 +70,11 @@ public class PrepareforInitialEnrollmentPage extends GlobalWebElements {
 	public DiscoverMoreResourcesPage discoverMoreResourcesClick() {
 		validate(discoverMoreResourcesMedicareEducationLink);
 		Actions actions = new Actions(driver);
+		PageFactory.initElements(driver, this);
         actions.moveToElement(navigationSectionMedicareEducationLink);
         actions.moveToElement(discoverMoreResourcesMedicareEducationLink);
         actions.click().build().perform();
-        if (driver.getTitle().equalsIgnoreCase("More Medicare Resources | AARP® Medicare Plans from UnitedHealthcare®")) {
+        if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_MORE_MEDICARE_RESOURCES)) {
 			return new DiscoverMoreResourcesPage(driver);
 		}else{
 		

@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import atdd.framework.UhcDriver;
 
 /**
@@ -364,11 +365,6 @@ public class RegistrationInformationPage extends UhcDriver {
 	@FindBy(id = "emailText")
 	private WebElement emailIdText;	
 	
-	
-	/** edit your profile link. */
-	@FindBy(linkText = "EDIT YOUR PROFILE")
-	private WebElement editYourProfileLink;
-	
 	/** print link. */
 	@FindBy(id = "printLink")
 	private WebElement printLink;
@@ -490,7 +486,7 @@ public class RegistrationInformationPage extends UhcDriver {
 	public void pressEnterYear()
 	{
 		yearToEnterText.sendKeys(Keys.ENTER);
-		
+		System.out.println(driver.getCurrentUrl());
 	}
 	/**
 	 * Click the continue button

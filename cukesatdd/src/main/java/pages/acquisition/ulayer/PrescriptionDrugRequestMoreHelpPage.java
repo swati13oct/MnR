@@ -29,7 +29,7 @@ public class PrescriptionDrugRequestMoreHelpPage extends GlobalWebElements {
 		validate(headerMedicareSupplementPlansLink);
 		headerMedicareSupplementPlansLink.click();
 		validate(headerMedicareSupplementPlansLink);
-		if(driver.getTitle().equalsIgnoreCase("AARP Medicare Supplement Insurance Plans")){
+		if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_AARP_MEDICARE_SUPPLEMENT_INSURANCE_PLANS)){
 			return new MedicareSupplementInsurancePlansPage(driver);
 		}
 		return null;

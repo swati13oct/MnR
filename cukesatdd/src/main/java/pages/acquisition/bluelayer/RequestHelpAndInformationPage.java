@@ -3,6 +3,8 @@
  */
 package pages.acquisition.bluelayer;
 
+import java.util.Set;
+
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -10,8 +12,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -20,11 +22,23 @@ import atdd.framework.UhcDriver;
  */
 public class RequestHelpAndInformationPage extends UhcDriver {
 	
-	@FindBy(xpath =".//*[@id='subPageLeft']/div/div/div/div[2]/div/div[1]/p[2]/a")
+	@FindBy(xpath =".//*[@id='article_mededaccordion0']//*[contains(text(),'Request an Appointment')]")
 	private WebElement ma_requestAgentAppointmentLink;
 	                 
-	@FindBy(xpath =".//*[@id='subPageLeft']/div/div/div/div[2]/div/div[1]/p[3]/a")
-	private WebElement findUnitedHealthcareLink;
+	@FindBy(xpath =".//*[@id='article_mededaccordion2']//*[contains(text(),'Find UnitedHealthcare')]")
+	private WebElement communityMeetingLink;
+	
+	@FindBy(xpath =".//*[@id='collapse2heading_article_mededaccordion0']")
+	private WebElement requestAgentApptDropdown;
+	
+	@FindBy(xpath =".//*[@id='collapse2heading_article_mededaccordion2']")
+	private WebElement communityMeetingDropdown;
+	
+	@FindBy(xpath =".//*[@id='ghn_lnk_1']")
+	private WebElement homeTab;
+	
+	@FindBy(xpath =".//*[@id='ym-first_name']")
+	private WebElement firstNameField;
 	
 	public RequestHelpAndInformationPage(WebDriver driver) {
 		super(driver);
@@ -38,23 +52,15 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 		
 	}
 	
-	public RequestAgentAppointmentPage nagiateToAgentAppointmentRequest()
+	public RequestAgentAppointmentPage navigateToAgentAppointmentRequest()
 	{
+		CommonUtility.waitForPageLoad(driver, requestAgentApptDropdown, 50);
+		requestAgentApptDropdown.click();
+		CommonUtility.waitForPageLoad(driver, ma_requestAgentAppointmentLink, 50);
+		//switchToNewTabNew(ma_requestAgentAppointmentLink);
 		ma_requestAgentAppointmentLink.click();
 		
-		try {
-			if (ma_requestAgentAppointmentLink.isDisplayed()) {
-				CommonUtility.waitForElementToDisappear(driver, ma_requestAgentAppointmentLink,
-						CommonConstants.TIMEOUT_30);
-			}
-		} catch (NoSuchElementException e) {
-			System.out.println("ma_requestAgentAppointmentLink not found");
-		} catch (TimeoutException ex) {
-			System.out.println("ma_requestAgentAppointmentLink not found");
-		} catch (Exception e) {
-			System.out.println("ma_requestAgentAppointmentLink not found");
-		}
-		if(currentUrl().contains("medicare-advantage-plans/request-information/agentebrc.html"))
+		if(currentUrl().contains("agentebrc"))
 		{
 			return new RequestAgentAppointmentPage(driver);
 		}
@@ -62,7 +68,19 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 		return null;
 	}
 	public boolean validateUhcLink(){
-		if(validate(findUnitedHealthcareLink)&&findUnitedHealthcareLink.getText().contains("Find UnitedHealthcare in Your Community"))
+		CommonUtility.waitForPageLoad(driver, communityMeetingDropdown, 50);
+		if(validate(communityMeetingDropdown)&&communityMeetingDropdown.getText().contains("Community"))
+			return true;
+		return false;
+	}
+
+	public boolean landingOnCommunityPage() {
+		CommonUtility.waitForPageLoad(driver, communityMeetingDropdown, 50);
+		communityMeetingDropdown.click();
+		CommonUtility.waitForPageLoad(driver, communityMeetingLink, 10);
+		communityMeetingLink.click();
+		CommonUtility.waitForPageLoad(driver, homeTab, 30);
+		if(driver.getCurrentUrl().contains("attend"))
 			return true;
 		return false;
 	}

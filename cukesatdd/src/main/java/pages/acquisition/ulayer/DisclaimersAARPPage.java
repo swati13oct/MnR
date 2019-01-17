@@ -8,8 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import atdd.framework.UhcDriver;
-
 /**
  * @author rkodumur
  *
@@ -35,7 +33,7 @@ public class DisclaimersAARPPage extends GlobalWebElements{
 		validate(footerAgentsnBrokersLink);
 		footerAgentsnBrokersLink.click();
 		validate(footerAgentsnBrokersLink);
-		if(driver.getTitle().equalsIgnoreCase("Health Insurance Broker & Agent Tools | AARP® Medicare Plans from UnitedHealthcare®")){
+		if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_HEALTH_INSURANCE_BROKER_AGENT_TOOLS)){
 			return new AgentsnBrokersAARPPage(driver);
 		}
 		return null;

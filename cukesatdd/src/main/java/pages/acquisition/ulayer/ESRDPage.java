@@ -9,9 +9,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -20,10 +20,10 @@ import atdd.framework.UhcDriver;
  */
 public class ESRDPage extends UhcDriver{	
 	
-	@FindBy(xpath = "//label[@for='esrd-no']")
+	@FindBy(xpath = ".//*[@id='esrd-no_label']")
 	private WebElement esrdno;
 	
-	@FindBy(xpath = "//label[@for='esrd-yes']")
+	@FindBy(xpath = ".//*[@id='esrd-yes_label']")
 	private WebElement esrdyes;
 	
 	@FindBy(id = "esrdprevious")
@@ -96,12 +96,9 @@ public class ESRDPage extends UhcDriver{
 	@FindBy(xpath = ".//*[@id='esrdInfo']/p")
 	private WebElement esrdHeader;
 	
-	@FindBy(xpath = ".//*[@id='esrdquestion']/p/strog/span/span/b")
-	private WebElement esrdQuestion;
-	
 	public boolean validateESRDPage(){
 		boolean flag = false;
-		if(validate(esrdHeader)&&validate(esrdQuestion)&&validate(esrdno)&&validate(esrdyes)&&validate(esrdprevious)
+		if(validate(esrdHeader)&&validate(esrdno)&&validate(esrdyes)&&validate(esrdprevious)
 		&&validate(esrdsaveandcontinue)&&validate(esrdcancelregistration))
 			flag = true;
 		return flag;

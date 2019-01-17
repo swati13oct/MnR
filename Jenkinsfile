@@ -73,7 +73,7 @@ def updatePipelineVersion(String gitBranch, String pipelineVersion){
 		pipelineVersion = "${version}-${env.BUILD_NUMBER}"
    } else if (gitBranch=="develop"){
 	   echo "Branch name is develop. Use global Jenkins variable UCP_DEVELOP_RELEASE_VERSION to set version to ${UCP_DEVELOP_RELEASE_VERSION}"
-	   pipelineVersion = "${UCP_DEVELOP_RELEASE_VERSION}-d{env.BUILD_NUMBER}"
+	   pipelineVersion = "${UCP_DEVELOP_RELEASE_VERSION}-d${env.BUILD_NUMBER}"
    }
 	echo "New version: ${pipelineVersion}"
 	return pipelineVersion
@@ -110,7 +110,7 @@ node('docker-maven-slave') {
 		writeBuildPropertiesFile(gitBranch, gitHubRepoUrl, pipelineVersion)		
 
         // Set build display name and description
-		currentBuild.displayName = "#${env.BUILD_NUMBER} - ${pipelineVersion}"
+		currentBuild.displayName = "${pipelineVersion}"
         currentBuild.description = "Git commit: ${fullGitCommit.take(6)}"
 
         echo "Building version: ${env.BUILD_NUMBER} from commit: ${fullGitCommit}"
@@ -125,7 +125,7 @@ node('docker-maven-slave') {
         }
 
         echo "Build complete"
-		archiveArtifacts artifacts: '**/target/*.war , **/target/*.ear, **/build/*.zip, **/build_info.txt, **/build.properties', fingerprint: true
+		archiveArtifacts artifacts: '**/target/*.war , **/target/*.ear, **/build/*.zip, **/build_info.txt, **/build.properties, **/target/*pmd.xml', fingerprint: true
     }
     echo "Build complete"
 	

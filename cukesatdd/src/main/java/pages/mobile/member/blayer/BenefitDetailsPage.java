@@ -15,9 +15,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.mobile.data.CommonConstants;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstantsMobile;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -26,8 +26,7 @@ import atdd.framework.UhcDriver;
  */
 public class BenefitDetailsPage extends UhcDriver{
 	
-	@FindBy(xpath="//div[@class='site-header']/a")
-	private WebElement menuButton;
+	
 	
 	@FindBy(xpath = "//div[@id='standard']//div[@class='carousel-next clickable']")
 	private WebElement nextarrow;
@@ -61,9 +60,9 @@ public class BenefitDetailsPage extends UhcDriver{
 	public BenefitDetailsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		String fileName = CommonConstants.BENEFITS_DETAIL_PAGE_DATA;
+		String fileName = CommonConstantsMobile.BENEFITS_DETAIL_PAGE_DATA;
 		benefitsDetail = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_MOBILE_ULAYER_MEMBER);
+				CommonConstantsMobile.PAGE_OBJECT_DIRECTORY_MOBILE_ULAYER_MEMBER);
 		openAndValidate();
 	}
 
@@ -123,14 +122,14 @@ public class BenefitDetailsPage extends UhcDriver{
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 		JSONObject benefitsDetailExpectedJson = expectedDataMap
-				.get(acceptancetests.atdd.data.CommonConstants.BENEFITS_DETAIL);
+				.get(acceptancetests.data.CommonConstants.BENEFITS_DETAIL);
 		
 		return benefitsDetailExpectedJson;
 	}
 
 	public JSONObject getExpectedDataship(Map<String, JSONObject> expectedDataMap) {
 		JSONObject benefitsDetailExpectedJson = expectedDataMap
-				.get(acceptancetests.atdd.data.CommonConstants.BENEFITS_DETAIL);
+				.get(acceptancetests.data.CommonConstants.BENEFITS_DETAIL);
 		
 		return benefitsDetailExpectedJson;
 	}
@@ -139,9 +138,9 @@ public class BenefitDetailsPage extends UhcDriver{
 
 
 	public JSONObject getBrowserCheck() {
-		String fileName = CommonConstants.MOBILE_BROWSER_CHECK_DATA;
+		String fileName = CommonConstantsMobile.MOBILE_BROWSER_CHECK_DATA;
 		browserCheckData = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_MOBILE_ULAYER_MEMBER);
+				CommonConstantsMobile.PAGE_OBJECT_DIRECTORY_MOBILE_ULAYER_MEMBER);
 
 		JSONObject jsonObject = new JSONObject();
 		for (String key : browserCheckData.getExpectedData().keySet()) {

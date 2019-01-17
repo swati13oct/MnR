@@ -8,9 +8,10 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.PageTitleConstants;
 
 /**
  * @author pperugu
@@ -72,7 +73,7 @@ public class ZipcodeLookupPage extends UhcDriver {
 
 		zipcodeButton.click();
 		if (driver.getTitle().equalsIgnoreCase(
-				"Our Medicare Plan Types | UnitedHealthcare®")) {
+				PageTitleConstants.BLAYER_MEDICARE_PLAN_TYPES_TITLE)) {
 			return new ZipcodeSelectionPage(driver);
 		}
 		return null;

@@ -3,10 +3,6 @@
  */
 package pages.redesign;
 
-import java.util.concurrent.TimeUnit;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,27 +11,29 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import pages.acquisition.bluelayer.LoginAssistancePage;
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.MRConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
-import atdd.framework.MRScenario;
+import acceptancetests.data.MRConstants;
 import atdd.framework.UhcDriver;
 
 /**
  * @author pagarwa5
  *
  */
+/**
+* Functionality: Redesign login page
+*/
 public class RedesignLoginPage extends UhcDriver {
 
 
-	private static String PAGE_URL = MRConstants.MEDICARE_UHC_REDESIGN;
+	//private static String PAGE_URL = MRConstants.MEDICARE_UHC_REDESIGN;
+	private static String PAGE_URL = MRConstants.REDESIGN_LOGIN_URL;
+	
+	//private static String CI_PAGE_URL = MRConstants.REDESIGN_LOGIN_URL; 
+	
 	
 	@FindBy(xpath = "//area[@href='javascript:clWin()'][@alt = 'close']")
 	private WebElement FeedbackModal;
 
-	@FindBy(id = "username")
+/*	@FindBy(id = "username")
 	private WebElement userNameField;
 
 	@FindBy(id = "password")
@@ -48,105 +46,160 @@ public class RedesignLoginPage extends UhcDriver {
 	private WebElement forgotUsernamePasswordLink;
 
 	@FindBy(id = "usercheckbox")
-	private WebElement userNameCheckBox;
+	private WebElement userNameCheckBox;*/
 	
-	@FindBy(id = "new-email")
-	private WebElement NewEmailTxtBox;
+	// HSID Login Page
+    @FindBy(id = "hsid-username")
+    private WebElement hsiduserNameField;
 
-	@FindBy(id = "new-email-confirm")
-	private WebElement ConfirmNewEmailTxtBox;
-	
-	@FindBy(xpath = "//*[@id='email-modal-form']//button")
-	private WebElement NewEmailContinueBtn;
+    @FindBy(id = "hsid-password")
+    private WebElement hsidpasswordField;
+    
+    @FindBy(id = "hsid-submit")
+    private WebElement signInHsidButton;
+
+    //HSID Security Questions
+	@FindBy(id = "authQuestiontextLabelId")
+	private static WebElement questionid;
+
+	@FindBy(id = "challengeQuestionList[0].userAnswer")
+	private static WebElement securityAnswer;
+
+	@FindBy(id = "continueSubmitButton")
+	private static WebElement continueButton;
 
 
-	private PageData browserCheckData;
-
-	private JSONObject browserCheckJson;
-
-
+	/**
+	* @todo : Redesign login 
+	*/
 	public RedesignLoginPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
 	}
+	
+	
 
-	public Object loginWith(String username, String password, String category) throws InterruptedException {
-		sendkeys(userNameField, username);
-		sendkeys(passwordField, password);
-		System.out.println(signInButton.isEnabled());
-		signInButton.click();
-		
-		if (MRScenario.environment.equals("dev-a")) {
-			while (!isAlertPresent());
-        }
-
-
-		if (MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("team-b")) {
-
-			while (!isAlertPresent());
-		}
-		if ( MRScenario.environment.equals("team-c")) {
-			
-			Alert alert = driver.switchTo().alert();
-	        alert.accept();
-	        Alert alert1 = driver.switchTo().alert();
-	        alert1.accept();
-	        }
-		if ( MRScenario.environment.equals("team-h") || MRScenario.environment.equals("team-a")) {
-			try{
+	// Updated loginWith to include RallyDashboard navigation
+		public Object loginWith(String username, String password) throws InterruptedException {
+			sendkeysNew(hsiduserNameField, username);
+			sendkeysNew(hsidpasswordField, password);
+			signInHsidButton.click();
+			System.out.println("Sign In clicked");
+			try {
 				Alert alert = driver.switchTo().alert();
 				alert.accept();
+				Alert alert1 = driver.switchTo().alert();
+				alert1.accept();
+			} catch (Exception e) {
+				System.out.println("No Such alert displayed");
 			}
-			catch(Throwable e) {
-				System.out.println("Alert isn't present!!");
-			} 
-		        }
+			int counter = 0;
+			do {
+				if (counter <= 20) {
+					Thread.sleep(5000);
+					System.out.println("Time elapsed post sign In clicked --" + counter + "*5 sec.");
+				} else {
+					System.out.println("TimeOut!!!");
+					return null;
+				}
+				counter++;
+			} while (!(driver.getTitle().contains("security questions")));
 			
-		Thread.sleep(15000);
-		CommonUtility.checkPageIsReady(driver);
-/*		try{
-			if(validate(NewEmailTxtBox)){
-			NewEmailTxtBox.sendKeys("uhcmnrportals@gmail.com");
-			ConfirmNewEmailTxtBox.sendKeys("uhcmnrportals@gmail.com");
-			System.out.println("@@@@@@@@@@@@ Enter New Email Page Displayed for ULayer Member@@@@@@@@@@@@");
-			NewEmailContinueBtn.click();
-			Thread.sleep(3000);
-			CommonUtility.checkPageIsReady(driver);
+			if (currentUrl().contains("=securityQuestion")) {
+			
+				String friendname = "name1";
+				String favouritecolor = "color1";
+				String phoneNumber = "number1";
+				String Question = questionid.getText();
+				System.out.println("question is" + Question);
+				if (Question.equalsIgnoreCase("What is your best friend's name?")) {
+					System.out.println("Question is related to friendname");
+					securityAnswer.sendKeys(friendname);
+					}
+
+				else if (Question.equalsIgnoreCase("What is your favorite color?")) {
+					System.out.println("Question is related to color");
+					securityAnswer.sendKeys(favouritecolor);
+					} 
+				else {
+					System.out.println("Question is related to phone");
+					securityAnswer.sendKeys(phoneNumber);
+
+					}
+				validateNew(continueButton);
+				continueButton.click();
+				}
+			
+			try {
+				Thread.sleep(12000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		}
-		catch (Exception e) {
-			System.out.println("New Email Page NOT Present");
-		}
 
-*/		try{
-			FeedbackModal.click();
-			System.out.println("FeedBack Modal Present");
-			if (validate(FeedbackModal)){
-				System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
+			try{
+				FeedbackModal.click();
+				System.out.println("FeedBack Modal Present");
+				if (validate(FeedbackModal)){
+					System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
+				}
+				System.out.println("FeedBack Modal Closed");
+				Thread.sleep(3000);
 			}
-			System.out.println("FeedBack Modal Closed");
-			Thread.sleep(3000);
-		}
-		catch (Exception e) {
-			System.out.println("FeedBack Modal NOT Present");
+			catch (Exception e) {
+				System.out.println("FeedBack Modal NOT Present");
 
-		}
-		if(currentUrl().contains("/dashboard")) {
-			System.out.println("@@@@@@@@@@@@ Rally Dashboard Page Displayed for BlueLayer Member@@@@@@@@@@@@");
-			return new BlueLayerHomePage(driver, category);
-		}
-		System.out.println("@@@@@@@@@@@@ Rally Dashboard Page is NOT DISPLAYED @@@@@@@@@@@@");
+			}
 
-		return null;
-	}
+/*			if (currentUrl().contains("/testharness")){
+				System.out.println("@@@@@@@@@@@@ Redesign Testharness Page Displayed for Member@@@@@@@@@@@@");
+				return new UlayerHomePage(driver);
+			}
+*/			
+			Thread.sleep(5000);
+		if (currentUrl().contains("/dashboard")){
+				System.out.println("@@@@@@@@@@@@ Rally Dashboard Page Displayed for Member @@@@@@@@@@@@");
+				return new UlayerHomePage(driver);
+			}
+			System.out.println("@@@@@@@@@@@@ Account Home Page is NOT DISPLAYED @@@@@@@@@@@@");
+			return null;			
+		}
+	
+		@Override
+		public void openAndValidate() {
+	/*		if(MRScenario.environment.contentEquals("test-a") || MRScenario.environment.contentEquals("stage")){
+				start(PAGE_URL);
+			}
+			if(MRScenario.environment.contentEquals("team-ci1")){
+				start(CI_PAGE_URL);
+			}
+	*/		
+			start(PAGE_URL);
+			validate(hsiduserNameField);
+			System.out.println("@@@@@@@@@@@@@  Test Environment and URL  : "+PAGE_URL+"  @@@@@@@@@@@@@@@@@@@@@@@");
+		}
+	
+	/**
+	 * 
+	 * 
+	 * 
+	 * @param username
+	 * @param password
+	 * @return
+	 * @throws InterruptedException
+	 */
 
-	public Object loginWith(String username, String password) throws InterruptedException {
+/*	public Object loginWith(String username, String password) throws InterruptedException {
 		sendkeys(userNameField,username);
 		sendkeys(passwordField,password);
 		System.out.println(signInButton.isEnabled());
 		signInButton.click();
-		if ( MRScenario.environment.equals("team-h") || MRScenario.environment.equals("team-a")) {
+		Thread.sleep(25000);
+		
+		if ( MRScenario.environment.equals("team-f") || MRScenario.environment.equals("team-h") || MRScenario.environment.equals("team-a") || MRScenario.environment.equals("team-ci1")) {
+			while (isAlertPresent());
+
 			try{
 				Alert alert = driver.switchTo().alert();
 				alert.accept();
@@ -156,9 +209,9 @@ public class RedesignLoginPage extends UhcDriver {
 			} 
 		}
 		
-		Thread.sleep(15000);
+		Thread.sleep(50000);
 		CommonUtility.checkPageIsReady(driver);
-/*		try{
+		try{
 			if(validate(NewEmailTxtBox)){
 			NewEmailTxtBox.sendKeys("uhcmnrportals@gmail.com");
 			ConfirmNewEmailTxtBox.sendKeys("uhcmnrportals@gmail.com");
@@ -172,7 +225,7 @@ public class RedesignLoginPage extends UhcDriver {
 			System.out.println("New Email Page NOT Present");
 		}
 
-*/		try{
+		try{
 			FeedbackModal.click();
 			System.out.println("FeedBack Modal Present");
 			if (validate(FeedbackModal)){
@@ -186,29 +239,27 @@ public class RedesignLoginPage extends UhcDriver {
 
 		}
 
-/*		if (currentUrl().contains("/testharness.html")){
-			System.out.println("@@@@@@@@@@@@ Redesign Home Page Displayed for ULayer Member@@@@@@@@@@@@");
+		if (currentUrl().contains("/testharness")){
+			System.out.println("@@@@@@@@@@@@ Redesign Testharness Page Displayed for Member@@@@@@@@@@@@");
 			return new UlayerHomePage(driver);
 		}
-*/		
+		
 
 	if (currentUrl().contains("/dashboard")){
-			System.out.println("@@@@@@@@@@@@ Rally Dashboard Page Displayed for ULayer Member@@@@@@@@@@@@");
+			System.out.println("@@@@@@@@@@@@ Rally Dashboard Page Displayed for Member @@@@@@@@@@@@");
 			return new UlayerHomePage(driver);
 		}
-		System.out.println("@@@@@@@@@@@@ Rally Dashboard Page is NOT DISPLAYED @@@@@@@@@@@@");
+		System.out.println("@@@@@@@@@@@@ Account Home Page is NOT DISPLAYED @@@@@@@@@@@@");
 		return null;
-	}
+	}*/
+	/**
+	* @todo : user name valdiation 
+	*/
 
-	@Override
-	public void openAndValidate() {
-		start(PAGE_URL);
-		validate(userNameField);
-		System.out.println("@@@@@@@@@@@@@  Test Environment and URL  : "+PAGE_URL+"@@@@@@@@@@@@@@@@@@@@@@@");
-
-	}
-
-	public LoginAssistancePage navigateToLoginAssistance() {
+	/**
+	* @todo : click on forgot password
+	*/
+/*	public LoginAssistancePage navigateToLoginAssistance() {
 		forgotUsernamePasswordLink.click();
 		CommonUtility.waitForPageLoad(driver, userNameCheckBox, 5);
 		if(driver.getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions |Username and Password Assistance"))
@@ -219,38 +270,14 @@ public class RedesignLoginPage extends UhcDriver {
 		return null;
 
 	}
-
-	public JSONObject getBrowserCheck() {
-		String fileName = CommonConstants.UHCM_BROWSER_CHECK_DATA;
-		browserCheckData = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);
-
-		JSONObject jsonObject = new JSONObject();
-		for (String key : browserCheckData.getExpectedData().keySet()) {
-			WebElement element = findElement(browserCheckData.getExpectedData()
-					.get(key));
-			if (element != null) {
-				if (validate(element)) {
-					try {
-						jsonObject.put(key, element.getText());
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			}
-		}
-		browserCheckJson = jsonObject;
-
-		return browserCheckJson;
-
-
-	}
-	
+*/
+	/**
+	* @todo : wait for dashboard page to load
+	*/
 	public boolean isAlertPresent(){ 
 	    try{ 
 	        Alert a = new WebDriverWait(driver, 5).until(ExpectedConditions.alertIsPresent());
-	        if(a!=null){
+/*	        if(a!=null){
 	            System.out.println("Alert is present = " + a.getText());
 	            driver.switchTo().alert().accept();
 	            Alert a2 = new WebDriverWait(driver, 5).until(ExpectedConditions.alertIsPresent());
@@ -259,12 +286,17 @@ public class RedesignLoginPage extends UhcDriver {
 		            
 		            driver.switchTo().alert().accept();
 	            }
-	            return true;
-	        }else{
+	            //return true;
+	        }
+*/            
+	        System.out.println("Alert is present = " + a.getText());
+            driver.switchTo().alert().accept();
+	        return true;
+	        /*else{
 	            //throw new Throwable();
 	        	System.out.println("alert is not present 1");
 	        	return false;
-	        }
+	        }*/
 	    } 
 	    catch (Throwable e) {
 	        System.out.println("Alert isn't present!!");

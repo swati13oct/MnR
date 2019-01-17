@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import pages.acquisition.bluelayer.ZipcodeLookupPage;
-import acceptancetests.atdd.data.MRConstants;
+import acceptancetests.data.MRConstants;
 import atdd.framework.UhcDriver;
 
 /**
@@ -27,9 +27,6 @@ public class OurPlansPage extends UhcDriver {
 
 	@FindBy(id = "nav-zipcode")
 	private WebElement zipfield;
-
-	@FindBy(xpath = "//*[@id='zipLookup']/p/a")
-	private WebElement LookUpZipCode;
 
 	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div[2]/form/span/span")
 	private WebElement errormessage;
@@ -77,6 +74,7 @@ public class OurPlansPage extends UhcDriver {
 
 		validate(OurPlansLink);
 		Actions action = new Actions(driver);
+		PageFactory.initElements(driver, this);
 		action.moveToElement(OurPlansLink).build().perform();
 		validate(OurPlansLink);
 	}
@@ -95,6 +93,7 @@ public class OurPlansPage extends UhcDriver {
 	public AcquisitionHomePage ErrorMessage() {
 		validate(errormessage);
 		Actions action = new Actions(driver);
+		PageFactory.initElements(driver, this);
 		action.moveToElement(errormessage);
 
 		validate(errormessage);
@@ -116,6 +115,7 @@ public class OurPlansPage extends UhcDriver {
 	public AcquisitionHomePage errormessage() {
 		validate(errormessage);
 		Actions action = new Actions(driver);
+		PageFactory.initElements(driver, this);
 		action.moveToElement(errormessage);
 
 		validate(errormessage);

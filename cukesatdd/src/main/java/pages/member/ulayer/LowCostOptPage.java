@@ -16,9 +16,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 public class LowCostOptPage extends UhcDriver {
@@ -29,20 +29,7 @@ public class LowCostOptPage extends UhcDriver {
 	@FindBys(value = { @FindBy(name = "typeofdrug") })
 	private List<WebElement> genericDrugs;
 	
-	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/p[1]")
-	private WebElement genericDrug;
-	
-	@FindBy(xpath = ".//*[@id='dce.member']/div/div[4]/div/div/div[1]/p[1]/span/a")
-	private WebElement editLink;
-	
-	@FindBy(xpath = ".//*[@id='dce.member']/div/div[4]/div/div/div[1]/div[1]/div[1]")
-	private WebElement manageDrugTab;
-	
-	@FindBy(xpath = ".//*[@id='dce.member']/div/div[4]/div/div/div[1]/div[1]/div[2]")
-	private WebElement selectPharmacyTab;
-	
-	@FindBy(xpath = ".//*[@id='dce.member']/div/div[4]/div/div/div[1]/div[1]/div[3]")
-	private WebElement viewDrugCostsTab;
+
 
 	private PageData lowCostOptions;
 

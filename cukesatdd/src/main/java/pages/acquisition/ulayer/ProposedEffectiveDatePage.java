@@ -1,18 +1,15 @@
 package pages.acquisition.ulayer;
 
-import java.util.Map;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 public class ProposedEffectiveDatePage extends UhcDriver{
@@ -93,11 +90,16 @@ public class ProposedEffectiveDatePage extends UhcDriver{
 	private WebElement pedCancelBtn;
 	
 	public boolean validateEffectiveDatePage(){
-		boolean flag = false;
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if(validate(segmentHeading)&&validate(saveAndContinue)&&validate(dateRadioBtn)&&
 		validate(pedPrevBtn)&&validate(pedCancelBtn))
-			flag = true;
-		return flag;
+			return true;
+		return false;
 	}
 	
 }

@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 public class DrugCoverageOptionsPage extends UhcDriver {

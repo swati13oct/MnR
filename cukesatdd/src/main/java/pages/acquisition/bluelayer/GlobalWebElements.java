@@ -165,8 +165,6 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(id="ghn_lnk_2")
 	public static WebElement ourPlansHoverLink;
 	
-	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div/div/div[1]/p[2]/a/span")
-	private WebElement ma_moreHelpInfoLink;
 	
 	@FindBy(id="subnav_2")
 	public static WebElement ourPlansDropdownText;
@@ -231,6 +229,7 @@ public class GlobalWebElements extends UhcDriver {
 	
 	public void ourPlansHover() {
 		Actions actions = new Actions(driver);
+		PageFactory.initElements(driver, this);
 		actions.moveToElement(ourPlansHoverLink);
 		actions.moveToElement(ourPlansDropdownText);
 		actions.click();

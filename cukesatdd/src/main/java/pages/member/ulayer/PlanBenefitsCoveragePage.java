@@ -23,10 +23,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.ElementData;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.ElementData;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import cucumber.api.DataTable;
 
@@ -36,14 +36,12 @@ import cucumber.api.DataTable;
  */
 public class PlanBenefitsCoveragePage extends UhcDriver {
 
-	@FindBy(id = "planBenefitsApp")
-	private WebElement planBenefitsContent;
+	
 
 	@FindBy(id ="disclosure_link")
 	private WebElement logOut;
 
-	@FindBy(id = "standardNetwork")
-	private WebElement standardNetwork;
+	
 
 	private PageData planBenefitsCoverage;
 

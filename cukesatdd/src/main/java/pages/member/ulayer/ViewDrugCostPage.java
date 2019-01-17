@@ -15,9 +15,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 public class ViewDrugCostPage extends UhcDriver {
@@ -25,8 +25,7 @@ public class ViewDrugCostPage extends UhcDriver {
 	@FindBy(xpath = "//table[@class='viewDrugCost']//td[@class='borderLeft_color druglistedit']/p/a")
 	private WebElement editLink;
 
-	@FindBy(className = "viewDrugCost")
-	private WebElement drugCostContent;
+	
 
 	@FindBy(linkText = "Sign Out")
 	private WebElement logOut;
@@ -37,11 +36,7 @@ public class ViewDrugCostPage extends UhcDriver {
 	@FindBy(className= "borderLeft drugdosage ng-binding")
 	private WebElement descBox;
 	
-	@FindBy(linkText ="Edit pharmacy")
-	private WebElement editPharmacyLink;
-	
-	@FindBy(xpath =".//*[@id='dce.member']/div/div[7]/div/div/div/div/div[1]/div[3]/div[3]")
-	private WebElement descriptionTable;
+
 
 	private PageData viewDrugCost;
 

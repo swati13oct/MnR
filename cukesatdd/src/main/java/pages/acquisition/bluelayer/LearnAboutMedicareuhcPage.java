@@ -11,10 +11,10 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
-import pages.acquisition.bluelayer.GlobalWebElements;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
+import pages.acquisition.ulayer.PageTitleConstants;
 
 /**
  * @author rkodumur
@@ -63,7 +63,7 @@ public class LearnAboutMedicareuhcPage extends GlobalWebElements{
 		validate(prepareForInitialEnrollmentLink);
 		prepareForInitialEnrollmentLink.click();
 		validate(prepareForInitialEnrollmentLink);
-		if(driver.getTitle().equalsIgnoreCase("Prepare for Your Medicare Initial Enrollment Period | UnitedHealthcare®")){
+		if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_PREPARE_FOR_YOUR_MEDICARE_INITIAL_ENROLLMENT_PERIOD)){
 			return new PrepareForInitialEnrollmentuhcPage(driver);
 		}
 		return null;
@@ -72,11 +72,12 @@ public class LearnAboutMedicareuhcPage extends GlobalWebElements{
 	public ExploreChangingPlansuhcPage exploreChangingPlansClick() {
 		validate(exploreChangingPlansMedicareEducationLink);
 		Actions actions = new Actions(driver);
+		PageFactory.initElements(driver, this);
 	    actions.moveToElement(navigationSectionMedicareEducationLink);
 	    actions.moveToElement(exploreChangingPlansMedicareEducationLink);
 	    actions.click().build().perform();
 	    validate(navigationSectionMedicareEducationLink);
-		if (driver.getTitle().equalsIgnoreCase("Change Medicare Plans | UnitedHealthcare®")) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_CHANGE_MEDICARE_PLANS_UNITEDHEALTHCARE)) {
 			return new ExploreChangingPlansuhcPage(driver);
 		}else{
 		

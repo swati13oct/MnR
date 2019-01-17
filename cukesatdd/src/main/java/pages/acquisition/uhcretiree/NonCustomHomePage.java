@@ -1,14 +1,13 @@
 package pages.acquisition.uhcretiree;
 
-import java.util.ArrayList;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.MRConstants;
+import acceptancetests.data.MRConstants;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.PageTitleConstants;
 
 public class NonCustomHomePage extends UhcDriver {
 	
@@ -34,7 +33,7 @@ public class NonCustomHomePage extends UhcDriver {
 		validate(getstartedbutton);
 		getstartedbutton.click();
 		
-		if(driver.getTitle().equalsIgnoreCase("Problem loading page"))
+		if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_PROBLEM_LOADING_PAGE))
 		{
 			return new SalesforceSitePage(driver);
 		}

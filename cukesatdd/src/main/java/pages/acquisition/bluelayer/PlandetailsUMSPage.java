@@ -17,10 +17,10 @@ public class PlandetailsUMSPage {
 	@FindBy(id = "planDetailsPage")
 	private WebElement plandetails;
 
-	private WebDriver driver;
+	
 
 	public PlandetailsUMSPage(WebDriver driver) {
-		this.driver = driver;
+		
 
 		// Initialise Elements
 		PageFactory.initElements(driver, this);

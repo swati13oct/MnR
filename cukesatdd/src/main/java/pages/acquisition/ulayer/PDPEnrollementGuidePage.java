@@ -12,9 +12,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -44,23 +43,20 @@ public class PDPEnrollementGuidePage extends UhcDriver{
 	@FindBy(id = "emailAddressConfirm")
 	private WebElement emailAddressConfirmField;
 	
-	@FindBy(id = "promotions_yes")
+	@FindBy(xpath = ".//label[@for='promotions_yes']")
 	private WebElement promotionsYes;
 	
-	@FindBy(id = "promotions_no")
+	@FindBy(xpath = ".//label[@for='promotions_no']")
 	private WebElement promotionsNo;
 	
-	@FindBy(id = "gender_male")
+	@FindBy(xpath = ".//label[@for='gender_male']")
 	private WebElement genderMale;
 	
-	@FindBy(id = "gender_female")
+	@FindBy(xpath = ".//label[@for='gender_female']")
 	private WebElement genderFemale;
 	
 	@FindBy(id = "medicareNumber")
 	private WebElement medicareNumberField;
-	
-	@FindBy(id="planGuide1")
-	private WebElement chkBoxPlanName;
 	
 	@FindBy(id = "oneTimeAddress.addressLine1")
 	private WebElement addressLine1Field;
@@ -79,18 +75,18 @@ public class PDPEnrollementGuidePage extends UhcDriver{
 	
 	@FindBys(value = { @FindBy(xpath = "//select[@id='oneTimeAddress.stateCode']/option") })
 	private List<WebElement> stateCodeDropDown;
-	
-	@FindBy(id="oneTimeAddress.stateCode")
-	private WebElement stateDrpDown;
-	
+
+	@FindBy(xpath = "//*[@class='error'][@for='medicareNumber']")
+	private WebElement MedicareIDErrorMsg;
+
 	@FindBy(id = "oneTimeAddress.zipCode")
 	private WebElement zipCodeField;
 	
 	@FindBy(id = "dayPhone")
 	private WebElement dayPhoneField;
 	
-	@FindBy(id = "medicareTitle")
-	private WebElement medicareTitle;
+	@FindBy(id = "nameInfo")
+	private WebElement nameInfoConfPage;
 		
 	public PDPEnrollementGuidePage(WebDriver driver) {
 		super(driver);
@@ -137,11 +133,13 @@ public class PDPEnrollementGuidePage extends UhcDriver{
 		String zipCode = personalAttributesMap.get("Zip Code");
 		String dayTimePhNumber = personalAttributesMap.get("Daytime phone number");
 		
-		if(driver.findElement(By.xpath(".//*[@id='planGuideInformation']/div[2]")).getText().contains(planGuide))
+		if(driver.findElement(By.xpath(".//*[@id='planGuideInformation']/div[2]")).getText().contains(planGuide)){
+			CommonUtility.waitForPageLoad(driver, planGuide1, 20);
 			planGuide1.click();
-		else
+		}else{
+			CommonUtility.waitForPageLoad(driver, planGuide2, 20);
 			planGuide2.click();
-			
+		}
 		sendkeys(firstNameField, firstName);
 		sendkeys(lastNameField, lastName);
 		sendkeys(birthDateField, dob);
@@ -173,19 +171,50 @@ public class PDPEnrollementGuidePage extends UhcDriver{
 
 	public EnquiryKitConfirmationPage submitsRequest() {
 		inquryKitSubmitLink.click();
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		CommonUtility.waitForPageLoad(driver, medicareTitle, 10);
+		CommonUtility.waitForPageLoad(driver, nameInfoConfPage, 30);
 		if(currentUrl().contains("request-information/inquirykitconfirmation.html")){
 			return  new EnquiryKitConfirmationPage(driver);
 		}
 		return null;
-	
 		
+	}
+
+
+	public boolean ValidateMedicareIDformat(boolean MedicareValidFlag) {
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println("Medicare ID provided is Valid Format"+MedicareValidFlag);
+		if(validate(MedicareIDErrorMsg)){
+			if(MedicareValidFlag ==false){
+				System.out.println("Error Message Displayed for InCorrect Medicare ID Format");
+				return true;
+			}
+			else if(MedicareValidFlag ==true){
+				System.out.println("Error Message Displayed for Correct Medicare ID Format");
+				return false;
+			}
+			else{
+				System.out.println("Please provide true/false for Medicare ID format provided is Valid"+MedicareValidFlag);
+				return false;
+			}
+		}
+		else if(!validate(MedicareIDErrorMsg)){
+			if(MedicareValidFlag ==true){
+				System.out.println("Error Message is NOT Displayed for Correct Medicare ID Format");
+				return true;
+			}
+			else{
+				System.out.println("Please provide true/false for Medicare ID format provided is Valid"+MedicareValidFlag);
+				return false;
+			}
+		}
+		return false;
+	
 	}
 
 }

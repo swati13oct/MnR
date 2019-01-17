@@ -5,8 +5,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.MRConstants;
+import acceptancetests.data.MRConstants;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.PageTitleConstants;
 
 /**
  * @author pperugu
@@ -35,9 +36,9 @@ public class OurPlansPage extends UhcDriver {
 
 		lookupZipcodeLink.click();
 		if (driver.getTitle().equalsIgnoreCase(
-				"Forbidden Page | UnitedHealthcare®")
+				PageTitleConstants.BLAYER_FORBIDDEN_PAGE_TITLE)
 				|| driver.getTitle().equalsIgnoreCase(
-						"Our Medicare Plan Types | UnitedHealthcare®")) {
+						PageTitleConstants.BLAYER_MEDICARE_PLAN_TYPES_TITLE)) {
 			return new ZipcodeLookupPage(driver);
 		}
 		return null;

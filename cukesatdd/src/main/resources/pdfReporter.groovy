@@ -15,7 +15,7 @@ File pdfFile = new File("target");
 
 for(Object f : pdfFile.list())
 {
-        if(f.toString().startsWith("RunMRATDD"))
+        if(f.toString().startsWith("Run"))
         {
            // println "File name/ folder:::"+f.toString();
             File pdfOverViewFile = new File("target/"+f.toString()+"/cucumber-results-feature-overview.pdf");

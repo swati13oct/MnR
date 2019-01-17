@@ -8,11 +8,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.MRConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
-import atdd.framework.MRScenario;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.MRConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 
@@ -21,8 +20,7 @@ public class TeamHLoginUlayer extends UhcDriver{
 	
 	private static String PAGE_URL = MRConstants.TeamH_ULayer_Member_URL;
 	
-	@FindBy(id = "fd_memberSignInButton")
-	private WebElement loginIn;
+	
 
 	@FindBy(id = "username")
 	private WebElement userNameField;

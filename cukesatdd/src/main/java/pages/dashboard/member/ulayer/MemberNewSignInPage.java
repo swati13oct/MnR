@@ -5,34 +5,52 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.dashboard.acquisition.RegistrationInformationPage;
-import acceptancetests.atdd.data.MRConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 public class MemberNewSignInPage extends UhcDriver{
 	//private PageData newSign;
 
-	@FindBy (css ="#siginaccheader")
+	/*@FindBy (css ="#siginaccheader")
+	private WebElement signInCard;*/
+	
+	@FindBy (id="siginaccheader")
 	private WebElement signInCard;
 
 	@FindBy (css = ".page-header--left")
 	private WebElement signInHeader;
+	
+	/*@FindBy (className = ".page-header--left")
+	private WebElement signInHeader;*/
 
-	@FindBy (css = "#username")
+	/*@FindBy (css = "#username")
+	private WebElement username;*/
+	
+	@FindBy (id = "username")
 	private WebElement username;
 
-	@FindBy (css = "#password")
+	@FindBy (id = "password")
 	private WebElement password;
 
-	@FindBy (css = "#sign-in-btn")
+/*	@FindBy (css = "#sign-in-btn")
+	private WebElement signInButton;*/
+	
+	@FindBy (id= "sign-in-btn")
 	private WebElement signInButton;
+	
+	@FindBy (id ="uname_pwd_empty_error")
+	private WebElement emptyUsernamePswd;
 
-	@FindBy (css = "#username-error>p")
+	/*@FindBy (css = "#username-error>p")
+	private WebElement usernameErrormessage;*/
+
+	@FindBy (id = "username-error")
 	private WebElement usernameErrormessage;
-
-	@FindBy (css ="#password-error>p")
+	
+/*	@FindBy (css ="#password-error>p")
+	private WebElement passwordErrorMessage;*/
+	
+	@FindBy (id ="password-error")
 	private WebElement passwordErrorMessage;
 	
 	@FindBy (id ="regbutton")
@@ -43,9 +61,7 @@ public class MemberNewSignInPage extends UhcDriver{
 	
 	@FindBy (id ="member-id")
 	private WebElement MemberId;
-	
-	@FindBy (css = "#regbutton")
-	private WebElement regbutton;
+
 	
 
 	private WebDriver driver;
@@ -73,6 +89,7 @@ public class MemberNewSignInPage extends UhcDriver{
 	public  void validateNewSignPage(){
 
 		CommonUtility.waitForPageLoad(this.driver, signInCard, 30);
+		
 		if (signInHeader.isDisplayed()){
 
 			System.out.println("i am in new sign page ------------> "+ driver.getCurrentUrl());
@@ -107,6 +124,12 @@ public class MemberNewSignInPage extends UhcDriver{
 	public boolean validatepassworderror() {
 
 		return passwordErrorMessage.isDisplayed();
+
+	}
+	
+	public boolean validateUsernamePswdError() {
+
+		return emptyUsernamePswd.isDisplayed();
 
 	}
 

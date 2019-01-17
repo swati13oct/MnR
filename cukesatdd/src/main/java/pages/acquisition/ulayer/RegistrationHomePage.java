@@ -9,9 +9,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.MRConstants;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.MRConstants;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -78,7 +78,7 @@ public class RegistrationHomePage extends UhcDriver{
 		}
 
 		if (driver.getTitle().equalsIgnoreCase(
-				"AARP Medicare Plans | Registration"))
+				PageTitleConstants.ULAYER_AARP_MEDICARE_PLANS))
 			return new PlanConfirmationPage(driver);
 		else
 			return null;
@@ -102,7 +102,7 @@ public class RegistrationHomePage extends UhcDriver{
 	
 	public RegistrationAARPErrorPage navigateToErrorPage() {		
 		if (driver.getTitle().equalsIgnoreCase(
-				"AARP Medicare Plans | Registration")) {
+				PageTitleConstants.ULAYER_AARP_MEDICARE_PLANS)) {
 			return new RegistrationAARPErrorPage(driver);
 		}
 		return null;

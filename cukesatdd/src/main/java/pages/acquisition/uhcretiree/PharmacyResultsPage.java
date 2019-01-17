@@ -28,9 +28,6 @@ public class PharmacyResultsPage extends UhcDriver {
 	@FindBy(css="h1.titleLeft")
 	private WebElement pharmacyLocatorHeading;
 	
-	@FindBy(css="div#medicareTitle>h1")
-	private WebElement pharmacyResultsHeading;
-	
 	@FindBy(css="#medicareTitle>h4:nth-child(3)")
 	private WebElement pharmaciesZipcodeHeader;
 	
@@ -39,9 +36,6 @@ public class PharmacyResultsPage extends UhcDriver {
 	
 	@FindBy(css=".pub_mid>p")
 	private WebElement pharmacySaver;
-	
-	@FindBy(css=".pub_mid>p>img")
-	private WebElement blueballonImage;
 	
 	@FindAll(@FindBy(how = How.CSS, using = "div.Pharmacyresults table#currentRowObject tbody>tr"))
 	List<WebElement> pharmacyResultsTable;

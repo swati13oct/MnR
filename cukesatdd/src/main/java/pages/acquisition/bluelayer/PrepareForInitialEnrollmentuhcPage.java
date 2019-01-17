@@ -11,10 +11,10 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
-import pages.acquisition.bluelayer.GlobalWebElements;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
+import pages.acquisition.ulayer.PageTitleConstants;
 
 /**
  * @author rkodumur
@@ -65,7 +65,7 @@ public class PrepareForInitialEnrollmentuhcPage extends GlobalWebElements{
 		validate(exploreChangingPlansLink);
 		exploreChangingPlansLink.click();
 		validate(exploreChangingPlansLink);
-		if(driver.getTitle().equalsIgnoreCase("Change Medicare Plans | UnitedHealthcare®")){
+		if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_CHANGE_MEDICARE_PLANS_UNITEDHEALTHCARE)){
 			return new ExploreChangingPlansuhcPage(driver); 
 		}
 		return null;
@@ -76,10 +76,11 @@ public class PrepareForInitialEnrollmentuhcPage extends GlobalWebElements{
 	public DiscoverMoreResourcesuhcPage discoverMoreResourcesClick() {
 		validate(discoverMoreResourcesMedicareEducationLink);
 		Actions actions = new Actions(driver);
+		PageFactory.initElements(driver, this);
         actions.moveToElement(navigationSectionMedicareEducationLink);
         actions.moveToElement(discoverMoreResourcesMedicareEducationLink);
         actions.click().build().perform();
-        if (driver.getTitle().equalsIgnoreCase("Discover More Medicare Resources & Information | UnitedHealthcare®")) {
+        if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_DISCOVER_MORE_MEDICARE_RESOURCES_INFORMATION)) {
 			return new DiscoverMoreResourcesuhcPage(driver);
 		}else{
 		

@@ -14,9 +14,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 public class MyProfilesPage extends UhcDriver {
@@ -58,14 +58,11 @@ public class MyProfilesPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='editLink']")
 	private List<WebElement> editLink;
 
-	@FindBy(xpath = "//div[@class='accProMidBg']")
-	private WebElement accountInfo;
+
 
 	@FindBy(linkText = "save")
 	private WebElement saveButton;
 
-	@FindBy(xpath = "//div[@class='myProSubCntMidBg']")
-	private WebElement planProfileInfo;
 
 	@FindBy(id = "temporaryAddress.addressLine1")
 	private WebElement tempAddress1Field;
@@ -81,12 +78,6 @@ public class MyProfilesPage extends UhcDriver {
 
 	@FindBy(id = "temporaryAddress.startDate.month")
 	private WebElement tempAddStartDateMonthField;
-
-	@FindBy(id = "temporaryAddress.startDate.day")
-	private WebElement tempAddStartDateDayField;
-
-	@FindBy(id = "temporaryAddress.startDate.year")
-	private WebElement tempAddStartDateYearField;
 
 	@FindBy(id = "temporaryAddress.stopDate.month")
 	private WebElement tempAddStopDateMonthField;

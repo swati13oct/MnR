@@ -13,7 +13,7 @@ public class HealthAndWellness  extends UhcDriver {
 	@FindBy(linkText = "Health & Wellness")
 	private WebElement rallyHealthAndWellness;
 	
-	@FindBy(id = "healthwellness_3")
+	@FindBy(xpath  = "//header[@class='hide-mobile']//a[contains(text(),'Health & Wellness')]")
 	private WebElement healthAndWellness;
 	
 	@FindBy(id = "lifestyle_desk1")
@@ -22,8 +22,7 @@ public class HealthAndWellness  extends UhcDriver {
 	@FindBy(id = "learning_desk1")
 	private WebElement learningTab;
 	
-	@FindBy(id = "rewards_desk")
-	private WebElement rewardsTab;
+	
 	
 	@FindBy(xpath = ".//*[@id='hl-hw-buckets']/div/div[1]/a/img")
 	private WebElement lifestyleIcon;
@@ -49,6 +48,9 @@ public class HealthAndWellness  extends UhcDriver {
 		validate(rallyHealthAndWellness);
 	}
 	
+	/**
+	 * clicks on Health n Wellness Tab
+	 */
 	public void clickHealthnWellnessTab(){
 		if(healthAndWellness.isDisplayed()){
 			healthAndWellness.click();
@@ -61,6 +63,9 @@ public class HealthAndWellness  extends UhcDriver {
 		}
 	}
 	
+	/**
+	 * Validates Health and Wellness dashboard level 2 tabs
+	 */
 	public void validateHnWDashboardnL2Tabs(){
 		Assert.assertTrue("Lifestyle icon is not displayed", lifestyleIcon.isDisplayed());
 		Assert.assertTrue("Learning icon is not displayed", learningIcon.isDisplayed());
@@ -68,6 +73,9 @@ public class HealthAndWellness  extends UhcDriver {
 		Assert.assertTrue("Learning tab is not displayed", learningTab.isDisplayed());
 	}
 	
+	/**
+	 * Clicks on Lifestyle tab
+	 */
 	public void clickLifestyleTab(){
 		if(lifestyleTab.isDisplayed()){
 			lifestyleTab.click();
@@ -80,10 +88,16 @@ public class HealthAndWellness  extends UhcDriver {
 		}
 	}
 	
+	/**
+	 * Validate Life style banner
+	 */
 	public void validateLifestylePage(){
 		Assert.assertTrue("Lifestyle dashboard is not displayed", hnwLifestyleBanner.isDisplayed());
 	}
 	
+	/**
+	 * Clicks on health and wellness Learning tab
+	 */
 	public void clickLearningTab(){
 		if(learningTab.isDisplayed()){
 			learningTab.click();
@@ -96,6 +110,9 @@ public class HealthAndWellness  extends UhcDriver {
 		}
 	}
 	
+	/**
+	 * validate health and wellness Learning Page
+	 */
 	public void validateLearningPage(){
 		Assert.assertTrue("Learning dashboard is not displayed", hnwLearningBanner.isDisplayed());
 	}

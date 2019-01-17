@@ -1,22 +1,17 @@
 package pages.acquisition.ulayer;
 import java.util.List;
-import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 public class AddNewDrugModal extends UhcDriver {
 
 	private PageData addnewdrug;
@@ -83,10 +78,10 @@ public class AddNewDrugModal extends UhcDriver {
 
 	public AddDrugDetails clickonSearchButton(String DrugName) throws InterruptedException {
 
-		drugsearchinput.sendKeys(DrugName);
-		Thread.sleep(3000);
+		drugsearchinput.sendKeys(DrugName.toLowerCase());
+		CommonUtility.waitForPageLoad(driver, searchButton, 20);
 		searchButton.click();  
-		waitforElement(continueButton);
+		CommonUtility.waitForPageLoad(driver, continueButton, 20);
 		continueButton.click();
 			return new AddDrugDetails(driver);
 		

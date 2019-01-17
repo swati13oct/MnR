@@ -7,9 +7,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 public class ConfirmationPage extends UhcDriver{
@@ -80,7 +80,7 @@ public class ConfirmationPage extends UhcDriver{
 		}
 		
 		// Perform the actions on new window
-		if(driver.getTitle().equalsIgnoreCase("AARP Medicare Plans - Print"))
+		if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_AARP_MEDICARE_PLANS_PRINT))
 		{
 			
 			print.isEnabled();
@@ -111,3 +111,5 @@ public class ConfirmationPage extends UhcDriver{
 	}
 
 }
+
+

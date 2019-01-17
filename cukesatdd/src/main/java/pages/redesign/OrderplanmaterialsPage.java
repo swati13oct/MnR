@@ -4,7 +4,8 @@
 package pages.redesign;
 
 import java.util.NoSuchElementException;
-import java.util.concurrent.TimeUnit;
+
+import junit.framework.Assert;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -13,14 +14,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import junit.framework.Assert;
 
 /**
  * @author sdwaraka
  *
  */
+/**
+* Functionality: order materials page
+*/
+
 public class OrderplanmaterialsPage extends UhcDriver {
 
 	@FindBy(xpath = "//area[@href='javascript:clWin()'][@alt = 'close']")
@@ -77,11 +81,7 @@ public class OrderplanmaterialsPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id = 'coi-id']/..")
 	private WebElement certificateInsurance;
 	
-	@FindBy(xpath = "//label[@for='member-materials']")
-	private WebElement radiokitLink;
 	
-	@FindBy(xpath = "//p[contains(text(),'Replacement ID card')]")
-	private WebElement radioidLink;
 
 	@FindBy(xpath="//h3[contains(text(),'Technical Support') or contains(text(),'Plan Support')]/ancestor::div[@class='col-md-4']")
 	private WebElement needhelpcomponent;
@@ -103,12 +103,10 @@ public class OrderplanmaterialsPage extends UhcDriver {
 	@FindBy(className = "orderplanmaterials")
 	private WebElement OrderPlanMaterialsSection;
 	
-	//@FindBy(id = "shipDocumentStateCodeId")
-	@FindBy(id = "state")
-	private WebElement shipDocumentStateCodeId;
 
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;
+	
 
 	public OrderplanmaterialsPage(WebDriver driver) throws InterruptedException {
 		super(driver);
@@ -131,7 +129,10 @@ public class OrderplanmaterialsPage extends UhcDriver {
 		}
 		//openAndValidate();
 	}
-	
+	/**
+	* @todo : ordermatials page options based on plan type
+	*/
+
 	@SuppressWarnings("deprecation")
 	public boolean navigatePlanTabs(String PlanType){
 		
@@ -201,7 +202,10 @@ public class OrderplanmaterialsPage extends UhcDriver {
 		System.out.println("@@@@@@@@@@@@ Invalid Plan Type / Plan Tab not found @@@@@@@@@@@@@@");
 		return false;
 	}
-	
+	/**
+	* @todo : displaying error messages of order plan materials for different plans
+	*/
+
 	@SuppressWarnings("deprecation")
 	public void ValidateOptions(String PlanType){
 		
@@ -232,7 +236,10 @@ public class OrderplanmaterialsPage extends UhcDriver {
 			Assert.fail();
 		}
 	}
-	
+	/**
+	* @todo : Validate header in order materials page
+	*/
+
 	
 	public boolean ValidateHeader(){
 		if (driver.findElement(By.xpath("//h1[@class='h4 margin-none']")).isDisplayed() && driver.findElement(By.xpath("//h2[@class='h3 medium margin-large']")).isDisplayed()){
@@ -245,17 +252,26 @@ public class OrderplanmaterialsPage extends UhcDriver {
 			return false;}
 		
 	}
+	
+	/**
+	* @todo : Display error message
+	*/
+
 	public boolean ValidateErrorMessage() throws InterruptedException{
 		Thread.sleep(3000);
 		if (validate(OrderMaterialsErrorMsg)){
 			System.out.println("*************Error Message Displayed displayed for Order materials Page***************");
-			System.out.println("*************Error Message : "+OrderMaterialsErrorMsg.getText()+" ***************");
+			System.err.println("*************Error Message : "+OrderMaterialsErrorMsg.getText()+" ***************");
 			return true;
 		}
 		else{ 
 			System.out.println("************Error message not displayed for Order materials Page***************");
 			return false;}
 	}
+
+	/**
+	* @todo : error message for ship members
+	*/
 
 	public boolean ValidateSHIPErrorMessage(){
 		
@@ -276,6 +292,10 @@ public class OrderplanmaterialsPage extends UhcDriver {
 		
 	}
 	
+	/**
+	* @todo : Plan confirmation page validation of order materials page
+	*/
+
 	public PlanMaterialConfirmationPage selectsOption(String option) throws InterruptedException {
 		
 		CommonUtility.checkPageIsReady(driver);
@@ -370,7 +390,7 @@ public class OrderplanmaterialsPage extends UhcDriver {
 			System.out.println("****** Submit Button Clicked ********");
 		}
 
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		CommonUtility.checkPageIsReady(driver);
 		if (validate(OrderConfirmationHeader) || validate(OrderConfirmation_addordermaterialLink)) {
 			System.out.println("@@@@ Opder Plan Material COnfirmation Page is Displayed @@@@");
@@ -378,8 +398,12 @@ public class OrderplanmaterialsPage extends UhcDriver {
 		} 
 			return null;
 	}
-	
-	public OrderplanmaterialsPage verifyneedHelpcomponent(){
+	/**
+	* @throws InterruptedException 
+	 * @todo : Verify help component in order materials page
+	*/
+
+	public OrderplanmaterialsPage verifyneedHelpcomponent() throws InterruptedException{
 		boolean present;
 		try{
 			validate(needhelpcomponent);
@@ -388,10 +412,12 @@ public class OrderplanmaterialsPage extends UhcDriver {
 		{
 			present=false;
 		}
-		if(present)
-		System.out.println("Able to find needhelp component");
-		else
-			System.out.println("No needhelp component is displayed");
+		if(present){
+			System.out.println("Able to find needhelp component");
+			return new OrderplanmaterialsPage(driver);
+		}
+		
+		System.out.println("No needhelp component is displayed");
 		return null;
 	}
 

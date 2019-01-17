@@ -8,7 +8,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.UnsupportedCommandException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,10 +17,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pages.acquisition.ulayer.LoginAssistancePage;
-import pages.member.ulayer.AccountHomePage;import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.MRConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import pages.dashboard.member.ulayer.MemberNewSignInPage;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.MRConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
@@ -33,13 +33,15 @@ public class LoginPage extends UhcDriver {
 
 	// Page URL
 	private static String PAGE_URL = MRConstants.AARPM_URL;
-	private static String REDESIGN_PAGE_URL = MRConstants.REDESIGN_AARPM_URL;
+
 	private static String PAGE_URL_TEST_HARNESS = MRConstants.AARPM_URL_TEAMB_TESTHARNESS;
 	private static String PAGE_URL_OFFLINE = MRConstants.AARPM_URL_OFFLINE;
-		
+
 	private static String PAGE_URL_TEAM_H_TEST_HARNESS = MRConstants.TEAMH_URL_TESTHARNES;
-	private static String PAGE_URL_TEAM_MEDICARE_TESTHARNESS = MRConstants.TEAM_MEDICARE_TESTHARNESS;
-	
+
+	private static String STAGE_DASHBOARD_URL = MRConstants.STAGE_DASHBOARD_NEW_DOMAIN_URL;
+
+
 
 	@FindBy(id = "fd_memberSignInButton")
 	private WebElement loginIn;
@@ -58,12 +60,8 @@ public class LoginPage extends UhcDriver {
 
 	@FindBy(linkText = "Forgot your username or password?")
 	private WebElement forgotUsernamePasswordLink;
-	
-	@FindBy(xpath = "//*[@id='gogreenlogin_box']/div[4]/div")
-	private WebElement gogreenPopup;
-	
-	@FindBy(xpath = "//*[@id='gogreenlogin_box']/div[4]/div/a")
-	private WebElement gogreenPopupClose;
+
+
 
 	@FindBy(id = "usercheckbox")
 	private WebElement userNameCheckBox;
@@ -71,18 +69,18 @@ public class LoginPage extends UhcDriver {
 	private PageData browserCheckData;
 
 	private JSONObject browserCheckJson;
-	
+
 	@FindBy(id = "username")
 	private WebElement thUserName;
-	
+
 	@FindBy(id = "password")
 	private WebElement thPassword;
-	
+
 	@FindBy(id = "sign-in-btn")
 	private WebElement thSignIn;
-	
+
 	@FindBy(xpath=".//*[@id='IPEinvL']/map/area[1]")
-    private WebElement iPerceptionPopUp;
+	private WebElement iPerceptionPopUp;
 
 
 
@@ -147,7 +145,7 @@ public class LoginPage extends UhcDriver {
 				System.out.println("Alert is not displayed");
 			}
 		}
-		
+
 		if(currentUrl().contains("home/my-account-home.html"))
 
 		{
@@ -159,7 +157,7 @@ public class LoginPage extends UhcDriver {
 		else if (currentUrl().contains("terminated-plan.html")) {
 			return new TerminatedHomePage(driver); 
 		}
-			return new AccountHomePage(driver);
+		return new AccountHomePage(driver);
 	}
 
 	public LoginAssistancePage navigateToLoginAssistance() {
@@ -217,7 +215,7 @@ public class LoginPage extends UhcDriver {
 		} else
 			return null;
 	}
-	
+
 	public static boolean isAlertPresent(WebDriver wd) {
 		try {
 			Alert alert = wd.switchTo().alert();
@@ -230,54 +228,75 @@ public class LoginPage extends UhcDriver {
 			return false;
 		}
 	}
-	
+
 	public boolean isAlertPresent(){ 
-	    try{ 
-	        Alert a = new WebDriverWait(driver, 5).until(ExpectedConditions.alertIsPresent());
-	        if(a!=null){
-	            System.out.println("Alert is present = " + a.getText());
-	            driver.switchTo().alert().accept();
-	            return true;
-	        }else{
-	            //throw new Throwable();
-	        	System.out.println("alert is not present 1");
-	        	return false;
-	        }
-	    } 
-	    catch (Throwable e) {
-	        System.err.println("Alert isn't present!!");
-	        return false; 
-	    } 
+		try{ 
+			Alert a = new WebDriverWait(driver, 5).until(ExpectedConditions.alertIsPresent());
+			if(a!=null){
+				System.out.println("Alert is present = " + a.getText());
+				driver.switchTo().alert().accept();
+				return true;
+			}else{
+				//throw new Throwable();
+				System.out.println("alert is not present 1");
+				return false;
+			}
+		} 
+		catch (Throwable e) {
+			System.err.println("Alert isn't present!!");
+			return false; 
+		} 
 
 	} 
-	
+
 	public void loginTo(){
 		PageFactory.initElements(driver, this);
 		openAndValidate();
 	}
-	
+
 	public void loginToTeambTestHarness(){
 		start(PAGE_URL_TEST_HARNESS);
 		validate(thUserName);
 		validate(thPassword);
 		validate(thSignIn);
 	}
-	
+
 	public void loginToTeamhTestHarness(){
 		start(PAGE_URL_TEAM_H_TEST_HARNESS);
 		validate(thUserName);
 		validate(thPassword);
 		validate(thSignIn);
 	}
-	
-	public void navigateToTeamMedicareTestHarness(){
-		start(PAGE_URL_TEAM_MEDICARE_TESTHARNESS);
-		System.out.println("User is on Medicare Test harness page");
-		//validate(thUserName);
-		//validate(thPassword);
-		//validate(thSignIn);
+
+	public void navigateToNewDashboardUrl(){
+		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage"))
+		{
+			System.out.println(STAGE_DASHBOARD_URL);
+			start(STAGE_DASHBOARD_URL);
+			System.out.println(STAGE_DASHBOARD_URL);
+			System.out.println("User is Navigating to Stage Dashboard");
+
+		}
+
+		else if (MRScenario.environmentMedicare.equalsIgnoreCase("team-c"))
+		{
+
+			start(MRConstants.MEDICARE_UHC_REDESIGN);
+			System.out.println("user is on Testharness Environment" + MRConstants.REDESIGN_LOGIN_URL);
+		}
+		else{
+
+			start(MRConstants.REDESIGN_LOGIN_URL+"?testharness=true");
+			System.out.println("Selected URL is ===========>" + MRConstants.REDESIGN_LOGIN_URL);
+			System.out.println("user is on Testharness Environment");
+		}
+		/*else
+		{
+			start(PAGE_URL_TEAM_MEDICARE_TESTHARNESS);
+			System.out.println("User is on Medicare Test harness page");	
+		}*/
 	}
-	
+
 	public Object thloginWith(String username, String password, String category) {
 		//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		/*WebElement loginInEle= this.driver.findElement(By.id("fd_memberSignInButton"));
@@ -286,10 +305,10 @@ public class LoginPage extends UhcDriver {
 		sendkeys(thPassword, password);
 		thSignIn.click();
 
-		
+
 		if (MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("team-a")) {
 			while (!isAlertPresent());
-        }
+		}
 
 
 		if (MRScenario.environment.equals("dev-a"))  {
@@ -297,13 +316,13 @@ public class LoginPage extends UhcDriver {
 			while (!isAlertPresent());
 		}
 		if ( MRScenario.environment.equals("team-c") || MRScenario.environment.equals("team-b") ) {
-			
+
 			Alert alert = driver.switchTo().alert();
-	        alert.accept();
-	        //Alert alert1 = driver.switchTo().alert();
-	        //alert1.accept();
-	        } 
-		
+			alert.accept();
+			//Alert alert1 = driver.switchTo().alert();
+			//alert1.accept();
+		} 
+
 		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
@@ -324,40 +343,93 @@ public class LoginPage extends UhcDriver {
 		}
 		return null;
 	}
-	
+
 	public Object teamhloginWith(String username, String password) {
 		sendkeys(thUserName, username);
 		sendkeys(thPassword, password);
 		thSignIn.click();
-		try {
-			Thread.sleep(10000);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-				
+
+		if ( MRScenario.environmentMedicare.equalsIgnoreCase("team-ci1") || (MRScenario.environmentMedicare.equalsIgnoreCase("team-a"))) {
+
+			Alert alert = driver.switchTo().alert();
+			alert.accept();
+			//Alert alert1 = driver.switchTo().alert();
+			//alert1.accept();
+		} 
+
 		try{
-			//CommonUtility.waitForPageLoad(driver, iPerceptionPopUp, 90);
-            if (validate(iPerceptionPopUp)) {
-            	System.out.println("iPerceptionPopUp is Displayed");
-                  iPerceptionPopUp.click();
-            }
-     }catch(Exception e)        {
-            System.out.println("iPerception Pop Up not displayed");
-     }
 
-				if(currentUrl().contains("testharness.html"))
+			if (MRScenario.environmentMedicare.equalsIgnoreCase("stage") || (MRScenario.environmentMedicare.equalsIgnoreCase("team-t")  || ( MRScenario.environmentMedicare.equalsIgnoreCase("team-ci1")))) {
+				Thread.sleep(50000);	
+			}else {
 
-				{
-					return new AccountHomePage(driver);
-				}
-				else if(currentUrl().contains("home/my-account-home.html")  || currentUrl().contains("/login.html") ) {
-					return new AccountHomePage(driver);
-				}
-				else if (currentUrl().contains("terminated-plan.html")) {
-					return new TerminatedHomePage(driver);
-				}
-				
-				return null;
+				Thread.sleep(20000);
+			}
+
+			if (validate(iPerceptionPopUp)) {
+				System.out.println("iPerceptionPopUp is Displayed");
+				iPerceptionPopUp.click();
+			}
+		}catch(Exception e)        {
+			System.out.println("iPerception Pop Up not displayed");
+		}
+
+		if(currentUrl().contains("testharness.html") || currentUrl().contains("/dashboard"))
+
+		{
+			return new AccountHomePage(driver);
+		}
+		else if(currentUrl().contains("home/my-account-home.html")  || currentUrl().contains("/login.html") ) {
+			return new AccountHomePage(driver);
+		}
+		else if (currentUrl().contains("terminated-plan.html")) {
+			return new TerminatedHomePage(driver);
+		}
+
+		System.out.println("teamhloginWith is returing null. Please Update the above condition As per your Needs");
+
+		return null;
+	}
+
+	public Object doLoginWith(String username, String password) {
+		sendkeys(thUserName, username);
+		sendkeys(thPassword, password);
+		thSignIn.click();
+		if ( MRScenario.environmentMedicare.equals("team-e") || MRScenario.environmentMedicare.equals("team-ci1")){
+
+			Alert alert = driver.switchTo().alert();
+			alert.accept();
+		} 
+		try{
+			Thread.sleep(70000);
+			if (validate(iPerceptionPopUp)) {
+				System.out.println("iPerceptionPopUp is Displayed");
+				iPerceptionPopUp.click();
+			}
+		}catch(Exception e)        {
+			System.out.println("iPerception Pop Up not displayed");
+		}
+
+		if(currentUrl().contains("testharness.html") || currentUrl().contains("/dashboard"))
+
+		{
+			return new AccountHomePage(driver);
+		}
+		else if(currentUrl().contains("home/my-account-home.html")  || currentUrl().contains("/login.html") ) {
+			return new AccountHomePage(driver);
+		}
+		else if (currentUrl().contains("terminated-plan.html")) {
+			return new TerminatedHomePage(driver);
+		}
+
+		System.out.println("login is returing null. Please Update the above condition As per your Needs");
+
+		return null;
+	}
+
+	public Object loginPageObject(){
+		return new MemberNewSignInPage(driver);
+
 	}
 
 }

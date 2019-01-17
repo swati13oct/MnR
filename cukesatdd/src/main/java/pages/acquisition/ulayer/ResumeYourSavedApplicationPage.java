@@ -5,8 +5,6 @@ package pages.acquisition.ulayer;
 
 import org.openqa.selenium.WebDriver;
 
-import pages.acquisition.ulayer.PlanSelectorPage;
-
 /**
  * @author snagpa4
  *

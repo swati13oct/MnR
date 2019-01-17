@@ -13,15 +13,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 public class MyProfilesPage extends UhcDriver{
 	
-   @FindBy(className = "shipmyplans_tab")
-   private WebElement myProfilesTab;
+ 
    
    @FindBy(className = "shipmyprefers_tab")
    private WebElement myPrefTab;
@@ -80,11 +79,6 @@ public class MyProfilesPage extends UhcDriver{
 	@FindBy(id = "temporaryAddress.startDate.month")
 	private WebElement tempAddStartDateMonthField;
 	
-	@FindBy(id = "temporaryAddress.startDate.day")
-	private WebElement tempAddStartDateDayField;
-	
-	@FindBy(id = "temporaryAddress.startDate.year")
-	private WebElement tempAddStartDateYearField;
 	
 	@FindBy(id = "temporaryAddress.stopDate.month")
 	private WebElement tempAddStopDateMonthField;

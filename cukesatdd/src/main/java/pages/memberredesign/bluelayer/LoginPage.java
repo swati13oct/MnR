@@ -10,15 +10,16 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import acceptancetests.atdd.data.MRConstants;
+import pages.member.bluelayer.TerminatedHomePage;
+import acceptancetests.data.MRConstants;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.memberredesign.bluelayer.AccountHomePage;
-import pages.member.bluelayer.TerminatedHomePage;
 
 public class LoginPage extends UhcDriver {
 
-	private static String PAGE_URL_TEST_HARNESS = MRConstants.UHCM_URL_TEAMB_TESTHARNESS;
+	private static String PAGE_URL_MEM_REDESIGN = MRConstants.REDESIGN_LOGIN_URL;
+
+	
 	
 	private static String PAGE_URL_TEAM_H_TEST_HARNESS = MRConstants.TEAMH_URL_TESTHARNES;
 	
@@ -39,13 +40,16 @@ public class LoginPage extends UhcDriver {
 	public LoginPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		//openAndValidate();
+		openAndValidate();
 	}
 
 	@Override
 	public void openAndValidate() {
 		// TODO Auto-generated method stub
-		start(PAGE_URL_TEST_HARNESS);
+		start(PAGE_URL_MEM_REDESIGN);
+		//start(PAGE_URL_TEST_HARNESS);
+		
+		System.out.println("**** current URL******"+driver.getCurrentUrl());
 		validate(thUserName);
 		validate(thPassword);
 		validate(thSignIn);
@@ -85,7 +89,7 @@ public class LoginPage extends UhcDriver {
 
 			while (!isAlertPresent());
 		}
-		if (MRScenario.environment.equals("team-c") || MRScenario.environment.equals("team-b")) {
+		if (MRScenario.environment.equals("team-c") || MRScenario.environment.equals("team-b") || MRScenario.environment.equals("team-ci1")) {
 
 			Alert alert = driver.switchTo().alert();
 			alert.accept();

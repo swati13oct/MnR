@@ -11,10 +11,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import acceptancetests.agentappointment.data.RequestAgentAppointmentConstants;
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.vbfacquisition.agentflow.RequestAgentAppointmentConstants;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
@@ -30,37 +30,22 @@ public class AgentAppointmentConfirmationPage extends UhcDriver {
 	@FindBy(xpath=".//*[@id='subPageRight']/div/div/div/div/div")
 	private WebElement rightRail;
 	
+	@FindBy(xpath=".//*[@id='ym-custom-container']//button[contains(text(),'Find plans')]")
+	private WebElement findPlansBtn;
+	
 	public JSONObject agentConfirmationJson;
 
 	private PageData agentConfirmation;
 
 	public AgentAppointmentConfirmationPage(WebDriver driver) {
 		super(driver);
-		String agentConfirmationFile = CommonConstants.AGENT_CONFIRMATION_PAGE_DATA;
-		agentConfirmation = CommonUtility.readPageData(agentConfirmationFile,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
-		openAndValidate();
+		//openAndValidate();
 	}
 
 	@Override
 	public void openAndValidate() {
-		JSONObject jsonObject = new JSONObject();
-		for (String key : agentConfirmation.getExpectedData().keySet()) {
-			WebElement element = findElement(agentConfirmation
-					.getExpectedData().get(key));
-			if (validate(element)) {
-				try {
-					jsonObject.put(key, element.getText());
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-
-		}
-		agentConfirmationJson = jsonObject;
-		
-		System.out.println("agentConfirmationJson------->"+agentConfirmationJson);
+		CommonUtility.waitForPageLoad(driver, findPlansBtn,CommonConstants.TIMEOUT_30);
+		validateNew(findPlansBtn);
 	}
 
 	public JSONObject getExpectedData() {

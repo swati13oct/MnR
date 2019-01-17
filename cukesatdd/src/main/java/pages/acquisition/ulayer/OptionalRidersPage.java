@@ -12,9 +12,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -27,7 +27,7 @@ public class OptionalRidersPage extends UhcDriver{
 	@FindBy(xpath = "//label[@for='dental-no']")
 	private WebElement optno;
 	
-	@FindBy(id = "optionalridersquestionyestext")
+	@FindBy(id = "dental-rider-yes-label1")
 	private WebElement optyes;
 	
 	@FindBy(id = "optRiderprevious")
@@ -85,7 +85,8 @@ public class OptionalRidersPage extends UhcDriver{
 		String optradiooption = personalAttributesMap.get("optradiooption");
 		if(optradiooption.equalsIgnoreCase("No")){
 			optno.click();
-		}
+		}else
+			optyes.click();
 			
 		}
 	

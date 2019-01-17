@@ -1,18 +1,12 @@
 package pages.member.ulayer;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.MRConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
-import atdd.framework.MRScenario;
+import acceptancetests.data.MRConstants;
 import atdd.framework.UhcDriver;
 
 

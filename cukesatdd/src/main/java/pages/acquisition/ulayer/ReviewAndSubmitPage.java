@@ -12,9 +12,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -47,6 +47,9 @@ public class ReviewAndSubmitPage extends UhcDriver{
 	
 	@FindBy(id = "step3save")
 	private WebElement reviewandsubmitapplication;
+	
+	@FindBy(xpath =".//*[@id='enrollment-step-2-part-0']/span")
+	private WebElement submitPageErrMsg;
 	
 	private PageData reviewApplication;
 
@@ -286,5 +289,11 @@ public class ReviewAndSubmitPage extends UhcDriver{
 			System.out.println("Invalid plan type");
 		}
 	return flag;
+	}
+	
+	public boolean validateErrorMessage() {
+		if(validate(submitPageErrMsg))
+			return true;
+		return false;
 	}
 }

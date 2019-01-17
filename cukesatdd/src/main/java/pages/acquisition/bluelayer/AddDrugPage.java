@@ -2,20 +2,15 @@ package pages.acquisition.bluelayer;
 
 /*@author pagarwa5*/
 
-import java.util.List;
-
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.ElementData;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.ElementData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
@@ -24,8 +19,6 @@ public class AddDrugPage extends UhcDriver {
 	@FindBy(className = "drugDropDownList")
 	private WebElement drugDropDown;
 
-	@FindBy(className = "autoCompleteDrugs")
-	private List<WebElement> drugs;
 
 	@FindBy(id = "dcemodal")
 	WebElement drugsAdded;
@@ -42,16 +35,15 @@ public class AddDrugPage extends UhcDriver {
 	@FindBy(className = "addDrugBox")
 	WebElement adddrugdiv;
 
-	private PageData drugList;
+	
 
 	public JSONObject drugListJson;
 
 	public AddDrugPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		String fileName = CommonConstants.ADD_DRUG_PAGE_DATA;
-		drugList = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
+		
+	
 
 		openAndValidate();
 	}

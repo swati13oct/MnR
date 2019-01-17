@@ -17,10 +17,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.ElementData;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.ElementData;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -79,7 +79,6 @@ public class BenefitsCoveragePage extends UhcDriver {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		//String fileName = CommonConstants.BENEFITS_AND_COVERAGE_PDP_NONLIS_NONUS_PAGE_DATA;
-		String fileName = CommonConstants.BENEFITS_AND_COVERAGE_MAPD_LIS_NONUS_PAGE_DATA;
 		//benefitsAndCoverage = CommonUtility.readPageData(fileName,
 				//CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);
 		//openAndValidate();

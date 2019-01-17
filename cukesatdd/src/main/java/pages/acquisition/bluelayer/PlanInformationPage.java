@@ -10,9 +10,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -93,10 +93,20 @@ public class PlanInformationPage extends UhcDriver {
 
         public BeneficiaryInformationPage navigateToNextStep() {
                 enrollmentNext.click();
+
+                try {
+        			Thread.sleep(30000);
+        		} catch (InterruptedException e) {
+        			// TODO Auto-generated catch block
+        			e.printStackTrace();
+        		}
+
                 if(pageHeading.getText().contains("Beneficiary Information"))
                 {	
+                	
                         return new BeneficiaryInformationPage(driver);
                 }
+                System.out.println("Beneficiary INFO Page not Displayed");
                 return null;
                 
         }

@@ -15,14 +15,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.mobile.data.CommonConstants;
-import acceptancetests.atdd.util.CommonUtility;
-import atdd.framework.UhcDriver;
 import pages.dashboard.member.ulayer.PaymentHistoryPage;
-import pages.mobile.member.ulayer.CustomerServicePage;
-import pages.mobile.member.ulayer.MyDrugBenefitDetailsPage;
-import pages.mobile.member.ulayer.MyPlanBenefitDetailsPage;
+import acceptancetests.data.CommonConstantsMobile;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
+import atdd.framework.UhcDriver;
 
 /**
  * @author pjaising
@@ -113,9 +110,9 @@ public class BenefitsSummaryPage extends UhcDriver{
 	public BenefitsSummaryPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		String fileName = CommonConstants.BENEFITS_SUMMARY_PAGE_DATA;
+		String fileName = CommonConstantsMobile.BENEFITS_SUMMARY_PAGE_DATA;
 		benefitsSummary = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_MOBILE_ULAYER_MEMBER);
+				CommonConstantsMobile.PAGE_OBJECT_DIRECTORY_MOBILE_ULAYER_MEMBER);
 		openAndValidate();
 	}
 
@@ -167,7 +164,7 @@ public class BenefitsSummaryPage extends UhcDriver{
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 		JSONObject benefitsSummaryExpectedJson = expectedDataMap
-				.get(acceptancetests.atdd.data.CommonConstants.BENEFITS_SUMMARY);
+				.get(acceptancetests.data.CommonConstants.BENEFITS_SUMMARY);
 		
 		return benefitsSummaryExpectedJson;
 	}
@@ -186,9 +183,9 @@ public class BenefitsSummaryPage extends UhcDriver{
 	}
 
 	public JSONObject getBrowserCheck() {
-		String fileName = CommonConstants.MOBILE_BROWSER_CHECK_DATA;
+		String fileName = CommonConstantsMobile.MOBILE_BROWSER_CHECK_DATA;
 		browserCheckData = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_MOBILE_ULAYER_MEMBER);
+				CommonConstantsMobile.PAGE_OBJECT_DIRECTORY_MOBILE_ULAYER_MEMBER);
 
 		JSONObject jsonObject = new JSONObject();
 		for (String key : browserCheckData.getExpectedData().keySet()) {
@@ -374,7 +371,7 @@ public class BenefitsSummaryPage extends UhcDriver{
 	public PaymentHistoryPage changeUrlToNewPaymentHistoryPage() {
 
 		String NewPayHistoryUrl = "https://member.team-b-aarpmedicareplans.uhc.com/content/dashboard/home/payments.html";
-		String url = driver.getCurrentUrl();
+		
 		driver.get(NewPayHistoryUrl);
 		try {
 			Thread.sleep(15000);
@@ -386,7 +383,7 @@ public class BenefitsSummaryPage extends UhcDriver{
 	}
 	public boolean validateSetupAutomaticPayments() {
 		String NewPayHistoryUrl = "https://member.team-b-aarpmedicareplans.uhc.com/content/dashboard/home/payments.html";
-		String url = driver.getCurrentUrl();
+		
 		driver.get(NewPayHistoryUrl);
 		try {
 			Thread.sleep(10000);
@@ -406,7 +403,7 @@ public class BenefitsSummaryPage extends UhcDriver{
 	public boolean validateOneTimePaymentDtmValues() {
 		// TODO Auto-generated method stub
 		String NewPayHistoryUrl = "https://member.team-b-aarpmedicareplans.uhc.com/content/dashboard/home/payments.html";
-		String url = driver.getCurrentUrl();
+		
 		driver.get(NewPayHistoryUrl);
 
 		try {
@@ -426,7 +423,7 @@ public class BenefitsSummaryPage extends UhcDriver{
 	public boolean validateSetupPaymentDtmValues() {
 		// TODO Auto-generated method stub
 		String NewPayHistoryUrl = "https://member.team-b-aarpmedicareplans.uhc.com/content/dashboard/home/payments.html";
-		String url = driver.getCurrentUrl();
+		
 		driver.get(NewPayHistoryUrl);
 
 		try {

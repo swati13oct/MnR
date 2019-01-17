@@ -8,8 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import pages.acquisition.uhcretiree.Rallytool_Page;
-import pages.acquisition.ulayer.AcquisitionHomePage;
-import acceptancetests.atdd.data.MRConstants;
+import acceptancetests.data.MRConstants;
 import atdd.framework.UhcDriver;
 
 public class OurPlansMAHowToPayYourPremiumPage extends UhcDriver {
