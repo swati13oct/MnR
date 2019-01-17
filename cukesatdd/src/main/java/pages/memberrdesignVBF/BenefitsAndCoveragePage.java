@@ -60,7 +60,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(id = "viewTextAtdd")
 	private WebElement view_label;
 
-	@FindBy(xpath = "(//div[@id='plan_benefit_documents']/section//ul/li[not (contains(@class,'ng-hide'))])[1]")
+	@FindBy(xpath = "//div[@class='PlanPdf section']//*[contains(text(),'VIEW OTHER DOCUMENTS')]")
 	private WebElement documents_label;
 
 	@FindBy(xpath = "//div[@id='planBenefitsAppSum']/section//div/*[contains(@class,'atdd-benefitsoverview-plantitle')]")
@@ -101,7 +101,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-bncsummary-primarycareprvdrheader")
 	private WebElement PrimaryCareProviderHeaderHMO;
 
-	@FindBy(xpath = "//div[@id='outOfPocketTile']//span[contains(text(),'Out-of-Pocket Maximum')]")
+	@FindBy(xpath = "//div[@id='globalContentIdForSkipLink']//*[contains(text(),'Out-of-Pocket Maximum')]")
 	private WebElement OutofPocketMaximum;
 
 	@FindBy(className = "atdd-innetwrk-title")
