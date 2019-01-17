@@ -1,7 +1,6 @@
 @benefitsAndCoverage @thePredators @codeMonkeys @regression_06_06_18
 Feature: C1.1 To test plan benefits and Coverage on UMS site
 
-# begin - regression section
 
 #PROBLEM - wait for a new working MAPD GROUP LIS4 
   @benefitsAndCoverage1 @regressionMember @CMGroupmembersTC25 
@@ -204,9 +203,6 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | planType | memberType |
       | MAPD     | withRider  |
       
-# end - regression section
-
-# begin non-regression section
 
   @benefitsAndCoverage14 @CMFedDrugNonLis 
   Scenario Outline: Verify all sections for Ind NonLIS member on Benefits and Coverage page
@@ -758,9 +754,6 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | planType | memberType     |
       | MAPDVill | Individual_BnC |
       
-# end non-regression section
-
-# begin release-work section
 
   @benefitsAndCoverage34 @PlanBFSJMPLinks @Feb_release_2019 @gladiators
   Scenario Outline: Verify jump links for individual MAPD member
@@ -935,5 +928,4 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | planType | memberType            |
       | MAPD     | IndividualUHCPayments |
       
-# end release-work section
       
