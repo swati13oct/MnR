@@ -262,7 +262,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='drugModal']/div/div/div[2]/div/section/div/button[2]")
 	public WebElement deleteButton;
 
-	@FindBy(xpath = "//div[@id='drugs-tab']//div[contains(@ng-repeat,'eachDrug')]")
+	@FindBy(xpath = "//div[@id='drugs-tab']//*[contains(@ng-repeat,'eachDrug')]")
 	public List<WebElement> drugs;
 
 	@Override
@@ -451,8 +451,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,200)", "");
 		int drugCount = getDrugsCount();
-		while (getDrugsCount() != 0) {
-			String deleteDrugXpath = ".//*[@id='drugdetails']/div[2]/div[" + drugCount + "]/div/div/section/ul/li[2]/a";
+		while (drugCount != 0) {
+			String deleteDrugXpath = ".//*[@id='drugcontainer_"+(drugCount-1)+"']//*[@class='delete-drug']";
 			WebElement deleteDrug = driver.findElement(By.xpath(deleteDrugXpath));
 			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", deleteDrug);
 
@@ -462,7 +462,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			validateNew(deleteButton);
 			deleteButton.click();
 			drugCount--;
-			Thread.sleep(5000);
+			//Thread.sleep(5000);
 		}
 	}
 
