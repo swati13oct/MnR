@@ -2,7 +2,6 @@
 Feature: C1.1 To test plan benefits and Coverage on UMS site
 
 
-#PROBLEM - wait for a new working MAPD GROUP LIS4 
   @benefitsAndCoverage1 @regressionMember @CMGroupmembersTC25 
   Scenario Outline: Verify Group LIS 3/4 on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
@@ -31,7 +30,6 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | planType | memberType | copayCategory |
       | MAPD     | Group      | LIS 4         |
 
-#PROBLEM - PDP Drug Copays n Discounts element text looks strange, wait for defect fix first before verify again
   @benefitsAndCoverage2 @regressionMember @CMGroupmembersPDPLIS_TC26 
   Scenario Outline: Verify Group LIS 1/2 values on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
@@ -492,7 +490,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List     | AlternativeDrugList   | name            | memberid     | effectivedate | monthlypremium | extrahelp            |
       | MAPD     | Individual_BnC | LIS 1         | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | DBAD ADFED      | 919744565-00 | 01/01/2019    | Not Available  | Extra Help Level : 1 |
 
-#PROBLEM - not getting Benefit Summary header 
+
   @benefitsAndCoverage24 @CMpdpindlis 
   Scenario Outline: Verify all sections for Ind LIS1 member on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
@@ -695,8 +693,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
      # | MAPD     | Individual | NON LIS       |
       | MA       | Group      | NON LIS       |
 
-#PROBLEM - PDP Hartford no user in spreadsheet
-#PROBLEM - MAPD user has no prescription Drug Benefits table unless it means Drug Copays & Discounts table
+
   @benefitsAndCoverage30 @thePredators @juneRelease2018 @hartfordprescriptionDrugBenefit 
   Scenario Outline: Verify city of Hartford Prescription Drug Benefits
     Given login with following details logins in the member portal and validate elements
