@@ -149,7 +149,7 @@ Examples:
     And the user enters following Multi County details and  validates the Cancel button for Multi COunty Pop-up clears the Zip code text fields in pharmacy search in UMS Site
       | Zip Code | <zipcode> |
     When the user selects a language from dropdown in UMS Site
-      | <languageName1> |
+      | <languageName2> |
     And the user enters following Multi County details and  validates the Cancel button for Multi COunty Pop-up clears the Zip code text fields in pharmacy search in UMS Site
       | Zip Code | <zipcode> |
 
