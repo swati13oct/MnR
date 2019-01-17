@@ -25,5 +25,5 @@ Feature: 1.04-VBF-MemRedesign-To test Drug Cost Estimator functionality (GATED)
 
     Examples: 
       | memberType | drug    | USOTZipcode | friendname | favcolor | phonenumber |
-      | UhcMapdInd | lipitor |       90002 | name1      | color1   | number1     |
+      | UhcMapdInd | lipitor |       90210 | name1      | color1   | number1     |
 		#| AARPMapdInd |lipitor|90002|name1      | color1   | number1     |
