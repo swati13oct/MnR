@@ -603,7 +603,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | MAPDRX   | Group      | NON LIS       |
 
 
-  @benefitsAndCoverage27 @CMPDPGroupNonLis d
+  @benefitsAndCoverage27 @CMPDPGroupNonLis
   Scenario Outline: Verify all sections for PDP Group NonLIS member on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
