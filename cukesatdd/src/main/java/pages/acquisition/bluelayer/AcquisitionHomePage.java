@@ -38,6 +38,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(id = "lookzip")
 	private WebElement lookupZipcode;
+	
+	@FindBy(id = "planSelectorTool")
+	private WebElement iframePst; 
 
 	@FindBy(id = "takequizbtn")
 	private WebElement takequizbtn;
@@ -1078,7 +1081,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		action.moveToElement(ourPlans).build().perform();
 		waitforElement(PlanSelectorHeader);
 		PlanSelectorHeader.click();
+		waitforElement(iframePst);
+		if(iframePst.isDisplayed())
+		{
 		return new PlanSelectorNewPage(driver);
+		}
+		else
+			return null;
 	}
 
 	public VPPPlanSummaryPage searchPlans1(String zipcode, String countyName) {
