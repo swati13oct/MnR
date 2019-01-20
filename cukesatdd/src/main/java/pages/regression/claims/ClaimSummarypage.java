@@ -178,7 +178,8 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy (css = ".ng-scope>p>span")
 	private WebElement shipDateRangeErrMsg;
 	
-    @FindBy (id="errorMsg")
+   // @FindBy (id="errorMsg")
+    @FindBy(xpath ="//*[@id='errorMsg']")
     private WebElement PHIPerrorMsg;
     
 	@FindBy (css = ".color-red.semi-bold>p>span")
@@ -953,7 +954,7 @@ public class ClaimSummarypage extends UhcDriver{
 	 * @toDo :Validate error message for PHIP member on Claims Summary page
 	 */
 public boolean ValidatePHIPErrorMessage() throws InterruptedException{
-	    Thread.sleep(3000);
+	    Thread.sleep(10000);
 	     //if(driver.getTitle().equalsIgnoreCase("Claims")){	
 		// System.out.println("!!! The member is on Claims Summary page with PHIP Plan  !!!");
 		 validate(PHIPerrorMsg);		
