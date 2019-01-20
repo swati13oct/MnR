@@ -1222,6 +1222,7 @@ public class AccountHomePage extends UhcDriver {
 				e.printStackTrace();
 			}
 
+			
 		}
 		return null;
 	}
@@ -2337,6 +2338,27 @@ public class AccountHomePage extends UhcDriver {
 			counter++;
 		} while (counter < 2);
 	}
+	
+	//This method the dashboard when a pre effective member lands on the Home page 
+	public void validateHomePage1() throws InterruptedException {
+        Thread.sleep(10000);
+        System.out.println(" @@@ The title of the page is "+driver.getTitle());         
+        if (getTitle().equalsIgnoreCase("Home | UnitedHealthcare")) {        	 
+     	   System.out.println("On the dashboard ");            
+        }
+        System.out.println("@@@ The URL of the page is ==>" + driver.getCurrentUrl());
+        if (driver.getCurrentUrl().contains("https://member.int.uhc.com/aarp/dashboard"));
+        System.out.println("Member is on the dashboard");
+        validate(preEffectiveMessage);
+        System.out.println("The pre-effective message fr the member on dashboard is ==>" +preEffectiveMessage.getText());
+    	String preMessage_text = preEffectiveMessage.getText();
+ 	System.out.println("Message displayed on Dashboard for this member is:" + preEffectiveMessage);
+ 	Assert.assertTrue(preMessage_text.contains(
+ 			"Use this site to find helpful information while you’re getting ready for your plan to start on"));
+ 	System.out.println("Assert on the preeffective message is passed");
+
+ }
+    
 
 	
 }

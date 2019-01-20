@@ -331,7 +331,40 @@ public class HsidRegistrationStepDefinition {
 		hsidRegistrationConfirmInformationPage.getregistrationflowcompleteemail();
 	}
 	
+	@Then("^user after landing on sign in page get navigated to the go green splash page$")
+	public void user_should_be_at_Splash_page1 (DataTable memberAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		
+		
+		String password = memberAttributesMap.get("password");
+		
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		
+		HSIDLoginPage loginPage = new HSIDLoginPage(wd);
+		loginPage.validateelements();
+
+		String userName  = (String) getLoginScenario().getBean(LoginCommonConstants.Username);
+		//return the page (here the page is SaveProfilePrefrencePage & SplashPage= name i give to the  ) 
+		pages.regression.login.SaveProfilePrefrencePage SplashPage = (pages.regression.login.SaveProfilePrefrencePage) loginPage.doLoginWithpre(userName, password);
+	
+        if (SplashPage!= null) {
+        	//now save the page in beans in page constants  = GO_GREEN_SPLASH_PAGE created in page constants , SplashPage name i gave earlier 
+            	loginScenario.saveBean(PageConstantsMnR.GO_GREEN_SPLASH_PAGE,SplashPage);
+    			Assert.assertTrue(true);
+        	
+		}
+		
+	}
+
+
+}
   
 }
 	
