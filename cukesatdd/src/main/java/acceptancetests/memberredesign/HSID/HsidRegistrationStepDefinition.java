@@ -366,7 +366,7 @@ public class HsidRegistrationStepDefinition {
 
 }
   
-}
+
 	
 	
 	

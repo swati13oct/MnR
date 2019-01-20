@@ -229,7 +229,7 @@ public class AccountHomePage extends UhcDriver {
 	//@FindBy(xpath = "//*[@id='dashboard']//span[text()='View Your Claims']")
 	//@FindBy(xpath = "//*[@id='claims_1']")
 	//@FindBy(xpath = "//a[text()='Go to Claims page']")
-	@FindBy(xpath =".//*[@id='sticky-nav']/sticky-content/nav/div/div/div/div/a[3]")
+	@FindBy(xpath =".//*[@id='sticky-nav']/sticky-content/nav/div/div/div/div/a[2]")
 	private WebElement claimsDashboardLink;
 
 	@FindBy(xpath = "//*[@id='row2link1']/td[2]/a")
@@ -1181,8 +1181,8 @@ public class AccountHomePage extends UhcDriver {
 			/*System.out.println("Go to claims link is present "
 					+ driver.findElement(By.xpath("//a[text()='Go to Claims page']")).isDisplayed());
 			driver.findElement(By.xpath("//a[text()='Go to Claims page']")).click();*/
-			 System.out.println("Go to claims link is present "+driver.findElement(By.xpath(".//*[@id='sticky-nav']/sticky-content/nav/div/div/div/div/a[3]")).isDisplayed());
-             driver.findElement(By.xpath(".//*[@id='sticky-nav']/sticky-content/nav/div/div/div/div/a[3]")).click(); 
+			 System.out.println("Go to claims link is present "+driver.findElement(By.xpath(".//*[@id='sticky-nav']/sticky-content/nav/div/div/div/div/a[2]")).isDisplayed());
+             driver.findElement(By.xpath(".//*[@id='sticky-nav']/sticky-content/nav/div/div/div/div/a[2]")).click(); 
 			return new ClaimSummarypage(driver);
 		} else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
 			System.out.println("user is on Stage login page");
