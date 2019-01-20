@@ -179,7 +179,7 @@ public class ClaimSummarypage extends UhcDriver{
 	private WebElement shipDateRangeErrMsg;
 	
    // @FindBy (id="errorMsg")
-    @FindBy(xpath ="//*[@id='errorMsg']")
+    @FindBy(xpath ="//*[contains(text(),'You can view AARP Personal Health Insurance Plan claims')]")
     private WebElement PHIPerrorMsg;
     
 	@FindBy (css = ".color-red.semi-bold>p>span")
