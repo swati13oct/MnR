@@ -1,4 +1,4 @@
-@claims @theTransformers 
+@claims @theTransformers @regressionMember
 Feature: T1.1To validate the new changes related to claims page on the member redesigned site
 
 @claims1 @claimsSummaryFED
@@ -26,7 +26,7 @@ Examples:
      | MAPD       | Last 24 months | NICE   | NICECLAIMS   |
      | PDP      | Last 24 months | RX     | RXCLAIMS     |
 
-@claims2 @claimsSummarySHIP @regressionMember @febrelease
+@claims2 @claimsSummarySHIP  @febrelease
 Scenario Outline: To validate the claims present for the SHIP member on claims summary page for SHIP members
 Given login with following details logins in the member portal and validate elements
   | Plan Type      | <planType>     |
@@ -214,13 +214,13 @@ Examples:
      
         
 @claims9  @Tc02 @Tc05
-Scenario Outline: To validate the claims present for the Federal member on claims sumamry page for AARP site
-   Given login with following details logins in the member portal and validate elements
+    Scenario Outline: To validate the claims present for the Federal member on claims sumamry page for AARP site    
+    Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>     |
       | Test Data Type | <claimssystem> |
     When I navigate to the claims Summary page in redesigned site
     Then I can validate the claims summary header
-     And I can search claims for the following claim period on redesigned site
+    And I can search claims for the following claim period on redesigned site
       | Plan Type    | <planType>    |
       | Claim Period | <claimPeriod> |
     Then I can see the claims displayed based on the selection in redesigned site
@@ -232,12 +232,11 @@ Scenario Outline: To validate the claims present for the Federal member on claim
     When I navigate to the Claim Details page for federal members
     And I validate the Claims Table in claims details page for federal members
     And I validate the Claims Total in claims details page in AARP site
-    And I validate the claims history Button
-   
+    And I validate the claims history Button   
     Examples: 
       | planType | claimPeriod    | domain | claimssystem |
-   #   | MAPD     | Last 24 months | NICE   | NICECLAIMS   |
       | MAPD     | Last 24 months | COSMOS| COSMOSCLAIMS   |
+  #   | MAPD     | Last 24 months | NICE   | NICECLAIMS   |
      
   
 @claims10  @TC01_FED_AARP_Individual_NICE @TC04_FED_UHC_Individual_COSMOS
