@@ -24,12 +24,12 @@ Feature: To test pre-effective functionality
     Examples: 
       | planType  | memberType            | copayCategory |
       | IndMA     | preeffectiveIndMA     | NON LIS       |
-      | IndMAPD   | preeffectiveIndMAPD   | NON LIS       |
-      | IndPDP    | preeffectiveIndPDP    | NON LIS       |
-      | GroupMA   | preeffectiveGroupMA   | NON LIS       |
-      | GroupMAPD | preeffectiveGroupMAPD | NON LIS       |
-      | GroupSSUP | preeffectiveGroupSSUP | NON LIS       |
-      | GroupPDP  | preeffectiveGroupPDP  | NON LIS       |
+   #   | IndMAPD   | preeffectiveIndMAPD   | NON LIS       |
+   #   | IndPDP    | preeffectiveIndPDP    | NON LIS       |
+  #    | GroupMA   | preeffectiveGroupMA   | NON LIS       |
+   #   | GroupMAPD | preeffectiveGroupMAPD | NON LIS       |
+   #   | GroupSSUP | preeffectiveGroupSSUP | NON LIS       |
+   #  | GroupPDP  | preeffectiveGroupPDP  | NON LIS       |
 
   @preEffective2 @regressionMember @regression_Pre-Effective_AccountSettings_Page @codetransformers
   Scenario Outline: Verify that a preffective member is able to see the Account settings page
