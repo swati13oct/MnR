@@ -693,7 +693,7 @@ public class PaymentHistoryPage extends UhcDriver{
 		System.out.println("clicked on Checking account button");
 		NextButton.click();		
 		waitforElement(AutoPayHeading);
-		if(AutoPayHeading.getText().contains("It’s easy to pay your premium.")){
+		if(AutoPayHeading.getText().contains("easy to pay your premium.")){
 			return new  OneTimePaymentPage(driver); 
 		}else
 		return null;

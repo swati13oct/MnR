@@ -1390,6 +1390,7 @@ try {
                                      System.out.println("pdfs not coming correctly");
                                      }
                      }
+
                
                //note: Dec2018 - update the step text
                //@And("^the user verifies that the correct pdfs are coming in the plan material section for ship$")
@@ -1429,7 +1430,7 @@ try {
                * @author njain112
                */
                @And("^the Village user validates text in table$")
-               public void validatevillagetabletext(String text) throws InterruptedException   {
+               public void validatevillagetabletext() throws InterruptedException   {
                               System.out.println("***the Village user validates text in table***");
                               BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
                                                             .getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);

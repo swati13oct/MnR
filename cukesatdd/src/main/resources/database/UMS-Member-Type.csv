@@ -213,7 +213,7 @@ q2_jun_ship0010/Password@1,SHIP_ProfilePref,
 q4_grp_dec0040/Password@1,MAPD_GROUP_GOGreen_Profilepref,
 q2_jun_sofl0017/Password@1,Medica,Medica_SouthFlorida_ProfilePref,
 q2_june_combo0017/Password@1,Combo,MAPDANDSHIP_BnC2,
-q2_jun_grp00033/Password@1,PDP,Group_BnC,NON LIS
+q4_grp_dec204/Password@1,PDP,Group_BnC,NON LIS
 q2_jun_grp0290/Password@1,PDP,Group_BnC,LIS 1
 q2_jun_grp0255/Password@1,SSUP,Group_BnC,
 q1_aarp_feb267/Password@1,MA,Individual_BnC,NON LIS
@@ -227,6 +227,16 @@ q2_jun_aarp0082/Password@1,PDP,Wallgreens_BnC,
 q2_jun_aarp0082/Password@1,PDP,MailOrderPharamacy_BnC,
 q2_jun_grp0076/Password@1,PDP,TEXASERSGroup_BnC,
 q1_aarp_ma001/Password@1,MA,Individual_BnC
+q2_jun_grp0001/Password@1,PDP,Greenwich_BnC,
+q4_grp_dec0079/Password@1,MAPD,Hartford_BnC,
+q2_jun_aarp0045/Password@1,MAPDVill,Individual_BnC,
+q2_jun_grp0164/Password@1,MAPD,Group_BnC,NON LIS
+q4_dec_grp_060/Password@1,MA,Group_BnC,NON LIS
+q2_jun_sofl0002/Password@1,PCP,Individual_BnC,NON LIS
+q2_jun_aarp0112/Password@1,PDP,Individual_BnC,NON LIS
+q2_jun_aarp0045/Password@1,MAPDVill,Individual_BnC,NON LIS,
+q2_jun_aarp0074/Password@1,PDP,Individual_BnC,LIS 1
+q2_jun_aarp0038/Password@1,MAPD,Individual_BnC,LIS 1
 US1439786_ma_01/Password@1,MA,Individual,IndEffectiveAARP,Rider,
 q2_jun_aarp0043/Password@1,MA,Individual,IndEffectiveAARP,NoRider,
 q2_jun_aarp0054/Password@1,MAPD,Individual,IndEffectiveAARP,Rider,
