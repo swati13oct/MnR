@@ -44,11 +44,20 @@ public class PlanSelectorNewPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='control_control_0_4']/following-sibling::label")
 	private WebElement NoneOption;
 	
+	@FindBy(xpath = "//*[@id='control_control_1_4']/following-sibling::label")
+	private WebElement NonePreference;
+	
 	@FindBy(xpath = "(//*[@class='preferencenavigation pageNavigation']/a[2])[1]")
 	private WebElement NextQuestionButton;
 	
 	@FindBy(id = "planPreferenceLegend_1")
 	private WebElement NextQuestion;
+	
+	@FindBy(xpath = "(//*[contains(text(), 'Medicare Advantage (Part C)')])[2]")
+	private WebElement FinalResults;
+	
+	@FindBy(xpath = "//*[@class='skipToResultsLink']")
+	private WebElement ResultsPageLink;
 
 	//a[@class='btn btn-primary next leftBlk nextBtn']
 	@FindBy(xpath = "//div[@id='widget_B9pzC-bMU02tTlxiTpbchA']//div/a[@href='/PlanCompare/Consumer/Type3/2018/Compare/ComparePlans']")
@@ -68,6 +77,8 @@ public class PlanSelectorNewPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='PlanPreferenceCollection']//div[@class='planPreferenceQuestion ']//h1")
 	private WebElement PreferencesHeader;
 
+	@FindBy(id = "Enrollbtn_223554")
+	private WebElement PlanDetailsPageButton;
 
 
 	public PlanSelectorNewPage(WebDriver driver) {
@@ -134,10 +145,23 @@ public class PlanSelectorNewPage extends UhcDriver {
 
 	}
 	
+	public PlanSelectorNewPage JumpLink() throws InterruptedException
+	{		
+		NonePreference.click();
+		ResultsPageLink.click();		
+		waitforElement(FinalResults);
+		if(FinalResults.isDisplayed())
+		return new PlanSelectorNewPage(driver);
+		else 
+			return null;
+
+	}
+	
+	
 
 	public PlanSelectorNewPage navigateToPlanDetails() throws InterruptedException
 	{
-		Thread.sleep(3000);
+		/*Thread.sleep(3000);
 		driver.switchTo().defaultContent();
 		//Thread.sleep(5000);
 		waitforElement(iframePst);
@@ -145,9 +169,9 @@ public class PlanSelectorNewPage extends UhcDriver {
 		//waitforElement(firstPlanDetailsBtn);
 
 		WebDriverWait wait = new WebDriverWait(driver, 20);
-		wait.until(ExpectedConditions.elementToBeClickable(firstPlanDetailsBtn));
+		wait.until(ExpectedConditions.elementToBeClickable(firstPlanDetailsBtn));*/
 
-		firstPlanDetailsBtn.click();
+		PlanDetailsPageButton.click();
 
 
 		driver.switchTo().defaultContent();

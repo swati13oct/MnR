@@ -64,15 +64,33 @@ public class PlanSelectorStepDefinition {
 		getLoginScenario().saveBean(PageConstants.PLAN_SELECTOR_QUESTIONNAIRE,
 				Questionnaire);
 		else
-			System.out.println("Questionaaire not started I guess");
+			System.out.println("Questionaaire not started ");
 
 	}
 	
 	@And("^I select my Response and go to Next Questionnaire$")
-	public void I_click_plan_detail_button() throws Throwable {
+	public void I_click_questionnaire_first() throws Throwable {
 		PlanSelectorNewPage planSelectorNewPage = (PlanSelectorNewPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_SELECTOR_QUESTIONNAIRE);
-		planSelectorNewPage.NextQuestion();
+		PlanSelectorNewPage Questionnaire2 = planSelectorNewPage.NextQuestion();
+		if(Questionnaire2 != null)
+			getLoginScenario().saveBean(PageConstants.PLAN_SELECTOR_QUESTIONNAIRE,
+					Questionnaire2);
+			else
+				System.out.println("Questionaaire2 not started ");
+
+	}
+	
+	@And("^I select my second Response and go directly to results page$")
+	public void I_click_questionnaire_second()  throws Throwable {
+		PlanSelectorNewPage planSelectorNewPage = (PlanSelectorNewPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_SELECTOR_QUESTIONNAIRE);
+		PlanSelectorNewPage ResultsPage = planSelectorNewPage.JumpLink();
+		if(ResultsPage != null)
+			getLoginScenario().saveBean(PageConstants.PLAN_RESULTS_PAGE,
+					ResultsPage);
+			else
+				System.out.println("Plan Results Page not loaded");
 
 	}
 	
@@ -80,7 +98,7 @@ public class PlanSelectorStepDefinition {
 	@When("^I click plan detail button$")
 	public void i_click_plan_detail_button() throws Throwable {
 		PlanSelectorNewPage planSelectorNewPage = (PlanSelectorNewPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_SELECTOR_NEW_PAGE);
+				.getBean(PageConstants.PLAN_RESULTS_PAGE);
 		planSelectorNewPage.navigateToPlanDetails();
 
 	}
