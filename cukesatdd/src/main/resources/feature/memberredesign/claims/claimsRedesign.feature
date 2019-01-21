@@ -1,4 +1,4 @@
-@claims @theTransformers 
+@claims @theTransformers @regressionMember
 Feature: T1.1To validate the new changes related to claims page on the member redesigned site
 
 @claims1 @claimsSummaryFED
@@ -26,7 +26,7 @@ Examples:
      | MAPD       | Last 24 months | NICE   | NICECLAIMS   |
      | PDP      | Last 24 months | RX     | RXCLAIMS     |
 
-@claims2 @claimsSummarySHIP @regressionMember @febrelease
+@claims2 @claimsSummarySHIP  @febrelease
 Scenario Outline: To validate the claims present for the SHIP member on claims summary page for SHIP members
 Given login with following details logins in the member portal and validate elements
   | Plan Type      | <planType>     |
