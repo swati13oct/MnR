@@ -78,9 +78,8 @@ Then I should see learn more about the drug tiers and learn more about the drug 
  
 Examples:
  | planType | memberType  |drug1|dosage1|quantity1|frequency1|dosage2|brandeddrug|genericdosage|zipcode|radius|quantity2|frequency2|
- | MAPD     |AARPFederalDCEmember |Lipitor|Lipitor TAB 10MG|31|Every 1 month|Lipitor TAB 20MG|Lipitor TAB 20MG|atorvastatin calcium TAB 20MG|90210|25 miles|100|Every 3 months|
+ | MAPD     |AARPFederalDCEmember |Lipitor|Lipitor TAB 10MG|31|Every 1 month|Lipitor TAB 20MG|Lipitor TAB 20MG|atorvastatin calcium TAB 20MG|00820|25 miles|100|Every 3 months|
 # | PDP      |NonLISSplittier  |Lipitor|Lipitor TAB 10MG|31|Every 1 month|Lipitor TAB 20MG|Lipitor TAB 20MG|atorvastatin calcium TAB 20MG|90210|25 miles|100|Every 3 months|
- #| MAPD     |IndividualDCEmember  |Lipitor|Lipitor TAB 10MG|31|Every 1 month|Lipitor TAB 20MG|Lipitor TAB 20MG|atorvastatin calcium TAB 20MG|90210|25 miles|100|Every 3 months|
  #| COMBO    |ComboDCEmember  |Lipitor|Lipitor TAB 10MG|31|Every 1 month|Lipitor TAB 20MG|Lipitor TAB 20MG|atorvastatin calcium TAB 20MG|90210|25 miles|100|Every 3 months|
  
 @drugCostEstimator5 @drugToolNotDisplayed 
