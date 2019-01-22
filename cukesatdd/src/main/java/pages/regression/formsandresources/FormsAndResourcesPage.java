@@ -113,7 +113,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	private WebElement renewMagazinePDPAARP;
 
 	// @FindBy(xpath = "//*[@class='otherPages renewmagazine_UHC_PDP']")
-	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/div[3]/div[20]//section//div[1]/div/div/div[2]/h2")
+	@FindBy(xpath = "(//*[@id='renew_magazine']//h2)[2]")
 	private WebElement renewMagazinePDPUHC;
 
 	@FindBy(xpath = "//*[@class='otherPages renewmagazine_UHC_GROUP_MA_MAPD']")
@@ -278,7 +278,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	/* Pharmacy Locator Link for PDP */
 	// @FindBy(xpath = "//*[@class='otherPages
 	// PharmacyLocatorCallout_AD']//*[text()='Pharmacy Locator']")
-	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[3]/div[8]//section/div/div[2]/div/div[1]/div[2]//ul/li/a")
+	@FindBy(xpath = "(//*[contains(@href,'pharmacy-locator')])[3]")
 	private WebElement PharmacyLocatorLinkPDP;
 
 	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[3]/div[8]//section/div/div[2]/div/div[1]/div[3]//ul/li[2]/a")
