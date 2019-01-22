@@ -81,7 +81,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	// @FindBy(xpath = "//*[@class='otherPages
 	// EOBComponentforMAPDNICE_2018']//*[@class='explanationbenefits parbase
 	// section']//*[@class='block-body']")
-	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[3]/div[17]//section/div/div[2]/div[1]//a")
+	@FindBy(xpath = "(//*[@id=\"eobsection\"]/div[2]/div[1]//a)[7]")
 	private WebElement btnEobMedicalButton;
 
 	@FindBy(xpath = "//*[@class='otherPages EOB_MA_COSMOS']//*[contains(text(),'SEARCH EOB HISTORY')]")
@@ -91,7 +91,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	// @FindBy(xpath = "//*[@class='otherPages
 	// EOBComponentforMAPDNICE_2018']//*[@class='explanationbenefits parbase
 	// section']//*[@class='col-md-4 block border-left']")
-	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[3]/div[17]//section//div[2]/div[2]//a")
+	@FindBy(xpath = "(//*[@id=\"eobsection\"]/div//div[2]//a)[2]")
 	private WebElement btneobDrugButton;
 
 	/** Medical button in Eob section for mapd group */
@@ -134,7 +134,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	// @FindBy(xpath =
 	// "//*[@id='plan_material_fnr2018']//*[not(contains(text(),'ng-hide'))]//*[contains(text(),'Plan
 	// Materials')]")
-	@FindBy(xpath = "(//*[contains(text(),\"Plan Materials\")])[4]")
+	@FindBy(xpath = "(//*[contains(text(),\"Plan Materials\")])[14]")
 	public WebElement PlanMaterialSection;
 	
 	@FindBy(xpath = "(//*[@class='plan_benefit_documents_forms_amd_resources']//*[@class='planBenefitsHeaderParsys parsys']//*[contains(text(),'Plan Materials')])[2]")
@@ -350,7 +350,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 		return logoPEEHIP;
 	}
 
-	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[3]/div[4]/div/div/div/div/section/div/div[2]/div/div[1]/div/div/div/div/ul/li")
+	@FindBy(xpath = "(//*[contains(@class,'document-list-new margin-small spanWithImmDiv divWithImmLi')])[4]//li")
 	private List<WebElement> anocxpath;
 
 	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/div[3]/div[6]//section/div/div[2]/div/div[1]/div[1]//ul/li")
@@ -361,7 +361,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 
 	// @FindBy(xpath = "(//*[@class='document-list-new margin-small spanWithImmDiv
 	// divWithImmLi'])[1]/ul/li")
-	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/div[3]/div[1]/div[2]//div/section/div/div[2]/div/div[1]//div[1]/ul/li")
+	@FindBy(xpath = "(//*[contains(@class,'document-list-new margin-small spanWithImmDiv divWithImmLi')])[1]//li")
 	private List<WebElement> planmaterialxpath;
 
 	@FindBy(xpath = "//*[@class='source-content-configurations_plan-material_jcr-content_overview_formsandresourcescon_formsAndResourcesParsys_customsegments_segmentContainer_planbenefitdocuments'])[1]/div/ul/li")
@@ -379,7 +379,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	// *[@id="globalContentIdForSkipLink"]/div[3]/div[9]//section/div/div[2]/div/div[1]/div[1]//ul/li
 	private List<WebElement> annualDirectoryPdfList;
 
-	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/div[3]/div[8]/div/div/div/div/section/div/div[2]/div/div[1]/div[1]//li")
+	@FindBy(xpath = "(//*[contains(@class,'overview_customsegments-AnnualDirectories')])[2]//li")
 	private List<WebElement> copyAnnualDirectoryPdfList;
 
 	@FindBy(xpath = "//*[@id='home_2']")

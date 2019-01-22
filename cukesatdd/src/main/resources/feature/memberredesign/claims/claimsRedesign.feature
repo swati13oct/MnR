@@ -280,7 +280,7 @@ Scenario Outline: To validate the claims present for the Federal member on claim
       | Plan Type    | <planType>    |
       | Claim Period | <claimPeriod> |
     Then I can see the claims displayed based on the selection in redesigned site
-    And I validate the pagination on the claims summary page for members
+ #   And I validate the pagination on the claims summary page for members
    	And the user validates the EOB section based on domain in redesigned site
       | Domain     | <domain>      |
       | Plan Type  | <planType>    |
@@ -326,7 +326,7 @@ Given login with following details logins in the member portal and validate elem
   | Plan Type      | <planType>     |
   | Test Data Type | <claimssystem> |
 When I navigate to the claims Summary page in redesigned site
-Then I can validate the claims summary header
+#Then I can validate the claims summary header
 And I can search claims for the following claim period on redesigned site
   | Plan Type    | <planType>    |
   | Claim Period | <claimPeriod> |
@@ -336,4 +336,4 @@ And the user search claims for the following time interval in redesigned site
 Then the user should be able to see the from date is greater than to date error message
 Examples: 
      | planType | claimPeriod    | domain | claimssystem |claimToDate | claimFromDate |
-     | MAPD     |customsearch | COSMOS | COSMOSCLAIMS |11/06/2018  | 01/02/2019 |
+     | MAPD     |custom-search | COSMOS | COSMOSCLAIMS |11/06/2018  | 01/02/2019 |
