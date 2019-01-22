@@ -7,16 +7,19 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
     When the user performs plan search using following information in the AARP site
       | Zip Code    | <zipcode> |
       | County Name | <county>  |
+      | Is Multi County|  <isMultutiCounty> |
     Then user validates plan count for all plan types on plan summary page in the AARP site
     And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
     And the user validates the available plans for selected plan types in the AARP site
     Then the user validates plan summary for the below plan in the AARP site
       | Plan Name | <planName> |
+    Then the user view plan details of the above selected plan in AARP site and validates
+      | Plan Name | <planName> |
 
     Examples: 
-      | zipcode | county             | plantype | planName                                          |
-      |   90210 | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
+      | zipcode | isMultutiCounty | county       | plantype |               planName                            |
+      | 80002   | YES             | Adams County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 
   @vppPlanDetailsAarp
   Scenario Outline: Verify plan details in AARP site
@@ -24,14 +27,15 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
     When the user performs plan search using following information in the AARP site
       | Zip Code    | <zipcode> |
       | County Name | <county>  |
+      | Is Multi County|  <isMultutiCounty> |
     When the user views plans of the below plan type in AARP site
       | Plan Type | <plantype> |
     Then the user view plan details of the above selected plan in AARP site and validates
       | Plan Name | <planName> |
 
     Examples: 
-      | zipcode | county       | plantype | planName                                          |
-      |   90002 | Adams County | MAPD     | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |
+      | zipcode | isMultiCounty |county       | plantype | planName                                          |
+      |   90002 | NO            | Adams County | MAPD     | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |
 
   @defect3281
   Scenario Outline: To check all 3 MA plans and go to estimate drug costs page and return to vpp to verify they're still selected
@@ -51,6 +55,7 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
     When the user performs plan search using following information in the AARP site
       | Zip Code    | <zipcode> |
       | County Name | <county>  |
+      | Is Multi County|  <isMultutiCounty> |
     #Then user validates plan count for all plan types on plan summary page in the AARP site
     And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
@@ -61,8 +66,8 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
     Then the user clicks on both top and bottom back to plans link and validates its redirection AARP
 
     Examples: 
-      | zipcode | county             | plantype | planName                                          |
-      |   90210 | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
+      | zipcode | isMultiCounty |county             | plantype | planName                                          |
+      |   90210 | NO            | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 
   @snpplansulayer @september_release_2018 @predators
   Scenario Outline: Verify plan summary in AARP site
@@ -70,6 +75,7 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
     When the user performs plan search using following information in the AARP site
       | Zip Code | <zipcode> |
     #| County Name | <county>  |
+    | Is Multi County|  <isMultutiCounty> |
     Then user validates plan count for all plan types on plan summary page in the AARP site
     And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
@@ -78,8 +84,8 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
       | Plan Name | <planName> |
 
     Examples: 
-      | zipcode | county             | plantype | planName                                     |
-      |   80001 | Los Angeles County | SNP      | UnitedHealthcare Nursing Home Plan (PPO SNP) |
+      | zipcode | isMultiCounty |county             | plantype | planName                                     |
+      |   80001 | NO | Los Angeles County | SNP      | UnitedHealthcare Nursing Home Plan (PPO SNP) |
 
   @emailandprintplancompare @predators
   Scenario Outline: Verify print and email for <plantype> plan compare page in AARP site
@@ -120,6 +126,7 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
     When the user performs plan search using following information in the AARP site
       | Zip Code    | <zipcode> |
       | County Name | <county>  |
+       | Is Multi County|  <isMultutiCounty> |
     And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
     And the user validates the available plans for selected plan types in the AARP site

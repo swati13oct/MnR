@@ -1,7 +1,7 @@
-@theSpartans
+@memauth @theSpartans
 Feature: S1.1 To test Member Auth Dashboard page.
 
-  @memb
+  @memauth1 @memb
   Scenario Outline: To validate the error message for invalid user name and correct password or viseversa.
     Given the user is on member auth login page
     Then the member tries to login with invalid username and correct password and verify the error message
@@ -13,7 +13,7 @@ Feature: S1.1 To test Member Auth Dashboard page.
       | username  | password  | errormessage                                    |
       | qavgogine |           | Either your UserName or Password was incorrect. |
       |           | qavgogine | Either your UserName or Password was incorrect. |
-
+	@memauth2
   Scenario Outline: To validate the contact us page through Member auth.
     Given the user is on member auth login page
       | Username | <username> |
@@ -31,7 +31,7 @@ Feature: S1.1 To test Member Auth Dashboard page.
       | qavgogine | qavgogine | 4B152296-7C31-49C7-B49F-8739EB9A84A2 | You are viewing this site with member authorized read only access. Remember to LOGOUT at the end of the session | You are not authorized to submit |
       
        
- @regressionMemberAuth     @regressionMember
+	@memauth3 @regressionMemberAuth     @regressionMember
   Scenario Outline: TC09_Save_Prefrences WRT member auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password 
@@ -47,7 +47,7 @@ Feature: S1.1 To test Member Auth Dashboard page.
     | username  | password  |member            |  errorMessage|
     | qavgogine | qavgogine |q2_jun_uhc0008  	 |You are not authorized to change preferences on behalf of the member.|
  
- @regressionMemberAuth  @regressionMember
+		@memauth4 @regressionMemberAuth  @regressionMember
     Scenario Outline: TC08_Edit_Temporary_Address WRT member auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password 
@@ -63,7 +63,7 @@ Feature: S1.1 To test Member Auth Dashboard page.
     | username  | password  |member            |  errorMessage|
     | qavgogine | qavgogine |q2_jun_uhc0008  	 |you are not authorized to update the address number on behalf of member|
     
-@regressionMemberAuth   @regressionMember
+		@memauth5 @regressionMemberAuth   @regressionMember
     Scenario Outline: TC07_Edit_alternative_Address WRT member auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password 
@@ -79,7 +79,7 @@ Feature: S1.1 To test Member Auth Dashboard page.
     | username  | password  |member            |  errorMessage|
     | qavgogine | qavgogine |q2_jun_uhc0008  	 |you are not authorized to update the address number on behalf of member|
     
-@regressionMemberAuth    @regressionMember
+			@memauth6 @regressionMemberAuth    @regressionMember
     Scenario Outline: TC06_Edit_Email WRT member auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password 
@@ -95,7 +95,7 @@ Feature: S1.1 To test Member Auth Dashboard page.
     | username  | password  |member            |  errorMessage|
     | qavgogine | qavgogine |q2_jun_uhc0008  	 |you are not authorized to update the email address on behalf of member.|
     
-@regressionMemberAuth    @regressionMember
+			@memauth6 @regressionMemberAuth    @regressionMember
     Scenario Outline: TC05_Edit_Phone WRT member auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password 
@@ -111,7 +111,7 @@ Feature: S1.1 To test Member Auth Dashboard page.
     | username  | password  |member            |  errorMessage|
     | qavgogine | qavgogine |q2_jun_uhc0008  	 |you are not authorized to update the phone number on behalf of member|
  
- @regressionMemberAuth   @regressionMember
+ @memauth7 @regressionMemberAuth   @regressionMember
   Scenario Outline: TC18_Check EOB page is accessible using Member Auth Tool WRT member auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password 
@@ -130,7 +130,7 @@ Feature: S1.1 To test Member Auth Dashboard page.
       | qavgogine | qavgogine |q2_jun_aarp0101	 | PDP       | 18 Months  |Prescription  |   
       
       
- @MemberAuth_PharmacyLocatorDefaultZip  @regressionMember
+ @memauth8 @MemberAuth_PharmacyLocatorDefaultZip  @regressionMember
  Scenario Outline: To validate Pharmacy Locator view for Member Auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -153,7 +153,7 @@ Feature: S1.1 To test Member Auth Dashboard page.
       | username  | password  |MemUserName    | distance | pharmacyType                |
       | qavgogine | qavgogine | q2_jun_aarp0017 |      25 | Open 24 hours               |
  
-  @MemberAuth_PharmacyLocatorValidateLanguage  @regressionMember
+  @memauth9 @MemberAuth_PharmacyLocatorValidateLanguage  @regressionMember
  Scenario Outline: To validate Pharmacy Locator Multiple Language and Zipcode entry for Member Auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -174,7 +174,7 @@ Feature: S1.1 To test Member Auth Dashboard page.
       | qavgogine | qavgogine | q2_jun_aarp0017 |   
       
              
-@MemberAuth_OrderMaterialsErrorMessage   @regressionMember
+@memauth10 @MemberAuth_OrderMaterialsErrorMessage   @regressionMember
 Scenario Outline: To validate Order Submission Error for Member Auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password

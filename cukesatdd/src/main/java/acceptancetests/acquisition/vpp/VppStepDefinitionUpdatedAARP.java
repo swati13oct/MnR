@@ -71,12 +71,19 @@ public class VppStepDefinitionUpdatedAARP {
 
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String county = memberAttributesMap.get("County Name");
+		String isMultiCounty = memberAttributesMap.get("Is Multi County");
 		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
 		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
 
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
+		VPPPlanSummaryPage plansummaryPage = null;
+		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
+			plansummaryPage = aquisitionhomepage.searchPlansWithOutCounty(zipcode);
+		} else {
+			plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
+		}
 
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
@@ -94,12 +101,9 @@ public class VppStepDefinitionUpdatedAARP {
 
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		if (plansummaryPage.validateVPPPlanSummaryPage()) {
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail("Error validating plans in  VPP plan summary page");
+		Assert.assertTrue("Error validating plans in  VPP plan summary page",
+				plansummaryPage.validateVPPPlanSummaryPage());
 		}
-	}
 
 	/**
 	 * @toDo:user views the plans of the below plan type
@@ -120,16 +124,8 @@ public class VppStepDefinitionUpdatedAARP {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
-		plansummaryPage = plansummaryPage.viewPlanSummary(plantype);
-
-		if (plansummaryPage != null) {
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
-
-		} else {
-			Assert.fail("Error loading plans of desired plantype in  VPP plan summary page");
+		plansummaryPage.viewPlanSummary(plantype);
 		}
-
-	}
 
 	/**
 	 * @toDo:select all 3 plans to compare in MA and click on compare plan link
@@ -221,14 +217,9 @@ public class VppStepDefinitionUpdatedAARP {
 		if (vppPlanDetailsPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
 			Assert.assertTrue(true);
-			/*
-			 * if(vppPlanDetailsPage.validatePlanDetailsPage()){
-			 * Assert.assertTrue(true);
-			 */
 		} else
 			Assert.fail("Error in Loading the Plan Details Page");
 
-		// }
 	}
 
 	/**
@@ -242,10 +233,8 @@ public class VppStepDefinitionUpdatedAARP {
 
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		if (plansummaryPage.validatePlanNames(planType)) {
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 			String SiteName = "AARP_ACQ";
 			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
-
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("Error validating availables plans for selected plantype in  VPP plan summary page");
@@ -270,14 +259,9 @@ public class VppStepDefinitionUpdatedAARP {
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-
-		if (planSummaryPage.getSpecificPlanInfo(planName)) {
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, planSummaryPage);
-		} else {
-			Assert.fail("Error loading specific plan summary in VPP plan summary page");
+		Assert.assertTrue("Error loading specific plan summary in VPP plan summary page",
+				planSummaryPage.getSpecificPlanInfo(planName));
 		}
-
-	}
 
 	@Then("^the user view plan details of the above selected plan in AARP site vpp$")
 	public void the_user_view_plan_details_of_the_above_selected_plan_in_UMS_site_vpp(DataTable givenAttributes) {
