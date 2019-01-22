@@ -281,7 +281,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	@FindBy(xpath = "(//*[contains(@href,'pharmacy-locator')])[3]")
 	private WebElement PharmacyLocatorLinkPDP;
 
-	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[3]/div[8]//section/div/div[2]/div/div[1]/div[3]//ul/li[2]/a")
+	@FindBy(xpath = "(//*[contains(text(),'Pharmacy Locator')])[3]")
 	private WebElement lnkPharmacyLocatorLinkMAPDGroup;
 
 	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[3]/div[8]//section/div/div[2]/div/div[1]/div[2]//ul/li/a")
