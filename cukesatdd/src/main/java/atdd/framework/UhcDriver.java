@@ -576,4 +576,16 @@ try {
 			}
 		});
 	}
+	
+	/***
+	 * the method waits for maximum 30 sec till element gets disapper
+	 * throwing an exception
+	 * 
+	 * @param element
+	 */
+	public void waitforElementDisapper(By by) {
+		WebDriverWait wait = new WebDriverWait(driver, 30);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
+
+	}
 }

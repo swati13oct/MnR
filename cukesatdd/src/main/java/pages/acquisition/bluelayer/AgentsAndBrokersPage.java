@@ -27,10 +27,11 @@ public class AgentsAndBrokersPage extends GlobalWebElements{
 	@FindBy(id = "medicareTitle")
 	private WebElement agentsAndBrokersTitle;
 
-	private PageData agentsAndBrokers;
-
-	public JSONObject agentsAndBrokersJson;
-
+	@FindBy(xpath = "//*[contains(@class,'meded-article-header__title')]")
+	public static WebElement header;
+	
+	@FindBy(xpath = "//div[contains(@class,'mededoverviewcontainer')]//div[contains(@class,'meded-medicare-overview__title')]")
+	public static WebElement medicareOverviewTableTitle;
 
 
 	public AgentsAndBrokersPage(WebDriver driver) {
@@ -41,38 +42,10 @@ public class AgentsAndBrokersPage extends GlobalWebElements{
 
 	@Override
 	public void openAndValidate() {
-		validate(agentsAndBrokersTable);
-		validate(agentsAndBrokersTitle);
-
-	}
-
-	public JSONObject agentsAndBrokers() {
-
-		String fileName = CommonConstants.AGENTS_AND_BROKERS_PAGE_DATA;
-		agentsAndBrokers = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
-
-		JSONObject jsonObject = new JSONObject();
-		for (String key : agentsAndBrokers.getExpectedData().keySet()) {
-			WebElement element = findElement(agentsAndBrokers.getExpectedData()
-					.get(key));
-			if (element != null) {
-				if(validate(element)){
-					try {
-						jsonObject.put(key, element.getText());
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			}
+		CommonUtility.waitForPageLoadNew(driver, header, 30);
+		validateNew(medicareOverviewTableTitle);
 		}
-		agentsAndBrokersJson = jsonObject;
 
-
-		return agentsAndBrokersJson;
-
-	}
 	public AcquisitionHomePage homeFooterClick() {
 		validate(footerHomeLink);
 		footerHomeLink.click();
@@ -81,15 +54,6 @@ public class AgentsAndBrokersPage extends GlobalWebElements{
 			return new AcquisitionHomePage(driver);
 		}
 		return null;
-	}
-	
-	public boolean validatHomeLink(){
-		boolean flag = true;
-		
-		if(!footerHomeLink.isDisplayed())
-			flag = false;
-		
-		return flag;
 	}
 
 }
