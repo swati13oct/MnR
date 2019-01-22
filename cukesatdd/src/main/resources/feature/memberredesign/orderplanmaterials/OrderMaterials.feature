@@ -18,7 +18,7 @@ Feature:P1.5 To test order materials in Redesign site
       | planType | memberType | option           |
       | MA      |  AARPIndividual | Replacement ID card |
       | MAPD     | AARPIndividual_order  | Replacement ID card      |
-      | MAPD     | PCP  | Replacement ID card      |
+      | MAPD     | PCP_order  | Replacement ID card      |
       | MAPD     | Medica2  | Replacement ID card      | 
       | PDP      |  AARPIndividual | Welcome Guide    |
       | SHIP     | AARPIndividual_order  | Claims Envelope |
