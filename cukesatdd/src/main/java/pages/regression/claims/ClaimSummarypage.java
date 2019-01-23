@@ -178,8 +178,8 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy (css = ".ng-scope>p>span")
 	private WebElement shipDateRangeErrMsg;
 	
-   // @FindBy (id="errorMsg")
-    @FindBy(xpath ="//*[contains(text(),'You can view AARP Personal Health Insurance Plan claims')]")
+    @FindBy (id="errorMsg")
+   // @FindBy(xpath ="//*[contains(text(),'You can view AARP Personal Health Insurance Plan claims')]")
     private WebElement PHIPerrorMsg;
     
 	@FindBy (css = ".color-red.semi-bold>p>span")
