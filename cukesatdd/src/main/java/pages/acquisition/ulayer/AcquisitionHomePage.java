@@ -182,7 +182,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private WebElement GoButton;
 	
 	@FindBy(id = "cobrowse-disclaimer")
-	private List<WebElement> requestAssistanceModal;
+	private WebElement requestAssistanceModal;
 	
 	@FindBy(xpath = "//div[@id='cobrowse-disclaimer']//*[contains(@class,'modal-title')]")
 	private WebElement requestAssistanceTitle;
@@ -926,7 +926,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		if(proactiveChatExistBtn.size()!=0)
 			proactiveChatExistBtn.get(0).click();
 		footerRequestforAssistancelink.click();
-		CommonUtility.waitForPageLoadNew(driver, requestAssistanceModal.get(0), 30);
+		CommonUtility.waitForPageLoadNew(driver, requestAssistanceModal, 30);
 		validateNew(requestAssistanceTitle);
 		validateNew(requestAssistanceAgentID);
 		requestAssistanceClose.click();
