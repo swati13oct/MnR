@@ -55,7 +55,8 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy(xpath = ".//*[@id='planNameFed']")
 	private WebElement planame;
 	
-	@FindBy (xpath = "//*[@id='document-date']//option[contains(@value,'custom-search')]")
+	//@FindBy (xpath = "//*[@id='document-date']//option[contains(@value,'custom-search')]")
+	@FindBy(xpath =".//*[@id='dateCustomSearchAtdd']")
 	private WebElement customSearch;
 	
 	@FindBy (xpath = "//div[@class='medical-claims']//h2[@ng-bind-html='planName']/parent::div//*[@id='document-date']//option[contains(@value,'24 months')]")
@@ -185,7 +186,8 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy (css = ".color-red.semi-bold>p>span")
 	private WebElement fedDateRangeErrMsg;
 	
-	@FindBy (xpath ="//*[@id='futureDateErrorDivErr']/p/span/text()")
+	//@FindBy (xpath ="//*[@id='futureDateErrorDivErr']/p/span/text()")
+	@FindBy (xpath = ".//*[@id='futureDateErrorDivErr']/p/span")
 	private WebElement fromDateLaterThanToDateError;
 	
 	/*@FindBy (xpath =".//*[@id='moreInfoLinkAtdd0']/a")
@@ -583,8 +585,14 @@ public class ClaimSummarypage extends UhcDriver{
 
 	public void searchClaimsByTimeInterval(String toDate, String fromDate) {
 		System.out.println("The title of the page is-------->"+driver.getTitle());
-	if(driver.getTitle().equalsIgnoreCase("Claims Summary")){
-
+	if(driver.getTitle().contains("Claims Summary")){
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("now waiting for 20 seconds");
 			customSearch = driver.findElement(By.id("dateCustomSearchAtdd"));
 			customSearch.click();
 			

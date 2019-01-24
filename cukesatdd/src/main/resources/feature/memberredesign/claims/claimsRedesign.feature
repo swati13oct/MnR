@@ -325,10 +325,10 @@ Given login with following details logins in the member portal and validate elem
   | Plan Type      | <planType>     |
   | Test Data Type | <claimssystem> |
 When I navigate to the claims Summary page in redesigned site
-Then I can validate the claims summary header
-And I can search claims for the following claim period on redesigned site
-  | Plan Type    | <planType>    |
-  | Claim Period | <claimPeriod> |
+#Then I can validate the claims summary header
+#And I can search claims for the following claim period on redesigned site
+ # | Plan Type    | <planType>    |
+ # | Claim Period | <claimPeriod> |
 And the user search claims for the following time interval in redesigned site
 | Claims To Date   | <claimToDate>   |
 | Claims From Date | <claimFromDate>  |
