@@ -23,17 +23,32 @@ public class PlanSelectorNewPage extends UhcDriver {
 	private WebElement iframePst; 
 
 
-	@FindBy(xpath = "//div[@id='widget_0tdroCAgSEGuqWNwLbf7xA']/div/a")
+	/*@FindBy(xpath = "//div[@id='widget_0tdroCAgSEGuqWNwLbf7xA']/div/a")
+	private WebElement getStartedBtn; */
+	
+	@FindBy(xpath = "(//a[contains(text(), 'Get Started')])[2]")
 	private WebElement getStartedBtn; 
 
 	//	@FindBy(css = "#widget_0tdroCAgSEGuqWNwLbf7xA > div > a")
 	//	private WebElement getStartedBtn; 
 
 	@FindBy(id = "DemographicsDataModel_ZipCode")
-	private WebElement zipCode; 
+	private WebElement zipCode;
+	
+	@FindBy(xpath = "//*[@id='CoverageType_Idontknow_Option_7_Lable']/following-sibling ::label")
+	private WebElement TypeOfCoverageOption; 
 
-	@FindBy(xpath = "//div[@id='widget_XB0ZCgAJOUi3D3-w91PcnA']//a[@class='btn btn-primary next leftBlk nextBtn']")
+	@FindBy(xpath = "//div[@class='rightBlk']//a[@class='btn btn-primary next leftBlk nextBtn']")
 	private WebElement continueBtn; 
+	
+	@FindBy(xpath = "//*[@id='control_control_0_4']/following-sibling::label")
+	private WebElement NoneOption;
+	
+	@FindBy(xpath = "(//*[@class='preferencenavigation pageNavigation']/a[2])[1]")
+	private WebElement NextQuestionButton;
+	
+	@FindBy(id = "planPreferenceLegend_1")
+	private WebElement NextQuestion;
 
 	//a[@class='btn btn-primary next leftBlk nextBtn']
 	@FindBy(xpath = "//div[@id='widget_B9pzC-bMU02tTlxiTpbchA']//div/a[@href='/PlanCompare/Consumer/Type3/2018/Compare/ComparePlans']")
@@ -50,7 +65,8 @@ public class PlanSelectorNewPage extends UhcDriver {
 	@FindBy(id = "backToPlanSelectorBottom")
 	private WebElement backToPlanSelectorBottom;
 
-
+	@FindBy(xpath = "//*[@class='PlanPreferenceCollection']//div[@class='planPreferenceQuestion ']//h1")
+	private WebElement PreferencesHeader;
 
 
 
@@ -69,36 +85,55 @@ public class PlanSelectorNewPage extends UhcDriver {
 	}
 
 
-	public PlanSelectorNewPage quizStartAndSkipToResults(String zip_code) throws InterruptedException
+	public PlanSelectorNewPage quizStartAndRunQuestionnaire(String zip_code) throws InterruptedException
 	{
 
-		Thread.sleep(2000);
+	//	Thread.sleep(2000);
 
 		switchToNewIframe(iframePst);
 
 		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.elementToBeClickable(getStartedBtn));
 		getStartedBtn.click();
-		driver.switchTo().defaultContent();
+		/*driver.switchTo().defaultContent();
 
-		switchToNewIframe(iframePst);
+		switchToNewIframe(iframePst);*/
 
 		wait.until(ExpectedConditions.elementToBeClickable(zipCode));
 
 		sendkeys(zipCode, zip_code);
-		wait.until(ExpectedConditions.elementToBeClickable(continueBtn));
+		TypeOfCoverageOption.click();
+		System.out.println("I don't know option radio button should be selected");
+		
+		//wait.until(ExpectedConditions.elementToBeClickable(continueBtn));
 		continueBtn.click();
-		Thread.sleep(3000);
-		driver.switchTo().defaultContent();
-		switchToNewIframe(iframePst);
+		waitforElement(PreferencesHeader);
+		/*driver.switchTo().defaultContent();
+		switchToNewIframe(iframePst);*/
 
-		wait.until(ExpectedConditions.elementToBeClickable(skipToResultsLink));
+		/*wait.until(ExpectedConditions.elementToBeClickable(skipToResultsLink));
 
-		skipToResultsLink.click();
-
+		skipToResultsLink.click();*/
+		
+		if(PreferencesHeader.getText().contains("Your Preferences"))
 		return new PlanSelectorNewPage(driver);
+		else 
+			return null;
 
 	}
+	
+	public PlanSelectorNewPage NextQuestion() throws InterruptedException
+	{		
+		NoneOption.click();
+		NextQuestionButton.click();		
+		waitforElement(NextQuestion);
+		if(NextQuestion.isDisplayed())
+		return new PlanSelectorNewPage(driver);
+		else 
+			return null;
+
+	}
+	
 
 	public PlanSelectorNewPage navigateToPlanDetails() throws InterruptedException
 	{

@@ -229,9 +229,8 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(css = ".claimDetTableMainSection")
 	private WebElement claimDetTableMainSection;
 
-	//@FindBy(xpath = "//*[@id='dashboard']//span[text()='View Your Claims']")
-	//@FindBy(xpath = "//*[@id='claims_1']")
-	@FindBy(xpath = "//a[text()='Go to Claims page']")
+	@FindBy(xpath = "//*[@id='dashboard']//span[text()='View Your Claims']")
+	//@FindBy(xpath = "//*[@id='claims_1']") @FindBy(xpath = "//a[text()='Go to Claims page']")
 	private WebElement claimsDashboardLink;
 
 	@FindBy(xpath = "//*[@id='row2link1']/td[2]/a")

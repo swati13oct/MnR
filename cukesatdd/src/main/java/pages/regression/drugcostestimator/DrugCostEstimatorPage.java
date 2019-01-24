@@ -344,7 +344,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	 */
 	public AddNewDrugModal clickOnAddDrug() throws InterruptedException {
 		Thread.sleep(5000);
-		//waitforElement(addDrug);
+		waitforElement(addDrug);
 		addDrug.click();
 		//addDrug.click();
 		System.out.println("Current Page title :: " + driver.getTitle());
@@ -494,8 +494,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	 * To get drugs count
 	 */
 	public int getDrugsCount() {
-		List<WebElement> drugs = driver
-				.findElements(By.xpath("//div[@id='drugs-tab']//div[contains(@ng-repeat,'eachDrug')]"));
+		List<WebElement> drugs = driver.findElements(By.xpath("//div[@id='drugs-tab']//div[contains(@ng-repeat,'eachDrug')]"));
 		return drugs.size();
 	}
 
@@ -612,8 +611,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	 */
 	public void deleteDrugsByDosage(String dosage) throws InterruptedException {
 		Thread.sleep(15000);
-		String deleteDrugXpath = "//div[@id='drugs-tab']//p[contains (text(), '" + dosage
-				+ "')]/following-sibling::ul//li/a[@class='delete-drug']";
+		
+		//String deleteDrugXpath = "//div[@id='drugs-tab']//p[contains (text(), '" + dosage+ "')]/following-sibling::ul//li/a[@class='delete-drug']";
+		String deleteDrugXpath = "//*[@id='drugcontainer_0']/div/section/ul/li[2]/a";
 		WebElement deletedrug = driver.findElement(By.xpath(deleteDrugXpath));
 		deletedrug.click();
 //		CommonUtility.waitForPageLoad(driver, delDrgConfirm, 10);
@@ -644,8 +644,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	 */
 	public boolean validateAddedDrug(String args1, String arg2, String arg3) {
 		// TODO Auto-generated method stub
-		validate(driver.findElement(By.xpath("//div[@id='drugs-tab']//p[contains (text(), '" + args1
-				+ "')]/following-sibling::p/span[contains(text(),'" + arg2 + "')]")));
+		
+		
+		validate(driver.findElement(By.xpath("//div[@id='drugs-tab']//p[contains (text(), '" + args1+ "')]")));
 
 		// List<WebElement> stri =
 		// driver.findElements(By.xpath("//div[@id='drugs-tab']//p[contains
@@ -1491,19 +1492,14 @@ try {
 	 */
 	public void validateSwitchGenericOption() {
 
-		int drugscount = getDrugsCount();
-		if(drugscount>0){
-			WebElement switchGenericOption = driver.findElement(By.id("generic-drug-"+ (drugscount-1)));
+			WebElement switchGenericOption = driver.findElement(By.id("generic-drug-switch-btn-0"));
 			System.out.println("switch generic option" + switchGenericOption.getText());
 			if (switchGenericOption.isDisplayed()) {
 				Assert.assertTrue(true);
 			} else {
 				Assert.assertTrue("Drug does not have switch to generic option ",false);
 			}
-		}else{
-			Assert.assertTrue("There are no drugs added ",false);
-		}
-
+		
 
 	}
 
@@ -1511,18 +1507,21 @@ try {
 	 * 
 	 */
 	public void validateSwitchNowLink() {
-		int drugscount = getDrugsCount();
+	/*	int drugscount = getDrugsCount();
+		System.out.println("drugscount==="+drugscount);
+		
 		if(drugscount>0){
-			WebElement switchNowLink = driver.findElement(By.id("generic-drug-switch-btn-"+ (drugscount-1)));
+		*/	WebElement switchNowLink = driver.findElement(By.id("generic-drug-switch-btn-0"));
 			if (switchNowLink.isDisplayed()) {
 				Assert.assertTrue(true);
 			} else {
 				Assert.assertTrue("Switch now link is not present",false);
 			}
 
-		}else{
+		/*}else{
+			//System.out.println("0 drugs");
 			Assert.assertTrue("There are no drugs added ",false);
-		}
+		}*/
 
 	}
 
@@ -1531,9 +1530,9 @@ try {
 	 */
 	public void validateSaveGenericMessage() {
 		int drugscount = getDrugsCount();
-		if (drugscount > 0) {
+		/*if (drugscount > 0) {*/
 			List<WebElement> saveGenericMessage = driver
-					.findElements(By.id("generic-drug-saving-amount-"+(drugscount-1)));
+					.findElements(By.id("generic-drug-saving-amount-0"));
 			String valSaveGenericMessage = saveGenericMessage.get(0).getText();
 			if (valSaveGenericMessage.contains("Save")) {
 				Assert.assertTrue(true);
@@ -1541,9 +1540,9 @@ try {
 				Assert.assertTrue("Save money message is incorect",false);
 			}
 
-		} else {
+		/*} else {
 			Assert.assertTrue("There are no drugs added ", false);
-		}
+		}*/
 
 	}
 
@@ -1553,10 +1552,9 @@ try {
 	 */
 	public void validateSaveDollarValueMessage() throws InterruptedException {
 		int drugscount = getDrugsCount();
-		Thread.sleep(10000);
-		if (drugscount > 0) {
+		
 			List<WebElement> saveGenericMessage = driver
-					.findElements(By.id("generic-drug-saving-amount-"+(drugscount-1)));
+					.findElements(By.id("generic-drug-saving-amount-0"));
 			String valSaveGenericMessage = saveGenericMessage.get(0).getText();
 			if (!valSaveGenericMessage.contains("Save money")) {
 				Assert.assertTrue(true);
@@ -1564,19 +1562,14 @@ try {
 				Assert.assertTrue("Save dollar amount message is incorect",false);
 			}
 
-		} else {
-			Assert.assertTrue("There are no drugs added ", false);
-		}
-
 	}
 
 	/** click on switch now button
 	 * 
 	 */
 	public void clickSwitchNow() throws InterruptedException {
-		int drugscount = getDrugsCount();
-		if (drugscount > 0) {
-			WebElement switchNowLink = driver.findElement(By.id("generic-drug-switch-btn-"+ (drugscount-1)));
+		
+			WebElement switchNowLink = driver.findElement(By.id("generic-drug-switch-btn-0"));
 			Thread.sleep(500);
 			driver.manage().window().maximize();
 			switchNowLink.click();
@@ -1593,9 +1586,7 @@ try {
 				}
 			}
 
-		} else {
-			Assert.assertTrue("There are no drugs added ", false);
-		}
+	
 
 
 	}
@@ -1620,18 +1611,18 @@ try {
 		Thread.sleep(5000);
 		//List<WebElement> lbGenericdrug = driver.findElements(By.id("drugDosageStrengthId"));
 		List<WebElement> lbGenericdrug = driver.findElements(By.xpath("//p[@class='subtitle drugdosagestrength ng-binding']"));  
-		int drugsCount = getDrugsCount();
-		if (drugsCount > 0) {
-			String[] genericDrug = lbGenericdrug.get(drugsCount-1).getText().split(" ");
+	/*	int drugsCount = getDrugsCount();
+		if (drugsCount > 0) {*/
+			String[] genericDrug = lbGenericdrug.get(0).getText().split(" ");
 			if (genericDrug[0].equalsIgnoreCase("ATORVASTATIN")) {
 				Assert.assertTrue(true);
 			} else {
 				Assert.assertTrue("Branded drug is not switched to generic drug",false);
 			}
 
-		} else {
+	/*	} else {
 			Assert.assertTrue("There are no drugs added ", false);
-		}
+		}*/
 	}
 
 	/** Navigates to  DCE page

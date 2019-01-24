@@ -79,9 +79,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                @FindBy(xpath = ".//*[@id='planBenefitsApp']/section/div/div[1]/div/div/div/div/h1")
                private WebElement planName1;
 
-               //note: Dec2018, rollback to the original xpath
-               @FindBy(xpath = ".//*[@id='mapdPageLis']/div[1]/div/div/table/tbody/tr[2]/th")
                //@FindBy(xpath =".//*[@id='mapdPageLis'] or contains(text0,'Covered Generic Drugs')")
+               @FindBy(xpath = ".//*[@id='mapdPageLis']/div[1]/div/div/table/tbody/tr[2]/th")
                private WebElement columncoveragegenericdrugs;
 
                @FindBy(id = "contactUsAtdd")
@@ -138,7 +137,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                @FindBy(xpath = "//h4[contains(text(),'ADDITIONAL BENEFITS')]")
                private WebElement Headersection;
                
-               @FindBy(id="//a[text()='OPTUM RX']")
+               @FindBy(xpath="//a[@class='btn btn--secondary atdd-bnc-optumRx']")
                private WebElement optumRxBtn;
 
                @FindBy(className = ".//*[@id='ancillary']/div[2]/div[4]/div/div")
@@ -150,10 +149,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                @FindBy(className = "atdd-bnc-drugcoverage-title")
                private WebElement DrugCoverageHeader;
 
-               @FindBy(xpath = "(//h2[contains(text(),'Drug Copays & Discounts')])[1]")
+               @FindBy(xpath = "//h2[@class='atdd-bnc-drgcopaysdiscounts-title']")
                private WebElement lisDrugCopayHeader;
 
-               @FindBy(xpath = "(//p[@class='atdd-bnc-drgcopaysdiscounts-info']/..//p[2])[1]")
+               @FindBy(xpath = "//div[@class='drugCopaysAndDiscounts section'][1]//div[@class='drugCopayHeaderParsys parsys section']//p[@class='atdd-bnc-drgcopaysdiscounts-info']")
                private WebElement lisDrugCopayText;
 
                @FindBy(xpath = "//p[contains(text(),'Estimate your drug costs and view ways to save.')]")
@@ -326,7 +325,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                @FindBy(xpath = ".//*[@id='benefitsMain']/div[2]/div/div[1]/div/div/div/div/div[6]/div/div/div/p")
                private WebElement PCPtext;
 
-               @FindBy(id = "outOfPocketTile")
+               @FindBy(xpath = "//div[@class='col-md-8 margin-small']//div[@class='benefitsSummary parbase']//h3//span")
                private WebElement OutofPocketMaximum;
 
                @FindBy(xpath = "//span[contains(text(),'Out-of-Pocket Maximum')]")
@@ -463,7 +462,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                @FindBy(id = "outPatientTileAtdd")
                private WebElement OutpatientSurgeryCenterSection;
 
-               @FindBy(id = "outOfPocketTile")
+               @FindBy(xpath = "//div[@class='col-md-8 margin-small']//div[@class='benefitsSummary parbase']")
                private WebElement outOfPocketSection;
 
                @FindBy(className = "atdd-innetwrk-title")
@@ -484,7 +483,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                @FindBy(xpath = ".//*[@class='table-white atdd-bnc-txers-retailcostsharing-table']/tbody/tr[3]/td[2]")
                private WebElement ICTier1Value;
 
-               @FindBy(xpath = ".//*[@class='table-white atdd-bnc-txers-mailordersharing-table']/tbody/tr[3]/td[2]")
+               @FindBy(xpath = ".//*[@class='table-white atdd-bnc-txers-mailordersharing-table']/tbody/tr[3]/td[1]//div[not(contains(@class,'ng-hide'))]")
                private WebElement ICTier1ValueMailOrder;
 
                @FindBy(xpath = ".//*[@class='table-subheader']/td[1]")
@@ -2499,15 +2498,14 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                /*
                * ** To validate pdfs on Benefit&Coverage Page
                */
-
                public boolean verifypdfname(String a[]) {
                
                               boolean checkflag = true;
                               Select langdropdwn = new Select(langdropdown);
                               if(langdropdwn.getFirstSelectedOption().getText().contains("ENGLISH"))
                               {
-                                             List<WebElement> pdfs = driver.findElements(By.xpath(".//*[@class='PlanPdf section']/div/div[1]/div[1]/span/div/ul/li[2]/a"));
-
+                                             List<WebElement> pdfs = driver.findElements(By.xpath(".//div[@class='PlanPdf section']//div[contains(@ng-show, 'planProfileInfo.employerGroupIndicator')]//li[not(contains(@class,'ng-hide'))]//a"));
+                                             
                                              System.out.println("Size"+pdfs.size());
                                              for (int i=0;i<pdfs.size();i++)
                                              {  
@@ -2525,7 +2523,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                                                                            {
                                                                                           System.out.println(pdf1[0]);
                                                                                           System.out.println(a[i]);
-                                                                                          if(pdf1[0].contains(a[i])){
+                                                                                          if((pdf1[0]).contains(a[i])){
                                                                                                          checkflag = true;
                                                                                           }
                                                                                           else {
@@ -2547,8 +2545,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                               else if(langdropdwn.getFirstSelectedOption().getText().contains("ESPAÃ‘OL"))
                               {
 
-                                             List<WebElement> pdfs = driver.findElements(By.xpath(".//*[@class='PlanPdf section']/div[1]/div[1]/div[2]/span/div/ul/li[2]/a"));
-
+                                             List<WebElement> pdfs = driver.findElements(By.xpath(".//div[@class='PlanPdf section']//div[contains(@ng-show, 'planProfileInfo.employerGroupIndicator')]//li[not(contains(@class,'ng-hide'))]//a"));
+                                             
                                              System.out.println("Number of documents are - "+pdfs.size());
                                              for (int i=0;i<pdfs.size();i++)
                                              {  
@@ -2596,10 +2594,6 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                               return checkflag;
 
                }
-
-
-
-
 
                public void validatestaticlinksinpdf(String plantype) {
                               validateWithValue("Link-Medication Therapy Management Program", Medicationlinkinpdfsec);
@@ -2738,9 +2732,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
                public void validatevillagetabletext()
                {
-
-                              Assert.assertEquals(driver.findElement(By.xpath("(//div[contains(text(),'no more than 44% for generic drugs or 35% for brand name drugs')])[1]")).getText(),"no more than 44% for generic drugs or 35% for brand name drugs");
-        validateWithValue("no more than 44% for generic drugs or 35% for brand name drugs",driver.findElement(By.xpath("(//div[contains(text(),'no more than 44% for generic drugs or 35% for brand name drugs')])[1]")));
+            	   String cellText="no more than 37% for generic drugs or 25% for brand name drugs";
+                              Assert.assertEquals(driver.findElement(By.xpath("(//div[contains(text(),'"+cellText+"')])[1]")).getText(),cellText);
+        validateWithValue(cellText,driver.findElement(By.xpath("(//div[contains(text(),'"+cellText+"')])[1]")));
 
 
                }
@@ -2790,19 +2784,22 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                               if (plantype.contentEquals("MAPD"))
                               {
                                              //System.out.println(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[2]/td[3]")).getText());
-                                             Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[2]/td[3]")).getText(),"$5.00");
-                                             Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[2]/td[4]")).getText(),"$5.00");
-                                             Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[2]/td[5]")).getText(),"Greater of $3.35 or 5.00%");
-                                             Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[3]//td[1]")).getText(),"$20.00");
-                                             Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[3]//td[2]")).getText(),"$20.00");
-                                             Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[3]//td[3]")).getText(),"Greater of $8.35 or 5.00%");
-                                             Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[4]//td[1]")).getText(),"$50.00");
-                                             Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[4]//td[2]")).getText(),"$50.00");
-                                             Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[4]//td[3]")).getText(),"Greater of $8.35 or 5.00%");
-                                             Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[5]//td[1]")).getText(),"$20.00");
-                                             Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[5]//td[2]")).getText(),"$20.00");
-                                             Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[5]//td[3]")).getText(),"Greater of $8.35 or 5.00%");
+                                             Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[2]/td[3]")).getText(),"$7.00");
+                                             Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[2]/td[4]")).getText(),"$7.00");
+                                            // Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[2]/td[5]")).getText(),"Greater of $3.35 or 5.00%");
+                                             Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[3]//td[1]")).getText(),"$15.00");
+                                             Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[3]//td[2]")).getText(),"$15.00");
+                                            // Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[3]//td[3]")).getText(),"Greater of $8.35 or 5.00%");
+                                             Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[4]//td[1]")).getText(),"$15.00");
+                                             Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[4]//td[2]")).getText(),"$15.00");
+                                            // Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[4]//td[3]")).getText(),"Greater of $8.35 or 5.00%");
+                                             Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[5]//td[1]")).getText(),"$100.00");
+                                             Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[5]//td[2]")).getText(),"$100.00");
+                                            // Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[5]//td[3]")).getText(),"Greater of $8.35 or 5.00%");
                                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[2]/td[2]")).getText(),"No Deductible");
+                                             Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//td[7]")).getText(),"$3.40 copay for all generic drugs and $8.50 copay for brand name drugs.");
+                                             
+                                             
                                              validate(annualDeductibleColumnheader);
                                              validate(initialCoverageColumnheader);
                                              validate(coverageGaStageColumnheader);
@@ -2823,9 +2820,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-rx187grptable']//tr[4]/td[1]")).getText(),"$40.00");
                                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-rx187grptable']//tr[4]/td[1]")).getText(),"$40.00");
                                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-rx187grptable']//tr[4]/td[1]")).getText(),"$40.00");
-                                             Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-rx187grptable']//tr[5]/td[1]")).getText(),"25%");
-                                             Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-rx187grptable']//tr[5]/td[2]")).getText(),"25%");
-                                             Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-rx187grptable']//tr[5]/td[3]")).getText(),"25%");
+                                             Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-rx187grptable']//tr[5]/td[1]")).getText(),"25% coinsurance with a $100.00 maximum");
+                                             Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-rx187grptable']//tr[5]/td[2]")).getText(),"25% coinsurance with a $100.00 maximum");
+                                             Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-rx187grptable']//tr[5]/td[3]")).getText(),"25% coinsurance with a $100.00 maximum");
                                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-rx187grptable']//tr[2]/th")).getText(),"Tier 1 ");
                                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-rx187grptable']//tr[3]/th")).getText(),"Tier 2 ");
                                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-rx187grptable']//tr[4]/th")).getText(),"Tier 3 ");
@@ -3098,17 +3095,17 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                public void fedpdptabledata()
                {
                               System.out.println(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferedretailpharmcytable']//tr[2]/td[3]")).getText());
-                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferedretailpharmcytable']//tr[2]/td[3]")).getText(),"$1.00");
-                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferedretailpharmcytable']//tr[2]/td[4]")).getText(),"no more than 44% for generic drugs or 35% for brand name drugs");
-                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferedretailpharmcytable']//tr[3]/td[1]")).getText(),"$3.00");
-                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferedretailpharmcytable']//tr[3]/td[2]")).getText(),"no more than 44% for generic drugs or 35% for brand name drugs");
-                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferedretailpharmcytable']//tr[4]/td[1]")).getText(),"$34.00");
-                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferedretailpharmcytable']//tr[4]/td[2]")).getText(),"no more than 44% for generic drugs or 35% for brand name drugs");
-                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferedretailpharmcytable']//tr[5]/td[1]")).getText(),"30%");
-                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferedretailpharmcytable']//tr[5]/td[2]")).getText(),"no more than 44% for generic drugs or 35% for brand name drugs");
+                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferedretailpharmcytable']//tr[2]/td[3]")).getText(),"$0.00");
+                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferedretailpharmcytable']//tr[2]/td[4]")).getText(),"no more than 37% for generic drugs or 25% for brand name drugs");
+                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferedretailpharmcytable']//tr[3]/td[1]")).getText(),"$5.00");
+                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferedretailpharmcytable']//tr[3]/td[2]")).getText(),"no more than 37% for generic drugs or 25% for brand name drugs");
+                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferedretailpharmcytable']//tr[4]/td[2]")).getText(),"$30.00");
+                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferedretailpharmcytable']//tr[4]/td[3]")).getText(),"no more than 37% for generic drugs or 25% for brand name drugs");
+                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferedretailpharmcytable']//tr[5]/td[1]")).getText(),"32%");
+                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferedretailpharmcytable']//tr[5]/td[2]")).getText(),"no more than 37% for generic drugs or 25% for brand name drugs");
                               Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferedretailpharmcytable']//tr[6]/td[1]")).getText(),"25%");
-                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferedretailpharmcytable']//tr[6]/td[2]")).getText(),"no more than 44% for generic drugs or 35% for brand name drugs");
-                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferedretailpharmcytable']//tr[2]/td[2]")).getText(),"100% until the $405.00 deductible is met.");
+                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferedretailpharmcytable']//tr[6]/td[2]")).getText(),"no more than 37% for generic drugs or 25% for brand name drugs");
+                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferedretailpharmcytable']//tr[4]/td[1]")).getText(),"100% until the $415.00 deductible is met.*");
 
 
                               DrugCostDropdown.sendKeys("Preferred Mail Service Pharmacy");
@@ -3120,6 +3117,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                               {
                                              e.printStackTrace();
                               }
+                              /*
                               Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferdmailpharmcytable']//tr[2]/td[3]")).getText(),"$3.00");
                               Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferdmailpharmcytable']//tr[2]/td[4]")).getText(),"no more than 44% for generic drugs or 35% for brand name drugs");
                               Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferdmailpharmcytable']//tr[3]/td[1]")).getText(),"$9.00");
@@ -3132,7 +3130,20 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                               Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferdmailpharmcytable']//tr[6]/td[2]")).getText(),"no more than 44% for generic drugs or 35% for brand name drugs");
                               Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferdmailpharmcytable']//tr[2]/td[2]")).getText(),"100% until the $405.00 deductible is met.");
                               System.out.println(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferdmailpharmcytable']//tr[2]/td[6]")).getText());
-
+								*/
+                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferdmailpharmcytable']//tr[2]/td[3]")).getText(),"$0.00");
+                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferdmailpharmcytable']//tr[2]/td[4]")).getText(),"no more than 37% for generic drugs or 25% for brand name drugs");
+                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferdmailpharmcytable']//tr[3]/td[1]")).getText(),"$15.00");
+                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferdmailpharmcytable']//tr[3]/td[2]")).getText(),"no more than 37% for generic drugs or 25% for brand name drugs");
+                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferdmailpharmcytable']//tr[4]/td[2]")).getText(),"$90.00");
+                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferdmailpharmcytable']//tr[4]/td[3]")).getText(),"no more than 37% for generic drugs or 25% for brand name drugs");
+                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferdmailpharmcytable']//tr[5]/td[1]")).getText(),"32%");
+                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferdmailpharmcytable']//tr[5]/td[2]")).getText(),"no more than 37% for generic drugs or 25% for brand name drugs");
+                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferdmailpharmcytable']//tr[6]/td[1]")).getText(),"25%");
+                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferdmailpharmcytable']//tr[6]/td[2]")).getText(),"no more than 37% for generic drugs or 25% for brand name drugs");
+                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferdmailpharmcytable']//tr[4]/td[1]")).getText(),"100% until the $415.00 deductible is met.*");
+                              System.out.println(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-preferdmailpharmcytable']//tr[2]/td[6]")).getText());
+                              
                               DrugCostDropdown.sendKeys("Standard Retail Pharmacy");
                               try
                               {
@@ -3142,19 +3153,19 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                               {
                                              e.printStackTrace();
                               }
-                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[2]/td[3]")).getText(),"$2.00");
-                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[2]/td[4]")).getText(),"no more than 44% for generic drugs or 35% for brand name drugs");
-                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[3]/td[1]")).getText(),"$6.00");
-                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[3]/td[2]")).getText(),"no more than 44% for generic drugs or 35% for brand name drugs");
-                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[4]/td[1]")).getText(),"$44.00");
-                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[4]/td[2]")).getText(),"no more than 44% for generic drugs or 35% for brand name drugs");
-                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[5]/td[1]")).getText(),"40%");
-                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[5]/td[2]")).getText(),"no more than 44% for generic drugs or 35% for brand name drugs");
-                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[6]/td[1]")).getText(),"25%");
-                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[6]/td[2]")).getText(),"no more than 44% for generic drugs or 35% for brand name drugs");
-                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[2]/td[2]")).getText(),"100% until the $405.00 deductible is met.");
-                              System.out.println(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[2]/td[6]")).getText());
 
+                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[2]/td[3]")).getText(),"$15.00");
+                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[2]/td[4]")).getText(),"no more than 37% for generic drugs or 25% for brand name drugs");
+                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[3]/td[1]")).getText(),"$20.00");
+                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[3]/td[2]")).getText(),"no more than 37% for generic drugs or 25% for brand name drugs");
+                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[4]/td[2]")).getText(),"$45.00");
+                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[4]/td[3]")).getText(),"no more than 37% for generic drugs or 25% for brand name drugs");
+                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[5]/td[1]")).getText(),"33%");
+                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[5]/td[2]")).getText(),"no more than 37% for generic drugs or 25% for brand name drugs");
+                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[6]/td[1]")).getText(),"25%");
+                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[6]/td[2]")).getText(),"no more than 37% for generic drugs or 25% for brand name drugs");
+                              Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[4]/td[1]")).getText(),"100% until the $415.00 deductible is met.*");
+                              System.out.println(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[2]/td[6]")).getText());
 
 
                }

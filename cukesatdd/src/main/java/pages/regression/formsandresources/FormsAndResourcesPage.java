@@ -78,16 +78,20 @@ public class FormsAndResourcesPage extends UhcDriver {
 	private WebElement nothanksbutton;
 
 	/** Medical button in EOB section for MAPD - Forms And Resources page */
-	//@FindBy(xpath = "//*[@class='otherPages EOBComponentforMAPDNICE_2018']//*[@class='explanationbenefits parbase section']//*[@class='block-body']")
-	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[3]/div[17]//section/div/div[2]/div[1]//a")
+	// @FindBy(xpath = "//*[@class='otherPages
+	// EOBComponentforMAPDNICE_2018']//*[@class='explanationbenefits parbase
+	// section']//*[@class='block-body']")
+	@FindBy(xpath = "(//*[@id=\"eobsection\"]/div[2]/div[1]//a)[7]")
 	private WebElement btnEobMedicalButton;
 
 	@FindBy(xpath = "//*[@class='otherPages EOB_MA_COSMOS']//*[contains(text(),'SEARCH EOB HISTORY')]")
 	private WebElement eobMedicalButtonMA;
 
 	/** Drug button in EOB section for MAPD */
-	//@FindBy(xpath = "//*[@class='otherPages EOBComponentforMAPDNICE_2018']//*[@class='explanationbenefits parbase section']//*[@class='col-md-4 block border-left']")
-	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[3]/div[17]//section//div[2]/div[2]//a")
+	// @FindBy(xpath = "//*[@class='otherPages
+	// EOBComponentforMAPDNICE_2018']//*[@class='explanationbenefits parbase
+	// section']//*[@class='col-md-4 block border-left']")
+	@FindBy(xpath = "(//*[@id=\"eobsection\"]/div//div[2]//a)[2]")
 	private WebElement btneobDrugButton;
 
 	/** Medical button in Eob section for mapd group */
@@ -108,7 +112,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='otherPages renewmagazine_AARP_PDP']")
 	private WebElement renewMagazinePDPAARP;
 
-	//@FindBy(xpath = "//*[@class='otherPages renewmagazine_UHC_PDP']")
+	// @FindBy(xpath = "//*[@class='otherPages renewmagazine_UHC_PDP']")
 	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/div[3]/div[20]//section//div[1]/div/div/div[2]/h2")
 	private WebElement renewMagazinePDPUHC;
 
@@ -127,56 +131,62 @@ public class FormsAndResourcesPage extends UhcDriver {
 
 	/** Plan Material Section **/
 
-	//@FindBy(xpath = "//*[@id='plan_material_fnr2018']//*[not(contains(text(),'ng-hide'))]//*[contains(text(),'Plan Materials')]")
-	@FindBy(xpath = "(//*[contains(text(),\"Plan Materials\")])[4]")
+	// @FindBy(xpath =
+	// "//*[@id='plan_material_fnr2018']//*[not(contains(text(),'ng-hide'))]//*[contains(text(),'Plan
+	// Materials')]")
+	@FindBy(xpath = "(//*[contains(text(),\"Plan Materials\")])[14]")
 	public WebElement PlanMaterialSection;
 	
-	//*[@id="plan_material_fnr"]/div/div[1]/h2
+	@FindBy(xpath = "(//*[@class='plan_benefit_documents_forms_amd_resources']//*[@class='planBenefitsHeaderParsys parsys']//*[contains(text(),'Plan Materials')])[2]")
+	public WebElement hdrPlanMaterialSection;
 	
+	// *[@id="plan_material_fnr"]/div/div[1]/h2
+
 	@FindBy(xpath = "//*[@id='plan_material_fnr']/div/div[1]/h2")
 	public WebElement planMaterialHeaderSection;
-	
+
 	@FindBy(xpath = "//*[@id='plan_material_fnr']/div/div[1]/h2")
 	public List<WebElement> lstPlanMaterialHeaderSection;
-		
+
 	@FindBy(xpath = "//*[@id='anoc_headerfnr']/div/div/h2")
 	public List<WebElement> anocHeaderSection;
-	
+
 	@FindBy(xpath = "//*[@id='FnR_annualDirectory']/div/div[2]/div/div/div/h2")
 	public List<WebElement> annualdirectoriesHeaderSection;
-	
+
 	@FindBy(xpath = "//*[@id='FnR_annualDirectory']/div/div[1]/div/div/div/h2")
 	public List<WebElement> annualdirectoriesHeaderSectionMAPDGRP;
-		
+
 	@FindBy(xpath = "//*[@id='eobsection']/div[1]/div/h2")
 	public List<WebElement> eobHeaderSection;
-	
+
 	/* for active member */
 	@FindBy(xpath = "//*[@class='otherPages PlanDocumentsActiveCallouts2018']//*[contains(text(),'VIEW MEMBER')]")
 	private WebElement MemberIdCardlink;
-	
-	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]//div[2]//div[2]/div/div[2]//section/div/div[1]//div[4]//ul/li[2]/a")
+
+	@FindBy(xpath = "(//*[@id=\"globalContentIdForSkipLink\"]//div[2]//section//div[1]//div[4]//ul/li[2]/a)[2]")
 	private WebElement lnkMemberIdCardlink;
 
 	/* for terminated */
 	@FindBy(xpath = "(//a[contains(text(),'VIEW MEMBER ID CARD')])[1]")
 	private WebElement MemberIdCardlinkterminated;
 
-	//@FindBy(xpath = "//*[@class='otherPages PlanDocumentsActiveCallouts2018']//*[contains(text(),'ORDER PLAN')]")
+	// @FindBy(xpath = "//*[@class='otherPages
+	// PlanDocumentsActiveCallouts2018']//*[contains(text(),'ORDER PLAN')]")
 	@FindBy(xpath = "//*[@class='otherPages PlanDocumentsActiveCallouts2019']//*[contains(text(),'ORDER PLAN')]")
 	private WebElement OrderPlanMaterialLink;
-	
+
 	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']//div[2]//div[2]/div/div[2]//section/div/div[1]//div[4]//ul/li[1]/a")
 	private WebElement lnkOrderPlanMaterialLink;
 
-	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']//div[2]//div[2]/div/div[2]//section/div/div[1]//div[4]//ul/li[1]/a")
+	@FindBy(xpath = "(//*[@id=\"globalContentIdForSkipLink\"]//div[2]//section//div[1]//div[4]//ul/li[1]/a)[2]")
 	private WebElement pcpOrderPlanMaterialLink;
-	
+
 	@FindBy(xpath = "//*[@id='renew_magazine']//h2")
 	public List<WebElement> renewMagazineSectionHeader;
-	
-	//*[@id="plan_material_fnr2018"]/div/div[4]//ul/li[1]/a
-	
+
+	// *[@id="plan_material_fnr2018"]/div/div[4]//ul/li[1]/a
+
 	/*
 	 * @FindBy(xpath =
 	 * "//*[@id='lang-select-2source-content-configurations_plan-material_jcr-content_overview_formsandresourcescon_formsAndResourcesParsys_customsegments_segmentContainer_planbenefitdocuments']")
@@ -192,17 +202,14 @@ public class FormsAndResourcesPage extends UhcDriver {
 	@FindBy(id = "lang-select-2source-content-configurations_plan-material_jcr-content_overview_formsandresourcescon_formsAndResourcesParsys_customsegments2019_segmentContainer_planbenefitdocuments")
 	private WebElement languagedropdown;
 
-	//AEP language xpath changed
+	// AEP language xpath changed
 	@FindBy(id = "lang-select-2source-content-configurations_plan-material_jcr-content_overview_formsandresourcescon_formsAndResourcesParsys_customsegments_segmentContainer_planbenefitdocuments")
 	private WebElement languagedropdowncopy;
-	
-	
-	
-	
+
 	@FindBy(id = "lang-select-2overview_customsegments-welcomeKit-2018_segmentContainer_planbenefitdocuments")
 	private List<WebElement> languagedropdownPreEfffective;
-	
-	//AEP language xpath changed
+
+	// AEP language xpath changed
 	@FindBy(id = "lang-select-2source-content-configurations_plan-material_jcr-content_overview_formsandresourcescon_formsAndResourcesParsys_customsegments_segmentContainer_planbenefitdocuments")
 	private List<WebElement> languagedropdownPreEfffectiveCopy;
 
@@ -225,11 +232,10 @@ public class FormsAndResourcesPage extends UhcDriver {
 	/** Annual Directories Section **/
 	@FindBy(xpath = "(//*[@id='FnR_annualDirectory']//h2[contains(text(),'Provider and Pharmacy Directories')])[3]")
 	private WebElement preAnnualDirectorySection;
-	
-	/** Annual Directories Section for pre-effective MAPD**/
+
+	/** Annual Directories Section for pre-effective MAPD **/
 	@FindBy(xpath = "(//*[@id='FnR_annualDirectory'])[3]")
 	private WebElement preMAAnnualDirectorySection;
-	
 
 	public WebElement getPreMAAnnualDirectorySection() {
 		return preMAAnnualDirectorySection;
@@ -246,7 +252,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	// Locator')])[2]
 	@FindBy(xpath = "//*[@class='otherPages calloutBoth_AD']//*[contains(text(),'Pharmacy Locator')]")
 	private WebElement PharmacyLocatorLink;
-	
+
 	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[3]/div[8]//section/div/div[2]//div[1]/div[3]//ul/li[2]/a")
 	private WebElement lnkPharmacyLocatorLink;
 
@@ -257,35 +263,33 @@ public class FormsAndResourcesPage extends UhcDriver {
 	/* Provider Search link for PDP and MA */
 	@FindBy(xpath = "//*[@class='otherPages providerSearchCallout_AD']//*[text()='Provider Search']")
 	private WebElement ProviderSearchLinkPDP;
-	
-	
+
 	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[3]/div[8]//section/div/div[2]/div/div[1]/div[3]//ul/li[1]/a")
 	private WebElement lnkProviderSearchLinkMAPDGroup;
-	
+
 	/* Provider Search link for PDP and MA */
 	@FindBy(xpath = "//*[@class='otherPages provide_rSearch_Callout_PE']//*[text()='Provider Search']")
 	private WebElement ProviderSearchLinkPreEffectivePDPMA;
-	
-	
 
 	public WebElement getProviderSearchLinkPreEffectivePDPMA() {
 		return ProviderSearchLinkPreEffectivePDPMA;
 	}
 
 	/* Pharmacy Locator Link for PDP */
-	//@FindBy(xpath = "//*[@class='otherPages PharmacyLocatorCallout_AD']//*[text()='Pharmacy Locator']")
+	// @FindBy(xpath = "//*[@class='otherPages
+	// PharmacyLocatorCallout_AD']//*[text()='Pharmacy Locator']")
 	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[3]/div[8]//section/div/div[2]/div/div[1]/div[2]//ul/li/a")
 	private WebElement PharmacyLocatorLinkPDP;
-	
+
 	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[3]/div[8]//section/div/div[2]/div/div[1]/div[3]//ul/li[2]/a")
 	private WebElement lnkPharmacyLocatorLinkMAPDGroup;
-	
+
 	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[3]/div[8]//section/div/div[2]/div/div[1]/div[2]//ul/li/a")
 	private WebElement lnkPharmacyLocatorLinkPDPUHCGroupFnR;
-	
+
 	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[3]/div[9]//section/div/div[2]/div/div[1]/div[2]//ul/li/a")
 	private WebElement preEffectivePharmacyLocatorLinkPDP;
-	
+
 	/** Forms and Resources section **/
 	@FindBy(xpath = "//h2[@id='formsAndResHeader']")
 	private WebElement FormsnResources;
@@ -338,28 +342,26 @@ public class FormsAndResourcesPage extends UhcDriver {
 
 	@FindBy(id = "closeButton")
 	private WebElement iPerceptionCloseButton;
-	
+
 	@FindBy(xpath = "(//*[@class='img-responsive coLogo'])[1]")
 	private WebElement logoPEEHIP;
-	
-	
 
 	public WebElement getLogoPEEHIP() {
 		return logoPEEHIP;
 	}
 
-	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[3]/div[4]/div/div/div/div/section/div/div[2]/div/div[1]/div/div/div/div/ul/li")
+	@FindBy(xpath = "(//*[contains(@class,'document-list-new margin-small spanWithImmDiv divWithImmLi')])[4]//li")
 	private List<WebElement> anocxpath;
-	
+
 	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/div[3]/div[6]//section/div/div[2]/div/div[1]/div[1]//ul/li")
 	private List<WebElement> lstTexasRxanocxpath;
-	
+
 	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[3]/div[6]//section/div/div[2]/div/div[1]/div[1]//ul/li")
 	private List<WebElement> lstGRPanocxpath;
 
-
-	//@FindBy(xpath = "(//*[@class='document-list-new margin-small spanWithImmDiv divWithImmLi'])[1]/ul/li")
-	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/div[3]/div[1]/div[2]//div/section/div/div[2]/div/div[1]//div[1]/ul/li")
+	// @FindBy(xpath = "(//*[@class='document-list-new margin-small spanWithImmDiv
+	// divWithImmLi'])[1]/ul/li")
+	@FindBy(xpath = "(//*[contains(@class,'document-list-new margin-small spanWithImmDiv divWithImmLi')])[1]//li")
 	private List<WebElement> planmaterialxpath;
 
 	@FindBy(xpath = "//*[@class='source-content-configurations_plan-material_jcr-content_overview_formsandresourcescon_formsAndResourcesParsys_customsegments_segmentContainer_planbenefitdocuments'])[1]/div/ul/li")
@@ -371,76 +373,71 @@ public class FormsAndResourcesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='overview_customsegments-welcomeKit-2018_segmentContainer_planbenefitdocuments']//li")
 	private List<WebElement> PreEffectiveMemMaterials;
 
-	//@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[3]/div[8]//section/div/div[2]/div/div[1]/div[1]//ul/li")
+	// @FindBy(xpath =
+	// "//*[@id=\"globalContentIdForSkipLink\"]/div[3]/div[8]//section/div/div[2]/div/div[1]/div[1]//ul/li")
 	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[3]/div[9]//section/div/div[2]/div/div[1]/div[1]//ul/li")
-	//*[@id="globalContentIdForSkipLink"]/div[3]/div[9]//section/div/div[2]/div/div[1]/div[1]//ul/li
+	// *[@id="globalContentIdForSkipLink"]/div[3]/div[9]//section/div/div[2]/div/div[1]/div[1]//ul/li
 	private List<WebElement> annualDirectoryPdfList;
-	
-	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/div[3]/div[8]/div/div/div/div/section/div/div[2]/div/div[1]/div[1]//li")
+
+	@FindBy(xpath = "(//*[contains(@class,'overview_customsegments-AnnualDirectories')])[2]//li")
 	private List<WebElement> copyAnnualDirectoryPdfList;
-	
 
 	@FindBy(xpath = "//*[@id='home_2']")
 	private WebElement home;
-	
+
 	@FindBy(xpath = "(//*[@id='backToTopContainer']/a/span/p)[1]")
 	private WebElement linkBackToTop;
-		
+
 	@FindBy(xpath = "(//*[@id='backToTopContainer']/a/span/p)[2]")
 	private WebElement LinkBackToTop_copy;
-	
-		
-	//JumpLinks
-	
-	//directory section for MAPD
+
+	// JumpLinks
+
+	// directory section for MAPD
 	@FindBy(xpath = "//*[@id='forms-and-resources-quickLinksParsys']/div[1]//div[3]//ul/li")
 	private List<WebElement> jumpLinks;
-	
+
 	@FindBy(xpath = "//*[@id='forms-and-resources-quickLinksParsys']/div[1]/div[1]/div[2]/div/div[4]/div/div/div/div/ul/li")
 	private List<WebElement> jumpLinksGroup;
-	
+
 	@FindBy(xpath = "//*[@id='forms-and-resources-quickLinksParsys']/div[1]/div[1]/div[2]/div/div[6]/div/div/div/div/ul/li")
 	private List<WebElement> jumpLinksMAPDIndUHC;
-	
-	//directory section for MA
-	
+
+	// directory section for MA
+
 	@FindBy(xpath = "//*[@id='forms-and-resources-quickLinksParsys']/div[1]/div[1]/div[2]/div/div[7]/div/div/div/div/ul/li")
 	private List<WebElement> jumpLinksMAIndUHC;
 
-
 	@FindBy(xpath = "//*[@id='forms-and-resources-quickLinksParsys']/div[1]/div[1]/div[2]/div/div[8]/div/div/div/div/ul/li")
 	private List<WebElement> jumpLinksMAGroup;
-	
 
 	@FindBy(xpath = "//*[@id='forms-and-resources-quickLinksParsys']/div[1]/div[1]/div[2]/div/div[2]/div/div/div/div/ul/li")
 	private List<WebElement> jumpLinksMAIndAARP;
-	
 
 	@FindBy(xpath = "//*[@id='welcomekit']")
 	private List<WebElement> membershipMaterialHeaderSection;
-	
+
 	@FindBy(xpath = "//*[@id='FnR_annualDirectory']")
 	private List<WebElement> annualdirectoriesHeaderSectionMA;
-	
+
 	@FindBy(xpath = "//*[@id='forms-and-resources-quickLinksParsys']/div[1]/div[1]/div[2]/div/div[1]//ul/li")
 	private List<WebElement> jumpLinksMedSupp;
-	
+
 	@FindBy(xpath = "//*[@id='forms-and-resources-quickLinksParsys']/div[1]/div[1]/div[2]/div/div[5]//ul/li")
 	private List<WebElement> jumpLinksPDP;
-	
+
 	@FindBy(xpath = "//*[@id='forms-and-resources-quickLinksParsys']/div[1]/div[1]/div[2]/div/div[9]/div/div/div/div/ul/li")
 	private List<WebElement> jumpLinksPDPGroup;
-	
+
 	@FindBy(xpath = "//*[@id='forms-and-resources-quickLinksParsys']/div[1]/div[1]/div[2]/div/div[10]//ul/li")
 	private List<WebElement> jumpLinksSSUP;
-	
+
 	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/div[3]/div[12]//section/div/div[2]//a")
 	private WebElement btnEobSectionall;
-	
+
 	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[3]/div[17]/div/div/div/section/div")
 	private WebElement eobSectionall;
-	
-	
+
 	public WebElement getEobSectionall() {
 		return eobSectionall;
 	}
@@ -448,34 +445,35 @@ public class FormsAndResourcesPage extends UhcDriver {
 	public WebElement getLnkPharmacyLocatorLink() {
 		return lnkPharmacyLocatorLink;
 	}
-	
+
 	public WebElement getBtnEobSectionall() {
 		return btnEobSectionall;
 	}
+
 	public WebElement getLnkPharmacyLocatorLinkPDPUHCGroupFnR() {
 		return lnkPharmacyLocatorLinkPDPUHCGroupFnR;
 	}
+
 	public List<WebElement> getLstTexasRxanocxpath() {
 		return lstTexasRxanocxpath;
 	}
-		
+
 	public WebElement getLnkPharmacyLocatorLinkMAPDGroup() {
 		return lnkPharmacyLocatorLinkMAPDGroup;
 	}
 
-	
 	public WebElement getLnkProviderSearchLinkMAPDGroup() {
 		return lnkProviderSearchLinkMAPDGroup;
 	}
-	
+
 	public List<WebElement> getLstGRPanocxpath() {
 		return lstGRPanocxpath;
 	}
-	
+
 	public List<WebElement> getJumpLinksPDPGroup() {
 		return jumpLinksPDPGroup;
 	}
-		
+
 	public List<WebElement> getJumpLinksSSUP() {
 		return jumpLinksSSUP;
 	}
@@ -487,7 +485,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	public List<WebElement> getLstPlanMaterialHeaderSection() {
 		return lstPlanMaterialHeaderSection;
 	}
-		
+
 	public List<WebElement> getAnnualdirectoriesHeaderSectionMA() {
 		return annualdirectoriesHeaderSectionMA;
 	}
@@ -495,12 +493,11 @@ public class FormsAndResourcesPage extends UhcDriver {
 	public List<WebElement> getJumpLinksMAIndAARP() {
 		return jumpLinksMAIndAARP;
 	}
-	
+
 	public List<WebElement> getJumpLinksMAIndUHC() {
 		return jumpLinksMAIndUHC;
 	}
-	
-	
+
 	public List<WebElement> getMembershipMaterialHeaderSection() {
 		return membershipMaterialHeaderSection;
 	}
@@ -508,16 +505,14 @@ public class FormsAndResourcesPage extends UhcDriver {
 	public List<WebElement> getJumpLinksMAGroup() {
 		return jumpLinksMAGroup;
 	}
-	
+
 	public List<WebElement> getJumpLinksMAPDIndUHC() {
 		return jumpLinksMAPDIndUHC;
 	}
 
-
 	public List<WebElement> getAnnualdirectoriesHeaderSectionMAPDGRP() {
 		return annualdirectoriesHeaderSectionMAPDGRP;
 	}
-	
 
 	public List<WebElement> getJumpLinksGroup() {
 		return jumpLinksGroup;
@@ -526,7 +521,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	public List<WebElement> getRenewMagazineSectionHeader() {
 		return renewMagazineSectionHeader;
 	}
-		
+
 	public WebElement getLinkBackToTop() {
 		return linkBackToTop;
 	}
@@ -534,40 +529,36 @@ public class FormsAndResourcesPage extends UhcDriver {
 	public WebElement getLinkBackToTop_copy() {
 		return LinkBackToTop_copy;
 	}
-	
+
 	public List<WebElement> getJumpLinks() {
 		return jumpLinks;
 	}
-	
+
 	public WebElement getPlanMaterialHeaderSection() {
 		return planMaterialHeaderSection;
 	}
-
 
 	public List<WebElement> getAnocHeaderSection() {
 		return anocHeaderSection;
 	}
 
-
 	public List<WebElement> getAnnualdirectoriesHeaderSection() {
 		return annualdirectoriesHeaderSection;
 	}
 
-
 	public List<WebElement> getEobHeaderSection() {
 		return eobHeaderSection;
 	}
-	
+
 	public WebElement getPreEffectivePharmacyLocatorLinkPDP() {
 		return preEffectivePharmacyLocatorLinkPDP;
 	}
-	
-	
+
 	public WebElement getHome() {
 		return home;
 	}
 
-	public List<WebElement> getAnnualDirectoryPdfList(String memberType ) {
+	public List<WebElement> getAnnualDirectoryPdfList(String memberType) {
 		if (memberType.contains("Pre-Effective"))
 			return annualDirectoryPdfList;
 		else
@@ -578,7 +569,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 		return PreEffectiveMemMaterials;
 	}
 
-	//@FindBy(xpath = "//*[contains(text(),'Pharmacy Locator')])[7]")
+	// @FindBy(xpath = "//*[contains(text(),'Pharmacy Locator')])[7]")
 	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[3]/div[8]//section/div/div[2]/div/div[1]/div[3]//ul/li[2]/a")
 	private WebElement lnkpharmacyLocatorLinkIndMAPDPreEffective;
 
@@ -592,14 +583,14 @@ public class FormsAndResourcesPage extends UhcDriver {
 	public List<WebElement> getJumpLinksMedSupp() {
 		return jumpLinksMedSupp;
 	}
-	
+
 	/*
 	 * @FindBy(xpath="") private WebElement annualdirectoryxpath;
 	 */
 	String pDR = "Plan Documents & Resources";
-	WebDriverWait wait=null;
-	String iPerceptionframeName="iPerceptionBody";
-	
+	WebDriverWait wait = null;
+	String iPerceptionframeName = "iPerceptionBody";
+
 	public List<WebElement> getDirectorySection(String planType, String memberType, String identifier) {
 
 		int planId = 0;
@@ -660,16 +651,15 @@ public class FormsAndResourcesPage extends UhcDriver {
 
 	}
 
-	
 	public FormsAndResourcesPage(WebDriver driver) throws InterruptedException {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		CommonUtility.checkPageIsReady(driver);
 
 		CommonUtility.checkPageIsReady(driver);
-		//Thread.sleep(5000);
+		// Thread.sleep(5000);
 		iPerceptionHandle("IPerceptionsEmbed");
-		
+
 		/*
 		 * try{ FeedbackModal.click(); System.out.println("FeedBack Modal Present"); if
 		 * (validate(FeedbackModal)){
@@ -682,11 +672,12 @@ public class FormsAndResourcesPage extends UhcDriver {
 
 	public void iPerceptionHandle(String frameName) {
 		wait = new WebDriverWait(driver, 15);
-		
+
 		try {
 			wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(frameName));
-			/*driver.switchTo().frame("iPerceptionBody");
-			Thread.sleep(5000);*/
+			/*
+			 * driver.switchTo().frame("iPerceptionBody"); Thread.sleep(5000);
+			 */
 			System.out.println("iPerception Pop Up is Present");
 			iPerceptionCloseButton.click();
 
@@ -826,9 +817,12 @@ public class FormsAndResourcesPage extends UhcDriver {
 	/**
 	 * @toDo : plan materials section
 	 */
-	public WebElement getplanmaterialsection() {
+	public WebElement getplanmaterialsection(String memberType) {
 		/* CommonUtility.waitForPageLoad(driver, documentheader, 40); */
-		return PlanMaterialSection;
+		if (memberType.toLowerCase().contains("term"))
+			return hdrPlanMaterialSection;
+		else
+			return PlanMaterialSection;
 	}
 
 	/**
@@ -844,15 +838,14 @@ public class FormsAndResourcesPage extends UhcDriver {
 	public void validateOrderPlanMaterial() throws InterruptedException {
 		iPerceptionHandle(iPerceptionframeName);
 		try {
-		if ((OrderPlanMaterialLink).isDisplayed()) {
-			OrderPlanMaterialLink.click();
-		}
-		}
-		catch(Exception e) {
+			if ((OrderPlanMaterialLink).isDisplayed()) {
+				OrderPlanMaterialLink.click();
+			}
+		} catch (Exception e) {
 			if ((getPcpOrderPlanMaterialLink()).isDisplayed()) {
 				getPcpOrderPlanMaterialLink().click();
 			}
-						
+
 		}
 		CommonUtility.waitForPageLoad(driver, ordermatpage, 40);
 		if (driver.getCurrentUrl().contains("order-materials")) {
@@ -879,11 +872,11 @@ public class FormsAndResourcesPage extends UhcDriver {
 	 * @toDo : temporary id card link
 	 */
 	public WebElement getTemporaryIdcardlink(String memberType) {
-		
-		if(memberType.toLowerCase().contains("pcp")||memberType.toLowerCase().contains("medica"))
+
+		if (memberType.toLowerCase().contains("pcp") || memberType.toLowerCase().contains("medica"))
 			return lnkMemberIdCardlink;
 		else
-		return MemberIdCardlink;
+			return MemberIdCardlink;
 	}
 
 	/**
@@ -895,7 +888,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 				|| MRScenario.environmentMedicare.equalsIgnoreCase("test-a")
 				|| MRScenario.environment.equalsIgnoreCase("team-ci1")) {
 
-			String s = getTemporaryIdcardlink(memberType ).getAttribute("href");
+			String s = getTemporaryIdcardlink(memberType).getAttribute("href");
 			if (s.contains("test-harness")) {
 				Assert.assertTrue(true);
 			} else {
@@ -906,7 +899,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 
 		{
 			String s = getTemporaryIdcardlink(memberType).getAttribute("href");
-			if (memberType.equalsIgnoreCase("PCP")||memberType.equalsIgnoreCase("Medica")) {
+			if (memberType.equalsIgnoreCase("PCP") || memberType.equalsIgnoreCase("Medica")) {
 				if (s.contains("int.mymedicareaccount.uhc")) {
 					Assert.assertTrue(true);
 				} else {
@@ -929,17 +922,18 @@ public class FormsAndResourcesPage extends UhcDriver {
 	 * @toDo : to verify english as a default language
 	 */
 	public void validateEngDefault(String memberType) {
-		Select oselect,oselectCopy;
-		if(memberType.contains("Pre-Effective")){
+		Select oselect, oselectCopy;
+		if (memberType.contains("Pre-Effective")) {
 			oselect = new Select(languagedropdownPreEfffective.get(0));
-			oselectCopy= new Select(languagedropdownPreEfffectiveCopy.get(0));
+			oselectCopy = new Select(languagedropdownPreEfffectiveCopy.get(0));
 		}
-			 	
+
 		else {
-			 oselect = new Select(languagedropdown);
-			 oselectCopy= new Select(languagedropdowncopy);
+			oselect = new Select(languagedropdown);
+			oselectCopy = new Select(languagedropdowncopy);
 		}
-		if (oselect.getFirstSelectedOption().getText().equals("ENGLISH")||oselectCopy.getFirstSelectedOption().getText().equals("ENGLISH")) {
+		if (oselect.getFirstSelectedOption().getText().equals("ENGLISH")
+				|| oselectCopy.getFirstSelectedOption().getText().equals("ENGLISH")) {
 			System.out.println(oselect.getFirstSelectedOption().getText());
 			System.out.println("true");
 			Assert.assertTrue(true);
@@ -1093,12 +1087,13 @@ public class FormsAndResourcesPage extends UhcDriver {
 	public boolean verifyPdfNames(String a[], List<WebElement> listOfPdf) throws InterruptedException {
 		boolean checkflag = false;
 		checkflag = pdfComparison(a, listOfPdf, checkflag);
-		/*Select langdropdwn = new Select(languagedropdownPreEfffective.get(0));
-		if (langdropdwn.getFirstSelectedOption().getText().contains("ENGLISH")) {
-			checkflag = pdfComparison(a, listOfPdf, checkflag);
-		} else if (langdropdwn.getFirstSelectedOption().getText().contains("SPANISH")) {
-			checkflag = pdfComparison(a, listOfPdf, checkflag);
-		}*/
+		/*
+		 * Select langdropdwn = new Select(languagedropdownPreEfffective.get(0)); if
+		 * (langdropdwn.getFirstSelectedOption().getText().contains("ENGLISH")) {
+		 * checkflag = pdfComparison(a, listOfPdf, checkflag); } else if
+		 * (langdropdwn.getFirstSelectedOption().getText().contains("SPANISH")) {
+		 * checkflag = pdfComparison(a, listOfPdf, checkflag); }
+		 */
 
 		return checkflag;
 	}
@@ -1211,7 +1206,8 @@ public class FormsAndResourcesPage extends UhcDriver {
 
 	public WebElement geteobsectionall() {
 
-		return driver.findElement(By.xpath("//*[@id='globalContentIdForSkipLink']/div[4]/div[12]/div/div/div/section/div/div[2]/div/div/div/h3"));
+		return driver.findElement(By.xpath(
+				"//*[@id='globalContentIdForSkipLink']/div[4]/div[12]/div/div/div/section/div/div[2]/div/div/div/h3"));
 
 	}
 
@@ -1292,7 +1288,6 @@ public class FormsAndResourcesPage extends UhcDriver {
 
 		}
 
-		
 	}
 
 	public boolean checkRenewsection() {
@@ -1338,7 +1333,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 			System.out.println("Drug Eob section is not present");
 			return true;
 		}
-		//return false;
+		// return false;
 	}
 
 	public boolean checkpharmacyforMA() {
@@ -1353,7 +1348,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 			System.out.println("Pharmacy section is not present");
 			return false;
 		}
-		
+
 	}
 
 	public boolean checkanocforPCP() {
@@ -1399,7 +1394,6 @@ public class FormsAndResourcesPage extends UhcDriver {
 			return true;
 		}
 	}
-	
 
 	public WebElement getfirstplantab() {
 		return FirstTab;
@@ -1544,12 +1538,11 @@ public class FormsAndResourcesPage extends UhcDriver {
 			if (memberType.contains("Group"))
 				return verifypdfnamesfordocuments(a, getLstGRPanocxpath());
 			else {
-				if(memberType.contains("TexasRx"))
-					return  verifypdfnamesfordocuments(a, getLstTexasRxanocxpath());
-				else 
+				if (memberType.contains("TexasRx"))
+					return verifypdfnamesfordocuments(a, getLstTexasRxanocxpath());
+				else
 					return verifypdfnamesfordocuments(a, anocxpath);
 			}
-			
 
 		} else if (section == "ship plan material") {
 			return verifypdfnamesfordocuments(a, shipplanmaterialxpath);
@@ -1589,7 +1582,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 
 	public void pdfValidationOfAllTypes(FormsAndResourcesPage formsAndResourcesPage, DataTable givenAttributes,
 			String materialType) throws InterruptedException {
-		String memberType=null;
+		String memberType = null;
 		List<WebElement> temp = null;
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		System.out.println(memberAttributesRow);
@@ -1597,44 +1590,41 @@ public class FormsAndResourcesPage extends UhcDriver {
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-						
+
 		}
-		
-		memberType=memberAttributesRow.get(0).getCells().get(1).toString().trim();
+
+		memberType = memberAttributesRow.get(0).getCells().get(1).toString().trim();
 		memberAttributesMap.remove("MemberType");
 		memberAttributesMap.remove("Member Type");
 		memberAttributesMap.remove("memberType");
 		memberAttributesMap.remove("member Type");
-		
-		
-				
+
 		Collection<String> values = memberAttributesMap.values();
 		String[] targetArray = values.toArray(new String[values.size()]);
 		System.out.println(values.size());
-		
-		
+
 		if (materialType == "memberShip")
 			temp = getPreEffectiveMemMaterials();
 		else if (materialType == "welcomeGuide")
 			temp = getPreEffectiveMemMaterials();// same for both
 		else if (materialType == "annualDirectory") {
-			//formsAndResourcesPage.scrollToView(preAnnualDirectorySection);
+			// formsAndResourcesPage.scrollToView(preAnnualDirectorySection);
 			temp = getAnnualDirectoryPdfList(memberType);
-			/*if(temp.size()<1)
-			temp = getAnnualDirectoryPdfList();*/
-				
+			/*
+			 * if(temp.size()<1) temp = getAnnualDirectoryPdfList();
+			 */
+
 		}
 		boolean arraycheck = formsAndResourcesPage.verifyPdfNames(targetArray, temp);
 		Assert.assertTrue("Incorrect pdf's shown", arraycheck == true);
 	}
 
-	public void verifyPresenceOfJumpLinksMAPD(String rider, String planType, String memberType,String identifier) {
-		int t=0;
+	public void verifyPresenceOfJumpLinksMAPD(String rider, String planType, String memberType, String identifier) {
+		int t = 0;
 		CommonUtility.waitForPageLoad(driver, myDocumentSection, 15);
-		
-		
+
 		Assert.assertTrue("jmpLinkToPLANMATERIALS isn't displayed",
-				getDirectorySection(planType,memberType,identifier).get(0).isDisplayed());
+				getDirectorySection(planType, memberType, identifier).get(0).isDisplayed());
 
 		if ((identifier.toString().trim().contains("UHC") || identifier.toString().trim().contains("PCP")
 				|| identifier.toString().trim().contains("Medica"))
@@ -1650,36 +1640,33 @@ public class FormsAndResourcesPage extends UhcDriver {
 		if ((identifier.contains("UHC") && memberType.contains("Individual")) || identifier.contains("PCP")
 				|| identifier.contains("Medica"))// decrementing the index by 1 as ANOC doesn't appear for this
 			t = 1;
-			
+
 		Assert.assertTrue("jmpLinkTo Annual Directories/Annual Directory isn't displayed",
-				getDirectorySection(planType,memberType,identifier).get(3-t).isDisplayed());
-	
-	
+				getDirectorySection(planType, memberType, identifier).get(3 - t).isDisplayed());
+
 		Assert.assertTrue("jmpLinkToMyDocuments isn't displayed",
-				getDirectorySection(planType,memberType,identifier).get(4-t).isDisplayed());
-		
+				getDirectorySection(planType, memberType, identifier).get(4 - t).isDisplayed());
+
 		Assert.assertTrue("jmpLinkToExplanationofBenefits(EOB) isn't displayed",
-				getDirectorySection(planType,memberType,identifier).get(5-t).isDisplayed());
-		
+				getDirectorySection(planType, memberType, identifier).get(5 - t).isDisplayed());
+
 		Assert.assertTrue("jmpLinkToForms&Resources isn't displayed",
-				getDirectorySection(planType,memberType,identifier).get(6-t).isDisplayed());
-		
+				getDirectorySection(planType, memberType, identifier).get(6 - t).isDisplayed());
+
 		Assert.assertTrue("jmpLinkToRenewMagazine isn't displayed",
-				getDirectorySection(planType,memberType,identifier).get(7-t).isDisplayed());
-	
+				getDirectorySection(planType, memberType, identifier).get(7 - t).isDisplayed());
+
 		System.out.println("All Jump links are displayed for the MAPD Plan");
 
 	}
 
 	public void clicksOnJumpLinksAndCheckRespectiveSectionsMAPD(String rider, String planType, String memberType,
 			String identifier) {
-		
+
 		int t = 0;
 		if ((identifier.contains("UHC") && memberType.contains("Individual")) || identifier.contains("PCP")
 				|| identifier.contains("Medica"))// decrementing the index by 1 as ANOC doesn't appear for this
 			t = 1; // decrementing the index by 1 as ANOC doesn't appear for this
-			
-		
 
 		clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(0),
 				getPlanMaterialHeaderSection());
@@ -1687,19 +1674,18 @@ public class FormsAndResourcesPage extends UhcDriver {
 				|| identifier.toString().trim().contains("Medica"))
 				&& memberType.toString().trim().contains("Individual")) {
 
-		}  else {
-			
+		} else {
+
 			if (identifier.toString().trim().contains("AARP") && memberType.toString().trim().contains("Individual"))
 				clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(2),
 						getAnocHeaderSection().get(0));
-			
+
 			if (identifier.toString().trim().contains("UHC") && memberType.toString().trim().contains("Group"))
 				clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(2),
-							getAnocHeaderSection().get(2));
-				
+						getAnocHeaderSection().get(2));
+
 		}
 
-		
 		if (memberType.toString().trim().contains("Group"))
 			clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(3),
 					getAnnualdirectoriesHeaderSectionMAPDGRP());
@@ -1732,43 +1718,43 @@ public class FormsAndResourcesPage extends UhcDriver {
 		else
 			clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(7),
 					getRenewMagazineSectionHeader().get(0));
-		
+
 		System.out.println("All sections are present for the MAPD Plan");
 
 	}
 
 	// For MA Plan
-	public void verifyPresenceOfJumpLinksMA(String rider, String planType, String memberType,String identifier) {
+	public void verifyPresenceOfJumpLinksMA(String rider, String planType, String memberType, String identifier) {
 		CommonUtility.waitForPageLoad(driver, myDocumentSection, 15);
-		
+
 		Assert.assertTrue("jmpLinkToPLANMATERIALS isn't displayed",
-				getDirectorySection(planType,memberType,identifier).get(0).isDisplayed());
-		
-		if(identifier.contains("GrpEffectiveUHC"))
-		Assert.assertTrue("jmpLinkToMembershipMATERIALS isn't displayed",
-				getDirectorySection(planType,memberType,identifier).get(1).isDisplayed());
-		
+				getDirectorySection(planType, memberType, identifier).get(0).isDisplayed());
+
+		if (identifier.contains("GrpEffectiveUHC"))
+			Assert.assertTrue("jmpLinkToMembershipMATERIALS isn't displayed",
+					getDirectorySection(planType, memberType, identifier).get(1).isDisplayed());
+
 		Assert.assertTrue("jmpLinkToAnnualNoticeofChangesDocuments isn't displayed",
-				getDirectorySection(planType,memberType,identifier).get(2).isDisplayed());
-		
-		
+				getDirectorySection(planType, memberType, identifier).get(2).isDisplayed());
+
 		Assert.assertTrue("jmpLinkToMyDocuments isn't displayed",
-				getDirectorySection(planType,memberType,identifier).get(3).isDisplayed());
-		
+				getDirectorySection(planType, memberType, identifier).get(3).isDisplayed());
+
 		Assert.assertTrue("jmpLinkToExplanationofBenefits(EOB) isn't displayed",
-				getDirectorySection(planType,memberType,identifier).get(4).isDisplayed());
-		
+				getDirectorySection(planType, memberType, identifier).get(4).isDisplayed());
+
 		Assert.assertTrue("jmpLinkToForms&Resources isn't displayed",
-				getDirectorySection(planType,memberType,identifier).get(5).isDisplayed());
-		
+				getDirectorySection(planType, memberType, identifier).get(5).isDisplayed());
+
 		Assert.assertTrue("jmpLinkToRenewMagazine isn't displayed",
-				getDirectorySection(planType,memberType,identifier).get(6).isDisplayed());
-		
+				getDirectorySection(planType, memberType, identifier).get(6).isDisplayed());
+
 		System.out.println("All Jump links are displayed for the MA Plan");
 
 	}
 
-	public void clicksOnJumpLinksAndCheckRespectiveSectionsMA(String rider, String planType, String memberType, String identifier) {
+	public void clicksOnJumpLinksAndCheckRespectiveSectionsMA(String rider, String planType, String memberType,
+			String identifier) {
 		int t = 0;
 		if (identifier.contains("IndEffectiveAARP"))
 			t = 1;
@@ -1786,16 +1772,17 @@ public class FormsAndResourcesPage extends UhcDriver {
 			clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(2),
 					getAnocHeaderSection().get(0));
 
-		//if (identifier.contains("AARP"))
-		
+		// if (identifier.contains("AARP"))
+
 		if (identifier.contains("GrpEffectiveUHC")) {
 			// Do nothing
 		} else
 			clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(3),
 					getAnnualdirectoriesHeaderSectionMA().get(0));
-		/*else
-			clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(3),
-					getAnnualdirectoriesHeaderSection().get(1));*/
+		/*
+		 * else clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType,
+		 * identifier).get(3), getAnnualdirectoriesHeaderSection().get(1));
+		 */
 
 		clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(3 + t),
 				getMyDocumentSection());
@@ -1820,15 +1807,17 @@ public class FormsAndResourcesPage extends UhcDriver {
 			clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(6 + t),
 					getRenewMagazineSectionHeader().get(0));
 
-		/*else if ((identifier.contains("UHC") || identifier.toString().trim().contains("PCP")
-				|| identifier.toString().trim().contains("Medica")) && memberType.contains("Individual"))
-			clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(7 - t),
-					getRenewMagazineSectionHeader().get(2));
-		else
-			clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(7),
-					getRenewMagazineSectionHeader().get(0));*/
-		
-		
+		/*
+		 * else if ((identifier.contains("UHC") ||
+		 * identifier.toString().trim().contains("PCP") ||
+		 * identifier.toString().trim().contains("Medica")) &&
+		 * memberType.contains("Individual"))
+		 * clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType,
+		 * identifier).get(7 - t), getRenewMagazineSectionHeader().get(2)); else
+		 * clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType,
+		 * identifier).get(7), getRenewMagazineSectionHeader().get(0));
+		 */
+
 		System.out.println("All sections are present for the MA Plan");
 
 	}
@@ -1836,33 +1825,34 @@ public class FormsAndResourcesPage extends UhcDriver {
 	// MedSupp
 
 	public void verifyPresenceOfJumpLinksMedSupp(String rider, String planType, String memberType, String identifier) {
-		CommonUtility.waitForPageLoad(driver, getDirectorySection(planType,memberType, identifier).get(0), 15);
-		
+		CommonUtility.waitForPageLoad(driver, getDirectorySection(planType, memberType, identifier).get(0), 15);
+
 		Assert.assertTrue("jmpLinkToPlanMaterials isn't displayed",
-				getDirectorySection(planType,memberType, identifier).get(0).isDisplayed());
-		
+				getDirectorySection(planType, memberType, identifier).get(0).isDisplayed());
+
 		Assert.assertTrue("jmpLinkToExplanationOfBenefits isn't displayed",
-				getDirectorySection(planType,memberType, identifier).get(1).isDisplayed());
-		
+				getDirectorySection(planType, memberType, identifier).get(1).isDisplayed());
+
 		Assert.assertTrue("jmpLinkToForms&Resources isn't displayed",
-				getDirectorySection(planType,memberType, identifier).get(2).isDisplayed());
-		
+				getDirectorySection(planType, memberType, identifier).get(2).isDisplayed());
+
 		System.out.println("All Jump links are displayed for the MedSupp Plan");
-		
+
 	}
 
-	public void clicksOnJumpLinksAndCheckRespectiveSectionsMedSupp(String rider, String planType, String memberType,String identifier) {
-		
+	public void clicksOnJumpLinksAndCheckRespectiveSectionsMedSupp(String rider, String planType, String memberType,
+			String identifier) {
+
 		clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(0),
 				getLstPlanMaterialHeaderSection().get(0));
 		clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(1),
 				getEobHeaderSection().get(2));
-		
+
 		clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(2),
 				getFormsandResourcesSection());
-		
+
 		System.out.println("All sections are present for the MedSupp Plan");
-	
+
 	}
 
 	// PDP
@@ -1871,28 +1861,27 @@ public class FormsAndResourcesPage extends UhcDriver {
 		CommonUtility.waitForPageLoad(driver, myDocumentSection, 15);
 
 		Assert.assertTrue("jmpLinkToPlanMaterials isn't displayed",
-				getDirectorySection(planType,memberType, identifier).get(0).isDisplayed());
-		
+				getDirectorySection(planType, memberType, identifier).get(0).isDisplayed());
+
 		Assert.assertTrue("jmpLinkToWelcomeGuide isn't displayed",
-				getDirectorySection(planType,memberType, identifier).get(1).isDisplayed());
-		
+				getDirectorySection(planType, memberType, identifier).get(1).isDisplayed());
+
 		Assert.assertTrue("jmpLinkToANNUALNOTICEOFCHANGESDOCUMENTS isn't displayed",
-				getDirectorySection(planType,memberType, identifier).get(2).isDisplayed());
+				getDirectorySection(planType, memberType, identifier).get(2).isDisplayed());
 		Assert.assertTrue("jmpLinkToANNUALDIRECTORIES/ANNUALDIRECTORY isn't displayed",
-				getDirectorySection(planType,memberType, identifier).get(3).isDisplayed());
+				getDirectorySection(planType, memberType, identifier).get(3).isDisplayed());
 		Assert.assertTrue("jmpLinkToMYDOCUMENTS isn't displayed",
-				getDirectorySection(planType,memberType, identifier).get(4).isDisplayed());
+				getDirectorySection(planType, memberType, identifier).get(4).isDisplayed());
 		Assert.assertTrue("jmpLinkToMYDOCUMENTS isn't displayed",
-				getDirectorySection(planType,memberType, identifier).get(5).isDisplayed());
+				getDirectorySection(planType, memberType, identifier).get(5).isDisplayed());
 		Assert.assertTrue("jmpLinkToFORMS&RESOURCES isn't displayed",
-				getDirectorySection(planType,memberType, identifier).get(6).isDisplayed());
-		
+				getDirectorySection(planType, memberType, identifier).get(6).isDisplayed());
+
 		if (memberType.contains("Group")) {
 			// do noting
-		}
-		else
-		Assert.assertTrue("jmpLinkToRENEWMAGAZINE isn't displayed",
-				getDirectorySection(planType,memberType, identifier).get(7).isDisplayed());
+		} else
+			Assert.assertTrue("jmpLinkToRENEWMAGAZINE isn't displayed",
+					getDirectorySection(planType, memberType, identifier).get(7).isDisplayed());
 
 		System.out.println("All Jump links are displayed for the PDP Plan");
 
@@ -1905,17 +1894,17 @@ public class FormsAndResourcesPage extends UhcDriver {
 				getLstPlanMaterialHeaderSection().get(0));
 		clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(1),
 				getMembershipMaterialHeaderSection().get(0));
-		
-		if(memberType.contains("Group"))
+
+		if (memberType.contains("Group"))
 			clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(2),
 					getAnocHeaderSection().get(2));
 		else
-		clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(2),
-				getAnocHeaderSection().get(0));
-		
+			clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(2),
+					getAnocHeaderSection().get(0));
+
 		clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(3),
 				getAnnualDirectorySection(memberType));
-		
+
 		clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(4), getMyDocumentSection());
 		clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(5),
 				getEobHeaderSection().get(3));
@@ -1923,47 +1912,50 @@ public class FormsAndResourcesPage extends UhcDriver {
 				getFormsandResourcesSection());
 		if (memberType.contains("Group")) {
 			// do noting
-		}
-		else
-		clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(7),
-				getRenewMagazineSectionHeader());
-				System.out.println("All sections are present for the PDP Plan");
-	/*	if (Identifier.contains("UHC")) {
-			clicksOnLinkAndBackToTop(getJmpLinkToDrugCopaysAndDiscountsPDPUHC(),
-					getDrugCopaysAndDiscountsSectionHeader());
-			clicksOnLinkAndBackToTop(getJmpLinkToPlanDocumentsAndResourcesPDPUHC(),
-					getPlanDocumentsAndResourcesSectionHeader());
-		} else {
-
-			clicksOnLinkAndBackToTop(getJmpLinkToDrugCopaysAndDiscountsPDP(), getDrugCopaysAndDiscountsSectionHeader());
-			clicksOnLinkAndBackToTop(getJmpLinkToDrugCoveragePDP(), getDrugCoverageSectionHeader());
-			clicksOnLinkAndBackToTop(getJmpLinkToPlanDocumentsAndResourcesPDP(),
-					getPlanDocumentsAndResourcesSectionHeader());
-			clicksOnLinkAndBackToTop(getJmpLinkToWaysToSaveMoneyPDP(), getWaysToSaveMoneySectionHeader());
-		}
-		System.out.println("All sections are present for the PDP Plan");*/
+		} else
+			clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(7),
+					getRenewMagazineSectionHeader());
+		System.out.println("All sections are present for the PDP Plan");
+		/*
+		 * if (Identifier.contains("UHC")) {
+		 * clicksOnLinkAndBackToTop(getJmpLinkToDrugCopaysAndDiscountsPDPUHC(),
+		 * getDrugCopaysAndDiscountsSectionHeader());
+		 * clicksOnLinkAndBackToTop(getJmpLinkToPlanDocumentsAndResourcesPDPUHC(),
+		 * getPlanDocumentsAndResourcesSectionHeader()); } else {
+		 * 
+		 * clicksOnLinkAndBackToTop(getJmpLinkToDrugCopaysAndDiscountsPDP(),
+		 * getDrugCopaysAndDiscountsSectionHeader());
+		 * clicksOnLinkAndBackToTop(getJmpLinkToDrugCoveragePDP(),
+		 * getDrugCoverageSectionHeader());
+		 * clicksOnLinkAndBackToTop(getJmpLinkToPlanDocumentsAndResourcesPDP(),
+		 * getPlanDocumentsAndResourcesSectionHeader());
+		 * clicksOnLinkAndBackToTop(getJmpLinkToWaysToSaveMoneyPDP(),
+		 * getWaysToSaveMoneySectionHeader()); }
+		 * System.out.println("All sections are present for the PDP Plan");
+		 */
 
 	}
 
 	// SSUP
-	public void verifyPresenceOfJumpLinksSSUP(String rider, String planType, String memberType,String identifier) {
+	public void verifyPresenceOfJumpLinksSSUP(String rider, String planType, String memberType, String identifier) {
 		CommonUtility.waitForPageLoad(driver, myDocumentSection, 15);
-		
+
 		Assert.assertTrue("jmpLinkToPlanMaterials isn't displayed",
-				getDirectorySection(planType,memberType, identifier).get(0).isDisplayed());
+				getDirectorySection(planType, memberType, identifier).get(0).isDisplayed());
 		Assert.assertTrue("jmpLinkToMEMBERSHIPMATERIALS isn't displayed",
-				getDirectorySection(planType,memberType, identifier).get(1).isDisplayed());
+				getDirectorySection(planType, memberType, identifier).get(1).isDisplayed());
 		Assert.assertTrue("jmpLinkToMYDOCUMENTS isn't displayed",
-				getDirectorySection(planType,memberType, identifier).get(2).isDisplayed());
+				getDirectorySection(planType, memberType, identifier).get(2).isDisplayed());
 		Assert.assertTrue("jmpLinkToFORMS&RESOURCES isn't displayed",
-				getDirectorySection(planType,memberType, identifier).get(4).isDisplayed());
-	
+				getDirectorySection(planType, memberType, identifier).get(4).isDisplayed());
+
 		System.out.println("All Jump links are displayed for SSUP Plan");
 
 	}
 
-	public void clicksOnJumpLinksAndCheckRespectiveSectionsSSUP(String rider, String planType, String memberType,String identifier) {
-		
+	public void clicksOnJumpLinksAndCheckRespectiveSectionsSSUP(String rider, String planType, String memberType,
+			String identifier) {
+
 		clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(0),
 				getLstPlanMaterialHeaderSection().get(0));
 		clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(1),
@@ -1972,30 +1964,34 @@ public class FormsAndResourcesPage extends UhcDriver {
 		clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(4),
 				getFormsandResourcesSection());
 
-		/*clicksOnLinkAndBackToTop(getJmpLinkToMedicalCopaysOrCoinsuranceSSUP(), getCopayscoinsuranceheader());
-		clicksOnLinkAndBackToTop(getJmpLinkToOutofPocketMaximumSSUP(), getOutOfPocketSectionHeader());
-
-		
+		/*
+		 * clicksOnLinkAndBackToTop(getJmpLinkToMedicalCopaysOrCoinsuranceSSUP(),
+		 * getCopayscoinsuranceheader());
+		 * clicksOnLinkAndBackToTop(getJmpLinkToOutofPocketMaximumSSUP(),
+		 * getOutOfPocketSectionHeader());
+		 * 
+		 * 
 		 * if(memberType.equalsIgnoreCase("Individual"))
 		 * clicksOnLinkAndBackToTop(getJmpLinkToPrimaryCareProviderSSUP(),
 		 * getPrimaryCareProviderHeaderInd()); else
-		 
-		clicksOnLinkAndBackToTop(getJmpLinkToPrimaryCareProviderSSUP(), getPrimaryCareProviderSectionHeaderGroup());
-
-		clicksOnLinkAndBackToTop(getJmpLinkToPlanDocumentsAndResourcesSSUP(),
-				getPlanDocumentsAndResourcesSectionHeader());
-		System.out.println("All sections are present for SSUP Plan");*/
+		 * 
+		 * clicksOnLinkAndBackToTop(getJmpLinkToPrimaryCareProviderSSUP(),
+		 * getPrimaryCareProviderSectionHeaderGroup());
+		 * 
+		 * clicksOnLinkAndBackToTop(getJmpLinkToPlanDocumentsAndResourcesSSUP(),
+		 * getPlanDocumentsAndResourcesSectionHeader());
+		 * System.out.println("All sections are present for SSUP Plan");
+		 */
 
 	}
 
 	// SSUP ends here
 
-	
 	public void verifyElementPresence(WebElement element) {
-		Assert.assertTrue("Section/Link isn't displayed",element.isDisplayed());
-		System.out.println(element.getText());	
+		Assert.assertTrue("Section/Link isn't displayed", element.isDisplayed());
+		System.out.println(element.getText());
 	}
-	
+
 	public void verifyElementPresence(List<WebElement> element) {
 		Assert.assertTrue("Section/Link isn't displayed",
 				element.get(0).isDisplayed() || element.get(1).isDisplayed() || element.get(2).isDisplayed());
@@ -2015,12 +2011,12 @@ public class FormsAndResourcesPage extends UhcDriver {
 
 		}
 	}
-	
-	public void clicksOnLinkAndBackToTop(WebElement element_1,List<WebElement> element_2 ) {
+
+	public void clicksOnLinkAndBackToTop(WebElement element_1, List<WebElement> element_2) {
 		element_1.click();
-		
+
 		try {
-			Thread.sleep(1000);        //Added sleep to mimic user interaction 
+			Thread.sleep(1000); // Added sleep to mimic user interaction
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -2028,23 +2024,23 @@ public class FormsAndResourcesPage extends UhcDriver {
 		verifyElementPresence(element_2);
 		try {
 			getLinkBackToTop_copy().click();
-		}catch(Exception ex){
+		} catch (Exception ex) {
 			getLinkBackToTop().click();
-			
+
 		}
 		try {
-			Thread.sleep(1000);		  //Added sleep to mimic user interaction 
+			Thread.sleep(1000); // Added sleep to mimic user interaction
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
-	public void clicksOnLinkAndBackToTop(WebElement element_1,WebElement element_2 ) {
+
+	public void clicksOnLinkAndBackToTop(WebElement element_1, WebElement element_2) {
 		element_1.click();
-		
+
 		try {
-			Thread.sleep(1000);        //Added sleep to mimic user interaction 
+			Thread.sleep(1000); // Added sleep to mimic user interaction
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -2052,61 +2048,51 @@ public class FormsAndResourcesPage extends UhcDriver {
 		verifyElementPresence(element_2);
 		try {
 			getLinkBackToTop_copy().click();
-		}catch(Exception ex){
+		} catch (Exception ex) {
 			getLinkBackToTop().click();
-			
+
 		}
 		try {
-			Thread.sleep(1000);		  //Added sleep to mimic user interaction 
+			Thread.sleep(1000); // Added sleep to mimic user interaction
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
-	public void directoryLinksCount(int linkCount, String rider, String planType, String memberType, String identifier) {
+
+	public void directoryLinksCount(int linkCount, String rider, String planType, String memberType,
+			String identifier) {
 		int count = 0;
-		
-		if(planType.equalsIgnoreCase("MedSupp")||planType.equalsIgnoreCase("PDP"))
-			count = getDirectorySection(planType, memberType,identifier).size() ;
+
+		if (planType.equalsIgnoreCase("MedSupp") || planType.equalsIgnoreCase("PDP"))
+			count = getDirectorySection(planType, memberType, identifier).size();
 		else
-			count = getDirectorySection(planType, memberType,identifier).size() - 1;
-		
-		/*if (identifier.toString().trim().contains("UHC") && memberType.toString().trim().contains("Individual"))
-			count = getDirectorySection(planType, memberType,identifier).size() - 2;
-		else*/
-		
-			
-		
-		/*if (planType.equals("MA") || planType.equals("MAPD")) {
-			if (memberType.equalsIgnoreCase("Individual")) {
-						
-				count = getDirectorySection(planType, memberType).size() - 1;
-				if (rider.toString().trim().equals("Rider"))
-					count += 1;
-				
-			} else if (memberType.equalsIgnoreCase("Group")) {
-				if (planType.equals("MAPD"))
-				count = getDirectorySection(planType, memberType).size();
-				else
-				count = getDirectorySection(planType, memberType).size()-1;
-			}
-			else
-				count = getDirectorySection(planType, memberType).size();
-		} else
-			count = getDirectorySection(planType, memberType).size();*/
+			count = getDirectorySection(planType, memberType, identifier).size() - 1;
+
+		/*
+		 * if (identifier.toString().trim().contains("UHC") &&
+		 * memberType.toString().trim().contains("Individual")) count =
+		 * getDirectorySection(planType, memberType,identifier).size() - 2; else
+		 */
+
+		/*
+		 * if (planType.equals("MA") || planType.equals("MAPD")) { if
+		 * (memberType.equalsIgnoreCase("Individual")) {
+		 * 
+		 * count = getDirectorySection(planType, memberType).size() - 1; if
+		 * (rider.toString().trim().equals("Rider")) count += 1;
+		 * 
+		 * } else if (memberType.equalsIgnoreCase("Group")) { if
+		 * (planType.equals("MAPD")) count = getDirectorySection(planType,
+		 * memberType).size(); else count = getDirectorySection(planType,
+		 * memberType).size()-1; } else count = getDirectorySection(planType,
+		 * memberType).size(); } else count = getDirectorySection(planType,
+		 * memberType).size();
+		 */
 		System.out.println("The link count is " + count);
 		Assert.assertTrue("Irrelevant links are present", count == linkCount);
 		System.out.println("No irrelevant links found");
 
 	}
 
-	
-
-
-
-
-	
-
-	
 }
