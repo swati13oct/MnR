@@ -124,7 +124,11 @@ public class PlanDetailsPage extends UhcDriver{
 		@FindBy(xpath = ".//*[@id='form-valid']//button[2]")
 		private WebElement sendButtonEmailPlanDetailsPopUp;
 		
+		@FindBy(xpath = "//div[@id='estimateYourDrugs']//*[contains(text(),'Your Drug List')]")
+		private WebElement yourDrugListHeading;
 		
+		@FindBy(xpath = "//table[contains(@class,'drug-list-table')]//tr[2]/td/strong")
+		private WebElement addedDrug;
 
 	private PageData vppPlanDetails;
 
@@ -642,6 +646,14 @@ public VPPPlanSummaryPage navigateBackToPlanSummaryPage() {
 
 	}
 	return null;
+}
+
+public void validatedAddedDrug(String expectedDrugName) {
+	validateNew(presDrugTab.get(0));
+	presDrugTab.get(0).click();
+	validateNew(yourDrugListHeading);
+	String actualDrug = addedDrug.getText().trim();
+	Assert.assertTrue(actualDrug.contains(expectedDrugName), "Expected drug not matches with actual drug");
 }
 }
 

@@ -187,7 +187,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='responsiveplan']")
 	private List<WebElement> medSuppPlanList;
 	
-
+	@FindBy(xpath = "(//div[contains(@class,'mabenefittable')]//li[contains(@class,'ng-scope')]/p[contains(text(),'drugs covered')])[1]")
+	private WebElement drugCoveredInfo;
+	
+	@FindBy(xpath = "(//div[contains(@class,'mabenefittable')]//li[contains(@class,'ng-scope')]/span[contains(text(),'Estimated Annual Drug Cost')])[1]")
+	private WebElement estimatedAnnualDrigCostLabel;
+	
+	@FindBy(xpath = "(//div[contains(@class,'mabenefittable')]//li[contains(@class,'ng-scope')]/span[contains(text(),'Estimated Annual Drug Cost:')]/following-sibling::span[not(contains(@class,'ng-hide'))])[1]")
+	private WebElement estimatedAnnualDrigCostValue;
+	
 	public VPPPlanSummaryPage(WebDriver driver) {
 		super(driver);
 		
@@ -205,7 +213,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 
 	private boolean getSpecificPlanSummary(WebElement element, String planName) {
-		System.out.println("plan info: " + element.getText());
 		if (element.getText().contains(planName)) {
 			return true;
 		} else {
@@ -1037,6 +1044,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if(currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPage(driver);
 		return null;
+	}
+	
+	public void validateMedicalBenefitDrugSection() {
+		validateNew(drugCoveredInfo);
+		validateNew(estimatedAnnualDrigCostLabel);
+		validateNew(estimatedAnnualDrigCostValue);
 	}
 }
 

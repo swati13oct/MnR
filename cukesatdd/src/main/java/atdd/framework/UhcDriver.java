@@ -583,8 +583,9 @@ try {
 	 * 
 	 * @param element
 	 */
-	public void waitforElementDisapper(By by) {
-		WebDriverWait wait = new WebDriverWait(driver, 30);
+	public void waitforElementDisapper(By by, long timeout) {
+		System.out.println("Waiting for element to disappear!!!");
+		WebDriverWait wait = new WebDriverWait(driver, timeout);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
 
 	}
