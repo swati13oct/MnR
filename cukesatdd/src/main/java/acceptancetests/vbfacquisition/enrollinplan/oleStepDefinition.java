@@ -451,8 +451,8 @@ public class oleStepDefinition {
 		}
 		MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
 
-		medicareInfoPage = medicareInfoPage.enter_required_Medicare_details(MedicareDetailsMap);
-		if (medicareInfoPage != null) {
+		boolean isInformationFilled = medicareInfoPage.enter_required_Medicare_details(MedicareDetailsMap);
+		if (isInformationFilled) {
 
 			getLoginScenario().saveBean(oleCommonConstants.FIRST_NAME, MedicareDetailsMap.get("First Name"));
 			getLoginScenario().saveBean(oleCommonConstants.LAST_NAME, MedicareDetailsMap.get("Last Name"));
@@ -904,8 +904,8 @@ public class oleStepDefinition {
 						givenAttributesRow.get(i).getCells().get(1));
 			}
 			PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
-			personalInformationPage = personalInformationPage.enter_member_details(MemberDetailsMap);
-			if (personalInformationPage != null) {
+			boolean isFormFilled = personalInformationPage.enter_member_details(MemberDetailsMap);
+			if (isFormFilled) {
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE,
 						personalInformationPage);
 				System.out.println("OLE Personal Information Page - All required Member Details are entered");
@@ -1422,8 +1422,8 @@ public class oleStepDefinition {
 		String LongTermQuestionFlag = QuestionMap.get("LongTerm Question");
 			 */
 			CoverageInformationPage coverageInformationPage = (CoverageInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_COVERAGE_INFO_PAGE);
-			coverageInformationPage = coverageInformationPage.answer_following_questions(QuestionMap);
-			if (coverageInformationPage != null) {
+			boolean areQuestionsAnswered = coverageInformationPage.answer_following_questions(QuestionMap);
+			if (areQuestionsAnswered) {
 
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_COVERAGE_INFO_PAGE,
 						coverageInformationPage);

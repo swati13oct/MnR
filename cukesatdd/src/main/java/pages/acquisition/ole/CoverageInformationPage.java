@@ -93,8 +93,7 @@ public class CoverageInformationPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoad(driver, CoverageInfoPageHeader, 30);
-		validate(CoverageInfoPageHeader);
+		CommonUtility.waitForPageLoadNew(driver, CoverageInfoPageHeader, 30);
 		System.out.println("Page header is Displayed : "+CoverageInfoPageHeader.getText());
 	
 	}
@@ -102,7 +101,7 @@ public class CoverageInformationPage extends UhcDriver{
 		boolean Validation_Flag = true;
 		System.out.println("PlanType : "+planType);
 		if(planType.contentEquals("PDP")){
-			if(validate(PDP_Question) && validate(LongTerm_Question) && !validate(OtherIns_Question)){
+			if(validate(PDP_Question) && validate(LongTerm_Question) && validateNonPresenceOfElement(OtherIns_Question)){
 				System.out.println("Coverage and Health Information Validation for PDP plan : Validation Passed");
 				Validation_Flag = true;
 			}
@@ -126,9 +125,10 @@ public class CoverageInformationPage extends UhcDriver{
 	
 	public ProposedEffectiveDatePage navigate_to_Proposed_Effective_Date_Page() {
 
-		validate(NextBtn);
-		JavascriptExecutor executor = (JavascriptExecutor)driver;
-		executor.executeScript("arguments[0].click();", NextBtn);
+		validateNew(NextBtn);
+		jsClickNew(NextBtn);
+		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", NextBtn);*/
 		
 		if(driver.getCurrentUrl().contains("effective-date")){
 			System.out.println("OLE Proposed Effective Date Page is Displayed");
@@ -137,7 +137,7 @@ public class CoverageInformationPage extends UhcDriver{
 		return null;
 	}
 
-	public CoverageInformationPage answer_following_questions(Map<String, String> questionMap) {
+	public boolean answer_following_questions(Map<String, String> questionMap) {
 		String PDPquestionFlag = questionMap.get("PDP Question");
 		String LongTermQuestionFlag = questionMap.get("LongTerm Question");
 
@@ -149,9 +149,9 @@ public class CoverageInformationPage extends UhcDriver{
 		}
 		if(NextBtn.isEnabled()){
 			System.out.println("SEP options selected :  Next button is enabled");
-			return new CoverageInformationPage(driver);
+			return true;
 		}
-		return null;
+		return false;
 	}
 
 }

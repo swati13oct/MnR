@@ -6,6 +6,7 @@ package pages.acquisition.ole;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -13,6 +14,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -125,23 +127,17 @@ public class MedicareInformationPage extends UhcDriver{
 	public void openAndValidate() {
 		
 		System.out.println("Validating Medicare Information for OLE");
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		validate(MedicalInfoPageHeader);
-		validate(SelectCardA);
-		validate(SelectCardB);
+		CommonUtility.waitForPageLoadNew(driver, MedicalInfoPageHeader, 30);
+		validateNew(SelectCardA);
+		validateNew(SelectCardB);
 	}
 
 	public boolean validate_required_fields() {
 		boolean flag = true;
 		
 		if(!RadioCardA.isSelected() && !RadioCardA.isSelected()){
-			if(!validate(firstNameField)&& !validate(lastNameField) && !validate(claimNumberField)
-					&& !validate(partAStartDateField)&& !validate(partBStartDateField)){
+			if(validateNonPresenceOfElement(firstNameField)&& validateNonPresenceOfElement(lastNameField) && validateNonPresenceOfElement(claimNumberField)
+					&& validateNonPresenceOfElement(partAStartDateField)&& validateNonPresenceOfElement(partBStartDateField)){
 				System.out.println("Medicare Information Fields are not Displayed when Card Type is not selected");
 				flag= true;
 			}
@@ -151,14 +147,8 @@ public class MedicareInformationPage extends UhcDriver{
 			}
 		}
 		SelectCardA.click();
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if(validate(firstNameField)&& validate(lastNameField) && validate(claimNumberField)
-				&& validate(partAStartDateField)&& validate(partBStartDateField)){
+		if(validateNew(firstNameField)&& validateNew(lastNameField) && validateNew(claimNumberField)
+				&& validateNew(partAStartDateField)&& validateNew(partBStartDateField)){
 			
 			System.out.println("Medicare Information Fields are Displayed when Card Type is selected");
 			flag = (flag==false)?false:true;
@@ -168,7 +158,7 @@ public class MedicareInformationPage extends UhcDriver{
 		return flag;
 	}
 
-	public MedicareInformationPage enter_required_Medicare_details(Map<String, String> MedicareDetailsMap){
+	public boolean enter_required_Medicare_details(Map<String, String> MedicareDetailsMap){
 		String FirstName = MedicareDetailsMap.get("First Name");
 		String LastName = MedicareDetailsMap.get("Last Name");
 		String MedicareNumber = MedicareDetailsMap.get("Medicare Number");
@@ -176,29 +166,36 @@ public class MedicareInformationPage extends UhcDriver{
 		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date");
 		String CardType = MedicareDetailsMap.get("Card Type");
 		String SSNflag = MedicareDetailsMap.get("SSN Flag");
-		//WebElement MedicareNumberLabel = driver.findElement(By.xpath("//*[@id='medicareClaimNumber']/preceding-sibling::label"));
 		if(CardType.contains("HICN")){
 			SelectCardA.click();
+			validateNew(MedicareNumberLabel);
 			if(MedicareNumberLabel.getText().contains("Medicare Claim Number")){
 				System.out.println("Correct Label 'Medicare Claim Number' displayed for CARD A");
 			}
 			else{
-				System.out.println("Correct Label not displayed for CARD A");
-				return null;
+				Assert.fail("Correct Label not displayed for CARD A");
+				/*System.out.println("Correct Label not displayed for CARD A");
+				return null;*/
 			}
 		}
 		if(CardType.contains("MBI")){
 			SelectCardB.click();
+			validateNew(MedicareNumberLabel);
 			if(MedicareNumberLabel.getText().contains("Medicare Number")){
 				System.out.println("Correct Label 'Medicare Number' displayed for CARD B");
 			}
 			else{
-				System.out.println("Correct Label not displayed for CARD B");
-				return null;
+				Assert.fail("Correct Label not displayed for CARD B");
+				/*System.out.println("Correct Label not displayed for CARD B");
+				return null;*/
 			}
 		}
+sendkeysNew(firstNameField, FirstName);
+sendkeysNew(lastNameField, LastName);
+sendkeysNew(claimNumberField, MedicareNumber);
 
-		if(validate(firstNameField)){
+
+/*		if(validateNew(firstNameField)){
 			firstNameField.sendKeys(FirstName);
 			System.out.println("First Name entered : "+FirstName);
 		}
@@ -221,12 +218,12 @@ public class MedicareInformationPage extends UhcDriver{
 		else{
 			System.out.println("Medicare Number field is not displayed");
 			return null;
-		}
-
-		//claimNumberField.sendKeys(MedicareNumber);
+		}*/
+		
 		if(SSNflag.contains("true")){
 			String SSNnumber = MedicareDetailsMap.get("SSN Number");
-			if(validate(SSNField)){
+			sendkeysNew(SSNField, SSNnumber);
+			/*if(validateNew(SSNField)){
 				System.out.println("SSN field is Displayed for NC M&R DSNP");
 				SSNField.sendKeys(SSNnumber);
 				System.out.println("SSN entered : "+SSNnumber);
@@ -234,47 +231,50 @@ public class MedicareInformationPage extends UhcDriver{
 			else{
 				System.out.println("SSN field is not displayed for NC M&R DSNP");
 				return null;
-			}
+			}*/
 		}
-		if(validate(partAStartDateField)){
+		
+		sendkeysNew(partAStartDateField, PartAeffectiveDate);
+		/*if(validate(partAStartDateField)){
 			partAStartDateField.sendKeys(PartAeffectiveDate);
 			System.out.println("Part A Effective Date entered : "+PartAeffectiveDate);
 		}
 		else{
 			System.out.println("Part A Effective Date field is not displayed");
 			return null;
-		}
-		if(validate(partBStartDateField)){
+		}*/
+		
+		sendkeysNew(partBStartDateField, PartBeffectiveDate);
+		
+		/*if(validate(partBStartDateField)){
 			partBStartDateField.sendKeys(PartBeffectiveDate);
 			System.out.println("Part B Effective Date entered : "+PartBeffectiveDate);
 		}
 		else{
 			System.out.println("Part B Effective Date field is not displayed");
 			return null;
-		}
+		}*/
 
 		System.out.println("All Medicare Details are entered");
 		
 		if(NextBtn.isEnabled()){
 			System.out.println("Next Button is enabled to navigate to Next Page");
-			return new MedicareInformationPage(driver);
+			return true;
 		}
 		else
 			System.out.println("Next Button is disabled, Incorrect/Incomplete Medicare Details provided");
-		return new MedicareInformationPage(driver);
+		return false;
 	}
 	
 	public PrelimineryQuestionsPage navigate_to_Preliminary_Questions_page() {
 		
-		validate(NextBtn);
-		JavascriptExecutor executor = (JavascriptExecutor)driver;
-		executor.executeScript("arguments[0].click();", NextBtn);
+		validateNew(NextBtn);
+		jsClickNew(NextBtn);
+		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", NextBtn);*/
 
-		//NextBtn.click();
-		
 		if(driver.getCurrentUrl().contains("preliminary-questions")){
 			System.out.println("OLE Preliminary Questions page is Displayed");
-			System.out.println(driver.getCurrentUrl());
 			return new PrelimineryQuestionsPage(driver);
 		}
 		return null;
