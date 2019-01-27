@@ -7,6 +7,7 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
+import junit.framework.Assert;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,18 +30,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-//import pages.member.bluelayer.AccountHomePage;
-//import pages.acquisition.ulayer.MaViewPlansAndPricingPage;
-//import pages.acquisition.ulayer.MsViewPlansAndPricingPage;
-//import pages.acquisition.ulayer.PdpViewPlansAndPricingPage;
 
 public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(id = "lookzip")
 	private WebElement lookupZipcode;
-	
-	@FindBy(id = "planSelectorTool")
-	private WebElement iframePst; 
 
 	@FindBy(id = "takequizbtn")
 	private WebElement takequizbtn;
@@ -134,11 +128,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "cobrowse-disclaimer")
 	private WebElement cobrowsemodelwindow;
 
-	/*@FindBy(xpath = "//a[@class='cta-button']")
-	private WebElement takeTheQuizBtn;*/
-	
-	@FindBy(xpath = "//a[contains(text(),'Plan Selector') or @ng-controller='emailwidgetCtrl'//div[@class='scroll-pane']//div[@class='nav-col nav-col-1'][3]//h3[4]/a]")
-	private WebElement PlanSelectorHeader;
+	@FindBy(xpath = "//a[@class='cta-button']")
+	private WebElement takeTheQuizBtn;
 
 	@FindBy(xpath = ".//*[@id='colhowdoesthiswork_dce']//*[@itemprop='significantLink']/*[@class='cta-button secondary']")
 	public WebElement getStarted;
@@ -161,8 +152,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='js-ole-plan-result']/button")
 	private WebElement StandaloneVPP;
 
-	@FindBy(xpath = "//*[@id='js-ole-plan-select']//optgroup[3]/option[1]")
-	private WebElement StandaloneSNPoptions;	
+	@FindBy(xpath = "//*[@id='js-ole-plan-select']//optgroup[2]/option[1]")
+	private WebElement StandaloneSNPoptions;
 
 	@FindBy(xpath = "//*[@class='btn--bottom']")
 	private WebElement StandalonSearchCounty;
@@ -192,12 +183,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='js-ole-plan-select']//following::button")
 	private WebElement enrollButton;
 
-	/*
-	 * @FindBys(value = { @FindBy(xpath =
-	 * "//table[@id='selectcountytable']/tbody/tr/td") }) List<WebElement>
-	 * countyRows;
-	 */
-
 	@FindBy(xpath = "//*[@class='textalign']//p[2]/a")
 	private WebElement county;
 
@@ -212,17 +197,27 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath = "//div[@class='overview-main']/h2")
 	private WebElement vppTop;
+	
+	@FindBy(xpath="//div[contains(@class,'proactive-offer__close')]")
+	public static List<WebElement> proactiveChatExistBtn;
+	
+	@FindBy(id = "cobrowse-disclaimer")
+	private List<WebElement> requestAssistanceModal;
+	
+	@FindBy(xpath = "//div[@id='cobrowse-disclaimer']//*[contains(@class,'modal-title')]")
+	private WebElement requestAssistanceTitle;
+	
+	@FindBy(id = "correlationId")
+	private WebElement requestAssistanceAgentID;
+	
+	@FindBy(xpath = "//a[contains(@class,'closer')]")
+	private WebElement requestAssistanceClose;
 
-	private PageData homePageDisclaimer;
 	public JSONObject homePageDisclaimerJson;
-	private PageData homePageDisclaimerHide;
 	public JSONObject homePageDisclaimerHideJson;
-
-	private PageData globalFooter;
 
 	public JSONObject globalFooterJson;
 
-	private PageData globalHeader;
 	public JSONObject globalHeaderJson;
 
 	private PageData alreadyPlanMember;
@@ -234,7 +229,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private PageData ourPlansNav;
 	public JSONObject ourPlansNavJson;
 
-	private PageData browserCheckData;
 	public JSONObject browserCheckJson;
 
 	private PageData cobrowseData;
@@ -246,12 +240,31 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
-		driver.manage().window().maximize();
+	}
+	
+	public AcquisitionHomePage(WebDriver driver, boolean alreadyOnSite) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		openAndValidate(alreadyOnSite);
 	}
 
+	@SuppressWarnings("deprecation")
+	public void openAndValidate(boolean alreadyOnSite) {
+		if (alreadyOnSite) {
+			
+		CommonUtility.checkPageIsReadyNew(driver);
+		checkModelPopup(driver);
+		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 45);
+		if(proactiveChatExistBtn.size()!=0)
+			jsClickNew(proactiveChatExistBtn.get(0));
+		}
+		else {
+			Assert.fail("Please check booleanvalue");
+		}
+		
+	}
 	public DrugCostEstimatorPage navigateToDCEToolFromHome() throws InterruptedException {
-
-		driver.manage().window().maximize();
+		validateNew(getStarted);
 		getStarted.click();
 
 		if (driver.getCurrentUrl().contains("health-plans/estimate-drug-costs.html"))
@@ -273,10 +286,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public SiteMapUMSPage siteMapFooterClick() {
-		validate(footerSiteMapLink);
+		validateNew(footerSiteMapLink);
 		footerSiteMapLink.click();
-		validate(footerSiteMapLink);
-		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_SITEMAP)) {
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("sitemap.html")){
 			return new SiteMapUMSPage(driver);
 		}
 		return null;
@@ -643,8 +656,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public PharmacySearchPage navigateToPharmacyLocator() {
-
-		driver.manage().window().maximize();
 		Actions action = new Actions(driver);
 		PageFactory.initElements(driver, this);
 		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
@@ -920,7 +931,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public RequestHelpAndInformationPage navigateToMaMoreHelpAndInfo() {
-		try {
+		/*try {
 			if (zipCodeField.isDisplayed()) {
 				CommonUtility.waitForElementToDisappear(driver, zipCodeField, CommonConstants.TIMEOUT_30);
 			}
@@ -930,7 +941,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("zipCodeField not found");
 		} catch (Exception e) {
 			System.out.println("zipCodeField not found");
-		}
+		}*/
 		
 
 		Actions actions = new Actions(driver);
@@ -939,7 +950,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		actions.moveToElement(moreHelpInfoLink);
 		actions.click().build().perform();
 
-		try {
+		/*try {
 			if (zipCodeField.isDisplayed()) {
 				CommonUtility.waitForElementToDisappear(driver, zipCodeField, CommonConstants.TIMEOUT_30);
 			}
@@ -949,7 +960,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("zipCodeField not found");
 		} catch (Exception e) {
 			System.out.println("zipCodeField not found");
-		}
+		}*/
+		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoad(driver, requestAgentApptDropdown, 60);
 		if (validateNew(requestAgentApptDropdown)) {
 			return new RequestHelpAndInformationPage(driver);
@@ -974,15 +986,18 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return null;
 	}
 
-	public RequestForAssistanceUMSPage requestforassistanceclick() {
-		validate(footerRequestforAssistanceLink);
-		footerRequestforAssistanceLink.click();
-		if (cobrowsemodelwindow.isDisplayed()) {
-			return new RequestForAssistanceUMSPage(driver);
-		} else {
-			return null;
-		}
+	public void clickRequestAsistancce() {
+		validateNew(footerRequestforAssistancelink);
+		if(proactiveChatExistBtn.size()!=0)
+			proactiveChatExistBtn.get(0).click();
+		footerRequestforAssistancelink.click();
+		CommonUtility.waitForPageLoadNew(driver, requestAssistanceModal.get(0), 30);
+		validateNew(requestAssistanceTitle);
+		validateNew(requestAssistanceAgentID);
+		requestAssistanceClose.click();
+		waitforElementDisapper(By.id("cobrowse-disclaimer"), 30);
 	}
+	
 
 	public JSONObject validatecobrowsemodelwindow() {
 		String fileName = CommonConstants.COBROWSE_MODEL_WINDOW;
@@ -1045,49 +1060,33 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	}
 
-	public boolean validateFooterLinks(JSONObject jsonObj) {
-		boolean flag = true;
+		public void validateFooterLinks() {
+			validateNew(footerHomeLink);
+			validateNew(footerAboutUsLink);
+			validateNew(footerContactUsLink);
+			validateNew(footerSiteMapLink);
+			validateNew(footerPrivacyPolicyLink);
+			validateNew(footerTermsnConditionsLink);
+			validateNew(footerDisclaimersLink);
+			validateNew(footerAgentsnBrokersLink);
+			validateNew(footerRequestforAssistancelink);
+			validateNew(footerAccessibilitylink);
+			validateNew(medicareAdvantagePlansLink);
+			validateNew(medicareSupplementInsurancePlansLink);
+			validateNew(medicarePrescriptionDrug_PlansLink);
+			validateNew(learnAboutMedicareLink);
+			validateNew(viewAllDisclaimerInformationLink);
 
-		try {
-			if (!jsonObj.get("footerPrivacyPolicyLink").equals("Privacy Policy"))
-				flag = false;
-			if (!jsonObj.get("footerDisclaimersLink").equals("Disclaimers"))
-				flag = false;
-			if (!jsonObj.get("footerHomeLink").equals("Home"))
-				flag = false;
-			if (!jsonObj.get("footerContactUsLink").equals("Contact Us"))
-				flag = false;
-			if (!jsonObj.get("footerAgentsAndBrokersLink").equals("Agents & Brokers"))
-				flag = false;
-			if (!jsonObj.get("footerAboutUsLink").equals("About Us"))
-				flag = false;
-			if (!jsonObj.get("footerSiteMapLink").equals("Site Map"))
-				flag = false;
-			if (!jsonObj.get("footerTermsofUseLink").equals("Terms of Use"))
-				flag = false;
-
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-
-		return flag;
-	}
 
 	public PlanSelectorNewPage quizButton() {
 		waitforElement(ourPlans);
 		Actions action = new Actions(driver);
 		PageFactory.initElements(driver, this);
 		action.moveToElement(ourPlans).build().perform();
-		waitforElement(PlanSelectorHeader);
-		PlanSelectorHeader.click();
-		waitforElement(iframePst);
-		if(iframePst.isDisplayed())
-		{
+		waitforElement(takeTheQuizBtn);
+		takeTheQuizBtn.click();
 		return new PlanSelectorNewPage(driver);
-		}
-		else
-			return null;
 	}
 
 	public VPPPlanSummaryPage searchPlans1(String zipcode, String countyName) {
@@ -1321,4 +1320,81 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			counter++;
 		} while (counter < 2);
 	}
+	
+	public AboutUsPage aboutUsClick() {
+		validateNew(footerAboutUsLink);
+		footerAboutUsLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (getTitle().contains("About UnitedHealthcare")) {
+			return new AboutUsPage(driver);
+		}
+		return null;
+			
+		}
+	
+	public ContactUsUmsPage contactUsClick() {
+		validateNew(footerContactUsLink);
+		footerContactUsLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("contact-us")) {
+			return new ContactUsUmsPage(driver);
+		}
+		return null;
+			
+		}
+	
+	public PrivacyPolicyUmsPage privacyPolicyClick() {
+		validateNew(footerPrivacyPolicyLink);
+		footerPrivacyPolicyLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("privacy_policy.html")) {
+			return new PrivacyPolicyUmsPage(driver);
+		}
+		return null;
+			
+		}
+	
+	public TermsOfUseUmsPage termsOfUseClick() {
+		validateNew(footerTermsnConditionsLink);
+		footerTermsnConditionsLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("terms_and_conditions")) {
+			return new TermsOfUseUmsPage(driver);
+		}
+		return null;
+			
+		}
+	
+	public DisclaimersPage disclaimersClick() {
+		validateNew(footerDisclaimersLink);
+		footerDisclaimersLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("disclaimer")) {
+			return new DisclaimersPage(driver);
+		}
+		return null;
+			
+		}
+	
+	public AgentsAndBrokersPage agentsAndBrokersClick() {
+		validateNew(footerAgentsnBrokersLink);
+		footerAgentsnBrokersLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if(driver.getCurrentUrl().contains("health-insurance-brokers")){
+			return new AgentsAndBrokersPage(driver);
+		}
+		return null;
+			
+		}
+	
+	public AcquisitionHomePage homeFooterClick() {
+		validateNew(footerHomeLink);
+		footerHomeLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (validateNew(zipCodeField)) {
+			return new AcquisitionHomePage(driver, true);
+		}
+		return null;
+	}
+
 }
