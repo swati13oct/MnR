@@ -2,9 +2,6 @@ package acceptancetests.acquisition.vpp;
 
 import gherkin.formatter.model.DataTableRow;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +19,7 @@ import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
-import acceptancetests.vbfacquisition.vpp.VPPCommonConstants;
+import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;

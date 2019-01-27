@@ -145,16 +145,16 @@ public class PrelimineryQuestionsPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoad(driver, PrelimPageHeader, 30);
-		validateNew(PrelimPageHeader);
-
+		CommonUtility.waitForPageLoadNew(driver, PrelimPageHeader, 30);
 	}
 
 	public PersonalInformationPage navigate_to_Personal_Information_page() {
 		
-		validate(NextBtn);
-		JavascriptExecutor executor = (JavascriptExecutor)driver;
-		executor.executeScript("arguments[0].click();", NextBtn);
+		validateNew(NextBtn);
+		
+		jsClickNew(NextBtn);
+		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", NextBtn);*/
 		
 		if(driver.getCurrentUrl().contains("personal-information")){
 			System.out.println("OLE Personal Information Page is Displayed");
@@ -230,12 +230,12 @@ public PersonalInformationPage Validate_use_and_disclosure_page() {
 				System.out.println("ESRD question is displayed for MA/DSNP plans in Preliminary Questions Page");
 				esrdYes.click();
 				System.out.println("ESRD question : YES clicked"+esrdYes.isSelected());
-				if(validate(esrdError) && validate(CancelButton) && !validate(NextBtn)){
+				if(validate(esrdError) && validate(CancelButton) && validateNonPresenceOfElement(NextBtn)){
 					System.out.println("ESRD error and Cancel Enrollment button are displayed for MA/DSNP plans, YES answer to ESRD question");
 					validation_Flag = true;
 					esrdNo.click();
 					System.out.println("ESRD question : No clicked"+esrdNo.isSelected());
-					if(!validate(esrdError) && !validate(CancelButton) && validate(NextBtn)){
+					if(validateNonPresenceOfElement(esrdError) && validateNonPresenceOfElement(CancelButton) && validate(NextBtn)){
 						System.out.println("ESRD error and Cancel Enrollment button are NOT displayed for NO answer to ESRD question");
 						validation_Flag = true;
 					}
@@ -255,7 +255,7 @@ public PersonalInformationPage Validate_use_and_disclosure_page() {
 			}
 		}
 		else{
-			if(!validate(ESRDQuestion)){
+			if(validateNonPresenceOfElement(ESRDQuestion)){
 				System.out.println("ESRD question is not displayed for PDP Plan Type");
 				validation_Flag = true;
 			}
@@ -271,7 +271,7 @@ public PersonalInformationPage Validate_use_and_disclosure_page() {
 			System.out.println("Medicaid Question is displayed for "+planType+" : "+validate(MedicaidQuestion));
 			medicaiddno.click();
 			System.out.println("Medicaid question : No clicked"+medicaiddno.isSelected());
-			if(validate(MedicaidError) && validate(CancelButton) && !validate(NextBtn)){
+			if(validate(MedicaidError) && validate(CancelButton) && validateNonPresenceOfElement(NextBtn)){
 				System.out.println("Medicaid Number error and Cancel Enrollment button are displayed for DSNP plansNO answer to ESRD question");
 				//validation_Flag = (validation_Flag==false)?false:true;
 				medicaiddyes.click();
@@ -282,7 +282,7 @@ public PersonalInformationPage Validate_use_and_disclosure_page() {
 					Medicaid_Validation = true;
 					medicaidnumTxtBx.sendKeys(medicaidNumber);
 					System.out.println("Medicare Number is enetered : "+medicaidNumber);
-					if(!validate(RequiredField_ErrorMessage)&& !validate(MedicaidRequired_ErrorMessage))
+					if(validateNonPresenceOfElement(RequiredField_ErrorMessage)&& validateNonPresenceOfElement(MedicaidRequired_ErrorMessage))
 					{
 						System.out.println("Error Message is not Displayed when Medicaid Number is entered");
 						Medicaid_Validation = true;
@@ -305,7 +305,7 @@ public PersonalInformationPage Validate_use_and_disclosure_page() {
 				System.out.println("Medicaid Number question is not required for non-DSNP : validation pass");
 				medicaiddno.click();
 				System.out.println("Medicaid question : No clicked"+medicaiddno.isSelected());
-				if(!validate(MedicaidError) && !validate(CancelButton) && NextBtn.isEnabled()){
+				if(validateNonPresenceOfElement(MedicaidError) && validateNonPresenceOfElement(CancelButton) && NextBtn.isEnabled()){
 					System.out.println("Next Button is enabled when Medicaid question Answered NO");
 					Medicaid_Validation = (!Medicaid_Validation)?false:true;
 				}
@@ -315,7 +315,7 @@ public PersonalInformationPage Validate_use_and_disclosure_page() {
 				}
 				medicaiddyes.click();
 				System.out.println("Medicaid question : Yes clicked"+medicaiddyes.isSelected());
-				if(!validate(MedicaidError) && !validate(CancelButton) && NextBtn.isEnabled()){
+				if(validateNonPresenceOfElement(MedicaidError) && validateNonPresenceOfElement(CancelButton) && NextBtn.isEnabled()){
 					System.out.println("non DSNP - Medicare Number not required");
 					Medicaid_Validation = (!Medicaid_Validation)?false:true;
 				}

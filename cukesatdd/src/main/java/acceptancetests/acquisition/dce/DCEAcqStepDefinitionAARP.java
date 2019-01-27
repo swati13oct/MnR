@@ -8,19 +8,19 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.ulayer.AcquisitionHomePage;
+import pages.acquisition.ulayer.AddDrugDetails;
 import pages.acquisition.ulayer.DrugCostEstimatorPage;
 import pages.acquisition.ulayer.PlanDetailsPage;
+import pages.acquisition.ulayer.SavingsOppurtunity;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
-import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
+import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
@@ -46,13 +46,13 @@ public class DCEAcqStepDefinitionAARP {
 	@When("^I access the acquisition DCE tool from home page$")
 	public void I_access_the_DCE_tool_home_page() throws InterruptedException {
 
-		AcquisitionHomePage acquisitionHomePage = (AcquisitionHomePage) loginScenario.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) acquisitionHomePage.navigateToDCEToolFromHome();
-		if(dce!=null){
-			loginScenario.saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
-			dce.validateDceLandingPage();
-		}else
-			Assert.fail("DCE page object returned null");
+		AcquisitionHomePage acquisitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		DrugCostEstimatorPage dcePage = (DrugCostEstimatorPage) acquisitionHomePage.navigateToDCEToolFromHome();
+		if (null != dcePage) {
+			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dcePage);
+		} else
+			Assert.fail("DCE page object not loaded");
 	}
 	
 	/**
@@ -72,12 +72,12 @@ public class DCEAcqStepDefinitionAARP {
 		String planName = memberAttributesMap.get("Plan Name");
 		String planType = memberAttributesMap.get("Plan Type");
 
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) loginScenario.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.clickonViewPlans();
 		PlanDetailsPage plandetailspage = plansummaryPage.navigateToPlanDetails(planName, planType);
 		DrugCostEstimatorPage dce = plandetailspage.navigateToDCE();
 		if(dce!=null){
-			loginScenario.saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
+			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
 			
 		}
 	}
@@ -97,10 +97,10 @@ public class DCEAcqStepDefinitionAARP {
 		}
 
 		String plantype = memberAttributesMap.get("Plan Type");
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) loginScenario.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		DrugCostEstimatorPage dce = plansummaryPage.navigateToDCE(plantype);
 		if(dce!=null){
-			loginScenario.saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
+			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
 		}
 	}
 	
@@ -109,13 +109,17 @@ public class DCEAcqStepDefinitionAARP {
 	 */
 	@When("^I have added a drug to my drug list$")
 	public void I_have_added_a_drug_to_my_drug_list(DataTable data) throws InterruptedException {
+		
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String drug = memberAttributesRow.get(0).getCells().get(1);
-
-		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) loginScenario.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		boolean isDrugPresent = dce.isDrugPresent(drug);
 		if(!isDrugPresent){
-			dce.addDrug(drug.split(" ")[0]);
+			AddDrugDetails addDrugDetails= dce.addDrug(drug.split(" ")[0]);
+			if (null != addDrugDetails) {
+				getLoginScenario().saveBean(PageConstants.ADD_DRUG_DETAILS, addDrugDetails);
+			} else
+				Assert.fail("Drug Details content not loaded");
 		}
 
 	}
@@ -123,8 +127,62 @@ public class DCEAcqStepDefinitionAARP {
 	/**
 	 * @toDo:
 	 */
+	@And("^user selects drug details$")
+	public void user_selects_drug_details(DataTable data) throws InterruptedException {
+		
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String drug = memberAttributesMap.get("Drug");
+		String quantity = memberAttributesMap.get("Quantity");
+		String frequency = memberAttributesMap.get("Frequency");
+
+		AddDrugDetails DrugDetails = (AddDrugDetails) getLoginScenario().getBean(PageConstants.ADD_DRUG_DETAILS);
+		DrugDetails.selectDosage(drug);
+		DrugDetails.selectQnty(quantity);
+		DrugDetails.selectFrequency(frequency);		
+	}
+	
+	/**
+	 * @toDo:
+	 */
+	@When("^user successfully adds drug$")
+	public void user_successfully_adds_drug(DataTable data) throws InterruptedException {
+
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String isBranded = memberAttributesMap.get("Is Branded Drug");
+		String drug = memberAttributesMap.get("Drug");
+		AddDrugDetails DrugDetails = (AddDrugDetails) getLoginScenario().getBean(PageConstants.ADD_DRUG_DETAILS);
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		if (isBranded.trim().equalsIgnoreCase("YES")) {
+
+			SavingsOppurtunity savingsOppurtunity = DrugDetails.continueAddDrugDetailsModWithSaving();
+			//savingsOppurtunity.switchToGeneric();
+			dce = savingsOppurtunity.savedrugbutton();
+
+		} else {
+			dce = DrugDetails.continueAddDrugDetailsModNoSaving();
+		}
+		Assert.assertTrue("Drug not added", null != dce);
+		dce.validateAddedDrug(drug);
+	}
+	
+	/**
+	 * @toDo:
+	 */
 	@And("^I navigate to step2 page$")
-	public void I_navigate_to_step2_page () throws InterruptedException
+	public void I_navigate_to_step2_page_aarp () throws InterruptedException
 	{
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.navigateToStep2();
@@ -143,7 +201,7 @@ public class DCEAcqStepDefinitionAARP {
 		String zipcode = memberAttributesMap.get("Zipcode");
 		String radius = memberAttributesMap.get("Radius");
 		
-		DrugCostEstimatorPage dce =  (DrugCostEstimatorPage) loginScenario.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		DrugCostEstimatorPage dce =  (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		
 		dce.pharmacyInformation(zipcode,radius);
 	}
@@ -182,10 +240,7 @@ public class DCEAcqStepDefinitionAARP {
 		String drug = memberAttributesRow.get(0).getCells().get(1);
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.navigateToStep3();
-	   if(dce.validateStep3FromHomePage(drug))
-		   Assert.assertTrue(true);
-	   else
-		   Assert.fail("Error:the drug did not display on step 3 page"); 
+		Assert.assertTrue("Error:the drug did not display on step 3 page", dce.validateStep3FromHomePage(drug));
 	}
 
 	/**
@@ -257,7 +312,7 @@ public class DCEAcqStepDefinitionAARP {
 		String zipCode = memberAttributesMap.get("Zip Code");
 		VPPPlanSummaryPage vppPage = dcePage.mouseHoverOurPlans(zipCode);
 		if(vppPage!=null){
-			loginScenario.saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, vppPage);
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, vppPage);
 		}else{
 			System.out.println("===========Page not returned============");
 			Assert.fail();
@@ -270,5 +325,51 @@ public class DCEAcqStepDefinitionAARP {
 		vppPage.validatePlanSummary();
 	}
 	
+	@Then("^user enters zipcode on step3 and validate plan summary page$")
+	public void user_enters_zipcode_on_step3_and_validate_plan_summary_aarp(DataTable data){
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		String zip = memberAttributesRow.get(0).getCells().get(1);
+		DrugCostEstimatorPage dcePage = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		VPPPlanSummaryPage vppPlanSummaryPage= dcePage.enterZipcodeAndNavigateToPlanSummary(zip);
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, vppPlanSummaryPage);
+	}
+	
+	/**
+	 * @throws InterruptedException
+	 * @toDo:user validates plan summary for the below plan
+	 */
+	@And("^user validates drug cost in medical benefit section in the AARP site$")
+	public void user_validates_drug_cost_in_medical_benefit_section_aarp(DataTable planAttributes) throws InterruptedException {
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planName = givenAttributesMap.get("Plan Name");
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		Assert.assertTrue("Error loading specific plan summary in VPP plan summary page",
+				planSummaryPage.getSpecificPlanInfo(planName));
+		planSummaryPage.validateMedicalBenefitDrugSection();
+	}
+	
+	@Then("^user validates drug added on prescription drug benefits tab in AARP$")
+	public void user_validates_drug_added_on_prescription_drug_benefits_tab_AARP(DataTable drug){
+		List<DataTableRow> givenAttributesRow = drug.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String drugName = givenAttributesMap.get("Drug");
+		PlanDetailsPage planDetailsPage = (PlanDetailsPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		planDetailsPage.validatedAddedDrug(drugName);
+	}
 	
 }

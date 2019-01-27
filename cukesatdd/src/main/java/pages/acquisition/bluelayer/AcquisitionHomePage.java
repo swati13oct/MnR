@@ -246,7 +246,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
-		driver.manage().window().maximize();
 	}
 
 	public AcquisitionHomePage(WebDriver driver, boolean alreadyOnSite) {
@@ -271,8 +270,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 	}
 	public DrugCostEstimatorPage navigateToDCEToolFromHome() throws InterruptedException {
-
-		driver.manage().window().maximize();
+		validateNew(getStarted);
 		getStarted.click();
 
 		if (driver.getCurrentUrl().contains("health-plans/estimate-drug-costs.html"))
@@ -669,8 +667,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public PharmacySearchPage navigateToPharmacyLocator() {
-
-		driver.manage().window().maximize();
 		Actions action = new Actions(driver);
 		PageFactory.initElements(driver, this);
 		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
@@ -961,36 +957,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public RequestHelpAndInformationPage navigateToMaMoreHelpAndInfo() {
-		try {
-			if (zipCodeField.isDisplayed()) {
-				CommonUtility.waitForElementToDisappear(driver, zipCodeField, CommonConstants.TIMEOUT_30);
-			}
-		} catch (NoSuchElementException e) {
-			System.out.println("zipCodeField not found");
-		} catch (TimeoutException ex) {
-			System.out.println("zipCodeField not found");
-		} catch (Exception e) {
-			System.out.println("zipCodeField not found");
-		}
 		
-
 		Actions actions = new Actions(driver);
 		PageFactory.initElements(driver, this);
 		actions.moveToElement(ourPlansHoverLink);
 		actions.moveToElement(moreHelpInfoLink);
 		actions.click().build().perform();
 
-		try {
-			if (zipCodeField.isDisplayed()) {
-				CommonUtility.waitForElementToDisappear(driver, zipCodeField, CommonConstants.TIMEOUT_30);
-			}
-		} catch (NoSuchElementException e) {
-			System.out.println("zipCodeField not found");
-		} catch (TimeoutException ex) {
-			System.out.println("zipCodeField not found");
-		} catch (Exception e) {
-			System.out.println("zipCodeField not found");
-		}
+		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoad(driver, requestAgentApptDropdown, 60);
 		if (validateNew(requestAgentApptDropdown)) {
 			return new RequestHelpAndInformationPage(driver);
@@ -1024,7 +998,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(requestAssistanceTitle);
 		validateNew(requestAssistanceAgentID);
 		requestAssistanceClose.click();
-		waitforElementDisapper(By.id("cobrowse-disclaimer"));
+		waitforElementDisapper(By.id("cobrowse-disclaimer"), 30);
 		}
 
 
@@ -1065,33 +1039,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			return new VPPPlanSummaryPage(driver);
 		}
 		return null;
-	}
-
-	public PDPRequestHelpAndInformationPage navigateToPDPMoreHelpAndInfo() {
-
-		Actions actions = new Actions(driver);
-		PageFactory.initElements(driver, this);
-		actions.moveToElement(ourPlansHoverLink);
-		actions.moveToElement(moreHelpInfoLink);
-		actions.click().build().perform();
-		try {
-			if (zipCodeField.isDisplayed()) {
-				CommonUtility.waitForElementToDisappear(driver, zipCodeField, 20);
-			}
-		} catch (NoSuchElementException e) {
-			System.out.println("zipCodeField not found");
-		} catch (TimeoutException ex) {
-			System.out.println("zipCodeField not found");
-		} catch (Exception e) {
-			System.out.println("zipCodeField not found");
-		}
-		CommonUtility.waitForPageLoad(driver, requestAgentApptDropdown, 60);
-		if (validateNew(requestAgentApptDropdown)) {
-			return new PDPRequestHelpAndInformationPage(driver);
-		}
-
-		return null;
-
 	}
 
 		public void validateFooterLinks() {
@@ -1358,7 +1305,27 @@ public pages.acquisition.bluelayer.VPPPlanSummaryPage ValidateMultiCOuntyPopUp(S
 		}
 		return null;
 	}
-}
+	public static void checkModelPopup(WebDriver driver) {
+		int counter = 0;
+		do {
+
+			System.out.println("current value of conter: " + counter);
+			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
+
+			if (IPerceptionsFrame.isEmpty()) {
+				try {
+					Thread.sleep(5000);
+				} catch (InterruptedException e) {
+					System.out.println(e.getMessage());
+				}
+			} else {
+				driver.switchTo().frame(IPerceptionsFrame.get(0));
+				driver.findElement(By.className("btn-no")).click();
+				driver.switchTo().defaultContent();
+			}
+			counter++;
+		} while (counter < 2);
+	}
 	
 	public AboutUsPage aboutUsClick() {
 		validateNew(footerAboutUsLink);

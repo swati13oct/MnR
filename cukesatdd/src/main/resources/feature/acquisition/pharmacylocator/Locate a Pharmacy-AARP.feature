@@ -107,9 +107,9 @@ Feature: 1.17-VBF-Acq-To test Locate a Pharmacy in acqusition flow AARP site
       | zipcode | distance | county | planName | pharmacytype | plantype |
 
   #	| 90210       | 2        |       | AARP MedicareRx Preferred (PDP)                    |   Mail Order Pharmacy				|PDP|
-  @pharmacylocatorulayerVBF
+@pharmacyLocatorUlayerSmoke
   Scenario Outline: To verify available pharmacies in AARP site for zipcode <zipcode> and county <county>
-    Given the user is on the AARP Medicare Site landing page
+Given the user is on AARP medicare acquisition site landing page
     When the user hovers to Our Plans and select pharmacy search for following plan type in AARP Site
     And the user enters following details for pharmacy search in AARP Site
       | Zip Code    | <zipcode>  |
