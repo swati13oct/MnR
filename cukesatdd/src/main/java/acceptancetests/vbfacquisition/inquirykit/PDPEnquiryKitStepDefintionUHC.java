@@ -13,14 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.EnquiryKitConfirmationPage;
 import pages.acquisition.bluelayer.PDPEnrollementGuidePage;
-import pages.acquisition.bluelayer.PDPRequestHelpAndInformationPage;
+import pages.acquisition.bluelayer.RequestHelpAndInformationPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
-import cucumber.api.java.en.When;
 
 /**
  *Functionality:PDP Enquiry Kit
@@ -51,9 +50,9 @@ public class PDPEnquiryKitStepDefintionUHC {
 	
 	}
 	
-	/**
+/*	*//**
 	 * @toDo:the user navigates to Request More Help and Information page 
-	 */
+	 *//*
 	@When("^the user navigates to Request More Help and Information page under pdp section in UHC Site$")
 	public void the_user_navigates_request_more_help_information_page_uhc()
 	{
@@ -66,7 +65,7 @@ public class PDPEnquiryKitStepDefintionUHC {
 		else{
 			Assert.fail("ERROR loading pdpRequestHelpAndInformationPage");
 		}
-	}
+	}*/
 	
 	/**
 	 * @toDo:the user accesses the Request Plan Information and Enrollment Materials 
@@ -74,9 +73,9 @@ public class PDPEnquiryKitStepDefintionUHC {
 	@And("^the user accesses the Request Plan Information and Enrollment Materials in UHC site$")
 	public void the_user_accessess_the_pdp_enquiry_kit_uhc()
 	{
-		PDPRequestHelpAndInformationPage pdpRequestHelpAndInformationPage = (PDPRequestHelpAndInformationPage) getLoginScenario().getBean(PageConstants.PDP_REQUEST_MORE_HELP_INFORMATION_PAGE);
+RequestHelpAndInformationPage requestHelpAndInformationPage = (RequestHelpAndInformationPage) getLoginScenario().getBean(PageConstants.REQUEST_MORE_HELP_INFORMATION_PAGE);
 		
-		PDPEnrollementGuidePage pdpEnrollementGuidePage = pdpRequestHelpAndInformationPage.navigatesToPdpEnquiryKit();
+		PDPEnrollementGuidePage pdpEnrollementGuidePage = requestHelpAndInformationPage.navigatesToPdpEnquiryKit();
 		if(pdpEnrollementGuidePage!=null){
 			getLoginScenario().saveBean(PageConstants.PDP_ENROLLMENT_GUIDE_PAGE, pdpEnrollementGuidePage);
 			Assert.assertTrue(true);

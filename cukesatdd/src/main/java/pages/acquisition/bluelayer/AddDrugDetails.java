@@ -1,5 +1,4 @@
 package pages.acquisition.bluelayer;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -7,11 +6,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
-
 import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.bluelayer.DrugCostEstimatorPage;
 import pages.acquisition.ulayer.PageTitleConstants;
+import pages.acquisition.bluelayer.SavingsOppurtunity;
 
 public class AddDrugDetails extends UhcDriver {
 
@@ -36,34 +36,25 @@ public class AddDrugDetails extends UhcDriver {
 	
 	@FindBy(id = "frequency")
 	public WebElement selectYourFrequencyDropdown;
+	
+	@FindBy(xpath = "//div[contains(@class,'add-drug-slide-header')]/span[@class='subtitle'][not (contains(@class,'ng-hige'))]")
+	public WebElement addDrugDetailsPageHeading;
+	
+	@FindBy(xpath = "//input[@id='dosage-0']/following-sibling::label")
+	public WebElement firstDosageOption;
+	
 	public AddDrugDetails(WebDriver driver) {
 		super(driver);
-		PageFactory.initElements(driver, this);
-		//CommonUtility.waitForPageLoad(driver, addDrugDetailsPage, 10);
-		
-		//openAndValidate();
+		PageFactory.initElements(driver, this);	
+		openAndValidate();
 	}
 
 	@Override
 	public void openAndValidate() {
-
-		JSONObject jsonObject = new JSONObject();
-		for (String key : adddrugdetails.getExpectedData().keySet()) {
-			WebElement element = findElement(adddrugdetails.getExpectedData().get(key));
-			if (null != element) {
-			validate(element);
-			try {
-				jsonObject.put(key, element.getText());
-			} catch (JSONException e) {
-				
-				e.printStackTrace();
-			}
-
-		}
-	}
-		adddrugdetailsJson = jsonObject;
-
-		System.out.println("addnewdrugJson----->" + adddrugdetailsJson);
+		CommonUtility.waitForPageLoadNew(driver, addDrugDetailsPageHeading, 45);
+		validateNew(selectYourFrequencyDropdown);
+		validateNew(quantityField);
+		validateNew(firstDosageOption);
 	}
 
 	/*public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
@@ -74,25 +65,16 @@ public class AddDrugDetails extends UhcDriver {
 	}*/
 	public void selectDosage(String dosage){
 	
-		WebElement element = driver.findElement(By.xpath("//input[@value='"+dosage+"']/following-sibling::label"));
-		if(!element.isSelected()){
-			element.click();
-		}
+		WebElement drugDosage = driver.findElement(By.xpath("//input[@value='"+dosage+"']/following-sibling::label"));
+		drugDosage.click();
 	}
 
 	public void selectQnty(String qnty){
-		waitforElement(quantityField);
-		sendkeys(quantityField, qnty);
+		sendkeysNew(quantityField, qnty);
 	}
 
 	public void selectFrequency(String frquency){
-		Select options = new Select(selectYourFrequencyDropdown);
-		if(frquency.equalsIgnoreCase("Every 1 month")){
-			options.selectByValue("30");
-		}
-		if(frquency.equalsIgnoreCase("Every 3 months")){
-			options.selectByValue("90");
-		}
+		selectFromDropDownByText(driver, selectYourFrequencyDropdown, frquency);
 	}
 
 	public SavingsOppurtunity continueAddDrugDetailsModal() throws InterruptedException{
@@ -125,5 +107,16 @@ public class AddDrugDetails extends UhcDriver {
 	public void validateThePage(){
 		Assert.assertTrue(addDrugDetailsPage.isDisplayed());
 	}
-
+	public SavingsOppurtunity continueAddDrugDetailsModWithSaving() throws InterruptedException{
+		scrollToView(continueButton);
+		continueButton.click();
+		
+		return new SavingsOppurtunity(driver);
+		}
+	
+	public DrugCostEstimatorPage continueAddDrugDetailsModNoSaving() throws InterruptedException{
+		validateNew(continueButton);
+		continueButton.click();
+		return new DrugCostEstimatorPage(driver);
+		}
 }

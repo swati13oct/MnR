@@ -181,7 +181,7 @@ Feature:1.12-VBF-ACQ-To test OLE common tool flow in AARP site
       |   90210 | NO             | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                   |
 
        
-@oleVBF @oleVppAarp
+@oleVBF @oleVppUlayerSmoke
 Scenario Outline: OLE Landing from VPP Plan Summary
 Given the user is on AARP medicare acquisition site landing page
 When the user performs plan search using following information in the AARP site

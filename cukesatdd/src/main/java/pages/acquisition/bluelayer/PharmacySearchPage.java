@@ -159,6 +159,10 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='pharmacy-locator']//div[contains(@class,'col-md-12')]/*[contains(text(),'farmacia')]")
 	WebElement pharmacyBodyContentSpanish;
 	
+	@FindBy(xpath = "//div[@class='pharmacy-locator']//div[contains(@class,'col-md-12')]/*[contains(text(),'Ã¤Â½Â¿Ã§â€�Â¨Ã§Â¶Â²Ã¤Â¸Å Ã¥ï¿½ï¿½Ã¥â€ Å Ã¦ï¿½Å“Ã¥Â°â€¹Ã¨â€”Â¥Ã¦Ë†Â¿Ã¥â€™Å’Ã¨â€”Â¥Ã¦Ë†Â¿Ã¤Â½ï¿½Ã§Â½Â®Ã£â‚¬â€š')]")
+	WebElement pharmacyBodyContentChinese;
+	@FindBy(id = "createpdf_id")
+	WebElement resultAsPDF;
 	
 	@FindBy(xpath = "//*[@id='15ec5a30-0a71-4aaa-b7df-074986ec97a9_toolTip']/parent::p")
 	WebElement standardNetworkPharmacy;
@@ -197,13 +201,7 @@ public class PharmacySearchPage extends UhcDriver {
 	private WebElement MultiCOunty_CancelBtn;
 	
 
-	
-	@FindBy(xpath = "//div[@class='pharmacy-locator']//div[contains(@class,'col-md-12')]/*[contains(text(),'使用網上�  冊� �尋藥房和藥房� 置。')]")
-	WebElement pharmacyBodyContentChinese;
-		@FindBy(id = "createpdf_id")
-		WebElement resultAsPDF;
-	
-	
+
 	public PharmacySearchPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -244,22 +242,7 @@ public class PharmacySearchPage extends UhcDriver {
 		System.out.println("*****Zipcode, distance and County details are entered******");
 		Select dropdown = new Select(seletPlandropdown);
 		waitUntilSelectOptionsPopulated(dropdown);
-		/*List<WebElement> options;
-		options = dropdown.getOptions();
-		int counter = 0;
-		while (options.isEmpty()) {
-			if (counter <= 30) {
-				try {
-					Thread.sleep(2000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}
-				options = dropdown.getOptions();
-			} else
-				Assert.fail("Plans not populated!!!");
-		}*/
-	}
 	
 	public boolean isPlanYear() {		
 		if (!planYearList.isEmpty()) {
@@ -277,7 +260,8 @@ public class PharmacySearchPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		if (!loadingBlock.isEmpty()) {
-			CommonUtility.waitForElementToDisappear(driver, loadingBlock.get(0), 60);
+			waitforElementDisapper(By.className("loading-block"), 60);
+			//CommonUtility.waitForElementToDisappear(driver, loadingBlock.get(0), 60);
 		}
 		if (!validateNew(pharmacyCount)) {
 			Assert.fail("Pharmacies not displayed");
@@ -351,7 +335,8 @@ public boolean selectPharmacyandServices(String pharmacytype) {
 			}
 			if (!loadingBlock.isEmpty()) {
 				System.out.println("Waiting till loading spinner gets disappear");
-				CommonUtility.waitForElementToDisappear(driver, loadingBlock.get(0), 60);
+				waitforElementDisapper(By.className("loading-block"), 60);
+				//CommonUtility.waitForElementToDisappear(driver, loadingBlock.get(0), 60);
 			}
 			if (!driver.findElements(By.xpath("//label[contains(text(),'" + pharmacytype
 					+ "')]/preceding-sibling::input[contains(@class,'ng-dirty')]")).isEmpty()) {
@@ -658,11 +643,11 @@ public boolean selectPharmacyandServices(String pharmacytype) {
 			} else if (("zh").equalsIgnoreCase(language)) {
 				Assert.fail("Temporarily commented code. Please select Spanish or English!!!");
 				/*String headingText = pharmacylocatorheader.getText();
-				if (!headingText.contains("尋找藥房"))
+				if (!headingText.contains("Ã¥Â°â€¹Ã¦â€°Â¾Ã¨â€”Â¥Ã¦Ë†Â¿"))
 					return false;
 				if (!pharmacyBodyContentChinese.isDisplayed())
 					return false;
-				if (!btnContinue.getText().contains("繼續"))
+				if (!btnContinue.getText().contains("Ã§Â¹Â¼Ã§ÂºÅ’"))
 					return false;*/
 			} else {
 				Assert.fail("Please select a valid language!!!");

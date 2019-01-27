@@ -113,7 +113,7 @@ public abstract class UhcDriver {
 		System.out.println("Element not found/not visible");
 		}
 		} catch (Exception e) {
-		System.out.println("Exception: Element not found/not visible");
+		System.out.println("Exception: Element not found/not visible. Exception message - "+e.getMessage());
 
 		}
 		return false;
@@ -429,6 +429,7 @@ try {
 	 */
 	public void startNew(String url) {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.manage().window().maximize();
 		driver.get(url);
 	}
 
@@ -583,9 +584,40 @@ try {
 	 * 
 	 * @param element
 	 */
-	public void waitforElementDisapper(By by) {
-		WebDriverWait wait = new WebDriverWait(driver, 30);
+	public void waitforElementDisapper(By by, long timeout) {
+		System.out.println("Waiting for element to disappear!!!");
+		WebDriverWait wait = new WebDriverWait(driver, timeout);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
+
+	}
+	/***
+	 * Created by - agarg119
+	 * The method waits for 2 seconds (increasing timeout may affect execution performance) to validate element is not present on screen.
+	 * @param element
+	 * @return boolean 
+	 */
+	public boolean validateNonPresenceOfElement(WebElement element) {
+		try {
+			waitforElementVisibilityInTime(element, 2);
+
+		} catch (Exception e) {
+			System.out.println("Validation Passed !!! Element not visible on screen");
+			return true;
+		}
+		System.out.println("Validation failed!!! Element is visible on screen");
+		return false;
+	}
+	
+	/***
+	 * Created By - agarg119
+	 * the method waits for mentioned seconds till element gets visible before
+	 * throwing an exception
+	 * 
+	 * @param element
+	 */
+	public void waitforElementVisibilityInTime(WebElement element, long timeout) {
+		WebDriverWait wait = new WebDriverWait(driver, timeout);
+		wait.until(ExpectedConditions.visibilityOf(element));
 
 	}
 }
