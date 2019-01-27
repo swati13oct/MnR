@@ -66,22 +66,25 @@ public class RequestAgentApptStepDefinitionUHC {
 	
 	@Then("^the user fills the form out and submits the uhc agent appointment application$")
 	public void fillOutAndSubmitForm(DataTable attributes) {
+		if (!MRScenario.environment.equalsIgnoreCase("offline")) {
+			RequestAgentAppointmentPage requestAgentAppointmentPage = (RequestAgentAppointmentPage) getLoginScenario()
+					.getBean(PageConstants.REQUEST_AGENT_APPOINTMENT_PAGE);
+			List<DataTableRow> givenAttributesRow = attributes.getGherkinRows();
+			Map<String, String> givenAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < givenAttributesRow.size(); i++) {
 
-		RequestAgentAppointmentPage requestAgentAppointmentPage = (RequestAgentAppointmentPage) getLoginScenario()
-				.getBean(PageConstants.REQUEST_AGENT_APPOINTMENT_PAGE);
-		List<DataTableRow> givenAttributesRow = attributes.getGherkinRows();
-		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}
-		boolean isFormSubmitted = requestAgentAppointmentPage.submitAgentAppointment(givenAttributesMap);
-		if (isFormSubmitted) {
-			System.out.println("Successfully submitted the Appointment form");
-			Assert.assertTrue(true);
+				givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+						givenAttributesRow.get(i).getCells().get(1));
+			}
+			boolean isFormSubmitted = requestAgentAppointmentPage.submitAgentAppointment(givenAttributesMap);
+			if (isFormSubmitted) {
+				System.out.println("Successfully submitted the Appointment form");
+				Assert.assertTrue(true);
+			} else {
+				Assert.fail("Error submitting the form or loading the Confirmation page");
+			}
 		} else {
-			Assert.fail("Error submitting the form or loading the Confirmation page");
+			System.out.println("Skipping the submit functionality in Offline-Prod environment");
 		}
 
 	}
