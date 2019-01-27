@@ -1700,18 +1700,30 @@ try {
 		
 		public void switchToGenericDrug(String branddosage, String gendosage) throws InterruptedException{
 
-			WebElement switchNowLink = driver.findElement(By.xpath("//p[contains(text(), '"+ branddosage+"')]/ancestor::section//a[contains(text(), 'SWITCH NOW')]"));
+			//*[@id="generic-drug-switch-btn-1"]
+			System.out.println("branddosage=="+branddosage);
+			
+			System.out.println("gendosage=="+gendosage);
+			//WebElement switchNowLink = driver.findElement(By.xpath("//p[contains(text(), '"+ branddosage+"')]/ancestor::section//a[contains(text(), 'SWITCH NOW')]"));
 			//p[contains(text(), 'Exelon Transdermal Patch DIS 9.5MG/24')]/ancestor::section//a[contains(text(), 'SWITCH NOW')]
 			//CommonUtility.waitForPageLoad(driver, switchNowLink, 20);
-			waitForloader(driver, overlay, 30);
-			Thread.sleep(10000);
-driver.manage().window().maximize();
-			if (validate(switchNowLink)){
+			
+			Dimension dim = new Dimension(1280,1024);
+			driver.manage().window().setSize(dim);
+
+			
+				WebElement switchNowLink = driver.findElement(By.id("generic-drug-switch-btn-1"));
+				JavascriptExecutor js = (JavascriptExecutor)driver;
+				js.executeScript("arguments[0].click();", switchNowLink);
+				//switchNowLink.click();
+				//Thread.sleep(3000);
+			
+		/*	if (validate(switchNowLink)){
 				switchNowLink.click();
 
 			}	
 			else Assert.assertTrue("Unable to see switch now link", false);
-
+*/
 			CommonUtility.waitForPageLoad(driver, genericDrugText, 20);
 			//	waitForPageLoad(WebDriver driver, WebElement element, long timeout)
 
