@@ -11,17 +11,19 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import acceptancetests.util.CommonUtility;
 
+import acceptancetests.util.CommonUtility;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import atdd.framework.MRScenario;
@@ -1568,11 +1570,14 @@ try {
 	 * 
 	 */
 	public void clickSwitchNow() throws InterruptedException {
+		Dimension dim = new Dimension(1280,1024);
+		driver.manage().window().setSize(dim);
+
 		
 			WebElement switchNowLink = driver.findElement(By.id("generic-drug-switch-btn-0"));
-			Thread.sleep(500);
-			driver.manage().window().maximize();
-			switchNowLink.click();
+			JavascriptExecutor js = (JavascriptExecutor)driver;
+			js.executeScript("arguments[0].click();", switchNowLink);
+			//switchNowLink.click();
 			Thread.sleep(3000);
 
 			//switchToGenericHeadingsId
