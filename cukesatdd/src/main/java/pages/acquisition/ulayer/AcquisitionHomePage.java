@@ -766,7 +766,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public PharmacySearchPage navigateToPharmacyLocator() {
-		driver.manage().window().maximize();
 		Actions action = new Actions(driver);
 		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
 		pharmacylocator.click();
@@ -800,8 +799,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		actions.moveToElement(ourPlansHoverLink);
 		actions.moveToElement(moreHelpInfoLink);
 		actions.click().build().perform();
-
-		try {
+		CommonUtility.checkPageIsReadyNew(driver);
+		/*try {
 			if (zipCodeField.isDisplayed()) {
 				CommonUtility.waitForElementToDisappear(driver, zipCodeField, 20);
 			}
@@ -812,8 +811,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		} catch (Exception e) {
 			System.out.println("zipCodeField not found");
 		}
-
-		CommonUtility.waitForPageLoad(driver, requestAgentApptDropdown, 60);
+*/
+		CommonUtility.waitForPageLoadNew(driver, requestAgentApptDropdown, 60);
 		if (validateNew(requestAgentApptDropdown)) {
 			return new RequestHelpAndInformationPage(driver);
 		}

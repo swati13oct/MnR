@@ -5,15 +5,14 @@ package pages.acquisition.ulayer;
 
 import java.io.File;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.vbfacquisition.agentflow.RequestAgentAppointmentConstants;
 import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
@@ -35,16 +34,16 @@ public class AgentAppointmentConfirmationPage extends UhcDriver {
 	
 	public JSONObject agentConfirmationJson;
 
-	private PageData agentConfirmation;
 
 	public AgentAppointmentConfirmationPage(WebDriver driver) {
 		super(driver);
-		//openAndValidate();
+		PageFactory.initElements(driver, this);
+		openAndValidate();
 	}
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoad(driver, findPlansBtn,CommonConstants.TIMEOUT_30);
+
 		validateNew(findPlansBtn);
 	}
 
@@ -61,7 +60,6 @@ public class AgentAppointmentConfirmationPage extends UhcDriver {
 	
 	public boolean validateConfirmationPage(){
 		CommonUtility.waitForPageLoad(driver, confirmationHeader,CommonConstants.TIMEOUT_30);
-		//System.out.println("text:"+confirmationHeader.getText());
 		if(validate(rightRail))//.getText().contains("Thank You for Your Appointment Request"))
 			return true;
 		return false;

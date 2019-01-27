@@ -3,16 +3,11 @@
  */
 package pages.acquisition.bluelayer;
 
-import java.util.Set;
-
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
@@ -28,10 +23,13 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 	@FindBy(xpath =".//*[@id='article_mededaccordion2']//*[contains(text(),'Find UnitedHealthcare')]")
 	private WebElement communityMeetingLink;
 	
-	@FindBy(xpath =".//*[@id='collapse2heading_article_mededaccordion0']")
+	@FindBy(xpath =".//*[@id='collapse2heading_article_mededaccordion0']/a")
 	private WebElement requestAgentApptDropdown;
 	
-	@FindBy(xpath =".//*[@id='collapse2heading_article_mededaccordion2']")
+	@FindBy(xpath = ".//*[@id='collapse2heading_article_mededaccordion1']/a")
+	private WebElement pdpInquityDropdown;
+	
+	@FindBy(xpath =".//*[@id='collapse2heading_article_mededaccordion2']/a")
 	private WebElement communityMeetingDropdown;
 	
 	@FindBy(xpath =".//*[@id='ghn_lnk_1']")
@@ -40,28 +38,38 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 	@FindBy(xpath =".//*[@id='ym-first_name']")
 	private WebElement firstNameField;
 	
+	@FindBy(id = "zipcodemeded")
+	private WebElement zipCodeMedEd;
+	
+	@FindBy(id = "lookzip")
+	private WebElement lookUpZipLink;
+	
+	@FindBy(xpath = "//input[@id='zipcodemeded']/following-sibling::button[contains(@class,'zip-button')]")
+	private WebElement findPlansBtnMedEd;
+	
 	public RequestHelpAndInformationPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-
+		openAndValidate();
 	}
 
 	@Override
 	public void openAndValidate() {
-		validate(ma_requestAgentAppointmentLink);
+		validateNew(pdpInquityDropdown);
+		validateNew(zipCodeMedEd);
+		validateNew(lookUpZipLink);
 		
 	}
 	
 	public RequestAgentAppointmentPage navigateToAgentAppointmentRequest()
 	{
-		CommonUtility.waitForPageLoad(driver, requestAgentApptDropdown, 50);
-		requestAgentApptDropdown.click();
-		CommonUtility.waitForPageLoad(driver, ma_requestAgentAppointmentLink, 50);
-		//switchToNewTabNew(ma_requestAgentAppointmentLink);
+		if (requestAgentApptDropdown.getAttribute("class").contains("collapsed")) {
+			requestAgentApptDropdown.click();
+		}
+		validateNew(ma_requestAgentAppointmentLink);
 		ma_requestAgentAppointmentLink.click();
-		
-		if(currentUrl().contains("agentebrc"))
-		{
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (currentUrl().contains("agentebrc")) {
 			return new RequestAgentAppointmentPage(driver);
 		}
 		

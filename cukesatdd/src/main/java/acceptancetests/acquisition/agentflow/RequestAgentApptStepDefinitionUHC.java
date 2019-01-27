@@ -69,22 +69,42 @@ public class RequestAgentApptStepDefinitionUHC {
 	}
 	
 	@Then("^the user fills the form out and submits the uhc agent appointment application$")
-	public void fillOutAndSubmitForm(DataTable attributes){
-		
-			RequestAgentAppointmentPage requestAgentAppointmentPage = (RequestAgentAppointmentPage) getLoginScenario().getBean(PageConstants.REQUEST_AGENT_APPOINTMENT_PAGE);
-			List<DataTableRow> givenAttributesRow = attributes.getGherkinRows();
-			Map<String, String> givenAttributesMap = new HashMap<String, String>();
-			for (int i = 0; i < givenAttributesRow.size(); i++) {
+	public void fillOutAndSubmitForm(DataTable attributes) {
+
+		RequestAgentAppointmentPage requestAgentAppointmentPage = (RequestAgentAppointmentPage) getLoginScenario()
+				.getBean(PageConstants.REQUEST_AGENT_APPOINTMENT_PAGE);
+		List<DataTableRow> givenAttributesRow = attributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		boolean isFormSubmitted = requestAgentAppointmentPage.submitAgentAppointment(givenAttributesMap);
+		if (isFormSubmitted) {
+			System.out.println("Successfully submitted the Appointment form");
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Error submitting the form or loading the Confirmation page");
+		}
+
+	}
 	
-				givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-						givenAttributesRow.get(i).getCells().get(1));
-			}
-			AgentAppointmentConfirmationPage agentConfirmationPage = requestAgentAppointmentPage.submitAgentAppointment(givenAttributesMap);
-			if(agentConfirmationPage != null){
-				System.out.println("Successfully submitted the Appointment form");
-			}else{
-				Assert.fail("Error submitting the form or loading the Confirmation page");
-			}
+	/**
+	 * @todo : user navigates to request appointment with an agent in 
+	 */
+	@Then("^user validates error messages on submitting blank form on UHC site$")
+	public void user_validates_error_messages_on_submitting_blank_form_uhc()
+	{
+		RequestAgentAppointmentPage requestAgentAppointmentPage = (RequestAgentAppointmentPage) getLoginScenario().getBean(PageConstants.REQUEST_AGENT_APPOINTMENT_PAGE);
+		requestAgentAppointmentPage.SubmitForm();
+		boolean errorMessageValidated = requestAgentAppointmentPage.validateErrorMessages();
+		if(errorMessageValidated){
+			Assert.assertTrue(errorMessageValidated);
+		}else{
+			Assert.fail("Error in loading error messages");
+		}
 		
 	}
+	
 }
