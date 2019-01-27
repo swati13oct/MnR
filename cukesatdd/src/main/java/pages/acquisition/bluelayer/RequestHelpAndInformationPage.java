@@ -3,6 +3,8 @@
  */
 package pages.acquisition.bluelayer;
 
+import java.util.Set;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -35,7 +37,7 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 	@FindBy(xpath =".//*[@id='ghn_lnk_1']")
 	private WebElement homeTab;
 	
-	@FindBy(xpath =".//*[@id='ym-first_name']")
+	@FindBy(xpath =".//*[@id='firstName']")
 	private WebElement firstNameField;
 	
 	@FindBy(id = "zipcodemeded")
@@ -46,6 +48,9 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 	
 	@FindBy(xpath = "//input[@id='zipcodemeded']/following-sibling::button[contains(@class,'zip-button')]")
 	private WebElement findPlansBtnMedEd;
+	
+	@FindBy(xpath = ".//*[@id='article_mededaccordion1']//*[contains(text(),'Information')]")
+	private WebElement pdpEnquiryKitLink;
 	
 	public RequestHelpAndInformationPage(WebDriver driver) {
 		super(driver);
@@ -92,4 +97,38 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 			return true;
 		return false;
 	}
+	
+	public PDPEnrollementGuidePage navigatesToPdpEnquiryKit() {
+		validateNew(pdpInquityDropdown);
+		if (pdpInquityDropdown.getAttribute("class").contains("collapsed")) {
+			pdpInquityDropdown.click();
+		}
+		validateNew(pdpEnquiryKitLink);
+		pdpEnquiryKitLink.click();
+		
+		//applying hard timeout here to give it couple of seconds to launch the second tab
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+		String mainwindow=driver.getWindowHandle();
+
+		Set<String> allWindowHandles = driver.getWindowHandles();
+		for (String currentWindowHandle : allWindowHandles) {
+			if (!currentWindowHandle.equals(mainwindow)) {
+				driver.switchTo().window(currentWindowHandle);
+			}
+		}
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, firstNameField, 60);
+		if(firstNameField.isDisplayed() && currentUrl().contains("inquirykit")){
+			return new  PDPEnrollementGuidePage(driver);
+		}
+		return null;
+		
+		
+	}
+
 }

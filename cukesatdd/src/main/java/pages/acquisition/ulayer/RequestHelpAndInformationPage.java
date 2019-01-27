@@ -3,6 +3,8 @@
  */
 package pages.acquisition.ulayer;
 
+import java.util.Set;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -104,17 +106,36 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 	}
 	
 	public PDPEnrollementGuidePage navigatesToPdpEnquiryKit() {
-		CommonUtility.waitForPageLoad(driver, pdpInquityDropdown, 50);
-		pdpInquityDropdown.click();
-		CommonUtility.waitForPageLoad(driver, pdpEnquiryKitLink, 50);
+		validateNew(pdpInquityDropdown);
+		if (pdpInquityDropdown.getAttribute("class").contains("collapsed")) {
+			pdpInquityDropdown.click();
+		}
+		validateNew(pdpEnquiryKitLink);
 		pdpEnquiryKitLink.click();
-		CommonUtility.waitForPageLoad(driver, firstNameField, 50);
-		if(validateNew(firstNameField)){
-			return new  PDPEnrollementGuidePage(driver);
+
+		// applying hard timeout here to give it couple of seconds to launch the second
+		// tab
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		String mainwindow = driver.getWindowHandle();
+
+		Set<String> allWindowHandles = driver.getWindowHandles();
+		for (String currentWindowHandle : allWindowHandles) {
+			if (!currentWindowHandle.equals(mainwindow)) {
+				driver.switchTo().window(currentWindowHandle);
+			}
+		}
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, firstNameField, 60);
+		if (firstNameField.isDisplayed()) {
+			return new PDPEnrollementGuidePage(driver);
 		}
 		return null;
-		
-		
+
 	}
 
 	public boolean landingOnCommunityPage() {
