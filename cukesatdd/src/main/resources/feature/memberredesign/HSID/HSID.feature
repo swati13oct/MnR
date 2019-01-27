@@ -1,8 +1,8 @@
-@aprilRelease2018  @regressionMember
+@hsid @regressionMember
 Feature:To test HSID registration flow
 
  
-   @US968241 @hsidregistration 
+   @hsid1 @US968241 @hsidregistration 
    Scenario Outline:Verify HSID registration.
      Given the user connect to DB
      And the user select record from database
@@ -61,7 +61,7 @@ Feature:To test HSID registration flow
     | Medica  |  Individual  |  NON LIS      | CBCCA     | FECBC           | 01/01/1942          | 912020922-1 | 33125	 |q2_jun_sofl0005      | Password@1 | codetransformers@gmail.com      | number1   | name1     | color1    |
     | PCP     |  Individual  |  NON LIS      | ECCFF     | DBCAADBCAE      | 04/07/1952          | 965421538-1 | 33435	 |q2_jun_sofl0009      | Password@1 | codetransformers@gmail.com      | number1   | name1     | color1    |
     
-   @AssistiveRegistration @US968323 
+    @hsid2 @AssistiveRegistration @US968323 
    Scenario Outline:Verify HSID assistive registration.
    Given the user connect to DB
     And the user select record from database
@@ -107,7 +107,7 @@ Feature:To test HSID registration flow
    | MAPD    |  Individual  |  NON LIS       |AUTO_q2_apr_uhc100   | Password@1 | codetransformers@gmail.com | number1   | name1     | color1    |
    
    
-   @Login @US968315
+   @hsid2 @Login @US968315
    Scenario Outline:Verify HSID login functionality.
    Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>  |
@@ -123,7 +123,7 @@ Feature:To test HSID registration flow
    | MAPDGroup|  Individual  |  NON LIS      | 
    
    
-@validateStep1 @US968241
+		@hsid3 @validateStep1 @US968241
     Scenario Outline:Verify feilds in HSID registration Step 1 page.
     Given the user is on medicare sign in page
     When the user clicks on Register now link
@@ -143,7 +143,7 @@ Examples:
    | MAPD    |  Individual  |  NON LIS         | BBABFAD   | BEDD            | 09/17/1946            | 002238311-1    | 92024	 |AUTO_q2_apr_uhc100     | Password@1 | codetransformers@gmail.com     | number1   | name1     | color1    |
    
    
-  @codetransformers
+  @hsid4 @codetransformers
   Scenario Outline: To verify that iperception smiley survey is displayed on medicare.uhc.com signin pages
     Given User is on the sign-in page of medicare.uhc.com of the environment mentioned in config file
       | URL | <appendinURL> |
@@ -156,7 +156,7 @@ Examples:
       | aarp        |
       | retiree     |
 
-  @codetransformers
+  @hsid5 @codetransformers
   Scenario Outline: To verify that iperception smiley survey is displayed on mymedicareaccount.uhc.com signin pages
     Given User is on the sign-in page of mymedicareaccount.uhc.com of the environment mentioned in config file
       | URL | <appendinURL> |

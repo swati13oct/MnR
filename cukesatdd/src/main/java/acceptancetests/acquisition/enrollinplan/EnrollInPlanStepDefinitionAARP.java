@@ -116,13 +116,7 @@ public class EnrollInPlanStepDefinitionAARP {
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
 		VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage(wd);
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, wd);
-		plansummaryPage = plansummaryPage.viewPlanSummary(plantype);
-
-		if (plansummaryPage != null) {
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
-					plansummaryPage);
-
-		}
+		plansummaryPage.viewPlanSummary(plantype);
 	}
 
 	/**

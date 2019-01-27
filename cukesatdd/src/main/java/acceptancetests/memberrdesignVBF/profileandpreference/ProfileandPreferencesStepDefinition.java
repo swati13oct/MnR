@@ -97,7 +97,7 @@ public class ProfileandPreferencesStepDefinition {
 		ProfilePreferencesPage ProfilePreferencesPage = (pages.memberrdesignVBF.ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstants.ProfilePreferencesPage);
 
-		ProfilePreferencesPage.validateSavePreferences();
+		//ProfilePreferencesPage.validateSavePreferences();
 
 	}
 

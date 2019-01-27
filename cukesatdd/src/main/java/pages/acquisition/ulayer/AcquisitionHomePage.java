@@ -23,6 +23,7 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
+import junit.framework.Assert;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
@@ -174,12 +175,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(className = "textalign")
 	private WebElement countyModal1;
 
-	/*
-	 * @FindBys(value = { @FindBy(xpath =
-	 * "//table[@id='selectcountytable']/tbody/tr/td") }) List<WebElement>
-	 * countyRows;
-	 */
-
 	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
 	private WebElement OurPlans;
 
@@ -191,6 +186,19 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath = "(//*[@class='zip-button'])[2]")
 	private WebElement GoButton;
+	
+	@FindBy(id = "cobrowse-disclaimer")
+	private WebElement requestAssistanceModal;
+	
+	@FindBy(xpath = "//div[@id='cobrowse-disclaimer']//*[contains(@class,'modal-title')]")
+	private WebElement requestAssistanceTitle;
+	
+	@FindBy(id = "correlationId")
+	private WebElement requestAssistanceAgentID;
+	
+	@FindBy(xpath = "//a[contains(@class,'closer')]")
+	private WebElement requestAssistanceClose;
+	
 
 	private static String TeamC_ACQUISITION_PAGE_URL = MRConstants.TeamC_UHC_URL;
 
@@ -231,6 +239,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		openAndValidate();
 	}
 
+	public AcquisitionHomePage(WebDriver driver, boolean alreadyOnSite) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		openAndValidate(alreadyOnSite);
+	}
+	
 	public JSONObject accessingGlobalHeader() {
 
 		String fileName = CommonConstants.GLOBAL_HEADER_PAGE_DATA;
@@ -240,7 +254,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		for (String key : globalHeader.getExpectedData().keySet()) {
 			WebElement element = findElement(globalHeader.getExpectedData().get(key));
 			if (element != null) {
-				if (validate(element)) {
+				if (validateNew(element)) {
 					try {
 						jsonObject.put(key, element.getText());
 					} catch (JSONException e) {
@@ -264,25 +278,37 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			start(AARP_ACQISITION_PAGE_URL);
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
+		checkModelPopup(driver);
 		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
+		if(proactiveChatExistBtn.size()!=0)
+			jsClickNew(proactiveChatExistBtn.get(0));
 	}
 
+	@SuppressWarnings("deprecation")
+	public void openAndValidate(boolean alreadyOnSite) {
+		if (alreadyOnSite) {
+			
+		CommonUtility.checkPageIsReadyNew(driver);
+		checkModelPopup(driver);
+		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 45);
+		if(proactiveChatExistBtn.size()!=0)
+			jsClickNew(proactiveChatExistBtn.get(0));
+		}
+		else {
+			Assert.fail("Please check booleanvalue");
+		}
+		
+	}
+	
 	public VPPPlanSummaryPage searchPlans(String zipcode, String countyName) {
 
-		CommonUtility.waitForPageLoad(driver, zipCodeField, 30);
+		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
 		sendkeys(zipCodeField, zipcode);
 
 		viewPlansButton.click();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		try {
-			if (countyModal.isDisplayed()) {
+		CommonUtility.waitForPageLoad(driver, countyModal, 45);
 				driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
-			}
-		} catch (Exception e) {
-			System.out.println("county box not found");
-		}
-		CommonUtility.waitForPageLoad(driver, vppTop, 30);
-		validate(vppTop);
+		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
 		}
@@ -342,7 +368,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		for (String key : globalFooter.getExpectedData().keySet()) {
 			WebElement element = findElement(globalFooter.getExpectedData().get(key));
 			if (element != null) {
-				if (validate(element)) {
+				if (validateNew(element)) {
 					try {
 						jsonObject.put(key, element.getText());
 					} catch (JSONException e) {
@@ -358,14 +384,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public AcquisitionHomePage veiwAllDisclaimerLinkSectionLinksClick() {
-		validate(GlobalWebElements.viewAllDisclaimerInformationLink);
-		GlobalWebElements.viewAllDisclaimerInformationLink.click();
+		validateNew(viewAllDisclaimerInformationLink);
+		viewAllDisclaimerInformationLink.click();
 
-		validate(GlobalWebElements.disclaimerBackToTopLink);
-		GlobalWebElements.disclaimerBackToTopLink.click();
+		validateNew(disclaimerBackToTopLink);
+		disclaimerBackToTopLink.click();
 
-		validate(GlobalWebElements.hideDiscliamerInformation);
-		GlobalWebElements.hideDiscliamerInformation.click();
+		validateNew(hideDiscliamerInformation);
+		hideDiscliamerInformation.click();
 
 		if (getTitle().equalsIgnoreCase("Medicare Plans | AARP® Medicare Plans from UnitedHealthcare®")) {
 			return new AcquisitionHomePage(driver);
@@ -374,13 +400,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public Boolean visitAARPOrgClick() {
-		validate(GlobalWebElements.visitAARPLink);
-		GlobalWebElements.visitAARPLink.click();
-		validate(GlobalWebElements.visitAARPLink);
+		validateNew(visitAARPLink);
+		visitAARPLink.click();
+		validateNew(visitAARPLink);
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(1));
 		if (getTitle().equalsIgnoreCase("You are now leaving AARPMedicarerx.com")) {
-			GlobalWebElements.proceedLink.click();
+			proceedLink.click();
 			if (driver.getCurrentUrl().equals("http://www.aarp.org/")) {
 				return true;
 
@@ -390,24 +416,24 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public Boolean validate_alreadyPlanMemberButton_inactive() {
-		return validate(alreadyPlanMemberButtonInactive);
+		return validateNew(alreadyPlanMemberButtonInactive);
 
 	}
 
 	public Boolean validate_alreadyPlanMemberButton_active() {
-		validate(alreadyPlanMemberButton);
+		validateNew(alreadyPlanMemberButton);
 		alreadyPlanMemberButton.click();
-		return validate(alreadyPlanMemberButtonActive);
+		return validateNew(alreadyPlanMemberButtonActive);
 
 	}
 
 	public Boolean validate_textField() {
 
-		validate(usernameField);
+		validateNew(usernameField);
 		usernameField.click();
 		usernameField.sendKeys("q1ulayer");
 		String user = usernameField.getAttribute("value");
-		validate(passwordField);
+		validateNew(passwordField);
 		passwordField.click();
 		passwordField.sendKeys("Password");
 		String pass = passwordField.getAttribute("value");
@@ -418,9 +444,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public AcquisitionHomePage navigationSectionHomeLinkClick() {
-		validate(navigationSectionHomeLink);
+		validateNew(navigationSectionHomeLink);
 		navigationSectionHomeLink.click();
-		validate(navigationSectionHomeLink);
+		validateNew(navigationSectionHomeLink);
 		if (getTitle().equalsIgnoreCase("Medicare Plans | AARP® Medicare Plans from UnitedHealthcare®")) {
 			return new AcquisitionHomePage(driver);
 		}
@@ -429,7 +455,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public Boolean navigationSectionEnterSearchClick() {
-		validate(navigationSectionEnterSearch);
+		validateNew(navigationSectionEnterSearch);
 		navigationSectionEnterSearch.click();
 		navigationSectionEnterSearch.sendKeys("home");
 		String search = navigationSectionEnterSearch.getAttribute("value");
@@ -441,12 +467,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public Boolean enterInvalidUserNamePassword() {
-		validate(usernameField);
+		validateNew(usernameField);
 		usernameField.click();
 		usernameField.sendKeys("");
 		// usernameField.sendKeys(givenAttributesRow.get(0).getCells().get(0));
 		String user = usernameField.getAttribute("value");
-		validate(passwordField);
+		validateNew(passwordField);
 		passwordField.click();
 		passwordField.sendKeys("pas");
 		// passwordField.sendKeys(givenAttributesRow.get(0).getCells().get(1));
@@ -458,19 +484,19 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public Boolean checkErrorMessage() {
-		validate(signInButton);
+		validateNew(signInButton);
 		signInButton.click();
-		validate(signInButton);
-		return validate(alreadyMemberInvalidCredsErrorMessage);
+		validateNew(signInButton);
+		return validateNew(alreadyMemberInvalidCredsErrorMessage);
 	}
 
 	public Boolean enterValidUserNamePassword() {
-		validate(usernameField);
+		validateNew(usernameField);
 		usernameField.click();
 		usernameField.sendKeys("q3ulayer_090");
 		// usernameField.sendKeys(givenAttributesRow.get(0).getCells().get(0));
 		String user = usernameField.getAttribute("value");
-		validate(passwordField);
+		validateNew(passwordField);
 		passwordField.click();
 		passwordField.sendKeys("Password@1");
 		// passwordField.sendKeys(givenAttributesRow.get(0).getCells().get(1));
@@ -482,7 +508,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public void hoverourplanslink() {
-		validate(OurPlansLink1);
+		validateNew(OurPlansLink1);
 		// Hover over text
 		Actions action = new Actions(driver);
 		PageFactory.initElements(driver, this);
@@ -491,16 +517,16 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		// to click
 		// action.click().build().perform();
 
-		validate(OurPlansLink1);
+		validateNew(OurPlansLink1);
 
 		// TODO Auto-generated method stub
 
 	}
 
 	public AcquisitionHomePage findplansbuttonclick() {
-		validate(FindPlansButton1);
+		validateNew(FindPlansButton1);
 		FindPlansButton1.click();
-		validate(FindPlansButton1);
+		validateNew(FindPlansButton1);
 		if (getTitle().equalsIgnoreCase("Medicare Plans | AARP® Medicare Plans from UnitedHealthcare®")) {
 			return new AcquisitionHomePage(driver);
 		}
@@ -522,14 +548,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public Boolean cookieValid() {
-		validate(signInButton);
+		validateNew(signInButton);
 		signInButton.click();
-		// validate(signInButton);
+		// validateNew(signInButton);
 		Alert alert = driver.switchTo().alert();
 		alert.dismiss();
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(1));
-		validate(myPlansTab);
+		validateNew(myPlansTab);
 		if (getCookieName("membervisited") != null) {
 			driver.switchTo().window(tabs.get(0));
 			if (getCookieName("membervisited") != null) {
@@ -542,7 +568,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public Boolean alreadyMemberActiveValid() {
 
-		validate(signInButton);
+		validateNew(signInButton);
 		String timerId = alreadyPlanMemberButtonInactive.getAttribute("id");
 		if (timerId.contains("cookie")) {
 			if (cookieValid()) {
@@ -551,7 +577,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				String timerString = parts[1];
 				int timer = Integer.parseInt(timerString);
 				if (timer > 0) {
-					return validate(signInButton);
+					return validateNew(signInButton);
 				}
 			}
 		} else if (timerId.contains("visitor")) {
@@ -559,7 +585,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			String timerString = parts[1];
 			int timer = Integer.parseInt(timerString);
 			if (timer > 0) {
-				return validate(signInButton);
+				return validateNew(signInButton);
 			}
 
 		}
@@ -568,7 +594,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public Boolean cookieTimerValid() {
 		driver.navigate().refresh();
-		validate(signInButton);
+		validateNew(signInButton);
 		String timerId = alreadyPlanMemberButtonInactive.getAttribute("id");
 		if (timerId.contains("cookie") || timerId.contains("visitor")) {
 			String[] parts = timerId.split("-");
@@ -581,11 +607,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				e.printStackTrace();
 			}
 		}
-		return validate(signInButton);
+		return validateNew(signInButton);
 	}
 
 	public Boolean stopTimerValid() {
-		validate(signInButton);
+		validateNew(signInButton);
 		String timerId = alreadyPlanMemberButtonInactive.getAttribute("id");
 		if (timerId.contains("cookie")) {
 			if (cookieValid()) {
@@ -597,7 +623,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				usernameField.click();
 				try {
 					Thread.sleep(timer);
-					return validate(signInButton);
+					return validateNew(signInButton);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -609,7 +635,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			int timer = Integer.parseInt(timerString);
 			try {
 				Thread.sleep(timer);
-				return validate(signInButton);
+				return validateNew(signInButton);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -620,7 +646,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public void hoverhealthandwellnesslink() {
 
-		validate(hoverhealthandwellnesslink);
+		validateNew(hoverhealthandwellnesslink);
 		// Hover over text
 		Actions action = new Actions(driver);
 		PageFactory.initElements(driver, this);
@@ -646,7 +672,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		for (String key : healthandwellnessdropdown.getExpectedData().keySet()) {
 			WebElement element = findElement(healthandwellnessdropdown.getExpectedData().get(key));
 			if (element != null) {
-				if (validate(element)) {
+				if (validateNew(element)) {
 					try {
 						jsonObject.put(key, element.getText());
 					} catch (JSONException e) {
@@ -685,10 +711,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public VPPPlanSummaryPage searchPlansWithOutCounty(String zipcode) {
+		
+		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
 		sendkeys(zipCodeField, zipcode);
+
 		viewPlansButton.click();
-		if (driver.getTitle()
-				.equalsIgnoreCase("Our Medicare Plan Types | AARP® Medicare Plans from UnitedHealthcare®")) {
+		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
 		}
 		return null;
@@ -800,54 +829,125 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public AboutUsAARPPage aboutUsFooterClick() {
-		validate(GlobalWebElements.footerAboutUsLink);
-		GlobalWebElements.footerAboutUsLink.click();
-		validate(GlobalWebElements.footerAboutUsLink);
-
-		if (getTitle().equalsIgnoreCase("About UnitedHealthcare® | AARP® Medicare Plans from UnitedHealthcare")) {
+		validateNew(footerAboutUsLink);
+		footerAboutUsLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (getTitle().contains("About UnitedHealthcare")) {
 			return new AboutUsAARPPage(driver);
 		}
 		return null;
 	}
 
-	public boolean validateFooterLinks(JSONObject jsonObj) {
-		boolean flag = true;
+	public void validateFooterLinks() {
+		validateNew(footerHomeLink);
+		validateNew(footerAboutUsLink);
+		validateNew(footerContactUsLink);
+		validateNew(footerSiteMapLink);
+		validateNew(footerPrivacyPolicyLink);
+		validateNew(footerTermsnConditionsLink);
+		validateNew(footerDisclaimersLink);
+		validateNew(footerAgentsnBrokersLink);
+		validateNew(footerRequestforAssistancelink);
+		validateNew(footerAccessibilitylink);
+		validateNew(aarpOrgLink);
+		validateNew(medicareAdvantagePlansLink);
+		validateNew(medicareSupplementInsurancePlansLink);
+		validateNew(medicarePrescriptionDrug_PlansLink);
+		validateNew(learnAboutMedicareLink);
+		validateNew(viewAllDisclaimerInformationLink);
 
-		try {
-			if (!jsonObj.get("footerPrivacyPolicyLink").equals("Privacy Policy"))
-				flag = false;
-			if (!jsonObj.get("footerDisclaimersLink").equals("Disclaimers"))
-				flag = false;
-			if (!jsonObj.get("footerHomeLink").equals("Home"))
-				flag = false;
-			if (!jsonObj.get("footerContactUsLink").equals("Contact Us"))
-				flag = false;
-			if (!jsonObj.get("footerAgentsnBrokersLink").equals("Agents & Brokers"))
-				flag = false;
-			if (!jsonObj.get("footerAboutUsLink").equals("About Us"))
-				flag = false;
-			if (!jsonObj.get("footerSiteMapLink").equals("Site Map"))
-				flag = false;
-			if (!jsonObj.get("footerTermsofUseLink").equals("Terms of Use"))
-				flag = false;
-
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return flag;
 	}
 
+	public ContactUsAARPPage contactUsFooterClick() {
+		validateNew(footerContactUsLink);
+		footerContactUsLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("contact-us")) {
+			return new ContactUsAARPPage(driver);
+		}
+		return null;
+	}
+	
+	public SiteMapAARPPage siteMapFooterClick() {
+		validateNew(footerSiteMapLink);
+		footerSiteMapLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("sitemap.html")){
+			return new SiteMapAARPPage(driver);
+		}
+		return null;
+	}
+	
+	public PrivacyPolicyAARPPage privacypolicyFooterClick() {
+		validateNew(footerPrivacyPolicyLink);
+		footerPrivacyPolicyLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("privacy_policy.html")) {
+			return new PrivacyPolicyAARPPage(driver);
+		}
+		return null;
+	}
+
+	public TermsnConditionsAARPPage termsnconditionsFooterClick() {
+		validate(footerTermsnConditionsLink);
+		footerTermsnConditionsLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("terms_and_conditions")) {
+			return new TermsnConditionsAARPPage(driver);
+		}
+		return null;
+	}
+	
+	public DisclaimersAARPPage disclaimersFooterClick() {
+		validate(footerDisclaimersLink);
+		footerDisclaimersLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("disclaimer")) {
+			return new DisclaimersAARPPage(driver);
+		}
+		return null;
+	}
+	
+	public AgentsnBrokersAARPPage agentsnbrokersFooterClick() {
+		validate(footerAgentsnBrokersLink);
+		footerAgentsnBrokersLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if(driver.getCurrentUrl().contains("health-insurance-brokers")){
+			return new AgentsnBrokersAARPPage(driver);
+		}
+		return null;
+	}
+	
+	public AcquisitionHomePage homeFooterClick() {
+		validateNew(footerHomeLink);
+		footerHomeLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (validateNew(zipCodeField)) {
+			return new AcquisitionHomePage(driver, true);
+		}
+		return null;
+	}
+	
+	public void clickRequestAsistancce() {
+		validateNew(footerRequestforAssistancelink);
+		if(proactiveChatExistBtn.size()!=0)
+			proactiveChatExistBtn.get(0).click();
+		footerRequestforAssistancelink.click();
+		CommonUtility.waitForPageLoadNew(driver, requestAssistanceModal, 30);
+		validateNew(requestAssistanceTitle);
+		validateNew(requestAssistanceAgentID);
+		requestAssistanceClose.click();
+		waitforElementDisapper(By.id("cobrowse-disclaimer"));
+	}
 	public boolean validateSomeElementsOnPage() {
-		if (validate(zipCodeField) && validate(findPlansButton) && validate(lookzip))
+		if (validateNew(zipCodeField) && validateNew(findPlansButton) && validateNew(lookzip))
 			return true; // if all three
 		return false;
 
 	}
 
 	public boolean validateAllElementsOnPage() {
-		if (!validate(zipCodeField) && !validate(findPlansButton) && !validate(lookzip))
+		if (!validateNew(zipCodeField) && !validateNew(findPlansButton) && !validateNew(lookzip))
 			return false; // if all three elements return false for validation
 							// then this condition passes due to ! and returns
 							// false meaning all three elements were not found
@@ -983,9 +1083,29 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		return null;
 	}
-	public VPPPlanSummaryPage ValidateMultiCOuntyPopUp(String zipcode) {
-		
-		CommonUtility.waitForPageLoad(driver, zipCodeField, 30);
+	public static void checkModelPopup(WebDriver driver) {
+		int counter = 0;
+		do {
+
+
+
+			System.out.println("current value of conter: " + counter);
+			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
+
+			if (IPerceptionsFrame.isEmpty()) {
+				try {
+					Thread.sleep(5000);
+				} catch (InterruptedException e) {
+					System.out.println(e.getMessage());
+				}
+			} else {
+				driver.switchTo().frame(IPerceptionsFrame.get(0));
+				driver.findElement(By.className("btn-no")).click();
+				driver.switchTo().defaultContent();
+			}
+			counter++;
+		} while (counter < 2);
+	}	public VPPPlanSummaryPage ValidateMultiCOuntyPopUp(String zipcode) {		CommonUtility.waitForPageLoad(driver, zipCodeField, 30);
 		sendkeys(zipCodeField, zipcode);
 
 		viewPlansButton.click();
@@ -1008,6 +1128,5 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			return new VPPPlanSummaryPage(driver);
 		}
 		return null;
-	}
-
+	}		
 }
