@@ -109,7 +109,7 @@ public class AuthorizationPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoad(driver, PageHeader,30);
+		CommonUtility.waitForPageLoadNew(driver, PageHeader,30);
 		if(PageHeader.getText().contains("Authorizations"))
 			System.out.println("Page header is Displayed : "+PageHeader.getText());
 		else
@@ -166,9 +166,10 @@ public class AuthorizationPage extends UhcDriver{
 	}
 
 	public ReviewSubmitPage navigate_to_Review_Submit_Page() {
-		validate(NextBtn);
-		JavascriptExecutor executor = (JavascriptExecutor)driver;
-		executor.executeScript("arguments[0].click();", NextBtn);
+		validateNew(NextBtn);
+		jsClickNew(NextBtn);
+		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", NextBtn);*/
 		
 		
 		if(driver.getCurrentUrl().contains("review")){

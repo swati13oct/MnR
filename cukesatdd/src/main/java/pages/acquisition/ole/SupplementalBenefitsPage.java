@@ -63,16 +63,16 @@ public class SupplementalBenefitsPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoad(driver, ridersNoBtn, 30);
-		validateNew(ridersNoBtn);
-		validate(PageHeader);
+		CommonUtility.waitForPageLoadNew(driver, ridersNoBtn, 30);
+		validateNew(PageHeader);
 		System.out.println("Page header is Displayed"+PageHeader.getText());	
 	}
 
 	public AuthorizationPage navigate_to_Authorization_Page() {
-		validate(NextBtn);
-		JavascriptExecutor executor = (JavascriptExecutor)driver;
-		executor.executeScript("arguments[0].click();", NextBtn);
+		validateNew(NextBtn);
+		jsClickNew(NextBtn);
+		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", NextBtn);*/
 		
 		if(driver.getCurrentUrl().contains("authorization")){
 			System.out.println("OLE Authorization page is Displayed : Navigation from Optional Benefits Page Passed");
