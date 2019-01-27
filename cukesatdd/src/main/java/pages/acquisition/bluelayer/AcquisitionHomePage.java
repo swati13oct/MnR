@@ -240,7 +240,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
-		driver.manage().window().maximize();
 	}
 	
 	public AcquisitionHomePage(WebDriver driver, boolean alreadyOnSite) {
@@ -657,8 +656,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public PharmacySearchPage navigateToPharmacyLocator() {
-
-		driver.manage().window().maximize();
 		Actions action = new Actions(driver);
 		PageFactory.initElements(driver, this);
 		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
@@ -934,7 +931,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public RequestHelpAndInformationPage navigateToMaMoreHelpAndInfo() {
-		try {
+		/*try {
 			if (zipCodeField.isDisplayed()) {
 				CommonUtility.waitForElementToDisappear(driver, zipCodeField, CommonConstants.TIMEOUT_30);
 			}
@@ -944,7 +941,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("zipCodeField not found");
 		} catch (Exception e) {
 			System.out.println("zipCodeField not found");
-		}
+		}*/
 		
 
 		Actions actions = new Actions(driver);
@@ -953,7 +950,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		actions.moveToElement(moreHelpInfoLink);
 		actions.click().build().perform();
 
-		try {
+		/*try {
 			if (zipCodeField.isDisplayed()) {
 				CommonUtility.waitForElementToDisappear(driver, zipCodeField, CommonConstants.TIMEOUT_30);
 			}
@@ -963,7 +960,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("zipCodeField not found");
 		} catch (Exception e) {
 			System.out.println("zipCodeField not found");
-		}
+		}*/
+		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoad(driver, requestAgentApptDropdown, 60);
 		if (validateNew(requestAgentApptDropdown)) {
 			return new RequestHelpAndInformationPage(driver);
