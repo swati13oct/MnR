@@ -265,8 +265,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 	}
 	public DrugCostEstimatorPage navigateToDCEToolFromHome() throws InterruptedException {
-
-		driver.manage().window().maximize();
+		validateNew(getStarted);
 		getStarted.click();
 
 		if (driver.getCurrentUrl().contains("health-plans/estimate-drug-costs.html"))
@@ -998,7 +997,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(requestAssistanceTitle);
 		validateNew(requestAssistanceAgentID);
 		requestAssistanceClose.click();
-		waitforElementDisapper(By.id("cobrowse-disclaimer"));
+		waitforElementDisapper(By.id("cobrowse-disclaimer"), 30);
 	}
 	
 

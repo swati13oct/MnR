@@ -948,8 +948,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public void addDrug(String drug) throws InterruptedException {
 
 		AddNewDrugModal addNewDrugModal = clickOnAddDrug();
-		AddDrugDetails addDrugDetails = addNewDrugModal.clickonSearchButton(drug);
-		SavingsOppurtunity savingsOppurtunity = addDrugDetails.continueAddDrugDetailsModal();
+		AddDrugDetails addDrugDetails = addNewDrugModal.searchDrugWithoutAutoComplete(drug);
+		SavingsOppurtunity savingsOppurtunity = addDrugDetails.continueAddDrugDetailsModWithSaving();
 		savingsOppurtunity.savedrugbutton();
 		Thread.sleep(2000);
 

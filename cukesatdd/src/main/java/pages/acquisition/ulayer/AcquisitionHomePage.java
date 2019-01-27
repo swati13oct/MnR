@@ -117,7 +117,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//div[@class='overview-main']/h2")
 	private WebElement vppTop;
 
-	@FindBy(xpath = ".//*[@id='colhowdoesthiswork_dce']//*[@itemprop='significantLink']/*[@class='cta-button secondary']")
+	@FindBy(xpath = "//table[@id='colhowdoesthiswork_dce']//div[@itemprop='significantLink']/a[contains(@class,'cta-button')]")
 	public WebElement getStarted;
 
 	@FindBy(xpath = ".//*[@id='collapse2heading_article_mededaccordion0']")
@@ -930,7 +930,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(requestAssistanceTitle);
 		validateNew(requestAssistanceAgentID);
 		requestAssistanceClose.click();
-		waitforElementDisapper(By.id("cobrowse-disclaimer"));
+		waitforElementDisapper(By.id("cobrowse-disclaimer"), 30);
 	}
 	public boolean validateSomeElementsOnPage() {
 		if (validateNew(zipCodeField) && validateNew(findPlansButton) && validateNew(lookzip))
@@ -958,8 +958,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public DrugCostEstimatorPage navigateToDCEToolFromHome() throws InterruptedException {
-
-		driver.manage().window().maximize();
+		validateNew(getStarted);
 		getStarted.click();
 
 		if (driver.getCurrentUrl().contains("health-plans/estimate-drug-costs.html"))
