@@ -164,9 +164,8 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoad(driver, LookUpProviderBtn, 30);
-		validateNew(LookUpProviderBtn);
-		validate(PCPPageHeader);
+		CommonUtility.waitForPageLoadNew(driver, LookUpProviderBtn, 30);
+		validateNew(PCPPageHeader);
 		System.out.println("Page header is Displayed"+PCPPageHeader.getText());	
 	}
 
@@ -316,10 +315,11 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 
 	public PlanPremiumPage navigate_to_Plan_Premium_Page() {
 
-		validate(NextBtn);
-		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		validateNew(NextBtn);
+		jsClickNew(NextBtn);
+		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);
-		
+		*/
 		if(driver.getCurrentUrl().contains("monthly-premium")){
 			System.out.println("OLE Monthly Plan Premium Page is Displayed");
 			return new PlanPremiumPage(driver);

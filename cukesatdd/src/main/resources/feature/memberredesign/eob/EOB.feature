@@ -107,7 +107,7 @@ Then the user validates EOB count
  
            Examples:
        | planType    | memberType    |dateRange  | eobType |  eobCount |
-       | MAPD        | NICE_EOB_R      | Last 18 months |Medical  |     1     |
+       | MAPD        | NICE_EOB_R      | Last 12 months |Medical  |     1     |
 #       | MA          | COSMOS_EOB_R      | Last 18 months |Medical  |     16     |
 #       | PDPI         | COSMOS_EOB_R     | Last 18 months |Medical  |     0     |
        | SHIP_ACTIVE  | SHIP_EOB      | Last 12-18 months |Medical  |     1     |

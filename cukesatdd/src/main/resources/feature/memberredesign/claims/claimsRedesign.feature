@@ -1,4 +1,4 @@
-@claims @theTransformers 
+@claims @theTransformers @regressionMember
 Feature: T1.1To validate the new changes related to claims page on the member redesigned site
 
 @claims1 @claimsSummaryFED
@@ -26,7 +26,7 @@ Examples:
      | MAPD       | Last 24 months | NICE   | NICECLAIMS   |
      | PDP      | Last 24 months | RX     | RXCLAIMS     |
 
-@claims2 @claimsSummarySHIP @regressionMember @febrelease
+@claims2 @claimsSummarySHIP  @febrelease
 Scenario Outline: To validate the claims present for the SHIP member on claims summary page for SHIP members
 Given login with following details logins in the member portal and validate elements
   | Plan Type      | <planType>     |
@@ -212,8 +212,9 @@ Examples:
       | planType | claimPeriod    | domain | claimssystem |
       | PDP      | Last 24 months | RX     | RXCLAIMS     |
      
-        @Tc02 @Tc05
-@claims9  Scenario Outline: To validate the claims present for the Federal member on claims sumamry page for AARP site
+        
+@claims9  @Tc02 @Tc05
+Scenario Outline: To validate the claims present for the Federal member on claims sumamry page for AARP site
    Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>     |
       | Test Data Type | <claimssystem> |
@@ -235,7 +236,7 @@ Examples:
    
     Examples: 
       | planType | claimPeriod    | domain | claimssystem |
-      | MAPD     | Last 24 months | NICE   | NICECLAIMS   |
+   #   | MAPD     | Last 24 months | NICE   | NICECLAIMS   |
       | MAPD     | Last 24 months | COSMOS| COSMOSCLAIMS   |
      
   
@@ -279,7 +280,7 @@ Examples:
       | Plan Type    | <planType>    |
       | Claim Period | <claimPeriod> |
     Then I can see the claims displayed based on the selection in redesigned site
-    And I validate the pagination on the claims summary page for members
+ #   And I validate the pagination on the claims summary page for members
    	And the user validates the EOB section based on domain in redesigned site
       | Domain     | <domain>      |
       | Plan Type  | <planType>    |
@@ -325,7 +326,7 @@ Given login with following details logins in the member portal and validate elem
   | Plan Type      | <planType>     |
   | Test Data Type | <claimssystem> |
 When I navigate to the claims Summary page in redesigned site
-Then I can validate the claims summary header
+#Then I can validate the claims summary header
 And I can search claims for the following claim period on redesigned site
   | Plan Type    | <planType>    |
   | Claim Period | <claimPeriod> |
@@ -335,4 +336,4 @@ And the user search claims for the following time interval in redesigned site
 Then the user should be able to see the from date is greater than to date error message
 Examples: 
      | planType | claimPeriod    | domain | claimssystem |claimToDate | claimFromDate |
-     | MAPD     |customsearch | COSMOS | COSMOSCLAIMS |11/06/2018  | 01/02/2019 |
+     | MAPD     |custom-search | COSMOS | COSMOSCLAIMS |11/06/2018  | 01/02/2019 |

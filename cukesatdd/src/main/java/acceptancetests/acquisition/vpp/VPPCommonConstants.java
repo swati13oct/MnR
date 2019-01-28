@@ -55,6 +55,7 @@ public static final String PRIMARYCARE = "primarycare";
 
 	public static final String PLAN_TYPE_CRITERIA = "urlType";
 	
+	public static final String IS_MULTICOUNTY = "isMultutiCounty";
 /*
  * Additional Constants for AEP period VPP
  */

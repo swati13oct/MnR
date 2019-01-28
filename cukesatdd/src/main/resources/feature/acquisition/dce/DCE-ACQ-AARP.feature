@@ -1,11 +1,18 @@
 @acq_drug_cost_estimator
 Feature:1.23-VBF-Acq-Drug Cost Estimator (DCE) - To test DCE flows on aarp acq site
 
-@acq_drug_cost_estimator_ulayer_flow @dceVBF
+@acq_drug_cost_estimator_ulayer_flow @dceUlayerSmoke
 Scenario Outline: To verify DCE flow from Ulayer home page
 Given the user is on AARP medicare acquisition site landing page
 When I access the acquisition DCE tool from home page
 And I have added a drug to my drug list
+	|Drug|<drug>|
+And user selects drug details
+	|Drug|<drug>|
+	|Quantity|<quantity>|
+	|Frequency|<frequency>|
+When user successfully adds drug
+|Is Branded Drug|<branded>|	
 	|Drug|<drug>|
 And I navigate to step2 page
 And the user selects the pharmacy tab information like miles, zipcode and pharmacy type 
@@ -14,10 +21,19 @@ And the user selects the pharmacy tab information like miles, zipcode and pharma
 And I select the first pharmacy
 And I navigate to step3 page and validate for DCE homepage flow
 	|Drug|<drug>|
-
+Then user enters zipcode on step3 and validate plan summary page
+|Zip|<zipcode>|
+And the user views the plans of the below plan type in AARP site
+      | Plan Type | <plantype> |
+Then user validates drug cost in medical benefit section in the AARP site
+    | Plan Name | <planName> |
+ Then the user view plan details of the above selected plan in AARP site and validates
+      | Plan Name | <planName> | 
+ Then user validates drug added on prescription drug benefits tab in AARP
+      |Drug|<drug>| 
  Examples:
-| drug|zipcode| radius|
-| Lipitor TAB 10MG| 90210 | 15miles |
+|     drug        | quantity | frequency   |branded |zipcode|plantype |            planName                            |radius|
+| Lipitor TAB 10MG|    30    |Every 1 month| yes    | 90210 |   MAPD  |AARP MedicareComplete SecureHorizons Focus (HMO)|15 miles|
 
 
 @switchNowStep3 @dceVBF
