@@ -5,6 +5,7 @@ package pages.acquisition.bluelayer;
 
 
 import org.json.JSONObject;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -65,7 +66,7 @@ public class PlanSelectorNewPage extends UhcDriver {
 
 	public  JSONObject planselectoruhcJson;
 
-	@FindBy(xpath = "//div[@class='planList']/div[2]//a[@class='btn-primary EnrollPeriod']")
+	@FindBy(xpath = "(//div[@class='planList']/div[2]//a[@class='btn-primary EnrollPeriod'])[1]")
 	private WebElement firstPlanDetailsBtn;
 
 	@FindBy(xpath = "//a[@id='backToPlanSelectorTop']")
@@ -183,8 +184,8 @@ public class PlanSelectorNewPage extends UhcDriver {
 	public PlanSelectorNewPage verifyBackToPlanOptionslink() throws InterruptedException
 	{
 		validatetopbacktoplansOptionlink();
-		browserBack();
-		validatedownbacktoplansOptionslink();
+		//browserBack();
+		//validatedownbacktoplansOptionslink();
 
 
 		return new PlanSelectorNewPage(driver);
@@ -197,10 +198,11 @@ public class PlanSelectorNewPage extends UhcDriver {
 		wait.until(ExpectedConditions.elementToBeClickable(backToPlanOptionsTop));
 		validateUsergrpParam();
 		backToPlanOptionsTop.click();
+		System.out.println("Top Button clicked");
 		Thread.sleep(3000);
-		switchToNewIframe(iframePst);
+		//switchToNewIframe(iframePst);
 
-		waitforElement(firstPlanDetailsBtn);
+		//waitforElement(firstPlanDetailsBtn);
 		if (driver.getTitle().contentEquals(PageTitleConstants.BLAYER_PLAN_SELECTOR))
 		{
 			Assert.assertTrue(true);
@@ -212,13 +214,18 @@ public class PlanSelectorNewPage extends UhcDriver {
 
 	public void validatedownbacktoplansOptionslink() throws InterruptedException{
 
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0,1350)");
+		Thread.sleep(1000);
+		
 		waitforElement(backToPlanSelectorBottom);
 		validateUsergrpParam();
+		Thread.sleep(1000);
 		backToPlanSelectorBottom.click();
 		//Thread.sleep(3000);
-		waitforElement(iframePst);
-		switchToNewIframe(iframePst);
-		waitforElement(firstPlanDetailsBtn);
+		//waitforElement(iframePst);
+		//switchToNewIframe(iframePst);
+		//waitforElement(firstPlanDetailsBtn);
 		if (driver.getTitle().contentEquals(PageTitleConstants.BLAYER_PLAN_SELECTOR))
 		{
 			Assert.assertTrue(true);

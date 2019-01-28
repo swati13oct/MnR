@@ -99,7 +99,12 @@ public class PlanSelectorStepDefinition {
 	public void i_click_plan_detail_button() throws Throwable {
 		PlanSelectorNewPage planSelectorNewPage = (PlanSelectorNewPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_RESULTS_PAGE);
-		planSelectorNewPage.navigateToPlanDetails();
+		PlanSelectorNewPage PlanDetailsPage = planSelectorNewPage.navigateToPlanDetails();
+		if(PlanDetailsPage != null)
+			getLoginScenario().saveBean(PageConstants.PLAN_DETAILS_PAGE,
+					PlanDetailsPage);
+			else
+				System.out.println("Plan Details Page not loaded");
 
 	}
 
@@ -107,7 +112,7 @@ public class PlanSelectorStepDefinition {
 	@Then("^the user clicks on both top and bottom back to plan options link and validates its redirection$")
 	public void i_should_be_brought_back_to_the_plan_selector_results_page() throws Throwable {
 		PlanSelectorNewPage planSelectorNewPage = (PlanSelectorNewPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_SELECTOR_NEW_PAGE);
+				.getBean(PageConstants.PLAN_DETAILS_PAGE);
 		planSelectorNewPage.verifyBackToPlanOptionslink();
 
 	}

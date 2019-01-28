@@ -128,7 +128,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "cobrowse-disclaimer")
 	private WebElement cobrowsemodelwindow;
 
-	@FindBy(xpath = "//a[@class='cta-button']")
+	/*@FindBy(xpath = "//a[@class='cta-button']")
+	private WebElement takeTheQuizBtn;*/
+	
+	@FindBy(xpath = "//a[contains(text(), 'Plan Selector')]")
 	private WebElement takeTheQuizBtn;
 
 	@FindBy(xpath = ".//*[@id='colhowdoesthiswork_dce']//*[@itemprop='significantLink']/*[@class='cta-button secondary']")

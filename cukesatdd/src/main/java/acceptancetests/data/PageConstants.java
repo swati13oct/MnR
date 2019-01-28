@@ -41,7 +41,7 @@ public static final String ACCOUNT_HOME_PAGE = "accountHomePage";
 
 	public static final String HEALTH_PLANS_PAGE = "healthPlansPage";
 
-	public static final String PLAN_DETAILS_PAGE = "planDetailsPage";
+
 
 	public static final String ACQUISITION_HOME_PAGE = "acquisitionHomePage";
 	
@@ -596,6 +596,8 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 	public static final String PLAN_SELECTOR_QUESTIONNAIRE2 = "planSelectorQuestionnaire2";
 	
 	public static final String PLAN_RESULTS_PAGE = "PlanResultsPage";
+	
+	public static final String PLAN_DETAILS_PAGE = "PlanDetailsPage";
 		
 	public static final String SSO_TEST_HARNESS_PAGE = "ssoTestHarnessPage";
 	
