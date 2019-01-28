@@ -25,50 +25,45 @@ public class SavingsOppurtunity extends UhcDriver{
 	@FindBy(id="save-drug-button")
 	public WebElement savedrugbutton;
 	
-	@FindBy(xpath=".//*[@id='popup4']/header/span[contains(text(),' SAVINGS OPPORTUNITY')]")
-	public WebElement SwitchGenericPage;
+	@FindBy(xpath="//div[@id='popup4']//span[contains(@class,'subtitle')]")
+	public WebElement SwitchGenericPageHeading;
+	
+	@FindBy(xpath="//div[@id='popup4']//section[contains(@class,'add-drug-slide-body')]//h1[contains(@class,'drug-name')]")
+	public WebElement drugHeading;
+	
+	@FindBy(id="drug-name-sr-only")
+	public WebElement genericDrugName;
+	
+	@FindBy(xpath="//*[@id='generic-1']/following-sibling::label")
+	public WebElement switchToGenericOption;
+	
+	@FindBy(xpath="//*[@id='generic-2']/following-sibling::label")
+	public WebElement keepBrandedDrugOption;
 	
 	
 	public SavingsOppurtunity(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		
-		//openAndValidate();
+		openAndValidate();
 	}
 	@Override
 	public void openAndValidate() {
 
-		JSONObject jsonObject = new JSONObject();
-		for (String key : switchgeneric.getExpectedData().keySet()) {
-			WebElement element = findElement(switchgeneric.getExpectedData()
-					.get(key));
-			validate(element);
-			try {
-				jsonObject.put(key, element.getText());
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		}
-		switchgenericJson = jsonObject;
-
-		System.out.println("addnewdrugJson----->" + switchgenericJson);
+		CommonUtility.waitForPageLoadNew(driver, SwitchGenericPageHeading, 30);
+		validateNew(drugHeading);
+		validateNew(genericDrugName);
+		validateNew(switchToGenericOption);
+		validateNew(keepBrandedDrugOption);		
 	}
 	
-	public void savedrugbutton() throws InterruptedException {
-		
-		CommonUtility.waitForPageLoad(driver, savedrugbutton, 30);
+	public DrugCostEstimatorPage savedrugbutton() throws InterruptedException {
+		validateNew(savedrugbutton);
 		savedrugbutton.click();
-		
-		// TODO Auto-generated method stub
-		
+		return new DrugCostEstimatorPage(driver);
 	}
 	
 	public void switchToGeneric() throws InterruptedException {
-
-		List<WebElement> generic = driver.findElements(By.xpath(".//*[@id='generic-check']/div[1]"));
-		generic.get(0).click();
-		Thread.sleep(3000);
+		switchToGenericOption.click();
 	}
 }
