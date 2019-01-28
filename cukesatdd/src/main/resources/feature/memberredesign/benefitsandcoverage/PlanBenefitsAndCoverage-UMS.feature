@@ -84,7 +84,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | planType | memberType                       |
       | MAPD     | memberWithoutProviderTiering_BnC |
 
-  @benefitsAndCoverage5 @WaystoSaveforPdp @regression @regressionMember 
+  @benefitsAndCoverage5 @WaystoSaveforPdp @regression @regressionMember
   Scenario Outline: Verify the ways to save  widget for a PDP member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -491,7 +491,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | MAPD     | Individual_BnC | LIS 1         | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | DBAD ADFED      | 919744565-00 | 01/01/2019    | Not Available  | Extra Help Level : 1 |
 
 
-  @benefitsAndCoverage24 @CMpdpindlis 
+  @benefitsAndCoverage24 @CMpdpindlis
   Scenario Outline: Verify all sections for Ind LIS1 member on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -509,7 +509,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | Plan Type | <planType> |
     And the user view the LIS Drug Copays & Discounts header
     And the user should see drug cost table for Lis members
-    And the user validates Drug coverage header and text under the section
+    And the pdp lis user validates Drug coverage header and text under the section
     And the user validates text for the Look Up Drugs section
     And the user validates Look Up Drugs button should be visible
       | Plan Type | <planType> |
@@ -519,13 +519,13 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     And the drugcost dropdown should not display
     And the user validates the Learn More section link for stage
     And the user validates tier link should not display
-    And the lis user validates the user click on the link it expands and when user clicks it again it should collapse
+    #And the lis user validates the user click on the link it expands and when user clicks it again it should collapse
     And the user validates view and document label
     And the user validates static links
       | Plan Type | <planType> |
     And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully
       | Language | <language> |
-    And the user verifies that correct pdfs are there in the plan material section
+    And the user verifies that the correct pdfs are coming in the plan material section
       | Summary of Benefits                 | <SummaryofBenefits>               |
       | Evidence of Coverage                | <EvidenceofCoverage>              |
       | Comprehensive Formulary - Drug List | <ComprehensiveFormularyDrug List> |
@@ -599,7 +599,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
 
     Examples: 
       | planType | memberType | copayCategory |
-    #  | MAPD     | Group_BnC      | NON LIS       |
+      | MAPD     | Group_BnC  | NON LIS       |
       | MAPDRX   | Group      | NON LIS       |
 
 
@@ -690,11 +690,11 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
 
     Examples: 
       | planType | memberType | copayCategory |
-     # | MAPD     | Individual | NON LIS       |
+      | MAPD     | Individual | NON LIS       |
       | MA       | Group      | NON LIS       |
 
 
-  @benefitsAndCoverage30 @thePredators @juneRelease2018 @hartfordprescriptionDrugBenefit 
+  @benefitsAndCoverage30 @thePredators @juneRelease2018 @hartfordprescriptionDrugBenefit
   Scenario Outline: Verify city of Hartford Prescription Drug Benefits
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
