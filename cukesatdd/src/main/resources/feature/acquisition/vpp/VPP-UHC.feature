@@ -135,12 +135,12 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
 
     Examples: 
       | zipcode | isMultutiCounty | county              | plantype | planName                                                 | benefitType | expectedText                           |
-      |   80002 | Yes             | Adams County        | MA       | AARP MedicareComplete SecureHorizons Plan 1 (HMO)        | Eyewear     | for frames or / for contacts per       |
+      |   80002 | Yes             | Adams County        | MAPD       | AARP MedicareComplete SecureHorizons Plan 1 (HMO)        | Eyewear     | for frames or / for contacts per       |
       |   80002 | Yes             | Adams County        | SNP      | UnitedHealthcare Dual Complete (HMO SNP)                 | Eyewear     | for frames or / for contacts per       |
-      |   78006 | Yes             | Kendall County      | MA       | AARP MedicareComplete SecureHorizons (HMO)               | Eyewear     | Eyewear has a plan benefit limit up to |
+      |   78006 | Yes             | Kendall County      | MAPD       | AARP MedicareComplete SecureHorizons (HMO)               | Eyewear     | Eyewear has a plan benefit limit up to |
       |   65058 | Yes             | Miller County       | SNP      | UnitedHealthcare Dual Complete (HMO SNP)                 | Eyewear     | Eyewear has a plan benefit limit up to |
       |   78006 | Yes             | Kendall County      | SNP      | UnitedHealthcare Dual Complete Choice (Regional PPO SNP) | Eyewear     | No Coverage                            |
-      |   03033 | No              | Hillsborough County | MA       | UnitedHealthcare MedicareComplete Assure (PPO)           | Eyewear     | No Coverage                            |
+      |   03033 | No              | Hillsborough County | MAPD       | UnitedHealthcare MedicareComplete Assure (PPO)           | Eyewear     | No Coverage                            |
 
   @F250062 @HomeMultiCOunty @fastandfurious @Feb_release_2019
   Scenario Outline: Validate Cancel button for Multi Cunty Pop-up on Home Page

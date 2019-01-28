@@ -28,7 +28,7 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    When the user views plans of the below plan type in AARP site
+    When the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
     Then the user view plan details of the above selected plan in AARP site and validates
       | Plan Name | <planName> |
@@ -87,6 +87,7 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
       | zipcode | isMultiCounty | county             | plantype | planName                                     |
       |   80001 | NO            | Los Angeles County | SNP      | UnitedHealthcare Nursing Home Plan (PPO SNP) |
 
+
   @emailandprintplancompare @predators
   Scenario Outline: Verify print and email for <plantype> plan compare page in AARP site
     Given the user is on AARP medicare acquisition site landing page
@@ -120,13 +121,14 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
       | zipcode | plantype | planName                                          |
       |   90210 | MA       | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 
+
   @validateEyeWearCredit @fastandfurious @Feb_release_2019
   Scenario Outline: Verify specific Additional Benefits in Plan Details for provided plan
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
     And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
     And the user validates the available plans for selected plan types in the AARP site
@@ -138,14 +140,14 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
 
     Examples: 
       | zipcode | isMultutiCounty | county              | plantype | planName                                                 | benefitType | expectedText                           |
-      |   80002 | Yes             | Adams County        | MA       | AARP MedicareComplete SecureHorizons Plan 1 (HMO)        | Eyewear     | for frames or / for contacts per       |
+      |   80002 | Yes             | Adams County        | MAPD       | AARP MedicareComplete SecureHorizons Plan 1 (HMO)        | Eyewear     | for frames or / for contacts per       |
       |   80002 | Yes             | Adams County        | SNP      | UnitedHealthcare Dual Complete (HMO SNP)                 | Eyewear     | for frames or / for contacts per       |
-      |   78006 | Yes             | Kendall County      | MA       | AARP MedicareComplete SecureHorizons (HMO)               | Eyewear     | Eyewear has a plan benefit limit up to |
+      |   78006 | Yes             | Kendall County      | MAPD       | AARP MedicareComplete SecureHorizons (HMO)               | Eyewear     | Eyewear has a plan benefit limit up to |
       |   65058 | Yes             | Miller County       | SNP      | UnitedHealthcare Dual Complete (HMO SNP)                 | Eyewear     | Eyewear has a plan benefit limit up to |
       |   78006 | Yes             | Kendall County      | SNP      | UnitedHealthcare Dual Complete Choice (Regional PPO SNP) | Eyewear     | No Coverage                            |
-      |   03033 | No              | Hillsborough County | MA       | UnitedHealthcare MedicareComplete Assure (PPO)           | Eyewear     | No Coverage                            |
+      |   03033 | No              | Hillsborough County | MAPD       | UnitedHealthcare MedicareComplete Assure (PPO)           | Eyewear     | No Coverage                            |
 
-  @F250062 @HomeMultiCOunty @fastandfurious @Feb_release_2019
+  @HomeMultiCOunty @fastandfurious @Feb_release_2019 @F250062 
   Scenario Outline: Validate Cancel button for Multi Cunty Pop-up on Home Page
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following MultiCounty Zip information in the AARP site
@@ -156,7 +158,7 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
       | MultiCOuntyzipcode |
       |              78006 |
 
-  @F250062 @SubNavMultiCOunty @fastandfurious @Feb_release_2019
+  @SubNavMultiCOunty @fastandfurious @Feb_release_2019 @F250062 
   Scenario Outline: Validate Cancel button for Multi Cunty Pop-up on Sub-nav Plan Search
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following MultiCounty Zip in Header Sun Nav in the AARP site
@@ -167,7 +169,7 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
       | MultiCOuntyzipcode |
       |              78006 |
 
-  @F250062 @VPPChangeLocationMultiCOunty @fastandfurious @Feb_release_2019
+  @VPPChangeLocationMultiCOunty @fastandfurious @Feb_release_2019 @F250062 
   Scenario Outline: Validate Cancel button for Multi Cunty Pop-up on VPP for Change Location
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -181,3 +183,4 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
     Examples: 
       | zipcode | isMultutiCounty | county             | MultiCOuntyzipcode |
       |   90210 | No              | Los Angeles County |              80002 |
+

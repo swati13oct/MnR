@@ -14,9 +14,9 @@ import cucumber.api.CucumberOptions;
 
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
 jsonReport = "target/cucumber-RunMRATDDfastandfuriousAcquisitionTest.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDfastandfuriousAcquisitionTest")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" },
-features = { "src/main/resources/feature" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDfastandfuriousAcquisitionTest.json" }, tags = { "@F250062,@validateEyeWearCredit" })
-
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition.vpp", "acceptancetests.acquisition.pharmacylocator" },
+features = { "src/main/resources/feature/acquisition/vpp", "src/main/resources/feature/acquisition/pharmacylocator" }, plugin = {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDfastandfuriousAcquisitionTest.json" }, tags = { "@validateEyeWearCredit,@F250062" })
+//,@validateEyeWearCredit,@F250062
 public class RunMRATDDfastandfuriousAcquisitionTest { 
 }
