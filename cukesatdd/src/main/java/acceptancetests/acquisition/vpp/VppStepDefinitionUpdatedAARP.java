@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.ComparePlansPage;
+import pages.acquisition.ulayer.MultiCountyModalPage;
 import pages.acquisition.ulayer.OurPlansPage;
 import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
@@ -607,12 +608,12 @@ public class VppStepDefinitionUpdatedAARP {
 
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		VPPPlanSummaryPage PlanSummaryPage = aquisitionhomepage.ValidateMultiCOuntyPopUp(
+		MultiCountyModalPage multiCountyModalPage = aquisitionhomepage.ValidateMultiCOuntyPopUp(
 				zipcode);
 
-		if (PlanSummaryPage != null) {
+		if (multiCountyModalPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
-					PlanSummaryPage);
+					multiCountyModalPage);
 		} else {
 			Assert.fail("Error Loading VPP plan summary page");
 		}
@@ -621,9 +622,9 @@ public class VppStepDefinitionUpdatedAARP {
 
 	@Then("^the user validates the Cancel button for Multi COunty Pop-up lands on enter Zip code Page$")
 	public void the_user_validates_the_Cancel_button_for_Multi_COunty_Pop_up_lands_on_enter_Zip_code_Page() throws Throwable {
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+		MultiCountyModalPage multiCountyModalPage = (MultiCountyModalPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		boolean Validation_Flag = plansummaryPage.validateMultiCounty_CancelButton();
+		boolean Validation_Flag = multiCountyModalPage.validateMultiCounty_CancelButton();
 		Assert.assertTrue("Validation failed : Cancel button Validation for Multi County Pop-up Failed ",Validation_Flag);
 
 	}
@@ -644,12 +645,12 @@ public class VppStepDefinitionUpdatedAARP {
 
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		VPPPlanSummaryPage PlanSummaryPage = aquisitionhomepage.SubNav_ValidateMultiCOuntyPopUp(
+		MultiCountyModalPage multiCountyModalPage = aquisitionhomepage.SubNav_ValidateMultiCOuntyPopUp(
 				zipcode);
 
-		if (PlanSummaryPage != null) {
+		if (multiCountyModalPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
-					PlanSummaryPage);
+					multiCountyModalPage);
 		} else {
 			Assert.fail("Error Loading VPP plan summary page");
 		}
@@ -670,12 +671,12 @@ public class VppStepDefinitionUpdatedAARP {
 		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		VPPPlanSummaryPage PlanSummaryPage = plansummaryPage.VPP_ChangeLocationValidateMultiCOuntyPopUp(
+		MultiCountyModalPage multiCountyModalPage = plansummaryPage.VPP_ChangeLocationValidateMultiCOuntyPopUp(
 				zipcode);
 
-		if (PlanSummaryPage != null) {
+		if (multiCountyModalPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
-					PlanSummaryPage);
+					multiCountyModalPage);
 		} else {
 			Assert.fail("Error Loading VPP plan summary page");
 		}

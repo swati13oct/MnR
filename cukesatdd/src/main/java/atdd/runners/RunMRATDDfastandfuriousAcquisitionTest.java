@@ -17,6 +17,6 @@ jsonReport = "target/cucumber-RunMRATDDfastandfuriousAcquisitionTest.json",detai
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition.vpp", "acceptancetests.acquisition.pharmacylocator" },
 features = { "src/main/resources/feature/acquisition/vpp", "src/main/resources/feature/acquisition/pharmacylocator" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDfastandfuriousAcquisitionTest.json" }, tags = { "@validateEyeWearCredit,@F250062" })
-//,@validateEyeWearCredit,@F250062
+
 public class RunMRATDDfastandfuriousAcquisitionTest { 
 }

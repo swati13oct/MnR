@@ -1035,7 +1035,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		 * } } } catch (Exception e) { System.out.println("county box not found"
 		 * ); }
 		 */
-		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_PLAN_TYPES_TITLE)) {
+		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
 		}
 		return null;
@@ -1279,7 +1279,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		return null;
 	}
-public pages.acquisition.bluelayer.VPPPlanSummaryPage ValidateMultiCOuntyPopUp(String zipcode) {
+public MultiCountyModalPage ValidateMultiCOuntyPopUp(String zipcode) {
 		
 		CommonUtility.waitForPageLoad(driver, zipCodeField, 30);
 		sendkeys(zipCodeField, zipcode);
@@ -1287,12 +1287,12 @@ public pages.acquisition.bluelayer.VPPPlanSummaryPage ValidateMultiCOuntyPopUp(S
 		viewPlansButton.click();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		if (countyModal.isDisplayed()) {
-			return new pages.acquisition.bluelayer.VPPPlanSummaryPage(driver);
+			return new MultiCountyModalPage(driver);
 		}
 		return null;
 	}
 
-	public pages.acquisition.bluelayer.VPPPlanSummaryPage SubNav_ValidateMultiCOuntyPopUp(String zipcode) {
+	public MultiCountyModalPage SubNav_ValidateMultiCOuntyPopUp(String zipcode) {
 		hoverourplanslink();
 		validate(OurPlans_zipfield);
 		OurPlans_zipfield.click();
@@ -1301,7 +1301,7 @@ public pages.acquisition.bluelayer.VPPPlanSummaryPage ValidateMultiCOuntyPopUp(S
 		OurPlans_viewPlansButton.click();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		if (countyModal.isDisplayed()) {
-			return new pages.acquisition.bluelayer.VPPPlanSummaryPage(driver);
+			return new MultiCountyModalPage(driver);
 		}
 		return null;
 	}

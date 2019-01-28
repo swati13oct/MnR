@@ -140,7 +140,7 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
       |   78006 | Yes             | Kendall County      | MAPD       | AARP MedicareComplete SecureHorizons (HMO)               | Eyewear     | Eyewear has a plan benefit limit up to |
       |   65058 | Yes             | Miller County       | SNP      | UnitedHealthcare Dual Complete (HMO SNP)                 | Eyewear     | Eyewear has a plan benefit limit up to |
       |   78006 | Yes             | Kendall County      | SNP      | UnitedHealthcare Dual Complete Choice (Regional PPO SNP) | Eyewear     | No Coverage                            |
-      |   03033 | No              | Hillsborough County | MAPD       | UnitedHealthcare MedicareComplete Assure (PPO)           | Eyewear     | No Coverage                            |
+      |   03033 | NO              | Hillsborough County | MAPD       | UnitedHealthcare MedicareComplete Assure (PPO)           | Eyewear     | No Coverage                            |
 
   @F250062 @HomeMultiCOunty @fastandfurious @Feb_release_2019
   Scenario Outline: Validate Cancel button for Multi Cunty Pop-up on Home Page
@@ -170,11 +170,11 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
-      | Is Multi County | <isMultutiCounty> |
+      | Is Multi County | <isMultiCounty> |
     When the user performs Change Location on Plan Summary Page using following MultiCounty Zip information in the UHC site
       | Zip Code | <MultiCOuntyzipcode> |
     Then the user validates the Cancel button for Multi COunty Pop-up lands on enter Zip code Page in UHC
 
     Examples: 
-      | zipcode | isMultutiCounty | county             | MultiCOuntyzipcode |
-      |   90210 | No              | Los Angeles County |              80002 |
+      | zipcode | isMultiCounty | county             | MultiCOuntyzipcode |
+      |   90210 | NO              | Los Angeles County |              80002 |

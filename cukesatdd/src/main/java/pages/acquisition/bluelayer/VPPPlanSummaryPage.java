@@ -1469,7 +1469,7 @@ public void checkAllMAPlans(){
 		}
 		return isSpecificPlanInfoPresent;
 	}
-public VPPPlanSummaryPage VPP_ChangeLocationValidateMultiCOuntyPopUp(String zipcode) {
+public MultiCountyModalPage VPP_ChangeLocationValidateMultiCOuntyPopUp(String zipcode) {
 	try {
 		Thread.sleep(6000);
 	} catch (InterruptedException e) {
@@ -1487,30 +1487,10 @@ public VPPPlanSummaryPage VPP_ChangeLocationValidateMultiCOuntyPopUp(String zipc
 	FIndPlansButton.click();
 	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	if (countyModal.isDisplayed()) {
-		return new VPPPlanSummaryPage(driver);
+		return new MultiCountyModalPage(driver);
 	}
 	return null;
 }
-
-public boolean validateMultiCounty_CancelButton() {
-	validate(countyModal);
-	boolean ValidationFlag = true;
-	if(validate(MultiCOunty_CancelBtn)){
-		MultiCOunty_CancelBtn.click();
-		if(currentUrl().contains("health-plans.html#/zipcode") && ZipCodeTxtBx.getText().isEmpty()){
-			ValidationFlag = (!ValidationFlag)?false:true;
-		}else{
-			System.out.println("Zip code entry page is not displayed with Zip code field blank");
-			ValidationFlag = false;
-		}
-	}
-	else{
-		System.out.print("Cancel Button is not dispalyed in the Multy COunty Pop-up");
-		ValidationFlag = false;
-	}
-	return ValidationFlag;
-}
-
 
 
 	private boolean getSpecificPlanSummary(WebElement element, String planName) {

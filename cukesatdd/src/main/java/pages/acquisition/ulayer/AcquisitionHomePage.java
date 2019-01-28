@@ -1091,18 +1091,21 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			}
 			counter++;
 		} while (counter < 2);
-	}	public VPPPlanSummaryPage ValidateMultiCOuntyPopUp(String zipcode) {		CommonUtility.waitForPageLoad(driver, zipCodeField, 30);
+	}	
+	
+	public MultiCountyModalPage ValidateMultiCOuntyPopUp(String zipcode) {		
+		CommonUtility.waitForPageLoad(driver, zipCodeField, 30);
 		sendkeys(zipCodeField, zipcode);
 
 		viewPlansButton.click();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		if (countyModal.isDisplayed()) {
-			return new VPPPlanSummaryPage(driver);
+			return new MultiCountyModalPage(driver);
 		}
 		return null;
 	}
 
-	public VPPPlanSummaryPage SubNav_ValidateMultiCOuntyPopUp(String zipcode) {
+	public MultiCountyModalPage SubNav_ValidateMultiCOuntyPopUp(String zipcode) {
 		hoverourplanslink();
 		validate(OurPlans_zipfield);
 		OurPlans_zipfield.click();
@@ -1111,7 +1114,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		OurPlans_viewPlansButton.click();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		if (countyModal.isDisplayed()) {
-			return new VPPPlanSummaryPage(driver);
+			return new MultiCountyModalPage(driver);
 		}
 		return null;
 	}		
