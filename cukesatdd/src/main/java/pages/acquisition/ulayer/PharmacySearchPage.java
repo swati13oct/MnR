@@ -635,16 +635,39 @@ public PharmacyResultPage ValidateShowOnMapResult() {
 		}
 		return true;
 	}
+	
+	
+	@FindBy(xpath = "//*[@class='proactive-offer__button-wrapper']/button[contains(text(), 'Exit')]")
+    private WebElement ProactiveChat_Exit;
+
     public void enterZipCode(String zipCode) {
 //		txtZipCode.clear();
 		validate(txtZipCode);
     	txtZipCode.sendKeys(zipCode);
+    	driver.manage().window().maximize();
 		System.out.println("Zip code entered for Pharmacy Search : "+txtZipCode.getText());
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		try {
+			if(validate(ProactiveChat_Exit)){
+				System.out.println("Proactive chat is displayed");
+				jsClickNew(ProactiveChat_Exit);
+				System.out.println("Proactive chat exit button is clicked");
+				if(validate(ProactiveChat_Exit)){
+					System.out.println("Proactive chat is Still displayed");
+				}
+			}
+		} catch (Exception e1) {
+			System.out.println("Proactive chat not displayed");
+			e1.printStackTrace();
+		}
 		searchbtn.click();
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	    }
