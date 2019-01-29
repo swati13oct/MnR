@@ -572,13 +572,21 @@ try {
                 * @toDo : The user validates the DrugCoverage section headers and text
                */
                @And("^the user validates Drug coverage header and text under the section")
-               public void user_validates__drugcoverage_section() {
+               public void user_validates_drugcoverage_section() {
                               System.out.println("***the user validates Drug coverage header and text under the section***");
                               BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
                                                             .getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
                               benefitsCoveragePage.validatedrugcoverageheaderandtext();
                }
-               
+
+               @And("^the pdp lis user validates Drug coverage header and text under the section")
+               public void user_validates_drugcoverage_section_pdpUsers() {
+                              System.out.println("***the user validates Drug coverage header and text under the section***");
+                              BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+                                                            .getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+                              benefitsCoveragePage.validatedrugcoverageheaderandtext_pdplis();
+               }
+
                @And("^the user validates group Drug coverage header and text under the section")
                public void user_validates__groupdrugcoverage_section() {
                               System.out.println("***the user validates group Drug coverage header and text under the section***");
