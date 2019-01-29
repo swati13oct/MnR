@@ -37,7 +37,7 @@ Feature: To test pre-effective functionality
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Copay Category | <copayCategory> |
-    And verify that preeffective message is displayed on the home page
+  #  And verify that preeffective message is displayed on the home page
     And the user clicks on Account Profile tab & selects Account Settings from the drop down
     And user is navigated to Account Settings page
     And verify that the pre effecctive member can access the account settings page to view security and sign-in preferences
