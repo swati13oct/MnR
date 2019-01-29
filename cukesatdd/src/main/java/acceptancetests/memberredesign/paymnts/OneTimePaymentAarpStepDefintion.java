@@ -32,9 +32,11 @@ import pages.member.ulayer.TestHarness;
 import pages.regression.accounthomepage.AccountHomePage;
 //import pages.regression.payments.AccountHomePage;
 import pages.regression.payments.ConfirmOneTimePaymentPage;
+import pages.regression.payments.CreditCardUPGPage;
 import pages.regression.payments.OneTimePaymentPage;
 import pages.regression.payments.OneTimePaymentSuccessPage;
 import pages.regression.payments.PaymentHistoryPage;
+import pages.regression.payments.ReviewOneTimePaymentPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
@@ -406,6 +408,7 @@ public class OneTimePaymentAarpStepDefintion {
 			System.out.println("Object issue - unable to obtain the confirmOneTimePaymentPage");
 		}
 	}
+	
 	
 	@And("^the user makes Auto payment in CC flow and navigate further$")
 	public void makes_Auto_payment_CC_flow(DataTable givenAttributes) {
@@ -1536,4 +1539,84 @@ public class OneTimePaymentAarpStepDefintion {
 		oneTimePaymentsPage
 				.onetimepagecancelbtn();
 	}
+	
+	
+	@When("^the user clicks on Premium Payments on Header$")
+	public void the_user_clicks_on_Premium_Payments_on_Header() throws Throwable {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+		PaymentHistoryPage paymentHistoryPage = accountHomePage.navigateTooPaymentHistoryPage();
+		if (paymentHistoryPage!=null){
+	     	  getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
+		System.out.println("User is on Payment overview screen");
+} 
+	}
+	
+	@When("^user clicks on Make one time payment on payment overview page$")
+	public void user_clicks_on_Make_one_time_payment_on_payment_overview_page() throws Throwable {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage)getLoginScenario().getBean(PageConstants.Payments_History_Page);
+		OneTimePaymentPage oneTimePaymentPage = paymentHistoryPage.clickOnMakeOneTimePayment();
+		if (oneTimePaymentPage!=null){
+	     	  getLoginScenario().saveBean(PageConstants.One_Time_Payments_Page, oneTimePaymentPage);
+		System.out.println("User is on Make one time payment screen");
+} 
+	}
+	
+	@When("^user selects other amount and enters \"([^\"]*)\" and selects credit card and click on Next button$")
+	public void user_selects_other_amount_and_enters_and_selects_credit_card_and_click_on_Next_button(String otherAmountvalue) throws Throwable {
+		OneTimePaymentPage oneTimePaymentPage = (OneTimePaymentPage)getLoginScenario().getBean(PageConstants.One_Time_Payments_Page);
+		oneTimePaymentPage.selectAndEnterAmount(otherAmountvalue);
+		oneTimePaymentPage.selectCreditCardOption();		
+		CreditCardUPGPage creditCardPaymentPage = oneTimePaymentPage.clickOnNextButton();
+		if (creditCardPaymentPage!=null){
+	     	  getLoginScenario().saveBean(PageConstants.Credit_Card_Payments_Page, creditCardPaymentPage);
+		System.out.println("User is on UPG Credit cards page");
+				
+	}
+	}
+	
+	@When("^user selects Amount due today and selects credit card and click on Next button$")
+	public void user_selects_Amount_due_today_and_selects_credit_card_and_click_on_Next_button() throws Throwable {
+		OneTimePaymentPage oneTimePaymentPage = (OneTimePaymentPage)getLoginScenario().getBean(PageConstants.One_Time_Payments_Page);
+		oneTimePaymentPage.selectAmountDueToday();
+		oneTimePaymentPage.selectCreditCardOption();		
+		CreditCardUPGPage creditCardPaymentPage = oneTimePaymentPage.clickOnNextButton();
+		if (creditCardPaymentPage!=null){
+	     	  getLoginScenario().saveBean(PageConstants.Credit_Card_Payments_Page, creditCardPaymentPage);
+		System.out.println("User is on UPG Credit cards page");			
+	}
+	
+	}
+	
+	@Then("^user Navigates to UPG payment page and Enter Mandatory fields and click on Proceed$")
+	public void user_Navigates_to_UPG_payment_page_and_Enter_Mandatory_fields_and_click_on_Proceed(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		CreditCardUPGPage creditCardPaymentPage = (CreditCardUPGPage)getLoginScenario().getBean(PageConstants.Credit_Card_Payments_Page);
+		ReviewOneTimePaymentPage reviewOneTimePaymentsPage = creditCardPaymentPage.EnterFiledsOnCC(memberAttributesMap);
+		if (reviewOneTimePaymentsPage!=null){
+	     	  getLoginScenario().saveBean(PageConstants.Review_OneTime_Payments_Page, reviewOneTimePaymentsPage);
+		System.out.println("User is on Review One time payments page");
+		
+	}
+	}
+	
+	@Then("^user navigates to payment overview screen and selects agreements and click on Make one time payemnt$")
+	public void user_navigates_to_payment_overview_screen_and_selects_agreements_and_click_on_Make_one_time_payemnt() throws Throwable {
+		ReviewOneTimePaymentPage reviewOneTimePaymentsPage = (ReviewOneTimePaymentPage)getLoginScenario().getBean(PageConstants.Review_OneTime_Payments_Page);
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = reviewOneTimePaymentsPage.selectAgreeAndClickOnMakePayment();
+		if (confirmOneTimePaymentPage!=null){
+	     	  getLoginScenario().saveBean(PageConstants.ONE_TIME_PAYMENT_PAGE, confirmOneTimePaymentPage);
+		System.out.println("User is on Review One time payments page");
+		
+	}
+	}
+	@Then("^User navigates to payment confirmation page for CC flow$")
+	public void user_navigates_to_payment_confirmation_page_for_CC_flow() throws Throwable {
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = (ConfirmOneTimePaymentPage)getLoginScenario().getBean(PageConstants.ONE_TIME_PAYMENT_PAGE);
+		confirmOneTimePaymentPage.OneTimeCCverification();
+	}
+
 }

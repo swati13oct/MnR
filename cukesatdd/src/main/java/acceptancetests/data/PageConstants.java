@@ -481,6 +481,10 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 	public static final String PAYMENT_HISTORY_PAGE = "paymentHistoryPage";
 
 	public static final String ONE_TIME_PAYMENT_PAGE = "oneTimePaymentPage";
+	
+	public static final String Credit_Card_Payments_Page = "creditCardPaymentPage";
+	
+	public static final String Review_OneTime_Payments_Page = "reviewOneTimePaymentsPage";
 
 	public static final String CONFIRM_ONE_TIME_PAYMENT_PAGE = "confirmOneTimePaymentPage";
 
