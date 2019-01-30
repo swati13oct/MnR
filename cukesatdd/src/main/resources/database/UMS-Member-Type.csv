@@ -9,7 +9,7 @@ q1_grp_feb261/Password@1,MA,Group,
 q1_grp_feb271/Password@1,PDP,Group,
 q4_dec_grp306/Password@1,PDP,Group,
 q1_grp_feb495/Password@1,MA,Group,HMO
-q2_jun_ship0007/Password@1,SHIP,
+q2_jun_ship0007/Password@1,SHIP,	
 q1_grp_feb523,PDPwithSSUP,Group,
 q2_jun_grp0089/Password@1,MAPD,UHCGroup2,
 q2_jun_grp0071/Password@1,PDP,UHCGroup,
@@ -33,7 +33,7 @@ q2_jun_grp0013/Password@1,MAPD,Group,NON LIS
 q2_jun_grp0052/Password@1,MAPDRX,Group,NON LIS
 q1_grp_feb276/Password@1,PDP,Group,NON LIS
 q1_aarp_feb267/Password@1,MA,Individual,NON LIS
-termuhcactiveaarp02/Password@1,MAPD,ACTIVETERM,NON LIS
+q2_jun_aarp0158/Password@1,MAPD,ACTIVETERM,NON LIS
 q2_june_combo0017/Password@1,MAPD,UHCAARPCOMBO,NON LIS
 q1_aarp_apr125/Password@1,MAPD,AARPIndividual,NON LIS
 q1_aarp_feb405/Password@1,PDP,Individual,LIS 4
@@ -66,7 +66,7 @@ q2_jun_aarp0078/Password@1,PDP,NonLISSplittier,
 q2_jun_aarp0212/Password@1,PDP,IndAARPFnR,
 q2_jun_grp0036/Password@1,PDP,UHCGroupFnR,
 q1_aarp_apr185/Password@1,MA,AARPIndFnR,
-q2_jun_sofl0034/Password@1,MAPD,PCP,NON LIS
+q2_jun_sofl0002/Password@1,MAPD,PCP,NON LIS
 eff_ssup_grp01/Password@1,UHC,SSUPFnR,
 q2_jun_grp0238/Password@1,Combo,ComboFnR,
 q2_jun_uhc0042/Password@1,PDP,PdpuhcindividualFnR,
@@ -193,7 +193,7 @@ q2_jun_ship0010/Password@1,SHIP,SHIPCLAIMS,
 q2_jun_aarp0043/Password@1,MA,COSMOSCLAIMS,
 q2_jun_ship0259/Password@1,PHIP,SHIPCLAIMS,
 q2_jun_ship0010/Password@1,SHIP,SHIPOnlyBranding,NON LIS
-q2_jun_grp0008/Password@1,MAPD,IDCardmember_grp,
+q1_grp_apr026/Password@1,MAPD,IDCardmember_grp,
 q3_sep_aarp0046/Password@1,MAPD,IDCardmember,
 q4_dec_uhc120/Password@1,MA,IDCardmember,
 q2_jun_aarp0117/Password@1,PDP,IDCardmember,
