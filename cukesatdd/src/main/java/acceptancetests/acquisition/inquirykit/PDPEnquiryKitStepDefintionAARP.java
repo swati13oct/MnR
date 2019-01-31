@@ -136,4 +136,20 @@ public class PDPEnquiryKitStepDefintionAARP {
 		}
 	}
 	
+	/**
+	 * @toDo:user submits by entering following details in Order Enrollment Information page 
+	 */
+	@And("^user validates error messages when blank form is selected on AARP site$")
+	public void the_user_submits_entering_details_order_enrollment_information_aarp(){
+		
+		PDPEnrollementGuidePage pdpEnrollementGuidePage = (PDPEnrollementGuidePage) getLoginScenario().getBean(PageConstants.PDP_ENROLLMENT_GUIDE_PAGE);
+		pdpEnrollementGuidePage.submitForm();
+		boolean errorMessagesValidated = pdpEnrollementGuidePage.validateErrorMessages();
+		if(errorMessagesValidated){
+				Assert.assertTrue(true);
+		}else
+			Assert.fail("Issue in validating error messages");
+	
+	}	
+	
 }

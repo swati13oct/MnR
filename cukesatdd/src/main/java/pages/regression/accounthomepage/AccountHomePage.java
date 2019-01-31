@@ -226,10 +226,15 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(css = ".claimDetTableMainSection")
 	private WebElement claimDetTableMainSection;
 
+<<<<<<< HEAD
 	//@FindBy(xpath = "//*[@id='dashboard']//span[text()='View Your Claims']")
 	//@FindBy(xpath = "//*[@id='claims_1']")
 	//@FindBy(xpath = "//a[text()='Go to Claims page']")
 	@FindBy(xpath =".//*[@id='sticky-nav']/sticky-content/nav/div/div/div/div/a[2]")
+=======
+	@FindBy(xpath = "//*[@id='dashboard']//span[text()='View Your Claims']")
+	//@FindBy(xpath = "//*[@id='claims_1']") @FindBy(xpath = "//a[text()='Go to Claims page']")
+>>>>>>> develop
 	private WebElement claimsDashboardLink;
 
 	@FindBy(xpath = "//*[@id='row2link1']/td[2]/a")
@@ -1682,8 +1687,24 @@ public class AccountHomePage extends UhcDriver {
 			return true;
 
 		} else {
-			Assert.fail("find care is displayed");
-			return false;
+			//go to secondary page and double check
+			System.out.println("find care tab is displayed on the dashboard header - attempt the workaround");  
+			try {
+				coverageBenefits.click();
+			} catch (NoSuchElementException e) {
+				dashboard_coverageBenefits.click();
+			}
+			WebDriverWait wait = new WebDriverWait(driver, 30);
+			if (validate(findCare) == false) {
+				Assert.assertFalse("find care is not displayed", validate(findCare));
+				return true;
+
+			} else {
+				//go to secondary page and double check
+				System.out.println("find care tab is displayed on the secondary pages but should not");  
+				Assert.fail("find care is displayed");
+				return false;
+			}
 		}
 	}
 

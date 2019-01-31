@@ -12,6 +12,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -89,15 +90,9 @@ public class WelcomePage extends UhcDriver{
 	public void openAndValidate() {
 		
 		System.out.println("Validating Welcome Page for OLE");
-		try {
-			Thread.sleep(12000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
-		validate(WelcomePageHeader);
-		validate(PlanYear_PlanName);
+		validateNew(WelcomePageHeader);
+		validateNew(PlanYear_PlanName);
 	}
 
 	public boolean validate_plan_details(Map<String, String> planDetailsMap) {
@@ -108,10 +103,10 @@ public class WelcomePage extends UhcDriver{
 		System.out.println("Zip Code and County Displayed on OLE : "+Zip_County_Text);
 		System.out.println("Monthly Premium for Plan Displayed on OLE : "+Premium);
 		String Expected_PlanName = planDetailsMap.get("Plan Name");
-		String Expected_PlanYear = planDetailsMap.get("Plan Year");
+		//String Expected_PlanYear = planDetailsMap.get("Plan Year");
 		String Expected_ZipCode = planDetailsMap.get("Zip Code");
 		String Expected_County = planDetailsMap.get("County");
-		String Expected_PlanPremium = planDetailsMap.get("Plan Premium");
+		//String Expected_PlanPremium = planDetailsMap.get("Plan Premium");
 		boolean flag = false;
 		
 		if(PlanYear_PlanName_Text.contains(Expected_PlanName)){
@@ -196,14 +191,9 @@ public class WelcomePage extends UhcDriver{
 
 	public MedicareInformationPage navigate_to_medicare_info_page() {
 		
-		validate(NextBtn);
+		validateNew(NextBtn);
 		NextBtn.click();
-		try {
-			Thread.sleep(6000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		CommonUtility.checkPageIsReadyNew(driver);
 		if(driver.getCurrentUrl().contains("medicare-information")){
 			System.out.println("OLE Medicare Information Page is Displayed");
 			return new MedicareInformationPage(driver);

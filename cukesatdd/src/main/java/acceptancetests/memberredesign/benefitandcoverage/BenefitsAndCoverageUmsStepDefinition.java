@@ -572,13 +572,21 @@ try {
                 * @toDo : The user validates the DrugCoverage section headers and text
                */
                @And("^the user validates Drug coverage header and text under the section")
-               public void user_validates__drugcoverage_section() {
+               public void user_validates_drugcoverage_section() {
                               System.out.println("***the user validates Drug coverage header and text under the section***");
                               BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
                                                             .getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
                               benefitsCoveragePage.validatedrugcoverageheaderandtext();
                }
-               
+
+               @And("^the pdp lis user validates Drug coverage header and text under the section")
+               public void user_validates_drugcoverage_section_pdpUsers() {
+                              System.out.println("***the user validates Drug coverage header and text under the section***");
+                              BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+                                                            .getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+                              benefitsCoveragePage.validatedrugcoverageheaderandtext_pdplis();
+               }
+
                @And("^the user validates group Drug coverage header and text under the section")
                public void user_validates__groupdrugcoverage_section() {
                               System.out.println("***the user validates group Drug coverage header and text under the section***");
@@ -1390,6 +1398,7 @@ try {
                                      System.out.println("pdfs not coming correctly");
                                      }
                      }
+
                
                //note: Dec2018 - update the step text
                //@And("^the user verifies that the correct pdfs are coming in the plan material section for ship$")
@@ -1429,7 +1438,7 @@ try {
                * @author njain112
                */
                @And("^the Village user validates text in table$")
-               public void validatevillagetabletext(String text) throws InterruptedException   {
+               public void validatevillagetabletext() throws InterruptedException   {
                               System.out.println("***the Village user validates text in table***");
                               BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
                                                             .getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);

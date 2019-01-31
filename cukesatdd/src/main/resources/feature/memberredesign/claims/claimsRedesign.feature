@@ -279,7 +279,7 @@ Examples:
       | Plan Type    | <planType>    |
       | Claim Period | <claimPeriod> |
     Then I can see the claims displayed based on the selection in redesigned site
-    And I validate the pagination on the claims summary page for members
+ #   And I validate the pagination on the claims summary page for members
    	And the user validates the EOB section based on domain in redesigned site
       | Domain     | <domain>      |
       | Plan Type  | <planType>    |
@@ -326,13 +326,19 @@ Given login with following details logins in the member portal and validate elem
   | Test Data Type | <claimssystem> |
 When I navigate to the claims Summary page in redesigned site
 #Then I can validate the claims summary header
+<<<<<<< HEAD
 #And I can search claims for the following claim period on redesigned site
  # | Plan Type    | <planType>    |
  # | Claim Period | <claimPeriod> |
+=======
+And I can search claims for the following claim period on redesigned site
+  | Plan Type    | <planType>    |
+  | Claim Period | <claimPeriod> |
+>>>>>>> develop
 And the user search claims for the following time interval in redesigned site
 | Claims To Date   | <claimToDate>   |
 | Claims From Date | <claimFromDate>  |
 Then the user should be able to see the from date is greater than to date error message
 Examples: 
      | planType | claimPeriod    | domain | claimssystem |claimToDate | claimFromDate |
-     | MAPD     |customsearch | COSMOS | COSMOSCLAIMS |11/06/2018  | 01/02/2019 |
+     | MAPD     |custom-search | COSMOS | COSMOSCLAIMS |11/06/2018  | 01/02/2019 |
