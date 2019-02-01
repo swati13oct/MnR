@@ -202,7 +202,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | MAPD     | withRider  |
       
 
-  @benefitsAndCoverage14 @CMFedDrugNonLis 
+  @benefitsAndCoverage14 @CMFedDrugNonLis
   Scenario Outline: Verify all sections for Ind NonLIS member on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -250,11 +250,11 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
 
     Examples: 
       | planType | memberType      | copayCategory | language | SummaryofBenefits    | EvidenceofCoverage       | ComprehensiveFormularyDrug List     | AlternativeDrug List               | name                 | memberid     | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
-      | MAPD     | Individual      | NON LIS       | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | Alternative Drug List              | DDCEE DAADF          | 954016383-00 | 01/01/2018    | Not Available  | Tier 2          | true        |
-      | MAPD     |  Individual     |  NON LIS      | ESPAÑOL  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | Lista de Medicamentos Alternativos | DDCEE DAADF          | 954016383-00 | 01/01/2018    | Not Available  | Tier 2          | true       |
-      | MAPD     |  Individual     |  NON LIS      | 中文             |                      |                          |                                     |                                    | DDCEE DAADF          | 954016383-00 | 01/01/2018    | Not Available  | Tier 2          | true       |
-      | Medica   |  Individual     |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | Alternative Drug List              | AADECDC FEDFACEDBACBB| 954283936-00 | 04/01/2018    | Not Available  | Tier 2          | true       |
-      | Medica   |  Individual     |  NON LIS      | ESPAÑOL  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | Lista de Medicamentos Alternativos | AADECDC FEDFACEDBACBB| 954283936-00 | 04/01/2018    | Not Available  | Tier 2          | true       |
+      | MAPD     | Individual_BnC  | NON LIS       | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | Alternative Drug List              | DDCEE DAADF          | 954016383-00 | 01/01/2018    | Not Available  | Tier 2          | true        |
+      | MAPD     |  Individual_BnC |  NON LIS      | ESPAÑOL  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | Lista de Medicamentos Alternativos | DDCEE DAADF          | 954016383-00 | 01/01/2018    | Not Available  | Tier 2          | true       |
+      | MAPD     |  Individual_BnC |  NON LIS      | 中文             |                      |                          |                                     |                                    | DDCEE DAADF          | 954016383-00 | 01/01/2018    | Not Available  | Tier 2          | true       |
+      | Medica   |  Individual_BnC |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | Alternative Drug List              | AADECDC FEDFACEDBACBB| 954283936-00 | 04/01/2018    | Not Available  | Tier 2          | true       |
+      | Medica   |  Individual_BnC |  NON LIS      | ESPAÑOL  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | Lista de Medicamentos Alternativos | AADECDC FEDFACEDBACBB| 954283936-00 | 04/01/2018    | Not Available  | Tier 2          | true       |
       | PCP      |  Individual_BnC |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | Alternative Drug List              | BDFAEC CBADEADF      | 945007888-00 | 01/01/2018    | Not Available  | Tier 2          | true       |
       | PCP      |  Individual_BnC |  NON LIS      | ESPAÑOL  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | Lista de Medicamentos Alternativos | BDFAEC CBADEADF      | 945007888-00 | 01/01/2018    | Not Available  | Tier 2          | true       |
       
@@ -306,7 +306,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | PDP      | Individual_BnC | NON LIS       | 中文             |                       |                          |                                     |                                    | ECADEA DCAA| 0197331001| 05/01/2018    | Not Available  | Tier 2          | true        |
 
 
-  @benefitsAndCoverage16 @CMMapdFedTable 
+  @benefitsAndCoverage16 @CMMapdFedTable
   Scenario Outline: Verify fed table data on Benefits and Coverage page for MAPD user
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -317,8 +317,8 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     And the user able to see drug table for fed and values in it
 
     Examples:  
-      | planType | memberType | copayCategory |
-      | MAPD     | Individual | NON LIS       |
+      | planType | memberType     | copayCategory |
+      | MAPD     | Individual_BnC | NON LIS       |
 
 
   @benefitsAndCoverage17 @CMPdpFedTable 
@@ -689,9 +689,9 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     And the user validates the Vas section on benefits and coverage page is not displayed
 
     Examples: 
-      | planType | memberType | copayCategory |
-      | MAPD     | Individual | NON LIS       |
-      | MA       | Group      | NON LIS       |
+      | planType | memberType     | copayCategory |
+      | MAPD     | Individual_BnC | NON LIS       |
+      | MA       | Group          | NON LIS       |
 
 
   @benefitsAndCoverage30 @thePredators @juneRelease2018 @hartfordprescriptionDrugBenefit
@@ -736,7 +736,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     Examples: 
       | planType | memberType | copayCategory |
       | PDP      |  Group_BnC | NON LIS       |
-      | MAPD     | Individual | NON LIS       |
+      | MAPD     | Individual_BnC | NON LIS       |
  
 
   @benefitsAndCoverage33 @optumRxWidget @Feb_release_2019 
