@@ -2,8 +2,8 @@
 Feature:I1.3Header/Navigation for Member Site Redesign
 # note: if system is in future date, some testcases may fail due to expected tab(s) not showing up on page depending on user's data setup
 
-@header1 @member_redesign_header @IncrediblesHeader @regressionMember
-Scenario Outline:Verify HSID login functionality and header
+@header1 @member_redesign_header @IncrediblesHeader @regressionMember1
+Scenario Outline: TID: <TID> -plan: <planType> -member: <memberType> - Verify HSID login functionality and header
   Given login with following details logins in the member portal and validate elements
 | Plan Type   | <planType>   |
 | Member Type   | <memberType> |
@@ -25,12 +25,12 @@ Then I should be able to see the help button Header
 Then I should be able to see and use the Account/Profile dropdown and logout
 
 Examples:
- | planType  | memberType  |
- | MAPD      |IndividualMember |
+ | TID   |	planType  | memberType  |
+ | 24803 | MAPD      |IndividualMember |
  
 
-@header2 @premiumpaymentsheader @regressionMember 
-Scenario Outline:To check the Premium Payments Tab in the header
+@header2 @premiumpaymentsheader @regressionMember1
+Scenario Outline: TID: <TID> -plan: <planType> -member: <memberType> - To check the Premium Payments Tab in the header
  Given login with following details logins in the member portal and validate elements
 | Plan Type   | <planType>   |
 | Member Type   | <memberType> |
@@ -39,13 +39,13 @@ Then I should be able to see and use the Premium Payments tab Header
 
 
 Examples:
- | planType  | memberType  |
- | MAPD      |IndividualMember |
- | MAPD    |GroupLessSubsidy |
+ | TID   | planType | memberType       |
+ | 24804 | MAPD     | IndividualMember |
+ | 24915 | MAPD     | GroupLessSubsidy |
  
  
-@header3 @premiumpaymentsheader_100%subisdy @regressionMember
- Scenario Outline:To check that the Premium Payments Tab is not displayed in the header
+@header3 @premiumpaymentsheader_100%subisdy @regressionMember1
+ Scenario Outline: TID: <TID> -plan: <planType> -member: <memberType> - To check that the Premium Payments Tab is not displayed in the header
 Given login with following details logins in the member portal and validate elements
 | Plan Type   | <planType>   |
 | Member Type   | <memberType> |
@@ -53,12 +53,12 @@ And I view the global navigation Header
 Then I should not be able to see the Premium Payments tab Header
 
 Examples:
- | planType|  memberType  | 
- | MAPD    |  UHCGroup  	  |
+ | TID   | planType|  memberType | 
+ | 24917 | MAPD    |  UHCGroup   |
  
  
 @header4 @findcarecostsheader @regressionMember
- Scenario Outline:To check that the Find Care and Costs Tab is displayed in the header
+ Scenario Outline: TID: <TID> -plan: <planType> -member: <memberType> - To check that the Find Care and Costs Tab is displayed in the header
 Given login with following details logins in the member portal and validate elements
 | Plan Type   | <planType>   |
 | Member Type   | <memberType> |
@@ -66,15 +66,15 @@ And I view the global navigation Header
 Then I should be able to see and use the Find Care & Costs tab Header
 
 Examples:
- | planType|  memberType  	| 
- | MAPD    |  UHCGroup  	  |
- | MAPD    | IndividualMember |
- | MAPD    | PCP |
- | MAPD  | Medica |
+ | TID  | planType | memberType  	  | 
+ | 24822| MAPD     | UHCGroup  	      |
+ | 24822| MAPD     | IndividualMember |
+ | 24822| MAPD     | PCP              |
+ | 24822| MAPD     | Medica           |
  
  
-@header5 @no_findcareheader @regressionMember  
-Scenario Outline:To check that the Find Care and Costs Tab is not displayed in the header
+@header5 @no_findcareheader @regressionMember1  
+Scenario Outline: TID: <TID> -plan: <planType> -member: <memberType> - To check that the Find Care and Costs Tab is not displayed in the header
 Given login with following details logins in the member portal and validate elements
 | Plan Type   | <planType>   |
 | Member Type   | <memberType> |
@@ -82,13 +82,13 @@ Given login with following details logins in the member portal and validate elem
 Then I should not be able to see the Find Care & Costs tab Header
 
 Examples:
- | planType|  memberType  	| 
- | SHIP    |   Individual_header  |
- | SSUP    |   UHCGroup_header 	  |
+ | TID   |planType|  memberType  	| 
+ | 24906 | SHIP    |   Individual_header  |
+ | 24906 | SSUP    |   UHCGroup_header 	  |
  
 
-@header6 @Terminated_view @regressionMember
- Scenario Outline:To check that the Find Care and Costs Tab is not displayed in the header for terminated user
+@header6 @Terminated_view @regressionMember1
+ Scenario Outline: TID: <TID> -plan: <planType> -member: <memberType> - To check that the Find Care and Costs Tab is not displayed in the header for terminated user
 Given login with following details logins in the member portal and validate elements
 | Plan Type   | <planType>   |
 | Member Type   | <memberType> |
@@ -96,5 +96,5 @@ Then I should be able to see and use the Home tab on Dashboard
 
 Examples:
  | planType|  memberType  	| 
- | MAPD    |  AARPTerminatedmember 	  |
- | MA	   | UHCTerminatedmember|
+ | 24858 | MAPD    |  AARPTerminatedmember 	  |
+ | 24858 | MA	   | UHCTerminatedmember|
