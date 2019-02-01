@@ -931,18 +931,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public RequestHelpAndInformationPage navigateToMaMoreHelpAndInfo() {
-		/*try {
-			if (zipCodeField.isDisplayed()) {
-				CommonUtility.waitForElementToDisappear(driver, zipCodeField, CommonConstants.TIMEOUT_30);
-			}
-		} catch (NoSuchElementException e) {
-			System.out.println("zipCodeField not found");
-		} catch (TimeoutException ex) {
-			System.out.println("zipCodeField not found");
-		} catch (Exception e) {
-			System.out.println("zipCodeField not found");
-		}*/
-		
 
 		Actions actions = new Actions(driver);
 		PageFactory.initElements(driver, this);
@@ -950,17 +938,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		actions.moveToElement(moreHelpInfoLink);
 		actions.click().build().perform();
 
-		/*try {
-			if (zipCodeField.isDisplayed()) {
-				CommonUtility.waitForElementToDisappear(driver, zipCodeField, CommonConstants.TIMEOUT_30);
-			}
-		} catch (NoSuchElementException e) {
-			System.out.println("zipCodeField not found");
-		} catch (TimeoutException ex) {
-			System.out.println("zipCodeField not found");
-		} catch (Exception e) {
-			System.out.println("zipCodeField not found");
-		}*/
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoad(driver, requestAgentApptDropdown, 60);
 		if (validateNew(requestAgentApptDropdown)) {
@@ -1031,33 +1008,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			return new VPPPlanSummaryPage(driver);
 		}
 		return null;
-	}
-
-	public PDPRequestHelpAndInformationPage navigateToPDPMoreHelpAndInfo() {
-
-		Actions actions = new Actions(driver);
-		PageFactory.initElements(driver, this);
-		actions.moveToElement(ourPlansHoverLink);
-		actions.moveToElement(moreHelpInfoLink);
-		actions.click().build().perform();
-		try {
-			if (zipCodeField.isDisplayed()) {
-				CommonUtility.waitForElementToDisappear(driver, zipCodeField, 20);
-			}
-		} catch (NoSuchElementException e) {
-			System.out.println("zipCodeField not found");
-		} catch (TimeoutException ex) {
-			System.out.println("zipCodeField not found");
-		} catch (Exception e) {
-			System.out.println("zipCodeField not found");
-		}
-		CommonUtility.waitForPageLoad(driver, requestAgentApptDropdown, 60);
-		if (validateNew(requestAgentApptDropdown)) {
-			return new PDPRequestHelpAndInformationPage(driver);
-		}
-
-		return null;
-
 	}
 
 		public void validateFooterLinks() {
