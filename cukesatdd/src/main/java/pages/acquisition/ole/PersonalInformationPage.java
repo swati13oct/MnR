@@ -119,12 +119,11 @@ public class PersonalInformationPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoad(driver, DOBtxtFld, 30);
-		validateNew(DOBtxtFld);
+		CommonUtility.waitForPageLoadNew(driver, DOBtxtFld, 30);
 
 	}
 
-	public PersonalInformationPage enter_member_details(Map<String, String> memberDetailsMap) throws InterruptedException {
+	public boolean enter_member_details(Map<String, String> memberDetailsMap) throws InterruptedException {
 
 		String DOB = memberDetailsMap.get("DOB");
 		String Gender = memberDetailsMap.get("Gender");
@@ -149,19 +148,19 @@ public class PersonalInformationPage extends UhcDriver{
 		System.out.println("Mailing Question : "+MailingQuestion);
 		if(MailingQuestion.equalsIgnoreCase("no")){
 			SameMailingAddressNo.click();
-			CommonUtility.waitForPageLoad(driver,MailingAdd_Street, 30);
-			sendkeys(MailingAdd_Street,Mailing_Street);
+			//CommonUtility.waitForPageLoadNew(driver,MailingAdd_Street, 30);
+			sendkeysNew(MailingAdd_Street,Mailing_Street);
 			sendkeys(MailingAdd_City,Mailing_City);
 			Select SelectState = new Select(MailingAdd_State_DropDown);
 			SelectState.selectByValue(Mailing_State);
-			sendkeys(MailingAdd_Zip,Mailing_Zip);
+			sendkeysNew(MailingAdd_Zip,Mailing_Zip);
 		}
 		sendkeys(Email,EmailAddress);
 		if(NextBtn.isEnabled()){
 			System.out.println("Next Button is Enabled : All Required Details are entered");
-			return new PersonalInformationPage(driver);
+			return true;
 		}
-		return null;
+		return false;
 	}
 
 	public boolean validate_plan_details(Map<String, String> planDetailsMap) {
@@ -277,9 +276,10 @@ public class PersonalInformationPage extends UhcDriver{
 
 	public SpecialElectionPeriodPage navigate_to_SEP_page() {
 
-		validate(NextBtn);
-		JavascriptExecutor executor = (JavascriptExecutor)driver;
-		executor.executeScript("arguments[0].click();", NextBtn);
+		validateNew(NextBtn);
+		jsClickNew(NextBtn);
+		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", NextBtn);*/
 		
 		if(driver.getCurrentUrl().contains("special-election-period")){
 			System.out.println("OLE SEP Page is Displayed");

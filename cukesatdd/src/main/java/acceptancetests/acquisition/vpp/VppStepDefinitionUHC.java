@@ -20,7 +20,7 @@ import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.bluelayer.ComparePlansPageBlayer;
 import acceptancetests.acquisition.ole.oleCommonConstants;
-import acceptancetests.vbfacquisition.vpp.VPPCommonConstants;
+import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.OLE_PageConstants;
 import acceptancetests.data.PageConstants;
@@ -238,7 +238,6 @@ public class VppStepDefinitionUHC {
 
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.OurPlanMALanding();
 		WelcomePage welcomeOLEPage = aquisitionhomepage.SpecialNeedPlansZipcodeSearchToOLE(zipcode);
 
 		if (welcomeOLEPage != null) {

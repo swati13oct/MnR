@@ -1,11 +1,12 @@
 @pdpInquiryKit
 @fixedTestCaseTest
 Feature:2.05-VBF-Acq-To test PDP inquiry flow in UHC site (GATED)
-@pdpInquiryKitUHC
+@pdpInquiryKitBLayerSmoke
 Scenario Outline:To verify PDP inquiry flow in UHC site
 Given the user is on the uhcmedicaresolutions site landing page
-When the user navigates to Request More Help and Information page under pdp section in UHC Site
+When the user navigates to request more help and information in UHC site
 And the user accesses the Request Plan Information and Enrollment Materials in UHC site
+And user validates error messages when blank form is selected on UHC site
 Then the user submits by entering following details in Order Enrollment Information page in UHC Site
 	| Plan guide		|<planGuide> |
 	| First name		| <firstName>		|

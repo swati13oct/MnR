@@ -4,6 +4,7 @@
 package pages.acquisition.ulayer;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,6 +13,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import pages.acquisition.uhcretiree.Rallytool_Page;
 import acceptancetests.data.MRConstants;
+import acceptancetests.util.CommonUtility;
 
 /**
  * @author rkodumur
@@ -19,6 +21,13 @@ import acceptancetests.data.MRConstants;
  */
 public class SiteMapAARPPage extends GlobalWebElements {
 	 
+	@FindBy(xpath = "//div[@id='medicareTitle']/*")
+	public static WebElement header;
+	
+	@FindBy(xpath = "//div[contains(@class,'med_cont')]/ul[contains(@class,'bullet_list')]/li")
+	public static List<WebElement> siteMapList;
+	
+	
 	public SiteMapAARPPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -27,13 +36,8 @@ public class SiteMapAARPPage extends GlobalWebElements {
 
 	@Override
 	public void openAndValidate() {
-		String en=System.getProperty("environment");
-		if ("offline".equalsIgnoreCase(en)){
-			start(AARP_SITE_MAP_PAGE_URL_OFFLINE);
-		}else{
-			start(AARP_SITE_MAP_PAGE_URL);
-		}
-		validate(footerPrivacyPolicyLink);
+		CommonUtility.waitForPageLoadNew(driver, header, 30);
+		validateNew(siteMapList.get(0));
 		
 	}
 	
@@ -43,16 +47,7 @@ public class SiteMapAARPPage extends GlobalWebElements {
 
 	private static String AARP_SITE_MAP_PAGE_URL = MRConstants.AARP_SITE_MAP_PAGE_URL;
 	private static String AARP_SITE_MAP_PAGE_URL_OFFLINE = MRConstants.AARP_SITE_MAP_PAGE_URL_OFFLINE;
-	public PrivacyPolicyAARPPage privacypolicyFooterClick() {
-		validate(footerPrivacyPolicyLink);
-		footerPrivacyPolicyLink.click();
-		validate(footerPrivacyPolicyLink);
-		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_PRIVACY_POLICY)) {
-			return new PrivacyPolicyAARPPage(driver);
-		}
-		return null;
-	}
-
+	
 	public Rallytool_Page providerlinkonaarpsitemapClick() {
 		validate(providerlinkonaarpsitemaplink);
 		

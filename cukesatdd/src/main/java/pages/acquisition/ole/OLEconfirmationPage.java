@@ -46,8 +46,7 @@ public class OLEconfirmationPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoad(driver,PlanYear_PlanName, 30);
-		validateNew(PlanYear_PlanName);
+		CommonUtility.waitForPageLoadNew(driver,PlanYear_PlanName, 30);
 	}
 
 	public boolean validate_plan_details(Map<String, String> planDetailsMap) {
@@ -111,7 +110,7 @@ public class OLEconfirmationPage extends UhcDriver{
 
 			}
 		}
-		if(!validate(NextSteps_MedicareAdvBtn) && !validate(NextSteps_MedSuppBtn) && !validate(NextSteps_PDPBtn)){
+		if(validateNonPresenceOfElement(NextSteps_MedicareAdvBtn) && validateNonPresenceOfElement(NextSteps_MedSuppBtn) && validateNonPresenceOfElement(NextSteps_PDPBtn)){
 			System.out.println("Next Steps are Not Displayed for planType : "+planType);
 			return true;
 		}

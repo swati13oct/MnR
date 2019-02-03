@@ -1,11 +1,12 @@
 @pdpInquiryKit
 @fixedTestCaseTest
 Feature:2.06-VBF-Acq-To test PDP inquiry flow in AARP site (GATED)
-@pdpInquiryKitAARP
+@pdpInquiryKitULayerSmoke
 Scenario Outline:To verify PDP inquiry flow in AARP site
 Given the user is on AARP medicare acquisition site landing page
-When the user navigates to Request More Help and Information page under pdp section in AARP Site
+When the user navigates to request more help and information in AARP site
 And the user accesses the Request Plan Information and Enrollment Materials in AARP site
+And user validates error messages when blank form is selected on AARP site
 Then the user submits by entering following details in Order Enrollment Information page in AARP Site
 	| Plan guide		|<planGuide> |
 	| First name		| <firstName>		|
