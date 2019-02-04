@@ -36,7 +36,11 @@ import pages.regression.payments.CreditCardUPGPage;
 import pages.regression.payments.OneTimePaymentPage;
 import pages.regression.payments.OneTimePaymentSuccessPage;
 import pages.regression.payments.PaymentHistoryPage;
+import pages.regression.payments.PaymentsFormPage;
+import pages.regression.payments.RecurringConfirmationPage;
+import pages.regression.payments.ReviewAutomaticPage;
 import pages.regression.payments.ReviewOneTimePaymentPage;
+import pages.regression.payments.SetUpRecurringPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
@@ -1603,6 +1607,22 @@ public class OneTimePaymentAarpStepDefintion {
 	}
 	}
 	
+	@Then("^user Navigates to UPG payment page and Enter Mandatory fields and click on Proceed for Recurring$")
+	public void user_Navigates_to_UPG_payment_page_and_Enter_Mandatory_fields_and_click_on_Proceed_for_Recurring(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		CreditCardUPGPage creditCardPaymentPage = (CreditCardUPGPage)getLoginScenario().getBean(PageConstants.Credit_Card_Payments_Page);
+		ReviewAutomaticPage reviewAutomaticPage = creditCardPaymentPage.EnterFiledsOnCCforREC(memberAttributesMap);
+		if (reviewAutomaticPage!=null){
+	     	  getLoginScenario().saveBean(PageConstants.Review_Automatic_Page, reviewAutomaticPage);
+		System.out.println("User is on Review Recurring Payments page");
+		
+	}
+	}
+	
 	@Then("^user navigates to payment overview screen and selects agreements and click on Make one time payemnt$")
 	public void user_navigates_to_payment_overview_screen_and_selects_agreements_and_click_on_Make_one_time_payemnt() throws Throwable {
 		ReviewOneTimePaymentPage reviewOneTimePaymentsPage = (ReviewOneTimePaymentPage)getLoginScenario().getBean(PageConstants.Review_OneTime_Payments_Page);
@@ -1619,4 +1639,96 @@ public class OneTimePaymentAarpStepDefintion {
 		confirmOneTimePaymentPage.OneTimeCCverification();
 	}
 
+	@Given("^user clicks on Set up Automatic payments on payment overview page$")
+	public void user_clicks_on_Set_up_Automatic_payments_on_payment_overview_page() throws Throwable {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		SetUpRecurringPage setupRecurringPage = paymentHistoryPage.clickOnSetUPAutomaticPayment();
+		if (setupRecurringPage != null) {
+			getLoginScenario().saveBean(PageConstants.SetUp_Recurring_Page, setupRecurringPage);
+			System.out.println("User is on Setup Recurring Payments screen");
+		}
+	}
+	
+	@Given("^user selects checking Account on Setup Automatic recurring payments page and Click on Next$")
+	public void user_selects_checking_Account_on_Setup_Automatic_recurring_payments_page_and_Click_on_Next() throws Throwable {
+		SetUpRecurringPage setupRecurringPage = (SetUpRecurringPage) getLoginScenario()
+				.getBean(PageConstants.SetUp_Recurring_Page);
+		PaymentsFormPage paymentsFormPage= setupRecurringPage.selectCheckingAccountAndClickOnNext();
+		if (paymentsFormPage != null) {
+			getLoginScenario().saveBean(PageConstants.Payments_Form_Page, paymentsFormPage);
+			System.out.println("User is on Form Page for Checking account");
+		}
+	}
+	
+	@Given("^user selects CreditDebit Card on Setup Automatic recurring payments page and Click on Next$")
+	public void user_selects_CreditDebit_Card_on_Setup_Automatic_recurring_payments_page_and_Click_on_Next() throws Throwable {
+		SetUpRecurringPage setupRecurringPage = (SetUpRecurringPage) getLoginScenario()
+				.getBean(PageConstants.SetUp_Recurring_Page);
+		CreditCardUPGPage creditCardPaymentPage= setupRecurringPage.selectCCAndClickOnNext();
+		if (creditCardPaymentPage != null) {
+			getLoginScenario().saveBean(PageConstants.Credit_Card_Payments_Page, creditCardPaymentPage);
+			System.out.println("User is on Form Page for Checking account");
+		}
+	}
+	
+	
+	@Given("^user Enters all Mandatory fields on form page and click on Authorize button$")
+	public void user_Enters_all_Mandatory_fields_on_form_page_and_click_on_Authorize_button(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		PaymentsFormPage paymentsFormPage = (PaymentsFormPage) getLoginScenario()
+				.getBean(PageConstants.Payments_Form_Page);
+		ReviewAutomaticPage reviewAutomaticPage = paymentsFormPage.EnterFiledsOnCC(memberAttributesMap);
+		if (reviewAutomaticPage != null) {
+			getLoginScenario().saveBean(PageConstants.Review_Automatic_Page, reviewAutomaticPage);
+			System.out.println("User is on Review Automatic payment for Checking account");
+		}
+		
+	}
+	
+	@Given("^user navigates to review your Automatic screen and selects agreements and click on Authorize Monthly payments Button for EFT$")
+	public void user_navigates_to_review_your_Automatic_screen_and_selects_agreements_and_click_on_Authorize_Monthly_payments_Button_for_EFT() throws Throwable {
+		ReviewAutomaticPage reviewAutomaticPage = (ReviewAutomaticPage) getLoginScenario()
+				.getBean(PageConstants.Review_Automatic_Page);
+		RecurringConfirmationPage recurringConfirmationPage = reviewAutomaticPage.selectAgreeAndClickOnAuthorizeMonthyPaymentsforEFT();
+		if (recurringConfirmationPage != null) {
+			getLoginScenario().saveBean(PageConstants.Recurring_Confirmation_Page, recurringConfirmationPage);
+			System.out.println("User is on recurring confirmation page for Checking account");
+		}
+	}
+	
+	
+	@Given("^user navigates to review your Automatic screen and selects agreements and click on Authorize Monthly payments Button for CC$")
+	public void user_navigates_to_review_your_Automatic_screen_and_selects_agreements_and_click_on_Authorize_Monthly_payments_Button_for_CC() throws Throwable {
+		ReviewAutomaticPage reviewAutomaticPage = (ReviewAutomaticPage) getLoginScenario()
+				.getBean(PageConstants.Review_Automatic_Page);
+		RecurringConfirmationPage recurringConfirmationPage = reviewAutomaticPage.selectAgreeAndClickOnAuthorizeMonthyPaymentsforCC();
+		if (recurringConfirmationPage != null) {
+			getLoginScenario().saveBean(PageConstants.Recurring_Confirmation_Page, recurringConfirmationPage);
+			System.out.println("User is on recurring confirmation page for CC");
+		}
+	}
+	
+	@Then("^User navigates to payment confirmation page and verifies ConfirmationNo for EFT$")
+	public void user_navigates_to_payment_confirmation_page_and_verifies_ConfirmationNo_for_EFT() throws Throwable {
+		RecurringConfirmationPage recurringConfirmationPage = (RecurringConfirmationPage) getLoginScenario()
+				.getBean(PageConstants.Recurring_Confirmation_Page);
+		recurringConfirmationPage.validateEFTRecurrVerification();
+		
+		
+	}
+	
+	@Then("^User navigates to payment confirmation page and verifies ConfirmationNo for CC$")
+	public void user_navigates_to_payment_confirmation_page_and_verifies_ConfirmationNo_for_CC() throws Throwable {
+		RecurringConfirmationPage recurringConfirmationPage = (RecurringConfirmationPage) getLoginScenario()
+				.getBean(PageConstants.Recurring_Confirmation_Page);
+		recurringConfirmationPage.validateCCRecurrVerification();
+		
+		
+	}
+	
 }

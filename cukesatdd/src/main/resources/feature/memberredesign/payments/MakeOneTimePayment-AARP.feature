@@ -330,7 +330,7 @@ Feature: To test the payment flow on Member site
       | planType | memberType              | Name | CreditCardNumber | validMonth | validYear |
       | PDP      | IndividualAARPCPayments | Test | 4111111111111111 |         04 |      2019 |
 
-  @MakOneTimeCCOther @Feb_release_2019 @SpartansObul
+  @MakOneTimeCCOther @Feb_release_2019 @Spartans
   Scenario Outline: Verify MakeOne time Payment submission for Different Types of Member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -345,6 +345,49 @@ Feature: To test the payment flow on Member site
       | Year             | <validYear>        |
     And user navigates to payment overview screen and selects agreements and click on Make one time payemnt
     Then User navigates to payment confirmation page for CC flow
+
+    Examples: 
+      | planType | memberType              | Name | CreditCardNumber | validMonth | validYear |
+      | PDP      | IndividualAARPCPayments | Test | 4111111111111111 |         04 |      2019 |
+
+  @SetupRecurrEFT @Feb_release_2019 @Spartans
+  Scenario Outline: Verify Setup Recurring for Checking Account
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When the user clicks on Premium Payments on Header
+    And user clicks on Set up Automatic payments on payment overview page
+    And user selects checking Account on Setup Automatic recurring payments page and Click on Next
+    And user Enters all Mandatory fields on form page and click on Authorize button
+      | Routing number             | <routingNo>        |
+      | Confirm routing number     | <confirmRoutingNo> |
+      | Account number             | <accountNo>        |
+      | Confirm account number     | <confirmAccountNo> |
+      | Account holder first name  | <firstName>        |
+      | Account holder middle name | <middleName>       |
+      | Account holder last name   | <lastName>         |
+    And user navigates to review your Automatic screen and selects agreements and click on Authorize Monthly payments Button for EFT
+    Then User navigates to payment confirmation page and verifies ConfirmationNo for EFT
+
+    Examples: 
+      | planType | memberType              | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
+      | PDP      | IndividualAARPCPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
+
+  @SetupRecurrCC @Feb_release_2019 @Spartans
+  Scenario Outline: Verify Setup Recurring for CC
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When the user clicks on Premium Payments on Header
+    And user clicks on Set up Automatic payments on payment overview page
+    And user selects CreditDebit Card on Setup Automatic recurring payments page and Click on Next
+    Then user Navigates to UPG payment page and Enter Mandatory fields and click on Proceed for Recurring
+      | Name             | <Name>             |
+      | CreditCardNumber | <CreditCardNumber> |
+      | Month            | <validMonth>       |
+      | Year             | <validYear>        |
+    And user navigates to review your Automatic screen and selects agreements and click on Authorize Monthly payments Button for CC
+    Then User navigates to payment confirmation page and verifies ConfirmationNo for CC
 
     Examples: 
       | planType | memberType              | Name | CreditCardNumber | validMonth | validYear |

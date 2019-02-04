@@ -199,6 +199,12 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='btn btn--primary onetimepayment']")
 	private WebElement MakeOneTimepaymentButton;
 
+	@FindBy(xpath = "//a[text()='Set Up Automatic Payments']")
+	private WebElement SetUpAutomaticPaymentsButton;
+
+	@FindBy(xpath = "//h2[text()='Helpful Reminders']")
+	private WebElement HelpfulRemindersPanel;
+
 	public PaymentHistoryPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -790,6 +796,17 @@ public class PaymentHistoryPage extends UhcDriver {
 		System.out.println("User clicked on Make one time payment");
 		if (validate(OtherAmountButton)) {
 			return new OneTimePaymentPage(driver);
+		} else
+			return null;
+	}
+
+	public SetUpRecurringPage clickOnSetUPAutomaticPayment() throws Exception {
+		Thread.sleep(20000);
+		waitforElement(SetUpAutomaticPaymentsButton);
+		SetUpAutomaticPaymentsButton.click();
+		System.out.println("User clicked on Setup Automatic Button");
+		if (validate(HelpfulRemindersPanel)) {
+			return new SetUpRecurringPage(driver);
 		} else
 			return null;
 	}

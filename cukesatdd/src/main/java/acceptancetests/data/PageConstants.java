@@ -588,6 +588,14 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 	public static final String DashPage =  "DashboradPage";
 
 	public static final String One_Time_Payments_Page = "oneTimePaymentPage";
+	
+	public static final String SetUp_Recurring_Page = "setupRecurringPage";
+	
+	public static final String Review_Automatic_Page = "reviewAutomaticPage";
+	
+	public static final String Recurring_Confirmation_Page = "recurringConfirmationPage";
+	
+	public static final String Payments_Form_Page = "paymentsFormPage";
 
 	public static final String Review_OneTime_Page = "reviewOneTimePaymentPage";
 

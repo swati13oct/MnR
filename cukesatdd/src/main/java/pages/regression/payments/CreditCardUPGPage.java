@@ -74,6 +74,26 @@ public class CreditCardUPGPage extends UhcDriver {
 		}
 	}
 
+	public ReviewAutomaticPage EnterFiledsOnCCforREC(Map<String, String> accountAttributessMap) {
+		String Name = accountAttributessMap.get("Name");
+		String CreditCardNumber = accountAttributessMap.get("CreditCardNumber");
+		String ExpMonth = accountAttributessMap.get("Month");
+		String ExpYr = accountAttributessMap.get("Year");
+
+		EnterName.sendKeys(Name);
+		EnterAccountNumber.sendKeys(CreditCardNumber);
+		selectFromDropDownByText(driver, SelectMonth, ExpMonth);
+		selectFromDropDownByText(driver, SelectYear, ExpYr);
+		ProceedButton.click();
+		if (ReviewPageHeading.getText().contains("Review Recurring Payments")) {
+			System.out.println("Review Recurring Payments displayed");
+			return new ReviewAutomaticPage(driver);
+		} else {
+			System.out.println("Review Recurring Payments not displayed");
+			return null;
+		}
+	}
+
 	@Override
 	public void openAndValidate() {
 		validate(EnterCreditInfo);
