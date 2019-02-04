@@ -238,6 +238,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public JSONObject cobrowseJson;
 	private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
 	private static String UMS_ACQISITION_OFFLINE_PAGE_URL = MRConstants.UHC_URL_OFFLINE;
+	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
+	private static String AARP_ACQISITION_OFFLINE_PAGE_URL = MRConstants.AARP_URL_OFFLINE;
 
 	public AcquisitionHomePage(WebDriver driver) {
 		super(driver);
@@ -249,6 +251,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate(alreadyOnSite);
+	}
+
+	public AcquisitionHomePage(WebDriver driver, String string) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		openAndValidate(string);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -310,6 +318,20 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		checkModelPopup(driver);
 		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
 	}
+	
+	
+	public void openAndValidate(String Ulayer) {
+		if (MRScenario.environment.equals("offline")) {
+			startNew(AARP_ACQISITION_PAGE_URL);
+		} else {
+			startNew(AARP_ACQISITION_PAGE_URL);
+		}
+		CommonUtility.checkPageIsReadyNew(driver);
+		checkModelPopup(driver);
+		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
+	}
+	
+	
 
 	public  VPPPlanSummaryPage searchPlans(String zipcode, String countyName) {
 		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 20);

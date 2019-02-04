@@ -25,13 +25,21 @@ public class PlanSelectorStepDefinition {
 		return loginScenario;
 	}
 
-	/**
-	 * @toDo:user is on AARP medicare acquisition site landing page
-	 */
+	
 	@Given("^the user is on UHC medicare acquisition site landing page$")
 	public void the_user_on_uhc_medicaresolutions_Site() {
 		WebDriver wd = getLoginScenario().getWebDriver();
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
+
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+				aquisitionhomepage);
+	}
+	
+	@Given("^the user is on Acquisition AARP medicare site landing page$")
+	public void the_user_on_AARP_Site_medicaresolutions() {
+		WebDriver wd = getLoginScenario().getWebDriver();
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, "Ulayer");
 
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
