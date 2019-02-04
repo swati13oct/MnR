@@ -146,6 +146,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                @FindBy(className = "atdd-bnc-drgcvrgeinfo")
                private WebElement DrugCoveragetext;
 
+               @FindBy(xpath = "//p[@class='atdd-bnc-drugcoverage-title']")
+               private WebElement DrugCoveragetext_pdp;
+               
                @FindBy(className = "atdd-bnc-drugcoverage-title")
                private WebElement DrugCoverageHeader;
 
@@ -193,6 +196,12 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
                @FindBy(xpath = "//a[@class='display-block collapse-expand collapsed atdd-bnc-drgpricingtiers']")
                private WebElement LearnMoreDrugPricingTiersLink;
+               
+               @FindBy(xpath = "//div[@class='margin-extra-small display-block ng-hide']//a[@class='display-block collapse-expand collapsed atdd-bnc-drgpricingtiers']")
+               private WebElement LearnMoreDrugPricingTiersLink_hidden_pdpLis;
+
+               @FindBy(xpath = "//div[@class='margin-extra-small display-block']//a[@class='display-block collapse-expand collapsed atdd-bnc-drgpricingtiers']")
+               private WebElement LearnMoreDrugPricingTiersLink_visble_pdpLis;
 
                @FindBy(id = "collapseTiers")
                private WebElement LearnmoretierslinkArea;
@@ -552,7 +561,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                @FindBy(xpath = "//img[@alt='mailservicelogo']/parent::div/following-sibling::div/p")
                private WebElement mailOrderWidget;
 
-               @FindBy(id = "waystosave")
+               //@FindBy(id = "waystosave")
+               @FindBy(xpath="//div[@id='waystosave']")
                private List<WebElement> waysToSaveSectionvalidate;
 
                @FindBy(className = "atdd-benefitssummary-plnbnftdcmnt-title")
@@ -1586,6 +1596,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                               validateWithValue("Drug Coverage text",DrugCoveragetext);
                }
 
+               public void validatedrugcoverageheaderandtext_pdplis() {
+                   validateWithValue("Drug Coverage Header", DrugCoverageHeader);
+                   validateWithValue("Drug Coverage text",DrugCoveragetext_pdp);
+    }
+
                /**
                * @toDo : The user validates the DrugCoverage section headers and text for group
                */
@@ -1756,7 +1771,24 @@ public class BenefitsAndCoveragePage extends UhcDriver {
             		   Assert.assertTrue(true);
                    }
 				}
+               
+               public void validate_tierlinknotdisplay_pdpLis() {
+            	   //note: for pdp lis user, this element will display in dom but it will not be visible on page (i.e. hidden)
+            	   try {
+                	   if (LearnMoreDrugPricingTiersLink_hidden_pdpLis.isDisplayed()) {
+                		   Assert.assertTrue("The element 'Learn more about drug tiers' should not be visible on page", true);
+                	   } 
+                   } catch (NoSuchElementException e) {
+                	   if (LearnMoreDrugPricingTiersLink_visble_pdpLis.isDisplayed()) {
+                		   Assert.assertTrue("The element 'Learn more about drug tiers' should have been hidden on page", false);
+                	   } else {
+                		   // neither of the elements are located so assume the element doesn't exist
+                		   Assert.assertTrue("The element 'Learn more about drug tiers' should not be visible/hidden on page", true);
+                	   }
 
+                   }
+				}
+               
                /**
                * @toDo : Validates the Pharmacy selection dropdown for a Lis member
                */
@@ -2073,7 +2105,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                               try {
                                              if (element.isDisplayed()) {
                                                             System.out.println("Element " +value+ " found!!!!");
-                                                            Assert.assertTrue("Element " +value+ " found!!!!", true);
+                                                            Assert.assertTrue("Element " +value+ " not found!!!!", true);
                                                             return true;
                                              } else {
                                                             System.out.println("Element " +value+ " not found/not visible");
@@ -2086,6 +2118,24 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                               return false;
 
                }
+
+               public boolean validateNotDisplay(String value, WebElement element) {
+            	   //note: validate element doesn't exist/display on the page
+                   try {
+                                  if (element.isDisplayed()) {
+                                                 System.out.println("Element " +value+ " found");
+                                                 Assert.assertTrue("Element " +value+ " not found", false);
+                                  } else {
+                                                 System.out.println("Element " +value+ " not found/not visible");
+                                                 Assert.assertTrue("Element " +value+ " found/visible", true);
+                                  }
+                   } catch (Exception e) {
+                                  System.err.println("Exception: Element " +value+ "  not found/not visible");
+                                  Assert.assertTrue("Element " +value+ " found/not visible", true);
+                   }
+                   return false;
+
+    }
 
                /**
                * @toDo Validate Plan overview for PDP Individual Members
@@ -2148,46 +2198,54 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                */
 
                public void validateHeaders(String planType) {
-                              validateWithValue("Benefits Summary Header", BenefitsSummaryHeader);
-                              validateWithValue("Copays coinsurance header",Copayscoinsuranceheader);
-                              validateWithValue("Hospital Visits",HospitalVisits);
-                              validateWithValue("Office Visits",OfficeVisits);
-                              validateWithValue("Outpatient Surgery Center",OutpatientSurgeryCenter);
+            	   //note: for PDP user, there will be NO Benefits Summary Header section
+            	   if (planType.equalsIgnoreCase("PDP")) {
+            		   System.out.println("User has planType=PDP, validate should not have Benefits Summary section at all");
+            		   validateNotDisplay("Benefits Summary Header", BenefitsSummaryHeader);
+            		   validateNotDisplay("Copays coinsurance header",Copayscoinsuranceheader);
+            	   } else {
+                       validateWithValue("Benefits Summary Header", BenefitsSummaryHeader);
+                	   
+                       validateWithValue("Copays coinsurance header",Copayscoinsuranceheader);
+                       validateWithValue("Hospital Visits",HospitalVisits);
+                       validateWithValue("Office Visits",OfficeVisits);
+                       validateWithValue("Outpatient Surgery Center",OutpatientSurgeryCenter);
 
-                              validateWithValue("Outpatient Surgery Center Value",OutpatientSurgeryCenterValue);
-                              validateWithValue("Offic Visits Value",OfficVisitsValue);
+                       validateWithValue("Outpatient Surgery Center Value",OutpatientSurgeryCenterValue);
+                       validateWithValue("Offic Visits Value",OfficVisitsValue);
 
-                              Assert.assertEquals(OfficeVisits.getText(), "OFFICE VISITS ");
-                              if(planType.contains("Medica"))
-                              {
-                                             System.out.println(OutpatientSurgeryCenter.getText());
-                                             Assert.assertEquals(OutpatientSurgeryCenter.getText(), "OUTPATIENT SURGERY CENTER VISITS ");
-                              }
-                              else
-                              {
-                                             Assert.assertEquals(OutpatientSurgeryCenter.getText(), "OUTPATIENT SURGERY CENTER VISITS");
-                                             System.out.println(OutpatientSurgeryCenter.getText());
-                              }
-                              System.out.println(HospitalVisits.getText());
-                              Assert.assertEquals(HospitalVisits.getText(), "HOSPITAL VISITS ");
-                              if(planType.contains("Medica"))
-                              {
-                                             System.out.println(OutpatientSurgeryCenter2.getText());
-                                             if (StringUtils.isEmpty(OutpatientSurgeryCenter2.getText())) {
+                       Assert.assertEquals(OfficeVisits.getText(), "OFFICE VISITS ");
+                       if(planType.contains("Medica"))
+                       {
+                                      System.out.println(OutpatientSurgeryCenter.getText());
+                                      Assert.assertEquals(OutpatientSurgeryCenter.getText(), "OUTPATIENT SURGERY CENTER VISITS ");
+                       }
+                       else
+                       {
+                                      Assert.assertEquals(OutpatientSurgeryCenter.getText(), "OUTPATIENT SURGERY CENTER VISITS");
+                                      System.out.println(OutpatientSurgeryCenter.getText());
+                       }
+                       System.out.println(HospitalVisits.getText());
+                       Assert.assertEquals(HospitalVisits.getText(), "HOSPITAL VISITS ");
+                       if(planType.contains("Medica"))
+                       {
+                                      System.out.println(OutpatientSurgeryCenter2.getText());
+                                      if (StringUtils.isEmpty(OutpatientSurgeryCenter2.getText())) {
 
-                                                            Assert.fail();
-                                             }              
-                              }
-                              else if (StringUtils.isEmpty(OutpatientSurgeryCenterValue.getText())) {
+                                                     Assert.fail();
+                                      }              
+                       }
+                       else if (StringUtils.isEmpty(OutpatientSurgeryCenterValue.getText())) {
 
-                                             Assert.fail("Outpatient Surgery Center Value is not displaying");
-                              }
+                                      Assert.fail("Outpatient Surgery Center Value is not displaying");
+                       }
 
-                              if (StringUtils.isEmpty(OfficVisitsValue.getText())) {
+                       if (StringUtils.isEmpty(OfficVisitsValue.getText())) {
 
-                                             Assert.fail();
-                              }
+                                      Assert.fail();
+                       }
 
+            	   }
                }
 
                /**
@@ -3114,14 +3172,14 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                                              //validateNew(lowTierdrugs);
                                              validateNew(mailOrderWidget);
                                              //validateNew(wallGreensWidget);
-                              } else if (memberType.equalsIgnoreCase("Group")) {
-                                             if (waysToSaveSectionvalidate.size() < 1) {
+                              } else if (memberType.equalsIgnoreCase("Group") || memberType.equalsIgnoreCase("withoutWaysToSave_BnC")) {
+                            	  //note: by default there will be one id=waystosave element on the page regardless memberType, so check to see it's less than 2 instead of 1
+                                             if (waysToSaveSectionvalidate.size() < 2) {
                                                             Assert.assertTrue("ways to save section doesnt exist for a non PDP memeber", true);
                                              } else {
                                                             Assert.assertFalse("ways to save section exists for a non PDP memeber", true);
                                              }
-
-                              } else {
+                               } else {
                                              System.out.println("Please provide a valid member .Refer Notes in feature file");
                               }
 
