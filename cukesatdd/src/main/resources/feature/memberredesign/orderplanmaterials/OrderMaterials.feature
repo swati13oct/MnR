@@ -17,11 +17,10 @@ Feature:P1.5 To test order materials in Redesign site
     Examples: 
       | planType | memberType | option           |
       | MA      |  AARPIndividual | Replacement ID card |
-      | MAPD     | AARPIndividual  | Replacement ID card      |
+      | MAPD     | AARPIndividual_order  | Replacement ID card      |
       | MAPD     | PCP  | Replacement ID card      |
       | MAPD     | Medica2  | Replacement ID card      | 
       | PDP      |  AARPIndividual | Welcome Guide    |
-      #orig | SHIP     | AARPIndividual  | Claims Envelope |
       | SHIP     | AARPIndividual_order  | Claims Envelope |
 
   @orderPlanMaterials2 @ValidateSHIPErrorMessage @regressionMember
