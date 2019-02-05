@@ -104,14 +104,7 @@ public class ProviderSearchStepDefinitionUHC {
 		
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		
-		plansummaryPage = plansummaryPage.viewPlanSummary(planType);
-		if (plansummaryPage != null) {
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
-					plansummaryPage);
-		} else {
-			Assert.fail("Error Loading VPP plan summary page");
-		}
-		
+		plansummaryPage.viewPlanSummary(planType);
 	}
 	
 		
@@ -133,7 +126,7 @@ public class ProviderSearchStepDefinitionUHC {
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		
-		plansummaryPage.clicksOnIsProviderCoveredB(planName);
+		plansummaryPage.clicksOnIsProviderCoveredUms(planName);
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
 				plansummaryPage);
 	

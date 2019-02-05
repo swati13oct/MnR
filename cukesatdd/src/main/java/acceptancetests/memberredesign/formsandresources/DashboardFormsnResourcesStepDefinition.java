@@ -18,6 +18,7 @@ import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.regression.login.HSIDLoginPage;
+import pages.regression.memberauth.MemberAuthPage;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.formsandresources.FormsAndResourcesPage;
 import atdd.framework.*;
@@ -674,11 +675,14 @@ public class DashboardFormsnResourcesStepDefinition {
 	 * }
 	 */
 	@Then("^validate that the plan material section is displayed$")
-	public void validate_that_the_plan_material_section_is_displayed() throws Throwable {
+	public void validate_that_the_plan_material_section_is_displayed(DataTable attribute) throws Throwable {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
 		System.out.println("fnr page");
-		if (formsAndResourcesPage.getplanmaterialsection().isDisplayed()) {
+		List<List<String>> data = attribute.raw();
+		String memberType=data.get(0).get(1);
+				
+		if (formsAndResourcesPage.getplanmaterialsection(memberType).isDisplayed()) {
 			System.out.println("plan materials");
 			Assert.assertTrue(true);
 		} else {
@@ -1253,6 +1257,17 @@ public class DashboardFormsnResourcesStepDefinition {
 
 	}
 	
-	
-	
+	@And("^user Clicks on the Pop up displayed and checks payment link$")
+	public void member_clicks_popup() throws InterruptedException {
+
+		MemberAuthPage popupMauth = (MemberAuthPage) getLoginScenario().getBean(PageConstants.Member_Auth_PopUp);
+		Thread.sleep(10000);
+		popupMauth.PopupClick();
+		/*AccountHomePage NewWindow = popupMauth.PopupClick();
+		
+		 * Thread.sleep(10000); if(NewWindow!=null){
+		 * getLoginScenario().saveBean(PageConstants.DashPage, NewWindow); } else {
+		 * System.out.println("NewWindow is null"); } }
+		 */
+	}
 }

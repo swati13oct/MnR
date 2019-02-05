@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import atdd.framework.UhcDriver;
 
@@ -80,6 +81,15 @@ public class OneTimePaymentPage extends UhcDriver{
 	
 	@FindBy(xpath="(//*[@class='margin-medium']/span)[2]/a")
 	private WebElement AuthorizeButton;
+	
+	@FindBy(id = "btnSubmit")
+	private WebElement ProceedButton;
+	
+	@FindBy(xpath="//*[@id='holderName']")
+	private WebElement CardHolderName;
+	
+	@FindBy(xpath="//*[@id='accountNumber']")
+	private WebElement CreditCardNumberField;	
 	
 	@FindBy(xpath="(//*[@class='modal-content']//div[@class='modal-footer'])[1]/a[1]")
 	private WebElement PaymentCancelPopup;
@@ -263,7 +273,56 @@ public ConfirmOneTimePaymentPage enterNewPagePaymentDetails(Map<String, String> 
 		return null;		
 	}	
 	
+
+public ConfirmOneTimePaymentPage enterNewPageCCDetails(Map<String, String> accountAttributessMap) {
 	
+	String Name = accountAttributessMap.get("Name");
+	String CreditCardNumber = accountAttributessMap.get("CreditCardNumber");	
+	
+	
+	try {   
+    	  Thread.sleep(2000); 		
+    		driver.switchTo().frame("IPerceptionsEmbed");
+    		System.out.println("iPerception Pop Up is Present");
+    		iPerceptionCloseButton.click();
+    		driver.switchTo().defaultContent();
+    		Thread.sleep(5000);
+    		}
+    		catch (Exception e) {
+    		System.out.println("iPerception Pop Up is not Present");
+    		}
+	
+	CardHolderName.clear();
+	CardHolderName.sendKeys(Name);
+	
+	CreditCardNumberField.click();
+	CreditCardNumberField.clear();
+	CreditCardNumberField.sendKeys(CreditCardNumber);
+	
+	Select Month = new Select(driver.findElement(By.name("month")));
+	Month.selectByVisibleText("04");
+	
+	Select Year = new Select(driver.findElement(By.name("year")));
+	Year.selectByVisibleText("2019");
+	
+	ProceedButton.click();
+	
+	try{
+		Thread.sleep(6000);
+	}catch(Exception e)
+	{
+		System.out.println(e);
+	}	
+	
+	return new ConfirmOneTimePaymentPage(driver);
+	/*if(PageHeader.isDisplayed())
+	{
+		return new ConfirmOneTimePaymentPage(driver);
+	}
+	
+	return null;*/		
+}	
+
 	
 	
 	public ConfirmOneTimePaymentPage enterAutoPaymentDetails(Map<String, String> accountAttributessMap) {

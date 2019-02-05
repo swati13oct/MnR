@@ -11,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.ulayer.AcquisitionHomePage;
+import pages.acquisition.ulayer.ProviderSearchPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
@@ -133,39 +134,48 @@ public class ProviderSearchStepDefinitionAARP {
 			getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			
-			plansummaryPage.clicksOnIsProviderCovered(planName);
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
-					plansummaryPage);
-		
-		}
-		}
-		
-		/**
-		 * @toDo:Verify X out of Y provider covered information is displayed on Plan Summary page
-		 */
-		@Then("^Verify X out of Y provider covered information is displayed on Plan Summary page Ulayer$")
-		public void verifyproviderscoveredulayer(DataTable Planname ){
-			
-			List<DataTableRow> plannameAttributesRow = Planname
-					.getGherkinRows();
-			Map<String, String> plannameAttributesMap = new HashMap<String, String>();
-			for (int i = 0; i < plannameAttributesRow.size(); i++) {
-
-				plannameAttributesMap.put(plannameAttributesRow.get(i).getCells()
-						.get(0), plannameAttributesRow.get(i).getCells().get(1));
+			ProviderSearchPage providerSearchPage = plansummaryPage.clicksOnIsProviderCovered(planName);
+			if(providerSearchPage!=null) {
+				getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
 			}
-			String planName = plannameAttributesMap.get("PlanName");
-	
-					VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		if(plansummaryPage.providerinfo(planName))
-		{
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
-					plansummaryPage);
+		
 		}
-	
-		else {
-			Assert.fail("Error Loading Provider search info");
+		}
+		
+	/**
+	 * @toDo:user user selects a provider
+	 */
+	@When("^user selects a provider and retuns to VPP page in ulayer$")
+	public void user_selects_provider_and_return_vpp_page_ulayer() {
+		{
+			ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
+					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+			VPPPlanSummaryPage plansummaryPage = providerSearchPage.selectsProvider();
+			Assert.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+
 		}
 	}
-		
+			
+			
+	/**
+	 * @toDo:Verify X out of Y provider covered information is displayed on Plan
+	 *              Summary page
+	 */
+	@Then("^Verify X out of Y provider covered information is displayed on Plan Summary page Ulayer$")
+	public void verify_providers_covered_ulayer(DataTable Planname) {
+
+		List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+					plannameAttributesRow.get(i).getCells().get(1));
+		}
+		String planName = plannameAttributesMap.get("PlanName");
+
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		Assert.assertTrue("Provider coverage Info not updated", plansummaryPage.providerinfo(planName));
+	}
+
 }

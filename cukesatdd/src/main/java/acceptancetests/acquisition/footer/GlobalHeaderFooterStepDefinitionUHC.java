@@ -56,7 +56,7 @@ public class GlobalHeaderFooterStepDefinitionUHC {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		if(aquisitionhomepage != null){
 			
-			
+			aquisitionhomepage.validateFooterLinks();
 		}
 		else{
 			Assert.fail("Error in Home page");
@@ -89,9 +89,9 @@ public class GlobalHeaderFooterStepDefinitionUHC {
 	@And("^the user clicks on Aboutus link from home page footer UHC Medicaresolutions Site$")
 	public void user_clicks_Aboutus_links_ums() {
 
-		SiteMapUMSPage siteMapUMSPage = (SiteMapUMSPage) getLoginScenario()
-				.getBean(PageConstants.SITE_MAP_PAGE);
-		AboutUsPage aboutUsPage = siteMapUMSPage.aboutUsClick();
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		AboutUsPage aboutUsPage = aquisitionhomepage.aboutUsClick();
 		if(aboutUsPage != null){
 			getLoginScenario().saveBean(PageConstants.ABOUT_US_PAGE,
 					aboutUsPage);
@@ -110,9 +110,9 @@ public class GlobalHeaderFooterStepDefinitionUHC {
 	@And("^the user clicks on Contactus link from about us page footer UHC Medicaresolutions Site$")
 	public void user_clicks_Contactus_link_ums() {
 
-		AboutUsPage aboutUsPage = (AboutUsPage) getLoginScenario()
-				.getBean(PageConstants.ABOUT_US_PAGE);
-		ContactUsUmsPage contactUsUmsPage = aboutUsPage.contactUsClick();
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		ContactUsUmsPage contactUsUmsPage = aquisitionhomepage.contactUsClick();
 		if(contactUsUmsPage != null){
 			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
 					contactUsUmsPage);
@@ -131,9 +131,9 @@ public class GlobalHeaderFooterStepDefinitionUHC {
 	@And("^the user clicks on Privacy Policy link from Contactus page footer UHC Medicaresolutions Site$")
 	public void user_clicks_PrivacyPolicy_link_ums() {
 
-		ContactUsUmsPage contactUsUmsPage = (ContactUsUmsPage) getLoginScenario()
-				.getBean(PageConstants.CONTACT_US_PAGE);
-		PrivacyPolicyUmsPage privacyPolicyUmsPage = contactUsUmsPage.privacyPolicyClick();
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		PrivacyPolicyUmsPage privacyPolicyUmsPage = aquisitionhomepage.privacyPolicyClick();
 		if(privacyPolicyUmsPage != null){
 			getLoginScenario().saveBean(PageConstants.PRIVACY_POLICY_PAGE,
 					privacyPolicyUmsPage);
@@ -152,9 +152,9 @@ public class GlobalHeaderFooterStepDefinitionUHC {
 	@And("^the user clicks on Terms of use link from Privacy Policy page footer UHC Medicaresolutions Site$")
 	public void user_clicks_TermsOfUse_link_ums() {
 
-		PrivacyPolicyUmsPage privacyPolicyUmsPage = (PrivacyPolicyUmsPage) getLoginScenario()
-				.getBean(PageConstants.PRIVACY_POLICY_PAGE);
-		TermsOfUseUmsPage termsOfUseUmsPage = privacyPolicyUmsPage.termsOfUseClick();
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		TermsOfUseUmsPage termsOfUseUmsPage = aquisitionhomepage.termsOfUseClick();
 		if(termsOfUseUmsPage != null){
 			getLoginScenario().saveBean(PageConstants.TERMS_OF_USE_PAGE,
 					termsOfUseUmsPage);
@@ -173,9 +173,9 @@ public class GlobalHeaderFooterStepDefinitionUHC {
 	@And("^the user clicks on Disclaimers link from Terms of use page footer UHC Medicaresolutions Site$")
 	public void user_clicks_Disclaimers_link_ums() {
 
-		TermsOfUseUmsPage termsOfUseUmsPage = (TermsOfUseUmsPage) getLoginScenario()
-				.getBean(PageConstants.TERMS_OF_USE_PAGE);
-		DisclaimersPage disclaimersPage = termsOfUseUmsPage.disclaimersClick();
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		DisclaimersPage disclaimersPage = aquisitionhomepage.disclaimersClick();
 		if(disclaimersPage != null){
 			getLoginScenario().saveBean(PageConstants.DISCLAIMERS_PAGE,
 					disclaimersPage);
@@ -194,9 +194,9 @@ public class GlobalHeaderFooterStepDefinitionUHC {
 	@And("^the user clicks on Agents & Brokers link from Disclaimers page footer UHC Medicaresolutions Site$")
 	public void user_clicks_AgentsAndBrokers_link_ums() {
 
-		DisclaimersPage disclaimersPage = (DisclaimersPage) getLoginScenario()
-				.getBean(PageConstants.DISCLAIMERS_PAGE);
-		AgentsAndBrokersPage agentsAndBrokersPage = disclaimersPage.agentsAndBrokersClick();
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		AgentsAndBrokersPage agentsAndBrokersPage = aquisitionhomepage.agentsAndBrokersClick();
 		if(agentsAndBrokersPage != null){
 			getLoginScenario().saveBean(PageConstants.AGENTS_AND_BROKERS_PAGE,
 					agentsAndBrokersPage);
@@ -212,12 +212,20 @@ public class GlobalHeaderFooterStepDefinitionUHC {
 	 */
 	@And("^user verifies home link of agents&brokers page bluelayer$")
 	public void user_clicks_on_home_link_of_agents_brokers_page_bluelayer() {
-		AgentsAndBrokersPage agentsAndBrokersPage  = (AgentsAndBrokersPage) getLoginScenario()
-				.getBean(PageConstants.AGENTS_AND_BROKERS_PAGE);
-		if (agentsAndBrokersPage.validatHomeLink()) {
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail("Error in validating Home link ");
-		}
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		
+		AcquisitionHomePage aquisitionHomePageReload = aquisitionhomepage.homeFooterClick();
+		Assert.assertTrue("home page not found", aquisitionHomePageReload!= null);
+	}
+	
+	/**
+	 * @toDo:user clicks on Request Assistance and validates modal window
+	 */
+	@And("^user clicks on Request Assistance and validates modal window bluelayer$")
+	public void user_clicks_on_Request_Assistance_and_validates_modal_window_blayer() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.clickRequestAsistancce();
 	}
 }

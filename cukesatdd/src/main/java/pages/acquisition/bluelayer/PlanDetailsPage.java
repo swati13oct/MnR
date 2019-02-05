@@ -82,7 +82,7 @@ public class PlanDetailsPage extends UhcDriver{
 	@FindBy(linkText="Back to all plans")
 	private WebElement backToPlansBtn;
 	
-	 @FindBy(xpath = ".//*[@id='highlights']/div/div/span[1]/label")
+	 @FindBy(xpath = "//input[@id='compareone']/following-sibling::label")
 	 private WebElement compareBox;
 	 
 	 @FindBy(xpath = ".//*[@id='highlights']//span[contains(@class,'added-num ng-scope')]")
@@ -124,7 +124,11 @@ public class PlanDetailsPage extends UhcDriver{
 		@FindBy(xpath = ".//*[@id='form-valid']//button[2]")
 		private WebElement sendButtonEmailPlanDetailsPopUp;
 		
+		@FindBy(xpath = "//div[@id='estimateYourDrugs']//*[contains(text(),'Your Drug List')]")
+		private WebElement yourDrugListHeading;
 		
+		@FindBy(xpath = "//table[contains(@class,'drug-list-table')]//tr[2]/td/strong")
+		private WebElement addedDrug;
 
 	private PageData vppPlanDetails;
 
@@ -139,6 +143,15 @@ public class PlanDetailsPage extends UhcDriver{
 	
 	@FindBy(xpath="//div[@class='content-section plan-details-content mb-content ng-scope']/div[2]//a[@class='back-to-plans backtoplans-plandetail ng-scope']")
 	private WebElement downbackToPlanslink;
+	
+	@FindBy(id="medicalbenefits")
+	private List<WebElement> medBenefitsTab;
+	
+	@FindBy(id = "prescriptiondrug")
+    private List<WebElement> presDrugTab;
+	
+	@FindBy(id="plancosts")
+	private WebElement planCostsTab;
 
 	public PlanDetailsPage(WebDriver driver) {
 		super(driver);
@@ -146,6 +159,12 @@ public class PlanDetailsPage extends UhcDriver{
 		//openAndValidate();
 	}
 
+	public PlanDetailsPage(WebDriver driver, String planType) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		openAndValidate(planType);
+	}
+	
 	public String getPlanDetails() {
 		return planDetailsContent.getText();
 
@@ -164,6 +183,18 @@ public class PlanDetailsPage extends UhcDriver{
 
 	}
 
+	public void openAndValidate(String planType) {
+		if (planType.equalsIgnoreCase("MA")) {
+			CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
+			Assert.assertTrue(0 == presDrugTab.size(), "Prescription Drug tab not displayed for MA plans");
+
+		} else if (planType.equalsIgnoreCase("PDP")) {
+			CommonUtility.waitForPageLoadNew(driver, presDrugTab.get(0), 45);
+			Assert.assertTrue(0 == medBenefitsTab.size(), "Medical Benefit tab not displayed for PDP plans");
+		}
+		validateNew(planCostsTab);
+
+	}
 	@Override
 	public void openAndValidate() {
 
@@ -382,18 +413,18 @@ public class PlanDetailsPage extends UhcDriver{
 		}
 
 	   
-		public boolean validateCompareBox() {
-			
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+	public boolean validateCompareBox() {
+		if (compareBoxMessage.getText().contains("plan added")) {
 			clickCompareBox();
-			if(compareBoxMessage.getText().contains("plan added"))
-				return true;
+			Assert.assertTrue(compareBoxMessage.getText().contains("Add to compare"),
+					"Message not changed to Add to Compare");
+			return true;
+		} else {
+			Assert.fail("Plan Added text not displayed. Please check if checkbox is checked or not");
 			return false;
 		}
+
+	}
 		
 		public void clickCompareBox(){
 			compareBox.click();
@@ -606,7 +637,24 @@ public boolean validatingAdditionalBenefitTextInPlanDetails(String benefitType, 
 	return validationFlag;
 }
 
+public VPPPlanSummaryPage navigateBackToPlanSummaryPage() {
+	
+	backToAllPlans.click();
+	CommonUtility.checkPageIsReadyNew(driver);
+	if (driver.getCurrentUrl().contains("plan-summary")) {
+		return new VPPPlanSummaryPage(driver);
 
+	}
+	return null;
+}
+
+public void validatedAddedDrug(String expectedDrugName) {
+	validateNew(presDrugTab.get(0));
+	presDrugTab.get(0).click();
+	validateNew(yourDrugListHeading);
+	String actualDrug = addedDrug.getText().trim();
+	Assert.assertTrue(actualDrug.contains(expectedDrugName), "Expected drug not matches with actual drug");
+}
 }
 
 
