@@ -97,16 +97,16 @@ public class MRScenario {
 	static BufferedReader memberAmpTypeReader = null;
 	static BufferedReader memberUmsTypeReader = null;
 	static BufferedReader memberRedesignVbfTypeReader = null;
-	public static final String USERNAME = "ucpadmin";
+	public static final String USERNAME = "ashah";
 
-	public static final String ACCESS_KEY = "2817affd-616e-4c96-819e-4583348d7b37";
+	public static final String ACCESS_KEY = "6dd7b6f1-f05a-463a-b6ca-67a591901947";
 
 	//public static final String USERNAME = System.getenv("SAUCE_USERNAME");
 
 	//public static final String ACCESS_KEY = System.getenv("SAUCE_ACCESS_KEY");
 
 	public static final String URL = "https://" + USERNAME + ":" + ACCESS_KEY
-			+ "@ondemand.saucelabs.com:443/wd/hub";
+			+ "@ondemand.us-east1.headless.saucelabs.com:443/wd/hub";
 
 	public void saveBean(String id, Object object) {
 		scenarioObjectMap.put(id, object);
@@ -755,10 +755,11 @@ public class MRScenario {
 		isSauceLabSelected = true;
 		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 
-		capabilities.setCapability("platform", "Windows 7");
-		capabilities.setCapability("version", "66.0");
+		capabilities.setCapability("platform", "Linux");
+		capabilities.setCapability("browser", "chrome");
+		capabilities.setCapability("version", "latest");
 		//capabilities.setCapability("parent-tunnel", "sauce_admin");
-		capabilities.setCapability("parent-tunnel", "optumtest");
+	/*	capabilities.setCapability("parent-tunnel", "optumtest");
 		capabilities.setCapability("tunnelIdentifier",
 sauceLabsTunnelIdentifier);		
 		//capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");		//capabilities.setCapability("name", "MRATDD-TestSuite");
@@ -766,7 +767,7 @@ sauceLabsTunnelIdentifier);
 		capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
 		String jobName = "VBF Execution - Using " + capabilities.getBrowserName() + " in  " + System.getProperty("environment") +" environment";
 		capabilities.setCapability("name", jobName);
-		capabilities.setCapability("recordMp4", true);
+		capabilities.setCapability("recordMp4", true);*/
 		try {
 			webDriver = new RemoteWebDriver(new URL(URL), capabilities);
 			MRScenario.sessionId = ((RemoteWebDriver) webDriver).getSessionId().toString();
