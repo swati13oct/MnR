@@ -47,7 +47,7 @@ public class PaymentsFormPage extends UhcDriver {
 		openAndValidate();
 	}
 
-	public ReviewAutomaticPage EnterFiledsOnCC(Map<String, String> accountAttributessMap) {
+	public ReviewAutomaticPage EnterFiledsOnEFTforSetup(Map<String, String> accountAttributessMap) {
 
 		String routingNumber = accountAttributessMap.get("Routing number");
 		String confirmRoutingNumber = accountAttributessMap.get("Confirm routing number");
@@ -71,6 +71,35 @@ public class PaymentsFormPage extends UhcDriver {
 			return new ReviewAutomaticPage(driver);
 		} else {
 			System.out.println("Review Your Automatic Payments Information not displayed");
+			return null;
+		}
+	}
+	
+	
+	public UpdateReviewPage EnterFiledsOnEFTforUpdate(Map<String, String> accountAttributessMap) {
+
+		String routingNumber = accountAttributessMap.get("Routing number");
+		String confirmRoutingNumber = accountAttributessMap.get("Confirm routing number");
+		String accountNumber = accountAttributessMap.get("Account number");
+		String confirmAccountNumber = accountAttributessMap.get("Confirm account number");
+		String firstName = accountAttributessMap.get("Account holder first name");
+		String middleName = accountAttributessMap.get("Account holder middle name");
+		String lastName = accountAttributessMap.get("Account holder last name");
+
+		routingNumberField.sendKeys(routingNumber);
+		confirmRoutingNumberField.sendKeys(confirmRoutingNumber);
+		accountNumberField.sendKeys(accountNumber);
+		confirmAccountNumberField.sendKeys(confirmAccountNumber);
+		firstNameField.sendKeys(firstName);
+		middleNameField.sendKeys(middleName);
+		lastNameField.sendKeys(lastName);
+		AuthorizeButton.click();
+		System.out.println("Clicked on Authorize button");
+		if (ReviewPageHeading.getText().contains("Review Payment Method Update")) {
+			System.out.println("User is on Review Payment Method Update Page");
+			return new UpdateReviewPage(driver);
+		} else {
+			System.out.println("Review Payment Method Update not displayed");
 			return null;
 		}
 	}

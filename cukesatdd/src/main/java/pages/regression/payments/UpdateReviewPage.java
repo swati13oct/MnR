@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
 
-public class ReviewAutomaticPage extends UhcDriver {
+public class UpdateReviewPage extends UhcDriver {
 
 	@FindBy(xpath = "//button[text()='Edit Payment Information']")
 	private WebElement EditPaymentInformation;
@@ -18,7 +18,7 @@ public class ReviewAutomaticPage extends UhcDriver {
 	@FindBy(xpath = "//button[text()='Authorize Monthly Payments']")
 	private WebElement AuthorizeMonthlyPaymentstButton;
 
-	@FindBy(xpath = "//button[text()='CONTINUE']")
+	@FindBy(xpath = "//button[text()='CONTINUE' or text()='Continue']")
 	private WebElement ContinueButton;
 
 	@FindBy(id = "custom-page-title")
@@ -30,34 +30,34 @@ public class ReviewAutomaticPage extends UhcDriver {
 	@FindBy(xpath = "//a[normalize-space(text())='Make a One-Time Payment']")
 	private WebElement MakeOneTimePaymentLink;
 
-	public ReviewAutomaticPage(WebDriver driver) {
+	public UpdateReviewPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
 	}
 
-	public RecurringConfirmationPage selectAgreeAndClickOnAuthorizeMonthyPaymentsforEFT() {
+	public UpdateConfirmationPage selectAgreeAndClickOnContinueforEFT() {
 		validate(EditPaymentInformation);
-		System.out.println("User is on Review Review Your Automatic Payments Information Page");
+		System.out.println("User is on Payment Method Update Page");
 		jsClickNew(AgreeCheckBox);
-		AuthorizeMonthlyPaymentstButton.click();
-		System.out.println("Clicked on Authorize Monthly Payments button");
+		ContinueButton.click();
+		System.out.println("Clicked on Continue button");
 		if (validate(MakeOneTimePaymentLink)) {
-			System.out.println("User is on Confirmation Page for Recurring");
-			return new RecurringConfirmationPage(driver);
+			System.out.println("User is on Confirmation Page for Update Recurring");
+			return new UpdateConfirmationPage(driver);
 		} else
 			return null;
 	}
 
-	public RecurringConfirmationPage selectAgreeAndClickOnContinueforCC() {
+	public UpdateConfirmationPage selectAgreeAndClickOnContinueforCC() {
 		validate(ChangeCard);
-		System.out.println("User is on Review Review Your Automatic Payments Information Page");
+		System.out.println("User is on Payment Method Update Page");
 		jsClickNew(AgreeCheckBox);
 		ContinueButton.click();
 		System.out.println("Clicked on Contuine button");
 		if (validate(MakeOneTimePaymentLink)) {
-			System.out.println("User is on Confirmation Page for Recurring");
-			return new RecurringConfirmationPage(driver);
+			System.out.println("User is on Confirmation Page for Update Recurring");
+			return new UpdateConfirmationPage(driver);
 		} else
 			return null;
 	}
@@ -65,9 +65,10 @@ public class ReviewAutomaticPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		validate(ReviewPageTitle);
-		if (ReviewPageTitle.getText().contains("Review Recurring Payments")) {
-			System.out.println("User is on Review Recurring Payments Page");
-
+		if (ReviewPageTitle.getText().contains("Review Payment Method Update")) {
+			System.out.println("User is on Review Payment Method Update Page");
+		}else{
+			System.out.println("User is unable to navigate to Review Payment Method Update Page");
 		}
 
 	}

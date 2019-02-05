@@ -93,7 +93,28 @@ public class CreditCardUPGPage extends UhcDriver {
 			return null;
 		}
 	}
+	
+	public UpdateReviewPage EnterFiledsOnCCforUpdateREC(Map<String, String> accountAttributessMap) {
+		String Name = accountAttributessMap.get("Name");
+		String CreditCardNumber = accountAttributessMap.get("CreditCardNumber");
+		String ExpMonth = accountAttributessMap.get("Month");
+		String ExpYr = accountAttributessMap.get("Year");
 
+		EnterName.sendKeys(Name);
+		EnterAccountNumber.sendKeys(CreditCardNumber);
+		selectFromDropDownByText(driver, SelectMonth, ExpMonth);
+		selectFromDropDownByText(driver, SelectYear, ExpYr);
+		ProceedButton.click();
+		if (ReviewPageHeading.getText().contains("Review Payment Method Update")) {
+			System.out.println("Review Payment Method Update displayed");
+			return new UpdateReviewPage(driver);
+		} else {
+			System.out.println("Review Payment Method Update not displayed");
+			return null;
+		}
+	}
+	
+	
 	@Override
 	public void openAndValidate() {
 		validate(EnterCreditInfo);

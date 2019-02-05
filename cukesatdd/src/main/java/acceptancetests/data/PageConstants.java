@@ -593,6 +593,12 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 	
 	public static final String Review_Automatic_Page = "reviewAutomaticPage";
 	
+	public static final String Update_Recurring_Page = "updateRecurringPage";
+	
+	public static final String Update_Review_Page = "updateReviewPage";
+	
+	public static final String Update_Confirmation_Page = "updateConfirmationPage";
+	
 	public static final String Recurring_Confirmation_Page = "recurringConfirmationPage";
 	
 	public static final String Payments_Form_Page = "paymentsFormPage";
