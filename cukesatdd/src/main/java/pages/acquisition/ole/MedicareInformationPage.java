@@ -183,6 +183,8 @@ public class MedicareInformationPage extends UhcDriver{
 			validateNew(MedicareNumberLabel);
 			if(MedicareNumberLabel.getText().contains("Medicare Number")){
 				System.out.println("Correct Label 'Medicare Number' displayed for CARD B");
+				System.out.println("Correct Medicare Number provided for CARD B"+MedicareNumber);
+
 			}
 			else{
 				Assert.fail("Correct Label not displayed for CARD B");
@@ -190,9 +192,9 @@ public class MedicareInformationPage extends UhcDriver{
 				return null;*/
 			}
 		}
-sendkeysNew(firstNameField, FirstName);
-sendkeysNew(lastNameField, LastName);
-sendkeysNew(claimNumberField, MedicareNumber);
+		sendkeysNew(firstNameField, FirstName);
+		sendkeysNew(lastNameField, LastName);
+		sendkeysNew(claimNumberField, MedicareNumber);
 
 
 /*		if(validateNew(firstNameField)){
