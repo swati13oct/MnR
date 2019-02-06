@@ -1,6 +1,7 @@
+@preEffective @codetransformers
 Feature: To test pre-effective functionality
 
-  @regressionMember @codetransformers
+  @preEffective1 @regressionMember @codetransformers
   Scenario Outline: Verify that correct links and messages are displayed on Dashboard and Secondary Pages for pre-effective members.
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -30,7 +31,7 @@ Feature: To test pre-effective functionality
       | GroupSSUP | preeffectiveGroupSSUP | NON LIS       |
       | GroupPDP  | preeffectiveGroupPDP  | NON LIS       |
 
-  @regressionMember @regression_Pre-Effective_AccountSettings_Page @codetransformers
+  @preEffective2 @regressionMember @regression_Pre-Effective_AccountSettings_Page @codetransformers
   Scenario Outline: Verify that a preffective member is able to see the Account settings page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -49,7 +50,7 @@ Feature: To test pre-effective functionality
       #   | GroupPDP | preeffectiveGroupPDP | NON LIS       |
       | GroupSSUP | preeffectiveGroupSSUP | NON LIS       |
       
-@preffectiveRegistration1 
+ @preEffective3 @preffectiveRegistration1 
 Scenario Outline:Verify HSID registration.    
     Given the preuser is on medicare sign in page
     When the preuser clicks on Register now link

@@ -1,9 +1,7 @@
-@thePredators
-@ordermaterials
-@redesignOrderMaterials
+@orderPlanMaterials @thePredators @redesignOrderMaterials
 Feature:P1.5 To test order materials in Redesign site
 
-  @ConfirmationPage @regressionMember
+  @orderPlanMaterials1 @ConfirmationPage @regressionMember
   Scenario Outline: Verify order materials confirmation page in Redesign site
     Given login with following details logins in the member portal and validate elements
     | Plan Type   | <planType>   |
@@ -19,14 +17,13 @@ Feature:P1.5 To test order materials in Redesign site
     Examples: 
       | planType | memberType | option           |
       | MA      |  AARPIndividual | Replacement ID card |
-      | MAPD     | AARPIndividual  | Replacement ID card      |
-      | MAPD     | PCP  | Replacement ID card      |
+      | MAPD     | AARPIndividual_order  | Replacement ID card      |
+      | MAPD     | PCP_order  | Replacement ID card      |
       | MAPD     | Medica2  | Replacement ID card      | 
       | PDP      |  AARPIndividual | Welcome Guide    |
-      #orig | SHIP     | AARPIndividual  | Claims Envelope |
       | SHIP     | AARPIndividual_order  | Claims Envelope |
 
-  @ValidateSHIPErrorMessage @regressionMember
+  @orderPlanMaterials2 @ValidateSHIPErrorMessage @regressionMember
   Scenario Outline: Verify SHIP Invalid selection Order Materials Page Error Message
      Given login with following details logins in the member portal and validate elements
     | Plan Type   | <planType>   |
@@ -41,10 +38,9 @@ Feature:P1.5 To test order materials in Redesign site
 
     Examples: 
       | planType | memberType          |option      | 
-      #orig | SHIP     | AARPIndividual      |Coupon Book | 
       | SHIP     | AARPIndividual_order      |Coupon Book | 
 
-  @GroupMemberOrderSelectionandConfirmation @regressionMember
+  @orderPlanMaterials3 @GroupMemberOrderSelectionandConfirmation @regressionMember
   Scenario Outline: Verify order plan materials in Redesign site for radio button validation and Order Confirmation for UHC plan Members
     Given login with following details logins in the member portal and validate elements
     | Plan Type   | <planType>   |
@@ -61,7 +57,7 @@ Feature:P1.5 To test order materials in Redesign site
       | PDP      | UHCGroup      | Welcome Guide |
       | MAPD     | UHCGroup2      | Replacement ID card |
 
- @ValidateHeaderComboTabs @regressionMember 
+ @orderPlanMaterials4 @ValidateHeaderComboTabs @regressionMember 
   Scenario Outline: Verify Aarp Order Materials Page Header - All Combo Plan Types
     Given login with following details logins in the member portal and validate elements
     | Plan Type   | <planType>   |
@@ -76,7 +72,7 @@ Feature:P1.5 To test order materials in Redesign site
             | 	MAPD	| MAPDwithMedSupp | MAPD,MedSupp | 
             | SSUP		| PDPwithSSUP	|	PDP,SSUP	|
 
-@TerminatedMemberNegativeScenario @regressionMember
+ @orderPlanMaterials5 @TerminatedMemberNegativeScenario @regressionMember
   Scenario Outline: Verify Terminated members cannot access Order Plan materials Page
     Given login with following details logins in the member portal and validate elements
     | Plan Type   | <planType>   |

@@ -150,13 +150,14 @@ public class ClaimsMemberRedesignStepDefinition {
 		}
 		
 
-		System.out.println(urlAttributesMap.get("Claim Period"));
+		System.out.println("claim period"+urlAttributesMap.get("Claim Period"));
 		String s=urlAttributesMap.get("Claim Period");
 		String planType = urlAttributesMap.get("Plan Type");
 		
 		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 
-		if(s.equals("customsearch")){
+		if(s.equals("custom-search")){
+			System.out.println("custom");
 			newClaimsSummaryPage.searchClaimsbyCustomDate(planType,s);
 		}else{
 		newClaimsSummaryPage.searchClaimsByTimePeriod(planType,s);

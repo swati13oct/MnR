@@ -1,7 +1,6 @@
-@fastandfurious @theSpartans @febRelease2018
-@eob
+@eob @fastandfurious 
 Feature:F1.1To test EOB on Dashboard page
-@Eobsiteleavingpopup 
+@eob1 @Eobsiteleavingpopup 
 Scenario Outline: Allowed Domains – Authors need ability to define messages and domains for leaving member sites (ATDD)
 Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -14,7 +13,7 @@ Examples:
        | MA          | IndividualAARPWOEOB						 |
      
 
-  @eobCountdaterange
+@eob2  @eobCountdaterange
 Scenario Outline: To verify EOB result list
 Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -39,7 +38,7 @@ Then the user validates EOB count
 
  
 
-@planTypeValidation @hsideob2
+@eob3 @planTypeValidation @hsideob2
 Scenario Outline: To verify different plan types under combo tabs
 Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -52,7 +51,7 @@ Examples:
 | MAPD        | NICE_EOB 						 |
 #| MA          | IndividualAARPWOEOB						 |
   
-@dropDownFuntion 
+@eob4 @dropDownFuntion 
 Scenario Outline: To validate page functionality with different dropdowns
 Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -73,7 +72,7 @@ Examples:
 	| SHIP        | Individual 			  			  | Medical 					|6-12 Months			|
 	| SHIP        | Individual 			  			  | Medical 					|90 Days			    |
   
-@learnAboutMedicalEOB 
+@eob5 @learnAboutMedicalEOB 
 Scenario Outline: To verify How to read a medical EOB PDF
 Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -91,7 +90,7 @@ And the user validates how to read medical eob PDF
 	| MAPD        |aarpWithEOB 			          | 12 Months    		 | Medical 	         |
 	| MAPD        |aarpWithEOB 			          | 18 Months    		 | Medical 	         |
 
-@febRelease2018 @hsideob @regressionMember
+@eob6 @febRelease2018 @hsideob @regressionMember
 Scenario Outline: To verify NICE EOB and click on the pdf
 Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -108,14 +107,14 @@ Then the user validates EOB count
  
            Examples:
        | planType    | memberType    |dateRange  | eobType |  eobCount |
-       | MAPD        | NICE_EOB_R      | Last 18 months |Medical  |     1     |
+       | MAPD        | NICE_EOB_R      | Last 12 months |Medical  |     1     |
 #       | MA          | COSMOS_EOB_R      | Last 18 months |Medical  |     16     |
 #       | PDPI         | COSMOS_EOB_R     | Last 18 months |Medical  |     0     |
        | SHIP_ACTIVE  | SHIP_EOB      | Last 12-18 months |Medical  |     1     |
 #       | SHIP_Termnated| SHIP_EOB     | Last 12-18 months |Medical  |     1     |
 #       | MAPD          | NICETermin_EOB_R | Last 18 months |Medical  |     1     |
        
-@regression_06_06_18FnF
+@eob7 @regression_06_06_18FnF
 Scenario Outline: To verify EOB accessible for PDP + MEDSup Plan
 Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -129,7 +128,7 @@ Then the user validates content displayed on EOB page
        | planType     | memberType     |dateRange  | eobType |  eobCount | planTab1   |planTab2 |
        | PDP          |  comboEOBMedSup      | Last 18 Months |Medical  |     0     | 	PDP			 | MedSup     |
        
-@regression_06_06_18FnF
+@eob8 @regression_06_06_18FnF
 Scenario Outline: TC009_Check EOB is accessible for PCP Individual - Active Plan
 Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -146,7 +145,7 @@ Examples:
        | planType    | memberType    |dateRange  | eobType |  eobCount |
        | PCP        | eobData      | Last 18 Months |Medical  |     6     |
 
-@regression_06_06_18FnF     
+@eob9 @regression_06_06_18FnF     
 Scenario Outline: TC013_Check EOB is accessible for TEXAS ERS  - Active Plan
 Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -160,7 +159,7 @@ Examples:
        | planType    | memberType    	 |dateRange  | eobType |   
        | PDP        | texasERS      | Last 18 Months |Medical  |      
 
-@regression_06_06_18FnF
+@eob10 @regression_06_06_18FnF
 Scenario Outline: TC011_Check EOB is accessible for MEDICA Individual - Active Plan
 Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -174,7 +173,7 @@ Examples:
        | planType    | memberType    	 |dateRange  | eobType |   
        | MA        | Medica      | Last 18 Months |Medical  |
 
-@regression_06_06_18FnF
+@eob11 @regression_06_06_18FnF
 Scenario Outline: TC010_Check EOB displays error message_ PHIP- Active Plan member
 Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -188,7 +187,7 @@ Examples:
        | planType      | memberType     | 
        | PHIP          |  SHIP          |
 
-@EOBnullpointerFix
+@eob12 @EOBnullpointerFix
 Scenario Outline: To verify NICE EOB and click on the pdf
 Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -207,14 +206,4 @@ Then the user validates EOB count
        | planType    | memberType    |dateRange  | eobType |  eobCount |
        | MAPD        | NICE_EOB_R      | Last 18 months |Medical  |     1     |
        | SHIP_ACTIVE  | SHIP_EOB      | Last 6-12 months |Medical  |     1     |
-
-Scenario Outline: TC008_Check EOB is accessible for MedsSupp ( Terminated) + PHIP (Active) Plan member
-
-Scenario Outline: TC007_Check EOB is accessible for  MedsSupp ( Active) + PHIP (Terminated) Plan member
-
-
-        
- 
-
-|
  

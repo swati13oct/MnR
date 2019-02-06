@@ -1,7 +1,7 @@
-@drug_cost_estimator   @regressionMember
+@drugCostEstimator  @regressionMember
 Feature:I1.3DCE for Member Site Redesign
 
-@Member_dce_not
+@drugCostEstimator1 @Member_dce_not
 Scenario Outline:I1.2 To Verify MR portal members DCE should not come for AARP federal members
 Given login with following details logins in the member portal and validate elements
 | Plan Type   | <planType>   |
@@ -14,7 +14,7 @@ Then I should not see drug look up on home page
  | Group     | SSUP_DCE      |
  | MA		| AARPIndividual_DCE|
  
-@drug_cost_estimator1
+@drugCostEstimator2 
 Scenario Outline:I1.1 To Verify MR portal members using DCE on a desktop device Pharmacy search tab validation
 Given login with following details logins in the member portal and validate elements
 | Plan Type   | <planType>   |
@@ -26,7 +26,7 @@ Examples:
  | planType  | memberType  |
  | MAPD       |IndividualDCEmember_DCE |
  
-@drug_cost_estimator2  
+@drugCostEstimator3  
 Scenario Outline: Pharmacy saver results
 Given login with following details logins in the member portal and validate elements
 | Plan Type   | <planType>   |
@@ -44,7 +44,7 @@ And I should see pharmacy saver pharmacies in results
 | planType | memberType| zipcode| radius|pharmacytype|
 | MAPD     |IndividualDCEmember_DCE | 06450  | 25 miles|Pharmacy Saver|
 
-@drug_cost_estimator3
+@drugCostEstimator4
 Scenario Outline:I1.1 To Verify MR portal DCE flow covering step1 step 2 and step3 .
   Given login with following details logins in the member portal and validate elements
 | Plan Type   | <planType>   |
@@ -78,12 +78,11 @@ Then I should see learn more about the drug tiers and learn more about the drug 
  
 Examples:
  | planType | memberType  |drug1|dosage1|quantity1|frequency1|dosage2|brandeddrug|genericdosage|zipcode|radius|quantity2|frequency2|
- | MAPD     |AARPFederalDCEmember |Lipitor|Lipitor TAB 10MG|31|Every 1 month|Lipitor TAB 20MG|Lipitor TAB 20MG|atorvastatin calcium TAB 20MG|90210|25 miles|100|Every 3 months|
+ | MAPD     |AARPFederalDCEmember |Lipitor|Lipitor TAB 10MG|31|Every 1 month|Lipitor TAB 20MG|Lipitor TAB 20MG|atorvastatin calcium TAB 20MG|00820|25 miles|100|Every 3 months|
 # | PDP      |NonLISSplittier  |Lipitor|Lipitor TAB 10MG|31|Every 1 month|Lipitor TAB 20MG|Lipitor TAB 20MG|atorvastatin calcium TAB 20MG|90210|25 miles|100|Every 3 months|
- #| MAPD     |IndividualDCEmember  |Lipitor|Lipitor TAB 10MG|31|Every 1 month|Lipitor TAB 20MG|Lipitor TAB 20MG|atorvastatin calcium TAB 20MG|90210|25 miles|100|Every 3 months|
  #| COMBO    |ComboDCEmember  |Lipitor|Lipitor TAB 10MG|31|Every 1 month|Lipitor TAB 20MG|Lipitor TAB 20MG|atorvastatin calcium TAB 20MG|90210|25 miles|100|Every 3 months|
  
-@drug_cost_estimator4 @drugToolNotDisplayed 
+@drugCostEstimator5 @drugToolNotDisplayed 
 Scenario Outline:To verify DCE drug tile is not displayed for certain members
 Given login with following details logins in the member portal and validate elements
 | Plan Type   | <planType>   |
@@ -92,7 +91,7 @@ Examples:
 	|  planType |
 	|MA_FED_DCE |
 	
-@drug_cost_estimator5 @Member_DCE_sso
+@drugCostEstimator6 @Member_DCE_sso
 Scenario Outline:I1.3 To Verify MR portal group members DCE should redirect to optum rx sso landing page. 
 Given login with following details logins in the member portal and validate elements
 | Plan Type   | <planType>   |
@@ -102,7 +101,7 @@ Then I click on drug lookup tile which takes me to optum rx sso landing page
 # | MAPD_GROUP_DCE  |
  |PDP_GROUP_DCE |
  
-@drug_cost_estimator6 @switch_to_generic_case_1  
+@drugCostEstimator7 @switch_to_generic_case_1  
 Scenario Outline: To Verify MR portal members using DCE on a desktop device, I want to be able to switch from branded to generic drug, given that no pharmacy is selected and it suggests the user with an appropriate save money message.
 Given login with following details logins in the member portal and validate elements
 | Plan Type   | <planType>   |
@@ -126,7 +125,7 @@ Examples:
  | MAPD     |Individualwithpharmacy_DCE |Lipitor|Lipitor TAB 10MG|31|Every 1 month|
  
  
-@drug_cost_estimator7  @switch_to_generic_case_2  
+@drugCostEstimator8  @switch_to_generic_case_2  
 Scenario Outline: To Verify MR portal members using DCE on a desktop device, I want to be able to switch from branded to generic drug, given that a pharmacy is selected and it suggests the user with an appropriate save money message and cost savings are also updated
 Given login with following details logins in the member portal and validate elements
 | Plan Type   | <planType>   |
