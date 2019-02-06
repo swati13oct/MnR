@@ -269,53 +269,53 @@ public boolean validate_SEPoptions_for_planType(String planType) {
 	}
 	if(planType.contentEquals("MA")){
 		if(validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer) && validate(MovedOutside_ServiceArea) 
-				&& validate(OutOf_LongTerm) && validate(Disaster) && validate(DualSEP) && validate(ChangeDual)
+				&& validate(Into_LongTerm) && validate(OutOf_LongTerm) && validate(Disaster) && validate(DualSEP) && validate(ChangeDual)
 					&& validate(ChangeLIS) && validate(Assignment) && validateNonPresenceOfElement(Both_Medicare_Medicaid)&& validateNonPresenceOfElement(ExtraHelp_PrescriptionDrug) && validateNonPresenceOfElement(LoSS_LIS)){
-			//&& validate(Into_LongTerm) 
-			System.out.println("All Options for MA/MAPD Plan are displayed in SEP pahe OLE flow : Validation Passed");
+			
+			System.out.println("All Options for MA/MAPD Plan are displayed in SEP page OLE flow : Validation Passed");
 			Validation_Flag = true;
 		}
 		else{
-			System.out.println("All Options for MA/MAPD Plan are NOT displayed in SEP pahe OLE flow : Validation Failed");
+			System.out.println("All Options for MA/MAPD Plan are NOT displayed in SEP page OLE flow : Validation Failed");
 			Validation_Flag = false;
 		}
 	}
 	if(planType.contentEquals("MAPD")){
 		if(validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer) && validate(MovedOutside_ServiceArea)
-				  && validate(OutOf_LongTerm) && validate(Disaster) && validate(DualSEP) && validate(ChangeDual)
+				&& validate(Into_LongTerm) && validate(OutOf_LongTerm) && validate(Disaster) && validate(DualSEP) && validate(ChangeDual)
 				  && validate(ChangeLIS) && validate(Assignment) 
 				 && validateNonPresenceOfElement(Both_Medicare_Medicaid) && validateNonPresenceOfElement(ExtraHelp_PrescriptionDrug) && validateNonPresenceOfElement(LoSS_LIS)){
-			//&& validate(Into_LongTerm)
-			System.out.println("All Options for MA/MAPD Plan are displayed in SEP pahe OLE flow : Validation Passed");
+			
+			System.out.println("All Options for MA/MAPD Plan are displayed in SEP page OLE flow : Validation Passed");
 			Validation_Flag = true;
 		}
 		else{
-			System.out.println("All Options for MA/MAPD Plan are NOT displayed in SEP pahe OLE flow : Validation Failed");
+			System.out.println("All Options for MA/MAPD Plan are NOT displayed in SEP page OLE flow : Validation Failed");
 			Validation_Flag = false;
 		}
 	}
 	if(planType.contentEquals("PDP")){
 		if(validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer) && validate(MovedOutside_ServiceArea) 
-				 && validate(OutOf_LongTerm) && validate(FiveStar_MAplan) && validate(DisEnrolling_MAPD)
+				&& validate(Into_LongTerm) && validate(OutOf_LongTerm) && validate(FiveStar_MAplan) && validate(DisEnrolling_MAPD)
 				 && validate(Disaster) && validate(DualSEP) && validate(ChangeDual) && validate(ChangeLIS) && validate(Assignment)
 				&& validateNonPresenceOfElement(Both_Medicare_Medicaid) && validateNonPresenceOfElement(ExtraHelp_PrescriptionDrug)){// && validateNonPresenceOfElement(LoSS_LIS)
-			//&& validate(Into_LongTerm)
-			System.out.println("All Options for PDP Plan are displayed in SEP pahe OLE flow : Validation Passed");
+			
+			System.out.println("All Options for PDP Plan are displayed in SEP page OLE flow : Validation Passed");
 			Validation_Flag = true;
 		}
 		else{
-			System.out.println("All Options for PDP Plan are NOT displayed in SEP pahe OLE flow : Validation Failed");
+			System.out.println("All Options for PDP Plan are NOT displayed in SEP page OLE flow : Validation Failed");
 			Validation_Flag = false;
 		}
 	}
 	if(planType.contentEquals("SNP")){
 		if(validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer) && validate(MovedOutside_ServiceArea)
 				&& validate(Disaster) && validate(DualSEP) && validate(ChangeDual) && validate(ChangeLIS) && validate(Assignment)){
-			System.out.println("All Options for SNP Plan are displayed in SEP pahe OLE flow : Validation Passed");
+			System.out.println("All Options for SNP Plan are displayed in SEP page OLE flow : Validation Passed");
 			Validation_Flag = true;
 		}
 		else{
-			System.out.println("All Options for SNP Plan are NOT displayed in SEP pahe OLE flow : Validation Failed");
+			System.out.println("All Options for SNP Plan are NOT displayed in SEP page OLE flow : Validation Failed");
 			Validation_Flag = false;
 		}
 	}
