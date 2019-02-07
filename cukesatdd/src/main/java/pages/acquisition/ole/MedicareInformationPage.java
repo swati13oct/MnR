@@ -166,7 +166,7 @@ public class MedicareInformationPage extends UhcDriver{
 		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date");
 		String CardType = MedicareDetailsMap.get("Card Type");
 		String SSNflag = MedicareDetailsMap.get("SSN Flag");
-		if(CardType.contains("HICN")){
+		if(CardType.contains("HICN") || CardType.contains("RRID")){
 			SelectCardA.click();
 			validateNew(MedicareNumberLabel);
 			if(MedicareNumberLabel.getText().contains("Medicare Claim Number")){
