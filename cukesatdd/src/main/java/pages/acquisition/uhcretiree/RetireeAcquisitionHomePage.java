@@ -2,6 +2,7 @@ package pages.acquisition.uhcretiree;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -13,34 +14,39 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import com.thoughtworks.selenium.webdriven.commands.WaitForPageToLoad;
+
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.uhcretiree.DrugLookUpPage;
 
 
 /**
- * @author eb
+ * @author ckoppura
  *
  */
 
-public class AcquisitionHomePage extends UhcDriver {
+public class RetireeAcquisitionHomePage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
 
 		start(UHCRETIREE_ACQISITION_PAGE_URL);
+		impliciWait(druglookuplink,20);
 
-		validate(prescriptionsLink);
+		validate(druglookuplink);
 	}
 
 	@FindBy(linkText="Pharmacy information")
+	
 	private WebElement pharmacyLocator;
 	
 	@FindBy(linkText = "Look up prescription drugs")
-	private WebElement prescriptionsLink;
+	private WebElement druglookuplink;
 
 	@FindBy(id = "new_form_GroupSelector")
 	private WebElement dropDownMenu;
@@ -56,11 +62,14 @@ public class AcquisitionHomePage extends UhcDriver {
 
 	public JSONObject browserCheckJson;
 	private PageData browserCheckData;
+	
+	@FindBy (xpath = ".//*[@id='main']//h1")
+	private WebElement searchForaDrugHeader;
 
 	private static String UHCRETIREE_ACQISITION_PAGE_URL = MRConstants.UHCRETIREE_URL;
 
 
-	public AcquisitionHomePage(WebDriver driver) {
+	public RetireeAcquisitionHomePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
@@ -79,8 +88,8 @@ public class AcquisitionHomePage extends UhcDriver {
 
 		try {
 			Thread.sleep(7000);
-			validate(prescriptionsLink);
-			prescriptionsLink.click();
+			validate(druglookuplink);
+			druglookuplink.click();
 			if (getTitle().equalsIgnoreCase(
 							"UnitedHealthcare Group Retiree – Search for a Drug")) {
 				return new SelectFormularyPage(driver);
@@ -185,5 +194,18 @@ public class AcquisitionHomePage extends UhcDriver {
 	
 	public void validateGroupDropdownList(){
 		Assert.assertTrue("Group dropdown is not displayed", dropDownMenu.isDisplayed());
+	}
+	public void impliciWait(WebElement element,int timeUnit)
+	{
+		driver.manage().timeouts().implicitlyWait(timeUnit,TimeUnit.SECONDS);
+		waitforElement(element);
+	}
+
+	public  DrugLookUpPage navigateToDrugLookUp() {
+		druglookuplink.click();
+		impliciWait(searchForaDrugHeader,10);
+		//waitforElement(searchForaDrugHeader);
+		Assert.assertTrue("Header Displayed", searchForaDrugHeader.isDisplayed());
+		return new DrugLookUpPage(driver);
 	}
 }
