@@ -1,12 +1,19 @@
 @acq_dce_UHC
 Feature:1.24-VBF-Acq-Drug Cost Estimator (DCE) - To test DCE flows on UMS acq site
 
-@acq_drug_cost_estimator_blayer_flow @dceVBF
+@acq_drug_cost_estimator_blayer_flow @dceBlayerSmoke
 Scenario Outline: To verify DCE flow from Blayer home page
 Given the user is on the uhcmedicaresolutions site landing page
 When I access the acquisition DCE tool from home page on ums site
 And I have added a drug to my drug list on ums site
 	|Drug|<drug>|
+And user selects drug details in ums site
+	|Drug|<drug>|
+	|Quantity|<quantity>|
+	|Frequency|<frequency>|
+When user successfully adds drug in ums site
+|Is Branded Drug|<branded>|	
+	|Drug|<drug>|	
 And I navigate to step2 page on ums site
 And the user selects the pharmacy tab information
 	| Zipcode	  | <zipcode> |
@@ -14,10 +21,20 @@ And the user selects the pharmacy tab information
 And I select the first pharmacy on there
 And I navigate to step3 page and validate drug info for DCE homepage flow uhc
 	|Drug|<drug>|
+Then user enters zipcode on step3 and validate plan summary page in uhc
+	|Zip|<zipcode>|
+And user views plans of the below plan type in UMS site
+      | Plan Type | <plantype> |
+Then user validates drug cost in medical benefit section in the UMS site
+    | Plan Name | <planName> |
+ Then the user view plan details of the above selected plan in UMS site and validates
+      | Plan Name | <planName> | 
+ Then user validates drug added on prescription drug benefits tab in UMS
+      |Drug|<drug>| 	
 
  Examples:
-| drug|zipcode| radius|
-| Lipitor TAB 10MG| 90210 | 15miles |
+|     drug        | quantity | frequency   |branded |zipcode|plantype |            planName                            |radius|
+| Lipitor TAB 10MG|    30    |Every 1 month| yes    | 90210 |   MAPD  |AARP MedicareComplete SecureHorizons Focus (HMO)|15 miles|
 
 
 @switchNowStep3Blayer @dceVBF

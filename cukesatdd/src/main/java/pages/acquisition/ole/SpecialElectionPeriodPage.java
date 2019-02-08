@@ -144,8 +144,7 @@ public class SpecialElectionPeriodPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoad(driver, SEPPageHeader, 30);
-		validateNew(SEPPageHeader);
+		CommonUtility.waitForPageLoadNew(driver, SEPPageHeader, 30);
 		System.out.println("Page header is Displayed : "+SEPPageHeader.getText());
 
 	}
@@ -271,7 +270,7 @@ public boolean validate_SEPoptions_for_planType(String planType) {
 	if(planType.contentEquals("MA")){
 		if(validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer) && validate(MovedOutside_ServiceArea) 
 					&& validate(Into_LongTerm) && validate(OutOf_LongTerm) && validate(Disaster) && validate(DualSEP) && validate(ChangeDual)
-					&& validate(ChangeLIS) && validate(Assignment) && !validate(Both_Medicare_Medicaid)&& !validate(ExtraHelp_PrescriptionDrug) && !validate(LoSS_LIS)){
+					&& validate(ChangeLIS) && validate(Assignment) && validateNonPresenceOfElement(Both_Medicare_Medicaid)&& validateNonPresenceOfElement(ExtraHelp_PrescriptionDrug) && validateNonPresenceOfElement(LoSS_LIS)){
 			System.out.println("All Options for MA/MAPD Plan are displayed in SEP pahe OLE flow : Validation Passed");
 			Validation_Flag = true;
 		}
@@ -284,7 +283,7 @@ public boolean validate_SEPoptions_for_planType(String planType) {
 		if(validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer) && validate(MovedOutside_ServiceArea)
 				 && validate(Into_LongTerm) && validate(OutOf_LongTerm) && validate(Disaster) && validate(DualSEP) && validate(ChangeDual)
 				 && validate(ChangeLIS) && validate(Assignment) 
-				 && !validate(Both_Medicare_Medicaid) && !validate(ExtraHelp_PrescriptionDrug) && !validate(LoSS_LIS)){
+				 && validateNonPresenceOfElement(Both_Medicare_Medicaid) && validateNonPresenceOfElement(ExtraHelp_PrescriptionDrug) && validateNonPresenceOfElement(LoSS_LIS)){
 			System.out.println("All Options for MA/MAPD Plan are displayed in SEP pahe OLE flow : Validation Passed");
 			Validation_Flag = true;
 		}
@@ -297,7 +296,7 @@ public boolean validate_SEPoptions_for_planType(String planType) {
 		if(validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer) && validate(MovedOutside_ServiceArea) 
 				&& validate(Into_LongTerm) && validate(OutOf_LongTerm) && validate(FiveStar_MAplan) && validate(DisEnrolling_MAPD)
 				&& validate(Disaster) && validate(DualSEP) && validate(ChangeDual) && validate(ChangeLIS) && validate(Assignment)
-				&& !validate(Both_Medicare_Medicaid) && !validate(ExtraHelp_PrescriptionDrug)){// && !validate(LoSS_LIS)
+				&& validateNonPresenceOfElement(Both_Medicare_Medicaid) && validateNonPresenceOfElement(ExtraHelp_PrescriptionDrug)){// && validateNonPresenceOfElement(LoSS_LIS)
 			System.out.println("All Options for PDP Plan are displayed in SEP pahe OLE flow : Validation Passed");
 			Validation_Flag = true;
 		}
@@ -323,10 +322,11 @@ public boolean validate_SEPoptions_for_planType(String planType) {
 
 public CoverageInformationPage navigate_to_Coverage_Information_page() {
 	
-	validate(NextBtn);
-	JavascriptExecutor executor = (JavascriptExecutor)driver;
+	validateNew(NextBtn);
+	jsClickNew(NextBtn);
+	/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 	executor.executeScript("arguments[0].click();", NextBtn);
-
+*/
 	
 	if(driver.getCurrentUrl().contains("coverage-info")){
 		System.out.println("OLE Coverage and Health Information page is Displayed");

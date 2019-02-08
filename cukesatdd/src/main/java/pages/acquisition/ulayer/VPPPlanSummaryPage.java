@@ -187,7 +187,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='responsiveplan']")
 	private List<WebElement> medSuppPlanList;
 	
-
+	@FindBy(xpath = "(//div[contains(@class,'mabenefittable')]//li[contains(@class,'ng-scope')]/p[contains(text(),'drugs covered')])[1]")
+	private WebElement drugCoveredInfo;
+	
+	@FindBy(xpath = "(//div[contains(@class,'mabenefittable')]//li[contains(@class,'ng-scope')]/span[contains(text(),'Estimated Annual Drug Cost')])[1]")
+	private WebElement estimatedAnnualDrigCostLabel;
+	
+	@FindBy(xpath = "(//div[contains(@class,'mabenefittable')]//li[contains(@class,'ng-scope')]/span[contains(text(),'Estimated Annual Drug Cost:')]/following-sibling::span[not(contains(@class,'ng-hide'))])[1]")
+	private WebElement estimatedAnnualDrigCostValue;
+	
 	public VPPPlanSummaryPage(WebDriver driver) {
 		super(driver);
 		
@@ -205,7 +213,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 
 	private boolean getSpecificPlanSummary(WebElement element, String planName) {
-		System.out.println("plan info: " + element.getText());
 		if (element.getText().contains(planName)) {
 			return true;
 		} else {
@@ -869,18 +876,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	 * @return
 	 */
 	public String getPlanPremium(String PlanName) {
-		
-		/*try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-
-		
 		System.out.println("Plan Name is : "+PlanName);
-		//
-		//WebElement PremiumForPlan = driver.findElement(By.xpath("//h3[contains(text(), '"+PlanName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//li[contains(text(),'Monthly Premium')]//span[contains(text(),'$')]"));
 		WebElement PremiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '"+PlanName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//li[1]//span[contains(text(),'$')]"));
 		CommonUtility.waitForPageLoadNew(driver,PremiumForPlan, 30);
 		String PlanPremium = PremiumForPlan.getText();
@@ -900,16 +896,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		System.out.println("Enroll in Plan for Plan : "+planName);
 		WebElement EnrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(), 'Enroll in plan')]"));
-		try {
-		validate(EnrollForPlan);
-		
-		System.out.println("Found Enroll IN Plan Button for the Plan : "+planName);
-		}catch(Exception e){
-			System.out.println("Enroll in Plan Button is Not Displayed ");
-		}
+		validateNew(EnrollForPlan);
 		EnrollForPlan.click();
 		
-		CommonUtility.waitForPageLoad(driver, NextBtn, 30);
+		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
 		if(driver.getCurrentUrl().contains("welcome")){
 			System.out.println("OLE Welcome Page is Displayed");
 			return new WelcomePage(driver);
@@ -923,7 +913,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	 * @return
 	 */
 	public String GetTFNforPlanType() {
-		if(validate(RightRail_TFN)){
+		if(validateNew(RightRail_TFN)){
 			System.out.println("TFN is displayed in Right Rail");
 			String TFN_Number = RightRail_TFN.getText();
 			return TFN_Number;
@@ -1037,6 +1027,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if(currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPage(driver);
 		return null;
+	}
+	
+	public void validateMedicalBenefitDrugSection() {
+		validateNew(drugCoveredInfo);
+		validateNew(estimatedAnnualDrigCostLabel);
+		validateNew(estimatedAnnualDrigCostValue);
 	}
 }
 
