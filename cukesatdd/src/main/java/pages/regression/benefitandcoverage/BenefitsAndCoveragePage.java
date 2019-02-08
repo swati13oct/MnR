@@ -2222,7 +2222,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                        }
                        else
                        {
-                                      Assert.assertEquals(OutpatientSurgeryCenter.getText(), "OUTPATIENT SURGERY CENTER VISITS");
+                                      Assert.assertEquals(OutpatientSurgeryCenter.getText(), "OUTPATIENT SURGERY CENTER VISITS ");
                                       System.out.println(OutpatientSurgeryCenter.getText());
                        }
                        System.out.println(HospitalVisits.getText());

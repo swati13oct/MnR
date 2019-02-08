@@ -173,7 +173,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | MAPD     | Individual_BnC2 |
 
 
-  @benefitsAndCoverage12 @BenefitsForCombo @regression @regressionMember 
+  @benefitsAndCoverage12 @BenefitsForCombo @regression @regressionMember
   Scenario Outline: Verify the Benefits for a combo member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -336,7 +336,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | PDP      | Individual_BnC | NON LIS       |
 
 
-  @benefitsAndCoverage18 @CMFedNonLisVillage 
+  @benefitsAndCoverage18 @CMFedNonLisVillage
   Scenario Outline: Verify the Village user validates text in table
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -370,7 +370,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | MA       | Group      | NON LIS       |
 
 
-  @benefitsAndCoverage20 @CMAncillarysection1 
+  @benefitsAndCoverage20 @CMAncillarysection1
   Scenario Outline: Verify CMAncillarysection1 section is in place on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -411,7 +411,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | MAPD     | Group_BnC  | NON LIS       |
 
 
-  @benefitsAndCoverage22 @CMShip 
+  @benefitsAndCoverage22 @CMShip
   Scenario Outline: Verify that Page Headers are in place on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -428,7 +428,6 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | Language | <language> |
     And the user verifies that the correct pdfs are coming in the plan material section
       | Plan Benefits Table | <PlanBenefitsTable> |
-      | Plan Overview       | <PlanOverview>      |
     And the user validates ship the need help section
     And the user validates for ship see more ways to contact us section
     And the user validates for ship member on clicking contact us link it should route to contact us page
@@ -437,11 +436,11 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     And the user validate vas tiles on vas page
 
     Examples: 
-      | planType | memberType | language | PlanBenefitsTable   | PlanOverview  |
-      | HIP      | SHIP       | ENGLISH  | Plan Benefits Table | Plan Overview |
+      | planType | memberType | language | PlanBenefitsTable   | 
+      | HIP      | SHIP       | ENGLISH  | Plan Benefits Table | 
 
 
-  @benefitsAndCoverage23 @CMmapdindlis 
+  @benefitsAndCoverage23 @CMmapdindlis
   Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -480,6 +479,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     And the user verifies that the correct pdfs are there in the plan material section
       | Summary of Benefits                 | <SummaryofBenefits>               |
       | Evidence of Coverage                | <EvidenceofCoverage>              |
+      | UnitedHealth Passport Program       |  <UnitedHealthPassportProgram>    | 
       | Comprehensive Formulary - Drug List | <ComprehensiveFormularyDrug List> |
       | Alternative Drug List               |  <AlternativeDrugList>            | 
     And the user validates Needhelp section
@@ -487,8 +487,8 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     And the user validates contactus section
 
     Examples: 
-      | planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List     | AlternativeDrugList   | name            | memberid     | effectivedate | monthlypremium | extrahelp            |
-      | MAPD     | Individual_BnC | LIS 1         | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | DBAD ADFED      | 919744565-00 | 01/01/2019    | Not Available  | Extra Help Level : 1 |
+      | planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | UnitedHealthPassportProgram   | ComprehensiveFormularyDrug List     | AlternativeDrugList   | name            | memberid     | effectivedate | monthlypremium | extrahelp            |
+      | MAPD     | Individual_BnC | LIS 1         | ENGLISH  | Summary of Benefits | Evidence of Coverage | UnitedHealth Passport Program | Comprehensive Formulary - Drug List | Alternative Drug List | DBAD ADFED      | 919744565-00 | 01/01/2019    | Not Available  | Extra Help Level : 1 |
 
 
   @benefitsAndCoverage24 @CMpdpindlis
