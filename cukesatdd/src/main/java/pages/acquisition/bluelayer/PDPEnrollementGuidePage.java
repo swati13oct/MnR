@@ -123,6 +123,18 @@ public class PDPEnrollementGuidePage extends UhcDriver{
 	
 	@FindBy(xpath = "//*[@for='planGuide2'][string-length(text())>1]")
 	private WebElement planGuideLabel2;
+	
+	//Added by Subha
+	
+	@FindBy(xpath = "//*[@class='error'][@for='oneTimeAddress.addressLine2'][string-length(text())>1]")
+	private WebElement addressLine2ErrorMsg;
+		
+	@FindBy(xpath = "//*[@class='error'][@for='emailAddressConfirm'][string-length(text())>1]")
+	private WebElement emailAddressConfirmErrorMsg;
+		
+	@FindBy(xpath = "//*[@class='error'][@for='emailAddress'][string-length(text())>1]")
+	private WebElement emailAddressErrorMsg;
+
 		
 	public PDPEnrollementGuidePage(WebDriver driver) {
 		super(driver);
@@ -176,9 +188,11 @@ public class PDPEnrollementGuidePage extends UhcDriver{
 		if (planGuideLabel1.getText().contains(planGuide)) {
 			validateNew(planGuide1);
 			planGuide1.click();
-		} else {
+		} else if (planGuideLabel2.getText().contains(planGuide)){
 			validateNew(planGuide2);
 			planGuide2.click();
+		} else {planGuide1.click(); planGuide2.click();
+
 		}
 			
 		sendkeys(firstNameField, firstName);
@@ -272,4 +286,33 @@ public class PDPEnrollementGuidePage extends UhcDriver{
 			return false;
 		}
 	}
-}
+	//Added by Subha
+	
+		public void invalidvaluesEntered() {
+			firstNameField.sendKeys("FirstName2");
+			lastNameField.sendKeys("LastName2");
+			birthDateField.sendKeys("01011990");
+			emailAddressField.sendKeys("test");
+			emailAddressConfirmField.sendKeys("test@uhc.com");
+			medicareNumberField.sendKeys("1111111");
+			addressLine1Field.sendKeys("@!California");
+			addressLine2Field.sendKeys("@!California");
+			cityField.sendKeys("@!California");
+			zipCodeField.sendKeys("@55129");
+			dayPhoneField.sendKeys("123456789");		
+			inquryKitSubmitLink.click();
+			
+		}
+		public boolean validateErrorMessages1() {
+				if (validateNew(firstNameErrorMsg) && validate(lastNameErrorMsg) && validate(dobErrorMsg) && validate(emailAddressConfirmErrorMsg) && validate(emailAddressErrorMsg)
+						&& validate(addressLineErrorMsg) && validate(addressLine2ErrorMsg) && validate(cityErrorMsg)&& validate(MedicareIDErrorMsg)
+						&& validate(zipErrorMsg) && validate(phoneErrorMsg)) {
+					return true;
+				} else {
+					return false;
+				}
+			
+		}
+	}
+
+
