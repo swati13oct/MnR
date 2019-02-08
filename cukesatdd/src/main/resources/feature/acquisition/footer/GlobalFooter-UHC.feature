@@ -13,5 +13,5 @@ Scenario:To verify links displayed in Global footer section in UMS site
 	And the user clicks on Terms of use link from Privacy Policy page footer UHC Medicaresolutions Site
 	And the user clicks on Disclaimers link from Terms of use page footer UHC Medicaresolutions Site
 	And the user clicks on Agents & Brokers link from Disclaimers page footer UHC Medicaresolutions Site
-	And user clicks on Request Assistance and validates modal window bluelayer
+	#And user clicks on Request Assistance and validates modal window bluelayer
 	And user verifies home link of agents&brokers page bluelayer
