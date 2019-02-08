@@ -16,7 +16,7 @@ Feature:P1.5 To test order materials in Redesign site
     And the user validate order additional material and click to add other order additional material in Order Confirmation Page
     Examples: 
       | planType | memberType | option           |
-      | MA      |  AARPIndividual | Replacement ID card |
+      | MA      |  AARPIndividual_order | Replacement ID card |
       | MAPD     | AARPIndividual_order  | Replacement ID card      |
       | MAPD     | PCP_order  | Replacement ID card      |
       | MAPD     | Medica2  | Replacement ID card      | 
