@@ -3,7 +3,7 @@ Feature: To test DCE to VPP plan Summary flow  in AARP site
 @dceVppNonAepAARP
 Scenario Outline: To Verify the drugs and plan summary for non AEP period 
 Given the user is on the AARP medicare site landing page
-When the user performs drug search using the following information in AARP site
+When the user performs plan search using following information in the AARP site
 	| Zip Code    | <zipcode>  |
 	| County      | <county>   |
 When the user search the drug using drug initials in AARP site

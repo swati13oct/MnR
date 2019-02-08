@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ulayer.PageTitleConstants;
 
@@ -16,9 +17,12 @@ import pages.acquisition.ulayer.PageTitleConstants;
  *
  */
 public class TermsOfUseUmsPage extends UhcDriver{
+
+	@FindBy(xpath = "//*[contains(@class,'meded-article-header__title')]")
+	public static WebElement header;
 	
-	@FindBy(id = "gf_lnk_7")
-	private WebElement disclaimersLink;
+	@FindBy(xpath = "(//section[contains(@class,'meded-article-content')]//p)[1]")
+	public static WebElement pageContent_Para1;
 
 	public TermsOfUseUmsPage(WebDriver driver) {
 		super(driver);
@@ -29,19 +33,10 @@ public class TermsOfUseUmsPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		validate(disclaimersLink);
+		CommonUtility.waitForPageLoadNew(driver, header, 30);
+		validateNew(pageContent_Para1);
 		
 	}
 	
-	public DisclaimersPage disclaimersClick() {
-		validate(disclaimersLink);
-		disclaimersLink.click();
-		validate(disclaimersLink);
-		if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_DISCLAIMERS)){
-			return new DisclaimersPage(driver);
-		}
-		return null;
-			
-		}
-
+	
 }
