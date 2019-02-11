@@ -2,7 +2,7 @@
 Feature: V1.1To This test scenario is to validate that ID card is accessible for all the members
 
   @idCards1 @regressionIDCards @regressionMember
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the fields in ID card page
+  Scenario Outline: TID: <TID> -plan: <plantype> -memberType: <memberType> - Verify the fields in ID card page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |
       | Member Type | <memberType> |
@@ -24,7 +24,7 @@ Feature: V1.1To This test scenario is to validate that ID card is accessible for
   |	 15109  | MAPD      | IDCardmember  | UnitedHealthcare MedicareComplete Choice (PPO)                     | 908949511-00  | Bcdbc Abaafb     | Subscriber - DOB 03/23/1948 | 01/01/19      | Active         | 
      
   @idCards2 @regressionIDCards_Group_User @regressionMember
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the fields in ID card page for group user
+  Scenario Outline: TID: <TID> -plan: <plantype> -memberType: <memberType> - Verify the fields in ID card page for group user
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |
       | Member Type | <memberType> |
