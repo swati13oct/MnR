@@ -186,7 +186,7 @@ public class ReviewSubmitPage extends UhcDriver{
 			System.out.println(LastName+" : "+LastNameDisplayed+" : "+flag);
 		}else flag =false;
 
-		if(CardType.contains("HICN")){
+		if(CardType.contains("HICN") || CardType.contains("RRID") ){
 			String MedicareNumberDisplayed = MedicareClaimNumberDisplay.getText().replaceAll("-", "");
 			if(MedicareNumberDisplayed.contains(MedicareNumber)){
 				flag = (!flag)?false:true;
