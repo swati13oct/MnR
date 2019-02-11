@@ -25,8 +25,8 @@ Then I should be able to see the help button Header
 Then I should be able to see and use the Account/Profile dropdown and logout
 
 Examples:
- | planType  | memberType  |
- | MAPD      |IndividualMember |
+ | planType  | memberType       |
+ | MAPD      | IndividualMember |
  
 
 @header2 @premiumpaymentsheader @regressionMember 
@@ -39,9 +39,9 @@ Then I should be able to see and use the Premium Payments tab Header
 
 
 Examples:
- | planType  | memberType  |
- | MAPD      |IndividualMember |
- | MAPD    |GroupLessSubsidy |
+ | planType | memberType       |
+ | MAPD     | IndividualMember |
+ | MAPD     | GroupLessSubsidy |
  
  
 @header3 @premiumpaymentsheader_100%subisdy @regressionMember
@@ -53,8 +53,8 @@ And I view the global navigation Header
 Then I should not be able to see the Premium Payments tab Header
 
 Examples:
- | planType|  memberType  | 
- | MAPD    |  UHCGroup  	  |
+ | planType|  memberType | 
+ | MAPD    |  UHCGroup   |
  
  
 @header4 @findcarecostsheader @regressionMember
@@ -66,11 +66,11 @@ And I view the global navigation Header
 Then I should be able to see and use the Find Care & Costs tab Header
 
 Examples:
- | planType|  memberType  	| 
- | MAPD    |  UHCGroup  	  |
+ | planType| memberType  	  | 
+ | MAPD    | UHCGroup  	      |
  | MAPD    | IndividualMember |
- | MAPD    | PCP |
- | MAPD  | Medica |
+ | MAPD    | PCP              |
+ | MAPD    | Medica           |
  
  
 @header5 @no_findcareheader @regressionMember  
@@ -82,9 +82,9 @@ Given login with following details logins in the member portal and validate elem
 Then I should not be able to see the Find Care & Costs tab Header
 
 Examples:
- | planType|  memberType  	| 
- | SHIP    |   Individual_header  |
- | SSUP    |   UHCGroup_header 	  |
+ | planType |  memberType  	      | 
+ | SHIP     |   Individual_header |
+ | SSUP     |   UHCGroup_header   |
  
 
 @header6 @Terminated_view @regressionMember
@@ -95,6 +95,6 @@ Given login with following details logins in the member portal and validate elem
 Then I should be able to see and use the Home tab on Dashboard
 
 Examples:
- | planType|  memberType  	| 
- | MAPD    |  AARPTerminatedmember 	  |
- | MA	   | UHCTerminatedmember|
+ | planType| memberType  	      | 
+ | MAPD    | AARPTerminatedmember |
+ | MA	   | UHCTerminatedmember  |
