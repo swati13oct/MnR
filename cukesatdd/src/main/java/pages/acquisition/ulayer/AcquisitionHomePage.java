@@ -204,6 +204,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath = "//*[@class='container meded-article-header']//span[contains(text(),'Health Insurance Broker')]")
 	public WebElement brokerHeader;
+	
+	/* LearnAboutMedicare link */
+	@FindBy(xpath = "//*[@id='ghn_lnk_3']")
+	private WebElement lnkLearnAboutMedicare;
 
 	private static String TeamC_ACQUISITION_PAGE_URL = MRConstants.TeamC_UHC_URL;
 
@@ -1101,5 +1105,18 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			counter++;
 		} while (counter < 2);
 	}
+	
+	public WebElement getLnkLearnAboutMedicare() {
+		return lnkLearnAboutMedicare;
+	}
+
+	public LearnAboutMedicareHomePage openLearnAboutMedicarePage() {
+
+		getLnkLearnAboutMedicare().click();
+
+		return new LearnAboutMedicareHomePage(driver);
+	}
+
+	
 
 }
