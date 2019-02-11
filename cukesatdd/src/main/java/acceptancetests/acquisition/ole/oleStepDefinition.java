@@ -453,6 +453,13 @@ public class oleStepDefinition {
 			MedicareDetailsMap.put("Medicare Number", MedicareNumber);
 			
 			}
+		else if(CardType.contains("RRID")){
+			Random rnd = new Random();
+			int n = 100000000 + rnd.nextInt(900000000);
+			String MedicareNumber = "RID"+Integer.toString(n);
+			MedicareDetailsMap.put("Medicare Number", MedicareNumber);
+		
+			}
 		String SSNflag = MedicareDetailsMap.get("SSN Flag");
 		if(SSNflag.contains("true")){
 			MedicareDetailsMap.put("SSN Number", "123456789");
