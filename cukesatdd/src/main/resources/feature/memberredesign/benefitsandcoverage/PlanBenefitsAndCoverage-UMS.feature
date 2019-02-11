@@ -189,7 +189,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
   # this testcase result will not be stable. Since can't predict time for GPS to finish the update, 
   # so the add or remove button does't always show up within the time the code expects it to.
   @benefitsAndCoverage13 @BenefitsRiderFunctionality @regression @regressionMember
-  Scenario Outline: Verify the Benefits for a combo member with Rider
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the Benefits for a combo member with Rider
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
