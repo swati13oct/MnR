@@ -27,7 +27,7 @@ Feature: 1.01-Acq-To test learn about medicare flow in AARP site
     And verifies URL, title of pages navigable from menu on aarp site
     And verifies navigation to learn about medicare homePage
 #    And verifies accessibility of links using tabkey, back button on every page navigable from homepage on aarp site
-#    And app navigates to medicare eligibility page on aarp site
+    And app navigates to medicare eligibility page on aarp site
     And verifies default value of state drop down on aarp site
     And verifies presence of video, sideLinks, back button and next button on medicare eligibility page on aarp site
     And verifies links under Types of UnitedHealthcare Insurance Company Plans on aarp site
