@@ -19,11 +19,12 @@
 Feature: 1.01-Acq-To test learn about medicare flow in UHC site
 
   @learnAboutMedicare1 @regressionMember @uhc
-  Scenario Outline: Verify medicare links, redirection to respective pages, page/browser back button,state selection, plan search on blue layer
+  Scenario Outline: Verify medicare links, redirection to respective pages, page/browser back button,state selection, plan search on u layer
     Given user is on uhcmedicaresolutions site landing page
     And verifies header, links under Learn About Medicare dropList on uhc site
     When user clicks on learn about medicare link on uhc site
     And verifies URL, title of pages navigable from menu on uhc site
+    When user clicks on learn about medicare link on uhc site
     And verifies navigation to learn about medicare homePage on uhc site
 #    And verifies accessibility of links using tabkey, back button on every page navigable from homepage on uhc site
     And app navigates to medicare eligibility page on uhc site
@@ -43,13 +44,13 @@ Feature: 1.01-Acq-To test learn about medicare flow in UHC site
     And views plan of a particular type on uhc site
     |PlanType|<planType>|
     ##MA MS SNP PDP
-    
+    And verifies plantype on uhc site
     |PlanType|<planType>|
 
     #TestCaseId:15524,15525,15526
     Examples: 
       | zipcode | planType | option |
-      |   90210 | MA       | ME     |
+      |   90002 | MA       | ME     |
 
   @learnAboutMedicare2 @regressionMember @uhc
   Scenario Outline: Verify medicare advantage flow from learn about medicare menu
@@ -64,7 +65,7 @@ Feature: 1.01-Acq-To test learn about medicare flow in UHC site
 	#TestCaseId:15524,15525,15526
     Examples: 
       | zipcode | planType |
-      |   90210 | MA       |
+      |   90002 | MA       |
 
   @learnAboutMedicare3 @regressionMember @uhc
   Scenario Outline: Verify precscription drug plan flow from learn about medicare menu
@@ -78,7 +79,7 @@ Feature: 1.01-Acq-To test learn about medicare flow in UHC site
 	#TestCaseId:15524,15525,15526
     Examples: 
       | zipcode | planType |
-      |   90210 | PDP      |
+      |   90002 | PDP      |
 
   @learnAboutMedicare4 @regressionMember @uhc
   Scenario Outline: Verify medicare advantage flow from learn about medicare homePage
@@ -90,15 +91,12 @@ Feature: 1.01-Acq-To test learn about medicare flow in UHC site
       | ZipCode  | <zipcode>  |
       | PlanType | <planType> |
     And verifies Shop For a Plan Homepage on uhc site
-    And views plan of a particular type on uhc site
-    |PlanType|<planType>|
-    ##MA MS SNP PDP
-    
+    And verifies plantype on uhc site
     |PlanType|<planType>|
 	#TestCaseId:15524,15525,15526
     Examples: 
       | zipcode | planType |
-      |   90210 | MA       |
+      |   90002 | MA       |
 		
   @learnAboutMedicare5 @regressionMember @uhc
   Scenario Outline: Verify precscription drug plan flow from learn about medicare homePage
@@ -110,12 +108,9 @@ Feature: 1.01-Acq-To test learn about medicare flow in UHC site
       | ZipCode  | <zipcode>  |
       | PlanType | <planType> |
 	And verifies Shop For a Plan Homepage on uhc site
-    And views plan of a particular type on uhc site
-    |PlanType|<planType>|
-    ##MA MS SNP PDP
-    
+    And verifies plantype on uhc site
     |PlanType|<planType>|
 	#TestCaseId:15524,15525,15526
     Examples: 
       | zipcode | planType |
-      |   90210 | PDP      |
+      |   90002 | PDP      |

@@ -227,10 +227,10 @@ public class LearnAboutMedicareStepDefinitionAARP {
 
 	@And("^views plan of a particular type on aarp site$")
 	public void clicks_on_medicare_advantage_tab(DataTable attributes) {
-		// VPPPlanSummaryPage vpp = (VPPPlanSummaryPage)
-		// getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		 VPPPlanSummaryPage vpp = (VPPPlanSummaryPage)
+		 getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
-		VPPPlanSummaryPage vpp = new VPPPlanSummaryPage(wd);
+		wd.navigate().refresh();
 		List<List<String>> data = attributes.raw();
 		String planType = data.get(0).get(1).toString();
 		vpp.viewPlanSummary(planType);
@@ -268,17 +268,18 @@ public class LearnAboutMedicareStepDefinitionAARP {
 		List<List<String>> data = attributes.raw();
 		String planType = data.get(0).get(1).toString();
 
-		learnAboutMedicareHomePage
-				.navigateToMedicareMenuLinks(learnAboutMedicareHomePage.getLstLearnAboutMedicareTitle().get(0));
+//		learnAboutMedicareHomePage
+//				.navigateToMedicareMenuLinks(learnAboutMedicareHomePage.getLstLearnAboutMedicareTitle().get(1));
 
 		if (planType.equals("MA")) {
-			Assert.assertTrue("Medicare Advantage link isn't displayed",
-					learnAboutMedicareHomePage.getLstLearnAboutMedicare().get(4).getText().contains("Advantage"));
+//			Assert.assertTrue("Medicare Advantage link isn't displayed",
+//					learnAboutMedicareHomePage.getLstLearnAboutMedicare().get(4).getText().contains("Advantage"));
 
 			learnAboutMedicareHomePage
 					.navigateToMedicareMenuLinks(learnAboutMedicareHomePage.getLstLearnAboutMedicare().get(4));
 		}
 		if (planType.equals("PDP")) {
+			learnAboutMedicareHomePage.navigateToMedicareMenuLinks(learnAboutMedicareHomePage.getLstLearnAboutMedicareTitle().get(1));
 			if (learnAboutMedicareHomePage.getLstLearnAboutMedicare().get(6).getText().contains("Prescription")) {
 				Assert.assertTrue("Medicare Prescription Drug Plan link isn't displayed",
 						learnAboutMedicareHomePage.getLstLearnAboutMedicare().get(6).isDisplayed());

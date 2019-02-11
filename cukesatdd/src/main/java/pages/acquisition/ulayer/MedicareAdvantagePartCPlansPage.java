@@ -96,16 +96,19 @@ public class MedicareAdvantagePartCPlansPage extends GlobalWebElements {
 		switchToNewTabNew(getLnkPlansAvailableInYourArea());
 
 	}
-	/*logic:search for a plan with valid zipcode*/
+
+	/* logic:search for a plan with valid zipcode */
+	@SuppressWarnings("deprecation")
 	public WebDriver planSearch(String zipCode) {
 		validateNew(getTxtZipcode());
 		getTxtZipcode().sendKeys(zipCode);
 		switchToNewTabNew(btnZipcode);
 		System.out.println(getTitle());
-		Assert.assertTrue("Incorrect page is loaded", getTitle().contains("Find Medicare Plans"));
-		//btnZipcode.click();
+		Assert.assertTrue("Incorrect page is loaded",
+				getTitle().contains("Find Medicare Plans") || getTitle().contains("Available Plans"));
+		validateNonPresenceOfElement(btnZipcode);
 		return driver;
-		
+
 	}
 
 }

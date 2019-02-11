@@ -1383,7 +1383,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public LearnAboutMedicareHomePage openLearnAboutMedicarePage() {
 
 		getLnkLearnAboutMedicare().click();
-
+		validateNonPresenceOfElement(zipCodeField);
 		return new LearnAboutMedicareHomePage(driver);
 	}
 
