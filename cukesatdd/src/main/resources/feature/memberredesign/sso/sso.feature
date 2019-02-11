@@ -2,7 +2,7 @@
 Feature: To test SSO functionality for SSO groups
 
   @sso1 @US1048825 @regression @regression_sso    @regressionMember
-  Scenario Outline: Verify North Carolina SSO functionality and check that security and password reset links are not displayed on profile page.
+  Scenario Outline: TID: <TID> -Group: <GroupName> -SSO Partner: <ssoPartner> - Verify North Carolina SSO functionality and check that security and password reset links are not displayed on profile page.
     Given the user access AEM Test Harness Page and enters his AEM Stage username and password and click on signin button
       | CQ UserName | <userName> |
       | CQ Password | <passWord> |
@@ -20,11 +20,11 @@ Feature: To test SSO functionality for SSO groups
     Then security and password reset link should not be visible
 
     Examples: 
-      | GroupName | ssoPartner   | firstName | lastName | dateOfBirth | uhcID     | eaID      | empNumber | userName       | passWord   |
-      | NC        | benefitfocus | EFBBF     | EEEDFAB  |    01251950 | BAB27F10F | BAB27F10F |           | sso_dummy_user | Password@1 |
+      | TID   | GroupName | ssoPartner   | firstName | lastName | dateOfBirth | uhcID     | eaID      | empNumber | userName       | passWord   |
+      | 15364 | NC        | benefitfocus | EFBBF     | EEEDFAB  |    01251950 | BAB27F10F | BAB27F10F |           | sso_dummy_user | Password@1 |
 
   @sso2 @US1048825 @regression @regression_sso    @regressionMember
-  Scenario Outline: Verify AT&T SSO functionality and check that security and password reset links are not displayed on profile page.
+  Scenario Outline: TID: <TID> -Group: <GroupName> -SSO Partner: <ssoPartner> - Verify AT&T SSO functionality and check that security and password reset links are not displayed on profile page.
     Given the user access AEM Test Harness Page and enters his AEM Stage username and password and click on signin button
       | CQ UserName | <userName> |
       | CQ Password | <passWord> |
@@ -42,11 +42,11 @@ Feature: To test SSO functionality for SSO groups
     Then security and password reset link should not be visible
 
     Examples: 
-      | GroupName | ssoPartner | firstName | lastName  | dateOfBirth | uhcID              | eaID               | empNumber | userName       | passWord   |
-      | AT&T      | aonhewitt  | FBDDE     | EABEAFBCB |    05171937 | 04E60BC3ED108800AC | 04E60BC3ED108800AC |           | sso_dummy_user | Password@1 |
+     | TID   | GroupName | ssoPartner | firstName | lastName  | dateOfBirth | uhcID              | eaID               | empNumber | userName       | passWord   |
+     | 15362 | AT&T      | aonhewitt  | FBDDE     | EABEAFBCB |    05171937 | 04E60BC3ED108800AC | 04E60BC3ED108800AC |           | sso_dummy_user | Password@1 |
 
   @sso3 @US1048825 @regression @regression_sso @regressionMember
-  Scenario Outline: Verify Verizon MA SSO functionality and check that security and password reset links are not displayed on profile page.
+  Scenario Outline: TID: <TID> -Group: <GroupName> -SSO Partner: <ssoPartner> - Verify Verizon MA SSO functionality and check that security and password reset links are not displayed on profile page.
     Given the user access AEM Test Harness Page and enters his AEM Stage username and password and click on signin button
       | CQ UserName | <userName> |
       | CQ Password | <passWord> |
@@ -64,11 +64,11 @@ Feature: To test SSO functionality for SSO groups
     Then security and password reset link should not be visible
 
     Examples: 
-      | GroupName  | ssoPartner | firstName | lastName | dateOfBirth | uhcID | eaID       | empNumber | userName       | passWord   |
-      | Verizon MA | conduent   | DABDCAE   | FCADBDD  |    11101946 |       | 63E8B0353B |    023978 | sso_dummy_user | Password@1 |
+     | TID   | GroupName  | ssoPartner | firstName | lastName | dateOfBirth | uhcID | eaID       | empNumber | userName       | passWord   |
+     | 15363 | Verizon MA | conduent   | DABDCAE   | FCADBDD  |    11101946 |       | 63E8B0353B |    023978 | sso_dummy_user | Password@1 |
 
   @sso4 @US1048825 @regression @regression_sso @regressionMember
-  Scenario Outline: Verify Verizon MAPD SSO functionality and check that security and password reset links are not displayed on profile page.
+  Scenario Outline: TID: <TID> -Group: <GroupName> -SSO Partner: <ssoPartner> - Verify Verizon MAPD SSO functionality and check that security and password reset links are not displayed on profile page.
     Given the user access AEM Test Harness Page and enters his AEM Stage username and password and click on signin button
       | CQ UserName | <userName> |
       | CQ Password | <passWord> |
@@ -86,5 +86,5 @@ Feature: To test SSO functionality for SSO groups
     Then security and password reset link should not be visible
 
     Examples: 
-      | GroupName    | ssoPartner | firstName | lastName | dateOfBirth | uhcID | eaID      | empNumber | userName       | passWord   |
-      | Verizon MAPD | conduent   | DAFB      | DCFDECCD |    06191926 |       | C6AC8162F |    002203 | sso_dummy_user | Password@1 |
+      | TID   | GroupName    | ssoPartner | firstName | lastName | dateOfBirth | uhcID | eaID      | empNumber | userName       | passWord   |
+      | 15388 | Verizon MAPD | conduent   | DAFB      | DCFDECCD |    06191926 |       | C6AC8162F |    002203 | sso_dummy_user | Password@1 |
