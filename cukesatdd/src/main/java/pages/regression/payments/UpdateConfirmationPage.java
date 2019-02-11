@@ -34,6 +34,16 @@ public class UpdateConfirmationPage extends UhcDriver {
 		System.out.println("Your Confimation Number is : " + ConfirmationNumber.getText());
 	}
 
+	
+	public void validateEFTUpdateVerificationforShip() {
+		validate(MakeOneTimePaymentLink);
+		System.out.println("User has sucessfully setup recurring payment for Ship EFT");
+	}
+	
+	public void validateStopRevurringVerificationforShip() {
+		validate(MakeOneTimePaymentLink);
+		System.out.println("User has sucessfully setup recurring payment for Ship EFT");
+	}
 	@Override
 	public void openAndValidate() {
 		validate(MakeOneTimePaymentLink);

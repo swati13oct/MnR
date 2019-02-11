@@ -63,6 +63,20 @@ public class UpdateRecurringPage extends UhcDriver {
 		} else
 			return null;
 	}
+	
+	public UpdateReviewPage selectStopRecurringClickOnNext() {
+		validate(HelpfulRemindersPanel);
+		System.out.println("User is on Update Automatic Recurring Page");
+		CheckingAccountRadioButton.click();
+		System.out.println("clicked on Checking account radio button");
+		NextButton.click();
+		System.out.println("clicked on Next button");
+		if (validate(CheckingAccountInformationHeader)) {
+			System.out.println("User is on Form Page for EFT");
+			return new UpdateReviewPage(driver);
+		} else
+			return null;
+	}
 
 	@Override
 	public void openAndValidate() {
