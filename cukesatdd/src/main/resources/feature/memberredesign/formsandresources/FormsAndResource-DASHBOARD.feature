@@ -37,7 +37,7 @@ Scenario Outline: To verify quicklinks for a MAPD member
 	Examples: 
       | planType | memberType |Identifier| language |count|rider|
       | MAPD     | Individual |IndEffectiveAARP| ENGLISH  | 7   |NoRider|
-      | MAPD     | Individual |IndEffectiveAARP| ENGLISH  | 7   |Rider|
+   	  | MAPD     | Individual |IndEffectiveAARP| ENGLISH  | 7   |Rider|
       | MAPD     | Group |GrpEffectiveUHC| ENGLISH  | 7   |NoRider|
       | MAPD     | Individual |IndEffectiveUHC| ENGLISH  | 6   |NoRider|
 	  | MAPD     | Individual |IndEffectiveUHC| ENGLISH  | 6   |Rider|
@@ -53,8 +53,8 @@ Scenario Outline: To verify quicklinks for a MAPD member
       |identifier|<Identifier>|
       |Rider|<rider>|
     And user clicks on the view document and resources link and navigate to forms and resource page
-    | Plan Type   | <planType>   |
-    | Member Type    | <memberType>    |
+		    | Plan Type   | <planType>   |
+		    | Member Type    | <memberType>    |
     Then user verifies presence of jump links on F&R page
       | Plan Type | <planType> |
       |Rider|<rider>|
@@ -576,12 +576,6 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     And Medical EOB link is not displayed for PDP
     Then validate that the forms & resources section is displayed
     Then validate that the renew magazine section is not displayed
-    And the user verifies that the correct pdfs are coming in the anoc section
-      | Member Type | <memberType> |
-      | ANNUAL NOTICE OF CHANGES     | <anoc>                      |
-      | EVIDENCE OF COVERAGEANOC     | <evidenceofcoverageanoc>     |
-      | COMPREHENSIVE FORMULARYANOC  | <comprehensiveformularyanoc> |
-      | ADDITIONAL DRUG COVERAGEANOC | <additionaldruganoc>         |
     And then user verifies that the correct pdfs are coming in the plan material section
      #| GETTING STARTED GUIDE             | <gettingstartedguide>    |
       | BENEFIT-HIGHLIGHT                 | <benefithighlight>       |  
@@ -594,6 +588,12 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
       | STEP THERAPY                      | <steptherapy>            |
       | FORMULARY ADDITIONS               | <formularyadd>           |
       | FORMULARY DELETIONS               | <formularydel>           |
+     And the user verifies that the correct pdfs are coming in the anoc section
+      | Member Type | <memberType> |
+      | ANNUAL NOTICE OF CHANGES     | <anoc>                      |
+      | EVIDENCE OF COVERAGEANOC     | <evidenceofcoverageanoc>     |
+      | COMPREHENSIVE FORMULARYANOC  | <comprehensiveformularyanoc> |
+      | ADDITIONAL DRUG COVERAGEANOC | <additionaldruganoc>         | 
  
       Examples:
 
@@ -641,13 +641,6 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     #  | EVIDENCE OF COVERAGE     | <evidenceofcoverage>     |
     #  | CERTIFICATE OF COVERAGE  | <certificateofcoverage>  |
     Then validate that the anoc section is displayed for group
-    And the user verifies that the correct pdfs are coming in the anoc section
-      | Member Type | <memberType> |
-      | ANNUAL NOTICE OF CHANGES     | <anoc>                       |
-      |CERTIFICATE 0F COVERAGE      |  <certificateofcoverage>  |
-     #| EVIDENCE OF COVERAGEANOC     | <evidenceofcoverageanoc>     |
-      | COMPREHENSIVE FORMULARYANOC  | <comprehensiveformularyanoc> |
-      | ADDITIONAL DRUG COVERAGEANOC | <additionaldruganoc>         |
     Then validate that annual directory section is displayed
       | Member Type | <memberType> |
     Then validate that My Document section is displayed
@@ -658,6 +651,13 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     And the provider search link is not displayed for PDP
     And the Pharmacy locator link is displayed
       | Member Type | <memberType> |
+    And the user verifies that the correct pdfs are coming in the anoc section
+      | Member Type | <memberType> |
+      | ANNUAL NOTICE OF CHANGES     | <anoc>                       |
+      |CERTIFICATE 0F COVERAGE      |  <certificateofcoverage>  |
+     #| EVIDENCE OF COVERAGEANOC     | <evidenceofcoverageanoc>     |
+      | COMPREHENSIVE FORMULARYANOC  | <comprehensiveformularyanoc> |
+      | ADDITIONAL DRUG COVERAGEANOC | <additionaldruganoc>         |  
     
 
     Examples: 

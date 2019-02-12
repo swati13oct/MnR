@@ -128,7 +128,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "cobrowse-disclaimer")
 	private WebElement cobrowsemodelwindow;
 
-	@FindBy(xpath = "//a[@class='cta-button']")
+	/*@FindBy(xpath = "//a[@class='cta-button']")
+	private WebElement takeTheQuizBtn;*/
+	
+	@FindBy(xpath = "//a[contains(text(), 'Plan Selector')]")
 	private WebElement takeTheQuizBtn;
 
 	@FindBy(xpath = ".//*[@id='colhowdoesthiswork_dce']//*[@itemprop='significantLink']/*[@class='cta-button secondary']")
@@ -212,6 +215,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath = "//a[contains(@class,'closer')]")
 	private WebElement requestAssistanceClose;
+	
+	/* LearnAboutMedicare link */
+	@FindBy(xpath = "//*[@id='ghn_lnk_3']")
+	private WebElement lnkLearnAboutMedicare;
 
 	public JSONObject homePageDisclaimerJson;
 	public JSONObject homePageDisclaimerHideJson;
@@ -235,6 +242,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public JSONObject cobrowseJson;
 	private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
 	private static String UMS_ACQISITION_OFFLINE_PAGE_URL = MRConstants.UHC_URL_OFFLINE;
+	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
+	private static String AARP_ACQISITION_OFFLINE_PAGE_URL = MRConstants.AARP_URL_OFFLINE;
 
 	public AcquisitionHomePage(WebDriver driver) {
 		super(driver);
@@ -246,6 +255,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate(alreadyOnSite);
+	}
+
+	public AcquisitionHomePage(WebDriver driver, String string) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		openAndValidate(string);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -307,6 +322,20 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		checkModelPopup(driver);
 		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
 	}
+	
+	
+	public void openAndValidate(String Ulayer) {
+		if (MRScenario.environment.equals("offline")) {
+			startNew(AARP_ACQISITION_PAGE_URL);
+		} else {
+			startNew(AARP_ACQISITION_PAGE_URL);
+		}
+		CommonUtility.checkPageIsReadyNew(driver);
+		checkModelPopup(driver);
+		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
+	}
+	
+	
 
 	public  VPPPlanSummaryPage searchPlans(String zipcode, String countyName) {
 		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 20);
@@ -1345,6 +1374,17 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			return new AcquisitionHomePage(driver, true);
 		}
 		return null;
+	}
+	
+	public WebElement getLnkLearnAboutMedicare() {
+		return lnkLearnAboutMedicare;
+	}
+
+	public LearnAboutMedicareHomePage openLearnAboutMedicarePage() {
+
+		getLnkLearnAboutMedicare().click();
+		validateNonPresenceOfElement(zipCodeField);
+		return new LearnAboutMedicareHomePage(driver);
 	}
 
 }

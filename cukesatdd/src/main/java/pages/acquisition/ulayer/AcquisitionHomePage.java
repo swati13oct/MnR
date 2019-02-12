@@ -193,6 +193,21 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//a[contains(@class,'closer')]")
 	private WebElement requestAssistanceClose;
 	
+	@FindBy(id = "gbqfbb")
+	private WebElement feelingluckyBtn;
+	
+	@FindBy(id = "medicareTitle")
+	public WebElement siteMapHeader;
+	
+	@FindBy(xpath = "//*[@class='container meded-article-header']//span[contains(text(),'Privacy Policy')]")
+	public WebElement privacyHeader;
+	
+	@FindBy(xpath = "//*[@class='container meded-article-header']//span[contains(text(),'Health Insurance Broker')]")
+	public WebElement brokerHeader;
+	
+	/* LearnAboutMedicare link */
+	@FindBy(xpath = "//*[@id='ghn_lnk_3']")
+	private WebElement lnkLearnAboutMedicare;
 
 	private static String TeamC_ACQUISITION_PAGE_URL = MRConstants.TeamC_UHC_URL;
 
@@ -266,6 +281,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@Override
 	public void openAndValidate() {
+	
+		
 		if (MRScenario.environment.equals("offline")) {
 			start(AARP_ACQISITION_OFFLINE_PAGE_URL);
 		} else {
@@ -852,16 +869,20 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(footerSiteMapLink);
 		footerSiteMapLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
+		validateNew(siteMapHeader);
 		if (driver.getCurrentUrl().contains("sitemap.html")){
 			return new SiteMapAARPPage(driver);
 		}
 		return null;
 	}
 	
+		
+	
 	public PrivacyPolicyAARPPage privacypolicyFooterClick() {
 		validateNew(footerPrivacyPolicyLink);
 		footerPrivacyPolicyLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
+		validateNew(privacyHeader);
 		if (driver.getCurrentUrl().contains("privacy_policy.html")) {
 			return new PrivacyPolicyAARPPage(driver);
 		}
@@ -892,6 +913,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validate(footerAgentsnBrokersLink);
 		footerAgentsnBrokersLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
+		validateNew(brokerHeader);
 		if(driver.getCurrentUrl().contains("health-insurance-brokers")){
 			return new AgentsnBrokersAARPPage(driver);
 		}
@@ -1083,5 +1105,18 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			counter++;
 		} while (counter < 2);
 	}
+	
+	public WebElement getLnkLearnAboutMedicare() {
+		return lnkLearnAboutMedicare;
+	}
+
+	public LearnAboutMedicareHomePage openLearnAboutMedicarePage() {
+
+		getLnkLearnAboutMedicare().click();
+		validateNonPresenceOfElement(zipCodeField);
+		return new LearnAboutMedicareHomePage(driver);
+	}
+
+	
 
 }

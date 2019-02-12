@@ -884,6 +884,35 @@ public class AccountHomePage extends UhcDriver {
 			return null;
 		}
 	}
+	
+	public PaymentHistoryPage navigateTooPaymentHistoryPage() {
+
+		try {
+			Thread.sleep(2000);
+			driver.switchTo().frame("IPerceptionsEmbed");
+			System.out.println("iPerception Pop Up is Present");
+			iPerceptionCloseButton.click();
+			driver.switchTo().defaultContent();
+			Thread.sleep(5000);
+		} catch (Exception e) {
+			System.out.println("iPerception Pop Up is not Present");
+		}
+
+		// Thread.sleep(16000);
+
+		try {
+			navigateToPaymentHistoryPage();
+		} catch (Exception e1) {
+			System.out.println("Unable to navigate to premium payment page");
+		}
+		if (PaymentHeading.getText().contains("Premium Payments Overview")) {
+			System.out.println("Payment Overview page displayed");
+			return new PaymentHistoryPage(driver);
+		} else {
+			System.out.println("payment overview page not displayed");
+			return null;
+		}
+	}
 
 	public AccountHomePage navigateToSHIPAutoPaymentHistoryPage() {
 
@@ -1687,24 +1716,8 @@ public class AccountHomePage extends UhcDriver {
 			return true;
 
 		} else {
-			//go to secondary page and double check
-			System.out.println("find care tab is displayed on the dashboard header - attempt the workaround");  
-			try {
-				coverageBenefits.click();
-			} catch (NoSuchElementException e) {
-				dashboard_coverageBenefits.click();
-			}
-			WebDriverWait wait = new WebDriverWait(driver, 30);
-			if (validate(findCare) == false) {
-				Assert.assertFalse("find care is not displayed", validate(findCare));
-				return true;
-
-			} else {
-				//go to secondary page and double check
-				System.out.println("find care tab is displayed on the secondary pages but should not");  
-				Assert.fail("find care is displayed");
-				return false;
-			}
+			Assert.fail("find care is displayed");
+			return false;
 		}
 	}
 
@@ -2322,7 +2335,7 @@ public class AccountHomePage extends UhcDriver {
 		String preMessage_text = preEffectiveMessage.getAttribute("innerText");
 		System.out.println("Message displayed on Dashboard for this member is:" + preMessage_text);
 		Assert.assertTrue(preMessage_text.contains(
-				"Use this site to find helpful information while you�re getting ready for your plan to start on"));
+				"Use this site to find helpful information while youï¿½re getting ready for your plan to start on"));
 		System.out.println("First assert on the preeffective message is passed");
 		Assert.assertTrue(preMessage_text.contains(
 				"Depending on your plan coverage, you can find a provider, locate a pharmacy, or view important plan documents."));
@@ -2375,7 +2388,7 @@ public class AccountHomePage extends UhcDriver {
     	String preMessage_text = preEffectiveMessage.getText();
  	System.out.println("Message displayed on Dashboard for this member is:" + preEffectiveMessage);
  	Assert.assertTrue(preMessage_text.contains(
- 			"Use this site to find helpful information while you�re getting ready for your plan to start on"));
+ 			"Use this site to find helpful information while you’re getting ready for your plan to start on"));
  	System.out.println("Assert on the preeffective message is passed");
 
  }
