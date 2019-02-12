@@ -21,7 +21,7 @@ public class OneTimePaymentPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='atdd_otheramount_label']/label")
 	private WebElement amountRadioButton;
 
-	@FindBy(id = "other-amount-number")
+	@FindBy(xpath = "//input[@id='amountInput']")
 	private WebElement otheramountfield;
 
 	@FindBy(id = "otherAmount")
@@ -549,6 +549,5 @@ public class OneTimePaymentPage extends UhcDriver {
 		validate(middleNameField);
 		validate(lastNameField);
 		validate(continueButton);
-
 	}
 }
