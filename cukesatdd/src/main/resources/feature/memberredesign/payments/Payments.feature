@@ -166,3 +166,17 @@ Feature: To Test Credit card functional Flows
     Examples: 
       | planType | memberType                   |
       | SHIP     | IndividualSHIPPaymentsUpdate |
+
+  @StopRecurrEFT @Feb_release_2019 @Spartans
+  Scenario Outline: Verify Stop Recurring payment flow for Federal memeber
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When the user clicks on Premium Payments on Header
+    And user clicks on Update Automatic payments on payment overview page
+    And user clicks on Stop Automatic payments and clicks on next on Setup recurring payments page
+    Then user navigates to Review Automatic page for Stop Recurring Payments
+
+    Examples: 
+      | planType | memberType                       |
+      | MAPD     | IndividualAARPMAPDPaymentsUpdate |

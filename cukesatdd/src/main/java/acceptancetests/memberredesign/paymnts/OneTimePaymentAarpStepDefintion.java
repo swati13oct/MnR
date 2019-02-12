@@ -1641,6 +1641,31 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 	}
 
+	  @Given("^user clicks on Stop Automatic payments and clicks on next on Setup recurring payments page$")
+	public void user_clicks_on_Stop_Automatic_payments_and_clicks_on_next_on_Setup_recurring_payments_page() throws Throwable {
+		UpdateRecurringPage updateRecurringPage = (UpdateRecurringPage) getLoginScenario()
+				.getBean(PageConstants.Update_Recurring_Page);
+		UpdateReviewPage updateReviewPage = updateRecurringPage.selectCancelAutomaticPaymentsAndClicksNext();
+		if (updateReviewPage!= null){
+			getLoginScenario().saveBean(PageConstants.Update_Review_Page, updateReviewPage);
+			System.out.println("User is on Review Recurring Payments screen"); 
+		}
+		
+	}
+	
+	@Then("^user navigates to Review Automatic page for Stop Recurring Payments$")
+	public void user_navigates_to_Review_Automatic_page_for_Stop_recurring_payments_page() throws Throwable {
+		UpdateReviewPage updateReviewPage = (UpdateReviewPage) getLoginScenario()
+				.getBean(PageConstants.Update_Review_Page);
+		UpdateConfirmationPage updateConfirmationPage = updateReviewPage.selectAgreeAndClickOnContinueforStopRecurring();
+		if (updateConfirmationPage!= null){
+			getLoginScenario().saveBean(PageConstants.Update_Confirmation_Page, updateConfirmationPage);
+			System.out.println("User is on Review Recurring Payments screen");
+		}
+		}
+		
+		
+
 	@Given("^user selects checking Account on Update Automatic recurring payments page and Click on Next$")
 	public void user_selects_checking_Account_on_Update_Automatic_recurring_payments_page_and_Click_on_Next()
 			throws Throwable {

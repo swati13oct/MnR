@@ -133,6 +133,24 @@ public class UpdateReviewPage extends UhcDriver {
 			return null;
 		}
 	}
+	
+	public UpdateConfirmationPage selectAgreeAndClickOnContinueforStopRecurring() {
+	System.out.println("User is on Payment Method Update Page");
+	PaymentsDataVerificationOnUpdateReviewPage();
+	System.out.println("Going to scroll down");
+	JavascriptExecutor jse = (JavascriptExecutor) driver;
+	jse.executeScript("window.scrollBy(0,650)", "");
+	jsClickNew(AgreeCheckBox);
+	ContinueButton.click();
+	System.out.println("Clicked on Continue button");
+	if (ConfirmationPageHeading.getText().contains("Review Payment Method Update")) {
+		System.out.println("User is on Confirmation Payment Method Update Page");
+		return new UpdateConfirmationPage(driver);
+	} else {
+		System.out.println("Confirmation Payment Method Update not displayed");
+		return null;
+	}
+}
 
 	@Override
 	public void openAndValidate() {
