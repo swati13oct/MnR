@@ -636,7 +636,7 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 
 	public static final String NEW_CC_BUTTON = "NewCCButton";
 	
-	
+	public static final String MEDICARE_ELIGIBILITY_PAGE = "medicareEligibilityPage";
 
 	
 }
