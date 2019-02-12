@@ -44,7 +44,7 @@ public class PaymentsFormPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='consent']/following-sibling::label[contains(text(),'Electronic Signature Consent')]")
 	private WebElement ElectronicSignatureInput;
 
-	@FindBy(xpath = "//button[text()='Continue']")
+	@FindBy(xpath = "//button[@class='btn btn--primary' and (text()='CONTINUE' or text()='Continue')]")
 	private WebElement ContinueButton;
 
 	public PaymentsFormPage(WebDriver driver) {
@@ -53,7 +53,7 @@ public class PaymentsFormPage extends UhcDriver {
 		openAndValidate();
 	}
 
-	public ReviewAutomaticPage EnterFiledsOnEFTforSetup(Map<String, String> accountAttributessMap) {
+	public ReviewAutomaticPage EnterFiledsOnEFTforSetup(Map<String, String> accountAttributessMap) throws Exception {
 
 		String routingNumber = accountAttributessMap.get("Routing number");
 		String confirmRoutingNumber = accountAttributessMap.get("Confirm routing number");
@@ -70,8 +70,9 @@ public class PaymentsFormPage extends UhcDriver {
 		firstNameField.sendKeys(firstName);
 		middleNameField.sendKeys(middleName);
 		lastNameField.sendKeys(lastName);
-		AuthorizeButton.click();
-		System.out.println("Clicked on Authorize button");
+		ContinueButton.click();
+		System.out.println("Clicked on Contuine button");
+		Thread.sleep(10000);
 		if (ReviewPageHeading.getText().contains("Review Your Automatic Payments Information")) {
 			System.out.println("User is on Review Your Automatic Payments Information Page");
 			return new ReviewAutomaticPage(driver);
