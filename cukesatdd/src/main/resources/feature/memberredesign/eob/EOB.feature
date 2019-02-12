@@ -8,9 +8,9 @@ Given login with following details logins in the member portal and validate elem
 Then the user navigates to EOB page_hsid 
 Then the user validates site leaving pop up         
 Examples:
-       | planType    | memberType                      |  
- 			 | MAPD        | IndividualAARPWOEOB						 |
-       | MA          | IndividualAARPWOEOB						 |
+      |TID | planType    | memberType                      |  
+ 			|15140 | MAPD        | IndividualAARPWOEOB						 |
+      |15120   | MA          | IndividualAARPWOEOB						 |
      
 
 @eob2  @eobCountdaterange
@@ -26,15 +26,15 @@ And the user slects the desired date range
 Then the user validates EOB count
 	| EOB COUNT			 | <eobCount>|
 	Examples:
-	| planType    | memberType                |dateRange					   | eobType           |eobCount |
- 	| PCP         | withEOB                   | 18 Months            | Medical           |		4		 |
-	| MAPD        |aarpWithEOB 			          | 90 Days    			     | Medical 	         |		4		 |
-	| MAPD        |aarpWithEOB 			          | 6 Months    		     | Medical 	         |		8		 |
-	| MAPD        |aarpWithEOB 			          | 12 Months    		     | Medical 	         |		8		 |
-	| MAPD        |aarpWithEOB 			          | 18 Months    		     | Medical 	         |		8		 |
-	| MAPD        |aarpWithEOB 			          | 6 Months   			     | Prescription Drug |		1		 |
-	| MAPD        |aarpWithEOB 			          | 12 Months  			     | Prescription Drug |		1		 |
-	| MAPD        |aarpWithEOB 			          | 18 Months   		     | Prescription Drug |		1		 |
+	 |TID | planType    | memberType                |dateRange					   | eobType           |eobCount |
+ 	 |15134 | PCP         | withEOB                   | 18 Months            | Medical           |		4		 |
+	 |15140 | MAPD        |aarpWithEOB 			          | 90 Days    			     | Medical 	         |		4		 |
+	 |15140 | MAPD        |aarpWithEOB 			          | 6 Months    		     | Medical 	         |		8		 |
+	 |15140 | MAPD        |aarpWithEOB 			          | 12 Months    		     | Medical 	         |		8		 |
+	 |15140 | MAPD        |aarpWithEOB 			          | 18 Months    		     | Medical 	         |		8		 |
+	 |15140 | MAPD        |aarpWithEOB 			          | 6 Months   			     | Prescription Drug |		1		 |
+	 |15140 | MAPD        |aarpWithEOB 			          | 12 Months  			     | Prescription Drug |		1		 |
+	 |15140 | MAPD        |aarpWithEOB 			          | 18 Months   		     | Prescription Drug |		1		 |
 
  
 
@@ -47,9 +47,9 @@ And the user navigates to EOB page_hsid
 Then the user validates content displayed on EOB page without combo tabs
   | Plan Type      |<planType>  |
 Examples: 
-| planType    | memberType   					         |
-| MAPD        | NICE_EOB 						 |
-#| MA          | IndividualAARPWOEOB						 |
+ |TID | planType    | memberType   					         |
+ |15140 | MAPD        | NICE_EOB 						 |
+# |15120 | MA          | IndividualAARPWOEOB						 |
   
 @eob4 @dropDownFuntion 
 Scenario Outline: To validate page functionality with different dropdowns
@@ -63,14 +63,14 @@ Then the user navigates to EOB page and validates the page
  Then the user validates content displayed on EOB page without combo tabs
   | Plan Type      |<planType>  |
 Examples:
-	| planType    | memberType                | eobTypeData       | dateRange       |
-	| MAPD        | IndividualAARPWOEOB       | Medical           | 6 Months        |
-	| MAPD        | IndividualAARPWOEOB       | Prescription Drug | 6 Months        |
- 	| MAPD        | IndividualAARPWOEOB       | Medical           | 12 Months       |
-	| MAPD        | IndividualAARPWOEOB       | Medical           | 18 Months       |
-	| MAPD        | IndividualAARPWOEOB       | Medical           | 90 Days         |
-	| SHIP        | Individual 			  			  | Medical 					|6-12 Months			|
-	| SHIP        | Individual 			  			  | Medical 					|90 Days			    |
+	 |TID | planType    | memberType                | eobTypeData       | dateRange       |
+	 |15140 | MAPD        | IndividualAARPWOEOB       | Medical           | 6 Months        |
+	 |15140 | MAPD        | IndividualAARPWOEOB       | Prescription Drug | 6 Months        |
+ 	 |15140 | MAPD        | IndividualAARPWOEOB       | Medical           | 12 Months       |
+	 |15140 | MAPD        | IndividualAARPWOEOB       | Medical           | 18 Months       |
+	 |15140 | MAPD        | IndividualAARPWOEOB       | Medical           | 90 Days         |
+	 |15165 | SHIP        | Individual 			  			  | Medical 					|6-12 Months			|
+	 |15165 | SHIP        | Individual 			  			  | Medical 					|90 Days			    |
   
 @eob5 @learnAboutMedicalEOB 
 Scenario Outline: To verify How to read a medical EOB PDF
@@ -83,12 +83,12 @@ Then the user navigates to EOB page and validates the page
  |EOB Type  |<eobTypeData>|
 And the user validates how to read medical eob PDF
  	Examples:
-	| planType    | memberType                |dateRange         | eobTypeData       |
-	| PCP         | withEOB                   |  18 Months       | Medica            |
-	| MAPD        |aarpWithEOB 			          | 90 Days    			 | Medical 	         |
-	| MAPD        |aarpWithEOB 			          | 6 Months    		 | Medical 	         |
-	| MAPD        |aarpWithEOB 			          | 12 Months    		 | Medical 	         |
-	| MAPD        |aarpWithEOB 			          | 18 Months    		 | Medical 	         |
+	 |TID | planType    | memberType                |dateRange         | eobTypeData       |
+	 |15134 | PCP         | withEOB                   |  18 Months       | Medica            |
+	 |15140 	| MAPD        |aarpWithEOB 			          | 90 Days    			 | Medical 	         |
+	 |15140 | MAPD        |aarpWithEOB 			          | 6 Months    		 | Medical 	         |
+	 |15140 | MAPD        |aarpWithEOB 			          | 12 Months    		 | Medical 	         |
+	 |15140 | MAPD        |aarpWithEOB 			          | 18 Months    		 | Medical 	         |
 
 @eob6 @febRelease2018 @hsideob @regressionMember
 Scenario Outline: To verify NICE EOB and click on the pdf
@@ -106,13 +106,13 @@ Then the user validates EOB count
  #And the user validates how to read medical eob PDF
  
            Examples:
-       | planType    | memberType    |dateRange  | eobType |  eobCount |
-       | MAPD        | NICE_EOB_R      | Last 12 months |Medical  |     1     |
-#       | MA          | COSMOS_EOB_R      | Last 18 months |Medical  |     16     |
-#       | PDPI         | COSMOS_EOB_R     | Last 18 months |Medical  |     0     |
-       | SHIP_ACTIVE  | SHIP_EOB      | Last 12-18 months |Medical  |     1     |
-#       | SHIP_Termnated| SHIP_EOB     | Last 12-18 months |Medical  |     1     |
-#       | MAPD          | NICETermin_EOB_R | Last 18 months |Medical  |     1     |
+      |TID   | planType    | memberType    |dateRange  | eobType |  eobCount |
+      |15140   | MAPD        | NICE_EOB_R      | Last 12 months |Medical  |     1     |
+#     |15120    | MA          | COSMOS_EOB_R      | Last 18 months |Medical  |     16     |
+#     |15167    | PDPI         | COSMOS_EOB_R     | Last 18 months |Medical  |     0     |
+      |15165   | SHIP_ACTIVE  | SHIP_EOB      | Last 12-18 months |Medical  |     1     |
+#     |15166    | SHIP_Termnated| SHIP_EOB     | Last 12-18 months |Medical  |     1     |
+#      |15141   | MAPD          | NICETermin_EOB_R | Last 18 months |Medical  |     1     |
        
 @eob7 @regression_06_06_18FnF
 Scenario Outline: To verify EOB accessible for PDP + MEDSup Plan
@@ -125,8 +125,8 @@ Then the user validates content displayed on EOB page
 Then the user validates content displayed on EOB page
       |Plan Tab     | <planTab2>  |
  Examples:
-       | planType     | memberType     |dateRange  | eobType |  eobCount | planTab1   |planTab2 |
-       | PDP          |  comboEOBMedSup      | Last 18 Months |Medical  |     0     | 	PDP			 | MedSup     |
+      |TID   | planType     | memberType     |dateRange  | eobType |  eobCount | planTab1   |planTab2 |
+      |15167   | PDP          |  comboEOBMedSup      | Last 18 Months |Medical  |     0     | 	PDP			 | MedSup     |
        
 @eob8 @regression_06_06_18FnF
 Scenario Outline: TC009_Check EOB is accessible for PCP Individual - Active Plan
@@ -142,8 +142,8 @@ Then the user validates EOB count
        | EOB COUNT                | <eobCount>|
 And the user clicks on first eob from the list
 Examples:
-       | planType    | memberType    |dateRange  | eobType |  eobCount |
-       | PCP        | eobData      | Last 18 Months |Medical  |     6     |
+      |TID   | planType    | memberType    |dateRange  | eobType |  eobCount |
+      |15134   | PCP        | eobData      | Last 18 Months |Medical  |     6     |
 
 @eob9 @regression_06_06_18FnF     
 Scenario Outline: TC013_Check EOB is accessible for TEXAS ERS  - Active Plan
@@ -156,8 +156,8 @@ And the user slects the desired date range
   | Date Range     |<dateRange> |
   | EOB Type       |<eobType>   |
 Examples:
-       | planType    | memberType    	 |dateRange  | eobType |   
-       | PDP        | texasERS      | Last 18 Months |Medical  |      
+       |TID  | planType    | memberType    	 |dateRange  | eobType |   
+       |15138  | PDP        | texasERS      | Last 18 Months |Medical  |      
 
 @eob10 @regression_06_06_18FnF
 Scenario Outline: TC011_Check EOB is accessible for MEDICA Individual - Active Plan
@@ -170,8 +170,8 @@ And the user slects the desired date range
   | Date Range     |<dateRange> |
   | EOB Type       |<eobType>   |
 Examples:
-       | planType    | memberType    	 |dateRange  | eobType |   
-       | MA        | Medica      | Last 18 Months |Medical  |
+       |TID  | planType    | memberType    	 |dateRange  | eobType |   
+      |15136   | MA        | Medica      | Last 18 Months |Medical  |
 
 @eob11 @regression_06_06_18FnF
 Scenario Outline: TC010_Check EOB displays error message_ PHIP- Active Plan member
@@ -184,8 +184,8 @@ Then the user validates content displayed on EOB page
 And the user gets the error message for PHIP member	
       
 Examples:
-       | planType      | memberType     | 
-       | PHIP          |  SHIP          |
+       |TID  | planType      | memberType     | 
+       |15174  | PHIP          |  SHIP          |
 
 @eob12 @EOBnullpointerFix
 Scenario Outline: To verify NICE EOB and click on the pdf
@@ -203,7 +203,7 @@ Then the user validates EOB count
  #And the user validates how to read medical eob PDF
  
            Examples:
-       | planType    | memberType    |dateRange  | eobType |  eobCount |
-       | MAPD        | NICE_EOB_R      | Last 18 months |Medical  |     1     |
-       | SHIP_ACTIVE  | SHIP_EOB      | Last 6-12 months |Medical  |     1     |
+        |TID | planType    | memberType    |dateRange  | eobType |  eobCount |
+        |15140 | MAPD        | NICE_EOB_R      | Last 18 months |Medical  |     1     |
+        |15165 | SHIP_ACTIVE  | SHIP_EOB      | Last 6-12 months |Medical  |     1     |
  
