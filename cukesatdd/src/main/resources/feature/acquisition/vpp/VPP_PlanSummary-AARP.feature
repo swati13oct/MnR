@@ -42,9 +42,6 @@ Feature: To test VPP Plan Summary Page in AARP Site
     Then the user closes Provider Search Page and reaches to Plan Summary Page
     Then the user clicks on Enroll Now for AARP site and validates the Welcome to OLE Page
       | Plan Name | <planName> |
-      
-
-  
 
     Examples: 
       | zipcode | isMultutiCounty | county             | plantype | planName                                             | monthlyPremium  | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1                       | annualDeductible                                       |
@@ -52,4 +49,46 @@ Feature: To test VPP Plan Summary Page in AARP Site
       |  28105  | YES             | Mecklenburg County | DSNP     | UnitedHealthcare Dual Complete (HMO SNP)             | $0 - $26.30     | $0 copay             | $0 copay   | No               | $0 - $6,700.00     | $0, $1.25, $3.40 copay, or 15% coinsurance   |                                                        |                                                        |        
       |  90210  | NO              | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Essential (HMO) | $0              | $5 copay             | $10 copay  | Yes              | $4900.00           |                                              |                                                        | 
       |  90210  | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                      | $28.10          |                      |            |                  |                    | $0 copay                                     | $0 for Tier 1, Tier 2  $415 for Tier 3, Tier 4, Tier 5 |
+      
+   @rightRailRegression
+   Scenario Outline: Verify right rail on plan summary page in AARP site
+   Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
+    And the user views the plans of the below plan type in AARP site
+      | Plan Type | <plantype> |
+    Then the user validates the right rail in AARP Site
+    Then the user validates the Need Help Section in the right rail
+    Then the user validates the TFN in the Need Help Section
+    Then the user validates Find an agent in your area link
+    Then the user clicks on Find an agent in your area link and validates Agent EBRC Page
+    Then the user navigates back to the Plan Summary Page
+    Then the user validates Get a free medicare Guide section in the right rail
+    Then the user enters the following information in the Get a free medicare Guide section
+      | First Name | <firstName> |
+      | Last Name | <lastName> |
+      | Email Address | <emailAddress> |
+    Then the user clicks on Submit button and validates the pop up
+    Then the user closes the pop up 
+    Then the user validates Need More Information? section in the right rail
+    Then the user validates and click on Choose a video link 
+    Then the user validates Medicare Plans Video Guide Page
+    Then the user closes Medicare Plans Video Guide page and navigates back to Plan Summary Page 
+    Then the user validates Plan Selector Tool section in the right rail  
+    Then the user validates and clicks on Start Plan Selector button 
+    Then the user validates Plan Selector Page 
+    Then the user navigates back to Plan Summary Page
+    
+    
+    Examples: 
+      | zipcode | isMultutiCounty | county             | plantype | firstName | lastName | emailAddress         | 
+      |  90210  | NO              | Los Angeles County | MAPD     | test      | test     | yashima_16@optum.com | 
+    
+    
+    
+     
+    
+        
                               
