@@ -5,12 +5,14 @@ package pages.acquisition.bluelayer;
 
 
 import org.json.JSONObject;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -35,6 +37,9 @@ public class PlanSelectorNewPage extends UhcDriver {
 
 	@FindBy(id = "DemographicsDataModel_ZipCode")
 	private WebElement zipCode;
+	
+	@FindBy(id = "Counties")
+	private WebElement PSTCounty;
 	
 	@FindBy(xpath = "//*[@id='CoverageType_Idontknow_Option_7_Lable']/following-sibling ::label")
 	private WebElement TypeOfCoverageOption; 
@@ -100,39 +105,62 @@ public class PlanSelectorNewPage extends UhcDriver {
 	public PlanSelectorNewPage quizStartAndRunQuestionnaire(String zip_code) throws InterruptedException
 	{
 
-	//	Thread.sleep(2000);
-
-		switchToNewIframe(iframePst);
-
+			switchToNewIframe(iframePst);
 		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.elementToBeClickable(getStartedBtn));
 		getStartedBtn.click();
-		/*driver.switchTo().defaultContent();
-
-		switchToNewIframe(iframePst);*/
-
 		wait.until(ExpectedConditions.elementToBeClickable(zipCode));
 
 		sendkeys(zipCode, zip_code);
 		TypeOfCoverageOption.click();
-		System.out.println("I don't know option radio button should be selected");
-		
-		//wait.until(ExpectedConditions.elementToBeClickable(continueBtn));
+		System.out.println("'I don't know option' radio button should be selected");		
 		continueBtn.click();
-		waitforElement(PreferencesHeader);
-		/*driver.switchTo().defaultContent();
-		switchToNewIframe(iframePst);*/
-
-		/*wait.until(ExpectedConditions.elementToBeClickable(skipToResultsLink));
-
-		skipToResultsLink.click();*/
-		
+		waitforElement(PreferencesHeader);				
 		if(PreferencesHeader.getText().contains("Your Preferences"))
 		return new PlanSelectorNewPage(driver);
 		else 
 			return null;
 
 	}
+	
+	public PlanSelectorNewPage quizStartAndRunQuestionnaireWithCounty(String zip_code, String County) throws InterruptedException
+	{
+
+			switchToNewIframe(iframePst);
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.elementToBeClickable(getStartedBtn));
+		getStartedBtn.click();
+		wait.until(ExpectedConditions.elementToBeClickable(zipCode));
+		sendkeys(zipCode, zip_code);
+		wait.until(ExpectedConditions.elementToBeClickable(PSTCounty));
+		
+		try {
+			Thread.sleep(10000);
+			Select drpCountry = new Select(driver.findElement(By.id("Counties")));
+			drpCountry.selectByVisibleText(County);
+		}
+		catch(Exception ex)
+		{
+			Thread.sleep(2000);
+			Select drpCountry = new Select(driver.findElement(By.id("Counties")));
+			drpCountry.selectByValue("48029");
+		}
+		
+		//Select drpCountry = new Select(driver.findElement(By.id("Counties")));
+		//drpCountry.selectByVisibleText(County);
+		
+		//driver.findElement(By.xpath("//*[@id='Counties']/option[text()='" + County + "']")).click();
+		TypeOfCoverageOption.click();
+		System.out.println("'I don't know option' radio button should be selected");		
+		continueBtn.click();
+		waitforElement(PreferencesHeader);				
+		if(PreferencesHeader.getText().contains("Your Preferences"))
+		return new PlanSelectorNewPage(driver);
+		else 
+			return null;
+
+	}
+	
 	
 	public PlanSelectorNewPage NextQuestion() throws InterruptedException
 	{		

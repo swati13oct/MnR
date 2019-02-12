@@ -140,8 +140,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//div[@id='subnav_2']//h3/a[contains(text(),'Pharmacy')]")
 	private WebElement pharmacysearchbtn;
 
+	@FindBy(xpath = ".//*[@id='selector']")
+	private WebElement PSTButton;
+	
 	@FindBy(xpath = ".//*[@id='change-location']")
 	private WebElement changeLocationLink;
+
 
 	@FindBy(xpath = ".//*[@id='collapse2heading_article_mededaccordion0']")
 	private WebElement requestAgentApptDropdown;
@@ -343,7 +347,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		viewPlansButton.click();
 		CommonUtility.waitForPageLoad(driver, countyModal, 45);
 		driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
-		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+		CommonUtility.waitForPageLoadNew(driver, vppTop, 35);
+		try{
+			Thread.sleep(5000);
+		}
+		catch(Exception e)
+		{
+			
+		}
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
 
@@ -1068,6 +1079,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return new PlanSelectorNewPage(driver);
 	}
 
+	public PlanSelectorNewPage PSTButton() {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		PageFactory.initElements(driver, this);
+		js.executeScript("window.scrollBy(0,1000)");
+		waitforElement(PSTButton);
+		PSTButton.click();
+		return new PlanSelectorNewPage(driver);
+	}
+	
 	public VPPPlanSummaryPage searchPlans1(String zipcode, String countyName) {
 		try {
 			Thread.sleep(3000);

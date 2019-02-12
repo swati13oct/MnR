@@ -1,12 +1,20 @@
 package acceptancetests.acquisition.PlanSelector;
 
 import gherkin.formatter.model.DataTableRow;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.PlanSelectorNewPage;
+import pages.acquisition.bluelayer.VPPPlanSummaryPage;
+import acceptancetests.acquisition.ole.oleCommonConstants;
+import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
@@ -47,6 +55,33 @@ public class PlanSelectorStepDefinition {
 	}
 
 
+	/*@When("^user goes to ours plan tab and click on Take the Quiz button$")
+	public void user_goes_to_ours_plan_tab_and_click_on_Take_the_Quiz_button() throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		PlanSelectorNewPage planSelectorNewPage = aquisitionhomepage.quizButton();
+		if(planSelectorNewPage != null)
+		getLoginScenario().saveBean(PageConstants.PLAN_SELECTOR_NEW_PAGE,
+				planSelectorNewPage);
+		else
+			System.out.println("PST page not displayed");			
+
+	}*/
+	
+	@When("^user scrolls down to Plan selector on VPP page on right rail widget$")
+	public void user_scrolls_down_PST_rightRail() throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		PlanSelectorNewPage planSelectorNewPage = aquisitionhomepage.PSTButton();
+		if(planSelectorNewPage != null)
+		getLoginScenario().saveBean(PageConstants.PLAN_SELECTOR_NEW_PAGE,
+				planSelectorNewPage);
+		else
+			System.out.println("PST page not displayed");			
+
+	}
+	
+	
 	@When("^user goes to ours plan tab and click on Take the Quiz button$")
 	public void user_goes_to_ours_plan_tab_and_click_on_Take_the_Quiz_button() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
@@ -62,12 +97,44 @@ public class PlanSelectorStepDefinition {
 
 	@And("^clicks on get started button and runs questionnaire$")
 	public void clicks_on_get_started_button_and_directly_skip_to_results(DataTable givenAttributes) throws Throwable {
-		List<DataTableRow> memberAttributesRow = givenAttributes
-				.getGherkinRows();
-		String zipcode = memberAttributesRow.get(0).getCells().get(1); 
+		/*List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();*/
+		
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		
+		String zipcode = memberAttributesMap.get("Zip Code");
+		String county = memberAttributesMap.get("CountyDropDown");
+		String isMultiCounty = memberAttributesMap.get("Is Multi County");
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
+
+		/*AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		VPPPlanSummaryPage plansummaryPage = null;
+		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
+			plansummaryPage = aquisitionhomepage.searchPlansWithOutCounty(zipcode);
+		} else {
+			plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
+		}*/
+		
+		//String zipcode = memberAttributesRow.get(0).getCells().get(1); 
 		PlanSelectorNewPage planSelectorNewPage = (PlanSelectorNewPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_SELECTOR_NEW_PAGE);
-		PlanSelectorNewPage Questionnaire = planSelectorNewPage.quizStartAndRunQuestionnaire(zipcode);
+		PlanSelectorNewPage Questionnaire = null;
+		
+		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
+			Questionnaire = planSelectorNewPage.quizStartAndRunQuestionnaire(zipcode);
+		} else {
+			Questionnaire = planSelectorNewPage.quizStartAndRunQuestionnaireWithCounty(zipcode, county);
+		}				
+				
 		if(Questionnaire != null)
 		getLoginScenario().saveBean(PageConstants.PLAN_SELECTOR_QUESTIONNAIRE,
 				Questionnaire);
