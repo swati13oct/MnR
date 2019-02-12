@@ -215,6 +215,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath = "//a[contains(@class,'closer')]")
 	private WebElement requestAssistanceClose;
+	
+	/* LearnAboutMedicare link */
+	@FindBy(xpath = "//*[@id='ghn_lnk_3']")
+	private WebElement lnkLearnAboutMedicare;
 
 	public JSONObject homePageDisclaimerJson;
 	public JSONObject homePageDisclaimerHideJson;
@@ -1370,6 +1374,17 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			return new AcquisitionHomePage(driver, true);
 		}
 		return null;
+	}
+	
+	public WebElement getLnkLearnAboutMedicare() {
+		return lnkLearnAboutMedicare;
+	}
+
+	public LearnAboutMedicareHomePage openLearnAboutMedicarePage() {
+
+		getLnkLearnAboutMedicare().click();
+		validateNonPresenceOfElement(zipCodeField);
+		return new LearnAboutMedicareHomePage(driver);
 	}
 
 }

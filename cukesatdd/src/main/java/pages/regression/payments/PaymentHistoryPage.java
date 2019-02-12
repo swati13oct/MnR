@@ -204,6 +204,9 @@ public class PaymentHistoryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//a[text()='Edit Automatic Payments']")
 	private WebElement EditAutomaticPaymentsButton;	
+	
+	@FindBy(xpath = "//a[text()='Edit Recurring Payments']")
+	private WebElement EditRecurringPaymentsButton;	
 
 	@FindBy(xpath = "//h2[text()='Helpful Reminders']")
 	private WebElement HelpfulRemindersPanel;
@@ -818,6 +821,17 @@ public class PaymentHistoryPage extends UhcDriver {
 		Thread.sleep(20000);
 		waitforElement(EditAutomaticPaymentsButton);
 		EditAutomaticPaymentsButton.click();
+		System.out.println("User clicked on Update Automatic Button");
+		if (validate(HelpfulRemindersPanel)) {
+			return new UpdateRecurringPage(driver);
+		} else
+			return null;
+	}
+	
+	public UpdateRecurringPage clickOnEditAutomaticPaymentforShip() throws Exception {
+		Thread.sleep(20000);
+		waitforElement(EditRecurringPaymentsButton);
+		EditRecurringPaymentsButton.click();
 		System.out.println("User clicked on Update Automatic Button");
 		if (validate(HelpfulRemindersPanel)) {
 			return new UpdateRecurringPage(driver);

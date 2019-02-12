@@ -41,13 +41,19 @@ public class PaymentsFormPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='col-md-12']//h1")
 	private WebElement ReviewPageHeading;
 
+	@FindBy(xpath = "//*[@id='consent']/following-sibling::label[contains(text(),'Electronic Signature Consent')]")
+	private WebElement ElectronicSignatureInput;
+
+	@FindBy(xpath = "//button[@class='btn btn--primary' and (text()='CONTINUE' or text()='Continue')]")
+	private WebElement ContinueButton;
+
 	public PaymentsFormPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
 	}
 
-	public ReviewAutomaticPage EnterFiledsOnEFTforSetup(Map<String, String> accountAttributessMap) {
+	public ReviewAutomaticPage EnterFiledsOnEFTforSetup(Map<String, String> accountAttributessMap) throws Exception {
 
 		String routingNumber = accountAttributessMap.get("Routing number");
 		String confirmRoutingNumber = accountAttributessMap.get("Confirm routing number");
@@ -64,8 +70,9 @@ public class PaymentsFormPage extends UhcDriver {
 		firstNameField.sendKeys(firstName);
 		middleNameField.sendKeys(middleName);
 		lastNameField.sendKeys(lastName);
-		AuthorizeButton.click();
-		System.out.println("Clicked on Authorize button");
+		ContinueButton.click();
+		System.out.println("Clicked on Contuine button");
+		Thread.sleep(10000);
 		if (ReviewPageHeading.getText().contains("Review Your Automatic Payments Information")) {
 			System.out.println("User is on Review Your Automatic Payments Information Page");
 			return new ReviewAutomaticPage(driver);
@@ -74,8 +81,7 @@ public class PaymentsFormPage extends UhcDriver {
 			return null;
 		}
 	}
-	
-	
+
 	public UpdateReviewPage EnterFiledsOnEFTforUpdate(Map<String, String> accountAttributessMap) {
 
 		String routingNumber = accountAttributessMap.get("Routing number");
@@ -94,6 +100,35 @@ public class PaymentsFormPage extends UhcDriver {
 		middleNameField.sendKeys(middleName);
 		lastNameField.sendKeys(lastName);
 		AuthorizeButton.click();
+		System.out.println("Clicked on Authorize button");
+		if (ReviewPageHeading.getText().contains("Review Payment Method Update")) {
+			System.out.println("User is on Review Payment Method Update Page");
+			return new UpdateReviewPage(driver);
+		} else {
+			System.out.println("Review Payment Method Update not displayed");
+			return null;
+		}
+	}
+
+	public UpdateReviewPage EnterFiledsOnEFTforUpdateForShip(Map<String, String> accountAttributessMap) {
+
+		String routingNumber = accountAttributessMap.get("Routing number");
+		String confirmRoutingNumber = accountAttributessMap.get("Confirm routing number");
+		String accountNumber = accountAttributessMap.get("Account number");
+		String confirmAccountNumber = accountAttributessMap.get("Confirm account number");
+		String firstName = accountAttributessMap.get("Account holder first name");
+		String middleName = accountAttributessMap.get("Account holder middle name");
+		String lastName = accountAttributessMap.get("Account holder last name");
+
+		routingNumberField.sendKeys(routingNumber);
+		confirmRoutingNumberField.sendKeys(confirmRoutingNumber);
+		accountNumberField.sendKeys(accountNumber);
+		confirmAccountNumberField.sendKeys(confirmAccountNumber);
+		firstNameField.sendKeys(firstName);
+		middleNameField.sendKeys(middleName);
+		lastNameField.sendKeys(lastName);
+		ElectronicSignatureInput.click();
+		ContinueButton.click();
 		System.out.println("Clicked on Authorize button");
 		if (ReviewPageHeading.getText().contains("Review Payment Method Update")) {
 			System.out.println("User is on Review Payment Method Update Page");
