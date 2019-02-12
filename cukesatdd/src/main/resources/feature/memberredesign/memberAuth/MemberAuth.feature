@@ -192,5 +192,19 @@ Scenario Outline: To validate Order Submission Error for Member Auth
     
    Examples: 
       | username  | password  |MemUserName    | planType |  option           |csrError |
-      | qavgogine | qavgogine | q2_jun_aarp0017 | MAPD     | Replacement ID card      | are not authorized to order material |
- 
+      | qavgogine | qavgogine | q2_jun_aarp0101 | MAPD     | Replacement ID card      | are not authorized to order material |
+
+@MemberAuth_Payments   @fastandfurious @Feb_release_2019
+Scenario Outline: To validate Order Submission Error for Member Auth
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username      | <username>     |
+      | Password      | <password>     |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |   
+    And user clicks on member to select
+    Then the user navigates to payment history    
+   Examples: 
+      | username  | password  |MemUserName    | 
+      | qavgogine | qavgogine | q2_jun_aarp0101 | 
+  

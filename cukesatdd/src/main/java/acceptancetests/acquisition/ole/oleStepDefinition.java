@@ -445,11 +445,21 @@ public class oleStepDefinition {
 			MedicareDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
 		}
-		Random rnd = new Random();
-		int n = 100000000 + rnd.nextInt(900000000);
-		String MedicareNumber = Integer.toString(n)+"C";
-		MedicareDetailsMap.put("Medicare Number", MedicareNumber);
+		String CardType = MedicareDetailsMap.get("Card Type");
+		if(CardType.contains("HICN")){
+			Random rnd = new Random();
+			int n = 100000000 + rnd.nextInt(900000000);
+			String MedicareNumber = Integer.toString(n)+"C";
+			MedicareDetailsMap.put("Medicare Number", MedicareNumber);
+			
+			}
+		else if(CardType.contains("RRID")){
+			Random rnd = new Random();
+			int n = 100000000 + rnd.nextInt(900000000);
+			String MedicareNumber = "RID"+Integer.toString(n);
+			MedicareDetailsMap.put("Medicare Number", MedicareNumber);
 		
+			}
 		String SSNflag = MedicareDetailsMap.get("SSN Flag");
 		if(SSNflag.contains("true")){
 			MedicareDetailsMap.put("SSN Number", "123456789");
