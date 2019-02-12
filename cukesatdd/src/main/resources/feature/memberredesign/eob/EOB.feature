@@ -14,7 +14,7 @@ Examples:
      
 
 @eob2  @eobCountdaterange
-Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType>c-daterange: <dateRange> -To verify EOB result list
+Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -daterange: <dateRange> -To verify EOB result list
 Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
