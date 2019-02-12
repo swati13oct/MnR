@@ -1,7 +1,7 @@
 @eob @fastandfurious 
 Feature:F1.1To test EOB on Dashboard page
 @eob1 @Eobsiteleavingpopup 
-Scenario Outline: Allowed Domains – Authors need ability to define messages and domains for leaving member sites (ATDD)
+Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType>- Allowed Domains – Authors need ability to define messages and domains for leaving member sites (ATDD)
 Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -14,7 +14,7 @@ Examples:
      
 
 @eob2  @eobCountdaterange
-Scenario Outline: To verify EOB result list
+Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType>c-daterange: <dateRange> -To verify EOB result list
 Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -39,7 +39,7 @@ Then the user validates EOB count
  
 
 @eob3 @planTypeValidation @hsideob2
-Scenario Outline: To verify different plan types under combo tabs
+Scenario Outline:  TID: <TID> -plan: <planType> -memberType: <memberType> -  To verify different plan types under combo tabs
 Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -52,7 +52,7 @@ Examples:
 # |15120 | MA          | IndividualAARPWOEOB						 |
   
 @eob4 @dropDownFuntion 
-Scenario Outline: To validate page functionality with different dropdowns
+Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -daterange: <dateRange> - To validate page functionality with different dropdowns
 Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -73,7 +73,7 @@ Examples:
 	 |15165 | SHIP        | Individual 			  			  | Medical 					|90 Days			    |
   
 @eob5 @learnAboutMedicalEOB 
-Scenario Outline: To verify How to read a medical EOB PDF
+Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -daterange: <dateRange>- To verify How to read a medical EOB PDF
 Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -91,7 +91,7 @@ And the user validates how to read medical eob PDF
 	 |15140 | MAPD        |aarpWithEOB 			          | 18 Months    		 | Medical 	         |
 
 @eob6 @febRelease2018 @hsideob @regressionMember
-Scenario Outline: To verify NICE EOB and click on the pdf
+Scenario Outline:  TID: <TID> -plan: <planType> -memberType: <memberType> -To verify NICE EOB and click on the pdf
 Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -115,7 +115,7 @@ Then the user validates EOB count
 #      |15141   | MAPD          | NICETermin_EOB_R | Last 18 months |Medical  |     1     |
        
 @eob7 @regression_06_06_18FnF
-Scenario Outline: To verify EOB accessible for PDP + MEDSup Plan
+Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -To verify EOB accessible for PDP + MEDSup Plan
 Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -129,7 +129,7 @@ Then the user validates content displayed on EOB page
       |15167   | PDP          |  comboEOBMedSup      | Last 18 Months |Medical  |     0     | 	PDP			 | MedSup     |
        
 @eob8 @regression_06_06_18FnF
-Scenario Outline: TC009_Check EOB is accessible for PCP Individual - Active Plan
+Scenario Outline:TID: <TID> -plan: <planType> -memberType: <memberType> - TC009_Check EOB is accessible for PCP Individual - Active Plan
 Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -146,7 +146,7 @@ Examples:
       |15134   | PCP        | eobData      | Last 18 Months |Medical  |     6     |
 
 @eob9 @regression_06_06_18FnF     
-Scenario Outline: TC013_Check EOB is accessible for TEXAS ERS  - Active Plan
+Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -TC013_Check EOB is accessible for TEXAS ERS  - Active Plan
 Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -160,7 +160,7 @@ Examples:
        |15138  | PDP        | texasERS      | Last 18 Months |Medical  |      
 
 @eob10 @regression_06_06_18FnF
-Scenario Outline: TC011_Check EOB is accessible for MEDICA Individual - Active Plan
+Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -TC011_Check EOB is accessible for MEDICA Individual - Active Plan
 Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -174,7 +174,7 @@ Examples:
       |15136   | MA        | Medica      | Last 18 Months |Medical  |
 
 @eob11 @regression_06_06_18FnF
-Scenario Outline: TC010_Check EOB displays error message_ PHIP- Active Plan member
+Scenario Outline:TID: <TID> -plan: <planType> -memberType: <memberType> - TC010_Check EOB displays error message_ PHIP- Active Plan member
 Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -188,7 +188,7 @@ Examples:
        |15174  | PHIP          |  SHIP          |
 
 @eob12 @EOBnullpointerFix
-Scenario Outline: To verify NICE EOB and click on the pdf
+Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -To verify NICE EOB and click on the pdf
 Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
