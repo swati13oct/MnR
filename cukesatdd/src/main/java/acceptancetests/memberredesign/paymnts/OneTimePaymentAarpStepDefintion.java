@@ -32,9 +32,18 @@ import pages.member.ulayer.TestHarness;
 import pages.regression.accounthomepage.AccountHomePage;
 //import pages.regression.payments.AccountHomePage;
 import pages.regression.payments.ConfirmOneTimePaymentPage;
+import pages.regression.payments.CreditCardUPGPage;
 import pages.regression.payments.OneTimePaymentPage;
 import pages.regression.payments.OneTimePaymentSuccessPage;
 import pages.regression.payments.PaymentHistoryPage;
+import pages.regression.payments.PaymentsFormPage;
+import pages.regression.payments.RecurringConfirmationPage;
+import pages.regression.payments.ReviewAutomaticPage;
+import pages.regression.payments.ReviewOneTimePaymentPage;
+import pages.regression.payments.SetUpRecurringPage;
+import pages.regression.payments.UpdateConfirmationPage;
+import pages.regression.payments.UpdateRecurringPage;
+import pages.regression.payments.UpdateReviewPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
@@ -58,509 +67,512 @@ public class OneTimePaymentAarpStepDefintion {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-	
-	
+
 	@Given("^registered AMP with for payments flow$")
-	public void registered_AMP_with_attribute_payments(DataTable memberAttributes) throws InterruptedException{
-		//get the required parameters from the feature files
-				WebDriver wd = getLoginScenario().getWebDriver();
-				getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-				List<DataTableRow> memberAttributesRow = memberAttributes
-						.getGherkinRows();
-				Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-				for (int i = 0; i < memberAttributesRow.size(); i++) {
+	public void registered_AMP_with_attribute_payments(DataTable memberAttributes) throws InterruptedException {
+		// get the required parameters from the feature files
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-					memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-							.get(0), memberAttributesRow.get(i).getCells().get(1));
-				}
-
-				String category = memberAttributesMap.get("Member Type");
-
-				Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
-				List<String> desiredAttributes = new ArrayList<String>();
-				for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
-						.hasNext();) {
-					{
-						String key = iterator.next();
-						desiredAttributes.add(memberAttributesMap.get(key));
-					}
-
-				}
-				System.out.println("desiredAttributes.." + desiredAttributes);
-
-				Map<String, String> loginCreds = loginScenario
-						.getUMSMemberWithDesiredAttributes(desiredAttributes);
-
-				String userName = null;
-				String password = null;
-				if (loginCreds == null) {
-					// no match found
-					System.out.println("Member Type data could not be setup !!!");
-					Assert.fail("unable to find a " + desiredAttributes + " member");
-				} else {
-					userName = loginCreds.get("user");
-					password = loginCreds.get("pwd");
-					System.out.println("User is..." + userName);
-					System.out.println("Password is..." + password);
-					getLoginScenario()
-					.saveBean(LoginCommonConstants.USERNAME, userName);
-					getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, password);
-					getLoginScenario().saveBean(LoginCommonConstants.CATOGERY, category);
-				}
-				NewLoginPage newloginpage = new NewLoginPage(wd);
-				//NewLoginPage paymenthistory = (NewLoginPage).loginWith(userName, password);
-				DashboardPage dashboardpage = (DashboardPage) newloginpage.loginWith(userName, password);
-				//DashboardPage.loginWith(userName, password);
-				
-		        if (dashboardpage != null) {
-		        	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		        	getLoginScenario().saveBean(PageConstants.RALLY_DASHBOARDPAGE, dashboardpage);
-		        }
-
-	}
-	@Then("^the user navigates to payment history$")
-	public void user_views_payment_history() throws InterruptedException {		
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		PaymentHistoryPage paymentHistoryPage = accountHomePage.navigateToPaymentHistoryPage();			
-		if (paymentHistoryPage!=null){
-    	     	  getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
-			System.out.println("user is on payments page"); 
-      }	
-
-	}
-	
-	@And("^the user clicks on One Time Payment button$")
-	public void click_on_OneTimePayment_btn() throws InterruptedException{
-		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage)getLoginScenario().getBean(PageConstants.Payments_History_Page);
-		OneTimePaymentPage oneTimePayment = paymentHistoryPage.OTPbtn();
-					
-		if(oneTimePayment!=null){
-			getLoginScenario().saveBean(PageConstants.One_Time_Payments_Page, oneTimePayment);
-			System.out.println("user is on one time payment page");	
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
 		}
-		
+
+		String category = memberAttributesMap.get("Member Type");
+
+		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+		List<String> desiredAttributes = new ArrayList<String>();
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator.hasNext();) {
+			{
+				String key = iterator.next();
+				desiredAttributes.add(memberAttributesMap.get(key));
+			}
+
+		}
+		System.out.println("desiredAttributes.." + desiredAttributes);
+
+		Map<String, String> loginCreds = loginScenario.getUMSMemberWithDesiredAttributes(desiredAttributes);
+
+		String userName = null;
+		String password = null;
+		if (loginCreds == null) {
+			// no match found
+			System.out.println("Member Type data could not be setup !!!");
+			Assert.fail("unable to find a " + desiredAttributes + " member");
+		} else {
+			userName = loginCreds.get("user");
+			password = loginCreds.get("pwd");
+			System.out.println("User is..." + userName);
+			System.out.println("Password is..." + password);
+			getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
+			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, password);
+			getLoginScenario().saveBean(LoginCommonConstants.CATOGERY, category);
+		}
+		NewLoginPage newloginpage = new NewLoginPage(wd);
+		// NewLoginPage paymenthistory = (NewLoginPage).loginWith(userName,
+		// password);
+		DashboardPage dashboardpage = (DashboardPage) newloginpage.loginWith(userName, password);
+		// DashboardPage.loginWith(userName, password);
+
+		if (dashboardpage != null) {
+			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+			getLoginScenario().saveBean(PageConstants.RALLY_DASHBOARDPAGE, dashboardpage);
+		}
+
 	}
-	
+
+	@Then("^the user navigates to payment history$")
+	public void user_views_payment_history() throws InterruptedException {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+		PaymentHistoryPage paymentHistoryPage = accountHomePage.navigateToPaymentHistoryPage();
+		if (paymentHistoryPage != null) {
+			getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
+			System.out.println("user is on payments page");
+		}
+
+	}
+
+	@And("^the user clicks on One Time Payment button$")
+	public void click_on_OneTimePayment_btn() throws InterruptedException {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		OneTimePaymentPage oneTimePayment = paymentHistoryPage.OTPbtn();
+
+		if (oneTimePayment != null) {
+			getLoginScenario().saveBean(PageConstants.One_Time_Payments_Page, oneTimePayment);
+			System.out.println("user is on one time payment page");
+		}
+
+	}
+
 	@When("^the user navigates to Recurring payment history$")
 	public void user_views_Recurring_payment_history() throws InterruptedException {
-		pages.regression.accounthomepage.AccountHomePage AHPage = (pages.regression.accounthomepage.AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+		pages.regression.accounthomepage.AccountHomePage AHPage = (pages.regression.accounthomepage.AccountHomePage) getLoginScenario()
+				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 		AHPage = AHPage.navigateToAutoPaymentHistoryPage();
-		
-      if (AHPage!=null){
-    	     	  getLoginScenario().saveBean(PageConstants.DashPage, AHPage);
+
+		if (AHPage != null) {
+			getLoginScenario().saveBean(PageConstants.DashPage, AHPage);
 			System.out.println("User is on Recurring Payment History");
-      } 
-      
+		}
+
 	}
-	
+
 	@When("^the user navigates to Ship Recurring payment history$")
 	public void user_Ship_Recurring_payment_history() throws InterruptedException {
-		pages.regression.accounthomepage.AccountHomePage AHPage = (pages.regression.accounthomepage.AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+		pages.regression.accounthomepage.AccountHomePage AHPage = (pages.regression.accounthomepage.AccountHomePage) getLoginScenario()
+				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 		AHPage = AHPage.navigateToSHIPAutoPaymentHistoryPage();
-		
-      if (AHPage!=null){
-    	     	  getLoginScenario().saveBean(PageConstants.DashPage, AHPage);
+
+		if (AHPage != null) {
+			getLoginScenario().saveBean(PageConstants.DashPage, AHPage);
 			System.out.println("User is on Recurring Payment History");
-      }
-      
+		}
+
 	}
-	
+
 	@When("^the user navigates to Combo payment history page$")
 	public void Combo_Recurring_payment_history() throws InterruptedException {
-		pages.regression.accounthomepage.AccountHomePage AHPage = (pages.regression.accounthomepage.AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+		pages.regression.accounthomepage.AccountHomePage AHPage = (pages.regression.accounthomepage.AccountHomePage) getLoginScenario()
+				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 		AHPage = AHPage.navigateToAutoPaymentHistoryPage();
-		
-      if (AHPage!=null){
-    	     	  getLoginScenario().saveBean(PageConstantsMnR.ComboTab, AHPage);
+
+		if (AHPage != null) {
+			getLoginScenario().saveBean(PageConstantsMnR.ComboTab, AHPage);
 			System.out.println("User is on Recurring Payment History");
-      }
-      
+		}
+
 	}
-	
+
 	@When("^the user navigates to Ship tab and validates the amount$")
 	public void ship_tab_amount_validation() throws InterruptedException {
-		pages.regression.accounthomepage.AccountHomePage AHPage = (pages.regression.accounthomepage.AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ComboTab);
+		pages.regression.accounthomepage.AccountHomePage AHPage = (pages.regression.accounthomepage.AccountHomePage) getLoginScenario()
+				.getBean(PageConstantsMnR.ComboTab);
 		AHPage = AHPage.navigateToSHIPTab();
-		
-      if (AHPage!=null){
-    	     	  getLoginScenario().saveBean(PageConstants.DashPage, AHPage);
+
+		if (AHPage != null) {
+			getLoginScenario().saveBean(PageConstants.DashPage, AHPage);
 			System.out.println("User is on Recurring Payment History");
-      } else {
-    	  System.out.println("Unable to navegate to Ship tab");
-      }
-      
+		} else {
+			System.out.println("Unable to navegate to Ship tab");
+		}
+
 	}
-	
+
 	@Then("^User Scrolls down to validate Payment History and Scrolls up$")
-	public void Validate_History_Payment() throws InterruptedException{
-		pages.regression.accounthomepage.AccountHomePage AHPage = (pages.regression.accounthomepage.AccountHomePage) getLoginScenario().getBean(PageConstants.DashPage);
+	public void Validate_History_Payment() throws InterruptedException {
+		pages.regression.accounthomepage.AccountHomePage AHPage = (pages.regression.accounthomepage.AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.DashPage);
 		PaymentHistoryPage paymentHistoryPage = AHPage.scrollDownAndUp();
-		if (paymentHistoryPage!=null){
-	     	  getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
-		System.out.println("user has scrolled up"); 
-}
+		if (paymentHistoryPage != null) {
+			getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
+			System.out.println("user has scrolled up");
+		}
 	}
-	
-	
+
 	@Then("^User Scrolls down to validate Payment History Section$")
-	public void Validate_History_Payment_section() throws InterruptedException{
-		pages.regression.accounthomepage.AccountHomePage AHPage = (pages.regression.accounthomepage.AccountHomePage) getLoginScenario().getBean(PageConstants.DashPage);
+	public void Validate_History_Payment_section() throws InterruptedException {
+		pages.regression.accounthomepage.AccountHomePage AHPage = (pages.regression.accounthomepage.AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.DashPage);
 		PaymentHistoryPage paymentHistoryPage = AHPage.validtaePaymentHistorySection();
 		System.out.println("found the value");
-		if (paymentHistoryPage!=null){
-	     	  getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
-		System.out.println("user has scrolled up"); 
-}
-	}
-	
-	
-	@And("^the user clicks on Make One Time Payment button$")
-		public void click_on_OTP_btn() throws InterruptedException{
-		
-		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);	
-		OneTimePaymentPage oneTimePayment = paymenthistory.OTPbtn();
-			
-			if(oneTimePayment!=null){
-				getLoginScenario().saveBean(PageConstants.One_Time_Payments_Page, oneTimePayment);
-				System.out.println("user is on one time payment page");	
-			}
-			
+		if (paymentHistoryPage != null) {
+			getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
+			System.out.println("user has scrolled up");
 		}
-	
-		
-	
+	}
+
+	@And("^the user clicks on Make One Time Payment button$")
+	public void click_on_OTP_btn() throws InterruptedException {
+
+		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		OneTimePaymentPage oneTimePayment = paymenthistory.OTPbtn();
+
+		if (oneTimePayment != null) {
+			getLoginScenario().saveBean(PageConstants.One_Time_Payments_Page, oneTimePayment);
+			System.out.println("user is on one time payment page");
+		}
+
+	}
 
 	@And("^the user clicks on Edit Automatic Payment button$")
-	public void click_on_Recurring_btn(){
-		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
+	public void click_on_Recurring_btn() {
+		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
 		OneTimePaymentPage oneTimePayment = paymenthistory.AutoPay();
-		
-		if(oneTimePayment!=null){
+
+		if (oneTimePayment != null) {
 			getLoginScenario().saveBean(PageConstants.One_Time_Payments_Page, oneTimePayment);
-			System.out.println("user is on one time payment page");	
+			System.out.println("user is on one time payment page");
 		}
-		
-	}	
-	
+
+	}
+
 	@And("^the user clicks on New flow Edit Automatic Payment button$")
-	public void click_on_Recurring_Payment_btn(){
-		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
+	public void click_on_Recurring_Payment_btn() {
+		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
 		PaymentHistoryPage PHoneTimePayment = paymenthistory.AutoPayNew();
-		
-		if(PHoneTimePayment!=null){
+
+		if (PHoneTimePayment != null) {
 			getLoginScenario().saveBean(PageConstants.NEW_CC_BUTTON, PHoneTimePayment);
-			System.out.println("user is on one time payment page");	
+			System.out.println("user is on one time payment page");
 		}
-		
-	}	
-	
+
+	}
+
 	@And("^the user clicks on New flow Edit CC Automatic Payment button$")
-	public void click_on_Recurring_Payment_btn_CC(){
-		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
-		PaymentHistoryPage PHoneTimePayment = paymenthistory.AutoPayNewCC();		
-		if(PHoneTimePayment!=null){
+	public void click_on_Recurring_Payment_btn_CC() {
+		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		PaymentHistoryPage PHoneTimePayment = paymenthistory.AutoPayNewCC();
+		if (PHoneTimePayment != null) {
 			getLoginScenario().saveBean(PageConstants.NEW_CC_BUTTON, PHoneTimePayment);
-			System.out.println("user is on one time payment page");	
+			System.out.println("user is on one time payment page");
 		}
-		
+
 	}
-	
+
 	@And("^the user clicks on New flow OneTime Payment button$")
-	public void click_on_OneTime_Payment_btn(){
-		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
+	public void click_on_OneTime_Payment_btn() {
+		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
 		PaymentHistoryPage PHoneTimePayment = paymenthistory.OneTimePayNew();
-		
-		if(PHoneTimePayment!=null){
+
+		if (PHoneTimePayment != null) {
 			getLoginScenario().saveBean(PageConstants.NEW_CC_BUTTON, PHoneTimePayment);
-			System.out.println("user is on one time payment page");	
+			System.out.println("user is on one time payment page");
 		}
-		
+
 	}
-	
+
 	@And("^the user selects the Checking account option on New page$")
-	public void click_on_Checking_account_Payment_btn(){
-		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.NEW_CC_BUTTON);
+	public void click_on_Checking_account_Payment_btn() {
+		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.NEW_CC_BUTTON);
 		OneTimePaymentPage oneTimePayment = paymenthistory.CheckingAccountbtn();
-		
-		if(oneTimePayment!=null){
+
+		if (oneTimePayment != null) {
 			getLoginScenario().saveBean(PageConstants.One_Time_Payments_Page, oneTimePayment);
-			System.out.println("user is on Automatic payment page");	
-		}		
+			System.out.println("user is on Automatic payment page");
+		}
 	}
-	
+
 	@And("^the user selects the Setup AutoCreditCard option on New page$")
-	public void click_on_SetupCCA_Auto_Payment_btn(){
-		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.NEW_CC_BUTTON);
+	public void click_on_SetupCCA_Auto_Payment_btn() {
+		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.NEW_CC_BUTTON);
 		OneTimePaymentPage oneTimePayment = paymenthistory.SetUpCCbtn();
-		
-		if(oneTimePayment!=null){
+
+		if (oneTimePayment != null) {
 			getLoginScenario().saveBean(PageConstants.One_Time_Payments_Page, oneTimePayment);
-			System.out.println("user is on Automatic payment page");	
-		}		
+			System.out.println("user is on Automatic payment page");
+		}
 	}
-	
+
 	@And("^the user selects the Checking account option on New page OTP$")
-	public void click_on_Checking_account_Payment_btn_OTP(){
-		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.NEW_CC_BUTTON);
+	public void click_on_Checking_account_Payment_btn_OTP() {
+		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.NEW_CC_BUTTON);
 		OneTimePaymentPage oneTimePayment = paymenthistory.CheckingAccountbtnOTP();
-		
-		if(oneTimePayment!=null){
+
+		if (oneTimePayment != null) {
 			getLoginScenario().saveBean(PageConstants.One_Time_Payments_Page, oneTimePayment);
-			
+
 		}
-		
+
 	}
-	
+
 	@And("^the user validates the Balance Summary option on New page OTP$")
-	public void validate_Balance_Summary_Payment_on_OTP(){
-		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.NEW_CC_BUTTON);
+	public void validate_Balance_Summary_Payment_on_OTP() {
+		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.NEW_CC_BUTTON);
 		OneTimePaymentPage oneTimePayment = paymenthistory.BalanceSummaryValidation();
-		
-		if(oneTimePayment!=null){
+
+		if (oneTimePayment != null) {
 			getLoginScenario().saveBean(PageConstants.One_Time_Payments_Page, oneTimePayment);
-			System.out.println("user is on Automatic payment page");	
+			System.out.println("user is on Automatic payment page");
 		}
-		
+
 	}
-	
+
 	@And("^the user clicks on cancel button in new flow$")
-	public void click_on_Cancel_payment_btn(){
-		OneTimePaymentPage oneTimePayment = (OneTimePaymentPage) getLoginScenario().getBean(PageConstants.One_Time_Payments_Page);
+	public void click_on_Cancel_payment_btn() {
+		OneTimePaymentPage oneTimePayment = (OneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.One_Time_Payments_Page);
 		OneTimePaymentPage OverviewPage = oneTimePayment.CancelPayments();
-		
-		if(OverviewPage!=null){
+
+		if (OverviewPage != null) {
 			getLoginScenario().saveBean(PageConstants.Payments_History_Page, OverviewPage);
-			
-		}		
+
+		}
 	}
-	
+
 	@And("^the user clicks on cancel button in new flow for OneTimePay$")
-	public void click_on_Cancel_payment_btn_OTP_flow_new(){
-		OneTimePaymentPage oneTimePayment = (OneTimePaymentPage) getLoginScenario().getBean(PageConstants.One_Time_Payments_Page);
+	public void click_on_Cancel_payment_btn_OTP_flow_new() {
+		OneTimePaymentPage oneTimePayment = (OneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.One_Time_Payments_Page);
 		OneTimePaymentPage OverviewPage = oneTimePayment.CancelPaymentsOneTime();
-		
-		if(OverviewPage!=null){
+
+		if (OverviewPage != null) {
 			getLoginScenario().saveBean(PageConstants.Payments_History_Page, OverviewPage);
-			
-		}		
+
+		}
 	}
-	
+
 	@And("^the user clicks on Authorize button to validate error message$")
-	public void click_on_Authorize_button(){
-		OneTimePaymentPage oneTimePayment = (OneTimePaymentPage) getLoginScenario().getBean(PageConstants.One_Time_Payments_Page);
+	public void click_on_Authorize_button() {
+		OneTimePaymentPage oneTimePayment = (OneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.One_Time_Payments_Page);
 		OneTimePaymentPage OverviewPage = oneTimePayment.ErrorMessageValidation();
-		
-		if(OverviewPage!=null){
+
+		if (OverviewPage != null) {
 			getLoginScenario().saveBean(PageConstants.Payments_History_Page, OverviewPage);
-			
-		}		
+
+		}
 	}
-	
+
 	@And("^the user clicks on MemAuth Edit Automatic Payment button$")
-	public void click_on_MemAuth_Recurring_btn(){
-		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
+	public void click_on_MemAuth_Recurring_btn() {
+		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
 		OneTimePaymentPage oneTimePayment = paymenthistory.MemAuthAutoPay();
-		
-		if(oneTimePayment!=null){
+
+		if (oneTimePayment != null) {
 			getLoginScenario().saveBean(PageConstants.One_Time_Payments_Page, oneTimePayment);
-			System.out.println("user is not able to click autopay");	
+			System.out.println("user is not able to click autopay");
 		} else {
 			System.out.println("user is able to click autopay");
 		}
-		
+
 	}
-	
-	
+
 	@And("^the user makes one time payment and navigate futher$")
 	public void makes_one_time_payment_aarp(DataTable givenAttributes) {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
 		}
 
-		OneTimePaymentPage oneTimePayment = (OneTimePaymentPage) getLoginScenario().getBean(PageConstants.One_Time_Payments_Page);
+		OneTimePaymentPage oneTimePayment = (OneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.One_Time_Payments_Page);
 		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = oneTimePayment.enterPaymentDetails(memberAttributesMap);
-		if(confirmOneTimePaymentPage != null) {
-			getLoginScenario().saveBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD,confirmOneTimePaymentPage);
+		if (confirmOneTimePaymentPage != null) {
+			getLoginScenario().saveBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD, confirmOneTimePaymentPage);
 			System.out.println("Payment details entered and moved successfully to next page");
 		} else {
 			System.out.println("Object issue - unable to obtain the confirmOneTimePaymentPage");
 		}
 	}
-	
+
 	@And("^the user makes one time payment in new flow and navigate further$")
 	public void makes_one_time_payment_aarp_new_flow(DataTable givenAttributes) {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
 		}
 
-		OneTimePaymentPage oneTimePayment = (OneTimePaymentPage) getLoginScenario().getBean(PageConstants.One_Time_Payments_Page);
-		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = oneTimePayment.enterNewPagePaymentDetails(memberAttributesMap);
-		if(confirmOneTimePaymentPage != null) {
-			getLoginScenario().saveBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD,confirmOneTimePaymentPage);
+		OneTimePaymentPage oneTimePayment = (OneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.One_Time_Payments_Page);
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = oneTimePayment
+				.enterNewPagePaymentDetails(memberAttributesMap);
+		if (confirmOneTimePaymentPage != null) {
+			getLoginScenario().saveBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD, confirmOneTimePaymentPage);
 			System.out.println("Payment details entered and moved successfully to next page");
 		} else {
 			System.out.println("Object issue - unable to obtain the confirmOneTimePaymentPage");
 		}
 	}
-	
+
 	@And("^the user makes Auto payment in CC flow and navigate further$")
 	public void makes_Auto_payment_CC_flow(DataTable givenAttributes) {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
 		}
 
-		OneTimePaymentPage oneTimePayment = (OneTimePaymentPage) getLoginScenario().getBean(PageConstants.One_Time_Payments_Page);
+		OneTimePaymentPage oneTimePayment = (OneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.One_Time_Payments_Page);
 		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = oneTimePayment.enterNewPageCCDetails(memberAttributesMap);
-		if(confirmOneTimePaymentPage != null) {
-			getLoginScenario().saveBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD,confirmOneTimePaymentPage);
+		if (confirmOneTimePaymentPage != null) {
+			getLoginScenario().saveBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD, confirmOneTimePaymentPage);
 			System.out.println("Payment CC details entered and moved successfully to next page");
 		} else {
 			System.out.println("Object issue - unable to obtain the confirmOneTimePaymentPage");
 		}
 	}
-	
-	
+
 	@And("^the user makes auto payment in AARP site$")
-	public void makes_auto_payment_aarp(DataTable givenAttributes) {			
+	public void makes_auto_payment_aarp(DataTable givenAttributes) {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
-		}		
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
 
-		OneTimePaymentPage oneTimePayment = (OneTimePaymentPage) getLoginScenario().getBean(PageConstants.One_Time_Payments_Page);
-		ConfirmOneTimePaymentPage confirmAutoPaymentPaymentPage = oneTimePayment.enterAutoPaymentDetails(memberAttributesMap);
+		OneTimePaymentPage oneTimePayment = (OneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.One_Time_Payments_Page);
+		ConfirmOneTimePaymentPage confirmAutoPaymentPaymentPage = oneTimePayment
+				.enterAutoPaymentDetails(memberAttributesMap);
 
-		if(confirmAutoPaymentPaymentPage != null) {
-			getLoginScenario().saveBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD,confirmAutoPaymentPaymentPage);
+		if (confirmAutoPaymentPaymentPage != null) {
+			getLoginScenario().saveBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD,
+					confirmAutoPaymentPaymentPage);
 			System.out.println("Payment details entered and moved successfully to next page");
 		} else {
 			System.out.println("Object issue - unable to obtain the confirmAutoPaymentPaymentPage");
 		}
 	}
 
-	
 	@And("^the user confirms the payment in AARP site$")
 	public void confirmspayment_uhc() throws InterruptedException {
 		ConfirmOneTimePaymentPage confirmOneTimePaymentsuccesspage = (ConfirmOneTimePaymentPage) getLoginScenario()
-				.getBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD);	
+				.getBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD);
 		ConfirmOneTimePaymentPage oneTimePaymentSuccessPage = confirmOneTimePaymentsuccesspage.confirmsAutoPayment();
 		if (oneTimePaymentSuccessPage != null) {
-			getLoginScenario().saveBean(PageConstantsMnR.ONE_TIME_PAYMENT_SUCCESS_PAGE,	oneTimePaymentSuccessPage);
+			getLoginScenario().saveBean(PageConstantsMnR.ONE_TIME_PAYMENT_SUCCESS_PAGE, oneTimePaymentSuccessPage);
 			Assert.assertTrue(true);
 		} else
 			System.out.println("Encountered More than one Payment per Business day error");
 	}
 
-	
-	
 	@And("^the user confirms the Autopayment in UHC site$")
 	public void confirms_payment_uhc() throws InterruptedException {
-		
+
 		Thread.sleep(2000);
 		ConfirmOneTimePaymentPage confirmOneTimePaymentsuccesspage = (ConfirmOneTimePaymentPage) getLoginScenario()
-				.getBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD);	
-		
+				.getBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD);
+
 		ConfirmOneTimePaymentPage oneTimePaymentSuccessPage = confirmOneTimePaymentsuccesspage.confirmsAutoPayment();
-        
+
 		if (oneTimePaymentSuccessPage != null) {
-			getLoginScenario().saveBean(
-					PageConstantsMnR.ONE_TIME_PAYMENT_SUCCESS_PAGE,
-					oneTimePaymentSuccessPage);
+			getLoginScenario().saveBean(PageConstantsMnR.ONE_TIME_PAYMENT_SUCCESS_PAGE, oneTimePaymentSuccessPage);
 			Assert.assertTrue(true);
-	}
-		else
+		} else
 			System.out.println("Encountered More than one Payment per Business day error");
 	}
-	
+
 	@And("^the user confirms the New flow OneTimePayment in UHC site$")
 	public void confirms_One_time_payment_uhc() throws InterruptedException {
-		
+
 		Thread.sleep(2000);
 		ConfirmOneTimePaymentPage confirmOneTimePaymentsuccesspage = (ConfirmOneTimePaymentPage) getLoginScenario()
-				.getBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD);	
-		
+				.getBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD);
+
 		ConfirmOneTimePaymentPage oneTimePaymentSuccessPage = confirmOneTimePaymentsuccesspage.confirmsNewOTPPayment();
-        
+
 		if (oneTimePaymentSuccessPage != null) {
-			getLoginScenario().saveBean(
-					PageConstantsMnR.ONE_TIME_PAYMENT_SUCCESS_PAGE,
-					oneTimePaymentSuccessPage);
+			getLoginScenario().saveBean(PageConstantsMnR.ONE_TIME_PAYMENT_SUCCESS_PAGE, oneTimePaymentSuccessPage);
 			Assert.assertTrue(true);
-	}
-		else
+		} else
 			System.out.println("Encountered More than one Payment per Business day error");
 	}
-	
+
 	@And("^the user confirms the Submit disabled in Member site$")
 	public void submit_disabled_payment_uhc() throws InterruptedException {
 		ConfirmOneTimePaymentPage confirmOneTimePaymentsuccesspage = (ConfirmOneTimePaymentPage) getLoginScenario()
-				.getBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD);	
-		
+				.getBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD);
+
 		ConfirmOneTimePaymentPage oneTimePaymentSuccessPage = confirmOneTimePaymentsuccesspage.MemAuthConfirmOTP();
-        
+
 		if (oneTimePaymentSuccessPage != null) {
-			getLoginScenario().saveBean(
-					PageConstantsMnR.ONE_TIME_PAYMENT_SUCCESS_PAGE,
-					oneTimePaymentSuccessPage);
+			getLoginScenario().saveBean(PageConstantsMnR.ONE_TIME_PAYMENT_SUCCESS_PAGE, oneTimePaymentSuccessPage);
 			Assert.assertTrue(true);
-	}
-		else
+		} else
 			System.out.println("Submit button maybe enabled");
 	}
-	
-	
+
 	@And("^the user confirms the AutoPay Disabled for Memauth$")
 	public void confirms_payment_DisableButton() throws InterruptedException {
 		ConfirmOneTimePaymentPage confirmOneTimePaymentsuccesspage = (ConfirmOneTimePaymentPage) getLoginScenario()
-				.getBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD);	
-		
-		ConfirmOneTimePaymentPage oneTimePaymentSuccessPage = confirmOneTimePaymentsuccesspage.ValidateAutoPaymentButton();
-        
+				.getBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD);
+
+		ConfirmOneTimePaymentPage oneTimePaymentSuccessPage = confirmOneTimePaymentsuccesspage
+				.ValidateAutoPaymentButton();
+
 		if (oneTimePaymentSuccessPage != null) {
-			getLoginScenario().saveBean(
-					PageConstantsMnR.ONE_TIME_PAYMENT_SUCCESS_PAGE,
-					oneTimePaymentSuccessPage);
+			getLoginScenario().saveBean(PageConstantsMnR.ONE_TIME_PAYMENT_SUCCESS_PAGE, oneTimePaymentSuccessPage);
 			Assert.assertTrue(true);
-	}
-		else
+		} else
 			System.out.println("Issue with Button enablement");
 	}
-	
 
 	@And("^the user moves to Go to Payment History Page button$")
-	public void Go_toPayment_History_page() throws InterruptedException{
-		ConfirmOneTimePaymentPage oneTimePaymentSuccessPageScroll = (ConfirmOneTimePaymentPage) getLoginScenario().getBean(PageConstantsMnR.ONE_TIME_PAYMENT_SUCCESS_PAGE);
+	public void Go_toPayment_History_page() throws InterruptedException {
+		ConfirmOneTimePaymentPage oneTimePaymentSuccessPageScroll = (ConfirmOneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstantsMnR.ONE_TIME_PAYMENT_SUCCESS_PAGE);
 		PaymentHistoryPage paymentHistoryPage = oneTimePaymentSuccessPageScroll.ScrollDownToBackButton();
-		if (paymentHistoryPage!=null){
-	     	  getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
-		System.out.println("user has reached back"); 
-}
+		if (paymentHistoryPage != null) {
+			getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
+			System.out.println("user has reached back");
+		}
 	}
 
-	
-	
 	@And("^the user confirms the values in AARP site$")
-	public void makes_one_time_payment_required_details() {	
- 		ConfirmOneTimePaymentPage confirmOneTimePayPage =  (ConfirmOneTimePaymentPage) getLoginScenario()
- 				.getBean(PageConstants.Review_OneTime_Page);
- 		
- 		confirmOneTimePayPage.confirmsPayment();
+	public void makes_one_time_payment_required_details() {
+		ConfirmOneTimePaymentPage confirmOneTimePayPage = (ConfirmOneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.Review_OneTime_Page);
+
+		confirmOneTimePayPage.confirmsPayment();
 		if (confirmOneTimePayPage != null) {
-			getLoginScenario().saveBean(
-					PageConstantsMnR.ONE_TIME_PAYMENT_SUCCESS_PAGE,
-					confirmOneTimePayPage);
+			getLoginScenario().saveBean(PageConstantsMnR.ONE_TIME_PAYMENT_SUCCESS_PAGE, confirmOneTimePayPage);
 			Assert.assertTrue(true);
-		} 
- 			
+		}
+
 	}
-	
+
 	@Then("^the user validates the One Time Payment Submitted successfull page$")
 	public void Payment_success_page() throws InterruptedException {
 		ReviewOneTimePaymentsPage onetimePaymentsSuccessPage = (ReviewOneTimePaymentsPage) getLoginScenario()
@@ -575,15 +587,13 @@ public class OneTimePaymentAarpStepDefintion {
 	}
 
 	@And("^the user makes one time payment in AARP site by entering required details$")
-	public void makes_one_time_payment_required_details(
-			DataTable accountAttributes) {
-		List<DataTableRow> accountAttributesRow = accountAttributes
-				.getGherkinRows();
+	public void makes_one_time_payment_required_details(DataTable accountAttributes) {
+		List<DataTableRow> accountAttributesRow = accountAttributes.getGherkinRows();
 		Map<String, String> accountAttributessMap = new HashMap<String, String>();
 
 		for (int i = 0; i < accountAttributesRow.size(); i++) {
-			accountAttributessMap.put(accountAttributesRow.get(i).getCells()
-					.get(0), accountAttributesRow.get(i).getCells().get(1));
+			accountAttributessMap.put(accountAttributesRow.get(i).getCells().get(0),
+					accountAttributesRow.get(i).getCells().get(1));
 		}
 
 		System.out.println("accountAttributessMap.." + accountAttributessMap);
@@ -593,17 +603,13 @@ public class OneTimePaymentAarpStepDefintion {
 		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = oneTimePaymentsPage
 				.enterAllPaymentDetails(accountAttributessMap);
 		if (reviewOneTimePaymentsPage != null) {
-			getLoginScenario().saveBean(
-					PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD,
-					reviewOneTimePaymentsPage);
+			getLoginScenario().saveBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD, reviewOneTimePaymentsPage);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("one time payments dashboard page not found");
 		}
 	}
-	
 
-	
 	@Then("^the user validates the payment successful page$")
 	public void user_validates_premium_payments_details() {
 		OneTimePaymentSuccessPage oneTimePaymentSuccessPage = (OneTimePaymentSuccessPage) getLoginScenario()
@@ -612,12 +618,10 @@ public class OneTimePaymentAarpStepDefintion {
 		JSONObject oneTimePaymentSuccessActualJson = (JSONObject) getLoginScenario()
 				.getBean(PaymentCommonConstants.ONE_TIME_PAYMENT_SUCCESS_ACTUAL);
 		JSONObject oneTimePaymentSuccessExpectedJson = (JSONObject) getLoginScenario()
-				.getBean(
-						PaymentCommonConstants.ONE_TIME_PAYMENT_SUCCESS_EXPECTED);
+				.getBean(PaymentCommonConstants.ONE_TIME_PAYMENT_SUCCESS_EXPECTED);
 
 		try {
-			JSONAssert.assertEquals(oneTimePaymentSuccessExpectedJson,
-					oneTimePaymentSuccessActualJson, true);
+			JSONAssert.assertEquals(oneTimePaymentSuccessExpectedJson, oneTimePaymentSuccessActualJson, true);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -643,9 +647,9 @@ public class OneTimePaymentAarpStepDefintion {
 		getLoginScenario().saveBean(PageConstantsMnR.LOGIN_PAGE, THloginPage);
 	}
 
-	/** 
-	 * @todo : User is taken to Stage login page 
-	 */	
+	/**
+	 * @todo : User is taken to Stage login page
+	 */
 	@Given("^TimeStampTheSpartans the user is on the Team-H AARP medicare site login page$")
 	public void TimeStampTheSpartans_user_TeamHlogin_page() {
 		WebDriver wd = getLoginScenario().getWebDriver();
@@ -679,19 +683,17 @@ public class OneTimePaymentAarpStepDefintion {
 	@When("^the user logs in with a registered AMP with following details in AARP site$")
 	public void user_logs_in(DataTable memberAttributes) {
 		/* Reading the given attribute from feature file */
-		List<DataTableRow> memberAttributesRow = memberAttributes
-				.getGherkinRows();
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
 		}
 
 		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
 		List<String> desiredAttributes = new ArrayList<String>();
-		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
-				.hasNext();) {
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator.hasNext();) {
 			{
 				String key = iterator.next();
 				desiredAttributes.add(memberAttributesMap.get(key));
@@ -700,8 +702,7 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 		System.out.println("desiredAttributes.." + desiredAttributes);
 
-		Map<String, String> loginCreds = loginScenario
-				.getAMPMemberWithDesiredAttributes(desiredAttributes);
+		Map<String, String> loginCreds = loginScenario.getAMPMemberWithDesiredAttributes(desiredAttributes);
 
 		String userName = null;
 		String pwd = null;
@@ -714,57 +715,43 @@ public class OneTimePaymentAarpStepDefintion {
 			pwd = loginCreds.get("pwd");
 			System.out.println("User is..." + userName);
 			System.out.println("Password is..." + pwd);
-			getLoginScenario()
-					.saveBean(LoginCommonConstants.USERNAME, userName);
+			getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 		}
 
-		LoginPage loginPage = (LoginPage) getLoginScenario().getBean(
-				PageConstantsMnR.LOGIN_PAGE);
+		LoginPage loginPage = (LoginPage) getLoginScenario().getBean(PageConstantsMnR.LOGIN_PAGE);
 		pages.regression.accounthomepage.AccountHomePage accountHomePage = (AccountHomePage) loginPage
 				.loginWith(userName, pwd);
 
 		if (accountHomePage != null) {
-			getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,
-					accountHomePage);
+			getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
 			Assert.assertTrue(true);
 			JSONObject accountHomeActualJson = accountHomePage.accountHomeJson;
-			getLoginScenario().saveBean(
-					LoginCommonConstants.ACCOUNT_HOME_ACTUAL,
-					accountHomeActualJson);
+			getLoginScenario().saveBean(LoginCommonConstants.ACCOUNT_HOME_ACTUAL, accountHomeActualJson);
 
 			/* Get expected data */
-			Map<String, JSONObject> expectedDataMap = loginScenario
-					.getExpectedJson(userName);
-			JSONObject accountHomeExpectedJson = accountHomePage
-					.getExpectedData(expectedDataMap);
-			getLoginScenario().saveBean(
-					LoginCommonConstants.ACCOUNT_HOME_EXPECTED,
-					accountHomeExpectedJson);
+			Map<String, JSONObject> expectedDataMap = loginScenario.getExpectedJson(userName);
+			JSONObject accountHomeExpectedJson = accountHomePage.getExpectedData(expectedDataMap);
+			getLoginScenario().saveBean(LoginCommonConstants.ACCOUNT_HOME_EXPECTED, accountHomeExpectedJson);
 
 		}
 
 	}
-	
-	
 
 	@When("^the user logs in TeamH with a registered AMP with following details in AARP site$")
-	public void user_logs_inTeamH(DataTable memberAttributes)
-			throws InterruptedException {
+	public void user_logs_inTeamH(DataTable memberAttributes) throws InterruptedException {
 		/* Reading the given attribute from feature file */
-		List<DataTableRow> memberAttributesRow = memberAttributes
-				.getGherkinRows();
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
 		}
 
 		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
 		List<String> desiredAttributes = new ArrayList<String>();
-		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
-				.hasNext();) {
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator.hasNext();) {
 			{
 				String key = iterator.next();
 				desiredAttributes.add(memberAttributesMap.get(key));
@@ -773,8 +760,7 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 		System.out.println("desiredAttributes.." + desiredAttributes);
 
-		Map<String, String> loginCreds = loginScenario
-				.getAMPMemberWithDesiredAttributes(desiredAttributes);
+		Map<String, String> loginCreds = loginScenario.getAMPMemberWithDesiredAttributes(desiredAttributes);
 
 		String userName = null;
 		String pwd = null;
@@ -787,20 +773,17 @@ public class OneTimePaymentAarpStepDefintion {
 			pwd = loginCreds.get("pwd");
 			System.out.println("User is..." + userName);
 			System.out.println("Password is..." + pwd);
-			getLoginScenario()
-					.saveBean(LoginCommonConstants.USERNAME, userName);
+			getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 		}
 
-		TeamHLoginUlayer loginPage = (TeamHLoginUlayer) getLoginScenario()
-				.getBean(PageConstantsMnR.LOGIN_PAGE);
+		TeamHLoginUlayer loginPage = (TeamHLoginUlayer) getLoginScenario().getBean(PageConstantsMnR.LOGIN_PAGE);
 		// TestHarness TestHarn = (TestHarness) loginPage.loginWith(userName,
 		// pwd);
 		// AccountHomePage accountHomePage = (AccountHomePage)
 		// loginPage.loginWith(userName, pwd);
 
-		RallyDashboard RallyDB = (RallyDashboard) loginPage.loginWith(userName,
-				pwd);
+		RallyDashboard RallyDB = (RallyDashboard) loginPage.loginWith(userName, pwd);
 
 		if (RallyDB != null) {
 			getLoginScenario().saveBean(PageConstantsMnR.Rally_Dashboard, RallyDB);
@@ -823,27 +806,24 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 
 	}
-	
+
 	/**
 	 * @todo : User logs in with the data from table and reached to Home page
 	 */
 	@When("^TimeStampTheSpartans the user logs in TeamH with a registered AMP with following details in AARP site$")
-	public void TimeStampTheSpartans_user_logs_inTeamH(
-			DataTable memberAttributes) throws InterruptedException {
+	public void TimeStampTheSpartans_user_logs_inTeamH(DataTable memberAttributes) throws InterruptedException {
 		/* Reading the given attribute from feature file */
-		List<DataTableRow> memberAttributesRow = memberAttributes
-				.getGherkinRows();
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
 		}
 
 		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
 		List<String> desiredAttributes = new ArrayList<String>();
-		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
-				.hasNext();) {
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator.hasNext();) {
 			{
 				String key = iterator.next();
 				desiredAttributes.add(memberAttributesMap.get(key));
@@ -852,8 +832,7 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 		System.out.println("desiredAttributes.." + desiredAttributes);
 
-		Map<String, String> loginCreds = loginScenario
-				.getAMPMemberWithDesiredAttributes(desiredAttributes);
+		Map<String, String> loginCreds = loginScenario.getAMPMemberWithDesiredAttributes(desiredAttributes);
 
 		String userName = null;
 		String pwd = null;
@@ -866,20 +845,17 @@ public class OneTimePaymentAarpStepDefintion {
 			pwd = loginCreds.get("pwd");
 			System.out.println("User is..." + userName);
 			System.out.println("Password is..." + pwd);
-			getLoginScenario()
-					.saveBean(LoginCommonConstants.USERNAME, userName);
+			getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 		}
 
-		TeamHLoginUlayer loginPage = (TeamHLoginUlayer) getLoginScenario()
-				.getBean(PageConstantsMnR.LOGIN_PAGE);
+		TeamHLoginUlayer loginPage = (TeamHLoginUlayer) getLoginScenario().getBean(PageConstantsMnR.LOGIN_PAGE);
 		// TestHarness TestHarn = (TestHarness) loginPage.loginWith(userName,
 		// pwd);
 		// AccountHomePage accountHomePage = (AccountHomePage)
 		// loginPage.loginWith(userName, pwd);
 
-		RallyDashboard RallyDB = (RallyDashboard) loginPage.loginWith(userName,
-				pwd);
+		RallyDashboard RallyDB = (RallyDashboard) loginPage.loginWith(userName, pwd);
 
 		if (RallyDB != null) {
 			getLoginScenario().saveBean(PageConstantsMnR.Rally_Dashboard, RallyDB);
@@ -904,22 +880,19 @@ public class OneTimePaymentAarpStepDefintion {
 	}
 
 	@When("^the user logs in TeamC with a registered AMP with following details in AARP site$")
-	public void user_logs_inTeamC(DataTable memberAttributes)
-			throws InterruptedException {
+	public void user_logs_inTeamC(DataTable memberAttributes) throws InterruptedException {
 		/* Reading the given attribute from feature file */
-		List<DataTableRow> memberAttributesRow = memberAttributes
-				.getGherkinRows();
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
 		}
 
 		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
 		List<String> desiredAttributes = new ArrayList<String>();
-		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
-				.hasNext();) {
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator.hasNext();) {
 			{
 				String key = iterator.next();
 				desiredAttributes.add(memberAttributesMap.get(key));
@@ -928,8 +901,7 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 		System.out.println("desiredAttributes.." + desiredAttributes);
 
-		Map<String, String> loginCreds = loginScenario
-				.getAMPMemberWithDesiredAttributes(desiredAttributes);
+		Map<String, String> loginCreds = loginScenario.getAMPMemberWithDesiredAttributes(desiredAttributes);
 
 		String userName = null;
 		String pwd = null;
@@ -942,20 +914,17 @@ public class OneTimePaymentAarpStepDefintion {
 			pwd = loginCreds.get("pwd");
 			System.out.println("User is..." + userName);
 			System.out.println("Password is..." + pwd);
-			getLoginScenario()
-					.saveBean(LoginCommonConstants.USERNAME, userName);
+			getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 		}
 
 		TeamCLoginUlayerPayments loginPage = (TeamCLoginUlayerPayments) getLoginScenario()
 				.getBean(PageConstantsMnR.LOGIN_PAGE);
-		AccountHomePage accountHomePage = (AccountHomePage) loginPage
-				.loginWith(userName, pwd);
+		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
 		Thread.sleep(25000);
 
 		if (accountHomePage != null) {
-			getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,
-					accountHomePage);
+			getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
 			/*
 			 * Assert.assertTrue(true); JSONObject accountHomeActualJson =
 			 * accountHomePage.accountHomeJson;
@@ -965,21 +934,12 @@ public class OneTimePaymentAarpStepDefintion {
 
 	}
 
-	
-
-
-
-
-
 	@And("^the user navigates to PaymentOverview Page$")
 	public void user_navigates_to_PaymentOverview_Page() {
-		TestHarness testHarness = (TestHarness) getLoginScenario().getBean(
-				PageConstantsMnR.TEST_HARNESS_PAGE);
-		PaymentsOverview paymentsOverview = testHarness
-				.navigateToPaymentOverview();
+		TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+		PaymentsOverview paymentsOverview = testHarness.navigateToPaymentOverview();
 		if (paymentsOverview != null) {
-			getLoginScenario().saveBean(PageConstantsMnR.PAYMENT_OVERVIEW,
-					paymentsOverview);
+			getLoginScenario().saveBean(PageConstantsMnR.PAYMENT_OVERVIEW, paymentsOverview);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("Payment Overview page not found");
@@ -988,41 +948,36 @@ public class OneTimePaymentAarpStepDefintion {
 	}
 
 	@And("^the user navigates to Stage PaymentOverview Page$")
-	public void user_navigates_to_TeamHPaymentOverview_Page()
-			throws InterruptedException {
+	public void user_navigates_to_TeamHPaymentOverview_Page() throws InterruptedException {
 		// TestHarness testHarness =
 		// (TestHarness)getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
 		Thread.sleep(20000);
-		RallyDashboard RDB = (RallyDashboard) getLoginScenario().getBean(
-				PageConstantsMnR.Rally_Dashboard);
+		RallyDashboard RDB = (RallyDashboard) getLoginScenario().getBean(PageConstantsMnR.Rally_Dashboard);
 		PaymentsOverview paymentsOverview = RDB.navigateToPaymentOverview();
 		Thread.sleep(2000);
 		if (paymentsOverview != null) {
-			getLoginScenario().saveBean(PageConstantsMnR.PAYMENT_OVERVIEW,
-					paymentsOverview);
+			getLoginScenario().saveBean(PageConstantsMnR.PAYMENT_OVERVIEW, paymentsOverview);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("Payment Overview page not found");
 		}
 
 	}
-	
+
 	/**
-	 * @todo : User clicks on payment option in global header and is taken to paymnet overview page 
+	 * @todo : User clicks on payment option in global header and is taken to
+	 *       paymnet overview page
 	 */
 	@And("^TimeStampTheSpartans the user navigates to Stage PaymentOverview Page$")
-	public void TimeStampTheSpartans_user_navigates_to_TeamHPaymentOverview_Page()
-			throws InterruptedException {
+	public void TimeStampTheSpartans_user_navigates_to_TeamHPaymentOverview_Page() throws InterruptedException {
 		// TestHarness testHarness =
 		// (TestHarness)getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
 		Thread.sleep(20000);
-		RallyDashboard RDB = (RallyDashboard) getLoginScenario().getBean(
-				PageConstantsMnR.Rally_Dashboard);
+		RallyDashboard RDB = (RallyDashboard) getLoginScenario().getBean(PageConstantsMnR.Rally_Dashboard);
 		PaymentsOverview paymentsOverview = RDB.navigateToPaymentOverview();
 		Thread.sleep(2000);
 		if (paymentsOverview != null) {
-			getLoginScenario().saveBean(PageConstantsMnR.PAYMENT_OVERVIEW,
-					paymentsOverview);
+			getLoginScenario().saveBean(PageConstantsMnR.PAYMENT_OVERVIEW, paymentsOverview);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("Payment Overview page not found");
@@ -1032,13 +987,10 @@ public class OneTimePaymentAarpStepDefintion {
 
 	@And("^the user navigates to TeamCPaymentOverview Page$")
 	public void user_navigates_to_TeamCPaymentOverview_Page() {
-		TestHarness testHarness = (TestHarness) getLoginScenario().getBean(
-				PageConstantsMnR.TEST_HARNESS_PAGE);
-		PaymentsOverview paymentsOverview = testHarness
-				.navigateToTeamCPaymentOverview();
+		TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+		PaymentsOverview paymentsOverview = testHarness.navigateToTeamCPaymentOverview();
 		if (paymentsOverview != null) {
-			getLoginScenario().saveBean(PageConstantsMnR.PAYMENT_OVERVIEW,
-					paymentsOverview);
+			getLoginScenario().saveBean(PageConstantsMnR.PAYMENT_OVERVIEW, paymentsOverview);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("Payment Overview page not found");
@@ -1046,19 +998,17 @@ public class OneTimePaymentAarpStepDefintion {
 
 	}
 
-	
-
 	/*
 	 * @And("^the user navigates to Team H One Time Payments page$") public void
 	 * user_navigates_to_TeamH_one_time_payments() throws InterruptedException {
 	 * PaymentsOverview accountHomePage =
 	 * (PaymentsOverview)getLoginScenario().getBean
-	 * (PageConstantsMnR.PAYMENT_OVERVIEW); OneTimePaymentsPage oneTimePaymentsPage
-	 * = accountHomePage.navigateToOneTimePaymentpage();
+	 * (PageConstantsMnR.PAYMENT_OVERVIEW); OneTimePaymentsPage
+	 * oneTimePaymentsPage = accountHomePage.navigateToOneTimePaymentpage();
 	 * if(oneTimePaymentsPage!= null){
 	 * getLoginScenario().saveBean(PageConstantsMnR.ONE_TIME_PAYMENTS_DASHBOARD,
-	 * oneTimePaymentsPage); Assert.assertTrue(true); } else {
-	 * Assert.fail("one time payments dashboard page not found"); }
+	 * oneTimePaymentsPage); Assert.assertTrue(true); } else { Assert.fail(
+	 * "one time payments dashboard page not found"); }
 	 * 
 	 * }
 	 */
@@ -1067,70 +1017,57 @@ public class OneTimePaymentAarpStepDefintion {
 	public void user_validates_Tabs() throws InterruptedException {
 		PaymentsOverview accountHomePage = (PaymentsOverview) getLoginScenario()
 				.getBean(PageConstantsMnR.PAYMENT_OVERVIEW);
-		OneTimePaymentsPage oneTimePaymentsPage = accountHomePage
-				.navigateToOneTimePaymentpage();
+		OneTimePaymentsPage oneTimePaymentsPage = accountHomePage.navigateToOneTimePaymentpage();
 		if (oneTimePaymentsPage != null) {
-			getLoginScenario().saveBean(
-					PageConstantsMnR.ONE_TIME_PAYMENTS_DASHBOARD,
-					oneTimePaymentsPage);
+			getLoginScenario().saveBean(PageConstantsMnR.ONE_TIME_PAYMENTS_DASHBOARD, oneTimePaymentsPage);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("one time payments dashboard page not found");
 		}
 
 	}
-	/** 
-	 * @todo : user validate payments overview for combo members 
-	 */	
+
+	/**
+	 * @todo : user validate payments overview for combo members
+	 */
 	@And("^TimeStampTheSpartans user lands on payment overview page validates the tabs for combo members$")
 	public void TimeStampTheSpartans_user_validates_Tabs() throws InterruptedException {
 		PaymentsOverview accountHomePage = (PaymentsOverview) getLoginScenario()
 				.getBean(PageConstantsMnR.PAYMENT_OVERVIEW);
-		OneTimePaymentsPage oneTimePaymentsPage = accountHomePage
-				.navigateToOneTimePaymentpage();
+		OneTimePaymentsPage oneTimePaymentsPage = accountHomePage.navigateToOneTimePaymentpage();
 		if (oneTimePaymentsPage != null) {
-			getLoginScenario().saveBean(
-					PageConstantsMnR.ONE_TIME_PAYMENTS_DASHBOARD,
-					oneTimePaymentsPage);
+			getLoginScenario().saveBean(PageConstantsMnR.ONE_TIME_PAYMENTS_DASHBOARD, oneTimePaymentsPage);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("one time payments dashboard page not found");
 		}
 
 	}
-	
+
 	@And("^user unchecks paid and unpaid checkbox and validates the result$")
-	public void user_validates_paid_unpaid_results()
-			throws InterruptedException {
+	public void user_validates_paid_unpaid_results() throws InterruptedException {
 		PaymentsOverview accountHomePage = (PaymentsOverview) getLoginScenario()
 				.getBean(PageConstantsMnR.PAYMENT_OVERVIEW);
-		PaymentsOverview oneTimePaymentsPage = accountHomePage
-				.UnselectPaidUnpaidCheck();
+		PaymentsOverview oneTimePaymentsPage = accountHomePage.UnselectPaidUnpaidCheck();
 		if (oneTimePaymentsPage != null) {
-			getLoginScenario().saveBean(
-					PageConstantsMnR.ONE_TIME_PAYMENTS_DASHBOARD,
-					oneTimePaymentsPage);
+			getLoginScenario().saveBean(PageConstantsMnR.ONE_TIME_PAYMENTS_DASHBOARD, oneTimePaymentsPage);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("issue with paid unpaid checkbox");
 		}
 
 	}
-	
-	/** 
-	 * @todo : User chacks paid and unpaid results 
-	 */	
+
+	/**
+	 * @todo : User chacks paid and unpaid results
+	 */
 	@And("^TimeStampTheSpartans user unchecks paid and unpaid checkbox and validates the result$")
-	public void TimeStampTheSpartans_user_validates_paid_unpaid_results()
-			throws InterruptedException {
+	public void TimeStampTheSpartans_user_validates_paid_unpaid_results() throws InterruptedException {
 		PaymentsOverview accountHomePage = (PaymentsOverview) getLoginScenario()
 				.getBean(PageConstantsMnR.PAYMENT_OVERVIEW);
-		PaymentsOverview oneTimePaymentsPage = accountHomePage
-				.UnselectPaidUnpaidCheck();
+		PaymentsOverview oneTimePaymentsPage = accountHomePage.UnselectPaidUnpaidCheck();
 		if (oneTimePaymentsPage != null) {
-			getLoginScenario().saveBean(
-					PageConstantsMnR.ONE_TIME_PAYMENTS_DASHBOARD,
-					oneTimePaymentsPage);
+			getLoginScenario().saveBean(PageConstantsMnR.ONE_TIME_PAYMENTS_DASHBOARD, oneTimePaymentsPage);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("issue with paid unpaid checkbox");
@@ -1139,16 +1076,12 @@ public class OneTimePaymentAarpStepDefintion {
 	}
 
 	@And("^the user navigates to Team H One Time Payments page$")
-	public void user_validates_TeamH_Payment_overview()
-			throws InterruptedException {
+	public void user_validates_TeamH_Payment_overview() throws InterruptedException {
 		PaymentsOverview accountHomePage = (PaymentsOverview) getLoginScenario()
 				.getBean(PageConstantsMnR.PAYMENT_OVERVIEW);
-		OneTimePaymentsPage oneTimePaymentsPage = accountHomePage
-				.navigateToOneTimePaymentpage();
+		OneTimePaymentsPage oneTimePaymentsPage = accountHomePage.navigateToOneTimePaymentpage();
 		if (oneTimePaymentsPage != null) {
-			getLoginScenario().saveBean(
-					PageConstantsMnR.ONE_TIME_PAYMENTS_DASHBOARD,
-					oneTimePaymentsPage);
+			getLoginScenario().saveBean(PageConstantsMnR.ONE_TIME_PAYMENTS_DASHBOARD, oneTimePaymentsPage);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("one time payments dashboard page not found");
@@ -1160,37 +1093,29 @@ public class OneTimePaymentAarpStepDefintion {
 	 * @todo : User arrives at OneTimePayment page form
 	 */
 	@And("^TimeStampTheSpartans the user navigates to Team H One Time Payments page$")
-	public void TimeStampTheSpartans_user_validates_TeamH_Payment_overview()
-			throws InterruptedException {
+	public void TimeStampTheSpartans_user_validates_TeamH_Payment_overview() throws InterruptedException {
 		PaymentsOverview accountHomePage = (PaymentsOverview) getLoginScenario()
 				.getBean(PageConstantsMnR.PAYMENT_OVERVIEW);
-		OneTimePaymentsPage oneTimePaymentsPage = accountHomePage
-				.navigateToOneTimePaymentpage();
+		OneTimePaymentsPage oneTimePaymentsPage = accountHomePage.navigateToOneTimePaymentpage();
 		if (oneTimePaymentsPage != null) {
-			getLoginScenario().saveBean(
-					PageConstantsMnR.ONE_TIME_PAYMENTS_DASHBOARD,
-					oneTimePaymentsPage);
+			getLoginScenario().saveBean(PageConstantsMnR.ONE_TIME_PAYMENTS_DASHBOARD, oneTimePaymentsPage);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("one time payments dashboard page not found");
 		}
 
 	}
-	
+
 	/**
 	 * User is Taken to Automatic Payments page form
 	 */
 	@And("^TimeStampTheSpartans the user navigates to Team H Automatic Payments page$")
-	public void TimeStampTheSpartans_user_validates_TeamHAuto_Payment_overview()
-			throws InterruptedException {
+	public void TimeStampTheSpartans_user_validates_TeamHAuto_Payment_overview() throws InterruptedException {
 		PaymentsOverview accountHomePage = (PaymentsOverview) getLoginScenario()
 				.getBean(PageConstantsMnR.PAYMENT_OVERVIEW);
-		OneTimePaymentsPage oneTimePaymentsPage = accountHomePage
-				.navigateToAutoPaymentpage();
+		OneTimePaymentsPage oneTimePaymentsPage = accountHomePage.navigateToAutoPaymentpage();
 		if (oneTimePaymentsPage != null) {
-			getLoginScenario().saveBean(
-					PageConstantsMnR.AUTOMATIC_PAYMENTS_DASHBOARD,
-					oneTimePaymentsPage);
+			getLoginScenario().saveBean(PageConstantsMnR.AUTOMATIC_PAYMENTS_DASHBOARD, oneTimePaymentsPage);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("one time payments dashboard page not found");
@@ -1199,52 +1124,41 @@ public class OneTimePaymentAarpStepDefintion {
 	}
 
 	@And("^the user enters details and click on continue button on One Time Payments Page for Dashboard$")
-	public void user_clicks_and_navigates_to_Review_page()
-			throws InterruptedException {
+	public void user_clicks_and_navigates_to_Review_page() throws InterruptedException {
 		OneTimePaymentsPage oneTimePaymentsPage = (OneTimePaymentsPage) getLoginScenario()
 				.getBean(PageConstantsMnR.ONE_TIME_PAYMENTS_DASHBOARD);
-		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = oneTimePaymentsPage
-				.enterInfoAndContinue();
+		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = oneTimePaymentsPage.enterInfoAndContinue();
 		if (reviewOneTimePaymentsPage != null) {
-			getLoginScenario().saveBean(
-					PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD,
-					reviewOneTimePaymentsPage);
+			getLoginScenario().saveBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD, reviewOneTimePaymentsPage);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("one time payments dashboard page not found");
 		}
 	}
-	
+
 	/**
 	 * User Enters the required details and click on continue to see review page
-	 */	
+	 */
 	@And("^TimeStampTheSpartans the user enters details and click on continue button on One Time Payments Page for Dashboard$")
-	public void TimeStampTheSpartans_user_clicks_and_navigates_to_Review_page()
-			throws InterruptedException {
+	public void TimeStampTheSpartans_user_clicks_and_navigates_to_Review_page() throws InterruptedException {
 		OneTimePaymentsPage oneTimePaymentsPage = (OneTimePaymentsPage) getLoginScenario()
 				.getBean(PageConstantsMnR.ONE_TIME_PAYMENTS_DASHBOARD);
-		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = oneTimePaymentsPage
-				.enterInfoAndContinue();
+		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = oneTimePaymentsPage.enterInfoAndContinue();
 		if (reviewOneTimePaymentsPage != null) {
-			getLoginScenario().saveBean(
-					PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD,
-					reviewOneTimePaymentsPage);
+			getLoginScenario().saveBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD, reviewOneTimePaymentsPage);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("one time payments dashboard page not found");
 		}
 	}
+
 	@And("^the user enters details and click on continue button on Automatic Payments Page for Dashboard$")
-	public void user_clicks_AutoPay_and_navigates_to_Review_page()
-			throws InterruptedException {
+	public void user_clicks_AutoPay_and_navigates_to_Review_page() throws InterruptedException {
 		OneTimePaymentsPage oneTimePaymentsPage = (OneTimePaymentsPage) getLoginScenario()
 				.getBean(PageConstantsMnR.AUTOMATIC_PAYMENTS_DASHBOARD);
-		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = oneTimePaymentsPage
-				.enterInfoAndContinue();
+		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = oneTimePaymentsPage.enterInfoAndContinue();
 		if (reviewOneTimePaymentsPage != null) {
-			getLoginScenario().saveBean(
-					PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD,
-					reviewOneTimePaymentsPage);
+			getLoginScenario().saveBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD, reviewOneTimePaymentsPage);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("one time payments dashboard page not found");
@@ -1252,19 +1166,16 @@ public class OneTimePaymentAarpStepDefintion {
 	}
 
 	/**
-	 * User enters details on Automatic Payments form and navigates to AutomaticPaymentsReview page
+	 * User enters details on Automatic Payments form and navigates to
+	 * AutomaticPaymentsReview page
 	 */
 	@And("^TimeStampTheSpartans the user enters details and click on continue button on Automatic Payments Page for Dashboard$")
-	public void TimeStampTheSpartans_user_clicks_AutoPay_and_navigates_to_Review_page()
-			throws InterruptedException {
+	public void TimeStampTheSpartans_user_clicks_AutoPay_and_navigates_to_Review_page() throws InterruptedException {
 		OneTimePaymentsPage oneTimePaymentsPage = (OneTimePaymentsPage) getLoginScenario()
 				.getBean(PageConstantsMnR.AUTOMATIC_PAYMENTS_DASHBOARD);
-		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = oneTimePaymentsPage
-				.enterInfoAndContinue();
+		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = oneTimePaymentsPage.enterInfoAndContinue();
 		if (reviewOneTimePaymentsPage != null) {
-			getLoginScenario().saveBean(
-					PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD,
-					reviewOneTimePaymentsPage);
+			getLoginScenario().saveBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD, reviewOneTimePaymentsPage);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("one time payments dashboard page not found");
@@ -1272,91 +1183,83 @@ public class OneTimePaymentAarpStepDefintion {
 	}
 
 	/**
-	 * @todo : User Lands on Review one time payment page , slects the checkbox and continue to One time Payment Submitted page
-	 */	
+	 * @todo : User Lands on Review one time payment page , slects the checkbox
+	 *       and continue to One time Payment Submitted page
+	 */
 	@And("^TimeStampTheSpartans user lands on Review One time Payments Page and navigates to OTP Submitted Page$")
-	public void Review_OneTime_Payment_Navigation_to_OTPSubmitted()
-			throws InterruptedException {
+	public void Review_OneTime_Payment_Navigation_to_OTPSubmitted() throws InterruptedException {
 		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = (ReviewOneTimePaymentsPage) getLoginScenario()
 				.getBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD);
-		OneTimePaymentPageSubmitted OTPSubmitted = reviewOneTimePaymentsPage
-				.navigateToOTPSubmittedPage();
+		OneTimePaymentPageSubmitted OTPSubmitted = reviewOneTimePaymentsPage.navigateToOTPSubmittedPage();
 		Thread.sleep(1000);
 		if (OTPSubmitted != null) {
-			getLoginScenario().saveBean(
-					PageConstantsMnR.CONFIRM_ONE_TIME_PAYMENT_PAGE, OTPSubmitted);
+			getLoginScenario().saveBean(PageConstantsMnR.CONFIRM_ONE_TIME_PAYMENT_PAGE, OTPSubmitted);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("OTP Submitted page not found");
 		}
 	}
 
-/*	@And("^user lands on Review One time Payments Page and navigates to Review Submitted Page$")
-	public void Review_OneTime_Payment_Navigation_to_ReviewSubmitted()
-			throws InterruptedException {
-		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = (ReviewOneTimePaymentsPage) getLoginScenario()
-				.getBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD);
-		OneTimePaymentPageSubmitted OTPSubmitted = reviewOneTimePaymentsPage
-				.navigateToReviewSubmittedPage();
-		Thread.sleep(1000);
-		if (OTPSubmitted != null) {
-			getLoginScenario().saveBean(
-					PageConstantsMnR.CONFIRM_ONE_TIME_PAYMENT_PAGE, OTPSubmitted);
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail("OTP Submitted page not found");
-		}
-	}
-	
-	*//**
-	 * User is on Review Automatic payments page, checks the electronic signature box and move to Submit Page
-	 *//*
-	@And("^TimeStampTheSpartans user lands on Review Automatic Payments Page and navigates to Review Submitted Page$")
-	public void TimeStampTheSpartans_Review_OneTime_Payment_Navigation_to_ReviewSubmitted()
-			throws InterruptedException {
-		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = (ReviewOneTimePaymentsPage) getLoginScenario()
-				.getBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD);
-		OneTimePaymentPageSubmitted OTPSubmitted = reviewOneTimePaymentsPage
-				.navigateToReviewSubmittedPage();
-		Thread.sleep(1000);
-		if (OTPSubmitted != null) {
-			getLoginScenario().saveBean(
-					PageConstantsMnR.CONFIRM_ONE_TIME_PAYMENT_PAGE, OTPSubmitted);
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail("OTP Submitted page not found");
-		}
-	}*/
+	/*
+	 * @And(
+	 * "^user lands on Review One time Payments Page and navigates to Review Submitted Page$"
+	 * ) public void Review_OneTime_Payment_Navigation_to_ReviewSubmitted()
+	 * throws InterruptedException { ReviewOneTimePaymentsPage
+	 * reviewOneTimePaymentsPage = (ReviewOneTimePaymentsPage)
+	 * getLoginScenario()
+	 * .getBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD);
+	 * OneTimePaymentPageSubmitted OTPSubmitted = reviewOneTimePaymentsPage
+	 * .navigateToReviewSubmittedPage(); Thread.sleep(1000); if (OTPSubmitted !=
+	 * null) { getLoginScenario().saveBean(
+	 * PageConstantsMnR.CONFIRM_ONE_TIME_PAYMENT_PAGE, OTPSubmitted);
+	 * Assert.assertTrue(true); } else { Assert.fail(
+	 * "OTP Submitted page not found"); } }
+	 * 
+	 *//**
+		 * User is on Review Automatic payments page, checks the electronic
+		 * signature box and move to Submit Page
+		 *//*
+		 * @And(
+		 * "^TimeStampTheSpartans user lands on Review Automatic Payments Page and navigates to Review Submitted Page$"
+		 * ) public void
+		 * TimeStampTheSpartans_Review_OneTime_Payment_Navigation_to_ReviewSubmitted
+		 * () throws InterruptedException { ReviewOneTimePaymentsPage
+		 * reviewOneTimePaymentsPage = (ReviewOneTimePaymentsPage)
+		 * getLoginScenario()
+		 * .getBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD);
+		 * OneTimePaymentPageSubmitted OTPSubmitted = reviewOneTimePaymentsPage
+		 * .navigateToReviewSubmittedPage(); Thread.sleep(1000); if
+		 * (OTPSubmitted != null) { getLoginScenario().saveBean(
+		 * PageConstantsMnR.CONFIRM_ONE_TIME_PAYMENT_PAGE, OTPSubmitted);
+		 * Assert.assertTrue(true); } else { Assert.fail(
+		 * "OTP Submitted page not found"); } }
+		 */
 
 	@Then("^user lands on Review One time Payments Page and validates one payment per day error message$")
 	public void One_Payment_Per_Day_Error() throws InterruptedException {
 		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = (ReviewOneTimePaymentsPage) getLoginScenario()
 				.getBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD);
-		ReviewOneTimePaymentsPage OTPError = reviewOneTimePaymentsPage
-				.ValidateOnePaymentPerDayErrorMessage();
+		ReviewOneTimePaymentsPage OTPError = reviewOneTimePaymentsPage.ValidateOnePaymentPerDayErrorMessage();
 		Thread.sleep(1000);
 		if (OTPError != null) {
-			getLoginScenario().saveBean(
-					PageConstantsMnR.ONE_PAYMENT_PER_DAY_ERROR_MESSAGE, OTPError);
+			getLoginScenario().saveBean(PageConstantsMnR.ONE_PAYMENT_PER_DAY_ERROR_MESSAGE, OTPError);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("Error message not validated");
 		}
 	}
-	
+
 	/**
 	 * This step validates the error message for more than one payment per day
-	 */	
+	 */
 	@Then("^TimeStampTheSpartans user lands on Review One time Payments Page and validates one payment per day error message$")
 	public void TimeStampTheSpartans_One_Payment_Per_Day_Error() throws InterruptedException {
 		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = (ReviewOneTimePaymentsPage) getLoginScenario()
 				.getBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD);
-		ReviewOneTimePaymentsPage OTPError = reviewOneTimePaymentsPage
-				.ValidateOnePaymentPerDayErrorMessage();
+		ReviewOneTimePaymentsPage OTPError = reviewOneTimePaymentsPage.ValidateOnePaymentPerDayErrorMessage();
 		Thread.sleep(1000);
 		if (OTPError != null) {
-			getLoginScenario().saveBean(
-					PageConstantsMnR.ONE_PAYMENT_PER_DAY_ERROR_MESSAGE, OTPError);
+			getLoginScenario().saveBean(PageConstantsMnR.ONE_PAYMENT_PER_DAY_ERROR_MESSAGE, OTPError);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("Error message not validated");
@@ -1368,8 +1271,7 @@ public class OneTimePaymentAarpStepDefintion {
 
 		OneTimePaymentPageSubmitted OTPSubmitted = (OneTimePaymentPageSubmitted) getLoginScenario()
 				.getBean(PageConstantsMnR.CONFIRM_ONE_TIME_PAYMENT_PAGE);
-		OneTimePaymentPageSubmitted PDFValidation = OTPSubmitted
-				.ValidatePDFLink();
+		OneTimePaymentPageSubmitted PDFValidation = OTPSubmitted.ValidatePDFLink();
 		if (PDFValidation != null) {
 			getLoginScenario().saveBean(PageConstantsMnR.PDF_LINK, PDFValidation);
 			Assert.assertTrue(true);
@@ -1385,13 +1287,10 @@ public class OneTimePaymentAarpStepDefintion {
 		OneTimePaymentPageSubmitted OTPSubmitted = (OneTimePaymentPageSubmitted) getLoginScenario()
 				.getBean(PageConstantsMnR.CONFIRM_ONE_TIME_PAYMENT_PAGE);
 		Thread.sleep(2000);
-		OneTimePaymentPageSubmitted PaymentAmount = OTPSubmitted
-				.ValidatePaymentAmount();
-		OneTimePaymentPageSubmitted MemberName = OTPSubmitted
-				.ValidateMemberName();
+		OneTimePaymentPageSubmitted PaymentAmount = OTPSubmitted.ValidatePaymentAmount();
+		OneTimePaymentPageSubmitted MemberName = OTPSubmitted.ValidateMemberName();
 		if (PaymentAmount != null) {
-			getLoginScenario().saveBean(PageConstantsMnR.PAYMENT_AMOUNT,
-					PaymentAmount);
+			getLoginScenario().saveBean(PageConstantsMnR.PAYMENT_AMOUNT, PaymentAmount);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("Payment Amount not found");
@@ -1412,8 +1311,7 @@ public class OneTimePaymentAarpStepDefintion {
 		OneTimePaymentPageSubmitted OTPSubmitted = (OneTimePaymentPageSubmitted) getLoginScenario()
 				.getBean(PageConstantsMnR.CONFIRM_ONE_TIME_PAYMENT_PAGE);
 		Thread.sleep(2000);
-		OneTimePaymentPageSubmitted Timestamp = OTPSubmitted
-				.ValidateTimeStamp();
+		OneTimePaymentPageSubmitted Timestamp = OTPSubmitted.ValidateTimeStamp();
 		if (Timestamp != null) {
 			getLoginScenario().saveBean(PageConstantsMnR.TIMESTAMP, Timestamp);
 			Assert.assertTrue(true);
@@ -1421,19 +1319,17 @@ public class OneTimePaymentAarpStepDefintion {
 			Assert.fail("Payment Amount not found");
 		}
 	}
-	
+
 	/**
 	 * User reaches the OnetimePaymentSubmittedPage and validates Timestamp
 	 */
 	@Then("^TimeStampTheSpartans the user lands on OneTime Payment Submitted Page and validates Timestamp$")
-	public void TimeStampTheSpartans_OTP_SubmittedPage_Timestamp()
-			throws InterruptedException {
+	public void TimeStampTheSpartans_OTP_SubmittedPage_Timestamp() throws InterruptedException {
 
 		OneTimePaymentPageSubmitted OTPSubmitted = (OneTimePaymentPageSubmitted) getLoginScenario()
 				.getBean(PageConstantsMnR.CONFIRM_ONE_TIME_PAYMENT_PAGE);
 		Thread.sleep(2000);
-		OneTimePaymentPageSubmitted Timestamp = OTPSubmitted
-				.ValidateTimeStamp();
+		OneTimePaymentPageSubmitted Timestamp = OTPSubmitted.ValidateTimeStamp();
 		if (Timestamp != null) {
 			getLoginScenario().saveBean(PageConstantsMnR.TIMESTAMP, Timestamp);
 			Assert.assertTrue(true);
@@ -1446,14 +1342,10 @@ public class OneTimePaymentAarpStepDefintion {
 	public void user_continueswithoutCheckbox() {
 		OneTimePaymentsPage oneTimePaymentsPage = (OneTimePaymentsPage) getLoginScenario()
 				.getBean(PageConstantsMnR.ONE_TIME_PAYMENTS_DASHBOARD);
-		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = oneTimePaymentsPage
-				.enterInfoWithoutCheckBoxAndContinue();
-		oneTimePaymentsPage
-				.errorMessagechkBox();
+		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = oneTimePaymentsPage.enterInfoWithoutCheckBoxAndContinue();
+		oneTimePaymentsPage.errorMessagechkBox();
 		if (reviewOneTimePaymentsPage != null) {
-			getLoginScenario().saveBean(
-					PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD,
-					reviewOneTimePaymentsPage);
+			getLoginScenario().saveBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD, reviewOneTimePaymentsPage);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("one time payments dashboard page not found");
@@ -1465,12 +1357,9 @@ public class OneTimePaymentAarpStepDefintion {
 	public void user_clicks_cancel_button() {
 		OneTimePaymentsPage oneTimePaymentsPage = (OneTimePaymentsPage) getLoginScenario()
 				.getBean(PageConstantsMnR.ONE_TIME_PAYMENTS_DASHBOARD);
-		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = oneTimePaymentsPage
-				.CancelButton();
+		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = oneTimePaymentsPage.CancelButton();
 		if (reviewOneTimePaymentsPage != null) {
-			getLoginScenario().saveBean(
-					PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD,
-					reviewOneTimePaymentsPage);
+			getLoginScenario().saveBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD, reviewOneTimePaymentsPage);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("one time payments dashboard page not found");
@@ -1482,11 +1371,9 @@ public class OneTimePaymentAarpStepDefintion {
 	public void user_validates_Payment_History_PageDetails() {
 		OneTimePaymentsPage oneTimePaymentsPage = (OneTimePaymentsPage) getLoginScenario()
 				.getBean(PageConstantsMnR.ONE_TIME_PAYMENTS_DASHBOARD);
-		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = oneTimePaymentsPage
-				.HistoryPageValidation();
+		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = oneTimePaymentsPage.HistoryPageValidation();
 		if (reviewOneTimePaymentsPage != null) {
-			getLoginScenario().saveBean(PageConstantsMnR.PAYMENT_HISTORY_PAGE,
-					reviewOneTimePaymentsPage);
+			getLoginScenario().saveBean(PageConstantsMnR.PAYMENT_HISTORY_PAGE, reviewOneTimePaymentsPage);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("one time payments dashboard page not found");
@@ -1497,31 +1384,21 @@ public class OneTimePaymentAarpStepDefintion {
 	public void review_onetime_payments_validation() {
 		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = (ReviewOneTimePaymentsPage) getLoginScenario()
 				.getBean(PageConstantsMnR.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD);
-		JSONObject reviewOneTimeActual = reviewOneTimePaymentsPage
-				.reviewOneTimeValues();
+		JSONObject reviewOneTimeActual = reviewOneTimePaymentsPage.reviewOneTimeValues();
 		/* Get expected data */
 		String fileName = "reviewonetimeexpected";
-		String directory = CommonConstants.MEMBER_EXPECTED_DIRECTORY
-				+ File.separator + CommonConstants.SITE_ULAYER + File.separator
-				+ PaymentCommonConstants.ONE_TIME_PAYMENTS_FLOW_NAME
-				+ File.separator;
-		JSONObject reviewOneTimeExpectedJson = MRScenario.readExpectedJson(
-				fileName, directory);
+		String directory = CommonConstants.MEMBER_EXPECTED_DIRECTORY + File.separator + CommonConstants.SITE_ULAYER
+				+ File.separator + PaymentCommonConstants.ONE_TIME_PAYMENTS_FLOW_NAME + File.separator;
+		JSONObject reviewOneTimeExpectedJson = MRScenario.readExpectedJson(fileName, directory);
 
-		getLoginScenario().saveBean(
-				PaymentCommonConstants.ONE_TIME_PAYMENTS_ACTUAL,
-				reviewOneTimeActual);
-		getLoginScenario().saveBean(
-				PaymentCommonConstants.ONE_TIME_PAYMENTS_EXPECTED,
-				reviewOneTimeExpectedJson);
+		getLoginScenario().saveBean(PaymentCommonConstants.ONE_TIME_PAYMENTS_ACTUAL, reviewOneTimeActual);
+		getLoginScenario().saveBean(PaymentCommonConstants.ONE_TIME_PAYMENTS_EXPECTED, reviewOneTimeExpectedJson);
 
 		System.out.println("reviewOneTimeActual---->" + reviewOneTimeActual);
-		System.out.println("reviewOneTimeExpectedJson---->"
-				+ reviewOneTimeExpectedJson);
+		System.out.println("reviewOneTimeExpectedJson---->" + reviewOneTimeExpectedJson);
 
 		try {
-			JSONAssert.assertEquals(reviewOneTimeExpectedJson,
-					reviewOneTimeActual, true);
+			JSONAssert.assertEquals(reviewOneTimeExpectedJson, reviewOneTimeActual, true);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1533,7 +1410,434 @@ public class OneTimePaymentAarpStepDefintion {
 	public void user_clicks_cancelbtn_onOnetimePaymentPage() {
 		OneTimePaymentsPage oneTimePaymentsPage = (OneTimePaymentsPage) getLoginScenario()
 				.getBean(PageConstantsMnR.ONE_TIME_PAYMENTS_DASHBOARD);
-		oneTimePaymentsPage
-				.onetimepagecancelbtn();
+		oneTimePaymentsPage.onetimepagecancelbtn();
+	}
+
+	@When("^the user clicks on Premium Payments on Header$")
+	public void the_user_clicks_on_Premium_Payments_on_Header() throws Throwable {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+		PaymentHistoryPage paymentHistoryPage = accountHomePage.navigateTooPaymentHistoryPage();
+		if (paymentHistoryPage != null) {
+			getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
+			System.out.println("User is on Payment overview screen");
+		}
+	}
+
+	@When("^user clicks on Make one time payment on payment overview page$")
+	public void user_clicks_on_Make_one_time_payment_on_payment_overview_page() throws Throwable {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		OneTimePaymentPage oneTimePaymentPage = paymentHistoryPage.clickOnMakeOneTimePayment();
+		if (oneTimePaymentPage != null) {
+			getLoginScenario().saveBean(PageConstants.One_Time_Payments_Page, oneTimePaymentPage);
+			System.out.println("User is on Make one time payment screen");
+		}
+	}
+
+	@When("^user selects other amount and enters \"([^\"]*)\" and selects credit card and click on Next button$")
+	public void user_selects_other_amount_and_enters_and_selects_credit_card_and_click_on_Next_button(
+			String otherAmountvalue) throws Throwable {
+		OneTimePaymentPage oneTimePaymentPage = (OneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.One_Time_Payments_Page);
+		oneTimePaymentPage.selectAndEnterAmount(otherAmountvalue);
+		oneTimePaymentPage.selectCreditCardOption();
+		CreditCardUPGPage creditCardPaymentPage = oneTimePaymentPage.clickOnNextButton();
+		if (creditCardPaymentPage != null) {
+			getLoginScenario().saveBean(PageConstants.Credit_Card_Payments_Page, creditCardPaymentPage);
+			System.out.println("User is on UPG Credit cards page");
+
+		}
+	}
+
+	@When("^user selects Amount due today and selects credit card and click on Next button$")
+	public void user_selects_Amount_due_today_and_selects_credit_card_and_click_on_Next_button() throws Throwable {
+		OneTimePaymentPage oneTimePaymentPage = (OneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.One_Time_Payments_Page);
+		oneTimePaymentPage.selectAmountDueToday();
+		oneTimePaymentPage.selectCreditCardOption();
+		CreditCardUPGPage creditCardPaymentPage = oneTimePaymentPage.clickOnNextButton();
+		if (creditCardPaymentPage != null) {
+			getLoginScenario().saveBean(PageConstants.Credit_Card_Payments_Page, creditCardPaymentPage);
+			System.out.println("User is on UPG Credit cards page");
+		}
+
+	}
+
+	@Then("^user Navigates to UPG payment page and Enter Mandatory fields and click on Proceed$")
+	public void user_Navigates_to_UPG_payment_page_and_Enter_Mandatory_fields_and_click_on_Proceed(
+			DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		CreditCardUPGPage creditCardPaymentPage = (CreditCardUPGPage) getLoginScenario()
+				.getBean(PageConstants.Credit_Card_Payments_Page);
+		ReviewOneTimePaymentPage reviewOneTimePaymentsPage = creditCardPaymentPage.EnterFiledsOnCC(memberAttributesMap);
+		if (reviewOneTimePaymentsPage != null) {
+			getLoginScenario().saveBean(PageConstants.Review_OneTime_Payments_Page, reviewOneTimePaymentsPage);
+			System.out.println("User is on Review One time payments page");
+
+		}
+	}
+
+	@Then("^user Navigates to UPG payment page and Enter Mandatory fields and click on Proceed for Recurring$")
+	public void user_Navigates_to_UPG_payment_page_and_Enter_Mandatory_fields_and_click_on_Proceed_for_Recurring(
+			DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		CreditCardUPGPage creditCardPaymentPage = (CreditCardUPGPage) getLoginScenario()
+				.getBean(PageConstants.Credit_Card_Payments_Page);
+		ReviewAutomaticPage reviewAutomaticPage = creditCardPaymentPage.EnterFiledsOnCCforREC(memberAttributesMap);
+		if (reviewAutomaticPage != null) {
+			getLoginScenario().saveBean(PageConstants.Review_Automatic_Page, reviewAutomaticPage);
+			System.out.println("User is on Review Recurring Payments page");
+
+		}
+	}
+
+	@Then("^user navigates to payment overview screen and selects agreements and click on Make one time payemnt$")
+	public void user_navigates_to_payment_overview_screen_and_selects_agreements_and_click_on_Make_one_time_payemnt()
+			throws Throwable {
+		ReviewOneTimePaymentPage reviewOneTimePaymentsPage = (ReviewOneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.Review_OneTime_Payments_Page);
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = reviewOneTimePaymentsPage
+				.selectAgreeAndClickOnMakePayment();
+		if (confirmOneTimePaymentPage != null) {
+			getLoginScenario().saveBean(PageConstants.ONE_TIME_PAYMENT_PAGE, confirmOneTimePaymentPage);
+			System.out.println("User is on Review One time payments page");
+
+		}
+	}
+
+	@Then("^User navigates to payment confirmation page for CC flow$")
+	public void user_navigates_to_payment_confirmation_page_for_CC_flow() throws Throwable {
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = (ConfirmOneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.ONE_TIME_PAYMENT_PAGE);
+		confirmOneTimePaymentPage.OneTimeCCverification();
+	}
+
+	@Given("^user clicks on Set up Automatic payments on payment overview page$")
+	public void user_clicks_on_Set_up_Automatic_payments_on_payment_overview_page() throws Throwable {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		SetUpRecurringPage setupRecurringPage = paymentHistoryPage.clickOnSetUPAutomaticPayment();
+		if (setupRecurringPage != null) {
+			getLoginScenario().saveBean(PageConstants.SetUp_Recurring_Page, setupRecurringPage);
+			System.out.println("User is on Setup Recurring Payments screen");
+		}
+	}
+
+	@Given("^user selects checking Account on Setup Automatic recurring payments page and Click on Next$")
+	public void user_selects_checking_Account_on_Setup_Automatic_recurring_payments_page_and_Click_on_Next()
+			throws Throwable {
+		SetUpRecurringPage setupRecurringPage = (SetUpRecurringPage) getLoginScenario()
+				.getBean(PageConstants.SetUp_Recurring_Page);
+		PaymentsFormPage paymentsFormPage = setupRecurringPage.selectCheckingAccountAndClickOnNext();
+		if (paymentsFormPage != null) {
+			getLoginScenario().saveBean(PageConstants.Payments_Form_Page, paymentsFormPage);
+			System.out.println("User is on Form Page for Checking account");
+		}
+	}
+
+	@Given("^user selects CreditDebit Card on Setup Automatic recurring payments page and Click on Next$")
+	public void user_selects_CreditDebit_Card_on_Setup_Automatic_recurring_payments_page_and_Click_on_Next()
+			throws Throwable {
+		SetUpRecurringPage setupRecurringPage = (SetUpRecurringPage) getLoginScenario()
+				.getBean(PageConstants.SetUp_Recurring_Page);
+		CreditCardUPGPage creditCardPaymentPage = setupRecurringPage.selectCCAndClickOnNext();
+		if (creditCardPaymentPage != null) {
+			getLoginScenario().saveBean(PageConstants.Credit_Card_Payments_Page, creditCardPaymentPage);
+			System.out.println("User is on UPG Page");
+		}
+	}
+
+	@Given("^user Enters all Mandatory fields on form page and click on Authorize button$")
+	public void user_Enters_all_Mandatory_fields_on_form_page_and_click_on_Authorize_button(DataTable givenAttributes)
+			throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		PaymentsFormPage paymentsFormPage = (PaymentsFormPage) getLoginScenario()
+				.getBean(PageConstants.Payments_Form_Page);
+		ReviewAutomaticPage reviewAutomaticPage = paymentsFormPage.EnterFiledsOnEFTforSetup(memberAttributesMap);
+		if (reviewAutomaticPage != null) {
+			getLoginScenario().saveBean(PageConstants.Review_Automatic_Page, reviewAutomaticPage);
+			System.out.println("User is on Review Automatic payment for Checking account");
+		}
+
+	}
+
+	@Given("^user navigates to review your Automatic screen and selects agreements and click on Authorize Monthly payments Button for EFT$")
+	public void user_navigates_to_review_your_Automatic_screen_and_selects_agreements_and_click_on_Authorize_Monthly_payments_Button_for_EFT()
+			throws Throwable {
+		ReviewAutomaticPage reviewAutomaticPage = (ReviewAutomaticPage) getLoginScenario()
+				.getBean(PageConstants.Review_Automatic_Page);
+		RecurringConfirmationPage recurringConfirmationPage = reviewAutomaticPage
+				.selectAgreeAndClickOnAuthorizeMonthyPaymentsforEFT();
+		if (recurringConfirmationPage != null) {
+			getLoginScenario().saveBean(PageConstants.Recurring_Confirmation_Page, recurringConfirmationPage);
+			System.out.println("User is on recurring confirmation page for Checking account");
+		}
+	}
+
+	@Given("^user navigates to Review Payment Method Update screen and selects agreements and click on Authorize Monthly payments Button for EFT$")
+	public void user_navigates_to_Review_Payment_Method_Update_screen_and_selects_agreements_and_click_on_Authorize_Monthly_payments_Button_for_EFT()
+			throws Throwable {
+		UpdateReviewPage updateReviewPage = (UpdateReviewPage) getLoginScenario()
+				.getBean(PageConstants.Update_Review_Page);
+		UpdateConfirmationPage updateConfirmationPage = updateReviewPage.selectAgreeAndClickOnContinueforEFT();
+		if (updateConfirmationPage != null) {
+			getLoginScenario().saveBean(PageConstants.Update_Confirmation_Page, updateConfirmationPage);
+			System.out.println("User is on Update confirmation page for Checking account");
+		}
+	}
+
+	@Given("^user navigates to review your Automatic screen and selects agreements and click on Authorize Monthly payments Button for CC$")
+	public void user_navigates_to_review_your_Automatic_screen_and_selects_agreements_and_click_on_Authorize_Monthly_payments_Button_for_CC()
+			throws Throwable {
+		ReviewAutomaticPage reviewAutomaticPage = (ReviewAutomaticPage) getLoginScenario()
+				.getBean(PageConstants.Review_Automatic_Page);
+		RecurringConfirmationPage recurringConfirmationPage = reviewAutomaticPage.selectAgreeAndClickOnContinueforCC();
+		if (recurringConfirmationPage != null) {
+			getLoginScenario().saveBean(PageConstants.Recurring_Confirmation_Page, recurringConfirmationPage);
+			System.out.println("User is on recurring confirmation page for CC");
+		}
+	}
+
+	@Then("^User navigates to payment confirmation page and verifies ConfirmationNo for EFT$")
+	public void user_navigates_to_payment_confirmation_page_and_verifies_ConfirmationNo_for_EFT() throws Throwable {
+		RecurringConfirmationPage recurringConfirmationPage = (RecurringConfirmationPage) getLoginScenario()
+				.getBean(PageConstants.Recurring_Confirmation_Page);
+		recurringConfirmationPage.validateEFTRecurrVerification();
+
+	}
+
+	@Then("^User navigates to payment confirmation page and verifies ConfirmationNo for CC$")
+	public void user_navigates_to_payment_confirmation_page_and_verifies_ConfirmationNo_for_CC() throws Throwable {
+		RecurringConfirmationPage recurringConfirmationPage = (RecurringConfirmationPage) getLoginScenario()
+				.getBean(PageConstants.Recurring_Confirmation_Page);
+		recurringConfirmationPage.validateCCRecurrVerification();
+
+	}
+
+	@Given("^user clicks on Update Automatic payments on payment overview page$")
+	public void user_clicks_on_Update_Automatic_payments_on_payment_overview_page() throws Throwable {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		UpdateRecurringPage updateRecurringPage = paymentHistoryPage.clickOnEditAutomaticPayment();
+		if (updateRecurringPage != null) {
+			getLoginScenario().saveBean(PageConstants.Update_Recurring_Page, updateRecurringPage);
+			System.out.println("User is on Setup Recurring Payments screen");
+		}
+	}
+
+	  @Given("^user clicks on Stop Automatic payments and clicks on next on Setup recurring payments page$")
+	public void user_clicks_on_Stop_Automatic_payments_and_clicks_on_next_on_Setup_recurring_payments_page() throws Throwable {
+		UpdateRecurringPage updateRecurringPage = (UpdateRecurringPage) getLoginScenario()
+				.getBean(PageConstants.Update_Recurring_Page);
+		UpdateReviewPage updateReviewPage = updateRecurringPage.selectCancelAutomaticPaymentsAndClicksNext();
+		if (updateReviewPage!= null){
+			getLoginScenario().saveBean(PageConstants.Update_Review_Page, updateReviewPage);
+			System.out.println("User is on Review Recurring Payments screen"); 
+		}
+		
+	}
+	
+	@Then("^user navigates to Review Automatic page for Stop Recurring Payments$")
+	public void user_navigates_to_Review_Automatic_page_for_Stop_recurring_payments_page() throws Throwable {
+		UpdateReviewPage updateReviewPage = (UpdateReviewPage) getLoginScenario()
+				.getBean(PageConstants.Update_Review_Page);
+		UpdateConfirmationPage updateConfirmationPage = updateReviewPage.selectAgreeAndClickOnContinueforStopRecurring();
+		if (updateConfirmationPage!= null){
+			getLoginScenario().saveBean(PageConstants.Update_Confirmation_Page, updateConfirmationPage);
+			System.out.println("User is on Review Recurring Payments screen");
+		}
+		}
+		
+		
+
+	@Given("^user selects checking Account on Update Automatic recurring payments page and Click on Next$")
+	public void user_selects_checking_Account_on_Update_Automatic_recurring_payments_page_and_Click_on_Next()
+			throws Throwable {
+		UpdateRecurringPage updateRecurringPage = (UpdateRecurringPage) getLoginScenario()
+				.getBean(PageConstants.Update_Recurring_Page);
+		PaymentsFormPage paymentsFormPage = updateRecurringPage.selectCheckingAccountAndClickOnNext();
+		if (paymentsFormPage != null) {
+			getLoginScenario().saveBean(PageConstants.Payments_Form_Page, paymentsFormPage);
+			System.out.println("User is on Form Page for Checking account");
+		}
+	}
+
+	@Given("^user Enters all Mandatory fields on form page and click on Authorize button for Update Recurring$")
+	public void user_Enters_all_Mandatory_fields_on_form_page_and_click_on_Authorize_button_for_Update_Recurring(
+			DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		PaymentsFormPage paymentsFormPage = (PaymentsFormPage) getLoginScenario()
+				.getBean(PageConstants.Payments_Form_Page);
+		UpdateReviewPage updateReviewPage = paymentsFormPage.EnterFiledsOnEFTforUpdate(memberAttributesMap);
+		if (updateReviewPage != null) {
+			getLoginScenario().saveBean(PageConstants.Update_Review_Page, updateReviewPage);
+			System.out.println("User is on Update Review Automatic payment for Checking account");
+		}
+
+	}
+
+	@Then("^User navigates to payment confirmation page and verifies ConfirmationNo for EFT for Update Recurring$")
+	public void user_navigates_to_payment_confirmation_page_and_verifies_ConfirmationNo_for_EFT_for_Update_Recurring()
+			throws Throwable {
+		UpdateConfirmationPage updateConfirmationPage = (UpdateConfirmationPage) getLoginScenario()
+				.getBean(PageConstants.Update_Confirmation_Page);
+		updateConfirmationPage.validateEFTUpdateVerification();
+
+	}
+
+	@Given("^user selects CreditDebit Card on Update Automatic recurring payments page and Click on Next$")
+	public void user_selects_CreditDebit_Card_on_Update_Automatic_recurring_payments_page_and_Click_on_Next()
+			throws Throwable {
+		UpdateRecurringPage updateRecurringPage = (UpdateRecurringPage) getLoginScenario()
+				.getBean(PageConstants.Update_Recurring_Page);
+		CreditCardUPGPage creditCardPaymentPage = updateRecurringPage.selectCCAndClickOnNext();
+		if (creditCardPaymentPage != null) {
+			getLoginScenario().saveBean(PageConstants.Credit_Card_Payments_Page, creditCardPaymentPage);
+			System.out.println("User is on UPG Page");
+		}
+	}
+
+	@Then("^user Navigates to UPG payment page and Enter Mandatory fields and click on Proceed for Update Recurring$")
+	public void user_Navigates_to_UPG_payment_page_and_Enter_Mandatory_fields_and_click_on_Proceed_for_Update_Recurring(
+			DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		CreditCardUPGPage creditCardPaymentPage = (CreditCardUPGPage) getLoginScenario()
+				.getBean(PageConstants.Credit_Card_Payments_Page);
+		UpdateReviewPage updateReviewPage = creditCardPaymentPage.EnterFiledsOnCCforUpdateREC(memberAttributesMap);
+		if (updateReviewPage != null) {
+			getLoginScenario().saveBean(PageConstants.Update_Review_Page, updateReviewPage);
+			System.out.println("User is on Update Review Payments page");
+
+		}
+	}
+
+	@Given("^user navigates to Review Payment Method Update screen and selects agreements and click on Authorize Monthly payments Button for CC$")
+	public void user_navigates_to_Review_Payment_Method_Update_screen_and_selects_agreements_and_click_on_Authorize_Monthly_payments_Button_for_CC()
+			throws Throwable {
+		UpdateReviewPage updateReviewPage = (UpdateReviewPage) getLoginScenario()
+				.getBean(PageConstants.Update_Review_Page);
+		UpdateConfirmationPage updateConfirmationPage = updateReviewPage.selectAgreeAndClickOnContinueforCC();
+		if (updateConfirmationPage != null) {
+			getLoginScenario().saveBean(PageConstants.Update_Confirmation_Page, updateConfirmationPage);
+			System.out.println("User is on Update Confirmation for CC");
+		}
+	}
+
+	@Then("^User navigates to payment confirmation page and verifies ConfirmationNo for CC for Update Recurring$")
+	public void user_navigates_to_payment_confirmation_page_and_verifies_ConfirmationNo_for_CC_for_Update_Recurring()
+			throws Throwable {
+		UpdateConfirmationPage updateConfirmationPage = (UpdateConfirmationPage) getLoginScenario()
+				.getBean(PageConstants.Update_Confirmation_Page);
+		updateConfirmationPage.validateCCUpdateVerification();
+
+	}
+
+	@Given("^user Enters all Mandatory fields on form page and click on Electronic Signature and click on Contuine for Update Recurring for Ship$")
+	public void user_Enters_all_Mandatory_fields_on_form_page_and_click_on_Electronic_Signature_and_click_on_Contuine_for_Update_Recurring_for_Ship(
+			DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		PaymentsFormPage paymentsFormPage = (PaymentsFormPage) getLoginScenario()
+				.getBean(PageConstants.Payments_Form_Page);
+		UpdateReviewPage updateReviewPage = paymentsFormPage.EnterFiledsOnEFTforUpdateForShip(memberAttributesMap);
+		if (updateReviewPage != null) {
+			getLoginScenario().saveBean(PageConstants.Update_Review_Page, updateReviewPage);
+			System.out.println("User is on Update Review Automatic payment for Checking account");
+		}
+
+	}
+
+	@Given("^user clicks on Update Automatic payments on payment overview page for Ship$")
+	public void user_clicks_on_Update_Automatic_payments_on_payment_overview_page_for_Ship() throws Throwable {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		UpdateRecurringPage updateRecurringPage = paymentHistoryPage.clickOnEditAutomaticPaymentforShip();
+		if (updateRecurringPage != null) {
+			getLoginScenario().saveBean(PageConstants.Update_Recurring_Page, updateRecurringPage);
+			System.out.println("User is on Setup Recurring Payments screen");
+		}
+	}
+
+	@Given("^user navigates to Review Payment Method Update screen and selects agreements and click on Contuine Button for EFT Ship$")
+	public void user_navigates_to_Review_Payment_Method_Update_screen_and_selects_agreements_and_click_on_Contuine_Button_for_EFT_Ship()
+			throws Throwable {
+		UpdateReviewPage updateReviewPage = (UpdateReviewPage) getLoginScenario()
+				.getBean(PageConstants.Update_Review_Page);
+		UpdateConfirmationPage updateConfirmationPage = updateReviewPage.selectAgreeAndClickOnContinueforEFTForShip();
+		if (updateConfirmationPage != null) {
+			getLoginScenario().saveBean(PageConstants.Update_Confirmation_Page, updateConfirmationPage);
+			System.out.println("User is on recurring confirmation page for Checking account");
+		}
+	}
+
+	@Then("^User navigates to payment confirmation page and verifies sucessful EFT for Update Recurring for Ship$")
+	public void user_navigates_to_payment_confirmation_page_and_verifies_sucessful_EFT_for_Update_Recurring_for_Ship()
+			throws Throwable {
+		UpdateConfirmationPage updateConfirmationPage = (UpdateConfirmationPage) getLoginScenario()
+				.getBean(PageConstants.Update_Confirmation_Page);
+		updateConfirmationPage.validateEFTUpdateVerificationforShip();
+
+	}
+
+	@Given("^user selects Stop Automatic Recurring Payments and Click on Next$")
+	public void user_selects_Stop_Automatic_Recurring_Payments_and_Click_on_Next() throws Throwable {
+		UpdateRecurringPage updateRecurringPage = (UpdateRecurringPage) getLoginScenario()
+				.getBean(PageConstants.Update_Recurring_Page);
+		PaymentsFormPage paymentsFormPage = updateRecurringPage.selectCheckingAccountAndClickOnNext();
+		if (paymentsFormPage != null) {
+			getLoginScenario().saveBean(PageConstants.Payments_Form_Page, paymentsFormPage);
+			System.out.println("User is on Form Page for Checking account");
+		}
+	}
+
+	@Given("^user navigates to Review Payment Method Update screen and selects agreements and click on Contuine Button for Stop recurring Ship$")
+	public void user_navigates_to_Review_Payment_Method_Update_screen_and_selects_agreements_and_click_on_Contuine_Button_for_Stop_recurring_Ship()
+			throws Throwable {
+		UpdateReviewPage updateReviewPage = (UpdateReviewPage) getLoginScenario()
+				.getBean(PageConstants.Update_Review_Page);
+		UpdateConfirmationPage updateConfirmationPage = updateReviewPage.selectAgreeAndClickOnContinueforStopForShip();
+		if (updateConfirmationPage != null) {
+			getLoginScenario().saveBean(PageConstants.Update_Confirmation_Page, updateConfirmationPage);
+			System.out.println("User is on recurring confirmation page for Checking account");
+		}
+	}
+
+	@Then("^User navigates to payment confirmation page and verifies sucessful Stop Recurring for Ship$")
+	public void user_navigates_to_payment_confirmation_page_and_verifies_sucessful_Stop_Recurring_for_Ship()
+			throws Throwable {
+		UpdateConfirmationPage updateConfirmationPage = (UpdateConfirmationPage) getLoginScenario()
+				.getBean(PageConstants.Update_Confirmation_Page);
+		updateConfirmationPage.validateStopRevurringVerificationforShip();
+
 	}
 }
