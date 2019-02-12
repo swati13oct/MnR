@@ -1,11 +1,16 @@
 package pages.regression.payments;
 
+import java.util.List;
+
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import com.google.common.base.Strings;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -55,6 +60,23 @@ public class ConfirmOneTimePaymentPage extends UhcDriver {
 		openAndValidate();
 	}
 
+	public void PaymentsDataVerificationonConfirmationPage()
+	{
+		List<WebElement> rowsList = driver.findElements(By.xpath("//div[@class='table-body-row']"));
+		List<WebElement> columnsList = null;
+		for (WebElement row : rowsList) {
+			System.out.println();
+			columnsList = row.findElements(By.tagName("div"));
+
+			for (WebElement column : columnsList) {
+				System.out.print(column.getText() + " - ");
+				if ((Strings.isNullOrEmpty(column.getText()))) {
+					Assert.fail("Coloumn Header or value is null");
+				}
+			}
+		}
+	}
+	
 	public OneTimePaymentSuccessPage confirmsPayment() {
 
 		try {
@@ -258,6 +280,7 @@ public class ConfirmOneTimePaymentPage extends UhcDriver {
 
 	public void OneTimeCCverification() {
 		validate(ConfirmationNumber);
+		PaymentsDataVerificationonConfirmationPage();
 		System.out.println("Your Confimation Number is : " + ConfirmationNumber.getText());
 
 	}
