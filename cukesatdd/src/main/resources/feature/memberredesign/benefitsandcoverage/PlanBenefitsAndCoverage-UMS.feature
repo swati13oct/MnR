@@ -135,7 +135,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | 15087 | MAPD     | NICEBenefits_BnC |
 
   @benefitsAndCoverage9 @BenefitsForAlPeehipMember @regression @regressionMember
-  Scenario Outline: Verify the benefits for an AL peehip member
+  Scenario Outline:TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the benefits for an AL peehip member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -203,7 +203,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       
 
   @benefitsAndCoverage14 @CMFedDrugNonLis
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify all sections for Ind NonLIS member on Benefits and Coverage page
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify all sections for Ind NonLIS member on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
@@ -259,7 +259,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | 15097 | PCP      |  Individual_BnC |  NON LIS      | ESPAÑOL  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | Lista de Medicamentos Alternativos | BDFAEC CBADEADF      | 945007888-00 | 01/01/2018    | Not Available  | Tier 2          | true       |
       
   @benefitsAndCoverage15 @CMFedPDPNonLis 
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify all sections for PDP Ind NonLIS member on Benefits and Coverage page
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify all sections for PDP Ind NonLIS member on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
@@ -413,7 +413,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
 
   #note: this scenario covers multiple testcases TID 15094,15240
   @benefitsAndCoverage22 @CMShip
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify that Page Headers are in place on Benefits and Coverage page
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify that Page Headers are in place on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -442,7 +442,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
 
 
   @benefitsAndCoverage23 @CMmapdindlis
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify PDF section is in place on Benefits and Coverage page for Lis user
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify PDF section is in place on Benefits and Coverage page for Lis user
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
@@ -493,7 +493,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
 
 
   @benefitsAndCoverage24 @CMpdpindlis
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify all sections for Ind LIS1 member on Benefits and Coverage page
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify all sections for Ind LIS1 member on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
@@ -541,7 +541,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
 
 
   @benefitsAndCoverage25 @CMMapdGroupNonLis
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify all sections for Group NonLIS member on Benefits and Coverage page
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify all sections for Group NonLIS member on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
@@ -605,7 +605,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
 
 
   @benefitsAndCoverage27 @CMPDPGroupNonLis
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify all sections for PDP Group NonLIS member on Benefits and Coverage page
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify all sections for PDP Group NonLIS member on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
@@ -649,7 +649,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
 
 
   @benefitsAndCoverage28 @CMvasnegativescenario
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify that DisocuntServices section is visible on Benefits and coverage page for PDP nonLis member
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify that DisocuntServices section is visible on Benefits and coverage page for PDP nonLis member
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
@@ -740,8 +740,9 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | 15238 | MAPD     | Individual_BnC | NON LIS       |
  
 
+  #note: Feature - F230250, User story -  US1410989
   @benefitsAndCoverage33 @optumRxWidget @Feb_release_2019 
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify link to Optum Rx in Benefits and Coverage page
+  Scenario Outline: UID: <UID> -plan: <planType> -memberType: <memberType> - Verify link to Optum Rx in Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -749,9 +750,8 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     Then user validates the Optum Rx link in Benefits and Coverage page
 
     Examples: 
-      | TID   | planType | memberType     |
-      | 15367 | MAPDVill | Individual_BnC |
-      
+      | UID   | planType | memberType     |
+      | 1410989 | MAPDVill | Individual_BnC |
 
   @benefitsAndCoverage34 @PlanBFSJMPLinks @Feb_release_2019 @gladiators
   Scenario Outline: Verify jump links for individual MAPD member
@@ -915,7 +915,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
 
 
   @benefitsAndCoverage39 @UpdatedTextDocumentsAndResources @dec_release_2018
-  Scenario Outline: Verify updated text for Pdfs in Documents and Resources
+  Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> - Verify updated text for Pdfs in Documents and Resources
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -923,7 +923,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     And the user validates the UpdatedText
 
    Examples: 
-      | planType | memberType            |
-      | MAPD     | IndividualUHCPayments |
+      | FID | planType | memberType            |
+      | 231151 | MAPD     | IndividualUHCPayments |
       
       
