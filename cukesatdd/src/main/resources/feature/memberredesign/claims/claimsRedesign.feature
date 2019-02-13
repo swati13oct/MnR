@@ -2,7 +2,7 @@
 Feature: T1.1To validate the new changes related to claims page on the member redesigned site
 
 @claims1 @claimsSummaryFED
-Scenario Outline: To validate the claims present for the Federal member on claims summary page for federal members
+Scenario Outline:  TID: <TID> -plan: <planType> - To validate the claims present for the Federal member on claims summary page for federal members
 Given login with following details logins in the member portal and validate elements
   | Plan Type      | <planType>     |
   | Test Data Type | <claimssystem> |
@@ -20,14 +20,15 @@ And the user validates the DownloadMyData section in redesigned site
 #    Then I navigate to the Claim Details page in redesigned site
 #    And I validate the Claims Total in claims details page in AARP site
 Examples: 
-     | planType | claimPeriod    | domain | claimssystem |
-     | MAPD     | Last 24 months | COSMOS | COSMOSCLAIMS |
-     | MA       | Last 24 months | NICE   | NICECLAIMS   |
-     | MAPD       | Last 24 months | NICE   | NICECLAIMS   |
-     | PDP      | Last 24 months | RX     | RXCLAIMS     |
+    | TID | planType | claimPeriod    | domain | claimssystem |
+  	| 15230   | MAPD     | Last 24 months | COSMOS | COSMOSCLAIMS |
+  	 #|15234  | MA       | Last 24 months | COSMOS   | COSMOSCLAIMS   |
+    |15227  | MA       | Last 24 months | NICE   | NICECLAIMS   |
+    |15235 | MAPD       | Last 24 months | NICE   | NICECLAIMS   |
+    |15299  | PDP      | Last 24 months | RX     | RXCLAIMS     |
 
 @claims2 @claimsSummarySHIP  @febrelease
-Scenario Outline: To validate the claims present for the SHIP member on claims summary page for SHIP members
+Scenario Outline:  TID: <TID> -plan: <planType> -To validate the claims present for the SHIP member on claims summary page for SHIP members
 Given login with following details logins in the member portal and validate elements
   | Plan Type      | <planType>     |
   | Test Data Type | <claimssystem> |
@@ -44,11 +45,11 @@ And the user validates the EOB section based on domain in redesigned site
 Then I navigate to the Claim Details page in redesigned site
 Then I validate the Claims Table in claims details page in redesigned site    
 Examples: 
-      | planType | claimPeriod    | domain | claimssystem |
-      | SHIP     | Last 24 Months | NA     | SHIPCLAIMS   |
+    | TID  | planType | claimPeriod    | domain | claimssystem |
+    |15236  | SHIP     | Last 24 Months | NA     | SHIPCLAIMS   |
  
 @claims3 @claimsDetailsTableFED 
-Scenario Outline: To Verify Claim Table on Claims Details Page for federal members
+Scenario Outline:  TID: <TID> -plan: <planType> -To Verify Claim Table on Claims Details Page for federal members
 Given login with following details logins in the member portal and validate elements
   | Plan Type      | <planType>     |
   | Test Data Type | <claimssystem> |
@@ -64,12 +65,12 @@ When I navigate to the Claim Details page for federal members
 And I validate the Claims Table in claims details page for federal members
 And I validate the Claims Total in claims details page in AARP site
 Examples: 
-  | planType | claimPeriod    | claimssystem |
-  | MA       | Last 24 months | NICECLAIMS   |
-  | MAPD     | Last 24 months | COSMOSCLAIMS |
+   | TID | planType | claimPeriod    | claimssystem |
+  | 15227    | MA       | Last 24 months | NICECLAIMS   |
+  | 15235   | MAPD     | Last 24 months | COSMOSCLAIMS |
     
 @claims4 @ClaimsDetailsSHIP
-Scenario Outline: To Verify Learn more section on Claims Details Page
+Scenario Outline:  TID: <TID> -plan: <planType> -To Verify Learn more section on Claims Details Page
 Given login with following details logins in the member portal and validate elements
   | Plan Type      | <planType>     |
   | Test Data Type | <claimssystem> |
@@ -81,12 +82,12 @@ Then I can see the claims displayed based on the selection in redesigned site
 When I navigate to the Claim Details page for federal members
 And I validate the Claims Table in claims details page for federal members
 Examples: 
-   | planType | claimPeriod    | claimssystem |
-   | SHIP     | Last 24 Months | SHIPCLAIMS   |
+  | TID  | planType | claimPeriod    | claimssystem |
+  | 15236   | SHIP     | Last 24 Months | SHIPCLAIMS   |
    
   
 @claims5 @TC10_COMBO
-Scenario Outline: To validate the claims present for the Combo member on claims sumamry page & the Details on the Claims Details page 
+Scenario Outline:  TID: <TID> -plan: <planType> -To validate the claims present for the Combo member on claims sumamry page & the Details on the Claims Details page 
 Given login with following details logins in the member portal and validate elements
   | Plan Type      | <planType>     |
   | Test Data Type | <claimssystem> |
@@ -109,19 +110,19 @@ And I validate the two COMBO tabs on the page
 And I validate the two COMBO tabs on the claim Summary page 
 #And the user validates the DownloadMyData section in redesigned site   
 Examples: 
-   | planType | claimPeriod    | domain | claimssystem |
-   | SHIP    | Last 24 months  | NA      |    COSMOSCLAIMS |
+   | TID | planType | claimPeriod    | domain | claimssystem |
+   | 15259  | SHIP    | Last 24 months  | NA      |    COSMOSCLAIMS |
 
 @claims6 @TC_09claimsPHIP 
-Scenario Outline: To validate the Error Message for a PHIP  member on claims sumamry page
+Scenario Outline:  TID: <TID> -plan: <planType> -To validate the Error Message for a PHIP  member on claims sumamry page
 Given login with following details logins in the member portal and validate elements
   | Plan Type      | <planType>     |
   | Test Data Type | <claimssystem> |
 When I navigate to the claims Summary page in redesigned site
 And I validate the error message for a PHIP Member on the screen
 Examples: 
-   | planType | claimssystem |
-   | SHIP     | SHIPCLAIMS   |
+   | TID  | planType | claimssystem |
+   | 15258  | SHIP     | SHIPCLAIMS   |
   
    # This Scenario can only execute when max claims indicator as true
   #@MaxClaimsResultsError
@@ -170,7 +171,7 @@ Examples:
       #| MAPD     | Custom Search | 10/10/2017  | 06/14/2012    |
   
 @claims7  @claimsSummaryAndDetails 
-  Scenario Outline: To validate the claims present for the Federal member on claims sumamry page for AARP site
+  Scenario Outline:  TID: <TID> -plan: <planType> - To validate the claims present for the Federal member on claims sumamry page for AARP site
    Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>     |
       | Test Data Type | <claimssystem> |
@@ -190,12 +191,12 @@ Examples:
     And I validate the Claims Total in claims details page in AARP site
 
     Examples: 
-      | planType | claimPeriod    | domain | claimssystem |
-      | MAPD     | Last 24 months | NICE   | NICECLAIMS   | 
+     | TID  | planType | claimPeriod    | domain | claimssystem |
+     | 15235    | MAPD     | Last 24 months | NICE   | NICECLAIMS   | 
 
 
 @claims8 @TC03_FEDAARPIndividualPDP   
-    Scenario Outline: To validate the claims present for the Federal member on claims sumamry page for AARP site
+    Scenario Outline: TID: <TID> -plan: <planType> - To validate the claims present for the Federal member on claims sumamry page for AARP site
     Given login with following details logins in the member portal and validate elements
       
       | Plan Type      | <planType>     |
@@ -209,8 +210,8 @@ Examples:
     And the user validates the EOB section in redesigned site    
    # And the user validates the DownloadMyData section in redesigned site
     Examples: 
-      | planType | claimPeriod    | domain | claimssystem |
-      | PDP      | Last 24 months | RX     | RXCLAIMS     |
+     | TID  | planType | claimPeriod    | domain | claimssystem |
+     | 15299     | PDP      | Last 24 months | RX     | RXCLAIMS     |
      
         
 @claims9  @Tc02 @Tc05
@@ -240,7 +241,7 @@ Examples:
      
   
 @claims10  @TC01_FED_AARP_Individual_NICE @TC04_FED_UHC_Individual_COSMOS
-  Scenario Outline: To validate the claims present for the Federal member on claims sumamry page & the Details on the Claims Details page 
+  Scenario Outline:  TID: <TID> -plan: <planType> -To validate the claims present for the Federal member on claims sumamry page & the Details on the Claims Details page 
    Given login with following details logins in the member portal and validate elements
      
       | Plan Type      | <planType>     |
@@ -262,13 +263,13 @@ Examples:
     #And the user validates the DownloadMyData section in redesigned site
    
     Examples: 
-      | planType | claimPeriod    | domain | claimssystem |
-      | MA       | Last 24 months | NICE   | NICECLAIMS   |
-      #| MA       | Last 24 months | COSMOS | COSMOSCLAIMS |
+     | TID  | planType | claimPeriod    | domain | claimssystem |
+     | 15227     | MA       | Last 24 months | NICE   | NICECLAIMS   |
+      #| 15234    | MA       | Last 24 months | COSMOS | COSMOSCLAIMS |
       
      
 @claims11   @TC11_PCP
-  Scenario Outline: To validate the claims present for the Federal member on claims sumamry page for AARP site
+  Scenario Outline:  TID: <TID> -plan: <planType> -To validate the claims present for the Federal member on claims sumamry page for AARP site
    Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>     |
       | Test Data Type | <claimssystem> |
@@ -290,12 +291,12 @@ Examples:
     And I validate the claims history Button
    
     Examples: 
-      | planType | claimPeriod    | domain | claimssystem |
-      | PCP      | Last 24 months | PCP   | COSMOSCLAIMS   |
+   | TID  | planType | claimPeriod    | domain | claimssystem |
+   | 15268 | PCP      | Last 24 months | PCP   | COSMOSCLAIMS   |
       
     
 @claims12  @claimsprintanddownload @thePredator
-  	Scenario Outline: To validate the <claimssystem> on claims summary page
+  	Scenario Outline:  TID: <TID> -plan: <planType> -To validate the <claimssystem> on claims summary page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>     |
       | Test Data Type | <claimssystem> |
@@ -316,11 +317,11 @@ Examples:
     And I validate the EOB option in claims details page in redesigned site    
 
     Examples: 
-      | planType | claimPeriod    | domain | claimssystem |
-      | MAPD     | Last 24 Months | COSMOS     | COSMOSCLAIMS   |
+    | TID   | planType | claimPeriod    | domain | claimssystem |
+    | 15230    | MAPD     | Last 24 Months | COSMOS     | COSMOSCLAIMS   |
       
 @claims13   @claimsSummaryFEDError
-Scenario Outline: To validate the claims present for the Federal member on claims summary page for federal members
+Scenario Outline:  TID: <TID> -plan: <planType> -To validate the claims present for the Federal member on claims summary page for federal members
 Given login with following details logins in the member portal and validate elements
   | Plan Type      | <planType>     |
   | Test Data Type | <claimssystem> |
@@ -340,5 +341,5 @@ And the user search claims for the following time interval in redesigned site
 | Claims From Date | <claimFromDate>  |
 Then the user should be able to see the from date is greater than to date error message
 Examples: 
-     | planType | claimPeriod    | domain | claimssystem |claimToDate | claimFromDate |
-     | MAPD     |custom-search | COSMOS | COSMOSCLAIMS |11/06/2018  | 01/02/2019 |
+     | TID | planType | claimPeriod    | domain | claimssystem |claimToDate | claimFromDate |
+     |  15230  | MAPD     |custom-search | COSMOS | COSMOSCLAIMS |11/06/2018  | 01/02/2019 |

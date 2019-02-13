@@ -2,7 +2,7 @@
 Feature: To test the payment flow on Member site
 
   @paymentsFInal @paymentsOneTimePayments @regressionMember @payment1
-  Scenario Outline: Verify if the user is able to make one time payment.
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify if the user is able to make one time payment.
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -20,13 +20,12 @@ Feature: To test the payment flow on Member site
     And the user confirms the payment in AARP site
 
     Examples: 
-      | planType | memberType              | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
-      | MAPD     | IndividualUHCPayments   | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
-      #   | SHIP     | IndividualUHCPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
-      | SHIP     | IndividualAARPSPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
+      | TID   | planType | memberType              | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
+      | 15118 | MAPD     | IndividualUHCPayments   | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
+      | 15143 | SHIP     | IndividualAARPSPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
 
   @paymentsAutoPay @15301 @regressionMember @payment2
-  Scenario Outline: Verify Recurring Payment for Different Types of Member
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Recurring Payment for Different Types of Member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -44,8 +43,8 @@ Feature: To test the payment flow on Member site
     And the user confirms the Autopayment in UHC site
 
     Examples: 
-      | planType | memberType            | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
-      | MAPD     | IndividualUHCPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
+      | TID   | planType | memberType            | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
+      | 15118 | MAPD     | IndividualUHCPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
 
   @paymentsMoreThanOnePay @15142 @regressionMember @payment3
   Scenario Outline: Verify More Than one Payment Per day error message
@@ -79,12 +78,12 @@ Feature: To test the payment flow on Member site
     And the user confirms the Autopayment in UHC site
 
     Examples: 
-      | planType | memberType              | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
-      | MAPD     | IndividualAarpPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.12 |
+      | TID   | planType | memberType              | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
+      | 15142 | MAPD     | IndividualAarpPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.12 |
 
   #NOTE: Nov2018 - q2_jun_aarp0057 didn't work, swap to use other user
   @TestmemberAuth @15170 @regressionMember @payment4
-  Scenario Outline: To validate the Edit Payment flow for Member Auth
+  Scenario Outline: TID: <TID> -MemUserName: <MemUserName> - To validate the Edit Payment flow for Member Auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
@@ -96,13 +95,12 @@ Feature: To test the payment flow on Member site
     And the user clicks on MemAuth Edit Automatic Payment button
 
     Examples: 
-      | username  | password  | MemUserName     |
-      #| qavgogine | qavgogine | q2_jun_aarp0057 |
-      | qavgogine | qavgogine | q2_jun_aarp0058 |
+      | TID   | username  | password  | MemUserName     |
+      | 15118 | qavgogine | qavgogine | q2_jun_aarp0058 |
 
   #NOTE: Nov2018 - q2_jun_uhc0042 didn't work, swap to use other user
   @TestmemberAuthOTP @15163 @regressionMember @payment5
-  Scenario Outline: To validate the oneTime Payment flow for Member Auth
+  Scenario Outline: TID: <TID> -MemUserName: <MemUserName> - To validate the oneTime Payment flow for Member Auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
@@ -124,12 +122,11 @@ Feature: To test the payment flow on Member site
     And the user confirms the Submit disabled in Member site
 
     Examples: 
-      | username  | password  | MemUserName    | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
-      # | qavgogine | qavgogine | q2_jun_uhc0042 | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.12 |
-      | qavgogine | qavgogine | q4_dec_uhc150 | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.12 |
+      | TID   | username  | password  | MemUserName    | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
+      | 15118 | qavgogine | qavgogine | q4_dec_uhc150 | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.12 |
 
   @paymentsShip @15320 @regressionMember @payment6
-  Scenario Outline: Verify Recurring Payment for SHIP member
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Recurring Payment for SHIP member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -147,12 +144,11 @@ Feature: To test the payment flow on Member site
     And the user confirms the Autopayment in UHC site
 
     Examples: 
-      | planType | memberType              | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
-      | SHIP     | IndividualAARPSPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
+      | TID   | planType | memberType              | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
+      | 15320 | SHIP     | IndividualAARPSPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
 
-  #NOTE: Nov2018 - q2_june_combo0012 didn't work, swap to use other user
   @paymentsCombo @15144 @regressionMember @payment7
-  Scenario Outline: Verify Payment for Combo member
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Payment for Combo member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -183,9 +179,8 @@ Feature: To test the payment flow on Member site
     And the user confirms the Autopayment in UHC site
 
     Examples: 
-      | planType | memberType         | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
-      # | COMBO    | COMBOAARPPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
-      | COMBO    | COMBOAARPPayments2 | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
+      | TID   | planType | memberType         | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
+      | 15144 | COMBO    | COMBOAARPPayments2 | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
 
   @paymentsAutoPayCancel @US1463204 @Feb_release_2019 @Spartans @payment8
   Scenario Outline: Verify Recurring Payment cancellation for Different Types of Member

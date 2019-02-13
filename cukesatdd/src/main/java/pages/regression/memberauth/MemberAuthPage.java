@@ -3,6 +3,7 @@ package pages.regression.memberauth;
 import org.json.JSONObject;
 //import junit.framework.Assert;
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,6 +14,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.regression.accounthomepage.AccountHomePage;
 
@@ -56,7 +58,8 @@ public class MemberAuthPage extends UhcDriver {
        @FindBy(id="super-user-banner")
        private WebElement SuperUser_DashboardBanner;
 
-       private static String MEMBER_AUTH = MRConstants.MEMBER_AUTH;
+       private static String MEMBER_AUTH = "http://team-f-generic.ose-elr-core.optum.com/content/medicare/memberauth.html#/memberAuthLogin";
+       //private static String MEMBER_AUTH = MRConstants.MEMBER_AUTH;
        
    	@FindBy(xpath = "(//*[@class='ng-scope']//a[text()='Premium Payments'])[1]")
    	private WebElement paymentsLink;
@@ -87,6 +90,7 @@ public class MemberAuthPage extends UhcDriver {
        */
        public MemberAuthPage navigateToLoginURL(){
               start(MEMBER_AUTH);
+              System.out.println("Member Auth URL - "+MEMBER_AUTH);
               //driver.get("https://www.team-c-generic.uhc.com/content/dashboard/guest/memberauth.html#/memberAuthLogin");
               CommonUtility.waitForPageLoad(driver, username, 60);
               try {
@@ -244,11 +248,27 @@ public AccountHomePage userSelectsMemberEntered() throws InterruptedException{
               Thread.sleep(20000);
               switchToNewTab();
               System.out.println("Switched to new tab");
-              waitforElement(SuperUser_DashboardBanner);
-              if (driver.getCurrentUrl().contains("/dashboard") && SuperUser_DashboardBanner.isDisplayed()){
-                     System.out.println("CSR Dashboard Page is displayed for the Member");      
-                     return new AccountHomePage(driver);             
-                     }
+              if(MRScenario.environment.equalsIgnoreCase("stage")){
+            	  waitforElement(SuperUser_DashboardBanner);
+            	  if (driver.getCurrentUrl().contains("/dashboard") && SuperUser_DashboardBanner.isDisplayed()){
+            		  System.out.println("CSR Dashboard Page is displayed for the Member");      
+            		  return new AccountHomePage(driver);             
+            	  }
+              }
+              else if (MRScenario.environment.startsWith("team")){
+            	  if (driver.getCurrentUrl().contains("/testharness")){
+          			try {
+        				Alert alert = driver.switchTo().alert();
+        				alert.accept();
+        				Alert alert1 = driver.switchTo().alert();
+        				alert1.accept();
+        			} catch (Exception e) {
+        				System.out.println("No alert displayed");
+        			}
+          			System.out.println("CSR - Lower ENV TestHarness Page is displayed for the Member");      
+            		  return new AccountHomePage(driver);             
+            	  }
+              }
               else
                      System.out.println("CSR Dashboard Page is NOT displayed for the Member");
               return null;               
