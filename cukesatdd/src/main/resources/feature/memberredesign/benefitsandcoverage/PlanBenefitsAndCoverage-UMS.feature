@@ -203,7 +203,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       
 
   @benefitsAndCoverage14 @CMFedDrugNonLis
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify all sections for Ind NonLIS member on Benefits and Coverage page
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -testLanguage: <testLanguage> - Verify all sections for Ind NonLIS member on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
@@ -249,17 +249,17 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     And the user validates contactus section
 
     Examples: 
-      | TID   | planType | memberType      | copayCategory | language | SummaryofBenefits    | EvidenceofCoverage       | ComprehensiveFormularyDrug List     | AlternativeDrug List               | name                 | memberid     | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
-      | 15377 | MAPD     | Individual_BnC  | NON LIS       | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | Alternative Drug List              | DDCEE DAADF          | 954016383-00 | 01/01/2018    | Not Available  | Tier 2          | true        |
-      | 15377 | MAPD     |  Individual_BnC |  NON LIS      | ESPAÑOL  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | Lista de Medicamentos Alternativos | DDCEE DAADF          | 954016383-00 | 01/01/2018    | Not Available  | Tier 2          | true       |
-      | 15377 | MAPD     |  Individual_BnC |  NON LIS      | 中文             |                      |                          |                                     |                                    | DDCEE DAADF          | 954016383-00 | 01/01/2018    | Not Available  | Tier 2          | true       |
-      | 15095 | Medica   |  Individual_BnC |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | Alternative Drug List              | AADECDC FEDFACEDBACBB| 954283936-00 | 04/01/2018    | Not Available  | Tier 2          | true       |
-      | 15095 | Medica   |  Individual_BnC |  NON LIS      | ESPAÑOL  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | Lista de Medicamentos Alternativos | AADECDC FEDFACEDBACBB| 954283936-00 | 04/01/2018    | Not Available  | Tier 2          | true       |
-      | 15097 | PCP      |  Individual_BnC |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | Alternative Drug List              | BDFAEC CBADEADF      | 945007888-00 | 01/01/2018    | Not Available  | Tier 2          | true       |
-      | 15097 | PCP      |  Individual_BnC |  NON LIS      | ESPAÑOL  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | Lista de Medicamentos Alternativos | BDFAEC CBADEADF      | 945007888-00 | 01/01/2018    | Not Available  | Tier 2          | true       |
+      | TID   | planType | memberType      | copayCategory | testLanguage | language | SummaryofBenefits    | EvidenceofCoverage       | ComprehensiveFormularyDrug List     | AlternativeDrug List               | name                 | memberid     | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
+      | 15377 | MAPD     | Individual_BnC  |  NON LIS      | English      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | Alternative Drug List              | DDCEE DAADF          | 954016383-00 | 01/01/2018    | Not Available  | Tier 2          | true        |
+      | 15377 | MAPD     |  Individual_BnC |  NON LIS      | Spanish      | ESPAÑOL  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | Lista de Medicamentos Alternativos | DDCEE DAADF          | 954016383-00 | 01/01/2018    | Not Available  | Tier 2          | true       |
+      | 15377 | MAPD     |  Individual_BnC |  NON LIS      | Chinese      | 中文             |                      |                          |                                     |                                    | DDCEE DAADF          | 954016383-00 | 01/01/2018    | Not Available  | Tier 2          | true       |
+      | 15095 | Medica   |  Individual_BnC |  NON LIS      | English      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | Alternative Drug List              | AADECDC FEDFACEDBACBB| 954283936-00 | 04/01/2018    | Not Available  | Tier 2          | true       |
+      | 15095 | Medica   |  Individual_BnC |  NON LIS      | Spanish      | ESPAÑOL  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | Lista de Medicamentos Alternativos | AADECDC FEDFACEDBACBB| 954283936-00 | 04/01/2018    | Not Available  | Tier 2          | true       |
+      | 15097 | PCP      |  Individual_BnC |  NON LIS      | English      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | Alternative Drug List              | BDFAEC CBADEADF      | 945007888-00 | 01/01/2018    | Not Available  | Tier 2          | true       |
+      | 15097 | PCP      |  Individual_BnC |  NON LIS      | Spanish      | ESPAÑOL  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | Lista de Medicamentos Alternativos | BDFAEC CBADEADF      | 945007888-00 | 01/01/2018    | Not Available  | Tier 2          | true       |
       
-  @benefitsAndCoverage15 @CMFedPDPNonLis 
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify all sections for PDP Ind NonLIS member on Benefits and Coverage page
+  @benefitsAndCoverage15 @CMFedPDPNonLis
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -testLanguage: <testLanguage> - Verify all sections for PDP Ind NonLIS member on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
@@ -300,10 +300,10 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     And the user validates contactus section
 
     Examples: 
-      | TID   | planType | memberType     | copayCategory | language | SummaryofBenefits     | EvidenceofCoverage       | ComprehensiveFormularyDrug List     | AlternativeDrugList                | name       | memberid  | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
-      | 15377 | PDP      | Individual_BnC | NON LIS       | ENGLISH  | Summary of Benefits   | Evidence of Coverage     | Comprehensive Formulary - Drug List | Alternative Drug List              | ECADEA DCAA| 0197331001| 05/01/2018    | Not Available  | Tier 2          | true        |
-      | 15377 | PDP      | Individual_BnC | NON LIS       | ESPAÑOL  | Resumen de Beneficios | Comprobante de Cobertura | Formulario Completo                 | Lista de Medicamentos Alternativos | ECADEA DCAA| 0197331001| 05/01/2018    | Not Available  | Tier 2          | true        |
-      | 15377 | PDP      | Individual_BnC | NON LIS       | 中文             |                       |                          |                                     |                                    | ECADEA DCAA| 0197331001| 05/01/2018    | Not Available  | Tier 2          | true        |
+      | TID   | planType | memberType     | copayCategory | testLanguage | language | SummaryofBenefits     | EvidenceofCoverage       | ComprehensiveFormularyDrug List     | AlternativeDrugList                | name       | memberid  | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
+      | 15377 | PDP      | Individual_BnC | NON LIS       | English      | ENGLISH  | Summary of Benefits   | Evidence of Coverage     | Comprehensive Formulary - Drug List | Alternative Drug List              | ECADEA DCAA| 0197331001| 05/01/2018    | Not Available  | Tier 2          | true        |
+      | 15377 | PDP      | Individual_BnC | NON LIS       | Spanish      | ESPAÑOL  | Resumen de Beneficios | Comprobante de Cobertura | Formulario Completo                 | Lista de Medicamentos Alternativos | ECADEA DCAA| 0197331001| 05/01/2018    | Not Available  | Tier 2          | true        |
+      | 15377 | PDP      | Individual_BnC | NON LIS       | Chinese      | 中文             |                       |                          |                                     |                                    | ECADEA DCAA| 0197331001| 05/01/2018    | Not Available  | Tier 2          | true        |
 
 
   @benefitsAndCoverage16 @CMMapdFedTable
@@ -675,8 +675,8 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     And the user validates contactus section
 
     Examples: 
-      | planType | memberType | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List | name            | memberid      | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
-      | 15241    | Group_BnC  | NON LIS       | ENGLISH  | Summary Of Benefits | Evidence of Coverage | Comprehensive Formulary         | BBBCCB FFAAFAD  | 0191976081    | 01/01/2019    | Not Available  | Tier 2          | true        |
+      | TID      | planType | memberType | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List | name            | memberid      | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
+      | 15241    | PDP      | Group_BnC  | NON LIS       | ENGLISH  | Summary Of Benefits | Evidence of Coverage | Comprehensive Formulary         | BBBCCB FFAAFAD  | 0191976081    | 01/01/2019    | Not Available  | Tier 2          | true        |
 
 
   @benefitsAndCoverage29 @CMvasnegativescenario
@@ -750,11 +750,11 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     Then user validates the Optum Rx link in Benefits and Coverage page
 
     Examples: 
-      | UID   | planType | memberType     |
+      | UID     | planType | memberType     |
       | 1410989 | MAPDVill | Individual_BnC |
 
   @benefitsAndCoverage34 @PlanBFSJMPLinks @Feb_release_2019 @gladiators
-  Scenario Outline: Verify jump links for individual MAPD member
+  Scenario Outline: UID: <UID> -plan: <planType> -Identifier: <Identifier> -rider: <rider> - Verify jump links for individual MAPD member
     Given login with following details logins in the member portal and validate elements
       | Plan Type  | <planType>   |
       | Member Type| <memberType> |
@@ -779,18 +779,18 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | MemberType | <memberType> |
       
    Examples: 
-       | planType | memberType |Identifier        | language | count| rider   |
-       | MAPD     | Individual |IndEffectiveAARP  | ENGLISH  | 6    | NoRider |
-       | MAPD     | Individual |IndEffectiveAARP  | ENGLISH  | 7    | Rider   |
-       | MAPD     | Group      |GrpEffectiveUHC   | ENGLISH  | 6    | NoRider |
-       | MAPD     | Individual |IndEffectiveUHC   | ENGLISH  | 6    | NoRider |
-       | MAPD     | Individual |IndEffectiveUHC   | ENGLISH  | 7    | Rider   |
-       | PCP      | Individual |IndEffectivePCP   | ENGLISH  | 6   |NoRider|
-       | MEDICA   | Individual |IndEffectiveMedica| ENGLISH  | 6   |NoRider|
+       | UID     | planType | memberType |Identifier        | language | count| rider   |
+       | 1417780 | MAPD     | Individual |IndEffectiveAARP  | ENGLISH  | 6    | NoRider |
+       | 1417780 | MAPD     | Individual |IndEffectiveAARP  | ENGLISH  | 7    | Rider   |
+       | 1417780 | MAPD     | Group      |GrpEffectiveUHC   | ENGLISH  | 6    | NoRider |
+       | 1417780 | MAPD     | Individual |IndEffectiveUHC   | ENGLISH  | 6    | NoRider |
+       | 1417780 | MAPD     | Individual |IndEffectiveUHC   | ENGLISH  | 7    | Rider   |
+       | 1417780 | PCP      | Individual |IndEffectivePCP   | ENGLISH  | 6    | NoRider |
+       | 1417780 | MEDICA   | Individual |IndEffectiveMedica| ENGLISH  | 6    | NoRider |
          
   
   @benefitsAndCoverage35 @PlanBFSJMPLinks @Feb_release_2019 @gladiators
-  Scenario Outline: Verify jump links for individual MA member
+  Scenario Outline: UID: <UID> -plan: <planType> -Identifier: <Identifier> -rider: <rider> - Verify jump links for individual MA member
     Given login with following details logins in the member portal and validate elements
       | Plan Type  | <planType>   |
       | Member Type| <memberType> |
@@ -815,15 +815,15 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | MemberType | <memberType> |
       
    Examples: 
-      | planType | memberType | Identifier       | language | count | rider   |
-      | MA       | Group      | GrpEffectiveUHC  | ENGLISH  | 4     | NoRider |
-      | MA       | Individual | IndEffectiveUHC  | ENGLISH  | 5     | Rider   |
-      | MA       | Individual | IndEffectiveAARP | ENGLISH  | 5     | Rider   |
-      | MA       | Individual | IndEffectiveAARP | ENGLISH  | 4     | NoRider |
+      | UID     | planType | memberType | Identifier       | language | count | rider   |
+      | 1417780 | MA       | Group      | GrpEffectiveUHC  | ENGLISH  | 4     | NoRider |
+      | 1417780 | MA       | Individual | IndEffectiveUHC  | ENGLISH  | 5     | Rider   |
+      | 1417780 | MA       | Individual | IndEffectiveAARP | ENGLISH  | 5     | Rider   |
+      | 1417780 | MA       | Individual | IndEffectiveAARP | ENGLISH  | 4     | NoRider |
       
        
   @benefitsAndCoverage36 @PlanBFSJMPLinks @Feb_release_2019 @gladiators
-  Scenario Outline: Verify jump links for a MedSupp member
+  Scenario Outline: UID: <UID> -plan: <planType> -Identifier: <Identifier> - Verify jump links for a MedSupp NoRider member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -848,12 +848,12 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | MemberType  | <memberType> |
       
    Examples: 
-      | planType | memberType | Identifier           | language | count | rider   |
-      | MedSupp  | Individual | EffectiveShipMedSupp | ENGLISH  | 3     | NoRider |
+      | UID     | planType | memberType | Identifier           | language | count | rider   |
+      | 1417780 | MedSupp  | Individual | EffectiveShipMedSupp | ENGLISH  | 3     | NoRider |
 
       
   @benefitsAndCoverage37 @PlanBFSJMPLinks @Feb_release_2019 @gladiators
-  Scenario Outline: Verify jump links for individual PDP member
+  Scenario Outline: UID: <UID> -plan: <planType> -Identifier: <Identifier> - Verify jump links for individual PDP NoRider member
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
@@ -878,14 +878,14 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       |MemberType|<memberType>|
       
    Examples: 
-      | planType | memberType | Identifier      | language |count| rider   |
-      | PDP      | Individual | EffectivePDPAARP| ENGLISH  | 4   | NoRider |
-      | PDP      | Individual | EffectivePDPUHC | ENGLISH  | 2   | NoRider |
-     #| PDP      | Group      | EffectivePDPUHC | ENGLISH  | 4   | NoRider |
+      | UID     | planType | memberType | Identifier      | language |count| rider   |
+      | 1417780 | PDP      | Individual | EffectivePDPAARP| ENGLISH  | 4   | NoRider |
+      | 1417780 | PDP      | Individual | EffectivePDPUHC | ENGLISH  | 2   | NoRider |
+     #| 1417780 | PDP      | Group      | EffectivePDPUHC | ENGLISH  | 4   | NoRider |
 
     
   @benefitsAndCoverage38 @PlanBFSJMPLinks @Feb_release_2019 @gladiators
-  Scenario Outline: Verify jump links for a SSUP member
+  Scenario Outline: UID: <UID> -plan: <planType> -Identifier: <Identifier> - Verify jump links for a SSUP NoRider member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -910,8 +910,8 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | Member Type | <memberType> |
       
    Examples: 
-      | planType | memberType | Identifier       | language | count | rider   |
-      | SSUP     | Group      | GrpEffectiveSSUP | ENGLISH  | 4     | NoRider |
+      | UID     | planType | memberType | Identifier       | language | count | rider   |
+      | 1417780 | SSUP     | Group      | GrpEffectiveSSUP | ENGLISH  | 4     | NoRider |
 
 
   @benefitsAndCoverage39 @UpdatedTextDocumentsAndResources @dec_release_2018
@@ -923,7 +923,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     And the user validates the UpdatedText
 
    Examples: 
-      | FID | planType | memberType            |
+      | FID    | planType | memberType            |
       | 231151 | MAPD     | IndividualUHCPayments |
       
       
