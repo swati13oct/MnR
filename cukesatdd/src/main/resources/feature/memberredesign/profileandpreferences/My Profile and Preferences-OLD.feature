@@ -52,7 +52,7 @@ Feature: C1.2To test Profile and Preferences page .
 
     Examples: 
       | planType |
-      | MAPD     |
+      | MAPD     |                    
       | PDP      |
       | SHIP     |
 
@@ -281,12 +281,12 @@ Feature: C1.2To test Profile and Preferences page .
 
     Examples: 
       | userType           |
-      | MAPD_AARP_GOGreen_Profilepref  |
-      | MA_AARP_GOGreen_Profilepref    |
-      | PDP_AARP_GOGreen_Profilepref   |
-      | MA_UHC_GOGreen_Profilepref     |
-      | MAPD_UHC_GOGreen_Profilepref   |
-      | MAPD_GROUP_GOGreen_Profilepref |
+    #  | MAPD_AARP_GOGreen_Profilepref  |
+     # | MA_AARP_GOGreen_Profilepref    |
+      #| PDP_AARP_GOGreen_Profilepref   |
+      #| MA_UHC_GOGreen_Profilepref     |
+      #| MAPD_UHC_GOGreen_Profilepref   |
+      #| MAPD_GROUP_GOGreen_Profilepref |
 
   @accountProfile20 @EPMPProfilePage
   Scenario Outline: To test end to end regression scenario for EPMP profile page
@@ -301,7 +301,7 @@ Feature: C1.2To test Profile and Preferences page .
       | planType | memberType  |
       | MAPD     | EPMPEnabled |
 
-  @accountProfile21 @EPMPProfilePageContactusInformation @regressionMember
+  @accountProfile21 @EPMPProfilePageContactusInformation 
   Scenario Outline: To test end to end regression scenario for EPMP profile page
   #Removed from Regression as EPMP is still in the pipeline for development
  	Given login with following details logins in the member portal and validate elements
@@ -317,7 +317,7 @@ Feature: C1.2To test Profile and Preferences page .
       | planType | memberType  | dataType   |
       #| MAPD     | EPMPEnabled | Individual |
 
-  @accountProfile22 @EMPMprofilePageForShip  @regressionMember
+  @accountProfile22 @EMPMprofilePageForShip 
   Scenario Outline: To test end to end regression scenario for EPMP profile page for ship
    #Removed from Regression as EPMP is still in the pipeline for development
     Given login with following details logins in the member portal and validate elements
@@ -332,7 +332,7 @@ Feature: C1.2To test Profile and Preferences page .
       | planType |
       #| SHIP    |
 
-  @accountProfile23 @EPMPProfilePageContactusGroup  @regressionMember
+  @accountProfile23 @EPMPProfilePageContactusGroup
   Scenario Outline: To test end to end regression scenario for EPMP profile page for group members
    #Removed from Regression as EPMP is still in the pipeline for development
     Given login with following details logins in the member portal and validate elements
@@ -349,7 +349,7 @@ Feature: C1.2To test Profile and Preferences page .
       | planType | memberType  | dataType | GroupPlanName  |
       #| MAPD     | EPMPEnabled | group    | HealthSelectRx |
 
-  @accountProfile24 @regressionPCPMedica @regressionMember
+  @accountProfile24 @regressionPCPMedica 
   Scenario Outline: To test end to end regression scenario for account profile page for PCP medica members
     Given login with following details logins in the member portal and validate elements
       | User Type | <userType> |
@@ -372,10 +372,10 @@ Feature: C1.2To test Profile and Preferences page .
 
     Examples: 
       | userType | memberType |
-      | PCP      | PCP_SouthFlorida_ProfilePref     |
+     # | PCP      | PCP_SouthFlorida_ProfilePref     |
       | Medica   | Medica_SouthFlorida_ProfilePref  |
 
-  @accountProfile25 @regressionPreferencesForShip @regressionMember
+  @accountProfile25 @regressionPreferencesForShip 
   Scenario Outline: To test end to end regression scenario for preferences of a SHIP member
     Given login with following details logins in the member portal and validate elements
       | User Type | <userType> |
@@ -385,9 +385,9 @@ Feature: C1.2To test Profile and Preferences page .
 
     Examples: 
       | userType |
-      | SHIP_ProfilePref     |
+     # | SHIP_ProfilePref     |
 
-  @accountProfile26 @profilePageForTerminated @regressionMember
+  @accountProfile26 @profilePageForTerminated
   Scenario Outline: To test end to end regression scenario for account profile  page for a terminated member
  #Removed from Regression as EPMP is still in the pipeline for development
     Given login with following details logins in the member portal and validate elements
@@ -404,7 +404,7 @@ Feature: C1.2To test Profile and Preferences page .
       | planType | memberType  | dataType   |
     #  | MAPD     | EPMPEnabled | Terminated |
 
-  @accountProfile27 @EPMPpreferencesForComboOnProfile  @regressionMember
+  @accountProfile27 @EPMPpreferencesForComboOnProfile 
   Scenario Outline: To test end to end regression scenario for account profile and preferences for a combo member
   #Removed from Regression as EPMP is still in the pipeline for development
     Given login with following details logins in the member portal and validate elements
