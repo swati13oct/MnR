@@ -159,7 +159,7 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='pharmacy-locator']//div[contains(@class,'col-md-12')]/*[contains(text(),'farmacia')]")
 	WebElement pharmacyBodyContentSpanish;
 	
-	@FindBy(xpath = "//div[@class='pharmacy-locator']//div[contains(@class,'col-md-12')]/*[contains(text(),'Ã¤Â½Â¿Ã§â€�Â¨Ã§Â¶Â²Ã¤Â¸Å Ã¥ï¿½ï¿½Ã¥â€ Å Ã¦ï¿½Å“Ã¥Â°â€¹Ã¨â€”Â¥Ã¦Ë†Â¿Ã¥â€™Å’Ã¨â€”Â¥Ã¦Ë†Â¿Ã¤Â½ï¿½Ã§Â½Â®Ã£â‚¬â€š')]")
+	@FindBy(xpath = "//div[@class='pharmacy-locator']//div[contains(@class,'col-md-12')]/*[contains(text(),'ÃƒÂ¤Ã‚Â½Ã‚Â¿ÃƒÂ§Ã¢â‚¬ï¿½Ã‚Â¨ÃƒÂ§Ã‚Â¶Ã‚Â²ÃƒÂ¤Ã‚Â¸Ã…Â ÃƒÂ¥Ã¯Â¿Â½Ã¯Â¿Â½ÃƒÂ¥Ã¢â‚¬Â Ã…Â ÃƒÂ¦Ã¯Â¿Â½Ã…â€œÃƒÂ¥Ã‚Â°Ã¢â‚¬Â¹ÃƒÂ¨Ã¢â‚¬â€�Ã‚Â¥ÃƒÂ¦Ã‹â€ Ã‚Â¿ÃƒÂ¥Ã¢â‚¬â„¢Ã…â€™ÃƒÂ¨Ã¢â‚¬â€�Ã‚Â¥ÃƒÂ¦Ã‹â€ Ã‚Â¿ÃƒÂ¤Ã‚Â½Ã¯Â¿Â½ÃƒÂ§Ã‚Â½Ã‚Â®ÃƒÂ£Ã¢â€šÂ¬Ã¢â‚¬Å¡')]")
 	WebElement pharmacyBodyContentChinese;
 	@FindBy(id = "createpdf_id")
 	WebElement resultAsPDF;
@@ -643,11 +643,19 @@ public boolean selectPharmacyandServices(String pharmacytype) {
 			} else if (("zh").equalsIgnoreCase(language)) {
 				Assert.fail("Temporarily commented code. Please select Spanish or English!!!");
 				/*String headingText = pharmacylocatorheader.getText();
+<<<<<<< HEAD
+				if (!headingText.contains("ÃƒÂ¥Ã‚Â°Ã¢â‚¬Â¹ÃƒÂ¦Ã¢â‚¬Â°Ã‚Â¾ÃƒÂ¨Ã¢â‚¬â€�Ã‚Â¥ÃƒÂ¦Ã‹â€ Ã‚Â¿"))
+=======
 				if (!headingText.contains("Ã¥Â°â€¹Ã¦â€°Â¾Ã¨â€”Â¥Ã¦Ë†Â¿"))
+>>>>>>> refs/remotes/origin/RELEASE-19-1-0
 					return false;
 				if (!pharmacyBodyContentChinese.isDisplayed())
 					return false;
+<<<<<<< HEAD
+				if (!btnContinue.getText().contains("ÃƒÂ§Ã‚Â¹Ã‚Â¼ÃƒÂ§Ã‚ÂºÃ…â€™"))
+=======
 				if (!btnContinue.getText().contains("Ã§Â¹Â¼Ã§ÂºÅ’"))
+>>>>>>> refs/remotes/origin/RELEASE-19-1-0
 					return false;*/
 			} else {
 				Assert.fail("Please select a valid language!!!");
