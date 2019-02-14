@@ -203,7 +203,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       
 
   @benefitsAndCoverage14 @CMFedDrugNonLis
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -testLanguage: <testLanguage> - Verify all sections for Ind NonLIS member on Benefits and Coverage page
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify all sections for Ind NonLIS member on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
@@ -249,17 +249,17 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     And the user validates contactus section
 
     Examples: 
-      | TID   | planType | memberType      | copayCategory | testLanguage | language | SummaryofBenefits    | EvidenceofCoverage       | ComprehensiveFormularyDrug List     | AlternativeDrug List               | name                 | memberid     | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
-      | 15377 | MAPD     | Individual_BnC  |  NON LIS      | English      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | Alternative Drug List              | DDCEE DAADF          | 954016383-00 | 01/01/2018    | Not Available  | Tier 2          | true        |
-      | 15377 | MAPD     |  Individual_BnC |  NON LIS      | Spanish      | ESPAÑOL  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | Lista de Medicamentos Alternativos | DDCEE DAADF          | 954016383-00 | 01/01/2018    | Not Available  | Tier 2          | true       |
-      | 15377 | MAPD     |  Individual_BnC |  NON LIS      | Chinese      | 中文             |                      |                          |                                     |                                    | DDCEE DAADF          | 954016383-00 | 01/01/2018    | Not Available  | Tier 2          | true       |
-      | 15095 | Medica   |  Individual_BnC |  NON LIS      | English      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | Alternative Drug List              | AADECDC FEDFACEDBACBB| 954283936-00 | 04/01/2018    | Not Available  | Tier 2          | true       |
-      | 15095 | Medica   |  Individual_BnC |  NON LIS      | Spanish      | ESPAÑOL  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | Lista de Medicamentos Alternativos | AADECDC FEDFACEDBACBB| 954283936-00 | 04/01/2018    | Not Available  | Tier 2          | true       |
-      | 15097 | PCP      |  Individual_BnC |  NON LIS      | English      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | Alternative Drug List              | BDFAEC CBADEADF      | 945007888-00 | 01/01/2018    | Not Available  | Tier 2          | true       |
-      | 15097 | PCP      |  Individual_BnC |  NON LIS      | Spanish      | ESPAÑOL  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | Lista de Medicamentos Alternativos | BDFAEC CBADEADF      | 945007888-00 | 01/01/2018    | Not Available  | Tier 2          | true       |
+      | TID   | planType | memberType      | copayCategory | language | SummaryofBenefits    | EvidenceofCoverage       | ComprehensiveFormularyDrug List     | AlternativeDrug List               | name                 | memberid     | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
+      | 15377 | MAPD     |  Individual_BnC |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | Alternative Drug List              | DDCEE DAADF          | 954016383-00 | 01/01/2018    | Not Available  | Tier 2          | true        |
+      | 15377 | MAPD     |  Individual_BnC |  NON LIS      | ESPAÑOL  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | Lista de Medicamentos Alternativos | DDCEE DAADF          | 954016383-00 | 01/01/2018    | Not Available  | Tier 2          | true       |
+      | 15377 | MAPD     |  Individual_BnC |  NON LIS      | 中文             |                      |                          |                                     |                                    | DDCEE DAADF          | 954016383-00 | 01/01/2018    | Not Available  | Tier 2          | true       |
+      | 15095 | Medica   |  Individual_BnC |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | Alternative Drug List              | AADECDC FEDFACEDBACBB| 954283936-00 | 04/01/2018    | Not Available  | Tier 2          | true       |
+      | 15095 | Medica   |  Individual_BnC |  NON LIS      | ESPAÑOL  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | Lista de Medicamentos Alternativos | AADECDC FEDFACEDBACBB| 954283936-00 | 04/01/2018    | Not Available  | Tier 2          | true       |
+      | 15097 | PCP      |  Individual_BnC |  NON LIS      | ENGLISH  | Summary of Benefits  | Evidence of Coverage     | Comprehensive Formulary - Drug List | Alternative Drug List              | BDFAEC CBADEADF      | 945007888-00 | 01/01/2018    | Not Available  | Tier 2          | true       |
+      | 15097 | PCP      |  Individual_BnC |  NON LIS      | ESPAÑOL  | Resumen de Beneficios| Comprobante de Cobertura | Formulario Completo                 | Lista de Medicamentos Alternativos | BDFAEC CBADEADF      | 945007888-00 | 01/01/2018    | Not Available  | Tier 2          | true       |
       
   @benefitsAndCoverage15 @CMFedPDPNonLis
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -testLanguage: <testLanguage> - Verify all sections for PDP Ind NonLIS member on Benefits and Coverage page
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify all sections for PDP Ind NonLIS member on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
@@ -300,10 +300,10 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     And the user validates contactus section
 
     Examples: 
-      | TID   | planType | memberType     | copayCategory | testLanguage | language | SummaryofBenefits     | EvidenceofCoverage       | ComprehensiveFormularyDrug List     | AlternativeDrugList                | name       | memberid  | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
-      | 15377 | PDP      | Individual_BnC | NON LIS       | English      | ENGLISH  | Summary of Benefits   | Evidence of Coverage     | Comprehensive Formulary - Drug List | Alternative Drug List              | ECADEA DCAA| 0197331001| 05/01/2018    | Not Available  | Tier 2          | true        |
-      | 15377 | PDP      | Individual_BnC | NON LIS       | Spanish      | ESPAÑOL  | Resumen de Beneficios | Comprobante de Cobertura | Formulario Completo                 | Lista de Medicamentos Alternativos | ECADEA DCAA| 0197331001| 05/01/2018    | Not Available  | Tier 2          | true        |
-      | 15377 | PDP      | Individual_BnC | NON LIS       | Chinese      | 中文             |                       |                          |                                     |                                    | ECADEA DCAA| 0197331001| 05/01/2018    | Not Available  | Tier 2          | true        |
+      | TID   | planType | memberType     | copayCategory | language | SummaryofBenefits     | EvidenceofCoverage       | ComprehensiveFormularyDrug List     | AlternativeDrugList                | name       | memberid  | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
+      | 15377 | PDP      | Individual_BnC | NON LIS       | ENGLISH  | Summary of Benefits   | Evidence of Coverage     | Comprehensive Formulary - Drug List | Alternative Drug List              | ECADEA DCAA| 0197331001| 05/01/2018    | Not Available  | Tier 2          | true        |
+      | 15377 | PDP      | Individual_BnC | NON LIS       | ESPAÑOL  | Resumen de Beneficios | Comprobante de Cobertura | Formulario Completo                 | Lista de Medicamentos Alternativos | ECADEA DCAA| 0197331001| 05/01/2018    | Not Available  | Tier 2          | true        |
+      | 15377 | PDP      | Individual_BnC | NON LIS       | 中文             |                       |                          |                                     |                                    | ECADEA DCAA| 0197331001| 05/01/2018    | Not Available  | Tier 2          | true        |
 
 
   @benefitsAndCoverage16 @CMMapdFedTable
