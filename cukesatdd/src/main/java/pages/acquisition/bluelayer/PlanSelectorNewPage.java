@@ -109,13 +109,16 @@ public class PlanSelectorNewPage extends UhcDriver {
 	@FindBy(xpath = "//a[@id='backToPlanSelectorTop']")
 	private WebElement backToPlanOptionsTop;
 
+	@FindBy(xpath = "(//*[@id='selectCounty']/p/a)[1]")
+	private WebElement BackToPlanCounty;
+	
 	@FindBy(id = "backToPlanSelectorBottom")
 	private WebElement backToPlanSelectorBottom;
 
 	@FindBy(xpath = "//*[@class='PlanPreferenceCollection']//div[@class='planPreferenceQuestion ']//h1")
 	private WebElement PreferencesHeader;
 
-	@FindBy(id = "Enrollbtn_223554")
+	@FindBy(id = "Enrollbtn_225193")
 	private WebElement PlanDetailsPageButton;
 
 
@@ -302,7 +305,17 @@ public class PlanSelectorNewPage extends UhcDriver {
 
 	public void validatetopbacktoplansOptionlink() throws InterruptedException{
 
-
+         Thread.sleep(2000);
+         
+		try{
+			BackToPlanCounty.click();	
+		}catch(Exception e)
+		{
+			System.out.println("No zipcode turned in again");
+		}
+		
+		Thread.sleep(2000);
+		
 		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.elementToBeClickable(backToPlanOptionsTop));
 		validateUsergrpParam();
