@@ -210,6 +210,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath="//div[contains(@class,'proactive-offer__close')]")
 	public static List<WebElement> proactiveChatExistBtn;
 	
+	@FindBy(xpath = "//div[@class='overview-main']/h2")
+	private WebElement vppTop;
+	
+	
 	@FindBy(id = "cobrowse-disclaimer")
 	private List<WebElement> requestAssistanceModal;
 	
@@ -256,6 +260,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		PageFactory.initElements(driver, this);
 		openAndValidate();
 	}
+	
 
 	public AcquisitionHomePage(WebDriver driver, boolean alreadyOnSite) {
 		super(driver);
@@ -1029,6 +1034,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		requestAssistanceClose.click();
 		waitforElementDisapper(By.id("cobrowse-disclaimer"), 30);
 		}
+
 
 
 	public JSONObject validatecobrowsemodelwindow() {
