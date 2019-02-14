@@ -205,6 +205,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "(//div[contains(@class,'mabenefittable')]//li[contains(@class,'ng-scope')]/p[contains(text(),'drugs covered')])[1]")
 	private WebElement drugCoveredInfo;
 
+
 	@FindBy(xpath = "(//div[contains(@class,'mabenefittable')]//li[contains(@class,'ng-scope')]/span[contains(text(),'Estimated Annual Drug Cost')])[1]")
 	private WebElement estimatedAnnualDrigCostLabel;
 	
