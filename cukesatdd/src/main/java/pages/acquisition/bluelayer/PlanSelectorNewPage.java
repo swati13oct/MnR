@@ -4,11 +4,15 @@
 package pages.acquisition.bluelayer;
 
 
+import java.awt.Desktop.Action;
+import java.util.List;
+
 import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -59,12 +63,40 @@ public class PlanSelectorNewPage extends UhcDriver {
 	@FindBy(id = "planPreferenceLegend_1")
 	private WebElement NextQuestion;
 	
+	@FindBy(xpath="//*[@class='planPreferenceQuestion']//div[@class='preferencenavigation pageNavigation']/a[2]")
+	private WebElement NextQuestionButton2;
+	
 	@FindBy(xpath = "(//*[contains(text(), 'Medicare Advantage (Part C)')])[2]")
 	private WebElement FinalResults;
 	
 	@FindBy(xpath = "//*[@class='skipToResultsLink']")
 	private WebElement ResultsPageLink;
+	
+	@FindBy(id = "planPreferenceLegend_1")
+	private WebElement PrescriptionBox;
+	
+	@FindBy(id = "DrugSearchBox_SearchtextBox")
+	private WebElement PrescriptionBox_1;
+	
+	/*@FindBy(xpath = "//*[@id='41d4dd57-ca06-f737-8466-59563fb2d535']//li/a[@id='ui-active-menuitem']")
+	private WebElement PrescriptionAutoResults;*/
+	
+	//@FindBy(id="ui-active-menuitem")
+	@FindBy(xpath="(//a[@id='ui-active-menuitem'])[1]")
+	private WebElement PrescriptionAutoResultsOld;
+	
+	@FindBy(xpath="(//li[@class='ui-menu-item'])[1]")
+	private WebElement PrescriptionAutoResults;
+	
+	@FindBy(xpath = "//*[@class='addDrugRow addDPad']/a[@id='Drugs_AddDrug']")
+	private WebElement AddDrugPSTButton;
 
+	@FindBy(xpath = "//*[@class='rightBlk']/a[2]")
+	private WebElement DrugContinueButton;
+	
+	@FindBy(xpath = "(//*[@class='checkboxCol']//label[@class='sr-only selectable'])[1]")
+	private WebElement PharmacyCheckBox;
+	
 	//a[@class='btn btn-primary next leftBlk nextBtn']
 	@FindBy(xpath = "//div[@id='widget_B9pzC-bMU02tTlxiTpbchA']//div/a[@href='/PlanCompare/Consumer/Type3/2018/Compare/ComparePlans']")
 	private WebElement skipToResultsLink;
@@ -132,11 +164,12 @@ public class PlanSelectorNewPage extends UhcDriver {
 		getStartedBtn.click();
 		wait.until(ExpectedConditions.elementToBeClickable(zipCode));
 		sendkeys(zipCode, zip_code);
-		wait.until(ExpectedConditions.elementToBeClickable(PSTCounty));
+		//wait.until(ExpectedConditions.elementToBeClickable(PSTCounty));
 		
 		try {
 			Thread.sleep(10000);
 			Select drpCountry = new Select(driver.findElement(By.id("Counties")));
+			System.out.println("county name is "+County);			
 			drpCountry.selectByVisibleText(County);
 		}
 		catch(Exception ex)
@@ -177,13 +210,61 @@ public class PlanSelectorNewPage extends UhcDriver {
 	public PlanSelectorNewPage JumpLink() throws InterruptedException
 	{		
 		NonePreference.click();
-		ResultsPageLink.click();		
-		waitforElement(FinalResults);
+		//ResultsPageLink.click();
+		int i;
+		
+		for(i=0; i<6; i++)
+		{
+			Thread.sleep(3000);
+		NextQuestionButton2.click();		
+		}
+		
+		//waitforElement(FinalResults);
+		Thread.sleep(10000);
+		try{
+			if(PrescriptionBox.isDisplayed())
+				PrescriptionBox.sendKeys("Adci");				
+		}catch(Exception e)
+		{
+			PrescriptionBox_1.sendKeys("Adci");
+			System.out.println("Prescription page loaded");
+		}		
+		
+		Thread.sleep(5000);
+		
+		try{
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", PrescriptionAutoResultsOld);
+		}
+		catch(Exception e)
+		{
+			PrescriptionAutoResults.click();
+			System.out.println("second one worked");
+		}
+		
+		
+		
+		/*Actions builder = new Actions(driver);
+        builder.moveToElement(PrescriptionAutoResults).click()
+        .build().perform();*/
+        
+		//PrescriptionAutoResults.click();
+		waitforElement(AddDrugPSTButton);
+		AddDrugPSTButton.click();
+		Thread.sleep(2000);
+		DrugContinueButton.click();
+		Thread.sleep(5000);
+		waitforElement(PharmacyCheckBox);
+        PharmacyCheckBox.click();
+        DrugContinueButton.click();
+        Thread.sleep(5000);
+        DrugContinueButton.click();
+        waitforElement(FinalResults); 	
+		
 		if(FinalResults.isDisplayed())
 		return new PlanSelectorNewPage(driver);
 		else 
 			return null;
-
 	}
 	
 	
