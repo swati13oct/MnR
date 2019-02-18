@@ -1407,4 +1407,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return new LearnAboutMedicareHomePage(driver);
 	}
 
+	public MultiCountyModalPage SubNav_ValidateMultiCOuntyPopUp(String zipcode) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public MultiCountyModalPage ValidateMultiCOuntyPopUp(String zipcode) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 }
