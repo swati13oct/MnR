@@ -67,7 +67,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 	@FindBy(xpath = "//a[contains(text(), 'Primary Care Physician')]")
 	private WebElement SelectPCPLink;
 
-	@FindBy(xpath = "//*[contains(text(), 'Select PCP')]")
+	@FindBy(xpath = "//span[@class='pcp']//button")
 	private List <WebElement> AssinPCPLinks;
 
 	@FindBy(xpath = ".//*[@id='label_selectedLocation0_acceptingExistingPatientsOnly' or @id = 'label_selectedLocation0_accepting']")
@@ -164,9 +164,8 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoad(driver, LookUpProviderBtn, 30);
-		validateNew(LookUpProviderBtn);
-		validate(PCPPageHeader);
+		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
+		validateNew(PCPPageHeader);
 		System.out.println("Page header is Displayed"+PCPPageHeader.getText());	
 	}
 
@@ -233,10 +232,13 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 						System.out.println("PCP selection is Displayed in Rally Page : Selecting PCP");
 						SelectPCPLink.click();
 						try {
-							Thread.sleep(2000);
+							Thread.sleep(4000);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
+						}
+						if (AssinPCPLinks.size()>0){
+						System.out.println("No of PCPs are Displayed : "+AssinPCPLinks.size());
 						}
 						WebElement firstPCP = AssinPCPLinks.get(0);
 						firstPCP.click();
@@ -265,7 +267,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 							e.printStackTrace();
 						}
 						try {
-							Thread.sleep(1000);
+							Thread.sleep(3000);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -316,10 +318,11 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 
 	public PlanPremiumPage navigate_to_Plan_Premium_Page() {
 
-		validate(NextBtn);
-		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		validateNew(NextBtn);
+		jsClickNew(NextBtn);
+		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);
-		
+		*/
 		if(driver.getCurrentUrl().contains("monthly-premium")){
 			System.out.println("OLE Monthly Plan Premium Page is Displayed");
 			return new PlanPremiumPage(driver);

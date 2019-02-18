@@ -184,7 +184,7 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy (css = ".color-red.semi-bold>p>span")
 	private WebElement fedDateRangeErrMsg;
 	
-	@FindBy (css = ".color-red.semi-bold>p>span")
+	@FindBy (xpath ="//*[@id='futureDateErrorDivErr']/p/span")
 	private WebElement fromDateLaterThanToDateError;
 	
 	/*@FindBy (xpath =".//*[@id='moreInfoLinkAtdd0']/a")
@@ -365,6 +365,11 @@ public class ClaimSummarypage extends UhcDriver{
 	public void searchClaimsbyCustomDate(String planType,String claimPeriod) throws InterruptedException {
 	customSearch = driver.findElement(By.id("dateCustomSearchAtdd"));
 		validate (customSearch);
+		
+		customSearch = driver.findElement(By.id("dateCustomSearchAtdd"));
+		customSearch.click();
+		
+		
 		System.out.println("!!! Custom search is seen in the view Claims From drop down ===>"+(customSearch.getText()));
 		System.out.println("!!! Validating the drop down to select the claims !!!");
 	
@@ -582,11 +587,9 @@ public class ClaimSummarypage extends UhcDriver{
 
 	public void searchClaimsByTimeInterval(String toDate, String fromDate) {
 		System.out.println("The title of the page is-------->"+driver.getTitle());
-	if(driver.getTitle().equalsIgnoreCase("Claims Summary")){
+	if(driver.getTitle().equalsIgnoreCase("AARP Medicare Plans from UnitedHealthCare - Claims Summary")){
 
-			customSearch = driver.findElement(By.id("dateCustomSearchAtdd"));
-			customSearch.click();
-			
+		
 
 
 			sendkeys(from,fromDate);
@@ -695,65 +698,55 @@ public class ClaimSummarypage extends UhcDriver{
 			}
 			
 			else if (planType.contains("MAPD")){
-				/*validate (customSearch);
-				System.out.println("!!! Custom search is seen in the view Claims From drop down ===>"+(customSearch.getText()));*/
-				System.out.println("!!! Validating the drop down to select the claims from last 24 months  !!!");
-				last24months = driver.findElement(By.id("date24MAtdd"));
-				last24months.click();
-				System.out.println("!!! Month Selected from the view claims from drop down is ====>"+(last24months.getText()));
-				//Thread.sleep(2000);
-				validate (Medical);
-				System.out.println("!! Claim type Medical is validated!!! ");
-				validate (Medical);
-				validate(PrescriptionDrug);
-    			System.out.println("!!!Claim type PDP is validated !!!");
-    			PrescriptionDrug.click();
-				/* 
-				Select claimTypeDropdown = new Select(PrescriptionDrug);
-				claimTypeDropdown.selectByVisibleText("PrescriptionDrug");
-				//PrescriptionDrug = driver.findElement(By.id("claim-type"));
-				PrescriptionDrug.click();
-				*/
-				
-				System.out.println("!!! Claim Type PDP is clicked !!!");
-				//Thread.sleep(3000);
 				
 			
-				validate(claimsTablePrescriptionDrug);
-				System.out.println("!!! Claims Table PDP is seen on the Claims Summary page!!!");
-			    validate (RxNumberinthecalimstable);
-			    System.out.println("Element on the Rx table is ===>"+ RxNumberinthecalimstable.getText());
-				//	Assert.fail();
-				/* 
-				Select claimType = new Select(PrescriptionDrug);
-				claimType.selectByVisibleText("PrescriptionDrug");*/
-				System.out.println("!!! Claim Type Prescription Drug is Selected !!!");
-				Medical.click();
+					/*validate (customSearch);
+					System.out.println("!!! Custom search is seen in the view Claims From drop down ===>"+(customSearch.getText()));*/
+					System.out.println("!!! Validating the drop down to select the claims from last 24 months  !!!");
+					last24months = driver.findElement(By.id("date24MAtdd"));
+					last24months.click();
+					System.out.println("!!! Month Selected from the view claims from drop down is ====>"+(last24months.getText()));
+					//Thread.sleep(2000);
+					validate (Medical);
+					System.out.println("!! Claim type Medical is validated!!! ");
+					validate (Medical);
+					validate(PrescriptionDrug);
+	    			System.out.println("!!!Claim type PDP is validated !!!");
+	    			PrescriptionDrug.click();
+					/* 
+					Select claimTypeDropdown = new Select(PrescriptionDrug);
+					claimTypeDropdown.selectByVisibleText("PrescriptionDrug");
+					//PrescriptionDrug = driver.findElement(By.id("claim-type"));
+					PrescriptionDrug.click();
+					*/
+					
+					System.out.println("!!! Claim Type PDP is clicked !!!");
+					//Thread.sleep(3000);
+					
+				
+					validate(claimsTablePrescriptionDrug);
+					System.out.println("!!! Claims Table PDP is seen on the Claims Summary page!!!");
+				    validate (RxNumberinthecalimstable);
+				    System.out.println("Element on the Rx table is ===>"+ RxNumberinthecalimstable.getText());
+					//	Assert.fail();
+					/* 
+					Select claimType = new Select(PrescriptionDrug);
+					claimType.selectByVisibleText("PrescriptionDrug");*/
+					System.out.println("!!! Claim Type Prescription Drug is Selected !!!");
+					Medical.click();
+				
 				
 			}
 			else{
 				validate (customSearch);
 				System.out.println("!!! Custom search is seen in the view Claims From drop down ===>"+(customSearch.getText()));
 				System.out.println("!!! Validating the drop down to select the claims !!!");
-				last24months = driver.findElement(By.id("date24MAtdd"));
-				
+			
 				//last24months = driver.findElement(By.xpath("//div[@class='medical-claims']//h2[@ng-bind-html='planName']/parent::div//*[@id='document-date']//option[contains(@value,'24 months')]"));
-							}
+			}
 			
-			/*Select month = new Select(lastwenty4months);
-			month.selectByVisibleText("Last 24 months");
-			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-			CommonUtility.checkPageIsReady(driver);
-			System.out.println("Plan Year Selected is =====> "+lastwenty4months.getText());
-			driver.manage().timeouts().implicitlyWait(70, TimeUnit.SECONDS);
-			*/
-			
-			//Select dropdown = new Select(driver.findElement(By.xpath("//div[@class='medical-claims']//h2[@ng-bind-html='planName']/parent::div//*[@id='document-date']//option[contains(@value,'24 months')]")));
-			
-			//dropdown.selectByIndex(4);
-			//CommonUtility.waitForPageLoad(driver, last24months, 60);
-			last24months.click();
-			System.out.println("!!! Month Selected from the view claims from drop down is ====>"+(last24months.getText()));
+			/*last24months.click();
+			System.out.println("!!! Month Selected from the view claims from drop down is ====>"+(last24months.getText()));*/
 			/*try { Thread.sleep(10000); } 
 			catch (InterruptedException e) {			
 				
@@ -763,8 +756,8 @@ public class ClaimSummarypage extends UhcDriver{
 			*/
 			/*Select claimsFrom = new Select(viewClaimsFrom);
 			claimsFrom.selectByValue("24 months");*/
-			validate (claimsCopyText);
-			System.out.println(claimsCopyText.getText());
+//			validate (claimsCopyText);
+//			System.out.println(claimsCopyText.getText());
 			validate (learnMoreAboutClaims);
 			System.out.println("!!! Learn More About Claims link is seen on the claims Summary page ===>"+(learnMoreAboutClaims.isDisplayed()));
 			//validate(claimsTablePagination);
@@ -916,8 +909,13 @@ public class ClaimSummarypage extends UhcDriver{
 	public void  validatefromDateLaterThanToDateError() {
 		
 		
+			if(!fromDateLaterThanToDateError.getText().contains("Your From date needs to come before or")){
+			Assert.fail(fromDateLaterThanToDateError + "is not beind dsiplayed");	
+		}
+		//fromDateLaterThanToDateError = driver.findElement(By.xpath("//*[@id="futureDateErrorDivErr"]/p/span/text()"));
+		/*	
 		if(!fromDateLaterThanToDateError.isDisplayed())
-			Assert.fail(fromDateLaterThanToDateError + "is not beind dsiplayed");		
+			Assert.fail(fromDateLaterThanToDateError + "is not beind dsiplayed");	*/	
 	}
 	/**
 	 * @toDo : this method validates combo tab section

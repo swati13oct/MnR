@@ -12,9 +12,9 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
       | NewConfirm Email | <newConfirmEmail> |
 
     Examples: 
-      | plantype | memberType       | newEmail       | newConfirmEmail |
-      | PDP      | IDCardmember     | test@optum.com | test@optum.com  |
-      | MAPD     | IndividualMember | test@optum.com | test@optum.com  |
+      | plantype | memberType           | newEmail       | newConfirmEmail |
+      | PDP      | member_ContactUs     | test@optum.com | test@optum.com  |
+      | MAPD     | IndividualMember     | test@optum.com | test@optum.com  |
 
   @contactUs2 @GroupEmailConfirmMessage @regressionMember
   Scenario Outline: Verify Group Email Widget Confirm Request in contact us redesign page

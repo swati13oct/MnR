@@ -1,5 +1,7 @@
 package pages.acquisition.ulayer;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -49,8 +51,10 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(id="gf_lnk_9")
 	public static WebElement footerRequestforAssistancelink;
 	
+	@FindBy(id="gf_lnk_10")
+	public static WebElement footerAccessibilitylink;
 	
-	@FindBys(value = { @FindBy(xpath = "(//a[contains(text(),'Visit AARP.org')])[2]") })
+	@FindBys(value = { @FindBy(xpath = "//div[contains(@class,'globalfooternav')]//a[contains(text(),'Visit AARP.org')]") })
 	public static WebElement aarpOrgLink;
 	
 	@FindBys(value = { @FindBy(id = "footnotes1" )})
@@ -212,6 +216,8 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(id="cover")
 	public static WebElement RequestforAssistancepopup;
 	
+	@FindBy(xpath="//div[contains(@class,'proactive-offer__close')]")
+	public static List<WebElement> proactiveChatExistBtn;
 	
 	
 	public void ourPlansHover() {

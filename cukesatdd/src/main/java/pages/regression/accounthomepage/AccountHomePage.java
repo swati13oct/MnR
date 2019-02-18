@@ -65,6 +65,9 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "(//*[@class='ng-scope']//a[text()='Premium Payments'])[1]")
 	private WebElement paymentsLink;
 
+	@FindBy(xpath = "(//a[contains(text(),'Payments Page')])")
+	private WebElement TestHarnesspaymentsLink;
+
 	@FindBy(xpath = "//*[@id='premiumpayment_3']")
 	private WebElement paymentsLink3; // after clicking benefit and coverage page this is the link for payment history
 
@@ -226,9 +229,8 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(css = ".claimDetTableMainSection")
 	private WebElement claimDetTableMainSection;
 
-	//@FindBy(xpath = "//*[@id='dashboard']//span[text()='View Your Claims']")
-	//@FindBy(xpath = "//*[@id='claims_1']")
-	@FindBy(xpath = "//a[text()='Go to Claims page']")
+	@FindBy(xpath = "//*[@id='dashboard']//span[text()='View Your Claims']")
+	//@FindBy(xpath = "//*[@id='claims_1']") @FindBy(xpath = "//a[text()='Go to Claims page']")
 	private WebElement claimsDashboardLink;
 
 	@FindBy(xpath = "//*[@id='row2link1']/td[2]/a")
@@ -878,6 +880,35 @@ public class AccountHomePage extends UhcDriver {
 			return null;
 		}
 	}
+	
+	public PaymentHistoryPage navigateTooPaymentHistoryPage() {
+
+		try {
+			Thread.sleep(2000);
+			driver.switchTo().frame("IPerceptionsEmbed");
+			System.out.println("iPerception Pop Up is Present");
+			iPerceptionCloseButton.click();
+			driver.switchTo().defaultContent();
+			Thread.sleep(5000);
+		} catch (Exception e) {
+			System.out.println("iPerception Pop Up is not Present");
+		}
+
+		// Thread.sleep(16000);
+
+		try {
+			navigateToPaymentHistoryPage();
+		} catch (Exception e1) {
+			System.out.println("Unable to navigate to premium payment page");
+		}
+		if (PaymentHeading.getText().contains("Premium Payments Overview")) {
+			System.out.println("Payment Overview page displayed");
+			return new PaymentHistoryPage(driver);
+		} else {
+			System.out.println("payment overview page not displayed");
+			return null;
+		}
+	}
 
 	public AccountHomePage navigateToSHIPAutoPaymentHistoryPage() {
 
@@ -1494,6 +1525,12 @@ public class AccountHomePage extends UhcDriver {
 			System.out.println("payment link is displayed on the header");
 			paymentsLink.click();
 			return new PaymentHistoryPage(driver);
+		} 
+		else if (validate(TestHarnesspaymentsLink)) {
+
+			System.out.println("TestHarness Page Payments Link is displayed");
+			TestHarnesspaymentsLink.click();
+			return new PaymentHistoryPage(driver);
 		} else {
 			//tbd		System.out.println("payment link is not displayed on the header");  // when in future date
 			//tbd		coverageBenefits.click();
@@ -1538,7 +1575,7 @@ public class AccountHomePage extends UhcDriver {
 			// OrderMaterial_Dashboard.click();
 		} else {
 			String Page_URL = "https://" + MRScenario.environment
-					+ "-medicare.uhc.com//member/order-plan-materials.html";
+					+ "-medicare."+MRScenario.domain+"//member/order-plan-materials.html";
 			// String Page_URL = driver.getCurrentUrl().split(".com")[0];
 			driver.navigate().to(Page_URL);
 			System.out.println("Navigated to Order materials Page URL : " + Page_URL);
@@ -2334,6 +2371,5 @@ public class AccountHomePage extends UhcDriver {
 			counter++;
 		} while (counter < 2);
 	}
-
 	
 }

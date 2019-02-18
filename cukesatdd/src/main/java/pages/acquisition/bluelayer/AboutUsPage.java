@@ -20,12 +20,13 @@ import pages.acquisition.ulayer.PageTitleConstants;
  * @author saduri
  *
  */
-public class AboutUsPage extends UhcDriver{
+public class AboutUsPage extends GlobalWebElements{
 	
+	@FindBy(xpath = "//*[contains(@class,'meded-article-header__title')]")
+	public static WebElement header;
 	
-	private PageData aboutUs;
-
-	public JSONObject aboutUsJson;
+	@FindBy(xpath = "//section[contains(@class,'meded-article-content')]//p[string-length(text()) > '1']")
+	public static WebElement abountUsBodyParaSection;
 	
 	@FindBy(id = "medicareTitle")
 	private WebElement aboutUsTitle;
@@ -33,8 +34,6 @@ public class AboutUsPage extends UhcDriver{
 	@FindBy(className = "med_cont")
 	private WebElement aboutUsTable;
 	
-	@FindBy(id = "gf_lnk_3")
-	private WebElement contactUsLink;
 
 	public AboutUsPage(WebDriver driver) {
 		super(driver);
@@ -42,52 +41,20 @@ public class AboutUsPage extends UhcDriver{
 		openAndValidate();
 	}
 	
-public JSONObject aboutUs() {
-		
-		String fileName = CommonConstants.ABOUT_US_PAGE_DATA;
-		aboutUs = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
-		
-		JSONObject jsonObject = new JSONObject();
-		for (String key : aboutUs.getExpectedData().keySet()) {
-		WebElement element = findElement(aboutUs.getExpectedData()
-		.get(key));
-		if (element != null) {
-		if(validate(element)){
-		try {
-		jsonObject.put(key, element.getText());
-		} catch (JSONException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-		}
-		}
-		}
-		}
-		aboutUsJson = jsonObject;
-		
-		
-		return aboutUsJson;
-		
-	}
 
-public ContactUsUmsPage contactUsClick() {
-	validate(contactUsLink);
-	contactUsLink.click();
-	validate(contactUsLink);
-	if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_CONTACT_UNITEDHEALTHCARE)){
-		return new ContactUsUmsPage(driver);
-	}
-	return null;
-		
-	}
+
+
 	
 
 	@Override
 	public void openAndValidate() {
-		validate(aboutUsTitle);
+		
+		CommonUtility.waitForPageLoadNew(driver, header, 30);
+		validateNew(abountUsBodyParaSection);
+/*		validate(aboutUsTitle);
 		validate(aboutUsTable);
 		validate(contactUsLink);
-		
+		*/
 		
 	}
 

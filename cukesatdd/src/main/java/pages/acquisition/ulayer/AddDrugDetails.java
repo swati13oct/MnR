@@ -1,5 +1,4 @@
 package pages.acquisition.ulayer;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -7,99 +6,74 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
-
-import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 public class AddDrugDetails extends UhcDriver {
 
-	private PageData adddrugdetails;
-
 	public JSONObject adddrugdetailsJson;
 
-	@FindBy(xpath = "//span[contains(text(),'Add Drug Details')]")
-	public WebElement addDrugDetailsPage;
+	@FindBy(xpath = "//div[contains(@class,'add-drug-slide-header')]/span[@class='subtitle'][not (contains(@class,'ng-hige'))]")
+	public WebElement addDrugDetailsPageHeading;
 
 	@FindBy(id = "drug-dosage-button")
 	public WebElement continueButton;
 
-	@FindBy(xpath = "//input[@value='Lipitor TAB 10MG']")
-	public WebElement Dosageone;
+	@FindBy(xpath = "//input[@id='dosage-0']/following-sibling::label")
+	public WebElement firstDosageOption;
 
 	@FindBy(id = "quantity")
 	public WebElement quantityField;
 	
 	@FindBy(id = "drug-alt-back-button")
 	public WebElement backToSearchBtn;
+
+	@FindBy(xpath = "//div[@class='loading-dialog'][not (contains(@style,'display: none;'))]")
+	public WebElement loadingDialog;
 	
 	@FindBy(id = "frequency")
 	public WebElement selectYourFrequencyDropdown;
+	
 	public AddDrugDetails(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		//openAndValidate();
+		openAndValidate();
 	}
 
 	@Override
 	public void openAndValidate() {
-
-		JSONObject jsonObject = new JSONObject();
-		for (String key : adddrugdetails.getExpectedData().keySet()) {
-			WebElement element = findElement(adddrugdetails.getExpectedData().get(key));
-			if (null != element) {
-			validate(element);
-			try {
-				jsonObject.put(key, element.getText());
-			} catch (JSONException e) {
-				
-				e.printStackTrace();
-			}
-
-		}
+		CommonUtility.waitForPageLoadNew(driver, addDrugDetailsPageHeading, 45);
+		validateNew(selectYourFrequencyDropdown);
+		validateNew(quantityField);
+		validateNew(firstDosageOption);
 	}
-		adddrugdetailsJson = jsonObject;
-
-		System.out.println("addnewdrugJson----->" + adddrugdetailsJson);
-	}
-
 
 	public void selectDosage(String dosage) throws InterruptedException{
-	    Thread.sleep(8000);
-		WebElement element = driver.findElement(By.xpath("//input[@value='"+dosage+"']/following-sibling::label"));
-		//if(!element.isSelected()){
-			element.click();
-		//}
+		WebElement drugDosage = driver.findElement(By.xpath("//input[@value='"+dosage+"']/following-sibling::label"));
+		drugDosage.click();
 	}
 
 	public void selectQnty(String qnty){
-		waitforElement(quantityField);
-		sendkeys(quantityField, qnty);
+		sendkeysNew(quantityField, qnty);
 	}
 
 	public void selectFrequency(String frquency){
-		Select options = new Select(selectYourFrequencyDropdown);
-		if(frquency.equalsIgnoreCase("Every 1 month")){
-			options.selectByValue("30");
-		}
-		if(frquency.equalsIgnoreCase("Every 3 months")){
-			options.selectByValue("90");
-		}
+		selectFromDropDownByText(driver, selectYourFrequencyDropdown, frquency);
 	}
 
-	public SavingsOppurtunity continueAddDrugDetailsModal() throws InterruptedException{
-		CommonUtility.waitForPageLoad(driver, continueButton, 20);
+	public SavingsOppurtunity continueAddDrugDetailsModWithSaving() throws InterruptedException{
+		scrollToView(continueButton);
 		continueButton.click();
+		
 		return new SavingsOppurtunity(driver);
 		}
 	
-	public DrugCostEstimatorPage continueAddDrugDetailsMod() throws InterruptedException{
-		waitforElement(continueButton);
+	public DrugCostEstimatorPage continueAddDrugDetailsModNoSaving() throws InterruptedException{
+		validateNew(continueButton);
 		continueButton.click();
-		Thread.sleep(12000);
 		return new DrugCostEstimatorPage(driver);
 		}
+	
 	public SavingsOppurtunity continueAddDrugDetails(){
 		
 		waitforElement(continueButton);
@@ -114,7 +88,7 @@ public class AddDrugDetails extends UhcDriver {
 		return new AddNewDrugModal(driver);
 	}
 	public void validateThePage(){
-		Assert.assertTrue(addDrugDetailsPage.isDisplayed());
+		Assert.assertTrue(addDrugDetailsPageHeading.isDisplayed());
 	}
 
 }

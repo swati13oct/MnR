@@ -194,11 +194,17 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='pharmacy-locator']//div[contains(@class,'col-md-12')]/*[contains(text(),'farmacia')]")
 	WebElement pharmacyBodyContentSpanish;
 	
-	@FindBy(xpath = "//div[@class='pharmacy-locator']//div[contains(@class,'col-md-12')]/*[contains(text(),'使用網上名冊搜尋藥房和藥房位置。')]")
+	@FindBy(xpath = "//div[@class='pharmacy-locator']//div[contains(@class,'col-md-12')]/*[contains(text(),'ä½¿ç”¨ç¶²ä¸Šå��å†Šæ�œå°‹è—¥æˆ¿å’Œè—¥æˆ¿ä½�ç½®ã€‚')]")
 	WebElement pharmacyBodyContentChinese;
 
 	@FindBy(id = "distance")
 	WebElement distanceDropownID;
+	@FindBy(xpath = "//div[@class='modal-title']")
+	private WebElement countyModal;
+
+	@FindBy(id = "multiCountyCancelBtn")
+	private WebElement MultiCOunty_CancelBtn;
+
 	
 	public PharmacySearchPage(WebDriver driver) {
 		super(driver);
@@ -245,21 +251,6 @@ public class PharmacySearchPage extends UhcDriver {
 		System.out.println("*****Zipcode, distance and County details are entered******");
 		Select dropdown = new Select(seletPlandropdown);
 		waitUntilSelectOptionsPopulated(dropdown);
-		/*List<WebElement> options;
-		options = dropdown.getOptions();
-		int counter = 0;
-		while (options.isEmpty()) {
-			if (counter <= 30) {
-				try {
-					Thread.sleep(2000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				options = dropdown.getOptions();
-			} else
-				Assert.fail("Plans not populated!!!");
-		}*/
 	}
 
 	public void selectsPlanName(String planName) {
@@ -270,7 +261,8 @@ public class PharmacySearchPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		if (!loadingBlock.isEmpty()) {
-			CommonUtility.waitForElementToDisappear(driver, loadingBlock.get(0), 60);
+			waitforElementDisapper(By.className("loading-block"), 60);
+			//CommonUtility.waitForElementToDisappear(driver, loadingBlock.get(0), 60);
 		}
 		if (!validateNew(pharmacyCount)) {
 			Assert.fail("Pharmacies not displayed");
@@ -307,7 +299,8 @@ public class PharmacySearchPage extends UhcDriver {
 				}
 				if (!loadingBlock.isEmpty()) {
 					System.out.println("Waiting till loading spinner gets disappear");
-					CommonUtility.waitForElementToDisappear(driver, loadingBlock.get(0), 60);
+					waitforElementDisapper(By.className("loading-block"), 60);
+					//CommonUtility.waitForElementToDisappear(driver, loadingBlock.get(0), 60);
 				}
 				if (!driver.findElements(By.xpath("//label[contains(text(),'" + pharmacytype
 						+ "')]/preceding-sibling::input[contains(@class,'ng-dirty')]")).isEmpty()) {
@@ -409,10 +402,6 @@ public class PharmacySearchPage extends UhcDriver {
 	    		selectPlan.selectByValue("1");
 	    	}
 	    }
-	    public void enterZipCode(String zipCode) {
-			txtZipCode.clear();
-			txtZipCode.sendKeys(zipCode);
-		    }
 
 		    public void selectState(String state) {
 
@@ -634,11 +623,11 @@ public PharmacyResultPage ValidateShowOnMapResult() {
 		} else if (("zh").equalsIgnoreCase(language)) {
 			Assert.fail("Temporarily commented Chinese code. Please select Spanish or English");
 			/*String headingText = pharmacylocatorheader.getText();
-			if (!headingText.contains("尋找藥房"))
+			if (!headingText.contains("å°‹æ‰¾è—¥æˆ¿"))
 				return false;
 			if (!pharmacyBodyContentChinese.isDisplayed())
 				return false;
-			if (!btnContinue.getText().contains("繼續"))
+			if (!btnContinue.getText().contains("ç¹¼çºŒ"))
 				return false;*/
 		} else {
 			Assert.fail("Please select a valid language!!!");
@@ -646,4 +635,60 @@ public PharmacyResultPage ValidateShowOnMapResult() {
 		}
 		return true;
 	}
+	
+	
+	@FindBy(xpath = "//*[@class='proactive-offer__button-wrapper']/button[contains(text(), 'Exit')]")
+    private WebElement ProactiveChat_Exit;
+
+    public void enterZipCode(String zipCode) {
+//		txtZipCode.clear();
+		validate(txtZipCode);
+    	txtZipCode.sendKeys(zipCode);
+    	driver.manage().window().maximize();
+		System.out.println("Zip code entered for Pharmacy Search : "+txtZipCode.getText());
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		try {
+			if(validate(ProactiveChat_Exit)){
+				System.out.println("Proactive chat is displayed");
+				jsClickNew(ProactiveChat_Exit);
+				System.out.println("Proactive chat exit button is clicked");
+				if(validate(ProactiveChat_Exit)){
+					System.out.println("Proactive chat is Still displayed");
+				}
+			}
+		} catch (Exception e1) {
+			System.out.println("Proactive chat not displayed");
+			e1.printStackTrace();
+		}
+		searchbtn.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	    }
+
+	public boolean validate_MultiCounty_CancelBtn() {
+		validate(countyModal);
+		boolean ValidationFlag = true;
+		if(validate(MultiCOunty_CancelBtn)){
+			MultiCOunty_CancelBtn.click();
+			if(currentUrl().contains("Pharmacy-Search") && txtZipCode.getText().isEmpty()){
+				ValidationFlag = (!ValidationFlag)?false:true;
+			}else{
+				System.out.println("Zip code entry page is not displayed with Zip code field blank");
+				ValidationFlag = false;
+			}
+		}
+		else{
+			System.out.print("Cancel Button is not dispalyed in the Multy COunty Pop-up");
+			ValidationFlag = false;
+		}
+		return ValidationFlag;
+	}
+	
 }

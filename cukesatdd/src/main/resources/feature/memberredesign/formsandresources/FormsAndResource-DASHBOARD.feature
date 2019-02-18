@@ -37,7 +37,7 @@ Scenario Outline: To verify quicklinks for a MAPD member
 	Examples: 
       | planType | memberType |Identifier| language |count|rider|
       | MAPD     | Individual |IndEffectiveAARP| ENGLISH  | 7   |NoRider|
-      | MAPD     | Individual |IndEffectiveAARP| ENGLISH  | 7   |Rider|
+   	  | MAPD     | Individual |IndEffectiveAARP| ENGLISH  | 7   |Rider|
       | MAPD     | Group |GrpEffectiveUHC| ENGLISH  | 7   |NoRider|
       | MAPD     | Individual |IndEffectiveUHC| ENGLISH  | 6   |NoRider|
 	  | MAPD     | Individual |IndEffectiveUHC| ENGLISH  | 6   |Rider|
@@ -53,8 +53,8 @@ Scenario Outline: To verify quicklinks for a MAPD member
       |identifier|<Identifier>|
       |Rider|<rider>|
     And user clicks on the view document and resources link and navigate to forms and resource page
-    | Plan Type   | <planType>   |
-    | Member Type    | <memberType>    |
+		    | Plan Type   | <planType>   |
+		    | Member Type    | <memberType>    |
     Then user verifies presence of jump links on F&R page
       | Plan Type | <planType> |
       |Rider|<rider>|
@@ -207,7 +207,7 @@ Scenario Outline: To validate the forms and resources page MAPD AARP Individual 
      | PASSPORT					| <passport>    			|
      | OVER THE COUNTER			| <overthecounter>    		|  
    	Then validate that annual directory section is displayed
-    | Member Type | <memberType> |
+     | Member Type | <memberType> |
     Then validate pdf's in annual directory section
      |Member Type|<memberType>|
      | ProviderDirectory     		  | <providerdirectory>    |
@@ -307,6 +307,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     And validate that the view temporary id card link is displayed
     | Member Type | <memberType> |
     Then validate that the plan material section is displayed
+    | Member Type | <memberType> |
     And validate that english is default language in the dropdown
     | Member Type | <memberType> |
     And the user validates the language dropdown and selects new value in dropdown successfully
@@ -329,11 +330,6 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     Then validate that the AnocSection is displayed
     Then validate that annual directory section is displayed
     | Member Type | <memberType> |
-    		
-	And the user verifies that the correct pdfs are coming in the anoc section
-			      | ANNUAL NOTICE OF CHANGES    | <anoc>                       |
-			      | EVIDENCE OF COVERAGEANOC    | <evidenceofcoverageanoc>     |
-			      | COMPREHENSIVE FORMULARYANOC | <comprehensiveformularyanoc> |
     And both Pharmacy and provider search links are displayed
     | PlanType |<planType>|
     Then validate that My Document section is displayed
@@ -345,6 +341,11 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
      | ProviderDirectory     		  | <providerdirectory>    |
      | Vendor Information Sheet       | <vendorInformationsheet> |
      |Pharmacy Directory Information  |<pharmacydirectoryinformation>|
+     And the user verifies that the correct pdfs are coming in the anoc section
+      | Member Type|<memberType>|
+      | ANNUAL NOTICE OF CHANGES    | <anoc>                       |
+      | EVIDENCE OF COVERAGEANOC    | <evidenceofcoverageanoc>     |
+      | COMPREHENSIVE FORMULARYANOC | <comprehensiveformularyanoc> |
 
     Examples: 
       | planType | memberType         | language | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | comprehensiveformulary  | priorauth           | steptherapy  | formularyadd        | formularydel        | anoc                     | evidenceofcoverageanoc | comprehensiveformularyanoc |unitedhealthpassportprogram |alternativedruglist|providerdirectory   | vendorInformationsheet    |pharmacydirectoryinformation  |
@@ -365,6 +366,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     And validate that the view temporary id card link is displayed
     | Member Type | <memberType> |
     Then validate that the plan material section is displayed
+    | Member Type | <memberType> |
     And validate that english is default language in the dropdown
       | Member Type | <memberType> |
     And the user validates the language dropdown and selects new value in dropdown successfully
@@ -420,6 +422,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     | Member Type    | <memberType>    |
    # And validates that PEEHIP logo is not displayed
     Then validate that the plan material section is displayed
+    | Member Type | <memberType> |
     And validate for active member Temporary Id Card and Plan Order Material links are displayed
     | Member Type | <memberType> |
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
@@ -486,6 +489,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     | Member Type    | <memberType>    |
     #And validates that PEEHIP logo is not displayed
     Then validate that the plan material section is displayed
+    | Member Type | <memberType> |
     And validate for active member Temporary Id Card and Plan Order Material links are displayed
     | Member Type | <memberType> |
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
@@ -522,6 +526,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
       | FORMULARY ADDITIONS     | <formularyadd>           |
       | FORMULARY DELETIONS     | <formularydel>           |
 	And the user verifies that the correct pdfs are coming in the anoc section
+	  |Member Type|<memberType>|
       | ANNUAL NOTICE OF CHANGES    | <anoc>                       |
       | EVIDENCE OF COVERAGEANOC    | <evidenceofcoverageanoc>     |
       | COMPREHENSIVE FORMULARYANOC | <comprehensiveformularyanoc> |
@@ -543,6 +548,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
    #And validates that PEEHIP logo is not displayed
     And validates the pdp texas logo
     Then validate that the plan material section is displayed
+    | Member Type | <memberType> |
     And validate for active member Temporary Id Card and Plan Order Material links are displayed
     | Member Type | <memberType> |
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
@@ -570,12 +576,6 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     And Medical EOB link is not displayed for PDP
     Then validate that the forms & resources section is displayed
     Then validate that the renew magazine section is not displayed
-    And the user verifies that the correct pdfs are coming in the anoc section
-      | Member Type | <memberType> |
-      | ANNUAL NOTICE OF CHANGES     | <anoc>                      |
-      | EVIDENCE OF COVERAGEANOC     | <evidenceofcoverageanoc>     |
-      | COMPREHENSIVE FORMULARYANOC  | <comprehensiveformularyanoc> |
-      | ADDITIONAL DRUG COVERAGEANOC | <additionaldruganoc>         |
     And then user verifies that the correct pdfs are coming in the plan material section
      #| GETTING STARTED GUIDE             | <gettingstartedguide>    |
       | BENEFIT-HIGHLIGHT                 | <benefithighlight>       |  
@@ -588,6 +588,12 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
       | STEP THERAPY                      | <steptherapy>            |
       | FORMULARY ADDITIONS               | <formularyadd>           |
       | FORMULARY DELETIONS               | <formularydel>           |
+     And the user verifies that the correct pdfs are coming in the anoc section
+      | Member Type | <memberType> |
+      | ANNUAL NOTICE OF CHANGES     | <anoc>                      |
+      | EVIDENCE OF COVERAGEANOC     | <evidenceofcoverageanoc>     |
+      | COMPREHENSIVE FORMULARYANOC  | <comprehensiveformularyanoc> |
+      | ADDITIONAL DRUG COVERAGEANOC | <additionaldruganoc>         | 
  
       Examples:
 
@@ -604,6 +610,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     | Member Type    | <memberType>    |
     #And validates that PEEHIP logo is not displayed
     Then validate that the plan material section is displayed
+    | Member Type | <memberType> |
     And validate for active member Temporary Id Card and Plan Order Material links are displayed
     | Member Type | <memberType> |
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
@@ -634,13 +641,6 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     #  | EVIDENCE OF COVERAGE     | <evidenceofcoverage>     |
     #  | CERTIFICATE OF COVERAGE  | <certificateofcoverage>  |
     Then validate that the anoc section is displayed for group
-    And the user verifies that the correct pdfs are coming in the anoc section
-      | Member Type | <memberType> |
-      | ANNUAL NOTICE OF CHANGES     | <anoc>                       |
-      |CERTIFICATE 0F COVERAGE      |  <certificateofcoverage>  |
-     #| EVIDENCE OF COVERAGEANOC     | <evidenceofcoverageanoc>     |
-      | COMPREHENSIVE FORMULARYANOC  | <comprehensiveformularyanoc> |
-      | ADDITIONAL DRUG COVERAGEANOC | <additionaldruganoc>         |
     Then validate that annual directory section is displayed
       | Member Type | <memberType> |
     Then validate that My Document section is displayed
@@ -651,6 +651,13 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     And the provider search link is not displayed for PDP
     And the Pharmacy locator link is displayed
       | Member Type | <memberType> |
+    And the user verifies that the correct pdfs are coming in the anoc section
+      | Member Type | <memberType> |
+      | ANNUAL NOTICE OF CHANGES     | <anoc>                       |
+      |CERTIFICATE 0F COVERAGE      |  <certificateofcoverage>  |
+     #| EVIDENCE OF COVERAGEANOC     | <evidenceofcoverageanoc>     |
+      | COMPREHENSIVE FORMULARYANOC  | <comprehensiveformularyanoc> |
+      | ADDITIONAL DRUG COVERAGEANOC | <additionaldruganoc>         |  
     
 
     Examples: 
@@ -669,6 +676,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     | Member Type    | <memberType>    |
    # And validates that PEEHIP logo is not displayed
     Then validate that the plan material section is displayed
+    | Member Type | <memberType> |
     And validate for active member Temporary Id Card and Plan Order Material links are displayed
     | Member Type | <memberType> |
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
@@ -722,6 +730,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     | Member Type    | <memberType>    |
    # And the user verifies the alpeehip logo
     Then validate that the plan material section is displayed
+    | Member Type | <memberType> |
     And validate for active member Temporary Id Card and Plan Order Material links are displayed
     | Member Type | <memberType> |
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
@@ -788,6 +797,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     | Member Type | <memberType> |
    #And validates that PEEHIP logo is not displayed
     Then validate that the plan material section is displayed
+    | Member Type | <memberType> |
    And validate for active member Temporary Id Card and Plan Order Material links are displayed
     | Member Type | <memberType> |
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
@@ -797,7 +807,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     | Member Type | <memberType> |
     And the user validates the language dropdown and selects new value in dropdown successfully
       | Language | <language> |
-     Then validate that the anoc section is not displayed
+    Then validate that the anoc section is not displayed
     Then validate that annual directory section is displayed
     | Member Type | <memberType> |
     And both the Pharmacy locator & provider search links are displayed
@@ -842,6 +852,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     | Member Type    | <memberType>    |
    #And validates that PEEHIP logo is not displayed
     Then validate that the plan material section is displayed
+    | Member Type | <memberType> |
     And validate for active member Temporary Id Card and Plan Order Material links are displayed
     | Member Type | <memberType> |
     And clicking on the order plan materials link the user is navigated to the Order Plan Material Page
@@ -884,11 +895,13 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
    #And validates that PEEHIP logo is not displayed
     And user is on the forms and resources page for first plan tab
     Then validate that the plan material section is displayed
+    | Member Type | <memberType> |
     And validate for active member Temporary Id Card and Plan Order Material links are displayed
     | Member Type | <memberType> |
     And the user scrolls till the end of the page to check the forms and resources section
     And the user changes the plan tab to view the forms and resources page for second plan
     Then validate that the plan material section is displayed
+    | Member Type | <memberType> |
     And validate for active member Temporary Id Card and Plan Order Material links are displayed
     | Member Type | <memberType> |
     And the user scrolls till the end of the page to check the forms and resources section
@@ -907,6 +920,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     | Member Type    | <memberType>    |
    # And validates that PEEHIP logo is not displayed
     Then validate that the plan material section is displayed
+    | Member Type | <memberType> |
     And for terminated member order plan materials link is not displayed
     Then validate that the anoc section is not displayed
     And both the Pharmacy locator and provider search links are not displayed
@@ -937,15 +951,16 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     And validate that the view temporary id card link is displayed
     | Member Type | <memberType> |
     Then validate that the plan material section is displayed
+    | Member Type | <memberType> |
     And validate that english is default language in the dropdown
     | Member Type | <memberType> |
     Then validate that the forms & resources section is displayed
     Then verifies that Electronic Funds pdf for ship is displayed
-    Then the user verifies the pdfs for ship if particular pdf is not present
-		| Member Type | <memberType> |
-		| BENEFIT HIGHLIGHTS  |<benefitstable>    |
-		| PLAN OVERVIEW | <planoverview>  |
-		| OUTLINE OF COVERAGE    |<outlineofcoverage>|
+   # Then the user verifies the pdfs for ship if particular pdf is not present
+	#	| Member Type | <memberType> |
+	#	| BENEFIT HIGHLIGHTS  |<benefitstable>    |
+	#	| PLAN OVERVIEW | <planoverview>  |
+	#	| OUTLINE OF COVERAGE    |<outlineofcoverage>|
 
     Examples: 
       | planType | memberType     | benefitstable  |planoverview|outlineofcoverage |
@@ -960,7 +975,7 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <member> |
-    And User Clicks on the Pop up displayed
+    And user Clicks on the Pop up displayed and checks payment link
     #And user clicks on the view document and resources link and navigate to forms and resource page from member auth page
     #And validates that PEEHIP logo is not displayed
     #And validate for active member Temporary Id Card and Plan Order Material links are displayed

@@ -63,17 +63,17 @@ public class PlanPremiumPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoad(driver, ZipCode_County, 30);
-		validate(PageHeader);
-		validateNew(ZipCode_County);
+		CommonUtility.waitForPageLoadNew(driver, ZipCode_County, 30);
+		validateNew(PageHeader);
 		System.out.println("Page header is Displayed : "+PageHeader.getText());	
 	}
 
 	public SupplementalBenefitsPage navigate_to_Supplemental_Riders_Page() {
 		agreeBtn.click();
-		validate(NextBtn);
-		JavascriptExecutor executor = (JavascriptExecutor)driver;
-		executor.executeScript("arguments[0].click();", NextBtn);
+		validateNew(NextBtn);
+		jsClickNew(NextBtn);
+		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", NextBtn);*/
 		
 		if(driver.getCurrentUrl().contains("optional-benefits")){
 			System.out.println("OLE Supplemental Benefits page is Displayed");
@@ -87,10 +87,16 @@ public class PlanPremiumPage extends UhcDriver{
 
 	public AuthorizationPage navigate_to_Authorization_Page() {
 		agreeBtn.click();
-		validate(NextBtn);
-		JavascriptExecutor executor = (JavascriptExecutor)driver;
-		executor.executeScript("arguments[0].click();", NextBtn);
-		
+		validateNew(NextBtn);
+		jsClickNew(NextBtn);
+		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", NextBtn);*/
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		};
 		if(driver.getCurrentUrl().contains("authorization")){
 			System.out.println("OLE Authorization page is Displayed : Navigation from Plan Premium Page Passed");
 			return new AuthorizationPage(driver);

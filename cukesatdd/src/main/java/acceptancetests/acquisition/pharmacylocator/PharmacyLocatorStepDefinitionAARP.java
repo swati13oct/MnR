@@ -358,4 +358,25 @@ public class PharmacyLocatorStepDefinitionAARP {
 		Assert.assertTrue("Changes to language is not successful",
 				pharmacySearchPage.validateLanguageChanges(langName));
 	}
+	
+	@And("^the user enters following Multi County details and  validates the Cancel button for Multi COunty Pop-up clears the Zip code text fields in pharmacy search in AARP Site$")
+	public void user_enters_MultiCounty_zip_to_validate(DataTable zipAttributes) {
+		List<DataTableRow> zipAttributesRow = zipAttributes.getGherkinRows();
+		Map<String, String> zipAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < zipAttributesRow.size(); i++) {
+
+			zipAttributesMap.put(zipAttributesRow.get(i).getCells().get(0),
+					zipAttributesRow.get(i).getCells().get(1));
+		}
+		String zipcode = zipAttributesMap.get("Zip Code");
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.ZIPCODE,
+				zipcode);
+
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		pharmacySearchPage.enterZipCode(zipcode);
+		boolean Validation_Flag = pharmacySearchPage.validate_MultiCounty_CancelBtn();
+		Assert.assertTrue("Validation failed : Cancel button Validation for Multi County Pop-up Failed ",Validation_Flag);
+
+	}
 }

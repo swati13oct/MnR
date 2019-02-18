@@ -41,7 +41,7 @@ public static final String ACCOUNT_HOME_PAGE = "accountHomePage";
 
 	public static final String HEALTH_PLANS_PAGE = "healthPlansPage";
 
-	public static final String PLAN_DETAILS_PAGE = "planDetailsPage";
+
 
 	public static final String ACQUISITION_HOME_PAGE = "acquisitionHomePage";
 	
@@ -481,6 +481,10 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 	public static final String PAYMENT_HISTORY_PAGE = "paymentHistoryPage";
 
 	public static final String ONE_TIME_PAYMENT_PAGE = "oneTimePaymentPage";
+	
+	public static final String Credit_Card_Payments_Page = "creditCardPaymentPage";
+	
+	public static final String Review_OneTime_Payments_Page = "reviewOneTimePaymentsPage";
 
 	public static final String CONFIRM_ONE_TIME_PAYMENT_PAGE = "confirmOneTimePaymentPage";
 
@@ -584,12 +588,34 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 	public static final String DashPage =  "DashboradPage";
 
 	public static final String One_Time_Payments_Page = "oneTimePaymentPage";
+	
+	public static final String SetUp_Recurring_Page = "setupRecurringPage";
+	
+	public static final String Review_Automatic_Page = "reviewAutomaticPage";
+	
+	public static final String Update_Recurring_Page = "updateRecurringPage";
+	
+	public static final String Update_Review_Page = "updateReviewPage";
+	
+	public static final String Update_Confirmation_Page = "updateConfirmationPage";
+	
+	public static final String Recurring_Confirmation_Page = "recurringConfirmationPage";
+	
+	public static final String Payments_Form_Page = "paymentsFormPage";
 
 	public static final String Review_OneTime_Page = "reviewOneTimePaymentPage";
 
 	public static final String SECURITY_QUESTIONS_PAGE = "securityQuestionsPage";
 	
 	public static final String PLAN_SELECTOR_NEW_PAGE = "planSelectorNewPage";
+	
+	public static final String PLAN_SELECTOR_QUESTIONNAIRE = "planSelectorQuestionnaire";
+	
+	public static final String PLAN_SELECTOR_QUESTIONNAIRE2 = "planSelectorQuestionnaire2";
+	
+	public static final String PLAN_RESULTS_PAGE = "PlanResultsPage";
+	
+	public static final String PLAN_DETAILS_PAGE = "PlanDetailsPage";
 		
 	public static final String SSO_TEST_HARNESS_PAGE = "ssoTestHarnessPage";
 	
@@ -610,7 +636,7 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 
 	public static final String NEW_CC_BUTTON = "NewCCButton";
 	
-	
+	public static final String MEDICARE_ELIGIBILITY_PAGE = "medicareEligibilityPage";
 
 	
 }

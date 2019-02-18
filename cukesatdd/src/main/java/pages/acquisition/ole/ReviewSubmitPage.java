@@ -127,9 +127,8 @@ public class ReviewSubmitPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoad(driver, SubmitApplicationBtn, 30);
-		validateNew(SubmitApplicationBtn);
-		validate(PageHeader);
+		CommonUtility.waitForPageLoadNew(driver, SubmitApplicationBtn, 30);
+		validateNew(PageHeader);
 		System.out.println("Page header is Displayed : "+PageHeader.getText());	
 	}
 
@@ -157,14 +156,14 @@ public class ReviewSubmitPage extends UhcDriver{
 		String Expected_County = detailsMap.get("County");
 		String Expected_PlanPremium = detailsMap.get("Plan Premium");
 
-		try {
+		/*try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		boolean flag = true;
-		
+		validateNew(PlanYear_NameDisplay);
 		String PlanNameDisplayed = PlanYear_NameDisplay.getText();
 		if(PlanNameDisplayed.contains(Expected_PlanName)){
 			flag = (!flag)?false:true;
@@ -187,7 +186,7 @@ public class ReviewSubmitPage extends UhcDriver{
 			System.out.println(LastName+" : "+LastNameDisplayed+" : "+flag);
 		}else flag =false;
 
-		if(CardType.contains("HICN")){
+		if(CardType.contains("HICN") || CardType.contains("RRID") ){
 			String MedicareNumberDisplayed = MedicareClaimNumberDisplay.getText().replaceAll("-", "");
 			if(MedicareNumberDisplayed.contains(MedicareNumber)){
 				flag = (!flag)?false:true;
@@ -294,12 +293,13 @@ public class ReviewSubmitPage extends UhcDriver{
 
 	public OLEconfirmationPage submitEnrollment() {
 		
-		validate(SubmitApplicationBtn);
-		JavascriptExecutor executor = (JavascriptExecutor)driver;
-		executor.executeScript("arguments[0].click();", SubmitApplicationBtn);
-
-		WebDriverWait wait = new WebDriverWait(driver, 30);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@class = 'cta-button confirm-button']")));
+		validateNew(SubmitApplicationBtn);
+		jsClickNew(SubmitApplicationBtn);
+		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", SubmitApplicationBtn);*/
+		waitforElementDisapper(By.xpath("//*[@class = 'cta-button confirm-button']"), 45);
+		/*WebDriverWait wait = new WebDriverWait(driver, 30);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@class = 'cta-button confirm-button']")));*/
 		if(driver.getCurrentUrl().contains("confirmation")){
 			System.out.println("OLE Enrollment Submission Confirmation Page is Displayed");
 			return new OLEconfirmationPage(driver);

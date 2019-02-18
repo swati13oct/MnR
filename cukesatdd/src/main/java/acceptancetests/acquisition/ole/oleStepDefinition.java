@@ -445,19 +445,29 @@ public class oleStepDefinition {
 			MedicareDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
 		}
-		Random rnd = new Random();
-		int n = 100000000 + rnd.nextInt(900000000);
-		String MedicareNumber = Integer.toString(n)+"C";
-		MedicareDetailsMap.put("Medicare Number", MedicareNumber);
+		String CardType = MedicareDetailsMap.get("Card Type");
+		if(CardType.contains("HICN")){
+			Random rnd = new Random();
+			int n = 100000000 + rnd.nextInt(900000000);
+			String MedicareNumber = Integer.toString(n)+"C";
+			MedicareDetailsMap.put("Medicare Number", MedicareNumber);
+			
+			}
+		else if(CardType.contains("RRID")){
+			Random rnd = new Random();
+			int n = 100000000 + rnd.nextInt(900000000);
+			String MedicareNumber = "RID"+Integer.toString(n);
+			MedicareDetailsMap.put("Medicare Number", MedicareNumber);
 		
+			}
 		String SSNflag = MedicareDetailsMap.get("SSN Flag");
 		if(SSNflag.contains("true")){
 			MedicareDetailsMap.put("SSN Number", "123456789");
 		}
 		MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
 
-		medicareInfoPage = medicareInfoPage.enter_required_Medicare_details(MedicareDetailsMap);
-		if (medicareInfoPage != null) {
+		boolean isInformationFilled = medicareInfoPage.enter_required_Medicare_details(MedicareDetailsMap);
+		if (isInformationFilled) {
 
 			getLoginScenario().saveBean(oleCommonConstants.FIRST_NAME, MedicareDetailsMap.get("First Name"));
 			getLoginScenario().saveBean(oleCommonConstants.LAST_NAME, MedicareDetailsMap.get("Last Name"));
@@ -633,7 +643,7 @@ public class oleStepDefinition {
 			}
 			else{
 				System.out.println("Already Enrolled Error message is NOT Displayed in OLE Medicare Information PAGE : "+Validation_Status);
-				Assert.fail();
+				Assert.fail("Already Enrolled Error message is NOT Displayed in OLE Medicare Information PAGE : "+Validation_Status);
 			}
 
 		}
@@ -945,8 +955,8 @@ public class oleStepDefinition {
 						givenAttributesRow.get(i).getCells().get(1));
 			}
 			PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
-			personalInformationPage = personalInformationPage.enter_member_details(MemberDetailsMap);
-			if (personalInformationPage != null) {
+			boolean isFormFilled = personalInformationPage.enter_member_details(MemberDetailsMap);
+			if (isFormFilled) {
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE,
 						personalInformationPage);
 				System.out.println("OLE Personal Information Page - All required Member Details are entered");
@@ -1463,8 +1473,8 @@ public class oleStepDefinition {
 		String LongTermQuestionFlag = QuestionMap.get("LongTerm Question");
 			 */
 			CoverageInformationPage coverageInformationPage = (CoverageInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_COVERAGE_INFO_PAGE);
-			coverageInformationPage = coverageInformationPage.answer_following_questions(QuestionMap);
-			if (coverageInformationPage != null) {
+			boolean areQuestionsAnswered = coverageInformationPage.answer_following_questions(QuestionMap);
+			if (areQuestionsAnswered) {
 
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_COVERAGE_INFO_PAGE,
 						coverageInformationPage);
@@ -1748,7 +1758,7 @@ public class oleStepDefinition {
 			}
 			else{
 				System.out.println("Authorization Page : Required fields NOT validated");
-				Assert.fail();
+				Assert.fail("Authorization Page : Required fields NOT validated");
 			}
 		}
 	}
@@ -1882,13 +1892,14 @@ public class oleStepDefinition {
 				}
 				else{
 					System.out.println("Review and Submit Page : All Plan and Member Details  NOT validated");
-					Assert.fail();
+					Assert.fail("Review and Submit Page : All Plan and Member Details  NOT validated");
 				}
 			}
 			else{
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE,
 						oleConfirmationPage);
 				System.out.println("OLE Confirmation Page is NOT Displayed : OLE Submission Failed");
+				Assert.fail("OLE Confirmation Page is NOT Displayed : OLE Submission Failed");	
 			}
 		}
 	}

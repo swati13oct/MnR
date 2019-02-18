@@ -66,9 +66,7 @@ public class ProposedEffectiveDatePage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoad(driver, ProposedEffectiveDatePageHeader, 30);
-		validate(ProposedEffectiveDatePageHeader);
-		
+		CommonUtility.waitForPageLoadNew(driver, ProposedEffectiveDatePageHeader, 30);		
 		System.out.println("Page header is Displayed"+ProposedEffectiveDatePageHeader.getText());
 		
 	}
@@ -92,9 +90,10 @@ public class ProposedEffectiveDatePage extends UhcDriver{
 	
 	public Object navigate_to_PCP_Page(String planType) {
 
-		validate(NextBtn);
-		JavascriptExecutor executor = (JavascriptExecutor)driver;
-		executor.executeScript("arguments[0].click();", NextBtn);
+		validateNew(NextBtn);
+		jsClickNew(NextBtn);
+		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", NextBtn);*/
 		
 		if(planType.contentEquals("PDP")){
 			if(driver.getCurrentUrl().contains("monthly-premium")){
