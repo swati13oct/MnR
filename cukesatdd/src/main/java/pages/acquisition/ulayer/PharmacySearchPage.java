@@ -199,6 +199,12 @@ public class PharmacySearchPage extends UhcDriver {
 
 	@FindBy(id = "distance")
 	WebElement distanceDropownID;
+	@FindBy(xpath = "//div[@class='modal-title']")
+	private WebElement countyModal;
+
+	@FindBy(id = "multiCountyCancelBtn")
+	private WebElement MultiCOunty_CancelBtn;
+
 	
 	public PharmacySearchPage(WebDriver driver) {
 		super(driver);
@@ -396,10 +402,6 @@ public class PharmacySearchPage extends UhcDriver {
 	    		selectPlan.selectByValue("1");
 	    	}
 	    }
-	    public void enterZipCode(String zipCode) {
-			txtZipCode.clear();
-			txtZipCode.sendKeys(zipCode);
-		    }
 
 		    public void selectState(String state) {
 
@@ -633,4 +635,60 @@ public PharmacyResultPage ValidateShowOnMapResult() {
 		}
 		return true;
 	}
+	
+	
+	@FindBy(xpath = "//*[@class='proactive-offer__button-wrapper']/button[contains(text(), 'Exit')]")
+    private WebElement ProactiveChat_Exit;
+
+    public void enterZipCode(String zipCode) {
+//		txtZipCode.clear();
+		validate(txtZipCode);
+    	txtZipCode.sendKeys(zipCode);
+    	driver.manage().window().maximize();
+		System.out.println("Zip code entered for Pharmacy Search : "+txtZipCode.getText());
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		try {
+			if(validate(ProactiveChat_Exit)){
+				System.out.println("Proactive chat is displayed");
+				jsClickNew(ProactiveChat_Exit);
+				System.out.println("Proactive chat exit button is clicked");
+				if(validate(ProactiveChat_Exit)){
+					System.out.println("Proactive chat is Still displayed");
+				}
+			}
+		} catch (Exception e1) {
+			System.out.println("Proactive chat not displayed");
+			e1.printStackTrace();
+		}
+		searchbtn.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	    }
+
+	public boolean validate_MultiCounty_CancelBtn() {
+		validate(countyModal);
+		boolean ValidationFlag = true;
+		if(validate(MultiCOunty_CancelBtn)){
+			MultiCOunty_CancelBtn.click();
+			if(currentUrl().contains("Pharmacy-Search") && txtZipCode.getText().isEmpty()){
+				ValidationFlag = (!ValidationFlag)?false:true;
+			}else{
+				System.out.println("Zip code entry page is not displayed with Zip code field blank");
+				ValidationFlag = false;
+			}
+		}
+		else{
+			System.out.print("Cancel Button is not dispalyed in the Multy COunty Pop-up");
+			ValidationFlag = false;
+		}
+		return ValidationFlag;
+	}
+	
 }

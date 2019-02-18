@@ -25,8 +25,6 @@ public class OurPlansPage extends UhcDriver {
 	@FindBy(id = "goBtn")
 	private WebElement goButton;
 
-	@FindBy(id = "nav-zipcode")
-	private WebElement zipfield;
 
 	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div[2]/form/span/span")
 	private WebElement errormessage;
@@ -37,6 +35,9 @@ public class OurPlansPage extends UhcDriver {
 	@FindBy(id = "subnav_2")
 	public static WebElement ourPlansDropdown;
 
+	@FindBy(id = "nav-zipcode")
+	private WebElement zipfield;
+
 	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div[2]/form/span/button")
 	public WebElement FindPlansButton;
 
@@ -45,7 +46,7 @@ public class OurPlansPage extends UhcDriver {
 	public OurPlansPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		openAndValidate();
+//		openAndValidate();
 	}
 
 	public ZipcodeLookupPage looksupforZipcodes() {
