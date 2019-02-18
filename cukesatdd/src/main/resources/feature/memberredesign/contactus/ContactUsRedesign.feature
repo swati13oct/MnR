@@ -16,6 +16,18 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
       | PDP      | IDCardmember     | test@optum.com | test@optum.com  |
       | MAPD     | IndividualMember | test@optum.com | test@optum.com  |
 
+  @TFNforTechSupport
+  Scenario Outline: Verify TFN number tech support section in contact us redesign page
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <plantype>   |
+      | Member Type | <memberType> |
+    When the user navigates to contact us page in UHC site
+    Then user should see a static phone number for tech support in redesign contact us page
+      | Expected TFN | <expectedTFN> |
+
+    Examples: 
+      | plantype | memberType       |       expectedTFN    |
+       | PDP     | IDCardmember    |        1-800-721-0627 |  
   @GroupEmailConfirmMessage
   Scenario Outline: Verify Group Email Widget Confirm Request in contact us redesign page
     Given login with following details logins in the member portal and validate elements
