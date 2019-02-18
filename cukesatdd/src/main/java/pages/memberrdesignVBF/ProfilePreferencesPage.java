@@ -200,7 +200,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 		validateNew(memberName);
 		validateNew(memberNameText);
 		// ValidateAccount Profile
-		validateNew(EditButtonEmail);
+		//validateNew(EditButtonEmail);
 
 	}
 

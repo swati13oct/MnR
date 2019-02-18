@@ -7,6 +7,7 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
+import junit.framework.Assert;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,15 +24,12 @@ import org.openqa.selenium.support.PageFactory;
 
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.PageTitleConstants;
+import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-//import pages.member.bluelayer.AccountHomePage;
-//import pages.acquisition.ulayer.MaViewPlansAndPricingPage;
-//import pages.acquisition.ulayer.MsViewPlansAndPricingPage;
-//import pages.acquisition.ulayer.PdpViewPlansAndPricingPage;
 
 public class AcquisitionHomePage extends GlobalWebElements {
 
@@ -130,13 +128,16 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "cobrowse-disclaimer")
 	private WebElement cobrowsemodelwindow;
 
-	@FindBy(xpath = "//a[@class='cta-button']")
+	/*@FindBy(xpath = "//a[@class='cta-button']")
+	private WebElement takeTheQuizBtn;*/
+	
+	@FindBy(xpath = "//a[contains(text(), 'Plan Selector')]")
 	private WebElement takeTheQuizBtn;
 
 	@FindBy(xpath = ".//*[@id='colhowdoesthiswork_dce']//*[@itemprop='significantLink']/*[@class='cta-button secondary']")
 	public WebElement getStarted;
 
-	@FindBy(xpath = " //*[@id='subnav_2']/div[1]/div/div[3]/div/h3[3]/a")
+	@FindBy(xpath = "//div[@id='subnav_2']//h3/a[contains(text(),'Pharmacy')]")
 	private WebElement pharmacysearchbtn;
 
 	@FindBy(xpath = ".//*[@id='change-location']")
@@ -185,12 +186,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='js-ole-plan-select']//following::button")
 	private WebElement enrollButton;
 
-	/*
-	 * @FindBys(value = { @FindBy(xpath =
-	 * "//table[@id='selectcountytable']/tbody/tr/td") }) List<WebElement>
-	 * countyRows;
-	 */
-
 	@FindBy(xpath = "//*[@class='textalign']//p[2]/a")
 	private WebElement county;
 
@@ -202,17 +197,30 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "(//*[@class='zip-button'])[2]")
 	private WebElement GoButton;
+	
+	@FindBy(xpath = "//div[@class='overview-main']/h2")
+	private WebElement vppTop;
+	
+	@FindBy(xpath="//div[contains(@class,'proactive-offer__close')]")
+	public static List<WebElement> proactiveChatExistBtn;
+	
+	@FindBy(id = "cobrowse-disclaimer")
+	private List<WebElement> requestAssistanceModal;
+	
+	@FindBy(xpath = "//div[@id='cobrowse-disclaimer']//*[contains(@class,'modal-title')]")
+	private WebElement requestAssistanceTitle;
+	
+	@FindBy(id = "correlationId")
+	private WebElement requestAssistanceAgentID;
+	
+	@FindBy(xpath = "//a[contains(@class,'closer')]")
+	private WebElement requestAssistanceClose;
 
-	private PageData homePageDisclaimer;
 	public JSONObject homePageDisclaimerJson;
-	private PageData homePageDisclaimerHide;
 	public JSONObject homePageDisclaimerHideJson;
-
-	private PageData globalFooter;
 
 	public JSONObject globalFooterJson;
 
-	private PageData globalHeader;
 	public JSONObject globalHeaderJson;
 
 	private PageData alreadyPlanMember;
@@ -224,24 +232,50 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private PageData ourPlansNav;
 	public JSONObject ourPlansNavJson;
 
-	private PageData browserCheckData;
 	public JSONObject browserCheckJson;
 
 	private PageData cobrowseData;
 	public JSONObject cobrowseJson;
 	private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
 	private static String UMS_ACQISITION_OFFLINE_PAGE_URL = MRConstants.UHC_URL_OFFLINE;
+	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
+	private static String AARP_ACQISITION_OFFLINE_PAGE_URL = MRConstants.AARP_URL_OFFLINE;
 
 	public AcquisitionHomePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
-		driver.manage().window().maximize();
+	}
+	
+	public AcquisitionHomePage(WebDriver driver, boolean alreadyOnSite) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		openAndValidate(alreadyOnSite);
 	}
 
-	public DrugCostEstimatorPage navigateToDCEToolFromHome() throws InterruptedException {
+	public AcquisitionHomePage(WebDriver driver, String string) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		openAndValidate(string);
+	}
 
-		driver.manage().window().maximize();
+	@SuppressWarnings("deprecation")
+	public void openAndValidate(boolean alreadyOnSite) {
+		if (alreadyOnSite) {
+			
+		CommonUtility.checkPageIsReadyNew(driver);
+		checkModelPopup(driver);
+		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 45);
+		if(proactiveChatExistBtn.size()!=0)
+			jsClickNew(proactiveChatExistBtn.get(0));
+		}
+		else {
+			Assert.fail("Please check booleanvalue");
+		}
+		
+	}
+	public DrugCostEstimatorPage navigateToDCEToolFromHome() throws InterruptedException {
+		validateNew(getStarted);
 		getStarted.click();
 
 		if (driver.getCurrentUrl().contains("health-plans/estimate-drug-costs.html"))
@@ -263,10 +297,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public SiteMapUMSPage siteMapFooterClick() {
-		validate(footerSiteMapLink);
+		validateNew(footerSiteMapLink);
 		footerSiteMapLink.click();
-		validate(footerSiteMapLink);
-		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_SITEMAP)) {
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("sitemap.html")){
 			return new SiteMapUMSPage(driver);
 		}
 		return null;
@@ -276,20 +310,42 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@Override
 	public void openAndValidate() {
 		if (MRScenario.environment.equals("offline")) {
-			start(UMS_ACQISITION_OFFLINE_PAGE_URL);
+			startNew(UMS_ACQISITION_OFFLINE_PAGE_URL);
 		} else {
-			start(UMS_ACQISITION_PAGE_URL);
+			startNew(UMS_ACQISITION_PAGE_URL);
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
+		checkModelPopup(driver);
 		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
 	}
+	
+	
+	public void openAndValidate(String Ulayer) {
+		if (MRScenario.environment.equals("offline")) {
+			startNew(AARP_ACQISITION_PAGE_URL);
+		} else {
+			startNew(AARP_ACQISITION_PAGE_URL);
+		}
+		CommonUtility.checkPageIsReadyNew(driver);
+		checkModelPopup(driver);
+		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
+	}
+	
+	
 
-	public VPPPlanSummaryPage searchPlans(String zipcode, String countyName) {
-		CommonUtility.waitForPageLoad(driver, zipCodeField, 20);
+	public  VPPPlanSummaryPage searchPlans(String zipcode, String countyName) {
+		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 20);
 		sendkeys(zipCodeField, zipcode);
 		viewPlansButton.click();
-		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-		try {
+		CommonUtility.waitForPageLoad(driver, countyModal, 45);
+		driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
+		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			return new VPPPlanSummaryPage(driver);
+
+		}
+		return null;
+		/*try {
 
 			if (countyModal.isDisplayed()) {
 				driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
@@ -299,19 +355,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		} catch (Exception e) {
 			System.out.println("county box not found");
 		}
-		// try {
-		// if (countyModal.isDisplayed()) {
-		// for (WebElement county : countyRows) {
-		// if (county.getText().equalsIgnoreCase(countyName)) {
-		// county.click();
-		// break;
-		// }
-		//
-		// }
-		// }
-		// } catch (Exception e) {
-		// System.out.println("county box not found");
-		// }
+		
 		try {
 			if (countyModal.isDisplayed()) {
 				for (WebElement county : countyRows) {
@@ -329,7 +373,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
 		}
-		return null;
+		return null;*/
 	}
 
 	public VPPPlanSummaryPage searchPlans(String zipcode) {
@@ -637,14 +681,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public PharmacySearchPage navigateToPharmacyLocator() {
-
-		driver.manage().window().maximize();
 		Actions action = new Actions(driver);
 		PageFactory.initElements(driver, this);
 		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
 		pharmacysearchbtn.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE)) {
+		if (driver.getTitle().toLowerCase().contains(PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE.toLowerCase())) {
 			return new PharmacySearchPage(driver);
 		}
 		return null;
@@ -914,21 +956,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public RequestHelpAndInformationPage navigateToMaMoreHelpAndInfo() {
-		try {
-			if (zipCodeField.isDisplayed()) {
-				CommonUtility.waitForElementToDisappear(driver, zipCodeField, CommonConstants.TIMEOUT_30);
-			}
-		} catch (NoSuchElementException e) {
-			System.out.println("zipCodeField not found");
-		} catch (TimeoutException ex) {
-			System.out.println("zipCodeField not found");
-		} catch (Exception e) {
-			System.out.println("zipCodeField not found");
-		}
-		CommonUtility.waitForPageLoad(driver, requestAgentApptDropdown, 60);
-		if (validateNew(requestAgentApptDropdown)) {
-			return new RequestHelpAndInformationPage(driver);
-		}
 
 		Actions actions = new Actions(driver);
 		PageFactory.initElements(driver, this);
@@ -936,20 +963,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		actions.moveToElement(moreHelpInfoLink);
 		actions.click().build().perform();
 
-		try {
-			if (zipCodeField.isDisplayed()) {
-				CommonUtility.waitForElementToDisappear(driver, zipCodeField, CommonConstants.TIMEOUT_30);
-			}
-		} catch (NoSuchElementException e) {
-			System.out.println("zipCodeField not found");
-		} catch (TimeoutException ex) {
-			System.out.println("zipCodeField not found");
-		} catch (Exception e) {
-			System.out.println("zipCodeField not found");
-		}
+		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoad(driver, requestAgentApptDropdown, 60);
-		if (validateNew(requestAgentApptDropdown)
-				&& currentUrl().contains("medicare-advantage-plans/request-information.html")) {
+		if (validateNew(requestAgentApptDropdown)) {
 			return new RequestHelpAndInformationPage(driver);
 		}
 
@@ -972,15 +988,18 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return null;
 	}
 
-	public RequestForAssistanceUMSPage requestforassistanceclick() {
-		validate(footerRequestforAssistanceLink);
-		footerRequestforAssistanceLink.click();
-		if (cobrowsemodelwindow.isDisplayed()) {
-			return new RequestForAssistanceUMSPage(driver);
-		} else {
-			return null;
-		}
+	public void clickRequestAsistancce() {
+		validateNew(footerRequestforAssistancelink);
+		if(proactiveChatExistBtn.size()!=0)
+			proactiveChatExistBtn.get(0).click();
+		footerRequestforAssistancelink.click();
+		CommonUtility.waitForPageLoadNew(driver, requestAssistanceModal.get(0), 30);
+		validateNew(requestAssistanceTitle);
+		validateNew(requestAssistanceAgentID);
+		requestAssistanceClose.click();
+		waitforElementDisapper(By.id("cobrowse-disclaimer"), 30);
 	}
+	
 
 	public JSONObject validatecobrowsemodelwindow() {
 		String fileName = CommonConstants.COBROWSE_MODEL_WINDOW;
@@ -1005,78 +1024,35 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public VPPPlanSummaryPage searchPlansWithOutCounty(String zipcode) {
+		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
 		sendkeys(zipCodeField, zipcode);
+
 		viewPlansButton.click();
-		/*
-		 * try { if (countyModal.isDisplayed()) { for (WebElement county :
-		 * countyRows) { if (county.getText().equalsIgnoreCase(countyName)) {
-		 * county.click(); break; }
-		 * 
-		 * } } } catch (Exception e) { System.out.println("county box not found"
-		 * ); }
-		 */
-		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_PLAN_TYPES_TITLE)) {
+		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
 		}
 		return null;
 	}
 
-	public PDPRequestHelpAndInformationPage navigateToPDPMoreHelpAndInfo() {
+		public void validateFooterLinks() {
+			validateNew(footerHomeLink);
+			validateNew(footerAboutUsLink);
+			validateNew(footerContactUsLink);
+			validateNew(footerSiteMapLink);
+			validateNew(footerPrivacyPolicyLink);
+			validateNew(footerTermsnConditionsLink);
+			validateNew(footerDisclaimersLink);
+			validateNew(footerAgentsnBrokersLink);
+			validateNew(footerRequestforAssistancelink);
+			validateNew(footerAccessibilitylink);
+			validateNew(medicareAdvantagePlansLink);
+			validateNew(medicareSupplementInsurancePlansLink);
+			validateNew(medicarePrescriptionDrug_PlansLink);
+			validateNew(learnAboutMedicareLink);
+			validateNew(viewAllDisclaimerInformationLink);
 
-		Actions actions = new Actions(driver);
-		PageFactory.initElements(driver, this);
-		actions.moveToElement(ourPlansHoverLink);
-		actions.moveToElement(moreHelpInfoLink);
-		actions.click().build().perform();
-		try {
-			if (zipCodeField.isDisplayed()) {
-				CommonUtility.waitForElementToDisappear(driver, zipCodeField, 20);
-			}
-		} catch (NoSuchElementException e) {
-			System.out.println("zipCodeField not found");
-		} catch (TimeoutException ex) {
-			System.out.println("zipCodeField not found");
-		} catch (Exception e) {
-			System.out.println("zipCodeField not found");
 		}
-		CommonUtility.waitForPageLoad(driver, requestAgentApptDropdown, 60);
-		if (validateNew(requestAgentApptDropdown)
-				&& currentUrl().contains("medicare-advantage-plans/request-information.html")) {
-			return new PDPRequestHelpAndInformationPage(driver);
-		}
-
-		return null;
-
-	}
-
-	public boolean validateFooterLinks(JSONObject jsonObj) {
-		boolean flag = true;
-
-		try {
-			if (!jsonObj.get("footerPrivacyPolicyLink").equals("Privacy Policy"))
-				flag = false;
-			if (!jsonObj.get("footerDisclaimersLink").equals("Disclaimers"))
-				flag = false;
-			if (!jsonObj.get("footerHomeLink").equals("Home"))
-				flag = false;
-			if (!jsonObj.get("footerContactUsLink").equals("Contact Us"))
-				flag = false;
-			if (!jsonObj.get("footerAgentsAndBrokersLink").equals("Agents & Brokers"))
-				flag = false;
-			if (!jsonObj.get("footerAboutUsLink").equals("About Us"))
-				flag = false;
-			if (!jsonObj.get("footerSiteMapLink").equals("Site Map"))
-				flag = false;
-			if (!jsonObj.get("footerTermsofUseLink").equals("Terms of Use"))
-				flag = false;
-
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return flag;
-	}
 
 	public PlanSelectorNewPage quizButton() {
 		waitforElement(ourPlans);
@@ -1294,6 +1270,104 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		if (driver.getCurrentUrl().contains("welcome")) {
 			System.out.println("OLE Welcome Page is Displayed");
 			return new WelcomePage(driver);
+		}
+		return null;
+	}
+	
+	public static void checkModelPopup(WebDriver driver) {
+		int counter = 0;
+		do {
+
+			System.out.println("current value of conter: " + counter);
+			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
+
+			if (IPerceptionsFrame.isEmpty()) {
+				try {
+					Thread.sleep(5000);
+				} catch (InterruptedException e) {
+					System.out.println(e.getMessage());
+				}
+			} else {
+				driver.switchTo().frame(IPerceptionsFrame.get(0));
+				driver.findElement(By.className("btn-no")).click();
+				driver.switchTo().defaultContent();
+			}
+			counter++;
+		} while (counter < 2);
+	}
+	
+	public AboutUsPage aboutUsClick() {
+		validateNew(footerAboutUsLink);
+		footerAboutUsLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (getTitle().contains("About UnitedHealthcare")) {
+			return new AboutUsPage(driver);
+		}
+		return null;
+			
+		}
+	
+	public ContactUsUmsPage contactUsClick() {
+		validateNew(footerContactUsLink);
+		footerContactUsLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("contact-us")) {
+			return new ContactUsUmsPage(driver);
+		}
+		return null;
+			
+		}
+	
+	public PrivacyPolicyUmsPage privacyPolicyClick() {
+		validateNew(footerPrivacyPolicyLink);
+		footerPrivacyPolicyLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("privacy_policy.html")) {
+			return new PrivacyPolicyUmsPage(driver);
+		}
+		return null;
+			
+		}
+	
+	public TermsOfUseUmsPage termsOfUseClick() {
+		validateNew(footerTermsnConditionsLink);
+		footerTermsnConditionsLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("terms_and_conditions")) {
+			return new TermsOfUseUmsPage(driver);
+		}
+		return null;
+			
+		}
+	
+	public DisclaimersPage disclaimersClick() {
+		validateNew(footerDisclaimersLink);
+		footerDisclaimersLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("disclaimer")) {
+			return new DisclaimersPage(driver);
+		}
+		return null;
+			
+		}
+	
+	public AgentsAndBrokersPage agentsAndBrokersClick() {
+		validateNew(footerAgentsnBrokersLink);
+		footerAgentsnBrokersLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if(driver.getCurrentUrl().contains("health-insurance-brokers")){
+			return new AgentsAndBrokersPage(driver);
+		}
+		return null;
+			
+		}
+	
+	public AcquisitionHomePage homeFooterClick() {
+		validateNew(footerHomeLink);
+		footerHomeLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (validateNew(zipCodeField)) {
+			return new AcquisitionHomePage(driver, true);
 		}
 		return null;
 	}

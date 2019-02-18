@@ -13,7 +13,7 @@ import cucumber.api.CucumberOptions;
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=2, screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcquisitionPDPInquiryKitVBF.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionPDPInquiryKitVBF")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/inquirykit" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPDPInquiryKitVBF.json" }, tags = { "@pdpInquiryKit" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPDPInquiryKitVBF.json" }, tags = { "@pdpInquiryKitBLayerSmoke, @pdpInquiryKitULayerSmoke" })
 public class RunMRATDDAcquisitionPDPInquiryKitVBF {
 
 }

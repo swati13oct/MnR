@@ -7,6 +7,7 @@ Scenario Outline: Verify request an appointment with an agent flow in UHC site
 Given the user is on the uhcmedicaresolutions site landing page
 When the user navigates to request more help and information in UHC site
 When the user navigates to request appointment with an agent in UHC site and validates page loaded
+Then user validates error messages on submitting blank form on UHC site
 Then the user fills the form out and submits the uhc agent appointment application
 	|First Name| <firstName>|
 	|Last Name | <lastName> |

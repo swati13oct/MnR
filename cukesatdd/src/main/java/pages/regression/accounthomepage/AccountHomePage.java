@@ -58,7 +58,8 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//table[@class='componentTable']/tbody/tr/td/a[contains(.,'Contact Us')]")
 	private WebElement contactUsPageLink;
 
-	@FindBy(css = ".view-id-link")
+	//@FindBy(css = ".view-id-link")
+	@FindBy(xpath = "//*[@id='dashboard']/div[1]/section[1]/account-info/div/div/a/span[1]")
 	private WebElement idCardLink;
 
 	@FindBy(xpath = "(//*[@class='ng-scope']//a[text()='Premium Payments'])[1]")
@@ -137,7 +138,8 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='plan_box']/div/div[2]/div/p/a")
 	private WebElement planNameLink;
 
-	@FindBy(id = "dropdown-toggle--1")
+	//@FindBy(id = "dropdown-toggle--1")
+	@FindBy(xpath = "//*[@id='dropdown-toggle--1']")											 
 	private WebElement accountProfileBtn;
 
 	// @FindBy(xpath = ".//*[@id='dropdown-options--1']/a[contains(text(),'Account
@@ -225,7 +227,7 @@ public class AccountHomePage extends UhcDriver {
 	private WebElement claimDetTableMainSection;
 
 	@FindBy(xpath = "//*[@id='dashboard']//span[text()='View Your Claims']")
-	//@FindBy(xpath = "//*[@id='claims_1']")
+	//@FindBy(xpath = "//*[@id='claims_1']") @FindBy(xpath = "//a[text()='Go to Claims page']")
 	private WebElement claimsDashboardLink;
 
 	@FindBy(xpath = "//*[@id='row2link1']/td[2]/a")
@@ -244,9 +246,7 @@ public class AccountHomePage extends UhcDriver {
 	// private WebElement logoImage;
 
 	@FindBy (xpath = "//*[@id='ui-view-page']/div/arcade-header/header[1]/div/div/a/img")
-	private WebElement logoImage;
-	@FindBy (xpath = "//*[@id='ui-view-page']/div/arcade-header/header[1]/div/div/a/img")
-	private WebElement logoImage1;																				  
+	private WebElement logoImage;								  																				  
 
 	@FindBy(xpath = "//*[@id='ui-view-page']/div/arcade-header/header[1]/div/div/a/img[2]")
 	private WebElement cologoImage;
@@ -351,6 +351,11 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(id = "closeButton")
 	private WebElement iPerceptionCloseButton;
+	
+	/*@FindBy(xpath ="//*[@id='paymentHistoryApp1']//div/p/span")
+	private WebElement PaymentHistorySection;*/
+	@FindBy(xpath ="//*[@id='paymentHistoryApp1']//div//div[@class='col-md-12']/h2")
+	private WebElement PaymentHistorySection;
 
 	private PageData myAccountHome;
 
@@ -469,15 +474,19 @@ public class AccountHomePage extends UhcDriver {
 		}
 
 		else if (MRScenario.environmentMedicare.equals("team-h") || MRScenario.environmentMedicare.equals("test-a")
-				|| MRScenario.environmentMedicare.equals("team-e")) {
+				|| MRScenario.environmentMedicare.equals("team-e") ||  MRScenario.environmentMedicare.equals("team-c")){
 
 			driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
 			System.out.println(driver.getCurrentUrl());
 		} else {
-			driver.navigate().to(
-					"https://" +MRScenario.environmentMedicare+"-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
-			
-			
+			if(Plantype.equalsIgnoreCase("PCP")) {driver.navigate().to("https://" + MRScenario.environmentMedicare
+					+ "-mymedicareaccount.uhc.com/pcp/member/benefits-coverage.html");}
+			else if (Plantype.equalsIgnoreCase("MEDICA")) {driver.navigate().to("https://" + MRScenario.environmentMedicare
+					+ "-mymedicareaccount.uhc.com/medica/member/benefits-coverage.html");}
+				else {
+				driver.navigate().to(
+						"https://" +MRScenario.environmentMedicare+"-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
+				}
 		}
 		CommonUtility.waitForPageLoad(driver, heading, 50);
 		/*if (driver.getTitle().equalsIgnoreCase("Benefits")) {
@@ -504,12 +513,17 @@ public class AccountHomePage extends UhcDriver {
 
 	public BenefitsAndCoveragePage navigateToBandCPage() {
 		System.out.println("Checking for Welcome or Hello on Dashboard home page now");
+	  try{
 		if(helloPerson.isDisplayed()){
 			System.out.println("Hello PersonName on Dashboard home page was found");
 		} else{
 			waitForHomePage(welcome);
 			System.out.println("Welcome on Dashboard home page was found");
-		}				
+		}	} catch	(Exception e){
+			waitForHomePage(welcome);
+			System.out.println("Welcome on Dashboard home page was found");
+			
+		}		
 		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
 			System.out.println("User is on Stage environment");
 
@@ -556,6 +570,26 @@ public class AccountHomePage extends UhcDriver {
 
 	public ProfileandPreferencesPage navigateDirectToProfilePage() throws InterruptedException {
 
+			System.out.println("waitning for profile page");
+		// If we test through test harness , this is needed to navigate to profile page
+ 	
+			if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)){
+			 System.out.println("testing through test harness page");
+			 try{
+				 if(driver.findElement(By.id("home_1")).isDisplayed()){
+					 driver.findElement(By.id("home_1")).click();
+				 }else{
+					 driver.findElement(By.xpath("//*[@id='home_2']")).click();
+					 Thread.sleep(6000);
+				 }
+			 } catch (Exception e) {
+				 driver.findElement(By.xpath("//*[@id='home_2']")).click();
+				 Thread.sleep(6000);
+			 }
+			//CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//*[@id='dashboard']/div[1]/section[1]/account-info/div/div[1]/h1")), 30);
+		} else{
+			System.out.println("test is through stage");
+		}									  																													
 		if (MRScenario.environment.equalsIgnoreCase("stage")) {
 			System.out.println("user is on Stage login page");
 			// CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);
@@ -573,7 +607,8 @@ public class AccountHomePage extends UhcDriver {
 				accountSettingOption.click();
 				System.out.println("title is " + driver.getTitle());
 				System.out.println("Current Url is " + driver.getCurrentUrl());
-				CommonUtility.waitForPageLoad(driver, heading, 10);
+				Thread.sleep(6000);	   
+				//CommonUtility.waitForPageLoad(driver, heading, 10);
 
 				if (driver.getCurrentUrl().contains("profile")) {
 					return new ProfileandPreferencesPage(driver);
@@ -597,7 +632,7 @@ public class AccountHomePage extends UhcDriver {
 			System.out.println("Current Url is " + driver.getCurrentUrl());
 
 		}
-		CommonUtility.waitForPageLoad(driver, heading, 50);
+		//CommonUtility.waitForPageLoad(driver, heading, 50);
 		if (driver.getTitle().equalsIgnoreCase("Profile")) {
 			return new ProfileandPreferencesPage(driver);
 		}
@@ -793,18 +828,17 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public void verifyPageTitle() throws InterruptedException {
-		System.out.println("Checking for Hello Name or welcome  element");
-		if(helloPerson.isDisplayed()){
-			System.out.println("Hello Name element was displayed");
-		} else{
-			waitForHomePage(welcome);
-			System.out.println("Welcome element was displayed");
-		}			   
-		String title = driver.getTitle();
-		System.out.println(title);
-		// Assert.assertEquals(title, "Home | UnitedHealthcare");
-		Assert.assertTrue(title.contains("UnitedHealthcare"));
-		System.out.println("Assert condition on title of dashboard page was passed");
+		 System.out.println("Checking for Hello Name element after waiting for 20 seconds");
+		 Thread.sleep(20000);
+         waitForHomePage(helloPerson);
+         System.out.println("Hello Name element was displayed");
+  String title = driver.getTitle();
+  System.out.println(title);
+  Assert.assertTrue(title.contains("UnitedHealthcare"));
+  System.out.println("Assert condition on title of dashboard page was passed");
+
+		
+		
 	}
 
 	public AccountHomePage navigateToAutoPaymentHistoryPage() {
@@ -838,6 +872,35 @@ public class AccountHomePage extends UhcDriver {
 		if (PaymentHeading.getText().contains("Premium Payments Overview")) {
 			System.out.println("Payment Overview page displayed");
 			return new AccountHomePage(driver);
+		} else {
+			System.out.println("payment overview page not displayed");
+			return null;
+		}
+	}
+	
+	public PaymentHistoryPage navigateTooPaymentHistoryPage() {
+
+		try {
+			Thread.sleep(2000);
+			driver.switchTo().frame("IPerceptionsEmbed");
+			System.out.println("iPerception Pop Up is Present");
+			iPerceptionCloseButton.click();
+			driver.switchTo().defaultContent();
+			Thread.sleep(5000);
+		} catch (Exception e) {
+			System.out.println("iPerception Pop Up is not Present");
+		}
+
+		// Thread.sleep(16000);
+
+		try {
+			navigateToPaymentHistoryPage();
+		} catch (Exception e1) {
+			System.out.println("Unable to navigate to premium payment page");
+		}
+		if (PaymentHeading.getText().contains("Premium Payments Overview")) {
+			System.out.println("Payment Overview page displayed");
+			return new PaymentHistoryPage(driver);
 		} else {
 			System.out.println("payment overview page not displayed");
 			return null;
@@ -940,6 +1003,24 @@ public class AccountHomePage extends UhcDriver {
 		}
 	}
 
+	public pages.regression.payments.PaymentHistoryPage validtaePaymentHistorySection() throws InterruptedException {
+		
+		Thread.sleep(5000);
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,550)", "");
+
+		waitforElement(PaymentHistorySection);
+
+		//tbd		Select dateRange = new Select(HistoryDropdown);
+		//tbd		dateRange.selectByVisibleText("Last 6 months");
+
+		// note: need to mouse over to select
+		System.out.println("Payment History Exists");
+		jse.executeScript("window.scrollBy(0,-1100)", "");
+		
+		return new pages.regression.payments.PaymentHistoryPage(driver);
+	}
+	
 	public pages.regression.payments.PaymentHistoryPage scrollDownAndUp() throws InterruptedException {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,550)", "");
@@ -1097,32 +1178,17 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public void validateImagePresent(String logoToBeDisplayedOnDashboard) throws InterruptedException {
-		//Thread.sleep(2000);
-		driver.findElement(By.id("home_2")).click();
-		System.out.println("Home button is clicked on TestHarness Home Page to go to Home Page");
-		//CommonUtility.waitForPageLoad(driver,logoImage,30);
-		Thread.sleep(8000);
-		if(logoImage.isDisplayed()){
-			String logo_src = logoImage.getAttribute("src");
-			String logo_alt = logoImage.getAttribute("alt");
-			System.out.println("Actual logo's source on Dashboard page is   " + logo_src + " and Expected logo source    "
-					+ logoToBeDisplayedOnDashboard + " .");
-			System.out.println("logo's alt text on Dashboard page is   " + logo_alt);
-			Assert.assertTrue(logo_src.contains(logoToBeDisplayedOnDashboard));
-			System.out.println("Dashboard page Primary logo assert condition is passed");}
-		else if(logoImage1.isDisplayed())
-		{
-			String logo_src = logoImage1.getAttribute("src");
-			String logo_alt = logoImage1.getAttribute("alt");
-			System.out.println("Actual logo's source on Dashboard page is   " + logo_src + " and Expected logo source    "
-					+ logoToBeDisplayedOnDashboard + " .");
-			System.out.println("logo's alt text on Dashboard page is   " + logo_alt);
-			Assert.assertTrue(logo_src.contains(logoToBeDisplayedOnDashboard));
-			System.out.println("Dashboard page Primary logo assert condition is passed");}
+		CommonUtility.waitForPageLoad(driver,logoImage,30); 
+        String logo_src = logoImage.getAttribute("src");
+        String logo_alt = logoImage.getAttribute("alt");
+        System.out.println("Actual logo's source on Dashboard page is   "+logo_src+" and Expected logo source    "+logoToBeDisplayedOnDashboard+" .");   
+        System.out.println("logo's alt text on Dashboard page is   "+logo_alt);           
+        Assert.assertTrue(logo_src.contains(logoToBeDisplayedOnDashboard));
+        System.out.println("Dashboard page Primary logo assert condition is passed");
 	}
 
 	public void validateCoLogoImagePresent(String cologoToBeDisplayedOnDashboard) throws InterruptedException {
-		CommonUtility.waitForPageLoad(driver,cologoImage,15);
+		CommonUtility.waitForPageLoad(driver,cologoImage,30);
 		String cologo_src = cologoImage.getAttribute("src");
 		String cologo_alt = cologoImage.getAttribute("alt");
 		System.out.println("Actual cologo's source on Dashboard page is   " + cologo_src
@@ -1269,7 +1335,8 @@ public class AccountHomePage extends UhcDriver {
 
 	// to navigate to forms and resources page
 	@SuppressWarnings("unused")
-	public FormsAndResourcesPage navigatetoFormsnResources() throws InterruptedException {
+	public FormsAndResourcesPage navigatetoFormsnResources(String memberType, String planType)
+			throws InterruptedException {
 		// waitForHomePage(helloPerson);
 		WebDriverWait wait = new WebDriverWait(driver, 20);
 		if (validate(iPerceptionAutoPopUp)) {
@@ -1288,7 +1355,9 @@ public class AccountHomePage extends UhcDriver {
 		else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
 			System.out.println("user is on Stage login page");
 			// Thread.sleep(1000);
-			if (driver.getCurrentUrl().contains("/aarp/dashboard")) {
+			if ((driver.getCurrentUrl().contains("/aarp/dashboard")) && ((!memberType.toLowerCase().contains("pcp")
+					&& !memberType.toLowerCase().contains("medica")) && (!planType.toLowerCase().contains("pcp")
+							&& !planType.toLowerCase().contains("medica")))) {
 				System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
 				// Thread.sleep(2000);
 				driver.navigate().to(PAGE_URL + "aarp/member/documents/overview.html");
@@ -1307,11 +1376,17 @@ public class AccountHomePage extends UhcDriver {
 
 				System.out.println(driver.getTitle());
 
-			} else if (driver.getCurrentUrl().contains("/pcp/dashboard"))
+			} /*
+			 * else if (driver.getCurrentUrl().contains("/pcp/dashboard"))
+			 * 
+			 * {
+			 */
+			else if ((driver.getCurrentUrl().contains("mymedicareaccount"))&& (memberType.toLowerCase().contains("pcp") || planType.toLowerCase().contains("pcp")))
 
 			{
+
 				System.out.println("User is on pcp dashboard page and URL is ====>" + driver.getCurrentUrl());
-				//Thread.sleep(2000);
+				// Thread.sleep(2000);
 				driver.navigate().to("https://stage-mymedicareaccount.uhc.com/pcp/member/documents/overview.html");
 
 				System.out.println(driver.getCurrentUrl());
@@ -1321,7 +1396,7 @@ public class AccountHomePage extends UhcDriver {
 
 				} catch (Exception e) {
 				}
-				//CommonUtility.waitForPageLoad(driver, PlanMaterialSection, 20);
+				// CommonUtility.waitForPageLoad(driver, PlanMaterialSection, 20);
 				if (driver.getTitle().contains("Documents & Resources")) {
 					System.out.println(driver.getTitle());
 				}
@@ -1331,7 +1406,7 @@ public class AccountHomePage extends UhcDriver {
 
 			{
 				System.out.println("User is on  dashboard page and URL is ====>" + driver.getCurrentUrl());
-				//Thread.sleep(2000);
+				// Thread.sleep(2000);
 				driver.navigate().to(PAGE_URL + "retiree/member/documents/overview.html");
 
 				System.out.println(driver.getCurrentUrl());
@@ -1341,7 +1416,7 @@ public class AccountHomePage extends UhcDriver {
 
 				} catch (Exception e) {
 				}
-				//CommonUtility.waitForPageLoad(driver, PlanMaterialSection, 20);
+				// CommonUtility.waitForPageLoad(driver, PlanMaterialSection, 20);
 				if (driver.getTitle().contains("Documents & Resources")) {
 					System.out.println(driver.getTitle());
 				}
@@ -1352,7 +1427,7 @@ public class AccountHomePage extends UhcDriver {
 
 			{
 				System.out.println("User is on  dashboard page and URL is ====>" + driver.getCurrentUrl());
-				//Thread.sleep(2000);
+				// Thread.sleep(2000);
 				driver.navigate().to(PAGE_URL + "medicare/member/documents/overview.html");
 
 				System.out.println(driver.getCurrentUrl());
@@ -1362,18 +1437,24 @@ public class AccountHomePage extends UhcDriver {
 
 				} catch (Exception e) {
 				}
-				//CommonUtility.waitForPageLoad(driver, PlanMaterialSection, 20);
+				// CommonUtility.waitForPageLoad(driver, PlanMaterialSection, 20);
 				if (driver.getTitle().contains("Documents & Resources")) {
 					System.out.println(driver.getTitle());
 				}
 
 			}
 
-			else if (driver.getCurrentUrl().contains("/medica/dashboard"))
+			/*
+			 * else if (driver.getCurrentUrl().contains("/medica/dashboard"))
+			 * 
+			 * {
+			 */
+			else if ((driver.getCurrentUrl().contains("mymedicareaccount"))&& (memberType.toLowerCase().contains("medica") || planType.toLowerCase().contains("medica")))
 
 			{
+
 				System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
-				//Thread.sleep(2000);
+				// Thread.sleep(2000);
 				driver.navigate().to("https://stage-mymedicareaccount.uhc.com/medica/member/documents/overview.html");
 				System.out.println(driver.getCurrentUrl());
 				try {
@@ -1382,11 +1463,20 @@ public class AccountHomePage extends UhcDriver {
 
 				} catch (Exception e) {
 				}
-				//CommonUtility.waitForPageLoad(driver, PlanMaterialSection, 20);
+				// CommonUtility.waitForPageLoad(driver, PlanMaterialSection, 20);
 				if (driver.getTitle().contains("Documents & Resources")) {
 					System.out.println(driver.getTitle());
 				}
 			}
+		} else {
+			if (driver.getCurrentUrl().contains("mymedicareaccount"))
+				driver.navigate().to("https://" + MRScenario.environmentMedicare
+						+ "-mymedicareaccount.uhc.com/content/medicare/member/documents/overview.html");
+			else {
+				driver.navigate().to("https://" + MRScenario.environmentMedicare
+						+ "-medicare.ose-elr-core.optum.com/content/medicare/member/documents/overview.html");
+			}
+
 		}
 		return new FormsAndResourcesPage(driver);
 	}
@@ -1654,9 +1744,17 @@ public class AccountHomePage extends UhcDriver {
 			System.out.println("iPerception Pop Up not displayed");
 		}
 
+		if(driver.getCurrentUrl().contains("testharness")){
+			driver.findElement(By.id("home_2")).click();
+			CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//*[@id='dashboard']")), 10);											
 		validate(idCardLink);
 		idCardLink.click();
 		return new IDCardPage(driver);
+		} else{
+
+			validate(idCardLink);
+			idCardLink.click();
+			return new IDCardPage(driver);}				  
 	}
 
 	public boolean validateOrderMaterialsLink() {
@@ -2105,7 +2203,7 @@ public class AccountHomePage extends UhcDriver {
 				}
 				System.out.println(driver.getCurrentUrl());
 				CommonUtility.waitForPageLoad(driver, heading, 30);
-				if (driver.getTitle().contains("Benefits Overview")) {
+				if (driver.getTitle().contains("Benefits")) {
 					System.out.println(driver.getTitle());
 					return new BenefitsAndCoveragePage(driver);
 				}
@@ -2114,16 +2212,23 @@ public class AccountHomePage extends UhcDriver {
 		}
 
 		else if (MRScenario.environmentMedicare.equals("team-h") || MRScenario.environmentMedicare.equals("test-a")
-				|| MRScenario.environmentMedicare.equals("team-e")) {
+				|| MRScenario.environmentMedicare.equals("team-e")){
 
 			driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
 			System.out.println(driver.getCurrentUrl());
-		} else {
+		} else if(MRScenario.environmentMedicare.equals("team-c")){
+			driver.navigate().to(
+					"https://team-c-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
+			System.out.println(driver.getCurrentUrl());
+			return new BenefitsAndCoveragePage(driver);
+		}else
+		{
 			driver.navigate().to(
 					"https://team-ci1-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
-
 			System.out.println(driver.getCurrentUrl());
+			return new BenefitsAndCoveragePage(driver);
 		}
+			
 
 		/*
 		 * if (validate(iPerceptionPopUp)) { iPerceptionPopUp.click();
@@ -2257,4 +2362,5 @@ public class AccountHomePage extends UhcDriver {
 			counter++;
 		} while (counter < 2);
 	}
+	
 }

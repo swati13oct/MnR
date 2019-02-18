@@ -20,7 +20,7 @@ import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.bluelayer.ComparePlansPageBlayer;
 import acceptancetests.acquisition.ole.oleCommonConstants;
-import acceptancetests.vbfacquisition.vpp.VPPCommonConstants;
+import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.OLE_PageConstants;
 import acceptancetests.data.PageConstants;
@@ -73,20 +73,25 @@ public class VppStepDefinitionUHC {
 
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String county = memberAttributesMap.get("County Name");
+		String isMultiCounty = memberAttributesMap.get("Is Multi County");
 		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
 		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
 
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
+		VPPPlanSummaryPage plansummaryPage = null;
+		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
+			plansummaryPage = aquisitionhomepage.searchPlansWithOutCounty(zipcode);
+		} else {
+			plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
+		}
 
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
-			if (plansummaryPage.validateVPPPlanSummaryPage())
-				Assert.assertTrue(true);
-			else
-				Assert.fail("Error in validating the Plan Summary Page");
 
+		} else {
+			Assert.fail("Error Loading VPP plan summary page");
 		}
 
 	}
@@ -233,7 +238,6 @@ public class VppStepDefinitionUHC {
 
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.OurPlanMALanding();
 		WelcomePage welcomeOLEPage = aquisitionhomepage.SpecialNeedPlansZipcodeSearchToOLE(zipcode);
 
 		if (welcomeOLEPage != null) {
@@ -349,15 +353,9 @@ public class VppStepDefinitionUHC {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
-		plansummaryPage = plansummaryPage.viewPlanSummary(plantype);
+		plansummaryPage.viewPlanSummary(plantype);
 		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "UHC_ACQ");
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, plantype);
-		if (plansummaryPage != null) {
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail("Error validating availables plans for selected plantype in  VPP plan summary page");
-		}
 	}
 
 	@Then("^the user validates the Enroll Now Button present for the plan type$")
@@ -398,14 +396,12 @@ public class VppStepDefinitionUHC {
 		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
-		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(planName);
+		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(planName, planType);
 		if (vppPlanDetailsPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
-			if (vppPlanDetailsPage.validatePlanDetailsPage()) {
-				Assert.assertTrue(true);
-			} else
-				Assert.fail("Error in validating the Plan Details Page");
-		}
+		} else
+			Assert.fail("Error in validating the Plan Details Page");
 	}
 
 	@Then("^the user view plan details of the above selected plan in UMS site vpp$")
@@ -419,7 +415,8 @@ public class VppStepDefinitionUHC {
 		String PlanPremium = vppPlanSummaryPage.getPlanPremium(PlanName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
 
-		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(PlanName);
+		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(PlanName,planType);
 		if (vppPlanDetailsPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
 			Assert.assertTrue(true);
@@ -537,7 +534,7 @@ public class VppStepDefinitionUHC {
 	public void uncheck_and_validate_vpp_page() {
 		PlanDetailsPage plandetailspage = (PlanDetailsPage) loginScenario.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		plandetailspage.clickCompareBox();
-		VPPPlanSummaryPage vppsummarypage = plandetailspage.backtoPlanSummaryPage();
+		VPPPlanSummaryPage vppsummarypage = plandetailspage.navigateBackToPlanSummaryPage();
 		if (vppsummarypage != null) {
 			if (vppsummarypage.verifyCompareCheckBoxesAreUnchecked())
 				Assert.assertTrue(true);
@@ -685,5 +682,70 @@ public class VppStepDefinitionUHC {
 			Assert.fail("Error Loading VPP plan summary page");
 		}
 	}
+	
+	@Then("^the user validates the following Plan details for the plan in UMS$")
+	public void the_user_validates_the_following_Plan_details_for_the_plan(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String benefitType = memberAttributesMap.get("Benefit Type");
+		String expectedText = memberAttributesMap.get("Expected Text");
+		System.out.println("Validating the following Additional benefits : "+benefitType);
+		
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		boolean validationFlag = vppPlanDetailsPage.validatingAdditionalBenefitTextInPlanDetails(benefitType, expectedText);
+		Assert.assertTrue("Validation failed : Expected text not displayed for Additional Benefit - "+benefitType,validationFlag);
+	
+	}	
+
+	/**
+	 * @toDo:user validates plan count for all plan types on plan summary page
+	 */
+	@Then("^user validates plan count for all plan types on plan summary page in the UMS site$")
+	public void user_validates_following_benefits_ui_ums() {
+
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		Assert.assertTrue("Error validating plans in  VPP plan summary page",
+				plansummaryPage.validateVPPPlanSummaryPage());
+	}
+	
+	/**
+	 * @toDo:user view plan details of the above selected plan
+	 */
+	@Then("^User clicks on Back to Plans link and navigate back to plan summary in UMS site$")
+	public void User_clicks_BackToPlansLink_and_navigate_back_to_plan_summary_in_UMS_site() {
+
+		
+		PlanDetailsPage planDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+
+		
+		VPPPlanSummaryPage plansummaryPage = planDetailsPage.navigateBackToPlanSummaryPage();
+		if (plansummaryPage != null) {
+				Assert.assertTrue(true);
+			} else
+				Assert.fail("Error in validating the Plan Summary Page");
+		}
+	
+	/**
+	 * @toDo:click on add to compare checkbox and click on view details
+	 */
+	@And("^User click on add to compare checkbox and click on view details link on UMS$")
+	public void user_click_on_compare_checkbox_ums() {
+		VPPPlanSummaryPage vppplansummarypage = (VPPPlanSummaryPage) loginScenario
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		vppplansummarypage.clickCompareChkBox();
+		PlanDetailsPage plandetailspage = vppplansummarypage.clickViewDetails_AddedToCompare();
+		if (plandetailspage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, plandetailspage);
+			plandetailspage.clickCompareBox();
+		}
+	}
 }

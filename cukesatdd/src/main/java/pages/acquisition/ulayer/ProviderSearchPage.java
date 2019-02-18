@@ -43,39 +43,41 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(id = "pageHeader")
 	private WebElement pageHeader;
 
-	private PageData providerSearch;
+	@FindBy(xpath="(//div[contains(@class,'searchData')]//button[contains(@class,'saved-provider-button')]/span)[1]")
+	private WebElement SaveBtn;
+	
+	@FindBy(xpath="//*[contains(text(),'View Saved')]")
+	private WebElement Viewsavebtn;
 
-	public JSONObject providerSearchJson;
+	@FindBy(xpath="//div[contains(@class,'exportSavedProviders')]//button[contains(@class,'action-btn')]")
+	private WebElement Checkcoverage;
+	
+	@FindBy(xpath="//*[contains(text(),'People')][contains(@class,'option-title')]")
+	private WebElement People;
+	
+	@FindBy(xpath="//*[contains(text(),'Primary Care')][contains(@class,'option-title')]")
+	private WebElement Primary;
+	
+	
+	@FindBy(xpath="//button[contains(text(),'Primary Care Physician')]")
+	private WebElement Physician;
+
+	@FindBy(xpath="//div[contains(@class,'first')]//div[@class='hidden-phone']//button")
+	private WebElement Savebtn;
+	
+	@FindBy(xpath="//button[contains(text(),'Get Started')]")
+	private WebElement GetStarted;
+	
 	
 	public ProviderSearchPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		String fileName = CommonConstants.PROVIDER_SEARCH_PAGE_DATA;
-		providerSearch = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
 		openAndValidate();
 	}
 
 	@Override
 	public void openAndValidate() {
-		validate(pageHeader);
-		JSONObject jsonObject = new JSONObject();
-		for (String key : providerSearch.getExpectedData().keySet()) {
-			WebElement element = findElement(providerSearch.getExpectedData()
-					.get(key));
-			if (null != element) {
-				if (validate(element)) {
-					try {
-						jsonObject.put(key, element.getText());
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			}
-		}
-		providerSearchJson = jsonObject;
-		
+		CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
 	}
 
 	public VPPPlanSummaryPage selectsProvider(String physicianSearchCriteria,
@@ -121,4 +123,30 @@ public class ProviderSearchPage extends UhcDriver {
 
 	}
 
+	public VPPPlanSummaryPage selectsProvider() {
+	GetStarted.click();
+
+	CommonUtility.waitForPageLoadNew(driver, People, 30);
+	People.click();
+
+	CommonUtility.waitForPageLoadNew(driver, Primary, 30);
+	Primary.click();
+
+	CommonUtility.waitForPageLoadNew(driver, Physician, 30);
+
+	Physician.click();
+	CommonUtility.waitForPageLoadNew(driver, SaveBtn, 45);
+	SaveBtn.click();
+	CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
+
+	Viewsavebtn.click();
+
+	validateNew(Checkcoverage);
+	
+	Checkcoverage.click();
+	waitForCountDecrement(2);
+	driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+
+	return new VPPPlanSummaryPage(driver);
+	}
 }

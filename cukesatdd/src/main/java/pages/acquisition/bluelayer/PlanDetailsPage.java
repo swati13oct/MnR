@@ -4,6 +4,7 @@ package pages.acquisition.bluelayer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -81,7 +82,7 @@ public class PlanDetailsPage extends UhcDriver{
 	@FindBy(linkText="Back to all plans")
 	private WebElement backToPlansBtn;
 	
-	 @FindBy(xpath = ".//*[@id='highlights']/div/div/span[1]/label")
+	 @FindBy(xpath = "//input[@id='compareone']/following-sibling::label")
 	 private WebElement compareBox;
 	 
 	 @FindBy(xpath = ".//*[@id='highlights']//span[contains(@class,'added-num ng-scope')]")
@@ -104,6 +105,30 @@ public class PlanDetailsPage extends UhcDriver{
 		@FindBy(xpath="//*[@id='medicalBenefits']/div[1]/table/tbody/tr[1]/td[4]/strong")
 		private WebElement PremiumForPlan;
 		
+		
+		@FindBy(xpath = ".//*[@id='printdetails']")
+		private WebElement validatePrintButtonOnPlanDetails;
+
+		@FindBy(xpath = ".//*[@id='emailPlanDetail']")
+		private WebElement validateEmailButtonOnPlanDetails;
+
+		@FindBy(xpath = ".//*[@id='emailPlanDetailPopUp']")
+		private WebElement emailPopup;
+
+		@FindBy(xpath = ".//*[@id='emailSuccessMsgPopUp']")
+		private WebElement validatesuccesspopup;
+
+		@FindBy(xpath = ".//*[@id='closepopup']")
+		private WebElement cancelButtonEmailPlanDetailsPopUp;
+
+		@FindBy(xpath = ".//*[@id='form-valid']//button[2]")
+		private WebElement sendButtonEmailPlanDetailsPopUp;
+		
+		@FindBy(xpath = "//div[@id='estimateYourDrugs']//*[contains(text(),'Your Drug List')]")
+		private WebElement yourDrugListHeading;
+		
+		@FindBy(xpath = "//table[contains(@class,'drug-list-table')]//tr[2]/td/strong")
+		private WebElement addedDrug;
 
 	private PageData vppPlanDetails;
 
@@ -118,6 +143,15 @@ public class PlanDetailsPage extends UhcDriver{
 	
 	@FindBy(xpath="//div[@class='content-section plan-details-content mb-content ng-scope']/div[2]//a[@class='back-to-plans backtoplans-plandetail ng-scope']")
 	private WebElement downbackToPlanslink;
+	
+	@FindBy(id="medicalbenefits")
+	private List<WebElement> medBenefitsTab;
+	
+	@FindBy(id = "prescriptiondrug")
+    private List<WebElement> presDrugTab;
+	
+	@FindBy(id="plancosts")
+	private WebElement planCostsTab;
 
 	public PlanDetailsPage(WebDriver driver) {
 		super(driver);
@@ -125,6 +159,12 @@ public class PlanDetailsPage extends UhcDriver{
 		//openAndValidate();
 	}
 
+	public PlanDetailsPage(WebDriver driver, String planType) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		openAndValidate(planType);
+	}
+	
 	public String getPlanDetails() {
 		return planDetailsContent.getText();
 
@@ -143,6 +183,18 @@ public class PlanDetailsPage extends UhcDriver{
 
 	}
 
+	public void openAndValidate(String planType) {
+		if (planType.equalsIgnoreCase("MA")) {
+			CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
+			Assert.assertTrue(0 == presDrugTab.size(), "Prescription Drug tab not displayed for MA plans");
+
+		} else if (planType.equalsIgnoreCase("PDP")) {
+			CommonUtility.waitForPageLoadNew(driver, presDrugTab.get(0), 45);
+			Assert.assertTrue(0 == medBenefitsTab.size(), "Medical Benefit tab not displayed for PDP plans");
+		}
+		validateNew(planCostsTab);
+
+	}
 	@Override
 	public void openAndValidate() {
 
@@ -361,18 +413,18 @@ public class PlanDetailsPage extends UhcDriver{
 		}
 
 	   
-		public boolean validateCompareBox() {
-			
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+	public boolean validateCompareBox() {
+		if (compareBoxMessage.getText().contains("plan added")) {
 			clickCompareBox();
-			if(compareBoxMessage.getText().contains("plan added"))
-				return true;
+			Assert.assertTrue(compareBoxMessage.getText().contains("Add to compare"),
+					"Message not changed to Add to Compare");
+			return true;
+		} else {
+			Assert.fail("Plan Added text not displayed. Please check if checkbox is checked or not");
 			return false;
 		}
+
+	}
 		
 		public void clickCompareBox(){
 			compareBox.click();
@@ -527,6 +579,82 @@ public String GetTFNforPlanType() {
 	return null;
 }
 
+public void validatePrintandEmailOnPlanDetails() {
+	// TODO Auto-generated method stub
+	
+	// TODO Auto-generated method stub
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		validateNew(validatePrintButtonOnPlanDetails);
+		validateNew(validateEmailButtonOnPlanDetails);
+		System.out.println("successfully validated the Print and email Buttons on plan details page.");
+	
+}
+
+public void validatingFunctionalityOfPrintandEmailOnPlanDetails() {
+	// TODO Auto-generated method stub
+
+	validateEmailButtonOnPlanDetails.click();
+	driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	validateNew(emailPopup);
+	validateNew(cancelButtonEmailPlanDetailsPopUp);
+	System.out.println("!!!Cancel Button is displayed ===>" + cancelButtonEmailPlanDetailsPopUp.isDisplayed());
+	cancelButtonEmailPlanDetailsPopUp.click();
+	;
+	validateEmailButtonOnPlanDetails.click();
+	validateNew(emailPopup);
+	validateNew(sendButtonEmailPlanDetailsPopUp);
+	System.out.println("!!!Cancel Button is displayed ===>" + sendButtonEmailPlanDetailsPopUp.isDisplayed());
+	driver.findElement(By.xpath(".//*[@id='email']")).sendKeys("alisha_kapoor@optum.com");
+	System.out.println("!!!Entered valid Email ");
+	sendButtonEmailPlanDetailsPopUp.click();
+	System.out.println("Email has success fully send to user");
+	validateNew(validatesuccesspopup);
+	System.out.println("Validated Thank you Message");
+
+}
+public boolean validatingAdditionalBenefitTextInPlanDetails(String benefitType, String expectedText) {
+	boolean validationFlag = true;
+	WebElement AdditionalBenefitType = driver.findElement(By.xpath("//p[contains(text(), '"+benefitType+"')]/ancestor::td[@ng-hide]"));
+	System.out.println("The additional Benefit to Valuidate : "+benefitType);
+	WebElement ActualTextforBenefit =  driver.findElement(By.xpath("//p[contains(text(), '"+benefitType+"')]/ancestor::td[@ng-hide]/following-sibling::td"));
+	System.out.println("Text Displayed for the Additional Benefit on Plan Details : ");
+	String displayedText = ActualTextforBenefit.getText();
+	System.out.println(displayedText);
+	String[] Expected = expectedText.split("/");
+	
+	for(String str :Expected){
+		if(!displayedText.contains(str.trim())){
+			validationFlag = false;
+			System.out.println("Expected Text - "+str+" is NOT displayed");
+		}
+	}
+	return validationFlag;
+}
+
+public VPPPlanSummaryPage navigateBackToPlanSummaryPage() {
+	
+	backToAllPlans.click();
+	CommonUtility.checkPageIsReadyNew(driver);
+	if (driver.getCurrentUrl().contains("plan-summary")) {
+		return new VPPPlanSummaryPage(driver);
+
+	}
+	return null;
+}
+
+public void validatedAddedDrug(String expectedDrugName) {
+	validateNew(presDrugTab.get(0));
+	presDrugTab.get(0).click();
+	validateNew(yourDrugListHeading);
+	String actualDrug = addedDrug.getText().trim();
+	Assert.assertTrue(actualDrug.contains(expectedDrugName), "Expected drug not matches with actual drug");
+}
 }
 
 

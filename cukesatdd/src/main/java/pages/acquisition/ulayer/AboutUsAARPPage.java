@@ -3,13 +3,27 @@
  */
 package pages.acquisition.ulayer;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import acceptancetests.util.CommonUtility;
 
 /**
  * @author rkodumur
  *
  */
+
+
 public class AboutUsAARPPage extends GlobalWebElements{
+
+	@FindBy(xpath = "//*[contains(@class,'meded-article-header__title')]")
+	public static WebElement header;
+	
+	@FindBy(xpath = "//section[contains(@class,'meded-article-content')]//p[string-length(text()) > '1']")
+	public static WebElement abountUsBodyParaSection;
+	
+	
 	
 	public AboutUsAARPPage(WebDriver driver) {
 		super(driver);
@@ -19,18 +33,11 @@ public class AboutUsAARPPage extends GlobalWebElements{
 
 	@Override
 	public void openAndValidate() {
-		validate(footerContactUsLink);
 		
+		CommonUtility.waitForPageLoadNew(driver, header, 30);
+		validateNew(abountUsBodyParaSection);
 	}
 
-	public ContactUsAARPPage contactUsFooterClick() {
-		validate(footerContactUsLink);
-		footerContactUsLink.click();
-		validate(footerContactUsLink);
-		if (driver.getCurrentUrl().contains("contact-us")) {
-			return new ContactUsAARPPage(driver);
-		}
-		return null;
-	}
+	
 
 }

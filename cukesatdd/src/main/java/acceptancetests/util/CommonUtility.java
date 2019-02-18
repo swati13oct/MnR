@@ -397,6 +397,9 @@ public class CommonUtility {
 			WebElement elementExpected = wait.until(ExpectedConditions.visibilityOf(element));
 			if (elementExpected.isDisplayed()) {
 				System.out.println("The element: " + elementExpected + " is visible");
+			} else {
+				System.out.println("The element: " + elementExpected + " is not visible");
+				Assert.fail("The element: " + elementExpected + " is not visible");
 			}
 
 		} catch (Exception e) {

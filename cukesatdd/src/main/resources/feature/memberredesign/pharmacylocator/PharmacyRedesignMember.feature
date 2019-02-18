@@ -1,7 +1,7 @@
-@thePredators @pharmacylocator @PharmacylocatorRedesign @regression_06_06_18
+@pharmacylocator @regressionMember @gladiators
 Feature: P1.6To test Locate a Pharmacy tool in Redesign site
 
-  @PharmacyDistanceDefaultZip
+  @pharmacylocator1 @PharmacyDistanceDefaultZip
   Scenario Outline: To verify for default zipcode, filters, Show on map, View PDF, More Info in Redesign site
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -26,7 +26,7 @@ Feature: P1.6To test Locate a Pharmacy tool in Redesign site
       | PDP      | TexasRxPharmacyFnR |       25 | Long-term care              |
       | MAPD     | IndUHCPharmacyFnR  |       25 | E-Prescribing               |
 
-  @ValidateLanguageandZIPcode
+  @pharmacylocator2 @ValidateLanguageandZIPcode
   Scenario Outline: To verify pharmacy Locator ZIP code entry and for Chinese and Spanish Language in Redesign site
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -51,7 +51,7 @@ Feature: P1.6To test Locate a Pharmacy tool in Redesign site
       | PDP      | TexasRxPharmacyFnR |   14867 |       25 |
       | MAPD     | IndUHCPharmacyFnR  |   29148 |       10 |
 
-  @ZipCodeErrorMessages
+  @pharmacylocator3 @ZipCodeErrorMessages
   Scenario Outline: To verify error messages for invalid Zipcode in pharmacy locator page in Redesign site
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -79,7 +79,7 @@ Feature: P1.6To test Locate a Pharmacy tool in Redesign site
       | MAPD     | IndUHCPharmacyFnR  |         |        5 |
       | MAPD     | IndUHCPharmacyFnR  |    9999 |       10 |
 
-  @NegativeScenario
+  @pharmacylocator4 @NegativeScenario
   Scenario Outline: To verify pharmacy link is not displayed to MA/SHIP member in Redesign site
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |

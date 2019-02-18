@@ -31,8 +31,8 @@ public class PDPEnrollementGuidePage extends UhcDriver{
 	@FindBy(id = "birthDate")
 	private WebElement birthDateField;
 	
-	@FindBys(value = { @FindBy(xpath = "//select[@id='relationship']/option") })
-	private List<WebElement> relationshipDropDown;
+	@FindBys(value = { @FindBy(xpath = "//select[@id='relationship']") })
+	private WebElement relationshipDropDown;
 	
 	@FindBy(id = "emailAddress")
 	private WebElement emailAddressField;
@@ -40,16 +40,16 @@ public class PDPEnrollementGuidePage extends UhcDriver{
 	@FindBy(id = "emailAddressConfirm")
 	private WebElement emailAddressConfirmField;
 	
-	@FindBy(id = "promotions_yes")
+	@FindBy(xpath = ".//label[@for='promotions_yes']")
 	private WebElement promotionsYes;
 	
-	@FindBy(id = "promotions_no")
+	@FindBy(xpath = ".//label[@for='promotions_no']")
 	private WebElement promotionsNo;
 	
-	@FindBy(id = "gender_male")
+	@FindBy(xpath = ".//label[@for='gender_male']")
 	private WebElement genderMale;
 	
-	@FindBy(id = "gender_female")
+	@FindBy(xpath = ".//label[@for='gender_female']")
 	private WebElement genderFemale;
 	
 	@FindBy(id = "medicareNumber")
@@ -57,6 +57,30 @@ public class PDPEnrollementGuidePage extends UhcDriver{
 	
 	@FindBy(xpath = "//*[@class='error'][@for='medicareNumber']")
 	private WebElement MedicareIDErrorMsg;
+	
+	@FindBy(xpath = "//*[@class='error'][@for='firstName'][string-length(text())>1]")
+	private WebElement firstNameErrorMsg;
+	
+	@FindBy(xpath = "//*[@class='error'][@for='lastName'][string-length(text())>1]")
+	private WebElement lastNameErrorMsg;
+	
+	@FindBy(xpath = "//*[@class='error'][@for='birthDate'][string-length(text())>1]")
+	private WebElement dobErrorMsg;
+	
+	@FindBy(xpath = "//*[@class='error'][@for='relationship'][string-length(text())>1]")
+	private WebElement relationshipErrorMsg;
+	
+	@FindBy(xpath = "//*[@class='error'][@for='oneTimeAddress.addressLine1'][string-length(text())>1]")
+	private WebElement addressLineErrorMsg;
+	
+	@FindBy(xpath = "//*[@class='error'][@for='oneTimeAddress.city'][string-length(text())>1]")
+	private WebElement cityErrorMsg;
+	
+	@FindBy(xpath = "//*[@class='error'][@for='oneTimeAddress.zipCode'][string-length(text())>1]")
+	private WebElement zipErrorMsg;
+	
+	@FindBy(xpath = "//*[@class='error'][@for='dayPhone'][string-length(text())>1]")
+	private WebElement phoneErrorMsg;
 
 	@FindBy(id = "oneTimeAddress.addressLine1")
 	private WebElement addressLine1Field;
@@ -73,8 +97,8 @@ public class PDPEnrollementGuidePage extends UhcDriver{
 	@FindBy(xpath=".//*[@id='planGuide2']")
 	private WebElement planGuide2;
 	
-	@FindBys(value = { @FindBy(xpath = "//select[@id='oneTimeAddress.stateCode']/option") })
-	private List<WebElement> stateCodeDropDown;
+	@FindBys(value = { @FindBy(xpath = "//select[@id='oneTimeAddress.stateCode']") })
+	private WebElement stateCodeDropDown;
 	
 	@FindBy(id = "oneTimeAddress.zipCode")
 	private WebElement zipCodeField;
@@ -84,6 +108,21 @@ public class PDPEnrollementGuidePage extends UhcDriver{
 	
 	@FindBy(id = "nameInfo")
 	private WebElement nameInfoConfPage;
+	
+	@FindBy(xpath = "//*[@id='currentYearTitle'][@style='display: block;'][string-length(text())>1]")
+	private WebElement pageHeading;
+	
+	@FindBy(xpath = "//div[contains(@class,'needhelprightrailcontainer')]//div[contains(@class,'module-aside')]//div[contains(@class,'segment-title')]//*[string-length(text())>1]")
+	private List<WebElement> rightRailHeading;
+	
+	@FindBy(xpath = "//div[contains(@class,'needhelprightrailcontainer')]//div[contains(@class,'module-aside')]//div[contains(@class,'content')]//div[contains(@class,'module-aside')]//*[string-length(text())>1]")
+	private List<WebElement> rightRailSectionLinks;
+	
+	@FindBy(xpath = "//*[@for='planGuide1'][string-length(text())>1]")
+	private WebElement planGuideLabel1;
+	
+	@FindBy(xpath = "//*[@for='planGuide2'][string-length(text())>1]")
+	private WebElement planGuideLabel2;
 		
 	public PDPEnrollementGuidePage(WebDriver driver) {
 		super(driver);
@@ -93,8 +132,11 @@ public class PDPEnrollementGuidePage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		validate(inquryKitSubmitLink);
-		validate(firstNameField);
+		validateNew(pageHeading);
+		validateNew(rightRailHeading.get(0));
+		validateNew(rightRailHeading.get(1));
+		validateNew(rightRailHeading.get(2));
+		validateNew(rightRailSectionLinks.get(0));
 		validate(lastNameField);
 		validate(birthDateField);
 		validate(emailAddressField);
@@ -109,6 +151,7 @@ public class PDPEnrollementGuidePage extends UhcDriver{
 		validate(cityField);
 		validate(zipCodeField);
 		validate(dayPhoneField);
+		validateNew(inquryKitSubmitLink);
 	}
 
 	public void entersDetails(Map<String, String> personalAttributesMap) {
@@ -130,15 +173,18 @@ public class PDPEnrollementGuidePage extends UhcDriver{
 		String zipCode = personalAttributesMap.get("Zip Code");
 		String dayTimePhNumber = personalAttributesMap.get("Daytime phone number");
 		
-		if(driver.findElement(By.xpath(".//*[@id='planGuideInformation']/div[2]")).getText().contains(planGuide))
+		if (planGuideLabel1.getText().contains(planGuide)) {
+			validateNew(planGuide1);
 			planGuide1.click();
-		else
+		} else {
+			validateNew(planGuide2);
 			planGuide2.click();
+		}
 			
 		sendkeys(firstNameField, firstName);
 		sendkeys(lastNameField, lastName);
 		sendkeys(birthDateField, dob);
-		selectFromDropDown(relationshipDropDown, relationShip);
+		selectFromDropDownByText(driver, relationshipDropDown, relationShip);
 		sendkeys(emailAddressField, emailAddress);
 		sendkeys(emailAddressConfirmField, confirmEmailAddress);
 		if(emailUpdates.equalsIgnoreCase("Yes")){
@@ -158,7 +204,7 @@ public class PDPEnrollementGuidePage extends UhcDriver{
 		sendkeys(addressLine1Field, addressLine1);
 		sendkeys(addressLine2Field, addressLine2);
 		sendkeys(cityField, city);
-		selectFromDropDown(stateCodeDropDown, state);
+		selectFromDropDownByText(driver, stateCodeDropDown, state);
 		sendkeys(zipCodeField, zipCode);
 		sendkeys(dayPhoneField, dayTimePhNumber);
 	
@@ -166,8 +212,9 @@ public class PDPEnrollementGuidePage extends UhcDriver{
 
 	public EnquiryKitConfirmationPage submitsRequest() {
 		inquryKitSubmitLink.click();
-		CommonUtility.waitForPageLoad(driver, nameInfoConfPage, 30);
-		if(currentUrl().contains("request-information/inquirykitconfirmation.html")){
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, nameInfoConfPage, 60);
+		if(currentUrl().contains("inquirykitconfirmation.html")){
 			return  new EnquiryKitConfirmationPage(driver);
 		}
 		return null;
@@ -210,5 +257,19 @@ public class PDPEnrollementGuidePage extends UhcDriver{
 		return false;
 	
 	}
+	public void submitForm() {
+		validateNew(inquryKitSubmitLink);
+		inquryKitSubmitLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+	}
 
+	public boolean validateErrorMessages() {
+		if (validateNew(firstNameErrorMsg) && validate(lastNameErrorMsg) && validate(dobErrorMsg)
+				&& validate(relationshipErrorMsg) && validate(addressLineErrorMsg) && validate(cityErrorMsg)
+				&& validate(zipErrorMsg) && validate(phoneErrorMsg)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

@@ -18,7 +18,7 @@ jsonReport = "target/cucumber-RunMRATDDtheSpartansAcquisitionTest.json",detailed
 	overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDtheSpartansAcquisitionTest")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, 
 features = { "src/main/resources/feature/acquisition" }, plugin = {"pretty", "html:reports/test-report", 
-		"json:target/cucumber-RunMRATDDtheSpartansAcquisitionTest.json" }, tags = { "@theSpartans" })
+		"json:target/cucumber-RunMRATDDtheSpartansAcquisitionTest.json" }, tags = { "@Feb_release_2019" })
 public class RunMRATDDtheSpartansAcquisitionTest {
 
 }

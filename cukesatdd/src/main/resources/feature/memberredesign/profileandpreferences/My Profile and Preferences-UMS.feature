@@ -1,7 +1,7 @@
-@codeMonkeys1 @thePredators
+@accountProfile @codeMonkeys1 @thePredators
 Feature: C1.2To test Profile and Preferences page .
 
-  @CMNeedhelp
+  @accountProfile1 @CMNeedhelp
   Scenario Outline: To verify the NeedHelp Section On Account Profile page
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
@@ -15,7 +15,7 @@ Feature: C1.2To test Profile and Preferences page .
       | MAPD     |
       | PDP      |
 
-  @CMNeedhelpShip
+  @accountProfile2 @CMNeedhelpShip
   Scenario Outline: To verify the NeedHelp Section On Account Profile page for ship members
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
@@ -28,7 +28,7 @@ Feature: C1.2To test Profile and Preferences page .
       | planType |
       | SHIP     |
 
-  @CMValidatePlanNamemembernameIDAccountSectionUMS
+  @accountProfile3 @CMValidatePlanNamemembernameIDAccountSectionUMS
   Scenario Outline: To verify Plan Name, Member name, Member ID and account section in UMS site
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
@@ -41,7 +41,7 @@ Feature: C1.2To test Profile and Preferences page .
       | PDP      |
       | SHIP     |
 
-  @CMPasswordEdit
+  @accountProfile4 @CMPasswordEdit
   Scenario Outline: To verify the edit functionality in Account Profile section in UMS site
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
@@ -56,7 +56,7 @@ Feature: C1.2To test Profile and Preferences page .
       | PDP      |
       | SHIP     |
 
-  @CMPasswordEdit1
+  @accountProfile5 @CMPasswordEdit1
   Scenario Outline: To verify the edit functionality in Account Profile section in UMS site without entering the mandatory fields
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
@@ -70,7 +70,7 @@ Feature: C1.2To test Profile and Preferences page .
       | PDP      |
       | SHIP     |
 
-  @CMPasswordEdit3
+  @accountProfile6 @CMPasswordEdit3
   Scenario Outline: To verify the edit functionality in Account Profile section in UMS site when user enters different password in confirm new password field
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
@@ -84,7 +84,7 @@ Feature: C1.2To test Profile and Preferences page .
       | PDP      |
       | SHIP     |
 
-  @CMValidateEmail
+  @accountProfile7 @CMValidateEmail
   Scenario Outline: To verify Email section in member Redesign site
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
@@ -97,7 +97,7 @@ Feature: C1.2To test Profile and Preferences page .
       | PDP      |
       | SHIP     |
 
-  @CMEmailEdit1
+  @accountProfile8 @CMEmailEdit1
   Scenario Outline: To verify Email edit functionality in Redesign site
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
@@ -112,7 +112,7 @@ Feature: C1.2To test Profile and Preferences page .
       | PDP      |
       | SHIP     |
 
-  @CMEmailEdit2
+  @accountProfile9 @CMEmailEdit2
   Scenario Outline: To verify validations on email secton in member redesign site
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
@@ -127,7 +127,7 @@ Feature: C1.2To test Profile and Preferences page .
       | PDP      |
       | SHIP     |
 
-  @CMPermanentAddress
+  @accountProfile10 @CMPermanentAddress
   Scenario Outline: To verify the Permanent Address section
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
@@ -140,7 +140,7 @@ Feature: C1.2To test Profile and Preferences page .
       | MAPD     |
       | PDP      |
 
-  @CMCommunicationPreferences
+  @accountProfile11 @CMCommunicationPreferences
   Scenario Outline: To verify Communication Preferences section
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
@@ -154,7 +154,7 @@ Feature: C1.2To test Profile and Preferences page .
       | PDP      |
       | SHIP     |
 
-  @CMPhone
+  @accountProfile12 @CMPhone
   Scenario Outline: To verify Phone in Aarp site
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
@@ -171,7 +171,7 @@ Feature: C1.2To test Profile and Preferences page .
       | PDP      |
       | SHIP     |
 
-  @CMGoGreen
+  @accountProfile13 @CMGoGreen
   Scenario Outline: To verify Go Green page
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
@@ -191,7 +191,7 @@ Feature: C1.2To test Profile and Preferences page .
       | PDP      |
 
   #|SHIP      |
-  @CMTemporaryaddress
+  @accountProfile14 @CMTemporaryaddress
   Scenario Outline: To verify Temporary address section
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
@@ -206,7 +206,7 @@ Feature: C1.2To test Profile and Preferences page .
       | MAPD     |
       | PDP      |
 
-  @CMTemporaryaddressShip
+  @accountProfile15 @CMTemporaryaddressShip
   Scenario Outline: To verify Temporary address section for a ship member
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
@@ -217,7 +217,7 @@ Feature: C1.2To test Profile and Preferences page .
       | planType |
       | SHIP     |
 
-  @US957739
+  @accountProfile16 @US957739
   Scenario Outline: To verify  the sections on Profile and Preferences page for a NOKIA member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -233,7 +233,7 @@ Feature: C1.2To test Profile and Preferences page .
       | MA       | NOKIA      |
       | MAPD     | NOKIA      |
 
-  @thePredators @AprilRelease2018 @ProfilePageHSIDLinks
+  @accountProfile17 @thePredators @AprilRelease2018 @ProfilePageHSIDLinks
   Scenario Outline: To test the Profile Page after HSID login
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
@@ -247,7 +247,7 @@ Feature: C1.2To test Profile and Preferences page .
       | planType |
       | MAPD     |
 
-  @accountProfAndPref @regressionAccountProf&Pref 
+  @accountProfile18 @accountProfAndPref @regressionAccountProf&Pref 
   Scenario Outline: To test end to end regression scenario for account profile page aarp member
     Given login with following details logins in the member portal and validate elements
       | User Type | <userType> |
@@ -271,7 +271,7 @@ Feature: C1.2To test Profile and Preferences page .
       | userType            | memberType |
       | MAPD_AARPIndividual | AARP       |
 
-  @goGreen @regression_06_06_18
+  @accountProfile19 @goGreen @regressionMember
   Scenario Outline: To verify Edit preferences section for Go Green
     Given login with following details logins in the member portal and validate elements
       | User Type | <userType> |
@@ -281,14 +281,14 @@ Feature: C1.2To test Profile and Preferences page .
 
     Examples: 
       | userType           |
-      | MAPD_AARP_GOGreen  |
-      | MA_AARP_GOGreen    |
-      | PDP_AARP_GOGreen   |
-      | MA_UHC_GOGreen     |
-      | MAPD_UHC_GOGreen   |
-      | MAPD_GROUP_GOGreen |
+      | MAPD_AARP_GOGreen_Profilepref  |
+      | MA_AARP_GOGreen_Profilepref    |
+      | PDP_AARP_GOGreen_Profilepref   |
+      | MA_UHC_GOGreen_Profilepref     |
+      | MAPD_UHC_GOGreen_Profilepref   |
+      | MAPD_GROUP_GOGreen_Profilepref |
 
-  @EPMPProfilePage
+  @accountProfile20 @EPMPProfilePage
   Scenario Outline: To test end to end regression scenario for EPMP profile page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -301,23 +301,25 @@ Feature: C1.2To test Profile and Preferences page .
       | planType | memberType  |
       | MAPD     | EPMPEnabled |
 
-  @EPMPProfilePageContactusInformation @regression_06_06_18
+  @accountProfile21 @EPMPProfilePageContactusInformation @regressionMember
   Scenario Outline: To test end to end regression scenario for EPMP profile page
-    Given login with following details logins in the member portal and validate elements
+  #Removed from Regression as EPMP is still in the pipeline for development
+ 	Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     #|data type    | <dataType>   |
     When the user navigates to Profile and Preferences page
-    And I should see the EPMP i frame on profile page
+    And I should see the EPMP i frame on profile page   
     And I should be able to see edit email address and to view read only HSID email
     And I should be able to view and edit phone numbers
 
     Examples: 
       | planType | memberType  | dataType   |
-      | MAPD     | EPMPEnabled | Individual |
+      #| MAPD     | EPMPEnabled | Individual |
 
-  @profilePageForShip @regression_06_06_18
+  @accountProfile22 @EMPMprofilePageForShip  @regressionMember
   Scenario Outline: To test end to end regression scenario for EPMP profile page for ship
+   #Removed from Regression as EPMP is still in the pipeline for development
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
     When the user navigates to Profile and Preferences page
@@ -325,13 +327,14 @@ Feature: C1.2To test Profile and Preferences page .
     And the user validate the Phone section on profile page for ship member
     And the user validate the Permanent Address section on profile page for ship member
     And the user validate the temporary section on profile page for ship member
-
+	
     Examples: 
       | planType |
-      | SHIP     |
+      #| SHIP    |
 
-  @EPMPProfilePageContactusGroup @regression_06_06_18
+  @accountProfile23 @EPMPProfilePageContactusGroup  @regressionMember
   Scenario Outline: To test end to end regression scenario for EPMP profile page for group members
+   #Removed from Regression as EPMP is still in the pipeline for development
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -344,12 +347,13 @@ Feature: C1.2To test Profile and Preferences page .
 
     Examples: 
       | planType | memberType  | dataType | GroupPlanName  |
-      | MAPD     | EPMPEnabled | group    | HealthSelectRx |
+      #| MAPD     | EPMPEnabled | group    | HealthSelectRx |
 
-  @regressionPCPMedica @regression_06_06_18
+  @accountProfile24 @regressionPCPMedica @regressionMember
   Scenario Outline: To test end to end regression scenario for account profile page for PCP medica members
     Given login with following details logins in the member portal and validate elements
       | User Type | <userType> |
+      | Member Type | <memberType> |
     When the user navigates to Profile and Preferences page
     And I click the HEALTHSAFE ID PASSWORD link and validate username and password and verify edit password link
     Then I should see the breadcrumb  in the upper left side of the page
@@ -368,10 +372,10 @@ Feature: C1.2To test Profile and Preferences page .
 
     Examples: 
       | userType | memberType |
-      | PCP      | AARP       |
-      | Medica   | AARP       |
+      | PCP      | PCP_SouthFlorida_ProfilePref     |
+      | Medica   | Medica_SouthFlorida_ProfilePref  |
 
-  @regressionPreferencesForShip @regression_06_06_18
+  @accountProfile25 @regressionPreferencesForShip @regressionMember
   Scenario Outline: To test end to end regression scenario for preferences of a SHIP member
     Given login with following details logins in the member portal and validate elements
       | User Type | <userType> |
@@ -381,10 +385,11 @@ Feature: C1.2To test Profile and Preferences page .
 
     Examples: 
       | userType |
-      | SHIP     |
+      | SHIP_ProfilePref     |
 
-  @profilePageForTerminated @regression_06_06_18
+  @accountProfile26 @profilePageForTerminated @regressionMember
   Scenario Outline: To test end to end regression scenario for account profile  page for a terminated member
+ #Removed from Regression as EPMP is still in the pipeline for development
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -397,10 +402,11 @@ Feature: C1.2To test Profile and Preferences page .
 
     Examples: 
       | planType | memberType  | dataType   |
-      | MAPD     | EPMPEnabled | Terminated |
+    #  | MAPD     | EPMPEnabled | Terminated |
 
-  @preferencesForComboOnProfile @regression_06_06_18
+  @accountProfile27 @EPMPpreferencesForComboOnProfile  @regressionMember
   Scenario Outline: To test end to end regression scenario for account profile and preferences for a combo member
+  #Removed from Regression as EPMP is still in the pipeline for development
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -410,4 +416,4 @@ Feature: C1.2To test Profile and Preferences page .
 
     Examples: 
       | planType | memberType  |
-      | Combo    | EPMPEnabled |
+     # | Combo    | EPMPEnabled |

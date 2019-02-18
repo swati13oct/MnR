@@ -19,7 +19,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionHeader.json",detailedReport = t
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionHeader")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/header" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionHeader.json" }, tags = { "@regression_06_06_18" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionHeader.json" }, tags = { "@regressionMember" })
 public class RunMRATDDRegressionHeader {
 
 }

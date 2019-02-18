@@ -222,6 +222,7 @@ public class MRScenario {
 				 else if ((environment.equalsIgnoreCase("team-a") || (environment.equalsIgnoreCase("team-e")) || (environment.equalsIgnoreCase("team-f")) || (environment.equalsIgnoreCase("team-g")) || (environment.equalsIgnoreCase("team-c")) || (environment.equalsIgnoreCase("team-t")))) {
 				csvName= "MemberRedesign-UUID.csv";
 				 }
+				 /* note: Dec2018 - comment out because this section caused stage run not to use UMS-Member-Type.csv
 					else{
 				if (tagName.equalsIgnoreCase("@benefitsAndCoverage")) {
 					csvName = "benefitsAndCoverage.csv";
@@ -236,6 +237,7 @@ public class MRScenario {
 				}
 				
 					}
+					*/
 			}
 				if(csvName!=null)
 					return csvName;
@@ -755,11 +757,12 @@ public class MRScenario {
 
 		capabilities.setCapability("platform", "Windows 7");
 		capabilities.setCapability("version", "66.0");
-		capabilities.setCapability("parent-tunnel", "sauce_admin");
+		//capabilities.setCapability("parent-tunnel", "sauce_admin");
+		capabilities.setCapability("parent-tunnel", "optumtest");
 		capabilities.setCapability("tunnelIdentifier",
 sauceLabsTunnelIdentifier);		
-		capabilities.setCapability("tunnelIdentifier",
-				"OptumSharedTunnel-Prd");		//capabilities.setCapability("name", "MRATDD-TestSuite");
+		//capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");		//capabilities.setCapability("name", "MRATDD-TestSuite");
+		capabilities.setCapability("tunnelIdentifier", "Optum-Stage");	
 		capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
 		String jobName = "VBF Execution - Using " + capabilities.getBrowserName() + " in  " + System.getProperty("environment") +" environment";
 		capabilities.setCapability("name", jobName);
@@ -1051,7 +1054,8 @@ sauceLabsTunnelIdentifier);
 					capabilities.setCapability("recordMp4", true);
 				}
 				capabilities.setCapability("autoAcceptsAlerts", true);
-				capabilities.setCapability("parent-tunnel", "sauce_admin");				
+				//capabilities.setCapability("parent-tunnel", "sauce_admin");		
+				capabilities.setCapability("parent-tunnel", "optumtest");						
 				capabilities.setCapability("tunnelIdentifier", sauceLabsTunnelIdentifier);
 				//capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
 				capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));

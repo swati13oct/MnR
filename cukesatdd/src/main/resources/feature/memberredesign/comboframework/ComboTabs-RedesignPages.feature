@@ -1,8 +1,7 @@
-#@thePredators
-@ComboTabsRedesignPages
+@thePredators @ComboTabsRedesign
 Feature:P1.1 Test Combo Member Plan Tabs for Redesign Pages
  
-@TerminatedPlanTabsDisplay
+@ComboTabsRedesign1 @TerminatedPlanTabsDisplay
 Scenario Outline: Verify Terminated Plan Tabs are displayed in Claims, EOB, Contact Us and Forms & Resources Redesign pages
 Given registered Combo Plans member with following attribute
 	| Plan Type | <planType> |
@@ -20,7 +19,7 @@ Examples:
 # | AARP |  TerminatedPlan | ContactUs | 
 # | AARP | TerminatedPlan  | FormsResources |
     
-@TerminatedPlanTabsNotDisplayed
+@ComboTabsRedesign2 @TerminatedPlanTabsNotDisplayed
 Scenario Outline: Verify Terminated Plan Tabs are NOT Displayed in Profile and Go Green Preferences Redesign pages
 Given registered Combo Plans member with following attribute
 	| Plan Type | <planType> |
@@ -36,7 +35,7 @@ Examples:
  | AARP | TerminatedPlan | Profile 		|  
  | AARP | TerminatedPlan | GoGreenPreferences |
  
-@SingleTabsforSHIP
+@ComboTabsRedesign3 @SingleTabsforSHIP
 Scenario Outline: Verify single tabs for all SHIP plans in Claims, EOB, Payment, My Profile and Contact Us  page
 Given registered Combo Plans member with following attribute
 	| Plan Type | <planType> |
@@ -54,7 +53,7 @@ Examples:
 #    | Profile 	| 
 #    | ContactUs | 
 
-    @ValidateSHIPsingleTab
+@ComboTabsRedesign4  @ValidateSHIPsingleTab
 Scenario Outline: Verify Single tabs for all SHIP Plans except for PHIP in My Profile and Preferences in Member Redesign site
 Given registered Combo Plans member with following attribute
 	| Plan Type | <planType> |
@@ -67,7 +66,7 @@ Examples:
             | SHIP        | MedSuppwithRider |
 #            | SHIP				| HIPwithRider	|
 
-@ValidatePHIPtab
+@ComboTabsRedesign5 @ValidatePHIPtab
 Scenario Outline: Verify Single tabs for all SHIP Plans except for PHIP in My Profile and Preferences in Member Redesign site
 Given registered Combo Plans member with following attribute
 	| Plan Type | <planType> |
@@ -79,7 +78,7 @@ Examples:
             | planType    | memberType |
             | SHIP        | PHIP |
 
-@ValidateComboTabsAARPPlans
+@ComboTabsRedesign6 @ValidateComboTabsAARPPlans
 Scenario Outline: Verify Separate tabs for All AARP Plans in My Profile and Preferences in Member Redesign site
 Given registered Combo Plans member with following attribute
 	| Plan Type | <planType> |
@@ -97,7 +96,7 @@ Examples:
             | MAPD			| MAPDwithMedSUpp | MA,MedSupp |
             | PDP				| PDPwithMedSupp | PDP,MedSupp |
 
-@ValidateComboTabsUHCPlans
+@ComboTabsRedesign7 @ValidateComboTabsUHCPlans
 Scenario Outline: Verify Separate tabs for All UHC Plans in My Profile and Preferences in Member Redesign site
 Given registered Combo Plans member with following attribute
 	| Plan Type | <planType> |
@@ -111,7 +110,7 @@ Examples:
             | PDPwithSSUP | Group | PDP,SSUP |
     
 
-@ValidateGoGreenPageSHIPsingleTab
+@ComboTabsRedesign8 @ValidateGoGreenPageSHIPsingleTab
 Scenario Outline: Verify Single tabs for all SHIP Plans except for PHIP in My Profile and Preferences in Member Redesign site
 Given registered Combo Plans member with following attribute
 	| Plan Type | <planType> |
@@ -125,7 +124,7 @@ Examples:
             | SHIP        | MedSuppwithRider |
             | SHIP				| HIPwithRider	|
 
-@ValidateGoGreenPagePHIPtab
+@ComboTabsRedesign9 @ValidateGoGreenPagePHIPtab
 Scenario Outline: Verify Single tabs for all SHIP Plans except for PHIP in My Profile and Preferences in Member Redesign site
 Given registered Combo Plans member with following attribute
 	| Plan Type | <planType> |
@@ -138,7 +137,7 @@ Examples:
             | planType    | memberType |
             | SHIP        | PHIP |
 
-@ValidateGoGreenPageComboTabsAARPPlans
+@ComboTabsRedesign10 @ValidateGoGreenPageComboTabsAARPPlans
 Scenario Outline: Verify Separate tabs for All AARP Plans in My Profile and Preferences in Member Redesign site
 Given registered Combo Plans member with following attribute
 	| Plan Type | <planType> |
@@ -157,7 +156,7 @@ Examples:
             | MAPD			| MAPDwithMedSUpp | MA,MedSupp |
             | PDP				| PDPwithMedSupp | PDP,MedSupp |
 
-@ValidateGoGreenPageComboTabsUHCPlans
+@ComboTabsRedesign11 @ValidateGoGreenPageComboTabsUHCPlans
 Scenario Outline: Verify Separate tabs for All UHC Plans in My Profile and Preferences in Member Redesign site
 Given registered Combo Plans member with following attribute
 	| Plan Type | <planType> |
