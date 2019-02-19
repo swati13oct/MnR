@@ -1070,6 +1070,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		 * } } } catch (Exception e) { System.out.println("county box not found"
 		 * ); }
 		 */
+		CommonUtility.waitForPageLoadNew(driver, changeLocationLink, 30);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
 		}
