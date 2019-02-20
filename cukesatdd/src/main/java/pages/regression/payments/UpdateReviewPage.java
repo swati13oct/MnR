@@ -45,9 +45,8 @@ public class UpdateReviewPage extends UhcDriver {
 		PageFactory.initElements(driver, this);
 		openAndValidate();
 	}
-	
-	public void PaymentsDataVerificationOnUpdateReviewPage()
-	{
+
+	public void PaymentsDataVerificationOnUpdateReviewPage() {
 		List<WebElement> rowsList = driver.findElements(By.xpath("//div[@class='table-body-row']"));
 		List<WebElement> columnsList = null;
 		for (WebElement row : rowsList) {
@@ -62,12 +61,11 @@ public class UpdateReviewPage extends UhcDriver {
 			}
 		}
 	}
-	
 
 	public UpdateConfirmationPage selectAgreeAndClickOnContinueforEFT() {
 		validate(EditPaymentInformation);
 		System.out.println("User is on Payment Method Update Page");
-		
+
 		PaymentsDataVerificationOnUpdateReviewPage();
 		System.out.println("Going to scroll down");
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
@@ -75,6 +73,7 @@ public class UpdateReviewPage extends UhcDriver {
 		jsClickNew(AgreeCheckBox);
 		ContinueButton.click();
 		System.out.println("Clicked on Continue button");
+		waitforElement(ConfirmationPageHeading);
 		if (validate(MakeOneTimePaymentLink)) {
 			System.out.println("User is on Confirmation Page for Update Recurring");
 			return new UpdateConfirmationPage(driver);
@@ -92,6 +91,7 @@ public class UpdateReviewPage extends UhcDriver {
 		jsClickNew(AgreeCheckBox);
 		ContinueButton.click();
 		System.out.println("Clicked on Contuine button");
+		waitforElement(ConfirmationPageHeading);
 		if (validate(MakeOneTimePaymentLink)) {
 			System.out.println("User is on Confirmation Page for Update Recurring");
 			return new UpdateConfirmationPage(driver);
@@ -109,6 +109,7 @@ public class UpdateReviewPage extends UhcDriver {
 		jsClickNew(AgreeCheckBox);
 		ContinueButton.click();
 		System.out.println("Clicked on Continue button");
+		waitforElement(ConfirmationPageHeading);
 		if (validate(MakeOneTimePaymentLink)) {
 			System.out.println("User is on Confirmation Page for Update Recurring");
 			return new UpdateConfirmationPage(driver);
@@ -125,6 +126,7 @@ public class UpdateReviewPage extends UhcDriver {
 		jsClickNew(AgreeCheckBox);
 		ContinueButton.click();
 		System.out.println("Clicked on Continue button");
+		waitforElement(ConfirmationPageHeading);
 		if (ConfirmationPageHeading.getText().contains("Review Payment Method Update")) {
 			System.out.println("User is on Confirmation Payment Method Update Page");
 			return new UpdateConfirmationPage(driver);
@@ -133,24 +135,25 @@ public class UpdateReviewPage extends UhcDriver {
 			return null;
 		}
 	}
-	
-	public UpdateConfirmationPage selectAgreeAndClickOnContinueforStopRecurring() {
-	System.out.println("User is on Payment Method Update Page");
-	PaymentsDataVerificationOnUpdateReviewPage();
-	System.out.println("Going to scroll down");
-	JavascriptExecutor jse = (JavascriptExecutor) driver;
-	jse.executeScript("window.scrollBy(0,650)", "");
-	jsClickNew(AgreeCheckBox);
-	ContinueButton.click();
-	System.out.println("Clicked on Continue button");
-	if (ConfirmationPageHeading.getText().contains("Review Payment Method Update")) {
-		System.out.println("User is on Confirmation Payment Method Update Page");
-		return new UpdateConfirmationPage(driver);
-	} else {
-		System.out.println("Confirmation Payment Method Update not displayed");
-		return null;
+
+	public UpdateConfirmationPage selectAgreeAndClickOnContinueforStopRecurringForFed() {
+		System.out.println("User is on Payment Method Update Page");
+		PaymentsDataVerificationOnUpdateReviewPage();
+		System.out.println("Going to scroll down");
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,650)", "");
+		jsClickNew(AgreeCheckBox);
+		ContinueButton.click();
+		System.out.println("Clicked on Continue button");
+		waitforElement(MakeOneTimePaymentLink);
+		if (validate(MakeOneTimePaymentLink)) {
+			System.out.println("User is on Confirmation Payment Method Update Page");
+			return new UpdateConfirmationPage(driver);
+		} else {
+			System.out.println("Confirmation Payment Method Update not displayed");
+			return null;
+		}
 	}
-}
 
 	@Override
 	public void openAndValidate() {

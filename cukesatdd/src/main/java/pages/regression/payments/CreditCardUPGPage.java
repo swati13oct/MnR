@@ -65,6 +65,7 @@ public class CreditCardUPGPage extends UhcDriver {
 		selectFromDropDownByText(driver, SelectMonth, ExpMonth);
 		selectFromDropDownByText(driver, SelectYear, ExpYr);
 		ProceedButton.click();
+		waitforElement(ReviewPageHeading);
 		if (ReviewPageHeading.getText().contains("Review One Time Payment")) {
 			System.out.println("Review One Time Payment page displayed");
 			return new ReviewOneTimePaymentPage(driver);
@@ -85,15 +86,16 @@ public class CreditCardUPGPage extends UhcDriver {
 		selectFromDropDownByText(driver, SelectMonth, ExpMonth);
 		selectFromDropDownByText(driver, SelectYear, ExpYr);
 		ProceedButton.click();
-		if (ReviewPageHeading.getText().contains("Review Recurring Payments")) {
-			System.out.println("Review Recurring Payments displayed");
+		waitforElement(ReviewPageHeading);
+		if (ReviewPageHeading.getText().contains("Review Your Automatic Payments Information")) {
+			System.out.println("Review Your Automatic Payments Informations displayed");
 			return new ReviewAutomaticPage(driver);
 		} else {
-			System.out.println("Review Recurring Payments not displayed");
+			System.out.println("Review Your Automatic Payments Information not displayed");
 			return null;
 		}
 	}
-	
+
 	public UpdateReviewPage EnterFiledsOnCCforUpdateREC(Map<String, String> accountAttributessMap) {
 		String Name = accountAttributessMap.get("Name");
 		String CreditCardNumber = accountAttributessMap.get("CreditCardNumber");
@@ -113,8 +115,7 @@ public class CreditCardUPGPage extends UhcDriver {
 			return null;
 		}
 	}
-	
-	
+
 	@Override
 	public void openAndValidate() {
 		validate(EnterCreditInfo);
