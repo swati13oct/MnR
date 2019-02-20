@@ -1097,16 +1097,16 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public void clickonViewPlans() {
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(20000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (validate(viewPlans)) {
-			viewPlans.click();
-		}
+			if (validateNew(viewPlans)) {
+				viewPlans.click();
+			}
 
-	}
+		}
 
 	public void clickOnPDPPlans() {
 		try {
@@ -1452,6 +1452,9 @@ public boolean validateAllPlansChecked() {
 		if (allMAPlans != null) {
 			for (int i = 0; i < allMAPlans.size(); i++) {
 				allMAPlans.get(i).click();
+				if (i == 3){
+					break;
+				}
 			}
 		}
 

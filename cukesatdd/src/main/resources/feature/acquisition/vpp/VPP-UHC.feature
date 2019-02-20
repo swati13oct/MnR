@@ -96,8 +96,9 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
     And I select all 3 plans to compare in MA and click on compare plan link in UHS site
     When the user validate the print and email link option in plan compare in UHS site
     Then the user validating email and print option in plan compare in UHS site
-
-    #Then I click back to all plans button and verify that all 3 plans are still selected
+	Then the user validate thank you message in plan compare in UHS site 
+	Then the user clicks on back to all plans link and validates all three plans are selected
+    
     Examples: 
       | zipcode |
       |   90210 |
