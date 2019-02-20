@@ -273,6 +273,7 @@ public boolean validate_SEPoptions_for_planType(String planType) {
 					&& validate(ChangeLIS) && validate(Assignment) && validateNonPresenceOfElement(Both_Medicare_Medicaid)&& validateNonPresenceOfElement(ExtraHelp_PrescriptionDrug) && validateNonPresenceOfElement(LoSS_LIS)){
 			
 			System.out.println("All Options for MA/MAPD Plan are displayed in SEP page OLE flow : Validation Passed");
+
 			Validation_Flag = true;
 		}
 		else{
