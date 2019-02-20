@@ -177,9 +177,9 @@ public class PlanSelectorNewPage extends UhcDriver {
 		}
 		catch(Exception ex)
 		{
-			Thread.sleep(2000);
+			/*Thread.sleep(2000);
 			Select drpCountry = new Select(driver.findElement(By.id("Counties")));
-			drpCountry.selectByValue("48029");
+			drpCountry.selectByValue("48029");*/
 		}
 		
 		//Select drpCountry = new Select(driver.findElement(By.id("Counties")));

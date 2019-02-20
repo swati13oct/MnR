@@ -81,6 +81,39 @@ public class PlanSelectorStepDefinition {
 
 	}
 	
+	@When("^user scrolls down to Plan selector on VPP detail page on right rail widget$")
+	public void user_scrolls_down_PST_detail_rightRail() throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		System.out.println(aquisitionhomepage);
+		PlanSelectorNewPage planSelectorNewPage = aquisitionhomepage.PSTButton();
+		if(planSelectorNewPage != null)
+		getLoginScenario().saveBean(PageConstants.PLAN_SELECTOR_NEW_PAGE,
+				planSelectorNewPage);
+		else
+			System.out.println("PST page not displayed");			
+
+	}
+	
+	
+	@Then("^the user view plan details of the above selected plan in UMS site for DST$")
+	public void user_views_plandetails_selected_plan_ums(DataTable givenAttributes) {
+
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		String planName = memberAttributesRow.get(0).getCells().get(1);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		AcquisitionHomePage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetailsDST(planName, planType);
+		System.out.println(vppPlanDetailsPage);
+		if (vppPlanDetailsPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
+			} else
+				Assert.fail("Error in validating the Plan Details Page");
+		}
+	
 	
 	@When("^user goes to ours plan tab and click on Take the Quiz button$")
 	public void user_goes_to_ours_plan_tab_and_click_on_Take_the_Quiz_button() throws Throwable {

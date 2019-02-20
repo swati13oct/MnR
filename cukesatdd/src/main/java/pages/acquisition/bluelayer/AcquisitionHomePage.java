@@ -1,12 +1,18 @@
 package pages.acquisition.bluelayer;
 
+import acceptancetests.acquisition.vpp.VPPCommonConstants;
+
 /*@author pagarwa5*/
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
+import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
+import cucumber.api.DataTable;
+import cucumber.api.java.en.Then;
+import gherkin.formatter.model.DataTableRow;
 import junit.framework.Assert;
 
 import org.json.JSONException;
@@ -21,6 +27,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.PageTitleConstants;
@@ -32,6 +39,8 @@ import java.util.concurrent.TimeUnit;
 
 
 public class AcquisitionHomePage extends GlobalWebElements {
+	
+	
 
 	@FindBy(id = "lookzip")
 	private WebElement lookupZipcode;
@@ -253,6 +262,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
+	}
+	
+	public AcquisitionHomePage(WebDriver driver, String planType, boolean details) {
+		super(driver);
+		PageFactory.initElements(driver, this);		
 	}
 	
 	public AcquisitionHomePage(WebDriver driver, boolean alreadyOnSite) {
@@ -1082,7 +1096,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public PlanSelectorNewPage PSTButton() {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		PageFactory.initElements(driver, this);
-		js.executeScript("window.scrollBy(0,1000)");
+		js.executeScript("window.scrollBy(0,1200)");
 		waitforElement(PSTButton);
 		PSTButton.click();
 		return new PlanSelectorNewPage(driver);
@@ -1182,6 +1196,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		return null;
 	}
+	
+	
+	
+
+	
 
 	public void OurPlanMALanding() {
 
