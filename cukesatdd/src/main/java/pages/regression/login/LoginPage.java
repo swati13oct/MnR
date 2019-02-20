@@ -93,7 +93,9 @@ public class LoginPage extends UhcDriver {
 				if ("team-ci1".equalsIgnoreCase(MRScenario.environment)
 						|| "team-ci2".equalsIgnoreCase(MRScenario.environment)) {
 					PAGE_URL = MRConstants.LEGACY_TESTHARNESS;
-				} else {
+				}  else if("team-a".equalsIgnoreCase(MRScenario.environment)){
+					PAGE_URL=MRConstants.OSE_NEW_URL;				
+				}else {
 					PAGE_URL = MRConstants.LEGACY_TESTHARNESS.replace("awe-", "");
 				}
 			} else if ("NO".equalsIgnoreCase(MRScenario.isTestHarness)

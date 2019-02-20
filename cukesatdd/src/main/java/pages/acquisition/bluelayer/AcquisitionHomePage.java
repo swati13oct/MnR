@@ -1016,7 +1016,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		sendkeys(zipCodeField, zipcode);
 		viewPlansButton.click();
-
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new pages.acquisition.bluelayer.VPPPlanSummaryPage(driver);
 		}

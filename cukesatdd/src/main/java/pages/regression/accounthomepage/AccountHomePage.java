@@ -1081,7 +1081,7 @@ public class AccountHomePage extends UhcDriver {
 				linkContactUs.click();
 			}
 			CommonUtility.waitForPageLoad(driver, headingContactUs, 10);
-			if (driver.getTitle().contains("Contact Us")) {
+			if (driver.getTitle().contains("/contact-us/")) {
 				return new ContactUsPage(driver);
 			}
 		} catch (InterruptedException e) {

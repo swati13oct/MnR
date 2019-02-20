@@ -862,4 +862,20 @@ public class VppStepDefinitionUHC {
 				Assert.fail("Error Loading VPP plan summary page");
 			}
 		}
+		@Then("^the user validates the VPP Promo right rail widjet$")
+		public void user_validates_the_VPP_promo_widjet(DataTable givenAttributes) {
+
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			String planName = memberAttributesRow.get(0).getCells().get(1);
+			getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+			VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+			//String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+			PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.validatePromoWidjet(planName);
+			if (vppPlanDetailsPage != null) {
+				getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
+				} else
+					Assert.fail("Error in validating the Plan Details Page");
+			}
 }

@@ -96,9 +96,9 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
     And I select all 3 plans to compare in MA and click on compare plan link in UHS site
     When the user validate the print and email link option in plan compare in UHS site
     Then the user validating email and print option in plan compare in UHS site
-	Then the user validate thank you message in plan compare in UHS site 
-	Then the user clicks on back to all plans link and validates all three plans are selected
-    
+    Then the user validate thank you message in plan compare in UHS site
+    Then the user clicks on back to all plans link and validates all three plans are selected
+
     Examples: 
       | zipcode |
       |   90210 |
@@ -136,12 +136,12 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
 
     Examples: 
       | zipcode | isMultutiCounty | county              | plantype | planName                                                 | benefitType | expectedText                           |
-      |   80002 | Yes             | Adams County        | MAPD       | AARP MedicareComplete SecureHorizons Plan 1 (HMO)        | Eyewear     | for frames or / for contacts per       |
+      |   80002 | Yes             | Adams County        | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO)        | Eyewear     | for frames or / for contacts per       |
       |   80002 | Yes             | Adams County        | SNP      | UnitedHealthcare Dual Complete (HMO SNP)                 | Eyewear     | for frames or / for contacts per       |
-      |   78006 | Yes             | Kendall County      | MAPD       | AARP MedicareComplete SecureHorizons (HMO)               | Eyewear     | Eyewear has a plan benefit limit up to |
+      |   78006 | Yes             | Kendall County      | MAPD     | AARP MedicareComplete SecureHorizons (HMO)               | Eyewear     | Eyewear has a plan benefit limit up to |
       |   65058 | Yes             | Miller County       | SNP      | UnitedHealthcare Dual Complete (HMO SNP)                 | Eyewear     | Eyewear has a plan benefit limit up to |
       |   78006 | Yes             | Kendall County      | SNP      | UnitedHealthcare Dual Complete Choice (Regional PPO SNP) | Eyewear     | No Coverage                            |
-      |   03033 | NO              | Hillsborough County | MAPD       | UnitedHealthcare MedicareComplete Assure (PPO)           | Eyewear     | No Coverage                            |
+      |   03033 | NO              | Hillsborough County | MAPD     | UnitedHealthcare MedicareComplete Assure (PPO)           | Eyewear     | No Coverage                            |
 
   @F250062 @HomeMultiCOunty @fastandfurious @Feb_release_2019
   Scenario Outline: Validate Cancel button for Multi Cunty Pop-up on Home Page
@@ -169,8 +169,8 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
   Scenario Outline: Validate Cancel button for Multi Cunty Pop-up on VPP for Change Location
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
-      | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
     When the user performs Change Location on Plan Summary Page using following MultiCounty Zip information in the UHC site
       | Zip Code | <MultiCOuntyzipcode> |
@@ -178,4 +178,18 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
 
     Examples: 
       | zipcode | isMultiCounty | county             | MultiCOuntyzipcode |
-      |   90210 | NO              | Los Angeles County |              80002 |
+      |   90210 | NO            | Los Angeles County |              80002 |
+
+  @F225721 @VPPPromoWidget @Predetors @Feb_release_2019
+  Scenario Outline: Vaidate the Right Rail Promo Widget
+    Given the user is on the uhcmedicaresolutions site landing page
+    When I access the vpp page
+      | Zip Code | <zipcode> |
+    When user views plans of the below plan type in UMS site
+      | Plan Type | <plantype> |
+    Then the user validates the VPP Promo right rail widjet
+      | Plan Name | <planName> |
+
+    Examples: 
+      | zipcode | plantype | planName                    |
+      |   55344 | MA       | UnitedHealthcare Sync (PPO) |
