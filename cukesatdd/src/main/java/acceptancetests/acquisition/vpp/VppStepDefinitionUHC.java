@@ -838,4 +838,40 @@ public class VppStepDefinitionUHC {
 				Assert.fail("Error Loading VPP plan summary page");
 			}
 		}
-}
+		
+		/**
+		 * @toDo:the user is on UHC medicare acquisition site VPP Plan Summary page after hits Campaign URL
+		 */
+		@Given("^the user is on UHC medicare acquisition site VPP Plan Summary page after hits Campaign URL$")
+		public void the_user_on_aarpmedicareplans_Campaign_landing_page() throws Throwable {
+			
+			String County = "St. Louis County";
+			String ZipCode = "63043";
+			String PlanYear = "2019"; 
+			String SiteName =  "UHC_ACQ";
+
+			getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
+			getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, County);
+			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
+			getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
+			
+
+			
+			String OLE_Campaign_URL = "https://stage-uhcmedicaresolutions.uhc.com/health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731#/plan-summary <>";
+			
+			
+			WebDriver wd = getLoginScenario().getWebDriver();
+			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+			VPPPlanSummaryPage vppPlanSummaryPage = new VPPPlanSummaryPage(wd, OLE_Campaign_URL,true);
+			if (vppPlanSummaryPage != null) {
+				getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
+						vppPlanSummaryPage);
+				System.out.println("OLE Campaign Landing Page Displayed");
+				Assert.assertTrue(true);
+			}
+			else
+				Assert.fail("Error in validating the OLE Campaign Landing");
+		}
+		
+		}
