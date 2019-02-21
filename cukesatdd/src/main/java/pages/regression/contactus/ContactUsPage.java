@@ -212,6 +212,9 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(css="div#confrmmatchheightonce div.message-block-header p>b")
 	private WebElement successHeader_EmailForm;
 	
+	@FindBy(xpath="(.//*[@id='globalContentIdForSkipLink']//div[@ng-controller='phoneHoursAddressCtrl'])[2]//a[@ng-href='tel:1-844-355-3359']")
+	private WebElement connectorModelTFN;
+	
 	public JSONObject contactUsJson;
 	
 	private JSONObject secureemailwidgetDataJson;
@@ -695,6 +698,19 @@ public class ContactUsPage extends UhcDriver{
 			//iPerceptionAutoPopUp.click();
 		} else {
 			System.out.println("iPerception Pop Up not displayed");
+		}
+	}
+
+	public void validateConnectroModelTFNNumber() {
+		
+		String tfnNumber = connectorModelTFN.getText();
+		if(tfnNumber.contains("1-844-355-3359"))
+		{
+			System.out.println("Connector Model TFN dsiplayed    >" +connectorModelTFN.isDisplayed() );
+		}else
+		{
+			System.err.println("Connector Model TFN dsiplayed    >" +connectorModelTFN.isDisplayed() );
+			
 		}
 	}
 }

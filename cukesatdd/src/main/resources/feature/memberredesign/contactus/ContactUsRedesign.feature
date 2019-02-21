@@ -161,6 +161,7 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
       | Plan Type   | <plantype>   |
       | Member Type | <memberType> |
     When the user navigates to contact us page in UHC site
+    Then The user validates the connector model group TFN number
 
     Examples: 
       | plantype | memberType          |
