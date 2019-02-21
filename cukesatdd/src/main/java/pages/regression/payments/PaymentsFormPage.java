@@ -73,6 +73,7 @@ public class PaymentsFormPage extends UhcDriver {
 		ContinueButton.click();
 		System.out.println("Clicked on Contuine button");
 		Thread.sleep(10000);
+		waitforElement(ReviewPageHeading);
 		if (ReviewPageHeading.getText().contains("Review Your Automatic Payments Information")) {
 			System.out.println("User is on Review Your Automatic Payments Information Page");
 			return new ReviewAutomaticPage(driver);
@@ -99,8 +100,9 @@ public class PaymentsFormPage extends UhcDriver {
 		firstNameField.sendKeys(firstName);
 		middleNameField.sendKeys(middleName);
 		lastNameField.sendKeys(lastName);
-		AuthorizeButton.click();
+		ContinueButton.click();
 		System.out.println("Clicked on Authorize button");
+		waitforElement(ReviewPageHeading);
 		if (ReviewPageHeading.getText().contains("Review Payment Method Update")) {
 			System.out.println("User is on Review Payment Method Update Page");
 			return new UpdateReviewPage(driver);
@@ -130,6 +132,7 @@ public class PaymentsFormPage extends UhcDriver {
 		ElectronicSignatureInput.click();
 		ContinueButton.click();
 		System.out.println("Clicked on Authorize button");
+		waitforElement(ReviewPageHeading);
 		if (ReviewPageHeading.getText().contains("Review Payment Method Update")) {
 			System.out.println("User is on Review Payment Method Update Page");
 			return new UpdateReviewPage(driver);
