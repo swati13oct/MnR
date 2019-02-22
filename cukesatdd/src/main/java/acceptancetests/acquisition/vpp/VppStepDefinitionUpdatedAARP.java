@@ -762,11 +762,11 @@ public class VppStepDefinitionUpdatedAARP {
 		if (vppPlanSummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
 					vppPlanSummaryPage);
-			System.out.println("OLE Camapaign Landing Page Displayed");
+			System.out.println("OLE Campaign Landing Page Displayed");
 			Assert.assertTrue(true);
 		}
 		else
-			Assert.fail("Error in validating the OLE Camapaign Landing");
+			Assert.fail("Error in validating the OLE Campaign Landing");
 	}
 	
 	

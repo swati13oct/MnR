@@ -34,7 +34,8 @@ public class UpdateRecurringPage extends UhcDriver {
 	@FindBy(xpath = "//p[text()='Checking Account Information']")
 	private WebElement ReviewStopRecurringPageHeading;
 	
-	
+	@FindBy(xpath = "//div[@class='col-md-12']//h1")
+	private WebElement UpdateReviewPageHeading;	
 
 	@FindBy(id = "div_cardInfo")
 	private WebElement EnterCreditInfo;
@@ -80,8 +81,9 @@ public class UpdateRecurringPage extends UhcDriver {
 		System.out.println("clicked on Checking account radio button");
 		NextButton.click();
 		System.out.println("clicked on Next button");
-		if (validate(CheckingAccountInformationHeader)) {
-			System.out.println("User is on Form Page for EFT");
+		waitforElement(UpdateReviewPageHeading);
+		if (validate(UpdateReviewPageHeading)) {
+			System.out.println("User is on Update Review Page for ship");
 			return new UpdateReviewPage(driver);
 		} else
 			return null;
@@ -92,11 +94,11 @@ public class UpdateRecurringPage extends UhcDriver {
 		validate(HelpfulRemindersPanel);
 		System.out.println("User is on Update Automatic Recurring Page");
 		CancelPaymentRadioBtn.click();
-		System.out.println("clicked on CancelPayment radio button");
+		System.out.println("clicked on Cancel Payment radio button");
 		NextButton.click();
 		System.out.println("clicked on Next button");
-		
-		if (validate(ReviewStopRecurringPageHeading)) {
+		waitforElement(UpdateReviewPageHeading);
+		if (validate(UpdateReviewPageHeading)) {
 			System.out.println("User is on Review Page");
 			return new UpdateReviewPage(driver);
 		} else
