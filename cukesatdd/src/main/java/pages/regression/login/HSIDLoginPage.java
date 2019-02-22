@@ -196,14 +196,14 @@ public class HSIDLoginPage extends UhcDriver {
 		}
 
 		if (driver.getCurrentUrl().contains(
-				"aa-web/evaluate?execution=e1s2&action=securityQuestion")) {
-
+				"=securityQuestion")) {
+			
 			ConfirmSecurityQuestion cs = new ConfirmSecurityQuestion(driver);
 			try {
 				Thread.sleep(5000);
 				cs.enterValidSecurityAnswer();
 				System.out.println(driver.getCurrentUrl());
-				Thread.sleep(20000);
+				Thread.sleep(5000);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
