@@ -33,3 +33,9 @@ b7724e62-322d-4684-92c4-82076654b2c1/Password@1,PDP,Individual,EffectivePDPUHC,N
 cca1b4a7-8ece-4c82-9c10-957308b514e3/Password@1,PDP,IndividualAARPCPayments
 2b409c3a-ba26-40c2-9514-3f0ab2526c7d/Password@1,MAPD,IndividualAARPMAPDPaymentsUpdate,
 a05c3ccc-ef6d-4e05-9236-b73266bf498a/Password@1,SHIP,IndividualSHIPPaymentsUpdate,
+6e7e1ea5-034b-4d07-9524-3460d2e5b0a7/Password@1,MAGroup,NoDeductible,
+ac80e35e-c086-411b-aaa8-e660eb7a0e6b/Password@1,MAPDGroup,NoDeductible,
+b227b9cf-64f8-4b98-bc95-882968ad8554/Password@1,MAGroup,SingleDeductible,
+afdbd9e9-b049-48c9-bcf9-784029fde2d6/Password@1,MAPDGroup,SingleDeductible,
+d8276124-7d7c-4117-8e15-5e9f2d564c23/Password@1,MAGroup1,DualDeductible,
+3870f00c-e33e-455d-8f11-fbe0d5715fbe/Password@1,MAGroup2,DualDeductible,

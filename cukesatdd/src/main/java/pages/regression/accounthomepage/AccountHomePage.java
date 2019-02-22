@@ -2230,6 +2230,11 @@ public class AccountHomePage extends UhcDriver {
 					"https://team-c-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
 			System.out.println(driver.getCurrentUrl());
 			return new BenefitsAndCoveragePage(driver);
+		}else if(MRScenario.environmentMedicare.equals("team-f")){
+			driver.navigate().to(
+					"https://team-f-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
+			System.out.println(driver.getCurrentUrl());
+			return new BenefitsAndCoveragePage(driver);
 		}else
 		{
 			driver.navigate().to(
