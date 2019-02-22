@@ -183,4 +183,16 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
     Examples: 
       | zipcode | isMultutiCounty | county             | MultiCOuntyzipcode |
       |   90210 | No              | Los Angeles County |              80002 |
-
+@VppPromoWidjetaarp
+Scenario Outline: To check VPP for specific plans
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code | <zipcode> |
+      | Is Multi County | <isMultutiCounty> |
+      And the user views the plans of the below plan type in AARP site
+      | Plan Type | <plantype> |
+      Then User validates the VPP promowidjet for specifc plans
+       | Plan Name | <planName> |
+ Examples: 
+      | zipcode |isMultutiCounty|plantype|planName|
+      |   55344 |NO|MA|UnitedHealthcare Sync (PPO)|

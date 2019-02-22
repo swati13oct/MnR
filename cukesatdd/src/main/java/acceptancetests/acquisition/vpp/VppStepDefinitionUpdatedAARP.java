@@ -732,6 +732,20 @@ public class VppStepDefinitionUpdatedAARP {
 		Assert.assertTrue("Validation failed : Expected text not displayed for Additional Benefit - "+benefitType,validationFlag);
 	
 	}	*/
-
+@Then ("^User validates the VPP promowidjet for specifc plans$")
+public void User_validates_the_promo_widjet(DataTable givenAttributes)
+{
+	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+	String planName = memberAttributesRow.get(0).getCells().get(1);
+	getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+	VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	vppPlanSummaryPage.validatePromoWidjetAArp(planName);
+	if (vppPlanSummaryPage != null) {
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanSummaryPage);
+		} else
+			Assert.fail("Error in validating the Plan Details Page");
+	
+}
 
 }
