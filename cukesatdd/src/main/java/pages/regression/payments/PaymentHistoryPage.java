@@ -6,7 +6,6 @@ package pages.regression.payments;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
-import java.util.NoSuchElementException;
 import java.util.regex.Pattern;
 
 import org.json.JSONException;
@@ -319,7 +318,7 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='otherPages ResultsTextwhenyouselectfromdropdown']//p")
 	private WebElement nonCustomSearchResultText;
 	
-	@FindBy(xpath = "//p[contains(text(),'There are no premium payments available for the time period entered')]")
+	@FindBy(xpath = "//div[@ng-show='shiphistory == null' and not(contains(@class,'ng-hide'))]//p[contains(text(),'There are no premium payments available for the time period entered')]")
 	private WebElement noPremiumPaymentsText;
 	
 	@FindBy(xpath = "//div[@class='otherPages ResultsTextwhencustomsearch']//p")
@@ -1415,7 +1414,7 @@ public class PaymentHistoryPage extends UhcDriver {
 		sleepBySec(5);
 		List<WebElement> paidTableRowsList = driver.findElements(By.xpath("//div[@id='paymentTable1']/div/div/table/tbody/tr"));
 		int actualPaidtableRows=paidTableRowsList.size();
-		System.out.println("total PAID rows for Last 24 Months="+actualPaidtableRows);
+		System.out.println("total PAID rows including header for Last 24 Months="+actualPaidtableRows);
 		int filteredPaidCount=0;
 		int filteredUnpaidCount=0;
 		for(int i=2; i<actualPaidtableRows+1; i++) {
@@ -1461,7 +1460,7 @@ public class PaymentHistoryPage extends UhcDriver {
 		sleepBySec(5);
 		List<WebElement> unpaidTableRowsList = driver.findElements(By.xpath("//div[@id='paymentTable1']/div/div/table/tbody/tr"));
 		int actualUnpaidtableRows=unpaidTableRowsList.size();
-		System.out.println("total UNPAID rows for Last 24 Months="+actualUnpaidtableRows);
+		System.out.println("total UNPAID rows including header for Last 24 Months="+actualUnpaidtableRows);
 		int filteredPaidCount=0;
 		int filteredUnpaidCount=0;
 		for(int i=2; i<actualUnpaidtableRows+1; i++) {
@@ -1517,7 +1516,6 @@ public class PaymentHistoryPage extends UhcDriver {
 		Assert.assertTrue("PROBLEM - this env doesn't have new paymentHistoryShip UI. Stop executing remaining steps", paymentHistoryShipNewUi);
 		new Actions(driver).moveToElement(PaymentHistorySectionHeader).perform();
 		sleepBySec(2);
-
 	}
 	
 	public void waitAndClick(WebElement e) {
@@ -1535,7 +1533,4 @@ public class PaymentHistoryPage extends UhcDriver {
 		}
 	}
 	// ^^^ note: added for F247601 Payment History SHIP testing	
-	
-	
-
 }
