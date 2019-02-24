@@ -83,7 +83,7 @@ public class RequestAgentAppttStepDefinitionAARP {
 	
 	@Then("^the user fills the form out and submits the agent appointment application$")
 	public void fillOutAndSubmitForm(DataTable attributes) {
-		if (!MRScenario.environment.equalsIgnoreCase("offline")) {
+		if (!(MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))) {
 			RequestAgentAppointmentPage requestAgentAppointmentPage = (RequestAgentAppointmentPage) getLoginScenario()
 					.getBean(PageConstants.REQUEST_AGENT_APPOINTMENT_PAGE);
 			List<DataTableRow> givenAttributesRow = attributes.getGherkinRows();
@@ -101,7 +101,7 @@ public class RequestAgentAppttStepDefinitionAARP {
 				Assert.fail("Error submitting the form or loading the Confirmation page");
 			}
 		} else {
-			System.out.println("Skipping the submit functionality in Offline-Prod environment");
+			System.out.println("Skipping the submit functionality in Offline-Prod/Prod environment");
 		}
 	}
 	
