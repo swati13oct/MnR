@@ -195,8 +195,8 @@ public class HSIDLoginPage extends UhcDriver {
 			e.printStackTrace();
 		}
 
-		if (driver.getCurrentUrl().contains(
-				"aa-web/evaluate?execution=e1s2&action=securityQuestion")) {
+		if (driver.getTitle().contains(
+				"confirm your identity:security questions")) {
 
 			ConfirmSecurityQuestion cs = new ConfirmSecurityQuestion(driver);
 			try {
