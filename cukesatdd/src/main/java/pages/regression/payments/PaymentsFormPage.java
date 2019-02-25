@@ -41,7 +41,7 @@ public class PaymentsFormPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='col-md-12']//h1")
 	private WebElement ReviewPageHeading;
 
-	@FindBy(xpath = "//*[@id='consent']/following-sibling::label[contains(text(),'Electronic Signature Consent')]")
+	@FindBy(xpath = "//*[@id='consent']/following-sibling::label")
 	private WebElement ElectronicSignatureInput;
 
 	@FindBy(xpath = "//button[@class='btn btn--primary' and (text()='CONTINUE' or text()='Continue')]")
@@ -141,12 +141,18 @@ public class PaymentsFormPage extends UhcDriver {
 		ElectronicSignatureInput.click();
 		ContinueButton.click();
 		System.out.println("Clicked on Authorize button");
-		waitforElement(ReviewPageHeading);
-		if (ReviewPageHeading.getText().contains("Review Payment Method Update")) {
-			System.out.println("User is on Review Payment Method Update Page");
+
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			System.out.println(driver.getCurrentUrl());
+			e.printStackTrace();
+		}
+		if (driver.getTitle().contains("Review Your Recurring Payments Update")) {
+			System.out.println("User is on Review Your Recurring Payments Page");
 			return new UpdateReviewPage(driver);
 		} else {
-			System.out.println("Review Payment Method Update not displayed");
+			System.out.println("Review Your Recurring Payments not displayed");
 			return null;
 		}
 	}

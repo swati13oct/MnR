@@ -120,31 +120,37 @@ public class UpdateReviewPage extends UhcDriver {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,650)", "");
 		jsClickNew(AgreeCheckBox);
-		ContinueButton.click();
-		System.out.println("Clicked on Continue button");
-		waitforElement(ConfirmationPageHeading);
-		if (validate(MakeOneTimePaymentLink)) {
-			System.out.println("User is on Confirmation Page for Update Recurring");
+		AuthorizeMonthlyPaymentstButton.click();
+		System.out.println("Clicked on Contuine button");
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			System.out.println(driver.getCurrentUrl());
+			e.printStackTrace();
+		}
+		if (driver.getTitle().contains("Your Updated Payment Method")) {
+			System.out.println("User is on Confirmation Page for Update Recurring for ship");
 			return new UpdateConfirmationPage(driver);
-		} else
+		} else {
+			System.out.println("Confirmation Page for Update not displayed for ship");
 			return null;
+		}
 	}
 
 	public UpdateConfirmationPage selectAgreeAndClickOnContinueforStopForShip() {
-		System.out.println("User is on Payment Method Update Page");
+		System.out.println("User is on Cancel recurring Page for ship");
 		PaymentsDataVerificationOnUpdateReviewPage();
 		System.out.println("Going to scroll down");
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,650)", "");
 		jsClickNew(AgreeCheckBox);
-		ContinueButton.click();
+		AuthorizeMonthlyPaymentstButton.click();
 		System.out.println("Clicked on Continue button");
-		waitforElement(ConfirmationPageHeading);
-		if (ConfirmationPageHeading.getText().contains("Review Payment Method Update")) {
-			System.out.println("User is on Confirmation Payment Method Update Page");
+		if (driver.getTitle().contains("Cancel Recurring Payments")) {
+			System.out.println("User is on Cancel Recurring Payments Confirmation Page for Update Recurring");
 			return new UpdateConfirmationPage(driver);
 		} else {
-			System.out.println("Confirmation Payment Method Update not displayed");
+			System.out.println("Cancel Recurring Payments Confirmation Page for Update Recurring not displayed");
 			return null;
 		}
 	}
@@ -180,6 +186,8 @@ public class UpdateReviewPage extends UhcDriver {
 			System.out.println("User is on Review Payment Method Update Page");
 		} else if (ReviewPageTitle.getText().contains("Cancel Automatic Payments")) {
 			System.out.println("User is on Cancel Automatic Payments Page");
+		} else if (ReviewPageTitle.getText().contains("Cancel Recurring Payments")) {
+			System.out.println("User is on Cancel Recurring Payments for ship");
 		} else {
 			System.out.println("User is unable to navigate to Review Payment Method Update Page");
 		}

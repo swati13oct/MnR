@@ -67,14 +67,14 @@ public class UpdateConfirmationPage extends UhcDriver {
 	public void validateStopRevurringVerificationforShip() {
 		validate(MakeOneTimePaymentLink);
 		UpdatePaymentsDataVerificationonConfirmationPage();
-		System.out.println("User has sucessfully setup recurring payment for Ship EFT");
+		System.out.println("User has sucessfully canceled recurring payment for ship");
 	}
 
 	public void validateStopRevurringVerificationforFed() {
 		validate(MakeOneTimePaymentLink);
 		validate(ConfirmationNumber);
 		UpdatePaymentsDataVerificationonConfirmationPage();
-		System.out.println("User has sucessfully setup recurring payment for Federal EFT");
+		System.out.println("User has sucessfully canceled recurring payment for Federal");
 	}
 
 	@Override

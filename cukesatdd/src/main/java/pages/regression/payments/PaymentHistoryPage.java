@@ -851,10 +851,19 @@ public class PaymentHistoryPage extends UhcDriver {
 		waitforElement(EditRecurringPaymentsButton);
 		EditRecurringPaymentsButton.click();
 		System.out.println("User clicked on Update Automatic Button");
-		if (validate(HelpfulRemindersPanel)) {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			System.out.println(driver.getCurrentUrl());
+			e.printStackTrace();
+		}
+		if (driver.getTitle().contains("Update Recurring Payments")) {
+			System.out.println("Navigated to Update Recurring Payments page for ship");
 			return new UpdateRecurringPage(driver);
-		} else
+		} else {
+			System.out.println("Update Automatic Payments not displayed for ship");
 			return null;
+		}
 	}
 
 }

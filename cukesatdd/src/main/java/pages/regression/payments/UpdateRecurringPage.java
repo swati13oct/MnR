@@ -23,6 +23,9 @@ public class UpdateRecurringPage extends UhcDriver {
 
 	@FindBy(id = "optionsRadios30")
 	private WebElement CancelPaymentRadioBtn;
+	
+	@FindBy(xpath = "//label[@for='optionsRadios30' and not(attribute::class)]")
+	private WebElement CanceltRadioBtnShip;
 
 	@FindBy(xpath = "//button[@class='btn btn--primary payment-selection__btn']")
 	private WebElement NextButton;
@@ -84,19 +87,25 @@ public class UpdateRecurringPage extends UhcDriver {
 		}
 	}
 
-	public UpdateReviewPage selectStopRecurringClickOnNext() {
-		validate(HelpfulRemindersPanel);
+	public UpdateReviewPage selectStopRecurringClickOnNextforShip() {
 		System.out.println("User is on Update Automatic Recurring Page");
-		CheckingAccountRadioButton.click();
+		CanceltRadioBtnShip.click();
 		System.out.println("clicked on Checking account radio button");
 		NextButton.click();
 		System.out.println("clicked on Next button");
-		waitforElement(UpdateReviewPageHeading);
-		if (validate(UpdateReviewPageHeading)) {
-			System.out.println("User is on Update Review Page for ship");
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			System.out.println(driver.getCurrentUrl());
+			e.printStackTrace();
+		}
+		if (driver.getTitle().contains("Cancel Recurring Payments")) {
+			System.out.println("Navigated to Cancel Recurring Payments page");
 			return new UpdateReviewPage(driver);
-		} else
+		} else {
+			System.out.println("Cancel Recurring Payments not displayed");
 			return null;
+		}
 	}
 
 	public UpdateReviewPage selectCancelAutomaticPaymentsAndClicksNext() {

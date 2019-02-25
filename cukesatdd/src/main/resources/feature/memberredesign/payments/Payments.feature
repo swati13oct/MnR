@@ -1,10 +1,10 @@
 #Author        : Obul Reddy
 #Created Date  : 2019-02-11(YYYY-MM-DD)
 @payments @paymentsMarch
-Feature: To Test Credit card functional Flows
+Feature: New payment flows with Credit card funtionality for Make one time setup and update flows
 
   @MakOneTimeCCTotal @Feb_release_2019 @Spartans @F243897
-  Scenario Outline: TID: <TID> - Verify MakeOne time Payment submission for Different Types of Member
+  Scenario Outline: TID: <TID> - Verify MakeOne time Payment submission for Credit card total amount
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -24,7 +24,7 @@ Feature: To Test Credit card functional Flows
       | F243897 | MAPD     | SetupPaymentsCCTotal | Test | 4111111111111111 |         04 |      2019 |
 
   @MakOneTimeCCOther @Feb_release_2019 @Spartans @F243897
-  Scenario Outline: TID: <TID> - Verify MakeOne time Payment submission for Different Types of Member
+  Scenario Outline: TID: <TID> - Verify MakeOne time Payment submission for Credit card Other amount
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
