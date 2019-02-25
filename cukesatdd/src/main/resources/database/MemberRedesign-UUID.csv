@@ -33,3 +33,7 @@ b7724e62-322d-4684-92c4-82076654b2c1/Password@1,PDP,Individual,EffectivePDPUHC,N
 cca1b4a7-8ece-4c82-9c10-957308b514e3/Password@1,PDP,IndividualAARPCPayments
 2b409c3a-ba26-40c2-9514-3f0ab2526c7d/Password@1,MAPD,IndividualAARPMAPDPaymentsUpdate,
 a05c3ccc-ef6d-4e05-9236-b73266bf498a/Password@1,SHIP,IndividualSHIPPaymentsUpdate,
+cca1b4a7-8ece-4c82-9c10-957308b514e3/Password@123,PDP,SetupPaymentsCCTotal,
+fb15468c-87c5-4312-aaff-ed4048b12872/Password@123,MAPD,SetupPaymentsCCOther,
+b4f87cfd-175e-43e4-9e01-6aa923359621/Password@1,MAPD,UpdateRecurrEFT
+7da85c24-c505-40d9-91d2-4ebd3975fb68/Password@1,PDP,UpdateRecurrCC
