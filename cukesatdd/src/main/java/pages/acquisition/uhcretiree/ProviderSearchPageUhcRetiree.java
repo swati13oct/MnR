@@ -1,8 +1,4 @@
-/**
- * 
- */
-package pages.acquisition.ulayer;
-
+package pages.acquisition.uhcretiree;
 import java.util.List;
 
 import org.json.JSONException;
@@ -21,11 +17,12 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
- * @author pperugu
+ * @author akapoo18
  *
  */
-public class ProviderSearchPage extends UhcDriver {
-	
+public class ProviderSearchPageUhcRetiree extends UhcDriver{
+
+
 	private static final String planToBeSelected = null;
 
 	@FindBy(className = "firstTierFilterItem")
@@ -65,12 +62,13 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(xpath="//button[contains(text(),'Primary Care Physician')]")
 	private WebElement Physician;
 
+	
 	@FindBy(xpath="//div[contains(@class,'first')]//div[@class='hidden-phone']//button")
 	private WebElement Savebtn;
 	
 	@FindBy(xpath="//button[contains(text(),'Get Started')]")
 	private WebElement GetStarted;
-	
+
 	@FindBy(id="location")
 	private WebElement zipCodeTextfield;
 	
@@ -86,91 +84,23 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(className="saved-provider-button")
 	private WebElement SaveBtn2;
 	
-	
-	public ProviderSearchPage(WebDriver driver) {
+	public ProviderSearchPageUhcRetiree(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
+		// TODO Auto-generated constructor stub
 	}
+
+
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
+		//CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
 	}
 
-	public VPPPlanSummaryPage selectsProvider(String physicianSearchCriteria,
-			String physicianName) {
 	
-		CommonUtility.waitForPageLoad(driver, physcianSearchTypes, 10);
-		ElementData elementData = new ElementData("linkText",
-				physicianSearchCriteria);
-		findElement(elementData).click();
-		CommonUtility.waitForPageLoad(driver, providerName, 10);
 
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		for (WebElement element : providerNameList) {
-			ElementData providerElementData = new ElementData("className",
-					"providerName");
-			if (findChildElement(providerElementData, element).getText()
-					.equalsIgnoreCase(physicianName)) {
-				ElementData addToListElementData = new ElementData("linkText",
-						"Add to List");
-				findChildElement(addToListElementData, element).click();
-				break;
-			}
-		}
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		switchToNewIframe(cboxIframeElement);
-		completeMyList.click();
-
-		if (getTitle()
-				.equalsIgnoreCase(
-						"Our Medicare Plan Types | AARP® Medicare Plans from UnitedHealthcare®")) {
-			return new VPPPlanSummaryPage(driver);
-		}
-		return null;
-
-	}
-
-	public VPPPlanSummaryPage selectsProvider() {
-		CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
-	GetStarted.click();
-
-	CommonUtility.waitForPageLoadNew(driver, People, 30);
-	People.click();
-
-	CommonUtility.waitForPageLoadNew(driver, Primary, 30);
-	Primary.click();
-
-	CommonUtility.waitForPageLoadNew(driver, Physician, 30);
-
-	Physician.click();
-	CommonUtility.waitForPageLoadNew(driver, SaveBtn, 45);
-	SaveBtn.click();
-	CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
-
-	Viewsavebtn.click();
-
-	validateNew(Checkcoverage);
-	
-	Checkcoverage.click();
-	waitForCountDecrement(2);
-	driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
-
-	return new VPPPlanSummaryPage(driver);
-	}
-	
-	public void entersZipcodeAndSelectPlanName(String zipcode,String planName) {
+	public void entersZipcodeAndSelectsPlanName(String zipcode,String planName) {
 
 		validateNew(zipCodeTextfield);	
 		zipCodeTextfield.sendKeys(zipcode);
@@ -182,7 +112,7 @@ public class ProviderSearchPage extends UhcDriver {
 		
 	}
 	
-	public void selectsProviderFromGlobaHeader() {
+	public void selectProviderFromHomePage() {
 		
 
 		CommonUtility.waitForPageLoadNew(driver, People, 30);
@@ -206,34 +136,4 @@ public class ProviderSearchPage extends UhcDriver {
 		
 		}
 
-	public PlanDetailsPage selectsProviderFromVppPlanDetailsPage() {
-		// TODO Auto-generated method stub
-		
-		   CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
-			GetStarted.click();
-
-			CommonUtility.waitForPageLoadNew(driver, People, 30);
-			People.click();
-
-			CommonUtility.waitForPageLoadNew(driver, Primary, 30);
-			Primary.click();
-
-			CommonUtility.waitForPageLoadNew(driver, Physician, 30);
-
-			Physician.click();
-			CommonUtility.waitForPageLoadNew(driver, SaveBtn, 45);
-			SaveBtn.click();
-			CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
-
-			Viewsavebtn.click();
-
-			validateNew(Checkcoverage);
-			
-			Checkcoverage.click();
-			waitForCountDecrement(2);
-			driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
-
-			return new PlanDetailsPage(driver);
-		
-	}
 }

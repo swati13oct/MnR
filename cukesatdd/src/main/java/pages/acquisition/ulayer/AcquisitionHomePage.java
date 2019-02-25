@@ -214,6 +214,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	/* LearnAboutMedicare link */
 	@FindBy(xpath = "//*[@id='ghn_lnk_3']")
 	private WebElement lnkLearnAboutMedicare;
+	
+	@FindBy(xpath = "//*[@id='subnav_2']/div[1]/div/div[3]/div/h3[7]/a")
+	private WebElement providerSearchFromGlobalHeader;
+
+	@FindBy(xpath ="//*[@id='colhowdoesthiswork_provider']/tbody/tr/td/div/a")
+	private WebElement providerSearchFromHomeScreen;
+
 
 	private static String TeamC_ACQUISITION_PAGE_URL = MRConstants.TeamC_UHC_URL;
 
@@ -1153,4 +1160,35 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		return null;
 	}		
+	
+	public ProviderSearchPage clicksOnRallyToolFromGlobalHeader() {
+
+		Actions action = new Actions(driver);
+		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
+		validateNew(providerSearchFromGlobalHeader);
+
+		switchToNewTabNew(providerSearchFromGlobalHeader);
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("werally")) {
+
+			return new ProviderSearchPage(driver);
+
+		}
+		return null;
+	}
+
+	public ProviderSearchPage clicksOnRallyToolFromHomePage() {
+		validateNew(providerSearchFromHomeScreen);
+
+		switchToNewTabNew(providerSearchFromHomeScreen);
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("werally")) {
+
+			return new ProviderSearchPage(driver);
+
+		}
+		return null;
+	}
 }

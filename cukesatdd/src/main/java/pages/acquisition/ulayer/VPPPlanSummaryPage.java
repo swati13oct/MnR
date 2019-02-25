@@ -698,6 +698,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public PlanDetailsPage navigateToPlanDetails(String planName, String planType) {
+		CommonUtility.checkPageIsReadyNew(driver);
 		
 		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {	
 			WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
@@ -1087,6 +1088,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 	}
 
+	
 
 }
 

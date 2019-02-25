@@ -22,8 +22,9 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import cucumber.api.java.lu.a;
 import pages.acquisition.uhcretiree.DrugLookUpPage;
-
+import pages.acquisition.ulayer.ProviderSearchPage;
 
 /**
  * @author ckoppura
@@ -36,15 +37,15 @@ public class RetireeAcquisitionHomePage extends UhcDriver {
 	public void openAndValidate() {
 
 		start(UHCRETIREE_ACQISITION_PAGE_URL);
-		impliciWait(druglookuplink,20);
+		impliciWait(druglookuplink, 20);
 
 		validate(druglookuplink);
 	}
 
-	@FindBy(linkText="Pharmacy information")
-	
+	@FindBy(linkText = "Pharmacy information")
+
 	private WebElement pharmacyLocator;
-	
+
 	@FindBy(linkText = "Look up prescription drugs")
 	private WebElement druglookuplink;
 
@@ -62,12 +63,14 @@ public class RetireeAcquisitionHomePage extends UhcDriver {
 
 	public JSONObject browserCheckJson;
 	private PageData browserCheckData;
-	
-	@FindBy (xpath = ".//*[@id='main']//h1")
+
+	@FindBy(xpath = ".//*[@id='main']//h1")
 	private WebElement searchForaDrugHeader;
 
-	private static String UHCRETIREE_ACQISITION_PAGE_URL = MRConstants.UHCRETIREE_URL;
+	@FindBy(xpath = "//a[contains (text(),'Look up a provider now')]")
+	private WebElement providerSearchFromHomeScreen;
 
+	private static String UHCRETIREE_ACQISITION_PAGE_URL = MRConstants.UHCRETIREE_URL;
 
 	public RetireeAcquisitionHomePage(WebDriver driver) {
 		super(driver);
@@ -77,21 +80,21 @@ public class RetireeAcquisitionHomePage extends UhcDriver {
 
 	/**
 	 * Navigate to pharmacy Locator Page
+	 * 
 	 * @return
 	 */
-	public UhcRetireePharmacyLocatorPage navigateToPharmacyLocator(){
+	public UhcRetireePharmacyLocatorPage navigateToPharmacyLocator() {
 		pharmacyLocator.click();
 		return new UhcRetireePharmacyLocatorPage(driver);
 	}
-	
+
 	public SelectFormularyPage prescriptionsDrugLink() {
 
 		try {
 			Thread.sleep(7000);
 			validate(druglookuplink);
 			druglookuplink.click();
-			if (getTitle().equalsIgnoreCase(
-							"UnitedHealthcare Group Retiree – Search for a Drug")) {
+			if (getTitle().equalsIgnoreCase("UnitedHealthcare Group Retiree – Search for a Drug")) {
 				return new SelectFormularyPage(driver);
 			}
 		} catch (InterruptedException e) {
@@ -99,14 +102,13 @@ public class RetireeAcquisitionHomePage extends UhcDriver {
 			e.printStackTrace();
 
 		}
-		
+
 		return null;
 	}
 
 	public RetireesOfSelectedPlans openDropDown(String groupName) {
 		validate(dropDownMenu);
-		Select dropdown = new Select(driver.findElement(By
-				.id("new_form_GroupSelector")));
+		Select dropdown = new Select(driver.findElement(By.id("new_form_GroupSelector")));
 		dropdown.selectByVisibleText(groupName);
 		System.out.println(getTitle());
 		return new RetireesOfSelectedPlans(driver);
@@ -115,8 +117,7 @@ public class RetireeAcquisitionHomePage extends UhcDriver {
 	public Rallytool_Page lookupproviderclick() {
 		validate(lookupproviderLink);
 		lookupproviderLink.click();
-		ArrayList<String> tabs = new ArrayList<String>(
-				driver.getWindowHandles());
+		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(1));
 		if (getTitle().equalsIgnoreCase("Enter Zip")) {
 			return new Rallytool_Page(driver);
@@ -127,12 +128,10 @@ public class RetireeAcquisitionHomePage extends UhcDriver {
 
 	public JSONObject getBrowserCheck() {
 		String fileName = CommonConstants.GR_BROWSER_CHECK_DATA;
-		browserCheckData = CommonUtility.readPageData(fileName,
-				CommonConstants.RETIREE_PAGE_OBJECT_DIRECTORY);
+		browserCheckData = CommonUtility.readPageData(fileName, CommonConstants.RETIREE_PAGE_OBJECT_DIRECTORY);
 		JSONObject jsonObject = new JSONObject();
 		for (String key : browserCheckData.getExpectedData().keySet()) {
-			WebElement element = findElement(browserCheckData.getExpectedData()
-					.get(key));
+			WebElement element = findElement(browserCheckData.getExpectedData().get(key));
 			if (element != null) {
 				if (validate(element)) {
 					try {
@@ -164,8 +163,7 @@ public class RetireeAcquisitionHomePage extends UhcDriver {
 
 		validate(sitemaplink);
 		sitemaplink.click();
-		if (getTitle().equalsIgnoreCase(
-				"UnitedHealthcare Group Retiree – Site Map")) {
+		if (getTitle().equalsIgnoreCase("UnitedHealthcare Group Retiree – Site Map")) {
 			return new UHCRetireeSiteMapPage(driver);
 		}
 		return null;
@@ -173,8 +171,7 @@ public class RetireeAcquisitionHomePage extends UhcDriver {
 
 	public GroupHomePage selectGroupFromList(String groupName) {
 
-		ElementData groupTypeElement = new ElementData("select:className",
-				"form_field");
+		ElementData groupTypeElement = new ElementData("select:className", "form_field");
 		List<WebElement> pharmacyTypeOptions = findElements(groupTypeElement);
 
 		for (WebElement pharmacyTypeOption : pharmacyTypeOptions) {
@@ -191,21 +188,34 @@ public class RetireeAcquisitionHomePage extends UhcDriver {
 			return null;
 		}
 	}
-	
-	public void validateGroupDropdownList(){
+
+	public void validateGroupDropdownList() {
 		Assert.assertTrue("Group dropdown is not displayed", dropDownMenu.isDisplayed());
 	}
-	public void impliciWait(WebElement element,int timeUnit)
-	{
-		driver.manage().timeouts().implicitlyWait(timeUnit,TimeUnit.SECONDS);
+
+	public void impliciWait(WebElement element, int timeUnit) {
+		driver.manage().timeouts().implicitlyWait(timeUnit, TimeUnit.SECONDS);
 		waitforElement(element);
 	}
 
-	public  DrugLookUpPage navigateToDrugLookUp() {
+	public DrugLookUpPage navigateToDrugLookUp() {
 		druglookuplink.click();
-		impliciWait(searchForaDrugHeader,10);
-		//waitforElement(searchForaDrugHeader);
+		impliciWait(searchForaDrugHeader, 10);
+		// waitforElement(searchForaDrugHeader);
 		Assert.assertTrue("Header Displayed", searchForaDrugHeader.isDisplayed());
 		return new DrugLookUpPage(driver);
+	}
+
+	public ProviderSearchPageUhcRetiree navigateToProviderSearchTool() {
+		validateNew(providerSearchFromHomeScreen);
+		switchToNewTabNew(providerSearchFromHomeScreen);
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("werally")) {
+
+			return new ProviderSearchPageUhcRetiree(driver);
+
+		}
+		return null;
 	}
 }

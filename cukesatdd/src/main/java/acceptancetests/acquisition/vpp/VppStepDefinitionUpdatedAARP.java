@@ -748,4 +748,31 @@ public void User_validates_the_promo_widjet(DataTable givenAttributes)
 	
 }
 
+@When("^the user navigates to the plan Details page$")
+public void user_navigates_to_plan_details_page(DataTable givenAttributes) {
+	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+	String PlanName = memberAttributesRow.get(0).getCells().get(1);
+	getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, PlanName);
+
+	VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+	String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+	PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(PlanName, planType);
+	if (vppPlanDetailsPage != null) {
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
+		Assert.assertTrue(true);
+	} else
+		Assert.fail("Error in Loading the Plan Details Page");
+
+}
+
+@Then("^the user Click on Look up your Provider button$")
+public void user_Clicks_on_Look_upyourProvider_button_on_PlanDetailsPage() {
+
+	PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+			.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+	vppPlanDetailsPage.validateLookUpYourProviderButton();
+}
+
 }
