@@ -29,9 +29,8 @@ public class UpdateConfirmationPage extends UhcDriver {
 		PageFactory.initElements(driver, this);
 		openAndValidate();
 	}
-	
-	public void UpdatePaymentsDataVerificationonConfirmationPage()
-	{
+
+	public void UpdatePaymentsDataVerificationonConfirmationPage() {
 		List<WebElement> rowsList = driver.findElements(By.xpath("//div[@class='table-body-row']"));
 		List<WebElement> columnsList = null;
 		for (WebElement row : rowsList) {
@@ -59,26 +58,25 @@ public class UpdateConfirmationPage extends UhcDriver {
 		System.out.println("Your Confimation Number is : " + ConfirmationNumber.getText());
 	}
 
-	
 	public void validateEFTUpdateVerificationforShip() {
 		validate(MakeOneTimePaymentLink);
 		UpdatePaymentsDataVerificationonConfirmationPage();
 		System.out.println("User has sucessfully setup recurring payment for Ship EFT");
 	}
-	
+
 	public void validateStopRevurringVerificationforShip() {
 		validate(MakeOneTimePaymentLink);
 		UpdatePaymentsDataVerificationonConfirmationPage();
 		System.out.println("User has sucessfully setup recurring payment for Ship EFT");
 	}
-	
+
 	public void validateStopRevurringVerificationforFed() {
 		validate(MakeOneTimePaymentLink);
 		validate(ConfirmationNumber);
 		UpdatePaymentsDataVerificationonConfirmationPage();
 		System.out.println("User has sucessfully setup recurring payment for Federal EFT");
 	}
-	
+
 	@Override
 	public void openAndValidate() {
 		validate(MakeOneTimePaymentLink);

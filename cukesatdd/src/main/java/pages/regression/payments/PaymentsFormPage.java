@@ -72,13 +72,17 @@ public class PaymentsFormPage extends UhcDriver {
 		lastNameField.sendKeys(lastName);
 		ContinueButton.click();
 		System.out.println("Clicked on Contuine button");
-		Thread.sleep(10000);
-		waitforElement(ReviewPageHeading);
-		if (ReviewPageHeading.getText().contains("Review Your Automatic Payments Information")) {
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			System.out.println(driver.getCurrentUrl());
+			e.printStackTrace();
+		}
+		if (driver.getTitle().contains("Review Your Automatic Payments Information")) {
 			System.out.println("User is on Review Your Automatic Payments Information Page");
 			return new ReviewAutomaticPage(driver);
 		} else {
-			System.out.println("Review Your Automatic Payments Information not displayed");
+			System.out.println("Review Your Automatic Payments Information Page not displayed");
 			return null;
 		}
 	}
@@ -101,13 +105,18 @@ public class PaymentsFormPage extends UhcDriver {
 		middleNameField.sendKeys(middleName);
 		lastNameField.sendKeys(lastName);
 		ContinueButton.click();
-		System.out.println("Clicked on Authorize button");
-		waitforElement(ReviewPageHeading);
-		if (ReviewPageHeading.getText().contains("Review Payment Method Update")) {
-			System.out.println("User is on Review Payment Method Update Page");
+		System.out.println("Clicked on Contuine button");
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			System.out.println(driver.getCurrentUrl());
+			e.printStackTrace();
+		}
+		if (driver.getTitle().contains("Review Your Automatic Payments Update")) {
+			System.out.println("User is on Review Your Automatic Payments Update Page");
 			return new UpdateReviewPage(driver);
 		} else {
-			System.out.println("Review Payment Method Update not displayed");
+			System.out.println("Review Your Automatic Payments Update Page not displayed");
 			return null;
 		}
 	}
