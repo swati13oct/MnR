@@ -21,7 +21,7 @@ Feature: To Test Credit card functional Flows
 
     Examples: 
       | TID     | planType | memberType           | Name | CreditCardNumber | validMonth | validYear |
-      | F243897 | PDP      | SetupPaymentsCCTotal | Test | 4111111111111111 |         04 |      2019 |
+      | F243897 | MAPD     | SetupPaymentsCCTotal | Test | 4111111111111111 |         04 |      2019 |
 
   @MakOneTimeCCOther @Feb_release_2019 @Spartans @F243897
   Scenario Outline: TID: <TID> - Verify MakeOne time Payment submission for Different Types of Member
@@ -41,7 +41,7 @@ Feature: To Test Credit card functional Flows
 
     Examples: 
       | TID     | planType | memberType           | Name | CreditCardNumber | validMonth | validYear |
-      | F243897 | MAPD     | SetupPaymentsCCOther | Test | 4111111111111111 |         04 |      2019 |
+      | F243897 | PDP      | SetupPaymentsCCOther | Test | 4111111111111111 |         04 |      2019 |
 
   @SetupRecurrEFT @Feb_release_2019 @Spartans @F238525
   Scenario Outline: TID: <TID> - Verify Setup Recurring for Checking Account
@@ -64,7 +64,7 @@ Feature: To Test Credit card functional Flows
 
     Examples: 
       | TID     | planType | memberType           | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
-      | F238525 | PDP      | SetupPaymentsCCTotal | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
+      | F238525 | MAPD     | SetupPaymentsCCTotal | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
 
   @SetupRecurrCC @Feb_release_2019 @Spartans @F238525
   Scenario Outline: TID: <TID> - Verify Setup Recurring for CC
@@ -84,7 +84,7 @@ Feature: To Test Credit card functional Flows
 
     Examples: 
       | TID     | planType | memberType           | Name | CreditCardNumber | validMonth | validYear |
-      | F238525 | MAPD     | SetupPaymentsCCOther | Test | 4111111111111111 |         04 |      2019 |
+      | F238525 | PDP      | SetupPaymentsCCOther | Test | 4111111111111111 |         04 |      2019 |
 
   @UpdateRecurrEFT @Feb_release_2019 @Spartans @F242866
   Scenario Outline: TID: <TID> - Verify Update Recurring for Checking Account
