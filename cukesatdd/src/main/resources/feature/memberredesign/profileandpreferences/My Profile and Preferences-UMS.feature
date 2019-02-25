@@ -417,3 +417,24 @@ Feature: C1.2To test Profile and Preferences page .
     Examples: 
       | planType | memberType  |
      # | Combo    | EPMPEnabled |
+     
+     
+     @accountProfile28  @profilePageforGroupsWithNoEditsAllowed @predators @marchRelease2019
+  Scenario Outline: To test profile page for group members for which no edits are allowed
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Group Name  | <group name> |
+    When the user navigates to Profile and Preferences page
+    And the user should not be able to edit the Phone numbers
+    And the user should not be able to add or update temporary address
+    And the user should not be able to add or update Mailing address
+
+    Examples: 
+      | planType | group name       |
+       |  MAPD    | JohnDeere       |
+      |  MAPD    | StateOfIllinois|
+      |  MAPD    | BankOfAmerica  |
+      |  MAPD    | KentuckyTRS     |
+      
+     
+     
