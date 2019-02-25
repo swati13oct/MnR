@@ -118,8 +118,8 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
       | zipcode | planName                                           | plantype |
       |   33012 | AARP MedicareComplete Choice Plan 2 (Regional PPO) | MAPD     |
 
-  @validateEyeWearCredit @fastandfurious @Feb_release_2019
-  Scenario Outline: Verify specific Additional Benefits in Plan Details for provided plan
+  @validateEyeWearCredit @F229349 @fastandfurious @Mar_release_2019
+  Scenario Outline: UserStory: <UID> -plan type: <PlanType> - Verify specific Additional Benefits in Plan Details for provided plan
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |
@@ -134,13 +134,20 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
       | Expected Text | <expectedText> |
 
     Examples: 
-      | zipcode | isMultutiCounty | county              | plantype | planName                                                 | benefitType | expectedText                           |
-      |   80002 | Yes             | Adams County        | MAPD       | AARP MedicareComplete SecureHorizons Plan 1 (HMO)        | Eyewear     | for frames or / for contacts per       |
-      |   80002 | Yes             | Adams County        | SNP      | UnitedHealthcare Dual Complete (HMO SNP)                 | Eyewear     | for frames or / for contacts per       |
-      |   78006 | Yes             | Kendall County      | MAPD       | AARP MedicareComplete SecureHorizons (HMO)               | Eyewear     | Eyewear has a plan benefit limit up to |
-      |   65058 | Yes             | Miller County       | SNP      | UnitedHealthcare Dual Complete (HMO SNP)                 | Eyewear     | Eyewear has a plan benefit limit up to |
-      |   78006 | Yes             | Kendall County      | SNP      | UnitedHealthcare Dual Complete Choice (Regional PPO SNP) | Eyewear     | No Coverage                            |
-      |   03033 | NO              | Hillsborough County | MAPD       | UnitedHealthcare MedicareComplete Assure (PPO)           | Eyewear     | No Coverage                            |
+      | UID                                       | zipcode | isMultutiCounty | county              | plantype | planName                                                 | benefitType | expectedText                                                       |
+      | US1580455 - UHC - Single Eyewear Credit   |   53503 | No              | Iowa County         | MAPD     | UnitedHealthcare MedicareComplete Open (PPO)             | Eyewear     | limit up to $100 per year                                          |
+      | US1580455 - UHC - Single Eyewear Credit   |   96701 | No              | Honolulu County     | MAPD     | AARP MedicareComplete Choice Plan 1 (PPO)                | Eyewear     | limit up to $70 per every 2 years                                  |
+      | US1580455 - UHC - Single Eyewear Credit   |   53533 | No              | Iowa County         | MA       | UnitedHealthcare MedicareComplete Open Essential (PPO)   | Eyewear     | limit up to $100 per year                                          |
+      | US1580455 - UHC - Single Eyewear Credit   |   96701 | No              | Honolulu County     | MA       | AARP MedicareComplete Choice Essential (PPO)             | Eyewear     | limit up to $70 per every 2 years                                  |
+      | US1580455 - UHC - Single Eyewear Credit   |   33880 | No              | Polk County         | SNP      | UnitedHealthcare Assisted Living Plan (PPO SNP)          | Eyewear     | limit up to $150 per year                                          |
+      | US1580455 - UHC - Single Eyewear Credit   |   12202 | No              | Albany County       | SNP      | UnitedHealthcare Nursing Home Plan 1 (PPO SNP)           | Eyewear     | limit up to $150 per every 2 years                                 |
+      | US1580459 - UHC - Multiple Eyewear Credit |   80920 | No              | El Paso County      | MAPD     | AARP MedicareComplete SecureHorizons Essential (HMO)     | Eyewear     | limit up to $70 for frames or $105 for contacts per every 2 years  |
+      | US1580459 - UHC - Multiple Eyewear Credit |   92660 | No              | Orange County       | MA       | AARP MedicareComplete SecureHorizons Essential (HMO)     | Eyewear     | limit up to $130 for frames or $125 for contacts per year          |
+      | US1580459 - UHC - Multiple Eyewear Credit |   80920 | No              | El Paso County      | MA       | AARP MedicareComplete SecureHorizons Essential (HMO)     | Eyewear     | limit up to $70 for frames or $105 for contacts per every 2 years  |
+      | US1580459 - UHC - Multiple Eyewear Credit |   33880 | No              | Polk County         | SNP      | UnitedHealthcare Dual Complete RP (Regional PPO SNP)     | Eyewear     | limit up to $70 for frames or $105 for contacts per year           |
+      | US1580459 - UHC - Multiple Eyewear Credit |   80210 | No              | Denver County       | SNP      | UnitedHealthcare Dual Complete (HMO SNP)                 | Eyewear     | limit up to $200 for frames or $200 for contacts per every 2 years |
+      | US1580459 - UHC - No Eyewear Credit       |   78006 | Yes             | Kendall County      | SNP      | UnitedHealthcare Dual Complete Choice (Regional PPO SNP) | Eyewear     | No Coverage                                                        |
+      | US1580459 - UHC - No Eyewear Credit       |   03033 | No              | Hillsborough County | MAPD     | UnitedHealthcare MedicareComplete Assure (PPO)           | Eyewear     | No Coverage                                                        |
 
   @F250062 @HomeMultiCOunty @fastandfurious @Feb_release_2019
   Scenario Outline: Validate Cancel button for Multi Cunty Pop-up on Home Page
@@ -168,8 +175,8 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
   Scenario Outline: Validate Cancel button for Multi Cunty Pop-up on VPP for Change Location
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
-      | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
     When the user performs Change Location on Plan Summary Page using following MultiCounty Zip information in the UHC site
       | Zip Code | <MultiCOuntyzipcode> |
@@ -177,4 +184,4 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
 
     Examples: 
       | zipcode | isMultiCounty | county             | MultiCOuntyzipcode |
-      |   90210 | NO              | Los Angeles County |              80002 |
+      |   90210 | NO            | Los Angeles County |              80002 |
