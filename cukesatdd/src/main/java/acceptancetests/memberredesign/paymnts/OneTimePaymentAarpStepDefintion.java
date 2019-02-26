@@ -1641,8 +1641,8 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 	}
 
-	  @Given("^user clicks on Stop Automatic payments and clicks on next on Setup recurring payments page$")
-	public void user_clicks_on_Stop_Automatic_payments_and_clicks_on_next_on_Setup_recurring_payments_page() throws Throwable {
+	  @Given("^user clicks on Stop Automatic payments and clicks on next for Federal$")
+	public void user_clicks_on_Stop_Automatic_payments_and_clicks_on_next_for_Federal() throws Throwable {
 		UpdateRecurringPage updateRecurringPage = (UpdateRecurringPage) getLoginScenario()
 				.getBean(PageConstants.Update_Recurring_Page);
 		UpdateReviewPage updateReviewPage = updateRecurringPage.selectCancelAutomaticPaymentsAndClicksNext();
@@ -1653,14 +1653,14 @@ public class OneTimePaymentAarpStepDefintion {
 		
 	}
 	
-	@Then("^user navigates to Review Automatic page for Stop Recurring Payments$")
-	public void user_navigates_to_Review_Automatic_page_for_Stop_recurring_payments_page() throws Throwable {
+	@Then("^user navigates to Review Payment Method Update screen for Stop Recurring Payments for Federal$")
+	public void user_navigates_to_Review_Payment_Method_Update_screen_for_Stop_recurring_payments_page_for_Federal() throws Throwable {
 		UpdateReviewPage updateReviewPage = (UpdateReviewPage) getLoginScenario()
 				.getBean(PageConstants.Update_Review_Page);
-		UpdateConfirmationPage updateConfirmationPage = updateReviewPage.selectAgreeAndClickOnContinueforStopRecurring();
+		UpdateConfirmationPage updateConfirmationPage = updateReviewPage.selectAgreeAndClickOnContinueforStopRecurringForFed();
 		if (updateConfirmationPage!= null){
 			getLoginScenario().saveBean(PageConstants.Update_Confirmation_Page, updateConfirmationPage);
-			System.out.println("User is on Review Recurring Payments screen");
+			System.out.println("User is on Confirmation Payment Method Update Page Payments screen");
 		}
 		}
 		
@@ -1841,6 +1841,14 @@ public class OneTimePaymentAarpStepDefintion {
 
 	}
 	
+	@Then("^User navigates to payment confirmation page and verifies sucessful Stop Recurring for Federal$")
+	public void user_navigates_to_payment_confirmation_page_and_verifies_sucessful_Stop_Recurring_for_Federal()
+			throws Throwable {
+		UpdateConfirmationPage updateConfirmationPage = (UpdateConfirmationPage) getLoginScenario()
+				.getBean(PageConstants.Update_Confirmation_Page);
+		updateConfirmationPage.validateStopRevurringVerificationforFed();
+
+	}
 	// vvv note: added for F247601 Payment History SHIP testing
 	@Then("^user validates payment history section header exists$")
 	public void user_validates_payment_history_section_header_exists() {

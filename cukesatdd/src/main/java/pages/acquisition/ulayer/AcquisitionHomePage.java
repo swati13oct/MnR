@@ -226,6 +226,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
 	private static String AARP_ACQISITION_OFFLINE_PAGE_URL = MRConstants.AARP_URL_OFFLINE;
+	private static String AARP_ACQISITION_PROD_PAGE_URL = MRConstants.AARP_URL_PROD;
 
 	private PageData globalFooter;
 
@@ -267,7 +268,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		openAndValidate(alreadyOnSite);
 	}
 	
-	public JSONObject accessingGlobalHeader() {
+	/*public JSONObject accessingGlobalHeader() {
 
 		String fileName = CommonConstants.GLOBAL_HEADER_PAGE_DATA;
 		globalHeader = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
@@ -290,7 +291,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		return globalHeaderJson;
 
-	}
+	}*/
 
 	@Override
 	public void openAndValidate() {
@@ -298,10 +299,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 		if (MRScenario.environment.equals("offline")) {
 			start(AARP_ACQISITION_OFFLINE_PAGE_URL);
-		} else {
+		}
+		else if (MRScenario.environment.equals("prod")) {
+			start(AARP_ACQISITION_PROD_PAGE_URL);
+		}else {
 			start(AARP_ACQISITION_PAGE_URL);
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("Current page URL: "+driver.getCurrentUrl());
 		checkModelPopup(driver);
 		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
 		if(proactiveChatExistBtn.size()!=0)
@@ -313,6 +318,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		if (alreadyOnSite) {
 			
 		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("Current page URL: "+driver.getCurrentUrl());
 		checkModelPopup(driver);
 		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 45);
 		if(proactiveChatExistBtn.size()!=0)

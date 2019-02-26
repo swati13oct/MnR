@@ -503,6 +503,53 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		return null;
 	}
+	
+	
+	public AcquisitionHomePage navigateToPlanDetailsDST(String planName, String planType) {
+
+		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
+			WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
+					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View plan')]"));
+			CommonUtility.waitForPageLoadNew(driver, MAmoreDetailsLink, 30);
+			MAmoreDetailsLink.click();
+			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
+
+		} else if (planType.equalsIgnoreCase("PDP")) {
+			WebElement PDPmoreDetailsLink = driver.findElement(By.xpath("//h2[contains(text(), '" + planName
+					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[@id = 'viewmoredetlinkpdp']"));
+			CommonUtility.waitForPageLoadNew(driver, PDPmoreDetailsLink, 30);
+			PDPmoreDetailsLink.click();
+			System.out.println("View Plan Details Link is clicked for PDP plan"+planName);
+			
+		} else if (planType.equalsIgnoreCase("SNP")) {
+			WebElement SNPmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
+					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//a[contains(text(),'View plan')]"));
+			CommonUtility.waitForPageLoadNew(driver, SNPmoreDetailsLink, 30);
+			SNPmoreDetailsLink.click();
+			System.out.println("View Plan Details Link is clicked for SNP plan"+planName);
+
+		}else if (planName.contains("HMO") || planName.contains("Regional PPO")) {
+			WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//a[contains(text(),'View plan and drug coverage details')]"));
+			//CommonUtility.waitForPageLoad(driver, MAmoreDetailsLink, 30);	
+					validate(MAmoreDetailsLink);
+					
+					MAmoreDetailsLink.click();
+					System.out.println("View Plan Details Link is clicked for MA plan"+planName);
+		}
+		CommonUtility.checkPageIsReadyNew(driver);
+		try{
+		Thread.sleep(3000);
+		}catch(Exception e)
+		{
+			System.out.println("Thread not slept");
+		}
+		if (driver.getCurrentUrl().contains("#/details")) {	
+			System.out.println("Mil gaya");
+			return new AcquisitionHomePage(driver, planType, true);
+		}
+		return null;
+	}
+	
 
 	private WebElement getViewPlanDetailsElement(List<WebElement> maPlanElement2, ElementData elementData,
 			String planName) {
