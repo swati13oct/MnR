@@ -1574,8 +1574,14 @@ public class AccountHomePage extends UhcDriver {
 			executor.executeScript("arguments[0].click();", OrderMaterial_Dashboard);
 			// OrderMaterial_Dashboard.click();
 		} else {
-			String Page_URL = "https://" + MRScenario.environment
-					+ "-medicare."+MRScenario.domain+"//member/order-plan-materials.html";
+			String Page_URL;
+			if (MRScenario.environment.equalsIgnoreCase("team-a")) {
+				Page_URL = "https://www." + MRScenario.environment
+						+ "-medicare."+MRScenario.domain+"/content/medicare/member/order-materials/overview.html";
+			} else {
+				Page_URL = "https://" + MRScenario.environment
+						+ "-medicare."+MRScenario.domain+"//member/order-plan-materials.html";
+			}
 			// String Page_URL = driver.getCurrentUrl().split(".com")[0];
 			driver.navigate().to(Page_URL);
 			System.out.println("Navigated to Order materials Page URL : " + Page_URL);
