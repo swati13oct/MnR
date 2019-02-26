@@ -20,8 +20,9 @@ Feature: New payment flows with Credit card funtionality for Make one time setup
     Then User navigates to payment confirmation page for CC flow
 
     Examples: 
-      | TID     | planType | memberType           | Name | CreditCardNumber | validMonth | validYear |
-      | F243897 | MAPD     | SetupPaymentsCCTotal | Test | 4111111111111111 |         04 |      2019 |
+      | TID       | planType | memberType           | Name | CreditCardNumber | validMonth | validYear |
+      | F243897   | MAPD     | MakePaymentsCCTotal  | Test | 4111111111111111 |         04 |      2019 |
+      | US1588469 | PDP      | ComboPaymentsCCTotal | Test | 4111111111111111 |         04 |      2019 |
 
   @MakOneTimeCCOther @Feb_release_2019 @Spartans @F243897
   Scenario Outline: TID: <TID> - Verify MakeOne time Payment submission for Credit card Other amount
@@ -40,8 +41,9 @@ Feature: New payment flows with Credit card funtionality for Make one time setup
     Then User navigates to payment confirmation page for CC flow
 
     Examples: 
-      | TID     | planType | memberType           | Name | CreditCardNumber | validMonth | validYear |
-      | F243897 | PDP      | SetupPaymentsCCOther | Test | 4111111111111111 |         04 |      2019 |
+      | TID       | planType | memberType           | Name | CreditCardNumber | validMonth | validYear |
+      | F243897   | PDP      | MakePaymentsCCOther  | Test | 4111111111111111 |         04 |      2019 |
+      | US1588469 | PDP      | ComboPaymentsCCTotal | Test | 4111111111111111 |         04 |      2019 |
 
   @SetupRecurrEFT @Feb_release_2019 @Spartans @F238525
   Scenario Outline: TID: <TID> - Verify Setup Recurring for Checking Account
@@ -63,8 +65,9 @@ Feature: New payment flows with Credit card funtionality for Make one time setup
     Then User navigates to payment confirmation page and verifies ConfirmationNo for EFT
 
     Examples: 
-      | TID     | planType | memberType           | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
-      | F238525 | MAPD     | SetupPaymentsCCTotal | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
+      | TID       | planType | memberType       | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
+      | F238525   | MAPD     | SetupRecEFT      | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
+      | US1588469 | PDP      | ComboSetupRecEFT | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
 
   @SetupRecurrCC @Feb_release_2019 @Spartans @F238525
   Scenario Outline: TID: <TID> - Verify Setup Recurring for CC
@@ -83,8 +86,9 @@ Feature: New payment flows with Credit card funtionality for Make one time setup
     Then User navigates to payment confirmation page and verifies ConfirmationNo for CC
 
     Examples: 
-      | TID     | planType | memberType           | Name | CreditCardNumber | validMonth | validYear |
-      | F238525 | PDP      | SetupPaymentsCCOther | Test | 4111111111111111 |         04 |      2019 |
+      | TID       | planType | memberType      | Name | CreditCardNumber | validMonth | validYear |
+      | F238525   | PDP      | SetupRecCC      | Test | 4111111111111111 |         04 |      2019 |
+      | US1588469 | PDP      | ComboStepuRecCC | Test | 4111111111111111 |         04 |      2019 |
 
   @UpdateRecurrEFT @Feb_release_2019 @Spartans @F242866
   Scenario Outline: TID: <TID> - Verify Update Recurring for Checking Account
@@ -106,8 +110,9 @@ Feature: New payment flows with Credit card funtionality for Make one time setup
     Then User navigates to payment confirmation page and verifies ConfirmationNo for EFT for Update Recurring
 
     Examples: 
-      | TID     | planType | memberType      | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
-      | F242866 | MAPD     | UpdateRecurrEFT | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
+      | TID       | planType | memberType           | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
+      | F242866   | MAPD     | UpdateRecurrEFT      | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
+      | US1588469 | PDP      | ComboUpdateRecurrEFT | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
 
   @UpdateRecurrCC @Feb_release_2019 @Spartans @F242866
   Scenario Outline: TID: <TID> - Verify Update Recurring for CC
@@ -126,8 +131,9 @@ Feature: New payment flows with Credit card funtionality for Make one time setup
     Then User navigates to payment confirmation page and verifies ConfirmationNo for CC for Update Recurring
 
     Examples: 
-      | TID     | planType | memberType     | Name | CreditCardNumber | validMonth | validYear |
-      | F242866 | PDP      | UpdateRecurrCC | Test | 4111111111111111 |         04 |      2019 |
+      | TID       | planType | memberType          | Name | CreditCardNumber | validMonth | validYear |
+      | F242866   | PDP      | UpdateRecurrCC      | Test | 4111111111111111 |         04 |      2019 |
+      | US1588469 | PDP      | ComboUpdateRecurrCC | Test | 4111111111111111 |         04 |      2019 |
 
   @UpdateRecurrStopFed @Feb_release_2019 @Spartans @F242866
   Scenario Outline: TID: <TID> - Verify Stop Recurring payment flow for Federal memeber
@@ -141,8 +147,9 @@ Feature: New payment flows with Credit card funtionality for Make one time setup
     Then User navigates to payment confirmation page and verifies sucessful Stop Recurring for Federal
 
     Examples: 
-      | TID     | planType | memberType      |
-      | F242866 | MAPD     | UpdateRecurrEFT |
+      | TID       | planType | memberType         |
+      | F242866   | MAPD     | UpdateRecurrStop   |
+      | US1588469 | PDP      | ComboUpdateStopRec |
 
   @UpdateRecurrEFTSHIP @Feb_release_2019 @Spartans @F242866
   Scenario Outline: TID: <TID> - Verify Update Recurring for Checking Account for Ship Member

@@ -11,6 +11,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import com.google.common.base.Strings;
+import com.thoughtworks.selenium.webdriven.commands.WaitForPageToLoad;
 
 import atdd.framework.UhcDriver;
 
@@ -98,7 +99,7 @@ public class UpdateReviewPage extends UhcDriver {
 		AuthorizeMonthlyPaymentstButton.click();
 		System.out.println("Clicked on Contuine button");
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(15000);
 		} catch (InterruptedException e) {
 			System.out.println(driver.getCurrentUrl());
 			e.printStackTrace();
