@@ -195,15 +195,15 @@ public class HSIDLoginPage extends UhcDriver {
 			e.printStackTrace();
 		}
 
-		if (driver.getTitle().contains(
-				"confirm your identity:security questions")) {
-
+		if (driver.getCurrentUrl().contains(
+				"=securityQuestion")) {
+			
 			ConfirmSecurityQuestion cs = new ConfirmSecurityQuestion(driver);
 			try {
 				Thread.sleep(5000);
 				cs.enterValidSecurityAnswer();
 				System.out.println(driver.getCurrentUrl());
-				Thread.sleep(20000);
+				Thread.sleep(5000);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
