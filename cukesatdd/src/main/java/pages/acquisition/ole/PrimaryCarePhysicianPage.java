@@ -89,7 +89,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 	private WebElement ProviderName;
 	
 	//PCP Page - PCP information display
-	@FindBy(xpath = "//*[@class='provider-info__data']")
+	@FindBy(xpath = "//*[@id = 'pcpFullName']//preceding-sibling::*[contains(@class, 'provider-info__data')]")
 	private WebElement ProviderNameDisplay_PCPpage;
 
 	@FindBy(xpath = "//*[contains(text(), 'Are you now seeing or have you recently seen this doctor?')]")
