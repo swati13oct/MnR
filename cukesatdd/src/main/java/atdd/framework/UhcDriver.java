@@ -35,6 +35,8 @@ public abstract class UhcDriver {
 	public WebDriver driver;
 
 	public void start(String url) {
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.manage().window().maximize();
 		driver.get(url);
 	}
 

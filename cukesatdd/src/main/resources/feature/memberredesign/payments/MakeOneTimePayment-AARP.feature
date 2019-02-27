@@ -47,7 +47,7 @@ Feature: To test the payment flow on Member site
       | 15118 | MAPD     | IndividualUHCPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
 
   @paymentsMoreThanOnePay @15142 @regressionMember @payment3
-  Scenario Outline: Verify More Than one Payment Per day error message
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify More Than one Payment Per day error message
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -79,7 +79,7 @@ Feature: To test the payment flow on Member site
 
     Examples: 
       | TID   | planType | memberType              | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
-      | 15142 | MAPD     | IndividualAarpPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.12 |
+      | 15142 | MAPD     | IndividualAarpPayments  | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.12 |
 
   #NOTE: Nov2018 - q2_jun_aarp0057 didn't work, swap to use other user
   @TestmemberAuth @15170 @regressionMember @payment4
