@@ -62,8 +62,11 @@ public class HealthAndWellnessPage extends UhcDriver{
 	@FindBy (id = "renew-rewards-widget-target")
 	private WebElement rewardsPage;
 	
-	@FindBy (partialLinkText = "GET Rewarded")
+	@FindBy (partialLinkText = "REWARDED")
 	private WebElement rewardsLink;
+	
+	@FindBy (linkText = "LEARN MORE")
+	private WebElement learnmorelink;
 	
 
 	public HealthAndWellnessPage(WebDriver driver){
@@ -110,12 +113,12 @@ public class HealthAndWellnessPage extends UhcDriver{
 			System.err.println("Health and Wellness page not Successfully loaded ");
 		}
 		try {
-			Thread.sleep(20000);
+			Thread.sleep(15000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Assert.assertTrue("GetRewarded Link is displayed", rewardsLink.isDisplayed());
+		Assert.assertTrue("GetRewarded Link is displayed", (rewardsLink.isDisplayed() || learnmorelink.isDisplayed()));
 		//Assert.assertTrue("Learning tab is not displayed", learningTab.isDisplayed());
 	}
 
