@@ -170,6 +170,10 @@ public class LoginPage extends UhcDriver {
 			int counter = 0;
 
 			do {
+				if (("YES".equalsIgnoreCase(MRScenario.isTestHarness)) && (driver.getCurrentUrl().contains("logout.html"))) {
+					System.out.println("User is on logout.html!!!");
+					return null;
+				}
 				if (counter <= 20) {
 					Thread.sleep(5000);
 					System.out.println("Time elapsed post sign In clicked --" + counter + "*5 sec.");

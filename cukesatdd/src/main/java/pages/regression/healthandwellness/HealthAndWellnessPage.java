@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 /**
@@ -90,10 +91,18 @@ public class HealthAndWellnessPage extends UhcDriver{
 			healthAndWellness.click();
 			waitforElement(titleText);
 		} catch (Exception e) {
-			System.out.println("Unable to locate the xpath for healthAndWellness for stage and non-harness, try the one for stage and harness");
-			healthAndWellness_harness.isDisplayed();
-			healthAndWellness_harness.click();
-			waitforElement(titleText);
+			if (MRScenario.environment.equalsIgnoreCase("team-a")) {
+				String Page_URL = "https://www." + MRScenario.environment
+						+ "-medicare."+MRScenario.domain+"/retiree/member/health-and-wellness.html";
+				driver.navigate().to(Page_URL);
+				System.out.println("Navigated to Health & Wellness Page URL : " + Page_URL);
+				Assert.assertTrue("KNOWN BEHAVIOR - The H&W page does not load on Team-A env due to non-availability of lower environment support from Talix (The third party vendor which actually hosts the page). Please validate on stage env", false);
+			} else {
+				System.out.println("Unable to locate the xpath for healthAndWellness for stage and non-harness, try the one for stage and harness");
+				healthAndWellness_harness.isDisplayed();
+				healthAndWellness_harness.click();
+				waitforElement(titleText);
+			}
 		}
 	}
 
