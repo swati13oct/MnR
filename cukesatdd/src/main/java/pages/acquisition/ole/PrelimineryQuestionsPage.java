@@ -76,7 +76,7 @@ public class PrelimineryQuestionsPage extends UhcDriver{
 	
 
 	//Preliminery Page header
-	@FindBy(xpath = "//*[@class='only-prelim']")
+	@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-prelim')]")
 	private WebElement PrelimPageHeader;
 	
 	//Medicaid Question
