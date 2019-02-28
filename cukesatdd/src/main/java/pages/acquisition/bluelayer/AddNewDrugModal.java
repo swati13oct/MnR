@@ -12,7 +12,7 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.ulayer.AddDrugDetails;
+import pages.acquisition.bluelayer.AddDrugDetails;
 public class AddNewDrugModal extends UhcDriver {
 
 	private PageData addnewdrug;
@@ -47,7 +47,7 @@ public class AddNewDrugModal extends UhcDriver {
 	@FindBy(xpath = "//span[@class='color-red']")
 	public WebElement atleast_4_mesg;
 	
-	@FindBy(xpath = "//div[contains(@class,'add-drug-slide-header')]//label[text()]")
+	@FindBy(id = "dialogHeading1")
 	public WebElement modalHeading;
 	
 	@FindBy(xpath = "//input[starts-with(@id,'drugs-')]/parent::div[contains(@class,'radio-block')]/label")
