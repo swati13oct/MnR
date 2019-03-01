@@ -12,7 +12,7 @@ And I can search claims for the following claim period on redesigned site
   | Plan Type    | <planType>    |
   | Claim Period | <claimPeriod> |
 Then I can see the claims displayed based on the selection in redesigned site
-And I validate the pagination on the claims summary page 
+#And I validate the pagination on the claims summary page 
 And the user validates the EOB section based on domain in redesigned site
   | Domain     | <domain>      |
   | Plan Type  | <planType>    |
@@ -38,7 +38,7 @@ And I can search claims for the following claim period on redesigned site
   | Plan Type    | <planType>    |
   | Claim Period | <claimPeriod> |
 Then I can see the claims displayed based on the selection in redesigned site
-And I validate the pagination on the claims summary page 
+#And I validate the pagination on the claims summary page 
 And the user validates the EOB section based on domain in redesigned site
      | Domain       | <domain>      |
       | Plan Type      | <planType>     |
@@ -96,7 +96,7 @@ And I can search claims for the following claim period on redesigned site
   | Plan Type    | <planType>    |
   | Claim Period | <claimPeriod> |
 Then I can see the claims displayed based on the selection in redesigned site
-And I validate the pagination on the claims summary page combo member PDP plan
+#And I validate the pagination on the claims summary page combo member PDP plan
 And the user validates the EOB section based on domain in redesigned site
   | Domain     | <domain>      |
   | Plan Type  | <planType>    |
@@ -181,7 +181,7 @@ Examples:
       | Plan Type    | <planType>    |
       | Claim Period | <claimPeriod> |
     Then I can see the claims displayed based on the selection in redesigned site
-    And I validate the pagination on the claims summary page 
+   #And I validate the pagination on the claims summary page 
    	And the user validates the EOB section based on domain in redesigned site
       | Domain     | <domain>      |
       | Plan Type  | <planType>    |
@@ -206,7 +206,7 @@ Examples:
       | Plan Type    | <planType>    |
       | Claim Period | <claimPeriod> |
     Then  I can see the claims displayed based on the selection in redesigned site for PDP plans 
-    And I validate the pagination on the claims summary page for members  
+   #And I validate the pagination on the claims summary page for members  
     And the user validates the EOB section in redesigned site    
    # And the user validates the DownloadMyData section in redesigned site
     Examples: 
@@ -225,7 +225,7 @@ Scenario Outline: TID: <TID> -plan: <planType> - To validate the claims present 
       | Plan Type    | <planType>    |
       | Claim Period | <claimPeriod> |
     Then I can see the claims displayed based on the selection in redesigned site
-    And I validate the pagination on the claims summary page for members
+    #And I validate the pagination on the claims summary page for members
    	And the user validates the EOB section based on domain in redesigned site
       | Domain     | <domain>      |
       | Plan Type  | <planType>    |
@@ -253,7 +253,7 @@ Scenario Outline: TID: <TID> -plan: <planType> - To validate the claims present 
       | Plan Type    | <planType>    |
       | Claim Period | <claimPeriod> |
     Then I can see the claims displayed based on the selection in redesigned site
-    And I validate the pagination on the claims summary page for members
+    #And I validate the pagination on the claims summary page for members
    	And the user validates the EOB section based on domain in redesigned site
       | Domain     | <domain>      |
       | Plan Type  | <planType>    |
@@ -309,7 +309,7 @@ Scenario Outline: TID: <TID> -plan: <planType> - To validate the claims present 
     Then I can see the claims displayed based on the selection in redesigned site
     Then I can see the print and download option in claims details table
     And I validate the print and download option in claims details table
-    And I validate the pagination on the claims summary page 
+    #And I validate the pagination on the claims summary page 
     And the user validates the EOB section based on domain in redesigned site    
      | Domain       | <domain>      |
      | Plan Type    | <planType>    |
@@ -338,3 +338,22 @@ Then the user should be able to see the from date is greater than to date error 
 Examples: 
      | TID | planType | claimPeriod    | domain | claimssystem |claimToDate | claimFromDate |
      |  15230  | MAPD     |custom-search | COSMOS | COSMOSCLAIMS |11/06/2018  | 01/02/2019 |
+     
+@claims14 @claimsPagination
+Scenario Outline:  TID: <TID> -plan: <planType> - To validate the claims present for the Federal member on claims summary page for federal members
+Given login with following details logins in the member portal and validate elements
+  | Plan Type      | <planType>     |
+  | Test Data Type | <claimssystem> |
+When I navigate to the claims Summary page in redesigned site
+Then I can validate the claims summary header
+And I can search claims for the following claim period on redesigned site
+  | Plan Type    | <planType>    |
+  | Claim Period | <claimPeriod> |
+Then I can see the claims displayed based on the selection in redesigned site
+And I validate the pagination on the claims summary page 
+And the user validates the EOB section based on domain in redesigned site
+  | Domain     | <domain>      |
+  | Plan Type  | <planType>    |
+Examples: 
+    | TID | planType | claimPeriod    | domain | claimssystem |
+  	| 15230   | MAPD     | Last 24 months | COSMOS | COSMOSCLAIMS |
