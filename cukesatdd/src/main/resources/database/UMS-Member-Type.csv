@@ -147,7 +147,7 @@ preeff_pdpind_01/Password@1,PDP,IndAARPPre-EffectivePDPFnR,
 q3_sep_aarp0046/Password@1,MAPD,NICE_EOB_R,
 q1_grp_apr031/Password@1,MA,COSMOS_EOB_R,
 AAFEEBHSID0608/Test2day,PDPI,COSMOS_EOB_R,
-q2_jun_ship0003486/Password@1,SHIP_ACTIVE,SHIP_EOB,
+q2_jun_ship0010/Password@1,SHIP_ACTIVE,SHIP_EOB,
 q2_jun_ship0002/Password@1,SHIP_Termnated,SHIP_EOB,
 q1_reg_mapdniceeob001/Password@1,MAPD,NICETermin_EOB_R,
 q2_june_combo0016/Password@1,PDP,comboEOBMedSup,
@@ -173,7 +173,7 @@ q2_june_combo0012/Password@1,COMBO,COMBOAARPPayments,
 q2_jun_ship0005/Password@1,PDP,UHCGroup,Ship_AARP_DCE
 q2_jun_ship0003486/Password@1,Medsup,Ship_AARP_DCE
 TESTVILLAGEUSER01/Password@1,MAPD,IndividualDCEmember_DCE,
-TESTVILLAGEUSER01/Password@1,MAPD,Individualwithpharmacy_DCE
+q2_jun_aarp0028/Password@1,MAPD,Individualwithpharmacy_DCE
 q2_jun_aarp0058/Password@1,MAPD,Individualwithoutpharmacy_DCE
 q2_jun_aarp0040_02/Password@1,MA,AARPIndividual_DCE
 ATDD_q2_jun_blayer123/Password@1,MAPD,COSMOS_dce,
@@ -182,7 +182,7 @@ q2_jun_grp0022/Password@1,PDP_GROUP_DCE,
 q2_jun_aarp0040_02/Password@1,MA_FED_DCE,
 q2_dec_grp0282/Password@1,Group,SSUP_DCE
 q4_dec_uhc003/Password@1,MAPD,Individual,Drug
-q2_jun_aarp0158/Password@1,MAPD,AARPFederalDCEmember,
+q2_jun_aarp0028/Password@1,MAPD,AARPFederalDCEmember,
 q2_jun_aarp0057/Password@1,MAPD,IndividualDCEmember,
 auto_test_dce_002/Password@1,MAPD,UHCIndividualDCEmembers,
 TESTVILLAGEUSER01/Password@1,MAPD,COSMOSCLAIMS,
@@ -190,6 +190,7 @@ q2_jun_aarp0040_02/Password@1,MA,NICECLAIMS,
 q2_jun_sofl0034/Password@1,PCP,COSMOSCLAIMS,
 q2_jun_aarp0028/Password@1,MAPD,NICECLAIMS,
 q2_jun_aarp0081/Password@1,PDP,RXCLAIMS,
+q4_dec_crossCombo007/Password@1,SHIP,COSMOSCLAIMS,
 q2_jun_ship0010/Password@1,SHIP,SHIPCLAIMS,
 q2_jun_aarp0043/Password@1,MA,COSMOSCLAIMS,
 q2_jun_PHIP01/Password@1,PHIP,SHIPCLAIMS,
