@@ -129,7 +129,8 @@ public class AccountHomePage extends UhcDriver {
 	private WebElement viewIDCard;
 
 	//@FindBy(xpath = "//div[@class='claim-results']//table[not (contains(@class,'ng-hide'))]//tbody//tr[2]//a[text()='MORE INFO']")
-	@FindBy(xpath = "//a[contains (text(), 'MORE INFO')]")
+	//@FindBy(xpath = "//a[contains (text(), 'MORE INFO')]")
+	@FindBy(xpath = "//*[@id='moreInfoLinkAtdd0']/a")
 	private WebElement claimstablemoreinfolinkCombo;
 
 	@FindBy(id = "pcpLogoPrint1left")
@@ -2166,7 +2167,7 @@ public class AccountHomePage extends UhcDriver {
 
 	public ClaimDetailsPage navigateToClaimDetailsPageCombo() {
 		try {
-			Thread.sleep(10000);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
