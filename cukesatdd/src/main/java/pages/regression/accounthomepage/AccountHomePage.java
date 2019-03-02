@@ -1288,18 +1288,21 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public PharmacySearchPage navigateToRedesignPharmacyLocaterPage() {
-		waitForHomePage(helloPerson);
 		/*
 		 * if (validate(iPerceptionAutoPopUp)) { iPerceptionAutoPopUp.click(); } else {
 		 * System.out.println("iPerception Pop Up not displayed"); }
 		 */
 		checkForIPerceptionModel(driver);
-		if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a")
-				|| MRScenario.environmentMedicare.equalsIgnoreCase("test-a")
+		if (MRScenario.environmentMedicare.equalsIgnoreCase("test-a")
 				|| MRScenario.environment.equalsIgnoreCase("team-ci1")) {
 			System.out.println("Go to Pharmacy locator is present " + pharmacySearchLink.isDisplayed());
 			pharmacySearchLink.click();
+		} else if (MRScenario.environment.equalsIgnoreCase("team-a")) {
+				String Page_URL = "https://www." + MRScenario.environment
+						+ "-medicare."+MRScenario.domain+"/content/medicare/member/pharmacy-locator/overview.html";
+				driver.navigate().to(Page_URL);
 		} else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
+			waitForHomePage(helloPerson);
 			if (driver.getCurrentUrl().contains("/dashboard"))
 				;
 			{
