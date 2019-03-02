@@ -58,7 +58,7 @@ q2_jun_grp00033/Password@1,PDP,Group,NON LIS
 q2_jun_grp0097/Password@1,MAPD,Group,LIS 4
 q2_jun_aarp0060/Password@1,MAPD_AARP,
 q2_jun_aarp0043/Password@1,MA,AARPIndividual,
-q2_jun_aarp0158/Password@1,MAPD,IndividualMember,
+q4_grp_dec0040/Password@1,MAPD,Ind_ContactUs,
 q2_jun_grp0054/Password@1,MAPD,UHCGroup,
 q1_apr_uhc144/Password@1,MA,UHCGroup,
 q1_feb_uhc_eft008/Password@1,MAPD,GroupLessSubsidy,
@@ -262,3 +262,6 @@ eff_ssup_grp01/Password@1,SSUP,Group,GrpEffectiveSSUP,NoRider,
 q4_dec_grp_001/Password@1,PDP,member_ContactUs,
 TESTUSER018833/Password@1,MAPD,IndividualAARPMAPDPaymentsUpdate,
 q2_jun_ship0195/Password@1,SHIP,IndividualSHIPPaymentsUpdate,
+q4_grp_dec0040/Password@1,MAPD,MAPD_Profilepref,
+q2_jun_aarp0035/Password@1,MA,MA_Profilepref,
+q2_jun_grp0071/Password@1,PDP,PDP_Profilepref
