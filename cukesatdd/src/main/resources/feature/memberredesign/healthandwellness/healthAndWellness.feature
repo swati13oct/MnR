@@ -1,5 +1,5 @@
 @healthAndWellness @member_redesign_H&W
-Feature: I1.4Header/Navigation for Member Site Redesign
+Feature: I1.4Health and Wellness for Member Site Redesign
 
   @healthAndWellness1 @member_redesign_H&W @regressiongenericpagesH&W @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - As an authenticated member on the new Member site, I want to check health and wellness and its Lifestyle, Learning and Rewards tabs
