@@ -16,7 +16,7 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
        | 15220  | PDP      | ContactUs     | test@optum.com | test@optum.com  |
        | 15221  | MAPD     | Ind_ContactUs     | test@optum.com | test@optum.com  |
 
-  @contactUs2 @GroupEmailConfirmMessage @regressionMember 
+  @contactUs2 @GroupEmailConfirmMessage @regressionMember @tamzid
   Scenario Outline: TID: <TID> -Plan Type: <plantype> -Member Type: <memberType> - Verify Group Email Widget Confirm Request in contact us redesign page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |
@@ -37,7 +37,7 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
        | 15324  | MAPD     | GEORGIAGroup  | Finding a Pharmacy          | test@optum.com     | test@optum.com            |             9999999999 |                    9999999999 | Thank you for your inquiry. We value your input, and would be happy to answer your questions. A Customer Service Advocate will review your question and respond to you shortly. |
        | 15218  | MAPD     | TEXASERSGroup | Updating Member information | test@optum.com     | test@optum.com            |             9999999999 |                    9999999999 | Thank you for your inquiry. We value your input, and would be happy to answer your questions. A Customer Service Advocate will review your question and respond to you shortly. |
 
-  @contactUs3 @GroupEmailAQuestionFiledValidations  @regressionMember 
+  @contactUs3 @GroupEmailAQuestionFiledValidations  @regressionMember
   Scenario Outline: TID: <TID> -Plan Type: <plantype> -Member Type: <memberType> - Verify Group Email Widget Confirm Request in contact us redesign page with error messages
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |
@@ -110,7 +110,7 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
        | TID    | plantype | memberType   | phoneNumber |
        | 15224  | MAPD     | CALPERSGroup |  9999999999 |
 
-  @contactUs7 @clickToCallConfirmation  @rgressionMember
+  @contactUs7 @clickToCallConfirmation  @rgressionMember 
   Scenario Outline: TID: <TID> -Plan Type: <plantype> -Member Type: <memberType> - Verify Click to Call Widget Drop-Down Request Routing and Confirmation message functionality on contactUS redesign page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |
