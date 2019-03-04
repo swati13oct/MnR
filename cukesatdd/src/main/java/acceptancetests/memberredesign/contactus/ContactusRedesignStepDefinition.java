@@ -345,6 +345,19 @@ public class ContactusRedesignStepDefinition {
 			ContactUsPage contactusPage = (ContactUsPage) getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 			contactusPage.validateWidgetsForTerminatedMembers();
 		}
+		
+		@Then("^The user validates the connector model group TFN number$")
+		public void the_user_validates_the_TFNNumber()
+		{
+			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+			
+			contactusPage.validateConnectroModelTFNNumber();
+			
+			if(contactusPage != null)				
+				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+						contactusPage);
+			
+		}
 
 	}
 

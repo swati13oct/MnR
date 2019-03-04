@@ -7,7 +7,7 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.uhcretiree.AcquisitionHomePage;
+import pages.acquisition.uhcretiree.RetireeAcquisitionHomePage;
 import pages.acquisition.uhcretiree.GroupHomePage;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
@@ -28,20 +28,20 @@ public class GroupRetireeCustomAndNonCustomStepDefinition {
 	@Given("^the user is on group retiree acquisition home page$")
 	public void the_user_is_on_group_retiree_acquisition_home_page() throws Throwable {
 		WebDriver wd = getLoginScenario().getWebDriver();
-		AcquisitionHomePage acquisitionHomePage = new AcquisitionHomePage(wd);
+		RetireeAcquisitionHomePage acquisitionHomePage = new RetireeAcquisitionHomePage(wd);
 		getLoginScenario().saveBean(PageConstants.UHCRETIREE_ACQ_HOME_PAGE, acquisitionHomePage);
 	}
 
 	@When("^I find groups dropdown populated with different retiree group name$")
 	public void i_find_groups_dropdown_populated_with_different_retiree_group_name() throws Throwable {
-		AcquisitionHomePage acquisitionHomePage = (AcquisitionHomePage) loginScenario.getBean(PageConstants.UHCRETIREE_ACQ_HOME_PAGE);
+		RetireeAcquisitionHomePage acquisitionHomePage = (RetireeAcquisitionHomePage) loginScenario.getBean(PageConstants.UHCRETIREE_ACQ_HOME_PAGE);
 		acquisitionHomePage.validateGroupDropdownList();
 		
 	}
 
 	@When("^I select a group from list of group$")
 	public void i_select_a_group_from_list_of_group(DataTable data) throws Throwable {
-		AcquisitionHomePage acquisitionHomePage = (AcquisitionHomePage) loginScenario.getBean(PageConstants.UHCRETIREE_ACQ_HOME_PAGE);
+		RetireeAcquisitionHomePage acquisitionHomePage = (RetireeAcquisitionHomePage) loginScenario.getBean(PageConstants.UHCRETIREE_ACQ_HOME_PAGE);
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String groupName = memberAttributesRow.get(0).getCells().get(1);
 		GroupHomePage groupHomePage = acquisitionHomePage.selectGroupFromList(groupName);

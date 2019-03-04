@@ -167,10 +167,10 @@ public class ClaimSummarypage extends UhcDriver{
 	private WebElement searchButton;
 	
 	@FindBy (xpath="//*[@id='custom_from_date_fed']")
-	private WebElement from;
+	private WebElement fromFed;
 
 	@FindBy (xpath="//*[@id='custom_to_date_fed']")
-	private WebElement to;
+	private WebElement toFed;
 	
 	@FindBy (xpath = ".//*[@id='errorMsg']/div/p")
 	private WebElement rxErrorMsg;
@@ -254,8 +254,17 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy(id = "all-claims-download-btn")
 	private WebElement validateclaimsdownloadbutton;
 
-	
+	@FindBy(xpath = "//div[contains(@class,'shipCompSection')]//select[@name='document-date']")
+	private WebElement claimDropDownBoxForShip;	
 
+	@FindBy(xpath = "//div[contains(@class,'fedCompSection')]//select[@name='document-date']")
+	private WebElement claimDropDownBoxForFed;	
+	
+	@FindBy(xpath="//button[@id='customsearchbuttonFedBtn']")
+	private WebElement customSearchButton;
+
+	@FindBy(xpath="//div[@id='tableAtddFed']//div[contains(text(),'Prescription Drug')]")
+	public WebElement pdpPrescriptionDrug;
 
 	public ClaimSummarypage(WebDriver driver) {
 		super(driver);
@@ -581,22 +590,20 @@ public class ClaimSummarypage extends UhcDriver{
 		return false;
 
 	}
+	
 	/**
 	 * @toDo : this method validates claims by time interval 
 	 */
 
 	public void searchClaimsByTimeInterval(String toDate, String fromDate) {
-		System.out.println("The title of the page is-------->"+driver.getTitle());
-	if(driver.getTitle().equalsIgnoreCase("AARP Medicare Plans from UnitedHealthCare - Claims Summary")){
+		//note: 
+		System.out.println("The title of the page is-------->"+driver.getTitle()+", proceed to select date range");
+		if(driver.getTitle().contains("Claims Summary")){
+			sendkeys(fromFed,fromDate);
+			sendkeys(toFed,toDate);
 
-		
-
-
-			sendkeys(from,fromDate);
-			sendkeys(to,toDate);
-
-			CommonUtility.waitForPageLoad(driver, searchButton,60);
-			searchButton.click();
+			//tbd CommonUtility.waitForPageLoad(driver, searchButton,60);
+			customSearchButton.click();
 		}
 	}
 	/**
@@ -614,8 +621,7 @@ public class ClaimSummarypage extends UhcDriver{
 				return false;
 
 		}
-	
-	
+
 	/**
 	 * @throws InterruptedException 
 	 * @toDo : this method validates Claims by time period 
@@ -691,12 +697,18 @@ public class ClaimSummarypage extends UhcDriver{
 				}
 		*/	//System.out.println("!!! Going to select Last 24 months from the dropdown !!! ");
 			if(planType.contains("SHIP")){
-				System.out.println(planType+"SHIP plan type last 24 moths is going to select");
-						
-				last24months = driver.findElement(By.xpath("//div[@class='medical-claims shipCompSection']//div//*[@id='document-date']//option[contains(@value,'24 months')]"));
-			
+				System.out.println("For ship case, locate the drop down box and select 24 months option");
+				Select dropdown=new Select (claimDropDownBoxForShip);	
+				dropdown.selectByVisibleText("Last 24 months");
+				System.out.println("Clicked 24 months option");
 			}
-			
+			else if (planType.contains("PDP")) {
+    			System.out.println("!!!Claim type PDP is validated !!!");
+				Select dropdown=new Select (claimDropDownBoxForFed);	
+				dropdown.selectByVisibleText("Last 24 months");
+				System.out.println("Clicked 24 months option");
+				validate(pdpPrescriptionDrug);
+			}
 			else if (planType.contains("MAPD")){
 				
 			

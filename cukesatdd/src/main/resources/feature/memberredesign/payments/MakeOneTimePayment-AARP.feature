@@ -304,3 +304,39 @@ Feature: To test the payment flow on Member site
     Examples: 
       | planType | memberType              | Name | CreditCardNumber |
       | PDP      | IndividualAARPCPayments | Test | 4111111111111111 |
+
+
+  @payment15 @paymentHistoryShip @Apr_release_2019 @thePredators @F247601
+  Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> - Verify SHIP member can view payment history.
+  """
+	This scenario covers the following user-stories in F247601
+		US1474717,US1474718,US1474731,US1474719,US1474720
+		US1474722,US1474723,US1474725,US1474726,US1474727
+		Open item: 
+		-Custom Search option text not visible 
+		-got server error when filter result in no row (e.g. Current Year filter option got server error)
+		-paid and unpaid filters behavior unstable 
+  """
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    Then the user navigates to payment history
+	Then user validates payment history section header exists
+	Then user expands show payment history for supplement insurance plan section
+	Then user validates date range default is Last 90 days  
+	Then user validates default payment status selected option
+	Then user validates payment table includes the most recent Payment Date information
+	Then user validates LEARN MORE ABOUT YOUR PAYMENT HISTORY link
+	Then user validates total date range options available
+	Then user validates nonCustomSearch date range options
+	Then user validates only paid rows display when paid selected
+	Then user validates only unpaid rows display when unpaid selected
+	Then user validates custom search with valid input
+	Then user validates error message for custom search with to date earlier than from date
+	Then user validates error message for custom search with no dates selected
+	Then user validates error message for custom search with From and To date more than 24 months apart
+	
+    Examples: 
+      | FID    | planType  | memberType      | 
+      | 247601 | Ship     | PaymentHistory   |
+      
