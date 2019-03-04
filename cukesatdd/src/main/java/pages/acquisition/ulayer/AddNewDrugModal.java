@@ -46,7 +46,7 @@ public class AddNewDrugModal extends UhcDriver {
 	@FindBy(xpath = "//span[@class='color-red']")
 	public WebElement atleast_4_mesg;
 	
-	@FindBy(xpath = "//div[contains(@class,'add-drug-slide-header')]//label[text()]")
+	@FindBy(id = "dialogHeading1")
 	public WebElement modalHeading;
 	
 	@FindBy(xpath = "//div[contains(@class,'autocomplete-suggestions')]/div[@class='autocomplete-suggestion']")
