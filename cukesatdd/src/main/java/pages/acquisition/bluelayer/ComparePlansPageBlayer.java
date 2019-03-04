@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.ole.WelcomePage;
@@ -33,6 +34,12 @@ public class ComparePlansPageBlayer extends UhcDriver {
 	
 	@FindBy(xpath=".//*[@id='emailSuccessMsgPopUp']")
 	private WebElement validatesuccesspopup;
+	
+	@FindBy(xpath=".//*[@id='emailSuccessMsgPopUp']/div/form/div[2]/button")
+	private WebElement closeButtonthankyoumessagepopup;
+	
+	@FindBy(linkText ="Back to all plans")
+	private WebElement topbackToPlanslink;
 	
 		
 	public ComparePlansPageBlayer(WebDriver driver) {
@@ -137,6 +144,27 @@ public class ComparePlansPageBlayer extends UhcDriver {
 		validateNew(validatesuccesspopup);
 		System.out.println("Validated Thank you Message");
 		
+	}
+
+
+	public void validatingthankyoumessage() {
+		// TODO Auto-generated method stub
+		closeButtonthankyoumessagepopup.click();
+		System.out.println("Thank you Message pop up is closed");
+	}
+
+
+	public void validatetopbacktoplanslink() {
+		// TODO Auto-generated method stub
+		System.out.println("i am in");
+    	topbackToPlanslink.click();
+    	System.out.println("i clicked");
+    	if (driver.getCurrentUrl().contains("health-plans.html#/plan-summary"))
+    	{
+    		Assert.assertTrue(true);
+    	}
+    	
+    	else Assert.assertTrue(false);
 	}
 
 

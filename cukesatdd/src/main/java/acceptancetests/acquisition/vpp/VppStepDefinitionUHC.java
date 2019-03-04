@@ -655,6 +655,30 @@ public class VppStepDefinitionUHC {
 				.getBean(PageConstants.TeamC_Plan_Compare_Page);
 		comparePlansPage.validatingprintandemail();
 	}
+	
+	/**
+	 * @toDo:user validate thank you message in plan compare
+	 */
+	@When("^the user validate thank you message in plan compare in UHS site$")
+	public void user_validate_thank_you_message_in_plan_compare() {
+
+		ComparePlansPageBlayer comparePlansPage = (ComparePlansPageBlayer) getLoginScenario()
+				.getBean(PageConstants.TeamC_Plan_Compare_Page);
+		comparePlansPage.validatingthankyoumessage();
+	}
+	
+	/**
+	 * @toDo:user clicks on back to all plans link and validate all three plans are selected
+	 */
+	
+	@Then("^the user clicks on back to all plans link and validates all three plans are selected$")
+	public void the_user_clicks_on_back_to_plans_link_and_validates_plans_are_selected() {
+		
+			ComparePlansPageBlayer comparePlansPage = (ComparePlansPageBlayer) getLoginScenario()
+				.getBean(PageConstants.TeamC_Plan_Compare_Page);
+			comparePlansPage.validatetopbacktoplanslink();
+	}
+
 
 	@When("^the user goes to PDP Landing and performs zipcode search using widget following information in the UHC site$")
 	public void the_user_goes_to_PDP_Landing_and_performs_zipcode_search_using_widget_following_information_in_the_UHC_site(
@@ -838,4 +862,20 @@ public class VppStepDefinitionUHC {
 				Assert.fail("Error Loading VPP plan summary page");
 			}
 		}
+		@Then("^the user validates the VPP Promo right rail widjet$")
+		public void user_validates_the_VPP_promo_widjet(DataTable givenAttributes) {
+
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			String planName = memberAttributesRow.get(0).getCells().get(1);
+			getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+			VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+			//String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+			PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.validatePromoWidjet(planName);
+			if (vppPlanDetailsPage != null) {
+				getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
+				} else
+					Assert.fail("Error in validating the Plan Details Page");
+			}
 }

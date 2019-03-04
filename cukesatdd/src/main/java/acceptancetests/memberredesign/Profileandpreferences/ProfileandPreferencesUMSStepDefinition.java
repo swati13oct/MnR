@@ -1098,5 +1098,26 @@ public class ProfileandPreferencesUMSStepDefinition {
 		}
 
 	}
+	
+	@And("^the user should not be able to edit the Phone numbers$")
+	public void userValidatesThePhoneSectionWithoutEditsAllowed() {
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+		profilePreferencesPage.validatePhoneSectionWithoutEditAllowed();
+	}
+
+	@Then("^the user should not be able to add or update temporary address$")
+	public void userValidatestheTemporaryaddressSectioWithoutEditsAllowedn() {
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+		profilePreferencesPage.validateTemporaryAddressSectionWithoutEditAllowed();
+	}
+
+	@Then("^the user should not be able to add or update Mailing address$")
+	public void userValidatestheMailindAddressSectionWithoutEditsAllowed() {
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+		profilePreferencesPage.validateMailingAddressSectionWithoutEditAllowed();
+	}
 
 }
