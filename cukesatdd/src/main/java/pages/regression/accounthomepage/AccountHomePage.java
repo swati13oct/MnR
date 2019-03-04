@@ -1798,7 +1798,8 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public DrugCostEstimatorPage navigate_to_optumrxPage() {
-		waitforElement(drugLookup);
+		CommonUtility.waitForPageLoad(driver, drugLookup, 90);
+		//waitforElement(drugLookup);
 		drugLookup.click();
 
 		String mainwindow = driver.getWindowHandle();
