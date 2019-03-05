@@ -4,7 +4,7 @@ Feature: G1.1 To validate forms and resources page in dashboard site
 
 
 @formsAndResources1 @F&RJMPLinks @Feb_release_2019 @gladiators
-Scenario Outline: To verify quicklinks for a MAPD member
+ Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To verify quicklinks for a MAPD member
    	Given login with following details logins in the member portal and validate elements
    	  | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
@@ -35,18 +35,18 @@ Scenario Outline: To verify quicklinks for a MAPD member
 	#Membership material comes dynamically based on the logic
 		
 	Examples: 
-      | planType | memberType |Identifier| language |count|rider|
-      | MAPD     | Individual |IndEffectiveAARP| ENGLISH  | 7   |NoRider|
-      | MAPD     | Individual |IndEffectiveAARP| ENGLISH  | 7   |Rider|
-      | MAPD     | Group |GrpEffectiveUHC| ENGLISH  | 7   |NoRider|
-      | MAPD     | Individual |IndEffectiveUHC| ENGLISH  | 6   |NoRider|
-	  | MAPD     | Individual |IndEffectiveUHC| ENGLISH  | 6   |Rider|
-	  | PCP     | Individual |IndEffectivePCP| ENGLISH  | 6   |NoRider|
-	  | MEDICA     | Individual |IndEffectiveMedica| ENGLISH  | 6   |NoRider|
+      | TID     | planType | memberType |Identifier        | language |count|rider  |
+      | 15108   | MAPD     | Individual |IndEffectiveAARP  | ENGLISH  | 7   |NoRider|
+      | 15108   | MAPD     | Individual |IndEffectiveAARP  | ENGLISH  | 7   |Rider  |
+      | 15303   | MAPD     | Group      |GrpEffectiveUHC   | ENGLISH  | 7   |NoRider|
+      | 15108   | MAPD     | Individual |IndEffectiveUHC   | ENGLISH  | 6   |NoRider|
+	  | 15108   | MAPD     | Individual |IndEffectiveUHC   | ENGLISH  | 6   |Rider  |
+	  | 00000   | PCP      | Individual |IndEffectivePCP   | ENGLISH  | 6   |NoRider|
+	  | 15128   | MEDICA   | Individual |IndEffectiveMedica| ENGLISH  | 6   |NoRider|
 	  
 	  
 @formsAndResources2 @F&RJMPLinks @Feb_release_2019 @gladiators
-  Scenario Outline: Verify jump links for individual MA member
+  Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - Verify jump links for individual MA member
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
@@ -76,14 +76,14 @@ Scenario Outline: To verify quicklinks for a MAPD member
     
       
    Examples: 
-      | planType | memberType |Identifier| language |count|rider|
-      | MA       | Group	  |GrpEffectiveUHC| ENGLISH   | 6   |NoRider|
-      | MA       | Individual |IndEffectiveUHC | ENGLISH  | 6   |Rider|
-      | MA       | Individual |IndEffectiveAARP| ENGLISH  | 7   |Rider|
-      | MA       | Individual |IndEffectiveAARP| ENGLISH  | 7   |NoRider|
+      | TID      | planType | memberType  |Identifier        | language  |count |rider  |
+      | 15130    | MA       | Group	      |GrpEffectiveUHC   | ENGLISH   | 6    |NoRider|
+      | 00000    | MA       | Individual  |IndEffectiveUHC   | ENGLISH   | 6    |Rider  |
+      | 00000    | MA       | Individual  |IndEffectiveAARP  | ENGLISH   | 7    |Rider  |
+      | 00000    | MA       | Individual  |IndEffectiveAARP  | ENGLISH   | 7    |NoRider|
 	   
 @formsAndResources3 @F&RJMPLinks @Feb_release_2019 @gladiators
-  Scenario Outline: Verify jump links for a MedSupp member
+  Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -Verify jump links for a MedSupp member
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
@@ -112,11 +112,11 @@ Scenario Outline: To verify quicklinks for a MAPD member
       |identifier|<Identifier>|
       
    Examples: 
-      | planType | memberType |Identifier| language |count|rider|
-      | MedSupp  | Individual |EffectiveShipMedSupp| ENGLISH  | 3   |NoRider|
+      | TID    | planType | memberType | Identifier         | language |count|rider  |
+      | 15304  | MedSupp  | Individual |EffectiveShipMedSupp| ENGLISH  | 3   |NoRider|
 
  @formsAndResources4 @F&RJMPLinks @Feb_release_2019 @gladiators
-  Scenario Outline: Verify jump links for individual PDP member
+  Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - Verify jump links for individual PDP member
         Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
@@ -145,14 +145,14 @@ Scenario Outline: To verify quicklinks for a MAPD member
       |identifier|<Identifier>|
       
    Examples: 
-      | planType | memberType |Identifier| language |count|rider|
-   	  | PDP | Individual |EffectivePDPAARP| ENGLISH  | 8   |NoRider|
-   #  | PDP | Individual |EffectivePDPUHC| ENGLISH  | 8   |NoRider|
-      | PDP | Group |EffectivePDPUHC| ENGLISH  | 7   |NoRider|
+      | TID    | planType | memberType |Identifier       | language |count|rider  |
+   	  | 15126  | PDP      | Individual |EffectivePDPAARP | ENGLISH  | 8   |NoRider|
+     # | 15127  | PDP      | Individual |EffectivePDPUHC  | ENGLISH  | 8   |NoRider|  # it was already hashtagged by Kamal
+      | 15131  | PDP      | Group      |EffectivePDPUHC  | ENGLISH  | 7   |NoRider|
       
       
 @formsAndResources5 @F&RJMPLinks @Feb_release_2019 @gladiators
-  Scenario Outline: Verify jump links for a SSUP member
+  Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - Verify jump links for a SSUP member
       Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
@@ -181,13 +181,13 @@ Scenario Outline: To verify quicklinks for a MAPD member
       |identifier|<Identifier>|
       
    Examples: 
-      | planType | memberType |Identifier| language |count|rider|
-      | SSUP | Group |GrpEffectiveSSUP| ENGLISH  | 4   |NoRider|
+     | TID   | planType | memberType |Identifier      | language |count|rider  |
+     | 15304 | SSUP     | Group      |GrpEffectiveSSUP| ENGLISH  | 4   |NoRider|
 
 
 # Pre-Effective Federal Cases
 @formsAndResources6 @pre-effectivefnrmapdaarpindividualvalidation @regressionMember 
-Scenario Outline: To validate the forms and resources page MAPD AARP Individual Pre-Effective
+Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page MAPD AARP Individual Pre-Effective
    	Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -217,13 +217,11 @@ Scenario Outline: To validate the forms and resources page MAPD AARP Individual 
     And both Pharmacy and provider search links are displayed
     | PlanType |<planType>|
     Examples: 
-      
-    
-     | planType | memberType           			  | language | gettingstartedguide   | benefithighlight   |  comprehensiveformulary|alternativedruglist   | evidenceofcoverage   |passport                             | overthecounter  			   | comprehensiveformularymem  | providerdirectory   | vendorInformationsheet    |pharmacydirectoryinformation  |
-     | MAPD     | IndAARPPre-EffectiveFnR 		  | ENGLISH  | Getting Started Guide | Benefit Highlights | Comprehensive Formulary|Alternative Drug List | Evidence of Coverage |UnitedHealth Passport Program| OVER THE COUNTER ESSENTIALS   | Comprehensive Formulary    | Provider Directory  | Vendor Information Sheet          |Pharmacy Directory Information|
+     | TID   | planType | memberType           	  | language | gettingstartedguide   | benefithighlight   |  comprehensiveformulary|alternativedruglist   | evidenceofcoverage   |passport                             | overthecounter  			   | comprehensiveformularymem  | providerdirectory   | vendorInformationsheet    |pharmacydirectoryinformation  |
+     | 15108 | MAPD     | IndAARPPre-EffectiveFnR | ENGLISH  | Getting Started Guide | Benefit Highlights | Comprehensive Formulary|Alternative Drug List | Evidence of Coverage |UnitedHealth Passport Program| OVER THE COUNTER ESSENTIALS   | Comprehensive Formulary    | Provider Directory  | Vendor Information Sheet          |Pharmacy Directory Information|
 
 @formsAndResources7 @IndAARPMAPre-EffectiveFnR @regressionMember
-Scenario Outline: To validate the forms and resources page MA AARP Individual Pre-Effective
+Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page MA AARP Individual Pre-Effective
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -250,13 +248,13 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
    	| Member Type | <memberType> |
     Examples: 
       
-     | planType | memberType           	    | language | gettingstartedguide   | benefithighlight   | evidenceofcoverage   |providerdirectory   | vendorInformationsheet    |passport      |linkhealthproductsbenefit|
-     | MA       | IndAARPMAPre-EffectiveFnR | ENGLISH  | Getting Started Guide | Benefit Highlights |Evidence of Coverage  |Provider Directory  | Vendor Information Sheet 	|UnitedHealth Passport Program|linkHEALTH PRODUCTS BENEFIT|
+    | TID   | planType | memberType           	    | language | gettingstartedguide   | benefithighlight   | evidenceofcoverage   |providerdirectory   | vendorInformationsheet    |passport      |linkhealthproductsbenefit|
+    | 00000 | MA       | IndAARPMAPre-EffectiveFnR  | ENGLISH  | Getting Started Guide | Benefit Highlights |Evidence of Coverage  |Provider Directory  | Vendor Information Sheet 	|UnitedHealth Passport Program|linkHEALTH PRODUCTS BENEFIT|
      
 
 
 @formsAndResources8 @fnrpdpaarpindividualvalidationPre-Effective  @regressionMember 
-  Scenario Outline: To validate the forms and resources page PDP AARP Individual Pre-Effective
+  Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page PDP AARP Individual Pre-Effective
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -285,15 +283,15 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     | Member Type | <memberType> |
        
     Examples: 
-      | planType | memberType 				  | language | benefithighlight   | gettingstartedguide   | benefithighlight   |comprehensiveformulary  |alternativedruglist  |evidenceofcoverage   |pharmacydirectoryinformation  |
-      | PDP      | IndAARPPre-EffectivePDPFnR | ENGLISH  | Benefit Highlights |Getting Started Guide  |Benefit Highlights  |Comprehensive Formulary |Alternative Drug List|Evidence Of Coverage |Pharmacy Directory Information|
-
+      | TID   | planType | memberType 				  | language | benefithighlight   | gettingstartedguide   | benefithighlight   |comprehensiveformulary  |alternativedruglist  |evidenceofcoverage   |pharmacydirectoryinformation  |
+      | 15126 | PDP      | IndAARPPre-EffectivePDPFnR | ENGLISH  | Benefit Highlights |Getting Started Guide  |Benefit Highlights  |Comprehensive Formulary |Alternative Drug List|Evidence Of Coverage |Pharmacy Directory Information|
+ 
 
 
 
 #Effective Users
   @formsAndResources9 @fnrmapdaarpindividualvalidation  @regressionMember  
-  Scenario Outline: To validate the forms and resources page MAPD AARP Individual
+  Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page MAPD AARP Individual
    	Given login with following details in the member redesign portal
     	| Plan Type   | <planType>   |
      	| Member Type | <memberType> |
@@ -348,11 +346,11 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
       | COMPREHENSIVE FORMULARYANOC | <comprehensiveformularyanoc> |
 
     Examples: 
-      | planType | memberType         | language | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | comprehensiveformulary  | priorauth           | steptherapy  | formularyadd        | formularydel        | anoc                     | evidenceofcoverageanoc | comprehensiveformularyanoc |unitedhealthpassportprogram |alternativedruglist|providerdirectory   | vendorInformationsheet    |pharmacydirectoryinformation  |
-      | MAPD     | IndAARPPharmacyFnR | ENGLISH  | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Annual Notice of Changes | Evidence Of Coverage   | Comprehensive Formulary    |UnitedHealth Passport Program |Alternative Drug List| Provider Directory  | Vendor Information Sheet          |Pharmacy Directory Information|
+      | TID   | planType | memberType         | language | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | comprehensiveformulary  | priorauth           | steptherapy  | formularyadd        | formularydel        | anoc                     | evidenceofcoverageanoc | comprehensiveformularyanoc |unitedhealthpassportprogram |alternativedruglist|providerdirectory   | vendorInformationsheet    |pharmacydirectoryinformation  |
+      | 15108 | MAPD     | IndAARPPharmacyFnR | ENGLISH  | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Annual Notice of Changes | Evidence Of Coverage   | Comprehensive Formulary    |UnitedHealth Passport Program |Alternative Drug List| Provider Directory  | Vendor Information Sheet          |Pharmacy Directory Information|
 
   @formsAndResources10 @fnrpdpuhcindividual  @regressionMember 
-  Scenario Outline: To validate the forms and resources page PDP UHC Individual
+  Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page PDP UHC Individual
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -409,11 +407,11 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
      
 
     Examples: 
-      | planType | memberType          | language | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | comprehensiveformulary  | priorauth           | steptherapy  | formularyadd        | formularydel        | anoc                     | evidenceofcoverageanoc | comprehensiveformularyanoc |alternativedruglist|gettingstartedguide|pharmacydirectoryinformation|
-      | PDP      | PdpuhcindividualFnR | ENGLISH  | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Annual Notice of Changes | Evidence Of Coverage   | Comprehensive Formulary    |Alternative Drug List|Getting Started Guide|Pharmacy Directory Information|
+     | TID   | planType | memberType          | language | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | comprehensiveformulary  | priorauth           | steptherapy  | formularyadd        | formularydel        | anoc                     | evidenceofcoverageanoc | comprehensiveformularyanoc |alternativedruglist|gettingstartedguide|pharmacydirectoryinformation|
+     | 15127 | PDP      | PdpuhcindividualFnR | ENGLISH  | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Annual Notice of Changes | Evidence Of Coverage   | Comprehensive Formulary    |Alternative Drug List|Getting Started Guide|Pharmacy Directory Information|
 
   @formsAndResources11 @fnrmapdgroupvalidation  @regressionMember 
-  Scenario Outline: To validate the forms and resources page MAPD group
+  Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page MAPD group
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -475,12 +473,12 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
       | Member Type | <memberType> |
 
     Examples: 
-      | planType | memberType           | language | gettingstartedguide   | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | certificateofcoverage   | abridgedformulary   | comprehensiveformulary              | additionaldrug           | priorauth           | steptherapy  | formularyadd        | formularydel        | certificateofcoverage   | anoc                     | evidenceofcoverageanoc | comprehensiveformularymem | additionaldruganoc       |   evidenceofcoveragemem   |
-      | MAPD     | GroupMAPDPharmacyFnR | ENGLISH  | Getting Started Guide | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Certificate of Coverage | Formulary/Drug List | Formulary/Drug List - Comprehensive | Additional Drug Coverage | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Certificate of Coverage | Annual Notice of Changes | Evidence of Coverage   | Comprehensive Formulary    | Additional Drug Coverage | Evidence Of Coverage |
+      | TID   | planType | memberType           | language | gettingstartedguide   | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | certificateofcoverage   | abridgedformulary   | comprehensiveformulary              | additionaldrug           | priorauth           | steptherapy  | formularyadd        | formularydel        | certificateofcoverage   | anoc                     | evidenceofcoverageanoc | comprehensiveformularymem | additionaldruganoc       |   evidenceofcoveragemem   |
+      | 15303 | MAPD     | GroupMAPDPharmacyFnR | ENGLISH  | Getting Started Guide | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Certificate of Coverage | Formulary/Drug List | Formulary/Drug List - Comprehensive | Additional Drug Coverage | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Certificate of Coverage | Annual Notice of Changes | Evidence of Coverage   | Comprehensive Formulary    | Additional Drug Coverage | Evidence Of Coverage |
 
   # |MAPD     | GroupPharmacyFnR  | SPANISH           |Beneficios Importantes |Resumen de Beneficios |Comprobante de Cobertura |Comprehensive Formulary-Spanish |
   @formsAndResources12 @fnrpdpaarpindividualvalidation @regressionMember 
-  Scenario Outline: To validate the forms and resources page PDP AARP Individual
+  Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page PDP AARP Individual
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -534,11 +532,11 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
      |Member Type|<memberType>|
      |Pharmacy Directory Information  |<pharmacydirectoryinformation>|  
     Examples: 
-      | planType | memberType | language | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | comprehensiveformulary  | priorauth           | steptherapy  | formularyadd        | formularydel        | anoc                     | evidenceofcoverageanoc | comprehensiveformularyanoc |alternativedruglist   |pharmacydirectoryinformation|
-      | PDP      | IndAARPFnR | ENGLISH  | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Annual Notice of Changes | Evidence Of Coverage   | Comprehensive Formulary    |Alternative Drug List |Pharmacy Directory Information|
+      | TID   | planType | memberType | language | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | comprehensiveformulary  | priorauth           | steptherapy  | formularyadd        | formularydel        | anoc                     | evidenceofcoverageanoc | comprehensiveformularyanoc |alternativedruglist   |pharmacydirectoryinformation|
+      | 15126 | PDP      | IndAARPFnR | ENGLISH  | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Annual Notice of Changes | Evidence Of Coverage   | Comprehensive Formulary    |Alternative Drug List |Pharmacy Directory Information|
 
   @formsAndResources13 @fnrpdptexasgroupvalidation  @regressionMember 
-  Scenario Outline: To validate the forms and resources page PDP Texas group
+  Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page PDP Texas group
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -597,11 +595,11 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
  
       Examples:
 
-      | planType | memberType         | language | gettingstartedguide   | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | abridgedformulary   | comprehensiveformulary              | additionaldrug           | priorauth           | steptherapy  | formularyadd        | formularydel        | evidenceofcoverageanoc | comprehensiveformularyanoc | additionaldruganoc       |anoc        				   |
-      | PDP      | TexasRxPharmacyFnRPage | ENGLISH  | Getting Started Guide | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Formulary/Drug List | Formulary/Drug List - Comprehensive | Additional Drug Coverage | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Evidence of Coverage   | Comprehensive Formulary    | Additional Drug Coverage | Annual Notice of Changes |
+      | TID   | planType | memberType             | language | gettingstartedguide   | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | abridgedformulary   | comprehensiveformulary              | additionaldrug           | priorauth           | steptherapy  | formularyadd        | formularydel        | evidenceofcoverageanoc | comprehensiveformularyanoc | additionaldruganoc       |anoc        				   |
+      | 15373 | PDP      | TexasRxPharmacyFnRPage | ENGLISH  | Getting Started Guide | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Formulary/Drug List | Formulary/Drug List - Comprehensive | Additional Drug Coverage | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Evidence of Coverage   | Comprehensive Formulary    | Additional Drug Coverage | Annual Notice of Changes |
 
   @formsAndResources14 @fnrpdpgroupvalidation  @regressionMember 
-  Scenario Outline: To validate the forms and resources page PDP UHC group
+  Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page PDP UHC group
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -661,13 +659,13 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     
 
     Examples: 
-      | planType | memberType  | language| gettingstartedguide | benefithighlight   |   evidenceofcoverage| certificateofcoverage| summaryofbenefits                   |   abridgedformulary   | comprehensiveformulary              | additionaldrug           | anoc |    evidenceofcoverageanoc|comprehensiveformularyanoc|additionaldruganoc|priorauth           | steptherapy  | formularyadd        | formularydel        |
-      | PDP      | UHCGroupFnR | ENGLISH |   Getting Started Guide   |Benefit Highlights |Evidence of Coverage |Certificate of Coverage | Summary of Benefits |Formulary/Drug List | Formulary/Drug List - Comprehensive | Additional Drug Coverage  | Annual Notice of Changes |Evidence of Coverage   | Comprehensive Formulary    | Additional Drug Coverage |Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions |
+     | TID   | planType | memberType  | language| gettingstartedguide | benefithighlight   |   evidenceofcoverage| certificateofcoverage| summaryofbenefits                   |   abridgedformulary   | comprehensiveformulary              | additionaldrug           | anoc |    evidenceofcoverageanoc|comprehensiveformularyanoc|additionaldruganoc|priorauth           | steptherapy  | formularyadd        | formularydel        |
+     | 15131 | PDP      | UHCGroupFnR | ENGLISH |   Getting Started Guide   |Benefit Highlights |Evidence of Coverage |Certificate of Coverage | Summary of Benefits |Formulary/Drug List | Formulary/Drug List - Comprehensive | Additional Drug Coverage  | Annual Notice of Changes |Evidence of Coverage   | Comprehensive Formulary    | Additional Drug Coverage |Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions |
 
  
      
   @formsAndResources15 @fnrmaindividualvalidation  @regressionMember 
-  Scenario Outline: To validate the forms and resources page  MA AARP Individual
+  Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page  MA AARP Individual
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -717,11 +715,11 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
      | Vendor Information Sheet       | <vendorInformationsheet> |
 
     Examples: 
-      | planType | memberType | language | benefithighlight   | summaryofbenefits   | evidenceofcoverage         | unitedhealthpassportprogram   | anoc                     | evidenceofcoverageanoc |providerdirectory   | vendorInformationsheet    |
-      | MA       | AARPIndFnR | ENGLISH  | Benefit Highlights | Summary of Benefits | Evidence of Coverage | UnitedHealth Passport Program | Annual Notice of Changes | Evidence Of Coverage   |Provider Directory  | Vendor Information Sheet        |
+    | TID   | planType | memberType | language | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | unitedhealthpassportprogram   | anoc                     | evidenceofcoverageanoc |providerdirectory   | vendorInformationsheet    |
+    | 15129 | MA       | AARPIndFnR | ENGLISH  | Benefit Highlights | Summary of Benefits | Evidence of Coverage | UnitedHealth Passport Program | Annual Notice of Changes | Evidence Of Coverage   |Provider Directory  | Vendor Information Sheet        |
 
   @formsAndResources16 @fnralpeehipgroupvalidation  @regressionMember 
-  Scenario Outline: To validate the forms and resources page alpeehip group 
+  Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page alpeehip group 
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -782,11 +780,11 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     
 
     Examples: 
-      | planType     | memberType       | language | gettingstartedguide   | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | certificateofcoverage   | abridgedformulary   | comprehensiveformulary              | additionaldrug           | doctorflyer  | providerdirectoryinsert   | priorauth           | steptherapy  | formularyadd        | formularydel        | evidenceofcoverageanoc | comprehensiveformularyanoc |additionaldrug            |anoc              | 
-      | MAPDALPeehip | GroupAlPeehipFnR | ENGLISH  | Getting Started Guide | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Certificate of Coverage | Formulary/Drug List | Formulary/Drug List - Comprehensive | Additional Drug Coverage | Doctor Flyer | Provider Directory Insert | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Evidence of Coverage   | Comprehensive Formulary    | Additional Drug Coverage |Annual Notice of Changes|  
+      | TID   | planType     | memberType       | language | gettingstartedguide   | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | certificateofcoverage   | abridgedformulary   | comprehensiveformulary              | additionaldrug           | doctorflyer  | providerdirectoryinsert   | priorauth           | steptherapy  | formularyadd        | formularydel        | evidenceofcoverageanoc | comprehensiveformularyanoc |additionaldrug            |anoc              | 
+      | 15130 | MAPDALPeehip | GroupAlPeehipFnR | ENGLISH  | Getting Started Guide | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Certificate of Coverage | Formulary/Drug List | Formulary/Drug List - Comprehensive | Additional Drug Coverage | Doctor Flyer | Provider Directory Insert | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Evidence of Coverage   | Comprehensive Formulary    | Additional Drug Coverage |Annual Notice of Changes|  
 
   @formsAndResources17 @pcpfnrvalidation  @regressionMember
-  Scenario Outline: To validate the forms and resources page for PCP
+  Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page for PCP
     Given login with following details in the member redesign portal
        | Plan Type   | <planType>   |
        | Member Type | <memberType> |
@@ -838,12 +836,12 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     
 
     Examples: 
-      | planType | memberType | language | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | comprehensiveformulary  | priorauth           | steptherapy  | formularyadd        | formularydel        |type   |alternativedruglist   | providerdirectory   | vendorInformationsheet    |pharmacydirectoryinformation  |
-      | MAPD     | PCP        | ENGLISH  | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions |NON LIS|Alternative Drug List | Provider Directory  | Vendor Information Sheet          |Pharmacy Directory Information|
+      | TID   | planType | memberType | language | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | comprehensiveformulary  | priorauth           | steptherapy  | formularyadd        | formularydel        |type   |alternativedruglist   | providerdirectory   | vendorInformationsheet    |pharmacydirectoryinformation  |
+      | 15128 | MAPD     | PCP        | ENGLISH  | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions |NON LIS|Alternative Drug List | Provider Directory  | Vendor Information Sheet          |Pharmacy Directory Information|
 
   # | MAPD     | PCPFnR | SPANISH | Benefit Highlights  | Summary of Benefits  | Evidence of Coverage  | Comprehensive Formulary  | Prior Authorization  | Step Therapy  | Formulary Additions  | Formulary Deletions  |
   @formsAndResources18 @ssupfnrvalidation  @regressionMember
-  Scenario Outline: To validate the forms and resources page for ssupFnr 
+  Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page for ssupFnr 
     Given login with following details in the member redesign portal
         |Type        |<type>        |
         | identifier | <Identifier> |
@@ -880,12 +878,12 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
      # | CDI_NOTICE                | <cdinotice>              |
 
     Examples: 
-      | planType | memberType | language | scheduleofbenefits   | certificateofcoverage   | yourplangettingstarted    | privacynotice  | cdinotice       |Identifier|type|
-      | UHC      | SSUPFnR    | ENGLISH  | Schedule of Benefits | Certificate of Coverage | Your Plan Getting Started | Privacy Notice | CDI Long Notice |SSUP_DCE   |Group|
+      | TID   | planType | memberType | language | scheduleofbenefits   | certificateofcoverage   | yourplangettingstarted    | privacynotice  | cdinotice       |Identifier|type|
+      | 15304 | UHC      | SSUPFnR    | ENGLISH  | Schedule of Benefits | Certificate of Coverage | Your Plan Getting Started | Privacy Notice | CDI Long Notice |SSUP_DCE   |Group|
 
-  #  | MAPD     | PCPFnR |  #SPANISH | Benefit Highlights  | Summary of Benefits  | Evidence of Coverage  | Comprehensive Formulary  | Prior Authorization  | Step Therapy  | Formulary Additions  | Formulary Deletions  |
+  #  | 00000   | MAPD     | PCPFnR |  #SPANISH | Benefit Highlights  | Summary of Benefits  | Evidence of Coverage  | Comprehensive Formulary  | Prior Authorization  | Step Therapy  | Formulary Additions  | Formulary Deletions  |
   @formsAndResources19 @combovalidation  @regressionMember
-  Scenario Outline: To validate the forms and resources page for combo members
+  Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page for combo members
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -907,11 +905,11 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     And the user scrolls till the end of the page to check the forms and resources section
 
     Examples: 
-      | planType | memberType |
-      | Combo    | ComboFnR   |
+     | TID   | planType | memberType |
+     | 15233 | Combo    | ComboFnR   |
 
   @formsAndResources20 @terminatedmembervalidation  @regressionMember
-  Scenario Outline: To validate the forms and resources page for Terminated Members
+  Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page for Terminated Members
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -932,12 +930,12 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
     
 
     Examples: 
-      | planType | memberType      |
+     | TID   | planType | memberType             |
       # uhc
-      | MA       | IndAARPMATerminatedFnR |
+     | 15129 | MA       | IndAARPMATerminatedFnR |
 
   @formsAndResources21 @shipscenario  @regressionMember
-  Scenario Outline: To validate the forms and resources page for SHIP members
+  Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page for SHIP members
     Given login with following details in the member redesign portal
 	      | Plan Type   | <planType>   |
 	      | Member Type | <memberType> |
@@ -963,12 +961,12 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
 	#	| OUTLINE OF COVERAGE    |<outlineofcoverage>|
 
     Examples: 
-      | planType | memberType     | benefitstable  |planoverview|outlineofcoverage |
+     | TID   | planType | memberType         | benefitstable  |planoverview  |outlineofcoverage   |
       # uhc
-      | SHIP   | IndPharmacyShipFnR | Benefits Table |Plan Overview |Outline of Coverage |
+     | 15119 | SHIP     | IndPharmacyShipFnR | Benefits Table |Plan Overview |Outline of Coverage |
 
   @formsAndResources22 @memberauthfnrpagevalidation  @regressionMember 
-  Scenario Outline: To validate the forms and resources page through Member auth.
+  Scenario Outline:  TID: <TID> -Username: <username> - To validate the forms and resources page through Member auth.
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
@@ -985,5 +983,5 @@ Scenario Outline: To validate the forms and resources page MA AARP Individual Pr
    	#Then validate that the AnocSection is displayed
     #Then validate that annual directory section is displayed
         Examples: 
-      | username  | password  | member           |
-      | qavgogine | qavgogine | q2_jun_aarp0055   |
+     | TID   | username  | password  | member           |
+     | 00000 | qavgogine | qavgogine | q2_jun_aarp0055  |

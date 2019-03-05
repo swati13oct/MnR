@@ -1,12 +1,18 @@
 package pages.acquisition.bluelayer;
 
+import acceptancetests.acquisition.vpp.VPPCommonConstants;
+
 /*@author pagarwa5*/
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
+import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
+import cucumber.api.DataTable;
+import cucumber.api.java.en.Then;
+import gherkin.formatter.model.DataTableRow;
 import junit.framework.Assert;
 
 import org.json.JSONException;
@@ -21,6 +27,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.PageTitleConstants;
@@ -32,6 +39,8 @@ import java.util.concurrent.TimeUnit;
 
 
 public class AcquisitionHomePage extends GlobalWebElements {
+	
+	
 
 	@FindBy(id = "lookzip")
 	private WebElement lookupZipcode;
@@ -112,6 +121,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(id = "ghn_lnk_2")
 	private WebElement ourPlans;
+	
+	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
+	private WebElement OurPlansLink1;
 
 	@FindBy(id = "ghn_lnk_1")
 	private WebElement Home;
@@ -121,6 +133,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(id = "findazip_box")
 	private WebElement zipCodeSearchPopup;
+	
+	@FindBy(id = "nav-zipcode")
+	private WebElement OurPlans_zipfield;
+	
+	@FindBy(xpath = "//*[@id = 'nav-zipcode']/following-sibling::button[@class = 'zip-button']")
+	public WebElement OurPlans_viewPlansButton;
 
 	@FindBy(xpath = "//div[@id='findazip_box']/div/div/div/h4")
 	private WebElement zipCodeSearchPopupHeading;
@@ -140,8 +158,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//div[@id='subnav_2']//h3/a[contains(text(),'Pharmacy')]")
 	private WebElement pharmacysearchbtn;
 
+	@FindBy(xpath = ".//*[@id='selector']")
+	private WebElement PSTButton;
+	
 	@FindBy(xpath = ".//*[@id='change-location']")
 	private WebElement changeLocationLink;
+
 
 	@FindBy(xpath = ".//*[@id='collapse2heading_article_mededaccordion0']")
 	private WebElement requestAgentApptDropdown;
@@ -197,12 +219,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "(//*[@class='zip-button'])[2]")
 	private WebElement GoButton;
+
+	@FindBy(xpath="//div[contains(@class,'proactive-offer__close')]")
+	public static List<WebElement> proactiveChatExistBtn;
 	
 	@FindBy(xpath = "//div[@class='overview-main']/h2")
 	private WebElement vppTop;
-	
-	@FindBy(xpath="//div[contains(@class,'proactive-offer__close')]")
-	public static List<WebElement> proactiveChatExistBtn;
 	
 	@FindBy(id = "cobrowse-disclaimer")
 	private List<WebElement> requestAssistanceModal;
@@ -215,6 +237,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath = "//a[contains(@class,'closer')]")
 	private WebElement requestAssistanceClose;
+	
+	/* LearnAboutMedicare link */
+	@FindBy(xpath = "//*[@id='ghn_lnk_3']")
+	private WebElement lnkLearnAboutMedicare;
+	
+	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button proactive-offer__close main-background-color second-color')]")
+	public static WebElement proactiveChatExitBtn;
 
 	public JSONObject homePageDisclaimerJson;
 	public JSONObject homePageDisclaimerHideJson;
@@ -238,6 +267,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public JSONObject cobrowseJson;
 	private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
 	private static String UMS_ACQISITION_OFFLINE_PAGE_URL = MRConstants.UHC_URL_OFFLINE;
+	private static String UMS_ACQISITION_PROD_PAGE_URL = MRConstants.UHCM_URL_PROD;	
+	private static String AARP_ACQISITION_PROD_PAGE_URL = MRConstants.AARP_URL_PROD;	
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
 	private static String AARP_ACQISITION_OFFLINE_PAGE_URL = MRConstants.AARP_URL_OFFLINE;
 
@@ -245,6 +276,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
+	}
+	
+	public AcquisitionHomePage(WebDriver driver, String planType, boolean details) {
+		super(driver);
+		PageFactory.initElements(driver, this);		
 	}
 	
 	public AcquisitionHomePage(WebDriver driver, boolean alreadyOnSite) {
@@ -264,6 +300,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		if (alreadyOnSite) {
 			
 		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("Current page URL: "+driver.getCurrentUrl());
 		checkModelPopup(driver);
 		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 45);
 		if(proactiveChatExistBtn.size()!=0)
@@ -311,22 +348,34 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public void openAndValidate() {
 		if (MRScenario.environment.equals("offline")) {
 			startNew(UMS_ACQISITION_OFFLINE_PAGE_URL);
+		}else if (MRScenario.environment.equals("prod")) {
+			startNew(UMS_ACQISITION_PROD_PAGE_URL);
 		} else {
 			startNew(UMS_ACQISITION_PAGE_URL);
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
-		checkModelPopup(driver);
+		System.out.println("Current page URL: "+driver.getCurrentUrl());
 		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
+		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
+		try{
+			if(proactiveChatExitBtn.isDisplayed())
+				jsClickNew(proactiveChatExitBtn);
+		}catch(Exception e){
+			System.out.println("Proactive chat popup not displayed");
+	}
 	}
 	
 	
 	public void openAndValidate(String Ulayer) {
 		if (MRScenario.environment.equals("offline")) {
-			startNew(AARP_ACQISITION_PAGE_URL);
+			startNew(AARP_ACQISITION_OFFLINE_PAGE_URL);
+		}else if (MRScenario.environment.equals("prod")) {
+			startNew(AARP_ACQISITION_PROD_PAGE_URL);
 		} else {
 			startNew(AARP_ACQISITION_PAGE_URL);
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("Current page URL: "+driver.getCurrentUrl());
 		checkModelPopup(driver);
 		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
 	}
@@ -339,7 +388,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		viewPlansButton.click();
 		CommonUtility.waitForPageLoad(driver, countyModal, 45);
 		driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
-		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+		CommonUtility.waitForPageLoadNew(driver, vppTop, 35);
+		try{
+			Thread.sleep(5000);
+		}
+		catch(Exception e)
+		{
+			
+		}
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
 
@@ -981,7 +1037,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		sendkeys(zipCodeField, zipcode);
 		viewPlansButton.click();
-
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
 		}
@@ -1064,6 +1124,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return new PlanSelectorNewPage(driver);
 	}
 
+	public PlanSelectorNewPage PSTButton() {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		PageFactory.initElements(driver, this);
+		js.executeScript("window.scrollBy(0,1200)");
+		waitforElement(PSTButton);
+		PSTButton.click();
+		return new PlanSelectorNewPage(driver);
+	}
+	
 	public VPPPlanSummaryPage searchPlans1(String zipcode, String countyName) {
 		try {
 			Thread.sleep(3000);
@@ -1158,6 +1227,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		return null;
 	}
+	
+	
+	
+
+	
 
 	public void OurPlanMALanding() {
 
@@ -1371,5 +1445,27 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		return null;
 	}
+	
+	public WebElement getLnkLearnAboutMedicare() {
+		return lnkLearnAboutMedicare;
+	}
+
+	public LearnAboutMedicareHomePage openLearnAboutMedicarePage() {
+
+		getLnkLearnAboutMedicare().click();
+		validateNonPresenceOfElement(zipCodeField);
+		return new LearnAboutMedicareHomePage(driver);
+	}
+
+	public MultiCountyModalPage SubNav_ValidateMultiCOuntyPopUp(String zipcode) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public MultiCountyModalPage ValidateMultiCOuntyPopUp(String zipcode) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

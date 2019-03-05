@@ -89,13 +89,17 @@ public class PDPEnquiryKitStepDefintionAARP {
 		
 		PDPEnrollementGuidePage pdpEnrollementGuidePage = (PDPEnrollementGuidePage) getLoginScenario().getBean(PageConstants.PDP_ENROLLMENT_GUIDE_PAGE);
 		pdpEnrollementGuidePage.entersDetails(personalAttributesMap);
+		if (!(MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))) {
 		EnquiryKitConfirmationPage enquiryKitConfirmationPage = pdpEnrollementGuidePage.submitsRequest();
 		if(enquiryKitConfirmationPage!=null){
 				Assert.assertTrue(true);
 		}else
 			Assert.fail("Not able to submit the form. Confirmation page is null.");
-	
-	}	
+		}else {
+			System.out.println("Skipping the submit functionality in Offline-Prod/Prod environment");
+		}
+	}
+		
 	
 
 	/**
@@ -152,4 +156,31 @@ public class PDPEnquiryKitStepDefintionAARP {
 	
 	}	
 	
+
+	/**
+	 * @toDo:user submits the form by entering invalid values in Order Enrollment Information page 
+	 */
+	@And("^user enters the invalid values in blank form on AARP site$")
+	public void the_user_submits_entering_invalid_values_order_enrollment_information_aarp(){
+		
+		PDPEnrollementGuidePage pdpEnrollementGuidePage = (PDPEnrollementGuidePage) getLoginScenario().getBean(PageConstants.PDP_ENROLLMENT_GUIDE_PAGE);
+		pdpEnrollementGuidePage.invalidvaluesEntered();
+				
+		
+	} 
+	/**
+	 * @toDo:user validates the error messages for the invalid values in Order Enrollment Information page 
+	 */
+	@And("^user validates error message for invalid values on AARP site$")
+	public void user_validates_invalid_values_error_message_aarp(){
+		PDPEnrollementGuidePage pdpEnrollementGuidePage = (PDPEnrollementGuidePage) getLoginScenario().getBean(PageConstants.PDP_ENROLLMENT_GUIDE_PAGE);
+		pdpEnrollementGuidePage.submitForm();
+		boolean errorMessagesValidated = pdpEnrollementGuidePage.validateErrorMessages1();
+		if(errorMessagesValidated){
+				Assert.assertTrue(true);
+		}else
+			Assert.fail("Issue in validating invalid values error messages");
+
+	}
+
 }

@@ -221,6 +221,9 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(css="div#confrmmatchheightonce div.message-block-header p>b")
 	private WebElement successHeader_EmailForm;
 	
+	@FindBy(xpath="(.//*[@id='globalContentIdForSkipLink']//div[@ng-controller='phoneHoursAddressCtrl'])[2]//a[@ng-href='tel:1-844-355-3359']")
+	private WebElement connectorModelTFN;
+	
 	public JSONObject contactUsJson;
 	
 	private JSONObject secureemailwidgetDataJson;
@@ -710,6 +713,7 @@ public class ContactUsPage extends UhcDriver{
 	 * Validate the widgets which should not present for the terminated members
 	 */
 	public void validateWidgetsForTerminatedMembers(){
+		/* tbd
 		System.out.println("ready to assert check");
 		getStartedButton.click();
 		driver.navigate().back();
@@ -718,6 +722,12 @@ public class ContactUsPage extends UhcDriver{
 		//Assert.assertTrue(!validate(fillOutFormButton)); // doesn't exist for these kind of users
 		Assert.assertTrue(!validate(requestCall));
 		//Assert.assertTrue(!validate(email_EmailForm)); // doesn't exist for these kind of users
+		 */
+		Assert.assertTrue(!validate(getStartedButton)); 
+		Assert.assertTrue(!validate(fillOutFormButton));
+		Assert.assertTrue(!validate(requestCall));
+		Assert.assertTrue(!validate(getStartedButton)); 
+		Assert.assertTrue(!validate(email_EmailForm));
 	}
 	
 	public void feebackpopupClose() throws InterruptedException
@@ -731,6 +741,19 @@ public class ContactUsPage extends UhcDriver{
 			//iPerceptionAutoPopUp.click();
 		} else {
 			System.out.println("iPerception Pop Up not displayed");
+		}
+	}
+
+	public void validateConnectroModelTFNNumber() {
+		
+		String tfnNumber = connectorModelTFN.getText();
+		if(tfnNumber.contains("1-844-355-3359"))
+		{
+			System.out.println("Connector Model TFN dsiplayed    >" +connectorModelTFN.isDisplayed() );
+		}else
+		{
+			System.err.println("Connector Model TFN dsiplayed    >" +connectorModelTFN.isDisplayed() );
+			
 		}
 	}
 }

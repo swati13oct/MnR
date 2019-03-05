@@ -17,6 +17,10 @@ public class UpdateRecurringPage extends UhcDriver {
 
 	@FindBy(id = "optionsRadios20")
 	private WebElement CreditDebitRadioButton;
+	
+	@FindBy(id = "optionsRadios30")
+	private WebElement CancelPaymentRadioBtn;
+	
 
 	@FindBy(xpath = "//button[text()='Next']")
 	private WebElement NextButton;
@@ -26,6 +30,12 @@ public class UpdateRecurringPage extends UhcDriver {
 
 	@FindBy(xpath = "//p[text()='Checking Account Information']")
 	private WebElement CheckingAccountInformationHeader;
+	
+	@FindBy(xpath = "//p[text()='Checking Account Information']")
+	private WebElement ReviewStopRecurringPageHeading;
+	
+	@FindBy(xpath = "//div[@class='col-md-12']//h1")
+	private WebElement UpdateReviewPageHeading;	
 
 	@FindBy(id = "div_cardInfo")
 	private WebElement EnterCreditInfo;
@@ -63,7 +73,37 @@ public class UpdateRecurringPage extends UhcDriver {
 		} else
 			return null;
 	}
+	
+	public UpdateReviewPage selectStopRecurringClickOnNext() {
+		validate(HelpfulRemindersPanel);
+		System.out.println("User is on Update Automatic Recurring Page");
+		CheckingAccountRadioButton.click();
+		System.out.println("clicked on Checking account radio button");
+		NextButton.click();
+		System.out.println("clicked on Next button");
+		waitforElement(UpdateReviewPageHeading);
+		if (validate(UpdateReviewPageHeading)) {
+			System.out.println("User is on Update Review Page for ship");
+			return new UpdateReviewPage(driver);
+		} else
+			return null;
+	}
 
+	
+	public UpdateReviewPage selectCancelAutomaticPaymentsAndClicksNext() {
+		validate(HelpfulRemindersPanel);
+		System.out.println("User is on Update Automatic Recurring Page");
+		CancelPaymentRadioBtn.click();
+		System.out.println("clicked on Cancel Payment radio button");
+		NextButton.click();
+		System.out.println("clicked on Next button");
+		waitforElement(UpdateReviewPageHeading);
+		if (validate(UpdateReviewPageHeading)) {
+			System.out.println("User is on Review Page");
+			return new UpdateReviewPage(driver);
+		} else
+			return null;
+	}
 	@Override
 	public void openAndValidate() {
 		validate(HelpfulRemindersPanel);

@@ -93,7 +93,9 @@ public class LoginPage extends UhcDriver {
 				if ("team-ci1".equalsIgnoreCase(MRScenario.environment)
 						|| "team-ci2".equalsIgnoreCase(MRScenario.environment)) {
 					PAGE_URL = MRConstants.LEGACY_TESTHARNESS;
-				} else {
+				}  else if("team-a".equalsIgnoreCase(MRScenario.environment)){
+					PAGE_URL=MRConstants.OSE_NEW_URL;				
+				}else {
 					PAGE_URL = MRConstants.LEGACY_TESTHARNESS.replace("awe-", "");
 				}
 			} else if ("NO".equalsIgnoreCase(MRScenario.isTestHarness)
@@ -168,6 +170,10 @@ public class LoginPage extends UhcDriver {
 			int counter = 0;
 
 			do {
+				if (("YES".equalsIgnoreCase(MRScenario.isTestHarness)) && (driver.getCurrentUrl().contains("logout.html"))) {
+					System.out.println("User is on logout.html!!!");
+					return null;
+				}
 				if (counter <= 20) {
 					Thread.sleep(5000);
 					System.out.println("Time elapsed post sign In clicked --" + counter + "*5 sec.");

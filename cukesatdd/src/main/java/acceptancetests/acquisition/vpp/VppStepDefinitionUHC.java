@@ -19,6 +19,8 @@ import pages.acquisition.bluelayer.PlanDetailsPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.bluelayer.ComparePlansPageBlayer;
+import pages.acquisition.bluelayer.MultiCountyModalPage;
+import pages.acquisition.bluelayer.OurPlansPage;
 import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
@@ -86,7 +88,7 @@ public class VppStepDefinitionUHC {
 		} else {
 			plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
 		}
-
+          
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 
@@ -121,8 +123,8 @@ public class VppStepDefinitionUHC {
 		 */
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.searchPlans1(zipcode, county);
-
+		//VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
+		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 			if (plansummaryPage.validateVPPPlanSummaryPage())
@@ -356,7 +358,7 @@ public class VppStepDefinitionUHC {
 		plansummaryPage.viewPlanSummary(plantype);
 		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "UHC_ACQ");
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, plantype);
-	}
+		}
 
 	@Then("^the user validates the Enroll Now Button present for the plan type$")
 	public void Enroll_now_button_validation(DataTable givenAttributes) {
@@ -400,9 +402,9 @@ public class VppStepDefinitionUHC {
 		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(planName, planType);
 		if (vppPlanDetailsPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
-		} else
-			Assert.fail("Error in validating the Plan Details Page");
-	}
+			} else
+				Assert.fail("Error in validating the Plan Details Page");
+		}
 
 	@Then("^the user view plan details of the above selected plan in UMS site vpp$")
 	public void the_user_view_plan_details_of_the_above_selected_plan_in_UMS_site_vpp(DataTable givenAttributes) {
@@ -653,6 +655,30 @@ public class VppStepDefinitionUHC {
 				.getBean(PageConstants.TeamC_Plan_Compare_Page);
 		comparePlansPage.validatingprintandemail();
 	}
+	
+	/**
+	 * @toDo:user validate thank you message in plan compare
+	 */
+	@When("^the user validate thank you message in plan compare in UHS site$")
+	public void user_validate_thank_you_message_in_plan_compare() {
+
+		ComparePlansPageBlayer comparePlansPage = (ComparePlansPageBlayer) getLoginScenario()
+				.getBean(PageConstants.TeamC_Plan_Compare_Page);
+		comparePlansPage.validatingthankyoumessage();
+	}
+	
+	/**
+	 * @toDo:user clicks on back to all plans link and validate all three plans are selected
+	 */
+	
+	@Then("^the user clicks on back to all plans link and validates all three plans are selected$")
+	public void the_user_clicks_on_back_to_plans_link_and_validates_plans_are_selected() {
+		
+			ComparePlansPageBlayer comparePlansPage = (ComparePlansPageBlayer) getLoginScenario()
+				.getBean(PageConstants.TeamC_Plan_Compare_Page);
+			comparePlansPage.validatetopbacktoplanslink();
+	}
+
 
 	@When("^the user goes to PDP Landing and performs zipcode search using widget following information in the UHC site$")
 	public void the_user_goes_to_PDP_Landing_and_performs_zipcode_search_using_widget_following_information_in_the_UHC_site(
@@ -701,8 +727,9 @@ public class VppStepDefinitionUHC {
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		boolean validationFlag = vppPlanDetailsPage.validatingAdditionalBenefitTextInPlanDetails(benefitType, expectedText);
 		Assert.assertTrue("Validation failed : Expected text not displayed for Additional Benefit - "+benefitType,validationFlag);
+	}
 	
-	}	
+
 
 	/**
 	 * @toDo:user validates plan count for all plan types on plan summary page
@@ -748,4 +775,107 @@ public class VppStepDefinitionUHC {
 			plandetailspage.clickCompareBox();
 		}
 	}
+	// Steps added to validate Cancel button on Multi County pop-up on Home, SubNav and VPP plan search
+		@When("^the user performs plan search using following MultiCounty Zip information in the UHC site$")
+		public void the_user_performs_plan_search_using_following_MultiCounty_Zip_information_in_the_UHC_site(DataTable givenAttributes) throws Throwable {
+			List<DataTableRow> memberAttributesRow = givenAttributes
+					.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+						.get(0), memberAttributesRow.get(i).getCells().get(1));
+			}
+			String zipcode = memberAttributesMap.get("Zip Code");
+			getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+			AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+					.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+			MultiCountyModalPage multiCountyModalPage = aquisitionhomepage.ValidateMultiCOuntyPopUp(
+					zipcode);
+
+			if (multiCountyModalPage != null) {
+				getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
+						multiCountyModalPage);
+			} else {
+				Assert.fail("Error Loading VPP plan summary page");
+			}
+
+		}
+
+		@Then("^the user validates the Cancel button for Multi COunty Pop-up lands on enter Zip code Page in UHC$")
+		public void the_user_validates_the_Cancel_button_for_Multi_COunty_Pop_up_lands_on_enter_Zip_code_Page() throws Throwable {
+			MultiCountyModalPage multiCountyModalPage = (MultiCountyModalPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			boolean Validation_Flag = multiCountyModalPage.validateMultiCounty_CancelButton();
+			Assert.assertTrue("Validation failed : Cancel button Validation for Multi County Pop-up Failed ",Validation_Flag);
+
+		}
+
+		@When("^the user performs plan search using following MultiCounty Zip in Header Sub Nav in the UHC site$")
+		public void the_user_performs_plan_search_using_following_MultiCounty_Zip_in_Header_Sub_Nav_in_the_UHC_site(DataTable givenAttributes) throws Throwable {
+			List<DataTableRow> memberAttributesRow = givenAttributes
+					.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+						.get(0), memberAttributesRow.get(i).getCells().get(1));
+			}
+
+			String zipcode = memberAttributesMap.get("Zip Code");
+			getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+
+			AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+					.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+			MultiCountyModalPage multiCountyModalPage = aquisitionhomepage.SubNav_ValidateMultiCOuntyPopUp(
+					zipcode);
+
+			if (multiCountyModalPage != null) {
+				getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
+						multiCountyModalPage);
+			} else {
+				Assert.fail("Error Loading VPP plan summary page");
+			}
+	}
+
+		@When("^the user performs Change Location on Plan Summary Page using following MultiCounty Zip information in the UHC site$")
+		public void the_user_performs_Change_Location_on_Plan_Summary_Page_using_following_MultiCounty_Zip_information_in_the_UHC_site(DataTable givenAttributes) throws Throwable {
+			List<DataTableRow> memberAttributesRow = givenAttributes
+					.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+						.get(0), memberAttributesRow.get(i).getCells().get(1));
+			}
+
+			String zipcode = memberAttributesMap.get("Zip Code");
+			getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			MultiCountyModalPage multiCountyModalPage = plansummaryPage.VPP_ChangeLocationValidateMultiCOuntyPopUp(
+					zipcode);
+			if (multiCountyModalPage != null) {
+				getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
+						multiCountyModalPage);
+			} else {
+				Assert.fail("Error Loading VPP plan summary page");
+			}
+		}
+		@Then("^the user validates the VPP Promo right rail widjet$")
+		public void user_validates_the_VPP_promo_widjet(DataTable givenAttributes) {
+
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			String planName = memberAttributesRow.get(0).getCells().get(1);
+			getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+			VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+			//String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+			PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.validatePromoWidjet(planName);
+			if (vppPlanDetailsPage != null) {
+				getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
+				} else
+					Assert.fail("Error in validating the Plan Details Page");
+			}
 }

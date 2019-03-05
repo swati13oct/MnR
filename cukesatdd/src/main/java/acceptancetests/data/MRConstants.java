@@ -16,6 +16,8 @@ public class MRConstants {
 	//public static final String AARP_URL = "https://www.awe-"+MRScenario.environment+"-aarpmedicareplans." + getDomain() + "/";
 	public static final String AARP_URL = "https://www."+MRScenario.environment+"-aarpmedicareplans." + getDomain() + "/";
 	public static final String AARP_URL_OFFLINE = "https://offline.aarpmedicareplans.com";
+	public static final String AARP_URL_PROD = "https://www.aarpmedicareplans.com";
+	public static final String UHCM_URL_PROD = "https://www.uhcmedicaresolutions.com";	
 	public static final String UHCM_URL = "https://member."+MRScenario.environment+"-uhcmedicaresolutions." + getDomain() + "/guest/login.html";
 	public static final String UHCM_URL_OFFLINE = "https://member.offline.uhcmedicaresolutions.com";
 	//public static final String UHC_URL = "https://www."+MRScenario.environment+"-uhcmedicarsolutions." + getDomain() + "/";
@@ -275,8 +277,8 @@ public class MRConstants {
   
   public static final String UHCM_TEAM_E_URL = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com";
   
-  public static final String MEMBER_AUTH = "https://"+MRScenario.environment+"-generic.uhc.com/content/medicare/memberauth.html#/memberAuthLogin";
-  
+  public static final String MEMBER_AUTH = "https://"+MRScenario.environment+"-generic."+ getDomain()+"/content/medicare/memberauth.html#/memberAuthLogin";
+
   public static final String MEMBER_AUTH_STAGE = "https://"+MRScenario.environment+"-generic.uhc.com/content/medicare/memberauth.html#/memberAuthLogin";
 
   public static final String MEMBER_AUTH_TEAM = "https://"+MRScenario.environment+"-medicare.ose-elr-core.optum.com/content/medicare/memberauth.html#/memberAuthLogin";
@@ -362,7 +364,7 @@ public class MRConstants {
   public static final String MEMBER_AUTH_PLM_REDESIGN_URL = "https://stage-generic.uhc.com/content/medicare/memberauth.html#/memberAuthLogin";
   public static final String TeamC_UHC_URL="https://www.team-c-uhcmedicaresolutions.ose-elr-core.optum.com";
   public static final String LEGACY_PCP_TESTHARNESS = "https://" + MRScenario.environment + "-mymedicareaccount."+ MRScenario.domain + LEGACY_REDESIGN + "/?testharness=true";
-
+  public static final String OSE_NEW_URL = "https://www." + MRScenario.environment + "-medicare."+ MRScenario.domain+"/?testharness=true";
  }
 
 	    
