@@ -19,6 +19,8 @@ import pages.acquisition.bluelayer.PlanDetailsPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.bluelayer.ComparePlansPageBlayer;
+import pages.acquisition.bluelayer.DrugCostEstimatorPage;
+import pages.acquisition.bluelayer.FindCarePage;
 import pages.acquisition.bluelayer.MultiCountyModalPage;
 import pages.acquisition.bluelayer.OurPlansPage;
 import acceptancetests.acquisition.ole.oleCommonConstants;
@@ -878,4 +880,95 @@ public class VppStepDefinitionUHC {
 				} else
 					Assert.fail("Error in validating the Plan Details Page");
 			}
-}
+		
+		/**
+		 * @toDo:select all 3 plans to compare and click on compare plan link
+		 */
+		@And("^I select all 3 plans to compare and click on compare plan link in UHC$")
+		public void I_select_all_3_plans_to_compare_UHC() {
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			plansummaryPage.clickonViewPlans();
+			plansummaryPage.checkAllMAPlans();
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ComparePlansPageBlayer planComparePage = plansummaryPage.clickOnCompareLink();
+			if (planComparePage != null) {
+				getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+				// comparePlansPage.backToVPPPage();
+			} else
+				Assert.fail("Error in loading the compare plans page");
+		}
+		
+		@And("^I Click on DCE link on Plan compare$")
+		public void I_Click_On_DCE_link_on_Plan_Compare() {
+			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			DrugCostEstimatorPage drugCostEstimatorPage = planComparePage.clickonDCE();
+			if (drugCostEstimatorPage != null) {
+				getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, drugCostEstimatorPage);
+				// comparePlansPage.backToVPPPage();
+			} else
+				Assert.fail("Error in loading the compare plans page");
+		}
+
+		@And("^I Click on Look up your doctor link on Plan compare$")
+		public void I_Click_on_Look_up_your_doctor_link_on_Plan_compare() throws InterruptedException {
+			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			FindCarePage findCarePage = planComparePage.clickonLookUpYourDoctor();
+			if (findCarePage != null) {
+				getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
+				// comparePlansPage.backToVPPPage();
+			} else
+				Assert.fail("Error in loading the compare plans page");
+		}
+
+		@And("^I click on Get Started on and Add Provider from find care page$")
+		public void I_click_on_Get_Started_and_Add_Provider_from_find_care_page() throws Exception {
+			FindCarePage findCarePage = (FindCarePage) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ComparePlansPageBlayer planComparePage = findCarePage.getstarted();
+			if (planComparePage != null) {
+				getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+				// comparePlansPage.backToVPPPage();
+			} else
+				Assert.fail("Error in loading the compare plans page");
+		}
+
+		@Then("^Verify provider is count is updated on plan compare page$")
+		public void Verify_provider_is_count_is_updated_on_plan_compare_page() throws Exception {
+			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			planComparePage.verifyProvidercount();
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+		}
+
+	}
