@@ -122,7 +122,7 @@ When I navigate to the claims Summary page in redesigned site
 And I validate the error message for a PHIP Member on the screen
 Examples: 
    | TID  | planType | claimssystem |
-   | 15258  | SHIP     | SHIPCLAIMS   |
+   | 15258  | PHIP     | SHIPCLAIMS   |
   
    # This Scenario can only execute when max claims indicator as true
   #@MaxClaimsResultsError
