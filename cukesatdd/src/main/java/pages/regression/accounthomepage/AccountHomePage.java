@@ -110,7 +110,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "(.//*[@class='link-row ng-scope']//a[@class='link-text ng-scope ng-binding'])[1]")
 	private WebElement medicalEobLink;
 
-	driver.findElement(By.xpath("//*[@id='dashboard']/div[1]/section[7]/link-bar/div/div/div[1]/div/a)")).click();
+
   @FindBy(xpath = "//*[@id='dashboard']/div[1]/section[7]/link-bar/div/div/div[1]/div/a)")
 	private WebElement medicalEobLinkOther;
 	
@@ -1617,7 +1617,7 @@ public class AccountHomePage extends UhcDriver {
 				}
 
 				//validate(medicalEobLink);
-				if(validate(medicalEobLink)){
+				if(medicalEobLink.isDisplayed()){
 					medicalEobLink.click();
 				}else{
 					scrollToView(medicalEobLinkOther);
