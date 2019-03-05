@@ -7,13 +7,11 @@ Feature: C1.2To test Profile and Preferences page .
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
     When the user navigates to Profile and Preferences page
-	Then the user validates the Plan Name, Member name, Member ID and account section in UMS site                      
+	Then the user validates the Plan Name, Member name and  Member ID  in UMS site                      
     And the user validates the need help section  														
 	Then the user validates permanent address section   												
-	Then the user validates the Phone section 
-	 | Plan Type | <planType> |                                                         
-    Then the user Clicks on the the Edit phone Link and validates the elements
-    | Plan Type | <planType> | 							    
+	 Then the user validates the Phone section                                                          
+    Then the user Clicks on the the Edit Link and validates the elements 							    
     Then the user checks the Edit Button changes to Cancel Button                                     
     Then the user checks the functionality of save Button in Phoneeditsection                          
     Then the user validate the functionality of Cancel Button In phoneeditSection                      
@@ -24,55 +22,51 @@ Feature: C1.2To test Profile and Preferences page .
     And the user validates on clicking contact us link it should route to contact us page             
 	
 	Examples: 
-     |  TID    | planType          | 
-    |  15103  | SHIP_ProfilePref  |
+     |  TID    | planType          |
+     |  15103  | SHIP_ProfilePref  |
 	  
 	
   @accountProfile2 @MAPDandMAEndToEnd	
   Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Profile page End to End test for MAPD and MA Members
     Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
+      | Plan Type | <planType> |
     When the user navigates to Profile and Preferences page
-	Then the user validates the Plan Name, Member name, Member ID and account section in UMS site                   
+	Then the user validates the Plan Name, Member name and  Member ID  in UMS site                    
     And the user validates the need help section  														
 	Then the user validates permanent address section   												
-	 Then the user validates the Phone section 
-	  | Plan Type | <planType> |                                                         
-    Then the user Clicks on the the Edit phone Link and validates the elements
-     	| Plan Type | <planType> | 						    
+	 Then the user validates the Phone section                                                          
+    Then the user Clicks on the the Edit Link and validates the elements 							    
     Then the user checks the Edit Button changes to Cancel Button                                       
     Then the user checks the functionality of save Button in Phoneeditsection                           
     Then the user validate the functionality of Cancel Button In phoneeditSection                       
-    Then the user validate the temporary address section for  member                                
+    Then the user validate the temporary address section for ship member                                
 	And the user validates see more ways to contact us section                                          
     And the user validates on clicking contact us link it should route to contact us page               
 	Examples: 
-     |  TID   | planType   | memberType       |
-     | 15083  | MAPD      | MAPD_Profilepref |
-	 | 15083  | MA        | MA_Profilepref   |
-     | 15083  | PDP       | PDP_Profilepref  | 
+     |  TID   | planType |
+     | 15083  | MAPD	 |
+	 | 15083  | MA       |
+     | 15083  | PDP      |
 	  
 
   @accountProfile3 @NegativeTestonHSIDpage 
   Scenario Outline:  TID: <TID> -Plan Type: <planType> - To verify all Negative tests on Password Edit on HSID PASSWORD Link Page
 	Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>    |
-      | member Type | <memberType>  |
+      | Plan Type | <planType> |
     When the user navigates to Profile and Preferences page
-	And I click the HEALTHSAFE ID PASSWORD link and validate username and password and verify edit password link
+	And I click the HEALTHSAFE ID PASSWORD link and validate username and password
 	Then the user validates the elements on clicking the edit link                                                             
-    Then the user validates the functionality of Cancel Button
-    # might need a navigate back command                                                                 
-    Then the user validates the elements on clicking the edit link                                                             
+    Then the user validates the functionality of Cancel Button                                                                 
+    #need to add back button command
+	Then the user validates the elements on clicking the edit link                                                             
     Then the user clicks on save button without filling current and new password and the red mandatory message should come     
 	Then the user validates the elements on clicking the edit link                                                             
     Then the user enters different password in confirm password field and clicks save button and the user should see expected error message - Please enter the same value again 
 	 Examples: 
-     |  TID   | planType  | memberType       |
-     | 00000  | MAPD      | MAPD_Profilepref |
-	 | 00000  | MA        | MA_Profilepref   |
-     | 00000  | PDP       | PDP_Profilepref  |
+       |  TID   | planType |
+       | 00000  | MAPD	   |
+	   | 00000  | MA       |
+       | 00000  | PDP      |
 	  
 
 
