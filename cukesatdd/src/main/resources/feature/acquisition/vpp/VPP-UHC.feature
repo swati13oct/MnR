@@ -118,7 +118,7 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
       | zipcode | planName                                           | plantype |
       |   33012 | AARP MedicareComplete Choice Plan 2 (Regional PPO) | MAPD     |
 
-  @validateEyeWearCredit @F229349 @fastandfurious @Mar_release_2019
+  @F229349 @validateEyeWearCredit @fastandfurious @Mar_release_2019
   Scenario Outline: UserStory: <UID> -plan type: <PlanType> - Verify specific Additional Benefits in Plan Details for provided plan
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -129,7 +129,7 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
       | Plan Type | <plantype> |
     Then the user view plan details of the above selected plan in UMS site and validates
       | Plan Name | <planName> |
-    Then the user validates the following Plan details for the plan in UMS
+    Then the user validates the following Additional Benefits Plan details for the plan in UMS
       | Benefit Type  | <benefitType>  |
       | Expected Text | <expectedText> |
 
@@ -185,3 +185,27 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
     Examples: 
       | zipcode | isMultiCounty | county             | MultiCOuntyzipcode |
       |   90210 | NO            | Los Angeles County |              80002 |
+
+  @F251983 @validatePCPandSpecialistTiering @fastandfurious @Apr_release_2019
+  Scenario Outline: UserStory: <UID> -plan type: <PlanType> - Verify PCP and Specialist Benefits Tiering in Plan Details for provided plan on UHC
+    Given the user is on the uhcmedicaresolutions site landing page
+    When the user performs plan search using following information in UMS site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    When user views plans of the below plan type in UMS site
+      | Plan Type | <plantype> |
+    Then the user view plan details of the above selected plan in UMS site and validates
+      | Plan Name | <planName> |
+    Then the user validates the following Medical Benefits Plan details for the plan in UMS
+      | Benefit Type  | <benefitType>  |
+      | Expected Text | <expectedText> |
+
+    Examples: 
+      | UID                                     | zipcode | isMultutiCounty | county          | plantype | planName                                          | benefitType      | expectedText                          |
+      | US1497184 - UHC - Specialist Tiering    |   27021 | YES             | Stokes County   | MA       | AARP MedicareComplete Essential (HMO)             | Specialist Copay | Tier 1: $30 copay / Tier 2: $50 copay |
+      | US1497184 - UHC - Specialist Tiering    |   27021 | YES             | Stokes County   | MAPD     | AARP MedicareComplete Plan 1 (HMO)                | Specialist Copay | Tier 1: $30 copay / Tier 2: $50 copay |
+      | US1497184 - UHC - Specialist Tiering    |   28616 | NO              | Avery County    | MAPD     | AARP MedicareComplete Plan 2 (HMO)                | Specialist Copay | Tier 1: $35 copay / Tier 2: $50 copay |
+      | US1497184 - UHC - Specialist Tiering    |   28701 | NO              | Buncombe County | MAPD     | AARP MedicareComplete Plan 3 (HMO)                | Specialist Copay | Tier 1: $40 copay / Tier 2: $50 copay |
+      | US1497184 - UHC - No Specialist Tiering |   06280 | NO              | Windham County  | MA       | UnitedHealthcare MedicareComplete Essential (HMO) | Specialist Copay | $35 copay                             |
+      | US1497184 - UHC - No Specialist Tiering |   35618 | NO              | Lawrence County | MAPD     | AARP MedicareComplete Plan 1 (HMO)                | Specialist Copay | $40 copay                             |

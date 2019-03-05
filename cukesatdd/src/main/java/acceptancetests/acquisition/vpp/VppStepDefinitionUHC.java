@@ -685,7 +685,7 @@ public class VppStepDefinitionUHC {
 		}
 	}
 	
-	@Then("^the user validates the following Plan details for the plan in UMS$")
+	@Then("^the user validates the following Additional Benefits Plan details for the plan in UMS$")
 	public void the_user_validates_the_following_Plan_details_for_the_plan(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -704,6 +704,27 @@ public class VppStepDefinitionUHC {
 		boolean validationFlag = vppPlanDetailsPage.validatingAdditionalBenefitTextInPlanDetails(benefitType, expectedText);
 		Assert.assertTrue("Validation failed : Expected text not displayed for Additional Benefit - "+benefitType,validationFlag);
 	}
+	
+	@Then("^the user validates the following Medical Benefits Plan details for the plan in UMS$")
+	public void the_user_validates_the_following_Medical_benefits_Plan_details_for_the_plan(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String benefitType = memberAttributesMap.get("Benefit Type");
+		String expectedText = memberAttributesMap.get("Expected Text");
+		System.out.println("Validating the following Medical benefits : "+benefitType);
+		
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		boolean validationFlag = vppPlanDetailsPage.validatingMedicalBenefitTextInPlanDetails(benefitType, expectedText);
+		Assert.assertTrue("Validation failed : Expected text not displayed for Medical Benefit - "+benefitType,validationFlag);
+	
+	}	
 	
 
 

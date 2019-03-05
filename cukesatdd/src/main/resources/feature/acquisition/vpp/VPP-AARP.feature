@@ -120,7 +120,7 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
       | zipcode | plantype | planName                                          |
       |   90210 | MA       | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 
-  @validateEyeWearCredit @F229349 @fastandfurious @Mar_release_2019
+  @F229349 @validateEyeWearCredit @fastandfurious @Mar_release_2019
   Scenario Outline: UserStory: <UID> -plan type: <PlanType> - Verify Eyewear Credit Benefits in Plan Details for provided plan
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -132,7 +132,7 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
     And the user validates the available plans for selected plan types in the AARP site
     Then the user view plan details of the above selected plan in AARP site and validates
       | Plan Name | <planName> |
-    Then the user validates the following Plan details for the plan
+    Then the user validates the following Additional Benefits Plan details for the plan
       | Benefit Type  | <benefitType>  |
       | Expected Text | <expectedText> |
 
@@ -152,7 +152,7 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
       | US1580458 - AARP - No Eyewear Credit       |   78006 | Yes             | Kendall County      | SNP      | UnitedHealthcare Dual Complete Choice (Regional PPO SNP) | Eyewear     | No Coverage                                                        |
       | US1580458 - AARP - No Eyewear Credit       |   03033 | No              | Hillsborough County | MAPD     | UnitedHealthcare MedicareComplete Assure (PPO)           | Eyewear     | No Coverage                                                        |
 
-  @HomeMultiCOunty @fastandfurious @Feb_release_2019 @F250062
+  @F250062 @HomeMultiCOunty @fastandfurious @Feb_release_2019 @F250062
   Scenario Outline: Validate Cancel button for Multi Cunty Pop-up on Home Page
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following MultiCounty Zip information in the AARP site
@@ -163,7 +163,7 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
       | MultiCOuntyzipcode |
       |              78006 |
 
-  @SubNavMultiCOunty @fastandfurious @Feb_release_2019 @F250062
+  @F250062 @SubNavMultiCOunty @fastandfurious @Feb_release_2019 @F250062
   Scenario Outline: Validate Cancel button for Multi Cunty Pop-up on Sub-nav Plan Search
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following MultiCounty Zip in Header Sun Nav in the AARP site
@@ -174,7 +174,7 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
       | MultiCOuntyzipcode |
       |              78006 |
 
-  @VPPChangeLocationMultiCOunty @fastandfurious @Feb_release_2019 @F250062
+  @F250062 @VPPChangeLocationMultiCOunty @fastandfurious @Feb_release_2019 @F250062
   Scenario Outline: Validate Cancel button for Multi Cunty Pop-up on VPP for Change Location
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -188,3 +188,28 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
     Examples: 
       | zipcode | isMultutiCounty | county             | MultiCOuntyzipcode |
       |   90210 | No              | Los Angeles County |              80002 |
+
+  @F251983 @validatePCPandSpecialistTiering @fastandfurious @Apr_release_2019
+  Scenario Outline: UserStory: <UID> -plan type: <PlanType> - Verify PCP and Specialist Benefits Tiering in Plan Details for provided plan on AARP
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
+    And the user views the plans of the below plan type in AARP site
+      | Plan Type | <plantype> |
+    And the user validates the available plans for selected plan types in the AARP site
+    Then the user view plan details of the above selected plan in AARP site and validates
+      | Plan Name | <planName> |
+    Then the user validates the following Medical Benefits Plan details for the plan
+      | Benefit Type  | <benefitType>  |
+      | Expected Text | <expectedText> |
+
+    Examples: 
+      | UID                                      | zipcode | isMultutiCounty | county          | plantype | planName                                          | benefitType      | expectedText                          |
+      | US1497183 - AARP - Specialist Tiering    |   27021 | YES             | Stokes County   | MA       | AARP MedicareComplete Essential (HMO)             | Specialist Copay | Tier 1: $30 copay / Tier 2: $50 copay |
+      | US1497183 - AARP - Specialist Tiering    |   27021 | YES             | Stokes County   | MAPD     | AARP MedicareComplete Plan 1 (HMO)                | Specialist Copay | Tier 1: $30 copay / Tier 2: $50 copay |
+      | US1497183 - AARP - Specialist Tiering    |   28616 | NO              | Avery County    | MAPD     | AARP MedicareComplete Plan 2 (HMO)                | Specialist Copay | Tier 1: $35 copay / Tier 2: $50 copay |
+      | US1497183 - AARP - Specialist Tiering    |   28701 | NO              | Buncombe County | MAPD     | AARP MedicareComplete Plan 3 (HMO)                | Specialist Copay | Tier 1: $40 copay / Tier 2: $50 copay |
+      | US1497183 - AARP - No Specialist Tiering |   06280 | NO              | Windham County  | MA       | UnitedHealthcare MedicareComplete Essential (HMO) | Specialist Copay | $35 copay                             |
+      | US1497183 - AARP - No Specialist Tiering |   35618 | NO              | Lawrence County | MAPD     | AARP MedicareComplete Plan 1 (HMO)                | Specialist Copay | $40 copay                             |
