@@ -1617,12 +1617,12 @@ public class AccountHomePage extends UhcDriver {
 				}
 
 				//validate(medicalEobLink);
-				if(medicalEobLink.isDisplayed()){
+				/*if(medicalEobLink.isDisplayed()){
 					medicalEobLink.click();
-				}else{
+				}else{ */
 					scrollToView(medicalEobLinkOther);
 				  medicalEobLinkOther.click();
-				}
+				//}
 			}
 		} else {
 			System.out.println(
