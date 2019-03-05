@@ -187,7 +187,7 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
       |   90210 | NO            | Los Angeles County |              80002 |
 
   @F251983 @validatePCPandSpecialistTiering @fastandfurious @Apr_release_2019
-  Scenario Outline: UserStory: <UID> -plan type: <PlanType> - Verify PCP and Specialist Benefits Tiering in Plan Details for provided plan on UHC
+  Scenario Outline: UserStory: <UID> -plan type: <plantype> - Verify PCP and Specialist Benefits Tiering in Plan Details for provided plan on UHC
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |

@@ -190,7 +190,7 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
       |   90210 | No              | Los Angeles County |              80002 |
 
   @F251983 @validatePCPandSpecialistTiering @fastandfurious @Apr_release_2019
-  Scenario Outline: UserStory: <UID> -plan type: <PlanType> - Verify PCP and Specialist Benefits Tiering in Plan Details for provided plan on AARP
+  Scenario Outline: UserStory: <UID> -plan type: <plantype> - Verify PCP and Specialist Benefits Tiering in Plan Details for provided plan on AARP
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
