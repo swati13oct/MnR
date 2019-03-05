@@ -98,7 +98,7 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 	}
 
 	public void backButtonClick(WebElement element) {
-		navigateToMenuLinks(getLnkLearnAboutMedicare(), getLstLearnAboutMedicareTitle().get(0));
+		//navigateToMenuLinks(getLnkLearnAboutMedicare(), getLstLearnAboutMedicareTitle().get(0));
 		navigateToMenuLinks(getLnkLearnAboutMedicare(), element);
 	}
 

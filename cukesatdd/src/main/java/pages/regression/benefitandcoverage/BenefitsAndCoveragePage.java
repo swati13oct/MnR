@@ -257,7 +257,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                @FindBy(id = "viewTextAtdd")
                private WebElement view_label;
 
-               @FindBy(xpath = "//h2[contains(text(),'Plan Documents and Resources')]")
+               //tbd @FindBy(xpath = "//h2[contains(text(),'Plan Documents and Resources')]")
+               @FindBy(xpath = "//h2[contains(text(),'Plan Materials')]")
                private WebElement documents_label;
 
                // @FindBy(className = "atdd-benefitsoverview-plantitle")
@@ -2222,8 +2223,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                        }
                        else
                        {
-                                      Assert.assertEquals(OutpatientSurgeryCenter.getText(), "OUTPATIENT SURGERY CENTER VISITS ");
-                                      System.out.println(OutpatientSurgeryCenter.getText());
+                           System.out.println(OutpatientSurgeryCenter.getText());
+                           Assert.assertTrue("Text for Outpatinet Surgery Center is not as expected.", OutpatientSurgeryCenter.getText().contains("OUTPATIENT SURGERY CENTER VISITS"));
+                           //Assert.assertEquals(OutpatientSurgeryCenter.getText(), "OUTPATIENT SURGERY CENTER VISITS ");
                        }
                        System.out.println(HospitalVisits.getText());
                        Assert.assertEquals(HospitalVisits.getText(), "HOSPITAL VISITS ");

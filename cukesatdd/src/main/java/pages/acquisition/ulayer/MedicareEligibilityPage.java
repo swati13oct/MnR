@@ -177,6 +177,7 @@ public class MedicareEligibilityPage extends GlobalWebElements {
 		System.out.println(getTitle());
 		Assert.assertTrue("Incorrect page is loaded", getTitle().contains("Find Medicare Plans"));
 		//btnZipcode.click();
+		validateNonPresenceOfElement(btnZipcode);
 		return driver;
 		
 	}

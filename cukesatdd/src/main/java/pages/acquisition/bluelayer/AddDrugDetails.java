@@ -37,7 +37,7 @@ public class AddDrugDetails extends UhcDriver {
 	@FindBy(id = "frequency")
 	public WebElement selectYourFrequencyDropdown;
 	
-	@FindBy(xpath = "//div[contains(@class,'add-drug-slide-header')]/span[@class='subtitle'][not (contains(@class,'ng-hige'))]")
+	@FindBy(id = "addheadDetails_id")
 	public WebElement addDrugDetailsPageHeading;
 	
 	@FindBy(xpath = "//input[@id='dosage-0']/following-sibling::label")

@@ -21,7 +21,7 @@ public class OneTimePaymentPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='atdd_otheramount_label']/label")
 	private WebElement amountRadioButton;
 
-	@FindBy(id = "other-amount-number")
+	@FindBy(xpath = "//input[@id='amountInput']")
 	private WebElement otheramountfield;
 
 	@FindBy(id = "otherAmount")
@@ -528,12 +528,19 @@ public class OneTimePaymentPage extends UhcDriver {
 		validate(otheramountfield);
 		NextButton.click();
 		System.out.println("User Click on Next button on one time page");
-		waitforElement(EnterCreditInfo);
-		if (EnterCreditInfo.getText().contains("Enter Card Information")) {
+		try {
+			Thread.sleep(5000);
+			System.out.println(driver.getCurrentUrl());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if (driver.getTitle().contains("Payment")) {
 			System.out.println("Navigated to UPG Credit card page");
 			return new CreditCardUPGPage(driver);
-		} else
+		} else {
+			System.out.println("UPG is not displayed");
 			return null;
+		}
 	}
 
 	@Override
@@ -549,6 +556,5 @@ public class OneTimePaymentPage extends UhcDriver {
 		validate(middleNameField);
 		validate(lastNameField);
 		validate(continueButton);
-
 	}
 }

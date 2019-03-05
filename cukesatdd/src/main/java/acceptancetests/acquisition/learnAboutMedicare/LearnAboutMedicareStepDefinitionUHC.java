@@ -204,17 +204,17 @@ public class LearnAboutMedicareStepDefinitionUHC {
 		if (option.contains("ME")) {
 			MedicareEligibilityPage medicareEligibilityPage = (MedicareEligibilityPage) getLoginScenario()
 					.getBean(PageConstants.MEDICARE_ELIGIBILITY_PAGE);
-			wd = medicareEligibilityPage.planSearch(zipCode);
+			 medicareEligibilityPage.planSearch(zipCode);
 		} else if (option.contains("MA")) {
 			MedicareAdvantagePartCPlansPage medicareAdvantagePartCPlansPage = (MedicareAdvantagePartCPlansPage) getLoginScenario()
 					.getBean(PageConstants.MEDICARE_ADVANTAGE_PLANS_PAGE);
-			wd = medicareAdvantagePartCPlansPage.planSearch(zipCode);
+			 medicareAdvantagePartCPlansPage.planSearch(zipCode);
 		}
 
 		else if (option.contains("PDP")) {
 			MedicarePrescriptionDrugPartDPlansPage medicarePrescriptionDrugPartDPlansPage = (MedicarePrescriptionDrugPartDPlansPage) getLoginScenario()
 					.getBean(PageConstants.MEDICARE_PRESCRIPTION_DRUG_PLANS_PAGE);
-			wd = medicarePrescriptionDrugPartDPlansPage.planSearch(zipCode);
+			 medicarePrescriptionDrugPartDPlansPage.planSearch(zipCode);
 		}
 
 	}
@@ -228,10 +228,10 @@ public class LearnAboutMedicareStepDefinitionUHC {
 
 	@And("^views plan of a particular type on uhc site$")
 	public void clicks_on_medicare_advantage_tab(DataTable attributes) {
-		// VPPPlanSummaryPage vpp = (VPPPlanSummaryPage)
-		// getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		 VPPPlanSummaryPage vpp = (VPPPlanSummaryPage)
+		 getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
-		VPPPlanSummaryPage vpp = new VPPPlanSummaryPage(wd);
+		wd.navigate().refresh();
 		List<List<String>> data = attributes.raw();
 		String planType = data.get(0).get(1).toString();
 		vpp.viewPlanSummary(planType);
@@ -269,17 +269,18 @@ public class LearnAboutMedicareStepDefinitionUHC {
 		List<List<String>> data = attributes.raw();
 		String planType = data.get(0).get(1).toString();
 
-		learnAboutMedicareHomePage
-				.navigateToMedicareMenuLinks(learnAboutMedicareHomePage.getLstLearnAboutMedicareTitle().get(0));
+//		learnAboutMedicareHomePage
+//				.navigateToMedicareMenuLinks(learnAboutMedicareHomePage.getLstLearnAboutMedicareTitle().get(1));
 
 		if (planType.equals("MA")) {
-			Assert.assertTrue("Medicare Advantage link isn't displayed",
-					learnAboutMedicareHomePage.getLstLearnAboutMedicare().get(4).getText().contains("Advantage"));
+//			Assert.assertTrue("Medicare Advantage link isn't displayed",
+//					learnAboutMedicareHomePage.getLstLearnAboutMedicare().get(4).getText().contains("Advantage"));
 
 			learnAboutMedicareHomePage
 					.navigateToMedicareMenuLinks(learnAboutMedicareHomePage.getLstLearnAboutMedicare().get(4));
 		}
 		if (planType.equals("PDP")) {
+			learnAboutMedicareHomePage.navigateToMedicareMenuLinks(learnAboutMedicareHomePage.getLstLearnAboutMedicareTitle().get(1));
 			if (learnAboutMedicareHomePage.getLstLearnAboutMedicare().get(6).getText().contains("Prescription")) {
 				Assert.assertTrue("Medicare Prescription Drug Plan link isn't displayed",
 						learnAboutMedicareHomePage.getLstLearnAboutMedicare().get(6).isDisplayed());
@@ -340,8 +341,6 @@ public class LearnAboutMedicareStepDefinitionUHC {
 		}
 
 	}
-	
-
 	
 	
 

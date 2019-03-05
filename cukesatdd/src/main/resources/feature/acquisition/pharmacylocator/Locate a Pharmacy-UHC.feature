@@ -136,5 +136,23 @@ Then the user validates the available pharmacies page in UMS site
 Examples:
 	| zipcode | distance  | county      |                     planName 			             | planYear |         pharmacytype     | servicetype   |languageName|
 	| 80002  | 25 miles  | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | 2019    	|Standard Network Pharmacy | Open 24 hours |Spanish     |
-	| 90210  | 25 miles  | None         | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | 2019    	|Standard Network Pharmacy | Open 24 hours |Spanish     |
-	
+	| 90210  | 25 miles  | None     	 | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | 2019    	|Standard Network Pharmacy | Open 24 hours |Spanish     |
+
+ @F250062 @PharmacySearchMultiCOunty @fastandfurious @Feb_release_2019
+  Scenario Outline: Validate Cancel button for Multi Cunty Pop-up on PharmacySearch Page
+    Given the user is on the UMS Medicare Site landing page
+    When the user hovers to Our Plans and select pharmacy search for following plan type in uhc site
+    And the user enters following Multi County details and  validates the Cancel button for Multi COunty Pop-up clears the Zip code text fields in pharmacy search in UMS Site
+      | Zip Code | <zipcode> |
+    When the user selects a language from dropdown in UMS Site
+      | <languageName1> |
+    And the user enters following Multi County details and  validates the Cancel button for Multi COunty Pop-up clears the Zip code text fields in pharmacy search in UMS Site
+      | Zip Code | <zipcode> |
+    When the user selects a language from dropdown in UMS Site
+      | <languageName2> |
+    And the user enters following Multi County details and  validates the Cancel button for Multi COunty Pop-up clears the Zip code text fields in pharmacy search in UMS Site
+      | Zip Code | <zipcode> |
+
+    Examples: 
+      | zipcode | languageName1 | languageName2 |
+      |   80002 | Chinese       | Spanish       |	

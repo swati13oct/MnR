@@ -9,9 +9,9 @@ import cucumber.api.CucumberOptions;
  * this file is to run test cases for RunMRATDDAcquisitionMedicare
  */
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcquisitionMedicare.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionMedicare")
+@ExtendedCucumberOptions(retryCount=3,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcquisitionMedicare.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionMedicare")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/learnAboutMedicare" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionMedicare.json" }, tags = { " @learnAboutMedicare","@uhc" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionMedicare.json" }, tags = { "@learnAboutMedicare" })
 public class RunMRATDDAcquisitionMedicare {
 
 }
