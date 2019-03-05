@@ -110,6 +110,10 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "(.//*[@class='link-row ng-scope']//a[@class='link-text ng-scope ng-binding'])[1]")
 	private WebElement medicalEobLink;
 
+	driver.findElement(By.xpath("//*[@id='dashboard']/div[1]/section[7]/link-bar/div/div/div[1]/div/a)")).click();
+  @FindBy(xpath = "//*[@id='dashboard']/div[1]/section[7]/link-bar/div/div/div[1]/div/a)")
+	private WebElement medicalEobLinkOther;
+	
 	@FindBy(linkText = "Prescription Drug Explanation of Benefits (EOB)")
 	private WebElement prescriptionDrugEobLink;
 
@@ -1612,8 +1616,13 @@ public class AccountHomePage extends UhcDriver {
 					System.out.println("iPerception Pop Up not displayed");
 				}
 
-				validate(medicalEobLink);
-				medicalEobLink.click();
+				//validate(medicalEobLink);
+				if(validate(medicalEobLink)){
+					medicalEobLink.click();
+				}else{
+					scrollToView(medicalEobLinkOther);
+				  medicalEobLinkOther.click();
+				}
 			}
 		} else {
 			System.out.println(
