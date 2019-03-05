@@ -254,6 +254,14 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy(id = "all-claims-download-btn")
 	private WebElement validateclaimsdownloadbutton;
 
+	@FindBy(xpath = "//div[contains(@class,'shipCompSection')]//select[@name='document-date']")
+	private WebElement claimDropDownBoxForShip;	
+
+	@FindBy(xpath = "//div[contains(@class,'fedCompSection')]//select[@name='document-date']")
+	private WebElement claimDropDownBoxForFed;	
+	
+	@FindBy(xpath="//div[@id='tableAtddFed']//div[contains(text(),'Prescription Drug')]")
+	public WebElement pdpPrescriptionDrug;
 	
 
 
@@ -587,7 +595,8 @@ public class ClaimSummarypage extends UhcDriver{
 
 	public void searchClaimsByTimeInterval(String toDate, String fromDate) {
 		System.out.println("The title of the page is-------->"+driver.getTitle());
-	if(driver.getTitle().equalsIgnoreCase("AARP Medicare Plans from UnitedHealthCare - Claims Summary")){
+	//if(driver.getTitle().equalsIgnoreCase("AARP Medicare Plans from UnitedHealthCare - Claims Summary")){
+		if(driver.getTitle().contains("Claims Summary")){
 
 		
 
@@ -690,6 +699,7 @@ public class ClaimSummarypage extends UhcDriver{
 				e.printStackTrace();
 				}
 		*/	//System.out.println("!!! Going to select Last 24 months from the dropdown !!! ");
+		/*
 			if(planType.contains("SHIP")){
 				System.out.println(planType+"SHIP plan type last 24 moths is going to select");
 						
@@ -698,8 +708,22 @@ public class ClaimSummarypage extends UhcDriver{
 			}
 			
 			else if (planType.contains("MAPD")){
-				
-			
+			*/	
+		if(planType.contains("SHIP")){
+			System.out.println("For ship case, locate the drop down box and select 24 months option");
+			Select dropdown=new Select (claimDropDownBoxForShip);	
+			dropdown.selectByVisibleText("Last 24 months");
+			System.out.println("Clicked 24 months option");
+		}
+		else if (planType.contains("PDP")) {
+			System.out.println("!!!Claim type PDP is validated !!!");
+			Select dropdown=new Select (claimDropDownBoxForFed);	
+			dropdown.selectByVisibleText("Last 24 months");
+			System.out.println("Clicked 24 months option");
+			validate(pdpPrescriptionDrug);
+		}
+		else if (planType.contains("MAPD") || planType.contains("MA")){
+	
 					/*validate (customSearch);
 					System.out.println("!!! Custom search is seen in the view Claims From drop down ===>"+(customSearch.getText()));*/
 					System.out.println("!!! Validating the drop down to select the claims from last 24 months  !!!");
@@ -710,6 +734,7 @@ public class ClaimSummarypage extends UhcDriver{
 					validate (Medical);
 					System.out.println("!! Claim type Medical is validated!!! ");
 					validate (Medical);
+					if (planType.contains("MAPD")) {
 					validate(PrescriptionDrug);
 	    			System.out.println("!!!Claim type PDP is validated !!!");
 	    			PrescriptionDrug.click();
@@ -734,7 +759,7 @@ public class ClaimSummarypage extends UhcDriver{
 					claimType.selectByVisibleText("PrescriptionDrug");*/
 					System.out.println("!!! Claim Type Prescription Drug is Selected !!!");
 					Medical.click();
-				
+					}
 				
 			}
 			else{
