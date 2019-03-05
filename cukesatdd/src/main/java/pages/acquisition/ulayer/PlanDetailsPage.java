@@ -131,6 +131,12 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//table[contains(@class,'drug-list-table')]//tr[2]/td/strong")
 	private WebElement addedDrug;
 	
+	@FindBy(id = "po7links")
+	private WebElement lookUpYourProviderButton;
+	
+
+	@FindBy(xpath = "//span[contains(text(),'1 providers covered')]")
+	private WebElement providerCountUpdated;
 	
 	private PageData planDocsPDF;
 	
@@ -542,5 +548,26 @@ public boolean validatingAdditionalBenefitTextInPlanDetails(String benefitType, 
 		Assert.assertTrue(actualDrug.contains(expectedDrugName), "Expected drug not matches with actual drug");
 	}
 
+	public ProviderSearchPage validateLookUpYourProviderButton() {
+		// TODO Auto-generated method stub
+		validateNew(lookUpYourProviderButton);	
+		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+		switchToNewTabNew(lookUpYourProviderButton);
+		if (driver.getCurrentUrl().contains("werally")) {
+			return new ProviderSearchPage(driver);
+		}
+		return null;
+		
+		
+	}
+
+	public boolean providerinfo() {
+	
+		if(providerCountUpdated.isDisplayed())
+		{
+			return true;
+		}
+		return false;
+	}
 
 }
