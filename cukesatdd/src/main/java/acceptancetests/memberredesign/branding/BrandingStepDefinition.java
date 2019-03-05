@@ -85,7 +85,7 @@ public void verifyCorrectLogoAndCoLogoDisplayedOnDashboardHomePage(DataTable giv
 @Then("^user clicks on benefits and coverage tab on home page$")
 public void userClicksOnBenefitAndCoveragePage() throws Throwable {
 	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-	Thread.sleep(3000);
+	Thread.sleep(9000);
 	BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateToBandCPage();
 	getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
 	
