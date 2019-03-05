@@ -28,7 +28,7 @@ public class ReviewOneTimePaymentPage extends UhcDriver {
 	@FindBy(xpath = "//button[text()='MAKE PAYMENT']")
 	private WebElement MakePaymentButton;
 
-	@FindBy(xpath = "//button[@class='btn btn--primary' and (text()='CONTINUE' or text()='Continue')]")
+	@FindBy(xpath = "//div[@class='col-md-12']/button[@class='btn btn--primary']")
 	private WebElement ContinueButton;
 
 	@FindBy(id = "termsAgree")
@@ -65,12 +65,19 @@ public class ReviewOneTimePaymentPage extends UhcDriver {
 		PaymentsDataVerificationonReviewPage();
 		jsClickNew(AgreeCheckBox);
 		ContinueButton.click();
-		waitforElement(confirmPageHeader);
-		if (validate(confirmPageHeader)) {
+		try {
+			Thread.sleep(20000);
+			System.out.println(driver.getCurrentUrl());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if (driver.getTitle().contains("One-Time Payment Submitted")) {
 			System.out.println("User is on Confirmation Page");
 			return new ConfirmOneTimePaymentPage(driver);
-		} else
+		} else {
+			System.out.println("User is not on Confirmation Page");
 			return null;
+		}
 	}
 
 	@Override

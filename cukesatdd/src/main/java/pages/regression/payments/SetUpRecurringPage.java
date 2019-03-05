@@ -18,7 +18,7 @@ public class SetUpRecurringPage extends UhcDriver {
 	@FindBy(id = "optionsRadios20")
 	private WebElement CreditDebitRadioButton;
 
-	@FindBy(xpath = "//button[text()='Next']")
+	@FindBy(xpath = "//div[@class='payment-selection__actions']//button[contains(@class,'btn btn--primary')]")
 	private WebElement NextButton;
 
 	@FindBy(xpath = "//button[text()='Back To Overview']")
@@ -37,8 +37,6 @@ public class SetUpRecurringPage extends UhcDriver {
 	}
 
 	public PaymentsFormPage selectCheckingAccountAndClickOnNext() {
-		validate(HelpfulRemindersPanel);
-		System.out.println("User is on setup Automatic Recurring Page");
 		CheckingAccountRadioButton.click();
 		System.out.println("clicked on Checking account radio button");
 		NextButton.click();
@@ -51,22 +49,30 @@ public class SetUpRecurringPage extends UhcDriver {
 	}
 
 	public CreditCardUPGPage selectCCAndClickOnNext() {
-		validate(HelpfulRemindersPanel);
-		System.out.println("User is on setup Automatic Recurring Page");
 		CreditDebitRadioButton.click();
 		System.out.println("clicked on Credit/Debit radio button");
 		NextButton.click();
 		System.out.println("clicked on Next button");
-		if (validate(EnterCreditInfo)) {
-			System.out.println("User is on UPG Page");
+		try {
+			Thread.sleep(5000);
+			System.out.println(driver.getCurrentUrl());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if (driver.getTitle().contains("Payment")) {
+			System.out.println("Navigated to UPG Credit card page");
 			return new CreditCardUPGPage(driver);
-		} else
+		} else {
+			System.out.println("UPG is not displayed");
 			return null;
+		}
 	}
 
 	@Override
 	public void openAndValidate() {
-		validate(HelpfulRemindersPanel);
-
+		if (driver.getTitle().contains("Set Up Automatic Payments")) {
+			System.out.println("Set Up Automatic Payments page");
+		} else
+			System.out.println("Set Up Automatic Payments not displayed");
 	}
 }
