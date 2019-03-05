@@ -37,7 +37,7 @@ public class IDCardPage extends UhcDriver{
 	private WebElement planName_grp;
 	
 	//@FindBy(xpath="//*[@id='details-00_950035171695_2018-12-31']/li[1]/dl/dd") 
-	@FindBy(css="li.ng-scope.long-plan-name > dl > dd")
+	@FindBy(xpath="//*[@id='details-00_2683600_2019-12-31']/li[1]/dl/dd")
 	private WebElement planName_Ind;
 	
 	@FindBy(xpath="//*[@id='details-00_950035171695_2019-12-31']/li[1]/dl/dd") //--- this is for PDP
@@ -50,7 +50,7 @@ public class IDCardPage extends UhcDriver{
 	@FindBy(css="li:nth-child(2) > dl > dd")
 	private WebElement id_ind;
 	
-	@FindBy(xpath="//*[@id='details-00_950035171695_2019-12-31']/li[2]/dl/dd") //--- this is for PDP
+	@FindBy(xpath="//*[@id='details-00_2683600_2019-12-31']/li[2]/dl/dd") //--- this is for PDP
 	private WebElement id_PDP;
 	
 	@FindBy(css="li:nth-child(2) > dl > .ng-binding")
@@ -127,7 +127,7 @@ public class IDCardPage extends UhcDriver{
 		 * Validates the details of the member
 		 */
 		try{
-			if(driver.findElement(By.cssSelector("#header-00_950035171695_2019-12-31 > ul > li > span")).getText().contains("PRESCRIPTION")){
+			if(driver.findElement(By.xpath("//*[@id='header-00_2683600_2019-12-31']/ul/li/span")).getText().contains("PRESCRIPTION")){
 				System.out.println("the Plan Name is: " + planName_PDP.getText());
 				System.out.println("the ID is: " + id_PDP.getText());
 
