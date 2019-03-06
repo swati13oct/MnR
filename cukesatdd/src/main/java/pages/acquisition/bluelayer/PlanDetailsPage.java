@@ -138,7 +138,7 @@ public class PlanDetailsPage extends UhcDriver{
 
 	public JSONObject planDocPDFAcqJson;
 
-	@FindBy(xpath="//div[@class='content-section plan-details-content mb-content ng-scope']/div[1]//a[@class='back-to-plans backtoplans-plandetail ng-scope']")
+	@FindBy(id="backToPlanSummaryTop")
 	private WebElement topbackToPlanslink;
 
 	@FindBy(xpath="//div[@class='content-section plan-details-content mb-content ng-scope']/div[2]//a[@class='back-to-plans backtoplans-plandetail ng-scope']")
@@ -458,7 +458,8 @@ public class PlanDetailsPage extends UhcDriver{
 	}
 
 	public void validatetopbacktoplanslink() throws InterruptedException{
-
+			Thread.sleep(3000);
+	    	System.out.println("i am in");
 		waitforElement(topbackToPlanslink);
 		topbackToPlanslink.click();
 		Thread.sleep(3000);

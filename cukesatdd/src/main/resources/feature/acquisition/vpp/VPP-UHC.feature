@@ -96,8 +96,9 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
     And I select all 3 plans to compare in MA and click on compare plan link in UHS site
     When the user validate the print and email link option in plan compare in UHS site
     Then the user validating email and print option in plan compare in UHS site
+    Then the user validate thank you message in plan compare in UHS site
+    Then the user clicks on back to all plans link and validates all three plans are selected
 
-    #Then I click back to all plans button and verify that all 3 plans are still selected
     Examples: 
       | zipcode |
       |   90210 |
@@ -185,6 +186,20 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
     Examples: 
       | zipcode | isMultiCounty | county             | MultiCOuntyzipcode |
       |   90210 | NO            | Los Angeles County |              80002 |
+
+  @F225721 @VPPPromoWidget @Predetors @Feb_release_2019
+  Scenario Outline: Vaidate the Right Rail Promo Widget
+    Given the user is on the uhcmedicaresolutions site landing page
+    When I access the vpp page
+      | Zip Code | <zipcode> |
+    When user views plans of the below plan type in UMS site
+      | Plan Type | <plantype> |
+    Then the user validates the VPP Promo right rail widjet
+      | Plan Name | <planName> |
+
+    Examples: 
+      | zipcode | plantype | planName                    |
+      |   55344 | MA       | UnitedHealthcare Sync (PPO) |
 
   @F251983 @validatePCPandSpecialistTiering @fastandfurious @Apr_release_2019
   Scenario Outline: UserStory: <UID> -plan type: <plantype> - Verify PCP and Specialist Benefits Tiering in Plan Details for provided plan on UHC

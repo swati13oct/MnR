@@ -7,12 +7,18 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.acquisition.uhcretiree.DrugLookUpPage;
+import pages.acquisition.uhcretiree.RetireeAcquisitionHomePage;
 import pages.acquisition.ulayer.AcquisitionHomePage;
+import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.ulayer.ProviderSearchPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import acceptancetests.acquisition.retiree.RetireeCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
@@ -177,5 +183,109 @@ public class ProviderSearchStepDefinitionAARP {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		Assert.assertTrue("Provider coverage Info not updated", plansummaryPage.providerinfo(planName));
 	}
+	
+	
+	/**
+	 * @toDo: user performs plan search using following information
+	 */
+	@When("^the user clicks on Provider Search on the global header$")
+	public void zipcode_details_in_aarp_site() {
+		
+		AcquisitionHomePage acquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		
+		ProviderSearchPage providerSearchPage = acquisitionhomepage.clicksOnRallyToolFromGlobalHeader();
 
-}
+		if (providerSearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
+		} else {
+			Assert.fail("Error Loading Rally tool from Global Header");
+		}
+	}
+	
+	/**
+	 * @toDo: user Enters a zipcode
+	 */
+	@When("^the user enters the zipcode and select a plan on the Rally tool$")
+	public void user_enters_the_zipcode_on_the_Rally_tool(DataTable givenAttributes) {
+
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+						memberAttributesRow.get(i).getCells().get(1));
+			}
+
+			String zipcode = memberAttributesMap.get("Zip Code");
+			String planName = memberAttributesMap.get("Plan Name");
+
+		{
+			ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
+					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+			 providerSearchPage.entersZipcodeAndSelectPlanName(zipcode,planName);
+			
+
+		}
+	}
+		
+	/**
+	 * @toDo:user user selects a provider
+	 */
+	@When("^user selects a provider and saves it$")
+	public void user_selects_provider_and_saves_it() {
+		{
+			ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
+					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+			 providerSearchPage.selectsProviderFromGlobaHeader();
+
+		}
+	}
+	
+	
+	/**
+	 * @toDo:user user selects a provider on Vpp Plan Details page
+	 */
+	@When("^user selects a provider and retuns to VPP plan details page in ulayer$")
+	public void user_selects_provider_and_return_vpp_Plan_details_page_ulayer() {
+		{
+			ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
+					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+			PlanDetailsPage planDetailsPage = providerSearchPage.selectsProviderFromVppPlanDetailsPage();
+			Assert.assertTrue("Not able to return to Plan Details page", planDetailsPage != null);
+
+		}
+	}
+	
+	/**
+	 * @toDo:Verify X out of Y provider covered information is displayed on Plan
+	 *              Summary page
+	 */
+	@Then("^Verify X out of Y provider covered information is displayed on Plan Details page Ulayer$")
+	public void verify_providers_covered_ulayer_planDetails() {
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		Assert.assertTrue("Provider coverage Info not updated", vppPlanDetailsPage.providerinfo());
+	}
+	
+	/**
+	 * @toDo: user performs plan search using following information
+	 */
+	@When("^the user clicks on Provider Search on the Home Page$")
+	public void providerSearch_details_in_aarp_site_from_HomePage() {
+		
+		AcquisitionHomePage acquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		
+		ProviderSearchPage providerSearchPage = acquisitionhomepage.clicksOnRallyToolFromHomePage();
+
+		if (providerSearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
+		} else {
+			Assert.fail("Error Loading Rally tool from Home Page");
+		}
+	}
+	
+	
+
+}		

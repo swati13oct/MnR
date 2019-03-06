@@ -241,6 +241,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	/* LearnAboutMedicare link */
 	@FindBy(xpath = "//*[@id='ghn_lnk_3']")
 	private WebElement lnkLearnAboutMedicare;
+	
+	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button proactive-offer__close main-background-color second-color')]")
+	public static WebElement proactiveChatExitBtn;
 
 	public JSONObject homePageDisclaimerJson;
 	public JSONObject homePageDisclaimerHideJson;
@@ -353,6 +356,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
 		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
+		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
+		try{
+			if(proactiveChatExitBtn.isDisplayed())
+				jsClickNew(proactiveChatExitBtn);
+		}catch(Exception e){
+			System.out.println("Proactive chat popup not displayed");
+	}
 	}
 	
 	
@@ -1027,7 +1037,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		sendkeys(zipCodeField, zipcode);
 		viewPlansButton.click();
-
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
 		}

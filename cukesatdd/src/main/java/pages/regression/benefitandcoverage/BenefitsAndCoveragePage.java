@@ -257,7 +257,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(id = "viewTextAtdd")
 	private WebElement view_label;
 
-	@FindBy(xpath = "//h2[contains(text(),'Plan Documents and Resources')]")
+               //tbd @FindBy(xpath = "//h2[contains(text(),'Plan Documents and Resources')]")
+               @FindBy(xpath = "//h2[contains(text(),'Plan Materials')]")
 	private WebElement documents_label;
 
 	// @FindBy(className = "atdd-benefitsoverview-plantitle")
