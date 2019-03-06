@@ -210,7 +210,7 @@ q2_jun_uhc0040/Password@1,MAPD_UHC_GOGreen_Profilepref,
 q2_jun_aarp0062/Password@1,MAPD_AARP_GOGreen_Profilepref,
 q2_jun_aarp0076/Password@1,PDP_AARP_GOGreen_Profilepref,
 q2_jun_sofl0002/Password@1,PCP,PCP_SouthFlorida_ProfilePref,
-q2_jun_ship0010/Password@1,SHIP_ProfilePref,
+Shipeff_001/Password@1,SHIP_ProfilePref,
 q4_grp_dec0040/Password@1,MAPD_GROUP_GOGreen_Profilepref,
 q2_jun_sofl0017/Password@1,Medica,Medica_SouthFlorida_ProfilePref,
 q2_jun_aarp0030/Password@1,MAPD,Individual_BnC,NON LIS
@@ -264,4 +264,5 @@ q4_grp_dec0040/Password@1,MAPD,MAPD_Profilepref,
 q2_jun_aarp0035/Password@1,MA,MA_Profilepref,
 q2_jun_grp0071/Password@1,PDP,PDP_Profilepref,
 q4_grp_dec0003/Password@1,MAPD,TEXASERSGroup,
-
+q2_jun_ship0259/Password@1,PHIP,SHIPCLAIMS_ContactUS,
+q2_jun_ship0192/Password@1,SHIP,SHIPOnly_Branding,NON LIS
