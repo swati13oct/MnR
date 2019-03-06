@@ -2,7 +2,7 @@
 Feature: C1.2To test Profile and Preferences page 
 
   
-    @accountProfile1 @ShipEndtoEnd @tamzid
+    @accountProfile1 @ShipEndtoEnd
 	Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Profile page End to End test for Ship Members
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
@@ -49,9 +49,9 @@ Feature: C1.2To test Profile and Preferences page
     And the user validates on clicking contact us link it should route to contact us page               
 	Examples: 
      |  TID   | planType  | memberType       |
-     #| 15083  | MAPD      | MAPD_Profilepref |
-	# | 15083  | MA        | MA_Profilepref   |
-   #  | 15083  | PDP       | PDP_Profilepref  |
+     | 15083  | MAPD      | MAPD_Profilepref |
+	 | 15083  | MA        | MA_Profilepref   |
+     | 15083  | PDP       | PDP_Profilepref  |
 	  
 
   @accountProfile3 @NegativeTestonHSIDpage 
