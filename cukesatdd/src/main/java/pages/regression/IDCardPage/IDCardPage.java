@@ -37,7 +37,7 @@ public class IDCardPage extends UhcDriver{
 	private WebElement planName_grp;
 	
 	//@FindBy(xpath="//*[@id='details-00_950035171695_2018-12-31']/li[1]/dl/dd") 
-	@FindBy(xpath="//*[@id='details-00_2683600_2019-12-31']/li[1]/dl/dd")
+	@FindBy(css=".ng-scope > dl > .ng-binding")
 	private WebElement planName_Ind;
 	
 	@FindBy(xpath="//*[@id='details-00_950035171695_2019-12-31']/li[1]/dl/dd") //--- this is for PDP
