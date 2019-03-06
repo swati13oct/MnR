@@ -34,14 +34,14 @@ public class MedicareInformationPage extends UhcDriver{
 	@FindBy(id = "ole-form-back-button")
 	private WebElement BackBtn;
 
-	@FindBy(xpath = "//*[@class = 'enrollmentAllowed-error-msg']/p")
+	@FindBy(xpath = "//*[contains(@class, 'enrollmentAllowed-error-msg')]/p")
 	private WebElement AlreadyEnrolled_ErrorMessage;
 
 	
 	@FindBy(xpath = "//*[@id='ole-form-cancel-button' or @id = 'cancel-enrollment']")
 	private WebElement CancelEnrollmentLink;
 	
-	@FindBy(xpath = "//*[@class = 'enrollmentAllowed-error-msg']")
+	@FindBy(xpath = "//*[contains(@class, 'enrollmentAllowed-error-msg')]")
 	private WebElement RequiredField_ErrorMessage;
 	
 	//Right Rail Elements
@@ -63,7 +63,7 @@ public class MedicareInformationPage extends UhcDriver{
 	
 
 	//Page Header
-	@FindBy(xpath = "//*[@class='only-prelim']")
+	@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-prelim')]")
 	private WebElement MedicalInfoPageHeader;
 	
 	//Select Medicare Card Type - A 0r B
@@ -105,7 +105,7 @@ public class MedicareInformationPage extends UhcDriver{
 	@FindBy(id = "leavingSite-linkrouter")
 	private WebElement LeavingOLEmodal;
 
-	@FindBy(xpath = "//*[@class = 'field-error-msg']")
+	@FindBy(xpath = "//*[contains(@class, 'field-error-msg')]")
 	private List <WebElement> FieldValidation_ErrorMessage;
 	
 	@FindBy(xpath = "//*[@id='medicareClaimNumber']/preceding-sibling::label")
