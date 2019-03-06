@@ -36,7 +36,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 	private WebElement CancelEnrollmentLink;
 
 	//Page Header
-	@FindBy(xpath = "//*[@class='only-prelim']")
+	@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-prelim')]")
 	private WebElement PCPPageHeader;
 
 	//Right Rail Elements
@@ -89,7 +89,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 	private WebElement ProviderName;
 	
 	//PCP Page - PCP information display
-	@FindBy(xpath = "//*[@class='provider-info__data']")
+	@FindBy(xpath = "//*[@id = 'pcpFullName']//preceding-sibling::*[contains(@class, 'provider-info__data')]")
 	private WebElement ProviderNameDisplay_PCPpage;
 
 	@FindBy(xpath = "//*[contains(text(), 'Are you now seeing or have you recently seen this doctor?')]")
@@ -287,8 +287,9 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 						driver.switchTo().window(PCPWindow);
 						if(driver.getCurrentUrl().contains("provider-search")){
 							System.out.println("OLE PCP Page is displayed : Provider Look up is Complete");
+							waitforElement(ProviderNameDisplay_PCPpage);
 							String ProviderNameDisplay = ProviderNameDisplay_PCPpage.getText();
-							if(PCPname.contains(ProviderNameDisplay) && validate(CurrentPCP_Question) 
+							if(PCPname.contains(ProviderNameDisplay)
 									&& validate(CurrentPCP_Question_Yes) && validate(CurrentPCP_Question_No)){
 								System.out.println("PCP Name is Displayed"+ProviderNameDisplay);
 								System.out.println("PCP Question and OPtions are Displayed");
@@ -300,18 +301,17 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 						System.out.println("Rally Provider Lookup page is not displayed");
 						validation_Flag = false; 
 					}
-				//}
+			}
 			}
 			else{
 				System.out.println("Rally Provider Lookup page is not displayed");
 				validation_Flag = false; 
 			}
-
-		}
+	/*
 		else{
 			System.out.println("Provider Look Up button is not displaye");
 			validation_Flag = false;
-		}
+		}*/
 		return validation_Flag;
 	
 	}

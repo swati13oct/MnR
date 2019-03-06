@@ -84,6 +84,8 @@ public static final String ACCOUNT_HOME_PAGE = "accountHomePage";
 	public static final String ZIP_SELECTION_HOME_PAGE = "zipcodeSelectionhomePage";
 	
 	public static final String DRUG_COST_ESTIMATOR_PAGE = "drugCostEstimatorPage";
+	
+	public static final String FIND_CARE_PAGE = "findCarePage";
 
 	public static final String OUR_PLANS_PAGE = "ourPlansPage";
 

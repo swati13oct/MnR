@@ -315,6 +315,21 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		openAndValidate();
 		}
 
+	public VPPPlanSummaryPage(WebDriver driver, String OLE_Campaign_URL,boolean flag) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		start(OLE_Campaign_URL);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		openAndValidate();
+
+		// TODO Auto-generated constructor stub
+	}
+	
 	public boolean validatePlanSummary() {
 		boolean flag = true;
 		int allPlans = 0;

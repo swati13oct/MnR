@@ -1417,7 +1417,7 @@ public class OneTimePaymentAarpStepDefintion {
 	public void the_user_clicks_on_Premium_Payments_on_Header() throws Throwable {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		PaymentHistoryPage paymentHistoryPage = accountHomePage.navigateTooPaymentHistoryPage();
+		PaymentHistoryPage paymentHistoryPage = accountHomePage.navigateToPaymentHistoryPage();
 		if (paymentHistoryPage != null) {
 			getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
 			System.out.println("User is on Payment overview screen");
@@ -1641,30 +1641,30 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 	}
 
-	  @Given("^user clicks on Stop Automatic payments and clicks on next for Federal$")
+	@Given("^user clicks on Stop Automatic payments and clicks on next for Federal$")
 	public void user_clicks_on_Stop_Automatic_payments_and_clicks_on_next_for_Federal() throws Throwable {
 		UpdateRecurringPage updateRecurringPage = (UpdateRecurringPage) getLoginScenario()
 				.getBean(PageConstants.Update_Recurring_Page);
 		UpdateReviewPage updateReviewPage = updateRecurringPage.selectCancelAutomaticPaymentsAndClicksNext();
-		if (updateReviewPage!= null){
+		if (updateReviewPage != null) {
 			getLoginScenario().saveBean(PageConstants.Update_Review_Page, updateReviewPage);
-			System.out.println("User is on Review Recurring Payments screen"); 
+			System.out.println("User is on Review Recurring Payments screen");
 		}
-		
+
 	}
-	
+
 	@Then("^user navigates to Review Payment Method Update screen for Stop Recurring Payments for Federal$")
-	public void user_navigates_to_Review_Payment_Method_Update_screen_for_Stop_recurring_payments_page_for_Federal() throws Throwable {
+	public void user_navigates_to_Review_Payment_Method_Update_screen_for_Stop_recurring_payments_page_for_Federal()
+			throws Throwable {
 		UpdateReviewPage updateReviewPage = (UpdateReviewPage) getLoginScenario()
 				.getBean(PageConstants.Update_Review_Page);
-		UpdateConfirmationPage updateConfirmationPage = updateReviewPage.selectAgreeAndClickOnContinueforStopRecurringForFed();
-		if (updateConfirmationPage!= null){
+		UpdateConfirmationPage updateConfirmationPage = updateReviewPage
+				.selectAgreeAndClickOnContinueforStopRecurringForFed();
+		if (updateConfirmationPage != null) {
 			getLoginScenario().saveBean(PageConstants.Update_Confirmation_Page, updateConfirmationPage);
 			System.out.println("User is on Confirmation Payment Method Update Page Payments screen");
 		}
-		}
-		
-		
+	}
 
 	@Given("^user selects checking Account on Update Automatic recurring payments page and Click on Next$")
 	public void user_selects_checking_Account_on_Update_Automatic_recurring_payments_page_and_Click_on_Next()
@@ -1813,10 +1813,10 @@ public class OneTimePaymentAarpStepDefintion {
 	public void user_selects_Stop_Automatic_Recurring_Payments_and_Click_on_Next() throws Throwable {
 		UpdateRecurringPage updateRecurringPage = (UpdateRecurringPage) getLoginScenario()
 				.getBean(PageConstants.Update_Recurring_Page);
-		PaymentsFormPage paymentsFormPage = updateRecurringPage.selectCheckingAccountAndClickOnNext();
-		if (paymentsFormPage != null) {
-			getLoginScenario().saveBean(PageConstants.Payments_Form_Page, paymentsFormPage);
-			System.out.println("User is on Form Page for Checking account");
+		UpdateReviewPage updateReviewPage = updateRecurringPage.selectStopRecurringClickOnNextforShip();
+		if (updateReviewPage != null) {
+			getLoginScenario().saveBean(PageConstants.Update_Review_Page, updateReviewPage);
+			System.out.println("User is on Update review page");
 		}
 	}
 
@@ -1840,7 +1840,7 @@ public class OneTimePaymentAarpStepDefintion {
 		updateConfirmationPage.validateStopRevurringVerificationforShip();
 
 	}
-	
+
 	@Then("^User navigates to payment confirmation page and verifies sucessful Stop Recurring for Federal$")
 	public void user_navigates_to_payment_confirmation_page_and_verifies_sucessful_Stop_Recurring_for_Federal()
 			throws Throwable {

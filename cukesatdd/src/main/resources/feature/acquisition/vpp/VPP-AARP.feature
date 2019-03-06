@@ -87,7 +87,6 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
       | zipcode | isMultiCounty | county             | plantype | planName                                     |
       |   80001 | NO            | Los Angeles County | SNP      | UnitedHealthcare Nursing Home Plan (PPO SNP) |
 
-
   @emailandprintplancompare @predators
   Scenario Outline: Verify print and email for <plantype> plan compare page in AARP site
     Given the user is on AARP medicare acquisition site landing page
@@ -121,9 +120,8 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
       | zipcode | plantype | planName                                          |
       |   90210 | MA       | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 
-
-  @validateEyeWearCredit @fastandfurious @Feb_release_2019
-  Scenario Outline: Verify specific Additional Benefits in Plan Details for provided plan
+  @F229349 @validateEyeWearCredit @fastandfurious @Mar_release_2019
+  Scenario Outline: UserStory: <UID> -plan type: <PlanType> - Verify Eyewear Credit Benefits in Plan Details for provided plan
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
@@ -134,20 +132,27 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
     And the user validates the available plans for selected plan types in the AARP site
     Then the user view plan details of the above selected plan in AARP site and validates
       | Plan Name | <planName> |
-    Then the user validates the following Plan details for the plan
+    Then the user validates the following Additional Benefits Plan details for the plan
       | Benefit Type  | <benefitType>  |
       | Expected Text | <expectedText> |
 
     Examples: 
-      | zipcode | isMultutiCounty | county              | plantype | planName                                                 | benefitType | expectedText                           |
-      |   80002 | Yes             | Adams County        | MAPD       | AARP MedicareComplete SecureHorizons Plan 1 (HMO)        | Eyewear     | for frames or / for contacts per       |
-      |   80002 | Yes             | Adams County        | SNP      | UnitedHealthcare Dual Complete (HMO SNP)                 | Eyewear     | for frames or / for contacts per       |
-      |   78006 | Yes             | Kendall County      | MAPD       | AARP MedicareComplete SecureHorizons (HMO)               | Eyewear     | Eyewear has a plan benefit limit up to |
-      |   65058 | Yes             | Miller County       | SNP      | UnitedHealthcare Dual Complete (HMO SNP)                 | Eyewear     | Eyewear has a plan benefit limit up to |
-      |   78006 | Yes             | Kendall County      | SNP      | UnitedHealthcare Dual Complete Choice (Regional PPO SNP) | Eyewear     | No Coverage                            |
-      |   03033 | No              | Hillsborough County | MAPD       | UnitedHealthcare MedicareComplete Assure (PPO)           | Eyewear     | No Coverage                            |
+      | UID                                        | zipcode | isMultutiCounty | county              | plantype | planName                                                 | benefitType | expectedText                                                       |
+      | US1580456 - AARP - Single Eyewear Credit   |   53503 | No              | Iowa County         | MAPD     | UnitedHealthcare MedicareComplete Open (PPO)             | Eyewear     | limit up to $100 per year                                          |
+      | US1580456 - AARP - Single Eyewear Credit   |   96701 | No              | Honolulu County     | MAPD     | AARP MedicareComplete Choice Plan 1 (PPO)                | Eyewear     | limit up to $70 per every 2 years                                  |
+      | US1580456 - AARP - Single Eyewear Credit   |   53533 | No              | Iowa County         | MA       | UnitedHealthcare MedicareComplete Open Essential (PPO)   | Eyewear     | limit up to $100 per year                                          |
+      | US1580456 - AARP - Single Eyewear Credit   |   96701 | No              | Honolulu County     | MA       | AARP MedicareComplete Choice Essential (PPO)             | Eyewear     | limit up to $70 per every 2 years                                  |
+      | US1580456 - AARP - Single Eyewear Credit   |   33880 | No              | Polk County         | SNP      | UnitedHealthcare Assisted Living Plan (PPO SNP)          | Eyewear     | limit up to $150 per year                                          |
+      | US1580456 - AARP - Single Eyewear Credit   |   12202 | No              | Albany County       | SNP      | UnitedHealthcare Nursing Home Plan 1 (PPO SNP)           | Eyewear     | limit up to $150 per every 2 years                                 |
+      | US1580458 - AARP - Multiple Eyewear Credit |   80210 | No              | Denver County       | MAPD     | AARP MedicareComplete SecureHorizons Plan 2 (HMO)        | Eyewear     | limit up to $70 for frames or $105 for contacts per every 2 years  |
+      | US1580458 - AARP - Multiple Eyewear Credit |   92660 | No              | Orange County       | MA       | AARP MedicareComplete SecureHorizons Essential (HMO)     | Eyewear     | limit up to $130 for frames or $125 for contacts per year          |
+      | US1580458 - AARP - Multiple Eyewear Credit |   80920 | No              | El Paso County      | MA       | AARP MedicareComplete SecureHorizons Essential (HMO)     | Eyewear     | limit up to $70 for frames or $105 for contacts per every 2 years  |
+      | US1580458 - AARP - Multiple Eyewear Credit |   33880 | No              | Polk County         | SNP      | UnitedHealthcare Dual Complete RP (Regional PPO SNP)     | Eyewear     | limit up to $70 for frames or $105 for contacts per year           |
+      | US1580458 - AARP - Multiple Eyewear Credit |   80210 | No              | Denver County       | SNP      | UnitedHealthcare Dual Complete (HMO SNP)                 | Eyewear     | limit up to $200 for frames or $200 for contacts per every 2 years |
+      | US1580458 - AARP - No Eyewear Credit       |   78006 | Yes             | Kendall County      | SNP      | UnitedHealthcare Dual Complete Choice (Regional PPO SNP) | Eyewear     | No Coverage                                                        |
+      | US1580458 - AARP - No Eyewear Credit       |   03033 | No              | Hillsborough County | MAPD     | UnitedHealthcare MedicareComplete Assure (PPO)           | Eyewear     | No Coverage                                                        |
 
-  @HomeMultiCOunty @fastandfurious @Feb_release_2019 @F250062 
+  @F250062 @HomeMultiCOunty @fastandfurious @Feb_release_2019 @F250062
   Scenario Outline: Validate Cancel button for Multi Cunty Pop-up on Home Page
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following MultiCounty Zip information in the AARP site
@@ -158,7 +163,7 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
       | MultiCOuntyzipcode |
       |              78006 |
 
-  @SubNavMultiCOunty @fastandfurious @Feb_release_2019 @F250062 
+  @F250062 @SubNavMultiCOunty @fastandfurious @Feb_release_2019 @F250062
   Scenario Outline: Validate Cancel button for Multi Cunty Pop-up on Sub-nav Plan Search
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following MultiCounty Zip in Header Sun Nav in the AARP site
@@ -169,7 +174,7 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
       | MultiCOuntyzipcode |
       |              78006 |
 
-  @VPPChangeLocationMultiCOunty @fastandfurious @Feb_release_2019 @F250062 
+  @F250062 @VPPChangeLocationMultiCOunty @fastandfurious @Feb_release_2019 @F250062
   Scenario Outline: Validate Cancel button for Multi Cunty Pop-up on VPP for Change Location
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -196,3 +201,28 @@ Scenario Outline: To check VPP for specific plans
  Examples: 
       | zipcode |isMultutiCounty|plantype|planName|
       |   55344 |NO|MA|UnitedHealthcare Sync (PPO)|
+
+  @F251983 @validatePCPandSpecialistTiering @fastandfurious @Apr_release_2019
+  Scenario Outline: UserStory: <UID> -plan type: <plantype> - Verify PCP and Specialist Benefits Tiering in Plan Details for provided plan on AARP
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
+    And the user views the plans of the below plan type in AARP site
+      | Plan Type | <plantype> |
+    And the user validates the available plans for selected plan types in the AARP site
+    Then the user view plan details of the above selected plan in AARP site and validates
+      | Plan Name | <planName> |
+    Then the user validates the following Medical Benefits Plan details for the plan
+      | Benefit Type  | <benefitType>  |
+      | Expected Text | <expectedText> |
+
+    Examples: 
+      | UID                                      | zipcode | isMultutiCounty | county          | plantype | planName                                          | benefitType      | expectedText                          |
+      | US1497183 - AARP - Specialist Tiering    |   27021 | YES             | Stokes County   | MA       | AARP MedicareComplete Essential (HMO)             | Specialist Copay | Tier 1: $30 copay / Tier 2: $50 copay |
+      | US1497183 - AARP - Specialist Tiering    |   27021 | YES             | Stokes County   | MAPD     | AARP MedicareComplete Plan 1 (HMO)                | Specialist Copay | Tier 1: $30 copay / Tier 2: $50 copay |
+      | US1497183 - AARP - Specialist Tiering    |   28616 | NO              | Avery County    | MAPD     | AARP MedicareComplete Plan 2 (HMO)                | Specialist Copay | Tier 1: $35 copay / Tier 2: $50 copay |
+      | US1497183 - AARP - Specialist Tiering    |   28701 | NO              | Buncombe County | MAPD     | AARP MedicareComplete Plan 3 (HMO)                | Specialist Copay | Tier 1: $40 copay / Tier 2: $50 copay |
+      | US1497183 - AARP - No Specialist Tiering |   06280 | NO              | Windham County  | MA       | UnitedHealthcare MedicareComplete Essential (HMO) | Specialist Copay | $35 copay                             |
+      | US1497183 - AARP - No Specialist Tiering |   35618 | NO              | Lawrence County | MAPD     | AARP MedicareComplete Plan 1 (HMO)                | Specialist Copay | $40 copay                             |

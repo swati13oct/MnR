@@ -36,10 +36,10 @@ public class PrelimineryQuestionsPage extends UhcDriver{
 	@FindBy(id = "ole-form-back-button")
 	private WebElement BackBtn;
 	
-	@FindBy(xpath = "//*[@class = 'enrollmentAllowed-error-msg req']")
+	@FindBy(xpath = "//*[contains(@class, 'enrollmentAllowed-error-msg req')]")
 	private WebElement RequiredField_ErrorMessage;
 
-	@FindBy(xpath = "//*[@class = 'subques-err-msg req']")
+	@FindBy(xpath = "//*[contains(@class, 'subques-err-msg req')]")
 	private WebElement MedicaidRequired_ErrorMessage;
 
 	@FindBy(xpath = "//*[@id='ole-form-cancel-button' or @id = 'cancel-enrollment']")
@@ -76,7 +76,7 @@ public class PrelimineryQuestionsPage extends UhcDriver{
 	
 
 	//Preliminery Page header
-	@FindBy(xpath = "//*[@class='only-prelim']")
+	@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-prelim')]")
 	private WebElement PrelimPageHeader;
 	
 	//Medicaid Question
