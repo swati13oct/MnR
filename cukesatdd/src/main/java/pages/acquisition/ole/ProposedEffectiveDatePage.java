@@ -34,7 +34,7 @@ public class ProposedEffectiveDatePage extends UhcDriver{
 	private WebElement CancelEnrollmentLink;
 
 	//Page Header
-	@FindBy(xpath = "//*[@class='only-prelim']")
+	@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-prelim')]")
 	private WebElement ProposedEffectiveDatePageHeader;
 
 	@FindBy(xpath = "//*[@type='radio']//following-sibling::label")

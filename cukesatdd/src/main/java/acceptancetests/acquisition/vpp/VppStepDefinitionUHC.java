@@ -657,7 +657,7 @@ public class VppStepDefinitionUHC {
 				.getBean(PageConstants.TeamC_Plan_Compare_Page);
 		comparePlansPage.validatingprintandemail();
 	}
-	
+
 	/**
 	 * @toDo:user validate thank you message in plan compare
 	 */
@@ -711,7 +711,7 @@ public class VppStepDefinitionUHC {
 		}
 	}
 	
-	@Then("^the user validates the following Plan details for the plan in UMS$")
+	@Then("^the user validates the following Additional Benefits Plan details for the plan in UMS$")
 	public void the_user_validates_the_following_Plan_details_for_the_plan(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -730,6 +730,27 @@ public class VppStepDefinitionUHC {
 		boolean validationFlag = vppPlanDetailsPage.validatingAdditionalBenefitTextInPlanDetails(benefitType, expectedText);
 		Assert.assertTrue("Validation failed : Expected text not displayed for Additional Benefit - "+benefitType,validationFlag);
 	}
+	
+	@Then("^the user validates the following Medical Benefits Plan details for the plan in UMS$")
+	public void the_user_validates_the_following_Medical_benefits_Plan_details_for_the_plan(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String benefitType = memberAttributesMap.get("Benefit Type");
+		String expectedText = memberAttributesMap.get("Expected Text");
+		System.out.println("Validating the following Medical benefits : "+benefitType);
+		
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		boolean validationFlag = vppPlanDetailsPage.validatingMedicalBenefitTextInPlanDetails(benefitType, expectedText);
+		Assert.assertTrue("Validation failed : Expected text not displayed for Medical Benefit - "+benefitType,validationFlag);
+	
+	}	
 	
 
 
@@ -971,4 +992,40 @@ public class VppStepDefinitionUHC {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 		}
 
-	}
+	
+		/**
+		 * @toDo:the user is on UHC medicare acquisition site VPP Plan Summary page after hits Campaign URL
+		 */
+		@Given("^the user is on UHC medicare acquisition site VPP Plan Summary page after hits Campaign URL$")
+		public void the_user_on_aarpmedicareplans_Campaign_landing_page() throws Throwable {
+			
+			String County = "St. Louis County";
+			String ZipCode = "63043";
+			String PlanYear = "2019"; 
+			String SiteName =  "UHC_ACQ";
+
+			getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
+			getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, County);
+			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
+			getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
+			
+
+			
+			String OLE_Campaign_URL = "https://stage-uhcmedicaresolutions.uhc.com/health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731#/plan-summary <>";
+			
+			
+			WebDriver wd = getLoginScenario().getWebDriver();
+			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+			VPPPlanSummaryPage vppPlanSummaryPage = new VPPPlanSummaryPage(wd, OLE_Campaign_URL,true);
+			if (vppPlanSummaryPage != null) {
+				getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
+						vppPlanSummaryPage);
+				System.out.println("OLE Campaign Landing Page Displayed");
+				Assert.assertTrue(true);
+			}
+			else
+				Assert.fail("Error in validating the OLE Campaign Landing");
+		}
+		
+		}
