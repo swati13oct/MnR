@@ -36,7 +36,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 	private WebElement CancelEnrollmentLink;
 
 	//Page Header
-	@FindBy(xpath = "//*[@class='only-prelim']")
+	@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-prelim')]")
 	private WebElement PCPPageHeader;
 
 	//Right Rail Elements
@@ -89,7 +89,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 	private WebElement ProviderName;
 	
 	//PCP Page - PCP information display
-	@FindBy(xpath = "//*[@class='provider-info__data ng-star-inserted'][1]")
+	@FindBy(xpath = "//*[@id = 'pcpFullName']//preceding-sibling::*[contains(@class, 'provider-info__data')]")
 	private WebElement ProviderNameDisplay_PCPpage;
 
 	@FindBy(xpath = "//*[contains(text(), 'Are you now seeing or have you recently seen this doctor?')]")
@@ -301,7 +301,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 						System.out.println("Rally Provider Lookup page is not displayed");
 						validation_Flag = false; 
 					}
-				}
+			}
 			}
 			else{
 				System.out.println("Rally Provider Lookup page is not displayed");
