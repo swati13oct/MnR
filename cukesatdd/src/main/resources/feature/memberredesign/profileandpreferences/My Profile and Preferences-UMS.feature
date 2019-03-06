@@ -1,8 +1,8 @@
-@accountProfile  @thePredators @regressionMember
-Feature: C1.2To test Profile and Preferences page .
+@accountProfile  @thePredators @regressionMember 
+Feature: C1.2To test Profile and Preferences page 
 
   
-    @accountProfile1 @ShipEndtoEnd 
+    @accountProfile1 @ShipEndtoEnd @tamzid
 	Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Profile page End to End test for Ship Members
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
@@ -14,7 +14,7 @@ Feature: C1.2To test Profile and Preferences page .
 	 | Plan Type | <planType> |                                                         
     Then the user Clicks on the the Edit phone Link and validates the elements
     | Plan Type | <planType> | 							    
-    Then the user checks the Edit Button changes to Cancel Button                                     
+    Then the user checks the Edit Button changes to Cancel Button for ship                                     
     Then the user checks the functionality of save Button in Phoneeditsection                          
     Then the user validate the functionality of Cancel Button In phoneeditSection                      
     Then the user validate the temporary address section for ship member                                
@@ -25,7 +25,7 @@ Feature: C1.2To test Profile and Preferences page .
 	
 	Examples: 
      |  TID    | planType           |
-    # |  15103  | SHIP_ProfilePref  |
+     |  15103  | SHIP_ProfilePref   |
 	  
 	
   @accountProfile2 @MAPDandMAEndToEnd	
@@ -44,14 +44,14 @@ Feature: C1.2To test Profile and Preferences page .
     Then the user checks the Edit Button changes to Cancel Button                                       
     Then the user checks the functionality of save Button in Phoneeditsection                           
     Then the user validate the functionality of Cancel Button In phoneeditSection                       
-    Then the user validate the temporary address section for ship member                                
+    Then the user validate the temporary address section for  member                                
 	And the user validates see more ways to contact us section                                          
     And the user validates on clicking contact us link it should route to contact us page               
 	Examples: 
      |  TID   | planType  | memberType       |
-     | 15083  | MAPD      | MAPD_Profilepref |
-	# | 15083  | MA       | MA_Profilepref |
-   #  | 15083  | PDP      |
+     #| 15083  | MAPD      | MAPD_Profilepref |
+	# | 15083  | MA        | MA_Profilepref   |
+   #  | 15083  | PDP       | PDP_Profilepref  |
 	  
 
   @accountProfile3 @NegativeTestonHSIDpage 
@@ -69,9 +69,9 @@ Feature: C1.2To test Profile and Preferences page .
     Then the user enters different password in confirm password field and clicks save button and the user should see expected error message - Please enter the same value again 
 	 Examples: 
        |  TID   | planType |
-     #  | 00000  | MAPD	   |
-	 #  | 00000  | MA       |
-     #  | 00000  | PDP      |
+       | 00000  | MAPD	   |
+	   | 00000  | MA       |
+       | 00000  | PDP      |
 	  
 
 
@@ -88,9 +88,9 @@ Feature: C1.2To test Profile and Preferences page .
     Then the user fill different email id in confirm email box from new email address then error message should come          
 	Examples: 
      |  TID   | planType |
-    # | 00000  | MAPD	 |
-	# | 00000  | MA       |
-   #  | 00000  | PDP      |
+     | 00000  | MAPD	 |
+	 | 00000  | MA       |
+     | 00000  | PDP      |
 	
 	
 	
@@ -110,9 +110,9 @@ Feature: C1.2To test Profile and Preferences page .
     Then the user validates the presence of Back to Profile and Preferences links                              
 	 Examples: 
       |  TID    | userType                       |
-    #  | 15311   | MAPD_AARP_GOGreen_Profilepref  |
-    #  | 15312   | MA_AARP_GOGreen_Profilepref    |
-    #  | 15313   | PDP_AARP_GOGreen_Profilepref   |
+      | 15311   | MAPD_AARP_GOGreen_Profilepref  |
+      | 15312   | MA_AARP_GOGreen_Profilepref    |
+      | 15313   | PDP_AARP_GOGreen_Profilepref   |
 	
 	
 	
@@ -130,8 +130,8 @@ Feature: C1.2To test Profile and Preferences page .
 
     Examples: 
       |  TID    | planType | memberType |
-     # | 00000   | MA       | NOKIA      |
-    #  | 00000   | MAPD     | NOKIA      |
+      | 00000   | MA       | NOKIA      |
+      | 00000   | MAPD     | NOKIA      |
 	
 	
 	
@@ -160,8 +160,8 @@ Feature: C1.2To test Profile and Preferences page .
 
     Examples: 
      |  TID    | userType | memberType |
-    # | 15105   | PCP      | PCP_SouthFlorida_ProfilePref     |
-   #  | 15107   | Medica   | Medica_SouthFlorida_ProfilePref  |
+     | 15105   | PCP      | PCP_SouthFlorida_ProfilePref     |
+     | 15107   | Medica   | Medica_SouthFlorida_ProfilePref  |
 	
 	
 	 
@@ -187,7 +187,7 @@ Feature: C1.2To test Profile and Preferences page .
 
     Examples: 
      |  TID    | userType            | memberType |
-    # | 15083   | MAPD_AARPIndividual | AARP       |
+     | 15083   | MAPD_AARPIndividual | AARP       |
 	
 	
 	 
@@ -201,12 +201,12 @@ Feature: C1.2To test Profile and Preferences page .
 
     Examples: 
       |  TID    | userType                       |
-     # | 15311   | MAPD_AARP_GOGreen_Profilepref  |
-     # | 15312   | MA_AARP_GOGreen_Profilepref    |
-     # | 15313   | PDP_AARP_GOGreen_Profilepref   |
-     # | 15314   | MAPD_UHC_GOGreen_Profilepref   |
-     # | 15315   | MA_UHC_GOGreen_Profilepref     |
-     # | 15316   | MAPD_GROUP_GOGreen_Profilepref |
+      | 15311   | MAPD_AARP_GOGreen_Profilepref  |
+      | 15312   | MA_AARP_GOGreen_Profilepref    |
+      | 15313   | PDP_AARP_GOGreen_Profilepref   |
+      | 15314   | MAPD_UHC_GOGreen_Profilepref   |
+      | 15315   | MA_UHC_GOGreen_Profilepref     |
+      | 15316   | MAPD_GROUP_GOGreen_Profilepref |
 	
 	
 #-----------------------  Below All tests are EPMP ( Non regression) tests ---------------------------------------------------	
