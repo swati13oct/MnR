@@ -326,13 +326,17 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
 		checkModelPopup(driver);
 		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 45);
-		if(proactiveChatExitBtn!=null)
+		try{
+			if(proactiveChatExitBtn!=null)
 			jsClickNew(proactiveChatExitBtn);
+			
+			else 
+				Assert.fail("Please check booleanvalue");
+			
+		}catch(Exception e){
+			System.out.println("Proactive chat popup not displayed");
 		}
-		else {
-			Assert.fail("Please check booleanvalue");
 		}
-		
 	}
 	
 	public VPPPlanSummaryPage searchPlans(String zipcode, String countyName) {
