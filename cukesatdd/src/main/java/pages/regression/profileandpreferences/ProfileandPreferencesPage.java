@@ -184,7 +184,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	private WebElement Technicalsupportsection;
 
 	//@FindBy(xpath = "//*[@id='needhelpsectioncontactus']/section/div/div[2]/div/div/div[3]/div/div")
-	@FindBy(xpath = "//*[@id='needhelpsectioncontactus']/section/div/div[2]/div/div/div[2]/div/div")
+	@FindBy(xpath = "//*[@id='needhelpsectioncontactus']/section/div/div[2]/div/div/div[4]/div/div")
 	private WebElement PlanSupportsection;
 
 	public static final String Disclaimerlinkcontent_xpath = ".//*[@id='collapseDisclaimer']";
@@ -1364,6 +1364,12 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	}
 
+	public void validateCancelElementShip() {
+		// TODO Auto-generated method stub
+		driver.findElement(By.xpath("//*[@id='phone']/div[1]/div/div/div/div/div/div/div/a")).click();
+		Assert.assertTrue(phoneTopCancelButton.getText().equalsIgnoreCase("CANCEL"));
+
+	}
 	/**
 	 * @toDo : Validates the elements of the temporary address section
 	 */
