@@ -18,13 +18,13 @@ Feature: P1.6To test Locate a Pharmacy tool in Redesign site
 
     Examples: 
       | TID | planType | memberType         | distance | pharmacyType                |
-      | 15273| MAPD     | IndAARPPharmacyFnR  |       25 | Open 24 hours               |
-      | 15295| PDP      | IndAARPPharmacyFnR  |       25 | E-Prescribing               |
-      | 15296 | MAPD    | GroupPharmacyFnR   |       25 | Long-term care              |
-      | 15279| MAPD     | MedicaPharmacyFnR   |       25 | Home Infusion and Specialty |
-      | 15280| MAPD     | PCPPharmacyFnR      |       25 | Retail Pharmacy (90-day)    |
-      | 15274| PDP      | TexasRxPharmacyFnR  |       25 | Long-term care              |
-      | 15294| MAPD     | IndUHCPharmacyFnR   |       25 | E-Prescribing               |
+      | 15273| MAPD     | IndAARPMAPD_Pharmacylocator|       25 | Open 24 hours               |
+      | 15295| PDP      | IndAARPPDP_Pharmacylocator|       25 | E-Prescribing               |
+      | 15296 | MAPD    | GroupMAPD_Pharmacylocator|       25 | Long-term care              |
+      | 15279| MAPD     | Medica_Pharmacylocator|       25 | Home Infusion and Specialty |
+      | 15280| MAPD     | PCP_Pharmacylocator|       25 | Retail Pharmacy (90-day)    |
+      | 15274| PDP      | TexasRx_Pharmacylocator|       25 | Long-term care              |
+      | 15294| MAPD     | IndMAPDUHC_Pharmacylocator|       25 | E-Prescribing               |
 
   @pharmacylocator2 @ValidateLanguageandZIPcode
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -To verify pharmacy Locator ZIP code entry and for Chinese and Spanish Language in Redesign site
@@ -43,13 +43,13 @@ Feature: P1.6To test Locate a Pharmacy tool in Redesign site
 
     Examples: 
       | TID| planType | memberType         | zipcode | distance |
-      | 15273| MAPD     | IndAARPPharmacyFnR |   10980 |       10 |
-      | 15295| PDP      | IndAARPPharmacyFnR |   10980 |       10 |
-      | 15296| MAPD     | GroupPharmacyFnR   |   61443 |       10 |
-      | 15279| MAPD     | MedicaPharmacyFnR  |   33321 |       10 |
-      | 15280| MAPD     | PCPPharmacyFnR     |   33174 |       10 |
-      | 15274| PDP      | TexasRxPharmacyFnR |   14867 |       25 |
-      | 15294| MAPD     | IndUHCPharmacyFnR  |   29148 |       10 |
+      | 15273| MAPD     | IndAARPMAPD_Pharmacylocator |   10980 |       10 |
+      | 15295| PDP      | IndAARPPDP_Pharmacylocator |   10980 |       10 |
+      | 15296| MAPD     | GroupMAPD_Pharmacylocator   |   61443 |       10 |
+      | 15279| MAPD     | Medica_Pharmacylocator  |   33321 |       10 |
+      | 15280| MAPD     | PCP_Pharmacylocator     |   33174 |       10 |
+      | 15274| PDP      | TexasRx_Pharmacylocator |   14867 |       25 |
+      | 15294| MAPD     | IndMAPDUHC_Pharmacylocator  |   29148 |       10 |
 
   @pharmacylocator3 @ZipCodeErrorMessages
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -zipcode: <zipcode>-To verify error messages for invalid Zipcode in pharmacy locator page in Redesign site
@@ -64,20 +64,20 @@ Feature: P1.6To test Locate a Pharmacy tool in Redesign site
 
     Examples: 
       | TID| planType | memberType         | zipcode | distance |
-      | 15273 | MAPD     | IndAARPPharmacyFnR |         |        5 |
-      | 15273| MAPD     | IndAARPPharmacyFnR |    9999 |       10 |
-      | 15295|PDP      | IndAARPPharmacyFnR |         |        5 |
-      | 15295| PDP      | IndAARPPharmacyFnR |    9999 |       10 |
-      | 15296| MAPD     | GroupPharmacyFnR   |         |        5 |
-      | 15296| MAPD     | GroupPharmacyFnR   |    9999 |       10 |
-      | 15279| MAPD     | MedicaPharmacyFnR  |         |        5 |
-      | 15279| MAPD     | MedicaPharmacyFnR  |    9999 |       10 |
-      | 15280| MAPD     | PCPPharmacyFnR     |         |        5 |
-      | 15280| MAPD     | PCPPharmacyFnR     |    9999 |       10 |
-      | 15274| PDP      | TexasRxPharmacyFnR |         |        5 |
-      | 15274 |PDP      | TexasRxPharmacyFnR |    9999 |       10 |
-      | 15294| MAPD     | IndUHCPharmacyFnR  |         |        5 |
-      | 15294| MAPD     | IndUHCPharmacyFnR  |    9999 |       10 |
+      | 15273 | MAPD     | IndAARPMAPD_Pharmacylocator|         |        5 |
+      | 15273| MAPD     | IndAARPMAPD_Pharmacylocator |    9999 |       10 |
+      | 15295|PDP      | IndAARPPDP_Pharmacylocator |         |        5 |
+      | 15295| PDP      | IndAARPPDP_Pharmacylocator |    9999 |       10 |
+      | 15296| MAPD     | GroupMAPD_Pharmacylocator   |         |        5 |
+      | 15296| MAPD     | GroupMAPD_Pharmacylocator   |    9999 |       10 |
+      | 15279| MAPD     | Medica_Pharmacylocator  |         |        5 |
+      | 15279| MAPD     | Medica_Pharmacylocator |    9999 |       10 |
+      | 15280| MAPD     | PCP_Pharmacylocator     |         |        5 |
+      | 15280| MAPD     | PCP_Pharmacylocator     |    9999 |       10 |
+      | 15274| PDP      | TexasRx_Pharmacylocator |         |        5 |
+      | 15274 |PDP      | TexasRx_Pharmacylocator |    9999 |       10 |
+      | 15294| MAPD     | IndMAPDUHC_Pharmacylocator  |         |        5 |
+      | 15294| MAPD     | IndMAPDUHC_Pharmacylocator  |    9999 |       10 |
 
   @pharmacylocator4 @NegativeScenario
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -To verify pharmacy link is not displayed to MA/SHIP member in Redesign site
@@ -88,6 +88,6 @@ Feature: P1.6To test Locate a Pharmacy tool in Redesign site
 
     Examples: 
      | TID | planType | memberType         |
-     | 15272 | MA       | IndAARPPharmacyFnR |
-     | 15272 | SHIP     | IndPharmacyFnR     |
-     | 15272 | MA       | IndUHCPharmacyFnR  |
+     | 15272 | MA       | IndAARPMA_Pharmacylocator |
+     | 15272 | SHIP     | IndSHIP_Pharmacylocator     |
+     | 15272 | MA       | IndUHCMA_Pharmacylocator |
