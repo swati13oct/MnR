@@ -1620,9 +1620,11 @@ public class AccountHomePage extends UhcDriver {
 				/*if(medicalEobLink.isDisplayed()){
 					medicalEobLink.click();
 				}else{ */
-					scrollToView(medicalEobLinkOther);
-				  medicalEobLinkOther.click();
+					//scrollToView(medicalEobLinkOther);
+				  //medicalEobLinkOther.click();
 				//}
+				
+				 startNew("https://stage-medicare.uhc.com/member/eob.html");
 			}
 		} else {
 			System.out.println(
