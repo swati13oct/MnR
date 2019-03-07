@@ -19,9 +19,9 @@ Feature: V1.1To This test scenario is to validate that ID card is accessible for
   # Added MAPD amd PDP user,  MA user was not provided  , also had to create a scenario for group user
     Examples: 
   | TID     | plantype  | memberType    | medicalPlan                                                        | memberId      | memberName       | dob                         | covergaeStart | coverageStatus |
-  |  15110  | PDP       | IDCardmember  | AARP MedicareRx Walgreens (PDP)                                    | 0197340581    | D'Andra D'Ndra   | Subscriber - DOB 03/07/1953 | 04/01/18      | Active         |
+  |  15110  | PDP       | IDCardmember  | AARP MedicareRx Saver Plus (PDP)                                   | 8258077149    | Cdda Ecafbd      | Subscriber - DOB 12/31/1939 | 01/01/13      | Active         |
   |  15109  | MA        | IDCardmember  | UnitedHealthcare MedicareComplete Choice Essential (Regional PPO)  | 979180267-00  | Cbbbaebe Cdcefdac| Subscriber - DOB 02/29/1944 | 01/01/19      | Active         |
-  |	 15109  | MAPD      | IDCardmember  | UnitedHealthcare MedicareComplete Choice (PPO)                     | 908949511-00  | Bcdbc Abaafb     | Subscriber - DOB 03/23/1948 | 01/01/19      | Active         | 
+  |	 15109  | MAPD      | IDCardmember  | UnitedHealthcare MedicareComplete Choice (PPO)                     | 908949511-00  | Kylene Pietzsch  | Subscriber - DOB 03/23/1948 | 01/01/19      | Active         | 
      
   @idCards2 @regressionIDCards_Group_User @regressionMember
   Scenario Outline: TID: <TID> -plan: <plantype> -memberType: <memberType> - Verify the fields in ID card page for group user
