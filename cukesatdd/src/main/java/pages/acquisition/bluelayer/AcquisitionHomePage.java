@@ -121,6 +121,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(id = "ghn_lnk_2")
 	private WebElement ourPlans;
+	
+	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
+	private WebElement OurPlansLink1;
 
 	@FindBy(id = "ghn_lnk_1")
 	private WebElement Home;
@@ -130,6 +133,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(id = "findazip_box")
 	private WebElement zipCodeSearchPopup;
+	
+	@FindBy(id = "nav-zipcode")
+	private WebElement OurPlans_zipfield;
+	
+	@FindBy(xpath = "//*[@id = 'nav-zipcode']/following-sibling::button[@class = 'zip-button']")
+	public WebElement OurPlans_viewPlansButton;
 
 	@FindBy(xpath = "//div[@id='findazip_box']/div/div/div/h4")
 	private WebElement zipCodeSearchPopupHeading;
@@ -210,12 +219,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "(//*[@class='zip-button'])[2]")
 	private WebElement GoButton;
+
+	@FindBy(xpath="//div[contains(@class,'proactive-offer__close')]")
+	public static List<WebElement> proactiveChatExistBtn;
 	
 	@FindBy(xpath = "//div[@class='overview-main']/h2")
 	private WebElement vppTop;
-	
-	@FindBy(xpath="//div[contains(@class,'proactive-offer__close')]")
-	public static List<WebElement> proactiveChatExistBtn;
 	
 	@FindBy(id = "cobrowse-disclaimer")
 	private List<WebElement> requestAssistanceModal;
@@ -232,6 +241,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	/* LearnAboutMedicare link */
 	@FindBy(xpath = "//*[@id='ghn_lnk_3']")
 	private WebElement lnkLearnAboutMedicare;
+	
+	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button proactive-offer__close main-background-color second-color')]")
+	public static WebElement proactiveChatExitBtn;
 
 	public JSONObject homePageDisclaimerJson;
 	public JSONObject homePageDisclaimerHideJson;
@@ -255,6 +267,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public JSONObject cobrowseJson;
 	private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
 	private static String UMS_ACQISITION_OFFLINE_PAGE_URL = MRConstants.UHC_URL_OFFLINE;
+	private static String UMS_ACQISITION_PROD_PAGE_URL = MRConstants.UHCM_URL_PROD;	
+	private static String AARP_ACQISITION_PROD_PAGE_URL = MRConstants.AARP_URL_PROD;	
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
 	private static String AARP_ACQISITION_OFFLINE_PAGE_URL = MRConstants.AARP_URL_OFFLINE;
 
@@ -286,6 +300,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		if (alreadyOnSite) {
 			
 		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("Current page URL: "+driver.getCurrentUrl());
 		checkModelPopup(driver);
 		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 45);
 		if(proactiveChatExistBtn.size()!=0)
@@ -333,22 +348,34 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public void openAndValidate() {
 		if (MRScenario.environment.equals("offline")) {
 			startNew(UMS_ACQISITION_OFFLINE_PAGE_URL);
+		}else if (MRScenario.environment.equals("prod")) {
+			startNew(UMS_ACQISITION_PROD_PAGE_URL);
 		} else {
 			startNew(UMS_ACQISITION_PAGE_URL);
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
-		checkModelPopup(driver);
+		System.out.println("Current page URL: "+driver.getCurrentUrl());
 		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
+		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
+		try{
+			if(proactiveChatExitBtn.isDisplayed())
+				jsClickNew(proactiveChatExitBtn);
+		}catch(Exception e){
+			System.out.println("Proactive chat popup not displayed");
+	}
 	}
 	
 	
 	public void openAndValidate(String Ulayer) {
 		if (MRScenario.environment.equals("offline")) {
-			startNew(AARP_ACQISITION_PAGE_URL);
+			startNew(AARP_ACQISITION_OFFLINE_PAGE_URL);
+		}else if (MRScenario.environment.equals("prod")) {
+			startNew(AARP_ACQISITION_PROD_PAGE_URL);
 		} else {
 			startNew(AARP_ACQISITION_PAGE_URL);
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("Current page URL: "+driver.getCurrentUrl());
 		checkModelPopup(driver);
 		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
 	}
@@ -1010,7 +1037,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		sendkeys(zipCodeField, zipcode);
 		viewPlansButton.click();
-
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
 		}

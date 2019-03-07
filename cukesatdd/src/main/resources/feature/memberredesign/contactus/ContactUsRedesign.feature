@@ -154,3 +154,14 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
      | 15210 | SSP      | Terminated_Group_SSP            |
      | 15214 | MA       | Terminated_Individual_MA_COSMOS |
      | 15217 | MAPD     | Terminated_Individual_MAPD_NICE |
+ @Connectormodel
+  Scenario Outline: Verify Secure Email Us Widget section in contact us redesign page
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <plantype>   |
+      | Member Type | <memberType> |
+    When the user navigates to contact us page in UHC site
+    Then The user validates the connector model group TFN number
+
+    Examples: 
+      | plantype | memberType          |
+      | PDP      | ConnectorModelGroup |

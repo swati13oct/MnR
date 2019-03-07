@@ -14,6 +14,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.vppforaep.AepVppPlanSummaryPage;
 import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPage;
@@ -212,6 +214,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "(//div[contains(@class,'mabenefittable')]//li[contains(@class,'ng-scope')]/span[contains(text(),'Estimated Annual Drug Cost:')]/following-sibling::span[not(contains(@class,'ng-hide'))])[1]")
 	private WebElement estimatedAnnualDrigCostValue;
 	
+	@FindBy(xpath = "(.//*[@id='globalContentIdForSkipLink']//div[contains(@class,'module module-aside no-med-supp rigntrailwidget')])[2]")
+	private WebElement promoWidject;
+	
 	public VPPPlanSummaryPage(WebDriver driver) {
 		super(driver);
 		
@@ -226,7 +231,21 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	}
 
-	
+	public VPPPlanSummaryPage(WebDriver driver, String OLE_Campaign_URL,boolean flag) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		start(OLE_Campaign_URL);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		openAndValidate();
+
+		// TODO Auto-generated constructor stub
+	}
+
 
 	private boolean getSpecificPlanSummary(WebElement element, String planName) {
 		if (element.getText().contains(planName)) {
@@ -693,6 +712,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public PlanDetailsPage navigateToPlanDetails(String planName, String planType) {
+		CommonUtility.checkPageIsReadyNew(driver);
 		
 		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {	
 			WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
@@ -1067,6 +1087,22 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return null;
 	}
 
+	public VPPPlanSummaryPage validatePromoWidjetAArp(String planName) {
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View plan')]"));
+		validateNew(MAmoreDetailsLink);
+		validateNew(promoWidject);
+		
+		return new VPPPlanSummaryPage(driver);
+		
+	}
+
+	
 
 }
 

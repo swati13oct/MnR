@@ -1417,7 +1417,7 @@ public class OneTimePaymentAarpStepDefintion {
 	public void the_user_clicks_on_Premium_Payments_on_Header() throws Throwable {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		PaymentHistoryPage paymentHistoryPage = accountHomePage.navigateTooPaymentHistoryPage();
+		PaymentHistoryPage paymentHistoryPage = accountHomePage.navigateToPaymentHistoryPage();
 		if (paymentHistoryPage != null) {
 			getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
 			System.out.println("User is on Payment overview screen");
@@ -1641,30 +1641,30 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 	}
 
-	  @Given("^user clicks on Stop Automatic payments and clicks on next for Federal$")
+	@Given("^user clicks on Stop Automatic payments and clicks on next for Federal$")
 	public void user_clicks_on_Stop_Automatic_payments_and_clicks_on_next_for_Federal() throws Throwable {
 		UpdateRecurringPage updateRecurringPage = (UpdateRecurringPage) getLoginScenario()
 				.getBean(PageConstants.Update_Recurring_Page);
 		UpdateReviewPage updateReviewPage = updateRecurringPage.selectCancelAutomaticPaymentsAndClicksNext();
-		if (updateReviewPage!= null){
+		if (updateReviewPage != null) {
 			getLoginScenario().saveBean(PageConstants.Update_Review_Page, updateReviewPage);
-			System.out.println("User is on Review Recurring Payments screen"); 
+			System.out.println("User is on Review Recurring Payments screen");
 		}
-		
+
 	}
-	
+
 	@Then("^user navigates to Review Payment Method Update screen for Stop Recurring Payments for Federal$")
-	public void user_navigates_to_Review_Payment_Method_Update_screen_for_Stop_recurring_payments_page_for_Federal() throws Throwable {
+	public void user_navigates_to_Review_Payment_Method_Update_screen_for_Stop_recurring_payments_page_for_Federal()
+			throws Throwable {
 		UpdateReviewPage updateReviewPage = (UpdateReviewPage) getLoginScenario()
 				.getBean(PageConstants.Update_Review_Page);
-		UpdateConfirmationPage updateConfirmationPage = updateReviewPage.selectAgreeAndClickOnContinueforStopRecurringForFed();
-		if (updateConfirmationPage!= null){
+		UpdateConfirmationPage updateConfirmationPage = updateReviewPage
+				.selectAgreeAndClickOnContinueforStopRecurringForFed();
+		if (updateConfirmationPage != null) {
 			getLoginScenario().saveBean(PageConstants.Update_Confirmation_Page, updateConfirmationPage);
 			System.out.println("User is on Confirmation Payment Method Update Page Payments screen");
 		}
-		}
-		
-		
+	}
 
 	@Given("^user selects checking Account on Update Automatic recurring payments page and Click on Next$")
 	public void user_selects_checking_Account_on_Update_Automatic_recurring_payments_page_and_Click_on_Next()
@@ -1813,10 +1813,10 @@ public class OneTimePaymentAarpStepDefintion {
 	public void user_selects_Stop_Automatic_Recurring_Payments_and_Click_on_Next() throws Throwable {
 		UpdateRecurringPage updateRecurringPage = (UpdateRecurringPage) getLoginScenario()
 				.getBean(PageConstants.Update_Recurring_Page);
-		PaymentsFormPage paymentsFormPage = updateRecurringPage.selectCheckingAccountAndClickOnNext();
-		if (paymentsFormPage != null) {
-			getLoginScenario().saveBean(PageConstants.Payments_Form_Page, paymentsFormPage);
-			System.out.println("User is on Form Page for Checking account");
+		UpdateReviewPage updateReviewPage = updateRecurringPage.selectStopRecurringClickOnNextforShip();
+		if (updateReviewPage != null) {
+			getLoginScenario().saveBean(PageConstants.Update_Review_Page, updateReviewPage);
+			System.out.println("User is on Update review page");
 		}
 	}
 
@@ -1840,7 +1840,7 @@ public class OneTimePaymentAarpStepDefintion {
 		updateConfirmationPage.validateStopRevurringVerificationforShip();
 
 	}
-	
+
 	@Then("^User navigates to payment confirmation page and verifies sucessful Stop Recurring for Federal$")
 	public void user_navigates_to_payment_confirmation_page_and_verifies_sucessful_Stop_Recurring_for_Federal()
 			throws Throwable {
@@ -1849,4 +1849,103 @@ public class OneTimePaymentAarpStepDefintion {
 		updateConfirmationPage.validateStopRevurringVerificationforFed();
 
 	}
+	// vvv note: added for F247601 Payment History SHIP testing
+	@Then("^user validates payment history section header exists$")
+	public void user_validates_payment_history_section_header_exists() {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		paymentHistoryPage.validatePaymentHistoryHeaderExists();
+	}
+	
+	@Then("^user validates date range default is Last 90 days$")
+	public void user_validates_date_range_default_is_Last_90_days() {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		paymentHistoryPage.validatePaymentHistoryDateRageDefault();
+	}
+
+	@Then("^user validates default payment status selected option$")
+	public void user_validates_Paid_status_check_box_is_checked() {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		paymentHistoryPage.validateDefaultPaymentStatusOption();
+	}
+	
+	@Then("^user validates payment table includes the most recent Payment Date information$")
+	public void user_validates_payment_table_includes_the_most_recent_Payment_Date_information() {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		paymentHistoryPage.validateDefaultPaymentTable();
+	}
+
+	@Then("^user validates total date range options available$")
+	public void user_validates_total_date_range_options_available() {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		paymentHistoryPage.validateTotalDateRangeOptions();
+	}
+	
+	@Then("^user validates nonCustomSearch date range options$")
+	public void user_validates_nonCustomSearch_date_range_options() {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		paymentHistoryPage.validateNonCustomeSearchDateRangeOptions();
+	}
+	
+	@Then("^user validates LEARN MORE ABOUT YOUR PAYMENT HISTORY link$")
+	public void user_validates_LEARN_MORE_ABOUT_YOUR_PAYMENT_HISTORY_link() {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		paymentHistoryPage.validateLeanrMoreLink();
+	}
+	
+	@Then("^user validates custom search with valid input$")
+	public void user_validates_custom_search_with_valid_input() {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		paymentHistoryPage.validateValidCustomSearch();
+	}
+	
+	@Then("^user validates error message for custom search with to date earlier than from date$")
+	public void user_validates_error_message_for_custom_search_with_to_date_earlier_than_from_date() {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		paymentHistoryPage.validateErrorToEarlierThanFromCustomSearch();
+	}
+	
+	@Then("^user validates error message for custom search with no dates selected$")
+	public void user_validates_error_message_for_custom_search_with_no_dates_selected() {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		paymentHistoryPage.validateErrorNoDateSelectedCustomSearch();
+	}
+
+	@Then("^user validates error message for custom search with From and To date more than 24 months apart$")
+	public void user_validates_error_message_for_custom_search_with_From_and_To_date_more_than_24_months_apart() {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		paymentHistoryPage.validateErrorMoreThan24MonthsApartSelectedCustomSearch();
+	}
+
+	@Then("^user validates only paid rows display when paid selected$")
+	public void user_validates_only_paid_rows_display_according_to_selected_checkbox() {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		paymentHistoryPage.validateOnlyPaidOptionSelected();
+	}
+	
+	@Then("^user validates only unpaid rows display when unpaid selected$")
+	public void user_validates_only_unpaid_rows_display_according_to_selected_checkbox() {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		paymentHistoryPage.validateOnlyUnpaidOptionSelected();
+	}	
+	
+	@Then("^user expands show payment history for supplement insurance plan section$")
+	public void user_expands_show_payment_history_for_supplement_insurance_plan_section() {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		paymentHistoryPage.validatePaymentHistoryForSupplementInsurancePlan();
+	}	
+	// ^^^ note: added for F247601 Payment History SHIP testing	
 }

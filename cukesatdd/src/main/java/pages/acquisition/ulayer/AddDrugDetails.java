@@ -13,7 +13,7 @@ public class AddDrugDetails extends UhcDriver {
 
 	public JSONObject adddrugdetailsJson;
 
-	@FindBy(xpath = "//div[contains(@class,'add-drug-slide-header')]/span[@class='subtitle'][not (contains(@class,'ng-hige'))]")
+	@FindBy(id = "addheadDetails_id")
 	public WebElement addDrugDetailsPageHeading;
 
 	@FindBy(id = "drug-dosage-button")

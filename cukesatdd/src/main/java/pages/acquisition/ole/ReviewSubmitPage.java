@@ -41,7 +41,7 @@ public class ReviewSubmitPage extends UhcDriver{
 	private WebElement CancelEnrollmentLink;
 
 	//Page Header
-	@FindBy(xpath = "//*[@class='only-review']")
+	@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-review')]")
 	private WebElement PageHeader;
 
 	//Right Rail Elements
@@ -62,10 +62,10 @@ public class ReviewSubmitPage extends UhcDriver{
 	private WebElement PremiumDisplay;
 
 	//Plan Details Display
-	@FindBy(xpath = "//*[@class = 'plan-information']//h3")
+	@FindBy(xpath = "//*[contains(@class, 'plan-information')]//h3")
 	private WebElement PlanYear_NameDisplay;
 
-	@FindBy(xpath = "//*[@class = 'plan-information']//li")
+	@FindBy(xpath = "//*[contains(@class, 'plan-information')]//li")
 	private WebElement PlanZipDisplay;
 
 	//Member Details Display
@@ -105,19 +105,19 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(), 'Is your mailing address the same as')]//following-sibling::*")
 	private WebElement MailingQiuestionDisplay;
 	
-	@FindBy(xpath = "//*[contains(text(), 'mailing address')]/ancestor::*[@class = 'review-step']//*[contains(text(), 'State')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'mailing address')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'State')]//following-sibling::*")
 	private WebElement MailStateDisplay;
 	
 	@FindBy(xpath = "//*[contains(text(), 'Zip Code')]//following-sibling::*")
 	private WebElement MailZipDisplay;
 	
 	//Submit Application Disclaimer
-	@FindBy(xpath = "//*[@class = 'submit-disclaimer']")
+	@FindBy(xpath = "//*[contains(@class, 'submit-disclaimer')]")
 	private WebElement Submit_Disclaimer;
 	
 	@FindBy(xpath = "//*[@class = 'default-ul']")
 	private WebElement Enrollment_Disclaimer_Text;
-
+	
 	
 	public ReviewSubmitPage(WebDriver driver) {
 		super(driver);

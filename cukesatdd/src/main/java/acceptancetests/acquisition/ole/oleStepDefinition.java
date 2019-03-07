@@ -1836,28 +1836,32 @@ public class oleStepDefinition {
 			}
 		}
 	}
+
 	@Then("^the user clicks on Submit Enrollment to complete enrollment$")
 	public void the_user_clicks_on_Submit_Enrollment_to_complete_enrollment() throws Throwable {
 		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
-		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		if(alreadyEnrolled_Flag){
-			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true")) ? true : false;
+		if (alreadyEnrolled_Flag) {
+			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+					+ alreadyEnrolled + "  :  " + alreadyEnrolled_Flag + " - Validation Passed");
+			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG, "true");
 			Assert.assertTrue(true);
-		}
-		else{
-			ReviewSubmitPage reviewSubmitPage = (ReviewSubmitPage) getLoginScenario().getBean(OLE_PageConstants.OLE_REVIEW_SUBMIT_PAGE);
-			OLEconfirmationPage oleConfirmationPage = reviewSubmitPage.submitEnrollment();
-			if (oleConfirmationPage != null) {
+		} else {
+			if (!(MRScenario.environment.equalsIgnoreCase("offline")
+					|| MRScenario.environment.equalsIgnoreCase("prod"))) {
+				ReviewSubmitPage reviewSubmitPage = (ReviewSubmitPage) getLoginScenario()
+						.getBean(OLE_PageConstants.OLE_REVIEW_SUBMIT_PAGE);
+				OLEconfirmationPage oleConfirmationPage = reviewSubmitPage.submitEnrollment();
+				if (oleConfirmationPage != null) {
 
-				getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE,
-						oleConfirmationPage);
-				System.out.println("OLE Confirmation Page is Displayed");
-			}
-			else{
-				getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE,
-						oleConfirmationPage);
-				System.out.println("OLE Confirmation Page is NOT Displayed : OLE Submission Failed");
+					getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE, oleConfirmationPage);
+					System.out.println("OLE Confirmation Page is Displayed");
+				} else {
+					getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE, oleConfirmationPage);
+					System.out.println("OLE Confirmation Page is NOT Displayed : OLE Submission Failed");
+				}
+			} else {
+				System.out.println("Skipping the submit functionality in Offline-Prod environment");
 			}
 		}
 	}
@@ -1865,41 +1869,43 @@ public class oleStepDefinition {
 	@Then("^the user validates Plan and Member Details on Confirmation Page$")
 	public void the_user_validates_Plan_and_Membber_Details_on_Confirmation_Page() throws Throwable {
 		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
-		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		if(alreadyEnrolled_Flag){
-			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true")) ? true : false;
+		if (alreadyEnrolled_Flag) {
+			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+					+ alreadyEnrolled + "  :  " + alreadyEnrolled_Flag + " - Validation Passed");
+			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG, "true");
 			Assert.assertTrue(true);
-		}
-		else{
-			OLEconfirmationPage oleConfirmationPage = (OLEconfirmationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
-			if (oleConfirmationPage != null) {
+		} else {
+			if (!(MRScenario.environment.equalsIgnoreCase("offline")
+					|| MRScenario.environment.equalsIgnoreCase("prod"))) {
+				OLEconfirmationPage oleConfirmationPage = (OLEconfirmationPage) getLoginScenario()
+						.getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
+				if (oleConfirmationPage != null) {
 
-				Map<String, String> DetailsMap = new HashMap<String, String>();
-				DetailsMap.put("Plan Name", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME));
-				DetailsMap.put("Plan Year", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR));
-				DetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
-				DetailsMap.put("County", (String) getLoginScenario().getBean(oleCommonConstants.OLE_COUNTY));
-				DetailsMap.put("Plan Premium", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM));
+					Map<String, String> DetailsMap = new HashMap<String, String>();
+					DetailsMap.put("Plan Name", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME));
+					DetailsMap.put("Plan Year", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR));
+					DetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
+					DetailsMap.put("County", (String) getLoginScenario().getBean(oleCommonConstants.OLE_COUNTY));
+					DetailsMap.put("Plan Premium",
+							(String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM));
 
-
-				boolean Validation_Status = oleConfirmationPage.validate_plan_details(DetailsMap);
-				if(Validation_Status){
-					System.out.println("OLE Confirmation Page : All Plan Details Validated");
-					getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE,
-							oleConfirmationPage);
-					Assert.assertTrue(true);
+					boolean Validation_Status = oleConfirmationPage.validate_plan_details(DetailsMap);
+					if (Validation_Status) {
+						System.out.println("OLE Confirmation Page : All Plan Details Validated");
+						getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE, oleConfirmationPage);
+						Assert.assertTrue(true);
+					} else {
+						System.out.println("Review and Submit Page : All Plan and Member Details  NOT validated");
+						Assert.fail("Review and Submit Page : All Plan and Member Details  NOT validated");
+					}
+				} else {
+					getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE, oleConfirmationPage);
+					System.out.println("OLE Confirmation Page is NOT Displayed : OLE Submission Failed");
+					Assert.fail("OLE Confirmation Page is NOT Displayed : OLE Submission Failed");
 				}
-				else{
-					System.out.println("Review and Submit Page : All Plan and Member Details  NOT validated");
-					Assert.fail("Review and Submit Page : All Plan and Member Details  NOT validated");
-				}
-			}
-			else{
-				getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE,
-						oleConfirmationPage);
-				System.out.println("OLE Confirmation Page is NOT Displayed : OLE Submission Failed");
-				Assert.fail("OLE Confirmation Page is NOT Displayed : OLE Submission Failed");	
+			} else {
+				System.out.println("Skipping the Confirmation functionality in Offline-Prod/Prod environment");
 			}
 		}
 	}

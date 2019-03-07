@@ -931,9 +931,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 		AddNewDrugModal addNewDrugModal = clickOnAddDrug();
 		addNewDrugModal.searchDrugWithoutAutoComplete(drug);
-		addNewDrugModal.closeModalWindow();
+		/*addNewDrugModal.closeModalWindow();
 		clickOnAddDrug();
-		addNewDrugModal.searchDrugWithAutoComplete(drug);
+		addNewDrugModal.searchDrugWithAutoComplete(drug);*/
 		return new AddDrugDetails(driver);
 	}
 

@@ -716,6 +716,12 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	
 	@FindBy(xpath="//h1[contains(text(),'Account Settings')]")
 	private WebElement pageheading;
+	
+	@FindBy(id = "temporaryAddress")
+	private List<WebElement> tempAddressSectionPresent;
+
+	@FindBy(id = "mailingAddress")
+	private List<WebElement> mailingAddressSectionPresent;
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 
@@ -2339,4 +2345,42 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	 {
 			Assert.assertTrue("Claims Table is not present in Claims Details Page", false);
 	}*/
+	
+
+	public void validatePhoneSectionWithoutEditAllowed() {
+		// TODO Auto-generated method stub
+		validateNew(phoneSection);
+		Assert.assertTrue("Edit Button is visible on the phone section", !phoneEditButton.isDisplayed());
+
+	}
+
+	public void validateTemporaryAddressSectionWithoutEditAllowed() {
+		// TODO Auto-generated method stub
+
+		if (tempAddressSectionPresent.size() > 0) {
+			if (addTempAddressLink.isDisplayed()) {
+				Assert.fail("Add Button is visible on the temp address section");
+			}
+
+			if (editTempAddressLink.isDisplayed()) {
+				Assert.fail("Edit Button is visible on the temp address section");
+			}
+
+		}
+	}
+
+	public void validateMailingAddressSectionWithoutEditAllowed() {
+		// TODO Auto-generated method stub
+
+		if (mailingAddressSectionPresent.size() > 0) {
+			if (mailingAddressAddButton.isDisplayed()) {
+				Assert.fail("Add Button is visible on the mailing address section");
+			}
+
+			if (mailingAddressEditLink.isDisplayed()) {
+				Assert.fail("Edit Button is visible on the mailing address section");
+			}
+
+		}
+	}
 	}
