@@ -633,7 +633,7 @@ public class VppPlanSummaryStepDefinitionAARP {
 		
 		PlanDetailsPage planDetailsPage = (PlanDetailsPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-		pages.acquisition.bluelayer.VPPPlanSummaryPage plansummaryPage = planDetailsPage.navigateBackToPlanSummaryPage();
+		VPPPlanSummaryPage plansummaryPage = planDetailsPage.navigateBackToPlanSummaryPage();
         //VPPPlanSummaryPage plansummaryPage = planDetailsPage.navigateBackToPlanSummaryPage(); 
 		
 		//VPPPlanSummaryPage plansummaryPage = planDetailsPage.navigateBackToPlanSummaryPage();
@@ -769,7 +769,7 @@ public class VppPlanSummaryStepDefinitionAARP {
 	  VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE); 
 	  String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
-	  plansummaryPage.clicksOnIsProviderCovered(planName);  
+	  plansummaryPage.ValidateclicksOnIsProviderCovered(planName);  
   }
   }
 
