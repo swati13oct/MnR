@@ -14,9 +14,9 @@ import cucumber.api.CucumberOptions;
 
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
 jsonReport = "target/cucumber-RunMRATDDfastandfuriousAcquisitionTest.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDfastandfuriousAcquisitionTest")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition.vpp", "acceptancetests.acquisition.pharmacylocator","acceptancetests.acquisition.ole"  },
-features = { "src/main/resources/feature/acquisition/vpp", "src/main/resources/feature/acquisition/pharmacylocator", "src/main/resources/feature/acquisition/ole" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDfastandfuriousAcquisitionTest.json" }, tags = { "@validatePCPandSpecialistTiering" })
-//@validateEyeWearCredit,@F250062,@validatePCPandSpecialistTiering
-public class RunMRATDDfastandfuriousAcquisitionTest { 
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition.vpp", "acceptancetests.acquisition.ole"  },
+features = { "src/main/resources/feature/acquisition/vpp","src/main/resources/feature/acquisition/ole" }, plugin = {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDfastandfuriousAcquisitionTest.json" }, tags = { "@OLE_Regression,@CampaignURL_OLE" })
+//@validateEyeWearCredit,@F250062, @OLE_Regression,
+public class RunMRATDDAcquisitionRegressionOLE { 
 }
