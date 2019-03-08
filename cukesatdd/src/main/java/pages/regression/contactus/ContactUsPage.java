@@ -191,6 +191,9 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(id="question-email")
 	private WebElement email_EmailForm;
 	
+	@FindBy(xpath="(.//*[@id='globalContentIdForSkipLink']//div[@ng-controller='phoneHoursAddressCtrl'])[2]//a[@ng-href='tel:1-844-355-3359']")
+	private WebElement connectorModelTFN;
+	
 	@FindBy(id="question-email-confirm")
 	private WebElement confirmEmail_EmailForm;
 	
@@ -211,9 +214,6 @@ public class ContactUsPage extends UhcDriver{
 	
 	@FindBy(css="div#confrmmatchheightonce div.message-block-header p>b")
 	private WebElement successHeader_EmailForm;
-	
-	@FindBy(xpath="(.//*[@id='globalContentIdForSkipLink']//div[@ng-controller='phoneHoursAddressCtrl'])[2]//a[@ng-href='tel:1-844-355-3359']")
-	private WebElement connectorModelTFN;
 	
 	public JSONObject contactUsJson;
 	
@@ -677,7 +677,7 @@ public class ContactUsPage extends UhcDriver{
 	 * Validate the widgets which should not present for the terminated members
 	 */
 	public void validateWidgetsForTerminatedMembers(){
-		/* tbd
+		/*
 		System.out.println("ready to assert check");
 		getStartedButton.click();
 		driver.navigate().back();
@@ -720,4 +720,5 @@ public class ContactUsPage extends UhcDriver{
 			
 		}
 	}
+
 }

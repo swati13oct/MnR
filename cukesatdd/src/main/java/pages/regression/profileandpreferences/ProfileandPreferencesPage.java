@@ -55,13 +55,13 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(id = "closeButton")
 	private WebElement FeedbackModal;
 
-	@FindBy(xpath = ".//*[@id='tab-1']//div[@class='col-md-12']/h2")
+	@FindBy(xpath = "//*[@id='tab-1']/div[1]/div/h3")
 	private WebElement planName;
 
-	@FindBy(className = "bold atdd-profile-membername")
+	@FindBy(xpath = "//*[@id='tab-1']/div[1]/div/p[1]/span")
 	private WebElement memberName;
 
-	@FindBy(className = "bold atdd-profile-membernumber")
+	@FindBy(xpath = "//*[@id='tab-1']/div[1]/div/p[2]")
 	private WebElement memberId;
 
 	//@FindBy(xpath = "//*[@class='account_settings form__content']/div/flex/flex/flex-content[2]/p")
@@ -183,7 +183,8 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(className = "atdd-techsupport-block")
 	private WebElement Technicalsupportsection;
 
-	@FindBy(className = "atdd-plansupport-block")
+	//@FindBy(xpath = "//*[@id='needhelpsectioncontactus']/section/div/div[2]/div/div/div[3]/div/div")
+	@FindBy(xpath = "//*[@id='needhelpsectioncontactus']/section/div/div[2]/div/div/div[4]/div/div")
 	private WebElement PlanSupportsection;
 
 	public static final String Disclaimerlinkcontent_xpath = ".//*[@id='collapseDisclaimer']";
@@ -1364,10 +1365,17 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	public void validateCancelElement() {
 		// TODO Auto-generated method stub
+		driver.findElement(By.xpath("//*[@id='phoneCardHeight']/div[1]/div/div/div/div/div/div/div/a")).click();
 		Assert.assertTrue(phoneTopCancelButton.getText().equalsIgnoreCase("CANCEL"));
 
 	}
 
+	public void validateCancelElementShip() {
+		// TODO Auto-generated method stub
+		driver.findElement(By.xpath("//*[@id='phone']/div[1]/div/div/div/div/div/div/div/a")).click();
+		Assert.assertTrue(phoneTopCancelButton.getText().equalsIgnoreCase("CANCEL"));
+
+	}
 	/**
 	 * @toDo : Validates the elements of the temporary address section
 	 */
@@ -1563,6 +1571,16 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 			Assert.assertFalse(tempEditButton.size() > 0);
 
+		}
+
+	}
+	
+
+	public void validateTempAddress() {
+		if (tempEditButton.size() > 0) {
+
+			Assert.assertTrue(tempEditButton.size() > 0);
+			
 		}
 
 	}
