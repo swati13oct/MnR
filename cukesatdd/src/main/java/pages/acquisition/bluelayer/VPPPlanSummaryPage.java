@@ -298,11 +298,56 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "(.//*[@id='globalContentIdForSkipLink']//div[contains(@class,'module module-aside no-med-supp rigntrailwidget')])[2]")
 	private WebElement promoWidject;
 	
-	
 	private PageData vppPlanSummary;
 
 	public JSONObject vppPlanSummaryJson;
 
+	//vvv note: added for US1598162
+	@FindBy(xpath = "//div[@ng-show='showMaPlans']//a[@id='printsummary']")
+	private WebElement maPrintOption;
+
+	@FindBy(xpath = "//div[@ng-show='showMaPlans']//a[@id='emailsummary']")
+	private WebElement maEmailOption;
+
+	@FindBy(xpath = "//div[@ng-show='showPdpPlans']//a[@id='printsummary']")
+	private WebElement pdpPrintOption;
+
+	@FindBy(xpath = "//div[@ng-show='showPdpPlans']//a[@id='emailsummary']")
+	private WebElement pdpEmailOption;
+
+	@FindBy(xpath = "//div[@ng-show='showSnpPlans']//a[@id='printsummary']")
+	private WebElement snpPrintOption;
+
+	@FindBy(xpath = "//div[@ng-show='showSnpPlans']//a[@id='emailsummary']")
+	private WebElement snpEmailOption;
+
+	@FindBy(xpath = "//a[@id='ghn_lnk_1']")
+	private WebElement homeBtn;
+
+	@FindBy(xpath ="//a[contains(@dtmname,'Shop For a Plan')]")
+	private WebElement topMenushopForAPlanOption;
+
+	@FindBy(xpath="//input[contains(@class,'zip-field')]")
+	private WebElement shopForAPlanOptionZipcodeFieldBox;
+
+	@FindBy(xpath="//button[contains(@class,'zip-button') and contains(@dtmid,'top')]")
+	private WebElement shopForAPlanOptionFindPlanButton;
+
+	@FindBy(xpath = "//a[@id='change-location']")
+	private WebElement planOverviewChangeZipCodeLink;
+
+	@FindBy(xpath = "//input[@id='zipcode']")
+	private WebElement planOverviewZipCodeFieldBox;
+
+	@FindBy(xpath = "//button[contains(@class,'zip-button') and contains(@dtmid,'landing')]")
+	private WebElement planOverviewFindPlanButton;
+
+		private String linkTextXpath="//a[text()='Favorite plan']";
+	private String savePlanImgXpath="//img[contains(@src,'ic_favorite-unfilled.png')]";
+	private String savedPlanImgXpath="//img[contains(@src,'ic_favorite-filled.png')]";
+	//^^^ note: added for US1598162	
+
+	
 	public VPPPlanSummaryPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -1587,52 +1632,6 @@ public PlanDetailsPage validatePromoWidjet(String planname) {
 	//validateNew();
 	
 }
-
-//vvv note: added for US1598162
-@FindBy(xpath = "//div[@ng-show='showMaPlans']//a[@id='printsummary']")
-private WebElement maPrintOption;
-
-@FindBy(xpath = "//div[@ng-show='showMaPlans']//a[@id='emailsummary']")
-private WebElement maEmailOption;
-
-@FindBy(xpath = "//div[@ng-show='showPdpPlans']//a[@id='printsummary']")
-private WebElement pdpPrintOption;
-
-@FindBy(xpath = "//div[@ng-show='showPdpPlans']//a[@id='emailsummary']")
-private WebElement pdpEmailOption;
-
-
-@FindBy(xpath = "//div[@ng-show='showSnpPlans']//a[@id='printsummary']")
-private WebElement snpPrintOption;
-
-@FindBy(xpath = "//div[@ng-show='showSnpPlans']//a[@id='emailsummary']")
-private WebElement snpEmailOption;
-
-@FindBy(xpath = "//a[@id='ghn_lnk_1']")
-private WebElement homeBtn;
-
-@FindBy(xpath ="//a[contains(@dtmname,'Shop For a Plan')]")
-private WebElement topMenushopForAPlanOption;
-
-@FindBy(xpath="//input[contains(@class,'zip-field')]")
-private WebElement shopForAPlanOptionZipcodeFieldBox;
-
-@FindBy(xpath="//button[contains(@class,'zip-button') and contains(@dtmid,'top')]")
-private WebElement shopForAPlanOptionFindPlanButton;
-
-@FindBy(xpath = "//a[@id='change-location']")
-private WebElement planOverviewChangeZipCodeLink;
-
-@FindBy(xpath = "//input[@id='zipcode']")
-private WebElement planOverviewZipCodeFieldBox;
-
-@FindBy(xpath = "//button[contains(@class,'zip-button') and contains(@dtmid,'landing')]")
-private WebElement planOverviewFindPlanButton;
-
-	private String linkTextXpath="//a[text()='Favorite plan']";
-private String savePlanImgXpath="//img[contains(@src,'ic_favorite-unfilled.png')]";
-private String savedPlanImgXpath="//img[contains(@src,'ic_favorite-filled.png')]";
-//^^^ note: added for US1598162	
 
 //vvv note: added for US1598162
 public void sleepBySec(int sec) {
