@@ -2364,14 +2364,13 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			Assert.assertTrue("Claims Table is not present in Claims Details Page", false);
 	}*/
 	
-
 	public void validatePhoneSectionWithoutEditAllowed() {
 		// TODO Auto-generated method stub
 		validateNew(phoneSection);
 		Assert.assertTrue("Edit Button is visible on the phone section", !phoneEditButton.isDisplayed());
 
 	}
-
+	
 	public void validateTemporaryAddressSectionWithoutEditAllowed() {
 		// TODO Auto-generated method stub
 
@@ -2386,7 +2385,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 		}
 	}
-
+	
 	public void validateMailingAddressSectionWithoutEditAllowed() {
 		// TODO Auto-generated method stub
 
@@ -2401,4 +2400,8 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 		}
 	}
-	}
+	
+	
+	
+
+}

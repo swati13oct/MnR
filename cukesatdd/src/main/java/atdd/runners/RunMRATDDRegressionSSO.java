@@ -12,7 +12,7 @@ import cucumber.api.CucumberOptions;
  * @author schak38
  *
  */
-
+ 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=2,screenShotSize="", screenShotLocation="/screenshots/",
 jsonReport = "target/cucumber-RunMRATDDRegressionSSO.json",detailedReport = true, detailedAggregatedReport = true,

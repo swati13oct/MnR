@@ -89,7 +89,7 @@ Given login with following details logins in the member portal and validate elem
 Then I should not see drug look up on home page
 Examples:
 	| TID|  planType |
-	|15337|AARPIndividual_DCE |
+	|15337|MA_FED_DCE |
 	
 @drugCostEstimator6 @Member_DCE_sso
 Scenario Outline:TID: <TID> -plan: <planType> -memberType: <memberType> -I1.3 To Verify MR portal group members DCE should redirect to optum rx sso landing page. 
@@ -123,7 +123,7 @@ And any cost savings will be applied to my total cost savings in Step3
 
 Examples:
 | TID    | planType | memberType  |drug|dosage|quantity|frequency| 
-| 15325    | MAPD     |AARPFederalDCEmember |Lipitor|Lipitor TAB 10MG|31|Every 1 month|
+| 15325    | MAPD     |Individualwithpharmacy_DCE |Lipitor|Lipitor TAB 10MG|31|Every 1 month|
  
  
 @drugCostEstimator8  @switch_to_generic_case_2  
