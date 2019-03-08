@@ -1,4 +1,4 @@
-@accountProfile @codeMonkeys1 @thePredators
+@accountProfilebak @codeMonkeys1 @thePredators
 Feature: C1.2To test Profile and Preferences page .
 
   @accountProfile1 @CMNeedhelp
@@ -271,7 +271,7 @@ Feature: C1.2To test Profile and Preferences page .
       | userType            | memberType |
       | MAPD_AARPIndividual | AARP       |
 
-  @accountProfile19 @goGreen @regressionMember
+  @accountProfile19 @goGreen @regressionMemberbak
   Scenario Outline: To verify Edit preferences section for Go Green
     Given login with following details logins in the member portal and validate elements
       | User Type | <userType> |
