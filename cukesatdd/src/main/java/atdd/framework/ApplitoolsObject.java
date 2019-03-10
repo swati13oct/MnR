@@ -33,7 +33,6 @@ public class ApplitoolsObject {
 		eyes = new Eyes();
 		eyes.setApiKey("sAdOjZCjfkyK5G111xeuEgLb4OcNhdPNzO6c0CaCovsds110");
 		
-		
 	}
 	
 	public void setApplitools(){
