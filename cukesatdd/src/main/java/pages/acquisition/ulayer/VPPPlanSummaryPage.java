@@ -4,6 +4,7 @@
 package pages.acquisition.ulayer;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -17,6 +18,8 @@ import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.ole.WelcomePage;
@@ -24,6 +27,7 @@ import pages.acquisition.vppforaep.AepVppPlanSummaryPage;
 import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
+import acceptancetests.data.PageConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
@@ -333,23 +337,23 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public void viewPlanSummary(String planType) {
 		if (planType.equalsIgnoreCase("PDP")) {
 			CommonUtility.waitForPageLoadNew(driver, pdpPlansViewLink, 30);
-			sleepBySec(1); //note: add sleep for timing issue, tried increase timeout from waitForPageLoadNew but didn't work
+			sleepBySec(2); //note: add sleep for timing issue, tried increase timeout from waitForPageLoadNew but didn't work
 			pdpPlansViewLink.click();
 			System.out.println("PDP Plan Type Clicked");
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
 			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
-			sleepBySec(1);
+			sleepBySec(2);
 			maPlansViewLink.click();
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MS")) {
 			CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
-			sleepBySec(1);
+			sleepBySec(2);
 			msPlansViewLink.click();
 			CommonUtility.waitForPageLoadNew(driver, medSuppPlanList.get(0), 30);
 		} else if (planType.equalsIgnoreCase("SNP")) {
 			CommonUtility.waitForPageLoadNew(driver, snpPlansViewLink, 30);
-			sleepBySec(1);
+			sleepBySec(2);
 			snpPlansViewLink.click();
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		}
@@ -1241,11 +1245,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		Assert.assertTrue("PROBLEM: Total number of unsaved plans should equal to total number of unfilled icons.  Actual numOfUnfilledIcons='"+numOfUnfilledIcons+"' | Actual numOfUnsavedPlans='"+numOfUnsavedPlans+"'",numOfUnfilledIcons==numOfUnsavedPlans);
 	}
 
-	public void validateAbilityToSavePlans(List<String> listOfTestPlans, String planType) {
-		System.out.println("Going to mark the following "+listOfTestPlans.size()+" number of test plans as favorite");
+	public void validateAbilityToSavePlans(String savePlanNames, String planType) {
 		String subPath=determineSubpath(planType);
 		String headerPath=determineHeaderPath(planType);
 		
+		List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
+		System.out.println("Going to mark the following "+listOfTestPlans.size()+" number of test plans as favorite");
+
 		for (String plan: listOfTestPlans) {
 			System.out.println("Proceed to locate plan="+plan);
 
@@ -1315,20 +1321,29 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 	}
 
-	public void validatePlansAreSaved(List<String> listOfTestPlans, String planType) {
+	public void validatePlansAreSaved(String savePlanNames, String planType) {
 		String subPath=determineSubpath(planType);
 		String headerPath=determineHeaderPath(planType);
-
+		String planTypePath="";
+		if (planType.equalsIgnoreCase("ma") || planType.equalsIgnoreCase("mapd")) {
+			planTypePath="//div[@ng-show='showMaPlans']";
+		} else if (planType.equalsIgnoreCase("showPdpPlans")) {
+			planTypePath="//div[@ng-show='showMaPlans']";
+		} else if (planType.equalsIgnoreCase("snp")) {
+			planTypePath="//div[@ng-show='showSnpPlans']";
+		}
+		List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
+		
 		System.out.println("Validate "+listOfTestPlans.size()+" number of test plans are saved as favorite");
 
 		System.out.println("Proceed to validate 'Saved Plan' link and icon will appear after 'Save Plan' is clicked");
-		String appeared_savedPlanLinkXpath=headerPath+subPath+"//div[@class='savedPlan' and not(contains(@style,'none'))]"+linkTextXpath;
+		String appeared_savedPlanLinkXpath=planTypePath+headerPath+subPath+"//div[@class='savedPlan' and @style='']"+linkTextXpath;
 		//System.out.println("TEST - appeared_savedPlanLinkXpath xpath="+appeared_savedPlanLinkXpath);
 		List<WebElement>  listOfAppearedSavedPlanLinks=driver.findElements(By.xpath(appeared_savedPlanLinkXpath));
 		int expMatch=listOfTestPlans.size();
 		Assert.assertTrue("PROBLEM - total saved plan links not as expected.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfAppearedSavedPlanLinks.size()+"'",listOfAppearedSavedPlanLinks.size()==expMatch);
 
-		String appeared_savedPlanLIconXpath=headerPath+subPath+"//div[@class='savedPlan' and not(contains(@style,'none'))]"+savedPlanImgXpath;
+		String appeared_savedPlanLIconXpath=planTypePath+headerPath+subPath+"//div[@class='savedPlan' and @style='']"+savedPlanImgXpath;
 		//System.out.println("TEST - appeared_savedPlanLIconXpath xpath="+appeared_savedPlanLIconXpath);
 		List<WebElement>  listOfAppearedSavedPlanIcons=driver.findElements(By.xpath(appeared_savedPlanLIconXpath));
 		expMatch=listOfTestPlans.size();
@@ -1337,7 +1352,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public String determineSubpath(String planType) {
 		//System.out.println("TEST - The test planType="+planType);
-		if (planType.equals("MAPD")) {
+		if (planType.equals("MAPD") || planType.equals("MA")) {
 			return "/../../..";
 		} else {
 			return "/../..";
@@ -1346,7 +1361,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	public String determineHeaderPath(String planType) {
 		//System.out.println("TEST - The test planType="+planType);
-		if (planType.equals("MAPD") || planType.equals("PDP")) {
+		if (planType.equals("MAPD") || planType.equals("MA") || planType.equals("PDP")) {
 			return "//h3";
 		} else {
 			return "//h2";
@@ -1355,7 +1370,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public void clickHomeButton() {
 		System.out.println("Proceed to click on Home so that zipcode can be entered again without clearing cache");
-		//System.out.println("TEST - xpath="+homeXpath);
 		try {
 			sleepBySec(2);
 			homeBtn.isDisplayed();
@@ -1406,17 +1420,19 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			CommonUtility.waitForPageLoad(driver, countyModal, 45);
 			driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
 		}
-		sleepBySec(1);
+		sleepBySec(2);
 		if(driver.findElement(By.xpath("//*[contains(text(),'"+zipcode+" "+countyName+"')]")).isDisplayed()) {
 			return new VPPPlanSummaryPage(driver);
 		}
 		return null;
 	}
 
-	public void validateAbilityToUnSavePlans(String unsavePlan, String planType) {
+	public void validateAbilityToUnSavePlans(String savedPlans, String planType) {
 		String subPath=determineSubpath(planType);
 		String headerPath=determineHeaderPath(planType);
 
+		List<String> listOfTestPlans = Arrays.asList(savedPlans.split(","));
+		String unsavePlan=listOfTestPlans.get(1);
 		System.out.println("Proceed to unsave 1st plan from input '"+unsavePlan+"'");
 
 		String textPlanXpath=headerPath+"[contains(text(),'"+unsavePlan+"')]";
@@ -1466,9 +1482,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		Assert.assertTrue("PROBLEM - unable to locate Save Plan icon for ='"+unsavePlan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfSavePlanIcons.size()+"'",listOfSavePlanIcons.size()==expMatch);
 	}
 
-	public void validateOnePlanSavedOnePlanUnsaved(List<String> listOfTestPlans, String planType) {
+	public void validateOnePlanSavedOnePlanUnsaved(String savePlanNames, String planType) {
 		String subPath=determineSubpath(planType);
 		String headerPath=determineHeaderPath(planType);
+		List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
 
 		System.out.println("Validate first plan on list is saved and second plan on list is unsaved");
 		Assert.assertTrue("PROBLEM - scenario validation only support testing with two plans as input arguments, please update input and try again.  Input current has '"+listOfTestPlans.size()+"' number of plans listed", listOfTestPlans.size()==2);

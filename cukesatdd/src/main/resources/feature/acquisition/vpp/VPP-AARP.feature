@@ -228,69 +228,67 @@ Scenario Outline: To check VPP for specific plans
       | US1497183 - AARP - No Specialist Tiering |   35618 | NO              | Lawrence County | MAPD     | AARP MedicareComplete Plan 1 (HMO)                | Specialist Copay | $40 copay                             |
 
 
-  @feature-F265872 @vppFavoritePlanAarp @thePredators @Apr_release_2019
+  @feature-F265872 @us1598162 @vppFavoritePlanAarp @thePredators @Apr_release_2019
   Scenario Outline: UID: <UID> -planType: <planType> -isMultiCounty: <isMultiCounty> - Verify user can save and unsave favorite plans on view plan preview page on AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
-    Then user validates plan count for all plan types on plan summary page in the AARP site
-    When the user views the plans of the below plan type in AARP site
-      | Plan Type       | <planType>      |
-    Then user validates print and email options are on the page on AARP site      
-      | Plan Type       | <planType>      |
+    When user validates plan count for all plan types on plan summary page in the AARP site 
     Then user validates save plan option is unselected for all plans by default on AARP site
-      | Plan Type       | <planType>      |
     Then user validates selected plans can be saved as favorite on AARP site
-      | Plan Type       | <planType>      |
-      | Save Plan Names | <savePlanNames> |
+      | MA Test Plans   | <MA_testPlans>  |
+      | PDP Test Plans  | <PDP_testPlans> |
+      | SNP Test Plans  | <SNP_testPlans> |
     Then user validates saved favorite plans will be stored within same session after zipcode change from Home on AARP site
-      | Plan Type       | <planType>      |
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
-      | Save Plan Names | <savePlanNames> |
+      | MA Test Plans   | <MA_testPlans>  |
+      | PDP Test Plans  | <PDP_testPlans> |
+      | SNP Test Plans  | <SNP_testPlans> |
     Then user validates saved favorite plans will be stored within same session after zipcode change from Shop For a Plan on AARP site
-      | Plan Type       | <planType>      |
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
-      | Save Plan Names | <savePlanNames> |
+      | MA Test Plans   | <MA_testPlans>  |
+      | PDP Test Plans  | <PDP_testPlans> |
+      | SNP Test Plans  | <SNP_testPlans> |
     Then user validates saved favorite plans will be stored within same session after zipcode change within VPP page on AARP site
-      | Plan Type       | <planType>      |
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
-      | Save Plan Names | <savePlanNames> |
+      | MA Test Plans   | <MA_testPlans>  |
+      | PDP Test Plans  | <PDP_testPlans> |
+      | SNP Test Plans  | <SNP_testPlans> |
 	Then user validates ability to unsave a saved plan on AARP site   
-      | Plan Type       | <planType>      |
-      | Save Plan Names | <savePlanNames> |
+      | MA Test Plans   | <MA_testPlans>  |
+      | PDP Test Plans  | <PDP_testPlans> |
+      | SNP Test Plans  | <SNP_testPlans> |
     Then user validates unsave favorite plans will be stored within same session after zipcode change from Home on AARP site
-      | Plan Type       | <planType>      |
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
-      | Save Plan Names | <savePlanNames> |
+      | MA Test Plans   | <MA_testPlans>  |
+      | PDP Test Plans  | <PDP_testPlans> |
+      | SNP Test Plans  | <SNP_testPlans> |
     Then user validates unsave favorite plans will be stored within same session after zipcode change from Shop For a Plan on AARP site
-      | Plan Type       | <planType>      |
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
-      | Save Plan Names | <savePlanNames> |
+      | MA Test Plans   | <MA_testPlans>  |
+      | PDP Test Plans  | <PDP_testPlans> |
+      | SNP Test Plans  | <SNP_testPlans> |
     Then user validates unsave favorite plans will be stored within same session after zipcode change within VPP page on AARP site
-      | Plan Type       | <planType>      |
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
-      | Save Plan Names | <savePlanNames> |
+      | MA Test Plans   | <MA_testPlans>  |
+      | PDP Test Plans  | <PDP_testPlans> |
+      | SNP Test Plans  | <SNP_testPlans> |
 
     Examples: 
-      | UID     | zipcode | isMultiCounty | county           | planType | savePlanNames                                                                                         |
-      | 1598162 | 80002   | YES           | Adams County     | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO),AARP MedicareComplete SecureHorizons Plan 2 (HMO)   |
-      | 1598162 | 80002   | YES           | Adams County     | PDP      | AARP MedicareRx Walgreens (PDP),AARP MedicareRx Preferred (PDP)                                       |
-      | 1598162 | 80002   | YES           | Adams County     | SNP      | UnitedHealthcare Dual Complete (HMO SNP),UnitedHealthcare Assisted Living Plan (PPO SNP)              |
-      | 1598162 | 80001   | NO            | Jefferson County | MAPD     | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO)|
-      | 1598162 | 80001   | NO            | Jefferson County | PDP      | AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP)                                      |
-      | 1598162 | 80001   | NO            | Jefferson County | SNP      | UnitedHealthcare Nursing Home Plan (PPO SNP),UnitedHealthcare Assisted Living Plan (PPO SNP)          |
+      | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                          | PDP_testPlans                                                    | SNP_testPlans                                                                               |
+      | 1598162 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Nursing Home Plan (PPO SNP),UnitedHealthcare Assisted Living Plan (PPO SNP)|
       
