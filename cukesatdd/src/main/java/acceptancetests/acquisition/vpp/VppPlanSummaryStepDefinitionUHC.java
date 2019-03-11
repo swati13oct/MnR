@@ -870,6 +870,28 @@ public class VppPlanSummaryStepDefinitionUHC {
 	  plansummaryPage.validateMarketingBullets(planType , planName);
   }
   
+  @Then("^the user hover overs the tool tip for Why is my premium 0 and validates the text for MAPD Plan , MA Plan in UMS Site$")
+  public void toolTip_premium0_validateText_inUMS() throws Throwable {
+	  String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+	  if(planType.equals("MA") || planType.equals("MAPD")){
+	  VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);  
+     String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
+	  plansummaryPage.toolTipForPremium0(planName);
+  }
+ }
+ 
+ @Then("^the user hovers over the tool tip for Annual Deductible and validates the ext for PDP Plan in UMS Site$")
+ public void toolTip_annualDeductible_inUMS() throws Throwable {
+	  String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+	  if(planType.equals("PDP")){
+		  VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);  
+	      String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
+		  plansummaryPage.toolTipForAnnualDeductible(planName);  
+	  }
+ }
+  
   @Then("^the user validates the right rail in UMS Site$")
   public void user_validates_rightRail(){
 	  VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()

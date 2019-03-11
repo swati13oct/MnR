@@ -13,6 +13,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -1401,9 +1402,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public void validatePrescriptionDrugsTier1(String planName , String prescriptionDrugsTier1) {
 		WebElement DrugsForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(), 'Prescription Drugs, Tier 1')]/span)[1]"));
 		CommonUtility.waitForPageLoadNew(driver,DrugsForPlan, 30);
-		System.out.println("Expected value " + prescriptionDrugsTier1);
 		String PrescriptionDrugs = DrugsForPlan.getText();
-		System.out.println("Prescription Drugs " + PrescriptionDrugs);
 		if(PrescriptionDrugs.equals(prescriptionDrugsTier1)){
 			System.out.println("PrescriptionDrugs for the plan is " + PrescriptionDrugs);      
 			Assert.assertTrue(true);
@@ -1464,13 +1463,31 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 }*/
 	public void toolTipForPremium0(String planName){
-		WebElement toolTip = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(), 'Monthly Premium')]/span)[2]/span[1]"));
-		if (toolTip.getText().contains("Why is my premium $0?")){
-			System.out.println("ToolTip text is " + toolTip.getText());
+		WebElement toolTip = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//descendant :: span[@class='standalone']//*[name()='use']"));
+		WebElement tooltipContent = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//descendant :: span[@class='standalone']//span"));
+		Actions action = new Actions(driver);
+		action.moveToElement(toolTip).build().perform();
+		String toolTipText = tooltipContent.getAttribute("textContent").trim();
+		if (toolTipText.contains("Why is my premium")){
+			System.out.println("ToolTip text is " + toolTipText);
 			Assert.assertTrue(true);
 		}
 		else
 			Assert.fail("Tool Tip is not working");	     	
+	}
+	
+	public void toolTipForAnnualDeductible(String planName) {
+		WebElement toolTip = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//descendant :: span[@class='standalone']//*[name()='use'])[2]"));
+		WebElement tooltipContent = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//descendant :: span[@class='standalone']//span)[2]"));
+		Actions action = new Actions(driver);
+		action.moveToElement(toolTip).build().perform();
+		String toolTipText = tooltipContent.getAttribute("textContent").trim();
+		if (toolTipText.contains("annual deductible")){
+			System.out.println("ToolTip text is " + toolTipText);
+			Assert.assertTrue(true);
+		}
+		else
+			Assert.fail("Tool Tip is not working");
 	}
 
 
