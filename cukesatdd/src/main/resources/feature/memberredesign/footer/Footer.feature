@@ -24,4 +24,4 @@ Feature: F1.2Footer validation
 
     Examples: 
       | TID   | planType | memberType|
-      | 15347 | MAPD     | withRider |
+      | 15347 | MAPD     | withRider_footer |

@@ -51,6 +51,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
                @FindBy(linkText = "VIEW PLAN DOCUMENTS")
                public WebElement viewPlanDocumentsButton;
+               
+               @FindBy(xpath="//*[@id='plandeductiblecard2']")
+               private WebElement MedicalDeductibleCard2;
 
                @FindBy(xpath = ".//*[@id='globalContentIdForSkipLink']/div[3]/div/div/div[2]/div/div/div/p[1]")
                private WebElement messageForPreeffective;
@@ -471,6 +474,18 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
                @FindBy(xpath = "(//*[@id='officeVisitTileAtdd']/div//div[1]/span)[2]")
                private WebElement specialistValue;
+               
+               @FindBy(xpath="//*[@id='plandeductiblecard1']")
+	           	private WebElement MedicalDeductibleCard1;
+	
+	           	@FindBy(xpath="//*[@id='plandeductible1AEMvalue']")
+	           	private WebElement NoDeductible1Text;
+	
+	           	@FindBy(xpath="//*[@id='plandeductible2servicevalue']")
+	           	private WebElement Deductible2Text;
+
+           	@FindBy(xpath="//*[@id='plandeductible1servicevalue']")
+           	private WebElement Deductible1Text;
 
                @FindBy(id = "outPatientTileAtdd")
                private WebElement outpatientsurgeryVisits;
@@ -2223,9 +2238,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                        }
                        else
                        {
-                           System.out.println(OutpatientSurgeryCenter.getText());
-                           Assert.assertTrue("Text for Outpatinet Surgery Center is not as expected.", OutpatientSurgeryCenter.getText().contains("OUTPATIENT SURGERY CENTER VISITS"));
-                           //Assert.assertEquals(OutpatientSurgeryCenter.getText(), "OUTPATIENT SURGERY CENTER VISITS ");
+                                      Assert.assertEquals(OutpatientSurgeryCenter.getText(), "OUTPATIENT SURGERY CENTER VISITS ");
+                                      System.out.println(OutpatientSurgeryCenter.getText());
                        }
                        System.out.println(HospitalVisits.getText());
                        Assert.assertEquals(HospitalVisits.getText(), "HOSPITAL VISITS ");
@@ -3994,6 +4008,99 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                               }
                               
                }
+               
+               
+               public boolean ValidateBnCNoDeductible() {
+           		try {
+           			Thread.sleep(5000);
+           		} catch (InterruptedException e) {
+           			// TODO Auto-generated catch block
+           			e.printStackTrace();
+           		}
+           		boolean Validation_Flag = true;
+           		if(validate(MedicalDeductibleCard1)){
+           			if(!NoDeductible1Text.getText().contains("$")){
+           				System.out.println("No $ Amount is displayed for Member with No Deductible");
+           				System.out.println("Text displayed in Deductible1 Card : "+NoDeductible1Text.getText());
+           				Validation_Flag = true;
+           			}
+           			else{
+           				System.out.println("Validation Failed -  $ Amount is displayed for Member with No Deductible");
+           				System.out.println("Text displayed in Deductible1 Card : "+NoDeductible1Text.getText());
+           				Validation_Flag = false;
+
+           			}
+           		}
+           		else{
+           			System.out.println("Validation Failed - Medical Deductible Card is NOT Displayed for Group MA/MAPD Member");
+           			Validation_Flag = false;
+
+           		}
+           		return Validation_Flag;
+           	}
+               
+               
+               public boolean ValidateBnCSingleDeductible(String deductibleAmount1) {
+           		try {
+           			Thread.sleep(5000);
+           		} catch (InterruptedException e) {
+           			// TODO Auto-generated catch block
+           			e.printStackTrace();
+           		}
+           		boolean Validation_Flag = true;
+           		if(validate(MedicalDeductibleCard1)){
+           			if(Deductible1Text.getText().contains(deductibleAmount1)){
+           				System.out.println("Expected $ Amount "+deductibleAmount1+" is displayed for Member with Single Deductible");
+           				System.out.println("Text displayed in Deductible1 Card : "+Deductible1Text.getText());
+           				Validation_Flag = true;
+           			}
+           			else{
+           				System.out.println("Validation Failed -  Expected Deductible Amount is NOT displayed for Member with Single Deductible");
+           				System.out.println("Text displayed in Deductible1 Card : "+Deductible1Text.getText());
+           				Validation_Flag = false;
+
+           			}
+           		}
+           		else{
+           			System.out.println("Validation Failed - Medical Deductible Card is NOT Displayed for Group MA/MAPD Member");
+           			Validation_Flag = false;
+
+           		}
+           		return Validation_Flag;
+           	}
+               
+
+           	public boolean ValidateBnC_DualDeductible(String deductibleAmount1, String deductibleAmount2) {
+           		try {
+           			Thread.sleep(5000);
+           		} catch (InterruptedException e) {
+           			// TODO Auto-generated catch block
+           			e.printStackTrace();
+           		}
+           		boolean Validation_Flag = true;
+           		if(validate(MedicalDeductibleCard1) && validate(MedicalDeductibleCard2) ){
+           			if(Deductible1Text.getText().contains(deductibleAmount1) && Deductible2Text.getText().contains(deductibleAmount2)){
+           				System.out.println("Expected $ Amount "+deductibleAmount1+" AND "+deductibleAmount2+" is displayed for Member with Dual Deductible");
+           				System.out.println("Text displayed in Deductible1 Card : "+Deductible1Text.getText());
+           				System.out.println("Text displayed in Deductible2 Card : "+Deductible2Text.getText());
+           				Validation_Flag = true;
+           			}
+           			else{
+           				System.out.println("Validation Failed -  Expected Deductible Amount is NOT displayed for Member with Dual Deductible");
+           				System.out.println("Text displayed in Deductible1 Card : "+Deductible1Text.getText());
+           				System.out.println("Text displayed in Deductible2 Card : "+Deductible2Text.getText());
+           				Validation_Flag = false;
+
+           			}
+           		}
+           		else{
+           			System.out.println("Validation Failed - Both Medical Deductible Card is NOT Displayed for Group MA/MAPD Member with Dual Deductible");
+           			Validation_Flag = false;
+
+           		}
+           		return Validation_Flag;
+           	}
+
                
 
 }

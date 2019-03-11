@@ -110,6 +110,10 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "(.//*[@class='link-row ng-scope']//a[@class='link-text ng-scope ng-binding'])[1]")
 	private WebElement medicalEobLink;
 
+
+  @FindBy(xpath = "//*[@id='dashboard']/div[1]/section[7]/link-bar/div/div/div[1]/div/a)")
+	private WebElement medicalEobLinkOther;
+	
 	@FindBy(linkText = "Prescription Drug Explanation of Benefits (EOB)")
 	private WebElement prescriptionDrugEobLink;
 
@@ -129,7 +133,8 @@ public class AccountHomePage extends UhcDriver {
 	private WebElement viewIDCard;
 
 	//@FindBy(xpath = "//div[@class='claim-results']//table[not (contains(@class,'ng-hide'))]//tbody//tr[2]//a[text()='MORE INFO']")
-	@FindBy(xpath = "//a[contains (text(), 'MORE INFO')]")
+	//@FindBy(xpath = "//a[contains (text(), 'MORE INFO')]")
+	@FindBy(xpath = "//*[@id='moreInfoLinkAtdd0']/a")
 	private WebElement claimstablemoreinfolinkCombo;
 
 	@FindBy(id = "pcpLogoPrint1left")
@@ -248,10 +253,10 @@ public class AccountHomePage extends UhcDriver {
 	// @FindBy(css = "img.primary-logo")
 	// private WebElement logoImage;
 
-	@FindBy (xpath = "//*[@id='ui-view-page']/div/arcade-header/header[1]/div/div/a/img")
+	@FindBy (css = ".container .primary-logo")
 	private WebElement logoImage;								  																				  
 
-	@FindBy(xpath = "//*[@id='ui-view-page']/div/arcade-header/header[1]/div/div/a/img[2]")
+	@FindBy(css = ".container .secondary-logo")
 	private WebElement cologoImage;
 
 	@FindBy(xpath = "//*[@ng-src='/images/icons/icon-pharmacy-locator.svg']")
@@ -535,9 +540,9 @@ public class AccountHomePage extends UhcDriver {
 			{
 				System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
 				driver.findElement(By.xpath("//a[contains(text(),'Coverage & Benefits')]")).click();
-				System.out.println("Now waiting for 6 seconds");
+				System.out.println("Now waiting for 10 seconds");
 				try {
-					Thread.sleep(6000);
+					Thread.sleep(10000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -1288,21 +1293,18 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public PharmacySearchPage navigateToRedesignPharmacyLocaterPage() {
+		waitForHomePage(helloPerson);
 		/*
 		 * if (validate(iPerceptionAutoPopUp)) { iPerceptionAutoPopUp.click(); } else {
 		 * System.out.println("iPerception Pop Up not displayed"); }
 		 */
 		checkForIPerceptionModel(driver);
-		if (MRScenario.environmentMedicare.equalsIgnoreCase("test-a")
+		if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a")
+				|| MRScenario.environmentMedicare.equalsIgnoreCase("test-a")
 				|| MRScenario.environment.equalsIgnoreCase("team-ci1")) {
 			System.out.println("Go to Pharmacy locator is present " + pharmacySearchLink.isDisplayed());
 			pharmacySearchLink.click();
-		} else if (MRScenario.environment.equalsIgnoreCase("team-a")) {
-				String Page_URL = "https://www." + MRScenario.environment
-						+ "-medicare."+MRScenario.domain+"/content/medicare/member/pharmacy-locator/overview.html";
-				driver.navigate().to(Page_URL);
 		} else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
-			waitForHomePage(helloPerson);
 			if (driver.getCurrentUrl().contains("/dashboard"))
 				;
 			{
@@ -1577,14 +1579,8 @@ public class AccountHomePage extends UhcDriver {
 			executor.executeScript("arguments[0].click();", OrderMaterial_Dashboard);
 			// OrderMaterial_Dashboard.click();
 		} else {
-			String Page_URL;
-			if (MRScenario.environment.equalsIgnoreCase("team-a")) {
-				Page_URL = "https://www." + MRScenario.environment
-						+ "-medicare."+MRScenario.domain+"/content/medicare/member/order-materials/overview.html";
-			} else {
-				Page_URL = "https://" + MRScenario.environment
-						+ "-medicare."+MRScenario.domain+"//member/order-plan-materials.html";
-			}
+			String Page_URL = "https://" + MRScenario.environment
+					+ "-medicare."+MRScenario.domain+"//member/order-plan-materials.html";
 			// String Page_URL = driver.getCurrentUrl().split(".com")[0];
 			driver.navigate().to(Page_URL);
 			System.out.println("Navigated to Order materials Page URL : " + Page_URL);
@@ -1620,8 +1616,15 @@ public class AccountHomePage extends UhcDriver {
 					System.out.println("iPerception Pop Up not displayed");
 				}
 
-				validate(medicalEobLink);
-				medicalEobLink.click();
+				//validate(medicalEobLink);
+				/*if(medicalEobLink.isDisplayed()){
+					medicalEobLink.click();
+				}else{ */
+					//scrollToView(medicalEobLinkOther);
+				  //medicalEobLinkOther.click();
+				//}
+				
+				 startNew("https://stage-medicare.uhc.com/member/eob.html");
 			}
 		} else {
 			System.out.println(
@@ -1806,7 +1809,8 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public DrugCostEstimatorPage navigate_to_optumrxPage() {
-		waitforElement(drugLookup);
+		CommonUtility.waitForPageLoad(driver, drugLookup, 90);
+		//waitforElement(drugLookup);
 		drugLookup.click();
 
 		String mainwindow = driver.getWindowHandle();
@@ -2175,7 +2179,7 @@ public class AccountHomePage extends UhcDriver {
 
 	public ClaimDetailsPage navigateToClaimDetailsPageCombo() {
 		try {
-			Thread.sleep(10000);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

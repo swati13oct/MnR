@@ -22,6 +22,7 @@ import pages.acquisition.ulayer.PlanDetailsPage;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
 public class DrugCostEstimatorPage extends UhcDriver {
 
@@ -1735,4 +1736,26 @@ sendkeys(zipcodeInput, zipcode); // not sure what webelement to use
 			return true;
 		return false;
 	}
+	public VPPPlanSummaryPage navigateBackToPlanSummaryPage() {	
+		
+		//WebElement returnToPlanSummaryLink = driver.findElement(By.xpath(".//*[@id='returnLink']"));	
+		WebElement returnToPlanSummaryLink = driver.findElement(By.xpath("//*[@id='returnLink']"));	
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", returnToPlanSummaryLink);
+		//returnToPlanSummaryLink.click();
+		
+	/*}
+	catch (Exception e){
+		WebElement returnToPlanSummaryLink = driver.findElement(By.id("returnLink"));
+		returnToPlanSummaryLink.click();
+	}
+	//
+*/		
+	CommonUtility.checkPageIsReadyNew(driver);
+	if (driver.getCurrentUrl().contains("plan-summary")) {
+	return new VPPPlanSummaryPage(driver);	
+			}
+			return null;
+		}
+
 }

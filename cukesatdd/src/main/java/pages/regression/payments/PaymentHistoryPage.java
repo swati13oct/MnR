@@ -952,10 +952,19 @@ public class PaymentHistoryPage extends UhcDriver {
 		waitforElement(SetUpAutomaticPaymentsButton);
 		SetUpAutomaticPaymentsButton.click();
 		System.out.println("User clicked on Setup Automatic Button");
-		if (validate(HelpfulRemindersPanel)) {
+		try {
+			Thread.sleep(5000);
+			System.out.println(driver.getCurrentUrl());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if (driver.getTitle().contains("Set Up Automatic Payments")) {
+			System.out.println("Set Up Automatic Payments page");
 			return new SetUpRecurringPage(driver);
-		} else
+		} else {
+			System.out.println("Set Up Automatic Payments not displayed");
 			return null;
+		}
 	}
 	
 	public UpdateRecurringPage clickOnEditAutomaticPayment() throws Exception {
@@ -963,10 +972,19 @@ public class PaymentHistoryPage extends UhcDriver {
 		waitforElement(EditAutomaticPaymentsButton);
 		EditAutomaticPaymentsButton.click();
 		System.out.println("User clicked on Update Automatic Button");
-		if (validate(HelpfulRemindersPanel)) {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			System.out.println(driver.getCurrentUrl());
+			e.printStackTrace();
+		}
+		if (driver.getTitle().contains("Update Automatic Payments")) {
+			System.out.println("Navigated to Update Automatic Payments page");
 			return new UpdateRecurringPage(driver);
-		} else
+		} else {
+			System.out.println("Update Automatic Payments not displayed");
 			return null;
+		}
 	}
 	
 	public UpdateRecurringPage clickOnEditAutomaticPaymentforShip() throws Exception {
@@ -974,10 +992,19 @@ public class PaymentHistoryPage extends UhcDriver {
 		waitforElement(EditRecurringPaymentsButton);
 		EditRecurringPaymentsButton.click();
 		System.out.println("User clicked on Update Automatic Button");
-		if (validate(HelpfulRemindersPanel)) {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			System.out.println(driver.getCurrentUrl());
+			e.printStackTrace();
+		}
+		if (driver.getTitle().contains("Update Recurring Payments")) {
+			System.out.println("Navigated to Update Recurring Payments page for ship");
 			return new UpdateRecurringPage(driver);
-		} else
+		} else {
+			System.out.println("Update Automatic Payments not displayed for ship");
 			return null;
+		}
 	}
 	
 	// vvv note: added for F247601 Payment History SHIP testing

@@ -197,13 +197,13 @@ public class HSIDLoginPage extends UhcDriver {
 
 		if (driver.getCurrentUrl().contains(
 				"=securityQuestion")) {
-			
+
 			ConfirmSecurityQuestion cs = new ConfirmSecurityQuestion(driver);
 			try {
-				Thread.sleep(5000);
+				Thread.sleep(10000);
 				cs.enterValidSecurityAnswer();
 				System.out.println(driver.getCurrentUrl());
-				Thread.sleep(5000);
+				Thread.sleep(20000);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

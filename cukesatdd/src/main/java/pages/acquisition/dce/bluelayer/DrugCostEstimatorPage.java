@@ -8,6 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,6 +23,8 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ulayer.PageTitleConstants;
+import pages.acquisition.bluelayer.VPPPlanSummaryPage;
+
 
 public class DrugCostEstimatorPage extends UhcDriver {
 
@@ -1769,7 +1772,17 @@ public void navigateFromStep2ToStep3() throws InterruptedException {
 			Assert.assertFalse("Plan year are not displayed", true);
 		}
 	}
-	
+	public VPPPlanSummaryPage navigateBackToPlanSummaryPage() {
+		WebElement returnToPlanSummaryLink = driver.findElement(By.xpath("//*[@id='returnLink']"));	
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", returnToPlanSummaryLink);
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+		return new VPPPlanSummaryPage(driver);	
+				}
+				return null;
+			}
+
 	
 
 }

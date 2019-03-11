@@ -3,7 +3,7 @@
 Feature: G1.1 To validate forms and resources page in dashboard site
 
 
-@formsAndResources1 @F&RJMPLinks @Feb_release_2019 @gladiators
+@formsAndResources1 @F&RJMPLinks @Feb_release_2019 @gladiators @regressionMember
  Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To verify quicklinks for a MAPD member
    	Given login with following details logins in the member portal and validate elements
    	  | Plan Type      | <planType>      |
@@ -45,7 +45,7 @@ Feature: G1.1 To validate forms and resources page in dashboard site
 	  | 15128   | MEDICA   | Individual |IndEffectiveMedica| ENGLISH  | 6   |NoRider|
 	  
 	  
-@formsAndResources2 @F&RJMPLinks @Feb_release_2019 @gladiators
+@formsAndResources2 @F&RJMPLinks @Feb_release_2019 @gladiators @regressionMember
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - Verify jump links for individual MA member
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -82,7 +82,7 @@ Feature: G1.1 To validate forms and resources page in dashboard site
       | 00000    | MA       | Individual  |IndEffectiveAARP  | ENGLISH   | 7    |Rider  |
       | 00000    | MA       | Individual  |IndEffectiveAARP  | ENGLISH   | 7    |NoRider|
 	   
-@formsAndResources3 @F&RJMPLinks @Feb_release_2019 @gladiators
+@formsAndResources3 @F&RJMPLinks @Feb_release_2019 @gladiators @regressionMember
   Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -Verify jump links for a MedSupp member
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -115,7 +115,7 @@ Feature: G1.1 To validate forms and resources page in dashboard site
       | TID    | planType | memberType | Identifier         | language |count|rider  |
       | 15304  | MedSupp  | Individual |EffectiveShipMedSupp| ENGLISH  | 3   |NoRider|
 
- @formsAndResources4 @F&RJMPLinks @Feb_release_2019 @gladiators
+ @formsAndResources4 @F&RJMPLinks @Feb_release_2019 @gladiators @regressionMember
   Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - Verify jump links for individual PDP member
         Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -151,7 +151,7 @@ Feature: G1.1 To validate forms and resources page in dashboard site
       | 15131  | PDP      | Group      |EffectivePDPUHC  | ENGLISH  | 7   |NoRider|
       
       
-@formsAndResources5 @F&RJMPLinks @Feb_release_2019 @gladiators
+@formsAndResources5 @F&RJMPLinks @Feb_release_2019 @gladiators @regressionMember
   Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - Verify jump links for a SSUP member
       Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -477,6 +477,8 @@ Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> 
       | 15303 | MAPD     | GroupMAPDPharmacyFnR | ENGLISH  | Getting Started Guide | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Certificate of Coverage | Formulary/Drug List | Formulary/Drug List - Comprehensive | Additional Drug Coverage | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Certificate of Coverage | Annual Notice of Changes | Evidence of Coverage   | Comprehensive Formulary    | Additional Drug Coverage | Evidence Of Coverage |
 
   # |MAPD     | GroupPharmacyFnR  | SPANISH           |Beneficios Importantes |Resumen de Beneficios |Comprobante de Cobertura |Comprehensive Formulary-Spanish |
+  
+  
   @formsAndResources12 @fnrpdpaarpindividualvalidation @regressionMember 
   Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page PDP AARP Individual
     Given login with following details in the member redesign portal
@@ -840,7 +842,9 @@ Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> 
       | 15128 | MAPD     | PCP        | ENGLISH  | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions |NON LIS|Alternative Drug List | Provider Directory  | Vendor Information Sheet          |Pharmacy Directory Information|
 
   # | MAPD     | PCPFnR | SPANISH | Benefit Highlights  | Summary of Benefits  | Evidence of Coverage  | Comprehensive Formulary  | Prior Authorization  | Step Therapy  | Formulary Additions  | Formulary Deletions  |
-  @formsAndResources18 @ssupfnrvalidation  @regressionMember
+ 
+ 
+ @formsAndResources18 @ssupfnrvalidation  @regressionMember
   Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page for ssupFnr 
     Given login with following details in the member redesign portal
         |Type        |<type>        |
@@ -882,6 +886,8 @@ Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> 
       | 15304 | UHC      | SSUPFnR    | ENGLISH  | Schedule of Benefits | Certificate of Coverage | Your Plan Getting Started | Privacy Notice | CDI Long Notice |SSUP_DCE   |Group|
 
   #  | 00000   | MAPD     | PCPFnR |  #SPANISH | Benefit Highlights  | Summary of Benefits  | Evidence of Coverage  | Comprehensive Formulary  | Prior Authorization  | Step Therapy  | Formulary Additions  | Formulary Deletions  |
+  
+  
   @formsAndResources19 @combovalidation  @regressionMember
   Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page for combo members
     Given login with following details in the member redesign portal
@@ -926,14 +932,12 @@ Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> 
     Then validate that the renew magazine section is not displayed
     Then validate that the annual directories section is not displayed
     Then validate that the EOB Section is displayed
-    
-    
-
-    Examples: 
+   Examples: 
      | TID   | planType | memberType             |
       # uhc
      | 15129 | MA       | IndAARPMATerminatedFnR |
 
+ 
   @formsAndResources21 @shipscenario  @regressionMember
   Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page for SHIP members
     Given login with following details in the member redesign portal
@@ -959,12 +963,12 @@ Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> 
 	#	| BENEFIT HIGHLIGHTS  |<benefitstable>    |
 	#	| PLAN OVERVIEW | <planoverview>  |
 	#	| OUTLINE OF COVERAGE    |<outlineofcoverage>|
-
-    Examples: 
+	Examples: 
      | TID   | planType | memberType         | benefitstable  |planoverview  |outlineofcoverage   |
       # uhc
      | 15119 | SHIP     | IndPharmacyShipFnR | Benefits Table |Plan Overview |Outline of Coverage |
 
+  
   @formsAndResources22 @memberauthfnrpagevalidation  @regressionMember 
   Scenario Outline:  TID: <TID> -Username: <username> - To validate the forms and resources page through Member auth.
     Given the user is on member auth login flow page

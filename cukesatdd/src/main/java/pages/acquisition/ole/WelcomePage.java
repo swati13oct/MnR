@@ -33,7 +33,7 @@ public class WelcomePage extends UhcDriver{
 	private WebElement CancelEnrollmentLink;
 	
 	// WebElements for Welcome Page
-	@FindBy(xpath = "//*[@class = 'only-intro']")
+	@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class, 'only-intro')]")
 	private WebElement WelcomePageHeader;
 
 	@FindBy(id = "view-learn-enrollment")

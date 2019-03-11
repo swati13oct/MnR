@@ -65,8 +65,14 @@ public class CreditCardUPGPage extends UhcDriver {
 		selectFromDropDownByText(driver, SelectMonth, ExpMonth);
 		selectFromDropDownByText(driver, SelectYear, ExpYr);
 		ProceedButton.click();
-		waitforElement(ReviewPageHeading);
-		if (ReviewPageHeading.getText().contains("Review One Time Payment")) {
+		try {
+			Thread.sleep(15000);
+			System.out.println(driver.getCurrentUrl());
+		} catch (InterruptedException e) {
+			System.out.println(driver.getCurrentUrl());
+			e.printStackTrace();
+		}
+		if (driver.getTitle().contains("Payment")) {
 			System.out.println("Review One Time Payment page displayed");
 			return new ReviewOneTimePaymentPage(driver);
 		} else {
@@ -86,8 +92,13 @@ public class CreditCardUPGPage extends UhcDriver {
 		selectFromDropDownByText(driver, SelectMonth, ExpMonth);
 		selectFromDropDownByText(driver, SelectYear, ExpYr);
 		ProceedButton.click();
-		waitforElement(ReviewPageHeading);
-		if (ReviewPageHeading.getText().contains("Review Your Automatic Payments Information")) {
+		try {
+			Thread.sleep(15000);
+			System.out.println(driver.getCurrentUrl());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if (driver.getTitle().contains("Review Your Automatic Payments Information")) {
 			System.out.println("Review Your Automatic Payments Informations displayed");
 			return new ReviewAutomaticPage(driver);
 		} else {
@@ -107,7 +118,13 @@ public class CreditCardUPGPage extends UhcDriver {
 		selectFromDropDownByText(driver, SelectMonth, ExpMonth);
 		selectFromDropDownByText(driver, SelectYear, ExpYr);
 		ProceedButton.click();
-		if (ReviewPageHeading.getText().contains("Review Payment Method Update")) {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			System.out.println(driver.getCurrentUrl());
+			e.printStackTrace();
+		}
+		if (driver.getTitle().contains("Review Your Automatic Payments Update")) {
 			System.out.println("Review Payment Method Update displayed");
 			return new UpdateReviewPage(driver);
 		} else {

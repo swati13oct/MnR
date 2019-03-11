@@ -21,7 +21,7 @@ public class ReviewAutomaticPage extends UhcDriver {
 	@FindBy(xpath = "//button[text()='CHANGE CARD']")
 	private WebElement ChangeCard;
 
-	@FindBy(xpath = "//button[text()='Authorize Monthly Payments']")
+	@FindBy(xpath = "//button[@class='btn btn--primary']")
 	private WebElement AuthorizeMonthlyPaymentstButton;
 
 	@FindBy(xpath = "//button[@class='btn btn--primary' and (text()='CONTINUE' or text()='Continue')]")
@@ -42,9 +42,7 @@ public class ReviewAutomaticPage extends UhcDriver {
 		openAndValidate();
 	}
 
-	
-	public void PaymentsDataVerificationonReviewPage()
-	{
+	public void PaymentsDataVerificationonReviewPage() {
 		List<WebElement> rowsList = driver.findElements(By.xpath("//div[@class='table-body-row']"));
 		List<WebElement> columnsList = null;
 		for (WebElement row : rowsList) {
@@ -59,19 +57,27 @@ public class ReviewAutomaticPage extends UhcDriver {
 			}
 		}
 	}
-	
+
 	public RecurringConfirmationPage selectAgreeAndClickOnAuthorizeMonthyPaymentsforEFT() {
 		validate(EditPaymentInformation);
 		System.out.println("User is on Review Review Your Automatic Payments Information Page");
 		PaymentsDataVerificationonReviewPage();
 		jsClickNew(AgreeCheckBox);
-		ContinueButton.click();
+		AuthorizeMonthlyPaymentstButton.click();
 		System.out.println("Clicked on Authorize Monthly Payments button");
-		if (validate(MakeOneTimePaymentLink)) {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			System.out.println(driver.getCurrentUrl());
+			e.printStackTrace();
+		}
+		if (driver.getTitle().contains("Automatic Payments Request Submitted")) {
 			System.out.println("User is on Confirmation Page for Recurring");
 			return new RecurringConfirmationPage(driver);
-		} else
+		} else {
+			System.out.println("Confirmation Page for Recurring not displayed");
 			return null;
+		}
 	}
 
 	public RecurringConfirmationPage selectAgreeAndClickOnContinueforCC() {
@@ -79,13 +85,21 @@ public class ReviewAutomaticPage extends UhcDriver {
 		System.out.println("User is on Review Review Your Automatic Payments Information Page");
 		PaymentsDataVerificationonReviewPage();
 		jsClickNew(AgreeCheckBox);
-		ContinueButton.click();
+		AuthorizeMonthlyPaymentstButton.click();
 		System.out.println("Clicked on Contuine button");
-		if (validate(MakeOneTimePaymentLink)) {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			System.out.println(driver.getCurrentUrl());
+			e.printStackTrace();
+		}
+		if (driver.getTitle().contains("Your Automatic Payments")) {
 			System.out.println("User is on Confirmation Page for Recurring");
 			return new RecurringConfirmationPage(driver);
-		} else
+		} else {
+			System.out.println("Confirmation Page for Recurring not displayed");
 			return null;
+		}
 	}
 
 	@Override
