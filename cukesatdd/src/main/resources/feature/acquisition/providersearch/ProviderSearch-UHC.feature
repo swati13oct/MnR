@@ -31,5 +31,5 @@ Feature: 1.15-VBF-Acq-To test Provider Search Flow  in UMS site
     Then Verify provider is count is updated on plan compare page
 
     Examples: 
-      | TID   | zipcode |  | drug             | quantity | frequency     | branded | zipcode | plantype | planName                                         | radius   |
-      | 15488 |   90210 |  | Lipitor TAB 10MG |       30 | Every 1 month | yes     |   90210 | MAPD     | AARP MedicareComplete SecureHorizons Focus (HMO) | 15 miles |
+      | TID   | zipcode | isMultutiCounty | county             |
+      | 15488 |   90210 | NO              | Los Angeles County |
