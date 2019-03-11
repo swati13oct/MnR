@@ -198,6 +198,13 @@ public class ProfileandPreferencesUMSStepDefinition {
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 		profilePreferencesPage.validateTempAddressShip();
 	}
+	
+	@Then("^the user validate the temporary address section for  member")
+	public void UserValidatesTempAddress() {
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+		profilePreferencesPage.validateTempAddress();
+	}
 
 	/**
 	 * @toDo : The user checks the Password Update functionality without
@@ -552,6 +559,15 @@ public class ProfileandPreferencesUMSStepDefinition {
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
 		profilePreferencesPage.validateCancelElement();
+
+	}
+	
+	@Then("^the user checks the Edit Button changes to Cancel Button for ship")
+	public void UserChecksSaveCancelButtonShip() {
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+
+		profilePreferencesPage.validateCancelElementShip();
 
 	}
 

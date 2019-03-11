@@ -607,5 +607,16 @@ public class PlanDetailsPage extends UhcDriver {
 		}
 		return false;
 	}
+    public VPPPlanSummaryPage navigateBackToPlanSummaryPage() {
+        
+        backToAllPlans.click();
+        CommonUtility.checkPageIsReadyNew(driver);
+        if (driver.getCurrentUrl().contains("plan-summary")) {
+                        return new VPPPlanSummaryPage(driver);
+
+        }
+        return null;
+}
+
 
 }
