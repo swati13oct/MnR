@@ -198,9 +198,9 @@ Feature: S1.1 To test Member Auth Dashboard page.
       | username  | password  | MemUserName     | planType | option              | csrError                             |
       | qavgogine | qavgogine | q2_jun_aarp0101 | MAPD     | Replacement ID card | are not authorized to order material |
 
-  # @MemberAuth_Payments @fastandfurious @Feb_release_2019
+ 
 
-  @memauth11 @MemberAuthFederalOneTimeCC 
+  @memauth11 @MemberAuthFederalOneTimeCC  @MemberAuth_Payments @fastandfurious @Feb_release_2019
   Scenario Outline: UserStory: <UID>, Plan Type: <planType>, Member Type: <memberType> - To validate One Time CC Payment Submission Error for Member Auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -223,10 +223,10 @@ Feature: S1.1 To test Member Auth Dashboard page.
 
     Examples: 
       | UID     | username  | password  | planType | memberType          | Name | CreditCardNumber | validMonth | validYear | csrError              |
-      | F243897 | qavgogine | qavgogine | MAPD     | MAPD_MakePaymentsCCTotal | Test | 4111111111111111 |         04 |      2019 | are not authorized to |
+      | F243897 | qavgogine | qavgogine | MAPD     | MAPD_MakePaymentsCCTotal_Payments | Test | 4111111111111111 |         04 |      2019 | are not authorized to |
 
-# @MemberAuth_Payments @fastandfurious @Feb_release_2019
-  @memauth12 @MemberAuthFederalSetupRecurrEFT
+
+  @memauth12 @MemberAuthFederalSetupRecurrEFT @MemberAuth_Payments @fastandfurious @Feb_release_2019
   Scenario Outline: UserStory: <UID>, Plan Type: <planType>, Member Type: <memberType> - To validate Set up Recurring EFT Payment Submission Error for Member Auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -252,10 +252,10 @@ Feature: S1.1 To test Member Auth Dashboard page.
 
     Examples: 
       | UID     | username  | password  | planType | memberType  | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | csrError              |
-      | F243897 | qavgogine | qavgogine | MAPD     | MAPD_SetupRecEFT | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | are not authorized to |
+      | F243897 | qavgogine | qavgogine | MAPD     | MAPD_SetupRecEFT_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | are not authorized to |
 
-  # @MemberAuth_Payments @fastandfurious @Feb_release_2019
-  @memauth13 @MemberAuthFederalSetupRecurrCC 
+  
+  @memauth13 @MemberAuthFederalSetupRecurrCC  @MemberAuth_Payments @fastandfurious @Feb_release_2019
   Scenario Outline: UserStory: <UID>, Plan Type: <planType>, Member Type: <memberType> - To validate Setup Recurring CC Payment Submission Error for Member Auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -278,7 +278,7 @@ Feature: S1.1 To test Member Auth Dashboard page.
 
     Examples: 
       | UID     | username  | password  | planType | memberType | Name | CreditCardNumber | validMonth | validYear | csrError              |
-      | F243897 | qavgogine | qavgogine | MAPD     | MAPD_SetupRecCC | Test | 4111111111111111 |         04 |      2019 | are not authorized to |
+      | F243897 | qavgogine | qavgogine | MAPD     | MAPD_SetupRecCC_Payments | Test | 4111111111111111 |         04 |      2019 | are not authorized to |
 
   @memauth14 @MemberAuthFederalUpdateRecurrEFT @MemberAuth_Payments @fastandfurious @Feb_release_2019
   Scenario Outline: UserStory: <UID>, Plan Type: <planType>, Member Type: <memberType> - Verify Update Recurring for Checking Account Payment Submission Error for Member Auth
@@ -306,7 +306,7 @@ Feature: S1.1 To test Member Auth Dashboard page.
 
     Examples: 
       | UID     | username  | password  | planType | memberType      | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | csrError              |
-      | F243897 | qavgogine | qavgogine | MAPD     | MAPD_UpdateRecurrEFT | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | are not authorized to |
+      | F243897 | qavgogine | qavgogine | MAPD     | MAPD_UpdateRecurrEFT_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | are not authorized to |
 
 
 @memauth15 @MemberAuthFederalUpdateRecurrCC @MemberAuth_Payments @fastandfurious @Feb_release_2019
@@ -332,7 +332,7 @@ Feature: S1.1 To test Member Auth Dashboard page.
 
     Examples: 
       | UID     | username  | password  | planType | memberType | Name | CreditCardNumber | validMonth | validYear | csrError              |
-      | F243897 | qavgogine | qavgogine | MAPD     | MAPD_UpdateRecurrCC | Test | 4111111111111111 |         04 |      2019 | are not authorized to |
+      | F243897 | qavgogine | qavgogine | MAPD     | MAPD_UpdateRecurrCC_Payments | Test | 4111111111111111 |         04 |      2019 | are not authorized to |
 
 
  @memauth16 @MemberAuthUpdateRecurrStopFed @MemberAuth_Payments @fastandfurious @Feb_release_2019
@@ -353,7 +353,7 @@ Feature: S1.1 To test Member Auth Dashboard page.
 
     Examples: 
       | UID     | username  | password  | planType | memberType                   | csrError              |
-      | F243897 | qavgogine | qavgogine | MAPD     | MAPD_UpdateRecurrStop | are not authorized to |
+      | F243897 | qavgogine | qavgogine | MAPD     | MAPD_UpdateRecurrStop_Payments | are not authorized to |
 
   @memauth17 @MemberAuthUpdateRecurrStopSHIP @MemberAuth_Payments @fastandfurious @Feb_release_2019
   Scenario Outline: UserStory: <UID>, Plan Type: <planType>, Member Type: <memberType> - To validate SHIP STOP Recurring Update Payement Submission Error for Member Auth
@@ -373,7 +373,7 @@ Feature: S1.1 To test Member Auth Dashboard page.
 
     Examples: 
       | UID     | username  | password  | planType | memberType                   | csrError              |
-      | F243897 | qavgogine | qavgogine | SHIP     | SHIP_IndividualSHIPPaymentsUpdate | are not authorized to |
+      | F243897 | qavgogine | qavgogine | SHIP     | SHIP_IndividualSHIPPaymentsUpdate_Payments | are not authorized to |
 
   @memauth18 @MemberAuthUpdateRecurrEFTSHIP @MemberAuth_Payments @fastandfurious @Feb_release_2019
   Scenario Outline: UserStory: <UID>, Plan Type: <planType>, Member Type: <memberType> - To validate SHIP Update Recurring Paymnet EFT Submission Error for Member Auth
@@ -401,4 +401,4 @@ Feature: S1.1 To test Member Auth Dashboard page.
 
     Examples: 
       | UID     | username  | password  | planType | memberType                   | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | csrError              |
-      | F243897 | qavgogine | qavgogine | SHIP     | SHIP_IndividualSHIPPaymentsUpdate | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | are not authorized to |
+      | F243897 | qavgogine | qavgogine | SHIP     | SHIP_IndividualSHIPPaymentsUpdate_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | are not authorized to |
