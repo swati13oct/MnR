@@ -180,18 +180,12 @@ public class ClaimSummarypage extends UhcDriver{
 	private WebElement shipDateRangeErrMsg;
 	
     @FindBy (id="errorMsg")
-   // @FindBy(xpath ="//*[contains(text(),'You can view AARP Personal Health Insurance Plan claims')]")
     private WebElement PHIPerrorMsg;
     
 	@FindBy (css = ".color-red.semi-bold>p>span")
 	private WebElement fedDateRangeErrMsg;
 	
-<<<<<<< HEAD
-	//@FindBy (xpath ="//*[@id='futureDateErrorDivErr']/p/span/text()")
-	@FindBy (xpath = ".//*[@id='futureDateErrorDivErr']/p/span")
-=======
 	@FindBy (xpath ="//*[@id='futureDateErrorDivErr']/p/span")
->>>>>>> develop
 	private WebElement fromDateLaterThanToDateError;
 	
 	/*@FindBy (xpath =".//*[@id='moreInfoLinkAtdd0']/a")
@@ -545,7 +539,8 @@ public class ClaimSummarypage extends UhcDriver{
 			if(leavingsitepopup.isDisplayed()){
 				proceedButtonDownloadPopUp.click();
 				switchToNewTab();
-				driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);				CommonUtility.waitForPageLoad(driver, downloadmydatabutton, 60);
+				driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
+				CommonUtility.waitForPageLoad(driver, downloadmydatabutton, 60);
 			if (downloadmydatabutton.isDisplayed())
 			{			
 				downloadmydatabutton.click();		
@@ -613,14 +608,6 @@ public class ClaimSummarypage extends UhcDriver{
 
 			CommonUtility.waitForPageLoad(driver, searchButton,60);
 			searchButton.click();
-
-
-
-
-
-
-
->>>>>>> .theirs
 		}
 	}
 	/**
@@ -988,7 +975,7 @@ public class ClaimSummarypage extends UhcDriver{
 	 * @toDo :Validate error message for PHIP member on Claims Summary page
 	 */
 public boolean ValidatePHIPErrorMessage() throws InterruptedException{
-	    Thread.sleep(10000);
+	    Thread.sleep(3000);
 	     //if(driver.getTitle().equalsIgnoreCase("Claims")){	
 		// System.out.println("!!! The member is on Claims Summary page with PHIP Plan  !!!");
 		 validate(PHIPerrorMsg);		
