@@ -195,7 +195,7 @@ Feature: To test the payment flow on Member site
 
     Examples: 
       | planType | memberType            |
-      | MAPD     | IndividualUHCPayments |
+      | MAPD     | UpdateRecurrStop_Payments |
 
   @paymentsErrorMessage @US1474255 @Feb_release_2019 @Spartans @payment9
   Scenario Outline: Verify Recurring Payment Error Message for Different Types of Member

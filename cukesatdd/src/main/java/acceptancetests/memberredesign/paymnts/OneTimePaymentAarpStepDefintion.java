@@ -345,10 +345,9 @@ public class OneTimePaymentAarpStepDefintion {
 	public void click_on_Cancel_payment_btn() {
 		OneTimePaymentPage oneTimePayment = (OneTimePaymentPage) getLoginScenario()
 				.getBean(PageConstants.One_Time_Payments_Page);
-		OneTimePaymentPage OverviewPage = oneTimePayment.CancelPayments();
-
-		if (OverviewPage != null) {
-			getLoginScenario().saveBean(PageConstants.Payments_History_Page, OverviewPage);
+		PaymentHistoryPage paymenthistory = oneTimePayment.CancelPayments();
+		if (paymenthistory != null) {
+			getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymenthistory);
 
 		}
 	}
