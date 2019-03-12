@@ -189,6 +189,9 @@ public class PaymentHistoryPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@class='payments']//div[@class='container']//div[@class='col-md-12']//div/h2")
 	private WebElement AutoPayHeading;
+	
+	@FindBy(xpath = "//p[text()='Checking Account Information']")
+	private WebElement CheckingAccountInformationHeader;
 
 	@FindBy(xpath = "//*[@class='col-md-9 col-xs-12']//div/p[@class='textfontsize']")
 	private WebElement OneTimePayHeading;
@@ -811,8 +814,8 @@ public class PaymentHistoryPage extends UhcDriver {
 		CheckingAccountRadioButton.click();
 		System.out.println("clicked on Checking account button");
 		NextButton.click();
-		waitforElement(AutoPayHeading);
-		if (AutoPayHeading.getText().contains("easy to pay your premium.")) {
+		if (validate(CheckingAccountInformationHeader)) {
+			System.out.println("User is on Form Page for EFT");
 			return new OneTimePaymentPage(driver);
 		} else
 			return null;
