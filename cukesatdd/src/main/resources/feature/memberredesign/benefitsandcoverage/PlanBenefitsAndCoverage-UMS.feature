@@ -924,7 +924,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     Examples: 
       | UID       | planType    | memberType       | deductible1 |
       | US1564214 | MAGroup_BnC | SingleDeductible | $185        |
-      | US1564214 | MAPDGroup   | SingleDeductible | $250        |
+      | US1564214 | MAPDGroup_BnC   | SingleDeductible | $250        |
 
   @benefitsAndCoverage42 @F250386 @MedicalDeductibleCards @GroupDualDeductible @Mar_release_2019
   Scenario Outline: UserStory: <UID> -plan: <planType> -memberType: <memberType> - Verify Deductible cards for Dual deductible
