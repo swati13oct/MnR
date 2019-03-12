@@ -85,7 +85,8 @@ ac80e35e-c086-411b-aaa8-e660eb7a0e6b/Password@1,MAPDGroup,NoDeductible,
 b227b9cf-64f8-4b98-bc95-882968ad8554/Password@1,MAGroup,SingleDeductible,
 afdbd9e9-b049-48c9-bcf9-784029fde2d6/Password@1,MAPDGroup,SingleDeductible,
 d8276124-7d7c-4117-8e15-5e9f2d564c23/Password@1,MAGroup1,DualDeductible,
-3870f00c-e33e-455d-8f11-fbe0d5715fbe/Password@1,MAGroup2,DualDeductible,f22aeb44-736a-42fc-99d5-ef601401616c/Password@1,PDP,TexasRxPharmacyFnR,,
+3870f00c-e33e-455d-8f11-fbe0d5715fbe/Password@1,MAGroup2,DualDeductible,
+f22aeb44-736a-42fc-99d5-ef601401616c/Password@1,PDP,TexasRxPharmacyFnR,,
 b4a105a1-4f78-423e-b1f3-12a0e495c6da/Password@1,MAPD,IndUHCPharmacyFnR,,
 d113310c-a909-4697-b080-a255871e8681/Password@1,MA,IndAARPPharmacyFnR,,
 d63617c6-1766-4584-a613-c0b12db9e71a/Password@1,SHIP,IndPharmacyFnR,,
@@ -114,4 +115,3 @@ b0ba148f-e0bc-40e9-aed5-3aaba9f77402/Password@1,PDP,ComboMakeOneTimeCCTotal_Paym
 b0ba148f-e0bc-40e9-aed5-3aaba9f77402/Password@1,PDP,ComboStepuRecCC_Payments,
 418104da-2552-414d-bcec-a4fdaa500fbc/Password@1,PDP,ComboUpdateRecurrCC_Payments,
 b0ba148f-e0bc-40e9-aed5-3aaba9f77402/Password@1,PDP,ComboUpdateStopRec_Payments
-
