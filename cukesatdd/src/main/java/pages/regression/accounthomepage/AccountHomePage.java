@@ -1494,22 +1494,33 @@ public class AccountHomePage extends UhcDriver {
 			System.out.println("payment link is displayed on the header");
 			paymentsLink.click();
 			return new PaymentHistoryPage(driver);
-		} else {
+		} 
+		
+		else {
 			//tbd		System.out.println("payment link is not displayed on the header");  // when in future date
 			//tbd		coverageBenefits.click();
 
 			// NOTE:
 			// work-around, when Home, data maintained by Rally, is out of sync, payment tab may not show
 			// go to secondary page first then locate the payment tab.
-			System.out.println("payment link is not displayed on the dashboard header - attempt the workaround");  
+			System.out.println("payment link is not displayed on the dashboard header - attempt the workaround"); 
 			try {
-				coverageBenefits.click();
-			} catch (NoSuchElementException e) {
-				dashboard_coverageBenefits.click();
+				String Page_URL = "https://" + MRScenario.environment
+						+ "-medicare.uhc.com/aarp/member/payments/overview.html";
+				//String Page_URL = driver.getCurrentUrl().split(".com")[0];
+				driver.navigate().to(Page_URL);
+			} catch (Exception e1) {
+				try {
+					coverageBenefits.click();
+				} catch (NoSuchElementException e) {
+					dashboard_coverageBenefits.click();
+				}
+				WebDriverWait wait = new WebDriverWait(driver, 30);
+				paymentsLink3.click(); 
 			}
-			WebDriverWait wait = new WebDriverWait(driver, 30);
-			paymentsLink3.click(); 
+			System.out.println("Navigated to Payments Overview Page URL : " +driver.getCurrentUrl());
 			return new PaymentHistoryPage(driver); 
+
 		}
 
 		//tbd		 else{ CoverageAndBenefits.click();
