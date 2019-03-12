@@ -90,13 +90,13 @@ public class OneTimePaymentPage extends UhcDriver {
 	@FindBy(id = "closeButton")
 	private WebElement iPerceptionCloseButton;
 
-	@FindBy(xpath = "//*[@class='btn btn--secondary cancelbutton']")
+	@FindBy(xpath = "//*[@class='btn btn--secondary cancelbutton cancel-wcag']")
 	private WebElement RecurringFormCancel;
 
-	@FindBy(xpath = "//*[@class='modal-footer']/a[1]")
+	@FindBy(xpath = "//a[@class='btn btn--primary cancel-btn-modal']")
 	private WebElement RecurringFormCancelPopup;
 
-	@FindBy(xpath = "(//*[@id='paymentOverviewApp']//div[@class='container']//div[@class='col-md-12']/h2)[1]")
+	@FindBy(xpath = "//*[@id='paymentOverviewApp']//h2[contains(text(), normalize-space('Premium Payments Overview'))]")
 	private WebElement PaymentOverviewtText;
 
 	@FindBy(xpath = "(//*[@class='margin-medium']/span)[2]/a")
@@ -418,7 +418,7 @@ public class OneTimePaymentPage extends UhcDriver {
 		}
 	}
 
-	public OneTimePaymentPage CancelPayments() {
+	public PaymentHistoryPage CancelPayments() {
 		System.out.println("In Cancel payment method");
 
 		try {
@@ -438,7 +438,7 @@ public class OneTimePaymentPage extends UhcDriver {
 		RecurringFormCancelPopup.click();
 		waitforElement(PaymentOverviewtText);
 		if (PaymentOverviewtText.isDisplayed())
-			return new OneTimePaymentPage(driver);
+			return new PaymentHistoryPage(driver);
 		else
 			return null;
 
