@@ -78,8 +78,8 @@ Feature: To test the payment flow on Member site
     And the user confirms the Autopayment in UHC site
 
     Examples: 
-      | TID   | planType | memberType              | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
-      | 15142 | MAPD     | IndividualAarpPayments  | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.12 |
+      | TID   | planType | memberType             | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
+      | 15142 | MAPD     | IndividualAarpPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.12 |
 
   #NOTE: Nov2018 - q2_jun_aarp0057 didn't work, swap to use other user
   @TestmemberAuth @15170 @regressionMember @payment4
@@ -122,7 +122,7 @@ Feature: To test the payment flow on Member site
     And the user confirms the Submit disabled in Member site
 
     Examples: 
-      | TID   | username  | password  | MemUserName    | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
+      | TID   | username  | password  | MemUserName   | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
       | 15118 | qavgogine | qavgogine | q4_dec_uhc150 | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.12 |
 
   @paymentsShip @15320 @regressionMember @payment6
@@ -183,7 +183,7 @@ Feature: To test the payment flow on Member site
       | 15144 | COMBO    | COMBOAARPPayments2 | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
 
   @paymentsAutoPayCancel @US1463204 @Feb_release_2019 @Spartans @payment8
-  Scenario Outline: Verify Recurring Payment cancellation for Different Types of Member
+  Scenario Outline: UID: <UID> -plan: <planType> -memberType: <memberType> - Verify Cancel Model PopUP for Recurring EFT
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -191,14 +191,14 @@ Feature: To test the payment flow on Member site
     Then User Scrolls down to validate Payment History Section
     And the user clicks on New flow Edit Automatic Payment button
     And the user selects the Checking account option on New page
-    And the user clicks on cancel button in new flow
+    And the user clicks on cancel button in Recurring EFT flow
 
     Examples: 
-      | planType | memberType            |
-      | MAPD     | UpdateRecurrStop_Payments |
+      | UID       | planType | memberType                |
+      | US1463204 | MAPD     | UpdateRecurrStop_Payments |
 
   @paymentsErrorMessage @US1474255 @Feb_release_2019 @Spartans @payment9
-  Scenario Outline: Verify Recurring Payment Error Message for Different Types of Member
+  Scenario Outline: UID: <UID> -plan: <planType> -memberType: <memberType> - Verify Payment Error Message for Recurring EFT
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -209,11 +209,11 @@ Feature: To test the payment flow on Member site
     And the user clicks on Authorize button to validate error message
 
     Examples: 
-      | planType | memberType            |
-      | MAPD     | IndividualUHCPayments |
+      | UID       | planType | memberType                |
+      | US1474255 | MAPD     | UpdateRecurrStop_Payments |
 
   @paymentsCancelButton @US1449078 @Feb_release_2019 @Spartans @payment10
-  Scenario Outline: Verify oneTime Payment cancellation for Different Types of Member
+  Scenario Outline: UID: <UID> -plan: <planType> -memberType: <memberType> - Verify Cancel Model PopUP for OneTime Payment
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -221,28 +221,28 @@ Feature: To test the payment flow on Member site
     Then User Scrolls down to validate Payment History Section
     And the user clicks on New flow OneTime Payment button
     And the user selects the Checking account option on New page OTP
-    And the user clicks on cancel button in new flow for OneTimePay
+    And the user clicks on cancel button on Make one time flow
 
     Examples: 
-      | planType | memberType              |
-      | MAPD     | IndividualAARPRPayments |
+      | UID       | planType | memberType                |
+      | US1449078 | MAPD     | UpdateRecurrStop_Payments |
 
   @BalanceSummaryValidation @US1448800 @Feb_release_2019 @Spartans @payment11
-  Scenario Outline: Verify Balance Summary for different types of members
+  Scenario Outline: UID: <UID> -plan: <planType> -memberType: <memberType> - Verify Payment Summary for OneTime payment Flow
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When the user navigates to Recurring payment history
     Then User Scrolls down to validate Payment History Section
     And the user clicks on New flow OneTime Payment button
-    And the user validates the Balance Summary option on New page OTP
+    And the user validates the Payment Summary option on New page OTP
 
     Examples: 
-      | planType | memberType              |
-      | MAPD     | IndividualAARPRPayments |
+      | UID       | planType | memberType                |
+      | US1448800 | MAPD     | UpdateRecurrStop_Payments |
 
   @paymentsEndtoEnd @US1483885 @Feb_release_2019 @Spartans @payment12
-  Scenario Outline: Verify oneTime Payment submission for Different Types of Member
+  Scenario Outline: UID: <UID> -plan: <planType> -memberType: <memberType> - Verify oneTime Payment submission Checking Account
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -261,8 +261,8 @@ Feature: To test the payment flow on Member site
     And the user confirms the New flow OneTimePayment in UHC site
 
     Examples: 
-      | planType | memberType            | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
-      | MAPD     | IndividualUHCPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
+      | UID       | planType | memberType            | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
+      | US1483885 | MAPD     | IndividualUHCPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
 
   @paymentsAutoPayEndtoEnd @Feb_release_2019 @Spartans @payment13
   Scenario Outline: Verify AutoPay Payment submission for Different Types of Member
@@ -305,38 +305,37 @@ Feature: To test the payment flow on Member site
       | planType | memberType              | Name | CreditCardNumber |
       | PDP      | IndividualAARPCPayments | Test | 4111111111111111 |
 
-
   @payment15 @paymentHistoryShip @Apr_release_2019 @thePredators @F247601
   Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> - Verify SHIP member can view payment history.
-  """
-	This scenario covers the following user-stories in F247601
-		US1474717,US1474718,US1474731,US1474719,US1474720
-		US1474722,US1474723,US1474725,US1474726,US1474727
-		Open item: 
-		-Custom Search option text not visible 
-		-got server error when filter result in no row (e.g. Current Year filter option got server error)
-		-paid and unpaid filters behavior unstable 
-  """
+    """
+    This scenario covers the following user-stories in F247601
+    US1474717,US1474718,US1474731,US1474719,US1474720
+    US1474722,US1474723,US1474725,US1474726,US1474727
+    Open item: 
+    -Custom Search option text not visible 
+    -got server error when filter result in no row (e.g. Current Year filter option got server error)
+    -paid and unpaid filters behavior unstable 
+    """
+
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     Then the user navigates to payment history
-	Then user validates payment history section header exists
-	Then user expands show payment history for supplement insurance plan section
-	Then user validates date range default is Last 90 days  
-	Then user validates default payment status selected option
-	Then user validates payment table includes the most recent Payment Date information
-	Then user validates LEARN MORE ABOUT YOUR PAYMENT HISTORY link
-	Then user validates total date range options available
-	Then user validates nonCustomSearch date range options
-	Then user validates only paid rows display when paid selected
-	Then user validates only unpaid rows display when unpaid selected
-	Then user validates custom search with valid input
-	Then user validates error message for custom search with to date earlier than from date
-	Then user validates error message for custom search with no dates selected
-	Then user validates error message for custom search with From and To date more than 24 months apart
-	
+    Then user validates payment history section header exists
+    Then user expands show payment history for supplement insurance plan section
+    Then user validates date range default is Last 90 days
+    Then user validates default payment status selected option
+    Then user validates payment table includes the most recent Payment Date information
+    Then user validates LEARN MORE ABOUT YOUR PAYMENT HISTORY link
+    Then user validates total date range options available
+    Then user validates nonCustomSearch date range options
+    Then user validates only paid rows display when paid selected
+    Then user validates only unpaid rows display when unpaid selected
+    Then user validates custom search with valid input
+    Then user validates error message for custom search with to date earlier than from date
+    Then user validates error message for custom search with no dates selected
+    Then user validates error message for custom search with From and To date more than 24 months apart
+
     Examples: 
-      | FID    | planType  | memberType      | 
-      | 247601 | Ship     | PaymentHistory   |
-      
+      | FID    | planType | memberType     |
+      | 247601 | Ship     | PaymentHistory |

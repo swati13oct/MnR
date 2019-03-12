@@ -93,13 +93,10 @@ public class OneTimePaymentPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='btn btn--secondary cancelbutton cancel-wcag']")
 	private WebElement RecurringFormCancel;
 
-	@FindBy(xpath = "//a[@class='btn btn--primary cancel-btn-modal']")
-	private WebElement RecurringFormCancelPopup;
-
 	@FindBy(xpath = "//*[@id='paymentOverviewApp']//h2[contains(text(), normalize-space('Premium Payments Overview'))]")
 	private WebElement PaymentOverviewtText;
 
-	@FindBy(xpath = "(//*[@class='margin-medium']/span)[2]/a")
+	@FindBy(xpath = "//*[@class='margin-medium']//span//button")
 	private WebElement AuthorizeButton;
 
 	@FindBy(id = "btnSubmit")
@@ -111,8 +108,8 @@ public class OneTimePaymentPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='accountNumber']")
 	private WebElement CreditCardNumberField;
 
-	@FindBy(xpath = "(//*[@class='modal-content']//div[@class='modal-footer'])[1]/a[1]")
-	private WebElement PaymentCancelPopup;
+	@FindBy(xpath = "//a[@class='btn btn--primary cancel-btn-modal']")
+	private WebElement PaymentCancelModelPopup;
 
 	@FindBy(id = "form_routingNumber")
 	private WebElement Error1;
@@ -434,8 +431,8 @@ public class OneTimePaymentPage extends UhcDriver {
 		}
 		System.out.println("will click on cancel button");
 		RecurringFormCancel.click();
-		waitforElement(RecurringFormCancelPopup);
-		RecurringFormCancelPopup.click();
+		waitforElement(PaymentCancelModelPopup);
+		PaymentCancelModelPopup.click();
 		waitforElement(PaymentOverviewtText);
 		if (PaymentOverviewtText.isDisplayed())
 			return new PaymentHistoryPage(driver);
@@ -444,7 +441,7 @@ public class OneTimePaymentPage extends UhcDriver {
 
 	}
 
-	public OneTimePaymentPage CancelPaymentsOneTime() {
+	public PaymentHistoryPage CancelPaymentsOneTime() {
 		System.out.println("In Cancel payment method for OneTime");
 		try {
 			Thread.sleep(2000);
@@ -459,15 +456,13 @@ public class OneTimePaymentPage extends UhcDriver {
 		}
 		System.out.println("will click on cancel button");
 		RecurringFormCancel.click();
-		waitforElement(PaymentCancelPopup);
-		PaymentCancelPopup.click();
-		waitforElement(PaymentHeading);
-		if (PaymentHeading.getText().contains("Premium Payments Overview")) {
-			System.out.println("Payment Overview page displayed");
-			return new OneTimePaymentPage(driver);
-		} else
+		waitforElement(PaymentCancelModelPopup);
+		PaymentCancelModelPopup.click();
+		waitforElement(PaymentOverviewtText);
+		if (PaymentOverviewtText.isDisplayed())
+			return new PaymentHistoryPage(driver);
+		else
 			return null;
-
 	}
 
 	public OneTimePaymentPage ErrorMessageValidation() {
@@ -545,9 +540,6 @@ public class OneTimePaymentPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-
-		validate(otheramountfield);
-		validate(amountToBePaidField);
 		validate(routingNumberField);
 		validate(confirmRoutingNumberField);
 		validate(accountNumberField);
