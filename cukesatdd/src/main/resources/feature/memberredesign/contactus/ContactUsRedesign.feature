@@ -149,7 +149,7 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
 
     Examples: 
      | TID   | plantype | memberType                      |
-     | 15207 | MA       | Terminated_Group_MA_NICE        |
+     | 15207 | MA       | Terminated_Group_MA_NICE_ContactUS        |
      | 15208 | MAPD     | Terminated_Group_MAPD_COSMOS    |
      | 15210 | SSP      | Terminated_Group_SSP            |
      | 15214 | MA       | Terminated_Individual_MA_COSMOS |
