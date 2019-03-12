@@ -236,15 +236,6 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id='dashboard']//span[text()='View Your Claims']")
 	//@FindBy(xpath = "//*[@id='claims_1']") @FindBy(xpath = "//a[text()='Go to Claims page']")
-<<<<<<< HEAD
-	//@FindBy(xpath = "//*[@id='dashboard']//span[text()='View Your Claims']")
-	//@FindBy(xpath = "//*[@id='claims_1']")
-	//@FindBy(xpath = "//a[text()='Go to Claims page']")
-	@FindBy(xpath =".//*[@id='sticky-nav']/sticky-content/nav/div/div/div/div/a[2]")
-=======
-	@FindBy(xpath = "//*[@id='dashboard']//span[text()='View Your Claims']")
-	//@FindBy(xpath = "//*[@id='claims_1']") @FindBy(xpath = "//a[text()='Go to Claims page']")
->>>>>>> develop
 	private WebElement claimsDashboardLink;
 
 	@FindBy(xpath = "//*[@id='row2link1']/td[2]/a")
@@ -1222,11 +1213,9 @@ public class AccountHomePage extends UhcDriver {
 				|| MRScenario.environmentMedicare.equalsIgnoreCase("team-a")
 				|| (MRScenario.environmentMedicare.equalsIgnoreCase("team-t")
 						|| MRScenario.environment.equalsIgnoreCase("team-ci1"))) {
-			/*System.out.println("Go to claims link is present "
+			System.out.println("Go to claims link is present "
 					+ driver.findElement(By.xpath("//a[text()='Go to Claims page']")).isDisplayed());
-			driver.findElement(By.xpath("//a[text()='Go to Claims page']")).click();*/
-			 System.out.println("Go to claims link is present "+driver.findElement(By.xpath(".//*[@id='sticky-nav']/sticky-content/nav/div/div/div/div/a[2]")).isDisplayed());
-             driver.findElement(By.xpath(".//*[@id='sticky-nav']/sticky-content/nav/div/div/div/div/a[2]")).click(); 
+			driver.findElement(By.xpath("//a[text()='Go to Claims page']")).click();
 			return new ClaimSummarypage(driver);
 		} else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
 			System.out.println("user is on Stage login page");
@@ -1266,7 +1255,6 @@ public class AccountHomePage extends UhcDriver {
 				e.printStackTrace();
 			}
 
-			
 		}
 		return null;
 	}
@@ -2359,7 +2347,7 @@ public class AccountHomePage extends UhcDriver {
 		String preMessage_text = preEffectiveMessage.getAttribute("innerText");
 		System.out.println("Message displayed on Dashboard for this member is:" + preMessage_text);
 		Assert.assertTrue(preMessage_text.contains(
-				"Use this site to find helpful information while youï¿½re getting ready for your plan to start on"));
+				"Use this site to find helpful information while you�re getting ready for your plan to start on"));
 		System.out.println("First assert on the preeffective message is passed");
 		Assert.assertTrue(preMessage_text.contains(
 				"Depending on your plan coverage, you can find a provider, locate a pharmacy, or view important plan documents."));
@@ -2398,7 +2386,7 @@ public class AccountHomePage extends UhcDriver {
 	}
 	
 }
-<<<<<<< .mine
+
 	//This method the dashboard when a pre effective member lands on the Home page 
 	public void validateHomePage1() throws InterruptedException {
         Thread.sleep(10000);
@@ -2422,7 +2410,7 @@ public class AccountHomePage extends UhcDriver {
 
 	
 }
-=======
+
 }
 
 
@@ -2446,4 +2434,3 @@ public class AccountHomePage extends UhcDriver {
 
 
 
->>>>>>> .theirs
