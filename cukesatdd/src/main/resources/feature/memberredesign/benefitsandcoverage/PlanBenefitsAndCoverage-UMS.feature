@@ -397,7 +397,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
 
     Examples: 
       | TID   | planType | memberType | copayCategory |
-      | 15238 | MA       | Group      | NON LIS       |
+      | 15238 | MA       | Group_BnC  | NON LIS       |
       | 15238 | MAPD     | Group_BnC  | NON LIS       |
 
   #note: this scenario covers multiple testcases TID 15094,15240
@@ -427,7 +427,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
 
     Examples: 
       | TID   | planType | memberType | language | PlanBenefitsTable   |
-      | 15094 | HIP      | SHIP       | ENGLISH  | Plan Benefits Table |
+      | 15094 | HIP      | SHIP_BnC   | ENGLISH  | Plan Benefits Table |
 
   @benefitsAndCoverage23 @CMmapdindlis
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify PDF section is in place on Benefits and Coverage page for Lis user
@@ -688,8 +688,8 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     Examples: 
       | TID   | planType | memberType   |
       | 15367 | MAPD     | Hartford_BnC |
+    # | 15367 | PDP      | Hartford_BnC |
 
-  # | 15367 | PDP      | Hartford_BnC |
   @benefitsAndCoverage31 @thePredators @juneRelease2018 @TownOfGreenwichprescriptionDrugBenefit
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify town of greenwich Prescription Drug Benefits
     Given login with following details logins in the member portal and validate elements
@@ -908,9 +908,9 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     And the user validates the deductible card for no deductible member
 
     Examples: 
-      | UID     | planType      | memberType   |
-      | 1564217 | MAGroup_BnC   | NoDeductible |
-      | 1564217 | MAPDGroup_BnC | NoDeductible |
+      | UID       | planType      | memberType   |
+      | US1564217 | MAGroup_BnC   | NoDeductible |
+      | US1564217 | MAPDGroup_BnC | NoDeductible |
 
   @benefitsAndCoverage41 @F250386 @MedicalDeductibleCards @GroupSingleDeductible @Mar_release_2019
   Scenario Outline: UserStory: <UID> -plan: <planType> -memberType: <memberType> -Verify Deductible cards for Single deductible
@@ -922,9 +922,9 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | DeductibleAmount1 | <deductible1> |
 
     Examples: 
-      | UID     | planType      | memberType       | deductible1 |
-      | 1564214 | MAGroup_BnC   | SingleDeductible | $185        |
-      | 1564214 | MAPDGroup_BnC | SingleDeductible | $250        |
+      | UID       | planType    | memberType       | deductible1 |
+      | US1564214 | MAGroup_BnC | SingleDeductible | $185        |
+      | US1564214 | MAPDGroup   | SingleDeductible | $250        |
 
   @benefitsAndCoverage42 @F250386 @MedicalDeductibleCards @GroupDualDeductible @Mar_release_2019
   Scenario Outline: UserStory: <UID> -plan: <planType> -memberType: <memberType> - Verify Deductible cards for Dual deductible
@@ -937,6 +937,6 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | DeductibleAmount2 | <deductible2> |
 
     Examples: 
-      | UID     | planType     | memberType     | deductible1 | deductible2 |
-      | 1564213 | MAGroup1_BnC | DualDeductible | $150        | $250        |
-      | 1564213 | MAGroup2_BnC | DualDeductible | $1,364      | $185        |
+      | UID       | planType     | memberType     | deductible1 | deductible2 |
+      | US1564213 | MAGroup1_BnC | DualDeductible | $150        | $250        |
+      | US1564213 | MAGroup2_BnC | DualDeductible | $1,364      | $185        |
