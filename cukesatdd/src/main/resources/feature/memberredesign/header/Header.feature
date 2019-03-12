@@ -6,7 +6,7 @@ Feature:I1.3Header/Navigation for Member Site Redesign
 	Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify HSID login functionality and header
 	  Given login with following details logins in the member portal and validate elements
 	| Plan Type   | <planType>   |
-	| Member Type | <memberType> |
+	| Member Type   | <memberType> |
 	#When the above plantype user logs in UMS Site Desktop Header
 	And I view the global navigation Header
 	Then I should be able to see and use the Home tab Header
@@ -67,8 +67,8 @@ Feature:I1.3Header/Navigation for Member Site Redesign
 	
 	Examples:
 	 | TID   | planType| memberType  	         | 
-	 | 15171 | MAPD    | UHCGroup_header  	     |
-	 | 15171 | MAPD    | IndividualMembe_headerr |
+	 | 15171 | MAPD    | UHCGroup_header         |
+	 | 15171 | MAPD    | IndividualMember_header |
 	 | 15171 | MAPD    | PCP_header              |
 	 | 15171 | MAPD    | Medica_header           |
 	 
@@ -77,12 +77,12 @@ Feature:I1.3Header/Navigation for Member Site Redesign
 	Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To check that the Find Care and Costs Tab is not displayed in the header
 	Given login with following details logins in the member portal and validate elements
 	| Plan Type   | <planType>   |
-	| Member Type | <memberType> |
+	| Member Type   | <memberType> |
 	#And I view the global navigation Header
 	Then I should not be able to see the Find Care & Costs tab Header
 	
 	Examples:
-	 | TID   | planType |  memberType        | 
+	 | TID   | planType |  memberType  	     | 
 	 | 15251 | SHIP     |  Individual_header |
 	 | 15251 | SSUP     |  UHCGroup_header   |
 	 

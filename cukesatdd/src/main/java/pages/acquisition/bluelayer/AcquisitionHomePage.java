@@ -1088,7 +1088,19 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		sendkeys(zipCodeField, zipcode);
 
 		viewPlansButton.click();
+
 		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+
+		/*
+		 * try { if (countyModal.isDisplayed()) { for (WebElement county :
+		 * countyRows) { if (county.getText().equalsIgnoreCase(countyName)) {
+		 * county.click(); break; }
+		 * 
+		 * } } } catch (Exception e) { System.out.println("county box not found"
+		 * ); }
+		 */
+		CommonUtility.waitForPageLoadNew(driver, changeLocationLink, 30);
+
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
 		}
