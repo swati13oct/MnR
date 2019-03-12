@@ -18,6 +18,7 @@ import pages.acquisition.bluelayer.PlanComparePage;
 import pages.acquisition.bluelayer.PlanDetailsPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.ulayer.ComparePlansPage;
 import pages.acquisition.bluelayer.ComparePlansPageBlayer;
 import pages.acquisition.bluelayer.DrugCostEstimatorPage;
 import pages.acquisition.bluelayer.FindCarePage;
@@ -603,7 +604,7 @@ public class VppStepDefinitionUHC {
 		System.out.println("TFN for Plan Type is : " + TFN);
 		System.out.println("Plan Year is : " + PlanYear);
 		System.out.println("OLE is being started from Acquisition Site : " + SiteName);
-		PlanComparePage comparePlansPage = planSummaryPage.selectplantocompare(PlanType);
+		PlanComparePage comparePlansPage = planSummaryPage.selectplantocompare(PlanType, PlanName);
 
 		if (comparePlansPage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, comparePlansPage);
@@ -1028,4 +1029,26 @@ public class VppStepDefinitionUHC {
 				Assert.fail("Error in validating the OLE Campaign Landing");
 		}
 		
+		
+		@Then("^the user validates the following Medical Benefits for the plan in Plan Compare Page on UHC$")
+		public void the_user_validates_the_following_Medical_benefits_for_the_plan_in_Plan_Compare_Page(DataTable givenAttributes) throws Throwable {
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+						memberAttributesRow.get(i).getCells().get(1));
+			}
+
+			String benefitType = memberAttributesMap.get("Benefit Type");
+			String expectedText = memberAttributesMap.get("Expected Text");
+			String PlanName = memberAttributesMap.get("Plan Name");
+			System.out.println("Validating the following Medical benefits : "+benefitType);
+
+			PlanComparePage comparePlansPage = (PlanComparePage) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);
+			boolean validationFlag = comparePlansPage.validatingMedicalBenefitTextInPlanDetails(benefitType, expectedText, PlanName);
+			Assert.assertTrue("Validation failed : Expected text not displayed for Medical Benefit - "+benefitType,validationFlag);
+		
+		}	
 		}

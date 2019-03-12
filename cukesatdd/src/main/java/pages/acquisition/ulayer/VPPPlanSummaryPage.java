@@ -1082,6 +1082,55 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		System.out.println("Compare Plans Link not displayed");
 		return null;
 	}
+	
+	public ComparePlansPage selectplantocompare(String PlanType, String PlanName) {
+		//To add upto 4 plans to compare and navigate to Plan Compare Page
+		int count = 1;
+		if(PlanType.contains("PDP")){
+			System.out.println("Plan Type is :"+PlanType);
+			count = (Integer.parseInt(maPlansCount.getText())) + 1;
+			System.out.println("Plan count starts is :"+count);
+		}
+		int CountUntil = count+3;
+		do{
+			String temp = Integer.toString(count);
+			WebElement SelectCompare = driver.findElement(By.xpath("//*[@id = 'compare-plan-"+temp+"']//following-sibling::label"));
+			if(validate(SelectCompare))
+				SelectCompare.click();
+			count++;
+		}while(count<CountUntil);
+
+		try {
+			if(driver.findElement(By.xpath("//*[contains(text(), '"+PlanName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//label[contains(@for, 'compare-plan')]")).getText().equalsIgnoreCase("Add to compare")){
+				driver.findElement(By.xpath("//*[contains(text(), '"+PlanName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//label[contains(@for, 'compare-plan')]")).click();
+				System.out.println("Add to Compare is clicked for the plan : "+PlanName);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 try {
+			if(driver.findElement(By.xpath("//*[contains(text(), '"+PlanName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//label[contains(@for, 'compare-plan')]")).getText().equalsIgnoreCase("Added to compare")){
+					System.out.println("Add to Compare already clicked for the plan : "+PlanName);
+			 }
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List <WebElement> ComparePlansLinks = driver.findElements(By.xpath("//button[contains(text(), 'Compare plans') and @type='submit']"));
+		//validate();
+		for(WebElement CompareLink : ComparePlansLinks){
+			if(CompareLink.isDisplayed()){
+				CompareLink.click();
+				CommonUtility.checkPageIsReady(driver);
+				if (driver.getCurrentUrl().contains("plan-compare")) {
+					return new ComparePlansPage(driver);
+				}
+			}
+		}
+		System.out.println("Compare Plans Link not displayed");
+		return null;
+	}
 
 	public DrugCostEstimatorPage navigateToDCEFromVPP(String plantype, String planName){
 		if(plantype.equals("MA")||plantype.equals("MAPD")){

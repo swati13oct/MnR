@@ -234,3 +234,29 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
       | US1497179 - AARP - PCP Tiering           |   28701 | NO              | Buncombe County | MAPD     | AARP MedicareComplete Plan 3 (HMO)                | Primary Care Provider Copay | Tier 1: $0 copay / Tier 2: $20 copay  |
       | US1497179 - AARP - No PCP Tiering        |   06280 | NO              | Windham County  | MA       | UnitedHealthcare MedicareComplete Essential (HMO) | Primary Care Provider Copay | $5 copay                              |
       | US1497179 - AARP - No PCP Tiering        |   35618 | NO              | Lawrence County | MAPD     | AARP MedicareComplete Plan 1 (HMO)                | Primary Care Provider Copay | $5 copay                              |
+
+  @F251983 @validatePCPTieringPlanCompare @fastandfurious @Apr_release_2019
+  Scenario Outline: UserStory: <UID> -plan type: <plantype> - Verify PCP and Specialist Benefits Tiering in Plan Details for provided plan on AARP
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
+    And the user views the plans of the below plan type in AARP site
+      | Plan Type | <plantype> |
+    And the user validates the available plans for selected plan types in the AARP site
+    Then the user selects plans to add to plan compare and navigates to Plan compare page
+      | Plan Name | <planName> |
+    Then the user validates the following Medical Benefits for the plan in Plan Compare Page
+      | Benefit Type  | <benefitType>  |
+      | Expected Text | <expectedText> |
+      | Plan Name     | <planName>     |
+
+    Examples: 
+      | UID                                            | zipcode | isMultutiCounty | county          | plantype | planName                                          | benefitType                 | expectedText                         |
+      | US1625234 - AARP Plan Compare - PCP Tiering    |   27021 | YES             | Stokes County   | MA       | AARP MedicareComplete Essential (HMO)             | Primary Care Provider Copay | Tier 1: $0 copay / Tier 2: $10 copay |
+      | US1625234 - AARP Plan Compare - PCP Tiering    |   27021 | YES             | Stokes County   | MAPD     | AARP MedicareComplete Plan 1 (HMO)                | Primary Care Provider Copay | Tier 1: $0 copay / Tier 2: $10 copay |
+      | US1625234 - AARP Plan Compare - PCP Tiering    |   28616 | NO              | Avery County    | MAPD     | AARP MedicareComplete Plan 2 (HMO)                | Primary Care Provider Copay | Tier 1: $0 copay / Tier 2: $20 copay |
+      | US1625234 - AARP Plan Compare - PCP Tiering    |   28701 | NO              | Buncombe County | MAPD     | AARP MedicareComplete Plan 3 (HMO)                | Primary Care Provider Copay | Tier 1: $0 copay / Tier 2: $20 copay |
+      | US1625234 - AARP Plan Compare - PCP No Tiering |   06280 | NO              | Windham County  | MA       | UnitedHealthcare MedicareComplete Essential (HMO) | Primary Care Provider Copay | $5 copay                             |
+      | US1625234 - AARP Plan Compare - PCP No Tiering |   35618 | NO              | Lawrence County | MAPD     | AARP MedicareComplete Plan 1 (HMO)                | Primary Care Provider Copay | $5 copay                             |
