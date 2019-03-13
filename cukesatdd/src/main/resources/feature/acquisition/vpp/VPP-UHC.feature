@@ -226,14 +226,14 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
       | US1497184 - UHC - No Specialist Tiering |   35618 | NO              | Lawrence County | MAPD     | AARP MedicareComplete Plan 1 (HMO)                | Specialist Copay | $40 copay                             |
 
       
-  @feature-F265872 @us1598162  @vppFavoritePlanUhc @thePredators @Apr_release_2019
+  @feature-F265872 @us1598162 @vppFavoritePlanInSessionUhc @thePredators @Apr_release_2019
   Scenario Outline: UID: <UID> -planType: <planType> -isMultiCounty: <isMultiCounty> - Verify user can save and unsave favorite plans on view plan preview page on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
-    When user validates plan count for all plan types on plan summary page in the UMS site 
+    Then user validates plan count for all plan types on plan summary page in the UMS site 
     Then user validates save plan option is unselected for all plans by default on UHC site
     Then user validates selected plans can be saved as favorite on UHC site
       | MA Test Plans   | <MA_testPlans>  |
@@ -289,4 +289,71 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
     Examples: 
       | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                          | PDP_testPlans                                                    | SNP_testPlans                                                                               |
       | 1598162 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Nursing Home Plan (PPO SNP),UnitedHealthcare Assisted Living Plan (PPO SNP)|
+
+
+  @feature-F265872 @us1598162 @vppFavoritePlanInSessionCloseTabUhc @thePredators @Apr_release_2019
+  Scenario Outline: UID: <UID> -planType: <planType> -isMultiCounty: <isMultiCounty> - Verify user can print favorite plans on view plan preview page on UHC site
+    Given the user is on the uhcmedicaresolutions site landing page
+    When the user performs plan search using following information in UMS site
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
+    Then user validates plan count for all plan types on plan summary page in the UMS site 
+    Then user validates selected plans can be saved as favorite on UHC site
+      | MA Test Plans   | <MA_testPlans>  |
+      | PDP Test Plans  | <PDP_testPlans> |
+      | SNP Test Plans  | <SNP_testPlans> |
+	Then user closes the original tab and open new tab for UHC site
+	Then the user performs plan search using following information in the UHC site
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
+	Then user validates plans remain saved within same session for UHC site
+      | MA Test Plans   | <MA_testPlans>  |
+      | PDP Test Plans  | <PDP_testPlans> |
+      | SNP Test Plans  | <SNP_testPlans> |
+ 
+    Examples: 
+      | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                          | PDP_testPlans                                                    | SNP_testPlans                                                                               |
+      | 1598162 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Nursing Home Plan (PPO SNP),UnitedHealthcare Assisted Living Plan (PPO SNP)|
+
+
+  @feature-F265872 @us1598166 @vppFavoritePlanEmailUhc @thePredators @Apr_release_2019
+  Scenario Outline: UID: <UID> -planType: <planType> -isMultiCounty: <isMultiCounty> - Verify user can email favorite plans on view plan preview page on UHC site
+    Given the user is on the uhcmedicaresolutions site landing page
+    When the user performs plan search using following information in UMS site
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
+    Then user validates plan count for all plan types on plan summary page in the UMS site 
+    Then user validates selected plans can be saved as favorite on UHC site
+      | MA Test Plans   | <MA_testPlans>  |
+      | PDP Test Plans  | <PDP_testPlans> |
+      | SNP Test Plans  | <SNP_testPlans> |
+    Then user validates email option on UHC site
+	Then user validates email functionality with invalid and valid emaill address on UHC site
+    Examples: 
+      | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                          | PDP_testPlans                                                    | SNP_testPlans                                                                               |
+      | 1598166 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Nursing Home Plan (PPO SNP),UnitedHealthcare Assisted Living Plan (PPO SNP)|
+
+
+  @feature-F265872 @us1603378 @vppFavoritePlanPrintAarp @thePredators @Apr_release_2019 @abc
+  Scenario Outline: UID: <UID> -planType: <planType> -isMultiCounty: <isMultiCounty> - Verify user can print favorite plans on view plan preview page on UHC site
+    Given the user is on the uhcmedicaresolutions site landing page
+    When the user performs plan search using following information in UMS site
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
+    Then user validates plan count for all plan types on plan summary page in the UMS site 
+    Then user validates selected plans can be saved as favorite on UHC site
+      | MA Test Plans   | <MA_testPlans>  |
+      | PDP Test Plans  | <PDP_testPlans> |
+      | SNP Test Plans  | <SNP_testPlans> |
+    Then user validates print option on UHC site
+	Then user validates print functionality on UHC site
+
+    Examples: 
+      | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                          | PDP_testPlans                                                    | SNP_testPlans                                                                               |
+      | 1603378 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Nursing Home Plan (PPO SNP),UnitedHealthcare Assisted Living Plan (PPO SNP)|
+
       

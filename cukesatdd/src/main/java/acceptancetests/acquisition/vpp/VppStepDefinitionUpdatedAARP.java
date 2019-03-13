@@ -848,17 +848,20 @@ public void user_validates_save_plan_option_is_unselected_for_all_plans_by_defau
 	//----- MA plan type -----------------------------
 	String planType="MA";
 	plansummaryPage.viewPlanSummary(planType);
-	plansummaryPage.validatePrintAndEmailOptionsExistOnPage(planType);
+	//plansummaryPage.validateEmailOptionExistOnPage(planType);
+	//plansummaryPage.validatePrintOptionExistOnPage(planType);
 	plansummaryPage.validateDefaultNoSavedPlan(planType);
 	//----- PDP plan type ----------------------------
 	planType="PDP";
 	plansummaryPage.viewPlanSummary(planType);
-	plansummaryPage.validatePrintAndEmailOptionsExistOnPage(planType);
+	//plansummaryPage.validateEmailOptionExistOnPage(planType);
+	//plansummaryPage.validatePrintOptionExistOnPage(planType);
 	plansummaryPage.validateDefaultNoSavedPlan(planType);
 	//----- SNP plan type ----------------------------
 	planType="SNP";
 	plansummaryPage.viewPlanSummary(planType);
-	plansummaryPage.validatePrintAndEmailOptionsExistOnPage(planType);
+	//plansummaryPage.validateEmailOptionExistOnPage(planType);
+	//plansummaryPage.validatePrintOptionExistOnPage(planType);
 	plansummaryPage.validateDefaultNoSavedPlan(planType);
 }
 
@@ -1198,6 +1201,112 @@ public void user_validates_unsave_favorite_plans_will_be_stored_within_same_sess
 	plansummaryPage.validateOnePlanSavedOnePlanUnsaved(snp_savePlanNames, planType);
 }
 
-//^^^ note: added for US1598162
+@Then("^user validates email option on AARP site$")
+public void user_validates_email_option_on_AARP_site() {
+	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	//----- MA plan type -----------------------------
+	String planType="MA";
+	plansummaryPage.viewPlanSummary(planType);
+	plansummaryPage.validateEmailOptionExistOnPage(planType);
+	//----- PDP plan type ----------------------------
+	planType="PDP";
+	plansummaryPage.viewPlanSummary(planType);
+	plansummaryPage.validateEmailOptionExistOnPage(planType);
+	//----- SNP plan type ----------------------------
+	planType="SNP";
+	plansummaryPage.viewPlanSummary(planType);
+	plansummaryPage.validateEmailOptionExistOnPage(planType);
+}
 
+@Then("^user validates print option on AARP site$")
+public void user_validates_print_option_on_AARP_site() {
+	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	//----- MA plan type -----------------------------
+	String planType="MA";
+	plansummaryPage.viewPlanSummary(planType);
+	plansummaryPage.validatePrintOptionExistOnPage(planType);
+	//----- PDP plan type ----------------------------
+	planType="PDP";
+	plansummaryPage.viewPlanSummary(planType);
+	plansummaryPage.validatePrintOptionExistOnPage(planType);
+	//----- SNP plan type ----------------------------
+	planType="SNP";
+	plansummaryPage.viewPlanSummary(planType);
+	plansummaryPage.validatePrintOptionExistOnPage(planType);
+}
+
+@Then("^user validates email functionality with invalid and valid emaill address on AARP site$")
+public void user_validates_email_functionality_on_AARP_site() {
+	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	//----- MA plan type -----------------------------
+	String planType="MA";
+	plansummaryPage.viewPlanSummary(planType);
+	plansummaryPage.validateEmailOption(planType);
+	//----- PDP plan type ----------------------------
+	planType="PDP";
+	plansummaryPage.viewPlanSummary(planType);
+	plansummaryPage.validateEmailOption(planType);
+	//----- SNP plan type ----------------------------
+	planType="SNP";
+	plansummaryPage.viewPlanSummary(planType);
+	plansummaryPage.validateEmailOption(planType);
+}
+
+@Then("^user validates print functionality on AARP site$")
+public void user_validates_print_functionality_on_AARP_site() {
+	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	//----- MA plan type -----------------------------
+	String planType="MA";
+	plansummaryPage.viewPlanSummary(planType);
+	plansummaryPage.validatePrintOption(planType);
+	//----- PDP plan type ----------------------------
+	planType="PDP";
+	plansummaryPage.viewPlanSummary(planType);
+	plansummaryPage.validatePrintOption(planType);
+	//----- SNP plan type ----------------------------
+	planType="SNP";
+	plansummaryPage.viewPlanSummary(planType);
+	plansummaryPage.validatePrintOption(planType);
+}
+
+@Then("^user closes the original tab and open new tab for AARP site$")
+public void user_closes_the_original_tab_and_open_new_tab_for_AARP_site() {
+	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	plansummaryPage.closeOriginalTabAndOpenNewTab();
+}
+
+@Then("^user validates plans remain saved within same session for AARP site$")
+public void user_validates_plans_remain_saved_within_same_session(DataTable givenAttributes) {
+	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	
+	Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
+	String ma_savePlanNames = memberAttributesMap.get("MA Test Plans");
+	String pdp_savePlanNames = memberAttributesMap.get("PDP Test Plans");
+	String snp_savePlanNames = memberAttributesMap.get("SNP Test Plans");
+
+	//----- MA plan type ---------------------------
+	String planType="MA";
+	System.out.println("Proceed to validate "+planType+" saved plan(s) are still saved");
+	plansummaryPage.viewPlanSummary(planType);
+	plansummaryPage.validatePlansAreSaved(ma_savePlanNames, planType);
+	
+	//----- PDP plan type --------------------------
+	planType="PDP";
+	System.out.println("Proceed to validate "+planType+" saved plan(s) are still saved");
+	plansummaryPage.viewPlanSummary(planType);
+	plansummaryPage.validatePlansAreSaved(pdp_savePlanNames, planType);
+	
+	//----- SNP plan type --------------------------
+	planType="SNP";
+	System.out.println("Proceed to validate "+planType+" saved plan(s) are still saved");
+	plansummaryPage.viewPlanSummary(planType);
+	plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType);
+}
+//^^^ note: added for US1598162
 }
