@@ -304,7 +304,7 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
       | PDP Test Plans  | <PDP_testPlans> |
       | SNP Test Plans  | <SNP_testPlans> |
 	Then user closes the original tab and open new tab for UHC site
-	Then the user performs plan search using following information in the UMS site
+	Then the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
