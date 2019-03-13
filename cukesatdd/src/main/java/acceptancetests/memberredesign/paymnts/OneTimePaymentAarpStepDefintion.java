@@ -328,8 +328,8 @@ public class OneTimePaymentAarpStepDefintion {
 
 	}
 
-	@And("^the user validates the Balance Summary option on New page OTP$")
-	public void validate_Balance_Summary_Payment_on_OTP() {
+	@And("^the user validates the Payment Summary option on New page OTP$")
+	public void validate_Payment_Summary_Payment_on_OTP() {
 		PaymentHistoryPage paymenthistory = (PaymentHistoryPage) getLoginScenario()
 				.getBean(PageConstants.NEW_CC_BUTTON);
 		OneTimePaymentPage oneTimePayment = paymenthistory.BalanceSummaryValidation();
@@ -341,7 +341,7 @@ public class OneTimePaymentAarpStepDefintion {
 
 	}
 
-	@And("^the user clicks on cancel button in new flow$")
+	@And("^the user clicks on cancel button in Recurring EFT flow$")
 	public void click_on_Cancel_payment_btn() {
 		OneTimePaymentPage oneTimePayment = (OneTimePaymentPage) getLoginScenario()
 				.getBean(PageConstants.One_Time_Payments_Page);
@@ -352,14 +352,14 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 	}
 
-	@And("^the user clicks on cancel button in new flow for OneTimePay$")
+	@And("^the user clicks on cancel button on Make one time flow$")
 	public void click_on_Cancel_payment_btn_OTP_flow_new() {
 		OneTimePaymentPage oneTimePayment = (OneTimePaymentPage) getLoginScenario()
 				.getBean(PageConstants.One_Time_Payments_Page);
-		OneTimePaymentPage OverviewPage = oneTimePayment.CancelPaymentsOneTime();
+		PaymentHistoryPage paymenthistory = oneTimePayment.CancelPaymentsOneTime();
 
-		if (OverviewPage != null) {
-			getLoginScenario().saveBean(PageConstants.Payments_History_Page, OverviewPage);
+		if (paymenthistory != null) {
+			getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymenthistory);
 
 		}
 	}
