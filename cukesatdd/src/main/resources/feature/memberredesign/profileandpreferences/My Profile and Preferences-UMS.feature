@@ -1,18 +1,20 @@
-@accountProfile  @thePredators @regressionMember
-Feature: C1.2To test Profile and Preferences page .
+@accountProfile  @thePredators @regressionMember 
+Feature: C1.2To test Profile and Preferences page 
 
   
-    @accountProfile1 @ShipEndtoEnd 
+    @accountProfile1 @ShipEndtoEnd
 	Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Profile page End to End test for Ship Members
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
     When the user navigates to Profile and Preferences page
-	Then the user validates the Plan Name, Member name and  Member ID  in UMS site                      
+	Then the user validates the Plan Name, Member name, Member ID and account section in UMS site                      
     And the user validates the need help section  														
 	Then the user validates permanent address section   												
-	 Then the user validates the Phone section                                                          
-    Then the user Clicks on the the Edit Link and validates the elements 							    
-    Then the user checks the Edit Button changes to Cancel Button                                     
+	Then the user validates the Phone section 
+	 | Plan Type | <planType> |                                                         
+    Then the user Clicks on the the Edit phone Link and validates the elements
+    | Plan Type | <planType> | 							    
+    Then the user checks the Edit Button changes to Cancel Button for ship                                     
     Then the user checks the functionality of save Button in Phoneeditsection                          
     Then the user validate the functionality of Cancel Button In phoneeditSection                      
     Then the user validate the temporary address section for ship member                                
@@ -22,31 +24,34 @@ Feature: C1.2To test Profile and Preferences page .
     And the user validates on clicking contact us link it should route to contact us page             
 	
 	Examples: 
-     |  TID    | planType          |
-     |  15103  | SHIP_ProfilePref  |
+     |  TID    | planType           |
+     |  15103  | SHIP_ProfilePref   |
 	  
 	
   @accountProfile2 @MAPDandMAEndToEnd	
   Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Profile page End to End test for MAPD and MA Members
     Given login with following details logins in the member portal and validate elements
-      | Plan Type | <planType> |
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
     When the user navigates to Profile and Preferences page
-	Then the user validates the Plan Name, Member name and  Member ID  in UMS site                    
+	Then the user validates the Plan Name, Member name, Member ID and account section in UMS site                   
     And the user validates the need help section  														
 	Then the user validates permanent address section   												
-	 Then the user validates the Phone section                                                          
-    Then the user Clicks on the the Edit Link and validates the elements 							    
+	 Then the user validates the Phone section 
+	  | Plan Type | <planType> |                                                         
+    Then the user Clicks on the the Edit phone Link and validates the elements
+     	| Plan Type | <planType> | 						    
     Then the user checks the Edit Button changes to Cancel Button                                       
     Then the user checks the functionality of save Button in Phoneeditsection                           
     Then the user validate the functionality of Cancel Button In phoneeditSection                       
-    Then the user validate the temporary address section for ship member                                
+    Then the user validate the temporary address section for  member                                
 	And the user validates see more ways to contact us section                                          
     And the user validates on clicking contact us link it should route to contact us page               
 	Examples: 
-     |  TID   | planType |
-     | 15083  | MAPD	 |
-	 | 15083  | MA       |
-     | 15083  | PDP      |
+     |  TID   | planType  | memberType       |
+     | 15083  | MAPD      | MAPD_Profilepref |
+	 | 15083  | MA        | MA_Profilepref   |
+     | 15083  | PDP       | PDP_Profilepref  |
 	  
 
   @accountProfile3 @NegativeTestonHSIDpage 
@@ -299,5 +304,16 @@ Feature: C1.2To test Profile and Preferences page .
     Examples: 
       | planType | memberType  |
      # | Combo    | EPMPEnabled |
+       #-----------------------  SHIP Preferences tests ---------------------------------------------------
+  @F220921 @CommunicationPreferences
+  Scenario Outline: TID: <TID> -User Type: <userType> - To verify Communication Preferences section for a SHIP member
+    Given login with following details logins in the member portal and validate elements
+      | User Type | <userType> |
+    When the user navigates to Profile and Preferences page
+    Then the user validates Communication Preferences section
+    Then the user clicks on edit preferences link page for ship
+    Then the user validates the headers and labels of the communication preferences section for SHIP
 
-	
+    Examples: 
+      | TID     | userType 				 |
+      | F220921 | SHIP_ProfilePref |

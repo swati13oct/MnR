@@ -188,19 +188,21 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
     Examples: 
       | zipcode | isMultutiCounty | county             | MultiCOuntyzipcode |
       |   90210 | No              | Los Angeles County |              80002 |
-@VppPromoWidjetaarp
-Scenario Outline: To check VPP for specific plans
+
+  @VppPromoWidjetaarp
+  Scenario Outline: To check VPP for specific plans
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
-      | Zip Code | <zipcode> |
+      | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |
-      And the user views the plans of the below plan type in AARP site
+    And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
-      Then User validates the VPP promowidjet for specifc plans
-       | Plan Name | <planName> |
- Examples: 
-      | zipcode |isMultutiCounty|plantype|planName|
-      |   55344 |NO|MA|UnitedHealthcare Sync (PPO)|
+    Then User validates the VPP promowidjet for specifc plans
+      | Plan Name | <planName> |
+
+    Examples: 
+      | zipcode | isMultutiCounty | plantype | planName                    |
+      |   55344 | NO              | MA       | UnitedHealthcare Sync (PPO) |
 
   @F251983 @validatePCPandSpecialistTiering @fastandfurious @Apr_release_2019
   Scenario Outline: UserStory: <UID> -plan type: <plantype> - Verify PCP and Specialist Benefits Tiering in Plan Details for provided plan on AARP
@@ -219,13 +221,19 @@ Scenario Outline: To check VPP for specific plans
       | Expected Text | <expectedText> |
 
     Examples: 
-      | UID                                      | zipcode | isMultutiCounty | county          | plantype | planName                                          | benefitType      | expectedText                          |
-      | US1497183 - AARP - Specialist Tiering    |   27021 | YES             | Stokes County   | MA       | AARP MedicareComplete Essential (HMO)             | Specialist Copay | Tier 1: $30 copay / Tier 2: $50 copay |
-      | US1497183 - AARP - Specialist Tiering    |   27021 | YES             | Stokes County   | MAPD     | AARP MedicareComplete Plan 1 (HMO)                | Specialist Copay | Tier 1: $30 copay / Tier 2: $50 copay |
-      | US1497183 - AARP - Specialist Tiering    |   28616 | NO              | Avery County    | MAPD     | AARP MedicareComplete Plan 2 (HMO)                | Specialist Copay | Tier 1: $35 copay / Tier 2: $50 copay |
-      | US1497183 - AARP - Specialist Tiering    |   28701 | NO              | Buncombe County | MAPD     | AARP MedicareComplete Plan 3 (HMO)                | Specialist Copay | Tier 1: $40 copay / Tier 2: $50 copay |
-      | US1497183 - AARP - No Specialist Tiering |   06280 | NO              | Windham County  | MA       | UnitedHealthcare MedicareComplete Essential (HMO) | Specialist Copay | $35 copay                             |
-      | US1497183 - AARP - No Specialist Tiering |   35618 | NO              | Lawrence County | MAPD     | AARP MedicareComplete Plan 1 (HMO)                | Specialist Copay | $40 copay                             |
+      | UID                                      | zipcode | isMultutiCounty | county          | plantype | planName                                          | benefitType                 | expectedText                          |
+      | US1497183 - AARP - Specialist Tiering    |   27021 | YES             | Stokes County   | MA       | AARP MedicareComplete Essential (HMO)             | Specialist Copay            | Tier 1: $30 copay / Tier 2: $50 copay |
+      | US1497183 - AARP - Specialist Tiering    |   27021 | YES             | Stokes County   | MAPD     | AARP MedicareComplete Plan 1 (HMO)                | Specialist Copay            | Tier 1: $30 copay / Tier 2: $50 copay |
+      | US1497183 - AARP - Specialist Tiering    |   28616 | NO              | Avery County    | MAPD     | AARP MedicareComplete Plan 2 (HMO)                | Specialist Copay            | Tier 1: $35 copay / Tier 2: $50 copay |
+      | US1497183 - AARP - Specialist Tiering    |   28701 | NO              | Buncombe County | MAPD     | AARP MedicareComplete Plan 3 (HMO)                | Specialist Copay            | Tier 1: $40 copay / Tier 2: $50 copay |
+      | US1497183 - AARP - No Specialist Tiering |   06280 | NO              | Windham County  | MA       | UnitedHealthcare MedicareComplete Essential (HMO) | Specialist Copay            | $35 copay                             |
+      | US1497183 - AARP - No Specialist Tiering |   35618 | NO              | Lawrence County | MAPD     | AARP MedicareComplete Plan 1 (HMO)                | Specialist Copay            | $40 copay                             |
+      | US1497179 - AARP - PCP Tiering           |   27021 | YES             | Stokes County   | MA       | AARP MedicareComplete Essential (HMO)             | Primary Care Provider Copay | Tier 1: $0 copay / Tier 2: $10 copay  |
+      | US1497179 - AARP - PCP Tiering           |   27021 | YES             | Stokes County   | MAPD     | AARP MedicareComplete Plan 1 (HMO)                | Primary Care Provider Copay | Tier 1: $0 copay / Tier 2: $10 copay  |
+      | US1497179 - AARP - PCP Tiering           |   28616 | NO              | Avery County    | MAPD     | AARP MedicareComplete Plan 2 (HMO)                | Primary Care Provider Copay | Tier 1: $0 copay / Tier 2: $20 copay  |
+      | US1497179 - AARP - PCP Tiering           |   28701 | NO              | Buncombe County | MAPD     | AARP MedicareComplete Plan 3 (HMO)                | Primary Care Provider Copay | Tier 1: $0 copay / Tier 2: $20 copay  |
+      | US1497179 - AARP - No PCP Tiering        |   06280 | NO              | Windham County  | MA       | UnitedHealthcare MedicareComplete Essential (HMO) | Primary Care Provider Copay | $5 copay                              |
+      | US1497179 - AARP - No PCP Tiering        |   35618 | NO              | Lawrence County | MAPD     | AARP MedicareComplete Plan 1 (HMO)                | Primary Care Provider Copay | $5 copay                              |
 
 
   @feature-F265872 @us1598162 @vppFavoritePlanInSessionAarp @thePredators @Apr_release_2019
@@ -358,4 +366,3 @@ Scenario Outline: To check VPP for specific plans
       | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                          | PDP_testPlans                                                    | SNP_testPlans                                                                               |
       | 1603378 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Nursing Home Plan (PPO SNP),UnitedHealthcare Assisted Living Plan (PPO SNP)|
 
-           
