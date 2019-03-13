@@ -2127,6 +2127,8 @@ public void validateEmailOption(String planType) {
 }
 
 public void validatePrintOption(String planType) {
+	//note: the print function will bring up the print preview window where the content can't be controlled by selenium
+	// for now will only validate the print button will bring up the print preview page
 	WebElement printButton=null;
 	if (planType.equalsIgnoreCase("ma") || planType.equalsIgnoreCase("mapd")) {
 		printButton=maPrintOption;
@@ -2149,13 +2151,13 @@ public void validatePrintOption(String planType) {
 	for(String winHandle : driver.getWindowHandles()){
 	    driver.switchTo().window(winHandle);
 	}
-	//sleepBySec(5);
+	sleepBySec(5);
 	//CommonUtility.checkPageIsReady(driver);
 	// Perform the actions on new window
 	//System.out.println("TEST  --------------- after handler="+driver.getWindowHandle());
 	System.out.println("Proceed to validate the new window content for print");
 	String printPreviewPageTitle=driver.getTitle();
-	//Assert.assertTrue("PROBLEM - print preview page title should be empty (untitled).  Actual='"+printPreviewPageTitle+"'", printPreviewPageTitle.equals(""));
+	Assert.assertTrue("PROBLEM - print preview page title should be empty (untitled).  Actual='"+printPreviewPageTitle+"'", printPreviewPageTitle.equals(""));
 	   
 	System.out.println("Proceed to close the print preview window");
 	driver.close();
@@ -2165,7 +2167,7 @@ public void validatePrintOption(String planType) {
 	
 	//System.out.println("TEST  --------------- back handler="+driver.getWindowHandle());
 	String pageTitleAfterClosingPrintPreview=driver.getTitle();
-	//Assert.assertTrue("PROBLEM - page title should have been the same after closing print preview.  \nBefore='"+originalPageTitle+"' \nAfter='"+pageTitleAfterClosingPrintPreview+"'", originalPageTitle.equals(pageTitleAfterClosingPrintPreview));
+	Assert.assertTrue("PROBLEM - page title should have been the same after closing print preview.  \nBefore='"+originalPageTitle+"' \nAfter='"+pageTitleAfterClosingPrintPreview+"'", originalPageTitle.equals(pageTitleAfterClosingPrintPreview));
 }
 
 public void closeOriginalTabAndOpenNewTab() {

@@ -229,7 +229,7 @@ Scenario Outline: To check VPP for specific plans
 
 
   @feature-F265872 @us1598162 @vppFavoritePlanInSessionAarp @thePredators @Apr_release_2019
-  Scenario Outline: UID: <UID> -planType: <planType> -isMultiCounty: <isMultiCounty> - Verify user can save and unsave favorite plans on view plan preview page on AARP site
+  Scenario Outline: UID: <UID> -zipcode: <zipcode> -isMultiCounty: <isMultiCounty> - Verify user can save and unsave favorite plans on view plan preview page on AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>       |
@@ -294,7 +294,7 @@ Scenario Outline: To check VPP for specific plans
 
 
   @feature-F265872 @us1598162 @vppFavoritePlanInSessionCloseTabAarp @thePredators @Apr_release_2019
-  Scenario Outline: UID: <UID> -planType: <planType> -isMultiCounty: <isMultiCounty> - Verify user can print favorite plans on view plan preview page on AARP site
+  Scenario Outline: UID: <UID> -zipcode: <zipcode> -isMultiCounty: <isMultiCounty> - Verify user can print favorite plans on view plan preview page on AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>       |
@@ -321,7 +321,7 @@ Scenario Outline: To check VPP for specific plans
  
  
   @feature-F265872 @us1598166 @vppFavoritePlanEmailAarp @thePredators @Apr_release_2019
-  Scenario Outline: UID: <UID> -planType: <planType> -isMultiCounty: <isMultiCounty> - Verify user can email favorite plans on view plan preview page on AARP site
+  Scenario Outline: UID: <UID> -zipcode: <zipcode> -isMultiCounty: <isMultiCounty> - Verify user can invoke the email button on view plan preview page on AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>       |
@@ -333,25 +333,25 @@ Scenario Outline: To check VPP for specific plans
       | PDP Test Plans  | <PDP_testPlans> |
       | SNP Test Plans  | <SNP_testPlans> |
     Then user validates email option on AARP site
-	Then user validates email functionality with invalid and valid emaill address on AARP site
+	Then user validates email functionality with invalid and valid email address on AARP site
     Examples: 
       | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                          | PDP_testPlans                                                    | SNP_testPlans                                                                               |
       | 1598166 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Nursing Home Plan (PPO SNP),UnitedHealthcare Assisted Living Plan (PPO SNP)|
 
 
   @feature-F265872 @us1603378 @vppFavoritePlanPrintAarp @thePredators @Apr_release_2019
-  Scenario Outline: UID: <UID> -planType: <planType> -isMultiCounty: <isMultiCounty> - Verify user can print favorite plans on view plan preview page on AARP site
+  Scenario Outline: UID: <UID> -zipcode: <zipcode> -isMultiCounty: <isMultiCounty> - Verify user can invoke the print button on view plan preview page on UHC site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
     Then user validates plan count for all plan types on plan summary page in the AARP site 
-    #Then user validates selected plans can be saved as favorite on AARP site
-    #  | MA Test Plans   | <MA_testPlans>  |
-    #  | PDP Test Plans  | <PDP_testPlans> |
-    #  | SNP Test Plans  | <SNP_testPlans> |
-    #Then user validates print option on AARP site
+    Then user validates selected plans can be saved as favorite on AARP site
+      | MA Test Plans   | <MA_testPlans>  |
+      | PDP Test Plans  | <PDP_testPlans> |
+      | SNP Test Plans  | <SNP_testPlans> |
+    Then user validates print option on AARP site
 	Then user validates print functionality on AARP site
 
     Examples: 

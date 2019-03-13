@@ -227,7 +227,7 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
 
       
   @feature-F265872 @us1598162 @vppFavoritePlanInSessionUhc @thePredators @Apr_release_2019
-  Scenario Outline: UID: <UID> -planType: <planType> -isMultiCounty: <isMultiCounty> - Verify user can save and unsave favorite plans on view plan preview page on UHC site
+  Scenario Outline: UID: <UID> -zipcode: <zipcode> -isMultiCounty: <isMultiCounty> - Verify user can save and unsave favorite plans on view plan preview page on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>       |
@@ -291,8 +291,8 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
       | 1598162 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Nursing Home Plan (PPO SNP),UnitedHealthcare Assisted Living Plan (PPO SNP)|
 
 
-  @feature-F265872 @us1598162 @vppFavoritePlanInSessionCloseTabUhc @thePredators @Apr_release_2019 @abc
-  Scenario Outline: UID: <UID> -planType: <planType> -isMultiCounty: <isMultiCounty> - Verify user can print favorite plans on view plan preview page on UHC site
+  @feature-F265872 @us1598162 @vppFavoritePlanInSessionCloseTabUhc @thePredators @Apr_release_2019
+  Scenario Outline: UID: <UID> -zipcode: <zipcode> -isMultiCounty: <isMultiCounty> - Verify user can print favorite plans on view plan preview page on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>       |
@@ -319,7 +319,7 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
 
 
   @feature-F265872 @us1598166 @vppFavoritePlanEmailUhc @thePredators @Apr_release_2019
-  Scenario Outline: UID: <UID> -planType: <planType> -isMultiCounty: <isMultiCounty> - Verify user can email favorite plans on view plan preview page on UHC site
+  Scenario Outline: UID: <UID> -zipcode: <zipcode> -isMultiCounty: <isMultiCounty> - Verify user can invoke the email button on view plan preview page on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>       |
@@ -331,14 +331,14 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
       | PDP Test Plans  | <PDP_testPlans> |
       | SNP Test Plans  | <SNP_testPlans> |
     Then user validates email option on UHC site
-	Then user validates email functionality with invalid and valid emaill address on UHC site
+	Then user validates email functionality with invalid and valid email address on UHC site
     Examples: 
       | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                          | PDP_testPlans                                                    | SNP_testPlans                                                                               |
       | 1598166 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Nursing Home Plan (PPO SNP),UnitedHealthcare Assisted Living Plan (PPO SNP)|
 
 
   @feature-F265872 @us1603378 @vppFavoritePlanPrintAarp @thePredators @Apr_release_2019
-  Scenario Outline: UID: <UID> -planType: <planType> -isMultiCounty: <isMultiCounty> - Verify user can print favorite plans on view plan preview page on UHC site
+  Scenario Outline: UID: <UID> -zipcode: <zipcode> -isMultiCounty: <isMultiCounty> - Verify user can invoke the print button on view plan preview page on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>       |
