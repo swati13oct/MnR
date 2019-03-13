@@ -291,7 +291,7 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
       | 1598162 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Nursing Home Plan (PPO SNP),UnitedHealthcare Assisted Living Plan (PPO SNP)|
 
 
-  @feature-F265872 @us1598162 @vppFavoritePlanInSessionCloseTabUhc @thePredators @Apr_release_2019
+  @feature-F265872 @us1598162 @vppFavoritePlanInSessionCloseTabUhc @thePredators @Apr_release_2019 @abc
   Scenario Outline: UID: <UID> -planType: <planType> -isMultiCounty: <isMultiCounty> - Verify user can print favorite plans on view plan preview page on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -337,7 +337,7 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
       | 1598166 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Nursing Home Plan (PPO SNP),UnitedHealthcare Assisted Living Plan (PPO SNP)|
 
 
-  @feature-F265872 @us1603378 @vppFavoritePlanPrintAarp @thePredators @Apr_release_2019 @abc
+  @feature-F265872 @us1603378 @vppFavoritePlanPrintAarp @thePredators @Apr_release_2019
   Scenario Outline: UID: <UID> -planType: <planType> -isMultiCounty: <isMultiCounty> - Verify user can print favorite plans on view plan preview page on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
