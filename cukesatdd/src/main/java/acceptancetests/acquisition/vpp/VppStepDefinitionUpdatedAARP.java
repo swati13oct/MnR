@@ -1309,7 +1309,7 @@ public void user_Clicks_on_Look_upyourProvider_button_on_PlanDetailsPage() {
 		plansummaryPage.validatePrintOptionExistOnPage(planType);
 	}
 
-	@Then("^user validates email functionality with invalid and valid emaill address on AARP site$")
+	@Then("^user validates email functionality with invalid and valid email address on AARP site$")
 	public void user_validates_email_functionality_on_AARP_site() {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);

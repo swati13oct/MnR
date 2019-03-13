@@ -1437,7 +1437,7 @@ public class VppStepDefinitionUHC {
 			plansummaryPage.validatePrintOptionExistOnPage(planType);
 		}
 
-		@Then("^user validates email functionality with invalid and valid emaill address on UHC site$")
+		@Then("^user validates email functionality with invalid and valid email address on UHC site$")
 		public void user_validates_email_functionality_on_AARP_site() {
 			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
