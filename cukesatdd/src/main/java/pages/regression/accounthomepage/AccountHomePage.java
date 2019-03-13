@@ -147,12 +147,12 @@ public class AccountHomePage extends UhcDriver {
 	private WebElement planNameLink;
 
 	//@FindBy(id = "dropdown-toggle--1")
-	@FindBy(xpath = "//*[@id='dropdown-toggle--1']")											 
+	@FindBy(id = "accountProfile")											 
 	private WebElement accountProfileBtn;
 
 	// @FindBy(xpath = ".//*[@id='dropdown-options--1']/a[contains(text(),'Account
 	// Settings')]")
-	@FindBy(xpath = ".//*[@id='dropdown-options--1']//a[contains(text(),'Account Settings')]")
+	@FindBy(linkText = "Account Settings")
 	private WebElement accountSettingOption;
 
 	@FindBy(xpath = "//h1")
@@ -584,8 +584,9 @@ public class AccountHomePage extends UhcDriver {
 			if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)){
 			 System.out.println("testing through test harness page");
 			 try{
-				 if(driver.findElement(By.id("home_1")).isDisplayed()){
-					 driver.findElement(By.id("home_1")).click();
+				 if(driver.findElement(By.id("accountprofile")).isDisplayed()){
+					 driver.findElement(By.id("accountprofile")).click();
+					 driver.findElement(By.linkText("Account Settings")).click();
 				 }else{
 					 driver.findElement(By.xpath("//*[@id='home_2']")).click();
 					 Thread.sleep(6000);
@@ -594,6 +595,11 @@ public class AccountHomePage extends UhcDriver {
 				 driver.findElement(By.xpath("//*[@id='home_2']")).click();
 				 Thread.sleep(6000);
 			 }
+			 if (driver.getCurrentUrl().contains("profile")) {
+				 System.out.println("Navigating to Profile Page");
+				 return new ProfileandPreferencesPage(driver);
+			 }
+			 
 			//CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//*[@id='dashboard']/div[1]/section[1]/account-info/div/div[1]/h1")), 30);
 		} else{
 			System.out.println("test is through stage");
@@ -641,7 +647,7 @@ public class AccountHomePage extends UhcDriver {
 
 		}
 		//CommonUtility.waitForPageLoad(driver, heading, 50);
-		if (driver.getTitle().equalsIgnoreCase("Profile")) {
+		if (driver.getTitle().contains("Profile")) {
 			return new ProfileandPreferencesPage(driver);
 		}
 		return null;
