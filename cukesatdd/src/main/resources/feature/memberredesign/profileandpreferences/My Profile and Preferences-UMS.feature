@@ -304,3 +304,16 @@ Feature: C1.2To test Profile and Preferences page
     Examples: 
       | planType | memberType  |
      # | Combo    | EPMPEnabled |
+       #-----------------------  SHIP Preferences tests ---------------------------------------------------
+  @F220921 @CommunicationPreferences
+  Scenario Outline: TID: <TID> -User Type: <userType> - To verify Communication Preferences section for a SHIP member
+    Given login with following details logins in the member portal and validate elements
+      | User Type | <userType> |
+    When the user navigates to Profile and Preferences page
+    Then the user validates Communication Preferences section
+    Then the user clicks on edit preferences link page for ship
+    Then the user validates the headers and labels of the communication preferences section for SHIP
+
+    Examples: 
+      | TID     | userType 				 |
+      | F220921 | SHIP_ProfilePref |
