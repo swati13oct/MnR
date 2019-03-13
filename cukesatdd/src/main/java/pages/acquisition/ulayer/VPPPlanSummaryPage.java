@@ -83,7 +83,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'module-tabs-tabs')]/div[not (contains(@class,'active'))]//span[@id='pdpviewplans']/following-sibling::a")
 	private WebElement pdpPlansViewLink;
 
-
 	@FindBy(xpath = "//div[contains(@class,'overview-main')]/h2")
 	private WebElement vppTop;
 
@@ -428,6 +427,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			msPlansViewLink.click();
 			CommonUtility.waitForPageLoadNew(driver, medSuppPlanList.get(0), 30);
 		} else if (planType.equalsIgnoreCase("SNP")) {
+			sleepBySec(5);
 			CommonUtility.waitForPageLoadNew(driver, snpPlansViewLink, 30);
 			snpPlansViewLink.click();
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
@@ -1270,7 +1270,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		validateNew(promoWidject);
 
 		return new VPPPlanSummaryPage(driver);
-
 	}
 
 	public void validateAndClickAddtoCompareinAARP(String planType , String planName) throws InterruptedException {
@@ -1716,7 +1715,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		else
 			Assert.fail("Popup message has not been displayed");
 	}
-	
+
 	//vvv note: added for US1598162
 	public void sleepBySec(int sec) {
 		try {
@@ -1763,7 +1762,6 @@ for (int i = 0; i < initialCount + 1; i++) {
 		Assert.assertTrue("PROBLEM - Unable to locate the print option or the email option. printCheck="+validate(printElement), validate(printElement));
 	}
 
-	
 	public void validateDefaultNoSavedPlan(String planType) {
 		String maOrMapdSectionXpath="//div[@ng-show='showMaPlans']";
 		String pdpSectionXpath="//div[@ng-show='showPdpPlans']";
