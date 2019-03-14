@@ -4,6 +4,7 @@
 package pages.acquisition.bluelayer;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -14,17 +15,19 @@ import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.uhcretiree.Rallytool_Page;
 import pages.acquisition.bluelayer.ComparePlansPageBlayer;
 import pages.acquisition.ulayer.PageTitleConstants;
-
 //import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import pages.acquisition.bluelayer.ProviderSearchPage;
 import pages.acquisition.dce.bluelayer.DrugCostEstimatorPage;
@@ -32,6 +35,7 @@ import pages.acquisition.bluelayer.PlanDetailsPage;
 import pages.acquisition.vppforaep.AepVppPlanSummaryPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
+import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -271,7 +275,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[4]//a[@class='trigger-closed']")
 	private WebElement snpPlansViewLink;
 
-	@FindBy(xpath = "//div[@class='overview-main']/h2")
+	@FindBy(xpath = "//div[contains(@class,'overview-main')]/h2")
 	private WebElement vppTop;
 
 	@FindBy(xpath = "//div[contains(@class,'plan-overview-list')]//div[contains(@id,'plan-list-')][not (contains(@class,'ng-hide'))]//div[contains(@class,'module-plan-overview')]//div[contains(@class,'content-secondary')]//input[contains(@id,'compare-plan-')]/following-sibling::label")
@@ -351,6 +355,81 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public JSONObject vppPlanSummaryJson;
 
+	//vvv note: added for US1598162
+	@FindBy(xpath = "//div[@ng-show='showMaPlans']//a[@id='printsummary']")
+	private WebElement maPrintOption;
+
+	@FindBy(xpath = "//div[@ng-show='showMaPlans']//a[@id='emailsummary']")
+	private WebElement maEmailOption;
+
+	@FindBy(xpath = "//div[@ng-show='showPdpPlans']//a[@id='printsummary']")
+	private WebElement pdpPrintOption;
+
+	@FindBy(xpath = "//div[@ng-show='showPdpPlans']//a[@id='emailsummary']")
+	private WebElement pdpEmailOption;
+	
+	@FindBy(xpath = "//div[@ng-show='showSnpPlans']//a[@id='printsummary']")
+	private WebElement snpPrintOption;
+
+	@FindBy(xpath = "//div[@ng-show='showSnpPlans']//a[@id='emailsummary']")
+	private WebElement snpEmailOption;
+
+	@FindBy(xpath = "//a[@id='ghn_lnk_1']")
+	private WebElement homeBtn;
+
+	@FindBy(xpath ="//a[contains(@dtmname,'Shop For a Plan')]")
+	private WebElement topMenushopForAPlanOption;
+	
+	@FindBy(xpath="//input[contains(@class,'zip-field')]")
+	private WebElement shopForAPlanOptionZipcodeFieldBox;
+
+	@FindBy(xpath="//button[contains(@class,'zip-button') and contains(@dtmid,'top')]")
+	private WebElement shopForAPlanOptionFindPlanButton;
+
+	@FindBy(xpath = "//a[@id='change-location']")
+	private WebElement planOverviewChangeZipCodeLink;
+	
+	@FindBy(xpath = "//input[@id='zipcode']")
+	private WebElement planOverviewZipCodeFieldBox;
+
+	@FindBy(xpath = "//button[contains(@class,'zip-button') and contains(@dtmid,'landing')]")
+	private WebElement planOverviewFindPlanButton;
+
+  	private String linkTextXpath="//a[text()='Favorite plan']";
+	private String savePlanImgXpath="//img[contains(@src,'ic_favorite-unfilled.png')]";
+	private String savedPlanImgXpath="//img[contains(@src,'ic_favorite-filled.png')]";
+	
+	@FindBy(xpath = "//div[@id='emailPlanSummaryPopUp']")
+	private WebElement emailPlanSummaryPopupScreen;
+	
+	@FindBy(xpath = "//h3[@id='emailplandetail']")
+	private WebElement emailPlanSummaryPopupScreenText;
+	
+	@FindBy(xpath = "//input[@id='email']")
+	private WebElement emailPlanSummaryFieldBox;
+
+	@FindBy(xpath = "//button[@class='cta-button cta-button sendbtn']")
+	private WebElement emailPlanSummarySendButton;
+
+	@FindBy(xpath = "//button[@class='cta-button close-modal secondary']")
+	private WebElement emailPlanSummaryCancelButton;
+
+	@FindBy(xpath = "//p[@id='emailSuccess']") 
+	private WebElement emailPlanSummarySuccessText;
+	
+	@FindBy(xpath = "//button[@ng-click='closeEmailSuccessMsgSummaryPopUp()']")
+	private WebElement emailPlanSummarySuccessCloseButton;
+
+	@FindBy(xpath = "//input[@id='email' and @class='error']")
+	private WebElement emailPlanSummaryErrorFieldBox;
+
+	@FindBy(xpath = "//p//span[@id='emailError']")
+	private WebElement emailPlanSummaryInputErrorText;
+
+	private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
+	//^^^ note: added for US1598162	
+
+	
 	public VPPPlanSummaryPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -638,41 +717,31 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return null;
 	}
 
-        public void viewPlanSummary(String planType) {
+	public void viewPlanSummary(String planType) {
+		if (planType.equalsIgnoreCase("PDP")) {
+			CommonUtility.waitForPageLoadNew(driver, pdpPlansViewLink, 30);
+			sleepBySec(2); //note: add sleep for timing issue, tried increase timeout from waitForPageLoadNew but didn't work
+			pdpPlansViewLink.click();
+			System.out.println("PDP Plan Type Clicked");
+			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
+		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
+			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
+			sleepBySec(2);
+			maPlansViewLink.click();
+			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
+		} else if (planType.equalsIgnoreCase("MS")) {
+			CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
+			sleepBySec(2);
+			msPlansViewLink.click();
+			CommonUtility.waitForPageLoadNew(driver, medSuppPlanList.get(0), 30);
+		} else if (planType.equalsIgnoreCase("SNP")) {
+			sleepBySec(5);
+			CommonUtility.checkPageIsReady(driver);
+			snpPlansViewLink.click();
+			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
+		}                                                                              
+	}              
 
-            if (planType.equalsIgnoreCase("PDP")) {
-                            CommonUtility.waitForPageLoadNew(driver, pdpPlansViewLink, 30);
-                            pdpPlansViewLink.click();
-                            System.out.println("PDP Plan Type Clicked");
-                            CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
-                            
-            } else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
-                            CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
-                            maPlansViewLink.click();
-                            CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
-
-            } else if (planType.equalsIgnoreCase("MS")) {
-                            CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
-                            msPlansViewLink.click();
-                            CommonUtility.waitForPageLoadNew(driver, medSuppPlanList.get(0), 30);
-            } else if (planType.equalsIgnoreCase("SNP")) {
-                       try{
-        	            Thread.sleep(5000);
-        	            CommonUtility.checkPageIsReady(driver);
-        	            snpPlansViewLink.click();
-        	            CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
-                         }
-                      catch (InterruptedException e) {
-        	          	e.printStackTrace();
-                      	}
-                            //CommonUtility.waitForPageLoadNew(driver, snpPlansViewLink, 30);
-                           // snpPlansViewLink.click();
-                            //snpPlansViewLink.click();
-                            /*JavascriptExecutor executor = (JavascriptExecutor)driver;
-                            executor.executeScript("arguments[0].click();", snpPlansViewLink);*/
-                           // CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
-                            }                                                                              
-                            }              
 	@Override
 	public void openAndValidate() {
 		validateVPPPlanSummaryPage();
@@ -1169,7 +1238,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		validateNew(msPlansCount);
 		validateNew(pdpPlansCount);
 		validateNew(snpPlansCount);
-		validateNew(changeLocationBtn);
+		//note: once you change zipcode once using it, this field will not show again
+		//validateNew(changeLocationBtn);
 
 		int allPlans = Integer.valueOf(vppTop.getText().substring(10, 12).trim());
 		int maPlans = Integer.valueOf(maPlansCount.getText());
@@ -2099,5 +2169,546 @@ public void validatePlanPremium (String planName , String monthlyPremium){
 		  Assert.fail("Popup message has not been displayed");
      }
   
+//vvv note: added for US1598162
+public void sleepBySec(int sec) {
+	try {
+		Thread.sleep(sec*1000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+}
+
+public void validateEmailOptionExistOnPage(String planType) {
+	//System.out.println("TEST - playType="+planType);
+	WebElement emailElement=null;
+	if (planType.equalsIgnoreCase("mapd") || planType.equalsIgnoreCase("ma")) {
+		//System.out.println("TEST - going to validate the print and email element for MA");
+		emailElement=maEmailOption;
+	} else if (planType.equalsIgnoreCase("pdp")) {
+		//System.out.println("TEST - going to validate the print and email element for PDP");
+		emailElement=pdpEmailOption;
+	} else if (planType.equalsIgnoreCase("snp")) {
+		//System.out.println("TEST - going to validate the print and email element for SNP");
+		emailElement=snpEmailOption;
+	} else {
+		Assert.assertTrue("PROBLEM - test not coded for this '"+planType+"' planType testing", false);
+	}
+	Assert.assertTrue("PROBLEM - Unable to locate the email option. emailCheck="+validate(emailElement), validate(emailElement));
+}
+
+public void validatePrintOptionExistOnPage(String planType) {
+	//System.out.println("TEST - playType="+planType);
+	WebElement printElement=null;
+	if (planType.equalsIgnoreCase("mapd") || planType.equalsIgnoreCase("ma")) {
+		//System.out.println("TEST - going to validate the print and email element for MA");
+		printElement=maPrintOption;
+	} else if (planType.equalsIgnoreCase("pdp")) {
+		//System.out.println("TEST - going to validate the print and email element for PDP");
+		printElement=pdpPrintOption;
+	} else if (planType.equalsIgnoreCase("snp")) {
+		//System.out.println("TEST - going to validate the print and email element for SNP");
+		printElement=snpPrintOption;
+	} else {
+		Assert.assertTrue("PROBLEM - test not coded for this '"+planType+"' planType testing", false);
+	}
+	Assert.assertTrue("PROBLEM - Unable to locate the print option or the email option. printCheck="+validate(printElement), validate(printElement));
+}
+
+
+public void validateDefaultNoSavedPlan(String planType) {
+	String maOrMapdSectionXpath="//div[@ng-show='showMaPlans']";
+	String pdpSectionXpath="//div[@ng-show='showPdpPlans']";
+	String snpSectionXpath="//div[@ng-show='showSnpPlans']";
+
+	String plansXpath="//span[@class='plan-index ng-binding ng-scope']";
+
+	String unsavePlanXpath="//div[contains(@class,'savePlan')]"+linkTextXpath;
+	String unfilledIconXpath=unsavePlanXpath+"/.."+savePlanImgXpath;
+
+	String testXpath="";
+	if (planType.equals("MA") || planType.equals("MAPD")) {
+		testXpath=maOrMapdSectionXpath;
+	} else if (planType.equals("PDP")) {
+		testXpath=pdpSectionXpath;
+	} else if (planType.equals("SNP")) {
+		testXpath=snpSectionXpath;
+	} else {
+		Assert.assertTrue("PROBLEM - unsupported test for this scenario planType.  Expected=MA or MAPD or PDP or SNP | Actual='"+planType+"'", false);
+	}
+
+	List<WebElement> listOfPlans=driver.findElements(By.xpath(testXpath+plansXpath));
+	int numOfAvaliablePlans=listOfPlans.size();
+	//System.out.println("TEST - listOfPlans xpath="+testXpath+plansXpath);
+	//System.out.println("TEST - Number of Available Plan for planType='"+planType+"'="+numOfAvaliablePlans);
+
+	List<WebElement> listOfUnsavedPlans=driver.findElements(By.xpath(testXpath+unsavePlanXpath));
+	int numOfUnsavedPlans=listOfUnsavedPlans.size();
+	//System.out.println("TEST - listOfUnsavedPlans xpath="+testXpath+unsavePlanXpath);
+	//System.out.println("TEST - Number of unsave plan link for planType='"+planType+"'="+numOfUnsavedPlans);
+
+	List<WebElement> listOfUnfilledIcons=driver.findElements(By.xpath(testXpath+unfilledIconXpath));
+	int numOfUnfilledIcons=listOfUnfilledIcons.size();
+	//System.out.println("TEST - listOfUnfilledIcons xpath="+testXpath+unfilledIconXpath);
+	//System.out.println("TEST - Number of unsave plan icon for planType='"+planType+"'="+numOfUnfilledIcons);
+
+	Assert.assertTrue("PROBLEM: Total number of unsaved plans should equal to total number of avaliable plans.  Actual numOfAvaliablePlans='"+numOfAvaliablePlans+"' | Actual numOfUnsavedPlans='"+numOfUnsavedPlans+"'",numOfAvaliablePlans==numOfUnsavedPlans);
+	Assert.assertTrue("PROBLEM: Total number of unsaved plans should equal to total number of unfilled icons.  Actual numOfUnfilledIcons='"+numOfUnfilledIcons+"' | Actual numOfUnsavedPlans='"+numOfUnsavedPlans+"'",numOfUnfilledIcons==numOfUnsavedPlans);
+}
+
+public void validateAbilityToSavePlans(String savePlanNames, String planType) {
+	String subPath=determineSubpath(planType);
+	String headerPath=determineHeaderPath(planType);
+	
+	List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
+	System.out.println("Going to mark the following "+listOfTestPlans.size()+" number of test plans as favorite");
+
+	for (String plan: listOfTestPlans) {
+		System.out.println("Proceed to locate plan="+plan);
+
+		String textPlanXpath=headerPath+"[contains(text(),'"+plan+"')]";
+		//System.out.println("TEST - textPlanXpath xpath="+textPlanXpath);
+		List<WebElement>  listOfPlans=driver.findElements(By.xpath(textPlanXpath));
+		int expMatch=1;
+		Assert.assertTrue("PROBLEM - unable to locate plan='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfPlans.size()+"'",listOfPlans.size()==expMatch);
+
+		System.out.println("Proceed to validate 'Save Plan' link and icon appeared before clicking");
+		String initial_savePlanLinkXpath=headerPath+"[contains(text(),'"+plan+"')]"+subPath+"//div[@class='savePlan' and not(contains(@style,'none')) and not(contains(@style,'block'))]"+linkTextXpath;
+		//System.out.println("TEST - initial_savePlanLinkXpath xpath="+initial_savePlanLinkXpath);
+		List<WebElement>  listOfSavePlanLinks=driver.findElements(By.xpath(initial_savePlanLinkXpath));
+		expMatch=1;
+		Assert.assertTrue("PROBLEM - unable to locate Save Plan link for ='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfSavePlanLinks.size()+"'",listOfSavePlanLinks.size()==expMatch);
+
+		String initial_savePlanLIconXpath=headerPath+"[contains(text(),'"+plan+"')]"+subPath+"//div[@class='savePlan' and not(contains(@style,'none')) and not(contains(@style,'block'))]"+savePlanImgXpath;
+		//System.out.println("TEST - initial_savePlanLIconXpath xpath="+initial_savePlanLIconXpath);
+		List<WebElement>  listOfSavePlanIcons=driver.findElements(By.xpath(initial_savePlanLIconXpath));
+		expMatch=1;
+		Assert.assertTrue("PROBLEM - unable to locate Save Plan icon for ='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfSavePlanIcons.size()+"'",listOfSavePlanIcons.size()==expMatch);
+
+		System.out.println("Proceed to validate 'Saved Plan' link and icon will not appear before 'Save Plan' is clicked");
+		String savedPlanLinkXpath=headerPath+"[contains(text(),'"+plan+"')]"+subPath+"//div[@class='savedPlan' and contains(@style,'block')]"+linkTextXpath;
+		//System.out.println("TEST - savePlanLinkXpath xpath="+savedPlanLinkXpath);
+		List<WebElement>  listOfSavedPlanLinks=driver.findElements(By.xpath(savedPlanLinkXpath));
+		expMatch=0;
+		Assert.assertTrue("PROBLEM - unable to locate Save Plan link for ='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfSavedPlanLinks.size()+"'",listOfSavedPlanLinks.size()==expMatch);
+
+		String savedPlanLIconXpath=headerPath+"[contains(text(),'"+plan+"')]"+subPath+"//div[@class='savedPlan' and contains(@style,'none')]"+savePlanImgXpath;
+		//System.out.println("TEST - savePlanLIconXpath xpath="+savedPlanLIconXpath);
+		List<WebElement>  listOfSavedPlanIcons=driver.findElements(By.xpath(savedPlanLIconXpath));
+		expMatch=0;
+		Assert.assertTrue("PROBLEM - unable to locate Save Plan icon for ='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfSavedPlanIcons.size()+"'",listOfSavedPlanIcons.size()==expMatch);
+
+		System.out.println("Proceed to click to save plan");
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", listOfSavePlanLinks.get(0));
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", listOfSavePlanLinks.get(0));
+
+		System.out.println("Proceed to validate 'Save Plan' link and icon disappeared after clicking it");
+
+		//System.out.println("TEST - initial_savePlanLinkXpath xpath="+initial_savePlanLinkXpath);
+		listOfSavePlanLinks=driver.findElements(By.xpath(initial_savePlanLinkXpath));
+		expMatch=0;
+		Assert.assertTrue("PROBLEM - 'Save Plan' link should have disappeared after click for ='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfSavePlanLinks.size()+"'",listOfSavePlanLinks.size()==expMatch);
+
+		//System.out.println("TEST - initial_savePlanLIconXpath xpath="+initial_savePlanLIconXpath);
+		listOfSavePlanIcons=driver.findElements(By.xpath(initial_savePlanLIconXpath));
+		expMatch=0;
+		Assert.assertTrue("PROBLEM - 'Save Plan' icon should have disappeared after click for ='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfSavePlanIcons.size()+"'",listOfSavePlanIcons.size()==expMatch);
+
+		System.out.println("Proceed to validate 'Saved Plan' link and icon will appear after 'Save Plan' is clicked");
+		String appeared_savedPlanLinkXpath=headerPath+"[contains(text(),'"+plan+"')]"+subPath+"//div[@class='savedPlan' and not(contains(@style,'none'))]"+linkTextXpath;
+		//System.out.println("TEST - appeared_savedPlanLinkXpath xpath="+appeared_savedPlanLinkXpath);
+		List<WebElement>  listOfAppearedSavedPlanLinks=driver.findElements(By.xpath(appeared_savedPlanLinkXpath));
+		expMatch=1;
+		Assert.assertTrue("PROBLEM - unable to locate Saved Plan link after click for ='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfAppearedSavedPlanLinks.size()+"'",listOfAppearedSavedPlanLinks.size()==expMatch);
+
+		String appeared_savedPlanLIconXpath=headerPath+"[contains(text(),'"+plan+"')]"+subPath+"//div[@class='savedPlan' and not(contains(@style,'none'))]"+savedPlanImgXpath;
+		//System.out.println("TEST - appeared_savedPlanLIconXpath xpath="+appeared_savedPlanLIconXpath);
+		List<WebElement>  listOfAppearedSavedPlanIcons=driver.findElements(By.xpath(appeared_savedPlanLIconXpath));
+		expMatch=1;
+		Assert.assertTrue("PROBLEM - unable to locate Saved Plan icon after click for ='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfAppearedSavedPlanIcons.size()+"'",listOfAppearedSavedPlanIcons.size()==expMatch);
+	}
+}
+
+public void validatePlansAreSaved(String savePlanNames, String planType) {
+	String subPath=determineSubpath(planType);
+	String headerPath=determineHeaderPath(planType);
+	String planTypePath="";
+	if (planType.equalsIgnoreCase("ma") || planType.equalsIgnoreCase("mapd")) {
+		planTypePath="//div[@ng-show='showMaPlans']";
+	} else if (planType.equalsIgnoreCase("showPdpPlans")) {
+		planTypePath="//div[@ng-show='showMaPlans']";
+	} else if (planType.equalsIgnoreCase("snp")) {
+		planTypePath="//div[@ng-show='showSnpPlans']";
+	}
+	List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
+	
+	System.out.println("Validate "+listOfTestPlans.size()+" number of test plans are saved as favorite");
+
+	System.out.println("Proceed to validate 'Saved Plan' link and icon will appear after 'Save Plan' is clicked");
+	String appeared_savedPlanLinkXpath=planTypePath+headerPath+subPath+"//div[@class='savedPlan' and @style='']"+linkTextXpath;
+	//System.out.println("TEST - appeared_savedPlanLinkXpath xpath="+appeared_savedPlanLinkXpath);
+	List<WebElement>  listOfAppearedSavedPlanLinks=driver.findElements(By.xpath(appeared_savedPlanLinkXpath));
+	int expMatch=listOfTestPlans.size();
+	Assert.assertTrue("PROBLEM - total saved plan links not as expected.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfAppearedSavedPlanLinks.size()+"'",listOfAppearedSavedPlanLinks.size()==expMatch);
+
+	String appeared_savedPlanLIconXpath=planTypePath+headerPath+subPath+"//div[@class='savedPlan' and @style='']"+savedPlanImgXpath;
+	//System.out.println("TEST - appeared_savedPlanLIconXpath xpath="+appeared_savedPlanLIconXpath);
+	List<WebElement>  listOfAppearedSavedPlanIcons=driver.findElements(By.xpath(appeared_savedPlanLIconXpath));
+	expMatch=listOfTestPlans.size();
+	Assert.assertTrue("PROBLEM - total saved plan icons not as expected.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfAppearedSavedPlanIcons.size()+"'",listOfAppearedSavedPlanIcons.size()==expMatch);
+}
+
+public String determineSubpath(String planType) {
+	//System.out.println("TEST - The test planType="+planType);
+	if (planType.equals("MAPD") || planType.equals("MA")) {
+		return "/../../..";
+	} else {
+		return "/../..";
+	}
+}
+
+public String determineHeaderPath(String planType) {
+	//System.out.println("TEST - The test planType="+planType);
+	if (planType.equals("MAPD") || planType.equals("MA") || planType.equals("PDP")) {
+		return "//h3";
+	} else {
+		return "//h2";
+	}
+}
+
+public void clickHomeButton() {
+	System.out.println("Proceed to click on Home so that zipcode can be entered again without clearing cache");
+	try {
+		sleepBySec(2);
+		homeBtn.isDisplayed();
+		homeBtn.click();
+	} catch (Exception e) {
+		Assert.assertTrue("PROBLEM - Unable to click Home button", false);
+	}
+	//System.out.println("TEST - clicked home button");
+}
+
+public VPPPlanSummaryPage navagateToShopAPlanAndFindZipcode(String zipcode, String countyName, String isMultiCounty) {
+	System.out.println("Proceed to go to top menu to select 'Shop A Plan' option and enter zipcode '"+zipcode+"' to find plan");
+	Actions builder = new Actions(driver);
+	Action mouseOverButton=builder.moveToElement(topMenushopForAPlanOption).build();
+	mouseOverButton.perform();
+	shopForAPlanOptionZipcodeFieldBox.sendKeys(zipcode);
+	sleepBySec(1);
+	shopForAPlanOptionFindPlanButton.click();
+	if (isMultiCounty.equalsIgnoreCase("yes")) {
+		System.out.println("Handle mutliple county");
+		CommonUtility.waitForPageLoad(driver, countyModal, 45);
+		driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
+		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+	}
+	sleepBySec(2);
+	if(driver.findElement(By.xpath("//*[contains(text(),'"+zipcode+" "+countyName+"')]")).isDisplayed()) {
+		return new VPPPlanSummaryPage(driver);
+	}
+	return null;
+}
+
+public VPPPlanSummaryPage navagateToChangeZipcodeOptionToChangeZipcode(String zipcode, String countyName, String isMultiCounty) {
+	System.out.println("Proceed to go to plan overview section to enter zipcode '"+zipcode+"' to find plan'");
+	try {
+		//if change zip code link is there then click it, once you used it then it will only display field box going forward.
+		planOverviewChangeZipCodeLink.click();
+	} catch (Exception e) {
+		System.out.println("Change ZipCode link already not on the page, proceed to update zipcode for search directly");
+	}
+	//if field box already there then clear it if left over text from prior run
+	planOverviewZipCodeFieldBox.sendKeys(Keys.CONTROL + "a");
+	planOverviewZipCodeFieldBox.sendKeys(Keys.DELETE);
+	//enter zipcode
+	planOverviewZipCodeFieldBox.sendKeys(zipcode);
+	planOverviewFindPlanButton.click();
+
+	if (isMultiCounty.equalsIgnoreCase("yes")) {
+		System.out.println("Handle mutliple county case");
+		CommonUtility.waitForPageLoad(driver, countyModal, 45);
+		driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
+	}
+	sleepBySec(2);
+	if(driver.findElement(By.xpath("//*[contains(text(),'"+zipcode+" "+countyName+"')]")).isDisplayed()) {
+		return new VPPPlanSummaryPage(driver);
+	}
+	return null;
+}
+
+public void validateAbilityToUnSavePlans(String savedPlans, String planType) {
+	String subPath=determineSubpath(planType);
+	String headerPath=determineHeaderPath(planType);
+
+	List<String> listOfTestPlans = Arrays.asList(savedPlans.split(","));
+	String unsavePlan=listOfTestPlans.get(1);
+	System.out.println("Proceed to unsave 1st plan from input '"+unsavePlan+"'");
+
+	String textPlanXpath=headerPath+"[contains(text(),'"+unsavePlan+"')]";
+	List<WebElement>  listOfPlans=driver.findElements(By.xpath(textPlanXpath));
+	int expMatch=1;
+	Assert.assertTrue("PROBLEM - unable to locate plan='"+unsavePlan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfPlans.size()+"'",listOfPlans.size()==expMatch);
+
+	System.out.println("Proceed to validate 'Saved Plan' link and icon is there before clicking to unsave it");
+	String appeared_savedPlanLinkXpath=headerPath+"[contains(text(),'"+unsavePlan+"')]"+subPath+"//div[@class='savedPlan' and not(contains(@style,'none'))]"+linkTextXpath;
+	//System.out.println("TEST - appeared_savedPlanLinkXpath xpath="+appeared_savedPlanLinkXpath);
+	List<WebElement>  listOfAppearedSavedPlanLinks=driver.findElements(By.xpath(appeared_savedPlanLinkXpath));
+	expMatch=1;
+	Assert.assertTrue("PROBLEM - unable to locate Saved Plan link after click for ='"+unsavePlan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfAppearedSavedPlanLinks.size()+"'",listOfAppearedSavedPlanLinks.size()==expMatch);
+
+	String appeared_savedPlanLIconXpath=headerPath+"[contains(text(),'"+unsavePlan+"')]"+subPath+"//div[@class='savedPlan' and not(contains(@style,'none'))]"+savedPlanImgXpath;
+	//System.out.println("TEST - appeared_savedPlanLIconXpath xpath="+appeared_savedPlanLIconXpath);
+	List<WebElement>  listOfAppearedSavedPlanIcons=driver.findElements(By.xpath(appeared_savedPlanLIconXpath));
+	expMatch=1;
+	Assert.assertTrue("PROBLEM - unable to locate Saved Plan icon after click for ='"+unsavePlan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfAppearedSavedPlanIcons.size()+"'",listOfAppearedSavedPlanIcons.size()==expMatch);
+
+	System.out.println("Proceed to click to unsave plan");
+	((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", listOfAppearedSavedPlanLinks.get(0));
+	((JavascriptExecutor) driver).executeScript("arguments[0].click();", listOfAppearedSavedPlanLinks.get(0));
+
+	System.out.println("Proceed to validate 'Saved Plan' link and icon is not there after clicking to unsave it");
+	//System.out.println("TEST - appeared_savedPlanLinkXpath xpath="+appeared_savedPlanLinkXpath);
+	listOfAppearedSavedPlanLinks=driver.findElements(By.xpath(appeared_savedPlanLinkXpath));
+	expMatch=0;
+	Assert.assertTrue("PROBLEM - 'Saved Plan' link should no longer appear for ='"+unsavePlan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfAppearedSavedPlanLinks.size()+"'",listOfAppearedSavedPlanLinks.size()==expMatch);
+
+	//System.out.println("TEST - appeared_savedPlanLIconXpath xpath="+appeared_savedPlanLIconXpath);
+	listOfAppearedSavedPlanIcons=driver.findElements(By.xpath(appeared_savedPlanLIconXpath));
+	expMatch=0;
+	Assert.assertTrue("PROBLEM - 'Saved Plan' icon should no longer appear for ='"+unsavePlan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfAppearedSavedPlanIcons.size()+"'",listOfAppearedSavedPlanIcons.size()==expMatch);
+
+	System.out.println("Proceed to validate 'Save Plan' link and icon appeared again after unsaved plan");
+	String savePlanLinkXpath=headerPath+"[contains(text(),'"+unsavePlan+"')]"+subPath+"//div[@class='savePlan' and not(contains(@style,'none'))]"+linkTextXpath;
+	//System.out.println("TEST - savePlanLinkXpath xpath="+savePlanLinkXpath);
+	List<WebElement>  listOfSavePlanLinks=driver.findElements(By.xpath(savePlanLinkXpath));
+	expMatch=1;
+	Assert.assertTrue("PROBLEM - unable to locate Save Plan link for ='"+unsavePlan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfSavePlanLinks.size()+"'",listOfSavePlanLinks.size()==expMatch);
+
+	String savePlanLIconXpath=headerPath+"[contains(text(),'"+unsavePlan+"')]"+subPath+"//div[@class='savePlan' and not(contains(@style,'none'))]"+savePlanImgXpath;
+	//System.out.println("TEST - initial_savePlanLIconXpath xpath="+savePlanLIconXpath);
+	List<WebElement>  listOfSavePlanIcons=driver.findElements(By.xpath(savePlanLIconXpath));
+	expMatch=1;
+	Assert.assertTrue("PROBLEM - unable to locate Save Plan icon for ='"+unsavePlan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfSavePlanIcons.size()+"'",listOfSavePlanIcons.size()==expMatch);
+}
+
+public void validateOnePlanSavedOnePlanUnsaved(String savePlanNames, String planType) {
+	String subPath=determineSubpath(planType);
+	String headerPath=determineHeaderPath(planType);
+	List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
+
+	System.out.println("Validate first plan on list is saved and second plan on list is unsaved");
+	Assert.assertTrue("PROBLEM - scenario validation only support testing with two plans as input arguments, please update input and try again.  Input current has '"+listOfTestPlans.size()+"' number of plans listed", listOfTestPlans.size()==2);
+	for (int i=0; i<listOfTestPlans.size(); i++) {
+		if (i==0) {
+			String plan=listOfTestPlans.get(i);
+			System.out.println("Plan '"+plan+"' should be saved");
+			System.out.println("Proceed to locate plan="+plan);
+
+			String textPlanXpath=headerPath+"[contains(text(),'"+plan+"')]";
+			List<WebElement>  listOfPlans=driver.findElements(By.xpath(textPlanXpath));
+			int expMatch=1;
+			Assert.assertTrue("PROBLEM - unable to locate plan='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfPlans.size()+"'",listOfPlans.size()==expMatch);
+
+			System.out.println("Proceed to validate 'Save Plan' link and icon appeared again after unsaved plan");
+			String savePlanLinkXpath=headerPath+"[contains(text(),'"+plan+"')]"+subPath+"//div[@class='savePlan' and contains(@style,'none')]"+linkTextXpath;
+			//System.out.println("TEST - savePlanLinkXpath xpath="+savePlanLinkXpath);
+			List<WebElement>  listOfSavePlanLinks=driver.findElements(By.xpath(savePlanLinkXpath));
+			expMatch=1;
+			Assert.assertTrue("PROBLEM - unable to locate Save Plan link for ='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfSavePlanLinks.size()+"'",listOfSavePlanLinks.size()==expMatch);
+
+			String savePlanLIconXpath=headerPath+"[contains(text(),'"+plan+"')]"+subPath+"//div[@class='savePlan' and contains(@style,'none')]"+savePlanImgXpath;
+			//System.out.println("TEST - initial_savePlanLIconXpath xpath="+savePlanLIconXpath);
+			List<WebElement>  listOfSavePlanIcons=driver.findElements(By.xpath(savePlanLIconXpath));
+			expMatch=1;
+			Assert.assertTrue("PROBLEM - unable to locate Save Plan icon for ='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfSavePlanIcons.size()+"'",listOfSavePlanIcons.size()==expMatch);
+		} else if (i==1) {
+			String plan=listOfTestPlans.get(i);
+			System.out.println("Plan '"+plan+"' should be unsaved");
+
+			String textPlanXpath=headerPath+"[contains(text(),'"+plan+"')]";
+			List<WebElement>  listOfPlans=driver.findElements(By.xpath(textPlanXpath));
+			int expMatch=1;
+			Assert.assertTrue("PROBLEM - unable to locate plan='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfPlans.size()+"'",listOfPlans.size()==expMatch);
+
+			System.out.println("Proceed to validate 'Save Plan' link and icon appeared again after unsaved plan");
+			String savedPlanLinkXpath=headerPath+"[contains(text(),'"+plan+"')]"+subPath+"//div[@class='savePlan' and not(contains(@style,'none')) and not(contains(@style,'block'))]"+linkTextXpath;
+			//System.out.println("TEST - savedPlanLinkXpath xpath="+savedPlanLinkXpath);
+			List<WebElement>  listOfSavedPlanLinks=driver.findElements(By.xpath(savedPlanLinkXpath));
+			expMatch=1;
+			Assert.assertTrue("PROBLEM - unable to locate Save Plan link for ='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfSavedPlanLinks.size()+"'",listOfSavedPlanLinks.size()==expMatch);
+
+			String savedPlanLIconXpath=headerPath+"[contains(text(),'"+plan+"')]"+subPath+"//div[@class='savePlan' and not(contains(@style,'none')) and not(contains(@style,'block'))]"+savePlanImgXpath;
+			//System.out.println("TEST - savedPlanLIconXpath xpath="+savedPlanLIconXpath);
+			List<WebElement>  listOfSavedPlanIcons=driver.findElements(By.xpath(savedPlanLIconXpath));
+			expMatch=1;
+			Assert.assertTrue("PROBLEM - unable to locate Save Plan icon for ='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfSavedPlanIcons.size()+"'",listOfSavedPlanIcons.size()==expMatch);
+		}
+	}
+}
+
+public void validateEmailOption(String planType) {
+	WebElement emailButton=null;
+	if (planType.equalsIgnoreCase("ma") || planType.equalsIgnoreCase("mapd")) {
+		emailButton=maEmailOption;
+	} else if (planType.equalsIgnoreCase("pdp")) {
+		emailButton=pdpEmailOption;
+	} else if (planType.equalsIgnoreCase("snp")) {
+		emailButton=snpEmailOption;
+	} else {
+		Assert.assertTrue("PROBLEM - '"+planType+"' is not supported test scenario. Only support MA/MAPD/PDP/SNP, please update input argument", false);
+	}
+	System.out.println("Proceed to validate email popup screen for cancel option");
+	emailButton.click();
+	Assert.assertTrue("PROBLEM - unable to locate email popup screen after email link is clicked",validate(emailPlanSummaryPopupScreen));
+	String expectedEmailBoxHeader=emailPlanSummaryPopupScreenText.getText();
+	String actualEmailBoxHeader="Email Plan Summary";
+	Assert.assertTrue("PROBLEM - header text for the email popup screen is not as expected.  Expecte='"+expectedEmailBoxHeader+"' | Actual='"+actualEmailBoxHeader+"'",expectedEmailBoxHeader.equals(actualEmailBoxHeader));
+	Assert.assertTrue("PROBLEM - unable to locate email field box on email popup screen after email link is clicked",validate(emailPlanSummaryFieldBox));
+	Assert.assertTrue("PROBLEM - unable to locate send button on email popup screen after email link is clicked",validate(emailPlanSummarySendButton));
+	Assert.assertTrue("PROBLEM - unable to locate cancel button on email popup screen after email link is clicked",validate(emailPlanSummaryCancelButton));
+	
+	System.out.println("Proceed to click cancel button on email screen, email screen should close");
+	emailPlanSummaryCancelButton.click();
+	Assert.assertTrue("PROBLEM - email popup screen should have disappeared after cancel button is clicked", !validate(emailPlanSummaryPopupScreen));
+
+	//----- failure cases ------------------
+	System.out.println("Proceed to validate email popup screen for send option for failure case 1");
+	emailButton.click();
+	String testEmailAddresss="bademailformat";
+	emailPlanSummaryFieldBox.sendKeys(testEmailAddresss);
+	emailPlanSummarySendButton.click();
+	
+	Assert.assertTrue("PROBLEM - unable to locate email field box after email address validation failed",validate(emailPlanSummaryErrorFieldBox));
+	Assert.assertTrue("PROBLEM - unable to locate error text after email address validation failed",validate(emailPlanSummaryInputErrorText));
+	String actualErrorText=emailPlanSummaryInputErrorText.getText();
+	String execptedErrorText="Please Enter Valid Email Address";
+	
+	Assert.assertTrue("PROBLEM - Email success message is not as expected.  Expected: '"+execptedErrorText+"' | Actual='"+actualErrorText+"'", (execptedErrorText.equals(actualErrorText)) );
+
+	System.out.println("Proceed to validate email popup screen for send option for failure case 2 ");
+	testEmailAddresss="bademailformat@";
+	emailPlanSummaryFieldBox.sendKeys(Keys.CONTROL + "a");
+	emailPlanSummaryFieldBox.sendKeys(Keys.DELETE);
+	emailPlanSummaryFieldBox.sendKeys(testEmailAddresss);
+	emailPlanSummarySendButton.click();
+	
+	Assert.assertTrue("PROBLEM - unable to locate email field box after email address validation failed",validate(emailPlanSummaryErrorFieldBox));
+	Assert.assertTrue("PROBLEM - unable to locate email field box after email address validation failed",validate(emailPlanSummaryInputErrorText));
+	actualErrorText=emailPlanSummaryInputErrorText.getText();
+	execptedErrorText="Please Enter Valid Email Address";
+	
+	Assert.assertTrue("PROBLEM - Email success message is not as expected.  Expected: '"+execptedErrorText+"' | Actual='"+actualErrorText+"'", (execptedErrorText.equals(actualErrorText)) );
+
+	System.out.println("Proceed to validate email popup screen for send option for failure case 3");
+	testEmailAddresss="bademailformat@test.";
+	emailPlanSummaryFieldBox.sendKeys(Keys.CONTROL + "a");
+	emailPlanSummaryFieldBox.sendKeys(Keys.DELETE);
+	emailPlanSummaryFieldBox.sendKeys(testEmailAddresss);
+	emailPlanSummarySendButton.click();
+	
+	Assert.assertTrue("PROBLEM - unable to locate email field box after email address validation failed",validate(emailPlanSummaryErrorFieldBox));
+	Assert.assertTrue("PROBLEM - unable to locate email field box after email address validation failed",validate(emailPlanSummaryInputErrorText));
+	actualErrorText=emailPlanSummaryInputErrorText.getText();
+	execptedErrorText="Please Enter Valid Email Address";
+	
+	Assert.assertTrue("PROBLEM - Email success message is not as expected.  Expected: '"+execptedErrorText+"' | Actual='"+actualErrorText+"'", (execptedErrorText.equals(actualErrorText)) );
+
+	//----- success cases ------------------
+	System.out.println("Proceed to validate email popup screen for send option for successful case");
+	testEmailAddresss="test@optum.com";
+	emailPlanSummaryFieldBox.sendKeys(Keys.CONTROL + "a");
+	emailPlanSummaryFieldBox.sendKeys(Keys.DELETE);
+	emailPlanSummaryFieldBox.sendKeys(testEmailAddresss);
+	emailPlanSummarySendButton.click();
+	CommonUtility.waitForPageLoad(driver, emailPlanSummarySuccessText, 10);
+	Assert.assertTrue("PROBLEM - unable to locate success message after email is sent",validate(emailPlanSummarySuccessText));
+	String expectedSuccess1="Thank you!";
+	String expectedSuccess2="The email with your information will arrive shortly.";
+	String actualEmailSuccessText=emailPlanSummarySuccessText.getText();
+	Assert.assertTrue("PROBLEM - Email success message is not as expected.  Expected to contain '"+expectedSuccess1+"' and '"+expectedSuccess2+"' | Actual='"+actualEmailSuccessText+"'", (actualEmailSuccessText.contains(expectedSuccess1)) && (actualEmailSuccessText.contains(expectedSuccess2)));
+
+	Assert.assertTrue("PROBLEM - unable to locate success message after email is sent",validate(emailPlanSummarySuccessCloseButton));
+	System.out.println("Proceed to close the email popup screen to cleanup");
+	emailPlanSummarySuccessCloseButton.click();
+}
+
+public void validatePrintOption(String planType) {
+	//note: the print function will bring up the print preview window where the content can't be controlled by selenium
+	// for now will only validate the print button will bring up the print preview page
+	WebElement printButton=null;
+	if (planType.equalsIgnoreCase("ma") || planType.equalsIgnoreCase("mapd")) {
+		printButton=maPrintOption;
+	} else if (planType.equalsIgnoreCase("pdp")) {
+		printButton=pdpPrintOption;
+	} else if (planType.equalsIgnoreCase("snp")) {
+		printButton=snpPrintOption;
+	} else {
+		Assert.assertTrue("PROBLEM - '"+planType+"' is not supported test scenario. Only support MA/MAPD/PDP/SNP, please update input argument", false);
+	}
+	System.out.println("Proceed to validate print popup screen for cancel option");
+	printButton.click();
+
+	// Store the current window handle
+	String winHandleBefore = driver.getWindowHandle();
+	//System.out.println("TEST --------------- before handler="+driver.getWindowHandle());
+	String originalPageTitle=driver.getTitle();
+
+	//switch to handle the new print window
+	for(String winHandle : driver.getWindowHandles()){
+	    driver.switchTo().window(winHandle);
+	}
+	sleepBySec(5);
+	//CommonUtility.checkPageIsReady(driver);
+	// Perform the actions on new window
+	//System.out.println("TEST  --------------- after handler="+driver.getWindowHandle());
+	System.out.println("Proceed to validate the new window content for print");
+	String printPreviewPageTitle=driver.getTitle();
+	Assert.assertTrue("PROBLEM - print preview page title should be empty (untitled).  Actual='"+printPreviewPageTitle+"'", printPreviewPageTitle.equals(""));
+	   
+	System.out.println("Proceed to close the print preview window");
+	driver.close();
+
+	// note: Switch back to original browser (first window)
+	driver.switchTo().window(winHandleBefore);
+	
+	//System.out.println("TEST  --------------- back handler="+driver.getWindowHandle());
+	String pageTitleAfterClosingPrintPreview=driver.getTitle();
+	Assert.assertTrue("PROBLEM - page title should have been the same after closing print preview.  \nBefore='"+originalPageTitle+"' \nAfter='"+pageTitleAfterClosingPrintPreview+"'", originalPageTitle.equals(pageTitleAfterClosingPrintPreview));
+}
+
+public void closeOriginalTabAndOpenNewTab() {
+	
+    //get original tab handler
+	String winHandleBefore = driver.getWindowHandle();
+	
+	System.out.println("Proceed to open a new blank tab as placeholder so the driver won't close");
+	//open new tab
+	JavascriptExecutor js = (JavascriptExecutor) driver;
+    js.executeScript("window.open('about:blank','_blank');");
+	for(String winHandle : driver.getWindowHandles()){
+	    driver.switchTo().window(winHandle);
+	}
+	String winHandleTmp = driver.getWindowHandle();
+	System.out.println("Proceed to close the original tab that has plans saved, should left with a blank tab afterward");
+	driver.switchTo().window(winHandleBefore);
+	driver.close();
+    
+	driver.switchTo().window(winHandleTmp);
+	System.out.println("Proceed to open the acquisition url in new tab");
+    js.executeScript("window.open('"+UMS_ACQISITION_PAGE_URL+"','_blank');");
+
+    for(String winHandle : driver.getWindowHandles()){
+	    driver.switchTo().window(winHandle);
+	}
+	String winHandleNew = driver.getWindowHandle();
+
+	System.out.println("Proceed to close the placeholder blank tab");
+	driver.switchTo().window(winHandleTmp);
+	driver.close();
+
+	System.out.println("Proceed to use this newly opened tab for remaining validation");
+	driver.switchTo().window(winHandleNew);
+}
+//^^^ note: added for US1598162	
 
 }
