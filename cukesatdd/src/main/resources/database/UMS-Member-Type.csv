@@ -13,6 +13,7 @@ ucpgroupmapd01/Password@1,MAPD,GroupMAPD_Pharmacylocator
 ucpmedicamapd01/Password@1,MAPD,Medica_Pharmacylocator
 ucppcpmapd01/Password@1,MAPD,PCP_Pharmacylocator,
 ucpgrouppdptxers01/Password@1,PDP,TexasRx_Pharmacylocator,
+ucpuhcmapd01/Password@1,MAPD,IndMAPDUHC_Pharmacylocator,
 ucpuhcmapd01/Password@1,MAPD,IndUHC_Pharmacylocator,
 ucpaarpmapd01/Password@1,MAPD,IndAARPMAPD_Pharmacylocator	,
 q1_aarp_ma001/Password@1,MA,IndAARPMA_Pharmacylocator
