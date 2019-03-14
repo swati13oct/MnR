@@ -236,7 +236,7 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
       | US1497179 - AARP - No PCP Tiering        |   35618 | NO              | Lawrence County | MAPD     | AARP MedicareComplete Plan 1 (HMO)                | Primary Care Provider Copay | $5 copay                              |
 
 
-  @feature-F265872 @us1598162 @vppFavoritePlanInSessionAarp @thePredators @Apr_release_2019
+  @feature-F265872 @us1598162 @vppFavoritePlanInSession @vppFavoritePlanInSessionAarp @thePredators @Apr_release_2019
   Scenario Outline: UID: <UID> -zipcode: <zipcode> -isMultiCounty: <isMultiCounty> - Verify user can save and unsave favorite plans on view plan preview page on AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -301,7 +301,7 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
       | 1598162 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Nursing Home Plan (PPO SNP),UnitedHealthcare Assisted Living Plan (PPO SNP)|
 
 
-  @feature-F265872 @us1598162 @vppFavoritePlanInSessionCloseTabAarp @thePredators @Apr_release_2019
+  @feature-F265872 @us1598162 @vppFavoritePlanInSessionCloseTab @vppFavoritePlanInSessionCloseTabAarp @thePredators @Apr_release_2019
   Scenario Outline: UID: <UID> -zipcode: <zipcode> -isMultiCounty: <isMultiCounty> - Verify user can print favorite plans on view plan preview page on AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -328,7 +328,7 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
       | 1598162 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Nursing Home Plan (PPO SNP),UnitedHealthcare Assisted Living Plan (PPO SNP)|
  
  
-  @feature-F265872 @us1598166 @vppFavoritePlanEmail  @vppFavoritePlanEmailAarp @thePredators @Apr_release_2019
+  @feature-F265872 @us1598166 @vppFavoritePlanEmail @vppFavoritePlanEmailAarp @thePredators @Apr_release_2019
   Scenario Outline: UID: <UID> -zipcode: <zipcode> -isMultiCounty: <isMultiCounty> - Verify user can invoke the email button on view plan preview page on AARP site
 	# NOTE: Uncommment the step to save plans when there is a way to validate the received email content
     Given the user is on AARP medicare acquisition site landing page

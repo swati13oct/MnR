@@ -232,7 +232,7 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
       | US1497180 - UHC - No PCP Tiering        |   35618 | NO              | Lawrence County | MAPD     | AARP MedicareComplete Plan 1 (HMO)                | Primary Care Provider Copay | $5 copay                              |
 
       
-  @feature-F265872 @us1598162 @vppFavoritePlanInSessionUhc @thePredators @Apr_release_2019
+  @feature-F265872 @us1598162 @vppFavoritePlanInSession @vppFavoritePlanInSessionUhc @thePredators @Apr_release_2019
   Scenario Outline: UID: <UID> -zipcode: <zipcode> -isMultiCounty: <isMultiCounty> - Verify user can save and unsave favorite plans on view plan preview page on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -297,7 +297,7 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
       | 1598162 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Nursing Home Plan (PPO SNP),UnitedHealthcare Assisted Living Plan (PPO SNP)|
 
 
-  @feature-F265872 @us1598162 @vppFavoritePlanInSessionCloseTabUhc @thePredators @Apr_release_2019
+  @feature-F265872 @us1598162 @vppFavoritePlanInSessionCloseTab @vppFavoritePlanInSessionCloseTabUhc @thePredators @Apr_release_2019
   Scenario Outline: UID: <UID> -zipcode: <zipcode> -isMultiCounty: <isMultiCounty> - Verify user can print favorite plans on view plan preview page on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
