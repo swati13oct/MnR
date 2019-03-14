@@ -211,6 +211,10 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(xpath = "//a[text()='Set Up Automatic Payments']")
 	private WebElement SetUpAutomaticPaymentsButton;
 	
+	@FindBy(xpath = "//a[text()='Set Up Recurring Payments']")
+	private WebElement SetUpRecurringPaymentsButtonShip;
+	
+	
 	@FindBy(xpath = "//a[text()='Edit Automatic Payments']")
 	private WebElement EditAutomaticPaymentsButton;	
 	
@@ -1008,6 +1012,27 @@ public class PaymentHistoryPage extends UhcDriver {
 			return new UpdateRecurringPage(driver);
 		} else {
 			System.out.println("Update Automatic Payments not displayed for ship");
+			return null;
+		}
+	}
+	
+
+	public PaymentsFormPage clickOnsetupAutomaticPaymentforShip() throws Exception {
+		Thread.sleep(20000);
+		waitforElement(SetUpRecurringPaymentsButtonShip);
+		SetUpRecurringPaymentsButtonShip.click();
+		System.out.println("User clicked on Setup Recurring Paymets Button");
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			System.out.println(driver.getCurrentUrl());
+			e.printStackTrace();
+		}
+		if (driver.getTitle().contains("Set Up Recurring Payments")) {
+			System.out.println("Navigated to Set Up Recurring Payments page for ship");
+			return new PaymentsFormPage(driver);
+		} else {
+			System.out.println("Update Set Up Recurring Payments not displayed for ship");
 			return null;
 		}
 	}

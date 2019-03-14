@@ -624,6 +624,31 @@ public class OneTimePaymentPage extends UhcDriver {
 			return null;
 		}
 	}
+	
+	public ConfirmOneTimePaymentPage selectAgreeAndClickOnContinueforEFTForShip() {
+		validate(EditPaymentInformation);
+		PaymentsDataVerificationonReviewPage();
+		System.out.println("User is on review Payment Page");
+		System.out.println("Going to scroll down");
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,650)", "");
+		jsClickNew(AgreeCheckBox);
+		AuthorizeMonthlyPaymentstButton.click();
+		System.out.println("Clicked on Contuine button");
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			System.out.println(driver.getCurrentUrl());
+			e.printStackTrace();
+		}
+		if (driver.getTitle().contains("Recurring Payments Request Submitted")) {
+			System.out.println("User is on Confirmation Page for Setup Recurring for ship");
+			return new ConfirmOneTimePaymentPage(driver);
+		} else {
+			System.out.println("Confirmation Page for setup recurring not displayed for ship");
+			return null;
+		}
+	}
 
 	@Override
 	public void openAndValidate() {
