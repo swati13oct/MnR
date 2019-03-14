@@ -2,13 +2,14 @@
 Feature: To test the payment flow on Member site
 
   @paymentsFInal @paymentsOneTimePayments @regressionMember @payment1
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify if the user is able to make one time payment.
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify if the user is able to make one time payment for EFT
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     Then the user navigates to payment history
-    And the user clicks on One Time Payment button
-    And the user makes one time payment and navigate futher
+    And user clicks on Make one time payment on payment overview page
+    And user selects other amount and enters "1.00" and selects Checking Account and click on Next button
+    And user Enters all Mandatory fields on form page and click on Authorize button for Make one Time CA
       | Amount to be paid          | <Amount>           |
       | Routing number             | <routingNo>        |
       | Confirm routing number     | <confirmRoutingNo> |
@@ -17,12 +18,13 @@ Feature: To test the payment flow on Member site
       | Account holder first name  | <firstName>        |
       | Account holder middle name | <middleName>       |
       | Account holder last name   | <lastName>         |
-    And the user confirms the payment in AARP site
+    And user navigates to Review Your One-Time Payment Information and selects agreements and click on Submit Button for Make One Time
+    Then User navigates to payment confirmation page and verifies ConfirmationNo for One time
 
     Examples: 
-      | TID   | planType | memberType              | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
-      | 15118 | MAPD     | IndividualUHCPayments   | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
-      | 15143 | SHIP     | IndividualAARPSPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
+      | TID   | planType | memberType              | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
+      | 15118 | MAPD     | IndividualUHCPayments   | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
+      | 15143 | SHIP     | IndividualAARPSPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
 
   @paymentsAutoPay @15301 @regressionMember @payment2
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Recurring Payment for Different Types of Member

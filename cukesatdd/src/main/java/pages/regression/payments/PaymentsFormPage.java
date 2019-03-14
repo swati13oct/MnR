@@ -44,7 +44,7 @@ public class PaymentsFormPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='consent']/following-sibling::label")
 	private WebElement ElectronicSignatureInput;
 
-	@FindBy(xpath = "//button[@class='btn btn--primary' and (text()='CONTINUE' or text()='Continue')]")
+	@FindBy(xpath = "//button[@class='btn btn--primary']")
 	private WebElement ContinueButton;
 
 	public PaymentsFormPage(WebDriver driver) {
@@ -153,6 +153,40 @@ public class PaymentsFormPage extends UhcDriver {
 			return new UpdateReviewPage(driver);
 		} else {
 			System.out.println("Review Your Recurring Payments not displayed");
+			return null;
+		}
+	}
+	
+	public OneTimePaymentPage EnterFiledsOnMakeOneTime(Map<String, String> accountAttributessMap) throws Exception {
+
+		String routingNumber = accountAttributessMap.get("Routing number");
+		String confirmRoutingNumber = accountAttributessMap.get("Confirm routing number");
+		String accountNumber = accountAttributessMap.get("Account number");
+		String confirmAccountNumber = accountAttributessMap.get("Confirm account number");
+		String firstName = accountAttributessMap.get("Account holder first name");
+		String middleName = accountAttributessMap.get("Account holder middle name");
+		String lastName = accountAttributessMap.get("Account holder last name");
+
+		routingNumberField.sendKeys(routingNumber);
+		confirmRoutingNumberField.sendKeys(confirmRoutingNumber);
+		accountNumberField.sendKeys(accountNumber);
+		confirmAccountNumberField.sendKeys(confirmAccountNumber);
+		firstNameField.sendKeys(firstName);
+		middleNameField.sendKeys(middleName);
+		lastNameField.sendKeys(lastName);
+		ContinueButton.click();
+		System.out.println("Clicked on Contuine button");
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			System.out.println(driver.getCurrentUrl());
+			e.printStackTrace();
+		}
+		if (driver.getTitle().contains("Review Your One-Time Payment Information")) {
+			System.out.println("User is on Review Your One-Time Payment Information Page");
+			return new OneTimePaymentPage(driver);
+		} else {
+			System.out.println("Review Your One-Time Payment Information not displayed");
 			return null;
 		}
 	}
