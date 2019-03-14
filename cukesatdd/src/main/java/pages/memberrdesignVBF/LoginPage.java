@@ -97,7 +97,13 @@ public class LoginPage extends UhcDriver {
 			}
 		} else if ("NO".equalsIgnoreCase(MRScenario.isTestHarness)
 				& "YES".equalsIgnoreCase(MRScenario.isHSIDCompatible)) {
-			PAGE_URL = MRConstants.DASHBOARD.replace("awe-", "");
+					
+					 if ("offline-stage".equalsIgnoreCase(MRScenario.environment)) 
+					
+						PAGE_URL = MRConstants.OFFLINE_STAGE_TESTHARNESS;
+					
+						else 
+						PAGE_URL = MRConstants.DASHBOARD.replace("awe-", "");
 		} else if ("NO".equalsIgnoreCase(MRScenario.isTestHarness)
 				& "NO".equalsIgnoreCase(MRScenario.isHSIDCompatible)) {
 			PAGE_URL = MRConstants.LEGACY_DASHBOARD.replace("awe-", "");
