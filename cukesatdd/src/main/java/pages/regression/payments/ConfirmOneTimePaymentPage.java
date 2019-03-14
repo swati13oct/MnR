@@ -53,6 +53,9 @@ public class ConfirmOneTimePaymentPage extends UhcDriver {
 
 	@FindBy(id = "closeButton")
 	private WebElement iPerceptionCloseButton;
+	
+	@FindBy(xpath = "//a[normalize-space(text())='Make a One-Time Payment']")
+	private WebElement MakeOneTimePaymentLink;
 
 	public ConfirmOneTimePaymentPage(WebDriver driver) {
 		super(driver);
@@ -292,6 +295,13 @@ public class ConfirmOneTimePaymentPage extends UhcDriver {
 
 	}
 
+	
+	public void validateEFTSetupVerificationforShip() {
+		validate(MakeOneTimePaymentLink);
+		PaymentsDataVerificationonConfirmationPage();
+		System.out.println("User has sucessfully setup recurring payment for Ship EFT");
+	}
+	
 	@Override
 	public void openAndValidate() {
 

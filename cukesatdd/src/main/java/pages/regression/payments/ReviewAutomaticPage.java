@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -98,6 +99,32 @@ public class ReviewAutomaticPage extends UhcDriver {
 			return new RecurringConfirmationPage(driver);
 		} else {
 			System.out.println("Confirmation Page for Recurring not displayed");
+			return null;
+		}
+	}
+	
+	
+	public RecurringConfirmationPage selectAgreeAndClickOnContinueforEFTForShip() {
+		validate(EditPaymentInformation);
+		PaymentsDataVerificationonReviewPage();
+		System.out.println("User is on Payment Method Update Page");
+		System.out.println("Going to scroll down");
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,650)", "");
+		jsClickNew(AgreeCheckBox);
+		AuthorizeMonthlyPaymentstButton.click();
+		System.out.println("Clicked on Contuine button");
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			System.out.println(driver.getCurrentUrl());
+			e.printStackTrace();
+		}
+		if (driver.getTitle().contains("Your Updated Payment Method")) {
+			System.out.println("User is on Confirmation Page for Update Recurring for ship");
+			return new RecurringConfirmationPage(driver);
+		} else {
+			System.out.println("Confirmation Page for Update not displayed for ship");
 			return null;
 		}
 	}
