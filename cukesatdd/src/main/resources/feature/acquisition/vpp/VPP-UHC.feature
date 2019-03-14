@@ -326,9 +326,7 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
 
   @feature-F265872 @us1598166 @vppFavoritePlanEmailUhc @thePredators @Apr_release_2019
   Scenario Outline: UID: <UID> -zipcode: <zipcode> -isMultiCounty: <isMultiCounty> - Verify user can invoke the email button on view plan preview page on UHC site
- 	"""
-	NOTE: Uncommment the step to save plans when there is a way to validate the received email content
-	"""
+	# NOTE: Uncommment the step to save plans when there is a way to validate the received email content
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>       |
@@ -348,9 +346,7 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
 
   @feature-F265872 @us1603378 @vppFavoritePlanPrintAarp @thePredators @Apr_release_2019
   Scenario Outline: UID: <UID> -zipcode: <zipcode> -isMultiCounty: <isMultiCounty> - Verify user can invoke the print button on view plan preview page on UHC site
-	"""
-	NOTE: Uncommment the step to save plans when there is a way to validate the print preview screen content
-	"""
+	# NOTE: Uncommment the step to save plans when there is a way to validate the print preview screen content
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>       |

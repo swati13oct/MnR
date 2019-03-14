@@ -330,9 +330,7 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
  
   @feature-F265872 @us1598166 @vppFavoritePlanEmailAarp @thePredators @Apr_release_2019 @abc
   Scenario Outline: UID: <UID> -zipcode: <zipcode> -isMultiCounty: <isMultiCounty> - Verify user can invoke the email button on view plan preview page on AARP site
- 	"""
-	NOTE: Uncommment the step to save plans when there is a way to validate the received email content
-	"""
+	# NOTE: Uncommment the step to save plans when there is a way to validate the received email content
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>       |
@@ -352,9 +350,7 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
 
   @feature-F265872 @us1603378 @vppFavoritePlanPrintAarp @thePredators @Apr_release_2019 @abc
   Scenario Outline: UID: <UID> -zipcode: <zipcode> -isMultiCounty: <isMultiCounty> - Verify user can invoke the print button on view plan preview page on UHC site
-	"""
-	NOTE: Uncommment the step to save plans when there is a way to validate the print preview screen content
-	"""
+	# NOTE: Uncommment the step to save plans when there is a way to validate the print preview screen content
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>       |
