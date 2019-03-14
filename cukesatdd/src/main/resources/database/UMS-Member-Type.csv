@@ -8,7 +8,6 @@ TESTVILLAGEUSER01/Password@1,MAPD,IndividualDCEmember_DCE,
 q2_jun_aarp0028/Password@1,MAPD,AARPFederalDCEmember,
 q2_jun_grp0022/Password@1,PDP_GROUP_DCE,
 q2_jun_aarp0135/Password@1,MAPD,Individualwithoutpharmacy_DCE
-ucpaarpmapd01/Password@1,MAPD,IndAARPMAPD_Pharmacylocator
 ucpaarppdp01/Password@1,PDP,IndAARPPDP_Pharmacylocator
 ucpgroupmapd01/Password@1,MAPD,GroupMAPD_Pharmacylocator
 ucpmedicamapd01/Password@1,MAPD,Medica_Pharmacylocator
@@ -155,10 +154,10 @@ q2_jun_uhc0040/Password@123,MAPD,MakeOneTimeCCTotal_Payments,
 q2_jun_aarp0141/Password@1,PDP,MakeOneTimeCCOther_Payments,
 q2_jun_uhc0040/Password@123,MAPD,SetupRecEFT_Payments,
 q2_jun_aarp0082/Password@1,PDP,SetupRecCC_Payments,
-q1_aarp_feb532/Password@1,MAPD,UpdateRecurrEFT_Payments, 
+q1_aarp_feb532/Password@1,MAPD,UpdateRecurrEFT_Payments,
 q2_jun_aarp0141/Password@1,PDP,UpdateRecurrCC_Payments,
 q1_aarp_feb532/Password@1,MAPD,UpdateRecurrStop_Payments,
-q2_jun_ship0195/Password@1,SHIP,SHIPUpdate_Payments,
+q2_jun_ship0042/Password@1,SHIP,SHIPUpdate_Payments,
 PDPSSUPCrossCombo2/Password@1,PDP,ComboMakeOneTimeCCTotal_Payments,
 q4_dec_combocross0011/Password@1,PDP,ComboMakeOneTimeCCOther_Payments,
 q4_dec_combo0009_2/Password@1,PDP,ComboSetupRecEFT_Payments,
@@ -166,4 +165,4 @@ q4_dec_combocross0011/Password@1,PDP,ComboStepuRecCC_Payments,
 PDPSSUPCrossCombo2/Password@1,PDP,ComboUpdateRecurrEFT_Payments,
 q4_dec_combocross0014/Password@1,PDP,ComboUpdateRecurrCC_Payments,
 PDPSSUPCrossCombo2/Password@1,PDP,ComboUpdateStopRec_Payments,
-
+q2_jun_ship0195/Password@1,SHIP,SHIPSetup_Payments,
