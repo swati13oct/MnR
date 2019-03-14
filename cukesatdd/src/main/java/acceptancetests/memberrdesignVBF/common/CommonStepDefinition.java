@@ -1,4 +1,4 @@
-package acceptancetests.memberrdesignVBF.common;
+apackage acceptancetests.memberrdesignVBF.common;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -185,7 +185,11 @@ public class CommonStepDefinition {
 	}
 
 	public void launchBrowser() {
+		if ("offline-stage".equalsIgnoreCase(MRScenario.environment)){
+			wd = getLoginScenario().getWebDriver();
+		}else{
 		wd = getLoginScenario().getWebDriverNew();
+	}
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		CommonStepDefinition commonStepDefinition = new CommonStepDefinition(loginScenario);
 		getLoginScenario().saveBean(CommonConstants.COMMONSTEPDEFINITIONMEMVBF, commonStepDefinition);
