@@ -1,4 +1,4 @@
-apackage acceptancetests.memberrdesignVBF.common;
+package acceptancetests.memberrdesignVBF.common;
 
 import java.util.ArrayList;
 import java.util.Iterator;
