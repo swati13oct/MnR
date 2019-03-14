@@ -24,6 +24,7 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import junit.framework.Assert;
+
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
@@ -220,6 +221,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath ="//*[@id='colhowdoesthiswork_provider']/tbody/tr/td/div/a")
 	private WebElement providerSearchFromHomeScreen;
+	
+	@FindBy(id="ghn_lnk_2")
+	private WebElement ShopForaplan;
+	
+    @FindBy(xpath=".//*[@id='updates-mobile-form']/div/div[2]/button")
+	private WebElement submit;
 
 
 	private static String TeamC_ACQUISITION_PAGE_URL = MRConstants.TeamC_UHC_URL;
@@ -1206,4 +1213,19 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		return null;
 	}
+	public AcquisitionHomePage hovershopaplan() throws InterruptedException {
+		
+		waitforElement(ShopForaplan);
+		if (ShopForaplan.isDisplayed()) {
+			Actions actions = new Actions(driver);
+			actions.moveToElement(ShopForaplan);
+			waitforElementNew(submit);
+			System.out.println("Submit button is displayed");
+			return new AcquisitionHomePage(driver);
+	      }
+		else {
+			return null;}
+	
+	
+}
 }
