@@ -284,6 +284,13 @@ public class ConfirmOneTimePaymentPage extends UhcDriver {
 		System.out.println("Your Confimation Number is : " + ConfirmationNumber.getText());
 
 	}
+	
+	public void OneTimeEFTverification() {
+		validate(ConfirmationNumber);
+		PaymentsDataVerificationonConfirmationPage();
+		System.out.println("Your Confimation Number is : " + ConfirmationNumber.getText());
+
+	}
 
 	@Override
 	public void openAndValidate() {
