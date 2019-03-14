@@ -1,7 +1,7 @@
 @smokeTest @MemberVBF
 Feature: 1.02-VBF-MemRedesign-To test claim functionality
 
-  @smokeTest_Claims @rallyDashboard @testharness
+  @rallyDashboard @testharness
  Scenario Outline: To validate that claims are present on claims summary page and claims details page for <claimssystem>
     Given I am a authenticated member on the member redesign site for Direct Login
       | Plan Type    | <planType>    |
@@ -26,6 +26,21 @@ Feature: 1.02-VBF-MemRedesign-To test claim functionality
     Then I validate the Claims Table in claims details page in AARP site
     And I validate the Claims Total in claims details page in AARP site
 
+	@smokeTest_Claims
+    Examples: 
+     | memberType    | planType | claimPeriod     | domain | claimssystem | friendname | favcolor | phonenumber |
+ 	 |  ShipInd 	   |  SHIP    | Last 24 months  | NA     | SHIPCLAIMS   |  name1     | color1   | number1     |
+     |  ULayerInd 	 |  MAPD    |  Last 24 months | COSMOS | COSMOSCLAIMS |  name1     | color1   | number1     |
+     |  ULayerInd		 |  MAPD    |  Last 24 months | NICE   | NICECLAIMS   |  name1     | color1   | number1     |
+   	 |  ULayerInd    |  MAPD    |  Last 24 months | COSMOS | RxCLAIMS     |  name1     | color1   | number1     |
+   #  | BlueLayerInd |MAPD |  Last 24 months | COSMOS | COSMOSCLAIMS | name1      | color1   | number1     |
+   #	| BlueLayerInd |MAPD |  Last 24 months | COSMOS   | RxCLAIMS   | name1      | color1   | number1     |
+   #  | BlueLayerInd |MAPD |  Last 24 months | NICE   | NICECLAIMS   | name1      | color1   | number1     |
+   #  |  GroupRetiree |MAPD |  Last 24 months | COSMOS | COSMOSCLAIMS |name1      | color1   | number1     |
+   #  |  GroupRetiree |MAPD |  Last 24 months | NICE   | NICECLAIMS   |name1      | color1   | number1     |
+   #  | GroupRetiree |MAPD |  Last 24 months | Rx   | RxCLAIMS   | name1      | color1   | number1     |
+
+   @gatingTest_Claims
     Examples: 
      | memberType    | planType | claimPeriod     | domain | claimssystem | friendname | favcolor | phonenumber |
  		 |  ShipInd 	   |  SHIP    | Last 24 months  | NA     | SHIPCLAIMS   |  name1     | color1   | number1     |
@@ -38,3 +53,4 @@ Feature: 1.02-VBF-MemRedesign-To test claim functionality
    #  |  GroupRetiree |MAPD |  Last 24 months | COSMOS | COSMOSCLAIMS |name1      | color1   | number1     |
    #  |  GroupRetiree |MAPD |  Last 24 months | NICE   | NICECLAIMS   |name1      | color1   | number1     |
    #  | GroupRetiree |MAPD |  Last 24 months | Rx   | RxCLAIMS   | name1      | color1   | number1     |
+   
