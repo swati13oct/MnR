@@ -1965,7 +1965,28 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		Assert.assertTrue("**** Validation Failed for Group Member - Dual Medical Deductible ****",benefitsCoveragePage.ValidateBnC_DualDeductible(deductibleAmount1, deductibleAmount2));
 
 	}
-
+	
+	@And("^the user validates the access your drug benefits block$")
+	public void the_user_validates_the_access_your_drug_benefits_block() throws Throwable {
+		
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		Assert.assertTrue("**** Validation Failed for Group-University Of Kentucky - Access Your Drug Benefits ****",benefitsCoveragePage.validateAccessDrugsBenfitsBlock());
+	}
+	
+	@And("^the user validates the site leaving pop up and click cancel$")
+	public void the_user_validates_the_site_leaving_pop_up_and_click_cancel() throws Throwable {
+		
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		Assert.assertFalse("**** Validation Failed for Group-University Of Kentucky - site leaving popup cancel flow****",benefitsCoveragePage.validateSiteLeavingPopUpCancelFlow());
+		
+	}
+	
+	@And("^the user validates the site leaving pop up and click proceed$")
+	public void the_user_validates_the_site_leaving_pop_up_and_click_proceed() throws Throwable {
+		
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		Assert.assertTrue("**** Validation Failed for Group-University Of Kentucky - site leaving popup proceed flow ****",benefitsCoveragePage.validateSiteLeavingPopUpProceedFlow());
+	}
 
 
 }//end of class
