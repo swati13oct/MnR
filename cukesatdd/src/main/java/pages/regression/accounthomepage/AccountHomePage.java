@@ -2239,14 +2239,18 @@ public class AccountHomePage extends UhcDriver {
 			}
 		}
 
-		else if (MRScenario.environmentMedicare.equals("team-h") || MRScenario.environmentMedicare.equals("test-a")
-				|| MRScenario.environmentMedicare.equals("team-e")){
+		else if (MRScenario.environmentMedicare.equals("team-h") || MRScenario.environmentMedicare.equals("test-a")){
 
 			driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
 			System.out.println(driver.getCurrentUrl());
 		} else if(MRScenario.environmentMedicare.equals("team-c")){
 			driver.navigate().to(
 					"https://team-c-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
+			System.out.println(driver.getCurrentUrl());
+			return new BenefitsAndCoveragePage(driver);
+		}else if(MRScenario.environmentMedicare.equals("team-e")){
+			jsClickNew(driver.findElement(By.xpath("//td[text()='benefits and coverage page ']/following::a[1]")));
+			CommonUtility.waitForPageLoad(driver, heading, 30);
 			System.out.println(driver.getCurrentUrl());
 			return new BenefitsAndCoveragePage(driver);
 		}else

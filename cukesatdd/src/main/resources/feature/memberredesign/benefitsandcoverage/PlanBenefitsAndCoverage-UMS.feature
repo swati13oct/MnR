@@ -27,7 +27,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
 
     Examples: 
       | TID   | planType | memberType | copayCategory |
-      | 15247 | MAPD     | Group_BnC      | LIS 4         |
+      | 15247 | MAPD     | Group_BnC  | LIS 4         |
 
   @benefitsAndCoverage2 @regressionMember @CMGroupmembersPDPLIS_TC26
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Group LIS 1/2 values on Benefits and Coverage page
@@ -167,7 +167,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     And the user validates the copay coinsurance in drug costs table
 
     Examples: 
-      | TID   | planType | memberType      |
+      | TID   | planType | memberType     |
       | 15090 | MAPD     | Individual_BnC |
 
   @benefitsAndCoverage12 @BenefitsForCombo @regression @regressionMember
@@ -179,7 +179,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     And the user validates the benefits for a combo member
 
     Examples: 
-      | TID   | planType | memberType       |
+      | TID   | planType | memberType      |
       | 15091 | Combo    | MAPDANDSHIP_BnC |
 
   # note: Due to timing that it takes for GPS to do the update (add or remove),
@@ -195,8 +195,8 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     Then the user validates the remove Rider functionality
 
     Examples: 
-      | TID   | planType | memberType |
-      | 15243 | MAPD     | withRider_BnC  |
+      | TID   | planType | memberType    |
+      | 15243 | MAPD     | withRider_BnC |
 
   @benefitsAndCoverage14 @CMFedDrugNonLis
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify all sections for Ind NonLIS member on Benefits and Coverage page
@@ -688,8 +688,8 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     Examples: 
       | TID   | planType | memberType   |
       | 15367 | MAPD     | Hartford_BnC |
-    # | 15367 | PDP      | Hartford_BnC |
 
+  # | 15367 | PDP      | Hartford_BnC |
   @benefitsAndCoverage31 @thePredators @juneRelease2018 @TownOfGreenwichprescriptionDrugBenefit
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify town of greenwich Prescription Drug Benefits
     Given login with following details logins in the member portal and validate elements
@@ -940,3 +940,17 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | UID       | planType     | memberType     | deductible1 | deductible2 |
       | US1564213 | MAGroup1_BnC | DualDeductible | $150        | $250        |
       | US1564213 | MAGroup2_BnC | DualDeductible | $1,364      | $185        |
+
+  @benefitsAndCoverage43 @F276093 @Apr_release_2019
+  Scenario Outline: UserStory: <UID> -plan: <planType> -memberType: <memberType> - Verify Access your drug beneifts block for Univ. Of Kentucky Member
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    Then The user navigate to Benefits and Coverage page
+    And the user validates the access your drug benefits block
+		And the user validates the site leaving pop up and click cancel
+		And the user validates the site leaving pop up and click proceed
+		
+    Examples: 
+      | UID       | planType | memberType           |
+      | US1615721 | MAPD     | Group_UnivOfKentucky |
