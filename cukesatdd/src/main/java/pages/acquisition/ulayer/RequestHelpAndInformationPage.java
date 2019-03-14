@@ -9,9 +9,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+
 
 /**
  * @author pjaising
@@ -28,7 +28,6 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 	
 	@FindBy(xpath =".//*[@id='collapse2heading_article_mededaccordion0']/a")
 	private WebElement requestAgentApptDropdown;
-
 	
 	@FindBy(xpath = ".//*[@id='article_mededaccordion1']//*[contains(text(),'Information')]")
 	private WebElement pdpEnquiryKitLink;
@@ -38,8 +37,6 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 	
 	@FindBy(xpath =".//*[@id='collapse2heading_article_mededaccordion2']/a")
 	private WebElement communityMeetingDropdown;
-	
-	
 	
 	@FindBy(xpath =".//*[@id='ghn_lnk_1']")
 	private WebElement homeTab;
@@ -60,6 +57,12 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 	
 	@FindBy(xpath = "//input[@id='zipcodemeded']/following-sibling::button[contains(@class,'zip-button')]")
 	private WebElement findPlansBtnMedEd;
+	
+	@FindBy(xpath =".//*[@id='collapse2heading_article_mededaccordion1']/a")
+	private WebElement requestMailinfoDropdown;
+	
+	@FindBy(xpath =".//*[@id='article_mededaccordion1']//*[contains(text(),'Request Mailed Information')]")
+	private WebElement ma_requestmailedinformationLink;
 	
 
 	
@@ -147,5 +150,18 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 		if(driver.getCurrentUrl().contains("attend"))
 			return true;
 		return false;
+	}
+	
+	public RequestMailedInformation navigateToRequestMailedinformation() throws InterruptedException {
+		if (requestMailinfoDropdown.getAttribute("class").contains("collapsed")) {
+			requestMailinfoDropdown.click();
+		}
+		validateNew(ma_requestmailedinformationLink);
+		ma_requestmailedinformationLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (currentUrl().contains("inquirykit")) {
+			return new RequestMailedInformation(driver);
+		}
+		return null;
 	}
 }
