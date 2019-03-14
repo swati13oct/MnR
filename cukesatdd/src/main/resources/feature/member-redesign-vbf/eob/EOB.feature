@@ -1,7 +1,7 @@
 @smokeTest @MemberVBF
 Feature: 1.05-VBF-MemRedesign-To test EOB functionality (GATED)
 
-  @smokeTest_EOB @rallyDashboard @testharness
+  @rallyDashboard @testharness
   Scenario Outline: Validate that member can search for eob statement for <eobType>
     Given I am a authenticated member on the member redesign site for Direct Login
       | Plan Type   | <planType>   |
@@ -21,6 +21,20 @@ Feature: 1.05-VBF-MemRedesign-To test EOB functionality (GATED)
     Then the user validates EOB statments displayed
 
     #Then the user validates site leaving pop up
+    
+    @smokeTest_EOB
+    Examples: 
+      | planType | memberType        | dateRange   | eobType        | friendname | favcolor | phonenumber |
+     | Medsupp | Ship              | 12-18 Months | ShipEOB        |  name1     |  color1  |   number1   |
+      | MAPD     | UHCIndividualCosmosEOB  | 18 Months | Medical           | name1      | color1   | number1     |
+      | MAPD     | UHCIndividualEOB  | 18 Months | Prescription Drug | name1      | color1   | number1     |
+   #   | MAPD     | AARPIndividualCosmosEOB | 18 Months | Medical           | name1      | color1   | number1     |
+    | MAPD     | AARPIndividualNiceEOB | 18 Months | Medical           | name1      | color1   | number1     |
+	#	| MAPD      | AARPIndividualEOB    |18 Months		  | Prescription Drug | name1      | color1   | number1     | 
+		#	| MAPD      | GroupRetireeCosmosEOB      |18 Months		  | Medical           | name1      | color1   | number1     | 
+		#	| MAPD      | GroupRetireeEOB      |18 Months		  | Prescription Drug | name1      | color1   | number1     | 
+		
+	@GatingTest_EOB
     Examples: 
       | planType | memberType        | dateRange   | eobType        | friendname | favcolor | phonenumber |
     # | Medsupp | Ship              | 6-12 Months | ShipEOB        |  name1     |  color1  |   number1   |
