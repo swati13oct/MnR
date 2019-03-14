@@ -239,7 +239,7 @@ public class ContactUsPage extends UhcDriver {
                    switchToNewTabNew(btnContinue);
                    CommonUtility.checkPageIsReadyNew(driver);
                    CommonUtility.waitForPageLoadNew(driver, messengerComposeBtn, 60);
-                   Assert.assertTrue(driver.getTitle().equals("Messenger"));                  
+                   Assert.assertTrue(driver.getTitle().contains("Messenger"));                  
                    validateNew(messengerInbox);
                    }
                    else{

@@ -1087,7 +1087,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public boolean providerinfo(String planName) {
 
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
-				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]/descendant::span[contains(text(),'covered')]"));
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]/descendant::span[contains(text(),'providers covered')]"));
 		String mproviderinfo=ProviderSearchLink.getText();
         System.out.println(mproviderinfo);
 		if (mproviderinfo.contains("1 providers covered")) {
