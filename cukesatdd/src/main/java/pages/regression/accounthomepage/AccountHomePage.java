@@ -2352,10 +2352,10 @@ public class AccountHomePage extends UhcDriver {
 		try {
 			driver.findElement(By.xpath("//a[contains(text(),'Premium Payments')]"));
 			System.out.println("Premium Payment tab was displayed on Dashboard");
-			Assert.fail("Premium Payment tab was displayed, Test step is failed");
+			
 		} catch (NoSuchElementException e) {
 			// TODO Auto-generated catch block
-			System.out.println("Premium Payment tab was not displayed on Dashboard, Test Step is Passed ");
+			Assert.fail("Premium Payment tab was not displayed on Dashboard, Test Step is failed ");
 		}
 
 	}

@@ -1,4 +1,4 @@
-package pages.memberrdesignVBF;
+package pages.regression.testharness;
 
 import java.util.List;
 
@@ -11,11 +11,24 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
-import acceptancetests.memberrdesignVBF.common.CommonStepDefinition;
+import acceptancetests.memberredesign.HSID.CommonStepDefinition;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.memberrdesignVBF.BenefitsAndCoveragePage;
+import pages.memberrdesignVBF.ClaimSummarypage;
+import pages.memberrdesignVBF.ContactUsPage;
+import pages.memberrdesignVBF.DrugCostEstimatorPage;
+import pages.memberrdesignVBF.EOBPage;
+import pages.memberrdesignVBF.FormsAndResourcesPage;
 import pages.memberrdesignVBF.HealthAndWellness;
+import pages.memberrdesignVBF.OrderplanmaterialsPage;
+import pages.memberrdesignVBF.PaymentsOverview;
+import pages.memberrdesignVBF.PharmacySearchPage;
+import pages.memberrdesignVBF.ProfilePreferencesPage;
+import pages.memberrdesignVBF.ProviderSearchPage;
+import pages.memberrdesignVBF.RallyDashboardPage;
+
 
 public class TestHarness extends UhcDriver {
 
@@ -174,7 +187,6 @@ public class TestHarness extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		category = CommonStepDefinition.getMemberAttributeMap().get("Member Type");
-		RallyDashboardPage.checkModelPopup(driver);
 		if (category.equalsIgnoreCase("PCP") || category.equalsIgnoreCase("MEDICA")) {
 			CommonUtility.waitForPageLoad(driver, panelHomePcpMedica, 30);
 			validateNew(pcpMedicaLogo);		

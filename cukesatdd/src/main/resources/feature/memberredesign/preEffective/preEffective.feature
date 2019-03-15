@@ -8,7 +8,7 @@ Feature: To test pre-effective functionality
       | Member Type    | <memberType>    |
       | Copay Category | <copayCategory> |
     And verify that preeffective message is displayed on the home page
-    And verify that payment tab is not displayed to Preeffective member on dashboard
+    And verify that payment tab is displayed to Preeffective member on dashboard
     And user clicks on the benefits and coverage tab on the dashboard home page
     And verify that subnavigation is supressed on the coverage and benefits page
     And verify that correct preeffective message and plan documents button are displayed on coverage and benefits page
@@ -100,5 +100,30 @@ Scenario Outline:Verify HSID registration.
     #| Medica  |  Individual  |  NON LIS      | CBCCA     | FECBC           | 01/01/1942          | 912020922-1 | 33125	 |q2_jun_sofl0005      | Password@1 | codetransformers@gmail.com      | number1   | name1     | color1    |
   # | PCP     |  Individual  |  NON LIS      | ECCFF     | DBCAADBCAE      | 04/07/1952          | 965421538-1 | 33435	 |q2_jun_sofl0009      | Password@1 | codetransformers@gmail.com      | number1   | name1     | color1    |
   
-  
+#The below scenario is used for VBF in gating. 
+	@preEffectiveVBF @MemberVBF
+	Scenario Outline: Verify that correct links and messages are displayed on Dashboard and Secondary Pages for pre-effective members through Test harness
+    Given I am a authenticated member on the member redesign site for Direct Login
+      | Member Type    | <memberType>    |
+ 	When the above plantype user logs in member redesign for Direct Login
+      | friendname     | <friendname>  |
+      | favouritecolor | <favcolor>    |
+      | PhoneNumber    | <phonenumber> |
+    And verify that preeffective message is displayed on the test harness page
+    And verify that payment tab is displayed to Preeffective member on test harness page
+    And user clicks on the benefits and coverage tab on the dashboard home page
+    And verify that subnavigation is supressed on the coverage and benefits page
+    And verify that correct preeffective message and plan documents button are displayed on coverage and benefits page
+    And verify that correct phone number is displayed in technical support section of coverage and benefits page
+    And user click on the plan documents button
+    And user is navigated to Forms and Resource page
+    And user clicks on claims tab from Forms and Resources page
+    And verify that subnavigation is supressed on the claims page
+    And verify that correct preeffective message is displayed on claims page
+    And verify that correct phone number is displayed in technical support section of claims page
+    And verify that payment tab is not displayed to Preeffective member from secondary pages
+
+    Examples: 
+       | memberType          | friendname | favcolor | phonenumber |
+       | PreEffectivePDP     | name1      | color1   | number1     |
          

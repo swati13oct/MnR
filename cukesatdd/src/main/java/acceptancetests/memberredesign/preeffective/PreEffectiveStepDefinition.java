@@ -22,6 +22,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
+import pages.regression.testharness.*;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.regression.claims.ClaimSummarypage;
@@ -57,13 +58,30 @@ public void verifyPreEffectiveMessageDisplayedOnDashboardHomePage() throws Throw
     getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
 	
 }
-@Given("^verify that payment tab is not displayed to Preeffective member on dashboard$")
+
+@Given("^verify that preeffective message is displayed on the test harness page$")
+public void verifyPreEffectiveMessageDisplayedOnTestHarnessPage() throws Throwable {
+	TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
+	testHarnessPage.validatePreEffectiveMessagePresent();	
+    getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE, testHarnessPage);
+	
+}
+
+@Given("^verify that payment tab is displayed to Preeffective member on dashboard$")
 public void verifyPaymentsTabNotDisplayedOnDashboardHomePage() throws Throwable {
 	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 	Thread.sleep(3000);	
 	AccountHomePage.checkForIPerceptionModel(accountHomePage.driver);
 	accountHomePage.validatePremiumPaymentTabNotDisplayed();	
 	getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
+	
+}
+
+@Given("^verify that payment tab is displayed to Preeffective member on test harness page$")
+public void verifyPaymentsTabNotDisplayedOnDashTestHarnessPage() throws Throwable {
+	TestHarness  testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
+	testHarnessPage.validatePremiumPaymentTabIsDisplayed();	
+	getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE, testHarnessPage);
 	
 }
 
