@@ -260,3 +260,33 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
       | US1625234 - AARP Plan Compare - PCP Tiering    |   28701 | NO              | Buncombe County | MAPD     | AARP MedicareComplete Plan 3 (HMO)                | Primary Care Provider Copay | Tier 1: $0 copay / Tier 2: $20 copay |
       | US1625234 - AARP Plan Compare - PCP No Tiering |   06280 | NO              | Windham County  | MA       | UnitedHealthcare MedicareComplete Essential (HMO) | Primary Care Provider Copay | $5 copay                             |
       | US1625234 - AARP Plan Compare - PCP No Tiering |   35618 | NO              | Lawrence County | MAPD     | AARP MedicareComplete Plan 1 (HMO)                | Primary Care Provider Copay | $5 copay                             |
+
+  @F251983 @validateAmbulatorySurgicalCenterPackage @fastandfurious @Apr_release_2019
+  Scenario Outline: UserStory: <UID> - plan type: <plantype> - Verify Ambulatory Surgical Centre Benefit on Plan Details Page for the provided plan on AARP
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
+    And the user views the plans of the below plan type in AARP site
+      | Plan Type | <plantype> |
+    And the user validates the available plans for selected plan types in the AARP site
+    Then the user view plan details of the above selected plan in AARP site and validates
+      | Plan Name | <planName> |
+    Then the user validates the following Medical Benefits Plan details for the plan
+      | Benefit Type  | <benefitType>  |
+      | Expected Text | <expectedText> |
+
+    Examples: 
+      | UID                                                   | zipcode | isMultutiCounty | county              | plantype | planName                                               | benefitType                | expectedText               |
+      | US1641966 - AARP - Ambulatory Surgical Center Package |   35616 | NO              | Colbert County      | MAPD     | AARP MedicareComplete Plan 1 (HMO)                     | Ambulatory Surgical Center | $245 copay                 |
+      | US1641966 - AARP - Ambulatory Surgical Center Package |   33413 | NO              | Palm Beach County   | MAPD     | UnitedHealthcare Sync (PPO)                            | Ambulatory Surgical Center | $150 copay                 |
+      | US1641966 - AARP - Ambulatory Surgical Center Package |   84301 | NO              | Box Elder County    | MA       | AARP MedicareComplete Essential (HMO)                  | Ambulatory Surgical Center | $290 copay                 |
+      | US1641966 - AARP - Ambulatory Surgical Center Package |   83616 | YES             | Ada County          | MAPD     | UnitedHealthcare MedicareComplete Assure (PPO)         | Ambulatory Surgical Center | $0 copay - 20% of the cost |
+      | US1641966 - AARP - Ambulatory Surgical Center Package |   33002 | NO              | Miami-Dade County   | SNP      | Preferred Special Care Miami-Dade (HMO SNP)            | Ambulatory Surgical Center | $25 copay                  |
+      | US1641966 - AARP - Ambulatory Surgical Center Package |   53920 | YES             | Adams County        | SNP      | UnitedHealthcare MedicareComplete Assist (PPO SNP)     | Ambulatory Surgical Center | $295 copay                 |
+      | US1641966 - AARP - Ambulatory Surgical Center Package |   92220 | NO              | Riverside County    | MAPD     | AARP MedicareComplete SecureHorizons Plan 2 (HMO)      | Ambulatory Surgical Center | $0 copay                   |
+      | US1641966 - AARP - Ambulatory Surgical Center Package |   98601 | YES             | Clark County        | SNP      | UnitedHealthcare Nursing Home Plan (PPO SNP)           | Ambulatory Surgical Center | 10% of the cost            |
+      | US1641966 - AARP - Ambulatory Surgical Center Package |   53910 | NO              | Adams County        | MA       | UnitedHealthcare MedicareComplete Open Essential (PPO) | Ambulatory Surgical Center | $250 copay                 |
+      | US1641966 - AARP - Ambulatory Surgical Center Package |   32960 | NO              | Indian River County | MAPD     | AARP MedicareComplete Focus (HMO)                      | Ambulatory Surgical Center | $250 copay                 |
+      
