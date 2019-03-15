@@ -29,4 +29,10 @@ public class OLE_PageConstants {
 	public static final String OLE_LEAVING_MODAL_PAGE = "oleleavingmodalpage";
 	public static final String OLE_CANCELLATION_MODAL_PAGE = "olecancellationmodalpage";
 	public static final String OLE_LEARNMORE_MODAL_PAGE = "olelearnmoremodalpage";
+	public static final String OLE_User_And_Disclosure_PAGE = "OleUserAndDiscllosurePage";
+	public static final String PROVIDER_NAME = "providername";
+	public static final String PROVIDER_ADDRESS = "provideraddress";
+	public static final String CITY = "providerCity";
+	public static final String ZIP = "providerZipcode";
+	public static final String PROVIDER_NUMBER = "providernumber";
 }
