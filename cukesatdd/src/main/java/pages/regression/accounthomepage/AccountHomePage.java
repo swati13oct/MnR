@@ -1299,21 +1299,24 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public PharmacySearchPage navigateToRedesignPharmacyLocaterPage() {
-		waitForHomePage(helloPerson);
+		//tbd waitForHomePage(helloPerson);
 		/*
 		 * if (validate(iPerceptionAutoPopUp)) { iPerceptionAutoPopUp.click(); } else {
 		 * System.out.println("iPerception Pop Up not displayed"); }
 		 */
 		checkForIPerceptionModel(driver);
-		if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a")
-				|| MRScenario.environmentMedicare.equalsIgnoreCase("test-a")
+		if (MRScenario.environmentMedicare.equalsIgnoreCase("test-a")
 				|| MRScenario.environment.equalsIgnoreCase("team-ci1")) {
+			waitForHomePage(helloPerson);
 			System.out.println("Go to Pharmacy locator is present " + pharmacySearchLink.isDisplayed());
 			pharmacySearchLink.click();
+		} else if (MRScenario.environment.equalsIgnoreCase("team-a")) {
+			String Page_URL = "https://www." + MRScenario.environment
+					+ "-medicare."+MRScenario.domain+"/content/medicare/member/pharmacy-locator/overview.html";
+			driver.navigate().to(Page_URL);
 		} else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
-			if (driver.getCurrentUrl().contains("/dashboard"))
-				;
-			{
+			waitForHomePage(helloPerson);
+			if (driver.getCurrentUrl().contains("/dashboard")) {
 				System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
 				pharmacySearchLink.click();
 				try {
@@ -1585,8 +1588,17 @@ public class AccountHomePage extends UhcDriver {
 			executor.executeScript("arguments[0].click();", OrderMaterial_Dashboard);
 			// OrderMaterial_Dashboard.click();
 		} else {
-			String Page_URL = "https://" + MRScenario.environment
-					+ "-medicare."+MRScenario.domain+"//member/order-plan-materials.html";
+			//tbd String Page_URL = "https://" + MRScenario.environment
+			//tbd 		+ "-medicare."+MRScenario.domain+"//member/order-plan-materials.html";
+			String Page_URL="";
+			if (MRScenario.environment.equalsIgnoreCase("team-a")) {
+				Page_URL = "https://www." + MRScenario.environment
+						+ "-medicare."+MRScenario.domain+"/content/medicare/member/order-materials/overview.html";
+			} else {
+				Page_URL = "https://" + MRScenario.environment
+						+ "-medicare."+MRScenario.domain+"//member/order-plan-materials.html";
+			}
+			
 			// String Page_URL = driver.getCurrentUrl().split(".com")[0];
 			driver.navigate().to(Page_URL);
 			System.out.println("Navigated to Order materials Page URL : " + Page_URL);

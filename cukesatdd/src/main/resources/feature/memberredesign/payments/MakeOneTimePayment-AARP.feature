@@ -1,7 +1,7 @@
 @payments
 Feature: To test the payment flow on Member site
 
-  @paymentsFInal @paymentsOneTimePayments @regressionMember @payment1
+  @MakOneTimeEFTOther @paymentsOneTimePayments @regressionMember @payment1
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify if the user is able to make one time payment for EFT
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -22,19 +22,19 @@ Feature: To test the payment flow on Member site
     Then User navigates to payment confirmation page and verifies ConfirmationNo for One time
 
     Examples: 
-      | TID   | planType | memberType              | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
-      | 15118 | MAPD     | IndividualUHCPayments   | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
-      | 15143 | SHIP     | IndividualAARPSPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
+      | TID   | planType | memberType            | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
+      | 15118 | MAPD     | IndividualUHCPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
 
-  @paymentsAutoPay @15301 @regressionMember @payment2
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Recurring Payment for Different Types of Member
+  @MakOneTimeEFTTotalSHIP @regressionMember @payment2
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify if the user is able to make one time Total Amount payment for Ship
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When the user navigates to Recurring payment history
-    Then User Scrolls down to validate Payment History and Scrolls up
-    And the user clicks on Edit Automatic Payment button
-    And the user makes auto payment in AARP site
+    Then the user navigates to payment history
+    And user clicks on Make one time payment on payment overview page
+    And user selects other amount and enters "1.00" and selects Checking Account and click on Next button
+    And user Enters all Mandatory fields on form page and click on Authorize button for Make one Time CA
+      | Amount to be paid          | <Amount>           |
       | Routing number             | <routingNo>        |
       | Confirm routing number     | <confirmRoutingNo> |
       | Account number             | <accountNo>        |
@@ -42,13 +42,38 @@ Feature: To test the payment flow on Member site
       | Account holder first name  | <firstName>        |
       | Account holder middle name | <middleName>       |
       | Account holder last name   | <lastName>         |
-    And the user confirms the Autopayment in UHC site
+    And user navigates to Review Your One-Time Payment Information and selects agreements and click on Submit Button for Make One Time
+    Then User navigates to payment confirmation page and verifies ConfirmationNo for One time
 
     Examples: 
-      | TID   | planType | memberType            | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
-      | 15118 | MAPD     | IndividualUHCPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
+      | TID   | planType | memberType          | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
+      | 15143 | SHIP     | SHIPUpdate_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
 
-  @paymentsMoreThanOnePay @15142 @regressionMember @payment3
+  @MakOneTimeEFTOtherSHIP @regressionMember @payment3
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify if the user is able to make one time Other Amount payment for EFT
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    Then the user navigates to payment history
+    And user clicks on Make one time payment on payment overview page
+    And user selects other amount and enters "1.00" and selects Checking Account and click on Next button
+    And user Enters all Mandatory fields on form page and click on Authorize button for Make one Time CA
+      | Amount to be paid          | <Amount>           |
+      | Routing number             | <routingNo>        |
+      | Confirm routing number     | <confirmRoutingNo> |
+      | Account number             | <accountNo>        |
+      | Confirm account number     | <confirmAccountNo> |
+      | Account holder first name  | <firstName>        |
+      | Account holder middle name | <middleName>       |
+      | Account holder last name   | <lastName>         |
+    And user navigates to Review Your One-Time Payment Information and selects agreements and click on Submit Button for Make One Time
+    Then User navigates to payment confirmation page and verifies ConfirmationNo for One time
+
+    Examples: 
+      | TID   | planType | memberType          | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
+      | 15143 | SHIP     | SHIPUpdate_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
+
+  @paymentsMoreThanOnePay @15142 @regressionMember @payment4
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify More Than one Payment Per day error message
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -84,7 +109,7 @@ Feature: To test the payment flow on Member site
       | 15142 | MAPD     | IndividualAarpPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.12 |
 
   #NOTE: Nov2018 - q2_jun_aarp0057 didn't work, swap to use other user
-  @TestmemberAuth @15170 @regressionMember @payment4
+  @TestmemberAuth @15170 @regressionMember @payment5
   Scenario Outline: TID: <TID> -MemUserName: <MemUserName> - To validate the Edit Payment flow for Member Auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -101,7 +126,7 @@ Feature: To test the payment flow on Member site
       | 15118 | qavgogine | qavgogine | q2_jun_aarp0058 |
 
   #NOTE: Nov2018 - q2_jun_uhc0042 didn't work, swap to use other user
-  @TestmemberAuthOTP @15163 @regressionMember @payment5
+  @TestmemberAuthOTP @15163 @regressionMember @payment6
   Scenario Outline: TID: <TID> -MemUserName: <MemUserName> - To validate the oneTime Payment flow for Member Auth
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -126,28 +151,6 @@ Feature: To test the payment flow on Member site
     Examples: 
       | TID   | username  | password  | MemUserName   | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
       | 15118 | qavgogine | qavgogine | q4_dec_uhc150 | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.12 |
-
-  @paymentsShip @15320 @regressionMember @payment6
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Recurring Payment for SHIP member
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    When the user navigates to Ship Recurring payment history
-    Then User Scrolls down to validate Payment History and Scrolls up
-    And the user clicks on Edit Automatic Payment button
-    And the user makes auto payment in AARP site
-      | Routing number             | <routingNo>        |
-      | Confirm routing number     | <confirmRoutingNo> |
-      | Account number             | <accountNo>        |
-      | Confirm account number     | <confirmAccountNo> |
-      | Account holder first name  | <firstName>        |
-      | Account holder middle name | <middleName>       |
-      | Account holder last name   | <lastName>         |
-    And the user confirms the Autopayment in UHC site
-
-    Examples: 
-      | TID   | planType | memberType              | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
-      | 15320 | SHIP     | IndividualAARPSPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |   1.00 |
 
   @paymentsCombo @15144 @regressionMember @payment7
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Payment for Combo member
@@ -242,70 +245,6 @@ Feature: To test the payment flow on Member site
     Examples: 
       | UID       | planType | memberType                |
       | US1448800 | MAPD     | UpdateRecurrStop_Payments |
-
-  @paymentsEndtoEnd @US1483885 @Feb_release_2019 @Spartans @payment12
-  Scenario Outline: UID: <UID> -plan: <planType> -memberType: <memberType> - Verify oneTime Payment submission Checking Account
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    When the user navigates to Recurring payment history
-    Then User Scrolls down to validate Payment History Section
-    And the user clicks on New flow OneTime Payment button
-    And the user selects the Checking account option on New page OTP
-    And the user makes one time payment in new flow and navigate further
-      | Routing number             | <routingNo>        |
-      | Confirm routing number     | <confirmRoutingNo> |
-      | Account number             | <accountNo>        |
-      | Confirm account number     | <confirmAccountNo> |
-      | Account holder first name  | <firstName>        |
-      | Account holder middle name | <middleName>       |
-      | Account holder last name   | <lastName>         |
-    And the user confirms the New flow OneTimePayment in UHC site
-
-    Examples: 
-      | UID       | planType | memberType            | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
-      | US1483885 | MAPD     | IndividualUHCPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
-
-  @paymentsAutoPayEndtoEnd @Feb_release_2019 @Spartans @payment13
-  Scenario Outline: Verify AutoPay Payment submission for Different Types of Member
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    When the user navigates to Recurring payment history
-    Then User Scrolls down to validate Payment History Section
-    And the user clicks on New flow Edit Automatic Payment button
-    And the user selects the Checking account option on New page
-    And the user makes one time payment in new flow and navigate further
-      | Routing number             | <routingNo>        |
-      | Confirm routing number     | <confirmRoutingNo> |
-      | Account number             | <accountNo>        |
-      | Confirm account number     | <confirmAccountNo> |
-      | Account holder first name  | <firstName>        |
-      | Account holder middle name | <middleName>       |
-      | Account holder last name   | <lastName>         |
-    And the user confirms the New flow OneTimePayment in UHC site
-
-    Examples: 
-      | planType | memberType              | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
-      | MAPD     | IndividualAARPRPayments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
-
-  @paymentsAutoPayCC @Feb_release_2019 @Spartans @payment14
-  Scenario Outline: Verify AutoPay CC Payment submission for Different Types of Member
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    When the user navigates to Recurring payment history
-    Then User Scrolls down to validate Payment History Section
-    And the user clicks on New flow Edit CC Automatic Payment button
-    And the user selects the Setup AutoCreditCard option on New page
-    And the user makes Auto payment in CC flow and navigate further
-      | Name             | <Name>             |
-      | CreditCardNumber | <CreditCardNumber> |
-
-    #And the user confirms the New flow OneTimePayment in UHC site
-    Examples: 
-      | planType | memberType              | Name | CreditCardNumber |
-      | PDP      | IndividualAARPCPayments | Test | 4111111111111111 |
 
   @payment15 @paymentHistoryShip @Apr_release_2019 @thePredators @F247601
   Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> - Verify SHIP member can view payment history.

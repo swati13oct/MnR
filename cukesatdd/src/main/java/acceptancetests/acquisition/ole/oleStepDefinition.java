@@ -27,6 +27,7 @@ import pages.acquisition.ole.ProposedEffectiveDatePage;
 import pages.acquisition.ole.ReviewSubmitPage;
 import pages.acquisition.ole.SpecialElectionPeriodPage;
 import pages.acquisition.ole.SupplementalBenefitsPage;
+import pages.acquisition.ole.UseAndDisclosureAuthorizationPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.ComparePlansPage;
 import pages.acquisition.ulayer.PlanDetailsPage;
@@ -406,6 +407,42 @@ public class oleStepDefinition {
 			Assert.fail();
 		}
 	}
+	
+	@Then("^the user validates requierd fields for Preliminary Questions Page for CSNP and navigates to User and Disclosure plage$")
+	public void  the_user_validates_requierd_fields_for_Preliminary_Questions_Page_CSNP(DataTable Flags) throws Throwable {
+
+
+		List<DataTableRow> personalAttributesRow = Flags.getGherkinRows();
+		Map<String, String> PreliminaryFlagsMap = new HashMap<String, String>();
+		for (int i = 0; i < personalAttributesRow.size(); i++) {
+			PreliminaryFlagsMap.put(personalAttributesRow.get(i)
+					.getCells().get(0), personalAttributesRow.get(i)
+					.getCells().get(1));
+		}
+		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
+		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		if(alreadyEnrolled_Flag){
+			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+			Assert.assertTrue(true);
+		}
+		else{
+			String MedicaidNumber = PreliminaryFlagsMap.get("MedicaidNumber");
+			
+			String plantype = PreliminaryFlagsMap.get("plan_type");
+			PrelimineryQuestionsPage prelimineryQuestionsPage = (PrelimineryQuestionsPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE);
+			UseAndDisclosureAuthorizationPage useranddisclosure = prelimineryQuestionsPage.validate_Required_Fields_CSNP(MedicaidNumber, plantype);
+						
+			if (useranddisclosure!= null){
+				getLoginScenario().saveBean(OLE_PageConstants.OLE_User_And_Disclosure_PAGE,
+						useranddisclosure);
+				System.out.println("OLE Preliminary Questions Page is Displayed");
+				
+			}
+			 
+		}		
+	}
+
 
 	@Then("^the user navigates to Medicare Information Page$")
 	public void the_user_navigates_to_Medicare_Information_Page() throws Throwable {
@@ -684,6 +721,7 @@ public class oleStepDefinition {
 		else{
 			String MedicaidNumber = PreliminaryFlagsMap.get("MedicaidNumber");
 			String PlanType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
+			String plantype = PreliminaryFlagsMap.get("plan_type");
 
 			PrelimineryQuestionsPage prelimineryQuestionsPage = (PrelimineryQuestionsPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE);
 			boolean Validation_Status = prelimineryQuestionsPage.validate_Required_Fields(PlanType, MedicaidNumber);
@@ -697,6 +735,29 @@ public class oleStepDefinition {
 				Assert.fail();
 			}
 		}
+	}
+	
+
+	@Then("^the user enters provider details in Use and Disclosure Authorization page for CSNP and navidates to Personal information page$")
+	public void user_navigates_to_use_and_disclosure_page(DataTable planAttributes)throws Throwable {
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> MedicareDetailsMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			MedicareDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		UseAndDisclosureAuthorizationPage useranddisclosure = (UseAndDisclosureAuthorizationPage) getLoginScenario()
+	.getBean(OLE_PageConstants.OLE_User_And_Disclosure_PAGE);
+		getLoginScenario().saveBean(OLE_PageConstants.PROVIDER_NAME, MedicareDetailsMap.get("Provider Name"));
+		getLoginScenario().saveBean(OLE_PageConstants.PROVIDER_ADDRESS, MedicareDetailsMap.get("Provider Street Address"));
+		getLoginScenario().saveBean(OLE_PageConstants.CITY, MedicareDetailsMap.get("City"));
+		getLoginScenario().saveBean(OLE_PageConstants.ZIP, MedicareDetailsMap.get("Zip"));
+		getLoginScenario().saveBean(OLE_PageConstants.PROVIDER_NUMBER, MedicareDetailsMap.get("Provider Phone Number"));
+		
+		PersonalInformationPage personalInformationPage = useranddisclosure.Validate_and_Enter_Details_for_YourProvide_Section( MedicareDetailsMap);
+		getLoginScenario().saveBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE,
+				personalInformationPage);
 	}
 	/**
 	 * @toDo:user fill following information in Preliminary Questions Page 

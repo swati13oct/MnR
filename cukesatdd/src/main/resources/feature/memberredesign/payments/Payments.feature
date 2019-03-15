@@ -151,6 +151,28 @@ Feature: New payment flows with Credit card funtionality for Make one time setup
       | F242866   | MAPD     | UpdateRecurrStop_Payments   |
       | US1588469 | PDP      | ComboUpdateStopRec_Payments |
 
+  @SetupRecurrEFTSHIP @Feb_release_2019 @Spartans @F242866
+  Scenario Outline: TID: <TID> - Verify Update Recurring for Checking Account for Ship Member
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When the user clicks on Premium Payments on Header
+    And user clicks on Setup Automatic payments on payment overview page for Ship
+    And user Enters all Mandatory fields on form page and click on Electronic Signature and click on Contuine for Setup Recurring for Ship
+      | Routing number             | <routingNo>        |
+      | Confirm routing number     | <confirmRoutingNo> |
+      | Account number             | <accountNo>        |
+      | Confirm account number     | <confirmAccountNo> |
+      | Account holder first name  | <firstName>        |
+      | Account holder middle name | <middleName>       |
+      | Account holder last name   | <lastName>         |
+    And user navigates to Review Your Payment screen and selects agreements and click on Contuine Button for EFT Ship
+    Then User navigates to payment confirmation page and verifies sucessful EFT for setup Recurring for Ship
+
+    Examples: 
+      | TID     | planType | memberType         | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
+      | F242866 | SHIP     | SHIPSetup_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
+
   @UpdateRecurrEFTSHIP @Feb_release_2019 @Spartans @F242866
   Scenario Outline: TID: <TID> - Verify Update Recurring for Checking Account for Ship Member
     Given login with following details logins in the member portal and validate elements
