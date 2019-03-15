@@ -20,8 +20,8 @@ Feature: 1.10-VBF-MemRedesign-To test order materials functionality
 
     Examples: 
 		 | memberType       | option              | friendname | favcolor | phonenumber |
-		# | UhcMapdInd  | Replacement ID card      |name1      | color1   | number1     |
-		 | AARPMapdInd | Replacement ID card | name1      | color1   | number1     |
+		 | UhcMapdInd  | Replacement ID card      |name1      | color1   | number1     |
+		# | AARPMapdInd | Replacement ID card | name1      | color1   | number1     |
 		# | GroupRetireeMapd  | Replacement ID card      |name1      | color1   | number1     |
 		# |  UhcIndMA | Member Materials |name1      | color1   | number1     |
 		# |  AARPIndPDP | Welcome Guide    |name1      | color1   | number1     |
