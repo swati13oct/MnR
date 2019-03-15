@@ -17,6 +17,8 @@ import pages.acquisition.ulayer.FindCarePage;
 import pages.acquisition.ulayer.MultiCountyModalPage;
 import pages.acquisition.ulayer.OurPlansPage;
 import pages.acquisition.ulayer.PlanDetailsPage;
+import pages.acquisition.ulayer.RequestHelpAndInformationPage;
+import pages.acquisition.ulayer.RequestMailedInformation;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.data.CommonConstants;
@@ -1381,5 +1383,41 @@ public void user_Clicks_on_Look_upyourProvider_button_on_PlanDetailsPage() {
 		plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType);
 	}
 	//^^^ note: added for US1598162
+	
+	@When("^the user navigates to the request mailed information in AARP site and validates page is loaded$")
+	public void the_user_navigates_to_the_request_mailed_information_in_AARP_site_and_validates_page_is_loaded() throws Throwable {
+		RequestHelpAndInformationPage requestHelpAndInformationPage = (RequestHelpAndInformationPage) getLoginScenario().getBean(PageConstants.REQUEST_MORE_HELP_INFORMATION_PAGE);
+		RequestMailedInformation requestmailedinformation = requestHelpAndInformationPage.navigateToRequestMailedinformation();
+		if(requestmailedinformation!=null){
+			getLoginScenario().saveBean(PageConstants.REQUEST_MAILED_INFORMATION, requestmailedinformation);
+		}else{
+			Assert.fail("Error in loading requestAgentAppointmentPage");
+		}
+	}
+
+
+	@When("^the user fills the Enrollment guide plan form and validate the order confirmation page$")
+	public void the_user_fills_the_Enrollment_guide_plan_form_and_validate_the_order_confirmation_page(DataTable attributes) throws Throwable {
+		if (!MRScenario.environment.equalsIgnoreCase("offline")) {
+			RequestMailedInformation requestmailedinformation = (RequestMailedInformation) getLoginScenario()
+					.getBean(PageConstants.REQUEST_MAILED_INFORMATION);
+			List<DataTableRow> givenAttributesRow = attributes.getGherkinRows();
+			Map<String, String> givenAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+				givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+						givenAttributesRow.get(i).getCells().get(1));
+			}
+			boolean isFormSubmitted = requestmailedinformation.submitAgentAppointment(givenAttributesMap);
+			if (isFormSubmitted) {
+				System.out.println("Successfully submitted the Appointment form");
+				Assert.assertTrue(true);
+			} else {
+				Assert.fail("Error submitting the form or loading the Confirmation page");
+			}
+		} else {
+			System.out.println("Skipping the submit functionality in Offline-Prod environment");
+		}
+	}
 	
 }
