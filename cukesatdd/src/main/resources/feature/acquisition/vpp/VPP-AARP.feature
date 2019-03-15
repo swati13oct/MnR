@@ -288,5 +288,5 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
       | US1641966 - AARP - Ambulatory Surgical Center Package |   92220 | NO              | Riverside County    | MAPD     | AARP MedicareComplete SecureHorizons Plan 2 (HMO)      | Ambulatory Surgical Center | $0 copay                   |
       | US1641966 - AARP - Ambulatory Surgical Center Package |   98601 | YES             | Clark County        | SNP      | UnitedHealthcare Nursing Home Plan (PPO SNP)           | Ambulatory Surgical Center | 10% of the cost            |
       | US1641966 - AARP - Ambulatory Surgical Center Package |   53910 | NO              | Adams County        | MA       | UnitedHealthcare MedicareComplete Open Essential (PPO) | Ambulatory Surgical Center | $250 copay                 |
-      | US1641966 - AARP - Ambulatory Surgical Center Package |   32960 | NO              | Indian River County | MAPD     | AARP MedicareComplete Focus (HMO)                      | Ambulatory Surgical Center | $250 copay                 |
+      | US1641966 - AARP - Ambulatory Surgical Center Package |   32960 | NO              | Indian River County | MAPD     | AARP MedicareComplete Focus (HMO)                      | Ambulatory Surgical Center | $150 copay                 |
       
