@@ -92,6 +92,8 @@ public class LoginPage extends UhcDriver {
 				} else {
 					PAGE_URL = MRConstants.LEGACY_TESTHARNESS;
 				}
+			} else if ("team-a".equalsIgnoreCase(MRScenario.environment)) {
+				PAGE_URL = MRConstants.OSE_NEW_URL;
 			} else {
 				PAGE_URL = MRConstants.LEGACY_TESTHARNESS.replace("awe-", "");
 			}
