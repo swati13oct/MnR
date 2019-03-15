@@ -136,6 +136,12 @@ public static final String ACCOUNT_HOME_PAGE = "accountHomePage";
 	public static final String MEET_WITH_AN_AGENT = "meetWithAnAgentPage";
 
 	public static final String REQUEST_AGENT_APPOINTMENT_PAGE = "requestAgentAppointmentPage";
+	
+    public static final String SHOP_FOR_A_PLAN_UHCLAYER = "ShopforaplanUHClayer";	
+	
+	public static final String REQUEST_MAILED_INFORMATION = "Requestmailedinformation";
+	
+	public static final String REQUEST_MAILED_INFORMATION_UHC = "RequestmailedinformationUHC";
 
 	public static final String MA_VPP_PAGE = "maViewPlansAndPricingPage";
 
