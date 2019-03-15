@@ -232,7 +232,7 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
       | US1497180 - UHC - No PCP Tiering        |   35618 | NO              | Lawrence County | MAPD     | AARP MedicareComplete Plan 1 (HMO)                | Primary Care Provider Copay | $5 copay                              |
 
   @F251983 @validatePCPTieringPlanCompare @fastandfurious @Apr_release_2019
-  Scenario Outline: UserStory: <UID> -plan type: <plantype> - Verify PCP and Specialist Benefits Tiering in Plan Details for provided plan on UHC
+  Scenario Outline: UserStory: <UID> -plan type: <plantype> - Verify PCP and Specialist Benefits Tiering in Plan Compare Page for provided plan on UHC
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |
@@ -248,10 +248,40 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
       | Plan Name     | <planName>     |
 
     Examples: 
-      | UID                                           | zipcode | isMultutiCounty | county          | plantype | planName                                          | benefitType                 | expectedText                         |
-      | US1625235 - UHC Plan Compare - PCP Tiering    |   27021 | YES             | Stokes County   | MA       | AARP MedicareComplete Essential (HMO)             | Primary Care Provider Copay | Tier 1: $0 copay / Tier 2: $10 copay |
-      | US1625235 - UHC Plan Compare - PCP Tiering    |   27021 | YES             | Stokes County   | MAPD     | AARP MedicareComplete Plan 1 (HMO)                | Primary Care Provider Copay | Tier 1: $0 copay / Tier 2: $10 copay |
-      | US1625235 - UHC Plan Compare - PCP Tiering    |   28616 | NO              | Avery County    | MAPD     | AARP MedicareComplete Plan 2 (HMO)                | Primary Care Provider Copay | Tier 1: $0 copay / Tier 2: $20 copay |
-      | US1625235 - UHC Plan Compare - PCP Tiering    |   28701 | NO              | Buncombe County | MAPD     | AARP MedicareComplete Plan 3 (HMO)                | Primary Care Provider Copay | Tier 1: $0 copay / Tier 2: $20 copay |
-      | US1625235 - UHC Plan Compare - PCP No Tiering |   06280 | NO              | Windham County  | MA       | UnitedHealthcare MedicareComplete Essential (HMO) | Primary Care Provider Copay | $5 copay                             |
-      | US1625235 - UHC Plan Compare - PCP No Tiering |   35618 | NO              | Lawrence County | MAPD     | AARP MedicareComplete Plan 1 (HMO)                | Primary Care Provider Copay | $5 copay                             |
+      | UID                                                  | zipcode | isMultutiCounty | county          | plantype | planName                                          | benefitType                 | expectedText                          |
+      | US1625235 - UHC Plan Compare - PCP Tiering           |   27021 | YES             | Stokes County   | MA       | AARP MedicareComplete Essential (HMO)             | Primary Care Provider Copay | Tier 1: $0 copay / Tier 2: $10 copay  |
+      | US1625235 - UHC Plan Compare - PCP Tiering           |   27021 | YES             | Stokes County   | MAPD     | AARP MedicareComplete Plan 1 (HMO)                | Primary Care Provider Copay | Tier 1: $0 copay / Tier 2: $10 copay  |
+      | US1625235 - UHC Plan Compare - PCP Tiering           |   28616 | NO              | Avery County    | MAPD     | AARP MedicareComplete Plan 2 (HMO)                | Primary Care Provider Copay | Tier 1: $0 copay / Tier 2: $20 copay  |
+      | US1625235 - UHC Plan Compare - PCP Tiering           |   28701 | NO              | Buncombe County | MAPD     | AARP MedicareComplete Plan 3 (HMO)                | Primary Care Provider Copay | Tier 1: $0 copay / Tier 2: $20 copay  |
+      | US1625235 - UHC Plan Compare - PCP No Tiering        |   06280 | NO              | Windham County  | MA       | UnitedHealthcare MedicareComplete Essential (HMO) | Primary Care Provider Copay | $5 copay                              |
+      | US1625235 - UHC Plan Compare - PCP No Tiering        |   35618 | NO              | Lawrence County | MAPD     | AARP MedicareComplete Plan 1 (HMO)                | Primary Care Provider Copay | $5 copay                              |
+      | US1653895 - UHC Plan Compare - Specialist Tiering    |   27021 | YES             | Stokes County   | MA       | AARP MedicareComplete Essential (HMO)             | Specialist Copay            | Tier 1: $30 copay / Tier 2: $50 copay |
+      | US1653895 - UHC Plan Compare - Specialist Tiering    |   27021 | YES             | Stokes County   | MAPD     | AARP MedicareComplete Plan 1 (HMO)                | Specialist Copay            | Tier 1: $30 copay / Tier 2: $50 copay |
+      | US1653895 - UHC Plan Compare - Specialist Tiering    |   28616 | NO              | Avery County    | MAPD     | AARP MedicareComplete Plan 2 (HMO)                | Specialist Copay            | Tier 1: $35 copay / Tier 2: $50 copay |
+      | US1653895 - UHC Plan Compare - Specialist Tiering    |   28701 | NO              | Buncombe County | MAPD     | AARP MedicareComplete Plan 3 (HMO)                | Specialist Copay            | Tier 1: $40 copay / Tier 2: $50 copay |
+      | US1653895 - UHC Plan Compare - No Specialist Tiering |   06280 | NO              | Windham County  | MA       | UnitedHealthcare MedicareComplete Essential (HMO) | Specialist Copay            | $35 copay                             |
+      | US1653895 - UHC Plan Compare - No Specialist Tiering |   35618 | NO              | Lawrence County | MAPD     | AARP MedicareComplete Plan 1 (HMO)                | Specialist Copay            | $40 copay                             |
+
+  @F251983 @validateOutPatientHospitalServices @fastandfurious @Apr_release_2019
+  Scenario Outline: UserStory: <UID> -plan type: <plantype> - Verify Out Patient Hospital Visit Benefits vakues in Plan Details for provided plan on UHC
+    Given the user is on the uhcmedicaresolutions site landing page
+    When the user performs plan search using following information in UMS site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    When user views plans of the below plan type in UMS site
+      | Plan Type | <plantype> |
+    Then the user view plan details of the above selected plan in UMS site and validates
+      | Plan Name | <planName> |
+    Then the user validates the following Medical Benefits Plan details for the plan in UMS
+      | Benefit Type  | <benefitType>  |
+      | Expected Text | <expectedText> |
+
+    Examples: 
+      | UID                                            | zipcode | isMultutiCounty | county             | plantype | planName                                          | benefitType                  | expectedText    |
+      | US1533323 - UHC - OutPatient Hospital Services |   06280 | NO              | Windham County     | MA       | UnitedHealthcare MedicareComplete Essential (HMO) | Outpatient Hospital Services | $250 copay      |
+      | US1533323 - UHC - OutPatient Hospital Services |   99210 | NO              | Spokane County     | MA       | AARP MedicareComplete Essential (HMO)             | Outpatient Hospital Services | 20% of the cost |
+      | US1533323 - UHC - OutPatient Hospital Services |   35650 | NO              | Lawrence County    | MAPD     | AARP MedicareComplete Plan 1 (HMO)                | Outpatient Hospital Services | $295 copay      |
+      | US1533323 - UHC - OutPatient Hospital Services |   90210 | NO              | Los Angeles County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) | Outpatient Hospital Services | $0 copay        |
+      | US1533323 - UHC - OutPatient Hospital Services |   33002 | NO              | Miami-Dade County  | SNP      | Preferred Special Care Miami-Dade (HMO SNP)       | Outpatient Hospital Services | $75 copay       |
+      | US1533323 - UHC - OutPatient Hospital Services |   36688 | NO              | Mobile County      | SNP      | UnitedHealthcare Dual Complete (HMO SNP)          | Outpatient Hospital Services | $0 copay        |
