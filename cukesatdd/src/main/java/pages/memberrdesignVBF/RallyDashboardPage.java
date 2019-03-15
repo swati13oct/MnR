@@ -206,10 +206,10 @@ public class RallyDashboardPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='plan section']//*[contains(@class,'atdd-plan-header')]")
 	private WebElement planSupportHeading;
 	
-	@FindBy(xpath = "//div[@class='technical section']//a[contains(@href,'tel:') and contains(@class,'display-inline-block')]")
+	@FindBy(xpath = "//div[@class='technical section']//*[contains(@class,'display-inline-block') and string-length(text()=13)]")
 	private WebElement techSupportTelephone;
 	
-	@FindBy(xpath = "//div[@class='plan section']//a[contains(@href,'tel:') and contains(@class,'display-inline-block')]")
+	@FindBy(xpath = "//div[@class='plan section']//*[contains(@class,'display-inline-block') and string-length(text()=13)]")
 	private WebElement planSupportTelephone;
 	
 	String category = null;
