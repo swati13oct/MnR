@@ -51,6 +51,12 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 	
 	@FindBy(xpath = ".//*[@id='article_mededaccordion1']//*[contains(text(),'Information')]")
 	private WebElement pdpEnquiryKitLink;
+
+	@FindBy(xpath = "//a[@href='#article_mededaccordion1']")
+	private WebElement GetpartDinformation;
+	
+	@FindBy(xpath ="//*[@id='article_mededaccordion1']//*[contains(text(),'Request Mailed Information')]")
+	private WebElement RequestMailedInformationlink;
 	
 	public RequestHelpAndInformationPage(WebDriver driver) {
 		super(driver);
@@ -129,6 +135,19 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 		return null;
 		
 		
+	}
+	
+	public RequestMailedInformationUHC navigateToRequestMailedinformationUHC() throws InterruptedException {
+		if (GetpartDinformation.getAttribute("class").contains("collapsed")) {
+			GetpartDinformation.click();
+		}
+		validateNew(RequestMailedInformationlink);
+		RequestMailedInformationlink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (currentUrl().contains("inquirykit")) {
+			return new RequestMailedInformationUHC(driver);
+		}
+		return null;
 	}
 
 }

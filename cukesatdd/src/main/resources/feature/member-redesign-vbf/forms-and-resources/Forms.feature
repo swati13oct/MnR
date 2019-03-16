@@ -37,6 +37,6 @@ Feature: 1.16-VBF-MemRedesign-To test FnR functionality
 
     Examples: 
 	| memberType | friendname | favcolor | phonenumber |benefithighlight | summaryofbenefits | evidenceofcoverage | unitedhealthpassportprogram | comprehensiveformulary| priorauth |  steptherapy  |  formularyadd |  formularydel |
-	| AARPMapdInd |name1      | color1   | number1     | Benefit Highlights  |Summary of Benefits |Evidence of Coverage (EOC) |  UnitedHealth Passport Program  |  Comprehensive Formulary | Prior Authorization | Step Therapy  | Formulary Additions | Formulary Deletions |
+	| AARPMapdInd |name1      | color1   | number1     | Benefit Highlights  |Summary of Benefits |Evidence of Coverage |  UnitedHealth Passport Program  |  Comprehensive Formulary | Prior Authorization | Step Therapy  | Formulary Additions | Formulary Deletions |
       
 #q1_aarp_apr194/Password@1

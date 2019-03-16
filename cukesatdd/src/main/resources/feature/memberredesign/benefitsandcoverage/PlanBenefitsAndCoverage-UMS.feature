@@ -688,8 +688,8 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     Examples: 
       | TID   | planType | memberType   |
       | 15367 | MAPD     | Hartford_BnC |
-    # | 15367 | PDP      | Hartford_BnC |
 
+    # | 15367 | PDP      | Hartford_BnC |
   @benefitsAndCoverage31 @thePredators @juneRelease2018 @TownOfGreenwichprescriptionDrugBenefit
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify town of greenwich Prescription Drug Benefits
     Given login with following details logins in the member portal and validate elements
@@ -940,3 +940,17 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | UID       | planType     | memberType     | deductible1 | deductible2 |
       | US1564213 | MAGroup1_BnC | DualDeductible | $150        | $250        |
       | US1564213 | MAGroup2_BnC | DualDeductible | $1,364      | $185        |
+
+  @benefitsAndCoverage43 @F276093 @Apr_release_2019
+  Scenario Outline: UserStory: <UID> -plan: <planType> -memberType: <memberType> - Verify Access your drug beneifts block for Univ. Of Kentucky Member
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    Then The user navigate to Benefits and Coverage page
+    And the user validates the access your drug benefits block
+		And the user validates the site leaving pop up and click cancel
+		And the user validates the site leaving pop up and click proceed
+		
+    Examples: 
+      | UID       | planType | memberType           |
+      | US1615721 | MAPD     | Group_UnivOfKentucky |

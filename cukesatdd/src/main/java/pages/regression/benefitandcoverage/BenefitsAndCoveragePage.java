@@ -852,6 +852,24 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                @FindBy(xpath="//*[@class='subtitle atdd-benefitssummary-dental']")
                private WebElement ssupDental;
                
+               @FindBy(xpath="//a[@class='siteLeavingPopup']/parent::p/parent::div")
+               private WebElement accessDrugsBenfitsBlock;
+               
+               @FindBy(xpath="//a[@class='siteLeavingPopup']/parent::p/parent::div/h3")
+               private WebElement accessDrugsBenfitsBlockHeader;
+               
+               @FindBy(xpath="//a[@class='siteLeavingPopup']/parent::p/a")
+               private WebElement accessDrugsBenfitsBlockExpressScriptsLink;
+               
+               @FindBy(css="div.siteleaving-popup-footer>div")
+               private WebElement siteLeavingPopUp;
+               
+               @FindBy(css="div.siteleaving-popup-footer a#cancelbtn")
+               private WebElement siteLeavingPopUpCancelBtn;
+               
+               @FindBy(css="div.siteleaving-popup-footer a#proceedbtn")
+               private WebElement siteLeavingPopUpProceedBtn;
+               
                public WebElement getLinkBackToTop_copy() {
                               return linkBackToTop_copy;
                }
@@ -4101,6 +4119,64 @@ public class BenefitsAndCoveragePage extends UhcDriver {
            		return Validation_Flag;
            	}
 
-               
+           	/**
+           	 * Validate the Access your Drug Benefits 
+           	 * @return
+           	 */
+            public boolean validateAccessDrugsBenfitsBlock() {
+            	boolean bAccessDrugsBenfitsBlockValidation = true;
+            	if(validateNew(accessDrugsBenfitsBlock) && validate(accessDrugsBenfitsBlockHeader) && validate(accessDrugsBenfitsBlockExpressScriptsLink)){
+            		bAccessDrugsBenfitsBlockValidation = true;
+            	}else
+            		bAccessDrugsBenfitsBlockValidation = false;
+            	return bAccessDrugsBenfitsBlockValidation;
+            }
+            
+            /**
+           	 * Validate the Access your Drug Benefits 
+           	 * @return
+           	 */
+            public boolean validateSiteLeavingPopUp() {
+            	boolean bAccessDrugsBenfitsBlockValidation = true;
+            	if(validate(siteLeavingPopUp)){
+            		bAccessDrugsBenfitsBlockValidation = true;
+            	}else
+            		bAccessDrugsBenfitsBlockValidation = false;
+            	return bAccessDrugsBenfitsBlockValidation;
+            }
+            
+            /**
+           	 * Validate the Access your Drug Benefits 
+           	 * @return
+           	 */
+            public boolean validateSiteLeavingPopUpCancelFlow() {
+            	accessDrugsBenfitsBlockExpressScriptsLink.click();
+            	waitforElement(siteLeavingPopUp);
+            	boolean bAccessDrugsBenfitsBlockValidation = false;
+            	jsClickNew(siteLeavingPopUpCancelBtn);
+            	if(driver.findElements(By.cssSelector("div.siteleaving-popup-footer>div")).size()>0){
+            		bAccessDrugsBenfitsBlockValidation = true;
+            	}else
+            		bAccessDrugsBenfitsBlockValidation = false;
+            	return bAccessDrugsBenfitsBlockValidation;
+            }
+            
+            /**
+           	 * Validate the Access your Drug Benefits 
+           	 * @return
+           	 */
+            public boolean validateSiteLeavingPopUpProceedFlow() {
+            	accessDrugsBenfitsBlockExpressScriptsLink.click();
+            	waitforElement(siteLeavingPopUp);
+            	boolean bAccessDrugsBenfitsBlockValidation = true;
+            	jsClickNew(siteLeavingPopUpProceedBtn);
+            	if(driver.getWindowHandles().size()>0) {
+            		bAccessDrugsBenfitsBlockValidation=true;
+            		Assert.assertTrue(driver.getWindowHandles().size()>0);
+            	}else {
+            		bAccessDrugsBenfitsBlockValidation=false;
+            	}
+            	return bAccessDrugsBenfitsBlockValidation;
+            }
 
 }

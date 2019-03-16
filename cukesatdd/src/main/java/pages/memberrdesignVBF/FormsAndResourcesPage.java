@@ -69,33 +69,33 @@ public class FormsAndResourcesPage extends UhcDriver {
 	private WebElement PlanMaterialSection;
 
 	/* for active uhc member */
-	@FindBy(xpath = "(//div[contains(@class,'planBenefitsHeaderParsys')]//div[contains(@class,'otherPages')]//a[contains(text(),'VIEW MEMBER')])[1]")
+	@FindBy(xpath = "(//div[contains(@class,'formsAndResourcesParsys')]//div[contains(@class,'planMaterial201') and not(contains(@class,'ng-hide'))]//a[contains(text(),'VIEW MEMBER')])[1]")
 	private WebElement MemberIdCardlink;
 
 	/* for terminated */
 	@FindBy(xpath = "(//a[contains(text(),'VIEW MEMBER ID CARD')])[1]")
 	private WebElement MemberIdCardlinkterminated;
 
-	@FindBy(xpath = "(//div[contains(@class,'planBenefitsHeaderParsys')]//div[contains(@class,'otherPages')]//a[contains(text(),'ORDER PLAN MATERIALS')])[1]")
+	@FindBy(xpath = "(//div[contains(@class,'formsAndResourcesParsys')]//div[contains(@class,'planMaterial201') and not(contains(@class,'ng-hide'))]//a[contains(text(),'ORDER PLAN MATERIALS')])[1]")
 	private WebElement OrderPlanMaterialLink;
 
 	@FindBy(xpath = "//div[contains(@class,'formsAndResourcesParsys')]//div[contains(@class,'planMaterial201') and not(contains(@class,'ng-hide'))]//select[contains(@id,'lang-select-2source-content-configurations_plan-material_jcr-content_overview_formsandresourcescon_formsAndResourcesParsys_customsegments')]")
 	private WebElement languagedropdown;
 
 	/** Anoc Section **/
-	@FindBy(id = "anoc_headerfnr")
+	@FindBy(xpath = "(//div[contains(@class,'customsegments')]//div[contains(@class,'annualNotice201') and not(contains(@class,'ng-hide'))]//div[contains(@class,'planBenefitsHeaderParsys')])[1]")
 	private WebElement AnocSection;
 
 	/** Annual Directories Section **/
-	@FindBy(id = "FnR_annualDirectory")
+	@FindBy(xpath = "(//div[contains(@class,'customsegments')]//div[contains(@class,'annualDirectories_201') and not(contains(@class,'ng-hide'))]//div[contains(@class,'planBenefitsHeaderParsys')])[1]")
 	private WebElement AnnualDirectorySection;
 
 	/* Provider Search Link */
-	@FindBy(xpath = "//div[@class='customsegments parbase section']/div[contains(@class,'annualDirectories') and not(contains(@class,'ng-hide'))]//div[contains(@class,'otherPages') and contains(@class,'calloutBoth') and contains(@ng-show ,'mapdIndividual') and not (contains(@class,'ng-hide'))]//a[contains(text(),'Provider Search')]")
+	@FindBy(xpath = "//div[contains(@class,'customsegments')]//div[contains(@class,'annualDirectories_201')]//div[not(contains(@class,'ng-hide')) and contains(@class,'calloutBoth')]//a[contains(text(),'Provider Search')]")
 	private WebElement ProviderSearchLink;
 
 	/* Pharmacy Locator Link */
-	@FindBy(xpath = "//div[@class='customsegments parbase section']/div[contains(@class,'annualDirectories') and not(contains(@class,'ng-hide'))]//div[contains(@class,'otherPages') and contains(@class,'calloutBoth') and contains(@ng-show ,'mapdIndividual') and not (contains(@class,'ng-hide'))]//a[contains(text(),'Pharmacy Locator')]")
+	@FindBy(xpath = "//div[contains(@class,'customsegments')]//div[contains(@class,'annualDirectories_201')]//div[not(contains(@class,'ng-hide')) and contains(@class,'calloutBoth')]//a[contains(text(),'Pharmacy Locator')]")
 	private WebElement PharmacyLocatorLink;
 
 	/** Forms and Resources section **/

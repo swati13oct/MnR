@@ -147,12 +147,12 @@ public class AccountHomePage extends UhcDriver {
 	private WebElement planNameLink;
 
 	//@FindBy(id = "dropdown-toggle--1")
-	@FindBy(xpath = "//*[@id='dropdown-toggle--1']")											 
+	@FindBy(id = "accountProfile")											 
 	private WebElement accountProfileBtn;
 
 	// @FindBy(xpath = ".//*[@id='dropdown-options--1']/a[contains(text(),'Account
 	// Settings')]")
-	@FindBy(xpath = ".//*[@id='dropdown-options--1']//a[contains(text(),'Account Settings')]")
+	@FindBy(linkText = "Account Settings")
 	private WebElement accountSettingOption;
 
 	@FindBy(xpath = "//h1")
@@ -584,8 +584,9 @@ public class AccountHomePage extends UhcDriver {
 			if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)){
 			 System.out.println("testing through test harness page");
 			 try{
-				 if(driver.findElement(By.id("home_1")).isDisplayed()){
-					 driver.findElement(By.id("home_1")).click();
+				 if(driver.findElement(By.id("accountprofile")).isDisplayed()){
+					 driver.findElement(By.id("accountprofile")).click();
+					 driver.findElement(By.linkText("Account Settings")).click();
 				 }else{
 					 driver.findElement(By.xpath("//*[@id='home_2']")).click();
 					 Thread.sleep(6000);
@@ -594,6 +595,11 @@ public class AccountHomePage extends UhcDriver {
 				 driver.findElement(By.xpath("//*[@id='home_2']")).click();
 				 Thread.sleep(6000);
 			 }
+			 if (driver.getCurrentUrl().contains("profile")) {
+				 System.out.println("Navigating to Profile Page");
+				 return new ProfileandPreferencesPage(driver);
+			 }
+			 
 			//CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//*[@id='dashboard']/div[1]/section[1]/account-info/div/div[1]/h1")), 30);
 		} else{
 			System.out.println("test is through stage");
@@ -641,7 +647,7 @@ public class AccountHomePage extends UhcDriver {
 
 		}
 		//CommonUtility.waitForPageLoad(driver, heading, 50);
-		if (driver.getTitle().equalsIgnoreCase("Profile")) {
+		if (driver.getTitle().contains("Profile")) {
 			return new ProfileandPreferencesPage(driver);
 		}
 		return null;
@@ -1293,21 +1299,24 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public PharmacySearchPage navigateToRedesignPharmacyLocaterPage() {
-		waitForHomePage(helloPerson);
+		//tbd waitForHomePage(helloPerson);
 		/*
 		 * if (validate(iPerceptionAutoPopUp)) { iPerceptionAutoPopUp.click(); } else {
 		 * System.out.println("iPerception Pop Up not displayed"); }
 		 */
 		checkForIPerceptionModel(driver);
-		if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a")
-				|| MRScenario.environmentMedicare.equalsIgnoreCase("test-a")
+		if (MRScenario.environmentMedicare.equalsIgnoreCase("test-a")
 				|| MRScenario.environment.equalsIgnoreCase("team-ci1")) {
+			waitForHomePage(helloPerson);
 			System.out.println("Go to Pharmacy locator is present " + pharmacySearchLink.isDisplayed());
 			pharmacySearchLink.click();
+		} else if (MRScenario.environment.equalsIgnoreCase("team-a")) {
+			String Page_URL = "https://www." + MRScenario.environment
+					+ "-medicare."+MRScenario.domain+"/content/medicare/member/pharmacy-locator/overview.html";
+			driver.navigate().to(Page_URL);
 		} else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
-			if (driver.getCurrentUrl().contains("/dashboard"))
-				;
-			{
+			waitForHomePage(helloPerson);
+			if (driver.getCurrentUrl().contains("/dashboard")) {
 				System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
 				pharmacySearchLink.click();
 				try {
@@ -1588,8 +1597,17 @@ public class AccountHomePage extends UhcDriver {
 			executor.executeScript("arguments[0].click();", OrderMaterial_Dashboard);
 			// OrderMaterial_Dashboard.click();
 		} else {
-			String Page_URL = "https://" + MRScenario.environment
-					+ "-medicare."+MRScenario.domain+"//member/order-plan-materials.html";
+			//tbd String Page_URL = "https://" + MRScenario.environment
+			//tbd 		+ "-medicare."+MRScenario.domain+"//member/order-plan-materials.html";
+			String Page_URL="";
+			if (MRScenario.environment.equalsIgnoreCase("team-a")) {
+				Page_URL = "https://www." + MRScenario.environment
+						+ "-medicare."+MRScenario.domain+"/content/medicare/member/order-materials/overview.html";
+			} else {
+				Page_URL = "https://" + MRScenario.environment
+						+ "-medicare."+MRScenario.domain+"//member/order-plan-materials.html";
+			}
+			
 			// String Page_URL = driver.getCurrentUrl().split(".com")[0];
 			driver.navigate().to(Page_URL);
 			System.out.println("Navigated to Order materials Page URL : " + Page_URL);
@@ -2242,14 +2260,18 @@ public class AccountHomePage extends UhcDriver {
 			}
 		}
 
-		else if (MRScenario.environmentMedicare.equals("team-h") || MRScenario.environmentMedicare.equals("test-a")
-				|| MRScenario.environmentMedicare.equals("team-e")){
+		else if (MRScenario.environmentMedicare.equals("team-h") || MRScenario.environmentMedicare.equals("test-a")){
 
 			driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
 			System.out.println(driver.getCurrentUrl());
 		} else if(MRScenario.environmentMedicare.equals("team-c")){
 			driver.navigate().to(
 					"https://team-c-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
+			System.out.println(driver.getCurrentUrl());
+			return new BenefitsAndCoveragePage(driver);
+		}else if(MRScenario.environmentMedicare.equals("team-e")){
+			jsClickNew(driver.findElement(By.xpath("//td[text()='benefits and coverage page ']/following::a[1]")));
+			CommonUtility.waitForPageLoad(driver, heading, 30);
 			System.out.println(driver.getCurrentUrl());
 			return new BenefitsAndCoveragePage(driver);
 		}else
