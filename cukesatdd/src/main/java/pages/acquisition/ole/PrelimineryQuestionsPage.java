@@ -30,6 +30,9 @@ public class PrelimineryQuestionsPage extends UhcDriver{
 	@FindBy(xpath ="//*[@class = 'logo']//img")
 	private WebElement SiteLogo;
 	
+	@FindBy(xpath = "//*[@for='disclosureHealth']")
+	private WebElement disclosureBox;
+	
 	@FindBy(id = "ole-form-next-button")
 	private WebElement NextBtn;
 	
@@ -128,14 +131,64 @@ public class PrelimineryQuestionsPage extends UhcDriver{
 	@FindBy(id = "providerZip")
 	private WebElement Zip;
 	
+	
+//=============================================================================	
+	
+	// Diabetes questions
+	
 	@FindBy(id = "diabetes")
-	private WebElement diabetesLegend;
+	private WebElement diabetesQuestion1;
+	
+	@FindBy(id="diabetesQuestionYes")
+	private WebElement diabetesQuestions1Yes;
+	
+	@FindBy(id="oralMedicationQuestionNo")
+	private WebElement diabetesQuestions2No;
+	
+	
+	
+//===============================================================================	
 
+	// chronicHeartFailure Questions
+	
 	@FindBy(id = "chronicHeartFailure")
-	private WebElement chronicHeartFailureLegend;
+	private WebElement chronicHeartFailureQuestion1;
+	
+	@FindBy(id="chronicHeartFailureQuestionNo")
+	private WebElement chronicHeartFailureQuestion1No;
+	
+	@FindBy(id="shortnessOfBreathQuestionNo")
+	private WebElement chronicHeartFailureQuestion2No;
+	
+	@FindBy(id="counseledEducationQuestionNo")
+	private WebElement chronicHeartFailureQuestion3No;
+	
+//==================================================================================
+	
+	//Cardiovascular Disorders
+	
+	
 	
 	@FindBy(id = "thromboembolicdisorder")
-	private WebElement thromboembolicdisorderLegend;
+	private WebElement CardiovascularDisordersQuestion1;
+	
+	@FindBy(id="thromboembolicdisorderQuestionNo")
+	private WebElement CardiovascularDisordersQ1No;
+	
+	@FindBy(id="heartattackQuestionNo")
+	private WebElement CardiovascularDisordersQ2No;
+	
+	@FindBy(id="medicalattentionQuestionNo")
+	private WebElement CardiovascularDisordersQ3No;
+	
+	@FindBy(id="ClopidogrelQuestionNo")
+	private WebElement CardiovascularDisordersQ4No;
+	
+	@FindBy(id="defibrillatorQuestionNo")
+	private WebElement CardiovascularDisordersQ5No;
+	
+	@FindBy(id="heartorlegsQuestionNo")
+	private WebElement CardiovascularDisordersQ6No;
 	
 	public PrelimineryQuestionsPage(WebDriver driver) {
 		super(driver);
@@ -267,7 +320,7 @@ public PersonalInformationPage Validate_use_and_disclosure_page() {
 		System.out.println("ESRD question Validation Status for "+planType+" : "+validation_Flag);
 		boolean Medicaid_Validation = true;
 		//Medicaid Question validation for DSNP only
-		if(planType.contains("SNP")){
+		if(planType.equals("SNP")){
 			System.out.println("Medicaid Question is displayed for "+planType+" : "+validate(MedicaidQuestion));
 			medicaiddno.click();
 			System.out.println("Medicaid question : No clicked"+medicaiddno.isSelected());
@@ -309,6 +362,8 @@ public PersonalInformationPage Validate_use_and_disclosure_page() {
 					System.out.println("Next Button is enabled when Medicaid question Answered NO");
 					Medicaid_Validation = (!Medicaid_Validation)?false:true;
 				}
+				
+				
 				else{
 					System.out.println("non DSNP - Medicare Question 'No' : validation failed");
 					Medicaid_Validation = false;
@@ -324,11 +379,67 @@ public PersonalInformationPage Validate_use_and_disclosure_page() {
 					Medicaid_Validation = false;
 				}
 			}
-		}
+			
+			
+						}
+				
+			
+			
+		
 		validation_Flag = (validation_Flag==false || Medicaid_Validation==false)?false:true;
 		System.out.println("Validation Status for Preliminary Question Page for Plan Type - "+planType+" : "+validation_Flag);
-		
+			
 		return validation_Flag;
+		
+	}
+	
+	public UseAndDisclosureAuthorizationPage validate_Required_Fields_CSNP( String medicaidNumber, String plantype) {
+		//System.out.println("plantype : "+plantype+" Medicare Number : "+medicaidNumber);
+		
+				if(plantype.contains("CSNP")){
+					System.out.println("Medicaid Question is displayed for "+plantype+" : "+validate(MedicaidQuestion));
+					medicaiddno.click();
+					System.out.println("Medicaid question : No clicked"+medicaiddno.isSelected());
+					
+						//Diabetes questions
+						Assert.assertTrue(validate(diabetesQuestion1), "diabetes questions are present");
+						validate(diabetesQuestions1Yes);
+						diabetesQuestions1Yes.click();
+						validate(diabetesQuestions2No);
+						diabetesQuestions2No.click();
+						Assert.assertTrue(validate(chronicHeartFailureQuestion1), "Chromic Heart Failurequestions are present");
+						validate(chronicHeartFailureQuestion1No);
+						chronicHeartFailureQuestion1No.click();	
+						validate(chronicHeartFailureQuestion2No);
+						chronicHeartFailureQuestion2No.click();	
+						validate(chronicHeartFailureQuestion3No);
+						chronicHeartFailureQuestion3No.click();	
+						Assert.assertTrue(validate(CardiovascularDisordersQuestion1), "Cardiovascular Disorders Question are present");
+						validate(CardiovascularDisordersQ1No);
+						CardiovascularDisordersQ1No.click();	
+						validate(CardiovascularDisordersQ2No);
+						CardiovascularDisordersQ2No.click();	
+						validate(CardiovascularDisordersQ3No);
+						CardiovascularDisordersQ3No.click();
+						validate(CardiovascularDisordersQ4No);
+						CardiovascularDisordersQ4No.click();	
+						validate(CardiovascularDisordersQ5No);
+						CardiovascularDisordersQ5No.click();
+						validate(CardiovascularDisordersQ6No);
+						CardiovascularDisordersQ6No.click();
+						Assert.assertTrue(validate(ESRDQuestion), "End Stage Renal Disease Question are present");
+						validate(esrdNo);
+						esrdNo.click();						
+					
+						NextBtn.click();
+						waitforElement(disclosureBox);
+						return new UseAndDisclosureAuthorizationPage(driver);
+			            
+		    }
+		
+				else return null;	
+		
+		
 	}
 	
 	public boolean validate_plan_details(Map<String, String> planDetailsMap) {
@@ -444,14 +555,14 @@ public LeavingOLEmodal OpenLeaveOLEmodal() {
 
 public void VerifyPreliminaryQuestions(String plantype) {
 	System.out.println("plantype :- "+ plantype);
-	Assert.assertTrue(validate(diabetesLegend), "Diabetes questions are not present");
-    Assert.assertTrue(validate(chronicHeartFailureLegend), "Chronic Heart Failure questions are not present");
+	Assert.assertTrue(validate(diabetesQuestion1), "Diabetes questions are not present");
+    Assert.assertTrue(validate(chronicHeartFailureQuestion1), "Chronic Heart Failure questions are not present");
     
     if(plantype.contains("Silver")) {
-    Assert.assertFalse(validate(thromboembolicdisorderLegend), "Thromboembolic Disorder questions are present");
+    Assert.assertFalse(validate(CardiovascularDisordersQuestion1), "Thromboembolic Disorder questions are present");
     }
     else if (plantype.contains("Chronic")){
-    Assert.assertTrue(validate(thromboembolicdisorderLegend), "Thromboembolic Disorder questions are not present");
+    Assert.assertTrue(validate(CardiovascularDisordersQuestion1), "Thromboembolic Disorder questions are not present");
     } 
 }
 }

@@ -65,6 +65,9 @@ public class OrderplanmaterialsPage extends UhcDriver {
 
 	@FindBy(className = "loading-block")
 	public List<WebElement> loadingImages;
+	
+	@FindBy(id = "order-materials-serviceFail-error")
+	private WebElement orderMaterialServiceFailError;
 
 	public OrderplanmaterialsPage(WebDriver driver) {
 		super(driver);
@@ -193,26 +196,32 @@ public class OrderplanmaterialsPage extends UhcDriver {
 
 		}
 
-		if (validateNew(submitButton)) {
+			validateNew(submitButton);
 
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("arguments[0].click();", submitButton);
 			System.out.println("****** Submit Button Clicked ********");
-		}
 		CommonUtility.checkPageIsReadyNew(driver);
+		
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (loadingImages.size() > 0) {
 			CommonUtility.waitForElementToDisappear(driver, loadingImages.get(0), 120);
 		}
-		try {
-			if (validateNew(OrderConfirmationHeader) || validateNew(OrderConfirmation_addordermaterialLink)) {
-				System.out.println("@@@@ Opder Plan Material COnfirmation Page is Displayed @@@@");
-				return new PlanMaterialConfirmationPage(driver);
+		if(validateNonPresenceOfElement(orderMaterialServiceFailError)) {
+			validateNew(OrderConfirmationHeader) ;
+			validateNew(OrderConfirmation_addordermaterialLink);
+			System.out.println("@@@@ Opder Plan Material COnfirmation Page is Displayed @@@@");				
 			}
-			return null;
-		} catch (Exception ex) {
-			Assert.fail("@@@@ Opder Plan Material COnfirmation Page is not Displayed @@@@");
-			return null;
-		}
+			else {
+				Assert.fail("@@@@ Service Error @@@@");
+				return null;
+			}
+			return new PlanMaterialConfirmationPage(driver);
 	}
 
 	@Override

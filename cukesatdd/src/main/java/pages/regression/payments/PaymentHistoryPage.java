@@ -115,9 +115,8 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(xpath = "((//*[@class='container--base'])[2]//div[@class='margin-small']//span[@class='payment-method-btn'])[2]/a")
 	private WebElement SetUpAutoPayButtonCC;
 
-	// @FindBy(xpath = "//*[@class='payment-method-btn'][1]/a[1]")
-	@FindBy(xpath = "//*[@class='payment-method-btn'][1]/a[2]")
-	private WebElement OneTimeNewFlowPayButton;
+	@FindBy(xpath = "//*[@class='btn btn--primary onetimepayment']")
+	private WebElement MakeAOneTimePaymentButton;
 
 	// @FindBy(xpath =
 	// "(//*[@id='paymentOverviewApp']//div[@class='col-md-12'])[2]//div[@class='margin-small']/span[@class='payment-method-btn'][3]/a")
@@ -163,7 +162,7 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(id = "otherAmount")
 	private WebElement OtherAmountButton;
 
-	@FindBy(xpath = "//*[@class='onetime-bill']/div[@class='ng-binding ng-scope']")
+	@FindBy(xpath = "//dt[text()='Next Payment Amount:']")
 	private WebElement NextPaymentSummary;
 
 	@FindBy(xpath = "//*[@class='onetime-bill']/div[@class='ng-scope']")
@@ -171,6 +170,9 @@ public class PaymentHistoryPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@class='dl-horizontal'][2]")
 	private WebElement RemainingAmountSummary;
+	
+	@FindBy(xpath = "//*[@class='dl-horizontal'][2]//dd[@class='onetime-bill ng-binding']")
+	private WebElement RemainingAmount;
 
 	@FindBy(id = "amountInput")
 	private WebElement AmountInput;
@@ -189,6 +191,9 @@ public class PaymentHistoryPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@class='payments']//div[@class='container']//div[@class='col-md-12']//div/h2")
 	private WebElement AutoPayHeading;
+	
+	@FindBy(xpath = "//p[text()='Checking Account Information']")
+	private WebElement CheckingAccountInformationHeader;
 
 	@FindBy(xpath = "//*[@class='col-md-9 col-xs-12']//div/p[@class='textfontsize']")
 	private WebElement OneTimePayHeading;
@@ -205,6 +210,10 @@ public class PaymentHistoryPage extends UhcDriver {
 
 	@FindBy(xpath = "//a[text()='Set Up Automatic Payments']")
 	private WebElement SetUpAutomaticPaymentsButton;
+	
+	@FindBy(xpath = "//a[text()='Set Up Recurring Payments']")
+	private WebElement SetUpRecurringPaymentsButtonShip;
+	
 	
 	@FindBy(xpath = "//a[text()='Edit Automatic Payments']")
 	private WebElement EditAutomaticPaymentsButton;	
@@ -773,8 +782,8 @@ public class PaymentHistoryPage extends UhcDriver {
 		} catch (Exception e) {
 			System.out.println("iPerception Pop Up is not Present");
 		}
-		waitforElement(OneTimeNewFlowPayButton);
-		OneTimeNewFlowPayButton.click();
+		waitforElement(MakeAOneTimePaymentButton);
+		MakeAOneTimePaymentButton.click();
 		waitforElement(AmountInput);
 		if (validate(AmountInput)) {
 			return new PaymentHistoryPage(driver);
@@ -811,8 +820,8 @@ public class PaymentHistoryPage extends UhcDriver {
 		CheckingAccountRadioButton.click();
 		System.out.println("clicked on Checking account button");
 		NextButton.click();
-		waitforElement(AutoPayHeading);
-		if (AutoPayHeading.getText().contains("easy to pay your premium.")) {
+		if (validate(CheckingAccountInformationHeader)) {
+			System.out.println("User is on Form Page for EFT");
 			return new OneTimePaymentPage(driver);
 		} else
 			return null;
@@ -857,8 +866,8 @@ public class PaymentHistoryPage extends UhcDriver {
 		CheckingAccountRadioButton.click();
 		System.out.println("clicked on Checking account button");
 		NextButton.click();
-		waitforElement(OneTimePayHeading);
-		if (OneTimePayHeading.getText().contains("Checking Account Information")) {
+		if (validate(CheckingAccountInformationHeader)) {
+			System.out.println("User is on Form Page for One Time payment");
 			return new OneTimePaymentPage(driver);
 		} else
 			return null;
@@ -878,14 +887,14 @@ public class PaymentHistoryPage extends UhcDriver {
 		System.out.println("in new method for summary validation");
 		try {
 			if (NextPaymentSummary.isDisplayed() && RemainingAmountSummary.isDisplayed()) {
-				System.out.println("Next Payment due is : " + NextPaymentSummary.getText());
-				System.out.println("Remaining amount due is : " + RemainingAmountSummary.getText());
+				System.out.println("Next Payment due is : " + NextPaymentProcess.getText());
+				System.out.println("Remaining amount due is : " + RemainingAmount.getText());
 				return new OneTimePaymentPage(driver);
 			}
 		} catch (Exception e) {
 			if (NextPaymentProcess.isDisplayed() && RemainingAmountSummary.isDisplayed()) {
 				System.out.println("Next Payment due is : " + NextPaymentProcess.getText());
-				System.out.println("Remaining amount due is : " + RemainingAmountSummary.getText());
+				System.out.println("Remaining amount due is : " + RemainingAmount.getText());
 				return new OneTimePaymentPage(driver);
 			} else
 				return null;
@@ -1003,6 +1012,27 @@ public class PaymentHistoryPage extends UhcDriver {
 			return new UpdateRecurringPage(driver);
 		} else {
 			System.out.println("Update Automatic Payments not displayed for ship");
+			return null;
+		}
+	}
+	
+
+	public PaymentsFormPage clickOnsetupAutomaticPaymentforShip() throws Exception {
+		Thread.sleep(20000);
+		waitforElement(SetUpRecurringPaymentsButtonShip);
+		SetUpRecurringPaymentsButtonShip.click();
+		System.out.println("User clicked on Setup Recurring Paymets Button");
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			System.out.println(driver.getCurrentUrl());
+			e.printStackTrace();
+		}
+		if (driver.getTitle().contains("Set Up Recurring Payments")) {
+			System.out.println("Navigated to Set Up Recurring Payments page for ship");
+			return new PaymentsFormPage(driver);
+		} else {
+			System.out.println("Update Set Up Recurring Payments not displayed for ship");
 			return null;
 		}
 	}

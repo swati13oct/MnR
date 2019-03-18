@@ -1,7 +1,7 @@
 @smokeTest @MemberVBF
 Feature: 1.09-VBF-MemRedesign-To test sign functionality
 
-  @smokeTest_DirectLogin @rallyDashboard @testharness
+  @rallyDashboard @testharness
   Scenario Outline: Validate that member is successfully getting logged in to Rally Dashboard for memberType <memberType>
     Given I am a authenticated member on the member redesign site for Direct Login
       | Member Type | <memberType> |
@@ -13,7 +13,20 @@ Feature: 1.09-VBF-MemRedesign-To test sign functionality
     Then User should be able to validate Dashboard elements
     And User should be ale to navigate to secondary page
 
+    @smokeTest_DirectLogin
     Examples: 
+      | memberType  | friendname | favcolor | phonenumber |
+       | ComboMAPDANDSHIP      | name1      | color1   | number1     |
+      | TerminatedFedAARP      | name1      | color1   | number1     | 
+       | Ship     |name1      | color1   | number1     |     
+       | UhcMapdInd     |name1      | color1   | number1     |
+     # | AARPMapdInd | name1      | color1   | number1     |
+      | GroupRetireeMapd     |name1      | color1   | number1     |
+      | PCP     |name1      | color1   | number1     |
+      | Medica      | name1      | color1   | number1     |
+      
+      @gatingTest_DirectLogin
+      Examples: 
       | memberType  | friendname | favcolor | phonenumber |
        | ComboMAPDANDSHIP      | name1      | color1   | number1     |
       | TerminatedFedAARP      | name1      | color1   | number1     | 

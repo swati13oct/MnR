@@ -16,7 +16,7 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
        | 15220  | PDP      | ContactUs     | test@optum.com | test@optum.com  |
        | 15221  | MAPD     | Ind_ContactUs     | test@optum.com | test@optum.com  |
 
-  @contactUs2 @GroupEmailConfirmMessage @regressionMember @tamzid
+  @contactUs2 @GroupEmailConfirmMessage @regressionMember
   Scenario Outline: TID: <TID> -Plan Type: <plantype> -Member Type: <memberType> - Verify Group Email Widget Confirm Request in contact us redesign page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |
@@ -57,10 +57,10 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
 
     Examples: 
        | TID      | plantype | memberType   | enquiryType         | alternativeEmailId | confirmAlternativeEmailId | alternativePhoneNumber | confirmAlternativePhoneNumber | inavlidPhoneErrorMessage                    | inavlidAConfirmPhoneErrorMessage                                                      | inavlidEmailErrorMessage                                        | inavlidAConfirmEmailErrorMessage                        |
-       | 15380    | MAPD     | CALPERSGroup | Payment Information | abc                | xyz                       |                    123 |                           789 | Enter phone number like this: 111-111-1111. | Your confirmation alternative phone number and alternative phone number do not match. | Enter your email address like this: yourname@emailprovider.com. | Your email confirmation and email address do not match. |
-       | 15380    | MAPD     | GEORGIAGroup | Payment Information |                    |                           |                        |                               | Enter phone number like this: 111-111-1111. | Your confirmation alternative phone number and alternative phone number do not match. | Enter your email address like this: yourname@emailprovider.com. | Your email confirmation and email address do not match. |
+       | 15380    | MAPD     | CALPERSGroup_ContactUs | Payment Information | abc                | xyz                       |                    123 |                           789 | Enter phone number like this: 111-111-1111. | Your confirmation alternative phone number and alternative phone number do not match. | Enter your email address like this: yourname@emailprovider.com. | Your email confirmation and email address do not match. |
+       | 15380    | MAPD     | GEORGIAGroup_ContactUs | Payment Information |                    |                           |                        |                               | Enter phone number like this: 111-111-1111. | Your confirmation alternative phone number and alternative phone number do not match. | Enter your email address like this: yourname@emailprovider.com. | Your email confirmation and email address do not match. |
 
-  @contactUs4 @SHIPEmailUsFunctionality  @regressionMember 
+  @contactUs4 @SHIPEmailUsFunctionality  @regressionMember
   Scenario Outline: TID: <TID> -Plan Type: <plantype> -Member Type: <memberType> - Verify SHIP Email Us Widget Confirm Request in contact us redesign page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |
@@ -83,9 +83,9 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
 
     Examples: 
        | TID    | plantype | memberType           | enquiryType | message | aarpMemberShipNumber | firstName | lastName | emailAddress   | confirmEmailAddress | date | month | year | expectedMessage                                                                                                                          |
-       | 15380  | PHIP     | SHIPCLAIMS_ContactUS | Claims      | Testing |           1234567890 | test      | test     | test@optum.com | test@optum.com      |   01 |    01 | 1950 | We value your input and will be happy to answer your questions. A UnitedHealthcare Customer Service representative will respond shortly. |
+       | 15380  | PHIP     | SHIPCLAIMS_ContactUs | Claims      | Testing |           1234567890 | test      | test     | test@optum.com | test@optum.com      |   01 |    01 | 1950 | We value your input and will be happy to answer your questions. A UnitedHealthcare Customer Service representative will respond shortly. |
 
-  @contactUs5 @goToInbox  @regressionMember 
+  @contactUs5 @goToInbox  @regressionMember
   Scenario Outline: TID: <TID>  -Member Type: <memberType> - Verify go To Inbox button on contactUS redesign page for opted in member
     Given login with following details logins in the member portal and validate elements
       | Member Type | <memberType> |
@@ -94,9 +94,9 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
 
     Examples: 
        | TID    | memberType      |
-       | 15379  | MA_ontactUs     |
+       | 15379  | MA_ContactUs     |
 
-  @contactUs6 @clickToCallCancel  @regressionMember 
+  @contactUs6 @clickToCallCancel  @regressionMember
   Scenario Outline: TID: <TID> -Plan Type: <plantype> -Member Type: <memberType> -  Verify clickToCall Widget Expansion (Drop-Down, Text Box and Button UI) and click on cancel on contactUS redesign page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |
@@ -108,7 +108,7 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
 
     Examples: 
        | TID    | plantype | memberType   | phoneNumber |
-       | 15224  | MAPD     | CALPERSGroup |  9999999999 |
+       | 15224  | MAPD     | CALPERSGroup_ContactUs |  9999999999 |
 
   @contactUs7 @clickToCallConfirmation  @rgressionMember 
   Scenario Outline: TID: <TID> -Plan Type: <plantype> -Member Type: <memberType> - Verify Click to Call Widget Drop-Down Request Routing and Confirmation message functionality on contactUS redesign page
@@ -125,9 +125,9 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
 
     Examples: 
        | TID   | plantype | memberType   | phoneNumber | formatPhoneNumber | expectedMessage                                                                                                                                                      |
-       | 15224 | MAPD     | CALPERSGroup |  9999999999 | 999-999-9999      | We value your input and will be happy to answer your questions. A UnitedHealthcare® Customer Service representative will call you shortly at the number you provided |
+       | 15224 | MAPD     | CALPERSGroup_ContactUs |  9999999999 | 999-999-9999      | We value your input and will be happy to answer your questions. A UnitedHealthcare® Customer Service representative will call you shortly at the number you provided |
 
-  @contactUs8 @sendUsQuestionPDP  @regressionMember 
+  @contactUs8 @sendUsQuestionPDP  @regressionMember
   Scenario Outline:TID: <TID> -Plan Type: <plantype> -Member Type: <memberType> -  Verify send Us A Question Widget page for PDP display section in contact us redesign page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |
@@ -137,7 +137,7 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
 
     Examples: 
      | TID    | plantype | memberType   |
-     | 15219  | PDP      | ContactUS    |
+     | 15219  | PDP      | ContactUs    |
 
   @contactUs9 @regressionContactUsForTerminatedMembers  @regressionMember
   Scenario Outline: TID: <TID> -Plan Type: <plantype> -Member Type: <memberType> - Verify terminated members view on contact us redesign page
@@ -149,8 +149,8 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
 
     Examples: 
      | TID   | plantype | memberType                      |
-     | 15207 | MA       | Terminated_Group_MA_NICE        |
-     | 15208 | MAPD     | Terminated_Group_MAPD_COSMOS    |
-     | 15210 | SSP      | Terminated_Group_SSP            |
-     | 15214 | MA       | Terminated_Individual_MA_COSMOS |
-     | 15217 | MAPD     | Terminated_Individual_MAPD_NICE |
+     | 15207 | MA       | Terminated_Group_MA_NICE_ContactUs        |
+     | 15208 | MAPD     | Terminated_Group_MAPD_COSMOS_ContactUs    |
+     | 15210 | SSP      | Terminated_Group_SSP_ContactUs            |
+     | 15214 | MA       | Terminated_Individual_MA_COSMOS_ContactUs |
+     | 15217 | MAPD     | Terminated_Individual_MAPD_NICE_ContactUs |

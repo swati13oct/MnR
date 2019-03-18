@@ -3,7 +3,6 @@ target/
 
 .settings/
 .project
-.classpath
 .report.js
 .formatter.js
 .embedded4.png

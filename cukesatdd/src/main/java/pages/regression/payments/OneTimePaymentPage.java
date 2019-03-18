@@ -1,7 +1,9 @@
 package pages.regression.payments;
 
+import java.util.List;
 import java.util.Map;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -9,6 +11,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+
+import com.google.common.base.Strings;
 
 import atdd.framework.UhcDriver;
 
@@ -29,6 +33,9 @@ public class OneTimePaymentPage extends UhcDriver {
 
 	@FindBy(id = "optionsRadios1")
 	private WebElement AmountDueTodayButton;
+	
+	@FindBy(xpath = "//label[@for='optionsRadios10']//input")
+	private WebElement CheckingAccountRadioButton;
 
 	@FindBy(xpath = "//label[@for='optionsRadios20']//input")
 	private WebElement creditcardRadioButton;
@@ -90,16 +97,13 @@ public class OneTimePaymentPage extends UhcDriver {
 	@FindBy(id = "closeButton")
 	private WebElement iPerceptionCloseButton;
 
-	@FindBy(xpath = "//*[@class='btn btn--secondary cancelbutton']")
+	@FindBy(xpath = "//*[@class='btn btn--secondary cancelbutton cancel-wcag']")
 	private WebElement RecurringFormCancel;
 
-	@FindBy(xpath = "//*[@class='modal-footer']/a[1]")
-	private WebElement RecurringFormCancelPopup;
-
-	@FindBy(xpath = "(//*[@id='paymentOverviewApp']//div[@class='container']//div[@class='col-md-12']/h2)[1]")
+	@FindBy(xpath = "//*[@id='paymentOverviewApp']//h2[contains(text(), normalize-space('Premium Payments Overview'))]")
 	private WebElement PaymentOverviewtText;
 
-	@FindBy(xpath = "(//*[@class='margin-medium']/span)[2]/a")
+	@FindBy(xpath = "//*[@class='margin-medium']//span//button")
 	private WebElement AuthorizeButton;
 
 	@FindBy(id = "btnSubmit")
@@ -111,8 +115,8 @@ public class OneTimePaymentPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='accountNumber']")
 	private WebElement CreditCardNumberField;
 
-	@FindBy(xpath = "(//*[@class='modal-content']//div[@class='modal-footer'])[1]/a[1]")
-	private WebElement PaymentCancelPopup;
+	@FindBy(xpath = "//a[@class='btn btn--primary cancel-btn-modal']")
+	private WebElement PaymentCancelModelPopup;
 
 	@FindBy(id = "form_routingNumber")
 	private WebElement Error1;
@@ -123,12 +127,42 @@ public class OneTimePaymentPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='page-header']//div[@class='row']//h1")
 	private WebElement PageHeader;
 
+	@FindBy(xpath = "//p[text()='Checking Account Information']")
+	private WebElement CheckingAccountInformationHeader;
+	
+	@FindBy(xpath = "//button[text()='Edit Payment Information']")
+	private WebElement EditPaymentInformation;
+	
+	@FindBy(xpath = "//button[@class='btn btn--primary']")
+	private WebElement AuthorizeMonthlyPaymentstButton;
+	
+	@FindBy(id = "termsAgree")
+	private WebElement AgreeCheckBox;
+	
 	public OneTimePaymentPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
 	}
 
+	
+	public void PaymentsDataVerificationonReviewPage() {
+		List<WebElement> rowsList = driver.findElements(By.xpath("//div[@class='table-body-row']"));
+		List<WebElement> columnsList = null;
+		for (WebElement row : rowsList) {
+			System.out.println();
+			columnsList = row.findElements(By.tagName("div"));
+
+			for (WebElement column : columnsList) {
+				System.out.print(column.getText() + " - ");
+				if ((Strings.isNullOrEmpty(column.getText()))) {
+					Assert.fail("Coloumn Header or value is null");
+				}
+			}
+		}
+	}
+	
+	
 	public ConfirmOneTimePaymentPage enterPaymentDetails(Map<String, String> accountAttributessMap) {
 
 		String Amount = accountAttributessMap.get("Amount to be paid");
@@ -418,7 +452,7 @@ public class OneTimePaymentPage extends UhcDriver {
 		}
 	}
 
-	public OneTimePaymentPage CancelPayments() {
+	public PaymentHistoryPage CancelPayments() {
 		System.out.println("In Cancel payment method");
 
 		try {
@@ -434,17 +468,17 @@ public class OneTimePaymentPage extends UhcDriver {
 		}
 		System.out.println("will click on cancel button");
 		RecurringFormCancel.click();
-		waitforElement(RecurringFormCancelPopup);
-		RecurringFormCancelPopup.click();
+		waitforElement(PaymentCancelModelPopup);
+		PaymentCancelModelPopup.click();
 		waitforElement(PaymentOverviewtText);
 		if (PaymentOverviewtText.isDisplayed())
-			return new OneTimePaymentPage(driver);
+			return new PaymentHistoryPage(driver);
 		else
 			return null;
 
 	}
 
-	public OneTimePaymentPage CancelPaymentsOneTime() {
+	public PaymentHistoryPage CancelPaymentsOneTime() {
 		System.out.println("In Cancel payment method for OneTime");
 		try {
 			Thread.sleep(2000);
@@ -459,15 +493,13 @@ public class OneTimePaymentPage extends UhcDriver {
 		}
 		System.out.println("will click on cancel button");
 		RecurringFormCancel.click();
-		waitforElement(PaymentCancelPopup);
-		PaymentCancelPopup.click();
-		waitforElement(PaymentHeading);
-		if (PaymentHeading.getText().contains("Premium Payments Overview")) {
-			System.out.println("Payment Overview page displayed");
-			return new OneTimePaymentPage(driver);
-		} else
+		waitforElement(PaymentCancelModelPopup);
+		PaymentCancelModelPopup.click();
+		waitforElement(PaymentOverviewtText);
+		if (PaymentOverviewtText.isDisplayed())
+			return new PaymentHistoryPage(driver);
+		else
 			return null;
-
 	}
 
 	public OneTimePaymentPage ErrorMessageValidation() {
@@ -523,6 +555,13 @@ public class OneTimePaymentPage extends UhcDriver {
 		System.out.println("User selects Credit Card Option");
 
 	}
+	
+	public void selectCheckingAccountOption() {
+		validate(CheckingAccountRadioButton);
+		CheckingAccountRadioButton.click();
+		System.out.println("User selects Checking Account Option");
+
+	}
 
 	public CreditCardUPGPage clickOnNextButton() {
 		validate(otheramountfield);
@@ -542,12 +581,77 @@ public class OneTimePaymentPage extends UhcDriver {
 			return null;
 		}
 	}
+	
+	
+	public PaymentsFormPage clickOnContuineButton() {
+		validate(otheramountfield);
+		NextButton.click();
+		System.out.println("User Click on Next button on one time page");
+		try {
+			Thread.sleep(5000);
+			System.out.println(driver.getCurrentUrl());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if (validate(CheckingAccountInformationHeader)) {
+			System.out.println("Navigated to EFT form page");
+			return new PaymentsFormPage(driver);
+		} else {
+			System.out.println("Form Page is not displayed");
+			return null;
+		}
+	}
+	
+	
+	public ConfirmOneTimePaymentPage selectAgreeAndClickOnSubmitPaymentsforOneTime() {
+		validate(EditPaymentInformation);
+		System.out.println("User is on Review Review Your Automatic Payments Information Page");
+		PaymentsDataVerificationonReviewPage();
+		jsClickNew(AgreeCheckBox);
+		AuthorizeMonthlyPaymentstButton.click();
+		System.out.println("Clicked on Authorize Monthly Payments button");
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			System.out.println(driver.getCurrentUrl());
+			e.printStackTrace();
+		}
+		if (driver.getTitle().contains("One-Time Payment Submitted")) {
+			System.out.println("User is on Confirmation Page for One time payment");
+			return new ConfirmOneTimePaymentPage(driver);
+		} else {
+			System.out.println("Confirmation Page for one time payment not displayed");
+			return null;
+		}
+	}
+	
+	public ConfirmOneTimePaymentPage selectAgreeAndClickOnContinueforEFTForShip() {
+		validate(EditPaymentInformation);
+		PaymentsDataVerificationonReviewPage();
+		System.out.println("User is on review Payment Page");
+		System.out.println("Going to scroll down");
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,650)", "");
+		jsClickNew(AgreeCheckBox);
+		AuthorizeMonthlyPaymentstButton.click();
+		System.out.println("Clicked on Contuine button");
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			System.out.println(driver.getCurrentUrl());
+			e.printStackTrace();
+		}
+		if (driver.getTitle().contains("Recurring Payments Request Submitted")) {
+			System.out.println("User is on Confirmation Page for Setup Recurring for ship");
+			return new ConfirmOneTimePaymentPage(driver);
+		} else {
+			System.out.println("Confirmation Page for setup recurring not displayed for ship");
+			return null;
+		}
+	}
 
 	@Override
 	public void openAndValidate() {
-
-		validate(otheramountfield);
-		validate(amountToBePaidField);
 		validate(routingNumberField);
 		validate(confirmRoutingNumberField);
 		validate(accountNumberField);

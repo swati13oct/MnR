@@ -31,6 +31,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.PageTitleConstants;
+
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 
 import java.util.ArrayList;
@@ -241,6 +242,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	/* LearnAboutMedicare link */
 	@FindBy(xpath = "//*[@id='ghn_lnk_3']")
 	private WebElement lnkLearnAboutMedicare;
+	
+	@FindBy(xpath="//*[@id='ghn_lnk_2']")
+	private WebElement ShopForaplan;
 	
 	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button proactive-offer__close main-background-color second-color')]")
 	public static WebElement proactiveChatExitBtn;
@@ -1479,5 +1483,17 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return null;
 	}
 
+	public ShopforaplanUHClayer Hoveronaplan() throws InterruptedException
+	{		
+		waitforElement(ShopForaplan);
+        if (ShopForaplan.isDisplayed()) {
+               Actions action = new Actions(driver);
+//               PageFactory.initElements(driver, this);
+               action.moveToElement(ShopForaplan).build().perform();
+               return new ShopforaplanUHClayer(driver);
+        }
+		else {
+			return null;}
+	}
 
 }
