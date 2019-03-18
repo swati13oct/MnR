@@ -60,6 +60,7 @@ public class HSIDStepDefinition {
 		}
 
 		String category = memberAttributesMap.get("Member Type");
+		String planType = memberAttributesMap.get("Plan Type");
 		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
 		List<String> desiredAttributes = new ArrayList<String>();
 		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
@@ -75,7 +76,22 @@ public class HSIDStepDefinition {
 			getLoginScenario().saveBean(LoginCommonConstants.MEMBERTYPE,
 					desiredAttributes.get(1));
 		}
-
+		// note: for the team-a env, it needs a different URL for PCP and Medica users
+		boolean teamSpecialCase=false;
+		if ("team-a".equalsIgnoreCase(MRScenario.environment)) {
+			if (planType != null) {
+				if (planType.toLowerCase().contains("pcp") || planType.toLowerCase().contains("medica")) {
+					teamSpecialCase=true;		
+					System.out.println("This is a PCP / Medica case - need to use different URL on team-a env");
+				}
+			}
+			if (category != null) {
+				if (category.toLowerCase().contains("pcp") || category.toLowerCase().contains("medica")) {
+					teamSpecialCase=true;		
+					System.out.println("This is a PCP / Medica case - need to use different URL on team-a env");
+				} 
+			}
+		}
 		Map<String, String> loginCreds = loginScenario
 				.getUMSMemberWithDesiredAttributes(desiredAttributes);
 		String userName = null;
@@ -112,7 +128,12 @@ public class HSIDStepDefinition {
 			}
 		} else {
 			if (("YES").equalsIgnoreCase(MRScenario.isTestHarness)) {
-				LoginPage loginPage = new LoginPage(wd);
+				LoginPage loginPage=null;
+				if ("team-a".equalsIgnoreCase(MRScenario.environment)) {
+					loginPage = new LoginPage(wd, teamSpecialCase);
+				} else {
+					loginPage = new LoginPage(wd);
+				}
 
 				AccountHomePage accountHomePage = (AccountHomePage) loginPage
 						.loginWithLegacy(userName, pwd);
