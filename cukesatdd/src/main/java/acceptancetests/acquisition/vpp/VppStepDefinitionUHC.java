@@ -19,7 +19,6 @@ import pages.acquisition.bluelayer.PlanComparePage;
 import pages.acquisition.bluelayer.PlanDetailsPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.ole.WelcomePage;
-import pages.acquisition.ulayer.ComparePlansPage;
 import pages.acquisition.bluelayer.ComparePlansPageBlayer;
 import pages.acquisition.bluelayer.DrugCostEstimatorPage;
 import pages.acquisition.bluelayer.FindCarePage;
@@ -1044,7 +1043,7 @@ public class VppStepDefinitionUHC {
 			String benefitType = memberAttributesMap.get("Benefit Type");
 			String expectedText = memberAttributesMap.get("Expected Text");
 			String PlanName = memberAttributesMap.get("Plan Name");
-			System.out.println("Validating the following Medical benefits : "+benefitType);
+			System.out.println("Validating the following Medical benefits on Plan Compare Page : "+benefitType);
 
 			PlanComparePage comparePlansPage = (PlanComparePage) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);

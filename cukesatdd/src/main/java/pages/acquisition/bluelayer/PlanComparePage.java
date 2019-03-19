@@ -101,7 +101,7 @@ public class PlanComparePage extends UhcDriver{
 		System.out.println("The additional Benefit to Valuidate : "+benefitType);
 		ActualTextforBenefit =  driver.findElement(By.xpath("//p[(contains(text(), '"+benefitType+"'))]/ancestor::tr//td["+index+"]"));
 		displayedText = ActualTextforBenefit.getText();
-		System.out.println("Text Displayed for the Medical Benefit on Plan Details : ");
+		System.out.println("Text Displayed for the Medical Benefit on Plan Compare Page : ");
 		System.out.println(displayedText);
 		String[] Expected = expectedText.split("/");
 		for(String str :Expected){

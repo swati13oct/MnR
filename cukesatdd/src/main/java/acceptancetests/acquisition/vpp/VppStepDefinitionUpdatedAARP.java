@@ -624,7 +624,7 @@ public class VppStepDefinitionUpdatedAARP {
 		String benefitType = memberAttributesMap.get("Benefit Type");
 		String expectedText = memberAttributesMap.get("Expected Text");
 		String PlanName = memberAttributesMap.get("Plan Name");
-		System.out.println("Validating the following Medical benefits : "+benefitType);
+		System.out.println("Validating the following Medical benefits on Plan Compare : "+benefitType);
 
 		ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
