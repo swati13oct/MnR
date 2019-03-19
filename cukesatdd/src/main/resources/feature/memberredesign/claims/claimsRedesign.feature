@@ -358,3 +358,168 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		Examples: 
 	    | TID   | planType | claimPeriod    | domain | claimssystem |
 	  	| 15230 | MAPD     | Last 24 months | COSMOS | COSMOSCLAIMS |
+    Given login with following details logins in the member portal and validate elements
+      
+      | Plan Type      | <planType>     |
+      | Test Data Type | <claimssystem> |
+    When I navigate to the claims Summary page in redesigned site
+    And I can search claims for the following claim period on redesigned site
+      | Plan Type    | <planType>    |
+      | Claim Period | <claimPeriod> |
+    Then  I can see the claims displayed based on the selection in redesigned site for PDP plans 
+   #And I validate the pagination on the claims summary page for members  
+    And the user validates the EOB section in redesigned site    
+   # And the user validates the DownloadMyData section in redesigned site
+    Examples: 
+     | TID  | planType | claimPeriod    | domain | claimssystem |
+     | 15299     | PDP      | Last 24 months | RX     | RXCLAIMS     |
+     
+        
+@claims9  @Tc02 @Tc05
+    Scenario Outline: To validate the claims present for the Federal member on claims sumamry page for AARP site    
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>     |
+      | Test Data Type | <claimssystem> |
+    When I navigate to the claims Summary page in redesigned site
+    Then I can validate the claims summary header
+    And I can search claims for the following claim period on redesigned site
+      | Plan Type    | <planType>    |
+      | Claim Period | <claimPeriod> |
+    Then I can see the claims displayed based on the selection in redesigned site
+    #And I validate the pagination on the claims summary page for members
+   	And the user validates the EOB section based on domain in redesigned site
+      | Domain     | <domain>      |
+      | Plan Type  | <planType>    |
+    And the user validates the DownloadMyData section in redesigned site
+    When I navigate to the Claim Details page for federal members
+    And I validate the Claims Table in claims details page for federal members
+    And I validate the Claims Total in claims details page in AARP site
+    And I validate the claims history Button   
+    Examples: 
+      | planType | claimPeriod    | domain | claimssystem |
+      | MAPD     | Last 24 months | COSMOS| COSMOSCLAIMS   |
+  #   | MAPD     | Last 24 months | NICE   | NICECLAIMS   |
+     
+  
+@claims10  @TC01_FED_AARP_Individual_NICE @TC04_FED_UHC_Individual_COSMOS
+  Scenario Outline:  TID: <TID> -plan: <planType> -To validate the claims present for the Federal member on claims sumamry page & the Details on the Claims Details page 
+   Given login with following details logins in the member portal and validate elements
+     
+      | Plan Type      | <planType>     |
+      | Test Data Type | <claimssystem> |
+    When I navigate to the claims Summary page in redesigned site
+    Then I validate the claim summary header
+    And I can search claims for the following claim period on redesigned site
+      | Plan Type    | <planType>    |
+      | Claim Period | <claimPeriod> |
+    Then I can see the claims displayed based on the selection in redesigned site
+    #And I validate the pagination on the claims summary page for members
+   	And the user validates the EOB section based on domain in redesigned site
+      | Domain     | <domain>      |
+      | Plan Type  | <planType>    |
+ 	  When I navigate to the Claim Details page for federal members
+    And I validate the Claims Table in claims details page for federal members
+    And I validate the Claims Total in claims details page in AARP site
+    And I can view a claim search back button in Claims Details page in AARP site
+    #And the user validates the DownloadMyData section in redesigned site
+   
+    Examples: 
+     | TID  | planType | claimPeriod    | domain | claimssystem |
+     | 15227     | MA       | Last 24 months | NICE   | NICECLAIMS   |
+      #| 15234    | MA       | Last 24 months | COSMOS | COSMOSCLAIMS |
+      
+     
+@claims11   @TC11_PCP
+  Scenario Outline:  TID: <TID> -plan: <planType> -To validate the claims present for the Federal member on claims sumamry page for AARP site
+   Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>     |
+      | Test Data Type | <claimssystem> |
+    When I navigate to the claims Summary page in redesigned site
+    Then I can validate the claims summary header
+    Then I validate the text for PCP & medica members 
+    And I can search claims for the following claim period on redesigned site
+      | Plan Type    | <planType>    |
+      | Claim Period | <claimPeriod> |
+    Then I can see the claims displayed based on the selection in redesigned site
+ #   And I validate the pagination on the claims summary page for members
+   	And the user validates the EOB section based on domain in redesigned site
+      | Domain     | <domain>      |
+      | Plan Type  | <planType>    |
+    And the user validates the DownloadMyData section in redesigned site
+    When I navigate to the Claim Details page for federal members
+    And I validate the Claims Table in claims details page for federal members
+    And I validate the Claims Total in claims details page in AARP site
+    And I validate the claims history Button
+   
+    Examples: 
+   | TID  | planType | claimPeriod    | domain | claimssystem |
+   | 15268 | PCP      | Last 24 months | PCP   | COSMOSCLAIMS   |
+      
+    
+@claims12  @claimsprintanddownload @thePredator
+  	Scenario Outline:  TID: <TID> -plan: <planType> -To validate the <claimssystem> on claims summary page
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>     |
+      | Test Data Type | <claimssystem> |
+    When I navigate to the claims Summary page in redesigned site
+    #Then I can validate the claims summary header
+    And I can search claims for the following claim period on redesigned site
+      | Plan Type    | <planType>    |
+      | Claim Period | <claimPeriod> |      
+    Then I can see the claims displayed based on the selection in redesigned site
+    Then I can see the print and download option in claims details table
+    And I validate the print and download option in claims details table
+    #And I validate the pagination on the claims summary page 
+    And the user validates the EOB section based on domain in redesigned site    
+     | Domain       | <domain>      |
+     | Plan Type    | <planType>    |
+    Then I navigate to the Claim Details page in redesigned site
+    Then I validate the Claims Table in claims details page in redesigned site
+    And I validate the EOB option in claims details page in redesigned site    
+
+    Examples: 
+    | TID   | planType | claimPeriod    | domain | claimssystem |
+    | 15230    | MAPD     | Last 24 Months | COSMOS     | COSMOSCLAIMS   |
+      
+@claims13   @claimsSummaryFEDError
+Scenario Outline:  TID: <TID> -plan: <planType> -To validate the claims present for the Federal member on claims summary page for federal members
+Given login with following details logins in the member portal and validate elements
+  | Plan Type      | <planType>     |
+  | Test Data Type | <claimssystem> |
+When I navigate to the claims Summary page in redesigned site
+#Then I can validate the claims summary header
+<<<<<<< HEAD
+#And I can search claims for the following claim period on redesigned site
+ # | Plan Type    | <planType>    |
+ # | Claim Period | <claimPeriod> |
+=======
+And I can search claims for the following claim period on redesigned site
+  | Plan Type    | <planType>    |
+  | Claim Period | <claimPeriod> |
+>>>>>>> develop
+And the user search claims for the following time interval in redesigned site
+| Claims To Date   | <claimToDate>   |
+| Claims From Date | <claimFromDate>  |
+Then the user should be able to see the from date is greater than to date error message
+Examples: 
+     | TID | planType | claimPeriod    | domain | claimssystem |claimToDate | claimFromDate |
+     |  15230  | MAPD     |custom-search | COSMOS | COSMOSCLAIMS |11/06/2018  | 01/02/2019 |
+     
+@claims14 @claimsPagination
+Scenario Outline:  TID: <TID> -plan: <planType> - To validate the claims present for the Federal member on claims summary page for federal members
+Given login with following details logins in the member portal and validate elements
+  | Plan Type      | <planType>     |
+  | Test Data Type | <claimssystem> |
+When I navigate to the claims Summary page in redesigned site
+Then I can validate the claims summary header
+And I can search claims for the following claim period on redesigned site
+  | Plan Type    | <planType>    |
+  | Claim Period | <claimPeriod> |
+Then I can see the claims displayed based on the selection in redesigned site
+And I validate the pagination on the claims summary page 
+And the user validates the EOB section based on domain in redesigned site
+  | Domain     | <domain>      |
+  | Plan Type  | <planType>    |
+Examples: 
+    | TID | planType | claimPeriod    | domain | claimssystem |
+  	| 15230   | MAPD     | Last 24 months | COSMOS | COSMOSCLAIMS |
