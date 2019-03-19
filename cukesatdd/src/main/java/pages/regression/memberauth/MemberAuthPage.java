@@ -58,8 +58,7 @@ public class MemberAuthPage extends UhcDriver {
        @FindBy(id="super-user-banner")
        private WebElement SuperUser_DashboardBanner;
 
-       private static String MEMBER_AUTH = "http://team-f-generic.ose-elr-core.optum.com/content/medicare/memberauth.html#/memberAuthLogin";
-       //private static String MEMBER_AUTH = MRConstants.MEMBER_AUTH;
+       private static String MEMBER_AUTH = MRConstants.MEMBER_AUTH;
        
    	@FindBy(xpath = "(//*[@class='ng-scope']//a[text()='Premium Payments'])[1]")
    	private WebElement paymentsLink;

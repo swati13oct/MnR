@@ -235,6 +235,93 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
       | US1497179 - AARP - No PCP Tiering        |   06280 | NO              | Windham County  | MA       | UnitedHealthcare MedicareComplete Essential (HMO) | Primary Care Provider Copay | $5 copay                              |
       | US1497179 - AARP - No PCP Tiering        |   35618 | NO              | Lawrence County | MAPD     | AARP MedicareComplete Plan 1 (HMO)                | Primary Care Provider Copay | $5 copay                              |
 
+  @F251983 @validatePCPnSpecialistTieringPlanCompare @fastandfurious @Apr_release_2019
+  Scenario Outline: UserStory: <UID> -plan type: <plantype> - Verify PCP and Specialist Benefits Tiering in Plan Compare Page for provided plan on AARP
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
+    And the user views the plans of the below plan type in AARP site
+      | Plan Type | <plantype> |
+    And the user validates the available plans for selected plan types in the AARP site
+    Then the user selects plans to add to plan compare and navigates to Plan compare page
+      | Plan Name | <planName> |
+    Then the user validates the following Medical Benefits for the plan in Plan Compare Page
+      | Benefit Type  | <benefitType>  |
+      | Expected Text | <expectedText> |
+      | Plan Name     | <planName>     |
+
+    Examples: 
+      | UID                                                   | zipcode | isMultutiCounty | county          | plantype | planName                                          | benefitType                 | expectedText                          |
+      | US1625234 - AARP Plan Compare - PCP Tiering           |   27021 | YES             | Stokes County   | MA       | AARP MedicareComplete Essential (HMO)             | Primary Care Provider Copay | Tier 1: $0 copay / Tier 2: $10 copay  |
+      | US1625234 - AARP Plan Compare - PCP Tiering           |   27021 | YES             | Stokes County   | MAPD     | AARP MedicareComplete Plan 1 (HMO)                | Primary Care Provider Copay | Tier 1: $0 copay / Tier 2: $10 copay  |
+      | US1625234 - AARP Plan Compare - PCP Tiering           |   28616 | NO              | Avery County    | MAPD     | AARP MedicareComplete Plan 2 (HMO)                | Primary Care Provider Copay | Tier 1: $0 copay / Tier 2: $20 copay  |
+      | US1625234 - AARP Plan Compare - PCP Tiering           |   28701 | NO              | Buncombe County | MAPD     | AARP MedicareComplete Plan 3 (HMO)                | Primary Care Provider Copay | Tier 1: $0 copay / Tier 2: $20 copay  |
+      | US1625234 - AARP Plan Compare - PCP No Tiering        |   06280 | NO              | Windham County  | MA       | UnitedHealthcare MedicareComplete Essential (HMO) | Primary Care Provider Copay | $5 copay                              |
+      | US1625234 - AARP Plan Compare - PCP No Tiering        |   35618 | NO              | Lawrence County | MAPD     | AARP MedicareComplete Plan 1 (HMO)                | Primary Care Provider Copay | $5 copay                              |
+      | US1653894 - AARP Plan Compare - Specialist Tiering    |   27021 | YES             | Stokes County   | MA       | AARP MedicareComplete Essential (HMO)             | Specialist Copay            | Tier 1: $30 copay / Tier 2: $50 copay |
+      | US1653894 - AARP Plan Compare - Specialist Tiering    |   27021 | YES             | Stokes County   | MAPD     | AARP MedicareComplete Plan 1 (HMO)                | Specialist Copay            | Tier 1: $30 copay / Tier 2: $50 copay |
+      | US1653894 - AARP Plan Compare - Specialist Tiering    |   28616 | NO              | Avery County    | MAPD     | AARP MedicareComplete Plan 2 (HMO)                | Specialist Copay            | Tier 1: $35 copay / Tier 2: $50 copay |
+      | US1653894 - AARP Plan Compare - Specialist Tiering    |   28701 | NO              | Buncombe County | MAPD     | AARP MedicareComplete Plan 3 (HMO)                | Specialist Copay            | Tier 1: $40 copay / Tier 2: $50 copay |
+      | US1653894 - AARP Plan Compare - No Specialist Tiering |   06280 | NO              | Windham County  | MA       | UnitedHealthcare MedicareComplete Essential (HMO) | Specialist Copay            | $35 copay                             |
+      | US1653894 - AARP Plan Compare - No Specialist Tiering |   35618 | NO              | Lawrence County | MAPD     | AARP MedicareComplete Plan 1 (HMO)                | Specialist Copay            | $40 copay                             |
+
+  @F251983 @validateOutPatientHospitalServices @fastandfurious @Apr_release_2019
+  Scenario Outline: UserStory: <UID> -plan type: <plantype> - Verify Out Patient Hospital Visit Benefits vakues in Plan Details for provided plan on AARP
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
+    And the user views the plans of the below plan type in AARP site
+      | Plan Type | <plantype> |
+    And the user validates the available plans for selected plan types in the AARP site
+    Then the user view plan details of the above selected plan in AARP site and validates
+      | Plan Name | <planName> |
+    Then the user validates the following Medical Benefits Plan details for the plan
+      | Benefit Type  | <benefitType>  |
+      | Expected Text | <expectedText> |
+
+    Examples: 
+      | UID                                             | zipcode | isMultutiCounty | county             | plantype | planName                                          | benefitType                  | expectedText    |
+      | US1533310 - AARP - OutPatient Hospital Services |   06280 | NO              | Windham County     | MA       | UnitedHealthcare MedicareComplete Essential (HMO) | Outpatient Hospital Services | $250 copay      |
+      | US1533310 - AARP - OutPatient Hospital Services |   99210 | NO              | Spokane County     | MA       | AARP MedicareComplete Essential (HMO)             | Outpatient Hospital Services | 20% of the cost |
+      | US1533310 - AARP - OutPatient Hospital Services |   35650 | NO              | Lawrence County    | MAPD     | AARP MedicareComplete Plan 1 (HMO)                | Outpatient Hospital Services | $295 copay      |
+      | US1533310 - AARP - OutPatient Hospital Services |   90210 | NO              | Los Angeles County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) | Outpatient Hospital Services | $0 copay        |
+      | US1533310 - AARP - OutPatient Hospital Services |   33002 | NO              | Miami-Dade County  | SNP      | Preferred Special Care Miami-Dade (HMO SNP)       | Outpatient Hospital Services | $75 copay       |
+      | US1533310 - AARP - OutPatient Hospital Services |   36688 | NO              | Mobile County      | SNP      | UnitedHealthcare Dual Complete (HMO SNP)          | Outpatient Hospital Services | $0 copay        |
+
+  @F251983 @validateAmbulatorySurgicalCenterPackage @fastandfurious @Apr_release_2019
+  Scenario Outline: UserStory: <UID> - plan type: <plantype> - Verify Ambulatory Surgical Centre Benefit on Plan Details Page for the provided plan on AARP
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
+    And the user views the plans of the below plan type in AARP site
+      | Plan Type | <plantype> |
+    And the user validates the available plans for selected plan types in the AARP site
+    Then the user view plan details of the above selected plan in AARP site and validates
+      | Plan Name | <planName> |
+    Then the user validates the following Medical Benefits Plan details for the plan
+      | Benefit Type  | <benefitType>  |
+      | Expected Text | <expectedText> |
+
+    Examples: 
+      | UID                                                   | zipcode | isMultutiCounty | county              | plantype | planName                                               | benefitType                | expectedText               |
+      | US1641966 - AARP - Ambulatory Surgical Center Package |   35616 | NO              | Colbert County      | MAPD     | AARP MedicareComplete Plan 1 (HMO)                     | Ambulatory Surgical Center | $245 copay                 |
+      | US1641966 - AARP - Ambulatory Surgical Center Package |   33413 | NO              | Palm Beach County   | MAPD     | UnitedHealthcare Sync (PPO)                            | Ambulatory Surgical Center | $150 copay                 |
+      | US1641966 - AARP - Ambulatory Surgical Center Package |   84301 | NO              | Box Elder County    | MA       | AARP MedicareComplete Essential (HMO)                  | Ambulatory Surgical Center | $290 copay                 |
+      | US1641966 - AARP - Ambulatory Surgical Center Package |   83616 | YES             | Ada County          | MAPD     | UnitedHealthcare MedicareComplete Assure (PPO)         | Ambulatory Surgical Center | $0 copay - 20% of the cost |
+      | US1641966 - AARP - Ambulatory Surgical Center Package |   33002 | NO              | Miami-Dade County   | SNP      | Preferred Special Care Miami-Dade (HMO SNP)            | Ambulatory Surgical Center | $25 copay                  |
+      | US1641966 - AARP - Ambulatory Surgical Center Package |   53920 | YES             | Adams County        | SNP      | UnitedHealthcare MedicareComplete Assist (PPO SNP)     | Ambulatory Surgical Center | $295 copay                 |
+      | US1641966 - AARP - Ambulatory Surgical Center Package |   92220 | NO              | Riverside County    | MAPD     | AARP MedicareComplete SecureHorizons Plan 2 (HMO)      | Ambulatory Surgical Center | $0 copay                   |
+      | US1641966 - AARP - Ambulatory Surgical Center Package |   98601 | YES             | Clark County        | SNP      | UnitedHealthcare Nursing Home Plan (PPO SNP)           | Ambulatory Surgical Center | 10% of the cost            |
+      | US1641966 - AARP - Ambulatory Surgical Center Package |   53910 | NO              | Adams County        | MA       | UnitedHealthcare MedicareComplete Open Essential (PPO) | Ambulatory Surgical Center | $250 copay                 |
+      | US1641966 - AARP - Ambulatory Surgical Center Package |   32960 | NO              | Indian River County | MAPD     | AARP MedicareComplete Focus (HMO)                      | Ambulatory Surgical Center | $150 copay                 |
+      
+
 
   @feature-F265872 @us1598162 @vppFavoritePlanInSession @vppFavoritePlanInSessionAarp @thePredators @Apr_release_2019
   Scenario Outline: UID: <UID> -zipcode: <zipcode> -isMultiCounty: <isMultiCounty> - Verify user can save and unsave favorite plans on view plan preview page on AARP site

@@ -253,7 +253,7 @@ public class AccountHomePage extends UhcDriver {
 	// @FindBy(css = "img.primary-logo")
 	// private WebElement logoImage;
 
-	@FindBy (css = ".container .primary-logo")
+@FindBy (css = ".container .primary-logo")
 	private WebElement logoImage;								  																				  
 
 	@FindBy(css = ".container .secondary-logo")
@@ -891,7 +891,7 @@ public class AccountHomePage extends UhcDriver {
 			return null;
 		}
 	}
-	
+
 	public PaymentHistoryPage navigateTooPaymentHistoryPage() {
 
 		try {
@@ -1552,15 +1552,24 @@ public class AccountHomePage extends UhcDriver {
 			// NOTE:
 			// work-around, when Home, data maintained by Rally, is out of sync, payment tab may not show
 			// go to secondary page first then locate the payment tab.
-			System.out.println("payment link is not displayed on the dashboard header - attempt the workaround");  
+			System.out.println("payment link is not displayed on the dashboard header - attempt the workaround"); 
 			try {
-				coverageBenefits.click();
-			} catch (NoSuchElementException e) {
-				dashboard_coverageBenefits.click();
+				String Page_URL = "https://" + MRScenario.environment
+						+ "-medicare.uhc.com/aarp/member/payments/overview.html";
+				//String Page_URL = driver.getCurrentUrl().split(".com")[0];
+				driver.navigate().to(Page_URL);
+			} catch (Exception e1) {
+				try {
+					coverageBenefits.click();
+				} catch (NoSuchElementException e) {
+					dashboard_coverageBenefits.click();
+				}
+				WebDriverWait wait = new WebDriverWait(driver, 30);
+				paymentsLink3.click(); 
 			}
-			WebDriverWait wait = new WebDriverWait(driver, 30);
-			paymentsLink3.click(); 
+			System.out.println("Navigated to Payments Overview Page URL : " +driver.getCurrentUrl());
 			return new PaymentHistoryPage(driver); 
+
 		}
 
 		//tbd		 else{ CoverageAndBenefits.click();
@@ -1636,7 +1645,7 @@ public class AccountHomePage extends UhcDriver {
 
 				//validate(medicalEobLink);
 				/*if(medicalEobLink.isDisplayed()){
-					medicalEobLink.click();
+				medicalEobLink.click();
 				}else{ */
 					//scrollToView(medicalEobLinkOther);
 				  //medicalEobLinkOther.click();
@@ -2406,7 +2415,7 @@ public class AccountHomePage extends UhcDriver {
 			counter++;
 		} while (counter < 2);
 	}
-	
+
 
 
 	//This method the dashboard when a pre effective member lands on the Home page 
@@ -2415,7 +2424,7 @@ public class AccountHomePage extends UhcDriver {
         System.out.println(" @@@ The title of the page is "+driver.getTitle());         
         if (getTitle().equalsIgnoreCase("Home | UnitedHealthcare")) {        	 
      	   System.out.println("On the dashboard ");            
-        }
+}
         System.out.println("@@@ The URL of the page is ==>" + driver.getCurrentUrl());
         if (driver.getCurrentUrl().contains("https://member.int.uhc.com/aarp/dashboard"));
         System.out.println("Member is on the dashboard");

@@ -195,4 +195,36 @@ public class UpdateReviewPage extends UhcDriver {
 
 	}
 
+	
+	
+	/**
+	 * Member Auth Payments - Error Validation
+	 * @author sdwaraka
+	 * @param errorMessageExpected
+	 * @return
+	 */
+	
+	@FindBy(id = "memAuthPaymentSubmitError")
+	private WebElement CSR_Error_Message;
+
+	public boolean Validate_Error_selectAgreeAndClickOnMakePayment(String errorMessageExpected) {
+		validate(ChangeCard);
+		System.out.println("User is on Payment Update Review Page");
+		jsClickNew(AgreeCheckBox);
+		AuthorizeMonthlyPaymentstButton.click();
+		try {
+			Thread.sleep(20000);
+			System.out.println(driver.getCurrentUrl());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Expected Member Auth Error Message  : "+errorMessageExpected);
+
+		if(validate(CSR_Error_Message) && CSR_Error_Message.getText().contains(errorMessageExpected)){
+			System.out.println("Expected Member Auth Error Message is displayed : "+CSR_Error_Message.getText());
+			return true;
+		}
+		return false;
+	}
+
 }

@@ -28,6 +28,7 @@ import org.openqa.selenium.support.PageFactory;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.uhcretiree.Rallytool_Page;
 import pages.acquisition.bluelayer.ComparePlansPageBlayer;
+import pages.acquisition.ulayer.ComparePlansPage;
 import pages.acquisition.ulayer.PageTitleConstants;
 //import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import pages.acquisition.bluelayer.ProviderSearchPage;
@@ -426,7 +427,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//p//span[@id='emailError']")
 	private WebElement emailPlanSummaryInputErrorText;
-	
+
 	//MedSupp Resume application
 	
 		@FindBy(xpath = "(//*[contains(text(),'Start application')])[1]")
@@ -803,30 +804,30 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return null;
 	}
 
-	public void viewPlanSummary(String planType) {
-		if (planType.equalsIgnoreCase("PDP")) {
-			CommonUtility.waitForPageLoadNew(driver, pdpPlansViewLink, 30);
+        public void viewPlanSummary(String planType) {
+            if (planType.equalsIgnoreCase("PDP")) {
+                            CommonUtility.waitForPageLoadNew(driver, pdpPlansViewLink, 30);
 			sleepBySec(2); //note: add sleep for timing issue, tried increase timeout from waitForPageLoadNew but didn't work
-			pdpPlansViewLink.click();
-			System.out.println("PDP Plan Type Clicked");
-			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
-		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
-			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
+                            pdpPlansViewLink.click();
+                            System.out.println("PDP Plan Type Clicked");
+                            CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
+            } else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
+                            CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
 			sleepBySec(2);
-			maPlansViewLink.click();
-			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
-		} else if (planType.equalsIgnoreCase("MS")) {
-			CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
+                            maPlansViewLink.click();
+                            CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
+            } else if (planType.equalsIgnoreCase("MS")) {
+                            CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
 			sleepBySec(2);
-			msPlansViewLink.click();
-			CommonUtility.waitForPageLoadNew(driver, medSuppPlanList.get(0), 30);
-		} else if (planType.equalsIgnoreCase("SNP")) {
+                            msPlansViewLink.click();
+                            CommonUtility.waitForPageLoadNew(driver, medSuppPlanList.get(0), 30);
+            } else if (planType.equalsIgnoreCase("SNP")) {
 			sleepBySec(5);
-			CommonUtility.checkPageIsReady(driver);
-			snpPlansViewLink.click();
-			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
-		}                                                                              
-	}              
+        	            CommonUtility.checkPageIsReady(driver);
+        	            snpPlansViewLink.click();
+        	            CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
+                         }
+                      	}
 
 	@Override
 	public void openAndValidate() {
@@ -2081,6 +2082,34 @@ public void validatePlanPremium (String planName , String monthlyPremium){
 	            }
     }
     
+    public void toolTipForPremium0(String planName){
+		WebElement toolTip = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//descendant :: span[@class='standalone']//*[name()='use']"));
+		WebElement tooltipContent = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//descendant :: span[@class='standalone']//span"));
+		Actions action = new Actions(driver);
+		action.moveToElement(toolTip).build().perform();
+		String toolTipText = tooltipContent.getAttribute("textContent").trim();
+		if (toolTipText.contains("Why is my premium")){
+			System.out.println("ToolTip text is " + toolTipText);
+			Assert.assertTrue(true);
+		}
+		else
+			Assert.fail("Tool Tip is not working");	     	
+	}
+	
+	public void toolTipForAnnualDeductible(String planName) {
+		WebElement toolTip = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//descendant :: span[@class='standalone']//*[name()='use'])[2]"));
+		WebElement tooltipContent = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//descendant :: span[@class='standalone']//span)[2]"));
+		Actions action = new Actions(driver);
+		action.moveToElement(toolTip).build().perform();
+		String toolTipText = tooltipContent.getAttribute("textContent").trim();
+		if (toolTipText.contains("annual deductible")){
+			System.out.println("ToolTip text is " + toolTipText);
+			Assert.assertTrue(true);
+		}
+		else
+			Assert.fail("Tool Tip is not working");
+	}
+    
     public DrugCostEstimatorPage navigatetoDCEPage(String planName){
     	WebElement DCELink = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(), 'Prescription Drugs, Tier 1')]/span)[2]"));
     	DCELink.click();
@@ -2254,7 +2283,58 @@ public void validatePlanPremium (String planName , String monthlyPremium){
 	  else
 		  Assert.fail("Popup message has not been displayed");
      }
+
+public PlanComparePage selectplantocompare(String planType, String PlanName) {
+	//To add upto 4 plans to compare and navigate to Plan Compare Page
+	int count = 1;
+	if(planType.contains("PDP")){
+		System.out.println("Plan Type is :"+planType);
+		count = (Integer.parseInt(maPlansCount.getText())) + 1;
+		System.out.println("Plan count starts is :"+count);
+	}
+	int CountUntil = count+3;
+	do{
+		String temp = Integer.toString(count);
+		WebElement SelectCompare = driver.findElement(By.xpath("//*[@id = 'compare-plan-"+temp+"']//following-sibling::label"));
+		if(validate(SelectCompare))
+			SelectCompare.click();
+		count++;
+	}while(count<CountUntil);
+
+	try {
+		if(driver.findElement(By.xpath("//*[contains(text(), '"+PlanName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//label[contains(@for, 'compare-plan')]")).getText().equalsIgnoreCase("Add to compare")){
+			driver.findElement(By.xpath("//*[contains(text(), '"+PlanName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//label[contains(@for, 'compare-plan')]")).click();
+			System.out.println("Add to Compare is clicked for the plan : "+PlanName);
+		}
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	 try {
+		if(driver.findElement(By.xpath("//*[contains(text(), '"+PlanName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//label[contains(@for, 'compare-plan')]")).getText().equalsIgnoreCase("Added to compare")){
+				System.out.println("Add to Compare already clicked for the plan : "+PlanName);
+		 }
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	List <WebElement> ComparePlansLinks = driver.findElements(By.xpath("//button[contains(text(), 'Compare plans') and @type='submit']"));
+	//validate();
+	for(WebElement CompareLink : ComparePlansLinks){
+		if(CompareLink.isDisplayed()){
+			CompareLink.click();
+			CommonUtility.checkPageIsReady(driver);
+			if (driver.getCurrentUrl().contains("plan-compare")) {
+				return new PlanComparePage(driver);
+			}
+		}
+	}
+	System.out.println("Compare Plans Link not displayed");
+	return null;
+}
   
+
+
 //vvv note: added for US1598162
 public void sleepBySec(int sec) {
 	try {
@@ -2264,6 +2344,17 @@ public void sleepBySec(int sec) {
 		e.printStackTrace();
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
 
 public void validateEmailOptionExistOnPage(String planType) {
 	//System.out.println("TEST - playType="+planType);
@@ -2280,6 +2371,7 @@ public void validateEmailOptionExistOnPage(String planType) {
 	} else {
 		Assert.assertTrue("PROBLEM - test not coded for this '"+planType+"' planType testing", false);
 	}
+
 	Assert.assertTrue("PROBLEM - Unable to locate the email option. emailCheck="+validate(emailElement), validate(emailElement));
 }
 
