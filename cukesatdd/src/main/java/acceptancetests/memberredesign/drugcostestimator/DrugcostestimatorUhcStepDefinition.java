@@ -161,7 +161,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		LoginPage loginPage = new LoginPage(wd);
 		//loginPage.loginToStageTestHarness();
 		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
-		AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
+		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
 		getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
 
 
@@ -1200,7 +1200,7 @@ public class DrugcostestimatorUhcStepDefinition {
 			//WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 			LoginPage loginPage = new LoginPage(wd);
 			//	getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
-			AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
+			AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
 		}
 	}
