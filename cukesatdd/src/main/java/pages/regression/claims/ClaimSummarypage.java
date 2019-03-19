@@ -56,7 +56,8 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy(xpath = ".//*[@id='planNameFed']")
 	private WebElement planame;
 	
-	@FindBy (xpath = "//*[@id='document-date']//option[contains(@value,'custom-search')]")
+	//@FindBy (xpath = "//*[@id='document-date']//option[contains(@value,'custom-search')]")
+	@FindBy(xpath =".//*[@id='dateCustomSearchAtdd']")
 	private WebElement customSearch;
 	
 	@FindBy (xpath = "//div[@class='medical-claims']//h2[@ng-bind-html='planName']/parent::div//*[@id='document-date']//option[contains(@value,'24 months')]")
@@ -539,7 +540,8 @@ public class ClaimSummarypage extends UhcDriver{
 			if(leavingsitepopup.isDisplayed()){
 				proceedButtonDownloadPopUp.click();
 				switchToNewTab();
-				driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);				CommonUtility.waitForPageLoad(driver, downloadmydatabutton, 60);
+				driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
+				CommonUtility.waitForPageLoad(driver, downloadmydatabutton, 60);
 			if (downloadmydatabutton.isDisplayed())
 			{			
 				downloadmydatabutton.click();		

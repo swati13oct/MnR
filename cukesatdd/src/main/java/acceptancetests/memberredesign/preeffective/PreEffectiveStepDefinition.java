@@ -10,12 +10,14 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
+import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
@@ -31,6 +33,7 @@ import pages.regression.formsandresources.FormsAndResourcesPage;
 import pages.regression.login.HSIDLoginPage;
 import pages.regression.login.HsidRegistrationPersonalCreateAccount;
 import pages.regression.login.HsidRegistrationPersonalInformationPage;
+import pages.regression.login.SaveProfilePrefrencePage;
 import pages.regression.payments.PaymentHistoryPage;
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 /**
@@ -347,5 +350,26 @@ public void enter_username_password_re_enter_password_email_re_enter_email(DataT
 	hsidRegistrationPersonalCreateAccount.enterEmail(email);
 	hsidRegistrationPersonalCreateAccount.enterConfirmEmail(email);	
     
+}
+@When("^Preffective user lands on the splash page & clicks on Save Prefrences$")
+public void preffective_user_lands_on_splash_page(){
+	
+	SaveProfilePrefrencePage SplashPage = (SaveProfilePrefrencePage) loginScenario.getBean(PageConstantsMnR.GO_GREEN_SPLASH_PAGE);
+
+		System.out.println("*** navigated to Splash page ***");
+		SplashPage.verifyTitleOfPage();
+		SplashPage.validateonlinedelivery();
+		pages.regression.accounthomepage.AccountHomePage accountHomePage = SplashPage.NavigateToAccHomePage(); 	
+		if (accountHomePage!= null){
+			loginScenario.saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);    	
+			Assert.assertTrue(true);
+
+		}	
+}
+@When("^the Preffective member lands on the dashboard$")
+public void preffective_member_lands_on_dashboard() throws Throwable{
+	AccountHomePage accounthomepage = (AccountHomePage) loginScenario.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+System.out.println("	going to validate account home page ");
+	accounthomepage.validateHomePage1();
 }
 }
