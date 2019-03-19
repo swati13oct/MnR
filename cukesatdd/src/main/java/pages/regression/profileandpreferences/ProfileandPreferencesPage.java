@@ -1116,14 +1116,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	 * @toDo : Validates the permanent address section header
 	 */
 	public void validatepermanentaddress() {
-		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		jse.executeScript("window.scrollBy(0,400)", "");
-		try {
-			Thread.sleep(30000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		validateNew(permanentAddressSection);
 		System.out.println("*** Permananet Address is seen==> " + permanentAddressSection.isDisplayed());
 
@@ -2321,9 +2314,8 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	public void validatePhonepreffective () throws Throwable {
 
-		Thread.sleep(2000);    
+	   
 		System.out.println("Now checking Phone section for Pre-effective members");
-	  //  System.out.println("The Email section is dispalyed for preffective members on Account Set
 			validateNew(phoneSection1);
 			System.out.println("The phone section is seen ==>"+ phoneSection1.isDisplayed());
 			
@@ -2337,10 +2329,8 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	 */
 
 	public void validatepreffectiveemail () throws Throwable {
-
-		Thread.sleep(2000);    
+   
 		System.out.println("****Now checking Email section for Pre-effective members****");
-	  //  System.out.println("The Email section is dispalyed for preffective members on Account Set
 			validateNew(emailsection);
 			System.out.println("****The email section is seen ==>"+ emailsection.isDisplayed());
 			
