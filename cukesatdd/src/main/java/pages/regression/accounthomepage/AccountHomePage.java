@@ -2407,7 +2407,7 @@ public class AccountHomePage extends UhcDriver {
 		} while (counter < 2);
 	}
 	
-}
+
 
 	//This method the dashboard when a pre effective member lands on the Home page 
 	public void validateHomePage1() throws InterruptedException {
@@ -2433,7 +2433,6 @@ public class AccountHomePage extends UhcDriver {
 	
 }
 
-}
 
 
 
