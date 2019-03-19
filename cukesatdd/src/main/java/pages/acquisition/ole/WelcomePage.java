@@ -70,7 +70,7 @@ public class WelcomePage extends UhcDriver{
 	@FindBy(id = "tty-number")
 	private WebElement RightRailTFN;
 	
-	@FindBy(xpath = "//h4[text()='Coverage Details']")
+	@FindBy(xpath = "//*[text()='Coverage Details']")
 	private WebElement CoverageDetailswdt;
 	
 	@FindBy(xpath = "//li[contains(text(), normalize-space('Dental'))]//img")
