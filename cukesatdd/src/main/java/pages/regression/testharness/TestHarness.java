@@ -28,6 +28,7 @@ import pages.memberrdesignVBF.PharmacySearchPage;
 import pages.memberrdesignVBF.ProfilePreferencesPage;
 import pages.memberrdesignVBF.ProviderSearchPage;
 import pages.memberrdesignVBF.RallyDashboardPage;
+import pages.regression.payments.PaymentHistoryPage;
 
 
 public class TestHarness extends UhcDriver {
@@ -213,17 +214,17 @@ public class TestHarness extends UhcDriver {
 	 * @return
 	 * @throws InterruptedException
 	 */
-	public PaymentsOverview navigateToPaymentOverview() throws InterruptedException {
-		System.out.println("Inside navigateToPaymentOverview functions");
-		CommonUtility.waitForPageLoad(driver, PaymentPageLink, 30);
-		if(validateNew(PaymentPageLink))
-			PaymentPageLink.click();
+	public PaymentHistoryPage navigateToPaymentOverview() throws InterruptedException {
+		
+		CommonUtility.waitForPageLoad(driver, premPaymentsTab, 30);
+		if(validateNew(premPaymentsTab))
+			premPaymentsTab.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoad(driver, heading, 60);
-		if (driver.getTitle().contains("Payments")) {
-			return new PaymentsOverview(driver);
+		if (driver.getCurrentUrl().contains("payments")) {
+			return new PaymentHistoryPage(driver);
 		}
-		// }
+		
 		return null;
 	}
 

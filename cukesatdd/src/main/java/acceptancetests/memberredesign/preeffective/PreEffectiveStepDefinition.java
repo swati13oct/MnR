@@ -18,6 +18,7 @@ import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -30,6 +31,7 @@ import pages.regression.formsandresources.FormsAndResourcesPage;
 import pages.regression.login.HSIDLoginPage;
 import pages.regression.login.HsidRegistrationPersonalCreateAccount;
 import pages.regression.login.HsidRegistrationPersonalInformationPage;
+import pages.regression.payments.PaymentHistoryPage;
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 /**
  * 
@@ -85,6 +87,14 @@ public void verifyPaymentsTabNotDisplayedOnDashTestHarnessPage() throws Throwabl
 	
 }
 
+@And("^user goes to payments page and verifies that correct view is displayed$")
+public void verifyPaymentsPage() throws Throwable {
+	TestHarness  testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
+	PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) testHarnessPage.navigateToPaymentOverview();	
+	getLoginScenario().saveBean(PageConstants.PAYMENT_HISTORY_PAGE, paymentHistoryPage);
+	
+}
+
 @Then("^user clicks on the benefits and coverage tab on the dashboard home page$")
 public void userClicksOnBenefitAndCoveragePage() throws Throwable {
 	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
@@ -95,12 +105,19 @@ public void userClicksOnBenefitAndCoveragePage() throws Throwable {
 	
 }
 
+@Then("^user clicks on the benefits and coverage tab from Payments page$")
+public void userGoesToBenefitAndCoveragePage() throws Throwable {
+	PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.PAYMENT_HISTORY_PAGE);
+	BenefitsAndCoveragePage benefitsCoveragePage = paymentHistoryPage.clickOnBenefitsAndCoverageTab();
+	getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
+	
+}
+
 @Then("^verify that subnavigation is supressed on the coverage and benefits page$")
 public void validateBenefitsAndCoverageSubNavigationIsNotDisplayed() throws Throwable {
 	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 			.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
-	Thread.sleep(5000);
-	BenefitsAndCoveragePage.checkModelPopup(benefitsCoveragePage.driver);
+	//BenefitsAndCoveragePage.checkModelPopup(benefitsCoveragePage.driver);
 	benefitsCoveragePage.validatePlanBenefitsSummarySubNavNotDisplayed();
 	benefitsCoveragePage.validatePlanDocumentsResourcesSubNavNotDisplayed();
 	benefitsCoveragePage.validateOrderPlanMaterialsSubNavNotDisplayed();
@@ -110,7 +127,7 @@ public void validateBenefitsAndCoverageSubNavigationIsNotDisplayed() throws Thro
 public void validateCorrectMessageIsDisplayedOnBenefitsCoevargePage() throws Throwable {
 	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 			.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
-	Thread.sleep(2000);
+	
 	benefitsCoveragePage.verifyCorrectMessageForPreEffectiveMembers();
 
 }
@@ -212,6 +229,14 @@ public void userClicksOn_Account_settings() throws Throwable {
 	getLoginScenario().saveBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE,ppp);	
 }
 
+@Given("^the user clicks on Account Profile tab & selects Account Settings from the drop down from claims page$")
+public void userClicksOn_Account_settings_from_claims_page() throws Throwable {
+	ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario()
+			.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+	ProfileandPreferencesPage profileAndPrefPage = newClaimsSummaryPage.navigateDirectToProfilePage();
+	getLoginScenario().saveBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE,profileAndPrefPage);	
+}
+
 @Given("^user is navigated to Account Settings page$")
 public void userlands_on_Account_Settings_Page() throws Throwable {
 	ProfileandPreferencesPage ppp = (ProfileandPreferencesPage) getLoginScenario().getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);      
@@ -225,7 +250,6 @@ public void verify_preffectiev_member_can_access_the_page() throws Throwable {
 	ProfileandPreferencesPage.checkForIPerceptionModel(ppp.driver);
 	ppp.validatepermanentaddress();
 	ppp.validatePhonepreffective();
-	ppp.validatepreffectiveemail();
 }
 
 @Given("^verify that the pre effecctive group member can access the account settings page to view security and sign-in preferences$")

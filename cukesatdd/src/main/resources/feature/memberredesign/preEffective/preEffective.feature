@@ -111,9 +111,10 @@ Scenario Outline:Verify HSID registration.
       | PhoneNumber    | <phonenumber> |
     And verify that preeffective message is displayed on the test harness page
     And verify that payment tab is displayed to Preeffective member on test harness page
-    And user clicks on the benefits and coverage tab on the dashboard home page
-    And verify that subnavigation is supressed on the coverage and benefits page
+    And user goes to payments page and verifies that correct view is displayed
+    And user clicks on the benefits and coverage tab from Payments page
     And verify that correct preeffective message and plan documents button are displayed on coverage and benefits page
+    And verify that subnavigation is supressed on the coverage and benefits page
     And verify that correct phone number is displayed in technical support section of coverage and benefits page
     And user click on the plan documents button
     And user is navigated to Forms and Resource page
@@ -121,8 +122,9 @@ Scenario Outline:Verify HSID registration.
     And verify that subnavigation is supressed on the claims page
     And verify that correct preeffective message is displayed on claims page
     And verify that correct phone number is displayed in technical support section of claims page
-    And verify that payment tab is not displayed to Preeffective member from secondary pages
-
+	And the user clicks on Account Profile tab & selects Account Settings from the drop down from claims page
+    And verify that the pre effecctive member can access the account settings page to view security and sign-in preferences
+    
     Examples: 
        | memberType          | friendname | favcolor | phonenumber |
        | PreEffectivePDP     | name1      | color1   | number1     |

@@ -17,6 +17,7 @@ import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import junit.framework.Assert;
 import pages.regression.footer.FooterPage;
+import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 
 @SuppressWarnings("deprecation")
 
@@ -28,7 +29,7 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy(xpath = ".//*[@id='globalContentIdForSkipLink']/div[3]/div[1]/div/div/div/div/div/p")
 	private WebElement messageForPreeffective;
 	
-	@FindBy(linkText = "1-888-980-8125")
+	@FindBy(xpath = "//p[contains(text(),'1-888-980-8125')]")
 	public WebElement preEffectiveTechSupportNumber;
 
 	@FindBy (xpath=".//*[@id='MA']")
@@ -1287,7 +1288,8 @@ public void NavigateToClaimsPage(){
 			    Thread.sleep(2000);  
 			    System.out.println("Now checking for message on Claims Page for Pre-effective members");
 			    System.out.println("The message displayed on screen is "+messageForPreeffective.getText());
-				Assert.assertEquals(messageForPreeffective.getText(),"When your plan starts, this is where you can search for recent or past claims activity and view your Explanation of Benefits documents.");
+				if(!messageForPreeffective.getText().contains("When your plan starts,"))
+              	  Assert.fail("Correct message is not displayed");
 				System.out.println("Assert for preeffective message on claims page was passed");
 				
 			}
@@ -1367,6 +1369,21 @@ public void NavigateToClaimsPage(){
 				}else{
 					return true;
 				}
+			}
+
+			public ProfileandPreferencesPage navigateDirectToProfilePage() {
+			
+				if(driver.findElement(By.id("accountprofile")).isDisplayed()){
+					 driver.findElement(By.id("accountprofile")).click();
+					 driver.findElement(By.linkText("Account Settings")).click();
+				}else
+					Assert.fail("Account profile dropdown not found");
+				CommonUtility.waitForPageLoadNew(driver, driver.findElement(By.xpath("//h1[contains(text(),'Account Settings')]")),20 );
+				if (driver.getCurrentUrl().contains("profile")) {
+					 System.out.println("Landed on Account Settings page");
+					 return new ProfileandPreferencesPage(driver);
+				 }
+				return null;
 			}
 			
 }
