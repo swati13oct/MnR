@@ -274,28 +274,28 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public WebElement Submitbutton;
 
 	//vvv note: added for US1598162
-	@FindBy(xpath = "//div[@ng-show='showMaPlans']//a[@id='printsummary']")
+	@FindBy(xpath = "//div[@ng-show='showMaPlans']//a[contains(@dtmname,'Print Saved Plan List')]")
 	private WebElement maPrintOption;
 
-	@FindBy(xpath = "//div[@ng-show='showMaPlans']//a[@id='emailsummary']")
+	@FindBy(xpath = "//div[@ng-show='showMaPlans']//a[contains(@dtmname,'Email Saved Plan List')]")
 	private WebElement maEmailOption;
 
-	@FindBy(xpath = "//div[@ng-show='showPdpPlans']//a[@id='printsummary']")
+	@FindBy(xpath = "//div[@ng-show='showPdpPlans']//a[contains(@dtmname,'Print Saved Plan List')]")
 	private WebElement pdpPrintOption;
 
-	@FindBy(xpath = "//div[@ng-show='showPdpPlans']//a[@id='emailsummary']")
+	@FindBy(xpath = "//div[@ng-show='showPdpPlans']//a[contains(@dtmname,'Email Saved Plan List')]")
 	private WebElement pdpEmailOption;
 	
-	@FindBy(xpath = "//div[@ng-show='showSnpPlans']//a[@id='printsummary']")
+	@FindBy(xpath = "//div[@ng-show='showSnpPlans']//a[contains(@dtmname,'Print Saved Plan List')]")
 	private WebElement snpPrintOption;
 
-	@FindBy(xpath = "//div[@ng-show='showSnpPlans']//a[@id='emailsummary']")
+	@FindBy(xpath = "//div[@ng-show='showSnpPlans']//a[contains(@dtmname,'Email Saved Plan List')]")
 	private WebElement snpEmailOption;
 
 	@FindBy(xpath = "//a[@id='ghn_lnk_1']")
 	private WebElement homeBtn;
 
-	@FindBy(xpath ="//a[contains(@dtmname,'Shop For a Plan')]")
+	@FindBy(xpath ="//ul[contains(@class,'primary-nav')]//a[contains(@href,'health-plans.html')]")
 	private WebElement topMenushopForAPlanOption;
 	
 	@FindBy(xpath="//input[contains(@class,'zip-field')]")
