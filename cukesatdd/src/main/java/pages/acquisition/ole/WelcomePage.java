@@ -5,6 +5,7 @@ package pages.acquisition.ole;
 
 import java.util.Map;
 
+import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -68,6 +69,21 @@ public class WelcomePage extends UhcDriver{
 	
 	@FindBy(id = "tty-number")
 	private WebElement RightRailTFN;
+	
+	@FindBy(xpath = "//h4[text()='Coverage Details']")
+	private WebElement CoverageDetailswdt;
+	
+	@FindBy(xpath = "//li[contains(text(), normalize-space('Dental'))]//img")
+	private WebElement DentalImg;
+	
+	@FindBy(xpath = "//li[contains(text(), normalize-space('Vision'))]//img")
+	private WebElement VisionImg;
+	
+	@FindBy(xpath = "//li[contains(text(), normalize-space('Fitness'))]//img")
+	private WebElement FitnessImg;
+	
+	@FindBy(xpath = "//li[contains(text(), normalize-space('Hearing'))]//img")
+	private WebElement HearingImg;
 		
 	public WelcomePage(WebDriver driver) {
 		
@@ -252,5 +268,37 @@ public class WelcomePage extends UhcDriver{
 			return new LeavingOLEmodal(driver);
 		}
 		return null;
+	}
+	
+public void validateBenefits(boolean riderFlag,WebElement riderBenefit){
+		
+		if(riderFlag){
+			Assert.assertTrue("Rider Benefit is not available for this plan" 
+					, riderBenefit.getAttribute("src").contains("check-mark"));
+			System.out.println("Benfit is Available");
+		}
+		else{
+			Assert.assertTrue("Rider Benefit is available for this plan" 
+					, riderBenefit.getAttribute("src").contains("x-mark"));
+			System.out.println("Benfit is UnAvailable");
+		}
+	}
+	
+	public void validate_Ancillary_Benefits(String DentalFlag, String VisionFlag,String FitnessFlag,String HearingFlag) {
+		boolean di = Boolean.parseBoolean(DentalFlag);
+		boolean vi = Boolean.parseBoolean(VisionFlag);
+		boolean fi = Boolean.parseBoolean(FitnessFlag);
+		boolean hi = Boolean.parseBoolean(HearingFlag);
+		
+		validate(CoverageDetailswdt);
+		validate(DentalImg);
+		validate(VisionImg);
+		validate(FitnessImg);
+		validate(HearingImg);
+		
+		validateBenefits(di, DentalImg);
+		validateBenefits(vi, VisionImg);
+		validateBenefits(fi, FitnessImg);
+		validateBenefits(hi, HearingImg);	
 	}
 }
