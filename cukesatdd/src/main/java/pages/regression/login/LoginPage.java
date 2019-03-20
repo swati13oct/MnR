@@ -80,7 +80,16 @@ public class LoginPage extends UhcDriver {
 			openAndValidate();
 			
 		}
-		
+
+		private boolean teamSpecialCase;
+		public LoginPage(WebDriver driver, boolean input_teamSpecialCase) {
+			super(driver);
+			PageFactory.initElements(driver, this);
+			teamSpecialCase=input_teamSpecialCase;
+			openAndValidate();
+			
+		}
+
 		public void openAndValidate() {
 			if ("YES".equalsIgnoreCase(MRScenario.isTestHarness) & "YES".equalsIgnoreCase(MRScenario.isHSIDCompatible)) {
 				if ("team-ci1".equalsIgnoreCase(MRScenario.environment)
@@ -95,7 +104,12 @@ public class LoginPage extends UhcDriver {
 						|| "team-ci2".equalsIgnoreCase(MRScenario.environment)) {
 					PAGE_URL = MRConstants.LEGACY_TESTHARNESS;
 				}  else if("team-a".equalsIgnoreCase(MRScenario.environment)){
-					PAGE_URL=MRConstants.OSE_NEW_URL;				
+					System.out.println("Running on team-a env, teamSpecialCase="+teamSpecialCase);
+					if (teamSpecialCase) {
+						PAGE_URL=MRConstants.OSE_NEW_URL_PCP_OR_MEDIA;
+					} else {
+						PAGE_URL=MRConstants.OSE_NEW_URL;	
+					}
 				}else {
 					PAGE_URL = MRConstants.LEGACY_TESTHARNESS.replace("awe-", "");
 				}
@@ -200,6 +214,11 @@ public class LoginPage extends UhcDriver {
 			}
 			System.out.println("Current URL: " + currentUrl());
 			if (currentUrl().contains("member/testharness.html")) {
+				//vvv note: temp-workaround for team-a env for now
+				if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a")) {
+					return new AccountHomePage(driver);
+				}
+				//^^^ note: temp-workaround for team-a env for now
 				return new TestHarness(driver);
 			} else if (currentUrl().contains("terminated-plan.html")) {
 				return new TerminatedHomePage(driver);

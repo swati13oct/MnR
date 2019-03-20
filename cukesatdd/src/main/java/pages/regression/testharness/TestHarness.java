@@ -187,6 +187,12 @@ public class TestHarness extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
+		//vvv note: temp-workaround for team-a env, by-pass this for now
+		if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a")) {
+			CommonUtility.waitForPageLoad(driver, panelHome, 30);
+			return;
+		}
+		//^^^ note: temp-workaround for team-a env, by-pass this for now
 		category = CommonStepDefinition.getMemberAttributeMap().get("Member Type");
 		if (category.equalsIgnoreCase("PCP") || category.equalsIgnoreCase("MEDICA")) {
 			CommonUtility.waitForPageLoad(driver, panelHomePcpMedica, 30);
