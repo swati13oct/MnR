@@ -1,5 +1,7 @@
 package pages.acquisition.bluelayer;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -87,5 +89,51 @@ public class PlanComparePage extends UhcDriver{
 		return null;
 	}
 
+	public boolean validatingMedicalBenefitTextInPlanDetails(String benefitType, String expectedText, String planName) {
+		boolean validationFlag = true;
+		WebElement MedicalBenefitTypeRow;
+		WebElement ActualTextforBenefit;
+		String displayedText;
+		
+		int index = findindexofPlan_PlanCompare(planName);
+		index++;
+		MedicalBenefitTypeRow = driver.findElement(By.xpath("//p[(contains(text(), '"+benefitType+"'))]/ancestor::tr"));
+		System.out.println("The additional Benefit to Valuidate : "+benefitType);
+		ActualTextforBenefit =  driver.findElement(By.xpath("//p[(contains(text(), '"+benefitType+"'))]/ancestor::tr//td["+index+"]"));
+		displayedText = ActualTextforBenefit.getText();
+		System.out.println("Text Displayed for the Medical Benefit on Plan Compare Page : ");
+		System.out.println(displayedText);
+		String[] Expected = expectedText.split("/");
+		for(String str :Expected){
+			if(!displayedText.contains(str.trim())){
+				validationFlag = false;
+				System.out.println("Expected Text - "+str+" is NOT displayed");
+			}
+		}
+		return validationFlag;		}
+
+
+	private int findindexofPlan_PlanCompare(String planName) {
+		int index = 1;
+		List <WebElement> PlanHeadings = driver.findElements(By.xpath("//div[@ng-repeat = 'i in count']"));
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("Total Plans displayed - Total elements for Plan Name are : "+PlanHeadings.size());
+		for(WebElement currentPlanColumn : PlanHeadings){
+			WebElement PlanNameDisplay = driver.findElement(By.xpath("//div[@ng-repeat = 'i in count']["+index+"]//a[contains(@class,'ng-binding')]"));
+			if(validateNew(PlanNameDisplay) && PlanNameDisplay.getText().contains(planName)){
+				System.out.println("Index for the Plan -"+planName+" in Plan Compare is : "+index);
+				return index;
+			}
+			index++;
+		}
+		return index;
+	}
+
+	
 
 }

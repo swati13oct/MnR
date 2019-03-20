@@ -74,7 +74,7 @@ public class RedesignLoginStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		LoginPage loginPage = new LoginPage(wd);
 		loginPage.validateelements();
-        AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
+        AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
 		
 		if (accountHomePage!= null) {
 			System.out.println("Account home Page is displayed for the redesign Member" + pwd);

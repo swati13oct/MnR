@@ -2008,20 +2008,35 @@ public class oleStepDefinition {
 	}
 
 
-	@Then("^the user validates the presence for Preliminary Questions on Page$")	
-	public void the_user_validates_the_presence_for_Preliminary_Questions_on_Page(DataTable givenAttributes) throws Throwable {
-		List<DataTableRow> givenAttributesRow = givenAttributes
-				.getGherkinRows();
+	@Then("^the user validates the presence for Preliminary Questions on Page$")
+	public void the_user_validates_the_presence_for_Preliminary_Questions_on_Page(DataTable givenAttributes)
+			throws Throwable {
+		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-}
+		}
 
 		String planname = givenAttributesMap.get("Plan Name");
-		PrelimineryQuestionsPage prelimineryQuestionsPage = (PrelimineryQuestionsPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE);
+		PrelimineryQuestionsPage prelimineryQuestionsPage = (PrelimineryQuestionsPage) getLoginScenario()
+				.getBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE);
 		prelimineryQuestionsPage.VerifyPreliminaryQuestions(planname);
+	}
+
+	@Then("^the user Validates Ancillary benfit widget for \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" and \"([^\"]*)\"$")
+	public void the_user_Validates_Ancillary_benfit_widget_for_and(String DentalFlag, String VisionFlag,
+			String FitnesFlag, String HearingFlag) throws Throwable {
+
+		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
+		String planType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
+		if (planType.equals("PDP")) {
+			System.out.println("Ancillary Benefits Widget is not availble for PDP plan");
+		} else {
+			welcomePage.validate_Ancillary_Benefits(DentalFlag, VisionFlag, FitnesFlag, HearingFlag);
+		}
+
 	}
 } 
 

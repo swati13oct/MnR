@@ -36,7 +36,7 @@ public class ReviewOneTimePaymentPage extends UhcDriver {
 
 	@FindBy(id = "custom-page-title")
 	private WebElement confirmPageHeader;
-
+	
 	public ReviewOneTimePaymentPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -84,6 +84,36 @@ public class ReviewOneTimePaymentPage extends UhcDriver {
 	public void openAndValidate() {
 		validate(ChangeCard);
 
+	}
+	
+
+/**
+ * Member Auth Payments - Error Validation
+ * @author sdwaraka
+ * @param errorMessageExpected
+ * @return
+ */
+	@FindBy(id = "memAuthPaymentSubmitError")
+	private WebElement CSR_Error_Message;
+	
+	public boolean Validate_Error_selectAgreeAndClickOnMakePayment(String errorMessageExpected) {
+		validate(ChangeCard);
+		System.out.println("User is on Review one Time CC Page");
+		jsClickNew(AgreeCheckBox);
+		ContinueButton.click();
+		try {
+			Thread.sleep(20000);
+			System.out.println(driver.getCurrentUrl());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Expected Member Auth Error Message  : "+errorMessageExpected);
+
+		if(validate(CSR_Error_Message) && CSR_Error_Message.getText().contains(errorMessageExpected)){
+			System.out.println("Expected Member Auth Error Message is displayed : "+CSR_Error_Message.getText());
+			return true;
+		}
+		return false;
 	}
 
 }

@@ -19,6 +19,7 @@ import pages.acquisition.bluelayer.PlanComparePage;
 import pages.acquisition.bluelayer.PlanDetailsPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.ole.WelcomePage;
+
 import pages.acquisition.bluelayer.ComparePlansPageBlayer;
 import pages.acquisition.bluelayer.DrugCostEstimatorPage;
 import pages.acquisition.bluelayer.FindCarePage;
@@ -604,7 +605,7 @@ public class VppStepDefinitionUHC {
 		System.out.println("TFN for Plan Type is : " + TFN);
 		System.out.println("Plan Year is : " + PlanYear);
 		System.out.println("OLE is being started from Acquisition Site : " + SiteName);
-		PlanComparePage comparePlansPage = planSummaryPage.selectplantocompare(PlanType);
+		PlanComparePage comparePlansPage = planSummaryPage.selectplantocompare(PlanType, PlanName);
 
 		if (comparePlansPage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, comparePlansPage);
@@ -1028,7 +1029,29 @@ public class VppStepDefinitionUHC {
 			else
 				Assert.fail("Error in validating the OLE Campaign Landing");
 		}
+		
+		
+		@Then("^the user validates the following Medical Benefits for the plan in Plan Compare Page on UHC$")
+		public void the_user_validates_the_following_Medical_benefits_for_the_plan_in_Plan_Compare_Page(DataTable givenAttributes) throws Throwable {
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
 
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+						memberAttributesRow.get(i).getCells().get(1));
+			}
+
+			String benefitType = memberAttributesMap.get("Benefit Type");
+			String expectedText = memberAttributesMap.get("Expected Text");
+			String PlanName = memberAttributesMap.get("Plan Name");
+			System.out.println("Validating the following Medical benefits on Plan Compare Page : "+benefitType);
+
+			PlanComparePage comparePlansPage = (PlanComparePage) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);
+			boolean validationFlag = comparePlansPage.validatingMedicalBenefitTextInPlanDetails(benefitType, expectedText, PlanName);
+			Assert.assertTrue("Validation failed : Expected text not displayed for Medical Benefit - "+benefitType,validationFlag);
+		
+		}	
 		//vvv note: added for US1598162
 		public Map<String, String> prepareTestInput(DataTable givenAttributes) {
 			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -1509,4 +1532,98 @@ public class VppStepDefinitionUHC {
 			plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType);
 		}
 		//^^^ note: added for US1598162		
+		
+		@Then("^the user clicks on Start Application Button proceed to next pages for getting resume application key")
+		public void Start_application_button(DataTable givenAttributes) throws Throwable{
+			List<DataTableRow> memberAttributesRow = givenAttributes
+					.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+						memberAttributesRow.get(i).getCells().get(1));
+			}
+
+			String DateOfBirth = memberAttributesMap.get("DOB");
+			String FirstName = memberAttributesMap.get("Firstname");
+			String LastName = memberAttributesMap.get("Lastname");
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			String resumeKey = plansummaryPage.StartApplicationButton(DateOfBirth,FirstName, LastName);
+			getLoginScenario().saveBean(VPPCommonConstants.RESUMEKEY, resumeKey);
+		
+		}
+		@Then("^the user clicks on resume application button")
+		public void click_resume_application() throws Throwable{
+			System.out.println("***the user clicks on resume application button***");
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			plansummaryPage.ResumeApplicationButton();
+		
+		}
+		
+		@Then("^the user enters data to resume the application")
+		public void enters_data_to_resume_application(DataTable givenAttributes) throws Throwable{
+			System.out.println("***the user enters data to resume the application***");
+			List<DataTableRow> memberAttributesRow = givenAttributes
+					.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+						memberAttributesRow.get(i).getCells().get(1));
+			}
+			
+			String applicationType = memberAttributesMap.get("applicationType");
+			String DOB = memberAttributesMap.get("DOB");
+			String zipcode = memberAttributesMap.get("zipcode");
+			
+			String ApplicationID = (String) getLoginScenario().getBean(VPPCommonConstants.RESUMEKEY);
+			
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			
+			
+			if(applicationType.equalsIgnoreCase("Retrive")){
+				ApplicationID = memberAttributesMap.get("ApplicationID");
+			}
+			plansummaryPage.EnterDataForResumeApp(ApplicationID,DOB,zipcode);
+		
+		}
+		
+		@Then("^The user validates the resume application processed")
+		public void resume_application_processed(DataTable givenAttributes) throws Throwable{
+			System.out.println("***The user validates the resume application processed***");
+			List<DataTableRow> memberAttributesRow = givenAttributes
+					.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+						memberAttributesRow.get(i).getCells().get(1));
+			}
+			String FirstName = memberAttributesMap.get("Firstname");
+			String LastName = memberAttributesMap.get("Lastname");
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			plansummaryPage.ResumeApplicationButtonValidation(FirstName, LastName);
+		
+		}
+		
+		@Then("^The user validates the Retrive application")
+		public void retrive_application_processed(DataTable givenAttributes) throws Throwable{
+			System.out.println("***The user validates the Retrive application***");
+			List<DataTableRow> memberAttributesRow = givenAttributes
+					.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+						memberAttributesRow.get(i).getCells().get(1));
+			}
+			String ApplicationID = memberAttributesMap.get("ApplicationID");
+			
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			plansummaryPage.RetrieveApplicationButtonValidation(ApplicationID);
+		
+		}
+		
+		
 }
+		

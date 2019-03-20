@@ -209,8 +209,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(id = "multiCountyCancelBtn")
 	private WebElement MultiCOunty_CancelBtn;
-	@FindBy(xpath = "//div[@id='responsiveplan']")
-	private List<WebElement> medSuppPlanList;
+	/*@FindBy(xpath = "//div[@id='responsiveplan']")
+	private List<WebElement> medSuppPlanList;*/
+	
+	@FindBy(xpath = "(//div[@id='responsiveplan'])[1]")
+	private WebElement medSuppPlanList;
 
 	@FindBy(xpath = "(//div[contains(@class,'mabenefittable')]//li[contains(@class,'ng-scope')]/p[contains(text(),'drugs covered')])[1]")
 	private WebElement drugCoveredInfo;
@@ -344,6 +347,92 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
 	//^^^ note: added for US1598162	
 	
+	//MedSupp Resume application
+
+		@FindBy(xpath = "(//*[contains(text(),'Start application')])[1]")
+		private WebElement Start_ApplicationBtn;
+
+
+		@FindBy(id = "msVppDOB")
+		private WebElement DOB;
+
+		@FindBy(id = "mpbed-monthSelectBoxIt")
+		private WebElement monthDrpDwn;
+
+		@FindBy(xpath = "//ul[@id='mpbed-monthSelectBoxItOptions']//li[2]")
+		private WebElement monthDrpDwnOption;
+
+		@FindBy(xpath = "//span[@id='mpbed-yearSelectBoxIt']")
+		private WebElement yearDrpDwn;
+
+		@FindBy(xpath = "//ul[@id='mpbed-yearSelectBoxItOptions']//li[2]")
+		private WebElement yearDrpDwnOption;
+
+		@FindBy(id = "msVppdpsdSelectBoxItText")
+		private WebElement startDrpDwn;
+
+		@FindBy(xpath = "//ul[@id='msVppdpsdSelectBoxItOptions']//li[2]")
+		private WebElement startDrpDwnOption;
+
+		@FindBy(xpath = "//input[@id='CurrentlyInsured_2']//..")
+		private WebElement insuredStatus;
+
+		@FindBy(xpath = "//button[@class='cta-button next-button action_next']")
+		private WebElement nextButton;
+
+		@FindBy(id = "FirstName")
+		private WebElement firstName;
+
+		@FindBy(id = "LastName")
+		private WebElement lastName;
+
+		@FindBy(id = "AddressLine1")
+		private WebElement address1;
+
+		@FindBy(id = "City")
+		private WebElement cityName;
+
+		@FindBy(xpath = "//input[@id='alt-address-no']//..//label")
+		private WebElement alternatemailingAddressBtn;
+
+		@FindBy(xpath = "//input[@id='Email']")
+		private WebElement emailAddress;
+
+		@FindBy(xpath = "//input[@id='PhonePrimary']")
+		private WebElement phoneNumber;
+
+		@FindBy(xpath = "//a[@class='cancel-button modal-link inline-block']")
+		private WebElement cancelButton;
+
+		@FindBy(xpath = "//a[contains(text(),'Cancel Application')]")
+		private WebElement cancelButtonPopUp;
+
+		@FindBy(xpath = "//a[contains(text(),'Resume Application')]")
+		private WebElement resumeApplication;
+
+
+		@FindBy(xpath = "(//input[@id='DOB'])[1]")
+		private WebElement ResumeDOB;
+
+		@FindBy(xpath = "(//input[@id='applicationId'])[1]")
+		private WebElement applicationID;
+
+		@FindBy(xpath = "//button[contains(text(),'Resume Application')]")
+		private WebElement resumeApplicationBtn;
+
+		@FindBy(xpath = "(//input[@id='ZipCode'])[1]")
+		private WebElement ResumeZipCode;
+
+		@FindBy(xpath = "//p[contains(text(),'Return to this application using the code below')]//..//span")
+		private WebElement resumeKey;
+
+		@FindBy(xpath = "//span[contains(text(),'Welcome to Online Enrollment')]")
+		private WebElement welcomeHeader;
+
+		@FindBy(xpath = "//span[text()='Welcome to Online Enrollment']")
+		private WebElement welcomepage;
+	
+	
 	public VPPPlanSummaryPage(WebDriver driver) {
 		super(driver);
 
@@ -425,7 +514,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
 			sleepBySec(2);
 			msPlansViewLink.click();
-			CommonUtility.waitForPageLoadNew(driver, medSuppPlanList.get(0), 30);
+			CommonUtility.waitForPageLoadNew(driver, medSuppPlanList, 30);
+			/*msPlansViewLink.click();
+			CommonUtility.waitForPageLoadNew(driver, medSuppPlanList.get(0), 30);*/
 		} else if (planType.equalsIgnoreCase("SNP")) {
 			sleepBySec(5);
 			CommonUtility.waitForPageLoadNew(driver, snpPlansViewLink, 30);
@@ -1162,6 +1253,55 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		System.out.println("Compare Plans Link not displayed");
 		return null;
 	}
+	
+	public ComparePlansPage selectplantocompare(String PlanType, String PlanName) {
+		//To add upto 4 plans to compare and navigate to Plan Compare Page
+		int count = 1;
+		if(PlanType.contains("PDP")){
+			System.out.println("Plan Type is :"+PlanType);
+			count = (Integer.parseInt(maPlansCount.getText())) + 1;
+			System.out.println("Plan count starts is :"+count);
+		}
+		int CountUntil = count+3;
+		do{
+			String temp = Integer.toString(count);
+			WebElement SelectCompare = driver.findElement(By.xpath("//*[@id = 'compare-plan-"+temp+"']//following-sibling::label"));
+			if(validate(SelectCompare))
+				SelectCompare.click();
+			count++;
+		}while(count<CountUntil);
+
+		try {
+			if(driver.findElement(By.xpath("//*[contains(text(), '"+PlanName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//label[contains(@for, 'compare-plan')]")).getText().equalsIgnoreCase("Add to compare")){
+				driver.findElement(By.xpath("//*[contains(text(), '"+PlanName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//label[contains(@for, 'compare-plan')]")).click();
+				System.out.println("Add to Compare is clicked for the plan : "+PlanName);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 try {
+			if(driver.findElement(By.xpath("//*[contains(text(), '"+PlanName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//label[contains(@for, 'compare-plan')]")).getText().equalsIgnoreCase("Added to compare")){
+					System.out.println("Add to Compare already clicked for the plan : "+PlanName);
+			 }
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List <WebElement> ComparePlansLinks = driver.findElements(By.xpath("//button[contains(text(), 'Compare plans') and @type='submit']"));
+		//validate();
+		for(WebElement CompareLink : ComparePlansLinks){
+			if(CompareLink.isDisplayed()){
+				CompareLink.click();
+				CommonUtility.checkPageIsReady(driver);
+				if (driver.getCurrentUrl().contains("plan-compare")) {
+					return new ComparePlansPage(driver);
+				}
+			}
+		}
+		System.out.println("Compare Plans Link not displayed");
+		return null;
+	}
 
 	public DrugCostEstimatorPage navigateToDCEFromVPP(String plantype, String planName){
 		if(plantype.equals("MA")||plantype.equals("MAPD")){
@@ -1481,9 +1621,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public void validatePrescriptionDrugsTier1(String planName , String prescriptionDrugsTier1) {
 		WebElement DrugsForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(), 'Prescription Drugs, Tier 1')]/span)[1]"));
 		CommonUtility.waitForPageLoadNew(driver,DrugsForPlan, 30);
-		System.out.println("Expected value " + prescriptionDrugsTier1);
 		String PrescriptionDrugs = DrugsForPlan.getText();
-		System.out.println("Prescription Drugs " + PrescriptionDrugs);
 		if(PrescriptionDrugs.equals(prescriptionDrugsTier1)){
 			System.out.println("PrescriptionDrugs for the plan is " + PrescriptionDrugs);      
 			Assert.assertTrue(true);
@@ -1544,13 +1682,31 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 }*/
 	public void toolTipForPremium0(String planName){
-		WebElement toolTip = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(), 'Monthly Premium')]/span)[2]/span[1]"));
-		if (toolTip.getText().contains("Why is my premium $0?")){
-			System.out.println("ToolTip text is " + toolTip.getText());
+		WebElement toolTip = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//descendant :: span[@class='standalone']//*[name()='use']"));
+		WebElement tooltipContent = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//descendant :: span[@class='standalone']//span"));
+		Actions action = new Actions(driver);
+		action.moveToElement(toolTip).build().perform();
+		String toolTipText = tooltipContent.getAttribute("textContent").trim();
+		if (toolTipText.contains("Why is my premium")){
+			System.out.println("ToolTip text is " + toolTipText);
 			Assert.assertTrue(true);
 		}
 		else
 			Assert.fail("Tool Tip is not working");	     	
+	}
+	
+	public void toolTipForAnnualDeductible(String planName) {
+		WebElement toolTip = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//descendant :: span[@class='standalone']//*[name()='use'])[2]"));
+		WebElement tooltipContent = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//descendant :: span[@class='standalone']//span)[2]"));
+		Actions action = new Actions(driver);
+		action.moveToElement(toolTip).build().perform();
+		String toolTipText = tooltipContent.getAttribute("textContent").trim();
+		if (toolTipText.contains("annual deductible")){
+			System.out.println("ToolTip text is " + toolTipText);
+			Assert.assertTrue(true);
+		}
+		else
+			Assert.fail("Tool Tip is not working");
 	}
 
 
@@ -1723,9 +1879,9 @@ for (int i = 0; i < initialCount + 1; i++) {
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+}
 	}
-	
+
 	public void validateEmailOptionExistOnPage(String planType) {
 		//System.out.println("TEST - playType="+planType);
 		WebElement emailElement=null;
@@ -1743,7 +1899,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		}
 		Assert.assertTrue("PROBLEM - Unable to locate the email option. emailCheck="+validate(emailElement), validate(emailElement));
 	}
-	
+
 	public void validatePrintOptionExistOnPage(String planType) {
 		//System.out.println("TEST - playType="+planType);
 		WebElement printElement=null;
@@ -2258,6 +2414,134 @@ for (int i = 0; i < initialCount + 1; i++) {
 		driver.switchTo().window(winHandleNew);
 	 }
 	//^^^ note: added for US1598162	
+	
+	public String StartApplicationButton(String DateOfBirth, String FirstName, String LastName) throws InterruptedException {
+		Thread.sleep(4000);
+		CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 20);
+		Start_ApplicationBtn.click();
+		System.out.println("Start application button is clicked on application page");
+		Thread.sleep(8000);
+		DOB.click();
+
+		DOB.sendKeys(DateOfBirth);
+		System.out.println("Date of birth is entered");
+		try {
+			monthDrpDwn.click();
+			monthDrpDwnOption.click();
+			Thread.sleep(2000);
+			System.out.println("Effective date- month value selected");
+			yearDrpDwn.click();
+			Thread.sleep(2000);
+			yearDrpDwnOption.click();
+			System.out.println("Effective date- year value selected");
+			Thread.sleep(2000);
+			startDrpDwn.click();
+			Thread.sleep(2000);
+			startDrpDwnOption.click();
+			System.out.println("Plan to start date selected");
+		}
+		catch (InterruptedException e) {
+			e.printStackTrace();
+			System.out.println("Effective date-values not selected");
+		}
+		Start_ApplicationBtn.click();
+		CommonUtility.waitForPageLoadNew(driver, insuredStatus, 20);
+		insuredStatus.click();
+		Thread.sleep(2000);
+		nextButton.click();
+		Thread.sleep(2000);
+		nextButton.click();
+		Thread.sleep(2000);
+		nextButton.click();
+		Thread.sleep(2000);
+		nextButton.click();
+		Thread.sleep(2000);
+		firstName.sendKeys(FirstName);
+		lastName.sendKeys(LastName);
+		nextButton.click();
+		CommonUtility.waitForPageLoadNew(driver, address1, 20);
+		address1.sendKeys("TestAddress1");
+		cityName.sendKeys("TestCity");
+		alternatemailingAddressBtn.click();
+
+		emailAddress.sendKeys("John_Kerry@test.com");
+		phoneNumber.sendKeys("1234567890");
+		nextButton.click();
+		Thread.sleep(2000);
+		nextButton.click();
+		Thread.sleep(2000);
+		String ResumeKey= resumeKey.getText();
+
+		System.out.println("The return to the application code is- "+ResumeKey);
+
+		cancelButton.click();
+		CommonUtility.waitForPageLoad(driver, cancelButtonPopUp, 30);
+		cancelButtonPopUp.click();
+		System.out.println("Cancel application has been clicked on the pop up");
+		return ResumeKey;
+	}
+
+	public void ResumeApplicationButton() throws InterruptedException{
+		Thread.sleep(10000);
+		CommonUtility.waitForPageLoadNew(driver, resumeApplication, 30);
+		resumeApplication.click();
+		System.out.println("Resume application link clicked successfully");
+	}
+	public void EnterDataForResumeApp(String ApplicationID,String DOB,String zipcode) throws InterruptedException{
+		CommonUtility.waitForPageLoadNew(driver, resumeApplicationBtn, 30);
+		validateNew(resumeApplicationBtn);
+
+		applicationID.sendKeys(ApplicationID);
+		ResumeDOB.sendKeys(DOB);
+		ResumeZipCode.sendKeys(zipcode);
+		resumeApplicationBtn.click();
+
+		System.out.println("Resume application button has been clicked successfully after entering the data on resume application page");
+	}
+
+
+
+	public void ResumeApplicationButtonValidation(String FirstName,String LastName) throws InterruptedException{
+		Thread.sleep(2000);
+		CommonUtility.waitForPageLoadNew(driver, welcomeHeader, 30);
+		validateNew(welcomeHeader);
+
+		Thread.sleep(5000);
+		nextButton.click();
+		Thread.sleep(2000);
+		nextButton.click();
+		Thread.sleep(2000);
+		nextButton.click();
+		Thread.sleep(2000);
+		CommonUtility.waitForPageLoadNew(driver, firstName, 20);
+
+		String name= firstName.getAttribute("value");
+		System.out.println("The name displaying on  your information page is "+name);
+		if(name.equals(FirstName)){
+			System.out.println("Application has been resumed successfully");
+			Assert.assertTrue("Application has been resumed successfully", true);
+
+		}
+		else{
+
+			Assert.assertFalse("Application has not been resumed successfully", false);
+		}
+
+
+
+	}
+	public void RetrieveApplicationButtonValidation(String ApplicationID) throws InterruptedException{
+		CommonUtility.waitForPageLoadNew(driver, welcomepage, 30);
+		
+		try {
+			validateNew(welcomepage);
+				System.out.println("Application has been retrived successfully");
+				Assert.assertTrue("Application has been retrived successfully", true);
+			} 
+		catch (Exception e) {
+			Assert.assertFalse("Application has not been retrived successfully", false);
+		}
+	}
 }
 
 
