@@ -291,6 +291,10 @@ public void validateBenefits(boolean riderFlag,WebElement riderBenefit){
 		boolean hi = Boolean.parseBoolean(HearingFlag);
 		
 		validate(CoverageDetailswdt);
+		waitforElement(DentalImg);
+		waitforElement(VisionImg);
+		waitforElement(FitnessImg);
+		waitforElement(HearingImg);
 		validate(DentalImg);
 		validate(VisionImg);
 		validate(FitnessImg);
