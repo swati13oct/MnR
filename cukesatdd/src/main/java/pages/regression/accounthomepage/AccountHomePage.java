@@ -1313,6 +1313,12 @@ public class AccountHomePage extends UhcDriver {
 		} else if (MRScenario.environment.equalsIgnoreCase("team-a")) {
 			String Page_URL = "https://www." + MRScenario.environment
 					+ "-medicare."+MRScenario.domain+"/content/medicare/member/pharmacy-locator/overview.html";
+			if (driver.getCurrentUrl().contains("mymedicareaccount")) {
+				System.out.println("This is a case for PCP or MEDICA user, use special URL");
+				Page_URL= "https://www."+MRScenario.environment
+						+"-mymedicareaccount."+MRScenario.domain+"/content/medicare/member/pharmacy-locator/overview.html";
+			} 
+			System.out.println("URL for testing: "+Page_URL);
 			driver.navigate().to(Page_URL);
 		} else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
 			waitForHomePage(helloPerson);

@@ -365,7 +365,7 @@ public class MRConstants {
   public static final String TeamC_UHC_URL="https://www.team-c-uhcmedicaresolutions.ose-elr-core.optum.com";
   public static final String LEGACY_PCP_TESTHARNESS = "https://" + MRScenario.environment + "-mymedicareaccount."+ MRScenario.domain + LEGACY_REDESIGN + "/?testharness=true";
   public static final String OSE_NEW_URL = "https://www." + MRScenario.environment + "-medicare."+ MRScenario.domain+"/?testharness=true";
-  
+  public static final String OSE_NEW_URL_PCP_OR_MEDIA = "https://www."+MRScenario.environment+"-mymedicareaccount."+MRScenario.domain+"/content/medicare/login/memberRedesign.html?testharness=true";
   public static final String OFFLINE_STAGE_TESTHARNESS = "https://"+ MRScenario.environment +"-medicare."+MRScenario.domain+"/?testharness=true";  
   
   
