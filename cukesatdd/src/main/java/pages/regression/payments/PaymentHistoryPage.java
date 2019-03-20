@@ -21,6 +21,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.regression.footer.FooterPage;
 import pages.member.ulayer.SetupAutoPaymentPage;
 import acceptancetests.data.CommonConstants;
@@ -34,14 +35,14 @@ import atdd.framework.UhcDriver;
  */
 public class PaymentHistoryPage extends UhcDriver {
 
-	@FindBy(id = "paymentHistoryApp")
+	@FindBy(id = "paymentHistoryApp1")
 	private WebElement paymentHistoryApp;
 
 	@FindBy(id = "paymentSearchRangeGovt")
 	private WebElement paymentSearchRangeGovt;
 
 	@FindBy(xpath = "//a[not (contains(@class,'ng-hide')) and contains(text(),'Make a One-Time Payment')]")
-	private WebElement onetimepaymentbtn;
+	private WebElement oneTimePaymentBtn;
 
 	@FindBy(xpath = "//*[@class='payment-method-btn'][1]/a[2]")
 	private WebElement onetimepaymentbtnPDP;
@@ -134,6 +135,9 @@ public class PaymentHistoryPage extends UhcDriver {
 
 	@FindBy(xpath = "//a[contains(@class,'btn btn--secondary ng-scope greyedout')]//span[text()='Cancel Existing Automatic Payments']")
 	private WebElement cancelExistingAutomaticPaymentsButton;
+	
+	@FindBy(id = "paymentOverviewApp")
+	private WebElement paymentOverviewSection;
 
 	@FindBy(id = "IPerceptionsEmbed")
 	public WebElement iPerceptionframe;
@@ -361,14 +365,14 @@ public class PaymentHistoryPage extends UhcDriver {
 	private WebElement paymentHistoryServerError;
 	// ^^^ note: added for F247601 Payment History SHIP testing	
 	
+	@FindBy(xpath = "//a[contains(text(),'Coverage & Benefits')]")
+	private WebElement coverageBenefitsTab;
+	
 	public PaymentHistoryPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		// CommonUtility.waitForPageLoad(driver, paymenthistorypage,
-		// CommonConstants.TIMEOUT_30);
-		String fileName = CommonConstants.PAYMENT_HISTORY_PAGE_DATA;
-		paymentHistory = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
-		// openAndValidate();
+		CommonUtility.waitForPageLoad(driver, paymentOverviewSection,20);
+		 openAndValidate();
 	}
 
 	public void getSearchClick() {
@@ -489,21 +493,8 @@ public class PaymentHistoryPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 
-		JSONObject jsonObject = new JSONObject();
-		for (String key : paymentHistory.getExpectedData().keySet()) {
-			WebElement element = findElement(paymentHistory.getExpectedData().get(key));
-			validate(element);
-			try {
-				jsonObject.put(key, element.getText());
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		}
-		paymentHistoryJson = jsonObject;
-
-		System.out.println("paymentHistoryJson----->" + paymentHistoryJson);
+		validateNew(paymentHistoryApp);
+		validateNew(oneTimePaymentBtn);
 
 	}
 
@@ -565,7 +556,7 @@ public class PaymentHistoryPage extends UhcDriver {
 
 		try {
 
-			onetimepaymentbtn.click();
+			oneTimePaymentBtn.click();
 			System.out.println("clicked on make OTP button");
 			return new OneTimePaymentPage(driver);
 
@@ -758,7 +749,7 @@ public class PaymentHistoryPage extends UhcDriver {
 
 	public void feebackpopupClose() throws InterruptedException { // waitForloader(driver,overlay,
 																	// 20);
-		Thread.sleep(20000);
+		CommonUtility.waitForPageLoad(driver, iPerceptionframe, 20);
 		if (validate(iPerceptionframe)) {
 
 			switchToNewIframe(iPerceptionframe);
@@ -1590,4 +1581,12 @@ public class PaymentHistoryPage extends UhcDriver {
 		}
 	}
 	// ^^^ note: added for F247601 Payment History SHIP testing	
+
+	public BenefitsAndCoveragePage clickOnBenefitsAndCoverageTab() {
+		
+		coverageBenefitsTab.click();
+		if(driver.getCurrentUrl().contains("benefits"))
+			return new BenefitsAndCoveragePage(driver);
+		return null;
+	}
 }
