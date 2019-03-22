@@ -270,20 +270,22 @@ public class WelcomePage extends UhcDriver{
 		return null;
 	}
 	
-public void validateBenefits(boolean riderFlag,WebElement riderBenefit){
-		
-		if(riderFlag){
-			Assert.assertTrue("Rider Benefit is not available for this plan" 
-					, riderBenefit.getAttribute("src").contains("check-mark"));
+	public void validateBenefits(boolean riderFlag, WebElement riderBenefit) {
+		if (riderFlag) {
+			waitforElement(riderBenefit);
+			validate(riderBenefit);
+			Assert.assertTrue("Rider Benefit is not available for this plan",
+					riderBenefit.getAttribute("src").contains("check-mark"));
 			System.out.println("Benfit is Available");
-		}
-		else{
-			Assert.assertTrue("Rider Benefit is available for this plan" 
-					, riderBenefit.getAttribute("src").contains("x-mark"));
+		} else {
+			waitforElement(riderBenefit);
+			validate(riderBenefit);
+			Assert.assertTrue("Rider Benefit is available for this plan",
+					riderBenefit.getAttribute("src").contains("x-mark"));
 			System.out.println("Benfit is UnAvailable");
 		}
 	}
-	
+
 	public void validate_Ancillary_Benefits(String DentalFlag, String VisionFlag,String FitnessFlag,String HearingFlag) {
 		boolean di = Boolean.parseBoolean(DentalFlag);
 		boolean vi = Boolean.parseBoolean(VisionFlag);
@@ -291,15 +293,6 @@ public void validateBenefits(boolean riderFlag,WebElement riderBenefit){
 		boolean hi = Boolean.parseBoolean(HearingFlag);
 		
 		validate(CoverageDetailswdt);
-		waitforElement(DentalImg);
-		waitforElement(VisionImg);
-		waitforElement(FitnessImg);
-		waitforElement(HearingImg);
-		validate(DentalImg);
-		validate(VisionImg);
-		validate(FitnessImg);
-		validate(HearingImg);
-		
 		validateBenefits(di, DentalImg);
 		validateBenefits(vi, VisionImg);
 		validateBenefits(fi, FitnessImg);
