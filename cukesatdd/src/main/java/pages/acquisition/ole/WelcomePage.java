@@ -275,13 +275,13 @@ public class WelcomePage extends UhcDriver{
 			waitforElement(riderBenefit);
 			validate(riderBenefit);
 			Assert.assertTrue("Rider Benefit is not available for this plan",
-					riderBenefit.getAttribute("src").contains("check-mark"));
+					riderBenefit.getAttribute("alt").contains("benefit available"));
 			System.out.println("Benfit is Available");
 		} else {
 			waitforElement(riderBenefit);
 			validate(riderBenefit);
 			Assert.assertTrue("Rider Benefit is available for this plan",
-					riderBenefit.getAttribute("src").contains("x-mark"));
+					riderBenefit.getAttribute("alt").contains("benefit unavailable"));
 			System.out.println("Benfit is UnAvailable");
 		}
 	}
