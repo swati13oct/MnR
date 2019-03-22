@@ -270,10 +270,10 @@ public class WelcomePage extends UhcDriver{
 		return null;
 	}
 	
-	public void validateBenefits(boolean riderFlag, WebElement riderBenefit) {
+	public void validateBenefits(boolean riderFlag, WebElement riderBenefit) throws Exception {
 
 		if (riderFlag) {
-			for (int i = 0; i <= 5; i++) {
+			for (int i = 0; i <= 10; i++) {
 				try {
 					waitforElement(riderBenefit);
 					validate(riderBenefit);
@@ -285,10 +285,11 @@ public class WelcomePage extends UhcDriver{
 					System.out.println(e.getMessage());
 				}
 				System.out.println("TestWarning: Unable to find element : Retry Count - " + i);
+				Thread.sleep(5000);
 			}
 
 		} else {
-			for (int i = 0; i <= 5; i++) {
+			for (int i = 0; i <= 10; i++) {
 				try {
 					waitforElement(riderBenefit);
 					validate(riderBenefit);
@@ -300,11 +301,12 @@ public class WelcomePage extends UhcDriver{
 					System.out.println(e.getMessage());
 				}
 				System.out.println("TestWarning: Unable to find element : Retry Count - " + i);
+				Thread.sleep(5000);
 			}
 		}
 	}
 	
-	public void validate_Ancillary_Benefits(String DentalFlag, String VisionFlag,String FitnessFlag,String HearingFlag) {
+	public void validate_Ancillary_Benefits(String DentalFlag, String VisionFlag,String FitnessFlag,String HearingFlag) throws Exception {
 		boolean di = Boolean.parseBoolean(DentalFlag);
 		boolean vi = Boolean.parseBoolean(VisionFlag);
 		boolean fi = Boolean.parseBoolean(FitnessFlag);
