@@ -263,8 +263,6 @@ public class HSIDLoginPage extends UhcDriver {
 
 		if (MRScenario.environmentMedicare.equals("team-e")
 				|| MRScenario.environmentMedicare.equals("team-ci1")) {
-			System.out.println("TEST - 4");
-
 			Alert alert = driver.switchTo().alert();
 			alert.accept();
 		}

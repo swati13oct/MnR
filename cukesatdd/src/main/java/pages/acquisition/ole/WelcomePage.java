@@ -70,7 +70,7 @@ public class WelcomePage extends UhcDriver{
 	@FindBy(id = "tty-number")
 	private WebElement RightRailTFN;
 	
-	@FindBy(xpath = "//h4[text()='Coverage Details']")
+	@FindBy(xpath = "//*[text()='Coverage Details']")
 	private WebElement CoverageDetailswdt;
 	
 	@FindBy(xpath = "//li[contains(text(), normalize-space('Dental'))]//img")
@@ -270,33 +270,50 @@ public class WelcomePage extends UhcDriver{
 		return null;
 	}
 	
-public void validateBenefits(boolean riderFlag,WebElement riderBenefit){
-		
-		if(riderFlag){
-			Assert.assertTrue("Rider Benefit is not available for this plan" 
-					, riderBenefit.getAttribute("src").contains("check-mark"));
-			System.out.println("Benfit is Available");
-		}
-		else{
-			Assert.assertTrue("Rider Benefit is available for this plan" 
-					, riderBenefit.getAttribute("src").contains("x-mark"));
-			System.out.println("Benfit is UnAvailable");
+	public void validateBenefits(boolean riderFlag, WebElement riderBenefit) throws Exception {
+
+		if (riderFlag) {
+			for (int i = 0; i <= 10; i++) {
+				try {
+					waitforElement(riderBenefit);
+					validate(riderBenefit);
+					Assert.assertTrue("Rider Benefit is not available for this plan",
+							riderBenefit.getAttribute("alt").contains("benefit available"));
+					System.out.println("Benfit is Available");
+					break;
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
+				System.out.println("TestWarning: Unable to find element : Retry Count - " + i);
+				Thread.sleep(5000);
+			}
+
+		} else {
+			for (int i = 0; i <= 10; i++) {
+				try {
+					waitforElement(riderBenefit);
+					validate(riderBenefit);
+					Assert.assertTrue("Rider Benefit is available for this plan",
+							riderBenefit.getAttribute("alt").contains("benefit unavailable"));
+					System.out.println("Benfit is UnAvailable");
+					break;
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
+				System.out.println("TestWarning: Unable to find element : Retry Count - " + i);
+				Thread.sleep(5000);
+			}
 		}
 	}
 	
-	public void validate_Ancillary_Benefits(String DentalFlag, String VisionFlag,String FitnessFlag,String HearingFlag) {
+	public void validate_Ancillary_Benefits(String DentalFlag, String VisionFlag,String FitnessFlag,String HearingFlag) throws Exception {
 		boolean di = Boolean.parseBoolean(DentalFlag);
 		boolean vi = Boolean.parseBoolean(VisionFlag);
 		boolean fi = Boolean.parseBoolean(FitnessFlag);
 		boolean hi = Boolean.parseBoolean(HearingFlag);
 		
 		validate(CoverageDetailswdt);
-		validate(DentalImg);
-		validate(VisionImg);
-		validate(FitnessImg);
-		validate(HearingImg);
-		
-		validateBenefits(di, DentalImg);
+		validateBenefits(di, DentalImg);		
 		validateBenefits(vi, VisionImg);
 		validateBenefits(fi, FitnessImg);
 		validateBenefits(hi, HearingImg);	
