@@ -105,7 +105,7 @@ public class RequestAgentAppttStepDefinitionAARP {
 		}
 	}
 	
-	/*@Then("^user validates the breadcrumb title on the request appointment page$")
+	@Then("^user validates the breadcrumb title on the request appointment page$")
 	public void user_validates_the_breadcrumb_title_on_the_request_appointment_page() throws Throwable {
 		RequestAgentAppointmentPage requestAgentAppointmentPage = (RequestAgentAppointmentPage) getLoginScenario().getBean(PageConstants.REQUEST_AGENT_APPOINTMENT_PAGE);
 		boolean breadcrumb = requestAgentAppointmentPage.validateBreadcrumb();
@@ -114,6 +114,6 @@ public class RequestAgentAppttStepDefinitionAARP {
 		}else{
 			Assert.fail("Error in loading error messages");
 		}
-	}*/
+	}
 	
 }
