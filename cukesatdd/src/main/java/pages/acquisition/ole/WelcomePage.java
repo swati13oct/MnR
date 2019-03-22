@@ -271,21 +271,39 @@ public class WelcomePage extends UhcDriver{
 	}
 	
 	public void validateBenefits(boolean riderFlag, WebElement riderBenefit) {
+
 		if (riderFlag) {
-			waitforElement(riderBenefit);
-			validate(riderBenefit);
-			Assert.assertTrue("Rider Benefit is not available for this plan",
-					riderBenefit.getAttribute("alt").contains("benefit available"));
-			System.out.println("Benfit is Available");
+			for (int i = 0; i <= 5; i++) {
+				try {
+					waitforElement(riderBenefit);
+					validate(riderBenefit);
+					Assert.assertTrue("Rider Benefit is not available for this plan",
+							riderBenefit.getAttribute("alt").contains("benefit available"));
+					System.out.println("Benfit is Available");
+					break;
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
+				System.out.println("TestWarning: Unable to find element : Retry Count - " + i);
+			}
+
 		} else {
-			waitforElement(riderBenefit);
-			validate(riderBenefit);
-			Assert.assertTrue("Rider Benefit is available for this plan",
-					riderBenefit.getAttribute("alt").contains("benefit unavailable"));
-			System.out.println("Benfit is UnAvailable");
+			for (int i = 0; i <= 5; i++) {
+				try {
+					waitforElement(riderBenefit);
+					validate(riderBenefit);
+					Assert.assertTrue("Rider Benefit is available for this plan",
+							riderBenefit.getAttribute("alt").contains("benefit unavailable"));
+					System.out.println("Benfit is UnAvailable");
+					break;
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
+				System.out.println("TestWarning: Unable to find element : Retry Count - " + i);
+			}
 		}
 	}
-
+	
 	public void validate_Ancillary_Benefits(String DentalFlag, String VisionFlag,String FitnessFlag,String HearingFlag) {
 		boolean di = Boolean.parseBoolean(DentalFlag);
 		boolean vi = Boolean.parseBoolean(VisionFlag);
@@ -293,7 +311,7 @@ public class WelcomePage extends UhcDriver{
 		boolean hi = Boolean.parseBoolean(HearingFlag);
 		
 		validate(CoverageDetailswdt);
-		validateBenefits(di, DentalImg);
+		validateBenefits(di, DentalImg);		
 		validateBenefits(vi, VisionImg);
 		validateBenefits(fi, FitnessImg);
 		validateBenefits(hi, HearingImg);	
