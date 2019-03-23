@@ -20,19 +20,19 @@ import atdd.framework.UhcDriver;
  * @author sdwaraka
  *
  */
-public class WelcomePage extends UhcDriver {
-
-	// OLE Common Elements
+public class WelcomePage extends UhcDriver{
+	
+	//OLE Common Elements
 	@FindBy(xpath = "//*[@class = 'logo']//img")
 	private WebElement SiteLogo;
-
+	
 	@FindBy(id = "enrollment-next-button")
 	private WebElement NextBtn;
-
-	// @FindBy(xpath = "//*[@class = 'cancel-button modal-link']")
+	
+	//@FindBy(xpath = "//*[@class = 'cancel-button modal-link']")
 	@FindBy(id = "cancel-enrollment")
 	private WebElement CancelEnrollmentLink;
-
+	
 	// WebElements for Welcome Page
 	@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class, 'only-intro')]")
 	private WebElement WelcomePageHeader;
@@ -42,53 +42,51 @@ public class WelcomePage extends UhcDriver {
 
 	@FindBy(id = "ole-cancel-confirm")
 	private WebElement CancellationModal;
-
+	
 	@FindBy(id = "leavingSite-linkrouter")
 	private WebElement LeavingOLEmodal;
-
+	
 	@FindBy(xpath = "//*[contains(text(), 'chosen to enroll in:')]/following-sibling::h2")
 	private WebElement PlanYear_PlanName;
-
+	
 	@FindBy(xpath = "//*[contains(text(), 'Zip:')]/..")
 	private WebElement ZipCode_County;
-
+	
 	@FindBy(xpath = "//*[contains(text(), 'Premium:')]/..")
 	private WebElement PremiumDisplay;
-
+	
 	@FindBy(xpath = "//*[@id = 'learn-more' or @id = 'learnmorebtn']")
 	private WebElement LearnMoreButton;
-
-	/*
-	 * @FindBy(xpath = "//*[@id='enrollment-disclaimer-accept-yes']") private
-	 * WebElement DisclaimerAgreeCheckBx;
-	 */
-	// @FindBy(xpath =
-	// "//*[@id='enrollment-disclaimer-accept-yes']/following-sibling::label")
+	
+/*	@FindBy(xpath = "//*[@id='enrollment-disclaimer-accept-yes']")
+	private WebElement DisclaimerAgreeCheckBx;
+	*/
+	//@FindBy(xpath = "//*[@id='enrollment-disclaimer-accept-yes']/following-sibling::label")
 	@FindBy(xpath = "//*[@id='enrollment-disclaimer-accept-yes']")
 	private WebElement DisclaimerAgreeSelect;
-
-	// Right Rail Elements
-
+	
+	//Right Rail Elements
+	
 	@FindBy(id = "tty-number")
 	private WebElement RightRailTFN;
-
+	
 	@FindBy(xpath = "//*[text()='Coverage Details']")
 	private WebElement CoverageDetailswdt;
-
+	
 	@FindBy(xpath = "//li[contains(text(), normalize-space('Dental'))]//img")
 	private WebElement DentalImg;
-
+	
 	@FindBy(xpath = "//li[contains(text(), normalize-space('Vision'))]//img")
 	private WebElement VisionImg;
-
+	
 	@FindBy(xpath = "//li[contains(text(), normalize-space('Fitness'))]//img")
 	private WebElement FitnessImg;
-
+	
 	@FindBy(xpath = "//li[contains(text(), normalize-space('Hearing'))]//img")
 	private WebElement HearingImg;
-
+		
 	public WelcomePage(WebDriver driver) {
-
+		
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
@@ -98,7 +96,7 @@ public class WelcomePage extends UhcDriver {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		start(OLE_URL);
-
+		
 		openAndValidate();
 
 		// TODO Auto-generated constructor stub
@@ -106,7 +104,7 @@ public class WelcomePage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-
+		
 		System.out.println("Validating Welcome Page for OLE");
 
 		validateNew(WelcomePageHeader);
@@ -117,57 +115,53 @@ public class WelcomePage extends UhcDriver {
 		String PlanYear_PlanName_Text = PlanYear_PlanName.getText();
 		String Zip_County_Text = ZipCode_County.getText();
 		String Premium = PremiumDisplay.getText();
-		System.out.println("Plan Year and Plan Name Displayed on OLE : " + PlanYear_PlanName_Text);
-		System.out.println("Zip Code and County Displayed on OLE : " + Zip_County_Text);
-		System.out.println("Monthly Premium for Plan Displayed on OLE : " + Premium);
+		System.out.println("Plan Year and Plan Name Displayed on OLE : "+PlanYear_PlanName_Text);
+		System.out.println("Zip Code and County Displayed on OLE : "+Zip_County_Text);
+		System.out.println("Monthly Premium for Plan Displayed on OLE : "+Premium);
 		String Expected_PlanName = planDetailsMap.get("Plan Name");
-		// String Expected_PlanYear = planDetailsMap.get("Plan Year");
+		//String Expected_PlanYear = planDetailsMap.get("Plan Year");
 		String Expected_ZipCode = planDetailsMap.get("Zip Code");
 		String Expected_County = planDetailsMap.get("County");
-		// String Expected_PlanPremium = planDetailsMap.get("Plan Premium");
+		//String Expected_PlanPremium = planDetailsMap.get("Plan Premium");
 		boolean flag = false;
-
-		if (PlanYear_PlanName_Text.contains(Expected_PlanName)) {
+		
+		if(PlanYear_PlanName_Text.contains(Expected_PlanName)){
 			flag = true;
-			System.out.println("Plan Name is Validated : " + flag);
-		} else
-			flag = false;
-		// Plan Year commented for AEP validation
-		/*
-		 * if(PlanYear_PlanName_Text.contains(Expected_PlanYear)){ flag =
-		 * (flag==false)?false:true; System.out.println(
-		 * "Plan Year is Validated : "+flag); }else flag =false;
-		 */
-		if (Zip_County_Text.contains(Expected_County)) {
-			flag = (flag == false) ? false : true;
-			System.out.println("Plan County is Validated : " + flag);
-		} else
-			flag = false;
-		if (Zip_County_Text.contains(Expected_ZipCode)) {
-			flag = (flag == false) ? false : true;
-			System.out.println("Plan ZIP CODE is Validated : " + flag);
-		} else
-			flag = false;
-		/*
-		 * if(Premium.contains(Expected_PlanPremium)){ flag =
-		 * (flag==false)?false:true; System.out.println(
-		 * "Plan Premium is Validated : "+flag); }else flag =false;
-		 */
-		System.out.println("Plan Details are Validated : " + flag);
+			System.out.println("Plan Name is Validated : "+flag);
+		}else flag =false;
+		//Plan Year commented for AEP validation
+/*		if(PlanYear_PlanName_Text.contains(Expected_PlanYear)){
+			flag = (flag==false)?false:true;
+			System.out.println("Plan Year is Validated : "+flag);
+		}else flag =false;*/
+		if(Zip_County_Text.contains(Expected_County)){
+			flag = (flag==false)?false:true;
+			System.out.println("Plan County is Validated : "+flag);
+		}else flag =false;
+		if(Zip_County_Text.contains(Expected_ZipCode)){
+			flag = (flag==false)?false:true;
+			System.out.println("Plan ZIP CODE is Validated : "+flag);
+		}else flag =false;
+/*		if(Premium.contains(Expected_PlanPremium)){
+			flag = (flag==false)?false:true;
+			System.out.println("Plan Premium is Validated : "+flag);
+		}else flag =false;*/
+		System.out.println("Plan Details are Validated : "+flag);
 		return flag;
 	}
 
 	public boolean ValidateTFN(String TFN) {
-
-		if (validate(RightRailTFN)) {
+		
+		if(validate(RightRailTFN)){
 			String TFN_OLE = RightRailTFN.getText();
-			if (TFN_OLE.contains(TFN)) {
-				System.out.println("TFN is validated in OLE Welcome Page" + TFN);
+			if(TFN_OLE.contains(TFN)){
+				System.out.println("TFN is validated in OLE Welcome Page"+TFN);
 				return true;
-			} else {
+			}
+			else{
 				System.out.println("TFN does not match");
-				System.out.println("TFN in VPP page : " + TFN);
-				System.out.println("TFN in OLE Right Rail : " + TFN_OLE);
+				System.out.println("TFN in VPP page : "+TFN);
+				System.out.println("TFN in OLE Right Rail : "+TFN_OLE);
 				return false;
 			}
 		}
@@ -176,34 +170,34 @@ public class WelcomePage extends UhcDriver {
 	}
 
 	public boolean validateDisclaimerCheckBox() {
-
+		
 		boolean flag = false;
-
-		boolean Disclaimer_Flag = (DisclaimerAgreeSelect.isSelected()) ? true : false;
-		boolean NextBtn_Flag = (NextBtn.isEnabled()) ? true : false;
-		if (!Disclaimer_Flag) {
-			if (!NextBtn_Flag) {
-				System.out.println(
-						"Disclaimer Agree checkbox is not checked and Next button is disabled  : Validation Passed");
+		
+		boolean Disclaimer_Flag = (DisclaimerAgreeSelect.isSelected())?true:false;
+		boolean NextBtn_Flag = (NextBtn.isEnabled())?true:false;
+		if(!Disclaimer_Flag){
+			if(!NextBtn_Flag){
+				System.out.println("Disclaimer Agree checkbox is not checked and Next button is disabled  : Validation Passed");
 				flag = true;
-			} else {
-				System.out.println(
-						"Disclaimer Agree checkbox is not checked and Next button is ENABLED : Validation failed");
+			}
+			else
+			{
+				System.out.println("Disclaimer Agree checkbox is not checked and Next button is ENABLED : Validation failed");
 				flag = false;
 			}
 		}
 		DisclaimerAgreeSelect.click();
-
-		Disclaimer_Flag = (DisclaimerAgreeSelect.isSelected()) ? true : false;
-		NextBtn_Flag = (NextBtn.isEnabled()) ? true : false;
-		if (Disclaimer_Flag) {
-			if (NextBtn_Flag) {
-				System.out
-						.println("Disclaimer Agree checkbox is checked and Next button is enabled : Validation Passed");
+		
+		Disclaimer_Flag = (DisclaimerAgreeSelect.isSelected())?true:false;
+		NextBtn_Flag = (NextBtn.isEnabled())?true:false;
+		if(Disclaimer_Flag){
+			if(NextBtn_Flag){
+				System.out.println("Disclaimer Agree checkbox is checked and Next button is enabled : Validation Passed");
 				flag = true;
-			} else {
-				System.out.println(
-						"Disclaimer Agree checkbox is checked and Next button is DISABLED : Validation failed");
+			}
+			else
+			{
+				System.out.println("Disclaimer Agree checkbox is checked and Next button is DISABLED : Validation failed");
 				flag = false;
 
 			}
@@ -212,11 +206,11 @@ public class WelcomePage extends UhcDriver {
 	}
 
 	public MedicareInformationPage navigate_to_medicare_info_page() {
-
+		
 		validateNew(NextBtn);
 		NextBtn.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getCurrentUrl().contains("medicare-information")) {
+		if(driver.getCurrentUrl().contains("medicare-information")){
 			System.out.println("OLE Medicare Information Page is Displayed");
 			return new MedicareInformationPage(driver);
 		}
@@ -232,7 +226,7 @@ public class WelcomePage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (validate(LearnMore_Modal)) {
+		if(validate(LearnMore_Modal)){
 			System.out.println("OLE Learn More Modal is Displayed");
 			return new LearnMoreModal(driver);
 		}
@@ -241,19 +235,18 @@ public class WelcomePage extends UhcDriver {
 
 	public CancelOLEModal OpenCancelOLE() {
 		validate(CancelEnrollmentLink);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", CancelEnrollmentLink);
-
-		// ((JavascriptExecutor) driver).executeScript("arguments[0].click;",
-		// CancelEnrollmentLink);
-
-		// CancelEnrollmentLink.click();
+		
+		//((JavascriptExecutor) driver).executeScript("arguments[0].click;", CancelEnrollmentLink);
+		
+		//CancelEnrollmentLink.click();
 		try {
 			Thread.sleep(6000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		if (validate(CancellationModal)) {
+		if(validate(CancellationModal)){
 			System.out.println("OLE Cancel Enrollment Modal is Displayed");
 			return new CancelOLEModal(driver);
 		}
@@ -262,27 +255,26 @@ public class WelcomePage extends UhcDriver {
 
 	public LeavingOLEmodal OpenLeaveOLEmodal() {
 		validate(SiteLogo);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", SiteLogo);
-		// SiteLogo.click();
+		//SiteLogo.click();
 		try {
 			Thread.sleep(6000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		if (validate(LeavingOLEmodal)) {
+		if(validate(LeavingOLEmodal)){
 			System.out.println("Leaving OLE modal is Displayed");
 			return new LeavingOLEmodal(driver);
 		}
 		return null;
 	}
-
+	
 	public void validateBenefits(boolean riderFlag, WebElement riderBenefit) throws Exception {
 
 		if (riderFlag) {
 			for (int i = 0; i <= 10; i++) {
 				try {
-					Thread.sleep(10000);
 					waitforElement(riderBenefit);
 					validate(riderBenefit);
 					Assert.assertTrue("Rider Benefit is not available for this plan",
@@ -290,15 +282,15 @@ public class WelcomePage extends UhcDriver {
 					System.out.println("Benfit is Available");
 					break;
 				} catch (Exception e) {
-					System.out.println("Unable to Load the Imgage Element !!!");
+					System.out.println(e.getMessage());
 				}
 				System.out.println("TestWarning: Unable to find element : Retry Count - " + i);
+				Thread.sleep(5000);
 			}
 
 		} else {
 			for (int i = 0; i <= 10; i++) {
 				try {
-					Thread.sleep(10000);
 					waitforElement(riderBenefit);
 					validate(riderBenefit);
 					Assert.assertTrue("Rider Benefit is available for this plan",
@@ -306,25 +298,24 @@ public class WelcomePage extends UhcDriver {
 					System.out.println("Benfit is UnAvailable");
 					break;
 				} catch (Exception e) {
-					System.out.println("Unable to Load the Image Element !!!");
+					System.out.println(e.getMessage());
 				}
 				System.out.println("TestWarning: Unable to find element : Retry Count - " + i);
-
+				Thread.sleep(5000);
 			}
 		}
 	}
-
-	public void validate_Ancillary_Benefits(String DentalFlag, String VisionFlag, String FitnessFlag,
-			String HearingFlag) throws Exception {
+	
+	public void validate_Ancillary_Benefits(String DentalFlag, String VisionFlag,String FitnessFlag,String HearingFlag) throws Exception {
 		boolean di = Boolean.parseBoolean(DentalFlag);
 		boolean vi = Boolean.parseBoolean(VisionFlag);
 		boolean fi = Boolean.parseBoolean(FitnessFlag);
 		boolean hi = Boolean.parseBoolean(HearingFlag);
-
+		
 		validate(CoverageDetailswdt);
-		validateBenefits(di, DentalImg);
+		validateBenefits(di, DentalImg);		
 		validateBenefits(vi, VisionImg);
 		validateBenefits(fi, FitnessImg);
-		validateBenefits(hi, HearingImg);
+		validateBenefits(hi, HearingImg);	
 	}
 }
