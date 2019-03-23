@@ -55,19 +55,6 @@ public class PlanSelectorStepDefinition {
 	}
 
 
-	/*@When("^user goes to ours plan tab and click on Take the Quiz button$")
-	public void user_goes_to_ours_plan_tab_and_click_on_Take_the_Quiz_button() throws Throwable {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		PlanSelectorNewPage planSelectorNewPage = aquisitionhomepage.quizButton();
-		if(planSelectorNewPage != null)
-		getLoginScenario().saveBean(PageConstants.PLAN_SELECTOR_NEW_PAGE,
-				planSelectorNewPage);
-		else
-			System.out.println("PST page not displayed");			
-
-	}*/
-	
 	@When("^user scrolls down to Plan selector on VPP page on right rail widget$")
 	public void user_scrolls_down_PST_rightRail() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
@@ -123,16 +110,15 @@ public class PlanSelectorStepDefinition {
 		if(planSelectorNewPage != null)
 		getLoginScenario().saveBean(PageConstants.PLAN_SELECTOR_NEW_PAGE,
 				planSelectorNewPage);
-		else
-			System.out.println("PST page not displayed");			
+		else {
+			System.out.println("PST page not displayed");
+		Assert.fail("PST page not displayed");
+		}
 
 	}
 
 	@And("^clicks on get started button and runs questionnaire$")
 	public void clicks_on_get_started_button_and_directly_skip_to_results(DataTable givenAttributes) throws Throwable {
-		/*List<DataTableRow> memberAttributesRow = givenAttributes
-				.getGherkinRows();*/
-		
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -147,72 +133,38 @@ public class PlanSelectorStepDefinition {
 		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
 		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
 		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
-
-		/*AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		VPPPlanSummaryPage plansummaryPage = null;
-		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
-			plansummaryPage = aquisitionhomepage.searchPlansWithOutCounty(zipcode);
-		} else {
-			plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
-		}*/
-		
-		//String zipcode = memberAttributesRow.get(0).getCells().get(1); 
 		PlanSelectorNewPage planSelectorNewPage = (PlanSelectorNewPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_SELECTOR_NEW_PAGE);
-		PlanSelectorNewPage Questionnaire = null;
 		
 		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
-			Questionnaire = planSelectorNewPage.quizStartAndRunQuestionnaire(zipcode);
+			planSelectorNewPage.quizStartAndRunQuestionnaire(zipcode);
 		} else {
-			Questionnaire = planSelectorNewPage.quizStartAndRunQuestionnaireWithCounty(zipcode, county);
+			 planSelectorNewPage.quizStartAndRunQuestionnaireWithCounty(zipcode, county);
 		}				
-				
-		if(Questionnaire != null)
-		getLoginScenario().saveBean(PageConstants.PLAN_SELECTOR_QUESTIONNAIRE,
-				Questionnaire);
-		else
-			System.out.println("Questionaaire not started ");
-
 	}
 	
 	@And("^I select my Response and go to Next Questionnaire$")
 	public void I_click_questionnaire_first() throws Throwable {
 		PlanSelectorNewPage planSelectorNewPage = (PlanSelectorNewPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_SELECTOR_QUESTIONNAIRE);
-		PlanSelectorNewPage Questionnaire2 = planSelectorNewPage.NextQuestion();
-		if(Questionnaire2 != null)
-			getLoginScenario().saveBean(PageConstants.PLAN_SELECTOR_QUESTIONNAIRE,
-					Questionnaire2);
-			else
-				System.out.println("Questionaaire2 not started ");
-
+				.getBean(PageConstants.PLAN_SELECTOR_NEW_PAGE);
+		planSelectorNewPage.NextQuestion();
 	}
 	
 	@And("^I select my second Response and go directly to results page$")
 	public void I_click_questionnaire_second()  throws Throwable {
 		PlanSelectorNewPage planSelectorNewPage = (PlanSelectorNewPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_SELECTOR_QUESTIONNAIRE);
-		PlanSelectorNewPage ResultsPage = planSelectorNewPage.JumpLink();
-		if(ResultsPage != null)
-			getLoginScenario().saveBean(PageConstants.PLAN_RESULTS_PAGE,
-					ResultsPage);
-			else
-				System.out.println("Plan Results Page not loaded");
-
+				.getBean(PageConstants.PLAN_SELECTOR_NEW_PAGE);
+		boolean isResultsPage = planSelectorNewPage.JumpLink();
+		Assert.assertTrue("Plan Results Page not loaded", isResultsPage);
 	}
 	
 
 	@When("^I click plan detail button$")
 	public void i_click_plan_detail_button() throws Throwable {
 		PlanSelectorNewPage planSelectorNewPage = (PlanSelectorNewPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_RESULTS_PAGE);
-		PlanSelectorNewPage PlanDetailsPage = planSelectorNewPage.navigateToPlanDetails();
-		if(PlanDetailsPage != null)
-			getLoginScenario().saveBean(PageConstants.PLAN_DETAILS_PAGE,
-					PlanDetailsPage);
-			else
-				System.out.println("Plan Details Page not loaded");
+				.getBean(PageConstants.PLAN_SELECTOR_NEW_PAGE);
+		boolean isPlanDetailsPage = planSelectorNewPage.navigateToPlanDetails();
+		Assert.assertTrue("Plan Details Page is not loaded", isPlanDetailsPage);
 
 	}
 
@@ -220,7 +172,7 @@ public class PlanSelectorStepDefinition {
 	@Then("^the user clicks on both top and bottom back to plan options link and validates its redirection$")
 	public void i_should_be_brought_back_to_the_plan_selector_results_page() throws Throwable {
 		PlanSelectorNewPage planSelectorNewPage = (PlanSelectorNewPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_DETAILS_PAGE);
+				.getBean(PageConstants.PLAN_SELECTOR_NEW_PAGE);
 		planSelectorNewPage.verifyBackToPlanOptionslink();
 
 	}

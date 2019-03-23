@@ -1,5 +1,5 @@
 Feature: Plan Selector Tool flow - Verify back to plan options navigation to plan selector page
-@blayerPST @Spartans @acquisitionRegression
+@blayerPST @Spartans @acquisitionRegression @pstBLayerSmoke
 Scenario Outline: TID: 15471 -To validate Plan selector flow in UHC site
 Given the user is on UHC medicare acquisition site landing page
 When user goes to ours plan tab and click on Take the Quiz button 
@@ -16,7 +16,7 @@ Examples:
 |90210  | NO             |
 
 
-@UlayerPST @Spartans @acquisitionRegression
+@UlayerPST @Spartans @acquisitionRegression @pstULayerSmoke
 Scenario Outline: TID: 15474 - To validate Plan selector flow in AARP site
 Given the user is on Acquisition AARP medicare site landing page
 When user goes to ours plan tab and click on Take the Quiz button 
