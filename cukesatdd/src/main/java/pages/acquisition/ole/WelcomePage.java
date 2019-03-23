@@ -283,7 +283,7 @@ public class WelcomePage extends UhcDriver {
 			for (int i = 0; i <= 10; i++) {
 				try {
 					Thread.sleep(10000);
-					waitforElementNew(riderBenefit);
+					waitforElement(riderBenefit);
 					validate(riderBenefit);
 					Assert.assertTrue("Rider Benefit is not available for this plan",
 							riderBenefit.getAttribute("alt").contains("benefit available"));
@@ -299,7 +299,7 @@ public class WelcomePage extends UhcDriver {
 			for (int i = 0; i <= 10; i++) {
 				try {
 					Thread.sleep(10000);
-					waitforElementNew(riderBenefit);
+					waitforElement(riderBenefit);
 					validate(riderBenefit);
 					Assert.assertTrue("Rider Benefit is available for this plan",
 							riderBenefit.getAttribute("alt").contains("benefit unavailable"));
@@ -321,7 +321,7 @@ public class WelcomePage extends UhcDriver {
 		boolean fi = Boolean.parseBoolean(FitnessFlag);
 		boolean hi = Boolean.parseBoolean(HearingFlag);
 
-		validateNew(CoverageDetailswdt);
+		validate(CoverageDetailswdt);
 		validateBenefits(di, DentalImg);
 		validateBenefits(vi, VisionImg);
 		validateBenefits(fi, FitnessImg);
