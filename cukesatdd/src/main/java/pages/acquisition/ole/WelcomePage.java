@@ -275,33 +275,33 @@ public class WelcomePage extends UhcDriver{
 		if (riderFlag) {
 			for (int i = 0; i <= 10; i++) {
 				try {
-					waitforElement(riderBenefit);
+					Thread.sleep(10000);
+					waitforElementNew(riderBenefit);
 					validate(riderBenefit);
 					Assert.assertTrue("Rider Benefit is not available for this plan",
 							riderBenefit.getAttribute("alt").contains("benefit available"));
 					System.out.println("Benfit is Available");
 					break;
 				} catch (Exception e) {
-					System.out.println(e.getMessage());
+					System.out.println("Unable to Load the Image Element !!!");
 				}
 				System.out.println("TestWarning: Unable to find element : Retry Count - " + i);
-				Thread.sleep(5000);
 			}
 
 		} else {
 			for (int i = 0; i <= 10; i++) {
 				try {
-					waitforElement(riderBenefit);
+					Thread.sleep(10000);
+					waitforElementNew(riderBenefit);
 					validate(riderBenefit);
 					Assert.assertTrue("Rider Benefit is available for this plan",
 							riderBenefit.getAttribute("alt").contains("benefit unavailable"));
 					System.out.println("Benfit is UnAvailable");
 					break;
 				} catch (Exception e) {
-					System.out.println(e.getMessage());
+					System.out.println("Unable to Load the Image Element !!!");
 				}
 				System.out.println("TestWarning: Unable to find element : Retry Count - " + i);
-				Thread.sleep(5000);
 			}
 		}
 	}
@@ -312,7 +312,7 @@ public class WelcomePage extends UhcDriver{
 		boolean fi = Boolean.parseBoolean(FitnessFlag);
 		boolean hi = Boolean.parseBoolean(HearingFlag);
 		
-		validate(CoverageDetailswdt);
+		validateNew(CoverageDetailswdt);
 		validateBenefits(di, DentalImg);		
 		validateBenefits(vi, VisionImg);
 		validateBenefits(fi, FitnessImg);
