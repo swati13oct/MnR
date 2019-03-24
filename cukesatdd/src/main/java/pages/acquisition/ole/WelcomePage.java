@@ -273,38 +273,37 @@ public class WelcomePage extends UhcDriver{
 	public void validateBenefits(boolean riderFlag, WebElement riderBenefit) throws Exception {
 
 		if (riderFlag) {
-			for (int i = 0; i <= 10; i++) {
+			for (int i = 0; i <= 5; i++) {
 				try {
-					Thread.sleep(10000);
-					waitforElementNew(riderBenefit);
+					waitforElement(riderBenefit);
 					validate(riderBenefit);
 					Assert.assertTrue("Rider Benefit is not available for this plan",
 							riderBenefit.getAttribute("alt").contains("benefit available"));
 					System.out.println("Benfit is Available");
 					break;
 				} catch (Exception e) {
-					System.out.println("Unable to Load the Image Element !!!");
+					System.out.println(e.getMessage());
 				}
 				System.out.println("TestWarning: Unable to find element : Retry Count - " + i);
 			}
 
 		} else {
-			for (int i = 0; i <= 10; i++) {
+			for (int i = 0; i <= 5; i++) {
 				try {
-					Thread.sleep(10000);
-					waitforElementNew(riderBenefit);
+					waitforElement(riderBenefit);
 					validate(riderBenefit);
 					Assert.assertTrue("Rider Benefit is available for this plan",
 							riderBenefit.getAttribute("alt").contains("benefit unavailable"));
 					System.out.println("Benfit is UnAvailable");
 					break;
 				} catch (Exception e) {
-					System.out.println("Unable to Load the Image Element !!!");
+					System.out.println(e.getMessage());
 				}
 				System.out.println("TestWarning: Unable to find element : Retry Count - " + i);
 			}
 		}
 	}
+
 	
 	public void validate_Ancillary_Benefits(String DentalFlag, String VisionFlag,String FitnessFlag,String HearingFlag) throws Exception {
 		boolean di = Boolean.parseBoolean(DentalFlag);
@@ -312,7 +311,8 @@ public class WelcomePage extends UhcDriver{
 		boolean fi = Boolean.parseBoolean(FitnessFlag);
 		boolean hi = Boolean.parseBoolean(HearingFlag);
 		
-		validateNew(CoverageDetailswdt);
+		waitforElement(CoverageDetailswdt);
+		validate(CoverageDetailswdt);
 		validateBenefits(di, DentalImg);		
 		validateBenefits(vi, VisionImg);
 		validateBenefits(fi, FitnessImg);
