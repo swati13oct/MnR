@@ -23,6 +23,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pages.acquisition.ulayer.PlanDetailsPage;
+import pages.acquisition.medsuppole.MedSuppOLEPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.vppforaep.AepVppPlanSummaryPage;
 import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPage;
@@ -365,7 +366,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//span[@id='mpbed-yearSelectBoxIt']")
 		private WebElement yearDrpDwn;
 
-		@FindBy(xpath = "//ul[@id='mpbed-yearSelectBoxItOptions']//li[2]")
+		@FindBy(xpath = "//ul[@id='mpbed-yearSelectBoxItOptions']//li/a[contains(text(),'2019')]")
 		private WebElement yearDrpDwnOption;
 
 		@FindBy(id = "msVppdpsdSelectBoxItText")
@@ -432,7 +433,88 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//span[text()='Welcome to Online Enrollment']")
 		private WebElement welcomepage;
 	
-	
+		@FindBy(id = "mpbed-month")
+		private WebElement medSuppMonthDrpdwn;
+		
+		@FindBy(id = "mpbed-year")
+		private WebElement medSuppYearDrpdwn;
+				
+		@FindBy(xpath = "//div[@id='ole-form-content']//div[@id='text']")
+		private WebElement medSuppOlePlanSection;
+		
+		@FindBy(id = "importantdocuments_0")
+		private WebElement medSuppImpDoc_PlanOverview;
+		
+		@FindBy(xpath = "//img[@title='aarp-card']")
+		private WebElement medSuppOleAarpCardImg;
+		
+		@FindBy(xpath = "//*[contains(@class,'fieldset-label-text')][contains(text(),'date of birth')]")
+		private WebElement medSuppOleDobHeading;
+		
+		@FindBy(id = "MPAED")
+		private WebElement medSuppOleHospitalPartA;
+		
+		@FindBy(xpath = "//input[@id='Gender_1']/following-sibling::label[text()='Male']")
+		private WebElement medSuppOleMaleCheckbox;
+		
+		@FindBy(xpath = "//input[@id='PartABActiveIndicator_1']/following-sibling::label")
+		private WebElement medSuppOlePartABYesRadioBtn;
+		
+		@FindBy(xpath = "//input[@id='PlanEffIn6OfEligible_1']/following-sibling::label")
+		private WebElement medSuppOlePlanEffIn6OfEligibleYesRadioBtn;
+		
+		@FindBy(xpath = "//div[@id='ole-form-content']//a[contains(@href,'www.insurance.ca.gov')]")
+		private WebElement medSuppOleInsuranceLink;
+		
+		@FindBy(xpath = "//input[@id='MedicaidCovered_2']/following-sibling::label[text()='No']")
+		private WebElement OleMS_MedCoveredNoRadioBtn;
+		
+		@FindBy(xpath = "//input[@id='ExistingMedicare_2']/following-sibling::label[text()='No']")
+		private WebElement OleMS_ExistingMedicareNoRadioBtn;
+		
+		@FindBy(xpath = "//input[@id='ExistMedSupp_2']/following-sibling::label[text()='No']")
+		private WebElement OleMS_ExistMedSuppNoRadioBtn;
+		
+		@FindBy(xpath = "//input[@id='OtherInsCoverage_2']/following-sibling::label[text()='No']")
+		private WebElement OleMS_OtherInsCoverNoRadioBtn;
+		
+		@FindBy(xpath = "//input[@id='CpaSignatureInd'][@value='yes']/following-sibling::label")
+		private WebElement OleMS_CpaSignatureIndChkBox;
+		
+		@FindBy(xpath = "//input[@id='PaymentChoice_1']/following-sibling::label")
+		private WebElement OleMS_PaymentChoiceYesRadioBtn;
+		
+		@FindBy(xpath = "//input[@id='ElectronicDeliveryInd_2']/following-sibling::label")
+		private WebElement OleMS_UsMailRadioBtn;
+		
+		@FindBy(xpath = "(//div[contains(@class,'view--review')])[1]")
+		private WebElement OleMS_ReviewSection;
+		
+		@FindBy(xpath = "//button[contains(@class,'view--review')]")
+		private WebElement OleMS_ProceedToAuthBtn;
+		
+		@FindBy(xpath = "//input[@id='SignatureInd']/following-sibling::label")
+		private WebElement OleMS_SignatureIndCheckBox;
+		
+		@FindBy(xpath = "//input[@id='MedicalReleaseAuthSignatureInd']/following-sibling::label")
+		private WebElement OleMS_MedRelAuthSignCheckBox;
+		
+		@FindBy(xpath = "//input[@id='MedicalReleaseClaimSignatureInd']/following-sibling::label")
+		private WebElement OleMS_MedRelClaimSigCheckBox;
+		
+		@FindBy(xpath = "//button[text()='Submit application']")
+		private WebElement OleMS_SubmitAppBtn;
+		
+		@FindBy(xpath = "//span[contains(@class,'globalTitle')][contains(text(),'Confirmation')]")
+		private WebElement OleMS_ConfirmationHeading;
+		
+		@FindBy(xpath = "//button[contains(text(),'Enroll in AARP')]")
+		private WebElement OleMS_EnrollInAppBtn;
+		
+		@FindBy(xpath = "//button[contains(text(),'View Prescription')]")
+		private WebElement OleMS_ViewPDPPlanBtn;
+		
+		
 	public VPPPlanSummaryPage(WebDriver driver) {
 		super(driver);
 
@@ -2481,6 +2563,40 @@ for (int i = 0; i < initialCount + 1; i++) {
 		catch (Exception e) {
 			Assert.assertFalse("Application has not been retrived successfully", false);
 		}
+	}
+	
+	public MedSuppOLEPage StartApplication(String DateOfBirth) throws InterruptedException {
+		CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 30);
+		Start_ApplicationBtn.click();
+
+		System.out.println("Start application button is clicked on application page");
+		waitforElementVisibilityInTime(DOB, 30);
+		sendkeysNew(DOB, DateOfBirth);
+		System.out.println("Date of birth is entered");
+
+		monthDrpDwn.click();
+		monthDrpDwnOption.click();
+		Thread.sleep(2000);
+		System.out.println("Effective date- month value selected");
+		
+		yearDrpDwn.click();
+		Thread.sleep(2000);
+		yearDrpDwnOption.click();
+		
+		System.out.println("Effective date- year value selected");
+		Thread.sleep(2000);
+		startDrpDwn.click();
+		Thread.sleep(2000);
+		startDrpDwnOption.click();
+		
+		System.out.println("Plan to start date selected");
+
+		Start_ApplicationBtn.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("aarpsupplementalhealth"))
+			return new MedSuppOLEPage(driver);
+		else
+			return null;
 	}
 }
 

@@ -234,6 +234,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
 	private static String AARP_ACQISITION_OFFLINE_PAGE_URL = MRConstants.AARP_URL_OFFLINE;
 	private static String AARP_ACQISITION_PROD_PAGE_URL = MRConstants.AARP_URL_PROD;
+	private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
+	private static String UMS_ACQISITION_OFFLINE_PAGE_URL = MRConstants.UHC_URL_OFFLINE;
+	private static String UMS_ACQISITION_PROD_PAGE_URL = MRConstants.UHCM_URL_PROD;	
 
 	private PageData globalFooter;
 
@@ -275,30 +278,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		openAndValidate(alreadyOnSite);
 	}
 	
-	/*public JSONObject accessingGlobalHeader() {
-
-		String fileName = CommonConstants.GLOBAL_HEADER_PAGE_DATA;
-		globalHeader = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
-
-		JSONObject jsonObject = new JSONObject();
-		for (String key : globalHeader.getExpectedData().keySet()) {
-			WebElement element = findElement(globalHeader.getExpectedData().get(key));
-			if (element != null) {
-				if (validateNew(element)) {
-					try {
-						jsonObject.put(key, element.getText());
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			}
-		}
-		globalHeaderJson = jsonObject;
-
-		return globalHeaderJson;
-
-	}*/
+	public AcquisitionHomePage(WebDriver driver, String site) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		openAndValidate(site);
+	}
 
 	@Override
 	public void openAndValidate() {
@@ -325,6 +309,33 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 	}
 
+	public void openAndValidate(String site) {
+		if ("BLayer".equalsIgnoreCase(site)) {
+			if (MRScenario.environment.equals("offline")) {
+				startNew(UMS_ACQISITION_OFFLINE_PAGE_URL);
+			} else if (MRScenario.environment.equals("prod")) {
+				startNew(UMS_ACQISITION_PROD_PAGE_URL);
+			} else {
+				startNew(UMS_ACQISITION_PAGE_URL);
+			}
+			CommonUtility.checkPageIsReadyNew(driver);
+			System.out.println("Current page URL: " + driver.getCurrentUrl());
+			CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
+			CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn, 20); // do not change this to waitForPageLoadNew
+																				// as
+																				// we're not trying to fail the test if
+																				// it
+																				// isn't found
+			try {
+				if (proactiveChatExitBtn.isDisplayed())
+					jsClickNew(proactiveChatExitBtn);
+			} catch (Exception e) {
+				System.out.println("Proactive chat popup not displayed");
+			}
+		} else {
+			Assert.fail("**********Please specify site as BLayer*********");
+		}
+	}
 	@SuppressWarnings("deprecation")
 	public void openAndValidate(boolean alreadyOnSite) {
 		if (alreadyOnSite) {
