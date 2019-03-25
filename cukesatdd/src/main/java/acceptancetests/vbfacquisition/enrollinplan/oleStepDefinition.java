@@ -1641,6 +1641,40 @@ public class oleStepDefinition {
 			}
 		}
 	}
+	
+	@Then("^the user navigates to Optional Benefits Page for following plans with available Riders and select riders$")
+	public void the_user_navigates_to_optional_rider_Page_and_select_riders(DataTable Flags) {
+		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
+		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		if(alreadyEnrolled_Flag){
+			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+			Assert.assertTrue(true);
+		}
+		else{
+			List<DataTableRow> personalAttributesRow = Flags.getGherkinRows();
+			Map<String, String> RiderFlagMap = new HashMap<String, String>();
+			for (int i = 0; i < personalAttributesRow.size(); i++) {
+				RiderFlagMap.put(personalAttributesRow.get(i)
+						.getCells().get(0), personalAttributesRow.get(i)
+						.getCells().get(1));
+			}
+			String RiderFlag = RiderFlagMap.get("Rider Flag");
+			if(RiderFlag.contains("true")){
+				PlanPremiumPage  planPremiumPage = (PlanPremiumPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PLAN_PREMIUM_PAGE);
+				SupplementalBenefitsPage ridersPage = planPremiumPage.navigate_to_Supplemental_Riders_Page();
+				ridersPage.select_riders();
+				if (ridersPage != null) {
+					getLoginScenario().saveBean(OLE_PageConstants.OLE_SUPPLEMENTAL_BENEFITS_PAGE,
+							ridersPage);
+				}
+				else
+					Assert.fail("OLE Supplemental Benefits page is NOT Displayed");
+
+			}
+		}
+	}
+	
 	@Then("^the user navigates to Authorization Page for plan as per following rider options$")
 	public void the_user_navigates_to_authorization(DataTable Flags) {
 		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
@@ -1886,6 +1920,20 @@ public class oleStepDefinition {
 						oleConfirmationPage);
 				System.out.println("OLE Confirmation Page is NOT Displayed : Already Enrolled or Enrollment Failed due to Service error");
 			}
+		}
+
+	}
+	
+	@Then("^the user Validates Ancillary benfit widget for \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" and \"([^\"]*)\" for selected riders$")
+	public void the_user_Validates_Ancillary_benfit_widget_for_and_for_selected_riders(String DentalRiderFlag, String VisionFlag,
+			String FitnesRiderFlag, String HearingFlag) throws Throwable {
+		
+		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
+		String planType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
+		if (planType.equals("PDP")) {
+			System.out.println("Ancillary Benefits Widget is not availble for PDP plan");
+		} else {
+			welcomePage.validate_Ancillary_Benefits(DentalRiderFlag, VisionFlag, FitnesRiderFlag, HearingFlag);
 		}
 
 	}

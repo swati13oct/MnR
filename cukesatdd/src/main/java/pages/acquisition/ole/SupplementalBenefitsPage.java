@@ -55,6 +55,12 @@ public class SupplementalBenefitsPage extends UhcDriver{
 	@FindBy(xpath = ".//*[@id='ole-form-content']//label[contains(text(),'No. I do not')]")
 	private WebElement ridersNoBtn;
 	
+	@FindBy(xpath = "//input[@type='radio']/parent::span//label[contains(text(),'Yes, I want to add')]")
+	private WebElement dentalRiderYes;
+	
+	@FindBy(xpath = "//input[@type='checkbox']/parent::span//label[contains(text(),'Yes, I want to add')]")
+	public WebElement fitnessRiderYes;
+	
 	public SupplementalBenefitsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -84,6 +90,19 @@ public class SupplementalBenefitsPage extends UhcDriver{
 		}
 	}
 
-
+	public void select_riders(){
+		waitforElement(dentalRiderYes);
+		if(dentalRiderYes.isDisplayed()){
+			jsClickNew(dentalRiderYes);
+		}else{
+			System.out.println("No rider available");
+		}
+		if(fitnessRiderYes.isDisplayed()){
+			jsClickNew(fitnessRiderYes);
+		}
+		else{
+			System.out.println("No rider available");
+		}
+	}
 
 }
