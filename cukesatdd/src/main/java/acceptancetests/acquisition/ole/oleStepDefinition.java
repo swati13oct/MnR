@@ -32,6 +32,7 @@ import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.ComparePlansPage;
 import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import acceptancetests.vbfacquisition.enrollinplan.oleCommonConstants;
 import acceptancetests.vbfacquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.OLE_PageConstants;
@@ -2024,7 +2025,7 @@ public class oleStepDefinition {
 				.getBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE);
 		prelimineryQuestionsPage.VerifyPreliminaryQuestions(planname);
 	}
-
+	
 	@Then("^the user Validates Ancillary benfit widget for \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" and \"([^\"]*)\"$")
 	public void the_user_Validates_Ancillary_benfit_widget_for_and(String DentalFlag, String VisionFlag,
 			String FitnesFlag, String HearingFlag) throws Throwable {
@@ -2036,6 +2037,33 @@ public class oleStepDefinition {
 		} else {
 			welcomePage.validate_Ancillary_Benefits(DentalFlag, VisionFlag, FitnesFlag, HearingFlag);
 		}
+
+	}
+	
+	
+	@Then("^the user Validates Ancillary benfit widget for \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" and \"([^\"]*)\" for selected riders$")
+	public void the_user_Validates_Ancillary_benfit_widget_for_and_for_selected_riders(String DentalRiderFlag, String VisionFlag,
+			String FitnesRiderFlag, String HearingFlag) throws Throwable {
+		
+		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
+		String planType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
+		if (planType.equals("PDP")) {
+			System.out.println("Ancillary Benefits Widget is not availble for PDP plan");
+		} else {
+			welcomePage.validate_Ancillary_Benefits(DentalRiderFlag, VisionFlag, FitnesRiderFlag, HearingFlag);
+		}
+
+	}
+	
+	@Then("^user selects Optional Rider Benfits Dental \"([^\"]*)\"or fitness \"([^\"]*)\" Riders$")
+	public void user_selects_Optional_Rider_Benfits_Dental_or_fitness_Riders(String Dentalrider, String FitnessRider) throws Throwable {
+		SupplementalBenefitsPage ridersPage = (SupplementalBenefitsPage) getLoginScenario()
+				.getBean(OLE_PageConstants.OLE_SUPPLEMENTAL_BENEFITS_PAGE);
+		ridersPage.select_riders(Dentalrider,FitnessRider);
+		if (ridersPage != null) {
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_SUPPLEMENTAL_BENEFITS_PAGE, ridersPage);
+		} else
+			Assert.fail("OLE Supplemental Benefits page is NOT Displayed");
 
 	}
 } 

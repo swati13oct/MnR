@@ -90,19 +90,17 @@ public class SupplementalBenefitsPage extends UhcDriver{
 		}
 	}
 
-	public void select_riders(){
-		waitforElement(dentalRiderYes);
-		if(dentalRiderYes.isDisplayed()){
+	public void select_riders(String DentalRider, String FitnessRider) {
+		if (DentalRider.contains("true")) {
+			dentalRiderYes.isDisplayed();
 			jsClickNew(dentalRiderYes);
-		}else{
+		} else
 			System.out.println("No rider available");
-		}
-		if(fitnessRiderYes.isDisplayed()){
+		if (DentalRider.contains("true")) {
+			fitnessRiderYes.isDisplayed();
 			jsClickNew(fitnessRiderYes);
-		}
-		else{
+		} else
 			System.out.println("No rider available");
-		}
 	}
 
 }

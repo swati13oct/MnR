@@ -490,7 +490,7 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
       |   90210 | NO              | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
       |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                   |
 
-  @acquisitionRegression @aprilrelease2019 @OLE_PCP_Medica_AARP @OLE_Regression
+  @acquisitionRegressiontest @aprilrelease2019
   Scenario Outline: TID: <TID> -plan type: <PlanType> - OLE End to end from AARP Acquisition site VPP Plan Summary
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -564,8 +564,9 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
     Then the user validates Look up Provider for MA MAPD and DSNP plans.
     Then the user navigates to Monthly Plan Premium Page
     Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
-    Then the user navigates to Optional Benefits Page for following plans with available Riders and select riders
+    Then the user navigates to Optional Benefits Page for following plans with available Riders
       | Rider Flag | <riderflag> |
+    Then user selects Optional Rider Benfits Dental "<DentalRiderFlag>"or fitness "<FitnessRiderFlag>" Riders
     Then the user navigates to Authorization Page for plan as per following rider options
       | Rider Flag | <riderflag> |
     Then the user validates required fields for Authorization Page
@@ -578,5 +579,5 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
     Then the user Validates Next Steps in Confirmation Page for the Plan Type.
 
     Examples: 
-      | TID       | PlanType | zipcode | isMultutiCounty | county           | plantype | planName                                   | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | DentalFlag | VisionFlag | FitnessFlag | HearingFlag | DentalRiderFlag | FitnessRiderFlag |
-      | US1644081 | MA-HICN  |   95682 | NO              | El Dorado County | MA       | AARP MedicareComplete SecureHorizons (HMO) | HICN     | John      | Doe      | 987456321BB    | false   |  01012010 |  01012010 |      431665465 | true     | 01011903 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | CA           |      90210 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      | false      | true       | false       | true        | true            | true             |
+      | TID       | PlanType  | zipcode | isMultutiCounty | county           | plantype | planName                                   | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | DentalFlag | VisionFlag | FitnessFlag | HearingFlag | DentalRiderFlag | FitnessRiderFlag |
+      | US1644081 | MAPD-HICN |   95682 | NO              | El Dorado County | MAPD     | AARP MedicareComplete SecureHorizons (HMO) | HICN     | John      | Doe      | 987456321BB    | false   |  01012010 |  01012010 |      431665465 | true     | 01011903 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | CA           |      90210 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      | false      | true       | false       | true        | true            | true             |
