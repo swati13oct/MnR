@@ -120,7 +120,12 @@ public class MemberRedesignHeaderStepDefinition {
 	public void I_view_the_global_navigation() throws InterruptedException {
 		// Express the Regexp above with the code you wish you had
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-
+		//note: updated to use the accounthomepage to navigate to dce, in case need to use 'sorry' page workaround for header testing
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+		accountHomePage.navigate_to_dce();
+		getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
+		
+		/* original
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
 		dce.changeUrlToNewDCEPage();
 		try {
@@ -131,6 +136,7 @@ public class MemberRedesignHeaderStepDefinition {
 		}
 		AccountHomePage accountHomePage = new AccountHomePage(wd);
 		getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
+		*/
 	}
 
 	/**

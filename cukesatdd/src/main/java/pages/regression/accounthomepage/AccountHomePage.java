@@ -1,6 +1,7 @@
 package pages.regression.accounthomepage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -238,6 +239,11 @@ public class AccountHomePage extends UhcDriver {
 	//@FindBy(xpath = "//*[@id='claims_1']") @FindBy(xpath = "//a[text()='Go to Claims page']")
 	private WebElement claimsDashboardLink;
 
+	//note: for workaround if getting 'Sorry' error, go to account setting then go to claims
+	@FindBy(xpath = "//a[@id='claims_1']")
+	private WebElement claimsWorkAround;
+
+	
 	@FindBy(xpath = "//*[@id='row2link1']/td[2]/a")
 	private WebElement claimsTestharnessLink;
 
@@ -383,6 +389,11 @@ public class AccountHomePage extends UhcDriver {
 			myAccountHome = CommonUtility.readPageData(fileName,
 					CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);
 		}
+		//initialize this in case need to workaround later due to Sorry login error for certain testing
+		attemptSorryWorkaround=new HashMap<String,String>();
+		attemptSorryWorkaround.put("needWorkaround", "no");
+		attemptSorryWorkaround.put("planType", "na");
+		attemptSorryWorkaround.put("testType", "na");
 
 		// openAndValidate();
 	}
@@ -390,6 +401,11 @@ public class AccountHomePage extends UhcDriver {
 	public AccountHomePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
+		//initialize this in case need to workaround later due to Sorry login error for certain testing
+		attemptSorryWorkaround=new HashMap<String,String>();
+		attemptSorryWorkaround.put("needWorkaround", "no");
+		attemptSorryWorkaround.put("planType", "na");
+		attemptSorryWorkaround.put("testType", "na");
 		/*
 		 * try {
 		 * 
@@ -621,14 +637,19 @@ public class AccountHomePage extends UhcDriver {
 				accountSettingOption.click();
 				System.out.println("title is " + driver.getTitle());
 				System.out.println("Current Url is " + driver.getCurrentUrl());
-				Thread.sleep(6000);	   
-				//CommonUtility.waitForPageLoad(driver, heading, 10);
-
-				if (driver.getCurrentUrl().contains("profile")) {
-					return new ProfileandPreferencesPage(driver);
-				}
-				return null;
 			}
+			else if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
+				workaroundAttempt("profilepref");
+			}
+			Thread.sleep(6000);	   
+			//CommonUtility.waitForPageLoad(driver, heading, 10);
+
+			if (driver.getCurrentUrl().contains("profile")) {
+				return new ProfileandPreferencesPage(driver);
+			} 
+			return null;
+
+
 
 		} else if (MRScenario.environment.equals("team-ci1") || MRScenario.environment.equals("team-h")
 				|| MRScenario.environment.equals("test-a") || MRScenario.environment.equals("team-e")
@@ -1089,7 +1110,12 @@ public class AccountHomePage extends UhcDriver {
 				CommonUtility.waitForPageLoadNew(driver, headingContactUs, CommonConstants.TIMEOUT_60);
 				Thread.sleep(3000L);
 			} else {
-				linkContactUs.click();
+				if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
+					workaroundAttempt("contactus");
+				} else {
+					linkContactUs.click();
+				}
+
 			}
 			CommonUtility.waitForPageLoad(driver, headingContactUs, 10);
 			if (driver.getTitle().contains("Contact Us")) {
@@ -1226,7 +1252,6 @@ public class AccountHomePage extends UhcDriver {
 		} else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
 			System.out.println("user is on Stage login page");
 			if (driver.getCurrentUrl().contains("/dashboard"))
-				;
 			{
 				System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
 				if(MRScenario.isTestHarness.equals("YES")){
@@ -1241,6 +1266,9 @@ public class AccountHomePage extends UhcDriver {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+			} 
+			else if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
+				workaroundAttempt("claims");
 			}
 			return new ClaimSummarypage(driver);
 
@@ -1603,20 +1631,23 @@ public class AccountHomePage extends UhcDriver {
 			executor.executeScript("arguments[0].click();", OrderMaterial_Dashboard);
 			// OrderMaterial_Dashboard.click();
 		} else {
-			//tbd String Page_URL = "https://" + MRScenario.environment
-			//tbd 		+ "-medicare."+MRScenario.domain+"//member/order-plan-materials.html";
-			String Page_URL="";
-			if (MRScenario.environment.equalsIgnoreCase("team-a")) {
-				Page_URL = "https://www." + MRScenario.environment
-						+ "-medicare."+MRScenario.domain+"/content/medicare/member/order-materials/overview.html";
+			if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
+				workaroundAttempt("order");
 			} else {
-				Page_URL = "https://" + MRScenario.environment
-						+ "-medicare."+MRScenario.domain+"//member/order-plan-materials.html";
+				String Page_URL="";
+				if (MRScenario.environment.equalsIgnoreCase("team-a")) {
+					Page_URL = "https://www." + MRScenario.environment
+							+ "-medicare."+MRScenario.domain+"/content/medicare/member/order-materials/overview.html";
+				} else {
+					Page_URL = "https://" + MRScenario.environment
+							+ "-medicare."+MRScenario.domain+"//member/order-plan-materials.html";
+				}
+				
+				// String Page_URL = driver.getCurrentUrl().split(".com")[0];
+				driver.navigate().to(Page_URL);
+				System.out.println("Navigated to Order materials Page URL : " + Page_URL);
 			}
 			
-			// String Page_URL = driver.getCurrentUrl().split(".com")[0];
-			driver.navigate().to(Page_URL);
-			System.out.println("Navigated to Order materials Page URL : " + Page_URL);
 		}
 		try {
 			Thread.sleep(3000);
@@ -1702,6 +1733,8 @@ public class AccountHomePage extends UhcDriver {
 				System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
 				waitforElement(drugLookup);
 				drugLookup.click();
+			}else if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
+				workaroundAttempt("dce");
 			}
 		} else {
 			System.out.println("This script is only intended to be run using test harness on team-b or team-h. Update condition for your own environment");
@@ -2430,7 +2463,7 @@ public class AccountHomePage extends UhcDriver {
         System.out.println(" @@@ The title of the page is "+driver.getTitle());         
         if (getTitle().equalsIgnoreCase("Home | UnitedHealthcare")) {        	 
      	   System.out.println("On the dashboard ");            
-}
+        }
         System.out.println("@@@ The URL of the page is ==>" + driver.getCurrentUrl());
         if (driver.getCurrentUrl().contains("https://member.int.uhc.com/aarp/dashboard"));
         System.out.println("Member is on the dashboard");
@@ -2442,10 +2475,64 @@ public class AccountHomePage extends UhcDriver {
  			"Use this site to find helpful information while you’re getting ready for your plan to start on"));
  	System.out.println("Assert on the preeffective message is passed");
 
- }
+	}
     
+	//vvv note: added for 'sorry' login error workaround	
+	private HashMap<String,String> attemptSorryWorkaround;
 
-	
+	public HashMap<String,String> getAttemptSorryWorkaround() {
+		return attemptSorryWorkaround;
+	}
+
+	public void setAttemptSorryWorkaround(HashMap<String,String> input) {
+		attemptSorryWorkaround=input;
+	}
+
+	public void workaroundAttempt(String page) {
+		System.out.println("======================== OK LET'S ATTEMPT THE 'SORRY' WORKAROUND  ===========================");
+		//assumption this is the sorry error url, parse the URL to determine which URL to use
+		String currentUrl=driver.getCurrentUrl();
+		String[] tmp1=currentUrl.split(".com/");
+		String[] tmp2=tmp1[1].split("/");
+		String userType=tmp2[0];
+
+		String part1="";
+		if (attemptSorryWorkaround.get("planType").equalsIgnoreCase("pcp") || attemptSorryWorkaround.get("planType").equalsIgnoreCase("medica")) {
+			part1="https://"+MRScenario.environmentMedicare+"-mymedicareaccount.uhc.com/";
+		} else {
+			part1="https://"+MRScenario.environmentMedicare+"-medicare.uhc.com/";
+		}
+
+		String part2=userType;
+
+		String part3="";
+		if (page.equals("claims")) {
+			part3="/member/claims.html#/overview";
+		} else if (page.equals("contactus")) {
+			part3="/member/contact-us/overview.html#/contact-us-two";
+		} else if (page.equals("profilepref")) {
+			part3="/member/profile.html";
+		} else if (page.equals("order")) { 
+			part3="/member/order-materials/overview.html";
+		} else if (page.equals("reward")) { //note: keep for now in case anything changed but health n wellness content won't load if getting sorry error
+			part3="/member/health-and-wellness.html";
+		} else if (page.equals("dce")) { //note: keep for now in case anything changed but health n wellness content won't load if getting sorry error
+			part3="/member/drug-lookup/overview.html#/drug-cost-estimator";
+		} else {	//note: shouldn't have gotten here, but just in case
+			Assert.assertTrue("Sorry, testType '"+attemptSorryWorkaround.get("testType")+"' is not covered by this workaround yet, abort this test now", false);
+		}
+
+		String workaroundURL=part1+part2+part3;
+		System.out.println("Workaround URL is going to be: "+workaroundURL);
+		driver.get(workaroundURL);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	//^^^ note: added for 'sorry' login error workaround	
+
 }
 
 

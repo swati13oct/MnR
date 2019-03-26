@@ -1,9 +1,14 @@
 package pages.regression.claims;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.Alert;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NoSuchElementException;
@@ -15,11 +20,10 @@ import org.openqa.selenium.support.ui.Select;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import junit.framework.Assert;
+//import junit.framework.Assert;
 import pages.regression.footer.FooterPage;
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 
-@SuppressWarnings("deprecation")
 
 /**
  * Functionality : this page validates the Claim Summary page.
@@ -87,10 +91,11 @@ public class ClaimSummarypage extends UhcDriver{
 	private WebElement dynamicNumberOfClaimsTextPdp;
 
 	//@FindBy (xpath = "//*[@id='medical'or @id='table-medical']/")
-	@FindBy(xpath=".//*[@id='table-medical']/div[3]/div/div")
+	//@FindBy(xpath=".//*[@id='table-medical']/div[3]/div/div")
+	@FindBy(xpath=".//*[@id='medical']")
 	private WebElement claimsTableMedical;
 
-	@FindBy (xpath = ".//*[@id='prescriptionDrug' ]")
+	@FindBy (xpath = ".//*[@id='prescriptionDrug']")
 	//@FindBy (id= ".//*[@id='table-medical']")
 	private WebElement claimsTablePrescriptionDrug;
 	
@@ -265,6 +270,55 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy(xpath="//div[@id='tableAtddFed']//div[contains(text(),'Prescription Drug')]")
 	public WebElement pdpPrescriptionDrug;
 	
+	//vvv note:	added for def1041	
+	@FindBy(xpath="//div[@id='validDivErr']//p//span") 
+	private WebElement greatederThanTwoYearsError;
+
+	@FindBy(xpath="//span[@id='numClaims1']")	
+	private WebElement numberOfClaims;
+
+	@FindBy(xpath="//span[@id='numClaims3']")	
+	private WebElement numberOfClaimsPrescriptionDrug;
+	
+	@FindBy(xpath="//span[@id='numClaims4']")	
+	private WebElement numberOfClaimsPrescriptionDrugCustomSearch;
+
+	@FindBy(xpath="//span[@id='numClaims5']")	
+	private WebElement numberOfClaimsShip;
+
+	@FindBy(xpath="//span[@id='numClaims6']")	
+	private WebElement numberOfClaimsShipCustomSearch;
+
+	@FindBy(xpath="//span[contains(@class,'days-title')]//span[@id='numClaims2']")
+	private WebElement customSearchNumberOfClaims;
+	
+	@FindBy(xpath="//div[contains(@class,'shipCompSection')]//p[contains(@id,'validShipDivErr')]/..//p[2]//span")
+	private WebElement greatederThanTwoYearsErrorShip;
+
+	@FindBy(xpath=".//*[@id='ship' ]")
+	private WebElement claimsTableShip;
+
+	@FindBy(xpath="//b[contains(text(),'Claim Type')]/../../../../div[contains(text(),'Medical')]")
+	private WebElement ma_medicalClaimTypeText;
+
+	@FindBy(xpath="//b[contains(text(),'Claim Type')]/../../../../div[contains(text(),'Prescription')]")
+	private WebElement pdp_prescriptionDrugClaimTypeText;
+	
+	@FindBy(xpath="//div[contains(@ng-if,'systemFailure')]//*[contains(text(),'system error')]")
+	private WebElement systemErrorMsg;
+
+	@FindBy(xpath="//*[@id='custom_from_date_ship']")
+	private WebElement shipFrom;
+
+	@FindBy(xpath="//*[@id='custom_to_date_ship']")
+	private WebElement shipTo;
+
+	@FindBy(xpath="//div[contains(@class,'shipCompSection')]//div[contains(@ng-if,'futureDateError')]//p//span")
+	private WebElement fromDateLaterThanToDateErrorShip;
+
+	@FindBy(xpath="//button[@id='customsearchbuttonShipBtn']")
+	private WebElement shipSearchButton;
+	//^^^ note:	added for def1041				
 
 
 	public ClaimSummarypage(WebDriver driver) {
@@ -725,7 +779,7 @@ public class ClaimSummarypage extends UhcDriver{
 			System.out.println("Clicked 24 months option");
 			validate(pdpPrescriptionDrug);
 		}
-		else if (planType.contains("MAPD") || planType.contains("MA")){
+		else if (planType.contains("MAPD") || planType.contains("MA")||planType.contains("PCP")){
 	
 					/*validate (customSearch);
 					System.out.println("!!! Custom search is seen in the view Claims From drop down ===>"+(customSearch.getText()));*/
@@ -737,7 +791,7 @@ public class ClaimSummarypage extends UhcDriver{
 					validate (Medical);
 					System.out.println("!! Claim type Medical is validated!!! ");
 					validate (Medical);
-					if (planType.contains("MAPD")) {
+					if (planType.contains("MAPD") || planType.contains("PCP")) {
 					validate(PrescriptionDrug);
 	    			System.out.println("!!!Claim type PDP is validated !!!");
 	    			PrescriptionDrug.click();
@@ -806,9 +860,10 @@ public class ClaimSummarypage extends UhcDriver{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
-		validate(claimstablemoreinfolink);
-		System.out.println("more info seen claim summary page ==>" +claimstablemoreinfolink);
-		
+		if (validate(claimstablemoreinfolink)) {
+			System.out.println("more info seen claim summary page ==>" +claimstablemoreinfolink);
+		}
+		Assert.assertTrue("PROBLEM - should not get System Error message on claim page", !validate(systemErrorMsg));
 		if(claimsTableMedical.isDisplayed() || claimsTablePrescriptionDrug.isDisplayed() || claimsTableSHIP.isDisplayed()){
 			if (claimsTableMedical.isDisplayed())System.out.println("!!! Claims Table is seen for Federal members on Claims Summary page!!!");
 			else if (claimsTablePrescriptionDrug.isDisplayed())System.out.println("!!! Claims Table is seen for PDP members on Claims Summary page!!!");
@@ -817,10 +872,10 @@ public class ClaimSummarypage extends UhcDriver{
 		}	
 		else
 		{
-			System.out.println("!!!!!!!!! NOT Able to find the claim table !!!!!!!!!");
+			System.out.println("!!!!!!!!! NOT Able to find the claim table !!!!!!!!! - MedicalTable="+claimsTableMedical.isDisplayed()+" | PrescriptionTable="+claimsTablePrescriptionDrug.isDisplayed()+" | ShipTable="+claimsTableSHIP.isDisplayed());
 		//	validate(claimsTablePagination);
 		//	System.out.println(" !!! Pagination is seen on Claims Summary page under the claims table ===>"+claimsTablePagination.isDisplayed());
-		Assert.fail();
+		Assert.assertTrue("PROBLEM - no claims table showing, check to see if test user has any claims or getting system error, test assumes user will have claims for the given test range so the claims table should have show accordingly - MedicalTable="+claimsTableMedical.isDisplayed()+" | PrescriptionTable="+claimsTablePrescriptionDrug.isDisplayed()+" | ShipTable="+claimsTableSHIP.isDisplayed(), false);
 		return false;
 		}
 		
@@ -1388,4 +1443,518 @@ public void NavigateToClaimsPage(){
 				return null;
 			}
 			
+			//vvv note:	added for def1041	
+			public void validateGreaterThanTwoYearError(String planType) {
+				WebElement errorTextElement=greatederThanTwoYearsError;
+				if (planType.equals("SHIP")) {
+					errorTextElement=greatederThanTwoYearsErrorShip;
+				}
+				if(!errorTextElement.getText().contains("The time between your From date and your To date cannot be more than 24 months.For help with claims older than 24 months, call Customer Service at the number listed on the Contact Us web page.")){
+					Assert.fail(errorTextElement + "is not beind dsiplayed");	
+				}
+			}
+
+			public int getNumClaims(String range, String claimType) {
+				try {
+					Thread.sleep(10000); //the claims take time to load sometimes, if don't way then it will think 0 claims
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				WebElement numClaimsElement=numberOfClaims;
+				if (range.equalsIgnoreCase("custom search")) {
+					if (claimType.equalsIgnoreCase("prescription drug")) {
+						numClaimsElement=numberOfClaimsPrescriptionDrugCustomSearch;
+					} else if (claimType.equalsIgnoreCase("medical")) {
+						numClaimsElement=customSearchNumberOfClaims;
+					} else {
+						numClaimsElement=numberOfClaimsShipCustomSearch;
+					}
+				} else {
+					if (claimType.equalsIgnoreCase("prescription drug")) {
+						numClaimsElement=numberOfClaimsPrescriptionDrug;
+					} else if (claimType.equalsIgnoreCase("medical")) {
+						numClaimsElement=numberOfClaims;
+					} else {
+						numClaimsElement=numberOfClaimsShip;
+					}
+				}
+				Assert.assertTrue("PROBLEM - unable to lcoate the element for number of claims for range="+range, validate(numClaimsElement));
+				try {
+					int numClaims=Integer.valueOf(numClaimsElement.getText().trim());
+					System.out.println("numClaims="+numClaims);	
+					return numClaims;
+				} catch (Exception e) {
+					System.out.println("Exception e: "+e);
+					Assert.assertTrue("PROBLEM: Unable to locate the value for number of claim for given range="+range,false);
+				}
+				return 0;
+			}
+			public void searchClaimsByTimePeriodClaimType(String planType,String claimPeriod, String claimType) throws InterruptedException {
+				//MA - Medical
+				//MAPID | PCP - Medical & Prescription drug
+				//PDP - Prescription drug
+				//SHIP - no Medical or Prescription drug
+				if(planType.equals("SHIP")){
+					System.out.println("For ship case, locate the drop down box and select '"+claimPeriod+"' option");
+					Select dropdown=new Select (claimDropDownBoxForShip);	
+					dropdown.selectByVisibleText(claimPeriod);
+
+					System.out.println("Clicked '"+claimPeriod+"' option");
+				} else if (planType.contains("PDP")) {
+					System.out.println("!!!Claim type PDP is validated !!!");
+
+					Assert.assertTrue("PROBLEM - planType='"+planType+"' - unable to locate the prescription drug option",validate(pdp_prescriptionDrugClaimTypeText));
+					Select dropdown=new Select (claimDropDownBoxForFed);	
+					dropdown.selectByVisibleText(claimPeriod);
+					System.out.println("Clicked '"+claimPeriod+"' option");
+				} else if (planType.equals("MAPD") || planType.equals("MA") || planType.equals("PCP") || planType.equals("MEDICA")){
+					WebElement option=null;
+					if (claimPeriod.equals("Last 30 days")) {
+						option = driver.findElement(By.id("date30Atdd"));
+					} else if (claimPeriod.equals("Last 90 days")) {
+						option = driver.findElement(By.id("date90Atdd"));
+					} else if (claimPeriod.equals("Last 6 months")) {
+						option = driver.findElement(By.id("date6MAtdd"));
+					} else if (claimPeriod.equals("Last 12 months")) {
+						option = driver.findElement(By.id("date12MAtdd"));
+					} else if (claimPeriod.equals("Last 24 months")) {
+						option = driver.findElement(By.id("date24MAtdd"));
+					} else if (claimPeriod.equals("Custom search")) {
+						option = driver.findElement(By.id("dateCustomSearchAtdd"));
+					}
+					System.out.println("!!! Validating the drop down to select the claims from '"+claimPeriod+"'  !!!");
+					option.click();
+					System.out.println("!!! Option selected from the view claims from drop down is ====>"+(option.getText()));
+
+					if (planType.equals("MA")) {
+						Assert.assertTrue("PROBLEM - planType='"+planType+"' - unable to locate the medical option",validate(ma_medicalClaimTypeText));
+					}
+
+					System.out.println("!! Claim type Medical is validated!!! ");
+					if ((planType.equals("MAPD") || planType.equals("PCP") || planType.equals("MEDICA")) && claimType.equalsIgnoreCase("prescription drug")) {
+
+						Assert.assertTrue("PROBLEM - planType='"+planType+"' - unable to locate the prescription drug option",validate(PrescriptionDrug));
+
+						System.out.println("!!!Claim type PrescriptionDrug is validated !!!");
+						PrescriptionDrug.click();
+						System.out.println("!!! Claim Type PrescriptionDrug is clicked !!!");
+					} else if ((planType.equals("MAPD") || planType.equals("PCP") || planType.equals("MEDICA")) && claimType.equalsIgnoreCase("medical")) {
+						Assert.assertTrue("PROBLEM - planType='"+planType+"' - unable to locate the medical option",validate(Medical));
+						// note: MAPD has both medical and prescription drug options
+						// for MA case there will be just medical so there won't be a need for click
+						Medical.click();
+					}
+				} else{
+					validate (customSearch);
+					System.out.println("!!! Custom search is seen in the view Claims From drop down ===>"+(customSearch.getText()));
+					System.out.println("!!! Validating the drop down to select the claims !!!");
+				}
+				validate (learnMoreAboutClaims);
+				System.out.println("!!! Learn More About Claims link is seen on the claims Summary page ===>"+(learnMoreAboutClaims.isDisplayed()));
+			}
+
+			public boolean verifyPrintAndDownloadOptions(int numClaims) {
+				boolean result=false;
+				CommonUtility.waitForPageLoad(driver, ClaimsSummaryPage,60);
+				if (numClaims >0) {
+					System.out.println("Has claim(s), expect to see print and download buttons");
+					if (validate(validateclaimsprintbutton) && validate(validateclaimsdownloadbutton)) {
+						result=true;
+					} else {
+						result=false;
+					}
+				} else {
+					System.out.println("Has no claim, expect NOT to see print and download buttons");
+					if (!validate(validateclaimsprintbutton) && !validate(validateclaimsdownloadbutton)) {
+						result=true;
+					} else {
+						result=false;
+					}
+				}
+				return result;	
+			}
+
+			public HashMap<String,String> gatherDataFromSummaryPage(String claimType, int rowNum, String claimsSystem, boolean hasYourShare) {
+				HashMap<String,String> dataMap=new HashMap<String,String> ();
+				//note: for claim summary medical table
+				if (claimType.equalsIgnoreCase("medical")) {
+					String xpath="//table[@id='medical']//tr["+rowNum+"]//td[2]";
+					String key="med_dateOfService";
+					WebElement element=driver.findElement(By.xpath(xpath));
+					Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", validate(element));
+					String value=element.getText().trim();
+					dataMap.put(key, convertDateFormat(value));
+
+					xpath="//table[@id='medical']//tr["+rowNum+"]//td[3]";
+					key="med_providerName";
+					element=driver.findElement(By.xpath(xpath));
+					Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", validate(element));
+					value=element.getText().trim();
+					dataMap.put(key, value);
+
+					xpath="//table[@id='medical']//tr["+rowNum+"]//td[4]";
+					key="med_providerType";
+					element=driver.findElement(By.xpath(xpath));
+					Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", validate(element));
+					value=element.getText().trim();
+					dataMap.put(key, value);
+
+					xpath="//table[@id='medical']//tr["+rowNum+"]//td[5]";
+					key="med_amountBilled";
+					element=driver.findElement(By.xpath(xpath));
+					Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", validate(element));
+					value=element.getText().trim();
+					dataMap.put(key, value);
+
+					xpath="//table[@id='medical']//tr["+rowNum+"]//td[6]";
+					key="med_claimStatus";
+					element=driver.findElement(By.xpath(xpath));
+					Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", validate(element));
+					value=element.getText().trim();
+					dataMap.put(key, value);
+
+					if (hasYourShare) {
+						if (claimsSystem.contains("NICE")) {
+							xpath="//table[@id='medical']//tr["+rowNum+"]//td[8]";
+						} else {
+							xpath="//table[@id='medical']//tr["+rowNum+"]//td[7]";
+						}
+						key="med_yourShare";
+						element=driver.findElement(By.xpath(xpath));
+						Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", validate(element));
+						value=element.getText().trim();
+						dataMap.put(key, value);
+					} else {
+						if (claimsSystem.contains("NICE")) {
+							xpath="//table[@id='medical']//tr["+rowNum+"]//td[8]";
+						} else {
+							xpath="//table[@id='medical']//tr["+rowNum+"]//td[7]";
+						}
+						element=driver.findElement(By.xpath(xpath));
+						Assert.assertTrue("PROBLEM - should not have 'Your Share' value showing on detail page", !validate(element));
+					}
+				} else if (claimType.equalsIgnoreCase("prescription drug")) {
+					String xpath="//table[@id='prescriptionDrug']//tr["+rowNum+"]//td[3]";
+					String key="drug_dateFilled";
+					WebElement element=driver.findElement(By.xpath(xpath));
+					Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", validate(element));
+					String value=element.getText().trim();
+					dataMap.put(key, value);
+
+					xpath="//table[@id='prescriptionDrug']//tr["+rowNum+"]//td[4]";
+					key="drug_medication";
+					element=driver.findElement(By.xpath(xpath));
+					Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", validate(element));
+					value=element.getText().trim();
+					dataMap.put(key, value);
+
+					xpath="//table[@id='prescriptionDrug']//tr["+rowNum+"]//td[5]";
+					key="drug_rxNumber";
+					element=driver.findElement(By.xpath(xpath));
+					Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", validate(element));
+					value=element.getText().trim();
+					dataMap.put(key, value);
+
+					xpath="//table[@id='prescriptionDrug']//tr["+rowNum+"]//td[6]";
+					key="drug_pharmacy";
+					element=driver.findElement(By.xpath(xpath));
+					Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", validate(element));
+					value=element.getText().trim();
+					dataMap.put(key, value);
+
+					xpath="//table[@id='prescriptionDrug']//tr["+rowNum+"]//td[7]";
+					key="drug_planPaid";
+					element=driver.findElement(By.xpath(xpath));
+					Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", validate(element));
+					value=element.getText().trim();
+					dataMap.put(key, value);
+
+					xpath="//table[@id='prescriptionDrug']//tr["+rowNum+"]//td[8]";
+					key="drug_youPaid";
+					element=driver.findElement(By.xpath(xpath));
+					Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", validate(element));
+					value=element.getText().trim();
+					dataMap.put(key, value);
+
+					xpath="//table[@id='prescriptionDrug']//tr["+rowNum+"]//td[9]";
+					key="drug_otherPayments";
+					element=driver.findElement(By.xpath(xpath));
+					Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", validate(element));
+					value=element.getText().trim();
+					dataMap.put(key, value);
+				} else {
+					String xpath="//table[@id='ship']//tr["+rowNum+"]//td[4]";
+					String key="ship_dateOfService";
+					WebElement element=driver.findElement(By.xpath(xpath));
+					Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", validate(element));
+					String value=element.getText().trim();
+					dataMap.put(key, convertDateFormat(value));
+
+					xpath="//table[@id='ship']//tr["+rowNum+"]//td[5]";
+					key="ship_provider";
+					element=driver.findElement(By.xpath(xpath));
+					Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", validate(element));
+					value=element.getText().trim();
+					dataMap.put(key, value);
+
+					xpath="//table[@id='ship']//tr["+rowNum+"]//td[6]";
+					key="ship_claimType";
+					element=driver.findElement(By.xpath(xpath));
+					Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", validate(element));
+					value=element.getText().trim();
+					dataMap.put(key, value);
+
+					xpath="//table[@id='ship']//tr["+rowNum+"]//td[7]";
+					key="ship_charged";
+					element=driver.findElement(By.xpath(xpath));
+					Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", validate(element));
+					value=element.getText().trim();
+					dataMap.put(key, value);
+
+					xpath="//table[@id='ship']//tr["+rowNum+"]//td[8]";
+					key="ship_paidToYou";
+					element=driver.findElement(By.xpath(xpath));
+					Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", validate(element));
+					value=element.getText().trim();
+					dataMap.put(key, value);
+
+					xpath="//table[@id='ship']//tr["+rowNum+"]//td[9]";
+					key="ship_paidToProvider";
+					element=driver.findElement(By.xpath(xpath));
+					Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", validate(element));
+					value=element.getText().trim();
+					dataMap.put(key, value);
+
+					xpath="//table[@id='ship']//tr["+rowNum+"]//td[10]";
+					key="ship_processedDate";
+					element=driver.findElement(By.xpath(xpath));
+					Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", validate(element));
+					value=element.getText().trim();
+					dataMap.put(key, convertDateFormat(value));
+				}
+				System.out.println("Collected data from summary page 1st data row from claims table\n"+Arrays.asList(dataMap)+"\n");
+				return dataMap;
+			}
+
+			public String convertDateFormat(String inputDateString) {
+				String dateStr="";
+				try {
+					DateFormat srcDf = new SimpleDateFormat("yyyy-MM-dd");
+					Date date = srcDf.parse(inputDateString);	 // parse the date string into Date object
+					DateFormat destDf = new SimpleDateFormat("MM/dd/yyyy");
+					dateStr = destDf.format(date);	// format the date into another format
+					//System.out.println("TEST - Converted date format from '"+inputDateString+"' to  '" + dateStr+"'");
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				return dateStr;
+			}
+
+			public void searchClaimsByTimeInterval(String planType, String toDate, String fromDate) {
+				System.out.println("The title of the page is-------->"+driver.getTitle());
+				if(driver.getTitle().contains("Claims Summary")){
+					if (planType.equals("SHIP")) {
+						sendkeys(shipFrom,fromDate);
+						sendkeys(shipTo,toDate);
+						CommonUtility.waitForPageLoad(driver, shipSearchButton,60);
+						shipSearchButton.click();
+					} else {
+						sendkeys(from,fromDate);
+						sendkeys(to,toDate);
+						CommonUtility.waitForPageLoad(driver, searchButton,60);
+						searchButton.click();
+					}
+				}
+			}
+
+			public void  validatefromDateLaterThanToDateError(String planType) {
+				WebElement errorTextElement=fromDateLaterThanToDateError;
+				if (planType.equals("SHIP")) {
+					errorTextElement=fromDateLaterThanToDateErrorShip;
+				} 
+				if(!errorTextElement.getText().contains("Your From date needs to come before or")){
+					Assert.fail(errorTextElement + "is not beind dsiplayed");	
+				}
+			}
+
+			public void validateClaimsTableHeaderColumns(String claimType, String claimSystem, boolean hasYourShare) {
+				if (claimType.equalsIgnoreCase("medical")) {
+					//note: medical tbl doesn't have column6, don't know why
+					String actualCol1=driver.findElement(By.xpath("//table[@id='medical']//tr[1]//th[1]")).getText();
+					String expectCol1="Date of Service";
+					Assert.assertTrue("PROBLEM - medical claims table header column1 value not as expected. Expected='"+expectCol1+"' | Actual='"+actualCol1+"'", expectCol1.equals(actualCol1));
+
+					String actualCol2=driver.findElement(By.xpath("//table[@id='medical']//tr[1]//th[2]")).getText();
+					String expectCol2="Provider Name";
+					Assert.assertTrue("PROBLEM - medical claims table header column2 value not as expected. Expected='"+expectCol2+"' | Actual='"+actualCol2+"'", expectCol2.equals(actualCol2));
+
+					String actualCol3=driver.findElement(By.xpath("//table[@id='medical']//tr[1]//th[3]")).getText();
+					String expectCol3="Provider Type";
+					Assert.assertTrue("PROBLEM - medical claims table header column3 value not as expected. Expected='"+expectCol3+"' | Actual='"+actualCol3+"'", expectCol3.equals(actualCol3));
+
+					String actualCol4=driver.findElement(By.xpath("//table[@id='medical']//tr[1]//th[4]")).getText();
+					String expectCol4="Amount providers have billed the plan";
+					Assert.assertTrue("PROBLEM - medical claims table header column4 value not as expected. Expected='"+expectCol4+"' | Actual='"+actualCol4+"'", expectCol4.equals(actualCol4));
+
+					String actualCol5=driver.findElement(By.xpath("//table[@id='medical']//tr[1]//th[5]")).getText();
+					String expectCol5="Claim Status";
+					Assert.assertTrue("PROBLEM - medical claims table header column5 value not as expected. Expected='"+expectCol5+"' | Actual='"+actualCol5+"'", expectCol5.equals(actualCol5));
+
+					if (hasYourShare) {
+						if (claimSystem.contains("NICE")) {
+							String actualCol6=driver.findElement(By.xpath("//table[@id='medical']//tr[1]//th[6]")).getText();
+							String expectCol6="Your Share";
+							Assert.assertTrue("PROBLEM - medical claims table header column6 value not as expected. Expected='"+expectCol6+"' | Actual='"+actualCol6+"'", expectCol6.equals(actualCol6));
+						} else {
+							String actualCol7=driver.findElement(By.xpath("//table[@id='medical']//tr[1]//th[7]")).getText();
+							String expectCol7="Your Share";
+							Assert.assertTrue("PROBLEM - medical claims table header column7 value not as expected. Expected='"+expectCol7+"' | Actual='"+actualCol7+"'", expectCol7.equals(actualCol7));
+						}
+					} else {
+						if (claimSystem.contains("NICE")) {
+							boolean result=validate(driver.findElement(By.xpath("//table[@id='medical']//tr[1]//th[6]")));
+							Assert.assertTrue("PROBLEM - 'Your Share' column is showing up unexpectedly on summary page", !result);
+						} else {
+							boolean result=validate(driver.findElement(By.xpath("//table[@id='medical']//tr[1]//th[7]")));
+							Assert.assertTrue("PROBLEM - 'Your Share' column is showing up unexpectedly on summary page", !result);
+						}
+					}
+					String actualCol8=driver.findElement(By.xpath("//table[@id='medical']//tr[1]//th[8]")).getText();
+					String expectCol8="Claim Details";
+					Assert.assertTrue("PROBLEM - medical claims table header column8 value not as expected. Expected='"+expectCol8+"' | Actual='"+actualCol8+"'", expectCol8.equals(actualCol8));
+				} else if (claimType.equalsIgnoreCase("prescription drug")) {
+					String actualCol1=driver.findElement(By.xpath("//table[@id='prescriptionDrug']//tr[1]//th[1]")).getText();
+					String expectCol1="Date Filled";
+					Assert.assertTrue("PROBLEM - prescription drug claims table header column1 value not as expected. Expected='"+expectCol1+"' | Actual='"+actualCol1+"'", expectCol1.equals(actualCol1));
+
+					String actualCol2=driver.findElement(By.xpath("//table[@id='prescriptionDrug']//tr[1]//th[2]")).getText();
+					String expectCol2="Medication";
+					Assert.assertTrue("PROBLEM - prescription drug claims table header column2 value not as expected. Expected='"+expectCol2+"' | Actual='"+actualCol2+"'", expectCol2.equals(actualCol2));
+
+					String actualCol3=driver.findElement(By.xpath("//table[@id='prescriptionDrug']//tr[1]//th[3]")).getText();
+					String expectCol3="Rx Number";
+					Assert.assertTrue("PROBLEM - prescription drug claims table header column3 value not as expected. Expected='"+expectCol3+"' | Actual='"+actualCol3+"'", expectCol3.equals(actualCol3));
+
+					String actualCol4=driver.findElement(By.xpath("//table[@id='prescriptionDrug']//tr[1]//th[4]")).getText();
+					String expectCol4="Pharmacy";
+					Assert.assertTrue("PROBLEM - prescription drug claims table header column4 value not as expected. Expected='"+expectCol4+"' | Actual='"+actualCol4+"'", expectCol4.equals(actualCol4));
+
+					String actualCol5=driver.findElement(By.xpath("//table[@id='prescriptionDrug']//tr[1]//th[5]")).getText();
+					String expectCol5="Plan Paid";
+					Assert.assertTrue("PROBLEM - prescription drug claims table header column5 value not as expected. Expected='"+expectCol5+"' | Actual='"+actualCol5+"'", expectCol5.equals(actualCol5));
+
+					String actualCol6=driver.findElement(By.xpath("//table[@id='prescriptionDrug']//tr[1]//th[6]")).getText();
+					String expectCol6="You Paid";
+					Assert.assertTrue("PROBLEM - prescription drug claims table header column6 value not as expected. Expected='"+expectCol6+"' | Actual='"+actualCol6+"'", expectCol6.equals(actualCol6));
+
+					String actualCol7=driver.findElement(By.xpath("//table[@id='prescriptionDrug']//tr[1]//th[7]")).getText();
+					String expectCol7="Other Payments";
+					Assert.assertTrue("PROBLEM - prescription drug claims table header column7 value not as expected. Expected='"+expectCol7+"' | Actual='"+actualCol7+"'", expectCol7.equals(actualCol7));
+				} else {
+					String actualCol1=driver.findElement(By.xpath("//table[@id='ship']//tr[1]//th[1]")).getText();
+					String expectCol1="Dates of Service";
+					Assert.assertTrue("PROBLEM - ship claims table header column1 value not as expected. Expected='"+expectCol1+"' | Actual='"+actualCol1+"'", expectCol1.equals(actualCol1));
+
+					String actualCol2=driver.findElement(By.xpath("//table[@id='ship']//tr[1]//th[2]")).getText();
+					String expectCol2="Provider";
+					Assert.assertTrue("PROBLEM - ship claims table header column2 value not as expected. Expected='"+expectCol2+"' | Actual='"+actualCol2+"'", expectCol2.equals(actualCol2));
+
+					String actualCol3=driver.findElement(By.xpath("//table[@id='ship']//tr[1]//th[3]")).getText();
+					String expectCol3="Claim Type";
+					Assert.assertTrue("PROBLEM - ship claims table header column3 value not as expected. Expected='"+expectCol3+"' | Actual='"+actualCol3+"'", expectCol3.equals(actualCol3));
+
+					String actualCol4=driver.findElement(By.xpath("//table[@id='ship']//tr[1]//th[4]")).getText();
+					String expectCol4="Charged";
+					Assert.assertTrue("PROBLEM - ship claims table header column4 value not as expected. Expected='"+expectCol4+"' | Actual='"+actualCol4+"'", expectCol4.equals(actualCol4));
+
+					String actualCol5=driver.findElement(By.xpath("//table[@id='ship']//tr[1]//th[5]")).getText();
+					String expectCol5="Paid to You";
+					Assert.assertTrue("PROBLEM - ship claims table header column5 value not as expected. Expected='"+expectCol5+"' | Actual='"+actualCol5+"'", expectCol5.equals(actualCol5));
+
+					String actualCol6=driver.findElement(By.xpath("//table[@id='ship']//tr[1]//th[6]")).getText();
+					String expectCol6="Paid to Provider";
+					Assert.assertTrue("PROBLEM - ship claims table header column6 value not as expected. Expected='"+expectCol6+"' | Actual='"+actualCol6+"'", expectCol6.equals(actualCol6));
+
+					String actualCol7=driver.findElement(By.xpath("//table[@id='ship']//tr[1]//th[7]")).getText();
+					String expectCol7="Processed Date";
+					Assert.assertTrue("PROBLEM - ship claims table header column7 value not as expected. Expected='"+expectCol7+"' | Actual='"+actualCol7+"'", expectCol7.equals(actualCol7));
+
+					String actualCol8=driver.findElement(By.xpath("//table[@id='ship']//tr[1]//th[8]")).getText();
+					String expectCol8="Claim Details";
+					Assert.assertTrue("PROBLEM - ship claims table header column8 value not as expected. Expected='"+expectCol8+"' | Actual='"+actualCol8+"'", expectCol8.equals(actualCol8));
+				}
+			}
+
+			public void validateClaimsTable(String planType, int numClaims,String claimType, String claimSystem, boolean hasYourShare) {
+				CommonUtility.waitForPageLoad(driver, ClaimsSummaryPage,60);
+				if (numClaims>0) {
+					//has claims, table should display
+					if (claimType.equalsIgnoreCase("medical")) {
+						Assert.assertTrue("PROBLEM - has claims but unable to locate claims table for claimType='"+claimType+"'",claimsTableMedical.isDisplayed());
+						validateClaimsTableHeaderColumns(claimType, claimSystem, hasYourShare);
+					} else if (claimType.equalsIgnoreCase("prescription drug")) {
+						Assert.assertTrue("PROBLEM - has claims but unable to locate claims table for claimType='"+claimType+"'",claimsTablePrescriptionDrug.isDisplayed());
+						validateClaimsTableHeaderColumns(claimType, claimSystem, hasYourShare);
+					} else {
+						Assert.assertTrue("PROBLEM - has claims but unable to locate claims table for claimType='"+claimType+"'",claimsTableSHIP.isDisplayed());
+						validateClaimsTableHeaderColumns(claimType, claimSystem, hasYourShare);
+					}
+				} else {
+					//table should not display
+					if (claimType.equalsIgnoreCase("medical")) {
+						Assert.assertTrue("PROBLEM - has no claims should not be able to locate claims table for claimType='"+claimType+"'",!claimsTableMedical.isDisplayed());
+					} else if (claimType.equalsIgnoreCase("prescription drug")) {
+						Assert.assertTrue("PROBLEM - has no claims should not be able to locate claims table for claimType='"+claimType+"'",!claimsTablePrescriptionDrug.isDisplayed());
+					} else {
+						Assert.assertTrue("PROBLEM - has no claims should not be able to locate claims table for claimType='"+claimType+"'",!claimsTableSHIP.isDisplayed());
+					}
+				}
+			}
+
+			public ClaimDetailsPage navigateToClaimDetailsPage(int rowNum) throws InterruptedException {
+				System.out.println("Go to claim detail page by clicking 'More Info' button");
+				CommonUtility.waitForPageLoadNew(driver, claimstablemoreinfolink, 60);
+				WebElement row=driver.findElement(By.xpath("//div[@class='claim-results']//table[not (contains(@class,'ng-hide'))]//tbody//tr["+rowNum+"]//a[text()='MORE INFO']"));
+				scrollToView(row);
+				row.click();
+				int counter =0;
+				do{
+					if(counter<=12)
+						Thread.sleep(5000);
+					else
+						return null;
+					counter++;
+				}
+				while(!(driver.getCurrentUrl().contains("/details")));
+				if (driver.getCurrentUrl().contains("/details")) {
+					return new pages.regression.claims.ClaimDetailsPage(driver);
+				}
+				return null;
+			}
+
+			public int getTableTotalDataRows(String claimType) {
+				int totalRow=0;
+				if (claimType.equalsIgnoreCase("medical")) {
+					String xpath="//table[@id='medical']//tr";
+					List<WebElement> listRows=driver.findElements(By.xpath(xpath));
+					if (listRows.size()>1) 
+						totalRow=listRows.size()-1;  // remove the row count for header
+				} else if (claimType.equalsIgnoreCase("prescription drug")) {
+					String xpath="//table[@id='prescriptionDrug']//tr";
+					List<WebElement> listRows=driver.findElements(By.xpath(xpath));
+					if (listRows.size()>1) 
+						totalRow=listRows.size()-1;  // remove the row count for header
+				} else {
+					String xpath="//table[@id='ship']//tr";
+					List<WebElement> listRows=driver.findElements(By.xpath(xpath));
+					if (listRows.size()>1) 
+						totalRow=listRows.size()-1;  // remove the row count for header
+				}
+				return totalRow;
+			}
+
+			public void validateSystemErrorMsgNotExist() {
+				Assert.assertTrue("PROBLEM - located System Error",!validate(systemErrorMsg));
+			}
+			//^^^ note:	added for def1041			
 }
