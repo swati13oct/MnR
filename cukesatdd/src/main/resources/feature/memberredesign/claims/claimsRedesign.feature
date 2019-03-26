@@ -2,7 +2,7 @@
 Feature: T1.1To validate the new changes related to claims page on the member redesigned site
 
 	@claims1 @claimsSummaryFED @regressionMember
-	Scenario Outline:  TID: <TID> -plan: <planType> -claimsSystem: <domain> - To validate the claims present for the Federal member on claims summary page for federal members
+	Scenario Outline:  TID: <TID> -plan: <planType> -claimsSystem: <claimssystem> - To validate the claims present for the Federal member on claims summary page for federal members
 		Given login with following details logins in the member portal and validate elements
 		  | Plan Type      | <planType>     |
 		  | Test Data Type | <claimssystem> |
@@ -28,7 +28,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		    | 15299 | PDP      | Last 24 months | RX     | RXCLAIMS     |
 	
 	@claims2 @claimsSummarySHIP  @febrelease @regressionMember
-	Scenario Outline:  TID: <TID> -plan: <planType> -claimsSystem: <domain> - To validate the claims present for the SHIP member on claims summary page for SHIP members
+	Scenario Outline:  TID: <TID> -plan: <planType> -claimsSystem: <claimssystem> - To validate the claims present for the SHIP member on claims summary page for SHIP members
 		Given login with following details logins in the member portal and validate elements
 		  | Plan Type      | <planType>     |
 		  | Test Data Type | <claimssystem> |
@@ -49,7 +49,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		    |15236 | SHIP     | Last 24 Months | NA     | SHIPCLAIMS   |
 	 
 	@claims3 @claimsDetailsTableFED @regressionMember
-	Scenario Outline:  TID: <TID> -plan: <planType> -claimsSystem: <domain> - To Verify Claim Table on Claims Details Page for federal members
+	Scenario Outline:  TID: <TID> -plan: <planType> -claimsSystem: <claimssystem> - To Verify Claim Table on Claims Details Page for federal members
 		Given login with following details logins in the member portal and validate elements
 		  | Plan Type      | <planType>     |
 		  | Test Data Type | <claimssystem> |
@@ -70,7 +70,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | 15235 | MAPD     | Last 24 months | COSMOSCLAIMS |
 	    
 	@claims4 @ClaimsDetailsSHIP @regressionMember
-	Scenario Outline:  TID: <TID> -plan: <planType> -claimsSystem: <domain> - To Verify Learn more section on Claims Details Page
+	Scenario Outline:  TID: <TID> -plan: <planType> -claimsSystem: <claimssystem> - To Verify Learn more section on Claims Details Page
 		Given login with following details logins in the member portal and validate elements
 		  | Plan Type      | <planType>     |
 		  | Test Data Type | <claimssystem> |
@@ -87,7 +87,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	   
 	  
 	@claims5 @TC10_COMBO @regressionMember
-	Scenario Outline:  TID: <TID> -plan: <planType> -claimsSystem: <domain> - To validate the claims present for the Combo member on claims sumamry page & the Details on the Claims Details page 
+	Scenario Outline:  TID: <TID> -plan: <planType> -claimsSystem: <claimssystem> - To validate the claims present for the Combo member on claims sumamry page & the Details on the Claims Details page 
 		Given login with following details logins in the member portal and validate elements
 		  | Plan Type      | <planType>     |
 		  | Test Data Type | <claimssystem> |
@@ -110,11 +110,11 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		And I validate the two COMBO tabs on the claim Summary page 
 		#And the user validates the DownloadMyData section in redesigned site   
 		Examples: 
-		   | TID | planType | claimPeriod    | domain | claimssystem |
-		   | 15259  | SHIP    | Last 24 months  | NA      |    COSMOSCLAIMS |
+		   | TID    | planType | claimPeriod    | domain | claimssystem |
+		   | 15259  | SHIP     | Last 24 months | NA     | COSMOSCLAIMS |
 	
 	@claims6 @TC_09claimsPHIP @regressionMember
-	Scenario Outline:  TID: <TID> -plan: <planType> -claimsSystem: <domain> - To validate the Error Message for a PHIP  member on claims sumamry page
+	Scenario Outline:  TID: <TID> -plan: <planType> -claimsSystem: <claimssystem> - To validate the Error Message for a PHIP  member on claims sumamry page
 		Given login with following details logins in the member portal and validate elements
 		  | Plan Type      | <planType>     |
 		  | Test Data Type | <claimssystem> |
@@ -171,7 +171,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 #	     | MAPD     | Custom Search | 10/10/2017  | 06/14/2012    |
 	  
 	@claims7  @claimsSummaryAndDetails @regressionMember
-    Scenario Outline:  TID: <TID> -plan: <planType> -claimsSystem: <domain> - To validate the claims present for the Federal member on claims sumamry page for AARP site
+    Scenario Outline:  TID: <TID> -plan: <planType> -claimsSystem: <claimssystem> - To validate the claims present for the Federal member on claims sumamry page for AARP site
 		Given login with following details logins in the member portal and validate elements
 	      | Plan Type      | <planType>     |
 	      | Test Data Type | <claimssystem> |
@@ -196,7 +196,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	
 	
 	@claims8 @TC03_FEDAARPIndividualPDP @regressionMember  
-    Scenario Outline: TID: <TID> -plan: <planType> -claimsSystem: <domain> - To validate the claims present for the Federal member on claims sumamry page for AARP site
+    Scenario Outline: TID: <TID> -plan: <planType> -claimsSystem: <claimssystem> - To validate the claims present for the Federal member on claims sumamry page for AARP site
 	    Given login with following details logins in the member portal and validate elements
 	      | Plan Type      | <planType>     |
 	      | Test Data Type | <claimssystem> |
@@ -215,7 +215,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	     
 	        
 	@claims9  @Tc02 @Tc05 @regressionMember
-	Scenario Outline: TID: <TID> -plan: <planType> -claimsSystem: <domain> - To validate the claims present for the Federal member on claims sumamry page for AARP site
+	Scenario Outline: TID: <TID> -plan: <planType> -claimsSystem: <claimssystem> - To validate the claims present for the Federal member on claims sumamry page for AARP site
 	    Given login with following details logins in the member portal and validate elements
 	      | Plan Type      | <planType>     |
 	      | Test Data Type | <claimssystem> |
@@ -242,7 +242,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	     
 	  
 	@claims10  @TC01_FED_AARP_Individual_NICE @TC04_FED_UHC_Individual_COSMOS @regressionMember
-	Scenario Outline:  TID: <TID> -plan: <planType> -claimsSystem: <domain> - To validate the claims present for the Federal member on claims sumamry page & the Details on the Claims Details page 
+	Scenario Outline:  TID: <TID> -plan: <planType> -claimsSystem: <claimssystem> - To validate the claims present for the Federal member on claims sumamry page & the Details on the Claims Details page 
 		Given login with following details logins in the member portal and validate elements
 	      | Plan Type      | <planType>     |
 	      | Test Data Type | <claimssystem> |
@@ -269,7 +269,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	      
 	     
 	@claims11 @TC11_PCP @regressionMember
-	Scenario Outline:  TID: <TID> -plan: <planType> -claimsSystem: <domain> - To validate the claims present for the Federal member on claims sumamry page for AARP site
+	Scenario Outline:  TID: <TID> -plan: <planType> -claimsSystem: <claimssystem> - To validate the claims present for the Federal member on claims sumamry page for AARP site
 		Given login with following details logins in the member portal and validate elements
 	      | Plan Type      | <planType>     |
 	      | Test Data Type | <claimssystem> |
@@ -296,7 +296,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	      
 	    
 	@claims12  @claimsprintanddownload @thePredators @regressionMember
-	Scenario Outline:  TID: <TID> -plan: <planType> -claimsSystem: <domain> - To validate the <claimssystem> on claims summary page
+	Scenario Outline:  TID: <TID> -plan: <planType> -claimsSystem: <claimssystem> - To validate the <claimssystem> on claims summary page
 		Given login with following details logins in the member portal and validate elements
 	      | Plan Type      | <planType>     |
 	      | Test Data Type | <claimssystem> |
@@ -321,7 +321,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	      | 15230 | MAPD     | Last 24 Months | COSMOS | COSMOSCLAIMS |
 	      
 	@claims13  @claimsSummaryFEDError @regressionMember
-		Scenario Outline:  TID: <TID> -plan: <planType> -claimsSystem: <domain> - To validate the custom-search error msg present for the Federal member on claims summary page for federal members when the from date is greater than to date 
+		Scenario Outline:  TID: <TID> -plan: <planType> -claimsSystem: <claimssystem> - To validate the custom-search error msg present for the Federal member on claims summary page for federal members when the from date is greater than to date 
 		Given login with following details logins in the member portal and validate elements
 		  | Plan Type      | <planType>     |
 		  | Test Data Type | <claimssystem> |
@@ -340,7 +340,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	     | 15230 | MAPD     |custom-search | COSMOS | COSMOSCLAIMS |11/06/2018  | 01/02/2019    |
 	     
 	@claims14 @claimsPagination @regressionMember
-	Scenario Outline:  TID: <TID> -plan: <planType> -claimsSystem: <domain> - To validate the claims present for the Federal member on claims summary page for federal members
+	Scenario Outline:  TID: <TID> -plan: <planType> -claimsSystem: <claimssystem> - To validate the claims present for the Federal member on claims summary page for federal members
 		Given login with following details logins in the member portal and validate elements
 		  | Plan Type      | <planType>     |
 		  | Test Data Type | <claimssystem> |
@@ -360,7 +360,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	  	| 15230 | MAPD     | Last 24 months | COSMOS | COSMOSCLAIMS |
 
     @claims15 @def1041 @thePredators
-	Scenario Outline: UID: <UID> -plan: <planType> -claimsSystem: <domain> - <index> - To validate claims for both summary and detail page for each search range options
+	Scenario Outline: UID: <UID> -plan: <planType> -claimsSystem: <claimssystem> - <index> - To validate claims for both summary and detail page for each search range options
 		Given login with following details logins in the member portal and validate elements
 		  | Plan Type      | <planType>            |
 		  | Test Data Type | <claimssystem>        |
