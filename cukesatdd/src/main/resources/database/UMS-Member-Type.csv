@@ -23,7 +23,7 @@ q1_uhc_ma001/Password@1,MA,IndUHCMA_Pharmacylocator
 Shipeff_001/Password@1,MA,IndSHIP_Pharmacylocator
 q1_grp_apr026/Password@1,MAPD,IDCardmember_grp,
 q3_sep_aarp0046/Password@1,MAPD,IDCardmember,
-q4_dec_uhc120/Password@1,MA,IDCardmember,
+q2_jun_aarp0035/Password@1,MA,IDCardmember,
 q2_jun_aarp0076/Password@1,PDP,IDCardmember,
 q2_jun_aarp0158/Password@1,MAPD,ACTIVETERM_Branding,NON LIS
 q2_june_combo0017/Password@1,MAPD,UHCAARPCOMBO_Branding,NON LIS
@@ -31,7 +31,7 @@ q2_jun_aarp0135/Password@1,MAPD,AARPIndividual_Branding,NON LIS
 q1_grp_apr022/Password@1,MAPD,SHBP_Branding,NON LIS
 q2_jun_uhc0001/Password@1,MAPD,Individual_Branding,NON LIS
 q2_jun_sofl0002/Password@1,MAPD,PCP_Branding,NON LIS
-q1_apr_uhc177/Password@10,MAPD,Villages_Branding,NON LIS
+TESTVILLAGEUSER01/Password@10,MAPD,Villages_Branding,NON LIS
 q2_jun_sofl0019/Password@1,MAPD,Medica_Branding,NON LIS
 q2_jun_grp0080/Password@1,MAPD,ALPEEHIP_Branding,NON LIS
 q2_jun_grp0099/Password@1,MAPD,NCSHP_Branding,NON LIS
