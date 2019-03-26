@@ -956,7 +956,8 @@ public class ClaimsMemberRedesignStepDefinition {
 							System.out.println("Proceed to validate claims total");
 							newclaimDetailspage.validateClaimsTotalInDetailsPage();
 
-							HashMap<String, String> dataMapDetail=newclaimDetailspage.gatherDataFromDetailPage(claimType, hasYourShare);
+							//note: detail page will have Your Share column regardless Summary page
+							HashMap<String, String> dataMapDetail=newclaimDetailspage.gatherDataFromDetailPage(claimType);
 							newclaimDetailspage.compareSummaryAndDetailData(claimType, dataMapSummary, dataMapDetail);
 
 							// if all goes well, go back to the summary page to prep for next run

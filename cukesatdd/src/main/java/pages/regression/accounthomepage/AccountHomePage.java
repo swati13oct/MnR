@@ -1733,6 +1733,8 @@ public class AccountHomePage extends UhcDriver {
 				System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
 				waitforElement(drugLookup);
 				drugLookup.click();
+				WebElement loadingImage = driver.findElement(By.className("loading-dialog"));
+				CommonUtility.waitForPageLoad(driver, loadingImage, 15);
 			}else if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
 				workaroundAttempt("dce");
 			}

@@ -1613,13 +1613,13 @@ public void NavigateToClaimsPage(){
 					value=element.getText().trim();
 					dataMap.put(key, value);
 
+					key="med_yourShare";
 					if (hasYourShare) {
 						if (claimsSystem.contains("NICE")) {
 							xpath="//table[@id='medical']//tr["+rowNum+"]//td[8]";
 						} else {
 							xpath="//table[@id='medical']//tr["+rowNum+"]//td[7]";
 						}
-						key="med_yourShare";
 						element=driver.findElement(By.xpath(xpath));
 						Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", validate(element));
 						value=element.getText().trim();
@@ -1632,6 +1632,8 @@ public void NavigateToClaimsPage(){
 						}
 						element=driver.findElement(By.xpath(xpath));
 						Assert.assertTrue("PROBLEM - should not have 'Your Share' value showing on detail page", !validate(element));
+						value="$0.00";
+						dataMap.put(key, value);
 					}
 				} else if (claimType.equalsIgnoreCase("prescription drug")) {
 					String xpath="//table[@id='prescriptionDrug']//tr["+rowNum+"]//td[3]";

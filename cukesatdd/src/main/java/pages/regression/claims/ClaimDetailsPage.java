@@ -143,6 +143,9 @@ public class ClaimDetailsPage extends UhcDriver{
 
 	@FindBy(xpath="//a[@id='claimsummaryC1']")
 	private WebElement claimsSummaryLink;
+	
+	@FindBy(xpath="//p[contains(text(),'Medical Claim Details')]")
+	private WebElement claimsDetailHeader;
 	//^^^ note: added for def1041
 	
 	public ClaimDetailsPage(WebDriver driver) {
@@ -492,7 +495,7 @@ public class ClaimDetailsPage extends UhcDriver{
 	}
 
 	//vvv note: added for def1041
-	public HashMap<String,String> gatherDataFromDetailPage(String claimType, boolean hasYourShare) {
+	public HashMap<String,String> gatherDataFromDetailPage(String claimType) {
 		HashMap<String,String> dataMap=new HashMap<String,String> ();
 		if (claimType.equalsIgnoreCase("medical")) {
 			String key="med_dateOfService";
@@ -528,14 +531,10 @@ public class ClaimDetailsPage extends UhcDriver{
 			dataMap.put(key, value);
 
 			element=med_yourShare;
-			if (hasYourShare) {
-				key="med_yourShare";
-				Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", validate(element));
-				value=element.getText().trim();
-				dataMap.put(key, value);
-			} else {
-				Assert.assertTrue("PROBLEM - 'Your Share' showing up unexpectedly on detail page", !validate(element));
-			}
+			key="med_yourShare";
+			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", validate(element));
+			value=element.getText().trim();
+			dataMap.put(key, value);
 		} else if (claimType.equalsIgnoreCase("prescription drug")) {
 			String key="drug_dateFilled";
 			key="drug_medication";
@@ -628,18 +627,23 @@ public class ClaimDetailsPage extends UhcDriver{
 			String valueFromSummary=dataMapSummary.get(key);
 			String valueFromDetail=dataMapDetail.get(key);
 			Assert.assertTrue("PROBLEM: value for element "+key+" is not the same betweeen claims summary and detail pages. From summary: '"+valueFromSummary+"' | From detail: '"+valueFromDetail+"'", valueFromSummary.equals(valueFromDetail));
-
+	
+			//note: for provider name, some backend test data was setup with space, some doesn't
 			key="med_providerName";
 			valueFromSummary=dataMapSummary.get(key);
 			valueFromDetail=dataMapDetail.get(key);
+			boolean check1=valueFromSummary.equals(valueFromDetail);
+			if (check1) 
+				System.out.println("This med_providerName contains space on the detail page");
 			valueFromSummary=valueFromSummary.replaceAll("\\s","");
-			Assert.assertTrue("PROBLEM: value for element "+key+" is not the same betweeen claims summary and detail pages. From summary: '"+valueFromSummary+"' | From detail: '"+valueFromDetail+"'", valueFromSummary.equals(valueFromDetail));
-
+			boolean check2=valueFromSummary.equals(valueFromDetail);
+			Assert.assertTrue("PROBLEM: value for element "+key+" is not the same betweeen claims summary and detail pages. From summary: '"+valueFromSummary+"' | From detail: '"+valueFromDetail+"'", (check1 || check2));
+	
 			key="med_providerType";
 			valueFromSummary=dataMapSummary.get(key);
 			valueFromDetail=dataMapDetail.get(key);
 			Assert.assertTrue("PROBLEM: value for element "+key+" is not the same betweeen claims summary and detail pages. From summary: '"+valueFromSummary+"' | From detail: '"+valueFromDetail+"'", valueFromSummary.equals(valueFromDetail));
-
+	
 			key="med_amountBilled";
 			valueFromSummary=dataMapSummary.get(key);
 			valueFromDetail=dataMapDetail.get(key);
@@ -650,12 +654,12 @@ public class ClaimDetailsPage extends UhcDriver{
 			} else {
 				Assert.assertTrue("PROBLEM: KNOWN (potential test data setup issue in the backend) - value for element "+key+" is not the same betweeen claims summary and detail pages. From summary: '"+valueFromSummary+"' | From detail: '"+valueFromDetail+"'", valueFromSummary.equals(valueFromDetail));
 			}
-
+	
 			key="med_claimStatus";
 			valueFromSummary=dataMapSummary.get(key);
 			valueFromDetail=dataMapDetail.get(key);
 			Assert.assertTrue("PROBLEM: value for element "+key+" is not the same betweeen claims summary and detail pages. From summary: '"+valueFromSummary+"' | From detail: '"+valueFromDetail+"'", valueFromSummary.equals(valueFromDetail));
-
+	
 			key="med_yourShare";
 			valueFromSummary=dataMapSummary.get(key);
 			valueFromDetail=dataMapDetail.get(key);
@@ -674,43 +678,41 @@ public class ClaimDetailsPage extends UhcDriver{
 			//String valueFromSummary=dataMapSummary.get(key);
 			//String valueFromDetail=dataMapDetail.get(key);
 			//Assert.assertTrue("PROBLEM: value for element "+key+" is not the same betweeen claims summary and detail pages. From summary: '"+valueFromSummary+"' | From detail: '"+valueFromDetail+"'", valueFromSummary.equals(valueFromDetail));
-
+	
 			String key="ship_provider";
 			String valueFromSummary=dataMapSummary.get(key);
 			String valueFromDetail=dataMapDetail.get(key);
 			Assert.assertTrue("PROBLEM: value for element "+key+" is not the same betweeen claims summary and detail pages. From summary: '"+valueFromSummary+"' | From detail: '"+valueFromDetail+"'", valueFromDetail.contains(valueFromSummary));
-
+	
 			key="ship_claimType";
 			valueFromSummary=dataMapSummary.get(key);
 			valueFromDetail=dataMapDetail.get(key);
 			Assert.assertTrue("PROBLEM: value for element "+key+" is not the same betweeen claims summary and detail pages. From summary: '"+valueFromSummary+"' | From detail: '"+valueFromDetail+"'", valueFromSummary.equals(valueFromDetail));
-
+	
 			key="ship_charged";
 			valueFromSummary=dataMapSummary.get(key).replaceAll("\\s","");
 			valueFromDetail=dataMapDetail.get(key);
 			Assert.assertTrue("PROBLEM: value for element "+key+" is not the same betweeen claims summary and detail pages. From summary: '"+valueFromSummary+"' | From detail: '"+valueFromDetail+"'", valueFromSummary.equals(valueFromDetail));
-
+	
 			key="ship_paidToYou";
 			valueFromSummary=dataMapSummary.get(key).replaceAll("\\s","");
 			valueFromDetail=dataMapDetail.get(key);
 			Assert.assertTrue("PROBLEM: value for element "+key+" is not the same betweeen claims summary and detail pages. From summary: '"+valueFromSummary+"' | From detail: '"+valueFromDetail+"'", valueFromSummary.equals(valueFromDetail));
-
+	
 			key="ship_paidToProvider";
 			valueFromSummary=dataMapSummary.get(key).replaceAll("\\s","");
 			valueFromDetail=dataMapDetail.get(key);
 			Assert.assertTrue("PROBLEM: value for element "+key+" is not the same betweeen claims summary and detail pages. From summary: '"+valueFromSummary+"' | From detail: '"+valueFromDetail+"'", valueFromSummary.equals(valueFromDetail));
-
+	
 			key="ship_processedDate";
 			valueFromSummary=dataMapSummary.get(key);
 			valueFromDetail=dataMapDetail.get(key);
 			Assert.assertTrue("PROBLEM: value for element "+key+" is not the same betweeen claims summary and detail pages. From summary: '"+valueFromSummary+"' | From detail: '"+valueFromDetail+"'", valueFromSummary.equals(valueFromDetail));
-
+	
 		}
-
+	
 	}
 
-	@FindBy(xpath="//p[contains(text(),'Medical Claim Details')]")
-	private WebElement claimsDetailHeader;
 	public ClaimSummarypage navigateToClaimSummaryPage() {
 		Assert.assertTrue("PROBLEM - Unable to locate the Claims Summary link on top menu to return back to claim summary page to prep for next test step", validate(claimsSummaryLink));
 		claimsSummaryLink.click();

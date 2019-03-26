@@ -362,197 +362,197 @@ Feature: T1.1To validate the new changes related to claims page on the member re
     @claims15 @def1041 @thePredators
 	Scenario Outline: UID: <UID> -plan: <planType> -claimsSystem: <domain> - <index> - To validate claims for both summary and detail page for each search range options
 		Given login with following details logins in the member portal and validate elements
-		  | Plan Type      | <planType>     |
-		  | Test Data Type | <claimssystem> |
+		  | Plan Type      | <planType>            |
+		  | Test Data Type | <claimssystem>        |
 		When I navigate to the claims Summary page in redesigned site
 		Then I can validate the claims summary header
 		#----------------- Test for- Last 30 days --------------------------
 		And I can search claims for the following claim period and claim type on redesigned site
-		  | Plan Type    | <planType>    |
-		  | Claim Type   | <claimType>   |
-		  | Claim Period | Last 30 days  |
+		  | Plan Type    | <planType>              |
+		  | Claim Type   | <claimType>             |
+		  | Claim Period | Last 30 days            |
 		Then I can see the number of claims
-		  | Claim Type   | <claimType>   |
-		  | Claim Period | Last 30 days  |
+		  | Claim Type   | <claimType>             |
+		  | Claim Period | Last 30 days            |
 		And I validate the pagination on the claims summary page for given range 
-		  | Claim Period | Last 30 days  |
+		  | Claim Period | Last 30 days            |
 		Then I can validate the print and download option in claims details table for given range
-		  | Claim Period | Last 30 days  |
+		  | Claim Period | Last 30 days            |
 		Then I can validate claims table displayed based on the selection in redesigned site
-		  | Plan Type    | <planType>    |
-		  | Claim Type   | <claimType>   |
-		  | Claim System | <claimssystem> |
-		  | Has Your Share | <hasYourShare> |
-		  | Claim Period | Last 30 days  |
+		  | Plan Type    | <planType>              |
+		  | Claim Type   | <claimType>             |
+		  | Claim System | <claimssystem>          |
+		  | Has Your Share | <SummaryHasYourShare> |
+		  | Claim Period | Last 30 days            |
 		And the user validates the EOB section based on domain in redesigned site
-		  | Domain       | <domain>      |
-		  | Plan Type    | <planType>    |
+		  | Domain       | <domain>                |
+		  | Plan Type    | <planType>              |
 		Then I validate Claim Details page		  
-		  | Claim Type   | <claimType>   |
-		  | Claim System | <claimssystem> |
-		  | Has Your Share | <hasYourShare> |
-		  | Claim Period | Last 30 days  |
+		  | Claim Type   | <claimType>             |
+		  | Claim System | <claimssystem>          |
+		  | Has Your Share | <SummaryHasYourShare> |
+		  | Claim Period | Last 30 days            |
 		#----------------- Test for Last 90 days --------------------------
 		And I can search claims for the following claim period and claim type on redesigned site
-		  | Plan Type    | <planType>    |
-		  | Claim Type   | <claimType>   |
-		  | Claim Period | Last 90 days  |
+		  | Plan Type    | <planType>              |
+		  | Claim Type   | <claimType>             |
+		  | Claim Period | Last 90 days            |
 		Then I can see the number of claims
-		  | Claim Type   | <claimType>   |
-		  | Claim Period | Last 90 days  |
+		  | Claim Type   | <claimType>             |
+		  | Claim Period | Last 90 days            |
 		And I validate the pagination on the claims summary page for given range 
-		  | Claim Period | Last 90 days  |
+		  | Claim Period | Last 90 days            |
 		Then I can validate the print and download option in claims details table for given range
-		  | Claim Period | Last 90 days  |
+		  | Claim Period | Last 90 days            |
 		Then I can validate claims table displayed based on the selection in redesigned site
-		  | Plan Type    | <planType>    |
-		  | Claim Type   | <claimType>   |
-		  | Claim System | <claimssystem> |
-		  | Has Your Share | <hasYourShare> |
-		  | Claim Period | Last 90 days  |
+		  | Plan Type    | <planType>              |
+		  | Claim Type   | <claimType>             |
+		  | Claim System | <claimssystem>          |
+		  | Has Your Share | <SummaryHasYourShare> |
+		  | Claim Period | Last 90 days            |
 		And the user validates the EOB section based on domain in redesigned site
-		  | Domain       | <domain>      |
-		  | Plan Type    | <planType>    |
+		  | Domain       | <domain>                |
+		  | Plan Type    | <planType>              |
 		Then I validate Claim Details page		  
-		  | Claim Type   | <claimType>   |
-		  | Claim System | <claimssystem> |
-		  | Has Your Share | <hasYourShare> |
-		  | Claim Period | Last 90 days  |
+		  | Claim Type   | <claimType>             |
+		  | Claim System | <claimssystem>          |
+		  | Has Your Share | <SummaryHasYourShare> |
+		  | Claim Period | Last 90 days            |
 		#----------------- Test for Last 6 months --------------------------
 		And I can search claims for the following claim period and claim type on redesigned site
-		  | Plan Type    | <planType>    |
-		  | Claim Type   | <claimType>   |
-		  | Claim Period | Last 6 months |
+		  | Plan Type    | <planType>              |
+		  | Claim Type   | <claimType>             |
+		  | Claim Period | Last 6 months           |
 		Then I can see the number of claims
-		  | Claim Type   | <claimType>   |
-		  | Claim Period | Last 6 months |
+		  | Claim Type   | <claimType>             |
+		  | Claim Period | Last 6 months           |
 		And I validate the pagination on the claims summary page for given range 
-		  | Claim Period | Last 6 months |
+		  | Claim Period | Last 6 months           |
 		Then I can validate the print and download option in claims details table for given range
-		  | Claim Period | Last 6 months |
+		  | Claim Period | Last 6 months           |
 		Then I can validate claims table displayed based on the selection in redesigned site
-		  | Plan Type    | <planType>    |
-		  | Claim Type   | <claimType>   |
-		  | Claim System | <claimssystem> |
-		  | Has Your Share | <hasYourShare> |
-		  | Claim Period | Last 6 months |
+		  | Plan Type    | <planType>              |
+		  | Claim Type   | <claimType>             |
+		  | Claim System | <claimssystem>          |
+		  | Has Your Share | <SummaryHasYourShare> |
+		  | Claim Period | Last 6 months           |
 		And the user validates the EOB section based on domain in redesigned site
-		  | Domain       | <domain>      |
-		  | Plan Type    | <planType>    |
+		  | Domain       | <domain>                |
+		  | Plan Type    | <planType>              |
 		Then I validate Claim Details page		  
-		  | Claim Type   | <claimType>   |
-		  | Claim System | <claimssystem> |
-		  | Has Your Share | <hasYourShare> |
-		  | Claim Period | Last 6 months |
+		  | Claim Type   | <claimType>             |
+		  | Claim System | <claimssystem>          |
+		  | Has Your Share | <SummaryHasYourShare> |
+		  | Claim Period | Last 6 months           |
 		#----------------- Test for Last 12 months --------------------------
 		And I can search claims for the following claim period and claim type on redesigned site
-		  | Plan Type    | <planType>     |
-		  | Claim Type   | <claimType>    |
-		  | Claim Period | Last 12 months |
+		  | Plan Type    | <planType>              |
+		  | Claim Type   | <claimType>             |
+		  | Claim Period | Last 12 months          |
 		Then I can see the number of claims
-		  | Claim Type   | <claimType>    |
-		  | Claim Period | Last 12 months |
+		  | Claim Type   | <claimType>             |
+		  | Claim Period | Last 12 months          |
 		And I validate the pagination on the claims summary page for given range 
-		  | Claim Period | Last 12 months |
+		  | Claim Period | Last 12 months          |
 		Then I can validate the print and download option in claims details table for given range
-		  | Claim Period | Last 12 months |
+		  | Claim Period | Last 12 months          |
 		Then I can validate claims table displayed based on the selection in redesigned site
-		  | Plan Type    | <planType>     |
-		  | Claim Type   | <claimType>    |
-		  | Claim System | <claimssystem> |
-		  | Has Your Share | <hasYourShare> |
-		  | Claim Period | Last 12 months |
+		  | Plan Type    | <planType>              |
+		  | Claim Type   | <claimType>             |
+		  | Claim System | <claimssystem>          |
+		  | Has Your Share | <SummaryHasYourShare> |
+		  | Claim Period | Last 12 months          |
 		And the user validates the EOB section based on domain in redesigned site
-		  | Domain       | <domain>       |
-		  | Plan Type    | <planType>     |
+		  | Domain       | <domain>                |
+		  | Plan Type    | <planType>              |
 		Then I validate Claim Details page		  
-		  | Claim Type   | <claimType>    |
-		  | Claim System | <claimssystem> |
-		  | Has Your Share | <hasYourShare> |
-		  | Claim Period | Last 12 months |
+		  | Claim Type   | <claimType>             |
+		  | Claim System | <claimssystem>          |
+		  | Has Your Share | <SummaryHasYourShare> |
+		  | Claim Period | Last 12 months          |
 		#----------------- Test for Last 24 months --------------------------
 		And I can search claims for the following claim period and claim type on redesigned site
-		  | Plan Type    | <planType>     |
-		  | Claim Type   | <claimType>    |
-		  | Claim Period | Last 24 months |
+		  | Plan Type    | <planType>              |
+		  | Claim Type   | <claimType>             |
+		  | Claim Period | Last 24 months          |
 		Then I can see the number of claims
-		  | Claim Type   | <claimType>    |
-		  | Claim Period | Last 24 months |
+		  | Claim Type   | <claimType>             |
+		  | Claim Period | Last 24 months          |
 		And I validate the pagination on the claims summary page for given range 
-		  | Claim Period | Last 24 months |
+		  | Claim Period | Last 24 months          |
 		Then I can validate the print and download option in claims details table for given range
-		  | Claim Period | Last 24 months |
+		  | Claim Period | Last 24 months          |
 		Then I can validate claims table displayed based on the selection in redesigned site
-		  | Plan Type    | <planType>     |
-		  | Claim Type   | <claimType>    |
-		  | Claim System | <claimssystem> |
-		  | Has Your Share | <hasYourShare> |
-		  | Claim Period | Last 24 months |
+		  | Plan Type    | <planType>              |
+		  | Claim Type   | <claimType>             |
+		  | Claim System | <claimssystem>          |
+		  | Has Your Share | <SummaryHasYourShare> |
+		  | Claim Period | Last 24 months          |
 		And the user validates the EOB section based on domain in redesigned site
-		  | Domain       | <domain>       |
-		  | Plan Type    | <planType>     |
+		  | Domain       | <domain>                |
+		  | Plan Type    | <planType>              |
 		Then I validate Claim Details page		  
-		  | Claim Type   | <claimType>    |
-		  | Claim System | <claimssystem> |
-		  | Has Your Share | <hasYourShare> |
-		  | Claim Period | Last 24 months |
+		  | Claim Type   | <claimType>             |
+		  | Claim System | <claimssystem>          |
+		  | Has Your Share | <SummaryHasYourShare> |
+		  | Claim Period | Last 24 months          |
 		#----------------- Test for Custom search --------------------------
 		And I can search claims for the following claim period and claim type on redesigned site
-		  | Plan Type    | <planType>     |
-		  | Claim Type   | <claimType>    |
-		  | Claim Period | Custom search  |
+		  | Plan Type    | <planType>              |
+		  | Claim Type   | <claimType>             |
+		  | Claim Period | Custom search           |
 		And the user custom search claims for the following time interval in redesigned site
-		  | Plan Type    | <planType>     |
-		  | Claims From Date | 01/02/2018 |
-		  | Claims To Date   | 01/02/2019 |
+		  | Plan Type    | <planType>              |
+		  | Claims From Date | 01/02/2018          |
+		  | Claims To Date   | 01/02/2019          |
 		Then I can see the number of claims
-		  | Claim Type   | <claimType>    |
-		  | Claim Period | Custom search  |
+		  | Claim Type   | <claimType>             |
+		  | Claim Period | Custom search           |
 		And I validate the pagination on the claims summary page for given range 
-		  | Claim Period | Custom search  |
+		  | Claim Period | Custom search           |
 		Then I can validate the print and download option in claims details table for given range
-		  | Claim Period | Custom search  |
+		  | Claim Period | Custom search           |
 		And the user validates the EOB section based on domain in redesigned site
-		  | Domain       | <domain>       |
-		  | Plan Type    | <planType>     |
+		  | Domain       | <domain>                |
+		  | Plan Type    | <planType>              |
 		Then I validate Claim Details page		  
-		  | Claim Type   | <claimType>    |
-		  | Claim System | <claimssystem> |
-		  | Has Your Share | <hasYourShare> |
-		  | Claim Period | Custom search  |
+		  | Claim Type   | <claimType>             |
+		  | Claim System | <claimssystem>          |
+		  | Has Your Share | <SummaryHasYourShare> |
+		  | Claim Period | Custom search           |
 		#----------------- Test claims number makes sense --------------------------
 		And I can validate the numbers of claims from all search periods
 		#----------------- Test Custom search error cases --------------------------
 		And the user custom search claims for the following time interval in redesigned site
-		  | Plan Type        | <planType> |
-		  | Claims From Date | 01/02/2019 |
-		  | Claims To Date   | 01/02/2018 |
+		  | Plan Type        | <planType>          |
+		  | Claims From Date | 01/02/2019          |
+		  | Claims To Date   | 01/02/2018          |
 		Then the user should be able to see the from date is greater than the to date error message being displayed
-		  | Plan Type        | <planType> |
+		  | Plan Type        | <planType>          |
 		And the user custom search claims for the following time interval in redesigned site
-		  | Plan Type        | <planType> |
-		  | Claims From Date | 01/02/2016 |
-		  | Claims To Date   | 01/02/2019 |
+		  | Plan Type        | <planType>          |
+		  | Claims From Date | 01/02/2016          |
+		  | Claims To Date   | 01/02/2019          |
 		Then the user should be able to see the search range is greater than two years
-		  | Plan Type        | <planType> |
+		  | Plan Type        | <planType>          |
 
 	Examples: 
-	  |index |DID | planType | domain | claimssystem                 | claimToDate | claimFromDate | claimType         | hasYourShare |
-	  |01    |1041| MAPD     | COSMOS | diffGrpsDiffYrs_COSMOSCLAIMS | 01/02/2018  | 01/02/2019    | Medical           | Yes          |
-	  |02    |1041| MAPD     | COSMOS | diffGrpsDiffYrs_COSMOSCLAIMS | 01/02/2018  | 01/02/2019    | Prescription drug | Yes          |
-	  |03    |1041| MA       | COSMOS | COSMOSCLAIMS                 | 01/02/2018  | 01/02/2019    | Medical           | Yes          |
-	  |04    |1041| MA       | NICE   | NICECLAIMS                   | 01/02/2018  | 01/02/2019    | Medical           | No           |
-	  |05    |1041| MAPD     | NICE   | NICECLAIMS                   | 01/02/2018  | 01/02/2019    | Medical           | No           |
-	  |06    |1041| MAPD     | NICE   | NICECLAIMS                   | 01/02/2018  | 01/02/2019    | Prescription drug | No           |
-	  |07    |1041| MAPD     | COSMOS | COSMOSCLAIMS                 | 01/02/2018  | 01/02/2019    | Medical           | Yes          |
-	  |08    |1041| MAPD     | COSMOS | COSMOSCLAIMS                 | 01/02/2018  | 01/02/2019    | Prescription drug | Yes          |
-	  |09    |1041| PCP      | COSMOS | COSMOSCLAIMS                 | 01/02/2018  | 01/02/2019    | Medical           | Yes          |
-	  |10    |1041| PCP      | COSMOS | COSMOSCLAIMS                 | 01/02/2018  | 01/02/2019    | Prescription drug | Yes          |
-	  |11    |1041| MEDICA   | COSMOS | COSMOSCLAIMS                 | 01/02/2018  | 01/02/2019    | Medical           | Yes          |
-	  |12    |1041| MEDICA   | COSMOS | COSMOSCLAIMS                 | 01/02/2018  | 01/02/2019    | Prescription drug | Yes          |
-	  |13    |1041| PDP      | RX     | RXCLAIMS                     | 01/02/2018  | 01/02/2019    | Prescription drug | No           |
-	  |14    |1041| SHIP     | NA     | COSMOSCLAIMS                 | 01/02/2018  | 01/02/2019    | NA                | No           |
+	  |index |DID | planType | domain | claimssystem                 | claimToDate | claimFromDate | claimType         | SummaryHasYourShare |
+	  |01    |1041| MAPD     | COSMOS | diffGrpsDiffYrs_COSMOSCLAIMS | 01/02/2018  | 01/02/2019    | Medical           | Yes                 |
+	  |02    |1041| MAPD     | COSMOS | diffGrpsDiffYrs_COSMOSCLAIMS | 01/02/2018  | 01/02/2019    | Prescription drug | Yes                 |
+	  |03    |1041| MA       | COSMOS | COSMOSCLAIMS                 | 01/02/2018  | 01/02/2019    | Medical           | Yes                 |
+	  |04    |1041| MA       | NICE   | NICECLAIMS                   | 01/02/2018  | 01/02/2019    | Medical           | No                  |
+	  |05    |1041| MAPD     | NICE   | NICECLAIMS                   | 01/02/2018  | 01/02/2019    | Medical           | No                  |
+	  |06    |1041| MAPD     | NICE   | NICECLAIMS                   | 01/02/2018  | 01/02/2019    | Prescription drug | No                  |
+	  |07    |1041| MAPD     | COSMOS | COSMOSCLAIMS                 | 01/02/2018  | 01/02/2019    | Medical           | Yes                 |
+	  |08    |1041| MAPD     | COSMOS | COSMOSCLAIMS                 | 01/02/2018  | 01/02/2019    | Prescription drug | Yes                 |
+	  |09    |1041| PCP      | COSMOS | COSMOSCLAIMS                 | 01/02/2018  | 01/02/2019    | Medical           | Yes                 |
+	  |10    |1041| PCP      | COSMOS | COSMOSCLAIMS                 | 01/02/2018  | 01/02/2019    | Prescription drug | Yes                 |
+	  |11    |1041| MEDICA   | COSMOS | COSMOSCLAIMS                 | 01/02/2018  | 01/02/2019    | Medical           | Yes                 |
+	  |12    |1041| MEDICA   | COSMOS | COSMOSCLAIMS                 | 01/02/2018  | 01/02/2019    | Prescription drug | Yes                 |
+	  |13    |1041| PDP      | RX     | RXCLAIMS                     | 01/02/2018  | 01/02/2019    | Prescription drug | No                  |
+	  |14    |1041| SHIP     | NA     | COSMOSCLAIMS                 | 01/02/2018  | 01/02/2019    | NA                | No                  |
      #note: these will be in team-env only
-	 #|15    |1041| MAPD     | COSMOS | t_diffGrpsDiffYrs_COSMOSCLAIMS | 01/02/2018  | 01/02/2019    | Medical           | Yes          |
-	 #|16    |1041| MAPD     | COSMOS | t_diffGrpsDiffYrs_COSMOSCLAIMS | 01/02/2018  | 01/02/2019    | Prescription drug | Yes          |
+	 #|15    |1041| MAPD     | COSMOS | t_diffGrpsDiffYrs_COSMOSCLAIMS | 01/02/2018  | 01/02/2019    | Medical           | Yes                |
+	 #|16    |1041| MAPD     | COSMOS | t_diffGrpsDiffYrs_COSMOSCLAIMS | 01/02/2018  | 01/02/2019    | Prescription drug | Yes                |
 	  

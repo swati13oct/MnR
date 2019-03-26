@@ -123,6 +123,7 @@ public class MemberRedesignHeaderStepDefinition {
 		//note: updated to use the accounthomepage to navigate to dce, in case need to use 'sorry' page workaround for header testing
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 		accountHomePage.navigate_to_dce();
+		accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 		getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
 		
 		/* original
