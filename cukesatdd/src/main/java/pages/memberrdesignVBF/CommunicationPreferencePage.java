@@ -31,14 +31,14 @@ public class CommunicationPreferencePage extends UhcDriver {
 	private WebElement mailRadioBtnInput;
 
 	//@FindBy(xpath = "//div[contains(@class,'paperless')]//input[@id='Required_documents_EM']")
-	@FindBy(xpath = "//div[@class='tile-block paperless']/div[3]//div[@class='row']/div[1]//div[contains(@class,'control__indicator') and contains(@class,'input-options')]")
+	@FindBy(xpath = "//div[contains(@class,'paperless')]/div[3]//div[@class='row']/div[1]//div[contains(@class,'control__indicator') and contains(@class,'input-options')]")
 	private WebElement paperlessRadioBtn;
 	
 	//@FindBy(xpath = "//div[contains(@class,'paperless')]//input[@id='Required_documents_PM']")	
-	@FindBy(xpath = "//div[@class='tile-block paperless']/div[3]//div[@class='row']/div[2]//div[contains(@class,'control__indicator') and contains(@class,'input-options')]")
+	@FindBy(xpath = "//div[contains(@class,'paperless')]/div[3]//div[@class='row']/div[2]//div[contains(@class,'control__indicator') and contains(@class,'input-options')]")
 	private WebElement mailRadioBtn;
 
-	@FindBy(xpath = "//div[@class='tile-block paperless']//div[@class='row consent-row']//div[@class='control__indicator red-color-status']")
+	@FindBy(xpath = "//div[contains(@class,'paperless')]//div[contains(@class,'consent-row')]//div[contains(@class,'control__indicator')]")
 	private List<WebElement> agreeCheckBox;
 
 	@FindBy(xpath = "//div[@class='page-header']//a[contains(@class,'atdd-banklink-prefernce')]")
