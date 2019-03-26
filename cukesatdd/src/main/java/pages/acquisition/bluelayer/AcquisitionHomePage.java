@@ -1131,12 +1131,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 
 	public PlanSelectorNewPage quizButton() {
-		waitforElement(ourPlans);
+		validateNew(ourPlans);
 		Actions action = new Actions(driver);
-		PageFactory.initElements(driver, this);
 		action.moveToElement(ourPlans).build().perform();
-		waitforElement(takeTheQuizBtn);
+		validateNew(takeTheQuizBtn);
 		takeTheQuizBtn.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+
 		return new PlanSelectorNewPage(driver);
 	}
 

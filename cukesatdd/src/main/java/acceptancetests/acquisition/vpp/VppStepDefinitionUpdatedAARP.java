@@ -56,7 +56,16 @@ public class VppStepDefinitionUpdatedAARP {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 	}
+	@Given("^the user is on UHC medicare acquisition site page$")
+	public void the_user_on_uhc_medicares_Site() {
+		WebDriver wd = getLoginScenario().getWebDriver();
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, "Blayer");
 
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+				aquisitionhomepage);
+	}
+	
 	/**
 	 * @toDo: user performs plan search using following information
 	 */
