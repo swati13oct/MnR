@@ -1349,19 +1349,22 @@ public class AccountHomePage extends UhcDriver {
 			System.out.println("URL for testing: "+Page_URL);
 			driver.navigate().to(Page_URL);
 		} else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
-			waitForHomePage(helloPerson);
-			if (driver.getCurrentUrl().contains("/dashboard")) {
-				System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
-				pharmacySearchLink.click();
-				try {
-					Thread.sleep(10000);
+			if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
+				workaroundAttempt("pharmacylocator");
+			} else {
+				waitForHomePage(helloPerson);
+				if (driver.getCurrentUrl().contains("/dashboard")) {
+					System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
+					pharmacySearchLink.click();
+					try {
+						Thread.sleep(10000);
 
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			}
-
 		}
 		return new PharmacySearchPage(driver);
 	}
@@ -1733,8 +1736,8 @@ public class AccountHomePage extends UhcDriver {
 				System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
 				waitforElement(drugLookup);
 				drugLookup.click();
-				WebElement loadingImage = driver.findElement(By.className("loading-dialog"));
-				CommonUtility.waitForPageLoad(driver, loadingImage, 15);
+				//tbd WebElement loadingImage = driver.findElement(By.className("loading-dialog"));
+				//tbd CommonUtility.waitForPageLoad(driver, loadingImage, 15);
 			}else if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
 				workaroundAttempt("dce");
 			}
@@ -2516,9 +2519,11 @@ public class AccountHomePage extends UhcDriver {
 			part3="/member/profile.html";
 		} else if (page.equals("order")) { 
 			part3="/member/order-materials/overview.html";
-		} else if (page.equals("reward")) { //note: keep for now in case anything changed but health n wellness content won't load if getting sorry error
+		} else if (page.equals("reward")) { 
 			part3="/member/health-and-wellness.html";
-		} else if (page.equals("dce")) { //note: keep for now in case anything changed but health n wellness content won't load if getting sorry error
+		} else if (page.equals("pharmacylocator")) { 
+			part3="/member/pharmacy-locator/overview.html";
+		} else if (page.equals("dce")) { 
 			part3="/member/drug-lookup/overview.html#/drug-cost-estimator";
 		} else {	//note: shouldn't have gotten here, but just in case
 			Assert.assertTrue("Sorry, testType '"+attemptSorryWorkaround.get("testType")+"' is not covered by this workaround yet, abort this test now", false);

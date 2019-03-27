@@ -26,7 +26,8 @@ public class HealthAndWellnessPage extends UhcDriver{
 	@FindBy(linkText = "Health & Wellness")
 	private WebElement rallyHealthAndWellness;
 
-	@FindBy(xpath  = "//header[@class='hide-mobile']//a[contains(text(),'Health & Wellness')]")
+	//tbd @FindBy(xpath  = "//header[@class='hide-mobile']//a[contains(text(),'Health & Wellness')]")
+	@FindBy(xpath  = "//a[contains(text(),'Health & Wellness')]")
 	private WebElement healthAndWellness;
 
 	@FindBy(id  = "healthwellness_4")
@@ -117,7 +118,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 			System.err.println("Health and Wellness page not Successfully loaded ");
 		}
 		try {
-			Thread.sleep(15000);
+			Thread.sleep(17500);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

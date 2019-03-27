@@ -360,7 +360,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	  	| 15230 | MAPD     | Last 24 months | COSMOS | COSMOSCLAIMS |
 
     @claims15 @def1041 @thePredators
-	Scenario Outline: UID: <UID> -plan: <planType> -claimsSystem: <claimssystem> - <index> - To validate claims for both summary and detail page for each search range options
+	Scenario Outline: DID: <DID> -plan: <planType> -claimsSystem: <claimssystem> - <index> - To validate claims for both summary and detail page for each search range options
 		Given login with following details logins in the member portal and validate elements
 		  | Plan Type      | <planType>            |
 		  | Test Data Type | <claimssystem>        |

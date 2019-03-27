@@ -555,9 +555,10 @@ public class HSIDStepDefinition {
 		}
 		System.out.println("type="+type);
 		//note: login failure is sorry error, check to see if it's candidate for workaround
-		if 	(type.contains("claims") 
+		if 	(type.contains("claims") ||type.contains("reward")
 				||type.contains("contactus")||type.contains("profilepref")
 				||type.contains("order") ||type.contains("header")
+				||type.contains("pharmacylocator")
 				) {	//for now only doing workaround for the above features
 			String forType="claims";
 			if (type.contains("contactus")) {
@@ -568,21 +569,25 @@ public class HSIDStepDefinition {
 				forType="order";
 			} else if (type.contains("header")) {
 				forType="header";
+			} else if (type.contains("reward")) {
+				forType="reward";
+			} else if (type.contains("pharmacylocator")) {
+				forType="pharmacylocator";
 			}
 			System.out.println("Got 'sorry' login error and this is test for "+type+", will attempt the workaround");
-
+			
 			AccountHomePage accountHomePage=new AccountHomePage(wd);
 			HashMap<String, String> workaroundInfoMap=new HashMap<String, String>();
 			workaroundInfoMap.put("needWorkaround","yes");
 			workaroundInfoMap.put("planType",planType);
 			workaroundInfoMap.put("testType", forType);
 			accountHomePage.setAttemptSorryWorkaround(workaroundInfoMap);
+			if (type.contains("reward")) { //proceed to switch page now
+				accountHomePage.workaroundAttempt("reward");
+			}
 			getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
 		} else {
 			String msg="not workaround candidate";
-			if (type.contains("reward")) {
-				msg=msg+"; for reward case, even if workaround, the H&W page content won't load anyway";
-			}
 			System.out.println(msg);
 			Assert.fail("***** Error in loading Redesign Account Landing Page ***** Got error for 'Sorry. it's not you, it's us'");
 		}
