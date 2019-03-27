@@ -2527,8 +2527,8 @@ public class AccountHomePage extends UhcDriver {
 			part3="/member/health-and-wellness.html";
 		} else if (page.equals("pharmacylocator")) { 
 			part3="/member/pharmacy-locator/overview.html";
-		//} else if (page.equals("dce")) { 
-		//	part3="/member/drug-lookup/overview.html#/drug-cost-estimator";
+		} else if (page.equals("dce")) { 
+			part3="/member/drug-lookup/overview.html#/drug-cost-estimator";
 		} else {	//note: shouldn't have gotten here, but just in case
 			Assert.assertTrue("Sorry, testType '"+attemptSorryWorkaround.get("testType")+"' is not covered by this workaround yet, abort this test now", false);
 		}

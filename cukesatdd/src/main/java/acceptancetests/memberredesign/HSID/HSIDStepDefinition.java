@@ -142,7 +142,9 @@ public class HSIDStepDefinition {
 						//note: has the potential for sorry workaround if getting sorry error
 						Thread.sleep(1500);	//sometimes the sorry text take a bit longer to load
 						if (sorry.isDisplayed()) {
-							workaroundSorryErrorPage(wd, testDataType, category, planType);
+							boolean result=workaroundSorryErrorPage(wd, testDataType, category, planType);
+							Assert.assertTrue("***** Error in loading Redesign Account Landing Page ***** Got error for 'Sorry. it's not you, it's us'", result);
+
 						} else {
 							System.out.println("Not the 'sorry' login error, it's some other login error");
 							Assert.fail("***** Error in loading Redesign Account Landing Page *****");
@@ -544,7 +546,21 @@ public class HSIDStepDefinition {
 	}
 	
 	//vvv note: added for 'sorry' login error workaround	
-	public void workaroundSorryErrorPage(WebDriver wd, String testDataType, String category, String planType) {
+	public boolean workaroundSorryErrorPage(WebDriver wd, String testDataType, String category, String planType) {
+		String bypassSorry = System.getProperty("bypassSorry");
+		if (bypassSorry==null) {
+			System.out.println("bypassSorry not set, don't bother to handle Sorry page");
+			return false;
+		} else {
+			if (!bypassSorry.equalsIgnoreCase("yes") && !bypassSorry.equalsIgnoreCase("no")) {
+				System.out.println("don't bother to handle Sorry page, bypassSorry can either be yes or no.  Actual="+bypassSorry);
+				return false;
+			} else if (bypassSorry.equalsIgnoreCase("no")) {
+				System.out.println("don't bother to handle Sorry page, bypassSorry flag set to no");
+				return false;
+			}
+		}
+		System.out.println("*** bypassSorry is set to yes, will attemp the workaround ***");
 		String type="";
 		if ((testDataType==null) && (category!=null)) {
 			type=category.toLowerCase();
@@ -586,10 +602,11 @@ public class HSIDStepDefinition {
 				accountHomePage.workaroundAttempt("reward");
 			}
 			getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
+			return true;
 		} else {
 			String msg="not workaround candidate";
 			System.out.println(msg);
-			Assert.fail("***** Error in loading Redesign Account Landing Page ***** Got error for 'Sorry. it's not you, it's us'");
+			return false;
 		}
 	}
 	//^^^ note: added for 'sorry' login error workaround	
