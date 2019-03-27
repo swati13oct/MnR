@@ -1736,9 +1736,13 @@ public class AccountHomePage extends UhcDriver {
 				System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
 				waitforElement(drugLookup);
 				drugLookup.click();
-				//tbd WebElement loadingImage = driver.findElement(By.className("loading-dialog"));
-				//tbd CommonUtility.waitForPageLoad(driver, loadingImage, 15);
-			}else if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
+				try {
+					WebElement loadingImage = driver.findElement(By.className("loading-dialog"));
+					CommonUtility.waitForPageLoad(driver, loadingImage, 15);
+				} catch (Exception e) {
+					System.out.println("Exception e: "+e);
+				}
+			} else if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
 				workaroundAttempt("dce");
 			}
 		} else {
@@ -2523,13 +2527,17 @@ public class AccountHomePage extends UhcDriver {
 			part3="/member/health-and-wellness.html";
 		} else if (page.equals("pharmacylocator")) { 
 			part3="/member/pharmacy-locator/overview.html";
-		} else if (page.equals("dce")) { 
-			part3="/member/drug-lookup/overview.html#/drug-cost-estimator";
+		//} else if (page.equals("dce")) { 
+		//	part3="/member/drug-lookup/overview.html#/drug-cost-estimator";
 		} else {	//note: shouldn't have gotten here, but just in case
 			Assert.assertTrue("Sorry, testType '"+attemptSorryWorkaround.get("testType")+"' is not covered by this workaround yet, abort this test now", false);
 		}
 
 		String workaroundURL=part1+part2+part3;
+		if (page.equals("dce")) {
+			// mimic testharness page
+			workaroundURL="https://stage-medicare.uhc.com/content/medicare/member/drug-lookup/overview.html#/drug-cost-estimator"; 
+		}
 		System.out.println("Workaround URL is going to be: "+workaroundURL);
 		driver.get(workaroundURL);
 		try {
