@@ -541,9 +541,9 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	  |01    |1041| MAPD     | COSMOS | diffGrpsDiffYrs_COSMOSCLAIMS | 01/02/2018  | 01/02/2019    | Medical           | Yes                 |
 	  |02    |1041| MAPD     | COSMOS | diffGrpsDiffYrs_COSMOSCLAIMS | 01/02/2018  | 01/02/2019    | Prescription drug | Yes                 |
 	  |03    |1041| MA       | COSMOS | COSMOSCLAIMS                 | 01/02/2018  | 01/02/2019    | Medical           | Yes                 |
-	  |04    |1041| MA       | NICE   | NICECLAIMS                   | 01/02/2018  | 01/02/2019    | Medical           | No                  |
-	  |05    |1041| MAPD     | NICE   | NICECLAIMS                   | 01/02/2018  | 01/02/2019    | Medical           | No                  |
-	  |06    |1041| MAPD     | NICE   | NICECLAIMS                   | 01/02/2018  | 01/02/2019    | Prescription drug | No                  |
+	  |04    |1041| MA       | NICE   | NICECLAIMS                   | 01/02/2018  | 01/02/2019    | Medical           | Yes                 |
+	  |05    |1041| MAPD     | NICE   | NICECLAIMS                   | 01/02/2018  | 01/02/2019    | Medical           | Yes                 |
+	  |06    |1041| MAPD     | NICE   | NICECLAIMS                   | 01/02/2018  | 01/02/2019    | Prescription drug | Yes                 |
 	  |07    |1041| MAPD     | COSMOS | COSMOSCLAIMS                 | 01/02/2018  | 01/02/2019    | Medical           | Yes                 |
 	  |08    |1041| MAPD     | COSMOS | COSMOSCLAIMS                 | 01/02/2018  | 01/02/2019    | Prescription drug | Yes                 |
 	  |09    |1041| PCP      | COSMOS | COSMOSCLAIMS                 | 01/02/2018  | 01/02/2019    | Medical           | Yes                 |
