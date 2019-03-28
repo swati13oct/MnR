@@ -57,7 +57,7 @@ public class PreEffectiveStepDefinition{
 @Given("^verify that preeffective message is displayed on the home page$")
 public void verifyPreEffectiveMessageDisplayedOnDashboardHomePage() throws Throwable {
 	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-	Thread.sleep(10000);
+	
 	AccountHomePage.checkForIPerceptionModel(accountHomePage.driver);
 	accountHomePage.validatePreEffectiveMessagePresent();	
     getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
@@ -75,7 +75,7 @@ public void verifyPreEffectiveMessageDisplayedOnTestHarnessPage() throws Throwab
 @Given("^verify that payment tab is displayed to Preeffective member on dashboard$")
 public void verifyPaymentsTabNotDisplayedOnDashboardHomePage() throws Throwable {
 	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-	Thread.sleep(3000);	
+	
 	AccountHomePage.checkForIPerceptionModel(accountHomePage.driver);
 	accountHomePage.validatePremiumPaymentTabNotDisplayed();	
 	getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
@@ -149,9 +149,7 @@ public void clickViewPlanDocumentsButton() throws Throwable {
 	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 			.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 	BenefitsAndCoveragePage.checkModelPopup(benefitsCoveragePage.driver);
-    benefitsCoveragePage.clickViewPlanDocumentsButton();
-    System.out.println("Now waiting for 85 seconds as this page takes a lot of time to load :( ");
-    Thread.sleep(85000);    
+    benefitsCoveragePage.clickViewPlanDocumentsButton();  
     FormsAndResourcesPage formsAndResourcesPage = new FormsAndResourcesPage(benefitsCoveragePage.driver);
 	getLoginScenario().saveBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE, formsAndResourcesPage);
                
@@ -180,7 +178,6 @@ public void verifySubnavigationIsSuppressedOnClaimsPage() throws Throwable {
 	
 	ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario()
 			.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);   
-	Thread.sleep(5000);
 	//write code for handling iperception pop-up
 	//newclaimsSummarypage.feebackpopupClose();
 	ClaimSummarypage.checkForIPerceptionModel(newclaimsSummarypage.driver);
@@ -226,7 +223,6 @@ public void verifyPaymentTabIsNOTDisplayedOnClaimsPage() throws Throwable {
 @Given("^the user clicks on Account Profile tab & selects Account Settings from the drop down$")
 public void userClicksOn_Account_settings() throws Throwable {
 	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-	Thread.sleep(3000);
 	AccountHomePage.checkForIPerceptionModel(accountHomePage.driver);
 	ProfileandPreferencesPage ppp = accountHomePage.navigateDirectToProfilePage();
 	getLoginScenario().saveBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE,ppp);	

@@ -114,7 +114,7 @@ Scenario Outline:Verify HSID registration.
     And user clicks on claims tab from Forms and Resources page
     And verify that subnavigation is supressed on the claims page
     And verify that correct preeffective message is displayed on claims page
-    And verify that correct phone number is displayed in technical support section of claims page
+#    And verify that correct phone number is displayed in technical support section of claims page
 	And the user clicks on Account Profile tab & selects Account Settings from the drop down from claims page
     And verify that the pre effecctive member can access the account settings page to view security and sign-in preferences
     

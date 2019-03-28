@@ -1293,7 +1293,7 @@ public void NavigateToClaimsPage(){
 			
 			public void validateClaimsSummarySubNavNotDisplayed() throws InterruptedException 
 			{
-			    Thread.sleep(2000);  
+			     
 			    System.out.println("Now checking for claims summary sub navigation of Claims");
 			     
 				Dimension size = driver.findElement(By.id("claimsummaryC1")).getSize();
