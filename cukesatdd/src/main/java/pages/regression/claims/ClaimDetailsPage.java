@@ -143,6 +143,9 @@ public class ClaimDetailsPage extends UhcDriver{
 
 	@FindBy(xpath="//a[@id='claimsummaryC1']")
 	private WebElement claimsSummaryLink;
+
+	@FindBy(xpath="//a[@id='claimSearchButtons']")
+	private WebElement claimsSummaryBackButton;
 	
 	@FindBy(xpath="//p[contains(text(),'Medical Claim Details')]")
 	private WebElement claimsDetailHeader;
@@ -714,12 +717,11 @@ public class ClaimDetailsPage extends UhcDriver{
 	}
 
 	public ClaimSummarypage navigateToClaimSummaryPage() {
-		Assert.assertTrue("PROBLEM - Unable to locate the Claims Summary link on top menu to return back to claim summary page to prep for next test step", validate(claimsSummaryLink));
-		claimsSummaryLink.click();
+		Assert.assertTrue("PROBLEM - Unable to locate the Claims Summary link on top menu to return back to claim summary page to prep for next test step", validate(claimsSummaryBackButton));
+		claimsSummaryBackButton.click();
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (driver.getCurrentUrl().contains("claims.html#/overview")) {

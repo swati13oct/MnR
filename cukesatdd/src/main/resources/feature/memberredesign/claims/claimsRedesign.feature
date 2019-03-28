@@ -359,8 +359,9 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	    | TID   | planType | claimPeriod    | domain | claimssystem |
 	  	| 15230 | MAPD     | Last 24 months | COSMOS | COSMOSCLAIMS |
 
+
     @claims15 @def1041 @thePredators
-	Scenario Outline: DID: <DID> -plan: <planType> -claimsSystem: <claimssystem> - <index> - To validate claims for both summary and detail page for each search range options
+	Scenario Outline: DID: <DID> -plan: <planType> -claimsSystem: <claimssystem> -claimType: <claimType> - <index> - To validate claims for both summary and detail page for each search range options
 		Given login with following details logins in the member portal and validate elements
 		  | Plan Type      | <planType>            |
 		  | Test Data Type | <claimssystem>        |
@@ -536,23 +537,76 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		Then the user should be able to see the search range is greater than two years
 		  | Plan Type        | <planType>          |
 
+	@claims15_01 @claims15_MAPD @claims15_COSMOS @claims15_MEDICAL @diffGrpsDiffYrs
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimToDate | claimFromDate | claimType         | SummaryHasYourShare |
 	  |01    |1041| MAPD     | COSMOS | diffGrpsDiffYrs_COSMOSCLAIMS | 01/02/2018  | 01/02/2019    | Medical           | Yes                 |
+
+	@claims15_02 @claims15_MAPD @claims15_COSMOS @claims15_DRUG @diffGrpsDiffYrs
+	Examples: 
+	  |index |DID | planType | domain | claimssystem                 | claimToDate | claimFromDate | claimType         | SummaryHasYourShare |
 	  |02    |1041| MAPD     | COSMOS | diffGrpsDiffYrs_COSMOSCLAIMS | 01/02/2018  | 01/02/2019    | Prescription drug | Yes                 |
+
+	@claims15_03 @claims15_MA @claims15_COSMOS @claims15_MEDICAL
+	Examples: 
+	  |index |DID | planType | domain | claimssystem                 | claimToDate | claimFromDate | claimType         | SummaryHasYourShare |
 	  |03    |1041| MA       | COSMOS | COSMOSCLAIMS                 | 01/02/2018  | 01/02/2019    | Medical           | Yes                 |
+
+	@claims15_04 @claims15_MA @claims15_NICE @claims15_MEDICAL
+	Examples: 
+	  |index |DID | planType | domain | claimssystem                 | claimToDate | claimFromDate | claimType         | SummaryHasYourShare |
 	  |04    |1041| MA       | NICE   | NICECLAIMS                   | 01/02/2018  | 01/02/2019    | Medical           | Yes                 |
+
+	@claims15_05 @claims15_MAPD @claims15_NICE @claims15_MEDICAL
+	Examples: 
+	  |index |DID | planType | domain | claimssystem                 | claimToDate | claimFromDate | claimType         | SummaryHasYourShare |
 	  |05    |1041| MAPD     | NICE   | NICECLAIMS                   | 01/02/2018  | 01/02/2019    | Medical           | Yes                 |
+
+	@claims15_06 @claims15_MAPD @claims15_NICE @claims15_DRUG
+	Examples: 
+	  |index |DID | planType | domain | claimssystem                 | claimToDate | claimFromDate | claimType         | SummaryHasYourShare |
 	  |06    |1041| MAPD     | NICE   | NICECLAIMS                   | 01/02/2018  | 01/02/2019    | Prescription drug | Yes                 |
+
+	@claims15_07 @claims15_MAPD @claims15_COSMOS @claims15_MEDICAL
+	Examples: 
+	  |index |DID | planType | domain | claimssystem                 | claimToDate | claimFromDate | claimType         | SummaryHasYourShare |
 	  |07    |1041| MAPD     | COSMOS | COSMOSCLAIMS                 | 01/02/2018  | 01/02/2019    | Medical           | Yes                 |
+
+	@claims15_08 @claims15_MAPD @claims15_COSMOS @claims15_DRUG
+	Examples: 
+	  |index |DID | planType | domain | claimssystem                 | claimToDate | claimFromDate | claimType         | SummaryHasYourShare |
 	  |08    |1041| MAPD     | COSMOS | COSMOSCLAIMS                 | 01/02/2018  | 01/02/2019    | Prescription drug | Yes                 |
+
+	@claims15_09 @claims15_PCP @claims15_COSMOS @claims15_MEDICAL
+	Examples: 
+	  |index |DID | planType | domain | claimssystem                 | claimToDate | claimFromDate | claimType         | SummaryHasYourShare |
 	  |09    |1041| PCP      | COSMOS | COSMOSCLAIMS                 | 01/02/2018  | 01/02/2019    | Medical           | Yes                 |
+
+	@claims15_10 @claims15_PCP @claims15_COSMOS @claims15_DRUG
+	Examples: 
+	  |index |DID | planType | domain | claimssystem                 | claimToDate | claimFromDate | claimType         | SummaryHasYourShare |
 	  |10    |1041| PCP      | COSMOS | COSMOSCLAIMS                 | 01/02/2018  | 01/02/2019    | Prescription drug | Yes                 |
+
+	@claims15_11 @claims15_MEDICA @claims15_COSMOS @claims15_MEDICAL
+	Examples: 
+	  |index |DID | planType | domain | claimssystem                 | claimToDate | claimFromDate | claimType         | SummaryHasYourShare |
 	  |11    |1041| MEDICA   | COSMOS | COSMOSCLAIMS                 | 01/02/2018  | 01/02/2019    | Medical           | Yes                 |
+
+	@claims15_12 @claims15_MEDICA @claims15_COSMOS @claims15_DRUG
+	Examples: 
+	  |index |DID | planType | domain | claimssystem                 | claimToDate | claimFromDate | claimType         | SummaryHasYourShare |
 	  |12    |1041| MEDICA   | COSMOS | COSMOSCLAIMS                 | 01/02/2018  | 01/02/2019    | Prescription drug | Yes                 |
+
+	@claims15_13 @claims15_PDP @claims15_RX @claims15_DRUG
+	Examples: 
+	  |index |DID | planType | domain | claimssystem                 | claimToDate | claimFromDate | claimType         | SummaryHasYourShare |
 	  |13    |1041| PDP      | RX     | RXCLAIMS                     | 01/02/2018  | 01/02/2019    | Prescription drug | No                  |
-	  |14    |1041| SHIP     | NA     | COSMOSCLAIMS                 | 01/02/2018  | 01/02/2019    | NA                | No                  |
-     #note: these will be in team-env only
+
+	@claims15_14 @claims15_SHIP 
+	Examples: 
+	  |index |DID | planType | domain | claimssystem                 | claimToDate | claimFromDate | claimType         | SummaryHasYourShare |
+	  |14    |1041| SHIP     | NA     | SHIPCLAIMS                   | 01/02/2018  | 01/02/2019    | NA                | No                  |
+     #note: these will be in team-a env only
 	 #|15    |1041| MAPD     | COSMOS | t_diffGrpsDiffYrs_COSMOSCLAIMS | 01/02/2018  | 01/02/2019    | Medical           | Yes                |
 	 #|16    |1041| MAPD     | COSMOS | t_diffGrpsDiffYrs_COSMOSCLAIMS | 01/02/2018  | 01/02/2019    | Prescription drug | Yes                |
 	  

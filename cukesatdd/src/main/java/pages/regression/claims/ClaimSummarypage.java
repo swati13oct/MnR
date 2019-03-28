@@ -1455,8 +1455,12 @@ public void NavigateToClaimsPage(){
 			}
 
 			public int getNumClaims(String range, String claimType) {
+				int sleepTimeInSec=10;
+				if (range.equals("Last 12 months") || range.equals("Last 24 months") || range.equals("Custom search")) {
+					sleepTimeInSec=15;
+				}
 				try {
-					Thread.sleep(10000); //the claims take time to load sometimes, if don't way then it will think 0 claims
+					Thread.sleep(sleepTimeInSec*1000); //the claims take time to load sometimes, if don't way then it will think 0 claims
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
