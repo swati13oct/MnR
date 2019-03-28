@@ -725,14 +725,14 @@ public class ClaimDetailsPage extends UhcDriver{
 		CommonUtility.waitForPageLoad(driver, claimsSummaryBackButton, 5);
 		claimsSummaryBackButton.click();
 		System.out.println("Clicked claims summary back button...url="+driver.getCurrentUrl());
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		System.out.println("After sleep...url="+driver.getCurrentUrl());
-		//CommonUtility.waitForPageLoad(driver, claimsSummaryBackButton, 5);
-		if (driver.getCurrentUrl().contains("claims.html#/overview")) {
+		//tbd try {
+		//tbd 	Thread.sleep(2000);
+		//tbd } catch (InterruptedException e) {
+		//tbd 	e.printStackTrace();
+		//tbd }
+		System.out.println("url="+driver.getCurrentUrl());
+		CommonUtility.waitForPageLoad(driver, claimsSummaryPageHeader, 5);
+		if (driver.getCurrentUrl().contains("overview")) {
 			return new ClaimSummarypage(driver);
 		}
 		return null;
