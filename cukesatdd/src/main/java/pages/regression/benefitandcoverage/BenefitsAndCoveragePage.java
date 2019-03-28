@@ -58,7 +58,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                @FindBy(xpath = "//a[contains(text(),'VIEW PLAN DOCUMENTS')]/ancestor::p/preceding-sibling::p")
                private WebElement messageForPreeffective;
 
-               @FindBy(xpath = "//p[contains(text(),'1-888-980-8125')]")
+               @FindBy(xpath = "//p[contains(text(),'1-866-254-3132')]")
                public WebElement preEffectiveTechSupportNumber;
 
                @FindBy(id = "IPerceptionsEmbed")
@@ -3713,14 +3713,14 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
                               System.out.println("Now checking for Tech Support Number for Pre-effective members");
                               System.out.println("The Tech Support phone number displayed on screen is "+preEffectiveTechSupportNumber.getText());
-                              Assert.assertEquals(preEffectiveTechSupportNumber.getText(),"1-888-980-8125");
+                              Assert.assertEquals(preEffectiveTechSupportNumber.getText(),"1-866-254-3132");
                               System.out.println("Assert for correct Tech Suppport Phone Number  was passed");
 
                }
 
                public FormsAndResourcesPage clickViewPlanDocumentsButton() throws InterruptedException 
                {
-
+            	   			 CommonUtility.waitForPageLoadNew(driver, viewPlanDocumentsButton, 45);
                               System.out.println("Now clicking the View Plan Documents Button");
                               viewPlanDocumentsButton.click();
 
