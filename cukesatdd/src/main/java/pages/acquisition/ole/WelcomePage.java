@@ -278,7 +278,7 @@ public class WelcomePage extends UhcDriver{
 					waitforElement(riderBenefit);
 					validate(riderBenefit);
 					Assert.assertTrue("Rider Benefit is not available for this plan",
-							riderBenefit.getAttribute("alt").contains("benefit available"));
+							riderBenefit.getAttribute("class").contains("benefitAvailable"));
 					System.out.println("Benfit is Available");
 					break;
 				} catch (Exception e) {
@@ -293,7 +293,7 @@ public class WelcomePage extends UhcDriver{
 					waitforElement(riderBenefit);
 					validate(riderBenefit);
 					Assert.assertTrue("Rider Benefit is available for this plan",
-							riderBenefit.getAttribute("alt").contains("benefit unavailable"));
+							riderBenefit.getAttribute("class").contains("benefitUnavailable"));
 					System.out.println("Benfit is UnAvailable");
 					break;
 				} catch (Exception e) {
