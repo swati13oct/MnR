@@ -401,6 +401,10 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		validateNew(step1);
 		validateNew(step2);
 		validateNew(step3);
+		checkProactiveChatPopup();
+	}
+	
+	public void checkProactiveChatPopup(){
 		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
 		try{
 			if(proactiveChatExitBtn.isDisplayed())
@@ -1739,6 +1743,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 
 	public VPPPlanSummaryPage enterZipcodeAndNavigateToPlanSummary(String zipCode) {
+		checkProactiveChatPopup();
 		sendkeys(zipCodeTextBox, zipCode);
 		findPlansButton.click();
 		CommonUtility.checkPageIsReadyNew(driver);

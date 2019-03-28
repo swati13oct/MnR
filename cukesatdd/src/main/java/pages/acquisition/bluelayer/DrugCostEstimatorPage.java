@@ -412,6 +412,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id = "map")
 	public WebElement map;
 	
+	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button proactive-offer__close main-background-color second-color')]")
+	public static WebElement proactiveChatExitBtn;
+	
 	@Override
 	public void openAndValidate() {
 
@@ -1800,11 +1803,22 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}	
 	
 	public VPPPlanSummaryPage enterZipcodeAndNavigateToPlanSummary(String zipCode) {
+		checkProactiveChatPopup();
 		sendkeys(zipCodeTextBox, zipCode);
 		findPlansButton.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, maPlansCount, 60);
 		return new VPPPlanSummaryPage(driver);
+	}
+	
+	public void checkProactiveChatPopup(){
+		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
+		try{
+			if(proactiveChatExitBtn.isDisplayed())
+				jsClickNew(proactiveChatExitBtn);
+		}catch(Exception e){
+			System.out.println("Proactive chat popup not displayed");
+		}
 	}
 	
 }
