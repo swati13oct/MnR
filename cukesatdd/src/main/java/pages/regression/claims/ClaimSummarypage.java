@@ -1456,8 +1456,10 @@ public void NavigateToClaimsPage(){
 
 			public int getNumClaims(String range, String claimType) {
 				int sleepTimeInSec=10;
-				if (range.equals("Last 12 months") || range.equals("Last 24 months") || range.equals("Custom search")) {
+				if (range.equals("Last 12 months") || range.equals("Custom search")) {
 					sleepTimeInSec=15;
+				} else if (range.equals("Last 24 months")) {
+					sleepTimeInSec=20;
 				}
 				try {
 					Thread.sleep(sleepTimeInSec*1000); //the claims take time to load sometimes, if don't way then it will think 0 claims

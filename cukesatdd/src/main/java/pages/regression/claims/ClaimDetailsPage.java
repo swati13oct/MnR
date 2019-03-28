@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
@@ -718,6 +719,7 @@ public class ClaimDetailsPage extends UhcDriver{
 
 	public ClaimSummarypage navigateToClaimSummaryPage() {
 		Assert.assertTrue("PROBLEM - Unable to locate the Claims Summary link on top menu to return back to claim summary page to prep for next test step", validate(claimsSummaryBackButton));
+		CommonUtility.waitForPageLoad(driver, claimsSummaryBackButton, 5);
 		claimsSummaryBackButton.click();
 		try {
 			Thread.sleep(2000);
