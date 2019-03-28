@@ -549,18 +549,17 @@ public class HSIDStepDefinition {
 	public boolean workaroundSorryErrorPage(WebDriver wd, String testDataType, String category, String planType) {
 		String bypassSorry = System.getProperty("bypassSorry");
 		if (bypassSorry==null) {
-			System.out.println("bypassSorry not set, don't bother to handle Sorry page");
+			//System.out.println("bypassSorry not set, don't bother to handle Sorry page");
 			return false;
 		} else {
 			if (!bypassSorry.equalsIgnoreCase("yes") && !bypassSorry.equalsIgnoreCase("no")) {
-				System.out.println("don't bother to handle Sorry page, bypassSorry can either be yes or no.  Actual="+bypassSorry);
+				//System.out.println("don't bother to handle Sorry page, bypassSorry can either be yes or no.  Actual="+bypassSorry);
 				return false;
 			} else if (bypassSorry.equalsIgnoreCase("no")) {
-				System.out.println("don't bother to handle Sorry page, bypassSorry flag set to no");
+				//System.out.println("don't bother to handle Sorry page, bypassSorry flag set to no");
 				return false;
 			}
 		}
-		System.out.println("*** bypassSorry is set to yes, will attemp the workaround ***");
 		String type="";
 		if ((testDataType==null) && (category!=null)) {
 			type=category.toLowerCase();
@@ -590,6 +589,7 @@ public class HSIDStepDefinition {
 			} else if (type.contains("pharmacylocator")) {
 				forType="pharmacylocator";
 			}
+			System.out.println("*** bypassSorry is set to yes ***");
 			System.out.println("Got 'sorry' login error and this is test for "+type+", will attempt the workaround");
 			
 			AccountHomePage accountHomePage=new AccountHomePage(wd);
