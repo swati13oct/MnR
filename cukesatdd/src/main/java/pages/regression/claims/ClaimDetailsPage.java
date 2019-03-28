@@ -724,13 +724,14 @@ public class ClaimDetailsPage extends UhcDriver{
 		Assert.assertTrue("PROBLEM - Unable to locate the Claims Summary link on top menu to return back to claim summary page to prep for next test step", validate(claimsSummaryBackButton));
 		CommonUtility.waitForPageLoad(driver, claimsSummaryBackButton, 5);
 		claimsSummaryBackButton.click();
-		System.out.println("Clicked claims summary back button...");
+		System.out.println("Clicked claims summary back button...url="+driver.getCurrentUrl());
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		CommonUtility.waitForPageLoad(driver, claimsSummaryBackButton, 5);
+		System.out.println("After sleep...url="+driver.getCurrentUrl());
+		//CommonUtility.waitForPageLoad(driver, claimsSummaryBackButton, 5);
 		if (driver.getCurrentUrl().contains("claims.html#/overview")) {
 			return new ClaimSummarypage(driver);
 		}
