@@ -1203,16 +1203,16 @@ public void NavigateToClaimsPage(){
 			scrollToView(claimstablemoreinfolink);
 			claimstablemoreinfolink.click();
 			CommonUtility.checkPageIsReadyNew(driver);
-/* tbd 
+			/* tbd 
 			int counter =0;
 			do{
 				if(counter<=12)
-				Thread.sleep(5000);
+				Thread.sleep(3000);
 				else
 					return null;
 				counter++;
-			}
-			while(!(driver.getCurrentUrl().contains("/details")));*/
+			} */
+			while(!(driver.getCurrentUrl().contains("/details")));
 			if (driver.getCurrentUrl().contains("/details")) {
 				return new pages.regression.claims.ClaimDetailsPage(driver);
 		

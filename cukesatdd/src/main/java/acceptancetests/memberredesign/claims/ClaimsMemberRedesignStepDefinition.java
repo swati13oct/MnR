@@ -313,7 +313,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	@And("^I validate the pagination on the claims summary page$")
 	public void i_validate_the_pagination_on_the_claims_summary_page() throws Throwable {
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		Assert.assertTrue(claimSummarypage.verifyClaimsTableAndPagination());
+		Assert.assertTrue("PROBLEM - not getting expected pagination.  NOTE: pagination will only show if user has claims for the search range",claimSummarypage.verifyClaimsTableAndPagination());
 	   	}
 	
 	
@@ -430,7 +430,17 @@ public class ClaimsMemberRedesignStepDefinition {
 	 * @toDo : validate the Claims Total in claims details page
 	 */
 	@And("^I validate the Claims Total in claims details page in AARP site$")
-	public void validate_claims_total_AARP(){
+	public void validate_claims_total_AARP(DataTable memberAttributes){
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), 
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String planType = memberAttributesMap.get("Plan Type");
+		if (planType.toLowerCase().contains("pdp")) {
+			System.out.println("PDP case doesn't have 'MORE INFO', skip this step");
+			return;
+		} 
 		ClaimDetailsPage newclaimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
 		newclaimDetailspage.validateClaimsTotalInDetailsPage();
 	}
@@ -642,7 +652,17 @@ public class ClaimsMemberRedesignStepDefinition {
 		//newClaimsSummaryPage.validateLearnmoreaboutsection1();
 	}
 	@When("^I navigate to the Claim Details page in redesigned site$")
-	public void i_navigate_to_member_redesign_claim_details() throws InterruptedException {
+	public void i_navigate_to_member_redesign_claim_details(DataTable memberAttributes) throws InterruptedException {
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), 
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String planType = memberAttributesMap.get("Plan Type");
+		if (planType.toLowerCase().contains("pdp")) {
+			System.out.println("PDP case doesn't have 'MORE INFO', skip this step");
+			return;
+		} 
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario()
 				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
 		ClaimDetailsPage newClaimDetailsPage = claimSummarypage.navigateToClaimDetailsPage();

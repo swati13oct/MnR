@@ -12,13 +12,15 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | Plan Type    | <planType>    |
 		  | Claim Period | <claimPeriod> |
 		Then I can see the claims displayed based on the selection in redesigned site
-		#And I validate the pagination on the claims summary page 
+		And I validate the pagination on the claims summary page 
 		And the user validates the EOB section based on domain in redesigned site
 		  | Domain     | <domain>      |
 		  | Plan Type  | <planType>    |
 		And the user validates the DownloadMyData section in redesigned site
-		#Then I navigate to the Claim Details page in redesigned site
-		#And I validate the Claims Total in claims details page in AARP site
+		Then I navigate to the Claim Details page in redesigned site
+		  | Plan Type  | <planType>    |
+		And I validate the Claims Total in claims details page in AARP site
+		  | Plan Type  | <planType>    |
 		Examples: 
 		    | TID   | planType | claimPeriod    | domain | claimssystem |
 		  	| 15230 | MAPD     | Last 24 months | COSMOS | COSMOSCLAIMS |
@@ -38,11 +40,12 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | Plan Type    | <planType>    |
 		  | Claim Period | <claimPeriod> |
 		Then I can see the claims displayed based on the selection in redesigned site
-		#And I validate the pagination on the claims summary page 
+		And I validate the pagination on the claims summary page 
 		And the user validates the EOB section based on domain in redesigned site
 		     | Domain       | <domain>      |
 		      | Plan Type      | <planType>     |
 		Then I navigate to the Claim Details page in redesigned site
+		  | Plan Type  | <planType>    |
 		Then I validate the Claims Table in claims details page in redesigned site    
 		Examples: 
 		    | TID  | planType | claimPeriod    | domain | claimssystem |
@@ -64,6 +67,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		When I navigate to the Claim Details page for federal members
 		And I validate the Claims Table in claims details page for federal members
 		And I validate the Claims Total in claims details page in AARP site
+		  | Plan Type  | <planType>    |
 		Examples: 
 		  | TID   | planType | claimPeriod    | claimssystem |
 		  | 15227 | MA       | Last 24 months | NICECLAIMS   |
@@ -96,7 +100,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | Plan Type    | <planType>    |
 		  | Claim Period | <claimPeriod> |
 		Then I can see the claims displayed based on the selection in redesigned site
-		#And I validate the pagination on the claims summary page combo member PDP plan
+		And I validate the pagination on the claims summary page combo member PDP plan
 		And the user validates the EOB section based on domain in redesigned site
 		  | Domain     | <domain>      |
 		  | Plan Type  | <planType>    |
@@ -181,7 +185,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	      | Plan Type    | <planType>    |
 	      | Claim Period | <claimPeriod> |
 	    Then I can see the claims displayed based on the selection in redesigned site
-	    #And I validate the pagination on the claims summary page 
+	    And I validate the pagination on the claims summary page 
 	   	And the user validates the EOB section based on domain in redesigned site
 	      | Domain     | <domain>      |
 	      | Plan Type  | <planType>    |
@@ -189,6 +193,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	    When I navigate to the Claim Details page for federal members
 	    And I validate the Claims Table in claims details page for federal members
 	    And I validate the Claims Total in claims details page in AARP site
+		  | Plan Type  | <planType>    |
 		
 	    Examples: 
 	     | TID   | planType | claimPeriod    | domain | claimssystem |
@@ -205,7 +210,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	      | Plan Type    | <planType>    |
 	      | Claim Period | <claimPeriod> |
 	    Then  I can see the claims displayed based on the selection in redesigned site for PDP plans 
-	    #And I validate the pagination on the claims summary page for members  
+	    And I validate the pagination on the claims summary page for members  
 	    And the user validates the EOB section in redesigned site    
 	    #And the user validates the DownloadMyData section in redesigned site
 	
@@ -225,7 +230,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	      | Plan Type    | <planType>    |
 	      | Claim Period | <claimPeriod> |
 	    Then I can see the claims displayed based on the selection in redesigned site
-	    #And I validate the pagination on the claims summary page for members
+	    And I validate the pagination on the claims summary page for members
 	   	And the user validates the EOB section based on domain in redesigned site
 	      | Domain     | <domain>      |
 	      | Plan Type  | <planType>    |
@@ -233,6 +238,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	    When I navigate to the Claim Details page for federal members
 	    And I validate the Claims Table in claims details page for federal members
 	    And I validate the Claims Total in claims details page in AARP site
+		  | Plan Type  | <planType>    |
 	    And I validate the claims history Button
 		   
 	    Examples: 
@@ -252,15 +258,16 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	      | Plan Type    | <planType>    |
 	      | Claim Period | <claimPeriod> |
 	    Then I can see the claims displayed based on the selection in redesigned site
-	    #And I validate the pagination on the claims summary page for members
+	    And I validate the pagination on the claims summary page for members
 	   	And the user validates the EOB section based on domain in redesigned site
 	      | Domain     | <domain>      |
 	      | Plan Type  | <planType>    |
 	 	  When I navigate to the Claim Details page for federal members
 	    And I validate the Claims Table in claims details page for federal members
 	    And I validate the Claims Total in claims details page in AARP site
+		  | Plan Type  | <planType>    |
 	    And I can view a claim search back button in Claims Details page in AARP site
-	    #And the user validates the DownloadMyData section in redesigned site
+	    And the user validates the DownloadMyData section in redesigned site
 		   
 	    Examples: 
 	      | TID   | planType | claimPeriod    | domain | claimssystem |
@@ -280,7 +287,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	      | Plan Type    | <planType>    |
 	      | Claim Period | <claimPeriod> |
 		Then I can see the claims displayed based on the selection in redesigned site
-		#And I validate the pagination on the claims summary page for members
+		And I validate the pagination on the claims summary page for members
 		And the user validates the EOB section based on domain in redesigned site
 	      | Domain     | <domain>      |
 	      | Plan Type  | <planType>    |
@@ -288,6 +295,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		When I navigate to the Claim Details page for federal members
 		And I validate the Claims Table in claims details page for federal members
 		And I validate the Claims Total in claims details page in AARP site
+		  | Plan Type  | <planType>    |
 		And I validate the claims history Button
 		   
 		Examples: 
@@ -308,11 +316,12 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		Then I can see the claims displayed based on the selection in redesigned site
 		Then I can see the print and download option in claims details table
 		And I validate the print and download option in claims details table
-		#And I validate the pagination on the claims summary page 
+		And I validate the pagination on the claims summary page 
 		And the user validates the EOB section based on domain in redesigned site    
 	      | Domain       | <domain>      |
 	      | Plan Type    | <planType>    |
 		Then I navigate to the Claim Details page in redesigned site
+		  | Plan Type  | <planType>    |
 		Then I validate the Claims Table in claims details page in redesigned site
 		And I validate the EOB option in claims details page in redesigned site    
 		
@@ -326,7 +335,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | Plan Type      | <planType>     |
 		  | Test Data Type | <claimssystem> |
 		When I navigate to the claims Summary page in redesigned site
-		#Then I can validate the claims summary header
+		Then I can validate the claims summary header
 		And I can search claims for the following claim period on redesigned site
 		  | Plan Type    | <planType>    |
 		  | Claim Period | <claimPeriod> |
@@ -359,7 +368,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	    | TID   | planType | claimPeriod    | domain | claimssystem |
 	  	| 15230 | MAPD     | Last 24 months | COSMOS | COSMOSCLAIMS |
 
-
+    #----- begin of claims15 ---------------------------------------------------------
     @claims15 @def1041 @thePredators
 	Scenario Outline: DID: <DID> -plan: <planType> -claimsSystem: <claimssystem> -claimType: <claimType> - <index> - To validate claims for both summary and detail page for each search range options
 		Given login with following details logins in the member portal and validate elements
@@ -609,4 +618,5 @@ Feature: T1.1To validate the new changes related to claims page on the member re
      #note: these will be in team-a env only
 	 #|15    |1041| MAPD     | COSMOS | t_diffGrpsDiffYrs_COSMOSCLAIMS | 01/02/2018  | 01/02/2019    | Medical           | Yes                |
 	 #|16    |1041| MAPD     | COSMOS | t_diffGrpsDiffYrs_COSMOSCLAIMS | 01/02/2018  | 01/02/2019    | Prescription drug | Yes                |
+	#----- end of claims15 ---------------------------------------------------------
 	  

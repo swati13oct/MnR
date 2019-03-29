@@ -506,11 +506,14 @@ public class ClaimDetailsPage extends UhcDriver{
 			String key="med_dateOfService";
 			WebElement element=med_dateOfService;
 			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", validate(element));
-			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", element.getText().contains("to"));
 
 			String value=element.getText().trim();
 			String[] tmp=value.split("to");
+			try {
 			value=tmp[0].trim();
+			} catch (ArrayIndexOutOfBoundsException e) {
+				Assert.assertTrue("PROBLEM - not getting expected data value on detail page, please check to see if service is down or timing issue with script", false);
+			}
 			dataMap.put(key, value);
 
 			key="med_providerName";
@@ -720,9 +723,6 @@ public class ClaimDetailsPage extends UhcDriver{
 	
 	}
 
-	@FindBy(xpath="//h1[contains(@class,'main-heading')]")
-	private WebElement claimsSummaryPageHeader;
-	
 	public ClaimSummarypage navigateToClaimSummaryPage() {
 		Assert.assertTrue("PROBLEM - Unable to locate the Claims Summary link on top menu to return back to claim summary page to prep for next test step", validate(claimsSummaryBackButton));
 		CommonUtility.waitForPageLoad(driver, claimsSummaryBackButton, 5);
@@ -731,17 +731,15 @@ public class ClaimDetailsPage extends UhcDriver{
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("url="+driver.getCurrentUrl());
+		System.out.println("current url="+driver.getCurrentUrl());
 		if (driver.getCurrentUrl().contains("overview")) {
 			return new ClaimSummarypage(driver);
 		}
 		return null;
 	}
-	
-		//^^^ note:	added for def1041		
+	//^^^ note:	added for def1041		
 	
 	
 }
