@@ -15,11 +15,11 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=2,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionPreEffective.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPreEffective")
+jsonReport = "target/cucumber-RunMRATDDMemberRedesignPreEffectiveVBF.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDMemberRedesignPreEffectiveVBF")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/preEffective" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPreEffective.json" }, tags = { "@preEffectiveVBF" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDMemberRedesignPreEffectiveVBF.json" }, tags = { "@preEffectiveVBF" })
 public class RunMRATDDMemberRedesignPreEffectiveVBF {
 
 }
