@@ -146,8 +146,8 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='plan_box']/div/div[2]/div/p/a")
 	private WebElement planNameLink;
 
-	//@FindBy(id = "dropdown-toggle--1")
-	@FindBy(id = "accountProfile")											 
+	@FindBy(xpath = "//button[@id='dropdown-toggle--1']")
+	//@FindBy(id = "accountProfile")											 
 	private WebElement accountProfileBtn;
 
 	// @FindBy(xpath = ".//*[@id='dropdown-options--1']/a[contains(text(),'Account
