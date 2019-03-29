@@ -490,7 +490,7 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
       |   90210 | NO              | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
       |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                   |
 
-  @acquisitionRegressiontest @aprilrelease2019
+  @acquisitionRegression @April_release_2019 @Ancillary_Widget @OLE_Regression
   Scenario Outline: TID: <TID> -plan type: <PlanType> - OLE End to end from AARP Acquisition site VPP Plan Summary
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
