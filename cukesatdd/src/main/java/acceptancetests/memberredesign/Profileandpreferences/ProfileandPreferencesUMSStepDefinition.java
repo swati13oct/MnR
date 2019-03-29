@@ -106,9 +106,9 @@ public class ProfileandPreferencesUMSStepDefinition {
 	@Then("^the user navigates to Profile and Preferences page$")
 	public void user_navigate_toProfileandPreferencespage() throws InterruptedException {
 
+
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-
 		ProfileandPreferencesPage profilePreferencesPage = accountHomePage.navigateDirectToProfilePage();
 
 		if (profilePreferencesPage != null) {
@@ -330,6 +330,14 @@ public class ProfileandPreferencesUMSStepDefinition {
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
 		profilePreferencesPage.validateneedhelpheader();
+
+	}
+	@Then("^the ship user validates the need help section$")
+	public void uservalidatesneedhelpsectionShip() {
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+
+		profilePreferencesPage.validateneedhelpheaderShip();
 
 	}
 
@@ -581,7 +589,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	}
 	
-	@Then("^the user checks the Edit Button changes to Cancel Button for ship")
+	@Then("^the Ship user checks the Edit Button changes to Cancel Button$")
 	public void UserChecksSaveCancelButtonShip() {
 		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);

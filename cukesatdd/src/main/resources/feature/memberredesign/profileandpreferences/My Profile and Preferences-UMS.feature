@@ -2,19 +2,19 @@
 Feature: C1.2To test Profile and Preferences page 
 
   
-    @accountProfile1 @ShipEndtoEnd
+    @accountProfile1 @ShipEndtoEnd  @tamzid
 	Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Profile page End to End test for Ship Members
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
     When the user navigates to Profile and Preferences page
 	Then the user validates the Plan Name, Member name, Member ID and account section in UMS site                      
-    And the user validates the need help section  														
+    And the ship user validates the need help section  														
 	Then the user validates permanent address section   												
 	Then the user validates the Phone section 
 	 | Plan Type | <planType> |                                                         
     Then the user Clicks on the the Edit phone Link and validates the elements
     | Plan Type | <planType> | 							    
-    Then the user checks the Edit Button changes to Cancel Button for ship                                     
+    Then the Ship user checks the Edit Button changes to Cancel Button                                     
     Then the user checks the functionality of save Button in Phoneeditsection                          
     Then the user validate the functionality of Cancel Button In phoneeditSection                      
     Then the user validate the temporary address section for ship member                                
@@ -31,7 +31,6 @@ Feature: C1.2To test Profile and Preferences page
   @accountProfile2 @MAPDandMAEndToEnd	
   Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Profile page End to End test for MAPD and MA Members
     Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When the user navigates to Profile and Preferences page
 	Then the user validates the Plan Name, Member name, Member ID and account section in UMS site                   
@@ -48,10 +47,10 @@ Feature: C1.2To test Profile and Preferences page
 	And the user validates see more ways to contact us section                                          
     And the user validates on clicking contact us link it should route to contact us page               
 	Examples: 
-     |  TID   | planType  | memberType       |
-     | 15083  | MAPD      | MAPD_Profilepref |
-	 | 15083  | MA        | MA_Profilepref   |
-     | 15083  | PDP       | PDP_Profilepref  |
+     |  TID   | planType  | memberType      			   |
+     | 15083  | MAPD      | MAPD_GROUP_GOGreen_Profilepref |
+	 | 15083  | MA        | MA_AARP_GOGreen_Profilepref    |
+     | 15083  | PDP       | PDP_AARP_GOGreen_Profilepref   |
 	  
 
   @accountProfile3 @NegativeTestonHSIDpage 
