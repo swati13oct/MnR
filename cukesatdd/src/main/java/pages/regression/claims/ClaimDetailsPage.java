@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -174,7 +175,7 @@ public class ClaimDetailsPage extends UhcDriver{
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} 
 		if(claimSearch.isDisplayed()){
 			Assert.assertTrue(true);
 		}
@@ -357,7 +358,7 @@ public class ClaimDetailsPage extends UhcDriver{
 
 	public void validateClaimsTotalInDetailsPage() {
 		try {
-			Thread.sleep(9000);
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -386,7 +387,7 @@ public class ClaimDetailsPage extends UhcDriver{
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			} 
 		}
 	}
 	/**
@@ -470,7 +471,7 @@ public class ClaimDetailsPage extends UhcDriver{
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} 
 	validate(claimsHistoryLink);
 	System.out.println("claimsHistoryLink.isDisplayed==>"+claimsHistoryLink.isDisplayed());
 	claimsHistoryLink.click();
@@ -505,6 +506,8 @@ public class ClaimDetailsPage extends UhcDriver{
 			String key="med_dateOfService";
 			WebElement element=med_dateOfService;
 			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", validate(element));
+			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", element.getText().contains("to"));
+
 			String value=element.getText().trim();
 			String[] tmp=value.split("to");
 			value=tmp[0].trim();
@@ -724,20 +727,21 @@ public class ClaimDetailsPage extends UhcDriver{
 		Assert.assertTrue("PROBLEM - Unable to locate the Claims Summary link on top menu to return back to claim summary page to prep for next test step", validate(claimsSummaryBackButton));
 		CommonUtility.waitForPageLoad(driver, claimsSummaryBackButton, 5);
 		claimsSummaryBackButton.click();
-		System.out.println("Clicked claims summary back button...url="+driver.getCurrentUrl());
-		//tbd try {
-		//tbd 	Thread.sleep(2000);
-		//tbd } catch (InterruptedException e) {
-		//tbd 	e.printStackTrace();
-		//tbd }
+		System.out.println("Clicked claims summary back button...");
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println("url="+driver.getCurrentUrl());
-		CommonUtility.waitForPageLoad(driver, claimsSummaryPageHeader, 5);
 		if (driver.getCurrentUrl().contains("overview")) {
 			return new ClaimSummarypage(driver);
 		}
 		return null;
 	}
-	//^^^ note:	added for def1041		
+	
+		//^^^ note:	added for def1041		
 	
 	
 }

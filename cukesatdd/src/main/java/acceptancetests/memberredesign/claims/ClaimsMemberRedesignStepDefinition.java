@@ -888,7 +888,8 @@ public class ClaimsMemberRedesignStepDefinition {
 			urlAttributesMap .put(timeAttributesRow.get(i).getCells().get(0), 
 					timeAttributesRow.get(i).getCells().get(1));
 		}
-		System.out.println("claim period"+urlAttributesMap.get("Claim Period"));
+		System.out.println("============================================================================================");
+		System.out.println("Proceed to test for claim period="+urlAttributesMap.get("Claim Period"));
 		String claimPeriod=urlAttributesMap.get("Claim Period");
 		String planType = urlAttributesMap.get("Plan Type");
 		String claimType = urlAttributesMap.get("Claim Type");

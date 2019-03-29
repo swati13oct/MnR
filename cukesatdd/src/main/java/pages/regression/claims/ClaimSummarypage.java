@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -1104,7 +1105,9 @@ public void NavigateToClaimsPage(){
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} 
+		CommonUtility.checkPageIsReadyNew(driver);
+
     	 validate(Youhave);
  		if (Youhave.getText().contains("You have"))
  		{
@@ -1199,6 +1202,8 @@ public void NavigateToClaimsPage(){
 			CommonUtility.waitForPageLoadNew(driver, claimstablemoreinfolink, 60);
 			scrollToView(claimstablemoreinfolink);
 			claimstablemoreinfolink.click();
+			CommonUtility.checkPageIsReadyNew(driver);
+/* tbd 
 			int counter =0;
 			do{
 				if(counter<=12)
@@ -1207,7 +1212,7 @@ public void NavigateToClaimsPage(){
 					return null;
 				counter++;
 			}
-			while(!(driver.getCurrentUrl().contains("/details")));
+			while(!(driver.getCurrentUrl().contains("/details")));*/
 			if (driver.getCurrentUrl().contains("/details")) {
 				return new pages.regression.claims.ClaimDetailsPage(driver);
 		
@@ -1455,19 +1460,26 @@ public void NavigateToClaimsPage(){
 			}
 
 			public int getNumClaims(String range, String claimType) {
-				int sleepTimeInSec=10;
-				if (range.equals("Last 12 months") || range.equals("Custom search")) {
-					sleepTimeInSec=15;
-				} else if (range.equals("Last 24 months")) {
-					sleepTimeInSec=20;
-				}
-				try {
-					Thread.sleep(sleepTimeInSec*1000); //the claims take time to load sometimes, if don't way then it will think 0 claims
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+				CommonUtility.checkPageIsReadyNew(driver);
+			 try {
+					if (range.equalsIgnoreCase("last 30 days") || range.equalsIgnoreCase("last 90 days") || range.equalsIgnoreCase("last 6 months")) {
+						Thread.sleep(10*1000);
+						System.out.println("waited 10 sec for claims to load...");
+					}
+					if (range.equalsIgnoreCase("last 12 months") || range.equalsIgnoreCase("last 24 months") || range.equalsIgnoreCase("custom search")) {
+						Thread.sleep(15*1000);
+						System.out.println("waited 15 sec for claims to load");
+					}
+				} catch (Exception e) {
+				} 
 				WebElement numClaimsElement=numberOfClaims;
 				if (range.equalsIgnoreCase("custom search")) {
+					System.out.println("Give custom search extra wait time to laod...");
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 					if (claimType.equalsIgnoreCase("prescription drug")) {
 						numClaimsElement=numberOfClaimsPrescriptionDrugCustomSearch;
 					} else if (claimType.equalsIgnoreCase("medical")) {
@@ -1928,12 +1940,12 @@ public void NavigateToClaimsPage(){
 				int counter =0;
 				do{
 					if(counter<=12)
-						Thread.sleep(5000);
+						Thread.sleep(3000);
 					else
 						return null;
 					counter++;
-				}
-				while(!(driver.getCurrentUrl().contains("/details")));
+				} 
+				while(!(driver.getCurrentUrl().contains("/details"))); 
 				if (driver.getCurrentUrl().contains("/details")) {
 					return new pages.regression.claims.ClaimDetailsPage(driver);
 				}
@@ -1964,5 +1976,6 @@ public void NavigateToClaimsPage(){
 			public void validateSystemErrorMsgNotExist() {
 				Assert.assertTrue("PROBLEM - located System Error",!validate(systemErrorMsg));
 			}
+		
 			//^^^ note:	added for def1041			
 }
