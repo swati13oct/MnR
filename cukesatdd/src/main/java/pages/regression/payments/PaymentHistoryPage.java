@@ -368,6 +368,12 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(),'Coverage & Benefits')]")
 	private WebElement coverageBenefitsTab;
 	
+	@FindBy(xpath = "//h1[contains(text(),'Coverage & Benefits')]")
+	private WebElement coverageBenefitsHeader;
+	
+	@FindBy(xpath = "//*[contains(text(),'VIEW PLAN DOCUMENTS')]")
+	private WebElement planDocumentsBtn;
+	
 	public PaymentHistoryPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -1585,6 +1591,7 @@ public class PaymentHistoryPage extends UhcDriver {
 	public BenefitsAndCoveragePage clickOnBenefitsAndCoverageTab() {
 		
 		coverageBenefitsTab.click();
+		CommonUtility.waitForPageLoadNew(driver,planDocumentsBtn, 30);
 		if(driver.getCurrentUrl().contains("benefits"))
 			return new BenefitsAndCoveragePage(driver);
 		return null;
