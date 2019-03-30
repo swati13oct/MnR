@@ -120,7 +120,7 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
       |   33012 | AARP MedicareComplete Choice Plan 2 (Regional PPO) | MAPD     |
 
   @F229349 @validateEyeWearCredit @fastandfurious @Mar_release_2019
-  Scenario Outline: UserStory: <UID> -plan type: <PlanType> - Verify specific Additional Benefits in Plan Details for provided plan
+  Scenario Outline: UserStory: <UID> -plan type: <plantype> - Verify specific Additional Benefits in Plan Details for provided plan
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |
