@@ -1591,7 +1591,12 @@ public class PaymentHistoryPage extends UhcDriver {
 	public BenefitsAndCoveragePage clickOnBenefitsAndCoverageTab() {
 		
 		coverageBenefitsTab.click();
-		//CommonUtility.waitForPageLoadNew(driver,planDocumentsBtn, 30);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if(driver.getCurrentUrl().contains("benefits"))
 			return new BenefitsAndCoveragePage(driver);
 		return null;

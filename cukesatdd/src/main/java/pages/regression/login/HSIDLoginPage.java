@@ -208,7 +208,6 @@ public class HSIDLoginPage extends UhcDriver {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
 			//note: workaround - get URL again to check and see if it goes to the no-email.html page instead
 			if (driver.getCurrentUrl().contains("login/no-email.html")) {
 				System.out.println("User encounted no-email page, will enter email address to proceed");
@@ -234,7 +233,7 @@ public class HSIDLoginPage extends UhcDriver {
 						goToHomepage.isDisplayed();
 						goToHomepage.click();
 					} catch (Exception e1) {
-						System.out.println("did not encounter 'Go To Homepage' System error message, moving on");
+						System.out.println("did not encounter 'Go To Homepage' System error message, moving on. "+e1);
 					}
 					
 					try {
@@ -244,23 +243,19 @@ public class HSIDLoginPage extends UhcDriver {
 						e.printStackTrace();
 					}
 				} catch (Exception e) {
-					System.out.println("Unable to resolve no-email page encounter");
-					System.out.println(e);
+					System.out.println("Unable to resolve no-email page encounter. "+e);
 				}
-			}
-
+			}  
 		}
 		else if (currentUrl().contains("testharness.html")
 				|| currentUrl().contains("/dashboard")) {
 			System.out.println(driver.getCurrentUrl());
 			return new AccountHomePage(driver);
 		}
-
 		else {
 			System.out
 					.println("Security question page or test harness page or Account Home Page didn't load , please check");
 		}
-
 		if (MRScenario.environmentMedicare.equals("team-e")
 				|| MRScenario.environmentMedicare.equals("team-ci1")) {
 			Alert alert = driver.switchTo().alert();
