@@ -1,5 +1,5 @@
 @CT @OLE @OLE_Ulayer @OLE_VPP_UHC_ResumeApplication
-Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
+Feature: 1.12-VBF-ACQ-To test MedSupp OLE flow
 
   @OLE_VPP_UHC @UHC_Resume_App_AARP
  Scenario Outline: MedSup Resume Application with Application ID

@@ -121,7 +121,7 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
       |   90210 | MA       | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 
   @F229349 @validateEyeWearCredit @fastandfurious @Mar_release_2019
-  Scenario Outline: UserStory: <UID> -plan type: <PlanType> - Verify Eyewear Credit Benefits in Plan Details for provided plan
+  Scenario Outline: UserStory: <UID> -plan type: <plantype> - Verify Eyewear Credit Benefits in Plan Details for provided plan
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
