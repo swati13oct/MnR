@@ -200,8 +200,13 @@ public class LoginPage extends UhcDriver {
 					return null;
 				}
 				if (counter < 35) {
+					if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a")) { //note: sometimes take longer to load page on this team env
+						Thread.sleep(3000);
+						System.out.println("Time elapsed post sign In clicked --" + counter + "*3 sec.");
+					} else {
 					Thread.sleep(2000);
 					System.out.println("Time elapsed post sign In clicked --" + counter + "*2 sec.");
+					}
 				} else {
 					System.out.println("TimeOut!!!");
 					return null;
