@@ -2,6 +2,7 @@ package pages.regression.claims;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
@@ -246,9 +247,15 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy(xpath=".//*[@id='learnmoresummarytoggle']")
 	private WebElement learmore;
 
+	@FindBy(id="numDays1")
+	private WebElement Youhave1;
+
 	@FindBy(id="numDays2")
-	private WebElement Youhave;
-	
+	private WebElement Youhave2;
+
+	@FindBy(id="numDays3")
+	private WebElement Youhave3;
+
 	//@FindBy(xpath=".//*[@id='globalContentIdForSkipLink']/div[3]/div[1]/div/div/main/div/div[1]/section/div[1]/div/div/div/div/div[3]/div/p")
 	@FindBy(xpath=".//*[@id='globalContentIdForSkipLink']/div[3]/div[1]/div/div/div/div[2]/div/div[1]/section/div[2]/section/div/div/div/div/div/div/div[1]/p")
 	private WebElement PCPtext;
@@ -319,6 +326,24 @@ public class ClaimSummarypage extends UhcDriver{
 
 	@FindBy(xpath="//button[@id='customsearchbuttonShipBtn']")
 	private WebElement shipSearchButton;
+
+	@FindBy(xpath="//div[contains(@class,'EOBComponentMA') and not(contains(@class,'ng-hide'))]//span[contains(text(),'Medical')]/..//p[contains(text(),'SEARCH EOB HISTORY')]")
+	private WebElement medicalEOB_MA;
+	@FindBy(xpath="//div[contains(@class,'EOBComponentMA') and not(contains(@class,'ng-hide'))]//span[contains(text(),'Prescription')]/..//p[contains(text(),'SEARCH EOB HISTORY')]")
+	private WebElement drugEOB_MA;
+	
+	@FindBy(xpath="//div[contains(@class,'EOBComponentMAPD') and not(contains(@class,'ng-hide'))]//span[contains(text(),'Medical')]/..//p[contains(text(),'SEARCH EOB HISTORY')]")
+	private WebElement medicalEOB_MAPD;
+	@FindBy(xpath="//div[contains(@class,'EOBComponentMAPD') and not(contains(@class,'ng-hide'))]//span[contains(text(),'Prescription')]/..//p[contains(text(),'SEARCH EOB HISTORY')]")
+	private WebElement drugEOB_MAPD;
+
+	@FindBy(xpath="//div[contains(@class,'EOBComponentPDP') and not(contains(@class,'ng-hide'))]//span[contains(text(),'Medical')]/..//p[contains(text(),'SEARCH EOB HISTORY')]")
+	private WebElement medicalEOB_PDP;
+	@FindBy(xpath="//div[contains(@class,'EOBComponentPDP') and not(contains(@class,'ng-hide'))]//span[contains(text(),'Prescription')]/..//p[contains(text(),'SEARCH EOB HISTORY')]")
+	private WebElement drugEOB_PDP;
+
+	@FindBy(xpath="//div[contains(@class,'EOBComponentSHIP') and not(contains(@class,'ng-hide'))]//span[contains(text(),'Ship')]/../p[contains(text(),'VIEW EOB STATEMENT')]")
+	private WebElement EOB_SHIP;
 	//^^^ note:	added for def1041				
 
 
@@ -340,7 +365,7 @@ public class ClaimSummarypage extends UhcDriver{
 	}
 
 
-	public void validateHeader() {
+	public void TBR_validateHeader() {	//tbd-remove whole method
 		// TODO Auto-generated method stub
 		if(myCaimsText.getText().equals("My Claims")){
 			Assert.assertTrue(true);
@@ -352,7 +377,7 @@ public class ClaimSummarypage extends UhcDriver{
 	/**
 	 * @toDo : this method validates claim type
 	 */
-	public  boolean validateClaimType(String abc){	
+	public  boolean TBR_validateClaimType(String abc){		//tbd-remove whole method
 
 		if(abc.equals("MA")){	
 			return claimTypeMA.isDisplayed();		
@@ -364,7 +389,8 @@ public class ClaimSummarypage extends UhcDriver{
 		else{
 			System.out.println(claimTypeMAPD.isDisplayed());
 			return claimTypeMAPD.isDisplayed();	
-			/*Select select = new Select(claimTypeMAPD);
+			/* tbd-remove 
+		Select select = new Select(claimTypeMAPD);
 		int size = select.getOptions().size();
 		//select.getFirstSelectedOption()
 		if(size!=2){
@@ -381,26 +407,26 @@ public class ClaimSummarypage extends UhcDriver{
 	/**
 	 * @toDo : this method validates view claim FROM drop down 
 	 */
-	public String validateViewClaimsFromDropDown(){		
+	public String TBR_validateViewClaimsFromDropDown(){			//tbd-remove whole method
 		Select select = new Select(viewClaimsFrom);
 		return select.getFirstSelectedOption().getText(); 		
 	}
 	/**
 	 * @toDo : this method validates the text 
 	 */
-	public boolean verifyCopyText(){
+	public boolean TBR_verifyCopyText(){	//tbd-remove whole method
 		return claimsCopyText.isDisplayed();
 	}
 	/**
 	 * @toDo : this method validates the text 
 	 */
-	public boolean verifyCopyText2(){
+	public boolean TBR_verifyCopyText2(){	//tbd-remove whole method
 		return claimsCopyText2.isDisplayed();
 	}
 	/**
 	 * @toDo : this method validates dynamic text
 	 */
-	public boolean verifyDynamicText(){
+	public boolean TBR_verifyDynamicText(){	//tbd-remove whole method
 		return dynamicNumberOfClaimsText.isDisplayed() || dynamicNumberOfClaimsTextPdp.isDisplayed() ;
 
 	}
@@ -467,33 +493,8 @@ public class ClaimSummarypage extends UhcDriver{
 	
 	/**
 	 * @toDo:validate the pagination on the claims summary page
-	 *//*
-	public boolean verifyClaimsTableAndPagination3(){
-		     
-	    	   try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	    	   
-			validateNew (verifyClaimSummaryAndPagination3);
-			if 
-			(verifyClaimSummaryAndPagination3.isDisplayed())
-			{
-			System.out.println("Pagination is seen ===>"+verifyClaimSummaryAndPagination3.getText());
-			return true;
-	              }	
-			else {
-		System.out.println("************Pagination is not displayed as records are less***************");
-		return false;
-	}
-	}	*/
-	
-	/**
-	 * @toDo:validate the pagination on the claims summary page
 	 */
-	public boolean verifyClaimsTableAndPagination3(){
+	public boolean TBR_verifyClaimsTableAndPagination3(){	//tbd-remove whole method
 		     
 	    	   try {
 				Thread.sleep(5000);
@@ -514,10 +515,36 @@ public class ClaimSummarypage extends UhcDriver{
 		return false;
 	}
 	}	
-		
-		
-		
+	
 	/**
+	 * @toDo:validate the pagination on the claims summary page
+	 */
+	public boolean verifyClaimsTableAndPagination3(){
+		     CommonUtility.waitForPageLoadNew(driver, verifyClaimSummaryAndPagination3, 30);
+		     /* tbd-remove
+	    	   try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} */
+	    	   
+			validateNew (verifyClaimSummaryAndPagination3);
+			if 
+			(verifyClaimSummaryAndPagination3.isDisplayed())
+			{
+			System.out.println("Pagination is seen ===>"+verifyClaimSummaryAndPagination3.getText());
+			return true;
+	              }	
+			else {
+		System.out.println("************Pagination is not displayed as records are less***************");
+		return false;
+	}
+	}	
+		
+		
+		
+	/** keep for EOB story
 	 * @toDo : this method validates EOB 
 	 */
 	public boolean validateEobfordifferentDomainType(String domain, String plantype){
@@ -560,7 +587,7 @@ public class ClaimSummarypage extends UhcDriver{
 	 * @toDo : this method validates Learn More 
 	 */
 
-	public boolean validateLearnmoreaboutsection() {
+	public boolean TBR_validateLearnmoreaboutsection() {	//tbd-remove whole method
 
 		return learnmorefalse.isDisplayed() || learnmorePdp.isDisplayed();
 
@@ -568,7 +595,7 @@ public class ClaimSummarypage extends UhcDriver{
 	/**
 	 * @toDo : this method validates Down Load my Data Button
 	 */
-	public /*Boolean*/ void validateDownloadMyDataButton(){
+	public /*Boolean*/ void TBR_validateDownloadMyDataButton(){ //tbd-remove whole method
 		CommonUtility.waitForPageLoad(driver, downloadmydatabutton, 60);
 		validate(downloadmydatabutton);
 		  System.out.println("!!! Blue Button-DownLoad my Data Button is displayed ===>"+downloadmydatabutton.isDisplayed());
@@ -624,7 +651,7 @@ public class ClaimSummarypage extends UhcDriver{
 	/**
 	 * @toDo : this method validates required plan type
 	 */
-	public  boolean selectRequiredPlanType(String planType) {
+	public  boolean TBR_selectRequiredPlanType(String planType) {//tbd-remove whole method
 
 		if (planType.equals("MA")){
 			waitforElement(MA);
@@ -670,7 +697,7 @@ public class ClaimSummarypage extends UhcDriver{
 	 * @toDo : this method validates Plan Name
 	 */
 	
-	public boolean validatePlanName(){
+	public boolean TBR_validatePlanName(){	//tbd-remove whole method
 		
 	     if(driver.getTitle().equalsIgnoreCase("Claims")){	
 		validate(planame);
@@ -688,13 +715,13 @@ public class ClaimSummarypage extends UhcDriver{
 	 * @toDo : this method validates Claims by time period 
 	 */
 	public void searchClaimsByTimePeriod(String planType,String claimPeriod) throws InterruptedException {
-		/*try {
+		/*try {	//tbd-remove
 			Thread.sleep(12000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
-		/*try {
+		/*try {	//tbd-remove
 			WelcomePage_iPerceptionPresent.click();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -718,7 +745,7 @@ public class ClaimSummarypage extends UhcDriver{
 */
 	
 
-		/*Thread.sleep(1000);
+		/*Thread.sleep(1000);	//tbd-remove
 		try{
 			if (iPerceptionPopUp.isDisplayed()) {
 				iPerceptionPopUp.click();
@@ -726,7 +753,7 @@ public class ClaimSummarypage extends UhcDriver{
 		}catch(Exception e)        {
 			System.out.println("iPerception Pop Up not displayed");
 		}*/
-		/*
+		/*	//tbd-remove
 		//System.out.println("The title of Claims page is-------->"+driver.getTitle());
 		//System.out.println("The URL of the Claims page is---------->"+driver.getCurrentUrl());
 		if(driver.getCurrentUrl().equalsIgnoreCase("Claims")){	
@@ -751,13 +778,13 @@ public class ClaimSummarypage extends UhcDriver{
 			System.out.println("!!! The member is on Claims Summary page !!!");
 			validate(planame);
 			System.out.println("The Plan Name is ===>"+(planame.getText()));*/
-		/*	try { Thread.sleep(1000); } 
+		/*	try { Thread.sleep(1000); } 	//tbd-remove
 			catch (InterruptedException e) {						
 				// TODO Auto-generated catch block 
 				e.printStackTrace();
 				}
 		*/	//System.out.println("!!! Going to select Last 24 months from the dropdown !!! ");
-		/*
+		/*	//tbd-remove
 			if(planType.contains("SHIP")){
 				System.out.println(planType+"SHIP plan type last 24 moths is going to select");
 						
@@ -828,7 +855,7 @@ public class ClaimSummarypage extends UhcDriver{
 				//last24months = driver.findElement(By.xpath("//div[@class='medical-claims']//h2[@ng-bind-html='planName']/parent::div//*[@id='document-date']//option[contains(@value,'24 months')]"));
 			}
 			
-			/*last24months.click();
+			/*last24months.click();	//tbd-remove
 			System.out.println("!!! Month Selected from the view claims from drop down is ====>"+(last24months.getText()));*/
 			/*try { Thread.sleep(10000); } 
 			catch (InterruptedException e) {			
@@ -837,7 +864,7 @@ public class ClaimSummarypage extends UhcDriver{
 				e.printStackTrace();
 				}
 			*/
-			/*Select claimsFrom = new Select(viewClaimsFrom);
+			/*Select claimsFrom = new Select(viewClaimsFrom);	//tbd-remove
 			claimsFrom.selectByValue("24 months");*/
 //			validate (claimsCopyText);
 //			System.out.println(claimsCopyText.getText());
@@ -897,7 +924,7 @@ public class ClaimSummarypage extends UhcDriver{
 		  System.out.println("!!!Cancel Button is displayed ===>"+cancelButtonDownloadPopUp.isDisplayed());
 		  validate(proceedButtonDownloadPopUp);
 		  System.out.println("!!!Proceed Button is displayed ===>"+proceedButtonDownloadPopUp.isDisplayed());
-		/*if (downloadmydatabutton.isDisplayed())      
+		/*if (downloadmydatabutton.isDisplayed())      //tbd-remove
 		{			
 			downloadmydatabutton.click();-*/
 			driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
@@ -905,7 +932,7 @@ public class ClaimSummarypage extends UhcDriver{
 			cancelButtonDownloadPopUp.click();
 			if(driver.getTitle().contains("Claims")){
 				System.out.println("Cancel button functionality is working as expected");
-				//now again validate site leaving popup
+				//now again validate site leaving popup  	//tbd-remove
 				//downloadmydatabutton.click();
 				//now click on proceed and validate new tab opens
 				//proceedToDownloadPopUp.click();
@@ -938,7 +965,7 @@ public class ClaimSummarypage extends UhcDriver{
 		}
 	
 	
-		/*CommonUtility.waitForPageLoad(driver, downloadmydatabutton, 60);
+		/*CommonUtility.waitForPageLoad(driver, downloadmydatabutton, 60); //tbd-remove
 		if (downloadmydatabutton.isDisplayed())
 		{			
 			downloadmydatabutton.click();		
@@ -974,7 +1001,7 @@ public class ClaimSummarypage extends UhcDriver{
 		if (!shipDateRangeErrMsg.isDisplayed())
 		Assert.fail(shipDateRangeErrMsg + "is not being displayed");
 
-		// shipDateRangeErrMsg.isDisplayed();
+		// shipDateRangeErrMsg.isDisplayed(); //tbd-remove
 	}
 	/**
 	 * @toDo : this method validates Error message greater than 24 months.
@@ -997,7 +1024,7 @@ public class ClaimSummarypage extends UhcDriver{
 			Assert.fail(fromDateLaterThanToDateError + "is not beind dsiplayed");	
 		}
 		//fromDateLaterThanToDateError = driver.findElement(By.xpath("//*[@id="futureDateErrorDivErr"]/p/span/text()"));
-		/*	
+		/*		//tbd-remove
 		if(!fromDateLaterThanToDateError.isDisplayed())
 			Assert.fail(fromDateLaterThanToDateError + "is not beind dsiplayed");	*/	
 	}
@@ -1009,13 +1036,15 @@ public class ClaimSummarypage extends UhcDriver{
 			System.out.println(webElement.getText());
 			webElement.click();
 			try {
-				Thread.sleep(10000);
+				CommonUtility.waitForPageLoadNew(driver, last24months, 10);	
+				//tbd-remove Thread.sleep(10000);
 				last24months = driver.findElement(By.xpath("//div[@class='medical-claims']//h2[@ng-bind-html='planName']/parent::div//*[@id='document-date']//option[contains(@value,'24 months')]"));
 				last24months.click();
 				validateClaimsTable();
 				if (validateClaimsTable() == true)
 					break;
-			} catch (InterruptedException e) {
+			//tbd-remove } catch (InterruptedException e) {
+			} catch (Exception e) {
 				last24months = driver.findElement(By.xpath("//div[@class='medical-claims shipCompSection']//div//*[@id='document-date']//option[contains(@value,'24 months')]"));
 				last24months.click();
 				validateClaimsTable();
@@ -1032,7 +1061,9 @@ public class ClaimSummarypage extends UhcDriver{
 	 * @toDo :Validate error message for PHIP member on Claims Summary page
 	 */
 public boolean ValidatePHIPErrorMessage() throws InterruptedException{
-	    Thread.sleep(3000);
+		CommonUtility.waitForPageLoadNew(driver, PHIPerrorMsg, 5);	
+	
+	    //tbd-remove Thread.sleep(3000);
 	     //if(driver.getTitle().equalsIgnoreCase("Claims")){	
 		// System.out.println("!!! The member is on Claims Summary page with PHIP Plan  !!!");
 		 validate(PHIPerrorMsg);		
@@ -1049,7 +1080,7 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{
 
 		
  
-     public void validateCustomSearch(){
+     public void TBR_validateCustomSearch(){	//tbd-remove whole method
     	 System.out.println("The title of the page is-------->"+driver.getTitle());
  		if(driver.getTitle().equalsIgnoreCase("Claims")){
  		String fdate = ("10/12/2012");
@@ -1078,7 +1109,7 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{
 
 
 
-public void NavigateToClaimsPage(){
+public void TBR_NavigateToClaimsPage(){	//tbd-remove whole method
 	validate(claimsLink);
 	if(claimsLink.isDisplayed()){
 	System.out.println("Claims link is displayed");
@@ -1089,7 +1120,7 @@ public void NavigateToClaimsPage(){
 	}
 	
 }
-  public FooterPage validatePageFooter(){
+  public FooterPage TBR_validatePageFooter(){	//tbd-remove whole method
 	  	  
 	  	 
 	  	 return new FooterPage(driver);
@@ -1100,6 +1131,16 @@ public void NavigateToClaimsPage(){
 	 */
 
      public void validateYouHavemessage() {
+    	 CommonUtility.checkPageIsReadyNew(driver);
+    	 WebElement e=Youhave3;
+    	 if(validate(Youhave1)) {
+    		 e=Youhave1;
+    	 } else if (validate(Youhave2)) {
+    		 e=Youhave2;
+    	 } else {
+    		 Assert.assertTrue("Unable to locate the 'You have...' message on page", false);
+    	 }
+ 		/* tbd-remove
  		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -1107,11 +1148,11 @@ public void NavigateToClaimsPage(){
 			e.printStackTrace();
 		} 
 		CommonUtility.checkPageIsReadyNew(driver);
-
-    	 validate(Youhave);
- 		if (Youhave.getText().contains("You have"))
+		*/
+    	//tbd  validate(Youhave);
+ 		if (e.getText().contains("You have"))
  		{
- 			System.out.println(Youhave.getText());
+ 			System.out.println(e.getText());
  			System.out.println("You have claims messgae displayed ");
  			//Assert.assertTrue(Youhave.getText().contains("You have")+"message is displayed", true);
  			
@@ -1122,6 +1163,7 @@ public void NavigateToClaimsPage(){
      /**
  	 * @toDo : Validate You have text 
  	 */
+     /* tbd-remove
 	public boolean validateYouHavemessage1() throws InterruptedException {  	
  			Thread.sleep(2000); 		
      	 validate(Youhave);
@@ -1136,10 +1178,10 @@ public void NavigateToClaimsPage(){
      	else
 				System.out.println("************You have message not displayed *****");
 		return false;
-				} 		
+				} 		*/
    
      
-     public void validateClaimsHeaderCopyText() {
+     public void TBR_validateClaimsHeaderCopyText() {	//tbd-remove whole method
   		// TODO Auto-generated method stub
   		if (clamsSummaryCopyText.getText().contains("Review your claims search"))
   		{
@@ -1154,7 +1196,7 @@ public void NavigateToClaimsPage(){
  		
 		 
  		Select select = new Select(claimFromDropDown1);
- 		System.out.println("Slected value is  =>" +select.getFirstSelectedOption());
+ 		System.out.println("Slected value is  =>" +select.getFirstSelectedOption().getText());
  		for(int i=0;i<select.getOptions().size();i++){
  			System.out.println(select.getOptions().get(i).getAttribute("value"));
  		} 		
@@ -1175,7 +1217,7 @@ public void NavigateToClaimsPage(){
 		 System.out.println("*** Drop down for months visible***");	
 		 
 	 		Select select = new Select(claimFromDropDown1);
-	 		System.out.println("Slected value is  =>" +select.getFirstSelectedOption());
+	 		System.out.println("Slected value is  =>" +select.getFirstSelectedOption().getText());
 	 		for(int i=0;i<select.getOptions().size();i++){
 	 			System.out.println(select.getOptions().get(i).getAttribute("value"));
 	 		} 	
@@ -1191,7 +1233,7 @@ public void NavigateToClaimsPage(){
 	 public void validateClaimsPlantype() {
 	 		// TODO Auto-generated method stub
 	 		Select select = new Select(clamtypeFromDropDown);
-	 		System.out.println("Slected value is  =>" +select.getFirstSelectedOption());
+	 		System.out.println("Slected value is  =>" +select.getFirstSelectedOption().getText());
 	 		for(int i=0;i<select.getOptions().size();i++){
 	 			System.out.println(select.getOptions().get(i).getAttribute("value"));
 	 		}
@@ -1227,12 +1269,13 @@ public void NavigateToClaimsPage(){
 		
 
 		public 	 ClaimSummarypage comboTabSelection1(){
-			try {
+			CommonUtility.checkPageIsReadyNew(driver);
+			/* tbd-remove try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			}
+			} */
 			for (WebElement webElement : comboTabsOnclaimsPage) {
 				System.out.println(webElement.getText());
 				webElement.click();
@@ -1244,7 +1287,7 @@ public void NavigateToClaimsPage(){
 		
 		// @SuppressWarnings("deprecation")
 		public void validatePCPtext(){
-			/* WebElement t = PCPtext;
+			/* WebElement t = PCPtext;	//tbd-remove
 			 if (t.getText().contains ("plan members can view claims"))
 			 //if(driver.getCurrentUrl().contains("/documents/medication-program"))
 				{
@@ -1264,12 +1307,13 @@ public void NavigateToClaimsPage(){
 			 */
 		 
 		 public void validateEobPDP(){
-				try {
+			 CommonUtility.waitForPageLoadNew(driver, PrescriptionEobText1, 10);
+				/* tbd-remove try {
 					Thread.sleep(5000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
+				} */
 				validate(PrescriptionEobText1);
 				System.out.println("PDP EOB is displayed"  +  PrescriptionEobText.isDisplayed());
 			}
@@ -1282,12 +1326,13 @@ public void NavigateToClaimsPage(){
 				CommonUtility.waitForPageLoad(driver, ClaimsSummaryPage,60);
 				validate(claimsTablePrescriptionDrug);
 				System.out.println("!!! Claims Table is seen on the Claims Summary page!!!"+claimsTablePrescriptionDrug.isDisplayed());
+				/* //tbd-remove
 				try {
 					Thread.sleep(5000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
+				} */
 			}
 		
 		 
@@ -1461,25 +1506,25 @@ public void NavigateToClaimsPage(){
 
 			public int getNumClaims(String range, String claimType) {
 				CommonUtility.checkPageIsReadyNew(driver);
-			 try {
-					if (range.equalsIgnoreCase("last 30 days") || range.equalsIgnoreCase("last 90 days") || range.equalsIgnoreCase("last 6 months")) {
-						Thread.sleep(10*1000);
-						System.out.println("waited 10 sec for claims to load...");
-					}
-					if (range.equalsIgnoreCase("last 12 months") || range.equalsIgnoreCase("last 24 months") || range.equalsIgnoreCase("custom search")) {
-						Thread.sleep(15*1000);
-						System.out.println("waited 15 sec for claims to load");
-					}
-				} catch (Exception e) {
-				} 
+				// note: do not modify this check - critical to wait
+				int extra=2000;
+				int x=0;
+				while(x<=20) {
+					try {
+						if (verifyClaimsTableAndPagination()) {
+							Thread.sleep(extra); //give it more time to settle the page
+							System.out.println("sleep for another 2 sec for the page to settle down...");
+							System.out.println("there is some indication of claims...let's check it out");
+							break;
+						}
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {}
+					x=x+1;
+				}
+				System.out.println("Waited total of "+(x+extra)+" seconds for claims to show up");
+				
 				WebElement numClaimsElement=numberOfClaims;
 				if (range.equalsIgnoreCase("custom search")) {
-					System.out.println("Give custom search extra wait time to laod...");
-					try {
-						Thread.sleep(1000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
 					if (claimType.equalsIgnoreCase("prescription drug")) {
 						numClaimsElement=numberOfClaimsPrescriptionDrugCustomSearch;
 					} else if (claimType.equalsIgnoreCase("medical")) {
@@ -1572,24 +1617,22 @@ public void NavigateToClaimsPage(){
 			}
 
 			public boolean verifyPrintAndDownloadOptions(int numClaims) {
-				boolean result=false;
 				CommonUtility.waitForPageLoad(driver, ClaimsSummaryPage,60);
 				if (numClaims >0) {
 					System.out.println("Has claim(s), expect to see print and download buttons");
 					if (validate(validateclaimsprintbutton) && validate(validateclaimsdownloadbutton)) {
-						result=true;
+						return true;
 					} else {
-						result=false;
+						return false;
 					}
 				} else {
 					System.out.println("Has no claim, expect NOT to see print and download buttons");
 					if (!validate(validateclaimsprintbutton) && !validate(validateclaimsdownloadbutton)) {
-						result=true;
+						return true;
 					} else {
-						result=false;
+						return false;
 					}
 				}
-				return result;	
 			}
 
 			public HashMap<String,String> gatherDataFromSummaryPage(String claimType, int rowNum, String claimsSystem, boolean hasYourShare) {
@@ -1770,7 +1813,7 @@ public void NavigateToClaimsPage(){
 				return dateStr;
 			}
 
-			public void searchClaimsByTimeInterval(String planType, String toDate, String fromDate) {
+			public void searchClaimsByTimeInterval(String planType, String fromDate, String toDate) {
 				System.out.println("The title of the page is-------->"+driver.getTitle());
 				if(driver.getTitle().contains("Claims Summary")){
 					if (planType.equals("SHIP")) {
@@ -1976,6 +2019,96 @@ public void NavigateToClaimsPage(){
 			public void validateSystemErrorMsgNotExist() {
 				Assert.assertTrue("PROBLEM - located System Error",!validate(systemErrorMsg));
 			}
+			
+			public void validateComboTabs(){
+				CommonUtility.checkPageIsReadyNew(driver);
+				Assert.assertTrue("PROBLEM - this user doesn't have combo tabs, this test is intended for combo testing, please select user that has combo plans", comboTabsOnclaimsPage.size()>1);
+			}
 		
+			@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Med') and contains(.,'Drug')]") 
+			private WebElement comboTab_MAPD;
+
+			@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Medicare Supplement')]") 
+			private WebElement comboTab_SHIP;
+			
+			public void goToSpecificComboTab(String planType) {
+				if (planType.equalsIgnoreCase("mapd")) {
+					Assert.assertTrue("PROBLEM - unable to locate combo tab for MAPD", validate(comboTab_MAPD));
+					comboTab_MAPD.click();
+				} else if (planType.equalsIgnoreCase("ship")) {
+					Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP", validate(comboTab_SHIP));
+					comboTab_SHIP.click();
+				} else {
+					Assert.assertTrue("PROBLEM - need to enhance code to cover planType '"+planType+"' for combo testing", false);
+				}
+			}
+
+			
+			
+			public void validate_EOB_onSummaryPage(String domain, String plantype){
+				boolean bypass=false; //remove when story is done
+				if (!bypass) {
+				if ((plantype.equals("MAPD") || plantype.equals("PCP") || plantype.equals("MEDICA")) &&
+						(domain.equals("COSMOS") || domain.equals("NICE"))) {
+					Assert.assertTrue("PROBLEM - unable to locate Medical EOB link on summary page", validate(medicalEOB_MAPD));
+					Assert.assertTrue("PROBLEM - unable to locate Prescription EOB link on summary page", validate(drugEOB_MAPD));
+					System.out.println("for '"+plantype+" and "+domain+"' - medical and precription drug EOB's are displayed===> "+ (medicalEOB_MAPD.isDisplayed() && drugEOB_MAPD.isDisplayed()));
+
+				}
+				else if (plantype.equals("MA") &&
+						(domain.equals("COSMOS") || domain.equals("NICE"))) {
+					Assert.assertTrue("PROBLEM - unable to locate Medical EOB link on summary page", validate(medicalEOB_MA));
+					Assert.assertTrue("PROBLEM - should NOT be able to locate Prescription EOB link on summary page", !validate(drugEOB_MA));
+					System.out.println("for '"+plantype+" and "+domain+"' - medical EOB's are displayed===> "+ (medicalEOB_MA.isDisplayed()));
+
+				}
+				else if (plantype.equals("PDP")) {
+					Assert.assertTrue("PROBLEM - should NOT be able to locate Medical EOB link on summary page", !validate(medicalEOB_PDP));
+					Assert.assertTrue("PROBLEM - unable to locate Prescription EOB link on summary page", validate(drugEOB_PDP));
+					System.out.println("for '"+plantype+" and "+domain+"' - medical EOB's are displayed===> "+ (drugEOB_PDP.isDisplayed()));
+				}
+				else if (plantype.equals("SHIP") && domain.equals("NA")){
+					Assert.assertTrue("PROBLEM - unable to locate EOB link on summary page for SHIP user", validate(EOB_SHIP));
+					System.out.println("for SHIP Eob is diplayed ====>"+ (EOB_SHIP.isDisplayed()));
+				}
+				else {
+					Assert.assertTrue("PROBLEM - need to code the condition for planType="+plantype+" and domain="+domain+" EOB expectation", false);
+
+				}
+				}
+			}
+
+			@FindBy(xpath="//div[@id='prefix-overlay-step1']")
+			private WebElement makeTheMostPopup;
+			public void validateDownloadMyData(String planType){
+				if (planType.equalsIgnoreCase("ship")) {
+					Assert.assertTrue("PROBLEM - ship user should not have DownloadMyData button",!validate(downloadmydatabutton));
+				} else {
+					Assert.assertTrue("PROBLEM - not getting expected DownloadMyData button",validate(downloadmydatabutton));
+					System.out.println("!!! Blue Button-DownLoad my Data Button is displayed ===>"+downloadmydatabutton.isDisplayed());
+					downloadmydatabutton.click();
+					Assert.assertTrue("PROBLEM - not getting expected leavingsitepopup",validate(leavingsitepopup));
+					System.out.println("!!!Proceed Button is displayed ===>"+leavingsitepopup.isDisplayed());
+					Assert.assertTrue("PROBLEM - not getting expected cancelButtonDownloadPopUp",validate(cancelButtonDownloadPopUp));
+					//now click cancel and validate any element on page
+					cancelButtonDownloadPopUp.click();
+					CommonUtility.checkPageIsReadyNew(driver);
+					Assert.assertTrue("PROBLEM - Cancel button on DownloadPopUp is not working", driver.getTitle().contains("Claims"));
+					System.out.println("Cancel button functionality is working as expected");
+					//now again validate site leaving popup
+					downloadmydatabutton.click();
+					waitforElement(leavingsitepopup);
+					System.out.println("Proceed button is displayed ===>"+(leavingsitepopup.isDisplayed()));
+					if(leavingsitepopup.isDisplayed()){
+						proceedButtonDownloadPopUp.click();
+						switchToNewTab();
+						//driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
+						//CommonUtility.waitForPageLoad(driver, makeTheMostPopup, 5);
+						//Assert.assertTrue("PROBLEM - process button is not functioning as expected",driver.getCurrentUrl().contains("medicares-blue-button-blue-button"));
+						ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+						driver.switchTo().window(tabs.get(0)); //switch back to original tab
+					}
+				}
+			}
 			//^^^ note:	added for def1041			
 }

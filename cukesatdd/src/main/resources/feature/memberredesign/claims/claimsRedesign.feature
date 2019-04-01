@@ -47,6 +47,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		Then I navigate to the Claim Details page in redesigned site
 		  | Plan Type  | <planType>    |
 		Then I validate the Claims Table in claims details page in redesigned site    
+		  | Plan Type      | <planType>     |
 		Examples: 
 		    | TID  | planType | claimPeriod    | domain | claimssystem |
 		    |15236 | SHIP     | Last 24 Months | NA     | SHIPCLAIMS   |
@@ -65,7 +66,9 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		#| Claims From Date | <claimFromDate>  |
 		Then I can see the claims displayed based on the selection in redesigned site
 		When I navigate to the Claim Details page for federal members
-		And I validate the Claims Table in claims details page for federal members
+		#tbd-remove And I validate the Claims Table in claims details page for federal members
+		And I validate the Claims Table in claims details page in redesigned site
+		  | Plan Type      | <planType>     |
 		And I validate the Claims Total in claims details page in AARP site
 		  | Plan Type  | <planType>    |
 		Examples: 
@@ -84,7 +87,9 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | Claim Period | <claimPeriod> |
 		Then I can see the claims displayed based on the selection in redesigned site
 		When I navigate to the Claim Details page for federal members
-		And I validate the Claims Table in claims details page for federal members
+		#tbd-remove And I validate the Claims Table in claims details page for federal members
+		And I validate the Claims Table in claims details page in redesigned site
+		  | Plan Type      | <planType>     |
 		Examples: 
 		  | TID   | planType | claimPeriod    | claimssystem |
 		  | 15236 | SHIP     | Last 24 Months | SHIPCLAIMS   |
@@ -191,7 +196,9 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	      | Plan Type  | <planType>    |
 	    And the user validates the DownloadMyData section in redesigned site
 	    When I navigate to the Claim Details page for federal members
-	    And I validate the Claims Table in claims details page for federal members
+	    #tbd-remove And I validate the Claims Table in claims details page for federal members
+	    And I validate the Claims Table in claims details page in redesigned site
+		  | Plan Type      | <planType>     |
 	    And I validate the Claims Total in claims details page in AARP site
 		  | Plan Type  | <planType>    |
 		
@@ -200,7 +207,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	     | 15235 | MAPD     | Last 24 months | NICE   | NICECLAIMS   | 
 	
 	
-	@claims8 @TC03_FEDAARPIndividualPDP @regressionMember  
+	@claims8 @TC03_FEDAARPIndividualPDP @regressionMember
     Scenario Outline: TID: <TID> -plan: <planType> -claimsSystem: <claimssystem> - To validate the claims present for the Federal member on claims sumamry page for AARP site
 	    Given login with following details logins in the member portal and validate elements
 	      | Plan Type      | <planType>     |
@@ -236,7 +243,9 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	      | Plan Type  | <planType>    |
 	    And the user validates the DownloadMyData section in redesigned site
 	    When I navigate to the Claim Details page for federal members
-	    And I validate the Claims Table in claims details page for federal members
+	    #tbd-remove And I validate the Claims Table in claims details page for federal members
+	    And I validate the Claims Table in claims details page in redesigned site
+		  | Plan Type      | <planType>     |
 	    And I validate the Claims Total in claims details page in AARP site
 		  | Plan Type  | <planType>    |
 	    And I validate the claims history Button
@@ -263,7 +272,9 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	      | Domain     | <domain>      |
 	      | Plan Type  | <planType>    |
 	 	  When I navigate to the Claim Details page for federal members
-	    And I validate the Claims Table in claims details page for federal members
+	    #tbd-remove And I validate the Claims Table in claims details page for federal members
+	    And I validate the Claims Table in claims details page in redesigned site
+		  | Plan Type      | <planType>     |
 	    And I validate the Claims Total in claims details page in AARP site
 		  | Plan Type  | <planType>    |
 	    And I can view a claim search back button in Claims Details page in AARP site
@@ -293,7 +304,9 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	      | Plan Type  | <planType>    |
 		And the user validates the DownloadMyData section in redesigned site
 		When I navigate to the Claim Details page for federal members
-		And I validate the Claims Table in claims details page for federal members
+		#tbd-remove And I validate the Claims Table in claims details page for federal members
+		And I validate the Claims Table in claims details page in redesigned site
+		  | Plan Type      | <planType>     |
 		And I validate the Claims Total in claims details page in AARP site
 		  | Plan Type  | <planType>    |
 		And I validate the claims history Button
@@ -323,6 +336,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		Then I navigate to the Claim Details page in redesigned site
 		  | Plan Type  | <planType>    |
 		Then I validate the Claims Table in claims details page in redesigned site
+		  | Plan Type      | <planType>     |
 		And I validate the EOB option in claims details page in redesigned site    
 		
 		Examples: 
@@ -368,6 +382,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	    | TID   | planType | claimPeriod    | domain | claimssystem |
 	  	| 15230 | MAPD     | Last 24 months | COSMOS | COSMOSCLAIMS |
 
+
     #----- begin of claims15 ---------------------------------------------------------
     @claims15 @def1041 @thePredators
 	Scenario Outline: DID: <DID> -plan: <planType> -claimsSystem: <claimssystem> -claimType: <claimType> - <index> - To validate claims for both summary and detail page for each search range options
@@ -380,6 +395,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		And I can search claims for the following claim period and claim type on redesigned site
 		  | Plan Type    | <planType>              |
 		  | Claim Type   | <claimType>             |
+		  | Claim System | <claimssystem>          |
 		  | Claim Period | Last 30 days            |
 		Then I can see the number of claims
 		  | Claim Type   | <claimType>             |
@@ -394,10 +410,14 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | Claim System | <claimssystem>          |
 		  | Has Your Share | <SummaryHasYourShare> |
 		  | Claim Period | Last 30 days            |
-		And the user validates the EOB section based on domain in redesigned site
+		And I can validate the EOB section based on domain in redesigned site
 		  | Domain       | <domain>                |
 		  | Plan Type    | <planType>              |
-		Then I validate Claim Details page		  
+		And I can validates the DownloadMyData section in redesigned site
+		  | Plan Type    | <planType>              |
+		Then I validate Claim Details page content value and Learn More and EOB		  
+		  | Domain       | <domain>                |
+	      | Plan Type    | <planType>              |
 		  | Claim Type   | <claimType>             |
 		  | Claim System | <claimssystem>          |
 		  | Has Your Share | <SummaryHasYourShare> |
@@ -406,6 +426,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		And I can search claims for the following claim period and claim type on redesigned site
 		  | Plan Type    | <planType>              |
 		  | Claim Type   | <claimType>             |
+		  | Claim System | <claimssystem>          |
 		  | Claim Period | Last 90 days            |
 		Then I can see the number of claims
 		  | Claim Type   | <claimType>             |
@@ -420,10 +441,14 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | Claim System | <claimssystem>          |
 		  | Has Your Share | <SummaryHasYourShare> |
 		  | Claim Period | Last 90 days            |
-		And the user validates the EOB section based on domain in redesigned site
+		And I can validate the EOB section based on domain in redesigned site
 		  | Domain       | <domain>                |
 		  | Plan Type    | <planType>              |
-		Then I validate Claim Details page		  
+		And I can validates the DownloadMyData section in redesigned site
+		  | Plan Type    | <planType>              |
+		Then I validate Claim Details page content value and Learn More and EOB		  
+		  | Domain       | <domain>                |
+	      | Plan Type    | <planType>              |
 		  | Claim Type   | <claimType>             |
 		  | Claim System | <claimssystem>          |
 		  | Has Your Share | <SummaryHasYourShare> |
@@ -432,6 +457,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		And I can search claims for the following claim period and claim type on redesigned site
 		  | Plan Type    | <planType>              |
 		  | Claim Type   | <claimType>             |
+		  | Claim System | <claimssystem>          |
 		  | Claim Period | Last 6 months           |
 		Then I can see the number of claims
 		  | Claim Type   | <claimType>             |
@@ -446,10 +472,14 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | Claim System | <claimssystem>          |
 		  | Has Your Share | <SummaryHasYourShare> |
 		  | Claim Period | Last 6 months           |
-		And the user validates the EOB section based on domain in redesigned site
+		And I can validate the EOB section based on domain in redesigned site
 		  | Domain       | <domain>                |
 		  | Plan Type    | <planType>              |
-		Then I validate Claim Details page		  
+		And I can validates the DownloadMyData section in redesigned site
+		  | Plan Type    | <planType>              |
+		Then I validate Claim Details page content value and Learn More and EOB		  
+		  | Domain       | <domain>                |
+	      | Plan Type    | <planType>              |
 		  | Claim Type   | <claimType>             |
 		  | Claim System | <claimssystem>          |
 		  | Has Your Share | <SummaryHasYourShare> |
@@ -458,6 +488,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		And I can search claims for the following claim period and claim type on redesigned site
 		  | Plan Type    | <planType>              |
 		  | Claim Type   | <claimType>             |
+		  | Claim System | <claimssystem>          |
 		  | Claim Period | Last 12 months          |
 		Then I can see the number of claims
 		  | Claim Type   | <claimType>             |
@@ -472,10 +503,14 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | Claim System | <claimssystem>          |
 		  | Has Your Share | <SummaryHasYourShare> |
 		  | Claim Period | Last 12 months          |
-		And the user validates the EOB section based on domain in redesigned site
+		And I can validate the EOB section based on domain in redesigned site
 		  | Domain       | <domain>                |
 		  | Plan Type    | <planType>              |
-		Then I validate Claim Details page		  
+		And I can validates the DownloadMyData section in redesigned site
+		  | Plan Type    | <planType>              |
+		Then I validate Claim Details page content value and Learn More and EOB		  
+		  | Domain       | <domain>                |
+	      | Plan Type    | <planType>              |
 		  | Claim Type   | <claimType>             |
 		  | Claim System | <claimssystem>          |
 		  | Has Your Share | <SummaryHasYourShare> |
@@ -484,6 +519,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		And I can search claims for the following claim period and claim type on redesigned site
 		  | Plan Type    | <planType>              |
 		  | Claim Type   | <claimType>             |
+		  | Claim System | <claimssystem>          |
 		  | Claim Period | Last 24 months          |
 		Then I can see the number of claims
 		  | Claim Type   | <claimType>             |
@@ -498,10 +534,14 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | Claim System | <claimssystem>          |
 		  | Has Your Share | <SummaryHasYourShare> |
 		  | Claim Period | Last 24 months          |
-		And the user validates the EOB section based on domain in redesigned site
+		And I can validate the EOB section based on domain in redesigned site
 		  | Domain       | <domain>                |
 		  | Plan Type    | <planType>              |
-		Then I validate Claim Details page		  
+		And I can validates the DownloadMyData section in redesigned site
+		  | Plan Type    | <planType>              |
+		Then I validate Claim Details page content value and Learn More and EOB		  
+		  | Domain       | <domain>                |
+	      | Plan Type    | <planType>              |
 		  | Claim Type   | <claimType>             |
 		  | Claim System | <claimssystem>          |
 		  | Has Your Share | <SummaryHasYourShare> |
@@ -510,11 +550,10 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		And I can search claims for the following claim period and claim type on redesigned site
 		  | Plan Type    | <planType>              |
 		  | Claim Type   | <claimType>             |
+		  | Claim System | <claimssystem>          |
 		  | Claim Period | Custom search           |
 		And the user custom search claims for the following time interval in redesigned site
 		  | Plan Type    | <planType>              |
-		  | Claims From Date | 01/02/2018          |
-		  | Claims To Date   | 01/02/2019          |
 		Then I can see the number of claims
 		  | Claim Type   | <claimType>             |
 		  | Claim Period | Custom search           |
@@ -522,101 +561,132 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | Claim Period | Custom search           |
 		Then I can validate the print and download option in claims details table for given range
 		  | Claim Period | Custom search           |
-		And the user validates the EOB section based on domain in redesigned site
+		And I can validate the EOB section based on domain in redesigned site
 		  | Domain       | <domain>                |
 		  | Plan Type    | <planType>              |
-		Then I validate Claim Details page		  
+		And I can validates the DownloadMyData section in redesigned site
+		  | Plan Type    | <planType>              |
+		Then I validate Claim Details page content value and Learn More and EOB		  
+		  | Domain       | <domain>                |
+	      | Plan Type    | <planType>              |
 		  | Claim Type   | <claimType>             |
 		  | Claim System | <claimssystem>          |
 		  | Has Your Share | <SummaryHasYourShare> |
 		  | Claim Period | Custom search           |
-		#----------------- Test claims number makes sense --------------------------
-		And I can validate the numbers of claims from all search periods
 		#----------------- Test Custom search error cases --------------------------
-		And the user custom search claims for the following time interval in redesigned site
+		And the user custom search claims for the following invalid time interval in redesigned site
 		  | Plan Type        | <planType>          |
 		  | Claims From Date | 01/02/2019          |
 		  | Claims To Date   | 01/02/2018          |
 		Then the user should be able to see the from date is greater than the to date error message being displayed
 		  | Plan Type        | <planType>          |
-		And the user custom search claims for the following time interval in redesigned site
+		And the user custom search claims for the following invalid time interval in redesigned site
 		  | Plan Type        | <planType>          |
 		  | Claims From Date | 01/02/2016          |
 		  | Claims To Date   | 01/02/2019          |
-		Then the user should be able to see the search range is greater than two years
+		Then the user should be able to see the search range is greater than two years error
 		  | Plan Type        | <planType>          |
+		#----------------- Final Test claims number makes sense from search periods --------------
+		And I can validate the numbers of claims from all search periods
 
+		  
 	@claims15_01 @claims15_MAPD @claims15_COSMOS @claims15_MEDICAL @diffGrpsDiffYrs
 	Examples: 
-	  |index |DID | planType | domain | claimssystem                 | claimToDate | claimFromDate | claimType         | SummaryHasYourShare |
-	  |01    |1041| MAPD     | COSMOS | diffGrpsDiffYrs_COSMOSCLAIMS | 01/02/2018  | 01/02/2019    | Medical           | Yes                 |
+	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
+	  |01    |1041| MAPD     | COSMOS | diffGrpsDiffYrs_COSMOSCLAIMS | Medical           | Yes                 |
 
 	@claims15_02 @claims15_MAPD @claims15_COSMOS @claims15_DRUG @diffGrpsDiffYrs
 	Examples: 
-	  |index |DID | planType | domain | claimssystem                 | claimToDate | claimFromDate | claimType         | SummaryHasYourShare |
-	  |02    |1041| MAPD     | COSMOS | diffGrpsDiffYrs_COSMOSCLAIMS | 01/02/2018  | 01/02/2019    | Prescription drug | Yes                 |
+	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
+	  |02    |1041| MAPD     | COSMOS | diffGrpsDiffYrs_COSMOSCLAIMS | Prescription drug | Yes                 |
 
 	@claims15_03 @claims15_MA @claims15_COSMOS @claims15_MEDICAL
 	Examples: 
-	  |index |DID | planType | domain | claimssystem                 | claimToDate | claimFromDate | claimType         | SummaryHasYourShare |
-	  |03    |1041| MA       | COSMOS | COSMOSCLAIMS                 | 01/02/2018  | 01/02/2019    | Medical           | Yes                 |
+	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
+	  |03    |1041| MA       | COSMOS | COSMOSCLAIMS                 | Medical           | Yes                 |
 
 	@claims15_04 @claims15_MA @claims15_NICE @claims15_MEDICAL
 	Examples: 
-	  |index |DID | planType | domain | claimssystem                 | claimToDate | claimFromDate | claimType         | SummaryHasYourShare |
-	  |04    |1041| MA       | NICE   | NICECLAIMS                   | 01/02/2018  | 01/02/2019    | Medical           | Yes                 |
+	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
+	  |04    |1041| MA       | NICE   | NICECLAIMS                   | Medical           | Yes                 |
 
 	@claims15_05 @claims15_MAPD @claims15_NICE @claims15_MEDICAL
 	Examples: 
-	  |index |DID | planType | domain | claimssystem                 | claimToDate | claimFromDate | claimType         | SummaryHasYourShare |
-	  |05    |1041| MAPD     | NICE   | NICECLAIMS                   | 01/02/2018  | 01/02/2019    | Medical           | Yes                 |
+	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
+	  |05    |1041| MAPD     | NICE   | NICECLAIMS                   | Medical           | Yes                 |
 
 	@claims15_06 @claims15_MAPD @claims15_NICE @claims15_DRUG
 	Examples: 
-	  |index |DID | planType | domain | claimssystem                 | claimToDate | claimFromDate | claimType         | SummaryHasYourShare |
-	  |06    |1041| MAPD     | NICE   | NICECLAIMS                   | 01/02/2018  | 01/02/2019    | Prescription drug | Yes                 |
+	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
+	  |06    |1041| MAPD     | NICE   | NICECLAIMS                   | Prescription drug | Yes                 |
 
 	@claims15_07 @claims15_MAPD @claims15_COSMOS @claims15_MEDICAL
 	Examples: 
-	  |index |DID | planType | domain | claimssystem                 | claimToDate | claimFromDate | claimType         | SummaryHasYourShare |
-	  |07    |1041| MAPD     | COSMOS | COSMOSCLAIMS                 | 01/02/2018  | 01/02/2019    | Medical           | Yes                 |
+	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
+	  |07    |1041| MAPD     | COSMOS | COSMOSCLAIMS                 | Medical           | Yes                 |
 
 	@claims15_08 @claims15_MAPD @claims15_COSMOS @claims15_DRUG
 	Examples: 
-	  |index |DID | planType | domain | claimssystem                 | claimToDate | claimFromDate | claimType         | SummaryHasYourShare |
-	  |08    |1041| MAPD     | COSMOS | COSMOSCLAIMS                 | 01/02/2018  | 01/02/2019    | Prescription drug | Yes                 |
+	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
+	  |08    |1041| MAPD     | COSMOS | COSMOSCLAIMS                 | Prescription drug | Yes                 |
 
 	@claims15_09 @claims15_PCP @claims15_COSMOS @claims15_MEDICAL
 	Examples: 
-	  |index |DID | planType | domain | claimssystem                 | claimToDate | claimFromDate | claimType         | SummaryHasYourShare |
-	  |09    |1041| PCP      | COSMOS | COSMOSCLAIMS                 | 01/02/2018  | 01/02/2019    | Medical           | Yes                 |
+	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
+	  |09    |1041| PCP      | COSMOS | COSMOSCLAIMS                 | Medical           | Yes                 |
 
 	@claims15_10 @claims15_PCP @claims15_COSMOS @claims15_DRUG
 	Examples: 
-	  |index |DID | planType | domain | claimssystem                 | claimToDate | claimFromDate | claimType         | SummaryHasYourShare |
-	  |10    |1041| PCP      | COSMOS | COSMOSCLAIMS                 | 01/02/2018  | 01/02/2019    | Prescription drug | Yes                 |
+	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
+	  |10    |1041| PCP      | COSMOS | COSMOSCLAIMS                 | Prescription drug | Yes                 |
 
 	@claims15_11 @claims15_MEDICA @claims15_COSMOS @claims15_MEDICAL
 	Examples: 
-	  |index |DID | planType | domain | claimssystem                 | claimToDate | claimFromDate | claimType         | SummaryHasYourShare |
-	  |11    |1041| MEDICA   | COSMOS | COSMOSCLAIMS                 | 01/02/2018  | 01/02/2019    | Medical           | Yes                 |
+	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
+	  |11    |1041| MEDICA   | COSMOS | COSMOSCLAIMS                 | Medical           | Yes                 |
 
 	@claims15_12 @claims15_MEDICA @claims15_COSMOS @claims15_DRUG
 	Examples: 
-	  |index |DID | planType | domain | claimssystem                 | claimToDate | claimFromDate | claimType         | SummaryHasYourShare |
-	  |12    |1041| MEDICA   | COSMOS | COSMOSCLAIMS                 | 01/02/2018  | 01/02/2019    | Prescription drug | Yes                 |
+	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
+	  |12    |1041| MEDICA   | COSMOS | COSMOSCLAIMS                 | Prescription drug | Yes                 |
 
 	@claims15_13 @claims15_PDP @claims15_RX @claims15_DRUG
 	Examples: 
-	  |index |DID | planType | domain | claimssystem                 | claimToDate | claimFromDate | claimType         | SummaryHasYourShare |
-	  |13    |1041| PDP      | RX     | RXCLAIMS                     | 01/02/2018  | 01/02/2019    | Prescription drug | No                  |
+	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
+	  |13    |1041| PDP      | RX     | RXCLAIMS                     | Prescription drug | No                  |
 
-	@claims15_14 @claims15_SHIP 
+	@claims15_14 @claims15_SHIP
 	Examples: 
-	  |index |DID | planType | domain | claimssystem                 | claimToDate | claimFromDate | claimType         | SummaryHasYourShare |
-	  |14    |1041| SHIP     | NA     | SHIPCLAIMS                   | 01/02/2018  | 01/02/2019    | NA                | No                  |
+	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
+	  |14    |1041| SHIP     | NA     | SHIPCLAIMS                   | NA                | No                  |
+
+	@claims15_15 @claims15_COMBO @claims15_MEDICAL
+	Examples: 
+	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
+	  |15    |1041| MAPD     | COSMOS | COMBO_COSMOSCLAIMS           | Medical           | Yes                 |
+
+	@claims15_16 @claims15_COMBO @claims15_DRUG
+	Examples: 
+	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
+	  |16    |1041| MAPD     | COSMOS | COMBO_COSMOSCLAIMS           | Prescription drug | Yes                 |
+
+	@claims15_17 @claims15_COMBO @claims15_SHIP
+	Examples: 
+	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
+	  |17    |1041| SHIP     | NA     | COMBO_SHIPCLAIMS             | NA                | No                  |
+
+	@claims15_18 @claims15_GROUP @claims15_MAPD @claims15_COSMOS @claims15_MEDICAL
+	Examples: 
+	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
+	  |18    |1041| MAPD     | COSMOS | GROUP_COSMOSCLAIMS           | Medical           | Yes                 |
+
+	@claims15_19 @claims15_GROUP @claims15_MAPD @claims15_COSMOS @claims15_DRUG
+	Examples: 
+	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
+	  |19    |1041| MAPD     | COSMOS | GROUP_COSMOSCLAIMS           | Prescription drug | Yes                 |
+
      #note: these will be in team-a env only
-	 #|15    |1041| MAPD     | COSMOS | t_diffGrpsDiffYrs_COSMOSCLAIMS | 01/02/2018  | 01/02/2019    | Medical           | Yes                |
-	 #|16    |1041| MAPD     | COSMOS | t_diffGrpsDiffYrs_COSMOSCLAIMS | 01/02/2018  | 01/02/2019    | Prescription drug | Yes                |
+	 #|xx    |1041| MAPD     | COSMOS | t_diffGrpsDiffYrs_COSMOSCLAIMS | Medical           | Yes                |
+	 #|xx    |1041| MAPD     | COSMOS | t_diffGrpsDiffYrs_COSMOSCLAIMS | Prescription drug | Yes                |
 	#----- end of claims15 ---------------------------------------------------------
 	  

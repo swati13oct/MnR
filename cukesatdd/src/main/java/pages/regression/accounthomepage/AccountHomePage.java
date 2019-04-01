@@ -1259,13 +1259,14 @@ public class AccountHomePage extends UhcDriver {
 				}else{
 					claimsDashboardLink.click();
 				}
-				try {
+				CommonUtility.checkPageIsReadyNew(driver);
+				/* tbd 	try {
 					Thread.sleep(10000);
 
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
+				}*/
 			} 
 			else if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
 				workaroundAttempt("claims");
@@ -1278,18 +1279,18 @@ public class AccountHomePage extends UhcDriver {
 		}
 		System.out.println(driver.getTitle());
 
-		if (driver.getTitle().equalsIgnoreCase("Claims")) {
-			try {
-				Thread.sleep(10000);
-				ClaimSummarypage comboTab = new ClaimSummarypage(driver).comboTabSelection();
-				comboTab.comboTabSelection();
+		//tbd if (driver.getTitle().equalsIgnoreCase("Claims")) {
+			//tbd try {
+			//tbd 	Thread.sleep(10000);
+		//tbd 	ClaimSummarypage comboTab = new ClaimSummarypage(driver).comboTabSelection();
+		//tbd 		comboTab.comboTabSelection();
 
-			} catch (InterruptedException e) {
+				//tbd } catch (InterruptedException e) {
 
-				e.printStackTrace();
-			}
+				//tbd e.printStackTrace();
+				//tbd }
 
-		}
+				//tbd }
 		return null;
 	}
 

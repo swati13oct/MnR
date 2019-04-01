@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -42,6 +43,9 @@ public class ClaimDetailsPage extends UhcDriver{
 	@FindBy(xpath=".//*[@id='claimNumberLabel']/p/b")
 	private WebElement claimNumber;
 
+	@FindBy(xpath="//div[contains(@class,'ship')]//p//b[contains(text(),'Claim #:')]")
+	private WebElement ship_claimNumber;
+	
 	@FindBy(xpath=".//*[@id='claimDynamicNum']")
 	private WebElement claimNumDynamic;
 
@@ -86,7 +90,10 @@ public class ClaimDetailsPage extends UhcDriver{
 	
 	@FindBy(xpath =".//*[@id='claimDetailsHeaders']/p")
 	private WebElement medicalClaimDetailsText;
-	
+
+	@FindBy(xpath ="//div[contains(@class,'ship')]//h2[contains(@id,'claimDetailsHeader')]//p")
+	private WebElement ship_medicalClaimDetailsText;
+
 	@FindBy (xpath= "//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li")
 	private List<WebElement> comboTabsOnclaimsPage;
 	
@@ -148,9 +155,27 @@ public class ClaimDetailsPage extends UhcDriver{
 
 	@FindBy(xpath="//a[@id='claimSearchButtons']")
 	private WebElement claimsSummaryBackButton;
-	
+
+	@FindBy(xpath="//a[@id='claimSearchButton']")
+	private WebElement ship_claimsSummaryBackButton;
+
 	@FindBy(xpath="//p[contains(text(),'Medical Claim Details')]")
 	private WebElement claimsDetailHeader;
+	
+	@FindBy(xpath="//h1[contains(@class,'heading')]")
+	private WebElement claimsSummaryHeader;
+	
+	@FindBy(xpath="//div[@class='learnmorearea learnMoreAboutBreakdownDetails']")
+	private WebElement learnmoreCost; 
+	
+	@FindBy(xpath="//div[contains(@class,'EOBComponentMA') and not(contains(@class,'ng-hide'))]//span[contains(text(),'Medical')]/../p[contains(text(),'SEARCH YOUR HISTORY')]")
+	private WebElement detail_medicalEOB;
+
+	@FindBy(xpath="//div[contains(@class,'EOBComponentMA') and not(contains(@class,'ng-hide'))]//span[contains(text(),'Prescription')]/../p[contains(text(),'SEARCH YOUR HISTORY')]")
+	private WebElement detail_drugEOB;
+
+	@FindBy(xpath="//div[contains(@class,'EOBComponentSHIP') and not(contains(@class,'ng-hide'))]//span[contains(text(),'Ship')]/../p[contains(text(),'VIEW EOB STATEMENT')]")
+	private WebElement EOB_SHIP;
 	//^^^ note: added for def1041
 	
 	public ClaimDetailsPage(WebDriver driver) {
@@ -168,14 +193,15 @@ public class ClaimDetailsPage extends UhcDriver{
 
 	}
 	
-	@SuppressWarnings("deprecation")
+	//tbd @SuppressWarnings("deprecation")
 	public void validateClaimSearch() {
-		try {
+		CommonUtility.waitForPageLoadNew(driver, claimSearch, 5);
+		/* //tbd-remove try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
+		} */
 		if(claimSearch.isDisplayed()){
 			Assert.assertTrue(true);
 		}
@@ -206,21 +232,21 @@ public class ClaimDetailsPage extends UhcDriver{
 	/**
 	 * @toDo :this method validates provider name
 	 */
-	public boolean verifyProviderName(){
+	public boolean TBR_verifyProviderName(){	//tbd-remove whole method
 		System.out.println("verifyProviderName");
 		return providerName.isDisplayed();
 	}
 	/**
 	 * @toDo :this method validates claim number 
 	 */
-	public boolean verifyClaimNumber(){
+	public boolean TBR_verifyClaimNumber(){	//tbd-remove whole method
 		System.out.println("verifyClaimNumber");
 		return claimNumber.isDisplayed();
 	}
 	/**
 	 * @toDo :this method validates dynamic claim number 
 	 */
-	public boolean verifyDynamicClaimNumber(){
+	public boolean TBR_verifyDynamicClaimNumber(){	//tbd-remove whole method
 		System.out.println("verifyDynamicClaimNumber");
 		return claimNumDynamic.isDisplayed();
 
@@ -228,7 +254,7 @@ public class ClaimDetailsPage extends UhcDriver{
 	/**
 	 * @toDo : this method validates claim type 
 	 */
-	public boolean validateClaimType() {
+	public boolean TBR_validateClaimType() {	//tbd-remove whole method
 		System.out.println("validateClaimType");
 		return claimType.isDisplayed();
 
@@ -237,21 +263,21 @@ public class ClaimDetailsPage extends UhcDriver{
 	 * @toDo : this method validates Dynamic claim type 
 	 */
 
-	public boolean validateDynamicClaimType(){
+	public boolean TBR_validateDynamicClaimType(){	//tbd-remove whole method
 		System.out.println("validateDynamicClaimType");
 			return claimsTypeDynamic.isDisplayed();
 		}
 	/**
 	 * @toDo :this method validates claim status 
 	 */
-	public boolean validateClaimStatus(){
+	public boolean TBR_validateClaimStatus(){	//tbd-remove whole method
 		System.out.println("validateClaimStatus");
 		return claimStatus.isDisplayed();
 	}
 	/**
 	 * @toDo :this method validates dynamic claim status 
 	 */
-	public boolean validateDynamicClaimStatus(){
+	public boolean TBR_validateDynamicClaimStatus(){	//tbd-remove whole method
 		System.out.println("validateDynamicClaimStatus");
 		return claimStatusDynamic.isDisplayed();
 	}
@@ -259,7 +285,7 @@ public class ClaimDetailsPage extends UhcDriver{
 	 * @toDo :this method validates EOB for different domain 
 	 */
 	public boolean validateMedicalEOBfordifferentDomainType(String domain, String plantype){
-
+		//keep for EOB story
 		if (domain.equals("COSMOS")&& plantype.equals("MAPD"))
 		{
 			System.out.println("validateMedicalEOBfordifferentDomainType");
@@ -274,15 +300,15 @@ public class ClaimDetailsPage extends UhcDriver{
 	 */
 	
 	public boolean validateDetailsLearnmoreaboutsectionDetails() {
-
+		//keep to add validation
 		return learnmoreMA.isDisplayed() || learnmorePDP.isDisplayed();
 
 	}
     /**
      * @toDo : validateClaimsTableInDetailsPage
      */
-	@SuppressWarnings("deprecation")
-	public void validateClaimsTableInDetailsPage() {
+	//tbd @SuppressWarnings("deprecation")
+	public void validateClaimsTableInDetailsPage(String planType) {
 		//wait.until(ExpectedConditions.visibilityOf(rememberThisDeviceSection));
 		if (driver.getCurrentUrl().contains("member/claims.html#/details"))
 			
@@ -292,31 +318,53 @@ public class ClaimDetailsPage extends UhcDriver{
 		System.out.println("The title of Claims page is-------->"+driver.getTitle());
 		
 		System.out.println("!!! Validating the elements on the Claims Details page !!!");
+		if (planType.equalsIgnoreCase("ship")) {
+			CommonUtility.waitForPageLoadNew(driver, ship_medicalClaimDetailsText, 5);
+			Assert.assertTrue("PROBLEM - unable to locate medicalClaimDetailsText",validate(ship_medicalClaimDetailsText));
+			System.out.println("!!! Medical Claims Details text is seen on the Claims Details page !!!  "+ ship_medicalClaimDetailsText.isDisplayed());
+			Assert.assertTrue("PROBLEM - unable to locate claimNumber",validate(ship_claimNumber));
+			System.out.println("!!!Claim Number is displayed===>"+ship_claimNumber.isDisplayed());
+		} else {
+			CommonUtility.waitForPageLoadNew(driver, medicalClaimDetailsText, 5);
+			Assert.assertTrue("PROBLEM - unable to locate medicalClaimDetailsText",validate(medicalClaimDetailsText));
+			System.out.println("!!! Medical Claims Details text is seen on the Claims Details page !!!  "+ medicalClaimDetailsText.isDisplayed());
+			Assert.assertTrue("PROBLEM - unable to locate claimNumber",validate(claimNumber));
+			System.out.println("!!!Claim Number is displayed===>"+claimNumber.isDisplayed());
+		}
+		Assert.assertTrue("PROBLEM - unable to locate learnMoreLink",validate(learnMoreLink));
+		System.out.println("!!!Learn More link is seen on the Claims Details Page !!!"+ learnMoreLink.isDisplayed());
+		Assert.assertTrue("PROBLEM - unable to locate claimDetTableMainSection",validate(claimDetTableMainSection));
+		System.out.println("!!! Claims table is seen in the Cliams details page ===>"+claimDetTableMainSection.isDisplayed());
+		if(claimDetTableMainSection.isDisplayed()){
+			Assert.assertTrue(true);
+		} else{
+			Assert.assertTrue("Claims Table is not present in Claims Details Page", false);
+		}
+		/* //tbd-remove
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		validate(medicalClaimDetailsText);
+		} 
+		Assert.assertTrue("PROBLEM - unable to locate medicalClaimDetailsText",validate(medicalClaimDetailsText));
 		System.out.println("!!! Medical Claims Details text is seen on the Claims Details page !!!  "+ medicalClaimDetailsText.isDisplayed());
-		validate(claimNumber);
+		Assert.assertTrue("PROBLEM - unable to locate claimNumber",validate(claimNumber));
 		System.out.println("!!!Claim Number is displayed===>"+claimNumber.isDisplayed());
-		validate(learnMoreLink);
+		Assert.assertTrue("PROBLEM - unable to locate learnMoreLink",validate(learnMoreLink));
 		System.out.println("!!!Learn More link is seen on the Claims Details Page !!!"+ learnMoreLink.isDisplayed());
-				validate(claimDetTableMainSection);
+		Assert.assertTrue("PROBLEM - unable to locate claimDetTableMainSection",validate(claimDetTableMainSection));
 		System.out.println("!!! Claims table is seen in the Cliams details page ===>"+claimDetTableMainSection.isDisplayed());
 		if(claimDetTableMainSection.isDisplayed()){
 			Assert.assertTrue(true);
+		} else{
+			Assert.assertTrue("Claims Table is not present in Claims Details Page", false);
 		}
-			else{
-				Assert.assertTrue("Claims Table is not present in Claims Details Page", false);
-		}
-		
+		*/
 	}
 
-	@SuppressWarnings("deprecation")
-	public void validateLearnMoreInDetailsPage() {
+	//tbd @SuppressWarnings("deprecation")
+	public void TBR_validateLearnMoreInDetailsPage() {	//tbd-remove whole method
 		validate(learnMoreLink);
 		System.out.println("!!! Learn more link is seen on the claims Details page ===>"+learnMoreLink.getText());
 		if(learnMoreLink.isDisplayed()){
@@ -328,13 +376,12 @@ public class ClaimDetailsPage extends UhcDriver{
 		
 	}
 
-	@SuppressWarnings("deprecation")
-	public void clickOnEOB() {
+	//tbd @SuppressWarnings("deprecation")
+	public void clickOnEOB() { //keep for EOB story
 		if(headerEOB.isDisplayed()){
 			Assert.assertTrue(true);
 			headerEOB.click();			
-		}
-		else{
+		} else{
 			Assert.assertTrue("EOB link is not present in Claims Details Page", false);
 		}
 		
@@ -342,7 +389,7 @@ public class ClaimDetailsPage extends UhcDriver{
 	/**
 	 * @toDo :this method validates EOB
 	 */
-	public void validateEOB() {
+	public void validateEOB() { //keep for EOB story
 		if(EOB.isDisplayed()){
 			Assert.assertTrue(true);
 			EOB.click();			
@@ -357,6 +404,8 @@ public class ClaimDetailsPage extends UhcDriver{
 	 */
 
 	public void validateClaimsTotalInDetailsPage() {
+		CommonUtility.waitForPageLoadNew(driver, claimstotalTable, 5);
+		/* //tbd-remove
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
@@ -365,19 +414,22 @@ public class ClaimDetailsPage extends UhcDriver{
 		}
 		validate(claimstotalTable);
 		System.out.println("!!! Claims Total $$ table is displayed on the Claims Details page===>"+claimstotalTable.isDisplayed());
+		validate(claimstotalTable);
+		System.out.println("!!! Claims Total $$ table is displayed on the Claims Details page===>"+claimstotalTable.isDisplayed());
 		if(claimstotalTable.isDisplayed()){
 			Assert.assertTrue(true);			
 		}
 		else{
 			Assert.assertTrue("Claims Total is not present in Claims Details Page", false);
-		}
+		} */
+		Assert.assertTrue("PROBLEM - Claims Total is not present in Claims Details Page", validate(claimstotalTable));
 	
 	}
 	/**
 	 * @toDo :validateClaimSearchLINK
 	 */
-	public void validateClaimSearchLINK(){
-		//CommonUtility.waitForPageLoad(driver, claimsHistoryLink, 90);
+	public void validateClaimSearchLINK(){ //need to investigate to see how to cover this
+		//CommonUtility.waitForPageLoad(driver, claimsHistoryLink, 90);	//tbd-remove
 		//validate(claimsearch);
 		//System.out.println("*** Claim search Link is seen on the page ===>"+claimsearch.isDisplayed());
 		if (driver.getTitle().equalsIgnoreCase("/details")) {
@@ -393,29 +445,29 @@ public class ClaimDetailsPage extends UhcDriver{
 	/**
 	 * @toDo: Validate learnMoreCostLink
 	 */
-	public void learnMoreCostLink(){
-		//validate(learnmoreCost);
-		//System.out.println("Learm more cost break down link is seen" +learnmoreCost.isDisplayed());
-		//learnmoreCost.click();		
+	public void learnMoreCostLink(){  
+		Assert.assertTrue("PROBLEM - unable to locate the Learn More link on detail page", validate(learnmoreCost));
+		System.out.println("Learm more cost break down link is seen" +learnmoreCost.isDisplayed());
+		learnmoreCost.click();		
 	}
 	/**
 	 * @toDo : Validate Claims Table in claims details page for Combo
 	 */
-	public void shipdetailcombo(){
+	public void shipdetailcombo(){ //need to investigate to see what this one is about
 		//validate(shipcombotable);
 		System.out.println("Cliam detail table is seen for Ship combo member");
 	}
 	/**
 	 * @toDo : Validate EOB for Combo members 
 	 */
-	public void EOBShipcombo(){
+	public void EOBShipcombo(){  //need to investigate to see what this one is about
 		//validate(EOBshipcombo);
 		System.out.println("EOB for combo ship plan is seen on claim details page");
 }
 	/**
 	 * @toDo : validate Claim History Button
 	 */
-	/*public void validateClaimHistory(){
+	/*public void validateClaimHistory(){	//tbd-remove
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
@@ -436,7 +488,7 @@ public class ClaimDetailsPage extends UhcDriver{
 	/**
 	 * @toDo :validate the two COMBO tabs on the claims Summary page
 	 */
-	/*public void comboTabs() {
+	/*public void comboTabs() { //tbd-remove
 		
 		for (WebElement webElement : comboTabsOnclaimsPage) {
 			System.out.println("The COMBO plans names seen on the page are ==> " + webElement.getText());
@@ -447,7 +499,7 @@ public class ClaimDetailsPage extends UhcDriver{
 	/**
 	 * @toDo : validate the Claims History Button
 	 */
-	public void claimshistorylink(){
+	public void TBR_claimshistorylink(){	//tbd-remove whole method
 		validate (historylink);
 		System.out.println("history link is seen");
 		historylink.click();
@@ -462,10 +514,9 @@ public class ClaimDetailsPage extends UhcDriver{
 		{
 		System.out.println("The member has navigated from details page to Summary page ---------->"+driver.getCurrentUrl());
 		}
-			
-		
 	}
 	public void validateClaimHistory(){
+		/* tbd-remove
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
@@ -475,12 +526,17 @@ public class ClaimDetailsPage extends UhcDriver{
 	validate(claimsHistoryLink);
 	System.out.println("claimsHistoryLink.isDisplayed==>"+claimsHistoryLink.isDisplayed());
 	claimsHistoryLink.click();
-	
-}
+	*/
+		Assert.assertTrue("PROBLEM - unable to locate claims summary page link",validate(historylink));
+		historylink.click();
+		CommonUtility.waitForPageLoadNew(driver, claimsSummaryHeader, 5);
+		Assert.assertTrue("PROBLEM - unable to navigate from details page to summary page", driver.getCurrentUrl().contains("/overview"));
+		System.out.println("The member has navigated from details page to Summary page ---------->"+driver.getCurrentUrl());
+	}
 	/**
 	 * @toDo :validate the two COMBO tabs on the claims Summary page
 	 */
-	public void comboTabs() {
+	public void comboTabs() {  //investigate and see how to cover this case
 		
 		for (WebElement webElement : comboTabsOnclaimsPage) {
 			System.out.println("The COMBO plans names seen on the page are ==> " + webElement.getText());
@@ -489,7 +545,7 @@ public class ClaimDetailsPage extends UhcDriver{
 		}
  }
 
-	public void validateEobInDetailsPage() {
+	public void validateEobInDetailsPage() { //keep for EOB story
 		if(MRScenario.environment.equalsIgnoreCase("team-a"))
 		{
 		validate(EOBunavailable);
@@ -503,12 +559,21 @@ public class ClaimDetailsPage extends UhcDriver{
 	public HashMap<String,String> gatherDataFromDetailPage(String claimType) {
 		HashMap<String,String> dataMap=new HashMap<String,String> ();
 		if (claimType.equalsIgnoreCase("medical")) {
+			CommonUtility.waitForPageLoadNew(driver, med_providerName, 15);
+			try {
+				Thread.sleep(2000);  //need to wait before validation, validatedriver is ready or wait for element is not enough
+			} catch (InterruptedException e1) {}
 			String key="med_dateOfService";
 			WebElement element=med_dateOfService;
 			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", validate(element));
 
 			String value=element.getText().trim();
 			String[] tmp=value.split("to");
+			if (tmp.length==0) {
+				System.out.println("med_dateOfService is not populated, could be timing issue, check it one more time before giving up");
+				value=element.getText().trim();
+				tmp=value.split("to");
+			}
 			try {
 			value=tmp[0].trim();
 			} catch (ArrayIndexOutOfBoundsException e) {
@@ -546,6 +611,7 @@ public class ClaimDetailsPage extends UhcDriver{
 			value=element.getText().trim();
 			dataMap.put(key, value);
 		} else if (claimType.equalsIgnoreCase("prescription drug")) {
+			CommonUtility.waitForPageLoadNew(driver, drug_rxNumber, 10);
 			String key="drug_dateFilled";
 			key="drug_medication";
 			WebElement element=drug_medication;
@@ -583,6 +649,7 @@ public class ClaimDetailsPage extends UhcDriver{
 			value=element.getText().trim();
 			dataMap.put(key, value);
 		} else {
+			CommonUtility.waitForPageLoadNew(driver, ship_provider, 10);
 			String key="ship_dateOfService";
 			WebElement element=ship_dateOfService;
 			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", validate(element));
@@ -723,22 +790,58 @@ public class ClaimDetailsPage extends UhcDriver{
 	
 	}
 
-	public ClaimSummarypage navigateToClaimSummaryPage() {
-		Assert.assertTrue("PROBLEM - Unable to locate the Claims Summary link on top menu to return back to claim summary page to prep for next test step", validate(claimsSummaryBackButton));
-		CommonUtility.waitForPageLoad(driver, claimsSummaryBackButton, 5);
-		claimsSummaryBackButton.click();
+	public ClaimSummarypage navigateBackToClaimSummaryPage(String planType, String claimPeriod) {
+		WebElement backButton=claimsSummaryBackButton;
+		if (planType.equalsIgnoreCase("ship")) {
+			System.out.println("This is ship case");
+			backButton=ship_claimsSummaryBackButton;
+		}
+		Assert.assertTrue("PROBLEM - Unable to locate the Claims Summary link on top menu to return back to claim summary page to prep for next test step", validate(backButton));
+		CommonUtility.waitForPageLoad(driver, backButton, 5);
+		backButton.click();
 		System.out.println("Clicked claims summary back button...");
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("current url="+driver.getCurrentUrl());		//note: only do the following for non-ship and non-custom search case to make sure it gets back to the right search period
+		if (!planType.equalsIgnoreCase("ship")) {
+			if (driver.getCurrentUrl().contains("overview")) {
+				if (!claimPeriod.equalsIgnoreCase("custom search")) {
+					WebElement option=null;
+					if (claimPeriod.equals("Last 30 days")) {
+						option = driver.findElement(By.id("date30Atdd"));
+					} else if (claimPeriod.equals("Last 90 days")) {
+						option = driver.findElement(By.id("date90Atdd"));
+					} else if (claimPeriod.equals("Last 6 months")) {
+						option = driver.findElement(By.id("date6MAtdd"));
+					} else if (claimPeriod.equals("Last 12 months")) {
+						option = driver.findElement(By.id("date12MAtdd"));
+					} else if (claimPeriod.equals("Last 24 months")) {
+						option = driver.findElement(By.id("date24MAtdd"));
+					} else if (claimPeriod.equals("Custom search")) {
+						option = driver.findElement(By.id("dateCustomSearchAtdd"));
+					}
+					System.out.println("!!! Validating the drop down to select the claims from '"+claimPeriod+"'  !!!");
+					option.click();
+				}
+			} 
 		}
-		System.out.println("current url="+driver.getCurrentUrl());
-		if (driver.getCurrentUrl().contains("overview")) {
-			return new ClaimSummarypage(driver);
-		}
-		return null;
+		return new ClaimSummarypage(driver);
 	}
+	
+	public void validate_EOB_onDetailPage(String domain, String plantype){
+		boolean bypass=false;  //bypass for now until story is done
+		if (!bypass) {
+			if (!plantype.equals("SHIP")) {
+				Assert.assertTrue("PROBLEM - unable to locate Medical EOB link on detail page", validate(detail_medicalEOB));
+				System.out.println("for '"+plantype+" and "+domain+"' - medical EOB is displayed===> "+ detail_medicalEOB.isDisplayed());
+
+			}
+			else {
+				Assert.assertTrue("PROBLEM - unable to locate EOB link on detail page for SHIP user", validate(EOB_SHIP));
+				System.out.println("for SHIP Eob is diplayed ====>"+ (EOB_SHIP.isDisplayed()));
+			}
+		}
+	}
+	
 	//^^^ note:	added for def1041		
 	
 	
