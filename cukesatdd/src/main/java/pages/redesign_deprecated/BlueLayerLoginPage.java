@@ -1,7 +1,7 @@
 /**
  * 
  */
-package pages.redesign;
+package pages.redesign_deprecated;
 
 import org.json.JSONException;
 import org.json.JSONObject;

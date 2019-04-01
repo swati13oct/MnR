@@ -1,4 +1,4 @@
-package pages.redesign;
+package pages.redesign_deprecated;
 
 
 

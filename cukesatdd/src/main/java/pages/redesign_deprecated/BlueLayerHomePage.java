@@ -1,7 +1,7 @@
 /**
  * 
  */
-package pages.redesign;
+package pages.redesign_deprecated;
 
 import java.util.Map;
 import java.util.NoSuchElementException;
