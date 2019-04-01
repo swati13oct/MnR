@@ -25,7 +25,7 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-//import pages.member.bluelayer.AccountHomePage;
+//import pages.member_deprecated.bluelayer.AccountHomePage;
 
 public class LoginPage extends UhcDriver {
 	

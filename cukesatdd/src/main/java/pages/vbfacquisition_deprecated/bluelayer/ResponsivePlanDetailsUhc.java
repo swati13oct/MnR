@@ -10,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import pages.vbfacquisition_deprecated.ulayer.ResponsivePlanDetails;
-import pages.member.ulayer.Rallytool_Page;
+import pages.member_deprecated.ulayer.Rallytool_Page;
 import atdd.framework.UhcDriver;
 
 public class ResponsivePlanDetailsUhc extends UhcDriver {

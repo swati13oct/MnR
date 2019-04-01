@@ -28,10 +28,10 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 //import pages.member.redesign.ContactUsPage;
-import pages.member.ulayer.OneTimePaymentsPage;
-import pages.member.ulayer.PlanComparePage;
-import pages.member.ulayer.Rallytool_Page;
-import pages.member.ulayer.TestHarness;
+import pages.member_deprecated.ulayer.OneTimePaymentsPage;
+import pages.member_deprecated.ulayer.PlanComparePage;
+import pages.member_deprecated.ulayer.Rallytool_Page;
+import pages.member_deprecated.ulayer.TestHarness;
 import pages.regression.IDCardPage.IDCardPage;
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.regression.claims.ClaimDetailsPage;
@@ -44,7 +44,7 @@ import pages.regression.formsandresources.FormsAndResourcesPage;
 import pages.regression.ordermaterials.OrderMaterialsPage;
 import pages.regression.payments.PaymentHistoryPage;
 import pages.regression.pharmacylocator.PharmacySearchPage;
-//import pages.member.bluelayer.BenefitsAndCoveragePage;
+//import pages.member_deprecated.bluelayer.BenefitsAndCoveragePage;
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 
 public class AccountHomePage extends UhcDriver {
@@ -1101,7 +1101,7 @@ public class AccountHomePage extends UhcDriver {
 		return null;
 	}
 
-	public pages.dashboard.member.ulayer.PaymentHistoryPage changeUrlToNewPaymentHistoryPage() {
+	public pages.dashboard_deprecated.member.ulayer.PaymentHistoryPage changeUrlToNewPaymentHistoryPage() {
 
 		String NewPayHistoryUrl = "content/dashboard/home/Payments.html";
 
@@ -1112,7 +1112,7 @@ public class AccountHomePage extends UhcDriver {
 		// System.out.println("testing2");
 		if (paymentsHeading.getText().contains("Premium Payments Overview")) {
 
-			return new pages.dashboard.member.ulayer.PaymentHistoryPage(driver);
+			return new pages.dashboard_deprecated.member.ulayer.PaymentHistoryPage(driver);
 
 		}
 

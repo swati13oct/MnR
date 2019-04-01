@@ -11,7 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import pages.member.ulayer.TerminatedHomePage;
+import pages.member_deprecated.ulayer.TerminatedHomePage;
 import pages.regression.accounthomepage.AccountHomePage;
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;

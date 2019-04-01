@@ -10,8 +10,8 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.member.redesign.NewLoginPage;
-import pages.redesign.CommunicationPreferences;
+import pages.member_deprecated.redesign.NewLoginPage;
+import pages.redesign_deprecated.CommunicationPreferences;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
