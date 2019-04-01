@@ -26,7 +26,8 @@ public class HealthAndWellnessPage extends UhcDriver{
 	@FindBy(linkText = "Health & Wellness")
 	private WebElement rallyHealthAndWellness;
 
-	@FindBy(xpath  = "//header[@class='hide-mobile']//a[contains(text(),'Health & Wellness')]")
+	//tbd @FindBy(xpath  = "//header[@class='hide-mobile']//a[contains(text(),'Health & Wellness')]")
+	@FindBy(xpath  = "//a[contains(text(),'Health & Wellness')]")
 	private WebElement healthAndWellness;
 
 	@FindBy(id  = "healthwellness_4")
@@ -117,7 +118,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 			System.err.println("Health and Wellness page not Successfully loaded ");
 		}
 		try {
-			Thread.sleep(15000);
+			Thread.sleep(17500);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -125,29 +126,8 @@ public class HealthAndWellnessPage extends UhcDriver{
 		String errorText="";
 		boolean rewardCheck=false;
 		boolean learnmoreCheck=false;
-		try {
-			errorText="Page does not contain rewardsLink";
-			if (rewardsLink.isDisplayed()) {
-				System.out.println("Page contains rewardsLink");
-				rewardCheck=true;
-			} else {
-				System.out.println(errorText);
-			}
-		} catch (Exception e) {
-			System.out.println(errorText);
-		}
-		try {
-			errorText="Page does not contain learnmorelink";
-			if (learnmorelink.isDisplayed()) {
-				System.out.println("Page contains learnmorelink");
-				learnmoreCheck=true;
-			} else {
-				System.out.println(errorText);
-			}
-		} catch (Exception e) {
-			System.out.println(errorText);
-		}
-
+		rewardCheck=validate(rewardsLink);
+		learnmoreCheck=validate(learnmorelink);
 		Assert.assertTrue("PROBLEM - unable to locate either one of the expected elements on page. rewardCheck="+rewardCheck+" | learnmoreCheck="+learnmoreCheck, (rewardCheck || learnmoreCheck));
 		//Assert.assertTrue("GetRewarded Link is displayed", (rewardsLink.isDisplayed() || learnmorelink.isDisplayed()));
 		//Assert.assertTrue("Learning tab is not displayed", learningTab.isDisplayed());
