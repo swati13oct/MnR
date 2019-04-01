@@ -1,7 +1,7 @@
 /**
  * 
  */
-package pages.member.bluelayer;
+package pages.member_deprecated.bluelayer;
 
 import java.util.ArrayList;
 import java.util.Iterator;

@@ -1,4 +1,4 @@
-package pages.member.redesign;
+package pages.member_deprecated.redesign;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

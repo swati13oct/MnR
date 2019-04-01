@@ -13,7 +13,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.member.bluelayer.ContactUsPage;
+import pages.member_deprecated.bluelayer.ContactUsPage;
 import pages.regression.pharmacylocator.PharmacySearchPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;

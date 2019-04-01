@@ -1,4 +1,4 @@
-package pages.member.bluelayer;
+package pages.member_deprecated.bluelayer;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

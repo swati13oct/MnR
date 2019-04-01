@@ -1,4 +1,4 @@
-package pages.member.bluelayer;
+package pages.member_deprecated.bluelayer;
 
 import org.json.JSONException;
 import org.json.JSONObject;

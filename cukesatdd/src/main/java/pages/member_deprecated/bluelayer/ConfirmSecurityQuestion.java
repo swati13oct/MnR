@@ -1,5 +1,5 @@
 
-package pages.member.bluelayer;
+package pages.member_deprecated.bluelayer;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;

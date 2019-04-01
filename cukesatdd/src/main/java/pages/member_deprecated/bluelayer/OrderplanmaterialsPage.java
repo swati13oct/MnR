@@ -1,7 +1,7 @@
 /**
  * 
  */
-package pages.member.bluelayer;
+package pages.member_deprecated.bluelayer;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.member.ulayer.PlanMaterialConfirmationPage;
+import pages.member_deprecated.ulayer.PlanMaterialConfirmationPage;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;

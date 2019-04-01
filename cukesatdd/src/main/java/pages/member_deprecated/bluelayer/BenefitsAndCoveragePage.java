@@ -1,7 +1,7 @@
 /**
  * 
  */
-package pages.member.bluelayer;
+package pages.member_deprecated.bluelayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import pages.member.ulayer.ValueAddedServicepage;
+import pages.member_deprecated.ulayer.ValueAddedServicepage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
@@ -1215,7 +1215,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(planName1);
 	}
 
-	public pages.member.bluelayer.ProfilePreferencesPage navigateDirectToProfilePagee()
+	public pages.member_deprecated.bluelayer.ProfilePreferencesPage navigateDirectToProfilePagee()
 			throws InterruptedException {
 		System.out.println(driver.getTitle());
 		accountToggleDropdown.click();

@@ -1,4 +1,4 @@
-package pages.member.bluelayer;
+package pages.member_deprecated.bluelayer;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -73,7 +73,7 @@ public class DashboardPage extends UhcDriver {
 	 * @throws InterruptedException 
 	 * @toDo : The user navigates to Profile  and Preferences  page from Rally Dashboard
 	 */
-	public pages.member.bluelayer.ProfilePreferencesPage navigateDirectToProfilePage() throws InterruptedException {
+	public pages.member_deprecated.bluelayer.ProfilePreferencesPage navigateDirectToProfilePage() throws InterruptedException {
 		System.out.println(driver.getTitle());
 		accountToggleDropdown.click();
 		validate(accountSettingOption);

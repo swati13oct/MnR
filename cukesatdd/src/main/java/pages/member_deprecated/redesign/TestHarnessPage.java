@@ -1,7 +1,7 @@
 /**
  * 
  */
-package pages.member.redesign;
+package pages.member_deprecated.redesign;
 
 
 import org.openqa.selenium.WebDriver;

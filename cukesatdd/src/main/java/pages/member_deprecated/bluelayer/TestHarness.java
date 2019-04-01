@@ -1,11 +1,11 @@
-package pages.member.bluelayer;
+package pages.member_deprecated.bluelayer;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.member.ulayer.PaymentsOverview;
+import pages.member_deprecated.ulayer.PaymentsOverview;
 import atdd.framework.UhcDriver;
 
 public class TestHarness extends UhcDriver{
