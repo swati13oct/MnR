@@ -390,6 +390,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'overview-tabs module-tabs-tabs')]/div[1]//span[@class='ng-binding']")
 	private WebElement maPlansCount;
 	
+	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button proactive-offer__close main-background-color second-color')]")
+	public static WebElement proactiveChatExitBtn;
+	
 	@Override
 	public void openAndValidate() {
 
@@ -398,6 +401,17 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		validateNew(step1);
 		validateNew(step2);
 		validateNew(step3);
+		checkProactiveChatPopup();
+	}
+	
+	public void checkProactiveChatPopup(){
+		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
+		try{
+			if(proactiveChatExitBtn.isDisplayed())
+				jsClickNew(proactiveChatExitBtn);
+		}catch(Exception e){
+			System.out.println("Proactive chat popup not displayed");
+		}
 	}
 
 
@@ -908,9 +922,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 		AddNewDrugModal addNewDrugModal = clickOnAddDrug();
 		addNewDrugModal.searchDrugWithoutAutoComplete(drug);
-		addNewDrugModal.closeModalWindow();
+		/*addNewDrugModal.closeModalWindow();
 		clickOnAddDrug();
-		addNewDrugModal.searchDrugWithAutoComplete(drug);
+		addNewDrugModal.searchDrugWithAutoComplete(drug);*/
 		return new AddDrugDetails(driver);
 	}
 
@@ -1729,6 +1743,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 
 	public VPPPlanSummaryPage enterZipcodeAndNavigateToPlanSummary(String zipCode) {
+		checkProactiveChatPopup();
 		sendkeys(zipCodeTextBox, zipCode);
 		findPlansButton.click();
 		CommonUtility.checkPageIsReadyNew(driver);

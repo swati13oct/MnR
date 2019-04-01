@@ -51,11 +51,14 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
                @FindBy(linkText = "VIEW PLAN DOCUMENTS")
                public WebElement viewPlanDocumentsButton;
+               
+               @FindBy(xpath="//*[@id='plandeductiblecard2']")
+               private WebElement MedicalDeductibleCard2;
 
-               @FindBy(xpath = ".//*[@id='globalContentIdForSkipLink']/div[3]/div/div/div[2]/div/div/div/p[1]")
+               @FindBy(xpath = "//a[contains(text(),'VIEW PLAN DOCUMENTS')]/ancestor::p/preceding-sibling::p")
                private WebElement messageForPreeffective;
 
-               @FindBy(linkText = "1-888-980-8125")
+               @FindBy(xpath = "//p[contains(text(),'1-866-254-3132')]")
                public WebElement preEffectiveTechSupportNumber;
 
                @FindBy(id = "IPerceptionsEmbed")
@@ -257,7 +260,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                @FindBy(id = "viewTextAtdd")
                private WebElement view_label;
 
-               @FindBy(xpath = "//h2[contains(text(),'Plan Documents and Resources')]")
+               //tbd @FindBy(xpath = "//h2[contains(text(),'Plan Documents and Resources')]")
+               @FindBy(xpath = "//h2[contains(text(),'Plan Materials')]")
                private WebElement documents_label;
 
                // @FindBy(className = "atdd-benefitsoverview-plantitle")
@@ -470,6 +474,18 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
                @FindBy(xpath = "(//*[@id='officeVisitTileAtdd']/div//div[1]/span)[2]")
                private WebElement specialistValue;
+               
+               @FindBy(xpath="//*[@id='plandeductiblecard1']")
+	           	private WebElement MedicalDeductibleCard1;
+	
+	           	@FindBy(xpath="//*[@id='plandeductible1AEMvalue']")
+	           	private WebElement NoDeductible1Text;
+	
+	           	@FindBy(xpath="//*[@id='plandeductible2servicevalue']")
+	           	private WebElement Deductible2Text;
+
+           	@FindBy(xpath="//*[@id='plandeductible1servicevalue']")
+           	private WebElement Deductible1Text;
 
                @FindBy(id = "outPatientTileAtdd")
                private WebElement outpatientsurgeryVisits;
@@ -560,6 +576,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                private WebElement wallGreensWidget;
                @FindBy(xpath = "//img[@alt='mailservicelogo']/parent::div/following-sibling::div/p")
                private WebElement mailOrderWidget;
+               
+               @FindBy(xpath = "//a[contains(text(),'VIEW PLAN DOCUMENTS')]")
+               private WebElement viewPlanDocsBtn;
 
                //@FindBy(id = "waystosave")
                @FindBy(xpath="//div[@id='waystosave']")
@@ -835,6 +854,24 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                
                @FindBy(xpath="//*[@class='subtitle atdd-benefitssummary-dental']")
                private WebElement ssupDental;
+               
+               @FindBy(xpath="//a[@class='siteLeavingPopup']/parent::p/parent::div")
+               private WebElement accessDrugsBenfitsBlock;
+               
+               @FindBy(xpath="//a[@class='siteLeavingPopup']/parent::p/parent::div/h3")
+               private WebElement accessDrugsBenfitsBlockHeader;
+               
+               @FindBy(xpath="//a[@class='siteLeavingPopup']/parent::p/a")
+               private WebElement accessDrugsBenfitsBlockExpressScriptsLink;
+               
+               @FindBy(css="div.siteleaving-popup-footer>div")
+               private WebElement siteLeavingPopUp;
+               
+               @FindBy(css="div.siteleaving-popup-footer a#cancelbtn")
+               private WebElement siteLeavingPopUpCancelBtn;
+               
+               @FindBy(css="div.siteleaving-popup-footer a#proceedbtn")
+               private WebElement siteLeavingPopUpProceedBtn;
                
                public WebElement getLinkBackToTop_copy() {
                               return linkBackToTop_copy;
@@ -3582,9 +3619,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                */ 
                public void validatePlanBenefitsSummarySubNavNotDisplayed() throws InterruptedException 
                {
-                              Thread.sleep(2000);  
+                               
                               System.out.println("Now checking for Plan Benefits Summary sub navigation of Benefits and Coverage");
-
                               Dimension size = driver.findElement(By.id("benefitssummary")).getSize();
                               System.out.println(size);
                               int height = size.getHeight();
@@ -3610,7 +3646,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                */
                public void validatePlanDocumentsResourcesSubNavNotDisplayed() throws InterruptedException 
                {
-                              Thread.sleep(2000);  
+                               
                               System.out.println("Now checking for Plan Documents and Resources sub navigation of Benefits and Coverage");
 
                               Dimension size = driver.findElement(By.id("formsandresourcesC1")).getSize();
@@ -3638,7 +3674,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                */
                public void validateOrderPlanMaterialsSubNavNotDisplayed() throws InterruptedException 
                {
-                              Thread.sleep(2000);  
+                                
                               System.out.println("Now checking for Order Plan Materials sub navigation of Benefits and Coverage");
 
                               Dimension size = driver.findElement(By.id("ordermaterials")).getSize();
@@ -3662,14 +3698,14 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
                public void verifyCorrectMessageForPreEffectiveMembers() throws InterruptedException 
                {
-                              Thread.sleep(2000);  
+                              CommonUtility.waitForPageLoadNew(driver, viewPlanDocsBtn, 20);
+                              System.out.println("View Plan Documents button was displayed");
                               System.out.println("Now checking for message on Benefits and Coverage Page for Pre-effective members");
                               System.out.println("The message displayed on screen is "+messageForPreeffective.getText());
-                              Assert.assertEquals(messageForPreeffective.getText(),"When your plan starts, this is where youï¿½ll find an overview of your plan benefits and coverage information. You can also view your plan documents to find important plan details and information.");
-                              System.out.println("Assert for correct Message was passed");
-                              System.out.println("Now checking for display View Plan Documents button");
-                              viewPlanDocumentsButton.isDisplayed();
-                              System.out.println("View Plan Documents button was displayed");
+                              if(!messageForPreeffective.getText().contains("When your plan starts,"))
+                            	  Assert.fail("Correct message is not displayed");
+                              
+                              
                }
 
                public void verifyCorrectTechSupportNumberForPreEffectiveMembers() throws InterruptedException 
@@ -3677,14 +3713,14 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
                               System.out.println("Now checking for Tech Support Number for Pre-effective members");
                               System.out.println("The Tech Support phone number displayed on screen is "+preEffectiveTechSupportNumber.getText());
-                              Assert.assertEquals(preEffectiveTechSupportNumber.getText(),"1-888-980-8125");
+                              Assert.assertEquals(preEffectiveTechSupportNumber.getText(),"1-866-254-3132");
                               System.out.println("Assert for correct Tech Suppport Phone Number  was passed");
 
                }
 
                public FormsAndResourcesPage clickViewPlanDocumentsButton() throws InterruptedException 
                {
-
+            	   			 CommonUtility.waitForPageLoadNew(driver, viewPlanDocumentsButton, 45);
                               System.out.println("Now clicking the View Plan Documents Button");
                               viewPlanDocumentsButton.click();
 
@@ -3993,5 +4029,156 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                               
                }
                
+               
+               public boolean ValidateBnCNoDeductible() {
+           		try {
+           			Thread.sleep(5000);
+           		} catch (InterruptedException e) {
+           			// TODO Auto-generated catch block
+           			e.printStackTrace();
+           		}
+           		boolean Validation_Flag = true;
+           		if(validate(MedicalDeductibleCard1)){
+           			if(!NoDeductible1Text.getText().contains("$")){
+           				System.out.println("No $ Amount is displayed for Member with No Deductible");
+           				System.out.println("Text displayed in Deductible1 Card : "+NoDeductible1Text.getText());
+           				Validation_Flag = true;
+           			}
+           			else{
+           				System.out.println("Validation Failed -  $ Amount is displayed for Member with No Deductible");
+           				System.out.println("Text displayed in Deductible1 Card : "+NoDeductible1Text.getText());
+           				Validation_Flag = false;
+
+           			}
+           		}
+           		else{
+           			System.out.println("Validation Failed - Medical Deductible Card is NOT Displayed for Group MA/MAPD Member");
+           			Validation_Flag = false;
+
+           		}
+           		return Validation_Flag;
+           	}
+               
+               
+               public boolean ValidateBnCSingleDeductible(String deductibleAmount1) {
+           		try {
+           			Thread.sleep(5000);
+           		} catch (InterruptedException e) {
+           			// TODO Auto-generated catch block
+           			e.printStackTrace();
+           		}
+           		boolean Validation_Flag = true;
+           		if(validate(MedicalDeductibleCard1)){
+           			if(Deductible1Text.getText().contains(deductibleAmount1)){
+           				System.out.println("Expected $ Amount "+deductibleAmount1+" is displayed for Member with Single Deductible");
+           				System.out.println("Text displayed in Deductible1 Card : "+Deductible1Text.getText());
+           				Validation_Flag = true;
+           			}
+           			else{
+           				System.out.println("Validation Failed -  Expected Deductible Amount is NOT displayed for Member with Single Deductible");
+           				System.out.println("Text displayed in Deductible1 Card : "+Deductible1Text.getText());
+           				Validation_Flag = false;
+
+           			}
+           		}
+           		else{
+           			System.out.println("Validation Failed - Medical Deductible Card is NOT Displayed for Group MA/MAPD Member");
+           			Validation_Flag = false;
+
+           		}
+           		return Validation_Flag;
+           	}
+               
+
+           	public boolean ValidateBnC_DualDeductible(String deductibleAmount1, String deductibleAmount2) {
+           		try {
+           			Thread.sleep(5000);
+           		} catch (InterruptedException e) {
+           			// TODO Auto-generated catch block
+           			e.printStackTrace();
+           		}
+           		boolean Validation_Flag = true;
+           		if(validate(MedicalDeductibleCard1) && validate(MedicalDeductibleCard2) ){
+           			if(Deductible1Text.getText().contains(deductibleAmount1) && Deductible2Text.getText().contains(deductibleAmount2)){
+           				System.out.println("Expected $ Amount "+deductibleAmount1+" AND "+deductibleAmount2+" is displayed for Member with Dual Deductible");
+           				System.out.println("Text displayed in Deductible1 Card : "+Deductible1Text.getText());
+           				System.out.println("Text displayed in Deductible2 Card : "+Deductible2Text.getText());
+           				Validation_Flag = true;
+           			}
+           			else{
+           				System.out.println("Validation Failed -  Expected Deductible Amount is NOT displayed for Member with Dual Deductible");
+           				System.out.println("Text displayed in Deductible1 Card : "+Deductible1Text.getText());
+           				System.out.println("Text displayed in Deductible2 Card : "+Deductible2Text.getText());
+           				Validation_Flag = false;
+
+           			}
+           		}
+           		else{
+           			System.out.println("Validation Failed - Both Medical Deductible Card is NOT Displayed for Group MA/MAPD Member with Dual Deductible");
+           			Validation_Flag = false;
+
+           		}
+           		return Validation_Flag;
+           	}
+
+           	/**
+           	 * Validate the Access your Drug Benefits 
+           	 * @return
+           	 */
+            public boolean validateAccessDrugsBenfitsBlock() {
+            	boolean bAccessDrugsBenfitsBlockValidation = true;
+            	if(validateNew(accessDrugsBenfitsBlock) && validate(accessDrugsBenfitsBlockHeader) && validate(accessDrugsBenfitsBlockExpressScriptsLink)){
+            		bAccessDrugsBenfitsBlockValidation = true;
+            	}else
+            		bAccessDrugsBenfitsBlockValidation = false;
+            	return bAccessDrugsBenfitsBlockValidation;
+            }
+            
+            /**
+           	 * Validate the Access your Drug Benefits 
+           	 * @return
+           	 */
+            public boolean validateSiteLeavingPopUp() {
+            	boolean bAccessDrugsBenfitsBlockValidation = true;
+            	if(validate(siteLeavingPopUp)){
+            		bAccessDrugsBenfitsBlockValidation = true;
+            	}else
+            		bAccessDrugsBenfitsBlockValidation = false;
+            	return bAccessDrugsBenfitsBlockValidation;
+            }
+            
+            /**
+           	 * Validate the Access your Drug Benefits 
+           	 * @return
+           	 */
+            public boolean validateSiteLeavingPopUpCancelFlow() {
+            	accessDrugsBenfitsBlockExpressScriptsLink.click();
+            	waitforElement(siteLeavingPopUp);
+            	boolean bAccessDrugsBenfitsBlockValidation = false;
+            	jsClickNew(siteLeavingPopUpCancelBtn);
+            	if(driver.findElements(By.cssSelector("div.siteleaving-popup-footer>div")).size()>0){
+            		bAccessDrugsBenfitsBlockValidation = true;
+            	}else
+            		bAccessDrugsBenfitsBlockValidation = false;
+            	return bAccessDrugsBenfitsBlockValidation;
+            }
+            
+            /**
+           	 * Validate the Access your Drug Benefits 
+           	 * @return
+           	 */
+            public boolean validateSiteLeavingPopUpProceedFlow() {
+            	accessDrugsBenfitsBlockExpressScriptsLink.click();
+            	waitforElement(siteLeavingPopUp);
+            	boolean bAccessDrugsBenfitsBlockValidation = true;
+            	jsClickNew(siteLeavingPopUpProceedBtn);
+            	if(driver.getWindowHandles().size()>0) {
+            		bAccessDrugsBenfitsBlockValidation=true;
+            		Assert.assertTrue(driver.getWindowHandles().size()>0);
+            	}else {
+            		bAccessDrugsBenfitsBlockValidation=false;
+            	}
+            	return bAccessDrugsBenfitsBlockValidation;
+            }
 
 }

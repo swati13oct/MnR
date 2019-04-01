@@ -17,6 +17,7 @@ import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import junit.framework.Assert;
 import pages.regression.footer.FooterPage;
+import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 
 @SuppressWarnings("deprecation")
 
@@ -28,7 +29,7 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy(xpath = ".//*[@id='globalContentIdForSkipLink']/div[3]/div[1]/div/div/div/div/div/p")
 	private WebElement messageForPreeffective;
 	
-	@FindBy(linkText = "1-888-980-8125")
+	@FindBy(xpath = "//p[contains(text(),'1-888-980-8125')]")
 	public WebElement preEffectiveTechSupportNumber;
 
 	@FindBy (xpath=".//*[@id='MA']")
@@ -55,7 +56,8 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy(xpath = ".//*[@id='planNameFed']")
 	private WebElement planame;
 	
-	@FindBy (xpath = "//*[@id='document-date']//option[contains(@value,'custom-search')]")
+	//@FindBy (xpath = "//*[@id='document-date']//option[contains(@value,'custom-search')]")
+	@FindBy(xpath =".//*[@id='dateCustomSearchAtdd']")
 	private WebElement customSearch;
 	
 	@FindBy (xpath = "//div[@class='medical-claims']//h2[@ng-bind-html='planName']/parent::div//*[@id='document-date']//option[contains(@value,'24 months')]")
@@ -254,6 +256,14 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy(id = "all-claims-download-btn")
 	private WebElement validateclaimsdownloadbutton;
 
+	@FindBy(xpath = "//div[contains(@class,'shipCompSection')]//select[@name='document-date']")
+	private WebElement claimDropDownBoxForShip;	
+
+	@FindBy(xpath = "//div[contains(@class,'fedCompSection')]//select[@name='document-date']")
+	private WebElement claimDropDownBoxForFed;	
+	
+	@FindBy(xpath="//div[@id='tableAtddFed']//div[contains(text(),'Prescription Drug')]")
+	public WebElement pdpPrescriptionDrug;
 	
 
 
@@ -530,7 +540,8 @@ public class ClaimSummarypage extends UhcDriver{
 			if(leavingsitepopup.isDisplayed()){
 				proceedButtonDownloadPopUp.click();
 				switchToNewTab();
-				driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);				CommonUtility.waitForPageLoad(driver, downloadmydatabutton, 60);
+				driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
+				CommonUtility.waitForPageLoad(driver, downloadmydatabutton, 60);
 			if (downloadmydatabutton.isDisplayed())
 			{			
 				downloadmydatabutton.click();		
@@ -587,7 +598,8 @@ public class ClaimSummarypage extends UhcDriver{
 
 	public void searchClaimsByTimeInterval(String toDate, String fromDate) {
 		System.out.println("The title of the page is-------->"+driver.getTitle());
-	if(driver.getTitle().equalsIgnoreCase("AARP Medicare Plans from UnitedHealthCare - Claims Summary")){
+	//if(driver.getTitle().equalsIgnoreCase("AARP Medicare Plans from UnitedHealthCare - Claims Summary")){
+		if(driver.getTitle().contains("Claims Summary")){
 
 		
 
@@ -690,6 +702,7 @@ public class ClaimSummarypage extends UhcDriver{
 				e.printStackTrace();
 				}
 		*/	//System.out.println("!!! Going to select Last 24 months from the dropdown !!! ");
+		/*
 			if(planType.contains("SHIP")){
 				System.out.println(planType+"SHIP plan type last 24 moths is going to select");
 						
@@ -698,8 +711,22 @@ public class ClaimSummarypage extends UhcDriver{
 			}
 			
 			else if (planType.contains("MAPD")){
-				
-			
+			*/	
+		if(planType.contains("SHIP")){
+			System.out.println("For ship case, locate the drop down box and select 24 months option");
+			Select dropdown=new Select (claimDropDownBoxForShip);	
+			dropdown.selectByVisibleText("Last 24 months");
+			System.out.println("Clicked 24 months option");
+		}
+		else if (planType.contains("PDP")) {
+			System.out.println("!!!Claim type PDP is validated !!!");
+			Select dropdown=new Select (claimDropDownBoxForFed);	
+			dropdown.selectByVisibleText("Last 24 months");
+			System.out.println("Clicked 24 months option");
+			validate(pdpPrescriptionDrug);
+		}
+		else if (planType.contains("MAPD") || planType.contains("MA")){
+	
 					/*validate (customSearch);
 					System.out.println("!!! Custom search is seen in the view Claims From drop down ===>"+(customSearch.getText()));*/
 					System.out.println("!!! Validating the drop down to select the claims from last 24 months  !!!");
@@ -710,6 +737,7 @@ public class ClaimSummarypage extends UhcDriver{
 					validate (Medical);
 					System.out.println("!! Claim type Medical is validated!!! ");
 					validate (Medical);
+					if (planType.contains("MAPD")) {
 					validate(PrescriptionDrug);
 	    			System.out.println("!!!Claim type PDP is validated !!!");
 	    			PrescriptionDrug.click();
@@ -734,7 +762,7 @@ public class ClaimSummarypage extends UhcDriver{
 					claimType.selectByVisibleText("PrescriptionDrug");*/
 					System.out.println("!!! Claim Type Prescription Drug is Selected !!!");
 					Medical.click();
-				
+					}
 				
 			}
 			else{
@@ -1210,7 +1238,7 @@ public void NavigateToClaimsPage(){
 			
 			public void validateClaimsSummarySubNavNotDisplayed() throws InterruptedException 
 			{
-			    Thread.sleep(2000);  
+			     
 			    System.out.println("Now checking for claims summary sub navigation of Claims");
 			     
 				Dimension size = driver.findElement(By.id("claimsummaryC1")).getSize();
@@ -1262,7 +1290,8 @@ public void NavigateToClaimsPage(){
 			    Thread.sleep(2000);  
 			    System.out.println("Now checking for message on Claims Page for Pre-effective members");
 			    System.out.println("The message displayed on screen is "+messageForPreeffective.getText());
-				Assert.assertEquals(messageForPreeffective.getText(),"When your plan starts, this is where you can search for recent or past claims activity and view your Explanation of Benefits documents.");
+				if(!messageForPreeffective.getText().contains("When your plan starts,"))
+              	  Assert.fail("Correct message is not displayed");
 				System.out.println("Assert for preeffective message on claims page was passed");
 				
 			}
@@ -1342,6 +1371,21 @@ public void NavigateToClaimsPage(){
 				}else{
 					return true;
 				}
+			}
+
+			public ProfileandPreferencesPage navigateDirectToProfilePage() {
+			
+				if(driver.findElement(By.id("accountprofile")).isDisplayed()){
+					 driver.findElement(By.id("accountprofile")).click();
+					 driver.findElement(By.linkText("Account Settings")).click();
+				}else
+					Assert.fail("Account profile dropdown not found");
+				CommonUtility.waitForPageLoadNew(driver, driver.findElement(By.xpath("//h1[contains(text(),'Account Settings')]")),20 );
+				if (driver.getCurrentUrl().contains("profile")) {
+					 System.out.println("Landed on Account Settings page");
+					 return new ProfileandPreferencesPage(driver);
+				 }
+				return null;
 			}
 			
 }

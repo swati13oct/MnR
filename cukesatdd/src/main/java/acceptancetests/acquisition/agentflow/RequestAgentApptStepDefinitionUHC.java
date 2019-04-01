@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.RequestAgentAppointmentPage;
 import pages.acquisition.bluelayer.RequestHelpAndInformationPage;
+import pages.acquisition.bluelayer.RequestMailedInformationUHC;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -66,7 +67,7 @@ public class RequestAgentApptStepDefinitionUHC {
 	
 	@Then("^the user fills the form out and submits the uhc agent appointment application$")
 	public void fillOutAndSubmitForm(DataTable attributes) {
-		if (!MRScenario.environment.equalsIgnoreCase("offline")) {
+		if (!(MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))) {
 			RequestAgentAppointmentPage requestAgentAppointmentPage = (RequestAgentAppointmentPage) getLoginScenario()
 					.getBean(PageConstants.REQUEST_AGENT_APPOINTMENT_PAGE);
 			List<DataTableRow> givenAttributesRow = attributes.getGherkinRows();
@@ -84,7 +85,7 @@ public class RequestAgentApptStepDefinitionUHC {
 				Assert.fail("Error submitting the form or loading the Confirmation page");
 			}
 		} else {
-			System.out.println("Skipping the submit functionality in Offline-Prod environment");
+			System.out.println("Skipping the submit functionality in Offline-Prod/Prod environment");
 		}
 
 	}
@@ -105,5 +106,51 @@ public class RequestAgentApptStepDefinitionUHC {
 		}
 		
 	}
+	
+	@When("^the user navigates to the request mailed information in UHC site and validates page is loaded$")
+	public void the_user_navigates_to_the_request_mailed_information_in_UHC_site_and_validates_page_is_loaded() throws Throwable {
+		RequestHelpAndInformationPage requestHelpAndInformationPage = (RequestHelpAndInformationPage) getLoginScenario().getBean(PageConstants.REQUEST_MORE_HELP_INFORMATION_PAGE);
+		RequestMailedInformationUHC requestmailedinformationuhc = requestHelpAndInformationPage.navigateToRequestMailedinformationUHC();
+		if(requestmailedinformationuhc!=null){
+			getLoginScenario().saveBean(PageConstants.REQUEST_MAILED_INFORMATION_UHC, requestmailedinformationuhc);
+		}else{
+			Assert.fail("Error in loading requestAgentAppointmentPage");
+		}
+	}
+
+	@When("^the user fills the Enrollment guide plan form and validate the order confirmation page in UHC site$")
+	public void the_user_fills_the_Enrollment_guide_plan_form_and_validate_the_order_confirmation_page_in_UHC_site(DataTable attributes) throws Throwable {
+		if (!MRScenario.environment.equalsIgnoreCase("offline")) {
+			RequestMailedInformationUHC requestmailedinformationUHC = (RequestMailedInformationUHC) getLoginScenario()
+					.getBean(PageConstants.REQUEST_MAILED_INFORMATION_UHC);
+			List<DataTableRow> givenAttributesRow = attributes.getGherkinRows();
+			Map<String, String> givenAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+				givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+						givenAttributesRow.get(i).getCells().get(1));
+			}
+			boolean isFormSubmitted = requestmailedinformationUHC.submitAgentAppointmentUHC(givenAttributesMap);
+			if (isFormSubmitted) {
+				System.out.println("Successfully submitted the Appointment form");
+				Assert.assertTrue(true);
+			} else {
+				Assert.fail("Error submitting the form or loading the Confirmation page");
+			}
+		} else {
+			System.out.println("Skipping the submit functionality in Offline-Prod environment");
+		}
+	}
+	
+	/*@Then("^user validates the breadcrum on the request appointment with an agent in UHC site$")
+	public void user_validates_the_breadcrum_on_the_request_appointment_with_an_agent_in_UHC_site() throws Throwable {
+		RequestAgentAppointmentPage requestAgentAppointmentPage = (RequestAgentAppointmentPage) getLoginScenario().getBean(PageConstants.REQUEST_AGENT_APPOINTMENT_PAGE);
+		boolean errorMessageValidated = requestAgentAppointmentPage.validateErrorMessages();
+		if(errorMessageValidated){
+			Assert.assertTrue(errorMessageValidated);
+		}else{
+			Assert.fail("Error in loading error messages");
+		}
+	}*/
 	
 }

@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 /**
@@ -62,6 +63,12 @@ public class HealthAndWellnessPage extends UhcDriver{
 	@FindBy (id = "renew-rewards-widget-target")
 	private WebElement rewardsPage;
 	
+	@FindBy (partialLinkText = "REWARDED")
+	private WebElement rewardsLink;
+	
+	@FindBy (linkText = "LEARN MORE")
+	private WebElement learnmorelink;
+	
 
 	public HealthAndWellnessPage(WebDriver driver){
 		super(driver);
@@ -80,14 +87,17 @@ public class HealthAndWellnessPage extends UhcDriver{
 	 */
 	public void clickHealthnWellnessTab(){
 		try {
+			if (MRScenario.environment.equalsIgnoreCase("team-a")) {
+				Assert.assertTrue("KNOWN BEHAVIOR - The H&W page does not load on Team-A env due to non-availability of lower environment support from Talix (The third party vendor which actually hosts the page). Please validate on stage env", false);
+			} 		
 			healthAndWellness.isDisplayed();
 			healthAndWellness.click();
 			waitforElement(titleText);
 		} catch (Exception e) {
-			System.out.println("Unable to locate the xpath for healthAndWellness for stage and non-harness, try the one for stage and harness");
-			healthAndWellness_harness.isDisplayed();
-			healthAndWellness_harness.click();
-			waitforElement(titleText);
+				System.out.println("Unable to locate the xpath for healthAndWellness for stage and non-harness, try the one for stage and harness");
+				healthAndWellness_harness.isDisplayed();
+				healthAndWellness_harness.click();
+				waitforElement(titleText);
 		}
 	}
 
@@ -105,8 +115,41 @@ public class HealthAndWellnessPage extends UhcDriver{
 		}
 		else {
 			System.err.println("Health and Wellness page not Successfully loaded ");
-		}		
-		//Assert.assertTrue("Lifestyle tab is not displayed", lifestyleTab.isDisplayed());
+		}
+		try {
+			Thread.sleep(15000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String errorText="";
+		boolean rewardCheck=false;
+		boolean learnmoreCheck=false;
+		try {
+			errorText="Page does not contain rewardsLink";
+			if (rewardsLink.isDisplayed()) {
+				System.out.println("Page contains rewardsLink");
+				rewardCheck=true;
+			} else {
+				System.out.println(errorText);
+			}
+		} catch (Exception e) {
+			System.out.println(errorText);
+		}
+		try {
+			errorText="Page does not contain learnmorelink";
+			if (learnmorelink.isDisplayed()) {
+				System.out.println("Page contains learnmorelink");
+				learnmoreCheck=true;
+			} else {
+				System.out.println(errorText);
+			}
+		} catch (Exception e) {
+			System.out.println(errorText);
+		}
+
+		Assert.assertTrue("PROBLEM - unable to locate either one of the expected elements on page. rewardCheck="+rewardCheck+" | learnmoreCheck="+learnmoreCheck, (rewardCheck || learnmoreCheck));
+		//Assert.assertTrue("GetRewarded Link is displayed", (rewardsLink.isDisplayed() || learnmorelink.isDisplayed()));
 		//Assert.assertTrue("Learning tab is not displayed", learningTab.isDisplayed());
 	}
 

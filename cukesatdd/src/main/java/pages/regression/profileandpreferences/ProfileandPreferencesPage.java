@@ -55,13 +55,13 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(id = "closeButton")
 	private WebElement FeedbackModal;
 
-	@FindBy(xpath = ".//*[@id='tab-1']//div[@class='col-md-12']/h2")
+	@FindBy(xpath = "//*[@id='tab-1']/div[1]/div/h3")
 	private WebElement planName;
 
-	@FindBy(className = "bold atdd-profile-membername")
+	@FindBy(xpath = "//*[@id='tab-1']/div[1]/div/p[1]/span")
 	private WebElement memberName;
 
-	@FindBy(className = "bold atdd-profile-membernumber")
+	@FindBy(xpath = "//*[@id='tab-1']/div[1]/div/p[2]")
 	private WebElement memberId;
 
 	//@FindBy(xpath = "//*[@class='account_settings form__content']/div/flex/flex/flex-content[2]/p")
@@ -183,8 +183,12 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(className = "atdd-techsupport-block")
 	private WebElement Technicalsupportsection;
 
-	@FindBy(className = "atdd-plansupport-block")
+	//@FindBy(xpath = "//*[@id='needhelpsectioncontactus']/section/div/div[2]/div/div/div[3]/div/div")
+	@FindBy(css = ".atdd-plan-header")
 	private WebElement PlanSupportsection;
+	
+	@FindBy(xpath = "//*[@id='needhelpsectioncontactus']/section/div/div[2]/div/div/div[3]/div/div")
+	private WebElement GeneralQuestion;
 
 	public static final String Disclaimerlinkcontent_xpath = ".//*[@id='collapseDisclaimer']";
 
@@ -223,11 +227,14 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='phone-form']//button")
 	private WebElement phoneSaveButton;
+	
+	@FindBy(css = ".phoneedit .edit-btn")
+	private WebElement phoneEdit;
 
-	@FindBy(xpath = ".//*[@id='phone-form']//a[contains(text(), 'Cancel')]")
+	@FindBy(css = ".atdd-phoneedit-cancel")
 	private WebElement phoneCancelButton;
 
-	@FindBy(xpath = ".//*[@id='phone' or @id='phoneCardHeight']//div[1]//a[contains(text(), 'Cancel')]")
+	@FindBy(css = ".atdd-phoneedit-cancel")
 	private WebElement phoneTopCancelButton;
 
 	@FindBy(id = "daytimePhone")
@@ -716,6 +723,12 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	
 	@FindBy(xpath="//h1[contains(text(),'Account Settings')]")
 	private WebElement pageheading;
+	
+	@FindBy(id = "temporaryAddress")
+	private List<WebElement> tempAddressSectionPresent;
+
+	@FindBy(id = "mailingAddress")
+	private List<WebElement> mailingAddressSectionPresent;
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 
@@ -1068,6 +1081,12 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		validateNew(Technicalsupportsection);
 		validateNew(PlanSupportsection);
 	}
+	
+	public void validateneedhelpheaderShip() {
+		validateNew(NeedHelpHeader);
+		validateNew(Technicalsupportsection);
+		validateNew(GeneralQuestion);
+	}
 
 	public void clickOndisclaimerlink(JSONObject myProfilenpreferencesexpectedjson) {
 		// TODO Auto-generated method stub
@@ -1109,14 +1128,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	 * @toDo : Validates the permanent address section header
 	 */
 	public void validatepermanentaddress() {
-		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		jse.executeScript("window.scrollBy(0,400)", "");
-		try {
-			Thread.sleep(30000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		validateNew(permanentAddressSection);
 		System.out.println("*** Permananet Address is seen==> " + permanentAddressSection.isDisplayed());
 
@@ -1350,6 +1362,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		}
 
 	}
+	
 
 	/**
 	 * @toDo : Validates the presence of Cancel Button post clicking the edit
@@ -1358,10 +1371,17 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	public void validateCancelElement() {
 		// TODO Auto-generated method stub
+		phoneEdit.click();
 		Assert.assertTrue(phoneTopCancelButton.getText().equalsIgnoreCase("CANCEL"));
 
 	}
 
+	public void validateCancelElementShip() {
+		// TODO Auto-generated method stub
+		driver.findElement(By.xpath("//*[@id='phone']/div[1]/div/div/div/div/div/div/div/a")).click();
+		Assert.assertTrue(phoneTopCancelButton.getText().equalsIgnoreCase("CANCEL"));
+
+	}
 	/**
 	 * @toDo : Validates the elements of the temporary address section
 	 */
@@ -1555,8 +1575,18 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	public void validateTempAddressShip() {
 		if (tempEditButton.size() > 0) {
 
-			Assert.assertFalse(tempEditButton.size() > 0);
+			Assert.assertFalse(tempEditButton.contains("Edit"));
 
+		}
+
+	}
+	
+
+	public void validateTempAddress() {
+		if (tempEditButton.size() > 0) {
+
+			Assert.assertTrue(tempEditButton.size() > 0);
+			
 		}
 
 	}
@@ -2297,9 +2327,8 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	public void validatePhonepreffective () throws Throwable {
 
-		Thread.sleep(2000);    
+	   
 		System.out.println("Now checking Phone section for Pre-effective members");
-	  //  System.out.println("The Email section is dispalyed for preffective members on Account Set
 			validateNew(phoneSection1);
 			System.out.println("The phone section is seen ==>"+ phoneSection1.isDisplayed());
 			
@@ -2313,10 +2342,8 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	 */
 
 	public void validatepreffectiveemail () throws Throwable {
-
-		Thread.sleep(2000);    
+   
 		System.out.println("****Now checking Email section for Pre-effective members****");
-	  //  System.out.println("The Email section is dispalyed for preffective members on Account Set
 			validateNew(emailsection);
 			System.out.println("****The email section is seen ==>"+ emailsection.isDisplayed());
 			
@@ -2339,4 +2366,45 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	 {
 			Assert.assertTrue("Claims Table is not present in Claims Details Page", false);
 	}*/
+	
+	public void validatePhoneSectionWithoutEditAllowed() {
+		// TODO Auto-generated method stub
+		validateNew(phoneSection);
+		Assert.assertTrue("Edit Button is visible on the phone section", !phoneEditButton.isDisplayed());
+
 	}
+	
+	public void validateTemporaryAddressSectionWithoutEditAllowed() {
+		// TODO Auto-generated method stub
+
+		if (tempAddressSectionPresent.size() > 0) {
+			if (addTempAddressLink.isDisplayed()) {
+				Assert.fail("Add Button is visible on the temp address section");
+			}
+
+			if (editTempAddressLink.isDisplayed()) {
+				Assert.fail("Edit Button is visible on the temp address section");
+			}
+
+		}
+	}
+	
+	public void validateMailingAddressSectionWithoutEditAllowed() {
+		// TODO Auto-generated method stub
+
+		if (mailingAddressSectionPresent.size() > 0) {
+			if (mailingAddressAddButton.isDisplayed()) {
+				Assert.fail("Add Button is visible on the mailing address section");
+			}
+
+			if (mailingAddressEditLink.isDisplayed()) {
+				Assert.fail("Edit Button is visible on the mailing address section");
+			}
+
+		}
+	}
+	
+	
+	
+
+}

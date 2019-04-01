@@ -1,13 +1,15 @@
 package pages.acquisition.ulayer;
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.ole.WelcomePage;
 import atdd.framework.UhcDriver;
 public class ComparePlansPage extends UhcDriver {
@@ -33,6 +35,24 @@ public class ComparePlansPage extends UhcDriver {
 	
 	@FindBy(xpath=".//*[@id='emailSuccessMsgPopUp']")
 	private WebElement validatesuccesspopup;
+	
+	@FindBy(xpath = "//p[text()='Drug Costs from Formulary']/parent::td/following::td[1]//a")
+	private WebElement dceLink;
+
+	@FindBy(xpath = "//p[text()='Your Doctors / Providers']/parent::td/following::td[1]//a[text()='Look up your doctor']")
+	private WebElement LookUpYourDoctorLink;
+
+	@FindBy(id = "add-drug")
+	public WebElement addDrug;
+
+	@FindBy(xpath = "//span[text()='Find Care']")
+	public WebElement FindCareLink;
+
+	@FindBy(xpath = "//span[text()='1 out of 1 providers covered']")
+	public WebElement VerifyProviderCount;
+
+	@FindBy(xpath = "//a[text()='Edit provider list']")
+	public WebElement EditproviderlistLink;
 	
 		
 	public ComparePlansPage(WebDriver driver) {
@@ -138,7 +158,124 @@ public class ComparePlansPage extends UhcDriver {
 		System.out.println("Validated Thank you Message");
 		
 	}
+	
+	public DrugCostEstimatorPage clickonDCE() {
 
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validate(dceLink);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].scrollIntoView(true);", dceLink);
+		jsClickNew(dceLink);
+		waitforElement(addDrug);
+		if (validate(addDrug)) {
+			System.out.println("User is on DCE Page");
+			return new DrugCostEstimatorPage(driver);
+		} else
+			return null;
+	}
+
+	public FindCarePage clickonLookUpYourDoctor() throws InterruptedException {
+
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validate(LookUpYourDoctorLink);
+		String ParentWindow = driver.getTitle();
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].scrollIntoView(true);", LookUpYourDoctorLink);
+		jsClickNew(LookUpYourDoctorLink);
+
+		Thread.sleep(25000);
+		Set<String> handles1 = driver.getWindowHandles();
+		for (String windowHandle : handles1) {
+			if (!windowHandle.equals(ParentWindow)) {
+				driver.switchTo().window(windowHandle);
+				String title = driver.getTitle();
+				System.out.println("Window title is : " + title);
+				if (title.contains("Find Care")) {
+					System.out.println("We are on Find Care winodow opened");
+					driver.manage().window().maximize();
+					Thread.sleep(3000);
+					waitforElement(FindCareLink);
+					break;
+				}
+			} else {
+				System.out.println("Not found Expected window");
+				driver.switchTo().window(ParentWindow);
+			}
+
+		}
+		waitforElement(FindCareLink);
+		if (validate(FindCareLink)) {
+			System.out.println("User is on Find care Page");
+			return new FindCarePage(driver);
+		} else
+			return null;
+	}
+
+	public void verifyProvidercount() {
+		validate(VerifyProviderCount);
+		System.out.println("Verified Provider Count Displayed");
+		validate(EditproviderlistLink);
+		System.out.println("Verified Edit Provider Link Displayed");
+
+	}
+
+
+	public boolean validatingMedicalBenefitTextInPlanDetails(String benefitType, String expectedText, String planName) {
+		boolean validationFlag = true;
+		WebElement MedicalBenefitTypeRow;
+		WebElement ActualTextforBenefit;
+		String displayedText;
+		
+		int index = findindexofPlan_PlanCompare(planName);
+		index++;
+		MedicalBenefitTypeRow = driver.findElement(By.xpath("//p[(contains(text(), '"+benefitType+"'))]/ancestor::tr"));
+		System.out.println("The additional Benefit to Valuidate : "+benefitType);
+		ActualTextforBenefit =  driver.findElement(By.xpath("//p[(contains(text(), '"+benefitType+"'))]/ancestor::tr//td["+index+"]"));
+		displayedText = ActualTextforBenefit.getText();
+		System.out.println("Text Displayed for the Medical Benefit on Plan Compare Page : ");
+		System.out.println(displayedText);
+		String[] Expected = expectedText.split("/");
+		for(String str :Expected){
+			if(!displayedText.contains(str.trim())){
+				validationFlag = false;
+				System.out.println("Expected Text - "+str+" is NOT displayed");
+			}
+		}
+		return validationFlag;		}
+
+
+	private int findindexofPlan_PlanCompare(String planName) {
+		int index = 1;
+		List <WebElement> PlanHeadings = driver.findElements(By.xpath("//div[@ng-repeat = 'i in count']"));
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("Total Plans displayed - Total elements for Plan Name are : "+PlanHeadings.size());
+		for(WebElement currentPlanColumn : PlanHeadings){
+			WebElement PlanNameDisplay = driver.findElement(By.xpath("//div[@ng-repeat = 'i in count']["+index+"]//a[contains(@class,'ng-binding')]"));
+			if(validateNew(PlanNameDisplay) && PlanNameDisplay.getText().contains(planName)){
+				System.out.println("Index for the Plan -"+planName+" in Plan Compare is : "+index);
+				return index;
+			}
+			index++;
+		}
+		return index;
+	}
+
+	
 
 }
 

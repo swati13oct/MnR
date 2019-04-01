@@ -159,7 +159,7 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='pharmacy-locator']//div[contains(@class,'col-md-12')]/*[contains(text(),'farmacia')]")
 	WebElement pharmacyBodyContentSpanish;
 	
-	@FindBy(xpath = "//div[@class='pharmacy-locator']//div[contains(@class,'col-md-12')]/*[contains(text(),'ä½¿ç”¨ç¶²ä¸Šå��å†Šæ�œå°‹è—¥æˆ¿å’Œè—¥æˆ¿ä½�ç½®ã€‚')]")
+	@FindBy(xpath = "//div[@class='pharmacy-locator']//div[contains(@class,'col-md-12')]/*[contains(text(),'ÃƒÂ¤Ã‚Â½Ã‚Â¿ÃƒÂ§Ã¢â‚¬ï¿½Ã‚Â¨ÃƒÂ§Ã‚Â¶Ã‚Â²ÃƒÂ¤Ã‚Â¸Ã…Â ÃƒÂ¥Ã¯Â¿Â½Ã¯Â¿Â½ÃƒÂ¥Ã¢â‚¬Â Ã…Â ÃƒÂ¦Ã¯Â¿Â½Ã…â€œÃƒÂ¥Ã‚Â°Ã¢â‚¬Â¹ÃƒÂ¨Ã¢â‚¬â€�Ã‚Â¥ÃƒÂ¦Ã‹â€ Ã‚Â¿ÃƒÂ¥Ã¢â‚¬â„¢Ã…â€™ÃƒÂ¨Ã¢â‚¬â€�Ã‚Â¥ÃƒÂ¦Ã‹â€ Ã‚Â¿ÃƒÂ¤Ã‚Â½Ã¯Â¿Â½ÃƒÂ§Ã‚Â½Ã‚Â®ÃƒÂ£Ã¢â€šÂ¬Ã¢â‚¬Å¡')]")
 	WebElement pharmacyBodyContentChinese;
 	@FindBy(id = "createpdf_id")
 	WebElement resultAsPDF;
@@ -187,8 +187,21 @@ public class PharmacySearchPage extends UhcDriver {
 
     @FindBy(id = "plan-year")
     private WebElement drpYear;
+    
+    @FindBy(id = "zipcodeTxt")
+    private WebElement txtZipCode;
+    
+    @FindBy(id = "zipcode-button")
+	private WebElement searchbtn;;
 	
+	@FindBy(xpath = "//div[@class='modal-title']")
+	private WebElement countyModal;
 	
+	@FindBy(id = "multiCountyCancelBtn")
+	private WebElement MultiCOunty_CancelBtn;
+	
+
+
 	public PharmacySearchPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -229,7 +242,7 @@ public class PharmacySearchPage extends UhcDriver {
 		System.out.println("*****Zipcode, distance and County details are entered******");
 		Select dropdown = new Select(seletPlandropdown);
 		waitUntilSelectOptionsPopulated(dropdown);
-	}
+				}
 	
 	public boolean isPlanYear() {		
 		if (!planYearList.isEmpty()) {
@@ -630,11 +643,19 @@ public boolean selectPharmacyandServices(String pharmacytype) {
 			} else if (("zh").equalsIgnoreCase(language)) {
 				Assert.fail("Temporarily commented code. Please select Spanish or English!!!");
 				/*String headingText = pharmacylocatorheader.getText();
-				if (!headingText.contains("å°‹æ‰¾è—¥æˆ¿"))
+<<<<<<< HEAD
+				if (!headingText.contains("ÃƒÂ¥Ã‚Â°Ã¢â‚¬Â¹ÃƒÂ¦Ã¢â‚¬Â°Ã‚Â¾ÃƒÂ¨Ã¢â‚¬â€�Ã‚Â¥ÃƒÂ¦Ã‹â€ Ã‚Â¿"))
+=======
+				if (!headingText.contains("Ã¥Â°â€¹Ã¦â€°Â¾Ã¨â€”Â¥Ã¦Ë†Â¿"))
+>>>>>>> refs/remotes/origin/RELEASE-19-1-0
 					return false;
 				if (!pharmacyBodyContentChinese.isDisplayed())
 					return false;
-				if (!btnContinue.getText().contains("ç¹¼çºŒ"))
+<<<<<<< HEAD
+				if (!btnContinue.getText().contains("ÃƒÂ§Ã‚Â¹Ã‚Â¼ÃƒÂ§Ã‚ÂºÃ…â€™"))
+=======
+				if (!btnContinue.getText().contains("Ã§Â¹Â¼Ã§ÂºÅ’"))
+>>>>>>> refs/remotes/origin/RELEASE-19-1-0
 					return false;*/
 			} else {
 				Assert.fail("Please select a valid language!!!");
@@ -642,5 +663,35 @@ public boolean selectPharmacyandServices(String pharmacytype) {
 			}
 			return true;
 		}
-
+		 public void enterZipCode(String zipCode) {
+//				txtZipCode.clear();
+				validate(txtZipCode);
+		    	txtZipCode.sendKeys(zipCode);
+				System.out.println("Zip code entered for Pharmacy Search : "+txtZipCode.getText());
+				searchbtn.click();
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			    }
+		 public boolean validate_MultiCounty_CancelBtn() {
+				validate(countyModal);
+				boolean ValidationFlag = true;
+				if(validate(MultiCOunty_CancelBtn)){
+					MultiCOunty_CancelBtn.click();
+					if(currentUrl().contains("Pharmacy-Search") && txtZipCode.getText().isEmpty()){
+						ValidationFlag = (!ValidationFlag)?false:true;
+					}else{
+						System.out.println("Zip code entry page is not displayed with Zip code field blank");
+						ValidationFlag = false;
+					}
+				}
+				else{
+					System.out.print("Cancel Button is not dispalyed in the Multy COunty Pop-up");
+					ValidationFlag = false;
+				}
+				return ValidationFlag;
+			}
 }

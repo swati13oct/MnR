@@ -196,11 +196,11 @@ public class HSIDLoginPage extends UhcDriver {
 		}
 
 		if (driver.getCurrentUrl().contains(
-				"aa-web/evaluate?execution=e1s2&action=securityQuestion")) {
+				"=securityQuestion")) {
 
 			ConfirmSecurityQuestion cs = new ConfirmSecurityQuestion(driver);
 			try {
-				Thread.sleep(5000);
+				Thread.sleep(10000);
 				cs.enterValidSecurityAnswer();
 				System.out.println(driver.getCurrentUrl());
 				Thread.sleep(20000);
@@ -263,8 +263,6 @@ public class HSIDLoginPage extends UhcDriver {
 
 		if (MRScenario.environmentMedicare.equals("team-e")
 				|| MRScenario.environmentMedicare.equals("team-ci1")) {
-			System.out.println("TEST - 4");
-
 			Alert alert = driver.switchTo().alert();
 			alert.accept();
 		}
@@ -522,4 +520,55 @@ public class HSIDLoginPage extends UhcDriver {
 			counter++;
 		} while (counter < 2);
 	}
+	/**
+	 * @toDo : Pre-effective member login through hsid via entering security questions
+	 */
+	public Object doLoginWithpre(String username, String password) {
+
+        System.out.println(driver.getCurrentUrl());
+		sendkeys(userNameField, username);
+		sendkeys(passwordField, password);
+		signInButton.click();
+		
+		try {
+			Thread.sleep(35000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if (driver.getCurrentUrl().contains("aa-web/evaluate?execution=e1s2&action=securityQuestion"))
+		{
+			
+			
+			ConfirmSecurityQuestion cs = new ConfirmSecurityQuestion(driver);
+		    try {
+		    	Thread.sleep(5000);
+				cs.enterValidSecurityAnswer();
+				System.out.println(driver.getCurrentUrl());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		    
+		    try {
+				Thread.sleep(15000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
+		
+		else if(currentUrl().contains("member-registration-gogreen-splash.html#/individual-federal") || currentUrl().contains("/dashboard"))
+		{			    
+				System.out.println(driver.getCurrentUrl());
+				System.out.println(" %%% Navigated to save Prefrence page %%% ");				
+				
+				return new SaveProfilePrefrencePage(driver);			
+						}
+		return null;
+	}
+
 }

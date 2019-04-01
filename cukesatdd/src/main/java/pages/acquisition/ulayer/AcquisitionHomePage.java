@@ -24,6 +24,7 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import junit.framework.Assert;
+
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
@@ -178,6 +179,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
 	private WebElement OurPlans;
 
+	@FindBy(id = "nav-zipcode")
+	private WebElement OurPlans_zipfield;
+
+	@FindBy(xpath = "//*[@id = 'nav-zipcode']/following-sibling::button[@class = 'zip-button']")
+	public WebElement OurPlans_viewPlansButton;
+	
 	@FindBy(xpath = "(//*[@class='zip-button'])[2]")
 	private WebElement GoButton;
 	
@@ -208,11 +215,28 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	/* LearnAboutMedicare link */
 	@FindBy(xpath = "//*[@id='ghn_lnk_3']")
 	private WebElement lnkLearnAboutMedicare;
+	
+	@FindBy(xpath = "//*[@id='subnav_2']/div[1]/div/div[3]/div/h3[7]/a")
+	private WebElement providerSearchFromGlobalHeader;
+
+	@FindBy(xpath ="//*[@id='colhowdoesthiswork_provider']/tbody/tr/td/div/a")
+	private WebElement providerSearchFromHomeScreen;
+	
+	@FindBy(id="ghn_lnk_2")
+	private WebElement ShopForaplan;
+	
+    @FindBy(xpath=".//*[@id='updates-mobile-form']/div/div[2]/button")
+	private WebElement submit;
+
 
 	private static String TeamC_ACQUISITION_PAGE_URL = MRConstants.TeamC_UHC_URL;
 
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
 	private static String AARP_ACQISITION_OFFLINE_PAGE_URL = MRConstants.AARP_URL_OFFLINE;
+	private static String AARP_ACQISITION_PROD_PAGE_URL = MRConstants.AARP_URL_PROD;
+	private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
+	private static String UMS_ACQISITION_OFFLINE_PAGE_URL = MRConstants.UHC_URL_OFFLINE;
+	private static String UMS_ACQISITION_PROD_PAGE_URL = MRConstants.UHCM_URL_PROD;	
 
 	private PageData globalFooter;
 
@@ -254,29 +278,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		openAndValidate(alreadyOnSite);
 	}
 	
-	public JSONObject accessingGlobalHeader() {
-
-		String fileName = CommonConstants.GLOBAL_HEADER_PAGE_DATA;
-		globalHeader = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
-
-		JSONObject jsonObject = new JSONObject();
-		for (String key : globalHeader.getExpectedData().keySet()) {
-			WebElement element = findElement(globalHeader.getExpectedData().get(key));
-			if (element != null) {
-				if (validateNew(element)) {
-					try {
-						jsonObject.put(key, element.getText());
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			}
-		}
-		globalHeaderJson = jsonObject;
-
-		return globalHeaderJson;
-
+	public AcquisitionHomePage(WebDriver driver, String site) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		openAndValidate(site);
 	}
 
 	@Override
@@ -285,30 +290,71 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 		if (MRScenario.environment.equals("offline")) {
 			start(AARP_ACQISITION_OFFLINE_PAGE_URL);
-		} else {
+		}
+		else if (MRScenario.environment.equals("prod")) {
+			start(AARP_ACQISITION_PROD_PAGE_URL);
+		}else {
 			start(AARP_ACQISITION_PAGE_URL);
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("Current page URL: "+driver.getCurrentUrl());
 		checkModelPopup(driver);
 		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
-		if(proactiveChatExistBtn.size()!=0)
-			jsClickNew(proactiveChatExistBtn.get(0));
+		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
+		try{
+		if(proactiveChatExitBtn.isDisplayed())
+			jsClickNew(proactiveChatExitBtn);
+		}catch(Exception e){
+			System.out.println("Proactive chat popup not displayed");
+		}
 	}
 
+	public void openAndValidate(String site) {
+		if ("BLayer".equalsIgnoreCase(site)) {
+			if (MRScenario.environment.equals("offline")) {
+				startNew(UMS_ACQISITION_OFFLINE_PAGE_URL);
+			} else if (MRScenario.environment.equals("prod")) {
+				startNew(UMS_ACQISITION_PROD_PAGE_URL);
+			} else {
+				startNew(UMS_ACQISITION_PAGE_URL);
+			}
+			CommonUtility.checkPageIsReadyNew(driver);
+			System.out.println("Current page URL: " + driver.getCurrentUrl());
+			CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
+			CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn, 20); // do not change this to waitForPageLoadNew
+																				// as
+																				// we're not trying to fail the test if
+																				// it
+																				// isn't found
+			try {
+				if (proactiveChatExitBtn.isDisplayed())
+					jsClickNew(proactiveChatExitBtn);
+			} catch (Exception e) {
+				System.out.println("Proactive chat popup not displayed");
+			}
+		} else {
+			Assert.fail("**********Please specify site as BLayer*********");
+		}
+	}
 	@SuppressWarnings("deprecation")
 	public void openAndValidate(boolean alreadyOnSite) {
 		if (alreadyOnSite) {
 			
 		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("Current page URL: "+driver.getCurrentUrl());
 		checkModelPopup(driver);
 		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 45);
-		if(proactiveChatExistBtn.size()!=0)
-			jsClickNew(proactiveChatExistBtn.get(0));
+		try{
+			if(proactiveChatExitBtn!=null)
+			jsClickNew(proactiveChatExitBtn);
+			
+			else 
+				Assert.fail("Please check booleanvalue");
+			
+		}catch(Exception e){
+			System.out.println("Proactive chat popup not displayed");
 		}
-		else {
-			Assert.fail("Please check booleanvalue");
 		}
-		
 	}
 	
 	public VPPPlanSummaryPage searchPlans(String zipcode, String countyName) {
@@ -318,13 +364,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		viewPlansButton.click();
 		CommonUtility.waitForPageLoad(driver, countyModal, 45);
-		driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
+				driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
 		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
 		}
 		return null;
 	}
+
 
 	public VPPPlanSummaryPage searchPlansForLearnFindPlans(String zipcode, String countyName) {
 		sendkeys(learnzipCodeField, zipcode);
@@ -844,7 +891,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(footerTermsnConditionsLink);
 		validateNew(footerDisclaimersLink);
 		validateNew(footerAgentsnBrokersLink);
-		validateNew(footerRequestforAssistancelink);
+		//validateNew(footerRequestforAssistancelink);
 		validateNew(footerAccessibilitylink);
 		validateNew(aarpOrgLink);
 		validateNew(medicareAdvantagePlansLink);
@@ -932,8 +979,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	public void clickRequestAsistancce() {
 		validateNew(footerRequestforAssistancelink);
-		if(proactiveChatExistBtn.size()!=0)
-			proactiveChatExistBtn.get(0).click();
+		if(proactiveChatExitBtn!=null)
+			proactiveChatExitBtn.click();
 		footerRequestforAssistancelink.click();
 		CommonUtility.waitForPageLoadNew(driver, requestAssistanceModal, 30);
 		validateNew(requestAssistanceTitle);
@@ -1088,6 +1135,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		int counter = 0;
 		do {
 
+
+
 			System.out.println("current value of conter: " + counter);
 			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
 
@@ -1104,6 +1153,18 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			}
 			counter++;
 		} while (counter < 2);
+	}	
+	
+	public MultiCountyModalPage ValidateMultiCOuntyPopUp(String zipcode) {		
+		CommonUtility.waitForPageLoad(driver, zipCodeField, 30);
+		sendkeys(zipCodeField, zipcode);
+
+		viewPlansButton.click();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		if (countyModal.isDisplayed()) {
+			return new MultiCountyModalPage(driver);
+		}
+		return null;
 	}
 	
 	public WebElement getLnkLearnAboutMedicare() {
@@ -1119,4 +1180,63 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	
 
+	public MultiCountyModalPage SubNav_ValidateMultiCOuntyPopUp(String zipcode) {
+		hoverourplanslink();
+		validate(OurPlans_zipfield);
+		OurPlans_zipfield.click();
+		OurPlans_zipfield.sendKeys(zipcode);
+		validate(OurPlans_viewPlansButton);
+		OurPlans_viewPlansButton.click();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		if (countyModal.isDisplayed()) {
+			return new MultiCountyModalPage(driver);
+		}
+		return null;
+	}		
+	
+	public ProviderSearchPage clicksOnRallyToolFromGlobalHeader() {
+
+		Actions action = new Actions(driver);
+		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
+		validateNew(providerSearchFromGlobalHeader);
+
+		switchToNewTabNew(providerSearchFromGlobalHeader);
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("werally")) {
+
+			return new ProviderSearchPage(driver);
+
+		}
+		return null;
+	}
+
+	public ProviderSearchPage clicksOnRallyToolFromHomePage() {
+		validateNew(providerSearchFromHomeScreen);
+
+		switchToNewTabNew(providerSearchFromHomeScreen);
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("werally")) {
+
+			return new ProviderSearchPage(driver);
+
+		}
+		return null;
+	}
+	public AcquisitionHomePage hovershopaplan() throws InterruptedException {
+		
+		waitforElement(ShopForaplan);
+		if (ShopForaplan.isDisplayed()) {
+			Actions actions = new Actions(driver);
+			actions.moveToElement(ShopForaplan);
+			waitforElementNew(submit);
+			System.out.println("Submit button is displayed");
+			return new AcquisitionHomePage(driver);
+	      }
+		else {
+			return null;}
+	
+	
+}
 }

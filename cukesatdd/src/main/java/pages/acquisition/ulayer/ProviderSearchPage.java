@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -24,6 +25,8 @@ import atdd.framework.UhcDriver;
  *
  */
 public class ProviderSearchPage extends UhcDriver {
+	
+	private static final String planToBeSelected = null;
 
 	@FindBy(className = "firstTierFilterItem")
 	private WebElement physcianSearchTypes;
@@ -68,6 +71,21 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(xpath="//button[contains(text(),'Get Started')]")
 	private WebElement GetStarted;
 	
+	@FindBy(id="location")
+	private WebElement zipCodeTextfield;
+	
+	@FindBy(xpath="//*[@id='mainContent']//button")
+	private WebElement continueButton;
+	
+	@FindBy(xpath="//div[contains(@class,'searchData')]/h2/div/a[1]")
+	private WebElement PrimaryCarePhysician;
+	
+	@FindBy(xpath="//span[contains(text(),'Print / Email Providers')]")
+	private WebElement PrintEmailBtn;
+
+	@FindBy(className="saved-provider-button")
+	private WebElement SaveBtn2;
+	
 	
 	public ProviderSearchPage(WebDriver driver) {
 		super(driver);
@@ -82,6 +100,7 @@ public class ProviderSearchPage extends UhcDriver {
 
 	public VPPPlanSummaryPage selectsProvider(String physicianSearchCriteria,
 			String physicianName) {
+	
 		CommonUtility.waitForPageLoad(driver, physcianSearchTypes, 10);
 		ElementData elementData = new ElementData("linkText",
 				physicianSearchCriteria);
@@ -124,6 +143,7 @@ public class ProviderSearchPage extends UhcDriver {
 	}
 
 	public VPPPlanSummaryPage selectsProvider() {
+		CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
 	GetStarted.click();
 
 	CommonUtility.waitForPageLoadNew(driver, People, 30);
@@ -148,5 +168,72 @@ public class ProviderSearchPage extends UhcDriver {
 	driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 
 	return new VPPPlanSummaryPage(driver);
+	}
+	
+	public void entersZipcodeAndSelectPlanName(String zipcode,String planName) {
+
+		validateNew(zipCodeTextfield);	
+		zipCodeTextfield.sendKeys(zipcode);
+		validateNew(continueButton);
+		continueButton.click();
+		WebElement planNameToBeSelected = driver.findElement(By.xpath("//*[contains(text(),\'" + planName+ "\')]"));
+		planNameToBeSelected.click();
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public void selectsProviderFromGlobaHeader() {
+		
+
+		CommonUtility.waitForPageLoadNew(driver, People, 30);
+		People.click();
+
+		CommonUtility.waitForPageLoadNew(driver, Primary, 30);
+		Primary.click();
+
+		CommonUtility.waitForPageLoadNew(driver, Physician, 30);
+		Physician.click();
+		
+		CommonUtility.waitForPageLoadNew(driver, PrimaryCarePhysician, 30);
+		PrimaryCarePhysician.click();
+		
+		CommonUtility.waitForPageLoadNew(driver, SaveBtn2, 45);
+		SaveBtn2.click();
+		CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
+		Viewsavebtn.click();
+		validateNew(PrintEmailBtn);
+		
+		
+		}
+
+	public PlanDetailsPage selectsProviderFromVppPlanDetailsPage() {
+		// TODO Auto-generated method stub
+		
+		   CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
+			GetStarted.click();
+
+			CommonUtility.waitForPageLoadNew(driver, People, 30);
+			People.click();
+
+			CommonUtility.waitForPageLoadNew(driver, Primary, 30);
+			Primary.click();
+
+			CommonUtility.waitForPageLoadNew(driver, Physician, 30);
+
+			Physician.click();
+			CommonUtility.waitForPageLoadNew(driver, SaveBtn, 45);
+			SaveBtn.click();
+			CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
+
+			Viewsavebtn.click();
+
+			validateNew(Checkcoverage);
+			
+			Checkcoverage.click();
+			waitForCountDecrement(2);
+			driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+
+			return new PlanDetailsPage(driver);
+		
 	}
 }

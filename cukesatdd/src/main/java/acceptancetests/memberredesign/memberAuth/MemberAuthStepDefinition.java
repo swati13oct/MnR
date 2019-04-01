@@ -1,9 +1,12 @@
 package acceptancetests.memberredesign.memberAuth;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
@@ -11,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.mysql.jdbc.Driver;
 
 import acceptancetests.data.CommonConstants;
+import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
@@ -28,6 +32,10 @@ import pages.regression.explanationofbenefits.EOBPage;
 import pages.regression.memberauth.MemberAuthPage;
 import pages.regression.memberauth.MemberInformationPage;
 import pages.regression.memberauth.MemberSearchPage;
+import pages.regression.payments.ConfirmOneTimePaymentPage;
+import pages.regression.payments.ReviewAutomaticPage;
+import pages.regression.payments.ReviewOneTimePaymentPage;
+import pages.regression.payments.UpdateReviewPage;
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 
 /**
@@ -384,5 +392,135 @@ public class MemberAuthStepDefinition{
 		ProfileandPreferencesPage profilePreferencePage = (ProfileandPreferencesPage) getLoginScenario().getBean(PageConstants.ProfilePreferencesPage);
 		profilePreferencePage.validateEditPhoneWithMemberAuth(errorMessageExpected);
  	}
+	
+	@And("^Member Searches for the Username as per the membertype provided$")
+	public void member_searches_MemberType(DataTable memberAttributes) throws InterruptedException{
 
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String category = memberAttributesMap.get("Member Type");
+		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+		List<String> desiredAttributes = new ArrayList<String>();
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
+				.hasNext();) {
+			{
+				String key = iterator.next();
+				desiredAttributes.add(memberAttributesMap.get(key));
+			}
+
+		}
+		System.out.println("desiredAttributes.." + desiredAttributes);
+		if (desiredAttributes.size() > 1) {
+			getLoginScenario().saveBean(LoginCommonConstants.MEMBERTYPE,
+					desiredAttributes.get(1));
+		}
+
+		Map<String, String> loginCreds = loginScenario
+				.getUMSMemberWithDesiredAttributes(desiredAttributes);
+		String userName = null;
+		String pwd = null;
+		if (loginCreds == null) {
+			// no match found
+			System.out.println("Member Type data could not be setup !!!");
+			Assert.fail("unable to find a " + desiredAttributes + " member");
+		} else {
+			userName = loginCreds.get("user");
+			System.out.println("Member to search for in Member Auth is..." + userName);
+			getLoginScenario()
+					.saveBean(LoginCommonConstants.USERNAME, userName);
+		}
+
+		MemberAuthPage memberauth = (MemberAuthPage) getLoginScenario().getBean(PageConstants.Member_Auth_Login);
+		MemberAuthPage mauthPage = memberauth.MainMemberLogin(userName);
+		
+		if(mauthPage!=null){
+			getLoginScenario().saveBean(PageConstants.Member_Auth_PopUp, mauthPage);
+		} else {
+			System.out.println("mauthPage is null");
+		}
+
+	}
+	
+
+	@Then("^user navigates to Member Auth One Time payment overview and validates error message for Make one time payemnt$")
+	public void user_navigates_to_MemberAuth_OneTime_SubmitsPayment_ValidatesError(DataTable  errorText)
+			throws Throwable {
+		
+		List<DataTableRow> memberAttributesRow = errorText
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String errorMessageExpected = memberAttributesMap.get("CSR Error");
+
+		ReviewOneTimePaymentPage reviewOneTimePaymentsPage = (ReviewOneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.Review_OneTime_Payments_Page);
+		boolean Validation_Flag = reviewOneTimePaymentsPage
+				.Validate_Error_selectAgreeAndClickOnMakePayment(errorMessageExpected);
+		if(!Validation_Flag){
+			System.out.println("Error Message not displayed for Review Paymenst Page");
+			Assert.fail("Member Auth Paymnets - One Time payment - Error Message failed");
+		}	
+	}
+	
+	@Then("^user navigates to Member Auth Recurring payment overview and validates error message for Make one time payemnt$")
+	public void user_navigates_to_MemberAuth_Recurring_SubmitsPayment_ValidatesError(DataTable  errorText)
+			throws Throwable {
+		
+		List<DataTableRow> memberAttributesRow = errorText
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String errorMessageExpected = memberAttributesMap.get("CSR Error");
+
+		ReviewAutomaticPage reviewAutomaticPage = (ReviewAutomaticPage) getLoginScenario()
+				.getBean(PageConstants.Review_Automatic_Page);
+		boolean Validation_Flag = reviewAutomaticPage
+				.Validate_Error_selectAgreeAndClickOnMakePayment(errorMessageExpected);
+		if(!Validation_Flag){
+			System.out.println("Error Message not displayed for Review Paymenst Page");
+			Assert.fail("Member Auth Paymnets - Recurring payment - Error Message failed");
+		}	
+	}
+	
+	@Then("^user navigates to Member Auth Update Review Page and validates error message for Submit or Continue$")
+	public void user_navigates_to_MemberAuth_Update_ReviewPayment_ValidatesError(DataTable  errorText)
+			throws Throwable {
+		
+		List<DataTableRow> memberAttributesRow = errorText
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String errorMessageExpected = memberAttributesMap.get("CSR Error");
+
+		UpdateReviewPage updateReviewPage = (UpdateReviewPage) getLoginScenario()
+				.getBean(PageConstants.Update_Review_Page);
+		boolean Validation_Flag = updateReviewPage
+				.Validate_Error_selectAgreeAndClickOnMakePayment(errorMessageExpected);
+		if(!Validation_Flag){
+			System.out.println("Error Message not displayed for Review Paymenst Page");
+			Assert.fail("Member Auth Paymnets - Payment Update Review- Error Message failed");
+		}	
+	}
 }

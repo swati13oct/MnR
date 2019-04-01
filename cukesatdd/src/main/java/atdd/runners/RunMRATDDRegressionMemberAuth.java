@@ -14,12 +14,12 @@ import cucumber.api.CucumberOptions;
  */
 
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
+@ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",
 jsonReport = "target/cucumber-RunMRATDDRegressionMemberAuth.json",detailedReport = true, detailedAggregatedReport = true,
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionMemberAuth")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/memberAuth" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionMemberAuth.json" }, tags = { "@regressionMember" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionMemberAuth.json" }, tags = { "@MemberAuth_Payments" })
 public class RunMRATDDRegressionMemberAuth {
 
 }

@@ -157,6 +157,12 @@ public class TestHarness extends UhcDriver {
 	@FindBy(id = "home_1")
 	private WebElement panelHomePcpMedica;
 	
+	@FindBy(xpath = "//div[contains(@class,'testharnessHeader')]")
+	private WebElement testHarnessHeader;
+	
+	@FindBy(id = "premiumpayment_4")
+	private WebElement premPaymentsTab;
+	
 	String category = null;
 
 	public TestHarness(WebDriver driver) {
@@ -667,4 +673,15 @@ public class TestHarness extends UhcDriver {
 		Assert.assertTrue("Saved link is not clickable", saved.isDisplayed());
 	}
 
+	public void validatePreEffectiveMessagePresent() throws InterruptedException {
+		CommonUtility.waitForPageLoadNew(driver, testHarnessHeader, 20);
+		String preMessage_text = testHarnessHeader.getText();
+		Assert.assertTrue(preMessage_text.contains("Preeffective Test Harness"));
+		
+	}
+
+	public void validatePremiumPaymentTabIsDisplayed() {
+		validateNew(premPaymentsTab);
+		
+	}
 }

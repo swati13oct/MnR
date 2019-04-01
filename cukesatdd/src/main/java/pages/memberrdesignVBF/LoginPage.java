@@ -76,6 +76,9 @@ public class LoginPage extends UhcDriver {
 			if ("team-ci1".equalsIgnoreCase(MRScenario.environment)
 					|| "team-ci2".equalsIgnoreCase(MRScenario.environment)) {				
 				PAGE_URL = MRConstants.TEAMCI_TESTHARNESS;
+			}else if ("offline-stage".equalsIgnoreCase(MRScenario.environment)) {
+					PAGE_URL = MRConstants.OFFLINE_STAGE_TESTHARNESS;
+					
 			} else {
 				PAGE_URL = MRConstants.TESTHARNESS.replace("awe-", "");
 			}
@@ -89,12 +92,20 @@ public class LoginPage extends UhcDriver {
 				} else {
 					PAGE_URL = MRConstants.LEGACY_TESTHARNESS;
 				}
+			} else if ("team-a".equalsIgnoreCase(MRScenario.environment)) {
+				PAGE_URL = MRConstants.OSE_NEW_URL;
 			} else {
 				PAGE_URL = MRConstants.LEGACY_TESTHARNESS.replace("awe-", "");
 			}
 		} else if ("NO".equalsIgnoreCase(MRScenario.isTestHarness)
 				& "YES".equalsIgnoreCase(MRScenario.isHSIDCompatible)) {
-			PAGE_URL = MRConstants.DASHBOARD.replace("awe-", "");
+					
+					 if ("offline-stage".equalsIgnoreCase(MRScenario.environment)) 
+					
+						PAGE_URL = MRConstants.OFFLINE_STAGE_TESTHARNESS;
+					
+						else 
+						PAGE_URL = MRConstants.DASHBOARD.replace("awe-", "");
 		} else if ("NO".equalsIgnoreCase(MRScenario.isTestHarness)
 				& "NO".equalsIgnoreCase(MRScenario.isHSIDCompatible)) {
 			PAGE_URL = MRConstants.LEGACY_DASHBOARD.replace("awe-", "");
@@ -175,8 +186,11 @@ public class LoginPage extends UhcDriver {
 				return null;
 			}
 			counter++;
-		} while (!((driver.getTitle().contains("Home")) || (driver.getTitle().contains("Test Harness"))));
-
+		} while (!((driver.getTitle().contains("Home")) || (driver.getTitle().contains("Test Harness")) || (driver.getTitle().contains("No Email"))));
+		
+		if(currentUrl().contains("login/no-email.html")){
+			driver.get("https://"+MRScenario.environment+"-medicare.ose-elr-core.optum.com/content/medicare/member/testharness.html");
+		}
 		System.out.println("Current URL: " + currentUrl());
 		if (currentUrl().contains("member/testharness.html")) {
 			return new TestHarness(driver);

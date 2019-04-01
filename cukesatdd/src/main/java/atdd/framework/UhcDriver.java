@@ -35,6 +35,8 @@ public abstract class UhcDriver {
 	public WebDriver driver;
 
 	public void start(String url) {
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.manage().window().maximize();
 		driver.get(url);
 	}
 
@@ -618,6 +620,32 @@ try {
 	public void waitforElementVisibilityInTime(WebElement element, long timeout) {
 		WebDriverWait wait = new WebDriverWait(driver, timeout);
 		wait.until(ExpectedConditions.visibilityOf(element));
+
+	}
+	
+	/***
+	 * Created By - agarg119
+	 * the method waits for mentioned seconds till element gets clickable
+	 * throwing an exception
+	 * 
+	 * @param element
+	 */
+	public void waitTillElementClickableInTime(WebElement element, long timeout) {
+		WebDriverWait wait = new WebDriverWait(driver, timeout);
+		wait.until(ExpectedConditions.elementToBeClickable(element));
+
+	}
+	
+	/***
+	 * Created By - agarg119
+	 * the method waits for the iframe to be available and switch to it
+	 * throwing an exception
+	 * 
+	 * @param element
+	 */
+	public void waitTillFrameAvailabeAndSwitch(WebElement element, long timeout) {
+		WebDriverWait wait = new WebDriverWait(driver, timeout);
+		wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(element));
 
 	}
 }

@@ -10,18 +10,22 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
+import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
+import pages.regression.testharness.*;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.regression.claims.ClaimSummarypage;
@@ -29,6 +33,8 @@ import pages.regression.formsandresources.FormsAndResourcesPage;
 import pages.regression.login.HSIDLoginPage;
 import pages.regression.login.HsidRegistrationPersonalCreateAccount;
 import pages.regression.login.HsidRegistrationPersonalInformationPage;
+import pages.regression.login.SaveProfilePrefrencePage;
+import pages.regression.payments.PaymentHistoryPage;
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 /**
  * 
@@ -51,19 +57,44 @@ public class PreEffectiveStepDefinition{
 @Given("^verify that preeffective message is displayed on the home page$")
 public void verifyPreEffectiveMessageDisplayedOnDashboardHomePage() throws Throwable {
 	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-	Thread.sleep(10000);
+	
 	AccountHomePage.checkForIPerceptionModel(accountHomePage.driver);
 	accountHomePage.validatePreEffectiveMessagePresent();	
     getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
 	
 }
-@Given("^verify that payment tab is not displayed to Preeffective member on dashboard$")
+
+@Given("^verify that preeffective message is displayed on the test harness page$")
+public void verifyPreEffectiveMessageDisplayedOnTestHarnessPage() throws Throwable {
+	TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
+	testHarnessPage.validatePreEffectiveMessagePresent();	
+    getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE, testHarnessPage);
+	
+}
+
+@Given("^verify that payment tab is displayed to Preeffective member on dashboard$")
 public void verifyPaymentsTabNotDisplayedOnDashboardHomePage() throws Throwable {
 	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-	Thread.sleep(3000);	
+	
 	AccountHomePage.checkForIPerceptionModel(accountHomePage.driver);
 	accountHomePage.validatePremiumPaymentTabNotDisplayed();	
 	getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
+	
+}
+
+@Given("^verify that payment tab is displayed to Preeffective member on test harness page$")
+public void verifyPaymentsTabNotDisplayedOnDashTestHarnessPage() throws Throwable {
+	TestHarness  testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
+	testHarnessPage.validatePremiumPaymentTabIsDisplayed();	
+	getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE, testHarnessPage);
+	
+}
+
+@And("^user goes to payments page and verifies that correct view is displayed$")
+public void verifyPaymentsPage() throws Throwable {
+	TestHarness  testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
+	PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) testHarnessPage.navigateToPaymentOverview();	
+	getLoginScenario().saveBean(PageConstants.PAYMENT_HISTORY_PAGE, paymentHistoryPage);
 	
 }
 
@@ -77,12 +108,19 @@ public void userClicksOnBenefitAndCoveragePage() throws Throwable {
 	
 }
 
+@Then("^user clicks on the benefits and coverage tab from Payments page$")
+public void userGoesToBenefitAndCoveragePage() throws Throwable {
+	PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.PAYMENT_HISTORY_PAGE);
+	BenefitsAndCoveragePage benefitsCoveragePage = paymentHistoryPage.clickOnBenefitsAndCoverageTab();
+	getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
+	
+}
+
 @Then("^verify that subnavigation is supressed on the coverage and benefits page$")
 public void validateBenefitsAndCoverageSubNavigationIsNotDisplayed() throws Throwable {
 	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 			.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
-	Thread.sleep(5000);
-	BenefitsAndCoveragePage.checkModelPopup(benefitsCoveragePage.driver);
+	//BenefitsAndCoveragePage.checkModelPopup(benefitsCoveragePage.driver);
 	benefitsCoveragePage.validatePlanBenefitsSummarySubNavNotDisplayed();
 	benefitsCoveragePage.validatePlanDocumentsResourcesSubNavNotDisplayed();
 	benefitsCoveragePage.validateOrderPlanMaterialsSubNavNotDisplayed();
@@ -92,7 +130,7 @@ public void validateBenefitsAndCoverageSubNavigationIsNotDisplayed() throws Thro
 public void validateCorrectMessageIsDisplayedOnBenefitsCoevargePage() throws Throwable {
 	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 			.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
-	Thread.sleep(2000);
+	
 	benefitsCoveragePage.verifyCorrectMessageForPreEffectiveMembers();
 
 }
@@ -111,9 +149,7 @@ public void clickViewPlanDocumentsButton() throws Throwable {
 	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 			.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 	BenefitsAndCoveragePage.checkModelPopup(benefitsCoveragePage.driver);
-    benefitsCoveragePage.clickViewPlanDocumentsButton();
-    System.out.println("Now waiting for 85 seconds as this page takes a lot of time to load :( ");
-    Thread.sleep(85000);    
+    benefitsCoveragePage.clickViewPlanDocumentsButton();  
     FormsAndResourcesPage formsAndResourcesPage = new FormsAndResourcesPage(benefitsCoveragePage.driver);
 	getLoginScenario().saveBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE, formsAndResourcesPage);
                
@@ -142,7 +178,6 @@ public void verifySubnavigationIsSuppressedOnClaimsPage() throws Throwable {
 	
 	ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario()
 			.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);   
-	Thread.sleep(5000);
 	//write code for handling iperception pop-up
 	//newclaimsSummarypage.feebackpopupClose();
 	ClaimSummarypage.checkForIPerceptionModel(newclaimsSummarypage.driver);
@@ -188,10 +223,17 @@ public void verifyPaymentTabIsNOTDisplayedOnClaimsPage() throws Throwable {
 @Given("^the user clicks on Account Profile tab & selects Account Settings from the drop down$")
 public void userClicksOn_Account_settings() throws Throwable {
 	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-	Thread.sleep(3000);
 	AccountHomePage.checkForIPerceptionModel(accountHomePage.driver);
 	ProfileandPreferencesPage ppp = accountHomePage.navigateDirectToProfilePage();
 	getLoginScenario().saveBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE,ppp);	
+}
+
+@Given("^the user clicks on Account Profile tab & selects Account Settings from the drop down from claims page$")
+public void userClicksOn_Account_settings_from_claims_page() throws Throwable {
+	ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario()
+			.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+	ProfileandPreferencesPage profileAndPrefPage = newClaimsSummaryPage.navigateDirectToProfilePage();
+	getLoginScenario().saveBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE,profileAndPrefPage);	
 }
 
 @Given("^user is navigated to Account Settings page$")
@@ -207,7 +249,6 @@ public void verify_preffectiev_member_can_access_the_page() throws Throwable {
 	ProfileandPreferencesPage.checkForIPerceptionModel(ppp.driver);
 	ppp.validatepermanentaddress();
 	ppp.validatePhonepreffective();
-	ppp.validatepreffectiveemail();
 }
 
 @Given("^verify that the pre effecctive group member can access the account settings page to view security and sign-in preferences$")
@@ -305,5 +346,26 @@ public void enter_username_password_re_enter_password_email_re_enter_email(DataT
 	hsidRegistrationPersonalCreateAccount.enterEmail(email);
 	hsidRegistrationPersonalCreateAccount.enterConfirmEmail(email);	
     
+}
+@When("^Preffective user lands on the splash page & clicks on Save Prefrences$")
+public void preffective_user_lands_on_splash_page(){
+	
+	SaveProfilePrefrencePage SplashPage = (SaveProfilePrefrencePage) loginScenario.getBean(PageConstantsMnR.GO_GREEN_SPLASH_PAGE);
+
+		System.out.println("*** navigated to Splash page ***");
+		SplashPage.verifyTitleOfPage();
+		SplashPage.validateonlinedelivery();
+		pages.regression.accounthomepage.AccountHomePage accountHomePage = SplashPage.NavigateToAccHomePage(); 	
+		if (accountHomePage!= null){
+			loginScenario.saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);    	
+			Assert.assertTrue(true);
+
+		}	
+}
+@When("^the Preffective member lands on the dashboard$")
+public void preffective_member_lands_on_dashboard() throws Throwable{
+	AccountHomePage accounthomepage = (AccountHomePage) loginScenario.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+System.out.println("	going to validate account home page ");
+	accounthomepage.validateHomePage1();
 }
 }

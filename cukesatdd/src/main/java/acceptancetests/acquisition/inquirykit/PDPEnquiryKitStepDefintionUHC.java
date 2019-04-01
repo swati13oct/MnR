@@ -66,12 +66,16 @@ public class PDPEnquiryKitStepDefintionUHC {
 		
 		PDPEnrollementGuidePage pdpEnrollementGuidePage = (PDPEnrollementGuidePage) getLoginScenario().getBean(PageConstants.PDP_ENROLLMENT_GUIDE_PAGE);
 		pdpEnrollementGuidePage.entersDetails(personalAttributesMap);
+		if (!(MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))) {
 		EnquiryKitConfirmationPage enquiryKitConfirmationPage = pdpEnrollementGuidePage.submitsRequest();
 		if(enquiryKitConfirmationPage!=null){
 				Assert.assertTrue(true);
 		}else
 			Assert.fail("Not able to submit the form. Confirmation page is null.");
-		
+		}
+		else {
+			System.out.println("Skipping the submit functionality in Offline-Prod/Prod environment");
+		}
 	}		
 	
 	/**

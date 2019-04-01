@@ -12,9 +12,9 @@ import cucumber.api.CucumberOptions;
  * @author schak38
  *
  */
-
+ 
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
+@ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",
 jsonReport = "target/cucumber-RunMRATDDRegressionSSO.json",detailedReport = true, detailedAggregatedReport = true,
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionSSO")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 

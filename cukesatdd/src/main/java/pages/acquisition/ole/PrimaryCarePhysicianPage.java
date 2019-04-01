@@ -36,7 +36,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 	private WebElement CancelEnrollmentLink;
 
 	//Page Header
-	@FindBy(xpath = "//*[@class='only-prelim']")
+	@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-prelim')]")
 	private WebElement PCPPageHeader;
 
 	//Right Rail Elements
@@ -67,7 +67,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 	@FindBy(xpath = "//a[contains(text(), 'Primary Care Physician')]")
 	private WebElement SelectPCPLink;
 
-	@FindBy(xpath = "//*[contains(text(), 'Select PCP')]")
+	@FindBy(xpath = "//span[@class='pcp']//button")
 	private List <WebElement> AssinPCPLinks;
 
 	@FindBy(xpath = ".//*[@id='label_selectedLocation0_acceptingExistingPatientsOnly' or @id = 'label_selectedLocation0_accepting']")
@@ -89,7 +89,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 	private WebElement ProviderName;
 	
 	//PCP Page - PCP information display
-	@FindBy(xpath = "//*[@class='provider-info__data']")
+	@FindBy(xpath = "//*[@id = 'pcpFullName']//preceding-sibling::*[contains(@class, 'provider-info__data')]")
 	private WebElement ProviderNameDisplay_PCPpage;
 
 	@FindBy(xpath = "//*[contains(text(), 'Are you now seeing or have you recently seen this doctor?')]")
@@ -164,7 +164,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoadNew(driver, LookUpProviderBtn, 30);
+		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
 		validateNew(PCPPageHeader);
 		System.out.println("Page header is Displayed"+PCPPageHeader.getText());	
 	}
@@ -232,10 +232,13 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 						System.out.println("PCP selection is Displayed in Rally Page : Selecting PCP");
 						SelectPCPLink.click();
 						try {
-							Thread.sleep(2000);
+							Thread.sleep(4000);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
+						}
+						if (AssinPCPLinks.size()>0){
+						System.out.println("No of PCPs are Displayed : "+AssinPCPLinks.size());
 						}
 						WebElement firstPCP = AssinPCPLinks.get(0);
 						firstPCP.click();
@@ -264,7 +267,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 							e.printStackTrace();
 						}
 						try {
-							Thread.sleep(1000);
+							Thread.sleep(3000);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -284,8 +287,9 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 						driver.switchTo().window(PCPWindow);
 						if(driver.getCurrentUrl().contains("provider-search")){
 							System.out.println("OLE PCP Page is displayed : Provider Look up is Complete");
+							waitforElement(ProviderNameDisplay_PCPpage);
 							String ProviderNameDisplay = ProviderNameDisplay_PCPpage.getText();
-							if(PCPname.contains(ProviderNameDisplay) && validate(CurrentPCP_Question) 
+							if(PCPname.contains(ProviderNameDisplay)
 									&& validate(CurrentPCP_Question_Yes) && validate(CurrentPCP_Question_No)){
 								System.out.println("PCP Name is Displayed"+ProviderNameDisplay);
 								System.out.println("PCP Question and OPtions are Displayed");
@@ -297,18 +301,17 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 						System.out.println("Rally Provider Lookup page is not displayed");
 						validation_Flag = false; 
 					}
-				//}
+			}
 			}
 			else{
 				System.out.println("Rally Provider Lookup page is not displayed");
 				validation_Flag = false; 
 			}
-
-		}
+	/*
 		else{
 			System.out.println("Provider Look Up button is not displaye");
 			validation_Flag = false;
-		}
+		}*/
 		return validation_Flag;
 	
 	}

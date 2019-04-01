@@ -54,7 +54,7 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(id="gf_lnk_10")
 	public static WebElement footerAccessibilitylink;
 	
-	@FindBy(xpath = "//footer[@class ='footer']//*[contains(text(),'Visit AARP.org')]")
+	@FindBys(value = { @FindBy(xpath = "//div[contains(@class,'globalfooternav')]//a[contains(text(),'Visit AARP.org')]") })
 	public static WebElement aarpOrgLink;
 	
 	@FindBys(value = { @FindBy(id = "footnotes1" )})
@@ -216,8 +216,8 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(id="cover")
 	public static WebElement RequestforAssistancepopup;
 	
-	@FindBy(xpath="//div[contains(@class,'proactive-offer__close')]")
-	public static List<WebElement> proactiveChatExistBtn;
+	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button proactive-offer__close main-background-color second-color')]")
+	public static WebElement proactiveChatExitBtn;
 	
 	
 	public void ourPlansHover() {

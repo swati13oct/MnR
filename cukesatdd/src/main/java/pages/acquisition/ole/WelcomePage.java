@@ -5,6 +5,7 @@ package pages.acquisition.ole;
 
 import java.util.Map;
 
+import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -33,7 +34,7 @@ public class WelcomePage extends UhcDriver{
 	private WebElement CancelEnrollmentLink;
 	
 	// WebElements for Welcome Page
-	@FindBy(xpath = "//*[@class = 'only-intro']")
+	@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class, 'only-intro')]")
 	private WebElement WelcomePageHeader;
 
 	@FindBy(id = "view-learn-enrollment")
@@ -68,6 +69,21 @@ public class WelcomePage extends UhcDriver{
 	
 	@FindBy(id = "tty-number")
 	private WebElement RightRailTFN;
+	
+	@FindBy(xpath = "//*[text()='Coverage Details']")
+	private WebElement CoverageDetailswdt;
+	
+	@FindBy(xpath = "//li[contains(text(), normalize-space('Dental'))]//img")
+	private WebElement DentalImg;
+	
+	@FindBy(xpath = "//li[contains(text(), normalize-space('Vision'))]//img")
+	private WebElement VisionImg;
+	
+	@FindBy(xpath = "//li[contains(text(), normalize-space('Fitness'))]//img")
+	private WebElement FitnessImg;
+	
+	@FindBy(xpath = "//li[contains(text(), normalize-space('Hearing'))]//img")
+	private WebElement HearingImg;
 		
 	public WelcomePage(WebDriver driver) {
 		
@@ -252,5 +268,54 @@ public class WelcomePage extends UhcDriver{
 			return new LeavingOLEmodal(driver);
 		}
 		return null;
+	}
+	
+	public void validateBenefits(boolean riderFlag, WebElement riderBenefit) throws Exception {
+
+		if (riderFlag) {
+			for (int i = 0; i <= 5; i++) {
+				try {
+					waitforElement(riderBenefit);
+					validate(riderBenefit);
+					Assert.assertTrue("Rider Benefit is not available for this plan",
+							riderBenefit.getAttribute("class").contains("benefitAvailable"));
+					System.out.println("Benfit is Available");
+					break;
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
+				System.out.println("TestWarning: Unable to find element : Retry Count - " + i);
+			}
+
+		} else {
+			for (int i = 0; i <= 5; i++) {
+				try {
+					waitforElement(riderBenefit);
+					validate(riderBenefit);
+					Assert.assertTrue("Rider Benefit is available for this plan",
+							riderBenefit.getAttribute("class").contains("benefitUnavailable"));
+					System.out.println("Benfit is UnAvailable");
+					break;
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
+				System.out.println("TestWarning: Unable to find element : Retry Count - " + i);
+			}
+		}
+	}
+
+	
+	public void validate_Ancillary_Benefits(String DentalFlag, String VisionFlag,String FitnessFlag,String HearingFlag) throws Exception {
+		boolean di = Boolean.parseBoolean(DentalFlag);
+		boolean vi = Boolean.parseBoolean(VisionFlag);
+		boolean fi = Boolean.parseBoolean(FitnessFlag);
+		boolean hi = Boolean.parseBoolean(HearingFlag);
+		
+		waitforElement(CoverageDetailswdt);
+		validate(CoverageDetailswdt);
+		validateBenefits(di, DentalImg);		
+		validateBenefits(vi, VisionImg);
+		validateBenefits(fi, FitnessImg);
+		validateBenefits(hi, HearingImg);	
 	}
 }

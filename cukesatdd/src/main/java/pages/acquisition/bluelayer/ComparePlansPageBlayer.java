@@ -1,11 +1,14 @@
 package pages.acquisition.bluelayer;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.ole.WelcomePage;
@@ -34,6 +37,29 @@ public class ComparePlansPageBlayer extends UhcDriver {
 	@FindBy(xpath=".//*[@id='emailSuccessMsgPopUp']")
 	private WebElement validatesuccesspopup;
 	
+	@FindBy(xpath=".//*[@id='emailSuccessMsgPopUp']/div/form/div[2]/button")
+	private WebElement closeButtonthankyoumessagepopup;
+	
+	@FindBy(linkText ="Back to all plans")
+	private WebElement topbackToPlanslink;
+	
+	@FindBy(xpath = "//p[text()='Drug Costs from Formulary']/parent::td/following::td[1]//a")
+	private WebElement dceLink;
+
+	@FindBy(xpath = "//p[text()='Your Doctors / Providers']/parent::td/following::td[1]//a[text()='Look up your doctor']")
+	private WebElement LookUpYourDoctorLink;
+
+	@FindBy(id = "add-drug")
+	public WebElement addDrug;
+
+	@FindBy(xpath = "//span[text()='Find Care']")
+	public WebElement FindCareLink;
+
+	@FindBy(xpath = "//span[text()='1 out of 1 providers covered']")
+	public WebElement VerifyProviderCount;
+
+	@FindBy(xpath = "//a[text()='Edit provider list']")
+	public WebElement EditproviderlistLink;
 		
 	public ComparePlansPageBlayer(WebDriver driver) {
 		super(driver);
@@ -137,6 +163,97 @@ public class ComparePlansPageBlayer extends UhcDriver {
 		validateNew(validatesuccesspopup);
 		System.out.println("Validated Thank you Message");
 		
+	}
+
+
+	public void validatingthankyoumessage() {
+		// TODO Auto-generated method stub
+		closeButtonthankyoumessagepopup.click();
+		System.out.println("Thank you Message pop up is closed");
+	}
+
+
+	public void validatetopbacktoplanslink() {
+		// TODO Auto-generated method stub
+		System.out.println("i am in");
+    	topbackToPlanslink.click();
+    	System.out.println("i clicked");
+    	if (driver.getCurrentUrl().contains("health-plans.html#/plan-summary"))
+    	{
+    		Assert.assertTrue(true);
+    	}
+    	
+    	else Assert.assertTrue(false);
+	}
+
+	public DrugCostEstimatorPage clickonDCE() {
+
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validate(dceLink);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].scrollIntoView(true);", dceLink);
+		jsClickNew(dceLink);
+		waitforElement(addDrug);
+		if (validate(addDrug)) {
+			System.out.println("User is on DCE Page");
+			return new DrugCostEstimatorPage(driver);
+		} else
+			return null;
+	}
+
+	public FindCarePage clickonLookUpYourDoctor() throws InterruptedException {
+
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validate(LookUpYourDoctorLink);
+		String ParentWindow = driver.getTitle();
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].scrollIntoView(true);", LookUpYourDoctorLink);
+		jsClickNew(LookUpYourDoctorLink);
+
+		Thread.sleep(25000);
+		Set<String> handles1 = driver.getWindowHandles();
+		for (String windowHandle : handles1) {
+			if (!windowHandle.equals(ParentWindow)) {
+				driver.switchTo().window(windowHandle);
+				String title = driver.getTitle();
+				System.out.println("Window title is : " + title);
+				if (title.contains("Find Care")) {
+					System.out.println("We are on Find Care winodow opened");
+					driver.manage().window().maximize();
+					Thread.sleep(3000);
+					waitforElement(FindCareLink);
+					break;
+				}
+			} else {
+				System.out.println("Not found Expected window");
+				driver.switchTo().window(ParentWindow);
+			}
+
+		}
+		waitforElement(FindCareLink);
+		if (validate(FindCareLink)) {
+			System.out.println("User is on Find care Page");
+			return new FindCarePage(driver);
+		} else
+			return null;
+	}
+
+	public void verifyProvidercount() {
+		validate(VerifyProviderCount);
+		System.out.println("Verified Provider Count Displayed");
+		validate(EditproviderlistLink);
+		System.out.println("Verified Edit Provider Link Displayed");
+
 	}
 
 

@@ -84,6 +84,8 @@ public static final String ACCOUNT_HOME_PAGE = "accountHomePage";
 	public static final String ZIP_SELECTION_HOME_PAGE = "zipcodeSelectionhomePage";
 	
 	public static final String DRUG_COST_ESTIMATOR_PAGE = "drugCostEstimatorPage";
+	
+	public static final String FIND_CARE_PAGE = "findCarePage";
 
 	public static final String OUR_PLANS_PAGE = "ourPlansPage";
 
@@ -134,6 +136,12 @@ public static final String ACCOUNT_HOME_PAGE = "accountHomePage";
 	public static final String MEET_WITH_AN_AGENT = "meetWithAnAgentPage";
 
 	public static final String REQUEST_AGENT_APPOINTMENT_PAGE = "requestAgentAppointmentPage";
+	
+    public static final String SHOP_FOR_A_PLAN_UHCLAYER = "ShopforaplanUHClayer";	
+	
+	public static final String REQUEST_MAILED_INFORMATION = "Requestmailedinformation";
+	
+	public static final String REQUEST_MAILED_INFORMATION_UHC = "RequestmailedinformationUHC";
 
 	public static final String MA_VPP_PAGE = "maViewPlansAndPricingPage";
 
@@ -637,6 +645,8 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 	public static final String NEW_CC_BUTTON = "NewCCButton";
 	
 	public static final String MEDICARE_ELIGIBILITY_PAGE = "medicareEligibilityPage";
+	
+	public static final String MEDSUPP_OLE_PAGE = "medSuppOLEPage";
 
 	
 }

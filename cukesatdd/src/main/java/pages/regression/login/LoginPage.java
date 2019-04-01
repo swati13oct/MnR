@@ -14,7 +14,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pages.memberrdesignVBF.RallyDashboardPage;
-import pages.memberrdesignVBF.TestHarness;
+import pages.memberrdesignVBF.SecurityQuestionsPage;
+import pages.regression.testharness.*;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.login.AssistiveRegistrationPage;
 import pages.regression.login.ConfirmSecurityQuestion;
@@ -79,7 +80,16 @@ public class LoginPage extends UhcDriver {
 			openAndValidate();
 			
 		}
-		
+
+		private boolean teamSpecialCase;
+		public LoginPage(WebDriver driver, boolean input_teamSpecialCase) {
+			super(driver);
+			PageFactory.initElements(driver, this);
+			teamSpecialCase=input_teamSpecialCase;
+			openAndValidate();
+			
+		}
+
 		public void openAndValidate() {
 			if ("YES".equalsIgnoreCase(MRScenario.isTestHarness) & "YES".equalsIgnoreCase(MRScenario.isHSIDCompatible)) {
 				if ("team-ci1".equalsIgnoreCase(MRScenario.environment)
@@ -93,7 +103,14 @@ public class LoginPage extends UhcDriver {
 				if ("team-ci1".equalsIgnoreCase(MRScenario.environment)
 						|| "team-ci2".equalsIgnoreCase(MRScenario.environment)) {
 					PAGE_URL = MRConstants.LEGACY_TESTHARNESS;
-				} else {
+				}  else if("team-a".equalsIgnoreCase(MRScenario.environment)){
+					System.out.println("Running on team-a env, teamSpecialCase="+teamSpecialCase);
+					if (teamSpecialCase) {
+						PAGE_URL=MRConstants.OSE_NEW_URL_PCP_OR_MEDIA;
+					} else {
+						PAGE_URL=MRConstants.OSE_NEW_URL;	
+					}
+				}else {
 					PAGE_URL = MRConstants.LEGACY_TESTHARNESS.replace("awe-", "");
 				}
 			} else if ("NO".equalsIgnoreCase(MRScenario.isTestHarness)
@@ -168,6 +185,95 @@ public class LoginPage extends UhcDriver {
 			int counter = 0;
 
 			do {
+				
+				try {
+					alert = wait.until(ExpectedConditions.alertIsPresent());
+					alert.accept();
+					System.out.println("Alert accepted inside 2nd try block");
+				} catch (NoAlertPresentException ex) {
+					System.out.println("NoAlertPresentException - No Aert Presernt...");
+				} catch (TimeoutException ex) {
+					System.out.println("TimeoutException - No Aert Presernt...");
+				}
+				if (driver.getTitle().contains("Internal Error") || driver.getTitle().contains("Sign In")) {
+					System.out.println("Error !!!");
+					return null;
+				}
+				if (counter < 35) {
+					Thread.sleep(2000);
+					System.out.println("Time elapsed post sign In clicked --" + counter + "*2 sec.");
+				} else {
+					System.out.println("TimeOut!!!");
+					return null;
+				}
+				counter++;
+			} while (!((driver.getTitle().contains("Home")) || (driver.getTitle().contains("Test Harness")) || (driver.getTitle().contains("No Email"))));
+			
+			if(currentUrl().contains("login/no-email.html")){
+				driver.get("https://"+MRScenario.environment+"-medicare.ose-elr-core.optum.com/content/medicare/member/testharness.html");
+			}
+			System.out.println("Current URL: " + currentUrl());
+			if (currentUrl().contains("member/testharness.html")) {
+				//vvv note: temp-workaround for team-a env for now
+				if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a")) {
+					return new AccountHomePage(driver);
+				}
+				//^^^ note: temp-workaround for team-a env for now
+				return new TestHarness(driver);
+			} else if (currentUrl().contains("terminated-plan.html")) {
+				return new TerminatedHomePage(driver);
+			} else if (currentUrl().contains("/dashboard")) {
+				return new RallyDashboardPage(driver);
+			}
+			return null;
+		}
+		
+		
+		public Object loginWith(String username, String password) {
+
+			sendkeysNew(hsiduserNameField, username);
+			sendkeysNew(hsidpasswordField, password);
+			signInHsidButton.click();
+			System.out.println("Sign In clicked");
+			try {
+				Alert alert = driver.switchTo().alert();
+				alert.accept();
+				Alert alert1 = driver.switchTo().alert();
+				alert1.accept();
+			} catch (Exception e) {
+				System.out.println("No Such alert displayed");
+			}
+			int counter = 0;
+			do {
+				if (counter <= 9) {
+					try {
+						Thread.sleep(5000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					System.out.println("Time elapsed post sign In clicked --" + counter + "*5 sec.");
+				} else {
+					System.out.println("TimeOut!!!");
+					return null;
+				}
+				counter++;
+			} while (!(driver.getTitle().contains("security questions")));
+
+			if (currentUrl().contains("=securityQuestion")) {
+				return new SecurityQuestionsPage(driver);
+			}
+			return null;
+		}
+		
+		public Object navigateToHomePage() throws InterruptedException {
+
+			// CommonUtility.checkPageIsReady(driver);
+			WebDriverWait wait = new WebDriverWait(driver, 5);
+			Alert alert;
+			int counter = 0;
+
+			do {
 				if (counter <= 20) {
 					Thread.sleep(5000);
 					System.out.println("Time elapsed post sign In clicked --" + counter + "*5 sec.");
@@ -193,103 +299,11 @@ public class LoginPage extends UhcDriver {
 
 			System.out.println("Current URL: " + currentUrl());
 			if (currentUrl().contains("member/testharness.html")) {
-				return new AccountHomePage(driver);
+				return new TestHarness(driver);
 			} else if (currentUrl().contains("terminated-plan.html")) {
-				return new AccountHomePage(driver);
-			} else if (currentUrl().contains("/dashboard")) {
-				return new AccountHomePage(driver);
-			}
-			return null;
-		}
-		
-		
-		public Object doLoginWith(String username, String password) {
-
-	        System.out.println(driver.getCurrentUrl());
-			sendkeys(hsiduserNameField, username);
-			sendkeys(hsidpasswordField, password);
-			signInHsidButton.click();
-			
-			try {
-				Thread.sleep(20000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			if (driver.getCurrentUrl().contains("aa-web/evaluate?execution=e1s2&action=securityQuestion"))
-			{
-				
-				
-				ConfirmSecurityQuestion cs = new ConfirmSecurityQuestion(driver);
-			    try {
-					cs.enterValidSecurityAnswer();
-					System.out.println(driver.getCurrentUrl());
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			
-			else if(currentUrl().contains("testharness.html") || currentUrl().contains("/dashboard"))
-			{
-				
-					System.out.println("test");
-					System.out.println(driver.getCurrentUrl());
-					CommonUtility.waitForPageLoad(driver, bencovtab, 20);
-				    return new AccountHomePage(driver);
-			}
-			
-			else
-			{
-				System.out.println("teamhloginWith is returing null. Please Update the above condition As per your Needs");
-			}
-			
-			if ( MRScenario.environmentMedicare.equals("team-e") || MRScenario.environmentMedicare.equals("team-ci1")){
-
-				Alert alert = driver.switchTo().alert();
-				alert.accept();
-			} 
-			
-			try {
-				Thread.sleep(25000);
-			} catch (InterruptedException e) 
-			{
-			// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			
-			if(currentUrl().contains("testharness.html") || currentUrl().contains("/dashboard"))
-	        {
-				System.out.println("test");
-				System.out.println(driver.getCurrentUrl());
-				return new AccountHomePage(driver);
-			}
-			else if(currentUrl().contains("home/my-account-home.html")  || currentUrl().contains("/login.html") ) {
-				return new AccountHomePage(driver);
-			}
-			else if (currentUrl().contains("terminated-plan.html")) {
 				return new TerminatedHomePage(driver);
-			}
-
-			else{
-				driver.navigate().refresh();
-				try {
-					Thread.sleep(25000);
-				} catch (InterruptedException e) 
-				{
-				// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-				if(currentUrl().contains("testharness.html") || currentUrl().contains("/dashboard"))
-		        {
-					System.out.println("test");
-					System.out.println(driver.getCurrentUrl());
-					return new AccountHomePage(driver);
-				}
-
+			} else if (currentUrl().contains("/dashboard")) {
+				return new RallyDashboardPage(driver);
 			}
 			return null;
 		}

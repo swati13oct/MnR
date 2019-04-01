@@ -3,68 +3,108 @@
  */
 package pages.acquisition.bluelayer;
 
+import java.awt.Desktop.Action;
+import java.util.List;
 
 import org.json.JSONObject;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ulayer.PageTitleConstants;
-
 
 public class PlanSelectorNewPage extends UhcDriver {
 
 	@FindBy(id = "planSelectorTool")
-	private WebElement iframePst; 
+	private WebElement iframePst;
 
+	/*
+	 * @FindBy(xpath = "//div[@id='widget_0tdroCAgSEGuqWNwLbf7xA']/div/a") private
+	 * WebElement getStartedBtn;
+	 */
 
-	/*@FindBy(xpath = "//div[@id='widget_0tdroCAgSEGuqWNwLbf7xA']/div/a")
-	private WebElement getStartedBtn; */
-	
-	@FindBy(xpath = "(//a[contains(text(), 'Get Started')])[2]")
-	private WebElement getStartedBtn; 
+	@FindBy(xpath = "//div[@id='aside-second']//a[contains(@class,'get-started-btn')]")
+	private WebElement getStartedBtn;
 
-	//	@FindBy(css = "#widget_0tdroCAgSEGuqWNwLbf7xA > div > a")
-	//	private WebElement getStartedBtn; 
+	// @FindBy(css = "#widget_0tdroCAgSEGuqWNwLbf7xA > div > a")
+	// private WebElement getStartedBtn;
 
 	@FindBy(id = "DemographicsDataModel_ZipCode")
 	private WebElement zipCode;
-	
-	@FindBy(xpath = "//*[@id='CoverageType_Idontknow_Option_7_Lable']/following-sibling ::label")
-	private WebElement TypeOfCoverageOption; 
 
-	@FindBy(xpath = "//div[@class='rightBlk']//a[@class='btn btn-primary next leftBlk nextBtn']")
-	private WebElement continueBtn; 
-	
+	@FindBy(id = "Counties")
+	private WebElement PSTCounty;
+
+	@FindBy(xpath = "//*[@id='CoverageType_Idontknow_Option_7_Lable']/following-sibling ::label")
+	private WebElement TypeOfCoverageOption;
+
+	@FindBy(xpath = "//div[@class='rightBlk']//a[contains(@class,'nextBtn') and contains(@class,'btn-primary')]")
+	private WebElement continueBtn;
+
 	@FindBy(xpath = "//*[@id='control_control_0_4']/following-sibling::label")
 	private WebElement NoneOption;
-	
+
 	@FindBy(xpath = "//*[@id='control_control_1_4']/following-sibling::label")
 	private WebElement NonePreference;
-	
+
 	@FindBy(xpath = "(//*[@class='preferencenavigation pageNavigation']/a[2])[1]")
 	private WebElement NextQuestionButton;
-	
+
 	@FindBy(id = "planPreferenceLegend_1")
 	private WebElement NextQuestion;
-	
+
+	@FindBy(xpath = "//*[@class='planPreferenceQuestion']//div[@class='preferencenavigation pageNavigation']/a[2]")
+	private WebElement NextQuestionButton2;
+
 	@FindBy(xpath = "(//*[contains(text(), 'Medicare Advantage (Part C)')])[2]")
 	private WebElement FinalResults;
-	
+
 	@FindBy(xpath = "//*[@class='skipToResultsLink']")
 	private WebElement ResultsPageLink;
 
-	//a[@class='btn btn-primary next leftBlk nextBtn']
+	@FindBy(id = "planPreferenceLegend_1")
+	private WebElement PrescriptionBox;
+
+	@FindBy(id = "DrugSearchBox_SearchtextBox")
+	private WebElement PrescriptionBox_1;
+
+	/*
+	 * @FindBy(xpath =
+	 * "//*[@id='41d4dd57-ca06-f737-8466-59563fb2d535']//li/a[@id='ui-active-menuitem']")
+	 * private WebElement PrescriptionAutoResults;
+	 */
+
+	// @FindBy(id="ui-active-menuitem")
+	@FindBy(xpath = "(//a[@id='ui-active-menuitem'])[1]")
+	private WebElement PrescriptionAutoResultsOld;
+
+	@FindBy(xpath = "//ul[contains(@class,'ui-autocomplete')]/li[contains(@class,'ui-menu-item')]/a[contains(@class,'ui-corner-all')]")
+	private WebElement PrescriptionAutoResults;
+
+	@FindBy(xpath = "//div[contains(@class,'addDrugRow')]/a[@id='Drugs_AddDrug']")
+	private WebElement AddDrugPSTButton;
+
+	@FindBy(xpath = "//*[@class='rightBlk']/a[2]")
+	private WebElement DrugContinueButton;
+
+	@FindBy(xpath = "//table[@id='pharmacyMainTable']/tbody/tr[@id='Pharmacy1']/td[contains(@class,'checkboxCol')]//input[starts-with(@id,'SelectedPharmacyID_')]/following-sibling::label")
+	private WebElement PharmacyCheckBox;
+
+	// a[@class='btn btn-primary next leftBlk nextBtn']
 	@FindBy(xpath = "//div[@id='widget_B9pzC-bMU02tTlxiTpbchA']//div/a[@href='/PlanCompare/Consumer/Type3/2018/Compare/ComparePlans']")
 	private WebElement skipToResultsLink;
 
-	public  JSONObject planselectoruhcJson;
+	public JSONObject planselectoruhcJson;
 
 	@FindBy(xpath = "(//div[@class='planList']/div[2]//a[@class='btn-primary EnrollPeriod'])[1]")
 	private WebElement firstPlanDetailsBtn;
@@ -72,15 +112,43 @@ public class PlanSelectorNewPage extends UhcDriver {
 	@FindBy(xpath = "//a[@id='backToPlanSelectorTop']")
 	private WebElement backToPlanOptionsTop;
 
+	@FindBy(xpath = "(//*[@id='selectCounty']/p/a)[1]")
+	private WebElement BackToPlanCounty;
+
 	@FindBy(id = "backToPlanSelectorBottom")
 	private WebElement backToPlanSelectorBottom;
 
 	@FindBy(xpath = "//*[@class='PlanPreferenceCollection']//div[@class='planPreferenceQuestion ']//h1")
 	private WebElement PreferencesHeader;
 
-	@FindBy(id = "Enrollbtn_223554")
+	@FindBy(xpath = "(//div[contains(@class,'planList'[contains(@id,'List_')])]//a[starts-with(@id,'Enrollbtn_')])[1]")
 	private WebElement PlanDetailsPageButton;
 
+	@FindBy(xpath = "(//div[contains(@class,'planPreferenceQuestion')][not (contains(@class,'disabled'))]//span[starts-with(@id,QuestionsCounter_)])[1]")
+	private WebElement QuestionsCounter;
+
+	@FindBy(xpath = "//span[@id='planPreferenceLegend_1']/span[@id='Mandatory_1']")
+	private WebElement MandatoryQuestion;
+
+	@FindBy(xpath = "//div[@id='MyDrugsList']//div[@id='MyDrugsSection']//div[starts-with(@id,'drugItem_')]")
+	private WebElement addedDrug;
+
+	@FindBy(id = "providerLinkTest")
+	private WebElement addDocAndProviders;
+
+	@FindBy(xpath = "(//div[contains(@class,'planList'[contains(@id,'List_')])]//div[contains(@class,'plan-name')])[1]")
+	private WebElement planNamePSTPage;
+
+	@FindBy(xpath = "//div[contains(@class,'plan-summary-hero')]//*[@class='content']")
+	private WebElement planNamePlanDetailsPage;
+
+	@FindBy(xpath = "//div[@id='detailTabs']//div[contains(@class,'plan-detail-tabs')]//span[contains(@class,'title')][contains(text(),'Medical Benefits')]")
+	private WebElement planDetailsMedicalBenefits;
+
+	@FindBy(xpath = "(//table[contains(@class,'plan-detail-table')]/tbody/tr/td[string-length(text())>1][not (contains(@class,'ng-hide'))])[1]")
+	private WebElement planDetailsMedicalBenefitsTableCol;
+
+	public String planNameExpected = null;
 
 	public PlanSelectorNewPage(WebDriver driver) {
 		super(driver);
@@ -89,163 +157,177 @@ public class PlanSelectorNewPage extends UhcDriver {
 		openAndValidate();
 	}
 
-
 	@Override
 	public void openAndValidate() {
-		validate(getStartedBtn);
+		waitTillFrameAvailabeAndSwitch(iframePst, 45);
+		waitforElementVisibilityInTime(getStartedBtn, 30);
 
 	}
 
+	public void quizStartAndRunQuestionnaire(String zip_code) throws InterruptedException {
 
-	public PlanSelectorNewPage quizStartAndRunQuestionnaire(String zip_code) throws InterruptedException
-	{
-
-	//	Thread.sleep(2000);
-
-		switchToNewIframe(iframePst);
-
-		WebDriverWait wait = new WebDriverWait(driver, 20);
-		wait.until(ExpectedConditions.elementToBeClickable(getStartedBtn));
+		// switchToNewIframe(iframePst);
+		// waitTillElementClickableInTime(getStartedBtn, 30);
 		getStartedBtn.click();
-		/*driver.switchTo().defaultContent();
-
-		switchToNewIframe(iframePst);*/
-
-		wait.until(ExpectedConditions.elementToBeClickable(zipCode));
-
+		waitforElementVisibilityInTime(zipCode, 45);
 		sendkeys(zipCode, zip_code);
 		TypeOfCoverageOption.click();
-		System.out.println("I don't know option radio button should be selected");
-		
-		//wait.until(ExpectedConditions.elementToBeClickable(continueBtn));
+		System.out.println("'I don't know option' radio button should be selected");
 		continueBtn.click();
-		waitforElement(PreferencesHeader);
-		/*driver.switchTo().defaultContent();
-		switchToNewIframe(iframePst);*/
-
-		/*wait.until(ExpectedConditions.elementToBeClickable(skipToResultsLink));
-
-		skipToResultsLink.click();*/
-		
-		if(PreferencesHeader.getText().contains("Your Preferences"))
-		return new PlanSelectorNewPage(driver);
-		else 
-			return null;
-
+		waitforElementNew(PreferencesHeader);
+		Assert.assertTrue(PreferencesHeader.getText().contains("Your Preferences"), "Questionaaire not started");
 	}
-	
-	public PlanSelectorNewPage NextQuestion() throws InterruptedException
-	{		
-		NoneOption.click();
-		NextQuestionButton.click();		
-		waitforElement(NextQuestion);
-		if(NextQuestion.isDisplayed())
-		return new PlanSelectorNewPage(driver);
-		else 
-			return null;
 
-	}
-	
-	public PlanSelectorNewPage JumpLink() throws InterruptedException
-	{		
-		NonePreference.click();
-		ResultsPageLink.click();		
-		waitforElement(FinalResults);
-		if(FinalResults.isDisplayed())
-		return new PlanSelectorNewPage(driver);
-		else 
-			return null;
+	public void quizStartAndRunQuestionnaireWithCounty(String zip_code, String County) {
 
-	}
-	
-	
-
-	public PlanSelectorNewPage navigateToPlanDetails() throws InterruptedException
-	{
-		/*Thread.sleep(3000);
-		driver.switchTo().defaultContent();
-		//Thread.sleep(5000);
-		waitforElement(iframePst);
 		switchToNewIframe(iframePst);
-		//waitforElement(firstPlanDetailsBtn);
+		waitTillElementClickableInTime(getStartedBtn, 30);
+		getStartedBtn.click();
+		waitforElementVisibilityInTime(zipCode, 45);
+		sendkeys(zipCode, zip_code);
+		waitforElementVisibilityInTime(PSTCounty, 30);
+		selectFromDropDownByText(driver, PSTCounty, County);
+		/*
+		 * try { Thread.sleep(10000); Select drpCountry = new
+		 * Select(driver.findElement(By.id("Counties")));
+		 * System.out.println("county name is "+County);
+		 * drpCountry.selectByVisibleText(County); } catch(Exception ex) {
+		 * Thread.sleep(2000); Select drpCountry = new
+		 * Select(driver.findElement(By.id("Counties")));
+		 * drpCountry.selectByValue("48029"); }
+		 */
 
-		WebDriverWait wait = new WebDriverWait(driver, 20);
-		wait.until(ExpectedConditions.elementToBeClickable(firstPlanDetailsBtn));*/
+		TypeOfCoverageOption.click();
+		System.out.println("'I don't know option' radio button should be selected");
+		continueBtn.click();
+		waitforElementNew(PreferencesHeader);
+		Assert.assertTrue(PreferencesHeader.getText().contains("Your Preferences"), "Questionaaire not started");
 
+	}
+
+	public void NextQuestion() throws InterruptedException {
+		NoneOption.click();
+		NextQuestionButton.click();
+		waitforElementNew(NextQuestion);
+		Assert.assertTrue(QuestionsCounter.getText().contains("2 of"), "Questionaaire 2nd question was not started ");
+	}
+
+	public boolean JumpLink() throws InterruptedException {
+		NonePreference.click();
+		NextQuestionButton2.click();
+		for (int i = 3; i <= 7; i++) {
+			Thread.sleep(2000);
+			System.out.println("Question #" + i);
+			if (validateNonPresenceOfElement(MandatoryQuestion)
+					&& QuestionsCounter.getText().contains(String.valueOf(i))) {
+
+				NextQuestionButton2.click();
+			} else {
+				System.out.println("Mandatory question exits!!! Please fill appropriate response.");
+				Assert.fail("Mandatory question exits!!! Please fill appropriate response.");
+			}
+
+		}
+		CommonUtility.waitForPageLoadNew(driver, PrescriptionBox_1, 30);
+		sendkeys(PrescriptionBox_1, "Adci");
+
+		try {
+			waitforElementVisibilityInTime(PrescriptionAutoResults, 30);
+			PrescriptionAutoResults.click();
+		} catch (Exception e) {
+			waitforElementVisibilityInTime(PrescriptionAutoResultsOld, 30);
+			JavascriptExecutor executor = (JavascriptExecutor) driver;
+			executor.executeScript("arguments[0].click();", PrescriptionAutoResultsOld);
+			System.out.println("second one worked");
+		}
+		waitforElementVisibilityInTime(AddDrugPSTButton, 45);
+		AddDrugPSTButton.click();
+		waitforElementVisibilityInTime(addedDrug, 45);
+		DrugContinueButton.click();
+		waitforElementVisibilityInTime(PharmacyCheckBox, 45);
+		PharmacyCheckBox.click();
+		waitTillElementClickableInTime(DrugContinueButton, 30);
+		DrugContinueButton.click();
+		waitforElementVisibilityInTime(addDocAndProviders, 45);
+		DrugContinueButton.click();
+		waitforElementVisibilityInTime(FinalResults, 60);
+
+		if (FinalResults.isDisplayed())
+			return true;
+		else
+			return false;
+	}
+
+	public boolean navigateToPlanDetails() throws InterruptedException {
+		validateNew(planNamePSTPage);
+		planNameExpected = planNamePSTPage.getText().trim();
+		validateNew(PlanDetailsPageButton);
 		PlanDetailsPageButton.click();
-
-
 		driver.switchTo().defaultContent();
+		CommonUtility.checkPageIsReadyNew(driver);
 
-		return new PlanSelectorNewPage(driver);
-
+		int counter = 0;
+		do {
+			if (counter <= 9) {
+				Thread.sleep(5000);
+				System.out.println("Time elapsed post sign In clicked --" + counter + "*5 sec.");
+			} else {
+				System.out.println("TimeOut!!! Plan Details page is not displayed");
+				return false;
+			}
+			counter++;
+		} while (!(driver.getCurrentUrl().endsWith("#/details")));
+		waitforElementVisibilityInTime(planNamePlanDetailsPage, 30);
+		if (planNamePlanDetailsPage.getText().trim().contains(planNameExpected))
+			return true;
+		else
+			return false;
 	}
 
-	public PlanSelectorNewPage verifyBackToPlanOptionslink() throws InterruptedException
-	{
+	public void verifyBackToPlanOptionslink() throws InterruptedException {
+		validateNew(planDetailsMedicalBenefits);
+		Assert.assertTrue(validate(planDetailsMedicalBenefitsTableCol), "Medical benefits Table not displayed");
 		validatetopbacktoplansOptionlink();
-		//browserBack();
-		//validatedownbacktoplansOptionslink();
 
-
-		return new PlanSelectorNewPage(driver);
 	}
 
-	public void validatetopbacktoplansOptionlink() throws InterruptedException{
+	public void validatetopbacktoplansOptionlink() throws InterruptedException {
 
-
-		WebDriverWait wait = new WebDriverWait(driver, 20);
-		wait.until(ExpectedConditions.elementToBeClickable(backToPlanOptionsTop));
-		validateUsergrpParam();
+		try {
+			BackToPlanCounty.click();
+		} catch (Exception e) {
+			System.out.println("No zipcode turned in again");
+		}
+		waitTillElementClickableInTime(backToPlanOptionsTop, 30);
+		Assert.assertTrue(currentUrl().contains("userGroup=DST"), "User group not matches");
 		backToPlanOptionsTop.click();
 		System.out.println("Top Button clicked");
 		Thread.sleep(3000);
-		//switchToNewIframe(iframePst);
-
-		//waitforElement(firstPlanDetailsBtn);
-		if (driver.getTitle().contentEquals(PageTitleConstants.BLAYER_PLAN_SELECTOR))
-		{
-			Assert.assertTrue(true);
-		}
-
-		else Assert.assertTrue(false);
-
+		CommonUtility.checkPageIsReadyNew(driver);
+		Assert.assertTrue(driver.getTitle().contentEquals(PageTitleConstants.BLAYER_PLAN_SELECTOR),
+				"Navigation to plan selector page is not successful");
 	}
 
-	public void validatedownbacktoplansOptionslink() throws InterruptedException{
+	public void validatedownbacktoplansOptionslink() throws InterruptedException {
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollBy(0,1350)");
 		Thread.sleep(1000);
-		
+
 		waitforElement(backToPlanSelectorBottom);
-		validateUsergrpParam();
-		Thread.sleep(1000);
+		Assert.assertTrue(currentUrl().contains("userGroup=DST"), "User group not matches");
 		backToPlanSelectorBottom.click();
-		//Thread.sleep(3000);
-		//waitforElement(iframePst);
-		//switchToNewIframe(iframePst);
-		//waitforElement(firstPlanDetailsBtn);
-		if (driver.getTitle().contentEquals(PageTitleConstants.BLAYER_PLAN_SELECTOR))
-		{
+		if (driver.getTitle().contentEquals(PageTitleConstants.BLAYER_PLAN_SELECTOR)) {
 			Assert.assertTrue(true);
 		}
 
-		else Assert.assertTrue(false);
+		else
+			Assert.assertTrue(false);
 
 	}
 
 	public void browserBack() {
 
 		driver.navigate().back();
-	}
-
-	public void validateUsergrpParam () {
-		if (currentUrl().contains("userGroup=DST"))
-		{
-			Assert.assertTrue(true);
-		}
-
-		else Assert.assertTrue(false);
 	}
 }

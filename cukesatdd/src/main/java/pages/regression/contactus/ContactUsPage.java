@@ -32,6 +32,16 @@ import cucumber.api.DataTable;
  */
 public class ContactUsPage extends UhcDriver{
 
+		
+	//DIANE
+	//@FindBy(xpath = "//a[contains@href,'1-800-721-0627')]")
+	//private WebElement staticTFN;
+	//@FindBy(xpath = "//a[contains@href, 'tel:1-800-721-0627']")
+	
+	@FindBy(xpath = "//a[@href = 'tel:1-800-721-0627']")
+	private WebElement staticTFN; 
+	
+		
 	@FindBy(xpath=  "//*[@id='cardslideID']/a[1]") 
 	private WebElement getStartedButton;
 
@@ -150,7 +160,6 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath="//input[@id='question-alt-phone-confirm']/following-sibling::span[not (contains(@class,'hide'))]")
 	private WebElement confirmPhneErrorMsg;
 	
-
 	
 	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//div[contains(@class,'success') and (not (contains(@class,'ng-hide')))]/div[@class='message-block-header']//p")
 	private WebElement requestReceivedMessageHeader;
@@ -190,6 +199,9 @@ public class ContactUsPage extends UhcDriver{
 	
 	@FindBy(id="question-email")
 	private WebElement email_EmailForm;
+	
+	@FindBy(xpath="(.//*[@id='globalContentIdForSkipLink']//div[@ng-controller='phoneHoursAddressCtrl'])[2]//a[@ng-href='tel:1-844-355-3359']")
+	private WebElement connectorModelTFN;
 	
 	@FindBy(id="question-email-confirm")
 	private WebElement confirmEmail_EmailForm;
@@ -276,6 +288,33 @@ public class ContactUsPage extends UhcDriver{
 		Assert.assertEquals("Request Confirmed", requestReceivedMessageHeader.getText().trim());
 		Assert.assertEquals(expectedMessage, thankYouMessage.getText().trim());
 		
+	}
+	
+	/**
+	 * DIANE
+	 * Validate the static TFN
+	 *
+	 **/
+	public void validateTFN(String expectedTFN){
+		
+		//ORIG
+		//Assert.assertEquals(expectedTFN, staticTFN.getText().trim());
+				
+		//object
+		//Assert.assertEquals(expectedTFN, staticTFN.getText().trim());
+		
+		//object[]
+		//Assert.assertEquals(expectedTFN, staticTFN.getText().trim());
+			    	
+			
+    	if (staticTFN.getText().contains(expectedTFN))
+    	{
+    		System.out.println("Expected Static TFN is displayed" + staticTFN.getText());}
+    	
+    	else 
+    		Assert.fail("Expected TFN is not displayed");
+    		
+    	      					
 	}
 	
 	/**
@@ -674,6 +713,7 @@ public class ContactUsPage extends UhcDriver{
 	 * Validate the widgets which should not present for the terminated members
 	 */
 	public void validateWidgetsForTerminatedMembers(){
+		/*
 		System.out.println("ready to assert check");
 		getStartedButton.click();
 		driver.navigate().back();
@@ -682,6 +722,12 @@ public class ContactUsPage extends UhcDriver{
 		//Assert.assertTrue(!validate(fillOutFormButton)); // doesn't exist for these kind of users
 		Assert.assertTrue(!validate(requestCall));
 		//Assert.assertTrue(!validate(email_EmailForm)); // doesn't exist for these kind of users
+		 */
+		Assert.assertTrue(!validate(getStartedButton)); 
+		Assert.assertTrue(!validate(fillOutFormButton));
+		Assert.assertTrue(!validate(requestCall));
+		Assert.assertTrue(!validate(getStartedButton)); 
+		Assert.assertTrue(!validate(email_EmailForm));
 	}
 	
 	public void feebackpopupClose() throws InterruptedException
@@ -697,4 +743,18 @@ public class ContactUsPage extends UhcDriver{
 			System.out.println("iPerception Pop Up not displayed");
 		}
 	}
+
+	public void validateConnectroModelTFNNumber() {
+		
+		String tfnNumber = connectorModelTFN.getText();
+		if(tfnNumber.contains("1-844-355-3359"))
+		{
+			System.out.println("Connector Model TFN dsiplayed    >" +connectorModelTFN.isDisplayed() );
+		}else
+		{
+			System.err.println("Connector Model TFN dsiplayed    >" +connectorModelTFN.isDisplayed() );
+			
+		}
+	}
+
 }

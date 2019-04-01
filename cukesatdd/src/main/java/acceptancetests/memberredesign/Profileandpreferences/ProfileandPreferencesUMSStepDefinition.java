@@ -106,9 +106,9 @@ public class ProfileandPreferencesUMSStepDefinition {
 	@Then("^the user navigates to Profile and Preferences page$")
 	public void user_navigate_toProfileandPreferencespage() throws InterruptedException {
 
+
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-
 		ProfileandPreferencesPage profilePreferencesPage = accountHomePage.navigateDirectToProfilePage();
 
 		if (profilePreferencesPage != null) {
@@ -197,6 +197,13 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 		profilePreferencesPage.validateTempAddressShip();
+	}
+	
+	@Then("^the user validate the temporary address section for  member")
+	public void UserValidatesTempAddress() {
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+		profilePreferencesPage.validateTempAddress();
 	}
 
 	/**
@@ -323,6 +330,14 @@ public class ProfileandPreferencesUMSStepDefinition {
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
 		profilePreferencesPage.validateneedhelpheader();
+
+	}
+	@Then("^the ship user validates the need help section$")
+	public void uservalidatesneedhelpsectionShip() {
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+
+		profilePreferencesPage.validateneedhelpheaderShip();
 
 	}
 
@@ -464,6 +479,25 @@ public class ProfileandPreferencesUMSStepDefinition {
 				getLoginScenario().saveBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE, communicationPrefPage);
 		}
 	}
+	
+	/**
+	 * @toDo : Clicks on Edit Preferences link under Communication Preferences for ship
+	 *       section
+	 */
+	@Then("^the user clicks on edit preferences link page for ship")
+	public void the_user_clicks_on_edit_preferences_link_page_for_ship() {
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+
+		CommunicationPreferencePage communicationPrefPage = profilePreferencesPage
+				.navigateToCommunicationPreferencePage();
+		if (communicationPrefPage != null) {
+			if (!communicationPrefPage.validatePageForShip())
+				Assert.fail("Error in validating communication preferences page");
+			else
+				getLoginScenario().saveBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE, communicationPrefPage);
+		}
+	}
 
 	@Then("^the user changes the online preference and saves the change")
 	public void userChangesOnlinePref() {
@@ -552,6 +586,15 @@ public class ProfileandPreferencesUMSStepDefinition {
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
 		profilePreferencesPage.validateCancelElement();
+
+	}
+	
+	@Then("^the Ship user checks the Edit Button changes to Cancel Button$")
+	public void UserChecksSaveCancelButtonShip() {
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+
+		profilePreferencesPage.validateCancelElementShip();
 
 	}
 
@@ -674,6 +717,20 @@ public class ProfileandPreferencesUMSStepDefinition {
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
 		profilePreferencesPage.validatecommunicationpreferencesheader();
+
+	}
+	
+	/**
+	 * @toDo : Validates the headers and labels of the communication preferences section for SHIP
+	 */
+
+	@Then("^the user validates the headers and labels of the communication preferences section for SHIP")
+	public void the_user_validates_headers_and_labels_of_the_communication_preferences_section_for_SHIP() {
+		
+		CommunicationPreferencePage communicationPreferencesPage = (CommunicationPreferencePage)getLoginScenario()
+				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
+		
+		communicationPreferencesPage.validateGoGreenSectionForShip();
 
 	}
 
@@ -1097,6 +1154,27 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 		}
 
+	}
+	
+	@And("^the user should not be able to edit the Phone numbers$")
+	public void userValidatesThePhoneSectionWithoutEditsAllowed() {
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+		profilePreferencesPage.validatePhoneSectionWithoutEditAllowed();
+	}
+
+	@Then("^the user should not be able to add or update temporary address$")
+	public void userValidatestheTemporaryaddressSectioWithoutEditsAllowedn() {
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+		profilePreferencesPage.validateTemporaryAddressSectionWithoutEditAllowed();
+	}
+
+	@Then("^the user should not be able to add or update Mailing address$")
+	public void userValidatestheMailindAddressSectionWithoutEditsAllowed() {
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+		profilePreferencesPage.validateMailingAddressSectionWithoutEditAllowed();
 	}
 
 }

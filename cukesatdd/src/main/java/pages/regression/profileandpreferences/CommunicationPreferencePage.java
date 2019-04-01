@@ -3,7 +3,6 @@ package pages.regression.profileandpreferences;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,6 +18,9 @@ public class CommunicationPreferencePage extends UhcDriver {
 
 	@FindBy(id = "savePaperlessSettings")
 	private WebElement savePrefButton;
+	
+	@FindBy(id="save-prefs-btn-SHIP")
+	private WebElement savePrefButtonSHIP;
 
 	@FindBy(xpath = ".//iframe[@class='preferences']")  
 	private WebElement iframeEPMP;
@@ -44,15 +46,13 @@ public class CommunicationPreferencePage extends UhcDriver {
 	@FindBy(className = "atdd-goGreenHeader")
 	private WebElement goggreenheader;
 
-	@FindBy(id = "requiredplan")
+	@FindBy(xpath = "//div[@class='otherPages SHIP']//label[@for='requiredplan']")
 	private WebElement iHavereadCheckbox;
 
-	//@FindBy(xpath ="//div[@id='mail-preferences-selector-SHIP']//*[@id='preferences-form0']/div/div[1]/div[2]/div[2]/div/fieldset/div[1]/div/label")
-	@FindBy(xpath ="//div[@class='otherPages SHIP']//input[@aria-label='Online Delivery']")
+	@FindBy(xpath ="//div[@class='otherPages SHIP']//legend[text()='Claims']/following::input[1]")
 	private WebElement onlineDeliveryRadioButton;
 
-	//@FindBy(id = "Claims12")
-	@FindBy(xpath ="//div[@class='otherPages SHIP']//input[@aria-label='Mail']")
+	@FindBy(xpath ="//div[@class='otherPages SHIP']//legend[text()='Claims']/following::input[2]")
 	private WebElement mailRadioButton;
 
 	@FindBy(xpath = "//*[@id='Claims2']/following-sibling::label")
@@ -73,19 +73,32 @@ public class CommunicationPreferencePage extends UhcDriver {
 	@FindBy(className = "atdd-notes")
 	private WebElement NoteSection;
 
-	//@FindBy(id = "save-prefs-btn-SHIP")
-	//@FindBy(xpath = "//*[@id='savePaperlessSettings']")
 	@FindBy(xpath = "//div[@class='otherPages SHIP']//button[@class='btn save-prefs-btn']")
 	private WebElement savePreferencesButton;
+	
+	@FindBy(id="PlanBenefits0")
+	private WebElement onlineDeliveryPlanDocuments;
+	
+	@FindBy(id="PlanBenefits10")
+	private WebElement mailDeliveryPlanDocuments;
 
-	@FindBy(partialLinkText = "PREFERENCES")
+	@FindBy(xpath = "//div[@class='otherPages SHIP']//a[text()='Edit Preferences']")
 	private WebElement EditPreferenceButton;
+	
+	@FindBy(partialLinkText = "BACK TO ACCOUNT PROFILE")
+	private WebElement backToAccountProfile;
 
 	@FindBy(xpath = "//*[@class='nav nav-tabs']/li")
 	private List<WebElement> tabsForComboMember;
 
 	@FindBy(xpath = "//iframe[@class='preferences']")
 	private List<WebElement> iframeEPMPCheck;
+	
+	@FindBy(xpath = "//div[@class='otherPages SHIP']//legend[text()='Claims']")
+	private WebElement claimsLabel;
+
+	@FindBy(xpath = "//div[@class='otherPages SHIP']//legend[text()='Plan Documents']")
+	private WebElement planDocumentsLabel;
 
 	public CommunicationPreferencePage(WebDriver driver) {
 		super(driver);
@@ -138,6 +151,16 @@ public class CommunicationPreferencePage extends UhcDriver {
 		else
 			return false;
 	}
+	
+	public boolean validatePageForShip() {
+		CommonUtility.waitForPageLoad(driver, claimsLabel, 15);
+		validate(claimsLabel);
+		validate(planDocumentsLabel);
+		if (validateNew(savePrefButtonSHIP))
+			return true;
+		else
+			return false;
+	}
 
 	public boolean changeAndVerifyOnlinePreference() {
 		if (validateNew(paperlessRadioBtn) && !(paperlessRadioBtn.isSelected())) {
@@ -158,49 +181,34 @@ public class CommunicationPreferencePage extends UhcDriver {
 			return false;
 	}
 
+	/**
+	 * Validate the communications page for ship members
+	 */
 	public void validateGoGreenSectionForShip() {
 
 		validateNew(gogreenleaf);
 		validateNew(goggreenheader);
 		validateNew(onlineDeliveryRadioButton);
 		validateNew(mailRadioButton);
-		boolean flag1 = onlineDeliveryRadioButton.isSelected();
-		System.out.println("Value of Online delivery flag is" + flag1);
-		/*try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if (flag1 = true) {
-			validateNew(mailLabel);
-			mailLabel.click();
-		} else {
-			validateNew(onlineDelivery);
-			onlineDelivery.click();
-		}
-*/	
-		validateNew(savePreferencesButton);
+		validateNew(claimsLabel);
+		validateNew(planDocumentsLabel);
+		validateNew(savePrefButtonSHIP);
+		jsClickNew(onlineDeliveryPlanDocuments);
+		validateNew(iHavereadCheckbox);
+		iHavereadCheckbox.click();
+		savePrefButtonSHIP.click();
+		waitforElementVisibilityInTime(EditPreferenceButton, 10);
+		validateNew(backToAccountProfile);
+		//Reverting the preferneces saved
+		EditPreferenceButton.click();
+		waitforElementVisibilityInTime(savePrefButtonSHIP, 10);
+		jsClickNew(mailDeliveryPlanDocuments);
+		validateNew(iHavereadCheckbox);
+		iHavereadCheckbox.click();
 		savePreferencesButton.click();
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-/*
-		if (EditPreferenceButton.isDisplayed()) {
-			EditPreferenceButton.click();
-			boolean flag2 = onlineDeliveryRadioButton.isSelected();
-			if (!flag1 == flag2)
-				Assert.assertTrue(true);
-
-		} else {
-			Assert.assertFalse(true);
-
-		}*/
+		waitforElementVisibilityInTime(EditPreferenceButton, 10);
+		validateNew(EditPreferenceButton);
 		validateNew(backLink1);
-
 	}
 
 	public boolean validateifEPMPIframeIsPresent() {
@@ -233,5 +241,6 @@ public class CommunicationPreferencePage extends UhcDriver {
 		// TODO Auto-generated method stub
 
 	}
+	
 
 }

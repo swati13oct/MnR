@@ -107,6 +107,36 @@ public class ContactusRedesignStepDefinition {
 						contactUsPage);
 		}
 		
+		/**  DIANE
+		 * @toDo : user validates static phone number on contact us page
+		 */
+		
+		@Then("^user should see a static phone number for tech support in redesign contact us page$")
+		public void user_should_see_a_static_phone_number_for_tech_support_in_redesign_contact_us_page(DataTable givenAttributes) {
+
+			/* Reading the given attribute from feature file */
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+			}
+			String expectedTFN = memberAttributesMap.get("Expected TFN");
+			
+			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+			
+				contactusPage.validateTFN(expectedTFN);
+		
+			
+			
+			if(contactusPage != null)				
+				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+						contactusPage);
+		}
+		
+
+
+		
+		
+
 		/**
 		 *  @toDO : the user validates cancel link on secure email widget on contact us page
 		 */
@@ -344,6 +374,19 @@ public class ContactusRedesignStepDefinition {
 		public void user_should_only_see_the_Technical_Support_and_Plan_Support_components() {
 			ContactUsPage contactusPage = (ContactUsPage) getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 			contactusPage.validateWidgetsForTerminatedMembers();
+		}
+		
+		@Then("^The user validates the connector model group TFN number$")
+		public void the_user_validates_the_TFNNumber()
+		{
+			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+			
+			contactusPage.validateConnectroModelTFNNumber();
+			
+			if(contactusPage != null)				
+				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+						contactusPage);
+			
 		}
 
 	}

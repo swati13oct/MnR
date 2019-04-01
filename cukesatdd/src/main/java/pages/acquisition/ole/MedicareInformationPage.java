@@ -34,14 +34,14 @@ public class MedicareInformationPage extends UhcDriver{
 	@FindBy(id = "ole-form-back-button")
 	private WebElement BackBtn;
 
-	@FindBy(xpath = "//*[@class = 'enrollmentAllowed-error-msg']/p")
+	@FindBy(xpath = "//*[contains(@class, 'enrollmentAllowed-error-msg')]/p")
 	private WebElement AlreadyEnrolled_ErrorMessage;
 
 	
 	@FindBy(xpath = "//*[@id='ole-form-cancel-button' or @id = 'cancel-enrollment']")
 	private WebElement CancelEnrollmentLink;
 	
-	@FindBy(xpath = "//*[@class = 'enrollmentAllowed-error-msg']")
+	@FindBy(xpath = "//*[contains(@class, 'enrollmentAllowed-error-msg')]")
 	private WebElement RequiredField_ErrorMessage;
 	
 	//Right Rail Elements
@@ -63,7 +63,7 @@ public class MedicareInformationPage extends UhcDriver{
 	
 
 	//Page Header
-	@FindBy(xpath = "//*[@class='only-prelim']")
+	@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-prelim')]")
 	private WebElement MedicalInfoPageHeader;
 	
 	//Select Medicare Card Type - A 0r B
@@ -105,7 +105,7 @@ public class MedicareInformationPage extends UhcDriver{
 	@FindBy(id = "leavingSite-linkrouter")
 	private WebElement LeavingOLEmodal;
 
-	@FindBy(xpath = "//*[@class = 'field-error-msg']")
+	@FindBy(xpath = "//*[contains(@class, 'field-error-msg')]")
 	private List <WebElement> FieldValidation_ErrorMessage;
 	
 	@FindBy(xpath = "//*[@id='medicareClaimNumber']/preceding-sibling::label")
@@ -166,7 +166,7 @@ public class MedicareInformationPage extends UhcDriver{
 		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date");
 		String CardType = MedicareDetailsMap.get("Card Type");
 		String SSNflag = MedicareDetailsMap.get("SSN Flag");
-		if(CardType.contains("HICN")){
+		if(CardType.contains("HICN") || CardType.contains("RRID")){
 			SelectCardA.click();
 			validateNew(MedicareNumberLabel);
 			if(MedicareNumberLabel.getText().contains("Medicare Claim Number")){
@@ -183,6 +183,8 @@ public class MedicareInformationPage extends UhcDriver{
 			validateNew(MedicareNumberLabel);
 			if(MedicareNumberLabel.getText().contains("Medicare Number")){
 				System.out.println("Correct Label 'Medicare Number' displayed for CARD B");
+				System.out.println("Correct Medicare Number provided for CARD B"+MedicareNumber);
+
 			}
 			else{
 				Assert.fail("Correct Label not displayed for CARD B");
@@ -190,9 +192,9 @@ public class MedicareInformationPage extends UhcDriver{
 				return null;*/
 			}
 		}
-sendkeysNew(firstNameField, FirstName);
-sendkeysNew(lastNameField, LastName);
-sendkeysNew(claimNumberField, MedicareNumber);
+		sendkeysNew(firstNameField, FirstName);
+		sendkeysNew(lastNameField, LastName);
+		sendkeysNew(claimNumberField, MedicareNumber);
 
 
 /*		if(validateNew(firstNameField)){
