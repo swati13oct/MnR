@@ -689,4 +689,23 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	 #|xx    |1041| MAPD     | COSMOS | t_diffGrpsDiffYrs_COSMOSCLAIMS | Medical           | Yes                |
 	 #|xx    |1041| MAPD     | COSMOS | t_diffGrpsDiffYrs_COSMOSCLAIMS | Prescription drug | Yes                |
 	#----- end of claims15 ---------------------------------------------------------
-	  
+	  #---- thsi s the test EOB link on claims details page
+  @claimsEOB @US1268210 @F244667
+  Scenario Outline: to validate the claims eob link
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>     |
+      | Test Data Type | <claimssystem> |
+    When I navigate to the claims Summary page in redesigned site
+    Then I validate the claim summary header
+    And I can search claims for the following claim period on redesigned site
+      | Plan Type    | <planType>    |
+      | Claim Period | <claimPeriod> |
+    Then I can see the claims displayed based on the selection in redesigned site
+    When I navigate to the Claim details page to see view as pdf EOB
+    Then I can vdate the view as pdf link on claims details page header
+    | Plan Type    | <planType>    |
+    | Domain       | <domain>                |
+
+    Examples: 
+      | planType | claimPeriod    | domain | claimssystem  |
+      | MA       | Last 24 months | NICE   | NICECLAIMSEOB |

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.internal.runners.statements.Fail;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -291,7 +292,13 @@ public class ClaimDetailsPage extends UhcDriver{
 			System.out.println("validateMedicalEOBfordifferentDomainType");
 			System.out.println("for MAPD COSMOS EOB's are displayed===> "+ (medicalEOB.isDisplayed() && viewPDF.isDisplayed()));
 			return medicalEOB.isDisplayed() && viewPDF.isDisplayed();
+		}else if((plantype.equals("MA")||(plantype.equals("MAPD"))&&domain.equals("NICE")))
+		{
+			System.out.println("validateMedicalEOBfordifferentDomainType");
+			System.out.println("for NICE view as pdf link are displayed===> "+ (medicalEOB.isDisplayed() && viewPDF.isDisplayed()));
+			return medicalEOB.isDisplayed() && viewPDF.isDisplayed();
 		}
+		Assert.fail();
 		return false;
 		
 	}
