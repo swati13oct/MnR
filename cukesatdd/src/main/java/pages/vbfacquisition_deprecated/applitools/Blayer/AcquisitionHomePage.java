@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-//import pages.member.bluelayer.AccountHomePage;
+//import pages.member_deprecated.bluelayer.AccountHomePage;
 //import pages.vbfacquisition_deprecated.ulayer.MaViewPlansAndPricingPage;
 //import pages.vbfacquisition_deprecated.ulayer.MsViewPlansAndPricingPage;
 //import pages.vbfacquisition_deprecated.ulayer.PdpViewPlansAndPricingPage;

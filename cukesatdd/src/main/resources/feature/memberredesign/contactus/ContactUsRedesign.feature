@@ -32,10 +32,10 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
       | Expected Message | <expectedMessage> |
 
     Examples: 
-       | TID    | plantype | memberType    | enquiryType                 | alternativeEmailId | confirmAlternativeEmailId | alternativePhoneNumber | confirmAlternativePhoneNumber | expectedMessage                                                                                                                                                                 |
-       | 15323  | MAPD     | CALPERSGroup  | Payment Information         | test@optum.com     | test@optum.com            |             9999999999 |                    9999999999 | Thank you for your inquiry. We value your input, and would be happy to answer your questions. A Customer Service Advocate will review your question and respond to you shortly. |
-       | 15324  | MAPD     | GEORGIAGroup  | Finding a Pharmacy          | test@optum.com     | test@optum.com            |             9999999999 |                    9999999999 | Thank you for your inquiry. We value your input, and would be happy to answer your questions. A Customer Service Advocate will review your question and respond to you shortly. |
-       | 15218  | MAPD     | TEXASERSGroup | Updating Member information | test@optum.com     | test@optum.com            |             9999999999 |                    9999999999 | Thank you for your inquiry. We value your input, and would be happy to answer your questions. A Customer Service Advocate will review your question and respond to you shortly. |
+       | TID    | plantype | memberType              | enquiryType                 | alternativeEmailId | confirmAlternativeEmailId | alternativePhoneNumber | confirmAlternativePhoneNumber | expectedMessage                                                                                                                                                                 |
+       | 15323  | MAPD     | CALPERSGroup_ContactUs  | Payment Information         | test@optum.com     | test@optum.com            |             9999999999 |                    9999999999 | Thank you for your inquiry. We value your input, and would be happy to answer your questions. A Customer Service Advocate will review your question and respond to you shortly. |
+       | 15324  | MAPD     | GEORGIAGroup_ContactUs  | Finding a Pharmacy          | test@optum.com     | test@optum.com            |             9999999999 |                    9999999999 | Thank you for your inquiry. We value your input, and would be happy to answer your questions. A Customer Service Advocate will review your question and respond to you shortly. |
+       | 15218  | MAPD     | TEXASERSGroup_ContactUs | Updating Member information | test@optum.com     | test@optum.com            |             9999999999 |                    9999999999 | Thank you for your inquiry. We value your input, and would be happy to answer your questions. A Customer Service Advocate will review your question and respond to you shortly. |
 
   @contactUs3 @GroupEmailAQuestionFiledValidations  @regressionMember
   Scenario Outline: TID: <TID> -Plan Type: <plantype> -Member Type: <memberType> - Verify Group Email Widget Confirm Request in contact us redesign page with error messages
@@ -97,7 +97,7 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
        | 15379  | MA_ContactUs     |
 
   @contactUs6 @clickToCallCancel  @regressionMember
-  Scenario Outline: TID: <TID> -Plan Type: <plantype> -Member Type: <memberType> -  Verify clickToCall Widget Expansion (Drop-Down, Text Box and Button UI) and click on cancel on contactUS redesign page
+  Scenario Outline: TID: <TID> -Plan Type: <plantype> -Member Type: <memberType> -  Verify clickToCall Widget Expansion -Drop-Down, Text Box and Button UI- and click on cancel on contactUS redesign page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |
       | Member Type | <memberType> |

@@ -2,10 +2,10 @@ package acceptancetests.memberredesign.healthandwellness;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.dashboard.member.drugcostestimator.blayer.DrugCostEstimatorPage;
-import pages.memberredesign.bluelayer.AccountHomePage;
-import pages.memberredesign.bluelayer.HealthAndWellness;
-import pages.memberredesign.bluelayer.LoginPage;
+import pages.dashboard_deprecated.member.drugcostestimator.blayer.DrugCostEstimatorPage;
+import pages.memberredesign_deprecated.bluelayer.AccountHomePage;
+import pages.memberredesign_deprecated.bluelayer.HealthAndWellness;
+import pages.memberredesign_deprecated.bluelayer.LoginPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
