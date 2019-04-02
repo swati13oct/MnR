@@ -15,11 +15,11 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-//import pages.member.bluelayer.AccountHomePage;
-import pages.member.bluelayer.LoginPage2;
+//import pages.member_deprecated.bluelayer.AccountHomePage;
+import pages.member_deprecated.bluelayer.LoginPage2;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.profileandpreferences.CommunicationPreferencePage;
-//import pages.member.bluelayer.ProfilePreferencesPage;
+//import pages.member_deprecated.bluelayer.ProfilePreferencesPage;
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
