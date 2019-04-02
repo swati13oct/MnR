@@ -1037,7 +1037,7 @@ public class ClaimsMemberRedesignStepDefinition {
 							newclaimDetailspage.compareSummaryAndDetailData(claimType, dataMapSummary, dataMapDetail);
 
 							System.out.println("Proceed to validate 'EOB' links on detail page");
-							newclaimDetailspage.validate_EOB_onDetailPage(domain,planType);
+							newclaimDetailspage.validate_SearchEobHistory_onDetailPage(domain,planType);
 							// if all goes well, go back to the summary page to prep for next run
 							claimSummarypage= newClaimDetailsPage.navigateBackToClaimSummaryPage(planType, claimPeriod);
 							if(claimSummarypage != null) {
@@ -1165,7 +1165,7 @@ public class ClaimsMemberRedesignStepDefinition {
 		
 
 		ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		newclaimsSummarypage.validate_EOB_onSummaryPage(domain, planType);
+		newclaimsSummarypage.validate_SearchEobHistory_onSummaryPage(domain, planType);
 
 		if(newclaimsSummarypage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newclaimsSummarypage);
