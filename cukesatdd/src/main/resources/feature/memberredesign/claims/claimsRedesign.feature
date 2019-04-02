@@ -652,7 +652,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |12    |1041| MEDICA   | COSMOS | COSMOSCLAIMS                 | Prescription drug | Yes                 |
 
-	@claims15_13 @claims15_PDP @claims15_RX @claims15_DRUG @claims15_notNiceOrCosmos
+	@claims15_13 @claims15_PDP @claims15_RX @claims15_notNiceOrCosmos @claims15_DRUG
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |13    |1041| PDP      | RX     | RXCLAIMS                     | Prescription drug | No                  |
@@ -662,12 +662,12 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |14    |1041| SHIP     | NA     | SHIPCLAIMS                   | NA                | No                  |
 
-	@claims15_15 @claims15_COMBO @claims15_MEDICAL
+	@claims15_15 @claims15_COMBO @claims15_MAPD @claims15_COSMOS @claims15_MEDICAL
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |15    |1041| MAPD     | COSMOS | COMBO_COSMOSCLAIMS           | Medical           | Yes                 |
 
-	@claims15_16 @claims15_COMBO @claims15_DRUG @claims15_COSMOS
+	@claims15_16 @claims15_COMBO @claims15_MAPD @claims15_COSMOS @claims15_DRUG
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |16    |1041| MAPD     | COSMOS | COMBO_COSMOSCLAIMS           | Prescription drug | Yes                 |
