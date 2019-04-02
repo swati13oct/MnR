@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pages.regression.drugcostestimator.DrugCostEstimatorPage;
 //import pages.memberredesign.bluelayer.AccountHomePage;
 import pages.regression.accounthomepage.AccountHomePage;
-import pages.memberredesign.bluelayer.LoginPage;
+import pages.memberredesign_deprecated.bluelayer.LoginPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;

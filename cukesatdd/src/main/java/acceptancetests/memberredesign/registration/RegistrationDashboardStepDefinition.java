@@ -11,9 +11,9 @@ import junit.framework.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.dashboard.acquisition.DeregisterPage;
-import pages.dashboard.acquisition.RegistrationInformationPage;
-import pages.member.redesign.NewLoginPage;
+import pages.dashboard_deprecated.acquisition.DeregisterPage;
+import pages.dashboard_deprecated.acquisition.RegistrationInformationPage;
+import pages.member_deprecated.redesign.NewLoginPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;

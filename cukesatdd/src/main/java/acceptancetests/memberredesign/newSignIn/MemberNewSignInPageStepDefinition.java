@@ -10,10 +10,10 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.dashboard.member.ulayer.MemberNewSignInPage;
-import pages.dashboard.member.ulayer.NewMemebrRegistrationPage;
-import pages.dashboard.member.ulayer.UsernamePasswordAssistancePage;
-import pages.member.ulayer.LoginPage;
+import pages.dashboard_deprecated.member.ulayer.MemberNewSignInPage;
+import pages.dashboard_deprecated.member.ulayer.NewMemebrRegistrationPage;
+import pages.dashboard_deprecated.member.ulayer.UsernamePasswordAssistancePage;
+import pages.member_deprecated.ulayer.LoginPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
