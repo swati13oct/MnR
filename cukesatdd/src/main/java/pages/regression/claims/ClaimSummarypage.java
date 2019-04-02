@@ -1509,7 +1509,7 @@ public void TBR_NavigateToClaimsPage(){	//tbd-remove whole method
 				// note: do not modify this check - critical to wait
 				int extra=2000;
 				int x=0;
-				while(x<=20) {
+				while(x<=30) {
 					try {
 						if (verifyClaimsTableAndPagination()) {
 							Thread.sleep(extra); //give it more time to settle the page

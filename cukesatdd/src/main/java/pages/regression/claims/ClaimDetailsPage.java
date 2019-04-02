@@ -573,14 +573,22 @@ public class ClaimDetailsPage extends UhcDriver{
 
 			String value=element.getText().trim();
 			String[] tmp=value.split("to");
-			if (tmp.length==0) {
-				System.out.println("med_dateOfService is not populated, could be timing issue, check it one more time before giving up");
-				try {
-					Thread.sleep(5000);  //need to wait before validation, validate driver is ready or wait for element is not enough
-				} catch (InterruptedException e1) {}
-				value=element.getText().trim();
-				tmp=value.split("to");
+			int x=0;
+			while (x<=10) {
+				if (tmp.length==0) {
+					System.out.println("med_dateOfService is not populated, could be timing issue, wait a bit more before giving up");
+					try {
+						Thread.sleep(1000);  //need to wait before validation, validate driver is ready or wait for element is not enough
+					} catch (InterruptedException e1) {}
+					value=element.getText().trim();
+					tmp=value.split("to");
+				} else {
+					System.out.println("wait another sec for data to populate...");
+					break;
+				}
+				x=x+1;
 			}
+			System.out.println("waited total of "+x+" sec for the data to populate on detail page");
 			try {
 			value=tmp[0].trim();
 			} catch (ArrayIndexOutOfBoundsException e) {
