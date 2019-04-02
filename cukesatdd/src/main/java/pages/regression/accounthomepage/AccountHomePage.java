@@ -370,6 +370,15 @@ public class AccountHomePage extends UhcDriver {
 	private WebElement PaymentHistorySection;*/
 	@FindBy(xpath ="//*[@id='paymentHistoryApp1']//div//div[@class='col-md-12']/h2")
 	private WebElement PaymentHistorySection;
+	
+	@FindBy(xpath ="//*[@id='atddUhcPagination']/li[3]/a")
+	private WebElement paginationRightArrow;
+	
+	@FindBy(xpath ="//*[@id='moreInfoLinkAtdd2']/a")
+	private WebElement specificclaimlinkforeob;
+	
+	
+	
 
 	private PageData myAccountHome;
 
@@ -2548,28 +2557,28 @@ public class AccountHomePage extends UhcDriver {
 		}
 	}
 	//^^^ note: added for 'sorry' login error workaround	
+	public ClaimDetailsPage navigateToClaimDetailsPagetoseeeobpdflink() {
 
+		try {
+			validateNew(claimstablemoreinfolink);
+            paginationRightArrow.click();
+            paginationRightArrow.click();
+            paginationRightArrow.click();
+			System.out.println("more info link is seen for  ===>" + claimstablemoreinfolink.isDisplayed());
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			JavascriptExecutor executor = (JavascriptExecutor) driver;
+			executor.executeScript("arguments[0].click();", specificclaimlinkforeob);
+			System.out.println(driver.getTitle());
+			if (driver.getTitle().equalsIgnoreCase("Claims Summary")) {
+				System.out.println("*** Claims Details Page ***");
+			}
+		} catch (Exception ex) {
+			return null;
+		}
+		return new ClaimDetailsPage(driver);
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
