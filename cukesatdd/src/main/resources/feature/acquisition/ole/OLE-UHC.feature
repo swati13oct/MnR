@@ -485,7 +485,7 @@ Feature: 1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
       |   78006 |
       
 
- @acquisitionRegressiontest @aprilrelease2019
+ @acquisitionRegression @April_release_2019 @Ancillary_Widget @OLE_Regression
   Scenario Outline: TID: <TID> -plan type: <PlanType> - OLE End to end from UHC Acquisition site VPP Plan Summary for Anciallry Widget
      Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
