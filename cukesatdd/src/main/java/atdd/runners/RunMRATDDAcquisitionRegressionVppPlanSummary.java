@@ -13,10 +13,10 @@ import cucumber.api.CucumberOptions;
 @RunWith(ExtendedCucumber.class)
 
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDfastandfuriousAcquisitionTest.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDfastandfuriousAcquisitionTest")
+jsonReport = "target/cucumber-RunMRATDDAcquisitionRegressionVppPlanSummary.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDfastandfuriousAcquisitionTest")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition.vpp", "acceptancetests.acquisition.ole"  },
 features = { "src/main/resources/feature/acquisition/vpp","src/main/resources/feature/acquisition/ole" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDfastandfuriousAcquisitionTest.json" }, tags = { "@vppPlanCardsRegression, @rightRailRegression" })
-//@validateEyeWearCredit,@F250062, @OLE_Regression,
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionRegressionVppPlanSummary.json" }, tags = { "@vppPlanCardsRegression, @rightRailRegression, @vppFavoritePlanRegression, @vppEmailRegression, @vppPrintRegression" })
+
 public class RunMRATDDAcquisitionRegressionVppPlanSummary { 
 }

@@ -1,6 +1,7 @@
 package pages.regression.accounthomepage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -28,10 +29,10 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 //import pages.member.redesign.ContactUsPage;
-import pages.member.ulayer.OneTimePaymentsPage;
-import pages.member.ulayer.PlanComparePage;
-import pages.member.ulayer.Rallytool_Page;
-import pages.member.ulayer.TestHarness;
+import pages.member_deprecated.ulayer.OneTimePaymentsPage;
+import pages.member_deprecated.ulayer.PlanComparePage;
+import pages.member_deprecated.ulayer.Rallytool_Page;
+import pages.member_deprecated.ulayer.TestHarness;
 import pages.regression.IDCardPage.IDCardPage;
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.regression.claims.ClaimDetailsPage;
@@ -44,7 +45,7 @@ import pages.regression.formsandresources.FormsAndResourcesPage;
 import pages.regression.ordermaterials.OrderMaterialsPage;
 import pages.regression.payments.PaymentHistoryPage;
 import pages.regression.pharmacylocator.PharmacySearchPage;
-//import pages.member.bluelayer.BenefitsAndCoveragePage;
+//import pages.member_deprecated.bluelayer.BenefitsAndCoveragePage;
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 
 public class AccountHomePage extends UhcDriver {
@@ -146,8 +147,8 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='plan_box']/div/div[2]/div/p/a")
 	private WebElement planNameLink;
 
-	//@FindBy(id = "dropdown-toggle--1")
-	@FindBy(id = "accountProfile")											 
+	@FindBy(xpath = "//button[@id='dropdown-toggle--1']")
+	//@FindBy(id = "accountProfile")											 
 	private WebElement accountProfileBtn;
 
 	// @FindBy(xpath = ".//*[@id='dropdown-options--1']/a[contains(text(),'Account
@@ -238,6 +239,11 @@ public class AccountHomePage extends UhcDriver {
 	//@FindBy(xpath = "//*[@id='claims_1']") @FindBy(xpath = "//a[text()='Go to Claims page']")
 	private WebElement claimsDashboardLink;
 
+	//note: for workaround if getting 'Sorry' error, go to account setting then go to claims
+	@FindBy(xpath = "//a[@id='claims_1']")
+	private WebElement claimsWorkAround;
+
+	
 	@FindBy(xpath = "//*[@id='row2link1']/td[2]/a")
 	private WebElement claimsTestharnessLink;
 
@@ -364,6 +370,15 @@ public class AccountHomePage extends UhcDriver {
 	private WebElement PaymentHistorySection;*/
 	@FindBy(xpath ="//*[@id='paymentHistoryApp1']//div//div[@class='col-md-12']/h2")
 	private WebElement PaymentHistorySection;
+	
+	@FindBy(xpath ="//*[@id='atddUhcPagination']/li[3]/a")
+	private WebElement paginationRightArrow;
+	
+	@FindBy(xpath ="//*[@id='moreInfoLinkAtdd2']/a")
+	private WebElement specificclaimlinkforeob;
+	
+	
+	
 
 	private PageData myAccountHome;
 
@@ -383,6 +398,11 @@ public class AccountHomePage extends UhcDriver {
 			myAccountHome = CommonUtility.readPageData(fileName,
 					CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);
 		}
+		//initialize this in case need to workaround later due to Sorry login error for certain testing
+		attemptSorryWorkaround=new HashMap<String,String>();
+		attemptSorryWorkaround.put("needWorkaround", "no");
+		attemptSorryWorkaround.put("planType", "na");
+		attemptSorryWorkaround.put("testType", "na");
 
 		// openAndValidate();
 	}
@@ -390,6 +410,11 @@ public class AccountHomePage extends UhcDriver {
 	public AccountHomePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
+		//initialize this in case need to workaround later due to Sorry login error for certain testing
+		attemptSorryWorkaround=new HashMap<String,String>();
+		attemptSorryWorkaround.put("needWorkaround", "no");
+		attemptSorryWorkaround.put("planType", "na");
+		attemptSorryWorkaround.put("testType", "na");
 		/*
 		 * try {
 		 * 
@@ -621,14 +646,19 @@ public class AccountHomePage extends UhcDriver {
 				accountSettingOption.click();
 				System.out.println("title is " + driver.getTitle());
 				System.out.println("Current Url is " + driver.getCurrentUrl());
-				Thread.sleep(6000);	   
-				//CommonUtility.waitForPageLoad(driver, heading, 10);
-
-				if (driver.getCurrentUrl().contains("profile")) {
-					return new ProfileandPreferencesPage(driver);
-				}
-				return null;
 			}
+			else if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
+				workaroundAttempt("profilepref");
+			}
+			Thread.sleep(6000);	   
+			//CommonUtility.waitForPageLoad(driver, heading, 10);
+
+			if (driver.getCurrentUrl().contains("profile")) {
+				return new ProfileandPreferencesPage(driver);
+			} 
+			return null;
+
+
 
 		} else if (MRScenario.environment.equals("team-ci1") || MRScenario.environment.equals("team-h")
 				|| MRScenario.environment.equals("test-a") || MRScenario.environment.equals("team-e")
@@ -1089,7 +1119,12 @@ public class AccountHomePage extends UhcDriver {
 				CommonUtility.waitForPageLoadNew(driver, headingContactUs, CommonConstants.TIMEOUT_60);
 				Thread.sleep(3000L);
 			} else {
-				linkContactUs.click();
+				if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
+					workaroundAttempt("contactus");
+				} else {
+					linkContactUs.click();
+				}
+
 			}
 			CommonUtility.waitForPageLoad(driver, headingContactUs, 10);
 			if (driver.getTitle().contains("Contact Us")) {
@@ -1101,7 +1136,7 @@ public class AccountHomePage extends UhcDriver {
 		return null;
 	}
 
-	public pages.dashboard.member.ulayer.PaymentHistoryPage changeUrlToNewPaymentHistoryPage() {
+	public pages.dashboard_deprecated.member.ulayer.PaymentHistoryPage changeUrlToNewPaymentHistoryPage() {
 
 		String NewPayHistoryUrl = "content/dashboard/home/Payments.html";
 
@@ -1112,7 +1147,7 @@ public class AccountHomePage extends UhcDriver {
 		// System.out.println("testing2");
 		if (paymentsHeading.getText().contains("Premium Payments Overview")) {
 
-			return new pages.dashboard.member.ulayer.PaymentHistoryPage(driver);
+			return new pages.dashboard_deprecated.member.ulayer.PaymentHistoryPage(driver);
 
 		}
 
@@ -1226,7 +1261,6 @@ public class AccountHomePage extends UhcDriver {
 		} else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
 			System.out.println("user is on Stage login page");
 			if (driver.getCurrentUrl().contains("/dashboard"))
-				;
 			{
 				System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
 				if(MRScenario.isTestHarness.equals("YES")){
@@ -1234,13 +1268,17 @@ public class AccountHomePage extends UhcDriver {
 				}else{
 					claimsDashboardLink.click();
 				}
-				try {
+				CommonUtility.checkPageIsReadyNew(driver);
+				/* tbd 	try {
 					Thread.sleep(10000);
 
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
+				}*/
+			} 
+			else if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
+				workaroundAttempt("claims");
 			}
 			return new ClaimSummarypage(driver);
 
@@ -1250,18 +1288,18 @@ public class AccountHomePage extends UhcDriver {
 		}
 		System.out.println(driver.getTitle());
 
-		if (driver.getTitle().equalsIgnoreCase("Claims")) {
-			try {
-				Thread.sleep(10000);
-				ClaimSummarypage comboTab = new ClaimSummarypage(driver).comboTabSelection();
-				comboTab.comboTabSelection();
+		//tbd if (driver.getTitle().equalsIgnoreCase("Claims")) {
+			//tbd try {
+			//tbd 	Thread.sleep(10000);
+		//tbd 	ClaimSummarypage comboTab = new ClaimSummarypage(driver).comboTabSelection();
+		//tbd 		comboTab.comboTabSelection();
 
-			} catch (InterruptedException e) {
+				//tbd } catch (InterruptedException e) {
 
-				e.printStackTrace();
-			}
+				//tbd e.printStackTrace();
+				//tbd }
 
-		}
+				//tbd }
 		return null;
 	}
 
@@ -1321,19 +1359,22 @@ public class AccountHomePage extends UhcDriver {
 			System.out.println("URL for testing: "+Page_URL);
 			driver.navigate().to(Page_URL);
 		} else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
-			waitForHomePage(helloPerson);
-			if (driver.getCurrentUrl().contains("/dashboard")) {
-				System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
-				pharmacySearchLink.click();
-				try {
-					Thread.sleep(10000);
+			if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
+				workaroundAttempt("pharmacylocator");
+			} else {
+				waitForHomePage(helloPerson);
+				if (driver.getCurrentUrl().contains("/dashboard")) {
+					System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
+					pharmacySearchLink.click();
+					try {
+						Thread.sleep(10000);
 
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			}
-
 		}
 		return new PharmacySearchPage(driver);
 	}
@@ -1603,20 +1644,23 @@ public class AccountHomePage extends UhcDriver {
 			executor.executeScript("arguments[0].click();", OrderMaterial_Dashboard);
 			// OrderMaterial_Dashboard.click();
 		} else {
-			//tbd String Page_URL = "https://" + MRScenario.environment
-			//tbd 		+ "-medicare."+MRScenario.domain+"//member/order-plan-materials.html";
-			String Page_URL="";
-			if (MRScenario.environment.equalsIgnoreCase("team-a")) {
-				Page_URL = "https://www." + MRScenario.environment
-						+ "-medicare."+MRScenario.domain+"/content/medicare/member/order-materials/overview.html";
+			if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
+				workaroundAttempt("order");
 			} else {
-				Page_URL = "https://" + MRScenario.environment
-						+ "-medicare."+MRScenario.domain+"//member/order-plan-materials.html";
+				String Page_URL="";
+				if (MRScenario.environment.equalsIgnoreCase("team-a")) {
+					Page_URL = "https://www." + MRScenario.environment
+							+ "-medicare."+MRScenario.domain+"/content/medicare/member/order-materials/overview.html";
+				} else {
+					Page_URL = "https://" + MRScenario.environment
+							+ "-medicare."+MRScenario.domain+"//member/order-plan-materials.html";
+				}
+				
+				// String Page_URL = driver.getCurrentUrl().split(".com")[0];
+				driver.navigate().to(Page_URL);
+				System.out.println("Navigated to Order materials Page URL : " + Page_URL);
 			}
 			
-			// String Page_URL = driver.getCurrentUrl().split(".com")[0];
-			driver.navigate().to(Page_URL);
-			System.out.println("Navigated to Order materials Page URL : " + Page_URL);
 		}
 		try {
 			Thread.sleep(3000);
@@ -1702,6 +1746,14 @@ public class AccountHomePage extends UhcDriver {
 				System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
 				waitforElement(drugLookup);
 				drugLookup.click();
+				try {
+					WebElement loadingImage = driver.findElement(By.className("loading-dialog"));
+					CommonUtility.waitForPageLoad(driver, loadingImage, 15);
+				} catch (Exception e) {
+					System.out.println("Exception e: "+e);
+				}
+			} else if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
+				workaroundAttempt("dce");
 			}
 		} else {
 			System.out.println("This script is only intended to be run using test harness on team-b or team-h. Update condition for your own environment");
@@ -2430,7 +2482,7 @@ public class AccountHomePage extends UhcDriver {
         System.out.println(" @@@ The title of the page is "+driver.getTitle());         
         if (getTitle().equalsIgnoreCase("Home | UnitedHealthcare")) {        	 
      	   System.out.println("On the dashboard ");            
-}
+        }
         System.out.println("@@@ The URL of the page is ==>" + driver.getCurrentUrl());
         if (driver.getCurrentUrl().contains("https://member.int.uhc.com/aarp/dashboard"));
         System.out.println("Member is on the dashboard");
@@ -2442,31 +2494,91 @@ public class AccountHomePage extends UhcDriver {
  			"Use this site to find helpful information while you’re getting ready for your plan to start on"));
  	System.out.println("Assert on the preeffective message is passed");
 
- }
+	}
     
+	//vvv note: added for 'sorry' login error workaround	
+	private HashMap<String,String> attemptSorryWorkaround;
 
-	
+	public HashMap<String,String> getAttemptSorryWorkaround() {
+		return attemptSorryWorkaround;
+	}
+
+	public void setAttemptSorryWorkaround(HashMap<String,String> input) {
+		attemptSorryWorkaround=input;
+	}
+
+	public void workaroundAttempt(String page) {
+		System.out.println("======================== OK LET'S ATTEMPT THE 'SORRY' WORKAROUND  ===========================");
+		//assumption this is the sorry error url, parse the URL to determine which URL to use
+		String currentUrl=driver.getCurrentUrl();
+		String[] tmp1=currentUrl.split(".com/");
+		String[] tmp2=tmp1[1].split("/");
+		String userType=tmp2[0];
+
+		String part1="";
+		if (attemptSorryWorkaround.get("planType").equalsIgnoreCase("pcp") || attemptSorryWorkaround.get("planType").equalsIgnoreCase("medica")) {
+			part1="https://"+MRScenario.environmentMedicare+"-mymedicareaccount.uhc.com/";
+		} else {
+			part1="https://"+MRScenario.environmentMedicare+"-medicare.uhc.com/";
+		}
+
+		String part2=userType;
+
+		String part3="";
+		if (page.equals("claims")) {
+			part3="/member/claims.html#/overview";
+		} else if (page.equals("contactus")) {
+			part3="/member/contact-us/overview.html#/contact-us-two";
+		} else if (page.equals("profilepref")) {
+			part3="/member/profile.html";
+		} else if (page.equals("order")) { 
+			part3="/member/order-materials/overview.html";
+		} else if (page.equals("reward")) { 
+			part3="/member/health-and-wellness.html";
+		} else if (page.equals("pharmacylocator")) { 
+			part3="/member/pharmacy-locator/overview.html";
+		} else if (page.equals("dce")) { 
+			part3="/member/drug-lookup/overview.html#/drug-cost-estimator";
+		} else {	//note: shouldn't have gotten here, but just in case
+			Assert.assertTrue("Sorry, testType '"+attemptSorryWorkaround.get("testType")+"' is not covered by this workaround yet, abort this test now", false);
+		}
+
+		String workaroundURL=part1+part2+part3;
+		if (page.equals("dce")) {
+			// mimic testharness page
+			workaroundURL="https://stage-medicare.uhc.com/content/medicare/member/drug-lookup/overview.html#/drug-cost-estimator"; 
+		}
+		System.out.println("Workaround URL is going to be: "+workaroundURL);
+		driver.get(workaroundURL);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	//^^^ note: added for 'sorry' login error workaround	
+	public ClaimDetailsPage navigateToClaimDetailsPagetoseeeobpdflink() {
+
+		try {
+			validateNew(claimstablemoreinfolink);
+            paginationRightArrow.click();
+            paginationRightArrow.click();
+            paginationRightArrow.click();
+			System.out.println("more info link is seen for  ===>" + claimstablemoreinfolink.isDisplayed());
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			JavascriptExecutor executor = (JavascriptExecutor) driver;
+			executor.executeScript("arguments[0].click();", specificclaimlinkforeob);
+			System.out.println(driver.getTitle());
+			if (driver.getTitle().equalsIgnoreCase("Claims Summary")) {
+				System.out.println("*** Claims Details Page ***");
+			}
+		} catch (Exception ex) {
+			return null;
+		}
+		return new ClaimDetailsPage(driver);
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

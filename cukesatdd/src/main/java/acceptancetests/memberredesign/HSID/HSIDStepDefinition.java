@@ -10,7 +10,9 @@ import java.util.Map;
 import java.util.Set;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
@@ -19,6 +21,7 @@ import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
+import atdd.framework.UhcDriver;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -26,6 +29,7 @@ import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
 import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.drugcostestimator.DrugCostEstimatorPage;
 import pages.regression.login.AssistiveRegistrationPage;
 import pages.regression.login.DeregisterPage;
 import pages.regression.login.HSIDLoginPage;
@@ -61,6 +65,7 @@ public class HSIDStepDefinition {
 
 		String category = memberAttributesMap.get("Member Type");
 		String planType = memberAttributesMap.get("Plan Type");
+		String testDataType = memberAttributesMap.get("Test Data Type");
 		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
 		List<String> desiredAttributes = new ArrayList<String>();
 		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
@@ -123,8 +128,32 @@ public class HSIDStepDefinition {
 				getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,
 						accountHomePage);
 				Assert.assertTrue(true);
+		
 			} else {
-				Assert.fail("***** Error in loading  Redesign Account Landing Page *****");
+				//tbd Assert.fail("***** Error in loading Redesign Account Landing Page *****");
+				// note: accountHomePage==null, instead of fail it right away, check to see if it is worth it go workaround it
+				System.out.println("accountHomePage==null, try one more check to see if workaround can be applied before calling it quit");
+				try {
+					WebElement sorry=wd.findElement(By.xpath("//h1[@translate='INTERNAL_ERROR_SORRY']")); 
+					if ((testDataType==null) && (category==null) && (planType==null)) {
+						System.out.println("not workaround candidate, don't have enough info to determine if woorkaround is possible, test doesn't have the 'Test Data Type' or 'Member Type' or 'Plan Type' input ");
+						Assert.fail("***** Error in loading  Redesign Account Landing Page *****");
+					} else {
+						//note: has the potential for sorry workaround if getting sorry error
+						Thread.sleep(1500);	//sometimes the sorry text take a bit longer to load
+						if (sorry.isDisplayed()) {
+							boolean result=workaroundSorryErrorPage(wd, testDataType, category, planType);
+							Assert.assertTrue("***** Error in loading Redesign Account Landing Page ***** Got error for 'Sorry. it's not you, it's us'", result);
+
+						} else {
+							System.out.println("Not the 'sorry' login error, it's some other login error");
+							Assert.fail("***** Error in loading Redesign Account Landing Page *****");
+						}
+					}
+				} catch(Exception e) {
+					System.out.println("Exception: "+e);
+					Assert.fail("***** Error in loading  Redesign Account Landing Page *****");
+				}
 			}
 		} else {
 			if (("YES").equalsIgnoreCase(MRScenario.isTestHarness)) {
@@ -515,4 +544,71 @@ public class HSIDStepDefinition {
 		loginPage.switchToIperceptionSmileySurveyAndSubmit();
 
 	}
+	
+	//vvv note: added for 'sorry' login error workaround	
+	public boolean workaroundSorryErrorPage(WebDriver wd, String testDataType, String category, String planType) {
+		String bypassSorry = System.getProperty("bypassSorry");
+		if (bypassSorry==null) {
+			//System.out.println("bypassSorry not set, don't bother to handle Sorry page");
+			return false;
+		} else {
+			if (!bypassSorry.equalsIgnoreCase("yes") && !bypassSorry.equalsIgnoreCase("no")) {
+				//System.out.println("don't bother to handle Sorry page, bypassSorry can either be yes or no.  Actual="+bypassSorry);
+				return false;
+			} else if (bypassSorry.equalsIgnoreCase("no")) {
+				//System.out.println("don't bother to handle Sorry page, bypassSorry flag set to no");
+				return false;
+			}
+		}
+		String type="";
+		if ((testDataType==null) && (category!=null)) {
+			type=category.toLowerCase();
+		} else if ((testDataType!=null) && (category==null)) {
+			type=testDataType.toLowerCase();
+		} else if ((testDataType==null) && (category==null)) {
+			type=planType.toLowerCase();
+		}
+		System.out.println("type="+type);
+		//note: login failure is sorry error, check to see if it's candidate for workaround
+		if 	(type.contains("claims") ||type.contains("reward")
+				||type.contains("contactus")||type.contains("profilepref")
+				||type.contains("order") ||type.contains("header")
+				||type.contains("pharmacylocator")
+				) {	//for now only doing workaround for the above features
+			String forType="claims";
+			if (type.contains("contactus")) {
+				forType="contactus";
+			} else if (type.contains("profilepref")) {
+				forType="profilepref";
+			} else if (type.contains("order")) {
+				forType="order";
+			} else if (type.contains("header")) {
+				forType="header";
+			} else if (type.contains("reward")) {
+				forType="reward";
+			} else if (type.contains("pharmacylocator")) {
+				forType="pharmacylocator";
+			}
+			System.out.println("*** bypassSorry is set to yes ***");
+			System.out.println("Got 'sorry' login error and this is test for "+type+", will attempt the workaround");
+			
+			AccountHomePage accountHomePage=new AccountHomePage(wd);
+			HashMap<String, String> workaroundInfoMap=new HashMap<String, String>();
+			workaroundInfoMap.put("needWorkaround","yes");
+			workaroundInfoMap.put("planType",planType);
+			workaroundInfoMap.put("testType", forType);
+			accountHomePage.setAttemptSorryWorkaround(workaroundInfoMap);
+			if (type.contains("reward")) { //proceed to switch page now
+				accountHomePage.workaroundAttempt("reward");
+			}
+			getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
+			return true;
+		} else {
+			String msg="not workaround candidate";
+			System.out.println(msg);
+			return false;
+		}
+	}
+	//^^^ note: added for 'sorry' login error workaround	
+
 }

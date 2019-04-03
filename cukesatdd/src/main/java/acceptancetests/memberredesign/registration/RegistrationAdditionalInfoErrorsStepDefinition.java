@@ -11,7 +11,7 @@ import junit.framework.Assert;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.dashboard.acquisition.RegistrationInformationPage;
+import pages.dashboard_deprecated.acquisition.RegistrationInformationPage;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;

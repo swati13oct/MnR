@@ -120,7 +120,7 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
       |   33012 | AARP MedicareComplete Choice Plan 2 (Regional PPO) | MAPD     |
 
   @F229349 @validateEyeWearCredit @fastandfurious @Mar_release_2019
-  Scenario Outline: UserStory: <UID> -plan type: <PlanType> - Verify specific Additional Benefits in Plan Details for provided plan
+  Scenario Outline: UserStory: <UID> -plan type: <plantype> - Verify specific Additional Benefits in Plan Details for provided plan
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |
@@ -316,7 +316,7 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
          
 
       
-  @feature-F265872 @us1598162 @vppFavoritePlanInSession @vppFavoritePlanInSessionUhc @thePredators @Apr_release_2019
+  @feature-F265872 @us1598162 @vppFavoritePlanRegression @vppFavoritePlanInSession @vppFavoritePlanInSessionUhc @thePredators @Apr_release_2019
   Scenario Outline: UID: <UID> -zipcode: <zipcode> -isMultiCounty: <isMultiCounty> - Verify user can save and unsave favorite plans on view plan preview page on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -381,7 +381,7 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
       | 1598162 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Nursing Home Plan (PPO SNP),UnitedHealthcare Assisted Living Plan (PPO SNP)|
 
 
-  @feature-F265872 @us1598162 @vppFavoritePlanInSessionCloseTab @vppFavoritePlanInSessionCloseTabUhc @thePredators @Apr_release_2019
+  @feature-F265872 @us1598162 @vppFavoritePlanRegression @vppFavoritePlanInSessionCloseTab @vppFavoritePlanInSessionCloseTabUhc @thePredators @Apr_release_2019
   Scenario Outline: UID: <UID> -zipcode: <zipcode> -isMultiCounty: <isMultiCounty> - Verify user can print favorite plans on view plan preview page on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -408,7 +408,7 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
       | 1598162 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Nursing Home Plan (PPO SNP),UnitedHealthcare Assisted Living Plan (PPO SNP)|
 
 
-  @feature-F265872 @us1598166 @vppFavoritePlanEmail @vppFavoritePlanEmailUhc @thePredators @Apr_release_2019
+  @feature-F265872 @us1598166 @vppEmailRegression @vppFavoritePlanEmailUhc @thePredators @Apr_release_2019
   Scenario Outline: UID: <UID> -zipcode: <zipcode> -isMultiCounty: <isMultiCounty> - Verify user can invoke the email button on view plan preview page on UHC site
 	# NOTE: Uncommment the step to save plans when there is a way to validate the received email content
     Given the user is on the uhcmedicaresolutions site landing page
@@ -428,7 +428,7 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
       | 1598166 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Nursing Home Plan (PPO SNP),UnitedHealthcare Assisted Living Plan (PPO SNP)|
 
 
-  @feature-F265872 @us1603378 @vppFavoritePlanPrint @vppFavoritePlanPrintUhc @thePredators @Apr_release_2019
+  @feature-F265872 @us1603378 @vppPrintRegression @vppFavoritePlanPrintUhc @thePredators @Apr_release_2019 
   Scenario Outline: UID: <UID> -zipcode: <zipcode> -isMultiCounty: <isMultiCounty> - Verify user can invoke the print button on view plan preview page on UHC site
 	# NOTE: Uncommment the step to save plans when there is a way to validate the print preview screen content
     Given the user is on the uhcmedicaresolutions site landing page
