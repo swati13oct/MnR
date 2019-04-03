@@ -386,7 +386,9 @@ Feature: T1.1To validate the new changes related to claims page on the member re
     #----- begin of claims15 ---------------------------------------------------------
     # note: for time being will bypass the YourShare value mismatch between summary and detail INC10332773
     # note: will bypass Search EOB History link missing for MA NICE summary page and MA and MAPD NICE detail page defect on prod
-	# note: any additional Example will need to tag with either one of these @claims15_COSMOS @claims15_NICE @claims15_notNiceOrCosmos
+	# note: any additional Example will need to tag with either one of these 
+	# note:   @claims15_COSMOS_MEDICAL, @claims15_COSMOS_DRUG, 
+	# note:   @claims15_NICE_MEDICAL, @claims15_NICE_DRUG or @claims15_NOT_NICE_OR_COSMOS
     @claims15 @def1041 @thePredators
 	Scenario Outline: DID: <DID> -plan: <planType> -claimsSystem: <claimssystem> -claimType: <claimType> - <index> - To validate claims for both summary and detail page for each search range options
 		Given login with following details logins in the member portal and validate elements
@@ -592,97 +594,97 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		#----------------- Final Test claims number makes sense from search periods --------------
 		And I can validate the numbers of claims from all search periods
 		  
-	@claims15_01 @claims15_MAPD @claims15_COSMOS @claims15_MEDICAL @diffGrpsDiffYrs
+	@claims15_01 @claims15_MAPD @claims15_COSMOS_MEDICAL @diffGrpsDiffYrs
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |01    |1041| MAPD     | COSMOS | diffGrpsDiffYrs_COSMOSCLAIMS | Medical           | Yes                 |
 
-	@claims15_02 @claims15_MAPD @claims15_COSMOS @claims15_DRUG @diffGrpsDiffYrs
+	@claims15_02 @claims15_MAPD @claims15_COSMOS_DRUG @diffGrpsDiffYrs
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |02    |1041| MAPD     | COSMOS | diffGrpsDiffYrs_COSMOSCLAIMS | Prescription drug | Yes                 |
 
-	@claims15_03 @claims15_MA @claims15_COSMOS @claims15_MEDICAL
+	@claims15_03 @claims15_MA @claims15_COSMOS_MEDICAL
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |03    |1041| MA       | COSMOS | COSMOSCLAIMS                 | Medical           | Yes                 |
 
-	@claims15_04 @claims15_MA @claims15_NICE @claims15_MEDICAL
+	@claims15_04 @claims15_MA @claims15_NICE_MEDICAL
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |04    |1041| MA       | NICE   | NICECLAIMS                   | Medical           | Yes                 |
 
-	@claims15_05 @claims15_MAPD @claims15_NICE @claims15_MEDICAL
+	@claims15_05 @claims15_MAPD @claims15_NICE_MEDICAL
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |05    |1041| MAPD     | NICE   | NICECLAIMS                   | Medical           | Yes                 |
 
-	@claims15_06 @claims15_MAPD @claims15_NICE @claims15_DRUG
+	@claims15_06 @claims15_MAPD @claims15_NICE_DRUG
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |06    |1041| MAPD     | NICE   | NICECLAIMS                   | Prescription drug | Yes                 |
 
-	@claims15_07 @claims15_MAPD @claims15_COSMOS @claims15_MEDICAL
+	@claims15_07 @claims15_MAPD @claims15_COSMOS_MEDICAL
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |07    |1041| MAPD     | COSMOS | COSMOSCLAIMS                 | Medical           | Yes                 |
 
-	@claims15_08 @claims15_MAPD @claims15_COSMOS @claims15_DRUG
+	@claims15_08 @claims15_MAPD @claims15_COSMOS_DRUG
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |08    |1041| MAPD     | COSMOS | COSMOSCLAIMS                 | Prescription drug | Yes                 |
 
-	@claims15_09 @claims15_PCP @claims15_COSMOS @claims15_MEDICAL
+	@claims15_09 @claims15_PCP @claims15_COSMOS_MEDICAL
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |09    |1041| PCP      | COSMOS | COSMOSCLAIMS                 | Medical           | Yes                 |
 
-	@claims15_10 @claims15_PCP @claims15_COSMOS @claims15_DRUG
+	@claims15_10 @claims15_PCP @claims15_COSMOS_DRUG
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |10    |1041| PCP      | COSMOS | COSMOSCLAIMS                 | Prescription drug | Yes                 |
 
-	@claims15_11 @claims15_MEDICA @claims15_COSMOS @claims15_MEDICAL
+	@claims15_11 @claims15_MEDICA @claims15_COSMOS_MEDICAL
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |11    |1041| MEDICA   | COSMOS | COSMOSCLAIMS                 | Medical           | Yes                 |
 
-	@claims15_12 @claims15_MEDICA @claims15_COSMOS @claims15_DRUG
+	@claims15_12 @claims15_MEDICA @claims15_COSMOS_DRUG
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |12    |1041| MEDICA   | COSMOS | COSMOSCLAIMS                 | Prescription drug | Yes                 |
 
-	@claims15_13 @claims15_PDP @claims15_RX @claims15_notNiceOrCosmos @claims15_DRUG
+	@claims15_13 @claims15_PDP @claims15_RX @claims15_NOT_NICE_OR_COSMOS
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |13    |1041| PDP      | RX     | RXCLAIMS                     | Prescription drug | No                  |
 
-	@claims15_14 @claims15_SHIP @claims15_notNiceOrCosmos
+	@claims15_14 @claims15_SHIP @claims15_NOT_NICE_OR_COSMOS
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |14    |1041| SHIP     | NA     | SHIPCLAIMS                   | NA                | No                  |
 
-	@claims15_15 @claims15_COMBO @claims15_MAPD @claims15_COSMOS @claims15_MEDICAL
+	@claims15_15 @claims15_COMBO @claims15_MAPD @claims15_COSMOS_MEDICAL
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |15    |1041| MAPD     | COSMOS | COMBO_COSMOSCLAIMS           | Medical           | Yes                 |
 
-	@claims15_16 @claims15_COMBO @claims15_MAPD @claims15_COSMOS @claims15_DRUG
+	@claims15_16 @claims15_COMBO @claims15_MAPD @claims15_COSMOS_DRUG
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |16    |1041| MAPD     | COSMOS | COMBO_COSMOSCLAIMS           | Prescription drug | Yes                 |
 
-	@claims15_17 @claims15_COMBO @claims15_SHIP @claims15_notNiceOrCosmos
+	@claims15_17 @claims15_COMBO @claims15_SHIP @claims15_NOT_NICE_OR_COSMOS
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |17    |1041| SHIP     | NA     | COMBO_SHIPCLAIMS             | NA                | No                  |
 
-	@claims15_18 @claims15_GROUP @claims15_MAPD @claims15_COSMOS @claims15_MEDICAL
+	@claims15_18 @claims15_GROUP @claims15_MAPD @claims15_COSMOS_MEDICAL
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |18    |1041| MAPD     | COSMOS | GROUP_COSMOSCLAIMS           | Medical           | Yes                 |
 
-	@claims15_19 @claims15_GROUP @claims15_MAPD @claims15_COSMOS @claims15_DRUG
+	@claims15_19 @claims15_GROUP @claims15_MAPD @claims15_COSMOS_DRUG
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |19    |1041| MAPD     | COSMOS | GROUP_COSMOSCLAIMS           | Prescription drug | Yes                 |
