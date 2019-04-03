@@ -368,6 +368,10 @@ public class MRConstants {
   public static final String OSE_NEW_URL_PCP_OR_MEDIA = "https://www."+MRScenario.environment+"-mymedicareaccount."+MRScenario.domain+"/content/medicare/login/memberRedesign.html?testharness=true";
   public static final String OFFLINE_STAGE_TESTHARNESS = "https://"+ MRScenario.environment +"-medicare."+MRScenario.domain+"/?testharness=true";  
   
+  //vvv note:
+  public static final String OFFLINE_PROD_MEMBER_AUTH = "https://offline-generic.uhc.com/memberonlineaccount#/memberAuthLogin";
+  public static final String ONLINE_PROD_MEMBER_AUTH = "https://generic.uhc.com/memberonlineaccount#/memberAuthLogin";
+  //^^^ note:
   
  }
 

@@ -2038,6 +2038,34 @@ public class oleStepDefinition {
 		}
 
 	}
+	
+	@Then("^user selects Optional Rider Benfits Dental \"([^\"]*)\"or fitness \"([^\"]*)\" Riders$")
+	public void user_selects_Optional_Rider_Benfits_Dental_or_fitness_Riders(String Dentalrider, String FitnessRider)
+			throws Throwable {
+		SupplementalBenefitsPage ridersPage = (SupplementalBenefitsPage) getLoginScenario()
+				.getBean(OLE_PageConstants.OLE_SUPPLEMENTAL_BENEFITS_PAGE);
+		ridersPage.select_riders(Dentalrider, FitnessRider);
+		if (ridersPage != null) {
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_SUPPLEMENTAL_BENEFITS_PAGE, ridersPage);
+		} else
+			Assert.fail("OLE Supplemental Benefits page is NOT Displayed");
+
+	}
+	
+	
+	@Then("^the user Validates Ancillary benfit widget for \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" and \"([^\"]*)\" for selected riders$")
+	public void the_user_Validates_Ancillary_benfit_widget_for_and_for_selected_riders(String DentalRiderFlag, String VisionFlag,
+			String FitnesRiderFlag, String HearingFlag) throws Throwable {
+		
+		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
+		String planType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
+		if (planType.equals("PDP")) {
+			System.out.println("Ancillary Benefits Widget is not availble for PDP plan");
+		} else {
+			welcomePage.validate_Ancillary_Benefits(DentalRiderFlag, VisionFlag, FitnesRiderFlag, HearingFlag);
+ 		}
+ 
+ 	}
 } 
 
 
