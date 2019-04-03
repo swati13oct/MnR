@@ -389,7 +389,9 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	# note: any additional Example will need to tag with either one of these 
 	# note:   @claims15_COSMOS_MEDICAL, @claims15_COSMOS_DRUG, 
 	# note:   @claims15_NICE_MEDICAL, @claims15_NICE_DRUG or @claims15_NOT_NICE_OR_COSMOS
-    @claims15 @def1041 @thePredators
+	# note: 
+	#----------------------------------------------------------------------------------
+    @claims15 @def1041 @thePredators   @abc
 	Scenario Outline: DID: <DID> -plan: <planType> -claimsSystem: <claimssystem> -claimType: <claimType> - <index> - To validate claims for both summary and detail page for each search range options
 		Given login with following details logins in the member portal and validate elements
 		  | Plan Type      | <planType>            |

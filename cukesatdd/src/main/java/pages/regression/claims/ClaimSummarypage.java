@@ -430,14 +430,35 @@ public class ClaimSummarypage extends UhcDriver{
 		return dynamicNumberOfClaimsText.isDisplayed() || dynamicNumberOfClaimsTextPdp.isDisplayed() ;
 
 	}
+	
+	@FindBy(xpath="//a//span[text()='keyboard_arrow_left']")
+	private WebElement leftArrowButton;
+	@FindBy(xpath="//a//span[text()='keyboard_arrow_right']")
+	private WebElement rightArrowButton;
 	/**
 	 * @toDo : this method validates claims table and pagination
 	 */
 	public boolean verifyClaimsTableAndPagination(){
        try {
 		if(validate (verifyClaimSummaryAndPagination)){
-			System.out.println("Pagination is seen ===>"+verifyClaimSummaryAndPagination.getText());
-			return true;
+			if (verifyClaimSummaryAndPagination.getText().equals("Page 1 of 1")) {
+				System.out.println("Only one page. Pagination is seen ===>"+verifyClaimSummaryAndPagination.getText());
+				return true;
+			} else {
+				String expectedText1="Page 1 of";
+				String expectedText2="Page 2 of";
+				Assert.assertTrue("PROBLEM - unable to locate the Pagination left arrow", validate(leftArrowButton));
+				Assert.assertTrue("PROBLEM - unable to locate the Pagination left arrow", validate(rightArrowButton));
+				System.out.println("Proceed to validate right and left arrow functionality");
+				rightArrowButton.click();
+				String actualText=verifyClaimSummaryAndPagination.getText();
+				Assert.assertTrue("PROBLEM - not getting expected page change after clicking right arrow.  Expected to contains='"+expectedText2+"' | Actual='"+actualText+"'", actualText.contains(expectedText2));
+				
+				leftArrowButton.click();
+				actualText=verifyClaimSummaryAndPagination.getText();
+				Assert.assertTrue("PROBLEM - not getting expected page change after clicking left arrow.  Expected to contains='"+expectedText1+"' | Actual='"+actualText+"'", actualText.contains(expectedText1));
+				return true;
+			}
 		}else{
 			System.out.println("Pagination is not displayed as records are less");
 		return false;

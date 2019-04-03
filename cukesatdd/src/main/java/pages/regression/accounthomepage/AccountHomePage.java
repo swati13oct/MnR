@@ -2550,11 +2550,13 @@ public class AccountHomePage extends UhcDriver {
 		}
 		System.out.println("Workaround URL is going to be: "+workaroundURL);
 		driver.get(workaroundURL);
-		try {
+		System.out.println("wait for driver to be ready after loading URL...");
+		CommonUtility.checkPageIsReadyNew(driver);
+		/* tbd try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
-		}
+		}*/
 	}
 	//^^^ note: added for 'sorry' login error workaround	
 	public ClaimDetailsPage navigateToClaimDetailsPagetoseeeobpdflink() {

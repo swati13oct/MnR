@@ -178,6 +178,8 @@ public class HSIDLoginPage extends UhcDriver {
 		return null;
 	}
 
+	@FindBy(id="authQuestiontextLabelId")
+	private WebElement authQuestionlabel;
 	/**
 	 * @toDo : To login through hsid via entering security questions
 	 */
@@ -188,22 +190,27 @@ public class HSIDLoginPage extends UhcDriver {
 		sendkeys(passwordField, password);
 		signInButton.click();
 
-		try {
+		System.out.println("Check to see if SecurityQuestion page is loaded, timeout in 35 sec...");
+		CommonUtility.waitForPageLoadNew(driver, authQuestionlabel, 35);
+		/* tbd try {
 			Thread.sleep(35000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} */
 
 		if (driver.getCurrentUrl().contains(
 				"=securityQuestion")) {
+			System.out.println("Landed on security question page...");
 
 			ConfirmSecurityQuestion cs = new ConfirmSecurityQuestion(driver);
 			try {
-				Thread.sleep(10000);
+				//tbd Thread.sleep(10000);
 				cs.enterValidSecurityAnswer();
 				System.out.println(driver.getCurrentUrl());
-				Thread.sleep(20000);
+				//tbd Thread.sleep(20000);
+				System.out.println("Check to see if document.readyState is ready...");
+				CommonUtility.checkPageIsReadyNew(driver);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -236,12 +243,15 @@ public class HSIDLoginPage extends UhcDriver {
 						System.out.println("did not encounter 'Go To Homepage' System error message, moving on. "+e1);
 					}
 					
-					try {
+					System.out.println("Check to see if document.readyState is completed...");
+					CommonUtility.checkPageIsReadyNew(driver);
+
+					/* tbd try {
 						Thread.sleep(20000);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-					}
+					} */
 				} catch (Exception e) {
 					System.out.println("Unable to resolve no-email page encounter. "+e);
 				}
@@ -261,7 +271,9 @@ public class HSIDLoginPage extends UhcDriver {
 			Alert alert = driver.switchTo().alert();
 			alert.accept();
 		}
-
+		
+		//note: would we actually get here??? leave it as-is for now
+		System.out.println("Not Security question page or test harness page or Account Home Page...wait 15 sec and check again for last attempt");
 		try {
 			Thread.sleep(15000);
 		} catch (InterruptedException e) {
