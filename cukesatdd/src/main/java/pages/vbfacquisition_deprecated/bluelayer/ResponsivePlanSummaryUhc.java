@@ -21,8 +21,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pages.vbfacquisition_deprecated.ulayer.PageTitleConstants;
-import pages.dashboard.member.blayer.DrugCostEstimatorPage;
-import pages.member.ulayer.Rallytool_Page;
+import pages.dashboard_deprecated.member.blayer.DrugCostEstimatorPage;
+import pages.member_deprecated.ulayer.Rallytool_Page;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;

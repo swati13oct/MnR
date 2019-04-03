@@ -2570,7 +2570,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		Start_ApplicationBtn.click();
 
 		System.out.println("Start application button is clicked on application page");
-		waitforElementVisibilityInTime(DOB, 30);
+		waitforElementVisibilityInTime(DOB, 45);
 		sendkeysNew(DOB, DateOfBirth);
 		System.out.println("Date of birth is entered");
 

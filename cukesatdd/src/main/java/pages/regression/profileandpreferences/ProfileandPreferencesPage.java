@@ -23,7 +23,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.member.bluelayer.GoGreenPage;
+import pages.member_deprecated.bluelayer.GoGreenPage;
 
 /**
  * @author akapoo18
@@ -184,8 +184,11 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	private WebElement Technicalsupportsection;
 
 	//@FindBy(xpath = "//*[@id='needhelpsectioncontactus']/section/div/div[2]/div/div/div[3]/div/div")
-	@FindBy(xpath = "//*[@id='needhelpsectioncontactus']/section/div/div[2]/div/div/div[4]/div/div")
+	@FindBy(css = ".atdd-plan-header")
 	private WebElement PlanSupportsection;
+	
+	@FindBy(xpath = "//*[@id='needhelpsectioncontactus']/section/div/div[2]/div/div/div[3]/div/div")
+	private WebElement GeneralQuestion;
 
 	public static final String Disclaimerlinkcontent_xpath = ".//*[@id='collapseDisclaimer']";
 
@@ -224,11 +227,14 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='phone-form']//button")
 	private WebElement phoneSaveButton;
+	
+	@FindBy(css = ".phoneedit .edit-btn")
+	private WebElement phoneEdit;
 
-	@FindBy(xpath = ".//*[@id='phone-form']//a[contains(text(), 'Cancel')]")
+	@FindBy(css = ".atdd-phoneedit-cancel")
 	private WebElement phoneCancelButton;
 
-	@FindBy(xpath = ".//*[@id='phone' or @id='phoneCardHeight']//div[1]//a[contains(text(), 'Cancel')]")
+	@FindBy(css = ".atdd-phoneedit-cancel")
 	private WebElement phoneTopCancelButton;
 
 	@FindBy(id = "daytimePhone")
@@ -1075,6 +1081,12 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		validateNew(Technicalsupportsection);
 		validateNew(PlanSupportsection);
 	}
+	
+	public void validateneedhelpheaderShip() {
+		validateNew(NeedHelpHeader);
+		validateNew(Technicalsupportsection);
+		validateNew(GeneralQuestion);
+	}
 
 	public void clickOndisclaimerlink(JSONObject myProfilenpreferencesexpectedjson) {
 		// TODO Auto-generated method stub
@@ -1350,6 +1362,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		}
 
 	}
+	
 
 	/**
 	 * @toDo : Validates the presence of Cancel Button post clicking the edit
@@ -1358,7 +1371,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	public void validateCancelElement() {
 		// TODO Auto-generated method stub
-		driver.findElement(By.xpath("//*[@id='phoneCardHeight']/div[1]/div/div/div/div/div/div/div/a")).click();
+		phoneEdit.click();
 		Assert.assertTrue(phoneTopCancelButton.getText().equalsIgnoreCase("CANCEL"));
 
 	}
@@ -1562,7 +1575,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	public void validateTempAddressShip() {
 		if (tempEditButton.size() > 0) {
 
-			Assert.assertFalse(tempEditButton.size() > 0);
+			Assert.assertFalse(tempEditButton.contains("Edit"));
 
 		}
 

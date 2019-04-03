@@ -23,7 +23,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.regression.footer.FooterPage;
-import pages.member.ulayer.SetupAutoPaymentPage;
+import pages.member_deprecated.ulayer.SetupAutoPaymentPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
@@ -370,6 +370,9 @@ public class PaymentHistoryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//h1[contains(text(),'Coverage & Benefits')]")
 	private WebElement coverageBenefitsHeader;
+	
+	@FindBy(xpath = "//*[contains(text(),'VIEW PLAN DOCUMENTS')]")
+	private WebElement planDocumentsBtn;
 	
 	public PaymentHistoryPage(WebDriver driver) {
 		super(driver);
@@ -1588,7 +1591,12 @@ public class PaymentHistoryPage extends UhcDriver {
 	public BenefitsAndCoveragePage clickOnBenefitsAndCoverageTab() {
 		
 		coverageBenefitsTab.click();
-		CommonUtility.waitForPageLoadNew(driver,coverageBenefitsHeader, 20);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if(driver.getCurrentUrl().contains("benefits"))
 			return new BenefitsAndCoveragePage(driver);
 		return null;
