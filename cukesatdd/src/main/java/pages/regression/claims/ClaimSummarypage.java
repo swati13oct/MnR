@@ -1509,19 +1509,19 @@ public void TBR_NavigateToClaimsPage(){	//tbd-remove whole method
 				// note: do not modify this check - critical to wait
 				int extra=2000;
 				int x=0;
-				while(x<=30) {
+				while(x<45) {
 					try {
+						Thread.sleep(1000);
 						if (verifyClaimsTableAndPagination()) {
 							Thread.sleep(extra); //give it more time to settle the page
 							System.out.println("sleep for another 2 sec for the page to settle down...");
 							System.out.println("there is some indication of claims...let's check it out");
 							break;
 						}
-						Thread.sleep(1000);
 					} catch (InterruptedException e) {}
 					x=x+1;
 				}
-				System.out.println("Waited total of "+(x+extra)+" seconds for claims to show up");
+				System.out.println("Waited total of "+(x*1000+extra)+" seconds for claims to show up");
 				
 				WebElement numClaimsElement=numberOfClaims;
 				if (range.equalsIgnoreCase("custom search")) {
