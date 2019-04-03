@@ -246,6 +246,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath="//*[@id='ghn_lnk_2']")
 	private WebElement ShopForaplan;
 	
+	@FindBy(id= "search-field")
+	private static WebElement searchfield;
+	
+	@FindBy(css=".icon-search")
+	private WebElement searchbutton;
+	
 	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button proactive-offer__close main-background-color second-color')]")
 	public static WebElement proactiveChatExitBtn;
 
@@ -1495,6 +1501,25 @@ public class AcquisitionHomePage extends GlobalWebElements {
         }
 		else {
 			return null;}
+	}
+
+	public  KeywordSearch searchfield() {
+		validate (searchfield);		
+		System.out.println("search field is seen ==>" + searchfield.isDisplayed());
+		validate (searchbutton);
+		System.out.println("search button is seen"  + searchbutton.isDisplayed());
+		searchfield.clear();		
+		searchfield.sendKeys("medicare");
+		searchbutton.click();
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (driver.getCurrentUrl().contains("medicare.html?q=medicare"))
+		return new  KeywordSearch(driver);
+		return null;	
 	}
 
 }
