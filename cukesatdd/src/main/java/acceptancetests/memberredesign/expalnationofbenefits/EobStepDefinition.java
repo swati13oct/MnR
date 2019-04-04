@@ -335,7 +335,8 @@ public class EobStepDefinition {
 	}
 
     @Then("^the user navigates to EOB page_hsid$")
-    public void user_views_EOBpagehsid() throws InterruptedException {                  
+    public void user_views_EOBpagehsid() throws InterruptedException {   
+    	System.out.println("****the user navigates to EOB page_hsid****");
                     AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
                     //AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
                     pages.regression.explanationofbenefits.EOBPage eobPage = accountHomePage.navigateDirectToEOBPag();
