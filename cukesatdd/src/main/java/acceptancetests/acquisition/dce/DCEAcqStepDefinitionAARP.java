@@ -372,4 +372,15 @@ public class DCEAcqStepDefinitionAARP {
 		planDetailsPage.validatedAddedDrug(drugName);
 	}
 	
+	@When("^I click on Drug Cost Estimator link from Shop for a plan hover over for AARP site$")
+	public void i_click_on_Drug_Cost_Estimator_link_from_Shop_for_a_plan_hover_over_for_ums_site() {
+		
+		AcquisitionHomePage acquisitionHomePage = (AcquisitionHomePage) loginScenario.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) acquisitionHomePage.navigationDrugCostEstimator();
+				
+		if(dce!=null){
+			loginScenario.saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
+		}
+	}
+	
 }
