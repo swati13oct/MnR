@@ -409,4 +409,20 @@ public class DCEAcqStepDefinitionUHC {
 		PlanDetailsPage planDetailsPage = (PlanDetailsPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		planDetailsPage.validatedAddedDrug(drugName);
 	}
+	
+	/*verify DCE flow from Blue Layer home page hover over*/
+	@When("^I click on Drug Cost Estimator link from Shop for a plan hover over for ums site$")
+	public void i_click_on_Drug_Cost_Estimator_link_from_Shop_for_a_plan_hover_over_for_ums_site() {
+		
+		AcquisitionHomePage acquisitionHomePage = (AcquisitionHomePage) loginScenario.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) acquisitionHomePage.navigationDrugCostEstimator();
+		
+		
+		if(dce!=null){
+			loginScenario.saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
+		}
+	}
+	
+	
+	
 }
