@@ -27,6 +27,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
+
 import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.drugcostestimator.DrugCostEstimatorPage;
@@ -35,6 +36,7 @@ import pages.regression.login.DeregisterPage;
 import pages.regression.login.HSIDLoginPage;
 import pages.regression.login.HsidRegistrationPersonalCreateAccount;
 import pages.regression.login.LoginPage;
+import pages.regression.testharness.TestHarness;
 
 /**
  * Functionality: Benefits and Coverage page
@@ -64,6 +66,7 @@ public class HSIDStepDefinition {
 		}
 
 		String category = memberAttributesMap.get("Member Type");
+		getLoginScenario().saveBean(LoginCommonConstants.CATOGERY,category);
 		String planType = memberAttributesMap.get("Plan Type");
 		String testDataType = memberAttributesMap.get("Test Data Type");
 		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
@@ -113,6 +116,9 @@ public class HSIDStepDefinition {
 			getLoginScenario()
 					.saveBean(LoginCommonConstants.USERNAME, userName);
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
+			
+			
+			
 
 		}
 
@@ -160,16 +166,24 @@ public class HSIDStepDefinition {
 				LoginPage loginPage=null;
 				if ("team-a".equalsIgnoreCase(MRScenario.environment)) {
 					loginPage = new LoginPage(wd, teamSpecialCase);
-				} else {
+				} 
+				
+				else {
 					loginPage = new LoginPage(wd);
 				}
-
+/*
 				AccountHomePage accountHomePage = (AccountHomePage) loginPage
 						.loginWithLegacy(userName, pwd);
-				if (accountHomePage != null) {
+						if (accountHomePage != null) {
 					getLoginScenario()
 							.saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,
-									accountHomePage);
+									accountHomePage);*/
+				
+				TestHarness testHarnessPage = (TestHarness) loginPage
+						.loginWithLegacy(userName, pwd);
+				if (testHarnessPage != null) {
+					getLoginScenario().saveBean(PageConstantsMnR.TEST_HARNESS_PAGE,
+							testHarnessPage);
 				} else {
 					Assert.fail("Login not successful...");
 				}
