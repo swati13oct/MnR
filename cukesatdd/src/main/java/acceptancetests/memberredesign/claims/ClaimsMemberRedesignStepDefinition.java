@@ -1107,7 +1107,7 @@ public class ClaimsMemberRedesignStepDefinition {
 
 							System.out.println("Proceed to validate claims total");
 							//newclaimDetailspage.validateClaimsTotalInDetailsPage();
-							newclaimDetailspage.validateClaimsTotalAccurateInDetailsPage(invokedBypass);
+							newclaimDetailspage.validateClaimsTotalAccurateInDetailsPage(invokedBypass, planType);
 
 							System.out.println("Proceed to validate 'EOB' links on detail page");
 							newclaimDetailspage.validate_SearchEobHistory_onDetailPage(domain,planType);
