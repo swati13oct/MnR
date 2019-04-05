@@ -198,6 +198,9 @@ public class ClaimDetailsPage extends UhcDriver{
 	//note: 1=amount | 2=adjustment | 3=plansShare | 4=your share
 	@FindBy(xpath="//div[@class='medical-claims']//div[contains(@class,'claimsTotalTable')]//section[@id='cltotmednice']//div[@class='row margin-small']//div[@class='col-md-3']//p[contains(@class,'h5')]")
 	private List<WebElement> claimsTotalItems;
+
+	@FindBy(xpath="//div[@id='shipPartBDetailsTable']//div[contains(@ng-repeat,'billLineDetailsList')]//div[@class='card-body']")
+	private List<WebElement> ship_claimsTableRows;
 	
 	@FindBy(xpath="//b[contains(text(),'Note')]")
 	private WebElement note;
@@ -778,8 +781,6 @@ public class ClaimDetailsPage extends UhcDriver{
 				System.out.println("*** BY-PASS FOR NOW - amount billed values not matched");
 				System.out.println("*** Modify validation to check for value is the same between the pages when the fix comes in");
 				Assert.assertTrue("PROBLEM: value for element "+key+" should not be empty in claims summary and detail pages. From summary: '"+valueFromSummary+"' | From detail: '"+valueFromDetail+"'", !valueFromSummary.equals("") && !valueFromSummary.equals(""));
-		   
-																																																																								   
 			}
 	
 			key="med_claimStatus";
@@ -923,57 +924,115 @@ public class ClaimDetailsPage extends UhcDriver{
 		}
 	}
 
-	public void validateClaimsTotalAccurateInDetailsPage(boolean invokedBypass) {
+	public float findValue(String elementXpath) {
+		WebElement r=driver.findElement(By.xpath(elementXpath));
+		return Float.parseFloat(r.getText().replace("$", "").replace(",",""));
+	}
+	
+	public float findValue(WebElement e) {
+		return Float.parseFloat(e.getText().replace("$", "").replace(",",""));
+	}
+	
+	public void validateClaimsTotalAccurateInDetailsPage(boolean invokedBypass, String planType) {
 		System.out.println("Proceed to validate total values are accurate");
 
-		Assert.assertTrue("PROBLEM - unable to locate the claims total rows",claimsTotalItems.size()>0);
-		float totalAmountBilled=Float.parseFloat(claimsTotalItems.get(0).getText().replace("$", "").replace(",",""));
-		System.out.println("totalAmountBilled="+totalAmountBilled);
-		float totalAdjustment=Float.parseFloat(claimsTotalItems.get(1).getText().replace("$", "").replace(",",""));
-		System.out.println("totalAdjustment="+totalAdjustment);
-		float totalPlanShare=Float.parseFloat(claimsTotalItems.get(2).getText().replace("$", "").replace(",",""));
-		System.out.println("totalPlanShare="+totalPlanShare);
-		float totalYourShare=Float.parseFloat(claimsTotalItems.get(3).getText().replace("$", "").replace(",",""));
-		System.out.println("totalYourShare="+totalYourShare);
+		if (planType.equalsIgnoreCase("ship")) {
+			String xpath1="//section[@id='cltotshippartb']//div[@class='row margin-small']//div[@class='col-md-2']";
+			float totalAmountCharged=findValue(xpath1+"[1]//p[contains(@class,'h5')]");
+			float totalMedicareApproved=findValue(xpath1+"[2]//p[contains(@class,'h5')]");
+			float totalMedicareDeducible=findValue(xpath1+"[3]//p[contains(@class,'h5')]");
+			float totalMedicarePaid=findValue(xpath1+"[4]//p[contains(@class,'h5')]");
+			float totalPlanCostShare=findValue(xpath1+"[5]//p[contains(@class,'h5')]");
+			float totalYourPlanPaid=findValue(xpath1+"[6]//p[contains(@class,'h5')]");
 
-		//note: add up value for each row
-		float rowsTotalAmountBilled=0.0f;
-		float rowsTotalAdjustment=0.0f;
-		float rowsTotalPlanShare=0.0f;
-		float rowsTotalYourShare=0.0f;
-		for(int x=0; x<claimsTableRows.size(); x++) {
-			System.out.println("--- index= "+x+" -----------------------");
-			WebElement e=driver.findElement(By.xpath("//div[@class='medical-claims']//div[@class='claimDetTableMainSection']//div[contains(@ng-repeat,'bl in billLineDetailsList')]["+(x+1)+"]//div[@class='row margin-small']/div[1]/p"));
-			float value=Float.parseFloat(e.getText().replace("$", "").replace(",",""));
-			System.out.println("rows AmountBilled value="+value);
-			rowsTotalAmountBilled=rowsTotalAmountBilled+value;
-			
-			e=driver.findElement(By.xpath("//div[@class='medical-claims']//div[@class='claimDetTableMainSection']//div[contains(@ng-repeat,'bl in billLineDetailsList')]["+(x+1)+"]//div[@class='row margin-small']/div[2]/p"));
-			value=Float.parseFloat(e.getText().replace("$", "").replace(",",""));
-			rowsTotalAdjustment=rowsTotalAdjustment+value;
-			System.out.println("rows Adjustment value="+value);
+			float rowTotalAmountCharged=0.0f;
+			float rowTotalMedicareApproved=0.0f;
+			float rowTotalMedicareDeducible=0.0f;
+			float rowTotalMedicarePaid=0.0f;
+			float rowTotalPlanCostShare=0.0f;
+			float rowTotalYourPlanPaid=0.0f;
+			for (int x=0; x<ship_claimsTableRows.size(); x++) {
+				String xpath2="//div[@id='shipPartBDetailsTable']//div[contains(@ng-repeat,'billLineDetailsList')]//div[@class='card-body']["+(x+1)+"]//div[@class='row'][2]//div[contains(@class,'col-md-9')]//div[@class='col-md-2']";
+				System.out.println("--- index= "+x+" -----------------------");
+				float value=findValue(xpath2+"[1]/p");
+				System.out.println("rows Amount Charged value="+value);
+				rowTotalAmountCharged=rowTotalAmountCharged+value;
 
-			e=driver.findElement(By.xpath("//div[@class='medical-claims']//div[@class='claimDetTableMainSection']//div[contains(@ng-repeat,'bl in billLineDetailsList')]["+(x+1)+"]//div[@class='row margin-small']/div[4]/p"));
-			value=Float.parseFloat(e.getText().replace("$", "").replace(",",""));
-			rowsTotalPlanShare=rowsTotalPlanShare+value;
-			System.out.println("rows PlanShare value="+value);
+				value=findValue(xpath2+"[2]/p");
+				System.out.println("rows Medicare Approved value="+value);
+				rowTotalMedicareApproved=rowTotalMedicareApproved+value;
+				
+				value=findValue(xpath2+"[3]/p");
+				System.out.println("rows Medicare Deductible value="+value);
+				rowTotalMedicareDeducible=rowTotalMedicareDeducible+value;
+				
+				value=findValue(xpath2+"[4]/p");
+				System.out.println("rows Medicare Paid value="+value);
+				rowTotalMedicarePaid=rowTotalMedicarePaid+value;
+				
+				value=findValue(xpath2+"[5]/p");
+				System.out.println("rows Plan Cost Share value="+value);
+				rowTotalPlanCostShare=rowTotalPlanCostShare+value;
 
-			e=driver.findElement(By.xpath("//div[@class='medical-claims']//div[@class='claimDetTableMainSection']//div[contains(@ng-repeat,'bl in billLineDetailsList')]["+(x+1)+"]//div[@class='row margin-small']/div[5]/p"));
-			value=Float.parseFloat(e.getText().replace("$", "").replace(",",""));
-			rowsTotalYourShare=rowsTotalYourShare+value;
-			System.out.println("rows YourShare value="+value);
-		}
-		
-		//note: check to see if total match
-		Assert.assertTrue("PROBLEM - 'Adjustments' from each list doesn't add up to the value from claims total section.  totalAdjustment="+totalAdjustment+" | rowsTotalAdjustment="+rowsTotalAdjustment, totalAdjustment==rowsTotalAdjustment);
-		Assert.assertTrue("PROBLEM - 'Plan's share' from each list doesn't add up to the value from claims total section.  totalPlanShare="+totalPlanShare+" | rowsTotalPlanShare="+rowsTotalPlanShare, totalPlanShare==rowsTotalPlanShare);
-		if (invokedBypass) {
-			System.out.println("Invoking BYPASS for the Amount Billed and Your share value accuracy check because of underlining known issue encountered on this detail page.");
+				value=findValue(xpath2+"[6]/p");
+				System.out.println("rows Your Plan Paid value="+value);
+				rowTotalYourPlanPaid=rowTotalYourPlanPaid+value;
+			}
+
+			Assert.assertTrue("PROBLEM - 'Amount Charged' from each list doesn't add up to the value from claims total section.  totalAmountCharged="+totalAmountCharged+" | rowTotalAmountCharged="+rowTotalAmountCharged, totalAmountCharged==rowTotalAmountCharged);
+			Assert.assertTrue("PROBLEM - 'Medicare Approved' from each list doesn't add up to the value from claims total section.  totalMedicareApproved="+totalMedicareApproved+" | rowTotalMedicareApproved="+rowTotalMedicareApproved, totalMedicareApproved==rowTotalMedicareApproved);
+			Assert.assertTrue("PROBLEM - 'Medicare Deductible' from each list doesn't add up to the value from claims total section.  totalMedicareDeducible="+totalMedicareDeducible+" | rowTotalMedicareDeducible="+rowTotalMedicareDeducible, totalMedicareDeducible==rowTotalMedicareDeducible);
+			Assert.assertTrue("PROBLEM - 'Medicare Paid' from each list doesn't add up to the value from claims total section.  totalMedicarePaid="+totalMedicarePaid+" | rowTotalMedicarePaid="+rowTotalMedicarePaid, totalMedicarePaid==rowTotalMedicarePaid);
+			Assert.assertTrue("PROBLEM - 'Plan Cost Share' from each list doesn't add up to the value from claims total section.  totalPlanCostShare="+totalPlanCostShare+" | rowTotalPlanCostShare="+rowTotalPlanCostShare, totalPlanCostShare==rowTotalPlanCostShare);
+			Assert.assertTrue("PROBLEM - 'Your Plan Paid' from each list doesn't add up to the value from claims total section.  totalYourPlanPaid="+totalYourPlanPaid+" | rowTotalYourPlanPaid="+rowTotalYourPlanPaid, totalYourPlanPaid==rowTotalYourPlanPaid);
 		} else {
-			Assert.assertTrue("PROBLEM - 'Amount Billed' from each list doesn't add up to the value from claims total section.  totalAmountBilled="+totalAmountBilled+" | rowsTotalAmountBilled="+rowsTotalAmountBilled, totalAmountBilled==rowsTotalAmountBilled);
-			Assert.assertTrue("PROBLEM - 'Your share' from each list doesn't add up to the value from claims total section.  totalYourShare="+totalYourShare+" | rowsTotalYourShare="+rowsTotalYourShare, totalYourShare==rowsTotalYourShare);
+			Assert.assertTrue("PROBLEM - unable to locate the claims total rows",claimsTotalItems.size()>0);
+			float totalAmountBilled=findValue(claimsTotalItems.get(0));
+			System.out.println("totalAmountBilled="+totalAmountBilled);
+			float totalAdjustment=findValue(claimsTotalItems.get(1));
+			System.out.println("totalAdjustment="+totalAdjustment);
+			float totalPlanShare=findValue(claimsTotalItems.get(2));
+			System.out.println("totalPlanShare="+totalPlanShare);
+			float totalYourShare=findValue(claimsTotalItems.get(3));
+			System.out.println("totalYourShare="+totalYourShare);
+
+			//note: add up value for each row
+			float rowsTotalAmountBilled=0.0f;
+			float rowsTotalAdjustment=0.0f;
+			float rowsTotalPlanShare=0.0f;
+			float rowsTotalYourShare=0.0f;
+			for(int x=0; x<claimsTableRows.size(); x++) {
+				System.out.println("--- index= "+x+" -----------------------");
+				String xpath1="//div[@class='medical-claims']//div[@class='claimDetTableMainSection']//div[contains(@ng-repeat,'bl in billLineDetailsList')]["+(x+1)+"]//div[@class='row margin-small']/div";
+				float value=findValue(xpath1+"[1]/p");
+				System.out.println("rows AmountBilled value="+value);
+				rowsTotalAmountBilled=rowsTotalAmountBilled+value;
+				
+				value=findValue(xpath1+"[2]/p");
+				rowsTotalAdjustment=rowsTotalAdjustment+value;
+				System.out.println("rows Adjustment value="+value);
+
+				value=findValue(xpath1+"[4]/p");
+				rowsTotalPlanShare=rowsTotalPlanShare+value;
+				System.out.println("rows PlanShare value="+value);
+
+				value=findValue(xpath1+"[5]/p");
+				rowsTotalYourShare=rowsTotalYourShare+value;
+				System.out.println("rows YourShare value="+value);
+			}
+			
+			//note: check to see if total match
+			Assert.assertTrue("PROBLEM - 'Adjustments' from each list doesn't add up to the value from claims total section.  totalAdjustment="+totalAdjustment+" | rowsTotalAdjustment="+rowsTotalAdjustment, totalAdjustment==rowsTotalAdjustment);
+			Assert.assertTrue("PROBLEM - 'Plan's share' from each list doesn't add up to the value from claims total section.  totalPlanShare="+totalPlanShare+" | rowsTotalPlanShare="+rowsTotalPlanShare, totalPlanShare==rowsTotalPlanShare);
+			if (invokedBypass) {
+				System.out.println("Invoking BYPASS for the Amount Billed and Your share value accuracy check because of underlining known issue encountered on this detail page.");
+			} else {
+				Assert.assertTrue("PROBLEM - 'Amount Billed' from each list doesn't add up to the value from claims total section.  totalAmountBilled="+totalAmountBilled+" | rowsTotalAmountBilled="+rowsTotalAmountBilled, totalAmountBilled==rowsTotalAmountBilled);
+				Assert.assertTrue("PROBLEM - 'Your share' from each list doesn't add up to the value from claims total section.  totalYourShare="+totalYourShare+" | rowsTotalYourShare="+rowsTotalYourShare, totalYourShare==rowsTotalYourShare);
+			}
 		}
-	}	//^^^ note:	added for def1041		
+	}	
+	//^^^ note:	added for def1041		
 	
 	
 }
