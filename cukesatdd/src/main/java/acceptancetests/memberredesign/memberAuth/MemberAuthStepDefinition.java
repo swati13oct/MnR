@@ -24,7 +24,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
-import pages.dashboard.memberAuth.MemberAuthLoginPage;
+import pages.dashboard_deprecated.memberAuth.MemberAuthLoginPage;
 import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.contactus.ContactUsPage;

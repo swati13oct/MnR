@@ -15,6 +15,7 @@ import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
@@ -648,4 +649,16 @@ try {
 		wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(element));
 
 	}
+	
+	/* logic to simulate hover over functionality*/
+	public void navigateToMenuLinks(WebElement hdrMenuElement, WebElement menuDropListItem) {
+
+		Actions actions = new Actions(driver);
+		actions.moveToElement(hdrMenuElement);
+		actions.moveToElement(menuDropListItem);
+		actions.click().build().perform();
+		CommonUtility.checkPageIsReadyNew(driver);
+
+	}
+	
 }

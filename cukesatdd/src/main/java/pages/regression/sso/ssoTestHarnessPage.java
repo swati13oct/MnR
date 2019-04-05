@@ -10,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import pages.memberredesign.bluelayer.AccountHomePage;
+import pages.memberredesign_deprecated.bluelayer.AccountHomePage;
 import atdd.framework.UhcDriver;
 
 /**

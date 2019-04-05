@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pages.acquisition.dce.bluelayer.DrugCostEstimatorPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.acquisition.bluelayer.KeywordSearch;
 import pages.acquisition.ulayer.ComparePlansPage;
 import pages.acquisition.ulayer.MultiCountyModalPage;
 import pages.acquisition.ulayer.OurPlansPage;
@@ -969,4 +970,18 @@ public class VppPlanSummaryStepDefinitionUHC {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 	  plansummaryPage.validatePlanSelectorPageInRightRail();
   }
+  @When("^the member validates the search box$")
+	public void I_validate_search_box() throws InterruptedException {
+
+		AcquisitionHomePage acquisitionHomePage = (AcquisitionHomePage) loginScenario.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		Thread.sleep(10000);
+		//acquisitionHomePage.searchfield(acquisitionHomePage.driver);
+		KeywordSearch kws = acquisitionHomePage.searchfield();
+		getLoginScenario().saveBean(PageConstants.Keyword_Search, kws);
+	}
+	@Then("^the member lands on the result page$")
+	public void I_land_on_result_page(){
+		KeywordSearch kws = (KeywordSearch) getLoginScenario().getBean(PageConstants.Keyword_Search);
+		kws.url();			
+	}
 } 

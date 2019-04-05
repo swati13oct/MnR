@@ -13,7 +13,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-//import pages.member.bluelayer.AccountHomePage;
+//import pages.member_deprecated.bluelayer.AccountHomePage;
 //import pages.memberredesign.bluelayer.AccountHomePage;
 //import pages.memberredesign.bluelayer.LoginPage;
 import pages.mobile.member.blayer.BenefitsSummaryPage;

@@ -27,12 +27,12 @@ import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
-import pages.member.bluelayer.LoginPage2;
+import pages.member_deprecated.bluelayer.LoginPage2;
 import pages.regression.benefitandcoverage.ValueAddedServicepage;
 import pages.regression.formsandresources.FormsAndResourcesPage;
-import pages.redesign.BenefitsCoveragePage;
-import pages.redesign.RedesignLoginPage;
-import pages.redesign.UlayerHomePage;
+import pages.redesign_deprecated.BenefitsCoveragePage;
+import pages.redesign_deprecated.RedesignLoginPage;
+import pages.redesign_deprecated.UlayerHomePage;
 
 /**
  * Functionality: Benefits and Coverage page
