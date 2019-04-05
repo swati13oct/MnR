@@ -166,6 +166,15 @@ public class HSIDStepDefinition {
 				LoginPage loginPage=null;
 				if ("team-a".equalsIgnoreCase(MRScenario.environment)) {
 					loginPage = new LoginPage(wd, teamSpecialCase);
+					//TODO - note - fix this later, need to swap this to work with testHarnessPage
+					AccountHomePage accountHomePage = (AccountHomePage) loginPage
+							.loginWithLegacy(userName, pwd);
+					if (accountHomePage != null) {
+						getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
+						return;
+					} else {
+						Assert.fail("Login not successful...");
+					}
 				} 
 				
 				else {

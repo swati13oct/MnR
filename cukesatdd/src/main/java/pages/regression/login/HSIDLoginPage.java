@@ -230,11 +230,11 @@ public class HSIDLoginPage extends UhcDriver {
 						break;
 					}
 					Thread.sleep(1000);
+					x=x+1;
 					System.out.println("Waiting for some form of header to show up... waited "+x+" sec");
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				x=x+1;
 			} 
 
 			//note: workaround - get URL again to check and see if it goes to the no-email.html page instead
@@ -278,11 +278,11 @@ public class HSIDLoginPage extends UhcDriver {
 								break;
 							}
 							Thread.sleep(1000);
+							y=y+1;
 							System.out.println("Waiting for some form of header to show up... waited "+y+" sec");
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
-						y=y+1;
 					} 
 
 					/* tbd try {

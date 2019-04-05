@@ -1069,14 +1069,24 @@ public class ClaimsMemberRedesignStepDefinition {
 						if(newclaimDetailspage != null) {
 							getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newclaimDetailspage);
 							System.out.println("Proceed to validate claims total");
-							newclaimDetailspage.validateClaimsTotalInDetailsPage();
+
+							System.out.println("Proceed to validate medicalEob links on detail page");
+							newclaimDetailspage.validateMedicalEob(claimType);
+							
 							
 							System.out.println("Proceed to validate 'Learn More...' link");
 							newclaimDetailspage.learnMoreCostLink();
 
+							System.out.println("Proceed to validate 'This page contains PDF documents...' text");
+							newclaimDetailspage.validatePageContainsPdfDocText();
+
 							//note: detail page will have Your Share column regardless Summary page
 							HashMap<String, String> dataMapDetail=newclaimDetailspage.gatherDataFromDetailPage(claimType);
-							newclaimDetailspage.compareSummaryAndDetailData(claimType, dataMapSummary, dataMapDetail);
+							boolean invokedBypass=newclaimDetailspage.compareSummaryAndDetailData(claimType, dataMapSummary, dataMapDetail);
+
+							System.out.println("Proceed to validate claims total");
+							//newclaimDetailspage.validateClaimsTotalInDetailsPage();
+							newclaimDetailspage.validateClaimsTotalAccurateInDetailsPage(invokedBypass);
 
 							System.out.println("Proceed to validate 'EOB' links on detail page");
 							newclaimDetailspage.validate_SearchEobHistory_onDetailPage(domain,planType);

@@ -646,7 +646,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |10    |1041| PCP      | COSMOS | COSMOSCLAIMS                 | Prescription drug | Yes                 |
 
-	@claims15_11 @claims15_MEDICA @claims15_COSMOS_MEDICAL @abc
+	@claims15_11 @claims15_MEDICA @claims15_COSMOS_MEDICAL
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |11    |1041| MEDICA   | COSMOS | COSMOSCLAIMS                 | Medical           | Yes                 |
@@ -695,10 +695,11 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	 #|xx    |1041| MAPD     | COSMOS | t_diffGrpsDiffYrs_COSMOSCLAIMS | Medical           | Yes                |
 	 #|xx    |1041| MAPD     | COSMOS | t_diffGrpsDiffYrs_COSMOSCLAIMS | Prescription drug | Yes                |
 	#----- end of claims15 ---------------------------------------------------------
+
 	
 	#---- this the test EOB link on claims details page
     @claims16 @claimsEOB @US1268210 @F244667
-    Scenario Outline: to validate the claims eob link
+    Scenario Outline: FID: <FID> -plan: <planType> -claimsSystem: <claimssystem> - to validate the claims eob link on claims detail page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>     |
       | Test Data Type | <claimssystem> |
@@ -714,8 +715,8 @@ Feature: T1.1To validate the new changes related to claims page on the member re
     | Domain       | <domain>      |
 
     Examples: 
-      | planType | claimPeriod    | domain | claimssystem  |
-      | MA       | Last 24 months | NICE   | NICECLAIMSEOB |
+      | FID    | planType | claimPeriod    | domain | claimssystem  |
+      | 244667 | MA       | Last 24 months | NICE   | NICECLAIMSEOB |
 
   #---- this test check that sub-navigation to EOB page under Claims tab is suppressed for SSUP Only Plan member
   @US1662790 @F267688

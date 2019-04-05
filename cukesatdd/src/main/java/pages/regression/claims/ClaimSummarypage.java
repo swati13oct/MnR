@@ -344,6 +344,17 @@ public class ClaimSummarypage extends UhcDriver{
 
 	@FindBy(xpath="//div[contains(@class,'EOBComponentSHIP') and not(contains(@class,'ng-hide'))]//span[contains(text(),'Ship')]/../p[contains(text(),'VIEW EOB STATEMENT')]")
 	private WebElement EOB_SHIP;
+
+	@FindBy(xpath="//a//span[text()='keyboard_arrow_left']")
+	private WebElement leftArrowButton;
+	@FindBy(xpath="//a//span[text()='keyboard_arrow_right']")
+	private WebElement rightArrowButton;
+	
+	@FindBy(xpath="//div[@id='atddPagination']//p[contains(text(),'items found. Displaying 1 to')]")
+	private WebElement itemsFoundDisplayingText;
+	
+	@FindBy(xpath="//p[contains(text(),'Not the claims you were expecting? Select a different date range to search again.')]")
+	private WebElement notTheClaimsYouWereExpecting;
 	//^^^ note:	added for def1041				
 
 
@@ -431,10 +442,6 @@ public class ClaimSummarypage extends UhcDriver{
 
 	}
 	
-	@FindBy(xpath="//a//span[text()='keyboard_arrow_left']")
-	private WebElement leftArrowButton;
-	@FindBy(xpath="//a//span[text()='keyboard_arrow_right']")
-	private WebElement rightArrowButton;
 	/**
 	 * @toDo : this method validates claims table and pagination
 	 */
@@ -1548,7 +1555,8 @@ public void TBR_NavigateToClaimsPage(){	//tbd-remove whole method
 				while(x<45) {
 					try {
 						Thread.sleep(1000);
-						if (verifyClaimsTableAndPagination()) {
+						if (validate(verifyClaimSummaryAndPagination)) {
+						//tbd if (verifyClaimsTableAndPagination()) {
 							Thread.sleep(extra); //give it more time to settle the page
 							System.out.println("sleep for another 2 sec for the page to settle down...");
 							System.out.println("there is some indication of claims...let's check it out");
