@@ -1410,6 +1410,21 @@ public void TBR_NavigateToClaimsPage(){	//tbd-remove whole method
 				
 			}	
 			
+			public void validateExplanationOfBenefitsSubNavNotDisplayedForSSUP() throws InterruptedException 
+			{
+			    Thread.sleep(2000);  
+			    System.out.println("Now checking for Explanation of benefits sub navigation of Claims");
+			     
+				 try {
+					driver.findElement(By.id("eobC1")).isDisplayed();
+					System.out.println("Explanation of Benefits Sub Navigation Link under Claims was displayed");
+					Assert.fail("Explanation of Benefits Sub Navigation Link under Claims was displayed, Test step is failed due to it");
+				} catch (Exception e) {
+					System.out.println("Explanation of Benefits Sub Navigation Link under Claims was NOT displayed, Test step is passed due to it");
+			    		}
+									
+			}	
+			
 			
 			public void verifyCorrectMessageForPreEffectiveMembers() throws InterruptedException 
 			{

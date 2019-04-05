@@ -18,7 +18,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.memberrdesignVBF.BenefitsAndCoveragePage;
-import pages.memberrdesignVBF.ClaimSummarypage;
+import pages.regression.claims.ClaimSummarypage;
 import pages.memberrdesignVBF.ContactUsPage;
 import pages.memberrdesignVBF.DrugCostEstimatorPage;
 import pages.memberrdesignVBF.EOBPage;
@@ -38,7 +38,7 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath = "//table[@class='componentTable']/tbody/tr/td/a[contains(.,'Payment')]")
 	private WebElement PaymentPageLink;
 
-	@FindBy(xpath = "//table[@class='componentTable']/tbody/tr/td/a[contains(.,'Claim')]")
+	@FindBy(id = "claims_1")
 	private WebElement claimsPageLink;
 
 	@FindBy(xpath = "//table[@class='componentTable']/tbody/tr/td/a[contains(.,'Forms and Resource')]")
@@ -328,6 +328,22 @@ public class TestHarness extends UhcDriver {
 		}
 		return null;
 	}
+
+	public ClaimSummarypage navigateToClaimsSummaryFromTestHarnessPage() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		claimsPageLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return new ClaimSummarypage(driver);
+		
+	}
+		
 
 	/***
 	 * 

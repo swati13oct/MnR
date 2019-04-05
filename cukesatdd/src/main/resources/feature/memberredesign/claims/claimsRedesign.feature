@@ -716,3 +716,16 @@ Feature: T1.1To validate the new changes related to claims page on the member re
     Examples: 
       | planType | claimPeriod    | domain | claimssystem  |
       | MA       | Last 24 months | NICE   | NICECLAIMSEOB |
+
+  #---- this test check that sub-navigation to EOB page under Claims tab is suppressed for SSUP Only Plan member
+  @US1662790 @F267688
+  Scenario Outline: to validate that sub-navigation to EOB page under Claims tab is suppressed for SSUP Only Plan member
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>     |
+      | Test Data Type | <claimssystem> |
+    When I navigate to the claims Summary page from test harness page or dashboard
+    Then Explanation of benefits sub navigation under Claims tab is not displayed
+
+    Examples: 
+      | planType | claimssystem |
+      | SSUP     | COSMOSCLAIMS |
