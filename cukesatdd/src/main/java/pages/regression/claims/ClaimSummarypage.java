@@ -19,6 +19,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+
+import com.thoughtworks.selenium.webdriven.commands.Click;
+
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
@@ -344,6 +347,25 @@ public class ClaimSummarypage extends UhcDriver{
 
 	@FindBy(xpath="//div[contains(@class,'EOBComponentSHIP') and not(contains(@class,'ng-hide'))]//span[contains(text(),'Ship')]/../p[contains(text(),'VIEW EOB STATEMENT')]")
 	private WebElement EOB_SHIP;
+	
+	@FindBy(id="eobC1")
+	private WebElement EOB_claims;
+	
+	@FindBy(xpath="//h1[contains(text(),'Explanation of Benefits')]")
+	private WebElement EOB_header;
+	
+	@FindBy(xpath="//p[contains(text(),'EOBs for your plan are currently not available on this site. We apologize for the inconvenience.')]")
+	private WebElement EOB_errorMsg;
+	
+	@FindBy(xpath="//div[@class='otherPages EOBpagedescriptionPDP']//p[contains(text(),'Your monthly EOB shows a summary of the claims we ')]")
+	private WebElement EOB_MsgForPDP;
+	
+	@FindBy(id = "claims_1")
+	private WebElement claimsPageLink;
+	
+	@FindBy(xpath = "//main//li[@class='ng-scope']//a[1]")
+	private WebElement ssup_Plan;
+	
 	//^^^ note:	added for def1041				
 
 
@@ -1395,14 +1417,83 @@ public void TBR_NavigateToClaimsPage(){	//tbd-remove whole method
 			    System.out.println("Now checking for Explanation of benefits sub navigation of Claims");
 			     
 				 try {
-					driver.findElement(By.id("eobC1")).isDisplayed();
+					 EOB_claims.isDisplayed();
 					System.out.println("Explanation of Benefits Sub Navigation Link under Claims was displayed");
 					Assert.fail("Explanation of Benefits Sub Navigation Link under Claims was displayed, Test step is failed due to it");
 				} catch (Exception e) {
 					System.out.println("Explanation of Benefits Sub Navigation Link under Claims was NOT displayed, Test step is passed due to it");
 			    		}
 									
-			}	
+			}
+			public void validateExplanationOfBenefitsSubNavDisplayedForGroupSSUP() throws InterruptedException 
+			{
+			    Thread.sleep(2000);  
+			    System.out.println("Now checking for Explanation of benefits sub navigation of Claims");
+			    EOB_claims.click();
+			    Thread.sleep(2000);
+				 try {
+					 validateNew(EOB_claims);
+					 validateNew(EOB_header);
+					 validateNew(EOB_MsgForPDP);
+					 System.out.println("Explanation of Benefits page for PDP plan through Sub Navigation Link under Claims was displayed");
+					 
+					
+				} catch (Exception e) {
+					System.out.println("Explanation of Benefits page for PDP plan through Sub Navigation Link under Claims was not displayed");
+					Assert.fail("Explanation of Benefits page for PDP plan through Sub Navigation Link under Claims was not displayed");
+			    		}
+				// below code will validate same page for SSUP	plan	
+				 
+				 System.out.println("Now checking for Explanation of benefits page for SSUP plan");
+				  claimsPageLink.click();
+				    Thread.sleep(4000);
+					 try {
+						 validateNew(EOB_claims);
+						 validateNew(ssup_Plan);
+					
+						 ssup_Plan.click();
+						 System.out.println("SSUP plan has been selected");
+						 Thread.sleep(3000);
+						 EOB_claims.click();
+						 Thread.sleep(3000);
+						 validateNew(EOB_MsgForPDP);
+						 System.out.println("Explanation of Benefits page for SSUP plan through Sub Navigation Link under Claims was displayed as PDP Plan, Test step is passed due to it");
+						 
+						
+					} catch (Exception e) {
+						System.out.println("Explanation of Benefits page for SSUP plan through Sub Navigation Link under Claims was not displayed as PDP Plan, Test step is failed due to it");
+						Assert.fail("Explanation of Benefits page for SSUP plan through Sub Navigation Link under Claims was not displayed as PDP Plan, Test step is failed due to it");
+				    		}
+			}
+			
+			
+			
+			
+			public void invokeEOBDeepLink() throws InterruptedException 
+			{
+			    Thread.sleep(2000);  
+			    System.out.println("Now invoking the deep link of Explanation of benefits");
+			    if (MRScenario.environmentMedicare.equalsIgnoreCase("team-h")){
+			    	startNew("https://www.team-h-medicare.ocp-ctc-dmz-nonprod.optum.com/aarp/member/eob.html");
+			    }
+			    
+			    else if((MRScenario.environmentMedicare.equalsIgnoreCase("Stage"))){
+			    	startNew("https://stage-medicare.uhc.com/aarp/member/eob.html");
+			    }
+				 try {
+					 EOB_claims.isDisplayed();
+					System.out.println("Explanation of Benefits Sub Navigation Link under Claims was displayed");
+					Assert.fail("Explanation of Benefits Sub Navigation Link under Claims was displayed, Test step is failed due to it");
+				} catch (Exception e) {
+					System.out.println("Explanation of Benefits Sub Navigation Link under Claims was NOT displayed, Working as expected for SSUP member");
+					validateNew(EOB_header);
+					validateNew(EOB_errorMsg);
+					System.out.println("EOB page with the message 'EOBs for your plan are currently not available on this site. We apologize for the inconvenience.' is displaying ");
+				}
+					
+			}
+			
+			
 			
 			
 			public void verifyCorrectMessageForPreEffectiveMembers() throws InterruptedException 
