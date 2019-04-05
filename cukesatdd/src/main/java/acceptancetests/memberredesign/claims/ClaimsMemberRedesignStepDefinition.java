@@ -152,6 +152,26 @@ public class ClaimsMemberRedesignStepDefinition {
 	    
 	}	
 	
+	@When("^Validate Explanation of benefits Page for group SSUP$")
+	public void Validate_EOB_Tab_underClaims() throws Throwable 
+	{
+		ClaimSummarypage claimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.CLAIM_SUMMARY_PAGE);
+		claimsSummaryPage.validateExplanationOfBenefitsSubNavDisplayedForGroupSSUP();
+	    
+	}
+	
+	/**
+	 * @toDo : This method checks that Explanation of benefits sub navigation under Claims tab is not displayed
+	 */
+	
+	@When("^Explanation of benefits deep link is invoked and validate the Page$")
+	public void check_ExplanationOfBenefits_DeepLink() throws Throwable 
+	{
+		ClaimSummarypage claimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.CLAIM_SUMMARY_PAGE);
+		claimsSummaryPage.invokeEOBDeepLink();
+	    
+	}
+	
 	
 	/**
 	 * @toDo : The user search claims for the following time interval in redesigned site
