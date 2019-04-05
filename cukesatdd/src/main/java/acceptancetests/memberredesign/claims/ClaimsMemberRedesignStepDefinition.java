@@ -1238,6 +1238,8 @@ public class ClaimsMemberRedesignStepDefinition {
 
 		ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		newclaimsSummarypage.validate_SearchEobHistory_onSummaryPage(domain, planType);
+		
+		newclaimsSummarypage.validatePageContainsPdfDocText();
 
 		if(newclaimsSummarypage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newclaimsSummarypage);

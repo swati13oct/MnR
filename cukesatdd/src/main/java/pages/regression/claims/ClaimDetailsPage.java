@@ -185,6 +185,9 @@ public class ClaimDetailsPage extends UhcDriver{
 	@FindBy(xpath="//div[contains(@class,'EOBComponent') and not(contains(@class,'ng-hide'))]//*[contains(text(),'SEARCH')]")
 	private WebElement searchAnyEobHistoryText;
 
+	@FindBy(xpath="//div[contains(@class,'EOBComponent') and not(contains(@class,'ng-hide'))]//*[contains(text(),'VIEW EOB')]")
+	private WebElement searchEobStatementsText;
+	
 	//this give u number of rows on the claims list table
 	@FindBy(xpath="//div[@class='medical-claims']//div[@class='claimDetTableMainSection']//div[contains(@ng-repeat,'bl in billLineDetailsList')]")
 	private List<WebElement> claimsTableRows;
@@ -914,7 +917,7 @@ public class ClaimDetailsPage extends UhcDriver{
 		System.out.println("Validate PDF Doc text section exists");
 		System.out.println("validate(searchAnyEobHistoryText)="+validate(searchAnyEobHistoryText)+" | validate(medicalEobNotAvaText)="+validate(medicalEobNotAvaText));
 		//note: if there is any EOB then there should be the text about PDF DOC for Adobe
-		if (validate(searchAnyEobHistoryText) || validate(viewPDF)) {
+		if (validate(searchAnyEobHistoryText) || validate(searchEobStatementsText)|| validate(viewPDF)) {
 			Assert.assertTrue("PROBLEM - unable to locate the Adobe PDF section",validate(pageContainsPdfDocText));
 		} else {
 			Assert.assertTrue("PROBLEM - should not be able to locate the Adobe PDF section because there is no PDF avaialbe on this detail page",!validate(pageContainsPdfDocText));
