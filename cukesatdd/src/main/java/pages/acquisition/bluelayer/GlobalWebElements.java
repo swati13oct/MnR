@@ -224,6 +224,8 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[@class='top-menu']/div/div[2]/div/form/span/p")
 	 public static WebElement alreadyMemberInvalidCredsErrorMessage;
 
+	@FindBy(xpath="//*[@id='subnav_2']//*[contains(@href,'estimate')]")
+	public static WebElement headerDrugCostEstimatorLink;
 
 	@Override
 	public void openAndValidate() {

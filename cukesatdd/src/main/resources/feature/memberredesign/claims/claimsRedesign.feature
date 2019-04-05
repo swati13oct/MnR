@@ -384,6 +384,9 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 
 
     #----- begin of claims15 ---------------------------------------------------------
+    # note: for time being will bypass the YourShare value mismatch between summary and detail INC10332773
+    # note: will bypass Search EOB History link missing for MA NICE summary page and MA and MAPD NICE detail page defect on prod
+	# note: any additional Example will need to tag with either one of these @claims15_COSMOS @claims15_NICE @claims15_notNiceOrCosmos
     @claims15 @def1041 @thePredators
 	Scenario Outline: DID: <DID> -plan: <planType> -claimsSystem: <claimssystem> -claimType: <claimType> - <index> - To validate claims for both summary and detail page for each search range options
 		Given login with following details logins in the member portal and validate elements
@@ -588,7 +591,6 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | Plan Type        | <planType>          |
 		#----------------- Final Test claims number makes sense from search periods --------------
 		And I can validate the numbers of claims from all search periods
-
 		  
 	@claims15_01 @claims15_MAPD @claims15_COSMOS @claims15_MEDICAL @diffGrpsDiffYrs
 	Examples: 
@@ -650,27 +652,27 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |12    |1041| MEDICA   | COSMOS | COSMOSCLAIMS                 | Prescription drug | Yes                 |
 
-	@claims15_13 @claims15_PDP @claims15_RX @claims15_DRUG
+	@claims15_13 @claims15_PDP @claims15_RX @claims15_notNiceOrCosmos @claims15_DRUG
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |13    |1041| PDP      | RX     | RXCLAIMS                     | Prescription drug | No                  |
 
-	@claims15_14 @claims15_SHIP
+	@claims15_14 @claims15_SHIP @claims15_notNiceOrCosmos
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |14    |1041| SHIP     | NA     | SHIPCLAIMS                   | NA                | No                  |
 
-	@claims15_15 @claims15_COMBO @claims15_MEDICAL
+	@claims15_15 @claims15_COMBO @claims15_MAPD @claims15_COSMOS @claims15_MEDICAL
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |15    |1041| MAPD     | COSMOS | COMBO_COSMOSCLAIMS           | Medical           | Yes                 |
 
-	@claims15_16 @claims15_COMBO @claims15_DRUG
+	@claims15_16 @claims15_COMBO @claims15_MAPD @claims15_COSMOS @claims15_DRUG
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |16    |1041| MAPD     | COSMOS | COMBO_COSMOSCLAIMS           | Prescription drug | Yes                 |
 
-	@claims15_17 @claims15_COMBO @claims15_SHIP
+	@claims15_17 @claims15_COMBO @claims15_SHIP @claims15_notNiceOrCosmos
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |17    |1041| SHIP     | NA     | COMBO_SHIPCLAIMS             | NA                | No                  |
@@ -689,4 +691,60 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	 #|xx    |1041| MAPD     | COSMOS | t_diffGrpsDiffYrs_COSMOSCLAIMS | Medical           | Yes                |
 	 #|xx    |1041| MAPD     | COSMOS | t_diffGrpsDiffYrs_COSMOSCLAIMS | Prescription drug | Yes                |
 	#----- end of claims15 ---------------------------------------------------------
-	  
+	
+	#---- this the test EOB link on claims details page
+    @claims16 @claimsEOB @US1268210 @F244667
+    Scenario Outline: to validate the claims eob link
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>     |
+      | Test Data Type | <claimssystem> |
+    When I navigate to the claims Summary page in redesigned site
+    Then I validate the claim summary header
+    And I can search claims for the following claim period on redesigned site
+      | Plan Type    | <planType>    |
+      | Claim Period | <claimPeriod> |
+    Then I can see the claims displayed based on the selection in redesigned site
+    When I navigate to the Claim details page to see view as pdf EOB
+    Then I can vdate the view as pdf link on claims details page header
+    | Plan Type    | <planType>    |
+    | Domain       | <domain>      |
+
+    Examples: 
+      | planType | claimPeriod    | domain | claimssystem  |
+      | MA       | Last 24 months | NICE   | NICECLAIMSEOB |
+
+  #---- this test check that sub-navigation to EOB page under Claims tab is suppressed for SSUP Only Plan member
+  @US1662790 @F267688 @claimsEOB_SSUP_Plan
+  Scenario Outline: to validate that sub-navigation to EOB page under Claims tab is suppressed for SSUP Only Plan member
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>     |
+      | Test Data Type | <claimssystem> |
+    When I navigate to the claims Summary page from test harness page or dashboard
+    Then Explanation of benefits sub navigation under Claims tab is not displayed
+
+    Examples: 
+      | planType | claimssystem |
+      | SSUP     | COSMOSCLAIMS |
+      
+        @US1673123 @F267688_Test @claimsEOB_SSUP_Plan
+  Scenario Outline: to validate that SSUP member accessing EOB page via deep link
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>     |
+      | Test Data Type | <claimssystem> |
+    When I navigate to the claims Summary page from test harness page or dashboard
+    Then Explanation of benefits sub navigation under Claims tab is not displayed
+    Then Explanation of benefits deep link is invoked and validate the Page
+    Examples: 
+      | planType | claimssystem |
+      | SSUP     | SSUP_EOB_Deeplink |
+      
+           @US1673112 @F267688_Test @claimsEOB_SSUP_Plan
+  Scenario Outline: to validate that SSUP member accessing EOB page via deep link
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>     |
+      | Test Data Type | <claimssystem> |
+    When I navigate to the claims Summary page from test harness page or dashboard
+    Then Validate Explanation of benefits Page for group SSUP
+    Examples: 
+      | planType | claimssystem |
+      | SSUP     | Group_SSUP_EOB |

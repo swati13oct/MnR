@@ -10,13 +10,15 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.CommonConstants;
+import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.MRConstants;
+import acceptancetests.data.PageConstants;
 import acceptancetests.memberredesign.HSID.CommonStepDefinition;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.memberrdesignVBF.BenefitsAndCoveragePage;
-import pages.memberrdesignVBF.ClaimSummarypage;
+import pages.regression.claims.ClaimSummarypage;
 import pages.memberrdesignVBF.ContactUsPage;
 import pages.memberrdesignVBF.DrugCostEstimatorPage;
 import pages.memberrdesignVBF.EOBPage;
@@ -36,7 +38,7 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath = "//table[@class='componentTable']/tbody/tr/td/a[contains(.,'Payment')]")
 	private WebElement PaymentPageLink;
 
-	@FindBy(xpath = "//table[@class='componentTable']/tbody/tr/td/a[contains(.,'Claim')]")
+	@FindBy(id = "claims_1")
 	private WebElement claimsPageLink;
 
 	@FindBy(xpath = "//table[@class='componentTable']/tbody/tr/td/a[contains(.,'Forms and Resource')]")
@@ -184,6 +186,10 @@ public class TestHarness extends UhcDriver {
 		PageFactory.initElements(driver, this);
 		openAndValidate();
 	}
+	public MRScenario getLoginScenario() {
+		MRScenario loginScenario = null;
+		return loginScenario;
+	}
 
 	@Override
 	public void openAndValidate() {
@@ -193,7 +199,11 @@ public class TestHarness extends UhcDriver {
 			return;
 		}
 		//^^^ note: temp-workaround for team-a env, by-pass this for now
-		category = CommonStepDefinition.getMemberAttributeMap().get("Member Type");
+		//category = CommonStepDefinition.getMemberAttributeMap().get("Member Type");
+		
+		category = "Category";
+				//(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+				System.out.println("The selected category is " +category);
 		if (category.equalsIgnoreCase("PCP") || category.equalsIgnoreCase("MEDICA")) {
 			CommonUtility.waitForPageLoad(driver, panelHomePcpMedica, 30);
 			validateNew(pcpMedicaLogo);		
@@ -212,7 +222,10 @@ public class TestHarness extends UhcDriver {
 		}
 		//validateNew(orderPlanPageLink);
 		//validateNew(claimsPageLink);
-
+		else{
+			System.out.println("Active view is present");
+		}
+		
 	}
 
 	/***
@@ -315,6 +328,22 @@ public class TestHarness extends UhcDriver {
 		}
 		return null;
 	}
+
+	public ClaimSummarypage navigateToClaimsSummaryFromTestHarnessPage() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		claimsPageLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return new ClaimSummarypage(driver);
+		
+	}
+		
 
 	/***
 	 * 
