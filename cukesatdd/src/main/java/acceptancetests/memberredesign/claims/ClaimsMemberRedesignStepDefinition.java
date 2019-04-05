@@ -1097,8 +1097,9 @@ public class ClaimsMemberRedesignStepDefinition {
 							System.out.println("Proceed to validate 'Learn More...' link");
 							newclaimDetailspage.learnMoreCostLink();
 
-							System.out.println("Proceed to validate 'This page contains PDF documents...' text");
-							newclaimDetailspage.validatePageContainsPdfDocText();
+							//TODO note: need to find out expected behavior
+							//System.out.println("Proceed to validate 'This page contains PDF documents...' text on detail page");
+							//newclaimDetailspage.validatePageContainsPdfDocText();
 
 							//note: detail page will have Your Share column regardless Summary page
 							HashMap<String, String> dataMapDetail=newclaimDetailspage.gatherDataFromDetailPage(claimType);
@@ -1239,7 +1240,9 @@ public class ClaimsMemberRedesignStepDefinition {
 		ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		newclaimsSummarypage.validate_SearchEobHistory_onSummaryPage(domain, planType);
 		
-		newclaimsSummarypage.validatePageContainsPdfDocText();
+		//TODO note: need to find out expected behavior
+		//System.out.println("Proceed to validate 'This page contains PDF documents...' text on summary page");
+		//newclaimsSummarypage.validatePageContainsPdfDocText();
 
 		if(newclaimsSummarypage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newclaimsSummarypage);

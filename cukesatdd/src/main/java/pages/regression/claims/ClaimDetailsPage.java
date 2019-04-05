@@ -916,7 +916,6 @@ public class ClaimDetailsPage extends UhcDriver{
 	public void validatePageContainsPdfDocText() {
 		System.out.println("Validate PDF Doc text section exists");
 		System.out.println("validate(searchAnyEobHistoryText)="+validate(searchAnyEobHistoryText)+" | validate(medicalEobNotAvaText)="+validate(medicalEobNotAvaText));
-		//note: if there is any EOB then there should be the text about PDF DOC for Adobe
 		if (validate(searchAnyEobHistoryText) || validate(searchEobStatementsText)|| validate(viewPDF)) {
 			Assert.assertTrue("PROBLEM - unable to locate the Adobe PDF section",validate(pageContainsPdfDocText));
 		} else {

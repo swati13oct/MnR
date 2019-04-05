@@ -2245,7 +2245,6 @@ public void TBR_NavigateToClaimsPage(){	//tbd-remove whole method
 			public void validatePageContainsPdfDocText() {
 				System.out.println("Validate PDF Doc text section exists");
 				System.out.println("validate(searchAnyEobHistoryText)="+validate(searchAnyEobHistoryText));
-				//note: if there is any EOB then there should be the text about PDF DOC for Adobe
 				if (validate(searchAnyEobHistoryText) || validate(searchEobStatementsText)) {
 					Assert.assertTrue("PROBLEM - unable to locate the Adobe PDF section",validate(pageContainsPdfDocText));
 				} else {

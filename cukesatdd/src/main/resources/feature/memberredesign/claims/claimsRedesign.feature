@@ -386,6 +386,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
     #----- begin of claims15 ---------------------------------------------------------
     # note: for time being will bypass the YourShare value mismatch between summary and detail INC10332773
     # note: will bypass Search EOB History link missing for MA NICE summary page and MA and MAPD NICE detail page defect on prod
+    # note: TBD - expected behavior for This page contains PDF doc text
 	# note: any additional Example will need to tag with either one of these 
 	# note:   @claims15_COSMOS_MEDICAL, @claims15_COSMOS_DRUG, 
 	# note:   @claims15_NICE_MEDICAL, @claims15_NICE_DRUG or @claims15_NOT_NICE_OR_COSMOS
