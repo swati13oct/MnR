@@ -12,6 +12,8 @@ import java.util.TimeZone;
 
 import org.joda.time.DateTime;
 import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.PageConstants;
@@ -25,6 +27,7 @@ import gherkin.formatter.model.DataTableRow;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.claims.ClaimDetailsPage;
 import pages.regression.claims.ClaimSummarypage;
+import pages.regression.testharness.TestHarness;
 
 /**
  Functionality : Validating the Claims Summary & Claims Details Page on the redesigned site.
@@ -97,7 +100,8 @@ public class ClaimsMemberRedesignStepDefinition {
 	 */
 
 	@When("^I navigate to the claims Summary page in redesigned site$")
-	public void navigate_Claims_Summary_redesigned(){
+	public void navigate_Claims_Summary_redesigned()
+		{
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 		ClaimSummarypage newClaimsSummaryPage = accountHomePage.navigateToClaimsSummaryPage();
 		
@@ -111,6 +115,44 @@ public class ClaimsMemberRedesignStepDefinition {
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * @toDo : This method click on cliams tab from test harness page or dashboard page
+	 */
+	
+	@When("^I navigate to the claims Summary page from test harness page or dashboard$")
+	public void navigate_to_Claims_Summary_from_testharness_page() throws Throwable {
+	if (MRScenario.environmentMedicare.equalsIgnoreCase("team-h"))
+	{
+		TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+		System.out.println("Now clicking on Claims Tab from the test harness page to go to Claims Page");
+		ClaimSummarypage claimsSummaryPage = testHarnessPage.navigateToClaimsSummaryFromTestHarnessPage();
+		getLoginScenario().saveBean(PageConstants.CLAIM_SUMMARY_PAGE, claimsSummaryPage);
+	}
+	else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage"))
+	{
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		Thread.sleep(3000);
+		ClaimSummarypage claimsSummaryPage = accountHomePage.navigateToClaimsSummaryPage();
+		getLoginScenario().saveBean(PageConstants.CLAIM_SUMMARY_PAGE, claimsSummaryPage);
+	 }
+	else {
+		System.out.println("This script was created to be run from team-h or stage, please check and update accordingly");
+	}
+	}
+	
+	/**
+	 * @toDo : This method checks that Explanation of benefits sub navigation under Claims tab is not displayed
+	 */
+	
+	@When("^Explanation of benefits sub navigation under Claims tab is not displayed$")
+	public void check_ExplanationOfBenefits_SubNavigation_UnderClaimsTab() throws Throwable 
+	{
+		ClaimSummarypage claimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.CLAIM_SUMMARY_PAGE);
+		claimsSummaryPage.validateExplanationOfBenefitsSubNavNotDisplayedForSSUP();
+	    
+	}	
+	
+	
 	/**
 	 * @toDo : The user search claims for the following time interval in redesigned site
 	 */
