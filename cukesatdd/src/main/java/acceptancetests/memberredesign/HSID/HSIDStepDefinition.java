@@ -138,29 +138,41 @@ public class HSIDStepDefinition {
 			} else {
 				//tbd Assert.fail("***** Error in loading Redesign Account Landing Page *****");
 				// note: accountHomePage==null, instead of fail it right away, check to see if it is worth it go workaround it
-				System.out.println("accountHomePage==null, try one more check to see if workaround can be applied before calling it quit");
-				try {
-					WebElement sorry=wd.findElement(By.xpath("//h1[@translate='INTERNAL_ERROR_SORRY']")); 
-					WebElement wentWrong=wd.findElement(By.xpath("//h1[contains(text(),'Something went wrong')]"));
-					if ((testDataType==null) && (category==null) && (planType==null)) {
-						System.out.println("not workaround candidate, don't have enough info to determine if woorkaround is possible, test doesn't have the 'Test Data Type' or 'Member Type' or 'Plan Type' input ");
-						Assert.fail("***** Error in loading  Redesign Account Landing Page *****");
-					} else {
+				if ((testDataType==null) && (category==null) && (planType==null)) {
+					System.out.println("not workaround candidate, don't have enough info to determine if woorkaround is possible, test doesn't have the 'Test Data Type' or 'Member Type' or 'Plan Type' input ");
+					Assert.fail("***** Error in loading  Redesign Account Landing Page *****");
+				} else {
+					System.out.println("accountHomePage==null, try one more check to see if workaround can be applied before calling it quit");
+					boolean hasSorryError=false;
+					boolean hasWentWrongError=false;
+					try { //check to see if it has sorry error
+						WebElement sorry=wd.findElement(By.xpath("//h1[@translate='INTERNAL_ERROR_SORRY']")); 
+						if (sorry.isDisplayed()) {
+							hasSorryError=true;
+						}
+					} catch (Exception e) {}
+					try { //check to see if it has something went wrong eeror
+						WebElement wentWrong=wd.findElement(By.xpath("//h1[contains(text(),'Something went wrong')]"));
+						if (wentWrong.isDisplayed()) {
+							hasWentWrongError=true;
+						}
+					} catch (Exception e) {}
+					if (hasSorryError) {
 						//note: has the potential for sorry workaround if getting sorry error
 						Thread.sleep(1500);	//sometimes the sorry text take a bit longer to load
-						if (sorry.isDisplayed()) {
+						try {
 							boolean result=workaroundSorryErrorPage(wd, testDataType, category, planType);
 							Assert.assertTrue("***** Error in loading Redesign Account Landing Page ***** Got error for 'Sorry. it's not you, it's us'", result);
-						} else if(wentWrong.isDisplayed()) {
-							Assert.assertTrue("***** Error in loading Redesign Account Landing Page ***** Got error for 'Something went wrong'", false);
-						} else {
-							System.out.println("Not the 'sorry' or 'something went wrong' login error, it's some other login error");
-							Assert.fail("***** Error in loading Redesign Account Landing Page *****");
+						} catch (Exception e) {
+							System.out.println("Exception: "+e);
+							Assert.fail("***** Error in loading  Redesign Account Landing Page *****");
 						}
+					} else if(hasWentWrongError) {
+						Assert.assertTrue("***** Error in loading Redesign Account Landing Page ***** Got error for 'Something went wrong'", false);
+					} else {
+						System.out.println("Not the 'sorry' or 'something went wrong' login error, it's some other login error");
+						Assert.fail("***** Error in loading Redesign Account Landing Page ***** Got error that's not 'Sorry. it's not you, it's us' or 'Something went wrong'");
 					}
-				} catch(Exception e) {
-					System.out.println("Exception: "+e);
-					Assert.fail("***** Error in loading  Redesign Account Landing Page *****");
 				}
 			}
 		} else {
@@ -168,15 +180,6 @@ public class HSIDStepDefinition {
 				LoginPage loginPage=null;
 				if ("team-a".equalsIgnoreCase(MRScenario.environment)) {
 					loginPage = new LoginPage(wd, teamSpecialCase);
-					//TODO - note - fix this later, need to swap this to work with testHarnessPage
-					AccountHomePage accountHomePage = (AccountHomePage) loginPage
-							.loginWithLegacy(userName, pwd);
-					if (accountHomePage != null) {
-						getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
-						return;
-					} else {
-						Assert.fail("Login not successful...");
-					}
 				} 
 				
 				else {
@@ -189,7 +192,6 @@ public class HSIDStepDefinition {
 					getLoginScenario()
 							.saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,
 									accountHomePage);*/
-				
 				TestHarness testHarnessPage = (TestHarness) loginPage
 						.loginWithLegacy(userName, pwd);
 				if (testHarnessPage != null) {
@@ -625,7 +627,7 @@ public class HSIDStepDefinition {
 			accountHomePage.setAttemptSorryWorkaround(workaroundInfoMap);
 			if (type.contains("reward")) { //proceed to switch page now
 				accountHomePage.workaroundAttempt("reward");
-			}
+			} 
 			getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
 			return true;
 		} else {

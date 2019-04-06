@@ -2552,13 +2552,9 @@ public class AccountHomePage extends UhcDriver {
 		driver.get(workaroundURL);
 		System.out.println("wait for driver to be ready after loading URL...");
 		CommonUtility.checkPageIsReadyNew(driver);
-		/* tbd try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}*/
 	}
 	//^^^ note: added for 'sorry' login error workaround	
+
 	public ClaimDetailsPage navigateToClaimDetailsPagetoseeeobpdflink() {
 
 		try {
