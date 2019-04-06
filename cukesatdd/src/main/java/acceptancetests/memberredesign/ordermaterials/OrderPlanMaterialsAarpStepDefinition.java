@@ -15,8 +15,11 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.claims.ClaimSummarypage;
 import pages.regression.ordermaterials.OrderMaterialsPage;
 import pages.regression.ordermaterials.OrderPlanMaterialConfirmationPage;
+import pages.regression.testharness.TestHarness;
+import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -116,6 +119,23 @@ public class OrderPlanMaterialsAarpStepDefinition {
 	*/
 	@When("^the user views order materials in Member Redesign Order Materials page$")
 	public void views_order_materials_in_Ums_site() throws InterruptedException {
+		OrderMaterialsPage orderPlanMaterialsPage;
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+			orderPlanMaterialsPage = testHarness.navigateToOrderPlanMaterialsPageFromTestHarnessPage();
+		} else {
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			orderPlanMaterialsPage = accountHomePage.navigateToOrderPlanMaterialsPage();
+		}
+		if (orderPlanMaterialsPage != null) {
+			getLoginScenario().saveBean(PageConstantsMnR.ORDER_PLAN_MATERIALS_PAGE,
+					orderPlanMaterialsPage);
+		}
+		else {
+			Assert.fail("Error in loading  orderPlanMaterialsPage");
+		}
+
+		/* tbd-remove
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 		OrderMaterialsPage orderPlanMaterialsPage = accountHomePage
@@ -127,8 +147,9 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		}
 		else {
 			Assert.fail("Error in loading  orderPlanMaterialsPage");
-		}
+		} */
 	}
+	
 	@Then("^the user should not see Order Materials Link for terminated member$")
 	public void the_user_should_not_see_Order_Materials_Link_for_terminated_member() throws Throwable {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()

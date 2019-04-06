@@ -24,6 +24,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
+import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.claims.ClaimDetailsPage;
 import pages.regression.claims.ClaimSummarypage;
@@ -99,8 +100,8 @@ public class ClaimsMemberRedesignStepDefinition {
 	 * @toDo: Navigate to Claims Summary page.
 	 */
 
-	@When("^I navigate to the claims Summary page in redesigned site$")
-	public void navigate_Claims_Summary_redesigned()
+	@When("^TBR_I navigate to the claims Summary page in redesigned site$")
+	public void TBRnavigate_Claims_Summary_redesigned()
 		{
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 		ClaimSummarypage newClaimsSummaryPage = accountHomePage.navigateToClaimsSummaryPage();
@@ -1263,7 +1264,23 @@ public class ClaimsMemberRedesignStepDefinition {
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newclaimsSummarypage);
 	}	
 
+	@When("^I navigate to the claims Summary page in redesigned site$")
+	public void navigate_Claims_Summary_redesigned() {
+		ClaimSummarypage newClaimsSummaryPage;
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+			newClaimsSummaryPage = testHarness.navigateToClaimsSummaryFromTestHarnessPage();
+		} else {
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			newClaimsSummaryPage = accountHomePage.navigateToClaimsSummaryPage();
+		}
+		if (newClaimsSummaryPage != null)
+			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
+	}
 
+	
+
+	
 	//^^^ note: added for def1041	
 	@When("^I navigate to the Claim details page to see view as pdf EOB$")	
 	public void i_navigate_to_the_claim_detailspage_for_eob_pdf(){

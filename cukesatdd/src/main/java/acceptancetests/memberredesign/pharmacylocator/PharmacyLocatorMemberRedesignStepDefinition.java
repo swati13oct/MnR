@@ -13,7 +13,9 @@ import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.claims.ClaimSummarypage;
 import pages.regression.pharmacylocator.PharmacySearchPage;
+import pages.regression.testharness.TestHarness;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
@@ -40,6 +42,7 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 	
 	@When("^the user navigates to pharmacy search page in Redesign site$")
 	public void navigateToPharmacyLocatorPage() throws InterruptedException {
+		/* tbd-remove 
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 		PharmacySearchPage pharmacySearchPage = accountHomePage.navigateToRedesignPharmacyLocaterPage();
@@ -49,7 +52,23 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("Failed to load Pharmacy search page");
+		} */
+		PharmacySearchPage pharmacySearchPage;
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+			pharmacySearchPage = testHarness.navigateToPharmacyLocatorFromTestHarnessPage();
+		} else {
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			pharmacySearchPage = accountHomePage.navigateToRedesignPharmacyLocaterPage();
 		}
+		if (pharmacySearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
+					pharmacySearchPage);
+		} else {
+			Assert.fail("Failed to load Pharmacy search page");
+		}
+
+	
 	}
 
 	/**
