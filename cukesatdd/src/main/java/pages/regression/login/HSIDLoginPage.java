@@ -232,7 +232,7 @@ public class HSIDLoginPage extends UhcDriver {
 					Thread.sleep(1000);
 					x=x+1;
 					System.out.println("Waiting for some form of header to show up... waited "+x+" sec");
-				} catch (InterruptedException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			} 
