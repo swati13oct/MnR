@@ -13,6 +13,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import pages.member_deprecated.ulayer.TerminatedHomePage;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.testharness.TestHarness;
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
@@ -322,8 +323,7 @@ public class HSIDLoginPage extends UhcDriver {
 			e.printStackTrace();
 		}*/
 
-		if (currentUrl().contains("testharness.html")
-				|| currentUrl().contains("/dashboard")) {
+		if (currentUrl().contains("/dashboard")) {
 
 			System.out.println(driver.getCurrentUrl());
 			return new AccountHomePage(driver);
@@ -333,6 +333,9 @@ public class HSIDLoginPage extends UhcDriver {
 			return new AccountHomePage(driver);
 		} else if (currentUrl().contains("terminated-plan.html")) {
 			return new TerminatedHomePage(driver);
+		} else if (currentUrl().contains("testharness.html"))
+		{
+			return new TestHarness(driver);
 		}
 		return null;
 	}

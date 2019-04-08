@@ -128,12 +128,20 @@ public class HSIDStepDefinition {
 		if ("YES".equalsIgnoreCase(MRScenario.isHSIDCompatible)) {
 			HSIDLoginPage loginPage = new HSIDLoginPage(wd);
 			loginPage.validateelements();
-			AccountHomePage accountHomePage = (AccountHomePage) loginPage
-					.doLoginWith(userName, pwd);
-			if (accountHomePage != null) {
-				getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,
-						accountHomePage);
-				Assert.assertTrue(true);
+			if("YES".equalsIgnoreCase(MRScenario.isTestHarness))
+			{
+				TestHarness testharnesspage = (TestHarness) loginPage.doLoginWith(userName, pwd);
+				if(testharnesspage!=null){
+					getLoginScenario().saveBean(PageConstantsMnR.TEST_HARNESS_PAGE, testharnesspage);
+					Assert.assertTrue(true);
+				}
+			}else{
+				AccountHomePage accountHomePage = (AccountHomePage) loginPage
+						.doLoginWith(userName, pwd);
+				if (accountHomePage != null) {
+					getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,
+							accountHomePage);
+					Assert.assertTrue(true);		
 		
 			} else {
 				//tbd Assert.fail("***** Error in loading Redesign Account Landing Page *****");
@@ -175,7 +183,7 @@ public class HSIDStepDefinition {
 					}
 				}
 			}
-		} else {
+		}} else {
 			if (("YES").equalsIgnoreCase(MRScenario.isTestHarness)) {
 				LoginPage loginPage=null;
 				if ("team-a".equalsIgnoreCase(MRScenario.environment)) {
