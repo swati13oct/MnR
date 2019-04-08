@@ -227,11 +227,13 @@ public class LoginPage extends UhcDriver {
 			}
 			System.out.println("Current URL: " + currentUrl());
 			if (currentUrl().contains("member/testharness.html")) {
+				/* tbd 
 				//vvv note: temp-workaround for team-a env for now
 				if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a")) {
 					return new AccountHomePage(driver);
 				}
 				//^^^ note: temp-workaround for team-a env for now
+				 */
 				return new TestHarness(driver);
 			} else if (currentUrl().contains("terminated-plan.html")) {
 				return new TerminatedHomePage(driver);
