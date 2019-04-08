@@ -178,6 +178,8 @@ public class HSIDLoginPage extends UhcDriver {
 		return null;
 	}
 
+	@FindBy(id="authQuestiontextLabelId")
+	private WebElement authQuestionlabel;
 	/**
 	 * @toDo : To login through hsid via entering security questions
 	 */
@@ -188,26 +190,53 @@ public class HSIDLoginPage extends UhcDriver {
 		sendkeys(passwordField, password);
 		signInButton.click();
 
-		try {
+		//wait for some form of header to show
+		System.out.println("Check to see if SecurityQuestion page is loaded, timeout in 35 sec...");
+		CommonUtility.waitForPageLoadNew(driver, authQuestionlabel, 35);
+		/* tbd try {
 			Thread.sleep(35000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} */
 
 		if (driver.getCurrentUrl().contains(
 				"=securityQuestion")) {
+			System.out.println("Landed on security question page...");
 
 			ConfirmSecurityQuestion cs = new ConfirmSecurityQuestion(driver);
 			try {
-				Thread.sleep(10000);
+				//tbd Thread.sleep(10000);
 				cs.enterValidSecurityAnswer();
 				System.out.println(driver.getCurrentUrl());
-				Thread.sleep(20000);
+				//tbd Thread.sleep(20000);
+				System.out.println("Check to see if document.readyState is ready...");
+				CommonUtility.checkPageIsReadyNew(driver);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
+			//note: do not remove wait, need to give it enough time for the dashboard or error page to load
+			System.out.println("Start to wait for the dashboard (or some form of error page) to load...");
+			CommonUtility.checkPageIsReadyNew(driver);
+			int x=0;
+			while (x < 20) {
+				try {
+					List<WebElement> header=driver.findElements(By.xpath("//h1"));
+					if (header.size() >0) {
+						System.out.println("Located some sort of header, assume page is comming");
+						Thread.sleep(2000); //just in case
+						break;
+					}
+					Thread.sleep(1000);
+					x=x+1;
+					System.out.println("Waiting for some form of header to show up... waited "+x+" sec");
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			} 
+
 			//note: workaround - get URL again to check and see if it goes to the no-email.html page instead
 			if (driver.getCurrentUrl().contains("login/no-email.html")) {
 				System.out.println("User encounted no-email page, will enter email address to proceed");
@@ -236,12 +265,32 @@ public class HSIDLoginPage extends UhcDriver {
 						System.out.println("did not encounter 'Go To Homepage' System error message, moving on. "+e1);
 					}
 					
-					try {
+					//note: do not remove wait, need to give it enough time for the dashboard or error page to load
+					System.out.println("Start to wait for the dashboard (or some form of error page) to load...");
+					CommonUtility.checkPageIsReadyNew(driver);
+					int y=0;
+					while (y < 20) {
+						try {
+							List<WebElement> header=driver.findElements(By.xpath("//h1"));
+							if (header.size() >0) {
+								System.out.println("Located some sort of header, assume page is comming");
+								Thread.sleep(2000); //just in case
+								break;
+							}
+							Thread.sleep(1000);
+							y=y+1;
+							System.out.println("Waiting for some form of header to show up... waited "+y+" sec");
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					} 
+
+					/* tbd try {
 						Thread.sleep(20000);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-					}
+					} */
 				} catch (Exception e) {
 					System.out.println("Unable to resolve no-email page encounter. "+e);
 				}
@@ -261,13 +310,17 @@ public class HSIDLoginPage extends UhcDriver {
 			Alert alert = driver.switchTo().alert();
 			alert.accept();
 		}
-
+		
+		System.out.println("Not Security question page or test harness page or Account Home Page...wait 15 sec and check again for last attempt");
+		
+		
+		/* tbd
 		try {
 			Thread.sleep(15000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 
 		if (currentUrl().contains("testharness.html")
 				|| currentUrl().contains("/dashboard")) {

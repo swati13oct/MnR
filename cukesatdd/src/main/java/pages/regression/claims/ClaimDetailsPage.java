@@ -177,6 +177,40 @@ public class ClaimDetailsPage extends UhcDriver{
 
 	@FindBy(xpath="//div[contains(@class,'EOBComponentSHIP') and not(contains(@class,'ng-hide'))]//span[contains(text(),'Ship')]/../p[contains(text(),'VIEW EOB STATEMENT')]")
 	private WebElement EOB_SHIP;
+
+
+	@FindBy(xpath="//div[contains(@class,'AdobeAcrobatComponent') and not(contains(@class,'ng-hide'))]//p//b[contains(text(),'This page contains PDF documents')]")
+	private WebElement pageContainsPdfDocText;
+	
+	@FindBy(xpath="//div[contains(@class,'EOBComponent') and not(contains(@class,'ng-hide'))]//*[contains(text(),'SEARCH')]")
+	private WebElement searchAnyEobHistoryText;
+
+	@FindBy(xpath="//div[contains(@class,'EOBComponent') and not(contains(@class,'ng-hide'))]//*[contains(text(),'VIEW EOB')]")
+	private WebElement searchEobStatementsText;
+	
+	//this give u number of rows on the claims list table
+	@FindBy(xpath="//div[@class='medical-claims']//div[@class='claimDetTableMainSection']//div[contains(@ng-repeat,'bl in billLineDetailsList')]")
+	private List<WebElement> claimsTableRows;
+	
+	//note: total will be 8, just take p[1] - [4] 
+	@FindBy(xpath="//div[@class='medical-claims']//div[@class='claimDetTableMainSection']//div[contains(@ng-repeat,'bl in billLineDetailsList')]//div[@class='row margin-small']//div[@class='col-md-3']//p")
+	private List<WebElement> claimsColumnsItems;
+	//note: 1=amount | 2=adjustment | 3=plansShare | 4=your share
+	@FindBy(xpath="//div[@class='medical-claims']//div[contains(@class,'claimsTotalTable')]//section[@id='cltotmednice']//div[@class='row margin-small']//div[@class='col-md-3']//p[contains(@class,'h5')]")
+	private List<WebElement> claimsTotalItems;
+
+	@FindBy(xpath="//div[@id='shipPartBDetailsTable']//div[contains(@ng-repeat,'billLineDetailsList')]//div[@class='card-body']")
+	private List<WebElement> ship_claimsTableRows;
+	
+	@FindBy(xpath="//b[contains(text(),'Note')]")
+	private WebElement note;
+	
+	@FindBy(xpath="//b[contains(text(),'Medical Explanation of Benefits (EOB):')]")
+	private WebElement medicalEobText;
+	@FindBy(xpath="//div[@id='medicaleobNotavialable']//p[text()='Not Available (Pending)']")
+	private WebElement medicalEobNotAvaText;
+	@FindBy (xpath=".//*[@id='viewPDF']")
+	private WebElement medicalEobViewPDF;
 	//^^^ note: added for def1041
 	
 	public ClaimDetailsPage(WebDriver driver) {
@@ -711,8 +745,8 @@ public class ClaimDetailsPage extends UhcDriver{
 		return dataMap;
 	}
 
-	public void compareSummaryAndDetailData(String claimType, HashMap<String,String> dataMapSummary, HashMap<String,String> dataMapDetail) {
-		boolean bypassKnownIssue=true;
+	public boolean compareSummaryAndDetailData(String claimType, HashMap<String,String> dataMapSummary, HashMap<String,String> dataMapDetail) {
+		boolean invokedBypass=false;
 		if (claimType.equalsIgnoreCase("medical")) {
 			System.out.println("Proceed to compare data between summary and detail page for claimType="+claimType);
 			String key="med_dateOfService";
@@ -739,12 +773,14 @@ public class ClaimDetailsPage extends UhcDriver{
 			key="med_amountBilled";
 			valueFromSummary=dataMapSummary.get(key);
 			valueFromDetail=dataMapDetail.get(key);
-			if (bypassKnownIssue) {
+			//NOTE: known issue - backend test data setup issue
+			if (valueFromSummary.equals(valueFromDetail)) {
+				Assert.assertTrue("PROBLEM: KNOWN (potential test data setup issue in the backend) - value for element "+key+" is not the same betweeen claims summary and detail pages. From summary: '"+valueFromSummary+"' | From detail: '"+valueFromDetail+"'", valueFromSummary.equals(valueFromDetail));
+			} else {
+				invokedBypass=true;
 				System.out.println("*** BY-PASS FOR NOW - amount billed values not matched");
 				System.out.println("*** Modify validation to check for value is the same between the pages when the fix comes in");
 				Assert.assertTrue("PROBLEM: value for element "+key+" should not be empty in claims summary and detail pages. From summary: '"+valueFromSummary+"' | From detail: '"+valueFromDetail+"'", !valueFromSummary.equals("") && !valueFromSummary.equals(""));
-			} else {
-				Assert.assertTrue("PROBLEM: KNOWN (potential test data setup issue in the backend) - value for element "+key+" is not the same betweeen claims summary and detail pages. From summary: '"+valueFromSummary+"' | From detail: '"+valueFromDetail+"'", valueFromSummary.equals(valueFromDetail));
 			}
 	
 			key="med_claimStatus";
@@ -757,12 +793,15 @@ public class ClaimDetailsPage extends UhcDriver{
 			valueFromDetail=dataMapDetail.get(key);
 			//NOTE: known issue - production incident ticket by Cosmos - only validate value is not empty for now
 			//Assert.assertTrue("PROBLEM: value for element "+key+" is not the same betweeen claims summary and detail pages. From summary: '"+valueFromSummary+"' | From detail: '"+valueFromDetail+"'", valueFromSummary.equals(valueFromDetail));
-			if (bypassKnownIssue) {
+			if (valueFromSummary.equals(valueFromDetail)) {
+				Assert.assertTrue("PROBLEM: value for element "+key+" is not the same betweeen claims summary and detail pages. From summary: '"+valueFromSummary+"' | From detail: '"+valueFromDetail+"'", valueFromSummary.equals(valueFromDetail));
+			} else {
+				invokedBypass=true;
 				System.out.println("*** RUN INTO KNOWN ISSUE - incident ticket: INC10332773 *** - your share value on summary page != detail.  production incident ticket by Cosmos - only validate value is not empty for now");
 				System.out.println("*** Modify validation to check for value is the same between the pages when the fix comes in");
 				Assert.assertTrue("PROBLEM: value for element "+key+" should not be empty in claims summary and detail pages. From summary: '"+valueFromSummary+"' | From detail: '"+valueFromDetail+"'", !valueFromSummary.equals("") && !valueFromSummary.equals(""));
-			} else {
-				Assert.assertTrue("PROBLEM: KNOWN (INC10332773) - value for element "+key+" is not the same betweeen claims summary and detail pages. From summary: '"+valueFromSummary+"' | From detail: '"+valueFromDetail+"'", valueFromSummary.equals(valueFromDetail));
+		   
+																																																																																
 			}
 		} else {
 			System.out.println("Proceed to compare data between summary and detail page for claimType="+claimType);
@@ -800,9 +839,8 @@ public class ClaimDetailsPage extends UhcDriver{
 			valueFromSummary=dataMapSummary.get(key);
 			valueFromDetail=dataMapDetail.get(key);
 			Assert.assertTrue("PROBLEM: value for element "+key+" is not the same betweeen claims summary and detail pages. From summary: '"+valueFromSummary+"' | From detail: '"+valueFromDetail+"'", valueFromSummary.equals(valueFromDetail));
-	
 		}
-	
+		return invokedBypass;
 	}
 
 	public ClaimSummarypage navigateBackToClaimSummaryPage(String planType, String claimPeriod) {
@@ -859,6 +897,141 @@ public class ClaimDetailsPage extends UhcDriver{
 			}
 		}
 	}
+	
+	public void validateMedicalEob(String claimType) {
+		if (claimType.equalsIgnoreCase("medical")) {
+			Assert.assertTrue("PROBLEM - 'Medical Explanation of Benefits (EOB):' field should show up for claimType='"+claimType+"'", validate(medicalEobText));
+			//either has EOB or don't
+			System.out.println("validate(medicalEobNotAvaText)="+validate(medicalEobNotAvaText));
+			System.out.println("validate(medicalEobViewPDF)="+validate(medicalEobViewPDF));
+			if (validate(medicalEobViewPDF)) {
+				System.out.println("******************* located a Medical PDF EOB *******************");
+			}
+			Assert.assertTrue("PROBLEM - 'Medical Explanation of Benefits (EOB):' field value is not as expected, should either be 'Not Available (Pending)' or 'view PDF'", (validate(medicalEobNotAvaText) || validate(medicalEobViewPDF)));
+		} else {
+			System.out.println("claimType='', user will not have ");
+			Assert.assertTrue("PROBLEM - 'Medical Explanation of Benefits (EOB):' field should not show up for claimType='"+claimType+"'", !validate(medicalEobText));
+		}
+	}
+	
+	public void validatePageContainsPdfDocText() {
+		System.out.println("Validate PDF Doc text section exists");
+		System.out.println("validate(searchAnyEobHistoryText)="+validate(searchAnyEobHistoryText)+" | validate(medicalEobNotAvaText)="+validate(medicalEobNotAvaText));
+		if (validate(searchAnyEobHistoryText) || validate(searchEobStatementsText)|| validate(viewPDF)) {
+			Assert.assertTrue("PROBLEM - unable to locate the Adobe PDF section",validate(pageContainsPdfDocText));
+		} else {
+			Assert.assertTrue("PROBLEM - should not be able to locate the Adobe PDF section because there is no PDF avaialbe on this detail page",!validate(pageContainsPdfDocText));
+		}
+	}
+
+	public float findValue(String elementXpath) {
+		WebElement r=driver.findElement(By.xpath(elementXpath));
+		return Float.parseFloat(r.getText().replace("$", "").replace(",",""));
+	}
+	
+	public float findValue(WebElement e) {
+		return Float.parseFloat(e.getText().replace("$", "").replace(",",""));
+	}
+	
+	public void validateClaimsTotalAccurateInDetailsPage(boolean invokedBypass, String planType) {
+		System.out.println("Proceed to validate total values are accurate");
+
+		if (planType.equalsIgnoreCase("ship")) {
+			String xpath1="//section[@id='cltotshippartb']//div[@class='row margin-small']//div[@class='col-md-2']";
+			float totalAmountCharged=findValue(xpath1+"[1]//p[contains(@class,'h5')]");
+			float totalMedicareApproved=findValue(xpath1+"[2]//p[contains(@class,'h5')]");
+			float totalMedicareDeducible=findValue(xpath1+"[3]//p[contains(@class,'h5')]");
+			float totalMedicarePaid=findValue(xpath1+"[4]//p[contains(@class,'h5')]");
+			float totalPlanCostShare=findValue(xpath1+"[5]//p[contains(@class,'h5')]");
+			float totalYourPlanPaid=findValue(xpath1+"[6]//p[contains(@class,'h5')]");
+
+			float rowTotalAmountCharged=0.0f;
+			float rowTotalMedicareApproved=0.0f;
+			float rowTotalMedicareDeducible=0.0f;
+			float rowTotalMedicarePaid=0.0f;
+			float rowTotalPlanCostShare=0.0f;
+			float rowTotalYourPlanPaid=0.0f;
+			for (int x=0; x<ship_claimsTableRows.size(); x++) {
+				String xpath2="//div[@id='shipPartBDetailsTable']//div[contains(@ng-repeat,'billLineDetailsList')]//div[@class='card-body']["+(x+1)+"]//div[@class='row'][2]//div[contains(@class,'col-md-9')]//div[@class='col-md-2']";
+				System.out.println("--- index= "+x+" -----------------------");
+				float value=findValue(xpath2+"[1]/p");
+				System.out.println("rows Amount Charged value="+value);
+				rowTotalAmountCharged=rowTotalAmountCharged+value;
+
+				value=findValue(xpath2+"[2]/p");
+				System.out.println("rows Medicare Approved value="+value);
+				rowTotalMedicareApproved=rowTotalMedicareApproved+value;
+				
+				value=findValue(xpath2+"[3]/p");
+				System.out.println("rows Medicare Deductible value="+value);
+				rowTotalMedicareDeducible=rowTotalMedicareDeducible+value;
+				
+				value=findValue(xpath2+"[4]/p");
+				System.out.println("rows Medicare Paid value="+value);
+				rowTotalMedicarePaid=rowTotalMedicarePaid+value;
+				
+				value=findValue(xpath2+"[5]/p");
+				System.out.println("rows Plan Cost Share value="+value);
+				rowTotalPlanCostShare=rowTotalPlanCostShare+value;
+
+				value=findValue(xpath2+"[6]/p");
+				System.out.println("rows Your Plan Paid value="+value);
+				rowTotalYourPlanPaid=rowTotalYourPlanPaid+value;
+			}
+
+			Assert.assertTrue("PROBLEM - 'Amount Charged' from each list doesn't add up to the value from claims total section.  totalAmountCharged="+totalAmountCharged+" | rowTotalAmountCharged="+rowTotalAmountCharged, totalAmountCharged==rowTotalAmountCharged);
+			Assert.assertTrue("PROBLEM - 'Medicare Approved' from each list doesn't add up to the value from claims total section.  totalMedicareApproved="+totalMedicareApproved+" | rowTotalMedicareApproved="+rowTotalMedicareApproved, totalMedicareApproved==rowTotalMedicareApproved);
+			Assert.assertTrue("PROBLEM - 'Medicare Deductible' from each list doesn't add up to the value from claims total section.  totalMedicareDeducible="+totalMedicareDeducible+" | rowTotalMedicareDeducible="+rowTotalMedicareDeducible, totalMedicareDeducible==rowTotalMedicareDeducible);
+			Assert.assertTrue("PROBLEM - 'Medicare Paid' from each list doesn't add up to the value from claims total section.  totalMedicarePaid="+totalMedicarePaid+" | rowTotalMedicarePaid="+rowTotalMedicarePaid, totalMedicarePaid==rowTotalMedicarePaid);
+			Assert.assertTrue("PROBLEM - 'Plan Cost Share' from each list doesn't add up to the value from claims total section.  totalPlanCostShare="+totalPlanCostShare+" | rowTotalPlanCostShare="+rowTotalPlanCostShare, totalPlanCostShare==rowTotalPlanCostShare);
+			Assert.assertTrue("PROBLEM - 'Your Plan Paid' from each list doesn't add up to the value from claims total section.  totalYourPlanPaid="+totalYourPlanPaid+" | rowTotalYourPlanPaid="+rowTotalYourPlanPaid, totalYourPlanPaid==rowTotalYourPlanPaid);
+		} else {
+			Assert.assertTrue("PROBLEM - unable to locate the claims total rows",claimsTotalItems.size()>0);
+			float totalAmountBilled=findValue(claimsTotalItems.get(0));
+			System.out.println("totalAmountBilled="+totalAmountBilled);
+			float totalAdjustment=findValue(claimsTotalItems.get(1));
+			System.out.println("totalAdjustment="+totalAdjustment);
+			float totalPlanShare=findValue(claimsTotalItems.get(2));
+			System.out.println("totalPlanShare="+totalPlanShare);
+			float totalYourShare=findValue(claimsTotalItems.get(3));
+			System.out.println("totalYourShare="+totalYourShare);
+
+			//note: add up value for each row
+			float rowsTotalAmountBilled=0.0f;
+			float rowsTotalAdjustment=0.0f;
+			float rowsTotalPlanShare=0.0f;
+			float rowsTotalYourShare=0.0f;
+			for(int x=0; x<claimsTableRows.size(); x++) {
+				System.out.println("--- index= "+x+" -----------------------");
+				String xpath1="//div[@class='medical-claims']//div[@class='claimDetTableMainSection']//div[contains(@ng-repeat,'bl in billLineDetailsList')]["+(x+1)+"]//div[@class='row margin-small']/div";
+				float value=findValue(xpath1+"[1]/p");
+				System.out.println("rows AmountBilled value="+value);
+				rowsTotalAmountBilled=rowsTotalAmountBilled+value;
+				
+				value=findValue(xpath1+"[2]/p");
+				rowsTotalAdjustment=rowsTotalAdjustment+value;
+				System.out.println("rows Adjustment value="+value);
+
+				value=findValue(xpath1+"[4]/p");
+				rowsTotalPlanShare=rowsTotalPlanShare+value;
+				System.out.println("rows PlanShare value="+value);
+
+				value=findValue(xpath1+"[5]/p");
+				rowsTotalYourShare=rowsTotalYourShare+value;
+				System.out.println("rows YourShare value="+value);
+			}
+			
+			//note: check to see if total match
+			Assert.assertTrue("PROBLEM - 'Adjustments' from each list doesn't add up to the value from claims total section.  totalAdjustment="+totalAdjustment+" | rowsTotalAdjustment="+rowsTotalAdjustment, totalAdjustment==rowsTotalAdjustment);
+			Assert.assertTrue("PROBLEM - 'Plan's share' from each list doesn't add up to the value from claims total section.  totalPlanShare="+totalPlanShare+" | rowsTotalPlanShare="+rowsTotalPlanShare, totalPlanShare==rowsTotalPlanShare);
+			if (invokedBypass) {
+				System.out.println("Invoking BYPASS for the Amount Billed and Your share value accuracy check because of underlining known issue encountered on this detail page.");
+			} else {
+				Assert.assertTrue("PROBLEM - 'Amount Billed' from each list doesn't add up to the value from claims total section.  totalAmountBilled="+totalAmountBilled+" | rowsTotalAmountBilled="+rowsTotalAmountBilled, totalAmountBilled==rowsTotalAmountBilled);
+				Assert.assertTrue("PROBLEM - 'Your share' from each list doesn't add up to the value from claims total section.  totalYourShare="+totalYourShare+" | rowsTotalYourShare="+rowsTotalYourShare, totalYourShare==rowsTotalYourShare);
+			}
+		}
+	}	
 	//^^^ note:	added for def1041		
 	
 	

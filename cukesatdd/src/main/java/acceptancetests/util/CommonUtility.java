@@ -425,6 +425,7 @@ public class CommonUtility {
 				return true;
 			}
 			try {
+				System.out.println(counter+" of 23 tries - wait 5 sec for document.readyState=complete... ");
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();

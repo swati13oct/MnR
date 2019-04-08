@@ -1239,4 +1239,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	
 }
+	public DrugCostEstimatorPage navigationDrugCostEstimator() {
+     	navigateToMenuLinks(ShopForaplan, headerDrugCostEstimatorLink);
+
+     	
+     		return new DrugCostEstimatorPage(driver);
+	 }
+	
 }
