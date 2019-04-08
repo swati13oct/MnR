@@ -193,7 +193,10 @@ public class HSIDLoginPage extends UhcDriver {
 
 		//wait for some form of header to show
 		System.out.println("Check to see if SecurityQuestion page is loaded, timeout in 35 sec...");
-		CommonUtility.waitForPageLoadNew(driver, authQuestionlabel, 35);
+		CommonUtility.waitForPageLoad(driver, authQuestionlabel, 35);
+		if (!validate(authQuestionlabel)) {
+			System.out.println("waited 35 sec and still not seeing the authQuestionLabel showing...");
+		}
 		/* tbd try {
 			Thread.sleep(35000);
 		} catch (InterruptedException e) {
