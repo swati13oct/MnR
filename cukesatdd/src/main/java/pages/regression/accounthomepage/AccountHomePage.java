@@ -648,7 +648,7 @@ public class AccountHomePage extends UhcDriver {
 			else if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
 				workaroundAttempt("profilepref");
 			}
-			Thread.sleep(6000);	   
+			//Thread.sleep(6000);	   
 			//CommonUtility.waitForPageLoad(driver, heading, 10);
 
 			if (driver.getCurrentUrl().contains("profile")) {

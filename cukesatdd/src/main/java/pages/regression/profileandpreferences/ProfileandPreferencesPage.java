@@ -54,6 +54,12 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	@FindBy(id = "closeButton")
 	private WebElement FeedbackModal;
+	
+	@FindBy(xpath = "//div[@id='Required_documents']/fieldset/div[2]/div/div[2]/fieldset/label/div")
+	private WebElement mailButton;
+	
+	@FindBy(xpath = "//a[@class='atdd-editpreferences ng-scope']")
+	private WebElement editPrefLink;
 
 	@FindBy(xpath = "//*[@id='tab-1']/div[1]/div/h3")
 	private WebElement planName;
@@ -118,6 +124,10 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	
 	@FindBy(css = ".atdd-email")
 	private WebElement EmailAddressLabel_sofl;
+	
+	@FindBy(xpath = ("//*[@id='header']/h1/a"))
+	private WebElement aarpLinktogoBacktoProfilePage;
+	
 
 	@FindBy(id = "profileemailaddress")
 	private WebElement emailAddress;
@@ -357,7 +367,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='mailingAddress']/div[1]/a[2]")
 	private WebElement mailingCancelButtontoptempAddress;
 
-	@FindBy(className = "atdd-gopaperless")
+	@FindBy(xpath = "//div[@id='Required_documents']/fieldset/div[2]/div/div/fieldset/label/div")
 	private WebElement gopaperlessbutton;
 
 	@FindBy(xpath = ".//*[@id='communicationAddress' or @id='communicationAddressCardHeight']/div[3]/a")
@@ -375,19 +385,19 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(className = "atdd-plan-name")
 	private WebElement planNameGoGreen;
 
-	@FindBy(className = "atdd-section-heading")
+	@FindBy(xpath = "//h4[@class='margin-small match-height atdd-profile-communicationpreference']")
 	private WebElement communicationPreferences;
 
-	@FindBy(className = "atdd-banklink-prefernce")
+	@FindBy(xpath = "//a[@class='link link--icon-left link--icon-circled atdd-page-header atdd-banklink-prefernce']")
 	private WebElement backLink1;
 
 	@FindBy(className = "atdd-notes")
 	private WebElement NoteSection;
 
-	@FindBy(className = "atdd-checkbox-label")
+	@FindBy(xpath = "//*[@class='control control-checkbox consent-checkbox']")
 	private WebElement iHavereadCheckbox;
 
-	@FindBy(id = "save-prefs-btn")
+	@FindBy(xpath = "//*[@id='savePaperlessSettings']")
 	private WebElement savePreferencesButton;
 
 	@FindBy(linkText = "Edit Preferences")
@@ -888,13 +898,18 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	}
 
 	/**
+	 * @throws InterruptedException 
 	 * @toDo : The user checks the Password Update functionality by entering
 	 *       different password in confirm password field
 	 */
 	public boolean invalidpasswordvalidation2() {
 		cancelPasswordButton.click();
 		System.out.println("clicked cancel");
-		CommonUtility.waitForPageLoad(driver, passwordEditLink, 5);
+		driver.navigate().to("https://stage-mymedicareaccount.uhc.com/member/post-sign-in.html?target=account/profile.html");
+		System.out.println("navigating back");
+		CommonUtility.waitForPageLoad(driver, hsidPasswordLink, 30);
+		hsidPasswordLink.click();
+		CommonUtility.waitForPageLoad(driver, passwordEditLink, 9);
 		passwordEditLink.click();
 		currentPasswordFeild.sendKeys("Random@1");
 		newPasswordFeild.sendKeys("Password@1");
@@ -1223,18 +1238,21 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	public GoGreenPage validategogreenbutton() {
 
 		try {
-			Thread.sleep(30000);
+			Thread.sleep(20000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (gopaperlessbutton1.size() > 0) {
-			scrollToView(gopaperlessbutton);
-			gopaperlessbutton.click();
+		driver.switchTo().frame(0);
+		if (gopaperlessbutton.isSelected()) {
+				mailButton.click();
+				savePreferencesButton.click();
+				gopaperlessbutton.click();
+				savePreferencesButton.click();
 		} else {
-
-			scrollToView(editPreferencesLink);
-			editPreferencesLink.click();
+			gopaperlessbutton.click();
+			savePreferencesButton.click();
+			
 		}
 
 		System.out.println("Title is " + driver.getTitle());
@@ -1249,6 +1267,8 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	 */
 
 	public void validateheader() {
+		editPrefLink.click();
+		CommonUtility.waitForPageLoad(driver, gogreenleaf, 7);
 		validateNew(gogreenleaf);
 		validateNew(goggreenheader);
 
@@ -1485,7 +1505,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	public void validatePlanName() {
 
 		try {
-			Thread.sleep(40000);
+			Thread.sleep(15000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1516,7 +1536,8 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	 */
 
 	public void validateBacktoPNPlink() {
-
+		
+		driver.switchTo().defaultContent();
 		validateNew(backLink1);
 
 	}

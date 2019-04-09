@@ -53,19 +53,19 @@ Feature: C1.2To test Profile and Preferences page
      | 15083  | PDP       | PDP_AARP_GOGreen_Profilepref   |
 	  
 
-     @accountProfile3 @NegativeTestonHSIDpage @tamzid
+     @accountProfile3 @NegativeTestonHSIDpage
      Scenario Outline:  TID: <TID> -Plan Type: <planType> - To verify all Negative tests on Password Edit on HSID PASSWORD Link Page
      Given login with following details logins in the member portal and validate elements
      | Member Type | <memberType> |
      When the user navigates to Profile and Preferences page
      And I click the HEALTHSAFE ID PASSWORD link and validate username and password
      Then the user clicks on save button without filling current and new password and the red mandatory message should come     
-     Then the user enters different password in confirm password field and clicks save button and the user should see expected error message - Please enter the same value again 
+     #Then the user enters different password in confirm password field and clicks save button and the user should see expected error message - Please enter the same value again 
 	 Examples:  
 		|  TID   | planType | memberType      			     |
 		| 00000  | MAPD	    | MAPD_GROUP_GOGreen_Profilepref |
-	   # | 00000  | MA       | MA_AARP_GOGreen_Profilepref    |
-       #| 00000  | PDP      | PDP_AARP_GOGreen_Profilepref   |
+	    | 00000  | MA       | MA_AARP_GOGreen_Profilepref    |
+        | 00000  | PDP      | PDP_AARP_GOGreen_Profilepref   |
 	  
 	
        @accountProfile4 @CommunicationPreferences
@@ -78,7 +78,7 @@ Feature: C1.2To test Profile and Preferences page
     Then the user validates headers on green page                                                              
     Then the user validates the presence of Plan Name                                                         
     And the user validates Go paperless button and on clicking button go green page should come
-	 Then the user validates the I have read checkbox and check it                                            
+	Then the user validates the I have read checkbox and check it                                            
     Then the user validates the Save Preferences Button                                                       
     Then the user validates the presence of Back to Profile and Preferences links                              
 	 Examples: 
@@ -103,8 +103,8 @@ Feature: C1.2To test Profile and Preferences page
 
     Examples: 
       |  TID    | planType | memberType |
-      | 00000   | MA       | NOKIA      |
-      | 00000   | MAPD     | NOKIA      |
+     # | 00000   | MA       | NOKIA      |
+     # | 00000   | MAPD     | NOKIA      |
 	
 	
 	

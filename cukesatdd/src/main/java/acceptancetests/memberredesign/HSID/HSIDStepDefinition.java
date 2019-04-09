@@ -128,6 +128,19 @@ public class HSIDStepDefinition {
 		if ("YES".equalsIgnoreCase(MRScenario.isHSIDCompatible)) {
 			HSIDLoginPage loginPage = new HSIDLoginPage(wd);
 			loginPage.validateelements();
+			//--------- test
+			if (("YES").equalsIgnoreCase(MRScenario.isTestHarness)) {
+				TestHarness testHarnessPage = (TestHarness) loginPage
+						.doLoginWith(userName, pwd);
+				if (testHarnessPage != null) {
+					getLoginScenario().saveBean(PageConstantsMnR.TEST_HARNESS_PAGE,
+							testHarnessPage);
+					return;
+				} else {
+					Assert.fail("Login not successful...");
+				}
+			}
+			//--------- test
 			AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
 			if (accountHomePage != null) {
 				getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,

@@ -13,6 +13,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import pages.member_deprecated.ulayer.TerminatedHomePage;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.testharness.TestHarness;
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
@@ -331,7 +332,8 @@ public class HSIDLoginPage extends UhcDriver {
 				|| currentUrl().contains("/dashboard")) {
 
 			System.out.println(driver.getCurrentUrl());
-			return new AccountHomePage(driver);
+			return new TestHarness(driver);	//------ test
+			//return new AccountHomePage(driver);
 		} else if (currentUrl().contains("home/my-account-home.html")
 				|| currentUrl().contains("/login.html")) {
 
