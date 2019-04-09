@@ -60,7 +60,7 @@ public class ConfirmSecurityQuestion extends UhcDriver {
     
 
 	public void enterValidSecurityAnswer() throws Exception {
-		Thread.sleep(2000);
+		//tbd Thread.sleep(2000);
 		System.out.println(driver.getCurrentUrl());
 		WebDriverWait wait = new WebDriverWait(driver,40);
 		String SecurityQtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("authQuestiontextLabelId"))).getText();

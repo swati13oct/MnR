@@ -15,9 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 //import pages.dashboard.member.drugcostestimator.blayer.DrugCostEstimatorPage;
 import pages.regression.drugcostestimator.DrugCostEstimatorPage;
+import pages.regression.testharness.TestHarness;
 //import pages.memberredesign.bluelayer.AccountHomePage;
 import pages.regression.accounthomepage.AccountHomePage;
-import pages.memberredesign.bluelayer.LoginPage;
+import pages.regression.claims.ClaimSummarypage;
+import pages.memberredesign_deprecated.bluelayer.LoginPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
@@ -118,9 +120,27 @@ public class MemberRedesignHeaderStepDefinition {
 	 */
 	@When("^I view the global navigation Header$")
 	public void I_view_the_global_navigation() throws InterruptedException {
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+			testHarness.navigateToDCEPageFromTestHarnessPage();
+			getLoginScenario().saveBean(PageConstantsMnR.TEST_HARNESS_PAGE, testHarness);
+		} else {
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			accountHomePage.navigate_to_dce();
+			getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
+		}
+
+		
+		/* tbd-remove
 		// Express the Regexp above with the code you wish you had
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-
+		//note: updated to use the accounthomepage to navigate to dce, in case need to use 'sorry' page workaround for header testing
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+		accountHomePage.navigate_to_dce();
+		accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+		getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
+		*/
+		/* tbd-remove
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
 		dce.changeUrlToNewDCEPage();
 		try {
@@ -131,6 +151,7 @@ public class MemberRedesignHeaderStepDefinition {
 		}
 		AccountHomePage accountHomePage = new AccountHomePage(wd);
 		getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
+		*/
 	}
 
 	/**

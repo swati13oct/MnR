@@ -25,7 +25,7 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import pages.member.bluelayer.ProfilePreferencesPage;
+import pages.member_deprecated.bluelayer.ProfilePreferencesPage;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.benefitandcoverage.ValueAddedServicepage;
 import pages.regression.formsandresources.FormsAndResourcesPage;
@@ -2448,7 +2448,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                               validate(planName1);
                }
 
-               public pages.member.bluelayer.ProfilePreferencesPage navigateDirectToProfilePagee() throws InterruptedException {
+               public pages.member_deprecated.bluelayer.ProfilePreferencesPage navigateDirectToProfilePagee() throws InterruptedException {
                               System.out.println(driver.getTitle());
                               accountToggleDropdown.click();
                               validate(accountSettingOption);

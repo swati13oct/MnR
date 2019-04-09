@@ -1641,6 +1641,8 @@ public class oleStepDefinition {
 			}
 		}
 	}
+
+	
 	@Then("^the user navigates to Authorization Page for plan as per following rider options$")
 	public void the_user_navigates_to_authorization(DataTable Flags) {
 		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);

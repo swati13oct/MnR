@@ -13,7 +13,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.dashboard.member.blayer.PaymentHistoryPage;
+import pages.dashboard_deprecated.member.blayer.PaymentHistoryPage;
 import acceptancetests.data.CommonConstantsMobile;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
@@ -396,14 +396,14 @@ public class BenefitsSummaryPage extends UhcDriver{
 		}
 	}
 
-	public pages.dashboard.member.blayer.PaymentHistoryPage navigateToNewPaymentHistoryPage() {
+	public pages.dashboard_deprecated.member.blayer.PaymentHistoryPage navigateToNewPaymentHistoryPage() {
 		String NewPayHistoryUrl = "content/dashboard/home/Payments.html";
 		String url = driver.getCurrentUrl();
 		url = url.replace("mobile/home/my-benefit-summary.html",
 				NewPayHistoryUrl);
 		driver.get(url);
 		if (paymentsHeading.getText().contains("Premium Payments Overview")) {
-			return new pages.dashboard.member.blayer.PaymentHistoryPage(driver);
+			return new pages.dashboard_deprecated.member.blayer.PaymentHistoryPage(driver);
 		}
 		return null;
 	}

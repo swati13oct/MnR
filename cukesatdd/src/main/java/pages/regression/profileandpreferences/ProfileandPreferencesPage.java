@@ -23,7 +23,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.member.bluelayer.GoGreenPage;
+import pages.member_deprecated.bluelayer.GoGreenPage;
 
 /**
  * @author akapoo18

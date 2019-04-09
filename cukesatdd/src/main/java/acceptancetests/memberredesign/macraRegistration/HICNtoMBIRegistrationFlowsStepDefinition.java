@@ -11,7 +11,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.redesign.ReDesignRegistrationPage;
+import pages.redesign_deprecated.ReDesignRegistrationPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;

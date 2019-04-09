@@ -25,7 +25,7 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-//import pages.member.bluelayer.AccountHomePage;
+//import pages.member_deprecated.bluelayer.AccountHomePage;
 
 public class LoginPage extends UhcDriver {
 	
@@ -110,7 +110,15 @@ public class LoginPage extends UhcDriver {
 					} else {
 						PAGE_URL=MRConstants.OSE_NEW_URL;	
 					}
-				}else {
+				}
+				else if("team-h".equalsIgnoreCase(MRScenario.environment)){
+					System.out.println("Running on team-h env, teamSpecialCase="+teamSpecialCase);
+					if (teamSpecialCase) {
+					PAGE_URL=MRConstants.OSE_NEW_URL_PCP_OR_MEDIA;
+					} else {
+					PAGE_URL=MRConstants.OSE_NEW_URL; 
+					}}
+				else {
 					PAGE_URL = MRConstants.LEGACY_TESTHARNESS.replace("awe-", "");
 				}
 			} else if ("NO".equalsIgnoreCase(MRScenario.isTestHarness)
@@ -200,8 +208,13 @@ public class LoginPage extends UhcDriver {
 					return null;
 				}
 				if (counter < 35) {
+					if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a")) { //note: sometimes take longer to load page on this team env
+						Thread.sleep(3000);
+						System.out.println("Time elapsed post sign In clicked --" + counter + "*3 sec.");
+					} else {
 					Thread.sleep(2000);
 					System.out.println("Time elapsed post sign In clicked --" + counter + "*2 sec.");
+					}
 				} else {
 					System.out.println("TimeOut!!!");
 					return null;
@@ -214,11 +227,13 @@ public class LoginPage extends UhcDriver {
 			}
 			System.out.println("Current URL: " + currentUrl());
 			if (currentUrl().contains("member/testharness.html")) {
+				/* tbd 
 				//vvv note: temp-workaround for team-a env for now
 				if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a")) {
 					return new AccountHomePage(driver);
 				}
 				//^^^ note: temp-workaround for team-a env for now
+				 */
 				return new TestHarness(driver);
 			} else if (currentUrl().contains("terminated-plan.html")) {
 				return new TerminatedHomePage(driver);

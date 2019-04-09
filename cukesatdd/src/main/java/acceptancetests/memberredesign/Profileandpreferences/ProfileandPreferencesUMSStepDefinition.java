@@ -15,14 +15,17 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-//import pages.member.bluelayer.AccountHomePage;
-import pages.member.bluelayer.LoginPage2;
+//import pages.member_deprecated.bluelayer.AccountHomePage;
+import pages.member_deprecated.bluelayer.LoginPage2;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.claims.ClaimSummarypage;
 import pages.regression.profileandpreferences.CommunicationPreferencePage;
-//import pages.member.bluelayer.ProfilePreferencesPage;
+//import pages.member_deprecated.bluelayer.ProfilePreferencesPage;
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
+import pages.regression.testharness.TestHarness;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
+import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -105,8 +108,20 @@ public class ProfileandPreferencesUMSStepDefinition {
 	 */
 	@Then("^the user navigates to Profile and Preferences page$")
 	public void user_navigate_toProfileandPreferencespage() throws InterruptedException {
-
-
+		ProfileandPreferencesPage profilePreferencesPage;
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+			profilePreferencesPage = testHarness.navigateDirectToProfilePageFromTestHarnessPage();
+		} else {
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			profilePreferencesPage = accountHomePage.navigateDirectToProfilePage();
+		}
+		if (profilePreferencesPage != null) {
+			getLoginScenario().saveBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE, profilePreferencesPage);
+		} else {
+			Assert.fail("Profile preference page not loaded");
+		}
+		/* tbd-remove
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 		ProfileandPreferencesPage profilePreferencesPage = accountHomePage.navigateDirectToProfilePage();
@@ -116,7 +131,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 			getLoginScenario().saveBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE, profilePreferencesPage);
 		} else
 			Assert.fail("Profile preference page not loaded");
-
+	 */
 	}
 	/*
 	 * @Then("^the user navigates to Profile page") public void
