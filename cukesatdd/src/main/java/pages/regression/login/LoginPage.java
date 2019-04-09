@@ -110,7 +110,15 @@ public class LoginPage extends UhcDriver {
 					} else {
 						PAGE_URL=MRConstants.OSE_NEW_URL;	
 					}
-				}else {
+				}
+				else if("team-h".equalsIgnoreCase(MRScenario.environment)){
+					System.out.println("Running on team-h env, teamSpecialCase="+teamSpecialCase);
+					if (teamSpecialCase) {
+					PAGE_URL=MRConstants.OSE_NEW_URL_PCP_OR_MEDIA;
+					} else {
+					PAGE_URL=MRConstants.OSE_NEW_URL; 
+					}}
+				else {
 					PAGE_URL = MRConstants.LEGACY_TESTHARNESS.replace("awe-", "");
 				}
 			} else if ("NO".equalsIgnoreCase(MRScenario.isTestHarness)
@@ -219,11 +227,13 @@ public class LoginPage extends UhcDriver {
 			}
 			System.out.println("Current URL: " + currentUrl());
 			if (currentUrl().contains("member/testharness.html")) {
+				/* tbd 
 				//vvv note: temp-workaround for team-a env for now
 				if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a")) {
 					return new AccountHomePage(driver);
 				}
 				//^^^ note: temp-workaround for team-a env for now
+				 */
 				return new TestHarness(driver);
 			} else if (currentUrl().contains("terminated-plan.html")) {
 				return new TerminatedHomePage(driver);

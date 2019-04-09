@@ -12,6 +12,8 @@ import java.util.TimeZone;
 
 import org.joda.time.DateTime;
 import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.PageConstants;
@@ -22,9 +24,11 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
+import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.claims.ClaimDetailsPage;
 import pages.regression.claims.ClaimSummarypage;
+import pages.regression.testharness.TestHarness;
 
 /**
  Functionality : Validating the Claims Summary & Claims Details Page on the redesigned site.
@@ -96,8 +100,9 @@ public class ClaimsMemberRedesignStepDefinition {
 	 * @toDo: Navigate to Claims Summary page.
 	 */
 
-	@When("^I navigate to the claims Summary page in redesigned site$")
-	public void navigate_Claims_Summary_redesigned(){
+	@When("^TBR_I navigate to the claims Summary page in redesigned site$")
+	public void TBRnavigate_Claims_Summary_redesigned()
+		{
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 		ClaimSummarypage newClaimsSummaryPage = accountHomePage.navigateToClaimsSummaryPage();
 		
@@ -111,6 +116,64 @@ public class ClaimsMemberRedesignStepDefinition {
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * @toDo : This method click on cliams tab from test harness page or dashboard page
+	 */
+	
+	@When("^I navigate to the claims Summary page from test harness page or dashboard$")
+	public void navigate_to_Claims_Summary_from_testharness_page() throws Throwable {
+	if (MRScenario.environmentMedicare.equalsIgnoreCase("team-h"))
+	{
+		TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+		System.out.println("Now clicking on Claims Tab from the test harness page to go to Claims Page");
+		ClaimSummarypage claimsSummaryPage = testHarnessPage.navigateToClaimsSummaryFromTestHarnessPage();
+		getLoginScenario().saveBean(PageConstants.CLAIM_SUMMARY_PAGE, claimsSummaryPage);
+	}
+	else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage"))
+	{
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		Thread.sleep(3000);
+		ClaimSummarypage claimsSummaryPage = accountHomePage.navigateToClaimsSummaryPage();
+		getLoginScenario().saveBean(PageConstants.CLAIM_SUMMARY_PAGE, claimsSummaryPage);
+	 }
+	else {
+		System.out.println("This script was created to be run from team-h or stage, please check and update accordingly");
+	}
+	}
+	
+	/**
+	 * @toDo : This method checks that Explanation of benefits sub navigation under Claims tab is not displayed
+	 */
+	
+	@When("^Explanation of benefits sub navigation under Claims tab is not displayed$")
+	public void check_ExplanationOfBenefits_SubNavigation_UnderClaimsTab() throws Throwable 
+	{
+		ClaimSummarypage claimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.CLAIM_SUMMARY_PAGE);
+		claimsSummaryPage.validateExplanationOfBenefitsSubNavNotDisplayedForSSUP();
+	    
+	}	
+	
+	@When("^Validate Explanation of benefits Page for group SSUP$")
+	public void Validate_EOB_Tab_underClaims() throws Throwable 
+	{
+		ClaimSummarypage claimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.CLAIM_SUMMARY_PAGE);
+		claimsSummaryPage.validateExplanationOfBenefitsSubNavDisplayedForGroupSSUP();
+	    
+	}
+	
+	/**
+	 * @toDo : This method checks that Explanation of benefits sub navigation under Claims tab is not displayed
+	 */
+	
+	@When("^Explanation of benefits deep link is invoked and validate the Page$")
+	public void check_ExplanationOfBenefits_DeepLink() throws Throwable 
+	{
+		ClaimSummarypage claimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.CLAIM_SUMMARY_PAGE);
+		claimsSummaryPage.invokeEOBDeepLink();
+	    
+	}
+	
+	
 	/**
 	 * @toDo : The user search claims for the following time interval in redesigned site
 	 */
@@ -1027,14 +1090,25 @@ public class ClaimsMemberRedesignStepDefinition {
 						if(newclaimDetailspage != null) {
 							getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newclaimDetailspage);
 							System.out.println("Proceed to validate claims total");
-							newclaimDetailspage.validateClaimsTotalInDetailsPage();
+
+							System.out.println("Proceed to validate medicalEob links on detail page");
+							newclaimDetailspage.validateMedicalEob(claimType);
+							
 							
 							System.out.println("Proceed to validate 'Learn More...' link");
 							newclaimDetailspage.learnMoreCostLink();
 
+							//TODO note: need to find out expected behavior
+							//System.out.println("Proceed to validate 'This page contains PDF documents...' text on detail page");
+							//newclaimDetailspage.validatePageContainsPdfDocText();
+
 							//note: detail page will have Your Share column regardless Summary page
 							HashMap<String, String> dataMapDetail=newclaimDetailspage.gatherDataFromDetailPage(claimType);
-							newclaimDetailspage.compareSummaryAndDetailData(claimType, dataMapSummary, dataMapDetail);
+							boolean invokedBypass=newclaimDetailspage.compareSummaryAndDetailData(claimType, dataMapSummary, dataMapDetail);
+
+							System.out.println("Proceed to validate claims total");
+							//newclaimDetailspage.validateClaimsTotalInDetailsPage();
+							newclaimDetailspage.validateClaimsTotalAccurateInDetailsPage(invokedBypass, planType);
 
 							System.out.println("Proceed to validate 'EOB' links on detail page");
 							newclaimDetailspage.validate_SearchEobHistory_onDetailPage(domain,planType);
@@ -1166,6 +1240,10 @@ public class ClaimsMemberRedesignStepDefinition {
 
 		ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		newclaimsSummarypage.validate_SearchEobHistory_onSummaryPage(domain, planType);
+		
+		//TODO note: need to find out expected behavior
+		//System.out.println("Proceed to validate 'This page contains PDF documents...' text on summary page");
+		//newclaimsSummarypage.validatePageContainsPdfDocText();
 
 		if(newclaimsSummarypage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newclaimsSummarypage);
@@ -1186,7 +1264,23 @@ public class ClaimsMemberRedesignStepDefinition {
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newclaimsSummarypage);
 	}	
 
+	@When("^I navigate to the claims Summary page in redesigned site$")
+	public void navigate_Claims_Summary_redesigned() {
+		ClaimSummarypage newClaimsSummaryPage;
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+			newClaimsSummaryPage = testHarness.navigateToClaimsSummaryFromTestHarnessPage();
+		} else {
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			newClaimsSummaryPage = accountHomePage.navigateToClaimsSummaryPage();
+		}
+		if (newClaimsSummaryPage != null)
+			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
+	}
 
+	
+
+	
 	//^^^ note: added for def1041	
 	@When("^I navigate to the Claim details page to see view as pdf EOB$")	
 	public void i_navigate_to_the_claim_detailspage_for_eob_pdf(){

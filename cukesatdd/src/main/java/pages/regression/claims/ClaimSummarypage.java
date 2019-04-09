@@ -19,6 +19,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+
+import com.thoughtworks.selenium.webdriven.commands.Click;
+
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
@@ -344,7 +347,55 @@ public class ClaimSummarypage extends UhcDriver{
 
 	@FindBy(xpath="//div[contains(@class,'EOBComponentSHIP') and not(contains(@class,'ng-hide'))]//span[contains(text(),'Ship')]/../p[contains(text(),'VIEW EOB STATEMENT')]")
 	private WebElement EOB_SHIP;
+
+	@FindBy(xpath="//a//span[text()='keyboard_arrow_left']")
+	private WebElement leftArrowButton;
+	@FindBy(xpath="//a//span[text()='keyboard_arrow_right']")
+	private WebElement rightArrowButton;
+	
+	@FindBy(xpath="//div[@id='atddPagination']//p[contains(text(),'items found. Displaying 1 to')]")
+	private WebElement itemsFoundDisplayingText;
+	
+	@FindBy(xpath="//p[contains(text(),'Not the claims you were expecting? Select a different date range to search again.')]")
+	private WebElement notTheClaimsYouWereExpecting;
+	
+	@FindBy(xpath="//div[@id='prefix-overlay-step1']")
+	private WebElement makeTheMostPopup;
+
+	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Med') and contains(.,'Drug')]") 
+	private WebElement comboTab_MAPD;
+
+	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Medicare Supplement')]") 
+	private WebElement comboTab_SHIP;
+
+	@FindBy(xpath="//div[contains(@class,'AdobeAcrobatComponent') and not(contains(@class,'ng-hide'))]//p//b[contains(text(),'This page contains PDF documents')]")
+	private WebElement pageContainsPdfDocText;
+	
+	@FindBy(xpath="//div[contains(@class,'EOBComponent') and not(contains(@class,'ng-hide'))]//*[contains(text(),'SEARCH')]")
+	private WebElement searchAnyEobHistoryText;
+
+	@FindBy(xpath="//div[contains(@class,'EOBComponent') and not(contains(@class,'ng-hide'))]//*[contains(text(),'VIEW EOB')]")
+	private WebElement searchEobStatementsText;
 	//^^^ note:	added for def1041				
+
+	@FindBy(id="eobC1")
+	private WebElement EOB_claims;
+	
+	@FindBy(xpath="//h1[contains(text(),'Explanation of Benefits')]")
+	private WebElement EOB_header;
+	
+	@FindBy(xpath="//p[contains(text(),'EOBs for your plan are currently not available on this site. We apologize for the inconvenience.')]")
+	private WebElement EOB_errorMsg;
+	
+	@FindBy(xpath="//div[@class='otherPages EOBpagedescriptionPDP']//p[contains(text(),'Your monthly EOB shows a summary of the claims we ')]")
+	private WebElement EOB_MsgForPDP;
+	
+	@FindBy(id = "claims_1")
+	private WebElement claimsPageLink;
+	
+	@FindBy(xpath = "//main//li[@class='ng-scope']//a[1]")
+	private WebElement ssup_Plan;
+	
 
 
 	public ClaimSummarypage(WebDriver driver) {
@@ -430,6 +481,7 @@ public class ClaimSummarypage extends UhcDriver{
 		return dynamicNumberOfClaimsText.isDisplayed() || dynamicNumberOfClaimsTextPdp.isDisplayed() ;
 
 	}
+	
 	/**
 	 * @toDo : this method validates claims table and pagination
 	 */
@@ -1389,6 +1441,90 @@ public void TBR_NavigateToClaimsPage(){	//tbd-remove whole method
 				
 			}	
 			
+			public void validateExplanationOfBenefitsSubNavNotDisplayedForSSUP() throws InterruptedException 
+			{
+			    Thread.sleep(2000);  
+			    System.out.println("Now checking for Explanation of benefits sub navigation of Claims");
+			     
+				 try {
+					 EOB_claims.isDisplayed();
+					System.out.println("Explanation of Benefits Sub Navigation Link under Claims was displayed");
+					Assert.fail("Explanation of Benefits Sub Navigation Link under Claims was displayed, Test step is failed due to it");
+				} catch (Exception e) {
+					System.out.println("Explanation of Benefits Sub Navigation Link under Claims was NOT displayed, Test step is passed due to it");
+			    		}
+									
+			}
+			public void validateExplanationOfBenefitsSubNavDisplayedForGroupSSUP() throws InterruptedException 
+			{
+			    Thread.sleep(2000);  
+			    System.out.println("Now checking for Explanation of benefits sub navigation of Claims");
+			    EOB_claims.click();
+			    Thread.sleep(2000);
+				 try {
+					 validateNew(EOB_claims);
+					 validateNew(EOB_header);
+					 validateNew(EOB_MsgForPDP);
+					 System.out.println("Explanation of Benefits page for PDP plan through Sub Navigation Link under Claims was displayed");
+					 
+					
+				} catch (Exception e) {
+					System.out.println("Explanation of Benefits page for PDP plan through Sub Navigation Link under Claims was not displayed");
+					Assert.fail("Explanation of Benefits page for PDP plan through Sub Navigation Link under Claims was not displayed");
+			    		}
+				// below code will validate same page for SSUP	plan	
+				 
+				 System.out.println("Now checking for Explanation of benefits page for SSUP plan");
+				  claimsPageLink.click();
+				    Thread.sleep(4000);
+					 try {
+						 validateNew(EOB_claims);
+						 validateNew(ssup_Plan);
+					
+						 ssup_Plan.click();
+						 System.out.println("SSUP plan has been selected");
+						 Thread.sleep(3000);
+						 EOB_claims.click();
+						 Thread.sleep(3000);
+						 validateNew(EOB_MsgForPDP);
+						 System.out.println("Explanation of Benefits page for SSUP plan through Sub Navigation Link under Claims was displayed as PDP Plan, Test step is passed due to it");
+						 
+						
+					} catch (Exception e) {
+						System.out.println("Explanation of Benefits page for SSUP plan through Sub Navigation Link under Claims was not displayed as PDP Plan, Test step is failed due to it");
+						Assert.fail("Explanation of Benefits page for SSUP plan through Sub Navigation Link under Claims was not displayed as PDP Plan, Test step is failed due to it");
+				    		}
+			}
+			
+			
+			
+			
+			public void invokeEOBDeepLink() throws InterruptedException 
+			{
+			    Thread.sleep(2000);  
+			    System.out.println("Now invoking the deep link of Explanation of benefits");
+			    if (MRScenario.environmentMedicare.equalsIgnoreCase("team-h")){
+			    	startNew("https://www.team-h-medicare.ocp-ctc-dmz-nonprod.optum.com/aarp/member/eob.html");
+			    }
+			    
+			    else if((MRScenario.environmentMedicare.equalsIgnoreCase("Stage"))){
+			    	startNew("https://stage-medicare.uhc.com/aarp/member/eob.html");
+			    }
+				 try {
+					 EOB_claims.isDisplayed();
+					System.out.println("Explanation of Benefits Sub Navigation Link under Claims was displayed");
+					Assert.fail("Explanation of Benefits Sub Navigation Link under Claims was displayed, Test step is failed due to it");
+				} catch (Exception e) {
+					System.out.println("Explanation of Benefits Sub Navigation Link under Claims was NOT displayed, Working as expected for SSUP member");
+					validateNew(EOB_header);
+					validateNew(EOB_errorMsg);
+					System.out.println("EOB page with the message 'EOBs for your plan are currently not available on this site. We apologize for the inconvenience.' is displaying ");
+				}
+					
+			}
+			
+			
+			
 			
 			public void verifyCorrectMessageForPreEffectiveMembers() throws InterruptedException 
 			{
@@ -1509,19 +1645,20 @@ public void TBR_NavigateToClaimsPage(){	//tbd-remove whole method
 				// note: do not modify this check - critical to wait
 				int extra=2000;
 				int x=0;
-				while(x<=30) {
+				while(x<45) {
 					try {
-						if (verifyClaimsTableAndPagination()) {
+						Thread.sleep(1000);
+						if (validate(verifyClaimSummaryAndPagination)) {
+						//tbd if (verifyClaimsTableAndPagination()) {
 							Thread.sleep(extra); //give it more time to settle the page
 							System.out.println("sleep for another 2 sec for the page to settle down...");
 							System.out.println("there is some indication of claims...let's check it out");
 							break;
 						}
-						Thread.sleep(1000);
 					} catch (InterruptedException e) {}
 					x=x+1;
 				}
-				System.out.println("Waited total of "+(x+extra)+" seconds for claims to show up");
+				System.out.println("Waited total of "+(x*1000+extra)+" seconds for claims to show up");
 				
 				WebElement numClaimsElement=numberOfClaims;
 				if (range.equalsIgnoreCase("custom search")) {
@@ -2025,12 +2162,6 @@ public void TBR_NavigateToClaimsPage(){	//tbd-remove whole method
 				Assert.assertTrue("PROBLEM - this user doesn't have combo tabs, this test is intended for combo testing, please select user that has combo plans", comboTabsOnclaimsPage.size()>1);
 			}
 		
-			@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Med') and contains(.,'Drug')]") 
-			private WebElement comboTab_MAPD;
-
-			@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Medicare Supplement')]") 
-			private WebElement comboTab_SHIP;
-			
 			public void goToSpecificComboTab(String planType) {
 				if (planType.equalsIgnoreCase("mapd")) {
 					Assert.assertTrue("PROBLEM - unable to locate combo tab for MAPD", validate(comboTab_MAPD));
@@ -2042,48 +2173,44 @@ public void TBR_NavigateToClaimsPage(){	//tbd-remove whole method
 					Assert.assertTrue("PROBLEM - need to enhance code to cover planType '"+planType+"' for combo testing", false);
 				}
 			}
-
-			
 			
 			public void validate_SearchEobHistory_onSummaryPage(String domain, String plantype){
 				boolean bypass=false; //remove when story is done
 				if (!bypass) {
-				if ((plantype.equals("MAPD") || plantype.equals("PCP") || plantype.equals("MEDICA")) &&
-						(domain.equals("COSMOS") || domain.equals("NICE"))) {
-					Assert.assertTrue("PROBLEM - unable to locate Medical EOB link on summary page", validate(medicalEOB_MAPD));
-					Assert.assertTrue("PROBLEM - unable to locate Prescription EOB link on summary page", validate(drugEOB_MAPD));
-					System.out.println("for '"+plantype+" and "+domain+"' - medical and precription drug EOB's are displayed===> "+ (medicalEOB_MAPD.isDisplayed() && drugEOB_MAPD.isDisplayed()));
+					if ((plantype.equals("MAPD") || plantype.equals("PCP") || plantype.equals("MEDICA")) &&
+							(domain.equals("COSMOS") || domain.equals("NICE"))) {
+						Assert.assertTrue("PROBLEM - unable to locate Medical EOB link on summary page", validate(medicalEOB_MAPD));
+						Assert.assertTrue("PROBLEM - unable to locate Prescription EOB link on summary page", validate(drugEOB_MAPD));
+						System.out.println("for '"+plantype+" and "+domain+"' - medical and precription drug EOB's are displayed===> "+ (medicalEOB_MAPD.isDisplayed() && drugEOB_MAPD.isDisplayed()));
 
-				}
-				else if (plantype.equals("MA") && domain.equals("COSMOS")) {
-					Assert.assertTrue("PROBLEM - unable to locate Medical EOB link on summary page", validate(medicalEOB_MA));
-					Assert.assertTrue("PROBLEM - should NOT be able to locate Prescription EOB link on summary page", !validate(drugEOB_MA));
-					System.out.println("for '"+plantype+" and "+domain+"' - medical EOB's are displayed===> "+ (medicalEOB_MA.isDisplayed()));
-				}
-				else if (plantype.equals("MA") && domain.equals("NICE")) {
-					//note: not expected behavior but existing behavior, there is an existing defect in prod
-					Assert.assertTrue("PROBLEM - existing behavior should not be able to locate Medical EOB link on summary page (NOTE: this is not the right behavior,there is a prod defect)", !validate(medicalEOB_MA));
-					Assert.assertTrue("PROBLEM - should NOT be able to locate Prescription EOB link on summary page - (NOTE: this is not the right behavior,there is a prod defect)", !validate(drugEOB_MA));
-					System.out.println("for '"+plantype+" and "+domain+"' - no medical or precription drug EOB's are displayed");
-				}
-				else if (plantype.equals("PDP")) {
-					Assert.assertTrue("PROBLEM - should NOT be able to locate Medical EOB link on summary page", !validate(medicalEOB_PDP));
-					Assert.assertTrue("PROBLEM - unable to locate Prescription EOB link on summary page", validate(drugEOB_PDP));
-					System.out.println("for '"+plantype+" and "+domain+"' - medical EOB's are displayed===> "+ (drugEOB_PDP.isDisplayed()));
-				}
-				else if (plantype.equals("SHIP") && domain.equals("NA")){
-					Assert.assertTrue("PROBLEM - unable to locate EOB link on summary page for SHIP user", validate(EOB_SHIP));
-					System.out.println("for SHIP Eob is diplayed ====>"+ (EOB_SHIP.isDisplayed()));
-				}
-				else {
-					Assert.assertTrue("PROBLEM - need to code the condition for planType="+plantype+" and domain="+domain+" EOB expectation", false);
+					}
+					else if (plantype.equals("MA") && domain.equals("COSMOS")) {
+						Assert.assertTrue("PROBLEM - unable to locate Medical EOB link on summary page", validate(medicalEOB_MA));
+						Assert.assertTrue("PROBLEM - should NOT be able to locate Prescription EOB link on summary page", !validate(drugEOB_MA));
+						System.out.println("for '"+plantype+" and "+domain+"' - medical EOB's are displayed===> "+ (medicalEOB_MA.isDisplayed()));
+					}
+					else if (plantype.equals("MA") && domain.equals("NICE")) {
+						//note: not expected behavior but existing behavior, there is an existing defect in prod
+						Assert.assertTrue("PROBLEM - existing behavior should not be able to locate Medical EOB link on summary page (NOTE: this is not the right behavior,there is a prod defect)", !validate(medicalEOB_MA));
+						Assert.assertTrue("PROBLEM - should NOT be able to locate Prescription EOB link on summary page - (NOTE: this is not the right behavior,there is a prod defect)", !validate(drugEOB_MA));
+						System.out.println("for '"+plantype+" and "+domain+"' - no medical or precription drug EOB's are displayed");
+					}
+					else if (plantype.equals("PDP")) {
+						Assert.assertTrue("PROBLEM - should NOT be able to locate Medical EOB link on summary page", !validate(medicalEOB_PDP));
+						Assert.assertTrue("PROBLEM - unable to locate Prescription EOB link on summary page", validate(drugEOB_PDP));
+						System.out.println("for '"+plantype+" and "+domain+"' - medical EOB's are displayed===> "+ (drugEOB_PDP.isDisplayed()));
+					}
+					else if (plantype.equals("SHIP") && domain.equals("NA")){
+						Assert.assertTrue("PROBLEM - unable to locate EOB link on summary page for SHIP user", validate(EOB_SHIP));
+						System.out.println("for SHIP Eob is diplayed ====>"+ (EOB_SHIP.isDisplayed()));
+					}
+					else {
+						Assert.assertTrue("PROBLEM - need to code the condition for planType="+plantype+" and domain="+domain+" EOB expectation", false);
 
-				}
+					}
 				}
 			}
 
-			@FindBy(xpath="//div[@id='prefix-overlay-step1']")
-			private WebElement makeTheMostPopup;
 			public void validateDownloadMyData(String planType){
 				if (planType.equalsIgnoreCase("ship")) {
 					Assert.assertTrue("PROBLEM - ship user should not have DownloadMyData button",!validate(downloadmydatabutton));
@@ -2112,6 +2239,16 @@ public void TBR_NavigateToClaimsPage(){	//tbd-remove whole method
 						ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 						driver.switchTo().window(tabs.get(0)); //switch back to original tab
 					}
+				}
+			}
+
+			public void validatePageContainsPdfDocText() {
+				System.out.println("Validate PDF Doc text section exists");
+				System.out.println("validate(searchAnyEobHistoryText)="+validate(searchAnyEobHistoryText));
+				if (validate(searchAnyEobHistoryText) || validate(searchEobStatementsText)) {
+					Assert.assertTrue("PROBLEM - unable to locate the Adobe PDF section",validate(pageContainsPdfDocText));
+				} else {
+					Assert.assertTrue("PROBLEM - should not be able to locate the Adobe PDF section because there is no PDF avaialbe on this detail page",!validate(pageContainsPdfDocText));
 				}
 			}
 			//^^^ note:	added for def1041			

@@ -219,7 +219,7 @@ public class MRScenario {
 				}
 			}
 				
-				 else if ((environment.equalsIgnoreCase("team-a") || (environment.equalsIgnoreCase("team-e")) || (environment.equalsIgnoreCase("team-f")) || (environment.equalsIgnoreCase("team-g")) || (environment.equalsIgnoreCase("team-c")) || (environment.equalsIgnoreCase("team-t")))) {
+				 else if ((environment.equalsIgnoreCase("team-a")|| (environment.equalsIgnoreCase("team-h")) || (environment.equalsIgnoreCase("team-e")) || (environment.equalsIgnoreCase("team-f")) || (environment.equalsIgnoreCase("team-g")) || (environment.equalsIgnoreCase("team-c")) || (environment.equalsIgnoreCase("team-t")))) {
 				csvName= "MemberRedesign-UUID.csv";
 				 }
 				 /* note: Dec2018 - comment out because this section caused stage run not to use UMS-Member-Type.csv
