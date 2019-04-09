@@ -78,7 +78,7 @@ Feature:P1.5 To test order materials in Redesign site
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
 	  | Member Type | <memberType> |
-    Then the user should not see Order Materials Link for terminated member
+    #Then the user should not see Order Materials Link for terminated member
     Then user validates header navigation is not available for Terminated member
 
     Examples: 
