@@ -716,8 +716,8 @@ Feature: T1.1To validate the new changes related to claims page on the member re
     | Domain       | <domain>      |
 
     Examples: 
-      | FID    | planType | claimPeriod    | domain | claimssystem  |
-      | 244667 | MA       | Last 24 months | NICE   | NICECLAIMSEOB |
+      | FID    | planType | claimPeriod    | domain | claimssystem   |
+      | 244667 | MA       | Last 24 months | NICE   | EOB_NICECLAIMS |
 
   #---- this test check that sub-navigation to EOB page under Claims tab is suppressed for SSUP Only Plan member
   @US1662790 @F267688 @claimsEOB_SSUP_Plan

@@ -1291,7 +1291,7 @@ public void TBR_NavigateToClaimsPage(){	//tbd-remove whole method
 	 		}
 	 	}
 
-		public ClaimDetailsPage navigateToClaimDetailsPage() throws InterruptedException {
+		public ClaimDetailsPage navigateToClaimDetailsPage()  {
 			// TODO Auto-generated method stub
 			CommonUtility.waitForPageLoadNew(driver, claimstablemoreinfolink, 60);
 			scrollToView(claimstablemoreinfolink);
