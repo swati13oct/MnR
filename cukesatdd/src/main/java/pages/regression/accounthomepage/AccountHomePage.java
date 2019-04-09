@@ -48,7 +48,13 @@ import pages.regression.pharmacylocator.PharmacySearchPage;
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 
 public class AccountHomePage extends UhcDriver {
-
+	
+	@FindBy(xpath = "//*[@id='dropdown-toggle--1']/span")
+	private WebElement acctProfile;
+	
+	@FindBy(xpath = "//*[@id='dropdown-options--1']/a[3]")
+	private WebElement acctSetting;
+	
 	@FindBy(xpath = "//h2[@class='ng-scope' and @translate='FUTURE_MESSAGE_COVERAGE_START']")
 	private WebElement preEffectiveMessage;
 
@@ -147,7 +153,6 @@ public class AccountHomePage extends UhcDriver {
 	private WebElement planNameLink;
 
 	@FindBy(xpath = "//button[@id='dropdown-toggle--1']")
-	//@FindBy(id = "accountProfile")											 
 	private WebElement accountProfileBtn;
 
 	// @FindBy(xpath = ".//*[@id='dropdown-options--1']/a[contains(text(),'Account
@@ -578,58 +583,44 @@ public class AccountHomePage extends UhcDriver {
 
 	public ProfileandPreferencesPage navigateDirectToProfilePage() throws InterruptedException {
 
-			System.out.println("waitning for profile page");
-		// If we test through test harness , this is needed to navigate to profile page
- 	
-			if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)){
-			 System.out.println("testing through test harness page");
-			 try{
-				 if(driver.findElement(By.id("accountprofile")).isDisplayed()){
-					 driver.findElement(By.id("accountprofile")).click();
-					 driver.findElement(By.linkText("Account Settings")).click();
-				 }else{
-					 driver.findElement(By.xpath("//*[@id='home_2']")).click();
-					 Thread.sleep(6000);
-				 }
-			 } catch (Exception e) {
-				 driver.findElement(By.xpath("//*[@id='home_2']")).click();
-				 Thread.sleep(6000);
-			 }
-			 if (driver.getCurrentUrl().contains("profile")) {
-				 System.out.println("Navigating to Profile Page");
-				 return new ProfileandPreferencesPage(driver);
-			 }
-			 
-			//CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//*[@id='dashboard']/div[1]/section[1]/account-info/div/div[1]/h1")), 30);
+		System.out.println("waitning for profile page");
+		// Testing through Test Harness Page
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)){
+			System.out.println("testing through test harness page");
+			try{
+				if(acctProfile.isDisplayed()){
+					acctProfile.click();
+					acctSetting.click();
+				}else{
+					driver.findElement(By.xpath("//*[@id='home_2']")).click();
+					Thread.sleep(6000);
+				}
+			} catch (Exception e) {
+				driver.findElement(By.xpath("//*[@id='home_2']")).click();
+				Thread.sleep(6000);
+			}
+			if (driver.getCurrentUrl().contains("profile")) {
+				System.out.println("Navigating to Profile Page");
+				return new ProfileandPreferencesPage(driver);
+			}
 		} else{
 			System.out.println("test is through stage");
-		}									  																													
+		}	// Testing through Stage								  																													
 		if (MRScenario.environment.equalsIgnoreCase("stage")) {
 			System.out.println("user is on Stage login page");
-			// CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);
 			if (driver.getCurrentUrl().contains("/dashboard")) {
-
-				/*
-				 * accountToggleDropdown.click(); validate(accountSettingOption);
-				 * accountSettingOption.click(); try { Thread.sleep(3000); } catch
-				 * (InterruptedException e) { // TODO Auto generated catch block
-				 * e.printStackTrace(); }
-				 */
-				// driver.navigate().to(PAGE_URL + "medicare/member/account/profile.html");
-				waitforElement(accountProfileBtn);
-				accountProfileBtn.click();
-				accountSettingOption.click();
+				CommonUtility.waitForPageLoad(driver, acctProfile, 9);
+				acctProfile.click();
+				acctSetting.click();
 				System.out.println("title is " + driver.getTitle());
 				System.out.println("Current Url is " + driver.getCurrentUrl());
 				Thread.sleep(6000);	   
-				//CommonUtility.waitForPageLoad(driver, heading, 10);
-
 				if (driver.getCurrentUrl().contains("profile")) {
 					return new ProfileandPreferencesPage(driver);
 				}
 				return null;
 			}
-
+			// Testing through any Team Environment
 		} else if (MRScenario.environment.equals("team-ci1") || MRScenario.environment.equals("team-h")
 				|| MRScenario.environment.equals("test-a") || MRScenario.environment.equals("team-e")
 				|| MRScenario.environment.equals("stage")) {
@@ -638,7 +629,7 @@ public class AccountHomePage extends UhcDriver {
 
 			System.out.println("title is " + driver.getTitle());
 			System.out.println("Current Url is " + driver.getCurrentUrl());
-
+			// Testing through ci1 Environment 
 		} else {
 			driver.navigate().to(
 					"https://team-ci1-medicare.ose-elr-core.optum.com/content/medicare/member/account/profile.html");
@@ -646,7 +637,6 @@ public class AccountHomePage extends UhcDriver {
 			System.out.println("Current Url is " + driver.getCurrentUrl());
 
 		}
-		//CommonUtility.waitForPageLoad(driver, heading, 50);
 		if (driver.getTitle().contains("Profile")) {
 			return new ProfileandPreferencesPage(driver);
 		}

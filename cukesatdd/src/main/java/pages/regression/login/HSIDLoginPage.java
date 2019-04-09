@@ -75,6 +75,9 @@ public class HSIDLoginPage extends UhcDriver {
 
 	@FindBy(id = "sign-in-btn")
 	private WebElement thSignIn;
+	
+	@FindBy(xpath ="//span[contains(text(),'Answer the following security question to continue.')]")
+	private WebElement securyQAns;
 
 	@FindBy(xpath = ".//*[@id='IPEinvL']/map/area[1]")
 	private WebElement iPerceptionPopUp;
@@ -179,35 +182,23 @@ public class HSIDLoginPage extends UhcDriver {
 	}
 
 	/**
+	 * @throws Exception 
 	 * @toDo : To login through hsid via entering security questions
 	 */
-	public Object doLoginWith(String username, String password) {
+	public Object doLoginWith(String username, String password) throws Exception {
 
 		System.out.println(driver.getCurrentUrl());
 		sendkeys(userNameField, username);
 		sendkeys(passwordField, password);
 		signInButton.click();
-
-		try {
-			Thread.sleep(35000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+		CommonUtility.waitForPageLoad(driver, securyQAns, 10);
 		if (driver.getCurrentUrl().contains(
 				"=securityQuestion")) {
 
 			ConfirmSecurityQuestion cs = new ConfirmSecurityQuestion(driver);
-			try {
-				Thread.sleep(10000);
-				cs.enterValidSecurityAnswer();
-				System.out.println(driver.getCurrentUrl());
-				Thread.sleep(20000);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			cs.enterValidSecurityAnswer();
+			System.out.println(driver.getCurrentUrl());
+
 
 			//note: workaround - get URL again to check and see if it goes to the no-email.html page instead
 			if (driver.getCurrentUrl().contains("login/no-email.html")) {
@@ -236,7 +227,7 @@ public class HSIDLoginPage extends UhcDriver {
 					} catch (Exception e1) {
 						System.out.println("did not encounter 'Go To Homepage' System error message, moving on");
 					}
-					
+
 					try {
 						Thread.sleep(20000);
 					} catch (InterruptedException e) {

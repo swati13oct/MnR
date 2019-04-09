@@ -74,19 +74,28 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	// @FindBy(xpath = ".//*[@id='password']/div/div/span[2]")
 	// private WebElement passwordText;
 
-	@FindBy(id = "Artwork")
+	@FindBy(css = ".ng-scope:nth-child(2) > .base-padding p .ng-binding")
 	private WebElement editButton;
+	
+	@FindBy(css = ".button--primary")
+	private WebElement savePasswordButton;
+	
+	@FindBy(xpath = "//div[contains(text(),'Password is required')]")
+	private WebElement passwordErrormssg;
 
+	@FindBy(css = ".form__group:nth-child(4) .error")
+	private List<WebElement> passwordCnfrmErrormssg;
+	
 	@FindBy(id = "password-form")
 	private WebElement Editform;
 
-	@FindBy(id = "requiredField-errorMessage")
-	private WebElement passworderrormessage;
+//	@FindBy(id = "requiredField-errorMessage")
+//	private WebElement passworderrormessage;
 
 	@FindBy(id = "passwordNew-error")
 	private WebElement passworderrormessage2;
 
-	@FindBy(id = "passwordNotMatch-error")
+	@FindBy(xpath ="//div[contains(text(),'Passwords do not match')]")
 	private WebElement passworderrormessage3;
 
 	//@FindBy(xpath = ".//*[@id='email' or @id='emailCardHeight']/div[1]/h4")
@@ -114,19 +123,28 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	private WebElement emailAddress;
 
 	//@FindBy(id = "currentPassword") 
-	@FindBy(xpath = "//*[@name='currentPassword']")
+	@FindBy(xpath = "//span[contains(text(),'Enter current password')]")
 	private WebElement currentPassword;
+	
+	@FindBy(xpath = "//span[contains(text(),'Enter current password')]")
+	private WebElement currentPasswordFeild;
 
-	@FindBy(id = "password")
+	@FindBy(xpath = "//span[contains(text(),'New password')]")
 	private WebElement newPassword;
+	
+	@FindBy(xpath = "//*[@name='password']")
+	private WebElement newPasswordFeild;
 
-	@FindBy(id = "confirmPassword")
+	@FindBy(xpath = "//span[contains(text(),'Re-enter new password')]")
 	private WebElement confirmPassword;
+	
+	@FindBy(xpath = "//*[@id='confirmPassword']")
+	private WebElement confirmPasswordFeild;
 
-	@FindBy(xpath = "//button[@class='button button--primary ng-binding' and @ng-click='savePassword()']")
+	@FindBy(xpath = "//button[contains(text(),'Save')]")
 	private WebElement saveButton;
 
-	@FindBy(xpath = "//p[@ng-show='!passwordLoading']//a[contains(text(),'Cancel')")
+	@FindBy(xpath = "(//a[contains(@href, '')])[10]")
 	private WebElement cancelPasswordButton;
 
 	@FindBy(id = "emailNew")
@@ -405,9 +423,11 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='temporaryAddress']/div[1]/a[1]")
 	private List<WebElement> tempEditButton;
 
-	//@FindBy(xpath = "//*[@class='account_settings form__content']//flex-content[@class='ng-scope']/p/a/span[2]")
-	@FindBy(xpath = "//html//body//div//div//div[1]//div[1]//div//div[1]//flex//flex-content[1]//p//a//span[2]")
+	@FindBy(xpath = "//flex-content[@ng-if='!passwordView']//span[contains(text(),'Edit')]")
 	private WebElement passwordEditLink;
+	
+	@FindBy(xpath = "//flex-content[@ng-if='!passwordView']//span[contains(text(),'Edit')]")
+	private WebElement passwordEditLink_2;
 
 	@FindBy(id = "main")
 	private WebElement feedbackPopup;
@@ -809,7 +829,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		scrollToView(editButton);
 		editButton.click();
 		try {
-			Thread.sleep(30000);
+			Thread.sleep(9000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -826,19 +846,20 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	 *       entering the mandatory fields
 	 */
 	public boolean validateSavebuttonclick() {
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		CommonUtility.waitForPageLoad(driver, passwordEditLink, 10);
+		if(passwordEditLink.isDisplayed()){
+			System.out.println("Password edit button visible");
 		}
-
+		passwordEditLink.click();
+		newPasswordFeild.sendKeys("");
 		saveButton.click();
-		if (passworderrormessage.getText().contentEquals("Enter your current password.")) {
-			System.out.println("The element" + passworderrormessage.getText() + "is found");
+		saveButton.click();
+		System.out.println(passwordErrormssg.getText());
+		if (passwordErrormssg.getText().contains("Password is required")){
+			cancelPasswordButton.click();
 			return true;
 		} else {
-			Assert.fail("The element " + passworderrormessage.getText() + "is not found");
+			Assert.fail("The element " + (passwordErrormssg.getText() + "is not found"));
 		}
 		return false;
 	}
@@ -871,21 +892,20 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	 *       different password in confirm password field
 	 */
 	public boolean invalidpasswordvalidation2() {
-		// EditButton.click();
-		currentPassword.sendKeys("Random@1");
-		newPassword.sendKeys("Password@1");
-		confirmPassword.sendKeys("Password@2");
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		cancelPasswordButton.click();
+		System.out.println("clicked cancel");
+		CommonUtility.waitForPageLoad(driver, passwordEditLink, 5);
+		passwordEditLink.click();
+		currentPasswordFeild.sendKeys("Random@1");
+		newPasswordFeild.sendKeys("Password@1");
+		confirmPasswordFeild.sendKeys("Password@2");
+		CommonUtility.waitForPageLoad(driver, saveButton, 5);
 		saveButton.click();
 		System.out.println("Validation error is " + passworderrormessage3.getText());
 
-		if (passworderrormessage3.getText().contentEquals("Your password and password confirmation do not match. ")) {
+		if (passworderrormessage3.getText().contentEquals("Passwords do not match")) {
 			System.out.println("The element" + passworderrormessage3.getText() + "is found");
+			cancelPasswordButton.click();
 			return true;
 		} else {
 			Assert.fail("The element " + passworderrormessage3.getText() + "is not found");
@@ -1662,19 +1682,34 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	public void validateEditPasswordLinkBox() {
 		passwordEditLink.click();
-		try {
-			Thread.sleep(4000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		CommonUtility.waitForPageLoad(driver, confirmPassword, 5);
+		if(currentPassword.isDisplayed()){
+			if(newPassword.isDisplayed()){
+				if(confirmPassword.isDisplayed()){
+					Assert.assertTrue(true);
+					driver.findElement(By.xpath("/html/body/div/div/div[1]/div[1]/div/div[1]/flex/flex/flex-content[2]/div/p/a")).click();
+				} else
+					Assert.fail("Error in validating the edit password link box elements");
+			}
 		}
-		if (validateNew(currentPassword) && validateNew(newPassword) && validateNew(confirmPassword)) {
-		
-			Assert.assertTrue(true);
-		} else
-			Assert.fail("Error in validating the edit password link box elements");
-
 	}
+	
+//	public void validateEmptyPasswordLinkBox() {
+//		
+//		passwordEditLink_2.click();
+//		CommonUtility.waitForPageLoad(driver, cancelPasswordButton, 5);
+//		currentPassword.sendKeys("Password@1");
+//		newPassword.sendKeys("");
+//		confirmPassword.sendKeys("");
+//		savePasswordButton.click();
+//		Assert.assertTrue("Expaected Password Error Mssg didnt show",passwordErrormssg.contains("Password is required"));
+//		Assert.assertTrue("Expaected Password Error Mssg didnt show",passwordCnfrmErrormssg.contains("Password is required"));
+//		cancelPasswordButton.click();
+//
+//	}
+
+
+	
 
 	public void validateBreadCrumb() throws InterruptedException {
 		// TODO Auto-generated method stub

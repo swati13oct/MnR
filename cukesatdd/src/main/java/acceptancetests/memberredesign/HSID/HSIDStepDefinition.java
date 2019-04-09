@@ -48,7 +48,7 @@ public class HSIDStepDefinition {
 
 	@And("^login with following details logins in the member portal and validate elements$")
 	public void login_with_member(DataTable memberAttributes)
-			throws InterruptedException {
+			throws Exception {
 
 		List<DataTableRow> memberAttributesRow = memberAttributes
 				.getGherkinRows();
@@ -117,8 +117,7 @@ public class HSIDStepDefinition {
 		if ("YES".equalsIgnoreCase(MRScenario.isHSIDCompatible)) {
 			HSIDLoginPage loginPage = new HSIDLoginPage(wd);
 			loginPage.validateelements();
-			AccountHomePage accountHomePage = (AccountHomePage) loginPage
-					.doLoginWith(userName, pwd);
+			AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
 			if (accountHomePage != null) {
 				getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,
 						accountHomePage);
