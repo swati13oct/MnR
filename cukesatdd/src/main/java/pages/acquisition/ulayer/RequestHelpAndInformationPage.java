@@ -64,6 +64,11 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 	@FindBy(xpath =".//*[@id='article_mededaccordion1']//*[contains(text(),'Request Mailed Information')]")
 	private WebElement ma_requestmailedinformationLink;
 	
+	@FindBy(id ="iframeForConnextions")
+	private WebElement frame;
+	
+	@FindBy(xpath=" //input[@id='zip']")
+	private WebElement zipfield;
 
 	
 	public RequestHelpAndInformationPage(WebDriver driver) {
@@ -163,5 +168,25 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 			return new RequestMailedInformation(driver);
 		}
 		return null;
+	}
+	public boolean validatelementsonCommunitymeeting(){
+		//public void feebackpopupClose() throws InterruptedException { // waitForloader(driver,overlay, 20);
+			try {
+				Thread.sleep(20000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (validate(frame)) {
+
+				switchToNewIframe(frame);
+				zipfield.click();
+				zipfield.sendKeys("07747");
+				driver.switchTo().defaultContent();
+				// iPerceptionAutoPopUp.click();
+			} else {
+				System.out.println("iPerception Pop Up not displayed");
+			}
+			return false;
 	}
 }
