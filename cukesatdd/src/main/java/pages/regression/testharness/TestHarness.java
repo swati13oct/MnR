@@ -589,7 +589,7 @@ public class TestHarness extends UhcDriver {
 		validateNew(testHarnessProfilePageLink);
 		profilePageLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_60);
+		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_30);
 
 		if (driver.getTitle().contains("Profile")) {
 			System.out.println("Pass!");
