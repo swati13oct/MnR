@@ -170,8 +170,7 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 		return null;
 	}
 	public boolean validatelementsonCommunitymeeting(){
-		//public void feebackpopupClose() throws InterruptedException { // waitForloader(driver,overlay, 20);
-			try {
+				try {
 				Thread.sleep(20000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block

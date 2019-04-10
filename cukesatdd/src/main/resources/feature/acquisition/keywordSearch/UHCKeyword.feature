@@ -18,6 +18,7 @@ Feature: Acquistion Features community search, keyword search
     When the user navigates to request more help and information page in UHC site and validates
     Then the user navigates to community meeting page on UHC site and validates
     
+    
       Examples:
 	| placeholder | 
 	| none   |
