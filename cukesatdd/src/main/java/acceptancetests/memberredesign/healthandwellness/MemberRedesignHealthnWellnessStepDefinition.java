@@ -1,4 +1,5 @@
 package acceptancetests.memberredesign.healthandwellness;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -30,6 +31,14 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 	 */
 	@When("^I view the global navigation HW$")
 	public void I_view_the_global_navigation() throws InterruptedException {
+		if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a")) {
+			Assert.assertTrue("Health and Wellness page content won't load on lower environment, fail it to exit", false);
+			return;
+		}
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			System.out.println("Running with testharness, skip validating dashboard header step");
+			return;
+		}
 		// Express the Regexp above with the code you wish you had
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		HealthAndWellnessPage healthnWellnessPage = new HealthAndWellnessPage(wd);

@@ -18,16 +18,16 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.memberrdesignVBF.BenefitsAndCoveragePage;
-import pages.regression.claims.ClaimSummarypage;
-import pages.memberrdesignVBF.ContactUsPage;
+import pages.regression.claims.*;
+import pages.regression.contactus.ContactUsPage;
 import pages.memberrdesignVBF.DrugCostEstimatorPage;
 import pages.memberrdesignVBF.EOBPage;
 import pages.memberrdesignVBF.FormsAndResourcesPage;
-import pages.memberrdesignVBF.HealthAndWellness;
-import pages.memberrdesignVBF.OrderplanmaterialsPage;
+import pages.regression.healthandwellness.*;
+import pages.regression.ordermaterials.*;
 import pages.memberrdesignVBF.PaymentsOverview;
-import pages.memberrdesignVBF.PharmacySearchPage;
-import pages.memberrdesignVBF.ProfilePreferencesPage;
+import pages.regression.pharmacylocator.*;
+import pages.regression.profileandpreferences.*;
 import pages.memberrdesignVBF.ProviderSearchPage;
 import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.regression.payments.PaymentHistoryPage;
@@ -40,6 +40,9 @@ public class TestHarness extends UhcDriver {
 
 	@FindBy(id = "claims_1")
 	private WebElement claimsPageLink;
+	
+	@FindBy(xpath="//a[contains(text(),'Go to Claims page')]")
+	private WebElement testHarnessClaimsLink;
 
 	@FindBy(xpath = "//table[@class='componentTable']/tbody/tr/td/a[contains(.,'Forms and Resource')]")
 	private WebElement formsPageLink;
@@ -47,8 +50,14 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath = "//table[@class='componentTable']/tbody/tr/td/a[contains(.,'benefits')]")
 	private WebElement benefitsPageLink;
 
+	@FindBy(xpath = "//a[contains(text(),'Go to benefits and coverage page')]")
+	private WebElement testHarnessBenefitsPageLink;
+
 	@FindBy(xpath = "//table[@class='componentTable']/tbody/tr/td/a[contains(.,'profile')]")
 	private WebElement profilePageLink;
+
+	@FindBy(xpath = "//a[contains(text(),'Go to preferences page')]")
+	private WebElement testHarnessProfilePageLink;
 
 	@FindBy(xpath = "//table[@class='componentTable']/tbody/tr/td/a[contains(.,'EOB Search')]")
 	private WebElement eobPageLink;
@@ -56,14 +65,26 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath = "//table[@class='componentTable']/tbody/tr/td/a[contains(.,'Order Plan material')]")
 	private WebElement orderPlanPageLink;
 
+	@FindBy(xpath="//a[contains(text(),'Go to Order Plan materials page')]")
+	private WebElement testHarnessOrderPlanPageLink;
+
 	@FindBy(xpath = "//table[@class='componentTable']/tbody/tr/td/a[contains(.,'Pharmacy')]")
 	private WebElement pharmacyPageLink;
+
+	@FindBy(xpath = "//a[contains(text(),'Go to Pharmacy Locator page')]")
+	private WebElement testHarnessPharmacyPageLink;
 
 	@FindBy(xpath = "//table[@class='componentTable']/tbody/tr/td/a[contains(.,'DCE')]")
 	private WebElement dcePageLink;
 
+	@FindBy(xpath = "//a[contains(text(),'Go to DCE page')]")
+	private WebElement testHarnessDcePageLink;
+	
 	@FindBy(xpath = "//table[@class='componentTable']/tbody/tr/td/a[contains(.,'Contact Us')]")
 	private WebElement contactUsPageLink;
+
+	@FindBy(xpath = "//a[contains(text(),'Go to Contact Us page')]")
+	private WebElement testHarnessContactUsPageLink;
 
 	@FindBy(xpath = "//a[contains(.,'Go to Payments page')]")
 	private WebElement TeamHPaymentPage;
@@ -331,7 +352,7 @@ public class TestHarness extends UhcDriver {
 
 	public ClaimSummarypage navigateToClaimsSummaryFromTestHarnessPage() {
 		CommonUtility.checkPageIsReadyNew(driver);
-		claimsPageLink.click();
+		testHarnessClaimsLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		try {
 			Thread.sleep(5000);
@@ -383,6 +404,21 @@ public class TestHarness extends UhcDriver {
 	/***
 	 * 
 	 * @return
+	 * @throws InterruptedException
+	 */
+	public DrugCostEstimatorPage navigateToDCEPageFromTestHarnessPage() throws InterruptedException {
+		validateNew(testHarnessDcePageLink);
+		testHarnessDcePageLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, heading, CommonConstants.TIMEOUT_60);
+		if (driver.getTitle().contains("Overview")) {
+			return new DrugCostEstimatorPage(driver);
+		}
+		return null;
+	}
+	/***
+	 * 
+	 * @return
 	 */
 	public EOBPage navigateToEOBPage() {
 		CommonUtility.waitForPageLoad(driver, eobPageLink,30);
@@ -403,7 +439,7 @@ public class TestHarness extends UhcDriver {
 	 * @return
 	 * @throws InterruptedException
 	 */
-	public HealthAndWellness clickHealthnWellnessTab() throws InterruptedException {
+	public HealthAndWellnessPage clickHealthnWellnessTab() throws InterruptedException {
 		/*
 		 * validateNew(healthWellness); healthWellness.click();
 		 */
@@ -421,13 +457,13 @@ public class TestHarness extends UhcDriver {
 			counter++;
 
 			if (driver.getTitle().contains("Health")) {
-				return new HealthAndWellness(driver);
+				return new HealthAndWellnessPage(driver);
 			}
 
 		} while (!(driver.getTitle().contains("Find Care")));
 		// CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getTitle().contains("Health")) {
-			return new HealthAndWellness(driver);
+			return new HealthAndWellnessPage(driver);
 		}
 		return null;
 
@@ -436,18 +472,38 @@ public class TestHarness extends UhcDriver {
 	/***
 	 * 
 	 * @return
+	 * @throws InterruptedException 
 	 */
-	public OrderplanmaterialsPage navigateToOrderPlanMaterialsPage() {
+	public OrderMaterialsPage navigateToOrderPlanMaterialsPage() throws InterruptedException {
 		validateNew(orderPlanPageLink);
 		orderPlanPageLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, heading, CommonConstants.TIMEOUT_60);
 		if (driver.getTitle().contains("Order")) {
-			return new OrderplanmaterialsPage(driver);
+			return new OrderMaterialsPage(driver);
 		}
 		return null;
 	}
 
+	@FindBy(xpath="//h1[contains(text(),'Order Plan Materials')]")
+	private WebElement orderHeader;
+	/***
+	 * 
+	 * @return
+	 * @throws InterruptedException 
+	 */
+	public OrderMaterialsPage navigateToOrderPlanMaterialsPageFromTestHarnessPage() throws InterruptedException {
+		CommonUtility.checkPageIsReadyNew(driver);
+		testHarnessOrderPlanPageLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoad(driver, orderHeader, 30);
+		if (driver.getTitle().contains("Order")) {
+			return new OrderMaterialsPage(driver);
+		}
+		return null;
+	}
+
+	
 	/***
 	 * 
 	 * @return
@@ -466,12 +522,31 @@ public class TestHarness extends UhcDriver {
 		}
 		return null;
 	}
+	
+	/***
+	 * 
+	 * @return
+	 * @throws InterruptedException
+	 */
+	public PharmacySearchPage navigateToPharmacyLocatorFromTestHarnessPage() throws InterruptedException {
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoad(driver, testHarnessPharmacyPageLink, 30);
+		validateNew(testHarnessPharmacyPageLink);
+		testHarnessPharmacyPageLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoad(driver, zipcode, 60);
+		if (driver.getTitle().contains("Pharmacy")) {
+			return new PharmacySearchPage(driver);
+		}
+		return null;
+	}
 
 	/***
 	 * 
 	 * @return
 	 */
-	public pages.memberrdesignVBF.ProfilePreferencesPage navigateDirectToProfilePage() {
+	public ProfileandPreferencesPage navigateDirectToProfilePage() {
 		System.out.println(driver.getTitle());
 		CommonUtility.waitForPageLoad(driver, profilePageLink, 30);
 		validateNew(profilePageLink);
@@ -481,10 +556,31 @@ public class TestHarness extends UhcDriver {
 
 		if (driver.getTitle().contains("Profile")) {
 			System.out.println("Pass!");
-			return new ProfilePreferencesPage(driver);
+			return new ProfileandPreferencesPage(driver);
 		}
 		return null;
 	}
+	
+	/***
+	 * 
+	 * @return
+	 */
+	public ProfileandPreferencesPage navigateDirectToProfilePageFromTestHarnessPage() {
+		System.out.println(driver.getTitle());
+		CommonUtility.waitForPageLoad(driver, profilePageLink, 30);
+		validateNew(testHarnessProfilePageLink);
+		profilePageLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_30);
+
+		if (driver.getTitle().contains("Profile")) {
+			System.out.println("Pass!");
+			return new ProfileandPreferencesPage(driver);
+		}
+		return null;
+	}
+	
+	
 
 	public ProviderSearchPage navigateToProviderSearch() throws InterruptedException {
 		/*
@@ -617,13 +713,14 @@ public class TestHarness extends UhcDriver {
 	/***
 	 * 
 	 * @return
+	 * @throws InterruptedException 
 	 */
-	public OrderplanmaterialsPage validateOrderPlanMaterialsPage() {
+	public OrderMaterialsPage validateOrderPlanMaterialsPage() throws InterruptedException {
 		orderMaterials.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, heading, CommonConstants.TIMEOUT_60);
 		if (heading.isDisplayed()) {
-			return new OrderplanmaterialsPage(driver);
+			return new OrderMaterialsPage(driver);
 		}
 		return null;
 	}
