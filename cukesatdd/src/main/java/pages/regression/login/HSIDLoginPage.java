@@ -332,7 +332,7 @@ public class HSIDLoginPage extends UhcDriver {
 				|| currentUrl().contains("/dashboard")) {
 
 			System.out.println(driver.getCurrentUrl());
-			return new TestHarness(driver);	//------ test
+			return new AccountHomePage(driver);	//------ test
 			//return new AccountHomePage(driver);
 		} else if (currentUrl().contains("home/my-account-home.html")
 				|| currentUrl().contains("/login.html")) {
