@@ -59,5 +59,7 @@ public class AttendCommunityMeetingStepDefinitionAARP {
 	public void validate_elements(){
 		RequestHelpAndInformationPage requestHelpAndInformationPage = (RequestHelpAndInformationPage) getLoginScenario().getBean(PageConstants.REQUEST_MORE_HELP_INFORMATION_PAGE);
 		if(requestHelpAndInformationPage.validatelementsonCommunitymeeting());
+		
+		
 	}
 }

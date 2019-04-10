@@ -1,4 +1,4 @@
-@KeyWordSearch_UHC, @Community_meeting_UHC, @acquisitionRegression
+@KeyWordSearch_UHC, @Community_meeting_UHC
 Feature: Acquistion Features community search, keyword search 
   
   

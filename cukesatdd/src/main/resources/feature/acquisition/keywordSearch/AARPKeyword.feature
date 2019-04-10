@@ -1,4 +1,4 @@
-@Community_Meeting_AARP, @Keywordsearch_AARP, @acquisitionRegression
+@Community_Meeting_AARP, @Keywordsearch_AARP
 Feature: AARP_Acquistion Features community search, keyword search 
   
 

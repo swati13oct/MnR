@@ -186,5 +186,6 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 				System.out.println("iPerception Pop Up not displayed");
 			}
 			return false;
+			
 	}
 }
