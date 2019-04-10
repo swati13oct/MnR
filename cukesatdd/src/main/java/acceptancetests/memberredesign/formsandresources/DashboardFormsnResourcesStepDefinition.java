@@ -97,7 +97,12 @@ public class DashboardFormsnResourcesStepDefinition {
 			HSIDLoginPage loginPage = new HSIDLoginPage(wd);
 			loginPage.validateelements();
 			System.out.println("Login Attempt->" + (i + 1) + "\n");
-			accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
+			try {
+				accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			if (accountHomePage != null)
 				break;
 			//wd.navigate().back();
