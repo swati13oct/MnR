@@ -177,7 +177,6 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 				e.printStackTrace();
 			}
 			if (validate(frame)) {
-
 				switchToNewIframe(frame);
 				zipfield.click();
 				zipfield.sendKeys("07747");

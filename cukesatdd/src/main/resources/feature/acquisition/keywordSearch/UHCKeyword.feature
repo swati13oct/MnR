@@ -7,8 +7,7 @@ Feature: Acquistion Features community search, keyword search
    Given the user is on the uhcmedicaresolutions site landing page
    When the member validates the search box 
    Then the member lands on the result page 
-   
-    Examples:
+   Examples:
 	| placeholder | 
 	| none   |
 
@@ -17,9 +16,8 @@ Feature: Acquistion Features community search, keyword search
     Given the user is on the uhcmedicaresolutions site landing page
     When the user navigates to request more help and information page in UHC site and validates
     Then the user navigates to community meeting page on UHC site and validates
-    
-    
-      Examples:
+        
+   Examples:
 	| placeholder | 
 	| none   |
 	
