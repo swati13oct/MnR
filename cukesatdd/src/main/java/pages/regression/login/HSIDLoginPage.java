@@ -13,6 +13,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import pages.member_deprecated.ulayer.TerminatedHomePage;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.testharness.TestHarness;
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
@@ -75,6 +76,9 @@ public class HSIDLoginPage extends UhcDriver {
 
 	@FindBy(id = "sign-in-btn")
 	private WebElement thSignIn;
+	
+	@FindBy(xpath ="//span[contains(text(),'Answer the following security question to continue.')]")
+	private WebElement securyQAns;
 
 	@FindBy(xpath = ".//*[@id='IPEinvL']/map/area[1]")
 	private WebElement iPerceptionPopUp;
@@ -181,9 +185,10 @@ public class HSIDLoginPage extends UhcDriver {
 	@FindBy(id="authQuestiontextLabelId")
 	private WebElement authQuestionlabel;
 	/**
+	 * @throws Exception 
 	 * @toDo : To login through hsid via entering security questions
 	 */
-	public Object doLoginWith(String username, String password) {
+	public Object doLoginWith(String username, String password) throws Exception {
 
 		System.out.println(driver.getCurrentUrl());
 		sendkeys(userNameField, username);
@@ -237,6 +242,7 @@ public class HSIDLoginPage extends UhcDriver {
 				}
 			} 
 
+
 			//note: workaround - get URL again to check and see if it goes to the no-email.html page instead
 			if (driver.getCurrentUrl().contains("login/no-email.html")) {
 				System.out.println("User encounted no-email page, will enter email address to proceed");
@@ -264,7 +270,7 @@ public class HSIDLoginPage extends UhcDriver {
 					} catch (Exception e1) {
 						System.out.println("did not encounter 'Go To Homepage' System error message, moving on. "+e1);
 					}
-					
+
 					//note: do not remove wait, need to give it enough time for the dashboard or error page to load
 					System.out.println("Start to wait for the dashboard (or some form of error page) to load...");
 					CommonUtility.checkPageIsReadyNew(driver);
@@ -326,7 +332,8 @@ public class HSIDLoginPage extends UhcDriver {
 				|| currentUrl().contains("/dashboard")) {
 
 			System.out.println(driver.getCurrentUrl());
-			return new AccountHomePage(driver);
+			return new TestHarness(driver);	//------ test
+			//return new AccountHomePage(driver);
 		} else if (currentUrl().contains("home/my-account-home.html")
 				|| currentUrl().contains("/login.html")) {
 
