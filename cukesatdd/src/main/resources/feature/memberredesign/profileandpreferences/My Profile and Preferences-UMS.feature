@@ -108,7 +108,7 @@ Feature: C1.2To test Profile and Preferences page
 	
 	
 	
-	  @accountProfile6 @regressionPCPMedica @regressionMember
+	  @accountProfile6 @regressionPCPMedica @regressionMember @tamzid
     Scenario Outline:  TID: <TID> -User Type: <userType> -Member Type: <memberType> -To test end to end regression scenario for account profile page for PCP medica members
     Given login with following details logins in the member portal and validate elements
       | User Type | <userType> |
@@ -118,8 +118,7 @@ Feature: C1.2To test Profile and Preferences page
     Then I should see the breadcrumb  in the upper left side of the page											
     And clicking the link should lead me back to the Account Settings page of the member site						
 	And I click the HEALTHSAFE ID ACCOUNT RECOVERY AND SECURITY link												
-	# need to add back to page command
-    And the user validate the Email section in UMS site
+	And the user validate the Email section in UMS site
     And the user fill new email address and click save then user should see new updated email on page
     And the user validates the Phone section
       | Member Type | <memberType> |
@@ -133,7 +132,7 @@ Feature: C1.2To test Profile and Preferences page
 
     Examples: 
      |  TID    | userType | memberType |
-     | 15105   | PCP      | PCP_SouthFlorida_ProfilePref     |
+     #| 15105   | PCP      | PCP_SouthFlorida_ProfilePref     |
      | 15107   | Medica   | Medica_SouthFlorida_ProfilePref  |
 	
 	

@@ -750,8 +750,17 @@ public class MRScenario {
                }*/
 	
 
-
 	public WebDriver getWebDriver() {
+        System.setProperty("webdriver.chrome.driver", "C:\\drivers\\chromedriver.exe");
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("disable-infobars");
+        //options.addArguments("start-maximized");
+        options.setExperimentalOption("useAutomationExtension", false);
+        webDriver = new ChromeDriver(options);
+        webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+        return webDriver;
+ }
+	public WebDriver getWebDriver_original() {
 
 
 		isSauceLabSelected = true;
