@@ -693,6 +693,11 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |19    |1041| MAPD     | COSMOS | GROUP_COSMOSCLAIMS           | Prescription drug | Yes                 |
 
+	@claims00_20 @claims00_SSUP @claims00_COSMOS_MEDICAL @abc
+	Examples: 
+	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
+	  |20    |1041| SSUP     | COSMOS | COSMOSCLAIMS                 | Medical           | Yes                 |
+
      #note: these will be in team-a env only
 	 #|xx    |1041| MAPD     | COSMOS | t_diffGrpsDiffYrs_COSMOSCLAIMS | Medical           | Yes                |
 	 #|xx    |1041| MAPD     | COSMOS | t_diffGrpsDiffYrs_COSMOSCLAIMS | Prescription drug | Yes                |
@@ -753,5 +758,5 @@ Feature: T1.1To validate the new changes related to claims page on the member re
     When I navigate to the claims Summary page from test harness page or dashboard
     Then Validate Explanation of benefits Page for group SSUP
     Examples: 
-      | FID    | planType | claimssystem  |
+      | FID    | planType | claimssystem   |
       | 267688 | SSUP     | Group_SSUP_EOB |

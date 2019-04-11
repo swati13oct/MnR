@@ -1707,7 +1707,7 @@ public void TBR_NavigateToClaimsPage(){	//tbd-remove whole method
 					Select dropdown=new Select (claimDropDownBoxForFed);	
 					dropdown.selectByVisibleText(claimPeriod);
 					System.out.println("Clicked '"+claimPeriod+"' option");
-				} else if (planType.equals("MAPD") || planType.equals("MA") || planType.equals("PCP") || planType.equals("MEDICA")){
+				} else if (planType.equals("MAPD") || planType.equals("MA") || planType.equals("SSUP") || planType.equals("PCP") || planType.equals("MEDICA")){
 					WebElement option=null;
 					if (claimPeriod.equals("Last 30 days")) {
 						option = driver.findElement(By.id("date30Atdd"));
@@ -1726,7 +1726,7 @@ public void TBR_NavigateToClaimsPage(){	//tbd-remove whole method
 					option.click();
 					System.out.println("!!! Option selected from the view claims from drop down is ====>"+(option.getText()));
 
-					if (planType.equals("MA")) {
+					if (planType.equals("MA") || planType.equals("SSUP")) {
 						Assert.assertTrue("PROBLEM - planType='"+planType+"' - unable to locate the medical option",validate(ma_medicalClaimTypeText));
 					}
 
@@ -2191,14 +2191,20 @@ public void TBR_NavigateToClaimsPage(){	//tbd-remove whole method
 					}
 					else if (plantype.equals("MA") && domain.equals("NICE")) {
 						//note: not expected behavior but existing behavior, there is an existing defect in prod
-						Assert.assertTrue("PROBLEM - existing behavior should not be able to locate Medical EOB link on summary page (NOTE: this is not the right behavior,there is a prod defect)", !validate(medicalEOB_MA));
-						Assert.assertTrue("PROBLEM - should NOT be able to locate Prescription EOB link on summary page - (NOTE: this is not the right behavior,there is a prod defect)", !validate(drugEOB_MA));
+						Assert.assertTrue("PROBLEM - existing behavior should not be able to locate Medical EOB link on summary page (NOTE: this is not the right behavior- bypassIssue2)", !validate(medicalEOB_MA));
+						Assert.assertTrue("PROBLEM - should NOT be able to locate Prescription EOB link on summary page", !validate(drugEOB_MA));
 						System.out.println("for '"+plantype+" and "+domain+"' - no medical or precription drug EOB's are displayed");
 					}
 					else if (plantype.equals("PDP")) {
 						Assert.assertTrue("PROBLEM - should NOT be able to locate Medical EOB link on summary page", !validate(medicalEOB_PDP));
 						Assert.assertTrue("PROBLEM - unable to locate Prescription EOB link on summary page", validate(drugEOB_PDP));
 						System.out.println("for '"+plantype+" and "+domain+"' - medical EOB's are displayed===> "+ (drugEOB_PDP.isDisplayed()));
+					}
+					else if (plantype.equals("SSUP")) {
+						//note: F267688
+						Assert.assertTrue("PROBLEM - should NOT be able to locate medical EOB link on summary page", !validate(medicalEOB_MA));
+						Assert.assertTrue("PROBLEM - should NOT be able to locate Prescription EOB link on summary page", !validate(drugEOB_MA));
+						System.out.println("for '"+plantype+" and "+domain+"' - no medical or precription drug EOB's are displayed");
 					}
 					else if (plantype.equals("SHIP") && domain.equals("NA")){
 						Assert.assertTrue("PROBLEM - unable to locate EOB link on summary page for SHIP user", validate(EOB_SHIP));
