@@ -129,7 +129,6 @@ public class HSIDStepDefinition {
 			HSIDLoginPage loginPage = new HSIDLoginPage(wd);
 			loginPage.validateelements();
 
-			//--------- test
 			if (("YES").equalsIgnoreCase(MRScenario.isTestHarness)) {
 				TestHarness testHarnessPage = (TestHarness) loginPage
 						.doLoginWith(userName, pwd);
@@ -141,7 +140,6 @@ public class HSIDStepDefinition {
 					Assert.fail("Login not successful...");
 				}
 			}
-			//--------- test
 			AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
 			if (accountHomePage != null) {
 				getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,

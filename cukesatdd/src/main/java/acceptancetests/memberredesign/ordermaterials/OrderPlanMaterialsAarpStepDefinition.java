@@ -151,15 +151,17 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		} */
 	}
 	
-	/* tbd-remove
 	@Then("^the user should not see Order Materials Link for terminated member$")
 	public void the_user_should_not_see_Order_Materials_Link_for_terminated_member() throws Throwable {
-		if (MRScenario.isTestHarness.equalsIgnoreCase("YES")) {
-			//go to any of the secondary page then validate
-			TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
-			boolean LinkPresent = testHarnessPage.validateOrderMaterialsLink();
-			getLoginScenario().saveBean(PageConstantsMnR.TEST_HARNESS_PAGE,testHarnessPage);
+		/* tbd-remove
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+					.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			boolean LinkPresent = accountHomePage.validateOrderMaterialsLink();
+			getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
 				Assert.assertTrue("Order Materials link ist dispalyed for Terminated Member ", !LinkPresent);
+		 */
+		if (MRScenario.isTestHarness.equalsIgnoreCase("YES")) {
+			System.out.println("This test should run on rally dashboard only, skipping for testharness");
 		} else {
 			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 					.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
@@ -167,7 +169,7 @@ public class OrderPlanMaterialsAarpStepDefinition {
 			getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
 				Assert.assertTrue("Order Materials link ist dispalyed for Terminated Member ", !LinkPresent);
 		}
-	} */
+	}
 
 	@Then("^user validates header navigation is not available for Terminated member$")
 	public void user_validates_header_navigation_is_not_available_for_Terminated_member() throws Throwable {
@@ -179,17 +181,13 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		Assert.assertTrue("Order Materials link is dispalyed for Terminated Member in B&C Page ", !NavigationPresent);
 		*/
 		if (MRScenario.isTestHarness.equalsIgnoreCase("YES")) {
-			//go to any of the secondary page then validate
-			TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
-			boolean LinkPresent = testHarnessPage.validateOrderMaterialsLink();
-			getLoginScenario().saveBean(PageConstantsMnR.TEST_HARNESS_PAGE,testHarnessPage);
-				Assert.assertTrue("Order Materials link ist dispalyed for Terminated Member ", !LinkPresent);
+			System.out.println("This test should run on rally dashboard only, skipping for testharness");
 		} else {
 			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 					.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-			boolean LinkPresent = accountHomePage.validateOrderMaterialsLink();
+			boolean NavigationPresent = accountHomePage.validateOrderMaterialsPageHeaderNavigation();
 			getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
-				Assert.assertTrue("Order Materials link ist dispalyed for Terminated Member ", !LinkPresent);
+			Assert.assertTrue("Order Materials link is dispalyed for Terminated Member in B&C Page ", !NavigationPresent);
 		}
 		
 	}

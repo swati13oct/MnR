@@ -469,7 +469,22 @@ public class OrderMaterialsPage extends UhcDriver  {
 		if (validate(OrderConfirmationHeader) || validate(OrderConfirmation_addordermaterialLink)) {
 			System.out.println("@@@@ Opder Plan Material COnfirmation Page is Displayed @@@@");
 			return new OrderPlanMaterialConfirmationPage(driver);
-		} 
+		}
+		
+		/* note: try this when working data is available
+		int x=0;
+		while(x<5) {
+			try {
+				Thread.sleep(1000);
+			} catch (Exception e) {	e.printStackTrace(); }
+			if (validate(OrderConfirmationHeader) || validate(OrderConfirmation_addordermaterialLink)) {
+				System.out.println("@@@@ Opder Plan Material COnfirmation Page is Displayed @@@@");
+				return new OrderPlanMaterialConfirmationPage(driver);
+			}
+			x=x+1;
+			System.out.println("waited x seconds for either OrderConfirmationHeader or OrderConfirmation_addordermaterialLink to show");
+		}
+		*/
 			return null;
 	}
 	/**
