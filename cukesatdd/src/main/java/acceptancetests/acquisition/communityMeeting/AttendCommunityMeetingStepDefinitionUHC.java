@@ -55,6 +55,7 @@ public class AttendCommunityMeetingStepDefinitionUHC {
 					Assert.assertTrue(true);
 				else
 					Assert.fail("Error in navigating to the Uhc community page");
+				
 		
 	}
 }
