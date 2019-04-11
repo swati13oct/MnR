@@ -196,8 +196,10 @@ public class HSIDLoginPage extends UhcDriver {
 		signInButton.click();
 
 		//wait for some form of header to show
-		System.out.println("Check to see if SecurityQuestion page is loaded, timeout in 35 sec...");
-		CommonUtility.waitForPageLoadNew(driver, authQuestionlabel, 35);
+		CommonUtility.waitForPageLoad(driver, authQuestionlabel, 35);
+		if (!validate(authQuestionlabel)) {
+			System.out.println("waited 35 sec and still not seeing the authQuestionLabel showing...");
+		}
 		/* tbd try {
 			Thread.sleep(35000);
 		} catch (InterruptedException e) {
@@ -237,7 +239,7 @@ public class HSIDLoginPage extends UhcDriver {
 					Thread.sleep(1000);
 					x=x+1;
 					System.out.println("Waiting for some form of header to show up... waited "+x+" sec");
-				} catch (InterruptedException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			} 
@@ -317,9 +319,6 @@ public class HSIDLoginPage extends UhcDriver {
 			alert.accept();
 		}
 		
-		System.out.println("Not Security question page or test harness page or Account Home Page...wait 15 sec and check again for last attempt");
-		
-		
 		/* tbd
 		try {
 			Thread.sleep(15000);
@@ -328,18 +327,19 @@ public class HSIDLoginPage extends UhcDriver {
 			e.printStackTrace();
 		}*/
 
-		if (currentUrl().contains("testharness.html")
-				|| currentUrl().contains("/dashboard")) {
+		if (currentUrl().contains("/dashboard")) {
 
 			System.out.println(driver.getCurrentUrl());
-			return new TestHarness(driver);	//------ test
-			//return new AccountHomePage(driver);
+			return new AccountHomePage(driver);
 		} else if (currentUrl().contains("home/my-account-home.html")
 				|| currentUrl().contains("/login.html")) {
 
 			return new AccountHomePage(driver);
 		} else if (currentUrl().contains("terminated-plan.html")) {
 			return new TerminatedHomePage(driver);
+		} else if (currentUrl().contains("testharness.html"))
+		{
+			return new TestHarness(driver);
 		}
 		return null;
 	}

@@ -112,8 +112,9 @@ public class OrderMaterialsPage extends UhcDriver  {
 	public OrderMaterialsPage(WebDriver driver) throws InterruptedException {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		Thread.sleep(5000);
-		CommonUtility.checkPageIsReady(driver);
+		//tbd Thread.sleep(5000);
+		//tbd CommonUtility.checkPageIsReady(driver);
+		CommonUtility.checkPageIsReadyNew(driver);
 		try{
 			if(validate(iPerceptionPopUp)){
 				System.out.println("FeedBack Modal Present");
@@ -301,7 +302,8 @@ public class OrderMaterialsPage extends UhcDriver  {
 	*/
 
 	public boolean ValidateErrorMessage() throws InterruptedException{
-		Thread.sleep(3000);
+		CommonUtility.waitForPageLoad(driver, OrderMaterialsErrorMsg, 5);
+		//tbd Thread.sleep(3000);
 		if (validate(OrderMaterialsErrorMsg)){
 			System.out.println("*************Error Message Displayed displayed for Order materials Page***************");
 			System.out.println("*************Error Message : "+OrderMaterialsErrorMsg.getText()+" ***************");
@@ -318,12 +320,14 @@ public class OrderMaterialsPage extends UhcDriver  {
 	*/
 
 	public boolean ValidateSHIPErrorMessage() throws InterruptedException{
+		/* tbd-remove
 		try {
 			Thread.sleep(8000);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
+		} */
+		CommonUtility.waitForPageLoad(driver, SHIPerrorMsg, 10);
 		if (validate(SHIPerrorMsg)){
 			if(SHIPerrorMsg.getText().contains("request cannot be processed at this time")){
 				System.out.println("*************Error Message Displayed displayed for SHIP invalid Selection in Order materials Page***************");
@@ -346,12 +350,14 @@ public class OrderMaterialsPage extends UhcDriver  {
 	public OrderPlanMaterialConfirmationPage selectsOption(String option) throws InterruptedException {
 
 		driver.navigate().refresh();
+		/* tbd-remove
 		try {
 			Thread.sleep(3000);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
+		} */
+		CommonUtility.waitForPageLoad(driver, iPerceptionPopUp, 5);
 		if(validate(iPerceptionPopUp)){
 			System.out.println("FeedBack Modal Present");
 
@@ -442,7 +448,8 @@ public class OrderMaterialsPage extends UhcDriver  {
 
 		}
 		
-		Thread.sleep(5000);
+		CommonUtility.waitForPageLoad(driver, submitButton, 5);
+		//tbd-remove Thread.sleep(5000);
 
 		//submitButton.submit();
 		if(validate(submitButton)){
@@ -462,7 +469,22 @@ public class OrderMaterialsPage extends UhcDriver  {
 		if (validate(OrderConfirmationHeader) || validate(OrderConfirmation_addordermaterialLink)) {
 			System.out.println("@@@@ Opder Plan Material COnfirmation Page is Displayed @@@@");
 			return new OrderPlanMaterialConfirmationPage(driver);
-		} 
+		}
+		
+		/* note: try this when working data is available
+		int x=0;
+		while(x<5) {
+			try {
+				Thread.sleep(1000);
+			} catch (Exception e) {	e.printStackTrace(); }
+			if (validate(OrderConfirmationHeader) || validate(OrderConfirmation_addordermaterialLink)) {
+				System.out.println("@@@@ Opder Plan Material COnfirmation Page is Displayed @@@@");
+				return new OrderPlanMaterialConfirmationPage(driver);
+			}
+			x=x+1;
+			System.out.println("waited x seconds for either OrderConfirmationHeader or OrderConfirmation_addordermaterialLink to show");
+		}
+		*/
 			return null;
 	}
 	/**

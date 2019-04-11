@@ -1157,14 +1157,17 @@ public void user_Clicks_on_Look_upyourProvider_button_on_PlanDetailsPage() {
 
 		// note: the second plan in the list will be unsaved
 		String planType="MA";
+		plansummaryPage.viewPlanSummary(planType);
 		System.out.println("Proceed to unsave the "+planType+" second plan from the input");
 		plansummaryPage.validateAbilityToUnSavePlans(ma_plans, planType);
 
 		planType="PDP";
+		plansummaryPage.viewPlanSummary(planType);
 		System.out.println("Proceed to unsave the "+planType+" second plan from the input");
 		plansummaryPage.validateAbilityToUnSavePlans(pdp_plans, planType);
 		
 		planType="SNP";
+		plansummaryPage.viewPlanSummary(planType);
 		System.out.println("Proceed to unsave the "+planType+" second plan from the input");
 		plansummaryPage.validateAbilityToUnSavePlans(snp_plans, planType);
 	}

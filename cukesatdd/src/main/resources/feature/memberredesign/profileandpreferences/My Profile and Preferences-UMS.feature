@@ -2,7 +2,7 @@
 Feature: C1.2To test Profile and Preferences page 
 
   
-    @accountProfile1 @ShipEndtoEnd  
+    @accountProfile1 @ShipEndtoEnd
 	Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Profile page End to End test for Ship Members
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
@@ -204,7 +204,7 @@ Feature: C1.2To test Profile and Preferences page
  	Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    #|data type    | <dataType>   |
+      |data type    | <dataType>   |
     When the user navigates to Profile and Preferences page
     And I should see the EPMP i frame on profile page   
     And I should be able to see edit email address and to view read only HSID email
@@ -212,7 +212,7 @@ Feature: C1.2To test Profile and Preferences page
 
     Examples: 
       | planType | memberType  | dataType   |
-      #| MAPD     | EPMPEnabled | Individual |
+      | MAPD     | EPMPEnabled | Individual |
 
   @accountProfile12 @EMPMprofilePageForShip  @regressionMember
   Scenario Outline: To test end to end regression scenario for EPMP profile page for ship
