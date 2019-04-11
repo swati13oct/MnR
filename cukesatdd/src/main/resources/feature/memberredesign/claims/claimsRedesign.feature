@@ -384,9 +384,10 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 
 
     #----- begin of claims00 ---------------------------------------------------------
-    # note: for time being will bypass the YourShare value mismatch between summary and detail INC10332773
-    # note: will bypass Search EOB History link missing for MA NICE summary page and MA and MAPD NICE detail page defect on prod
-    # note: TBD - expected behavior for This page contains PDF doc text
+    # note: bypassIssue-1 - YourShare value mismatch between summary and detail INC10332773
+    # note: bypassIssue-2 - MA NICE missing Search EOB History on both summary and detail page - pending INC
+    # note: bypassIssue-2 - MAPD NICE missing Search EOB History on detail page - pending INC
+    # note: bypassIssue-3 - MA and MAPD NICE missing This page contains PDF doc text on detail page - pending INC
 	# note: any additional Example will need to tag with either one of these 
 	# note:   @claims00_COSMOS_MEDICAL, @claims00_COSMOS_DRUG, 
 	# note:   @claims00_NICE_MEDICAL, @claims00_NICE_DRUG or @claims00_NOT_NICE_OR_COSMOS
@@ -712,8 +713,8 @@ Feature: T1.1To validate the new changes related to claims page on the member re
     Then I can see the claims displayed based on the selection in redesigned site
     When I navigate to the Claim details page to see view as pdf EOB
     Then I can vdate the view as pdf link on claims details page header
-    | Plan Type    | <planType>    |
-    | Domain       | <domain>      |
+      | Plan Type    | <planType>    |
+      | Domain       | <domain>      |
 
     Examples: 
       | FID    | planType | claimPeriod    | domain | claimssystem   |
@@ -721,7 +722,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 
     #---- this test check that sub-navigation to EOB page under Claims tab is suppressed for SSUP Only Plan member
     @claims16 @US1662790 @F267688 @claimsEOB_SSUP_Plan
-    Scenario Outline: to validate that sub-navigation to EOB page under Claims tab is suppressed for SSUP Only Plan member
+    Scenario Outline: FID: <FID> -plan: <planType> -claimsSystem: <claimssystem> - to validate that sub-navigation to EOB page under Claims tab is suppressed for SSUP Only Plan member
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>     |
       | Test Data Type | <claimssystem> |
@@ -729,11 +730,11 @@ Feature: T1.1To validate the new changes related to claims page on the member re
     Then Explanation of benefits sub navigation under Claims tab is not displayed
 
     Examples: 
-      | planType | claimssystem |
-      | SSUP     | COSMOSCLAIMS |
+      | FID    | planType | claimssystem |
+      | 267688 | SSUP     | COSMOSCLAIMS |
       
     @claims17 @US1673123 @F267688_Test @claimsEOB_SSUP_Plan
-    Scenario Outline: to validate that SSUP member accessing EOB page via deep link
+    Scenario Outline: FID: <FID> -plan: <planType> -claimsSystem: <claimssystem> - to validate that SSUP member accessing EOB page via deep link
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>     |
       | Test Data Type | <claimssystem> |
@@ -741,16 +742,16 @@ Feature: T1.1To validate the new changes related to claims page on the member re
     Then Explanation of benefits sub navigation under Claims tab is not displayed
     Then Explanation of benefits deep link is invoked and validate the Page
     Examples: 
-      | planType | claimssystem      |
-      | SSUP     | SSUP_EOB_Deeplink |
+      | FID     | planType | claimssystem      |
+      | F267688 | SSUP     | SSUP_EOB_Deeplink |
       
     @claims18 @US1673112 @F267688_Test @claimsEOB_SSUP_Plan
-    Scenario Outline: to validate that SSUP member accessing EOB page via deep link
+    Scenario Outline: FID: <FID> -plan: <planType> -claimsSystem: <claimssystem> - to validate that SSUP member accessing EOB page via deep link
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>     |
       | Test Data Type | <claimssystem> |
     When I navigate to the claims Summary page from test harness page or dashboard
     Then Validate Explanation of benefits Page for group SSUP
     Examples: 
-      | planType | claimssystem  |
-      | SSUP     | Group_SSUP_EOB |
+      | FID     | planType | claimssystem  |
+      | F267688 | SSUP     | Group_SSUP_EOB |
