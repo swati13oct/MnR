@@ -149,13 +149,7 @@ public class HSIDLoginPage extends UhcDriver {
 
 	public HsidRegistrationPersonalInformationPage clickRegister() {
 		driver.get(REGIRATION_URL);
-		/*
-		 * if(registerNow.isDisplayed()){ registerNow.click(); try {
-		 * Thread.sleep(5000); } catch (InterruptedException e) { // TODO
-		 * Auto-generated catch block e.printStackTrace(); } return new
-		 * HsidRegistrationPersonalInformationPage(driver); }else{
-		 * Assert.assertTrue("Register now button is not displayed", false); }
-		 */
+	
 		return new HsidRegistrationPersonalInformationPage(driver);
 	}
 
@@ -198,23 +192,14 @@ public class HSIDLoginPage extends UhcDriver {
 		//wait for some form of header to show
 		System.out.println("Check to see if SecurityQuestion page is loaded, timeout in 35 sec...");
 		CommonUtility.waitForPageLoadNew(driver, authQuestionlabel, 35);
-		/* tbd try {
-			Thread.sleep(35000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} */
-
 		if (driver.getCurrentUrl().contains(
 				"=securityQuestion")) {
 			System.out.println("Landed on security question page...");
 
 			ConfirmSecurityQuestion cs = new ConfirmSecurityQuestion(driver);
 			try {
-				//tbd Thread.sleep(10000);
 				cs.enterValidSecurityAnswer();
 				System.out.println(driver.getCurrentUrl());
-				//tbd Thread.sleep(20000);
 				System.out.println("Check to see if document.readyState is ready...");
 				CommonUtility.checkPageIsReadyNew(driver);
 			} catch (Exception e) {
@@ -291,12 +276,6 @@ public class HSIDLoginPage extends UhcDriver {
 						}
 					} 
 
-					/* tbd try {
-						Thread.sleep(20000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} */
 				} catch (Exception e) {
 					System.out.println("Unable to resolve no-email page encounter. "+e);
 				}
@@ -308,8 +287,7 @@ public class HSIDLoginPage extends UhcDriver {
 			return new AccountHomePage(driver);
 		}
 		else {
-			System.out
-					.println("Security question page or test harness page or Account Home Page didn't load , please check");
+			System.out.println("Security question page or test harness page or Account Home Page didn't load , please check");
 		}
 		if (MRScenario.environmentMedicare.equals("team-e")
 				|| MRScenario.environmentMedicare.equals("team-ci1")) {
@@ -320,28 +298,24 @@ public class HSIDLoginPage extends UhcDriver {
 		System.out.println("Not Security question page or test harness page or Account Home Page...wait 15 sec and check again for last attempt");
 		
 		
-		/* tbd
-		try {
-			Thread.sleep(15000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
+		if (currentUrl().contains("/dashboard")) {
 
-		if (currentUrl().contains("testharness.html")
-				|| currentUrl().contains("/dashboard")) {
-
+			System.out.println(driver.getCurrentUrl()); 
+			return new AccountHomePage(driver);
+		} else if (currentUrl().contains("testharness.html"))
+		{
 			System.out.println(driver.getCurrentUrl());
-			return new AccountHomePage(driver);	//------ test
-			//return new AccountHomePage(driver);
-		} else if (currentUrl().contains("home/my-account-home.html")
+			return new TestHarness(driver);
+		}
+		else if (currentUrl().contains("home/my-account-home.html")
 				|| currentUrl().contains("/login.html")) {
 
 			return new AccountHomePage(driver);
 		} else if (currentUrl().contains("terminated-plan.html")) {
 			return new TerminatedHomePage(driver);
-		}
+		} 
 		return null;
+
 	}
 
 	public void emailconfirmed() {
@@ -376,11 +350,6 @@ public class HSIDLoginPage extends UhcDriver {
 				Thread.sleep(20000);
 			}
 
-			/*
-			 * if (validate(iPerceptionPopUp)) {
-			 * System.out.println("iPerceptionPopUp is Displayed");
-			 * iPerceptionPopUp.click(); }
-			 */
 		} catch (Exception e) {
 			System.out.println("iPerception Pop Up not displayed");
 		}
@@ -434,10 +403,7 @@ public class HSIDLoginPage extends UhcDriver {
 					+ MRConstants.REDESIGN_LOGIN_URL);
 			System.out.println("user is on Testharness Environment");
 		}
-		/*
-		 * else { start(PAGE_URL_TEAM_MEDICARE_TESTHARNESS);
-		 * System.out.println("User is on Medicare Test harness page"); }
-		 */
+	
 	}
 
 	public void verifyIfIperceptionSmileySurveyIsDisplayed()
