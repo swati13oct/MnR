@@ -393,7 +393,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	# note:   @claims00_NICE_MEDICAL, @claims00_NICE_DRUG or @claims00_NOT_NICE_OR_COSMOS
 	# note: 
 	#----------------------------------------------------------------------------------
-    @claims00 @def1041 @thePredators
+    @claims00 @def1041 @thePredators @abc
 	Scenario Outline: DID: <DID> -plan: <planType> -claimsSystem: <claimssystem> -claimType: <claimType> - <index> - To validate claims for both summary and detail page for each search range options
 		Given login with following details logins in the member portal and validate elements
 		  | Plan Type      | <planType>            |
@@ -693,7 +693,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |19    |1041| MAPD     | COSMOS | GROUP_COSMOSCLAIMS           | Prescription drug | Yes                 |
 
-	@claims00_20 @claims00_SSUP @claims00_COSMOS_MEDICAL @abc
+	@claims00_20 @claims00_SSUP @claims00_COSMOS_MEDICAL
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |20    |1041| SSUP     | COSMOS | COSMOSCLAIMS                 | Medical           | Yes                 |
