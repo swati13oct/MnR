@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -227,24 +228,11 @@ public class HSIDLoginPage extends UhcDriver {
 			//note: do not remove wait, need to give it enough time for the dashboard or error page to load
 			System.out.println("Start to wait for the dashboard (or some form of error page) to load...");
 			CommonUtility.checkPageIsReadyNew(driver);
-			int x=0;
-			while (x < 20) {
-				try {
-					List<WebElement> header=driver.findElements(By.xpath("//h1"));
-					if (header.size() >0) {
-						System.out.println("Located some sort of header, assume page is comming");
-						Thread.sleep(2000); //just in case
-						break;
-					}
-					Thread.sleep(1000);
-					x=x+1;
-					System.out.println("Waiting for some form of header to show up... waited "+x+" sec");
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			} 
+			waitToReachDashboard();
 
-
+			if (driver.getCurrentUrl().equals("https://stage-medicare.uhc.com/")) {
+				Assert.fail("***** Error in loading  Redesign Account Landing Page ***** got redirect back to login page after answered security question");
+			}
 			//note: workaround - get URL again to check and see if it goes to the no-email.html page instead
 			if (driver.getCurrentUrl().contains("login/no-email.html")) {
 				System.out.println("User encounted no-email page, will enter email address to proceed");
@@ -276,23 +264,11 @@ public class HSIDLoginPage extends UhcDriver {
 					//note: do not remove wait, need to give it enough time for the dashboard or error page to load
 					System.out.println("Start to wait for the dashboard (or some form of error page) to load...");
 					CommonUtility.checkPageIsReadyNew(driver);
-					int y=0;
-					while (y < 20) {
-						try {
-							List<WebElement> header=driver.findElements(By.xpath("//h1"));
-							if (header.size() >0) {
-								System.out.println("Located some sort of header, assume page is comming");
-								Thread.sleep(2000); //just in case
-								break;
-							}
-							Thread.sleep(1000);
-							y=y+1;
-							System.out.println("Waiting for some form of header to show up... waited "+y+" sec");
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-					} 
+					waitToReachDashboard();
 
+					if (driver.getCurrentUrl().equals("https://stage-medicare.uhc.com/")) {
+						Assert.fail("***** Error in loading  Redesign Account Landing Page ***** got redirect back to login page after answered security question");
+					}
 					/* tbd try {
 						Thread.sleep(20000);
 					} catch (InterruptedException e) {
@@ -624,6 +600,28 @@ public class HSIDLoginPage extends UhcDriver {
 				return new SaveProfilePrefrencePage(driver);			
 						}
 		return null;
+	}
+	
+	public void waitToReachDashboard() {
+		int y=0;
+		while (y < 20) {
+			try {
+				List<WebElement> header=driver.findElements(By.xpath("//h1"));
+				if (header.size() >0) {
+					System.out.println("Located some sort of header, assume page is comming");
+					Thread.sleep(2000); //just in case
+					break;
+				}
+				Thread.sleep(1000);
+				y=y+1;
+				System.out.println("Waiting for some form of header to show up... waited "+y+" sec");
+			} catch (UnhandledAlertException ae) {
+				System.out.println("Exception: "+ae);
+				Assert.fail("***** Error in loading  Redesign Account Landing Page ***** Got Alert error");
+			} catch (InterruptedException e) {
+				//e.printStackTrace();
+			}
+		} 
 	}
 
 }
