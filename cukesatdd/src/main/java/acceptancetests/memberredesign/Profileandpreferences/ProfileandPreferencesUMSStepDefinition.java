@@ -186,6 +186,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 	 * @toDo : The user checks the elements that appear when the user clicks on
 	 *       edit link of Account section
 	 */
+	
 	@Then("^the user validates the elements on clicking the edit link")
 	public void UserValidatesAccountEditOptions() {
 		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
@@ -963,7 +964,26 @@ public class ProfileandPreferencesUMSStepDefinition {
 		profilePreferencesPage.validateHealthSafeIdLink();
 		profilePreferencesPage.validateEditPasswordLinkBox();
 	}
+	
+	@When("^I click the HEALTHSAFE ID PASSWORD link and validate username and password$")
+	public void i_click_the_HEALTHSAFE_ID_PASSWORD_link_2() throws InterruptedException {
 
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+
+		profilePreferencesPage.validateHealthSafeIdLink();
+		profilePreferencesPage.validateEditPasswordLinkBox();
+	}
+
+//	@Then ("^the user clicks on save button without filling current and new password and the red mandatory message should come$")
+//	public void empty_value_password_field() throws InterruptedException {
+//
+//		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+//				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+//
+//		profilePreferencesPage.validateEmptyPasswordLinkBox();
+//		
+//	}
 	/**
 	 * @toDo : The user should see the breadcrumb in the upper left side
 	 */

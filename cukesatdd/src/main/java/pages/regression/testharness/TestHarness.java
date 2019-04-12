@@ -200,6 +200,9 @@ public class TestHarness extends UhcDriver {
 	@FindBy(id = "premiumpayment_4")
 	private WebElement premPaymentsTab;
 	
+	@FindBy(xpath = "//div[@id='ui-view-page']//a[@track='ORDER_MATERIALS']")
+	private WebElement OrderMaterial_Dashboard;
+
 	String category = null;
 
 	public TestHarness(WebDriver driver) {
@@ -376,6 +379,21 @@ public class TestHarness extends UhcDriver {
 		jse.executeScript("window.scrollBy(0,-500)", "");
 		CommonUtility.waitForPageLoad(driver, contactUsPageLink, 30);
 		validateNew(contactUsPageLink);
+		contactUsPageLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_60);
+		if (driver.getTitle().trim().contains("Contact Us")) {
+			return new ContactUsPage(driver);
+		}
+		return null;
+	}
+	
+	public ContactUsPage navigateToContactUsPageFromTestHarnessPage() {
+
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,-500)", "");
+		CommonUtility.waitForPageLoad(driver, contactUsPageLink, 30);
+		validateNew(testHarnessContactUsPageLink);
 		contactUsPageLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_60);
@@ -571,7 +589,7 @@ public class TestHarness extends UhcDriver {
 		validateNew(testHarnessProfilePageLink);
 		profilePageLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_60);
+		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_30);
 
 		if (driver.getTitle().contains("Profile")) {
 			System.out.println("Pass!");
@@ -828,5 +846,11 @@ public class TestHarness extends UhcDriver {
 	public void validatePremiumPaymentTabIsDisplayed() {
 		validateNew(premPaymentsTab);
 		
+	}
+	
+	public boolean validateOrderMaterialsLink() {
+		if (validate(OrderMaterial_Dashboard))
+			return true;
+		return false;
 	}
 }

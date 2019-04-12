@@ -2,7 +2,7 @@
 Feature: C1.2To test Profile and Preferences page 
 
   
-    @accountProfile1 @ShipEndtoEnd  @tamzid
+    @accountProfile1 @ShipEndtoEnd
 	Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Profile page End to End test for Ship Members
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
@@ -53,48 +53,22 @@ Feature: C1.2To test Profile and Preferences page
      | 15083  | PDP       | PDP_AARP_GOGreen_Profilepref   |
 	  
 
-  @accountProfile3 @NegativeTestonHSIDpage 
-  Scenario Outline:  TID: <TID> -Plan Type: <planType> - To verify all Negative tests on Password Edit on HSID PASSWORD Link Page
-	Given login with following details logins in the member portal and validate elements
-      | Plan Type | <planType> |
-    When the user navigates to Profile and Preferences page
-	And I click the HEALTHSAFE ID PASSWORD link and validate username and password
-	Then the user validates the elements on clicking the edit link                                                             
-    Then the user validates the functionality of Cancel Button                                                                 
-    #need to add back button command
-	Then the user validates the elements on clicking the edit link                                                             
-    Then the user clicks on save button without filling current and new password and the red mandatory message should come     
-	Then the user validates the elements on clicking the edit link                                                             
-    Then the user enters different password in confirm password field and clicks save button and the user should see expected error message - Please enter the same value again 
-	 Examples: 
-       |  TID   | planType |
-       | 00000  | MAPD	   |
-	   | 00000  | MA       |
-       | 00000  | PDP      |
+     @accountProfile3 @NegativeTestonHSIDpage
+     Scenario Outline:  TID: <TID> -Plan Type: <planType> - To verify all Negative tests on Password Edit on HSID PASSWORD Link Page
+     Given login with following details logins in the member portal and validate elements
+     | Member Type | <memberType> |
+     When the user navigates to Profile and Preferences page
+     And I click the HEALTHSAFE ID PASSWORD link and validate username and password
+     Then the user clicks on save button without filling current and new password and the red mandatory message should come     
+     #Then the user enters different password in confirm password field and clicks save button and the user should see expected error message - Please enter the same value again 
+	 Examples:  
+		|  TID   | planType | memberType      			     |
+		| 00000  | MAPD	    | MAPD_GROUP_GOGreen_Profilepref |
+	    | 00000  | MA       | MA_AARP_GOGreen_Profilepref    |
+        | 00000  | PDP      | PDP_AARP_GOGreen_Profilepref   |
 	  
-
-
-	  
-  @accountProfile4 @NegativeTestonEmail  
-  Scenario Outline:  TID: <TID> -Plan Type: <planType> - To verify all Negative tests on Edit  for Email 
-	Given login with following details logins in the member portal and validate elements
-      | Plan Type | <planType> |
-    When the user navigates to Profile and Preferences page
-	  Then the user validates the Email section in UMS site                                                                   
-	Then the user clicks on save without filling both fields then the user should see red mandatory message                   
-    Then the user fill new email address and click save then user should see new updated email on page                        
-	Then the user fill invalid email and clicks on save button then the user should see error message for invalid email       
-    Then the user fill different email id in confirm email box from new email address then error message should come          
-	Examples: 
-     |  TID   | planType |
-     | 00000  | MAPD	 |
-	 | 00000  | MA       |
-     | 00000  | PDP      |
 	
-	
-	
-	
-	@accountProfile5 @CommunicationPreferences
+       @accountProfile4 @CommunicationPreferences
   Scenario Outline:  TID: <TID> -User Type: <userType> - To verify Communication Preferences section
     Given login with following details logins in the member portal and validate elements
       | User Type | <userType> |
@@ -104,7 +78,7 @@ Feature: C1.2To test Profile and Preferences page
     Then the user validates headers on green page                                                              
     Then the user validates the presence of Plan Name                                                         
     And the user validates Go paperless button and on clicking button go green page should come
-	 Then the user validates the I have read checkbox and check it                                            
+	Then the user validates the I have read checkbox and check it                                            
     Then the user validates the Save Preferences Button                                                       
     Then the user validates the presence of Back to Profile and Preferences links                              
 	 Examples: 
@@ -116,7 +90,7 @@ Feature: C1.2To test Profile and Preferences page
 	
 	
 	
-	@accountProfile6 @US957739 @regressionMember
+	@accountProfile5 @US957739 @regressionMember
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To verify  the sections on Profile and Preferences page for a NOKIA member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -129,12 +103,12 @@ Feature: C1.2To test Profile and Preferences page
 
     Examples: 
       |  TID    | planType | memberType |
-      | 00000   | MA       | NOKIA      |
-      | 00000   | MAPD     | NOKIA      |
+     # | 00000   | MA       | NOKIA      |
+     # | 00000   | MAPD     | NOKIA      |
 	
 	
 	
-	  @accountProfile7 @regressionPCPMedica @regressionMember
+	  @accountProfile6 @regressionPCPMedica @regressionMember
     Scenario Outline:  TID: <TID> -User Type: <userType> -Member Type: <memberType> -To test end to end regression scenario for account profile page for PCP medica members
     Given login with following details logins in the member portal and validate elements
       | User Type | <userType> |
@@ -164,7 +138,7 @@ Feature: C1.2To test Profile and Preferences page
 	
 	
 	 
-	  @accountProfile8  @regressionAccountProf&Pref  @regressionMember
+	  @accountProfile7  @regressionAccountProf&Pref  @regressionMember
   Scenario Outline:  TID: <TID> -User Type: <userType> -Member Type: <memberType> - To test end to end regression scenario for account profile page aarp member
     Given login with following details logins in the member portal and validate elements
       | User Type | <userType> |
@@ -190,7 +164,7 @@ Feature: C1.2To test Profile and Preferences page
 	
 	
 	 
-	 @accountProfile9 @goGreen @regressionMember
+	 @accountProfile8 @goGreen @regressionMember
   Scenario Outline:  TID: <TID> -User Type: <userType> -To verify Edit preferences section for Go Green
     Given login with following details logins in the member portal and validate elements
       | User Type | <userType> |
@@ -230,7 +204,7 @@ Feature: C1.2To test Profile and Preferences page
  	Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    #|data type    | <dataType>   |
+      |data type    | <dataType>   |
     When the user navigates to Profile and Preferences page
     And I should see the EPMP i frame on profile page   
     And I should be able to see edit email address and to view read only HSID email
@@ -238,7 +212,7 @@ Feature: C1.2To test Profile and Preferences page
 
     Examples: 
       | planType | memberType  | dataType   |
-      #| MAPD     | EPMPEnabled | Individual |
+      | MAPD     | EPMPEnabled | Individual |
 
   @accountProfile12 @EMPMprofilePageForShip  @regressionMember
   Scenario Outline: To test end to end regression scenario for EPMP profile page for ship

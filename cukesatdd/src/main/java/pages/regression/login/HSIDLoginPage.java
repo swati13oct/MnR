@@ -13,6 +13,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import pages.member_deprecated.ulayer.TerminatedHomePage;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.testharness.TestHarness;
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
@@ -75,6 +76,9 @@ public class HSIDLoginPage extends UhcDriver {
 
 	@FindBy(id = "sign-in-btn")
 	private WebElement thSignIn;
+	
+	@FindBy(xpath ="//span[contains(text(),'Answer the following security question to continue.')]")
+	private WebElement securyQAns;
 
 	@FindBy(xpath = ".//*[@id='IPEinvL']/map/area[1]")
 	private WebElement iPerceptionPopUp;
@@ -181,9 +185,10 @@ public class HSIDLoginPage extends UhcDriver {
 	@FindBy(id="authQuestiontextLabelId")
 	private WebElement authQuestionlabel;
 	/**
+	 * @throws Exception 
 	 * @toDo : To login through hsid via entering security questions
 	 */
-	public Object doLoginWith(String username, String password) {
+	public Object doLoginWith(String username, String password) throws Exception {
 
 		System.out.println(driver.getCurrentUrl());
 		sendkeys(userNameField, username);
@@ -191,8 +196,10 @@ public class HSIDLoginPage extends UhcDriver {
 		signInButton.click();
 
 		//wait for some form of header to show
-		System.out.println("Check to see if SecurityQuestion page is loaded, timeout in 35 sec...");
-		CommonUtility.waitForPageLoadNew(driver, authQuestionlabel, 35);
+		CommonUtility.waitForPageLoad(driver, authQuestionlabel, 35);
+		if (!validate(authQuestionlabel)) {
+			System.out.println("waited 35 sec and still not seeing the authQuestionLabel showing...");
+		}
 		/* tbd try {
 			Thread.sleep(35000);
 		} catch (InterruptedException e) {
@@ -232,10 +239,11 @@ public class HSIDLoginPage extends UhcDriver {
 					Thread.sleep(1000);
 					x=x+1;
 					System.out.println("Waiting for some form of header to show up... waited "+x+" sec");
-				} catch (InterruptedException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			} 
+
 
 			//note: workaround - get URL again to check and see if it goes to the no-email.html page instead
 			if (driver.getCurrentUrl().contains("login/no-email.html")) {
@@ -264,7 +272,7 @@ public class HSIDLoginPage extends UhcDriver {
 					} catch (Exception e1) {
 						System.out.println("did not encounter 'Go To Homepage' System error message, moving on. "+e1);
 					}
-					
+
 					//note: do not remove wait, need to give it enough time for the dashboard or error page to load
 					System.out.println("Start to wait for the dashboard (or some form of error page) to load...");
 					CommonUtility.checkPageIsReadyNew(driver);
@@ -311,9 +319,6 @@ public class HSIDLoginPage extends UhcDriver {
 			alert.accept();
 		}
 		
-		System.out.println("Not Security question page or test harness page or Account Home Page...wait 15 sec and check again for last attempt");
-		
-		
 		/* tbd
 		try {
 			Thread.sleep(15000);
@@ -322,8 +327,7 @@ public class HSIDLoginPage extends UhcDriver {
 			e.printStackTrace();
 		}*/
 
-		if (currentUrl().contains("testharness.html")
-				|| currentUrl().contains("/dashboard")) {
+		if (currentUrl().contains("/dashboard")) {
 
 			System.out.println(driver.getCurrentUrl());
 			return new AccountHomePage(driver);
@@ -333,6 +337,9 @@ public class HSIDLoginPage extends UhcDriver {
 			return new AccountHomePage(driver);
 		} else if (currentUrl().contains("terminated-plan.html")) {
 			return new TerminatedHomePage(driver);
+		} else if (currentUrl().contains("testharness.html"))
+		{
+			return new TestHarness(driver);
 		}
 		return null;
 	}
