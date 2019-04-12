@@ -45,7 +45,8 @@ public class OrderPlanMaterialsAarpStepDefinition {
 	/**
 	* @todo : Verifying order materials page based on plan type attributes
 	*/
-	/*@Given("^registered Redesign member for Order Plan Materials with following attributes$")
+	/*tbd-remove
+	@Given("^registered Redesign member for Order Plan Materials with following attributes$")
 	public void registered_member_orderplanmaterials_redesign(
 			DataTable memberAttributes) throws InterruptedException {
 
@@ -152,20 +153,43 @@ public class OrderPlanMaterialsAarpStepDefinition {
 	
 	@Then("^the user should not see Order Materials Link for terminated member$")
 	public void the_user_should_not_see_Order_Materials_Link_for_terminated_member() throws Throwable {
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
-				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		boolean LinkPresent = accountHomePage.validateOrderMaterialsLink();
-		getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
-			Assert.assertTrue("Order Materials link ist dispalyed for Terminated Member ", !LinkPresent);
+		/* tbd-remove
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+					.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			boolean LinkPresent = accountHomePage.validateOrderMaterialsLink();
+			getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
+				Assert.assertTrue("Order Materials link ist dispalyed for Terminated Member ", !LinkPresent);
+		 */
+		if (MRScenario.isTestHarness.equalsIgnoreCase("YES")) {
+			System.out.println("This test should run on rally dashboard only, skipping for testharness");
+		} else {
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+					.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			boolean LinkPresent = accountHomePage.validateOrderMaterialsLink();
+			getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
+				Assert.assertTrue("Order Materials link ist dispalyed for Terminated Member ", !LinkPresent);
+		}
 	}
 
 	@Then("^user validates header navigation is not available for Terminated member$")
 	public void user_validates_header_navigation_is_not_available_for_Terminated_member() throws Throwable {
+		/* tbd-remove
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 		boolean NavigationPresent = accountHomePage.validateOrderMaterialsPageHeaderNavigation();
 		getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
 		Assert.assertTrue("Order Materials link is dispalyed for Terminated Member in B&C Page ", !NavigationPresent);
+		*/
+		if (MRScenario.isTestHarness.equalsIgnoreCase("YES")) {
+			System.out.println("This test should run on rally dashboard only, skipping for testharness");
+		} else {
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+					.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			boolean NavigationPresent = accountHomePage.validateOrderMaterialsPageHeaderNavigation();
+			getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
+			Assert.assertTrue("Order Materials link is dispalyed for Terminated Member in B&C Page ", !NavigationPresent);
+		}
+		
 	}
 
 
@@ -187,7 +211,8 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		
 		String option = givenAttributesMap.get("Option");
 		
-/*		if (!plantype.contentEquals("SHIP")){
+/* tbd-remove
+ 		if (!plantype.contentEquals("SHIP")){
 			System.out.println("**************Plan Tab to to Select is : "+plantype+"+++++++++++++");
 			boolean TabPresent = orderPlanMaterialsPage.navigatePlanTabs(plantype);
 		}
@@ -203,8 +228,9 @@ public class OrderPlanMaterialsAarpStepDefinition {
 			System.out.print("Order Plan Material Confirmation Page displayed");
 		}
 		else{
+/* tbd-remove	
 			//retry order submit
-/*			System.out.print("Order Plan Material Confirmation Page not displayed : Retrying Order Submission");
+ 		System.out.print("Order Plan Material Confirmation Page not displayed : Retrying Order Submission");
 			planMaterialConfirmationPage = orderPlanMaterialsPage.selectsOption(option);
 			if (planMaterialConfirmationPage != null) {
 				getLoginScenario().saveBean(PageConstantsMnR.PLAN_MATERIALS_CONFIRMATION_PAGE,
@@ -386,7 +412,8 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		}
 	}
 
-	/*@After
+	/* tbd-remove
+	@After
 	public void tearDown() {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.quit();
