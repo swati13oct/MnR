@@ -228,7 +228,7 @@ public class HSIDLoginPage extends UhcDriver {
 			//note: do not remove wait, need to give it enough time for the dashboard or error page to load
 			System.out.println("Start to wait for the dashboard (or some form of error page) to load...");
 			CommonUtility.checkPageIsReadyNew(driver);
-			waitToReachDashboard();
+			waitToReachDashboard();	//note: after page is completed state, still need this wait for the page to finish loading
 
 			if (driver.getCurrentUrl().equals("https://stage-medicare.uhc.com/")) {
 				Assert.fail("***** Error in loading  Redesign Account Landing Page ***** got redirect back to login page after answered security question");
@@ -264,7 +264,7 @@ public class HSIDLoginPage extends UhcDriver {
 					//note: do not remove wait, need to give it enough time for the dashboard or error page to load
 					System.out.println("Start to wait for the dashboard (or some form of error page) to load...");
 					CommonUtility.checkPageIsReadyNew(driver);
-					waitToReachDashboard();
+					waitToReachDashboard();  //note: after page is completed state, still need this wait for the page to finish loading
 
 					if (driver.getCurrentUrl().equals("https://stage-medicare.uhc.com/")) {
 						Assert.fail("***** Error in loading  Redesign Account Landing Page ***** got redirect back to login page after answered security question");
@@ -602,6 +602,7 @@ public class HSIDLoginPage extends UhcDriver {
 		return null;
 	}
 	
+	//note: do not remove this wait time
 	public void waitToReachDashboard() {
 		int y=0;
 		while (y < 20) {
@@ -609,14 +610,14 @@ public class HSIDLoginPage extends UhcDriver {
 				List<WebElement> header=driver.findElements(By.xpath("//h1"));
 				if (header.size() >0) {
 					System.out.println("Located some sort of header, assume page is comming");
-					Thread.sleep(2000); //just in case
+					Thread.sleep(2000); //just in case, let page settle down
 					break;
 				}
 				Thread.sleep(1000);
 				y=y+1;
 				System.out.println("Waiting for some form of header to show up... waited "+y+" sec");
-			} catch (UnhandledAlertException ae) {
-				System.out.println("Exception: "+ae);
+			} catch (UnhandledAlertException ae) {  //if getting alert error, stop and get out
+				System.out.println("Exception: "+ae); 
 				Assert.fail("***** Error in loading  Redesign Account Landing Page ***** Got Alert error");
 			} catch (InterruptedException e) {
 				//e.printStackTrace();
