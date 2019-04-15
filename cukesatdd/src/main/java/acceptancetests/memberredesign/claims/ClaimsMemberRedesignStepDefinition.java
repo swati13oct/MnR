@@ -451,10 +451,12 @@ public class ClaimsMemberRedesignStepDefinition {
 	 */
 	@When("^I navigate to the Claim Details page for federal members$")	
 	public void i_navigate_to_member_redesign_claim_details_page(){
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
+		ClaimDetailsPage newClaimDetailsPage =claimSummarypage.navigateToClaimDetailsPage();
+		//tbd AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 		
-		ClaimDetailsPage newClaimDetailsPage = accountHomePage.navigateToClaimDetailsPage();
-		System.out.println("claims-============"+newClaimDetailsPage);
+		//tbd ClaimDetailsPage newClaimDetailsPage = accountHomePage.navigateToClaimDetailsPage();
+		//tbd System.out.println("claims-============"+newClaimDetailsPage);
 		
 		//getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
 		if(newClaimDetailsPage != null)
@@ -1048,7 +1050,7 @@ public class ClaimsMemberRedesignStepDefinition {
 		String hasYourShareStr = memberAttributesMap.get("Has Your Share");
 		String domain = memberAttributesMap.get("Domain");
 		
-		boolean hasYourShare=false;;
+		boolean hasYourShare=false;
 		if (hasYourShareStr.equalsIgnoreCase("yes")) {
 			hasYourShare=true;
 		} else if (hasYourShareStr.equalsIgnoreCase("no")) {
@@ -1065,6 +1067,8 @@ public class ClaimsMemberRedesignStepDefinition {
 				System.out.println("Proceed to Claims Summary page");
 				ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario()
 						.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+				//don't bother if getting system error already
+				claimSummarypage.validateSystemErrorMsgNotExist();
 
 				//note: gather data on summary page for validation on detail page
 				System.out.println("Determine number of data rows on table");
