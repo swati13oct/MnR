@@ -6,11 +6,14 @@
  *
  */
 package acceptancetests.memberredesign.preeffective;
+import java.sql.DriverAction;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -54,32 +57,66 @@ public class PreEffectiveStepDefinition{
 	 * 
 	 */
 
-@Given("^verify that preeffective message is displayed on the home page$")
+@Given("^verify that preeffective message is displayed on the home page or test harness page$")
 public void verifyPreEffectiveMessageDisplayedOnDashboardHomePage() throws Throwable {
-	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 	
-	AccountHomePage.checkForIPerceptionModel(accountHomePage.driver);
-	accountHomePage.validatePreEffectiveMessagePresent();	
-    getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
+	if (MRScenario.environmentMedicare.equalsIgnoreCase("stage") & "NO".equalsIgnoreCase(MRScenario.isTestHarness))
+	{
+		
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		AccountHomePage.checkForIPerceptionModel(accountHomePage.driver);
+		System.out.println("Now checking for pre-effective message on Dashboard home page");
+		accountHomePage.validatePreEffectiveMessagePresent();	
+		getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
+	}
 	
-}
+	else if ((MRScenario.environmentMedicare.equalsIgnoreCase("team-h")) || (MRScenario.environmentMedicare.equalsIgnoreCase("stage") & "YES".equalsIgnoreCase(MRScenario.isTestHarness)))
+	{
+		TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+		System.out.println("Now checking for pre-effective header text on Team-h or stage test harness page");
+		testHarnessPage.validatePreEffectiveMessagePresent();	
+		System.out.println("Pre-effective text on header of test harness page was displayed.");
+	    getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE, testHarnessPage);
+	}
+	else {
+		System.out.println("Not verifying that preeffective message is displayed as the environment is not set to team-h or Stage");
+	}
+	}
+	
 
 @Given("^verify that preeffective message is displayed on the test harness page$")
 public void verifyPreEffectiveMessageDisplayedOnTestHarnessPage() throws Throwable {
+	
 	TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
 	testHarnessPage.validatePreEffectiveMessagePresent();	
     getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE, testHarnessPage);
 	
 }
 
-@Given("^verify that payment tab is displayed to Preeffective member on dashboard$")
+@Given("^verify that payment tab is displayed to Preeffective member on dashboard or test harness page$")
 public void verifyPaymentsTabNotDisplayedOnDashboardHomePage() throws Throwable {
-	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 	
-	AccountHomePage.checkForIPerceptionModel(accountHomePage.driver);
-	accountHomePage.validatePremiumPaymentTabNotDisplayed();	
-	getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
+	if (MRScenario.environmentMedicare.equalsIgnoreCase("stage") & "NO".equalsIgnoreCase(MRScenario.isTestHarness))
+	{
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		
+		AccountHomePage.checkForIPerceptionModel(accountHomePage.driver);
+		accountHomePage.validatePremiumPaymentTabDisplayed();	
+		getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
+	}
 	
+	else if ((MRScenario.environmentMedicare.equalsIgnoreCase("team-h")) || (MRScenario.environmentMedicare.equalsIgnoreCase("stage") & "YES".equalsIgnoreCase(MRScenario.isTestHarness)))
+	{
+		
+		System.out.println("Now checking for Payments tab on Team-h or stage test harness page");
+		TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+		testHarnessPage.validatePremiumPaymentTabIsDisplayed();	
+		System.out.println("Payments tab on Team-h or stage test harness page was displayed");
+		getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE, testHarnessPage);
+	}
+	else {
+		System.out.println("Not verifying that Premium payment tab is displayed as the environment is not set to team-h or Stage");
+	}
 }
 
 @Given("^verify that payment tab is displayed to Preeffective member on test harness page$")
@@ -98,14 +135,30 @@ public void verifyPaymentsPage() throws Throwable {
 	
 }
 
-@Then("^user clicks on the benefits and coverage tab on the dashboard home page$")
+@Then("^user clicks on the benefits and coverage tab on the dashboard home page or test harness page$")
 public void userClicksOnBenefitAndCoveragePage() throws Throwable {
-	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-	Thread.sleep(3000);
-	AccountHomePage.checkForIPerceptionModel(accountHomePage.driver);
-	BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.clickOnBenefitsandCoverageTab();
-	getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
+	if (MRScenario.environmentMedicare.equalsIgnoreCase("stage") & "NO".equalsIgnoreCase(MRScenario.isTestHarness))
+	{
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		Thread.sleep(3000);
+		AccountHomePage.checkForIPerceptionModel(accountHomePage.driver);
+		BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.clickOnBenefitsandCoverageTab();
+		getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
+		
+	}
+	else if ((MRScenario.environmentMedicare.equalsIgnoreCase("team-h")) || (MRScenario.environmentMedicare.equalsIgnoreCase("stage") & "YES".equalsIgnoreCase(MRScenario.isTestHarness)))
+	{
+		
+		System.out.println("Now clicking on Coverage and Benefits tab from Team-h or Stage test harness page");
+		TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+		BenefitsAndCoveragePage coverageandbenefitsPage = testHarnessPage.clickOnBenefitsandCoverageTab();
+		getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, coverageandbenefitsPage);
+		System.out.println("Now waiting for 20 seconds");
+	}
 	
+	else {
+		System.out.println("Not clicking on coverage & benefits tab as the environment is not set to team-h or Stage");
+	}
 }
 
 @Then("^user clicks on the benefits and coverage tab from Payments page$")
@@ -209,15 +262,33 @@ public void verifyCorrectTechnicalSupportPhoneNumberIsDisplayedOnClaimsPage() th
                
 }
 
-@Then("^verify that payment tab is not displayed to Preeffective member from secondary pages$")
-public void verifyPaymentTabIsNOTDisplayedOnClaimsPage() throws Throwable {
-	
-	ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario()
-			.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);   
-	ClaimSummarypage.checkForIPerceptionModel(newclaimsSummarypage.driver);
-	newclaimsSummarypage.verifyPaymentTabIsNotDisplayedForPreEffectiveMembers();
-	
+@Then("^verify that payment tab is displayed to Preeffective member from secondary pages$")
+public void verifyPaymentTabIsDisplayedOnClaimsPage(DataTable givenAttributes)throws Throwable {
+	/* Reading the given attribute from feature file */
+	List<DataTableRow> memberAttributesRow = givenAttributes
+			.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
 
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+				.get(0), memberAttributesRow.get(i).getCells().get(1));
+	}
+
+	String memberType = memberAttributesMap.get("Member Type");
+	/* Premium payment tab is always displayed to Individual members, therefore checking only for them*/
+	if (memberType.equalsIgnoreCase("preeffectiveIndMA")|| memberType.equalsIgnoreCase("preeffectiveIndMAPD")|| memberType.equalsIgnoreCase("preeffectiveIndPDP")) 
+	{	
+	
+		ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario()
+				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);   
+		ClaimSummarypage.checkForIPerceptionModel(newclaimsSummarypage.driver);
+		newclaimsSummarypage.verifyPaymentTabIsDisplayedForPreEffectiveMembers();
+	}
+	
+	else
+	{
+		System.out.println("Premium Payments tab was not validated and the step was skipped");
+	}
 }
 
 @Given("^the user clicks on Account Profile tab & selects Account Settings from the drop down$")
