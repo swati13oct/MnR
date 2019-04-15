@@ -280,10 +280,13 @@ public class HSIDLoginPage extends UhcDriver {
 				}
 			}  
 		}
-		else if (currentUrl().contains("testharness.html")
-				|| currentUrl().contains("/dashboard")) {
+		else if (currentUrl().contains("/dashboard")) {
 			System.out.println(driver.getCurrentUrl());
 			return new AccountHomePage(driver);
+		}
+			else if (currentUrl().contains("testharness.html")) {
+				System.out.println(driver.getCurrentUrl());
+				return new TestHarness(driver);
 		}
 		else {
 			System.out
