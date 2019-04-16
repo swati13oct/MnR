@@ -858,6 +858,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | 1417780 | PDP      | Individual_BnC | EffectivePDPUHC  | ENGLISH  |     2 | NoRider |
 
   #| 1417780 | PDP      | Group      | EffectivePDPUHC | ENGLISH  | 4   | NoRider |
+  
   @benefitsAndCoverage38 @PlanBFSJMPLinks @Feb_release_2019 @gladiators
   Scenario Outline: UID: <UID> -plan: <planType> -Identifier: <Identifier> - Verify jump links for a SSUP NoRider member
     Given login with following details logins in the member portal and validate elements
