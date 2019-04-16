@@ -576,7 +576,7 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 	public static final String ProfilePreferencesPage = "ProfilePreferencesPage";
 
 	public static final String RALLY_DASHBOARD_PAGE = "RallyDashboardPage";
-	public static final String TEST_HARNESS_PAGE = "TestHarnessPage";
+	public static final String TEST_HARNESS_PAGE = "testHarnessPage";
 	public static final String DRUG_COST_ESTIMATOR_PAGE_VBF = "drugcostestimatorPage";
 
 	public static final String MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE = "memberRedesignHealthAndWellnessPage";
