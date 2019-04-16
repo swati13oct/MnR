@@ -1754,6 +1754,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		hsidAccountLink.click();
 		Thread.sleep(10000);
 		Assert.assertTrue(driver.getTitle().equalsIgnoreCase("HealthSafe ID"));
+		driver.navigate().back();
 	}
 
 	public void validateHealthSafeAccountLinkNOTPresent() throws InterruptedException {
