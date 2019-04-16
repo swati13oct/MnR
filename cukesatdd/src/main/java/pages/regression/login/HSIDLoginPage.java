@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -196,8 +197,10 @@ public class HSIDLoginPage extends UhcDriver {
 		signInButton.click();
 
 		//wait for some form of header to show
-		System.out.println("Check to see if SecurityQuestion page is loaded, timeout in 35 sec...");
-		CommonUtility.waitForPageLoadNew(driver, authQuestionlabel, 35);
+		CommonUtility.waitForPageLoad(driver, authQuestionlabel, 35);
+		if (!validate(authQuestionlabel)) {
+			System.out.println("waited 35 sec and still not seeing the authQuestionLabel showing...");
+		}
 		/* tbd try {
 			Thread.sleep(35000);
 		} catch (InterruptedException e) {
@@ -225,24 +228,11 @@ public class HSIDLoginPage extends UhcDriver {
 			//note: do not remove wait, need to give it enough time for the dashboard or error page to load
 			System.out.println("Start to wait for the dashboard (or some form of error page) to load...");
 			CommonUtility.checkPageIsReadyNew(driver);
-			int x=0;
-			while (x < 20) {
-				try {
-					List<WebElement> header=driver.findElements(By.xpath("//h1"));
-					if (header.size() >0) {
-						System.out.println("Located some sort of header, assume page is comming");
-						Thread.sleep(2000); //just in case
-						break;
-					}
-					Thread.sleep(1000);
-					x=x+1;
-					System.out.println("Waiting for some form of header to show up... waited "+x+" sec");
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			} 
+			waitToReachDashboard();	//note: after page is completed state, still need this wait for the page to finish loading
 
-
+			if (driver.getCurrentUrl().equals("https://stage-medicare.uhc.com/")) {
+				Assert.fail("***** Error in loading  Redesign Account Landing Page ***** got redirect back to login page after answered security question");
+			}
 			//note: workaround - get URL again to check and see if it goes to the no-email.html page instead
 			if (driver.getCurrentUrl().contains("login/no-email.html")) {
 				System.out.println("User encounted no-email page, will enter email address to proceed");
@@ -274,23 +264,11 @@ public class HSIDLoginPage extends UhcDriver {
 					//note: do not remove wait, need to give it enough time for the dashboard or error page to load
 					System.out.println("Start to wait for the dashboard (or some form of error page) to load...");
 					CommonUtility.checkPageIsReadyNew(driver);
-					int y=0;
-					while (y < 20) {
-						try {
-							List<WebElement> header=driver.findElements(By.xpath("//h1"));
-							if (header.size() >0) {
-								System.out.println("Located some sort of header, assume page is comming");
-								Thread.sleep(2000); //just in case
-								break;
-							}
-							Thread.sleep(1000);
-							y=y+1;
-							System.out.println("Waiting for some form of header to show up... waited "+y+" sec");
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-					} 
+					waitToReachDashboard();  //note: after page is completed state, still need this wait for the page to finish loading
 
+					if (driver.getCurrentUrl().equals("https://stage-medicare.uhc.com/")) {
+						Assert.fail("***** Error in loading  Redesign Account Landing Page ***** got redirect back to login page after answered security question");
+					}
 					/* tbd try {
 						Thread.sleep(20000);
 					} catch (InterruptedException e) {
@@ -302,10 +280,13 @@ public class HSIDLoginPage extends UhcDriver {
 				}
 			}  
 		}
-		else if (currentUrl().contains("testharness.html")
-				|| currentUrl().contains("/dashboard")) {
+		else if (currentUrl().contains("/dashboard")) {
 			System.out.println(driver.getCurrentUrl());
 			return new AccountHomePage(driver);
+		}
+			else if (currentUrl().contains("testharness.html")) {
+				System.out.println(driver.getCurrentUrl());
+				return new TestHarness(driver);
 		}
 		else {
 			System.out
@@ -317,9 +298,6 @@ public class HSIDLoginPage extends UhcDriver {
 			alert.accept();
 		}
 		
-		System.out.println("Not Security question page or test harness page or Account Home Page...wait 15 sec and check again for last attempt");
-		
-		
 		/* tbd
 		try {
 			Thread.sleep(15000);
@@ -328,18 +306,19 @@ public class HSIDLoginPage extends UhcDriver {
 			e.printStackTrace();
 		}*/
 
-		if (currentUrl().contains("testharness.html")
-				|| currentUrl().contains("/dashboard")) {
+		if (currentUrl().contains("/dashboard")) {
 
 			System.out.println(driver.getCurrentUrl());
-			return new TestHarness(driver);	//------ test
-			//return new AccountHomePage(driver);
+			return new AccountHomePage(driver);
 		} else if (currentUrl().contains("home/my-account-home.html")
 				|| currentUrl().contains("/login.html")) {
 
 			return new AccountHomePage(driver);
 		} else if (currentUrl().contains("terminated-plan.html")) {
 			return new TerminatedHomePage(driver);
+		} else if (currentUrl().contains("testharness.html"))
+		{
+			return new TestHarness(driver);
 		}
 		return null;
 	}
@@ -624,6 +603,29 @@ public class HSIDLoginPage extends UhcDriver {
 				return new SaveProfilePrefrencePage(driver);			
 						}
 		return null;
+	}
+	
+	//note: do not remove this wait time
+	public void waitToReachDashboard() {
+		int y=0;
+		while (y < 20) {
+			try {
+				List<WebElement> header=driver.findElements(By.xpath("//h1"));
+				if (header.size() >0) {
+					System.out.println("Located some sort of header, assume page is comming");
+					Thread.sleep(2000); //just in case, let page settle down
+					break;
+				}
+				Thread.sleep(1000);
+				y=y+1;
+				System.out.println("Waiting for some form of header to show up... waited "+y+" sec");
+			} catch (UnhandledAlertException ae) {  //if getting alert error, stop and get out
+				System.out.println("Exception: "+ae); 
+				Assert.fail("***** Error in loading  Redesign Account Landing Page ***** Got Alert error");
+			} catch (InterruptedException e) {
+				//e.printStackTrace();
+			}
+		} 
 	}
 
 }

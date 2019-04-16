@@ -55,5 +55,11 @@ public class AttendCommunityMeetingStepDefinitionAARP {
 					Assert.fail("Error in navigating to the Uhc community page");
 		
 	}
-	
+	@When("^the user validates elements on the page$")
+	public void validate_elements(){
+		RequestHelpAndInformationPage requestHelpAndInformationPage = (RequestHelpAndInformationPage) getLoginScenario().getBean(PageConstants.REQUEST_MORE_HELP_INFORMATION_PAGE);
+		if(requestHelpAndInformationPage.validatelementsonCommunitymeeting());
+		
+		
+	}
 }

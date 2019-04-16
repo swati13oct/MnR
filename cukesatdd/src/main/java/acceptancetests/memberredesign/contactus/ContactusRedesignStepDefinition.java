@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.contactus.ContactUsPage;
+import pages.regression.testharness.TestHarness;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
@@ -98,10 +99,14 @@ public class ContactusRedesignStepDefinition {
 		 */
 		@When("^the user navigates to contact us page in UHC site$")
 		public void validates_contactUs_Redesign_Page() {
-			
-			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-			
-			ContactUsPage contactUsPage = accountHomePage.navigateToContactUsPage();
+			ContactUsPage contactUsPage;
+			if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+				TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+				contactUsPage  = testHarness.navigateToContactUsPageFromTestHarnessPage();
+			} else {
+				AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+				contactUsPage = accountHomePage.navigateToContactUsPage();
+			}
 			if(contactUsPage != null)				
 				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
 						contactUsPage);

@@ -3,6 +3,7 @@ package pages.regression.testharness;
 import java.util.List;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,6 +19,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.memberrdesignVBF.BenefitsAndCoveragePage;
+import pages.regression.benefitandcoverage.*;
 import pages.regression.claims.*;
 import pages.regression.contactus.ContactUsPage;
 import pages.memberrdesignVBF.DrugCostEstimatorPage;
@@ -200,6 +202,13 @@ public class TestHarness extends UhcDriver {
 	@FindBy(id = "premiumpayment_4")
 	private WebElement premPaymentsTab;
 	
+	@FindBy(xpath = "//div[@id='ui-view-page']//a[@track='ORDER_MATERIALS']")
+	private WebElement OrderMaterial_Dashboard;
+	
+	@FindBy(id = "coveragebenefits_2")
+	private WebElement coverageandbenefitslink;
+	
+
 	String category = null;
 
 	public TestHarness(WebDriver driver) {
@@ -376,6 +385,21 @@ public class TestHarness extends UhcDriver {
 		jse.executeScript("window.scrollBy(0,-500)", "");
 		CommonUtility.waitForPageLoad(driver, contactUsPageLink, 30);
 		validateNew(contactUsPageLink);
+		contactUsPageLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_60);
+		if (driver.getTitle().trim().contains("Contact Us")) {
+			return new ContactUsPage(driver);
+		}
+		return null;
+	}
+	
+	public ContactUsPage navigateToContactUsPageFromTestHarnessPage() {
+
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,-500)", "");
+		CommonUtility.waitForPageLoad(driver, contactUsPageLink, 30);
+		validateNew(testHarnessContactUsPageLink);
 		contactUsPageLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_60);
@@ -828,5 +852,19 @@ public class TestHarness extends UhcDriver {
 	public void validatePremiumPaymentTabIsDisplayed() {
 		validateNew(premPaymentsTab);
 		
+	}
+	
+	public boolean validateOrderMaterialsLink() {
+		if (validate(OrderMaterial_Dashboard))
+			return true;
+		return false;
+	}
+	
+	public pages.regression.benefitandcoverage.BenefitsAndCoveragePage clickOnBenefitsandCoverageTab() throws InterruptedException {
+		System.out.println("Now clicking on Benefits and Coverage Tab on Dashboard");
+		coverageandbenefitslink.click();
+		System.out.println("Now waiting for 20 seconds");
+		return new pages.regression.benefitandcoverage.BenefitsAndCoveragePage(driver);
+
 	}
 }
