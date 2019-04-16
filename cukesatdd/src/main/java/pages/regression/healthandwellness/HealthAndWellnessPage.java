@@ -68,7 +68,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 	private WebElement learnmorelink;
 	
 	@FindBy(tagName="arcade-header")
-	private WebElement shadowRoot;
+	private WebElement shadowRootHeader;
 
 	public HealthAndWellnessPage(WebDriver driver){
 		super(driver);
@@ -102,7 +102,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 					waitforElement(titleText);
 				} else {
 					System.out.println("Unable to Able to locate Rally or testharness HW button, last attemp for shadow-root");
-					locateAndClickHealthWelnessWithinShadowRoot();
+					locateAndClickElementWithinShadowRoot(shadowRootHeader, "#main-nav > div > div > div > a[href*='health-and-wellness.html']");
 				}
 		}
 	}
@@ -216,7 +216,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 		} else {
 			System.out.println("Not the usual dashboard header, not testharness header, last attempt to see if it's in shadow-root");
 			//last try to see if it's shadowroot element
-			locateHealthWelnessWithinShadowRoot();
+			locateElementWithinShadowRoot(shadowRootHeader, "#main-nav > div > div > div > a[href*='health-and-wellness.html']");
 		}
 		/* tbd-remove
 		try {
@@ -253,17 +253,15 @@ public class HealthAndWellnessPage extends UhcDriver{
 		return ele;
 	}
 	
-	public void locateHealthWelnessWithinShadowRoot() {
-		if (validate(shadowRoot)) {
+	public void locateElementWithinShadowRoot(WebElement shadowRootElement, String inputCssSelector) {
+		if (validate(shadowRootElement)) {
 			System.out.println("located shadow-root element, attempt to process further...");
-			WebElement root1=expandRootElement(shadowRoot);
+			WebElement root1=expandRootElement(shadowRootElement);
 			try {
-				WebElement hwButton=root1.findElement(By.cssSelector("#main-nav > div > div > div > a[href*='health-and-wellness.html']"));
-				//WebElement hwButton=root1.findElement(By.cssSelector("#main-nav > div > div > div > a:nth-child(6)"));
-								
-				Assert.assertTrue("Dashboard header is not displayed", validate(hwButton));
+				WebElement element=root1.findElement(By.cssSelector(inputCssSelector));
+				Assert.assertTrue("Dashboard header is not displayed", validate(element));
 			} catch (Exception e) {
-				System.out.println("can't locate hwButton. Exception e="+e);
+				System.out.println("can't locate element. Exception e="+e);
 				Assert.assertTrue("Dashboard header not functioning as expected", false);
 			}
 		} else {
@@ -272,19 +270,18 @@ public class HealthAndWellnessPage extends UhcDriver{
 		}
 	}
 
-	public void locateAndClickHealthWelnessWithinShadowRoot() {
-		if (validate(shadowRoot)) {
+	public void locateAndClickElementWithinShadowRoot(WebElement shadowRootElement, String inputCssSelector) {
+		if (validate(shadowRootElement)) {
 			System.out.println("located shadow-root element, attempt to process further...");
-			WebElement root1=expandRootElement(shadowRoot);
+			WebElement root1=expandRootElement(shadowRootElement);
 			try {
-				WebElement hwButton=root1.findElement(By.cssSelector("#main-nav > div > div > div > a[href*='health-and-wellness.html']"));
-				//WebElement hwButton=root1.findElement(By.cssSelector("#main-nav > div > div > div > a:nth-child(6)"));
-				Assert.assertTrue("Dashboard header is not displayed", validate(hwButton));
-				System.out.println("HW button from top menu is located, click it...");
-				hwButton.click();
+				WebElement element=root1.findElement(By.cssSelector(inputCssSelector));
+				Assert.assertTrue("Dashboard header is not displayed", validate(element));
+				System.out.println("element is located, click it...");
+				element.click();
 				waitforElement(titleText);
 			} catch (Exception e) {
-				System.out.println("can't locate hwButton. Exception e="+e);
+				System.out.println("can't locate element. Exception e="+e);
 				Assert.assertTrue("Dashboard header not functioning as expected", false);
 			}
 		} else {
