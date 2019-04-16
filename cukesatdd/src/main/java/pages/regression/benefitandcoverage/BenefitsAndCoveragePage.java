@@ -846,7 +846,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                private WebElement PDFUpdatedText;
                
                //note: add to support SSUP
-               @FindBy(xpath="//*[@class='subtitle atdd-bnc-exclusivehearing-subtitle']")
+               @FindBy(xpath="//h4[@class='h4 margin-extra-small atdd-benefitssummary-exclusivehearing']")
               private WebElement ssupExclusiveHearingSavings;
                
                @FindBy(xpath="//*[@class='subtitle atdd-benefitssummary-vision']")
