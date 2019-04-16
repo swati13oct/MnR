@@ -196,6 +196,11 @@ public class MRScenario {
 		}
 	}
 		
+		public static List<String> getTagList() {
+		List<String> tagsList = atdd.framework.GlobalBeforeHook.tagsList;
+		return tagsList;
+		}
+		
 		
 		public static String getCsvName() {
 
@@ -208,19 +213,13 @@ public class MRScenario {
 				String tagName=it.next();
 				
 				
-				 if  (tagName.equalsIgnoreCase("@MemberVBF")){
-						
-						if(environment.contains("team-ci")){
-							csvName = "MemberRedesign-VBF-Teamci.csv";
-						}
-					  
-				else {
-					csvName = "MemberRedesign-VBF.csv";
-				}
-			}
-				
-				 else if ((environment.equalsIgnoreCase("team-a")|| (environment.equalsIgnoreCase("team-h")) || (environment.equalsIgnoreCase("team-e")) || (environment.equalsIgnoreCase("team-f")) || (environment.equalsIgnoreCase("team-g")) || (environment.equalsIgnoreCase("team-c")) || (environment.equalsIgnoreCase("team-t")))) {
-				csvName= "MemberRedesign-UUID.csv";
+				  if  (tagName.equalsIgnoreCase("@MemberVBF") && environment.contains("team-ci")){
+						csvName = "MemberRedesign-VBF-Teamci.csv";
+								
+				} else if ((environment.equalsIgnoreCase("team-a")|| (environment.equalsIgnoreCase("team-h")) || (environment.equalsIgnoreCase("team-e")) || (environment.equalsIgnoreCase("team-f")) || (environment.equalsIgnoreCase("team-g")) || (environment.equalsIgnoreCase("team-c")) || (environment.equalsIgnoreCase("team-t")))) {
+					csvName= "MemberRedesign-UUID.csv";
+				 }else  if(tagName.equalsIgnoreCase("@MemberVBF") && environment.contains("team-ci1")){
+							csvName = "MemberRedesign-VBF.csv";
 				 }
 				 /* note: Dec2018 - comment out because this section caused stage run not to use UMS-Member-Type.csv
 					else{

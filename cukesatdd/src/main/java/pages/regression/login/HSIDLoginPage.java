@@ -150,13 +150,7 @@ public class HSIDLoginPage extends UhcDriver {
 
 	public HsidRegistrationPersonalInformationPage clickRegister() {
 		driver.get(REGIRATION_URL);
-		/*
-		 * if(registerNow.isDisplayed()){ registerNow.click(); try {
-		 * Thread.sleep(5000); } catch (InterruptedException e) { // TODO
-		 * Auto-generated catch block e.printStackTrace(); } return new
-		 * HsidRegistrationPersonalInformationPage(driver); }else{
-		 * Assert.assertTrue("Register now button is not displayed", false); }
-		 */
+	
 		return new HsidRegistrationPersonalInformationPage(driver);
 	}
 
@@ -197,6 +191,7 @@ public class HSIDLoginPage extends UhcDriver {
 		signInButton.click();
 
 		//wait for some form of header to show
+
 		CommonUtility.waitForPageLoad(driver, authQuestionlabel, 35);
 		if (!validate(authQuestionlabel)) {
 			System.out.println("waited 35 sec and still not seeing the authQuestionLabel showing...");
@@ -214,10 +209,8 @@ public class HSIDLoginPage extends UhcDriver {
 
 			ConfirmSecurityQuestion cs = new ConfirmSecurityQuestion(driver);
 			try {
-				//tbd Thread.sleep(10000);
 				cs.enterValidSecurityAnswer();
 				System.out.println(driver.getCurrentUrl());
-				//tbd Thread.sleep(20000);
 				System.out.println("Check to see if document.readyState is ready...");
 				CommonUtility.checkPageIsReadyNew(driver);
 			} catch (Exception e) {
@@ -298,14 +291,6 @@ public class HSIDLoginPage extends UhcDriver {
 			Alert alert = driver.switchTo().alert();
 			alert.accept();
 		}
-		
-		/* tbd
-		try {
-			Thread.sleep(15000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
 
 		if (currentUrl().contains("/dashboard")) {
 			System.out.println(driver.getCurrentUrl());
@@ -320,6 +305,7 @@ public class HSIDLoginPage extends UhcDriver {
 		}
 		return null;
 	}
+
 
 	public void emailconfirmed() {
 		// TODO Auto-generated method stub
@@ -353,11 +339,6 @@ public class HSIDLoginPage extends UhcDriver {
 				Thread.sleep(20000);
 			}
 
-			/*
-			 * if (validate(iPerceptionPopUp)) {
-			 * System.out.println("iPerceptionPopUp is Displayed");
-			 * iPerceptionPopUp.click(); }
-			 */
 		} catch (Exception e) {
 			System.out.println("iPerception Pop Up not displayed");
 		}
@@ -411,10 +392,7 @@ public class HSIDLoginPage extends UhcDriver {
 					+ MRConstants.REDESIGN_LOGIN_URL);
 			System.out.println("user is on Testharness Environment");
 		}
-		/*
-		 * else { start(PAGE_URL_TEAM_MEDICARE_TESTHARNESS);
-		 * System.out.println("User is on Medicare Test harness page"); }
-		 */
+	
 	}
 
 	public void verifyIfIperceptionSmileySurveyIsDisplayed()
