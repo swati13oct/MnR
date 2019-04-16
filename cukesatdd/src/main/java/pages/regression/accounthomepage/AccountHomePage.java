@@ -2406,22 +2406,15 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	/*
-	 * This method checks that Premium Payment tab is not displayed for
+	 * This method checks that Premium Payment tab is displayed for
 	 * Pre-Effective members
 	 */
-	public void validatePremiumPaymentTabNotDisplayed() throws InterruptedException {
+	public void validatePremiumPaymentTabDisplayed() throws InterruptedException {
 		Thread.sleep(2000);
 		System.out.println("Now checking for Premium Payment Tab on Dashboard");
-
-		try {
-			driver.findElement(By.xpath("//a[contains(text(),'Premium Payments')]"));
-			System.out.println("Premium Payment tab was displayed on Dashboard");
-			
-		} catch (NoSuchElementException e) {
-			// TODO Auto-generated catch block
-			Assert.fail("Premium Payment tab was not displayed on Dashboard, Test Step is failed ");
-		}
-
+		Assert.assertTrue(driver.findElement(By.xpath("//a[contains(text(),'Premium Payments')]")).isDisplayed());
+		System.out.println("Premium Payment tab was displayed on Dashboard");
+		
 	}
 
 	/*
@@ -2433,16 +2426,16 @@ public class AccountHomePage extends UhcDriver {
 		String preMessage_text = preEffectiveMessage.getAttribute("innerText");
 		System.out.println("Message displayed on Dashboard for this member is:" + preMessage_text);
 		Assert.assertTrue(preMessage_text.contains(
-				"Use this site to find helpful information while you�re getting ready for your plan to start on"));
+				"Use this site to find helpful information while"));
 		System.out.println("First assert on the preeffective message is passed");
 		Assert.assertTrue(preMessage_text.contains(
-				"Depending on your plan coverage, you can find a provider, locate a pharmacy, or view important plan documents."));
+				"Get early access to your new plan materials and manage your document delivery preferences."));
 		System.out.println("Second assert on the preeffective message is passed");
 	}
 
 	public BenefitsAndCoveragePage clickOnBenefitsandCoverageTab() throws InterruptedException {
-		System.out.println("Now clicking on Benefits and Coverage Tab on Dashboard");
-		driver.findElement(By.xpath("//a[contains(text(),'Coverage & Benefits')]")).click();
+		System.out.println("Now navigating to Coverage and Benefits page");
+	    driver.findElement(By.xpath("//a[contains(text(),'Coverage & Benefits')]")).click();
 		System.out.println("Now waiting for 20 seconds");
 		return new BenefitsAndCoveragePage(driver);
 
