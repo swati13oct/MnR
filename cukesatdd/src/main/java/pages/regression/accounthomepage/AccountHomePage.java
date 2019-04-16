@@ -2290,7 +2290,7 @@ public class AccountHomePage extends UhcDriver {
 
 	public BenefitsAndCoveragePage navigateDirectToBnCPag() {
 
-		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
+		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage") && ("NO".equalsIgnoreCase(MRScenario.isTestHarness))) {
 			System.out.println("user is on Stage login page");
 			// CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);
 			if (driver.getCurrentUrl().contains("/dashboard"))
@@ -2314,7 +2314,16 @@ public class AccountHomePage extends UhcDriver {
 
 			}
 		}
+		else if (MRScenario.environmentMedicare.equals("stage") && ("YES".equalsIgnoreCase(MRScenario.isTestHarness))){
+			System.out.println("TEST - stage testharness page="+ PAGE_URL + "content/medicare/member/benefits/overview.html");
+			driver.navigate().to(PAGE_URL + "content/medicare/member/benefits/overview.html");
+			System.out.println(driver.getCurrentUrl());
+			if (driver.getTitle().contains("Benefits")) {
+				System.out.println(driver.getTitle());
+				return new BenefitsAndCoveragePage(driver);
+			}
 
+		} 
 		else if (MRScenario.environmentMedicare.equals("team-h") || MRScenario.environmentMedicare.equals("test-a")){
 
 			driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");

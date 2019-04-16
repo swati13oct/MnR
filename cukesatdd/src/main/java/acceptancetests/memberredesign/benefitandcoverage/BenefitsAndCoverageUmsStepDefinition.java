@@ -30,6 +30,7 @@ import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.member_deprecated.bluelayer.LoginPage2;
 import pages.regression.benefitandcoverage.ValueAddedServicepage;
 import pages.regression.formsandresources.FormsAndResourcesPage;
+import pages.regression.testharness.TestHarness;
 import pages.redesign_deprecated.BenefitsCoveragePage;
 import pages.redesign_deprecated.RedesignLoginPage;
 import pages.redesign_deprecated.UlayerHomePage;
@@ -155,10 +156,19 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@Then("^The user navigate to Benefits and Coverage page$")
 	public void user_views_BenefitsAndCoveragejenkins1() {
 		System.out.println("***The user navigates to Benefits and Coverage page***");
+		BenefitsAndCoveragePage benefitsCoveragePage=null;
+		if (("YES".equalsIgnoreCase(MRScenario.isTestHarness))) {
+			TestHarness testharnessHomepage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
 
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			benefitsCoveragePage = testharnessHomepage.navigateDirectToBnCPagFromTestharnessPage();
+		} else {
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 
-		BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag();
+			benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag();
+		}
+		//tbd AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+
+		//tbd BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag();
 
 		if (benefitsCoveragePage != null) {
 			getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);

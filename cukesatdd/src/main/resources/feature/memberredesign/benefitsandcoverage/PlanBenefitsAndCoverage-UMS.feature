@@ -132,7 +132,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | TID   | planType | memberType       |
       | 15087 | MAPD     | NICEBenefits_BnC |
 
-  @benefitsAndCoverage9 @BenefitsForAlPeehipMember @regression @regressionMember
+  @benefitsAndCoverage9 @BenefitsForAlPeehipMember @regression @regressionMember 
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the benefits for an AL peehip member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -144,7 +144,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | TID   | planType | memberType |
       | 15092 | Peehip   | Group_BnC  |
 
-  @benefitsAndCoverage10 @BenefitsForMAMedsupSSUPMember @regression @regressionMember
+  @benefitsAndCoverage10 @BenefitsForMAMedsupSSUPMember @regression @regressionMember @tamzid
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the Benefits for a  MA Member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -179,7 +179,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     And the user validates the benefits for a combo member
 
     Examples: 
-      | TID   | planType | memberType       |
+      | TID   | planType | memberType      |
       | 15091 | Combo    | MAPDANDSHIP_BnC |
 
   # note: Due to timing that it takes for GPS to do the update (add or remove),
