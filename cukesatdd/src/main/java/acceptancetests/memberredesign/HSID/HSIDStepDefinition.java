@@ -11,6 +11,7 @@ import java.util.Set;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,6 @@ import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
-import atdd.framework.UhcDriver;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -30,7 +30,6 @@ import gherkin.formatter.model.DataTableRow;
 
 import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.regression.accounthomepage.AccountHomePage;
-import pages.regression.drugcostestimator.DrugCostEstimatorPage;
 import pages.regression.login.AssistiveRegistrationPage;
 import pages.regression.login.DeregisterPage;
 import pages.regression.login.HSIDLoginPage;
@@ -54,7 +53,7 @@ public class HSIDStepDefinition {
 
 	@And("^login with following details logins in the member portal and validate elements$")
 	public void login_with_member(DataTable memberAttributes)
-			throws InterruptedException {
+			throws Exception {
 
 		List<DataTableRow> memberAttributesRow = memberAttributes
 				.getGherkinRows();
@@ -128,37 +127,70 @@ public class HSIDStepDefinition {
 		if ("YES".equalsIgnoreCase(MRScenario.isHSIDCompatible)) {
 			HSIDLoginPage loginPage = new HSIDLoginPage(wd);
 			loginPage.validateelements();
-			AccountHomePage accountHomePage = (AccountHomePage) loginPage
-					.doLoginWith(userName, pwd);
+
+			if (("YES").equalsIgnoreCase(MRScenario.isTestHarness)) {
+				TestHarness testHarnessPage=null;
+				try {
+					testHarnessPage = (TestHarness) loginPage.doLoginWith(userName, pwd);
+				} catch (UnhandledAlertException ae) {
+					System.out.println("Exception: "+ae);
+					Assert.fail("***** Error in loading  Redesign Account Landing Page ***** Got Alert error");
+				}
+				if (testHarnessPage != null) {
+					getLoginScenario().saveBean(PageConstantsMnR.TEST_HARNESS_PAGE, testHarnessPage);
+					return;
+				} else {
+					Assert.fail("Login not successful...");
+				}
+			}
+			AccountHomePage accountHomePage=null;
+			try {
+				accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
+			} catch (UnhandledAlertException ae) {
+				System.out.println("Exception: "+ae);
+				Assert.fail("***** Error in loading  Redesign Account Landing Page ***** Got Alert error");
+			}
 			if (accountHomePage != null) {
-				getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,
-						accountHomePage);
+				getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
 				Assert.assertTrue(true);
-		
 			} else {
 				//tbd Assert.fail("***** Error in loading Redesign Account Landing Page *****");
 				// note: accountHomePage==null, instead of fail it right away, check to see if it is worth it go workaround it
-				System.out.println("accountHomePage==null, try one more check to see if workaround can be applied before calling it quit");
-				try {
-					WebElement sorry=wd.findElement(By.xpath("//h1[@translate='INTERNAL_ERROR_SORRY']")); 
-					if ((testDataType==null) && (category==null) && (planType==null)) {
-						System.out.println("not workaround candidate, don't have enough info to determine if woorkaround is possible, test doesn't have the 'Test Data Type' or 'Member Type' or 'Plan Type' input ");
-						Assert.fail("***** Error in loading  Redesign Account Landing Page *****");
-					} else {
+				if ((testDataType==null) && (category==null) && (planType==null)) {
+					System.out.println("not workaround candidate, don't have enough info to determine if woorkaround is possible, test doesn't have the 'Test Data Type' or 'Member Type' or 'Plan Type' input ");
+					Assert.fail("***** Error in loading  Redesign Account Landing Page *****");
+				} else {
+					//System.out.println("accountHomePage==null, try one more check to see if workaround can be applied before calling it quit");
+					boolean hasSorryError=false;
+					boolean hasWentWrongError=false;
+					try { //check to see if it has sorry error
+						WebElement sorry=wd.findElement(By.xpath("//h1[@translate='INTERNAL_ERROR_SORRY']")); 
+						if (sorry.isDisplayed()) {
+							hasSorryError=true;
+						}
+					} catch (Exception e) {}
+					try { //check to see if it has something went wrong eeror
+						WebElement wentWrong=wd.findElement(By.xpath("//h1[contains(text(),'Something went wrong')]"));
+						if (wentWrong.isDisplayed()) {
+							hasWentWrongError=true;
+						}
+					} catch (Exception e) {}
+					if (hasSorryError && isPotentialSorryWorkaroundCandidate()) {
 						//note: has the potential for sorry workaround if getting sorry error
 						Thread.sleep(1500);	//sometimes the sorry text take a bit longer to load
-						if (sorry.isDisplayed()) {
+						try {
 							boolean result=workaroundSorryErrorPage(wd, testDataType, category, planType);
 							Assert.assertTrue("***** Error in loading Redesign Account Landing Page ***** Got error for 'Sorry. it's not you, it's us'", result);
-
-						} else {
-							System.out.println("Not the 'sorry' login error, it's some other login error");
-							Assert.fail("***** Error in loading Redesign Account Landing Page *****");
+						} catch (Exception e) {
+							System.out.println("Exception: "+e);
+							Assert.fail("***** Error in loading  Redesign Account Landing Page *****");
 						}
+					} else if(hasWentWrongError) {
+						Assert.assertTrue("***** Error in loading Redesign Account Landing Page ***** Got error for 'Something went wrong'", false);
+					} else {
+						System.out.println("Not the 'sorry' or 'something went wrong' login error, it's some other login error");
+						Assert.fail("***** Error in loading Redesign Account Landing Page ***** Got error that's NOT 'Sorry. it's not you, it's us' OR 'Something went wrong'");
 					}
-				} catch(Exception e) {
-					System.out.println("Exception: "+e);
-					Assert.fail("***** Error in loading  Redesign Account Landing Page *****");
 				}
 			}
 		} else {
@@ -178,22 +210,29 @@ public class HSIDStepDefinition {
 					getLoginScenario()
 							.saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,
 									accountHomePage);*/
-				
-				TestHarness testHarnessPage = (TestHarness) loginPage
-						.loginWithLegacy(userName, pwd);
+				TestHarness testHarnessPage=null;
+				try {
+					testHarnessPage = (TestHarness) loginPage.loginWithLegacy(userName, pwd);
+				} catch (UnhandledAlertException ae) {
+					System.out.println("Exception: "+ae);
+					Assert.fail("***** Error in loading  Redesign Account Landing Page ***** Got Alert text : There was an error while processing login");
+				}
 				if (testHarnessPage != null) {
-					getLoginScenario().saveBean(PageConstantsMnR.TEST_HARNESS_PAGE,
-							testHarnessPage);
+					getLoginScenario().saveBean(PageConstantsMnR.TEST_HARNESS_PAGE,testHarnessPage);
 				} else {
 					Assert.fail("Login not successful...");
 				}
 			} else {
 				LoginPage loginPage = new LoginPage(wd);
-				RallyDashboardPage rallyDashboard = (RallyDashboardPage) loginPage
-						.loginWithLegacy(userName, pwd);
+				RallyDashboardPage rallyDashboard=null;
+				try {
+					rallyDashboard = (RallyDashboardPage) loginPage.loginWithLegacy(userName, pwd);
+				} catch (UnhandledAlertException ae) {
+					System.out.println("Exception: "+ae);
+					Assert.fail("***** Error in loading  Redesign Account Landing Page ***** Got Alert text : There was an error while processing login");
+				}
 				if (rallyDashboard != null) {
-					getLoginScenario().saveBean(
-							PageConstants.RALLY_DASHBOARD_PAGE, rallyDashboard);
+					getLoginScenario().saveBean(PageConstants.RALLY_DASHBOARD_PAGE, rallyDashboard);
 				} else {
 					Assert.fail("Login not successful...");
 				}
@@ -614,7 +653,7 @@ public class HSIDStepDefinition {
 			accountHomePage.setAttemptSorryWorkaround(workaroundInfoMap);
 			if (type.contains("reward")) { //proceed to switch page now
 				accountHomePage.workaroundAttempt("reward");
-			}
+			} 
 			getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
 			return true;
 		} else {
@@ -623,6 +662,21 @@ public class HSIDStepDefinition {
 			return false;
 		}
 	}
+	
+	public boolean isPotentialSorryWorkaroundCandidate(){
+		boolean result=true;
+		List<String> tagsList=loginScenario.getTagList();
+		Iterator<String> it= tagsList.iterator();
+		while(it.hasNext()){
+			String tagName=it.next();
+			 if  (tagName.contains("NegativeScenario")){
+				 System.out.println("This scenario contains *NegativeScenario* tag");
+				 return false;
+			 }
+		}
+		System.out.println("This scenario does not contain *NegativeScenario* tag");
+		return result;
+    }
 	//^^^ note: added for 'sorry' login error workaround	
 
 }

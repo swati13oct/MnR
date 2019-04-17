@@ -7,9 +7,9 @@ Feature: To test pre-effective functionality
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Copay Category | <copayCategory> |
-    And verify that preeffective message is displayed on the home page
-    And verify that payment tab is displayed to Preeffective member on dashboard
-    And user clicks on the benefits and coverage tab on the dashboard home page
+    And verify that preeffective message is displayed on the home page or test harness page
+    And verify that payment tab is displayed to Preeffective member on dashboard or test harness page
+    And user clicks on the benefits and coverage tab on the dashboard home page or test harness page
     And verify that subnavigation is supressed on the coverage and benefits page
     And verify that correct preeffective message and plan documents button are displayed on coverage and benefits page
     And verify that correct phone number is displayed in technical support section of coverage and benefits page
@@ -19,17 +19,17 @@ Feature: To test pre-effective functionality
     And verify that subnavigation is supressed on the claims page
     And verify that correct preeffective message is displayed on claims page
     And verify that correct phone number is displayed in technical support section of claims page
-    And verify that payment tab is not displayed to Preeffective member from secondary pages
-
+    And verify that payment tab is displayed to Preeffective member from secondary pages
+    | Member Type    | <memberType>    |
     Examples: 
-      | planType  | memberType            | copayCategory |
-      | IndMA     | preeffectiveIndMA     | NON LIS       |
-   #   | IndMAPD   | preeffectiveIndMAPD   | NON LIS       |
-   #   | IndPDP    | preeffectiveIndPDP    | NON LIS       |
-  #    | GroupMA   | preeffectiveGroupMA   | NON LIS       |
-   #   | GroupMAPD | preeffectiveGroupMAPD | NON LIS       |
-   #   | GroupSSUP | preeffectiveGroupSSUP | NON LIS       |
-   #  | GroupPDP  | preeffectiveGroupPDP  | NON LIS       |
+       | planType  | memberType            | copayCategory |
+       | IndMA     | preeffectiveIndMA     | NON LIS       |
+       | IndMAPD   | preeffectiveIndMAPD   | NON LIS       |
+       | IndPDP    | preeffectiveIndPDP    | NON LIS       |
+       | GroupMA   | preeffectiveGroupMA   | NON LIS       |
+       | GroupMAPD | preeffectiveGroupMAPD | NON LIS       |
+       | GroupSSUP | preeffectiveGroupSSUP | NON LIS       |
+       | GroupPDP  | preeffectiveGroupPDP  | NON LIS       |
 
   @preEffective2 @regressionMember @regression_Pre-Effective_AccountSettings_Page @codetransformers
   Scenario Outline: Verify that a preffective member is able to see the Account settings page

@@ -383,11 +383,17 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	  	| 15230 | MAPD     | Last 24 months | COSMOS | COSMOSCLAIMS |
 
 
-    #----- begin of claims15 ---------------------------------------------------------
-    # note: for time being will bypass the YourShare value mismatch between summary and detail INC10332773
-    # note: will bypass Search EOB History link missing for MA NICE summary page and MA and MAPD NICE detail page defect on prod
-	# note: any additional Example will need to tag with either one of these @claims15_COSMOS @claims15_NICE @claims15_notNiceOrCosmos
-    @claims15 @def1041 @thePredators
+    #----- begin of claims00 ---------------------------------------------------------
+    # note: bypassIssue-1 - YourShare value mismatch between summary and detail INC10332773
+    # note: bypassIssue-2 - MA NICE missing Search EOB History on both summary and detail page - pending INC
+    # note: bypassIssue-2 - MAPD NICE missing Search EOB History on detail page - pending INC
+    # note: bypassIssue-3 - MA and MAPD NICE missing This page contains PDF doc text on detail page - pending INC
+	# note: any additional Example will need to tag with either one of these 
+	# note:   @claims00_COSMOS_MEDICAL, @claims00_COSMOS_DRUG, 
+	# note:   @claims00_NICE_MEDICAL, @claims00_NICE_DRUG or @claims00_NOT_NICE_OR_COSMOS
+	# note: 
+	#----------------------------------------------------------------------------------
+    @claims00 @def1041 @thePredators
 	Scenario Outline: DID: <DID> -plan: <planType> -claimsSystem: <claimssystem> -claimType: <claimType> - <index> - To validate claims for both summary and detail page for each search range options
 		Given login with following details logins in the member portal and validate elements
 		  | Plan Type      | <planType>            |
@@ -592,109 +598,115 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		#----------------- Final Test claims number makes sense from search periods --------------
 		And I can validate the numbers of claims from all search periods
 		  
-	@claims15_01 @claims15_MAPD @claims15_COSMOS @claims15_MEDICAL @diffGrpsDiffYrs
+	@claims00_01 @claims00_MAPD @claims00_COSMOS_MEDICAL @diffGrpsDiffYrs
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |01    |1041| MAPD     | COSMOS | diffGrpsDiffYrs_COSMOSCLAIMS | Medical           | Yes                 |
 
-	@claims15_02 @claims15_MAPD @claims15_COSMOS @claims15_DRUG @diffGrpsDiffYrs
+	@claims00_02 @claims00_MAPD @claims00_COSMOS_DRUG @diffGrpsDiffYrs
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |02    |1041| MAPD     | COSMOS | diffGrpsDiffYrs_COSMOSCLAIMS | Prescription drug | Yes                 |
 
-	@claims15_03 @claims15_MA @claims15_COSMOS @claims15_MEDICAL
+	@claims00_03 @claims00_MA @claims00_COSMOS_MEDICAL
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |03    |1041| MA       | COSMOS | COSMOSCLAIMS                 | Medical           | Yes                 |
 
-	@claims15_04 @claims15_MA @claims15_NICE @claims15_MEDICAL
+	@claims00_04 @claims00_MA @claims00_NICE_MEDICAL
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |04    |1041| MA       | NICE   | NICECLAIMS                   | Medical           | Yes                 |
 
-	@claims15_05 @claims15_MAPD @claims15_NICE @claims15_MEDICAL
+	@claims00_05 @claims00_MAPD @claims00_NICE_MEDICAL
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |05    |1041| MAPD     | NICE   | NICECLAIMS                   | Medical           | Yes                 |
 
-	@claims15_06 @claims15_MAPD @claims15_NICE @claims15_DRUG
+	@claims00_06 @claims00_MAPD @claims00_NICE_DRUG
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |06    |1041| MAPD     | NICE   | NICECLAIMS                   | Prescription drug | Yes                 |
 
-	@claims15_07 @claims15_MAPD @claims15_COSMOS @claims15_MEDICAL
+	@claims00_07 @claims00_MAPD @claims00_COSMOS_MEDICAL
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |07    |1041| MAPD     | COSMOS | COSMOSCLAIMS                 | Medical           | Yes                 |
 
-	@claims15_08 @claims15_MAPD @claims15_COSMOS @claims15_DRUG
+	@claims00_08 @claims00_MAPD @claims00_COSMOS_DRUG
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |08    |1041| MAPD     | COSMOS | COSMOSCLAIMS                 | Prescription drug | Yes                 |
 
-	@claims15_09 @claims15_PCP @claims15_COSMOS @claims15_MEDICAL
+	@claims00_09 @claims00_PCP @claims00_COSMOS_MEDICAL
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |09    |1041| PCP      | COSMOS | COSMOSCLAIMS                 | Medical           | Yes                 |
 
-	@claims15_10 @claims15_PCP @claims15_COSMOS @claims15_DRUG
+	@claims00_10 @claims00_PCP @claims00_COSMOS_DRUG
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |10    |1041| PCP      | COSMOS | COSMOSCLAIMS                 | Prescription drug | Yes                 |
 
-	@claims15_11 @claims15_MEDICA @claims15_COSMOS @claims15_MEDICAL
+	@claims00_11 @claims00_MEDICA @claims00_COSMOS_MEDICAL
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |11    |1041| MEDICA   | COSMOS | COSMOSCLAIMS                 | Medical           | Yes                 |
 
-	@claims15_12 @claims15_MEDICA @claims15_COSMOS @claims15_DRUG
+	@claims00_12 @claims00_MEDICA @claims00_COSMOS_DRUG
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |12    |1041| MEDICA   | COSMOS | COSMOSCLAIMS                 | Prescription drug | Yes                 |
 
-	@claims15_13 @claims15_PDP @claims15_RX @claims15_notNiceOrCosmos @claims15_DRUG
+	@claims00_13 @claims00_PDP @claims00_RX @claims00_NOT_NICE_OR_COSMOS
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |13    |1041| PDP      | RX     | RXCLAIMS                     | Prescription drug | No                  |
 
-	@claims15_14 @claims15_SHIP @claims15_notNiceOrCosmos
+	@claims00_14 @claims00_SHIP @claims00_NOT_NICE_OR_COSMOS
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |14    |1041| SHIP     | NA     | SHIPCLAIMS                   | NA                | No                  |
 
-	@claims15_15 @claims15_COMBO @claims15_MAPD @claims15_COSMOS @claims15_MEDICAL
+	@claims00_15 @claims00_COMBO @claims00_MAPD @claims00_COSMOS_MEDICAL
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |15    |1041| MAPD     | COSMOS | COMBO_COSMOSCLAIMS           | Medical           | Yes                 |
 
-	@claims15_16 @claims15_COMBO @claims15_MAPD @claims15_COSMOS @claims15_DRUG
+	@claims00_16 @claims00_COMBO @claims00_MAPD @claims00_COSMOS_DRUG
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |16    |1041| MAPD     | COSMOS | COMBO_COSMOSCLAIMS           | Prescription drug | Yes                 |
 
-	@claims15_17 @claims15_COMBO @claims15_SHIP @claims15_notNiceOrCosmos
+	@claims00_17 @claims00_COMBO @claims00_SHIP @claims00_NOT_NICE_OR_COSMOS
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |17    |1041| SHIP     | NA     | COMBO_SHIPCLAIMS             | NA                | No                  |
 
-	@claims15_18 @claims15_GROUP @claims15_MAPD @claims15_COSMOS @claims15_MEDICAL
+	@claims00_18 @claims00_GROUP @claims00_MAPD @claims00_COSMOS_MEDICAL
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |18    |1041| MAPD     | COSMOS | GROUP_COSMOSCLAIMS           | Medical           | Yes                 |
 
-	@claims15_19 @claims15_GROUP @claims15_MAPD @claims15_COSMOS @claims15_DRUG
+	@claims00_19 @claims00_GROUP @claims00_MAPD @claims00_COSMOS_DRUG
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |19    |1041| MAPD     | COSMOS | GROUP_COSMOSCLAIMS           | Prescription drug | Yes                 |
 
+	@claims00_20 @claims00_SSUP @claims00_COSMOS_MEDICAL
+	Examples: 
+	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
+	  |20    |1041| SSUP     | COSMOS | COSMOSCLAIMS                 | Medical           | Yes                 |
+
      #note: these will be in team-a env only
 	 #|xx    |1041| MAPD     | COSMOS | t_diffGrpsDiffYrs_COSMOSCLAIMS | Medical           | Yes                |
 	 #|xx    |1041| MAPD     | COSMOS | t_diffGrpsDiffYrs_COSMOSCLAIMS | Prescription drug | Yes                |
-	#----- end of claims15 ---------------------------------------------------------
+	#----- end of claims00 ---------------------------------------------------------
+
 	
 	#---- this the test EOB link on claims details page
-    @claims16 @claimsEOB @US1268210 @F244667
-    Scenario Outline: to validate the claims eob link
+    @claims15 @claimsEOB @US1268210 @F244667
+    Scenario Outline: FID: <FID> -plan: <planType> -claimsSystem: <claimssystem> - to validate the claims eob link on claims detail page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>     |
       | Test Data Type | <claimssystem> |
@@ -706,16 +718,16 @@ Feature: T1.1To validate the new changes related to claims page on the member re
     Then I can see the claims displayed based on the selection in redesigned site
     When I navigate to the Claim details page to see view as pdf EOB
     Then I can vdate the view as pdf link on claims details page header
-    | Plan Type    | <planType>    |
-    | Domain       | <domain>      |
+      | Plan Type    | <planType>    |
+      | Domain       | <domain>      |
 
     Examples: 
-      | planType | claimPeriod    | domain | claimssystem  |
-      | MA       | Last 24 months | NICE   | NICECLAIMSEOB |
+      | FID    | planType | claimPeriod    | domain | claimssystem   |
+      | 244667 | MA       | Last 24 months | NICE   | EOB_NICECLAIMS |
 
-  #---- this test check that sub-navigation to EOB page under Claims tab is suppressed for SSUP Only Plan member
-  @US1662790 @F267688
-  Scenario Outline: to validate that sub-navigation to EOB page under Claims tab is suppressed for SSUP Only Plan member
+    #---- this test check that sub-navigation to EOB page under Claims tab is suppressed for SSUP Only Plan member
+    @claims16 @US1662790 @F267688 @claimsEOB_SSUP_Plan
+    Scenario Outline: FID: <FID> -plan: <planType> -claimsSystem: <claimssystem> - to validate that sub-navigation to EOB page under Claims tab is suppressed for SSUP Only Plan member
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>     |
       | Test Data Type | <claimssystem> |
@@ -723,5 +735,28 @@ Feature: T1.1To validate the new changes related to claims page on the member re
     Then Explanation of benefits sub navigation under Claims tab is not displayed
 
     Examples: 
-      | planType | claimssystem |
-      | SSUP     | COSMOSCLAIMS |
+      | FID    | planType | claimssystem |
+      | 267688 | SSUP     | COSMOSCLAIMS |
+      
+    @claims17 @US1673123 @F267688_Test @claimsEOB_SSUP_Plan
+    Scenario Outline: FID: <FID> -plan: <planType> -claimsSystem: <claimssystem> - to validate that SSUP member accessing EOB page via deep link
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>     |
+      | Test Data Type | <claimssystem> |
+    When I navigate to the claims Summary page from test harness page or dashboard
+    Then Explanation of benefits sub navigation under Claims tab is not displayed
+    Then Explanation of benefits deep link is invoked and validate the Page
+    Examples: 
+      | FID    | planType | claimssystem      |
+      | 267688 | SSUP     | SSUP_EOB_Deeplink |
+      
+    @claims18 @US1673112 @F267688_Test @claimsEOB_SSUP_Plan
+    Scenario Outline: FID: <FID> -plan: <planType> -claimsSystem: <claimssystem> - to validate that SSUP member accessing EOB page via deep link
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>     |
+      | Test Data Type | <claimssystem> |
+    When I navigate to the claims Summary page from test harness page or dashboard
+    Then Validate Explanation of benefits Page for group SSUP
+    Examples: 
+      | FID    | planType | claimssystem   |
+      | 267688 | SSUP     | Group_SSUP_EOB |

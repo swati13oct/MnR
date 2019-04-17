@@ -49,7 +49,13 @@ import pages.regression.pharmacylocator.PharmacySearchPage;
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 
 public class AccountHomePage extends UhcDriver {
-
+	
+	@FindBy(xpath = "//*[@id='dropdown-toggle--1']/span")
+	private WebElement acctProfile;
+	
+	@FindBy(xpath = "//*[@id='dropdown-options--1']/a[3]")
+	private WebElement acctSetting;
+	
 	@FindBy(xpath = "//h2[@class='ng-scope' and @translate='FUTURE_MESSAGE_COVERAGE_START']")
 	private WebElement preEffectiveMessage;
 
@@ -148,7 +154,6 @@ public class AccountHomePage extends UhcDriver {
 	private WebElement planNameLink;
 
 	@FindBy(xpath = "//button[@id='dropdown-toggle--1']")
-	//@FindBy(id = "accountProfile")											 
 	private WebElement accountProfileBtn;
 
 	// @FindBy(xpath = ".//*[@id='dropdown-options--1']/a[contains(text(),'Account
@@ -377,8 +382,11 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath ="//*[@id='moreInfoLinkAtdd2']/a")
 	private WebElement specificclaimlinkforeob;
 	
-	
-	
+	@FindBy(tagName="arcade-header")
+	private WebElement shadowRootHeader;
+
+	@FindBy(tagName="arcade-footer")
+	private WebElement shadowRootFooter;
 
 	private PageData myAccountHome;
 
@@ -603,54 +611,47 @@ public class AccountHomePage extends UhcDriver {
 
 	public ProfileandPreferencesPage navigateDirectToProfilePage() throws InterruptedException {
 
-			System.out.println("waitning for profile page");
-		// If we test through test harness , this is needed to navigate to profile page
- 	
-			if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)){
-			 System.out.println("testing through test harness page");
-			 try{
-				 if(driver.findElement(By.id("accountprofile")).isDisplayed()){
-					 driver.findElement(By.id("accountprofile")).click();
-					 driver.findElement(By.linkText("Account Settings")).click();
-				 }else{
-					 driver.findElement(By.xpath("//*[@id='home_2']")).click();
-					 Thread.sleep(6000);
-				 }
-			 } catch (Exception e) {
-				 driver.findElement(By.xpath("//*[@id='home_2']")).click();
-				 Thread.sleep(6000);
-			 }
-			 if (driver.getCurrentUrl().contains("profile")) {
-				 System.out.println("Navigating to Profile Page");
-				 return new ProfileandPreferencesPage(driver);
-			 }
-			 
-			//CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//*[@id='dashboard']/div[1]/section[1]/account-info/div/div[1]/h1")), 30);
+		System.out.println("waitning for profile page");
+		// Testing through Test Harness Page
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)){
+			System.out.println("testing through test harness page");
+			try{
+				if(acctProfile.isDisplayed()){
+					acctProfile.click();
+					acctSetting.click();
+				}else{
+					driver.findElement(By.xpath("//*[@id='home_2']")).click();
+					Thread.sleep(6000);
+				}
+			} catch (Exception e) {
+				driver.findElement(By.xpath("//*[@id='home_2']")).click();
+				Thread.sleep(6000);
+			}
+			if (driver.getCurrentUrl().contains("profile")) {
+				System.out.println("Navigating to Profile Page");
+				return new ProfileandPreferencesPage(driver);
+			}
 		} else{
 			System.out.println("test is through stage");
-		}									  																													
+		}	// Testing through Stage								  																													
 		if (MRScenario.environment.equalsIgnoreCase("stage")) {
 			System.out.println("user is on Stage login page");
-			// CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);
 			if (driver.getCurrentUrl().contains("/dashboard")) {
-
-				/*
-				 * accountToggleDropdown.click(); validate(accountSettingOption);
-				 * accountSettingOption.click(); try { Thread.sleep(3000); } catch
-				 * (InterruptedException e) { // TODO Auto generated catch block
-				 * e.printStackTrace(); }
-				 */
-				// driver.navigate().to(PAGE_URL + "medicare/member/account/profile.html");
-				waitforElement(accountProfileBtn);
-				accountProfileBtn.click();
-				accountSettingOption.click();
+				CommonUtility.waitForPageLoad(driver, acctProfile, 9);
+				acctProfile.click();
+				acctSetting.click();
 				System.out.println("title is " + driver.getTitle());
 				System.out.println("Current Url is " + driver.getCurrentUrl());
+				Thread.sleep(6000);	   
+				if (driver.getCurrentUrl().contains("profile")) {
+					return new ProfileandPreferencesPage(driver);
+				}
+				return null;
 			}
 			else if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
 				workaroundAttempt("profilepref");
 			}
-			Thread.sleep(6000);	   
+			//Thread.sleep(6000);	   
 			//CommonUtility.waitForPageLoad(driver, heading, 10);
 
 			if (driver.getCurrentUrl().contains("profile")) {
@@ -668,7 +669,7 @@ public class AccountHomePage extends UhcDriver {
 
 			System.out.println("title is " + driver.getTitle());
 			System.out.println("Current Url is " + driver.getCurrentUrl());
-
+			// Testing through ci1 Environment 
 		} else {
 			driver.navigate().to(
 					"https://team-ci1-medicare.ose-elr-core.optum.com/content/medicare/member/account/profile.html");
@@ -676,7 +677,6 @@ public class AccountHomePage extends UhcDriver {
 			System.out.println("Current Url is " + driver.getCurrentUrl());
 
 		}
-		//CommonUtility.waitForPageLoad(driver, heading, 50);
 		if (driver.getTitle().contains("Profile")) {
 			return new ProfileandPreferencesPage(driver);
 		}
@@ -1122,9 +1122,13 @@ public class AccountHomePage extends UhcDriver {
 				if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
 					workaroundAttempt("contactus");
 				} else {
-					linkContactUs.click();
+					if (validate(linkContactUs)) {
+						linkContactUs.click();
+					} else {
+						System.out.println("Unable to locate Contact Us on dashboard, will attempt to see if it's in shadow-root");
+						locateAndClickElementWithinShadowRoot(shadowRootFooter, "div > span > footer > div:nth-child(1) > div:nth-child(1) > ul > li:nth-child(1) > a");	
+					}
 				}
-
 			}
 			CommonUtility.waitForPageLoad(driver, headingContactUs, 10);
 			if (driver.getTitle().contains("Contact Us")) {
@@ -1822,7 +1826,12 @@ public class AccountHomePage extends UhcDriver {
 	 */
 
 	public void validateFindCareCostTab() {
-		Assert.assertTrue("Find Care and Cost tab is not displayed", findCareCost.isDisplayed());
+		if (validate(findCareCost)) {
+			Assert.assertTrue("Find Care and Cost tab is not displayed", findCareCost.isDisplayed());
+		} else {
+			System.out.println("Unable to locate 'Find Care & Costs' from dashboard, check to see if it's in shadow-root");
+			locateElementWithinShadowRoot(shadowRootHeader, "#main-nav > div > div > div > a[href*='find-care']");
+		}
 
 	}
 
@@ -2409,22 +2418,15 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	/*
-	 * This method checks that Premium Payment tab is not displayed for
+	 * This method checks that Premium Payment tab is displayed for
 	 * Pre-Effective members
 	 */
-	public void validatePremiumPaymentTabNotDisplayed() throws InterruptedException {
+	public void validatePremiumPaymentTabDisplayed() throws InterruptedException {
 		Thread.sleep(2000);
 		System.out.println("Now checking for Premium Payment Tab on Dashboard");
-
-		try {
-			driver.findElement(By.xpath("//a[contains(text(),'Premium Payments')]"));
-			System.out.println("Premium Payment tab was displayed on Dashboard");
-			
-		} catch (NoSuchElementException e) {
-			// TODO Auto-generated catch block
-			Assert.fail("Premium Payment tab was not displayed on Dashboard, Test Step is failed ");
-		}
-
+		Assert.assertTrue(driver.findElement(By.xpath("//a[contains(text(),'Premium Payments')]")).isDisplayed());
+		System.out.println("Premium Payment tab was displayed on Dashboard");
+		
 	}
 
 	/*
@@ -2436,16 +2438,16 @@ public class AccountHomePage extends UhcDriver {
 		String preMessage_text = preEffectiveMessage.getAttribute("innerText");
 		System.out.println("Message displayed on Dashboard for this member is:" + preMessage_text);
 		Assert.assertTrue(preMessage_text.contains(
-				"Use this site to find helpful information while you�re getting ready for your plan to start on"));
+				"Use this site to find helpful information while"));
 		System.out.println("First assert on the preeffective message is passed");
 		Assert.assertTrue(preMessage_text.contains(
-				"Depending on your plan coverage, you can find a provider, locate a pharmacy, or view important plan documents."));
+				"Get early access to your new plan materials and manage your document delivery preferences."));
 		System.out.println("Second assert on the preeffective message is passed");
 	}
 
 	public BenefitsAndCoveragePage clickOnBenefitsandCoverageTab() throws InterruptedException {
-		System.out.println("Now clicking on Benefits and Coverage Tab on Dashboard");
-		driver.findElement(By.xpath("//a[contains(text(),'Coverage & Benefits')]")).click();
+		System.out.println("Now navigating to Coverage and Benefits page");
+	    driver.findElement(By.xpath("//a[contains(text(),'Coverage & Benefits')]")).click();
 		System.out.println("Now waiting for 20 seconds");
 		return new BenefitsAndCoveragePage(driver);
 
@@ -2550,13 +2552,11 @@ public class AccountHomePage extends UhcDriver {
 		}
 		System.out.println("Workaround URL is going to be: "+workaroundURL);
 		driver.get(workaroundURL);
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		System.out.println("wait for driver to be ready after loading URL...");
+		CommonUtility.checkPageIsReadyNew(driver);
 	}
 	//^^^ note: added for 'sorry' login error workaround	
+
 	public ClaimDetailsPage navigateToClaimDetailsPagetoseeeobpdflink() {
 
 		try {
@@ -2581,4 +2581,46 @@ public class AccountHomePage extends UhcDriver {
 		}
 		return new ClaimDetailsPage(driver);
 	}
+	
+	public WebElement expandRootElement(WebElement element) {
+		WebElement ele = (WebElement) ((JavascriptExecutor)driver)
+				.executeScript("return arguments[0].shadowRoot", element);
+		return ele;
+	}
+	
+	public void locateElementWithinShadowRoot(WebElement shadowRootElement, String inputSelector) {
+		if (validate(shadowRootElement)) {
+			System.out.println("located shadow-root element, attempt to process further...");
+			WebElement root1=expandRootElement(shadowRootElement);
+			try {
+				WebElement element=root1.findElement(By.cssSelector(inputSelector));
+				Assert.assertTrue("Dashboard header is not displayed", validate(element));
+			} catch (Exception e) {
+				System.out.println("can't locate element. Exception e="+e);
+				Assert.assertTrue("Dashboard header not functioning as expected", false);
+			}
+		} else {
+			System.out.println("no shadow-root element either, not sure what's going on w/ the header on rally");
+			Assert.assertTrue("Dashboard header is not displayed", false);
+		}
+	}
+
+	public void locateAndClickElementWithinShadowRoot(WebElement shadowRootElement, String inputCssSelector) {
+		if (validate(shadowRootElement)) {
+			System.out.println("located shadow-root element, attempt to process further...");
+			WebElement root1=expandRootElement(shadowRootElement);
+			try {
+				WebElement element=root1.findElement(By.cssSelector(inputCssSelector));
+				Assert.assertTrue("Dashboard header is not displayed", validate(element));
+				System.out.println("element is located, click it...");
+				element.click();
+			} catch (Exception e) {
+				System.out.println("can't locate element. Exception e="+e);
+				Assert.assertTrue("Dashboard header not functioning as expected", false);
+			}
+		} else {
+			System.out.println("no shadow-root element either, not sure what's going on w/ the header on rally");
+			Assert.assertTrue("Dashboard header is not displayed", false);
+		}
+	}	
 }

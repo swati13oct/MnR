@@ -18,11 +18,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 //import pages.member_deprecated.bluelayer.AccountHomePage;
 import pages.member_deprecated.bluelayer.LoginPage2;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.claims.ClaimSummarypage;
 import pages.regression.profileandpreferences.CommunicationPreferencePage;
 //import pages.member_deprecated.bluelayer.ProfilePreferencesPage;
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
+import pages.regression.testharness.TestHarness;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
+import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -105,8 +108,20 @@ public class ProfileandPreferencesUMSStepDefinition {
 	 */
 	@Then("^the user navigates to Profile and Preferences page$")
 	public void user_navigate_toProfileandPreferencespage() throws InterruptedException {
-
-
+		ProfileandPreferencesPage profilePreferencesPage;
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+			profilePreferencesPage = testHarness.navigateDirectToProfilePageFromTestHarnessPage();
+		} else {
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			profilePreferencesPage = accountHomePage.navigateDirectToProfilePage();
+		}
+		if (profilePreferencesPage != null) {
+			getLoginScenario().saveBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE, profilePreferencesPage);
+		} else {
+			Assert.fail("Profile preference page not loaded");
+		}
+		/* tbd-remove
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 		ProfileandPreferencesPage profilePreferencesPage = accountHomePage.navigateDirectToProfilePage();
@@ -116,7 +131,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 			getLoginScenario().saveBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE, profilePreferencesPage);
 		} else
 			Assert.fail("Profile preference page not loaded");
-
+	 */
 	}
 	/*
 	 * @Then("^the user navigates to Profile page") public void
@@ -171,6 +186,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 	 * @toDo : The user checks the elements that appear when the user clicks on
 	 *       edit link of Account section
 	 */
+	
 	@Then("^the user validates the elements on clicking the edit link")
 	public void UserValidatesAccountEditOptions() {
 		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
@@ -948,7 +964,26 @@ public class ProfileandPreferencesUMSStepDefinition {
 		profilePreferencesPage.validateHealthSafeIdLink();
 		profilePreferencesPage.validateEditPasswordLinkBox();
 	}
+	
+	@When("^I click the HEALTHSAFE ID PASSWORD link and validate username and password$")
+	public void i_click_the_HEALTHSAFE_ID_PASSWORD_link_2() throws InterruptedException {
 
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+
+		profilePreferencesPage.validateHealthSafeIdLink();
+		profilePreferencesPage.validateEditPasswordLinkBox();
+	}
+
+//	@Then ("^the user clicks on save button without filling current and new password and the red mandatory message should come$")
+//	public void empty_value_password_field() throws InterruptedException {
+//
+//		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+//				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+//
+//		profilePreferencesPage.validateEmptyPasswordLinkBox();
+//		
+//	}
 	/**
 	 * @toDo : The user should see the breadcrumb in the upper left side
 	 */
