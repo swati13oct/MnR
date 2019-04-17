@@ -314,8 +314,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//button[contains(@class,'zip-button') and contains(@dtmid,'landing')]")
 	private WebElement planOverviewFindPlanButton;
 
-    private String linkTextXpath= "//span[text()='Favorite plan']";
+    private String savePlanLinkTextXpath= "//span[text()='Save plan']";
 	private String savePlanImgXpath="//img[contains(@src,'ic_favorite-unfilled.png')]";
+    private String savedPlanLinkTextXpath= "//span[text()='Saved']";
 	private String savedPlanImgXpath="//img[contains(@src,'ic_favorite-filled.png')]";
 	
 	@FindBy(xpath = "//div[@id='emailPlanSummaryPopUp']")
@@ -513,6 +514,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		@FindBy(xpath = "//button[contains(text(),'View Prescription')]")
 		private WebElement OleMS_ViewPDPPlanBtn;
+		
+		@FindBy(xpath = "( //*[contains(text(),'Annual')])[1]//following-sibling::span[2]")
+		private WebElement valEstimatedAnnualDrugCostValue;
+		
+		public WebElement getValEstimatedAnnualDrugCostValue() {
+			return valEstimatedAnnualDrugCostValue;
+		}
+
+		
 		
 		
 	public VPPPlanSummaryPage(WebDriver driver) {
@@ -1998,6 +2008,22 @@ for (int i = 0; i < initialCount + 1; i++) {
 			Assert.assertTrue("PROBLEM - test not coded for this '"+planType+"' planType testing", false);
 		}
 		Assert.assertTrue("PROBLEM - Unable to locate the print option or the email option. printCheck="+validate(printElement), validate(printElement));
+	
+		//note: temperary, remove the following when email option is enable, this is just to make sure it wasn't turn on by mistake
+		WebElement emailElement=null;
+		if (planType.equalsIgnoreCase("mapd") || planType.equalsIgnoreCase("ma")) {
+			//System.out.println("TEST - going to validate the print and email element for MA");
+			emailElement=maEmailOption;
+		} else if (planType.equalsIgnoreCase("pdp")) {
+			//System.out.println("TEST - going to validate the print and email element for PDP");
+			emailElement=pdpEmailOption;
+		} else if (planType.equalsIgnoreCase("snp")) {
+			//System.out.println("TEST - going to validate the print and email element for SNP");
+			emailElement=snpEmailOption;
+		} else {
+			Assert.assertTrue("PROBLEM - test not coded for this '"+planType+"' planType testing", false);
+		}
+		Assert.assertTrue("PROBLEM - Email option should NOT show up (disabled until feature approved). emailCheck="+validate(emailElement), !validate(emailElement));
 	}
 
 	public void validateDefaultNoSavedPlan(String planType) {
@@ -2007,8 +2033,8 @@ for (int i = 0; i < initialCount + 1; i++) {
 
 		String plansXpath="//span[@class='plan-index ng-binding ng-scope']";
 
-		String favoritePlanXpath=linkTextXpath;
-		String unfilledIconXpath=favoritePlanXpath+"/.."+savePlanImgXpath;
+		String savePlanXpath=savePlanLinkTextXpath;
+		String unfilledIconXpath=savePlanXpath+"/.."+savePlanImgXpath;
 
 		String testXpath="";
 		if (planType.equals("MA") || planType.equals("MAPD")) {
@@ -2026,7 +2052,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		//System.out.println("TEST - listOfPlans xpath="+testXpath+plansXpath);
 		//System.out.println("TEST - Number of Available Plan for planType='"+planType+"'="+numOfAvaliablePlans);
 
-		List<WebElement> listOfUnsavedPlans=driver.findElements(By.xpath(testXpath+favoritePlanXpath));
+		List<WebElement> listOfUnsavedPlans=driver.findElements(By.xpath(testXpath+savePlanXpath));
 		int numOfUnsavedPlans=listOfUnsavedPlans.size();
 		//System.out.println("TEST - listOfUnsavedPlans xpath="+testXpath+favoritePlanXpath);
 		//System.out.println("TEST - Number of unsave plan link for planType='"+planType+"'="+numOfUnsavedPlans);
@@ -2089,6 +2115,13 @@ for (int i = 0; i < initialCount + 1; i++) {
 			List<WebElement>  listOfAppearedSavedPlanIcons=driver.findElements(By.xpath(appeared_savedPlanIconXpath));
 			expMatch=1;
 			Assert.assertTrue("PROBLEM - unable to locate Saved Plan icon after click for ='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfAppearedSavedPlanIcons.size()+"'",listOfAppearedSavedPlanIcons.size()==expMatch);
+
+			System.out.println("Proceed to validate 'Saved' text will appear after 'Save Plan' is clicked");
+			String appeared_savedTextXpath=headerPath+"[contains(text(),'"+plan+"')]"+subPath+"//button[contains(@class,'savedPlan') and contains(@style,'')]"+"/span[contains(text(),'Saved')]";
+			//System.out.println("TEST - appeared_savedTextXpath xpath="+appeared_savedTextXpath);
+			List<WebElement>  listOfAppearedSavedText=driver.findElements(By.xpath(appeared_savedTextXpath));
+			expMatch=1;
+			Assert.assertTrue("PROBLEM - unable to locate Saved Plan icon after click for ='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfAppearedSavedText.size()+"'",listOfAppearedSavedText.size()==expMatch);
 		}
 	}
 
@@ -2222,11 +2255,18 @@ for (int i = 0; i < initialCount + 1; i++) {
 		Assert.assertTrue("PROBLEM - 'Saved Plan' icon should no longer appear for ='"+unsavePlan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfAppearedSavedPlanIcons.size()+"'",listOfAppearedSavedPlanIcons.size()==expMatch);
 
 		System.out.println("Proceed to validate 'Save Plan' icon appeared again after unsaved plan");
-		String savePlanLIconXpath=headerPath+"[contains(text(),'"+unsavePlan+"')]"+subPath+"//button[contains(@class, 'savePlan') and not(contains(@style,'none'))]"+savePlanImgXpath;
-		//System.out.println("TEST - initial_savePlanLIconXpath xpath="+savePlanLIconXpath);
-		List<WebElement>  listOfSavePlanIcons=driver.findElements(By.xpath(savePlanLIconXpath));
+		String savePlanIconXpath=headerPath+"[contains(text(),'"+unsavePlan+"')]"+subPath+"//button[contains(@class, 'savePlan') and not(contains(@style,'none'))]"+savePlanImgXpath;
+		//System.out.println("TEST - savePlanIconXpath xpath="+savePlanIconXpath);
+		List<WebElement>  listOfSavePlanIcons=driver.findElements(By.xpath(savePlanIconXpath));
 		expMatch=1;
 		Assert.assertTrue("PROBLEM - unable to locate Save Plan icon for ='"+unsavePlan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfSavePlanIcons.size()+"'",listOfSavePlanIcons.size()==expMatch);
+
+		System.out.println("Proceed to validate 'Save Plan' text appeared again after unsaved plan");
+		String savePlanTextXpath=headerPath+"[contains(text(),'"+unsavePlan+"')]"+subPath+"//button[contains(@class, 'savePlan') and not(contains(@style,'none'))]"+"/span[contains(text(),'Save plan')]";
+		//System.out.println("TEST - savePlanTextXpath xpath="+savePlanTextXpath);
+		List<WebElement>  listOfSavePlanText=driver.findElements(By.xpath(savePlanTextXpath));
+		expMatch=1;
+		Assert.assertTrue("PROBLEM - unable to locate 'Save Plan' text for ='"+unsavePlan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfSavePlanText.size()+"'",listOfSavePlanText.size()==expMatch);
 	}
 
 	public void validateOnePlanSavedOnePlanUnsaved(String savePlanNames, String planType) {
@@ -2263,11 +2303,18 @@ for (int i = 0; i < initialCount + 1; i++) {
 				Assert.assertTrue("PROBLEM - unable to locate plan='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfPlans.size()+"'",listOfPlans.size()==expMatch);
 
 				System.out.println("Proceed to validate 'Save Plan' icon appeared again after unsaved plan");
-				String savedPlanLIconXpath=headerPath+"[contains(text(),'"+plan+"')]"+subPath+"//button[contains(@class, 'savePlan') and not(contains(@style,'none')) and not(contains(@style,'block'))]"+savePlanImgXpath;
-				//System.out.println("TEST - savedPlanLIconXpath xpath="+savedPlanLIconXpath);
-				List<WebElement>  listOfSavedPlanIcons=driver.findElements(By.xpath(savedPlanLIconXpath));
+				String savedPlanIconXpath=headerPath+"[contains(text(),'"+plan+"')]"+subPath+"//button[contains(@class, 'savePlan') and not(contains(@style,'none')) and not(contains(@style,'block'))]"+savePlanImgXpath;
+				//System.out.println("TEST - savedPlanIconXpath xpath="+savedPlanIconXpath);
+				List<WebElement>  listOfSavedPlanIcons=driver.findElements(By.xpath(savedPlanIconXpath));
 				expMatch=1;
 				Assert.assertTrue("PROBLEM - unable to locate Save Plan icon for ='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfSavedPlanIcons.size()+"'",listOfSavedPlanIcons.size()==expMatch);
+
+				System.out.println("Proceed to validate 'Save Plan' text appeared again after unsaved plan");
+				String savePlanTextXpath=headerPath+"[contains(text(),'"+plan+"')]"+subPath+"//button[contains(@class, 'savePlan') and not(contains(@style,'none')) and not(contains(@style,'block'))]"+"/span[contains(text(),'Save plan')]";
+				//System.out.println("TEST - savePlanTextXpath xpath="+savePlanTextXpath);
+				List<WebElement>  listOfsavedPlanText=driver.findElements(By.xpath(savePlanTextXpath));
+				expMatch=1;
+				Assert.assertTrue("PROBLEM - unable to locate Save Plan text for ='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfsavedPlanText.size()+"'",listOfsavedPlanText.size()==expMatch);
 			}
 		}
 	}
