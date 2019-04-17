@@ -38,7 +38,7 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy(xpath = ".//*[@id='globalContentIdForSkipLink']/div[3]/div[1]/div/div/div/div/div/p")
 	private WebElement messageForPreeffective;
 	
-	@FindBy(xpath = "//p[contains(text(),'1-888-980-8125')]")
+	@FindBy(xpath = "//p[contains(text(),'1-866-254-3132')]")
 	public WebElement preEffectiveTechSupportNumber;
 
 	@FindBy (xpath=".//*[@id='MA']")
@@ -1543,23 +1543,19 @@ public void TBR_NavigateToClaimsPage(){	//tbd-remove whole method
 				
 			    System.out.println("Now checking for Tech Support Number for Pre-effective members on claims page");
 			    System.out.println("The Tech Support phone number displayed on screen is "+preEffectiveTechSupportNumber.getText());
-				Assert.assertEquals(preEffectiveTechSupportNumber.getText(),"1-888-980-8125");
+				Assert.assertEquals(preEffectiveTechSupportNumber.getText(),"1-866-254-3132");
 				System.out.println("Assert for correct Tech Suppport Phone Number on claims page was passed");
 				
 			}
-			public void verifyPaymentTabIsNotDisplayedForPreEffectiveMembers() throws InterruptedException 
+			public void verifyPaymentTabIsDisplayedForPreEffectiveMembers() throws InterruptedException 
 			{
 				
-				try {
-			    	driver.findElement(By.xpath("//a[contains(text(),'Premium Payments')]"));
-			    	System.out.println("Premium Payment tab was displayed on Claims secondary page");
-			    	Assert.fail("Premium Payment tab was displayed, Test step is failed");
-			 } catch (NoSuchElementException e) {
-			        // TODO Auto-generated catch block
-				   System.out.println("Premium Payment tab was not displayed on Claims secondary page, Test Step is Passed ");
+				Assert.assertTrue((driver.findElement(By.xpath("//a[contains(text(),'Premium Payments')]"))).isDisplayed());
+			    System.out.println("Premium Payment tab was displayed on Claims secondary page");
+			 			
 			  }
 			    
-			}	
+				
 			
 			public static void checkForIPerceptionModel(WebDriver driver) {
 				int counter = 0;

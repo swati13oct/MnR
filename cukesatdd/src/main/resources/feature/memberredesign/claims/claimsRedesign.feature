@@ -393,7 +393,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	# note:   @claims00_NICE_MEDICAL, @claims00_NICE_DRUG or @claims00_NOT_NICE_OR_COSMOS
 	# note: 
 	#----------------------------------------------------------------------------------
-    @claims00 @def1041 @thePredators @abc
+    @claims00 @def1041 @thePredators
 	Scenario Outline: DID: <DID> -plan: <planType> -claimsSystem: <claimssystem> -claimType: <claimType> - <index> - To validate claims for both summary and detail page for each search range options
 		Given login with following details logins in the member portal and validate elements
 		  | Plan Type      | <planType>            |
