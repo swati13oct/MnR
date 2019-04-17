@@ -372,6 +372,7 @@ public class DCEAcqStepDefinitionAARP {
 		planDetailsPage.validatedAddedDrug(drugName);
 	}
 	
+	/*verify DCE flow from Ulayer home page hover over*/
 	@When("^I click on Drug Cost Estimator link from Shop for a plan hover over for AARP site$")
 	public void i_click_on_Drug_Cost_Estimator_link_from_Shop_for_a_plan_hover_over_for_ums_site() {
 		
