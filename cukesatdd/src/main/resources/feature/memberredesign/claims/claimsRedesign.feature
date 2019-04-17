@@ -705,7 +705,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 
 	
 	#---- this the test EOB link on claims details page
-    @claims15 @claimsEOB @US1268210 @F244667
+    @claims15 @claimsEOB @US1268210 @F244667 @regressionMember
     Scenario Outline: FID: <FID> -plan: <planType> -claimsSystem: <claimssystem> - to validate the claims eob link on claims detail page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>     |

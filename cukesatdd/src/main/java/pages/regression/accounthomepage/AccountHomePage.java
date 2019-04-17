@@ -1744,7 +1744,7 @@ public class AccountHomePage extends UhcDriver {
 
 		} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
 
-			if(MRScenario.isTestHarness.equals("YES")){
+			if(MRScenario.isTestHarness.equalsIgnoreCase("YES")){
 				dceTestharnessLink.click();
 			}else if (driver.getCurrentUrl().contains("/dashboard")){
 				System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
