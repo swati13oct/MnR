@@ -18,7 +18,7 @@ Feature: 1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
     Then the user validates Learn more modal for Welcome OLE
     Then the user validates Leave OLE modal for Welcome OLE
     Then the user validates cancellation modal for Welcome OLE
-    Then the user validates and selects the Disclaimer Checkbox
+    #Then the user validates and selects the Disclaimer Checkbox
     Then the user navigates to Medicare Information Page
     Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates Medicare Information Page required fields
@@ -114,7 +114,7 @@ Feature: 1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
     Then the user validates Learn more modal for Welcome OLE
     Then the user validates Leave OLE modal for Welcome OLE
     Then the user validates cancellation modal for Welcome OLE
-    Then the user validates and selects the Disclaimer Checkbox
+    #Then the user validates and selects the Disclaimer Checkbox
     Then the user navigates to Medicare Information Page
     Then the user validates Medicare Information Page required fields
     Then the user enters following required Medicare Information
@@ -194,7 +194,7 @@ Feature: 1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
     Then the user validates Learn more modal for Welcome OLE
     Then the user validates Leave OLE modal for Welcome OLE
     Then the user validates cancellation modal for Welcome OLE
-    Then the user validates and selects the Disclaimer Checkbox
+    #Then the user validates and selects the Disclaimer Checkbox
     Then the user navigates to Medicare Information Page
     Then the user validates Medicare Information Page required fields
     Then the user enters following required Medicare Information
@@ -293,7 +293,7 @@ Feature: 1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
       | Plan Type | <plantype> |
     Then the user validates the Enroll Now Button present for the Chronic plan type
       | Plan Name | <planName> |
-    Then the user validates and selects the Disclaimer Checkbox
+    #Then the user validates and selects the Disclaimer Checkbox
     Then the user navigates to Medicare Information Page
     Then the user enters following required Medicare Information
       | First Name      | <firstname>      |
@@ -323,7 +323,7 @@ Feature: 1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
     #Then the user validates the Plan details on OLE
-    Then the user validates and selects the Disclaimer Checkbox
+    #Then the user validates and selects the Disclaimer Checkbox
     Then the user navigates to Medicare Information Page
     #Then the user validates Medicare Information Page required fields
     Then the user enters following required Medicare Information
@@ -356,7 +356,7 @@ Feature: 1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
-    Then the user validates and selects the Disclaimer Checkbox
+    #Then the user validates and selects the Disclaimer Checkbox
     Then the user navigates to Medicare Information Page
     Then the user validates Medicare Information Page required fields
     Then the user enters following required Medicare Information
@@ -502,7 +502,7 @@ Feature: 1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
     Then the user validates Learn more modal for Welcome OLE
     Then the user validates Leave OLE modal for Welcome OLE
     Then the user validates cancellation modal for Welcome OLE
-    Then the user validates and selects the Disclaimer Checkbox
+    #Then the user validates and selects the Disclaimer Checkbox
     Then the user navigates to Medicare Information Page
     Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates Medicare Information Page required fields
