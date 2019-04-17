@@ -138,9 +138,27 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//span[contains(text(),'1 providers covered')]")
 	private WebElement providerCountUpdated;
 	
+	@FindBy(id = "plancosts")
+	private List<WebElement> planCostTab;
+	
 	private PageData planDocsPDF;
 
 	public JSONObject planDocPDFAcqJson;
+	
+	public WebElement getPlanCostsTab() {
+		return planCostsTab;
+	}
+
+	@FindBy(xpath = "//*[contains(text(),'Enter drug information')]")
+	private WebElement lnkEnterDrugInformation;
+	
+	public WebElement getLnkEnterDrugInformation() {
+		return lnkEnterDrugInformation;
+	}
+
+	public void setLnkEnterDrugInformation(WebElement lnkEnterDrugInformation) {
+		this.lnkEnterDrugInformation = lnkEnterDrugInformation;
+	}
 
 	public PlanDetailsPage(WebDriver driver) {
 		super(driver);
@@ -338,6 +356,29 @@ public class PlanDetailsPage extends UhcDriver {
 		CommonUtility.waitForPageLoad(driver, estimateDrugBtn, 20);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", estimateDrugBtn);
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", estimateDrugBtn);
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(currentUrl().contains("/estimate-drug-costs.html"))
+			return new DrugCostEstimatorPage(driver);
+		return null;
+	}
+	//
+	public DrugCostEstimatorPage navigateToDCEThroughPlanCost() {
+
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		getPlanCostsTab().click();
+		CommonUtility.waitForPageLoad(driver, getLnkEnterDrugInformation(), 20);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", getLnkEnterDrugInformation());
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", getLnkEnterDrugInformation());
 		try {
 			Thread.sleep(4000);
 		} catch (InterruptedException e) {
