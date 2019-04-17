@@ -163,7 +163,13 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 		for (int i = 0; i < getLstLearnAboutMedicare().size(); i++) {
 			if (getLstLearnAboutMedicare().get(i).isEnabled()) {
 				navigateToMedicareMenuLinks(getLstLearnAboutMedicare().get(i));
-				compareValues(medicareUrlMapping()[i]);
+				if (driver.getCurrentUrl().contains("supplement"))
+					compareValues(medicareUrlMapping()[i]);
+				else if (medicareUrlMapping()[i].contains("supplement"))
+					continue;
+				else
+					compareValues(medicareUrlMapping()[i]);
+
 				if (baseUrlTitle.contains("AARP"))
 					checkTitle(titleAARP);
 				else
@@ -205,8 +211,17 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 
 		for (int i = 0; i < getLstLearnAboutMedicare().size(); i++) {
 			if (getLstLearnAboutMedicare().get(i).isEnabled()) {
-				Assert.assertTrue("Medicare-Menu-links-Text-Mismatch, link's description is incorrect",
-						getLstLearnAboutMedicare().get(i).getText().contains(medicareMenuText()[i]));
+
+				if (getLstLearnAboutMedicare().get(i).getText().contains("Supplement")) {
+					Assert.assertTrue("Medicare-Menu-links-Text-Mismatch, link's description is incorrect",
+							getLstLearnAboutMedicare().get(i).getText().contains(medicareMenuText()[i]));
+				}
+				else
+					if((medicareMenuText()[i]).contains("Supplement"))
+						continue;
+				else
+					Assert.assertTrue("Medicare-Menu-links-Text-Mismatch, link's description is incorrect",
+							getLstLearnAboutMedicare().get(i).getText().contains(medicareMenuText()[i]));
 				System.out.println(getLstLearnAboutMedicare().get(i).getText());
 			}
 		}
@@ -250,7 +265,7 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 		String txtmedicareMenu[] = {
 
 				"Eligibility", "Coverage Choices", "Prescriptions, Providers & Benefits", "Cost Basics",
-				"Medicare Advantage Plans", "Medicare Prescription Drug Plans", "Enrollment Basics" };
+				"Medicare Advantage Plans","Medicare Supplement Insurance Plans", "Medicare Prescription Drug Plans", "Enrollment Basics" };
 		return txtmedicareMenu;
 	}
 

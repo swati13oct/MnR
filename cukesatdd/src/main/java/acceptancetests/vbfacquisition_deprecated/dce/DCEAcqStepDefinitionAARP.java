@@ -148,7 +148,7 @@ public class DCEAcqStepDefinitionAARP {
 			dce.addDrug(drug.split(" ")[0]);
 		}
 		
-		dce.aepyearselection();
+		//dce.aepyearselection();
 
 	}
 
