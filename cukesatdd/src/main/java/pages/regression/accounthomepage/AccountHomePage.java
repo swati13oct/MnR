@@ -50,7 +50,7 @@ import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 
 public class AccountHomePage extends UhcDriver {
 	
-	@FindBy(xpath = "//*[@id='dropdown-toggle--1']/span")
+	@FindBy(xpath = ".//*[@id='dropdown-options-0']/a[3]/span")
 	private WebElement acctProfile;
 	
 	@FindBy(xpath = "//*[@id='dropdown-options--1']/a[3]")
