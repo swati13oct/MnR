@@ -143,7 +143,7 @@ public class RequestAgentAppointmentPage extends UhcDriver {
 		String breadCrumbText = breadCrumb.getText();
 		System.out.println(breadCrumbText);
 		if (breadCrumbText.equals(
-				"Home / Shop for a Plan / Shop / Connect / Request an Appointment with a Health Insurance Agent")) {
+				"Home / Shop for a Plan / Shop / Connect with UnitedHealthcare® / Request an Appointment with a Health Insurance Agent")) {
 			return true;
 		}
 		return false;
