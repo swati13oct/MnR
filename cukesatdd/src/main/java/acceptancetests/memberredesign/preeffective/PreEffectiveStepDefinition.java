@@ -197,6 +197,34 @@ public void validateCorrectTechSupportNumberIsDisplayedOnBenefitsCoevargePage() 
 
 }
 
+@Then("^verify that claim support header with phone number in Need Help is not displayed to SHIP Pre-effective members on coverage and benefits page$")
+public void validateClaimSupportIsNOTDisplayedOnBenefitsCoevargePageForSHIPPreffective(DataTable givenAttributes)throws Throwable {
+	
+	List<DataTableRow> memberAttributesRow = givenAttributes
+			.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+				.get(0), memberAttributesRow.get(i).getCells().get(1));
+	}
+
+	String memberType = memberAttributesMap.get("Member Type");
+	/* Claim Support number is not displayed to SHIP members as pert of May 1 2019 release*/
+	if (memberType.equalsIgnoreCase("preeffectiveSHIPOnly")) 	
+	{BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+			.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+	BenefitsAndCoveragePage.checkModelPopup(benefitsCoveragePage.driver);
+	benefitsCoveragePage.verifyClaimSupportSupportNumberNOTDisplayedForSHIPPreEffectiveMembers();
+	benefitsCoveragePage.verifyClaimSupportSupportHeaderInNeedHelpNOTDisplayedForSHIPPreEffectiveMembers();
+	}
+	else 
+	{
+		System.out.println("Skipping the validation for the Claims Support number as this is not a SHIP member");
+	}
+}
+
+
 @Then("^user click on the plan documents button$")
 public void clickViewPlanDocumentsButton() throws Throwable {
 	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -236,9 +264,38 @@ public void verifySubnavigationIsSuppressedOnClaimsPage() throws Throwable {
 	ClaimSummarypage.checkForIPerceptionModel(newclaimsSummarypage.driver);
 	newclaimsSummarypage.validateClaimsSummarySubNavNotDisplayed();
 	newclaimsSummarypage.validateExplanationOfBenefitsSubNavNotDisplayed();
-	
-               
+	               
 }
+
+@Then("^verify that claim support header with phone number in Need Help is not displayed to SHIP Pre-effective members on Claims Page$")
+public void validateClaimSupportIsNOTDisplayedOnClaimsPageForSHIPPreffective(DataTable givenAttributes)throws Throwable {
+	
+	List<DataTableRow> memberAttributesRow = givenAttributes
+			.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+				.get(0), memberAttributesRow.get(i).getCells().get(1));
+	}
+
+	String memberType = memberAttributesMap.get("Member Type");
+	/* Claim Support number is not displayed to SHIP members as pert of May 1 2019 release*/
+	if (memberType.equalsIgnoreCase("preeffectiveSHIPOnly")) 
+	{
+	
+	ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario()
+			.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);   
+	ClaimSummarypage.checkForIPerceptionModel(newclaimsSummarypage.driver);
+	newclaimsSummarypage.verifyClaimSupportSupportHeaderInNeedHelpNOTDisplayedForSHIPPreEffectiveMembers();
+	newclaimsSummarypage.verifyClaimSupportSupportNumberNOTDisplayedForSHIPPreEffectiveMembers();
+	}
+	else 
+	{
+		System.out.println("Skipping the validation for the Claims Support number as this is not a SHIP member");
+	}
+}
+
 
 @Then("^verify that correct preeffective message is displayed on claims page$")
 public void verifyCorrectPreEffectiveMessageIsDisplayedOnClaimsPage() throws Throwable {
@@ -276,7 +333,7 @@ public void verifyPaymentTabIsDisplayedOnClaimsPage(DataTable givenAttributes)th
 
 	String memberType = memberAttributesMap.get("Member Type");
 	/* Premium payment tab is always displayed to Individual members, therefore checking only for them*/
-	if (memberType.equalsIgnoreCase("preeffectiveIndMA")|| memberType.equalsIgnoreCase("preeffectiveIndMAPD")|| memberType.equalsIgnoreCase("preeffectiveIndPDP")) 
+	if (memberType.equalsIgnoreCase("preeffectiveIndMA")|| memberType.equalsIgnoreCase("preeffectiveIndMAPD")|| memberType.equalsIgnoreCase("preeffectiveIndPDP") || memberType.equalsIgnoreCase("preeffectiveSHIPOnly")) 
 	{	
 	
 		ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario()

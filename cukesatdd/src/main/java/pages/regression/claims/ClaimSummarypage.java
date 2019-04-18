@@ -396,6 +396,12 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy(xpath = "//main//li[@class='ng-scope']//a[1]")
 	private WebElement ssup_Plan;
 	
+    @FindBy(xpath = "//p[contains(text(),'1-800-523-5880')]")
+    public WebElement preEffectiveClaimsSupportNumber;
+    
+    @FindBy(xpath = "//h3[@class='needhelp h4 margin-none atdd-claims-header']")
+    public WebElement preEffectiveClaimsSupportHeader;
+	
 
 
 	public ClaimSummarypage(WebDriver driver) {
@@ -2253,5 +2259,33 @@ public void TBR_NavigateToClaimsPage(){	//tbd-remove whole method
 					Assert.assertTrue("PROBLEM - should not be able to locate the Adobe PDF section because there is no PDF avaialbe on this detail page",!validate(pageContainsPdfDocText));
 				}
 			}
+	
+			 public void verifyClaimSupportSupportNumberNOTDisplayedForSHIPPreEffectiveMembers() throws InterruptedException 
+             {
+
+                            System.out.println("Now checking for Claim Support Number for SHIP Pre-effective members");
+                            try {
+                          	  preEffectiveClaimsSupportNumber.isDisplayed();                            	  
+           					System.out.println("Claim Support Number for SHIP Pre-effective members was displayed");
+           					Assert.fail("Claim Support Number for SHIP Pre-effective members was displayed, Test step is failed due to it");
+           				} catch (Exception e) {
+           					System.out.println("Claim Support Number for SHIP Pre-effective members was NOT displayed, Test step is passed due to it");
+           			    		}
+
+             }
+             
+             public void verifyClaimSupportSupportHeaderInNeedHelpNOTDisplayedForSHIPPreEffectiveMembers() throws InterruptedException 
+             {
+
+                            System.out.println("Now checking for Claim Support Header in Need Help Section for SHIP Pre-effective members");
+                            try {
+                          	  preEffectiveClaimsSupportHeader.isDisplayed();
+                          	  System.out.println("Claim Support Header in Need Help Section for SHIP Pre-effective members was displayed");
+           					Assert.fail("Claim Support Header in Need Help Sectionr for SHIP Pre-effective members was displayed, Test step is failed due to it");
+           				} catch (Exception e) {
+           					System.out.println("Claim Support Header in Need Help Section for SHIP Pre-effective members was NOT displayed, Test step is passed due to it");
+           			    		}
+
+             }
 			//^^^ note:	added for def1041			
 }
