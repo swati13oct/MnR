@@ -202,7 +202,7 @@ Feature: C1.2To test Profile and Preferences page
       | planType | memberType  |
      # | MAPD     | EPMPEnabled |
 
-  @accountProfile11 @EPMPProfilePageContactusInformation @regressionMember
+  @accountProfile11 @EPMPProfilePageContactusInformation @regressionMember @epmpfixed
   Scenario Outline: To test end to end regression scenario for EPMP profile page
   #Removed from Regression as EPMP is still in the pipeline for development
  	Given login with following details logins in the member portal and validate elements
@@ -251,7 +251,7 @@ Feature: C1.2To test Profile and Preferences page
       #| MAPD     | EPMPEnabled | group    | HealthSelectRx |
 	  
 	
-	 @accountProfile14 @profilePageForTerminated @regressionMember
+	 @accountProfile14 @profilePageForTerminated @regressionMember @epmpfixed
   Scenario Outline: To test end to end regression scenario for account profile  page for a terminated member
  #Removed from Regression as EPMP is still in the pipeline for development
     Given login with following details logins in the member portal and validate elements
@@ -266,7 +266,7 @@ Feature: C1.2To test Profile and Preferences page
 
     Examples: 
       | planType | memberType  | dataType   |
-    #  | MAPD     | EPMPEnabled | Terminated |
+      | MAPD     | EPMPEnabled | Terminated |
 
   @accountProfile15 @EPMPpreferencesForComboOnProfile  @regressionMember
   Scenario Outline: To test end to end regression scenario for account profile and preferences for a combo member

@@ -208,6 +208,9 @@ public class TestHarness extends UhcDriver {
 	@FindBy(id = "coveragebenefits_2")
 	private WebElement coverageandbenefitslink;
 	
+	@FindBy(xpath = "//table[@class='componentTable']/tbody/tr/td/a[contains(.,'benefits')]")
+	private WebElement benefitsPagetestharnessLink;
+	
 
 	String category = null;
 
@@ -327,7 +330,7 @@ public class TestHarness extends UhcDriver {
 	 * 
 	 * @return
 	 */
-	public BenefitsAndCoveragePage navigateDirectToBnCPag() {
+	public pages.regression.benefitandcoverage.BenefitsAndCoveragePage navigateDirectToBnCPag() {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,50)", "");
 		scrollToView(benefitsPageLink);
@@ -338,7 +341,7 @@ public class TestHarness extends UhcDriver {
 		System.out.println(driver.getTitle());
 
 		if (driver.getTitle().contains("Benefits")) {
-			return new BenefitsAndCoveragePage(driver);
+			return new pages.regression.benefitandcoverage.BenefitsAndCoveragePage(driver);
 		}
 		return null;
 	}
@@ -866,5 +869,19 @@ public class TestHarness extends UhcDriver {
 		System.out.println("Now waiting for 20 seconds");
 		return new pages.regression.benefitandcoverage.BenefitsAndCoveragePage(driver);
 
+	}
+	public BenefitsAndCoveragePage navigateDirectToBnCFromTestHarnessPage() {
+		System.out.println(driver.getTitle());
+		CommonUtility.waitForPageLoad(driver, benefitsPagetestharnessLink, 30);
+		validateNew(benefitsPagetestharnessLink);
+		benefitsPagetestharnessLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_30);
+
+		if (driver.getTitle().contains("Plan Benefits Summary")) {
+			System.out.println("Pass!");
+			return new BenefitsAndCoveragePage(driver);
+		}
+		return null;
 	}
 }

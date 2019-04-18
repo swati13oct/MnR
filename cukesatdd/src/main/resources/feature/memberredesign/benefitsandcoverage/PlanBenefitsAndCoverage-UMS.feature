@@ -954,3 +954,15 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     Examples: 
       | UID       | planType | memberType           |
       | US1615721 | MAPD     | Group_UnivOfKentucky |
+      
+  @benefitsAndCoverage44 @PRB0527882 
+  Scenario Outline: UserStory: <UID> -plan: <planType> -memberType: <memberType> -Verify the PRB0527882 PCP - plan benefits correct URL redirection
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    Then The user navigate to Benefits and Coverage page
+    And the user validates the providersearch link
+     Examples: 
+      | UID       | planType | memberType           |
+      | US1674924 | MAPD     | PCPProblemTicket |
+  

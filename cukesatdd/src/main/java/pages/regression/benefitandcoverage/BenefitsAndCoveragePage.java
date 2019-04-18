@@ -879,6 +879,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                @FindBy(css="div.siteleaving-popup-footer a#proceedbtn")
                private WebElement siteLeavingPopUpProceedBtn;
                
+               @FindBy(xpath= "//*[@id='pcpCard2']/div/a")
+               private WebElement providersearchlink;
+               
                public WebElement getLinkBackToTop_copy() {
                               return linkBackToTop_copy;
                }
@@ -4214,5 +4217,26 @@ public class BenefitsAndCoveragePage extends UhcDriver {
             	}
             	return bAccessDrugsBenfitsBlockValidation;
             }
+
+			public void validate_provider_search_link() {
+				
+				waitforElement(providersearchlink);
+				validateNew(providersearchlink);
+				ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+				tabs.size();
+				System.out.println("hi");
+				if(tabs.size()==1)
+				{
+				System.out.println("user is on benefits overview page");
+				providersearchlink.click();
+				driver.switchTo().window(tabs.get(2));
+				try {
+					Thread.sleep(5000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				}
+			}
 
 }
