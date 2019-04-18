@@ -60,28 +60,28 @@ public class RequestAgentAppointmentPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='ebcformErrorContainer']")
 	private WebElement errorMessageHeading;
 
-	@FindBy(xpath = "//span[text()='Enter a First Name value.']")
+	@FindBy(xpath = "//span[contains(text(),'Enter a first name and must contain only letters, spaces, hyphens (-) and apostrophes')]")
 	private WebElement errorMessageFN;
 
-	@FindBy(xpath = "//span[text()='Enter a Last Name value.']")
+	@FindBy(xpath = "//span[contains(text(),'Enter a last name and must contain only letters, spaces, hyphens (-) and apostrophes')]")
 	private WebElement errorMessageLN;
 
 	@FindBy(xpath = "//div[@class='trail breadcrumb']")
 	private WebElement breadCrumb;
 
-	@FindBy(xpath = "//span[text()='Enter a Address value.']")
+	@FindBy(xpath = "//span[contains(text(),'Enter an address that contains only numbers, letters, apostrophe')]")
 	private WebElement errorMessageAddress;
 
-	@FindBy(xpath = "//span[text()='Enter a City value.']")
+	@FindBy(xpath = "//span[contains(text(),'Enter a city that only contains non-numeric characters, apostrophe')]")
 	private WebElement errorMessageCity;
 
-	@FindBy(xpath = "//span[text()='Select a State value.']")
+	@FindBy(xpath = "//span[contains(text(),'Select a state')]")
 	private WebElement errorMessageState;
 
-	@FindBy(xpath = "//span[text()='Enter a ZIP Code value.']")
+	@FindBy(xpath = "//span[text()='Enter a valid 5-digit ZIP code in the format 12345.']")
 	private WebElement errorMessageZip;
 
-	@FindBy(xpath = "//span[text()='Enter a Phone value.']")
+	@FindBy(xpath = "//span[contains(text(),'Enter a valid 10-digit phone number (format xxx-xxx-xxxx).')]")
 	private WebElement errorMessagePhone;
 	public RequestAgentAppointmentPage(WebDriver driver) {
 		super(driver);
