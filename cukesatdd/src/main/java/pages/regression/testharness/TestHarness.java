@@ -18,7 +18,7 @@ import acceptancetests.memberredesign.HSID.CommonStepDefinition;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.memberrdesignVBF.BenefitsAndCoveragePage;
+//import pages.memberrdesignVBF.BenefitsAndCoveragePage;
 import pages.regression.benefitandcoverage.*;
 import pages.regression.claims.*;
 import pages.regression.contactus.ContactUsPage;
@@ -346,6 +346,21 @@ public class TestHarness extends UhcDriver {
 		return null;
 	}
 
+	public BenefitsAndCoveragePage navigateDirectToBnCPagFromTestharnessPage() {
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,50)", "");
+		scrollToView(testHarnessBenefitsPageLink);
+		jsClickNew(testHarnessBenefitsPageLink);
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_60);
+		System.out.println(driver.getTitle());
+
+		if (driver.getTitle().contains("Benefits")) {
+			return new BenefitsAndCoveragePage(driver);
+		}
+		return null;
+	}
 	/***
 	 * 
 	 * @return
