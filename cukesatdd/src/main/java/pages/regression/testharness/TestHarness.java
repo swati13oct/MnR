@@ -18,13 +18,13 @@ import acceptancetests.memberredesign.HSID.CommonStepDefinition;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-//import pages.memberrdesignVBF.BenefitsAndCoveragePage;
 import pages.regression.benefitandcoverage.*;
+import pages.regression.formsandresources.*;
 import pages.regression.claims.*;
 import pages.regression.contactus.ContactUsPage;
 import pages.memberrdesignVBF.DrugCostEstimatorPage;
 import pages.memberrdesignVBF.EOBPage;
-import pages.memberrdesignVBF.FormsAndResourcesPage;
+
 import pages.regression.healthandwellness.*;
 import pages.regression.ordermaterials.*;
 import pages.memberrdesignVBF.PaymentsOverview;
@@ -649,8 +649,9 @@ public class TestHarness extends UhcDriver {
 	/***
 	 * 
 	 * @return
+	 * @throws InterruptedException 
 	 */
-	public FormsAndResourcesPage navigateDirectToFnRPage() {
+	public FormsAndResourcesPage navigateDirectToFnRPage() throws InterruptedException {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,50)", "");
 		scrollToView(formsPageLink);
@@ -664,6 +665,7 @@ public class TestHarness extends UhcDriver {
 		return null;
 	}
 
+	
 	/***
 	 * 
 	 * @return
@@ -732,8 +734,9 @@ public class TestHarness extends UhcDriver {
 	/***
 	 * 
 	 * @return
+	 * @throws InterruptedException 
 	 */
-	public FormsAndResourcesPage clickFormsAndResourcesTab() {
+	public FormsAndResourcesPage clickFormsAndResourcesTab() throws InterruptedException {
 
 		validateNew(formsAndResources);
 		formsAndResources.click();

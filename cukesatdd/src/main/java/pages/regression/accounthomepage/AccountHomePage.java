@@ -53,6 +53,9 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='dropdown-toggle--1']/span")
 	private WebElement acctProfile;
 	
+	@FindBy(xpath = "//a[contains(text(),'Go to Forms and Resource page')]")
+	private WebElement FormRsrceLinkTestHarness;
+	
 	@FindBy(xpath = "//*[@id='dropdown-options--1']/a[3]")
 	private WebElement acctSetting;
 	
@@ -1405,14 +1408,22 @@ public class AccountHomePage extends UhcDriver {
 	@SuppressWarnings("unused")
 	public FormsAndResourcesPage navigatetoFormsnResources(String memberType, String planType)
 			throws InterruptedException {
-		// waitForHomePage(helloPerson);
+		
 		WebDriverWait wait = new WebDriverWait(driver, 20);
 		if (validate(iPerceptionAutoPopUp)) {
 			iPerceptionAutoPopUp.click();
 		} else {
 			System.out.println("iPerception Pop Up not displayed");
 		}
-		if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a")
+		
+		if (MRScenario.isTestHarness.equals("YES")) {
+			System.out.println("user is on TestHarness login page");
+			
+			CommonUtility.waitForPageLoad(driver, FormRsrceLinkTestHarness, 30);
+			FormRsrceLinkTestHarness.click();
+		
+		}
+		else if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a")
 				|| MRScenario.environmentMedicare.equalsIgnoreCase("test-a")
 				|| MRScenario.environment.equalsIgnoreCase("team-ci1")) {
 			System.out.println("Go to claims link is present "

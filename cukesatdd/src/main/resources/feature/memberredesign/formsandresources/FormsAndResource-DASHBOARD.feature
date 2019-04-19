@@ -3,15 +3,13 @@
 Feature: G1.1 To validate forms and resources page in dashboard site
 
 
-@formsAndResources1 @F&RJMPLinks @Feb_release_2019 @gladiators @regressionMember
- Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To verify quicklinks for a MAPD member
+@formsAndResources1 @F&RJMPLinks @Feb_release_2019 @gladiators @regressionMember @tamzid
+ Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -Rider: <rider>-To verify quicklinks for a MAPD member
    	Given login with following details logins in the member portal and validate elements
    	  | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       |identifier|<Identifier>|
       |Rider|<rider>|
-	#And user naviagtes to Forms and Resources page
-	
 	And user clicks on the view document and resources link and navigate to forms and resource page
 	| Plan Type   | <planType>   |
 	| Member Type    | <memberType>    |
@@ -35,14 +33,14 @@ Feature: G1.1 To validate forms and resources page in dashboard site
 	#Membership material comes dynamically based on the logic
 		
 	Examples: 
-      | TID     | planType | memberType |Identifier        | language |count|rider  |
-      | 15108   | MAPD     | Individual |IndEffectiveAARP  | ENGLISH  | 7   |NoRider|
-      | 15108   | MAPD     | Individual |IndEffectiveAARP  | ENGLISH  | 7   |Rider  |
-      | 15303   | MAPD     | Group      |GrpEffectiveUHC   | ENGLISH  | 7   |NoRider|
-      | 15108   | MAPD     | Individual |IndEffectiveUHC   | ENGLISH  | 6   |NoRider|
-	  | 15108   | MAPD     | Individual |IndEffectiveUHC   | ENGLISH  | 6   |Rider  |
-	  | 00000   | PCP      | Individual |IndEffectivePCP   | ENGLISH  | 6   |NoRider|
-	  | 15128   | MEDICA   | Individual |IndEffectiveMedica| ENGLISH  | 6   |NoRider|
+      | TID     | planType | memberType                    | Identifier        | language |count|rider  |
+      | 15108   | MAPD     | Individual_FormsResources     | IndEffectiveAARP  | ENGLISH  | 7   |NoRider|
+     # | 15108   | MAPD     | Individual_FormsResources     | IndEffectiveAARP  | ENGLISH  | 7   |Rider  |
+    #  | 15303   | MAPD     | Group_FormsResources          | GrpEffectiveUHC   | ENGLISH  | 7   |NoRider|
+    #  | 15108   | MAPD     | Individual_FormsResources     | IndEffectiveUHC   | ENGLISH  | 6   |NoRider|
+	#  | 15108   | MAPD     | Individual_FormsResourcesl    | IndEffectiveUHC   | ENGLISH  | 6   |Rider  |
+	#  | 00000   | PCP      | Individual_FormsResources     | IndEffectivePCP   | ENGLISH  | 6   |NoRider|
+	#  | 15128   | MEDICA   | Individual_FormsResourcesl    | IndEffectiveMedica| ENGLISH  | 6   |NoRider|
 	  
 	  
 @formsAndResources2 @F&RJMPLinks @Feb_release_2019 @gladiators @regressionMember

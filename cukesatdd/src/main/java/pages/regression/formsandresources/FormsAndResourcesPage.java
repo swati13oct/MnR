@@ -126,7 +126,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	private WebElement renewMagazineMAPDGroup;
 	/** My DocumentSection - Forms And Resources page */
 
-	@FindBy(id = "myDocHeader")
+	@FindBy(xpath = "//*[@id='myDocHeader']")
 	private WebElement myDocumentSection;
 
 	/** Plan Material Section **/
@@ -142,22 +142,22 @@ public class FormsAndResourcesPage extends UhcDriver {
 	
 	// *[@id="plan_material_fnr"]/div/div[1]/h2
 
-	@FindBy(xpath = "//*[@id='plan_material_fnr']/div/div[1]/h2")
+	@FindBy(xpath = "//*[@id='plan_material_fnr']/div/div[2]/h2") 
 	public WebElement planMaterialHeaderSection;
 
 	@FindBy(xpath = "//*[@id='plan_material_fnr']/div/div[1]/h2")
 	public List<WebElement> lstPlanMaterialHeaderSection;
 
-	@FindBy(xpath = "//*[@id='anoc_headerfnr']/div/div/h2")
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/div[3]/div[4]/div/div/div/div/section//*[@id='anoc_headerfnr']/div/div/h2")
 	public List<WebElement> anocHeaderSection;
 
-	@FindBy(xpath = "//*[@id='FnR_annualDirectory']/div/div[2]/div/div/div/h2")
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/div[3]/div[8]/div/div/div/div/section//*[@id='FnR_annualDirectory']/div/div[2]/div/div/div/h2")
 	public List<WebElement> annualdirectoriesHeaderSection;
 
 	@FindBy(xpath = "//*[@id='FnR_annualDirectory']/div/div[1]/div/div/div/h2")
 	public List<WebElement> annualdirectoriesHeaderSectionMAPDGRP;
 
-	@FindBy(xpath = "//*[@id='eobsection']/div[1]/div/h2")
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/div[3]/div[17]/div/div/div/section//*[@id='eobsection']/div[1]/div/h2")
 	public List<WebElement> eobHeaderSection;
 
 	/* for active member */
@@ -182,7 +182,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	@FindBy(xpath = "(//*[@id=\"globalContentIdForSkipLink\"]//div[2]//section//div[1]//div[4]//ul/li[1]/a)[2]")
 	private WebElement pcpOrderPlanMaterialLink;
 
-	@FindBy(xpath = "//*[@id='renew_magazine']//h2")
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/div[3]/div[19]/div/div/div//*[@id='renew_magazine']/div/div/div/div[1]/div/div/div[2]/h2")
 	public List<WebElement> renewMagazineSectionHeader;
 
 	// *[@id="plan_material_fnr2018"]/div/div[4]//ul/li[1]/a
@@ -385,7 +385,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='home_2']")
 	private WebElement home;
 
-	@FindBy(xpath = "(//*[@id='backToTopContainer']/a/span/p)[1]")
+	@FindBy(xpath = "(//*[@id='backToTopContainer']/a/span/p)[2]")
 	private WebElement linkBackToTop;
 
 	@FindBy(xpath = "(//*[@id='backToTopContainer']/a/span/p)[2]")
