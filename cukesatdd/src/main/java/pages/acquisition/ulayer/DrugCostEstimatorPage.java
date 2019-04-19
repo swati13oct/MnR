@@ -1,5 +1,7 @@
 package pages.acquisition.ulayer;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -212,6 +214,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='total_pharmacysavings']/div[2]/a")
 	public WebElement lkEditPharmacyList;
+	
+	@FindBy(xpath = "//*[@id='atddEditPharmacyList']")
+	public WebElement lnkEditPharmacyList;
 
 	@FindBy(xpath = "//div[@class='pharmacy-container']")
 	public WebElement pharmacyContainer;
@@ -356,7 +361,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	
 	@FindBy(id = "total_annualcost_acq")
 	private WebElement costText;
-	
+		
 	@FindBy(id = "ghn_lnk_2")
 	public WebElement ourPlansTab;
 	
@@ -393,6 +398,105 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button proactive-offer__close main-background-color second-color')]")
 	public static WebElement proactiveChatExitBtn;
 	
+	@FindBy(xpath = "//*[@class='cta-button pharmacy-tab-show']")
+	private WebElement btnNextPickAPharmacy;
+	
+	@FindBy(xpath = "//*[contains(@class,'pharmacy-name')]")
+	private List<WebElement> lstPharmacyNames;
+	
+	@FindBy(xpath = "//button[contains(@id,'select-pharmacy')]")
+	private List<WebElement> lstSelectPharmacy;
+	
+	@FindBy(xpath = "//*[contains(@dtmname,'view costs')]")
+	private WebElement btnViewCost;
+	
+	@FindBy(xpath = "//*[contains(text(),'Find a pharmacy within')]")
+	private WebElement lblFindAPharmacy;
+	
+	@FindBy(xpath = "//*[@id='drugdetails']//p[contains(text(),'drugs to')]")
+	private WebElement lblCreateAListOfThePrescriptionDrug;
+	
+	@FindBy(xpath = "//*[contains(@id,'drugDosageStrengthId')]//following::a[contains(@id,'generic-drug-switch-btn')]")
+	private List<WebElement> lstlinkSwitchNow;
+	
+	@FindBy(xpath = "//*[contains(@class,'message-block')]//div[contains(@class,'message-block-body')]//div[2]/div")
+	private List<WebElement> lblGenericMsgBox;
+	
+	@FindBy(xpath = "//*[@id='atddBackToPlans']")
+	private WebElement btnBackToPlans;
+	
+	@FindBy(xpath = "//*[contains(@class,'drugName')]")
+	private List<WebElement> hdrDrugName;
+	
+	@FindBy(xpath = "//*[contains(@class,'margin-large generic-name')]")
+	private WebElement lblGenericDrugName;
+	
+	
+	
+	
+	public List<WebElement> getHdrDrugName() {
+		return hdrDrugName;
+	}
+
+	public WebElement getCostText() {
+		return costText;
+	}
+	
+	public WebElement getBtnBackToPlans() {
+		return btnBackToPlans;
+	}
+
+	/*Message on drug container, already added drugs*/
+	public List<WebElement> getLblGenericMsgBox() {
+		return lblGenericMsgBox;
+	}
+	
+	public List<WebElement> getLstlinkSwitchNow() {
+		return lstlinkSwitchNow;
+	}
+
+	public WebElement getLblCreateAListOfThePrescriptionDrug() {
+		return lblCreateAListOfThePrescriptionDrug;
+	}
+
+	public WebElement getStep3EditDrugsList() {
+		return step3EditDrugsList;
+	}
+	
+	public WebElement getLblFindAPharmacy() {
+		return lblFindAPharmacy;
+	}
+
+	public WebElement getBtnViewCost() {
+		return btnViewCost;
+	}
+
+	public List<WebElement> getLstSelectPharmacy() {
+		return lstSelectPharmacy;
+	}
+
+	public List<WebElement> getLstPharmacyNames() {
+		return lstPharmacyNames;
+	}
+
+	public WebElement getMilesSelection() {
+		return milesSelection;
+	}
+
+	public WebElement getBtnNextPickAPharmacy() {
+		return btnNextPickAPharmacy;
+	}
+	
+	
+
+	public WebElement getDrugCostCard() {
+		return drugCostCard;
+	}
+
+	public WebElement getLnkEditPharmacyList() {
+		return lnkEditPharmacyList;
+	}
+
 	@Override
 	public void openAndValidate() {
 
@@ -425,8 +529,15 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	public void validateAddedDrug(String drug) throws InterruptedException {
 		WebElement drugHeading = driver.findElement(By
-				.xpath("//*[starts-with(@id,'drugDosageStrengthId_')][contains(text(),'" + drug.split(" ")[0] + "')]"));
+				.xpath("//*[starts-with(@id,'drugDosageStrengthId_')][contains(text(),'"+drug.split(" ")[0]+"')]"));
 		Assert.assertTrue("Drug name not visible", validateNew(drugHeading));
+	}
+	
+	public void validateAddedDrugNew(String drug) throws InterruptedException {
+		if(driver.findElement(By.xpath("//*[starts-with(@id,'drugDosageStrengthId_')][contains(text(),'" + drug.split(" ")[0].trim() + "')]")).isDisplayed())
+				Assert.assertTrue(true);
+				else Assert.assertFalse(true);
+		//Assert.assertTrue("Drug name not visible", validateNew(drugHeading));
 	}
 	
 	public void changeUrlToNewDCEPage() throws InterruptedException {
@@ -682,14 +793,17 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	public void selectPharmacyType(String pharmacy) throws InterruptedException {
 
-		WebElement rbtn = driver		
-				.findElement(By.xpath(".//*[@id='pharmacy-type']/div[1]/label//p[contains(text(),'" + pharmacy + "')]"));
 
-		rbtn.isDisplayed();
-		if (!rbtn.isSelected()) {
-			rbtn.click();
+		List<WebElement> rbtn =  driver		
+				.findElements(By.xpath(".//*[@id='pharmacy-type']//*[contains(text(),'" + pharmacy + "')]"));
+									   
+		WebElement rbtnValue=rbtn.get(0);
+		rbtnValue.isDisplayed();
+		if (!rbtnValue.isSelected()) {
+			rbtnValue.click();
 			System.out.println("RBTN " + pharmacy + " >> Selected");
 		} else {
 			System.out.println("RBTN " + pharmacy + " >> already selected");
@@ -1750,5 +1864,87 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, maPlansCount, 60);
 		return new VPPPlanSummaryPage(driver);
 	}
+	
+	public void pickAPharmacy() {
+		validateNew(getBtnNextPickAPharmacy());
+		getBtnNextPickAPharmacy().click();
+		CommonUtility.waitForPageLoadNew(driver, getLblFindAPharmacy(), 60);
+	}
+	
+	/*selecting radius*/
+	public void selectRadius(WebElement dropDownID, String value) {
+		selectFromDropDownByText(driver,dropDownID, value);
+	}
+
+	public void clickButtonViewCost() {
+		validateNew(getBtnViewCost());
+		getBtnViewCost().click();
+		validateNew(getDrugCostCard());
+	}
+	
+	public void clickEditPharmacy() {
+		validateNew(getLnkEditPharmacyList());
+		getLnkEditPharmacyList().click();
+		validateNew(getLblFindAPharmacy());
+		
+	}
+	
+	public void clickEditDrugList() {
+		validateNew(getStep3EditDrugsList());
+		getStep3EditDrugsList().click();
+		validateNew(getLblCreateAListOfThePrescriptionDrug());
+		
+	}
+	
+	public void clickSwitchNowLink(WebElement lnkSwitchNow) throws InterruptedException {
+		
+		scrollToView(lnkSwitchNow);
+		jsClickNew(lnkSwitchNow);
+		CommonUtility.waitForPageLoad(driver, updateBtn, 60);
+	}
+	
+	public void clickUpdateButton() throws InterruptedException {
+		jsClickNew(updateBtn);
+	}
+	
+	public void clickSwitchNUpdate(WebElement lnkSwitchNow) throws InterruptedException {
+		clickSwitchNowLink(lnkSwitchNow);
+		clickUpdateButton();
+	}
+	
+	public void clickSwitchNUpdateAll() throws InterruptedException {
+		int count=0;
+		for(int i=0;i<getLstlinkSwitchNow().size();i++) {
+			
+		if(getLstlinkSwitchNow().get(i).isDisplayed()) {
+			try {
+		clickSwitchNowLink(getLstlinkSwitchNow().get(i));
+		clickUpdateButton();
+		count=1;
+			}catch(Exception e) {}
+		
+		}
+				
+		/*if(count==1)
+			i=0;*/
+			
+		}
+	}
+	
+	public void clickBtnBackToPlans() throws InterruptedException {
+		validateNew(getBtnBackToPlans());
+		getBtnBackToPlans().click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, maPlansCount, 60);
+		
+	}
+	
+	public String genericDrugName(WebDriver wd) throws InterruptedException {
+		String DrugName=wd.findElement(By.xpath("//*[contains(@class,'margin-large generic-name')]")).getText().toLowerCase();
+		return DrugName;
+	}
+	
+
+
 	
 }
