@@ -23,7 +23,7 @@ import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.uhcretiree.Rallytool_Page;
 
 import pages.acquisition.ulayer.PageTitleConstants;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;

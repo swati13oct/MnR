@@ -134,7 +134,8 @@ public class DCEVPPAcqStepDefinitionUHC {
 		
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.viewPlanSummary(plantype);
-		DrugCostEstimatorPage dce = plansummaryPage.navigatetoDCEPage(planName);
+		plansummaryPage.navigatetoDCEPage(planName);
+		DrugCostEstimatorPage dce=new DrugCostEstimatorPage(wd);
 		if(dce!=null){
 			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
 		}

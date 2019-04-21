@@ -29,7 +29,7 @@ import pages.acquisition.bluelayer.ComparePlansPageBlayer;
 import pages.acquisition.ulayer.PageTitleConstants;
 //import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import pages.acquisition.bluelayer.ProviderSearchPage;
-import pages.acquisition.bluelayer.DrugCostEstimatorPage;
+import pages.acquisition.dce.bluelayer.DrugCostEstimatorPage;
 import pages.acquisition.bluelayer.PlanDetailsPage;
 import pages.acquisition.vppforaep.AepVppPlanSummaryPage;
 import acceptancetests.data.CommonConstants;
