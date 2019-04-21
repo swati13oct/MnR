@@ -282,7 +282,9 @@ public class HSIDLoginPage extends UhcDriver {
 				return new TestHarness(driver);
 		}
 		else {
-			System.out.println("Security question page or test harness page or Account Home Page didn't load , please check");
+			System.out.println("Security question page "
+					+ "or test harness page "
+					+ "or Rally Account Home Page didn't load , please check");
 		}
 		if (MRScenario.environmentMedicare.equals("team-e")
 				|| MRScenario.environmentMedicare.equals("team-ci1")) {
@@ -585,18 +587,18 @@ public class HSIDLoginPage extends UhcDriver {
 		while (y < 20) {
 			try {
 				List<WebElement> header=driver.findElements(By.xpath("//h1"));
-				if (header.size() >0) {
+				if (header.size() > 0) {
 					System.out.println("Located some sort of header, assume page is comming");
 					Thread.sleep(2000); //just in case, let page settle down
 					break;
 				}
 				Thread.sleep(1000);
 				y=y+1;
-				System.out.println("Waiting for some form of header to show up... waited "+y+" sec");
+				System.out.println("Waiting for some form of header to show up... waited total of "+y+" sec");
 			} catch (UnhandledAlertException ae) {  //if getting alert error, stop and get out
 				System.out.println("Exception: "+ae); 
 				Assert.fail("***** Error in loading  Redesign Account Landing Page ***** Got Alert error");
-			} catch (InterruptedException e) {
+			} catch (Exception e) { 
 				//e.printStackTrace();
 			}
 		} 
