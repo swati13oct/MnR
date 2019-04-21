@@ -385,11 +385,15 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 	
 	@Then("^the user will not be able to see the locate a pharmacy on home page$")
 	public void verifyPharmacyLinkIsNotDisplayedToMaShip() throws InterruptedException{
+		if (MRScenario.isTestHarness.equalsIgnoreCase("YES")) {
+			System.out.println("This step is for running on Rally Dashboard, not suitable for testharness env, skipping this step");
+		} else {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 	
 
 		Assert.assertTrue(accountHomePage.checkPharmacyLinkNotAvailable());
+		}
 	}
 
 }
