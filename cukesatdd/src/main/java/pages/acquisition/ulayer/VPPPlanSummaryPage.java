@@ -1813,6 +1813,18 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		else
 			return null;  
 	}
+	/* Navigation to DCE for all plan types having a plan name*/
+	public DrugCostEstimatorPage navigatetoDCEVPP(String planName){
+		WebElement DCELink = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(), 'Prescription Drugs, Tier 1')]/span)[2]"));
+		DCELink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if(driver.getCurrentUrl().contains("drug-cost-estimator")){
+			System.out.println("DCE Page is loaded");
+			return new DrugCostEstimatorPage(driver);
+		}	
+		else
+			return null;  
+	}
 
 	public void validateRightRailSection(){
 		validateNew(RightRailSection);
@@ -2645,6 +2657,17 @@ for (int i = 0; i < initialCount + 1; i++) {
 		else
 			return null;
 	}
+	
+	public String estimatedAnnualDrugCostVPP() {
+		
+		scrollToView(getValEstimatedAnnualDrugCostValue());
+		return getValEstimatedAnnualDrugCostValue().getText().trim();
+		
+		
+	}
+
+	
+	
 }
 
 

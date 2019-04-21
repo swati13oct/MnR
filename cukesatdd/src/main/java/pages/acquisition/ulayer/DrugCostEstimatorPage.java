@@ -431,8 +431,14 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class,'margin-large generic-name')]")
 	private WebElement lblGenericDrugName;
 	
+	@FindBy(id="backToPlanSummaryTop")
+	private WebElement lnkBackToAllPlans;
+		
 	
-	
+	public WebElement getLnkBackToAllPlans() {
+		return lnkBackToAllPlans;
+	}
+		
 	
 	public List<WebElement> getHdrDrugName() {
 		return hdrDrugName;
@@ -1035,11 +1041,11 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public AddDrugDetails addDrug(String drug) throws InterruptedException {
 
 		AddNewDrugModal addNewDrugModal = clickOnAddDrug();
-		addNewDrugModal.searchDrugWithoutAutoComplete(drug);
+		return addNewDrugModal.searchDrugWithoutAutoComplete(drug);
 		/*addNewDrugModal.closeModalWindow();
 		clickOnAddDrug();
 		addNewDrugModal.searchDrugWithAutoComplete(drug);*/
-		return new AddDrugDetails(driver);
+		//return new AddDrugDetails(driver);     //commented because two times reference is written, rectified the issue
 	}
 
 	public void validateDrugSavingInfo() {
@@ -1930,12 +1936,20 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			
 		}
 	}
-	
+	/*Navigation from DCE to VPP*/
 	public void clickBtnBackToPlans() throws InterruptedException {
 		validateNew(getBtnBackToPlans());
 		getBtnBackToPlans().click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, maPlansCount, 60);
+		
+	}
+	/*Navigation from DCE to details page*/
+	public void clickBtnBackToPlansNavigateToDetails() throws InterruptedException {
+		validateNew(getBtnBackToPlans());
+		getBtnBackToPlans().click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, getLnkBackToAllPlans(), 60);
 		
 	}
 	

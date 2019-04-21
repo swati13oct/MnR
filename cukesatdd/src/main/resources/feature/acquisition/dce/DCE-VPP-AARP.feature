@@ -9,6 +9,7 @@ When user performs plan search using following information in the AARP site
                | County      | <county>   |
 And user access DCE tool on aarp site
 	|Plan Type | <plantype> |
+	| PlanName       | <planName>      |
 Then user adds drug to drug cost estimator flow for the given plan name in AARP site
 	  | PlanName       | <planName>      |
       | Drug Name1     | <drugName1>     |
@@ -76,10 +77,10 @@ And the user clicks on Back to Plans button in AARP site
 Then user validates Drug information is reflected on plan summary page in AARP site
 #Test ID: 15616,15617,15618
 Examples:
-               | zipcode | county             | drugInitials1       | drugName1     | drugInitials2 | drugName2  | drugInitials3 | drugName3     | drugInitials4 | drugName4 | drugInitials5 | drugName5             | pharmacyType                 | distance   |  pharmacyName               | plantype | planName                                           | quantity | frequency   |newPharmacyType|genericName1|genricName3|
-               | 90210   | Los Angeles County | lipi                |  Lipitor      | dron          | dronabinol | Adva          | Advair Diskus | Orfa          | Orfadin   | Fana          | Fanapt Titration Pack | Standard Network             | 15 miles   |  MEN'S HEALTH FOUNDATION    | MAPD     | AARP MedicareComplete SecureHorizons Plan 2 (HMO)  | 30       |Every 1 month|Mail Service   |atorvastatin |fluticasone|
-               | 90210   | Los Angeles County | lipi                |  Lipitor      | dron          | dronabinol | Adva          | Advair Diskus | Orfa          | Orfadin   | Fana          | Fanapt Titration Pack | Standard Network             | 15 miles   |  Men's Health Foundation    | PDP      | AARP MedicareRx Walgreens (PDP)                    | 30       |Every 1 month|Mail Service   |atorvastatin |fluticasone|
-               | 78002    | Los Angeles County | lipi                |  Lipitor      | dron          | dronabinol | Adva          | Advair Diskus | Orfa          | Orfadin   | Fana          | Fanapt Titration Pack | Standard Network             | 15 miles   |  Men's Health Foundation    | SNP      | UnitedHealthcare Chronic Complete (HMO SNP)        | 30       |Every 1 month|Mail Service   |atorvastatin |fluticasone|
+             	| zipcode | county             | drugInitials1       | drugName1     | drugInitials2 | drugName2  | drugInitials3 | drugName3     | drugInitials4 | drugName4 | drugInitials5 | drugName5             | pharmacyType                 | distance   |  pharmacyName               | plantype | planName                                           | quantity | frequency   |newPharmacyType|genericName1|genricName3|
+              	| 90210   | Los Angeles County | lipi                |  Lipitor      | dron          | dronabinol | Adva          | Advair Diskus | Orfa          | Orfadin   | Fana          | Fanapt Titration Pack | Standard Network             | 15 miles   |  MEN'S HEALTH FOUNDATION    | MAPD     | AARP MedicareComplete SecureHorizons Plan 2 (HMO)  | 30       |Every 1 month|Mail Service   |atorvastatin |fluticasone|
+                | 90210   | Los Angeles County | lipi                |  Lipitor      | dron          | dronabinol | Adva          | Advair Diskus | Orfa          | Orfadin   | Fana          | Fanapt Titration Pack | Standard Network             | 15 miles   |  Men's Health Foundation    | PDP      | AARP MedicareRx Walgreens (PDP)                    | 30       |Every 1 month|Mail Service   |atorvastatin |fluticasone|
+                | 78002    | Los Angeles County | lipi                |  Lipitor      | dron          | dronabinol | Adva          | Advair Diskus | Orfa          | Orfadin   | Fana          | Fanapt Titration Pack | Standard Network             | 15 miles   |  HEB PHARMACY 019    | SNP      | UnitedHealthcare Chronic Complete (HMO SNP)        | 30       |Every 1 month|Mail Service   |atorvastatin |fluticasone|
                
 @dceThroughPlanDetailsAARP @aarp @regressionMember @dce2 @aarpDce
 Scenario Outline: To Verify the drug cost estimator flow for <plantype> through plan details page's Prescription Drug Benefits tab
@@ -149,12 +150,14 @@ Then the user clicks on the Pick a pharmacy button in the DCE flow in AARP site
 Then the user change the pharmacy type and select new pharmacy in AARP site
                | New Pharmacy Type | <newPharmacyType> |
 Then the user validates the added drugs on See your Estimated Costs page in AARP site
-	  | Drug Name1     | <genericName1>     |
+	  | Drug Name1     | <genericName1>  |
       | Drug Name2     | <drugName2>     |
-      | Drug Name3     | <genricName3>     |
+      | Drug Name3     | <genricName3>   |
       | Drug Name4     | <drugName4>     |
       | Drug Name5     | <drugName5>     |
-And the user clicks on Back to Plans button in AARP site
+And the user clicks on Back to Plans button on See Your Estimated Costs page in AARP site
+And user verifies annual drug cost in the prescription drug tab of AARP site
+And the user clicks on Back to All Plans button present on details page in AARP site
 Then user validates Drug information is reflected on plan summary page in AARP site
 
 #Test ID: 15619,15620,15621
@@ -239,14 +242,16 @@ Then the user validates the added drugs on See your Estimated Costs page in AARP
       | Drug Name3     | <genricName3>     |
       | Drug Name4     | <drugName4>     |
       | Drug Name5     | <drugName5>     |
-And the user clicks on Back to Plans button in AARP site
+And the user clicks on Back to Plans button on See Your Estimated Costs page in AARP site
+And user verifies annual drug cost in the Plan Cost tab of AARP site
+And the user clicks on Back to All Plans button present on details page in AARP site
 Then user validates Drug information is reflected on plan summary page in AARP site
 #Test ID: 15623, 15624, 15625 : Few scenario's are left to be covered
 Examples:
                | zipcode | county             | drugInitials1       | drugName1     | drugInitials2 | drugName2  | drugInitials3 | drugName3     | drugInitials4 | drugName4 | drugInitials5 | drugName5             | pharmacyType                 | distance   |  pharmacyName               | plantype | planName                                           | quantity | frequency   |newPharmacyType|genericName1|genricName3|
                | 90210   | Los Angeles County | lipi                |  Lipitor      | dron          | dronabinol | Adva          | Advair Diskus | Orfa          | Orfadin   | Fana          | Fanapt Titration Pack | Standard Network             | 15 miles   |  MEN'S HEALTH FOUNDATION    | MAPD     | AARP MedicareComplete SecureHorizons Plan 2 (HMO)  | 30       |Every 1 month|Mail Service   |atorvastatin |fluticasone|
                | 90210   | Los Angeles County | lipi                |  Lipitor      | dron          | dronabinol | Adva          | Advair Diskus | Orfa          | Orfadin   | Fana          | Fanapt Titration Pack | Standard Network             | 15 miles   |  Men's Health Foundation    | PDP      | AARP MedicareRx Walgreens (PDP)                    | 30       |Every 1 month|Mail Service   |atorvastatin |fluticasone|
-               | 78002    | Los Angeles County | lipi                |  Lipitor      | dron          | dronabinol | Adva          | Advair Diskus | Orfa          | Orfadin   | Fana          | Fanapt Titration Pack | Standard Network             | 15 miles   |  Men's Health Foundation    | SNP      | UnitedHealthcare Chronic Complete (HMO SNP)        | 30       |Every 1 month|Mail Service   |atorvastatin |fluticasone|
+               | 78002    | Los Angeles County | lipi                |  Lipitor      | dron          | dronabinol | Adva          | Advair Diskus | Orfa          | Orfadin   | Fana          | Fanapt Titration Pack | Standard Network             | 15 miles   |  Men's Health Foundation   | SNP      | UnitedHealthcare Chronic Complete (HMO SNP)        | 30       |Every 1 month|Mail Service   |atorvastatin |fluticasone|
                
 ######################################################################################################
 ######################################################################################################
@@ -325,8 +330,8 @@ Examples:
 #	| <planName> |
 #Examples:
 #	| Zipcode | county              | drugInitials| drugName      |  drugDosage	        | drugQuantity | drugFrequency | packages | brand/generic            | pharmacyType	 	 		 	 | distance   | pharmacyName        		| planName 					                           | planYear |
-##	| 90210   | Los Angeles County  | lipi	      |  Lipitor      |  Lipitor TAB 10MG   |    30        | Every 1 month | null     | Lipitor TAB 10MG         | Standard Network Pharmacy 	 			| 15 miles	       		|  CVS PHARMACY  				| AARP MedicareComplete SecureHorizons Plan 2 (HMO)    | 2015     |
-##	| 80002   | Adams County        | lipi	      |  Lipitor      |  Lipitor TAB 10MG   |    30        | Every 1 month | null     | Lipitor TAB 10MG         | Standard Network Pharmacy 	 			| 15 miles	       		|  COSTCO PHARMACY 676 			| AARP MedicareRx Preferred (PDP)    | 2015     |
+#	| 90210   | Los Angeles County  | lipi	      |  Lipitor      |  Lipitor TAB 10MG   |    30        | Every 1 month | null     | Lipitor TAB 10MG         | Standard Network Pharmacy 	 			| 15 miles	       		|  CVS PHARMACY  				| AARP MedicareComplete SecureHorizons Plan 2 (HMO)    | 2015     |
+#	| 80002   | Adams County        | lipi	      |  Lipitor      |  Lipitor TAB 10MG   |    30        | Every 1 month | null     | Lipitor TAB 10MG         | Standard Network Pharmacy 	 			| 15 miles	       		|  COSTCO PHARMACY 676 			| AARP MedicareRx Preferred (PDP)    | 2015     |
 #
 #@dceVppNonAepDrugsPlanDetailsAARP
 #Scenario Outline: To Verify the drugs and plan details for non AEP period 
@@ -538,4 +543,4 @@ Examples:
 #
 #Examples:
 #	| zipcode | county             | drugInitials | drugName      |  drugDosage	        | packages                                          | quantity | drugFrequency  | genericAvailable | brand/generic                            | pharmacyType	 	 		| distance   |  pharmacyName               | plantype |planYear| planName 					                       |errorMessage                                                                                                                                   |
-##	| 76270   | Montague County    | lipi	      |  Lipitor      |  Lipitor TAB 20MG   | null                                              | 40       | Every 3 months | yes              | Lipitor TAB 20MG (Qty 40 Every 3 Months) | Available Pharmacies        | 25 miles   |  CVS Pharmacy               | PDP      | 2016   |AARP MedicareRx Preferred (PDP)                    |The pharmacy selected is not part of this plan's pharmacy network. Please edit your current pharmacy to estimate your drug costs for this plan.|	 		 
+#	| 76270   | Montague County    | lipi	      |  Lipitor      |  Lipitor TAB 20MG   | null                                              | 40       | Every 3 months | yes              | Lipitor TAB 20MG (Qty 40 Every 3 Months) | Available Pharmacies        | 25 miles   |  CVS Pharmacy               | PDP      | 2016   |AARP MedicareRx Preferred (PDP)                    |The pharmacy selected is not part of this plan's pharmacy network. Please edit your current pharmacy to estimate your drug costs for this plan.|	 		 

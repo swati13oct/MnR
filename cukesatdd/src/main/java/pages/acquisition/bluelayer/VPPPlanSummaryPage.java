@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
-import com.itextpdf.text.log.SysoCounter;
-import org.openqa.selenium.support.ui.Select;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
@@ -28,11 +26,10 @@ import org.openqa.selenium.support.PageFactory;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.uhcretiree.Rallytool_Page;
 import pages.acquisition.bluelayer.ComparePlansPageBlayer;
-import pages.acquisition.ulayer.ComparePlansPage;
 import pages.acquisition.ulayer.PageTitleConstants;
 //import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import pages.acquisition.bluelayer.ProviderSearchPage;
-import pages.acquisition.dce.bluelayer.DrugCostEstimatorPage;
+import pages.acquisition.bluelayer.DrugCostEstimatorPage;
 import pages.acquisition.bluelayer.PlanDetailsPage;
 import pages.acquisition.vppforaep.AepVppPlanSummaryPage;
 import acceptancetests.data.CommonConstants;
@@ -513,6 +510,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		@FindBy(xpath = "//span[text()='Welcome to Online Enrollment']")
 		private WebElement welcomepage;
+		
+		@FindBy(xpath = "( //*[contains(text(),'Annual')])[1]//following-sibling::span[2]")
+		private WebElement valEstimatedAnnualDrugCostValue;
+		
+		public WebElement getValEstimatedAnnualDrugCostValue() {
+			return valEstimatedAnnualDrugCostValue;
+		}
 
 	private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
 	//^^^ note: added for US1598162	
