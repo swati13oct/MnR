@@ -1005,8 +1005,8 @@ Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> 
  
     Examples: 
        |planType | memberType | 
-        #|MAPD     | PCP        |
-        |MAPD     | MEDICA  |
+        |MAPD     | PCP        |
+        #|MAPD     | MEDICA  |
         
 
  
