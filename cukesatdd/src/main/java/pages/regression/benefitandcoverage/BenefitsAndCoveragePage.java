@@ -4219,7 +4219,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
             }
 
 			public void validate_provider_search_link() {
-				
+				driver.navigate().to("https://stage-mymedicareaccount.uhc.com/pcp/member/benefits/overview.html");
 				waitforElement(providersearchlink);
 				validateNew(providersearchlink);
 				ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
