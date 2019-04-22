@@ -591,7 +591,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | Plan Type        | <planType>          |
 		And the user custom search claims for the following invalid time interval in redesigned site
 		  | Plan Type        | <planType>          |
-		  | Claims From Date | 01/02/2016          |
+		  | Claims From Date | 01/02/2017          |
 		  | Claims To Date   | 01/02/2019          |
 		Then the user should be able to see the search range is greater than two years error
 		  | Plan Type        | <planType>          |
