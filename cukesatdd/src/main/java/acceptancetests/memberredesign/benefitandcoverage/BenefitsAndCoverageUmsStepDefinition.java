@@ -30,6 +30,7 @@ import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.member_deprecated.bluelayer.LoginPage2;
 import pages.regression.benefitandcoverage.ValueAddedServicepage;
 import pages.regression.formsandresources.FormsAndResourcesPage;
+import pages.regression.testharness.TestHarness;
 import pages.redesign_deprecated.BenefitsCoveragePage;
 import pages.redesign_deprecated.RedesignLoginPage;
 import pages.redesign_deprecated.UlayerHomePage;
@@ -155,11 +156,14 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@Then("^The user navigate to Benefits and Coverage page$")
 	public void user_views_BenefitsAndCoveragejenkins1() {
 		System.out.println("***The user navigates to Benefits and Coverage page***");
-
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-
-		BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag();
-
+		BenefitsAndCoveragePage benefitsCoveragePage;
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+			benefitsCoveragePage = testHarness.navigateDirectToBnCPag();
+		}else{
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag();	
+		}
 		if (benefitsCoveragePage != null) {
 			getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
 		}
@@ -1986,6 +1990,12 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		Assert.assertTrue("**** Validation Failed for Group-University Of Kentucky - site leaving popup proceed flow ****",benefitsCoveragePage.validateSiteLeavingPopUpProceedFlow());
+	}
+	@And("^the user validates the providersearch link$")
+	public void the_user_validates_the_provider_search_link()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validate_provider_search_link();
 	}
 
 

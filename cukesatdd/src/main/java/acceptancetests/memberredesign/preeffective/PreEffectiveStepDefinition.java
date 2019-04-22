@@ -6,14 +6,12 @@
  *
  */
 package acceptancetests.memberredesign.preeffective;
-import java.sql.DriverAction;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -28,7 +26,6 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
-import pages.regression.testharness.*;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.regression.claims.ClaimSummarypage;
@@ -39,6 +36,7 @@ import pages.regression.login.HsidRegistrationPersonalInformationPage;
 import pages.regression.login.SaveProfilePrefrencePage;
 import pages.regression.payments.PaymentHistoryPage;
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
+import pages.regression.testharness.TestHarness;
 /**
  * 
  * @author jkuma14
