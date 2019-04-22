@@ -514,6 +514,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "( //*[contains(text(),'Annual')])[1]//following-sibling::span[2]")
 		private WebElement valEstimatedAnnualDrugCostValue;
 		
+		@FindBy(xpath = "(//*[@id='overlay'])[2]]")
+		private WebElement loadingIndicator;
+		
+		
+		
+		public WebElement getLoadingIndicator() {
+			return loadingIndicator;
+		}
+
 		public WebElement getValEstimatedAnnualDrugCostValue() {
 			return valEstimatedAnnualDrugCostValue;
 		}
@@ -1323,9 +1332,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public boolean validateVPPPlanSummaryPage() {
-
+		//CommonUtility.waitForElementToDisappear(driver,getLoadingIndicator(),CommonConstants.TIMEOUT_40);
+		driver.navigate().refresh();
+		
 		CommonUtility.waitForPageLoad(driver, vppTop, 30);
-
+		
 		validateNew(maPlansCount);
 		validateNew(msPlansCount);
 		validateNew(pdpPlansCount);
