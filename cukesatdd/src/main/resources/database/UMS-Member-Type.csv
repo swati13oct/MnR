@@ -65,7 +65,7 @@ q2_jun_sofl0017/Password@1,Medica,Medica_SouthFlorida_ProfilePref,
 q2_jun_grp0071/Password@1,PDP,PDP_Profilepref,
 q2_jun_aarp0042/Password@1,MAPD_AARPIndividual,AARP_ProfilePref,
 q2_jun_aarp0054/Password@1,MAPD,Individual_FormsResources,IndEffectiveAARP,Rider,
-q2_jun_aarp0007/Password@1,MAPD,Individual_FormsResources,IndEffectiveAARP,NoRider,
+q2_jun_aarp0020/Password@1,MAPD,Individual_FormsResources,IndEffectiveAARP,NoRider,
 q2_jun_uhc0001/Password@1,MAPD,Individual_FormsResources,IndEffectiveUHC,NoRider,
 q2_jun_uhc0011/Password@10,MAPD,Individual_FormsResourcesl,IndEffectiveUHC,Rider,
 q2_jun_grp0434/Password@1,MAPD,Group_FormsResources,GrpEffectiveUHC,NoRider,
@@ -190,4 +190,12 @@ q4_dec_combocross0014/Password@1,PDP,ComboUpdateRecurrCC_Payments,
 PDPSSUPCrossCombo2/Password@1,PDP,ComboUpdateStopRec_Payments,
 q2_jun_ship0195/Password@1,SHIP,SHIPSetup_Payments,
 q2_jun_aarp0057/Password@1,MAPD,EPMPEnabled,Individual,,
-q4_oct_sofl0012/Password@1,MAPD,PCPProblemTicket,,
+q4_oct_sofl0012/Password@1,MAPD,PCPProblemTicket,
+preeffectiveFEDMA_001/Password@1,IndMA,preeffectiveIndMA
+preeffectiveFEDMAPD_001/Password@1,IndMAPD,preeffectiveIndMAPD
+preeffectiveFEDPDP_001/Password@1,IndPDP,preeffectiveIndPDP
+preeffective_GroupMA_001/Password@1,GroupMA,preeffectiveGroupMA
+preeffectivegroupmapd_001/Password@1,GroupMAPD,preeffectiveGroupMAPD
+ssuppreeffective00001/Password@1,GroupSSUP,preeffectiveGroupSSUP
+preeffectiveGroupPDP_001/Password@1,GroupPDP,preeffectiveGroupPDP
+ship_preeffective_only02/Password@1,SHIPPreffective,preeffectiveGroupPDP
