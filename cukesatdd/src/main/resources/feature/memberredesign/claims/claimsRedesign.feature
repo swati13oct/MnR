@@ -122,7 +122,9 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		   | TID    | planType | claimPeriod    | domain | claimssystem |
 		   | 15259  | SHIP     | Last 24 months | NA     | COSMOSCLAIMS |
 	
-	@claims6 @TC_09claimsPHIP @regressionMember
+	
+#need test data to execute thsi specific scenario
+	 @TC_09claimsPHIP 
 	Scenario Outline:  TID: <TID> -plan: <planType> -claimsSystem: <claimssystem> - To validate the Error Message for a PHIP  member on claims sumamry page
 		Given login with following details logins in the member portal and validate elements
 		  | Plan Type      | <planType>     |
@@ -131,7 +133,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		And I validate the error message for a PHIP Member on the screen
 		Examples: 
 		   | TID   | planType | claimssystem |
-		   | 15258 | PHIP     | SHIPCLAIMS   |
+		   #| 15258 | PHIP     | SHIPCLAIMS   |
 	  
 #	  #This Scenario can only execute when max claims indicator as true
 #	  @MaxClaimsResultsError
