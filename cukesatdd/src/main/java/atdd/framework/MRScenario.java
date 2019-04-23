@@ -214,11 +214,11 @@ public class MRScenario {
 				
 				
 				  if  (tagName.equalsIgnoreCase("@MemberVBF") && environment.contains("team-ci")){
-						csvName = "MemberRedesign-VBF-Teamci.csv";
+						csvName = "MemberRedesign-VBF-Teamci-UUID.csv";
 								
 				} else if ((environment.equalsIgnoreCase("team-a")|| (environment.equalsIgnoreCase("team-h")) || (environment.equalsIgnoreCase("team-e")) || (environment.equalsIgnoreCase("team-f")) || (environment.equalsIgnoreCase("team-g")) || (environment.equalsIgnoreCase("team-c")) || (environment.equalsIgnoreCase("team-t")))) {
 					csvName= "MemberRedesign-UUID.csv";
-				 }else  if(tagName.equalsIgnoreCase("@MemberVBF") && environment.contains("team-ci1")){
+				 }else  if(tagName.equalsIgnoreCase("@MemberVBF") && environment.contains("stage")){
 							csvName = "MemberRedesign-VBF.csv";
 				 }
 				 /* note: Dec2018 - comment out because this section caused stage run not to use UMS-Member-Type.csv
