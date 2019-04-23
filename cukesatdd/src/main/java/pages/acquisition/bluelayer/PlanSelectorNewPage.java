@@ -178,8 +178,9 @@ public class PlanSelectorNewPage extends UhcDriver {
 		Assert.assertTrue(PreferencesHeader.getText().contains("Your Preferences"), "Questionaaire not started");
 	}
 
-	public void quizStartAndRunQuestionnaireWithCounty(String zip_code, String County) {
-
+	public void quizStartAndRunQuestionnaireWithCounty(String zip_code, String County) throws Exception {
+		
+		Thread.sleep(20000);
 		switchToNewIframe(iframePst);
 		waitTillElementClickableInTime(getStartedBtn, 30);
 		getStartedBtn.click();

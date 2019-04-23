@@ -4,7 +4,7 @@ Feature: Plan Selector Tool flow - Verify back to plan options navigation to pla
   @blayerPST @Spartans @acquisitionRegression @pstBLayerSmoke
   Scenario Outline: TID: 15471 -To validate Plan selector flow in UHC site
     Given the user is on UHC medicare acquisition site landing page
-    When user goes to ours plan tab and click on Take the Quiz button
+    When user goes to ours plan tab and click on Plan Selector button
     And clicks on get started button and runs questionnaire
       | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |
@@ -20,7 +20,7 @@ Feature: Plan Selector Tool flow - Verify back to plan options navigation to pla
   @UlayerPST @Spartans @acquisitionRegression @pstULayerSmoke
   Scenario Outline: TID: 15474 - To validate Plan selector flow in AARP site
     Given the user is on Acquisition AARP medicare site landing page
-    When user goes to ours plan tab and click on Take the Quiz button
+    When user goes to ours plan tab and click on Plan Selector button
     And clicks on get started button and runs questionnaire
       | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |

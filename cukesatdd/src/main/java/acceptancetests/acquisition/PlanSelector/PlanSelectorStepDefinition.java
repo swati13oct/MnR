@@ -102,8 +102,8 @@ public class PlanSelectorStepDefinition {
 		}
 	
 	
-	@When("^user goes to ours plan tab and click on Take the Quiz button$")
-	public void user_goes_to_ours_plan_tab_and_click_on_Take_the_Quiz_button() throws Throwable {
+	@When("^user goes to ours plan tab and click on Plan Selector button$")
+	public void user_goes_to_ours_plan_tab_and_click_on_Plan_Selector_button() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		PlanSelectorNewPage planSelectorNewPage = aquisitionhomepage.quizButton();
