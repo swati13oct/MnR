@@ -378,8 +378,7 @@ public class DCEVPPAcqStepDefinitionUHC {
 	/*Back To All Plans on prescription drug tab*/
 	@Then("^the user clicks on Back to All Plans button present on details page in UMS site$")
 	public void the_user_clicks_on_Back_to_All_Plans_button_present_UMS_sit() throws Throwable {
-		PlanDetailsPage plandetailspage = (PlanDetailsPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_DETAILS_PAGE);
+		PlanDetailsPage plandetailspage = new PlanDetailsPage(wd);
 			
 		plandetailspage.navigateBackToPlanSummaryPageFromDetailsPage();
 		
@@ -476,7 +475,7 @@ public class DCEVPPAcqStepDefinitionUHC {
 		String planType = memberAttributesRow.get(0).getCells().get(1);
 		String planName=memberAttributesRow.get(1).getCells().get(1);
 		VPPPlanSummaryPage plansummaryPage =  new VPPPlanSummaryPage(wd);
-		plansummaryPage.clickonViewPlans();
+		plansummaryPage.viewPlanSummary(planType);
 		PlanDetailsPage plandetailspage= (PlanDetailsPage)plansummaryPage.navigateToPlanDetails(planName, planType);
 		if(plandetailspage!=null){
 			getLoginScenario().saveBean(PageConstants.PLAN_DETAILS_PAGE, plandetailspage);
