@@ -131,7 +131,7 @@ public class PlanSelectorStepDefinition {
 		String county = memberAttributesMap.get("CountyDropDown");
 		String isMultiCounty = memberAttributesMap.get("Is Multi County");
 		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
-		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+		getLoginScenario().saveBean(VPPCommonConstants.COUNTY_DROP_DOWN, county);
 		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
 		PlanSelectorNewPage planSelectorNewPage = (PlanSelectorNewPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_SELECTOR_NEW_PAGE);
@@ -161,9 +161,10 @@ public class PlanSelectorStepDefinition {
 
 	@When("^I click plan detail button$")
 	public void i_click_plan_detail_button() throws Throwable {
+		String County = (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
 		PlanSelectorNewPage planSelectorNewPage = (PlanSelectorNewPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_SELECTOR_NEW_PAGE);
-		boolean isPlanDetailsPage = planSelectorNewPage.navigateToPlanDetails();
+		boolean isPlanDetailsPage = planSelectorNewPage.navigateToPlanDetails(County);
 		Assert.assertTrue("Plan Details Page is not loaded", isPlanDetailsPage);
 
 	}

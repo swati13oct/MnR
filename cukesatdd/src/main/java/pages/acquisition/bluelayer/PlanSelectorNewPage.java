@@ -19,7 +19,10 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import acceptancetests.data.PageConstants;
 import acceptancetests.util.CommonUtility;
+import acceptancetests.vbfacquisition_deprecated.enrollinplan.oleCommonConstants;
+import acceptancetests.vbfacquisition_deprecated.vpp.VPPCommonConstants;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ulayer.PageTitleConstants;
 
@@ -117,6 +120,9 @@ public class PlanSelectorNewPage extends UhcDriver {
 
 	@FindBy(id = "backToPlanSelectorBottom")
 	private WebElement backToPlanSelectorBottom;
+	
+	@FindBy(xpath = "//div[@class='modal-title']")
+	private WebElement countyModal;
 
 	@FindBy(xpath = "//*[@class='PlanPreferenceCollection']//div[@class='planPreferenceQuestion ']//h1")
 	private WebElement PreferencesHeader;
@@ -181,12 +187,14 @@ public class PlanSelectorNewPage extends UhcDriver {
 	public void quizStartAndRunQuestionnaireWithCounty(String zip_code, String County) throws Exception {
 		
 		Thread.sleep(20000);
+		driver.switchTo().defaultContent();
 		switchToNewIframe(iframePst);
-		waitTillElementClickableInTime(getStartedBtn, 30);
+		waitTillElementClickableInTime(getStartedBtn, 45);
 		getStartedBtn.click();
 		waitforElementVisibilityInTime(zipCode, 45);
 		sendkeys(zipCode, zip_code);
-		waitforElementVisibilityInTime(PSTCounty, 30);
+		Thread.sleep(2000);
+		waitforElementVisibilityInTime(PSTCounty, 45);
 		selectFromDropDownByText(driver, PSTCounty, County);
 		/*
 		 * try { Thread.sleep(10000); Select drpCountry = new
@@ -259,13 +267,18 @@ public class PlanSelectorNewPage extends UhcDriver {
 			return false;
 	}
 
-	public boolean navigateToPlanDetails() throws InterruptedException {
+	public boolean navigateToPlanDetails(String County) throws InterruptedException {
 		validateNew(planNamePSTPage);
 		planNameExpected = planNamePSTPage.getText().trim();
 		validateNew(PlanDetailsPageButton);
 		PlanDetailsPageButton.click();
 		driver.switchTo().defaultContent();
 		CommonUtility.checkPageIsReadyNew(driver);
+		if(countyModal.isDisplayed()){
+			CommonUtility.waitForPageLoad(driver, countyModal, 45);
+			driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + County + "']")).click();
+		}else
+			System.out.println("No County popu displayed");
 
 		int counter = 0;
 		do {
