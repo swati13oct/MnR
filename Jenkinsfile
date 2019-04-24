@@ -1,6 +1,6 @@
 #!groovy
 //original author: Brian Wyka
-//modified for M&R by Olga Mackevica
+//modified for M&R by Olga Mackevica    
 
 // Global Variables
 def pom, fullGitCommit, pipelineVersion
