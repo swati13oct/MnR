@@ -19,7 +19,7 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
     Then the user validates Learn more modal for Welcome OLE
     Then the user validates Leave OLE modal for Welcome OLE
     Then the user validates cancellation modal for Welcome OLE
-    Then the user validates and selects the Disclaimer Checkbox
+    #Then the user validates and selects the Disclaimer Checkbox
     Then the user navigates to Medicare Information Page
     Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates Medicare Information Page required fields
@@ -120,7 +120,7 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
     Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates TFN in Welcome OLE Right Rail
     Then the user validates cancellation modal for Welcome OLE
-    Then the user validates and selects the Disclaimer Checkbox
+    #Then the user validates and selects the Disclaimer Checkbox
     Then the user navigates to Medicare Information Page
     Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates Medicare Information Page required fields
@@ -211,7 +211,7 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
     Then the user validates Learn more modal for Welcome OLE
     Then the user validates Leave OLE modal for Welcome OLE
     Then the user validates cancellation modal for Welcome OLE
-    Then the user validates and selects the Disclaimer Checkbox
+    #Then the user validates and selects the Disclaimer Checkbox
     Then the user navigates to Medicare Information Page
     Then the user validates Medicare Information Page required fields
     Then the user enters following required Medicare Information
@@ -289,7 +289,7 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
-    Then the user validates and selects the Disclaimer Checkbox
+    #Then the user validates and selects the Disclaimer Checkbox
     Then the user navigates to Medicare Information Page
     Then the user validates Medicare Information Page required fields
     Then the user enters following required Medicare Information
@@ -324,7 +324,7 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
-    Then the user validates and selects the Disclaimer Checkbox
+    #Then the user validates and selects the Disclaimer Checkbox
     Then the user navigates to Medicare Information Page
     Then the user validates Medicare Information Page required fields
     Then the user enters following required Medicare Information
@@ -508,7 +508,7 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
     Then the user validates Learn more modal for Welcome OLE
     Then the user validates Leave OLE modal for Welcome OLE
     Then the user validates cancellation modal for Welcome OLE
-    Then the user validates and selects the Disclaimer Checkbox
+    #Then the user validates and selects the Disclaimer Checkbox
     Then the user navigates to Medicare Information Page
     Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates Medicare Information Page required fields

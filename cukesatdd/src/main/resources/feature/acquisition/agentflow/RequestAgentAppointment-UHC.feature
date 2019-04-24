@@ -40,4 +40,4 @@ Feature:1.05-VBF-Acq-To test request an appointment with an agent flow in UHC si
 
     Examples: 
       | TCID    | firstName | lastName | city | address      | state      | zipcode | phone      |
-      | F266872 | John      | Doe      | Test | 100 Test way | New Jersey |   08854 | 7324567890 |
+      | F266872 | John      | Doe      | Test | 100 Test way | NJ |   08854 | 7324567890 |
