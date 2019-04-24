@@ -406,9 +406,11 @@ public class DCEVPPAcqStepDefinitionAARP {
 	
 	/*Cost comparison for prescription drugs*/
 	@Then("^user verifies annual drug cost in the prescription drug tab of AARP site$")
-	public void user_verifies_drug_cost_in_AARP_site() throws Throwable {
+	public void user_verifies_drug_cost_in_AARP_site(DataTable data) throws Throwable {
 	
-		PlanDetailsPage plandetailspage= new PlanDetailsPage(wd);
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		String planType = memberAttributesRow.get(0).getCells().get(1);
+		PlanDetailsPage plandetailspage= new PlanDetailsPage(wd,planType);
 		
 		estimatedTotalAnnualCost=plandetailspage.costComparisonPrescriptionDrugFromDCE();
 		
@@ -425,9 +427,11 @@ public class DCEVPPAcqStepDefinitionAARP {
 	
 	/*Cost comparison for Plan Costs Tab*/
 	@Then("^user verifies annual drug cost in the Plan Cost tab of AARP site$")
-	public void user_verifies_annual_drug_cost_in_the_Plan_Cost_tab_of_AARP_site() throws Throwable {
+	public void user_verifies_annual_drug_cost_in_the_Plan_Cost_tab_of_AARP_site(DataTable data) throws Throwable {
 	
-		PlanDetailsPage plandetailspage= new PlanDetailsPage(wd);
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		String planType = memberAttributesRow.get(0).getCells().get(1);
+		PlanDetailsPage plandetailspage= new PlanDetailsPage(wd,planType);
 		
 		planCostTabEstimatedTotalAnnualCost=plandetailspage.costComparisonCostTabFromDCE();
 		

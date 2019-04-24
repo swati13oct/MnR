@@ -157,6 +157,7 @@ Then the user validates the added drugs on See your Estimated Costs page in UMS 
       | Drug Name5     | <drugName5>     |
 And the user clicks on Back to Plans button on See Your Estimated Costs page in UMS site
 And user verifies annual drug cost in the prescription drug tab of UMS site
+| Plan Type | <plantype> |
 And the user clicks on Back to All Plans button present on details page in UMS site
 Then user validates Drug information is reflected on plan summary page in UMS site
 
@@ -244,6 +245,7 @@ Then the user validates the added drugs on See your Estimated Costs page in UMS 
       | Drug Name5     | <drugName5>     |
 And the user clicks on Back to Plans button on See Your Estimated Costs page in UMS site
 And user verifies annual drug cost in the Plan Cost tab of UMS site
+| Plan Type | <plantype> |
 And the user clicks on Back to All Plans button present on details page in UMS site
 Then user validates Drug information is reflected on plan summary page in UMS site
 #Test ID: 15610, 15612, 15613 : Few scenario's are left to be covered

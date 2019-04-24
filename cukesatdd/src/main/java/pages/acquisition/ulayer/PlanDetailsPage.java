@@ -230,7 +230,10 @@ public class PlanDetailsPage extends UhcDriver {
 		} else if (planType.equalsIgnoreCase("PDP")) {
 			CommonUtility.waitForPageLoadNew(driver, presDrugTab.get(0), 45);
 			Assert.assertTrue(0 == medBenefitsTab.size(), "Medical Benefit tab not displayed for PDP plans");
-		}
+		}else if(planType.equalsIgnoreCase("SNP")) {
+			CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
+			Assert.assertTrue(medBenefitsTab.get(0).isDisplayed(), "Medical Benefit tab not displayed for SNP plans");
+		}/*Added for SNP as well*/
 		validate(planCostsTab);
 
 	}

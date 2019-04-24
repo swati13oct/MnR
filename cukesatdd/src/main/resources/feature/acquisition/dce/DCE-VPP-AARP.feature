@@ -157,6 +157,7 @@ Then the user validates the added drugs on See your Estimated Costs page in AARP
       | Drug Name5     | <drugName5>     |
 And the user clicks on Back to Plans button on See Your Estimated Costs page in AARP site
 And user verifies annual drug cost in the prescription drug tab of AARP site
+	| Plan Type | <plantype> |
 And the user clicks on Back to All Plans button present on details page in AARP site
 Then user validates Drug information is reflected on plan summary page in AARP site
 
@@ -165,7 +166,7 @@ Examples:
                | zipcode | county             | drugInitials1       | drugName1     | drugInitials2 | drugName2  | drugInitials3 | drugName3     | drugInitials4 | drugName4 | drugInitials5 | drugName5             | pharmacyType                 | distance   |  pharmacyName               | plantype | planName                                           | quantity | frequency   |newPharmacyType|genericName1|genricName3|
                | 90210   | Los Angeles County | lipi                |  Lipitor      | dron          | dronabinol | Adva          | Advair Diskus | Orfa          | Orfadin   | Fana          | Fanapt Titration Pack | Standard Network             | 15 miles   |  MEN'S HEALTH FOUNDATION    | MAPD     | AARP MedicareComplete SecureHorizons Plan 2 (HMO)  | 30       |Every 1 month|Mail Service   |atorvastatin |fluticasone|
                | 90210   | Los Angeles County | lipi                |  Lipitor      | dron          | dronabinol | Adva          | Advair Diskus | Orfa          | Orfadin   | Fana          | Fanapt Titration Pack | Standard Network             | 15 miles   |  Men's Health Foundation    | PDP      | AARP MedicareRx Walgreens (PDP)                    | 30       |Every 1 month|Mail Service   |atorvastatin |fluticasone|
-               | 78002  | Los Angeles County | lipi                |  Lipitor      | dron          | dronabinol | Adva          | Advair Diskus | Orfa          | Orfadin   | Fana          | Fanapt Titration Pack | Standard Network             | 15 miles   |  Men's Health Foundation    | SNP      | UnitedHealthcare Chronic Complete (HMO SNP)        | 30       |Every 1 month|Mail Service   |atorvastatin |fluticasone|
+               | 78002  | Los Angeles County | lipi                |  Lipitor      | dron          | dronabinol | Adva          | Advair Diskus | Orfa          | Orfadin   | Fana          | Fanapt Titration Pack | Standard Network             | 15 miles   |  HEB PHARMACY 019   | SNP      | UnitedHealthcare Chronic Complete (HMO SNP)        | 30       |Every 1 month|Mail Service   |atorvastatin |fluticasone|
                
 
                
@@ -244,6 +245,7 @@ Then the user validates the added drugs on See your Estimated Costs page in AARP
       | Drug Name5     | <drugName5>     |
 And the user clicks on Back to Plans button on See Your Estimated Costs page in AARP site
 And user verifies annual drug cost in the Plan Cost tab of AARP site
+	  | Plan Type | <plantype> |
 And the user clicks on Back to All Plans button present on details page in AARP site
 Then user validates Drug information is reflected on plan summary page in AARP site
 #Test ID: 15623, 15624, 15625 : Few scenario's are left to be covered
@@ -251,7 +253,7 @@ Examples:
                | zipcode | county             | drugInitials1       | drugName1     | drugInitials2 | drugName2  | drugInitials3 | drugName3     | drugInitials4 | drugName4 | drugInitials5 | drugName5             | pharmacyType                 | distance   |  pharmacyName               | plantype | planName                                           | quantity | frequency   |newPharmacyType|genericName1|genricName3|
                | 90210   | Los Angeles County | lipi                |  Lipitor      | dron          | dronabinol | Adva          | Advair Diskus | Orfa          | Orfadin   | Fana          | Fanapt Titration Pack | Standard Network             | 15 miles   |  MEN'S HEALTH FOUNDATION    | MAPD     | AARP MedicareComplete SecureHorizons Plan 2 (HMO)  | 30       |Every 1 month|Mail Service   |atorvastatin |fluticasone|
                | 90210   | Los Angeles County | lipi                |  Lipitor      | dron          | dronabinol | Adva          | Advair Diskus | Orfa          | Orfadin   | Fana          | Fanapt Titration Pack | Standard Network             | 15 miles   |  Men's Health Foundation    | PDP      | AARP MedicareRx Walgreens (PDP)                    | 30       |Every 1 month|Mail Service   |atorvastatin |fluticasone|
-               | 78002    | Los Angeles County | lipi                |  Lipitor      | dron          | dronabinol | Adva          | Advair Diskus | Orfa          | Orfadin   | Fana          | Fanapt Titration Pack | Standard Network             | 15 miles   |  Men's Health Foundation   | SNP      | UnitedHealthcare Chronic Complete (HMO SNP)        | 30       |Every 1 month|Mail Service   |atorvastatin |fluticasone|
+               | 78002    | Los Angeles County | lipi                |  Lipitor      | dron          | dronabinol | Adva          | Advair Diskus | Orfa          | Orfadin   | Fana          | Fanapt Titration Pack | Standard Network             | 15 miles   |  HEB PHARMACY 019   | SNP      | UnitedHealthcare Chronic Complete (HMO SNP)        | 30       |Every 1 month|Mail Service   |atorvastatin |fluticasone|
                
 ######################################################################################################
 ######################################################################################################

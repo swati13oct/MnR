@@ -514,7 +514,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "( //*[contains(text(),'Annual')])[1]//following-sibling::span[2]")
 		private WebElement valEstimatedAnnualDrugCostValue;
 		
-		@FindBy(xpath = "(//*[@id='overlay'])[2]]")
+		@FindBy(xpath = "(//*[@id='overlay'])[1]]")
 		private WebElement loadingIndicator;
 		
 		
@@ -1333,10 +1333,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public boolean validateVPPPlanSummaryPage() {
 		//CommonUtility.waitForElementToDisappear(driver,getLoadingIndicator(),CommonConstants.TIMEOUT_40);
-		driver.navigate().refresh();
+		driver.navigate().refresh(); //rectified page load issue on stage
 		
 		CommonUtility.waitForPageLoad(driver, vppTop, 30);
-		
+		validateNonPresenceOfElement(getLoadingIndicator());
 		validateNew(maPlansCount);
 		validateNew(msPlansCount);
 		validateNew(pdpPlansCount);
