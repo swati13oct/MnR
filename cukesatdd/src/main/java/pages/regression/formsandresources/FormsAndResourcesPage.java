@@ -106,7 +106,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	private WebElement eobDrugButtonPDP;
 
 	/** Renew Magazine Section - Forms And Resources page */
-	@FindBy(xpath = "//div[@class='otherPages renewmagazine_AARP_MA_MAPD']//*[contains(text(),'Renew Magazine')]")
+	@FindBy(css = ".customsegments:nth-child(19) .med-heading")
 	private WebElement renewMagazineSectionMAPDAARP;
 
 	@FindBy(xpath = "//*[@class='otherPages renewmagazine_AARP_PDP']")
@@ -142,7 +142,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	
 	// *[@id="plan_material_fnr"]/div/div[1]/h2
 
-	@FindBy(xpath = "//*[@id='plan_material_fnr']/div/div[2]/h2") 
+	@FindBy(xpath = "//*[@id='plan_material_fnr']/div/div[2]/h2[contains(text(), 'Plan Materials')]") 
 	public WebElement planMaterialHeaderSection;
 
 	@FindBy(xpath = "//*[@id='plan_material_fnr']/div/div[1]/h2")
@@ -157,7 +157,8 @@ public class FormsAndResourcesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='FnR_annualDirectory']/div/div[1]/div/div/div/h2")
 	public List<WebElement> annualdirectoriesHeaderSectionMAPDGRP;
 
-	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/div[3]/div[17]/div/div/div/section//*[@id='eobsection']/div[1]/div/h2")
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/div[3]/div[16]/div//*[@id='eobsection']/div[1]/div/h2")
+	//@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/div[3]/div[16]/div/div/div/section/div/div/div/h2")
 	public List<WebElement> eobHeaderSection;
 
 	/* for active member */
@@ -1690,9 +1691,15 @@ public class FormsAndResourcesPage extends UhcDriver {
 			clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(3),
 					getAnnualdirectoriesHeaderSectionMAPDGRP());
 		else
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(3 - t),
 					getAnnualdirectoriesHeaderSection());
-
+			
 		clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(4 - t),
 				getMyDocumentSection());
 
@@ -1702,8 +1709,14 @@ public class FormsAndResourcesPage extends UhcDriver {
 			clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(5 - t),
 					getEobHeaderSection().get(6));
 		else
-			clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(5),
-					getEobHeaderSection().get(5));
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			//clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(5),
+				//	getEobHeaderSection().get(5));
 
 		clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(6 - t),
 				getFormsandResourcesSection());

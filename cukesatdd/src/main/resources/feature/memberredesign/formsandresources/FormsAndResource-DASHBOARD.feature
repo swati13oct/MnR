@@ -31,11 +31,12 @@ Feature: G1.1 To validate forms and resources page in dashboard site
       |identifier|<Identifier>|
      
 	#Membership material comes dynamically based on the logic
+	# EOB Header xpath is not working Need to fix it
 		
 	Examples: 
       | TID     | planType | memberType                    | Identifier        | language |count|rider  |
       | 15108   | MAPD     | Individual_FormsResources     | IndEffectiveAARP  | ENGLISH  | 7   |NoRider|
-     # | 15108   | MAPD     | Individual_FormsResources     | IndEffectiveAARP  | ENGLISH  | 7   |Rider  |
+    #  | 15108   | MAPD     | Individual_FormsResources     | IndEffectiveAARP  | ENGLISH  | 7   |Rider  |
     #  | 15303   | MAPD     | Group_FormsResources          | GrpEffectiveUHC   | ENGLISH  | 7   |NoRider|
     #  | 15108   | MAPD     | Individual_FormsResources     | IndEffectiveUHC   | ENGLISH  | 6   |NoRider|
 	#  | 15108   | MAPD     | Individual_FormsResourcesl    | IndEffectiveUHC   | ENGLISH  | 6   |Rider  |
