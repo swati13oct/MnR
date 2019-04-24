@@ -50,7 +50,7 @@ import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 
 public class AccountHomePage extends UhcDriver {
 	
-	@FindBy(xpath = "//*[@id='dropdown-toggle--1']/span")
+	@FindBy(xpath = ".//*[@id='dropdown-options-0']/a[3]/span")
 	private WebElement acctProfile;
 	
 	@FindBy(xpath = "//*[@id='dropdown-options--1']/a[3]")
@@ -381,8 +381,11 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath ="//*[@id='moreInfoLinkAtdd2']/a")
 	private WebElement specificclaimlinkforeob;
 	
-	
-	
+	@FindBy(tagName="arcade-header")
+	private WebElement shadowRootHeader;
+
+	@FindBy(tagName="arcade-footer")
+	private WebElement shadowRootFooter;
 
 	private PageData myAccountHome;
 
@@ -1162,9 +1165,13 @@ public class AccountHomePage extends UhcDriver {
 				if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
 					workaroundAttempt("contactus");
 				} else {
-					linkContactUs.click();
+					if (validate(linkContactUs)) {
+						linkContactUs.click();
+					} else {
+						System.out.println("Unable to locate Contact Us on dashboard, will attempt to see if it's in shadow-root");
+						locateAndClickElementWithinShadowRoot(shadowRootFooter, "div > span > footer > div:nth-child(1) > div:nth-child(1) > ul > li:nth-child(1) > a");	
+					}
 				}
-
 			}
 			CommonUtility.waitForPageLoad(driver, headingContactUs, 10);
 			if (driver.getTitle().contains("Contact Us")) {
@@ -1780,7 +1787,7 @@ public class AccountHomePage extends UhcDriver {
 
 		} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
 
-			if(MRScenario.isTestHarness.equals("YES")){
+			if(MRScenario.isTestHarness.equalsIgnoreCase("YES")){
 				dceTestharnessLink.click();
 			}else if (driver.getCurrentUrl().contains("/dashboard")){
 				System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
@@ -1862,7 +1869,12 @@ public class AccountHomePage extends UhcDriver {
 	 */
 
 	public void validateFindCareCostTab() {
-		Assert.assertTrue("Find Care and Cost tab is not displayed", findCareCost.isDisplayed());
+		if (validate(findCareCost)) {
+			Assert.assertTrue("Find Care and Cost tab is not displayed", findCareCost.isDisplayed());
+		} else {
+			System.out.println("Unable to locate 'Find Care & Costs' from dashboard, check to see if it's in shadow-root");
+			locateElementWithinShadowRoot(shadowRootHeader, "#main-nav > div > div > div > a[href*='find-care']");
+		}
 
 	}
 
@@ -2333,7 +2345,7 @@ public class AccountHomePage extends UhcDriver {
 
 	public BenefitsAndCoveragePage navigateDirectToBnCPag() {
 
-		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
+		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage") && ("NO".equalsIgnoreCase(MRScenario.isTestHarness))) {
 			System.out.println("user is on Stage login page");
 			// CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);
 			if (driver.getCurrentUrl().contains("/dashboard"))
@@ -2357,7 +2369,16 @@ public class AccountHomePage extends UhcDriver {
 
 			}
 		}
+		else if (MRScenario.environmentMedicare.equals("stage") && ("YES".equalsIgnoreCase(MRScenario.isTestHarness))){
+			System.out.println("TEST - stage testharness page="+ PAGE_URL + "content/medicare/member/benefits/overview.html");
+			driver.navigate().to(PAGE_URL + "content/medicare/member/benefits/overview.html");
+			System.out.println(driver.getCurrentUrl());
+			if (driver.getTitle().contains("Benefits")) {
+				System.out.println(driver.getTitle());
+				return new BenefitsAndCoveragePage(driver);
+			}
 
+		} 
 		else if (MRScenario.environmentMedicare.equals("team-h") || MRScenario.environmentMedicare.equals("test-a")){
 
 			driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
@@ -2542,8 +2563,21 @@ public class AccountHomePage extends UhcDriver {
 
 	public void workaroundAttempt(String page) {
 		System.out.println("======================== OK LET'S ATTEMPT THE 'SORRY' WORKAROUND  ===========================");
+
+		if (driver.getCurrentUrl().contains("int.uhc.com/internal-error")) {
+			//in this case, there will be no userType identifier in URL, do one more step
+			//first click the account settings link on footer, get the URL for additional parsing
+			locateAndClickElementWithinShadowRoot(shadowRootFooter, "div > span > footer > div:nth-child(1) > div:nth-child(3) > ul:nth-child(2) > li > a");
+		}
+
 		//assumption this is the sorry error url, parse the URL to determine which URL to use
 		String currentUrl=driver.getCurrentUrl();
+
+		if (currentUrl.contains("https://systest3.myuhc.com")) {
+			System.out.println("Account setting is pointing to systest3.myuhc.com instead.  Give up trying workaround it.");
+			Assert.fail("***** Error in loading  Redesign Account Landing Page ***** Got 'Sorry, it's not you. It's us' login error and the account setting is pointed to systest3.myuhc.com");
+		}
+		
 		String[] tmp1=currentUrl.split(".com/");
 		String[] tmp2=tmp1[1].split("/");
 		String userType=tmp2[0];
@@ -2612,4 +2646,47 @@ public class AccountHomePage extends UhcDriver {
 		}
 		return new ClaimDetailsPage(driver);
 	}
+	
+	public WebElement expandRootElement(WebElement element) {
+		WebElement ele = (WebElement) ((JavascriptExecutor)driver)
+				.executeScript("return arguments[0].shadowRoot", element);
+		return ele;
+	}
+	
+	public void locateElementWithinShadowRoot(WebElement shadowRootElement, String inputSelector) {
+		if (validate(shadowRootElement)) {
+			System.out.println("located shadow-root element, attempt to process further...");
+			WebElement root1=expandRootElement(shadowRootElement);
+			try {
+				WebElement element=root1.findElement(By.cssSelector(inputSelector));
+				Assert.assertTrue("Dashboard header is not displayed", validate(element));
+			} catch (Exception e) {
+				System.out.println("can't locate element. Exception e="+e);
+				Assert.assertTrue("Dashboard header not functioning as expected", false);
+			}
+		} else {
+			System.out.println("no shadow-root element either, not sure what's going on w/ the header on rally");
+			Assert.assertTrue("Dashboard header is not displayed", false);
+		}
+	}
+
+	public void locateAndClickElementWithinShadowRoot(WebElement shadowRootElement, String inputCssSelector) {
+		if (validate(shadowRootElement)) {
+			System.out.println("located shadow-root element, attempt to process further...");
+			WebElement root1=expandRootElement(shadowRootElement);
+			try {
+				WebElement element=root1.findElement(By.cssSelector(inputCssSelector));
+				Assert.assertTrue("Dashboard header is not displayed", validate(element));
+				System.out.println("element is located, click it...");
+				element.click();
+				CommonUtility.checkPageIsReady(driver);
+			} catch (Exception e) {
+				System.out.println("can't locate element. Exception e="+e);
+				Assert.assertTrue("Dashboard header not functioning as expected", false);
+			}
+		} else {
+			System.out.println("no shadow-root element either, not sure what's going on w/ the header on rally");
+			Assert.assertTrue("Dashboard header is not displayed", false);
+		}
+	}	
 }

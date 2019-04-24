@@ -40,7 +40,7 @@ public class MedicareEligibilityPage extends GlobalWebElements {
 	@FindBy(xpath = "//button[contains(@ng-click,'lookupZip')]")
 	private WebElement btnZipcode;
 
-	@FindBy(xpath = "//video[contains(@poster,'dam/UCP/Individual/meded/eligibility')]")
+	@FindBy(xpath = "//iframe[contains(@src,'video')]")
 	private WebElement jpgVideo;
 
 	@FindBy(id = "uhc-arrow")

@@ -22,7 +22,6 @@ import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
-import atdd.framework.UhcDriver;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -31,7 +30,6 @@ import gherkin.formatter.model.DataTableRow;
 
 import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.regression.accounthomepage.AccountHomePage;
-import pages.regression.drugcostestimator.DrugCostEstimatorPage;
 import pages.regression.login.AssistiveRegistrationPage;
 import pages.regression.login.DeregisterPage;
 import pages.regression.login.HSIDLoginPage;
@@ -177,7 +175,7 @@ public class HSIDStepDefinition {
 							hasWentWrongError=true;
 						}
 					} catch (Exception e) {}
-					if (hasSorryError) {
+					if (hasSorryError && isPotentialSorryWorkaroundCandidate(planType)) {
 						//note: has the potential for sorry workaround if getting sorry error
 						Thread.sleep(1500);	//sometimes the sorry text take a bit longer to load
 						try {
@@ -647,6 +645,9 @@ public class HSIDStepDefinition {
 			System.out.println("*** bypassSorry is set to yes ***");
 			System.out.println("Got 'sorry' login error and this is test for "+type+", will attempt the workaround");
 			
+			if (planType==null) {
+				planType="NA";
+			}
 			AccountHomePage accountHomePage=new AccountHomePage(wd);
 			HashMap<String, String> workaroundInfoMap=new HashMap<String, String>();
 			workaroundInfoMap.put("needWorkaround","yes");
@@ -664,6 +665,21 @@ public class HSIDStepDefinition {
 			return false;
 		}
 	}
+	
+	public boolean isPotentialSorryWorkaroundCandidate(String planType){
+		boolean result=true;
+		List<String> tagsList=loginScenario.getTagList();
+		Iterator<String> it= tagsList.iterator();
+		while(it.hasNext()){
+			String tagName=it.next();
+			 if  (tagName.contains("NegativeScenario")){
+				 System.out.println("This scenario contains *NegativeScenario* tag");
+				 return false;
+			 }
+		}
+		System.out.println("This scenario does not contain *NegativeScenario* tag");
+		return result;
+    }
 	//^^^ note: added for 'sorry' login error workaround	
 
 }

@@ -396,10 +396,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public VPPPlanSummaryPage navigateToVpp(String zipcode) {
-
+		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 3000);
 		sendkeys(zipCodeField, zipcode);
 		viewPlansButton.click();
-
+		CommonUtility.waitForPageLoadNew(driver, vppTop, 3000);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
 		}
