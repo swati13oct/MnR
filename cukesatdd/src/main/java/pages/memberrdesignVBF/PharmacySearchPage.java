@@ -47,6 +47,10 @@ public class PharmacySearchPage extends UhcDriver {
 
 	@FindBy(className = "loading-block")
 	private WebElement loadingImage;
+	
+	@FindBy(xpath = "//ol[contains(@class, 'pharmacy-list')]")
+	private WebElement pharmacyList;
+	
 
 	public PharmacySearchPage(WebDriver driver) {
 		super(driver);
@@ -81,11 +85,13 @@ public class PharmacySearchPage extends UhcDriver {
 	 * 
 	 * @return
 	 */
-	public PharmacyResultPage searchesPharmacy() {
+	public PharmacyResultPage searchesPharmacy(String zipcode) {
 
 		driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 		CommonUtility.checkPageIsReadyNew(driver);
-
+		zipcodeField.sendKeys(zipcode);
+		continueField.click();
+		CommonUtility.waitForPageLoad(driver, pharmacyList, 40);
 		int PharmacyCount = PharmacyResultList.size();
 
 		if (PharmacyCount > 0) {
