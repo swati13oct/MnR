@@ -256,7 +256,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//input[@id='compare-plan-2']")
 	private WebElement mapdPlanCompare;
 
-	@FindBy(xpath =".//*[@class='popup-modal active']")
+	@FindBy(xpath =".//*[@id='vpp-monthly-premium-modal-header']/ancestor::div[contains (@class , 'popup-modal active')]")
 	private WebElement learnMoreModalPopUp;
 
 	@FindBy(xpath=".//*[@class='popup-modal active']/descendant::div[@class='modal-footer']/a[@class='cta-button close-modal']")
@@ -1508,15 +1508,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public void validateAndClickAddtoCompareinAARP(String planType , String planName) throws InterruptedException {
 		if (planType.equalsIgnoreCase("MAPD")) {
 			System.out.println("Choose Plan to Compare : "+planName);
-			//WebElement addToCompare = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//input[@id='compare-plan-2']"));
-			WebElement addToCompare = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//div[@class='compare-box']/span[@class='ng-scope']"));
-			//WebElement addToCompare = driver.findElement(By.xpath("//*[contains(text(),'AARP MedicareComplete SecureHorizons Plan 1 (HMO) ')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//input[@id='compare-plan-2']"));
-			validateNew(addToCompare);
-			addToCompare.click();
+				WebElement addToCompare = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//div[contains(@class ,'compare-box')]//span[contains(@class ,'ng-scope')]/label"));
+				validateNew(addToCompare);
+				addToCompare.click();
+				
 		}
+			
 		if (planType.equalsIgnoreCase("MA")) {
 			System.out.println("Choose Plan to Compare : "+planName);
-			WebElement addToCompare = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//div[@class='compare-box']/span[@class='ng-scope']"));
+			WebElement addToCompare = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//div[contains(@class ,'compare-box')]//span[contains(@class ,'ng-scope')]/label"));
 			validateNew(addToCompare);
 			addToCompare.click();
 		}
@@ -1524,7 +1524,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if (planType.equalsIgnoreCase("PDP")) {
 			System.out.println("Choose Plan to Compare : "+planName);
 			//WebElement addToCompare = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//input[@id='compare-plan-7']"));
-			WebElement addToCompare = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//div[@class='compare-box']/span[@class='ng-scope']"));
+			WebElement addToCompare = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//div[contains(@class ,'compare-box')]//span[contains(@class ,'ng-scope')]/label"));
 			validateNew(addToCompare);
 			addToCompare.click();
 		}
@@ -1575,7 +1575,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		if (planType.equalsIgnoreCase("SNP")) {
 			//WebElement learnMoreAboutExtraHelp = driver.findElement(By.xpath("(//*[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//a[@class='inline-edit-link modal-link vpp-monthly-premium-modal'])[1]"));
-			WebElement learnMoreAboutExtraHelp = driver.findElement(By.xpath("(//*[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//a)[5]"));
+			WebElement learnMoreAboutExtraHelp = driver.findElement(By.xpath("(//*[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//a[@class='inline-edit-link modal-link vpp-monthly-premium-modal'])[1]"));
 			validateNew(learnMoreAboutExtraHelp);
 			learnMoreAboutExtraHelp.click();
 		}
@@ -1941,6 +1941,9 @@ for (int i = 0; i < initialCount + 1; i++) {
 		StartPlanSelector.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("medicare-plans")) {
+			WebElement PlanSelector = driver.findElement(By.xpath("//*[@id='planSelectorTool']"));
+			CommonUtility.waitForPageLoadNew(driver, PlanSelector, 30);			
+			validateNew(PlanSelector);
 			System.out.println("Plan Selector Tool Page is displayed");
 			Assert.assertTrue(true);
 			driver.navigate().back();

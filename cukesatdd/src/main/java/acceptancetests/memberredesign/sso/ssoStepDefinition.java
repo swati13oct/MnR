@@ -135,7 +135,7 @@ public void user_should_be_navigated_to_home_page_of_rally_dashboard() throws Th
 @And("^user clicks on account setting link$")
 public void user_clicks_on_account_setting_link() throws Throwable {
 	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-	ProfileandPreferencesPage profilePageHsid = accountHomePage.navigateDirectToProfilePageHsid();
+	ProfileandPreferencesPage profilePageHsid = accountHomePage.navigatedirectToProfilePageurl();
 
 	if (profilePageHsid!= null) {
 		getLoginScenario().saveBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE_HSID, profilePageHsid);
