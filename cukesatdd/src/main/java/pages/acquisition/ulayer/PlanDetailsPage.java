@@ -167,7 +167,9 @@ public class PlanDetailsPage extends UhcDriver {
 	}
 
 	public PlanDetailsPage(WebDriver driver, String planType) {
+		
 		super(driver);
+		System.out.println("View Plan Details Link is clicked for MA plan"+planType);
 		PageFactory.initElements(driver, this);
 		openAndValidate(planType);
 	}
@@ -199,7 +201,12 @@ public class PlanDetailsPage extends UhcDriver {
 		} else if (planType.equalsIgnoreCase("PDP")) {
 			CommonUtility.waitForPageLoadNew(driver, presDrugTab.get(0), 45);
 			Assert.assertTrue(0 == medBenefitsTab.size(), "Medical Benefit tab not displayed for PDP plans");
+		} else if (planType.equalsIgnoreCase("MAPD")) {
+			CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
+			System.err.println(presDrugTab.size());
+			Assert.assertTrue(0 != presDrugTab.size(), "Prescription Drug tab not displayed for MA plans");
 		}
+		
 		validate(planCostsTab);
 
 	}

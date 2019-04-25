@@ -108,6 +108,7 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code | <zipcode> |
+       | Is Multi County | <isMultutiCounty> |
     And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
     And the user validates the available plans for selected plan types in the AARP site
@@ -117,9 +118,9 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
     Then the user validates the functionality of email and print buttons on the plan Details Page
 
     Examples: 
-      | zipcode | plantype | planName                                          |
-      |   90210 | MA       | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
-
+      | zipcode | isMultutiCounty  |  plantype | planName                                          |
+     # |   90210 | No               |   MA       | AARP MedicareComplete SecureHorizons Essential (HMO) |
+		|   90210 | No               |   MAPD       | AARP MedicareComplete SecureHorizons Premier (HMO) |
   @F229349 @validateEyeWearCredit @fastandfurious @Mar_release_2019
   Scenario Outline: UserStory: <UID> -plan type: <plantype> - Verify Eyewear Credit Benefits in Plan Details for provided plan
     Given the user is on AARP medicare acquisition site landing page
