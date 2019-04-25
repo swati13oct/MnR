@@ -777,8 +777,23 @@ sauceLabsTunnelIdentifier);
 			e.printStackTrace();
 		}
 		return webDriver;	
-
+		
+		/*File pathToBinary = new File("C:/Program Files (x86)/Google/Chrome/Application/chrome.exe");
+        Map<String, Object> chromeOptions = new HashMap<String, Object>();
+        chromeOptions.put("binary", pathToBinary);
+        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+        capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+        ChromeOptions options=new ChromeOptions();
+        System.setProperty("webdriver.chrome.driver","C:/Users/y16/drivers/chromedriver_win32/chromedriver.exe");
+        options.setExperimentalOption("useAutomationExtension", false);
+        webDriver = new ChromeDriver(options);
+        webDriver.manage().window().maximize();
+             
+		return webDriver;
+*/
 	}
+	
+
 
 	public WebDriver getIEDriver() {
 		System.setProperty("webdriver.ie.driver",
