@@ -60,6 +60,12 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
                @FindBy(xpath = "//p[contains(text(),'1-866-254-3132')]")
                public WebElement preEffectiveTechSupportNumber;
+               
+               @FindBy(xpath = "//p[contains(text(),'1-800-523-5880')]")
+               public WebElement preEffectiveClaimsSupportNumber;
+               
+               @FindBy(xpath = "//h3[@class='needhelp h4 margin-none atdd-claims-header']")
+               public WebElement preEffectiveClaimsSupportHeader;
 
                @FindBy(id = "IPerceptionsEmbed")
                public WebElement iPerceptionframe;
@@ -846,7 +852,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                private WebElement PDFUpdatedText;
                
                //note: add to support SSUP
-               @FindBy(xpath="//*[@class='subtitle atdd-bnc-exclusivehearing-subtitle']")
+               @FindBy(xpath="//h4[@class='h4 margin-extra-small atdd-benefitssummary-exclusivehearing']")
               private WebElement ssupExclusiveHearingSavings;
                
                @FindBy(xpath="//*[@class='subtitle atdd-benefitssummary-vision']")
@@ -872,6 +878,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                
                @FindBy(css="div.siteleaving-popup-footer a#proceedbtn")
                private WebElement siteLeavingPopUpProceedBtn;
+               
+               @FindBy(xpath= "//*[@id='pcpCard2']/div/a")
+               private WebElement providersearchlink;
                
                public WebElement getLinkBackToTop_copy() {
                               return linkBackToTop_copy;
@@ -2692,7 +2701,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                                                             Assert.fail();
                                              }
                               }
-                              else if(langdropdwn.getFirstSelectedOption().getText().contains("ESPAÃ‘OL"))
+                              else if(langdropdwn.getFirstSelectedOption().getText().contains("ESPAÑOL"))
                               {
 
                                              List<WebElement> pdfs = driver.findElements(By.xpath(".//div[@class='PlanPdf section']//div[contains(@ng-show, 'planProfileInfo.employerGroupIndicator')]//li[not(contains(@class,'ng-hide'))]//a"));
@@ -2734,7 +2743,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                                              }
 
                               }
-                              else if(langdropdwn.getFirstSelectedOption().getText().contains("ä¸¬æ–‡"))
+                              else if(langdropdwn.getFirstSelectedOption().getText().contains("丬文"))
                               {
                                              System.out.println("NO PDFs in chinese yet.if PDFs come then above same code can be used");
                                              checkflag = true;
@@ -3717,6 +3726,34 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                               System.out.println("Assert for correct Tech Suppport Phone Number  was passed");
 
                }
+               
+               public void verifyClaimSupportSupportNumberNOTDisplayedForSHIPPreEffectiveMembers() throws InterruptedException 
+               {
+
+                              System.out.println("Now checking for Claim Support Number for SHIP Pre-effective members");
+                              try {
+                            	  preEffectiveClaimsSupportNumber.isDisplayed();                            	  
+             					System.out.println("Claim Support Number for SHIP Pre-effective members was displayed");
+             					Assert.fail("Claim Support Number for SHIP Pre-effective members was displayed, Test step is failed due to it");
+             				} catch (Exception e) {
+             					System.out.println("Claim Support Number for SHIP Pre-effective members was NOT displayed, Test step is passed due to it");
+             			    		}
+
+               }
+               
+               public void verifyClaimSupportSupportHeaderInNeedHelpNOTDisplayedForSHIPPreEffectiveMembers() throws InterruptedException 
+               {
+
+                              System.out.println("Now checking for Claim Support Header in Need Help Section for SHIP Pre-effective members");
+                              try {
+                            	  preEffectiveClaimsSupportHeader.isDisplayed();
+                            	  System.out.println("Claim Support Header in Need Help Section for SHIP Pre-effective members was displayed");
+             					Assert.fail("Claim Support Header in Need Help Sectionr for SHIP Pre-effective members was displayed, Test step is failed due to it");
+             				} catch (Exception e) {
+             					System.out.println("Claim Support Header in Need Help Section for SHIP Pre-effective members was NOT displayed, Test step is passed due to it");
+             			    		}
+
+               }
 
                public FormsAndResourcesPage clickViewPlanDocumentsButton() throws InterruptedException 
                {
@@ -4180,5 +4217,26 @@ public class BenefitsAndCoveragePage extends UhcDriver {
             	}
             	return bAccessDrugsBenfitsBlockValidation;
             }
+
+			public void validate_provider_search_link() {
+				
+				waitforElement(providersearchlink);
+				validateNew(providersearchlink);
+				ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+				tabs.size();
+				System.out.println("hi");
+				if(tabs.size()==1)
+				{
+				System.out.println("user is on benefits overview page");
+				providersearchlink.click();
+				driver.switchTo().window(tabs.get(2));
+				try {
+					Thread.sleep(5000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				}
+			}
 
 }

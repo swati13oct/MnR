@@ -108,7 +108,7 @@ Feature: C1.2To test Profile and Preferences page
 	
 	
 	
-	  @accountProfile6 @regressionPCPMedica @regressionMember
+	  @accountProfile6 @regressionPCPMedica @regressionMember 
     Scenario Outline:  TID: <TID> -User Type: <userType> -Member Type: <memberType> -To test end to end regression scenario for account profile page for PCP medica members
     Given login with following details logins in the member portal and validate elements
       | User Type | <userType> |
@@ -118,8 +118,7 @@ Feature: C1.2To test Profile and Preferences page
     Then I should see the breadcrumb  in the upper left side of the page											
     And clicking the link should lead me back to the Account Settings page of the member site						
 	And I click the HEALTHSAFE ID ACCOUNT RECOVERY AND SECURITY link												
-	# need to add back to page command
-    And the user validate the Email section in UMS site
+	And the user validate the Email section in UMS site
     And the user fill new email address and click save then user should see new updated email on page
     And the user validates the Phone section
       | Member Type | <memberType> |
@@ -138,29 +137,34 @@ Feature: C1.2To test Profile and Preferences page
 	
 	
 	 
-	  @accountProfile7  @regressionAccountProf&Pref  @regressionMember
+	  @accountProfile7  @regressionAccountProf&Pref  @regressionMember 
   Scenario Outline:  TID: <TID> -User Type: <userType> -Member Type: <memberType> - To test end to end regression scenario for account profile page aarp member
     Given login with following details logins in the member portal and validate elements
-      | User Type | <userType> |
+      | User Type   | <userType>   |
+      | member Type | <memberType> |
     When the user navigates to Profile and Preferences page
     And I click the HEALTHSAFE ID PASSWORD link and validate username and password and verify edit password link
     Then I should see the breadcrumb  in the upper left side of the page
     And clicking the link should lead me back to the Account Settings page of the member site
     And the user validates the Email section in UMS site
-      | Member Type | <memberType> |
+    | User Type   | <userType>   |
+    | member Type | <memberType> |
     And the user validates the Phone section
-      | Member Type | <memberType> |
+    | User Type   | <userType>   |
+    | member Type | <memberType> |
     And the user Clicks on the the Edit phone Link and validates the elements
-      | Member Type | <memberType> |
+    | User Type   | <userType>   |
+    | member Type | <memberType> |
     Then the user validates Communication Preferences section
     And the user clicks on edit preferences link and validates the page
     And the user clicks on profile & preferences link to go back to Account settings page
     And the user validates the address section
-      | Member Type | <memberType> |
+    | User Type   | <userType>   |
+    | member Type | <memberType> |
 
     Examples: 
      |  TID    | userType            | memberType |
-     | 15083   | MAPD_AARPIndividual | AARP       |
+     | 15083   | MAPD_AARPIndividual | AARP_ProfilePref      |
 	
 	
 	 
@@ -198,7 +202,7 @@ Feature: C1.2To test Profile and Preferences page
       | planType | memberType  |
      # | MAPD     | EPMPEnabled |
 
-  @accountProfile11 @EPMPProfilePageContactusInformation @regressionMember
+  @accountProfile11 @EPMPProfilePageContactusInformation @regressionMember @epmpfixed
   Scenario Outline: To test end to end regression scenario for EPMP profile page
   #Removed from Regression as EPMP is still in the pipeline for development
  	Given login with following details logins in the member portal and validate elements
@@ -247,7 +251,7 @@ Feature: C1.2To test Profile and Preferences page
       #| MAPD     | EPMPEnabled | group    | HealthSelectRx |
 	  
 	
-	 @accountProfile14 @profilePageForTerminated @regressionMember
+	 @accountProfile14 @profilePageForTerminated @regressionMember @epmpfixed
   Scenario Outline: To test end to end regression scenario for account profile  page for a terminated member
  #Removed from Regression as EPMP is still in the pipeline for development
     Given login with following details logins in the member portal and validate elements
@@ -262,7 +266,7 @@ Feature: C1.2To test Profile and Preferences page
 
     Examples: 
       | planType | memberType  | dataType   |
-    #  | MAPD     | EPMPEnabled | Terminated |
+      | MAPD     | EPMPEnabled | Terminated |
 
   @accountProfile15 @EPMPpreferencesForComboOnProfile  @regressionMember
   Scenario Outline: To test end to end regression scenario for account profile and preferences for a combo member

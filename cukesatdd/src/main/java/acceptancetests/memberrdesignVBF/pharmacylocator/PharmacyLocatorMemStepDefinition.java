@@ -73,6 +73,7 @@ public class PharmacyLocatorMemStepDefinition {
 			zipAttributesMap.put(zipAttributesRow.get(i).getCells().get(0), zipAttributesRow.get(i).getCells().get(1));
 		}
 		String distance = zipAttributesMap.get("Distance");
+		
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.DISTANCE, distance);
 
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
@@ -89,12 +90,18 @@ public class PharmacyLocatorMemStepDefinition {
 	 * 
 	 */
 	@Then("^the user validates the pharmacies available in Redesign site$")
-	public void user_validates_pharmacies_available_aarp() {
+	public void user_validates_pharmacies_available_aarp(DataTable zipAttributes) {
+		List<DataTableRow> zipAttributesRow = zipAttributes.getGherkinRows();
+		Map<String, String> zipAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < zipAttributesRow.size(); i++) {
 
+			zipAttributesMap.put(zipAttributesRow.get(i).getCells().get(0), zipAttributesRow.get(i).getCells().get(1));
+		}
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 
-		PharmacyResultPage pharmacyResultPage = pharmacySearchPage.searchesPharmacy();
+		String zipcode = zipAttributesMap.get("Zipcode");
+		PharmacyResultPage pharmacyResultPage = pharmacySearchPage.searchesPharmacy(zipcode);
 		if (pharmacyResultPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_RESULT_PAGE, pharmacyResultPage);
 			Assert.assertTrue(true);

@@ -515,6 +515,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//button[contains(text(),'View Prescription')]")
 		private WebElement OleMS_ViewPDPPlanBtn;
 		
+		@FindBy(xpath = "( //*[contains(text(),'Annual')])[1]//following-sibling::span[2]")
+		private WebElement valEstimatedAnnualDrugCostValue;
+		
+		public WebElement getValEstimatedAnnualDrugCostValue() {
+			return valEstimatedAnnualDrugCostValue;
+		}
+
+		
+		
 		
 	public VPPPlanSummaryPage(WebDriver driver) {
 		super(driver);

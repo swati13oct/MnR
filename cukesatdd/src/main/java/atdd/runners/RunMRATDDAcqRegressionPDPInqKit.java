@@ -15,9 +15,9 @@ import cucumber.api.CucumberOptions;
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
 jsonReport = "target/cucumber-RunMRATDDAcqRegressionPDPInqKit.json",detailedReport = true, detailedAggregatedReport = true, 
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcqRegressionPDPInqKit")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition", "acceptancetests.acquisition.inquirykit"  },
-features = { "src/main/resources/feature/acquisition/inquirykit","src/main/resources/feature/inquirykit" },
-plugin = {"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqRegressionPDPInqKit.json" }, tags = { "" })
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition.vpp","acceptancetests.acquisition.agentflow", "acceptancetests.acquisition.inquirykit"  },
+features = { "src/main/resources/feature/acquisition/inquirykit" },
+plugin = {"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqRegressionPDPInqKit.json" }, tags = { "@pdpInquiryKitULayerRegression,@pdpInquiryKitBLayerRegression" })
 
 public class RunMRATDDAcqRegressionPDPInqKit { 
 }

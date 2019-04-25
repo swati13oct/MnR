@@ -150,13 +150,7 @@ public class HSIDLoginPage extends UhcDriver {
 
 	public HsidRegistrationPersonalInformationPage clickRegister() {
 		driver.get(REGIRATION_URL);
-		/*
-		 * if(registerNow.isDisplayed()){ registerNow.click(); try {
-		 * Thread.sleep(5000); } catch (InterruptedException e) { // TODO
-		 * Auto-generated catch block e.printStackTrace(); } return new
-		 * HsidRegistrationPersonalInformationPage(driver); }else{
-		 * Assert.assertTrue("Register now button is not displayed", false); }
-		 */
+	
 		return new HsidRegistrationPersonalInformationPage(driver);
 	}
 
@@ -197,6 +191,7 @@ public class HSIDLoginPage extends UhcDriver {
 		signInButton.click();
 
 		//wait for some form of header to show
+
 		CommonUtility.waitForPageLoad(driver, authQuestionlabel, 35);
 		if (!validate(authQuestionlabel)) {
 			System.out.println("waited 35 sec and still not seeing the authQuestionLabel showing...");
@@ -214,10 +209,8 @@ public class HSIDLoginPage extends UhcDriver {
 
 			ConfirmSecurityQuestion cs = new ConfirmSecurityQuestion(driver);
 			try {
-				//tbd Thread.sleep(10000);
 				cs.enterValidSecurityAnswer();
 				System.out.println(driver.getCurrentUrl());
-				//tbd Thread.sleep(20000);
 				System.out.println("Check to see if document.readyState is ready...");
 				CommonUtility.checkPageIsReadyNew(driver);
 			} catch (Exception e) {
@@ -289,39 +282,30 @@ public class HSIDLoginPage extends UhcDriver {
 				return new TestHarness(driver);
 		}
 		else {
-			System.out
-					.println("Security question page or test harness page or Account Home Page didn't load , please check");
+			System.out.println("Security question page "
+					+ "or test harness page "
+					+ "or Rally Account Home Page didn't load , please check");
 		}
 		if (MRScenario.environmentMedicare.equals("team-e")
 				|| MRScenario.environmentMedicare.equals("team-ci1")) {
 			Alert alert = driver.switchTo().alert();
 			alert.accept();
 		}
-		
-		/* tbd
-		try {
-			Thread.sleep(15000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
 
 		if (currentUrl().contains("/dashboard")) {
-
 			System.out.println(driver.getCurrentUrl());
 			return new AccountHomePage(driver);
 		} else if (currentUrl().contains("home/my-account-home.html")
 				|| currentUrl().contains("/login.html")) {
-
 			return new AccountHomePage(driver);
 		} else if (currentUrl().contains("terminated-plan.html")) {
 			return new TerminatedHomePage(driver);
-		} else if (currentUrl().contains("testharness.html"))
-		{
+		} else if (currentUrl().contains("testharness.html")) {
 			return new TestHarness(driver);
 		}
 		return null;
 	}
+
 
 	public void emailconfirmed() {
 		// TODO Auto-generated method stub
@@ -355,11 +339,6 @@ public class HSIDLoginPage extends UhcDriver {
 				Thread.sleep(20000);
 			}
 
-			/*
-			 * if (validate(iPerceptionPopUp)) {
-			 * System.out.println("iPerceptionPopUp is Displayed");
-			 * iPerceptionPopUp.click(); }
-			 */
 		} catch (Exception e) {
 			System.out.println("iPerception Pop Up not displayed");
 		}
@@ -413,10 +392,7 @@ public class HSIDLoginPage extends UhcDriver {
 					+ MRConstants.REDESIGN_LOGIN_URL);
 			System.out.println("user is on Testharness Environment");
 		}
-		/*
-		 * else { start(PAGE_URL_TEAM_MEDICARE_TESTHARNESS);
-		 * System.out.println("User is on Medicare Test harness page"); }
-		 */
+	
 	}
 
 	public void verifyIfIperceptionSmileySurveyIsDisplayed()
@@ -611,18 +587,18 @@ public class HSIDLoginPage extends UhcDriver {
 		while (y < 20) {
 			try {
 				List<WebElement> header=driver.findElements(By.xpath("//h1"));
-				if (header.size() >0) {
+				if (header.size() > 0) {
 					System.out.println("Located some sort of header, assume page is comming");
 					Thread.sleep(2000); //just in case, let page settle down
 					break;
 				}
 				Thread.sleep(1000);
 				y=y+1;
-				System.out.println("Waiting for some form of header to show up... waited "+y+" sec");
+				System.out.println("Waiting for some form of header to show up... waited total of "+y+" sec");
 			} catch (UnhandledAlertException ae) {  //if getting alert error, stop and get out
 				System.out.println("Exception: "+ae); 
 				Assert.fail("***** Error in loading  Redesign Account Landing Page ***** Got Alert error");
-			} catch (InterruptedException e) {
+			} catch (Exception e) { 
 				//e.printStackTrace();
 			}
 		} 

@@ -19,61 +19,64 @@ import atdd.framework.UhcDriver;
  */
 public class RequestAgentAppointmentPage extends UhcDriver{
 	
-	@FindBy(id="ym-first_name")
+	@FindBy(xpath = "//input[contains(@id,'firstNameField')]")
 	private WebElement firstName;
-	
-	@FindBy(id="ym-last_name")
+
+	@FindBy(xpath = "//input[contains(@id,'lastNameField')]")
 	private WebElement lastName;
-	
-	@FindBy(id="ym-address1")
+
+	@FindBy(xpath = "//input[contains(@id,'address1Field')]")
 	private WebElement address;
-	
-	@FindBy(id="ym-city")
+
+	@FindBy(xpath = "//input[contains(@id,'cityField')]")
 	private WebElement city;
-	
-	@FindBy(id="ym-state")
+
+	@FindBy(xpath = "//select[contains(@id,'stateField')]")
 	private WebElement state;
-	
-	@FindBy(id="ym-zip")
+
+	@FindBy(xpath = "//input[contains(@id,'zipcodeField')]")
 	private WebElement zip;
-	
-	@FindBy(id="ym-phone")
+
+	@FindBy(xpath = "//input[contains(@id,'phoneNumberField')]")
 	private WebElement phoneField;
-	
-	@FindBy(xpath=".//*[@id='appointmentform']//button[contains(@class,'submitagentappt')]")
+
+	@FindBy(xpath = "//button[@class=\"c-button\"]")
 	private WebElement requestAppointmentButton;
-	
-	@FindBy(xpath=".//*[@id='ym-custom-container']//button[contains(text(),'Find plans')]")
+
+	@FindBy(xpath = "//a[contains(text(),'Find plans')]")
 	private WebElement findPlansBtn;
-	
+
 	@FindBy(xpath = "//div[contains(@class,'rightrail')]//div[contains(@class,'segment-title')]//*[contains(text(),'Need Help')]")
 	private WebElement rightRailNeedHelpHeading;
-	
+
 	@FindBy(id = "tfn")
 	private WebElement rightRailNeedHelpTelePhone;
-	
-	@FindBy(xpath = "//form[@id='appointmentform']//*[contains(@class,'formerror')]")
+
+	@FindBy(xpath = "//div[@id='ebcformErrorContainer']")
 	private WebElement errorMessageHeading;
-	
-	@FindBy(xpath = "//input[@id='ym-first_name']/following-sibling::span[contains(@class,'field-error-msg') and contains(text(),'Please enter')]")
+
+	@FindBy(xpath = "//span[contains(text(),'Enter a first name and must contain only letters, spaces, hyphens (-) and apostrophes')]")
 	private WebElement errorMessageFN;
-	
-	@FindBy(xpath = "//input[@id='ym-last_name']/following-sibling::span[contains(@class,'field-error-msg') and contains(text(),'Please enter')]")
+
+	@FindBy(xpath = "//span[contains(text(),'Enter a last name and must contain only letters, spaces, hyphens (-) and apostrophes')]")
 	private WebElement errorMessageLN;
-	
-	@FindBy(xpath = "//input[@id='ym-address1']/following-sibling::span[contains(@class,'field-error-msg') and contains(text(),'Please enter')]")
+
+	@FindBy(xpath = "//div[@class='trail breadcrumb']")
+	private WebElement breadCrumb;
+
+	@FindBy(xpath = "//span[contains(text(),'Enter an address that contains only numbers, letters, apostrophe')]")
 	private WebElement errorMessageAddress;
-	
-	@FindBy(xpath = "//input[@id='ym-city']/following-sibling::span[contains(@class,'field-error-msg') and contains(text(),'Please enter')]")
+
+	@FindBy(xpath = "//span[contains(text(),'Enter a city that only contains non-numeric characters, apostrophe')]")
 	private WebElement errorMessageCity;
-	
-	@FindBy(xpath = "//select[@id='ym-state']/following-sibling::span[contains(@class,'field-error-msg') and contains(text(),'Please enter')]")
+
+	@FindBy(xpath = "//span[contains(text(),'Select a state')]")
 	private WebElement errorMessageState;
-	
-	@FindBy(xpath = "//input[@id='ym-zip']/following-sibling::span[contains(@class,'field-error-msg') and contains(text(),'Please enter')]")
+
+	@FindBy(xpath = "//span[text()='Enter a valid 5-digit ZIP code in the format 12345.']")
 	private WebElement errorMessageZip;
-	
-	@FindBy(xpath = "//input[@id='ym-phone']/following-sibling::span[contains(@class,'field-error-msg') and contains(text(),'Please enter')]")
+
+	@FindBy(xpath = "//span[contains(text(),'Enter a valid 10-digit phone number (format xxx-xxx-xxxx).')]")
 	private WebElement errorMessagePhone;
 	
 	public RequestAgentAppointmentPage(WebDriver driver) {
@@ -95,15 +98,13 @@ public class RequestAgentAppointmentPage extends UhcDriver{
 	public boolean submitAgentAppointment(Map<String, String> personalDetails) {
 		sendkeys(firstName, personalDetails.get("First Name"));
 		sendkeys(lastName, personalDetails.get("Last Name"));
-		sendkeys(address, personalDetails.get("Address"));
+		selectFromDropDownByValue(state, personalDetails.get("State"));
 		sendkeys(city, personalDetails.get("City"));
-		selectFromDropDownByText(driver, state, personalDetails.get("State"));
 		sendkeys(zip, personalDetails.get("Zipcode"));
-
 		String phone = personalDetails.get("Phone");
 		sendkeys(phoneField, phone);
-
-		requestAppointmentButton.click();
+		sendkeys(address, personalDetails.get("Address"));
+		SubmitForm();
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, findPlansBtn, 60);
 		if (findPlansBtn.isDisplayed()) {
@@ -127,6 +128,15 @@ public class RequestAgentAppointmentPage extends UhcDriver{
 		validateNew(errorMessageFN);
 		if (validate(errorMessageLN) && validate(errorMessageAddress) && validate(errorMessageCity)
 				&& validate(errorMessageState) && validate(errorMessageZip) && validate(errorMessagePhone)) {
+			return true;
+		}
+		return false;
+	}
+	public boolean validateBreadcrumb() {
+		validateNew(breadCrumb);
+		String breadCrumbText=breadCrumb.getText();
+		System.out.println(breadCrumbText);
+		if (breadCrumbText.equals("Home / Shop for a Plan / Shop / Connect / Request an Appointment with a Health Insurance Agent")) {
 			return true;
 		}
 		return false;
