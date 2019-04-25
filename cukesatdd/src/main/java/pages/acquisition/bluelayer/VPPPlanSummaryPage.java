@@ -511,7 +511,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//span[text()='Welcome to Online Enrollment']")
 		private WebElement welcomepage;
 		
-		@FindBy(xpath = "( //*[contains(text(),'Annual')])[1]//following-sibling::span[2]")
+		@FindBy(xpath = "//*[contains(text(),'\" + planName + \"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@ng-show=\"plan.network\"]")
 		private WebElement valEstimatedAnnualDrugCostValue;
 		
 		@FindBy(xpath = "(//*[@id='overlay'])[1]]")

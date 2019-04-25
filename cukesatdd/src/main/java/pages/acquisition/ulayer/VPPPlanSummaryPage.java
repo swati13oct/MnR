@@ -515,7 +515,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//button[contains(text(),'View Prescription')]")
 		private WebElement OleMS_ViewPDPPlanBtn;
 		
-		@FindBy(xpath = "( //*[contains(text(),'Annual')])[1]//following-sibling::span[2]")
+		@FindBy(xpath = "//*[contains(text(),'\" + planName + \"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@ng-show=\"plan.network\"]")
 		private WebElement valEstimatedAnnualDrugCostValue;
 		
 		public WebElement getValEstimatedAnnualDrugCostValue() {
