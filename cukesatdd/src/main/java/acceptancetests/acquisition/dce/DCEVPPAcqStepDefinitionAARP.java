@@ -457,13 +457,15 @@ public class DCEVPPAcqStepDefinitionAARP {
 	}
 
 	@Then("^user validates Drug information is reflected on plan summary page in AARP site$")
-	public void user_validates_Drug_information_is_reflected_on_plan_summary_page_in_AARP_site() throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
+	public void user_validates_Drug_information_is_reflected_on_plan_summary_page_in_AARP_site(DataTable data) throws Throwable {
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		
+		String planName=memberAttributesRow.get(0).getCells().get(1);
 		VPPPlanSummaryPage plansummaryPage =  new VPPPlanSummaryPage(wd);
 			System.out.println(cost);
-			System.out.println(plansummaryPage.getValEstimatedAnnualDrugCostValue().getText().trim());
+			System.out.println(plansummaryPage.getValEstimatedAnnualDrugCostValue(planName).getText().trim());
 			
-		if(cost.trim().contains(plansummaryPage.estimatedAnnualDrugCostVPP()))
+		if(cost.trim().contains(plansummaryPage.estimatedAnnualDrugCostVPP(planName)))
 				Assert.assertTrue("It's a match on on VPP and Drug CostEstimator page",true);
 		else
 			Assert.assertTrue("Cost mismatch on VPP and drug CostEstimator page",false);

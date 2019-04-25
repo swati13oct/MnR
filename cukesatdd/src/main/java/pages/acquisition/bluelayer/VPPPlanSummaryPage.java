@@ -511,9 +511,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//span[text()='Welcome to Online Enrollment']")
 		private WebElement welcomepage;
 		
-		@FindBy(xpath = "//*[contains(text(),'\" + planName + \"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@ng-show=\"plan.network\"]")
-		private WebElement valEstimatedAnnualDrugCostValue;
-		
 		@FindBy(xpath = "(//*[@id='overlay'])[1]]")
 		private WebElement loadingIndicator;
 		
@@ -523,8 +520,17 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			return loadingIndicator;
 		}
 
-		public WebElement getValEstimatedAnnualDrugCostValue() {
+		public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
+			WebElement valEstimatedAnnualDrugCostValue = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@ng-show='plan.network']"));
 			return valEstimatedAnnualDrugCostValue;
+		}
+		
+		public String estimatedAnnualDrugCostVPP(String planName) {
+			
+			scrollToView(getValEstimatedAnnualDrugCostValue(planName));
+			return getValEstimatedAnnualDrugCostValue(planName).getText().trim();
+			
+			
 		}
 
 	private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;

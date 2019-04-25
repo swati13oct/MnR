@@ -75,6 +75,7 @@ Then the user validates the added drugs on See your Estimated Costs page in AARP
       | Drug Name5     | <drugName5>     |
 And the user clicks on Back to Plans button in AARP site
 Then user validates Drug information is reflected on plan summary page in AARP site
+ | PlanName       | <planName>      |
 #Test ID: 15616,15617,15618
 Examples:
              	| zipcode | county             | drugInitials1       | drugName1     | drugInitials2 | drugName2  | drugInitials3 | drugName3     | drugInitials4 | drugName4 | drugInitials5 | drugName5             | pharmacyType                 | distance   |  pharmacyName               | plantype | planName                                           | quantity | frequency   |newPharmacyType|genericName1|genricName3|
@@ -160,6 +161,7 @@ And user verifies annual drug cost in the prescription drug tab of AARP site
 	| Plan Type | <plantype> |
 And the user clicks on Back to All Plans button present on details page in AARP site
 Then user validates Drug information is reflected on plan summary page in AARP site
+ | PlanName       | <planName>      |
 
 #Test ID: 15619,15620,15621
 Examples:
@@ -248,6 +250,7 @@ And user verifies annual drug cost in the Plan Cost tab of AARP site
 	  | Plan Type | <plantype> |
 And the user clicks on Back to All Plans button present on details page in AARP site
 Then user validates Drug information is reflected on plan summary page in AARP site
+ | PlanName       | <planName>      |
 #Test ID: 15623, 15624, 15625 : Few scenario's are left to be covered
 Examples:
                | zipcode | county             | drugInitials1       | drugName1     | drugInitials2 | drugName2  | drugInitials3 | drugName3     | drugInitials4 | drugName4 | drugInitials5 | drugName5             | pharmacyType                 | distance   |  pharmacyName               | plantype | planName                                           | quantity | frequency   |newPharmacyType|genericName1|genricName3|

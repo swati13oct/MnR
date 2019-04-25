@@ -461,12 +461,14 @@ public class DCEVPPAcqStepDefinitionUHC {
 	}
 
 	@Then("^user validates Drug information is reflected on plan summary page in UMS site$")
-	public void user_validates_Drug_information_is_reflected_on_plan_summary_page_in_UMS_site() throws Throwable {
-		// Write code here that turns the phrase above into concrete actions
+	public void user_validates_Drug_information_is_reflected_on_plan_summary_page_in_UMS_site(DataTable data) throws Throwable {
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		
+		String planName=memberAttributesRow.get(0).getCells().get(1);
 		VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage(wd);
 		System.out.println(cost);
-		System.out.println(plansummaryPage.getValEstimatedAnnualDrugCostValue().getText().trim());
-		if (cost.trim().contains(plansummaryPage.getValEstimatedAnnualDrugCostValue().getText().trim()))
+		System.out.println(plansummaryPage.getValEstimatedAnnualDrugCostValue(planName).getText().trim());
+		if (cost.trim().contains(plansummaryPage.getValEstimatedAnnualDrugCostValue(planName).getText().trim()))
 			Assert.assertTrue(true);
 		else
 			Assert.assertTrue("Cost Mismatch on VPP and Drug cost estimator page", false);

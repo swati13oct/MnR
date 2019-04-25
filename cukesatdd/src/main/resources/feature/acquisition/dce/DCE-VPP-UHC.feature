@@ -75,6 +75,7 @@ Then the user validates the added drugs on See your Estimated Costs page in UMS 
       | Drug Name5     | <drugName5>     |
 And the user clicks on Back to Plans button in UMS site
 Then user validates Drug information is reflected on plan summary page in UMS site
+| PlanName       | <planName>      |
 #Test ID: 15487,15490,15494
 Examples:
                | zipcode | county             | drugInitials1       | drugName1     | drugInitials2 | drugName2  | drugInitials3 | drugName3     | drugInitials4 | drugName4 | drugInitials5 | drugName5             | pharmacyType                 | distance   |  pharmacyName               | plantype | planName                                           | quantity | frequency   |newPharmacyType|genericName1|genricName3|
@@ -160,6 +161,7 @@ And user verifies annual drug cost in the prescription drug tab of UMS site
 | Plan Type | <plantype> |
 And the user clicks on Back to All Plans button present on details page in UMS site
 Then user validates Drug information is reflected on plan summary page in UMS site
+| PlanName       | <planName>      |
 
 #Test ID: 15495,15541,15608
 Examples:
@@ -248,6 +250,7 @@ And user verifies annual drug cost in the Plan Cost tab of UMS site
 | Plan Type | <plantype> |
 And the user clicks on Back to All Plans button present on details page in UMS site
 Then user validates Drug information is reflected on plan summary page in UMS site
+| PlanName       | <planName>      |
 #Test ID: 15610, 15612, 15613 : Few scenario's are left to be covered
 Examples:
                | zipcode | county             | drugInitials1       | drugName1     | drugInitials2 | drugName2  | drugInitials3 | drugName3     | drugInitials4 | drugName4 | drugInitials5 | drugName5             | pharmacyType                 | distance   |  pharmacyName               | plantype | planName                                           | quantity | frequency   |newPharmacyType|genericName1|genricName3|

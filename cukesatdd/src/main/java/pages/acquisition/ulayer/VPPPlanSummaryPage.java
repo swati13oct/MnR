@@ -515,10 +515,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//button[contains(text(),'View Prescription')]")
 		private WebElement OleMS_ViewPDPPlanBtn;
 		
-		@FindBy(xpath = "//*[contains(text(),'\" + planName + \"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@ng-show=\"plan.network\"]")
-		private WebElement valEstimatedAnnualDrugCostValue;
 		
-		public WebElement getValEstimatedAnnualDrugCostValue() {
+		public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
+			WebElement valEstimatedAnnualDrugCostValue = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@ng-show='plan.network']"));
 			return valEstimatedAnnualDrugCostValue;
 		}
 
@@ -1804,7 +1803,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 
 	public pages.acquisition.dce.ulayer.DrugCostEstimatorPage navigatetoDCEPage(String planName){
-		WebElement DCELink = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(), 'Prescription Drugs, Tier 1')]/span)[2]"));
+		WebElement DCELink = driver.findElement(By.xpath("(//*[contains(text(),'" + planName + "')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(), 'Prescription Drugs, Tier 1')]/span)[2]"));
 		DCELink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if(driver.getCurrentUrl().contains("drug-cost-estimator")){
@@ -1816,7 +1815,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 	/* Navigation to DCE for all plan types having a plan name*/
 	public DrugCostEstimatorPage navigatetoDCEVPP(String planName){
-		WebElement DCELink = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(), 'Prescription Drugs, Tier 1')]/span)[2]"));
+		WebElement DCELink = driver.findElement(By.xpath("(//*[contains(text(),'" + planName + "')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(), 'Prescription Drugs, Tier 1')]/span)[2]"));
 		DCELink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if(driver.getCurrentUrl().contains("drug-cost-estimator")){
@@ -2662,10 +2661,10 @@ for (int i = 0; i < initialCount + 1; i++) {
 			return null;
 	}
 	
-	public String estimatedAnnualDrugCostVPP() {
+	public String estimatedAnnualDrugCostVPP(String planName) {
 		
-		scrollToView(getValEstimatedAnnualDrugCostValue());
-		return getValEstimatedAnnualDrugCostValue().getText().trim();
+		scrollToView(getValEstimatedAnnualDrugCostValue(planName));
+		return getValEstimatedAnnualDrugCostValue(planName).getText().trim();
 		
 		
 	}
