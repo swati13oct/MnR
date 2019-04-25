@@ -88,7 +88,7 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
       | zipcode | planName                                           | plantype |
       |   33012 | AARP MedicareComplete Choice Plan 2 (Regional PPO) | MAPD     |
 
-  @emailandprintplancompareuhc @predatorsdecrelease2018
+  @emailandprintplancompareuhc @predatorsdecrelease2018 @RegressionPredators
   Scenario Outline: Verify email plan compare plan details in UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When I access the vpp page
@@ -103,7 +103,7 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
       | zipcode |
       |   90210 |
 
-  @emailAndPrintPlanDetailsuhc @predatorsdecrelease2018
+  @emailAndPrintPlanDetailsuhc @predatorsdecrelease2018 @RegressionPredators
   Scenario Outline: TO click Back to all plans from Top and bottom of the page and verify redirection back to the VPP-Summary page UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When I access the vpp page
@@ -408,7 +408,7 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
       | 1598162 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Nursing Home Plan (PPO SNP),UnitedHealthcare Assisted Living Plan (PPO SNP)|
 
 
-  @feature-F265872 @us1598166 @vppEmailRegression @vppFavoritePlanEmailUhc @thePredators @Apr_release_2019
+  @feature-F265872 @us1598166 @vppEmailRegression @vppFavoritePlanEmailUhc @thePredators @Apr_release_2019 
   Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can invoke the email button on view plan preview page on UHC site
 	# NOTE: Uncommment the step to save plans when there is a way to validate the received email content
     Given the user is on the uhcmedicaresolutions site landing page
@@ -428,7 +428,7 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
       | 1598166 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Nursing Home Plan (PPO SNP),UnitedHealthcare Assisted Living Plan (PPO SNP)|
 
 
-  @feature-F265872 @us1603378 @vppPrintRegression @vppFavoritePlanPrintUhc @thePredators @Apr_release_2019 
+  @feature-F265872 @us1603378 @vppPrintRegression @vppFavoritePlanPrintUhc @thePredators @Apr_release_2019  @RegressionPredators
   Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can invoke the print button on view plan preview page on UHC site
 	# NOTE: Uncommment the step to save plans when there is a way to validate the print preview screen content
     Given the user is on the uhcmedicaresolutions site landing page

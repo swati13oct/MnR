@@ -1729,7 +1729,7 @@ public boolean validateAllPlansChecked() {
 			e.printStackTrace();
 		}
 		List<WebElement> allMAPlans = driver
-				.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]"));
+				.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]/span[1]/label"));
 
 		if (allMAPlans != null) {
 			for (int i = 0; i < allMAPlans.size(); i++) {
