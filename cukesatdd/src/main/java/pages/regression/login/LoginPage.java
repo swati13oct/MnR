@@ -229,7 +229,7 @@ public class LoginPage extends UhcDriver {
 			if (currentUrl().contains("member/testharness.html")) {
 				/* tbd 
 				//vvv note: temp-workaround for team-a env for now
-				if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a")) {
+				if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a") || MRScenario.environmentMedicare.equalsIgnoreCase("team-f")) {
 					return new AccountHomePage(driver);
 				}
 				//^^^ note: temp-workaround for team-a env for now
