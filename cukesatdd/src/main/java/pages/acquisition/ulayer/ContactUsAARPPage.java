@@ -33,7 +33,7 @@ public class ContactUsAARPPage extends GlobalWebElements{
 		CommonUtility.waitForPageLoadNew(driver, header, 30);
 		validateNew(rightRailSection_ProvidersOnly);
 		validateNew(ma_AccordialCollapsed);
-		validateNew(disclaimerBox_Para);
+		//validateNew(disclaimerBox_Para);
 			
 	}
 
