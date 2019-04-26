@@ -5,6 +5,7 @@ package pages.acquisition.bluelayer;
 
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -65,6 +66,20 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(xpath="//button[contains(text(),'Get Started')]")
 	private WebElement GetStarted;
 	
+	@FindBy(id="location")
+	private WebElement zipCodeTextfield;
+	
+	@FindBy(xpath="//*[@id='mainContent']//button")
+	private WebElement continueButton;
+	
+	@FindBy(xpath="//div[contains(@class,'searchData')]/h2/div/a[1]")
+	private WebElement PrimaryCarePhysician;
+	
+	@FindBy(xpath="//span[contains(text(),'Print / Email Providers')]")
+	private WebElement PrintEmailBtn;
+
+	@FindBy(className="saved-provider-button")
+	private WebElement SaveBtn2;
 	
 	public ProviderSearchPage(WebDriver driver) {
 		super(driver);
@@ -74,7 +89,7 @@ public class ProviderSearchPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
+		CommonUtility.waitForPageLoadNew(driver, continueButton, 45);
 	}
 
 	public VPPPlanSummaryPage selectsProvider(String physicianSearchCriteria,
@@ -146,4 +161,39 @@ public class ProviderSearchPage extends UhcDriver {
 
 	return new VPPPlanSummaryPage(driver);
 	}
+
+	public void entersZipcodeAndSelectPlanName(String zipcode, String planName) {
+		// TODO Auto-generated method stub
+		validateNew(zipCodeTextfield);	
+		zipCodeTextfield.sendKeys(zipcode);
+		validateNew(continueButton);
+		continueButton.click();
+		WebElement planNameToBeSelected = driver.findElement(By.xpath("//*[contains(text(),\'" + planName+ "\')]"));
+		planNameToBeSelected.click();
+		// TODO Auto-generated method stub	
+	}
+
+public void selectsProviderFromGlobaHeader() {
+		
+
+		CommonUtility.waitForPageLoadNew(driver, People, 30);
+		People.click();
+
+		CommonUtility.waitForPageLoadNew(driver, Primary, 30);
+		Primary.click();
+
+		CommonUtility.waitForPageLoadNew(driver, Physician, 30);
+		Physician.click();
+		
+		CommonUtility.waitForPageLoadNew(driver, PrimaryCarePhysician, 30);
+		PrimaryCarePhysician.click();
+		
+		CommonUtility.waitForPageLoadNew(driver, SaveBtn2, 45);
+		SaveBtn2.click();
+		CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
+		Viewsavebtn.click();
+		validateNew(PrintEmailBtn);
+		
+		
+		}
 }
