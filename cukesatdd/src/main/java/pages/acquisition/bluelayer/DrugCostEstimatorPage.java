@@ -807,7 +807,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		}
 
 		Thread.sleep(5000);
-		CommonUtility.waitForPageLoad(driver,getBtnViewCost() , 30); //fixed loading indicator issue
+		//CommonUtility.waitForPageLoad(driver,getBtnViewCost() , 30); //fixed loading indicator issue
 	}
 
 	public void validateselectPharmacyType() throws InterruptedException {
