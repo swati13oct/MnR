@@ -433,6 +433,14 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	
 	@FindBy(id="backToPlanSummaryTop")
 	private WebElement lnkBackToAllPlans;
+	
+	@FindBy(xpath = "//*[contains(@src,'loader')]")
+	public WebElement imgLoadingIndicator;
+	
+		
+	public WebElement getImgLoadingIndicator() {
+		return imgLoadingIndicator;
+	}
 		
 	
 	public WebElement getLnkBackToAllPlans() {
@@ -809,7 +817,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		WebElement rbtnValue=rbtn.get(0);
 		rbtnValue.isDisplayed();
 		if (!rbtnValue.isSelected()) {
-			rbtnValue.click();
+			jsClickNew(rbtnValue);				//kept to get rid of overlay issue
+			validateNonPresenceOfElement( getImgLoadingIndicator());
+			//rbtnValue.click();
 			System.out.println("RBTN " + pharmacy + " >> Selected");
 		} else {
 			System.out.println("RBTN " + pharmacy + " >> already selected");

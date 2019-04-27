@@ -450,6 +450,14 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	
 	@FindBy(id="backToPlanSummaryTop")
 	private WebElement lnkBackToAllPlans;
+	
+	@FindBy(xpath = "//*[contains(@src,'loader')]")
+	public WebElement imgLoadingIndicator;
+	
+		
+	public WebElement getImgLoadingIndicator() {
+		return imgLoadingIndicator;
+	}
 			
 	public WebElement getLnkBackToAllPlans() {
 		return lnkBackToAllPlans;
@@ -790,13 +798,16 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 		rbtn.isDisplayed();
 		if (!rbtn.isSelected()) {
-			rbtn.click();
+			jsClickNew(rbtn);				//kept to get rid of overlay issue
+			validateNonPresenceOfElement( getImgLoadingIndicator());
+			//rbtn.click();
 			System.out.println("RBTN " + pharmacy + " >> Selected");
 		} else {
 			System.out.println("RBTN " + pharmacy + " >> already selected");
 		}
 
 		Thread.sleep(5000);
+		CommonUtility.waitForPageLoad(driver,getBtnViewCost() , 30); //fixed loading indicator issue
 	}
 
 	public void validateselectPharmacyType() throws InterruptedException {
