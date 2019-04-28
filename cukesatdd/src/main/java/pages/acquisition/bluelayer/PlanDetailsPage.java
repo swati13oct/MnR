@@ -803,12 +803,20 @@ public class PlanDetailsPage extends UhcDriver{
 	}
 
 	public VPPPlanSummaryPage navigateBackToPlanSummaryPageFromDetailsPage() {
-        //driver.navigate().refresh();
-			CommonUtility.waitForPageLoad(driver, getLnkBackToAllPlans(), 30);
-		    jsClickNew(getLnkBackToAllPlans());
+			driver.manage().window().maximize();    
+			driver.navigate().refresh();
+			CommonUtility.waitForPageLoad(driver, backToPlansBtn, 60);
+			validateNew(backToPlansBtn);
+			jsClickNew(backToPlansBtn);
 	        CommonUtility.checkPageIsReadyNew(driver);
-	        if (driver.getCurrentUrl().contains("plan-summary")) {
-	                        return new VPPPlanSummaryPage(driver);
+	        try {
+				Thread.sleep(6000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	        if (currentUrl().contains("plan-summary")) {
+	                      System.out.println("Plan Summary page");
 
 	        }
 	        return null;

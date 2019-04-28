@@ -462,10 +462,14 @@ public class DCEVPPAcqStepDefinitionUHC {
 
 	@Then("^user validates Drug information is reflected on plan summary page in UMS site$")
 	public void user_validates_Drug_information_is_reflected_on_plan_summary_page_in_UMS_site(DataTable data) throws Throwable {
+		
+
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		
 		String planName=memberAttributesRow.get(0).getCells().get(1);
-		VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage(wd);
+		//VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage(wd);
 		System.out.println(cost);
 		System.out.println(plansummaryPage.getValEstimatedAnnualDrugCostValue(planName).getText().trim());
 		if (cost.trim().contains(plansummaryPage.getValEstimatedAnnualDrugCostValue(planName).getText().trim()))
@@ -482,6 +486,7 @@ public class DCEVPPAcqStepDefinitionUHC {
 		String planName=memberAttributesRow.get(1).getCells().get(1);
 		VPPPlanSummaryPage plansummaryPage =  new VPPPlanSummaryPage(wd);
 		plansummaryPage.viewPlanSummary(planType);
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 		PlanDetailsPage plandetailspage= (PlanDetailsPage)plansummaryPage.navigateToPlanDetails(planName, planType);
 		if(plandetailspage!=null){
 			getLoginScenario().saveBean(PageConstants.PLAN_DETAILS_PAGE, plandetailspage);
