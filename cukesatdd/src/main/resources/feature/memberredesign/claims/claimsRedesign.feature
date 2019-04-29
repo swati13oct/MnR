@@ -95,7 +95,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | 15236 | SHIP     | Last 24 Months | SHIPCLAIMS   |
 	   
 	  
-	@claims5 @TC10_COMBO @regressionMember @abc
+	@claims5 @TC10_COMBO @regressionMember
 	Scenario Outline:  TID: <TID> -plan: <planType> -claimsSystem: <claimssystem> - To validate the claims present for the Combo member on claims sumamry page & the Details on the Claims Details page 
 		Given login with following details logins in the member portal and validate elements
 		  | Plan Type      | <planType>     |
@@ -728,7 +728,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
       | 244667 | MA       | Last 24 months | NICE   | EOB_NICECLAIMS |
 
     #---- this test check that sub-navigation to EOB page under Claims tab is suppressed for SSUP Only Plan member
-    @claims16 @US1662790 @F267688 @claimsEOB_SSUP_Plan @regressionMember @abc
+    @claims16 @US1662790 @F267688 @claimsEOB_SSUP_Plan @regressionMember
     Scenario Outline: FID: <FID> -plan: <planType> -claimsSystem: <claimssystem> - to validate that sub-navigation to EOB page under Claims tab is suppressed for SSUP Only Plan member
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>     |
@@ -740,7 +740,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
       | FID    | planType | claimssystem |
       | 267688 | SSUP     | COSMOSCLAIMS |
       
-    @claims17 @US1673123 @F267688_Test @claimsEOB_SSUP_Plan @regressionMember @abc
+    @claims17 @US1673123 @F267688_Test @claimsEOB_SSUP_Plan @regressionMember
     Scenario Outline: FID: <FID> -plan: <planType> -claimsSystem: <claimssystem> - to validate that SSUP member accessing EOB page via deep link
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>     |
@@ -752,7 +752,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
       | FID    | planType | claimssystem             |
       | 267688 | SSUP     | SSUP_EOB_Deeplink_CLAIMS |
       
-    @claims18 @US1673112 @F267688_Test @claimsEOB_SSUP_Plan @abc
+    @claims18 @US1673112 @F267688_Test @claimsEOB_SSUP_Plan
     Scenario Outline: FID: <FID> -plan: <planType> -claimsSystem: <claimssystem> - to validate that SSUP member accessing EOB page via deep link
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>     |
