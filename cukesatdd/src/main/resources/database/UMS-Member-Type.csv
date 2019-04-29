@@ -19,7 +19,7 @@ PCP_Pharmacylocator/Password@1,MAPD,PCP_Pharmacylocator,
 ucpgrouppdptxers01/Password@1,PDP,TexasRx_Pharmacylocator,
 q1_apr_uhc002/Password@1,MAPD,IndMAPDUHC_Pharmacylocator,
 q1_apr_uhc002/Password@1,MAPD,IndUHC_Pharmacylocator,
-q2_jun_aarp0060/Password@1,MAPD,IndAARPMAPD_Pharmacylocator,
+q2_jun_aarp0034/Password@1,MAPD,IndAARPMAPD_Pharmacylocator,
 q2_jun_aarp0043/Password@1,MA,IndAARPMA_Pharmacylocator
 q1_uhc_ma001/Password@1,MA,IndUHCMA_Pharmacylocator
 q2_jun_ship0190/Password@1,MA,IndSHIP_Pharmacylocator
