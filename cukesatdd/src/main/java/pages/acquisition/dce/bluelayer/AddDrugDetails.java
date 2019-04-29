@@ -38,6 +38,9 @@ public class AddDrugDetails extends UhcDriver {
 	@FindBy(id = "drug-alt-back-button")
 	public WebElement backToSearchBtn;
 	
+	@FindBy(xpath = "//*[@id=\"alt-search-radios\"]/div/div[1]//label")
+	public WebElement btndrugName;
+	
 	@FindBy(id = "frequency")
 	public WebElement selectYourFrequencyDropdown;
 	public AddDrugDetails(WebDriver driver) {
@@ -129,6 +132,11 @@ public class AddDrugDetails extends UhcDriver {
 	}
 	public void validateThePage(){
 		Assert.assertTrue(addDrugDetailsPage.isDisplayed());
+	}
+	
+	public void selectDosageAttribute(String dosage) throws InterruptedException{
+		if(btndrugName.getText().equalsIgnoreCase(dosage))
+			btndrugName.click();
 	}
 
 }
