@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
+import pages.acquisition.bluelayer.PlanDetailsPage;
 import pages.acquisition.bluelayer.ProviderSearchPage;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
@@ -234,6 +235,32 @@ public class ProviderSearchStepDefinitionUHC {
 			} else {
 				Assert.fail("Error Loading Rally tool from Home Page");
 			}
+		}
+		
+
+		/**
+		 * @toDo:user user selects a provider on Vpp Plan Details page
+		 */
+		@When("^user selects a provider and retuns to VPP plan details page in blayer$")
+		public void user_selects_provider_and_return_vpp_Plan_details_page_blayer() {
+			{
+				ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
+						.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+				PlanDetailsPage planDetailsPage = providerSearchPage.selectsProviderFromVppPlanDetailsPage();
+				Assert.assertTrue("Not able to return to Plan Details page", planDetailsPage != null);
+
+			}
+		}
+		
+		/**
+		 * @toDo:Verify X out of Y provider covered information is displayed on Plan
+		 *              Summary page
+		 */
+		@Then("^Verify X out of Y provider covered information is displayed on Plan Details page blayer$")
+		public void verify_providers_covered_blayer_planDetails() {
+			PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+			Assert.assertTrue("Provider coverage Info not updated", vppPlanDetailsPage.providerinfo());
 		}
 	
 }

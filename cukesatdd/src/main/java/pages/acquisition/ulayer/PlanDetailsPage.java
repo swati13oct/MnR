@@ -182,7 +182,7 @@ public class PlanDetailsPage extends UhcDriver {
 	public void openAndValidate() {
 
 		CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
-		validate(presDrugTab.get(0));
+		//validate(presDrugTab.get(0));
 		validate(planCostsTab);
 
 	}
@@ -630,6 +630,11 @@ public class PlanDetailsPage extends UhcDriver {
 
 	public boolean providerinfo() {
 
+		
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,-100)", "");
+		
+	
 		if (providerCountUpdated.isDisplayed()) {
 			return true;
 		}

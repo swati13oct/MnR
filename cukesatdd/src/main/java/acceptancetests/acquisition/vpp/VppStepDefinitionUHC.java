@@ -19,7 +19,7 @@ import pages.acquisition.bluelayer.PlanComparePage;
 import pages.acquisition.bluelayer.PlanDetailsPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.ole.WelcomePage;
-
+import pages.acquisition.bluelayer.ProviderSearchPage;
 import pages.acquisition.bluelayer.ComparePlansPageBlayer;
 import pages.acquisition.bluelayer.DrugCostEstimatorPage;
 import pages.acquisition.bluelayer.FindCarePage;
@@ -1650,11 +1650,14 @@ public class VppStepDefinitionUHC {
 
 	}
 	@Then("^the user Click on Look up your Provider button in UMS site$")
-public void user_Clicks_on_Look_upyourProvider_button_on_PlanDetailsPage() {
+     public void user_Clicks_on_Look_upyourProvider_button_on_PlanDetailsPage() {
 
 	PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
 			.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-	vppPlanDetailsPage.validateLookUpYourProviderButton();
+	ProviderSearchPage providerSearchPage =vppPlanDetailsPage.validateLookUpYourProviderButton();
+	if(providerSearchPage!=null) {
+		getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
+	}
 }
 		
 		

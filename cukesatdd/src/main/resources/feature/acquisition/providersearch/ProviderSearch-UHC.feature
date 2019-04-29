@@ -58,14 +58,16 @@ Feature: 1.15-VBF-Acq-To test Provider Search Flow  in UMS site
     When user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
     When user Click on Is my Provider covered link ums
-      | PlanName | <planname> |
+      | PlanName | <planName> |
     When user selects a provider and retuns to VPP page in ums
     Then Verify X out of Y provider covered information is displayed on Plan Summary page ums
-      | PlanName | <planname> |
+      | PlanName | <planName> |
 
     Examples: 
-      | zipcode | isMultutiCounty | county             | plantype | planname                                          |
+      | zipcode | isMultutiCounty | county             | plantype | planName                                          |
       |   90210 | NO              | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |
+
+
 
   @ProviderSearchFromVppPlanDetailsPageBlayer
   Scenario Outline: Verify Provider Search  in UHC site from Plan Details page
@@ -79,12 +81,12 @@ Feature: 1.15-VBF-Acq-To test Provider Search Flow  in UMS site
     Then the user view plan details of the above selected plan in UMS site and validates
       | Plan Name | <planName> |
     Then the user Click on Look up your Provider button in UMS site
-    When user selects a provider and retuns to VPP page in ums
-    Then Verify X out of Y provider covered information is displayed on Plan Summary page ums
-      | PlanName | <planname> |
+    When user selects a provider and retuns to VPP plan details page in blayer
+    Then Verify X out of Y provider covered information is displayed on Plan Details page blayer
+   
 
     Examples: 
-      | zipcode | isMultutiCounty | county             | plantype | planname                                          |
+      | zipcode | isMultutiCounty | county             | plantype | planName                                          |
       |   90210 | NO              | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Essential (HMO)|
 
   @ProviderSearchFromHomePageBlayer

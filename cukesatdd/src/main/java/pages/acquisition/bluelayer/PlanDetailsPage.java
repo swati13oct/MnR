@@ -10,6 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -21,7 +22,7 @@ import org.testng.Assert;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.uhcretiree.Rallytool_Page;
 import pages.acquisition.ulayer.PageTitleConstants;
-import pages.acquisition.ulayer.ProviderSearchPage;
+import pages.acquisition.bluelayer.ProviderSearchPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
@@ -127,6 +128,9 @@ public class PlanDetailsPage extends UhcDriver {
 
 	@FindBy(xpath = "//table[contains(@class,'drug-list-table')]//tr[2]/td/strong")
 	private WebElement addedDrug;
+	
+	@FindBy(xpath = "//table[contains(@class,'drug-list-table')]//tr[2]/td/strong")
+	private WebElement editProviderButton;
 
 	private PageData vppPlanDetails;
 
@@ -153,6 +157,9 @@ public class PlanDetailsPage extends UhcDriver {
 
 	@FindBy(id = "po7links")
 	private WebElement lookUpYourProviderButton;
+	
+	@FindBy(xpath = "//span[contains(text(),'1 providers covered')]")
+	private WebElement providerCountUpdated;
 
 	public PlanDetailsPage(WebDriver driver) {
 		super(driver);
@@ -687,5 +694,17 @@ public class PlanDetailsPage extends UhcDriver {
 		}
 		return null;
 
+	}
+
+	public boolean providerinfo() {
+		
+		
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,-100)", "");
+		waitforElementVisibilityInTime(providerCountUpdated, 3000);
+		if (providerCountUpdated.isDisplayed()) {
+			return true;
+		}
+		return false;
 	}
 }

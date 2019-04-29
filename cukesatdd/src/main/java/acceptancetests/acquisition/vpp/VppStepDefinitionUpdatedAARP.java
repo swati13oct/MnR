@@ -17,6 +17,7 @@ import pages.acquisition.ulayer.FindCarePage;
 import pages.acquisition.ulayer.MultiCountyModalPage;
 import pages.acquisition.ulayer.OurPlansPage;
 import pages.acquisition.ulayer.PlanDetailsPage;
+import pages.acquisition.ulayer.ProviderSearchPage;
 import pages.acquisition.ulayer.RequestHelpAndInformationPage;
 import pages.acquisition.ulayer.RequestMailedInformation;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
@@ -847,7 +848,8 @@ public void user_navigates_to_plan_details_page(DataTable givenAttributes) {
 			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 	String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-	PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(PlanName, planType);
+	System.out.println("Plan name is "+ PlanName+"Plan type is "+planType);
+	PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(PlanName,planType);
 	if (vppPlanDetailsPage != null) {
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
 		Assert.assertTrue(true);
@@ -861,7 +863,12 @@ public void user_Clicks_on_Look_upyourProvider_button_on_PlanDetailsPage() {
 
 	PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
 			.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-	vppPlanDetailsPage.validateLookUpYourProviderButton();
+	
+	ProviderSearchPage providerSearchPage = vppPlanDetailsPage.validateLookUpYourProviderButton();
+	if(providerSearchPage!=null) {
+		getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
+	}
+	
 }
 
 	/**

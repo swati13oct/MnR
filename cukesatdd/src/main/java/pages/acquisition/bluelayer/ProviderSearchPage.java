@@ -16,6 +16,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.bluelayer.PlanDetailsPage;
 
 /**
  * @author pperugu
@@ -196,4 +197,37 @@ public void selectsProviderFromGlobaHeader() {
 		
 		
 		}
+
+public PlanDetailsPage selectsProviderFromVppPlanDetailsPage() {
+
+	
+	
+	// TODO Auto-generated method stub
+	
+	   CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
+		GetStarted.click();
+
+		CommonUtility.waitForPageLoadNew(driver, People, 30);
+		People.click();
+
+		CommonUtility.waitForPageLoadNew(driver, Primary, 30);
+		Primary.click();
+
+		CommonUtility.waitForPageLoadNew(driver, Physician, 30);
+
+		Physician.click();
+		CommonUtility.waitForPageLoadNew(driver, SaveBtn, 45);
+		SaveBtn.click();
+		CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
+
+		Viewsavebtn.click();
+
+		validateNew(Checkcoverage);
+		
+		Checkcoverage.click();
+		waitForCountDecrement(2);
+		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+
+		return new PlanDetailsPage(driver);
+}
 }
