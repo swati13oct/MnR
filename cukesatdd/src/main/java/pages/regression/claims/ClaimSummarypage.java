@@ -402,7 +402,11 @@ public class ClaimSummarypage extends UhcDriver{
     @FindBy(xpath = "//h3[@class='needhelp h4 margin-none atdd-claims-header']")
     public WebElement preEffectiveClaimsSupportHeader;
 	
+	@FindBy(xpath ="//*[@id='atddUhcPagination']/li[3]/a")
+	private WebElement paginationRightArrow;
 
+	@FindBy(xpath ="//*[@id='moreInfoLinkAtdd2']/a")
+	private WebElement specificclaimlinkforeob;
 
 	public ClaimSummarypage(WebDriver driver) {
 		super(driver);
@@ -2288,4 +2292,29 @@ public void TBR_NavigateToClaimsPage(){	//tbd-remove whole method
 
              }
 			//^^^ note:	added for def1041			
+             
+         	public ClaimDetailsPage navigateToClaimDetailsPagetoseeeobpdflink() {
+
+        		try {
+        			validateNew(claimstablemoreinfolink);
+                    paginationRightArrow.click();
+                    paginationRightArrow.click();
+                    paginationRightArrow.click();
+        			System.out.println("more info link is seen for  ===>" + claimstablemoreinfolink.isDisplayed());
+        			try {
+        				Thread.sleep(2000);
+        			} catch (InterruptedException e) {
+        				e.printStackTrace();
+        			}
+        			JavascriptExecutor executor = (JavascriptExecutor) driver;
+        			executor.executeScript("arguments[0].click();", specificclaimlinkforeob);
+        			System.out.println(driver.getTitle());
+        			if (driver.getTitle().equalsIgnoreCase("Claims Summary")) {
+        				System.out.println("*** Claims Details Page ***");
+        			}
+        		} catch (Exception ex) {
+        			return null;
+        		}
+        		return new ClaimDetailsPage(driver);
+        	}
 }

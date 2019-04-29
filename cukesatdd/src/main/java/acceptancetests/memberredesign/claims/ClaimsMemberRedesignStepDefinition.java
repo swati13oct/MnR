@@ -122,7 +122,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	
 	@When("^I navigate to the claims Summary page from test harness page or dashboard$")
 	public void navigate_to_Claims_Summary_from_testharness_page() throws Throwable {
-	if (MRScenario.environmentMedicare.equalsIgnoreCase("team-h"))
+	if (MRScenario.environmentMedicare.equalsIgnoreCase("team-h") || "YES".equalsIgnoreCase(MRScenario.isTestHarness))
 	{
 		TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
 		System.out.println("Now clicking on Claims Tab from the test harness page to go to Claims Page");
@@ -857,9 +857,16 @@ public class ClaimsMemberRedesignStepDefinition {
 	 */
 	@And("^I navigate to the Claim Details page in AARP site for COMBO member$")	
 	public void i_navigate_to_member_redesign_claim_details_page_COMBOMember()  {
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		ClaimDetailsPage newClaimDetailsPage = accountHomePage.navigateToClaimDetailsPageCombo();
-		getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
+		//if from testharness, go from summary page
+		ClaimDetailsPage newClaimDetailsPage;
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
+			newClaimDetailsPage=claimSummarypage.navigateToClaimDetailsPage();
+		} else {
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			newClaimDetailsPage = accountHomePage.navigateToClaimDetailsPageCombo();
+			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
+		}
 		if(newClaimDetailsPage  != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
 		
@@ -1288,9 +1295,15 @@ public class ClaimsMemberRedesignStepDefinition {
 	//^^^ note: added for def1041	
 	@When("^I navigate to the Claim details page to see view as pdf EOB$")	
 	public void i_navigate_to_the_claim_detailspage_for_eob_pdf(){
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		
-		ClaimDetailsPage newClaimDetailsPage = accountHomePage.navigateToClaimDetailsPagetoseeeobpdflink();
+		ClaimDetailsPage newClaimDetailsPage;
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
+			newClaimDetailsPage=claimSummarypage.navigateToClaimDetailsPage();
+		} else {
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			
+			newClaimDetailsPage = accountHomePage.navigateToClaimDetailsPagetoseeeobpdflink();
+		}
 		System.out.println("claims-============"+newClaimDetailsPage);
 		
 		//getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
