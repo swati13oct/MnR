@@ -698,10 +698,10 @@ public class PlanDetailsPage extends UhcDriver {
 
 	public boolean providerinfo() {
 		
-		
+		CommonUtility.checkPageIsReadyNew(driver);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,-100)", "");
-		waitforElementVisibilityInTime(providerCountUpdated, 3000);
+		
 		if (providerCountUpdated.isDisplayed()) {
 			return true;
 		}
