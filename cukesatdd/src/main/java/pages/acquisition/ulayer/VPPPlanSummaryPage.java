@@ -515,10 +515,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//button[contains(text(),'View Prescription')]")
 		private WebElement OleMS_ViewPDPPlanBtn;
 		
-		@FindBy(xpath = "( //*[contains(text(),'Annual')])[1]//following-sibling::span[2]")
-		private WebElement valEstimatedAnnualDrugCostValue;
 		
-		public WebElement getValEstimatedAnnualDrugCostValue() {
+		public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
+			WebElement valEstimatedAnnualDrugCostValue = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@ng-show='plan.network']"));
 			return valEstimatedAnnualDrugCostValue;
 		}
 
@@ -949,7 +948,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public boolean validateVPPPlanSummaryPage() {
-
+		driver.navigate().refresh(); //rectified page load issue on stage
+		CommonUtility.waitForPageLoad(driver, vppTop, 30);
 		validateNew(maPlansCount);
 		validateNew(msPlansCount);
 		validateNew(pdpPlansCount);
@@ -1803,12 +1803,24 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 
 	public pages.acquisition.dce.ulayer.DrugCostEstimatorPage navigatetoDCEPage(String planName){
-		WebElement DCELink = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(), 'Prescription Drugs, Tier 1')]/span)[2]"));
+		WebElement DCELink = driver.findElement(By.xpath("(//*[contains(text(),'" + planName + "')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(), 'Prescription Drugs, Tier 1')]/span)[2]"));
 		DCELink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if(driver.getCurrentUrl().contains("drug-cost-estimator")){
 			System.out.println("DCE Page is loaded");
 			return new pages.acquisition.dce.ulayer.DrugCostEstimatorPage(driver);
+		}	
+		else
+			return null;  
+	}
+	/* Navigation to DCE for all plan types having a plan name*/
+	public DrugCostEstimatorPage navigatetoDCEVPP(String planName){
+		WebElement DCELink = driver.findElement(By.xpath("(//*[contains(text(),'" + planName + "')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(), 'Prescription Drugs, Tier 1')]/span)[2]"));
+		DCELink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if(driver.getCurrentUrl().contains("drug-cost-estimator")){
+			System.out.println("DCE Page is loaded");
+			return new DrugCostEstimatorPage(driver);
 		}	
 		else
 			return null;  
@@ -2648,6 +2660,17 @@ for (int i = 0; i < initialCount + 1; i++) {
 		else
 			return null;
 	}
+	
+	public String estimatedAnnualDrugCostVPP(String planName) {
+		
+		scrollToView(getValEstimatedAnnualDrugCostValue(planName));
+		return getValEstimatedAnnualDrugCostValue(planName).getText().trim();
+		
+		
+	}
+
+	
+	
 }
 
 
