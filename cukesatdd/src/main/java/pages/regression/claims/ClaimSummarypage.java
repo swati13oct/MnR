@@ -282,7 +282,7 @@ public class ClaimSummarypage extends UhcDriver{
 	public WebElement pdpPrescriptionDrug;
 	
 	//vvv note:	added for def1041	
-	@FindBy(xpath="//div[@id='validDivErr']//p//span") 
+	@FindBy(xpath="//div[@id='twoValidDivErr']//p//span") 
 	private WebElement greatederThanTwoYearsError;
 
 	@FindBy(xpath="//span[@id='numClaims1']")	
@@ -1638,12 +1638,13 @@ public void TBR_NavigateToClaimsPage(){	//tbd-remove whole method
 			//vvv note:	added for def1041	
 			public void validateGreaterThanTwoYearError(String planType) {
 				WebElement errorTextElement=greatederThanTwoYearsError;
+				String errorTextContent="For information about claims older than 2 years, contact Customer Service toll-free at 1-800-523-5880.";
 				if (planType.equals("SHIP")) {
 					errorTextElement=greatederThanTwoYearsErrorShip;
+					errorTextContent="The time between your From date and your To date cannot be more than 24 months.For help with claims older than 24 months, call Customer Service at the number listed on the Contact Us web page.";
 				}
-				if(!errorTextElement.getText().contains("The time between your From date and your To date cannot be more than 24 months.For help with claims older than 24 months, call Customer Service at the number listed on the Contact Us web page.")){
-					Assert.fail(errorTextElement + "is not beind dsiplayed");	
-				}
+				Assert.assertTrue(errorTextElement + "is not beind dsiplayed", validate(errorTextElement));
+				Assert.assertTrue("error text is not as expected. \nExpected="+errorTextContent+" \nActual="+errorTextElement.getText(), errorTextElement.getText().contains(errorTextContent));
 			}
 
 			public int getNumClaims(String range, String claimType) {
