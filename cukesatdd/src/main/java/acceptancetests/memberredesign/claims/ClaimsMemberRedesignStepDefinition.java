@@ -1324,5 +1324,22 @@ public class ClaimsMemberRedesignStepDefinition {
 		
 		System.out.println("claims-============"+claimsdetailspage);
 	}
+	@When("^I navigate to the Claim details page to see eoblink on details page$")	
+	public void i_navigate_to_the_eobclaims_detailspage(){
+		ClaimDetailsPage newClaimDetailsPage;
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
+			newClaimDetailsPage=claimSummarypage.navigateToClaimDetailsPagetoseeeobpdflink();
+		} else {
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			
+			newClaimDetailsPage = accountHomePage.navigateToClaimDetailsPagetoseeeobpdflink();
+		}
+		System.out.println("claims details page -============"+newClaimDetailsPage);
+		
+		//getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
+		if(newClaimDetailsPage != null)
+			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
+	}
 	
           }

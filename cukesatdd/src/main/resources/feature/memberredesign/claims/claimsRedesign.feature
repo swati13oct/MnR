@@ -718,7 +718,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
       | Plan Type    | <planType>    |
       | Claim Period | <claimPeriod> |
     Then I can see the claims displayed based on the selection in redesigned site
-    When I navigate to the Claim details page to see view as pdf EOB
+    When I navigate to the Claim details page to see eoblink on details page
     Then I can vdate the view as pdf link on claims details page header
       | Plan Type    | <planType>    |
       | Domain       | <domain>      |
