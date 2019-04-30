@@ -80,7 +80,7 @@ q2_jun_aarp0076/Password@1,PDP,Individual_FormsResources,EffectivePDPAARP,NoRide
 q2_jun_uhc0043/Password@1,PDP,Individual_FormsResources,EffectivePDPUHC,NoRider
 q2_jun_grp0070/Password@1,PDP,Group_FormsResources,EffectivePDPUHC,NoRider
 eff_ssup_grp01/Password@1,SSUP,Group_FormsResources,GrpEffectiveSSUP,NoRider
-q2_jun_aarp0072/Password@1,MAPD,RewardsMember,,
+COSMOS_claims_01/Password@1,MAPD,RewardsMember,,
 q2_jun_aarp0035/Password@1,MA,RewardsMember,,
 q2_jun_aarp0213/Password@1,PDP,RewardsMember,,
 q2_june_combo0017/Password@1,COMBO,RewardsMember,,
@@ -88,10 +88,10 @@ q1_aarp_apr185/Password@1,MA,AARPIndividual_order,,
 q1_apr_uhc144/Password@1,MA,UHCGroup_order,,
 q2_may_aarp0040_mapd/Password@1,MAPD,AARPIndividual_order,,
 q4_aarp_dec001/Password@1,MAPD,AARPTerminatedmember_order,,
-q2_apr_Combo_0001/Password@1,MAPD,MAPDwithMedSupp_order,,
+q2_may_combo006/Password@1,MAPD,MAPDwithMedSupp_order,,
 q2_jun_sofl0050/Password@1,MAPD,Medica_order,,
 q2_jun_aarp0051/Password@1,MAPD,PCP_order,,
-q2_jun_grp0083/Password@1,MAPD,UHCGroup_order,,
+q2_jun_grp0083/Password@11,MAPD,UHCGroup_order,,
 q2_jun_aarp0112/Password@1,PDP,AARPIndividual_order,,
 q2_jun_aarp0083/Password@7,PDP,UHCGroup_order,,
 q2_may_SHIP_001/Password@1,SHIP,AARPIndividual_order,,
