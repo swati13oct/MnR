@@ -126,7 +126,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	private WebElement renewMagazineMAPDGroup;
 	/** My DocumentSection - Forms And Resources page */
 
-	@FindBy(xpath = "//*[@id='myDocHeader']")
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/div[3]/div[10]/div/div/div/section//*[@id='myDocHeader']")
 	private WebElement myDocumentSection;
 
 	/** Plan Material Section **/
@@ -1692,14 +1692,19 @@ public class FormsAndResourcesPage extends UhcDriver {
 					getAnnualdirectoriesHeaderSectionMAPDGRP());
 		else
 			try {
-				Thread.sleep(10000);
+				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(3 - t),
 					getAnnualdirectoriesHeaderSection());
-			
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(4 - t),
 				getMyDocumentSection());
 
