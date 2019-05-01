@@ -24,6 +24,7 @@ Feature:P1.5 To test order materials in Redesign site
       | 15292 | PDP      | AARPIndividual_order | Welcome Guide       |
       | 15293 | SHIP     | AARPIndividual_order | Claims Envelope     |
 
+  #note: for SHIP user to get this error, user must have signed up for EFT i.e. recurring payments
   @orderPlanMaterials2 @ValidateSHIPErrorMessage @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -option <option> - Verify SHIP Invalid selection Order Materials Page Error Message
      Given login with following details logins in the member portal and validate elements
