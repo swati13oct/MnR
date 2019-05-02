@@ -646,7 +646,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	@claims00_10 @claims00_PCP @claims00_COSMOS_DRUG
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
-	  |10    |1041| PCP      | COSMOS | COSMOSCLAIMS                 | Prescription drug | Yes                 |
+	  |10    |1041| PCP      | COSMOS | D_COSMOSCLAIMS                 | Prescription drug | Yes                 |
 
 	@claims00_11 @claims00_MEDICA @claims00_COSMOS_MEDICAL
 	Examples: 
@@ -663,7 +663,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |13    |1041| PDP      | RX     | RXCLAIMS                     | Prescription drug | No                  |
 
-	@claims00_14 @claims00_SHIP @claims00_NOT_NICE_OR_COSMOS @abc
+	@claims00_14 @claims00_SHIP @claims00_NOT_NICE_OR_COSMOS
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |14    |1041| SHIP     | NA     | SHIPCLAIMS                   | NA                | No                  |
