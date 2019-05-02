@@ -415,9 +415,113 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button proactive-offer__close main-background-color second-color')]")
 	public static WebElement proactiveChatExitBtn;
 	
+	@FindBy(xpath = "//*[contains(@class,'cta-button pharmacy-tab-show')]")
+	private WebElement btnNextPickAPharmacy;
+	
+	@FindBy(xpath = "//*[contains(text(),'Find a pharmacy within')]")
+	private WebElement lblFindAPharmacy;
+	
+	@FindBy(xpath = "//*[contains(@class,'pharmacy-name')]")
+	private List<WebElement> lstPharmacyNames;
+	
+	@FindBy(xpath = "//button[contains(@id,'select-pharmacy')]")
+	private List<WebElement> lstSelectPharmacy;
+	
+	@FindBy(xpath = "//*[contains(@dtmname,'view costs')]")
+	private WebElement btnViewCost;
+	
+	@FindBy(id = "total_annualcost_acq")
+	private WebElement costText;
+	
+	@FindBy(xpath = "//*[contains(@class,'drugName')]")
+	private List<WebElement> hdrDrugName;
+	
+	@FindBy(xpath = "//*[@id='drugdetails']//p[contains(text(),'drugs to')]")
+	private WebElement lblCreateAListOfThePrescriptionDrug;
+	
+	@FindBy(xpath = "//*[contains(@id,'drugDosageStrengthId')]//following::a[contains(@id,'generic-drug-switch-btn')]")
+	private List<WebElement> lstlinkSwitchNow;
+	
+	@FindBy(xpath = "//*[@id='atddBackToPlans']")
+	private WebElement btnBackToPlans;
+	
+	@FindBy(xpath = "//*[@id='atddEditPharmacyList']")
+	public WebElement lnkEditPharmacyList;
+	
+	@FindBy(id="backToPlanSummaryTop")
+	private WebElement lnkBackToAllPlans;
+	
+	@FindBy(xpath = "//*[contains(@src,'loader')]")
+	public WebElement imgLoadingIndicator;
+	
+		
+	public WebElement getImgLoadingIndicator() {
+		return imgLoadingIndicator;
+	}
+			
+	public WebElement getLnkBackToAllPlans() {
+		return lnkBackToAllPlans;
+	}
+	
+	public WebElement getLnkEditPharmacyList() {
+		return lnkEditPharmacyList;
+	}
+	
+	public List<WebElement> getLstlinkSwitchNow() {
+		return lstlinkSwitchNow;
+	}
+	
+	public WebElement getLblCreateAListOfThePrescriptionDrug() {
+		return lblCreateAListOfThePrescriptionDrug;
+	}
+	
+	public WebElement getStep3EditDrugsList() {
+		return step3EditDrugsList;
+	}
+	
+	public WebElement getDrugCostCard() {
+		return drugCostCard;
+	}
+	
+	public List<WebElement> getHdrDrugName() {
+		return hdrDrugName;
+	}
+	
+	public WebElement getCostText() {
+		return costText;
+	}
+	
+	public List<WebElement> getLstSelectPharmacy() {
+		return lstSelectPharmacy;
+	}
+	
+	public WebElement getBtnViewCost() {
+		return btnViewCost;
+	}
+	
+	public WebElement getBtnNextPickAPharmacy() {
+		return btnNextPickAPharmacy;
+	}
+	
+	public WebElement getMilesSelection() {
+		return milesSelection;
+	}
+	
+	public WebElement getLblFindAPharmacy() {
+		return lblFindAPharmacy;
+	}
+	
+	public List<WebElement> getLstPharmacyNames() {
+		return lstPharmacyNames;
+	}
+	
+	public WebElement getBtnBackToPlans() {
+		return btnBackToPlans;
+	}
+	
 	@Override
 	public void openAndValidate() {
-
+		
 		CommonUtility.waitForPageLoadNew(driver, pageHeading, 30);
 		validateNew(addDrug);
 		validateNew(step1);
@@ -690,17 +794,20 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public void selectPharmacyType(String pharmacy) throws InterruptedException {
 
 		WebElement rbtn = driver
-				.findElement(By.xpath(".//*[@id='pharmacy-type']/div/label//p[contains(text(),'" + pharmacy + "')]"));
+				.findElement(By.xpath("(//*[@id='pharmacy-type']//*[contains(text(),'" + pharmacy + "')])[1]"));
 
 		rbtn.isDisplayed();
 		if (!rbtn.isSelected()) {
-			rbtn.click();
+			jsClickNew(rbtn);				//kept to get rid of overlay issue
+			validateNonPresenceOfElement( getImgLoadingIndicator());
+			//rbtn.click();
 			System.out.println("RBTN " + pharmacy + " >> Selected");
 		} else {
 			System.out.println("RBTN " + pharmacy + " >> already selected");
 		}
 
 		Thread.sleep(5000);
+		//CommonUtility.waitForPageLoad(driver,getBtnViewCost() , 30); //fixed loading indicator issue
 	}
 
 	public void validateselectPharmacyType() throws InterruptedException {
@@ -1820,5 +1927,87 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			System.out.println("Proactive chat popup not displayed");
 		}
 	}
+	
+	public void pickAPharmacy() {
+		validateNew(getBtnNextPickAPharmacy());
+		getBtnNextPickAPharmacy().click();
+		CommonUtility.waitForPageLoadNew(driver, getLblFindAPharmacy(), 60);
+	}
+	
+	/*selecting radius*/
+	public void selectRadius(WebElement dropDownID, String value) {
+		selectFromDropDownByText(driver,dropDownID, value);
+	}
+	
+	public void clickButtonViewCost() {
+		validateNew(getBtnViewCost());
+		getBtnViewCost().click();
+		validateNew(getDrugCostCard());
+	}
+	
+	public void clickEditDrugList() {
+		validateNew(getStep3EditDrugsList());
+		getStep3EditDrugsList().click();
+		validateNew(getLblCreateAListOfThePrescriptionDrug());
+		
+	}
+	
+	public void clickSwitchNUpdateAll() throws InterruptedException {
+		int count=0;
+		for(int i=0;i<getLstlinkSwitchNow().size();i++) {
+			
+		if(getLstlinkSwitchNow().get(i).isDisplayed()) {
+			try {
+		clickSwitchNowLink(getLstlinkSwitchNow().get(i));
+		clickUpdateButton();
+		count=1;
+			}catch(Exception e) {}
+		
+		}
+				
+		/*if(count==1)
+			i=0;*/
+			
+		}
+	}
+	
+	public void clickBtnBackToPlans() throws InterruptedException {
+		validateNew(getBtnBackToPlans());
+		getBtnBackToPlans().click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, maPlansCount, 60);
+		
+	}
+	
+	public void clickSwitchNowLink(WebElement lnkSwitchNow) throws InterruptedException {
+		
+		scrollToView(lnkSwitchNow);
+		jsClickNew(lnkSwitchNow);
+		CommonUtility.waitForPageLoad(driver, updateBtn, 60);
+	}
+	
+	public void clickUpdateButton() throws InterruptedException {
+		jsClickNew(updateBtn);
+	}
+	
+	public void clickEditPharmacy() {
+		validateNew(getLnkEditPharmacyList());
+		getLnkEditPharmacyList().click();
+		validateNew(getLblFindAPharmacy());
+		
+	}
+
+	/*Navigation from DCE to details page*/
+	public void clickBtnBackToPlansNavigateToDetails() throws InterruptedException {
+		validateNew(getBtnBackToPlans());
+		getBtnBackToPlans().click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, getLnkBackToAllPlans(), 60);
+		
+	}
+	
+	
+
+
 	
 }
