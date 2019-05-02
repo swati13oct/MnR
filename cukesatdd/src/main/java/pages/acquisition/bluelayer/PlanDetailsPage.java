@@ -10,6 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,7 +21,9 @@ import org.testng.Assert;
 
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.uhcretiree.Rallytool_Page;
+
 import pages.acquisition.ulayer.PageTitleConstants;
+import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
@@ -152,6 +155,47 @@ public class PlanDetailsPage extends UhcDriver{
 
 	@FindBy(id="plancosts")
 	private WebElement planCostsTab;
+	
+	@FindBy(id = "estimateYourDrugsLink")
+	private WebElement estimateDrugBtn;
+	
+	@FindBy(id = "plancosts")
+	private List<WebElement> planCostTab;
+	
+	@FindBy(xpath = "//*[contains(text(),'Enter drug information')]")
+	private WebElement lnkEnterDrugInformation;
+	
+	@FindBy(xpath = "(//*[contains(text(),'Total Annual ')]//following::td//*[@class='ng-binding' and contains(text(),'$')])[1]")
+	private WebElement valPrescritionDrugEstimatedTotalAnnualCost;
+	
+	@FindBy(id="backToPlanSummaryTop")
+	private WebElement lnkBackToAllPlans;
+	
+	@FindBy(xpath = "(//*[contains(text(),'Annual Total')]//following::td//*[@class='ng-binding' and contains(text(),'$')])[1]")
+	private WebElement valCostTabEstimatedTotalAnnualCost;
+	
+	
+	
+	public WebElement getValCostTabEstimatedTotalAnnualCost() {
+		return valCostTabEstimatedTotalAnnualCost;
+	}
+	
+	
+	public WebElement getLnkBackToAllPlans() {
+		return lnkBackToAllPlans;
+	}
+	
+	public WebElement getValPrescritionDrugEstimatedTotalAnnualCost() {
+		return valPrescritionDrugEstimatedTotalAnnualCost;
+	}
+	
+	public WebElement getLnkEnterDrugInformation() {
+		return lnkEnterDrugInformation;
+	}
+	
+	public WebElement getPlanCostsTab() {
+		return planCostsTab;
+	}
 
 	public PlanDetailsPage(WebDriver driver) {
 		super(driver);
@@ -191,11 +235,10 @@ public class PlanDetailsPage extends UhcDriver{
 		} else if (planType.equalsIgnoreCase("PDP")) {
 			CommonUtility.waitForPageLoadNew(driver, presDrugTab.get(0), 45);
 			Assert.assertTrue(0 == medBenefitsTab.size(), "Medical Benefit tab not displayed for PDP plans");
-		} else if (planType.equalsIgnoreCase("MAPD")) {
+		}else if(planType.equalsIgnoreCase("SNP")) {
 			CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
-			System.err.println(presDrugTab.size());
-			Assert.assertTrue(0 != presDrugTab.size(), "Prescription Drug tab not displayed for MA plans");
-		}
+			Assert.assertTrue(medBenefitsTab.get(0).isDisplayed(), "Medical Benefit tab not displayed for SNP plans");
+		}/*Added for SNP as well*/
 		validateNew(planCostsTab);
 
 	}
@@ -699,7 +742,96 @@ public class PlanDetailsPage extends UhcDriver{
 			}
 		}
 		return validationFlag;	}
+	
+	//can be optimized
+	public DrugCostEstimatorPage navigateToDCE() {
+
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		presDrugTab.get(0).click();
+		CommonUtility.waitForPageLoad(driver, estimateDrugBtn, 20);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", estimateDrugBtn);
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", estimateDrugBtn);
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(currentUrl().contains("/estimate-drug-costs.html"))
+			return new DrugCostEstimatorPage(driver);
+		return null;
+	}
+	
+	public DrugCostEstimatorPage navigateToDCEThroughPlanCost() {
+
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		getPlanCostsTab().click();
+		CommonUtility.waitForPageLoad(driver, getLnkEnterDrugInformation(), 20);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", getLnkEnterDrugInformation());
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", getLnkEnterDrugInformation());
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(currentUrl().contains("/estimate-drug-costs.html")) {
+			driver.navigate().refresh();//page hangs sometimes, added to rectify the same
+			return new DrugCostEstimatorPage(driver);
+			
+		}
+		return null;
+	}
+	
+	/*extracting cost from prescription tab*/
+	public String costComparisonPrescriptionDrugFromDCE() {
+		
+		CommonUtility.waitForPageLoad(driver, getValPrescritionDrugEstimatedTotalAnnualCost(), 30);
+		scrollToView(getValPrescritionDrugEstimatedTotalAnnualCost());
+		return getValPrescritionDrugEstimatedTotalAnnualCost().getText().trim();
+
+	}
+
+	public VPPPlanSummaryPage navigateBackToPlanSummaryPageFromDetailsPage() {
+			driver.manage().window().maximize();    
+			driver.navigate().refresh();
+			CommonUtility.waitForPageLoad(driver, backToPlansBtn, 60);
+			validateNew(backToPlansBtn);
+			jsClickNew(backToPlansBtn);
+	        CommonUtility.checkPageIsReadyNew(driver);
+	        try {
+				Thread.sleep(6000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	        if (currentUrl().contains("plan-summary")) {
+	                      System.out.println("Plan Summary page");
+
+	        }
+	        return null;
+	}
+	
+	/*extracting cost from cost tab*/
+	public String costComparisonCostTabFromDCE() {
+		
+		CommonUtility.waitForPageLoad(driver, getValCostTabEstimatedTotalAnnualCost(), 30);
+		scrollToView(getValCostTabEstimatedTotalAnnualCost());
+		return getValCostTabEstimatedTotalAnnualCost().getText().trim();
+
+	}
 
 }
+
 
 

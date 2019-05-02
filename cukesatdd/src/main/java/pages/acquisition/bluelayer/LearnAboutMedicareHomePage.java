@@ -256,7 +256,8 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 				"medicare-education/medicare-eligibility.html",
 				"medicare-education/medicare-parts-and-medigap-plans.html", "medicare-education/medicare-benefits.html",
 				"medicare-education/medicare-costs.html", "medicare-education/medicare-advantage-plans.html",
-				"medicare-education/medicare-part-d.html", "medicare-education/enrollment-and-changing-plans.html" };
+				"medicare-supplement-plans.html", "medicare-education/medicare-part-d.html",
+				"medicare-education/enrollment-and-changing-plans.html" };
 		return urlMapping;
 	}
 

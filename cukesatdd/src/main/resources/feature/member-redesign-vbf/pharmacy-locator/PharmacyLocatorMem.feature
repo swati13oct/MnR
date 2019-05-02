@@ -15,11 +15,12 @@ Feature: 1.12-VBF-MemRedesign-To test Locate a Pharmacy tool (GATED)
     And the user enters distance details in Redesign site
       | Distance | <distance> |
     Then the user validates the pharmacies available in Redesign site
+    	|Zipcode | <zipcode> |
     Then the user Validates show on map link in Redesign Site
     Then the user validate more information content based on plan type in Redesign Site
 
     Examples: 
-		| memberType       | distance | friendname | favcolor | phonenumber |
-		| UhcMapdInd  |   25      |name1      | color1   | number1     |
-		# | AARPMapdInd |       25 | name1      | color1   | number1     |
-		#| GroupRetireeMapd  |   25      |  name1      | color1   | number1     |
+		| memberType       | distance | friendname | favcolor | phonenumber | zipcode |
+		| UhcMapdInd  |   25      |name1      | color1   | number1     | 90210 |
+		# | AARPMapdInd |       25 | name1      | color1   | number1     | 90210 |
+		#| GroupRetireeMapd  |   25      |  name1      | color1   | number1     |90210 |

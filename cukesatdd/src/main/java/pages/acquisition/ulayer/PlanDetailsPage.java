@@ -140,7 +140,34 @@ public class PlanDetailsPage extends UhcDriver {
 	
 	@FindBy(id = "plancosts")
 	private List<WebElement> planCostTab;
+	/*prescription drug tab*/
+	@FindBy(xpath = "(//*[contains(text(),'Total Annual ')]//following::td//*[@class='ng-binding' and contains(text(),'$')])[1]")
+	private WebElement valPrescritionDrugEstimatedTotalAnnualCost;
 	
+	@FindBy(xpath = "(//*[contains(text(),'Annual Total')]//following::td//*[@class='ng-binding' and contains(text(),'$')])[1]")
+	private WebElement valCostTabEstimatedTotalAnnualCost;
+	
+	
+	
+	public WebElement getValCostTabEstimatedTotalAnnualCost() {
+		return valCostTabEstimatedTotalAnnualCost;
+	}
+
+	@FindBy(id="backToPlanSummaryTop")
+	private WebElement lnkBackToAllPlans;
+	
+	
+	
+	
+	public WebElement getLnkBackToAllPlans() {
+		return lnkBackToAllPlans;
+	}
+
+
+	public WebElement getBackToAllPlans() {
+		return backToAllPlans;
+	}
+
 	private PageData planDocsPDF;
 
 	public JSONObject planDocPDFAcqJson;
@@ -167,11 +194,13 @@ public class PlanDetailsPage extends UhcDriver {
 	}
 
 	public PlanDetailsPage(WebDriver driver, String planType) {
-		
 		super(driver);
-		System.out.println("View Plan Details Link is clicked for MA plan"+planType);
 		PageFactory.initElements(driver, this);
 		openAndValidate(planType);
+	}
+
+	public WebElement getValPrescritionDrugEstimatedTotalAnnualCost() {
+		return valPrescritionDrugEstimatedTotalAnnualCost;
 	}
 
 	public String getContent() {
@@ -201,12 +230,10 @@ public class PlanDetailsPage extends UhcDriver {
 		} else if (planType.equalsIgnoreCase("PDP")) {
 			CommonUtility.waitForPageLoadNew(driver, presDrugTab.get(0), 45);
 			Assert.assertTrue(0 == medBenefitsTab.size(), "Medical Benefit tab not displayed for PDP plans");
-		} else if (planType.equalsIgnoreCase("MAPD")) {
+		}else if(planType.equalsIgnoreCase("SNP")) {
 			CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
-			System.err.println(presDrugTab.size());
-			Assert.assertTrue(0 != presDrugTab.size(), "Prescription Drug tab not displayed for MA plans");
-		}
-		
+			Assert.assertTrue(medBenefitsTab.get(0).isDisplayed(), "Medical Benefit tab not displayed for SNP plans");
+		}/*Added for SNP as well*/
 		validate(planCostsTab);
 
 	}
@@ -372,6 +399,24 @@ public class PlanDetailsPage extends UhcDriver {
 		if(currentUrl().contains("/estimate-drug-costs.html"))
 			return new DrugCostEstimatorPage(driver);
 		return null;
+	}
+	
+	/*extracting cost from prescription tab*/
+	public String costComparisonPrescriptionDrugFromDCE() {
+		
+		CommonUtility.waitForPageLoad(driver, getValPrescritionDrugEstimatedTotalAnnualCost(), 30);
+		scrollToView(getValPrescritionDrugEstimatedTotalAnnualCost());
+		return getValPrescritionDrugEstimatedTotalAnnualCost().getText().trim();
+
+	}
+	
+	/*extracting cost from cost tab*/
+	public String costComparisonCostTabFromDCE() {
+		
+		CommonUtility.waitForPageLoad(driver, getValCostTabEstimatedTotalAnnualCost(), 30);
+		scrollToView(getValCostTabEstimatedTotalAnnualCost());
+		return getValCostTabEstimatedTotalAnnualCost().getText().trim();
+
 	}
 	//
 	public DrugCostEstimatorPage navigateToDCEThroughPlanCost() {
@@ -665,6 +710,20 @@ public class PlanDetailsPage extends UhcDriver {
         }
         return null;
 }
+ 
+public VPPPlanSummaryPage navigateBackToPlanSummaryPageFromDetailsPage() {
+        
+	getLnkBackToAllPlans().click();
+        CommonUtility.checkPageIsReadyNew(driver);
+        if (driver.getCurrentUrl().contains("plan-summary")) {
+                        return new VPPPlanSummaryPage(driver);
+
+        }
+        return null;
+}
+    
+    
+    
 
 
 }
