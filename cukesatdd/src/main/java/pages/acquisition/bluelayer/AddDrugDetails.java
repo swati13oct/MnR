@@ -43,6 +43,9 @@ public class AddDrugDetails extends UhcDriver {
 	@FindBy(xpath = "//input[@id='dosage-0']/following-sibling::label")
 	public WebElement firstDosageOption;
 	
+	@FindBy(xpath = "//*[@id=\"alt-search-radios\"]/div/div[1]//label")
+	public WebElement btndrugName;
+	
 	public AddDrugDetails(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);	
@@ -67,6 +70,11 @@ public class AddDrugDetails extends UhcDriver {
 	
 		WebElement drugDosage = driver.findElement(By.xpath("//input[@value='"+dosage+"']/following-sibling::label"));
 		drugDosage.click();
+	}
+	
+	public void selectDosageAttribute(String dosage) throws InterruptedException{
+		if(btndrugName.getText().equalsIgnoreCase(dosage))
+			btndrugName.click();
 	}
 
 	public void selectQnty(String qnty){

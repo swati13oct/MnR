@@ -227,7 +227,7 @@ public class TestHarness extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		//vvv note: temp-workaround for team-a env, by-pass this for now
-		if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a")) {
+		if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a") ||MRScenario.environmentMedicare.equalsIgnoreCase("team-f") ) {
 			CommonUtility.waitForPageLoad(driver, panelHome, 30);
 			return;
 		}

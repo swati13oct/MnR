@@ -1,7 +1,7 @@
 @CT @OLE @OLE_Ulayer @OLE_VPP_UHC_ResumeApplication
 Feature: 1.12-VBF-ACQ-To test MedSupp OLE flow
 
-  @OLE_VPP_UHC @UHC_Resume_App_AARP
+  @OLE_VPP_UHC @UHC_Resume_App_AARP @OLE_Regression
  Scenario Outline: MedSup Resume Application with Application ID
  Given the user is on AARP medicare acquisition site landing page
    When the user performs plan search using following information in the AARP site
@@ -10,7 +10,7 @@ Feature: 1.12-VBF-ACQ-To test MedSupp OLE flow
       | Is Multi County | <isMultutiCounty> |
      When the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
-     Then user clicks on Start Application Button proceed to next pages for getting resume application key in the AARP site
+     Then the AARP site user clicks on Start Application Button proceed to next pages for getting resume application key
        | DOB           | <DOB>         |
        | Firstname     | <Firstname>   |
        | Lastname      | <Lastname>    |
@@ -32,7 +32,7 @@ Feature: 1.12-VBF-ACQ-To test MedSupp OLE flow
       |   90210 | NO              | Los Angeles County | MS       | 11031950 | John      | Carry   |    ABCD        | Resume          |
      
   
-@UHC_Retrive_App_AARP
+@UHC_Retrive_App_AARP @OLE_Regression
  Scenario Outline: MedSup Retrieve Application with Application ID
  Given the user is on AARP medicare acquisition site landing page
    When the user performs plan search using following information in the AARP site

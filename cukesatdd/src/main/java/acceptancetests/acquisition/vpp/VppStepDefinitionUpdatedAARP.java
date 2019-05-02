@@ -1454,7 +1454,7 @@ public void user_Clicks_on_Look_upyourProvider_button_on_PlanDetailsPage() {
 		}
 	}
 	
-	@Then("^user clicks on Start Application Button proceed to next pages for getting resume application key in the AARP site")
+	@Then("^the AARP site user clicks on Start Application Button proceed to next pages for getting resume application key")
 	public void Start_application_button(DataTable givenAttributes) throws Throwable{
 		List<DataTableRow> memberAttributesRow = givenAttributes
 				.getGherkinRows();

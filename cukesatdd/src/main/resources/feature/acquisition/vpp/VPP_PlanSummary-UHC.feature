@@ -16,7 +16,7 @@ Feature: To test VPP Plan Summary Page in UMS Site
     Then the user validates Add to compare checkbox is not present for DSNP Plans in UMS 
     Then the user validates marketing bullets of the plan in UMS Site
     Then the user view plan details of the above selected plan in UMS site and validate
-      | Plan Name | <planName> |
+     | Plan Name | <planName> |
     Then the user clicks on back to all plans link and validates its redirection to Plan Summary in UMS site
     Then the user validates below plan benefit values for the above selected plan in UMS site for MA , DSNP and MAPD Plans
       | Monthly Premium | <monthlyPremium> |
@@ -42,9 +42,9 @@ Feature: To test VPP Plan Summary Page in UMS Site
     Examples: 
    |   TID  | zipcode | isMultutiCounty | county             | plantype | planName                                             | monthlyPremium  | primaryCarePhysician  | specialist  | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1                       | annualDeductible                                       |
    |  15553 |  90210  | NO              | Los Angeles County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    | $0              | $0  copay             | $0  copay   | Yes              | $3,400.00          | $4  copay                                    |                                                        | 
-   |  15554 |  28105  | YES             | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete (HMO SNP)             | $0 - $26.30     | $0  copay             | $0  copay   | No               | $0 - $6,700.00     | $0, $1.25, $3.40 copay, or 15% coinsurance   |                                                        |                                                               
+   |  15554 |  28105  | YES             | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete (HMO SNP)             | $0              | $0  copay             | $0  copay   | No               | $0 - $6,700.00     | $0, $1.25, $3.40 copay, or 15% coinsurance   |                                                        |                                                               
    |  15542 |  90210  | NO              | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Essential (HMO) | $0              | $5  copay             | $10  copay  | Yes              |  $4,900.00         |  No drug coverage                            |                                                        | 
-   |  15543 |  90210  | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                      | $28.10          |                       |             |                  |                    | $0  copay                                    | $0 for Tier 1, Tier 2 $415 for Tier 3, Tier 4, Tier 5  |
+   |  15543 |  90210  | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                      | $0              |                       |             |                  |                    | $0  copay                                    | $0 for Tier 1, Tier 2 $415 for Tier 3, Tier 4, Tier 5  |
       
    @rightRailRegression @rightRailRegressionUHC
    Scenario Outline: TID: <TID> -plan type: <plantype> - Verify right rail on plan summary page in UMS site
@@ -66,11 +66,11 @@ Feature: To test VPP Plan Summary Page in UMS Site
      | Email Address | <emailAddress> |
     Then the user validates Plan Selector Tool section in the right rail in ums Site  
     Then the user validates Plan Selector Page after clicking on Start Plan Selector button in ums Site
-    Then the user validates Need More Information section in the right rail in ums Site
-    Then the user validates Medicare Plans Video Guide Page after clicking Choose a video link in ums Site  
+  # Then the user validates Need More Information section in the right rail in ums Site
+  # Then the user validates Medicare Plans Video Guide Page after clicking Choose a video link in ums Site  
     
     Examples: 
-   |   TID   | zipcode | isMultutiCounty | county             | plantype | firstName | lastName | emailAddress         | 
-   |  15549  |  90210  | NO              | Los Angeles County | MAPD     | test      | test     | yashima_16@optum.com | 
+   |   TID   | zipcode | isMultutiCounty | county             | plantype | firstName | lastName | emailAddress  | 
+   |  15549  |  90210  | NO              | Los Angeles County | MAPD     | test      | test     | test@test.com | 
     
                               

@@ -42,7 +42,15 @@ public class DCEVPPAcqStepDefinitionAARP {
 	}
 	
 	WebDriver wd;
+	
+	/*DCE cost Estimator*/
 	String cost;
+	
+	/*Prescription Drug tab*/
+	String estimatedTotalAnnualCost;
+	
+	/*Plan Cost tab*/
+	String planCostTabEstimatedTotalAnnualCost;
 	
 	/**
 	 * @toDo:user is on AARP medicare acquisition site landing page
@@ -120,8 +128,11 @@ public class DCEVPPAcqStepDefinitionAARP {
 		}
 
 		String plantype = memberAttributesMap.get("Plan Type");
+		String planName = memberAttributesMap.get("PlanName");
+		
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		DrugCostEstimatorPage dce = plansummaryPage.navigateToDCE(plantype);
+		plansummaryPage.viewPlanSummary(plantype);
+		DrugCostEstimatorPage dce=plansummaryPage.navigatetoDCEVPP(planName);
 		if(dce!=null){
 			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
 		}
@@ -384,17 +395,80 @@ public class DCEVPPAcqStepDefinitionAARP {
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.clickBtnBackToPlans();
 	}
+	
+	@Then("^the user clicks on Back to Plans button on See Your Estimated Costs page in AARP site$")
+	public void the_user_clicks_on_Back_to_Plans_button_on_See_Your_Estimated_Costs_page_in_AARP_site() throws Throwable {
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.clickBtnBackToPlansNavigateToDetails();
+	}
+	
+	
+	/*Cost comparison for prescription drugs*/
+	@Then("^user verifies annual drug cost in the prescription drug tab of AARP site$")
+	public void user_verifies_drug_cost_in_AARP_site(DataTable data) throws Throwable {
+	
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		String planType = memberAttributesRow.get(0).getCells().get(1);
+		PlanDetailsPage plandetailspage= new PlanDetailsPage(wd,planType);
+		
+		estimatedTotalAnnualCost=plandetailspage.costComparisonPrescriptionDrugFromDCE();
+		
+		if(cost.trim().contains(estimatedTotalAnnualCost))
+			Assert.assertTrue("It's a match on on prescription drug tab and Drug CostEstimator page",true);
+		else
+		Assert.assertTrue("Cost mismatch on prescription drug tab and drug CostEstimator page",false);
+		
+		//plandetailspage.navigateBackToPlanSummaryPageFromDetailsPage();
+		
+		getLoginScenario().saveBean(PageConstants.PLAN_DETAILS_PAGE, plandetailspage);
+		
+	}
+	
+	/*Cost comparison for Plan Costs Tab*/
+	@Then("^user verifies annual drug cost in the Plan Cost tab of AARP site$")
+	public void user_verifies_annual_drug_cost_in_the_Plan_Cost_tab_of_AARP_site(DataTable data) throws Throwable {
+	
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		String planType = memberAttributesRow.get(0).getCells().get(1);
+		PlanDetailsPage plandetailspage= new PlanDetailsPage(wd,planType);
+		
+		planCostTabEstimatedTotalAnnualCost=plandetailspage.costComparisonCostTabFromDCE();
+		
+		if(cost.trim().contains(planCostTabEstimatedTotalAnnualCost))
+			Assert.assertTrue("It's a match on on prescription drug tab and Drug CostEstimator page",true);
+		else
+		Assert.assertTrue("Cost mismatch on prescription drug tab and drug CostEstimator page",false);
+		
+		//plandetailspage.navigateBackToPlanSummaryPageFromDetailsPage();
+		
+		getLoginScenario().saveBean(PageConstants.PLAN_DETAILS_PAGE, plandetailspage);
+		
+	}
+	
+	/*Back To All Plans on prescription drug tab*/
+	@Then("^the user clicks on Back to All Plans button present on details page in AARP site$")
+	public void the_user_clicks_on_Back_to_All_Plans_button_present_AARP_sit() throws Throwable {
+		PlanDetailsPage plandetailspage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_DETAILS_PAGE);
+			
+		plandetailspage.navigateBackToPlanSummaryPageFromDetailsPage();
+		
+	}
 
 	@Then("^user validates Drug information is reflected on plan summary page in AARP site$")
-	public void user_validates_Drug_information_is_reflected_on_plan_summary_page_in_AARP_site() throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
+	public void user_validates_Drug_information_is_reflected_on_plan_summary_page_in_AARP_site(DataTable data) throws Throwable {
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		
+		String planName=memberAttributesRow.get(0).getCells().get(1);
 		VPPPlanSummaryPage plansummaryPage =  new VPPPlanSummaryPage(wd);
 			System.out.println(cost);
-			System.out.println(plansummaryPage.getValEstimatedAnnualDrugCostValue().getText().trim());
-		if(cost.trim().contains(plansummaryPage.getValEstimatedAnnualDrugCostValue().getText().trim()))
-				Assert.assertTrue(true);
+			System.out.println(plansummaryPage.getValEstimatedAnnualDrugCostValue(planName).getText().trim());
+			
+		if(cost.trim().contains(plansummaryPage.estimatedAnnualDrugCostVPP(planName)))
+				Assert.assertTrue("It's a match on on VPP and Drug CostEstimator page",true);
 		else
-			Assert.assertTrue(false);
+			Assert.assertTrue("Cost mismatch on VPP and drug CostEstimator page",false);
 	}
 
 	@Then("^the user navigates to the plan details for the given plan type in AARP site$")
@@ -404,7 +478,7 @@ public class DCEVPPAcqStepDefinitionAARP {
 		String planType = memberAttributesRow.get(0).getCells().get(1);
 		String planName=memberAttributesRow.get(1).getCells().get(1);
 		VPPPlanSummaryPage plansummaryPage =  new VPPPlanSummaryPage(wd);
-		plansummaryPage.clickonViewPlans();
+		plansummaryPage.viewPlanSummary(planType);
 		PlanDetailsPage plandetailspage= (PlanDetailsPage)plansummaryPage.navigateToPlanDetails(planName, planType);
 		if(plandetailspage!=null){
 			getLoginScenario().saveBean(PageConstants.PLAN_DETAILS_PAGE, plandetailspage);
