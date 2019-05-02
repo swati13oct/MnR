@@ -283,7 +283,10 @@ public class ClaimSummarypage extends UhcDriver{
 	
 	//vvv note:	added for def1041	
 	@FindBy(xpath="//div[@id='twoValidDivErr']//p//span") 
-	private WebElement greatederThanTwoYearsError;
+	private WebElement greaterThanTwoYearsError;
+
+	@FindBy(xpath="//div[@id='validDivErr']//p//span") 
+	private WebElement greaterThan24monthsError;
 
 	@FindBy(xpath="//span[@id='numClaims1']")	
 	private WebElement numberOfClaims;
@@ -304,8 +307,8 @@ public class ClaimSummarypage extends UhcDriver{
 	private WebElement customSearchNumberOfClaims;
 	
 	@FindBy(xpath="//div[contains(@class,'shipCompSection')]//p[contains(@id,'validShipDivErr')]/..//p[2]//span")
-	private WebElement greatederThanTwoYearsErrorShip;
-
+	private WebElement greaterThan24monthsErrorShip;
+	
 	@FindBy(xpath=".//*[@id='ship' ]")
 	private WebElement claimsTableShip;
 
@@ -1637,14 +1640,18 @@ public void TBR_NavigateToClaimsPage(){	//tbd-remove whole method
 			
 			//vvv note:	added for def1041	
 			public void validateGreaterThanTwoYearError(String planType) {
-				WebElement errorTextElement=greatederThanTwoYearsError;
-				String errorTextContent="For information about claims older than 2 years, contact Customer Service toll-free at 1-800-523-5880.";
+				String errorTextContent1="The time between your From date and your To date cannot be more than 24 months.For help with claims older than 24 months, call Customer Service at the number listed on the Contact Us web page.";
+				String errorTextContent2="For information about claims older than 2 years, contact Customer Service toll-free at 1-800-523-5880.";
 				if (planType.equals("SHIP")) {
-					errorTextElement=greatederThanTwoYearsErrorShip;
-					errorTextContent="The time between your From date and your To date cannot be more than 24 months.For help with claims older than 24 months, call Customer Service at the number listed on the Contact Us web page.";
+					Assert.assertTrue(greaterThan24monthsErrorShip + "is not beind dsiplayed", validate(greaterThan24monthsErrorShip));
+					Assert.assertTrue("error text is not as expected. \nExpected="+errorTextContent1+" \nActual="+greaterThan24monthsErrorShip.getText(), greaterThan24monthsErrorShip.getText().contains(errorTextContent1));
+				} else {
+					Assert.assertTrue(greaterThan24monthsError + "is not beind dsiplayed", validate(greaterThan24monthsError));
+					Assert.assertTrue("error text is not as expected. \nExpected="+errorTextContent1+" \nActual="+greaterThan24monthsError.getText(), greaterThan24monthsError.getText().contains(errorTextContent1));
+
+					Assert.assertTrue(greaterThanTwoYearsError + "is not beind dsiplayed", validate(greaterThanTwoYearsError));
+					Assert.assertTrue("error text is not as expected. \nExpected="+errorTextContent2+" \nActual="+greaterThanTwoYearsError.getText(), greaterThanTwoYearsError.getText().contains(errorTextContent2));
 				}
-				Assert.assertTrue(errorTextElement + "is not beind dsiplayed", validate(errorTextElement));
-				Assert.assertTrue("error text is not as expected. \nExpected="+errorTextContent+" \nActual="+errorTextElement.getText(), errorTextElement.getText().contains(errorTextContent));
 			}
 
 			public int getNumClaims(String range, String claimType) {

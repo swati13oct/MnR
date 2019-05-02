@@ -1,5 +1,6 @@
 package acceptancetests.memberredesign.claims;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -1194,6 +1195,31 @@ public class ClaimsMemberRedesignStepDefinition {
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
 	}
 
+	@And("^the user custom search claims for over two years time interval from current date in redesigned site$")
+	public void greaterThanTwoYears_custom_search_claims_redesigned_site(DataTable memberAttributes) throws InterruptedException{
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), 
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String planType=memberAttributesMap.get("Plan Type");
+
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		Calendar calendar = Calendar.getInstance();
+		Date currentDate=calendar.getTime();
+		String toDate = dateFormat.format(currentDate);
+		System.out.println("current date="+toDate);
+		calendar.add(Calendar.YEAR, -2);
+		calendar.add(Calendar.DATE, -1);
+		Date twoYearsAndOneDayBackFromCurrentDate=calendar.getTime();
+		String fromDate = dateFormat.format(twoYearsAndOneDayBackFromCurrentDate);
+		System.out.println("2 yrs and 1 day ago date="+fromDate);
+
+		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
+		newClaimsSummaryPage.searchClaimsByTimeInterval(planType, fromDate,toDate);
+		if(newClaimsSummaryPage != null)
+			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
+	}
 	
 	@Then("^the user should be able to see the from date is greater than the to date error message being displayed$")
 	public void validateToDateInvalidErrorMessage(DataTable memberAttributes){

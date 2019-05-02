@@ -591,10 +591,8 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | Claims To Date   | 01/02/2018          |
 		Then the user should be able to see the from date is greater than the to date error message being displayed
 		  | Plan Type        | <planType>          |
-		And the user custom search claims for the following invalid time interval in redesigned site
+		And the user custom search claims for over two years time interval from current date in redesigned site
 		  | Plan Type        | <planType>          |
-		  | Claims From Date | 01/02/2017          |
-		  | Claims To Date   | 01/02/2019          |
 		Then the user should be able to see the search range is greater than two years error
 		  | Plan Type        | <planType>          |
 		#----------------- Final Test claims number makes sense from search periods --------------
@@ -665,7 +663,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |13    |1041| PDP      | RX     | RXCLAIMS                     | Prescription drug | No                  |
 
-	@claims00_14 @claims00_SHIP @claims00_NOT_NICE_OR_COSMOS
+	@claims00_14 @claims00_SHIP @claims00_NOT_NICE_OR_COSMOS @abc
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
 	  |14    |1041| SHIP     | NA     | SHIPCLAIMS                   | NA                | No                  |
