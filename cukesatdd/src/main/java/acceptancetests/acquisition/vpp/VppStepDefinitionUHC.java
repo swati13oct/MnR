@@ -1536,7 +1536,7 @@ public class VppStepDefinitionUHC {
 		}
 		//^^^ note: added for US1598162		
 		
-		@Then("^the user clicks on Start Application Button proceed to next pages for getting resume application key")
+		@Then("^the UHC user clicks on Start Application Button proceed to next pages for getting resume application key")
 		public void Start_application_button(DataTable givenAttributes) throws Throwable{
 			List<DataTableRow> memberAttributesRow = givenAttributes
 					.getGherkinRows();
