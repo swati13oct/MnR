@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.ComparePlansPage;
+import pages.acquisition.ulayer.DrugCostEstimatorPage;
 import pages.acquisition.ulayer.FindCarePage;
 import pages.acquisition.ulayer.MultiCountyModalPage;
 import pages.acquisition.ulayer.OurPlansPage;
@@ -884,6 +885,25 @@ public void user_Clicks_on_Look_upyourProvider_button_on_PlanDetailsPage() {
 		} else
 			Assert.fail("Error in loading the compare plans page");
 	}
+	
+	
+	@And("^I Click on DCE link on Plan compare for AARP$")
+	public void I_Click_On_DCE_link_on_Plan_Compare_for_AARP() {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		DrugCostEstimatorPage drugCostEstimatorPage = planComparePage.clickonDCE();
+		if (drugCostEstimatorPage != null) {
+			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, drugCostEstimatorPage);
+			// comparePlansPage.backToVPPPage();
+		} else
+			Assert.fail("Error in loading the compare plans page");
+	}
 
 	@And("^I Click on Look up your doctor link on Plan compare in AARP$")
 	public void I_Click_on_Look_up_your_doctor_link_on_Plan_compare_in_AARP() throws InterruptedException {
@@ -931,6 +951,20 @@ public void user_Clicks_on_Look_upyourProvider_button_on_PlanDetailsPage() {
 			e.printStackTrace();
 		}
 		planComparePage.verifyProvidercount();
+		getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+	}
+	
+	@Then("^user validates Drug information is reflected on plan compare page in AARP$")
+	public void user_validates_Drug_information_is_reflected_on_plan_compare_page_in_AARP() throws Exception {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		planComparePage.verifyDCEAmount();
 		getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 	}
 	
@@ -1454,7 +1488,7 @@ public void user_Clicks_on_Look_upyourProvider_button_on_PlanDetailsPage() {
 		}
 	}
 	
-	@Then("^user clicks on Start Application Button proceed to next pages for getting resume application key in the AARP site")
+	@Then("^the AARP site user clicks on Start Application Button proceed to next pages for getting resume application key")
 	public void Start_application_button(DataTable givenAttributes) throws Throwable{
 		List<DataTableRow> memberAttributesRow = givenAttributes
 				.getGherkinRows();
