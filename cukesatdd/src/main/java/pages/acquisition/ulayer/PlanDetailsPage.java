@@ -692,7 +692,7 @@ public class PlanDetailsPage extends UhcDriver {
 		return false;
 	}
 
-	public VPPPlanSummaryPage navigateBackToPlanSummaryPage() {
+
  
 public VPPPlanSummaryPage navigateBackToPlanSummaryPageFromDetailsPage() {
         
