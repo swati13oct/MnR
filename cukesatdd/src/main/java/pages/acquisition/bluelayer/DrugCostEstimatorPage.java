@@ -454,6 +454,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@src,'loader')]")
 	public WebElement imgLoadingIndicator;
 	
+	@FindBy(xpath = "//td[contains(@class,'estimatedrugcost')][1]//div")
+	public WebElement VerifyEstimatedDrugCost;
+	
 		
 	public WebElement getImgLoadingIndicator() {
 		return imgLoadingIndicator;
@@ -1971,6 +1974,14 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		}
 	}
 	
+	public ComparePlansPageBlayer clickBtnBackToPlancompare() throws InterruptedException {
+		validateNew(getBtnBackToPlans());
+		getBtnBackToPlans().click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, VerifyEstimatedDrugCost, 60);
+		return new ComparePlansPageBlayer(driver);
+		
+	}	
 	public void clickBtnBackToPlans() throws InterruptedException {
 		validateNew(getBtnBackToPlans());
 		getBtnBackToPlans().click();

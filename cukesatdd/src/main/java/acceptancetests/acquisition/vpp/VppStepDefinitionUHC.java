@@ -19,7 +19,7 @@ import pages.acquisition.bluelayer.PlanComparePage;
 import pages.acquisition.bluelayer.PlanDetailsPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.ole.WelcomePage;
-
+import pages.acquisition.ulayer.ComparePlansPage;
 import pages.acquisition.bluelayer.ComparePlansPageBlayer;
 import pages.acquisition.bluelayer.DrugCostEstimatorPage;
 import pages.acquisition.bluelayer.FindCarePage;
@@ -1625,6 +1625,38 @@ public class VppStepDefinitionUHC {
 			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			plansummaryPage.RetrieveApplicationButtonValidation(ApplicationID);
 		
+		}
+		
+		@And("^I Click on DCE link on Plan compare for UHC$")
+		public void I_Click_On_DCE_link_on_Plan_Compare_for_UHC() {
+			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			DrugCostEstimatorPage drugCostEstimatorPage = planComparePage.clickonDCE();
+			if (drugCostEstimatorPage != null) {
+				getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, drugCostEstimatorPage);
+				// comparePlansPage.backToVPPPage();
+			} else
+				Assert.fail("Error in loading the compare plans page");
+		}
+		
+		@Then("^user validates Drug information is reflected on plan compare page in UHC$")
+		public void user_validates_Drug_information_is_reflected_on_plan_compare_page_in_UHC() throws Exception {
+			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			planComparePage.verifyDCEAmount();
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 		}
 		
 		

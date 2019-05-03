@@ -54,6 +54,9 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//a[text()='Edit provider list']")
 	public WebElement EditproviderlistLink;
 	
+	@FindBy(xpath = "//td[contains(@class,'estimatedrugcost')][1]//div")
+	public WebElement VerifyEstimatedDrugCost;
+	
 		
 	public ComparePlansPage(WebDriver driver) {
 		super(driver);
@@ -226,6 +229,19 @@ public class ComparePlansPage extends UhcDriver {
 		System.out.println("Verified Provider Count Displayed");
 		validate(EditproviderlistLink);
 		System.out.println("Verified Edit Provider Link Displayed");
+
+	}
+	
+	public void verifyDCEAmount() {
+		validate(VerifyEstimatedDrugCost);
+		System.out.println("Verified DCE Link Exists");
+		System.out.println(VerifyEstimatedDrugCost.getText());
+		String DCEValue = VerifyEstimatedDrugCost.getText();
+		if (DCEValue.contains("Monthly")){
+			System.out.println("Verified Monthly varies Yearly Text Displayed");
+		}else{
+			System.out.println("No Monthly varies Yearly Text Displayed");
+		}
 
 	}
 
