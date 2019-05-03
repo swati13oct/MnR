@@ -19,6 +19,7 @@ import pages.acquisition.bluelayer.PlanComparePage;
 import pages.acquisition.bluelayer.PlanDetailsPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.ulayer.ComparePlansPage;
 import pages.acquisition.bluelayer.ProviderSearchPage;
 import pages.acquisition.bluelayer.ComparePlansPageBlayer;
 import pages.acquisition.bluelayer.DrugCostEstimatorPage;
@@ -1536,7 +1537,7 @@ public class VppStepDefinitionUHC {
 		}
 		//^^^ note: added for US1598162		
 		
-		@Then("^the user clicks on Start Application Button proceed to next pages for getting resume application key")
+		@Then("^the UHC user clicks on Start Application Button proceed to next pages for getting resume application key")
 		public void Start_application_button(DataTable givenAttributes) throws Throwable{
 			List<DataTableRow> memberAttributesRow = givenAttributes
 					.getGherkinRows();
@@ -1627,6 +1628,23 @@ public class VppStepDefinitionUHC {
 		
 		}
 		
+		@And("^I Click on DCE link on Plan compare for UHC$")
+		public void I_Click_On_DCE_link_on_Plan_Compare_for_UHC() {
+			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			DrugCostEstimatorPage drugCostEstimatorPage = planComparePage.clickonDCE();
+			if (drugCostEstimatorPage != null) {
+				getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, drugCostEstimatorPage);
+				// comparePlansPage.backToVPPPage();
+			} else
+				Assert.fail("Error in loading the compare plans page");
+		}
 		@Then("^the user validate the print and email links on the plan Details Page on uhc site")
 	public void user_validate_print_and_email_links_on_the_plan_Details_Page() {
 
@@ -1659,6 +1677,21 @@ public class VppStepDefinitionUHC {
 		getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
 	}
 }
+		
+		@Then("^user validates Drug information is reflected on plan compare page in UHC$")
+		public void user_validates_Drug_information_is_reflected_on_plan_compare_page_in_UHC() throws Exception {
+			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			planComparePage.verifyDCEAmount();
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+		}
+		
 		
 		
 }

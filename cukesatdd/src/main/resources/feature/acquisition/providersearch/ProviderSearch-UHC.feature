@@ -20,7 +20,7 @@ Feature: 1.15-VBF-Acq-To test Provider Search Flow  in UMS site
       | zipcode | isMultutiCounty | county             | plantype | planname                                          |
       |   90210 | NO              | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |
 
-  @PlancompareProviderSearch
+  @PlancompareProviderSearch @AcqRegressionProviderSearchBlayer
   Scenario Outline: TID: <TID> - TC01_RallyTool_Through_Plan Compare_Page
     Given the user is on the uhcmedicaresolutions site landing page
     When I access the vpp page

@@ -398,7 +398,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button proactive-offer__close main-background-color second-color')]")
 	public static WebElement proactiveChatExitBtn;
 	
-	@FindBy(xpath = "//*[@class='cta-button pharmacy-tab-show']")
+	@FindBy(xpath = "//*[contains(@class,'cta-button pharmacy-tab-show')]")
 	private WebElement btnNextPickAPharmacy;
 	
 	@FindBy(xpath = "//*[contains(@class,'pharmacy-name')]")
@@ -431,8 +431,25 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class,'margin-large generic-name')]")
 	private WebElement lblGenericDrugName;
 	
+	@FindBy(id="backToPlanSummaryTop")
+	private WebElement lnkBackToAllPlans;
 	
+	@FindBy(xpath = "//*[contains(@src,'loader')]")
+	public WebElement imgLoadingIndicator;
 	
+	@FindBy(xpath = "//td[contains(@class,'estimatedrugcost')][1]//div")
+	public WebElement VerifyEstimatedDrugCost;
+	
+		
+	public WebElement getImgLoadingIndicator() {
+		return imgLoadingIndicator;
+	}
+		
+	
+	public WebElement getLnkBackToAllPlans() {
+		return lnkBackToAllPlans;
+	}
+		
 	
 	public List<WebElement> getHdrDrugName() {
 		return hdrDrugName;
@@ -803,7 +820,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		WebElement rbtnValue=rbtn.get(0);
 		rbtnValue.isDisplayed();
 		if (!rbtnValue.isSelected()) {
-			rbtnValue.click();
+			jsClickNew(rbtnValue);				//kept to get rid of overlay issue
+			validateNonPresenceOfElement( getImgLoadingIndicator());
+			//rbtnValue.click();
 			System.out.println("RBTN " + pharmacy + " >> Selected");
 		} else {
 			System.out.println("RBTN " + pharmacy + " >> already selected");
@@ -1035,11 +1054,11 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public AddDrugDetails addDrug(String drug) throws InterruptedException {
 
 		AddNewDrugModal addNewDrugModal = clickOnAddDrug();
-		addNewDrugModal.searchDrugWithoutAutoComplete(drug);
+		return addNewDrugModal.searchDrugWithoutAutoComplete(drug);
 		/*addNewDrugModal.closeModalWindow();
 		clickOnAddDrug();
 		addNewDrugModal.searchDrugWithAutoComplete(drug);*/
-		return new AddDrugDetails(driver);
+		//return new AddDrugDetails(driver);     //commented because two times reference is written, rectified the issue
 	}
 
 	public void validateDrugSavingInfo() {
@@ -1931,11 +1950,29 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		}
 	}
 	
+	public ComparePlansPage clickBtnBackToPlancompare() throws InterruptedException {
+		validateNew(getBtnBackToPlans());
+		getBtnBackToPlans().click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, VerifyEstimatedDrugCost, 60);
+		return new ComparePlansPage(driver);
+		
+	}	
+	
+	/*Navigation from DCE to VPP*/
 	public void clickBtnBackToPlans() throws InterruptedException {
 		validateNew(getBtnBackToPlans());
 		getBtnBackToPlans().click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, maPlansCount, 60);
+		
+	}
+	/*Navigation from DCE to details page*/
+	public void clickBtnBackToPlansNavigateToDetails() throws InterruptedException {
+		validateNew(getBtnBackToPlans());
+		getBtnBackToPlans().click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, getLnkBackToAllPlans(), 60);
 		
 	}
 	

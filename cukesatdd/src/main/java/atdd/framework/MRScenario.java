@@ -214,11 +214,11 @@ public class MRScenario {
 				
 				
 				  if  (tagName.equalsIgnoreCase("@MemberVBF") && environment.contains("team-ci")){
-						csvName = "MemberRedesign-VBF-Teamci.csv";
+						csvName = "MemberRedesign-VBF-Teamci-UUID.csv";
 								
 				} else if ((environment.equalsIgnoreCase("team-a")|| (environment.equalsIgnoreCase("team-h")) || (environment.equalsIgnoreCase("team-e")) || (environment.equalsIgnoreCase("team-f")) || (environment.equalsIgnoreCase("team-g")) || (environment.equalsIgnoreCase("team-c")) || (environment.equalsIgnoreCase("team-t")))) {
 					csvName= "MemberRedesign-UUID.csv";
-				 }else  if(tagName.equalsIgnoreCase("@MemberVBF") && environment.contains("team-ci1")){
+				 }else  if(tagName.equalsIgnoreCase("@MemberVBF") && environment.contains("stage")){
 							csvName = "MemberRedesign-VBF.csv";
 				 }
 				 /* note: Dec2018 - comment out because this section caused stage run not to use UMS-Member-Type.csv
@@ -776,8 +776,23 @@ sauceLabsTunnelIdentifier);
 			e.printStackTrace();
 		}
 		return webDriver;	
-
+		
+		/*File pathToBinary = new File("C:/Program Files (x86)/Google/Chrome/Application/chrome.exe");
+        Map<String, Object> chromeOptions = new HashMap<String, Object>();
+        chromeOptions.put("binary", pathToBinary);
+        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+        capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+        ChromeOptions options=new ChromeOptions();
+        System.setProperty("webdriver.chrome.driver","C:/Users/y16/drivers/chromedriver_win32/chromedriver.exe");
+        options.setExperimentalOption("useAutomationExtension", false);
+        webDriver = new ChromeDriver(options);
+        webDriver.manage().window().maximize();
+             
+		return webDriver;
+*/
 	}
+	
+
 
 	public WebDriver getIEDriver() {
 		System.setProperty("webdriver.ie.driver",

@@ -224,9 +224,9 @@ public class RallyDashboardPage extends UhcDriver {
 	public void openAndValidate() {
 		category = CommonStepDefinition.getMemberAttributeMap().get("Member Type");
 		checkModelPopup(driver);
-		CommonUtility.waitForPageLoadNew(driver, panelHome, 60);
-		validateNew(panelClaims);
-		validateNew(panelHome);
+		CommonUtility.waitForPageLoadNew(driver, HelloMessage, 60);
+		//validateNew(panelClaims);
+		//validateNew(panelHome);
 		validateNew(HelloMessage);
 
 		if (category != null && category.contains(CommonConstants.CATEGORY_TERMIATED)) {

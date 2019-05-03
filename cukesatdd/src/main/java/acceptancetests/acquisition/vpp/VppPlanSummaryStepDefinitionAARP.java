@@ -703,7 +703,7 @@ public class VppPlanSummaryStepDefinitionAARP {
 		Assert.assertTrue("Validation failed : Expected text not displayed for Additional Benefit - "+benefitType,validationFlag);
 	
 	}	*/
-   @Then("^the user clicks on enter drug information link in the benefits table and validates the DCE Home Page for MAPD, PDP , DSNP Plan in AARP site$")
+   @Then("^the user clicks on enter drug information link in the benefits table and validate the DCE Home Page for MAPD, PDP , DSNP Plan in AARP site$")
      public void the_user_clicks_enterDrugInformation_validates_dceHomePage_AARP( ){
 	   String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 	   if(!planType.equals("MA")){
