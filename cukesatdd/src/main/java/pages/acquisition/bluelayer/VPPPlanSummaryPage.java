@@ -1307,12 +1307,16 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		List<WebElement> allMAPlans = driver
+		List<WebElement> allPDPPlans = driver
 				.findElements(By.xpath(".//*[@id='plan-list-3']//label[contains(text(),'Add to compare')]"));
-
-		if (allMAPlans != null) {
-			allMAPlans.get(0).click();
-
+		
+		if (allPDPPlans != null) {
+			for (int i = 0; i < allPDPPlans.size(); i++) {
+				allPDPPlans.get(i).click();
+				if (i == 3){
+					break;
+				}
+			}
 		}
 
 	}
