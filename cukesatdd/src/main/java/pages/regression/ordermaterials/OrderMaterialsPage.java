@@ -6,8 +6,7 @@ package pages.regression.ordermaterials;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -140,7 +139,7 @@ public class OrderMaterialsPage extends UhcDriver  {
 	@SuppressWarnings("deprecation")
 	public boolean navigatePlanTabs(String PlanType){
 		driver.navigate().refresh();
-		
+
 		try {
 			Thread.sleep(3000);
 		} catch (Exception e) {
@@ -165,124 +164,92 @@ public class OrderMaterialsPage extends UhcDriver  {
 
 		CommonUtility.checkPageIsReady(driver);
 
-		if(validate(ComboTabs.get(0))){
-			WebElement FirstTab = ComboTabs.get(0);
-			WebElement Secondtab = ComboTabs.get(1);
-			System.out.println("First Tab ====> "+FirstTab.getText());
-			System.out.println("Second Tab ====> "+Secondtab.getText());
-			WebElement mapdTab=null;
-			WebElement medsuppTab=null;
-			WebElement pdpTab=null;
-			WebElement ssupTab=null;
-			WebElement hipTab=null;
-			//note: ship and hip will likely need fixing, no available working user to work with right now
-			if (FirstTab.getText().contains("MEDICARE SUPPLEMENT INSURANCE PLAN")) {
-				medsuppTab=FirstTab;
-			} else if (FirstTab.getText().contains("MEDICARE ADVANTAGE")) {
-				mapdTab=FirstTab;
-			} else if (FirstTab.getText().contains("Prescription Drug Plan") && !FirstTab.getText().contains("MEDICARE ADVANTAGE")) {
-				pdpTab=FirstTab;
-			} else if (FirstTab.getText().contains("Senior Supplement Plan")) {
-				ssupTab=FirstTab;
-			} else if (FirstTab.getText().contains("Hospital Indemnity Insurance Plan")) {
-				hipTab=FirstTab;
-			}
-				
-			if (Secondtab.getText().contains("MEDICARE SUPPLEMENT INSURANCE PLAN")) {
-				medsuppTab=Secondtab;
-			} else if (Secondtab.getText().contains("MEDICARE ADVANTAGE")) {
-				mapdTab=Secondtab;
-			} else if (Secondtab.getText().contains("Prescription Drug Plan") && !Secondtab.getText().contains("MEDICARE ADVANTAGE")) {
-				pdpTab=Secondtab;
-			} else if (Secondtab.getText().contains("Senior Supplement Plan")) {
-				ssupTab=Secondtab;
-			} else if (Secondtab.getText().contains("Hospital Indemnity Insurance Plan")) {
-				hipTab=Secondtab;
-			}
-			System.out.println("Combo Tabs are Displayed - Member with multiple Plans");
-			if (PlanType.contentEquals("MA") || PlanType.contentEquals("MAPD")) {
-				if (validate(mapdTab)){
-					mapdTab.click();
-				//tbd if (validate(FirstTab)){
-					//tbd FirstTab.click();
-					//Assert.assertTrue("Cant navigate to MA / MAPD Plan Tab", memberMaterialsfield.isDisplayed());
-					System.out.println("*************Displaying Medicare Advantage Plan Tab **********");
-					return true;
-				}
-			}
-			
-			else if (PlanType.contentEquals("SHIP")) {
-				if (validate(medsuppTab)){
-					medsuppTab.click();
-				//tbd if (validate(Secondtab)){
-					//tbd Secondtab.click();
-					//Assert.assertTrue("Cant navigate to Med Supp PlanTab Plan Tab", MemberIDcardField.isDisplayed());
-					System.out.println("*************Displaying SHIP - Med Supp Plan Tab Plan Tab **********");
-					return true;
-				}
-				else if (validate(Secondtab)){
-					Secondtab.click();
-					//Assert.assertTrue("Cant navigate to HIP Plan Tab", MemberIDcardField.isDisplayed());
-					System.out.println("*************Displaying SHIP - HIP Plan Tab **********");
-					return true;
-				}
-				else {
-					System.out.println("*************No SHIP Plans available for this Member **********");
-					return false;
-				}
-			}
+		Assert.assertTrue("PROBLEM: test user doesn't have combo plans, please select applicable user",ComboTabs.size() >1);
 
-			else if (PlanType.contentEquals("HIP")) {
-				if (validate(hipTab)){
-					hipTab.click();
-				//tbd if (validate(Secondtab)){
-					//tbd Secondtab.click();
-					//Assert.assertTrue("Cant navigate to HIP Plan Tab", MemberIDcardField.isDisplayed());
-					System.out.println("*************Displaying SHIP - HIP Plan Tab **********");
-					return true;
-				}
-				
+		//note: determine which tab is for what
+		WebElement mapdTab=null;
+		WebElement medsuppTab=null;
+		WebElement pdpTab=null;
+		WebElement ssupTab=null;
+		WebElement hipTab=null;
+		for(WebElement tab: ComboTabs) {
+			if (tab.getText().contains("MEDICARE SUPPLEMENT INSURANCE PLAN")) {
+				medsuppTab=tab;
+			} else if (tab.getText().contains("MEDICARE ADVANTAGE")) {
+				mapdTab=tab;
+			} else if (tab.getText().contains("Prescription Drug Plan") && !tab.getText().contains("MEDICARE ADVANTAGE")) {
+				pdpTab=tab;
+			} else if (tab.getText().contains("Senior Supplement Plan")) {
+				ssupTab=tab;
+			} else if (tab.getText().contains("Hospital Indemnity Insurance Plan")) {
+				hipTab=tab;
 			}
-			else if (PlanType.contentEquals("PDP")) {
-				//tbd if (validate(FirstTab)){
-					//tbd FirstTab.click();
-				if (validate(pdpTab)){
-					pdpTab.click();
-					//Assert.assertTrue("Cant navigate to PDP Plan Tab", memberMaterialsfield.isDisplayed());
-					System.out.println("*************Displaying PDP Plan Tab **********");
-					return true;
-				}
-				
+		}
+		System.out.println("Combo Tabs are Displayed - Member with multiple Plans");
+		if (PlanType.contentEquals("MA") || PlanType.contentEquals("MAPD")) {
+			if (validate(mapdTab)){
+				mapdTab.click();
+				//Assert.assertTrue("Cant navigate to MA / MAPD Plan Tab", memberMaterialsfield.isDisplayed());
+				System.out.println("*************Displaying Medicare Advantage Plan Tab **********");
+				return true;
 			}
-			else if (PlanType.contentEquals("MedSupp")) {
-				if (validate(medsuppTab)){
-					medsuppTab.click();
-				//tbd if (validate(Secondtab)){
-					//tbd Secondtab.click();
-					//Assert.assertTrue("Cant navigate to Med Supp PlanTab Plan Tab", MemberIDcardField.isDisplayed());
-					System.out.println("*************Displaying SHIP - Med Supp Plan Tab Plan Tab **********");
-					return true;
-				}
+		}
+		else if (PlanType.contentEquals("SHIP")) {
+			if (validate(medsuppTab)){
+				medsuppTab.click();
+				//Assert.assertTrue("Cant navigate to Med Supp PlanTab Plan Tab", MemberIDcardField.isDisplayed());
+				System.out.println("*************Displaying SHIP - Med Supp Plan Tab Plan Tab **********");
+				return true;
 			}
-			else if (PlanType.contentEquals("SSUP")) {
-				if (validate(ssupTab)){
-					ssupTab.click();
-				//tbd if (validate(Secondtab)){
-					//tbd Secondtab.click();
-					//Assert.assertTrue("Cant navigate to Med Supp PlanTab Plan Tab", MemberIDcardField.isDisplayed());
-					System.out.println("*************Displaying UHC Senior Supplement Plan Tab **********");
-					return true;
-				}
+			else if (validate(hipTab)){
+				hipTab.click();
+				//Assert.assertTrue("Cant navigate to HIP Plan Tab", MemberIDcardField.isDisplayed());
+				System.out.println("*************Displaying SHIP - HIP Plan Tab **********");
+				return true;
 			}
-
-			System.out.println("@@@@@@@@@@@@ Invalid Plan Type / Plan Tab not found @@@@@@@@@@@@@@");
-			return false;
-
+			else {
+				System.out.println("*************No SHIP Plans available for this Member **********");
+				return false;
+			}
+		}
+		else if (PlanType.contentEquals("HIP")) {
+			if (validate(hipTab)){
+				hipTab.click();
+				//Assert.assertTrue("Cant navigate to HIP Plan Tab", MemberIDcardField.isDisplayed());
+				System.out.println("*************Displaying SHIP - HIP Plan Tab **********");
+				return true;
+			}
+		}
+		else if (PlanType.contentEquals("PDP")) {
+			if (validate(pdpTab)){
+				pdpTab.click();
+				//Assert.assertTrue("Cant navigate to PDP Plan Tab", memberMaterialsfield.isDisplayed());
+				System.out.println("*************Displaying PDP Plan Tab **********");
+				return true;
+			}
+		}
+		else if (PlanType.contentEquals("MedSupp")) {
+			if (validate(medsuppTab)){
+				medsuppTab.click();
+				//Assert.assertTrue("Cant navigate to Med Supp PlanTab Plan Tab", MemberIDcardField.isDisplayed());
+				System.out.println("*************Displaying SHIP - Med Supp Plan Tab Plan Tab **********");
+				return true;
+			}
+		}
+		else if (PlanType.contentEquals("SSUP")) {
+			if (validate(ssupTab)){
+				ssupTab.click();
+				//Assert.assertTrue("Cant navigate to Med Supp PlanTab Plan Tab", MemberIDcardField.isDisplayed());
+				System.out.println("*************Displaying UHC Senior Supplement Plan Tab **********");
+				return true;
+			}
 		}
 
+		//note: if get here, something is wrong...
 		System.out.println("@@@@@@@@@@@@ Invalid Plan Type / Plan Tab not found @@@@@@@@@@@@@@");
 		return false;
 	}
+
 	/**
 	* @todo : displaying error messages of order plan materials for different plans
 	*/

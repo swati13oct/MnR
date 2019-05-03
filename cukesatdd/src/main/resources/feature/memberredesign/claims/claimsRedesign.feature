@@ -120,7 +120,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		#And the user validates the DownloadMyData section in redesigned site   
 		Examples: 
 		   | TID    | planType | claimPeriod    | domain | claimssystem |
-		   | 15259  | SHIP     | Last 24 months | NA     | COSMOSCLAIMS |
+		   | 15259  | SHIP     | Last 24 months | NA     | SHIPCLAIMS   |
 	
 	
 #    #need test data to execute this specific scenario
