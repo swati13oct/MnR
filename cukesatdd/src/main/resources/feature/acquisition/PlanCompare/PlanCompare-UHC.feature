@@ -1,5 +1,5 @@
 @PlanCompare
-Feature: Acq-To test PlanCompare Flows in AARP site
+Feature: Acq-To test PlanCompare Flows in UHC site
 
   @PlancompareProviderSearch
   Scenario Outline: TID: <TID> - TC01_RallyTool_Through_Plan Compare_Page
@@ -15,8 +15,8 @@ Feature: Acq-To test PlanCompare Flows in AARP site
       | TID   | zipcode | isMultutiCounty | county             |
       | 15488 |   90210 | NO              | Los Angeles County |
 
-  @PlancompareDCEUHCTest
-  Scenario Outline: Verify email plan compare plan details in AARP site
+  @PlancompareDCETest
+  Scenario Outline: Verify DCE Search from Plan Compare for UHC
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |

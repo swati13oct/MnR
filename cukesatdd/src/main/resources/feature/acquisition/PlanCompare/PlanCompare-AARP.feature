@@ -18,7 +18,7 @@ Feature: Acq-To test PlanCompare Flows in AARP site
       | 15489 |   90210 | NO              | Los Angeles County |
 
   @PlancompareDCETest
-  Scenario Outline: Verify email plan compare plan details in AARP site
+  Scenario Outline: Verify DCE Search from Plan Compare for AARP
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
@@ -35,7 +35,7 @@ Feature: Acq-To test PlanCompare Flows in AARP site
       | Frequency  | <frequency> |
     When user successfully adds drug
       | Is Branded Drug | <branded>   |
-      | Drug     | <drugName1> |
+      | Drug            | <drugName1> |
     Then user adds drug to drug cost estimator flow for the given plan name in AARP site
       | PlanName   | <planName>  |
       | Drug Name2 | <drugName2> |
@@ -50,9 +50,9 @@ Feature: Acq-To test PlanCompare Flows in AARP site
       | Drug Name3 | <drugName3> |
       | Quantity   | <quantity>  |
       | Frequency  | <frequency> |
-      When user successfully adds drug
+    When user successfully adds drug
       | Is Branded Drug | <branded>   |
-      | Drug      | <drugName3> |
+      | Drug            | <drugName3> |
     Then user adds drug to drug cost estimator flow for the given plan name in AARP site
       | PlanName   | <planName>  |
       | Drug Name4 | <drugName4> |
@@ -93,7 +93,7 @@ Feature: Acq-To test PlanCompare Flows in AARP site
       | Drug Name5 | <drugName5>    |
     And the user clicks on Back to Plans button in AARP site and Navigates to Plan Compare
     Then user validates Drug information is reflected on plan compare page in AARP
-    
+
     Examples: 
       | zipcode | isMultutiCounty | county             | drugInitials1 | branded | drugName1 | drugInitials2 | drugName2  | drugInitials3 | drugName3     | drugInitials4 | drugName4 | drugInitials5 | drugName5             | pharmacyType     | distance | pharmacyName            | plantype | planName                                          | quantity | frequency     | newPharmacyType | genericName1 | genricName3 |
-      |   90210 | NO              | Los Angeles County | lipi          | yes |  Lipitor      | dron          | dronabinol | Adva          | Advair Diskus | Orfa          | Orfadin   | Fana          | Fanapt Titration Pack | Standard Network | 15 miles | MEN'S HEALTH FOUNDATION | MAPD     | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |       30 | Every 1 month | Mail Service    | atorvastatin | fluticasone |
+      |   90210 | NO              | Los Angeles County | lipi          | yes     | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Orfa          | Orfadin   | Fana          | Fanapt Titration Pack | Standard Network | 15 miles | MEN'S HEALTH FOUNDATION | MAPD     | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |       30 | Every 1 month | Mail Service    | atorvastatin | fluticasone |
