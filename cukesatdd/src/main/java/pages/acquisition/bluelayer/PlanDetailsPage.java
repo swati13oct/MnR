@@ -818,7 +818,7 @@ public class PlanDetailsPage extends UhcDriver {
 
 	}
 
-}
+
 	public ProviderSearchPage validateLookUpYourProviderButton() {
 		// TODO Auto-generated method stub
 		validateNew(lookUpYourProviderButton);
