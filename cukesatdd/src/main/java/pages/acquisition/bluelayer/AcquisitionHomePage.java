@@ -254,6 +254,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button proactive-offer__close main-background-color second-color')]")
 	public static WebElement proactiveChatExitBtn;
+	@FindBy(xpath = "//*[@id='subnav_2']/div[1]/div/div[3]/div/h3[7]/a")
+	private WebElement providerSearchFromGlobalHeader;
+	
+	@FindBy(xpath ="//*[@id='colhowdoesthiswork_provider']/tbody/tr/td/div/a")
+	private WebElement providerSearchFromHomeScreen;
+
 
 	public JSONObject homePageDisclaimerJson;
 	public JSONObject homePageDisclaimerHideJson;
@@ -1528,5 +1534,38 @@ public class AcquisitionHomePage extends GlobalWebElements {
      	
      		return new DrugCostEstimatorPage(driver);
 	 }
+
+	public pages.acquisition.bluelayer.ProviderSearchPage clicksOnRallyToolFromGlobalHeader() {
+		// TODO Auto-generated method stub
+		
+		Actions action = new Actions(driver);
+		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
+		validateNew(providerSearchFromGlobalHeader);
+
+		switchToNewTabNew(providerSearchFromGlobalHeader);
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("werally")) {
+
+			return new pages.acquisition.bluelayer.ProviderSearchPage(driver);
+
+		}
+		return null;
+		
+	}
+
+	public pages.acquisition.bluelayer.ProviderSearchPage clicksOnRallyToolFromHomePage() {
+		validateNew(providerSearchFromHomeScreen);
+
+		switchToNewTabNew(providerSearchFromHomeScreen);
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("werally")) {
+
+			return new pages.acquisition.bluelayer.ProviderSearchPage(driver);
+
+		}
+		return null;
+	}
 
 }

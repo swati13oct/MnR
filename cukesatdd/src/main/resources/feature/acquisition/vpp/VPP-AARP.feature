@@ -87,11 +87,13 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
       | zipcode | isMultiCounty | county             | plantype | planName                                     |
       |   80001 | NO            | Los Angeles County | SNP      | UnitedHealthcare Nursing Home Plan (PPO SNP) |
 
-  @emailandprintplancompare @predators
+  @emailandprintplancompare @predators @RegressionPredators
   Scenario Outline: Verify print and email for <plantype> plan compare page in AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code | <zipcode> |
+       | Is Multi County | <isMultiCounty> |
+      | County Name     | <county>          |
     And I select all 3 plans to compare in MA and click on compare plan link
       | plan type | <plantype> |
     When the user validate the print and email link option in plan compare
@@ -99,16 +101,18 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
 
     #Then I click back to all plans button and verify that all 3 plans are still selected
     Examples: 
-      | zipcode | plantype          |
-      |   90210 | MedicareAdvantage |
-      |   90210 | PDP               |
+      | zipcode | plantype          |isMultiCounty |planName                                           |
+      |   90210 | MedicareAdvantage |NO            |AARP MedicareComplete SecureHorizons Essential (HMO) |
 
-  @emailandprintplanDetails @predators @decRelease2018
-  Scenario Outline: Verify email  plan details in AARP site
+
+
+  @emailandprintplanDetails @predators @decRelease2018 @RegressionPredators
+  Scenario Outline: Verify email and Print plan functionalities on Plan Details page in AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code | <zipcode> |
        | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
     And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
     And the user validates the available plans for selected plan types in the AARP site
@@ -118,9 +122,9 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
     Then the user validates the functionality of email and print buttons on the plan Details Page
 
     Examples: 
-      | zipcode | isMultutiCounty  |  plantype | planName                                          |
-     # |   90210 | No               |   MA       | AARP MedicareComplete SecureHorizons Essential (HMO) |
-		|   90210 | No               |   MAPD       | AARP MedicareComplete SecureHorizons Premier (HMO) |
+      | zipcode | plantype | planName                                           | isMultutiCounty |
+      |   90210 | MA       | AARP MedicareComplete SecureHorizons Essential (HMO) |  No              |
+
   @F229349 @validateEyeWearCredit @fastandfurious @Mar_release_2019
   Scenario Outline: UserStory: <UID> -plan type: <plantype> - Verify Eyewear Credit Benefits in Plan Details for provided plan
     Given the user is on AARP medicare acquisition site landing page
@@ -436,7 +440,7 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
       | 1598166 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Nursing Home Plan (PPO SNP),UnitedHealthcare Assisted Living Plan (PPO SNP)|
 
 
-  @feature-F265872 @us1603378 @vppPrintRegression @vppFavoritePlanPrintAarp @thePredators @Apr_release_2019
+  @feature-F265872 @us1603378 @vppPrintRegression @vppFavoritePlanPrintAarp @thePredators @Apr_release_2019 @RegressionPredators
   Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can invoke the print button on view plan preview page on UHC site
 	# NOTE: Uncommment the step to save plans when there is a way to validate the print preview screen content
     Given the user is on AARP medicare acquisition site landing page

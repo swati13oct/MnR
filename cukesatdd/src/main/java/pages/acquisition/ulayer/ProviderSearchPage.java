@@ -95,7 +95,7 @@ public class ProviderSearchPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
+		CommonUtility.waitForPageLoadNew(driver, continueButton, 45);
 	}
 
 	public VPPPlanSummaryPage selectsProvider(String physicianSearchCriteria,

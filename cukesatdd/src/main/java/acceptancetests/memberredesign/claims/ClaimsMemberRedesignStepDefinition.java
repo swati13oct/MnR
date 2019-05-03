@@ -1,5 +1,6 @@
 package acceptancetests.memberredesign.claims;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -122,7 +123,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	
 	@When("^I navigate to the claims Summary page from test harness page or dashboard$")
 	public void navigate_to_Claims_Summary_from_testharness_page() throws Throwable {
-	if (MRScenario.environmentMedicare.equalsIgnoreCase("team-h"))
+	if (MRScenario.environmentMedicare.equalsIgnoreCase("team-h") || "YES".equalsIgnoreCase(MRScenario.isTestHarness))
 	{
 		TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
 		System.out.println("Now clicking on Claims Tab from the test harness page to go to Claims Page");
@@ -857,9 +858,16 @@ public class ClaimsMemberRedesignStepDefinition {
 	 */
 	@And("^I navigate to the Claim Details page in AARP site for COMBO member$")	
 	public void i_navigate_to_member_redesign_claim_details_page_COMBOMember()  {
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		ClaimDetailsPage newClaimDetailsPage = accountHomePage.navigateToClaimDetailsPageCombo();
-		getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
+		//if from testharness, go from summary page
+		ClaimDetailsPage newClaimDetailsPage;
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
+			newClaimDetailsPage=claimSummarypage.navigateToClaimDetailsPage();
+		} else {
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			newClaimDetailsPage = accountHomePage.navigateToClaimDetailsPageCombo();
+			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
+		}
 		if(newClaimDetailsPage  != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
 		
@@ -1187,6 +1195,31 @@ public class ClaimsMemberRedesignStepDefinition {
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
 	}
 
+	@And("^the user custom search claims for over two years time interval from current date in redesigned site$")
+	public void greaterThanTwoYears_custom_search_claims_redesigned_site(DataTable memberAttributes) throws InterruptedException{
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), 
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String planType=memberAttributesMap.get("Plan Type");
+
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		Calendar calendar = Calendar.getInstance();
+		Date currentDate=calendar.getTime();
+		String toDate = dateFormat.format(currentDate);
+		System.out.println("current date="+toDate);
+		calendar.add(Calendar.YEAR, -2);
+		calendar.add(Calendar.DATE, -1);
+		Date twoYearsAndOneDayBackFromCurrentDate=calendar.getTime();
+		String fromDate = dateFormat.format(twoYearsAndOneDayBackFromCurrentDate);
+		System.out.println("2 yrs and 1 day ago date="+fromDate);
+
+		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
+		newClaimsSummaryPage.searchClaimsByTimeInterval(planType, fromDate,toDate);
+		if(newClaimsSummaryPage != null)
+			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
+	}
 	
 	@Then("^the user should be able to see the from date is greater than the to date error message being displayed$")
 	public void validateToDateInvalidErrorMessage(DataTable memberAttributes){
@@ -1288,9 +1321,15 @@ public class ClaimsMemberRedesignStepDefinition {
 	//^^^ note: added for def1041	
 	@When("^I navigate to the Claim details page to see view as pdf EOB$")	
 	public void i_navigate_to_the_claim_detailspage_for_eob_pdf(){
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		
-		ClaimDetailsPage newClaimDetailsPage = accountHomePage.navigateToClaimDetailsPagetoseeeobpdflink();
+		ClaimDetailsPage newClaimDetailsPage;
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
+			newClaimDetailsPage=claimSummarypage.navigateToClaimDetailsPage();
+		} else {
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			
+			newClaimDetailsPage = accountHomePage.navigateToClaimDetailsPagetoseeeobpdflink();
+		}
 		System.out.println("claims-============"+newClaimDetailsPage);
 		
 		//getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
@@ -1310,6 +1349,23 @@ public class ClaimsMemberRedesignStepDefinition {
 		claimsdetailspage.validateMedicalEOBfordifferentDomainType(domain,planType);
 		
 		System.out.println("claims-============"+claimsdetailspage);
+	}
+	@When("^I navigate to the Claim details page to see eoblink on details page$")	
+	public void i_navigate_to_the_eobclaims_detailspage(){
+		ClaimDetailsPage newClaimDetailsPage;
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
+			newClaimDetailsPage=claimSummarypage.navigateToClaimDetailsPagetoseeeobpdflink();
+		} else {
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			
+			newClaimDetailsPage = accountHomePage.navigateToClaimDetailsPagetoseeeobpdflink();
+		}
+		System.out.println("claims details page -============"+newClaimDetailsPage);
+		
+		//getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
+		if(newClaimDetailsPage != null)
+			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
 	}
 	
           }
