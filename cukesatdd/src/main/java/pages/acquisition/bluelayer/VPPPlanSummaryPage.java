@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
-import com.itextpdf.text.log.SysoCounter;
-import org.openqa.selenium.support.ui.Select;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
@@ -28,7 +26,6 @@ import org.openqa.selenium.support.PageFactory;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.uhcretiree.Rallytool_Page;
 import pages.acquisition.bluelayer.ComparePlansPageBlayer;
-import pages.acquisition.ulayer.ComparePlansPage;
 import pages.acquisition.ulayer.PageTitleConstants;
 //import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import pages.acquisition.bluelayer.ProviderSearchPage;
@@ -513,6 +510,28 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		@FindBy(xpath = "//span[text()='Welcome to Online Enrollment']")
 		private WebElement welcomepage;
+		
+		@FindBy(xpath = "(//*[@id='overlay'])[1]]")
+		private WebElement loadingIndicator;
+		
+		
+		
+		public WebElement getLoadingIndicator() {
+			return loadingIndicator;
+		}
+
+		public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
+			WebElement valEstimatedAnnualDrugCostValue = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@ng-show='plan.network']"));
+			return valEstimatedAnnualDrugCostValue;
+		}
+		
+		public String estimatedAnnualDrugCostVPP(String planName) {
+			
+			scrollToView(getValEstimatedAnnualDrugCostValue(planName));
+			return getValEstimatedAnnualDrugCostValue(planName).getText().trim();
+			
+			
+		}
 
 	private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
 	//^^^ note: added for US1598162	
@@ -1319,9 +1338,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public boolean validateVPPPlanSummaryPage() {
-
+		//CommonUtility.waitForElementToDisappear(driver,getLoadingIndicator(),CommonConstants.TIMEOUT_40);
+		driver.navigate().refresh(); //rectified page load issue on stage
+		
 		CommonUtility.waitForPageLoad(driver, vppTop, 30);
-
+		validateNonPresenceOfElement(getLoadingIndicator());
 		validateNew(maPlansCount);
 		validateNew(msPlansCount);
 		validateNew(pdpPlansCount);
@@ -1729,7 +1750,7 @@ public boolean validateAllPlansChecked() {
 			e.printStackTrace();
 		}
 		List<WebElement> allMAPlans = driver
-				.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]"));
+				.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]//label"));
 
 		if (allMAPlans != null) {
 			for (int i = 0; i < allMAPlans.size(); i++) {

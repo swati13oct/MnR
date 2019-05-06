@@ -1275,4 +1275,16 @@ public class DashboardFormsnResourcesStepDefinition {
 		 * System.out.println("NewWindow is null"); } }
 		 */
 	}
+	
+	@And("User clicks on Provider search link and checks if the find care page opens up")
+	public void ValidateFindCarePage() {
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+		
+		formsAndResourcesPage.validateFindCareUrl();
+		
+		
+		
+		
+	}
 }

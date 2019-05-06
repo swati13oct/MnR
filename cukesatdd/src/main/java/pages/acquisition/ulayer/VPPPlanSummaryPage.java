@@ -515,10 +515,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//button[contains(text(),'View Prescription')]")
 		private WebElement OleMS_ViewPDPPlanBtn;
 		
-		@FindBy(xpath = "( //*[contains(text(),'Annual')])[1]//following-sibling::span[2]")
-		private WebElement valEstimatedAnnualDrugCostValue;
 		
-		public WebElement getValEstimatedAnnualDrugCostValue() {
+		public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
+			WebElement valEstimatedAnnualDrugCostValue = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@ng-show='plan.network']"));
 			return valEstimatedAnnualDrugCostValue;
 		}
 
@@ -949,7 +948,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public boolean validateVPPPlanSummaryPage() {
-
+		driver.navigate().refresh(); //rectified page load issue on stage
+		CommonUtility.waitForPageLoad(driver, vppTop, 30);
 		validateNew(maPlansCount);
 		validateNew(msPlansCount);
 		validateNew(pdpPlansCount);
@@ -1139,11 +1139,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		List<WebElement> allMAPlans = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]"));	
+		List<WebElement> allMAPlans = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]//label"));	
 
 		if(allMAPlans !=null){
 			for(int i = 0; i<allMAPlans.size(); i++){
 				allMAPlans.get(i).click();
+				System.out.println("Plan added to compare");
 			}
 		}
 
@@ -1450,7 +1451,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		if (plantype.equalsIgnoreCase("MedicareAdvantage"))
 		{
+			
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 			List<WebElement> compareLinks = driver.findElements(By.xpath(".//*[@id='plan-list-1']//button[contains(text(),'Compare plans')]"));	
+			
 			compareLinks.get(1).click();	
 		}else{
 			WebElement compareLinks2 = driver.findElement(By.xpath("(.//*[@id='plan-list-3']//button[contains(text(),'Compare plans')])[1]"));	
@@ -1462,6 +1471,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
 		}
 		if(currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPage(driver);
@@ -1803,12 +1813,24 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 
 	public pages.acquisition.dce.ulayer.DrugCostEstimatorPage navigatetoDCEPage(String planName){
-		WebElement DCELink = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//*[contains(text(), 'Prescription Drugs, Tier 1')]/span)[2]"));
+		WebElement DCELink = driver.findElement(By.xpath("(//*[contains(text(),'" + planName + "')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(), 'Prescription Drugs, Tier 1')]/span)[2]"));
 		DCELink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if(driver.getCurrentUrl().contains("drug-cost-estimator")){
 			System.out.println("DCE Page is loaded");
 			return new pages.acquisition.dce.ulayer.DrugCostEstimatorPage(driver);
+		}	
+		else
+			return null;  
+	}
+	/* Navigation to DCE for all plan types having a plan name*/
+	public DrugCostEstimatorPage navigatetoDCEVPP(String planName){
+		WebElement DCELink = driver.findElement(By.xpath("(//*[contains(text(),'" + planName + "')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(), 'Prescription Drugs, Tier 1')]/span)[2]"));
+		DCELink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if(driver.getCurrentUrl().contains("drug-cost-estimator")){
+			System.out.println("DCE Page is loaded");
+			return new DrugCostEstimatorPage(driver);
 		}	
 		else
 			return null;  
@@ -2648,6 +2670,17 @@ for (int i = 0; i < initialCount + 1; i++) {
 		else
 			return null;
 	}
+	
+	public String estimatedAnnualDrugCostVPP(String planName) {
+		
+		scrollToView(getValEstimatedAnnualDrugCostValue(planName));
+		return getValEstimatedAnnualDrugCostValue(planName).getText().trim();
+		
+		
+	}
+
+	
+	
 }
 
 
