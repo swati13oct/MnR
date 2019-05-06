@@ -35,7 +35,7 @@ Feature: 1.15-VBF-Acq-To test Provider Search Flow  in UMS site
       | 15488 |   90210 | NO              | Los Angeles County |
       
       
-     @ProviderSearchFromGlobalHeaderBlayer  
+     @ProviderSearchFromGlobalHeaderBlayer  @AcqRegressionProviderSearchBlayer
   Scenario Outline: Verify Provider Search  in UHC site from Global Header
     Given the user is on the uhcmedicaresolutions site landing page
     When the user clicks on Provider Search on the global header on UHC site
@@ -48,7 +48,7 @@ Feature: 1.15-VBF-Acq-To test Provider Search Flow  in UMS site
       | zipcode | planname                                          |
       |   90002 | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |
 
-  @ProviderSearchFromVppPlanSummaryPageBlayer
+  @ProviderSearchFromVppPlanSummaryPageBlayer @AcqRegressionProviderSearchBlayer
   Scenario Outline: Verify Provider Search  in UHC site from plan summary page
        Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -69,7 +69,7 @@ Feature: 1.15-VBF-Acq-To test Provider Search Flow  in UMS site
 
 
 
-  @ProviderSearchFromVppPlanDetailsPageBlayer
+  @ProviderSearchFromVppPlanDetailsPageBlayer @AcqRegressionProviderSearchBlayer
   Scenario Outline: Verify Provider Search  in UHC site from Plan Details page
      Given the user is on the uhcmedicaresolutions site landing page
      When the user performs plan search using following information in UMS site
@@ -89,7 +89,7 @@ Feature: 1.15-VBF-Acq-To test Provider Search Flow  in UMS site
       | zipcode | isMultutiCounty | county             | plantype | planName                                          |
       |   90210 | NO              | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Essential (HMO)|
 
-  @ProviderSearchFromHomePageBlayer
+  @ProviderSearchFromHomePageBlayer @AcqRegressionProviderSearchBlayer
   Scenario Outline: Verify Provider Search  in UHC site from Home Page
      Given the user is on the uhcmedicaresolutions site landing page
     When the user clicks on Provider Search on the Home Page on UHC Site
