@@ -1308,7 +1308,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		List<WebElement> allPDPPlans = driver
-				.findElements(By.xpath(".//*[@id='plan-list-3']//label[contains(text(),'Add to compare')]"));
+				.findElements(By.xpath(".//*[@id='plan-list-3']//label[contains(text(),'Add to compare')]//label"));
 		
 		if (allPDPPlans != null) {
 			for (int i = 0; i < allPDPPlans.size(); i++) {
