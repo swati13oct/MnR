@@ -13,7 +13,7 @@ import cucumber.api.CucumberOptions;
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDPerformanceAcquisitionUlayerPharmacyLocator.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDPerformanceAcquisitionUlayerPharmacyLocator")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/pharmacylocator" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDPerformanceAcquisitionUlayerPharmacyLocator.json" }, tags = { "@pharmacyLocatorUlayerSmoke" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDPerformanceAcquisitionUlayerPharmacyLocator.json" }, tags = { "@pharmacyLocatorPerformanceUlayer" })
 public class RunMRATDDPerformanceAcquisitionUlayerPharmacyLocator {
 
 }
