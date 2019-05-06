@@ -24,6 +24,7 @@ Feature:P1.5 To test order materials in Redesign site
       | 15292 | PDP      | AARPIndividual_order | Welcome Guide       |
       | 15293 | SHIP     | AARPIndividual_order | Claims Envelope     |
 
+  #note: for SHIP user to get this error, user must have signed up for EFT i.e. recurring payments
   @orderPlanMaterials2 @ValidateSHIPErrorMessage @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -option <option> - Verify SHIP Invalid selection Order Materials Page Error Message
      Given login with following details logins in the member portal and validate elements
@@ -58,7 +59,8 @@ Feature:P1.5 To test order materials in Redesign site
       | 15290 | PDP      | UHCGroup_order      | Welcome Guide       |
       | 15289 | MAPD     | UHCGroup_order      | Replacement ID card |
 
- @orderPlanMaterials4 @ValidateHeaderComboTabs @regressionMember 
+ #note: in comboPlans column, the order of the planTypes should follow the same as tabs order in the order plan materials page 	
+ @orderPlanMaterials4 @ValidateHeaderComboTabs @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Aarp Order Materials Page Header - All Combo Plan Types
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -70,7 +72,7 @@ Feature:P1.5 To test order materials in Redesign site
     And user Validates Page Header and Sub-Header text
     Examples: 
     | TID   | planType | memberType            | comboPlans   |
-    | 15281 | MAPD	   | MAPDwithMedSupp_order | MAPD,MedSupp | 
+    | 15281 | MAPD	   | MAPDwithMedSupp_order | MedSupp,MAPD | 
     | 15291 | SSUP     | PDPwithSSUP_order	   | PDP,SSUP	  |
 
  @orderPlanMaterials5 @TerminatedMemberNegativeScenario @regressionMember

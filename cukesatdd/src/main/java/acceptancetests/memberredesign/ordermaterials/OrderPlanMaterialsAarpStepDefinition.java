@@ -300,6 +300,7 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		String PlanTypes = givenAttributesMap.get("Combo Plans");
 		String[] Plans= PlanTypes.split(",");
 		for(String currentPlan: Plans){
+			System.out.println("Current plan="+currentPlan);
 			boolean TabPresent = orderPlanMaterialsPage.navigatePlanTabs(currentPlan);
 			if(!TabPresent){
 				System.out.println("Plan Tab not displayed "+currentPlan);

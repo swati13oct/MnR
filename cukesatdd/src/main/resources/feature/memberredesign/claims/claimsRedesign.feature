@@ -120,18 +120,20 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		#And the user validates the DownloadMyData section in redesigned site   
 		Examples: 
 		   | TID    | planType | claimPeriod    | domain | claimssystem |
-		   | 15259  | SHIP     | Last 24 months | NA     | COSMOSCLAIMS |
+		   | 15259  | SHIP     | Last 24 months | NA     | SHIPCLAIMS   |
 	
-	@claims6 @TC_09claimsPHIP @regressionMember
-	Scenario Outline:  TID: <TID> -plan: <planType> -claimsSystem: <claimssystem> - To validate the Error Message for a PHIP  member on claims sumamry page
-		Given login with following details logins in the member portal and validate elements
-		  | Plan Type      | <planType>     |
-		  | Test Data Type | <claimssystem> |
-		When I navigate to the claims Summary page in redesigned site
-		And I validate the error message for a PHIP Member on the screen
-		Examples: 
-		   | TID   | planType | claimssystem |
-		   | 15258 | PHIP     | SHIPCLAIMS   |
+	
+#    #need test data to execute this specific scenario
+#	 @claims6 @TC_09claimsPHIP 
+#	 Scenario Outline:  TID: <TID> -plan: <planType> -claimsSystem: <claimssystem> - To validate the Error Message for a PHIP  member on claims sumamry page
+#	 Given login with following details logins in the member portal and validate elements
+#	   | Plan Type      | <planType>     |
+#	   | Test Data Type | <claimssystem> |
+#	 When I navigate to the claims Summary page in redesigned site
+#	 And I validate the error message for a PHIP Member on the screen
+#	 Examples: 
+#	   | TID   | planType | claimssystem |
+#	   | 15258 | PHIP     | SHIPCLAIMS   |
 	  
 #	  #This Scenario can only execute when max claims indicator as true
 #	  @MaxClaimsResultsError
@@ -589,10 +591,8 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | Claims To Date   | 01/02/2018          |
 		Then the user should be able to see the from date is greater than the to date error message being displayed
 		  | Plan Type        | <planType>          |
-		And the user custom search claims for the following invalid time interval in redesigned site
+		And the user custom search claims for over two years time interval from current date in redesigned site
 		  | Plan Type        | <planType>          |
-		  | Claims From Date | 01/02/2016          |
-		  | Claims To Date   | 01/02/2019          |
 		Then the user should be able to see the search range is greater than two years error
 		  | Plan Type        | <planType>          |
 		#----------------- Final Test claims number makes sense from search periods --------------
@@ -646,7 +646,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	@claims00_10 @claims00_PCP @claims00_COSMOS_DRUG
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
-	  |10    |1041| PCP      | COSMOS | COSMOSCLAIMS                 | Prescription drug | Yes                 |
+	  |10    |1041| PCP      | COSMOS | D_COSMOSCLAIMS                 | Prescription drug | Yes                 |
 
 	@claims00_11 @claims00_MEDICA @claims00_COSMOS_MEDICAL
 	Examples: 
@@ -716,7 +716,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
       | Plan Type    | <planType>    |
       | Claim Period | <claimPeriod> |
     Then I can see the claims displayed based on the selection in redesigned site
-    When I navigate to the Claim details page to see view as pdf EOB
+    When I navigate to the Claim details page to see eoblink on details page
     Then I can vdate the view as pdf link on claims details page header
       | Plan Type    | <planType>    |
       | Domain       | <domain>      |
