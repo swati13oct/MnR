@@ -68,29 +68,9 @@ Feature: C1.2To test Profile and Preferences page
         | 00000  | PDP      | PDP_AARP_GOGreen_Profilepref   |
 	  
 	
-       @accountProfile4 @CommunicationPreferences
-  Scenario Outline:  TID: <TID> -User Type: <userType> - To verify Communication Preferences section
-    Given login with following details logins in the member portal and validate elements
-      | User Type | <userType> |
-    When the user navigates to Profile and Preferences page
-    Then the user validates Communication Preferences section
-	Then the user validates the presence of Communication preferences header                                   
-    Then the user validates headers on green page                                                              
-    Then the user validates the presence of Plan Name                                                         
-    And the user validates Go paperless button and on clicking button go green page should come
-	Then the user validates the I have read checkbox and check it                                            
-    Then the user validates the Save Preferences Button                                                       
-    Then the user validates the presence of Back to Profile and Preferences links                              
-	 Examples: 
-      |  TID    | userType                       |
-      | 15311   | MAPD_AARP_GOGreen_Profilepref  |
-      | 15312   | MA_AARP_GOGreen_Profilepref    |
-      | 15313   | PDP_AARP_GOGreen_Profilepref   |
+     
 	
-	
-	
-	
-	@accountProfile5 @US957739 @regressionMember
+	@accountProfile4 @US957739 @regressionMember
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To verify  the sections on Profile and Preferences page for a NOKIA member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -108,7 +88,7 @@ Feature: C1.2To test Profile and Preferences page
 	
 	
 	
-	  @accountProfile6 @regressionPCPMedica @regressionMember 
+	  @accountProfile5 @regressionPCPMedica @regressionMember 
     Scenario Outline:  TID: <TID> -User Type: <userType> -Member Type: <memberType> -To test end to end regression scenario for account profile page for PCP medica members
     Given login with following details logins in the member portal and validate elements
       | User Type | <userType> |
@@ -137,7 +117,7 @@ Feature: C1.2To test Profile and Preferences page
 	
 	
 	 
-	  @accountProfile7  @regressionAccountProf&Pref  @regressionMember 
+	  @accountProfile6  @regressionAccountProf&Pref  @regressionMember 
   Scenario Outline:  TID: <TID> -User Type: <userType> -Member Type: <memberType> - To test end to end regression scenario for account profile page aarp member
     Given login with following details logins in the member portal and validate elements
       | User Type   | <userType>   |
@@ -167,28 +147,12 @@ Feature: C1.2To test Profile and Preferences page
      | 15083   | MAPD_AARPIndividual | AARP_ProfilePref      |
 	
 	
-	 
-	 @accountProfile8 @goGreen @regressionMember
-  Scenario Outline:  TID: <TID> -User Type: <userType> -To verify Edit preferences section for Go Green
-    Given login with following details logins in the member portal and validate elements
-      | User Type | <userType> |
-    When the user navigates to Profile and Preferences page
-    And the user clicks on edit preferences link and validates the page
-    Then the user changes the online preference and saves the change
 
-    Examples: 
-      |  TID    | userType                       |
-      | 15311   | MAPD_AARP_GOGreen_Profilepref  |
-      | 15312   | MA_AARP_GOGreen_Profilepref    |
-      | 15313   | PDP_AARP_GOGreen_Profilepref   |
-      | 15314   | MAPD_UHC_GOGreen_Profilepref   |
-      | 15315   | MA_UHC_GOGreen_Profilepref     |
-      | 15316   | MAPD_GROUP_GOGreen_Profilepref |
 	
 	
 #-----------------------  Below All tests are EPMP ( Non regression) tests ---------------------------------------------------	
 	
-	@accountProfile10 @EPMPProfilePage
+	@accountProfile7 @EPMPProfilePage
   Scenario Outline: To test end to end regression scenario for EPMP profile page
    #Removed from Regression as EPMP is still in the pipeline for development
     Given login with following details logins in the member portal and validate elements
@@ -202,7 +166,7 @@ Feature: C1.2To test Profile and Preferences page
       | planType | memberType  |
      # | MAPD     | EPMPEnabled |
 
-  @accountProfile11 @EPMPProfilePageContactusInformation @regressionMember @epmpfixed
+  @accountProfile8 @EPMPProfilePageContactusInformation @regressionMember @epmpfixed
   Scenario Outline: To test end to end regression scenario for EPMP profile page
   #Removed from Regression as EPMP is still in the pipeline for development
  	Given login with following details logins in the member portal and validate elements
@@ -218,7 +182,7 @@ Feature: C1.2To test Profile and Preferences page
       | planType | memberType  | dataType   |
       | MAPD     | EPMPEnabled | Individual |
 
-  @accountProfile12 @EMPMprofilePageForShip  @regressionMember
+  @accountProfile9 @EMPMprofilePageForShip  @regressionMember
   Scenario Outline: To test end to end regression scenario for EPMP profile page for ship
    #Removed from Regression as EPMP is still in the pipeline for development
     Given login with following details logins in the member portal and validate elements
@@ -233,7 +197,7 @@ Feature: C1.2To test Profile and Preferences page
       | planType |
       #| SHIP    |
 
-  @accountProfile13 @EPMPProfilePageContactusGroup  @regressionMember
+  @accountProfile10 @EPMPProfilePageContactusGroup  @regressionMember
   Scenario Outline: To test end to end regression scenario for EPMP profile page for group members
    #Removed from Regression as EPMP is still in the pipeline for development
     Given login with following details logins in the member portal and validate elements
@@ -251,7 +215,7 @@ Feature: C1.2To test Profile and Preferences page
       #| MAPD     | EPMPEnabled | group    | HealthSelectRx |
 	  
 	
-	 @accountProfile14 @profilePageForTerminated @regressionMember @epmpfixed
+	 @accountProfile11 @profilePageForTerminated @regressionMember @epmpfixed
   Scenario Outline: To test end to end regression scenario for account profile  page for a terminated member
  #Removed from Regression as EPMP is still in the pipeline for development
     Given login with following details logins in the member portal and validate elements
@@ -268,7 +232,7 @@ Feature: C1.2To test Profile and Preferences page
       | planType | memberType  | dataType   |
       | MAPD     | EPMPEnabled | Terminated |
 
-  @accountProfile15 @EPMPpreferencesForComboOnProfile  @regressionMember
+  @accountProfile12 @EPMPpreferencesForComboOnProfile  @regressionMember
   Scenario Outline: To test end to end regression scenario for account profile and preferences for a combo member
   #Removed from Regression as EPMP is still in the pipeline for development
     Given login with following details logins in the member portal and validate elements
@@ -281,16 +245,3 @@ Feature: C1.2To test Profile and Preferences page
     Examples: 
       | planType | memberType  |
      # | Combo    | EPMPEnabled |
-       #-----------------------  SHIP Preferences tests ---------------------------------------------------
-  @F220921 @CommunicationPreferences
-  Scenario Outline: TID: <TID> -User Type: <userType> - To verify Communication Preferences section for a SHIP member
-    Given login with following details logins in the member portal and validate elements
-      | User Type | <userType> |
-    When the user navigates to Profile and Preferences page
-    Then the user validates Communication Preferences section
-    Then the user clicks on edit preferences link page for ship
-    Then the user validates the headers and labels of the communication preferences section for SHIP
-
-    Examples: 
-      | TID     | userType 				 |
-      | F220921 | SHIP_ProfilePref |

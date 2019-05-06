@@ -633,7 +633,7 @@ public class VppPlanSummaryStepDefinitionAARP {
 		
 		PlanDetailsPage planDetailsPage = (PlanDetailsPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-		VPPPlanSummaryPage plansummaryPage = planDetailsPage.navigateBackToPlanSummaryPage();
+		VPPPlanSummaryPage plansummaryPage = planDetailsPage.navigateBackToPlanSummaryPageFromDetailsPage();
         //VPPPlanSummaryPage plansummaryPage = planDetailsPage.navigateBackToPlanSummaryPage(); 
 		
 		//VPPPlanSummaryPage plansummaryPage = planDetailsPage.navigateBackToPlanSummaryPage();

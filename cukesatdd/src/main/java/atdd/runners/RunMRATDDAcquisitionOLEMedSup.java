@@ -21,7 +21,7 @@ jsonReport = "target/cucumber-RunMRATDDAcquisitionOLEMedSup.json",detailedReport
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionOLEMedSup")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, 
 features = { "src/main/resources/feature/acquisition/oleMedSup" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionOLEMedSup.json" }, tags = { "@OLE_VPP_UHC_ResumeApplication" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionOLEMedSup.json" }, tags = { "@OLE_Regression" })
 public class RunMRATDDAcquisitionOLEMedSup {
 
 }
