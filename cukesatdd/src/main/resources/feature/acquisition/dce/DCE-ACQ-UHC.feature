@@ -333,3 +333,27 @@ Then user validates drug added on prescription drug benefits tab in UMS
 Examples:
 |     drug        | quantity | frequency   |branded |zipcode|plantype |            planName                            |radius|
 | Lipitor TAB 10MG|    30    |Every 1 month| yes    | 90210 |   MAPD  |AARP MedicareComplete SecureHorizons Focus (HMO)|15 miles|
+
+
+@dcePerformanceBlayer
+Scenario Outline: To go to DCE flow from Home page
+Given the user is on the uhcmedicaresolutions site landing page
+When I access the acquisition DCE tool from home page on ums site
+And I have added a drug to my drug list on ums site
+	|Drug|<drug>|
+And user selects drug details in ums site
+  |Drug|<drug>|
+  |Quantity|<quantity>|
+  |Frequency|<frequency>|
+When user successfully adds drug in ums site
+  |Is Branded Drug|<branded>|	
+  |Drug|<drug>|
+And I navigate to step2 page on ums site
+And the user selects the pharmacy tab information
+	| Zipcode	  | <zipcode> |
+	| Radius  | <radius>   |
+And I select the first pharmacy on there
+
+Examples:
+|     drug        | quantity | frequency   |branded |zipcode  |radius|
+| Lipitor TAB 10MG|    30    |Every 1 month| yes    | 90210   |15 miles|

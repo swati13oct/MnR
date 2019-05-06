@@ -123,3 +123,27 @@ Then user validates drug added on prescription drug benefits tab in AARP
 Examples:
 |     drug        | quantity | frequency   |branded |zipcode|plantype |            planName                            |radius|
 | Lipitor TAB 10MG|    30    |Every 1 month| yes    | 90210 |   MAPD  |AARP MedicareComplete SecureHorizons Focus (HMO)|15 miles|
+
+
+@dcePerformanceUlayer
+Scenario Outline: To go to DCE flow from Home page
+Given the user is on AARP medicare acquisition site landing page
+When I access the acquisition DCE tool from home page
+And I have added a drug to my drug list
+	|Drug|<drug>|
+And user selects drug details
+    |Drug|<drug>|
+    |Quantity|<quantity>|
+    |Frequency|<frequency>|
+When user successfully adds drug
+	|Is Branded Drug|<branded>|	
+	|Drug|<drug>|
+And I navigate to step2 page
+And the user selects the pharmacy tab information like miles, zipcode and pharmacy type
+	| Zipcode	  | <zipcode> |
+	| Radius  | <radius>   |
+And I select the first pharmacy
+
+Examples:
+|     drug        | quantity | frequency   |branded |zipcode  |radius|
+| Lipitor TAB 10MG|    30    |Every 1 month| yes    | 90210   |15 miles|

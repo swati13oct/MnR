@@ -459,7 +459,7 @@ Examples:
 #	|Error Message | <errorMessage> |
 #Examples:
 #	| zipcode | county             | drugInitials | drugName      |  drugDosage	    | packages | quantity | drugFrequency  | genericAvailable | brand/generic                            | pharmacyType	 	 | distance   |  pharmacyName               | plantype |planYear| planName 					                       |errorMessage                                                                                                                                   |
-=======
+
 @dcevppnonaep
 Scenario Outline: To Verify the drugs and plan summary for non AEP period
 Given the user is on the UHC medicare solutions site landing page
