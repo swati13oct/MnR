@@ -987,3 +987,24 @@ Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> 
         Examples: 
      | TID   | username  | password  | member           |
      | 00000 | qavgogine | qavgogine | q2_jun_aarp0055  |
+     
+     
+          
+     @formsAndResources23 @pcpMedicaValidationOfProviderSearch  @regressionMember
+  Scenario Outline: To validate the forms and resources page for PCP medica members Provider search link
+    Given login with following details in the member redesign portal
+       | Plan Type   | <planType>   |
+       | Member Type | <memberType> |
+    And user clicks on the view document and resources link and navigate to forms and resource page
+    | Plan Type   | <planType>|
+     | Member Type | <memberType> |   
+    And User clicks on Provider search link and checks if the find care page opens up
+    
+ 
+    Examples: 
+       |planType | memberType | 
+        |MAPD     | PCP        |
+        #|MAPD     | MEDICA  |
+        
+
+ 

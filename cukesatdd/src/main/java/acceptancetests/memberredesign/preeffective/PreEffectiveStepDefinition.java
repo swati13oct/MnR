@@ -92,31 +92,50 @@ public void verifyPreEffectiveMessageDisplayedOnTestHarnessPage() throws Throwab
 }
 
 @Given("^verify that payment tab is displayed to Preeffective member on dashboard or test harness page$")
-public void verifyPaymentsTabNotDisplayedOnDashboardHomePage() throws Throwable {
-	
-	if (MRScenario.environmentMedicare.equalsIgnoreCase("stage") & "NO".equalsIgnoreCase(MRScenario.isTestHarness))
-	{
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		
-		AccountHomePage.checkForIPerceptionModel(accountHomePage.driver);
-		accountHomePage.validatePremiumPaymentTabDisplayed();	
-		getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
-	}
-	
-	else if ((MRScenario.environmentMedicare.equalsIgnoreCase("team-h")) || (MRScenario.environmentMedicare.equalsIgnoreCase("stage") & "YES".equalsIgnoreCase(MRScenario.isTestHarness)))
-	{
-		
-		System.out.println("Now checking for Payments tab on Team-h or stage test harness page");
-		TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
-		testHarnessPage.validatePremiumPaymentTabIsDisplayed();	
-		System.out.println("Payments tab on Team-h or stage test harness page was displayed");
-		getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE, testHarnessPage);
-	}
-	else {
-		System.out.println("Not verifying that Premium payment tab is displayed as the environment is not set to team-h or Stage");
-	}
-}
+public void verifyPaymentsTabNotDisplayedOnDashboardHomePage(DataTable givenAttributes) throws Throwable {
+	/* Reading the given attribute from feature file */
+	List<DataTableRow> memberAttributesRow = givenAttributes
+			.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
 
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+				.get(0), memberAttributesRow.get(i).getCells().get(1));
+	}
+
+	String memberType = memberAttributesMap.get("Member Type");
+	/* Premium payment tab is always displayed to Individual members, therefore checking only for them*/
+	if (memberType.equalsIgnoreCase("preeffectiveIndMA")|| memberType.equalsIgnoreCase("preeffectiveIndMAPD")|| memberType.equalsIgnoreCase("preeffectiveIndPDP") || memberType.equalsIgnoreCase("preeffectiveSHIPOnly")) 
+	{	
+		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage") & "NO".equalsIgnoreCase(MRScenario.isTestHarness))
+		{
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+			
+			AccountHomePage.checkForIPerceptionModel(accountHomePage.driver);
+			accountHomePage.validatePremiumPaymentTabDisplayed();	
+			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
+		}
+		
+		else if ((MRScenario.environmentMedicare.equalsIgnoreCase("team-h")) || (MRScenario.environmentMedicare.equalsIgnoreCase("stage") & "YES".equalsIgnoreCase(MRScenario.isTestHarness)))
+		{
+			
+			System.out.println("Now checking for Payments tab on Team-h or stage test harness page");
+			TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+			testHarnessPage.validatePremiumPaymentTabIsDisplayed();	
+			System.out.println("Payments tab on Team-h or stage test harness page was displayed");
+			getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE, testHarnessPage);
+		}
+		else {
+			System.out.println("Not verifying that Premium payment tab is displayed as the environment is not set to team-h or Stage");
+		}
+	}	
+	
+	else
+	{
+		System.out.println("Premium Payments tab was not validated and the step was skipped");
+	}
+   }
+	
 @Given("^verify that payment tab is displayed to Preeffective member on test harness page$")
 public void verifyPaymentsTabNotDisplayedOnDashTestHarnessPage() throws Throwable {
 	TestHarness  testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
@@ -253,17 +272,38 @@ public void userClicksonClaimsTab() throws Throwable {
 }
 
 @Then("^verify that subnavigation is supressed on the claims page$")
-public void verifySubnavigationIsSuppressedOnClaimsPage() throws Throwable {
-	
-	ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario()
-			.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);   
-	//write code for handling iperception pop-up
-	//newclaimsSummarypage.feebackpopupClose();
-	ClaimSummarypage.checkForIPerceptionModel(newclaimsSummarypage.driver);
-	newclaimsSummarypage.validateClaimsSummarySubNavNotDisplayed();
-	newclaimsSummarypage.validateExplanationOfBenefitsSubNavNotDisplayed();
-	               
+public void verifySubnavigationIsSuppressedOnClaimsPage(DataTable givenAttributes) throws Throwable {
+	List<DataTableRow> memberAttributesRow = givenAttributes
+			.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+				.get(0), memberAttributesRow.get(i).getCells().get(1));
+	}
+
+	String memberType = memberAttributesMap.get("Member Type");
+	/* Claim Support number is not displayed to SHIP members as pert of May 1 2019 release*/
+	if (memberType.equalsIgnoreCase("preeffectiveGroupSSUP")) 
+	{
+		ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario()
+				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);   
+		ClaimSummarypage.checkForIPerceptionModel(newclaimsSummarypage.driver);
+		newclaimsSummarypage.validateClaimsSummarySubNavNotDisplayed();
+		newclaimsSummarypage.validateExplanationOfBenefitsSubNavNotDisplayedForSSUP();
+	}
+	else 
+	{
+		ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario()
+				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);   
+		//write code for handling iperception pop-up
+		//newclaimsSummarypage.feebackpopupClose();
+		ClaimSummarypage.checkForIPerceptionModel(newclaimsSummarypage.driver);
+		newclaimsSummarypage.validateClaimsSummarySubNavNotDisplayed();
+		newclaimsSummarypage.validateExplanationOfBenefitsSubNavNotDisplayed();
+	}
 }
+  
 
 @Then("^verify that claim support header with phone number in Need Help is not displayed to SHIP Pre-effective members on Claims Page$")
 public void validateClaimSupportIsNOTDisplayedOnClaimsPageForSHIPPreffective(DataTable givenAttributes)throws Throwable {

@@ -256,7 +256,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//input[@id='compare-plan-2']")
 	private WebElement mapdPlanCompare;
 
-	@FindBy(xpath =".//*[@class='popup-modal active']")
+	@FindBy(xpath =".//*[@id='vpp-monthly-premium-modal-header']/ancestor::div[contains (@class , 'popup-modal active')]")
 	private WebElement learnMoreModalPopUp;
 
 	@FindBy(xpath=".//*[@class='popup-modal active']/descendant::div[@class='modal-footer']/a[@class='cta-button close-modal']")
@@ -515,10 +515,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//button[contains(text(),'View Prescription')]")
 		private WebElement OleMS_ViewPDPPlanBtn;
 		
-		@FindBy(xpath = "( //*[contains(text(),'Annual')])[1]//following-sibling::span[2]")
-		private WebElement valEstimatedAnnualDrugCostValue;
 		
-		public WebElement getValEstimatedAnnualDrugCostValue() {
+		public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
+			WebElement valEstimatedAnnualDrugCostValue = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@ng-show='plan.network']"));
 			return valEstimatedAnnualDrugCostValue;
 		}
 
@@ -949,7 +948,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public boolean validateVPPPlanSummaryPage() {
-
+		driver.navigate().refresh(); //rectified page load issue on stage
+		CommonUtility.waitForPageLoad(driver, vppTop, 30);
 		validateNew(maPlansCount);
 		validateNew(msPlansCount);
 		validateNew(pdpPlansCount);
@@ -1139,11 +1139,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		List<WebElement> allMAPlans = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]"));	
+		List<WebElement> allMAPlans = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]//label"));	
 
 		if(allMAPlans !=null){
 			for(int i = 0; i<allMAPlans.size(); i++){
 				allMAPlans.get(i).click();
+				System.out.println("Plan added to compare");
 			}
 		}
 
@@ -1450,7 +1451,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		if (plantype.equalsIgnoreCase("MedicareAdvantage"))
 		{
+			
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 			List<WebElement> compareLinks = driver.findElements(By.xpath(".//*[@id='plan-list-1']//button[contains(text(),'Compare plans')]"));	
+			
 			compareLinks.get(1).click();	
 		}else{
 			WebElement compareLinks2 = driver.findElement(By.xpath("(.//*[@id='plan-list-3']//button[contains(text(),'Compare plans')])[1]"));	
@@ -1462,6 +1471,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
 		}
 		if(currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPage(driver);
@@ -1507,15 +1517,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public void validateAndClickAddtoCompareinAARP(String planType , String planName) throws InterruptedException {
 		if (planType.equalsIgnoreCase("MAPD")) {
 			System.out.println("Choose Plan to Compare : "+planName);
-			//WebElement addToCompare = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//input[@id='compare-plan-2']"));
-			WebElement addToCompare = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//div[@class='compare-box']/span[@class='ng-scope']"));
-			//WebElement addToCompare = driver.findElement(By.xpath("//*[contains(text(),'AARP MedicareComplete SecureHorizons Plan 1 (HMO) ')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//input[@id='compare-plan-2']"));
-			validateNew(addToCompare);
-			addToCompare.click();
+				WebElement addToCompare = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//div[contains(@class ,'compare-box')]//span[contains(@class ,'ng-scope')]/label"));
+				validateNew(addToCompare);
+				addToCompare.click();
+				
 		}
+			
 		if (planType.equalsIgnoreCase("MA")) {
 			System.out.println("Choose Plan to Compare : "+planName);
-			WebElement addToCompare = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//div[@class='compare-box']/span[@class='ng-scope']"));
+			WebElement addToCompare = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//div[contains(@class ,'compare-box')]//span[contains(@class ,'ng-scope')]/label"));
 			validateNew(addToCompare);
 			addToCompare.click();
 		}
@@ -1523,7 +1533,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if (planType.equalsIgnoreCase("PDP")) {
 			System.out.println("Choose Plan to Compare : "+planName);
 			//WebElement addToCompare = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//input[@id='compare-plan-7']"));
-			WebElement addToCompare = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//div[@class='compare-box']/span[@class='ng-scope']"));
+			WebElement addToCompare = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//div[contains(@class ,'compare-box')]//span[contains(@class ,'ng-scope')]/label"));
 			validateNew(addToCompare);
 			addToCompare.click();
 		}
@@ -1574,7 +1584,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		if (planType.equalsIgnoreCase("SNP")) {
 			//WebElement learnMoreAboutExtraHelp = driver.findElement(By.xpath("(//*[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//a[@class='inline-edit-link modal-link vpp-monthly-premium-modal'])[1]"));
-			WebElement learnMoreAboutExtraHelp = driver.findElement(By.xpath("(//*[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//a)[5]"));
+			WebElement learnMoreAboutExtraHelp = driver.findElement(By.xpath("(//*[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//a[@class='inline-edit-link modal-link vpp-monthly-premium-modal'])[1]"));
 			validateNew(learnMoreAboutExtraHelp);
 			learnMoreAboutExtraHelp.click();
 		}
@@ -1803,12 +1813,24 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 
 	public pages.acquisition.dce.ulayer.DrugCostEstimatorPage navigatetoDCEPage(String planName){
-		WebElement DCELink = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(), 'Prescription Drugs, Tier 1')]/span)[2]"));
+		WebElement DCELink = driver.findElement(By.xpath("(//*[contains(text(),'" + planName + "')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(), 'Prescription Drugs, Tier 1')]/span)[2]"));
 		DCELink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if(driver.getCurrentUrl().contains("drug-cost-estimator")){
 			System.out.println("DCE Page is loaded");
 			return new pages.acquisition.dce.ulayer.DrugCostEstimatorPage(driver);
+		}	
+		else
+			return null;  
+	}
+	/* Navigation to DCE for all plan types having a plan name*/
+	public DrugCostEstimatorPage navigatetoDCEVPP(String planName){
+		WebElement DCELink = driver.findElement(By.xpath("(//*[contains(text(),'" + planName + "')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(), 'Prescription Drugs, Tier 1')]/span)[2]"));
+		DCELink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if(driver.getCurrentUrl().contains("drug-cost-estimator")){
+			System.out.println("DCE Page is loaded");
+			return new DrugCostEstimatorPage(driver);
 		}	
 		else
 			return null;  
@@ -1928,6 +1950,9 @@ for (int i = 0; i < initialCount + 1; i++) {
 		StartPlanSelector.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("medicare-plans")) {
+			WebElement PlanSelector = driver.findElement(By.xpath("//*[@id='planSelectorTool']"));
+			CommonUtility.waitForPageLoadNew(driver, PlanSelector, 30);			
+			validateNew(PlanSelector);
 			System.out.println("Plan Selector Tool Page is displayed");
 			Assert.assertTrue(true);
 			driver.navigate().back();
@@ -2645,6 +2670,17 @@ for (int i = 0; i < initialCount + 1; i++) {
 		else
 			return null;
 	}
+	
+	public String estimatedAnnualDrugCostVPP(String planName) {
+		
+		scrollToView(getValEstimatedAnnualDrugCostValue(planName));
+		return getValEstimatedAnnualDrugCostValue(planName).getText().trim();
+		
+		
+	}
+
+	
+	
 }
 
 

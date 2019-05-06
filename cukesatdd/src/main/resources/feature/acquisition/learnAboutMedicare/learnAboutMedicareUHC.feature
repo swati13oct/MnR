@@ -25,7 +25,7 @@ Feature: 1.01-Acq-To test learn about medicare flow in UHC site
     When user clicks on learn about medicare link on uhc site
     And verifies URL, title of pages navigable from menu on uhc site
     When user clicks on learn about medicare link on uhc site
-    And verifies navigation to learn about medicare homePage on uhc site
+#    And verifies navigation to learn about medicare homePage on uhc site
 #    And verifies accessibility of links using tabkey, back button on every page navigable from homepage on uhc site
     And app navigates to medicare eligibility page on uhc site
     And verifies default value of state drop down on uhc site
@@ -44,8 +44,8 @@ Feature: 1.01-Acq-To test learn about medicare flow in UHC site
     And views plan of a particular type on uhc site
     |PlanType|<planType>|
     ##MA MS SNP PDP
-    And verifies plantype on uhc site
-    |PlanType|<planType>|
+#    And verifies plantype on uhc site
+#   |PlanType|<planType>|
 
     #TestCaseId:15524,15525,15526
     Examples: 

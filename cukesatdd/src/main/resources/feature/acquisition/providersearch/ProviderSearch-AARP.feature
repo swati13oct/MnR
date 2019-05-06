@@ -20,7 +20,7 @@ Feature: 1.16-VBF-Acq-To test Provider Search Flow  in AARP site
       | zipcode | isMultutiCounty | county             | plantype | planname                                          |
       |   90210 | NO              | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |
 
-  @ProviderSearchFromGlobalHeaderUlayer
+  @ProviderSearchFromGlobalHeaderUlayer @AcqRegressionProviderSearchUlayer
   Scenario Outline: Verify Provider Search  in AARP site from Global Header
     Given the user is on AARP medicare acquisition site landing page
     When the user clicks on Provider Search on the global header
@@ -33,7 +33,7 @@ Feature: 1.16-VBF-Acq-To test Provider Search Flow  in AARP site
       | zipcode | planname                                          |
       |   90002 | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |
 
-  @ProviderSearchFromVppPlanSummaryPageUlayer
+  @ProviderSearchFromVppPlanSummaryPageUlayer @AcqRegressionProviderSearchUlayer
   Scenario Outline: Verify Provider Search  in AARP site from plan summary page
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -52,7 +52,7 @@ Feature: 1.16-VBF-Acq-To test Provider Search Flow  in AARP site
       | zipcode | isMultutiCounty | county             | plantype | planname                                          |
       |   90210 | NO              | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |
 
-  @ProviderSearchFromVppPlanDetailsPageUlayer
+  @ProviderSearchFromVppPlanDetailsPageUlayer @AcqRegressionProviderSearchUlayer
   Scenario Outline: Verify Provider Search  in AARP site from Plan Details page
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -66,13 +66,13 @@ Feature: 1.16-VBF-Acq-To test Provider Search Flow  in AARP site
     Then the user Click on Look up your Provider button
     When user selects a provider and retuns to VPP plan details page in ulayer
     Then Verify X out of Y provider covered information is displayed on Plan Details page Ulayer
-      | PlanName | <planname> |
+   
 
     Examples: 
-      | zipcode | isMultutiCounty | county             | plantype | planname                                          |
-      |   90210 | NO              | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |
+      | zipcode | isMultutiCounty | county             | plantype | planName                                          |
+      |   90210 | NO              | Los Angeles County | MA       |AARP MedicareComplete SecureHorizons Essential (HMO)|
 
-  @ProviderSearchFromHomePageUlayer
+  @ProviderSearchFromHomePageUlayer @AcqRegressionProviderSearchUlayer
   Scenario Outline: Verify Provider Search  in AARP site from Home Page
     Given the user is on AARP medicare acquisition site landing page
     When the user clicks on Provider Search on the Home Page
@@ -85,7 +85,7 @@ Feature: 1.16-VBF-Acq-To test Provider Search Flow  in AARP site
       | zipcode | planname                                          |
       |   90002 | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |
 
-  @PlancompareProviderSearchAARP
+  @PlancompareProviderSearchAARP @AcqRegressionProviderSearchUlayer
   Scenario Outline: TID: <TID> - TC01_RallyTool_Through_Plan Compare_Page
      Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site

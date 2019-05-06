@@ -9,6 +9,8 @@ public class VPPCommonConstants {
 	public static final String ZIPCODE = "zipcode";
 	
 	public static final String COUNTY = "county";
+	
+	public static final String COUNTY_DROP_DOWN = "countyDropDwn";
 
 	public static final String VPP_PLAN_FLOW_NAME = "vppplansummary";
 
