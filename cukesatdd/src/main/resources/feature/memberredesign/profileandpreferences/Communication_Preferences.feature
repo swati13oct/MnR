@@ -2,7 +2,7 @@
 Feature: C1.2To test Profile and Preferences page 
 
 	@accountPreferences1 @CommunicationPreferences
-    Scenario Outline: TID: <TID> -User Type: <userType> - To verify Communication Preferences section
+    Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Communication Preferences section
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
     When the user navigates to Profile and Preferences page
@@ -22,7 +22,7 @@ Feature: C1.2To test Profile and Preferences page
       | 15313   | PDP_AARP_GOGreen_Profilepref   |
 	 
 	@accountPreferences2 @goGreen @regressionMember
-    Scenario Outline: TID: <TID> -User Type: <userType> -To verify Edit preferences section for Go Green
+    Scenario Outline: TID: <TID> -Plan Type: <planType> -To verify Edit preferences section for Go Green
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
     When the user navigates to Profile and Preferences page
@@ -41,9 +41,9 @@ Feature: C1.2To test Profile and Preferences page
 
     #-----------------------  SHIP Preferences tests ---------------------------------------------------
     @accountPreferences3 @F220921 @CommunicationPreferences
-    Scenario Outline: FID: <FID> -User Type: <userType> - To verify Communication Preferences section for a SHIP member
+    Scenario Outline: FID: <FID> -Plan Type: <planType> - To verify Communication Preferences section for a SHIP member
     Given login with following details logins in the member portal and validate elements
-      | Plan Type | <userType> |
+      | Plan Type | <planType> |
     When the user navigates to Profile and Preferences page
     Then the user validates Communication Preferences section
     Then the user clicks on edit preferences link page for ship
