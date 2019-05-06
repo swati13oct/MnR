@@ -1153,7 +1153,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public ComparePlansPage clickOnCompareLink(){
 		List<WebElement> compareLinks = driver
-				.findElements(By.xpath(".//*[@id='plan-list-1']//button[contains(text(),'Compare plans')]"));
+				.findElements(By.xpath(".//span[contains(@class,'added-text show')]//button[contains(text(),'Compare plans')]"));
 		compareLinks.get(1).click();
 		try {
 			Thread.sleep(6000);
