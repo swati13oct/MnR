@@ -637,11 +637,17 @@ public class AccountHomePage extends UhcDriver {
 			System.out.println("user is on Stage login page");
 			if (driver.getCurrentUrl().contains("/dashboard")) {
 				CommonUtility.waitForPageLoad(driver, acctProfile, 9);
-				acctProfile.click();
-				acctSetting.click();
+				if (validate(acctProfile)) {
+					acctProfile.click();
+					acctSetting.click();
+				} else {
+					//check to see if link is inside shadow-root element
+					locateAndClickElementWithinShadowRoot(shadowRootHeader, "#dropdown-toggle-2 > span > span:nth-child(2)");	
+					locateAndClickElementWithinShadowRoot(shadowRootHeader, "#dropdown-options-2 > a:nth-child(3) > span");	
+				}
+				Thread.sleep(6000);	   
 				System.out.println("title is " + driver.getTitle());
 				System.out.println("Current Url is " + driver.getCurrentUrl());
-				Thread.sleep(6000);	   
 				if (driver.getCurrentUrl().contains("profile")) {
 					return new ProfileandPreferencesPage(driver);
 				}
