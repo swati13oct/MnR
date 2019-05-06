@@ -1139,11 +1139,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		List<WebElement> allMAPlans = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]"));	
+		List<WebElement> allMAPlans = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]//label"));	
 
 		if(allMAPlans !=null){
 			for(int i = 0; i<allMAPlans.size(); i++){
 				allMAPlans.get(i).click();
+				System.out.println("Plan added to compare");
 			}
 		}
 
@@ -1450,7 +1451,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		if (plantype.equalsIgnoreCase("MedicareAdvantage"))
 		{
+			
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 			List<WebElement> compareLinks = driver.findElements(By.xpath(".//*[@id='plan-list-1']//button[contains(text(),'Compare plans')]"));	
+			
 			compareLinks.get(1).click();	
 		}else{
 			WebElement compareLinks2 = driver.findElement(By.xpath("(.//*[@id='plan-list-3']//button[contains(text(),'Compare plans')])[1]"));	
@@ -1462,6 +1471,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
 		}
 		if(currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPage(driver);

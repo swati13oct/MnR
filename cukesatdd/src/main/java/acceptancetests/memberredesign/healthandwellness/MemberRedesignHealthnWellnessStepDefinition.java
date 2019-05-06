@@ -12,7 +12,9 @@ import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.When;
+import pages.regression.claims.ClaimSummarypage;
 import pages.regression.healthandwellness.HealthAndWellnessPage;
+import pages.regression.testharness.TestHarness;
 /**
  * Functionality : Covers step definition methods related to member redesign Health and Wellness page .
  */
@@ -36,8 +38,9 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 			return;
 		}
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
-			System.out.println("Running with testharness, skip validating dashboard header step");
-			return;
+			System.out.println("Running with testharness, go to secondary page like claims then go ot H&W tab");
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+			testHarness.navigateToClaimsSummaryFromTestHarnessPage();
 		}
 		// Express the Regexp above with the code you wish you had
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
