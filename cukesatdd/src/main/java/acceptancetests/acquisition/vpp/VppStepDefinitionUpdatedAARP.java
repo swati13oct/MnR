@@ -10,7 +10,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.bluelayer.ComparePlansPageBlayer;
+
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.ComparePlansPage;
@@ -19,6 +19,7 @@ import pages.acquisition.ulayer.FindCarePage;
 import pages.acquisition.ulayer.MultiCountyModalPage;
 import pages.acquisition.ulayer.OurPlansPage;
 import pages.acquisition.ulayer.PlanDetailsPage;
+import pages.acquisition.ulayer.ProviderSearchPage;
 import pages.acquisition.ulayer.RequestHelpAndInformationPage;
 import pages.acquisition.ulayer.RequestMailedInformation;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
@@ -74,6 +75,8 @@ public class VppStepDefinitionUpdatedAARP {
 	@When("^the user performs plan search using following information in the AARP site$")
 	public void zipcode_details_in_aarp_site(DataTable givenAttributes) {
 
+		
+		
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -847,7 +850,8 @@ public void user_navigates_to_plan_details_page(DataTable givenAttributes) {
 			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 	String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-	PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(PlanName, planType);
+	System.out.println("Plan name is "+ PlanName+"Plan type is "+planType);
+	PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(PlanName,planType);
 	if (vppPlanDetailsPage != null) {
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
 		Assert.assertTrue(true);
@@ -861,7 +865,12 @@ public void user_Clicks_on_Look_upyourProvider_button_on_PlanDetailsPage() {
 
 	PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
 			.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-	vppPlanDetailsPage.validateLookUpYourProviderButton();
+	
+	ProviderSearchPage providerSearchPage = vppPlanDetailsPage.validateLookUpYourProviderButton();
+	if(providerSearchPage!=null) {
+		getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
+	}
+	
 }
 
 	/**

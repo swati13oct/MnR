@@ -487,6 +487,7 @@ public class ClaimDetailsPage extends UhcDriver{
 	 * @toDo: Validate learnMoreCostLink
 	 */
 	public void learnMoreCostLink(){  
+		CommonUtility.waitForPageLoad(driver, learnmoreCost, 10);
 		Assert.assertTrue("PROBLEM - unable to locate the Learn More link on detail page", validate(learnmoreCost));
 		System.out.println("Learm more cost break down link is seen" +learnmoreCost.isDisplayed());
 		learnmoreCost.click();		
@@ -568,9 +569,10 @@ public class ClaimDetailsPage extends UhcDriver{
 	System.out.println("claimsHistoryLink.isDisplayed==>"+claimsHistoryLink.isDisplayed());
 	claimsHistoryLink.click();
 	*/
+		CommonUtility.waitForPageLoad(driver, historylink, 10);
 		Assert.assertTrue("PROBLEM - unable to locate claims summary page link",validate(historylink));
 		historylink.click();
-		CommonUtility.waitForPageLoadNew(driver, claimsSummaryHeader, 5);
+		CommonUtility.waitForPageLoad(driver, claimsSummaryHeader, 5);
 		Assert.assertTrue("PROBLEM - unable to navigate from details page to summary page", driver.getCurrentUrl().contains("/overview"));
 		System.out.println("The member has navigated from details page to Summary page ---------->"+driver.getCurrentUrl());
 	}

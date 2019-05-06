@@ -5,6 +5,7 @@ package pages.regression.benefitandcoverage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
@@ -4219,24 +4220,33 @@ public class BenefitsAndCoveragePage extends UhcDriver {
             }
 
 			public void validate_provider_search_link() {
-				
+				driver.navigate().to("https://stage-mymedicareaccount.uhc.com/pcp/member/benefits/overview.html");
 				waitforElement(providersearchlink);
 				validateNew(providersearchlink);
-				ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-				tabs.size();
-				System.out.println("hi");
-				if(tabs.size()==1)
-				{
-				System.out.println("user is on benefits overview page");
+				
+				String ParentWindow = driver.getTitle();
 				providersearchlink.click();
-				driver.switchTo().window(tabs.get(2));
 				try {
-					Thread.sleep(5000);
+					Thread.sleep(60000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				}
+				Set<String> handles1 = driver.getWindowHandles();
+				for (String windowHandle : handles1) {
+					if (!windowHandle.equals(ParentWindow)) {
+						driver.switchTo().window(windowHandle);
+						String title = driver.getTitle();
+						System.out.println("Window title is : " + title);
+						if (title.contains("Medical | Find Care")) {
+							System.out.println("user is on provider search page");							
+							break;
+						}
+					} else {
+						System.out.println("Not found Expected window");
+						driver.switchTo().window(ParentWindow);
+					}
+
 			}
 
-}
+}}
