@@ -25,6 +25,7 @@ import com.thoughtworks.selenium.webdriven.commands.Click;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.regression.contactus.ContactUsPage;
 //import junit.framework.Assert;
 import pages.regression.footer.FooterPage;
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
@@ -38,9 +39,12 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy(xpath = ".//*[@id='globalContentIdForSkipLink']/div[3]/div[1]/div/div/div/div/div/p")
 	private WebElement messageForPreeffective;
 	
-	@FindBy(xpath = "//p[contains(text(),'1-866-254-3132')]")
+	@FindBy(xpath = "//p[contains(@ng-if, 'preEffective == true')]")
 	public WebElement preEffectiveTechSupportNumber;
 
+	@FindBy(xpath = "//a[@id = 'contactUsAtdd']")
+	public WebElement ContactUsLink;
+	
 	@FindBy (xpath=".//*[@id='MA']")
 	private WebElement MA;
 
@@ -1544,12 +1548,12 @@ public void TBR_NavigateToClaimsPage(){	//tbd-remove whole method
 			}
 			
 			
-			public void verifyCorrectTechSupportNumberForPreEffectiveMembers() throws InterruptedException 
+			public void verifyCorrectTechSupportNumberForPreEffectiveMembers(String technicalPhNo) throws InterruptedException 
 			{
 				
 			    System.out.println("Now checking for Tech Support Number for Pre-effective members on claims page");
 			    System.out.println("The Tech Support phone number displayed on screen is "+preEffectiveTechSupportNumber.getText());
-				Assert.assertEquals(preEffectiveTechSupportNumber.getText(),"1-866-254-3132");
+				Assert.assertEquals(preEffectiveTechSupportNumber.getText(),technicalPhNo);
 				System.out.println("Assert for correct Tech Suppport Phone Number on claims page was passed");
 				
 			}
@@ -2288,4 +2292,19 @@ public void TBR_NavigateToClaimsPage(){	//tbd-remove whole method
 
              }
 			//^^^ note:	added for def1041			
+
+			public ContactUsPage ClickContactUs_NavigateToContactUsPage() {
+				System.out.println("Now clicking on Contact Us link in Claims Page");
+				ContactUsLink.click();
+				System.out.println("Now waiting for 10 seconds");
+				try {
+					Thread.sleep(10000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				String title = driver.getTitle();
+				System.out.println("Now user is on this page:" + title);
+				return new ContactUsPage(driver);
+			}
 }

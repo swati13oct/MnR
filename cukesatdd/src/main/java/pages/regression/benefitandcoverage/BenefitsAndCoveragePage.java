@@ -58,7 +58,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                @FindBy(xpath = "//a[contains(text(),'VIEW PLAN DOCUMENTS')]/ancestor::p/preceding-sibling::p")
                private WebElement messageForPreeffective;
 
-               @FindBy(xpath = "//p[contains(text(),'1-866-254-3132')]")
+               @FindBy(xpath = "//p[contains(@ng-if, 'preEffective == true')]")
                public WebElement preEffectiveTechSupportNumber;
                
                @FindBy(xpath = "//p[contains(text(),'1-800-523-5880')]")
@@ -3717,12 +3717,12 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                               
                }
 
-               public void verifyCorrectTechSupportNumberForPreEffectiveMembers() throws InterruptedException 
+               public void verifyCorrectTechSupportNumberForPreEffectiveMembers(String technicalPhNo) throws InterruptedException 
                {
 
                               System.out.println("Now checking for Tech Support Number for Pre-effective members");
                               System.out.println("The Tech Support phone number displayed on screen is "+preEffectiveTechSupportNumber.getText());
-                              Assert.assertEquals(preEffectiveTechSupportNumber.getText(),"1-866-254-3132");
+                              Assert.assertEquals(preEffectiveTechSupportNumber.getText(),technicalPhNo);
                               System.out.println("Assert for correct Tech Suppport Phone Number  was passed");
 
                }

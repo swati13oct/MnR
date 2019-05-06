@@ -41,10 +41,12 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath = "//a[@href = 'tel:1-800-721-0627']")
 	private WebElement staticTFN; 
 	
+	@FindBy(xpath=  "//a[contains(@ng-href,'tel:')]") 
+	private WebElement preEffectiveTechSupportNumber;
 		
 	@FindBy(xpath=  "//*[@id='cardslideID']/a[1]") 
 	private WebElement getStartedButton;
-
+	
 	@FindBy(id = "message-cancel")
 	private WebElement cancelLink;
 	
@@ -755,6 +757,21 @@ public class ContactUsPage extends UhcDriver{
 			System.err.println("Connector Model TFN dsiplayed    >" +connectorModelTFN.isDisplayed() );
 			
 		}
+	}
+
+	public void verifyCorrectTechSupportNumberForPreEffectiveMembers(String technicalPhNo) {
+		
+	    System.out.println("Now checking for Tech Support Number for Pre-effective members on claims page");
+	    System.out.println("The Tech Support phone number displayed on screen is "+preEffectiveTechSupportNumber.getText());
+	    boolean TFNvalidation = true;
+	    if(preEffectiveTechSupportNumber.getText().contains(technicalPhNo)){
+	    	TFNvalidation = true;
+	    }
+	    else
+	    	TFNvalidation=false;
+	    Assert.assertTrue("Extected TFN is not dispalyed", TFNvalidation);
+		System.out.println("Assert for correct Tech Suppport Phone Number on claims page was passed");
+		
 	}
 
 }

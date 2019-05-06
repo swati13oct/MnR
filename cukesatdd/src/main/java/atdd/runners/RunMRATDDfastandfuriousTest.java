@@ -17,7 +17,7 @@ jsonReport = "target/cucumber-RunMRATDDfastandfuriousTest.json",detailedReport =
 	overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDfastandfuriousTest")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign" }, plugin = {"pretty", "html:reports/test-report", 
-		"json:target/cucumber-RunMRATDDfastandfuriousTest.json" }, tags = { "@MemberAuth_Payments"})
+		"json:target/cucumber-RunMRATDDfastandfuriousTest.json" }, tags = { "@F296012"})
 public class RunMRATDDfastandfuriousTest {
 //@MedicalDeductibleCards
 }

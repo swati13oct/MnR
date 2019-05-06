@@ -127,3 +127,44 @@ Feature: To test pre-effective functionality
     Examples: 
       | memberType      | friendname | favcolor | phonenumber |
       | PreEffectivePDP | name1      | color1   | number1     |
+
+      
+  @preEffective4 @fastandfurious @F296012 @May2_Release
+  Scenario Outline: Verify that correct Technical Support TFNs are displayed on Contact Us and Secondary Pages Need Help Section for pre-effective members.
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      | Copay Category | <copayCategory> |
+    And verify that preeffective message is displayed on the home page or test harness page
+    #And verify that payment tab is displayed to Preeffective member on dashboard or test harness page
+    And user clicks on the benefits and coverage tab on the dashboard home page or test harness page
+    #And verify that subnavigation is supressed on the coverage and benefits page
+    #And verify that correct preeffective message and plan documents button are displayed on coverage and benefits page
+    And verify that correct phone number is displayed in technical support section of coverage and benefits page
+			| Technical TFN | <technicalTFN> |
+    #And verify that claim support header with phone number in Need Help is not displayed to SHIP Pre-effective members on coverage and benefits page
+    #| Member Type | <memberType> |
+    And user click on the plan documents button
+    #And user is navigated to Forms and Resource page
+    And user clicks on claims tab from Forms and Resources page
+    #And verify that subnavigation is supressed on the claims page
+    #And verify that correct preeffective message is displayed on claims page
+    And verify that correct phone number is displayed in technical support section of claims page
+    	| Technical TFN | <technicalTFN> |
+    #And verify that claim support header with phone number in Need Help is not displayed to SHIP Pre-effective members on Claims Page
+    | Member Type | <memberType> |
+    #And verify that payment tab is displayed to Preeffective member from secondary pages
+      | Member Type | <memberType> |
+    And user clicks on the Contact Us link in Need help Section of Claims Page
+    And verity that correct phone number is displayed in Technical Support section of Contact Us Page
+			| Technical TFN | <technicalTFN> |
+    Examples: 
+      | planType        | memberType            | copayCategory |  technicalTFN |
+      | IndMA           | preeffectiveIndMA     | NON LIS       | 1-888-980-8125 |
+      | IndMAPD         | preeffectiveIndMAPD   | NON LIS       | 1-888-980-8125 |
+      | IndPDP          | preeffectiveIndPDP    | NON LIS       | 1-888-980-8125 |
+      | GroupMA         | preeffectiveGroupMA   | NON LIS       | 1-888-980-8125 |
+      | GroupMAPD       | preeffectiveGroupMAPD | NON LIS       | 1-888-980-8125 |
+      | GroupSSUP       | preeffectiveGroupSSUP | NON LIS       | 1-888-980-8125 |
+      | GroupPDP        | preeffectiveGroupPDP  | NON LIS       | 1-888-980-8125 |
+      | SHIPPreffective | preeffectiveSHIPOnly  | NON LIS       | 1-866-254-3132 |
