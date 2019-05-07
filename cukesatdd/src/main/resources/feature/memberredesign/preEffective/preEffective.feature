@@ -15,30 +15,30 @@ Feature: To test pre-effective functionality
     And verify that correct preeffective message and plan documents button are displayed on coverage and benefits page
     And verify that correct phone number is displayed in technical support section of coverage and benefits page
     And verify that claim support header with phone number in Need Help is not displayed to SHIP Pre-effective members on coverage and benefits page
-    | Member Type | <memberType> |
+      | Member Type | <memberType> |
     And user click on the plan documents button
     And user is navigated to Forms and Resource page
     And user clicks on claims tab from Forms and Resources page
     And verify that subnavigation is supressed on the claims page
-    | Member Type | <memberType> |
+      | Member Type | <memberType> |
     And verify that correct preeffective message is displayed on claims page
     And verify that correct phone number is displayed in technical support section of claims page
     And verify that claim support header with phone number in Need Help is not displayed to SHIP Pre-effective members on Claims Page
-    | Member Type | <memberType> |
+      | Member Type | <memberType> |
     And verify that payment tab is displayed to Preeffective member from secondary pages
-    | Member Type | <memberType> |
+      | Member Type | <memberType> |
 
     Examples: 
-      | planType        | memberType            | copayCategory |
-#      | IndMA           | preeffectiveIndMA     | NON LIS       |
-#      | IndMAPD         | preeffectiveIndMAPD   | NON LIS       |
-      | IndPDP          | preeffectiveIndPDP    | NON LIS       |
-#      | GroupMA         | preeffectiveGroupMA   | NON LIS       |
-#      | GroupMAPD       | preeffectiveGroupMAPD | NON LIS       |
-#      | GroupSSUP       | preeffectiveGroupSSUP | NON LIS       |
-#      | GroupPDP        | preeffectiveGroupPDP  | NON LIS       |
-#      | SHIPPreffective | preeffectiveSHIPOnly  | NON LIS       |
+      | planType | memberType         | copayCategory |
+      #      | IndMA           | preeffectiveIndMA     | NON LIS       |
+      #      | IndMAPD         | preeffectiveIndMAPD   | NON LIS       |
+      | IndPDP   | preeffectiveIndPDP | NON LIS       |
 
+  #      | GroupMA         | preeffectiveGroupMA   | NON LIS       |
+  #      | GroupMAPD       | preeffectiveGroupMAPD | NON LIS       |
+  #      | GroupSSUP       | preeffectiveGroupSSUP | NON LIS       |
+  #      | GroupPDP        | preeffectiveGroupPDP  | NON LIS       |
+  #      | SHIPPreffective | preeffectiveSHIPOnly  | NON LIS       |
   @preEffective2 @regressionMember @regression_Pre-Effective_AccountSettings_Page @codetransformers
   Scenario Outline: Verify that a preffective member is able to see the Account settings page
     Given login with following details logins in the member portal and validate elements
@@ -121,7 +121,7 @@ Feature: To test pre-effective functionality
     And user is navigated to Forms and Resource page
     And user clicks on claims tab from Forms and Resources page
     And verify that subnavigation is supressed on the claims page
-     | Member Type | <memberType> |
+      | Member Type | <memberType> |
     And verify that correct preeffective message is displayed on claims page
     #    And verify that correct phone number is displayed in technical support section of claims page
     And the user clicks on Account Profile tab & selects Account Settings from the drop down from claims page
@@ -131,9 +131,8 @@ Feature: To test pre-effective functionality
       | memberType      | friendname | favcolor | phonenumber |
       | PreEffectivePDP | name1      | color1   | number1     |
 
-      
   @preEffective4 @fastandfurious @F296012 @May2_Release
-  Scenario Outline: Verify that correct Technical Support TFNs are displayed on Contact Us and Secondary Pages Need Help Section for pre-effective members.
+  Scenario Outline: UID: <UID> - Member Type type: <memberType> Verify that correct Technical Support TFNs are displayed on Contact Us and Secondary Pages Need Help Section for pre-effective members.
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
@@ -144,7 +143,7 @@ Feature: To test pre-effective functionality
     #And verify that subnavigation is supressed on the coverage and benefits page
     #And verify that correct preeffective message and plan documents button are displayed on coverage and benefits page
     And verify that correct phone number is displayed in technical support section of coverage and benefits page
-			| Technical TFN | <technicalTFN> |
+      | Technical TFN | <technicalTFN> |
     #And verify that claim support header with phone number in Need Help is not displayed to SHIP Pre-effective members on coverage and benefits page
     #| Member Type | <memberType> |
     And user click on the plan documents button
@@ -153,21 +152,22 @@ Feature: To test pre-effective functionality
     #And verify that subnavigation is supressed on the claims page
     #And verify that correct preeffective message is displayed on claims page
     And verify that correct phone number is displayed in technical support section of claims page
-    	| Technical TFN | <technicalTFN> |
-    #And verify that claim support header with phone number in Need Help is not displayed to SHIP Pre-effective members on Claims Page
-    | Member Type | <memberType> |
-    #And verify that payment tab is displayed to Preeffective member from secondary pages
-      | Member Type | <memberType> |
+      | Technical TFN | <technicalTFN> |
+      #And verify that claim support header with phone number in Need Help is not displayed to SHIP Pre-effective members on Claims Page
+      | Member Type   | <memberType>   |
+      #And verify that payment tab is displayed to Preeffective member from secondary pages
+      | Member Type   | <memberType>   |
     And user clicks on the Contact Us link in Need help Section of Claims Page
     And verity that correct phone number is displayed in Technical Support section of Contact Us Page
-			| Technical TFN | <technicalTFN> |
+      | Technical TFN | <technicalTFN> |
+
     Examples: 
-      | planType        | memberType            | copayCategory |  technicalTFN |
-      | IndMA           | preeffectiveIndMA     | NON LIS       | 1-888-980-8125 |
-      | IndMAPD         | preeffectiveIndMAPD   | NON LIS       | 1-888-980-8125 |
-      | IndPDP          | preeffectiveIndPDP    | NON LIS       | 1-888-980-8125 |
-      | GroupMA         | preeffectiveGroupMA   | NON LIS       | 1-888-980-8125 |
-      | GroupMAPD       | preeffectiveGroupMAPD | NON LIS       | 1-888-980-8125 |
-      | GroupSSUP       | preeffectiveGroupSSUP | NON LIS       | 1-888-980-8125 |
-      | GroupPDP        | preeffectiveGroupPDP  | NON LIS       | 1-888-980-8125 |
-      | SHIPPreffective | preeffectiveSHIPOnly  | NON LIS       | 1-866-254-3132 |
+      | UID       | planType        | memberType            | copayCategory | technicalTFN   |
+      | US1735715 | IndMA           | preeffectiveIndMA     | NON LIS       | 1-888-980-8125 |
+      | US1735715 | IndMAPD         | preeffectiveIndMAPD   | NON LIS       | 1-888-980-8125 |
+      | US1735715 | IndPDP          | preeffectiveIndPDP    | NON LIS       | 1-888-980-8125 |
+      | US1735715 | GroupMA         | preeffectiveGroupMA   | NON LIS       | 1-888-980-8125 |
+      | US1735715 | GroupMAPD       | preeffectiveGroupMAPD | NON LIS       | 1-888-980-8125 |
+      | US1735715 | GroupSSUP       | preeffectiveGroupSSUP | NON LIS       | 1-888-980-8125 |
+      | US1735715 | GroupPDP        | preeffectiveGroupPDP  | NON LIS       | 1-888-980-8125 |
+      | US1737398 | SHIPPreffective | preeffectiveSHIPOnly  | NON LIS       | 1-866-254-3132 |
