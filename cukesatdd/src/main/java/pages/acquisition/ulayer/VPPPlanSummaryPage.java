@@ -1977,10 +1977,10 @@ for (int i = 0; i < initialCount + 1; i++) {
 		sendkeysNew(emailField, EmailAddress);
 		validateNew(Submitbutton);
 		Submitbutton.click();
-		WebElement popup = driver.findElement(By.xpath("//div[@class='closeBg']/*[contains (text() , 'Thank you for your interest')]"));
+		WebElement popup = driver.findElement(By.xpath("//div[contains(@class,'closeBg')]/*[contains (text() , 'Thank you for your interest')]"));
 		if(validateNew(popup)){
 			System.out.println("Pop up message has been displayed");
-			WebElement closePopUp = driver.findElement(By.xpath("//a[@class='emailsubmit_close']"));
+			WebElement closePopUp = driver.findElement(By.xpath("//*[contains(@class , 'emailsubmit_close')]"));
 			closePopUp.click();
 			CommonUtility.checkPageIsReadyNew(driver);
 			Assert.assertTrue(true);

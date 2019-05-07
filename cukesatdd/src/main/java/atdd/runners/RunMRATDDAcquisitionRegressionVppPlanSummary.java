@@ -16,7 +16,7 @@ import cucumber.api.CucumberOptions;
 jsonReport = "target/cucumber-RunMRATDDAcquisitionRegressionVppPlanSummary.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDfastandfuriousAcquisitionTest")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition.vpp", "acceptancetests.acquisition.ole"  },
 features = { "src/main/resources/feature/acquisition/vpp","src/main/resources/feature/acquisition/ole" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionRegressionVppPlanSummary.json" }, tags = { "@vppPrintRegression,@emailandprintplanDetails,@emailandprintplancompare,@emailAndPrintPlanDetailsuhc,@emailandprintplancompareuhc" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionRegressionVppPlanSummary.json" }, tags = { "@vppPlanCardsRegression, @rightRailRegression, @vppFavoritePlanRegression, @vppPrintRegression" })
 
 public class RunMRATDDAcquisitionRegressionVppPlanSummary { 
 	//note: these tags are for F265872: 
