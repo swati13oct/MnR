@@ -201,8 +201,9 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(id = "po7links")
 	private WebElement lookUpYourProviderButton;
 	
-	@FindBy(xpath = "//span[contains(text(),'1 providers covered')]")
-	private WebElement providerCountUpdated;
+	@FindBy(xpath = "//div[@id='additionalBenefits']//a[contains(text(),'Edit Provider')]")
+	private WebElement editProviderButtonOnPlanDetails;
+	
 
 	public PlanDetailsPage(WebDriver driver) {
 		super(driver);
@@ -837,10 +838,12 @@ public class PlanDetailsPage extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,-100)", "");
-		
-		if (providerCountUpdated.isDisplayed()) {
+		String editProviderButtonText=editProviderButtonOnPlanDetails.getText();
+        System.out.println(editProviderButtonText);
+		if (editProviderButtonText.contains("Edit Provider")) {
 			return true;
 		}
 		return false;
+	
 	}
 }
