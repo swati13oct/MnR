@@ -32,10 +32,10 @@ public class FindCarePage extends UhcDriver {
 	@FindBy(xpath = "//span[text()='Change Location']")
 	public WebElement ChangeLocationButton;
 
-	@FindBy(xpath = "//button[@aria-label='Places']//div[@class='imgBox']")
+	@FindBy(xpath = "//h2[text()='Places']")
 	public WebElement PlacesButton;
 
-	@FindBy(xpath = "//button[@aria-label='Hospitals']//div[@class='imgBox']")
+	@FindBy(xpath = "//h2[text()='Hospitals']")
 	public WebElement HospitalsButton;
 
 	@FindBy(xpath = "//h1[text()='Which type of place?']")

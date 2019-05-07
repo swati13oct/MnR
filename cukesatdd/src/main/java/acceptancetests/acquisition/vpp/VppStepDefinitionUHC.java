@@ -17,10 +17,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.PlanComparePage;
 import pages.acquisition.bluelayer.PlanDetailsPage;
+import pages.acquisition.bluelayer.ProviderSearchPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.ComparePlansPage;
-import pages.acquisition.bluelayer.ProviderSearchPage;
+
 import pages.acquisition.bluelayer.ComparePlansPageBlayer;
 import pages.acquisition.bluelayer.DrugCostEstimatorPage;
 import pages.acquisition.bluelayer.FindCarePage;
@@ -927,6 +928,34 @@ public class VppStepDefinitionUHC {
 			} else
 				Assert.fail("Error in loading the compare plans page");
 		}
+		
+		
+		@Given("^I select \"([^\"]*)\" plans to compare and click on compare plan link in UHC$")
+		public void i_select_plans_to_compare_and_click_on_compare_plan_link_in_UHC(String planType) throws Throwable {
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		if (planType.equals("MAPD")) {
+			plansummaryPage.clickonViewPlans();
+			plansummaryPage.checkAllMAPlans();
+			System.out.println("Selected All MAPD plans for Plan Compare");
+		} else if (planType.equals("PDP")) {
+			plansummaryPage.clickOnPDPPlans();
+			plansummaryPage.clickCompareChkBoxPDP();
+			System.out.println("Selected All PDP plans for Plan Compare");
+		}
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ComparePlansPageBlayer planComparePage = plansummaryPage.clickOnCompareLink();
+		if (planComparePage != null) {
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+			// comparePlansPage.backToVPPPage();
+		} else
+			Assert.fail("Error in loading the compare plans page");
+	}
 		
 		@And("^I Click on DCE link on Plan compare$")
 		public void I_Click_On_DCE_link_on_Plan_Compare() {
