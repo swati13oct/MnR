@@ -15,7 +15,7 @@ q2_jun_aarp0024/Password@1,MAPD,Individualwithoutpharmacy_DCE
 q2_jun_grp0022/Password@1,PDP,IndAARPPDP_Pharmacylocator
 q2_jun_grp0318/Password@1,MAPD,GroupMAPD_Pharmacylocator
 q2_jun_sofl0019/Password@1,MAPD,Medica_Pharmacylocator
-PCP_Pharmacylocator/Password@1,MAPD,PCP_Pharmacylocator,
+q2_jun_aarp0051/Password@1,MAPD,PCP_Pharmacylocator,
 ucpgrouppdptxers01/Password@1,PDP,TexasRx_Pharmacylocator,
 q1_apr_uhc002/Password@1,MAPD,IndMAPDUHC_Pharmacylocator,
 q1_apr_uhc002/Password@1,MAPD,IndUHC_Pharmacylocator,
