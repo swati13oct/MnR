@@ -120,18 +120,20 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		#And the user validates the DownloadMyData section in redesigned site   
 		Examples: 
 		   | TID    | planType | claimPeriod    | domain | claimssystem |
-		   | 15259  | SHIP     | Last 24 months | NA     | COSMOSCLAIMS |
+		   | 15259  | SHIP     | Last 24 months | NA     | SHIPCLAIMS   |
 	
-	@claims6 @TC_09claimsPHIP @regressionMember
-	Scenario Outline:  TID: <TID> -plan: <planType> -claimsSystem: <claimssystem> - To validate the Error Message for a PHIP  member on claims sumamry page
-		Given login with following details logins in the member portal and validate elements
-		  | Plan Type      | <planType>     |
-		  | Test Data Type | <claimssystem> |
-		When I navigate to the claims Summary page in redesigned site
-		And I validate the error message for a PHIP Member on the screen
-		Examples: 
-		   | TID   | planType | claimssystem |
-		   | 15258 | PHIP     | SHIPCLAIMS   |
+	
+#    #need test data to execute this specific scenario
+#	 @claims6 @TC_09claimsPHIP 
+#	 Scenario Outline:  TID: <TID> -plan: <planType> -claimsSystem: <claimssystem> - To validate the Error Message for a PHIP  member on claims sumamry page
+#	 Given login with following details logins in the member portal and validate elements
+#	   | Plan Type      | <planType>     |
+#	   | Test Data Type | <claimssystem> |
+#	 When I navigate to the claims Summary page in redesigned site
+#	 And I validate the error message for a PHIP Member on the screen
+#	 Examples: 
+#	   | TID   | planType | claimssystem |
+#	   | 15258 | PHIP     | SHIPCLAIMS   |
 	  
 #	  #This Scenario can only execute when max claims indicator as true
 #	  @MaxClaimsResultsError
@@ -417,7 +419,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | Plan Type    | <planType>              |
 		  | Claim Type   | <claimType>             |
 		  | Claim System | <claimssystem>          |
-		  | Has Your Share | <SummaryHasYourShare> |
+		  #tbd | Has Your Share | <SummaryHasYourShare> |
 		  | Claim Period | Last 30 days            |
 		And I can validate the EOB section based on domain in redesigned site
 		  | Domain       | <domain>                |
@@ -429,7 +431,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	      | Plan Type    | <planType>              |
 		  | Claim Type   | <claimType>             |
 		  | Claim System | <claimssystem>          |
-		  | Has Your Share | <SummaryHasYourShare> |
+		  #tbd | Has Your Share | <SummaryHasYourShare> |
 		  | Claim Period | Last 30 days            |
 		#----------------- Test for Last 90 days --------------------------
 		And I can search claims for the following claim period and claim type on redesigned site
@@ -448,7 +450,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | Plan Type    | <planType>              |
 		  | Claim Type   | <claimType>             |
 		  | Claim System | <claimssystem>          |
-		  | Has Your Share | <SummaryHasYourShare> |
+		  #tbd | Has Your Share | <SummaryHasYourShare> |
 		  | Claim Period | Last 90 days            |
 		And I can validate the EOB section based on domain in redesigned site
 		  | Domain       | <domain>                |
@@ -460,7 +462,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	      | Plan Type    | <planType>              |
 		  | Claim Type   | <claimType>             |
 		  | Claim System | <claimssystem>          |
-		  | Has Your Share | <SummaryHasYourShare> |
+		  #tbd | Has Your Share | <SummaryHasYourShare> |
 		  | Claim Period | Last 90 days            |
 		#----------------- Test for Last 6 months --------------------------
 		And I can search claims for the following claim period and claim type on redesigned site
@@ -479,7 +481,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | Plan Type    | <planType>              |
 		  | Claim Type   | <claimType>             |
 		  | Claim System | <claimssystem>          |
-		  | Has Your Share | <SummaryHasYourShare> |
+		  #tbd | Has Your Share | <SummaryHasYourShare> |
 		  | Claim Period | Last 6 months           |
 		And I can validate the EOB section based on domain in redesigned site
 		  | Domain       | <domain>                |
@@ -491,7 +493,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	      | Plan Type    | <planType>              |
 		  | Claim Type   | <claimType>             |
 		  | Claim System | <claimssystem>          |
-		  | Has Your Share | <SummaryHasYourShare> |
+		  #tbd | Has Your Share | <SummaryHasYourShare> |
 		  | Claim Period | Last 6 months           |
 		#----------------- Test for Last 12 months --------------------------
 		And I can search claims for the following claim period and claim type on redesigned site
@@ -510,7 +512,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | Plan Type    | <planType>              |
 		  | Claim Type   | <claimType>             |
 		  | Claim System | <claimssystem>          |
-		  | Has Your Share | <SummaryHasYourShare> |
+		  #tbd | Has Your Share | <SummaryHasYourShare> |
 		  | Claim Period | Last 12 months          |
 		And I can validate the EOB section based on domain in redesigned site
 		  | Domain       | <domain>                |
@@ -522,7 +524,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	      | Plan Type    | <planType>              |
 		  | Claim Type   | <claimType>             |
 		  | Claim System | <claimssystem>          |
-		  | Has Your Share | <SummaryHasYourShare> |
+		  #tbd | Has Your Share | <SummaryHasYourShare> |
 		  | Claim Period | Last 12 months          |
 		#----------------- Test for Last 24 months --------------------------
 		And I can search claims for the following claim period and claim type on redesigned site
@@ -541,7 +543,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | Plan Type    | <planType>              |
 		  | Claim Type   | <claimType>             |
 		  | Claim System | <claimssystem>          |
-		  | Has Your Share | <SummaryHasYourShare> |
+		  #tbd | Has Your Share | <SummaryHasYourShare> |
 		  | Claim Period | Last 24 months          |
 		And I can validate the EOB section based on domain in redesigned site
 		  | Domain       | <domain>                |
@@ -553,7 +555,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	      | Plan Type    | <planType>              |
 		  | Claim Type   | <claimType>             |
 		  | Claim System | <claimssystem>          |
-		  | Has Your Share | <SummaryHasYourShare> |
+		  #tbd | Has Your Share | <SummaryHasYourShare> |
 		  | Claim Period | Last 24 months          |
 		#----------------- Test for Custom search --------------------------
 		And I can search claims for the following claim period and claim type on redesigned site
@@ -580,7 +582,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	      | Plan Type    | <planType>              |
 		  | Claim Type   | <claimType>             |
 		  | Claim System | <claimssystem>          |
-		  | Has Your Share | <SummaryHasYourShare> |
+		  #tbd | Has Your Share | <SummaryHasYourShare> |
 		  | Claim Period | Custom search           |
 		#----------------- Test Custom search error cases --------------------------
 		And the user custom search claims for the following invalid time interval in redesigned site
@@ -589,118 +591,117 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | Claims To Date   | 01/02/2018          |
 		Then the user should be able to see the from date is greater than the to date error message being displayed
 		  | Plan Type        | <planType>          |
-		And the user custom search claims for the following invalid time interval in redesigned site
+		And the user custom search claims for over two years time interval from current date in redesigned site
 		  | Plan Type        | <planType>          |
-		  | Claims From Date | 01/02/2016          |
-		  | Claims To Date   | 01/02/2019          |
 		Then the user should be able to see the search range is greater than two years error
 		  | Plan Type        | <planType>          |
 		#----------------- Final Test claims number makes sense from search periods --------------
 		And I can validate the numbers of claims from all search periods
+		  | Flag Zero Claims User | <flagZeroClaimsUser> |
 		  
 	@claims00_01 @claims00_MAPD @claims00_COSMOS_MEDICAL @diffGrpsDiffYrs
 	Examples: 
-	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
-	  |01    |1041| MAPD     | COSMOS | diffGrpsDiffYrs_COSMOSCLAIMS | Medical           | Yes                 |
+	  |index |DID | planType | domain | claimssystem                 | claimType         | flagZeroClaimsUser | 
+	  |01    |1041| MAPD     | COSMOS | diffGrpsDiffYrs_COSMOSCLAIMS | Medical           | Yes                | 
 
 	@claims00_02 @claims00_MAPD @claims00_COSMOS_DRUG @diffGrpsDiffYrs
 	Examples: 
-	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
-	  |02    |1041| MAPD     | COSMOS | diffGrpsDiffYrs_COSMOSCLAIMS | Prescription drug | Yes                 |
+	  |index |DID | planType | domain | claimssystem                 | claimType         | flagZeroClaimsUser |
+	  |02    |1041| MAPD     | COSMOS | diffGrpsDiffYrs_COSMOSCLAIMS | Prescription drug | No                 |
 
 	@claims00_03 @claims00_MA @claims00_COSMOS_MEDICAL
 	Examples: 
-	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
-	  |03    |1041| MA       | COSMOS | COSMOSCLAIMS                 | Medical           | Yes                 |
+	  |index |DID | planType | domain | claimssystem                 | claimType         | flagZeroClaimsUser |
+	  |03    |1041| MA       | COSMOS | COSMOSCLAIMS                 | Medical           | Yes                |
 
 	@claims00_04 @claims00_MA @claims00_NICE_MEDICAL
 	Examples: 
-	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
-	  |04    |1041| MA       | NICE   | NICECLAIMS                   | Medical           | Yes                 |
+	  |index |DID | planType | domain | claimssystem                 | claimType         | flagZeroClaimsUser |
+	  |04    |1041| MA       | NICE   | NICECLAIMS                   | Medical           | Yes                |
 
 	@claims00_05 @claims00_MAPD @claims00_NICE_MEDICAL
 	Examples: 
-	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
-	  |05    |1041| MAPD     | NICE   | NICECLAIMS                   | Medical           | Yes                 |
+	  |index |DID | planType | domain | claimssystem                 | claimType         | flagZeroClaimsUser |
+	  |05    |1041| MAPD     | NICE   | NICECLAIMS                   | Medical           | Yes                |
 
 	@claims00_06 @claims00_MAPD @claims00_NICE_DRUG
 	Examples: 
-	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
-	  |06    |1041| MAPD     | NICE   | NICECLAIMS                   | Prescription drug | Yes                 |
+	  |index |DID | planType | domain | claimssystem                 | claimType         | flagZeroClaimsUser |
+	  |06    |1041| MAPD     | NICE   | NICECLAIMS                   | Prescription drug | No                 |
 
 	@claims00_07 @claims00_MAPD @claims00_COSMOS_MEDICAL
 	Examples: 
-	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
-	  |07    |1041| MAPD     | COSMOS | COSMOSCLAIMS                 | Medical           | Yes                 |
+	  |index |DID | planType | domain | claimssystem                 | claimType         | flagZeroClaimsUser |
+	  |07    |1041| MAPD     | COSMOS | COSMOSCLAIMS                 | Medical           | Yes                |
 
 	@claims00_08 @claims00_MAPD @claims00_COSMOS_DRUG
 	Examples: 
-	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
-	  |08    |1041| MAPD     | COSMOS | COSMOSCLAIMS                 | Prescription drug | Yes                 |
+	  |index |DID | planType | domain | claimssystem                 | claimType         | flagZeroClaimsUser |
+	  |08    |1041| MAPD     | COSMOS | COSMOSCLAIMS                 | Prescription drug | No                 |
 
 	@claims00_09 @claims00_PCP @claims00_COSMOS_MEDICAL
 	Examples: 
-	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
-	  |09    |1041| PCP      | COSMOS | COSMOSCLAIMS                 | Medical           | Yes                 |
+	  |index |DID | planType | domain | claimssystem                 | claimType         | flagZeroClaimsUser |
+	  |09    |1041| PCP      | COSMOS | COSMOSCLAIMS                 | Medical           | Yes                |
 
 	@claims00_10 @claims00_PCP @claims00_COSMOS_DRUG
 	Examples: 
-	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
-	  |10    |1041| PCP      | COSMOS | COSMOSCLAIMS                 | Prescription drug | Yes                 |
+	  |index |DID | planType | domain | claimssystem                 | claimType         | flagZeroClaimsUser |
+	  |10    |1041| PCP      | COSMOS | D_COSMOSCLAIMS               | Prescription drug | No                 |
 
 	@claims00_11 @claims00_MEDICA @claims00_COSMOS_MEDICAL
 	Examples: 
-	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
-	  |11    |1041| MEDICA   | COSMOS | COSMOSCLAIMS                 | Medical           | Yes                 |
+	  |index |DID | planType | domain | claimssystem                 | claimType         | flagZeroClaimsUser |
+	  |11    |1041| MEDICA   | COSMOS | COSMOSCLAIMS                 | Medical           | Yes                |
 
 	@claims00_12 @claims00_MEDICA @claims00_COSMOS_DRUG
 	Examples: 
-	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
-	  |12    |1041| MEDICA   | COSMOS | COSMOSCLAIMS                 | Prescription drug | Yes                 |
+	  |index |DID | planType | domain | claimssystem                 | claimType         | flagZeroClaimsUser |
+	  |12    |1041| MEDICA   | COSMOS | COSMOSCLAIMS                 | Prescription drug | Yes                |
 
 	@claims00_13 @claims00_PDP @claims00_RX @claims00_NOT_NICE_OR_COSMOS
 	Examples: 
-	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
-	  |13    |1041| PDP      | RX     | RXCLAIMS                     | Prescription drug | No                  |
+	  |index |DID | planType | domain | claimssystem                 | claimType         | flagZeroClaimsUser |
+	  |13    |1041| PDP      | RX     | RXCLAIMS                     | Prescription drug | Yes                |
 
 	@claims00_14 @claims00_SHIP @claims00_NOT_NICE_OR_COSMOS
 	Examples: 
-	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
-	  |14    |1041| SHIP     | NA     | SHIPCLAIMS                   | NA                | No                  |
+	  |index |DID | planType | domain | claimssystem                 | claimType         | flagZeroClaimsUser |
+	  |14    |1041| SHIP     | NA     | SHIPCLAIMS                   | NA                | Yes                |
 
 	@claims00_15 @claims00_COMBO @claims00_MAPD @claims00_COSMOS_MEDICAL
 	Examples: 
-	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
-	  |15    |1041| MAPD     | COSMOS | COMBO_COSMOSCLAIMS           | Medical           | Yes                 |
+	  |index |DID | planType | domain | claimssystem                 | claimType         | flagZeroClaimsUser |
+	  |15    |1041| MAPD     | COSMOS | COMBO_COSMOSCLAIMS           | Medical           | No                 |
 
 	@claims00_16 @claims00_COMBO @claims00_MAPD @claims00_COSMOS_DRUG
 	Examples: 
-	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
-	  |16    |1041| MAPD     | COSMOS | COMBO_COSMOSCLAIMS           | Prescription drug | Yes                 |
+	  |index |DID | planType | domain | claimssystem                 | claimType         | flagZeroClaimsUser |
+	  |16    |1041| MAPD     | COSMOS | COMBO_COSMOSCLAIMS           | Prescription drug | No                 |
 
 	@claims00_17 @claims00_COMBO @claims00_SHIP @claims00_NOT_NICE_OR_COSMOS
 	Examples: 
-	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
-	  |17    |1041| SHIP     | NA     | COMBO_SHIPCLAIMS             | NA                | No                  |
+	  |index |DID | planType | domain | claimssystem                 | claimType         | flagZeroClaimsUser |
+	  |17    |1041| SHIP     | NA     | COMBO_SHIPCLAIMS             | NA                | Yes                |
 
 	@claims00_18 @claims00_GROUP @claims00_MAPD @claims00_COSMOS_MEDICAL
 	Examples: 
-	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
-	  |18    |1041| MAPD     | COSMOS | GROUP_COSMOSCLAIMS           | Medical           | Yes                 |
+	  |index |DID | planType | domain | claimssystem                 | claimType         | flagZeroClaimsUser |
+	  |18    |1041| MAPD     | COSMOS | GROUP_COSMOSCLAIMS           | Medical           | Yes                |
 
 	@claims00_19 @claims00_GROUP @claims00_MAPD @claims00_COSMOS_DRUG
 	Examples: 
-	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
-	  |19    |1041| MAPD     | COSMOS | GROUP_COSMOSCLAIMS           | Prescription drug | Yes                 |
+	  |index |DID | planType | domain | claimssystem                 | claimType         | flagZeroClaimsUser |
+	  |19    |1041| MAPD     | COSMOS | GROUP_COSMOSCLAIMS           | Prescription drug | No                 |
 
 	@claims00_20 @claims00_SSUP @claims00_COSMOS_MEDICAL
 	Examples: 
-	  |index |DID | planType | domain | claimssystem                 | claimType         | SummaryHasYourShare |
-	  |20    |1041| SSUP     | COSMOS | COSMOSCLAIMS                 | Medical           | Yes                 |
+	  |index |DID | planType | domain | claimssystem                 | claimType         | flagZeroClaimsUser |
+	  |20    |1041| SSUP     | COSMOS | COSMOSCLAIMS                 | Medical           | Yes                |
 
      #note: these will be in team-a env only
-	 #|xx    |1041| MAPD     | COSMOS | t_diffGrpsDiffYrs_COSMOSCLAIMS | Medical           | Yes                |
-	 #|xx    |1041| MAPD     | COSMOS | t_diffGrpsDiffYrs_COSMOSCLAIMS | Prescription drug | Yes                |
+	 #|xx    |1041| MAPD     | COSMOS | t_diffGrpsDiffYrs_COSMOSCLAIMS | Medical           | No                |
+	 #|xx    |1041| MAPD     | COSMOS | t_diffGrpsDiffYrs_COSMOSCLAIMS | Prescription drug | No                |
 	#----- end of claims00 ---------------------------------------------------------
 
 	
@@ -716,7 +717,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
       | Plan Type    | <planType>    |
       | Claim Period | <claimPeriod> |
     Then I can see the claims displayed based on the selection in redesigned site
-    When I navigate to the Claim details page to see view as pdf EOB
+    When I navigate to the Claim details page to see eoblink on details page
     Then I can vdate the view as pdf link on claims details page header
       | Plan Type    | <planType>    |
       | Domain       | <domain>      |

@@ -15,11 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
-
-
+import pages.acquisition.ulayer.ComparePlansPage;
 import pages.acquisition.bluelayer.DrugCostEstimatorPage;
 import pages.acquisition.bluelayer.SavingsOppurtunity;
 import pages.acquisition.bluelayer.AddDrugDetails;
+import pages.acquisition.bluelayer.ComparePlansPageBlayer;
 import pages.acquisition.bluelayer.PlanDetailsPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
@@ -156,6 +156,34 @@ public class DCEVPPAcqStepDefinitionUHC {
 				Assert.fail("Drug Details content not loaded");
 		}
 
+	}
+	
+	@When("^user successfully adds drug for UHC$")
+	public void user_successfully_adds_drug_for_UHC(DataTable data) throws InterruptedException {
+
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String isBranded = memberAttributesMap.get("Is Branded Drug");
+		String drug = memberAttributesMap.get("Drug");
+		AddDrugDetails DrugDetails = (AddDrugDetails) getLoginScenario().getBean(PageConstants.ADD_DRUG_DETAILS);
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		if (isBranded.trim().equalsIgnoreCase("YES")) {
+
+			SavingsOppurtunity savingsOppurtunity = DrugDetails.continueAddDrugDetailsModWithSaving();
+			//savingsOppurtunity.switchToGeneric();
+			dce = savingsOppurtunity.savedrugbutton();
+
+		} else {
+			dce = DrugDetails.continueAddDrugDetailsModNoSaving();
+		}
+		Assert.assertTrue("Drug not added", null != dce);
+		dce.validateAddedDrug(drug);
 	}
 	
 	
@@ -322,6 +350,16 @@ public class DCEVPPAcqStepDefinitionUHC {
 	    	    }	    	
 	   
 	   dce.clickButtonViewCost();
+	}
+	
+	@Then("^the user clicks on Back to Plans button in UHC site and Navigates to Plan Compare$")
+	public void the_user_clicks_on_Back_to_Plans_button_in_AARP_site_and_Navigates_to_Plan_Compare() throws Throwable {
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		ComparePlansPageBlayer planComparePage = dce.clickBtnBackToPlancompare();
+		if (planComparePage != null) {
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+	}
 	}
 
 	@Then("^the user validates the added drugs on See your Estimated Costs page in UMS site$")
@@ -533,6 +571,8 @@ public class DCEVPPAcqStepDefinitionUHC {
 			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
 		}
 	}
+	
+	
 
 }
 

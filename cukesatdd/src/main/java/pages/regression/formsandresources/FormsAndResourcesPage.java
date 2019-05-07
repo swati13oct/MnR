@@ -437,6 +437,12 @@ public class FormsAndResourcesPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[3]/div[17]/div/div/div/section/div")
 	private WebElement eobSectionall;
+	
+	@FindBy(xpath = "//*[@class='otherPages UHC_IND_MAPD']//ul/li[3]/a")
+	private WebElement jumpLinkToProviderAndPharmacyDirectories;
+	
+	@FindBy(xpath = "//*[@class='otherPages calloutBoth_2019_PCP_Medica']//*[text()='Provider Search']")
+	private WebElement ProviderSearchLinkPCPMedica;
 
 	public WebElement getEobSectionall() {
 		return eobSectionall;
@@ -2093,6 +2099,21 @@ public class FormsAndResourcesPage extends UhcDriver {
 		Assert.assertTrue("Irrelevant links are present", count == linkCount);
 		System.out.println("No irrelevant links found");
 
+	}
+
+	public pages.memberrdesignVBF.ProviderSearchPage validateFindCareUrl() {
+		// TODO Auto-generated method stub
+		
+		validateNew(jumpLinkToProviderAndPharmacyDirectories);
+		jumpLinkToProviderAndPharmacyDirectories.click();
+		validateNew(ProviderSearchLinkPCPMedica);
+		ProviderSearchLinkPCPMedica.click();
+		if (driver.getCurrentUrl().contains("pcp/find-care"))
+		{
+			Assert.assertTrue(true);
+			return new pages.memberrdesignVBF.ProviderSearchPage(driver);
+		}
+		return null;
 	}
 
 }
