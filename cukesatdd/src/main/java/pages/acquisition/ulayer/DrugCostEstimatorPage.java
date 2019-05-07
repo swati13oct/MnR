@@ -395,7 +395,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'overview-tabs module-tabs-tabs')]/div[1]//span[@class='ng-binding']")
 	private WebElement maPlansCount;
 	
-	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button proactive-offer__close main-background-color second-color')]")
+	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
 	public static WebElement proactiveChatExitBtn;
 	
 	@FindBy(xpath = "//*[contains(@class,'cta-button pharmacy-tab-show')]")
@@ -525,8 +525,10 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public void checkProactiveChatPopup(){
 		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
 		try{
-			if(proactiveChatExitBtn.isDisplayed())
+			if(proactiveChatExitBtn.isDisplayed()){		
 				jsClickNew(proactiveChatExitBtn);
+				System.out.println("Proactive chat popup displayed and exited");
+			}
 		}catch(Exception e){
 			System.out.println("Proactive chat popup not displayed");
 		}
