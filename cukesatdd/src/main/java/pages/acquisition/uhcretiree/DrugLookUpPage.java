@@ -3,14 +3,16 @@ package pages.acquisition.uhcretiree;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import junit.framework.Assert;
+
 
 /**
  * @author ckoppura
@@ -59,8 +61,12 @@ public class DrugLookUpPage extends UhcDriver {
 	}
 
 	public boolean validateDrugLookUpPage() {
-
-		String currenturl = "/gr/en/drug_lookup.html";
+		String currenturl = "";
+		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
+			currenturl = "/gr/en/drug_lookup.html";
+		} else {
+			currenturl = "drug_lookup.html";
+		}
 		if (currentUrl().contains(currenturl)) {
 			System.out.println("User is on Drug Look Up Page");
 			return true;
@@ -72,7 +78,6 @@ public class DrugLookUpPage extends UhcDriver {
 	public void selectTheGroupName(String groupName) {
 		String linktoclick = groupName;
 		driver.findElement(By.xpath("//a[text()='"+linktoclick+"']")).click();
-		
 		validateNew(findAdrugTextBox);
 		validateNew(findDrugButton);
 	}
