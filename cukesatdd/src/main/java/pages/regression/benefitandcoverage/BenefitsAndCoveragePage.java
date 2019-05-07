@@ -59,7 +59,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                @FindBy(xpath = "//a[contains(text(),'VIEW PLAN DOCUMENTS')]/ancestor::p/preceding-sibling::p")
                private WebElement messageForPreeffective;
 
-               @FindBy(xpath = "//p[contains(@ng-if, 'preEffective == true')]")
+               @FindBy(xpath = "//p[contains(@ng-if, 'preEffective == true') or (contains(@ng-if, 'preEffective != true') and contains(@ng-if, 'businessType ==') )]")
                public WebElement preEffectiveTechSupportNumber;
                
                @FindBy(xpath = "//p[contains(text(),'1-800-523-5880')]")

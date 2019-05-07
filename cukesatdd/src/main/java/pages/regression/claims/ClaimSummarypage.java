@@ -39,8 +39,8 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy(xpath = ".//*[@id='globalContentIdForSkipLink']/div[3]/div[1]/div/div/div/div/div/p")
 	private WebElement messageForPreeffective;
 	
-	@FindBy(xpath = "//p[contains(@ng-if, 'preEffective == true')]")
-	public WebElement preEffectiveTechSupportNumber;
+    @FindBy(xpath = "//p[contains(@ng-if, 'preEffective == true') or (contains(@ng-if, 'preEffective != true') and contains(@ng-if, 'businessType ==') )]")
+    public WebElement preEffectiveTechSupportNumber;
 
 	@FindBy(xpath = "//a[@id = 'contactUsAtdd']")
 	public WebElement ContactUsLink;
