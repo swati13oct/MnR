@@ -21,6 +21,7 @@ import acceptancetests.data.ElementData;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import cucumber.api.java.lu.a;
 import pages.acquisition.uhcretiree.DrugLookUpPage;
@@ -35,8 +36,12 @@ public class RetireeAcquisitionHomePage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
+		if (MRScenario.environmentMedicare.equalsIgnoreCase("Stage")) {
+			start(UHCRETIREE_ACQISITION_PAGE_URL);
+		} else {
+			start(TEAM_UHCRETIREE_ACQISITION_PAGE_URL);
 
-		start(UHCRETIREE_ACQISITION_PAGE_URL);
+		}
 		impliciWait(druglookuplink, 20);
 
 		validate(druglookuplink);
@@ -71,6 +76,8 @@ public class RetireeAcquisitionHomePage extends UhcDriver {
 	private WebElement providerSearchFromHomeScreen;
 
 	private static String UHCRETIREE_ACQISITION_PAGE_URL = MRConstants.UHCRETIREE_URL;
+	
+	private static String TEAM_UHCRETIREE_ACQISITION_PAGE_URL = MRConstants.TEAM_UHCRETIREE_URL;
 
 	public RetireeAcquisitionHomePage(WebDriver driver) {
 		super(driver);
@@ -209,10 +216,16 @@ public class RetireeAcquisitionHomePage extends UhcDriver {
 	public ProviderSearchPageUhcRetiree navigateToProviderSearchTool() {
 		validateNew(providerSearchFromHomeScreen);
 		switchToNewTabNew(providerSearchFromHomeScreen);
-
+		if (!MRScenario.environmentMedicare.equalsIgnoreCase("stage")) { //need this sleep for lower env
+			try { //need this sleep for 
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("werally")) {
-
 			return new ProviderSearchPageUhcRetiree(driver);
 
 		}
