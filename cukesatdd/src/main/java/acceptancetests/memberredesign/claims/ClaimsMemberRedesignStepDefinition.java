@@ -965,8 +965,23 @@ public class ClaimsMemberRedesignStepDefinition {
 	}
 	
 	@Then("^I can validate the numbers of claims from all search periods$")
-	public void compareAllClaimsPeriods() {
-		//note: assumption is the test is testing for all the search period
+	public void compareAllClaimsPeriods(DataTable memberAttributes) {
+		//note: use this flag to determine if you want to fail the case if zero claims
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), 
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String flagZeroClaimsUserInput = memberAttributesMap.get("Flag Zero Claims User");
+		boolean flagZeroClaimsUser=true;
+		if (flagZeroClaimsUserInput.equalsIgnoreCase("yes")) {
+			flagZeroClaimsUser=true;
+		} else if (flagZeroClaimsUserInput.equalsIgnoreCase("no")) {
+			flagZeroClaimsUser=false;
+		} else {
+			Assert.assertTrue("PROBLEM - 'Flag Zero Claims User' can only be yes or no.  Actual="+flagZeroClaimsUser, false);
+		} 
+		
 		int last30days=allClaims.get("Last 30 days");
 		int last90days=allClaims.get("Last 90 days");
 		int last6months=allClaims.get("Last 6 months");
@@ -993,7 +1008,13 @@ public class ClaimsMemberRedesignStepDefinition {
 		Assert.assertTrue("PROBLEM - number of claims from last12months should be less than or equals to last24months.  last12months='"+last12months+"' | last24months='"+last24months+"'", last12months <= last24months);
 		Assert.assertTrue("PROBLEM - number of claims from customSearch should be less than or equals to last24months.  customeSearch='"+customeSearch+"' | last24months='"+last24months+"'", customeSearch <= last24months);
 		
-		Assert.assertTrue("PROBLEM - While this user has passed all basic claims validations for each search period, but this user has 0 claims. please select another user with claims for comprehensive claims testing.  last24months='"+last24months+"'", last24months > 0);
+		if (flagZeroClaimsUser) {
+			Assert.assertTrue("PROBLEM - While this user has passed all basic claims validations for each search period, but this user has 0 claims. please select another user with claims for comprehensive claims testing.  last24months='"+last24months+"'", last24months > 0);
+		} else {
+			if (last24months < 0) {
+				System.out.println("WARNING - While this user has passed all basic claims validations for each search period, but this user has 0 claims. please select another user with claims for comprehensive claims testing.  last24months='"+last24months+"'");
+			}
+		}
 	}
 	
 	@And("^I validate the pagination on the claims summary page for given range$")
@@ -1055,9 +1076,14 @@ public class ClaimsMemberRedesignStepDefinition {
 		String claimPeriod = memberAttributesMap.get("Claim Period");
 		String claimType = memberAttributesMap.get("Claim Type");
 		String claimSystem = memberAttributesMap.get("Claim System");
-		String hasYourShareStr = memberAttributesMap.get("Has Your Share");
+		//tbd String hasYourShareStr = memberAttributesMap.get("Has Your Share");
 		String domain = memberAttributesMap.get("Domain");
 		
+		boolean hasYourShare=true;
+		if (planType.equalsIgnoreCase("ship") || planType.equalsIgnoreCase("pdp") ) {
+			hasYourShare=false;
+		}
+		/* tbd
 		boolean hasYourShare=false;
 		if (hasYourShareStr.equalsIgnoreCase("yes")) {
 			hasYourShare=true;
@@ -1065,7 +1091,7 @@ public class ClaimsMemberRedesignStepDefinition {
 			hasYourShare=false;
 		} else {
 			Assert.assertTrue("PROBLEM - 'Has Your Share' can only be yes or no.  Actual="+hasYourShareStr, false);
-		}
+		} */
 
 		if (claimType.equalsIgnoreCase("prescription drug")) {
 			System.out.println("Prescription drug doesn't have more info for claims, skip claims detail validation");
@@ -1244,8 +1270,13 @@ public class ClaimsMemberRedesignStepDefinition {
 		String claimPeriod=memberAttributesMap.get("Claim Period");		
 		String claimType=memberAttributesMap.get("Claim Type");		
 		String claimSystem=memberAttributesMap.get("Claim System");		
-		String hasYourShareStr = memberAttributesMap.get("Has Your Share");
+		//tbd String hasYourShareStr = memberAttributesMap.get("Has Your Share");
 
+		boolean hasYourShare=true;
+		if (planType.equalsIgnoreCase("ship") || planType.equalsIgnoreCase("pdp")) {
+			hasYourShare=false;
+		}
+		/* tbd 
 		boolean hasYourShare=false;;
 		if (hasYourShareStr.equalsIgnoreCase("yes")) {
 			hasYourShare=true;
@@ -1253,7 +1284,7 @@ public class ClaimsMemberRedesignStepDefinition {
 			hasYourShare=false;
 		} else {
 			Assert.assertTrue("PROBLEM - 'Has Your Share' can only be yes or no.  Actual="+hasYourShareStr, false);
-		}
+		} */
 
 		int numClaims=allClaims.get(claimPeriod);
 		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);

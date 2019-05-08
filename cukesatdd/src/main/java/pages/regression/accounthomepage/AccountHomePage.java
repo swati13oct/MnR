@@ -389,6 +389,9 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(tagName="arcade-footer")
 	private WebElement shadowRootFooter;
+	
+	@FindBy(xpath="//span[contains(@class,'account-info-label')]")
+	private WebElement accountLabel;
 
 	private PageData myAccountHome;
 
@@ -640,11 +643,26 @@ public class AccountHomePage extends UhcDriver {
 			System.out.println("user is on Stage login page");
 			if (driver.getCurrentUrl().contains("/dashboard")) {
 				CommonUtility.waitForPageLoad(driver, acctProfile, 9);
-				acctProfile.click();
-				acctSetting.click();
+				if (validate(acctProfile)) {
+					acctProfile.click();
+					acctSetting.click();
+				} else {
+					//check to see if link is inside shadow-root element
+					locateAndClickElementWithinShadowRoot(shadowRootHeader, "#dropdown-toggle-2 > span > span:nth-child(2)");	
+					System.out.println("clicked header menu");
+
+					if (validate(accountLabel) && 
+							(accountLabel.getText().toLowerCase().contains("supplement") 
+							|| accountLabel.getText().toLowerCase().contains("medicare prescription drug"))) {
+						locateAndClickElementWithinShadowRoot(shadowRootHeader, "#dropdown-options-2 > a:nth-child(2) > span");	
+					} else {
+						locateAndClickElementWithinShadowRoot(shadowRootHeader, "#dropdown-options-2 > a:nth-child(3) > span");	
+					}
+					System.out.println("clicked header button");
+				}
+				Thread.sleep(6000);	   
 				System.out.println("title is " + driver.getTitle());
 				System.out.println("Current Url is " + driver.getCurrentUrl());
-				Thread.sleep(6000);	   
 				if (driver.getCurrentUrl().contains("profile")) {
 					return new ProfileandPreferencesPage(driver);
 				}

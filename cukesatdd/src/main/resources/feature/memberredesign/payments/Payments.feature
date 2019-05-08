@@ -1,5 +1,3 @@
-#Author        : Obul Reddy
-#Created Date  : 2019-02-11(YYYY-MM-DD)
 @payments @paymentsMarch
 Feature: New payment flows with Credit card funtionality for Make one time setup and update flows
 
@@ -24,7 +22,7 @@ Feature: New payment flows with Credit card funtionality for Make one time setup
       | F243897   | MAPD     | MakeOneTimeCCTotal_Payments      | Test | 4111111111111111 |         04 |      2019 |
       | US1588469 | PDP      | ComboMakeOneTimeCCTotal_Payments | Test | 4111111111111111 |         04 |      2019 |
 
-  @MakOneTimeCCOther @Feb_release_2019 @Spartans @F243897
+  @paymentsMarch @MakOneTimeCCOther @Feb_release_2019 @Spartans @F243897
   Scenario Outline: TID: <TID> - Verify MakeOne time Payment submission for Credit card Other amount
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -45,7 +43,7 @@ Feature: New payment flows with Credit card funtionality for Make one time setup
       | F243897   | PDP      | MakeOneTimeCCOther_Payments      | Test | 4111111111111111 |         04 |      2019 |
       | US1588469 | PDP      | ComboMakeOneTimeCCOther_Payments | Test | 4111111111111111 |         04 |      2019 |
 
-  @SetupRecurrEFT @Feb_release_2019 @Spartans @F238525
+  @paymentsMarch @SetupRecurrEFT @Feb_release_2019 @Spartans @F238525
   Scenario Outline: TID: <TID> - Verify Setup Recurring for Checking Account
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -69,7 +67,7 @@ Feature: New payment flows with Credit card funtionality for Make one time setup
       | F238525   | MAPD     | SetupRecEFT_Payments      | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
       | US1588469 | PDP      | ComboSetupRecEFT_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
 
-  @SetupRecurrCC @Feb_release_2019 @Spartans @F238525
+  @paymentsMarch @SetupRecurrCC @Feb_release_2019 @Spartans @F238525
   Scenario Outline: TID: <TID> - Verify Setup Recurring for CC
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -90,7 +88,7 @@ Feature: New payment flows with Credit card funtionality for Make one time setup
       | F238525   | PDP      | SetupRecCC_Payments      | Test | 4111111111111111 |         04 |      2019 |
       | US1588469 | PDP      | ComboStepuRecCC_Payments | Test | 4111111111111111 |         04 |      2019 |
 
-  @UpdateRecurrEFT @Feb_release_2019 @Spartans @F242866
+  @paymentsMarch @UpdateRecurrEFT @Feb_release_2019 @Spartans @F242866
   Scenario Outline: TID: <TID> - Verify Update Recurring for Checking Account
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -114,7 +112,7 @@ Feature: New payment flows with Credit card funtionality for Make one time setup
       | F242866   | MAPD     | UpdateRecurrEFT_Payments      | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
       | US1588469 | PDP      | ComboUpdateRecurrEFT_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
 
-  @UpdateRecurrCC @Feb_release_2019 @Spartans @F242866
+  @paymentsMarch @UpdateRecurrCC @Feb_release_2019 @Spartans @F242866
   Scenario Outline: TID: <TID> - Verify Update Recurring for CC
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -135,7 +133,7 @@ Feature: New payment flows with Credit card funtionality for Make one time setup
       | F242866   | PDP      | UpdateRecurrCC_Payments      | Test | 4111111111111111 |         04 |      2019 |
       | US1588469 | PDP      | ComboUpdateRecurrCC_Payments | Test | 4111111111111111 |         04 |      2019 |
 
-  @UpdateRecurrStopFed @Feb_release_2019 @Spartans @F242866
+  @paymentsMarch @UpdateRecurrStopFed @Feb_release_2019 @Spartans @F242866
   Scenario Outline: TID: <TID> - Verify Stop Recurring payment flow for Federal memeber
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -151,7 +149,7 @@ Feature: New payment flows with Credit card funtionality for Make one time setup
       | F242866   | MAPD     | UpdateRecurrStop_Payments   |
       | US1588469 | PDP      | ComboUpdateStopRec_Payments |
 
-  @SetupRecurrEFTSHIP @Feb_release_2019 @Spartans @F242866
+  @paymentsMarch @SetupRecurrEFTSHIP @Feb_release_2019 @Spartans @F242866
   Scenario Outline: TID: <TID> - Verify Update Recurring for Checking Account for Ship Member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -173,7 +171,7 @@ Feature: New payment flows with Credit card funtionality for Make one time setup
       | TID     | planType | memberType         | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
       | F242866 | SHIP     | SHIPSetup_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
 
-  @UpdateRecurrEFTSHIP @Feb_release_2019 @Spartans @F242866
+  @paymentsMarch @UpdateRecurrEFTSHIP @Feb_release_2019 @Spartans @F242866
   Scenario Outline: TID: <TID> - Verify Update Recurring for Checking Account for Ship Member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -196,7 +194,7 @@ Feature: New payment flows with Credit card funtionality for Make one time setup
       | TID     | planType | memberType          | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
       | F242866 | SHIP     | SHIPUpdate_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
 
-  @UpdateRecurrStopSHIP @Feb_release_2019 @Spartans @F242866
+  @paymentsMarch @UpdateRecurrStopSHIP @Feb_release_2019 @Spartans @F242866
   Scenario Outline: TID: <TID> - Verify Stop Recurring for Ship Member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -210,3 +208,15 @@ Feature: New payment flows with Credit card funtionality for Make one time setup
     Examples: 
       | TID     | planType | memberType          |
       | F242866 | SHIP     | SHIPUpdate_Payments |
+
+  @paymentsMarch @downloadPDF @spartans @defect
+  Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> - Verify download PDF for payment History
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When the user clicks on Premium Payments on Header
+    Then user validates download PDF for monthly bill PDF
+
+    Examples: 
+      | FID    | planType | memberType   |
+      | 247601 | PDP      | IDCardmember |

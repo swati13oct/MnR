@@ -1,7 +1,7 @@
 @PlanCompare
 Feature: Acq-To test PlanCompare Flows in UHC site
 
-  @PlancompareProviderSearch
+  @PlancompareProviderSearchUHCTest
   Scenario Outline: TID: <TID> - TC01_RallyTool_Through_Plan Compare_Page
     Given the user is on the uhcmedicaresolutions site landing page
     When I access the vpp page
@@ -16,13 +16,13 @@ Feature: Acq-To test PlanCompare Flows in UHC site
       | 15488 |   90210 | NO              | Los Angeles County |
 
   @PlancompareDCETest
-  Scenario Outline: Verify DCE Search from Plan Compare for UHC
+  Scenario Outline: TID: <TID> -plan type: <plantype> - DCE_Through_Plan_Compare_Page_MAPD_PDP
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    And I select all 3 plans to compare and click on compare plan link in UHC
+    And I select "<plantype>" plans to compare and click on compare plan link in UHC
     And I Click on DCE link on Plan compare for UHC
     Then user adds drug to drug cost estimator flow for the given plan name in UMS site
       | PlanName   | <planName>  |
@@ -93,5 +93,6 @@ Feature: Acq-To test PlanCompare Flows in UHC site
     Then user validates Drug information is reflected on plan compare page in UHC
 
     Examples: 
-      | zipcode | isMultutiCounty | county             | drugInitials1 | branded | drugName1 | drugInitials2 | drugName2  | drugInitials3 | drugName3     | drugInitials4 | drugName4 | drugInitials5 | drugName5             | pharmacyType     | distance | pharmacyName            | plantype | planName                                          | quantity | frequency     | newPharmacyType | genericName1 | genricName3 |
-      |   90210 | NO              | Los Angeles County | lipi          | yes     | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Orfa          | Orfadin   | Fana          | Fanapt Titration Pack | Standard Network | 15 miles | MEN'S HEALTH FOUNDATION | MAPD     | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |       30 | Every 1 month | Mail Service    | atorvastatin | fluticasone |
+      | TID   | zipcode | isMultutiCounty | county             | drugInitials1 | branded | drugName1 | drugInitials2 | drugName2  | drugInitials3 | drugName3     | drugInitials4 | drugName4 | drugInitials5 | drugName5             | pharmacyType     | distance | pharmacyName            | plantype | planName                                          | quantity | frequency     | newPharmacyType | genericName1 | genricName3 |
+      | 15491 |   90210 | NO              | Los Angeles County | lipi          | yes     | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Orfa          | Orfadin   | Fana          | Fanapt Titration Pack | Standard Network | 15 miles | MEN'S HEALTH FOUNDATION | MAPD     | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |       30 | Every 1 month | Mail Service    | atorvastatin | fluticasone |
+      | 15540 |   90210 | NO              | Los Angeles County | lipi          | yes     | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Orfa          | Orfadin   | Fana          | Fanapt Titration Pack | Standard Network | 15 miles | MEN'S HEALTH FOUNDATION | PDP      | AARP MedicareRx Walgreens (PDP)                   |       30 | Every 1 month | Mail Service    | atorvastatin | fluticasone |

@@ -18,13 +18,13 @@ Feature: Acq-To test PlanCompare Flows in AARP site
       | 15489 |   90210 | NO              | Los Angeles County |
 
   @PlancompareDCETest
-  Scenario Outline: Verify DCE Search from Plan Compare for AARP
+  Scenario Outline: TID: TID: <TID> -plan type: <plantype> - DCE_Through_Plan_Compare_Page_MAPD_PDP
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    And I select all 3 plans to compare and click on compare plan link in AARP
+    And I select "<plantype>" plans to compare and click on compare plan link in AARP
     And I Click on DCE link on Plan compare for AARP
     Then user adds drug to drug cost estimator flow for the given plan name in AARP site
       | PlanName   | <planName>  |
@@ -95,5 +95,6 @@ Feature: Acq-To test PlanCompare Flows in AARP site
     Then user validates Drug information is reflected on plan compare page in AARP
 
     Examples: 
-      | zipcode | isMultutiCounty | county             | drugInitials1 | branded | drugName1 | drugInitials2 | drugName2  | drugInitials3 | drugName3     | drugInitials4 | drugName4 | drugInitials5 | drugName5             | pharmacyType     | distance | pharmacyName            | plantype | planName                                          | quantity | frequency     | newPharmacyType | genericName1 | genricName3 |
-      |   90210 | NO              | Los Angeles County | lipi          | yes     | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Orfa          | Orfadin   | Fana          | Fanapt Titration Pack | Standard Network | 15 miles | MEN'S HEALTH FOUNDATION | MAPD     | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |       30 | Every 1 month | Mail Service    | atorvastatin | fluticasone |
+      | TID   | zipcode | isMultutiCounty | county             | drugInitials1 | branded | drugName1 | drugInitials2 | drugName2  | drugInitials3 | drugName3     | drugInitials4 | drugName4 | drugInitials5 | drugName5             | pharmacyType     | distance | pharmacyName            | plantype | planName                                          | quantity | frequency     | newPharmacyType | genericName1 | genricName3 |
+      | 15492 |   90210 | NO              | Los Angeles County | lipi          | yes     | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Orfa          | Orfadin   | Fana          | Fanapt Titration Pack | Standard Network | 15 miles | MEN'S HEALTH FOUNDATION | MAPD     | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |       30 | Every 1 month | Mail Service    | atorvastatin | fluticasone |
+      | 15539 |   90210 | NO              | Los Angeles County | lipi          | yes     | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Orfa          | Orfadin   | Fana          | Fanapt Titration Pack | Standard Network | 15 miles | MEN'S HEALTH FOUNDATION | PDP      | AARP MedicareRx Walgreens (PDP)                   |       30 | Every 1 month | Mail Service    | atorvastatin | fluticasone |
